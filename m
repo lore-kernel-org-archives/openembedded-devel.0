@@ -1,37 +1,24 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D0EE6CED5
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D80126CF0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2013 06:19:09 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id a15so140065eae.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Oct 2013 23:19:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=cMHrIgZmeezz6Fn5Pex5qSMR1tmpwec7cmMk5RVIfX8=;
-	b=CJuNGTMzJqfxF7fbJlmTzAlCVhvzJ4eXkWFZXoguTnX2HwSssaavqX+IUrQEy6Gge5
-	CvgJb/RfbW0ncn18OTP4YBAm5AGoPKGzLDjZ2HsYIJvVAUvoZTUw6HXOo2OFa9QsR+HV
-	PGW1L3D0reql0h0G6/0e0d678WY4D9rdH2lF4Pm5wqa84mc0kRq4MYBG4mDW1aVAwzUt
-	qf/FzpYKJCbaAtQYrs2F158dK2xVd8q3XAJEj8XSUUo2CK4AYU2+a+M43S1UhgoFktL6
-	D8RC5hiR405xrb2OXjCugCXwQaVOCRDwd6CC5QYbd14LXIqGKxo/XUsTKu9jUxgKncGy
-	KsGw==
-X-Gm-Message-State: ALoCoQk6EzkIh8g8AolGKcqfG1FclMi7cCl1wLA4DQ7sX9bsipF3HHA8vymCzECi4z2P+/qf8v3q
-X-Received: by 10.15.99.72 with SMTP id bk48mr9106282eeb.22.1381299550657;
-	Tue, 08 Oct 2013 23:19:10 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPSA id f49sm84692076eec.7.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 08 Oct 2013 23:19:10 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Oct 2013 08:18:54 +0200
-Message-Id: <1381299534-15993-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.3.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] image-magick: update to latest patchset
+	Wed,  9 Oct 2013 07:30:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r997UcO3028691
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 9 Oct 2013 00:30:38 -0700 (PDT)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Wed, 9 Oct 2013 00:30:37 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Oct 2013 15:30:33 +0800
+Message-ID: <cover.1381303656.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+MIME-Version: 1.0
+Cc: paul.eggleton@linux.intel.com
+Subject: [meta-oe][PATCH 0/2] mariadb: fix warning and update libdir for libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,37 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 06:19:10 -0000
+X-List-Received-Date: Wed, 09 Oct 2013 07:30:42 -0000
+Content-Type: text/plain
 
-And switch to upstream mirror which keeps old releases. This makes it fetch again.
+The following changes since commit 2a463dddcf76d7fa437e96f6cf0210143e97a904:
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+  thunar-volman: Add PACKAGECONFIG for notify (2013-10-05 14:24:05 +0200)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-index 9963990..34e8013 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.6.bb
-@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1bf06a8d02cb00b02dea7d03ef9525f"
- # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
- 
--PATCHSET = "8"
--SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-+PATCHSET = "10"
-+SRC_URI = "http://www.imagemagick.org/download/legacy/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-            file://remove.dist-lzip.patch \
- "
--SRC_URI[md5sum] = "ea66fbb6fc1354312bc4971c0a0cfb3c"
--SRC_URI[sha256sum] = "eb33e0ba6aeb542b7127ee1c2f62961236428b233e9911aa86e1b66b3342ea1d"
-+SRC_URI[md5sum] = "9034ab5bf6d63fe72230779f1f590691"
-+SRC_URI[sha256sum] = "95b487bb0e4ebf97dd06b6d61f421a05e2666f253ae06352cb3262b34603b2a3"
- 
- S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
- 
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib hongxu/fix-mariadb
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-mariadb
+
+Hongxu Jia (2):
+  mariadb: update libdir for libtool
+  mariadb: fix warning while invoking 'mysql_install_db' on target
+
+ meta-oe/recipes-support/mysql/mariadb/my.cnf     | 2 +-
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
 -- 
-1.8.3.1
+1.8.1.2
 
 
