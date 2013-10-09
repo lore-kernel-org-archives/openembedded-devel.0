@@ -1,33 +1,37 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 4488F6CDA7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E75A6CD4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2013 22:16:24 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id d49so735187eek.34
+	Wed,  9 Oct 2013 22:31:45 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so736337eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
+	Wed, 09 Oct 2013 15:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=EVaenViwdOtGpMUg5EAx9pdpTTfDmlKksCYngs1e06U=;
-	b=YUzl9uaarZZP81oEyHYHOEnI9ZgD+cWMSMF494fiwB92P0PSKHLaUscFKV9y7PxPYP
-	wj4BP3T9SpXqJwn7a6k5jd5V6oG+DADkZR7hNtxKHry5DmpPO1dEBghQ54DVIjGwfaDP
-	ZqjLLwWO/lvlTk26rhuGoF+58RSobgiGNfEpEHGuTrji0rb8ABDeUezniAhjTL1z1w+g
-	NXp9RDs3Tp9Plzynfp8Cqzr5G56KNKLFZvCL5eWivm1M/XgP5Cp6VHn+bz3efYGXY9Ro
-	jWftLvjUGDvJSRngOADcni/6tRINg64ZPE4qOD0AckrOLzBJN6L2Xi30ARXGKT9yvfoU
-	qeqg==
-X-Received: by 10.14.115.133 with SMTP id e5mr14918299eeh.27.1381356985741;
-	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
-Received: from mizar.localdomain
-	(host138-252-dynamic.0-87-r.retail.telecomitalia.it. [87.0.252.138])
-	by mx.google.com with ESMTPSA id b45sm93470970eef.4.1969.12.31.16.00.00
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=0C7xGIZjXwtZr2rE7eUkmgar10cJGMVUnhZa0cKQpw4=;
+	b=SUn/vZ+lQqOf5VHhBZ5mFQB6WbE2qMWXNP4JR2N90OiJvnKEqgkvUZXcWKWWIBUQLX
+	txlUyX9W0dcvMqYzITvNZ/9tgDJ/+F8MJmWcW/UQgGkJSRXxZ39+2MT1hXtDfLZNRaik
+	8SS/p4O783M1xgP8lt1mYGadr5SKE3oHntr7XreJMOc/2SCrmBQzmSzuPopJYVr1o6tk
+	A/F7kPoF3Dt4Yg5MqVYEnL8eGsQxA9ep3hoFKjeZzAXCyw53EovfLAs9Toh8CT1i/3vs
+	u4/3R5/1/yX1DEIi1UFv8aMkcly9SMgW0fgezZOdHkbs9gIAlEGgl/OomfBfFeaA/DBh
+	QhTg==
+X-Received: by 10.14.180.73 with SMTP id i49mr6946109eem.55.1381357906292;
+	Wed, 09 Oct 2013 15:31:46 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	r48sm93669592eev.14.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 09 Oct 2013 15:31:45 -0700 (PDT)
+Date: Thu, 10 Oct 2013 00:31:56 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Oct 2013 00:16:18 +0200
-Message-Id: <1381356978-8699-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] klibc.bbclass: add a note about default of building -static
+Message-ID: <20131009223156.GG2872@jama>
+References: <CAP71WjwXX1MmRUzBa56oc6TENBNK18uA=pBUCNHDdT1+ZLViAg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP71WjwXX1MmRUzBa56oc6TENBNK18uA=pBUCNHDdT1+ZLViAg@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-qt5] fontconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,28 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 22:16:24 -0000
+X-List-Received-Date: Wed, 09 Oct 2013 22:31:46 -0000
+X-Groupsio-MsgNum: 46590
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3xoW37o/FfUZJwQG"
+Content-Disposition: inline
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/classes/klibc.bbclass | 3 +++
- 1 file changed, 3 insertions(+)
+--3xoW37o/FfUZJwQG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index ee49879..ca741cd 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -1,6 +1,9 @@
- # klcc-cross depends on klibc
- DEPENDS =+ "klcc-cross"
- 
-+# Default for klcc is to build static binaries.
-+# Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
-+
- export CC = "${TARGET_PREFIX}klcc"
- export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
- 
--- 
-1.8.1.5
+On Wed, Oct 09, 2013 at 10:50:03PM +0200, Nicolas Dechesne wrote:
+> hi,
+>=20
+> is there any specific reason why fontconfig is enabled by default in
+> meta-qt5/master (5.1) while it was disabled by default in
+> meta-qt5/dylan (5.0). It was explicitely disabled in dylan with this
+> patch:
+>=20
+> http://patchwork.openembedded.org/patch/52343/
 
+Probably my mistake when I was adding PACKAGECONFIGs to qtbase, I have
+very weak feeling it was somehow related to fontconfig being
+autodetected even when it wasn't explicitly enabled or some weird
+freetype-fontconfig dependency, but because I haven't documented it in
+commit message or by comment in qtbase.inc I'm willing to try if
+disabling it by default breaks something.
 
+The worst thing would be that people will have to manually update their
+=2Ebbappends if they depend on fontconfig enabled in qtbase now.
+
+Regards,
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--3xoW37o/FfUZJwQG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlJV2VwACgkQN1Ujt2V2gByOfgCfWxE7TesYEQOm3cvwNtLZRILp
+eakAn2ttO4oHeuA0n/tTf/qX0HuU+reH
+=+HEs
+-----END PGP SIGNATURE-----
+
+--3xoW37o/FfUZJwQG--
