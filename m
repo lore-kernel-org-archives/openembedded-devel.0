@@ -1,43 +1,35 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qe0-f49.google.com (mail-qe0-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 89E1A6CE6D
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EE9A6CE6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2013 12:21:59 +0000 (UTC)
-Received: by mail-qe0-f49.google.com with SMTP id ff1so284416qeb.8
+	Wed,  9 Oct 2013 13:22:54 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id hz1so1028030pad.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Oct 2013 05:22:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=v2c+npg8U1QW6xPUiRJXhwPvww7jj6SkhXQ0UvB01f4=;
-	b=k8rnSuryuKSu/DjngxBAs5tHshqPxK58OO4Co9RwthuOCL/c/vy0qbHdeZzcwSEXht
-	tsubuGbp4xlpgyAnRvqx8JfIwnphZ7fXlWc11pLqCklcpUk4aN8NR4tSVedT1JdHsyF9
-	+J2gl2swOZZDUBCxe3avsQrFBhnoUYfZCKwAkm3i6QuQNunehPLagITGlQHdGSFf73XA
-	3sGEZQD6QLWR60VbjyYut0lEei1KzbxZ0wbe9k6MTr1BkXMurDqMnCdS3ObYretW9QEJ
-	Bs/ipWFREXmSVulg/XI+Tf27mp53zqZIljeZJTx8ienMw0YxnZl1R68aJ6xMThJchrJe
-	JslQ==
-X-Gm-Message-State: ALoCoQk8cScmst4GWiFeDqxUtVNJ8FIafJhJePAtQA65AgTOQMT3g+EyGjB+bMbB8i2Zziq4SiBJ
-X-Received: by 10.224.2.68 with SMTP id 4mr10752724qai.25.1381321321002;
-	Wed, 09 Oct 2013 05:22:01 -0700 (PDT)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id g2sm85610509qaf.12.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 09 Oct 2013 05:21:59 -0700 (PDT)
-Date: Wed, 9 Oct 2013 08:21:57 -0400
-From: Joe MacDonald <joe@deserted.net>
+	Wed, 09 Oct 2013 06:22:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=6YWa5JZBQM+siWwn76lOBylB6VBKClbK0tbVMkrw4dE=;
+	b=0lljYtGjXF9uSz/wbD40+HyKCQjPsZsOv6vowq4bNQ7pjxbV6TcfhzLXbxMBfMwWuF
+	vj6EOA/tx8Y6BnTwOz/9I2aPkDVHBhKGlQWs1ZmmHe6n30vYV3IY+YIcjFzTMV/tl4lR
+	OYgk5x2wJ/QNfSkeCvvTogmLDPEP/lfCaophsk5t8IAm50ErPra4HbeyFbvnMqHsgvlY
+	kyG/2Ro2kzB5gQzSVKOsszIx9yuZ9HjtrAeqsvDWBfZJNmDcAgpzBX1d8zfsSSLhMx1u
+	qd/tLqjqjIkkaLq5sIPEOciChhe2vJRvqtSM65oL/RM3wk2GpQi9H3OWnPzwAx8ucFGr
+	s03Q==
+X-Received: by 10.66.121.234 with SMTP id ln10mr9429725pab.20.1381324976174;
+	Wed, 09 Oct 2013 06:22:56 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	bp4sm44071541pbb.42.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 09 Oct 2013 06:22:55 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131009122156.GA5541@deserted.net>
-References: <1381310457-4961-1-git-send-email-Qi.Chen@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1381310457-4961-1-git-send-email-Qi.Chen@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-selinux][PATCH] README: update the Dependencies area
+Date: Thu, 10 Oct 2013 00:20:56 +1100
+Message-Id: <1381324856-24216-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.4
+Subject: [meta-qt5][PATCH] qtbase: add upstream QTBUG-31579 patch for QPainter regression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,81 +43,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 12:22:00 -0000
-X-Groupsio-MsgNum: 46583
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6TrnltStXW4iwmi0"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Oct 2013 13:22:55 -0000
 
---6TrnltStXW4iwmi0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ ...Pixel.y-is-also-initalized-to-1-when-nece.patch | 47 ++++++++++++++++++++++
+ ...Pixel.y-is-also-initalized-to-1-when-nece.patch | 47 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase.inc                          |  1 +
+ 3 files changed, 95 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase-5.1.0/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
+ create mode 100644 recipes-qt/qt5/qtbase-git/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
 
-[[oe] [meta-selinux][PATCH] README: update the Dependencies area] On 13.10.=
-09 (Wed 17:20) Qi.Chen@windriver.com wrote:
+diff --git a/recipes-qt/qt5/qtbase-5.1.0/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch b/recipes-qt/qt5/qtbase-5.1.0/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
+new file mode 100644
+index 0000000..0d53305
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase-5.1.0/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
+@@ -0,0 +1,47 @@
++From f0b950144dde85b65df0c3cf83f7c8df0e94bbbf Mon Sep 17 00:00:00 2001
++From: Andy Shaw <andy.shaw@digia.com>
++Date: Tue, 8 Oct 2013 15:45:42 +0200
++Subject: [PATCH] Ensure lastPixel.y is also initalized to -1 when necessary
++
++Task-number: QTBUG-31579
++
++Upstream-Status: Accepted [https://codereview.qt-project.org/#change,67578]
++Signed-off-by: Jonathan Liu <net147@gmail.com>
++
++Change-Id: Ia4916ac0d384ea523bbfad0dafbc90044da7ec3e
++Reviewed-by: Gunnar Sletta <gunnar.sletta@digia.com>
++---
++ src/gui/painting/qcosmeticstroker.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/gui/painting/qcosmeticstroker.cpp b/src/gui/painting/qcosmeticstroker.cpp
++index 39f6422..a2301e3 100644
++--- a/src/gui/painting/qcosmeticstroker.cpp
+++++ b/src/gui/painting/qcosmeticstroker.cpp
++@@ -305,6 +305,7 @@ void QCosmeticStroker::setup()
++     ymax = deviceRect.bottom() + 2;
++ 
++     lastPixel.x = -1;
+++    lastPixel.y = -1;
++ }
++ 
++ // returns true if the whole line gets clipped away
++@@ -533,6 +534,7 @@ void QCosmeticStroker::drawPath(const QVectorPath &path)
++             QPointF p = QPointF(points[0], points[1]) * state->matrix;
++             patternOffset = state->lastPen.dashOffset()*64;
++             lastPixel.x = -1;
+++            lastPixel.y = -1;
++ 
++             bool closed;
++             const QPainterPath::ElementType *e = subPath(type, end, points, &closed);
++@@ -587,6 +589,7 @@ void QCosmeticStroker::drawPath(const QVectorPath &path)
++         QPointF movedTo = p;
++         patternOffset = state->lastPen.dashOffset()*64;
++         lastPixel.x = -1;
+++        lastPixel.y = -1;
++ 
++         const qreal *begin = points;
++         const qreal *end = points + 2*path.elementCount();
++-- 
++1.8.4
++
+diff --git a/recipes-qt/qt5/qtbase-git/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch b/recipes-qt/qt5/qtbase-git/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
+new file mode 100644
+index 0000000..0d53305
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase-git/0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch
+@@ -0,0 +1,47 @@
++From f0b950144dde85b65df0c3cf83f7c8df0e94bbbf Mon Sep 17 00:00:00 2001
++From: Andy Shaw <andy.shaw@digia.com>
++Date: Tue, 8 Oct 2013 15:45:42 +0200
++Subject: [PATCH] Ensure lastPixel.y is also initalized to -1 when necessary
++
++Task-number: QTBUG-31579
++
++Upstream-Status: Accepted [https://codereview.qt-project.org/#change,67578]
++Signed-off-by: Jonathan Liu <net147@gmail.com>
++
++Change-Id: Ia4916ac0d384ea523bbfad0dafbc90044da7ec3e
++Reviewed-by: Gunnar Sletta <gunnar.sletta@digia.com>
++---
++ src/gui/painting/qcosmeticstroker.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/gui/painting/qcosmeticstroker.cpp b/src/gui/painting/qcosmeticstroker.cpp
++index 39f6422..a2301e3 100644
++--- a/src/gui/painting/qcosmeticstroker.cpp
+++++ b/src/gui/painting/qcosmeticstroker.cpp
++@@ -305,6 +305,7 @@ void QCosmeticStroker::setup()
++     ymax = deviceRect.bottom() + 2;
++ 
++     lastPixel.x = -1;
+++    lastPixel.y = -1;
++ }
++ 
++ // returns true if the whole line gets clipped away
++@@ -533,6 +534,7 @@ void QCosmeticStroker::drawPath(const QVectorPath &path)
++             QPointF p = QPointF(points[0], points[1]) * state->matrix;
++             patternOffset = state->lastPen.dashOffset()*64;
++             lastPixel.x = -1;
+++            lastPixel.y = -1;
++ 
++             bool closed;
++             const QPainterPath::ElementType *e = subPath(type, end, points, &closed);
++@@ -587,6 +589,7 @@ void QCosmeticStroker::drawPath(const QVectorPath &path)
++         QPointF movedTo = p;
++         patternOffset = state->lastPen.dashOffset()*64;
++         lastPixel.x = -1;
+++        lastPixel.y = -1;
++ 
++         const qreal *begin = points;
++         const qreal *end = points + 2*path.elementCount();
++-- 
++1.8.4
++
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index b6927d1..ffd5af4 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -23,6 +23,7 @@ SRC_URI += " \
+     file://0023-configure-make-freetype-a-configurable-option.patch \
+     file://0024-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determine-pa.patch \
+     file://0025-QHttpMultiPart-fix-data-corruption-in-readData-metho.patch \
++    file://0026-Ensure-lastPixel.y-is-also-initalized-to-1-when-nece.patch \
+ "
+ 
+ DEPENDS += "qtbase-native"
+-- 
+1.8.4
 
-> From: Chen Qi <Qi.Chen@windriver.com>
->=20
-> Add meta-oe to the dependencies as some recipes in meta-selinux may
-> require it. Here's a dependency chain:
->=20
-> ['policycoreutils', 'libselinux', 'swig-native']
->=20
-> And swig is from meta-oe layer.
 
-I'll take a look at this.  It shouldn't be necessary, meta-selinux
-provides its own swig.
-
-meta-selinux/recipes-devtools/swig
-=E2=94=9C=E2=94=80=E2=94=80 swig
-=E2=94=82=C2=A0=C2=A0 =E2=94=94=E2=94=80=E2=94=80 0001-Use-proc-self-exe-fo=
-r-swig-swiglib-on-non-Win32-plat.patch
-=E2=94=9C=E2=94=80=E2=94=80 swig_2.0.10.bb
-=E2=94=94=E2=94=80=E2=94=80 swig.inc
-
-Might've crept in during the update last week.
-
--J.
-
->=20
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> ---
->  README |    7 +++++++
->  1 file changed, 7 insertions(+)
->=20
-> diff --git a/README b/README
-> index 926d880..987f7ac 100644
-> --- a/README
-> +++ b/README
-> @@ -34,6 +34,13 @@ the Yocto Project website:
-> =20
->  http://www.yoctoproject.org
-> =20
-> +For some recipes, the meta-oe layer is required:
-> +
-> +URI: git://github.com/openembedded/meta-oe.git
-> +subdirectory: meta-oe
-> +branch: master
-> +revision: HEAD
-> +
-> =20
->  Maintenance
->  -----------
---=20
--Joe MacDonald.
-:wq
-
---6TrnltStXW4iwmi0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlJVSloACgkQwFvcllog0XykXQCgpCTMDX/dzZlNq4r3V0Td9DJw
-w4sAnidvEOX6sawaBRDmNQNlQjc7dVmc
-=lMRW
------END PGP SIGNATURE-----
-
---6TrnltStXW4iwmi0--
