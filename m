@@ -1,33 +1,33 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f53.google.com (mail-oa0-f53.google.com
-	[209.85.219.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CC606A463
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 4488F6CDA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2013 20:50:23 +0000 (UTC)
-Received: by mail-oa0-f53.google.com with SMTP id i7so748896oag.12
+	Wed,  9 Oct 2013 22:16:24 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id d49so735187eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Oct 2013 13:50:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=uEMzX9L1J3LM03gQOcIdmxndhguFHgg5jbMnEUGoFiE=;
-	b=UFNjVe2H8YSdpHLk4uVTuH+L5kSSm6LaXGmyLk8HHYGorXftMG3D3pLBNrch8ZjuMz
-	CNqBAgq8n2TJKkD5UG26Tf+PSOefsTPoO14/tGSMNuOD5ShGR08feRTjYVMQDAqXUiuc
-	yEBdzagORtnK+sZ35ukB6h9+37FxKTwcAvc2/yrVdXnk7sbLcVEEQ80PCruN7vQKCLjB
-	16OqnIbVKjBm2d07LN9CN+eygMBFxIWb5lE6z20/YqyEpCan1189F5hl3WSvyfz555xX
-	XSGca3gAtwZ0LKtQkwpZG+x9meI3PL0tkkY4QUKQGW+bKQoJjHeiPcdpWXNSi/UgJ4Pr
-	syfg==
-X-Gm-Message-State: ALoCoQm3oiqONik85JCqj/5KRKv6TxdS50uiH8ISiiM2miYrG6JTSQDFTeEQgQCs1RfvQOVvgFie
-X-Received: by 10.60.145.207 with SMTP id sw15mr3294276oeb.38.1381351824883;
-	Wed, 09 Oct 2013 13:50:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.108.113 with HTTP; Wed, 9 Oct 2013 13:50:03 -0700 (PDT)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Wed, 9 Oct 2013 22:50:03 +0200
-Message-ID: <CAP71WjwXX1MmRUzBa56oc6TENBNK18uA=pBUCNHDdT1+ZLViAg@mail.gmail.com>
+	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=EVaenViwdOtGpMUg5EAx9pdpTTfDmlKksCYngs1e06U=;
+	b=YUzl9uaarZZP81oEyHYHOEnI9ZgD+cWMSMF494fiwB92P0PSKHLaUscFKV9y7PxPYP
+	wj4BP3T9SpXqJwn7a6k5jd5V6oG+DADkZR7hNtxKHry5DmpPO1dEBghQ54DVIjGwfaDP
+	ZqjLLwWO/lvlTk26rhuGoF+58RSobgiGNfEpEHGuTrji0rb8ABDeUezniAhjTL1z1w+g
+	NXp9RDs3Tp9Plzynfp8Cqzr5G56KNKLFZvCL5eWivm1M/XgP5Cp6VHn+bz3efYGXY9Ro
+	jWftLvjUGDvJSRngOADcni/6tRINg64ZPE4qOD0AckrOLzBJN6L2Xi30ARXGKT9yvfoU
+	qeqg==
+X-Received: by 10.14.115.133 with SMTP id e5mr14918299eeh.27.1381356985741;
+	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
+Received: from mizar.localdomain
+	(host138-252-dynamic.0-87-r.retail.telecomitalia.it. [87.0.252.138])
+	by mx.google.com with ESMTPSA id b45sm93470970eef.4.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 09 Oct 2013 15:16:25 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-qt5] fontconfig
+Date: Thu, 10 Oct 2013 00:16:18 +0200
+Message-Id: <1381356978-8699-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-initramfs][PATCH] klibc.bbclass: add a note about default of building -static
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,19 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2013 20:50:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Oct 2013 22:16:24 -0000
 
-hi,
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/classes/klibc.bbclass | 3 +++
+ 1 file changed, 3 insertions(+)
 
-is there any specific reason why fontconfig is enabled by default in
-meta-qt5/master (5.1) while it was disabled by default in
-meta-qt5/dylan (5.0). It was explicitely disabled in dylan with this
-patch:
+diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
+index ee49879..ca741cd 100644
+--- a/meta-initramfs/classes/klibc.bbclass
++++ b/meta-initramfs/classes/klibc.bbclass
+@@ -1,6 +1,9 @@
+ # klcc-cross depends on klibc
+ DEPENDS =+ "klcc-cross"
+ 
++# Default for klcc is to build static binaries.
++# Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
++
+ export CC = "${TARGET_PREFIX}klcc"
+ export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
+ 
+-- 
+1.8.1.5
 
-http://patchwork.openembedded.org/patch/52343/
-
-thanks
-
-nicolas
 
