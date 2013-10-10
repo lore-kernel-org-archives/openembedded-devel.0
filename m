@@ -1,33 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A21266CCB0
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 920B86CF27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 10:40:28 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c13so1054140eek.33
+	Thu, 10 Oct 2013 10:40:29 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id d49so1039019eek.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 03:40:29 -0700 (PDT)
+	Thu, 10 Oct 2013 03:40:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=3UVs3YVyh6jmUdm3o6NxR/GalfE5T6KxFL6g4lICh6Q=;
-	b=m0PA0Ebd84dzTNXm8b87TG7apbM8VO1QU5Ddxy0UOkA8k6ZcNOMlltZgDXGp9+/kYn
-	oitrc22S4/TsfNUEX9LIvVxm+LbGqX8oQlCzyCzCDD2vMwjftOrG8ySWgaveOrpmMWsI
-	PrhI15LBuMIltmuueLTBT/8yZoGk9a0fwnOtjgmt8tXToAqX5TnLqiWCtOjGdzT817VS
-	q3HtDX9NmlM7/BlB5u4aYB33NCh/HSWFCLw00/HzXO7JO+waRdCsGyzHTrIdbnKKDSL/
-	NUhQ0lpFK4WPH6sozDY7SmbzIXte++WMA2a4gV6cENRe8MetUZ7QJgAtFo4CTjS4pqHl
-	gxkA==
-X-Received: by 10.15.53.70 with SMTP id q46mr19549888eew.48.1381401629056;
-	Thu, 10 Oct 2013 03:40:29 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=sddadf0vYMcdobFEGt5Tz7xZ+4BWZn98OxFobHXpL3w=;
+	b=tMOyuyGZ0naM4HafRD6AWavaSvoq8BAIk+E6oOweJuNN2oFNFgvTCnq/a3Kp2YReXL
+	O4cmCf1qgIUqz2n50iIlNlJbz4RoN5QWlip/VokoPteuKxhJn0SNVDRv59zlwaptrFuW
+	ekJT77Zkyqy/drj/P1iZYNSpINyLge4zjdvtuHxlAmXAbFOU2s0HiGL9MXZubTcEJV3e
+	yfIx6HgSZBwn/XkPGiFWGoF+35grJ14QbScc2JXhkEAKjBYSR61twjMoKvGfsGi6cO/9
+	KU0LAYpR5QkB8LssreEJWMYwDJV+5nnqMtD5iksG1V2dZ83CbrU+Ct4v3nEnuJrLCrcd
+	NWvw==
+X-Received: by 10.14.101.6 with SMTP id a6mr1728503eeg.81.1381401631082;
+	Thu, 10 Oct 2013 03:40:31 -0700 (PDT)
 Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
 	by mx.google.com with ESMTPSA id
-	f49sm99955441eec.7.1969.12.31.16.00.00
+	m54sm99941531eex.2.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 10 Oct 2013 03:40:28 -0700 (PDT)
+	Thu, 10 Oct 2013 03:40:30 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Oct 2013 12:40:38 +0200
-Message-Id: <1381401639-20130-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 10 Oct 2013 12:40:39 +0200
+Message-Id: <1381401639-20130-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-qt5][PATCH 1/2] qtbase_git: restore 0025-QHttpMultiPart-fix-data-corruption-in-readData-metho.patch in SRC_URI
+In-Reply-To: <1381401639-20130-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1381401639-20130-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-qt5][PATCH 2/2] qtbase: Disable fontconfig by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,31 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 10:40:29 -0000
+X-List-Received-Date: Thu, 10 Oct 2013 10:40:30 -0000
 
-* commit 105ad2a18e20f2b07d20a1640917e69950c8496b
-  Author: Eric B<C3><A9>nard <eric@eukrea.com>
-  Date:   Mon Oct 7 22:54:12 2013 +0200
-  Subject: qtbase: update to 5.1.1
-  removed it from SRC_URI in qtbase.inc, but it's still needed for
-  qtbase_git
+* it was explicitly disabled in
+  commit 1b14686657cddcc5bb37a5c7db8a35f1c4903ee3
+  Author: Philip Craig <phil@blackmoth.com.au>
+  Date:   Wed Jun 26 02:13:02 2013 +0000
+  Subject: qtbase: disable fontconfig support by default
+* and then accidentaly enabled with PACKAGECONFIG changes
+  commit ebdd83f6b7e5c3296e5ebd3b7b0c1e0defe5aba5
+  Author: Martin Jansa <Martin.Jansa@gmail.com>
+  Date:   Sat Jul 20 00:02:57 2013 +0200
+  Subject: qtbase: explicitly enable or disable all deps
+* Thanks to Nicolas Dechesne for reporting it
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtbase_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ recipes-qt/qt5/qtbase.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 2994d3f..30d5b23 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -1,4 +1,6 @@
- require qt5-git.inc
- require ${PN}.inc
- 
-+SRC_URI += "file://0025-QHttpMultiPart-fix-data-corruption-in-readData-metho.patch"
-+
- SRCREV = "bd1dc60d6555a901fb3005273d7a86efe470739a"
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 559f54d..d1831a1 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -40,7 +40,7 @@ RDEPENDS_${PN}-tools += "perl"
+ PACKAGECONFIG_GL ?= "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
+ PACKAGECONFIG_FB ?= "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
+ PACKAGECONFIG_X11 ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor gtkstyle', '', d)}"
+-PACKAGECONFIG_FONTS ?= "fontconfig freetype"
++PACKAGECONFIG_FONTS ?= "freetype"
+ PACKAGECONFIG_SYSTEM ?= "jpeg libpng zlib"
+ PACKAGECONFIG_MULTIMEDIA ?= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
+ PACKAGECONFIG_DISTRO ?= ""
 -- 
 1.8.3.2
 
