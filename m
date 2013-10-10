@@ -1,38 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B40D6CCB0
+Return-Path: <jc@vtkloud.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A34BE6CF23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 10:44:43 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id k11so1060370eaj.28
+	Thu, 10 Oct 2013 14:33:46 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id hn3so1333242wib.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 03:44:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=gWywvnS3QiOhjWFqtqlxoEk9kAxsazGNTumG7QhwAVk=;
-	b=mIg8iL2lCb5OErNQGo+O/DzQPbphwEOpvUdsSEJnfYQvI5yAXrtu8wHimIYF0zpvgO
-	LQzOx5P6VSlFNWMRDJObBJcPwgXmJ93IBxGGjjnrVlAo+geZ3ons2MVstmtQAZXYjNuz
-	5lYA8VQaZMG9WlnFygGJnRZvEwbvW8c6KzjjjmNdQ9EtUW+tyMYuYEuU7kVq4GxAeEXZ
-	nPDUyKp2Qvqif4MFML4U2MTXT/KPVlFezYgvdHtsctGE91JA7v8iSYAjKDy/6332fXAV
-	mkLYyfJun3Z2tBAzBvyDw9HYNS6mXYzwmLDXpK/aGYMTO9vXb73bDrt/TeNU0EWVlV7B
-	9Fhg==
-X-Received: by 10.15.45.8 with SMTP id a8mr19643188eew.1.1381401884923;
-	Thu, 10 Oct 2013 03:44:44 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	Thu, 10 Oct 2013 07:33:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:content-type:subject:date:references:to
+	:message-id:mime-version;
+	bh=Imf3R0SLuOATTZzJCT5uQishzulvuys8bMyLkoj99aI=;
+	b=K+qODmMkRC5kACA57+Fk9SRfieloP7mH2QA+zOe97xOesKbKynnkagHjmi/j9gpopQ
+	Zw1ml23cfJUAo/e/406Plr3mrMOg0oObOkqaTratoCnvP8xF8NsUAh+xOWSSO+JkXTl3
+	6Bm0nTAJPPNkQLWTTjOBclxzTVXeduMJqFYAN2LAcDCNInEEvaGpEdArZUATaocqCe3x
+	6TGyW+/z/MlBc+fZkcNO3LO616wamLg/MJSTzDIoFgQTsvI/sKFYxUKsGQeZc17Uk5vv
+	I4knVkDew5SkDMEqKv3XlpggD4A/GSPNtVOWJus3FgfSZEi5VtPDyS0eROeyEHqcyRu7
+	fuvg==
+X-Gm-Message-State: ALoCoQn9J2CEBgYdVLi4RVHKGHxgkKjRbxV9vr/Caz+J/ypNTJN2HRIUMNn6/wZxP0MAoumlxaDE
+X-Received: by 10.180.101.134 with SMTP id fg6mr8127838wib.9.1381415627646;
+	Thu, 10 Oct 2013 07:33:47 -0700 (PDT)
+Received: from [172.24.63.121] ([94.103.137.126])
 	by mx.google.com with ESMTPSA id
-	f49sm99998671eec.7.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 10 Oct 2013 03:44:44 -0700 (PDT)
-Date: Thu, 10 Oct 2013 12:44:56 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131010104456.GI2872@jama>
-References: <1381221981-1585-1-git-send-email-eric@eukrea.com>
-MIME-Version: 1.0
-In-Reply-To: <1381221981-1585-1-git-send-email-eric@eukrea.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH 01/21] cinematicexperience: add example
+	ey4sm26545054wic.11.1969.12.31.16.00.00
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 10 Oct 2013 07:33:46 -0700 (PDT)
+From: =?iso-8859-1?Q?Jean-Charles_JC_Verdi=E9?= <jc@vtkloud.com>
+Date: Thu, 10 Oct 2013 16:33:44 +0200
+References: <CAGzCC=83=JyahKe8=3uqb5He9ccaDF3oFOoK35fkm3ZXoQghsg@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-Id: <0DF97D72-CB6D-416F-9490-C089455DFF2A@vtkloud.com>
+Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
+X-Mailer: Apple Mail (2.1510)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-webos] openwebos virtualbox pointer question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,112 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 10:44:44 -0000
-X-Groupsio-MsgNum: 46600
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kH8JNVvasRCCW1Oz"
-Content-Disposition: inline
-
---kH8JNVvasRCCW1Oz
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Oct 2013 14:33:47 -0000
+Content-Type: text/plain;
+	charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 08, 2013 at 10:46:01AM +0200, Eric B=E9nard wrote:
-> for more informations on this demo :
-> http://kgronholm.blogspot.fr/2012/08/qt5-cinematic-experience.html
-> http://quitcoding.com/?page=3Dwork#cinex
+resending as i'm not sure the email went through...
 
-All merged in master as well as dora, thanks!
+Begin forwarded message:
 
+> From: JC <jcv@voxtok.com>
+> Subject: [meta-webos] openwebos virtualbox pointer question
+> Date: 9October 2013 10:46:28 AM GMT+02:00
+> To: openembedded-devel@lists.openembedded.org
+> Reply-To: jcv@voxtok.com
 >=20
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> ---
->  recipes-qt/examples/cinematicexperience_1.0.bb | 40 ++++++++++++++++++++=
-++++++
->  1 file changed, 40 insertions(+)
->  create mode 100644 recipes-qt/examples/cinematicexperience_1.0.bb
+>       Hi,
 >=20
-> diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/=
-examples/cinematicexperience_1.0.bb
-> new file mode 100644
-> index 0000000..3fa6f06
-> --- /dev/null
-> +++ b/recipes-qt/examples/cinematicexperience_1.0.bb
-> @@ -0,0 +1,40 @@
-> +SUMMARY =3D "Qt5 technology demo"
-> +DESCRIPTION =3D "Cinematic Experience collects many of the new Qt5 QtQui=
-ck 2.0 features into the same UX demo application. It uses particles, sprit=
-es, path animation, custom shaders etc. features which Qt5 introduces for Q=
-ML UIs."
-> +HOMEPAGE =3D "http://quitcoding.com/?page=3Dwork#cinex"
-> +LICENSE =3D "CC-BY-3.0"
-> +LIC_FILES_CHKSUM =3D "file://README;beginline=3D38;endline=3D50;md5=3D51=
-babd597624b70752069953876aaa18"
-> +
-> +SRC_URI =3D "http://quitcoding.com/download/Qt5_CinematicExperience_rpi_=
-1.0.tgz"
-> +
-> +SRC_URI[md5sum] =3D "935a5db0a6b2a72c67236e72f52be7d1"
-> +SRC_URI[sha256sum] =3D "0dd602983ced5f7c0cfd5ad0fbfe2b0b7e3c9ff715e4ef23=
-eef818ccc2b6c60b"
-> +
-> +S =3D "${WORKDIR}/Qt5_CinematicExperience_rpi_${PV}/"
-> +
-> +# other version available for small screens
-> +#SRC_URI =3D "http://quitcoding.com/download/Qt5_CinematicExperience_1.0=
-=2Etgz"
-> +#SRC_URI[md5sum] =3D "1c4f9bf5411c985fc5d3dbfc5d826a29"
-> +#SRC_URI[sha256sum] =3D "0e547e0259667915a24e84ade5efdcd0c553f8178673445=
-2c2c8dbce19a19f44"
-> +#S =3D "${WORKDIR}/Qt5_CinematicExperience_${PV}/"
-> +
-> +DEPENDS =3D "qtdeclarative qtgraphicaleffects"
-> +RDEPENDS_${PN} =3D "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugi=
-ns"
-> +
-> +require recipes-qt/qt5/qt5.inc
-> +
-> +do_install() {
-> +    install -d ${D}${datadir}/${P}
-> +    install -m 0755 ${B}/Qt5_CinematicExperience ${D}${datadir}/${P}
-> +    cp -a ${S}/content ${D}${datadir}/${P}
-> +    install -m 0644 ${S}/Qt5_CinematicExperience.qml ${D}${datadir}/${P}
-> +
-> +    install -d ${D}${bindir}
-> +    echo "#!/bin/sh" > ${D}${bindir}/Qt5_CinematicExperience
-> +    echo "export QML_IMPORT_PATH=3D${datadir}/${P}" >> ${D}${bindir}/Qt5=
-_CinematicExperience
-> +    echo "export QML2_IMPORT_PATH=3D${datadir}/${P}" >> ${D}${bindir}/Qt=
-5_CinematicExperience
-> +    echo "${datadir}/${P}/Qt5_CinematicExperiencea \$* " >> ${D}${bindir=
-}/Qt5_CinematicExperience
-> +    chmod +x ${D}${bindir}/Qt5_CinematicExperience
-> +}
-> +
-> +FILES_${PN}-dbg +=3D "${datadir}/${P}/.debug"
-> +FILES_${PN} +=3D "${datadir}"
-> --=20
-> 1.8.4.rc3
+> This is a newbie question, sorry about it. I built webos from the =
+meta-webos recipe from within yocto by manually adding the meta layer =
+(but I get the exact same result using =
+https://github.com/openwebos/build-webos).=20
 >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> When running the generated vmdk from virtualbox, I get a full webos =
+running, the keyboard is functionning but I have no pointer device: the =
+mouse is not integrated, and I couldn't find any keyboard-hack to point =
+& touch anywhere on the screen.=20
+>=20
+> Apologies if this is not the right place. Otherwise thanks for your =
+help :)
+>=20
+> Jay
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---kH8JNVvasRCCW1Oz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlJWhSgACgkQN1Ujt2V2gBw5hACgl2e5M7btPPTvt3KGzpv9Nuje
-E9UAoITKKRKI86yJ7hvXQ/uP2TAcoXx7
-=MDxs
------END PGP SIGNATURE-----
-
---kH8JNVvasRCCW1Oz--
