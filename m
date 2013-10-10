@@ -1,34 +1,22 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CACF6CEF2
+Return-Path: <eric@eukrea.com>
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+	by mail.openembedded.org (Postfix) with ESMTP id A64DF6D03D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 18:49:09 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VULIL-0003iS-1v for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Oct 2013 20:49:09 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 20:49:09 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 20:49:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 10 Oct 2013 19:31:36 +0000 (UTC)
+Received: from e6520eb (unknown [82.233.81.124]) (Authenticated sender: eukrea)
+	by smtp1-g21.free.fr (Postfix) with ESMTPSA id 17098940277;
+	Thu, 10 Oct 2013 21:31:29 +0200 (CEST)
+Date: Thu, 10 Oct 2013 21:31:27 +0200
+From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 10 Oct 2013 20:49:03 +0200
-Message-ID: <l36sqj$dd6$1@ger.gmane.org>
-References: <5256F33C.50609@balister.org>
+Message-ID: <20131010213127.14c4f478@e6520eb>
+In-Reply-To: <5256CE06.60502@digi.com>
+References: <5256CE06.60502@digi.com>
+Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
+X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
-In-Reply-To: <5256F33C.50609@balister.org>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [RFC] Create meta-sdr in meta-oe
+Cc: javier.viguera@digi.com
+Subject: Re: Dylan backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +30,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 18:49:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Oct 2013 19:31:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Javier,
 
-Op 10-10-13 20:34, Philip Balister schreef:
-> At the GNU Radio conference last week, several people working with 
-> gnuradio on embedded systems asked about creating a meta-sdr to hold 
-> gnuradio and uhd. This would be the starting point for adding some other 
-> gnuradio out of tree applications. This could also be a home for some 
-> other sdr frameworks such as Iris and ALOE.
-> 
-> Software that is more focused toward the amateur radio community should 
-> not end up here since there is little overlap in the developer 
-> communities at this time.
-> 
-> Any comments?
+Le Thu, 10 Oct 2013 17:55:50 +0200,
+Javier Viguera <javier.viguera@digi.com> a =E9crit :
+> Bear with me if this has been already replied, but what is the procedure=
+=20
+> to get patches applied in maintenance branches (e.g. dylan)?
+>=20
+> I sent a couple of patches some time ago:
+>=20
+> <http://patchwork.openembedded.org/patch/57455/>
+> <http://patchwork.openembedded.org/patch/57475/>
+>=20
+> that fixes broken builds in Dylan, but I'm not sure if this is the=20
+> correct way because at the moment they have not made their way into the=20
+> repo.
+>=20
+both pushed to dylan-next for testing.
 
-soft66 and rtl-sdr can live there as well. I have recipes for that :)
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD4DBQFSVvafMkyGM64RGpERAv9hAJYp+P+siykamukuuYphpOhVyNxjAKCqbHy/
-R4h7IGNilTjmyAhRm/AH6Q==
-=HwTP
------END PGP SIGNATURE-----
-
+Thanks
+Eric
 
