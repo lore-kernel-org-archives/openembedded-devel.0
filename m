@@ -1,41 +1,41 @@
-Return-Path: <jc@vtkloud.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id A34BE6CF23
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 515B96CEF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 14:33:46 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id hn3so1333242wib.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 07:33:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:content-type:subject:date:references:to
-	:message-id:mime-version;
-	bh=Imf3R0SLuOATTZzJCT5uQishzulvuys8bMyLkoj99aI=;
-	b=K+qODmMkRC5kACA57+Fk9SRfieloP7mH2QA+zOe97xOesKbKynnkagHjmi/j9gpopQ
-	Zw1ml23cfJUAo/e/406Plr3mrMOg0oObOkqaTratoCnvP8xF8NsUAh+xOWSSO+JkXTl3
-	6Bm0nTAJPPNkQLWTTjOBclxzTVXeduMJqFYAN2LAcDCNInEEvaGpEdArZUATaocqCe3x
-	6TGyW+/z/MlBc+fZkcNO3LO616wamLg/MJSTzDIoFgQTsvI/sKFYxUKsGQeZc17Uk5vv
-	I4knVkDew5SkDMEqKv3XlpggD4A/GSPNtVOWJus3FgfSZEi5VtPDyS0eROeyEHqcyRu7
-	fuvg==
-X-Gm-Message-State: ALoCoQn9J2CEBgYdVLi4RVHKGHxgkKjRbxV9vr/Caz+J/ypNTJN2HRIUMNn6/wZxP0MAoumlxaDE
-X-Received: by 10.180.101.134 with SMTP id fg6mr8127838wib.9.1381415627646;
-	Thu, 10 Oct 2013 07:33:47 -0700 (PDT)
-Received: from [172.24.63.121] ([94.103.137.126])
-	by mx.google.com with ESMTPSA id
-	ey4sm26545054wic.11.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 10 Oct 2013 07:33:46 -0700 (PDT)
-From: =?iso-8859-1?Q?Jean-Charles_JC_Verdi=E9?= <jc@vtkloud.com>
-Date: Thu, 10 Oct 2013 16:33:44 +0200
-References: <CAGzCC=83=JyahKe8=3uqb5He9ccaDF3oFOoK35fkm3ZXoQghsg@mail.gmail.com>
+	Thu, 10 Oct 2013 15:57:45 +0000 (UTC)
+Received: from [216.82.249.131:64747] by server-12.bemta-12.messagelabs.com id
+	AD/2C-10790-87EC6525; Thu, 10 Oct 2013 15:57:44 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-6.tower-28.messagelabs.com!1381420653!24548651!10
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.12; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 32573 invoked from network); 10 Oct 2013 15:57:44 -0000
+Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-6.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
+	10 Oct 2013 15:57:44 -0000
+Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 10 Oct 2013 10:55:49 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH03.digi.com
+	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.158.1;
+	Thu, 10 Oct 2013 10:56:02 -0500
+Received: from [10.101.1.79] (10.101.1.79) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 10 Oct 2013 17:56:00 +0200
+Message-ID: <5256CE06.60502@digi.com>
+Date: Thu, 10 Oct 2013 17:55:50 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
+MIME-Version: 1.0
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Message-Id: <0DF97D72-CB6D-416F-9490-C089455DFF2A@vtkloud.com>
-Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
-X-Mailer: Apple Mail (2.1510)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-webos] openwebos virtualbox pointer question
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: Dylan backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,36 +49,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 14:33:47 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Oct 2013 15:57:46 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-resending as i'm not sure the email went through...
+Hi all,
 
-Begin forwarded message:
+Bear with me if this has been already replied, but what is the procedure 
+to get patches applied in maintenance branches (e.g. dylan)?
 
-> From: JC <jcv@voxtok.com>
-> Subject: [meta-webos] openwebos virtualbox pointer question
-> Date: 9October 2013 10:46:28 AM GMT+02:00
-> To: openembedded-devel@lists.openembedded.org
-> Reply-To: jcv@voxtok.com
->=20
->       Hi,
->=20
-> This is a newbie question, sorry about it. I built webos from the =
-meta-webos recipe from within yocto by manually adding the meta layer =
-(but I get the exact same result using =
-https://github.com/openwebos/build-webos).=20
->=20
-> When running the generated vmdk from virtualbox, I get a full webos =
-running, the keyboard is functionning but I have no pointer device: the =
-mouse is not integrated, and I couldn't find any keyboard-hack to point =
-& touch anywhere on the screen.=20
->=20
-> Apologies if this is not the right place. Otherwise thanks for your =
-help :)
->=20
-> Jay
+I sent a couple of patches some time ago:
 
+<http://patchwork.openembedded.org/patch/57455/>
+<http://patchwork.openembedded.org/patch/57475/>
+
+that fixes broken builds in Dylan, but I'm not sure if this is the 
+correct way because at the moment they have not made their way into the 
+repo.
+
+With the current status of dylan, cherokee cannot be downloaded (wrong 
+SRC_URI) and net-snmp fails to build when not using 'systemd':
+
+snmpd.c:459: undefined reference to `netsnmp_sd_listen_fds'
+
+-
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
 
