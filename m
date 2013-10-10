@@ -1,26 +1,33 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BBB2E6CF1E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A21266CCB0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2013 09:21:25 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9A9LRMj010011
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 10 Oct 2013 02:21:27 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.342.3; Thu, 10 Oct 2013 02:21:27 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Oct 2013 17:21:22 +0800
-Message-ID: <cb7c8ef452b8ffb463de5b396594a056efac74b2.1381396778.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1381396778.git.hongxu.jia@windriver.com>
-References: <cover.1381396778.git.hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Cc: paul.eggleton@linux.intel.com
-Subject: [meta-oe][PATCH 1/1] mariadb: Add mysql5 to RPROVIDES for backwards compatibility
+	Thu, 10 Oct 2013 10:40:28 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id c13so1054140eek.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2013 03:40:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=3UVs3YVyh6jmUdm3o6NxR/GalfE5T6KxFL6g4lICh6Q=;
+	b=m0PA0Ebd84dzTNXm8b87TG7apbM8VO1QU5Ddxy0UOkA8k6ZcNOMlltZgDXGp9+/kYn
+	oitrc22S4/TsfNUEX9LIvVxm+LbGqX8oQlCzyCzCDD2vMwjftOrG8ySWgaveOrpmMWsI
+	PrhI15LBuMIltmuueLTBT/8yZoGk9a0fwnOtjgmt8tXToAqX5TnLqiWCtOjGdzT817VS
+	q3HtDX9NmlM7/BlB5u4aYB33NCh/HSWFCLw00/HzXO7JO+waRdCsGyzHTrIdbnKKDSL/
+	NUhQ0lpFK4WPH6sozDY7SmbzIXte++WMA2a4gV6cENRe8MetUZ7QJgAtFo4CTjS4pqHl
+	gxkA==
+X-Received: by 10.15.53.70 with SMTP id q46mr19549888eew.48.1381401629056;
+	Thu, 10 Oct 2013 03:40:29 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	f49sm99955441eec.7.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 10 Oct 2013 03:40:28 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Oct 2013 12:40:38 +0200
+Message-Id: <1381401639-20130-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-qt5][PATCH 1/2] qtbase_git: restore 0025-QHttpMultiPart-fix-data-corruption-in-readData-metho.patch in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,59 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2013 09:21:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Oct 2013 10:40:29 -0000
 
-It failed to build image while IMAGE_INSTALL += "mysql5"
-For backwards compatibility:
-- Add mysql5 to RPROVIDES_${PN}
-- Add mysql5-dbg to RPROVIDES_${PN}-dbg
-- Add mysql5-leftovers to RPROVIDES_${PN}-leftovers
-- Use "+=" instead of "=" in  RPROVIDES_${PN}-client and
-  RPROVIDES_${PN}-server
+* commit 105ad2a18e20f2b07d20a1640917e69950c8496b
+  Author: Eric B<C3><A9>nard <eric@eukrea.com>
+  Date:   Mon Oct 7 22:54:12 2013 +0200
+  Subject: qtbase: update to 5.1.1
+  removed it from SRC_URI in qtbase.inc, but it's still needed for
+  qtbase_git
 
-The same to RREPLACES and RCONFLICTS.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/mysql/mariadb_5.1.67.bb | 24 ++++++++++++++++++------
- 1 file changed, 18 insertions(+), 6 deletions(-)
+ recipes-qt/qt5/qtbase_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-index fdf20dc..fc499d4 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-@@ -4,11 +4,23 @@ DEPENDS += "mariadb-native"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 2994d3f..30d5b23 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -1,4 +1,6 @@
+ require qt5-git.inc
+ require ${PN}.inc
  
- PROVIDES += "mysql5"
- 
--RPROVIDES_${PN}-client = "mysql5-client"
--RREPLACES_${PN}-client = "mysql5-client"
--RCONFLICTS_${PN}-client = "mysql5-client"
-+RPROVIDES_${PN} += "mysql5"
-+RREPLACES_${PN} += "mysql5"
-+RCONFLICTS_${PN} += "mysql5"
- 
--RPROVIDES_${PN}-server = "mysql5-server"
--RREPLACES_${PN}-server = "mysql5-server"
--RCONFLICTS_${PN}-server = "mysql5-server"
-+RPROVIDES_${PN}-dbg += "mysql5-dbg"
-+RREPLACES_${PN}-dbg += "mysql5-dbg"
-+RCONFLICTS_${PN}-dbg += "mysql5-dbg"
++SRC_URI += "file://0025-QHttpMultiPart-fix-data-corruption-in-readData-metho.patch"
 +
-+RPROVIDES_${PN}-leftovers += "mysql5-leftovers"
-+RREPLACES_${PN}-leftovers += "mysql5-leftovers"
-+RCONFLICTS_${PN}-leftovers += "mysql5-leftovers"
-+
-+RPROVIDES_${PN}-client += "mysql5-client"
-+RREPLACES_${PN}-client += "mysql5-client"
-+RCONFLICTS_${PN}-client += "mysql5-client"
-+
-+RPROVIDES_${PN}-server += "mysql5-server"
-+RREPLACES_${PN}-server += "mysql5-server"
-+RCONFLICTS_${PN}-server += "mysql5-server"
- 
+ SRCREV = "bd1dc60d6555a901fb3005273d7a86efe470739a"
 -- 
-1.8.1.2
+1.8.3.2
 
 
