@@ -1,39 +1,17 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BC246CC7F
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B1086D002
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 13:48:14 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id f12so988444wgh.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 06:48:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=PWeV9OPU27sYUIshD7MJM5HtHQ/DEg9Cv3yhOdloOjk=;
-	b=GUpllqQqvOstwgyRp1g3eRfCO3qAf0HDVchqx2dssMxGxl/uvh2IShbU6jkes4mDmA
-	CApHpZ0SX9VYikBZ0wli1Sj1l6MPLgA3spLTq4e5ryocBD94p1vkryluKmT1HVc503e1
-	ioUPNPRC018CfB+Q8Ew9JLPKFnTLYx3w5edD+cJRXON4Mzq1CLeADa8p7/VoMwTG+hNN
-	AEftvMXRalvOpPCNO4QoUqxOrhNUn/Ym/Zb/g2OKsi+c4nahT2NYvsHqA1YJLKtYc0R0
-	T/tDxhZyYP8hZQTxT/rRSHBkmwtcGfC29J/At13KlRWRFHINg+T4C5F+fChTioXLAWqf
-	mqaQ==
-X-Gm-Message-State: ALoCoQm8YDYY5T5fmt2JqoJeMQXgAp52G41G5zIinjXp2o761LzOWdIk589xbF3aQ88aOGTBe/2l
-X-Received: by 10.194.143.18 with SMTP id sa18mr399748wjb.70.1381499295571;
-	Fri, 11 Oct 2013 06:48:15 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPSA id k4sm5919578wic.0.2013.10.11.06.48.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Fri, 11 Oct 2013 06:48:14 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Fri, 11 Oct 2013 14:01:02 +0000 (UTC)
+From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2013 15:48:09 +0200
-Message-Id: <1381499289-10706-2-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1381499289-10706-1-git-send-email-koen@dominion.thruhere.net>
-References: <1381499289-10706-1-git-send-email-koen@dominion.thruhere.net>
-Subject: [meta-gnome][PATCH 2/2] gdm 2.32.2: don't install broken gdm-autologin PAM file
+Date: Fri, 11 Oct 2013 15:00:55 +0100
+Message-Id: <1381500055-11483-4-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.4
+In-Reply-To: <1381500055-11483-1-git-send-email-ml@communistcode.co.uk>
+References: <1381500055-11483-1-git-send-email-ml@communistcode.co.uk>
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: [meta-oe][PATCHv2 3/3] rsyslog: update to 7.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,37 +25,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2013 13:48:14 -0000
+X-List-Received-Date: Fri, 11 Oct 2013 14:01:03 -0000
 
-It references pam-plugin-console which isn't available. Deleting the PAM file makes autologin work.
+From: Jack Mitchell <jmitchell@cbnl.com>
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
 ---
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-extended/rsyslog/rsyslog/rsyslog.conf  | 60 ----------------------
+ meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb  |  5 --
+ .../rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb}      | 24 ++++++---
+ 3 files changed, 16 insertions(+), 73 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb} (54%)
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-index 65e0826..b341c8a 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+deleted file mode 100644
+index 47fc440..0000000
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
++++ /dev/null
+@@ -1,60 +0,0 @@
+-# if you experience problems, check
+-# http://www.rsyslog.com/troubleshoot for assistance
+-
+-# rsyslog v3: load input modules
+-# If you do not load inputs, nothing happens!
+-# You may need to set the module load path if modules are not found.
+-
+-$ModLoad immark   # provides --MARK-- message capability
+-$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+-$ModLoad imklog   # kernel logging (formerly provided by rklogd)
+-
+-# Log all kernel messages to the console.
+-# Logging much else clutters up the screen.
+-#kern.*                                                 /dev/console
+-
+-# Log anything (except mail) of level info or higher.
+-# Don't log private authentication messages!
+-*.info;mail.none;authpriv.none;cron.none                -/var/log/messages
+-
+-# The authpriv file has restricted access.
+-authpriv.*                                              /var/log/secure
+-
+-# Log all the mail messages in one place.
+-mail.*                                                  -/var/log/maillog
+-
+-
+-# Log cron stuff
+-cron.*                                                  -/var/log/cron
+-
+-# Everybody gets emergency messages
+-*.emerg                                                 *
+-
+-# Save news errors of level crit and higher in a special file.
+-uucp,news.crit                                          -/var/log/spooler
+-
+-# Save boot messages also to boot.log
+-local7.*                                                /var/log/boot.log
+-
+-# Remote Logging (we use TCP for reliable delivery)
+-# An on-disk queue is created for this action. If the remote host is
+-# down, messages are spooled to disk and sent when it is up again.
+-#$WorkDirectory /rsyslog/spool # where to place spool files
+-#$ActionQueueFileName uniqName # unique name prefix for spool files
+-#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+-#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+-#$ActionQueueType LinkedList   # run asynchronously
+-#$ActionResumeRetryCount -1    # infinite retries if host is down
+-# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+-#*.* @@remote-host:514
+-
+-
+-# ######### Receiving Messages from Remote Hosts ########## 
+-# TCP Syslog Server:
+-# provides TCP syslog reception and GSS-API (if compiled to support it)
+-#$ModLoad imtcp.so  # load module
+-#$InputTCPServerRun 514 # start up TCP listener at port 514
+-
+-# UDP Syslog Server:
+-#$ModLoad imudp.so  # provides UDP syslog reception
+-#$UDPServerRun 514 # start a UDP syslog server at standard port 514
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
+deleted file mode 100644
+index 3a6540d..0000000
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require rsyslog.inc
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "37562d0e71a24938a9ed7f242bd32d35"
+-SRC_URI[sha256sum] = "e034b02473fd7e5313522173ec2f6c57e6fbcaec2c6b289edb968b1d64ae3ffd"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog.inc b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+similarity index 54%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog.inc
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+index 4b2935f..33cc1d5 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog.inc
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+@@ -1,24 +1,32 @@
+ DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
+-DEPENDS = "zlib"
++DEPENDS = "zlib libestr json-c"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ HOMEPAGE = "http://www.rsyslog.com/"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973"
  
- DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
+-INC_PR = "r8"
+-
+ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${PN}-${PV}.tar.gz \
+-           file://rsyslog.conf"
++	   file://initscript \
++"
++
++SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
++SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
+            
+-inherit autotools pkgconfig systemd
++inherit autotools pkgconfig systemd update-rc.d
  
--PR = "r17"
-+PR = "r18"
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
++EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)} --enable-cached-man-pages"
  
- inherit gnome update-rc.d systemd useradd
+ do_install_append() {
+-    install -d ${D}/${sysconfdir}/${PN}
+-    install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
++    install -d "${D}${sysconfdir}/init.d"
++    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/rsyslogd
++    install -m 755 ${S}/platform/redhat/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+ }
  
-@@ -49,6 +49,7 @@ do_install_append() {
++FILES_${PN} += "/usr/bin"
++
++INITSCRIPT_NAME = "rsyslogd"
++INITSCRIPT_PARAMS = "defaults"
++
+ CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
  
-     install -d ${D}/${sysconfdir}/pam.d
-     install -m 0755 ${WORKDIR}/gdm-pam       ${D}/${sysconfdir}/pam.d/gdm
-+    rm -f ${D}/${sysconfdir}/pam.d/gdm-autologin
- 
-     install -d ${D}/${sysconfdir}/gdm/Init
-     install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
+ RPROVIDES_${PN} += "${PN}-systemd"
 -- 
-1.8.3.1
+1.8.4
 
 
