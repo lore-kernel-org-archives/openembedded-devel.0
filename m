@@ -1,17 +1,15 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 39F886CDAC
+	by mail.openembedded.org (Postfix) with ESMTP id 3AF076CF03
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 11 Oct 2013 08:55:50 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2013 09:55:44 +0100
-Message-Id: <1381481745-17613-3-git-send-email-ml@communistcode.co.uk>
+Date: Fri, 11 Oct 2013 09:55:42 +0100
+Message-Id: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.4
-In-Reply-To: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
-References: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
 Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: [PATCH 2/3] libestr: add 0.1.6
+Subject: [PATCH 0/3] rsyslog: update and add new dependancies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,28 +27,25 @@ X-List-Received-Date: Fri, 11 Oct 2013 08:55:53 -0000
 
 From: Jack Mitchell <jmitchell@cbnl.com>
 
----
- meta-oe/recipes-support/libestr/libestr_0.1.6.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+update rsyslog to the latest version and add required dependancies.
+
+Jack Mitchell (3):
+  json-c: add 0.11
+  libestr: add 0.1.6
+  rsyslog: update to 7.4.4
+
+ .../recipes-extended/rsyslog/rsyslog/rsyslog.conf  | 60 ----------------------
+ meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb  |  5 --
+ .../rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb}      | 24 ++++++---
+ meta-oe/recipes-support/json-c/json-c_0.11.bb      | 11 ++++
+ meta-oe/recipes-support/libestr/libestr_0.1.6.bb   | 11 ++++
+ 5 files changed, 38 insertions(+), 73 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb} (54%)
+ create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
  create mode 100644 meta-oe/recipes-support/libestr/libestr_0.1.6.bb
 
-diff --git a/meta-oe/recipes-support/libestr/libestr_0.1.6.bb b/meta-oe/recipes-support/libestr/libestr_0.1.6.bb
-new file mode 100644
-index 0000000..ae29856
---- /dev/null
-+++ b/meta-oe/recipes-support/libestr/libestr_0.1.6.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "some essentials for string handling (and a bit more)"
-+HOMEPAGE = "http://libestr.adiscon.com/"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9d6c993486c18262afba4ca5bcb894d0"
-+
-+SRC_URI = "http://libestr.adiscon.com/files/download/${P}.tar.gz"
-+
-+SRC_URI[md5sum] = "f48a7098080eebfe7842673c23dcd064"
-+SRC_URI[sha256sum] = "b9c819d30397845fdf85bb1f37c52e81de23aa3b061ec6cc4386f1b942960153"
-+
-+inherit autotools
 -- 
 1.8.4
 
