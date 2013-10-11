@@ -1,43 +1,34 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
-	[74.125.82.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CD4E96CC37
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id BC8606CF0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 14:20:51 +0000 (UTC)
-Received: by mail-we0-f169.google.com with SMTP id q58so4322777wes.0
+	Fri, 11 Oct 2013 22:29:06 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so2171891eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 07:20:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=egcIfgWU+GSlOGAtUPRLubh6+l1bAJnG1WjG9G+gqSw=;
-	b=DCaIloKoxyMsIzlidkan7mq1H+o+oqhBxEqKp2WgOyu2FGo0/32Xuz8ULD/0lygy7L
-	W/Fdjd6uISs0dMK1MFX/Pp+pBNjpx2JwyuBbnAAXcXIYD6TEIPeoqNG4cS2UoaCzN6e5
-	GjX9sJgDGdvi1sWkteMnTKWB9jyRxHqkgXG84p17nFYZ30KtvMYFBiasGx3n1A1Cr6yt
-	G609OtT9PWeIa8scIuuWW8QGU6ZgWwR4cypmhD9k8dBG+dCavG4VGe+Az5LdgrpOqV2Z
-	S3ubfRCvDo+6PnV4jQj8qA8KBDdRS6P3llsD9BlHoTZhlvXxZzucFh5DEf+9dudOUmBE
-	/h5Q==
-X-Gm-Message-State: ALoCoQmcpoV0whBKLET9g+TM5Yqe95GkLhicmVJzeo0n2hVWEq6/3vqWiyvEo9X15vEkacC+EWYQ
-X-Received: by 10.194.94.101 with SMTP id db5mr775721wjb.67.1381501252740;
-	Fri, 11 Oct 2013 07:20:52 -0700 (PDT)
-Received: from iMac.local ([2001:610:612:0:d04:70cd:6d6d:11d0])
-	by mx.google.com with ESMTPSA id b7sm6135386wiz.8.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 11 Oct 2013 07:20:51 -0700 (PDT)
-Message-ID: <52580927.90308@dominion.thruhere.net>
-Date: Fri, 11 Oct 2013 16:20:23 +0200
-From: Koen Kooi <koen@dominion.thruhere.net>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
-MIME-Version: 1.0
+	Fri, 11 Oct 2013 15:29:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Xerbb5Ut9accY38ZZhi7GqCHCpeHIENJZHeUl8HmuGI=;
+	b=E0FhZ/eeQb9h/AkOGzIiwcMzmVzg2633rT7hyhMarb8v6U/tPlqq2bYfTO8Qh3UCvb
+	b9hN66yV5oyON9dwIXMiTt9y6STUQgCfFWGmrzZHOV5YYjLdvR7/PdV+CNgLYHeBwV0L
+	UvxCFc8TUYhVEuPWMYLloKtk7+sWTHXjO4T9q8bTr99hrpPvmeHEIwglUwWQLQqslPsV
+	2AujqAIcct6rmJK1hZ1eCRh4revJn+9TLbIrVgdMWeW7H/i1If9qQwG0V/QTEensCalY
+	eybaYNEfcMBvQzS0xBWmZV8No8+cI/JSwh76rszQnwQ+dgAsNu/MExfdbz7a42pVtXh5
+	rGcw==
+X-Received: by 10.14.29.67 with SMTP id h43mr32728805eea.7.1381530547647;
+	Fri, 11 Oct 2013 15:29:07 -0700 (PDT)
+Received: from mizar.localdomain
+	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
+	by mx.google.com with ESMTPSA id
+	l49sm35653207eeo.12.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 11 Oct 2013 15:29:06 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1381500055-11483-1-git-send-email-ml@communistcode.co.uk>
-	<1381500055-11483-4-git-send-email-ml@communistcode.co.uk>
-In-Reply-To: <1381500055-11483-4-git-send-email-ml@communistcode.co.uk>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [meta-oe][PATCHv2 3/3] rsyslog: update to 7.4.4
+Date: Sat, 12 Oct 2013 00:28:53 +0200
+Message-Id: <1381530533-25113-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH] linux-2.6.29: remove recipe, h3600 now prefers linux-yocto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,120 +42,9695 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2013 14:20:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Oct 2013 22:29:09 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ ...7-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch | 1043 --------
+ ...08-1-SA1100-update-defconfigs-after-h3800.patch |  169 --
+ ...3-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch |   50 -
+ ...424-1-h3600-clean-up-mtd-partitions-table.patch |   67 -
+ ...5-1-h3600-first-stage-of-ipaq_model_ops-c.patch |  167 --
+ ...6-1-h3600-remove-clr_h3600_egpio-set_h360.patch |  117 -
+ ...5427-1-h3600-ipaq_model_ops-final-cleanup.patch |   96 -
+ ...outdated-and-broken-sa11xx-uda1341-driver.patch | 1166 ---------
+ ...009-mtd-remove-obsolete-ipaq-flash-driver.patch |  520 ----
+ ...0-h3600-introduce-new-set-of-GPIO-defines.patch |   91 -
+ .../0011-h3600-remove-unused-includes.patch        |   42 -
+ .../0012-h3600-add-include-linux-gpio.h.patch      |   27 -
+ .../0013-h3600-split-common-h3xxx_lcd_power.patch  |   86 -
+ .../0014-h3600-split-common-h3xxx_mach_init.patch  |  137 --
+ ...ve-IRDA-tranceiver-stuff-from-serial-PM-c.patch |   32 -
+ ...tch-serial-hooks-to-use-gpiolib-functions.patch |   46 -
+ ...ve-unused-set_wake-callback-from-sa1100_p.patch |   52 -
+ ...remove-unused-set_wake-from-sa1100_serial.patch |   25 -
+ ...dd-gpio-keys-for-Power-and-Action-buttons.patch |   79 -
+ ...x-compilation-of-h3600-touchscreen-driver.patch |   97 -
+ ...put-fix-h3600_ts_input-kconfig-dependency.patch |   52 -
+ ...r-for-Atmel-Microcontroller-on-iPaq-h3600.patch |  553 -----
+ ...ver-for-keys-connected-to-microcontroller.patch |  203 --
+ ...river-for-touchscreen-on-iPaq-h3600-h3100.patch |  211 --
+ ...-driver-for-battery-reading-on-iPaq-h3600.patch |  322 ---
+ .../0026-h3600-add-micro-platform-device.patch     |   36 -
+ .../0027-USB-add-sa1100_udc-driver.patch           | 2592 --------------------
+ .../0028-h3600-fix-suspend-HACK.patch              |   55 -
+ ...fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch |   57 -
+ recipes-kernel/linux/linux-2.6.29/h3600/defconfig  | 1141 ---------
+ ...SA1100-enable-second-serial-port-on-h3600.patch |   33 -
+ recipes-kernel/linux/linux_2.6.29.bb               |   62 -
+ 32 files changed, 9426 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0001--ARM-5407-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0002--ARM-5408-1-SA1100-update-defconfigs-after-h3800.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0003--ARM-5423-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0004--ARM-5424-1-h3600-clean-up-mtd-partitions-table.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0005--ARM-5425-1-h3600-first-stage-of-ipaq_model_ops-c.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0006--ARM-5426-1-h3600-remove-clr_h3600_egpio-set_h360.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0007--ARM-5427-1-h3600-ipaq_model_ops-final-cleanup.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0008-ALSA-drop-outdated-and-broken-sa11xx-uda1341-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0009-mtd-remove-obsolete-ipaq-flash-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0010-h3600-introduce-new-set-of-GPIO-defines.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0011-h3600-remove-unused-includes.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0012-h3600-add-include-linux-gpio.h.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0013-h3600-split-common-h3xxx_lcd_power.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0014-h3600-split-common-h3xxx_mach_init.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0015-h3600-remove-IRDA-tranceiver-stuff-from-serial-PM-c.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0016-h3600-switch-serial-hooks-to-use-gpiolib-functions.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0017-h3600-remove-unused-set_wake-callback-from-sa1100_p.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0018-serial-remove-unused-set_wake-from-sa1100_serial.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0019-h3600-add-gpio-keys-for-Power-and-Action-buttons.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0020-input-fix-compilation-of-h3600-touchscreen-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0021-input-fix-h3600_ts_input-kconfig-dependency.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0022-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3600.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0023-input-driver-for-keys-connected-to-microcontroller.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0024-input-driver-for-touchscreen-on-iPaq-h3600-h3100.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0025-power-add-driver-for-battery-reading-on-iPaq-h3600.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0026-h3600-add-micro-platform-device.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0027-USB-add-sa1100_udc-driver.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0028-h3600-fix-suspend-HACK.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0029-pcmcia-fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-2.6.29/h3600/misc/patch_needed_for_old_touchscreen_driver/0005-SA1100-enable-second-serial-port-on-h3600.patch
+ delete mode 100644 recipes-kernel/linux/linux_2.6.29.bb
 
-Op 11-10-13 16:00, Jack Mitchell schreef:
-> From: Jack Mitchell <jmitchell@cbnl.com>
-> 
-> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com> --- 
-> .../recipes-extended/rsyslog/rsyslog/rsyslog.conf  | 60
-> ---------------------- meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
-> |  5 -- .../rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb}      | 24
-> ++++++--- 3 files changed, 16 insertions(+), 73 deletions(-) delete mode
-> 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf delete mode
-> 100644 meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb rename
-> meta-oe/recipes-extended/rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb} (54%)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-> b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf deleted file mode
-> 100644 index 47fc440..0000000 ---
-> a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf +++ /dev/null @@
-> -1,60 +0,0 @@ -# if you experience problems, check -#
-> http://www.rsyslog.com/troubleshoot for assistance - -# rsyslog v3: load
-> input modules -# If you do not load inputs, nothing happens! -# You may
-> need to set the module load path if modules are not found. - -$ModLoad
-> immark   # provides --MARK-- message capability -$ModLoad imuxsock #
-> provides support for local system logging (e.g. via logger command) 
-> -$ModLoad imklog   # kernel logging (formerly provided by rklogd) - -#
-> Log all kernel messages to the console. -# Logging much else clutters up
-> the screen. -#kern.*
-> /dev/console - -# Log anything (except mail) of level info or higher. -#
-> Don't log private authentication messages! 
-> -*.info;mail.none;authpriv.none;cron.none
-> -/var/log/messages - -# The authpriv file has restricted access. 
-> -authpriv.*                                              /var/log/secure 
-> - -# Log all the mail messages in one place. -mail.*
-> -/var/log/maillog - - -# Log cron stuff -cron.*
-> -/var/log/cron - -# Everybody gets emergency messages -*.emerg
-> * - -# Save news errors of level crit and higher in a special file. 
-> -uucp,news.crit
-> -/var/log/spooler - -# Save boot messages also to boot.log -local7.*
-> /var/log/boot.log - -# Remote Logging (we use TCP for reliable delivery) 
-> -# An on-disk queue is created for this action. If the remote host is -#
-> down, messages are spooled to disk and sent when it is up again. 
-> -#$WorkDirectory /rsyslog/spool # where to place spool files 
-> -#$ActionQueueFileName uniqName # unique name prefix for spool files 
-> -#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as
-> possible) -#$ActionQueueSaveOnShutdown on # save messages to disk on
-> shutdown -#$ActionQueueType LinkedList   # run asynchronously 
-> -#$ActionResumeRetryCount -1    # infinite retries if host is down -#
-> remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional -#*.*
-> @@remote-host:514 - - -# ######### Receiving Messages from Remote Hosts
-> ########## -# TCP Syslog Server: -# provides TCP syslog reception and
-> GSS-API (if compiled to support it) -#$ModLoad imtcp.so  # load module 
-> -#$InputTCPServerRun 514 # start up TCP listener at port 514 - -# UDP
-> Syslog Server: -#$ModLoad imudp.so  # provides UDP syslog reception 
-> -#$UDPServerRun 514 # start a UDP syslog server at standard port 514 diff
-> --git a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
-> b/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb deleted file mode
-> 100644 index 3a6540d..0000000 ---
-> a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb +++ /dev/null @@ -1,5
-> +0,0 @@ -require rsyslog.inc -PR = "${INC_PR}.0" - -SRC_URI[md5sum] =
-> "37562d0e71a24938a9ed7f242bd32d35" -SRC_URI[sha256sum] =
-> "e034b02473fd7e5313522173ec2f6c57e6fbcaec2c6b289edb968b1d64ae3ffd" diff
-> --git a/meta-oe/recipes-extended/rsyslog/rsyslog.inc
-> b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb similarity index 54% 
-> rename from meta-oe/recipes-extended/rsyslog/rsyslog.inc rename to
-> meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb index 4b2935f..33cc1d5
-> 100644 --- a/meta-oe/recipes-extended/rsyslog/rsyslog.inc +++
-> b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb @@ -1,24 +1,32 @@ 
-> DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd" -DEPENDS =
-> "zlib" +DEPENDS = "zlib libestr json-c" DEPENDS +=
-> "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}" 
-> HOMEPAGE = "http://www.rsyslog.com/" LICENSE = "GPLv3" LIC_FILES_CHKSUM =
-> "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973"
-> 
-> -INC_PR = "r8" - SRC_URI =
-> "http://www.rsyslog.com/files/download/rsyslog/${PN}-${PV}.tar.gz \ -
-> file://rsyslog.conf" +	   file://initscript \
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0001--ARM-5407-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0001--ARM-5407-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch
+deleted file mode 100644
+index 439692c..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0001--ARM-5407-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch
++++ /dev/null
+@@ -1,1043 +0,0 @@
+-From ffda306c0fc3ad64206b4e2e0905bf858c29302e Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 20 Feb 2009 10:16:01 +0100
+-Subject: [PATCH 01/28] [ARM] 5407/1: SA1100: drop broken for ages iPAQ h3800 support
+-
+-Code has never been in buildable state since initial
+-merge.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/Kconfig                               |    2 +-
+- arch/arm/mach-sa1100/Kconfig                   |   12 +-
+- arch/arm/mach-sa1100/h3600.c                   |  392 --------------------
+- arch/arm/mach-sa1100/include/mach/h3600.h      |    2 +-
+- arch/arm/mach-sa1100/include/mach/h3600_gpio.h |  463 ------------------------
+- arch/arm/mach-sa1100/include/mach/irqs.h       |   22 --
+- drivers/video/sa1100fb.c                       |   21 -
+- 7 files changed, 3 insertions(+), 911 deletions(-)
+-
+-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+-index dbfdf87..7d3d025 100644
+---- a/arch/arm/Kconfig
+-+++ b/arch/arm/Kconfig
+-@@ -1092,7 +1092,7 @@ source "drivers/cpufreq/Kconfig"
+- 
+- config CPU_FREQ_SA1100
+- 	bool
+--	depends on CPU_FREQ && (SA1100_H3100 || SA1100_H3600 || SA1100_H3800 || SA1100_LART || SA1100_PLEB || SA1100_BADGE4 || SA1100_HACKKIT)
+-+	depends on CPU_FREQ && (SA1100_H3100 || SA1100_H3600 || SA1100_LART || SA1100_PLEB || SA1100_BADGE4 || SA1100_HACKKIT)
+- 	default y
+- 
+- config CPU_FREQ_SA1110
+-diff --git a/arch/arm/mach-sa1100/Kconfig b/arch/arm/mach-sa1100/Kconfig
+-index f99d901..bfc38e3 100644
+---- a/arch/arm/mach-sa1100/Kconfig
+-+++ b/arch/arm/mach-sa1100/Kconfig
+-@@ -71,19 +71,9 @@ config SA1100_H3600
+- 	  <http://www.handhelds.org/Compaq/index.html#iPAQ_H3600>
+- 	  <http://www.compaq.com/products/handhelds/pocketpc/>
+- 
+--config SA1100_H3800
+--	bool "Compaq iPAQ H3800"
+--	help
+--	  Say Y here if you intend to run this kernel on the Compaq iPAQ H3800
+--	  series handheld computer.  Information about this machine and the
+--	  Linux port to this machine can be found at:
+--
+--	  <http://www.handhelds.org/Compaq/index.html#iPAQ_H3800>
+--	  <http://www.compaq.com/products/handhelds/pocketpc/>
+--
+- config SA1100_H3XXX
+- 	bool
+--	depends on SA1100_H3100 || SA1100_H3600 || SA1100_H3800
+-+	depends on SA1100_H3100 || SA1100_H3600
+- 	default y
+- 
+- config SA1100_BADGE4
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index af25a78..b9aaa45 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -42,14 +42,7 @@
+- #include <asm/mach/serial_sa1100.h>
+- 
+- #include <mach/h3600.h>
+--
+--#if defined (CONFIG_SA1100_H3600) || defined (CONFIG_SA1100_H3100)
+- #include <mach/h3600_gpio.h>
+--#endif
+--
+--#ifdef CONFIG_SA1100_H3800
+--#include <mach/h3600_asic.h>
+--#endif
+- 
+- #include "generic.h"
+- 
+-@@ -519,388 +512,3 @@ MACHINE_END
+- 
+- #endif /* CONFIG_SA1100_H3600 */
+- 
+--#ifdef CONFIG_SA1100_H3800
+--
+--#define SET_ASIC1(x) \
+--   do {if (setp) { H3800_ASIC1_GPIO_OUT |= (x); } else { H3800_ASIC1_GPIO_OUT &= ~(x); }} while(0)
+--
+--#define SET_ASIC2(x) \
+--   do {if (setp) { H3800_ASIC2_GPIOPIOD |= (x); } else { H3800_ASIC2_GPIOPIOD &= ~(x); }} while(0)
+--
+--#define CLEAR_ASIC1(x) \
+--   do {if (setp) { H3800_ASIC1_GPIO_OUT &= ~(x); } else { H3800_ASIC1_GPIO_OUT |= (x); }} while(0)
+--
+--#define CLEAR_ASIC2(x) \
+--   do {if (setp) { H3800_ASIC2_GPIOPIOD &= ~(x); } else { H3800_ASIC2_GPIOPIOD |= (x); }} while(0)
+--
+--
+--/*
+--  On screen enable, we get
+--
+--     h3800_video_power_on(1)
+--     LCD controller starts
+--     h3800_video_lcd_enable(1)
+--
+--  On screen disable, we get
+--
+--     h3800_video_lcd_enable(0)
+--     LCD controller stops
+--     h3800_video_power_on(0)
+--*/
+--
+--
+--static void h3800_video_power_on(int setp)
+--{
+--	if (setp) {
+--		H3800_ASIC1_GPIO_OUT |= GPIO1_LCD_ON;
+--		msleep(30);
+--		H3800_ASIC1_GPIO_OUT |= GPIO1_VGL_ON;
+--		msleep(5);
+--		H3800_ASIC1_GPIO_OUT |= GPIO1_VGH_ON;
+--		msleep(50);
+--		H3800_ASIC1_GPIO_OUT |= GPIO1_LCD_5V_ON;
+--		msleep(5);
+--	} else {
+--		msleep(5);
+--		H3800_ASIC1_GPIO_OUT &= ~GPIO1_LCD_5V_ON;
+--		msleep(50);
+--		H3800_ASIC1_GPIO_OUT &= ~GPIO1_VGL_ON;
+--		msleep(5);
+--		H3800_ASIC1_GPIO_OUT &= ~GPIO1_VGH_ON;
+--		msleep(100);
+--		H3800_ASIC1_GPIO_OUT &= ~GPIO1_LCD_ON;
+--	}
+--}
+--
+--static void h3800_video_lcd_enable(int setp)
+--{
+--	if (setp) {
+--		msleep(17);	// Wait one from before turning on
+--		H3800_ASIC1_GPIO_OUT |= GPIO1_LCD_PCI;
+--	} else {
+--		H3800_ASIC1_GPIO_OUT &= ~GPIO1_LCD_PCI;
+--		msleep(30);	// Wait before turning off
+--	}
+--}
+--
+--
+--static void h3800_control_egpio(enum ipaq_egpio_type x, int setp)
+--{
+--	switch (x) {
+--	case IPAQ_EGPIO_LCD_POWER:
+--		h3800_video_power_on(setp);
+--		break;
+--	case IPAQ_EGPIO_LCD_ENABLE:
+--		h3800_video_lcd_enable(setp);
+--		break;
+--	case IPAQ_EGPIO_CODEC_NRESET:
+--	case IPAQ_EGPIO_AUDIO_ON:
+--	case IPAQ_EGPIO_QMUTE:
+--		printk("%s: error - should not be called\n", __func__);
+--		break;
+--	case IPAQ_EGPIO_OPT_NVRAM_ON:
+--		SET_ASIC2(GPIO2_OPT_ON_NVRAM);
+--		break;
+--	case IPAQ_EGPIO_OPT_ON:
+--		SET_ASIC2(GPIO2_OPT_ON);
+--		break;
+--	case IPAQ_EGPIO_CARD_RESET:
+--		SET_ASIC2(GPIO2_OPT_PCM_RESET);
+--		break;
+--	case IPAQ_EGPIO_OPT_RESET:
+--		SET_ASIC2(GPIO2_OPT_RESET);
+--		break;
+--	case IPAQ_EGPIO_IR_ON:
+--		CLEAR_ASIC1(GPIO1_IR_ON_N);
+--		break;
+--	case IPAQ_EGPIO_IR_FSEL:
+--		break;
+--	case IPAQ_EGPIO_RS232_ON:
+--		SET_ASIC1(GPIO1_RS232_ON);
+--		break;
+--	case IPAQ_EGPIO_VPP_ON:
+--		H3800_ASIC2_FlashWP_VPP_ON = setp;
+--		break;
+--	}
+--}
+--
+--static unsigned long h3800_read_egpio(void)
+--{
+--	return H3800_ASIC1_GPIO_OUT | (H3800_ASIC2_GPIOPIOD << 16);
+--}
+--
+--/* We need to fix ASIC2 GPIO over suspend/resume.  At the moment,
+--   it doesn't appear that ASIC1 GPIO has the same problem */
+--
+--static int h3800_pm_callback(int req)
+--{
+--	static u16 asic1_data;
+--	static u16 asic2_data;
+--	int result = 0;
+--
+--	printk("%s %d\n", __func__, req);
+--
+--	switch (req) {
+--	case PM_RESUME:
+--		MSC2 = (MSC2 & 0x0000ffff) | 0xE4510000;  /* Set MSC2 correctly */
+--
+--		H3800_ASIC2_GPIOPIOD = asic2_data;
+--		H3800_ASIC2_GPIODIR = GPIO2_PEN_IRQ
+--			| GPIO2_SD_DETECT
+--			| GPIO2_EAR_IN_N
+--			| GPIO2_USB_DETECT_N
+--			| GPIO2_SD_CON_SLT;
+--
+--		H3800_ASIC1_GPIO_OUT = asic1_data;
+--
+--		if (ipaq_model_ops.pm_callback_aux)
+--			result = ipaq_model_ops.pm_callback_aux(req);
+--		break;
+--
+--	case PM_SUSPEND:
+--		if (ipaq_model_ops.pm_callback_aux &&
+--		     ((result = ipaq_model_ops.pm_callback_aux(req)) != 0))
+--			return result;
+--
+--		asic1_data = H3800_ASIC1_GPIO_OUT;
+--		asic2_data = H3800_ASIC2_GPIOPIOD;
+--		break;
+--	default:
+--		printk("%s: unrecognized PM callback\n", __func__);
+--		break;
+--	}
+--	return result;
+--}
+--
+--static struct ipaq_model_ops h3800_model_ops __initdata = {
+--	.generic_name	= "3800",
+--	.control	= h3800_control_egpio,
+--	.read		= h3800_read_egpio,
+--	.pm_callback	= h3800_pm_callback
+--};
+--
+--#define MAX_ASIC_ISR_LOOPS    20
+--
+--/* The order of these is important - see #include <mach/irqs.h> */
+--static u32 kpio_irq_mask[] = {
+--	KPIO_KEY_ALL,
+--	KPIO_SPI_INT,
+--	KPIO_OWM_INT,
+--	KPIO_ADC_INT,
+--	KPIO_UART_0_INT,
+--	KPIO_UART_1_INT,
+--	KPIO_TIMER_0_INT,
+--	KPIO_TIMER_1_INT,
+--	KPIO_TIMER_2_INT
+--};
+--
+--static u32 gpio_irq_mask[] = {
+--	GPIO2_PEN_IRQ,
+--	GPIO2_SD_DETECT,
+--	GPIO2_EAR_IN_N,
+--	GPIO2_USB_DETECT_N,
+--	GPIO2_SD_CON_SLT,
+--};
+--
+--static void h3800_IRQ_demux(unsigned int irq, struct irq_desc *desc)
+--{
+--	int i;
+--
+--	if (0) printk("%s: interrupt received\n", __func__);
+--
+--	desc->chip->ack(irq);
+--
+--	for (i = 0; i < MAX_ASIC_ISR_LOOPS && (GPLR & GPIO_H3800_ASIC); i++) {
+--		u32 irq;
+--		int j;
+--
+--		/* KPIO */
+--		irq = H3800_ASIC2_KPIINTFLAG;
+--		if (0) printk("%s KPIO 0x%08X\n", __func__, irq);
+--		for (j = 0; j < H3800_KPIO_IRQ_COUNT; j++)
+--			if (irq & kpio_irq_mask[j])
+--				handle_edge_irq(H3800_KPIO_IRQ_COUNT + j, irq_desc + H3800_KPIO_IRQ_COUNT + j);
+--
+--		/* GPIO2 */
+--		irq = H3800_ASIC2_GPIINTFLAG;
+--		if (0) printk("%s GPIO 0x%08X\n", __func__, irq);
+--		for (j = 0; j < H3800_GPIO_IRQ_COUNT; j++)
+--			if (irq & gpio_irq_mask[j])
+--				handle_edge_irq(H3800_GPIO_IRQ_COUNT + j, irq_desc + H3800_GPIO_IRQ_COUNT + j);
+--	}
+--
+--	if (i >= MAX_ASIC_ISR_LOOPS)
+--		printk("%s: interrupt processing overrun\n", __func__);
+--
+--	/* For level-based interrupts */
+--	desc->chip->unmask(irq);
+--
+--}
+--
+--static struct irqaction h3800_irq = {
+--	.name		= "h3800_asic",
+--	.handler	= h3800_IRQ_demux,
+--	.flags		= IRQF_DISABLED | IRQF_TIMER | IRQF_IRQPOLL,
+--};
+--
+--u32 kpio_int_shadow = 0;
+--
+--
+--/* mask_ack <- IRQ is first serviced.
+--       mask <- IRQ is disabled.
+--     unmask <- IRQ is enabled
+--
+--     The INTCLR registers are poorly documented.  I believe that writing
+--     a "1" to the register clears the specific interrupt, but the documentation
+--     indicates writing a "0" clears the interrupt.  In any case, they shouldn't
+--     be read (that's the INTFLAG register)
+-- */
+--
+--static void h3800_mask_ack_kpio_irq(unsigned int irq)
+--{
+--	u32 mask = kpio_irq_mask[irq - H3800_KPIO_IRQ_START];
+--	kpio_int_shadow &= ~mask;
+--	H3800_ASIC2_KPIINTSTAT = kpio_int_shadow;
+--	H3800_ASIC2_KPIINTCLR  = mask;
+--}
+--
+--static void h3800_mask_kpio_irq(unsigned int irq)
+--{
+--	u32 mask = kpio_irq_mask[irq - H3800_KPIO_IRQ_START];
+--	kpio_int_shadow &= ~mask;
+--	H3800_ASIC2_KPIINTSTAT = kpio_int_shadow;
+--}
+--
+--static void h3800_unmask_kpio_irq(unsigned int irq)
+--{
+--	u32 mask = kpio_irq_mask[irq - H3800_KPIO_IRQ_START];
+--	kpio_int_shadow |= mask;
+--	H3800_ASIC2_KPIINTSTAT = kpio_int_shadow;
+--}
+--
+--static void h3800_mask_ack_gpio_irq(unsigned int irq)
+--{
+--	u32 mask = gpio_irq_mask[irq - H3800_GPIO_IRQ_START];
+--	H3800_ASIC2_GPIINTSTAT &= ~mask;
+--	H3800_ASIC2_GPIINTCLR	= mask;
+--}
+--
+--static void h3800_mask_gpio_irq(unsigned int irq)
+--{
+--	u32 mask = gpio_irq_mask[irq - H3800_GPIO_IRQ_START];
+--	H3800_ASIC2_GPIINTSTAT &= ~mask;
+--	}
+--
+--static void h3800_unmask_gpio_irq(unsigned int irq)
+--{
+--	u32 mask = gpio_irq_mask[irq - H3800_GPIO_IRQ_START];
+--	H3800_ASIC2_GPIINTSTAT |= mask;
+--}
+--
+--static void __init h3800_init_irq(void)
+--{
+--	int i;
+--
+--	/* Initialize standard IRQs */
+--	sa1100_init_irq();
+--
+--	/* Disable all IRQs and set up clock */
+--	H3800_ASIC2_KPIINTSTAT	   =  0;     /* Disable all interrupts */
+--	H3800_ASIC2_GPIINTSTAT	   =  0;
+--
+--	H3800_ASIC2_KPIINTCLR	   =  0;     /* Clear all KPIO interrupts */
+--	H3800_ASIC2_GPIINTCLR	   =  0;     /* Clear all GPIO interrupts */
+--
+--//	H3800_ASIC2_KPIINTCLR	   =  0xffff;	  /* Clear all KPIO interrupts */
+--//	H3800_ASIC2_GPIINTCLR	   =  0xffff;	  /* Clear all GPIO interrupts */
+--
+--	H3800_ASIC2_CLOCK_Enable       |= ASIC2_CLOCK_EX0;   /* 32 kHZ crystal on */
+--	H3800_ASIC2_INTR_ClockPrescale |= ASIC2_INTCPS_SET;
+--	H3800_ASIC2_INTR_ClockPrescale	= ASIC2_INTCPS_CPS(0x0e) | ASIC2_INTCPS_SET;
+--	H3800_ASIC2_INTR_TimerSet	= 1;
+--
+--#if 0
+--	for (i = 0; i < H3800_KPIO_IRQ_COUNT; i++) {
+--		int irq = i + H3800_KPIO_IRQ_START;
+--		irq_desc[irq].valid    = 1;
+--		irq_desc[irq].probe_ok = 1;
+--		set_irq_chip(irq, &h3800_kpio_irqchip);
+--	}
+--
+--	for (i = 0; i < H3800_GPIO_IRQ_COUNT; i++) {
+--		int irq = i + H3800_GPIO_IRQ_START;
+--		irq_desc[irq].valid    = 1;
+--		irq_desc[irq].probe_ok = 1;
+--		set_irq_chip(irq, &h3800_gpio_irqchip);
+--	}
+--#endif
+--	set_irq_type(IRQ_GPIO_H3800_ASIC, IRQ_TYPE_EDGE_RISING);
+--	set_irq_chained_handler(IRQ_GPIO_H3800_ASIC, h3800_IRQ_demux);
+--}
+--
+--
+--#define ASIC1_OUTPUTS	 0x7fff   /* First 15 bits are used */
+--
+--static void __init h3800_map_io(void)
+--{
+--	h3xxx_map_io();
+--
+--	/* Add wakeup on AC plug/unplug */
+--	PWER  |= PWER_GPIO12;
+--
+--	/* Initialize h3800-specific values here */
+--	GPCR = 0x0fffffff;	 /* All outputs are set low by default */
+--	GAFR =	GPIO_H3800_CLK_OUT |
+--		GPIO_LDD15 | GPIO_LDD14 | GPIO_LDD13 | GPIO_LDD12 |
+--		GPIO_LDD11 | GPIO_LDD10 | GPIO_LDD9  | GPIO_LDD8;
+--	GPDR =	GPIO_H3800_CLK_OUT |
+--		GPIO_H3600_COM_RTS  | GPIO_H3600_L3_CLOCK |
+--		GPIO_H3600_L3_MODE  | GPIO_H3600_L3_DATA  |
+--		GPIO_LDD15 | GPIO_LDD14 | GPIO_LDD13 | GPIO_LDD12 |
+--		GPIO_LDD11 | GPIO_LDD10 | GPIO_LDD9  | GPIO_LDD8;
+--	TUCR =	TUCR_3_6864MHz;   /* Seems to be used only for the Bluetooth UART */
+--
+--	/* Fix the memory bus */
+--	MSC2 = (MSC2 & 0x0000ffff) | 0xE4510000;
+--
+--	/* Set up ASIC #1 */
+--	H3800_ASIC1_GPIO_DIR		= ASIC1_OUTPUTS;	    /* All outputs */
+--	H3800_ASIC1_GPIO_MASK		= ASIC1_OUTPUTS;	    /* No interrupts */
+--	H3800_ASIC1_GPIO_SLEEP_MASK	= ASIC1_OUTPUTS;
+--	H3800_ASIC1_GPIO_SLEEP_DIR	= ASIC1_OUTPUTS;
+--	H3800_ASIC1_GPIO_SLEEP_OUT	= GPIO1_EAR_ON_N;
+--	H3800_ASIC1_GPIO_BATT_FAULT_DIR = ASIC1_OUTPUTS;
+--	H3800_ASIC1_GPIO_BATT_FAULT_OUT = GPIO1_EAR_ON_N;
+--
+--	H3800_ASIC1_GPIO_OUT = GPIO1_IR_ON_N
+--				      | GPIO1_RS232_ON
+--				      | GPIO1_EAR_ON_N;
+--
+--	/* Set up ASIC #2 */
+--	H3800_ASIC2_GPIOPIOD	= GPIO2_IN_Y1_N | GPIO2_IN_X1_N;
+--	H3800_ASIC2_GPOBFSTAT	= GPIO2_IN_Y1_N | GPIO2_IN_X1_N;
+--
+--	H3800_ASIC2_GPIODIR	= GPIO2_PEN_IRQ
+--				      | GPIO2_SD_DETECT
+--				      | GPIO2_EAR_IN_N
+--				      | GPIO2_USB_DETECT_N
+--				      | GPIO2_SD_CON_SLT;
+--
+--	/* TODO : Set sleep states & battery fault states */
+--
+--	/* Clear VPP Enable */
+--	H3800_ASIC2_FlashWP_VPP_ON = 0;
+--	ipaq_model_ops = h3800_model_ops;
+--}
+--
+--MACHINE_START(H3800, "Compaq iPAQ H3800")
+--	.phys_io	= 0x80000000,
+--	.io_pg_offst	= ((0xf8000000) >> 18) & 0xfffc,
+--	.boot_params	= 0xc0000100,
+--	.map_io		= h3800_map_io,
+--	.init_irq	= h3800_init_irq,
+--	.timer		= &sa1100_timer,
+--	.init_machine	= h3xxx_mach_init,
+--MACHINE_END
+--
+--#endif /* CONFIG_SA1100_H3800 */
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600.h b/arch/arm/mach-sa1100/include/mach/h3600.h
+-index 9cc47fd..e692ab3 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600.h
+-@@ -29,7 +29,7 @@ typedef int __bitwise pm_request_t;
+- #define PM_RESUME	((__force pm_request_t) 2)	/* enter D0 */
+- 
+- /* generalized support for H3xxx series Compaq Pocket PC's */
+--#define machine_is_h3xxx() (machine_is_h3100() || machine_is_h3600() || machine_is_h3800())
+-+#define machine_is_h3xxx() (machine_is_h3100() || machine_is_h3600())
+- 
+- /* Physical memory regions corresponding to chip selects */
+- #define H3600_EGPIO_PHYS	(SA1100_CS5_PHYS + 0x01000000)
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600_gpio.h b/arch/arm/mach-sa1100/include/mach/h3600_gpio.h
+-index 62b0b78..a36ca76 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600_gpio.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600_gpio.h
+-@@ -48,22 +48,11 @@
+- #define GPIO_H3600_OPT_LOCK		GPIO_GPIO (22)
+- #define GPIO_H3600_OPT_DET		GPIO_GPIO (27)
+- 
+--/* H3800 specific pins */
+--#define GPIO_H3800_AC_IN                GPIO_GPIO (12)
+--#define GPIO_H3800_COM_DSR              GPIO_GPIO (13)
+--#define GPIO_H3800_MMC_INT              GPIO_GPIO (18)
+--#define GPIO_H3800_NOPT_IND             GPIO_GPIO (20)   /* Almost exactly the same as GPIO_H3600_OPT_DET */
+--#define GPIO_H3800_OPT_BAT_FAULT        GPIO_GPIO (22)
+--#define GPIO_H3800_CLK_OUT              GPIO_GPIO (27)
+--
+- /****************************************************/
+- 
+- #define IRQ_GPIO_H3600_ACTION_BUTTON    IRQ_GPIO18
+- #define IRQ_GPIO_H3600_OPT_DET		IRQ_GPIO27
+- 
+--#define IRQ_GPIO_H3800_MMC_INT          IRQ_GPIO18
+--#define IRQ_GPIO_H3800_NOPT_IND         IRQ_GPIO20 /* almost same as OPT_DET */
+--
+- /* H3100 / 3600 EGPIO pins */
+- #define EGPIO_H3600_VPP_ON		(1 << 0)
+- #define EGPIO_H3600_CARD_RESET		(1 << 1)   /* reset the attached pcmcia/compactflash card.  active high. */
+-@@ -84,457 +73,5 @@
+- #define EGPIO_H3600_LCD_5V_ON		(1 << 14)  /* enable 5V to LCD. active high. */
+- #define EGPIO_H3600_LVDD_ON		(1 << 15)  /* enable 9V and -6.5V to LCD. */
+- 
+--/********************* H3800, ASIC #2 ********************/
+--
+--#define _H3800_ASIC2_Base            (H3600_EGPIO_VIRT)
+--#define H3800_ASIC2_OFFSET(s,x,y)    \
+--    (*((volatile s *) (_H3800_ASIC2_Base + _H3800_ASIC2_ ## x ## _Base + _H3800_ASIC2_ ## x ## _ ## y)))
+--#define H3800_ASIC2_NOFFSET(s,x,n,y) \
+--    (*((volatile s *) (_H3800_ASIC2_Base + _H3800_ASIC2_ ## x ## _ ## n ## _Base + _H3800_ASIC2_ ## x ## _ ## y)))
+--
+--#define _H3800_ASIC2_GPIO_Base                 0x0000
+--#define _H3800_ASIC2_GPIO_Direction            0x0000    /* R/W, 16 bits 1:input, 0:output */
+--#define _H3800_ASIC2_GPIO_InterruptType        0x0004    /* R/W, 12 bits 1:edge, 0:level          */
+--#define _H3800_ASIC2_GPIO_InterruptEdgeType    0x0008    /* R/W, 12 bits 1:rising, 0:falling */
+--#define _H3800_ASIC2_GPIO_InterruptLevelType   0x000C    /* R/W, 12 bits 1:high, 0:low  */
+--#define _H3800_ASIC2_GPIO_InterruptClear       0x0010    /* W,   12 bits */
+--#define _H3800_ASIC2_GPIO_InterruptFlag        0x0010    /* R,   12 bits - reads int status */
+--#define _H3800_ASIC2_GPIO_Data                 0x0014    /* R/W, 16 bits */
+--#define _H3800_ASIC2_GPIO_BattFaultOut         0x0018    /* R/W, 16 bit - sets level on batt fault */
+--#define _H3800_ASIC2_GPIO_InterruptEnable      0x001c    /* R/W, 12 bits 1:enable interrupt */
+--#define _H3800_ASIC2_GPIO_Alternate            0x003c    /* R/W, 12+1 bits - set alternate functions */
+--
+--#define H3800_ASIC2_GPIO_Direction          H3800_ASIC2_OFFSET( u16, GPIO, Direction )
+--#define H3800_ASIC2_GPIO_InterruptType      H3800_ASIC2_OFFSET( u16, GPIO, InterruptType )
+--#define H3800_ASIC2_GPIO_InterruptEdgeType  H3800_ASIC2_OFFSET( u16, GPIO, InterruptEdgeType )
+--#define H3800_ASIC2_GPIO_InterruptLevelType H3800_ASIC2_OFFSET( u16, GPIO, InterruptLevelType )
+--#define H3800_ASIC2_GPIO_InterruptClear     H3800_ASIC2_OFFSET( u16, GPIO, InterruptClear )
+--#define H3800_ASIC2_GPIO_InterruptFlag      H3800_ASIC2_OFFSET( u16, GPIO, InterruptFlag )
+--#define H3800_ASIC2_GPIO_Data               H3800_ASIC2_OFFSET( u16, GPIO, Data )
+--#define H3800_ASIC2_GPIO_BattFaultOut       H3800_ASIC2_OFFSET( u16, GPIO, BattFaultOut )
+--#define H3800_ASIC2_GPIO_InterruptEnable    H3800_ASIC2_OFFSET( u16, GPIO, InterruptEnable )
+--#define H3800_ASIC2_GPIO_Alternate          H3800_ASIC2_OFFSET( u16, GPIO, Alternate )
+--
+--#define GPIO_H3800_ASIC2_IN_Y1_N          (1 << 0)   /* Output: Touchscreen Y1 */
+--#define GPIO_H3800_ASIC2_IN_X0            (1 << 1)   /* Output: Touchscreen X0 */
+--#define GPIO_H3800_ASIC2_IN_Y0            (1 << 2)   /* Output: Touchscreen Y0 */
+--#define GPIO_H3800_ASIC2_IN_X1_N          (1 << 3)   /* Output: Touchscreen X1 */
+--#define GPIO_H3800_ASIC2_BT_RST           (1 << 4)   /* Output: Bluetooth reset */
+--#define GPIO_H3800_ASIC2_PEN_IRQ          (1 << 5)   /* Input : Pen down        */
+--#define GPIO_H3800_ASIC2_SD_DETECT        (1 << 6)   /* Input : SD detect */
+--#define GPIO_H3800_ASIC2_EAR_IN_N         (1 << 7)   /* Input : Audio jack plug inserted */
+--#define GPIO_H3800_ASIC2_OPT_PCM_RESET    (1 << 8)   /* Output: */
+--#define GPIO_H3800_ASIC2_OPT_RESET        (1 << 9)   /* Output: */
+--#define GPIO_H3800_ASIC2_USB_DETECT_N     (1 << 10)  /* Input : */
+--#define GPIO_H3800_ASIC2_SD_CON_SLT       (1 << 11)  /* Input : */
+--
+--#define _H3800_ASIC2_KPIO_Base                 0x0200
+--#define _H3800_ASIC2_KPIO_Direction            0x0000    /* R/W, 12 bits 1:input, 0:output */
+--#define _H3800_ASIC2_KPIO_InterruptType        0x0004    /* R/W, 12 bits 1:edge, 0:level          */
+--#define _H3800_ASIC2_KPIO_InterruptEdgeType    0x0008    /* R/W, 12 bits 1:rising, 0:falling */
+--#define _H3800_ASIC2_KPIO_InterruptLevelType   0x000C    /* R/W, 12 bits 1:high, 0:low  */
+--#define _H3800_ASIC2_KPIO_InterruptClear       0x0010    /* W,   20 bits - 8 special */
+--#define _H3800_ASIC2_KPIO_InterruptFlag        0x0010    /* R,   20 bits - 8 special - reads int status */
+--#define _H3800_ASIC2_KPIO_Data                 0x0014    /* R/W, 16 bits */
+--#define _H3800_ASIC2_KPIO_BattFaultOut         0x0018    /* R/W, 16 bit - sets level on batt fault */
+--#define _H3800_ASIC2_KPIO_InterruptEnable      0x001c    /* R/W, 20 bits - 8 special */
+--#define _H3800_ASIC2_KPIO_Alternate            0x003c    /* R/W, 6 bits */
+--
+--#define H3800_ASIC2_KPIO_Direction          H3800_ASIC2_OFFSET( u16, KPIO, Direction )
+--#define H3800_ASIC2_KPIO_InterruptType      H3800_ASIC2_OFFSET( u16, KPIO, InterruptType )
+--#define H3800_ASIC2_KPIO_InterruptEdgeType  H3800_ASIC2_OFFSET( u16, KPIO, InterruptEdgeType )
+--#define H3800_ASIC2_KPIO_InterruptLevelType H3800_ASIC2_OFFSET( u16, KPIO, InterruptLevelType )
+--#define H3800_ASIC2_KPIO_InterruptClear     H3800_ASIC2_OFFSET( u32, KPIO, InterruptClear )
+--#define H3800_ASIC2_KPIO_InterruptFlag      H3800_ASIC2_OFFSET( u32, KPIO, InterruptFlag )
+--#define H3800_ASIC2_KPIO_Data               H3800_ASIC2_OFFSET( u16, KPIO, Data )
+--#define H3800_ASIC2_KPIO_BattFaultOut       H3800_ASIC2_OFFSET( u16, KPIO, BattFaultOut )
+--#define H3800_ASIC2_KPIO_InterruptEnable    H3800_ASIC2_OFFSET( u32, KPIO, InterruptEnable )
+--#define H3800_ASIC2_KPIO_Alternate          H3800_ASIC2_OFFSET( u16, KPIO, Alternate )
+--
+--#define H3800_ASIC2_KPIO_SPI_INT        ( 1 << 16 )
+--#define H3800_ASIC2_KPIO_OWM_INT        ( 1 << 17 )
+--#define H3800_ASIC2_KPIO_ADC_INT        ( 1 << 18 )
+--#define H3800_ASIC2_KPIO_UART_0_INT     ( 1 << 19 )
+--#define H3800_ASIC2_KPIO_UART_1_INT     ( 1 << 20 )
+--#define H3800_ASIC2_KPIO_TIMER_0_INT    ( 1 << 21 )
+--#define H3800_ASIC2_KPIO_TIMER_1_INT    ( 1 << 22 )
+--#define H3800_ASIC2_KPIO_TIMER_2_INT    ( 1 << 23 )
+--
+--#define KPIO_H3800_ASIC2_RECORD_BTN_N     (1 << 0)   /* Record button */
+--#define KPIO_H3800_ASIC2_KEY_5W1_N        (1 << 1)   /* Keypad */
+--#define KPIO_H3800_ASIC2_KEY_5W2_N        (1 << 2)   /* */
+--#define KPIO_H3800_ASIC2_KEY_5W3_N        (1 << 3)   /* */
+--#define KPIO_H3800_ASIC2_KEY_5W4_N        (1 << 4)   /* */
+--#define KPIO_H3800_ASIC2_KEY_5W5_N        (1 << 5)   /* */
+--#define KPIO_H3800_ASIC2_KEY_LEFT_N       (1 << 6)   /* */
+--#define KPIO_H3800_ASIC2_KEY_RIGHT_N      (1 << 7)   /* */
+--#define KPIO_H3800_ASIC2_KEY_AP1_N        (1 << 8)   /* Old "Calendar" */
+--#define KPIO_H3800_ASIC2_KEY_AP2_N        (1 << 9)   /* Old "Schedule" */
+--#define KPIO_H3800_ASIC2_KEY_AP3_N        (1 << 10)  /* Old "Q"        */
+--#define KPIO_H3800_ASIC2_KEY_AP4_N        (1 << 11)  /* Old "Undo"     */
+--
+--/* Alternate KPIO functions (set by default) */
+--#define KPIO_ALT_H3800_ASIC2_KEY_5W1_N        (1 << 1)   /* Action key */
+--#define KPIO_ALT_H3800_ASIC2_KEY_5W2_N        (1 << 2)   /* J1 of keypad input */
+--#define KPIO_ALT_H3800_ASIC2_KEY_5W3_N        (1 << 3)   /* J2 of keypad input */
+--#define KPIO_ALT_H3800_ASIC2_KEY_5W4_N        (1 << 4)   /* J3 of keypad input */
+--#define KPIO_ALT_H3800_ASIC2_KEY_5W5_N        (1 << 5)   /* J4 of keypad input */
+--
+--#define _H3800_ASIC2_SPI_Base                  0x0400
+--#define _H3800_ASIC2_SPI_Control               0x0000    /* R/W 8 bits */
+--#define _H3800_ASIC2_SPI_Data                  0x0004    /* R/W 8 bits */
+--#define _H3800_ASIC2_SPI_ChipSelectDisabled    0x0008    /* W   8 bits */
+--
+--#define H3800_ASIC2_SPI_Control             H3800_ASIC2_OFFSET( u8, SPI, Control )
+--#define H3800_ASIC2_SPI_Data                H3800_ASIC2_OFFSET( u8, SPI, Data )
+--#define H3800_ASIC2_SPI_ChipSelectDisabled  H3800_ASIC2_OFFSET( u8, SPI, ChipSelectDisabled )
+--
+--#define _H3800_ASIC2_PWM_0_Base                0x0600
+--#define _H3800_ASIC2_PWM_1_Base                0x0700
+--#define _H3800_ASIC2_PWM_TimeBase              0x0000    /* R/W 6 bits */
+--#define _H3800_ASIC2_PWM_PeriodTime            0x0004    /* R/W 12 bits */
+--#define _H3800_ASIC2_PWM_DutyTime              0x0008    /* R/W 12 bits */
+--
+--#define H3800_ASIC2_PWM_0_TimeBase          H3800_ASIC2_NOFFSET(  u8, PWM, 0, TimeBase )
+--#define H3800_ASIC2_PWM_0_PeriodTime        H3800_ASIC2_NOFFSET( u16, PWM, 0, PeriodTime )
+--#define H3800_ASIC2_PWM_0_DutyTime          H3800_ASIC2_NOFFSET( u16, PWM, 0, DutyTime )
+--
+--#define H3800_ASIC2_PWM_1_TimeBase          H3800_ASIC2_NOFFSET(  u8, PWM, 1, TimeBase )
+--#define H3800_ASIC2_PWM_1_PeriodTime        H3800_ASIC2_NOFFSET( u16, PWM, 1, PeriodTime )
+--#define H3800_ASIC2_PWM_1_DutyTime          H3800_ASIC2_NOFFSET( u16, PWM, 1, DutyTime )
+--
+--#define H3800_ASIC2_PWM_TIMEBASE_MASK             0xf    /* Low 4 bits sets time base, max = 8 */
+--#define H3800_ASIC2_PWM_TIMEBASE_ENABLE    ( 1 << 4 )    /* Enable clock */
+--#define H3800_ASIC2_PWM_TIMEBASE_CLEAR     ( 1 << 5 )    /* Clear the PWM */
+--
+--#define _H3800_ASIC2_LED_0_Base                0x0800
+--#define _H3800_ASIC2_LED_1_Base                0x0880
+--#define _H3800_ASIC2_LED_2_Base                0x0900
+--#define _H3800_ASIC2_LED_TimeBase              0x0000    /* R/W  7 bits */
+--#define _H3800_ASIC2_LED_PeriodTime            0x0004    /* R/W 12 bits */
+--#define _H3800_ASIC2_LED_DutyTime              0x0008    /* R/W 12 bits */
+--#define _H3800_ASIC2_LED_AutoStopCount         0x000c    /* R/W 16 bits */
+--
+--#define H3800_ASIC2_LED_0_TimeBase          H3800_ASIC2_NOFFSET(  u8, LED, 0, TimeBase )
+--#define H3800_ASIC2_LED_0_PeriodTime        H3800_ASIC2_NOFFSET( u16, LED, 0, PeriodTime )
+--#define H3800_ASIC2_LED_0_DutyTime          H3800_ASIC2_NOFFSET( u16, LED, 0, DutyTime )
+--#define H3800_ASIC2_LED_0_AutoStopClock     H3800_ASIC2_NOFFSET( u16, LED, 0, AutoStopClock )
+--
+--#define H3800_ASIC2_LED_1_TimeBase          H3800_ASIC2_NOFFSET(  u8, LED, 1, TimeBase )
+--#define H3800_ASIC2_LED_1_PeriodTime        H3800_ASIC2_NOFFSET( u16, LED, 1, PeriodTime )
+--#define H3800_ASIC2_LED_1_DutyTime          H3800_ASIC2_NOFFSET( u16, LED, 1, DutyTime )
+--#define H3800_ASIC2_LED_1_AutoStopClock     H3800_ASIC2_NOFFSET( u16, LED, 1, AutoStopClock )
+--
+--#define H3800_ASIC2_LED_2_TimeBase          H3800_ASIC2_NOFFSET(  u8, LED, 2, TimeBase )
+--#define H3800_ASIC2_LED_2_PeriodTime        H3800_ASIC2_NOFFSET( u16, LED, 2, PeriodTime )
+--#define H3800_ASIC2_LED_2_DutyTime          H3800_ASIC2_NOFFSET( u16, LED, 2, DutyTime )
+--#define H3800_ASIC2_LED_2_AutoStopClock     H3800_ASIC2_NOFFSET( u16, LED, 2, AutoStopClock )
+--
+--#define H3800_ASIC2_LED_TIMEBASE_MASK            0x0f    /* Low 4 bits sets time base, max = 13 */
+--#define H3800_ASIC2_LED_TIMEBASE_BLINK     ( 1 << 4 )    /* Enable blinking */
+--#define H3800_ASIC2_LED_TIMEBASE_AUTOSTOP  ( 1 << 5 )
+--#define H3800_ASIC2_LED_TIMEBASE_ALWAYS    ( 1 << 6 )    /* Enable blink always */
+--
+--#define _H3800_ASIC2_UART_0_Base               0x0A00
+--#define _H3800_ASIC2_UART_1_Base               0x0C00
+--#define _H3800_ASIC2_UART_Receive              0x0000    /* R    8 bits */
+--#define _H3800_ASIC2_UART_Transmit             0x0000    /*   W  8 bits */
+--#define _H3800_ASIC2_UART_IntEnable            0x0004    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_IntVerify            0x0008    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_FIFOControl          0x000c    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_LineControl          0x0010    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_ModemStatus          0x0014    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_LineStatus           0x0018    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_ScratchPad           0x001c    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_DivisorLatchL        0x0020    /* R/W  8 bits */
+--#define _H3800_ASIC2_UART_DivisorLatchH        0x0024    /* R/W  8 bits */
+--
+--#define H3800_ASIC2_UART_0_Receive          H3800_ASIC2_NOFFSET(  u8, UART, 0, Receive )
+--#define H3800_ASIC2_UART_0_Transmit         H3800_ASIC2_NOFFSET(  u8, UART, 0, Transmit )
+--#define H3800_ASIC2_UART_0_IntEnable        H3800_ASIC2_NOFFSET(  u8, UART, 0, IntEnable )
+--#define H3800_ASIC2_UART_0_IntVerify        H3800_ASIC2_NOFFSET(  u8, UART, 0, IntVerify )
+--#define H3800_ASIC2_UART_0_FIFOControl      H3800_ASIC2_NOFFSET(  u8, UART, 0, FIFOControl )
+--#define H3800_ASIC2_UART_0_LineControl      H3800_ASIC2_NOFFSET(  u8, UART, 0, LineControl )
+--#define H3800_ASIC2_UART_0_ModemStatus      H3800_ASIC2_NOFFSET(  u8, UART, 0, ModemStatus )
+--#define H3800_ASIC2_UART_0_LineStatus       H3800_ASIC2_NOFFSET(  u8, UART, 0, LineStatus )
+--#define H3800_ASIC2_UART_0_ScratchPad       H3800_ASIC2_NOFFSET(  u8, UART, 0, ScratchPad )
+--#define H3800_ASIC2_UART_0_DivisorLatchL    H3800_ASIC2_NOFFSET(  u8, UART, 0, DivisorLatchL )
+--#define H3800_ASIC2_UART_0_DivisorLatchH    H3800_ASIC2_NOFFSET(  u8, UART, 0, DivisorLatchH )
+--
+--#define H3800_ASIC2_UART_1_Receive          H3800_ASIC2_NOFFSET(  u8, UART, 1, Receive )
+--#define H3800_ASIC2_UART_1_Transmit         H3800_ASIC2_NOFFSET(  u8, UART, 1, Transmit )
+--#define H3800_ASIC2_UART_1_IntEnable        H3800_ASIC2_NOFFSET(  u8, UART, 1, IntEnable )
+--#define H3800_ASIC2_UART_1_IntVerify        H3800_ASIC2_NOFFSET(  u8, UART, 1, IntVerify )
+--#define H3800_ASIC2_UART_1_FIFOControl      H3800_ASIC2_NOFFSET(  u8, UART, 1, FIFOControl )
+--#define H3800_ASIC2_UART_1_LineControl      H3800_ASIC2_NOFFSET(  u8, UART, 1, LineControl )
+--#define H3800_ASIC2_UART_1_ModemStatus      H3800_ASIC2_NOFFSET(  u8, UART, 1, ModemStatus )
+--#define H3800_ASIC2_UART_1_LineStatus       H3800_ASIC2_NOFFSET(  u8, UART, 1, LineStatus )
+--#define H3800_ASIC2_UART_1_ScratchPad       H3800_ASIC2_NOFFSET(  u8, UART, 1, ScratchPad )
+--#define H3800_ASIC2_UART_1_DivisorLatchL    H3800_ASIC2_NOFFSET(  u8, UART, 1, DivisorLatchL )
+--#define H3800_ASIC2_UART_1_DivisorLatchH    H3800_ASIC2_NOFFSET(  u8, UART, 1, DivisorLatchH )
+--
+--#define _H3800_ASIC2_TIMER_Base                0x0E00
+--#define _H3800_ASIC2_TIMER_Command             0x0000    /* R/W  8 bits */
+--
+--#define H3800_ASIC2_TIMER_Command           H3800_ASIC2_OFFSET( u8, Timer, Command )
+--
+--#define H3800_ASIC2_TIMER_GAT_0            ( 1 << 0 )    /* Gate enable, counter 0 */
+--#define H3800_ASIC2_TIMER_GAT_1            ( 1 << 1 )    /* Gate enable, counter 1 */
+--#define H3800_ASIC2_TIMER_GAT_2            ( 1 << 2 )    /* Gate enable, counter 2 */
+--#define H3800_ASIC2_TIMER_CLK_0            ( 1 << 3 )    /* Clock enable, counter 0 */
+--#define H3800_ASIC2_TIMER_CLK_1            ( 1 << 4 )    /* Clock enable, counter 1 */
+--#define H3800_ASIC2_TIMER_CLK_2            ( 1 << 5 )    /* Clock enable, counter 2 */
+--#define H3800_ASIC2_TIMER_MODE_0           ( 1 << 6 )    /* Mode 0 enable, counter 0 */
+--#define H3800_ASIC2_TIMER_MODE_1           ( 1 << 7 )    /* Mode 0 enable, counter 1 */
+--
+--#define _H3800_ASIC2_CLOCK_Base                0x1000
+--#define _H3800_ASIC2_CLOCK_Enable              0x0000    /* R/W  18 bits */
+--
+--#define H3800_ASIC2_CLOCK_Enable            H3800_ASIC2_OFFSET( u32, CLOCK, Enable )
+--
+--#define H3800_ASIC2_CLOCK_AUDIO_1              0x0001    /* Enable 4.1 MHz clock for 8Khz and 4khz sample rate */
+--#define H3800_ASIC2_CLOCK_AUDIO_2              0x0002    /* Enable 12.3 MHz clock for 48Khz and 32khz sample rate */
+--#define H3800_ASIC2_CLOCK_AUDIO_3              0x0004    /* Enable 5.6 MHz clock for 11 kHZ sample rate */
+--#define H3800_ASIC2_CLOCK_AUDIO_4              0x0008    /* Enable 11.289 MHz clock for 44 and 22 kHz sample rate */
+--#define H3800_ASIC2_CLOCK_ADC              ( 1 << 4 )    /* 1.024 MHz clock to ADC */
+--#define H3800_ASIC2_CLOCK_SPI              ( 1 << 5 )    /* 4.096 MHz clock to SPI */
+--#define H3800_ASIC2_CLOCK_OWM              ( 1 << 6 )    /* 4.096 MHz clock to OWM */
+--#define H3800_ASIC2_CLOCK_PWM              ( 1 << 7 )    /* 2.048 MHz clock to PWM */
+--#define H3800_ASIC2_CLOCK_UART_1           ( 1 << 8 )    /* 24.576 MHz clock to UART1 (turn off bit 16) */
+--#define H3800_ASIC2_CLOCK_UART_0           ( 1 << 9 )    /* 24.576 MHz clock to UART0 (turn off bit 17) */
+--#define H3800_ASIC2_CLOCK_SD_1             ( 1 << 10 )   /* 16.934 MHz to SD */
+--#define H3800_ASIC2_CLOCK_SD_2             ( 2 << 10 )   /* 24.576 MHz to SD */
+--#define H3800_ASIC2_CLOCK_SD_3             ( 3 << 10 )   /* 33.869 MHz to SD */
+--#define H3800_ASIC2_CLOCK_SD_4             ( 4 << 10 )   /* 49.152 MHz to SD */
+--#define H3800_ASIC2_CLOCK_EX0              ( 1 << 13 )   /* Enable 32.768 kHz crystal */
+--#define H3800_ASIC2_CLOCK_EX1              ( 1 << 14 )   /* Enable 24.576 MHz crystal */
+--#define H3800_ASIC2_CLOCK_EX2              ( 1 << 15 )   /* Enable 33.869 MHz crystal */
+--#define H3800_ASIC2_CLOCK_SLOW_UART_1      ( 1 << 16 )   /* Enable 3.686 MHz to UART1 (turn off bit 8) */
+--#define H3800_ASIC2_CLOCK_SLOW_UART_0      ( 1 << 17 )   /* Enable 3.686 MHz to UART0 (turn off bit 9) */
+--
+--#define _H3800_ASIC2_ADC_Base                  0x1200
+--#define _H3800_ASIC2_ADC_Multiplexer           0x0000    /* R/W 4 bits - low 3 bits set channel */
+--#define _H3800_ASIC2_ADC_ControlStatus         0x0004    /* R/W 8 bits */
+--#define _H3800_ASIC2_ADC_Data                  0x0008    /* R   10 bits */
+--
+--#define H3800_ASIC2_ADC_Multiplexer       H3800_ASIC2_OFFSET(  u8, ADC, Multiplexer )
+--#define H3800_ASIC2_ADC_ControlStatus     H3800_ASIC2_OFFSET(  u8, ADC, ControlStatus )
+--#define H3800_ASIC2_ADC_Data              H3800_ASIC2_OFFSET( u16, ADC, Data )
+--
+--#define H3600_ASIC2_ADC_MUX_CHANNEL_MASK         0x07    /* Low 3 bits sets channel.  max = 4 */
+--#define H3600_ASIC2_ADC_MUX_CLKEN          ( 1 << 3 )    /* Enable clock */
+--
+--#define H3600_ASIC2_ADC_CSR_ADPS_MASK            0x0f    /* Low 4 bits sets prescale, max = 8 */
+--#define H3600_ASIC2_ADC_CSR_FREE_RUN       ( 1 << 4 )
+--#define H3600_ASIC2_ADC_CSR_INT_ENABLE     ( 1 << 5 )
+--#define H3600_ASIC2_ADC_CSR_START          ( 1 << 6 )    /* Set to start conversion.  Goes to 0 when done */
+--#define H3600_ASIC2_ADC_CSR_ENABLE         ( 1 << 7 )    /* 1:power up ADC, 0:power down */
+--
+--
+--#define _H3800_ASIC2_INTR_Base                 0x1600
+--#define _H3800_ASIC2_INTR_MaskAndFlag          0x0000    /* R/(W) 8bits */
+--#define _H3800_ASIC2_INTR_ClockPrescale        0x0004    /* R/(W) 5bits */
+--#define _H3800_ASIC2_INTR_TimerSet             0x0008    /* R/(W) 8bits */
+--
+--#define H3800_ASIC2_INTR_MaskAndFlag      H3800_ASIC2_OFFSET( u8, INTR, MaskAndFlag )
+--#define H3800_ASIC2_INTR_ClockPrescale    H3800_ASIC2_OFFSET( u8, INTR, ClockPrescale )
+--#define H3800_ASIC2_INTR_TimerSet         H3800_ASIC2_OFFSET( u8, INTR, TimerSet )
+--
+--#define H3800_ASIC2_INTR_GLOBAL_MASK       ( 1 << 0 )    /* Global interrupt mask */
+--#define H3800_ASIC2_INTR_POWER_ON_RESET    ( 1 << 1 )    /* 01: Power on reset (bits 1 & 2 ) */
+--#define H3800_ASIC2_INTR_EXTERNAL_RESET    ( 2 << 1 )    /* 10: External reset (bits 1 & 2 ) */
+--#define H3800_ASIC2_INTR_MASK_UART_0       ( 1 << 4 )
+--#define H3800_ASIC2_INTR_MASK_UART_1       ( 1 << 5 )
+--#define H3800_ASIC2_INTR_MASK_TIMER        ( 1 << 6 )
+--#define H3800_ASIC2_INTR_MASK_OWM          ( 1 << 7 )
+--
+--#define H3800_ASIC2_INTR_CLOCK_PRESCALE          0x0f    /* 4 bits, max 14 */
+--#define H3800_ASIC2_INTR_SET               ( 1 << 4 )    /* Time base enable */
+--
+--
+--#define _H3800_ASIC2_OWM_Base                  0x1800
+--#define _H3800_ASIC2_OWM_Command               0x0000    /* R/W 4 bits command register */
+--#define _H3800_ASIC2_OWM_Data                  0x0004    /* R/W 8 bits, transmit / receive buffer */
+--#define _H3800_ASIC2_OWM_Interrupt             0x0008    /* R/W Command register */
+--#define _H3800_ASIC2_OWM_InterruptEnable       0x000c    /* R/W Command register */
+--#define _H3800_ASIC2_OWM_ClockDivisor          0x0010    /* R/W 5 bits of divisor and pre-scale */
+--
+--#define H3800_ASIC2_OWM_Command            H3800_ASIC2_OFFSET( u8, OWM, Command )
+--#define H3800_ASIC2_OWM_Data               H3800_ASIC2_OFFSET( u8, OWM, Data )
+--#define H3800_ASIC2_OWM_Interrupt          H3800_ASIC2_OFFSET( u8, OWM, Interrupt )
+--#define H3800_ASIC2_OWM_InterruptEnable    H3800_ASIC2_OFFSET( u8, OWM, InterruptEnable )
+--#define H3800_ASIC2_OWM_ClockDivisor       H3800_ASIC2_OFFSET( u8, OWM, ClockDivisor )
+--
+--#define H3800_ASIC2_OWM_CMD_ONE_WIRE_RESET ( 1 << 0 )    /* Set to force reset on 1-wire bus */
+--#define H3800_ASIC2_OWM_CMD_SRA            ( 1 << 1 )    /* Set to switch to Search ROM accelerator mode */
+--#define H3800_ASIC2_OWM_CMD_DQ_OUTPUT      ( 1 << 2 )    /* Write only - forces bus low */
+--#define H3800_ASIC2_OWM_CMD_DQ_INPUT       ( 1 << 3 )    /* Read only - reflects state of bus */
+--
+--#define H3800_ASIC2_OWM_INT_PD             ( 1 << 0 )    /* Presence detect */
+--#define H3800_ASIC2_OWM_INT_PDR            ( 1 << 1 )    /* Presence detect result */
+--#define H3800_ASIC2_OWM_INT_TBE            ( 1 << 2 )    /* Transmit buffer empty */
+--#define H3800_ASIC2_OWM_INT_TEMT           ( 1 << 3 )    /* Transmit shift register empty */
+--#define H3800_ASIC2_OWM_INT_RBF            ( 1 << 4 )    /* Receive buffer full */
+--
+--#define H3800_ASIC2_OWM_INTEN_EPD          ( 1 << 0 )    /* Enable receive buffer full interrupt */
+--#define H3800_ASIC2_OWM_INTEN_IAS          ( 1 << 1 )    /* Enable transmit shift register empty interrupt */
+--#define H3800_ASIC2_OWM_INTEN_ETBE         ( 1 << 2 )    /* Enable transmit buffer empty interrupt */
+--#define H3800_ASIC2_OWM_INTEN_ETMT         ( 1 << 3 )    /* INTR active state */
+--#define H3800_ASIC2_OWM_INTEN_ERBF         ( 1 << 4 )    /* Enable presence detect interrupt */
+--
+--#define _H3800_ASIC2_FlashCtl_Base             0x1A00
+--
+--/****************************************************/
+--/* H3800, ASIC #1
+-- * This ASIC is accesed through ASIC #2, and
+-- * mapped into the 1c00 - 1f00 region
+-- */
+--
+--#define H3800_ASIC1_OFFSET(s,x,y)   \
+--     (*((volatile s *) (_H3800_ASIC2_Base + _H3800_ASIC1_ ## x ## _Base + (_H3800_ASIC1_ ## x ## _ ## y << 1))))
+--
+--#define _H3800_ASIC1_MMC_Base             0x1c00
+--
+--#define _H3800_ASIC1_MMC_StartStopClock     0x00    /* R/W 8bit                                  */
+--#define _H3800_ASIC1_MMC_Status             0x02    /* R   See below, default 0x0040             */
+--#define _H3800_ASIC1_MMC_ClockRate          0x04    /* R/W 8bit, low 3 bits are clock divisor    */
+--#define _H3800_ASIC1_MMC_SPIRegister        0x08    /* R/W 8bit, see below                       */
+--#define _H3800_ASIC1_MMC_CmdDataCont        0x0a    /* R/W 8bit, write to start MMC adapter      */
+--#define _H3800_ASIC1_MMC_ResponseTimeout    0x0c    /* R/W 8bit, clocks before response timeout  */
+--#define _H3800_ASIC1_MMC_ReadTimeout        0x0e    /* R/W 16bit, clocks before received data timeout */
+--#define _H3800_ASIC1_MMC_BlockLength        0x10    /* R/W 10bit */
+--#define _H3800_ASIC1_MMC_NumOfBlocks        0x12    /* R/W 16bit, in block mode, number of blocks  */
+--#define _H3800_ASIC1_MMC_InterruptMask      0x1a    /* R/W 8bit */
+--#define _H3800_ASIC1_MMC_CommandNumber      0x1c    /* R/W 6 bits */
+--#define _H3800_ASIC1_MMC_ArgumentH          0x1e    /* R/W 16 bits  */
+--#define _H3800_ASIC1_MMC_ArgumentL          0x20    /* R/W 16 bits */
+--#define _H3800_ASIC1_MMC_ResFifo            0x22    /* R   8 x 16 bits - contains response FIFO */
+--#define _H3800_ASIC1_MMC_BufferPartFull     0x28    /* R/W 8 bits */
+--
+--#define H3800_ASIC1_MMC_StartStopClock    H3800_ASIC1_OFFSET(  u8, MMC, StartStopClock )
+--#define H3800_ASIC1_MMC_Status            H3800_ASIC1_OFFSET( u16, MMC, Status )
+--#define H3800_ASIC1_MMC_ClockRate         H3800_ASIC1_OFFSET(  u8, MMC, ClockRate )
+--#define H3800_ASIC1_MMC_SPIRegister       H3800_ASIC1_OFFSET(  u8, MMC, SPIRegister )
+--#define H3800_ASIC1_MMC_CmdDataCont       H3800_ASIC1_OFFSET(  u8, MMC, CmdDataCont )
+--#define H3800_ASIC1_MMC_ResponseTimeout   H3800_ASIC1_OFFSET(  u8, MMC, ResponseTimeout )
+--#define H3800_ASIC1_MMC_ReadTimeout       H3800_ASIC1_OFFSET( u16, MMC, ReadTimeout )
+--#define H3800_ASIC1_MMC_BlockLength       H3800_ASIC1_OFFSET( u16, MMC, BlockLength )
+--#define H3800_ASIC1_MMC_NumOfBlocks       H3800_ASIC1_OFFSET( u16, MMC, NumOfBlocks )
+--#define H3800_ASIC1_MMC_InterruptMask     H3800_ASIC1_OFFSET(  u8, MMC, InterruptMask )
+--#define H3800_ASIC1_MMC_CommandNumber     H3800_ASIC1_OFFSET(  u8, MMC, CommandNumber )
+--#define H3800_ASIC1_MMC_ArgumentH         H3800_ASIC1_OFFSET( u16, MMC, ArgumentH )
+--#define H3800_ASIC1_MMC_ArgumentL         H3800_ASIC1_OFFSET( u16, MMC, ArgumentL )
+--#define H3800_ASIC1_MMC_ResFifo           H3800_ASIC1_OFFSET( u16, MMC, ResFifo )
+--#define H3800_ASIC1_MMC_BufferPartFull    H3800_ASIC1_OFFSET(  u8, MMC, BufferPartFull )
+--
+--#define H3800_ASIC1_MMC_STOP_CLOCK                   (1 << 0)   /* Write to "StartStopClock" register */
+--#define H3800_ASIC1_MMC_START_CLOCK                  (1 << 1)
+--
+--#define H3800_ASIC1_MMC_STATUS_READ_TIMEOUT          (1 << 0)
+--#define H3800_ASIC1_MMC_STATUS_RESPONSE_TIMEOUT      (1 << 1)
+--#define H3800_ASIC1_MMC_STATUS_CRC_WRITE_ERROR       (1 << 2)
+--#define H3800_ASIC1_MMC_STATUS_CRC_READ_ERROR        (1 << 3)
+--#define H3800_ASIC1_MMC_STATUS_SPI_READ_ERROR        (1 << 4)  /* SPI data token error received */
+--#define H3800_ASIC1_MMC_STATUS_CRC_RESPONSE_ERROR    (1 << 5)
+--#define H3800_ASIC1_MMC_STATUS_FIFO_EMPTY            (1 << 6)
+--#define H3800_ASIC1_MMC_STATUS_FIFO_FULL             (1 << 7)
+--#define H3800_ASIC1_MMC_STATUS_CLOCK_ENABLE          (1 << 8)  /* MultiMediaCard clock stopped */
+--#define H3800_ASIC1_MMC_STATUS_DATA_TRANSFER_DONE    (1 << 11) /* Write operation, indicates transfer finished */
+--#define H3800_ASIC1_MMC_STATUS_END_PROGRAM           (1 << 12) /* End write and read operations */
+--#define H3800_ASIC1_MMC_STATUS_END_COMMAND_RESPONSE  (1 << 13) /* End command response */
+--
+--#define H3800_ASIC1_MMC_SPI_REG_SPI_ENABLE           (1 << 0)  /* Enables SPI mode */
+--#define H3800_ASIC1_MMC_SPI_REG_CRC_ON               (1 << 1)  /* 1:turn on CRC    */
+--#define H3800_ASIC1_MMC_SPI_REG_SPI_CS_ENABLE        (1 << 2)  /* 1:turn on SPI CS */
+--#define H3800_ASIC1_MMC_SPI_REG_CS_ADDRESS_MASK      0x38      /* Bits 3,4,5 are the SPI CS relative address */
+--
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_FORMAT_NO_RESPONSE  0x00
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_FORMAT_R1           0x01
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_FORMAT_R2           0x02
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_FORMAT_R3           0x03
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_DATA_ENABLE         (1 << 2)  /* This command contains a data transfer */
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_WRITE               (1 << 3)  /* This data transfer is a write */
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_STREAM_MODE         (1 << 4)  /* This data transfer is in stream mode */
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_BUSY_BIT            (1 << 5)  /* Busy signal expected after current cmd */
+--#define H3800_ASIC1_MMC_CMD_DATA_CONT_INITIALIZE          (1 << 6)  /* Enables the 80 bits for initializing card */
+--
+--#define H3800_ASIC1_MMC_INT_MASK_DATA_TRANSFER_DONE       (1 << 0)
+--#define H3800_ASIC1_MMC_INT_MASK_PROGRAM_DONE             (1 << 1)
+--#define H3800_ASIC1_MMC_INT_MASK_END_COMMAND_RESPONSE     (1 << 2)
+--#define H3800_ASIC1_MMC_INT_MASK_BUFFER_READY             (1 << 3)
+--
+--#define H3800_ASIC1_MMC_BUFFER_PART_FULL                  (1 << 0)
+--
+--/********* GPIO **********/
+--
+--#define _H3800_ASIC1_GPIO_Base        0x1e00
+--
+--#define _H3800_ASIC1_GPIO_Mask          0x30    /* R/W 0:don't mask, 1:mask interrupt */
+--#define _H3800_ASIC1_GPIO_Direction     0x32    /* R/W 0:input, 1:output              */
+--#define _H3800_ASIC1_GPIO_Out           0x34    /* R/W 0:output low, 1:output high    */
+--#define _H3800_ASIC1_GPIO_TriggerType   0x36    /* R/W 0:level, 1:edge                */
+--#define _H3800_ASIC1_GPIO_EdgeTrigger   0x38    /* R/W 0:falling, 1:rising            */
+--#define _H3800_ASIC1_GPIO_LevelTrigger  0x3A    /* R/W 0:low, 1:high level detect     */
+--#define _H3800_ASIC1_GPIO_LevelStatus   0x3C    /* R/W 0:none, 1:detect               */
+--#define _H3800_ASIC1_GPIO_EdgeStatus    0x3E    /* R/W 0:none, 1:detect               */
+--#define _H3800_ASIC1_GPIO_State         0x40    /* R   See masks below  (default 0)         */
+--#define _H3800_ASIC1_GPIO_Reset         0x42    /* R/W See masks below  (default 0x04)      */
+--#define _H3800_ASIC1_GPIO_SleepMask     0x44    /* R/W 0:don't mask, 1:mask trigger in sleep mode  */
+--#define _H3800_ASIC1_GPIO_SleepDir      0x46    /* R/W direction 0:input, 1:output in sleep mode    */
+--#define _H3800_ASIC1_GPIO_SleepOut      0x48    /* R/W level 0:low, 1:high in sleep mode           */
+--#define _H3800_ASIC1_GPIO_Status        0x4A    /* R   Pin status                                  */
+--#define _H3800_ASIC1_GPIO_BattFaultDir  0x4C    /* R/W direction 0:input, 1:output in batt_fault   */
+--#define _H3800_ASIC1_GPIO_BattFaultOut  0x4E    /* R/W level 0:low, 1:high in batt_fault           */
+--
+--#define H3800_ASIC1_GPIO_Mask         H3800_ASIC1_OFFSET( u16, GPIO, Mask )
+--#define H3800_ASIC1_GPIO_Direction    H3800_ASIC1_OFFSET( u16, GPIO, Direction )
+--#define H3800_ASIC1_GPIO_Out          H3800_ASIC1_OFFSET( u16, GPIO, Out )
+--#define H3800_ASIC1_GPIO_TriggerType  H3800_ASIC1_OFFSET( u16, GPIO, TriggerType )
+--#define H3800_ASIC1_GPIO_EdgeTrigger  H3800_ASIC1_OFFSET( u16, GPIO, EdgeTrigger )
+--#define H3800_ASIC1_GPIO_LevelTrigger H3800_ASIC1_OFFSET( u16, GPIO, LevelTrigger )
+--#define H3800_ASIC1_GPIO_LevelStatus  H3800_ASIC1_OFFSET( u16, GPIO, LevelStatus )
+--#define H3800_ASIC1_GPIO_EdgeStatus   H3800_ASIC1_OFFSET( u16, GPIO, EdgeStatus )
+--#define H3800_ASIC1_GPIO_State        H3800_ASIC1_OFFSET(  u8, GPIO, State )
+--#define H3800_ASIC1_GPIO_Reset        H3800_ASIC1_OFFSET(  u8, GPIO, Reset )
+--#define H3800_ASIC1_GPIO_SleepMask    H3800_ASIC1_OFFSET( u16, GPIO, SleepMask )
+--#define H3800_ASIC1_GPIO_SleepDir     H3800_ASIC1_OFFSET( u16, GPIO, SleepDir )
+--#define H3800_ASIC1_GPIO_SleepOut     H3800_ASIC1_OFFSET( u16, GPIO, SleepOut )
+--#define H3800_ASIC1_GPIO_Status       H3800_ASIC1_OFFSET( u16, GPIO, Status )
+--#define H3800_ASIC1_GPIO_BattFaultDir H3800_ASIC1_OFFSET( u16, GPIO, BattFaultDir )
+--#define H3800_ASIC1_GPIO_BattFaultOut H3800_ASIC1_OFFSET( u16, GPIO, BattFaultOut )
+--
+--#define H3800_ASIC1_GPIO_STATE_MASK            (1 << 0)
+--#define H3800_ASIC1_GPIO_STATE_DIRECTION       (1 << 1)
+--#define H3800_ASIC1_GPIO_STATE_OUT             (1 << 2)
+--#define H3800_ASIC1_GPIO_STATE_TRIGGER_TYPE    (1 << 3)
+--#define H3800_ASIC1_GPIO_STATE_EDGE_TRIGGER    (1 << 4)
+--#define H3800_ASIC1_GPIO_STATE_LEVEL_TRIGGER   (1 << 5)
+--
+--#define H3800_ASIC1_GPIO_RESET_SOFTWARE        (1 << 0)
+--#define H3800_ASIC1_GPIO_RESET_AUTO_SLEEP      (1 << 1)
+--#define H3800_ASIC1_GPIO_RESET_FIRST_PWR_ON    (1 << 2)
+--
+--/* These are all outputs */
+--#define GPIO_H3800_ASIC1_IR_ON_N          (1 << 0)   /* Apply power to the IR Module */
+--#define GPIO_H3800_ASIC1_SD_PWR_ON        (1 << 1)   /* Secure Digital power on */
+--#define GPIO_H3800_ASIC1_RS232_ON         (1 << 2)   /* Turn on power to the RS232 chip ? */
+--#define GPIO_H3800_ASIC1_PULSE_GEN        (1 << 3)   /* Goes to speaker / earphone */
+--#define GPIO_H3800_ASIC1_CH_TIMER         (1 << 4)   /* */
+--#define GPIO_H3800_ASIC1_LCD_5V_ON        (1 << 5)   /* Enables LCD_5V */
+--#define GPIO_H3800_ASIC1_LCD_ON           (1 << 6)   /* Enables LCD_3V */
+--#define GPIO_H3800_ASIC1_LCD_PCI          (1 << 7)   /* Connects to PDWN on LCD controller */
+--#define GPIO_H3800_ASIC1_VGH_ON           (1 << 8)   /* Drives VGH on the LCD (+9??) */
+--#define GPIO_H3800_ASIC1_VGL_ON           (1 << 9)   /* Drivers VGL on the LCD (-6??) */
+--#define GPIO_H3800_ASIC1_FL_PWR_ON        (1 << 10)  /* Frontlight power on */
+--#define GPIO_H3800_ASIC1_BT_PWR_ON        (1 << 11)  /* Bluetooth power on */
+--#define GPIO_H3800_ASIC1_SPK_ON           (1 << 12)  /* */
+--#define GPIO_H3800_ASIC1_EAR_ON_N         (1 << 13)  /* */
+--#define GPIO_H3800_ASIC1_AUD_PWR_ON       (1 << 14)  /* */
+--
+--/* Write enable for the flash */
+--
+--#define _H3800_ASIC1_FlashWP_Base         0x1F00
+--#define _H3800_ASIC1_FlashWP_VPP_ON         0x00    /* R   1: write, 0: protect */
+--#define H3800_ASIC1_FlashWP_VPP_ON       H3800_ASIC1_OFFSET( u8, FlashWP, VPP_ON )
+- 
+- #endif /* _INCLUDE_H3600_GPIO_H_ */
+-diff --git a/arch/arm/mach-sa1100/include/mach/irqs.h b/arch/arm/mach-sa1100/include/mach/irqs.h
+-index 0cb3660..ae81f80 100644
+---- a/arch/arm/mach-sa1100/include/mach/irqs.h
+-+++ b/arch/arm/mach-sa1100/include/mach/irqs.h
+-@@ -153,8 +153,6 @@
+-  */
+- #ifdef CONFIG_SA1111
+- #define NR_IRQS			(IRQ_S1_BVD1_STSCHG + 1)
+--#elif defined(CONFIG_SA1100_H3800)
+--#define NR_IRQS			(IRQ_BOARD_END)
+- #elif defined(CONFIG_SHARP_LOCOMO)
+- #define NR_IRQS			(IRQ_LOCOMO_SPI_TEND + 1)
+- #else
+-@@ -175,23 +173,3 @@
+- #define IRQ_LOCOMO_LT_BASE	(IRQ_BOARD_START + 2)
+- #define IRQ_LOCOMO_SPI_BASE	(IRQ_BOARD_START + 3)
+- 
+--/* H3800-specific IRQs (CONFIG_SA1100_H3800) */
+--#define H3800_KPIO_IRQ_START    (IRQ_BOARD_START)
+--#define IRQ_H3800_KEY           (IRQ_BOARD_START + 0)
+--#define IRQ_H3800_SPI           (IRQ_BOARD_START + 1)
+--#define IRQ_H3800_OWM           (IRQ_BOARD_START + 2)
+--#define IRQ_H3800_ADC           (IRQ_BOARD_START + 3)
+--#define IRQ_H3800_UART_0        (IRQ_BOARD_START + 4)
+--#define IRQ_H3800_UART_1        (IRQ_BOARD_START + 5)
+--#define IRQ_H3800_TIMER_0       (IRQ_BOARD_START + 6)
+--#define IRQ_H3800_TIMER_1       (IRQ_BOARD_START + 7)
+--#define IRQ_H3800_TIMER_2       (IRQ_BOARD_START + 8)
+--#define H3800_KPIO_IRQ_COUNT    9
+--
+--#define H3800_GPIO_IRQ_START    (IRQ_BOARD_START + 9)
+--#define IRQ_H3800_PEN           (IRQ_BOARD_START + 9)
+--#define IRQ_H3800_SD_DETECT     (IRQ_BOARD_START + 10)
+--#define IRQ_H3800_EAR_IN        (IRQ_BOARD_START + 11)
+--#define IRQ_H3800_USB_DETECT    (IRQ_BOARD_START + 12)
+--#define IRQ_H3800_SD_CON_SLT    (IRQ_BOARD_START + 13)
+--#define H3800_GPIO_IRQ_COUNT    5
+-diff --git a/drivers/video/sa1100fb.c b/drivers/video/sa1100fb.c
+-index 076f946..022d07a 100644
+---- a/drivers/video/sa1100fb.c
+-+++ b/drivers/video/sa1100fb.c
+-@@ -251,22 +251,6 @@ static struct sa1100fb_mach_info pal_info __initdata = {
+- #endif
+- #endif
+- 
+--#ifdef CONFIG_SA1100_H3800
+--static struct sa1100fb_mach_info h3800_info __initdata = {
+--	.pixclock	= 174757, 	.bpp		= 16,
+--	.xres		= 320,		.yres		= 240,
+--
+--	.hsync_len	= 3,		.vsync_len	= 3,
+--	.left_margin	= 12,		.upper_margin	= 10,
+--	.right_margin	= 17,		.lower_margin	= 1,
+--
+--	.cmap_static	= 1,
+--
+--	.lccr0		= LCCR0_Color | LCCR0_Sngl | LCCR0_Act,
+--	.lccr3		= LCCR3_OutEnH | LCCR3_PixRsEdg | LCCR3_ACBsDiv(2),
+--};
+--#endif
+--
+- #ifdef CONFIG_SA1100_H3600
+- static struct sa1100fb_mach_info h3600_info __initdata = {
+- 	.pixclock	= 174757, 	.bpp		= 16,
+-@@ -432,11 +416,6 @@ sa1100fb_get_machine_info(struct sa1100fb_info *fbi)
+- 		fbi->rgb[RGB_16] = &h3600_rgb_16;
+- 	}
+- #endif
+--#ifdef CONFIG_SA1100_H3800
+--	if (machine_is_h3800()) {
+--		inf = &h3800_info;
+--	}
+--#endif
+- #ifdef CONFIG_SA1100_COLLIE
+- 	if (machine_is_collie()) {
+- 		inf = &collie_info;
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0002--ARM-5408-1-SA1100-update-defconfigs-after-h3800.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0002--ARM-5408-1-SA1100-update-defconfigs-after-h3800.patch
+deleted file mode 100644
+index bed94be..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0002--ARM-5408-1-SA1100-update-defconfigs-after-h3800.patch
++++ /dev/null
+@@ -1,169 +0,0 @@
+-From ac95107d53ce586dc561b1c0dd6572d2f62ef73e Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 20 Feb 2009 10:18:08 +0100
+-Subject: [PATCH 02/28] [ARM] 5408/1: SA1100: update defconfigs after h3800 removal
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/configs/assabet_defconfig    |    1 -
+- arch/arm/configs/badge4_defconfig     |    1 -
+- arch/arm/configs/cerfcube_defconfig   |    1 -
+- arch/arm/configs/collie_defconfig     |    1 -
+- arch/arm/configs/h3600_defconfig      |    1 -
+- arch/arm/configs/hackkit_defconfig    |    1 -
+- arch/arm/configs/jornada720_defconfig |    1 -
+- arch/arm/configs/lart_defconfig       |    1 -
+- arch/arm/configs/neponset_defconfig   |    1 -
+- arch/arm/configs/pleb_defconfig       |    1 -
+- arch/arm/configs/shannon_defconfig    |    1 -
+- arch/arm/configs/simpad_defconfig     |    1 -
+- 12 files changed, 0 insertions(+), 12 deletions(-)
+-
+-diff --git a/arch/arm/configs/assabet_defconfig b/arch/arm/configs/assabet_defconfig
+-index b1cd331..c66dd39 100644
+---- a/arch/arm/configs/assabet_defconfig
+-+++ b/arch/arm/configs/assabet_defconfig
+-@@ -89,7 +89,6 @@ CONFIG_SA1100_ASSABET=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/badge4_defconfig b/arch/arm/configs/badge4_defconfig
+-index 80222fe..f264846 100644
+---- a/arch/arm/configs/badge4_defconfig
+-+++ b/arch/arm/configs/badge4_defconfig
+-@@ -91,7 +91,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- CONFIG_SA1100_BADGE4=y
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/cerfcube_defconfig b/arch/arm/configs/cerfcube_defconfig
+-index ee130b5..2b4c066 100644
+---- a/arch/arm/configs/cerfcube_defconfig
+-+++ b/arch/arm/configs/cerfcube_defconfig
+-@@ -93,7 +93,6 @@ CONFIG_SA1100_CERF_FLASH_16MB=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/collie_defconfig b/arch/arm/configs/collie_defconfig
+-index f7622e6..1aa6224 100644
+---- a/arch/arm/configs/collie_defconfig
+-+++ b/arch/arm/configs/collie_defconfig
+-@@ -113,7 +113,6 @@ CONFIG_ARCH_SA1100=y
+- CONFIG_SA1100_COLLIE=y
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/h3600_defconfig b/arch/arm/configs/h3600_defconfig
+-index 8f986e9..f2e16fd 100644
+---- a/arch/arm/configs/h3600_defconfig
+-+++ b/arch/arm/configs/h3600_defconfig
+-@@ -90,7 +90,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- CONFIG_SA1100_H3600=y
+--# CONFIG_SA1100_H3800 is not set
+- CONFIG_SA1100_H3XXX=y
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+-diff --git a/arch/arm/configs/hackkit_defconfig b/arch/arm/configs/hackkit_defconfig
+-index 1c8fb89..db0708d 100644
+---- a/arch/arm/configs/hackkit_defconfig
+-+++ b/arch/arm/configs/hackkit_defconfig
+-@@ -91,7 +91,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- CONFIG_SA1100_HACKKIT=y
+-diff --git a/arch/arm/configs/jornada720_defconfig b/arch/arm/configs/jornada720_defconfig
+-index 81fadaf..f3074e4 100644
+---- a/arch/arm/configs/jornada720_defconfig
+-+++ b/arch/arm/configs/jornada720_defconfig
+-@@ -178,7 +178,6 @@ CONFIG_DMABOUNCE=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- CONFIG_SA1100_JORNADA720=y
+- CONFIG_SA1100_JORNADA720_SSP=y
+-diff --git a/arch/arm/configs/lart_defconfig b/arch/arm/configs/lart_defconfig
+-index a1cc34f..56ae568 100644
+---- a/arch/arm/configs/lart_defconfig
+-+++ b/arch/arm/configs/lart_defconfig
+-@@ -87,7 +87,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/neponset_defconfig b/arch/arm/configs/neponset_defconfig
+-index d81ea21..36cd62e 100644
+---- a/arch/arm/configs/neponset_defconfig
+-+++ b/arch/arm/configs/neponset_defconfig
+-@@ -91,7 +91,6 @@ CONFIG_ASSABET_NEPONSET=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/pleb_defconfig b/arch/arm/configs/pleb_defconfig
+-index a6b47ea..f2d2dda 100644
+---- a/arch/arm/configs/pleb_defconfig
+-+++ b/arch/arm/configs/pleb_defconfig
+-@@ -88,7 +88,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/shannon_defconfig b/arch/arm/configs/shannon_defconfig
+-index d052c8f..984f709 100644
+---- a/arch/arm/configs/shannon_defconfig
+-+++ b/arch/arm/configs/shannon_defconfig
+-@@ -87,7 +87,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+-diff --git a/arch/arm/configs/simpad_defconfig b/arch/arm/configs/simpad_defconfig
+-index 03f783e..685d2b5 100644
+---- a/arch/arm/configs/simpad_defconfig
+-+++ b/arch/arm/configs/simpad_defconfig
+-@@ -89,7 +89,6 @@ CONFIG_ARCH_SA1100=y
+- # CONFIG_SA1100_COLLIE is not set
+- # CONFIG_SA1100_H3100 is not set
+- # CONFIG_SA1100_H3600 is not set
+--# CONFIG_SA1100_H3800 is not set
+- # CONFIG_SA1100_BADGE4 is not set
+- # CONFIG_SA1100_JORNADA720 is not set
+- # CONFIG_SA1100_HACKKIT is not set
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0003--ARM-5423-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0003--ARM-5423-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch
+deleted file mode 100644
+index 44d0c78..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0003--ARM-5423-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From 769e1cb0130c6a008229fd6a584c89c536e56d5f Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 15 Mar 2009 19:04:56 +0100
+-Subject: [PATCH 03/28] [ARM] 5423/1: SA1100: remove unused H3600_SLEEVE Kconfig option
+-
+-There's no actual code for iPAQ sleeves support in kernel that depends
+-on this config option.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/configs/h3600_defconfig |    1 -
+- arch/arm/mach-sa1100/Kconfig     |    9 ---------
+- 2 files changed, 0 insertions(+), 10 deletions(-)
+-
+-diff --git a/arch/arm/configs/h3600_defconfig b/arch/arm/configs/h3600_defconfig
+-index f2e16fd..1502957 100644
+---- a/arch/arm/configs/h3600_defconfig
+-+++ b/arch/arm/configs/h3600_defconfig
+-@@ -99,7 +99,6 @@ CONFIG_SA1100_H3XXX=y
+- # CONFIG_SA1100_SHANNON is not set
+- # CONFIG_SA1100_SIMPAD is not set
+- # CONFIG_SA1100_SSP is not set
+--# CONFIG_H3600_SLEEVE is not set
+- 
+- #
+- # Processor Type
+-diff --git a/arch/arm/mach-sa1100/Kconfig b/arch/arm/mach-sa1100/Kconfig
+-index bfc38e3..81ffff7 100644
+---- a/arch/arm/mach-sa1100/Kconfig
+-+++ b/arch/arm/mach-sa1100/Kconfig
+-@@ -147,15 +147,6 @@ config SA1100_SSP
+- 	  This isn't for audio support, but for attached sensors and
+- 	  other devices, eg for BadgePAD 4 sensor support.
+- 
+--config H3600_SLEEVE
+--	tristate "Compaq iPAQ Handheld sleeve support"
+--	depends on SA1100_H3100 || SA1100_H3600
+--	help
+--	  Choose this option to enable support for extension packs (sleeves)
+--	  for the Compaq iPAQ H3XXX series of handheld computers.  This option
+--	  is required for the CF, PCMCIA, Bluetooth and GSM/GPRS extension
+--	  packs.
+--
+- endmenu
+- 
+- endif
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0004--ARM-5424-1-h3600-clean-up-mtd-partitions-table.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0004--ARM-5424-1-h3600-clean-up-mtd-partitions-table.patch
+deleted file mode 100644
+index 3c4e8d0..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0004--ARM-5424-1-h3600-clean-up-mtd-partitions-table.patch
++++ /dev/null
+@@ -1,67 +0,0 @@
+-From 33e1b63b2d51d18db09a296fff181259cc485459 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 15 Mar 2009 19:09:50 +0100
+-Subject: [PATCH 04/28] [ARM] 5424/1: h3600: clean up mtd partitions table
+-
+-Right now iPaq h3600's default MTD partitions table is a mess. It has
+-two #ifdefs with #else, giving total 3 variants, depending on your
+-kernel config. Replace all this with simple two-partitions scheme
+-(bootloader + rootfs), that used by both shipped WindowsCE and
+-most of the linux distributions (Familiar, Angstrom)
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/mach-sa1100/h3600.c |   34 +---------------------------------
+- 1 files changed, 1 insertions(+), 33 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index b9aaa45..4920b89 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -56,41 +56,9 @@ static struct mtd_partition h3xxx_partitions[] = {
+- 		.offset		= 0,
+- 		.mask_flags	= MTD_WRITEABLE,  /* force read-only */
+- 	}, {
+--#ifdef CONFIG_MTD_2PARTS_IPAQ
+--		.name		= "H3XXX root jffs2",
+-+		.name		= "H3XXX rootfs",
+- 		.size		= MTDPART_SIZ_FULL,
+- 		.offset		= 0x00040000,
+--#else
+--		.name		= "H3XXX kernel",
+--		.size		= 0x00080000,
+--		.offset		= 0x00040000,
+--	}, {
+--		.name		= "H3XXX params",
+--		.size		= 0x00040000,
+--		.offset		= 0x000C0000,
+--	}, {
+--#ifdef CONFIG_JFFS2_FS
+--		.name		= "H3XXX root jffs2",
+--		.size		= MTDPART_SIZ_FULL,
+--		.offset		= 0x00100000,
+--#else
+--		.name		= "H3XXX initrd",
+--		.size		= 0x00100000,
+--		.offset		= 0x00100000,
+--	}, {
+--		.name		= "H3XXX root cramfs",
+--		.size		= 0x00300000,
+--		.offset		= 0x00200000,
+--	}, {
+--		.name		= "H3XXX usr cramfs",
+--		.size		= 0x00800000,
+--		.offset		= 0x00500000,
+--	}, {
+--		.name		= "H3XXX usr local",
+--		.size		= MTDPART_SIZ_FULL,
+--		.offset		= 0x00d00000,
+--#endif
+--#endif
+- 	}
+- };
+- 
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0005--ARM-5425-1-h3600-first-stage-of-ipaq_model_ops-c.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0005--ARM-5425-1-h3600-first-stage-of-ipaq_model_ops-c.patch
+deleted file mode 100644
+index 6dfadb5..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0005--ARM-5425-1-h3600-first-stage-of-ipaq_model_ops-c.patch
++++ /dev/null
+@@ -1,167 +0,0 @@
+-From b40ae178cbaa13b28660fab0b91ea120f78cb664 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 15 Mar 2009 19:11:21 +0100
+-Subject: [PATCH 05/28] [ARM] 5425/1: h3600: first stage of ipaq_model_ops cleanup
+-
+-Remove unused fields and associated funtions-accesors.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/mach-sa1100/h3600.c              |   38 ------------------------
+- arch/arm/mach-sa1100/include/mach/h3600.h |   46 -----------------------------
+- 2 files changed, 0 insertions(+), 84 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 4920b89..9f13f5b 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -227,12 +227,6 @@ static void __init h3xxx_map_io(void)
+- 	sa1100fb_lcd_power = h3xxx_lcd_power;
+- }
+- 
+--static __inline__ void do_blank(int setp)
+--{
+--	if (ipaq_model_ops.blank_callback)
+--		ipaq_model_ops.blank_callback(1-setp);
+--}
+--
+- /************************* H3100 *************************/
+- 
+- #ifdef CONFIG_SA1100_H3100
+-@@ -250,7 +244,6 @@ static void h3100_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	case IPAQ_EGPIO_LCD_POWER:
+- 		egpio |= EGPIO_H3600_LCD_ON;
+- 		gpio  |= GPIO_H3100_LCD_3V_ON;
+--		do_blank(setp);
+- 		break;
+- 	case IPAQ_EGPIO_LCD_ENABLE:
+- 		break;
+-@@ -304,23 +297,8 @@ static void h3100_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	}
+- }
+- 
+--static unsigned long h3100_read_egpio(void)
+--{
+--	return h3100_egpio;
+--}
+--
+--static int h3100_pm_callback(int req)
+--{
+--	if (ipaq_model_ops.pm_callback_aux)
+--		return ipaq_model_ops.pm_callback_aux(req);
+--	return 0;
+--}
+--
+- static struct ipaq_model_ops h3100_model_ops __initdata = {
+--	.generic_name	= "3100",
+- 	.control	= h3100_control_egpio,
+--	.read		= h3100_read_egpio,
+--	.pm_callback	= h3100_pm_callback
+- };
+- 
+- #define H3100_DIRECT_EGPIO (GPIO_H3100_BT_ON	  \
+-@@ -381,7 +359,6 @@ static void h3600_control_egpio(enum ipaq_egpio_type x, int setp)
+- 			 EGPIO_H3600_LCD_PCI |
+- 			 EGPIO_H3600_LCD_5V_ON |
+- 			 EGPIO_H3600_LVDD_ON;
+--		do_blank(setp);
+- 		break;
+- 	case IPAQ_EGPIO_LCD_ENABLE:
+- 		break;
+-@@ -432,23 +409,8 @@ static void h3600_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	}
+- }
+- 
+--static unsigned long h3600_read_egpio(void)
+--{
+--	return h3600_egpio;
+--}
+--
+--static int h3600_pm_callback(int req)
+--{
+--	if (ipaq_model_ops.pm_callback_aux)
+--		return ipaq_model_ops.pm_callback_aux(req);
+--	return 0;
+--}
+--
+- static struct ipaq_model_ops h3600_model_ops __initdata = {
+--	.generic_name	= "3600",
+- 	.control	= h3600_control_egpio,
+--	.read		= h3600_read_egpio,
+--	.pm_callback	= h3600_pm_callback
+- };
+- 
+- static void __init h3600_map_io(void)
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600.h b/arch/arm/mach-sa1100/include/mach/h3600.h
+-index e692ab3..8e8ccfc 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600.h
+-@@ -94,21 +94,11 @@ enum ipaq_egpio_type {
+- };
+- 
+- struct ipaq_model_ops {
+--	const char     *generic_name;
+- 	void	      (*control)(enum ipaq_egpio_type, int);
+--	unsigned long (*read)(void);
+--	void	      (*blank_callback)(int blank);
+--	int	      (*pm_callback)(int req);	    /* Primary model callback */
+--	int	      (*pm_callback_aux)(int req);  /* Secondary callback (used by HAL modules) */
+- };
+- 
+- extern struct ipaq_model_ops ipaq_model_ops;
+- 
+--static __inline__ const char * h3600_generic_name(void)
+--{
+--	return ipaq_model_ops.generic_name;
+--}
+--
+- static __inline__ void assign_h3600_egpio(enum ipaq_egpio_type x, int level)
+- {
+- 	if (ipaq_model_ops.control)
+-@@ -127,42 +117,6 @@ static __inline__ void set_h3600_egpio(enum ipaq_egpio_type x)
+- 		ipaq_model_ops.control(x,1);
+- }
+- 
+--static __inline__ unsigned long read_h3600_egpio(void)
+--{
+--	if (ipaq_model_ops.read)
+--		return ipaq_model_ops.read();
+--	return 0;
+--}
+--
+--static __inline__ int  h3600_register_blank_callback(void (*f)(int))
+--{
+--	ipaq_model_ops.blank_callback = f;
+--	return 0;
+--}
+--
+--static __inline__ void h3600_unregister_blank_callback(void (*f)(int))
+--{
+--	ipaq_model_ops.blank_callback = NULL;
+--}
+--
+--
+--static __inline__ int  h3600_register_pm_callback(int (*f)(int))
+--{
+--	ipaq_model_ops.pm_callback_aux = f;
+--	return 0;
+--}
+--
+--static __inline__ void h3600_unregister_pm_callback(int (*f)(int))
+--{
+--	ipaq_model_ops.pm_callback_aux = NULL;
+--}
+--
+--static __inline__ int h3600_power_management(int req)
+--{
+--	if (ipaq_model_ops.pm_callback)
+--		return ipaq_model_ops.pm_callback(req);
+--	return 0;
+--}
+- 
+- #endif /* ASSEMBLY */
+- 
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0006--ARM-5426-1-h3600-remove-clr_h3600_egpio-set_h360.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0006--ARM-5426-1-h3600-remove-clr_h3600_egpio-set_h360.patch
+deleted file mode 100644
+index ae45814..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0006--ARM-5426-1-h3600-remove-clr_h3600_egpio-set_h360.patch
++++ /dev/null
+@@ -1,117 +0,0 @@
+-From 338e29e75e86fc9592a5d03904d2c9ee312f9f89 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 15 Mar 2009 19:13:16 +0100
+-Subject: [PATCH 06/28] [ARM] 5426/1: h3600: remove clr_h3600_egpio/set_h3600_egpio helpers
+-
+-Replace all occurences with assign_h3600_egpio.
+-Also simplify code a bit by replacing couple of if-else
+-statements with one-line equivalents.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/mach-sa1100/h3600.c              |    6 +-----
+- arch/arm/mach-sa1100/include/mach/h3600.h |   13 -------------
+- drivers/pcmcia/sa1100_h3600.c             |   23 ++++++++++-------------
+- 3 files changed, 11 insertions(+), 31 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 9f13f5b..1fa0f58 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -92,11 +92,7 @@ static int h3600_irda_set_power(struct device *dev, unsigned int state)
+- 
+- static void h3600_irda_set_speed(struct device *dev, unsigned int speed)
+- {
+--	if (speed < 4000000) {
+--		clr_h3600_egpio(IPAQ_EGPIO_IR_FSEL);
+--	} else {
+--		set_h3600_egpio(IPAQ_EGPIO_IR_FSEL);
+--	}
+-+	assign_h3600_egpio(IPAQ_EGPIO_IR_FSEL, !(speed < 4000000));
+- }
+- 
+- static struct irda_platform_data h3600_irda_data = {
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600.h b/arch/arm/mach-sa1100/include/mach/h3600.h
+-index 8e8ccfc..33fc4bc 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600.h
+-@@ -105,19 +105,6 @@ static __inline__ void assign_h3600_egpio(enum ipaq_egpio_type x, int level)
+- 		ipaq_model_ops.control(x,level);
+- }
+- 
+--static __inline__ void clr_h3600_egpio(enum ipaq_egpio_type x)
+--{
+--	if (ipaq_model_ops.control)
+--		ipaq_model_ops.control(x,0);
+--}
+--
+--static __inline__ void set_h3600_egpio(enum ipaq_egpio_type x)
+--{
+--	if (ipaq_model_ops.control)
+--		ipaq_model_ops.control(x,1);
+--}
+--
+--
+- #endif /* ASSEMBLY */
+- 
+- #endif /* _INCLUDE_H3600_H_ */
+-diff --git a/drivers/pcmcia/sa1100_h3600.c b/drivers/pcmcia/sa1100_h3600.c
+-index 6de4e1b..0cc3748 100644
+---- a/drivers/pcmcia/sa1100_h3600.c
+-+++ b/drivers/pcmcia/sa1100_h3600.c
+-@@ -37,9 +37,9 @@ static void h3600_pcmcia_hw_shutdown(struct soc_pcmcia_socket *skt)
+- 	soc_pcmcia_free_irqs(skt, irqs, ARRAY_SIZE(irqs));
+-   
+- 	/* Disable CF bus: */
+--	clr_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON);
+--	clr_h3600_egpio(IPAQ_EGPIO_OPT_ON);
+--	set_h3600_egpio(IPAQ_EGPIO_OPT_RESET);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON, 0);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_ON, 0);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_RESET, 1);
+- }
+- 
+- static void
+-@@ -79,10 +79,7 @@ h3600_pcmcia_configure_socket(struct soc_pcmcia_socket *skt, const socket_state_
+- 		return -1;
+- 	}
+- 
+--	if (state->flags & SS_RESET)
+--		set_h3600_egpio(IPAQ_EGPIO_CARD_RESET);
+--	else
+--		clr_h3600_egpio(IPAQ_EGPIO_CARD_RESET);
+-+	assign_h3600_egpio(IPAQ_EGPIO_CARD_RESET, !!(state->flags & SS_RESET));
+- 
+- 	/* Silently ignore Vpp, output enable, speaker enable. */
+- 
+-@@ -92,9 +89,9 @@ h3600_pcmcia_configure_socket(struct soc_pcmcia_socket *skt, const socket_state_
+- static void h3600_pcmcia_socket_init(struct soc_pcmcia_socket *skt)
+- {
+- 	/* Enable CF bus: */
+--	set_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON);
+--	set_h3600_egpio(IPAQ_EGPIO_OPT_ON);
+--	clr_h3600_egpio(IPAQ_EGPIO_OPT_RESET);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON, 1);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_ON, 1);
+-+	assign_h3600_egpio(IPAQ_EGPIO_OPT_RESET, 0);
+- 
+- 	msleep(10);
+- 
+-@@ -112,10 +109,10 @@ static void h3600_pcmcia_socket_suspend(struct soc_pcmcia_socket *skt)
+- 	 * socket 0 then socket 1.
+- 	 */
+- 	if (skt->nr == 1) {
+--		clr_h3600_egpio(IPAQ_EGPIO_OPT_ON);
+--		clr_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON);
+-+		assign_h3600_egpio(IPAQ_EGPIO_OPT_ON, 0);
+-+		assign_h3600_egpio(IPAQ_EGPIO_OPT_NVRAM_ON, 0);
+- 		/* hmm, does this suck power? */
+--		set_h3600_egpio(IPAQ_EGPIO_OPT_RESET);
+-+		assign_h3600_egpio(IPAQ_EGPIO_OPT_RESET, 1);
+- 	}
+- }
+- 
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0007--ARM-5427-1-h3600-ipaq_model_ops-final-cleanup.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0007--ARM-5427-1-h3600-ipaq_model_ops-final-cleanup.patch
+deleted file mode 100644
+index cd1e8b5..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0007--ARM-5427-1-h3600-ipaq_model_ops-final-cleanup.patch
++++ /dev/null
+@@ -1,96 +0,0 @@
+-From 8932243b3dd1f4f57e5d48d3a5c7634d3ebc2b17 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 15 Mar 2009 19:14:27 +0100
+-Subject: [PATCH 07/28] [ARM] 5427/1: h3600: ipaq_model_ops final cleanup
+-
+-Since now ipaq_model_ops used only for accessing h3600 EGPIOs,
+-drop it completely and use assign_h3600_egpio() directly.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+----
+- arch/arm/mach-sa1100/h3600.c              |   16 ++++------------
+- arch/arm/mach-sa1100/include/mach/h3600.h |   12 +-----------
+- 2 files changed, 5 insertions(+), 23 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 1fa0f58..0eb2f15 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -46,8 +46,8 @@
+- 
+- #include "generic.h"
+- 
+--struct ipaq_model_ops ipaq_model_ops;
+--EXPORT_SYMBOL(ipaq_model_ops);
+-+void (*assign_h3600_egpio)(enum ipaq_egpio_type x, int level);
+-+EXPORT_SYMBOL(assign_h3600_egpio);
+- 
+- static struct mtd_partition h3xxx_partitions[] = {
+- 	{
+-@@ -293,10 +293,6 @@ static void h3100_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	}
+- }
+- 
+--static struct ipaq_model_ops h3100_model_ops __initdata = {
+--	.control	= h3100_control_egpio,
+--};
+--
+- #define H3100_DIRECT_EGPIO (GPIO_H3100_BT_ON	  \
+- 			  | GPIO_H3100_GPIO3	  \
+- 			  | GPIO_H3100_QMUTE	  \
+-@@ -322,7 +318,7 @@ static void __init h3100_map_io(void)
+- 	GAFR &= ~H3100_DIRECT_EGPIO;
+- 
+- 	H3100_EGPIO = h3100_egpio;
+--	ipaq_model_ops = h3100_model_ops;
+-+	assign_h3600_egpio = h3100_control_egpio;
+- }
+- 
+- MACHINE_START(H3100, "Compaq iPAQ H3100")
+-@@ -405,10 +401,6 @@ static void h3600_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	}
+- }
+- 
+--static struct ipaq_model_ops h3600_model_ops __initdata = {
+--	.control	= h3600_control_egpio,
+--};
+--
+- static void __init h3600_map_io(void)
+- {
+- 	h3xxx_map_io();
+-@@ -423,7 +415,7 @@ static void __init h3600_map_io(void)
+- 	       GPIO_LDD11 | GPIO_LDD10 | GPIO_LDD9  | GPIO_LDD8;
+- 
+- 	H3600_EGPIO = h3600_egpio;	   /* Maintains across sleep? */
+--	ipaq_model_ops = h3600_model_ops;
+-+	assign_h3600_egpio = h3600_control_egpio;
+- }
+- 
+- MACHINE_START(H3600, "Compaq iPAQ H3600")
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600.h b/arch/arm/mach-sa1100/include/mach/h3600.h
+-index 33fc4bc..2827faa 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600.h
+-@@ -93,17 +93,7 @@ enum ipaq_egpio_type {
+- 	IPAQ_EGPIO_LCD_ENABLE,	  /* Enable/disable LCD controller */
+- };
+- 
+--struct ipaq_model_ops {
+--	void	      (*control)(enum ipaq_egpio_type, int);
+--};
+--
+--extern struct ipaq_model_ops ipaq_model_ops;
+--
+--static __inline__ void assign_h3600_egpio(enum ipaq_egpio_type x, int level)
+--{
+--	if (ipaq_model_ops.control)
+--		ipaq_model_ops.control(x,level);
+--}
+-+extern void (*assign_h3600_egpio)(enum ipaq_egpio_type x, int level);
+- 
+- #endif /* ASSEMBLY */
+- 
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0008-ALSA-drop-outdated-and-broken-sa11xx-uda1341-driver.patch b/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0008-ALSA-drop-outdated-and-broken-sa11xx-uda1341-driver.patch
+deleted file mode 100644
+index e7bc6b6..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/01_pushed_upstream/0008-ALSA-drop-outdated-and-broken-sa11xx-uda1341-driver.patch
++++ /dev/null
+@@ -1,1166 +0,0 @@
+-From 7bb1125ff1460bad8843d089998ed18f175bab1f Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 13 Mar 2009 01:03:49 +0100
+-Subject: [PATCH 08/28] ALSA: drop outdated and broken sa11xx-uda1341 driver
+-
+-It depends on L3 support from 2.4 kernel (CONFIG_L3) that never got
+-merged into mainline. Since there's no way to use it on any of
+-supported machines (iPaq h3100 or h3600), better drop it for now.
+-It can be reimplemented later using ASoC infrastructure (there's
+-already a driver for uda1341 codec in mainline, so only CPU and machine
+-parts need to be written).
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Cc: Russell King <linux@arm.linux.org.uk>
+-Signed-off-by: Takashi Iwai <tiwai@suse.de>
+----
+- include/sound/uda1341.h |  126 -------
+- sound/arm/Kconfig       |   11 -
+- sound/arm/Makefile      |    3 -
+- sound/i2c/Makefile      |    2 -
+- sound/i2c/l3/Makefile   |    8 -
+- sound/i2c/l3/uda1341.c  |  935 -----------------------------------------------
+- 6 files changed, 0 insertions(+), 1085 deletions(-)
+- delete mode 100644 include/sound/uda1341.h
+- delete mode 100644 sound/i2c/l3/Makefile
+- delete mode 100644 sound/i2c/l3/uda1341.c
+-
+-diff --git a/include/sound/uda1341.h b/include/sound/uda1341.h
+-deleted file mode 100644
+-index 110d5dc..0000000
+---- a/include/sound/uda1341.h
+-+++ /dev/null
+-@@ -1,126 +0,0 @@
+--/*
+-- *  linux/include/linux/l3/uda1341.h
+-- *
+-- * Philips UDA1341 mixer device driver for ALSA
+-- *
+-- * Copyright (c) 2002 Tomas Kasparek <tomas.kasparek@seznam.cz>
+-- *
+-- * This program is free software; you can redistribute it and/or
+-- * modify it under the terms of the GNU General Public License.
+-- *
+-- * History:
+-- *
+-- * 2002-03-13 Tomas Kasparek Initial release - based on uda1341.h from OSS
+-- * 2002-03-30 Tomas Kasparek Proc filesystem support, complete mixer and DSP
+-- *                           features support
+-- */
+--
+--#define UDA1341_ALSA_NAME "snd-uda1341"
+--
+--/*
+-- * Default rate set after inicialization
+-- */
+--#define AUDIO_RATE_DEFAULT	44100
+--
+--/*
+-- * UDA1341 L3 address and command types
+-- */
+--#define UDA1341_L3ADDR		5
+--#define UDA1341_DATA0		(UDA1341_L3ADDR << 2 | 0)
+--#define UDA1341_DATA1		(UDA1341_L3ADDR << 2 | 1)
+--#define UDA1341_STATUS		(UDA1341_L3ADDR << 2 | 2)
+--
+--enum uda1341_onoff {
+--	OFF=0,
+--	ON,
+--};
+--
+--enum uda1341_format {
+--	I2S=0,
+--	LSB16,
+--	LSB18,
+--	LSB20,
+--	MSB,
+--	LSB16MSB,
+--	LSB18MSB,
+--	LSB20MSB,        
+--};
+--
+--enum uda1341_fs {
+--	F512=0,
+--	F384,
+--	F256,
+--	Funused,
+--};
+--
+--enum uda1341_peak {
+--	BEFORE=0,
+--	AFTER,
+--};
+--
+--enum uda1341_filter {
+--	FLAT=0,
+--	MIN,
+--	MIN2,
+--	MAX,
+--};
+--
+--enum uda1341_mixer {
+--	DOUBLE,
+--	LINE,
+--	MIC,
+--	MIXER,
+--};
+--
+--enum uda1341_deemp {
+--	NONE,
+--	D32,
+--	D44,
+--	D48,
+--};
+--
+--enum uda1341_config {
+--	CMD_READ_REG = 0,
+--	CMD_RESET,
+--	CMD_FS,
+--	CMD_FORMAT,
+--	CMD_OGAIN,
+--	CMD_IGAIN,
+--	CMD_DAC,
+--	CMD_ADC,
+--	CMD_VOLUME,
+--	CMD_BASS,
+--	CMD_TREBBLE,
+--	CMD_PEAK,
+--	CMD_DEEMP,
+--	CMD_MUTE,        
+--	CMD_FILTER,
+--	CMD_CH1,
+--	CMD_CH2,
+--	CMD_MIC,       
+--	CMD_MIXER,
+--	CMD_AGC,
+--	CMD_IG,
+--	CMD_AGC_TIME,
+--	CMD_AGC_LEVEL,
+--#ifdef CONFIG_PM
+--	CMD_SUSPEND,
+--	CMD_RESUME,
+--#endif
+--	CMD_LAST,
+--};
+--
+--enum write_through {
+--	//used in update_bits (write_cfg) to avoid l3_write - just update local copy of regs.
+--	REGS_ONLY=0,
+--	//update local regs and write value to uda1341 - do l3_write
+--	FLUSH,
+--};
+--
+--int __init snd_chip_uda1341_mixer_new(struct snd_card *card, struct l3_client **clnt);
+--
+--/*
+-- * Local variables:
+-- * indent-tabs-mode: t
+-- * End:
+-- */
+-diff --git a/sound/arm/Kconfig b/sound/arm/Kconfig
+-index f8e6de4..885683a 100644
+---- a/sound/arm/Kconfig
+-+++ b/sound/arm/Kconfig
+-@@ -11,17 +11,6 @@ menuconfig SND_ARM
+- 
+- if SND_ARM
+- 
+--config SND_SA11XX_UDA1341
+--	tristate "SA11xx UDA1341TS driver (iPaq H3600)"
+--	depends on ARCH_SA1100 && L3
+--	select SND_PCM
+--	help
+--	  Say Y here if you have a Compaq iPaq H3x00 handheld computer
+--	  and want to use its Philips UDA 1341 audio chip.
+--
+--	  To compile this driver as a module, choose M here: the module
+--	  will be called snd-sa11xx-uda1341.
+--
+- config SND_ARMAACI
+- 	tristate "ARM PrimeCell PL041 AC Link support"
+- 	depends on ARM_AMBA
+-diff --git a/sound/arm/Makefile b/sound/arm/Makefile
+-index 2054de1..5a549ed 100644
+---- a/sound/arm/Makefile
+-+++ b/sound/arm/Makefile
+-@@ -2,9 +2,6 @@
+- # Makefile for ALSA
+- #
+- 
+--obj-$(CONFIG_SND_SA11XX_UDA1341) += snd-sa11xx-uda1341.o 
+--snd-sa11xx-uda1341-objs		:= sa11xx-uda1341.o
+--
+- obj-$(CONFIG_SND_ARMAACI)	+= snd-aaci.o
+- snd-aaci-objs			:= aaci.o devdma.o
+- 
+-diff --git a/sound/i2c/Makefile b/sound/i2c/Makefile
+-index 3797066..36879bf 100644
+---- a/sound/i2c/Makefile
+-+++ b/sound/i2c/Makefile
+-@@ -7,8 +7,6 @@ snd-i2c-objs := i2c.o
+- snd-cs8427-objs := cs8427.o
+- snd-tea6330t-objs := tea6330t.o
+- 
+--obj-$(CONFIG_L3) += l3/
+--
+- obj-$(CONFIG_SND) += other/
+- 
+- # Toplevel Module Dependency
+-diff --git a/sound/i2c/l3/Makefile b/sound/i2c/l3/Makefile
+-deleted file mode 100644
+-index 49455b8..0000000
+---- a/sound/i2c/l3/Makefile
+-+++ /dev/null
+-@@ -1,8 +0,0 @@
+--#
+--# Makefile for ALSA
+--#
+--
+--snd-uda1341-objs := uda1341.o
+--
+--# Module Dependency
+--obj-$(CONFIG_SND_SA11XX_UDA1341) += snd-uda1341.o
+-diff --git a/sound/i2c/l3/uda1341.c b/sound/i2c/l3/uda1341.c
+-deleted file mode 100644
+-index 9840eb4..0000000
+---- a/sound/i2c/l3/uda1341.c
+-+++ /dev/null
+-@@ -1,935 +0,0 @@
+--/*
+-- * Philips UDA1341 mixer device driver
+-- * Copyright (c) 2002 Tomas Kasparek <tomas.kasparek@seznam.cz>
+-- *
+-- * Portions are Copyright (C) 2000 Lernout & Hauspie Speech Products, N.V.
+-- *
+-- * This program is free software; you can redistribute it and/or
+-- * modify it under the terms of the GNU General Public License.
+-- *
+-- * History:
+-- *
+-- * 2002-03-13   Tomas Kasparek  initial release - based on uda1341.c from OSS
+-- * 2002-03-28   Tomas Kasparek  basic mixer is working (volume, bass, treble)
+-- * 2002-03-30   Tomas Kasparek  proc filesystem support, complete mixer and DSP
+-- *                              features support
+-- * 2002-04-12	Tomas Kasparek	proc interface update, code cleanup
+-- * 2002-05-12   Tomas Kasparek  another code cleanup
+-- */
+--
+--#include <linux/module.h>
+--#include <linux/init.h>
+--#include <linux/types.h>
+--#include <linux/slab.h>
+--#include <linux/errno.h>
+--#include <linux/ioctl.h>
+--
+--#include <asm/uaccess.h>
+--
+--#include <sound/core.h>
+--#include <sound/control.h>
+--#include <sound/initval.h>
+--#include <sound/info.h>
+--
+--#include <linux/l3/l3.h>
+--
+--#include <sound/uda1341.h>
+--
+--/* {{{ HW regs definition */
+--
+--#define STAT0                   0x00
+--#define STAT1			0x80
+--#define STAT_MASK               0x80
+--
+--#define DATA0_0			0x00
+--#define DATA0_1			0x40
+--#define DATA0_2			0x80
+--#define DATA_MASK               0xc0
+--
+--#define IS_DATA0(x)     ((x) >= data0_0 && (x) <= data0_2)
+--#define IS_DATA1(x)     ((x) == data1)
+--#define IS_STATUS(x)    ((x) == stat0 || (x) == stat1)
+--#define IS_EXTEND(x)   ((x) >= ext0 && (x) <= ext6)
+--
+--/* }}} */
+--
+--
+--static const char *peak_names[] = {
+--	"before",
+--	"after",
+--};
+--
+--static const char *filter_names[] = {
+--	"flat",
+--	"min",
+--	"min",
+--	"max",
+--};
+--
+--static const char *mixer_names[] = {
+--	"double differential",
+--	"input channel 1 (line in)",
+--	"input channel 2 (microphone)",
+--	"digital mixer",
+--};
+--
+--static const char *deemp_names[] = {
+--	"none",
+--	"32 kHz",
+--	"44.1 kHz",
+--	"48 kHz",        
+--};
+--
+--enum uda1341_regs_names {
+--	stat0,
+--	stat1,
+--	data0_0,
+--	data0_1,
+--	data0_2,
+--	data1,
+--	ext0,
+--	ext1,
+--	ext2,
+--	empty,
+--	ext4,
+--	ext5,
+--	ext6,
+--	uda1341_reg_last,
+--};
+--
+--static const char *uda1341_reg_names[] = {
+--	"stat 0 ",
+--	"stat 1 ",
+--	"data 00",
+--	"data 01",
+--	"data 02",
+--	"data 1 ",
+--	"ext 0",
+--	"ext 1",
+--	"ext 2",
+--	"empty",
+--	"ext 4",
+--	"ext 5",
+--	"ext 6",
+--};
+--
+--static const int uda1341_enum_items[] = {
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+--	2, //peak - before/after
+--	4, //deemp - none/32/44.1/48
+--	0,
+--	4, //filter - flat/min/min/max
+--	0, 0, 0,
+--	4, //mixer - differ/line/mic/mixer
+--	0, 0, 0, 0, 0,
+--};
+--
+--static const char ** uda1341_enum_names[] = {
+--	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+--	peak_names, //peak - before/after
+--	deemp_names, //deemp - none/32/44.1/48
+--	NULL,
+--	filter_names, //filter - flat/min/min/max
+--	NULL, NULL, NULL,
+--	mixer_names, //mixer - differ/line/mic/mixer
+--	NULL, NULL, NULL, NULL, NULL,
+--};
+--
+--typedef int uda1341_cfg[CMD_LAST];
+--
+--struct uda1341 {
+--	int (*write) (struct l3_client *uda1341, unsigned short reg, unsigned short val);
+--	int (*read) (struct l3_client *uda1341, unsigned short reg);        
+--	unsigned char regs[uda1341_reg_last];
+--	int active;
+--	spinlock_t reg_lock;
+--	struct snd_card *card;
+--	uda1341_cfg cfg;
+--#ifdef CONFIG_PM
+--	unsigned char suspend_regs[uda1341_reg_last];
+--	uda1341_cfg suspend_cfg;
+--#endif
+--};
+--
+--/* transfer 8bit integer into string with binary representation */
+--static void int2str_bin8(uint8_t val, char *buf)
+--{
+--	const int size = sizeof(val) * 8;
+--	int i;
+--
+--	for (i= 0; i < size; i++){
+--		*(buf++) = (val >> (size - 1)) ? '1' : '0';
+--		val <<= 1;
+--	}
+--	*buf = '\0'; //end the string with zero
+--}
+--
+--/* {{{ HW manipulation routines */
+--
+--static int snd_uda1341_codec_write(struct l3_client *clnt, unsigned short reg, unsigned short val)
+--{
+--	struct uda1341 *uda = clnt->driver_data;
+--	unsigned char buf[2] = { 0xc0, 0xe0 }; // for EXT addressing
+--	int err = 0;
+--
+--	uda->regs[reg] = val;
+--
+--	if (uda->active) {
+--		if (IS_DATA0(reg)) {
+--			err = l3_write(clnt, UDA1341_DATA0, (const unsigned char *)&val, 1);
+--		} else if (IS_DATA1(reg)) {
+--			err = l3_write(clnt, UDA1341_DATA1, (const unsigned char *)&val, 1);
+--		} else if (IS_STATUS(reg)) {
+--			err = l3_write(clnt, UDA1341_STATUS, (const unsigned char *)&val, 1);
+--		} else if (IS_EXTEND(reg)) {
+--			buf[0] |= (reg - ext0) & 0x7;   //EXT address
+--			buf[1] |= val;                  //EXT data
+--			err = l3_write(clnt, UDA1341_DATA0, (const unsigned char *)buf, 2);
+--		}
+--	} else
+--		printk(KERN_ERR "UDA1341 codec not active!\n");
+--	return err;
+--}
+--
+--static int snd_uda1341_codec_read(struct l3_client *clnt, unsigned short reg)
+--{
+--	unsigned char val;
+--	int err;
+--
+--	err = l3_read(clnt, reg, &val, 1);
+--	if (err == 1)
+--		// use just 6bits - the rest is address of the reg
+--		return val & 63;
+--	return err < 0 ? err : -EIO;
+--}
+--
+--static inline int snd_uda1341_valid_reg(struct l3_client *clnt, unsigned short reg)
+--{
+--	return reg < uda1341_reg_last;
+--}
+--
+--static int snd_uda1341_update_bits(struct l3_client *clnt, unsigned short reg,
+--				   unsigned short mask, unsigned short shift,
+--				   unsigned short value, int flush)
+--{
+--	int change;
+--	unsigned short old, new;
+--	struct uda1341 *uda = clnt->driver_data;
+--
+--#if 0
+--	printk(KERN_DEBUG "update_bits: reg: %s mask: %d shift: %d val: %d\n",
+--	       uda1341_reg_names[reg], mask, shift, value);
+--#endif
+--        
+--	if (!snd_uda1341_valid_reg(clnt, reg))
+--		return -EINVAL;
+--	spin_lock(&uda->reg_lock);
+--	old = uda->regs[reg];
+--	new = (old & ~(mask << shift)) | (value << shift);
+--	change = old != new;
+--	if (change) {
+--		if (flush) uda->write(clnt, reg, new);
+--		uda->regs[reg] = new;
+--	}
+--	spin_unlock(&uda->reg_lock);
+--	return change;
+--}
+--
+--static int snd_uda1341_cfg_write(struct l3_client *clnt, unsigned short what,
+--				 unsigned short value, int flush)
+--{
+--	struct uda1341 *uda = clnt->driver_data;
+--	int ret = 0;
+--#ifdef CONFIG_PM
+--	int reg;
+--#endif
+--
+--#if 0
+--	printk(KERN_DEBUG "cfg_write what: %d value: %d\n", what, value);
+--#endif
+--
+--	uda->cfg[what] = value;
+--        
+--	switch(what) {
+--	case CMD_RESET:
+--		ret = snd_uda1341_update_bits(clnt, data0_2, 1, 2, 1, flush);	// MUTE
+--		ret = snd_uda1341_update_bits(clnt, stat0, 1, 6, 1, flush);	// RESET
+--		ret = snd_uda1341_update_bits(clnt, stat0, 1, 6, 0, flush);	// RESTORE
+--		uda->cfg[CMD_RESET]=0;
+--		break;
+--	case CMD_FS:
+--		ret = snd_uda1341_update_bits(clnt, stat0, 3, 4, value, flush);
+--		break;
+--	case CMD_FORMAT:
+--		ret = snd_uda1341_update_bits(clnt, stat0, 7, 1, value, flush);
+--		break;
+--	case CMD_OGAIN:
+--		ret = snd_uda1341_update_bits(clnt, stat1, 1, 6, value, flush);
+--		break;
+--	case CMD_IGAIN:
+--		ret = snd_uda1341_update_bits(clnt, stat1, 1, 5, value, flush);
+--		break;
+--	case CMD_DAC:
+--		ret = snd_uda1341_update_bits(clnt, stat1, 1, 0, value, flush);
+--		break;
+--	case CMD_ADC:
+--		ret = snd_uda1341_update_bits(clnt, stat1, 1, 1, value, flush);
+--		break;
+--	case CMD_VOLUME:
+--		ret = snd_uda1341_update_bits(clnt, data0_0, 63, 0, value, flush);
+--		break;
+--	case CMD_BASS:
+--		ret = snd_uda1341_update_bits(clnt, data0_1, 15, 2, value, flush);
+--		break;
+--	case CMD_TREBBLE:
+--		ret = snd_uda1341_update_bits(clnt, data0_1, 3, 0, value, flush);
+--		break;
+--	case CMD_PEAK:
+--		ret = snd_uda1341_update_bits(clnt, data0_2, 1, 5, value, flush);
+--		break;
+--	case CMD_DEEMP:
+--		ret = snd_uda1341_update_bits(clnt, data0_2, 3, 3, value, flush);
+--		break;
+--	case CMD_MUTE:
+--		ret = snd_uda1341_update_bits(clnt, data0_2, 1, 2, value, flush);
+--		break;
+--	case CMD_FILTER:
+--		ret = snd_uda1341_update_bits(clnt, data0_2, 3, 0, value, flush);
+--		break;
+--	case CMD_CH1:
+--		ret = snd_uda1341_update_bits(clnt, ext0, 31, 0, value, flush);
+--		break;
+--	case CMD_CH2:
+--		ret = snd_uda1341_update_bits(clnt, ext1, 31, 0, value, flush);
+--		break;
+--	case CMD_MIC:
+--		ret = snd_uda1341_update_bits(clnt, ext2, 7, 2, value, flush);
+--		break;
+--	case CMD_MIXER:
+--		ret = snd_uda1341_update_bits(clnt, ext2, 3, 0, value, flush);
+--		break;
+--	case CMD_AGC:
+--		ret = snd_uda1341_update_bits(clnt, ext4, 1, 4, value, flush);
+--		break;
+--	case CMD_IG:
+--		ret = snd_uda1341_update_bits(clnt, ext4, 3, 0, value & 0x3, flush);
+--		ret = snd_uda1341_update_bits(clnt, ext5, 31, 0, value >> 2, flush);
+--		break;
+--	case CMD_AGC_TIME:
+--		ret = snd_uda1341_update_bits(clnt, ext6, 7, 2, value, flush);
+--		break;
+--	case CMD_AGC_LEVEL:
+--		ret = snd_uda1341_update_bits(clnt, ext6, 3, 0, value, flush);
+--		break;
+--#ifdef CONFIG_PM		
+--	case CMD_SUSPEND:
+--		for (reg = stat0; reg < uda1341_reg_last; reg++)
+--			uda->suspend_regs[reg] = uda->regs[reg];
+--		for (reg = 0; reg < CMD_LAST; reg++)
+--			uda->suspend_cfg[reg] = uda->cfg[reg];
+--		break;
+--	case CMD_RESUME:
+--		for (reg = stat0; reg < uda1341_reg_last; reg++)
+--			snd_uda1341_codec_write(clnt, reg, uda->suspend_regs[reg]);
+--		for (reg = 0; reg < CMD_LAST; reg++)
+--			uda->cfg[reg] = uda->suspend_cfg[reg];
+--		break;
+--#endif
+--	default:
+--		ret = -EINVAL;
+--		break;
+--	}
+--                
+--	if (!uda->active)
+--		printk(KERN_ERR "UDA1341 codec not active!\n");                
+--	return ret;
+--}
+--
+--/* }}} */
+--
+--/* {{{ Proc interface */
+--#ifdef CONFIG_PROC_FS
+--
+--static const char *format_names[] = {
+--	"I2S-bus",
+--	"LSB 16bits",
+--	"LSB 18bits",
+--	"LSB 20bits",
+--	"MSB",
+--	"in LSB 16bits/out MSB",
+--	"in LSB 18bits/out MSB",
+--	"in LSB 20bits/out MSB",        
+--};
+--
+--static const char *fs_names[] = {
+--	"512*fs",
+--	"384*fs",
+--	"256*fs",
+--	"Unused - bad value!",
+--};
+--
+--static const char* bass_values[][16] = {
+--	{"0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB", "0 dB",
+--	 "0 dB", "0 dB", "0 dB", "0 dB", "undefined", }, //flat
+--	{"0 dB", "2 dB", "4 dB", "6 dB", "8 dB", "10 dB", "12 dB", "14 dB", "16 dB", "18 dB", "18 dB",
+--	 "18 dB", "18 dB", "18 dB", "18 dB", "undefined",}, // min
+--	{"0 dB", "2 dB", "4 dB", "6 dB", "8 dB", "10 dB", "12 dB", "14 dB", "16 dB", "18 dB", "18 dB",
+--	 "18 dB", "18 dB", "18 dB", "18 dB", "undefined",}, // min
+--	{"0 dB", "2 dB", "4 dB", "6 dB", "8 dB", "10 dB", "12 dB", "14 dB", "16 dB", "18 dB", "20 dB",
+--	 "22 dB", "24 dB", "24 dB", "24 dB", "undefined",}, // max
+--};
+--
+--static const char *mic_sens_value[] = {
+--	"-3 dB", "0 dB", "3 dB", "9 dB", "15 dB", "21 dB", "27 dB", "not used",
+--};
+--
+--static const unsigned short AGC_atime[] = {
+--	11, 16, 11, 16, 21, 11, 16, 21,
+--};
+--
+--static const unsigned short AGC_dtime[] = {
+--	100, 100, 200, 200, 200, 400, 400, 400,
+--};
+--
+--static const char *AGC_level[] = {
+--	"-9.0", "-11.5", "-15.0", "-17.5",
+--};
+--
+--static const char *ig_small_value[] = {
+--	"-3.0", "-2.5", "-2.0", "-1.5", "-1.0", "-0.5",
+--};
+--
+--/*
+-- * this was computed as peak_value[i] = pow((63-i)*1.42,1.013)
+-- *
+-- * UDA1341 datasheet on page 21: Peak value (dB) = (Peak level - 63.5)*5*log2
+-- * There is an table with these values [level]=value: [3]=-90.31, [7]=-84.29
+-- * [61]=-2.78, [62] = -1.48, [63] = 0.0
+-- * I tried to compute it, but using but even using logarithm with base either 10 or 2
+-- * i was'n able to get values in the table from the formula. So I constructed another
+-- * formula (see above) to interpolate the values as good as possible. If there is some
+-- * mistake, please contact me on tomas.kasparek@seznam.cz. Thanks.
+-- * UDA1341TS datasheet is available at:
+-- *   http://www-us9.semiconductors.com/acrobat/datasheets/UDA1341TS_3.pdf 
+-- */
+--static const char *peak_value[] = {
+--	"-INF dB", "N.A.", "N.A", "90.31 dB", "N.A.", "N.A.", "N.A.", "-84.29 dB",
+--	"-82.65 dB", "-81.13 dB", "-79.61 dB", "-78.09 dB", "-76.57 dB", "-75.05 dB", "-73.53 dB",
+--	"-72.01 dB", "-70.49 dB", "-68.97 dB", "-67.45 dB", "-65.93 dB", "-64.41 dB", "-62.90 dB",
+--	"-61.38 dB", "-59.86 dB", "-58.35 dB", "-56.83 dB", "-55.32 dB", "-53.80 dB", "-52.29 dB",
+--	"-50.78 dB", "-49.26 dB", "-47.75 dB", "-46.24 dB", "-44.73 dB", "-43.22 dB", "-41.71 dB",
+--	"-40.20 dB", "-38.69 dB", "-37.19 dB", "-35.68 dB", "-34.17 dB", "-32.67 dB", "-31.17 dB",
+--	"-29.66 dB", "-28.16 dB", "-26.66 dB", "-25.16 dB", "-23.66 dB", "-22.16 dB", "-20.67 dB",
+--	"-19.17 dB", "-17.68 dB", "-16.19 dB", "-14.70 dB", "-13.21 dB", "-11.72 dB", "-10.24 dB",
+--	"-8.76 dB", "-7.28 dB", "-5.81 dB", "-4.34 dB", "-2.88 dB", "-1.43 dB", "0.00 dB",
+--};
+--
+--static void snd_uda1341_proc_read(struct snd_info_entry *entry, 
+--				  struct snd_info_buffer *buffer)
+--{
+--	struct l3_client *clnt = entry->private_data;
+--	struct uda1341 *uda = clnt->driver_data;
+--	int peak;
+--
+--	peak = snd_uda1341_codec_read(clnt, UDA1341_DATA1);
+--	if (peak < 0)
+--		peak = 0;
+--	
+--	snd_iprintf(buffer, "%s\n\n", uda->card->longname);
+--
+--	// for information about computed values see UDA1341TS datasheet pages 15 - 21
+--	snd_iprintf(buffer, "DAC power           : %s\n", uda->cfg[CMD_DAC] ? "on" : "off");
+--	snd_iprintf(buffer, "ADC power           : %s\n", uda->cfg[CMD_ADC] ? "on" : "off");
+-- 	snd_iprintf(buffer, "Clock frequency     : %s\n", fs_names[uda->cfg[CMD_FS]]);
+--	snd_iprintf(buffer, "Data format         : %s\n\n", format_names[uda->cfg[CMD_FORMAT]]);
+--
+--	snd_iprintf(buffer, "Filter mode         : %s\n", filter_names[uda->cfg[CMD_FILTER]]);
+--	snd_iprintf(buffer, "Mixer mode          : %s\n", mixer_names[uda->cfg[CMD_MIXER]]);
+--	snd_iprintf(buffer, "De-emphasis         : %s\n", deemp_names[uda->cfg[CMD_DEEMP]]);	
+--	snd_iprintf(buffer, "Peak detection pos. : %s\n", uda->cfg[CMD_PEAK] ? "after" : "before");
+--	snd_iprintf(buffer, "Peak value          : %s\n\n", peak_value[peak]);		
+--	
+--	snd_iprintf(buffer, "Automatic Gain Ctrl : %s\n", uda->cfg[CMD_AGC] ? "on" : "off");
+--	snd_iprintf(buffer, "AGC attack time     : %d ms\n", AGC_atime[uda->cfg[CMD_AGC_TIME]]);
+--	snd_iprintf(buffer, "AGC decay time      : %d ms\n", AGC_dtime[uda->cfg[CMD_AGC_TIME]]);
+--	snd_iprintf(buffer, "AGC output level    : %s dB\n\n", AGC_level[uda->cfg[CMD_AGC_LEVEL]]);
+--
+--	snd_iprintf(buffer, "Mute                : %s\n", uda->cfg[CMD_MUTE] ? "on" : "off");
+--
+--	if (uda->cfg[CMD_VOLUME] == 0)
+--		snd_iprintf(buffer, "Volume              : 0 dB\n");
+--	else if (uda->cfg[CMD_VOLUME] < 62)
+--		snd_iprintf(buffer, "Volume              : %d dB\n", -1*uda->cfg[CMD_VOLUME] +1);
+--	else
+--		snd_iprintf(buffer, "Volume              : -INF dB\n");
+--	snd_iprintf(buffer, "Bass                : %s\n", bass_values[uda->cfg[CMD_FILTER]][uda->cfg[CMD_BASS]]);
+--	snd_iprintf(buffer, "Trebble             : %d dB\n", uda->cfg[CMD_FILTER] ? 2*uda->cfg[CMD_TREBBLE] : 0);
+--	snd_iprintf(buffer, "Input Gain (6dB)    : %s\n", uda->cfg[CMD_IGAIN] ? "on" : "off");
+--	snd_iprintf(buffer, "Output Gain (6dB)   : %s\n", uda->cfg[CMD_OGAIN] ? "on" : "off");
+--	snd_iprintf(buffer, "Mic sensitivity     : %s\n", mic_sens_value[uda->cfg[CMD_MIC]]);
+--
+--	
+--	if(uda->cfg[CMD_CH1] < 31)
+--		snd_iprintf(buffer, "Mixer gain channel 1: -%d.%c dB\n",
+--			    ((uda->cfg[CMD_CH1] >> 1) * 3) + (uda->cfg[CMD_CH1] & 1),
+--			    uda->cfg[CMD_CH1] & 1 ? '5' : '0');
+--	else
+--		snd_iprintf(buffer, "Mixer gain channel 1: -INF dB\n");
+--	if(uda->cfg[CMD_CH2] < 31)
+--		snd_iprintf(buffer, "Mixer gain channel 2: -%d.%c dB\n",
+--			    ((uda->cfg[CMD_CH2] >> 1) * 3) + (uda->cfg[CMD_CH2] & 1),
+--			    uda->cfg[CMD_CH2] & 1 ? '5' : '0');
+--	else
+--		snd_iprintf(buffer, "Mixer gain channel 2: -INF dB\n");
+--
+--	if(uda->cfg[CMD_IG] > 5)
+--		snd_iprintf(buffer, "Input Amp. Gain ch 2: %d.%c dB\n",
+--			    (uda->cfg[CMD_IG] >> 1) -3, uda->cfg[CMD_IG] & 1 ? '5' : '0');
+--	else
+--		snd_iprintf(buffer, "Input Amp. Gain ch 2: %s dB\n",  ig_small_value[uda->cfg[CMD_IG]]);
+--}
+--
+--static void snd_uda1341_proc_regs_read(struct snd_info_entry *entry, 
+--				       struct snd_info_buffer *buffer)
+--{
+--	struct l3_client *clnt = entry->private_data;
+--	struct uda1341 *uda = clnt->driver_data;		
+--	int reg;
+--	char buf[12];
+--
+--	for (reg = 0; reg < uda1341_reg_last; reg ++) {
+--		if (reg == empty)
+--			continue;
+--		int2str_bin8(uda->regs[reg], buf);
+--		snd_iprintf(buffer, "%s = %s\n", uda1341_reg_names[reg], buf);
+--	}
+--
+--	int2str_bin8(snd_uda1341_codec_read(clnt, UDA1341_DATA1), buf);
+--	snd_iprintf(buffer, "DATA1 = %s\n", buf);
+--}
+--#endif /* CONFIG_PROC_FS */
+--
+--static void __devinit snd_uda1341_proc_init(struct snd_card *card, struct l3_client *clnt)
+--{
+--	struct snd_info_entry *entry;
+--
+--	if (! snd_card_proc_new(card, "uda1341", &entry))
+--		snd_info_set_text_ops(entry, clnt, snd_uda1341_proc_read);
+--	if (! snd_card_proc_new(card, "uda1341-regs", &entry))
+--		snd_info_set_text_ops(entry, clnt, snd_uda1341_proc_regs_read);
+--}
+--
+--/* }}} */
+--
+--/* {{{ Mixer controls setting */
+--
+--/* {{{ UDA1341 single functions */
+--
+--#define UDA1341_SINGLE(xname, where, reg, shift, mask, invert) \
+--{ .iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, .info = snd_uda1341_info_single, \
+--  .get = snd_uda1341_get_single, .put = snd_uda1341_put_single, \
+--  .private_value = where | (reg << 5) | (shift << 9) | (mask << 12) | (invert << 18) \
+--}
+--
+--static int snd_uda1341_info_single(struct snd_kcontrol *kcontrol,
+--				   struct snd_ctl_elem_info *uinfo)
+--{
+--	int mask = (kcontrol->private_value >> 12) & 63;
+--
+--	uinfo->type = mask == 1 ? SNDRV_CTL_ELEM_TYPE_BOOLEAN : SNDRV_CTL_ELEM_TYPE_INTEGER;
+--	uinfo->count = 1;
+--	uinfo->value.integer.min = 0;
+--	uinfo->value.integer.max = mask;
+--	return 0;
+--}
+--
+--static int snd_uda1341_get_single(struct snd_kcontrol *kcontrol,
+--				  struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;
+--	int where = kcontrol->private_value & 31;        
+--	int mask = (kcontrol->private_value >> 12) & 63;
+--	int invert = (kcontrol->private_value >> 18) & 1;
+--        
+--	ucontrol->value.integer.value[0] = uda->cfg[where];
+--	if (invert)
+--		ucontrol->value.integer.value[0] = mask - ucontrol->value.integer.value[0];
+--
+--	return 0;
+--}
+--
+--static int snd_uda1341_put_single(struct snd_kcontrol *kcontrol,
+--				  struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;
+--	int where = kcontrol->private_value & 31;        
+--	int reg = (kcontrol->private_value >> 5) & 15;
+--	int shift = (kcontrol->private_value >> 9) & 7;
+--	int mask = (kcontrol->private_value >> 12) & 63;
+--	int invert = (kcontrol->private_value >> 18) & 1;
+--	unsigned short val;
+--
+--	val = (ucontrol->value.integer.value[0] & mask);
+--	if (invert)
+--		val = mask - val;
+--
+--	uda->cfg[where] = val;
+--	return snd_uda1341_update_bits(clnt, reg, mask, shift, val, FLUSH);
+--}
+--
+--/* }}} */
+--
+--/* {{{ UDA1341 enum functions */
+--
+--#define UDA1341_ENUM(xname, where, reg, shift, mask, invert) \
+--{ .iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = xname, .info = snd_uda1341_info_enum, \
+--  .get = snd_uda1341_get_enum, .put = snd_uda1341_put_enum, \
+--  .private_value = where | (reg << 5) | (shift << 9) | (mask << 12) | (invert << 18) \
+--}
+--
+--static int snd_uda1341_info_enum(struct snd_kcontrol *kcontrol,
+--				 struct snd_ctl_elem_info *uinfo)
+--{
+--	int where = kcontrol->private_value & 31;
+--	const char **texts;
+--	
+--	// this register we don't handle this way
+--	if (!uda1341_enum_items[where])
+--		return -EINVAL;
+--
+--	uinfo->type = SNDRV_CTL_ELEM_TYPE_ENUMERATED;
+--	uinfo->count = 1;
+--	uinfo->value.enumerated.items = uda1341_enum_items[where];
+--
+--	if (uinfo->value.enumerated.item >= uda1341_enum_items[where])
+--		uinfo->value.enumerated.item = uda1341_enum_items[where] - 1;
+--
+--	texts = uda1341_enum_names[where];
+--	strcpy(uinfo->value.enumerated.name, texts[uinfo->value.enumerated.item]);
+--	return 0;
+--}
+--
+--static int snd_uda1341_get_enum(struct snd_kcontrol *kcontrol,
+--				struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;
+--	int where = kcontrol->private_value & 31;        
+--        
+--	ucontrol->value.enumerated.item[0] = uda->cfg[where];	
+--	return 0;
+--}
+--
+--static int snd_uda1341_put_enum(struct snd_kcontrol *kcontrol,
+--				struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;
+--	int where = kcontrol->private_value & 31;        
+--	int reg = (kcontrol->private_value >> 5) & 15;
+--	int shift = (kcontrol->private_value >> 9) & 7;
+--	int mask = (kcontrol->private_value >> 12) & 63;
+--
+--	uda->cfg[where] = (ucontrol->value.enumerated.item[0] & mask);
+--	
+--	return snd_uda1341_update_bits(clnt, reg, mask, shift, uda->cfg[where], FLUSH);
+--}
+--
+--/* }}} */
+--
+--/* {{{ UDA1341 2regs functions */
+--
+--#define UDA1341_2REGS(xname, where, reg_1, reg_2, shift_1, shift_2, mask_1, mask_2, invert) \
+--{ .iface = SNDRV_CTL_ELEM_IFACE_MIXER, .name = (xname), .info = snd_uda1341_info_2regs, \
+--  .get = snd_uda1341_get_2regs, .put = snd_uda1341_put_2regs, \
+--  .private_value = where | (reg_1 << 5) | (reg_2 << 9) | (shift_1 << 13) | (shift_2 << 16) | \
+--                         (mask_1 << 19) | (mask_2 << 25) | (invert << 31) \
+--}
+--
+--
+--static int snd_uda1341_info_2regs(struct snd_kcontrol *kcontrol,
+--				  struct snd_ctl_elem_info *uinfo)
+--{
+--	int mask_1 = (kcontrol->private_value >> 19) & 63;
+--	int mask_2 = (kcontrol->private_value >> 25) & 63;
+--	int mask;
+--        
+--	mask = (mask_2 + 1) * (mask_1 + 1) - 1;
+--	uinfo->type = mask == 1 ? SNDRV_CTL_ELEM_TYPE_BOOLEAN : SNDRV_CTL_ELEM_TYPE_INTEGER;
+--	uinfo->count = 1;
+--	uinfo->value.integer.min = 0;
+--	uinfo->value.integer.max = mask;
+--	return 0;
+--}
+--
+--static int snd_uda1341_get_2regs(struct snd_kcontrol *kcontrol,
+--				 struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;
+--	int where = kcontrol->private_value & 31;
+--	int mask_1 = (kcontrol->private_value >> 19) & 63;
+--	int mask_2 = (kcontrol->private_value >> 25) & 63;        
+--	int invert = (kcontrol->private_value >> 31) & 1;
+--	int mask;
+--
+--	mask = (mask_2 + 1) * (mask_1 + 1) - 1;
+--
+--	ucontrol->value.integer.value[0] = uda->cfg[where];
+--	if (invert)
+--		ucontrol->value.integer.value[0] = mask - ucontrol->value.integer.value[0];
+--	return 0;
+--}
+--
+--static int snd_uda1341_put_2regs(struct snd_kcontrol *kcontrol,
+--				 struct snd_ctl_elem_value *ucontrol)
+--{
+--	struct l3_client *clnt = snd_kcontrol_chip(kcontrol);
+--	struct uda1341 *uda = clnt->driver_data;        
+--	int where = kcontrol->private_value & 31;        
+--	int reg_1 = (kcontrol->private_value >> 5) & 15;
+--	int reg_2 = (kcontrol->private_value >> 9) & 15;        
+--	int shift_1 = (kcontrol->private_value >> 13) & 7;
+--	int shift_2 = (kcontrol->private_value >> 16) & 7;
+--	int mask_1 = (kcontrol->private_value >> 19) & 63;
+--	int mask_2 = (kcontrol->private_value >> 25) & 63;        
+--	int invert = (kcontrol->private_value >> 31) & 1;
+--	int mask;
+--	unsigned short val1, val2, val;
+--
+--	val = ucontrol->value.integer.value[0];
+--         
+--	mask = (mask_2 + 1) * (mask_1 + 1) - 1;
+--
+--	val1 = val & mask_1;
+--	val2 = (val / (mask_1 + 1)) & mask_2;        
+--
+--	if (invert) {
+--		val1 = mask_1 - val1;
+--		val2 = mask_2 - val2;
+--	}
+--
+--	uda->cfg[where] = invert ? mask - val : val;
+--        
+--	//FIXME - return value
+--	snd_uda1341_update_bits(clnt, reg_1, mask_1, shift_1, val1, FLUSH);
+--	return snd_uda1341_update_bits(clnt, reg_2, mask_2, shift_2, val2, FLUSH);
+--}
+--
+--/* }}} */
+--  
+--static struct snd_kcontrol_new snd_uda1341_controls[] = {
+--	UDA1341_SINGLE("Master Playback Switch", CMD_MUTE, data0_2, 2, 1, 1),
+--	UDA1341_SINGLE("Master Playback Volume", CMD_VOLUME, data0_0, 0, 63, 1),
+--
+--	UDA1341_SINGLE("Bass Playback Volume", CMD_BASS, data0_1, 2, 15, 0),
+--	UDA1341_SINGLE("Treble Playback Volume", CMD_TREBBLE, data0_1, 0, 3, 0),
+--
+--	UDA1341_SINGLE("Input Gain Switch", CMD_IGAIN, stat1, 5, 1, 0),
+--	UDA1341_SINGLE("Output Gain Switch", CMD_OGAIN, stat1, 6, 1, 0),
+--
+--	UDA1341_SINGLE("Mixer Gain Channel 1 Volume", CMD_CH1, ext0, 0, 31, 1),
+--	UDA1341_SINGLE("Mixer Gain Channel 2 Volume", CMD_CH2, ext1, 0, 31, 1),
+--
+--	UDA1341_SINGLE("Mic Sensitivity Volume", CMD_MIC, ext2, 2, 7, 0),
+--
+--	UDA1341_SINGLE("AGC Output Level", CMD_AGC_LEVEL, ext6, 0, 3, 0),
+--	UDA1341_SINGLE("AGC Time Constant", CMD_AGC_TIME, ext6, 2, 7, 0),
+--	UDA1341_SINGLE("AGC Time Constant Switch", CMD_AGC, ext4, 4, 1, 0),
+--
+--	UDA1341_SINGLE("DAC Power", CMD_DAC, stat1, 0, 1, 0),
+--	UDA1341_SINGLE("ADC Power", CMD_ADC, stat1, 1, 1, 0),
+--
+--	UDA1341_ENUM("Peak detection", CMD_PEAK, data0_2, 5, 1, 0),
+--	UDA1341_ENUM("De-emphasis", CMD_DEEMP, data0_2, 3, 3, 0),
+--	UDA1341_ENUM("Mixer mode", CMD_MIXER, ext2, 0, 3, 0),
+--	UDA1341_ENUM("Filter mode", CMD_FILTER, data0_2, 0, 3, 0),
+--
+--	UDA1341_2REGS("Gain Input Amplifier Gain (channel 2)", CMD_IG, ext4, ext5, 0, 0, 3, 31, 0),
+--};
+--
+--static void uda1341_free(struct l3_client *clnt)
+--{
+--	l3_detach_client(clnt); // calls kfree for driver_data (struct uda1341)
+--	kfree(clnt);
+--}
+--
+--static int uda1341_dev_free(struct snd_device *device)
+--{
+--	struct l3_client *clnt = device->device_data;
+--	uda1341_free(clnt);
+--	return 0;
+--}
+--
+--int __init snd_chip_uda1341_mixer_new(struct snd_card *card, struct l3_client **clntp)
+--{
+--	static struct snd_device_ops ops = {
+--		.dev_free =     uda1341_dev_free,
+--	};
+--	struct l3_client *clnt;
+--	int idx, err;
+--
+--	if (snd_BUG_ON(!card))
+--		return -EINVAL;
+--
+--	clnt = kzalloc(sizeof(*clnt), GFP_KERNEL);
+--	if (clnt == NULL)
+--		return -ENOMEM;
+--         
+--	if ((err = l3_attach_client(clnt, "l3-bit-sa1100-gpio", UDA1341_ALSA_NAME))) {
+--		kfree(clnt);
+--		return err;
+--	}
+--
+--	for (idx = 0; idx < ARRAY_SIZE(snd_uda1341_controls); idx++) {
+--		if ((err = snd_ctl_add(card, snd_ctl_new1(&snd_uda1341_controls[idx], clnt))) < 0) {
+--			uda1341_free(clnt);
+--			return err;
+--		}
+--	}
+--
+--	if ((err = snd_device_new(card, SNDRV_DEV_CODEC, clnt, &ops)) < 0) {
+--		uda1341_free(clnt);
+--		return err;
+--	}
+--
+--	*clntp = clnt;
+--	strcpy(card->mixername, "UDA1341TS Mixer");
+--	((struct uda1341 *)clnt->driver_data)->card = card;
+--        
+--	snd_uda1341_proc_init(card, clnt);
+--        
+--	return 0;
+--}
+--
+--/* }}} */
+--
+--/* {{{ L3 operations */
+--
+--static int uda1341_attach(struct l3_client *clnt)
+--{
+--	struct uda1341 *uda;
+--
+--	uda = kzalloc(sizeof(*uda), 0, GFP_KERNEL);
+--	if (!uda)
+--		return -ENOMEM;
+--
+--	/* init fixed parts of my copy of registers */
+--	uda->regs[stat0]   = STAT0;
+--	uda->regs[stat1]   = STAT1;
+--
+--	uda->regs[data0_0] = DATA0_0;
+--	uda->regs[data0_1] = DATA0_1;
+--	uda->regs[data0_2] = DATA0_2;
+--
+--	uda->write = snd_uda1341_codec_write;
+--	uda->read = snd_uda1341_codec_read;
+--  
+--	spin_lock_init(&uda->reg_lock);
+--        
+--	clnt->driver_data = uda;
+--	return 0;
+--}
+--
+--static void uda1341_detach(struct l3_client *clnt)
+--{
+--	kfree(clnt->driver_data);
+--}
+--
+--static int
+--uda1341_command(struct l3_client *clnt, int cmd, void *arg)
+--{
+--	if (cmd != CMD_READ_REG)
+--		return snd_uda1341_cfg_write(clnt, cmd, (int) arg, FLUSH);
+--
+--	return snd_uda1341_codec_read(clnt, (int) arg);
+--}
+--
+--static int uda1341_open(struct l3_client *clnt)
+--{
+--	struct uda1341 *uda = clnt->driver_data;
+--
+--	uda->active = 1;
+--
+--	/* init default configuration */
+--	snd_uda1341_cfg_write(clnt, CMD_RESET, 0, REGS_ONLY);
+--	snd_uda1341_cfg_write(clnt, CMD_FS, F256, FLUSH);       // unknown state after reset
+--	snd_uda1341_cfg_write(clnt, CMD_FORMAT, LSB16, FLUSH);  // unknown state after reset
+--	snd_uda1341_cfg_write(clnt, CMD_OGAIN, ON, FLUSH);      // default off after reset
+--	snd_uda1341_cfg_write(clnt, CMD_IGAIN, ON, FLUSH);      // default off after reset
+--	snd_uda1341_cfg_write(clnt, CMD_DAC, ON, FLUSH);	// ??? default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_ADC, ON, FLUSH);	// ??? default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_VOLUME, 20, FLUSH);     // default 0dB after reset
+--	snd_uda1341_cfg_write(clnt, CMD_BASS, 0, REGS_ONLY);    // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_TREBBLE, 0, REGS_ONLY); // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_PEAK, AFTER, REGS_ONLY);// default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_DEEMP, NONE, REGS_ONLY);// default value after reset
+--	//at this moment should be QMUTED by h3600_audio_init
+--	snd_uda1341_cfg_write(clnt, CMD_MUTE, OFF, REGS_ONLY);  // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_FILTER, MAX, FLUSH);    // defaul flat after reset
+--	snd_uda1341_cfg_write(clnt, CMD_CH1, 31, FLUSH);        // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_CH2, 4, FLUSH);         // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_MIC, 4, FLUSH);         // default 0dB after reset
+--	snd_uda1341_cfg_write(clnt, CMD_MIXER, MIXER, FLUSH);   // default doub.dif.mode          
+--	snd_uda1341_cfg_write(clnt, CMD_AGC, OFF, FLUSH);       // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_IG, 0, FLUSH);          // unknown state after reset
+--	snd_uda1341_cfg_write(clnt, CMD_AGC_TIME, 0, FLUSH);    // default value after reset
+--	snd_uda1341_cfg_write(clnt, CMD_AGC_LEVEL, 0, FLUSH);   // default value after reset
+--
+--	return 0;
+--}
+--
+--static void uda1341_close(struct l3_client *clnt)
+--{
+--	struct uda1341 *uda = clnt->driver_data;
+--
+--	uda->active = 0;
+--}
+--
+--/* }}} */
+--
+--/* {{{ Module and L3 initialization */
+--
+--static struct l3_ops uda1341_ops = {
+--	.open =		uda1341_open,
+--	.command =	uda1341_command,
+--	.close =	uda1341_close,
+--};
+--
+--static struct l3_driver uda1341_driver = {
+--	.name =		UDA1341_ALSA_NAME,
+--	.attach_client = uda1341_attach,
+--	.detach_client = uda1341_detach,
+--	.ops =		&uda1341_ops,
+--	.owner =	THIS_MODULE,
+--};
+--
+--static int __init uda1341_init(void)
+--{
+--	return l3_add_driver(&uda1341_driver);
+--}
+--
+--static void __exit uda1341_exit(void)
+--{
+--	l3_del_driver(&uda1341_driver);
+--}
+--
+--module_init(uda1341_init);
+--module_exit(uda1341_exit);
+--
+--MODULE_AUTHOR("Tomas Kasparek <tomas.kasparek@seznam.cz>");
+--MODULE_LICENSE("GPL");
+--MODULE_DESCRIPTION("Philips UDA1341 CODEC driver for ALSA");
+--MODULE_SUPPORTED_DEVICE("{{UDA1341,UDA1341TS}}");
+--
+--EXPORT_SYMBOL(snd_chip_uda1341_mixer_new);
+--
+--/* }}} */
+--
+--/*
+-- * Local variables:
+-- * indent-tabs-mode: t
+-- * End:
+-- */
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0009-mtd-remove-obsolete-ipaq-flash-driver.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0009-mtd-remove-obsolete-ipaq-flash-driver.patch
+deleted file mode 100644
+index 1780d83..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0009-mtd-remove-obsolete-ipaq-flash-driver.patch
++++ /dev/null
+@@ -1,520 +0,0 @@
+-From 3d9cfe292cb6a5e54cceefc3b88b2caca4c49d8b Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 20 Feb 2009 16:19:21 +0300
+-Subject: [PATCH 09/28] mtd: remove obsolete ipaq-flash driver
+-
+-This driver seems to be obsolete and broken for a long time.
+-It depends on CONFIG_IPAQ_HANDHELD that simply doesn't exists
+-anywhere in kernel. Also, it seems that none of machines it
+-claims to support have any use of it:
+- SA11xx-based iPAQs (h3100/h3600) use sa1100-flash
+- iPAQ h5000 uses physmap-flash
+- Jornada 720 uses sa1100-flash
+- Jornada 560 and iPAQ h1910 are not in mainline
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/mtd/maps/Kconfig      |    6 -
+- drivers/mtd/maps/Makefile     |    1 -
+- drivers/mtd/maps/ipaq-flash.c |  460 -----------------------------------------
+- 3 files changed, 0 insertions(+), 467 deletions(-)
+- delete mode 100644 drivers/mtd/maps/ipaq-flash.c
+-
+-diff --git a/drivers/mtd/maps/Kconfig b/drivers/mtd/maps/Kconfig
+-index 043d50f..feb4485 100644
+---- a/drivers/mtd/maps/Kconfig
+-+++ b/drivers/mtd/maps/Kconfig
+-@@ -377,12 +377,6 @@ config MTD_SA1100
+- 	  the SA1100 and SA1110, including the Assabet and the Compaq iPAQ.
+- 	  If you have such a board, say 'Y'.
+- 
+--config MTD_IPAQ
+--	tristate "CFI Flash device mapped on Compaq/HP iPAQ"
+--	depends on IPAQ_HANDHELD && MTD_CFI
+--	help
+--	  This provides a driver for the on-board flash of the iPAQ.
+--
+- config MTD_DC21285
+- 	tristate "CFI Flash device mapped on DC21285 Footbridge"
+- 	depends on MTD_CFI && ARCH_FOOTBRIDGE && MTD_COMPLEX_MAPPINGS
+-diff --git a/drivers/mtd/maps/Makefile b/drivers/mtd/maps/Makefile
+-index 6d9ba35..b3dec28 100644
+---- a/drivers/mtd/maps/Makefile
+-+++ b/drivers/mtd/maps/Makefile
+-@@ -30,7 +30,6 @@ obj-$(CONFIG_MTD_PCMCIA)	+= pcmciamtd.o
+- obj-$(CONFIG_MTD_RPXLITE)	+= rpxlite.o
+- obj-$(CONFIG_MTD_TQM8XXL)	+= tqm8xxl.o
+- obj-$(CONFIG_MTD_SA1100)	+= sa1100-flash.o
+--obj-$(CONFIG_MTD_IPAQ)		+= ipaq-flash.o
+- obj-$(CONFIG_MTD_SBC_GXX)	+= sbc_gxx.o
+- obj-$(CONFIG_MTD_SC520CDP)	+= sc520cdp.o
+- obj-$(CONFIG_MTD_NETSC520)	+= netsc520.o
+-diff --git a/drivers/mtd/maps/ipaq-flash.c b/drivers/mtd/maps/ipaq-flash.c
+-deleted file mode 100644
+-index 748c85f..0000000
+---- a/drivers/mtd/maps/ipaq-flash.c
+-+++ /dev/null
+-@@ -1,460 +0,0 @@
+--/*
+-- * Flash memory access on iPAQ Handhelds (either SA1100 or PXA250 based)
+-- *
+-- * (C) 2000 Nicolas Pitre <nico@cam.org>
+-- * (C) 2002 Hewlett-Packard Company <jamey.hicks@hp.com>
+-- * (C) 2003 Christian Pellegrin <chri@ascensit.com>, <chri@infis.univ.ts.it>: concatenation of multiple flashes
+-- */
+--
+--#include <linux/module.h>
+--#include <linux/types.h>
+--#include <linux/kernel.h>
+--#include <linux/spinlock.h>
+--#include <linux/init.h>
+--#include <linux/slab.h>
+--#include <asm/page.h>
+--#include <asm/mach-types.h>
+--#include <asm/system.h>
+--#include <asm/errno.h>
+--
+--#include <linux/mtd/mtd.h>
+--#include <linux/mtd/map.h>
+--#include <linux/mtd/partitions.h>
+--#ifdef CONFIG_MTD_CONCAT
+--#include <linux/mtd/concat.h>
+--#endif
+--
+--#include <mach/hardware.h>
+--#include <mach/h3600.h>
+--#include <asm/io.h>
+--
+--
+--#ifndef CONFIG_IPAQ_HANDHELD
+--#error This is for iPAQ Handhelds only
+--#endif
+--#ifdef CONFIG_SA1100_JORNADA56X
+--
+--static void jornada56x_set_vpp(struct map_info *map, int vpp)
+--{
+--	if (vpp)
+--		GPSR = GPIO_GPIO26;
+--	else
+--		GPCR = GPIO_GPIO26;
+--	GPDR |= GPIO_GPIO26;
+--}
+--
+--#endif
+--
+--#ifdef CONFIG_SA1100_JORNADA720
+--
+--static void jornada720_set_vpp(struct map_info *map, int vpp)
+--{
+--	if (vpp)
+--		PPSR |= 0x80;
+--	else
+--		PPSR &= ~0x80;
+--	PPDR |= 0x80;
+--}
+--
+--#endif
+--
+--#define MAX_IPAQ_CS 2		/* Number of CS we are going to test */
+--
+--#define IPAQ_MAP_INIT(X) \
+--	{ \
+--		name:		"IPAQ flash " X, \
+--	}
+--
+--
+--static struct map_info ipaq_map[MAX_IPAQ_CS] = {
+--	IPAQ_MAP_INIT("bank 1"),
+--	IPAQ_MAP_INIT("bank 2")
+--};
+--
+--static struct mtd_info *my_sub_mtd[MAX_IPAQ_CS] = {
+--	NULL,
+--	NULL
+--};
+--
+--/*
+-- * Here are partition information for all known IPAQ-based devices.
+-- * See include/linux/mtd/partitions.h for definition of the mtd_partition
+-- * structure.
+-- *
+-- * The *_max_flash_size is the maximum possible mapped flash size which
+-- * is not necessarily the actual flash size.  It must be no more than
+-- * the value specified in the "struct map_desc *_io_desc" mapping
+-- * definition for the corresponding machine.
+-- *
+-- * Please keep these in alphabetical order, and formatted as per existing
+-- * entries.  Thanks.
+-- */
+--
+--#ifdef CONFIG_IPAQ_HANDHELD
+--static unsigned long h3xxx_max_flash_size = 0x04000000;
+--static struct mtd_partition h3xxx_partitions[] = {
+--	{
+--		name:		"H3XXX boot firmware",
+--#ifndef CONFIG_LAB
+--		size:		0x00040000,
+--#else
+--		size:		0x00080000,
+--#endif
+--		offset:		0,
+--#ifndef CONFIG_LAB
+--		mask_flags:	MTD_WRITEABLE,  /* force read-only */
+--#endif
+--	},
+--	{
+--		name:		"H3XXX root jffs2",
+--#ifndef CONFIG_LAB
+--		size:		0x2000000 - 2*0x40000, /* Warning, this is fixed later */
+--		offset:		0x00040000,
+--#else
+--		size:		0x2000000 - 0x40000 - 0x80000, /* Warning, this is fixed later */
+--		offset:		0x00080000,
+--#endif
+--	},
+--	{
+--		name:		"asset",
+--		size:		0x40000,
+--		offset:		0x2000000 - 0x40000, /* Warning, this is fixed later */
+--		mask_flags:	MTD_WRITEABLE,  /* force read-only */
+--	}
+--};
+--
+--#ifndef CONFIG_MTD_CONCAT
+--static struct mtd_partition h3xxx_partitions_bank2[] = {
+--	/* this is used only on 2 CS machines when concat is not present */
+--	{
+--		name:		"second H3XXX root jffs2",
+--		size:		0x1000000 - 0x40000, /* Warning, this is fixed later */
+--		offset:		0x00000000,
+--	},
+--	{
+--		name:		"second asset",
+--		size:		0x40000,
+--		offset:		0x1000000 - 0x40000, /* Warning, this is fixed later */
+--		mask_flags:	MTD_WRITEABLE,  /* force read-only */
+--	}
+--};
+--#endif
+--
+--static DEFINE_SPINLOCK(ipaq_vpp_lock);
+--
+--static void h3xxx_set_vpp(struct map_info *map, int vpp)
+--{
+--	static int nest = 0;
+--
+--	spin_lock(&ipaq_vpp_lock);
+--	if (vpp)
+--		nest++;
+--	else
+--		nest--;
+--	if (nest)
+--		assign_h3600_egpio(IPAQ_EGPIO_VPP_ON, 1);
+--	else
+--		assign_h3600_egpio(IPAQ_EGPIO_VPP_ON, 0);
+--	spin_unlock(&ipaq_vpp_lock);
+--}
+--
+--#endif
+--
+--#if defined(CONFIG_SA1100_JORNADA56X) || defined(CONFIG_SA1100_JORNADA720)
+--static unsigned long jornada_max_flash_size = 0x02000000;
+--static struct mtd_partition jornada_partitions[] = {
+--	{
+--		name:		"Jornada boot firmware",
+--		size:		0x00040000,
+--		offset:		0,
+--		mask_flags:	MTD_WRITEABLE,  /* force read-only */
+--	}, {
+--		name:		"Jornada root jffs2",
+--		size:		MTDPART_SIZ_FULL,
+--		offset:		0x00040000,
+--	}
+--};
+--#endif
+--
+--
+--static struct mtd_partition *parsed_parts;
+--static struct mtd_info *mymtd;
+--
+--static unsigned long cs_phys[] = {
+--#ifdef CONFIG_ARCH_SA1100
+--	SA1100_CS0_PHYS,
+--	SA1100_CS1_PHYS,
+--	SA1100_CS2_PHYS,
+--	SA1100_CS3_PHYS,
+--	SA1100_CS4_PHYS,
+--	SA1100_CS5_PHYS,
+--#else
+--	PXA_CS0_PHYS,
+--	PXA_CS1_PHYS,
+--	PXA_CS2_PHYS,
+--	PXA_CS3_PHYS,
+--	PXA_CS4_PHYS,
+--	PXA_CS5_PHYS,
+--#endif
+--};
+--
+--static const char *part_probes[] = { "cmdlinepart", "RedBoot", NULL };
+--
+--static int __init h1900_special_case(void);
+--
+--static int __init ipaq_mtd_init(void)
+--{
+--	struct mtd_partition *parts = NULL;
+--	int nb_parts = 0;
+--	int parsed_nr_parts = 0;
+--	const char *part_type;
+--	int i; /* used when we have >1 flash chips */
+--	unsigned long tot_flashsize = 0; /* used when we have >1 flash chips */
+--
+--	/* Default flash bankwidth */
+--	// ipaq_map.bankwidth = (MSC0 & MSC_RBW) ? 2 : 4;
+--
+--	if (machine_is_h1900())
+--	{
+--		/* For our intents, the h1900 is not a real iPAQ, so we special-case it. */
+--		return h1900_special_case();
+--	}
+--
+--	if (machine_is_h3100() || machine_is_h1900())
+--		for(i=0; i<MAX_IPAQ_CS; i++)
+--			ipaq_map[i].bankwidth = 2;
+--	else
+--		for(i=0; i<MAX_IPAQ_CS; i++)
+--			ipaq_map[i].bankwidth = 4;
+--
+--	/*
+--	 * Static partition definition selection
+--	 */
+--	part_type = "static";
+--
+--	simple_map_init(&ipaq_map[0]);
+--	simple_map_init(&ipaq_map[1]);
+--
+--#ifdef CONFIG_IPAQ_HANDHELD
+--	if (machine_is_ipaq()) {
+--		parts = h3xxx_partitions;
+--		nb_parts = ARRAY_SIZE(h3xxx_partitions);
+--		for(i=0; i<MAX_IPAQ_CS; i++) {
+--			ipaq_map[i].size = h3xxx_max_flash_size;
+--			ipaq_map[i].set_vpp = h3xxx_set_vpp;
+--			ipaq_map[i].phys = cs_phys[i];
+--			ipaq_map[i].virt = ioremap(cs_phys[i], 0x04000000);
+--			if (machine_is_h3100 () || machine_is_h1900())
+--				ipaq_map[i].bankwidth = 2;
+--		}
+--		if (machine_is_h3600()) {
+--			/* No asset partition here */
+--			h3xxx_partitions[1].size += 0x40000;
+--			nb_parts--;
+--		}
+--	}
+--#endif
+--#ifdef CONFIG_ARCH_H5400
+--	if (machine_is_h5400()) {
+--		ipaq_map[0].size = 0x02000000;
+--		ipaq_map[1].size = 0x02000000;
+--		ipaq_map[1].phys = 0x02000000;
+--		ipaq_map[1].virt = ipaq_map[0].virt + 0x02000000;
+--	}
+--#endif
+--#ifdef CONFIG_ARCH_H1900
+--	if (machine_is_h1900()) {
+--		ipaq_map[0].size = 0x00400000;
+--		ipaq_map[1].size = 0x02000000;
+--		ipaq_map[1].phys = 0x00080000;
+--		ipaq_map[1].virt = ipaq_map[0].virt + 0x00080000;
+--	}
+--#endif
+--
+--#ifdef CONFIG_SA1100_JORNADA56X
+--	if (machine_is_jornada56x()) {
+--		parts = jornada_partitions;
+--		nb_parts = ARRAY_SIZE(jornada_partitions);
+--		ipaq_map[0].size = jornada_max_flash_size;
+--		ipaq_map[0].set_vpp = jornada56x_set_vpp;
+--		ipaq_map[0].virt = (__u32)ioremap(0x0, 0x04000000);
+--	}
+--#endif
+--#ifdef CONFIG_SA1100_JORNADA720
+--	if (machine_is_jornada720()) {
+--		parts = jornada_partitions;
+--		nb_parts = ARRAY_SIZE(jornada_partitions);
+--		ipaq_map[0].size = jornada_max_flash_size;
+--		ipaq_map[0].set_vpp = jornada720_set_vpp;
+--	}
+--#endif
+--
+--
+--	if (machine_is_ipaq()) { /* for iPAQs only */
+--		for(i=0; i<MAX_IPAQ_CS; i++) {
+--			printk(KERN_NOTICE "iPAQ flash: probing %d-bit flash bus, window=%lx with CFI.\n", ipaq_map[i].bankwidth*8, ipaq_map[i].virt);
+--			my_sub_mtd[i] = do_map_probe("cfi_probe", &ipaq_map[i]);
+--			if (!my_sub_mtd[i]) {
+--				printk(KERN_NOTICE "iPAQ flash: probing %d-bit flash bus, window=%lx with JEDEC.\n", ipaq_map[i].bankwidth*8, ipaq_map[i].virt);
+--				my_sub_mtd[i] = do_map_probe("jedec_probe", &ipaq_map[i]);
+--			}
+--			if (!my_sub_mtd[i]) {
+--				printk(KERN_NOTICE "iPAQ flash: failed to find flash.\n");
+--				if (i)
+--					break;
+--				else
+--					return -ENXIO;
+--			} else
+--				printk(KERN_NOTICE "iPAQ flash: found %d bytes\n", my_sub_mtd[i]->size);
+--
+--			/* do we really need this debugging? --joshua 20030703 */
+--			// printk("my_sub_mtd[%d]=%p\n", i, my_sub_mtd[i]);
+--			my_sub_mtd[i]->owner = THIS_MODULE;
+--			tot_flashsize += my_sub_mtd[i]->size;
+--		}
+--#ifdef CONFIG_MTD_CONCAT
+--		/* fix the asset location */
+--#	ifdef CONFIG_LAB
+--		h3xxx_partitions[1].size = tot_flashsize - 0x40000 - 0x80000 /* extra big boot block */;
+--#	else
+--		h3xxx_partitions[1].size = tot_flashsize - 2 * 0x40000;
+--#	endif
+--		h3xxx_partitions[2].offset = tot_flashsize - 0x40000;
+--		/* and concat the devices */
+--		mymtd = mtd_concat_create(&my_sub_mtd[0], i,
+--					  "ipaq");
+--		if (!mymtd) {
+--			printk("Cannot create iPAQ concat device\n");
+--			return -ENXIO;
+--		}
+--#else
+--		mymtd = my_sub_mtd[0];
+--
+--		/*
+--		 *In the very near future, command line partition parsing
+--		 * will use the device name as 'mtd-id' instead of a value
+--		 * passed to the parse_cmdline_partitions() routine. Since
+--		 * the bootldr says 'ipaq', make sure it continues to work.
+--		 */
+--		mymtd->name = "ipaq";
+--
+--		if ((machine_is_h3600())) {
+--#	ifdef CONFIG_LAB
+--			h3xxx_partitions[1].size = my_sub_mtd[0]->size - 0x80000;
+--#	else
+--			h3xxx_partitions[1].size = my_sub_mtd[0]->size - 0x40000;
+--#	endif
+--			nb_parts = 2;
+--		} else {
+--#	ifdef CONFIG_LAB
+--			h3xxx_partitions[1].size = my_sub_mtd[0]->size - 0x40000 - 0x80000; /* extra big boot block */
+--#	else
+--			h3xxx_partitions[1].size = my_sub_mtd[0]->size - 2*0x40000;
+--#	endif
+--			h3xxx_partitions[2].offset = my_sub_mtd[0]->size - 0x40000;
+--		}
+--
+--		if (my_sub_mtd[1]) {
+--#	ifdef CONFIG_LAB
+--			h3xxx_partitions_bank2[0].size = my_sub_mtd[1]->size - 0x80000;
+--#	else
+--			h3xxx_partitions_bank2[0].size = my_sub_mtd[1]->size - 0x40000;
+--#	endif
+--			h3xxx_partitions_bank2[1].offset = my_sub_mtd[1]->size - 0x40000;
+--		}
+--#endif
+--	}
+--	else {
+--		/*
+--		 * Now let's probe for the actual flash.  Do it here since
+--		 * specific machine settings might have been set above.
+--		 */
+--		printk(KERN_NOTICE "IPAQ flash: probing %d-bit flash bus, window=%lx\n", ipaq_map[0].bankwidth*8, ipaq_map[0].virt);
+--		mymtd = do_map_probe("cfi_probe", &ipaq_map[0]);
+--		if (!mymtd)
+--			return -ENXIO;
+--		mymtd->owner = THIS_MODULE;
+--	}
+--
+--
+--	/*
+--	 * Dynamic partition selection stuff (might override the static ones)
+--	 */
+--
+--	 i = parse_mtd_partitions(mymtd, part_probes, &parsed_parts, 0);
+--
+--	 if (i > 0) {
+--		 nb_parts = parsed_nr_parts = i;
+--		 parts = parsed_parts;
+--		 part_type = "dynamic";
+--	 }
+--
+--	 if (!parts) {
+--		 printk(KERN_NOTICE "IPAQ flash: no partition info available, registering whole flash at once\n");
+--		 add_mtd_device(mymtd);
+--#ifndef CONFIG_MTD_CONCAT
+--		 if (my_sub_mtd[1])
+--			 add_mtd_device(my_sub_mtd[1]);
+--#endif
+--	 } else {
+--		 printk(KERN_NOTICE "Using %s partition definition\n", part_type);
+--		 add_mtd_partitions(mymtd, parts, nb_parts);
+--#ifndef CONFIG_MTD_CONCAT
+--		 if (my_sub_mtd[1])
+--			 add_mtd_partitions(my_sub_mtd[1], h3xxx_partitions_bank2, ARRAY_SIZE(h3xxx_partitions_bank2));
+--#endif
+--	 }
+--
+--	 return 0;
+--}
+--
+--static void __exit ipaq_mtd_cleanup(void)
+--{
+--	int i;
+--
+--	if (mymtd) {
+--		del_mtd_partitions(mymtd);
+--#ifndef CONFIG_MTD_CONCAT
+--		if (my_sub_mtd[1])
+--			del_mtd_partitions(my_sub_mtd[1]);
+--#endif
+--		map_destroy(mymtd);
+--#ifdef CONFIG_MTD_CONCAT
+--		for(i=0; i<MAX_IPAQ_CS; i++)
+--#else
+--			for(i=1; i<MAX_IPAQ_CS; i++)
+--#endif
+--			{
+--				if (my_sub_mtd[i])
+--					map_destroy(my_sub_mtd[i]);
+--			}
+--		kfree(parsed_parts);
+--	}
+--}
+--
+--static int __init h1900_special_case(void)
+--{
+--	/* The iPAQ h1900 is a special case - it has weird ROM. */
+--	simple_map_init(&ipaq_map[0]);
+--	ipaq_map[0].size = 0x80000;
+--	ipaq_map[0].set_vpp = h3xxx_set_vpp;
+--	ipaq_map[0].phys = 0x0;
+--	ipaq_map[0].virt = ioremap(0x0, 0x04000000);
+--	ipaq_map[0].bankwidth = 2;
+--
+--	printk(KERN_NOTICE "iPAQ flash: probing %d-bit flash bus, window=%lx with JEDEC.\n", ipaq_map[0].bankwidth*8, ipaq_map[0].virt);
+--	mymtd = do_map_probe("jedec_probe", &ipaq_map[0]);
+--	if (!mymtd)
+--		return -ENODEV;
+--	add_mtd_device(mymtd);
+--	printk(KERN_NOTICE "iPAQ flash: registered h1910 flash\n");
+--
+--	return 0;
+--}
+--
+--module_init(ipaq_mtd_init);
+--module_exit(ipaq_mtd_cleanup);
+--
+--MODULE_AUTHOR("Jamey Hicks");
+--MODULE_DESCRIPTION("IPAQ CFI map driver");
+--MODULE_LICENSE("MIT");
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0010-h3600-introduce-new-set-of-GPIO-defines.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0010-h3600-introduce-new-set-of-GPIO-defines.patch
+deleted file mode 100644
+index b6ad970..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0010-h3600-introduce-new-set-of-GPIO-defines.patch
++++ /dev/null
+@@ -1,91 +0,0 @@
+-From 85e49e50d9547b8e365af296bce466b9a5409840 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 15:28:42 +0300
+-Subject: [PATCH 10/28] h3600: introduce new set of GPIO defines
+-
+-Old GPIO defines are bitshifted values, but gpiolib needs GPIO numbers.
+-So for converting h3[16]00 code to gpiolib we need to introduce those
+-new numerical defines. Old defines will be pruned as soon as conversion
+-is complete.
+-
+-There's three sets of GPIO defines total: one for h3100, one for h3600
+-and another one containing common GPIOs between h3100 and h3600.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/include/mach/h3600.h |   59 +++++++++++++++++++++++++++++
+- 1 files changed, 59 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/include/mach/h3600.h b/arch/arm/mach-sa1100/include/mach/h3600.h
+-index 2827faa..085698f 100644
+---- a/arch/arm/mach-sa1100/include/mach/h3600.h
+-+++ b/arch/arm/mach-sa1100/include/mach/h3600.h
+-@@ -41,6 +41,65 @@ typedef int __bitwise pm_request_t;
+- #define H3600_BANK_2_VIRT	0xf1000000
+- #define H3600_BANK_4_VIRT	0xf3800000
+- 
+-+/* Common h3100/h3600 GPIOs */
+-+#define H3X00_GPIO_NPOWER_BUTTON	0
+-+
+-+#define H3X00_GPIO_PCMCIA_CD1		10
+-+#define H3X00_GPIO_PCMCIA_IRQ1		11
+-+
+-+#define H3X00_GPIO_L3_DATA		14	/* UDA1341 L3 Interface */
+-+#define H3X00_GPIO_L3_MODE		15
+-+#define H3X00_GPIO_L3_CLOCK		16
+-+#define H3X00_GPIO_PCMCIA_CD0		17
+-+#define H3X00_GPIO_SYS_CLK		19
+-+#define H3X00_GPIO_PCMCIA_IRQ0		21
+-+#define H3X00_GPIO_COM_DCD              23
+-+#define H3X00_GPIO_OPT_IRQ              24
+-+#define H3X00_GPIO_COM_CTS              25
+-+#define H3X00_GPIO_COM_RTS              26
+-+
+-+/* h3100 GPIOs */
+-+#define H3100_GPIO_NPOWER_BUTTON	0
+-+#define H3100_GPIO_BT_ON		2
+-+#define H3100_GPIO_3			3
+-+#define H3100_GPIO_QMUTE		4
+-+#define H3100_GPIO_LCD_3V_ON		5
+-+#define H3100_GPIO_AUD_ON		6
+-+#define H3100_GPIO_AUD_PWR_ON		7
+-+#define H3100_GPIO_IR_ON		8
+-+#define H3100_GPIO_IR_FSEL		9
+-+#define H3100_GPIO_PCMCIA_CD1		10
+-+#define H3100_GPIO_PCMCIA_IRQ1		11
+-+#define H3100_GPIO_L3_DATA		14	/* UDA1341 L3 Interface */
+-+#define H3100_GPIO_L3_MODE		15
+-+#define H3100_GPIO_L3_CLOCK		16
+-+#define H3100_GPIO_PCMCIA_CD0		17
+-+#define H3100_GPIO_SYS_CLK		19
+-+#define H3100_GPIO_PCMCIA_IRQ0		21
+-+#define H3100_GPIO_COM_DCD		23
+-+#define H3100_GPIO_OPT_IRQ		24
+-+#define H3100_GPIO_COM_CTS		25
+-+#define H3100_GPIO_COM_RTS		26
+-+
+-+/* h3600 GPIOs */
+-+#define H3600_GPIO_NPOWER_BUTTON	0
+-+#define H3600_GPIO_CLK_SET0		12	/* audio clock generator */
+-+#define H3600_GPIO_CLK_SET1		13
+-+#define H3600_GPIO_L3_DATA		14	/* UDA1341 L3 Interface */
+-+#define H3600_GPIO_L3_MODE		15
+-+#define H3600_GPIO_L3_CLOCK		16
+-+#define H3600_GPIO_PCMCIA_CD0		17
+-+#define H3600_GPIO_ACTION_BUTTON	18
+-+#define H3600_GPIO_SYS_CLK		19
+-+#define H3600_GPIO_SOFT_RESET		20	/* Also known as BATT_FAULT */
+-+#define H3600_GPIO_PCMCIA_IRQ0		21
+-+#define H3600_GPIO_OPT_LOCK		22
+-+#define H3600_GPIO_COM_DCD		23
+-+#define H3600_GPIO_OPT_IRQ		24
+-+#define H3600_GPIO_COM_CTS		25
+-+#define H3600_GPIO_COM_RTS		26
+-+#define H3600_GPIO_OPT_DET		27
+-+
+- /*
+-    Machine-independent GPIO definitions
+-    --- these are common across all current iPAQ platforms
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0011-h3600-remove-unused-includes.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0011-h3600-remove-unused-includes.patch
+deleted file mode 100644
+index 54c0220..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0011-h3600-remove-unused-includes.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 771d98be88b74aad344fb7a586fe3d32b4f7847f Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 4 Mar 2009 15:07:55 +0300
+-Subject: [PATCH 11/28] h3600: remove unused #includes
+-
+-Build is carefully tested.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |    8 --------
+- 1 files changed, 0 insertions(+), 8 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 0eb2f15..a85f9cd 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -19,22 +19,14 @@
+-  *				   and abstracted EGPIO interface.
+-  *
+-  */
+--#include <linux/module.h>
+--#include <linux/init.h>
+--#include <linux/kernel.h>
+--#include <linux/tty.h>
+--#include <linux/pm.h>
+- #include <linux/device.h>
+- #include <linux/mtd/mtd.h>
+- #include <linux/mtd/partitions.h>
+- #include <linux/serial_core.h>
+- 
+--#include <asm/irq.h>
+- #include <mach/hardware.h>
+- #include <asm/mach-types.h>
+--#include <asm/setup.h>
+- 
+--#include <asm/mach/irq.h>
+- #include <asm/mach/arch.h>
+- #include <asm/mach/flash.h>
+- #include <asm/mach/irda.h>
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0012-h3600-add-include-linux-gpio.h.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0012-h3600-add-include-linux-gpio.h.patch
+deleted file mode 100644
+index ad01215..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0012-h3600-add-include-linux-gpio.h.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 4eb0c7b0f49d29bbe6d55dc3159c604b35ecc017 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 4 Mar 2009 18:36:38 +0300
+-Subject: [PATCH 12/28] h3600: add #include <linux/gpio.h>
+-
+-PSEUDO-COMMIT - for easier patch shuffling
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |    1 +
+- 1 files changed, 1 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index a85f9cd..17e7b04 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -20,6 +20,7 @@
+-  *
+-  */
+- #include <linux/device.h>
+-+#include <linux/gpio.h>
+- #include <linux/mtd/mtd.h>
+- #include <linux/mtd/partitions.h>
+- #include <linux/serial_core.h>
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0013-h3600-split-common-h3xxx_lcd_power.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0013-h3600-split-common-h3xxx_lcd_power.patch
+deleted file mode 100644
+index 0940aab..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0013-h3600-split-common-h3xxx_lcd_power.patch
++++ /dev/null
+@@ -1,86 +0,0 @@
+-From 91340e6d7f14bef923f4a0093919faab2795b2ca Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 18 Feb 2009 20:24:32 +0300
+-Subject: [PATCH 13/28] h3600: split common h3xxx_lcd_power
+-
+-Make two separate functions - h3100_lcd_power and h3600_lcd_power
+-We need that for forthcoming EGPIO cleanup.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |   29 ++++++++++++++++++++---------
+- 1 files changed, 20 insertions(+), 9 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 17e7b04..0e690a0 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -163,14 +163,6 @@ static struct sa1100_port_fns h3600_port_fns __initdata = {
+- 	.set_wake	= h3600_uart_set_wake,
+- };
+- 
+--/*
+-- * helper for sa1100fb
+-- */
+--static void h3xxx_lcd_power(int enable)
+--{
+--	assign_h3600_egpio(IPAQ_EGPIO_LCD_POWER, enable);
+--}
+--
+- static struct map_desc h3600_io_desc[] __initdata = {
+-   	{	/* static memory bank 2  CS#2 */
+- 		.virtual	=  H3600_BANK_2_VIRT,
+-@@ -213,7 +205,6 @@ static void __init h3xxx_map_io(void)
+- 	PCFR = PCFR_OPDE;
+- 	PSDR = 0;
+- 
+--	sa1100fb_lcd_power = h3xxx_lcd_power;
+- }
+- 
+- /************************* H3100 *************************/
+-@@ -294,11 +285,21 @@ static void h3100_control_egpio(enum ipaq_egpio_type x, int setp)
+- 			  | GPIO_H3100_AUD_PWR_ON \
+- 			  | GPIO_H3100_IR_ON	  \
+- 			  | GPIO_H3100_IR_FSEL)
+-+/*
+-+ * helper for sa1100fb
+-+ */
+-+static void h3100_lcd_power(int enable)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_LCD_POWER, enable);
+-+}
+-+
+- 
+- static void __init h3100_map_io(void)
+- {
+- 	h3xxx_map_io();
+- 
+-+	sa1100fb_lcd_power = h3100_lcd_power;
+-+
+- 	/* Initialize h3100-specific values here */
+- 	GPCR = 0x0fffffff;	 /* All outputs are set low by default */
+- 	GPDR = GPIO_H3600_COM_RTS  | GPIO_H3600_L3_CLOCK |
+-@@ -394,10 +395,20 @@ static void h3600_control_egpio(enum ipaq_egpio_type x, int setp)
+- 	}
+- }
+- 
+-+/*
+-+ * helper for sa1100fb
+-+ */
+-+static void h3600_lcd_power(int enable)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_LCD_POWER, enable);
+-+}
+-+
+- static void __init h3600_map_io(void)
+- {
+- 	h3xxx_map_io();
+- 
+-+	sa1100fb_lcd_power = h3600_lcd_power;
+-+
+- 	/* Initialize h3600-specific values here */
+- 
+- 	GPCR = 0x0fffffff;	 /* All outputs are set low by default */
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0014-h3600-split-common-h3xxx_mach_init.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0014-h3600-split-common-h3xxx_mach_init.patch
+deleted file mode 100644
+index bd9889e..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0014-h3600-split-common-h3xxx_mach_init.patch
++++ /dev/null
+@@ -1,137 +0,0 @@
+-From 2a5d78bb214e660bda695e4d669c0ffaf111d27c Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sun, 1 Mar 2009 20:51:50 +0300
+-Subject: [PATCH 14/28] h3600: split common h3xxx_mach_init
+-
+-and separate IRDA-related code. It's needed for forthcoming
+-EGPIO cleanup, because the same "abstracted" EGPIOs, used by IRDA
+-helpers, correspond to different real GPIOs on h3100 and h3600.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |   81 +++++++++++++++++++++++++++--------------
+- 1 files changed, 53 insertions(+), 28 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 0e690a0..2358c61 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -74,32 +74,6 @@ static struct resource h3xxx_flash_resource = {
+- };
+- 
+- /*
+-- * This turns the IRDA power on or off on the Compaq H3600
+-- */
+--static int h3600_irda_set_power(struct device *dev, unsigned int state)
+--{
+--	assign_h3600_egpio( IPAQ_EGPIO_IR_ON, state );
+--
+--	return 0;
+--}
+--
+--static void h3600_irda_set_speed(struct device *dev, unsigned int speed)
+--{
+--	assign_h3600_egpio(IPAQ_EGPIO_IR_FSEL, !(speed < 4000000));
+--}
+--
+--static struct irda_platform_data h3600_irda_data = {
+--	.set_power	= h3600_irda_set_power,
+--	.set_speed	= h3600_irda_set_speed,
+--};
+--
+--static void h3xxx_mach_init(void)
+--{
+--	sa11x0_set_flash_data(&h3xxx_flash_data, &h3xxx_flash_resource, 1);
+--	sa11x0_set_irda_data(&h3600_irda_data);
+--}
+--
+--/*
+-  * low-level UART features
+-  */
+- 
+-@@ -315,6 +289,31 @@ static void __init h3100_map_io(void)
+- 	assign_h3600_egpio = h3100_control_egpio;
+- }
+- 
+-+/*
+-+ * This turns the IRDA power on or off on the Compaq H3100
+-+ */
+-+static int h3100_irda_set_power(struct device *dev, unsigned int state)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_IR_ON, state);
+-+	return 0;
+-+}
+-+
+-+static void h3100_irda_set_speed(struct device *dev, unsigned int speed)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_IR_FSEL, !(speed < 4000000));
+-+}
+-+
+-+static struct irda_platform_data h3100_irda_data = {
+-+	.set_power	= h3100_irda_set_power,
+-+	.set_speed	= h3100_irda_set_speed,
+-+};
+-+
+-+static void h3100_mach_init(void)
+-+{
+-+	sa11x0_set_flash_data(&h3xxx_flash_data, &h3xxx_flash_resource, 1);
+-+	sa11x0_set_irda_data(&h3100_irda_data);
+-+}
+-+
+- MACHINE_START(H3100, "Compaq iPAQ H3100")
+- 	.phys_io	= 0x80000000,
+- 	.io_pg_offst	= ((0xf8000000) >> 18) & 0xfffc,
+-@@ -322,7 +321,7 @@ MACHINE_START(H3100, "Compaq iPAQ H3100")
+- 	.map_io		= h3100_map_io,
+- 	.init_irq	= sa1100_init_irq,
+- 	.timer		= &sa1100_timer,
+--	.init_machine	= h3xxx_mach_init,
+-+	.init_machine	= h3100_mach_init,
+- MACHINE_END
+- 
+- #endif /* CONFIG_SA1100_H3100 */
+-@@ -422,6 +421,32 @@ static void __init h3600_map_io(void)
+- 	assign_h3600_egpio = h3600_control_egpio;
+- }
+- 
+-+/*
+-+ * This turns the IRDA power on or off on the Compaq H3600
+-+ */
+-+static int h3600_irda_set_power(struct device *dev, unsigned int state)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_IR_ON, state);
+-+	return 0;
+-+}
+-+
+-+static void h3600_irda_set_speed(struct device *dev, unsigned int speed)
+-+{
+-+	assign_h3600_egpio(IPAQ_EGPIO_IR_FSEL, !(speed < 4000000));
+-+}
+-+
+-+static struct irda_platform_data h3600_irda_data = {
+-+	.set_power	= h3600_irda_set_power,
+-+	.set_speed	= h3600_irda_set_speed,
+-+};
+-+
+-+
+-+static void h3600_mach_init(void)
+-+{
+-+	sa11x0_set_flash_data(&h3xxx_flash_data, &h3xxx_flash_resource, 1);
+-+	sa11x0_set_irda_data(&h3600_irda_data);
+-+}
+-+
+- MACHINE_START(H3600, "Compaq iPAQ H3600")
+- 	.phys_io	= 0x80000000,
+- 	.io_pg_offst	= ((0xf8000000) >> 18) & 0xfffc,
+-@@ -429,7 +454,7 @@ MACHINE_START(H3600, "Compaq iPAQ H3600")
+- 	.map_io		= h3600_map_io,
+- 	.init_irq	= sa1100_init_irq,
+- 	.timer		= &sa1100_timer,
+--	.init_machine	= h3xxx_mach_init,
+-+	.init_machine	= h3600_mach_init,
+- MACHINE_END
+- 
+- #endif /* CONFIG_SA1100_H3600 */
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0015-h3600-remove-IRDA-tranceiver-stuff-from-serial-PM-c.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0015-h3600-remove-IRDA-tranceiver-stuff-from-serial-PM-c.patch
+deleted file mode 100644
+index f0f1e76..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0015-h3600-remove-IRDA-tranceiver-stuff-from-serial-PM-c.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 1895047ee6987fde0dd5f10a53c990652d6f476c Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 18 Feb 2009 15:08:27 +0300
+-Subject: [PATCH 15/28] h3600: remove IRDA tranceiver stuff from serial PM callback
+-
+-It's simply never called.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |    5 +----
+- 1 files changed, 1 insertions(+), 4 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 2358c61..603761b 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -105,11 +105,8 @@ static u_int h3600_uart_get_mctrl(struct uart_port *port)
+- 
+- static void h3600_uart_pm(struct uart_port *port, u_int state, u_int oldstate)
+- {
+--	if (port->mapbase == _Ser2UTCR0) { /* TODO: REMOVE THIS */
+--		assign_h3600_egpio(IPAQ_EGPIO_IR_ON, !state);
+--	} else if (port->mapbase == _Ser3UTCR0) {
+-+	if (port->mapbase == _Ser3UTCR0)
+- 		assign_h3600_egpio(IPAQ_EGPIO_RS232_ON, !state);
+--	}
+- }
+- 
+- /*
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0016-h3600-switch-serial-hooks-to-use-gpiolib-functions.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0016-h3600-switch-serial-hooks-to-use-gpiolib-functions.patch
+deleted file mode 100644
+index a9ab084..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0016-h3600-switch-serial-hooks-to-use-gpiolib-functions.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From c3ec9c6676a8c373e3be3414cd0df09a8fc91071 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 15:40:19 +0300
+-Subject: [PATCH 16/28] h3600: switch serial hooks to use gpiolib functions
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |   13 ++++---------
+- 1 files changed, 4 insertions(+), 9 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 603761b..a2670be 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -79,12 +79,8 @@ static struct resource h3xxx_flash_resource = {
+- 
+- static void h3600_uart_set_mctrl(struct uart_port *port, u_int mctrl)
+- {
+--	if (port->mapbase == _Ser3UTCR0) {
+--		if (mctrl & TIOCM_RTS)
+--			GPCR = GPIO_H3600_COM_RTS;
+--		else
+--			GPSR = GPIO_H3600_COM_RTS;
+--	}
+-+	if (port->mapbase == _Ser3UTCR0)
+-+		gpio_set_value(H3X00_GPIO_COM_RTS, !(mctrl & TIOCM_RTS));
+- }
+- 
+- static u_int h3600_uart_get_mctrl(struct uart_port *port)
+-@@ -92,11 +88,10 @@ static u_int h3600_uart_get_mctrl(struct uart_port *port)
+- 	u_int ret = TIOCM_CD | TIOCM_CTS | TIOCM_DSR;
+- 
+- 	if (port->mapbase == _Ser3UTCR0) {
+--		int gplr = GPLR;
+- 		/* DCD and CTS bits are inverted in GPLR by RS232 transceiver */
+--		if (gplr & GPIO_H3600_COM_DCD)
+-+		if (gpio_get_value(H3X00_GPIO_COM_DCD))
+- 			ret &= ~TIOCM_CD;
+--		if (gplr & GPIO_H3600_COM_CTS)
+-+		if (gpio_get_value(H3X00_GPIO_COM_CTS))
+- 			ret &= ~TIOCM_CTS;
+- 	}
+- 
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0017-h3600-remove-unused-set_wake-callback-from-sa1100_p.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0017-h3600-remove-unused-set_wake-callback-from-sa1100_p.patch
+deleted file mode 100644
+index 1330314..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0017-h3600-remove-unused-set_wake-callback-from-sa1100_p.patch
++++ /dev/null
+@@ -1,52 +0,0 @@
+-From f206d925c5556630804216e49d38ba99da176877 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 4 Mar 2009 20:22:52 +0300
+-Subject: [PATCH 17/28] h3600: remove unused set_wake callback from sa1100_port_fns
+-
+-It's unused by serial core since 2.5.x era and h3600 seem to be the only
+-machine that sets it.
+-
+-See commit f934c8688171ec537f7a83d79e55ec930d1c25ce in old-2.6-bkcvs.git
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |   19 -------------------
+- 1 files changed, 0 insertions(+), 19 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index a2670be..96da4e1 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -104,29 +104,10 @@ static void h3600_uart_pm(struct uart_port *port, u_int state, u_int oldstate)
+- 		assign_h3600_egpio(IPAQ_EGPIO_RS232_ON, !state);
+- }
+- 
+--/*
+-- * Enable/Disable wake up events for this serial port.
+-- * Obviously, we only support this on the normal COM port.
+-- */
+--static int h3600_uart_set_wake(struct uart_port *port, u_int enable)
+--{
+--	int err = -EINVAL;
+--
+--	if (port->mapbase == _Ser3UTCR0) {
+--		if (enable)
+--			PWER |= PWER_GPIO23 | PWER_GPIO25; /* DCD and CTS */
+--		else
+--			PWER &= ~(PWER_GPIO23 | PWER_GPIO25); /* DCD and CTS */
+--		err = 0;
+--	}
+--	return err;
+--}
+--
+- static struct sa1100_port_fns h3600_port_fns __initdata = {
+- 	.set_mctrl	= h3600_uart_set_mctrl,
+- 	.get_mctrl	= h3600_uart_get_mctrl,
+- 	.pm		= h3600_uart_pm,
+--	.set_wake	= h3600_uart_set_wake,
+- };
+- 
+- static struct map_desc h3600_io_desc[] __initdata = {
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0018-serial-remove-unused-set_wake-from-sa1100_serial.patch b/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0018-serial-remove-unused-set_wake-from-sa1100_serial.patch
+deleted file mode 100644
+index 54956f3..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/02_cleanup_wip/0018-serial-remove-unused-set_wake-from-sa1100_serial.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 5642e58ee8ddc8d555a95ce1a67e3172dc5a0ef4 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Tue, 10 Mar 2009 22:52:07 +0300
+-Subject: [PATCH 18/28] serial: remove unused set_wake from sa1100_serial
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/serial/sa1100.c |    1 -
+- 1 files changed, 0 insertions(+), 1 deletions(-)
+-
+-diff --git a/drivers/serial/sa1100.c b/drivers/serial/sa1100.c
+-index b24a25e..665c535 100644
+---- a/drivers/serial/sa1100.c
+-+++ b/drivers/serial/sa1100.c
+-@@ -646,7 +646,6 @@ void __init sa1100_register_uart_fns(struct sa1100_port_fns *fns)
+- 		sa1100_pops.set_mctrl = fns->set_mctrl;
+- 
+- 	sa1100_pops.pm       = fns->pm;
+--	sa1100_pops.set_wake = fns->set_wake;
+- }
+- 
+- void __init sa1100_register_uart(int idx, int port)
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0019-h3600-add-gpio-keys-for-Power-and-Action-buttons.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0019-h3600-add-gpio-keys-for-Power-and-Action-buttons.patch
+deleted file mode 100644
+index a441970..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0019-h3600-add-gpio-keys-for-Power-and-Action-buttons.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-From 45d9a4a7667a006a8f614016d9cf4f388d3c8e09 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 13 Mar 2009 20:56:03 +0300
+-Subject: [PATCH 19/28] h3600: add gpio-keys for Power and Action buttons
+-
+-This is the only buttons on h3100/3600 connected to GPIOs. Other buttons
+-are connected via resistor matrix to ADC on Atmel microcontroller.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |   40 ++++++++++++++++++++++++++++++++++++++++
+- 1 files changed, 40 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 96da4e1..c7e0458 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -24,6 +24,9 @@
+- #include <linux/mtd/mtd.h>
+- #include <linux/mtd/partitions.h>
+- #include <linux/serial_core.h>
+-+#include <linux/gpio_keys.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+- 
+- #include <mach/hardware.h>
+- #include <asm/mach-types.h>
+-@@ -413,11 +416,48 @@ static struct irda_platform_data h3600_irda_data = {
+- 	.set_speed	= h3600_irda_set_speed,
+- };
+- 
+-+/* GPIO keys */
+-+
+-+static struct gpio_keys_button h3600_button_table[] = {
+-+	{
+-+		.code		= KEY_POWER,
+-+		.gpio		= H3600_GPIO_NPOWER_BUTTON,
+-+		.desc		= "Power Button",
+-+		.active_low	= 1,
+-+		.type		= EV_KEY,
+-+		.wakeup		= 1,
+-+	}, {
+-+		.code		= KEY_ENTER,
+-+		.gpio		= H3600_GPIO_ACTION_BUTTON,
+-+		.active_low	= 1,
+-+		.desc		= "Action button",
+-+		.type		= EV_KEY,
+-+		.wakeup		= 1,	/* FIXME - for testing only */
+-+	},
+-+};
+-+
+-+static struct gpio_keys_platform_data h3600_keys_data = {
+-+	.buttons  = h3600_button_table,
+-+	.nbuttons = ARRAY_SIZE(h3600_button_table),
+-+};
+-+
+-+static struct platform_device h3600_keys = {
+-+	.name	= "gpio-keys",
+-+	.id	= -1,
+-+	.dev	= {
+-+		.platform_data = &h3600_keys_data,
+-+	},
+-+};
+-+
+-+static struct platform_device *h3600_devices[] = {
+-+       &h3600_keys,
+-+};
+- 
+- static void h3600_mach_init(void)
+- {
+- 	sa11x0_set_flash_data(&h3xxx_flash_data, &h3xxx_flash_resource, 1);
+- 	sa11x0_set_irda_data(&h3600_irda_data);
+-+	platform_add_devices(h3600_devices, ARRAY_SIZE(h3600_devices));
+- }
+- 
+- MACHINE_START(H3600, "Compaq iPAQ H3600")
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0020-input-fix-compilation-of-h3600-touchscreen-driver.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0020-input-fix-compilation-of-h3600-touchscreen-driver.patch
+deleted file mode 100644
+index 99f1ea3..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0020-input-fix-compilation-of-h3600-touchscreen-driver.patch
++++ /dev/null
+@@ -1,97 +0,0 @@
+-From f0abc9f7db51463be5b2ea20694165bf4e9e3774 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 21 Jan 2009 20:59:50 +0300
+-Subject: [PATCH 20/28] input: fix compilation of h3600 touchscreen driver
+-
+-Custom handling of h3600 gpio buttons is largely outdated and broken,
+-and can be easily replaced by generic gpio-keys driver nowadays.
+-So it's better to remove this code than try to fix it.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/input/touchscreen/h3600_ts_input.c |   48 ----------------------------
+- 1 files changed, 0 insertions(+), 48 deletions(-)
+-
+-diff --git a/drivers/input/touchscreen/h3600_ts_input.c b/drivers/input/touchscreen/h3600_ts_input.c
+-index 4d3139e..8f8eeb3 100644
+---- a/drivers/input/touchscreen/h3600_ts_input.c
+-+++ b/drivers/input/touchscreen/h3600_ts_input.c
+-@@ -104,32 +104,6 @@ struct h3600_dev {
+- 	char phys[32];
+- };
+- 
+--static irqreturn_t action_button_handler(int irq, void *dev_id)
+--{
+--	int down = (GPLR & GPIO_BITSY_ACTION_BUTTON) ? 0 : 1;
+--	struct input_dev *dev = dev_id;
+--
+--	input_report_key(dev, KEY_ENTER, down);
+--	input_sync(dev);
+--
+--	return IRQ_HANDLED;
+--}
+--
+--static irqreturn_t npower_button_handler(int irq, void *dev_id)
+--{
+--	int down = (GPLR & GPIO_BITSY_NPOWER_BUTTON) ? 0 : 1;
+--	struct input_dev *dev = dev_id;
+--
+--	/*
+--	 * This interrupt is only called when we release the key. So we have
+--	 * to fake a key press.
+--	 */
+--	input_report_key(dev, KEY_SUSPEND, 1);
+--	input_report_key(dev, KEY_SUSPEND, down);
+--	input_sync(dev);
+--
+--	return IRQ_HANDLED;
+--}
+- 
+- #ifdef CONFIG_PM
+- 
+-@@ -390,24 +364,6 @@ static int h3600ts_connect(struct serio *serio, struct serio_driver *drv)
+- 	set_bit(KEY_SUSPEND, input_dev->keybit);
+- 	set_bit(BTN_TOUCH, input_dev->keybit);
+- 
+--	/* Device specific stuff */
+--	set_GPIO_IRQ_edge(GPIO_BITSY_ACTION_BUTTON, GPIO_BOTH_EDGES);
+--	set_GPIO_IRQ_edge(GPIO_BITSY_NPOWER_BUTTON, GPIO_RISING_EDGE);
+--
+--	if (request_irq(IRQ_GPIO_BITSY_ACTION_BUTTON, action_button_handler,
+--			IRQF_SHARED | IRQF_DISABLED, "h3600_action", &ts->dev)) {
+--		printk(KERN_ERR "h3600ts.c: Could not allocate Action Button IRQ!\n");
+--		err = -EBUSY;
+--		goto fail2;
+--	}
+--
+--	if (request_irq(IRQ_GPIO_BITSY_NPOWER_BUTTON, npower_button_handler,
+--			IRQF_SHARED | IRQF_DISABLED, "h3600_suspend", &ts->dev)) {
+--		printk(KERN_ERR "h3600ts.c: Could not allocate Power Button IRQ!\n");
+--		err = -EBUSY;
+--		goto fail3;
+--	}
+--
+- 	serio_set_drvdata(serio, ts);
+- 
+- 	err = serio_open(serio, drv);
+-@@ -419,8 +375,6 @@ static int h3600ts_connect(struct serio *serio, struct serio_driver *drv)
+- 
+- 	return 0;
+- 
+--fail3:	free_irq(IRQ_GPIO_BITSY_NPOWER_BUTTON, ts->dev);
+--fail2:	free_irq(IRQ_GPIO_BITSY_ACTION_BUTTON, ts->dev);
+- fail1:	serio_set_drvdata(serio, NULL);
+- 	input_free_device(input_dev);
+- 	kfree(ts);
+-@@ -435,8 +389,6 @@ static void h3600ts_disconnect(struct serio *serio)
+- {
+- 	struct h3600_dev *ts = serio_get_drvdata(serio);
+- 
+--	free_irq(IRQ_GPIO_BITSY_ACTION_BUTTON, &ts->dev);
+--	free_irq(IRQ_GPIO_BITSY_NPOWER_BUTTON, &ts->dev);
+- 	input_get_device(ts->dev);
+- 	input_unregister_device(ts->dev);
+- 	serio_close(serio);
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0021-input-fix-h3600_ts_input-kconfig-dependency.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0021-input-fix-h3600_ts_input-kconfig-dependency.patch
+deleted file mode 100644
+index 7cd9c37..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0021-input-fix-h3600_ts_input-kconfig-dependency.patch
++++ /dev/null
+@@ -1,52 +0,0 @@
+-From 218b2315fea262bc083c3d7af423c5f4d2d5250b Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 21 Jan 2009 21:16:58 +0300
+-Subject: [PATCH 21/28] input: fix h3600_ts_input kconfig dependency
+-
+-h3600 touchscreen driver depends on ARCH_BITSY, which doesn't exist
+-anywhere in current kernel. Looks like "Bitsy" was codename for iPAQ
+-h3600 long-long time ago. Googling shows that ARCH_BITSY was renamed to
+-ARCH_H3600 somewhere around 2.4.8
+-(see http://www.arm.linux.org.uk/developer/v2.4/2.4.8.php).
+-
+-So change this dependency and also rename TOUCHSCREEN_BITSY to
+-TOUCHSCREEN_H3600 for consistency.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/input/touchscreen/Kconfig  |    4 ++--
+- drivers/input/touchscreen/Makefile |    2 +-
+- 2 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/drivers/input/touchscreen/Kconfig b/drivers/input/touchscreen/Kconfig
+-index bb6486a..5f862d1 100644
+---- a/drivers/input/touchscreen/Kconfig
+-+++ b/drivers/input/touchscreen/Kconfig
+-@@ -29,9 +29,9 @@ config TOUCHSCREEN_ADS7846
+- 	  To compile this driver as a module, choose M here: the
+- 	  module will be called ads7846.
+- 
+--config TOUCHSCREEN_BITSY
+-+config TOUCHSCREEN_H3600
+- 	tristate "Compaq iPAQ H3600 (Bitsy) touchscreen"
+--	depends on SA1100_BITSY
+-+	depends on SA1100_H3600
+- 	select SERIO
+- 	help
+- 	  Say Y here if you have the h3600 (Bitsy) touchscreen.
+-diff --git a/drivers/input/touchscreen/Makefile b/drivers/input/touchscreen/Makefile
+-index d3375af..8a4a3d3 100644
+---- a/drivers/input/touchscreen/Makefile
+-+++ b/drivers/input/touchscreen/Makefile
+-@@ -8,7 +8,7 @@ wm97xx-ts-y := wm97xx-core.o
+- 
+- obj-$(CONFIG_TOUCHSCREEN_ADS7846)	+= ads7846.o
+- obj-$(CONFIG_TOUCHSCREEN_ATMEL_TSADCC)	+= atmel_tsadcc.o
+--obj-$(CONFIG_TOUCHSCREEN_BITSY)		+= h3600_ts_input.o
+-+obj-$(CONFIG_TOUCHSCREEN_H3600)		+= h3600_ts_input.o
+- obj-$(CONFIG_TOUCHSCREEN_CORGI)		+= corgi_ts.o
+- obj-$(CONFIG_TOUCHSCREEN_GUNZE)		+= gunze.o
+- obj-$(CONFIG_TOUCHSCREEN_ELO)		+= elo.o
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0022-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3600.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0022-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3600.patch
+deleted file mode 100644
+index 46a3e8e..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0022-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3600.patch
++++ /dev/null
+@@ -1,553 +0,0 @@
+-From c6132951729a8d37704f8c6b701be3358f538c0f Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:06:56 +0300
+-Subject: [PATCH 22/28] MFD: driver for Atmel Microcontroller on iPaq h3600/h3100
+-
+-This is a port of a driver from handhelds.org 2.6.21 kernel,
+-written by Alessandro GARDICH. It has been heavily cleaned and
+-converted to mfd-core.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/mfd/Kconfig       |    5 +
+- drivers/mfd/Makefile      |    4 +-
+- drivers/mfd/micro.c       |  454 +++++++++++++++++++++++++++++++++++++++++++++
+- include/linux/mfd/micro.h |   29 +++
+- 4 files changed, 491 insertions(+), 1 deletions(-)
+- create mode 100644 drivers/mfd/micro.c
+- create mode 100644 include/linux/mfd/micro.h
+-
+-diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+-index 06a2b0f..dbac30e 100644
+---- a/drivers/mfd/Kconfig
+-+++ b/drivers/mfd/Kconfig
+-@@ -34,6 +34,11 @@ config MFD_ASIC3
+- 	  This driver supports the ASIC3 multifunction chip found on many
+- 	  PDAs (mainly iPAQ and HTC based ones)
+- 
+-+config IPAQ_MICRO
+-+        tristate "Atmel Micro ASIC (iPAQ h3100/h3600/h3700) Support"
+-+        depends on SA1100_H3600 || SA1100_H3100
+-+	select MFD_CORE
+-+
+- config MFD_DM355EVM_MSP
+- 	bool "DaVinci DM355 EVM microcontroller"
+- 	depends on I2C && MACH_DAVINCI_DM355_EVM
+-diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+-index 3afb519..3fb4b39 100644
+---- a/drivers/mfd/Makefile
+-+++ b/drivers/mfd/Makefile
+-@@ -5,6 +5,8 @@
+- obj-$(CONFIG_MFD_SM501)		+= sm501.o
+- obj-$(CONFIG_MFD_ASIC3)		+= asic3.o
+- 
+-+obj-$(CONFIG_IPAQ_MICRO)        += micro.o
+-+
+- obj-$(CONFIG_HTC_EGPIO)		+= htc-egpio.o
+- obj-$(CONFIG_HTC_PASIC3)	+= htc-pasic3.o
+- 
+-@@ -40,4 +42,4 @@ obj-$(CONFIG_PMIC_DA903X)	+= da903x.o
+- 
+- obj-$(CONFIG_MFD_PCF50633)	+= pcf50633-core.o
+- obj-$(CONFIG_PCF50633_ADC)	+= pcf50633-adc.o
+--obj-$(CONFIG_PCF50633_GPIO)	+= pcf50633-gpio.o
+-\ No newline at end of file
+-+obj-$(CONFIG_PCF50633_GPIO)	+= pcf50633-gpio.o
+-diff --git a/drivers/mfd/micro.c b/drivers/mfd/micro.c
+-new file mode 100644
+-index 0000000..7a15df2
+---- /dev/null
+-+++ b/drivers/mfd/micro.c
+-@@ -0,0 +1,454 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support
+-+ * based on previous kernel 2.4 version
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ *
+-+ */
+-+
+-+
+-+#include <linux/module.h>
+-+#include <linux/version.h>
+-+
+-+#include <linux/init.h>
+-+#include <linux/fs.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/sched.h>
+-+#include <linux/pm.h>
+-+#include <linux/sysctl.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/backlight.h>
+-+#include <linux/fb.h>
+-+#include <linux/mfd/core.h>
+-+
+-+#include <asm/irq.h>
+-+#include <asm/atomic.h>
+-+#include <mach/hardware.h>
+-+
+-+#include <mach/h3600.h>
+-+#include <mach/SA-1100.h>
+-+
+-+/* FIXME #include "../../arch/arm/mach-sa1100/generic.h" */
+-+
+-+#include <linux/mfd/micro.h>
+-+
+-+#define TX_BUF_SIZE	32
+-+#define RX_BUF_SIZE	16
+-+#define CHAR_SOF	0x02
+-+
+-+/* state of receiver parser */
+-+enum rx_state {
+-+	STATE_SOF = 0,     /* Next byte should be start of frame */
+-+	STATE_ID,          /* Next byte is ID & message length   */
+-+	STATE_DATA,        /* Next byte is a data byte           */
+-+	STATE_CHKSUM       /* Next byte should be checksum       */
+-+};
+-+
+-+struct h3600_txdev {
+-+	unsigned char buf[TX_BUF_SIZE];
+-+	atomic_t head;
+-+	atomic_t tail;
+-+};
+-+static struct h3600_txdev tx;	/* transmit ISR state */
+-+
+-+struct h3600_rxdev {
+-+	enum rx_state state;            /* context of rx state machine */
+-+	unsigned char chksum;           /* calculated checksum */
+-+	int           id;               /* message ID from packet */
+-+	unsigned int  len;              /* rx buffer length */
+-+	unsigned int  index;            /* rx buffer index */
+-+	unsigned char buf[RX_BUF_SIZE]; /* rx buffer size  */
+-+};
+-+
+-+static struct h3600_rxdev rx;	/* receive ISR state */
+-+
+-+/*--- backlight ---*/
+-+#define MAX_BRIGHTNESS 255
+-+
+-+static void micro_set_bl_intensity(int intensity)
+-+{
+-+	unsigned char data[3];
+-+
+-+	data[0] = 0x01;
+-+	data[1] = intensity > 0 ? 1 : 0;
+-+	data[2] = intensity;
+-+	h3600_micro_tx_msg(0x0D, 3, data);
+-+}
+-+
+-+static struct generic_bl_info micro_bl_info = {
+-+	.default_intensity = MAX_BRIGHTNESS / 4,
+-+	.limit_mask = 0xffff,
+-+	.max_intensity = MAX_BRIGHTNESS,
+-+	.set_bl_intensity = micro_set_bl_intensity,
+-+};
+-+
+-+/*--- manage messages from Atmel Micro  ---*/
+-+
+-+static struct micro_private_t micro;
+-+
+-+static void h3600_micro_rx_msg(int id, int len, unsigned char *data)
+-+{
+-+	int i;
+-+
+-+	/*printk(KERN_ERR "h3600_micro : got a message from micro\n");*/
+-+	spin_lock(micro.lock);
+-+	switch (id) {
+-+	case 0x0D: /* backlight */
+-+		/* empty ack, just ignore */
+-+		break;
+-+	case 0x02: /* keyboard */
+-+		if (micro.h_key != NULL)
+-+			micro.h_key(len, data);
+-+		else
+-+			printk(KERN_ERR "h3600_micro : key message ignored, "
+-+					"no handle \n");
+-+		break;
+-+	case 0x03: /* touchscreen */
+-+		if (micro.h_ts != NULL)
+-+			micro.h_ts(len, data);
+-+		else
+-+			printk(KERN_ERR "h3600_micro : touchscreen message"
+-+					" ignored, no handle \n");
+-+		break;
+-+	case 0x06: /* temperature */
+-+		if (micro.h_temp != NULL)
+-+			micro.h_temp(len, data);
+-+		else
+-+			printk(KERN_ERR "h3600_micro : temperature message"
+-+					" ignored, no handle \n");
+-+		break;
+-+	case 0x09: /* battery */
+-+		if (micro.h_batt != NULL)
+-+			micro.h_batt(len, data);
+-+		else
+-+			printk(KERN_ERR "h3600_micro : battery message"
+-+					" ignored, no handle \n");
+-+		break;
+-+	default:
+-+		printk(KERN_ERR "h3600_micro : unknown msg %d [%d] ", id, len);
+-+		for (i = 0; i < len; ++i)
+-+			printk("0x%02x ", data[i]);
+-+		printk("\n");
+-+	}
+-+	spin_unlock(micro.lock);
+-+}
+-+
+-+/*--- low lever serial interface ---*/
+-+
+-+static void h3600_micro_process_char(unsigned char ch)
+-+{
+-+	switch (rx.state) {
+-+	case STATE_SOF:	/* Looking for SOF */
+-+		if (ch == CHAR_SOF)
+-+			rx.state = STATE_ID; /* Next byte is the id and len */
+-+		/* else
+-+			g_statistics.missing_sof++;  // FIXME */
+-+		break;
+-+	case STATE_ID: /* Looking for id and len byte */
+-+		rx.id = (ch & 0xf0) >> 4 ;
+-+		rx.len = (ch & 0x0f);
+-+		rx.index = 0;
+-+		rx.chksum = ch;
+-+		rx.state = (rx.len > 0) ? STATE_DATA : STATE_CHKSUM;
+-+		break;
+-+	case STATE_DATA: /* Looking for 'len' data bytes */
+-+		rx.chksum += ch;
+-+		rx.buf[rx.index] = ch;
+-+		if (++rx.index == rx.len)
+-+			rx.state = STATE_CHKSUM;
+-+		break;
+-+	case STATE_CHKSUM: /* Looking for the checksum */
+-+		if (ch == rx.chksum)
+-+			h3600_micro_rx_msg(rx.id, rx.len, rx.buf);
+-+		/* else
+-+			g_statistics.bad_checksum++; //FIXME */
+-+		rx.state = STATE_SOF;
+-+		break;
+-+	}
+-+}
+-+
+-+static void h3600_micro_rx_chars(void)
+-+{
+-+	unsigned int status, ch;
+-+
+-+	while ((status = Ser1UTSR1) & UTSR1_RNE) {
+-+		ch = Ser1UTDR;
+-+		/* statistics.rx++; // FIXME */
+-+		if (status & UTSR1_PRE) /* Parity error */
+-+			printk(KERN_ERR "h3600_micro_rx : parity error\n");
+-+			/* statistics.parity++; // FIXME */
+-+		else if (status & UTSR1_FRE) /* Framing error */
+-+			printk(KERN_ERR "h3600_micro_rx : framing error\n");
+-+			/* statistics.frame++; // FIXME */
+-+		else if (status & UTSR1_ROR)   /* Overrun error */
+-+			printk(KERN_ERR "h3600_micro_rx : overrun error\n");
+-+			/*statistics.overrun++;*/
+-+		h3600_micro_process_char(ch);
+-+	}
+-+}
+-+
+-+int h3600_micro_tx_msg(unsigned char id, unsigned char len, unsigned char *data)
+-+{
+-+	int free_space;
+-+	int i;
+-+	unsigned char checksum;
+-+	int head, tail;
+-+
+-+	tail = atomic_read(&tx.tail);
+-+	head = atomic_read(&tx.head);
+-+
+-+	free_space = (head >= tail) ? (TX_BUF_SIZE - head + tail - 1) \
+-+					: (tail - head - 1);
+-+
+-+	if (free_space < len + 2) {
+-+		printk(KERN_ERR "%s : no avaiable space on tx buffer.",
+-+								__func__);
+-+		return -EIO;
+-+	}
+-+
+-+	if (0)
+-+		printk(KERN_ERR "%s : avaiable space %d %d %d\n",
+-+			__func__, free_space, head, tail);
+-+
+-+	tx.buf[head] = (unsigned char) CHAR_SOF;
+-+	head = ((head+1) % TX_BUF_SIZE);
+-+
+-+	checksum = ((id & 0x0f) << 4) | (len & 0x0f);
+-+	tx.buf[head] = checksum;
+-+	head = ((head+1) % TX_BUF_SIZE);
+-+
+-+	for (i = 0; i < len; ++i) {
+-+		tx.buf[head] = data[i];
+-+		head = ((head + 1) % TX_BUF_SIZE);
+-+		checksum += data[i];
+-+	}
+-+
+-+	tx.buf[head] = checksum;
+-+	head = ((head + 1) % TX_BUF_SIZE);
+-+
+-+	atomic_set(&tx.head, head);
+-+
+-+	Ser1UTCR3 |= UTCR3_TIE; /* enable interrupt */
+-+
+-+	return 0;
+-+}
+-+EXPORT_SYMBOL(h3600_micro_tx_msg);
+-+
+-+
+-+static void h3600_micro_tx_chars(void)
+-+{
+-+	int head, tail;
+-+
+-+	head = atomic_read(&tx.head);
+-+	tail = atomic_read(&tx.tail);
+-+
+-+	while ((head != tail) && (Ser1UTSR1 & UTSR1_TNF)) {
+-+		Ser1UTDR = tx.buf[tail];
+-+		tail = ((tail+1) % TX_BUF_SIZE);
+-+	}
+-+	atomic_set(&tx.tail, tail);
+-+
+-+	if (tail == head) /* Stop interrupts */
+-+		Ser1UTCR3 &= ~UTCR3_TIE;
+-+}
+-+
+-+static void h3600_micro_reset_comm(void)
+-+{
+-+	printk(KERN_ERR "%s: initializing serial port\n", __func__);
+-+
+-+	/* Initialize Serial channel protocol frame */
+-+	rx.state = STATE_SOF;  /* Reset the state machine */
+-+
+-+	atomic_set(&tx.head, 0);
+-+	atomic_set(&tx.tail, 0);
+-+
+-+	/* Set up interrupts */
+-+	Ser1SDCR0 = 0x1;				/* Select UART mode */
+-+
+-+	Ser1UTCR3 = 0;					/* Clean up CR3 */
+-+	Ser1UTCR0 = UTCR0_8BitData | UTCR0_1StpBit;	/* Format: 8N1 */
+-+	Ser1UTCR1 = 0;					/* Baud rate: 115200 */
+-+	Ser1UTCR2 = 0x1;
+-+
+-+	Ser1UTSR0 = 0xff;				/* Clear SR0 */
+-+	Ser1UTCR3 = UTCR3_TXE | UTCR3_RXE | UTCR3_RIE;	/* Enable RX int */
+-+	Ser1UTCR3 &= ~UTCR3_TIE;			/* Disable TX int */
+-+}
+-+
+-+/*--- core interrupt ---*/
+-+enum MessageHandleType {
+-+	HANDLE_NORMAL,
+-+	HANDLE_ACK,
+-+	HANDLE_ERROR
+-+};
+-+
+-+#define MICRO_MSG_WAITING 0
+-+#define MICRO_MSG_SUCCESS 1
+-+#define MICRO_MSG_ERROR  -1
+-+
+-+static irqreturn_t h3600_micro_serial_isr(int irq, void *dev_id)
+-+{
+-+	unsigned int status; /* UTSR0 */
+-+	int head, tail;
+-+	/* unsigned int pass_counter = 0; // FIXME */
+-+
+-+	if (0)
+-+		printk(KERN_ERR "%s\n", __func__); /* FIXME */
+-+
+-+	/* statistics.isr++; // FIXME */
+-+	status = Ser1UTSR0;
+-+	do {
+-+		if (status & (UTSR0_RID | UTSR0_RFS)) {
+-+			if (status & UTSR0_RID)
+-+				/* Clear the Receiver IDLE bit */
+-+				Ser1UTSR0 = UTSR0_RID;
+-+			h3600_micro_rx_chars();
+-+		}
+-+
+-+		/* Clear break bits */
+-+		if (status & (UTSR0_RBB | UTSR0_REB))
+-+			Ser1UTSR0 = status & (UTSR0_RBB | UTSR0_REB);
+-+
+-+		if (status & UTSR0_TFS)
+-+			h3600_micro_tx_chars();
+-+
+-+		status = Ser1UTSR0;
+-+
+-+		head = atomic_read(&tx.head);
+-+		tail = atomic_read(&tx.tail);
+-+	} while (((head != tail) && (status & UTSR0_TFS)) ||
+-+		  status & (UTSR0_RFS | UTSR0_RID));
+-+		  /* && pass_counter++ < H3600_TS_PASS_LIMIT ); */
+-+/*
+-+	if ( pass_counter >= H3600_TS_PASS_LIMIT ) // FIXME
+-+		statistics.pass_limit++;
+-+*/
+-+
+-+	return IRQ_HANDLED;
+-+}
+-+
+-+/*--- sub devices declaration ---*/
+-+enum {
+-+	MICRO_CELL_BACKLIGHT,
+-+	MICRO_CELL_BATTERY,
+-+	MICRO_CELL_KEYS,
+-+	MICRO_CELL_TS,
+-+};
+-+
+-+static struct mfd_cell micro_cells[] = {
+-+	[MICRO_CELL_BACKLIGHT] = {
+-+		.name = "generic-bl",
+-+		.platform_data = &micro_bl_info,
+-+		.data_size = sizeof(micro_bl_info),
+-+	},
+-+	[MICRO_CELL_BATTERY] = {
+-+		.name = "h3600-micro-battery",
+-+		.driver_data = &micro,
+-+	},
+-+	[MICRO_CELL_KEYS] = {
+-+		.name = "h3600-micro-keys",
+-+		.driver_data = &micro,
+-+	},
+-+	[MICRO_CELL_TS] = {
+-+		.name = "h3600-micro-ts",
+-+		.driver_data = &micro,
+-+	},
+-+};
+-+
+-+/*--- micro ---*/
+-+static int micro_suspend(struct platform_device *dev, pm_message_t state)
+-+{
+-+	printk(KERN_ERR "micro : suspend \n");
+-+	/* __micro_backlight_set_power(FB_BLANK_POWERDOWN); // FIXME */
+-+	return 0;
+-+}
+-+
+-+static int micro_resume(struct platform_device *dev)
+-+{
+-+	printk(KERN_ERR "micro : resume\n");
+-+	h3600_micro_reset_comm();
+-+	mdelay(10);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_probe(struct platform_device *dev)
+-+{
+-+	int result = 0;
+-+	/* struct platform_device *plat; */
+-+
+-+	printk(KERN_ERR "micro probe : begin \n");
+-+
+-+	h3600_micro_reset_comm();
+-+
+-+	result = request_irq(IRQ_Ser1UART, h3600_micro_serial_isr,
+-+			     IRQF_SHARED | IRQF_DISABLED | IRQF_SAMPLE_RANDOM,
+-+			     "h3600_micro", h3600_micro_serial_isr);
+-+	if (result) {
+-+		printk(KERN_CRIT "%s: unable to grab serial port IRQ\n",
+-+								__func__);
+-+		return result;
+-+	} else
+-+		printk(KERN_ERR "h3600_micro : grab serial port IRQ\n");
+-+
+-+	result = mfd_add_devices(&dev->dev, dev->id, micro_cells,
+-+				ARRAY_SIZE(micro_cells), NULL, 0);
+-+	if (result != 0) {
+-+		printk(KERN_ERR "micro probe : platform_add_devices"
+-+				" fail [%d].\n", result);
+-+	}
+-+
+-+	spin_lock_init(&micro.lock);
+-+
+-+	printk(KERN_ERR "micro probe : end [%d]\n", result);
+-+
+-+	return result;
+-+}
+-+
+-+static int micro_remove(struct platform_device *dev)
+-+{
+-+	int i;
+-+
+-+	mfd_remove_devices(&dev->dev);
+-+
+-+	Ser1UTCR3 &= ~(UTCR3_RXE | UTCR3_RIE); /* disable receive interrupt */
+-+	Ser1UTCR3 &= ~(UTCR3_TXE | UTCR3_TIE); /* disable transmit interrupt */
+-+	free_irq(IRQ_Ser1UART, h3600_micro_serial_isr);
+-+	return 0;
+-+}
+-+
+-+static struct platform_driver micro_device_driver = {
+-+	.driver   = {
+-+		.name     = "h3600-micro",
+-+	},
+-+	.probe    = micro_probe,
+-+	.remove   = micro_remove,
+-+	.suspend  = micro_suspend,
+-+	.resume   = micro_resume,
+-+	/* .shutdown = micro_suspend, // FIXME */
+-+};
+-+
+-+static int micro_init(void)
+-+{
+-+	return platform_driver_register(&micro_device_driver);
+-+}
+-+
+-+static void micro_cleanup(void)
+-+{
+-+	platform_driver_unregister(&micro_device_driver);
+-+}
+-+
+-+module_init(micro_init);
+-+module_exit(micro_cleanup);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_AUTHOR("gremlin.it");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro core and backlight");
+-+
+-diff --git a/include/linux/mfd/micro.h b/include/linux/mfd/micro.h
+-new file mode 100644
+-index 0000000..7d185ec
+---- /dev/null
+-+++ b/include/linux/mfd/micro.h
+-@@ -0,0 +1,29 @@
+-+/*
+-+ * some definition of intercomunication structures for micro
+-+ * and it's sub devices
+-+ */
+-+
+-+#ifndef _MICRO_H_
+-+#define _MICRO_H_
+-+
+-+#include <linux/spinlock.h>
+-+
+-+
+-+#define TX_BUF_SIZE	32
+-+#define RX_BUF_SIZE	16
+-+#define CHAR_SOF	0x02
+-+
+-+extern struct platform_device h3600micro_device;
+-+
+-+struct micro_private_t {
+-+	spinlock_t lock;
+-+	void (*h_key) (int len, unsigned char *data);
+-+	void (*h_batt) (int len, unsigned char *data);
+-+	void (*h_temp) (int len, unsigned char *data);
+-+	void (*h_ts) (int len, unsigned char *data);
+-+};
+-+
+-+int h3600_micro_tx_msg(unsigned char id, unsigned char len,
+-+			unsigned char *data);
+-+
+-+#endif /* _MICRO_H_ */
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0023-input-driver-for-keys-connected-to-microcontroller.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0023-input-driver-for-keys-connected-to-microcontroller.patch
+deleted file mode 100644
+index c26b1ff..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0023-input-driver-for-keys-connected-to-microcontroller.patch
++++ /dev/null
+@@ -1,203 +0,0 @@
+-From 3e8165f514e5705eaf2e5be09cd8ebea4b257fb7 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:22:16 +0300
+-Subject: [PATCH 23/28] input: driver for keys connected to microcontroller on iPaq h3600
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/input/keyboard/Kconfig      |    7 ++
+- drivers/input/keyboard/Makefile     |    1 +
+- drivers/input/keyboard/micro_keys.c |  148 +++++++++++++++++++++++++++++++++++
+- 3 files changed, 156 insertions(+), 0 deletions(-)
+- create mode 100644 drivers/input/keyboard/micro_keys.c
+-
+-diff --git a/drivers/input/keyboard/Kconfig b/drivers/input/keyboard/Kconfig
+-index 3556168..aeb770d 100644
+---- a/drivers/input/keyboard/Kconfig
+-+++ b/drivers/input/keyboard/Kconfig
+-@@ -250,6 +250,13 @@ config KEYBOARD_HP7XX
+- 	  To compile this driver as a module, choose M here: the
+- 	  module will be called jornada720_kbd.
+- 
+-+config KEYBOARD_MICRO
+-+	tristate "Buttons on Micro SoC (iPaq h3100,h3600,h3700)"
+-+	depends on IPAQ_MICRO
+-+	help
+-+	  This enables support for the buttons attached to
+-+	  Micro peripheral controller on iPAQ h3100/h3600/h3700
+-+
+- config KEYBOARD_OMAP
+- 	tristate "TI OMAP keypad support"
+- 	depends on (ARCH_OMAP1 || ARCH_OMAP2)
+-diff --git a/drivers/input/keyboard/Makefile b/drivers/input/keyboard/Makefile
+-index 36351e1..928e7b5 100644
+---- a/drivers/input/keyboard/Makefile
+-+++ b/drivers/input/keyboard/Makefile
+-@@ -25,6 +25,7 @@ obj-$(CONFIG_KEYBOARD_AAED2000)		+= aaed2000_kbd.o
+- obj-$(CONFIG_KEYBOARD_GPIO)		+= gpio_keys.o
+- obj-$(CONFIG_KEYBOARD_HP6XX)		+= jornada680_kbd.o
+- obj-$(CONFIG_KEYBOARD_HP7XX)		+= jornada720_kbd.o
+-+obj-$(CONFIG_KEYBOARD_MICRO)		+= micro_keys.o
+- obj-$(CONFIG_KEYBOARD_MAPLE)		+= maple_keyb.o
+- obj-$(CONFIG_KEYBOARD_BFIN)		+= bf54x-keys.o
+- obj-$(CONFIG_KEYBOARD_SH_KEYSC)		+= sh_keysc.o
+-diff --git a/drivers/input/keyboard/micro_keys.c b/drivers/input/keyboard/micro_keys.c
+-new file mode 100644
+-index 0000000..721581f
+---- /dev/null
+-+++ b/drivers/input/keyboard/micro_keys.c
+-@@ -0,0 +1,148 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support, key subdevice
+-+ * based on previous kernel 2.4 version
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ *
+-+ */
+-+
+-+
+-+#include <linux/module.h>
+-+#include <linux/version.h>
+-+
+-+#include <linux/init.h>
+-+#include <linux/fs.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/sched.h>
+-+#include <linux/pm.h>
+-+#include <linux/sysctl.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+-+
+-+#include <mach/hardware.h>
+-+
+-+#include <mach/h3600.h>
+-+#include <mach/SA-1100.h>
+-+
+-+#include <linux/mfd/micro.h>
+-+
+-+/*--- methods ---*/
+-+static struct micro_private_t *p_micro;
+-+
+-+/*--- keys ---*/
+-+static struct input_dev *micro_key_input;
+-+
+-+#define NUM_KEYS 10
+-+int keycodes[NUM_KEYS] = {
+-+	KEY_RECORD,		/* 1:  Record button			*/
+-+	KEY_CALENDAR,		/* 2:  Calendar				*/
+-+	KEY_ADDRESSBOOK,	/* 3:  Contacts (looks like Outlook)	*/
+-+	KEY_MAIL,		/* 4:  Envelope (Q on older iPAQs)	*/
+-+	KEY_HOMEPAGE,		/* 5:  Start (looks like swoopy arrow)	*/
+-+	KEY_UP,			/* 6:  Up				*/
+-+	KEY_RIGHT,		/* 7:  Right				*/
+-+	KEY_LEFT,		/* 8:  Left				*/
+-+	KEY_DOWN,		/* 9:  Down				*/
+-+};
+-+
+-+static void micro_key_receive(int len, unsigned char *data)
+-+{
+-+	int key, down;
+-+
+-+	down = (0x80 & data[0]) ? 1 : 0;
+-+	key  = 0x7f & data[0];
+-+
+-+	if (key < NUM_KEYS) {
+-+		input_report_key(micro_key_input, keycodes[key], down);
+-+		input_sync(micro_key_input);
+-+	}
+-+}
+-+
+-+static int micro_key_probe(struct platform_device *pdev)
+-+{
+-+	int i;
+-+
+-+	micro_key_input = input_allocate_device();
+-+
+-+	micro_key_input->evbit[0] = BIT(EV_KEY);
+-+	set_bit(EV_KEY, micro_key_input->evbit);
+-+	for (i = 0; i < NUM_KEYS; i++)
+-+		set_bit(keycodes[i], micro_key_input->keybit);
+-+
+-+	micro_key_input->name = "h3600 micro keys";
+-+
+-+	input_register_device(micro_key_input);
+-+
+-+	/*--- callback ---*/
+-+	p_micro = dev_get_drvdata(&(pdev->dev));
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_key = micro_key_receive;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_remove(struct platform_device *pdev)
+-+{
+-+	input_unregister_device(micro_key_input);
+-+
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_key = NULL;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_suspend(struct platform_device *pdev,
+-+				pm_message_t statel)
+-+{
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_key = NULL;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_resume(struct platform_device *pdev)
+-+{
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_key = NULL;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+struct platform_driver micro_key_device_driver = {
+-+	.driver = {
+-+		.name    = "h3600-micro-keys",
+-+	},
+-+	.probe   = micro_key_probe,
+-+	.remove  = micro_key_remove,
+-+	.suspend = micro_key_suspend,
+-+	.resume  = micro_key_resume,
+-+};
+-+
+-+static int micro_key_init(void)
+-+{
+-+	return platform_driver_register(&micro_key_device_driver);
+-+}
+-+
+-+static void micro_key_cleanup(void)
+-+{
+-+	platform_driver_unregister(&micro_key_device_driver);
+-+}
+-+
+-+module_init(micro_key_init);
+-+module_exit(micro_key_cleanup);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_AUTHOR("gremlin.it");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro keys");
+-+
+-+
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0024-input-driver-for-touchscreen-on-iPaq-h3600-h3100.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0024-input-driver-for-touchscreen-on-iPaq-h3600-h3100.patch
+deleted file mode 100644
+index 204abc6..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0024-input-driver-for-touchscreen-on-iPaq-h3600-h3100.patch
++++ /dev/null
+@@ -1,211 +0,0 @@
+-From 8ea0c09d91f9accf87e4d821b0dcd91aa2bc4f33 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:27:19 +0300
+-Subject: [PATCH 24/28] input: driver for touchscreen on iPaq h3600/h3100
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/input/touchscreen/Kconfig    |    4 +
+- drivers/input/touchscreen/Makefile   |    1 +
+- drivers/input/touchscreen/micro_ts.c |  159 ++++++++++++++++++++++++++++++++++
+- 3 files changed, 164 insertions(+), 0 deletions(-)
+- create mode 100644 drivers/input/touchscreen/micro_ts.c
+-
+-diff --git a/drivers/input/touchscreen/Kconfig b/drivers/input/touchscreen/Kconfig
+-index 5f862d1..a46ef79 100644
+---- a/drivers/input/touchscreen/Kconfig
+-+++ b/drivers/input/touchscreen/Kconfig
+-@@ -171,6 +171,10 @@ config TOUCHSCREEN_HP7XX
+- 	  To compile this driver as a module, choose M here: the
+- 	  module will be called jornada720_ts.
+- 
+-+config TOUCHSCREEN_IPAQ_MICRO
+-+	tristate "HP iPAQ Micro ASIC - touchscreen driver"
+-+	depends on IPAQ_MICRO && INPUT
+-+
+- config TOUCHSCREEN_HTCPEN
+- 	tristate "HTC Shift X9500 touchscreen"
+- 	depends on ISA
+-diff --git a/drivers/input/touchscreen/Makefile b/drivers/input/touchscreen/Makefile
+-index 8a4a3d3..e548376 100644
+---- a/drivers/input/touchscreen/Makefile
+-+++ b/drivers/input/touchscreen/Makefile
+-@@ -19,6 +19,7 @@ obj-$(CONFIG_TOUCHSCREEN_MTOUCH)	+= mtouch.o
+- obj-$(CONFIG_TOUCHSCREEN_MK712)		+= mk712.o
+- obj-$(CONFIG_TOUCHSCREEN_HP600)		+= hp680_ts_input.o
+- obj-$(CONFIG_TOUCHSCREEN_HP7XX)		+= jornada720_ts.o
+-+obj-$(CONFIG_TOUCHSCREEN_IPAQ_MICRO)	+= micro_ts.o
+- obj-$(CONFIG_TOUCHSCREEN_HTCPEN)	+= htcpen.o
+- obj-$(CONFIG_TOUCHSCREEN_USB_COMPOSITE)	+= usbtouchscreen.o
+- obj-$(CONFIG_TOUCHSCREEN_PENMOUNT)	+= penmount.o
+-diff --git a/drivers/input/touchscreen/micro_ts.c b/drivers/input/touchscreen/micro_ts.c
+-new file mode 100644
+-index 0000000..6f0bc1d
+---- /dev/null
+-+++ b/drivers/input/touchscreen/micro_ts.c
+-@@ -0,0 +1,159 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support, touchscreen subdevice
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ *
+-+ */
+-+
+-+
+-+#include <linux/module.h>
+-+#include <linux/version.h>
+-+
+-+#include <linux/init.h>
+-+#include <linux/fs.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/sched.h>
+-+#include <linux/pm.h>
+-+#include <linux/sysctl.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+-+
+-+#include <asm/irq.h>
+-+#include <mach/hardware.h>
+-+
+-+#include <linux/mfd/micro.h>
+-+
+-+
+-+struct ts_sample {
+-+	unsigned short x;
+-+	unsigned short y;
+-+};
+-+
+-+
+-+struct touchscreen_data {
+-+	struct input_dev *input;
+-+};
+-+
+-+static struct micro_private_t *p_micro;
+-+struct touchscreen_data *ts;
+-+
+-+static void micro_ts_receive(int len, unsigned char *data)
+-+{
+-+	if (len == 4) {
+-+		input_report_abs(ts->input, ABS_X, (data[2]<<8)+data[3]);
+-+		input_report_abs(ts->input, ABS_Y, (data[0]<<8)+data[1]);
+-+		input_report_abs(ts->input, ABS_PRESSURE, 1);
+-+		input_report_key(ts->input, BTN_TOUCH, 0);
+-+	}
+-+	if (len == 0) {
+-+		input_report_abs(ts->input, ABS_X, 0);
+-+		input_report_abs(ts->input, ABS_Y, 0);
+-+		input_report_abs(ts->input, ABS_PRESSURE, 0);
+-+		input_report_key(ts->input, BTN_TOUCH, 1);
+-+	}
+-+	input_sync(ts->input);
+-+}
+-+
+-+
+-+static int micro_ts_probe(struct platform_device *pdev)
+-+{
+-+	printk(KERN_ERR "micro touchscreen probe : begin\n");
+-+
+-+	ts = kzalloc(sizeof(*ts), GFP_KERNEL);
+-+	if (!ts)
+-+		return -ENOMEM;
+-+
+-+	p_micro = platform_get_drvdata(pdev);
+-+
+-+	platform_set_drvdata(pdev, ts);
+-+	/* dev->driver_data = ts; */
+-+
+-+	ts->input = input_allocate_device();
+-+
+-+	ts->input->evbit[0] = BIT(EV_ABS);
+-+	ts->input->absbit[0] = BIT(ABS_X) | BIT(ABS_Y) | BIT(ABS_PRESSURE);
+-+
+-+	ts->input->absmin[ABS_X] = 0;
+-+	ts->input->absmin[ABS_Y] = 0;
+-+	ts->input->absmin[ABS_PRESSURE] = 0;
+-+	ts->input->absmax[ABS_X] = 1023;
+-+	ts->input->absmax[ABS_Y] = 1023;
+-+	ts->input->absmax[ABS_PRESSURE] = 1;
+-+
+-+	ts->input->name = "micro ts";
+-+	/* ts->input->private = ts; */
+-+
+-+	input_register_device(ts->input);
+-+
+-+	/*--- callback ---*/
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_ts = micro_ts_receive;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	printk(KERN_ERR "micro touchscreen probe : end\n");
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_remove(struct platform_device *pdev)
+-+{
+-+	struct touchscreen_data *ts;
+-+
+-+	ts = platform_get_drvdata(pdev);
+-+
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_ts = NULL;
+-+	spin_unlock(p_micro->lock);
+-+	input_unregister_device(ts->input);
+-+	kfree(ts);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_suspend(struct platform_device *dev, pm_message_t statel)
+-+{
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_ts = NULL;
+-+	spin_unlock(p_micro->lock);
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_resume(struct platform_device *dev)
+-+{
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_ts = micro_ts_receive;
+-+	spin_unlock(p_micro->lock);
+-+	return 0;
+-+}
+-+
+-+struct platform_driver micro_ts_device_driver = {
+-+	.driver  = {
+-+		.name    = "h3600-micro-ts",
+-+	},
+-+	.probe   = micro_ts_probe,
+-+	.remove  = micro_ts_remove,
+-+	.suspend = micro_ts_suspend,
+-+	.resume  = micro_ts_resume,
+-+};
+-+
+-+static int micro_ts_init(void)
+-+{
+-+	return platform_driver_register(&micro_ts_device_driver);
+-+}
+-+
+-+static void micro_ts_cleanup(void)
+-+{
+-+	platform_driver_unregister(&micro_ts_device_driver);
+-+}
+-+
+-+module_init(micro_ts_init);
+-+module_exit(micro_ts_cleanup);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_AUTHOR("gremlin.it");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro touchscreen");
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0025-power-add-driver-for-battery-reading-on-iPaq-h3600.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0025-power-add-driver-for-battery-reading-on-iPaq-h3600.patch
+deleted file mode 100644
+index 30c782d..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0025-power-add-driver-for-battery-reading-on-iPaq-h3600.patch
++++ /dev/null
+@@ -1,322 +0,0 @@
+-From 3fe2a64cc91ac7406845e590e193834755b9748e Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:28:50 +0300
+-Subject: [PATCH 25/28] power: add driver for battery reading on iPaq h3600/h3100
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Note: this driver shows some strange values on my h3635.
+-Needs further investigation.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/power/Kconfig         |    8 ++
+- drivers/power/Makefile        |    3 +-
+- drivers/power/micro_battery.c |  260 +++++++++++++++++++++++++++++++++++++++++
+- 3 files changed, 270 insertions(+), 1 deletions(-)
+- create mode 100644 drivers/power/micro_battery.c
+-
+-diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+-index 33da112..d0deaa4 100644
+---- a/drivers/power/Kconfig
+-+++ b/drivers/power/Kconfig
+-@@ -63,6 +63,14 @@ config BATTERY_TOSA
+- 	  Say Y to enable support for the battery on the Sharp Zaurus
+- 	  SL-6000 (tosa) models.
+- 
+-+config IPAQ_MICRO_BATTERY
+-+        tristate "HP iPAQ Micro ASIC battery driver"
+-+        depends on IPAQ_MICRO
+-+        help
+-+          Choose this option if you want to monitor battery status on
+-+          Compaq/HP iPAQ h3100 h3600
+-+
+-+
+- config BATTERY_WM97XX
+- 	bool "WM97xx generic battery driver"
+- 	depends on TOUCHSCREEN_WM97XX=y
+-diff --git a/drivers/power/Makefile b/drivers/power/Makefile
+-index 2fcf41d..6042f8e 100644
+---- a/drivers/power/Makefile
+-+++ b/drivers/power/Makefile
+-@@ -22,7 +22,8 @@ obj-$(CONFIG_BATTERY_DS2760)	+= ds2760_battery.o
+- obj-$(CONFIG_BATTERY_PMU)	+= pmu_battery.o
+- obj-$(CONFIG_BATTERY_OLPC)	+= olpc_battery.o
+- obj-$(CONFIG_BATTERY_TOSA)	+= tosa_battery.o
+-+obj-$(CONFIG_IPAQ_MICRO_BATTERY)	+= micro_battery.o
+- obj-$(CONFIG_BATTERY_WM97XX)	+= wm97xx_battery.o
+- obj-$(CONFIG_BATTERY_BQ27x00)	+= bq27x00_battery.o
+- obj-$(CONFIG_BATTERY_DA9030)	+= da9030_battery.o
+--obj-$(CONFIG_CHARGER_PCF50633)	+= pcf50633-charger.o
+-\ No newline at end of file
+-+obj-$(CONFIG_CHARGER_PCF50633)	+= pcf50633-charger.o
+-diff --git a/drivers/power/micro_battery.c b/drivers/power/micro_battery.c
+-new file mode 100644
+-index 0000000..9ff0311
+---- /dev/null
+-+++ b/drivers/power/micro_battery.c
+-@@ -0,0 +1,260 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support, battery subdevice
+-+ * based on previous kernel 2.4 version
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ *
+-+ */
+-+
+-+
+-+#include <linux/module.h>
+-+#include <linux/version.h>
+-+
+-+#include <linux/init.h>
+-+#include <linux/fs.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/sched.h>
+-+#include <linux/pm.h>
+-+#include <linux/sysctl.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/power_supply.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/timer.h>
+-+
+-+#include <mach/hardware.h>
+-+
+-+#include <mach/h3600.h>
+-+#include <mach/SA-1100.h>
+-+
+-+#include <linux/mfd/micro.h>
+-+
+-+#define BATT_PERIOD (10 * HZ)
+-+
+-+#define H3600_BATT_STATUS_HIGH         0x01
+-+#define H3600_BATT_STATUS_LOW          0x02
+-+#define H3600_BATT_STATUS_CRITICAL     0x04
+-+#define H3600_BATT_STATUS_CHARGING     0x08
+-+#define H3600_BATT_STATUS_CHARGEMAIN   0x10
+-+#define H3600_BATT_STATUS_DEAD         0x20 /* Battery will not charge */
+-+#define H3600_BATT_STATUS_NOTINSTALLED 0x20 /* For expansion pack batteries */
+-+#define H3600_BATT_STATUS_FULL         0x40 /* Battery fully charged */
+-+#define H3600_BATT_STATUS_NOBATTERY    0x80
+-+#define H3600_BATT_STATUS_UNKNOWN      0xff
+-+
+-+
+-+static struct micro_private_t *p_micro;
+-+
+-+struct timer_list batt_timer;
+-+
+-+struct {
+-+	int ac;
+-+	int update_time;
+-+	int chemistry;
+-+	int voltage;
+-+	int temperature;
+-+	int flag;
+-+} micro_battery;
+-+
+-+static void micro_battery_receive(int len, unsigned char *data)
+-+{
+-+	pr_debug("h3600_battery: AC = %02x\n", data[0]);
+-+	pr_debug("h3600_battery: BAT1 chemistry = %02x\n", data[1]);
+-+	pr_debug("h3600_battery: BAT1 voltage = %d %02x%02x\n",
+-+		(data[3] << 8) + data[2], data[2], data[3]);
+-+	pr_debug("h3600_battery: BAT1 status = %02x\n", data[4]);
+-+
+-+	micro_battery.chemistry = data[1];
+-+	micro_battery.voltage = ((((unsigned short)data[3] << 8) + \
+-+				data[2]) * 5000L) * 1000 / 1024;
+-+	micro_battery.flag = data[4];
+-+
+-+	if (len == 9) {
+-+		pr_debug("h3600_battery: BAT2 chemistry = %02x\n", data[5]);
+-+		pr_debug("h3600_battery: BAT2 voltage = %d %02x%02x\n",
+-+				(data[7] << 8) + data[6], data[6], data[7]);
+-+		pr_debug("h3600_battery: BAT2 status = %02x\n", data[8]);
+-+	}
+-+}
+-+
+-+static void micro_temperature_receive(int len, unsigned char *data)
+-+{
+-+	micro_battery.temperature = ((unsigned short)data[1] << 8) + data[0];
+-+}
+-+
+-+void h3600_battery_read_status(unsigned long data)
+-+{
+-+	if (++data % 2)
+-+		h3600_micro_tx_msg(0x09, 0, NULL);
+-+	else
+-+		h3600_micro_tx_msg(0x06, 0, NULL);
+-+
+-+	batt_timer.expires += BATT_PERIOD;
+-+	batt_timer.data = data;
+-+
+-+	add_timer(&batt_timer);
+-+}
+-+
+-+int get_capacity(struct power_supply *b)
+-+{
+-+	switch (micro_battery.flag) {
+-+	case H3600_BATT_STATUS_HIGH:
+-+		return 100;
+-+		break;
+-+	case H3600_BATT_STATUS_LOW:
+-+		return 50;
+-+		break;
+-+	case H3600_BATT_STATUS_CRITICAL:
+-+		return 5;
+-+		break;
+-+	default:
+-+		break;
+-+	}
+-+	return 0;
+-+}
+-+
+-+int get_status(struct power_supply *b)
+-+{
+-+	if (micro_battery.flag == H3600_BATT_STATUS_UNKNOWN)
+-+		return POWER_SUPPLY_STATUS_UNKNOWN;
+-+
+-+	if (micro_battery.flag & H3600_BATT_STATUS_FULL)
+-+		return POWER_SUPPLY_STATUS_FULL;
+-+
+-+	if ((micro_battery.flag & H3600_BATT_STATUS_CHARGING) ||
+-+		(micro_battery.flag & H3600_BATT_STATUS_CHARGEMAIN))
+-+		return POWER_SUPPLY_STATUS_CHARGING;
+-+
+-+	return POWER_SUPPLY_STATUS_DISCHARGING;
+-+}
+-+
+-+static int micro_batt_get_property(struct power_supply *b,
+-+					enum power_supply_property psp,
+-+					union power_supply_propval *val)
+-+{
+-+	switch (psp) {
+-+	case POWER_SUPPLY_PROP_STATUS:
+-+		val->intval = get_status(b);
+-+		break;
+-+	case POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN:
+-+		val->intval = 4700000;
+-+		break;
+-+	case POWER_SUPPLY_PROP_CAPACITY:
+-+		val->intval = get_capacity(b);
+-+		break;
+-+	case POWER_SUPPLY_PROP_TEMP:
+-+		val->intval = micro_battery.temperature;
+-+		break;
+-+	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
+-+		val->intval = micro_battery.voltage;
+-+		break;
+-+	default:
+-+		return -EINVAL;
+-+	};
+-+
+-+	return 0;
+-+}
+-+
+-+static enum power_supply_property micro_batt_props[] = {
+-+	POWER_SUPPLY_PROP_STATUS,
+-+	POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN,
+-+	POWER_SUPPLY_PROP_CAPACITY,
+-+	POWER_SUPPLY_PROP_TEMP,
+-+	POWER_SUPPLY_PROP_VOLTAGE_NOW,
+-+};
+-+
+-+static struct power_supply h3600_battery = {
+-+	.name               = "main-battery",
+-+	.properties         = micro_batt_props,
+-+	.num_properties     = ARRAY_SIZE(micro_batt_props),
+-+	.get_property       = micro_batt_get_property,
+-+	.use_for_apm        = 1,
+-+};
+-+
+-+static int micro_batt_probe(struct platform_device *pdev)
+-+{
+-+	printk(KERN_ERR "micro battery probe : begin\n");
+-+
+-+	power_supply_register(&pdev->dev, &h3600_battery);
+-+
+-+	/*--- callback ---*/
+-+	p_micro = platform_get_drvdata(pdev);
+-+	spin_lock(p_micro->lock);
+-+	p_micro->h_batt = micro_battery_receive;
+-+	p_micro->h_temp = micro_temperature_receive;
+-+	spin_unlock(p_micro->lock);
+-+
+-+	/*--- timer ---*/
+-+	init_timer(&batt_timer);
+-+	batt_timer.expires = jiffies + BATT_PERIOD;
+-+	batt_timer.data = 0;
+-+	batt_timer.function = h3600_battery_read_status;
+-+
+-+	add_timer(&batt_timer);
+-+
+-+	printk(KERN_ERR "micro battery probe : end\n");
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_remove(struct platform_device *pdev)
+-+{
+-+	power_supply_unregister(&h3600_battery);
+-+	/*--- callback ---*/
+-+	init_timer(&batt_timer);
+-+	p_micro->h_batt = NULL;
+-+	p_micro->h_temp = NULL;
+-+	spin_unlock(p_micro->lock);
+-+	/*--- timer ---*/
+-+	del_timer_sync(&batt_timer);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_suspend(struct platform_device *pdev, pm_message_t state)
+-+{
+-+	/*--- timer ---*/
+-+	del_timer(&batt_timer);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_resume(struct platform_device *pdev)
+-+{
+-+	/*--- timer ---*/
+-+	add_timer(&batt_timer);
+-+
+-+	return 0;
+-+}
+-+
+-+struct platform_driver micro_batt_device_driver = {
+-+	.driver		= {
+-+		.name	= "h3600-micro-battery",
+-+	},
+-+	.probe		= micro_batt_probe,
+-+	.remove		= micro_batt_remove,
+-+	.suspend	= micro_batt_suspend,
+-+	.resume		= micro_batt_resume,
+-+};
+-+
+-+static int micro_batt_init(void)
+-+{
+-+	return platform_driver_register(&micro_batt_device_driver);
+-+}
+-+
+-+static void micro_batt_cleanup(void)
+-+{
+-+	platform_driver_unregister(&micro_batt_device_driver);
+-+}
+-+
+-+module_init(micro_batt_init);
+-+module_exit(micro_batt_cleanup);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_AUTHOR("gremlin.it");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro battery");
+-+
+-+
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0026-h3600-add-micro-platform-device.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0026-h3600-add-micro-platform-device.patch
+deleted file mode 100644
+index 3db47d4..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0026-h3600-add-micro-platform-device.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From c294ebd17bcc3138edc87523195c877c3b094205 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Fri, 13 Mar 2009 22:30:15 +0300
+-Subject: [PATCH 26/28] h3600: add micro platform device
+-
+-So 'micro' MFD driver can be used for backlight, touchscreen, buttons
+-and battery.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |    8 +++++++-
+- 1 files changed, 7 insertions(+), 1 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index c7e0458..ee85530 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -449,8 +449,14 @@ static struct platform_device h3600_keys = {
+- 	},
+- };
+- 
+-+struct platform_device h3600_micro_device = {
+-+	.name	= "h3600-micro",
+-+	.id	= -1,
+-+};
+-+
+- static struct platform_device *h3600_devices[] = {
+--       &h3600_keys,
+-+	&h3600_keys,
+-+	&h3600_micro_device,
+- };
+- 
+- static void h3600_mach_init(void)
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0027-USB-add-sa1100_udc-driver.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0027-USB-add-sa1100_udc-driver.patch
+deleted file mode 100644
+index 4b2e4b9..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0027-USB-add-sa1100_udc-driver.patch
++++ /dev/null
+@@ -1,2592 +0,0 @@
+-From c573d808bc27f52066b692e7a2572709cccd0818 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 18:41:03 +0300
+-Subject: [PATCH 27/28] USB: add sa1100_udc driver
+-
+-It's original driver by Nick Bane, slightly cleaned
+-(formatting mostly) and ported to current kernel.
+-This driver is a mess, but at least it works somehow.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- drivers/usb/gadget/Kconfig      |   15 +
+- drivers/usb/gadget/Makefile     |    1 +
+- drivers/usb/gadget/sa1100_udc.c | 2416 +++++++++++++++++++++++++++++++++++++++
+- drivers/usb/gadget/sa1100_udc.h |  104 ++
+- 4 files changed, 2536 insertions(+), 0 deletions(-)
+- create mode 100644 drivers/usb/gadget/sa1100_udc.c
+- create mode 100644 drivers/usb/gadget/sa1100_udc.h
+-
+-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+-index e55fef5..b71dfbf 100644
+---- a/drivers/usb/gadget/Kconfig
+-+++ b/drivers/usb/gadget/Kconfig
+-@@ -464,6 +464,21 @@ config USB_GOKU
+- # LAST -- dummy/emulated controller
+- #
+- 
+-+config USB_GADGET_SA1100
+-+	boolean "SA1100 USB Device Port"
+-+	depends on ARCH_SA1100
+-+	select USB_GADGET_SELECTED
+-+	help
+-+
+-+	   Say "y" to link the driver statically, or "m" to build a
+-+	   dynamically linked module called "sa1100_udc" and force all
+-+	   gadget drivers to also be dynamically linked.
+-+
+-+config USB_SA1100
+-+	tristate
+-+	depends on USB_GADGET_SA1100
+-+	default USB_GADGET
+-+
+- config USB_GADGET_DUMMY_HCD
+- 	boolean "Dummy HCD (DEVELOPMENT)"
+- 	depends on USB=y || (USB=m && USB_GADGET=m)
+-diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
+-index 39a51d7..70e56d0 100644
+---- a/drivers/usb/gadget/Makefile
+-+++ b/drivers/usb/gadget/Makefile
+-@@ -15,6 +15,7 @@ obj-$(CONFIG_USB_GOKU)		+= goku_udc.o
+- obj-$(CONFIG_USB_OMAP)		+= omap_udc.o
+- obj-$(CONFIG_USB_LH7A40X)	+= lh7a40x_udc.o
+- obj-$(CONFIG_USB_S3C2410)	+= s3c2410_udc.o
+-+obj-$(CONFIG_USB_SA1100)	+= sa1100_udc.o
+- obj-$(CONFIG_USB_AT91)		+= at91_udc.o
+- obj-$(CONFIG_USB_ATMEL_USBA)	+= atmel_usba_udc.o
+- obj-$(CONFIG_USB_FSL_USB2)	+= fsl_usb2_udc.o
+-diff --git a/drivers/usb/gadget/sa1100_udc.c b/drivers/usb/gadget/sa1100_udc.c
+-new file mode 100644
+-index 0000000..2f5bd85
+---- /dev/null
+-+++ b/drivers/usb/gadget/sa1100_udc.c
+-@@ -0,0 +1,2416 @@
+-+/*
+-+ * SA1100 USB Device Controller (UDC) driver.
+-+ *
+-+ * Copyright (C) Compaq Computer Corporation, 1998, 1999
+-+ * Copyright (C) Extenex Corporation, 2001
+-+ * Copyright (C) David Brownell, 2003
+-+ * Copyright (C) Nick Bane, 2005, 2006, 2007
+-+ *   Many fragments from pxa2xx_udc.c and mach-sa1100 driver with various
+-+ *   GPL Copyright authors incl Russel king and Nicolas Pitre
+-+ *   Working port to 2.6.32-1 by N C Bane
+-+ *
+-+ * This file provides interrupt routing and overall coordination for the
+-+ * sa1100 USB endpoints: ep0, ep1out-bulk, ep2in-bulk, as well as device
+-+ * initialization and some parts of USB "Chapter 9" device behavior.
+-+ *
+-+ * It implements the "USB gadget controller" API, abstracting most hardware
+-+ * details so that drivers running on top of this API are mostly independent
+-+ * of hardware.  A key exception is that ep0 logic needs to understand which
+-+ * endpoints a given controller has, and their capabilities.  Also, hardware
+-+ * that doesn't fully support USB (like sa1100) may need workarounds in the
+-+ * protocols implemented by device functions.
+-+ *
+-+ * See linux/Documentation/arm/SA1100/SA1100_USB for more info, or the
+-+ * kerneldoc for the API exposed to gadget drivers.
+-+ *
+-+ */
+-+#define DEBUG	1
+-+#define	VERBOSE	1
+-+
+-+#define SA1100_USB_DEBUG
+-+#ifdef SA1100_USB_DEBUG
+-+static int sa1100_usb_debug;
+-+#endif
+-+
+-+#define NCB_DMA_FIX
+-+#ifdef NCB_DMA_FIX
+-+/* This is a clunky fix for dma alignemnt issues
+-+ * It should probably be done better by someone more
+-+ * steeped in DMA lore
+-+ */
+-+#include <linux/slab.h>
+-+#define SEND_BUFFER_SIZE 4096	/* this is probably a bit big */
+-+#define RECEIVE_BUFFER_SIZE 256	/* 64 may be all that is necessary */
+-+static char *send_buffer;
+-+static char *receive_buffer;
+-+#endif
+-+
+-+#include <linux/module.h>
+-+#include <linux/kernel.h>
+-+#include <linux/delay.h>
+-+#include <linux/ioport.h>
+-+#include <linux/sched.h>
+-+#include <linux/slab.h>
+-+#include <linux/smp_lock.h>
+-+#include <linux/errno.h>
+-+#include <linux/init.h>
+-+#include <linux/timer.h>
+-+#include <linux/list.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/version.h>
+-+#include <linux/device.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/io.h>
+-+
+-+#include <asm/irq.h>
+-+#include <mach/dma.h>
+-+#include <asm/system.h>
+-+#include <asm/unaligned.h>
+-+
+-+#include <linux/usb.h>
+-+#include <linux/usb/ch9.h>
+-+#include <linux/usb/gadget.h>
+-+
+-+#if CONFIG_PROC_FS
+-+#include <linux/proc_fs.h>
+-+#endif
+-+
+-+#define	DRIVER_VERSION		__DATE__
+-+
+-+#define	DMA_ADDR_INVALID (~(dma_addr_t)0)
+-+
+-+
+-+static const char driver_name[] = "sa1100_udc";
+-+static const char driver_desc[] = "SA-1110 USB Device Controller";
+-+
+-+static const char ep0name[] = "ep0";
+-+
+-+#ifdef	DEBUG
+-+static char *type_string(u8 bmAttributes)
+-+{
+-+	switch ((bmAttributes) & USB_ENDPOINT_XFERTYPE_MASK) {
+-+	case USB_ENDPOINT_XFER_BULK:
+-+		return "bulk";
+-+	/* case USB_ENDPOINT_XFER_ISOC:
+-+		return "iso";  */
+-+	case USB_ENDPOINT_XFER_INT:
+-+		return "intr";
+-+	};
+-+	return "control";
+-+}
+-+#endif
+-+
+-+#include <linux/dma-mapping.h>
+-+struct usb_stats_t {
+-+	 unsigned long ep0_fifo_write_failures;
+-+	 unsigned long ep0_bytes_written;
+-+	 unsigned long ep0_fifo_read_failures;
+-+	 unsigned long ep0_bytes_read;
+-+};
+-+
+-+struct usb_info_t {
+-+	dma_regs_t *dmaregs_tx, *dmaregs_rx;
+-+	int state;
+-+	unsigned char address;
+-+	struct usb_stats_t stats;
+-+};
+-+
+-+enum { kError = -1, kEvSuspend = 0, kEvReset = 1,
+-+	kEvResume = 2, kEvAddress = 3, kEvConfig = 4, kEvDeConfig = 5 };
+-+
+-+int usbctl_next_state_on_event(int event)
+-+{
+-+    return 0;
+-+}
+-+static struct usb_info_t usbd_info;
+-+
+-+/* UDC register utility functions */
+-+#define UDC_write(reg, val) { \
+-+	int i = 10000; \
+-+	do { \
+-+		(reg) = (val); \
+-+		if (i-- <= 0) { \
+-+			pr_err("%s [%d]: write %#x to %p (%#lx) failed\n", \
+-+				__func__, __LINE__, (val), &(reg), (reg)); \
+-+			break; \
+-+		} \
+-+	} while ((reg) != (val)); \
+-+}
+-+
+-+#define UDC_set(reg, val) { \
+-+	int i = 10000; \
+-+	do { \
+-+		(reg) |= (val); \
+-+		if (i-- <= 0) { \
+-+			pr_err("%s [%d]: set %#x of %p (%#lx) failed\n", \
+-+				__func__, __LINE__, (val), &(reg), (reg)); \
+-+			break; \
+-+		} \
+-+	} while (!((reg) & (val))); \
+-+}
+-+
+-+#define UDC_clear(reg, val) { \
+-+	int i = 10000; \
+-+	do { \
+-+		(reg) &= ~(val); \
+-+		if (i-- <= 0) { \
+-+			pr_err("%s [%d]: clear %#x of %p (%#lx) failed\n", \
+-+				__func__, __LINE__, (val), &(reg), (reg)); \
+-+			break; \
+-+		} \
+-+	} while ((reg) & (val)); \
+-+}
+-+
+-+#define UDC_flip(reg, val) { \
+-+	int i = 10000; \
+-+	(reg) = (val); \
+-+	do { \
+-+		(reg) = (val); \
+-+		if (i-- <= 0) { \
+-+			pr_err("%s [%d]: flip %#x of %p (%#lx) failed\n", \
+-+				__func__, __LINE__, (val), &(reg), (reg)); \
+-+			break; \
+-+		} \
+-+	} while (((reg) & (val))); \
+-+}
+-+
+-+#include "sa1100_udc.h"
+-+
+-+static struct sa1100_udc	*the_controller;
+-+static void nuke(struct sa1100_ep *, int status);
+-+static void done(struct sa1100_ep *ep, struct sa1100_request *req, int status);
+-+static inline void ep0_idle(struct sa1100_udc *dev)
+-+{
+-+	dev->ep0state = EP0_IDLE;
+-+}
+-+
+-+/* ep0 handlers */
+-+
+-+/* 1 == lots of trace noise,  0 = only "important' stuff */
+-+#define VERBOSITY 1
+-+
+-+#if 1 && !defined(ASSERT)
+-+#define ASSERT(expr) \
+-+	if (!(expr)) { \
+-+		pr_err("Assertion failed! %s, %s, %s, line = %d\n",\
+-+		#expr, __FILE__, __func__, __LINE__); \
+-+	}
+-+#else
+-+#  define ASSERT(expr)
+-+#endif
+-+
+-+#if VERBOSITY
+-+#define PRINTKD(fmt, args...) printk(fmt, ## args)
+-+#else
+-+#define PRINTKD(fmt, args...)
+-+#endif
+-+
+-+/* other subroutines */
+-+unsigned int (*wrint)(void);
+-+static void ep0_int_hndlr(void);
+-+static void ep0_queue(void *buf, unsigned int req, unsigned int act);
+-+static void write_fifo(void);
+-+static int read_fifo(struct usb_ctrlrequest *p);
+-+
+-+/* some voodo helpers  01Mar01ww */
+-+static void set_cs_bits(__u32 set_bits);
+-+static void set_de(void);
+-+static void set_ipr(void);
+-+static void set_ipr_and_de(void);
+-+static bool clear_opr(void);
+-+
+-+/***************************************************************************
+-+Inline Helpers
+-+***************************************************************************/
+-+
+-+/* Data extraction from usb_request_t fields */
+-+enum { kTargetDevice = 0, kTargetInterface = 1, kTargetEndpoint = 2 };
+-+static inline int request_target(__u8 b) { return (int) (b & 0x0F); }
+-+
+-+static inline int windex_to_ep_num(__u16 w) { return (int) (w & 0x000F); }
+-+inline int type_code_from_request(__u8 by) { return ((by >> 4) & 3); }
+-+
+-+/* following is hook for self-powered flag in GET_STATUS. Some devices
+-+   .. might like to override and return real info */
+-+static inline bool self_powered_hook(void) { return true; }
+-+
+-+#if VERBOSITY
+-+/* "pcs" == "print control status" */
+-+static inline void pcs(void)
+-+{
+-+	 __u32 foo = Ser0UDCCS0;
+-+	 printk("%8.8X: %s %s %s %s\n",
+-+			 foo,
+-+			 foo & UDCCS0_SE ? "SE" : "",
+-+			 foo & UDCCS0_OPR ? "OPR" : "",
+-+			 foo & UDCCS0_IPR ? "IPR" : "",
+-+			 foo & UDCCS0_SST ? "SST" : ""
+-+	 );
+-+}
+-+static inline void preq(struct usb_ctrlrequest *pReq)
+-+{
+-+	 static char *tnames[] = { "dev", "intf", "ep", "oth" };
+-+	 static char *rnames[] = { "std", "class", "vendor", "???" };
+-+	 char *psz;
+-+	 switch (pReq->bRequest) {
+-+	 case USB_REQ_GET_STATUS:
+-+		psz = "get stat";
+-+		break;
+-+	 case USB_REQ_CLEAR_FEATURE:
+-+		psz = "clr feat";
+-+		break;
+-+	 case USB_REQ_SET_FEATURE:
+-+		psz = "set feat";
+-+		break;
+-+	 case USB_REQ_SET_ADDRESS:
+-+		psz = "set addr";
+-+		break;
+-+	 case USB_REQ_GET_DESCRIPTOR:
+-+		psz = "get desc";
+-+		break;
+-+	 case USB_REQ_SET_DESCRIPTOR:
+-+		psz = "set desc";
+-+		break;
+-+	 case USB_REQ_GET_CONFIGURATION:
+-+		psz = "get cfg";
+-+		break;
+-+	 case USB_REQ_SET_CONFIGURATION:
+-+		psz = "set cfg";
+-+		break;
+-+	 case USB_REQ_GET_INTERFACE:
+-+		psz = "get intf";
+-+		break;
+-+	 case USB_REQ_SET_INTERFACE:
+-+		psz = "set intf";
+-+		break;
+-+	 default:
+-+		psz = "unknown";
+-+		break;
+-+	 }
+-+	 pr_err("- [%s: %s req to %s. dir=%s]\n", psz,
+-+			 rnames[(pReq->bRequestType >> 5) & 3],
+-+			 tnames[pReq->bRequestType & 3],
+-+			 (pReq->bRequestType & 0x80) ? "in" : "out");
+-+}
+-+
+-+static inline void usbctl_dump_request(const char *prefix,
+-+					const struct usb_ctrlrequest *req)
+-+{
+-+	pr_err("%s: bRequestType=0x%02x bRequest=0x%02x "
+-+		"wValue=0x%04x wIndex=0x%04x wLength=0x%04x\n",
+-+		prefix, req->bRequestType, req->bRequest,
+-+		le16_to_cpu(req->wValue), le16_to_cpu(req->wIndex),
+-+		le16_to_cpu(req->wLength));
+-+}
+-+#else
+-+static inline void pcs(void) {}
+-+static inline void preq(void *x) {}
+-+static inline void usbctl_dump_request(const char *prefix,
+-+					const struct usb_ctrlrequest *req) {}
+-+#endif
+-+
+-+/***************************************************************************
+-+Globals
+-+***************************************************************************/
+-+static const char pszMe[] = "usbep0: ";
+-+
+-+
+-+/* global write struct to keep write
+-+   ..state around across interrupts */
+-+static struct {
+-+		unsigned char *p;
+-+		int bytes_left;
+-+} wr;
+-+
+-+/***************************************************************************
+-+Public Interface
+-+***************************************************************************/
+-+
+-+/* reset received from HUB (or controller just went nuts and reset by itself!)
+-+  so udc core has been reset, track this state here  */
+-+void ep0_reset(void)
+-+{
+-+	/* reset state machine */
+-+	wr.p = NULL;
+-+	wr.bytes_left = 0;
+-+	usbd_info.address = 0;
+-+/* needed? */
+-+	Ser0UDCAR = 0;
+-+}
+-+
+-+
+-+/* handle interrupt for endpoint zero */
+-+
+-+inline void ep0_clear_write(void)
+-+{
+-+	wr.p = NULL;
+-+	wr.bytes_left = 0;
+-+}
+-+
+-+/* this is a config packet parser based on that from the updated HH 2.6 udc */
+-+static void ep0_read_packet(void)
+-+{
+-+	 unsigned char status_buf[2];  /* returned in GET_STATUS */
+-+	 struct usb_ctrlrequest req;
+-+	 int request_type;
+-+	 int n;
+-+	 __u32 address;
+-+	 __u32 in, out;
+-+
+-+	 /* reset previous count */
+-+	 the_controller->ep0_req_len = -1;
+-+
+-+	 /* read the setup request */
+-+	 n = read_fifo(&req);
+-+	 usbctl_dump_request("ep0_read_packet", &req);
+-+
+-+	 if (n != sizeof(req)) {
+-+		pr_err("%ssetup begin: fifo READ ERROR wanted %d bytes"
+-+			" got %d. Stalling out...\n",
+-+			pszMe, sizeof(req), n);
+-+		  /* force stall, serviced out */
+-+		set_cs_bits(UDCCS0_FST | UDCCS0_SO);
+-+		goto sh_sb_end;
+-+	 }
+-+
+-+	 /* Is it a standard request? (not vendor or class request) */
+-+	 request_type = type_code_from_request(req.bRequestType);
+-+	 if (request_type != 0) {
+-+		pr_err("%ssetup begin: unsupported bRequestType: %d ignored\n",
+-+				pszMe, request_type);
+-+		set_cs_bits(UDCCS0_DE | UDCCS0_SO);
+-+		goto sh_sb_end;
+-+	 }
+-+
+-+	/* save requested reply size */
+-+	the_controller->ep0_req_len = le16_to_cpu(req.wLength);
+-+	PRINTKD("%s: request length is %d\n", __func__,
+-+		the_controller->ep0_req_len);
+-+
+-+#if VERBOSITY
+-+	 {
+-+	 unsigned char *pdb = (unsigned char *) &req;
+-+	 PRINTKD("%2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X %2.2X ",
+-+		 pdb[0], pdb[1], pdb[2], pdb[3], pdb[4], pdb[5], pdb[6], pdb[7]
+-+		  );
+-+	 preq(&req);
+-+	 }
+-+#endif
+-+
+-+	 /* Handle it */
+-+	switch (req.bRequest) {
+-+
+-+		/* This first bunch have no data phase */
+-+
+-+	case USB_REQ_SET_ADDRESS:
+-+		address = (__u32) (req.wValue & 0x7F);
+-+		/* when SO and DE sent, UDC will enter status phase and ack,
+-+		..propagating new address to udc core. Next control transfer
+-+		..will be on the new address. You can't see the change in a
+-+		..read back of CAR until then. (about 250us later, on my box).
+-+		..The original Intel driver sets S0 and DE and code to check
+-+		..that address has propagated here. I tried this, but it
+-+		..would only work sometimes! The rest of the time it would
+-+		..never propagate and we'd spin forever. So now I just set
+-+		..it and pray...
+-+		*/
+-+		Ser0UDCAR = address;
+-+		usbd_info.address = address;
+-+		usbctl_next_state_on_event(kEvAddress);
+-+		set_cs_bits(UDCCS0_SO | UDCCS0_DE);  /* no data phase */
+-+		pr_err("%sI have been assigned address: %d\n", pszMe,
+-+			address);
+-+		break;
+-+
+-+
+-+	case USB_REQ_SET_CONFIGURATION:
+-+		if (req.wValue == 1) {
+-+			/* configured */
+-+			if (usbctl_next_state_on_event(kEvConfig) != kError) {
+-+				/* (re)set the out and in max packet sizes */
+-+				PRINTKD("%s: calling the_controller."
+-+				"driver->setup with SET_CONFIGURATION\n",
+-+				__func__);
+-+				the_controller->driver->setup(&the_controller->gadget, &req);
+-+				in = __le16_to_cpu(the_controller->ep[1].ep.maxpacket);
+-+				out = __le16_to_cpu(the_controller->ep[2].ep.maxpacket);
+-+				Ser0UDCOMP = (out - 1);
+-+				Ser0UDCIMP = (in - 1);
+-+				/* we are configured */
+-+				usbd_info.state = USB_STATE_CONFIGURED;
+-+				/* enable rx and tx interrupts */
+-+				Ser0UDCCR &= ~(UDCCR_RIM | UDCCR_TIM);
+-+
+-+				pr_err("%sConfigured (OMP=%8.8X IMP=%8.8X)\n",
+-+					pszMe, out, in);
+-+				break;
+-+			}
+-+		} else if (req.wValue == 0) {
+-+			/* de-configured */
+-+			if (usbctl_next_state_on_event(kEvDeConfig) != kError)
+-+				pr_err("%sDe-Configured\n", pszMe);
+-+			usbd_info.state = 0;
+-+			Ser0UDCCR |= UDCCR_RIM | UDCCR_TIM;
+-+			ep1_reset();
+-+			ep2_reset();
+-+			pr_err("%s: de-configured. Tx and Rx interrupts"
+-+				"disabled. ep1 and ep2 reset\n", __func__);
+-+		} else {
+-+			pr_err("%ssetup phase: Unknown "
+-+				"\"set configuration\" data %d\n",
+-+				pszMe, req.wValue);
+-+		}
+-+		set_cs_bits(UDCCS0_SO | UDCCS0_DE);  /* no data phase */
+-+		break;
+-+
+-+	case USB_REQ_CLEAR_FEATURE:
+-+		/* could check data length, direction...26Jan01ww */
+-+		if (req.wValue == 0) { /* clearing ENDPOINT_HALT/STALL */
+-+			int ep = windex_to_ep_num(req.wIndex);
+-+			if (ep == 1) {
+-+				pr_err("%sclear feature \"endpoint halt\" "
+-+					" on receiver\n", pszMe);
+-+					ep1_reset();
+-+			} else if (ep == 2) {
+-+				pr_err("%sclear feature \"endpoint halt\" "
+-+						"on xmitter\n", pszMe);
+-+					ep2_reset();
+-+			} else {
+-+				pr_err("%sclear feature \"endpoint halt\" "
+-+					"on unsupported ep # %d\n",
+-+					pszMe, ep);
+-+			}
+-+		} else {
+-+			pr_err("%sUnsupported feature selector (%d) "
+-+				"in clear feature. Ignored.\n" ,
+-+				pszMe, req.wValue);
+-+		}
+-+		set_cs_bits(UDCCS0_SO | UDCCS0_DE);  /* no data phase */
+-+		break;
+-+
+-+	case USB_REQ_SET_FEATURE:
+-+		if (req.wValue == 0) { /* setting ENDPOINT_HALT/STALL */
+-+			int ep = windex_to_ep_num(req.wValue);
+-+			if (ep == 1) {
+-+				pr_err("%set feature \"endpoint halt\" "
+-+						"on receiver\n", pszMe);
+-+				ep1_stall();
+-+			} else if (ep == 2) {
+-+				pr_err("%sset feature \"endpoint halt\" "
+-+						" on xmitter\n", pszMe);
+-+				ep2_stall();
+-+			} else {
+-+				pr_err("%sset feature \"endpoint halt\" "
+-+					"on unsupported ep # %d\n",
+-+						pszMe, ep);
+-+			}
+-+		  } else {
+-+			pr_err("%sUnsupported feature selector "
+-+					   "(%d) in set feature\n",
+-+					   pszMe, req.wValue);
+-+		  }
+-+		  set_cs_bits(UDCCS0_SO | UDCCS0_DE);  /* no data phase */
+-+		  break;
+-+
+-+		  /* The rest have a data phase that writes back to the host */
+-+	case USB_REQ_GET_STATUS:
+-+		/* return status bit flags */
+-+		status_buf[0] = status_buf[1] = 0;
+-+		n = request_target(req.bRequestType);
+-+		switch (n) {
+-+		case kTargetDevice:
+-+			if (self_powered_hook())
+-+				status_buf[0] |= 1;
+-+			break;
+-+		case kTargetInterface:
+-+			break;
+-+		case kTargetEndpoint:
+-+			/* return stalled bit */
+-+			n = windex_to_ep_num(req.wIndex);
+-+			if (n == 1)
+-+				status_buf[0] |= (Ser0UDCCS1 & UDCCS1_FST) >> 4;
+-+			else if (n == 2)
+-+				status_buf[0] |= (Ser0UDCCS2 & UDCCS2_FST) >> 5;
+-+			else
+-+				pr_err("%sUnknown endpoint (%d) "
+-+					"in GET_STATUS\n", pszMe, n);
+-+			break;
+-+		default:
+-+			pr_err("%sUnknown target (%d) in GET_STATUS\n",
+-+				   pszMe, n);
+-+			/* fall thru */
+-+			break;
+-+		}
+-+		PRINTKD("%s: GET_STATUS writing %d\n", __func__, req.wLength);
+-+		ep0_queue(status_buf, req.wLength, sizeof(status_buf));
+-+		break;
+-+	case USB_REQ_GET_DESCRIPTOR:
+-+		PRINTKD("%s: calling the_controller.driver->setup"
+-+			" with GET_DESCRIPTOR\n", __func__);
+-+		the_controller->driver->setup(&the_controller->gadget, &req);
+-+		break;
+-+	case USB_REQ_GET_CONFIGURATION:
+-+		PRINTKD("%s: calling the_controller.driver->setup"
+-+			" with GET_CONFIGURATION\n", __func__);
+-+		the_controller->driver->setup(&the_controller->gadget, &req);
+-+		break;
+-+	case USB_REQ_GET_INTERFACE:
+-+		PRINTKD("%s: calling the_controller->driver->setup"
+-+			" with GET_INTERFACE\n", __func__);
+-+		the_controller->driver->setup(&the_controller->gadget, &req);
+-+		break;
+-+	case USB_REQ_SET_INTERFACE:
+-+		PRINTKD("%s: calling the_controller->driver->setup"
+-+			" with SET_INTERFACE\n", __func__);
+-+		the_controller->driver->setup(&the_controller->gadget, &req);
+-+		break;
+-+	default:
+-+		pr_err("%sunknown request 0x%x\n", pszMe, req.bRequest);
+-+		break;
+-+	} /* switch( bRequest ) */
+-+
+-+sh_sb_end:
+-+	 return;
+-+
+-+}
+-+
+-+static void ep0_int_hndlr(void)
+-+{
+-+	u32 cs_reg_in;
+-+
+-+	pcs();
+-+
+-+	cs_reg_in = Ser0UDCCS0;
+-+
+-+	/*
+-+	 * If "setup end" has been set, the usb controller has terminated
+-+	 * a setup transaction before we set DE. This happens during
+-+	 * enumeration with some hosts. For example, the host will ask for
+-+	 * our device descriptor and specify a return of 64 bytes. When we
+-+	 * hand back the first 8, the host will know our max packet size
+-+	 * and turn around and issue a new setup immediately. This causes
+-+	 * the UDC to auto-ack the new setup and set SE. We must then
+-+	 * "unload" (process) the new setup, which is what will happen
+-+	 * after this preamble is finished executing.
+-+	 */
+-+	if (cs_reg_in & UDCCS0_SE) {
+-+		PRINTKD("UDC: early termination of setup\n");
+-+
+-+		/*
+-+		 * Clear setup end
+-+		 */
+-+		set_cs_bits(UDCCS0_SSE);
+-+
+-+		/*
+-+		 * Clear any pending write.
+-+		 */
+-+		ep0_clear_write();
+-+	}
+-+
+-+	/*
+-+	 * UDC sent a stall due to a protocol violation.
+-+	 */
+-+	if (cs_reg_in & UDCCS0_SST) {
+-+		PRINTKD("UDC: write_preamble: UDC sent stall\n");
+-+
+-+		/*
+-+		 * Clear sent stall
+-+		 */
+-+		set_cs_bits(UDCCS0_SST);
+-+
+-+		/*
+-+		 * Clear any pending write.
+-+		 */
+-+		ep0_clear_write();
+-+	}
+-+
+-+	switch (cs_reg_in & (UDCCS0_OPR | UDCCS0_IPR)) {
+-+	case UDCCS0_OPR | UDCCS0_IPR:
+-+		PRINTKD("UDC: write_preamble: see OPR. Stopping write to "
+-+			"handle new SETUP\n");
+-+
+-+		/*
+-+		 * very rarely, you can get OPR and
+-+		 * leftover IPR. Try to clear
+-+		 */
+-+		UDC_clear(Ser0UDCCS0, UDCCS0_IPR);
+-+
+-+		/*
+-+		 * Clear any pending write.
+-+		 */
+-+		ep0_clear_write();
+-+
+-+		/*FALLTHROUGH*/
+-+	case UDCCS0_OPR:
+-+		/*
+-+		 * A new setup request is pending.  Handle
+-+		 * it. Note that we don't try to read a
+-+		 * packet if SE was set and OPR is clear.
+-+		 */
+-+		ep0_read_packet();
+-+		break;
+-+
+-+	case 0:
+-+		/* if data pending ... */
+-+		if (wr.p) {
+-+			unsigned int cs_bits = 0;
+-+			if (wr.bytes_left != 0) {
+-+				/*
+-+				 * More data to go
+-+				 */
+-+				write_fifo();
+-+				/* packet ready */
+-+				cs_bits |= UDCCS0_IPR;
+-+			}
+-+
+-+			if (wr.bytes_left == 0) {
+-+				/*
+-+				 * All data sent.
+-+				 */
+-+				cs_bits |= wrint();
+-+				/* a null packet may be following */
+-+				if (!wrint)
+-+					ep0_clear_write();
+-+			}
+-+			set_cs_bits(cs_bits);
+-+		} else
+-+		    PRINTKD("%s: No data - probably an ACK\n", __func__);
+-+		break;
+-+
+-+	case UDCCS0_IPR:
+-+		PRINTKD("UDC: IPR set, not writing\n");
+-+		break;
+-+	}
+-+
+-+	pcs();
+-+	PRINTKD("-end-\n");
+-+}
+-+
+-+static unsigned int ep0_sh_write_data(void)
+-+{
+-+	/*
+-+	 * If bytes left is zero, we are coming in on the
+-+	 * interrupt after the last packet went out. And
+-+	 * we know we don't have to empty packet this
+-+	 * transfer so just set DE and we are done
+-+	 */
+-+	PRINTKD("UDC: normal packet ended\n");
+-+	wrint = NULL;
+-+	return UDCCS0_DE;
+-+}
+-+
+-+static unsigned int ep0_sh_write_with_empty_packet(void)
+-+{
+-+	/*
+-+	 * If bytes left is zero, we are coming in on the
+-+	 * interrupt after the last packet went out.
+-+	 * We must do short packet suff, so set DE and IPR
+-+	 */
+-+	PRINTKD("UDC: short packet sent\n");
+-+	wrint = NULL;
+-+	return UDCCS0_IPR | UDCCS0_DE;
+-+}
+-+
+-+static unsigned int ep0_sh_write_data_then_empty_packet(void)
+-+{
+-+	PRINTKD("UDC: last packet full. Send empty packet next\n");
+-+	wrint = ep0_sh_write_with_empty_packet;
+-+	return 0;
+-+}
+-+
+-+static void ep0_queue(void *buf, unsigned int len, unsigned int req_len)
+-+{
+-+	__u32 cs_reg_bits = UDCCS0_IPR;
+-+
+-+	PRINTKD("a=%d r=%d\n", len, req_len);
+-+
+-+	if (len == 0) {
+-+		/* no output packet to wait for */
+-+		PRINTKD("%s: zero byte packet being queued."
+-+			" Setting DE and OPR end exiting\n", __func__);
+-+		set_cs_bits(UDCCS0_DE | UDCCS0_SO);
+-+		return;
+-+	}
+-+
+-+	/*
+-+	 * thou shalt not enter data phase until
+-+	 * Out Packet Ready is clear
+-+	 */
+-+	if (!clear_opr()) {
+-+		pr_err("UDC: SO did not clear OPR\n");
+-+		set_cs_bits(UDCCS0_DE | UDCCS0_SO);
+-+		return;
+-+	}
+-+
+-+	/* note data to xmit stored */
+-+	wr.p = buf;
+-+	wr.bytes_left = min(len, req_len);
+-+
+-+	/* write the first block */
+-+	write_fifo();
+-+
+-+	/* done already? */
+-+	if (wr.bytes_left == 0) {
+-+		/*
+-+		 * out in one, so data end
+-+		 */
+-+		cs_reg_bits |= UDCCS0_DE;
+-+		ep0_clear_write();
+-+	/* rest is a shorter than expected reply? */
+-+	} else if (len < req_len) {
+-+		/*
+-+		 * we are going to short-change host
+-+		 * so need nul to not stall
+-+		 */
+-+		if (len % 8) {
+-+			PRINTKD("%s: %d more to go ending in a short packet.\n",
+-+				__func__, wr.bytes_left);
+-+			wrint = ep0_sh_write_with_empty_packet;
+-+		}
+-+		/* unless we are on a packet boundary.
+-+		 * Then send full packet plus null packet. */
+-+		else {
+-+			PRINTKD("%s: %d more to go then add empty packet.\n",
+-+				__func__, wr.bytes_left);
+-+			wrint = ep0_sh_write_data_then_empty_packet;
+-+		}
+-+	} else {
+-+		/*
+-+		 * we have as much or more than requested
+-+		 */
+-+		PRINTKD("%s: %d more to go.\n", __func__, wr.bytes_left);
+-+		wrint = ep0_sh_write_data;
+-+	}
+-+
+-+	/*
+-+	 * note: IPR was set uncondtionally at start of routine
+-+	 */
+-+	set_cs_bits(cs_reg_bits);
+-+}
+-+
+-+/*
+-+ * write_fifo()
+-+ * Stick bytes in the 8 bytes endpoint zero FIFO.
+-+ * This version uses a variety of tricks to make sure the bytes
+-+ * are written correctly. 1. The count register is checked to
+-+ * see if the byte went in, and the write is attempted again
+-+ * if not. 2. An overall counter is used to break out so we
+-+ * don't hang in those (rare) cases where the UDC reverses
+-+ * direction of the FIFO underneath us without notification
+-+ * (in response to host aborting a setup transaction early).
+-+ *
+-+ */
+-+static void write_fifo(void)
+-+{
+-+	int bytes_this_time = min(wr.bytes_left, 8);
+-+	int bytes_written = 0;
+-+
+-+	PRINTKD("WF=%d: ", bytes_this_time);
+-+
+-+	while (bytes_this_time--) {
+-+		unsigned int cwc;
+-+		int i;
+-+		PRINTKD("%2.2X ", *wr.p);
+-+		cwc = Ser0UDCWC & 15;
+-+		i = 10;
+-+		do {
+-+			Ser0UDCD0 = *wr.p;
+-+			udelay(20);  /* voodo 28Feb01ww */
+-+		} while ((Ser0UDCWC & 15) == cwc && --i);
+-+
+-+		if (i == 0) {
+-+			pr_err("%swrite_fifo: write failure\n", pszMe);
+-+			usbd_info.stats.ep0_fifo_write_failures++;
+-+		}
+-+
+-+		wr.p++;
+-+		bytes_written++;
+-+	}
+-+	wr.bytes_left -= bytes_written;
+-+
+-+	/* following propagation voodo so maybe caller writing IPR in
+-+	   ..a moment might actually get it to stick 28Feb01ww */
+-+	udelay(300);
+-+
+-+	usbd_info.stats.ep0_bytes_written += bytes_written;
+-+	PRINTKD("L=%d WCR=%8.8lX\n", wr.bytes_left, Ser0UDCWC);
+-+}
+-+/*
+-+ * read_fifo()
+-+ * Read 1-8 bytes out of FIFO and put in request.
+-+ * Called to do the initial read of setup requests
+-+ * from the host. Return number of bytes read.
+-+ *
+-+ * Like write fifo above, this driver uses multiple
+-+ * reads checked agains the count register with an
+-+ * overall timeout.
+-+ *
+-+ */
+-+static int
+-+read_fifo(struct usb_ctrlrequest *request)
+-+{
+-+	int bytes_read = 0;
+-+	int fifo_count;
+-+
+-+	unsigned char *pOut = (unsigned char *) request;
+-+
+-+	fifo_count = (Ser0UDCWC & 0xFF);
+-+
+-+	ASSERT(fifo_count <= 8);
+-+	PRINTKD("RF=%d ", fifo_count);
+-+
+-+	while (fifo_count--) {
+-+		unsigned int cwc;
+-+		int i;
+-+
+-+		cwc = Ser0UDCWC & 15;
+-+
+-+		i = 10;
+-+		do {
+-+			*pOut = (unsigned char) Ser0UDCD0;
+-+			udelay(20);
+-+		} while ((Ser0UDCWC & 15) == cwc && --i);
+-+
+-+		if (i == 0) {
+-+			pr_err("%sread_fifo(): read failure\n", pszMe);
+-+			usbd_info.stats.ep0_fifo_read_failures++;
+-+		}
+-+		pOut++;
+-+		bytes_read++;
+-+	}
+-+
+-+	PRINTKD("fc=%d\n", bytes_read);
+-+	usbd_info.stats.ep0_bytes_read++;
+-+	return bytes_read;
+-+}
+-+
+-+/* some voodo I am adding, since the vanilla macros just aren't doing it
+-+ * 1Mar01ww */
+-+
+-+#define ABORT_BITS (UDCCS0_SST | UDCCS0_SE)
+-+#define OK_TO_WRITE (!(Ser0UDCCS0 & ABORT_BITS))
+-+#define BOTH_BITS (UDCCS0_IPR | UDCCS0_DE)
+-+
+-+static void set_cs_bits(__u32 bits)
+-+{
+-+	if (bits & (UDCCS0_SO | UDCCS0_SSE | UDCCS0_FST | UDCCS0_SST))
+-+		Ser0UDCCS0 = bits;
+-+	else if ((bits & BOTH_BITS) == BOTH_BITS)
+-+		set_ipr_and_de();
+-+	else if (bits & UDCCS0_IPR)
+-+		set_ipr();
+-+	else if (bits & UDCCS0_DE)
+-+		set_de();
+-+}
+-+
+-+static void set_de(void)
+-+{
+-+	 int i = 1;
+-+	 while (1) {
+-+		if (OK_TO_WRITE) {
+-+			Ser0UDCCS0 |= UDCCS0_DE;
+-+		} else {
+-+			PRINTKD("%sQuitting set DE because SST or SE set\n",
+-+				pszMe);
+-+			break;
+-+		}
+-+		if (Ser0UDCCS0 & UDCCS0_DE)
+-+			break;
+-+		udelay(i);
+-+		if (++i == 50) {
+-+			pr_err("%sDangnabbbit! Cannot set DE!"
+-+				"(DE=%8.8X CCS0=%8.8lX)\n", pszMe, UDCCS0_DE,
+-+				Ser0UDCCS0);
+-+			break;
+-+		}
+-+	 }
+-+}
+-+
+-+static void set_ipr(void)
+-+{
+-+	int i = 1;
+-+	while (1) {
+-+		if (OK_TO_WRITE) {
+-+			Ser0UDCCS0 |= UDCCS0_IPR;
+-+		} else {
+-+			PRINTKD("%sQuitting set IPR because SST or SE set\n",
+-+				pszMe);
+-+			break;
+-+		}
+-+		if (Ser0UDCCS0 & UDCCS0_IPR)
+-+			break;
+-+		udelay(i);
+-+		if (++i == 50) {
+-+			pr_err("%sDangnabbbit! Cannot set IPR!"
+-+				" (IPR=%8.8X CCS0=%8.8lX)\n", pszMe,
+-+				UDCCS0_IPR, Ser0UDCCS0);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+static void set_ipr_and_de(void)
+-+{
+-+	int i = 1;
+-+	while (1) {
+-+		if (OK_TO_WRITE) {
+-+			Ser0UDCCS0 |= BOTH_BITS;
+-+		} else {
+-+			PRINTKD("%sQuitting set IPR/DE because SST"
+-+				" or SE set\n", pszMe);
+-+			break;
+-+		}
+-+		if ((Ser0UDCCS0 & BOTH_BITS) == BOTH_BITS)
+-+			break;
+-+		udelay(i);
+-+		if (++i == 50) {
+-+			pr_err("%sDangnabbbit! Cannot set DE/IPR!"
+-+				" (DE=%8.8X IPR=%8.8X CCS0=%8.8lX)\n", pszMe,
+-+				UDCCS0_DE, UDCCS0_IPR, Ser0UDCCS0);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+static bool clear_opr(void)
+-+{
+-+	int i = 10000;
+-+	bool is_clear;
+-+	do {
+-+		Ser0UDCCS0 = UDCCS0_SO;
+-+		is_clear = !(Ser0UDCCS0 & UDCCS0_OPR);
+-+		if (i-- <= 0) {
+-+			pr_err("%sclear_opr(): failed\n", pszMe);
+-+			break;
+-+		}
+-+	} while (!is_clear);
+-+	return is_clear;
+-+}
+-+
+-+
+-+
+-+/* ep1 handlers */
+-+
+-+static char *ep1_buf;
+-+static int ep1_len;
+-+static void (*ep1_callback)(int flag, int size);
+-+static char *ep1_curdmabuf;
+-+static dma_addr_t ep1_curdmapos;
+-+static int ep1_curdmalen;
+-+static int ep1_remain;
+-+static int ep1_used;
+-+
+-+static dma_regs_t *dmaregs_rx;
+-+static int rx_pktsize;
+-+
+-+static int naking;
+-+
+-+static void
+-+ep1_start(void)
+-+{
+-+	sa1100_reset_dma(dmaregs_rx);
+-+	if (!ep1_curdmalen) {
+-+		ep1_curdmalen = rx_pktsize;
+-+		if (ep1_curdmalen > ep1_remain)
+-+			ep1_curdmalen = ep1_remain;
+-+		ep1_curdmapos = dma_map_single(NULL, ep1_curdmabuf,
+-+					ep1_curdmalen, DMA_FROM_DEVICE);
+-+	}
+-+
+-+	UDC_write(Ser0UDCOMP, ep1_curdmalen - 1);
+-+
+-+	sa1100_start_dma(dmaregs_rx, ep1_curdmapos, ep1_curdmalen);
+-+
+-+	if (naking) {
+-+		/* turn off NAK of OUT packets, if set */
+-+		UDC_flip(Ser0UDCCS1, UDCCS1_RPC);
+-+		naking = 0;
+-+	}
+-+}
+-+
+-+static void
+-+ep1_done(int flag)
+-+{
+-+	int size = ep1_len - ep1_remain;
+-+
+-+	if (!ep1_len)
+-+		return;
+-+	if (ep1_curdmalen)
+-+		dma_unmap_single(NULL, ep1_curdmapos, ep1_curdmalen,
+-+				 DMA_FROM_DEVICE);
+-+	ep1_len = ep1_curdmalen = 0;
+-+	if (ep1_callback)
+-+		ep1_callback(flag, size);
+-+}
+-+
+-+void
+-+ep1_state_change_notify(int new_state)
+-+{
+-+
+-+}
+-+
+-+void
+-+ep1_stall(void)
+-+{
+-+	/* SET_FEATURE force stall at UDC */
+-+	UDC_set(Ser0UDCCS1, UDCCS1_FST);
+-+}
+-+
+-+int
+-+ep1_init(dma_regs_t *dmaregs)
+-+{
+-+	dmaregs_rx = dmaregs;
+-+	sa1100_reset_dma(dmaregs_rx);
+-+	ep1_done(-EAGAIN);
+-+	return 0;
+-+}
+-+
+-+void
+-+ep1_reset(void)
+-+{
+-+	if (dmaregs_rx)
+-+		sa1100_reset_dma(dmaregs_rx);
+-+	UDC_clear(Ser0UDCCS1, UDCCS1_FST);
+-+	ep1_done(-EINTR);
+-+}
+-+
+-+void ep1_int_hndlr(int udcsr)
+-+{
+-+	dma_addr_t dma_addr;
+-+	unsigned int len;
+-+	int status = Ser0UDCCS1;
+-+
+-+	if (naking)
+-+		pr_err("%sEh? in ISR but naking = %d\n", "usbrx: ", naking);
+-+
+-+	if (status & UDCCS1_RPC) {
+-+		if (!ep1_curdmalen) {
+-+			pr_err("usb_recv: RPC for non-existent buffer\n");
+-+			naking = 1;
+-+			return;
+-+		}
+-+
+-+	sa1100_stop_dma(dmaregs_rx);
+-+
+-+	if (status & UDCCS1_SST) {
+-+		pr_err("usb_recv: stall sent OMP=%ld\n", Ser0UDCOMP);
+-+		UDC_flip(Ser0UDCCS1, UDCCS1_SST);
+-+		ep1_done(-EIO); /* UDC aborted current transfer, so we do */
+-+		return;
+-+	}
+-+
+-+	if (status & UDCCS1_RPE) {
+-+		pr_err("usb_recv: RPError %x\n", status);
+-+		UDC_flip(Ser0UDCCS1, UDCCS1_RPC);
+-+		ep1_done(-EIO);
+-+		return;
+-+	}
+-+
+-+	dma_addr = sa1100_get_dma_pos(dmaregs_rx);
+-+	dma_unmap_single(NULL, ep1_curdmapos, ep1_curdmalen, DMA_FROM_DEVICE);
+-+	len = dma_addr - ep1_curdmapos;
+-+#ifdef SA1100_USB_DEBUG
+-+	if (sa1100_usb_debug) {
+-+		int i;
+-+		pr_err("usb rx %d :\n  ", len);
+-+		if (sa1100_usb_debug > 1) {
+-+			for (i = 0; i < len; i++) {
+-+				if ((i % 32) == 31)
+-+					pr_err("\n  ");
+-+				pr_err("%2.2x ", ((char *)ep1_curdmapos)[i]);
+-+			}
+-+		}
+-+		pr_err("\n");
+-+	}
+-+#endif
+-+	if (len < ep1_curdmalen) {
+-+		char *buf = ep1_curdmabuf + len;
+-+		while (Ser0UDCCS1 & UDCCS1_RNE) {
+-+			if (len >= ep1_curdmalen) {
+-+				pr_err("usb_recv: too much data in fifo\n");
+-+					break;
+-+			}
+-+			*buf++ = Ser0UDCDR;
+-+			len++;
+-+		}
+-+	} else if (Ser0UDCCS1 & UDCCS1_RNE) {
+-+		pr_err("usb_recv: fifo screwed, shouldn't contain data\n");
+-+		len = 0;
+-+	}
+-+
+-+#if defined(NCB_DMA_FIX)
+-+/*		if (len && (ep1_buf != ep1_curdmabuf))
+-+		    memcpy(ep1_buf,ep1_curdmabuf,len); */
+-+	if (len)
+-+		memcpy(&(((unsigned char *)ep1_buf)[ep1_used]),
+-+			ep1_curdmabuf, len);
+-+#endif
+-+
+-+	ep1_curdmalen = 0;  /* dma unmap already done */
+-+	ep1_remain -= len;
+-+	ep1_used += len;
+-+/*	ep1_curdmabuf += len;	// use same buffer again */
+-+	naking = 1;
+-+/* printk("%s: received %d, %d remaining\n",__func__,len,ep1_remain); */
+-+	if (len && (len == rx_pktsize))
+-+		ep1_start();
+-+	else
+-+		ep1_done((len) ? 0 : -EPIPE);
+-+	}
+-+	/* else, you can get here if we are holding NAK */
+-+}
+-+
+-+int
+-+sa1100_usb_recv(struct usb_request *req, void (*callback)(int flag, int size))
+-+{
+-+	unsigned long flags;
+-+	char *buf = req->buf;
+-+	int len = req->length;
+-+
+-+	if (ep1_len)
+-+		return -EBUSY;
+-+
+-+	local_irq_save(flags);
+-+	ep1_buf = buf;
+-+	ep1_len = len;
+-+	ep1_callback = callback;
+-+	ep1_remain = len;
+-+	ep1_used = 0;
+-+#ifdef NCB_DMA_FIX
+-+/*	if (((size_t)buf)&3) */
+-+	if (1)
+-+		ep1_curdmabuf = receive_buffer;
+-+	else
+-+#else
+-+	ep1_curdmabuf = buf;
+-+#endif
+-+	ep1_curdmalen = 0;
+-+	ep1_start();
+-+	local_irq_restore(flags);
+-+
+-+	return 0;
+-+}
+-+
+-+/* ep2 handlers */
+-+
+-+static char *ep2_buf;
+-+static int ep2_len;
+-+static void (*ep2_callback)(int status, int size);
+-+static dma_addr_t ep2_dma;
+-+static dma_addr_t ep2_curdmapos;
+-+static int ep2_curdmalen;
+-+static int ep2_remain;
+-+static dma_regs_t *dmaregs_tx;
+-+static int tx_pktsize;
+-+
+-+/* device state is changing, async */
+-+void
+-+ep2_state_change_notify(int new_state)
+-+{
+-+}
+-+
+-+/* set feature stall executing, async */
+-+void
+-+ep2_stall(void)
+-+{
+-+	UDC_set(Ser0UDCCS2, UDCCS2_FST);  /* force stall at UDC */
+-+}
+-+
+-+static void
+-+ep2_start(void)
+-+{
+-+	if (!ep2_len)
+-+		return;
+-+
+-+	ep2_curdmalen = tx_pktsize;
+-+	if (ep2_curdmalen > ep2_remain)
+-+		ep2_curdmalen = ep2_remain;
+-+
+-+	/* must do this _before_ queue buffer.. */
+-+	UDC_flip(Ser0UDCCS2, UDCCS2_TPC);  /* stop NAKing IN tokens */
+-+	UDC_write(Ser0UDCIMP, ep2_curdmalen - 1);
+-+
+-+	Ser0UDCAR = usbd_info.address; /* fighting stupid silicon bug */
+-+	sa1100_start_dma(dmaregs_tx, ep2_curdmapos, ep2_curdmalen);
+-+}
+-+
+-+static void
+-+ep2_done(int flag)
+-+{
+-+	int size = ep2_len - ep2_remain;
+-+	if (ep2_len) {
+-+		dma_unmap_single(NULL, ep2_dma, ep2_len, DMA_TO_DEVICE);
+-+		ep2_len = 0;
+-+		if (ep2_callback)
+-+			ep2_callback(flag, size);
+-+	}
+-+}
+-+
+-+int ep2_init(dma_regs_t *dmaregs)
+-+{
+-+	dmaregs_tx = dmaregs;
+-+	sa1100_reset_dma(dmaregs_tx);
+-+	ep2_done(-EAGAIN);
+-+	return 0;
+-+}
+-+
+-+void ep2_reset(void)
+-+{
+-+	UDC_clear(Ser0UDCCS2, UDCCS2_FST);
+-+	if (dmaregs_tx)
+-+		sa1100_reset_dma(dmaregs_tx);
+-+	ep2_done(-EINTR);
+-+}
+-+
+-+void ep2_int_hndlr(int udcsr)
+-+{
+-+	int status = Ser0UDCCS2;
+-+
+-+	if (Ser0UDCAR != usbd_info.address) /* check for stupid silicon bug. */
+-+		Ser0UDCAR = usbd_info.address;
+-+
+-+	if (status & UDCCS2_TPC) {
+-+		UDC_flip(Ser0UDCCS2, UDCCS2_SST);
+-+
+-+		sa1100_reset_dma(dmaregs_tx);
+-+
+-+		if (status & (UDCCS2_TPE | UDCCS2_TUR)) {
+-+			pr_err("usb_send: transmit error %x\n", status);
+-+			ep2_done(-EIO);
+-+		} else {
+-+			ep2_curdmapos += ep2_curdmalen;
+-+			ep2_remain -= ep2_curdmalen;
+-+
+-+			if (ep2_remain != 0)
+-+				ep2_start();
+-+			else
+-+				ep2_done(0);
+-+		}
+-+	} else {
+-+		pr_err("usb_send: Not TPC: UDCCS2 = %x\n", status);
+-+	}
+-+}
+-+
+-+int
+-+sa1100_usb_send(struct usb_request *req, void (*callback)(int status, int size))
+-+{
+-+	char *buf = req->buf;
+-+	int len = req->length;
+-+	unsigned long flags;
+-+
+-+	if (usbd_info.state != USB_STATE_CONFIGURED) {
+-+		PRINTKD("%s: return -ENODEV\n", __func__);
+-+		return -ENODEV;
+-+	}
+-+
+-+	if (ep2_len) {
+-+		PRINTKD("%s: return -EBUSY\n", __func__);
+-+		return -EBUSY;
+-+	}
+-+
+-+	local_irq_save(flags);
+-+#ifdef NCB_DMA_FIX
+-+/* if misaligned, copy to aligned buffer */
+-+/*	if (((size_t)buf)&3) { */
+-+	if (1) {
+-+		PRINTKD("%s: copying %d bytes to send_buffer\n", __func__, len);
+-+		memcpy(send_buffer, buf, len);
+-+		ep2_buf = send_buffer;
+-+	} else
+-+#endif
+-+		ep2_buf = buf;
+-+
+-+	ep2_len = len;
+-+	ep2_dma = dma_map_single(NULL, ep2_buf, len, DMA_TO_DEVICE);
+-+	PRINTKD("%s: mapped dma to buffer(%p0\n", __func__, buf);
+-+
+-+	ep2_callback = callback;
+-+	ep2_remain = len;
+-+	ep2_curdmapos = ep2_dma;
+-+
+-+	PRINTKD("%s: calling ep2_start\n", __func__);
+-+	ep2_start();
+-+	local_irq_restore(flags);
+-+
+-+	return 0;
+-+}
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static int
+-+sa1100_enable(struct usb_ep *_ep, const struct usb_endpoint_descriptor *desc)
+-+{
+-+	struct sa1100_udc	*dev;
+-+	struct sa1100_ep	*ep;
+-+	u32			max;
+-+	int			type;
+-+
+-+	ep = container_of(_ep, struct sa1100_ep, ep);
+-+	if (!_ep || !desc || ep->desc || _ep->name == ep0name
+-+			|| desc->bDescriptorType != USB_DT_ENDPOINT) {
+-+		PRINTKD("%s: _ep = %p, desc = %p\n", __func__, _ep, desc);
+-+		if (_ep && desc)
+-+			PRINTKD("%s: ep->desc = %p, _ep->name = %s"
+-+			"desc->bDescriptorType = %s\n", __func__, ep->desc,
+-+			_ep->name, (desc->bDescriptorType == USB_DT_ENDPOINT) \
+-+			? "USB_DT_ENDPOINT" : "bad!!");
+-+		return -EINVAL;
+-+	}
+-+
+-+	dev = ep->dev;
+-+	if (!dev->driver || dev->gadget.speed == USB_SPEED_UNKNOWN)
+-+		return -ESHUTDOWN;
+-+
+-+	type = desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK;
+-+	max = le16_to_cpu(desc->wMaxPacketSize);
+-+	switch (max) {
+-+	case 64: case 32:
+-+	/* note:  maxpacket > 16 means DMA might overrun/underrun */
+-+	case 16: case 8:
+-+		break;
+-+	default:
+-+		if (type == USB_ENDPOINT_XFER_INT && max < 64)
+-+			break;
+-+		return -EDOM;
+-+	}
+-+
+-+	switch (type) {
+-+	case USB_ENDPOINT_XFER_BULK:
+-+	case USB_ENDPOINT_XFER_INT:
+-+		if (ep == &dev->ep[2]) {
+-+			if (desc->bEndpointAddress != (USB_DIR_IN|2)) {
+-+				PRINTKD("%s: ep[2] has invalid endpoint\n",
+-+					__func__);
+-+				return -EINVAL;
+-+			}
+-+			tx_pktsize = max;
+-+			Ser0UDCOMP = max - 1;
+-+			PRINTKD("%s: ep2 max packet size is %d\n", __func__,
+-+				max);
+-+			break;
+-+		} else if (ep == &dev->ep[1]) {
+-+			if (desc->bEndpointAddress != (USB_DIR_OUT|1)) {
+-+				PRINTKD("%s: ep[1] has invalid endpoint\n",
+-+					__func__);
+-+				return -EINVAL;
+-+			}
+-+			rx_pktsize = max;
+-+			Ser0UDCIMP = max - 1;
+-+			PRINTKD("%s: ep1 max packet size is %d\n", __func__,
+-+				max);
+-+			break;
+-+		}
+-+		/* FALLTHROUGH */
+-+	default:
+-+		PRINTKD("%s: Invalid endpoint\n", __func__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	_ep->maxpacket = max;
+-+	ep->desc = desc;
+-+	ep->stopped = 0;
+-+
+-+	DEBUG(dev, "enabled %s %s max %04x\n", _ep->name,
+-+		type_string(desc->bmAttributes), max);
+-+
+-+	return 0;
+-+}
+-+
+-+static int sa1100_disable(struct usb_ep *_ep)
+-+{
+-+	struct sa1100_ep	*ep;
+-+
+-+	ep = container_of(_ep, struct sa1100_ep, ep);
+-+	if (!_ep || !ep->desc || _ep->name == ep0name)
+-+		return -EINVAL;
+-+
+-+	nuke(ep, -ESHUTDOWN);
+-+
+-+	DEBUG(ep->dev, "disabled %s\n", _ep->name);
+-+
+-+	ep->desc = NULL;
+-+	ep->stopped = 1;
+-+	return 0;
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static struct usb_request *
+-+sa1100_alloc_request(struct usb_ep *_ep, gfp_t gfp_flags)
+-+{
+-+	struct sa1100_request *req;
+-+
+-+	if (!_ep)
+-+		return NULL;
+-+
+-+	req = kzalloc(sizeof *req, gfp_flags);
+-+	if (!req)
+-+		return NULL;
+-+
+-+	req->req.dma = DMA_ADDR_INVALID;
+-+	INIT_LIST_HEAD(&req->queue);
+-+	return &req->req;
+-+}
+-+
+-+static void sa1100_free_request(struct usb_ep *_ep, struct usb_request *_req)
+-+{
+-+	struct sa1100_request	*req;
+-+
+-+	req = container_of(_req, struct sa1100_request, req);
+-+	WARN_ON(!list_empty(&req->queue));
+-+	kfree(req);	/* NCB - see pxa2xx_udc */
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static void done(struct sa1100_ep *ep, struct sa1100_request *req, int status)
+-+{
+-+	unsigned		stopped = ep->stopped;
+-+
+-+	list_del_init(&req->queue);
+-+
+-+	if (likely(req->req.status == -EINPROGRESS))
+-+		req->req.status = status;
+-+	else
+-+		status = req->req.status;
+-+
+-+	if (status && status != -ESHUTDOWN)
+-+		VDEBUG(ep->dev, "complete %s req %p stat %d len %u/%u\n",
+-+			ep->ep.name, &req->req, status,
+-+			req->req.actual, req->req.length);
+-+
+-+	/* don't modify queue heads during completion callback */
+-+	ep->stopped = 1;
+-+	req->req.complete(&ep->ep, &req->req);
+-+	ep->stopped = stopped;
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/* FIXME move away from the old non-queued api.
+-+ * - forces extra work on us
+-+ * - stores request state twice
+-+ * - doesn't let gadget driver handle dma mapping
+-+ * - status codes need mapping
+-+ */
+-+
+-+static int map_status(int status)
+-+{
+-+	switch (status) {
+-+	case 0:
+-+	case -EIO:	/* ep[12]_int_handler */
+-+		return status;
+-+	case -EPIPE:	/* ep1_int_handler */
+-+		return 0;
+-+	/*  case -EAGAIN:	*//* ep[12]_init */
+-+	/*  case -EINTR:	*//* ep[12]_reset */
+-+	default:
+-+		return -ESHUTDOWN;
+-+	}
+-+}
+-+
+-+static void tx_callback(int status, int size)
+-+{
+-+	struct sa1100_ep	*ep = &the_controller->ep[2];
+-+	struct sa1100_request	*req;
+-+
+-+	if (list_empty(&ep->queue)) {
+-+		if (status != -EAGAIN)
+-+			DEBUG(ep->dev, "%s, bogus tx callback %d/%d\n",
+-+				ep->ep.name, status, size);
+-+		return;
+-+	}
+-+	req = list_entry(ep->queue.next, struct sa1100_request, queue);
+-+	req->req.actual = size;
+-+	done(ep, req, map_status(status));
+-+
+-+	if (ep->stopped || list_empty(&ep->queue))
+-+		return;
+-+	req = list_entry(ep->queue.next, struct sa1100_request, queue);
+-+	sa1100_usb_send(&req->req, tx_callback);
+-+}
+-+
+-+static void rx_callback(int status, int size)
+-+{
+-+	struct sa1100_ep	*ep = &the_controller->ep[1];
+-+	struct sa1100_request	*req;
+-+
+-+	if (list_empty(&ep->queue)) {
+-+		if (status != -EAGAIN)
+-+			DEBUG(ep->dev, "%s, bogus tx callback %d/%d\n",
+-+				ep->ep.name, status, size);
+-+		return;
+-+	}
+-+	req = list_entry(ep->queue.next, struct sa1100_request, queue);
+-+	req->req.actual = size;
+-+	done(ep, req, map_status(status));
+-+
+-+	if (ep->stopped || list_empty(&ep->queue))
+-+		return;
+-+	req = list_entry(ep->queue.next, struct sa1100_request, queue);
+-+	sa1100_usb_recv(&req->req, rx_callback);
+-+}
+-+
+-+
+-+static int
+-+sa1100_queue(struct usb_ep *_ep, struct usb_request *_req, gfp_t gfp_flags)
+-+{
+-+	struct sa1100_request	*req;
+-+	struct sa1100_ep	*ep;
+-+	struct sa1100_udc	*dev;
+-+	unsigned long		flags;
+-+
+-+	req = container_of(_req, struct sa1100_request, req);
+-+	if (!_req || !_req->complete || !_req->buf
+-+			|| !list_empty(&req->queue))
+-+		return -EINVAL;
+-+
+-+	ep = container_of(_ep, struct sa1100_ep, ep);
+-+	if (unlikely(!_ep || (!ep->desc && _ep->name != ep0name)))
+-+		return -EINVAL;
+-+
+-+	dev = ep->dev;
+-+	if (unlikely(!dev->driver || dev->gadget.speed == USB_SPEED_UNKNOWN))
+-+		return -ESHUTDOWN;
+-+
+-+	/* handle ep0 */
+-+	if (_ep->name == ep0name) {
+-+		ep0_queue(_req->buf, _req->length, dev->ep0_req_len >= 0 ? \
+-+			dev->ep0_req_len : _req->length);
+-+		return 0;
+-+	}
+-+
+-+	/* sa1100 udc can't write zlps */
+-+	if (ep == &dev->ep[2] && _req->length == 0)
+-+		return -ERANGE;
+-+
+-+	/* the old sa1100 api doesn't use 'unsigned' for lengths */
+-+	if (_req->length > INT_MAX)
+-+		return -ERANGE;
+-+
+-+	VDEBUG(dev, "%s queue req %p, len %d buf %p\n",
+-+			_ep->name, _req, _req->length, _req->buf);
+-+
+-+	local_irq_save(flags);
+-+
+-+	_req->status = -EINPROGRESS;
+-+	_req->actual = 0;
+-+
+-+	if (list_empty(&ep->queue) && !ep->stopped) {
+-+		/* FIXME this does DMA mapping wrong.  caller is allowed
+-+		 * to provide buffers that don't need mapping, but this
+-+		 * doesn't use them.
+-+		 */
+-+		if (ep == &ep->dev->ep[2]) {
+-+			PRINTKD("%s: sa1100_usb_send buf %p length %d\n",
+-+				__func__, _req->buf, _req->length);
+-+			sa1100_usb_send(_req, tx_callback);
+-+		} else if (ep == &ep->dev->ep[1]) {
+-+			PRINTKD("%s: sa1100_usb_recv buf %p length %d\n",
+-+				__func__, _req->buf, _req->length);
+-+			sa1100_usb_recv(_req, rx_callback);
+-+		}
+-+		/* ep0 rx/tx is handled separately */
+-+	}
+-+	list_add_tail(&req->queue, &ep->queue);
+-+
+-+	local_irq_restore(flags);
+-+
+-+	return 0;
+-+}
+-+
+-+/* dequeue ALL requests */
+-+static void nuke(struct sa1100_ep *ep, int status)
+-+{
+-+	struct sa1100_request	*req;
+-+
+-+	/* called with irqs blocked */
+-+	while (!list_empty(&ep->queue)) {
+-+		req = list_entry(ep->queue.next,
+-+				struct sa1100_request,
+-+				queue);
+-+		done(ep, req, status);
+-+	}
+-+	if (ep == &ep->dev->ep[1])
+-+		ep1_reset();
+-+	else if (ep == &ep->dev->ep[2])
+-+		ep2_reset();
+-+}
+-+
+-+/* dequeue JUST ONE request */
+-+static int sa1100_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+-+{
+-+	struct sa1100_ep	*ep;
+-+	struct sa1100_request	*req;
+-+	unsigned long		flags;
+-+
+-+	ep = container_of(_ep, struct sa1100_ep, ep);
+-+	if (!_ep || (!ep->desc && _ep->name != ep0name) || !_req)
+-+		return -EINVAL;
+-+
+-+	local_irq_save(flags);
+-+
+-+	/* make sure it's actually queued on this endpoint */
+-+	list_for_each_entry(req, &ep->queue, queue) {
+-+		if (&req->req == _req)
+-+			break;
+-+	}
+-+	if (&req->req != _req) {
+-+		local_irq_restore(flags);
+-+		return -EINVAL;
+-+	}
+-+
+-+	done(ep, req, -ECONNRESET);
+-+
+-+	local_irq_restore(flags);
+-+
+-+	return 0;
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static int
+-+sa1100_set_halt(struct usb_ep *_ep, int value)
+-+{
+-+	struct sa1100_ep	*ep;
+-+
+-+	ep = container_of(_ep, struct sa1100_ep, ep);
+-+	if (unlikely(!_ep
+-+		|| (!ep->desc && _ep->name != ep0name))
+-+		|| (ep->desc->bmAttributes & 0x03) == USB_ENDPOINT_XFER_ISOC)
+-+		return -EINVAL;
+-+	if (!ep->dev->driver || ep->dev->gadget.speed == USB_SPEED_UNKNOWN)
+-+		return -ESHUTDOWN;
+-+
+-+	VDEBUG(ep->dev, "%s %s halt\n", _ep->name, value ? "set" : "clear");
+-+
+-+	/* set/clear, then synch memory views with the device */
+-+	if (value) {
+-+		if (ep == &ep->dev->ep[1])
+-+			ep1_stall();
+-+		else
+-+			ep2_stall();
+-+	} else {
+-+		if (ep == &ep->dev->ep[1])
+-+			ep1_reset();
+-+		else
+-+			ep2_reset();
+-+	}
+-+
+-+	return 0;
+-+}
+-+
+-+static struct usb_ep_ops sa1100_ep_ops = {
+-+	.enable		= sa1100_enable,
+-+	.disable	= sa1100_disable,
+-+
+-+	.alloc_request	= sa1100_alloc_request,
+-+	.free_request	= sa1100_free_request,
+-+
+-+	.queue		= sa1100_queue,
+-+	.dequeue	= sa1100_dequeue,
+-+
+-+	.set_halt	= sa1100_set_halt,
+-+	/* .fifo_status	= sa1100_fifo_status, */
+-+	/* .fifo_flush	= sa1100_fifo_flush, */
+-+};
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static int sa1100_get_frame(struct usb_gadget *_gadget)
+-+{
+-+	return -EOPNOTSUPP;
+-+}
+-+
+-+static int sa1100_wakeup(struct usb_gadget *_gadget)
+-+{
+-+	struct sa1100_udc	*dev;
+-+
+-+	if (!_gadget)
+-+		return 0;
+-+	dev = container_of(_gadget, struct sa1100_udc, gadget);
+-+
+-+	/*  FIXME  */
+-+
+-+	return 0;
+-+}
+-+
+-+static const struct usb_gadget_ops sa1100_ops = {
+-+	.get_frame	= sa1100_get_frame,
+-+	.wakeup		= sa1100_wakeup,
+-+
+-+	/* .set_selfpowered = sa1100_set_selfpowered, */
+-+};
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static inline void enable_resume_mask_suspend(void)
+-+{
+-+	int i = 0;
+-+
+-+	while (1) {
+-+		Ser0UDCCR |= UDCCR_SUSIM; /* mask future suspend events */
+-+		udelay(i);
+-+		if ((Ser0UDCCR & UDCCR_SUSIM) || (Ser0UDCSR & UDCSR_RSTIR))
+-+			break;
+-+		if (++i == 50) {
+-+			WARNING(&the_controller,
+-+				"%s Could not set SUSIM %8.8lX\n", __func__,
+-+				Ser0UDCCR);
+-+			break;
+-+		}
+-+	}
+-+
+-+	i = 0;
+-+	while (1) {
+-+		Ser0UDCCR &= ~UDCCR_RESIM;
+-+		udelay(i);
+-+		if ((Ser0UDCCR & UDCCR_RESIM) == 0
+-+				|| (Ser0UDCSR & UDCSR_RSTIR))
+-+			break;
+-+		if (++i == 50) {
+-+			WARNING(&the_controller,
+-+				"%s Could not clear RESIM %8.8lX\n",
+-+				__func__, Ser0UDCCR);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+static inline void enable_suspend_mask_resume(void)
+-+{
+-+	int i = 0;
+-+	while (1) {
+-+		Ser0UDCCR |= UDCCR_RESIM; /* mask future resume events */
+-+		udelay(i);
+-+		if (Ser0UDCCR & UDCCR_RESIM || (Ser0UDCSR & UDCSR_RSTIR))
+-+			break;
+-+		if (++i == 50) {
+-+			WARNING(&the_controller,
+-+				"%s could not set RESIM %8.8lX\n",
+-+				__func__, Ser0UDCCR);
+-+			break;
+-+		}
+-+	}
+-+	i = 0;
+-+	while (1) {
+-+		Ser0UDCCR &= ~UDCCR_SUSIM;
+-+		udelay(i);
+-+		if ((Ser0UDCCR & UDCCR_SUSIM) == 0
+-+			|| (Ser0UDCSR & UDCSR_RSTIR))
+-+			break;
+-+		if (++i == 50) {
+-+			WARNING(&the_controller,
+-+				"%s Could not clear SUSIM %8.8lX\n",
+-+				__func__, Ser0UDCCR);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+/* HACK DEBUG  3Mar01ww
+-+ * Well, maybe not, it really seems to help!  08Mar01ww
+-+ */
+-+static void core_kicker(void)
+-+{
+-+	u32 car = Ser0UDCAR;
+-+	u32 imp = Ser0UDCIMP;
+-+	u32 omp = Ser0UDCOMP;
+-+
+-+	UDC_set(Ser0UDCCR, UDCCR_UDD);
+-+	udelay(300);
+-+	UDC_clear(Ser0UDCCR, UDCCR_UDD);
+-+
+-+	Ser0UDCAR = car;
+-+	Ser0UDCIMP = imp;
+-+	Ser0UDCOMP = omp;
+-+}
+-+
+-+static irqreturn_t udc_int_hndlr(int irq, void *_dev)
+-+{
+-+	struct sa1100_udc	*dev = _dev;
+-+	u32			status = Ser0UDCSR;
+-+
+-+	PRINTKD("%s: status = 0x%x and control = 0x%lx\n", __func__,
+-+			status, Ser0UDCCR);
+-+	/* ReSeT Interrupt Request - UDC has been reset */
+-+	if (status & UDCSR_RSTIR) {
+-+		PRINTKD("%s: processing UDCSR_RSTIR\n", __func__);
+-+		if (usbctl_next_state_on_event(kEvReset) != kError) {
+-+			/* starting 20ms or so reset sequence now... */
+-+			INFO(dev, "Resetting\n");
+-+			ep0_reset();  /* just set state to idle */
+-+			ep1_reset();  /* flush dma, clear false stall */
+-+			ep2_reset();  /* flush dma, clear false stall */
+-+		}
+-+		/* mask reset ints, they flood during sequence, enable
+-+		 * suspend and resume	 */
+-+		UDC_set(Ser0UDCCR, UDCCR_REM);    /* mask reset */
+-+		/*enable suspend and resume */
+-+		UDC_clear(Ser0UDCCR, (UDCCR_SUSIM | UDCCR_RESIM));
+-+		UDC_flip(Ser0UDCSR, status);	/* clear all pending sources */
+-+		PRINTKD("%s: setting USB_FULL_SPEED\n", __func__);
+-+		dev->gadget.speed = USB_SPEED_FULL;
+-+		return IRQ_HANDLED;	/* NCB */
+-+	}
+-+
+-+	/* else we have done something other than reset,
+-+	 * so be sure reset enabled  */
+-+	UDC_clear(Ser0UDCCR, UDCCR_REM);
+-+
+-+	/* RESume Interrupt Request */
+-+	if (status & UDCSR_RESIR) {
+-+		struct usb_gadget_driver *driver = dev->driver;
+-+
+-+		PRINTKD("%s: processing UDCSR_RESIR\n", __func__);
+-+		if (driver->resume)
+-+			driver->resume(&dev->gadget);
+-+		core_kicker();
+-+		enable_suspend_mask_resume();
+-+	}
+-+
+-+	/* SUSpend Interrupt Request */
+-+	if (status & UDCSR_SUSIR) {
+-+		struct usb_gadget_driver *driver = dev->driver;
+-+
+-+		PRINTKD("%s: processing UDCSR_SUSIR\n", __func__);
+-+		if (driver->suspend)
+-+			driver->suspend(&dev->gadget);
+-+		enable_resume_mask_suspend();
+-+	}
+-+
+-+	UDC_flip(Ser0UDCSR, status); /* clear all pending sources */
+-+
+-+	if (status & UDCSR_EIR)
+-+		PRINTKD("%s: processing ep0_int_hndlr\n", __func__);
+-+		 ep0_int_hndlr();
+-+
+-+	if (status & UDCSR_RIR) {
+-+		PRINTKD("%s: processing ep1_int_hndlr\n", __func__);
+-+		ep1_int_hndlr(status);
+-+	}
+-+	if (status & UDCSR_TIR) {
+-+		PRINTKD("%s: processing ep2_int_hndlr\n", __func__);
+-+		ep2_int_hndlr(status);
+-+	}
+-+
+-+	return IRQ_HANDLED;	/* NCB */
+-+}
+-+
+-+
+-+/* FIXME-MAD - we need to pass soft_connect_hook via platform_data */
+-+
+-+/* soft_connect_hook ()
+-+ * Some devices have platform-specific circuitry to make USB
+-+ * not seem to be plugged in, even when it is. This allows
+-+ * software to control when a device 'appears' on the USB bus
+-+ * (after Linux has booted and this driver has loaded, for
+-+ * example). If you have such a circuit, control it here.
+-+ */
+-+#define soft_connect_hook(x) do { } while (0);
+-+
+-+
+-+
+-+/* "function" sysfs attribute */
+-+static ssize_t
+-+show_function(struct device *_dev, struct device_attribute *attr, char *buf)
+-+{
+-+	struct sa1100_udc	*dev = dev_get_drvdata(_dev);
+-+
+-+	if (!dev->driver
+-+			|| !dev->driver->function
+-+			|| strlen(dev->driver->function) > PAGE_SIZE)
+-+		return 0;
+-+	return scnprintf(buf, PAGE_SIZE, "%s\n", dev->driver->function);
+-+}
+-+static DEVICE_ATTR(function, S_IRUGO, show_function, NULL);
+-+
+-+/* disable the UDC at the source */
+-+static void udc_disable(struct sa1100_udc *dev)
+-+{
+-+	soft_connect_hook(0);
+-+	UDC_set(Ser0UDCCR, UDCCR_UDD);
+-+	dev->gadget.speed = USB_SPEED_UNKNOWN;
+-+	ep0_idle(dev);
+-+}
+-+
+-+static void udc_reinit(struct sa1100_udc *dev)
+-+{
+-+	u32	i;
+-+
+-+	/* Initialize the gadget controller data structure */
+-+	INIT_LIST_HEAD(&dev->gadget.ep_list);
+-+	INIT_LIST_HEAD(&dev->gadget.ep0->ep_list);
+-+	ep0_idle(dev);
+-+	for (i = 0 ; i < 3 ; i++) {
+-+		struct sa1100_ep *ep = &dev->ep[i];
+-+		if (i != 0)
+-+			list_add_tail(&ep->ep.ep_list, &dev->gadget.ep_list);
+-+		ep->desc     = NULL;
+-+		ep->stopped  = 0;
+-+		INIT_LIST_HEAD(&ep->queue);
+-+	}
+-+}
+-+
+-+/*  enable the udc at the source */
+-+static void udc_enable(struct sa1100_udc *dev)
+-+{
+-+	UDC_clear(Ser0UDCCR, UDCCR_UDD);
+-+	ep0_idle(dev);
+-+}
+-+
+-+static void ep0_start(struct sa1100_udc *dev)
+-+{
+-+	udc_enable(dev);
+-+	udelay(100);
+-+
+-+	/* clear stall - receiver seems to start stalled? 19Jan01ww */
+-+	/* also clear other stuff just to be thurough 22Feb01ww */
+-+	UDC_clear(Ser0UDCCS1, UDCCS1_FST | UDCCS1_RPE | UDCCS1_RPC);
+-+	UDC_clear(Ser0UDCCS2, UDCCS2_FST | UDCCS2_TPE | UDCCS2_TPC);
+-+
+-+	/* mask everything */
+-+	Ser0UDCCR = 0xFC;
+-+
+-+	/* flush DMA and fire through some -EAGAINs */
+-+	ep1_init(dev->ep[1].dmaregs);
+-+	ep2_init(dev->ep[2].dmaregs);
+-+
+-+	/* enable any platform specific hardware */
+-+	soft_connect_hook(1);
+-+
+-+	/* clear all top-level sources */
+-+	Ser0UDCSR = UDCSR_RSTIR | UDCSR_RESIR | UDCSR_EIR |
+-+			UDCSR_RIR | UDCSR_TIR | UDCSR_SUSIR ;
+-+
+-+	/* EXERIMENT - a short line in the spec says toggling this
+-+	 * bit diddles the internal state machine in the udc to
+-+	 * expect a suspend
+-+	 */
+-+	Ser0UDCCR  |= UDCCR_RESIM;
+-+	/* END EXPERIMENT 10Feb01ww */
+-+
+-+	/* enable any platform specific hardware */
+-+	soft_connect_hook(1);
+-+
+-+	/* Enable interrupts. If you are unplugged you will immediately
+-+	 * get a suspend interrupt. If you are plugged and have a soft
+-+	 * connect-circuit, you will get a reset.  If you are plugged
+-+	 * without a soft-connect, I think you also get suspend. In short,
+-+	 * start with suspend masked and everything else enabled
+-+	 */
+-+	UDC_write(Ser0UDCCR, UDCCR_SUSIM);
+-+}
+-+
+-+
+-+/* when a driver is successfully registered, it will receive
+-+ * control requests including set_configuration(), which enables
+-+ * non-control requests.  then usb traffic follows until a
+-+ * disconnect is reported.  then a host may connect again, or
+-+ * the driver might get unbound.
+-+ */
+-+int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+-+{
+-+	struct sa1100_udc	*dev = the_controller;
+-+	int			retval;
+-+
+-+	if (!driver || !driver->bind || !driver->setup)
+-+		return -EINVAL;
+-+	if (!dev)
+-+		return -ENODEV;
+-+	if (dev->driver)
+-+		return -EBUSY;
+-+
+-+	/* hook up the driver ... */
+-+	dev->driver = driver;
+-+	dev->gadget.dev.driver = &driver->driver;
+-+
+-+	retval = device_add(&dev->gadget.dev);
+-+	if (retval != 0) {
+-+		printk(KERN_ERR "Error in device_add() : %d\n", retval);
+-+		goto register_error;
+-+	}
+-+
+-+	retval = driver->bind(&dev->gadget);
+-+	if (retval != 0) {
+-+		DEBUG(dev, "bind to driver %s --> %d\n",
+-+				driver->driver.name, retval);
+-+		device_del(&dev->gadget.dev);
+-+		goto register_error;
+-+	}
+-+
+-+	retval = device_create_file(dev->dev, &dev_attr_function);
+-+
+-+	/* ... then enable host detection and ep0; and we're ready
+-+	 * for set_configuration as well as eventual disconnect.
+-+	 */
+-+	ep0_start(dev);
+-+
+-+	DEBUG(dev, "%s ready\n", driver->driver.name);
+-+
+-+	return 0;
+-+
+-+register_error:
+-+	dev->driver = NULL;
+-+	dev->gadget.dev.driver = NULL;
+-+	return retval;
+-+}
+-+EXPORT_SYMBOL(usb_gadget_register_driver);
+-+
+-+static void
+-+stop_activity(struct sa1100_udc *dev, struct usb_gadget_driver *driver)
+-+{
+-+	int i;
+-+
+-+	/* don't disconnect if it's not connected */
+-+	if (dev->gadget.speed == USB_SPEED_UNKNOWN)
+-+		driver = NULL;
+-+	dev->gadget.speed = USB_SPEED_UNKNOWN;
+-+
+-+	/* mask everything */
+-+	Ser0UDCCR = 0xFC;
+-+
+-+	/* stop hardware; prevent new request submissions;
+-+	 * and kill any outstanding requests.
+-+	 */
+-+	for (i = 0; i < 3; i++) {
+-+		struct sa1100_ep *ep = &dev->ep[i];
+-+		ep->stopped = 1;
+-+		nuke(ep, -ESHUTDOWN);
+-+	}
+-+	udc_disable(dev);
+-+
+-+	/* report disconnect; the driver is already quiesced */
+-+	if (driver)
+-+		driver->disconnect(&dev->gadget);
+-+
+-+	/* re-init driver-visible data structures */
+-+	udc_reinit(dev);
+-+}
+-+
+-+int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-+{
+-+	struct sa1100_udc	*dev = the_controller;
+-+
+-+	if (!dev)
+-+		return -ENODEV;
+-+	if (!driver || driver != dev->driver)
+-+		return -EINVAL;
+-+
+-+	local_irq_disable();
+-+	stop_activity(dev, driver);
+-+	local_irq_enable();
+-+	if (driver->unbind)
+-+		driver->unbind(&dev->gadget);
+-+	dev->driver = 0;
+-+
+-+	device_del(&dev->gadget.dev);
+-+	device_remove_file(dev->dev, &dev_attr_function);
+-+
+-+	DEBUG(dev, "unregistered driver '%s'\n", driver->driver.name);
+-+	return 0;
+-+}
+-+EXPORT_SYMBOL(usb_gadget_unregister_driver);
+-+
+-+
+-+/*-------------------------------------------------------------------------*/
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/* Proc Filesystem Support */
+-+
+-+#if CONFIG_PROC_FS
+-+
+-+#define SAY(fmt, args...) do { p += sprintf(p, fmt, ## args); } while (0)
+-+#define SAYV(num) do { p += sprintf(p, num_fmt, "Value", num); } while (0)
+-+#define SAYC(label, yn) do { p += sprintf(p, yn_fmt, label, yn); } while (0)
+-+#define SAYS(label, v) do { p += sprintf(p, cnt_fmt, label, v); } while (0)
+-+
+-+static int usbctl_read_proc(char *page, char **start, off_t off,
+-+			    int count, int *eof, void *data)
+-+{
+-+	const char *num_fmt   = "%25.25s: %8.8lX\n";
+-+	const char *cnt_fmt   = "%25.25s: %lu\n";
+-+	const char *yn_fmt    = "%25.25s: %s\n";
+-+	const char *yes       = "YES";
+-+	const char *no        = "NO";
+-+	unsigned long v;
+-+	char *p = page;
+-+	int len;
+-+
+-+	SAY("SA1100 USB Controller Core\n");
+-+
+-+	SAYS("ep0 bytes read", usbd_info.stats.ep0_bytes_read);
+-+	SAYS("ep0 bytes written", usbd_info.stats.ep0_bytes_written);
+-+	SAYS("ep0 FIFO read failures", usbd_info.stats.ep0_fifo_read_failures);
+-+	SAYS("ep0 FIFO write failures",
+-+		usbd_info.stats.ep0_fifo_write_failures);
+-+
+-+	SAY("\n");
+-+
+-+	v = Ser0UDCAR;
+-+	SAY("%25.25s: 0x%8.8lX - %ld\n", "Address Register", v, v);
+-+	v = Ser0UDCIMP;
+-+	SAY("%25.25s: %ld (%8.8lX)\n", "IN  max packet size", v+1, v);
+-+	v = Ser0UDCOMP;
+-+	SAY("%25.25s: %ld (%8.8lX)\n", "OUT max packet size", v+1, v);
+-+
+-+	v = Ser0UDCCR;
+-+	SAY("\nUDC Mask Register\n");
+-+	SAYV(v);
+-+	SAYC("UDC Active", (v & UDCCR_UDA) ? yes : no);
+-+	SAYC("Suspend interrupts masked", (v & UDCCR_SUSIM) ? yes : no);
+-+	SAYC("Resume interrupts masked", (v & UDCCR_RESIM) ? yes : no);
+-+	SAYC("Reset interrupts masked", (v & UDCCR_REM) ? yes : no);
+-+
+-+	v = Ser0UDCSR;
+-+	SAY("\nUDC Interrupt Request Register\n");
+-+	SAYV(v);
+-+	SAYC("Reset pending", (v & UDCSR_RSTIR) ? yes : no);
+-+	SAYC("Suspend pending", (v & UDCSR_SUSIR) ? yes : no);
+-+	SAYC("Resume pending", (v & UDCSR_RESIR) ? yes : no);
+-+	SAYC("ep0 pending", (v & UDCSR_EIR)   ? yes : no);
+-+	SAYC("receiver pending", (v & UDCSR_RIR)   ? yes : no);
+-+	SAYC("tramsitter pending", (v & UDCSR_TIR)   ? yes : no);
+-+
+-+#if 1
+-+	SAY("\nDMA Tx registers\n");
+-+	{
+-+	dma_regs_t *r = the_controller->ep[2].dmaregs;
+-+	SAY(" DDAR");
+-+	SAYV(r->DDAR);
+-+	SAY(" DCSR");
+-+	SAYV(r->RdDCSR);
+-+	SAY(" DBSA (address buf A) ");
+-+	SAYV(r->DBSA);
+-+	SAY(" DBTA (transfer count A) ");
+-+	SAYV(r->DBTA);
+-+	SAY(" DBSB (address buf B) ");
+-+	SAYV(r->DBSB);
+-+	SAY(" DBTB (transfer count B) ");
+-+	SAYV(r->DBTB);
+-+
+-+	}
+-+	SAY("\nDMA Rx registers\n");
+-+	{
+-+	dma_regs_t *r = the_controller->ep[1].dmaregs;
+-+	SAY(" DDAR");
+-+	SAYV(r->DDAR);
+-+	SAY(" DCSR");
+-+	SAYV(r->RdDCSR);
+-+	SAY(" DBSA (address buf A) ");
+-+	SAYV(r->DBSA);
+-+	SAY(" DBTA (transfer count A) ");
+-+	SAYV(r->DBTA);
+-+	SAY(" DBSB (address buf B) ");
+-+	SAYV(r->DBSB);
+-+	SAY(" DBTB (transfer count B) ");
+-+	SAYV(r->DBTB);
+-+
+-+	}
+-+#endif
+-+#if 1
+-+	v = Ser0UDCCS0;
+-+	SAY("\nUDC Endpoint Zero Status Register\n");
+-+	SAYV(v);
+-+	SAYC("Out Packet Ready", (v & UDCCS0_OPR) ? yes : no);
+-+	SAYC("In Packet Ready", (v & UDCCS0_IPR) ? yes : no);
+-+	SAYC("Sent Stall", (v & UDCCS0_SST) ? yes : no);
+-+	SAYC("Force Stall", (v & UDCCS0_FST) ? yes : no);
+-+	SAYC("Data End", (v & UDCCS0_DE)  ? yes : no);
+-+	SAYC("Data Setup End", (v & UDCCS0_SE)  ? yes : no);
+-+	SAYC("Serviced (SO)", (v & UDCCS0_SO)  ? yes : no);
+-+
+-+	v = Ser0UDCCS1;
+-+	SAY("\nUDC Receiver Status Register\n");
+-+	SAYV(v);
+-+	SAYC("Receive Packet Complete", (v & UDCCS1_RPC) ? yes : no);
+-+	SAYC("Sent Stall", (v & UDCCS1_SST) ? yes : no);
+-+	SAYC("Force Stall", (v & UDCCS1_FST) ? yes : no);
+-+	SAYC("Receive Packet Error", (v & UDCCS1_RPE) ? yes : no);
+-+	SAYC("Receive FIFO not empty", (v & UDCCS1_RNE) ? yes : no);
+-+
+-+	v = Ser0UDCCS2;
+-+	SAY("\nUDC Transmitter Status Register\n");
+-+	SAYV(v);
+-+	SAYC("FIFO has < 8 of 16 chars", (v & UDCCS2_TFS) ? yes : no);
+-+	SAYC("Transmit Packet Complete", (v & UDCCS2_TPC) ? yes : no);
+-+	SAYC("Transmit FIFO underrun", (v & UDCCS2_TUR) ? yes : no);
+-+	SAYC("Transmit Packet Error", (v & UDCCS2_TPE) ? yes : no);
+-+	SAYC("Sent Stall", (v & UDCCS2_SST) ? yes : no);
+-+	SAYC("Force Stall", (v & UDCCS2_FST) ? yes : no);
+-+#endif
+-+
+-+	len = (p - page) - off;
+-+	if (len < 0)
+-+		len = 0;
+-+	*eof = (len <= count) ? 1 : 0;
+-+	*start = page + off;
+-+	return len;
+-+}
+-+
+-+static inline void register_proc_entry(void)
+-+{
+-+	create_proc_read_entry(driver_name, 0, NULL,
+-+		usbctl_read_proc, NULL);
+-+}
+-+
+-+static inline void unregister_proc_entry(void)
+-+{
+-+	remove_proc_entry(driver_name, NULL);
+-+}
+-+
+-+#else
+-+
+-+#define register_proc_entry() do {} while (0)
+-+#define unregister_proc_entry() do {} while (0)
+-+
+-+#endif  /* CONFIG_PROC_FS */
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+MODULE_DESCRIPTION("sa1100_udc");
+-+MODULE_AUTHOR("Various");
+-+MODULE_LICENSE("GPL");
+-+
+-+static struct sa1100_udc memory = {
+-+	.gadget = {
+-+		.ops		= &sa1100_ops,
+-+		.ep0		= &memory.ep[0].ep,
+-+		.name		= driver_name,
+-+		.dev = {
+-+			.bus_id		= "gadget",
+-+		},
+-+	},
+-+
+-+	/* control endpoint */
+-+	.ep[0] = {
+-+		.ep = {
+-+			.name		= ep0name,
+-+			.ops		= &sa1100_ep_ops,
+-+			.maxpacket	= EP0_FIFO_SIZE,
+-+		},
+-+		.dev		= &memory,
+-+	},
+-+
+-+	/* first group of endpoints */
+-+	.ep[1] = {
+-+		.ep = {
+-+			.name		= "ep1out-bulk",
+-+			.ops		= &sa1100_ep_ops,
+-+			.maxpacket	= BULK_FIFO_SIZE,
+-+		},
+-+		.dev		= &memory,
+-+	},
+-+	.ep[2] = {
+-+		.ep = {
+-+			.name		= "ep2in-bulk",
+-+			.ops		= &sa1100_ep_ops,
+-+			.maxpacket	= BULK_FIFO_SIZE,
+-+		},
+-+		.dev		= &memory,
+-+	}
+-+};
+-+
+-+static int __init sa1100_udc_probe(struct platform_device *pdev)
+-+{
+-+	struct sa1100_udc *dev = &memory;
+-+	int retval = 0;
+-+
+-+	/* setup dev */
+-+	dev->dev = &pdev->dev;
+-+/*	dev->mach = _dev->platform_data; */
+-+
+-+	device_initialize(&dev->gadget.dev);
+-+	dev->gadget.dev.parent = &pdev->dev;
+-+	dev->gadget.dev.dma_mask = pdev->dev.dma_mask;
+-+
+-+	the_controller = dev;
+-+	platform_set_drvdata(pdev, dev);
+-+
+-+	/* controller stays disabled until gadget driver is bound */
+-+	udc_disable(dev);
+-+	udc_reinit(dev);
+-+
+-+/*	spin_lock_init(&the_udc.lock); */
+-+	register_proc_entry();
+-+
+-+	/* setup dma channels and IRQ */
+-+	retval = sa1100_request_dma(DMA_Ser0UDCRd, "USB receive",
+-+				    NULL, NULL, &dev->ep[1].dmaregs);
+-+	if (retval) {
+-+		ERROR(dev, "couldn't get rx dma, err %d\n", retval);
+-+		goto err_rx_dma;
+-+	}
+-+	retval = sa1100_request_dma(DMA_Ser0UDCWr, "USB transmit",
+-+				    NULL, NULL, &dev->ep[2].dmaregs);
+-+	if (retval) {
+-+		ERROR(dev, "couldn't get tx dma, err %d\n", retval);
+-+		goto err_tx_dma;
+-+	}
+-+	retval = request_irq(IRQ_Ser0UDC, udc_int_hndlr, IRQF_DISABLED,
+-+			driver_name, dev);
+-+	if (retval) {
+-+		ERROR(dev, "couldn't get irq, err %d\n", retval);
+-+		goto err_irq;
+-+	}
+-+
+-+	INFO(dev, "initialized, rx %p tx %p irq %d\n",
+-+		dev->ep[1].dmaregs, dev->ep[2].dmaregs, IRQ_Ser0UDC);
+-+	return 0;
+-+
+-+err_irq:
+-+	sa1100_free_dma(dev->ep[2].dmaregs);
+-+	usbd_info.dmaregs_rx = 0;
+-+err_tx_dma:
+-+	sa1100_free_dma(dev->ep[1].dmaregs);
+-+	usbd_info.dmaregs_tx = 0;
+-+err_rx_dma:
+-+	return retval;
+-+}
+-+
+-+static int __exit sa1100_udc_remove(struct platform_device *pdev)
+-+{
+-+	struct sa1100_udc *dev = platform_get_drvdata(pdev);
+-+
+-+	udc_disable(dev);
+-+	unregister_proc_entry();
+-+	usb_gadget_unregister_driver(dev->driver);
+-+	sa1100_free_dma(dev->ep[1].dmaregs);
+-+	sa1100_free_dma(dev->ep[2].dmaregs);
+-+	free_irq(IRQ_Ser0UDC, dev);
+-+	platform_set_drvdata(pdev, NULL);
+-+	the_controller = NULL;
+-+	return 0;
+-+}
+-+
+-+static struct platform_driver udc_driver = {
+-+	.remove		= __exit_p(sa1100_udc_remove),
+-+/*	.shutdown	= pxa25x_udc_shutdown, */
+-+/*	.suspend	= sa1100_udc_suspend, */
+-+/*	.resume		= sa1100_udc_resume, */
+-+	.driver		= {
+-+		.owner	= THIS_MODULE,
+-+		.name	= "sa11x0-udc",
+-+	},
+-+};
+-+
+-+static int __init udc_init(void)
+-+{
+-+	printk(KERN_INFO "%s: version %s\n", driver_name, DRIVER_VERSION);
+-+#ifdef NCB_DMA_FIX
+-+	send_buffer = kzalloc(SEND_BUFFER_SIZE, GFP_KERNEL | GFP_DMA);
+-+	receive_buffer = kzalloc(RECEIVE_BUFFER_SIZE, GFP_KERNEL |
+-+								GFP_DMA);
+-+#endif
+-+	return platform_driver_probe(&udc_driver, sa1100_udc_probe);
+-+}
+-+module_init(udc_init);
+-+
+-+static void __exit udc_exit(void)
+-+{
+-+#ifdef NCB_DMA_FIX
+-+	kfree(send_buffer);
+-+	kfree(receive_buffer);
+-+#endif
+-+	platform_driver_unregister(&udc_driver);
+-+}
+-+module_exit(udc_exit);
+-diff --git a/drivers/usb/gadget/sa1100_udc.h b/drivers/usb/gadget/sa1100_udc.h
+-new file mode 100644
+-index 0000000..fb0bc4a
+---- /dev/null
+-+++ b/drivers/usb/gadget/sa1100_udc.h
+-@@ -0,0 +1,104 @@
+-+/*
+-+ * internals of "new style" UDC controller
+-+ * <linux/usb_gadget.h> replaces ARM-specific "sa1100_usb.h".
+-+ */
+-+
+-+struct sa1100_ep {
+-+	struct usb_ep				ep;
+-+	struct sa1100_udc			*dev;
+-+	/* unsigned long				irqs; */
+-+
+-+	const struct usb_endpoint_descriptor	*desc;
+-+	struct list_head			queue;
+-+	dma_regs_t				*dmaregs;
+-+	unsigned				stopped:1;
+-+};
+-+
+-+struct sa1100_request {
+-+	struct usb_request			req;
+-+	struct list_head			queue;
+-+/* NCB	unsigned				mapped : 1; */
+-+};
+-+
+-+enum ep0_state {
+-+	EP0_IDLE,
+-+	EP0_IN_DATA_PHASE,
+-+	EP0_OUT_DATA_PHASE,
+-+	EP0_END_XFER,
+-+	EP0_STALL,
+-+};
+-+
+-+#define EP0_FIFO_SIZE	((unsigned)8)
+-+#define BULK_FIFO_SIZE	((unsigned)64)
+-+/* #define ISO_FIFO_SIZE	((unsigned)256) */
+-+/* #define INT_FIFO_SIZE	((unsigned)8) */
+-+
+-+struct udc_stats {
+-+	struct ep0stats {
+-+		unsigned long		ops;
+-+		unsigned long		bytes;
+-+	} read, write;
+-+	unsigned long			irqs;
+-+};
+-+
+-+struct sa1100_udc {
+-+	struct usb_gadget			gadget;
+-+	struct usb_gadget_driver		*driver;
+-+	struct device				*dev;
+-+	enum ep0_state				ep0state;
+-+	struct udc_stats			stats;
+-+/* NCB	spinlock_t				lock; */
+-+/* NCB	dma_regs_t				*dmaregs_tx, *dmaregs_rx; */
+-+	unsigned				got_irq:1,
+-+						vbus:1,
+-+						pullup:1,
+-+						has_cfr:1,
+-+						req_pending:1,
+-+						req_std:1,
+-+						req_config:1;
+-+	struct timer_list			timer;
+-+	u64 dma_mask;
+-+	unsigned char				address;
+-+	struct sa1100_ep			ep[3];
+-+	int					ep0_req_len;
+-+};
+-+
+-+/* receiver */
+-+void ep1_reset(void);
+-+void ep1_stall(void);
+-+int sa1100_usb_recv(struct usb_request *req, void (*callback) (int, int));
+-+
+-+/* xmitter */
+-+void ep2_reset(void);
+-+void ep2_stall(void);
+-+int sa1100_usb_send(struct usb_request *req, void (*callback) (int, int));
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+#define xprintk(dev, level, fmt, args...) \
+-+	printk(level "%s: " fmt, driver_name, ## args)
+-+
+-+#ifdef DEBUG
+-+#undef DEBUG
+-+#define DEBUG(dev, fmt, args...) \
+-+	xprintk(dev, KERN_DEBUG, fmt, ## args)
+-+#else
+-+#define DEBUG(dev, fmt, args...) \
+-+	do { } while (0)
+-+#endif /* DEBUG */
+-+
+-+#ifdef VERBOSE
+-+#define VDEBUG DEBUG
+-+#else
+-+#define VDEBUG(dev, fmt, args...) \
+-+	do { } while (0)
+-+#endif	/* VERBOSE */
+-+
+-+#define ERROR(dev, fmt, args...) \
+-+	xprintk(dev, KERN_ERR, fmt, ## args)
+-+#define WARNING(dev, fmt, args...) \
+-+	xprintk(dev, KERN_WARNING, fmt, ## args)
+-+#define INFO(dev, fmt, args...) \
+-+	xprintk(dev, KERN_INFO, fmt, ## args)
+-+
+-+/*-------------------------------------------------------------------------*/
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0028-h3600-fix-suspend-HACK.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0028-h3600-fix-suspend-HACK.patch
+deleted file mode 100644
+index a213c8d..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0028-h3600-fix-suspend-HACK.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From 11af27b6f4438975a090dd6bdac15f3b007cd0f2 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 02:05:34 +0300
+-Subject: [PATCH 28/28] h3600: fix suspend (HACK)
+-
+-Due to bug in Compaq bootldr suspend doesn't work since kernel 2.6.27
+-(to be more precise since commit 5f2809e69c7128f86316048221cf45146f69a4a0)
+-Here we're trying to fool bootldr by changing values in checked memory
+-area before suspending, and restoring them after wakeup. As a side effect,
+-this will probably fix suspend on kernels booted by HaRET too.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/pm.c |   18 ++++++++++++++++++
+- 1 files changed, 18 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/pm.c b/arch/arm/mach-sa1100/pm.c
+-index 111cce6..24db59a 100644
+---- a/arch/arm/mach-sa1100/pm.c
+-+++ b/arch/arm/mach-sa1100/pm.c
+-@@ -56,6 +56,21 @@ static int sa11x0_pm_enter(suspend_state_t state)
+- {
+- 	unsigned long gpio, sleep_save[SLEEP_SAVE_COUNT];
+- 
+-+#if defined(CONFIG_SA1100_H3100) || defined(CONFIG_SA1100_H3600)
+-+/* Compaq bootldr is trying to detect is Linux or WinCE needs resuming,	*
+-+ * but detection is poor and works incorrectly with kernels >=2.6.27	*
+-+ * Since bootldr development is dead, we trying to workaround this in	*
+-+ * kernel instead. Bootldr tests some bytes at 0xC0001000 and if they	*
+-+ * are equal to zero, it tries to wake Windows (even if it's erased	*
+-+ * from flash). So we are fooling bootldr by putting some junk at this	*
+-+ * testpoint address							*/
+-+	unsigned long *bootldr_testpoint  = phys_to_virt(PHYS_OFFSET + SZ_4K);
+-+	unsigned long saved_testpoint;
+-+
+-+	saved_testpoint = *bootldr_testpoint;
+-+	*bootldr_testpoint = 0xdeadbeef;
+-+#endif
+-+
+- 	gpio = GPLR;
+- 
+- 	/* save vital registers */
+-@@ -107,6 +122,9 @@ static int sa11x0_pm_enter(suspend_state_t state)
+- 	GPSR = gpio;
+- 	GPCR = ~gpio;
+- 
+-+#if defined(CONFIG_SA1100_H3100) || defined(CONFIG_SA1100_H3600)
+-+	*bootldr_testpoint = saved_testpoint;
+-+#endif
+- 	/*
+- 	 * Clear the peripheral sleep-hold bit.
+- 	 */
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0029-pcmcia-fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch b/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0029-pcmcia-fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch
+deleted file mode 100644
+index 0021061..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/03_add_features/0029-pcmcia-fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From 83ee6fe1ea085a6443d9f1f31a3d3b6eda4f24f8 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 20:27:15 +0300
+-Subject: [PATCH 29/29] pcmcia: fix oops on suspend in sa1100_pcmcia (HACK)
+-
+-From: Thomas Kunze <thommycheck@gmx.de>
+----
+- drivers/pcmcia/sa1100_generic.c |   19 ++++++++++---------
+- 1 files changed, 10 insertions(+), 9 deletions(-)
+-
+-diff --git a/drivers/pcmcia/sa1100_generic.c b/drivers/pcmcia/sa1100_generic.c
+-index c5b2a44..1bcb02e 100644
+---- a/drivers/pcmcia/sa1100_generic.c
+-+++ b/drivers/pcmcia/sa1100_generic.c
+-@@ -81,13 +81,14 @@ static int sa11x0_drv_pcmcia_probe(struct device *dev)
+- 	return ret;
+- }
+- 
+--static struct device_driver sa11x0_pcmcia_driver = {
+--	.probe		= sa11x0_drv_pcmcia_probe,
+--	.remove		= soc_common_drv_pcmcia_remove,
+--	.name		= "sa11x0-pcmcia",
+--	.bus		= &platform_bus_type,
+--	.suspend 	= pcmcia_socket_dev_suspend,
+--	.resume 	= pcmcia_socket_dev_resume,
+-+static struct platform_driver sa11x0_pcmcia_driver = {
+-+	.driver		= {
+-+		.name		= "sa11x0-pcmcia",
+-+		.probe		= sa11x0_drv_pcmcia_probe,
+-+		.remove		= soc_common_drv_pcmcia_remove,
+-+		.suspend	= pcmcia_socket_dev_suspend,
+-+		.resume		= pcmcia_socket_dev_resume,
+-+	},
+- };
+- 
+- /* sa11x0_pcmcia_init()
+-@@ -100,7 +101,7 @@ static struct device_driver sa11x0_pcmcia_driver = {
+-  */
+- static int __init sa11x0_pcmcia_init(void)
+- {
+--	return driver_register(&sa11x0_pcmcia_driver);
+-+	return platform_driver_register(&sa11x0_pcmcia_driver);
+- }
+- 
+- /* sa11x0_pcmcia_exit()
+-@@ -110,7 +111,7 @@ static int __init sa11x0_pcmcia_init(void)
+-  */
+- static void __exit sa11x0_pcmcia_exit(void)
+- {
+--	driver_unregister(&sa11x0_pcmcia_driver);
+-+	platform_driver_unregister(&sa11x0_pcmcia_driver);
+- }
+- 
+- MODULE_AUTHOR("John Dorsey <john+@cs.cmu.edu>");
+--- 
+-1.6.1.3
+-
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/defconfig b/recipes-kernel/linux/linux-2.6.29/h3600/defconfig
+deleted file mode 100644
+index 09299a0..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/defconfig
++++ /dev/null
+@@ -1,1141 +0,0 @@
+-#
+-# Automatically generated make config: don't edit
+-# Linux kernel version: 2.6.29-rc8
+-# Sat Mar 21 20:50:45 2009
+-#
+-CONFIG_ARM=y
+-CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+-CONFIG_GENERIC_GPIO=y
+-CONFIG_GENERIC_TIME=y
+-CONFIG_GENERIC_CLOCKEVENTS=y
+-CONFIG_MMU=y
+-# CONFIG_NO_IOPORT is not set
+-CONFIG_GENERIC_HARDIRQS=y
+-CONFIG_STACKTRACE_SUPPORT=y
+-CONFIG_HAVE_LATENCYTOP_SUPPORT=y
+-CONFIG_LOCKDEP_SUPPORT=y
+-CONFIG_TRACE_IRQFLAGS_SUPPORT=y
+-CONFIG_HARDIRQS_SW_RESEND=y
+-CONFIG_GENERIC_IRQ_PROBE=y
+-CONFIG_RWSEM_GENERIC_SPINLOCK=y
+-# CONFIG_ARCH_HAS_ILOG2_U32 is not set
+-# CONFIG_ARCH_HAS_ILOG2_U64 is not set
+-CONFIG_GENERIC_HWEIGHT=y
+-CONFIG_GENERIC_CALIBRATE_DELAY=y
+-CONFIG_ARCH_MTD_XIP=y
+-CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=y
+-CONFIG_VECTORS_BASE=0xffff0000
+-CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
+-
+-#
+-# General setup
+-#
+-CONFIG_EXPERIMENTAL=y
+-CONFIG_BROKEN_ON_SMP=y
+-CONFIG_INIT_ENV_ARG_LIMIT=32
+-CONFIG_LOCALVERSION=""
+-CONFIG_LOCALVERSION_AUTO=y
+-CONFIG_SWAP=y
+-CONFIG_SYSVIPC=y
+-CONFIG_SYSVIPC_SYSCTL=y
+-# CONFIG_POSIX_MQUEUE is not set
+-# CONFIG_BSD_PROCESS_ACCT is not set
+-# CONFIG_TASKSTATS is not set
+-# CONFIG_AUDIT is not set
+-
+-#
+-# RCU Subsystem
+-#
+-CONFIG_CLASSIC_RCU=y
+-# CONFIG_TREE_RCU is not set
+-# CONFIG_PREEMPT_RCU is not set
+-# CONFIG_TREE_RCU_TRACE is not set
+-# CONFIG_PREEMPT_RCU_TRACE is not set
+-CONFIG_IKCONFIG=y
+-CONFIG_IKCONFIG_PROC=y
+-CONFIG_LOG_BUF_SHIFT=14
+-# CONFIG_GROUP_SCHED is not set
+-# CONFIG_CGROUPS is not set
+-CONFIG_SYSFS_DEPRECATED=y
+-CONFIG_SYSFS_DEPRECATED_V2=y
+-# CONFIG_RELAY is not set
+-# CONFIG_NAMESPACES is not set
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE=""
+-CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+-CONFIG_SYSCTL=y
+-CONFIG_ANON_INODES=y
+-CONFIG_EMBEDDED=y
+-CONFIG_UID16=y
+-CONFIG_SYSCTL_SYSCALL=y
+-CONFIG_KALLSYMS=y
+-CONFIG_KALLSYMS_ALL=y
+-CONFIG_KALLSYMS_EXTRA_PASS=y
+-CONFIG_HOTPLUG=y
+-CONFIG_PRINTK=y
+-CONFIG_BUG=y
+-CONFIG_ELF_CORE=y
+-CONFIG_BASE_FULL=y
+-CONFIG_FUTEX=y
+-CONFIG_EPOLL=y
+-CONFIG_SIGNALFD=y
+-CONFIG_TIMERFD=y
+-CONFIG_EVENTFD=y
+-CONFIG_SHMEM=y
+-# CONFIG_AIO is not set
+-CONFIG_VM_EVENT_COUNTERS=y
+-CONFIG_COMPAT_BRK=y
+-# CONFIG_SLAB is not set
+-# CONFIG_SLUB is not set
+-CONFIG_SLOB=y
+-# CONFIG_PROFILING is not set
+-CONFIG_HAVE_OPROFILE=y
+-# CONFIG_KPROBES is not set
+-CONFIG_HAVE_KPROBES=y
+-CONFIG_HAVE_KRETPROBES=y
+-CONFIG_HAVE_CLK=y
+-CONFIG_HAVE_GENERIC_DMA_COHERENT=y
+-CONFIG_RT_MUTEXES=y
+-CONFIG_BASE_SMALL=0
+-CONFIG_MODULES=y
+-# CONFIG_MODULE_FORCE_LOAD is not set
+-CONFIG_MODULE_UNLOAD=y
+-# CONFIG_MODULE_FORCE_UNLOAD is not set
+-# CONFIG_MODVERSIONS is not set
+-# CONFIG_MODULE_SRCVERSION_ALL is not set
+-CONFIG_BLOCK=y
+-# CONFIG_LBD is not set
+-# CONFIG_BLK_DEV_IO_TRACE is not set
+-# CONFIG_BLK_DEV_BSG is not set
+-# CONFIG_BLK_DEV_INTEGRITY is not set
+-
+-#
+-# IO Schedulers
+-#
+-CONFIG_IOSCHED_NOOP=y
+-# CONFIG_IOSCHED_AS is not set
+-CONFIG_IOSCHED_DEADLINE=y
+-# CONFIG_IOSCHED_CFQ is not set
+-# CONFIG_DEFAULT_AS is not set
+-CONFIG_DEFAULT_DEADLINE=y
+-# CONFIG_DEFAULT_CFQ is not set
+-# CONFIG_DEFAULT_NOOP is not set
+-CONFIG_DEFAULT_IOSCHED="deadline"
+-CONFIG_FREEZER=y
+-
+-#
+-# System Type
+-#
+-# CONFIG_ARCH_AAEC2000 is not set
+-# CONFIG_ARCH_INTEGRATOR is not set
+-# CONFIG_ARCH_REALVIEW is not set
+-# CONFIG_ARCH_VERSATILE is not set
+-# CONFIG_ARCH_AT91 is not set
+-# CONFIG_ARCH_CLPS711X is not set
+-# CONFIG_ARCH_EBSA110 is not set
+-# CONFIG_ARCH_EP93XX is not set
+-# CONFIG_ARCH_FOOTBRIDGE is not set
+-# CONFIG_ARCH_NETX is not set
+-# CONFIG_ARCH_H720X is not set
+-# CONFIG_ARCH_IMX is not set
+-# CONFIG_ARCH_IOP13XX is not set
+-# CONFIG_ARCH_IOP32X is not set
+-# CONFIG_ARCH_IOP33X is not set
+-# CONFIG_ARCH_IXP23XX is not set
+-# CONFIG_ARCH_IXP2000 is not set
+-# CONFIG_ARCH_IXP4XX is not set
+-# CONFIG_ARCH_L7200 is not set
+-# CONFIG_ARCH_KIRKWOOD is not set
+-# CONFIG_ARCH_KS8695 is not set
+-# CONFIG_ARCH_NS9XXX is not set
+-# CONFIG_ARCH_LOKI is not set
+-# CONFIG_ARCH_MV78XX0 is not set
+-# CONFIG_ARCH_MXC is not set
+-# CONFIG_ARCH_ORION5X is not set
+-# CONFIG_ARCH_PNX4008 is not set
+-# CONFIG_ARCH_PXA is not set
+-# CONFIG_ARCH_RPC is not set
+-CONFIG_ARCH_SA1100=y
+-# CONFIG_ARCH_S3C2410 is not set
+-# CONFIG_ARCH_S3C64XX is not set
+-# CONFIG_ARCH_SHARK is not set
+-# CONFIG_ARCH_LH7A40X is not set
+-# CONFIG_ARCH_DAVINCI is not set
+-# CONFIG_ARCH_OMAP is not set
+-# CONFIG_ARCH_MSM is not set
+-# CONFIG_ARCH_W90X900 is not set
+-
+-#
+-# SA11x0 Implementations
+-#
+-# CONFIG_SA1100_ASSABET is not set
+-# CONFIG_SA1100_CERF is not set
+-# CONFIG_SA1100_COLLIE is not set
+-CONFIG_SA1100_H3100=y
+-CONFIG_SA1100_H3600=y
+-CONFIG_SA1100_H3XXX=y
+-# CONFIG_SA1100_BADGE4 is not set
+-# CONFIG_SA1100_JORNADA720 is not set
+-# CONFIG_SA1100_HACKKIT is not set
+-# CONFIG_SA1100_LART is not set
+-# CONFIG_SA1100_PLEB is not set
+-# CONFIG_SA1100_SHANNON is not set
+-# CONFIG_SA1100_SIMPAD is not set
+-# CONFIG_SA1100_SSP is not set
+-
+-#
+-# Processor Type
+-#
+-CONFIG_CPU_32=y
+-CONFIG_CPU_SA1100=y
+-CONFIG_CPU_32v4=y
+-CONFIG_CPU_ABRT_EV4=y
+-CONFIG_CPU_PABRT_NOIFAR=y
+-CONFIG_CPU_CACHE_V4WB=y
+-CONFIG_CPU_CACHE_VIVT=y
+-CONFIG_CPU_TLB_V4WB=y
+-CONFIG_CPU_CP15=y
+-CONFIG_CPU_CP15_MMU=y
+-
+-#
+-# Processor Features
+-#
+-# CONFIG_CPU_ICACHE_DISABLE is not set
+-# CONFIG_CPU_DCACHE_DISABLE is not set
+-# CONFIG_OUTER_CACHE is not set
+-
+-#
+-# Bus support
+-#
+-CONFIG_ISA=y
+-# CONFIG_PCI_SYSCALL is not set
+-# CONFIG_ARCH_SUPPORTS_MSI is not set
+-CONFIG_PCCARD=y
+-# CONFIG_PCMCIA_DEBUG is not set
+-CONFIG_PCMCIA=y
+-CONFIG_PCMCIA_LOAD_CIS=y
+-CONFIG_PCMCIA_IOCTL=y
+-
+-#
+-# PC-card bridges
+-#
+-# CONFIG_I82365 is not set
+-# CONFIG_TCIC is not set
+-CONFIG_PCMCIA_SA1100=y
+-
+-#
+-# Kernel Features
+-#
+-CONFIG_TICK_ONESHOT=y
+-# CONFIG_NO_HZ is not set
+-# CONFIG_HIGH_RES_TIMERS is not set
+-CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
+-CONFIG_VMSPLIT_3G=y
+-# CONFIG_VMSPLIT_2G is not set
+-# CONFIG_VMSPLIT_1G is not set
+-CONFIG_PAGE_OFFSET=0xC0000000
+-# CONFIG_PREEMPT is not set
+-CONFIG_HZ=100
+-# CONFIG_AEABI is not set
+-CONFIG_ARCH_SPARSEMEM_ENABLE=y
+-CONFIG_ARCH_SPARSEMEM_DEFAULT=y
+-# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
+-CONFIG_SELECT_MEMORY_MODEL=y
+-# CONFIG_FLATMEM_MANUAL is not set
+-# CONFIG_DISCONTIGMEM_MANUAL is not set
+-CONFIG_SPARSEMEM_MANUAL=y
+-CONFIG_SPARSEMEM=y
+-CONFIG_HAVE_MEMORY_PRESENT=y
+-CONFIG_SPARSEMEM_EXTREME=y
+-CONFIG_PAGEFLAGS_EXTENDED=y
+-CONFIG_SPLIT_PTLOCK_CPUS=4096
+-# CONFIG_PHYS_ADDR_T_64BIT is not set
+-CONFIG_ZONE_DMA_FLAG=0
+-CONFIG_VIRT_TO_BUS=y
+-CONFIG_UNEVICTABLE_LRU=y
+-# CONFIG_LEDS is not set
+-CONFIG_ALIGNMENT_TRAP=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE="mtdparts=sa1100:512k(boot),1m(kernel),-(root) console=ttySA0 root=1f02 noinitrd mem=64M jffs2_orphaned_inodes=delete rootfstype=jffs2"
+-# CONFIG_XIP_KERNEL is not set
+-# CONFIG_KEXEC is not set
+-
+-#
+-# CPU Power Management
+-#
+-# CONFIG_CPU_FREQ is not set
+-# CONFIG_CPU_IDLE is not set
+-
+-#
+-# Floating point emulation
+-#
+-
+-#
+-# At least one emulation must be selected
+-#
+-CONFIG_FPE_NWFPE=y
+-# CONFIG_FPE_NWFPE_XP is not set
+-# CONFIG_FPE_FASTFPE is not set
+-
+-#
+-# Userspace binary formats
+-#
+-CONFIG_BINFMT_ELF=y
+-# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+-CONFIG_HAVE_AOUT=y
+-# CONFIG_BINFMT_AOUT is not set
+-# CONFIG_BINFMT_MISC is not set
+-# CONFIG_ARTHUR is not set
+-
+-#
+-# Power management options
+-#
+-CONFIG_PM=y
+-CONFIG_PM_DEBUG=y
+-CONFIG_PM_VERBOSE=y
+-CONFIG_CAN_PM_TRACE=y
+-CONFIG_PM_SLEEP=y
+-CONFIG_SUSPEND=y
+-# CONFIG_PM_TEST_SUSPEND is not set
+-CONFIG_SUSPEND_FREEZER=y
+-CONFIG_APM_EMULATION=y
+-CONFIG_ARCH_SUSPEND_POSSIBLE=y
+-CONFIG_NET=y
+-
+-#
+-# Networking options
+-#
+-CONFIG_COMPAT_NET_DEV_OPS=y
+-CONFIG_PACKET=y
+-CONFIG_PACKET_MMAP=y
+-CONFIG_UNIX=y
+-CONFIG_XFRM=y
+-# CONFIG_XFRM_USER is not set
+-# CONFIG_XFRM_SUB_POLICY is not set
+-# CONFIG_XFRM_MIGRATE is not set
+-# CONFIG_XFRM_STATISTICS is not set
+-# CONFIG_NET_KEY is not set
+-CONFIG_INET=y
+-# CONFIG_IP_MULTICAST is not set
+-# CONFIG_IP_ADVANCED_ROUTER is not set
+-CONFIG_IP_FIB_HASH=y
+-CONFIG_IP_PNP=y
+-CONFIG_IP_PNP_DHCP=y
+-CONFIG_IP_PNP_BOOTP=y
+-# CONFIG_IP_PNP_RARP is not set
+-# CONFIG_NET_IPIP is not set
+-# CONFIG_NET_IPGRE is not set
+-# CONFIG_ARPD is not set
+-# CONFIG_SYN_COOKIES is not set
+-# CONFIG_INET_AH is not set
+-# CONFIG_INET_ESP is not set
+-# CONFIG_INET_IPCOMP is not set
+-# CONFIG_INET_XFRM_TUNNEL is not set
+-# CONFIG_INET_TUNNEL is not set
+-CONFIG_INET_XFRM_MODE_TRANSPORT=y
+-CONFIG_INET_XFRM_MODE_TUNNEL=y
+-CONFIG_INET_XFRM_MODE_BEET=y
+-# CONFIG_INET_LRO is not set
+-CONFIG_INET_DIAG=y
+-CONFIG_INET_TCP_DIAG=y
+-# CONFIG_TCP_CONG_ADVANCED is not set
+-CONFIG_TCP_CONG_CUBIC=y
+-CONFIG_DEFAULT_TCP_CONG="cubic"
+-# CONFIG_TCP_MD5SIG is not set
+-# CONFIG_IPV6 is not set
+-# CONFIG_NETWORK_SECMARK is not set
+-# CONFIG_NETFILTER is not set
+-# CONFIG_IP_DCCP is not set
+-# CONFIG_IP_SCTP is not set
+-# CONFIG_TIPC is not set
+-# CONFIG_ATM is not set
+-# CONFIG_BRIDGE is not set
+-# CONFIG_NET_DSA is not set
+-# CONFIG_VLAN_8021Q is not set
+-# CONFIG_DECNET is not set
+-# CONFIG_LLC2 is not set
+-# CONFIG_IPX is not set
+-# CONFIG_ATALK is not set
+-# CONFIG_X25 is not set
+-# CONFIG_LAPB is not set
+-# CONFIG_ECONET is not set
+-# CONFIG_WAN_ROUTER is not set
+-# CONFIG_NET_SCHED is not set
+-# CONFIG_DCB is not set
+-
+-#
+-# Network testing
+-#
+-# CONFIG_NET_PKTGEN is not set
+-# CONFIG_HAMRADIO is not set
+-# CONFIG_CAN is not set
+-# CONFIG_IRDA is not set
+-# CONFIG_BT is not set
+-# CONFIG_AF_RXRPC is not set
+-# CONFIG_PHONET is not set
+-# CONFIG_WIRELESS is not set
+-# CONFIG_WIMAX is not set
+-# CONFIG_RFKILL is not set
+-# CONFIG_NET_9P is not set
+-
+-#
+-# Device Drivers
+-#
+-
+-#
+-# Generic Driver Options
+-#
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-CONFIG_STANDALONE=y
+-CONFIG_PREVENT_FIRMWARE_BUILD=y
+-CONFIG_FW_LOADER=y
+-CONFIG_FIRMWARE_IN_KERNEL=y
+-CONFIG_EXTRA_FIRMWARE=""
+-# CONFIG_DEBUG_DRIVER is not set
+-# CONFIG_DEBUG_DEVRES is not set
+-# CONFIG_SYS_HYPERVISOR is not set
+-# CONFIG_CONNECTOR is not set
+-CONFIG_MTD=y
+-# CONFIG_MTD_DEBUG is not set
+-CONFIG_MTD_CONCAT=y
+-CONFIG_MTD_PARTITIONS=y
+-# CONFIG_MTD_TESTS is not set
+-# CONFIG_MTD_REDBOOT_PARTS is not set
+-# CONFIG_MTD_CMDLINE_PARTS is not set
+-# CONFIG_MTD_AFS_PARTS is not set
+-# CONFIG_MTD_AR7_PARTS is not set
+-
+-#
+-# User Modules And Translation Layers
+-#
+-# CONFIG_MTD_CHAR is not set
+-CONFIG_MTD_BLKDEVS=y
+-CONFIG_MTD_BLOCK=y
+-# CONFIG_FTL is not set
+-# CONFIG_NFTL is not set
+-# CONFIG_INFTL is not set
+-# CONFIG_RFD_FTL is not set
+-# CONFIG_SSFDC is not set
+-# CONFIG_MTD_OOPS is not set
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_CFI=y
+-# CONFIG_MTD_JEDECPROBE is not set
+-CONFIG_MTD_GEN_PROBE=y
+-# CONFIG_MTD_CFI_ADV_OPTIONS is not set
+-CONFIG_MTD_MAP_BANK_WIDTH_1=y
+-CONFIG_MTD_MAP_BANK_WIDTH_2=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
+-CONFIG_MTD_CFI_I1=y
+-CONFIG_MTD_CFI_I2=y
+-# CONFIG_MTD_CFI_I4 is not set
+-# CONFIG_MTD_CFI_I8 is not set
+-CONFIG_MTD_CFI_INTELEXT=y
+-# CONFIG_MTD_CFI_AMDSTD is not set
+-# CONFIG_MTD_CFI_STAA is not set
+-CONFIG_MTD_CFI_UTIL=y
+-# CONFIG_MTD_RAM is not set
+-# CONFIG_MTD_ROM is not set
+-# CONFIG_MTD_ABSENT is not set
+-# CONFIG_MTD_XIP is not set
+-
+-#
+-# Mapping drivers for chip access
+-#
+-# CONFIG_MTD_COMPLEX_MAPPINGS is not set
+-CONFIG_MTD_PHYSMAP=y
+-# CONFIG_MTD_PHYSMAP_COMPAT is not set
+-# CONFIG_MTD_ARM_INTEGRATOR is not set
+-CONFIG_MTD_SA1100=y
+-# CONFIG_MTD_PLATRAM is not set
+-
+-#
+-# Self-contained MTD device drivers
+-#
+-# CONFIG_MTD_SLRAM is not set
+-# CONFIG_MTD_PHRAM is not set
+-# CONFIG_MTD_MTDRAM is not set
+-# CONFIG_MTD_BLOCK2MTD is not set
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-# CONFIG_MTD_DOC2000 is not set
+-# CONFIG_MTD_DOC2001 is not set
+-# CONFIG_MTD_DOC2001PLUS is not set
+-# CONFIG_MTD_NAND is not set
+-# CONFIG_MTD_ONENAND is not set
+-
+-#
+-# LPDDR flash memory drivers
+-#
+-# CONFIG_MTD_LPDDR is not set
+-
+-#
+-# UBI - Unsorted block images
+-#
+-# CONFIG_MTD_UBI is not set
+-# CONFIG_PARPORT is not set
+-# CONFIG_PNP is not set
+-CONFIG_BLK_DEV=y
+-# CONFIG_BLK_DEV_COW_COMMON is not set
+-CONFIG_BLK_DEV_LOOP=y
+-# CONFIG_BLK_DEV_CRYPTOLOOP is not set
+-# CONFIG_BLK_DEV_NBD is not set
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_COUNT=16
+-CONFIG_BLK_DEV_RAM_SIZE=8192
+-# CONFIG_BLK_DEV_XIP is not set
+-# CONFIG_CDROM_PKTCDVD is not set
+-# CONFIG_ATA_OVER_ETH is not set
+-CONFIG_MISC_DEVICES=y
+-# CONFIG_ENCLOSURE_SERVICES is not set
+-# CONFIG_C2PORT is not set
+-
+-#
+-# EEPROM support
+-#
+-# CONFIG_EEPROM_93CX6 is not set
+-CONFIG_HAVE_IDE=y
+-CONFIG_IDE=y
+-
+-#
+-# Please see Documentation/ide/ide.txt for help/info on IDE drives
+-#
+-# CONFIG_BLK_DEV_IDE_SATA is not set
+-CONFIG_IDE_GD=y
+-CONFIG_IDE_GD_ATA=y
+-# CONFIG_IDE_GD_ATAPI is not set
+-CONFIG_BLK_DEV_IDECS=y
+-# CONFIG_BLK_DEV_IDECD is not set
+-# CONFIG_BLK_DEV_IDETAPE is not set
+-# CONFIG_IDE_TASK_IOCTL is not set
+-# CONFIG_IDE_PROC_FS is not set
+-
+-#
+-# IDE chipset support/bugfixes
+-#
+-# CONFIG_BLK_DEV_PLATFORM is not set
+-# CONFIG_BLK_DEV_IDEDMA is not set
+-
+-#
+-# SCSI device support
+-#
+-# CONFIG_RAID_ATTRS is not set
+-# CONFIG_SCSI is not set
+-# CONFIG_SCSI_DMA is not set
+-# CONFIG_SCSI_NETLINK is not set
+-# CONFIG_ATA is not set
+-# CONFIG_MD is not set
+-# CONFIG_NETDEVICES is not set
+-# CONFIG_ISDN is not set
+-
+-#
+-# Input device support
+-#
+-CONFIG_INPUT=y
+-# CONFIG_INPUT_FF_MEMLESS is not set
+-# CONFIG_INPUT_POLLDEV is not set
+-
+-#
+-# Userland interfaces
+-#
+-# CONFIG_INPUT_MOUSEDEV is not set
+-# CONFIG_INPUT_JOYDEV is not set
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_EVBUG=y
+-# CONFIG_INPUT_APMPOWER is not set
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_INPUT_KEYBOARD=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-# CONFIG_KEYBOARD_SUNKBD is not set
+-# CONFIG_KEYBOARD_LKKBD is not set
+-# CONFIG_KEYBOARD_XTKBD is not set
+-# CONFIG_KEYBOARD_NEWTON is not set
+-# CONFIG_KEYBOARD_STOWAWAY is not set
+-CONFIG_KEYBOARD_MICRO=y
+-CONFIG_KEYBOARD_GPIO=y
+-# CONFIG_INPUT_MOUSE is not set
+-# CONFIG_INPUT_JOYSTICK is not set
+-# CONFIG_INPUT_TABLET is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-# CONFIG_TOUCHSCREEN_H3600 is not set
+-# CONFIG_TOUCHSCREEN_FUJITSU is not set
+-# CONFIG_TOUCHSCREEN_GUNZE is not set
+-# CONFIG_TOUCHSCREEN_ELO is not set
+-# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
+-# CONFIG_TOUCHSCREEN_MTOUCH is not set
+-# CONFIG_TOUCHSCREEN_INEXIO is not set
+-# CONFIG_TOUCHSCREEN_MK712 is not set
+-CONFIG_TOUCHSCREEN_IPAQ_MICRO=y
+-# CONFIG_TOUCHSCREEN_HTCPEN is not set
+-# CONFIG_TOUCHSCREEN_PENMOUNT is not set
+-# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
+-# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
+-# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
+-# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
+-# CONFIG_INPUT_MISC is not set
+-
+-#
+-# Hardware I/O ports
+-#
+-CONFIG_SERIO=y
+-CONFIG_SERIO_SERPORT=y
+-# CONFIG_SERIO_LIBPS2 is not set
+-# CONFIG_SERIO_RAW is not set
+-# CONFIG_GAMEPORT is not set
+-
+-#
+-# Character devices
+-#
+-CONFIG_VT=y
+-CONFIG_CONSOLE_TRANSLATIONS=y
+-CONFIG_VT_CONSOLE=y
+-CONFIG_HW_CONSOLE=y
+-# CONFIG_VT_HW_CONSOLE_BINDING is not set
+-CONFIG_DEVKMEM=y
+-# CONFIG_SERIAL_NONSTANDARD is not set
+-
+-#
+-# Serial drivers
+-#
+-CONFIG_SERIAL_8250=y
+-# CONFIG_SERIAL_8250_CONSOLE is not set
+-# CONFIG_SERIAL_8250_CS is not set
+-CONFIG_SERIAL_8250_NR_UARTS=4
+-CONFIG_SERIAL_8250_RUNTIME_UARTS=4
+-# CONFIG_SERIAL_8250_EXTENDED is not set
+-
+-#
+-# Non-8250 serial port support
+-#
+-CONFIG_SERIAL_SA1100=y
+-CONFIG_SERIAL_SA1100_CONSOLE=y
+-CONFIG_SERIAL_CORE=y
+-CONFIG_SERIAL_CORE_CONSOLE=y
+-CONFIG_UNIX98_PTYS=y
+-# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
+-CONFIG_LEGACY_PTYS=y
+-CONFIG_LEGACY_PTY_COUNT=256
+-# CONFIG_IPMI_HANDLER is not set
+-# CONFIG_HW_RANDOM is not set
+-# CONFIG_DTLK is not set
+-# CONFIG_R3964 is not set
+-
+-#
+-# PCMCIA character devices
+-#
+-# CONFIG_SYNCLINK_CS is not set
+-# CONFIG_CARDMAN_4000 is not set
+-# CONFIG_CARDMAN_4040 is not set
+-# CONFIG_RAW_DRIVER is not set
+-# CONFIG_TCG_TPM is not set
+-CONFIG_DEVPORT=y
+-# CONFIG_I2C is not set
+-# CONFIG_SPI is not set
+-CONFIG_ARCH_REQUIRE_GPIOLIB=y
+-CONFIG_GPIOLIB=y
+-CONFIG_DEBUG_GPIO=y
+-CONFIG_GPIO_SYSFS=y
+-
+-#
+-# Memory mapped GPIO expanders:
+-#
+-
+-#
+-# I2C GPIO expanders:
+-#
+-
+-#
+-# PCI GPIO expanders:
+-#
+-
+-#
+-# SPI GPIO expanders:
+-#
+-# CONFIG_W1 is not set
+-CONFIG_POWER_SUPPLY=y
+-# CONFIG_POWER_SUPPLY_DEBUG is not set
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_BATTERY_DS2760 is not set
+-CONFIG_IPAQ_MICRO_BATTERY=y
+-# CONFIG_HWMON is not set
+-# CONFIG_THERMAL is not set
+-# CONFIG_THERMAL_HWMON is not set
+-# CONFIG_WATCHDOG is not set
+-CONFIG_SSB_POSSIBLE=y
+-
+-#
+-# Sonics Silicon Backplane
+-#
+-# CONFIG_SSB is not set
+-
+-#
+-# Multifunction device drivers
+-#
+-CONFIG_MFD_CORE=y
+-# CONFIG_MFD_SM501 is not set
+-# CONFIG_MFD_ASIC3 is not set
+-CONFIG_IPAQ_MICRO=y
+-# CONFIG_HTC_EGPIO is not set
+-# CONFIG_HTC_PASIC3 is not set
+-# CONFIG_MFD_TMIO is not set
+-# CONFIG_MFD_T7L66XB is not set
+-# CONFIG_MFD_TC6387XB is not set
+-# CONFIG_MFD_TC6393XB is not set
+-
+-#
+-# Multimedia Capabilities Port drivers
+-#
+-# CONFIG_MCP_SA11X0 is not set
+-
+-#
+-# Multimedia devices
+-#
+-
+-#
+-# Multimedia core support
+-#
+-# CONFIG_VIDEO_DEV is not set
+-# CONFIG_DVB_CORE is not set
+-# CONFIG_VIDEO_MEDIA is not set
+-
+-#
+-# Multimedia drivers
+-#
+-# CONFIG_DAB is not set
+-
+-#
+-# Graphics support
+-#
+-# CONFIG_VGASTATE is not set
+-# CONFIG_VIDEO_OUTPUT_CONTROL is not set
+-CONFIG_FB=y
+-# CONFIG_FIRMWARE_EDID is not set
+-# CONFIG_FB_DDC is not set
+-# CONFIG_FB_BOOT_VESA_SUPPORT is not set
+-CONFIG_FB_CFB_FILLRECT=y
+-CONFIG_FB_CFB_COPYAREA=y
+-CONFIG_FB_CFB_IMAGEBLIT=y
+-# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
+-# CONFIG_FB_SYS_FILLRECT is not set
+-# CONFIG_FB_SYS_COPYAREA is not set
+-# CONFIG_FB_SYS_IMAGEBLIT is not set
+-# CONFIG_FB_FOREIGN_ENDIAN is not set
+-# CONFIG_FB_SYS_FOPS is not set
+-# CONFIG_FB_SVGALIB is not set
+-# CONFIG_FB_MACMODES is not set
+-# CONFIG_FB_BACKLIGHT is not set
+-# CONFIG_FB_MODE_HELPERS is not set
+-# CONFIG_FB_TILEBLITTING is not set
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_SA1100=y
+-# CONFIG_FB_S1D13XXX is not set
+-# CONFIG_FB_TMIO is not set
+-# CONFIG_FB_VIRTUAL is not set
+-# CONFIG_FB_METRONOME is not set
+-# CONFIG_FB_MB862XX is not set
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CLASS_DEVICE=y
+-# CONFIG_LCD_ILI9320 is not set
+-# CONFIG_LCD_PLATFORM is not set
+-CONFIG_BACKLIGHT_CLASS_DEVICE=y
+-CONFIG_BACKLIGHT_GENERIC=y
+-
+-#
+-# Display device support
+-#
+-# CONFIG_DISPLAY_SUPPORT is not set
+-
+-#
+-# Console display driver support
+-#
+-# CONFIG_VGA_CONSOLE is not set
+-# CONFIG_MDA_CONSOLE is not set
+-CONFIG_DUMMY_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONTS=y
+-# CONFIG_FONT_8x8 is not set
+-# CONFIG_FONT_8x16 is not set
+-# CONFIG_FONT_6x11 is not set
+-# CONFIG_FONT_7x14 is not set
+-# CONFIG_FONT_PEARL_8x8 is not set
+-# CONFIG_FONT_ACORN_8x8 is not set
+-CONFIG_FONT_MINI_4x6=y
+-# CONFIG_FONT_SUN8x16 is not set
+-# CONFIG_FONT_SUN12x22 is not set
+-# CONFIG_FONT_10x18 is not set
+-CONFIG_LOGO=y
+-CONFIG_LOGO_LINUX_MONO=y
+-CONFIG_LOGO_LINUX_VGA16=y
+-CONFIG_LOGO_LINUX_CLUT224=y
+-# CONFIG_SOUND is not set
+-# CONFIG_HID_SUPPORT is not set
+-CONFIG_USB_SUPPORT=y
+-CONFIG_USB_ARCH_HAS_HCD=y
+-# CONFIG_USB_ARCH_HAS_OHCI is not set
+-# CONFIG_USB_ARCH_HAS_EHCI is not set
+-# CONFIG_USB is not set
+-# CONFIG_USB_OTG_WHITELIST is not set
+-# CONFIG_USB_OTG_BLACKLIST_HUB is not set
+-# CONFIG_USB_MUSB_HDRC is not set
+-# CONFIG_USB_GADGET_MUSB_HDRC is not set
+-
+-#
+-# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may also be needed;
+-#
+-CONFIG_USB_GADGET=y
+-CONFIG_USB_GADGET_DEBUG=y
+-CONFIG_USB_GADGET_DEBUG_FILES=y
+-CONFIG_USB_GADGET_DEBUG_FS=y
+-CONFIG_USB_GADGET_VBUS_DRAW=2
+-CONFIG_USB_GADGET_SELECTED=y
+-# CONFIG_USB_GADGET_AT91 is not set
+-# CONFIG_USB_GADGET_ATMEL_USBA is not set
+-# CONFIG_USB_GADGET_FSL_USB2 is not set
+-# CONFIG_USB_GADGET_LH7A40X is not set
+-# CONFIG_USB_GADGET_OMAP is not set
+-# CONFIG_USB_GADGET_PXA25X is not set
+-# CONFIG_USB_GADGET_PXA27X is not set
+-# CONFIG_USB_GADGET_S3C2410 is not set
+-# CONFIG_USB_GADGET_IMX is not set
+-# CONFIG_USB_GADGET_M66592 is not set
+-# CONFIG_USB_GADGET_AMD5536UDC is not set
+-# CONFIG_USB_GADGET_FSL_QE is not set
+-# CONFIG_USB_GADGET_CI13XXX is not set
+-# CONFIG_USB_GADGET_NET2280 is not set
+-# CONFIG_USB_GADGET_GOKU is not set
+-CONFIG_USB_GADGET_SA1100=y
+-CONFIG_USB_SA1100=y
+-# CONFIG_USB_GADGET_DUMMY_HCD is not set
+-# CONFIG_USB_GADGET_DUALSPEED is not set
+-# CONFIG_USB_ZERO is not set
+-CONFIG_USB_ETH=y
+-# CONFIG_USB_ETH_RNDIS is not set
+-# CONFIG_USB_GADGETFS is not set
+-# CONFIG_USB_FILE_STORAGE is not set
+-# CONFIG_USB_G_SERIAL is not set
+-# CONFIG_USB_MIDI_GADGET is not set
+-# CONFIG_USB_G_PRINTER is not set
+-# CONFIG_USB_CDC_COMPOSITE is not set
+-
+-#
+-# OTG and related infrastructure
+-#
+-# CONFIG_USB_GPIO_VBUS is not set
+-# CONFIG_MMC is not set
+-# CONFIG_MEMSTICK is not set
+-# CONFIG_ACCESSIBILITY is not set
+-# CONFIG_NEW_LEDS is not set
+-CONFIG_RTC_LIB=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_HCTOSYS=y
+-CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
+-# CONFIG_RTC_DEBUG is not set
+-
+-#
+-# RTC interfaces
+-#
+-CONFIG_RTC_INTF_SYSFS=y
+-CONFIG_RTC_INTF_PROC=y
+-CONFIG_RTC_INTF_DEV=y
+-# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
+-# CONFIG_RTC_DRV_TEST is not set
+-
+-#
+-# SPI RTC drivers
+-#
+-
+-#
+-# Platform RTC drivers
+-#
+-# CONFIG_RTC_DRV_CMOS is not set
+-# CONFIG_RTC_DRV_DS1286 is not set
+-# CONFIG_RTC_DRV_DS1511 is not set
+-# CONFIG_RTC_DRV_DS1553 is not set
+-# CONFIG_RTC_DRV_DS1742 is not set
+-# CONFIG_RTC_DRV_STK17TA8 is not set
+-# CONFIG_RTC_DRV_M48T86 is not set
+-# CONFIG_RTC_DRV_M48T35 is not set
+-# CONFIG_RTC_DRV_M48T59 is not set
+-# CONFIG_RTC_DRV_BQ4802 is not set
+-# CONFIG_RTC_DRV_V3020 is not set
+-
+-#
+-# on-CPU RTC drivers
+-#
+-CONFIG_RTC_DRV_SA1100=y
+-# CONFIG_DMADEVICES is not set
+-# CONFIG_REGULATOR is not set
+-# CONFIG_UIO is not set
+-# CONFIG_STAGING is not set
+-
+-#
+-# File systems
+-#
+-CONFIG_EXT2_FS=y
+-# CONFIG_EXT2_FS_XATTR is not set
+-# CONFIG_EXT2_FS_XIP is not set
+-# CONFIG_EXT3_FS is not set
+-# CONFIG_EXT4_FS is not set
+-# CONFIG_REISERFS_FS is not set
+-# CONFIG_JFS_FS is not set
+-# CONFIG_FS_POSIX_ACL is not set
+-# CONFIG_FILE_LOCKING is not set
+-# CONFIG_XFS_FS is not set
+-# CONFIG_OCFS2_FS is not set
+-# CONFIG_BTRFS_FS is not set
+-CONFIG_DNOTIFY=y
+-CONFIG_INOTIFY=y
+-CONFIG_INOTIFY_USER=y
+-# CONFIG_QUOTA is not set
+-# CONFIG_AUTOFS_FS is not set
+-# CONFIG_AUTOFS4_FS is not set
+-# CONFIG_FUSE_FS is not set
+-
+-#
+-# CD-ROM/DVD Filesystems
+-#
+-# CONFIG_ISO9660_FS is not set
+-# CONFIG_UDF_FS is not set
+-
+-#
+-# DOS/FAT/NT Filesystems
+-#
+-# CONFIG_MSDOS_FS is not set
+-# CONFIG_VFAT_FS is not set
+-# CONFIG_NTFS_FS is not set
+-
+-#
+-# Pseudo filesystems
+-#
+-CONFIG_PROC_FS=y
+-CONFIG_PROC_SYSCTL=y
+-CONFIG_PROC_PAGE_MONITOR=y
+-CONFIG_SYSFS=y
+-CONFIG_TMPFS=y
+-# CONFIG_TMPFS_POSIX_ACL is not set
+-# CONFIG_HUGETLB_PAGE is not set
+-# CONFIG_CONFIGFS_FS is not set
+-# CONFIG_MISC_FILESYSTEMS is not set
+-# CONFIG_NETWORK_FILESYSTEMS is not set
+-
+-#
+-# Partition Types
+-#
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ACORN_PARTITION is not set
+-# CONFIG_OSF_PARTITION is not set
+-# CONFIG_AMIGA_PARTITION is not set
+-# CONFIG_ATARI_PARTITION is not set
+-# CONFIG_MAC_PARTITION is not set
+-CONFIG_MSDOS_PARTITION=y
+-# CONFIG_BSD_DISKLABEL is not set
+-# CONFIG_MINIX_SUBPARTITION is not set
+-# CONFIG_SOLARIS_X86_PARTITION is not set
+-# CONFIG_UNIXWARE_DISKLABEL is not set
+-# CONFIG_LDM_PARTITION is not set
+-# CONFIG_SGI_PARTITION is not set
+-# CONFIG_ULTRIX_PARTITION is not set
+-# CONFIG_SUN_PARTITION is not set
+-# CONFIG_KARMA_PARTITION is not set
+-# CONFIG_EFI_PARTITION is not set
+-# CONFIG_SYSV68_PARTITION is not set
+-# CONFIG_NLS is not set
+-# CONFIG_DLM is not set
+-
+-#
+-# Kernel hacking
+-#
+-# CONFIG_PRINTK_TIME is not set
+-CONFIG_ENABLE_WARN_DEPRECATED=y
+-CONFIG_ENABLE_MUST_CHECK=y
+-CONFIG_FRAME_WARN=1024
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_UNUSED_SYMBOLS is not set
+-CONFIG_DEBUG_FS=y
+-# CONFIG_HEADERS_CHECK is not set
+-CONFIG_DEBUG_KERNEL=y
+-# CONFIG_DEBUG_SHIRQ is not set
+-# CONFIG_DETECT_SOFTLOCKUP is not set
+-# CONFIG_SCHED_DEBUG is not set
+-# CONFIG_SCHEDSTATS is not set
+-# CONFIG_TIMER_STATS is not set
+-# CONFIG_DEBUG_OBJECTS is not set
+-# CONFIG_DEBUG_RT_MUTEXES is not set
+-# CONFIG_RT_MUTEX_TESTER is not set
+-# CONFIG_DEBUG_SPINLOCK is not set
+-# CONFIG_DEBUG_MUTEXES is not set
+-# CONFIG_DEBUG_LOCK_ALLOC is not set
+-# CONFIG_PROVE_LOCKING is not set
+-# CONFIG_LOCK_STAT is not set
+-# CONFIG_DEBUG_SPINLOCK_SLEEP is not set
+-# CONFIG_DEBUG_LOCKING_API_SELFTESTS is not set
+-# CONFIG_DEBUG_KOBJECT is not set
+-CONFIG_DEBUG_BUGVERBOSE=y
+-# CONFIG_DEBUG_INFO is not set
+-# CONFIG_DEBUG_VM is not set
+-# CONFIG_DEBUG_WRITECOUNT is not set
+-# CONFIG_DEBUG_MEMORY_INIT is not set
+-# CONFIG_DEBUG_LIST is not set
+-# CONFIG_DEBUG_SG is not set
+-# CONFIG_DEBUG_NOTIFIERS is not set
+-CONFIG_FRAME_POINTER=y
+-# CONFIG_BOOT_PRINTK_DELAY is not set
+-# CONFIG_RCU_TORTURE_TEST is not set
+-# CONFIG_RCU_CPU_STALL_DETECTOR is not set
+-# CONFIG_BACKTRACE_SELF_TEST is not set
+-# CONFIG_DEBUG_BLOCK_EXT_DEVT is not set
+-# CONFIG_FAULT_INJECTION is not set
+-# CONFIG_LATENCYTOP is not set
+-CONFIG_SYSCTL_SYSCALL_CHECK=y
+-CONFIG_HAVE_FUNCTION_TRACER=y
+-
+-#
+-# Tracers
+-#
+-# CONFIG_FUNCTION_TRACER is not set
+-# CONFIG_IRQSOFF_TRACER is not set
+-# CONFIG_SCHED_TRACER is not set
+-# CONFIG_CONTEXT_SWITCH_TRACER is not set
+-# CONFIG_BOOT_TRACER is not set
+-# CONFIG_TRACE_BRANCH_PROFILING is not set
+-# CONFIG_STACK_TRACER is not set
+-CONFIG_DYNAMIC_PRINTK_DEBUG=y
+-# CONFIG_SAMPLES is not set
+-CONFIG_HAVE_ARCH_KGDB=y
+-# CONFIG_KGDB is not set
+-CONFIG_DEBUG_USER=y
+-CONFIG_DEBUG_ERRORS=y
+-# CONFIG_DEBUG_STACK_USAGE is not set
+-CONFIG_DEBUG_LL=y
+-# CONFIG_DEBUG_ICEDCC is not set
+-
+-#
+-# Security options
+-#
+-# CONFIG_KEYS is not set
+-# CONFIG_SECURITY is not set
+-# CONFIG_SECURITYFS is not set
+-# CONFIG_SECURITY_FILE_CAPABILITIES is not set
+-CONFIG_CRYPTO=y
+-
+-#
+-# Crypto core or helper
+-#
+-# CONFIG_CRYPTO_FIPS is not set
+-# CONFIG_CRYPTO_MANAGER is not set
+-# CONFIG_CRYPTO_MANAGER2 is not set
+-# CONFIG_CRYPTO_GF128MUL is not set
+-# CONFIG_CRYPTO_NULL is not set
+-# CONFIG_CRYPTO_CRYPTD is not set
+-# CONFIG_CRYPTO_AUTHENC is not set
+-# CONFIG_CRYPTO_TEST is not set
+-
+-#
+-# Authenticated Encryption with Associated Data
+-#
+-# CONFIG_CRYPTO_CCM is not set
+-# CONFIG_CRYPTO_GCM is not set
+-# CONFIG_CRYPTO_SEQIV is not set
+-
+-#
+-# Block modes
+-#
+-# CONFIG_CRYPTO_CBC is not set
+-# CONFIG_CRYPTO_CTR is not set
+-# CONFIG_CRYPTO_CTS is not set
+-# CONFIG_CRYPTO_ECB is not set
+-# CONFIG_CRYPTO_LRW is not set
+-# CONFIG_CRYPTO_PCBC is not set
+-# CONFIG_CRYPTO_XTS is not set
+-
+-#
+-# Hash modes
+-#
+-# CONFIG_CRYPTO_HMAC is not set
+-# CONFIG_CRYPTO_XCBC is not set
+-
+-#
+-# Digest
+-#
+-# CONFIG_CRYPTO_CRC32C is not set
+-# CONFIG_CRYPTO_MD4 is not set
+-# CONFIG_CRYPTO_MD5 is not set
+-# CONFIG_CRYPTO_MICHAEL_MIC is not set
+-# CONFIG_CRYPTO_RMD128 is not set
+-# CONFIG_CRYPTO_RMD160 is not set
+-# CONFIG_CRYPTO_RMD256 is not set
+-# CONFIG_CRYPTO_RMD320 is not set
+-# CONFIG_CRYPTO_SHA1 is not set
+-# CONFIG_CRYPTO_SHA256 is not set
+-# CONFIG_CRYPTO_SHA512 is not set
+-# CONFIG_CRYPTO_TGR192 is not set
+-# CONFIG_CRYPTO_WP512 is not set
+-
+-#
+-# Ciphers
+-#
+-# CONFIG_CRYPTO_AES is not set
+-# CONFIG_CRYPTO_ANUBIS is not set
+-# CONFIG_CRYPTO_ARC4 is not set
+-# CONFIG_CRYPTO_BLOWFISH is not set
+-# CONFIG_CRYPTO_CAMELLIA is not set
+-# CONFIG_CRYPTO_CAST5 is not set
+-# CONFIG_CRYPTO_CAST6 is not set
+-# CONFIG_CRYPTO_DES is not set
+-# CONFIG_CRYPTO_FCRYPT is not set
+-# CONFIG_CRYPTO_KHAZAD is not set
+-# CONFIG_CRYPTO_SALSA20 is not set
+-# CONFIG_CRYPTO_SEED is not set
+-# CONFIG_CRYPTO_SERPENT is not set
+-# CONFIG_CRYPTO_TEA is not set
+-# CONFIG_CRYPTO_TWOFISH is not set
+-
+-#
+-# Compression
+-#
+-# CONFIG_CRYPTO_DEFLATE is not set
+-# CONFIG_CRYPTO_LZO is not set
+-
+-#
+-# Random Number Generation
+-#
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-# CONFIG_CRYPTO_HW is not set
+-
+-#
+-# Library routines
+-#
+-CONFIG_BITREVERSE=y
+-CONFIG_GENERIC_FIND_LAST_BIT=y
+-CONFIG_CRC_CCITT=y
+-# CONFIG_CRC16 is not set
+-# CONFIG_CRC_T10DIF is not set
+-# CONFIG_CRC_ITU_T is not set
+-CONFIG_CRC32=y
+-# CONFIG_CRC7 is not set
+-# CONFIG_LIBCRC32C is not set
+-CONFIG_PLIST=y
+-CONFIG_HAS_IOMEM=y
+-CONFIG_HAS_IOPORT=y
+-CONFIG_HAS_DMA=y
+diff --git a/recipes-kernel/linux/linux-2.6.29/h3600/misc/patch_needed_for_old_touchscreen_driver/0005-SA1100-enable-second-serial-port-on-h3600.patch b/recipes-kernel/linux/linux-2.6.29/h3600/misc/patch_needed_for_old_touchscreen_driver/0005-SA1100-enable-second-serial-port-on-h3600.patch
+deleted file mode 100644
+index 474b4ac..0000000
+--- a/recipes-kernel/linux/linux-2.6.29/h3600/misc/patch_needed_for_old_touchscreen_driver/0005-SA1100-enable-second-serial-port-on-h3600.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 7b9beddfd25d98dabc95f2f9bebddc555376f8ae Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Wed, 21 Jan 2009 21:43:30 +0300
+-Subject: [PATCH] SA1100: enable second serial port on h3600
+-
+-It's used for communication with Atmel microcontroller (buttons,
+-touchscreen, etc.) We need userspace access to it for inputattach.
+-
+-THIS IS A HACK!
+-we need to rework h3600_ts_input into proper kernel-only driver,
+-so we won't need inputattach.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+----
+- arch/arm/mach-sa1100/h3600.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/h3600.c b/arch/arm/mach-sa1100/h3600.c
+-index 3d31397..cca5223 100644
+---- a/arch/arm/mach-sa1100/h3600.c
+-+++ b/arch/arm/mach-sa1100/h3600.c
+-@@ -247,7 +247,7 @@ static void __init h3xxx_map_io(void)
+- 
+- 	sa1100_register_uart_fns(&h3600_port_fns);
+- 	sa1100_register_uart(0, 3); /* Common serial port */
+--//	sa1100_register_uart(1, 1); /* Microcontroller on 3100/3600 */
+-+	sa1100_register_uart(1, 1); /* Microcontroller on 3100/3600 */
+- 
+- 	/* Ensure those pins are outputs and driving low  */
+- 	PPDR |= PPC_TXD4 | PPC_SCLK | PPC_SFRM;
+--- 
+-1.5.6.4
+-
+diff --git a/recipes-kernel/linux/linux_2.6.29.bb b/recipes-kernel/linux/linux_2.6.29.bb
+deleted file mode 100644
+index 1886f24..0000000
+--- a/recipes-kernel/linux/linux_2.6.29.bb
++++ /dev/null
+@@ -1,62 +0,0 @@
+-require linux.inc
+-
+-PR = "r0"
+-
+-# Mark archs/machines that this kernel supports
+-DEFAULT_PREFERENCE = "-1"
+-DEFAULT_PREFERENCE_h3600 = "1"
+-
+-COMPATIBLE_MACHINE = "h3600"
+-
+-SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v2.6/linux-2.6.29.6.tar.bz2;name=kernel \
+-           file://defconfig"
+-
+-S = "${WORKDIR}/linux-2.6.29.6"
+-
+-SRC_URI_append_h3600 = "\
+-    file://01_pushed_upstream/0001--ARM-5407-1-SA1100-drop-broken-for-ages-iPAQ-h380.patch \
+-    file://01_pushed_upstream/0002--ARM-5408-1-SA1100-update-defconfigs-after-h3800.patch \
+-    file://01_pushed_upstream/0003--ARM-5423-1-SA1100-remove-unused-H3600_SLEEVE-Kco.patch \
+-    file://01_pushed_upstream/0004--ARM-5424-1-h3600-clean-up-mtd-partitions-table.patch \
+-    file://01_pushed_upstream/0005--ARM-5425-1-h3600-first-stage-of-ipaq_model_ops-c.patch \
+-    file://01_pushed_upstream/0006--ARM-5426-1-h3600-remove-clr_h3600_egpio-set_h360.patch \
+-    file://01_pushed_upstream/0007--ARM-5427-1-h3600-ipaq_model_ops-final-cleanup.patch \
+-    file://01_pushed_upstream/0008-ALSA-drop-outdated-and-broken-sa11xx-uda1341-driver.patch \
+-    file://02_cleanup_wip/0009-mtd-remove-obsolete-ipaq-flash-driver.patch \
+-    file://02_cleanup_wip/0010-h3600-introduce-new-set-of-GPIO-defines.patch \
+-    file://02_cleanup_wip/0011-h3600-remove-unused-includes.patch \
+-    file://02_cleanup_wip/0012-h3600-add-include-linux-gpio.h.patch \
+-    file://02_cleanup_wip/0013-h3600-split-common-h3xxx_lcd_power.patch \
+-    file://02_cleanup_wip/0014-h3600-split-common-h3xxx_mach_init.patch \
+-    file://02_cleanup_wip/0015-h3600-remove-IRDA-tranceiver-stuff-from-serial-PM-c.patch \
+-    file://02_cleanup_wip/0016-h3600-switch-serial-hooks-to-use-gpiolib-functions.patch \
+-    file://02_cleanup_wip/0017-h3600-remove-unused-set_wake-callback-from-sa1100_p.patch \
+-    file://02_cleanup_wip/0018-serial-remove-unused-set_wake-from-sa1100_serial.patch \
+-    file://03_add_features/0019-h3600-add-gpio-keys-for-Power-and-Action-buttons.patch \
+-    file://03_add_features/0020-input-fix-compilation-of-h3600-touchscreen-driver.patch \
+-    file://03_add_features/0021-input-fix-h3600_ts_input-kconfig-dependency.patch \
+-    file://03_add_features/0022-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3600.patch \
+-    file://03_add_features/0023-input-driver-for-keys-connected-to-microcontroller.patch \
+-    file://03_add_features/0024-input-driver-for-touchscreen-on-iPaq-h3600-h3100.patch \
+-    file://03_add_features/0025-power-add-driver-for-battery-reading-on-iPaq-h3600.patch \
+-    file://03_add_features/0026-h3600-add-micro-platform-device.patch \
+-    file://03_add_features/0027-USB-add-sa1100_udc-driver.patch \
+-    file://03_add_features/0028-h3600-fix-suspend-HACK.patch \
+-    file://03_add_features/0029-pcmcia-fix-oops-on-suspend-in-sa1100_pcmcia-HACK.patch \
+-    file://misc/patch_needed_for_old_touchscreen_driver/0005-SA1100-enable-second-serial-port-on-h3600.patch \
+-	"	
+-
+-SRC_URI[kernel.md5sum] = "7cd24826fd3c7b0f83d9f662731a7865"
+-SRC_URI[kernel.sha256sum] = "536e69548e27da1f4693867fbbd6eedf6bdaa2e7656c743ce1d0b36b1becc5f9"
+-
+-do_configure_prepend() {
+-	# Rename getline in ./scripts/unifdef.c
+-	# Kernels up to 2.6.29 are currently failing to build unifdef.c,
+-	# clashing with exposed getline() from <stdio.h>
+-	# see https://patchwork.kernel.org/patch/11166/
+-	# committed in 2.6.29 (commit d15bd1067b1fcb2b7250d22bc0c7c7fea0b759f7)
+-
+-	if [ -e ${S}/scripts/unifdef.c ]; then
+-		sed -i -e 's/getline/parseline/g' ${S}/scripts/unifdef.c
+-	fi
+-}
+-- 
+1.8.1.5
 
-No tabs in SRC_URI please
-
-> +" + +SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6" 
-> +SRC_URI[sha256sum] =
-> "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
-> 
-> -inherit autotools pkgconfig systemd +inherit autotools pkgconfig systemd
-> update-rc.d
-> 
-> -EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd',
-> '--with-systemdsystemunitdir=${systemd_unitdir}/system/',
-> '--without-systemdsystemunitdir', d)}" +EXTRA_OECONF +=
-> "${@base_contains('DISTRO_FEATURES', 'systemd',
-> '--with-systemdsystemunitdir=${systemd_unitdir}/system/',
-> '--without-systemdsystemunitdir', d)} --enable-cached-man-pages"
-> 
-> do_install_append() { -    install -d ${D}/${sysconfdir}/${PN} -
-> install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf +
-> install -d "${D}${sysconfdir}/init.d" +    install -m 755
-> ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/rsyslogd +    install -m
-> 755 ${S}/platform/redhat/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf }
-> 
-> +FILES_${PN} += "/usr/bin"
-
-${bindir}, which should already be in FILES_${PN}
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSWAknMkyGM64RGpERAuHwAKCSHbt4fMXvMt4r0MHsxMTQPNAC0wCgjTCB
-bguFCTjaQ1x17zcFrbInakY=
-=ayon
------END PGP SIGNATURE-----
 
