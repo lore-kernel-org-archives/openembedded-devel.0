@@ -1,17 +1,17 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 89BB86CC7F
+	by mail.openembedded.org (Postfix) with ESMTP id 8A28D6CF0B
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 11 Oct 2013 14:01:02 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2013 15:00:54 +0100
-Message-Id: <1381500055-11483-3-git-send-email-ml@communistcode.co.uk>
+Date: Fri, 11 Oct 2013 15:00:53 +0100
+Message-Id: <1381500055-11483-2-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.4
 In-Reply-To: <1381500055-11483-1-git-send-email-ml@communistcode.co.uk>
 References: <1381500055-11483-1-git-send-email-ml@communistcode.co.uk>
 Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: [meta-oe][PATCHv2 2/3] libestr: add 0.1.6
+Subject: [meta-oe][PATCHv2 1/3] json-c: add 0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,25 +31,25 @@ From: Jack Mitchell <jmitchell@cbnl.com>
 
 Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
 ---
- meta-oe/recipes-support/libestr/libestr_0.1.6.bb | 11 +++++++++++
+ meta-oe/recipes-support/json-c/json-c_0.11.bb | 11 +++++++++++
  1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-support/libestr/libestr_0.1.6.bb
+ create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
 
-diff --git a/meta-oe/recipes-support/libestr/libestr_0.1.6.bb b/meta-oe/recipes-support/libestr/libestr_0.1.6.bb
+diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/recipes-support/json-c/json-c_0.11.bb
 new file mode 100644
-index 0000000..ae29856
+index 0000000..f94091b
 --- /dev/null
-+++ b/meta-oe/recipes-support/libestr/libestr_0.1.6.bb
++++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
 @@ -0,0 +1,11 @@
-+SUMMARY = "some essentials for string handling (and a bit more)"
-+HOMEPAGE = "http://libestr.adiscon.com/"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9d6c993486c18262afba4ca5bcb894d0"
++SUMMARY = "JSON-C implements a reference counting object model that allows you to easily construct JSON objects in C"
++HOMEPAGE = "https://github.com/json-c/json-c/wiki"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=de54b60fbbc35123ba193fea8ee216f2"
 +
-+SRC_URI = "http://libestr.adiscon.com/files/download/${P}.tar.gz"
++SRC_URI = "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.gz"
 +
-+SRC_URI[md5sum] = "f48a7098080eebfe7842673c23dcd064"
-+SRC_URI[sha256sum] = "b9c819d30397845fdf85bb1f37c52e81de23aa3b061ec6cc4386f1b942960153"
++SRC_URI[md5sum] = "aa02367d2f7a830bf1e3376f77881e98"
++SRC_URI[sha256sum] = "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983edbfac9149494448c"
 +
 +inherit autotools
 -- 
