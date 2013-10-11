@@ -1,17 +1,41 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BD9F6CF1F
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 036776CC7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 08:55:50 +0000 (UTC)
-From: Jack Mitchell <ml@communistcode.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2013 09:55:45 +0100
-Message-Id: <1381481745-17613-4-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.4
-In-Reply-To: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
-References: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
-Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: [PATCH 3/3] rsyslog: update to 7.4.4
+	Fri, 11 Oct 2013 09:16:52 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id cb5so657766wib.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Oct 2013 02:16:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=prQuOK/kbPw+BW4amyAqFRCud8lDmh1af6klLmAyR8Y=;
+	b=hUyBMn0RxAAGGtAJ4j5XVowB9VPrkvfVyDoK0AE9iGoY/JeesQW74cdrWgSH2NuJOc
+	9wVAGwSO+5aAw2kRU9pT4GcxQXmVsi7Eg0k3LLpT1SwKfm/SALxMh/qzLzhuJmk/BF0L
+	DDbBNRAhBr7pVeNWZ98B0CwgZDT8eNaPbsBHKHau9533TwVZtI2mW+cFmoyDaGAYkt07
+	QuoEqurE3q8N15sjmeN7WW9hG4zRhb4Fd1OmNV/ZfbNr1IR4efP2Ukn6f50rbKcli/17
+	jwjkK9ik8lqsAqjKuULyvk5w+pQgdYS/rXT1eEw3ofBPz167p/G1DKV+LqOeCnA73DT+
+	TeHg==
+X-Gm-Message-State: ALoCoQlyro7yhORC7sfH3XyflU9JIyheX3REEFk3mC7oM08HelvCnU/b6SikH7ITtgwUL27a8DEH
+X-Received: by 10.180.160.240 with SMTP id xn16mr2319009wib.62.1381483014075; 
+	Fri, 11 Oct 2013 02:16:54 -0700 (PDT)
+Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id gp9sm3752609wib.8.2013.10.11.02.16.52
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 11 Oct 2013 02:16:52 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1381478940-18836-1-git-send-email-fathi.boudra@linaro.org>
+Date: Fri, 11 Oct 2013 11:16:55 +0200
+Message-Id: <DBA386E2-0946-4250-A4C0-F626982DFDC9@dominion.thruhere.net>
+References: <1381478940-18836-1-git-send-email-fathi.boudra@linaro.org>
+To: Fathi Boudra <fathi.boudra@linaro.org>
+X-Mailer: Apple Mail (2.1508)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/1] [meta-oe][PATCH] python-numpy: add config files for armeb architecture
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,145 +49,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2013 08:55:53 -0000
+X-List-Received-Date: Fri, 11 Oct 2013 09:16:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-From: Jack Mitchell <jmitchell@cbnl.com>
 
----
- .../recipes-extended/rsyslog/rsyslog/rsyslog.conf  | 60 ----------------------
- meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb  |  5 --
- .../rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb}      | 24 ++++++---
- 3 files changed, 16 insertions(+), 73 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
- delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
- rename meta-oe/recipes-extended/rsyslog/{rsyslog.inc => rsyslog_7.4.4.bb} (54%)
+Op 11 okt. 2013, om 10:09 heeft Fathi Boudra <fathi.boudra@linaro.org> =
+het volgende geschreven:
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-deleted file mode 100644
-index 47fc440..0000000
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
-+++ /dev/null
-@@ -1,60 +0,0 @@
--# if you experience problems, check
--# http://www.rsyslog.com/troubleshoot for assistance
--
--# rsyslog v3: load input modules
--# If you do not load inputs, nothing happens!
--# You may need to set the module load path if modules are not found.
--
--$ModLoad immark   # provides --MARK-- message capability
--$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
--$ModLoad imklog   # kernel logging (formerly provided by rklogd)
--
--# Log all kernel messages to the console.
--# Logging much else clutters up the screen.
--#kern.*                                                 /dev/console
--
--# Log anything (except mail) of level info or higher.
--# Don't log private authentication messages!
--*.info;mail.none;authpriv.none;cron.none                -/var/log/messages
--
--# The authpriv file has restricted access.
--authpriv.*                                              /var/log/secure
--
--# Log all the mail messages in one place.
--mail.*                                                  -/var/log/maillog
--
--
--# Log cron stuff
--cron.*                                                  -/var/log/cron
--
--# Everybody gets emergency messages
--*.emerg                                                 *
--
--# Save news errors of level crit and higher in a special file.
--uucp,news.crit                                          -/var/log/spooler
--
--# Save boot messages also to boot.log
--local7.*                                                /var/log/boot.log
--
--# Remote Logging (we use TCP for reliable delivery)
--# An on-disk queue is created for this action. If the remote host is
--# down, messages are spooled to disk and sent when it is up again.
--#$WorkDirectory /rsyslog/spool # where to place spool files
--#$ActionQueueFileName uniqName # unique name prefix for spool files
--#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
--#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
--#$ActionQueueType LinkedList   # run asynchronously
--#$ActionResumeRetryCount -1    # infinite retries if host is down
--# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
--#*.* @@remote-host:514
--
--
--# ######### Receiving Messages from Remote Hosts ########## 
--# TCP Syslog Server:
--# provides TCP syslog reception and GSS-API (if compiled to support it)
--#$ModLoad imtcp.so  # load module
--#$InputTCPServerRun 514 # start up TCP listener at port 514
--
--# UDP Syslog Server:
--#$ModLoad imudp.so  # provides UDP syslog reception
--#$UDPServerRun 514 # start a UDP syslog server at standard port 514
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
-deleted file mode 100644
-index 3a6540d..0000000
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_5.8.0.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require rsyslog.inc
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "37562d0e71a24938a9ed7f242bd32d35"
--SRC_URI[sha256sum] = "e034b02473fd7e5313522173ec2f6c57e6fbcaec2c6b289edb968b1d64ae3ffd"
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog.inc b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-similarity index 54%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog.inc
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-index 4b2935f..33cc1d5 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog.inc
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-@@ -1,24 +1,32 @@
- DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
--DEPENDS = "zlib"
-+DEPENDS = "zlib libestr json-c"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- HOMEPAGE = "http://www.rsyslog.com/"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973"
- 
--INC_PR = "r8"
--
- SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${PN}-${PV}.tar.gz \
--           file://rsyslog.conf"
-+	   file://initscript \
-+"
-+
-+SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
-+SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
-            
--inherit autotools pkgconfig systemd
-+inherit autotools pkgconfig systemd update-rc.d
- 
--EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)} --enable-cached-man-pages"
- 
- do_install_append() {
--    install -d ${D}/${sysconfdir}/${PN}
--    install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-+    install -d "${D}${sysconfdir}/init.d"
-+    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/rsyslogd
-+    install -m 755 ${S}/platform/redhat/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
- }
- 
-+FILES_${PN} += "/usr/bin"
-+
-+INITSCRIPT_NAME = "rsyslogd"
-+INITSCRIPT_PARAMS = "defaults"
-+
- CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
- 
- RPROVIDES_${PN} += "${PN}-systemd"
--- 
-1.8.4
+> Fix python-numpy build failure on armeb architecture.
+>=20
+> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+
+Acked-by: Koen Kooi <koen.kooi@linaro.org>
+
+> ---
+> .../python/python-numpy/armeb/config.h              | 21 =
++++++++++++++++++++++
+> .../python/python-numpy/armeb/numpyconfig.h         | 17 =
++++++++++++++++++
+> .../recipes-devtools/python/python-numpy_1.7.0.bb   |  5 +++++
+> 3 files changed, 43 insertions(+)
+> create mode 100644 =
+meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
+> create mode 100644 =
+meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
+>=20
+> diff --git =
+a/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h =
+b/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
+> new file mode 100644
+> index 0000000..17ef186
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
+> @@ -0,0 +1,21 @@
+> +/* ./src.linux-i686-2.5/numpy/core/include/numpy/config.h */
+> +/* #define SIZEOF_SHORT 2 */
+> +/* #define SIZEOF_INT 4 */
+> +/* #define SIZEOF_LONG 4 */
+> +/* #define SIZEOF_FLOAT 4 */
+> +/* #define SIZEOF_DOUBLE 8 */
+> +#define SIZEOF_LONG_DOUBLE 12
+> +#define SIZEOF_PY_INTPTR_T 4
+> +/* #define SIZEOF_LONG_LONG 8 */
+> +#define SIZEOF_PY_LONG_LONG 8
+> +/* #define CHAR_BIT 8 */
+> +#define MATHLIB m
+> +#define HAVE_FLOAT_FUNCS
+> +#define HAVE_LOG1P
+> +#define HAVE_EXPM1
+> +#define HAVE_INVERSE_HYPERBOLIC
+> +#define HAVE_INVERSE_HYPERBOLIC_FLOAT
+> +#define HAVE_ISNAN
+> +#define HAVE_ISINF
+> +#define HAVE_RINT
+> +
+> diff --git =
+a/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h =
+b/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
+> new file mode 100644
+> index 0000000..c4bf654
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
+> @@ -0,0 +1,17 @@
+> +/* cat ./src.linux-i686-2.5/numpy/core/include/numpy/numpyconfig.h */
+> +/*
+> + *  * This file is generated by numpy/core/setup.pyc. DO NOT EDIT=20
+> + *   */
+> +#define NPY_SIZEOF_SHORT 2=20
+> +#define NPY_SIZEOF_INT 4=20
+> +#define NPY_SIZEOF_LONG 4=20
+> +#define NPY_SIZEOF_FLOAT 4=20
+> +#define NPY_SIZEOF_DOUBLE 8=20
+> +#define NPY_SIZEOF_LONGDOUBLE 12=20
+> +#define NPY_SIZEOF_PY_INTPTR_T 4=20
+> +#define NPY_NO_SMP 0
+> +
+> +#define NPY_SIZEOF_LONGLONG 8=20
+> +#define NPY_SIZEOF_PY_LONG_LONG 8=20
+> +/* #define CHAR_BIT 8 */
+> +
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb =
+b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> index 7d2f2e2..e6d328f 100644
+> --- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> @@ -2,6 +2,7 @@ DESCRIPTION =3D "A sophisticated Numeric Processing =
+Package for Python"
+> SECTION =3D "devel/python"
+> LICENSE =3D "PSF"
+> LIC_FILES_CHKSUM =3D =
+"file://LICENSE.txt;md5=3Df87832d854acbade6e9f5c601c8b30b1"
+> +PR =3D "r1"
+>=20
+> SRC_URI =3D "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+>            ${CONFIGFILESURI} "
+> @@ -16,6 +17,10 @@ CONFIGFILESURI_arm =3D " \
+>     file://config.h \
+>     file://numpyconfig.h \
+> "
+> +CONFIGFILESURI_armeb =3D " \
+> +    file://config.h \
+> +    file://numpyconfig.h \
+> +"
+> CONFIGFILESURI_mipsel =3D " \
+>     file://config.h \
+>     file://numpyconfig.h \
+> --=20
+> 1.8.1.2
+>=20
 
 
