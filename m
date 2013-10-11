@@ -1,37 +1,17 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 41C776CC7F
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 38F616CC7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 08:09:13 +0000 (UTC)
-Received: by mail-lb0-f169.google.com with SMTP id z5so3051462lbh.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2013 01:09:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+WW3ESDOgBmjyFrM4UR6OLTEpOp/EBiI2L7eTMX36TQ=;
-	b=Sz/R4kGaDyB2NFLr3KMkMPPcGe4piVG7lQJMOfurCUBPa6PyqksFyLZWqdqMGJR+Gr
-	edd4Rnp/eBWY8f2EtAQMsHBONOe7g+HRrXlMIlrTapOgTo4P7SMQKETXRktre4+X0O3j
-	t/PDQm2j83C3lsD6l08cZbCjrJTCA9vv3+ju1kUzOfdcdY5hP2pNVRRfU1riLowKJJSl
-	hwj3X+4zlSB7JsV8ndZayV5XGUkWgHPn2fSgMZMrKaS5CVMsh+aZ24y2CNSGx0Ou+mdt
-	jGXeRN60K1VrV7GD5mWJeCadio85b0r64T0CC3OcKOFZWZXbm9B6bfmfIRx1H6f1cAUe
-	2ipA==
-X-Gm-Message-State: ALoCoQk69ny8Xhb+JWwcZIyVu9U95raVEl8LCNk7+xyqJJQySIIzBstLhb0X4g6MhzQTGvaCPwmx
-X-Received: by 10.152.36.98 with SMTP id p2mr15196797laj.14.1381478954269;
-	Fri, 11 Oct 2013 01:09:14 -0700 (PDT)
-Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
-	[91.152.78.194])
-	by mx.google.com with ESMTPSA id yl7sm32596562lbb.0.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 11 Oct 2013 01:09:13 -0700 (PDT)
-From: Fathi Boudra <fathi.boudra@linaro.org>
+	Fri, 11 Oct 2013 08:55:50 +0000 (UTC)
+From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2013 11:09:00 +0300
-Message-Id: <1381478940-18836-1-git-send-email-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 1.8.1.2
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [PATCH 1/1] [meta-oe][PATCH] python-numpy: add config files for armeb architecture
+Date: Fri, 11 Oct 2013 09:55:43 +0100
+Message-Id: <1381481745-17613-2-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.8.4
+In-Reply-To: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
+References: <1381481745-17613-1-git-send-email-ml@communistcode.co.uk>
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: [PATCH 1/3] json-c: add 0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,93 +25,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2013 08:09:14 -0000
+X-List-Received-Date: Fri, 11 Oct 2013 08:55:53 -0000
 
-Fix python-numpy build failure on armeb architecture.
+From: Jack Mitchell <jmitchell@cbnl.com>
 
-Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- .../python/python-numpy/armeb/config.h              | 21 +++++++++++++++++++++
- .../python/python-numpy/armeb/numpyconfig.h         | 17 +++++++++++++++++
- .../recipes-devtools/python/python-numpy_1.7.0.bb   |  5 +++++
- 3 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
- create mode 100644 meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
+ meta-oe/recipes-support/json-c/json-c_0.11.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
 
-diff --git a/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h b/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
+diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/recipes-support/json-c/json-c_0.11.bb
 new file mode 100644
-index 0000000..17ef186
+index 0000000..f94091b
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-numpy/armeb/config.h
-@@ -0,0 +1,21 @@
-+/* ./src.linux-i686-2.5/numpy/core/include/numpy/config.h */
-+/* #define SIZEOF_SHORT 2 */
-+/* #define SIZEOF_INT 4 */
-+/* #define SIZEOF_LONG 4 */
-+/* #define SIZEOF_FLOAT 4 */
-+/* #define SIZEOF_DOUBLE 8 */
-+#define SIZEOF_LONG_DOUBLE 12
-+#define SIZEOF_PY_INTPTR_T 4
-+/* #define SIZEOF_LONG_LONG 8 */
-+#define SIZEOF_PY_LONG_LONG 8
-+/* #define CHAR_BIT 8 */
-+#define MATHLIB m
-+#define HAVE_FLOAT_FUNCS
-+#define HAVE_LOG1P
-+#define HAVE_EXPM1
-+#define HAVE_INVERSE_HYPERBOLIC
-+#define HAVE_INVERSE_HYPERBOLIC_FLOAT
-+#define HAVE_ISNAN
-+#define HAVE_ISINF
-+#define HAVE_RINT
++++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "JSON-C implements a reference counting object model that allows you to easily construct JSON objects in C"
++HOMEPAGE = "https://github.com/json-c/json-c/wiki"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=de54b60fbbc35123ba193fea8ee216f2"
 +
-diff --git a/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h b/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
-new file mode 100644
-index 0000000..c4bf654
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-numpy/armeb/numpyconfig.h
-@@ -0,0 +1,17 @@
-+/* cat ./src.linux-i686-2.5/numpy/core/include/numpy/numpyconfig.h */
-+/*
-+ *  * This file is generated by numpy/core/setup.pyc. DO NOT EDIT 
-+ *   */
-+#define NPY_SIZEOF_SHORT 2 
-+#define NPY_SIZEOF_INT 4 
-+#define NPY_SIZEOF_LONG 4 
-+#define NPY_SIZEOF_FLOAT 4 
-+#define NPY_SIZEOF_DOUBLE 8 
-+#define NPY_SIZEOF_LONGDOUBLE 12 
-+#define NPY_SIZEOF_PY_INTPTR_T 4 
-+#define NPY_NO_SMP 0
++SRC_URI = "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.gz"
 +
-+#define NPY_SIZEOF_LONGLONG 8 
-+#define NPY_SIZEOF_PY_LONG_LONG 8 
-+/* #define CHAR_BIT 8 */
++SRC_URI[md5sum] = "aa02367d2f7a830bf1e3376f77881e98"
++SRC_URI[sha256sum] = "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983edbfac9149494448c"
 +
-diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-index 7d2f2e2..e6d328f 100644
---- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
- SECTION = "devel/python"
- LICENSE = "PSF"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f87832d854acbade6e9f5c601c8b30b1"
-+PR = "r1"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
-            ${CONFIGFILESURI} "
-@@ -16,6 +17,10 @@ CONFIGFILESURI_arm = " \
-     file://config.h \
-     file://numpyconfig.h \
- "
-+CONFIGFILESURI_armeb = " \
-+    file://config.h \
-+    file://numpyconfig.h \
-+"
- CONFIGFILESURI_mipsel = " \
-     file://config.h \
-     file://numpyconfig.h \
++inherit autotools
 -- 
-1.8.1.2
+1.8.4
 
 
