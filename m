@@ -1,28 +1,28 @@
 Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 413506D065
+	by mail.openembedded.org (Postfix) with ESMTP id 8D18B6D065
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2013 01:32:19 +0000 (UTC)
+	Sat, 12 Oct 2013 01:33:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9C1WKGJ028053
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9C1X3ml028102
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 11 Oct 2013 18:32:20 -0700 (PDT)
+	Fri, 11 Oct 2013 18:33:03 -0700 (PDT)
 Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
-	Fri, 11 Oct 2013 18:32:19 -0700
-Message-ID: <5258A6A1.8020707@windriver.com>
-Date: Sat, 12 Oct 2013 09:32:17 +0800
+	Fri, 11 Oct 2013 18:33:02 -0700
+Message-ID: <5258A6CC.3090602@windriver.com>
+Date: Sat, 12 Oct 2013 09:33:00 +0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
 To: <paul.eggleton@linux.intel.com>
-References: <cover.1381396778.git.hongxu.jia@windriver.com>
-	<cb7c8ef452b8ffb463de5b396594a056efac74b2.1381396778.git.hongxu.jia@windriver.com>
-In-Reply-To: <cb7c8ef452b8ffb463de5b396594a056efac74b2.1381396778.git.hongxu.jia@windriver.com>
+References: <cover.1381391066.git.hongxu.jia@windriver.com>
+	<92c13ef2b1fa14b691df78914d0baafc3dedf70a.1381391066.git.hongxu.jia@windriver.com>
+In-Reply-To: <92c13ef2b1fa14b691df78914d0baafc3dedf70a.1381391066.git.hongxu.jia@windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/1] mariadb: Add mysql5 to RPROVIDES for backwards compatibility
+Subject: Re: [meta-oe][PATCH 1/1] mariadb: fix do_configure failed while multilib is used
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,64 +36,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Oct 2013 01:32:20 -0000
+X-List-Received-Date: Sat, 12 Oct 2013 01:33:01 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Ping
 
-Thanks,
-Hongxu
+Hongxu,
+Thanks
 
-On 10/10/2013 05:21 PM, Hongxu Jia wrote:
-> It failed to build image while IMAGE_INSTALL += "mysql5"
-> For backwards compatibility:
-> - Add mysql5 to RPROVIDES_${PN}
-> - Add mysql5-dbg to RPROVIDES_${PN}-dbg
-> - Add mysql5-leftovers to RPROVIDES_${PN}-leftovers
-> - Use "+=" instead of "=" in  RPROVIDES_${PN}-client and
->    RPROVIDES_${PN}-server
+On 10/10/2013 03:47 PM, Hongxu Jia wrote:
+> Here is the error log from mariadb's configure test
+> ...
+>   checking for zlib compression library... configure: error: headers or
+> binaries were not found in /home/jiahongxu/yocto/build-20131009-mysql/
+> bitbake_build/tmp/sysroots/qemux86-64/usr/{include,lib}
+> ...
 >
-> The same to RREPLACES and RCONFLICTS.
+> When multilib is used, the baselib is assigned with "lib64", here is
+> the log from 'bitbake mariadb -e'
+> ...
+>   4738 # $baselib [3 operations]
+>   4739 #   set conf/bitbake.conf:10
+>   4740 #     "${BASELIB}"
+>   4741 #   set conf/bitbake.conf:11
+>   4742 #     [vardepvalue] "${baselib}"
+>   4743 #   set /home/jiahongxu/yocto/build-20131009-mysql/layers/oe-core/meta/conf/multilib.conf:2
+>   4744 #     "${@d.getVar('BASE_LIB_tune-' + (d.getVar('DEFAULTTUNE', True) or 'INVALID'), True) or d.getVar('BASELIB', True)}"
+>   4745 # computed:
+>   4746 #   "${@d.getVar('BASE_LIB_tune-' + (d.getVar('DEFAULTTUNE', True) or 'INVALID'), True) or d.getVar('BASELIB', True)}"
+>   4747 baselib="lib64"
+> ...
+>
+> In this situation, the zlib locates in 'lib64' rather than 'lib'.
+> But mariadb's confiure test still searches zlib in 'lib'.
+>
+> Modify mariadb's confiure to let lib dir configurable rather
+> than hardcode could fix this issue.
 >
 > Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 > ---
->   meta-oe/recipes-support/mysql/mariadb_5.1.67.bb | 24 ++++++++++++++++++------
->   1 file changed, 18 insertions(+), 6 deletions(-)
+>   .../mariadb/zlib-let-libdir-configurable.patch     | 63 ++++++++++++++++++++++
+>   meta-oe/recipes-support/mysql/mariadb_5.1.67.inc   |  2 +
+>   2 files changed, 65 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/mysql/mariadb/zlib-let-libdir-configurable.patch
 >
-> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-> index fdf20dc..fc499d4 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-> +++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-> @@ -4,11 +4,23 @@ DEPENDS += "mariadb-native"
->   
->   PROVIDES += "mysql5"
->   
-> -RPROVIDES_${PN}-client = "mysql5-client"
-> -RREPLACES_${PN}-client = "mysql5-client"
-> -RCONFLICTS_${PN}-client = "mysql5-client"
-> +RPROVIDES_${PN} += "mysql5"
-> +RREPLACES_${PN} += "mysql5"
-> +RCONFLICTS_${PN} += "mysql5"
->   
-> -RPROVIDES_${PN}-server = "mysql5-server"
-> -RREPLACES_${PN}-server = "mysql5-server"
-> -RCONFLICTS_${PN}-server = "mysql5-server"
-> +RPROVIDES_${PN}-dbg += "mysql5-dbg"
-> +RREPLACES_${PN}-dbg += "mysql5-dbg"
-> +RCONFLICTS_${PN}-dbg += "mysql5-dbg"
+> diff --git a/meta-oe/recipes-support/mysql/mariadb/zlib-let-libdir-configurable.patch b/meta-oe/recipes-support/mysql/mariadb/zlib-let-libdir-configurable.patch
+> new file mode 100644
+> index 0000000..880c2a7
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/mysql/mariadb/zlib-let-libdir-configurable.patch
+> @@ -0,0 +1,63 @@
+> +zlib: let lib dir configurable
 > +
-> +RPROVIDES_${PN}-leftovers += "mysql5-leftovers"
-> +RREPLACES_${PN}-leftovers += "mysql5-leftovers"
-> +RCONFLICTS_${PN}-leftovers += "mysql5-leftovers"
+> +The zlib were found in $mysql_zlib_dir/lib, and the
+> +search will fail if zlib in $mysql_zlib_dir/lib64.
 > +
-> +RPROVIDES_${PN}-client += "mysql5-client"
-> +RREPLACES_${PN}-client += "mysql5-client"
-> +RCONFLICTS_${PN}-client += "mysql5-client"
+> +Let lib dir configurable rather than hardcode.
 > +
-> +RPROVIDES_${PN}-server += "mysql5-server"
-> +RREPLACES_${PN}-server += "mysql5-server"
-> +RCONFLICTS_${PN}-server += "mysql5-server"
+> +Upstream-Status: Pending
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+> + config/ac-macros/zlib.m4 | 12 ++++++------
+> + configure.in             |  8 ++++++++
+> + 2 files changed, 14 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/config/ac-macros/zlib.m4 b/config/ac-macros/zlib.m4
+> +--- a/config/ac-macros/zlib.m4
+> ++++ b/config/ac-macros/zlib.m4
+> +@@ -106,17 +106,17 @@ case $SYSTEM_TYPE in
+> +         ;;
+> +       *)
+> +         # Test for libz using all known library file endings
+> +-        if test \( -f "$mysql_zlib_dir/lib/libz.a"  -o \
+> +-                   -f "$mysql_zlib_dir/lib/libz.so" -o \
+> +-                   -f "$mysql_zlib_dir/lib/libz.sl" -o \
+> +-                   -f "$mysql_zlib_dir/lib/libz.dylib" \) \
+> ++        if test \( -f "$mysql_zlib_dir/$base_libdir/libz.a"  -o \
+> ++                   -f "$mysql_zlib_dir/$base_libdir/libz.so" -o \
+> ++                   -f "$mysql_zlib_dir/$base_libdir/libz.sl" -o \
+> ++                   -f "$mysql_zlib_dir/$base_libdir/libz.dylib" \) \
+> +                 -a -f "$mysql_zlib_dir/include/zlib.h"; then
+> +           ZLIB_INCLUDES="-I$mysql_zlib_dir/include"
+> +-          ZLIB_LIBS="-L$mysql_zlib_dir/lib -lz"
+> ++          ZLIB_LIBS="-L$mysql_zlib_dir/$base_libdir -lz"
+> +           MYSQL_CHECK_ZLIB_DIR
+> +         fi
+> +         if test "x$mysql_cv_compress" != "xyes"; then
+> +-          AC_MSG_ERROR([headers or binaries were not found in $mysql_zlib_dir/{include,lib}])
+> ++          AC_MSG_ERROR([headers or binaries were not found in $mysql_zlib_dir/{include,$base_libdir}])
+> +         fi
+> +         ;;
+> +     esac
+> +diff --git a/configure.in b/configure.in
+> +index 2c6c08e..193b59a 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -104,6 +104,14 @@ AC_SUBST(SHARED_LIB_MAJOR_VERSION)
+> + AC_SUBST(SHARED_LIB_VERSION)
+> + AC_SUBST(AVAILABLE_LANGUAGES)
+> +
+> ++AC_ARG_WITH([baselib-dir],
+> ++            AC_HELP_STRING([--baselib-dir=DIR],
+> ++                           [Provide MySQL with a custom location of
+> ++                           baselib dir. Given DIR, such as zlib binary is
+> ++                           assumed to be in $zlib-dir/$DIR.]),
+> ++            [base_libdir=${withval}],
+> ++            [base_libdir="lib"])
+> ++
+> + # Check whether a debug mode should be enabled.
+> + AC_ARG_WITH([debug],
+> +     AS_HELP_STRING([--with-debug@<:@=full@:>@],
+> +--
+> +1.8.1.2
+> +
+> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+> index c535a41..ca8090e 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+> @@ -15,6 +15,7 @@ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x8
+>              file://configure-ps-cache-check.patch \
+>              file://fix-cve-2013-1861-1.patch \
+>              file://fix-cve-2013-1861-2.patch \
+> +           file://zlib-let-libdir-configurable.patch \
+>              file://my.cnf \
+>              file://mysqld.sh"
+>   
+> @@ -51,6 +52,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
+>                   --without-man \
+>                   --without-docs \
+>                   --with-zlib-dir=${STAGING_EXECPREFIXDIR} \
+> +                --with-baselib-dir=${base_libdir} \
+>                   --with-pic \
+>                   "
 >   
 
 
