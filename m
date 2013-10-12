@@ -1,34 +1,37 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DDDE6CE62
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id E34A76CE62
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2013 23:00:28 +0000 (UTC)
-Received: by mail-ee0-f44.google.com with SMTP id b47so2651872eek.31
+	Sat, 12 Oct 2013 23:00:30 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id z15so2623190ead.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2013 16:00:30 -0700 (PDT)
+	Sat, 12 Oct 2013 16:00:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=FBILUvy1brXEkSdBtyg7T2BLtM0n2zWtdtQtJBpJ350=;
-	b=pNX5zg3peRFr0vRKwyAbFO6a33K3zsPtQ2jlyAntmeeawD41VqQENGIwIx4Q+g9bE/
-	7dG5zme0kttgWX3ho+Gxx9uiTiXFylNeR/lqX2VM6NnKTXl0NYfKY48x+Kv0g0h1ad1R
-	6MH5dJzCnOPAoLiWbuufMM1mcJV8n5ZvcqsrG2OZGDHvWTdvTsnsH/rEJb27djImeS1O
-	QyTbhrwAo5D8XDAKu3CsI4rxULV/k1GlD7jvaVLk/MlDNvq2qo14fY22cAEh+7nT8yx4
-	6UpRFmvJ3Z7GWGHZ8H3KCMtv/tHwPGj1YUn4JeydZgtuDuAjVs51fzX/76/4pKDjPQVu
-	X1VA==
-X-Received: by 10.14.246.11 with SMTP id p11mr42367079eer.9.1381618829960;
-	Sat, 12 Oct 2013 16:00:29 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=iJ5ObHa58DfhuPDgfMOLPw6Durb5AVhwAJaW3IUuKtQ=;
+	b=rPxtjOGKtZIcaH3X7Xw+/vnFpkjG7qe2j8bUySFlAlKLS5ukayv9Gu1tV6c/0K+9wv
+	RIRWf65kbh4nhwQHoneX82aOCvFWRnPX0bX3ucYkBz1cZ3F12oJPOadPdLTga+aCbuXU
+	61TKcyGgtEW6TYs8nPJxSXPRW/FheWOQPXCrdJoj5urgat4uBUvYotHt188Fi1Ta/ekx
+	ln5zTWefhV0fwJa+rZNH0lL/4mk+NJp8E2sciijMdzfTHoGUuaAnyc9V7ByCyr1Nd9XY
+	ZewI49ZYo0vNqFty/PkMWiFq0iiAiAzhIuWty7LVjRmW31JbuhtslmIMb6FXAAwHLfj9
+	gAfg==
+X-Received: by 10.14.9.72 with SMTP id 48mr41334220ees.42.1381618832141;
+	Sat, 12 Oct 2013 16:00:32 -0700 (PDT)
 Received: from mizar.localdomain
 	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
 	by mx.google.com with ESMTPSA id
 	n48sm133204585eeg.17.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 12 Oct 2013 16:00:29 -0700 (PDT)
+	Sat, 12 Oct 2013 16:00:31 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Oct 2013 01:00:23 +0200
-Message-Id: <1381618825-18766-1-git-send-email-andrea.adami@gmail.com>
+Date: Sun, 13 Oct 2013 01:00:24 +0200
+Message-Id: <1381618825-18766-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH 1/3] meta-handheld: remove TARGET_ARCH from machine configurations
+In-Reply-To: <1381618825-18766-1-git-send-email-andrea.adami@gmail.com>
+References: <1381618825-18766-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH 2/3] meta-handheld: remove obsolete refs to kdrive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,237 +45,230 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Oct 2013 23:00:29 -0000
+X-List-Received-Date: Sat, 12 Oct 2013 23:00:31 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/h1910.conf       |  2 --
- conf/machine/h1940.conf       | 10 +++++-----
- conf/machine/h2200.conf       |  2 --
- conf/machine/h3900.conf       |  2 --
- conf/machine/h4000.conf       |  2 --
- conf/machine/h5000.conf       |  2 --
- conf/machine/include/palm.inc |  2 --
- conf/machine/jornada56x.conf  |  1 -
- conf/machine/jornada6xx.conf  |  2 --
- conf/machine/jornada7xx.conf  |  2 --
- conf/machine/palmtt.conf      |  2 --
- conf/machine/palmz71.conf     |  2 --
- conf/machine/rx1950.conf      |  1 -
- conf/machine/rx3000.conf      |  1 -
- conf/machine/simpad.conf      |  2 --
- 15 files changed, 5 insertions(+), 30 deletions(-)
+ conf/machine/ben-nanonote.conf             | 5 -----
+ conf/machine/h1910.conf                    | 1 -
+ conf/machine/h1940.conf                    | 1 -
+ conf/machine/h2200.conf                    | 1 -
+ conf/machine/h3900.conf                    | 1 -
+ conf/machine/h4000.conf                    | 1 -
+ conf/machine/h5000.conf                    | 1 -
+ conf/machine/include/motorola-ezx-base.inc | 2 --
+ conf/machine/include/palm.inc              | 2 --
+ conf/machine/jornada56x.conf               | 1 -
+ conf/machine/jornada6xx.conf               | 6 ------
+ conf/machine/jornada7xx.conf               | 4 ----
+ conf/machine/palmtt.conf                   | 1 -
+ conf/machine/palmz71.conf                  | 1 -
+ conf/machine/rx3000.conf                   | 1 -
+ conf/machine/simpad.conf                   | 2 --
+ 16 files changed, 31 deletions(-)
 
+diff --git a/conf/machine/ben-nanonote.conf b/conf/machine/ben-nanonote.conf
+index 1ce5815..a66e996 100644
+--- a/conf/machine/ben-nanonote.conf
++++ b/conf/machine/ben-nanonote.conf
+@@ -10,11 +10,6 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-ben-nanonote"
+ #KERNEL_IMAGETYPE = "uImage"
+ KERNEL_IMAGETYPE = "vmlinux.bin"
+ 
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+-PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
+-
+-XSERVER = "xserver-kdrive-fbdev"
+-
+ #ScreenInfo
+ MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_DISPLAY_WIDTH_PIXELS = "320"
 diff --git a/conf/machine/h1910.conf b/conf/machine/h1910.conf
-index bd84cfb..59588dd 100644
+index 59588dd..b7b79b1 100644
 --- a/conf/machine/h1910.conf
 +++ b/conf/machine/h1910.conf
-@@ -5,8 +5,6 @@
+@@ -18,7 +18,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa irda usbgadget screen vfat"
+ # Software/packages selection
  #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
--
- require conf/machine/include/tune-xscale.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  
- VOLATILE_STORAGE_SIZE = "64"
+ EXTRA_IMAGECMD_h1910_jffs2 = "-e 0x4000 -p -n"
+ 
 diff --git a/conf/machine/h1940.conf b/conf/machine/h1940.conf
-index 19e7662..9a1864e 100644
+index 9a1864e..3d430ce 100644
 --- a/conf/machine/h1940.conf
 +++ b/conf/machine/h1940.conf
-@@ -2,7 +2,11 @@
- #@NAME: h1940
- #@DESCRIPTION: Machine configuration for the HP iPAQ h1930 and h1940
- 
--TARGET_ARCH = "arm"
-+#
-+# Hardware-based properties
-+#
-+# tune for armv4t
-+require conf/machine/include/tune-arm920t.inc
+@@ -9,7 +9,6 @@
+ require conf/machine/include/tune-arm920t.inc
  
  # Set preferred providers
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
-@@ -18,13 +22,9 @@ MACHINE_DISPLAY_WIDTH_PIXELS = "240"
- MACHINE_DISPLAY_HEIGHT_PIXELS = "320"
- MACHINE_FEATURES = "kernel26 touchscreen apm bluetooth irda usbgadget screen vfat"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
  
--
- # Some extra configuration
- VOLATILE_STORAGE_SIZE = "64"
- ROOT_FLASH_SIZE = "32"
- SERIAL_CONSOLE = "115200 ttySAC2 vt100"
- USE_VT = "0"
- 
--# tune for armv4t
--require conf/machine/include/tune-arm920t.inc
--
+ KERNEL_IMAGETYPE = "uImage"
 diff --git a/conf/machine/h2200.conf b/conf/machine/h2200.conf
-index 7dbf4f1..d07b4bb 100644
+index d07b4bb..d1d10b8 100644
 --- a/conf/machine/h2200.conf
 +++ b/conf/machine/h2200.conf
-@@ -5,8 +5,6 @@
+@@ -19,7 +19,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa pcmcia bluetooth irda usbgadge
  #
- # Hardware-based properties
+ # Software/packages selection
  #
--TARGET_ARCH = "arm"
--
- #Compile with armv5te optimizations, incompatible with armv4(t) cpus
- require conf/machine/include/tune-xscale.inc
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
  
+ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " kernel h2200-bootloader "
 diff --git a/conf/machine/h3900.conf b/conf/machine/h3900.conf
-index 3b5107d..6b75888 100644
+index 6b75888..a995ced 100644
 --- a/conf/machine/h3900.conf
 +++ b/conf/machine/h3900.conf
-@@ -5,8 +5,6 @@
+@@ -18,7 +18,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa irda bluetooth usbgadget scree
+ # Software/packages selection
  #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
--
- require conf/machine/include/tune-xscale.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  
- ROOT_FLASH_SIZE = "32"
+ MACHINE_EXTRA_RDEPENDS = "kernel ipaq-boot-params"
+ 
 diff --git a/conf/machine/h4000.conf b/conf/machine/h4000.conf
-index 937b626..2cd3e81 100644
+index 2cd3e81..a5c13bd 100644
 --- a/conf/machine/h4000.conf
 +++ b/conf/machine/h4000.conf
-@@ -5,8 +5,6 @@
+@@ -18,7 +18,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa irda bluetooth wifi usbgadget
+ # Software/packages selection
  #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
--
- require conf/machine/include/tune-xscale.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  
- ROOT_FLASH_SIZE = "32"
+ MACHINE_EXTRA_RDEPENDS = "tiinit acx-firmware ${PCMCIA_MANAGER}"
+ MACHINE_EXTRA_RRECOMMENDS = "kernel-module-snd-h4000-audio \
 diff --git a/conf/machine/h5000.conf b/conf/machine/h5000.conf
-index 73fbf17..b11670d 100644
+index b11670d..bd84fc3 100644
 --- a/conf/machine/h5000.conf
 +++ b/conf/machine/h5000.conf
-@@ -5,8 +5,6 @@
+@@ -18,7 +18,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa pcmcia bluetooth irda wifi usb
+ # Software/packages selection
  #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
--
- require conf/machine/include/tune-xscale.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ EXTRA_IMAGECMD_jffs2 = "-e 0x40000 -p ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
  
- ROOT_FLASH_SIZE = "32"
+ # Ship complete set of modules ('kernel-modules') for easier debug purposes 
+diff --git a/conf/machine/include/motorola-ezx-base.inc b/conf/machine/include/motorola-ezx-base.inc
+index 1d5c8f8..665872d 100644
+--- a/conf/machine/include/motorola-ezx-base.inc
++++ b/conf/machine/include/motorola-ezx-base.inc
+@@ -33,8 +33,6 @@ MACHINE_FEATURES += " iwmmxt"
+ #
+ PREFERRED_PROVIDER_virtual/kernel ?= "openezx-kernel"
+ MODUTILS = "26"
+-XSERVER = "xserver-kdrive-fbdev"
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+ 
+ IMAGE_FSTYPES ?= "jffs2"
+ EXTRA_IMAGECMD_jffs2 = "--pad=14680064 --little-endian --eraseblock=0x20000 -n"
 diff --git a/conf/machine/include/palm.inc b/conf/machine/include/palm.inc
-index 5394855..f38e027 100644
+index f38e027..cf39391 100644
 --- a/conf/machine/include/palm.inc
 +++ b/conf/machine/include/palm.inc
-@@ -2,8 +2,6 @@
- # Hardware-based properties
- #
+@@ -15,8 +15,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa bluetooth irda usbgadget scree
  
--TARGET_ARCH = "arm"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-hackndev-2.6"
+ 
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
 -
- SERIAL_CONSOLE = "115200 ttyS0"
- 
- # Use tune-xscale per default. Machine independent feeds should be built with tune-strongarm.
+ module_autoload_sa1100-rtc = "sa1100-rtc"
+ module_autoload_snd-ac97-bus = "snd-ac97-bus"
+ module_autoload_apm_power = "apm_power"
 diff --git a/conf/machine/jornada56x.conf b/conf/machine/jornada56x.conf
-index a42dd8c..da820d8 100644
+index da820d8..4258a51 100644
 --- a/conf/machine/jornada56x.conf
 +++ b/conf/machine/jornada56x.conf
 @@ -2,7 +2,6 @@
  #@NAME: HP Jornada 56x
  #@DESCRIPTION: Machine configuration for the SA1100 based HP Jornada 56x palmtop computer
  
--TARGET_ARCH = "arm"
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
+ BOOTSTRAP_EXTRA_RDEPENDS = "kernel kernel-modules module-init-tools" 
 diff --git a/conf/machine/jornada6xx.conf b/conf/machine/jornada6xx.conf
-index 7070510..a11ad29 100644
+index a11ad29..6b1fa68 100644
 --- a/conf/machine/jornada6xx.conf
 +++ b/conf/machine/jornada6xx.conf
-@@ -2,8 +2,6 @@
- #@NAME: HP Jornada 680
- #@DESCRIPTION: Machine configuration for the HITACHI SH3 based HP Jornada 6xx palmtop computer
+@@ -10,10 +10,4 @@ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-jornada6xx"
+ PREFERRED_VERSION_linux-jlime-jornada6xx = "2.6.17"
  
--TARGET_ARCH = "sh3"
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+-PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
 -
- require conf/machine/include/tune-sh3.inc
- 
- MACHINE_FEATURES = "kernel26 alsa pcmcia irda keyboard touchscreen screen vfat"
+-XSERVER = "xserver-kdrive-fbdev"
+-
+-
+ SYSVINIT_ENABLED_GETTYS = "1 2"
 diff --git a/conf/machine/jornada7xx.conf b/conf/machine/jornada7xx.conf
-index ade334e..22bd120 100644
+index 22bd120..d07ffd6 100644
 --- a/conf/machine/jornada7xx.conf
 +++ b/conf/machine/jornada7xx.conf
-@@ -2,8 +2,6 @@
- #@NAME: HP Jornada 7xx 
- #@DESCRIPTION: Machine configuration for the SA1110 based HP Jornada 7xx palmtop computer
+@@ -8,10 +8,6 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-jornada7xx"
+ MACHINE_FEATURES = "kernel26 apm alsa pcmcia irda keyboard touchscreen screen vfat"
+ MACHINE_EXTRA_RDEPENDS = "kernel-modules bluez-dtl1-workaround"
  
--TARGET_ARCH = "arm"
+-PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
+-PREFERRED_VERSION_xserver-kdrive = "1.3.0.0"
+-XSERVER = "xserver-kdrive-fbdev"
 -
- require conf/machine/include/tune-strongarm1100.inc
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-jornada7xx"
+ #screeninfo
+ MACHINE_GUI_CLASS = "smallscreen"
+ MACHINE_DISPLAY_WIDTH_PIXELS = "640"
 diff --git a/conf/machine/palmtt.conf b/conf/machine/palmtt.conf
-index 4326af9..3e99f5e 100644
+index 3e99f5e..f80d511 100644
 --- a/conf/machine/palmtt.conf
 +++ b/conf/machine/palmtt.conf
-@@ -2,8 +2,6 @@
- #@NAME: Palm Tungsten T
- #@DESCRIPTION: Machine configuration for Palm Tungsten T/T2
- 
--TARGET_ARCH = "arm"
--
- MACHINE_GUI_CLASS = "bigscreen"
+@@ -6,7 +6,6 @@ MACHINE_GUI_CLASS = "bigscreen"
  MACHINE_DISPLAY_WIDTH_PIXELS = "320"
  MACHINE_DISPLAY_HEIGHT_PIXELS = "320"
+ 
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-palm-omap1"
+ 
+ SERIAL_CONSOLE ?= "115200 ttyS0"
 diff --git a/conf/machine/palmz71.conf b/conf/machine/palmz71.conf
-index 0a7f274..5ac7be3 100644
+index 5ac7be3..aa820c7 100644
 --- a/conf/machine/palmz71.conf
 +++ b/conf/machine/palmz71.conf
-@@ -2,8 +2,6 @@
+@@ -2,7 +2,6 @@
  #@NAME: Palm Zire 71
  #@DESCRIPTION: Machine configuration for Palm Zire 71
  
--TARGET_ARCH = "arm"
--
- PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  PREFERRED_PROVIDER_virtual/kernel = "linux-palm-omap1"
  PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
-diff --git a/conf/machine/rx1950.conf b/conf/machine/rx1950.conf
-index a64dc27..5faf7e1 100644
---- a/conf/machine/rx1950.conf
-+++ b/conf/machine/rx1950.conf
-@@ -5,7 +5,6 @@
- #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
  
- # Samsung S3C2xxx CPU
- require conf/machine/include/tune-arm920t.inc
 diff --git a/conf/machine/rx3000.conf b/conf/machine/rx3000.conf
-index ab89fbf..e1a4e70 100644
+index e1a4e70..1808038 100644
 --- a/conf/machine/rx3000.conf
 +++ b/conf/machine/rx3000.conf
-@@ -5,7 +5,6 @@
+@@ -20,7 +20,6 @@ MACHINE_FEATURES = "kernel26 touchscreen apm alsa irda bluetooth wifi usbgadget
+ # Software/packages selection
  #
- # Hardware-based properties
- #
--TARGET_ARCH = "arm"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
  
- # Samsung S3C2xxx CPU
- require conf/machine/include/tune-arm920t.inc
+ MACHINE_EXTRA_RDEPENDS = "tiinit acx-firmware"
+ MACHINE_EXTRA_RRECOMMENDS = "kernel-module-acx \
 diff --git a/conf/machine/simpad.conf b/conf/machine/simpad.conf
-index 0c57554..373d95e 100644
+index 373d95e..d3d7a1e 100644
 --- a/conf/machine/simpad.conf
 +++ b/conf/machine/simpad.conf
-@@ -2,8 +2,6 @@
- #@NAME: SIEMENS SIMpad SL4, SIEMENS SIMpad CL4, SIEMENS SIMpad SLC, Telekom T-Sinus PAD
- #@DESCRIPTION: Machine configuration for the SA1100 based SIEMENS SIMpad and Telekom T-Sinus PAD devices
- 
--TARGET_ARCH = "arm"
+@@ -16,5 +16,3 @@ MACHINE_DISPLAY_WIDTH_PIXELS = "800"
+ MACHINE_DISPLAY_HEIGHT_PIXELS= "600"
+ SERIAL_CONSOLE = "ttySA0 115200 vt100"
+ USE_VT = "0"
 -
- MACHINE_FEATURES = "apm pcmcia irda screen touchscreen vfat kernel26"
- 
- PREFERRED_PROVIDER_virtual/kernel = "linux"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
 -- 
 1.8.1.5
 
