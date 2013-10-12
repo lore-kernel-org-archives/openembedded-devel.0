@@ -1,35 +1,34 @@
-Return-Path: <david.turgeon@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EE566CF08
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 3393E6CF14
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2013 14:01:13 +0000 (UTC)
-Received: by mail-ie0-f171.google.com with SMTP id at1so10598962iec.2
+	Sat, 12 Oct 2013 20:57:27 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id l10so2538276eei.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2013 07:01:15 -0700 (PDT)
+	Sat, 12 Oct 2013 13:57:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=mp/Mttx5RVyrV01UpXniSdNGgUg9sjbIvlfkHlYtmCo=;
-	b=KH9P8En/2aofkHy6zDNMXmEiGRq/SA61lU79HS+WSA244ZWgxYO8gegct2pauVl/go
-	wXofY1NW8VTticr/Qd8uNN4FO4q3mXZ0aPUqY6xSeUslIn+ZZ164/5G9FRP0c8vIGW0Q
-	HKNkMZQ9WZKoSrhu14Yt6gLxiuaNR7Xli6Fgdd7JRz/1Et/lHt2DGCbXKsZl6kKGlCa8
-	6oFqpd29GA3vdQ2bWQHmkwD68VBTpvLk+Ur7af8LmXvfu0JirhyHkYQ3YEhzpGoVyiyn
-	TtS95nk5hk1dWyozmQI361jtfyVfQz8JC0VFbrTxkdAymFtPLpTb2iytKpzGxBoSqOyc
-	mvLw==
-X-Received: by 10.50.111.228 with SMTP id il4mr7025998igb.1.1381586474856;
-	Sat, 12 Oct 2013 07:01:14 -0700 (PDT)
-Received: from calysto.gateway.2wire.net (69-11-30-18.sktn.hsdb.sasknet.sk.ca.
-	[69.11.30.18])
-	by mx.google.com with ESMTPSA id p7sm8818848iga.3.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 12 Oct 2013 07:01:14 -0700 (PDT)
-From: David Turgeon <david.turgeon@gmail.com>
+	bh=5iHgz09RplqllJK2FdQPCvRj4MJVVUDiWBGHRFhOR68=;
+	b=jseij9WLME3unQJLhUwHqhi7YNrz5ldwzhlQ3tDfROHtm3qKdiIW6rhgN6QV4VdjXB
+	/irNK1fg+0e1zxfG9DdB5lKlLF/l+00s1ATjDZC2SL0ZsnFo2K8VjeB03ziq/zANB3Ah
+	RJ6vSACf3FmpPoxO63Bld8ZoJ1muxmVWtRp8Ntr0MD3KvKm5kcaabBX69dwIZExMFUez
+	0fuzW7h8HuQR2NKx+6+z3YZlCsCvhMDuC3nnJKDVuxg16vQ1JawiG1LicbP+hMuk1ZAN
+	vhO2YZlekfq+YCd2ps240iwdyDFDrRVoKqlwBjLBjFG/gd1my872AmF9CUAAcWpcCZRm
+	zlhg==
+X-Received: by 10.15.73.130 with SMTP id h2mr6632714eey.56.1381611448489;
+	Sat, 12 Oct 2013 13:57:28 -0700 (PDT)
+Received: from mizar.localdomain
+	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
+	by mx.google.com with ESMTPSA id
+	r48sm131989092eev.14.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 12 Oct 2013 13:57:27 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Oct 2013 10:04:00 -0400
-Message-Id: <1381586640-32671-1-git-send-email-david.turgeon@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: David Turgeon <david.turgeon@gmail.com>
-Subject: [meta-oe][PATCH] tftpd-hpa: fix premature exit
+Date: Sat, 12 Oct 2013 22:57:20 +0200
+Message-Id: <1381611443-16395-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH 1/4] formfactor: add configuration for IPAQ with 3.5" screen
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,52 +42,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Oct 2013 14:01:14 -0000
+X-List-Received-Date: Sat, 12 Oct 2013 20:57:27 -0000
 
-standalone daemon exits as recipe installs file as tftpd-hpa
+iPAQ
+h1900
+h2215
+hx2100
+hx2400
+hx2700
+h4100
 
-* Changed script so it can consult /etc/default, as daemon name may be
- subject to change.
-* Changed the default name to match the recipe
+3.5" diagonal
+2.1"x2.8" (53x71mm)
+Area: 3763 mm
+pixels: 240x320
 
-Signed-off-by: David Turgeon <david.turgeon@gmail.com>
+Real display DPI: 114.29, set to 100
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-daemons/tftp-hpa/files/init            |   13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ recipes-bsp/formfactor/files/h1910/machconfig | 15 +++++++++++++++
+ recipes-bsp/formfactor/files/h1940/machconfig | 15 +++++++++++++++
+ recipes-bsp/formfactor/files/h2200/machconfig | 15 +++++++++++++++
+ recipes-bsp/formfactor/files/h4000/machconfig | 15 +++++++++++++++
+ 4 files changed, 60 insertions(+)
+ create mode 100755 recipes-bsp/formfactor/files/h1910/machconfig
+ create mode 100755 recipes-bsp/formfactor/files/h1940/machconfig
+ create mode 100755 recipes-bsp/formfactor/files/h2200/machconfig
+ create mode 100755 recipes-bsp/formfactor/files/h4000/machconfig
 
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/init b/meta-networking/recipes-daemons/tftp-hpa/files/init
-index 5ad8c52..9e18436 100644
---- a/meta-networking/recipes-daemons/tftp-hpa/files/init
-+++ b/meta-networking/recipes-daemons/tftp-hpa/files/init
-@@ -18,20 +18,21 @@ set -e
- 
- PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
- DESC="HPA's tftpd"
--NAME=in.tftpd
--DAEMON=/usr/sbin/$NAME
--PIDFILE=/var/run/$NAME.pid
-+NAME=in.tftpd-hpa
- SCRIPTNAME=/etc/init.d/tftpd-hpa
- 
--# Gracefully exit if the package has been removed.
--test -x $DAEMON || exit 0
--
- # Read config file if it is present.
- if [ -r /etc/default/tftpd-hpa ]
- then
- 	. /etc/default/tftpd-hpa
- fi
- 
-+DAEMON=/usr/sbin/$NAME
-+PIDFILE=/var/run/$NAME.pid
+diff --git a/recipes-bsp/formfactor/files/h1910/machconfig b/recipes-bsp/formfactor/files/h1910/machconfig
+new file mode 100755
+index 0000000..7a5e7b3
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/h1910/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
 +
-+# Gracefully exit if the package has been removed.
-+test -x $DAEMON || exit 0
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=0
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=53
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=100
++DISPLAY_SUBPIXEL_ORDER=rgb
+diff --git a/recipes-bsp/formfactor/files/h1940/machconfig b/recipes-bsp/formfactor/files/h1940/machconfig
+new file mode 100755
+index 0000000..fafe6c9
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/h1940/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
 +
- if [ "$RUN_DAEMON" != "yes" ] ; then
-          echo "tftpd-hpa disabled in /etc/default/tftpd-hpa"
- 	 exit 0
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=270
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=53
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=100
++DISPLAY_SUBPIXEL_ORDER=rgb
+diff --git a/recipes-bsp/formfactor/files/h2200/machconfig b/recipes-bsp/formfactor/files/h2200/machconfig
+new file mode 100755
+index 0000000..7a5e7b3
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/h2200/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
++
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=0
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=53
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=100
++DISPLAY_SUBPIXEL_ORDER=rgb
+diff --git a/recipes-bsp/formfactor/files/h4000/machconfig b/recipes-bsp/formfactor/files/h4000/machconfig
+new file mode 100755
+index 0000000..7a5e7b3
+--- /dev/null
++++ b/recipes-bsp/formfactor/files/h4000/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=1
++HAVE_KEYBOARD_LANDSCAPE=0
++
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=0
++DISPLAY_WIDTH_PIXELS=240
++DISPLAY_WIDTH_MM=53
++DISPLAY_HEIGHT_PIXELS=320
++DISPLAY_HEIGHT_MM=71
++DISPLAY_BPP=16
++#DISPLAY_DPI=114
++DISPLAY_DPI=100
++DISPLAY_SUBPIXEL_ORDER=rgb
 -- 
-1.7.9.5
+1.8.1.5
 
 
