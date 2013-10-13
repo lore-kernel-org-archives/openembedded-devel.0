@@ -1,36 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id EF0EE6CEC2
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E0DF60FC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 08:44:12 +0000 (UTC)
-Received: by mail-pd0-f169.google.com with SMTP id r10so6179025pdi.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 01:44:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cuSsdnJrQZ9RPp0GBoWCaxH1OHGS7kCBESXCGTl61tY=;
-	b=JItmoDKaWkKmKLj68z/TaxelowphwI/bPRysAkp5rLmn3j9kcYrrBeYAdM/gt/cgt+
-	S4T7+PqpbWHRhXTLOfYJ6mdj62g03jXYPoSpNO96ARB6mVfbLL4YagCo95mDYzGxPKhm
-	D37eb0sGRGHAZv0XNYWLY+UJtJRCzZhNihQEJmGjjqxGHhxpm42pt99CXG7g4YXtg+2H
-	EN243wjpnk4SsM6p34A7g/aY+R21WM11lzwGoJhcwExhf2b464ZWcd5hG/ADIMTkAH12
-	/EAgnCnKiON7dI9/vV+jcKgGFIr9WldyXjxuRBlE8Dt7S7SoiveVWQfntMq1XQVnbcrR
-	hbew==
-X-Received: by 10.66.146.42 with SMTP id sz10mr31736862pab.100.1381653854094; 
-	Sun, 13 Oct 2013 01:44:14 -0700 (PDT)
-Received: from haswell.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id l8sm70753592pbl.22.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 13 Oct 2013 01:44:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Oct 2013 01:43:54 -0700
-Message-Id: <1381653835-32079-5-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
+	Sun, 13 Oct 2013 11:10:04 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 13 Oct 2013 04:06:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,485,1378882800"; d="scan'208";a="418435063"
+Received: from junemccl-mobl.ger.corp.intel.com (HELO helios.localnet)
+	([10.252.120.196])
+	by orsmga002.jf.intel.com with ESMTP; 13 Oct 2013 04:10:03 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 13 Oct 2013 12:10:02 +0100
+Message-ID: <1596233.ZQ7J3xl2Nd@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
 In-Reply-To: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
 References: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/6] opencv: Upgrade to latest on 2.4 branch
+MIME-Version: 1.0
+Cc: Cliff Brake <cbrake@bec-systems.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/6] libraw1394: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2013 08:44:13 -0000
+X-List-Received-Date: Sun, 13 Oct 2013 11:10:06 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Sunday 13 October 2013 01:43:50 Khem Raj wrote:
+> From: Cliff Brake <cbrake@bec-systems.com>
+> 
+> Initial recipe created by Khem Raj
+> 
+> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb | 11 +++++++++++
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index ccb26e0..9dd9cd0 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET = "arm"
- 
- DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
- 
--SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
-+SRCREV = "c5afaa4e8dfe507e87531f7688b9cf65c1f701c6"
- SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
-            file://opencv-fix-pkgconfig-generation.patch \
- "
- 
--PV = "2.4.3+git${SRCPV}"
-+PV = "2.4.6+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
+Could these multimedia recipes go into meta-multimedia instead of meta-oe?
+
+Cheers,
+Paul
+
 -- 
-1.8.3.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
