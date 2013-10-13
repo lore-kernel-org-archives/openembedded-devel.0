@@ -1,34 +1,38 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 63FBB6AF50
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B42D6AF50
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 16:38:27 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id l10so2843374eei.7
+	Sun, 13 Oct 2013 17:04:02 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id h11so2188715wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 09:38:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=rjiDpolES8eIhVxI3W4hXp/JBNkb0wpn7EiSIbCQvRw=;
-	b=qWbfEZ9Y/LCmO3yarsOAh/VR6XMdVDpw/KV+4dNtxM7RX4mf+0uTWRM4JWcF4QlKCV
-	8v76eNk3xkgo4aNrYq7dSzv1FMkbPrElz8o+CleXgyUXSGMbe23BfC/T16OkGZqixPTe
-	IqMeQW6JYONkypu6VeoiOY90KSJgzA407zmUzCjJtiXWH5e2p1SA5VLTZvRrbd95Ugrl
-	6pEmuUd5uKx1//QtaGp56Ug6xaWPNpVmG8iJDlPRj7eU66m8uXMsAyMR7Bg51wA4kHiO
-	M7lYBGkH3j0mMWVwMtqounil8v/pE1afAjmeKoDPnd7tEVHV51ndpAMm45mxMeHGXHsy
-	6PpQ==
-X-Received: by 10.14.37.4 with SMTP id x4mr49116377eea.16.1381682308951;
-	Sun, 13 Oct 2013 09:38:28 -0700 (PDT)
-Received: from mizar.localdomain
-	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
-	by mx.google.com with ESMTPSA id
-	z12sm142235347eev.6.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 13 Oct 2013 09:38:28 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sun, 13 Oct 2013 10:04:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=g2tl5N7zfy+XG1w3ceXCxqdb5xk6t5ec6fs53EN8Wlo=;
+	b=CmTIJTQgTLMwW/jCHGPvTheqqTz4f25GIeJJwvLOJ0Q5zerRjv2o2zOWaJVLpGaCy/
+	XOxz0qO0Pnq7twqDO59zljdzyS1qzOlJegmG2dlYZ1MjPlTaH0FAbVAeQMzcLpnlHHwG
+	lGdLNK/JNmL8YIXYwQwyFOo1sAxdVuahLh5QL/ttvxs8ZDpa0wLwKaAYgI3NjjI2RKi/
+	1djqT2hwMMV0clYNF0zl/H4mBX15BVcN/e8UVM3D5ZEOFhDoWcWDCTVUV+6q5oFMdvcF
+	78k25dm38V0R0WHYrMwWCspGpOBDpgGG0+7GQzVqxLNlgxApEEwiF6W8NYmxsd0nB1+h
+	gLLQ==
+X-Gm-Message-State: ALoCoQlEazje+r+WiaNSVP0lL6URMq3REoLOsLbwiFZNfjyUyMiPUQ/lktj/HOHqk5hWMHgx8fXY
+X-Received: by 10.194.120.68 with SMTP id la4mr2322328wjb.33.1381683843353;
+	Sun, 13 Oct 2013 10:04:03 -0700 (PDT)
+Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
+	[77.162.165.174])
+	by mx.google.com with ESMTPSA id e5sm25985310wiy.2.2013.10.13.10.04.01
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Sun, 13 Oct 2013 10:04:02 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Oct 2013 18:38:25 +0200
-Message-Id: <1381682305-4998-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] formfactor: add configurations for Motorola with 2.4" and 2.5" LCD
+Date: Sun, 13 Oct 2013 19:03:54 +0200
+Message-Id: <1381683834-9439-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.3.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] python-pip: add 1.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,155 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2013 16:38:29 -0000
+X-List-Received-Date: Sun, 13 Oct 2013 17:04:03 -0000
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- recipes-bsp/formfactor/files/a1200/machconfig  | 16 ++++++++++++++++
- recipes-bsp/formfactor/files/a780/machconfig   | 15 +++++++++++++++
- recipes-bsp/formfactor/files/a910/machconfig   | 16 ++++++++++++++++
- recipes-bsp/formfactor/files/e680/machconfig   | 15 +++++++++++++++
- recipes-bsp/formfactor/files/rokre2/machconfig | 16 ++++++++++++++++
- recipes-bsp/formfactor/files/rokre6/machconfig | 16 ++++++++++++++++
- 6 files changed, 94 insertions(+)
- create mode 100755 recipes-bsp/formfactor/files/a1200/machconfig
- create mode 100755 recipes-bsp/formfactor/files/a780/machconfig
- create mode 100755 recipes-bsp/formfactor/files/a910/machconfig
- create mode 100755 recipes-bsp/formfactor/files/e680/machconfig
- create mode 100755 recipes-bsp/formfactor/files/rokre2/machconfig
- create mode 100755 recipes-bsp/formfactor/files/rokre6/machconfig
+ meta-oe/recipes-devtools/python/python-pip_1.3.1.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
 
-diff --git a/recipes-bsp/formfactor/files/a1200/machconfig b/recipes-bsp/formfactor/files/a1200/machconfig
-new file mode 100755
-index 0000000..9be6c4d
+diff --git a/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+new file mode 100644
+index 0000000..7ab3bd8
 --- /dev/null
-+++ b/recipes-bsp/formfactor/files/a1200/machconfig
-@@ -0,0 +1,16 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
++++ b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
++LICENSE = "MIT & GPL"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd00425a3465a0e4c81929b94241d3de"
 +
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=36
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=48
-+# Real DISPLAY_BPP=18
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=169
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
-diff --git a/recipes-bsp/formfactor/files/a780/machconfig b/recipes-bsp/formfactor/files/a780/machconfig
-new file mode 100755
-index 0000000..8a87fa4
---- /dev/null
-+++ b/recipes-bsp/formfactor/files/a780/machconfig
-@@ -0,0 +1,15 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
++SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
++SRC_URI[md5sum] = "cbb27a191cebc58997c4da8513863153"
++SRC_URI[sha256sum] = "145eaa5d1ea1b062663da1f3a97780d7edea4c63c68a37c463b1deedf7bb4957"
 +
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=38
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=50
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=161
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
-diff --git a/recipes-bsp/formfactor/files/a910/machconfig b/recipes-bsp/formfactor/files/a910/machconfig
-new file mode 100755
-index 0000000..e416b3c
---- /dev/null
-+++ b/recipes-bsp/formfactor/files/a910/machconfig
-@@ -0,0 +1,16 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
++S = "${WORKDIR}/pip-${PV}"
 +
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=38
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=50
-+# Real DISPLAY_BPP=18
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=161
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
-diff --git a/recipes-bsp/formfactor/files/e680/machconfig b/recipes-bsp/formfactor/files/e680/machconfig
-new file mode 100755
-index 0000000..8a87fa4
---- /dev/null
-+++ b/recipes-bsp/formfactor/files/e680/machconfig
-@@ -0,0 +1,15 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
++inherit setuptools
 +
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=38
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=50
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=161
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
-diff --git a/recipes-bsp/formfactor/files/rokre2/machconfig b/recipes-bsp/formfactor/files/rokre2/machconfig
-new file mode 100755
-index 0000000..9be6c4d
---- /dev/null
-+++ b/recipes-bsp/formfactor/files/rokre2/machconfig
-@@ -0,0 +1,16 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
-+
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=36
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=48
-+# Real DISPLAY_BPP=18
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=169
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
-diff --git a/recipes-bsp/formfactor/files/rokre6/machconfig b/recipes-bsp/formfactor/files/rokre6/machconfig
-new file mode 100755
-index 0000000..9be6c4d
---- /dev/null
-+++ b/recipes-bsp/formfactor/files/rokre6/machconfig
-@@ -0,0 +1,16 @@
-+HAVE_TOUCHSCREEN=0
-+HAVE_KEYBOARD=1
-+HAVE_KEYBOARD_PORTRAIT=1
-+HAVE_KEYBOARD_LANDSCAPE=0
-+
-+DISPLAY_CAN_ROTATE=0
-+DISPLAY_ORIENTATION=0
-+DISPLAY_WIDTH_PIXELS=240
-+DISPLAY_WIDTH_MM=36
-+DISPLAY_HEIGHT_PIXELS=320
-+DISPLAY_HEIGHT_MM=48
-+# Real DISPLAY_BPP=18
-+DISPLAY_BPP=16
-+# Real DISPLAY_DPI=169
-+DISPLAY_DPI=180
-+DISPLAY_SUBPIXEL_ORDER=rgb
++# Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
++RDEPENDS_${PN} = "python-modules"
 -- 
-1.8.1.5
+1.8.3.1
 
 
