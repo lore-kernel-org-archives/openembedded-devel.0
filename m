@@ -1,38 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B42D6AF50
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 80A836AF50
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 17:04:02 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id h11so2188715wiv.1
+	Sun, 13 Oct 2013 17:41:15 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id d10so2950928eaj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 10:04:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=g2tl5N7zfy+XG1w3ceXCxqdb5xk6t5ec6fs53EN8Wlo=;
-	b=CmTIJTQgTLMwW/jCHGPvTheqqTz4f25GIeJJwvLOJ0Q5zerRjv2o2zOWaJVLpGaCy/
-	XOxz0qO0Pnq7twqDO59zljdzyS1qzOlJegmG2dlYZ1MjPlTaH0FAbVAeQMzcLpnlHHwG
-	lGdLNK/JNmL8YIXYwQwyFOo1sAxdVuahLh5QL/ttvxs8ZDpa0wLwKaAYgI3NjjI2RKi/
-	1djqT2hwMMV0clYNF0zl/H4mBX15BVcN/e8UVM3D5ZEOFhDoWcWDCTVUV+6q5oFMdvcF
-	78k25dm38V0R0WHYrMwWCspGpOBDpgGG0+7GQzVqxLNlgxApEEwiF6W8NYmxsd0nB1+h
-	gLLQ==
-X-Gm-Message-State: ALoCoQlEazje+r+WiaNSVP0lL6URMq3REoLOsLbwiFZNfjyUyMiPUQ/lktj/HOHqk5hWMHgx8fXY
-X-Received: by 10.194.120.68 with SMTP id la4mr2322328wjb.33.1381683843353;
-	Sun, 13 Oct 2013 10:04:03 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPSA id e5sm25985310wiy.2.2013.10.13.10.04.01
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Oct 2013 10:04:02 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Sun, 13 Oct 2013 10:41:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Q8hdzvdQGywCVJEFeq/8pSBdpvzMgkEk0VJPBgT7TP8=;
+	b=GfRWiAtc6xZoGMsd7U8bjb0mY/E7DSRRSnUCOTrOPlhWPlkRCwgzrlb8CEJiIkWkpj
+	UCgqEz8A/6bdQYuHVE8RkSkeMy57gfRtypE8/ZjIOWRFSOaU+M8oJ29PnO6HqMRbvYSO
+	4j2FsqzUf4F9qkVowY9goGIJkrnoBx2TY9CET0fr1BH2Qx3vxgXEuB3uRl3N69a+rbhv
+	jU8aUMXyQgEa5ySOK9NPrtWWedIFqNG9tqO9qEKN3Gu0rFHBo5PM4A/okkWqkS/Od5zx
+	+yR9oC4cgwXPhfRkhSZ9XylU/yCmzWRan+/8Idi2HNRkzQuROIGZTj0uTjqwquvV9KE0
+	WEdA==
+X-Received: by 10.15.83.2 with SMTP id b2mr49450460eez.28.1381686076755;
+	Sun, 13 Oct 2013 10:41:16 -0700 (PDT)
+Received: from mizar.localdomain
+	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
+	by mx.google.com with ESMTPSA id
+	h52sm142813575eez.3.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 13 Oct 2013 10:41:16 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Oct 2013 19:03:54 +0200
-Message-Id: <1381683834-9439-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.3.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] python-pip: add 1.3.1
+Date: Sun, 13 Oct 2013 19:41:13 +0200
+Message-Id: <1381686073-5452-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH] formfactor: add ben-nanonote machconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2013 17:04:03 -0000
+X-List-Received-Date: Sun, 13 Oct 2013 17:41:18 -0000
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-devtools/python/python-pip_1.3.1.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+ recipes-bsp/formfactor/files/ben-nanonote/machconfig | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100755 recipes-bsp/formfactor/files/ben-nanonote/machconfig
 
-diff --git a/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
-new file mode 100644
-index 0000000..7ab3bd8
+diff --git a/recipes-bsp/formfactor/files/ben-nanonote/machconfig b/recipes-bsp/formfactor/files/ben-nanonote/machconfig
+new file mode 100755
+index 0000000..c19fac7
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
-+LICENSE = "MIT & GPL"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd00425a3465a0e4c81929b94241d3de"
++++ b/recipes-bsp/formfactor/files/ben-nanonote/machconfig
+@@ -0,0 +1,15 @@
++HAVE_TOUCHSCREEN=1
++HAVE_KEYBOARD=1
++HAVE_KEYBOARD_PORTRAIT=0
++HAVE_KEYBOARD_LANDSCAPE=1
 +
-+SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
-+SRC_URI[md5sum] = "cbb27a191cebc58997c4da8513863153"
-+SRC_URI[sha256sum] = "145eaa5d1ea1b062663da1f3a97780d7edea4c63c68a37c463b1deedf7bb4957"
-+
-+S = "${WORKDIR}/pip-${PV}"
-+
-+inherit setuptools
-+
-+# Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
-+RDEPENDS_${PN} = "python-modules"
++DISPLAY_CAN_ROTATE=0
++DISPLAY_ORIENTATION=0
++DISPLAY_WIDTH_PIXELS=320
++DISPLAY_WIDTH_MM=70
++DISPLAY_HEIGHT_PIXELS=240
++DISPLAY_HEIGHT_MM=51
++DISPLAY_BPP=16
++# Real DISPLAY_DPI=133
++DISPLAY_DPI=100
++DISPLAY_SUBPIXEL_ORDER=rgb
 -- 
-1.8.3.1
+1.8.1.5
 
 
