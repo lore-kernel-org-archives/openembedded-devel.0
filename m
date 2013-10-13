@@ -1,35 +1,37 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 864136BF59
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 641086BF59
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 08:44:08 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id q10so6098667pdj.20
+	Sun, 13 Oct 2013 08:44:09 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id kp14so6267873pab.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 01:44:10 -0700 (PDT)
+	Sun, 13 Oct 2013 01:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=4gSteTwaOV7BEY6n4dD64Htc2WHTJ1aK3xmIfZPKinY=;
-	b=TK6yTziNhjrDJJYZicevkKjXgetwlUQuf2scRp9Ge8Z4rpuqwMDl0HhKzvMPwrN7jH
-	xP0gzCKB4yh538NswtqsqeVXNG7A4mpozKOOP6dxVaz/3czTt3rADv6bjxxTfcga0R0i
-	iAQb75e+re/MrGjQKXb2X9wDb5LPRfNM6Sap/pSZanmqpFxjsFhxGy7hNmB3EU0wC4Gw
-	z/38DcJ2wnpyRaKPtPmbqI7eFPZvVFeK/poTK0qGBeo9QeDYlsgtbv1f+eCBoQt4qB9m
-	fqsABv3Rxg2/0gSJbsExUbI8rhAmJ7mICdc34nb90IU4VRoMbroIaSu3qEeJXQNEi/Qw
-	BS7w==
-X-Received: by 10.66.192.8 with SMTP id hc8mr31124755pac.66.1381653850302;
-	Sun, 13 Oct 2013 01:44:10 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=DIsHCwtkAKzLJ4MnLe8YVYxn9c01JxtjR+I3scpwCQs=;
+	b=QLerBYdxSdWLqjWW40hLQpo2VoqqgfxWmDb1Xzd+wQ+aypjgRv20zoi3HRyQcok3+u
+	omwQH+Dx5RrcHgf9dbAfgPSxPaqQxHZvFr1mdQDV6v/RLwcrmXczwhYSblvUjGmLL98w
+	jL+4zYVF3wgLr6QqGFLUGr8TU0gCGexA2XDsjAr/t2Eoh/T4Fky8bSFMxAX+uOY/cL83
+	+F+b+G1wRgHFrWQVU9jwDmYosbLtDFjpMW72etRi6e9/2fdo4eQuZwf11t8zqMKPDR6R
+	UYHq0BVXNxKaMbL4R7BZdkWTgmN1CMYgxuxalsbFEz8Y/UqFL4IPQAIgSh8dAyK4f5ot
+	MNBg==
+X-Received: by 10.66.157.165 with SMTP id wn5mr216612pab.169.1381653851313;
+	Sun, 13 Oct 2013 01:44:11 -0700 (PDT)
 Received: from haswell.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id l8sm70753592pbl.22.1969.12.31.16.00.00
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 13 Oct 2013 01:44:09 -0700 (PDT)
+	Sun, 13 Oct 2013 01:44:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Oct 2013 01:43:50 -0700
-Message-Id: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
+Date: Sun, 13 Oct 2013 01:43:51 -0700
+Message-Id: <1381653835-32079-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
+In-Reply-To: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
+References: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
 Cc: Cliff Brake <cbrake@bec-systems.com>
-Subject: [meta-oe][PATCH 1/6] libraw1394: add recipe
+Subject: [meta-oe][PATCH 2/6] libdc1394: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,27 +54,58 @@ Initial recipe created by Khem Raj
 Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb
+ .../libdc1394/files/install_examples.patch           | 14 ++++++++++++++
+ .../recipes-multimedia/libdc1394/libdc1394_git.bb    | 20 ++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100755 meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch
+ create mode 100755 meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
 
-diff --git a/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb
-new file mode 100644
-index 0000000..b0b4a53
+diff --git a/meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch b/meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch
+new file mode 100755
+index 0000000..89133ad
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "base library for low-level IEEE 1394 accesses"
-+HOMEPAGE = "https://ieee1394.wiki.kernel.org/index.php/Libraries#libraw1394"
++++ b/meta-oe/recipes-multimedia/libdc1394/files/install_examples.patch
+@@ -0,0 +1,14 @@
++Index: libdc1394/examples/Makefile.am
++===================================================================
++--- libdc1394.orig/examples/Makefile.am	2012-06-30 17:50:46.000000000 -0700
+++++ libdc1394/examples/Makefile.am	2012-06-30 19:02:13.822646430 -0700
++@@ -36,8 +36,7 @@
++ AM_LDFLAGS = -framework CoreFoundation -framework Carbon
++ endif
++ 
++-noinst_PROGRAMS = $(A)
++-bin_PROGRAMS = $(B)
+++bin_PROGRAMS = $(A) $(B)
++ 
++ LDADD = ../dc1394/libdc1394.la
++ 
+diff --git a/meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb b/meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
+new file mode 100755
+index 0000000..87a12bd
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libdc1394/libdc1394_git.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Capture and control API for IIDC compliant cameras"
++HOMEPAGE = "http://sourceforge.net/projects/libdc1394/"
 +SECTION = "libs"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d8045f3b8f929c1cb29a1e3fd737b499"
++LICENSE = "LGPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c848e78d9a4a5cc69906178e4d6fbd64"
++DEPENDS += "libxv virtual/libsdl virtual/libx11 libusb1 libraw1394"
 +
-+SRC_URI = "https://www.kernel.org/pub/linux/libs/ieee1394/${P}.tar.gz"
-+SRC_URI[md5sum] = "faf6b18a92075d80e45b603f9a659670"
-+SRC_URI[sha256sum] = "f83268b3f5d37e8d42ae9881c099b55839b70ac0af71549be7ef6af2578e809a"
++PV = "2.2.1+gitr${SRCPV}"
 +
-+inherit autotools
++SRCREV = "b90342933b4b48634b98b73805f47bd25ed5857e"
++
++SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
++           file://install_examples.patch \
++          "
++
++S = "${WORKDIR}/git/${PN}"
++
++inherit autotools pkgconfig sdl
++
++EXTRA_OECONF += "--disable-doxygen-doc"
 -- 
 1.8.3.2
 
