@@ -1,34 +1,32 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 57C9C6D009
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 11D9B6CDB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 20:59:07 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id z15so3671509ead.33
+	Mon, 14 Oct 2013 21:34:29 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id e52so3684817eek.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 13:59:08 -0700 (PDT)
+	Mon, 14 Oct 2013 14:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=ifOYe+Q+TTL60MBcyeu63TvfDe6hvHiMmdukhH0W5pE=;
-	b=Y73NuYhI4TvCGgL341184KeZ/gJy4wUvvaSUbZ30OZolD0icrbEtk/IC5NrrokURkg
-	Zn8iyjten1pVXVZLETDjnanwTHWRNE3KFmfZsLlnvnvCPKq3AcehmHPYnKos+ASPOS8N
-	6qCLms6N4IZDcgOo1enPTLkluGxh++bi6+BedRZCCYNCqkOjhFCqYOTijBpFdZpaAfpv
-	PZ2LXkVro5MvxYBxaERJYl8EO6hAsUCQ801XgPpE/ksonTnMVLAvuOiRb+B/DOe/fm15
-	DvY9NdgjGblrRFplJTxi9ueMFv2VFa0UVzMn7FSAY1M2wISh1b0lMEsT8aUUBD0lNJuO
-	5EWA==
-X-Received: by 10.14.45.70 with SMTP id o46mr59255825eeb.19.1381784348315;
-	Mon, 14 Oct 2013 13:59:08 -0700 (PDT)
+	bh=SPd1Lxh7HLG6QX5tAWB3n/ivLLFFbDbrGr1vu+4s9Us=;
+	b=sZAEbt71mO/Z3Mn/CAc5wPwl7Op1LWl+oI2h+KGxPgNzqDNBBFhVAGuVODM5CSJPkt
+	b5+cpKVLbrRypYOOCPRxkytT+pk8t2bBEOVWaVU+xnnqypNrRtRwX3DSBqI8vDx1Y1a9
+	lhqOFJDYeIntobCLbpdWCYLJtXspbVL5EWVRIsUrnY4B3n3OcwzSGTVOvWG36DX+oYCQ
+	OjVVZMDkRW3RuRpvmw3lL59s0NUei+7fjnfeVz/C1DDoIi8pXXOygpHXJF5f+fYhcIr+
+	/NBZjsn8uqzB4PCdc8Jpl5bTXJCPtp8GS7KSL/GcyzM8K6IxuDKZamgaGacSqzZJzzbz
+	9b0A==
+X-Received: by 10.15.74.197 with SMTP id j45mr58580604eey.40.1381786471464;
+	Mon, 14 Oct 2013 14:34:31 -0700 (PDT)
 Received: from mizar.localdomain ([95.237.174.211])
-	by mx.google.com with ESMTPSA id
-	h52sm157785313eez.3.1969.12.31.16.00.00
+	by mx.google.com with ESMTPSA id i1sm158092089eeg.0.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 14 Oct 2013 13:59:07 -0700 (PDT)
+	Mon, 14 Oct 2013 14:34:30 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Oct 2013 22:59:04 +0200
-Message-Id: <1381784344-2812-1-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 14 Oct 2013 23:34:28 +0200
+Message-Id: <1381786468-9072-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] spitz.conf: reorder and add full example for SL-C3000
+Subject: [meta-handheld][PATCH] zaurus: use mkfs.jffs2 -n option only for NAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +40,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 20:59:08 -0000
+X-List-Received-Date: Mon, 14 Oct 2013 21:34:30 -0000
 
-This device has different eraseblock size.
-Explain it clearly with example ready to un-comment.
+And remove it for collie (NOR).
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/spitz.conf | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ conf/machine/akita.conf  | 2 +-
+ conf/machine/c7x0.conf   | 2 +-
+ conf/machine/collie.conf | 4 ++--
+ conf/machine/poodle.conf | 2 +-
+ conf/machine/spitz.conf  | 4 ++--
+ conf/machine/tosa.conf   | 2 +-
+ 6 files changed, 8 insertions(+), 8 deletions(-)
 
+diff --git a/conf/machine/akita.conf b/conf/machine/akita.conf
+index 12a2fe9..e6f020b 100644
+--- a/conf/machine/akita.conf
++++ b/conf/machine/akita.conf
+@@ -11,7 +11,7 @@ require conf/machine/include/tune-xscale.inc
+ PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt" 
+ MACHINE_FEATURES += "iwmmxt"
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000"
++EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000 -n"
+ EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+ 
+ # UBI: max akita (128-7 MiB = 968 PEBs)
+diff --git a/conf/machine/c7x0.conf b/conf/machine/c7x0.conf
+index ffa998d..08a528e 100644
+--- a/conf/machine/c7x0.conf
++++ b/conf/machine/c7x0.conf
+@@ -11,7 +11,7 @@
+ require conf/machine/include/zaurus.inc
+ require conf/machine/include/tune-xscale.inc
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
++EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000 -n"
+ EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+ 
+ # UBI: max c7x0 (128-7 MiB = 7744 PEBs)
+diff --git a/conf/machine/collie.conf b/conf/machine/collie.conf
+index 26bc257..9f45f56 100644
+--- a/conf/machine/collie.conf
++++ b/conf/machine/collie.conf
+@@ -5,8 +5,8 @@
+ require conf/machine/include/zaurus.inc
+ require conf/machine/include/tune-strongarm1100.inc
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p 14680064 -l -e 0x20000 -n"
+-EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e 0x20000 -n"
++EXTRA_IMAGECMD_jffs2 = "-p 14680064 -l -e 0x20000"
++EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e 0x20000"
+ 
+ # UBI: max collie (14.125 = 113 PEBs)
+ # 14.125 x 1024 : 128 = 113 PEBs
+diff --git a/conf/machine/poodle.conf b/conf/machine/poodle.conf
+index 53dbc4a..ce3c8b3 100644
+--- a/conf/machine/poodle.conf
++++ b/conf/machine/poodle.conf
+@@ -8,7 +8,7 @@
+ require conf/machine/include/zaurus.inc
+ require conf/machine/include/tune-xscale.inc
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
++EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000 -n"
+ EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+ 
+ # UBI: max poodle (64-7 MiB = 3648 PEBs)
 diff --git a/conf/machine/spitz.conf b/conf/machine/spitz.conf
-index d4243fa..6a74165 100644
+index 6a74165..0ecce8b 100644
 --- a/conf/machine/spitz.conf
 +++ b/conf/machine/spitz.conf
-@@ -7,21 +7,21 @@
- # SL-C3100 (borzoi) mtdparts=sharpsl-nand:7168k@0k(smf),32768k@7168k(root),-(home)
- # SL-C3200 (terrier) mtdparts=sharpsl-nand:7168k@0k(smf),44032k@7168k(root),-(home)
- 
--require conf/machine/include/zaurus.inc
--require conf/machine/include/tune-xscale.inc
--
--MACHINE_FEATURES += "iwmmxt"
--PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt"
--
--# Warning! SL-C3000 has "0x4000" (16MiB NAND) 
-+# Warning! SL-C3000 has "0x4000" eraseblock size (16MiB NAND) 
- # C3100 and C3200 have same 128MiB NAND device as akita
+@@ -12,7 +12,7 @@
  #
  # SL-C3000 (16-7 MiB = 576 PEBs)
  # 9 x 1024 : 16 = 576 PEBs
--# ERASEBLOCKSIZE = "0x4000"
-+# EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
+-# EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
++# EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000 -n"
  # MKUBIFS_ARGS = "-m 512 -e 15872 -c 576 -x zlib"
  # UBINIZE_ARGS = "-m 512 -p 16384 -s 256"
  
-+require conf/machine/include/zaurus.inc
-+require conf/machine/include/tune-xscale.inc
-+
-+MACHINE_FEATURES += "iwmmxt"
-+PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt"
-+
- EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000"
+@@ -22,7 +22,7 @@ require conf/machine/include/tune-xscale.inc
+ MACHINE_FEATURES += "iwmmxt"
+ PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt"
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000"
++EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000 -n"
  EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
  
+ # UBI: max spitz (128-7 MiB = 968 PEBs)
+diff --git a/conf/machine/tosa.conf b/conf/machine/tosa.conf
+index 0ec93c7..3c19225 100644
+--- a/conf/machine/tosa.conf
++++ b/conf/machine/tosa.conf
+@@ -8,7 +8,7 @@
+ require conf/machine/include/zaurus.inc
+ require conf/machine/include/tune-xscale.inc
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
++EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000 -n"
+ EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+ 
+ # UBI: max tosa (128-7 MiB = 7744 PEBs)
 -- 
 1.8.1.5
 
