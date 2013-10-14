@@ -1,20 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 99C336CC86
+	by mail.openembedded.org (Postfix) with ESMTP id 1C1326CE3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 15:51:08 +0000 (UTC)
+	Mon, 14 Oct 2013 15:54:38 +0000 (UTC)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 14 Oct 2013 08:47:54 -0700
+	by orsmga102.jf.intel.com with ESMTP; 14 Oct 2013 08:51:23 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,493,1378882800"; d="scan'208";a="392743380"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.120.188])
-	by orsmga001.jf.intel.com with ESMTP; 14 Oct 2013 08:50:59 -0700
+X-IronPort-AV: E=Sophos;i="4.93,493,1378882800"; d="scan'208";a="392745294"
+Received: from unknown (HELO helios.localnet) ([10.252.120.188])
+	by orsmga001.jf.intel.com with ESMTP; 14 Oct 2013 08:54:39 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Oct 2013 16:49:57 +0100
-Message-Id: <1381765797-6945-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-webserver][PATCH v3] sthttpd: add systemd service
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Mon, 14 Oct 2013 16:54:38 +0100
+Message-ID: <5529742.8LBZEpu68j@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1381765192-3697-1-git-send-email-andrea.adami@gmail.com>
+References: <1381765192-3697-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] h3800.conf: fix MACHINE_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,82 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 15:51:08 -0000
+X-List-Received-Date: Mon, 14 Oct 2013 15:54:38 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Nick Glynn <n.s.glynn@gmail.com>
+On Monday 14 October 2013 17:39:52 Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  conf/machine/h3800.conf | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/conf/machine/h3800.conf b/conf/machine/h3800.conf
+> index 0c3cf15..53f3940 100644
+> --- a/conf/machine/h3800.conf
+> +++ b/conf/machine/h3800.conf
+> @@ -2,7 +2,5 @@
+>  #@NAME: Compaq iPAQ 38xx
+>  #@DESCRIPTION: Machine configuration for the Compaq iPAQ 38xx devices
+> 
+> -#this machine will be primarily focussed on the 2.6 port
+> -MACHINE_FEATURES = "touchscreen apm alsa pcmcia bluetooth irda usbgadget
+> screen vfat qvga" -
+>  require conf/machine/h3600.conf
+> +MACHINE_FEATURES += "pcmcia bluetooth"
 
-Signed-off-by: Nick Glynn <n.s.glynn@gmail.com>
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
+I don't particularly like this. I'd rather these files stay separate for now.
 
-Fixes since v2:
-* Make it apply properly on top of master
-* Avoid hardcoded paths in service file
-* Tidy up commit message
+Cheers,
+Paul
 
- meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service | 10 ++++++++++
- meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb      | 11 ++++++++++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
-
-diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
-new file mode 100644
-index 0000000..e2dae61
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=Tiny/Turbo/Throttling Web Server
-+
-+[Service]
-+Type=forking
-+ExecStart=/usr/sbin/thttpd -d @@SRVDIR -c cgi-bin/* -i /var/run/thttpd.pid
-+PIDFile=/var/run/thttpd.pid
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
-index ba2f047..0abd131 100644
---- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
-+++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
-@@ -5,6 +5,7 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dcbe9eb18815516502872"
- 
- SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
-+           file://thttpd.service \
-            file://init"
- 
- SRC_URI[md5sum] = "e645a85a97d3cb883011a35bc2211815"
-@@ -12,7 +13,7 @@ SRC_URI[sha256sum] = "78e87979140cbda123c81b4051552242dbbffb5dec1a17e5f95ec4826b
- 
- S = "${WORKDIR}/sthttpd-${PV}"
- 
--inherit autotools update-rc.d
-+inherit autotools update-rc.d systemd
- 
- EXTRA_OEMAKE += "'WEBDIR=${servicedir}/www'"
- 
-@@ -21,11 +22,19 @@ do_install_append () {
-     install -c -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/thttpd
-     sed -i -e 's,@@SRVDIR,${servicedir}/www,g' ${D}${sysconfdir}/init.d/thttpd
-     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/thttpd
-+
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/thttpd.service ${D}${systemd_unitdir}/system
-+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
-+    sed -i 's!/var/!${localstatedir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
-+    sed -i -e 's,@@SRVDIR,${servicedir}/www,g' ${D}${systemd_unitdir}/system/thttpd.service
- }
- 
- INITSCRIPT_NAME = "thttpd"
- INITSCRIPT_PARAMS = "defaults"
- 
-+SYSTEMD_SERVICE_${PN} = "thttpd.service"
-+
- FILES_${PN} += "${servicedir}"
- FILES_${PN}-dbg += "${servicedir}/www/cgi-bin/.debug"
- 
 -- 
-1.8.1.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
