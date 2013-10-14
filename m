@@ -1,21 +1,25 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 45DF46CE9F
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C7336CC88
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 16:29:30 +0000 (UTC)
-Received: from e6520eb (unknown [88.170.243.169])
-	(Authenticated sender: eukrea)
-	by smtp5-g21.free.fr (Postfix) with ESMTPSA id 5AA4FD482B3;
-	Mon, 14 Oct 2013 18:29:26 +0200 (CEST)
-Date: Mon, 14 Oct 2013 18:29:24 +0200
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: andrea.adami@gmail.com
-Message-ID: <20131014182924.53b1297c@e6520eb>
-In-Reply-To: <1381765192-3697-1-git-send-email-andrea.adami@gmail.com>
+	Mon, 14 Oct 2013 16:30:02 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 14 Oct 2013 09:28:06 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,493,1378882800"; d="scan'208";a="416645294"
+Received: from unknown (HELO helios.localnet) ([10.252.120.188])
+	by fmsmga002.fm.intel.com with ESMTP; 14 Oct 2013 09:28:04 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Mon, 14 Oct 2013 17:28:03 +0100
+Message-ID: <5442709.EOXcNmhYjx@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <CAAQYJAsvGqFZB7CjEc2txSfCxFuesk8AXqhER_EQAe7rknTe=Q@mail.gmail.com>
 References: <1381765192-3697-1-git-send-email-andrea.adami@gmail.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.19; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
+	<5529742.8LBZEpu68j@helios>
+	<CAAQYJAsvGqFZB7CjEc2txSfCxFuesk8AXqhER_EQAe7rknTe=Q@mail.gmail.com>
+MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-handheld][PATCH] h3800.conf: fix MACHINE_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -31,21 +35,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 16:29:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Oct 2013 16:30:02 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi Andrea,
+On Monday 14 October 2013 18:24:38 Andrea Adami wrote:
+> On Mon, Oct 14, 2013 at 5:54 PM, Paul Eggleton
+> 
+> <paul.eggleton@linux.intel.com> wrote:
+> > On Monday 14 October 2013 17:39:52 Andrea Adami wrote:
+> >> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> >> ---
+> >> 
+> >>  conf/machine/h3800.conf | 4 +---
+> >>  1 file changed, 1 insertion(+), 3 deletions(-)
+> >> 
+> >> diff --git a/conf/machine/h3800.conf b/conf/machine/h3800.conf
+> >> index 0c3cf15..53f3940 100644
+> >> --- a/conf/machine/h3800.conf
+> >> +++ b/conf/machine/h3800.conf
+> >> @@ -2,7 +2,5 @@
+> >> 
+> >>  #@NAME: Compaq iPAQ 38xx
+> >>  #@DESCRIPTION: Machine configuration for the Compaq iPAQ 38xx devices
+> >> 
+> >> -#this machine will be primarily focussed on the 2.6 port
+> >> -MACHINE_FEATURES = "touchscreen apm alsa pcmcia bluetooth irda usbgadget
+> >> screen vfat qvga" -
+> >> 
+> >>  require conf/machine/h3600.conf
+> >> 
+> >> +MACHINE_FEATURES += "pcmcia bluetooth"
+> > 
+> > I don't particularly like this. I'd rather these files stay separate for
+> > now.
+> > 
+> > Cheers,
+> > Paul
+> 
+> I understand but see, the include resets the MACHINE_FEATURES as-it-is...
 
-Le Mon, 14 Oct 2013 17:39:52 +0200,
-Andrea Adami <andrea.adami@gmail.com> a =E9crit :
->  require conf/machine/h3600.conf
-> +MACHINE_FEATURES +=3D "pcmcia bluetooth"
+Oops, I had missed that this file was doing a "require" already. My apologies.
 
-not directly related to your patch, but I have an old H3600 with a
-compactflash extension (both covered of dust ;-) : which image would you
-recommend to build to test on this PDA ?
+Cheers,
+Paul
 
-Thanks,
-Eric
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
