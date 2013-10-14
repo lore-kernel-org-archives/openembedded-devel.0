@@ -1,26 +1,18 @@
-Return-Path: <denis@denix.org>
-Received: from vms173011pub.verizon.net (vms173011pub.verizon.net
-	[206.46.173.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 510C36D11A
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 438116D094
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 16:43:00 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.45.150.102])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0MUO00J2U3RPQCB0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	14 Oct 2013 11:43:01 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 03EFE200A9; Mon,
-	14 Oct 2013 12:42:58 -0400 (EDT)
-Date: Mon, 14 Oct 2013 12:42:58 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 14 Oct 2013 19:05:54 +0000 (UTC)
+Received: from localhost.localdomain (chello080108009040.14.11.vie.surfer.at
+	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id D3FE72679A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Oct 2013 21:05:52 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20131014164258.GG27046@denix.org>
-References: <5256F33C.50609@balister.org> <l36sqj$dd6$1@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <l36sqj$dd6$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [RFC] Create meta-sdr in meta-oe
+Date: Mon, 14 Oct 2013 21:06:45 +0200
+Message-Id: <1381777605-6312-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.4
+Subject: [meta-oe][PATCH] orc: update to version 0.4.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +26,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 16:43:02 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 14 Oct 2013 19:05:56 -0000
 
-On Thu, Oct 10, 2013 at 08:49:03PM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Op 10-10-13 20:34, Philip Balister schreef:
-> > At the GNU Radio conference last week, several people working with 
-> > gnuradio on embedded systems asked about creating a meta-sdr to hold 
-> > gnuradio and uhd. This would be the starting point for adding some other 
-> > gnuradio out of tree applications. This could also be a home for some 
-> > other sdr frameworks such as Iris and ALOE.
-> > 
-> > Software that is more focused toward the amateur radio community should 
-> > not end up here since there is little overlap in the developer 
-> > communities at this time.
-> > 
-> > Any comments?
-> 
-> soft66 and rtl-sdr can live there as well. I have recipes for that :)
+This is the minimum required version for the Orc support in GStreamer 1.2
 
-I like both proposals. The only question is which is better placements - an 
-own repo and a layer, or just another sub-layer in meta-openembedded repo?
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ meta-oe/recipes-devtools/orc/orc_0.4.16.bb | 6 ------
+ meta-oe/recipes-devtools/orc/orc_0.4.18.bb | 6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+ create mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.18.bb
 
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb b/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
+deleted file mode 100644
+index bb193ab..0000000
+--- a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require orc.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[orc.md5sum] = "e482932e544c847761449b106ecbc483"
+-SRC_URI[orc.sha256sum] = "700e4edba20a0ed42164b645da26ce515b883d4c4633b222302f1e541f2a58ab"
+diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.18.bb b/meta-oe/recipes-devtools/orc/orc_0.4.18.bb
+new file mode 100644
+index 0000000..2375d8c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/orc/orc_0.4.18.bb
+@@ -0,0 +1,6 @@
++require orc.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI[orc.md5sum] = "1a2552e8d127526c48d644fe6437b377"
++SRC_URI[orc.sha256sum] = "34d3c8a7259f42bed4dcfbc106c5e3d0cc8e17eeaa73128d1c5eaf92883a6a24"
 -- 
-Denys
+1.8.4
+
 
