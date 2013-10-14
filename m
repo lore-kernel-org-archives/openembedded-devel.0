@@ -1,36 +1,35 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id ECE6F6CD55
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 448206BF59
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 23:26:50 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id d49so3003493eek.6
+	Mon, 14 Oct 2013 08:08:36 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VVdCd-0005rk-AM for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Oct 2013 10:08:35 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Oct 2013 10:08:35 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2013 16:26:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=n6fvw50vhrxEaXTADePErevGpiliO2+3aTjRmBlFzJk=;
-	b=0Qqg0yPY0N0nIBAjBHHaw037O/jMkDhvgf37C6uoXon9W4iiHBFlTk80FBmM50NBzv
-	r8Qr5T74PMGJjE1NKuPx35mqUshMhiFoufqM34xDhCfUc/QDmfDRjT7tUs7BVk0OEubB
-	xtGT+Qnj1vVbjhWZ/TYZeX91DJ4Ex8ulMjZQyE9/vXGjZR+lXGL5BkF27dTXMMJWlJbW
-	7WXXPCnHfvfk6oC7rJTa4EwWu7bL3/JUl1JuAo2BUHIno8yCnYh4jUStPeQ3lssLISN2
-	u097Z3o1PbSDw1mkLhpPNHC9rBDEyQTtOtc41/OYVVdwTrk/5O1ZbSGp4bW1q8Si2qCA
-	Kc/A==
-X-Received: by 10.14.198.197 with SMTP id v45mr28822een.52.1381706812291;
-	Sun, 13 Oct 2013 16:26:52 -0700 (PDT)
-Received: from mizar.localdomain
-	(host121-51-dynamic.0-79-r.retail.telecomitalia.it. [79.0.51.121])
-	by mx.google.com with ESMTPSA id
-	m54sm145933934eex.2.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 13 Oct 2013 16:26:51 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 14 Oct 2013 10:08:35 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Oct 2013 01:26:44 +0200
-Message-Id: <1381706804-21803-3-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-In-Reply-To: <1381706804-21803-1-git-send-email-andrea.adami@gmail.com>
-References: <1381706804-21803-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 3/3] linux.inc: remove LOGO_SIZE logic. BTW old linux.inc is deprecated.
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 14 Oct 2013 10:08:27 +0200
+Message-ID: <l3g8pe$7or$1@ger.gmane.org>
+References: <1381683834-9439-1-git-send-email-koen@dominion.thruhere.net>
+	<20131013184228.GA24278@mail.zedat.fu-berlin.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
+	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
+In-Reply-To: <20131013184228.GA24278@mail.zedat.fu-berlin.de>
+X-Enigmail-Version: 1.5.2
+Subject: Re: [meta-oe][PATCH] python-pip: add 1.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2013 23:26:51 -0000
+X-List-Received-Date: Mon, 14 Oct 2013 08:08:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux.inc | 7 -------
- 1 file changed, 7 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/recipes-kernel/linux/linux.inc b/recipes-kernel/linux/linux.inc
-index f920b84..81c096a 100644
---- a/recipes-kernel/linux/linux.inc
-+++ b/recipes-kernel/linux/linux.inc
-@@ -14,13 +14,6 @@ ARM_KEEP_OABI ?= "1"
- # You can define CMDLINE_DEBUG in your local.conf or distro.conf to override this behaviour
- CMDLINE_DEBUG ?= "loglevel=3"
- 
--# Kernel bootlogo is distro-specific (default is OE logo).
--# Logo resolution (qvga, vga, ...) is machine-specific.
--LOGO_SIZE ?= '${@base_conditional("MACHINE_GUI_CLASS", "bigscreen", "vga", "qvga", d)}'
--# To use this, add file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 or similar
--# to your kernel recipe, and then structure your logos for each resolution
--# accordingly.
--
- LOCALVERSION ?= ""
- 
- kernel_conf_variable() {
--- 
-1.8.1.5
+Op 13-10-13 20:42, Henning Heinold schreef:
+> On Sun, Oct 13, 2013 at 07:03:54PM +0200, Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
+>>  meta-oe/recipes-devtools/python/python-pip_1.3.1.bb | 14 ++++++++++++++
+>>  1 file changed, 14 insertions(+)
+>>  create mode 100644 meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+>>
+>> diff --git a/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+>> new file mode 100644
+>> index 0000000..7ab3bd8
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+>> @@ -0,0 +1,14 @@
+>> +DESCRIPTION = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
+> ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 
+> Hi,
+> 
+> isn't pip
+> 
+> A tool for installing and managing Python packages.
+> 
+> instead of a webserver?
+
+Yes, I copied python-tornado.bb to use as a template :)
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFSW6Z7MkyGM64RGpERAthLAJ9kPj0mQx3vDOwUx93DfJNRe9QJZgCgnjGd
+SlZZIPANNN/FsAROMkzzATk=
+=PE/D
+-----END PGP SIGNATURE-----
 
 
