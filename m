@@ -1,37 +1,41 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id DD25C60EED
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 2330A6CBAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 08:09:36 +0000 (UTC)
-Received: by mail-we0-f180.google.com with SMTP id q59so6539327wes.25
+	Mon, 14 Oct 2013 12:11:32 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id d41so3340393eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 01:09:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=HpZrNOXHoZyGgXURP5geFrs7lR2uqiC4+/gC6eTqt0Y=;
-	b=eY5wfCUMBcEdlDqjyTo1h6a1oepb1iRUEe6tr2cjEwJeign7PnyZM6fntiDz+QYBz5
-	6ilO1nNvNvXgIRe/r7Vlo7lvTwbKYKtmujbuJ2g5bRUMRHRkhe+wVs4UJ5b/CPwiUfqY
-	wWfUgoh7iQRa+M8zvmNKhcEZml4qRhAJ+hI94IGiMxt+/1j8ZeI9zaZNBoVDg98uO6v/
-	yBjFx23BRqmQJHQMamI2xl0864C/PbSdSfRx9qUu6QGb4dJHnhxZGw4oPJcUx7zpPzmX
-	CNA1aRs1gdgRq1CT6vJlVuX1/97TIApHfmh1rYtj5/+5fGZuNEMyktR4dNXQQLJyr+kb
-	SpSg==
-X-Gm-Message-State: ALoCoQmzowageTOXbuVKTsgHE4e2W62LYHDziFI1aHlncNTP+CxZX84eIWWeDKVrQNmOeaMcQl9w
-X-Received: by 10.194.81.8 with SMTP id v8mr605570wjx.47.1381738178038;
-	Mon, 14 Oct 2013 01:09:38 -0700 (PDT)
-Received: from localhost.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by mx.google.com with ESMTPSA id jf2sm31723655wic.2.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 14 Oct 2013 01:09:37 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Mon, 14 Oct 2013 05:11:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=4JPGkc/Z/TUDSDh5nydXew3K6BHPgrD/oSWPlCAluxI=;
+	b=UINnrki3qdqE3bNYQ6a/iY/oN4JlKs0LxSez5Rwt+LLzt0bGwHD7qDn34T2SOedeBP
+	ePe+HAqInlbxV1vDI+TqoUpwSTNrhBQhE7ivDaejOxoIh5HYE/a6LGCGQt9EI3+txMuC
+	jVeuDUkMYBB2iEIcQ3vI4yk+3W8ox6ZLwmCFJmdQhFzPZZffkwCaxNHR0+Y+uqRjSq4l
+	Ai8qhreDnCbmVI0Okj2sj+bCIgfI0To+9WMLdRvYUQyJjzV3H9cwwLEhW0RSsR6JRRK0
+	hdihivHRYNg47k492ITqIjRDP9kmjTQxup+RZt4SNbIioUfeHjkSk+PxtCTgnnmqRrYR
+	Lx8A==
+X-Received: by 10.14.203.70 with SMTP id e46mr52590851eeo.33.1381752694226;
+	Mon, 14 Oct 2013 05:11:34 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	r48sm152829098eev.14.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 14 Oct 2013 05:11:33 -0700 (PDT)
+Date: Mon, 14 Oct 2013 14:11:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Oct 2013 10:09:30 +0200
-Message-Id: <1381738170-28131-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.3.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCHv2] python-pip: add 1.3.1
+Message-ID: <20131014121133.GB3708@jama>
+References: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
+	<1596233.ZQ7J3xl2Nd@helios>
+	<1D7F89CC-74A8-4960-BE17-B59701B0F943@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1D7F89CC-74A8-4960-BE17-B59701B0F943@gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Cliff Brake <cbrake@bec-systems.com>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: [meta-oe][PATCH 1/6] libraw1394: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,35 +49,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 08:09:37 -0000
+X-List-Received-Date: Mon, 14 Oct 2013 12:11:34 -0000
+X-Groupsio-MsgNum: 46682
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qjNfmADvan18RZcF"
+Content-Disposition: inline
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-devtools/python/python-pip_1.3.1.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
+--qjNfmADvan18RZcF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
-new file mode 100644
-index 0000000..c812913
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-pip_1.3.1.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Python-pip is a tool for installing and managing Python packages."
-+LICENSE = "MIT & GPL"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd00425a3465a0e4c81929b94241d3de"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
-+SRC_URI[md5sum] = "cbb27a191cebc58997c4da8513863153"
-+SRC_URI[sha256sum] = "145eaa5d1ea1b062663da1f3a97780d7edea4c63c68a37c463b1deedf7bb4957"
-+
-+S = "${WORKDIR}/pip-${PV}"
-+
-+inherit setuptools
-+
-+# Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
-+RDEPENDS_${PN} = "python-modules"
--- 
-1.8.3.1
+On Sun, Oct 13, 2013 at 12:45:38PM -0700, Khem Raj wrote:
+>=20
+> On Oct 13, 2013, at 4:10 AM, Paul Eggleton <paul.eggleton@linux.intel.com=
+> wrote:
+>=20
+> > On Sunday 13 October 2013 01:43:50 Khem Raj wrote:
+> >> From: Cliff Brake <cbrake@bec-systems.com>
+> >>=20
+> >> Initial recipe created by Khem Raj
+> >>=20
+> >> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> ---
+> >> meta-oe/recipes-multimedia/libraw1394/libraw1394_2.0.9.bb | 11 +++++++=
+++++
+> >=20
+> > Could these multimedia recipes go into meta-multimedia instead of meta-=
+oe?
+>=20
+> Its ok to put them into meta-multimedia, but they depend on meta-oe a lot
+> may be more recipes like opencv should be moved as well.
+>=20
+> Martin, do you need a fresh set of patches for it or can you handle the m=
+ove from
+> meta-oe -> meta-multimedia
 
+If you're going to move opencv as well, then please send new fresh set
+of patches. Thanks.
 
+>=20
+> >=20
+> > Cheers,
+> > Paul
+> >=20
+> > --=20
+> >=20
+> > Paul Eggleton
+> > Intel Open Source Technology Centre
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--qjNfmADvan18RZcF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlJb33UACgkQN1Ujt2V2gBwrQwCghPgLjtS4peg3wygRJ8GSt0AA
+eU0An3/D2SfFQDkQ9GFUVDaIORHTON6r
+=tIt4
+-----END PGP SIGNATURE-----
+
+--qjNfmADvan18RZcF--
