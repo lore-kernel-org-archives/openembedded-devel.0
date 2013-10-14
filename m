@@ -1,32 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 034686D130
+Received: from mail-la0-f45.google.com (mail-la0-f45.google.com
+	[209.85.215.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C6256D112
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 16:21:18 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c13so3535422eek.33
+	Mon, 14 Oct 2013 16:24:37 +0000 (UTC)
+Received: by mail-la0-f45.google.com with SMTP id eh20so5947396lab.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 09:21:20 -0700 (PDT)
+	Mon, 14 Oct 2013 09:24:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=CodIHtR1FdyAYTYKDILFE9zHaCoKGUxLRblETCCayfk=;
-	b=fw4ae9vc4wmxY31fgrbK4Kn2GeYh+lrbFPdm8sCRVZwmmNYxMhOHkoW2wJdURDhxIf
-	9HCEjnMPFSC1SwUyGWxoQXI7flPTpO0VLqIqpYKZZ3lyIsVrG0tHOBieK4rGHYun+j9h
-	ucdyuicSq6DCb8TJh9gL0XA/tTw+7PWD2KGzsAIiLOELlayjgo1ToiIgdQaCr2oOse76
-	QDGoDQAEyhQp5/UHWOksVamYewJcQ/fqCaAIeG/8F6c0VDifHMiFjwMzQXjh9Y3bcD4y
-	FMrVb4Fgq4w4vt3CrZZH/iuCBhy7U+wpca+fkW29rB9X4s8YlltvKP1EOcXHjeXklxAR
-	+62w==
-X-Received: by 10.15.32.7 with SMTP id z7mr1737676eeu.78.1381767680616;
-	Mon, 14 Oct 2013 09:21:20 -0700 (PDT)
-Received: from mizar.localdomain ([95.237.174.211])
-	by mx.google.com with ESMTPSA id d8sm155236487eeh.8.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 14 Oct 2013 09:21:20 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=qv4VBdxr1PAaLQe0X28Nil5fe8vyd7GP/vwLaEnhKjw=;
+	b=YkGLlNwWz//dvAmpt9RVgxCkn1Ag7RDWApd2FQLhME6EvIgv9tEdo5hz+ufA6Cq17O
+	ETAfM3j4hoTMYMomASoqmcUiDcn8Or8GNEQaLBIfWRRh7c8TgqV2uhs9XT+COAK6FqSj
+	/F49B8lXwoRdadexq/Yan3c5BkrzyssO24PWBQg1FIPlo/lufs/zMSSb0mUYh77+PbFw
+	vJwllbdDYv738JqPmwenYsapUetx/O9K5RHyH4s8/ZZbYTmDQVWl2okLWXJAwgZueQXp
+	hjuX7k4mXV2NlDtgmqm6Y8uoJykkkZRda5A9wPVj1dJYY2Qyz/FonYPkTJ2gISLRgCTt
+	wnNA==
+MIME-Version: 1.0
+X-Received: by 10.152.170.166 with SMTP id an6mr31379077lac.20.1381767879036; 
+	Mon, 14 Oct 2013 09:24:39 -0700 (PDT)
+Received: by 10.112.52.74 with HTTP; Mon, 14 Oct 2013 09:24:38 -0700 (PDT)
+In-Reply-To: <5529742.8LBZEpu68j@helios>
+References: <1381765192-3697-1-git-send-email-andrea.adami@gmail.com>
+	<5529742.8LBZEpu68j@helios>
+Date: Mon, 14 Oct 2013 18:24:38 +0200
+Message-ID: <CAAQYJAsvGqFZB7CjEc2txSfCxFuesk8AXqhER_EQAe7rknTe=Q@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Oct 2013 18:21:17 +0200
-Message-Id: <1381767677-12914-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] zaurus.inc: remove code for JFFS2 now split in machine configuration
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] h3800.conf: fix MACHINE_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,32 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 16:21:20 -0000
+X-List-Received-Date: Mon, 14 Oct 2013 16:24:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- conf/machine/include/zaurus.inc | 7 -------
- 1 file changed, 7 deletions(-)
+On Mon, Oct 14, 2013 at 5:54 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Monday 14 October 2013 17:39:52 Andrea Adami wrote:
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+>> ---
+>>  conf/machine/h3800.conf | 4 +---
+>>  1 file changed, 1 insertion(+), 3 deletions(-)
+>>
+>> diff --git a/conf/machine/h3800.conf b/conf/machine/h3800.conf
+>> index 0c3cf15..53f3940 100644
+>> --- a/conf/machine/h3800.conf
+>> +++ b/conf/machine/h3800.conf
+>> @@ -2,7 +2,5 @@
+>>  #@NAME: Compaq iPAQ 38xx
+>>  #@DESCRIPTION: Machine configuration for the Compaq iPAQ 38xx devices
+>>
+>> -#this machine will be primarily focussed on the 2.6 port
+>> -MACHINE_FEATURES = "touchscreen apm alsa pcmcia bluetooth irda usbgadget
+>> screen vfat qvga" -
+>>  require conf/machine/h3600.conf
+>> +MACHINE_FEATURES += "pcmcia bluetooth"
+>
+> I don't particularly like this. I'd rather these files stay separate for now.
+>
+> Cheers,
+> Paul
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 2f5d2e7..480c855 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -6,13 +6,6 @@ IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2 ubifs"
- INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
- IMAGE_DEVICE_TABLES = ""
- 
--# kernel now supports favourlzo
--EXTRA_IMAGECMD_jffs2 = "-p -l --eraseblock=${ERASEBLOCKSIZE}"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
--
--EXTRA_IMAGECMD_jffs2_collie = "--pad=14680064 --little-endian --eraseblock=0x20000 -n"
--EXTRA_IMAGECMD_sum.jffs2_collie = "--pad -l --eraseblock=0x20000 -n"
--
- #########
- # xserver
- #########
--- 
-1.8.1.5
+I understand but see, the include resets the MACHINE_FEATURES as-it-is...
 
+Cheers
+
+Andrea
+
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
 
