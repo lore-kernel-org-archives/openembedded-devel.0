@@ -1,33 +1,33 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id F11DE6CEB9
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 6049260F15
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 22:05:28 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id d41so3594237eek.8
+	Mon, 14 Oct 2013 23:54:14 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id d17so3735851eek.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2013 15:05:30 -0700 (PDT)
+	Mon, 14 Oct 2013 16:54:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=QS/fbabfaKrGlxh9Olss3h7K5S0PFnp61aDjN/sY1Ro=;
-	b=JzeJSz+AblOflxLah8ztmSbGAqH62TYsz/3SPhiS7Wbp2q9NkBELjfWOWgiV0HKOoy
-	NrfAAthj7fYQ/lrwyRRNWQw2lNPYhsK1sVe+6dIP5FFiyXzE/aJnNeyrV6I+Di4+ydXz
-	kg0/TdKrXPLcY7dk14mjJ2HhQuWoP8yRTtFbiFhK2kJhAV7Wn3DlXat683bgYt2Dgzr4
-	P1WH5RuCGhCzzwrktddrdQXbdHcxsmUceTfVA/uoMxBvikjsO1RkajZHV1fVQGNyRCKX
-	nT6niaftuHOM/27N852WVt5wp3HPICWb4CstBCg/XMk56PStRqcm7ks+Ua2z848fSE+e
-	pdbw==
-X-Received: by 10.14.194.131 with SMTP id m3mr59484369een.45.1381788330010;
-	Mon, 14 Oct 2013 15:05:30 -0700 (PDT)
+	bh=2I0BUjeqi0/18Jlmbk7HEzMsDuy4/t3gqupTg3MhWtk=;
+	b=wmIMZXusGCBxSIRdOyOmoh+t1NCurYlbj9YcFKpj4exDoHA9KsmGkhZqF6VQatIGTm
+	SsgwrSVa5QIw3C4b64T9qoDiRXrBmyA6Ha6H0VYrLCoK3JvQPO43DuP6Uwpo5P880V2R
+	+5bHEBwsKzpyboJrz+GklyEazeRle077UqBdEdG8Qe2N7ALYh6RDkrML0gnVRGgALiav
+	hX8h7XUZzDD0rIC7hQIupTTJsuEuhhfEDkGwLp0CdrS55A712VDFB4UrX4AnD139LhWV
+	WpzirTXTjtdFDl8oTJXHnHoZCMAPWL6jlN/vx7ZmoWtXD//o9tpFezBjVytlPt2dtVJk
+	epZA==
+X-Received: by 10.14.102.66 with SMTP id c42mr8728427eeg.47.1381794855704;
+	Mon, 14 Oct 2013 16:54:15 -0700 (PDT)
 Received: from mizar.localdomain ([95.237.174.211])
 	by mx.google.com with ESMTPSA id
-	a6sm158417670eei.10.1969.12.31.16.00.00
+	j7sm159385714eeo.15.1969.12.31.16.00.00
 	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 14 Oct 2013 15:05:29 -0700 (PDT)
+	Mon, 14 Oct 2013 16:54:15 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2013 00:05:26 +0200
-Message-Id: <1381788326-9316-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 15 Oct 2013 01:54:11 +0200
+Message-Id: <1381794851-12671-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] zaurus: simplify JFFS2 creation using code in image_fstype.bbclass
+Subject: [meta-handheld][PATCH] meta-handheld: use code in image_types.bbclass for JFFS2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,119 +41,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2013 22:05:30 -0000
-
-fix ${ERASEBLOCKSIZE} remnant for collie
+X-List-Received-Date: Mon, 14 Oct 2013 23:54:16 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/akita.conf  | 3 +--
- conf/machine/c7x0.conf   | 3 +--
- conf/machine/collie.conf | 8 +++++---
- conf/machine/poodle.conf | 3 +--
- conf/machine/spitz.conf  | 5 ++---
- conf/machine/tosa.conf   | 3 +--
- 6 files changed, 11 insertions(+), 14 deletions(-)
+ conf/machine/h1910.conf                    | 2 +-
+ conf/machine/h2200.conf                    | 2 +-
+ conf/machine/h3600.conf                    | 3 ++-
+ conf/machine/h5000.conf                    | 5 ++++-
+ conf/machine/hx4700.conf                   | 7 +++----
+ conf/machine/include/motorola-ezx-base.inc | 3 ++-
+ conf/machine/jornada56x.conf               | 2 +-
+ conf/machine/palmtt.conf                   | 3 ++-
+ conf/machine/palmz71.conf                  | 3 ++-
+ conf/machine/simpad.conf                   | 6 +++---
+ 10 files changed, 21 insertions(+), 15 deletions(-)
 
-diff --git a/conf/machine/akita.conf b/conf/machine/akita.conf
-index 12a2fe9..a6f6f14 100644
---- a/conf/machine/akita.conf
-+++ b/conf/machine/akita.conf
-@@ -11,8 +11,7 @@ require conf/machine/include/tune-xscale.inc
- PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt" 
- MACHINE_FEATURES += "iwmmxt"
- 
--EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
-+JFFS2_ERASEBLOCK = "0x20000"
- 
- # UBI: max akita (128-7 MiB = 968 PEBs)
- # 121 x 1024 : 128 = 968 PEBs
-diff --git a/conf/machine/c7x0.conf b/conf/machine/c7x0.conf
-index ffa998d..4254258 100644
---- a/conf/machine/c7x0.conf
-+++ b/conf/machine/c7x0.conf
-@@ -11,8 +11,7 @@
- require conf/machine/include/zaurus.inc
- require conf/machine/include/tune-xscale.inc
- 
--EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
-+JFFS2_ERASEBLOCK = "0x4000"
- 
- # UBI: max c7x0 (128-7 MiB = 7744 PEBs)
- # 121 x 1024 : 16 = 7744 PEBs
-diff --git a/conf/machine/collie.conf b/conf/machine/collie.conf
-index 26bc257..baa2c0f 100644
---- a/conf/machine/collie.conf
-+++ b/conf/machine/collie.conf
-@@ -5,10 +5,12 @@
- require conf/machine/include/zaurus.inc
- require conf/machine/include/tune-strongarm1100.inc
- 
--EXTRA_IMAGECMD_jffs2 = "-p 14680064 -l -e 0x20000 -n"
--EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e 0x20000 -n"
-+JFFS2_ERASEBLOCK = "0x20000"
-+
-+EXTRA_IMAGECMD_jffs2 = "-p 14680064 -l -e ${JFFS2_ERASEBLOCK}"
-+EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
- 
- # UBI: max collie (14.125 = 113 PEBs)
- # 14.125 x 1024 : 128 = 113 PEBs
- MKUBIFS_ARGS = "-m 2048 -e 129024 -c 113 -x zlib"
--UBINIZE_ARGS = "-m 2048 -p ${ERASEBLOCKSIZE} -s 512"
-+UBINIZE_ARGS = "-m 2048 -p 131072 -s 512"
-diff --git a/conf/machine/poodle.conf b/conf/machine/poodle.conf
-index 53dbc4a..9d11893 100644
---- a/conf/machine/poodle.conf
-+++ b/conf/machine/poodle.conf
-@@ -8,8 +8,7 @@
- require conf/machine/include/zaurus.inc
- require conf/machine/include/tune-xscale.inc
- 
--EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
-+JFFS2_ERASEBLOCK = "0x4000"
- 
- # UBI: max poodle (64-7 MiB = 3648 PEBs)
- # 57 x 1024 : 16 = 3648 PEBs
-diff --git a/conf/machine/spitz.conf b/conf/machine/spitz.conf
-index 6a74165..9d41637 100644
---- a/conf/machine/spitz.conf
-+++ b/conf/machine/spitz.conf
-@@ -12,7 +12,7 @@
+diff --git a/conf/machine/h1910.conf b/conf/machine/h1910.conf
+index 56c560e..012b2e5 100644
+--- a/conf/machine/h1910.conf
++++ b/conf/machine/h1910.conf
+@@ -14,7 +14,7 @@ MACHINE_FEATURES = "touchscreen apm alsa irda usbgadget screen vfat qvga"
  #
- # SL-C3000 (16-7 MiB = 576 PEBs)
- # 9 x 1024 : 16 = 576 PEBs
--# EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
-+# JFFS2_ERASEBLOCK = "0x4000"
- # MKUBIFS_ARGS = "-m 512 -e 15872 -c 576 -x zlib"
- # UBINIZE_ARGS = "-m 512 -p 16384 -s 256"
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
  
-@@ -22,8 +22,7 @@ require conf/machine/include/tune-xscale.inc
- MACHINE_FEATURES += "iwmmxt"
- PACKAGE_EXTRA_ARCHS_tune-xscale += "iwmmxt"
- 
--EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x20000"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
-+JFFS2_ERASEBLOCK = "0x20000"
- 
- # UBI: max spitz (128-7 MiB = 968 PEBs)
- # 121 x 1024 : 128 = 968 PEBs
-diff --git a/conf/machine/tosa.conf b/conf/machine/tosa.conf
-index 0ec93c7..7e8c0da 100644
---- a/conf/machine/tosa.conf
-+++ b/conf/machine/tosa.conf
-@@ -8,8 +8,7 @@
- require conf/machine/include/zaurus.inc
- require conf/machine/include/tune-xscale.inc
- 
--EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x4000"
--EXTRA_IMAGECMD_sum.jffs2 = "${EXTRA_IMAGECMD_jffs2}"
+-EXTRA_IMAGECMD_h1910_jffs2 = "-e 0x4000 -p -n"
 +JFFS2_ERASEBLOCK = "0x4000"
  
- # UBI: max tosa (128-7 MiB = 7744 PEBs)
- # 121 x 1024 : 16 = 7744 PEBs
+ #
+ # Modules autoload and other boot properties
+diff --git a/conf/machine/h2200.conf b/conf/machine/h2200.conf
+index 30c8a81..97cfbb7 100644
+--- a/conf/machine/h2200.conf
++++ b/conf/machine/h2200.conf
+@@ -23,7 +23,7 @@ MACHINE_EXTRA_RRECOMMENDS = "\
+     kernel-module-i2c-pxa \
+     "
+ 
+-EXTRA_IMAGECMD_jffs2 = "--pad --eraseblock=0x4000"
++JFFS2_ERASEBLOCK = "0x4000"
+ 
+ #
+ # Modules autoload and other boot properties
+diff --git a/conf/machine/h3600.conf b/conf/machine/h3600.conf
+index 78e11be..70d31d6 100644
+--- a/conf/machine/h3600.conf
++++ b/conf/machine/h3600.conf
+@@ -27,7 +27,8 @@ MACHINE_EXTRA_RDEPENDS = "mtd-utils mtd-utils-jffs2"
+ 
+ MACHINE_EXTRA_RRECOMMENDS = ""
+ 
+-EXTRA_IMAGECMD_jffs2 = "-p -l -e 0x40000"
++JFFS2_ERASEBLOCK = "0x40000"
++EXTRA_IMAGECMD_jffs2_append = " ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
+ 
+ #
+ # Modules autoload and other boot properties
+diff --git a/conf/machine/h5000.conf b/conf/machine/h5000.conf
+index 2197520..a01393b 100644
+--- a/conf/machine/h5000.conf
++++ b/conf/machine/h5000.conf
+@@ -13,7 +13,10 @@ MACHINE_FEATURES = "touchscreen apm alsa pcmcia bluetooth irda wifi usbgadget us
+ # Software/packages selection
+ #
+ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+-EXTRA_IMAGECMD_jffs2 = "-e 0x40000 -p ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
++
++JFFS2_ERASEBLOCK = "0x40000"
++EXTRA_IMAGECMD_jffs2_append = " ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
++
+ 
+ # Ship complete set of modules ('kernel-modules') for easier debug purposes 
+ MACHINE_EXTRA_RDEPENDS = "kernel ipaq-boot-params"
+diff --git a/conf/machine/hx4700.conf b/conf/machine/hx4700.conf
+index 0099f8a..3be0628 100644
+--- a/conf/machine/hx4700.conf
++++ b/conf/machine/hx4700.conf
+@@ -32,11 +32,10 @@ MACHINE_EXTRA_RRECOMMENDS = "\
+ 	kernel-module-snd-hx4700-audio \
+         keymaps"
+ 
+-#write out a reflash.ctl with the appriate entries for the rootfs, the ones for the kernel should already be there
+-EXTRA_IMAGECMD_jffs2 = "; sumtool -i ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 \
+-			  -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs-summary.jffs2 \
+-			  -e 256KiB -p ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
++JFFS2_ERASEBLOCK = "0x40000"
+ 
++#write out a reflash.ctl with the appriate entries for the rootfs, the ones for the kernel should already be there
++EXTRA_IMAGECMD_jffs2_append = " ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
+ 
+ #
+ # Modules autoload and other boot properties
+diff --git a/conf/machine/include/motorola-ezx-base.inc b/conf/machine/include/motorola-ezx-base.inc
+index f5d11a5..a84e189 100644
+--- a/conf/machine/include/motorola-ezx-base.inc
++++ b/conf/machine/include/motorola-ezx-base.inc
+@@ -29,7 +29,8 @@ PREFERRED_PROVIDER_virtual/kernel ?= "openezx-kernel"
+ MODUTILS = "26"
+ 
+ IMAGE_FSTYPES ?= "jffs2"
+-EXTRA_IMAGECMD_jffs2 = "--pad=14680064 --little-endian --eraseblock=0x20000 -n"
++JFFS2_ERASEBLOCK = "0x20000"
++EXTRA_IMAGECMD_jffs2 = "--pad=14680064 --little-endian --eraseblock=${JFFS2_ERASEBLOCK} -n"
+ 
+ # In order to enable UIBIFS add "uibi and ubifs"
+ #IMAGE_FSTYPES += "ubi ubifs"
+diff --git a/conf/machine/jornada56x.conf b/conf/machine/jornada56x.conf
+index 4a0d2e6..746e1eb 100644
+--- a/conf/machine/jornada56x.conf
++++ b/conf/machine/jornada56x.conf
+@@ -6,7 +6,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-handhelds-2.6"
+ PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
+ BOOTSTRAP_EXTRA_RDEPENDS = "kernel kernel-modules module-init-tools" 
+ 
+-EXTRA_IMAGECMD_jornada56x_jffs2 = "-e 0x40000 -p"
++JFFS2_ERASEBLOCK = "0x40000"
+ 
+ SERIAL_CONSOLE = "115200 ttySA0"
+ 
+diff --git a/conf/machine/palmtt.conf b/conf/machine/palmtt.conf
+index 0965c0e..8db4a66 100644
+--- a/conf/machine/palmtt.conf
++++ b/conf/machine/palmtt.conf
+@@ -5,6 +5,7 @@
+ PREFERRED_PROVIDER_virtual/kernel = "linux-palm-omap1"
+ 
+ SERIAL_CONSOLE ?= "115200 ttyS0"
+-EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x40000"
++
++JFFS2_ERASEBLOCK = "0x40000"
+ 
+ require conf/machine/include/tune-arm926ejs.inc
+diff --git a/conf/machine/palmz71.conf b/conf/machine/palmz71.conf
+index aa820c7..2f39832 100644
+--- a/conf/machine/palmz71.conf
++++ b/conf/machine/palmz71.conf
+@@ -6,6 +6,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-palm-omap1"
+ PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
+ 
+ SERIAL_CONSOLE ?= "115200 ttyS0"
+-EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x40000"
++
++JFFS2_ERASEBLOCK = "0x40000"
+ 
+ require conf/machine/include/tune-arm926ejs.inc
+diff --git a/conf/machine/simpad.conf b/conf/machine/simpad.conf
+index 390c1c6..1e12ec4 100644
+--- a/conf/machine/simpad.conf
++++ b/conf/machine/simpad.conf
+@@ -2,13 +2,13 @@
+ #@NAME: SIEMENS SIMpad SL4, SIEMENS SIMpad CL4, SIEMENS SIMpad SLC, Telekom T-Sinus PAD
+ #@DESCRIPTION: Machine configuration for the SA1100 based SIEMENS SIMpad and Telekom T-Sinus PAD devices
+ 
++require conf/machine/include/tune-strongarm1100.inc
++
+ MACHINE_FEATURES = "apm pcmcia irda screen touchscreen vfat"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
+ 
+-require conf/machine/include/tune-strongarm1100.inc
+-
+-EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=0x20000"
++JFFS2_ERASEBLOCK = "0x20000"
+ 
+ SERIAL_CONSOLE = "ttySA0 115200 vt100"
+ USE_VT = "0"
 -- 
 1.8.1.5
 
