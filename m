@@ -1,41 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 9524C6CBAC
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-la0-f45.google.com (mail-la0-f45.google.com
+	[209.85.215.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 0275D6CBAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 11:22:58 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id u56so8235834wes.5
+	Tue, 15 Oct 2013 11:37:41 +0000 (UTC)
+Received: by mail-la0-f45.google.com with SMTP id eh20so6731624lab.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 04:22:59 -0700 (PDT)
+	Tue, 15 Oct 2013 04:37:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=YIXIvshFu/OTtvRnE/HKm5Z2YD+72Xh4tAcH/R1kM4s=;
-	b=TV1yk16NKwI+BRdKSndoWkU3pchTENpZsz5zK7vYSRAIFmxv8gKtPhDZss/VoJ7teK
-	WsanI7zKWAGVUFtfpX1QdqkSzXxGyAcz97NflIiFkWUAxLDAgMM4g/svqTUjnhL93ChF
-	zhy/T+ZAtkqulLY2Rbq7Y0bOC8d4iaRo8wgKnz+7T0/3ZcSrwhLR3qubisvsns58ARoU
-	/bZGrottwxvq3kEBhcjBqsgqD8FonCbFgAtz6q2R/y2A4tAwyeSASDaglM0pBEhvi2bx
-	lYe9wxHt/FNfJGPCBSlOK8crtfD1bV01QgaqCGxPCn6dEkW21Hp+ceV4uIylCxiqtiSa
-	9EnQ==
-X-Gm-Message-State: ALoCoQmXmOqDg4IkwYHG8J7jWU5KxOX8mfY47ZkUMGGiBLx9e0uQm3XUkoKgVUIV6Vp/yYigFFKY
-X-Received: by 10.194.119.132 with SMTP id ku4mr1590642wjb.51.1381836179739;
-	Tue, 15 Oct 2013 04:22:59 -0700 (PDT)
-Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPSA id ev4sm55084wib.7.2013.10.15.04.22.58
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 15 Oct 2013 04:22:58 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.5 \(1508\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1381835734-6969-1-git-send-email-fathi.boudra@linaro.org>
-Date: Tue, 15 Oct 2013 13:23:01 +0200
-Message-Id: <7AF48623-2F7B-443F-AC08-4241E115DAA1@dominion.thruhere.net>
-References: <1381835734-6969-1-git-send-email-fathi.boudra@linaro.org>
-To: Fathi Boudra <fathi.boudra@linaro.org>
-X-Mailer: Apple Mail (2.1508)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] libjpeg-turbo: update to 1.3.0 release (svn r988)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=plnS1cX2e0sEdrEsNyRiAMVOa9cfr3LhN65tiYwEf8E=;
+	b=IKm/i+QtqCyxOC7C6/l3hhlhCsnvjFqzRep91KWdz7xsKgoziBuaCtxLpxgTHjmoKk
+	qdecX+auI7bg63SJi3pZtBfCG7eWxhDmeo7gFjdqtb1H1iF1nPNHj4gL5DeaKo4V2s1z
+	K6YrIiOTbu6rpk4UwIRc0IzCC7jwRV8omV6s7OHT0PW0cpk1/UKda7kC/+0LwxScCFbm
+	YL0EfXV4i4kkAW1FuNwdWrz2ysB0vVdafciYoo4euZZZeOIeE5KtJWkV8vslvAKfDDWZ
+	C1TiXR9megmW3Sxns244nzVl1LERGDcq1mBFOTzaOm5wkA3XUQ+Bde37xISAkms491R7
+	fyhg==
+X-Gm-Message-State: ALoCoQmMKwiLtupO84wsrdRk7MeLLKt3i2ZVvRtpLjkYD1JjcpAL+fpRACeOKNEBL0KJOzSXIP5m
+X-Received: by 10.152.3.42 with SMTP id 10mr35971740laz.22.1381837063351;
+	Tue, 15 Oct 2013 04:37:43 -0700 (PDT)
+Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
+	[91.152.78.194]) by mx.google.com with ESMTPSA id
+	vs11sm64213095lac.3.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 15 Oct 2013 04:37:43 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Oct 2013 14:37:36 +0300
+Message-Id: <1381837057-9403-1-git-send-email-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [PATCHv2 1/2] libjpeg-turbo: update to 1.3.0 release (svn r988)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,54 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2013 11:22:59 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Oct 2013 11:37:42 -0000
 
+ License files changes:
+ + * This file was part of the Independent JPEG Group's software:
+   * Copyright (C) 1991-1998, Thomas G. Lane.
+   * Modified 2002-2009 by Guido Vollbeding.
+ - * Copyright (C) 2009-2011, D. R. Commander.
+ - * This file is part of the Independent JPEG Group's software.
+ + * Modifications:
+ + * Copyright (C) 2009-2011, 2013, D. R. Commander.
 
-Op 15 okt. 2013, om 13:15 heeft Fathi Boudra <fathi.boudra@linaro.org> =
-het volgende geschreven:
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-
-Can you list in the commit message what made the license checksums =
-change?
-
-> ---
-> meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 9 ++++-----
-> 1 file changed, 4 insertions(+), 5 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb =
-b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> index 4fd258f..f18d37d 100644
-> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-> @@ -3,12 +3,11 @@ HOMEPAGE =3D "http://libjpeg-turbo.org/"
->=20
-> LICENSE =3D"BSD-3-Clause"
-> LIC_FILES_CHKSUM =3D =
-"file://cdjpeg.h;endline=3D12;md5=3D78fa8dbac547bb5b2a0e6457a6cfe21d \
-> -                    =
-file://jpeglib.h;endline=3D14;md5=3D7bb9a39828a1b1e84acd4e8aec1e5532 \
-> -                    =
-file://djpeg.c;endline=3D13;md5=3De85613b52f2906c5dfc0e21ec902cb33 \
-> +                    =
-file://jpeglib.h;endline=3D14;md5=3Da08bb0a80f782a9f8da313cc4015ed6f \
-> +                    =
-file://djpeg.c;endline=3D13;md5=3D03db065044529233c296324be85530ab \
-> "
-> -PV =3D "8d+1.2.1"
-> -PR =3D "r2"
-> -SRCREV =3D "837"
-> +PV =3D "8d+1.3.0"
-> +SRCREV =3D "988"
-> SRC_URI =3D =
-"svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=3D=
-https;module=3Dtrunk"
->=20
-> S =3D "${WORKDIR}/trunk"
-> --=20
-> 1.8.1.2
->=20
+diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+index 4fd258f..f18d37d 100644
+--- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
++++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+@@ -3,12 +3,11 @@ HOMEPAGE = "http://libjpeg-turbo.org/"
+ 
+ LICENSE ="BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
+-                    file://jpeglib.h;endline=14;md5=7bb9a39828a1b1e84acd4e8aec1e5532 \
+-                    file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
++                    file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
++                    file://djpeg.c;endline=13;md5=03db065044529233c296324be85530ab \
+ "
+-PV = "8d+1.2.1"
+-PR = "r2"
+-SRCREV = "837"
++PV = "8d+1.3.0"
++SRCREV = "988"
+ SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=https;module=trunk"
+ 
+ S = "${WORKDIR}/trunk"
+-- 
+1.8.1.2
 
 
