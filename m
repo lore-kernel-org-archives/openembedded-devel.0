@@ -1,37 +1,40 @@
 Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 80AEE60071
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id BA52F60071
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 12:54:35 +0000 (UTC)
-Received: by mail-lb0-f179.google.com with SMTP id x18so6660486lbi.24
+	Tue, 15 Oct 2013 12:54:36 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id q8so6698078lbi.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 05:54:36 -0700 (PDT)
+	Tue, 15 Oct 2013 05:54:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=K+pDg5fWwLjFtj/1Ur/933qeYv0xsVnDxSKf4uagOB0=;
-	b=VX1bm5EuTOg1Ln9T4zUkGvd7TqMhWqs8mZtfmrSyf3v903/Hod7z4g9KD84DYc8NgC
-	SaVJEuUeV61cddgJBqqwiL4qdiGbg0twA+UbQ1j0hxWNsa8wluU0lFO54AtRFUvetOjl
-	SiHKiWgMZdAXbTnr/kpy1kf+8aEWyHJuReZIbWTMLli036bD2OBeOaNMd9wFEW+FovdN
-	PtH8sWxhEzWVW1H2g9zcaXrmaOaHD0KH6GWsYqHSiApmYDHy/oiQ737t44tzGNPzB2ud
-	sJrU/1P9TLE9ZRjwa6vBqtExAu6ggGA5UTw1Z0fxJdDFX10Z7awWOwriIoVt52RljwFx
-	cxUQ==
-X-Gm-Message-State: ALoCoQmDyv8yGvI+z2DNIBWFWaiwTiZwlUIQmzPfJYZfPClDzbdgTv2imBoWaf/yNTNt/CE7rJBG
-X-Received: by 10.152.10.99 with SMTP id h3mr36049656lab.13.1381841676523;
-	Tue, 15 Oct 2013 05:54:36 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=G5b1lg5srdwKW1zynP+UXiqHlemwVXlBx/6gHwDEl5s=;
+	b=gUgFh1U0aH8z9ln181zqYvGrWsoIR3QRMujrQddUSrL8A9X0trHTyrzJeP6OPkILuL
+	f4e08bEeZ8FT+L9i5PYXqdGoSxR2IGhJX2V4pO9fEtnvKKgXbCvnDDqx5J5yBTB5B+p8
+	w5QxlkpDPdQZRG/vi65irkQxcK6Mir0IUW0D8Eisomp/UKytvCniOaVpB2NGF2ACJcrE
+	yGhxCgUSgH9lOWDJifj/ZxFtrdQnjOSFpN4FkfPgcu4CPq2ijoyyPry9H1Ljv1PCwRAD
+	/AU1sy3IT0oJA/hDUeOpOHCBaj2/go/Js16qosuQkbO2klWTxy9qt54ksDhWurOC0vV3
+	JEzQ==
+X-Gm-Message-State: ALoCoQmjF0QpbYQqEcRcZV9grqB/F92R2RXuYJzWDQn+7ClF2ZgxXtF30aRwzdFjHk4N2FvQu8x1
+X-Received: by 10.152.36.170 with SMTP id r10mr1220200laj.48.1381841677980;
+	Tue, 15 Oct 2013 05:54:37 -0700 (PDT)
 Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
 	[91.152.78.194]) by mx.google.com with ESMTPSA id
 	m13sm47404265lbo.11.1969.12.31.16.00.00
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 15 Oct 2013 05:54:35 -0700 (PDT)
+	Tue, 15 Oct 2013 05:54:37 -0700 (PDT)
 From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2013 15:54:27 +0300
-Message-Id: <1381841668-16211-1-git-send-email-fathi.boudra@linaro.org>
+Date: Tue, 15 Oct 2013 15:54:28 +0300
+Message-Id: <1381841668-16211-2-git-send-email-fathi.boudra@linaro.org>
 X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <1381841668-16211-1-git-send-email-fathi.boudra@linaro.org>
+References: <1381841668-16211-1-git-send-email-fathi.boudra@linaro.org>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [PATCHv3 1/2] libjpeg-turbo: update to 1.3.0 release (svn r988)
+Subject: [PATCHv3 2/2] libjpeg-turbo: fix variables spacing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,47 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2013 12:54:36 -0000
-
-License files changes:
- + * This file was part of the Independent JPEG Group's software:
-   * Copyright (C) 1991-1998, Thomas G. Lane.
-   * Modified 2002-2009 by Guido Vollbeding.
- - * Copyright (C) 2009-2011, D. R. Commander.
- - * This file is part of the Independent JPEG Group's software.
- + * Modifications:
- + * Copyright (C) 2009-2011, 2013, D. R. Commander.
-
-Update SRC_URI to match new SF layout.
+X-List-Received-Date: Tue, 15 Oct 2013 12:54:37 -0000
 
 Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 ---
- meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-index 4fd258f..cb3693f 100644
+index cb3693f..607d9de 100644
 --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
 +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
-@@ -3,13 +3,12 @@ HOMEPAGE = "http://libjpeg-turbo.org/"
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "libjpeg-turbo is a derivative of libjpeg that uses SIMD instructions (MMX, SSE2, NEON) to accelerate baseline JPEG compression and decompression"
+ HOMEPAGE = "http://libjpeg-turbo.org/"
  
- LICENSE ="BSD-3-Clause"
+-LICENSE ="BSD-3-Clause"
++LICENSE = "BSD-3-Clause"
  LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
--                    file://jpeglib.h;endline=14;md5=7bb9a39828a1b1e84acd4e8aec1e5532 \
--                    file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
-+                    file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
-+                    file://djpeg.c;endline=13;md5=03db065044529233c296324be85530ab \
- "
--PV = "8d+1.2.1"
--PR = "r2"
--SRCREV = "837"
--SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=https;module=trunk"
-+PV = "8d+1.3.0"
-+SRCREV = "988"
-+SRC_URI = "svn://svn.code.sf.net/p/libjpeg-turbo/code/trunk;protocol=https;module=trunk"
+                     file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
+                     file://djpeg.c;endline=13;md5=03db065044529233c296324be85530ab \
+@@ -25,7 +25,7 @@ EXTRA_OECONF = "--with-jpeg8 "
+ PACKAGES =+ "jpeg-tools libturbojpeg"
  
- S = "${WORKDIR}/trunk"
+ DESCRIPTION_jpeg-tools = "The jpeg-tools package includes the client programs for access libjpeg functionality.  These tools allow for the compression, decompression, transformation and display of JPEG files."
+-FILES_jpeg-tools =  "${bindir}/*"
++FILES_jpeg-tools = "${bindir}/*"
  
+ FILES_libturbojpeg = "${libdir}/libturbojpeg.so"
+ INSANE_SKIP_libturbojpeg = "dev-so"
 -- 
 1.8.1.2
 
