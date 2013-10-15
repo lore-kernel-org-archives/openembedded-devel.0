@@ -1,33 +1,35 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 2251B6CA74
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E6ED56CA74
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 21:28:06 +0000 (UTC)
-Received: by mail-ea0-f180.google.com with SMTP id h10so4166873eaj.25
+	Tue, 15 Oct 2013 22:43:49 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id bj1so95305pad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 14:28:08 -0700 (PDT)
+	Tue, 15 Oct 2013 15:43:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=C0NK7N3/n19SJIZ3D1HxFRKQyOntamxj8mcDrL3ljMA=;
-	b=rS1CP3S7h0yej+yjEtim2SvzD5joZ5R4mH25j6XrXhwu96XjrRmQnpDv7SQGzQ6E4d
-	KqLkOSm9xggWjDm3qVwLKlcXNY+5BPOz1rsaRnxiMaHUQj/OncmH6+FamiIvIkPqW1vq
-	CPKbF2R8Y03NYlpH+WT5FVnoMW31LiKw9Qa6rNmP3b8C9rfRkEYaRQIpI7JyHirHLoSy
-	ubPa8QnzzqmLQYPUCgi5iUqpajOChu7XfgJ/7tqnX1XhJn5wO42J/djqIKeo5GlMizK3
-	15zAWdyMLIMtArRcEpMNA4WUL3lXrau/dTT8HpvIa/nDVV1rsmhbAE+pVyf9zrWJUvzT
-	5DLw==
-X-Received: by 10.14.108.9 with SMTP id p9mr3838272eeg.8.1381872488658;
-	Tue, 15 Oct 2013 14:28:08 -0700 (PDT)
-Received: from mizar.localdomain ([95.237.174.211])
-	by mx.google.com with ESMTPSA id s3sm7854328eeo.3.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 15 Oct 2013 14:28:08 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	bh=BF1fJNyI2XdHLy14i1S6u8FEYjECB8fTI/q7SqnwCuE=;
+	b=yPfKohHdOKChlNsJRHujN996D7PUwyH5LPynliMEoYv33jSgNSnWd7VB4DBuJCWmbo
+	z0iNmiji7d06HT2J/jEA3hnar8XKwkVartdE3f5P71MgWrtvCcMD2wqsCmOjqPeVqLIR
+	4dmKncKzO62HALpTCe5gBM4bG2IogkI64ZPR368TNORgJjX1TpiCaagAl/HMnNQf8yRk
+	wybtv28FhcV9VUyDpUpyjyfZlDxS5Gldwk0DwKV+D6qp4d0VlMwSah0zVlHS3HoJNAvY
+	iP1GVbpz6WxbSdGX3PUiYMWOY3Dfph8Gu/AXtxmj+TLdrsNk7bCfhGUJilR2/1uclz43
+	z0Cw==
+X-Received: by 10.66.66.202 with SMTP id h10mr292284pat.70.1381877031709;
+	Tue, 15 Oct 2013 15:43:51 -0700 (PDT)
+Received: from haswell.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id
+	ve9sm86900850pbc.19.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 15 Oct 2013 15:43:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2013 23:28:04 +0200
-Message-Id: <1381872484-17568-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] motorola-ezx-base.inc: remove -n from EXTRA_IMAGECMD_jffs2
+Date: Tue, 15 Oct 2013 15:43:23 -0700
+Message-Id: <1381877008-698-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-systemd][PATCH 1/6] Match the bbappend to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,30 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2013 21:28:08 -0000
+X-List-Received-Date: Tue, 15 Oct 2013 22:43:50 -0000
 
-because it is already in IMAGE_CMD_jffs2 as default
-in image_types.bbclass
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/machine/include/motorola-ezx-base.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../connman/{connman_1.17.bbappend => connman_1.18.bbappend}              | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.17.bbappend => connman_1.18.bbappend} (100%)
 
-diff --git a/conf/machine/include/motorola-ezx-base.inc b/conf/machine/include/motorola-ezx-base.inc
-index d6bb42d..0bb9a5b 100644
---- a/conf/machine/include/motorola-ezx-base.inc
-+++ b/conf/machine/include/motorola-ezx-base.inc
-@@ -24,7 +24,7 @@ PREFERRED_PROVIDER_virtual/kernel ?= "openezx-kernel"
- 
- IMAGE_FSTYPES ?= "jffs2"
- JFFS2_ERASEBLOCK = "0x20000"
--EXTRA_IMAGECMD_jffs2 = "--pad=14680064 --little-endian --eraseblock=${JFFS2_ERASEBLOCK} -n"
-+EXTRA_IMAGECMD_jffs2 = "--pad=14680064 --little-endian --eraseblock=${JFFS2_ERASEBLOCK}"
- 
- # In order to enable UIBIFS add "uibi and ubifs"
- #IMAGE_FSTYPES += "ubi ubifs"
+diff --git a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.17.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.18.bbappend
+similarity index 100%
+rename from meta-systemd/oe-core/recipes-connectivity/connman/connman_1.17.bbappend
+rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.18.bbappend
 -- 
-1.8.1.5
+1.8.3.2
 
 
