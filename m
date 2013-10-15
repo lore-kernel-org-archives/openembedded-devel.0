@@ -1,37 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id DEA8D6CBAC
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C5686CBAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 11:39:52 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id d17so3974397eek.28
+	Tue, 15 Oct 2013 11:40:46 +0000 (UTC)
+Received: by mail-lb0-f177.google.com with SMTP id w7so6695634lbi.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 04:39:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=InOPOR4r4EHWDvI0s3Zk2xNgg3kNGqBMo+D/QVTSo6E=;
-	b=osLl+76cjtUj02TL/AA4EXVprLKpix70Noe3LiLmbXH+4ocl3IxMg+xt8BIyTRYhPW
-	K8iOEgNwYDiM/SROJFiKsy34bLqk4oSR3vWmSh3Q8nO/WEG7A9+WhkcEJRsykCE0Lx3Z
-	Uel9PwlAxvjf9HHcrR378X2sSVmTPmzZBAucCaPx27pmpWI8ntiV30fe+2nRFpHtwtdk
-	iDNW5rwERpUNRe/y03CFvVYFCZ5DIeDXav2pB0DC1Qe7OpC2jBUSuAn7ND0Jibw6nyHZ
-	8Jqv9dtcvsVHuVFOhNwLuokuPD5yd2aCWrNMMpKZofGpOjAV41Kankj2/XRnmsc3B5Cl
-	u6Ww==
-X-Received: by 10.14.109.66 with SMTP id r42mr110738eeg.43.1381837194183;
-	Tue, 15 Oct 2013 04:39:54 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
-	by mx.google.com with ESMTPSA id
-	j7sm165669787eeo.15.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 15 Oct 2013 04:39:53 -0700 (PDT)
-Date: Tue, 15 Oct 2013 13:39:56 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131015113956.GB3703@jama>
-References: <1381777605-6312-1-git-send-email-dv@pseudoterminal.org>
+	Tue, 15 Oct 2013 04:40:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=9zeOnOX16aV35WIXlGTtxEJL8SY5gYpZwhXAqzq7FuE=;
+	b=hZaSHH8jpHV15uJGtRGhcKX8mn3QzNXmI2OmqFs/bj6NOQ7UDxHGrv3JpS/+cFGjSn
+	vv5eESPM7k0nWGBcipYjLzqFkZY9kBF0+nCIZTnhApNDzGkeZSw8eYaiAQsqz/f85i9s
+	bogU+dAZRx9AxvJORuWEH7OvcmUlE0SuhSCEBL2HD9JHP/we/ULBoMEKsM6/6BQfLClo
+	cEtIKiBjA5/0fCuSq1S+HGgfsmnl5tp7oA2NUtlg5cwgjIZaNgou1hTHBowCJQ2I8KSz
+	SDHyNyldBl/xisPaUjcPsFgRqtxpSpmxOHvadKmJw4xLwCBbNyZOdeiLA/7h03/S75H+
+	5URg==
+X-Gm-Message-State: ALoCoQm6ofZ7Ze1wxwkXad4jU4NlwbUXATstJwhq5GxitvjTassVJl17vdmn4K+ZJeW53Y+9cqDo
 MIME-Version: 1.0
-In-Reply-To: <1381777605-6312-1-git-send-email-dv@pseudoterminal.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-oe][PATCH] orc: update to version 0.4.18
+X-Received: by 10.112.51.227 with SMTP id n3mr769731lbo.54.1381837247581; Tue,
+	15 Oct 2013 04:40:47 -0700 (PDT)
+Received: by 10.112.173.66 with HTTP; Tue, 15 Oct 2013 04:40:47 -0700 (PDT)
+In-Reply-To: <7AF48623-2F7B-443F-AC08-4241E115DAA1@dominion.thruhere.net>
+References: <1381835734-6969-1-git-send-email-fathi.boudra@linaro.org>
+	<7AF48623-2F7B-443F-AC08-4241E115DAA1@dominion.thruhere.net>
+Date: Tue, 15 Oct 2013 14:40:47 +0300
+Message-ID: <CAGNsrLC48yHc2LBkA2rVVOv6_d-kA-aHreA7phiEp=H+kNpTwA@mail.gmail.com>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] libjpeg-turbo: update to 1.3.0 release (svn r988)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,85 +45,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2013 11:39:54 -0000
-X-Groupsio-MsgNum: 46723
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="V0207lvV8h4k8FAm"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Oct 2013 11:40:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---V0207lvV8h4k8FAm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 15 October 2013 14:23, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>
+> Op 15 okt. 2013, om 13:15 heeft Fathi Boudra <fathi.boudra@linaro.org> het volgende geschreven:
+>
+>> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+>
+> Can you list in the commit message what made the license checksums change?
 
-For some reason patchwork replaces your full name in commit author with
-just e-mail:
-http://patchwork.openembedded.org/patch/59857/
+added in patch v2.
 
-I've fixed it manually when adding to contrib/jansa/in-test
+a line has been moved to the top:
++ * This file was part of the Independent JPEG Group's software:
 
-can you please check if there is something strange in your pw account?
+and an explicit modifications line has been added
++ * Modifications:
++ * Copyright (C) 2009-2011, 2013, D. R. Commander.
 
-On Mon, Oct 14, 2013 at 09:06:45PM +0200, Carlos Rafael Giani wrote:
-> This is the minimum required version for the Orc support in GStreamer 1.2
->=20
-> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-> ---
->  meta-oe/recipes-devtools/orc/orc_0.4.16.bb | 6 ------
->  meta-oe/recipes-devtools/orc/orc_0.4.18.bb | 6 ++++++
->  2 files changed, 6 insertions(+), 6 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.16.bb
->  create mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.18.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb b/meta-oe/recipes=
--devtools/orc/orc_0.4.16.bb
-> deleted file mode 100644
-> index bb193ab..0000000
-> --- a/meta-oe/recipes-devtools/orc/orc_0.4.16.bb
-> +++ /dev/null
-> @@ -1,6 +0,0 @@
-> -require orc.inc
-> -
-> -PR =3D "${INC_PR}.0"
-> -
-> -SRC_URI[orc.md5sum] =3D "e482932e544c847761449b106ecbc483"
-> -SRC_URI[orc.sha256sum] =3D "700e4edba20a0ed42164b645da26ce515b883d4c4633=
-b222302f1e541f2a58ab"
-> diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.18.bb b/meta-oe/recipes=
--devtools/orc/orc_0.4.18.bb
-> new file mode 100644
-> index 0000000..2375d8c
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/orc/orc_0.4.18.bb
-> @@ -0,0 +1,6 @@
-> +require orc.inc
-> +
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI[orc.md5sum] =3D "1a2552e8d127526c48d644fe6437b377"
-> +SRC_URI[orc.sha256sum] =3D "34d3c8a7259f42bed4dcfbc106c5e3d0cc8e17eeaa73=
-128d1c5eaf92883a6a24"
-> --=20
-> 1.8.4
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> ---
+>> meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb | 9 ++++-----
+>> 1 file changed, 4 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+>> index 4fd258f..f18d37d 100644
+>> --- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+>> +++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb
+>> @@ -3,12 +3,11 @@ HOMEPAGE = "http://libjpeg-turbo.org/"
+>>
+>> LICENSE ="BSD-3-Clause"
+>> LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
+>> -                    file://jpeglib.h;endline=14;md5=7bb9a39828a1b1e84acd4e8aec1e5532 \
+>> -                    file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
+>> +                    file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
+>> +                    file://djpeg.c;endline=13;md5=03db065044529233c296324be85530ab \
+>> "
+>> -PV = "8d+1.2.1"
+>> -PR = "r2"
+>> -SRCREV = "837"
+>> +PV = "8d+1.3.0"
+>> +SRCREV = "988"
+>> SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=https;module=trunk"
+>>
+>> S = "${WORKDIR}/trunk"
+>> --
+>> 1.8.1.2
+>>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---V0207lvV8h4k8FAm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlJdKYwACgkQN1Ujt2V2gByyPACeJOpQvYOBwO2IwMdQCzsQj3ZI
-THkAnA0ShAG54x6NCrQuSq4izkHYVnAT
-=CxiQ
------END PGP SIGNATURE-----
-
---V0207lvV8h4k8FAm--
