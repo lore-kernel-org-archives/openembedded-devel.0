@@ -1,28 +1,36 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D14E6CBA4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E613A6CCA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2013 03:39:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9G3dcTc011221
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 15 Oct 2013 20:39:38 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
-	Tue, 15 Oct 2013 20:39:37 -0700
-Message-ID: <525E0A78.4080000@windriver.com>
-Date: Wed, 16 Oct 2013 11:39:36 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	Wed, 16 Oct 2013 04:20:01 +0000 (UTC)
+Received: by mail-ie0-f172.google.com with SMTP id tp5so376475ieb.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Oct 2013 21:20:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=2I/Yb9JE5F9rsRqA7NgvW/Ai7xva3ErC2GxtKfOKLjs=;
+	b=CyNdn4bFnayJZEGxgqR7BYAvBAKR/toWhXKZ5FRnUJRLvmH9vfsulRV/xyD1Gto+5j
+	UL9tiP52LmHN+2aAECK/3G4q4zL0JBMk1cwgRMpFA/mVi1UQoOs3PHSsTKENgMXU703Y
+	2Gm6j1AYrcTd2mwxmxkRVHdZ40NIDOhyUy66I8abph8d1CLKyOrWVQg1ttdT9wQBcdas
+	sbzK47Z46RJ6jlFARRFDxJ1ItDzI9tlsDoBdy3zF9WZKpOGofXH6iUaDNvVUdYWjjWyr
+	IYAH/A3y+koXzUQ+8ePiqNkC+6NjjdX9GuKaoTyStf5ssnzAlFykPVN8GvqPkw0VhPF8
+	RWcw==
 MIME-Version: 1.0
-To: Emil Petersen <erp@movis.dk>
-References: <1378222691-13852-1-git-send-email-erp@movis.dk>
-	<525E009C.1040201@windriver.com>
-In-Reply-To: <525E009C.1040201@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl][PATCH] libdigest-md5-perl_2.53: added
+X-Received: by 10.50.26.36 with SMTP id i4mr522241igg.33.1381897203348; Tue,
+	15 Oct 2013 21:20:03 -0700 (PDT)
+Received: by 10.50.5.225 with HTTP; Tue, 15 Oct 2013 21:20:03 -0700 (PDT)
+In-Reply-To: <20131016004738.GI3703@jama>
+References: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
+	<1381653835-32079-4-git-send-email-raj.khem@gmail.com>
+	<20131016004738.GI3703@jama>
+Date: Tue, 15 Oct 2013 21:20:03 -0700
+Message-ID: <CAMKF1spG22HW2xdHXHTE_28STBiXKenX5xXrnSRTK587YGOHyQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 4/6] libmikmod: Upgrade libmikmod_3.2.0.bb -> libmikmod_3.3.2.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,63 +44,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2013 03:39:37 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Oct 2013 04:20:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/16/2013 10:57 AM, Hongxu Jia wrote:
-> On 09/03/2013 11:38 PM, Emil Petersen wrote:
->> Signed-off-by: Emil Petersen <erp@movis.dk>
->> ---
->>   .../libdigest-md5-perl/libdigest-md5-perl_2.53.bb      | 18 
->> ++++++++++++++++++
->>   1 file changed, 18 insertions(+)
->>   create mode 100644 
->> meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
->>
->> diff --git 
->> a/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb 
->>
->> new file mode 100644
->> index 0000000..bbbaf2d
->> --- /dev/null
->> +++ 
->> b/meta-perl/recipes-perl/libdigest-md5-perl/libdigest-md5-perl_2.53.bb
->> @@ -0,0 +1,18 @@
->> +SUMMARY = "Digest::MD5 - Perl interface to the MD5 Algorithm"
->> +AUTHOR = "Gisle Aas <gisle@activestate.com>"
->> +HOMEPAGE = "https://metacpan.org/module/Digest::MD5"
->> +SECTION = "libs"
->> +LICENSE = "Artistic-1.0 | GPL-1.0+"
->> +LIC_FILES_CHKSUM = "file://README;md5=2f93400875dbb56f36691d5f69f3eba5"
->> +
->> +RDEPENDS_${PN} = "libdigest-base-perl"
+On Tuesday, October 15, 2013, Martin Jansa wrote:
+
+> On Sun, Oct 13, 2013 at 01:43:53AM -0700, Khem Raj wrote:
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../mikmod/libmikmod/autofoo.patch                 |  16 --
+> >  .../mikmod/libmikmod/ldflags.patch                 |  12 --
+> >  .../recipes-multimedia/mikmod/libmikmod/m4.patch   | 197
+> ---------------------
+> >  .../libmikmod/obsolete_automake_macros.patch       |  15 --
+> >  .../{libmikmod_3.2.0.bb => libmikmod_3.3.2.bb}     |   9 +-
+> >  5 files changed, 2 insertions(+), 247 deletions(-)
+> >  delete mode 100644
+> meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
+> >  delete mode 100644
+> meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
+> >  delete mode 100644 meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
+> >  delete mode 100644
+> meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch
+> >  rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.2.0.bb =>
+> libmikmod_3.3.2.bb} (68%)
+> >
+> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
+> b/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
+> > deleted file mode 100644
+> > index 22d8170..0000000
+> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
+> > +++ /dev/null
+> > @@ -1,16 +0,0 @@
+> > -
+> > -#
+> > -# Patch managed by http://www.holgerschurig.de/patcher.html
+> > -#
+> > -
+> > ---- libmikmod-3.2.0-beta2/configure.in~autofoo
+> > -+++ libmikmod-3.2.0-beta2/configure.in
+> > -@@ -415,8 +415,6 @@
+> > -
+> > - AC_CHECK_FUNCS(setenv snprintf srandom)
+> > - AC_REPLACE_FUNCS(strcasecmp strdup strstr)
+> > --# Change extension, as we use libtool
+> > --LIBOBJS="`echo $LIBOBJS|sed -e 's/\.o/\.lo/g'`"
+> > -
+> > - AC_HEADER_EGREP(srandom,math.h,AC_DEFINE(SRANDOM_IN_MATH_H))
+> > -
+> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
+> b/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
+> > deleted file mode 100644
+> > index de31139..0000000
+> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
+> > +++ /dev/null
+> > @@ -1,12 +0,0 @@
+> > -diff -urN libmikmod-3.1.12.orig/libmikmod/Makefile.in
+> libmikmod-3.1.12/libmikmod/Makefile.in
+> > ---- libmikmod-3.1.12.orig/libmikmod/Makefile.in      2004-01-21
+> 17:43:52.000000000 +0000
+> > -+++ libmikmod-3.1.12/libmikmod/Makefile.in   2009-04-02
+> 11:28:01.000000000 +0000
+> > -@@ -72,7 +72,7 @@
+> > -     rm -f Makefile
+> > -
+> > - $(LIB): $(OBJ)
+> > --    $(LIBTOOL) --mode=link $(CC) -version-info 3:0:0 -o $@ $(OBJ)
+> $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
+> > -+    $(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -version-info 3:0:0 -o $@
+> $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
+> > -
+> > - dl_hpux.lo: $(top_srcdir)/dlapi/dl_hpux.c \
+> > -                     $(top_srcdir)/dlapi/dlfcn.h
+> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
+> b/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
+> > deleted file mode 100644
+> > index ac7f2d7..0000000
+> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
+> > +++ /dev/null
+> > @@ -1,197 +0,0 @@
+> > ---- /dev/null
+> > -+++ libmikmod-3.2.0-beta2/m4/esd.m4
+> > -@@ -0,0 +1,194 @@
+> > -+# Configure paths for ESD
+> > -+# Manish Singh    98-9-30
+> > -+# stolen back from Frank Belew
+> > -+# stolen from Manish Singh
+> > -+# Shamelessly stolen from Owen Taylor
+> > -+
+> > -+dnl AM_PATH_ESD([MINIMUM-VERSION, [ACTION-IF-FOUND [,
+> ACTION-IF-NOT-FOUND]]])
+> > -+dnl Test for ESD, and define ESD_CFLAGS and ESD_LIBS
+> > -+dnl
+> > -+AC_DEFUN(AM_PATH_ESD,
+> > -+[dnl
+> > -+dnl Get the cflags and libraries from the esd-config script
+> > -+dnl
+> > -+AC_ARG_WITH(esd-prefiIt looks like 3.3.2 archive was removed today and
+> there is only 3.3.3.
 >
-> Which recipe provides libdigest-base-perl?
+> Old is still available on proper SF mirror:
+> http://sourceforge.net/projects/mikmod/files/libmikmod/3.3.2/
+
+
+Hmm I will update it to 3.3.3 and resend
+
 >
-
-Should be RDEPENDS_${PN} = "perl-module-digest-base"
-
-//Hongxu
-
-> //Hongxu
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com <javascript:;>
 >
->> +
->> +SRC_URI = 
->> "http://cpan.metacpan.org/authors/id/G/GA/GAAS/Digest-MD5-${PV}.tar.gz"
->> +SRC_URI[md5sum] = "affc629d05c4c7b3efe4b3b874bce528"
->> +SRC_URI[sha256sum] = 
->> "cde667c0c0c8a4d819d332ba9a4cad7e9f75fc7cabd490aae405ce7bc54d5152"
->> +
->> +S = "${WORKDIR}/Digest-MD5-${PV}"
->> +
->> +inherit cpan
->> +
->> +BBCLASSEXTEND = "native"
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
 
