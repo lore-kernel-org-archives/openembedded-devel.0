@@ -1,36 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id E613A6CCA3
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C48DC6CCA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2013 04:20:01 +0000 (UTC)
-Received: by mail-ie0-f172.google.com with SMTP id tp5so376475ieb.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2013 21:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=2I/Yb9JE5F9rsRqA7NgvW/Ai7xva3ErC2GxtKfOKLjs=;
-	b=CyNdn4bFnayJZEGxgqR7BYAvBAKR/toWhXKZ5FRnUJRLvmH9vfsulRV/xyD1Gto+5j
-	UL9tiP52LmHN+2aAECK/3G4q4zL0JBMk1cwgRMpFA/mVi1UQoOs3PHSsTKENgMXU703Y
-	2Gm6j1AYrcTd2mwxmxkRVHdZ40NIDOhyUy66I8abph8d1CLKyOrWVQg1ttdT9wQBcdas
-	sbzK47Z46RJ6jlFARRFDxJ1ItDzI9tlsDoBdy3zF9WZKpOGofXH6iUaDNvVUdYWjjWyr
-	IYAH/A3y+koXzUQ+8ePiqNkC+6NjjdX9GuKaoTyStf5ssnzAlFykPVN8GvqPkw0VhPF8
-	RWcw==
+	Wed, 16 Oct 2013 05:46:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9G5kEjN020562
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 15 Oct 2013 22:46:14 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
+	Tue, 15 Oct 2013 22:46:13 -0700
+Message-ID: <525E2824.3070303@windriver.com>
+Date: Wed, 16 Oct 2013 13:46:12 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-X-Received: by 10.50.26.36 with SMTP id i4mr522241igg.33.1381897203348; Tue,
-	15 Oct 2013 21:20:03 -0700 (PDT)
-Received: by 10.50.5.225 with HTTP; Tue, 15 Oct 2013 21:20:03 -0700 (PDT)
-In-Reply-To: <20131016004738.GI3703@jama>
-References: <1381653835-32079-1-git-send-email-raj.khem@gmail.com>
-	<1381653835-32079-4-git-send-email-raj.khem@gmail.com>
-	<20131016004738.GI3703@jama>
-Date: Tue, 15 Oct 2013 21:20:03 -0700
-Message-ID: <CAMKF1spG22HW2xdHXHTE_28STBiXKenX5xXrnSRTK587YGOHyQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 4/6] libmikmod: Upgrade libmikmod_3.2.0.bb -> libmikmod_3.3.2.bb
+To: Emil Petersen <erp@movis.dk>
+References: <1378222415-13643-1-git-send-email-erp@movis.dk>
+In-Reply-To: <1378222415-13643-1-git-send-email-erp@movis.dk>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-perl] libwww-perl_5.834: added
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,113 +35,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2013 04:20:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Oct 2013 05:46:13 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tuesday, October 15, 2013, Martin Jansa wrote:
-
-> On Sun, Oct 13, 2013 at 01:43:53AM -0700, Khem Raj wrote:
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  .../mikmod/libmikmod/autofoo.patch                 |  16 --
-> >  .../mikmod/libmikmod/ldflags.patch                 |  12 --
-> >  .../recipes-multimedia/mikmod/libmikmod/m4.patch   | 197
-> ---------------------
-> >  .../libmikmod/obsolete_automake_macros.patch       |  15 --
-> >  .../{libmikmod_3.2.0.bb => libmikmod_3.3.2.bb}     |   9 +-
-> >  5 files changed, 2 insertions(+), 247 deletions(-)
-> >  delete mode 100644
-> meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
-> >  delete mode 100644
-> meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
-> >  delete mode 100644 meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
-> >  delete mode 100644
-> meta-oe/recipes-multimedia/mikmod/libmikmod/obsolete_automake_macros.patch
-> >  rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.2.0.bb =>
-> libmikmod_3.3.2.bb} (68%)
-> >
-> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
-> b/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
-> > deleted file mode 100644
-> > index 22d8170..0000000
-> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/autofoo.patch
-> > +++ /dev/null
-> > @@ -1,16 +0,0 @@
-> > -
-> > -#
-> > -# Patch managed by http://www.holgerschurig.de/patcher.html
-> > -#
-> > -
-> > ---- libmikmod-3.2.0-beta2/configure.in~autofoo
-> > -+++ libmikmod-3.2.0-beta2/configure.in
-> > -@@ -415,8 +415,6 @@
-> > -
-> > - AC_CHECK_FUNCS(setenv snprintf srandom)
-> > - AC_REPLACE_FUNCS(strcasecmp strdup strstr)
-> > --# Change extension, as we use libtool
-> > --LIBOBJS="`echo $LIBOBJS|sed -e 's/\.o/\.lo/g'`"
-> > -
-> > - AC_HEADER_EGREP(srandom,math.h,AC_DEFINE(SRANDOM_IN_MATH_H))
-> > -
-> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
-> b/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
-> > deleted file mode 100644
-> > index de31139..0000000
-> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/ldflags.patch
-> > +++ /dev/null
-> > @@ -1,12 +0,0 @@
-> > -diff -urN libmikmod-3.1.12.orig/libmikmod/Makefile.in
-> libmikmod-3.1.12/libmikmod/Makefile.in
-> > ---- libmikmod-3.1.12.orig/libmikmod/Makefile.in      2004-01-21
-> 17:43:52.000000000 +0000
-> > -+++ libmikmod-3.1.12/libmikmod/Makefile.in   2009-04-02
-> 11:28:01.000000000 +0000
-> > -@@ -72,7 +72,7 @@
-> > -     rm -f Makefile
-> > -
-> > - $(LIB): $(OBJ)
-> > --    $(LIBTOOL) --mode=link $(CC) -version-info 3:0:0 -o $@ $(OBJ)
-> $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
-> > -+    $(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -version-info 3:0:0 -o $@
-> $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
-> > -
-> > - dl_hpux.lo: $(top_srcdir)/dlapi/dl_hpux.c \
-> > -                     $(top_srcdir)/dlapi/dlfcn.h
-> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
-> b/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
-> > deleted file mode 100644
-> > index ac7f2d7..0000000
-> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod/m4.patch
-> > +++ /dev/null
-> > @@ -1,197 +0,0 @@
-> > ---- /dev/null
-> > -+++ libmikmod-3.2.0-beta2/m4/esd.m4
-> > -@@ -0,0 +1,194 @@
-> > -+# Configure paths for ESD
-> > -+# Manish Singh    98-9-30
-> > -+# stolen back from Frank Belew
-> > -+# stolen from Manish Singh
-> > -+# Shamelessly stolen from Owen Taylor
-> > -+
-> > -+dnl AM_PATH_ESD([MINIMUM-VERSION, [ACTION-IF-FOUND [,
-> ACTION-IF-NOT-FOUND]]])
-> > -+dnl Test for ESD, and define ESD_CFLAGS and ESD_LIBS
-> > -+dnl
-> > -+AC_DEFUN(AM_PATH_ESD,
-> > -+[dnl
-> > -+dnl Get the cflags and libraries from the esd-config script
-> > -+dnl
-> > -+AC_ARG_WITH(esd-prefiIt looks like 3.3.2 archive was removed today and
-> there is only 3.3.3.
+On 09/03/2013 11:33 PM, Emil Petersen wrote:
+> libwww which provides most of LWP::* added
 >
-> Old is still available on proper SF mirror:
-> http://sourceforge.net/projects/mikmod/files/libmikmod/3.3.2/
-
-
-Hmm I will update it to 3.3.3 and resend
-
+> Signed-off-by: Emil Petersen <erp@movis.dk>
+> ---
+>   .../recipes-perl/libwww-perl/libwww-perl_5.834.bb  | 68 ++++++++++++++++++++++
+>   1 file changed, 68 insertions(+)
+>   create mode 100644 meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
 >
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com <javascript:;>
->
+> diff --git a/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb b/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
+> new file mode 100644
+> index 0000000..f1a77d5
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libwww-perl/libwww-perl_5.834.bb
+> @@ -0,0 +1,68 @@
+> +SUMMARY = "libwww-perl provides a simple and consistent API to the World Wide Web"
+> +AUTHOR = "Gisle Aas <gisle@activestate.com>"
+> +HOMEPAGE = "https://metacpan.org/release/libwww-perl"
+> +SECTION = "libs"
+> +LICENSE = "Artistic-1.0 | GPL-1.0+"
+> +LIC_FILES_CHKSUM = "file://README;md5=b7d978c7767cb9fb392f80103af8ca0a"
+> +
+> +RDEPENDS_${PN} += "libdigest-md5-perl \
+> +                   libencode-perl \
+> +                   libencode-locale-perl \
+> +                   libfile-listing-perl \
+> +                   libhtml-entities-perl \
+> +                   libhtml-headparser-perl \
+> +                   libhttp-date-perl \
+> +                   libhttp-cookies-perl \
+> +                   libhttp-daemon-perl \
+> +                   libhttp-negotiate-perl \
+> +                   libhttp-request-perl \
+> +                   libhttp-request-common-perl \
+> +                   libhttp-response-perl \
+> +                   libhttp-status-perl \
+
+Which recipe provides the 'libhttp-*' ?
+
+> +                   libio-select-perl \
+
+s/libio-select-perl/perl-module-io-select/
+
+> +                   libio-socket-perl \
+
+s/libio-socket-perl/perl-module-io-socket/
+
+> +                   liblwp-mediatypes-perl \
+
+Which recipe provides the liblwp-mediatypes-perl?
+
+> +                   libmime-base64-perl \
+
+s/libmime-base64-perl/perl-module-mime-base64/
+
+> +                   libnet-ftp-perl \
+
+s/libnet-ftp-perl/perl-module-net-ftp/
+
+> +                   libnet-http-perl \
+
+Which recipe provides the libnet-http-perl?
+
+> +                   liburi-perl \
+
+Which recipe provides the liburi-perl?
+
+> +                   liburi-escape-perl \
+
+Which recipe provides the liburi-escape-perl?
+
+> +                   libwww-robotrules-perl \
+
+Which recipe provides the libwww-robotrules-perl?
+
+//Hongxu
+
+> +                   "
+> +
+> +RPROVIDES_${PN} += "liblwp-perl \
+> +                    liblwp-authen-ntlm-perl \
+> +                    liblwp-conncache-perl \
+> +                    liblwp-debug-perl \
+> +                    liblwp-membermixin-perl \
+> +                    liblwp-protocol-perl \
+> +                    liblwp-robotua-perl \
+> +                    liblwp-simple-perl \
+> +                    liblwp-useragent-perl \
+> +                    liblwp-authen-basic-perl \
+> +                    liblwp-authen-digest-perl \
+> +                    liblwp-protocol-cpan-perl \
+> +                    liblwp-protocol-data-perl \
+> +                    liblwp-protocol-file-perl \
+> +                    liblwp-protocol-ftp-perl \
+> +                    liblwp-protocol-ghttp-perl \
+> +                    liblwp-protocol-gopher-perl \
+> +                    liblwp-protocol-http-perl \
+> +                    liblwp-protocol-http-socket-perl \
+> +                    liblwp-protocol-http-socketmethods-perl \
+> +                    liblwp-protocol-loopback-perl \
+> +                    liblwp-protocol-mailto-perl \
+> +                    liblwp-protocol-myftp-perl \
+> +                    liblwp-protocol-nntp-perl \
+> +                    liblwp-protocol-nogo-perl \
+> +                    "
+> +
+> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/libwww-perl-${PV}.tar.gz;name=libwww-perl-${PV}"
+> +SRC_URI[libwww-perl-5.834.md5sum] = "f2ed8a461f76556c9caed9087f47c86c"
+> +SRC_URI[libwww-perl-5.834.sha256sum] = "1a50eb91d1deeca3be10982e129e786809ad6f0f8049b156e91e889e5a7288ff"
+> +
+> +S = "${WORKDIR}/libwww-perl-${PV}"
+> +
+> +inherit cpan
+> +
+> +BBCLASSEXTEND = "native"
+
 
