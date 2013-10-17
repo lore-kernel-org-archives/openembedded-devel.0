@@ -1,37 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id AD8766CDB6
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id C61D16CC8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 23:12:27 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id lj1so2835714pab.8
+	Thu, 17 Oct 2013 23:21:57 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id n12so1399921wgh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 16:12:29 -0700 (PDT)
+	Thu, 17 Oct 2013 16:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=/XchgCcj7UPtspjkI7j/1rr3yobsR8SfY+h8ebIygc4=;
-	b=mvYkYsP156vrCHVFAC484HXc5zOLLcNGxxv0CF+DHqpFYtkQ+aVzV3Uwqjjq8gCveH
-	KinqVx19NewJSa2W2X9YDCHVVmDqQYv7U34x9ZsDreOUp8qrj4MlyHHsVbKPoIooI2LO
-	SpO2B5Pc2FzL3L0ICtUUsBs5h1389E+nNskwdxOv33/As9kgdiX80WashlVl8mwI2rQy
-	JktEYCULljvTkBFK3HGA0KJVcFWjIMwn0Ouu6yHkbgGRJB36e3apjtl+NI3CeacGYEtV
-	d/JmotE4DePNMiZea6TSOjyh6e9LH7KbvG0wys04C2/au5HByHR+7Ku0RZySISAsMnO4
-	HkfQ==
-X-Received: by 10.68.172.164 with SMTP id bd4mr10837376pbc.153.1382051549746; 
-	Thu, 17 Oct 2013 16:12:29 -0700 (PDT)
-Received: from haswell.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	fa4sm117337667pab.17.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Oct 2013 16:12:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2013 16:12:00 -0700
-Message-Id: <1382051520-1562-3-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
-References: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCv2 3/3] mikmod: Upgrade 3.3.2 -> 3.3.3
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Yoj7g6c376Pess3xsy45m+CmMWplG1J4YLztLYuPiZo=;
+	b=ESawBA2BI1hzK26uvyfiyWVX3QEofH0OXAWIVUtwEwYdqhttfGSW+r8ckAezTSvhat
+	C2TGAm5cLr7y1vHI6RQQZTvsafKsYzKa5YSrd1P2QsUXK6046h4ADrWidj5+O9wxr/9U
+	+YOxiE6Gde+UiritL3J2SYdZOSOKL5f1WdWto4M0NqHK6d0ARs1kBd0AYVfA3SLmGer+
+	Lc/yiMwNR9ioz6/A11UTvcHVLPhiZtTGDaBlue+T2gLZ4toxAkXRgrI/6WvmG7YzX6wO
+	CB2h5YPzh9QHDIUAyjP30d5zeHUJpgZOR1KlkRPyiiON6G24aV6KWRIy90mOh8/uAhNv
+	pWSA==
+MIME-Version: 1.0
+X-Received: by 10.194.176.163 with SMTP id cj3mr32800wjc.8.1382052118801; Thu,
+	17 Oct 2013 16:21:58 -0700 (PDT)
+Received: by 10.194.48.15 with HTTP; Thu, 17 Oct 2013 16:21:58 -0700 (PDT)
+In-Reply-To: <3526425.HOOTbMNAZg@helios>
+References: <1381296824-30294-1-git-send-email-stephen.arnold42@gmail.com>
+	<3526425.HOOTbMNAZg@helios>
+Date: Thu, 17 Oct 2013 16:21:58 -0700
+Message-ID: <CAOLEWZUEBnsnshvavy3tanfPvV-ZeKduZW8_u-MnGF2zsAMsww@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-openembedded/meta-webserver][PATCH] nginx: new recipe, updated from aging original in rpi layer (has not been scrubbed for any potential policy issues).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +43,198 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2013 23:12:27 -0000
+X-List-Received-Date: Thu, 17 Oct 2013 23:22:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../mikmod/{libmikmod_3.3.2.bb => libmikmod_3.3.3.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.2.bb => libmikmod_3.3.3.bb} (70%)
+Paul:
 
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-similarity index 70%
-rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
-rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-index 4ab293f..6a3077f 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
- DEPENDS = "alsa-lib texinfo"
- 
- SRC_URI = "\
--    http://mikmod.shlomifish.org/files/${P}.tar.gz \
-+    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "60ac77a804d082230df3009af11ef44f"
--SRC_URI[sha256sum] = "2311b209255bf24e95161907a16778cb054ac6d447fd8d05f1f0e41a555c7580"
-+SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
-+SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
- 
- inherit autotools binconfig lib_package
- 
--- 
-1.8.3.2
+Okay, I have a cleaner and more compliant recipe and a few questions for
+your comments.  See below...
 
+
+On Wed, Oct 9, 2013 at 2:55 AM, Paul Eggleton <paul.eggleton@linux.intel.com
+> wrote:
+
+> Hi Stephen,
+>
+> Thanks for sending this. A few comments below.
+>
+> On Tuesday 08 October 2013 22:33:44 stephen.arnold42 wrote:
+> > From: "stephen.arnold42" <stephen.arnold42@gmail.com>
+>
+> Ideally the part of the subject from "updated..." onwards should go into
+> the
+> commit message. You should really specify that the "rpi" layer you refer
+> to is
+> your own.
+>
+
+So,  [meta-openembedded/meta-webserver][PATCH] nginx: new recipe] and be
+more accurate about lineage.
+
+I only know the IRC nick of the original author of the old recipe
+(bencoh).  I wrote the init script and minimal config file, made sure
+everything built and ran correctly in the rpi-image, and made an rpi-data
+package.  That lead to me making a newer (generic) recipe for 1.4.0 (but
+without the rpi-graphics).  How should I describe that?  With bencoh as the
+original author and me as "upstream"?
+
+
+> > +++ b/meta-webserver/recipes-httpd/nginx/files/nginx-cross_1.4.0.diff
+> > @@ -0,0 +1,212 @@
+> > +diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
+>
+> Could you please add a header to this patch mentioning what it does, the
+> origin if it wasn't something you wrote, the Upstream-Status and your
+> Signed-
+> off-by?
+>
+
+So you want a bigger commit message mentioning the above in front of the
+signed-off-by that's already there?  Origin is described above (bencoh and
+then me) but what do you mean by "Upstream-Status"?  Who/what is upstream
+in this case?
+
+
+> > +DESCRIPTION = "HTTP and reverse proxy server"
+>
+> Please set this as SUMMARY rather than DESCRIPTION since it's one line.
+>
+> > +HOMEPAGE = "http://nginx.org/"
+> > +LICENSE = "BSD"
+>
+> Can we be specific about which BSD license this is? Looking at it I think
+> "BSD-2-Clause" is the correct one.
+>
+> > +SECTION = "net"
+> > +PRIORITY = "optional"
+>
+> Please drop PRIORITY, we don't use this anymore.
+>
+
+Done, done, and done.
+
+
+
+> > +DEPENDS = "libpcre gzip openssl"
+> > +
+> > +PR = "r4"
+>
+> PR should ideally be dropped since this is a new recipe for public layers.
+>
+
+Dropped completely, or set PR = "r0" ?
+
+
+> > +SRC_URI = " \
+> > +     http://nginx.org/download/nginx-${PV}.tar.gz \
+> > +     file://nginx-cross_${PV}.diff;name=crosspatch \
+> > +     file://nginx.conf \
+> > +     file://nginx.init \
+> > +"
+> > +
+> > +S = "${WORKDIR}/nginx-${PV}"
+>
+> This is the default value for S ("${WORKDIR}/${BP}" where BP is
+> "${BPN}-${PV}"
+> and BPN is "nginx") so no need to set this.
+>
+> > +inherit autotools update-rc.d useradd
+>
+> I could be mistaken, but looking at the source it doesn't appear to be
+> using
+> autotools, in which case inheriting autotools wouldn't be right. That does
+> mean you'll have to define your own do_install (doing
+> "oe_runmake 'DESTDIR=${D}' install" before what you currently have in
+> do_install_append).
+>
+> > +SRC_URI[md5sum] = "d496e58864ab10ed56278b7655b0d0b2"
+> > +SRC_URI[sha256sum] =
+> > "84aeb7a131fccff036dc80283dd98c989d2844eb84359cfe7c4863475de923a9"
+> > +SRC_URI[crosspatch.md5sum] = "707c4cdd6bb82719ea2ed50971101c21"
+> > +SRC_URI[crosspatch.sha256sum] =
+> > "96cc3b087126caaa0951ab3e3f9f26169e9caf283dd2aeb689ed6c435070f052"
+>
+> We don't normally checksum local files such as "crosspatch".
+>
+> > +LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=917bfdf005ffb6fd025550414ff05a9f" +
+> > +CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
+> > +             ${sysconfdir}/nginx/fastcgi.conf\
+> > +             ${sysconfdir}/nginx/fastcgi_params \
+> > +             ${sysconfdir}/nginx/koi-utf \
+> > +             ${sysconfdir}/nginx/koi-win \
+> > +             ${sysconfdir}/nginx/mime.types \
+> > +             ${sysconfdir}/nginx/scgi_params \
+> > +             ${sysconfdir}/nginx/uwsgi_params \
+> > +             ${sysconfdir}/nginx/win-utf \
+> > +"
+> > +
+> > +INITSCRIPT_NAME = "nginx"
+> > +INITSCRIPT_PARAMS = "defaults 92 20"
+> > +
+> > +do_configure () {
+> > +     PTRSIZE=$(expr ${SITEINFO_BITS} / 8)
+> > +
+> > +     echo $CFLAGS
+> > +     echo $LDFLAGS
+> > +
+> > +     ./configure \
+> > +     --crossbuild=Linux:${TUNE_ARCH} \
+> > +     --with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le',
+> 'little',
+> > 'big', d)} \ +        --with-int=4 \
+> > +     --with-long=${PTRSIZE} \
+> > +     --with-long-long=8 \
+> > +     --with-ptr-size=${PTRSIZE} \
+> > +     --with-sig-atomic-t=${PTRSIZE} \
+> > +     --with-size-t=${PTRSIZE} \
+> > +     --with-off-t=${PTRSIZE} \
+> > +     --with-time-t=${PTRSIZE} \
+> > +     --with-sys-nerr=132 \
+> > +     --conf-path=/etc/nginx/nginx.conf \
+> > +     --http-log-path=/var/log/nginx/access.log \
+> > +     --error-log-path=/var/log/nginx/error.log \
+> > +     --pid-path=/var/run/nginx/nginx.pid \
+> > +     --prefix=/usr \
+> > +     --with-http_ssl_module \
+> > +     --with-http_gzip_static_module
+> > +}
+> > +
+> > +do_install_append () {
+> > +    install -d ${D}${localstatedir}/www/localhost
+> > +    mv ${D}/usr/html ${D}${localstatedir}/www/localhost/
+> > +    chown www:www-data -R ${D}${localstatedir}
+> > +
+> > +    install -d ${D}${sysconfdir}/init.d
+> > +    install -d ${D}${sysconfdir}/nginx
+> > +    install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
+> > +    install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/
+> > +
+> > +    install -d ${D}${sysconfdir}/default/volatiles
+> > +    echo "d www www-data 0755 ${localstatedir}/run/nginx none" \
+> > +        > ${D}${sysconfdir}/default/volatiles/99_nginx
+> > +}
+> > +
+> > +FILES_${PN} += "${localstatedir}/ /run/"
+>
+> I don't think we should be adding /run/ here. There is a guide on how to
+> deal
+> with unshipped file/dir warnings for /run in case you haven't seen it:
+>
+> http://permalink.gmane.org/gmane.comp.handhelds.openembedded/58530
+>
+
+Thanks, and done.
+
+
+
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
 
