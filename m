@@ -1,35 +1,40 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 637886CF14
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FDCF60FF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 12:16:10 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VWmUs-0005N1-VB for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Oct 2013 14:16:10 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 14:16:10 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 17 Oct 2013 15:33:59 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id a15so1169452eae.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 14:16:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=fE6WW5IEp/qj2C/bOqShNaPzHfzSGjWURjuxHfhi0Ek=;
+	b=uPBxAObRAe+KlFEi26hjm7J38oWWP3ADC30REdU7RT4bubRiiImri/Sf0602wMTL++
+	pDgJP+3WAyRgsz/09wR/xVT2apKiPqIpgmMW1VgcGwv0O9RG1cFtqJ9ZjUD3OPlCNAGJ
+	zNLIuT232m80+td/g6L2lq5/5hGZ1aTVNiDFdLkIewYilMy/gxcKKqDfjFwzMnWSCiND
+	431QvUAHaViRO5vrM0DO4z+Pq4slXphHrC2hYo6qDfWOGZnRuLn6NQwReKCHnlCX+B+j
+	+5KoHWUXAWkXpET6pfNXf2RvQ8Xn037nSRcVV9xRKurR/SR5zZJ6VmeZYXOy/zv/EQQo
+	1ojQ==
+X-Received: by 10.15.98.194 with SMTP id bj42mr13613028eeb.12.1382024040910;
+	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
+Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	by mx.google.com with ESMTPSA id
+	j7sm194374200eeo.15.1969.12.31.16.00.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
+Date: Thu, 17 Oct 2013 17:34:05 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 Oct 2013 14:16:04 +0200
-Message-ID: <l3okdo$e0u$1@ger.gmane.org>
-References: <1381795394-21464-1-git-send-email-schnitzeltony@googlemail.com>
-	<1381795394-21464-2-git-send-email-schnitzeltony@googlemail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8;
-	rv:17.0) Gecko/20130801 Thunderbird/17.0.8
-In-Reply-To: <1381795394-21464-2-git-send-email-schnitzeltony@googlemail.com>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [meta-gnome/meta-systemd 1/2] orbit2: fix build after automake 1.13.4 update
+Message-ID: <20131017153405.GC3930@jama>
+References: <1381760413-15098-1-git-send-email-ml@communistcode.co.uk>
+	<1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: Re: [meta-oe][PATCHv3 1/3] json-c: add 0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,42 +48,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2013 12:16:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Oct 2013 15:34:00 -0000
+X-Groupsio-MsgNum: 46772
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uh9ZiVrAOUUm9fzH"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--uh9ZiVrAOUUm9fzH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Op 15-10-13 02:03, Andreas Müller schreef:
-> fixes: | test/everything/Makefile.am:81: error: using '$(srcdir)' in
-> TESTS is currently broken: '$(srcdir)/test.sh' |
-> test/inhibit/Makefile.am:4: warning: 'INCLUDES' is the old name for
-> 'AM_CPPFLAGS' (or '*_CPPFLAGS') | test/poa/Makefile.am:1: warning:
-> 'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS') |
-> autoreconf: automake failed with exit status: 1 | ERROR: autoreconf
-> execution failed. | WARNING:
-> /home/superandy/tmp/oe-core-eglibc/work/x86_64-linux/orbit2-native/2.14.19-r0/temp/run.do_configure.14800:1
-> exit 1 from |   exit 1 | ERROR: Function failed: do_configure (log file
-> is located at
-> /home/superandy/tmp/oe-core-eglibc/work/x86_64-linux/orbit2-native/2.14.19-r0/temp/log.do_configure.14800)
->
-> 
-ERROR: Task 6208
-(virtual:native:/home/superandy/data/oe-core/sources/meta-openembedded/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb,
-do_configure) failed with exit code '1'
-> 
-> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+On Mon, Oct 14, 2013 at 03:20:11PM +0100, Jack Mitchell wrote:
+> From: Jack Mitchell <jmitchell@cbnl.com>
+>=20
+> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
+> ---
+>  meta-oe/recipes-support/json-c/json-c_0.11.bb | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
+>=20
+> diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/reci=
+pes-support/json-c/json-c_0.11.bb
+> new file mode 100644
+> index 0000000..e0391f5
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY =3D "JSON-C implements a reference counting object model that al=
+lows you to easily construct JSON objects in C"
+> +HOMEPAGE =3D "https://github.com/json-c/json-c/wiki"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dde54b60fbbc35123ba193fea8ee21=
+6f2"
+> +
+> +SRC_URI =3D "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.=
+gz"
+> +
+> +SRC_URI[md5sum] =3D "aa02367d2f7a830bf1e3376f77881e98"
+> +SRC_URI[sha256sum] =3D "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983e=
+dbfac9149494448c"
+> +
+> +PARALLEL_MAKE =3D ""
+> +
+> +inherit autotools
 
-Applied, thanks!
+It conflicts with libjson from oe-core:
+WARNING: libjson-0.9 is already registered as shlib
+provider for libjson.so.0, ignoring json-c-0.11 trying to register the
+same
+
+openembedded-core/meta/recipes-devtools/libjson/libjson_0.9.bb
+
+You probably want to upgrade libjson in oe-core if it's the same json-c...
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--uh9ZiVrAOUUm9fzH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-iD8DBQFSX9UDMkyGM64RGpERAsFSAKC5S+2nljBJc6tD6/vS+fD4letp3gCggZZp
-K0RjMUV6W1SUOHVN6gkTjj8=
-=ET3y
+iEYEARECAAYFAlJgA20ACgkQN1Ujt2V2gByN0gCgpdQgYqU2V6fXqoWs4NR3dXa8
+29YAoIEXqfBUrbDhXG+goomAe5wdgLmT
+=EGRi
 -----END PGP SIGNATURE-----
 
-
+--uh9ZiVrAOUUm9fzH--
