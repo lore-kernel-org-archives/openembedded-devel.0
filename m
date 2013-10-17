@@ -1,16 +1,14 @@
 Return-Path: <obi@opendreambox.org>
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C6356CD0E
+	by mail.openembedded.org (Postfix) with ESMTP id 21F356CF32
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 11:38:14 +0000 (UTC)
+	Thu, 17 Oct 2013 11:38:15 +0000 (UTC)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2013 13:38:11 +0200
-Message-Id: <1382009891-6444-2-git-send-email-obi@opendreambox.org>
+Date: Thu, 17 Oct 2013 13:38:10 +0200
+Message-Id: <1382009891-6444-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1382009891-6444-1-git-send-email-obi@opendreambox.org>
-References: <1382009891-6444-1-git-send-email-obi@opendreambox.org>
-Subject: [PATCH 2/2] autofs: change DESCRIPTION to SUMMARY
+Subject: [PATCH 1/2] autofs: pass systemd directory to configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,21 +24,25 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 17 Oct 2013 11:38:15 -0000
 
+Otherwise, configure will try to auto-detect using host paths.
+
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-index 905be40..f8df0ef 100644
+index 0c66ebc..905be40 100644
 --- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
 +++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -1,4 +1,4 @@
--DESCRIPTION = "Kernel based automounter for linux."
-+SUMMARY = "Kernel based automounter for linux."
- SECTION = "base"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+@@ -85,6 +85,7 @@ EXTRA_OECONF += "--disable-mount-locking \
+ "
+ CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
+                         ac_cv_path_RPCGEN=rpcgen \
++                        systemddir=${systemd_unitdir}/system \
+ "
+ 
+ do_configure_prepend () {
 -- 
 1.8.1.2
 
