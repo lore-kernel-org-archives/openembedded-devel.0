@@ -1,40 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FDCF60FF0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F9356CC86
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 15:33:59 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id a15so1169452eae.9
+	Thu, 17 Oct 2013 23:12:23 +0000 (UTC)
+Received: by mail-pd0-f176.google.com with SMTP id g10so2853552pdj.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
+	Thu, 17 Oct 2013 16:12:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fE6WW5IEp/qj2C/bOqShNaPzHfzSGjWURjuxHfhi0Ek=;
-	b=uPBxAObRAe+KlFEi26hjm7J38oWWP3ADC30REdU7RT4bubRiiImri/Sf0602wMTL++
-	pDgJP+3WAyRgsz/09wR/xVT2apKiPqIpgmMW1VgcGwv0O9RG1cFtqJ9ZjUD3OPlCNAGJ
-	zNLIuT232m80+td/g6L2lq5/5hGZ1aTVNiDFdLkIewYilMy/gxcKKqDfjFwzMnWSCiND
-	431QvUAHaViRO5vrM0DO4z+Pq4slXphHrC2hYo6qDfWOGZnRuLn6NQwReKCHnlCX+B+j
-	+5KoHWUXAWkXpET6pfNXf2RvQ8Xn037nSRcVV9xRKurR/SR5zZJ6VmeZYXOy/zv/EQQo
-	1ojQ==
-X-Received: by 10.15.98.194 with SMTP id bj42mr13613028eeb.12.1382024040910;
-	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
-Received: from localhost (ip-62-24-80-145.net.upcbroadband.cz. [62.24.80.145])
+	h=from:to:cc:subject:date:message-id;
+	bh=wLP7GLYIfOP51PlGuWMm23bD+q7vmPQdKupjwyFNrAA=;
+	b=LUhJAByGaqmLue2UBHVTmpdBtmM72NxD1cdas5GakDEjLmfNfkOad8Pjw5bgDIKxaN
+	fzgMPb2yVygXHjG1Y27NCDlMRGAXy4YM5AZ/8A3qg04dLoEbBBDZ+5SmNPovzDEbRXRy
+	Tx0blJ3zA1J+JCf47m5P6GdbljOZxcMCRLFguiXb32mMe+bu+wdkBhJx6hk6zLGyjlpE
+	WO0ahPFGZmE/hfyxqV0Dmf65SDvW9Og4vtuGZqfbADUvmWwbFwRCC3n5KsB4CI+Bt1yP
+	Tfp62lyVv8UObCUvWMMjzVin6LK5cH3sH4VduJed57OJHT1ep/oVJp8QYUDQzO4DFfwc
+	UOnQ==
+X-Received: by 10.66.147.230 with SMTP id tn6mr319867pab.135.1382051545293;
+	Thu, 17 Oct 2013 16:12:25 -0700 (PDT)
+Received: from haswell.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id
-	j7sm194374200eeo.15.1969.12.31.16.00.00
-	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Oct 2013 08:34:00 -0700 (PDT)
-Date: Thu, 17 Oct 2013 17:34:05 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	fa4sm117337667pab.17.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 17 Oct 2013 16:12:23 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131017153405.GC3930@jama>
-References: <1381760413-15098-1-git-send-email-ml@communistcode.co.uk>
-	<1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
-MIME-Version: 1.0
-In-Reply-To: <1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: Re: [meta-oe][PATCHv3 1/3] json-c: add 0.11
+Date: Thu, 17 Oct 2013 16:11:58 -0700
+Message-Id: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: [meta-oe][PATCHv2 1/3] libraw1394: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,73 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2013 15:34:00 -0000
-X-Groupsio-MsgNum: 46772
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uh9ZiVrAOUUm9fzH"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Oct 2013 23:12:23 -0000
 
---uh9ZiVrAOUUm9fzH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Cliff Brake <cbrake@bec-systems.com>
 
-On Mon, Oct 14, 2013 at 03:20:11PM +0100, Jack Mitchell wrote:
-> From: Jack Mitchell <jmitchell@cbnl.com>
->=20
-> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
-> ---
->  meta-oe/recipes-support/json-c/json-c_0.11.bb | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->  create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
->=20
-> diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/reci=
-pes-support/json-c/json-c_0.11.bb
-> new file mode 100644
-> index 0000000..e0391f5
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "JSON-C implements a reference counting object model that al=
-lows you to easily construct JSON objects in C"
-> +HOMEPAGE =3D "https://github.com/json-c/json-c/wiki"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dde54b60fbbc35123ba193fea8ee21=
-6f2"
-> +
-> +SRC_URI =3D "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.=
-gz"
-> +
-> +SRC_URI[md5sum] =3D "aa02367d2f7a830bf1e3376f77881e98"
-> +SRC_URI[sha256sum] =3D "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983e=
-dbfac9149494448c"
-> +
-> +PARALLEL_MAKE =3D ""
-> +
-> +inherit autotools
+Initial recipe created by Khem Raj
 
-It conflicts with libjson from oe-core:
-WARNING: libjson-0.9 is already registered as shlib
-provider for libjson.so.0, ignoring json-c-0.11 trying to register the
-same
+Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
 
-openembedded-core/meta/recipes-devtools/libjson/libjson_0.9.bb
+diff --git a/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
+new file mode 100644
+index 0000000..617ba1b
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "base library for low-level IEEE 1394 accesses"
++HOMEPAGE = "https://ieee1394.wiki.kernel.org/index.php/Libraries#libraw1394"
++SECTION = "libs"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d8045f3b8f929c1cb29a1e3fd737b499"
++
++SRC_URI = "https://www.kernel.org/pub/linux/libs/ieee1394/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "d06cccb776b240b6ab5efdee33b87af2"
++SRC_URI[sha256sum] = "a83cff16fb8885831bc29d7d17f3c570dc39251d89e20795c08e87720de0ba70"
++
++inherit autotools
+-- 
+1.8.3.2
 
-You probably want to upgrade libjson in oe-core if it's the same json-c...
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---uh9ZiVrAOUUm9fzH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlJgA20ACgkQN1Ujt2V2gByN0gCgpdQgYqU2V6fXqoWs4NR3dXa8
-29YAoIEXqfBUrbDhXG+goomAe5wdgLmT
-=EGRi
------END PGP SIGNATURE-----
-
---uh9ZiVrAOUUm9fzH--
