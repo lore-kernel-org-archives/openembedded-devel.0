@@ -1,38 +1,37 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id F02F26CDB6
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id AD8766CDB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 23:12:25 +0000 (UTC)
-Received: by mail-pd0-f179.google.com with SMTP id y10so721096pdj.38
+	Thu, 17 Oct 2013 23:12:27 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id lj1so2835714pab.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 16:12:28 -0700 (PDT)
+	Thu, 17 Oct 2013 16:12:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TemGViNNfk4S267Uqfel8bpuYHmTU43VBAzDkejgVkc=;
-	b=TeAaeX3D7iiL2UMl1F/J/RPmE21vko0UcbSzcNV4Jg/OB4ekeluKzS+DYunsDMrPyi
-	uvRLP5eFhk41I7m1lWJ3cLxXjAsppRd1Yx775lediv2i8m/kOuY5t0PbwTmDYMFPBNix
-	orfrV8ILTOKmoYF/45oVX8g2MsDuQKxZXrtx1dcSRswUhYAHiqZRWHnNNHoX0tDd7Xbb
-	VPDIQoLG2LLbLxak+cjcF0S2GO4HROjymA+ZtajcHULvedFwgmjMu+pvQ422QGjKNSub
-	ooQwTXXgMoi8UON5qQj7km/ioZuSfXR1XqriTWbqDVOou6w+Lbh92XEwFzg0/ityIxIE
-	NUiA==
-X-Received: by 10.66.65.108 with SMTP id w12mr16827pas.183.1382051548081;
-	Thu, 17 Oct 2013 16:12:28 -0700 (PDT)
+	bh=/XchgCcj7UPtspjkI7j/1rr3yobsR8SfY+h8ebIygc4=;
+	b=mvYkYsP156vrCHVFAC484HXc5zOLLcNGxxv0CF+DHqpFYtkQ+aVzV3Uwqjjq8gCveH
+	KinqVx19NewJSa2W2X9YDCHVVmDqQYv7U34x9ZsDreOUp8qrj4MlyHHsVbKPoIooI2LO
+	SpO2B5Pc2FzL3L0ICtUUsBs5h1389E+nNskwdxOv33/As9kgdiX80WashlVl8mwI2rQy
+	JktEYCULljvTkBFK3HGA0KJVcFWjIMwn0Ouu6yHkbgGRJB36e3apjtl+NI3CeacGYEtV
+	d/JmotE4DePNMiZea6TSOjyh6e9LH7KbvG0wys04C2/au5HByHR+7Ku0RZySISAsMnO4
+	HkfQ==
+X-Received: by 10.68.172.164 with SMTP id bd4mr10837376pbc.153.1382051549746; 
+	Thu, 17 Oct 2013 16:12:29 -0700 (PDT)
 Received: from haswell.gateway.2wire.net
 	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id
 	fa4sm117337667pab.17.1969.12.31.16.00.00
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Oct 2013 16:12:27 -0700 (PDT)
+	Thu, 17 Oct 2013 16:12:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2013 16:11:59 -0700
-Message-Id: <1382051520-1562-2-git-send-email-raj.khem@gmail.com>
+Date: Thu, 17 Oct 2013 16:12:00 -0700
+Message-Id: <1382051520-1562-3-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
 References: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
-Cc: Cliff Brake <cbrake@bec-systems.com>
-Subject: [meta-multimedia][PATCHv2 2/3] coriander: add recipe
+Subject: [meta-oe][PATCv2 3/3] mikmod: Upgrade 3.3.2 -> 3.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,65 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2013 23:12:26 -0000
+X-List-Received-Date: Thu, 17 Oct 2013 23:12:27 -0000
 
-From: Cliff Brake <cbrake@bec-systems.com>
-
-Initial recipe created by Khem Raj
-
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../coriander/coriander/cross-compile.patch             | 17 +++++++++++++++++
- .../recipes-multimedia/coriander/coriander_2.0.2.bb     | 15 +++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/coriander/coriander/cross-compile.patch
- create mode 100755 meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
+ .../mikmod/{libmikmod_3.3.2.bb => libmikmod_3.3.3.bb}               | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.2.bb => libmikmod_3.3.3.bb} (70%)
 
-diff --git a/meta-multimedia/recipes-multimedia/coriander/coriander/cross-compile.patch b/meta-multimedia/recipes-multimedia/coriander/coriander/cross-compile.patch
-new file mode 100644
-index 0000000..49350fe
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/coriander/coriander/cross-compile.patch
-@@ -0,0 +1,17 @@
-+In a cross compile environment adding paths like /usr are not correct.
-+With this patch we make it so that its relative to sysroot if the compiler
-+defines one.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Index: a/src/Makefile.am
-+===================================================================
-+--- a/src/Makefile.am	2013-02-08 22:35:08.000000000 -0800
-++++ b/src/Makefile.am	2013-10-13 01:31:38.812869080 -0700
-+@@ -33,5 +33,5 @@
-+ 	video_encode.c video_encode.h \
-+ 	subtitles.c subtitles.h 
-+ 
-+-coriander_LDADD = -L/usr/X11R6/lib/ @PACKAGE_LIBS@ $(INTLLIBS) $(LIBTIFF_LIBS) $(FTPLIB_LIBS) $(SDLLIB_LIBS) $(LIBDC_LIBS) $(LIBRAW_LIBS) $(XV_LIBS) $(COR_LFS_LDFLAGS) -lgthread-2.0 $(FFMPEG_LIBS) $(X11_LIBS)
-++coriander_LDADD = -L=/usr/X11R6/lib/ @PACKAGE_LIBS@ $(INTLLIBS) $(LIBTIFF_LIBS) $(FTPLIB_LIBS) $(SDLLIB_LIBS) $(LIBDC_LIBS) $(LIBRAW_LIBS) $(XV_LIBS) $(COR_LFS_LDFLAGS) -lgthread-2.0 $(FFMPEG_LIBS) $(X11_LIBS)
-+ 
-diff --git a/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb b/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
-new file mode 100755
-index 0000000..587055d
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "Control and capture GUI for IIDC compliant cameras"
-+HOMEPAGE = "http://damien.douxchamps.net/ieee1394/coriander/"
-+SECTION = "applications"
-+LICENSE = "GPL-3.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+DEPENDS = "gtk+ libgnomeui libraw1394 libdc1394 libxv"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/coriander-2/${PV}/${P}.tar.gz \
-+           file://cross-compile.patch \
-+          "
-+
-+SRC_URI[md5sum] = "431d98fb013217681f97ade168201fb8"
-+SRC_URI[sha256sum] = "5c7fd31cb58d398e2742352bf1ffbd2ca22e06686c6668ecfd437735c2b79123"
-+
-+inherit autotools gettext sdl
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+similarity index 70%
+rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
+rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+index 4ab293f..6a3077f 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
+ DEPENDS = "alsa-lib texinfo"
+ 
+ SRC_URI = "\
+-    http://mikmod.shlomifish.org/files/${P}.tar.gz \
++    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+ "
+-SRC_URI[md5sum] = "60ac77a804d082230df3009af11ef44f"
+-SRC_URI[sha256sum] = "2311b209255bf24e95161907a16778cb054ac6d447fd8d05f1f0e41a555c7580"
++SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
++SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
+ 
+ inherit autotools binconfig lib_package
+ 
 -- 
 1.8.3.2
 
