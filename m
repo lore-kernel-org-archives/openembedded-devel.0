@@ -1,45 +1,19 @@
-Return-Path: <B40290@freescale.com>
-Received: from db8outboundpool.messaging.microsoft.com
-	(mail-db8lp0184.outbound.messaging.microsoft.com [213.199.154.184])
-	by mail.openembedded.org (Postfix) with ESMTP id F357F6CB44
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 85C0B6C76F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 08:27:48 +0000 (UTC)
-Received: from mail208-db8-R.bigfish.com (10.174.8.231) by
-	DB8EHSOBE028.bigfish.com (10.174.4.91) with Microsoft SMTP Server id
-	14.1.225.22; Fri, 18 Oct 2013 08:27:49 +0000
-Received: from mail208-db8 (localhost [127.0.0.1])	by
-	mail208-db8-R.bigfish.com (Postfix) with ESMTP id 851FE10017D	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 08:27:49 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah8275dh1de097h186068h8275bhz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail208-db8 (localhost.localdomain [127.0.0.1]) by mail208-db8
-	(MessageSwitch) id 1382084866892551_15435;
-	Fri, 18 Oct 2013 08:27:46 +0000 (UTC)
-Received: from DB8EHSMHS004.bigfish.com (unknown [10.174.8.236])	by
-	mail208-db8.bigfish.com (Postfix) with ESMTP id D5B9320065	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 08:27:46 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB8EHSMHS004.bigfish.com
-	(10.174.4.14) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Fri, 18 Oct 2013 08:27:46 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Fri, 18 Oct 2013 08:27:44 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id r9I8RgRb019411;	Fri, 18 Oct 2013 01:27:42 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Oct 2013 16:27:40 +0800
-Message-ID: <1382084860-25061-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.7.5.4
+	Fri, 18 Oct 2013 08:46:48 +0000 (UTC)
+Message-ID: <5260F57F.90502@communistcode.co.uk>
+Date: Fri, 18 Oct 2013 09:46:55 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Subject: [meta-networking][PATCH v2 3/3] barnyard: add recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1381760413-15098-1-git-send-email-ml@communistcode.co.uk>	<1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
+	<20131017153405.GC3930@jama>
+In-Reply-To: <20131017153405.GC3930@jama>
+Subject: Re: [meta-oe][PATCHv3 1/3] json-c: add 0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,47 +27,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 08:27:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Oct 2013 08:46:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Chunrong Guo <B40290@freescale.com>
+On 17/10/13 16:34, Martin Jansa wrote:
+> On Mon, Oct 14, 2013 at 03:20:11PM +0100, Jack Mitchell wrote:
+>> From: Jack Mitchell <jmitchell@cbnl.com>
+>>
+>> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
+>> ---
+>>  meta-oe/recipes-support/json-c/json-c_0.11.bb | 13 +++++++++++++
+>>  1 file changed, 13 insertions(+)
+>>  create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
+>>
+>> diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/recipes-support/json-c/json-c_0.11.bb
+>> new file mode 100644
+>> index 0000000..e0391f5
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
+>> @@ -0,0 +1,13 @@
+>> +SUMMARY = "JSON-C implements a reference counting object model that allows you to easily construct JSON objects in C"
+>> +HOMEPAGE = "https://github.com/json-c/json-c/wiki"
+>> +LICENSE = "MIT"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=de54b60fbbc35123ba193fea8ee216f2"
+>> +
+>> +SRC_URI = "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.gz"
+>> +
+>> +SRC_URI[md5sum] = "aa02367d2f7a830bf1e3376f77881e98"
+>> +SRC_URI[sha256sum] = "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983edbfac9149494448c"
+>> +
+>> +PARALLEL_MAKE = ""
+>> +
+>> +inherit autotools
+> 
+> It conflicts with libjson from oe-core:
+> WARNING: libjson-0.9 is already registered as shlib
+> provider for libjson.so.0, ignoring json-c-0.11 trying to register the
+> same
+> 
+> openembedded-core/meta/recipes-devtools/libjson/libjson_0.9.bb
+> 
+> You probably want to upgrade libjson in oe-core if it's the same json-c...
+> 
+> 
 
-  *Barnyard is a output system for Snort
+Ah, that's not confusing at all eh!
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- .../barnyard/barnyard_0.2.0.bb                     |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/barnyard/barnyard_0.2.0.bb
+I've sent a patch to oe-core, if they take it i'll ping you about
+pulling the libestr and rsyslogd.
 
-diff --git a/meta-networking/recipes-connectivity/barnyard/barnyard_0.2.0.bb b/meta-networking/recipes-connectivity/barnyard/barnyard_0.2.0.bb
-new file mode 100644
-index 0000000..09c5506
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/barnyard/barnyard_0.2.0.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "Barnyard is a output system for Snort."
-+HOMEPAGE = "http://www.snort.org/"
-+LICENSE = "QPL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.QPL;md5=1b8ff8c0012b5a2d647357699bf44b41"
-+
-+DEPENDS = "libpcap"
-+
-+SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
-+          "
-+SRC_URI[tarball.md5sum] = "be3283028cf414b52b220308ceb411e9"
-+SRC_URI[tarball.sha256sum] = "09e0f8e095e79cfe70ea069d13e7d02521a504a1f400a45556a634dccfd31a3a"
-+
-+
-+inherit autotools pkgconfig
-+
-+do_configure_prepend () {
-+	#fix hardcoded include path
-+	sed -i -e 's:extra_incl=/usr/include/pcap::g' ${S}/configure.in
-+}
-+
+Thanks JaMa!
+
 -- 
-1.7.5.4
-
-
+  Jack Mitchell (jack@embed.me.uk)
+  Embedded Systems Engineer
+  Cambridgeshire, UK
+  http://www.embed.me.uk
+-- 
 
