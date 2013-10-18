@@ -1,19 +1,32 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 55E396CD55
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F3CD6CE9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 10:09:31 +0000 (UTC)
-Message-ID: <526108E2.4010608@communistcode.co.uk>
-Date: Fri, 18 Oct 2013 11:09:38 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	Fri, 18 Oct 2013 13:12:18 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id z5so3104967lbh.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 06:12:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=adUx2tExg31KNQ9LxPKqdFSSzJ7B2srxVr22erxeTc8=;
+	b=GVGxGgKwu15XQFTj/HntPQD2lj+x6P912kpby2rHg17H01PxXtYNs99lRTib7NA1h9
+	boMRhAu6EYD6xWmS2CX4HNumtBFbVrPXspiX/Y/Ia62B383rlbmu0Q6yQ6Fn/B+9shv8
+	mneEJbHWxEmS8GKAgPbv0mQDB/l0fdwpuaLu5I2X8tZsmEeErCnzXwHvCK4OGinMqH+V
+	hH6rT6LbDFfnnpFgmAlcny5XogGDSAG7PQ5V+/t6fDltoTYg9kjmDGE1h7IRHH91Gtwa
+	VzLEGXJky0LpLpzBSewyu8gtYq5W6JFQgpP2QowzPZ1i91SUWwEbCmYyidy+2uGKXRz+
+	ZvKg==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1382081248-6370-1-git-send-email-olof.johansson@axis.com>	<5260F68B.6090403@communistcode.co.uk>	<20131018094408.GA21192@jama>
-	<20131018100430.GQ20888@axis.com>
-In-Reply-To: <20131018100430.GQ20888@axis.com>
-Subject: Re: [meta-oe][PATCH] rsyslog: fix dependency name (json-c => libjson)
+X-Received: by 10.112.13.72 with SMTP id f8mr1392869lbc.40.1382101939326; Fri,
+	18 Oct 2013 06:12:19 -0700 (PDT)
+Received: by 10.112.14.200 with HTTP; Fri, 18 Oct 2013 06:12:19 -0700 (PDT)
+In-Reply-To: <1382084579-341-1-git-send-email-liezhi.yang@windriver.com>
+References: <1382084579-341-1-git-send-email-liezhi.yang@windriver.com>
+Date: Fri, 18 Oct 2013 09:12:19 -0400
+Message-ID: <CADkTA4PwTVaPaRR8L6VTQRMryXA_pY+Sq=N+_8EwChbHYo9Nxw@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-virtualization] [PATCH 1/2] conf/layer.conf: fix "No newline at end of file"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,39 +40,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 10:09:31 -0000
+X-List-Received-Date: Fri, 18 Oct 2013 13:12:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 18/10/13 11:04, Olof Johansson wrote:
-> On Fri, Oct 18, 2013 at 09:51:23AM +0100, Jack Mitchell wrote:
->> The rsyslogd patches shouldn't really have gone in yet... I've fired off
->> a patch to oe-core to update libjson to the now named json-c, so if we
->> could hold off for a few days that would be great. Otherwise, maybe
->> temporarily revert the rsyslogd patches?
-> 
-> Ah, I didn't notice those patches. I see!
-> 
-> 
-> On 13-10-18 11:44 +0200, Martin Jansa wrote:
->> Sorry about that, I was testing them together with json-c patch, so I
->> haven't noticed, can we temporary take this patch and then revert it
->> when (and if) libjson is renamed in oe-core (assuming that newer rsyslog
->> works with older libjson-0.9.
-> 
-> Either way is fine by me. I can fix it locally for us until the
-> rename hits oecore.
-> 
-> 
-> Thanks,
-> 
+FYI: this should go to meta-virtualization@yoctoproject.org, but I can pick up
+the patch from here.
 
-I'm happy either way too. Whatever suits you best JaMa.
+Cheers,
+
+Bruce
+
+On Fri, Oct 18, 2013 at 4:22 AM, Robert Yang <liezhi.yang@windriver.com> wrote:
+> The last line lacked a newline (usually '\n', aka CR or CRLF) in the
+> end, so there was a warning from git diff:
+>
+> \ No newline at end of file
+>
+> The last byte of the file should be a newline.
+>
+> Note:
+> It seems that nothing is changed in this commit, but it does change the
+> end of the last line.
+>
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  conf/layer.conf |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 4c1fa19..15ed1df 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -9,4 +9,4 @@ BBFILE_PATTERN_virtualization-layer := "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_virtualization-layer = "7"
+>
+>  # Custom licenses used by some packages in this layer
+> -LICENSE_PATH += "${LAYERDIR}/files/custom-licenses"
+> \ No newline at end of file
+> +LICENSE_PATH += "${LAYERDIR}/files/custom-licenses"
+> --
+> 1.7.10.4
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
 -- 
-  Jack Mitchell (jack@embed.me.uk)
-  Embedded Systems Engineer
-  Cambridgeshire, UK
-  http://www.embed.me.uk
--- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
