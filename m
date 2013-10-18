@@ -1,45 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D19D6BA14
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 152DC6BA14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 16:30:35 +0000 (UTC)
-Received: by mail-we0-f176.google.com with SMTP id w62so4007947wes.35
+	Fri, 18 Oct 2013 16:31:09 +0000 (UTC)
+Received: by mail-wg0-f53.google.com with SMTP id y10so4103214wgg.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 09:30:36 -0700 (PDT)
+	Fri, 18 Oct 2013 09:31:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=MxmDSyby9HxZd18+12led91ROtZK2HKknurEc0UaLvE=;
-	b=OW2c2r8W5rd6xrM7Y+asvvElvsoTdlWk9ci851pwlTlLbDZtxvM6HqPlIAR36r9p4t
-	6uQ/4yzvHOl3TYIj4XGuJXguJV2FO5dbwKg0WN5BVx18x4Lwvpsho6EfhGMOhn4kiqYk
-	zNY3pYGT3jSoQFkpGgG5IJ2WEDsb4unobhmaD87qQeSr8bVCums+Y1vOGQ+VszmM0gXk
-	DzNAkPT/rZz24XroLw6REv3dRGpEu5qpVTLtIJunFYoGQFannUQl77Dxnno7Qz2uLT5P
-	jZW5Ngn4XxTkFqooTjTalDGKnNbtmJ/ykd9LpARB4c0CksbjDyrtPLKai1WfLXtWnMBr
-	Qskg==
-X-Gm-Message-State: ALoCoQmnOjJF4DZ7RIleBXYB2/n+BYwqlpTznOIbO0SQdTznGWNlMG+75179Xm5ocQfZY2Q1ngId
-X-Received: by 10.180.221.38 with SMTP id qb6mr193641wic.8.1382113836505;
-	Fri, 18 Oct 2013 09:30:36 -0700 (PDT)
+	bh=yiIxcXZabkCDfeJmfeVFozxXZslFDx7WFlhBBV/tvi8=;
+	b=gpaSrJFcRyxWfK42YMhFx3BX+NmRWdOj82ytWKF0aPnMsXazcioOTvEPaD2WNyOYz5
+	9hZgTgWIShr+XaCq1wGQ7rsdT/vAipQ+B1Oo56DORNXIkWTBnNDCzh/ydYo7I8J+t6Ia
+	bytTxZrW4Dk0Kq/tFt8vw0dfU8rqiYJdtY/gK+j9KR6voe3++V8SlibwK79LNUKT5hzH
+	t/d9RCCi9IFvBWZrCPU716DJvumabmanxSWSIxqMkl0mYWaJuSwXPV15BLuFnUBBsaNB
+	xBYFnbxPCDp0FXnCNJ/z5itSFAisAT/yqtGa4m1v06XgPbJPcgvfRC2FMIecJv97TUMk
+	8LMQ==
+X-Gm-Message-State: ALoCoQl666TbyLK6He8MhUMDlwf6bBGDe2fLoQJs3YZManh8RHaXBFsWh9ByZt4JRVrAFa6/eEJA
+X-Received: by 10.180.105.36 with SMTP id gj4mr191125wib.14.1382113871632;
+	Fri, 18 Oct 2013 09:31:11 -0700 (PDT)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id ey4sm4956638wic.11.2013.10.18.09.30.34
+	by mx.google.com with ESMTPSA id e1sm28514536wij.6.2013.10.18.09.31.09
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 18 Oct 2013 09:30:35 -0700 (PDT)
-Date: Fri, 18 Oct 2013 12:30:31 -0400
+	Fri, 18 Oct 2013 09:31:10 -0700 (PDT)
+Date: Fri, 18 Oct 2013 12:31:06 -0400
 From: Joe MacDonald <joe@deserted.net>
-To: rongqing.li@windriver.com
-Message-ID: <20131018163029.GB2456@deserted.net>
-References: <1381394085-7681-1-git-send-email-rongqing.li@windriver.com>
+To: Andreas Oberritter <obi@opendreambox.org>
+Message-ID: <20131018163105.GC2456@deserted.net>
+References: <1382009891-6444-1-git-send-email-obi@opendreambox.org>
+	<1382010314-6720-1-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <1381394085-7681-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1382010314-6720-1-git-send-email-obi@opendreambox.org>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2 meta-networking] vsftpd: use quotes to wrap variable
+Subject: Re: [meta-networking][PATCH v2 1/2] autofs: pass systemd directory to configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,13 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 16:30:35 -0000
-X-Groupsio-MsgNum: 46809
+X-List-Received-Date: Fri, 18 Oct 2013 16:31:11 -0000
+X-Groupsio-MsgNum: 46810
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XOIedfhf+7KOe/yw"
+	protocol="application/pgp-signature"; boundary="vOmOzSkFvhd7u8Ms"
 Content-Disposition: inline
 
---XOIedfhf+7KOe/yw
+--vOmOzSkFvhd7u8Ms
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -67,50 +67,43 @@ Content-Transfer-Encoding: quoted-printable
 Merged, thanks.
 -J.
 
-[[oe] [PATCH 1/2 meta-networking] vsftpd: use quotes to wrap variable] On 1=
-3.10.10 (Thu 16:34) rongqing.li@windriver.com wrote:
+[[oe] [meta-networking][PATCH v2 1/2] autofs: pass systemd directory to con=
+figure] On 13.10.17 (Thu 13:45) Andreas Oberritter wrote:
 
-> From: Roy Li <rongqing.li@windriver.com>
+> Otherwise, configure will try to auto-detect using host paths.
 >=20
-> "test -z ${PAMLIB}" in do_install() may report error if ${PAMLIB}
-> has space chars. This commit added double quotes to wrap it in
-> case of errors.
->=20
-> Signed-off-by: Qiang Chen <qiang.chen@windriver.com>
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 > ---
->  meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb | 1 +
+>  1 file changed, 1 insertion(+)
 >=20
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/met=
-a-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> index 2c3e009..7677477 100644
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> @@ -60,7 +60,7 @@ do_install() {
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/met=
+a-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> index 0c66ebc..905be40 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
+> @@ -85,6 +85,7 @@ EXTRA_OECONF +=3D "--disable-mount-locking \
+>  "
+>  CACHED_CONFIGUREVARS =3D "ac_cv_path_RANLIB=3D${RANLIB} \
+>                          ac_cv_path_RPCGEN=3Drpcgen \
+> +                        systemddir=3D${systemd_unitdir}/system \
+>  "
 > =20
->      install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
->      install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-> -    if ! test -z ${PAMLIB} ; then
-> +    if ! test -z "${PAMLIB}" ; then
->          install -d ${D}${sysconfdir}/pam.d/
->          cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
->          sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfd=
-ir}/pam.d/vsftpd
+>  do_configure_prepend () {
 --=20
 -Joe MacDonald.
 :wq
 
---XOIedfhf+7KOe/yw
+--vOmOzSkFvhd7u8Ms
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlJhYiUACgkQwFvcllog0XzoUACffyFi6QUA8eCViURsgrJ4+YFk
-s2wAoKP4QXzoKvmXfdz4eabKyJQhg7GF
-=nEzR
+iEYEARECAAYFAlJhYkkACgkQwFvcllog0XyAOACePA/bZQOajWMyM8Wb11MQP7ZR
+IZIAn3Q38jT6/KvNaTWACAmCSx9LLO0a
+=TX7c
 -----END PGP SIGNATURE-----
 
---XOIedfhf+7KOe/yw--
+--vOmOzSkFvhd7u8Ms--
