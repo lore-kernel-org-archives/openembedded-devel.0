@@ -1,23 +1,46 @@
-Return-Path: <anders@chargestorm.se>
-Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
-	[83.145.59.144])
-	by mail.openembedded.org (Postfix) with ESMTP id 396216D168
+Return-Path: <olof.johansson@axis.com>
+Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 128096C76F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 05:15:01 +0000 (UTC)
-Received: from localhost (83.252.255.124) by stoexhub03.domain01.net
-	(10.12.10.3) with Microsoft SMTP Server id 8.3.279.1; Fri, 18 Oct 2013
-	07:15:02 +0200
-From: Anders Darander <anders@chargestorm.se>
+	Fri, 18 Oct 2013 07:27:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by anubis.se.axis.com (Postfix) with ESMTP id F285619EB7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
+Received: from anubis.se.axis.com ([127.0.0.1])
+	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id yBjaom480fUs
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
+	by anubis.se.axis.com (Postfix) with ESMTP id CD5CC19EB6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+Received: from boulder.se.axis.com (localhost [127.0.0.1])
+	by postfix.imss71 (Postfix) with ESMTP id ABB2D9B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+Received: from seth.se.axis.com (seth.se.axis.com [10.0.2.172])
+	by boulder.se.axis.com (Postfix) with ESMTP id A0EB4525
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
+	by seth.se.axis.com (Postfix) with ESMTP id 9F6083E06F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+Received: from lnxolofjn.se.axis.com (10.92.17.1) by xmail2.se.axis.com
+	(10.0.5.74) with Microsoft SMTP Server id 8.2.255.0; Fri, 18 Oct 2013
+	09:27:28 +0200
+Received: by lnxolofjn.se.axis.com (Postfix, from userid 20466)	id 6A38C9C078; 
+	Fri, 18 Oct 2013 09:27:28 +0200 (CEST)
+From: Olof Johansson <olof.johansson@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Oct 2013 07:14:55 +0200
-Message-ID: <727ee4f43f7202f10c64cbffc5bd2ff6f965a3aa.1382073166.git.anders@chargestorm.se>
-X-Mailer: git-send-email 1.8.4.rc3
-In-Reply-To: <cover.1382073165.git.anders@chargestorm.se>
-References: <cover.1382073165.git.anders@chargestorm.se>
+Date: Fri, 18 Oct 2013 09:27:28 +0200
+Message-ID: <1382081248-6370-1-git-send-email-olof.johansson@axis.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH 2/2] ktap: add initial recipe
+Subject: [meta-oe][PATCH] rsyslog: fix dependency name (json-c => libjson)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,90 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 05:15:01 -0000
+X-List-Received-Date: Fri, 18 Oct 2013 07:27:31 -0000
 Content-Type: text/plain
 
-Ktap is a new scripting dynamic tracing tool for Linux.
-
-From kernel v3.13 it'll live inside the kernel tree, but for earlier kernels,
-this recipe will be usefull.
-
-Signed-off-by: Anders Darander <anders@chargestorm.se>
+Signed-off-by: Olof Johansson <olof.johansson@axis.com>
 ---
- meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb | 19 +++++++++++++++++++
- meta-oe/recipes-kernel/ktap/ktap.inc           | 11 +++++++++++
- meta-oe/recipes-kernel/ktap/ktap_0.3.bb        | 17 +++++++++++++++++
- 3 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
- create mode 100644 meta-oe/recipes-kernel/ktap/ktap.inc
- create mode 100644 meta-oe/recipes-kernel/ktap/ktap_0.3.bb
+ meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb b/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
-new file mode 100644
-index 0000000..12167ea
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
-@@ -0,0 +1,19 @@
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+require ktap.inc
-+
-+DESCRIPTION = "KTAP is a scripting dynamic tracing tool for Linux"
-+
-+inherit module
-+
-+# Only build the module
-+MAKE_TARGETS = "mod"
-+
-+# Kernel module packages MUST begin with 'kernel-module-', otherwise
-+# multilib image generation can fail.
-+#
-+# The following line is only necessary if the recipe name does not begin
-+# with kernel-module-.
-+#
-+PKG_${PN} = "kernel-module-${PN}"
-+
-diff --git a/meta-oe/recipes-kernel/ktap/ktap.inc b/meta-oe/recipes-kernel/ktap/ktap.inc
-new file mode 100644
-index 0000000..7fde165
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ktap/ktap.inc
-@@ -0,0 +1,11 @@
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+HOMEPAGE = "http://www.ktap.org"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE-GPL;md5=eb723b61539feef013de476e68b5c50a"
-+
-+SRCREV = "6a5100b77321ce5792dfea34fa500ea537b1858c"
-+SRC_URI = "git://github.com/ktap/ktap.git"
-+
-+S = "${WORKDIR}/git"
-+
-diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.3.bb b/meta-oe/recipes-kernel/ktap/ktap_0.3.bb
-new file mode 100644
-index 0000000..f5dd62f
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ktap/ktap_0.3.bb
-@@ -0,0 +1,17 @@
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+require ktap.inc
-+
-+SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
-+DEPENDS = "ktap-module"
-+
-+# Only build the userspace app
-+EXTRA_OEMAKE = "ktap"
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/ktap ${D}${bindir}/
-+}
-+
-+RDEPENDS_${PN} = "kernel-module-ktapvm"
-+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+index 0101004..238b484 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
+-DEPENDS = "zlib libestr json-c"
++DEPENDS = "zlib libestr libjson"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ HOMEPAGE = "http://www.rsyslog.com/"
+ LICENSE = "GPLv3"
 -- 
-1.8.4.rc3
+1.7.10.4
 
 
