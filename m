@@ -1,35 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id EC02C6C76F
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB01.domain01.net (STOEXHUB01.domain01.net
+	[83.145.59.142])
+	by mail.openembedded.org (Postfix) with ESMTP id 53FF16D15E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 04:00:34 +0000 (UTC)
-Received: by mail-pd0-f176.google.com with SMTP id g10so3119781pdj.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 21:00:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=/ll06yMOT24WZQV/cRk0Ti0j0J8P/pVLuJXriDtZx+U=;
-	b=O3rns9Mg22RP6PlTnr3srnzznOEcQ8mAJj+d5RiJUl4L3uEViy4b5jLy6u+g/JO4te
-	z2s7b5Xe4DMxTy6WRn/7JC+Fw2KGiZPcVS8WoVE04Lp0WIU+gK994Z1OF6eSlcSfo+Fu
-	jelW5S5eNqMG+deyKUUnnQ7cImGSR4PgolCFci7Lksh9K4QSOs48CW1fBXrFAgGVSV6/
-	jbP6kF0inbhAP1oAMimqqLQlLed1nfVTEf5kXw5fHEayx0pFsxRloHAAiLdb2fiLPLCc
-	L34Idlz8pFy9zEfSWAGnx5vXqecB1ztUZsQT9Sr9TTpVoyvlN0Kzpu3r/+J7hViyBy2a
-	JOTg==
-X-Received: by 10.68.209.161 with SMTP id mn1mr838924pbc.173.1382068836814;
-	Thu, 17 Oct 2013 21:00:36 -0700 (PDT)
-Received: from haswell.gateway.2wire.net
-	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
-	by mx.google.com with ESMTPSA id
-	yh1sm101360167pbc.21.1969.12.31.16.00.00
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Oct 2013 21:00:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2013 21:00:14 -0700
-Message-Id: <1382068814-12984-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-gnome][PATCH] gnumeric: Fix build failure with newer autotools
+	Fri, 18 Oct 2013 05:14:17 +0000 (UTC)
+Received: from android-17c990e6fd634c9c.lan (83.252.255.124) by
+	STOEXHUB01.domain01.net (10.12.10.1) with Microsoft SMTP Server (TLS)
+	id 8.3.279.1; Fri, 18 Oct 2013 07:14:14 +0200
+User-Agent: K-9 Mail for Android
+In-Reply-To: <cover.1381920288.git.anders@chargestorm.se>
+References: <cover.1381920288.git.anders@chargestorm.se>
+MIME-Version: 1.0
+From: Anders Darander <anders@chargestorm.se>
+Date: Fri, 18 Oct 2013 07:14:09 +0200
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <cace5960-a68e-4774-911d-debd3fc71b6d@email.android.com>
+Subject: Re: [PATCH 0/2] Breakpad and ktap recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,58 +30,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 04:00:36 -0000
+X-List-Received-Date: Fri, 18 Oct 2013 05:14:18 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
 
-Backports from upstream
+I'm going to resend this series with the correct prefix added. 
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../gnumeric/gnumeric/do-not-use-srcdir.patch             | 15 +++++++++++++++
- meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb      |  5 ++++-
- 2 files changed, 19 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnumeric/gnumeric/do-not-use-srcdir.patch
+Anders Darander <anders@chargestorm.se> wrote:
+>
+>These are a couple of recipes that we've been using internally for some
+>time. They
+>were developed and mostly used on a dylan-based setup. Testing has
+>primarily been 
+>performed on ARM, both qemuarm and our custom machine.
+>
+>Breakpad is a crash reporting tool, that's getting a wider use.
+>Please, let me know if there's a more efficient way (or otherwise
+>better way) to 
+>have the bbclass generate the symbol file.
+>
+>Ktap is a new scripting dynamic tracing tool for Linux. This recipe
+>will be of
+>use until everyone is on 3.13+ kernels (ktap has been merged for the
+>3.13 series).
+>
+>The following changes since commit
+>f8903f53db717294d63a8d79b5ef7ca34b3c189e:
+>
+>libhugetlbfs: install perl lib to directory perl instead of perl5
+>(2013-10-15 13:43:53 +0200)
+>
+>are available in the git repository at:
+>
+>  git://github.com/darander/meta-oe breakpad-ktap
+>  https://github.com/darander/meta-oe/tree/breakpad-ktap
+>
+>Anders Darander (2):
+>  breakpad: add initial recipe
+>  ktap: add initial recipe
+>
+> meta-oe/classes/breakpad.bbclass                  | 32 ++++++++++
+>meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 72
+>+++++++++++++++++++++++
+> meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb    | 19 ++++++
+> meta-oe/recipes-kernel/ktap/ktap.inc              | 11 ++++
+> meta-oe/recipes-kernel/ktap/ktap_0.3.bb           | 17 ++++++
+> 5 files changed, 151 insertions(+)
+> create mode 100644 meta-oe/classes/breakpad.bbclass
+> create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+> create mode 100644 meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
+> create mode 100644 meta-oe/recipes-kernel/ktap/ktap.inc
+> create mode 100644 meta-oe/recipes-kernel/ktap/ktap_0.3.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnumeric/gnumeric/do-not-use-srcdir.patch b/meta-gnome/recipes-gnome/gnumeric/gnumeric/do-not-use-srcdir.patch
-new file mode 100644
-index 0000000..cc81b1f
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnumeric/gnumeric/do-not-use-srcdir.patch
-@@ -0,0 +1,15 @@
-+Index: gnumeric-1.12.0/test/Makefile.am
-+===================================================================
-+--- gnumeric-1.12.0.orig/test/Makefile.am	2011-05-17 17:54:24.000000000 -0700
-++++ gnumeric-1.12.0/test/Makefile.am	2013-10-17 20:28:19.920618596 -0700
-+@@ -25,7 +25,9 @@
-+ #
-+ # 90xx: Misc stuff.
-+ 
-+-TESTS = $(sort $(wildcard $(srcdir)/t[0-9][0-9][0-9][0-9]-*.pl))
-++TESTS_EXTENSIONS=.pl
-++TESTS = @auto_find_tests@
-++
-+ SUPPS = common.supp commondots.supp gui.supp t8003-valgrind-pdf.supp
-+ 
-+ import-db:
-diff --git a/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-index 4f40594..041ab3f 100644
---- a/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-+++ b/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb
-@@ -7,10 +7,13 @@ DESCRIPTION = "Gnumeric spreadsheet for GNOME"
- 
- GNOME_COMPRESS_TYPE = "xz"
- 
-+inherit gnome
-+
-+SRC_URI += "file://do-not-use-srcdir.patch"
-+
- SRC_URI[archive.md5sum] = "3fd87cca95334b5d8ac922989670fe27"
- SRC_URI[archive.sha256sum] = "037b53d909e5d1454b2afda8c4fb1e7838e260343e36d4e36245f4a5d0e04111"
- 
--inherit gnome
- 
- EXTRA_OECONF=" --without-perl "
- 
 -- 
-1.8.3.2
-
+ChargeStorm AB / eStorm 
 
