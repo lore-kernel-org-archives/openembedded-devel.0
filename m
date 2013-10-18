@@ -1,40 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9183E6CCFC
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B7AA60CEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 00:02:30 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id q10so2371231pdj.41
+	Fri, 18 Oct 2013 00:08:23 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ld10so1136171pab.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2013 17:02:32 -0700 (PDT)
+	Thu, 17 Oct 2013 17:08:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=erKryuTZ/6DG2dnymTfM90xfwWrRAjqUDKXu7j6RU30=;
-	b=Ga11r6EwRctIsUh0V5P9A95f9t1TnjzTfJRpeISP797jzglLiASJMRPutYjsGMIUbS
-	RNnZEexe5hwgxz9oVZWftYEad3iGRL7rs/RBJzp99O+PHdADNNbVxg+hf/FnAJ42v6NM
-	g+kqYGJNUCwzu4lJk3k+Wjaej4OZYroDlLn7223/1E8a769/p4xY6j7tbyzVQUBGxsi9
-	dgSVaE53Zp79ODHG/IaFyJA7fSLdM6X9zExvN8ZW/TneLh0Ie+a93jGQfm1PWHezWFgE
-	K+7fW/tqfu3744bifC/nizSW7JDrw3jpn477Yj5aJKXDp22cK3Sfqy8Xpcewx5k28mNJ
-	oxuA==
-X-Received: by 10.66.121.234 with SMTP id ln10mr632136pab.20.1382054552484;
-	Thu, 17 Oct 2013 17:02:32 -0700 (PDT)
-Received: from kraj-sslvpn-nc.jnpr.net (natint3.juniper.net. [66.129.224.36])
+	h=from:to:cc:subject:date:message-id;
+	bh=RogN+E+LhdevuKC/2IiGrJXrGZEQbhakTbQ5mmUOpSw=;
+	b=twrcac3q0QEMxkdinccl8Ban3LrmchhnhjR4rQwjUEHn+a4uyCqL6j8RjtnLRa5SWo
+	HgpHjVkZimpx16wQ1A7gvND6EQZEqNJhey1REZACsNGUmJpRjvr/hEKpXbyNqhY2lmWz
+	wN/K3/MfL8ClZivEFmQqR26parUNOkuCGWN19A+2pGvvlfg8RIoq0IPQv07498eTB7so
+	IIz2EtfgGqTFje8Yo/GPH+jx9e3/ag3xZuZSw6Aq2/CFPIwSv+yoPwLKnakIM/h2LWx3
+	Y29/wKVle/u0n7FC8vcH4qbjv0ry/J3i3z0QDPz0fUqvwhkjRIcj8RXdVXi9P6QLC5+p
+	KqGw==
+X-Received: by 10.68.217.129 with SMTP id oy1mr103717pbc.23.1382054905336;
+	Thu, 17 Oct 2013 17:08:25 -0700 (PDT)
+Received: from haswell.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
 	by mx.google.com with ESMTPSA id
-	sd3sm6889601pbb.42.1969.12.31.16.00.00
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 17 Oct 2013 17:02:31 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 6.6 \(1510\))
+	dq3sm100434739pbc.35.1969.12.31.16.00.00
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 17 Oct 2013 17:08:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20131017235914.GE3930@jama>
-Date: Thu, 17 Oct 2013 17:02:35 -0700
-Message-Id: <B3FF8CDA-032C-49E1-86D1-78ED6E92FC10@gmail.com>
-References: <1382051520-1562-1-git-send-email-raj.khem@gmail.com>
-	<20131017235914.GE3930@jama>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1510)
-Cc: Cliff Brake <cbrake@bec-systems.com>
-Subject: Re: [meta-oe][PATCHv2 1/3] libraw1394: add recipe
+Date: Thu, 17 Oct 2013 17:08:03 -0700
+Message-Id: <1382054883-16540-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-gnome][PATCH] libbonobo: Fix build error with new autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,80 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 00:02:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Oct 2013 00:08:23 -0000
 
+Don't use srcdir with tests
 
-On Oct 17, 2013, at 4:59 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../libbonobo/do-not-use-srcdir-variable.patch     | 24 ++++++++++++++++++++++
+ .../recipes-gnome/bonobo/libbonobo_2.24.3.bb       |  4 +++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
 
-> On Thu, Oct 17, 2013 at 04:11:58PM -0700, Khem Raj wrote:
->> From: Cliff Brake <cbrake@bec-systems.com>
->>=20
->> Initial recipe created by Khem Raj
->=20
-> libraw1394 was already merged today:
-> =
-http://git.openembedded.org/meta-openembedded/commit/?h=3Ddora&id=3Dcd8755=
-253e6972356e2172670c1861ea664b0f0a
-> =
-http://git.openembedded.org/meta-openembedded/commit/?id=3D309eb8a5ff0e7ec=
-beaf191a9dc906b618d40dd94
->=20
-> It wasn't removed when you rebased, because it was moved to
-> recipes-support as discussed on #oe.
-
-hmmm, ok, it was an update so I will redo it.
->=20
-> I haven't merged coriander yet, because it wasn't build on jenkins at
-> all, because one of dependencies failed because of newer automake.
->=20
->> Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb | 11 =
-+++++++++++
->> 1 file changed, 11 insertions(+)
->> create mode 100644 =
-meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
->>=20
->> diff --git =
-a/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb =
-b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
->> new file mode 100644
->> index 0000000..617ba1b
->> --- /dev/null
->> +++ b/meta-oe/recipes-multimedia/libraw1394/libraw1394_2.1.0.bb
->> @@ -0,0 +1,11 @@
->> +DESCRIPTION =3D "base library for low-level IEEE 1394 accesses"
->> +HOMEPAGE =3D =
-"https://ieee1394.wiki.kernel.org/index.php/Libraries#libraw1394"
->> +SECTION =3D "libs"
->> +LICENSE =3D "LGPL-2.1"
->> +LIC_FILES_CHKSUM =3D =
-"file://COPYING.LIB;md5=3Dd8045f3b8f929c1cb29a1e3fd737b499"
->> +
->> +SRC_URI =3D =
-"https://www.kernel.org/pub/linux/libs/ieee1394/${BPN}-${PV}.tar.gz"
->> +SRC_URI[md5sum] =3D "d06cccb776b240b6ab5efdee33b87af2"
->> +SRC_URI[sha256sum] =3D =
-"a83cff16fb8885831bc29d7d17f3c570dc39251d89e20795c08e87720de0ba70"
->> +
->> +inherit autotools
->> --=20
->> 1.8.3.2
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
+new file mode 100644
+index 0000000..46f8137
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
+@@ -0,0 +1,24 @@
++| tests/Makefile.am:55: error: using '$(srcdir)' in TESTS is currently broken: '$(srcdir)/te
++st-properties.sh'
++| tests/test-activation/Makefile.am:76: warning: 'INCLUDES' is the old name for 'AM_CPPFLAGS
++' (or '*_CPPFLAGS')
++| utils/Makefile.am:9: warning: 'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS
++')
++| autoreconf: automake failed with exit status: 1
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Not Submitted
++
++Index: libbonobo-2.24.3/tests/Makefile.am
++===================================================================
++--- libbonobo-2.24.3.orig/tests/Makefile.am	2009-04-18 05:27:41.000000000 -0700
+++++ libbonobo-2.24.3/tests/Makefile.am	2013-10-17 16:59:45.612989079 -0700
++@@ -53,7 +53,7 @@
++ 	MODELS_DIR="$(srcdir)/models"
++ 
++ TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \
++-	test-stream-mem$(EXEEXT) $(srcdir)/test-properties.sh test-storage-mem$(EXEEXT) \
+++	test-stream-mem$(EXEEXT) test-properties.sh test-storage-mem$(EXEEXT) \
++ 	test-generic-factory.sh test-main-loop$(EXEEXT)
++ check_SCRIPTS = test-properties.sh test-generic-factory.sh
++ EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
+index 622f244..b837802 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
+@@ -1,6 +1,8 @@
+ require libbonobo.inc
+ PR = "r2"
+ 
+-SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch"
++SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
++            file://do-not-use-srcdir-variable.patch \
++           "
+ SRC_URI[archive.md5sum] = "b217cef6a187505290c66c5bf8225d38"
+ SRC_URI[archive.sha256sum] = "5310957fa90691689c0557218b8833f681666cae160bd84e1f2c2705189a4ebe"
+-- 
+1.8.3.2
 
 
