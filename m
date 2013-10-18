@@ -1,19 +1,37 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 85C0B6C76F
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B04F6C76F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2013 08:46:48 +0000 (UTC)
-Message-ID: <5260F57F.90502@communistcode.co.uk>
-Date: Fri, 18 Oct 2013 09:46:55 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
-MIME-Version: 1.0
+	Fri, 18 Oct 2013 08:48:16 +0000 (UTC)
+Received: by mail-we0-f177.google.com with SMTP id x55so3292209wes.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2013 01:48:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LGyyk4XrZ1qYXaNDBZQprkiSxpTDlqi7VUprUG4rso8=;
+	b=CIrYhu8Oat6j2k+xGd77e87RVOm8RaTokp/4HrZmmc+FyJEXEllPup8UKhori5+QgZ
+	Oom5kqcC3i/brduQVCZaFCWzdAxFJG4IlZWAq0Jhd8AbpKjYep3fkN/n5qY2JLh5JA+v
+	mA35b42tBheXdxAfT4UA7jj1Rq6QpDPXg/1UyjrDDrOUZjv1o0Gyxi4KHiq5OoDDLCGX
+	dTNPBmHUeqlJvnldXizullKCobGxSiGR4k0Nvme9eeJgD/zWTio2CsG5w+w6DuO7y+sn
+	K3yvMROYQWRrkm0Ce8tpeNqInpifSdDzb1OPSoPs6IM9m0bzT+pXn6hwRenHMu48NLKb
+	Lntw==
+X-Gm-Message-State: ALoCoQlRoNt/nygndtaZzi7gVenSoPjwhJaH4gfJvIyCoXWQCacglO39Hhw04uXAlUPJwfA22q78
+X-Received: by 10.194.175.133 with SMTP id ca5mr1498837wjc.19.1382086097738;
+	Fri, 18 Oct 2013 01:48:17 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:21f:c6ff:feaa:c5fb])
+	by mx.google.com with ESMTPSA id ey4sm1206965wic.11.2013.10.18.01.48.16
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
+	Fri, 18 Oct 2013 01:48:16 -0700 (PDT)
+From: koen@dominion.thruhere.net
 To: openembedded-devel@lists.openembedded.org
-References: <1381760413-15098-1-git-send-email-ml@communistcode.co.uk>	<1381760413-15098-2-git-send-email-ml@communistcode.co.uk>
-	<20131017153405.GC3930@jama>
-In-Reply-To: <20131017153405.GC3930@jama>
-Subject: Re: [meta-oe][PATCHv3 1/3] json-c: add 0.11
+Date: Fri, 18 Oct 2013 10:48:06 +0200
+Message-Id: <1382086086-4070-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.7.10
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] libhugetlbfs: kill /opt usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,62 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2013 08:46:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Oct 2013 08:48:16 -0000
 
-On 17/10/13 16:34, Martin Jansa wrote:
-> On Mon, Oct 14, 2013 at 03:20:11PM +0100, Jack Mitchell wrote:
->> From: Jack Mitchell <jmitchell@cbnl.com>
->>
->> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
->> ---
->>  meta-oe/recipes-support/json-c/json-c_0.11.bb | 13 +++++++++++++
->>  1 file changed, 13 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/json-c/json-c_0.11.bb
->>
->> diff --git a/meta-oe/recipes-support/json-c/json-c_0.11.bb b/meta-oe/recipes-support/json-c/json-c_0.11.bb
->> new file mode 100644
->> index 0000000..e0391f5
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/json-c/json-c_0.11.bb
->> @@ -0,0 +1,13 @@
->> +SUMMARY = "JSON-C implements a reference counting object model that allows you to easily construct JSON objects in C"
->> +HOMEPAGE = "https://github.com/json-c/json-c/wiki"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=de54b60fbbc35123ba193fea8ee216f2"
->> +
->> +SRC_URI = "https://s3.amazonaws.com/json-c_releases/releases/${P}.tar.gz"
->> +
->> +SRC_URI[md5sum] = "aa02367d2f7a830bf1e3376f77881e98"
->> +SRC_URI[sha256sum] = "28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983edbfac9149494448c"
->> +
->> +PARALLEL_MAKE = ""
->> +
->> +inherit autotools
-> 
-> It conflicts with libjson from oe-core:
-> WARNING: libjson-0.9 is already registered as shlib
-> provider for libjson.so.0, ignoring json-c-0.11 trying to register the
-> same
-> 
-> openembedded-core/meta/recipes-devtools/libjson/libjson_0.9.bb
-> 
-> You probably want to upgrade libjson in oe-core if it's the same json-c...
-> 
-> 
+From: Koen Kooi <koen.kooi@linaro.org>
 
-Ah, that's not confusing at all eh!
+/opt should never be used for packages built by OE, so install the tests in a more standard location.
 
-I've sent a patch to oe-core, if they take it i'll ping you about
-pulling the libestr and rsyslogd.
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Thanks JaMa!
-
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index 24480c3..d29dee1 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -37,8 +37,8 @@ do_configure() {
+ 
+ do_install() {
+         oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
+-          INST_TESTSDIR32=/opt/libhugetlbfs/tests \
+-          INST_TESTSDIR64=/opt/libhugetlbfs/tests \
++          INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
++          INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
+           install-tests
+ }
+ 
+@@ -47,6 +47,6 @@ PARALLEL_MAKE_pn-${PN} = ""
+ PACKAGES =+ "${PN}-perl ${PN}-tests "
+ FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
+ FILES_${PN}-perl = "${libdir}/perl"
+-FILES_${PN}-tests += "/opt/libhugetlbfs/tests"
++FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
+ 
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 -- 
-  Jack Mitchell (jack@embed.me.uk)
-  Embedded Systems Engineer
-  Cambridgeshire, UK
-  http://www.embed.me.uk
--- 
+1.7.10
+
 
