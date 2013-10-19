@@ -1,26 +1,24 @@
-Return-Path: <anders@chargestorm.se>
-Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
-	[83.145.59.141])
-	by mail.openembedded.org (Postfix) with ESMTP id E4E2D6A463
+Return-Path: <morphis@gravedo.de>
+Received: from gravedo.de (gravedo.de [85.214.79.159])
+	by mail.openembedded.org (Postfix) with ESMTP id 09B0E612D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Oct 2013 08:17:33 +0000 (UTC)
-Received: from android-17c990e6fd634c9c.lan (83.252.255.124) by
-	stoexhubfe02.domain01.net (10.12.10.7) with Microsoft SMTP Server (TLS)
-	id 8.3.279.1; Sat, 19 Oct 2013 10:17:33 +0200
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20131018094009.GF3930@jama>
-References: <cover.1381920288.git.anders@chargestorm.se>
-	<cace5960-a68e-4774-911d-debd3fc71b6d@email.android.com>
-	<20131018094009.GF3930@jama>
-MIME-Version: 1.0
-From: Anders Darander <anders@chargestorm.se>
-Date: Sat, 19 Oct 2013 10:17:26 +0200
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-Message-ID: <29fe97d5-76b0-4898-bc80-9af1aef64855@email.android.com>
-X-GFI-SMTP-Submission: 1
-Subject: Re: [PATCH 0/2] Breakpad and ktap recipes
+	Sat, 19 Oct 2013 12:12:00 +0000 (UTC)
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 6CB563B3417D; Sat, 19 Oct 2013 14:11:59 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00,
+	URIBL_BLOCKED autolearn=unavailable version=3.3.1
+Received: from localhost (p5B31E8A1.dip0.t-ipconnect.de [91.49.232.161])
+	by gravedo.de (Postfix) with ESMTPSA id 3FFF63B3417C;
+	Sat, 19 Oct 2013 14:11:57 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 19 Oct 2013 14:11:48 +0200
+Message-Id: <1382184710-30716-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-qt5][PATCH 1/3] maliit-frameworks-qt5: provide ${datadir} also by EXTRA_QMAKEVARS_PRE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,88 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Oct 2013 08:17:34 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 19 Oct 2013 12:12:01 -0000
 
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes-qt/maliit/maliit-framework-qt5_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-
-Martin Jansa <martin.jansa@gmail.com> wrote:
->On Fri, Oct 18, 2013 at 07:14:09AM +0200, Anders Darander wrote:
->> I'm going to resend this series with the correct prefix added. 
->
->Are they the same, just with prefix added?
-
-Yes, they are the same. Had I known that you already had them included in the last Jenkins build, I wouldn't have resent them. 
-
-So no need to fetch a new version. 
-
-Cheers, 
-Anders 
-
->I've already included them in last jenkins builds, so to know if I
->should fetch new version from patchwork or not.
->
->> Anders Darander <anders@chargestorm.se> wrote:
->> >
->> >These are a couple of recipes that we've been using internally for
->some
->> >time. They
->> >were developed and mostly used on a dylan-based setup. Testing has
->> >primarily been 
->> >performed on ARM, both qemuarm and our custom machine.
->> >
->> >Breakpad is a crash reporting tool, that's getting a wider use.
->> >Please, let me know if there's a more efficient way (or otherwise
->> >better way) to 
->> >have the bbclass generate the symbol file.
->> >
->> >Ktap is a new scripting dynamic tracing tool for Linux. This recipe
->> >will be of
->> >use until everyone is on 3.13+ kernels (ktap has been merged for the
->> >3.13 series).
->> >
->> >The following changes since commit
->> >f8903f53db717294d63a8d79b5ef7ca34b3c189e:
->> >
->> >libhugetlbfs: install perl lib to directory perl instead of perl5
->> >(2013-10-15 13:43:53 +0200)
->> >
->> >are available in the git repository at:
->> >
->> >  git://github.com/darander/meta-oe breakpad-ktap
->> >  https://github.com/darander/meta-oe/tree/breakpad-ktap
->> >
->> >Anders Darander (2):
->> >  breakpad: add initial recipe
->> >  ktap: add initial recipe
->> >
->> > meta-oe/classes/breakpad.bbclass                  | 32 ++++++++++
->> >meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 72
->> >+++++++++++++++++++++++
->> > meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb    | 19 ++++++
->> > meta-oe/recipes-kernel/ktap/ktap.inc              | 11 ++++
->> > meta-oe/recipes-kernel/ktap/ktap_0.3.bb           | 17 ++++++
->> > 5 files changed, 151 insertions(+)
->> > create mode 100644 meta-oe/classes/breakpad.bbclass
->> > create mode 100644
->meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
->> > create mode 100644 meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
->> > create mode 100644 meta-oe/recipes-kernel/ktap/ktap.inc
->> > create mode 100644 meta-oe/recipes-kernel/ktap/ktap_0.3.bb
->> 
->> -- 
->> ChargeStorm AB / eStorm 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+index ccd0c4c..56d1082 100644
+--- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
++++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
+@@ -49,6 +49,7 @@ FILES_${PN}-dev += "\
+ EXTRA_QMAKEVARS_PRE = "\
+     PREFIX=${prefix} \
+     LIBDIR=${libdir} \
++    DATADIR=${datadir} \
+     QT_IM_PLUGIN_PATH=${libdir}/qt4/plugins/inputmethods \
+     MALIIT_INSTALL_PRF=${QMAKE_MKSPEC_PATH}/mkspecs/features \
+     SCHEMADIR=${sysconfdir}/gconf/schemas \
 -- 
-Anders Darander
-ChargeStorm AB          Tel: +46 702 44 84 36
-Laxholmstorget 3        Email: anders@chargestorm.se
-602 21 Norrköping       Web: www.chargestorm.se
+1.8.1.2
 
-Sent from my Android phone with K-9 Mail. Please excuse my brevity.
 
