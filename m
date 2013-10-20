@@ -1,35 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id EE6766CFF9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Oct 2013 12:53:59 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id d41so2983079eek.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Oct 2013 05:54:01 -0700 (PDT)
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E9DF6D125;
+	Sun, 20 Oct 2013 13:04:01 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id z15so2899873ead.19
+	for <multiple recipients>; Sun, 20 Oct 2013 06:04:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8g5aY5jXhgtExFaINE8Q9oOF7UGHf/BqCsfEn3RVilQ=;
-	b=RqssU1ML9p2UGAU6/MqWLKzlntCu6PWPgzcUX4HaGcZxBL1cAS/vPXBmjJ09K2+vKW
-	dAkoFRH5sRpt2FrZoNCuV05ivsULpY2+dHeFLSMxef35zzEAvdpIWDH+OP3zDDaUDcDx
-	HkfaDGQI1kw24+co9lRsSnf8qFrfvV/xIHlpDisNPwgf13IYXJRVA+g//sTao/9unhxo
-	EFcjDhg+NXp7hSYmnUgmnv9olHe8VcxB194OosLSjMoyKjopKty7WPP93FoK646SCv0s
-	+SUpAlXhxeAsYST09W8kzC/FkybO3u1g0HODyOMdXGoWBkN5vf0327GunW57WHlaqVdx
-	sH/g==
-X-Received: by 10.15.48.67 with SMTP id g43mr16399108eew.17.1382273641478;
-	Sun, 20 Oct 2013 05:54:01 -0700 (PDT)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=EA0d8O0ZQj6qP/qv8DnOcy+LQC+ANHyI3ZD+r0h+2GU=;
+	b=vGMno5tzAPXcRUttnTf3SkVrP7iU0fMsGJsY7zvncV/Kz5BwQvBngBiAfis2C8rB2w
+	o4ihFYly0QpFzWfx7P995DHH/WALmvel88p67b/VWeIb5LVQhGxd64H24NDpPAe7JRbt
+	xhqYYJJRfV+ZehiX7vExc53UqvCxUK8ZLyzTSOhViiZ5gl03B+onyfXDWwRWfwHBoh07
+	VaQig8nJiKkSKxlfwWlVvk3oFJWi3BWempGPO2mJxWuBYUcgSk8A7d1SVD6ZBlPaXYOI
+	lOSyybOa2z+oOePufPumSvpnZybVxW6PKzr2Q1d9mSN6SVo3CU2DQdyGudq13fkn5pKs
+	OSQQ==
+X-Received: by 10.14.103.69 with SMTP id e45mr2355849eeg.51.1382274242545;
+	Sun, 20 Oct 2013 06:04:02 -0700 (PDT)
 Received: from localhost (ip-62-24-80-36.net.upcbroadband.cz. [62.24.80.36])
-	by mx.google.com with ESMTPSA id b42sm30335267eem.9.2013.10.20.05.54.00
+	by mx.google.com with ESMTPSA id f49sm30448019eec.7.2013.10.20.06.04.01
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Oct 2013 05:54:00 -0700 (PDT)
+	Sun, 20 Oct 2013 06:04:02 -0700 (PDT)
+Date: Sun, 20 Oct 2013 15:04:02 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Oct 2013 14:53:52 +0200
-Message-Id: <1382273632-10984-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4
-In-Reply-To: <1382273632-10984-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1382273632-10984-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-multimedia][PATCH 2/2] bigbuckbunny: Don't use whole avi in LIC_FILES_CHKSUM and add version
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20131020130402.GA29181@jama>
+References: <CAMKF1sonakYiB++QeeeXKVztx+7CKW3zn=ndn=kP+kSVmqu3Qw@mail.gmail.com>
+	<20130919120202.GK7313@jama>
+	<19D9595C-FE9E-4E24-B249-D32F62F25EA2@gmail.com>
+	<20130920114815.GI18414@jama>
+MIME-Version: 1.0
+In-Reply-To: <20130920114815.GI18414@jama>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] patchwork updated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,64 +50,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Oct 2013 12:54:00 -0000
+X-List-Received-Date: Sun, 20 Oct 2013 13:04:02 -0000
+X-Groupsio-MsgNum: 46823
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1yeeQ81UyVL57Vl7"
+Content-Disposition: inline
 
-* it's causing huge deploy/licenses files:
-  211M    deploy/licenses/bigbuckbunny-480p
-  317M    deploy/licenses/bigbuckbunny-720p
-  886M    deploy/licenses/bigbuckbunny-1080p
-  and avi checksum is already verified by SRC_URI checksums
+--1yeeQ81UyVL57Vl7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb          | 5 +++--
- .../recipes-multimedia/sample-content/bigbuckbunny-480p.bb           | 5 +++--
- .../recipes-multimedia/sample-content/bigbuckbunny-720p.bb           | 5 +++--
- 3 files changed, 9 insertions(+), 6 deletions(-)
+On Fri, Sep 20, 2013 at 01:48:15PM +0200, Martin Jansa wrote:
+> On Thu, Sep 19, 2013 at 09:11:50PM -0700, Khem Raj wrote:
+> >=20
+> > On Sep 19, 2013, at 5:02 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> >=20
+> > > On Sun, Sep 15, 2013 at 12:32:44AM -0700, Khem Raj wrote:
+> > >> Hi All,
+> > >>=20
+> > >> The patchwork has been updated to latest. Please keep an eye if you
+> > >> see something non working let me know immediately.
+> > >=20
+> > > Hi,
+> > >=20
+> > > something is wrong,
+> > >=20
+> > > http://patchwork.openembedded.org/user/bundles/
+> > >=20
+> > > returns 502 Bad Gateway for me and I cannot access individual bundles,
+> > > which is very bad, because all oe-devel patches are separated into
+> > > bundles based on layer.
+> >=20
+> > OK. I have created a local fix for it and also started a discussion on =
+patchwork ml
+> > bundles should be visible now. Let me know if there are further issues.
+>=20
+> Thanks for quick fix, it works for me now, but maybe not for others
+>=20
+> Bundles main page
+> http://patchwork.openembedded.org/user/bundles/
+> as well as user bundle (this is "in-test" bundle)
+> http://patchwork.openembedded.org/user/bundle/79/?archive=3Dboth
+> work now, but public link for the same bundle
+> http://patches.openembedded.org/bundle/jama/in-test/
+> shows 502 Bad Gateway
+>=20
+> Can you check that your local fix can be applied in last link as well?
 
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-index 93a52c0..e49b472 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-@@ -1,6 +1,7 @@
- DESCRIPTION = "Big Buck Bunny movie - 1080P"
--LICENSE = "CC-BY"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_1080p_surround.avi;md5=223991c8b33564eb77988a4c13c1c76a"
-+LICENSE = "CC-BY-3.0"
-+# http://www.bigbuckbunny.org/index.php/about/
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
- 
- SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_surround.avi"
- SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-index 31a90ca..84f3259 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-@@ -1,6 +1,7 @@
- DESCRIPTION = "Big Buck Bunny movie - 480P"
--LICENSE = "CC-BY"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_480p_surround-fix.avi;md5=ed7ed01e9aefba8ddd77c13332cec120"
-+LICENSE = "CC-BY-3.0"
-+# http://www.bigbuckbunny.org/index.php/about/
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
- 
- SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi"
- SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-index 61cdfdc..810e05f 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-@@ -1,6 +1,7 @@
- DESCRIPTION = "Big Buck Bunny movie - 720P"
--LICENSE = "CC-BY"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/big_buck_bunny_720p_surround.avi;md5=0da8fe124595f5b206d64cb1400bbefc"
-+LICENSE = "CC-BY-3.0"
-+# http://www.bigbuckbunny.org/index.php/about/
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
- 
- SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi"
- SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
--- 
-1.8.4
+Khem, can you please look at it? I'm trying to get layer maintainers to
+check and cleanup their bundles, but that doesn't work for them now.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--1yeeQ81UyVL57Vl7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlJj1MIACgkQN1Ujt2V2gBw+KwCgntRbcfqBU0wyPjvZRr2yplGW
+QNoAn1gzW3UvXLNeACEM22q8xDojX/Ma
+=vyuf
+-----END PGP SIGNATURE-----
+
+--1yeeQ81UyVL57Vl7--
