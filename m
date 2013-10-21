@@ -1,23 +1,42 @@
-Return-Path: <anders@chargestorm.se>
-Received: from STOEXHUB01.domain01.net (STOEXHUB01.domain01.net
-	[83.145.59.142])
-	by mail.openembedded.org (Postfix) with ESMTP id C24536CDCB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-vb0-f44.google.com (mail-vb0-f44.google.com
+	[209.85.212.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B7E16CDCB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2013 08:29:43 +0000 (UTC)
-Received: from [172.22.79.29] (212.20.242.100) by STOEXHUB01.domain01.net
-	(10.12.10.1) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Mon, 21 Oct 2013 10:29:42 +0200
-User-Agent: K-9 Mail for Android
-In-Reply-To: <2478778.XBk41EpSZr@koontz>
-References: <2478778.XBk41EpSZr@koontz>
+	Mon, 21 Oct 2013 08:32:22 +0000 (UTC)
+Received: by mail-vb0-f44.google.com with SMTP id 11so1829875vbe.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Oct 2013 01:32:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=gUDzYHJEv06Cg9l0josF2htpGT7mOJvXxpuRjxeFgDs=;
+	b=nG1Iewt9c3W6z9Lf45q6SKvnuyMqdo65BlpFGwKTR0I+ykNcXOWQd1LDMgnamSTD/P
+	z+WjzBERoIvJZ3LTMM9J40dOopU1oXCTc23F32Od2G+NbW44/VzbktA3qB0v1tqieccf
+	vhn1jiCjPCsNrHL36BSzbcHyKw3cUN3OO55Shaxe11l4OLwMwXdk9cjF1Xfj/fzwGE3T
+	jqt7ZVSRpYxndGvfL2G/D+Vze18iR9i9ChNAgSHcNiPd5atWpD5N4X/s7yT5zb+pCeVP
+	PnwP1DgGR5nkoT5Ifq3uiByQlH06J+ZeDoqYfwoRIbfWtU8iqvHgRH/llHLMdAJdEPGE
+	cvkQ==
+X-Gm-Message-State: ALoCoQnGkD0wq3iivZNeX2cmi0SnG3QffLcNU/dXWOCPVdkV45xTYucKG0XQlzAE5amVI68shFEf
+X-Received: by 10.220.164.202 with SMTP id f10mr325581vcy.25.1382344343652;
+	Mon, 21 Oct 2013 01:32:23 -0700 (PDT)
 MIME-Version: 1.0
-From: Anders Darander <anders@chargestorm.se>
-Date: Mon, 21 Oct 2013 09:29:27 +0100
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, =?ISO-8859-1?Q?S=F8ren_Holm?=
-	<sgh@sgh.dk>
-Message-ID: <544da34b-acbf-44ca-8f84-fd993db893f4@email.android.com>
-Subject: Re: Regarding layers and their versioning.
+Received: by 10.220.71.201 with HTTP; Mon, 21 Oct 2013 01:32:02 -0700 (PDT)
+In-Reply-To: <20131020194345.GB3709@jama>
+References: <20130502151833.GC3206@jama>
+	<20130516075215.GA24809@jama.dyndns-home.com>
+	<20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
+	<20130611160434.GI3233@jama> <20130622181656.GK14021@jama>
+	<20130725162341.GA3280@jama> <20130808225419.GB17945@jama>
+	<20130811114403.GG17945@jama> <20130917123058.GC7313@jama>
+	<20131020194345.GB3709@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 21 Oct 2013 09:32:02 +0100
+Message-ID: <CAJTo0LaQoFYc601yo4K+OuPUJa2Cq9McPH2nt+41X+EtZQgkUw@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +50,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 08:29:44 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 21 Oct 2013 08:32:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 20 October 2013 20:43, Martin Jansa <martin.jansa@gmail.com> wrote:
+> libtool-cross-2.4.2: libtool-cross: configure was passed unrecognised options: --with-sysroot
+> libxdmcp-1.1.1: libxdmcp: configure was passed unrecognised options: --without-groff --disable-malloc0returnsnull --without-ps2pdf --disable-specs
+> libxau-1.0.8: libxau: configure was passed unrecognised options: --without-xmlto --disable-malloc0returnsnull --without-ps2pdf --without-groff --without-fop --disable-specs
+[snip many many more lines]
 
+Well at least my QA test works. :)
 
-"Søren Holm" <sgh@sgh.dk> wrote:
->Hello
->
->What is the best way to manage a private repo with recipes as well as
->meta-oe, 
->meta-core and meta-angstrom.
+I thought I'd send patches for a large number of these already that
+are in oe-core, but obviously not.  I'll definitely do that shortly.
 
->Currently I have a private repo that has the layers attached as
->submodules. Is 
->that a crazy setup or what?
-
-We're doing the same internally at ChargeStorm. One benefit is that we're having our "master" repo keeping track of all the layers that we're using and which revision of those layers. 
-
-Other people / projects just use a shell script checking out the desired layers. Some people combines layers into one huge repo (though I'd personally not recommend that approach). (That'd be similar to how Poky is being managed). 
-
-Yet other people / projects use repo. 
-
-It's up to what you're comfortable with in the end. 
-
-> ...... and while  I'm at it - which
->revision of 
->all those layers are ment to match together? does master og meta-oe
->match 
->master of meta-core or do they have simmilar tags/branches.
-
-Yes, in general master of all (most) layers are intended to be used with master from oe-core. Most layers k att least bigger and more used ones) try to support a few old releases, and typically do this using the same branch name as used in oe-core. 
-
-Cheers, 
-Anders 
-
--- 
-ChargeStorm AB / eStorm 
+Ross
 
