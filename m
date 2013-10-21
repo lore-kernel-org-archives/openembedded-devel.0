@@ -1,38 +1,32 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 9143E6D073
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 67C676CF28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2013 14:17:33 +0000 (UTC)
-Received: by mail-ob0-f169.google.com with SMTP id wp4so5888656obc.28
+	Mon, 21 Oct 2013 20:52:50 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id u16so107608iet.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2013 07:17:31 -0700 (PDT)
+	Mon, 21 Oct 2013 13:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	bh=46SyL7wcFOX6Fucm5FFYy257cOoPG8Aj6lJusq9ahB8=;
-	b=qOm5rKHDQ9WN1ar9HalMOiVnqNY2nFrXCwu2Ll/v+VzlCAjkie289K13e1Mpw8OBNW
-	2uBdbbPvAuIVWhvnsNv8U7u3xhBHGTHVE7LelqpkcC/2n1VFBZPVVJmVGlwghvKOWDOW
-	RuPgFHQ7AmBU0bSewOA/K/Gim5gI1pYDwibQN0oBNK77oDWJ9MrtykBPmDZuGsop3m2r
-	zcKYE9c0hvyE+UTo9cVkEz79uo6MVK9yN28qYY3lcHNAxsuHSH2zwLFLO1BGlHTeQ6cK
-	mwDcCorsawpmeTAzW1P2b93aDY91jGEf7JhAKrLoa1PqpTOc5pxPd6qtzjz+OhDYO3KJ
-	Mx7Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=OxFmQhCrtCHr9e4a6ZREWKTo4og9TD1/gfGN/3BUe9U=;
+	b=DU3x7AL2mHzbb11+zOHSuDWIdoPAn5B4IO78t+dPjyKnl2N4pbL6L43mD6rc06yOzY
+	ETV+5KsqF7nqHNZXobpb+QxRD2PSaI+sRwaH/sM2784rsSbGVpkVp++CQvwmuC+27ept
+	8hTYk7amuPhI4zkoJA01g4L0MSnvd04Rl1pJLse9yYW5ADHmvnxzm/wM7KDfvlSYv5g1
+	FJ/IJm7niKHV5eHPc2POsgGln/87/+j5lXQNqKmwR6ylQ86+KGdU62FwbYy9qhvlHteh
+	nELQx48wfQ3+WHZFSvDmQdA+YzU35N9QnkaJFaPMZDqqqCrFuXO6TzVHJoRnMVkKzk0+
+	zRpw==
+X-Received: by 10.42.121.132 with SMTP id j4mr81572icr.42.1382388771495; Mon,
+	21 Oct 2013 13:52:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.60.73.137 with SMTP id l9mr7344193oev.32.1382365048166; Mon,
-	21 Oct 2013 07:17:28 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Mon, 21 Oct 2013 07:17:28 -0700 (PDT)
-In-Reply-To: <1734982.Eo3HTheTAh@helios>
-References: <2478778.XBk41EpSZr@koontz>
-	<544da34b-acbf-44ca-8f84-fd993db893f4@email.android.com>
-	<1734982.Eo3HTheTAh@helios>
-Date: Mon, 21 Oct 2013 12:17:28 -0200
-X-Google-Sender-Auth: aPS1wIWw0qm-cuPmofFCBoxicuo
-Message-ID: <CAP9ODKr0=4MPP-dXCVM7xzRRzQkGN3oTk2JQRGx=iUxwTkFFGw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: Re: Regarding layers and their versioning.
+Received: by 10.50.5.225 with HTTP; Mon, 21 Oct 2013 13:52:21 -0700 (PDT)
+In-Reply-To: <1382273632-10984-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1382273632-10984-1-git-send-email-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Oct 2013 13:52:21 -0700
+Message-ID: <CAMKF1srdJWQrLLDB6FYERFQeRTjKu0bs5q0nOSRUq1w8BE7u0Q@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][meta-multimedia][PATCH 1/2] llvm3.2: drop this version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +40,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 14:17:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Oct 2013 20:52:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Oct 21, 2013 at 7:01 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Monday 21 October 2013 09:29:27 Anders Darander wrote:
->> "S=F8ren Holm" <sgh@sgh.dk> wrote:
->> >What is the best way to manage a private repo with recipes as well as
->> >meta-oe,
->> >meta-core and meta-angstrom.
->> >
->> >Currently I have a private repo that has the layers attached as
->> >submodules. Is that a crazy setup or what?
->>
->> We're doing the same internally at ChargeStorm. One benefit is that we'r=
-e
->> having our "master" repo keeping track of all the layers that we're usin=
-g
->> and which revision of those layers.
->>
->> Other people / projects just use a shell script checking out the desired
->> layers. Some people combines layers into one huge repo (though I'd
->> personally not recommend that approach). (That'd be similar to how Poky =
-is
->> being managed).
->>
->> Yet other people / projects use repo.
->>
->> It's up to what you're comfortable with in the end.
+On Sun, Oct 20, 2013 at 5:53 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * 3.3 is used by default mesa config, 2.8 is used in meta-java, keep 2.9 as last in 2*
+
+who is using 2.9 ? I would suggest to keep the one we know is used.
+
 >
-> Just to clarify, we use the combo-layer script (scripts/combo-layer) to m=
-anage
-> the Poky repository. It can combine multiple repositories or even parts o=
-f
-> repositories into one and keep it up-to-date. It works well for our purpo=
-ses,
-> i.e. providing a single repository that people can download containing al=
-l of
-> the needed basic components. However, it's just one of a number of differ=
-ent
-> solutions in this area and you'd have to evaluate which tool works best f=
-or
-> your situation.
-
-At O.S. Systems we used some variants here.
-
-We started with forking and moved to combo-layer script. The
-combo-layer works for most case but it fails badly with empty merge
-commits and like. So it works quite fine for Yocto use case but not as
-fine for company workflow.
-
-In the end we choose 'repo' and we provide some 'platform' for
-customers where we link all need projects in a single .xml file; this
-scales fine and is quite easy to use.
-
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch | 14 --------------
+>  meta-oe/recipes-core/llvm/llvm3.2_3.2.bb                |  9 ---------
+>  2 files changed, 23 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+>  delete mode 100644 meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+>
+> diff --git a/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch b/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+> deleted file mode 100644
+> index c3ae494..0000000
+> --- a/meta-oe/recipes-core/llvm/llvm3.2/arm_fenv_uclibc.patch
+> +++ /dev/null
+> @@ -1,14 +0,0 @@
+> -Index: llvm-2.9/include/llvm/Support/FEnv.h
+> -===================================================================
+> ---- llvm-2.9.orig/include/llvm/Support/FEnv.h  2010-11-29 20:44:50.000000000 +0100
+> -+++ llvm-2.9/include/llvm/Support/FEnv.h       2011-11-18 18:42:22.580161297 +0100
+> -@@ -17,6 +17,9 @@
+> -
+> - #include "llvm/Config/config.h"
+> - #include <cerrno>
+> -+
+> -+#undef HAVE_FENV_H
+> -+
+> - #ifdef HAVE_FENV_H
+> - #include <fenv.h>
+> - #endif
+> diff --git a/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb b/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+> deleted file mode 100644
+> index 48e27b9..0000000
+> --- a/meta-oe/recipes-core/llvm/llvm3.2_3.2.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -require llvm.inc
+> -require llvm3.inc
+> -
+> -# 3.2 is different then 2.8, 2.9 and 3.3
+> -LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=60fdd7739841f04a2ce2171a726be8f3"
+> -
+> -SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
+> -SRC_URI[md5sum] = "71610289bbc819e3e15fdd562809a2d7"
+> -SRC_URI[sha256sum] = "125090c4d26740f1d5e9838477c931ed7d9ad70d599ba265f46f3a42cb066343"
+> --
+> 1.8.4
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
