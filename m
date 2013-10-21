@@ -1,22 +1,22 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id AA6A26D1F4
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB01.domain01.net (STOEXHUB01.domain01.net
+	[83.145.59.142])
+	by mail.openembedded.org (Postfix) with ESMTP id C24536CDCB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2013 01:16:35 +0000 (UTC)
-Received: (qmail 23657 invoked by uid 1003); 21 Oct 2013 01:16:37 -0000
-Received: from unknown (HELO ?192.168.1.103?) (philip@opensdr.com@108.44.88.68)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	21 Oct 2013 01:16:36 -0000
-Message-ID: <52648074.8000003@balister.org>
-Date: Sun, 20 Oct 2013 21:16:36 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <2478778.XBk41EpSZr@koontz>
+	Mon, 21 Oct 2013 08:29:43 +0000 (UTC)
+Received: from [172.22.79.29] (212.20.242.100) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Mon, 21 Oct 2013 10:29:42 +0200
+User-Agent: K-9 Mail for Android
 In-Reply-To: <2478778.XBk41EpSZr@koontz>
-X-Enigmail-Version: 1.5.2
+References: <2478778.XBk41EpSZr@koontz>
+MIME-Version: 1.0
+From: Anders Darander <anders@chargestorm.se>
+Date: Mon, 21 Oct 2013 09:29:27 +0100
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, =?ISO-8859-1?Q?S=F8ren_Holm?=
+	<sgh@sgh.dk>
+Message-ID: <544da34b-acbf-44ca-8f84-fd993db893f4@email.android.com>
 Subject: Re: Regarding layers and their versioning.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -31,26 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 01:16:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 21 Oct 2013 08:29:44 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
 
-On 10/20/2013 05:20 PM, Søren Holm wrote:
-> Hello
-> 
-> What is the best way to manage a private repo with recipes as well as meta-oe, 
-> meta-core and meta-angstrom.
-> 
-> Currently I have a private repo that has the layers attached as submodules. Is 
-> that a crazy setup or what? ...... and while  I'm at it - which revision of 
-> all those layers are ment to match together? does master og meta-oe match 
-> master of meta-core or do they have simmilar tags/branches.
-> 
-> Thanks in advance.
-> 
 
-If it works well for you, it must be a good idea. I've also heard of
-people using repo.
 
-Philip
+"SÃ¸ren Holm" <sgh@sgh.dk> wrote:
+>Hello
+>
+>What is the best way to manage a private repo with recipes as well as
+>meta-oe, 
+>meta-core and meta-angstrom.
+
+>Currently I have a private repo that has the layers attached as
+>submodules. Is 
+>that a crazy setup or what?
+
+We're doing the same internally at ChargeStorm. One benefit is that we're having our "master" repo keeping track of all the layers that we're using and which revision of those layers. 
+
+Other people / projects just use a shell script checking out the desired layers. Some people combines layers into one huge repo (though I'd personally not recommend that approach). (That'd be similar to how Poky is being managed). 
+
+Yet other people / projects use repo. 
+
+It's up to what you're comfortable with in the end. 
+
+> ...... and while  I'm at it - which
+>revision of 
+>all those layers are ment to match together? does master og meta-oe
+>match 
+>master of meta-core or do they have simmilar tags/branches.
+
+Yes, in general master of all (most) layers are intended to be used with master from oe-core. Most layers k att least bigger and more used ones) try to support a few old releases, and typically do this using the same branch name as used in oe-core. 
+
+Cheers, 
+Anders 
+
+-- 
+ChargeStorm AB / eStorm 
 
