@@ -1,39 +1,40 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A4A0D6D159;
-	Mon, 21 Oct 2013 11:06:26 +0000 (UTC)
-Received: by mail-lb0-f169.google.com with SMTP id o14so1217662lbi.28
-	for <multiple recipients>; Mon, 21 Oct 2013 04:06:27 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id A30FD6D159
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Oct 2013 11:09:43 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id o10so3370065eaj.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Oct 2013 04:09:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=0OlnC21XwAyl7FUiCW+A6l1GAbTBOqbf+XZEB6oTNTc=;
-	b=ek8gnPhcyDtlYdiS29oed6WHO/yoYsGMExKDaNlvmBnWBbriuMnJPg1rnJVbErmEG4
-	Qc+/E7YJ9Ti7axQph58/htVdNRvhgTeB00SGYbdSc1Fx1wD3dcRr9TM+i8F9gfRW/I12
-	kRZIXxUhPJ7RNlrQKGwvPLDhWX/+uUE1uPXJC5+GJSDsxiKxZkPQh1h073tjgXEcp6Dq
-	neaYuhfJKzWCcLQfxzLwcSHu/InSJB4yLQfy1cQYV6KkuIiP4j9v06+1tF1vdPxi7wXx
-	wHL19g+JJTP2LzK+izPxi/vOMbzFw/pqBNjhQty++Y7MCYkosedHkfun6xZ+DEKw7Tzb
-	d7YA==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=GSea2/gX6DQrepdeVWi4WZZRX1BBGAOcJwHwAlH608I=;
+	b=h3ORT3mM/Slbk70+ZPv3ttJFnPXD9MTo9V6FDCj7CwP9WWpWu5MZk40GUtk5QrQD1E
+	C++yAbFqe1W3fbIYtsUt2D7VjABnQqbfnK8GUMl/L+OBlLd6EqdDi3jlK98J0+cKN6ex
+	oSxnf2wf0Ip1IDQFBXZ2DtmgCCKMRyVBXpfTVclLm7JJBgEETpHOz89rm0A0rJi4zMaS
+	yvPzQfIhJr6sR1tPDk31nYfBjo7mUuRbt5XrbqSGAhlRqKpki5PLXfNRcFtfRs8/aUa6
+	AAimxqGwmhnZjV9COPCDsrf1VSjaVaeCHc9UOxWukrrEY+yJK5mWHgzNZpH3tonD7G8K
+	B65w==
+X-Received: by 10.14.87.3 with SMTP id x3mr1239517eee.121.1382353785095;
+	Mon, 21 Oct 2013 04:09:45 -0700 (PDT)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id z12sm42478448eev.6.2013.10.21.04.09.44
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Oct 2013 04:09:44 -0700 (PDT)
+Date: Mon, 21 Oct 2013 13:09:46 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131021110946.GD3709@jama>
+References: <2478778.XBk41EpSZr@koontz>
+	<544da34b-acbf-44ca-8f84-fd993db893f4@email.android.com>
 MIME-Version: 1.0
-X-Received: by 10.152.1.70 with SMTP id 6mr73502lak.60.1382353587189; Mon, 21
-	Oct 2013 04:06:27 -0700 (PDT)
-Received: by 10.112.52.74 with HTTP; Mon, 21 Oct 2013 04:06:27 -0700 (PDT)
-In-Reply-To: <20131021103841.GC3709@jama>
-References: <20130520130635.GA32431@jama> <20130603151008.GC3279@jama>
-	<20130611160434.GI3233@jama> <20130622181656.GK14021@jama>
-	<20130725162341.GA3280@jama> <20130808225419.GB17945@jama>
-	<20130811114403.GG17945@jama> <20130917123058.GC7313@jama>
-	<20131020194345.GB3709@jama>
-	<CAAQYJAvrTQUXHeaNcMQyE88WAF1ZySq6y+hCJD3Kpob9dOkhSg@mail.gmail.com>
-	<20131021103841.GC3709@jama>
-Date: Mon, 21 Oct 2013 13:06:27 +0200
-Message-ID: <CAAQYJAvwDdzF62MnqV=7hYNK_q8OJAgtYhz=6HSEa_V5xPUa9A@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world
+In-Reply-To: <544da34b-acbf-44ca-8f84-fd993db893f4@email.android.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: Regarding layers and their versioning.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,132 +48,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 11:06:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 21 Oct 2013 11:09:44 -0000
+X-Groupsio-MsgNum: 46836
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BQPnanjtCNWHyqYD"
+Content-Disposition: inline
 
-On Mon, Oct 21, 2013 at 12:38 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Oct 21, 2013 at 10:58:45AM +0200, Andrea Adami wrote:
->> <cut>
->> > qemux86* common (5):
->> > meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb, do_rootfs
->> </cut>
->>
->> Hi Martin, thanks for taking care of all those builds.
->> About this new do_rootfs failure [1], it seems related to update-rc.d
->> /postinst code.
->>
->> As you already know, for this image we don't want any initscript nor
->> package manager cruft but now and then some change in oe-core opens
->> unwanted doors...
->>
->> I'll investigate what's happening: seems strange it only fails on x86*.
->
-> This world build didn't have this fix included:
-> http://git.openembedded.org/openembedded-core/commit/?id=2b179d90eacc58f0b217f64407782a9174362850
->
-> it's queued for next one, maybe it will help.
->
->> | makedevs: No entry for root in search list
-> is also interesting, should it be calling makedevs in this initramfs
-> (IIRC kexecboot is creating all dev nodes manually?)
->
+--BQPnanjtCNWHyqYD
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes...
+On Mon, Oct 21, 2013 at 09:29:27AM +0100, Anders Darander wrote:
+>=20
+>=20
+> "S=F8ren Holm" <sgh@sgh.dk> wrote:
+> >Hello
+> >
+> >What is the best way to manage a private repo with recipes as well as
+> >meta-oe,=20
+> >meta-core and meta-angstrom.
+>=20
+> >Currently I have a private repo that has the layers attached as
+> >submodules. Is=20
+> >that a crazy setup or what?
+>=20
+> We're doing the same internally at ChargeStorm. One benefit is that we're=
+ having our "master" repo keeping track of all the layers that we're using =
+and which revision of those layers.=20
+>=20
+> Other people / projects just use a shell script checking out the desired =
+layers. Some people combines layers into one huge repo (though I'd personal=
+ly not recommend that approach). (That'd be similar to how Poky is being ma=
+naged).=20
+>=20
+> Yet other people / projects use repo.=20
+>=20
+> It's up to what you're comfortable with in the end.=20
 
-> | makedevs: No entry for root in search list
+I was using Makefile to checkout correct set of layers with correct
+revisions for SHR before and then changed it to use layerman script
+very similar to script used in angstrom-setup-scripts, because
+layers.txt is more "declarative" and easier to update than what I had
+in Makefile.
 
-Seems oiginated by commit d073ca77ba886c7912abd3ec064088
-1c00aea3bb
+For webos-ports project I use the same.
 
-image.bbclass: create device table after package installation
+For webos we recently switched from repo with submodules to repository
+with similar script (mcf - this time in python). Mostly because repos
+with submodules don't work well when replicating from gerrit to github.
 
-In fact, we set IMAGE_DEVICE_TABLES = "" for the initramfs then we
-mount devtmps during init.
+I think that biggest advantage of solution with some script, is that
+layers are still standalone checkouts, which developers can use as any
+other project (easier to submit patches upstream etc).
 
-Cheers
+And the script
+can be more clever than git pull --rebase in repo with submodules, e.g.
+for jenkins builds I want to automatically update build configuration in
+non-interactive way (because jenkins shouldn't ever keep some local
+changes), but for local build I want to preserve developer's local.conf
+changes and e.g. extra layers added in bblayers.conf etc.
 
-Andrea
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--BQPnanjtCNWHyqYD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
->
->>
->> Cheers
->> Andrea
->>
->>
->> [1]
->> ERROR: Function failed: do_rootfs (log file is located at
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/temp/log.do_rootfs.23292)
->> ERROR: Logfile of failure stored in:
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/temp/log.do_rootfs.23292
->> Log data follows:
->> | DEBUG: Executing python function rootfs_process_ignore
->> | DEBUG: Python function rootfs_process_ignore finished
->> | DEBUG: Executing python function rootfs_runtime_mapping
->> | DEBUG: Python function rootfs_runtime_mapping finished
->> | DEBUG: Executing shell function do_rootfs
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/all/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-all.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/i586/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-i586.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/qemux86/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-qemux86.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/all/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-all.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/i586/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-i586.
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/qemux86/Packages.
->> | Updated list of available packages in
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/lists/oe-qemux86.
->> | Installing kexec-klibc (2.0.2-r0.16) to root...
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/i586/kexec-klibc_2.0.2-r0.16_i586.ipk.
->> | Installing run-postinsts (1.0-r9.26) to root...
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/i586/run-postinsts_1.0-r9.26_i586.ipk.
->> | Installing update-rc.d (0.7-r5.37) to root...
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/all/update-rc.d_0.7-r5.37_all.ipk.
->> | Installing ubiattach-klibc (1.5.0-r0.28) to root...
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/i586/ubiattach-klibc_1.5.0-r0.28_i586.ipk.
->> | Installing kexecboot-klibc (0.6-r0.2) to root...
->> | Downloading file:/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/deploy/ipk/qemux86/kexecboot-klibc_0.6-r0.2_qemux86.ipk.
->> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/info/run-postinsts.postinst:
->> 8: /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs//var/lib/opkg/info/run-postinsts.postinst:
->> /etc/init.d/run-postinsts: not found
->> | update-rc.d: /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs/etc/init.d/run-postinsts
->> exists during rc.d purge (continuing)
->> |  Removing any system startup links for run-postinsts ...
->> |  Adding system startup for
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/rootfs/etc/init.d/run-postinsts.
->> | Configuring kexecboot-klibc.
->> | Configuring ubiattach-klibc.
->> | Configuring kexec-klibc.
->> | Configuring update-rc.d.
->> | Configuring run-postinsts.
->> | Building from feeds activated!
->> | Running intercept scripts:
->> | log_check: Using
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/temp/log.do_rootfs.23292
->> as logfile
->> | Logfile is clean
->> | makedevs: No entry for root in search list
->> | WARNING: exit code 1 from a shell command.
->> | ERROR: Function failed: do_rootfs (log file is located at
->> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/temp/log.do_rootfs.23292)
->> NOTE: recipe initramfs-kexecboot-klibc-image-1.0-r0: task do_rootfs: Failed
->> ERROR: Task 25930
->> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb,
->> do_rootfs) failed with exit code '1'
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
+iEYEARECAAYFAlJlC3oACgkQN1Ujt2V2gBzf2ACgkx9KbnMANIJimLWxdYVaH+M0
+ocIAn1fgS+yriM3LtC1XnEJHGgVd/EiI
+=fUnb
+-----END PGP SIGNATURE-----
+
+--BQPnanjtCNWHyqYD--
