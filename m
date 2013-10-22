@@ -1,26 +1,29 @@
-Return-Path: <sgh@sgh.dk>
-Received: from mx-aarh-1.stofanet.dk (mx-aarh-1.stofanet.dk [212.10.10.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D1DD86CF28
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 345056D257
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2013 21:10:08 +0000 (UTC)
-Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
-	by mx-aarh-1.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1VYMjP-0006cG-11; Mon, 21 Oct 2013 23:09:43 +0200
-Received: from koontz.localnet (localhost [127.0.0.1])
-	by asrock (Postfix) with ESMTPS id 2998D7ED86;
-	Mon, 21 Oct 2013 23:09:43 +0200 (CEST)
-From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, "Burton,
-	Ross" <ross.burton@intel.com>, Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 21 Oct 2013 23:09:42 +0200
-Message-ID: <4626518.m1dZEkDPQO@koontz>
-User-Agent: KMail/4.11.2 (Linux/3.11.0-11-lowlatency; KDE/4.11.2; i686; ; )
-In-Reply-To: <52648074.8000003@balister.org>
-References: <2478778.XBk41EpSZr@koontz> <52648074.8000003@balister.org>
+	Tue, 22 Oct 2013 05:20:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9M5KeXK012781
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 21 Oct 2013 22:20:40 -0700 (PDT)
+Received: from [128.224.162.168] (128.224.162.168) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
+	Mon, 21 Oct 2013 22:20:39 -0700
+Message-ID: <52660B2A.90603@windriver.com>
+Date: Tue, 22 Oct 2013 13:20:42 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Anders Darander <anders@chargestorm.se>
-Subject: Re: Regarding layers and their versioning.
+To: Joe MacDonald <joe@deserted.net>
+References: <1381394085-7681-1-git-send-email-rongqing.li@windriver.com>
+	<1381394085-7681-2-git-send-email-rongqing.li@windriver.com>
+	<20131018162954.GA2456@deserted.net>
+In-Reply-To: <20131018162954.GA2456@deserted.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2 meta-networking] vsftpd: change default secure_chroot_dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,15 +37,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2013 21:10:09 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 22 Oct 2013 05:20:41 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-Thanks for your replies. It was very reassuring that I'm not doing the =
-wrong=20
-thing.
 
---=20
-S=F8ren Holm
+On 10/19/2013 12:29 AM, Joe MacDonald wrote:
+> Hi Roy,
+>
+> Is this different from the patch I received from Ming Liu about a month
+> ago?  It doesn't look it at first glance, but I didn't diff the two.
+>
+> -J.
+
+Sorry, I did not sync my repo, LiuMing patch is OK.
+Thanks
+
+
+-Roy
+
+
+>
+> [[oe] [PATCH 2/2 meta-networking] vsftpd: change default secure_chroot_dir] On 13.10.10 (Thu 16:34) rongqing.li@windriver.com wrote:
+>
+>> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> Change default value of secure_chroot_dir to /var/run/vsftpd/empty, add
+>> volatiles entry for it, to ensure it won't fail to start by xinetd.
+>>
+>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>> ---
+>>   .../vsftpd/files/change-secure_chroot_dir.patch    |   55 ++++++++++++++++++++
+>>   meta-networking/recipes-daemons/vsftpd/files/init  |    2 +-
+>>   .../vsftpd/files/volatiles.99_vsftpd               |    2 +
+>>   .../recipes-daemons/vsftpd/vsftpd_3.0.0.bb         |    7 ++-
+>>   4 files changed, 64 insertions(+), 2 deletions(-)
+>>   create mode 100644 meta-networking/recipes-daemons/vsftpd/files/change-secure_chroot_dir.patch
+>>   create mode 100644 meta-networking/recipes-daemons/vsftpd/files/volatiles.99_vsftpd
+>>
+>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/change-secure_chroot_dir.patch b/meta-networking/recipes-daemons/vsftpd/files/change-secure_chroot_dir.patch
+>> new file mode 100644
+>> index 0000000..e7a673e
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-daemons/vsftpd/files/change-secure_chroot_dir.patch
+>> @@ -0,0 +1,55 @@
+>> +vsftpd: change secure_chroot_dir default value
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Change secure_chroot_dir pointing to a volatile directory.
+>> +
+>> +Signed-off-by: Ming Liu <ming.liu@windriver.com>
+>> +---
+>> + INSTALL       |    6 +++---
+>> + tunables.c    |    2 +-
+>> + vsftpd.conf.5 |    2 +-
+>> + 3 files changed, 5 insertions(+), 5 deletions(-)
+>> +
+>> +diff -urpN a/INSTALL b/INSTALL
+>> +--- a/INSTALL	2013-09-13 10:23:57.504972397 +0800
+>> ++++ b/INSTALL	2013-09-13 10:25:25.664971779 +0800
+>> +@@ -27,11 +27,11 @@ user in case it does not already exist.
+>> + [root@localhost root]# useradd nobody
+>> + useradd: user nobody exists
+>> +
+>> +-2b) vsftpd needs the (empty) directory /usr/share/empty in the default
+>> ++2b) vsftpd needs the (empty) directory /var/run/vsftpd/empty in the default
+>> + configuration. Add this directory in case it does not already exist. e.g.:
+>> +
+>> +-[root@localhost root]# mkdir /usr/share/empty/
+>> +-mkdir: cannot create directory `/usr/share/empty': File exists
+>> ++[root@localhost root]# mkdir /var/run/vsftpd/empty/
+>> ++mkdir: cannot create directory `/var/run/vsftpd/empty': File exists
+>> +
+>> + 2c) For anonymous FTP, you will need the user "ftp" to exist, and have a
+>> + valid home directory (which is NOT owned or writable by the user "ftp").
+>> +diff -urpN a/tunables.c b/tunables.c
+>> +--- a/tunables.c	2013-09-13 10:26:29.554972817 +0800
+>> ++++ b/tunables.c	2013-09-13 10:27:18.104972210 +0800
+>> +@@ -254,7 +254,7 @@ tunables_load_defaults()
+>> +   /* -rw------- */
+>> +   tunable_chown_upload_mode = 0600;
+>> +
+>> +-  install_str_setting("/usr/share/empty", &tunable_secure_chroot_dir);
+>> ++  install_str_setting("/var/run/vsftpd/empty", &tunable_secure_chroot_dir);
+>> +   install_str_setting("ftp", &tunable_ftp_username);
+>> +   install_str_setting("root", &tunable_chown_username);
+>> +   install_str_setting("/var/log/xferlog", &tunable_xferlog_file);
+>> +diff -urpN a/vsftpd.conf.5 b/vsftpd.conf.5
+>> +--- a/vsftpd.conf.5	2013-09-13 10:09:33.774972462 +0800
+>> ++++ b/vsftpd.conf.5	2013-09-13 10:10:41.914971989 +0800
+>> +@@ -969,7 +969,7 @@ This option should be the name of a dire
+>> + directory should not be writable by the ftp user. This directory is used
+>> + as a secure chroot() jail at times vsftpd does not require filesystem access.
+>> +
+>> +-Default: /usr/share/empty
+>> ++Default: /var/run/vsftpd/empty
+>> + .TP
+>> + .B ssl_ciphers
+>> + This option can be used to select which SSL ciphers vsftpd will allow for
+>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/init b/meta-networking/recipes-daemons/vsftpd/files/init
+>> index d0ec010..513f407 100755
+>> --- a/meta-networking/recipes-daemons/vsftpd/files/init
+>> +++ b/meta-networking/recipes-daemons/vsftpd/files/init
+>> @@ -2,7 +2,7 @@
+>>   DAEMON=/usr/sbin/vsftpd
+>>   NAME=vsftpd
+>>   DESC="FTP Server"
+>> -ARGS=""
+>> +ARGS="/etc/vsftpd.conf"
+>>   FTPDIR=/var/lib/ftp
+>>
+>>   test -f $DAEMON || exit 0
+>> diff --git a/meta-networking/recipes-daemons/vsftpd/files/volatiles.99_vsftpd b/meta-networking/recipes-daemons/vsftpd/files/volatiles.99_vsftpd
+>> new file mode 100644
+>> index 0000000..0f80776
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-daemons/vsftpd/files/volatiles.99_vsftpd
+>> @@ -0,0 +1,2 @@
+>> +# <type> <owner> <group> <mode> <path> <linksource>
+>> +d root root 0755 /var/run/vsftpd/empty none
+>> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>> index 7677477..09de1e9 100644
+>> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+>> @@ -14,6 +14,8 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
+>>              file://vsftpd.conf \
+>>              file://vsftpd.user_list \
+>>              file://vsftpd.ftpusers \
+>> +           file://change-secure_chroot_dir.patch \
+>> +           file://volatiles.99_vsftpd \
+>>   "
+>>
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
+>> @@ -40,7 +42,7 @@ LDFLAGS_append =" -lcrypt -lcap"
+>>   do_configure() {
+>>       # Fix hardcoded /usr, /etc, /var mess.
+>>       cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
+>> -    |sed s:\"${prefix}/share/empty:\"${localstatedir}/share/empty:g |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
+>> +    |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
+>>       mv tunables.c.new tunables.c
+>>   }
+>>
+>> @@ -60,6 +62,9 @@ do_install() {
+>>
+>>       install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
+>>       install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
+>> +    install -d ${D}/${sysconfdir}/default/volatiles
+>> +    install -m 644 ${WORKDIR}/volatiles.99_vsftpd ${D}/${sysconfdir}/default/volatiles/99_vsftpd
+>> +
+>>       if ! test -z "${PAMLIB}" ; then
+>>           install -d ${D}${sysconfdir}/pam.d/
+>>           cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
