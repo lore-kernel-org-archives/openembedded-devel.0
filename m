@@ -1,33 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id F37F86CEB9
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
+	[209.85.219.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 55F796CF3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2013 21:31:37 +0000 (UTC)
-Received: by mail-wg0-f54.google.com with SMTP id c11so8433913wgh.21
+	Wed, 23 Oct 2013 07:54:42 +0000 (UTC)
+Received: by mail-oa0-f51.google.com with SMTP id h1so430322oag.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2013 14:31:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=7r3Qao09WjjluAj5J6ExqonAu0zR/ukn1JYE4ULJBGs=;
-	b=RiLKK+akoU3+3eExN0kCwgD3sKr4KcUYUyjvAt6OgSMg8liulunBM0r+u94Bd/ozt0
-	Elfjlky131cYskHg6GIuFI8jgoS2oD50qvNCcf89mz0J4WlFqnO7pGy+LDfQ4CjOM3s5
-	AeFBpNNhKLaFalf9SeRAm1iC6qz0AgQnxyORYxQ4GNhIj7tLCLRBYaisT3cw/7jV14RF
-	u7+Hg7LKiZREZTXJ3kRn0dkTOoMQvQO1a5oYPeYwMIawCBsNOY8/E9qWTj7set/QPCI/
-	AUEiJ7ahGO8advHY/KmZbhCy84rFtLjanq193hxsskmB2k6AAn4yY2e+/N0mJPDHrJuY
-	kJ0g==
+	Wed, 23 Oct 2013 00:54:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=keiXOe3RAihaCbFXsUP5Uoo8wVsHzGe2Ny/ovaIT6mY=;
+	b=dVCtd0DISN62lwuG4qgrs5FEmRn8vNzvh4xuHq3nIBtvW/NgC7VflbtirDizgY1uSO
+	N3h9u7JwYm/DIMGyGWvgFRSlqN3mgd7yO3IkO/IgyJjbvzuO5xMGglFPyd3PVRquJRT3
+	9smLV+LQe97P+0OlPjC+GvKjKJ/7auro6N1Loin3Bgn2KzP/DE4/Q5UomU3zBGPKgRQK
+	D1lU5vOwgo5exB6a7185Mahyxwjyke9N+qgklUKSga/iGuUiARD4rcGoh5+ZsuHyt/Jx
+	+WkytKnhB+T7T+foILZpxyFaelxzBxWDzpdpNwrE6RKiYchZIGQPiqvgvRJGUHNVaifa
+	1OuQ==
+X-Gm-Message-State: ALoCoQkCLKWvM6hauPaTQB3eI3NGzvNMav1Au8M/5TeqzFnifspAWxHjbzUkBMKRspwD/9CHcZ+L
+X-Received: by 10.60.52.101 with SMTP id s5mr240519oeo.56.1382514884022; Wed,
+	23 Oct 2013 00:54:44 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.180.126.103 with SMTP id mx7mr9836791wib.39.1382477499521;
-	Tue, 22 Oct 2013 14:31:39 -0700 (PDT)
-Received: by 10.194.179.198 with HTTP; Tue, 22 Oct 2013 14:31:39 -0700 (PDT)
-In-Reply-To: <CAP71WjzvGpG3mNf5dEQd1HuBgTc+41iJ6915EDQydUxaX7aoeQ@mail.gmail.com>
+Received: by 10.76.156.40 with HTTP; Wed, 23 Oct 2013 00:54:23 -0700 (PDT)
+In-Reply-To: <CA+chaQfeObe0k1HODrGj_V-FFgswcRTPdzuNeb0ig8HLXi3wJg@mail.gmail.com>
 References: <1382456281-16216-1-git-send-email-nicolas.dechesne@linaro.org>
 	<CAP71WjzvGpG3mNf5dEQd1HuBgTc+41iJ6915EDQydUxaX7aoeQ@mail.gmail.com>
-Date: Tue, 22 Oct 2013 22:31:39 +0100
-Message-ID: <CA+chaQfeObe0k1HODrGj_V-FFgswcRTPdzuNeb0ig8HLXi3wJg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CA+chaQfeObe0k1HODrGj_V-FFgswcRTPdzuNeb0ig8HLXi3wJg@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Wed, 23 Oct 2013 09:54:23 +0200
+Message-ID: <CAP71Wjxai17ZpaPGM1rkWpObiBZeMC1V+soGrZ0wYMzmWkREhg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] qtwebkit-examples: add missing RDEPENDS for qmlplugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,36 +46,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2013 21:31:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Oct 2013 07:54:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-It's OK, but it will take a while until I'm back to actually merge it.
+On Tue, Oct 22, 2013 at 11:31 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> It's OK, but it will take a while until I'm back to actually merge it.
 
-
-On Tue, Oct 22, 2013 at 4:50 PM, Nicolas Dechesne <
-nicolas.dechesne@linaro.org> wrote:
-
-> On Tue, Oct 22, 2013 at 5:38 PM, Nicolas Dechesne
-> <nicolas.dechesne@linaro.org> wrote:
-> > Some examples require qtwebkit-qmlplugins (flickerview, youtubeview),
-> > and this dependency is not automatically added. Without this patch,
-> > and without manually adding qtwekbit-qmlplugins, we get errors like
-> > this:
-> >
-> > qrc:///flickrview.qml:42:1: module "QtWebKit" is not installed
-> >
-> > Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> > ---
->
-> hmm. sorry, i messed up with my git alias and with --subject-prefix...
-> the subject i meant to have for this email is
->
-> [meta-qt5 master&dora][PATCH] qtwebkit-examples: add missing RDEPENDS
-> for qmlplugins
->
-> let me know if i need to resend. the key thing here is that I'd like
-> this patch to be applied on master and dora branch.
->
-> thanks
->
+ok. no hurry... it's a patch for a minor issue ;-)
+thx
 
