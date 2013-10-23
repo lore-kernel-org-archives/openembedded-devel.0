@@ -1,38 +1,24 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
-	[209.85.219.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 55F796CF3C
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 066AC6CEB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2013 07:54:42 +0000 (UTC)
-Received: by mail-oa0-f51.google.com with SMTP id h1so430322oag.38
+	Wed, 23 Oct 2013 09:14:13 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9N9EGQa002714
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2013 00:54:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=keiXOe3RAihaCbFXsUP5Uoo8wVsHzGe2Ny/ovaIT6mY=;
-	b=dVCtd0DISN62lwuG4qgrs5FEmRn8vNzvh4xuHq3nIBtvW/NgC7VflbtirDizgY1uSO
-	N3h9u7JwYm/DIMGyGWvgFRSlqN3mgd7yO3IkO/IgyJjbvzuO5xMGglFPyd3PVRquJRT3
-	9smLV+LQe97P+0OlPjC+GvKjKJ/7auro6N1Loin3Bgn2KzP/DE4/Q5UomU3zBGPKgRQK
-	D1lU5vOwgo5exB6a7185Mahyxwjyke9N+qgklUKSga/iGuUiARD4rcGoh5+ZsuHyt/Jx
-	+WkytKnhB+T7T+foILZpxyFaelxzBxWDzpdpNwrE6RKiYchZIGQPiqvgvRJGUHNVaifa
-	1OuQ==
-X-Gm-Message-State: ALoCoQkCLKWvM6hauPaTQB3eI3NGzvNMav1Au8M/5TeqzFnifspAWxHjbzUkBMKRspwD/9CHcZ+L
-X-Received: by 10.60.52.101 with SMTP id s5mr240519oeo.56.1382514884022; Wed,
-	23 Oct 2013 00:54:44 -0700 (PDT)
+	Wed, 23 Oct 2013 02:14:16 -0700 (PDT)
+Received: from pek-hostel-vm02.wrs.com (128.224.153.172) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.342.3; Wed, 23 Oct 2013 02:14:15 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Oct 2013 05:14:12 -0400
+Message-ID: <1382519652-15717-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Received: by 10.76.156.40 with HTTP; Wed, 23 Oct 2013 00:54:23 -0700 (PDT)
-In-Reply-To: <CA+chaQfeObe0k1HODrGj_V-FFgswcRTPdzuNeb0ig8HLXi3wJg@mail.gmail.com>
-References: <1382456281-16216-1-git-send-email-nicolas.dechesne@linaro.org>
-	<CAP71WjzvGpG3mNf5dEQd1HuBgTc+41iJ6915EDQydUxaX7aoeQ@mail.gmail.com>
-	<CA+chaQfeObe0k1HODrGj_V-FFgswcRTPdzuNeb0ig8HLXi3wJg@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Wed, 23 Oct 2013 09:54:23 +0200
-Message-ID: <CAP71Wjxai17ZpaPGM1rkWpObiBZeMC1V+soGrZ0wYMzmWkREhg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] qtwebkit-examples: add missing RDEPENDS for qmlplugins
+Subject: [meta-webserver] [PATCH] cherokee: fix the installed but not shipped issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,12 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2013 07:54:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Oct 2013 09:14:15 -0000
+Content-Type: text/plain
 
-On Tue, Oct 22, 2013 at 11:31 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> It's OK, but it will take a while until I'm back to actually merge it.
+We will get the following ERROR/WARN if we enable the
+installed-vs-shipped check in QA:
 
-ok. no hurry... it's a patch for a minor issue ;-)
-thx
+ERROR: QA Issue: cherokee: Files/directories were installed but not shipped
+  /srv
+  /srv/www
+  /srv/www/htdocs
+  /srv/www/htdocs/index.html
+  /srv/www/htdocs/images
+  /srv/www/htdocs/images/cherokee-logo.png
+  /srv/www/htdocs/images/default-bg.png
+  /srv/www/htdocs/images/favicon.ico
+  /srv/www/htdocs/images/powered_by_cherokee.png
+
+I think that we can pack these files into cherokee just like what
+apache2 does.
+
+Fedora 17 also packs them
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb |    3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+index 2014ea1..dff662a 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+@@ -48,6 +48,9 @@ FILES_libcherokee-server = "${libdir}/libcherokee-server${SOLIBS}"
+ FILES_libcherokee-client = "${libdir}/libcherokee-client${SOLIBS}"
+ FILES_libcherokee-base = "${libdir}/libcherokee-base${SOLIBS}"
+ 
++# Pack the htdocs
++FILES_${PN} += "${servicedir}"
++
+ CONFFILES_${PN} = " \
+                    ${sysconfdir}/cherokee/cherokee.conf \
+                    ${sysconfdir}/init.d/cherokee \
+-- 
+1.7.10.4
+
 
