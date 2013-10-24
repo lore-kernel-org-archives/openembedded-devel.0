@@ -1,38 +1,24 @@
-Return-Path: <msteveharrison@gmail.com>
-Received: from mail-vb0-f54.google.com (mail-vb0-f54.google.com
-	[209.85.212.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 71D316D33A
+Return-Path: <Xufeng.Zhang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE7BF6D3D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 08:12:03 +0000 (UTC)
-Received: by mail-vb0-f54.google.com with SMTP id q12so1117931vbe.27
+	Thu, 24 Oct 2013 09:41:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9O9f92F001893
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 01:12:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=TkNI8Yjy6iN8exaC0SCWcNaiDAt5dT1MBx28jgN+aPA=;
-	b=avzWX66UAAh5bH0pdvrBFKwQ9wjppw5zxZ3garnw9r83tXuSXjFFjHtwPUacP/eHrz
-	J2LiZZ+Wqyjrg8tzr61/v9TfOXj7bkNtcwYbId7hgMbHeVzhM1oUzsbHwLeTkOIBcoaX
-	7lIiM9upTn7ebRf/zJwUWu6xscjN08KIXi7Nbv3vjFu4m2vmqYQj15KETt8+dYFSVS/3
-	wNOLNxUpEOUmgM7/+YyXkcgN3oDwShZA7scg8REvCSC0fNCSdiwDrRIUsOifz6tcg+Ue
-	y2OXaH7NLH07f0kLIFPaG7AFu4NQVGBbFDA/ZUpIWPK/K3x0eIIO3IgWJIp1QiG8Salb
-	s/Iw==
+	Thu, 24 Oct 2013 02:41:09 -0700 (PDT)
+Received: from localhost.localdomain (128.224.163.210) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.342.3; Thu, 24 Oct 2013 02:41:08 -0700
+From: Xufeng Zhang <xufeng.zhang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Oct 2013 17:48:41 +0800
+Message-ID: <1382608121-6622-1-git-send-email-xufeng.zhang@windriver.com>
+X-Mailer: git-send-email 1.7.0.2
 MIME-Version: 1.0
-X-Received: by 10.58.38.200 with SMTP id i8mr769694vek.6.1382602325027; Thu,
-	24 Oct 2013 01:12:05 -0700 (PDT)
-Received: by 10.220.75.72 with HTTP; Thu, 24 Oct 2013 01:12:04 -0700 (PDT)
-In-Reply-To: <5268CEB6.7030401@balister.org>
-References: <CAGJTLJ6MLtO_neHZq7QoER7Vs4JCLnfXZbxHeKhtV53V2+PDkw@mail.gmail.com>
-	<52685AB2.2060606@balister.org>
-	<CAGJTLJ5z=8Wjj2WOzid3MuaJEErc_Qja93bk5Uponw-aXwcxQA@mail.gmail.com>
-	<5268CEB6.7030401@balister.org>
-Date: Thu, 24 Oct 2013 01:12:04 -0700
-Message-ID: <CAGJTLJ6Sszu7NjAWLf4bW=mxxWq7=Rhvqc5=-fSQ5_Ftq6eEnA@mail.gmail.com>
-From: Stephen Harrison <msteveharrison@gmail.com>
-To: Philip Balister <philip@balister.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Issues Building Numpy
+Subject: [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,73 +32,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 08:12:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Oct 2013 09:41:08 -0000
+Content-Type: text/plain
 
-Great, I tried uninstalling those libraries and it seems to resolve the
-problem!
+There are two problems for ripd implementation after received
+SIGHUP signal:
+1). ripd didn't clean up ifp->connected list before reload
+    configuration file which makes the same advertise packet
+    being sent multiple times(depends on how many SIGHUP was recieved).
+2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
+    during restart which is different from the flag when ripd is
+    firstly started up, leading to unnecessary route to be advertised.
 
+[YOCTO #5266]
 
-On Thu, Oct 24, 2013 at 12:39 AM, Philip Balister <philip@balister.org>wrote:
+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+---
+ .../ripd-fix-two-bugs-after-received-SIGHUP.patch  |   49 ++++++++++++++++++++
+ .../recipes-protocols/quagga/quagga.inc            |    3 +-
+ 2 files changed, 51 insertions(+), 1 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
 
-> On 10/24/2013 12:29 AM, Stephen Harrison wrote:
-> > Hi,
-> >
-> > Yes I do have these libraries installed on the build machine. Are you
-> > saying I need to uninstall them?
->
-> Or fix the numpy build to not find them on the build machine :)
->
-> Philip
->
-> >
-> >
-> >
-> >
-> > On Wed, Oct 23, 2013 at 4:24 PM, Philip Balister <philip@balister.org
-> >wrote:
-> >
-> >> Do you have atlas, blas etc installed on the build machine. As I recall
-> >> the numpy recipe is weak and tends to finds things installed on the
-> >> build machine.
-> >>
-> >> Philip
-> >>
-> >> On 10/23/2013 08:22 PM, Stephen Harrison wrote:
-> >>> Hi,
-> >>>
-> >>> I am trying to build an image for the Zedboard (ARM) platform. I can't
-> >> seem
-> >>> to build the Numpy package and I can't quite understand why.
-> >>>
-> >>> I've attached the compile log. I've noticed there are many complaints
-> >> about
-> >>> ATLAS, BLAS etc not being available and other errors about executables
-> >>> being in the wrong format.
-> >>>
-> >>> Any help would be much appreciated.
-> >>>
-> >>> Regards,
-> >>>
-> >>> Stephen
-> >>>
-> >>>
-> >>>
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
->
+diff --git a/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch b/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
+new file mode 100644
+index 0000000..c081143
+--- /dev/null
++++ b/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
+@@ -0,0 +1,49 @@
++ripd: Fix two bugs after received SIGHUP signal
++
++There are two problems for ripd implementation after received
++SIGHUP signal:
++1). ripd didn't clean up ifp->connected list before reload
++    configuration file.
++2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
++    which lead to the unnecessary route to be advertised.
++
++Upstream-Status: Pending
++
++Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++---
++--- a/ripd/rip_interface.c
+++++ b/ripd/rip_interface.c
++@@ -500,6 +500,8 @@
++   struct listnode *node;
++   struct interface *ifp;
++   struct rip_interface *ri;
+++  struct connected *ifc;
+++  struct listnode *conn_node, *next;
++ 
++   for (ALL_LIST_ELEMENTS_RO (iflist, node, ifp))
++     {
++@@ -514,6 +516,13 @@
++ 	  thread_cancel (ri->t_wakeup);
++ 	  ri->t_wakeup = NULL;
++ 	}
+++
+++      for (conn_node = listhead (ifp->connected); conn_node; conn_node = next)
+++        {
+++          ifc = listgetdata (conn_node);
+++          next = conn_node->next;
+++          listnode_delete (ifp->connected, ifc);
+++        }          
++     }
++ }
++ 
++@@ -548,8 +557,8 @@
++ 	  ri->key_chain = NULL;
++ 	}
++ 
++-      ri->split_horizon = RIP_NO_SPLIT_HORIZON;
++-      ri->split_horizon_default = RIP_NO_SPLIT_HORIZON;
+++      ri->split_horizon = RIP_SPLIT_HORIZON;
+++      ri->split_horizon_default = RIP_SPLIT_HORIZON;
++ 
++       ri->list[RIP_FILTER_IN] = NULL;
++       ri->list[RIP_FILTER_OUT] = NULL;
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 89b9f7a..bf37067 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -31,7 +31,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
+            file://quagga.default \
+            file://watchquagga.init \
+            file://watchquagga.default \
+-           file://volatiles.03_quagga"
++           file://volatiles.03_quagga \
++           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+-- 
+1.7.0.2
+
 
