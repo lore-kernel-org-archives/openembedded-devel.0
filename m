@@ -1,37 +1,25 @@
-Return-Path: <kristofer.hansson-aspman@pelagicore.com>
-Received: from mail-la0-f52.google.com (mail-la0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E20D612D1
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 391786D10F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 15:01:17 +0000 (UTC)
-Received: by mail-la0-f52.google.com with SMTP id eh20so1951496lab.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 08:01:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6I8DVHZ/h96Gv1EX0ZdTtApUtP+LIavaFG6qJ7EU4ps=;
-	b=H78dOlU7cEk80S6istKlYzsyaE3t9Z8GuE14y/RMzmaKsG8UUk8u1EXQ2uX3ZJGaqU
-	jeN8SlPb0jIcKGdaG8l89fuFzMPsMz01lMCoCemsw0Ki2VCWGPoYfu6X6gefJtXKLphw
-	iJxjumHK0iyt2dEtMyuuQOtx9qcoIATAJEct4wvwTQ9t+klOlX+Yj4ncP4yl6GlR8zIZ
-	Dl9byhEQhEZyoBuypHUa+6eYaqKwqMHvl56nCX4dtGFsREyMSSy5/7RggWIaF2VtzZ49
-	wkdRrF4d0Ow8vN0QGu8ImkKx8+xUKMzrMppgX9WXw9xp3IsyMmNVa5iztIUV2eqrh2su
-	3Q6A==
-X-Gm-Message-State: ALoCoQlvfcFWEqp4Mtfvr6SDLmK5kC7jNTiuNvIhAGvmmn24mHpSi/1x04BjRAKSHFet8ZH84wmp
-X-Received: by 10.112.64.36 with SMTP id l4mr2182553lbs.15.1382626878685;
-	Thu, 24 Oct 2013 08:01:18 -0700 (PDT)
-Received: from K-Ubuntu-13.office.pelagicore.net
-	(194-237-7-146.customer.telia.com. [194.237.7.146])
-	by mx.google.com with ESMTPSA id sc4sm1954596lab.10.2013.10.24.08.01.17
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 24 Oct 2013 08:01:17 -0700 (PDT)
-From: Kristofer Hansson Aspman <kristofer.hansson-aspman@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Oct 2013 17:01:07 +0200
-Message-Id: <1382626867-8287-1-git-send-email-kristofer.hansson-aspman@pelagicore.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-qt5][PATCHv2] qtconnectivity: Added recipe.
+	Thu, 24 Oct 2013 15:03:46 +0000 (UTC)
+Received: (qmail 13779 invoked by uid 1003); 24 Oct 2013 15:03:48 -0000
+Received: from unknown (HELO ?172.22.85.2?) (philip@opensdr.com@212.20.242.100)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	24 Oct 2013 15:03:48 -0000
+Message-ID: <526936D1.2000406@balister.org>
+Date: Thu, 24 Oct 2013 16:03:45 +0100
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: openembedded-members@lists.openembedded.org
+References: <52690150.9050203@balister.org>
+In-Reply-To: <52690150.9050203@balister.org>
+X-Enigmail-Version: 1.6
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: OpenEmbedded eV General Assembly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,37 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 15:01:18 -0000
+X-List-Received-Date: Thu, 24 Oct 2013 15:03:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Kristofer Hansson Aspman <kristofer.hansson-aspman@pelagicore.com>
----
- recipes-qt/qt5/qtconnectivity.inc    | 4 ++++
- recipes-qt/qt5/qtconnectivity_git.bb | 4 ++++
- 2 files changed, 8 insertions(+)
- create mode 100644 recipes-qt/qt5/qtconnectivity.inc
- create mode 100644 recipes-qt/qt5/qtconnectivity_git.bb
+And the GA is on Friday Oct 25.
 
-diff --git a/recipes-qt/qt5/qtconnectivity.inc b/recipes-qt/qt5/qtconnectivity.inc
-new file mode 100644
-index 0000000..50efd46
---- /dev/null
-+++ b/recipes-qt/qt5/qtconnectivity.inc
-@@ -0,0 +1,4 @@
-+require qt5.inc
-+
-+DEPENDS += "qtbase qtdeclarative"
-+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-new file mode 100644
-index 0000000..2bd016b
---- /dev/null
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -0,0 +1,4 @@
-+require qt5-git.inc
-+require ${PN}.inc
-+
-+SRCREV = "c21addb23f2eb67dc55853b115e5b735df065891"
--- 
-1.8.1.2
+Philip
 
+On 10/24/2013 12:15 PM, Philip Balister wrote:
+> The GA is in Harris 1 room from 6:30 to no later than 8pm.
+> 
+> This meeting is basically to meet the requirements to maintain the eV
+> (German non profit). There will be a finance report, attendance taking
+> and any organizational issues that people would like to discuss.
+> 
+> We'd like to invite anyone interested in the eV to attend. This is also
+> a good time to ask to join the eV. We can then easily vote you in at the GA.
+> 
+> The eV exists to provide an organization with some legal structure to
+> provide support for the OpenEmbedded community. If there are things you
+> would like to the eV to do, this is a good time to talk about them. You
+> can also talk with myself or the other eV board members, Sean Hudson,
+> Denis Dmytriyenko, or Leon Woestenberg. (All of us are here). Joining
+> the eV gives you a voice in the future of OpenEmbedded.
+> 
+> If you can't attend, you can appoint a proxy to represent you. This also
+> serves to meet the eV GA attendance requirement. The proxy form (and
+> other meeting info is here:
+> 
+> http://www.openembedded.org/wiki/Edinburgh,_2013
+> 
+> Please add yourself to the list if you plan to attend (not required).
+> 
+> Philip
+> _______________________________________________
+> Openembedded-members mailing list
+> Openembedded-members@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-members
+> 
 
