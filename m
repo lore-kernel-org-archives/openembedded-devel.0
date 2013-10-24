@@ -1,37 +1,25 @@
-Return-Path: <kristofer.hansson-aspman@pelagicore.com>
-Received: from mail-la0-f43.google.com (mail-la0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FD5F6D36E
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B72866D348
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 13:39:48 +0000 (UTC)
-Received: by mail-la0-f43.google.com with SMTP id el20so1931462lab.30
+	Thu, 24 Oct 2013 14:40:52 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9OEescH016777
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 06:39:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=yQXtBCOdMsziAT+f0X4p85MGVknb55C7xwCGjbbIxJw=;
-	b=VEzr8AEvQW76p1K0XgpeKKQHN4AkZcIELU/A43HQ85/aNlMln61+73/4DIS7L+ImNa
-	+SOsyZVvseNII8CI/HE2Zxklxej96WmpK03MGeFyXYoxeiKsRIw2t401WJv3HGc6Y+uD
-	LVZRCHddhrocP315JzuXNi4Pvg622jLapKWuAlOQ+S/FMywCdWdE0vwshjFCqPakhBcC
-	LpP3bYp7S+21i+kUBRMBx0Ae9uUGSDPSoR6Kh2ousGo96FtKCASmTXnOPBx+NqqmAuXC
-	9oNfcWuxuuWrvTvwsENSPxed3tZWS7OChzD0Ie+lXhmBXW7FkewCdUBkcXY1fpQsJMFY
-	pKtQ==
-X-Gm-Message-State: ALoCoQlJCgwxXrH4dcMXau2r4v20olxKy9X9sfTkj6eZ71CkvrMVBHSWvDrdhmQOe/XIp4+kbZOz
-X-Received: by 10.112.159.166 with SMTP id xd6mr2019535lbb.22.1382621989497;
-	Thu, 24 Oct 2013 06:39:49 -0700 (PDT)
-Received: from K-Ubuntu-13.office.pelagicore.net
-	(194-237-7-146.customer.telia.com. [194.237.7.146])
-	by mx.google.com with ESMTPSA id b6sm1676463lae.0.2013.10.24.06.39.48
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 24 Oct 2013 06:39:48 -0700 (PDT)
-From: Kristofer Hansson Aspman <kristofer.hansson-aspman@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Oct 2013 15:39:33 +0200
-Message-Id: <1382621973-3677-1-git-send-email-kristofer.hansson-aspman@pelagicore.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-qt5][PATCH] qtconnectivity: Added recipe.
+	Thu, 24 Oct 2013 07:40:54 -0700 (PDT)
+Received: from pek-hostel-vm02.wrs.com (128.224.153.172) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Thu, 24 Oct 2013 07:40:53 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Oct 2013 10:40:50 -0400
+Message-ID: <1382625650-9266-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Cc: Joe.MacDonald@windriver.com
+Subject: [meta-networking] [PATCH] cifs-utils: add --ignore-fail-on-non-empty for rmdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 13:39:49 -0000
+X-List-Received-Date: Thu, 24 Oct 2013 14:40:52 -0000
+Content-Type: text/plain
 
-Signed-off-by: Kristofer Hansson Aspman <kristofer.hansson-aspman@pelagicore.com>
+Add --ignore-fail-on-non-empty for rmdir in case there are files in the
+directories.
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- recipes-qt/qt5/qtconnectivity.inc    | 3 +++
- recipes-qt/qt5/qtconnectivity_git.bb | 4 ++++
- 2 files changed, 7 insertions(+)
- create mode 100644 recipes-qt/qt5/qtconnectivity.inc
- create mode 100644 recipes-qt/qt5/qtconnectivity_git.bb
+ meta-networking/recipes-support/cifs/cifs-utils_git.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtconnectivity.inc b/recipes-qt/qt5/qtconnectivity.inc
-new file mode 100644
-index 0000000..b2147f1
---- /dev/null
-+++ b/recipes-qt/qt5/qtconnectivity.inc
-@@ -0,0 +1,3 @@
-+require qt5.inc
-+
-+DEPENDS += "qtbase qtdeclarative"
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-new file mode 100644
-index 0000000..2bd016b
---- /dev/null
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -0,0 +1,4 @@
-+require qt5-git.inc
-+require ${PN}.inc
-+
-+SRCREV = "c21addb23f2eb67dc55853b115e5b735df065891"
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+index fc7a4d3..d8de714 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+@@ -20,7 +20,7 @@ inherit autotools pkgconfig
+ do_install_append() {
+     # Remove empty /usr/bin and /usr/sbin directories since the mount helper
+     # is installed to /sbin
+-    rmdir ${D}${bindir} ${D}${sbindir}
++    rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
+ }
+ 
+ RRECOMMENDS_${PN} = "kernel-module-cifs"
 -- 
-1.8.1.2
+1.7.10.4
 
 
