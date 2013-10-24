@@ -1,23 +1,26 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 964DA6D2FC
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 648036D323
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 04:46:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9O4kqh1002049
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 23 Oct 2013 21:46:52 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.213) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 23 Oct 2013 21:46:51 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Oct 2013 12:47:39 +0800
-Message-ID: <1382590059-20109-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Thu, 24 Oct 2013 07:39:34 +0000 (UTC)
+Received: (qmail 13635 invoked by uid 1003); 24 Oct 2013 07:39:36 -0000
+Received: from unknown (HELO ?10.111.49.239?)
+	(philip@opensdr.com@109.144.255.190)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	24 Oct 2013 07:39:35 -0000
+Message-ID: <5268CEB6.7030401@balister.org>
+Date: Thu, 24 Oct 2013 08:39:34 +0100
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] autofs: fix do_install failure and remove unused /var/run directory
+To: openembedded-devel@lists.openembedded.org
+References: <CAGJTLJ6MLtO_neHZq7QoER7Vs4JCLnfXZbxHeKhtV53V2+PDkw@mail.gmail.com>
+	<52685AB2.2060606@balister.org>
+	<CAGJTLJ5z=8Wjj2WOzid3MuaJEErc_Qja93bk5Uponw-aXwcxQA@mail.gmail.com>
+In-Reply-To: <CAGJTLJ5z=8Wjj2WOzid3MuaJEErc_Qja93bk5Uponw-aXwcxQA@mail.gmail.com>
+X-Enigmail-Version: 1.5.2
+Subject: Re: Issues Building Numpy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,47 +34,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 04:46:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Oct 2013 07:39:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On 10/24/2013 12:29 AM, Stephen Harrison wrote:
+> Hi,
+> 
+> Yes I do have these libraries installed on the build machine. Are you
+> saying I need to uninstall them?
 
-If ${D}/run doesn't exist, the following statement will have non-zero
-exit code, which leads to do_install failure.
-     test -d ${D}/run && rmdir ${D}/run
+Or fix the numpy build to not find them on the build machine :)
 
-Modify it to use the if statement to make the do_install task succeed
-no matter ${D}/run exists or not.
+Philip
 
-Also, this patch removes the unused /var/run directory. Leaving that
-directory there will result in /run directory created before splitting
-package, which in turn lead to 'installed-vs-shipped' QA error or QA
-warning.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-daemons/autofs/autofs_5.0.7.bb         |    7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-index f8df0ef..c4eea31 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -96,7 +96,12 @@ do_configure_prepend () {
- }
- 
- do_install_append () {
--    test -d ${D}/run && rmdir ${D}/run
-+    if [ -d ${D}/run ]; then
-+	rmdir ${D}/run
-+    fi
-+    if [ -d ${D}${localstatedir}/run ]; then
-+	rmdir ${D}${localstatedir}/run
-+    fi
- }
- 
- INSANE_SKIP_${PN} = "dev-so"
--- 
-1.7.9.5
-
+> 
+> 
+> 
+> 
+> On Wed, Oct 23, 2013 at 4:24 PM, Philip Balister <philip@balister.org>wrote:
+> 
+>> Do you have atlas, blas etc installed on the build machine. As I recall
+>> the numpy recipe is weak and tends to finds things installed on the
+>> build machine.
+>>
+>> Philip
+>>
+>> On 10/23/2013 08:22 PM, Stephen Harrison wrote:
+>>> Hi,
+>>>
+>>> I am trying to build an image for the Zedboard (ARM) platform. I can't
+>> seem
+>>> to build the Numpy package and I can't quite understand why.
+>>>
+>>> I've attached the compile log. I've noticed there are many complaints
+>> about
+>>> ATLAS, BLAS etc not being available and other errors about executables
+>>> being in the wrong format.
+>>>
+>>> Any help would be much appreciated.
+>>>
+>>> Regards,
+>>>
+>>> Stephen
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
 
