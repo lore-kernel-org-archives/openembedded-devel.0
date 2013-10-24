@@ -1,46 +1,38 @@
-Return-Path: <B19537@freescale.com>
-Received: from ch1outboundpool.messaging.microsoft.com
-	(ch1ehsobe005.messaging.microsoft.com [216.32.181.185])
-	by mail.openembedded.org (Postfix) with ESMTP id D9E6B6D323
+Return-Path: <msteveharrison@gmail.com>
+Received: from mail-vb0-f54.google.com (mail-vb0-f54.google.com
+	[209.85.212.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 71D316D33A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 07:56:13 +0000 (UTC)
-Received: from mail169-ch1-R.bigfish.com (10.43.68.245) by
-	CH1EHSOBE002.bigfish.com (10.43.70.52) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 24 Oct 2013 07:56:14 +0000
-Received: from mail169-ch1 (localhost [127.0.0.1])	by
-	mail169-ch1-R.bigfish.com (Postfix) with ESMTP id 3F308160166	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 07:56:14 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah8275bh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h1155h)
-Received: from mail169-ch1 (localhost.localdomain [127.0.0.1]) by mail169-ch1
-	(MessageSwitch) id 1382601373305204_27838;
-	Thu, 24 Oct 2013 07:56:13 +0000 (UTC)
-Received: from CH1EHSMHS032.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.246])	by mail169-ch1.bigfish.com (Postfix) with ESMTP id
-	4255D2A0085	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 07:56:13 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS032.bigfish.com
-	(10.43.70.32) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 24 Oct 2013 07:56:13 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 24 Oct 2013 07:56:11 +0000
-Received: from localhost.localdomain (B19537-03.ap.freescale.net
-	[10.192.208.81])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id r9O7u8Lo001373;	Thu, 24 Oct 2013 00:56:09 -0700
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Oct 2013 15:56:06 +0800
-Message-ID: <1382601366-38422-1-git-send-email-zhenhua.luo@freescale.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 24 Oct 2013 08:12:03 +0000 (UTC)
+Received: by mail-vb0-f54.google.com with SMTP id q12so1117931vbe.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Oct 2013 01:12:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=TkNI8Yjy6iN8exaC0SCWcNaiDAt5dT1MBx28jgN+aPA=;
+	b=avzWX66UAAh5bH0pdvrBFKwQ9wjppw5zxZ3garnw9r83tXuSXjFFjHtwPUacP/eHrz
+	J2LiZZ+Wqyjrg8tzr61/v9TfOXj7bkNtcwYbId7hgMbHeVzhM1oUzsbHwLeTkOIBcoaX
+	7lIiM9upTn7ebRf/zJwUWu6xscjN08KIXi7Nbv3vjFu4m2vmqYQj15KETt8+dYFSVS/3
+	wNOLNxUpEOUmgM7/+YyXkcgN3oDwShZA7scg8REvCSC0fNCSdiwDrRIUsOifz6tcg+Ue
+	y2OXaH7NLH07f0kLIFPaG7AFu4NQVGBbFDA/ZUpIWPK/K3x0eIIO3IgWJIp1QiG8Salb
+	s/Iw==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: Zhenhua Luo <zhenhua.luo@freescale.com>, b40527@freescale.com
-Subject: [meta-oe/meta-oe][PATCH] libedit: fix multilib build issue
+X-Received: by 10.58.38.200 with SMTP id i8mr769694vek.6.1382602325027; Thu,
+	24 Oct 2013 01:12:05 -0700 (PDT)
+Received: by 10.220.75.72 with HTTP; Thu, 24 Oct 2013 01:12:04 -0700 (PDT)
+In-Reply-To: <5268CEB6.7030401@balister.org>
+References: <CAGJTLJ6MLtO_neHZq7QoER7Vs4JCLnfXZbxHeKhtV53V2+PDkw@mail.gmail.com>
+	<52685AB2.2060606@balister.org>
+	<CAGJTLJ5z=8Wjj2WOzid3MuaJEErc_Qja93bk5Uponw-aXwcxQA@mail.gmail.com>
+	<5268CEB6.7030401@balister.org>
+Date: Thu, 24 Oct 2013 01:12:04 -0700
+Message-ID: <CAGJTLJ6Sszu7NjAWLf4bW=mxxWq7=Rhvqc5=-fSQ5_Ftq6eEnA@mail.gmail.com>
+From: Stephen Harrison <msteveharrison@gmail.com>
+To: Philip Balister <philip@balister.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Issues Building Numpy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2013 07:56:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Oct 2013 08:12:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Failed to fetch URL http://www.thrysoee.dk/editline/lib64-libedit-20121213-3.0.tar.gz
-
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
----
- meta-oe/recipes-devtools/libedit/libedit_20121213.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/libedit/libedit_20121213.bb b/meta-oe/recipes-devtools/libedit/libedit_20121213.bb
-index 35e619c..08dba44 100644
---- a/meta-oe/recipes-devtools/libedit/libedit_20121213.bb
-+++ b/meta-oe/recipes-devtools/libedit/libedit_20121213.bb
-@@ -10,9 +10,9 @@ inherit autotools
- 
- # upstream site does not allow wget's User-Agent
- FETCHCMD_wget += "-U bitbake"
--SRC_URI = "http://www.thrysoee.dk/editline/${PN}-${PV}-3.0.tar.gz"
-+SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}-3.0.tar.gz"
- 
--S = "${WORKDIR}/${PN}-${PV}-3.0"
-+S = "${WORKDIR}/${BPN}-${PV}-3.0"
- 
- SRC_URI[md5sum] = "f475f50fe7467c1074c0fbae8b5bca1a"
- SRC_URI[sha256sum] = "0379e4a73c219f260e6d16adbc2e87635532ebb4c5a83a7399f231dc40108d1f"
--- 
-1.8.3.1
+Great, I tried uninstalling those libraries and it seems to resolve the
+problem!
 
 
+On Thu, Oct 24, 2013 at 12:39 AM, Philip Balister <philip@balister.org>wrote:
+
+> On 10/24/2013 12:29 AM, Stephen Harrison wrote:
+> > Hi,
+> >
+> > Yes I do have these libraries installed on the build machine. Are you
+> > saying I need to uninstall them?
+>
+> Or fix the numpy build to not find them on the build machine :)
+>
+> Philip
+>
+> >
+> >
+> >
+> >
+> > On Wed, Oct 23, 2013 at 4:24 PM, Philip Balister <philip@balister.org
+> >wrote:
+> >
+> >> Do you have atlas, blas etc installed on the build machine. As I recall
+> >> the numpy recipe is weak and tends to finds things installed on the
+> >> build machine.
+> >>
+> >> Philip
+> >>
+> >> On 10/23/2013 08:22 PM, Stephen Harrison wrote:
+> >>> Hi,
+> >>>
+> >>> I am trying to build an image for the Zedboard (ARM) platform. I can't
+> >> seem
+> >>> to build the Numpy package and I can't quite understand why.
+> >>>
+> >>> I've attached the compile log. I've noticed there are many complaints
+> >> about
+> >>> ATLAS, BLAS etc not being available and other errors about executables
+> >>> being in the wrong format.
+> >>>
+> >>> Any help would be much appreciated.
+> >>>
+> >>> Regards,
+> >>>
+> >>> Stephen
+> >>>
+> >>>
+> >>>
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+>
 
