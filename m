@@ -1,26 +1,24 @@
-Return-Path: <Liezhi.Yang@windriver.com>
+Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 918276D223
+	by mail.openembedded.org (Postfix) with ESMTP id 664EF6D2A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2013 02:37:28 +0000 (UTC)
+	Fri, 25 Oct 2013 05:23:22 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9P2bUlt016305
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9P5NO5w027750
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2013 19:37:30 -0700 (PDT)
-Received: from pek-hostel-vm02.wrs.com (128.224.153.172) by
+	Thu, 24 Oct 2013 22:23:24 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Thu, 24 Oct 2013 19:37:30 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	14.2.347.0; Thu, 24 Oct 2013 22:23:23 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Oct 2013 22:37:27 -0400
-Message-ID: <1382668647-27029-1-git-send-email-liezhi.yang@windriver.com>
+Date: Fri, 25 Oct 2013 13:23:24 +0800
+Message-ID: <1382678604-2326-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1382519652-15717-1-git-send-email-liezhi.yang@windriver.com>
-References: <1382519652-15717-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-webserver V2] [PATCH] cherokee: fix the installed but not shipped issue
+Subject: [PATCH] macchanger: fix PN -> BPN in FILES_${PN} for multilibs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,55 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2013 02:37:28 -0000
+X-List-Received-Date: Fri, 25 Oct 2013 05:23:23 -0000
 Content-Type: text/plain
 
-We will get the following ERROR/WARN if we enable the
-installed-vs-shipped check in QA:
+From: Roy Li <rongqing.li@windriver.com>
 
-ERROR: QA Issue: cherokee: Files/directories were installed but not shipped
-  /srv
-  /srv/www
-  /srv/www/htdocs
-  /srv/www/htdocs/index.html
-  /srv/www/htdocs/images
-  /srv/www/htdocs/images/cherokee-logo.png
-  /srv/www/htdocs/images/default-bg.png
-  /srv/www/htdocs/images/favicon.ico
-  /srv/www/htdocs/images/powered_by_cherokee.png
-
-I think that we can pack these files into cherokee just like what
-apache2 does.
-
-Fedora 17 also packs them
-
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb |    4 ++++
- 1 file changed, 4 insertions(+)
+ meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-index 2014ea1..ddd93f1 100644
---- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-+++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-@@ -25,6 +25,7 @@ PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
- EXTRA_OECONF = "--disable-static \
-                 --disable-nls \
-                ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
-+               --with-wwwroot=${servicedir} \
+diff --git a/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb b/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
+index 2ecfab2..8491dc0 100644
+--- a/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
++++ b/meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb
+@@ -12,9 +12,9 @@ SRC_URI[md5sum] = "79b7cdaeca3d8ebafa764c4b0dd03ab7"
+ SRC_URI[sha256sum] = "d44bfa27cb29c5a718627cb3ef3aa42eb5130426545eb2031120826cd73fa8fe"
+ 
+ FILES_${PN} = " \
+-    ${bindir}/${PN} \
+-    ${datadir}/${PN}/wireless.list \
+-    ${datadir}/${PN}/OUI.list \
++    ${bindir}/${BPN} \
++    ${datadir}/${BPN}/wireless.list \
++    ${datadir}/${BPN}/OUI.list \
  "
  
- do_install_append () {
-@@ -48,6 +49,9 @@ FILES_libcherokee-server = "${libdir}/libcherokee-server${SOLIBS}"
- FILES_libcherokee-client = "${libdir}/libcherokee-client${SOLIBS}"
- FILES_libcherokee-base = "${libdir}/libcherokee-base${SOLIBS}"
- 
-+# Pack the htdocs
-+FILES_${PN} += "${servicedir}"
-+
- CONFFILES_${PN} = " \
-                    ${sysconfdir}/cherokee/cherokee.conf \
-                    ${sysconfdir}/init.d/cherokee \
+ FILES_${PN}-doc = " \
 -- 
 1.7.10.4
 
