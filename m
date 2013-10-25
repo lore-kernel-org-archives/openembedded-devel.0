@@ -1,34 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 28B476D2FD
+Return-Path: <joe@deserted.net>
+Received: from mail-qa0-f41.google.com (mail-qa0-f41.google.com
+	[209.85.216.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 808A96D128
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2013 12:29:57 +0000 (UTC)
-Received: by mail-ie0-f176.google.com with SMTP id u16so6113435iet.21
+	Fri, 25 Oct 2013 13:31:54 +0000 (UTC)
+Received: by mail-qa0-f41.google.com with SMTP id f11so556482qae.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2013 05:29:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=9WXTbx6gBAkhzIvog2/E7R0ryu2ce9yJ265bbUVbtcU=;
-	b=OjRbQ2gIJeYq+IeNiy8Q8/pDBn6v5hDZBo3by9NjbWYSFl/g4iFbU8lHTtvhLPmiuc
-	qEkOfXhZhY1SP2gC9VzFBaWHWzS7c/610WF36MNUA1ELIrwD3qpaHZ8i3m9tasAae0DL
-	Cy/EgqYby/4Q6BuXAdgrXe3IC8xhhJamHBdbV7sFAbfk5Y1GQ5Q0hXW4Gpk+vmNGkgMD
-	orb2e3Hkvr46vmGFr8XFoKu0Bq+htM2fUCMF07ETbZi3XpGSW2iEKtlOw+iXUROQXOSp
-	CdaMw8NG0ECTaEY+JWBg456S4lRDA07jnhEAV/u4IEVSgPNssThPjjzkCxRxSVu29yoG
-	2XeQ==
-X-Received: by 10.50.61.179 with SMTP id q19mr1925739igr.33.1382704198858;
-	Fri, 25 Oct 2013 05:29:58 -0700 (PDT)
+	Fri, 25 Oct 2013 06:31:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=UuYLfv1iyCQACYddZs5zhnILqRmPEzk5nJNzdkcyAU8=;
+	b=gEFvovJxjLf/s34abM8W5PHkgcNdlHEOZrb1D8Yvk95neH2PbZ0B0YtNMoPeEjWkZs
+	yPDPzxx4lSroqw56dEZxlxnntqewYlwmHMrBfiUtAPoJfr+aKp6UM+Tl3NZsF+LYcaYh
+	VqRva7BkS/C3OQfvdrUpoevZcuhfZwk/k+8STm1gsljWQ3gduKqzEJ9q7WcGBEoWZfdi
+	HSJpifa6/4m4eFFHMcFBg3Kz+/5MisukB1ppeYrIvfAvOqZ6aym87vykvmigv4Ru2cN9
+	GKrLzuFyTo5imTP5C+uF3CWPgeR6GIr7qyk4hM7gdOzxzO25r+rHASjXw1ltMYYCJ+5T
+	tZQQ==
+X-Gm-Message-State: ALoCoQmxNYpb0+Vil4NDfLNcQVwKUQeEGgYkY0v/jAKxW0PJHREAO/3f6fkzyb/PFnH7etXZpYwO
+X-Received: by 10.224.79.12 with SMTP id n12mr9739449qak.109.1382707915799;
+	Fri, 25 Oct 2013 06:31:55 -0700 (PDT)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id r1sm19372840qam.4.2013.10.25.06.31.51
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 25 Oct 2013 06:31:51 -0700 (PDT)
+Date: Fri, 25 Oct 2013 09:31:49 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: Xufeng Zhang <xufeng.zhang@windriver.com>
+Message-ID: <20131025133147.GA4566@deserted.net>
+References: <1382608121-6622-1-git-send-email-xufeng.zhang@windriver.com>
+	<20131024174404.GA3984@deserted.net>
+	<5269CDA0.5030201@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.219.195 with HTTP; Fri, 25 Oct 2013 05:29:28 -0700 (PDT)
-In-Reply-To: <CA+chaQdxSVkwbcEttCZo5SA38QS7yVHhwqyXeHp6idxi389SpA@mail.gmail.com>
-References: <1382691396-3929-1-git-send-email-cazfi74@gmail.com>
-	<CA+chaQfqyNSS+PvjZk8eGKRi69iJJQ8dhxX4=HpNfA6-JpgZAQ@mail.gmail.com>
-	<CA+chaQdxSVkwbcEttCZo5SA38QS7yVHhwqyXeHp6idxi389SpA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 25 Oct 2013 05:29:28 -0700
-Message-ID: <CAMKF1soQ1dksJVV-x447kC5LgZ_8t6hnTzq-vrFK2aPaXh6HTA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] lua5.1: apply lua.org patches for lua-5.1.5
+In-Reply-To: <5269CDA0.5030201@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,157 +55,224 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2013 12:29:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Oct 2013 13:31:55 -0000
+X-Groupsio-MsgNum: 46890
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nFreZHaLTZJo0R7j"
+Content-Disposition: inline
 
-Martin
+--nFreZHaLTZJo0R7j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 25, 2013 at 2:53 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Sorry sent before finish
->
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-October/085502.html
->
-> can we just upgrade to 5.2.2 in meta-oe instead of patching 5.1.5? Does it
-> work for your use-case?
+[Re: [oe] [OE] [PATCH meta-networking] quagga/ripd: Fix two bugs after rece=
+ived SIGHUP signal] On 13.10.25 (Fri 09:47) Xufeng Zhang wrote:
 
-5.1 and 5.2 are ABI incompatible. We need to keep both recipes since
-not all apps have yet migrated to 5.2 APIs, so the OE-Core patch
-proposal should be instead directed to meta-oe
-and be applied as an addition to existing recipes.
+> On 10/25/2013 01:44 AM, Joe MacDonald wrote:
+> >[[oe] [OE] [PATCH meta-networking] quagga/ripd: Fix two bugs after recei=
+ved SIGHUP signal] On 13.10.24 (Thu 17:48) Xufeng Zhang wrote:
+> >
+> >>There are two problems for ripd implementation after received
+> >>SIGHUP signal:
+> >>1). ripd didn't clean up ifp->connected list before reload
+> >>     configuration file which makes the same advertise packet
+> >>     being sent multiple times(depends on how many SIGHUP was recieved).
+> >>2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
+> >>     during restart which is different from the flag when ripd is
+> >>     firstly started up, leading to unnecessary route to be advertised.
+> >>
+> >>[YOCTO #5266]
+> >Hey Xufeng,
+> >
+> >Normally I wouldn't go this deep into the detail but since you
+> >referenced the Yocto bug and the Quagga discussion in the commit log and
+> >the bug itself, I thought I'd try to understand what's going on here.
+> >The last thing I saw from the Quagga maintainer is this:
+> >
+> >    The ifp->connected list contains connected prefixes of a given
+> >    interface. These exist regardless of particular routing protocols and
+> >    emptying the list during ripd reconfiguration would be plain wrong. I
+> >    allow for a chance there is a bug that is related to ifp->connected
+> >    and SIGHUP handling at once, but not in this specific way.
+> What he said is that this ifp->connected list is exist in all
+> routing protocols,
+> and if it needs cleanup, it should be done in a more general way, such as
+> in zebra client which is independent of routing protocol.
 
-and this patch is good as it is.
+I'm not sure that's the interpretation I would have taken from the
+quoted text, but if what you indicate is what the maintainer meant, then
+is he not saying that the SIGHUP handling issue also exists for other
+routing daemons in the suite?  Are you saying a similar patch would then
+be required for potentially all daemons in quagga?
 
->
->
-> On Fri, Oct 25, 2013 at 11:52 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
->
->> There is also alternative patch for 5.2.2 proposed to be merged in oe-core
->>
->>
->>
->>
->> On Fri, Oct 25, 2013 at 10:56 AM, Marko Lindqvist <cazfi74@gmail.com>wrote:
->>
->>> Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
->>> ---
->>>  meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch | 18 +++++++++
->>>  meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch | 44
->>> ++++++++++++++++++++++
->>>  meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb       |  4 +-
->>>  3 files changed, 65 insertions(+), 1 deletion(-)
->>>  create mode 100644 meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
->>>  create mode 100644 meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
->>>
->>> diff --git a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
->>> b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
->>> new file mode 100644
->>> index 0000000..b64a6a2
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
->>> @@ -0,0 +1,18 @@
->>> +lua.org patch 1 for lua-5.1.5.
->>> +from http://www.lua.org/bugs.html
->>> +
->>> +Upstream-Status: Backport
->>> +
->>> +Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
->>> +diff -Nurd lua-5.1.5/src/Makefile lua-5.1.5/src/Makefile
->>> +--- lua-5.1.5/src/Makefile     2012-02-13 22:41:22.000000000 +0200
->>> ++++ lua-5.1.5/src/Makefile     2013-10-25 11:29:49.769540434 +0300
->>> +@@ -48,7 +48,7 @@
->>> + a:    $(ALL_A)
->>> +
->>> + $(LUA_A): $(CORE_O) $(LIB_O)
->>> +-      $(AR) $@ $(CORE_O) $(LIB_O)     # DLL needs all object files
->>> ++      $(AR) $@ $(CORE_O) $(LIB_O)
->>> +       $(RANLIB) $@
->>> +
->>> + $(LUA_T): $(LUA_O) $(LUA_A)
->>> diff --git a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
->>> b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
->>> new file mode 100644
->>> index 0000000..0c48ea2
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
->>> @@ -0,0 +1,44 @@
->>> +lua.org patch 2 for lua-5.1.5.
->>> +from http://www.lua.org/bugs.html
->>> +
->>> +Upstream-Status: Backport
->>> +
->>> +Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
->>> +diff -Nurd lua-5.1.5/src/lzio.c lua-5.1.5/src/lzio.c
->>> +--- lua-5.1.5/src/lzio.c       2007-12-27 15:02:25.000000000 +0200
->>> ++++ lua-5.1.5/src/lzio.c       2013-10-25 11:32:45.773536572 +0300
->>> +@@ -22,10 +22,14 @@
->>> +   size_t size;
->>> +   lua_State *L = z->L;
->>> +   const char *buff;
->>> ++  if (z->eoz) return EOZ;
->>> +   lua_unlock(L);
->>> +   buff = z->reader(L, z->data, &size);
->>> +   lua_lock(L);
->>> +-  if (buff == NULL || size == 0) return EOZ;
->>> ++  if (buff == NULL || size == 0) {
->>> ++    z->eoz = 1;  /* avoid calling reader function next time */
->>> ++    return EOZ;
->>> ++  }
->>> +   z->n = size - 1;
->>> +   z->p = buff;
->>> +   return char2int(*(z->p++));
->>> +@@ -51,6 +55,7 @@
->>> +   z->data = data;
->>> +   z->n = 0;
->>> +   z->p = NULL;
->>> ++  z->eoz = 0;
->>> + }
->>> +
->>> +
->>> +diff -Nurd lua-5.1.5/src/lzio.h lua-5.1.5/src/lzio.h
->>> +--- lua-5.1.5/src/lzio.h       2007-12-27 15:02:25.000000000 +0200
->>> ++++ lua-5.1.5/src/lzio.h       2013-10-25 11:31:50.301537789 +0300
->>> +@@ -59,6 +59,7 @@
->>> +   lua_Reader reader;
->>> +   void* data;                 /* additional data */
->>> +   lua_State *L;                       /* Lua state (for reader) */
->>> ++  int eoz;                    /* true if reader has no more data */
->>> + };
->>> +
->>> +
->>> diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bbb/meta-oe/recipes-devtools/lua/
->>> lua5.1_5.1.5.bb
->>> index 19fee01..f946994 100644
->>> --- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
->>> +++ b/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
->>> @@ -4,12 +4,14 @@ LICENSE = "MIT"
->>>  LIC_FILES_CHKSUM =
->>> "file://COPYRIGHT;md5=59bdd99bb82238f238cf5c65c21604fd"
->>>  HOMEPAGE = "http://www.lua.org/"
->>>
->>> -PR = "r1"
->>> +PR = "r2"
->>>
->>>  DEPENDS += "readline"
->>>  SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
->>>             file://bitwise_operators.patch \
->>>             file://lua5.1.pc \
->>> +           file://luaorg_1.patch \
->>> +           file://luaorg_2.patch \
->>>  "
->>>  S = "${WORKDIR}/lua-${PV}"
->>>
->>> --
->>> 1.8.4.rc3
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
+Don't get me wrong, repairing one is better than repairing none, but on
+my first read of his comments it didn't seem like the maintainer even
+agreed that there was a bug at all and your interpretation suggests that
+the same bug likely impacts all quagga daemons.  Any sense on whether
+that's the case?
+
+-J.
+
+> But I have specified the reasons in the above email that why it's
+> not easy to
+> implement this general way:
+> #########################################
+> More comments:
+> Generally this connected interface address stuff is cleaned up in
+> rip_interface_address_delete()
+> which is triggered by zsend_interface_address(), but just as the
+> annotation said above
+> zsend_interface_address() function in zebra/zserv.c,
+> ZEBRA_INTERFACE_ADDRESS_DELETE
+> message could only happens in two cases:
+> 1). ip address uninstall
+> 2). RTM_NEWADDR on routing/netlink socket
+>=20
+> It didn't take the SIGHUP signal into consideration, but since the
+> SIGHUP is handled
+> by every daemon independently, this cleanup is not easy to be
+> implemented commonly,
+> so I think this is a proper way to do this.
+> #########################################
+> So it needs to redesign a lot of stuff to implement this.
+>=20
+> >and it looks like the patch here is the same as the one that the
+> >maintainer indicated is "plain wrong".
+> >  Can you help me get some
+> >confidence that this isn't going to have negative side-effects if we
+> >integrate it?
+> Yes, there should be no side-effects:
+> 1. This modification is only going into ripd daemon and it only
+> takes effect when ripd is restarting.
+> 2. The fix for problem 1). just remove the previously connected
+> addresses of the interface, and these
+>     connected addresses list will be reconstructed when ripd read
+> the configuration during restarting.
+> 3. The fix for problem 2). definitely has not any side-effect
+> because I just restore the horizon flag to
+>     the values when ripd daemon is firstly start up.
+>=20
+> And the customer has already test the fix for a lot of times, no
+> problem is found.
+>=20
+>=20
+> Thanks,
+> Xufeng
+>=20
+> >-J.
+> >
+> >>Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+> >>---
+> >>  .../ripd-fix-two-bugs-after-received-SIGHUP.patch  |   49 +++++++++++=
++++++++++
+> >>  .../recipes-protocols/quagga/quagga.inc            |    3 +-
+> >>  2 files changed, 51 insertions(+), 1 deletions(-)
+> >>  create mode 100644 meta-networking/recipes-protocols/quagga/files/rip=
+d-fix-two-bugs-after-received-SIGHUP.patch
+> >>
+> >>diff --git a/meta-networking/recipes-protocols/quagga/files/ripd-fix-tw=
+o-bugs-after-received-SIGHUP.patch b/meta-networking/recipes-protocols/quag=
+ga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
+> >>new file mode 100644
+> >>index 0000000..c081143
+> >>--- /dev/null
+> >>+++ b/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-=
+after-received-SIGHUP.patch
+> >>@@ -0,0 +1,49 @@
+> >>+ripd: Fix two bugs after received SIGHUP signal
+> >>+
+> >>+There are two problems for ripd implementation after received
+> >>+SIGHUP signal:
+> >>+1). ripd didn't clean up ifp->connected list before reload
+> >>+    configuration file.
+> >>+2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
+> >>+    which lead to the unnecessary route to be advertised.
+> >>+
+> >>+Upstream-Status: Pending
+> >>+
+> >>+Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+> >>+---
+> >>+--- a/ripd/rip_interface.c
+> >>++++ b/ripd/rip_interface.c
+> >>+@@ -500,6 +500,8 @@
+> >>+   struct listnode *node;
+> >>+   struct interface *ifp;
+> >>+   struct rip_interface *ri;
+> >>++  struct connected *ifc;
+> >>++  struct listnode *conn_node, *next;
+> >>+
+> >>+   for (ALL_LIST_ELEMENTS_RO (iflist, node, ifp))
+> >>+     {
+> >>+@@ -514,6 +516,13 @@
+> >>+ 	  thread_cancel (ri->t_wakeup);
+> >>+ 	  ri->t_wakeup =3D NULL;
+> >>+ 	}
+> >>++
+> >>++      for (conn_node =3D listhead (ifp->connected); conn_node; conn_n=
+ode =3D next)
+> >>++        {
+> >>++          ifc =3D listgetdata (conn_node);
+> >>++          next =3D conn_node->next;
+> >>++          listnode_delete (ifp->connected, ifc);
+> >>++        }
+> >>+     }
+> >>+ }
+> >>+
+> >>+@@ -548,8 +557,8 @@
+> >>+ 	  ri->key_chain =3D NULL;
+> >>+ 	}
+> >>+
+> >>+-      ri->split_horizon =3D RIP_NO_SPLIT_HORIZON;
+> >>+-      ri->split_horizon_default =3D RIP_NO_SPLIT_HORIZON;
+> >>++      ri->split_horizon =3D RIP_SPLIT_HORIZON;
+> >>++      ri->split_horizon_default =3D RIP_SPLIT_HORIZON;
+> >>+
+> >>+       ri->list[RIP_FILTER_IN] =3D NULL;
+> >>+       ri->list[RIP_FILTER_OUT] =3D NULL;
+> >>diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta=
+-networking/recipes-protocols/quagga/quagga.inc
+> >>index 89b9f7a..bf37067 100644
+> >>--- a/meta-networking/recipes-protocols/quagga/quagga.inc
+> >>+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+> >>@@ -31,7 +31,8 @@ SRC_URI =3D "http://download.savannah.gnu.org/release=
+s/quagga${QUAGGASUBDIR}/quagg
+> >>             file://quagga.default \
+> >>             file://watchquagga.init \
+> >>             file://watchquagga.default \
+> >>-           file://volatiles.03_quagga"
+> >>+           file://volatiles.03_quagga \
+> >>+           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+> >>
+> >>  PACKAGECONFIG ??=3D ""
+> >>  PACKAGECONFIG[cap] =3D "--enable-capabilities,--disable-capabilities,=
+libcap"
+> >>
+> >>
+> >>_______________________________________________
+> >>Openembedded-devel mailing list
+> >>Openembedded-devel@lists.openembedded.org
+> >>http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+-Joe MacDonald.
+:wq
+
+--nFreZHaLTZJo0R7j
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlJqcrcACgkQwFvcllog0XxBjQCdE4x3Rkmzc96BWja2U9da+dqK
+8YMAnRlIdWNwsleDmpmgoyIxN+VnGAST
+=CDD7
+-----END PGP SIGNATURE-----
+
+--nFreZHaLTZJo0R7j--
