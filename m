@@ -1,36 +1,37 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 00B666CE55
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 8561F6CE55
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2013 23:04:50 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id a15so2541976eae.37
+	Mon, 28 Oct 2013 23:06:33 +0000 (UTC)
+Received: by mail-ee0-f42.google.com with SMTP id b45so4939776eek.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2013 16:04:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=VGIw+JbybxsjlV4b/AlJiCeqdQKJVLsGFsPdl3gfiqw=;
-	b=RSKlejm79k3BcLVGLyxKsKXa9thL+LG6a29QMqiNBGIjgLdv0I2xtCvDckZ9Bow4hi
-	qLUyGUvyGF5t8Ns0YmMFXaS865SFnpkyvjsapxH3l23Idq71rEcVTH7io9/gzYzVOlr9
-	w6f0cdX16rkaC+OstKVCV9D3qZYowqeLYhArckN5i4z3t9Zx1d8tHQGo5FNPN/vuUkUY
-	0xlxy4gV94uXNp0tod08lXf1jnHCEhGchQ1QHcHS8k7/VZjf7wb1sdJjvmtcJsXbgzEB
-	cBl5iEOqpQ8ym2Wnct+l7H0Aa5S7oTAqCmQ+8u8bvq9o4ucqTU2QNAuJIGPBim98yVme
-	vbYQ==
-X-Received: by 10.14.32.196 with SMTP id o44mr24635034eea.43.1383001492148;
-	Mon, 28 Oct 2013 16:04:52 -0700 (PDT)
-Received: from mizar.localdomain
-	(host234-252-dynamic.45-79-r.retail.telecomitalia.it.
-	[79.45.252.234])
-	by mx.google.com with ESMTPSA id a6sm62710461eei.10.2013.10.28.16.04.51
-	for <multiple recipients>
+	Mon, 28 Oct 2013 16:06:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=q+pWJbk1nYRwmnigBDqfaUdz/Fofz3M14POEqX8AjUo=;
+	b=0XrMj7K0J070oyOTC00cEtNOV0z0fdMCLu+2hV2tife0vPxibaCRMQQ6ru5tPxm/+W
+	22q3zZn2XpsdbYcCwYzmGBeJdgl6fcOYSabrS6e1wweKfoFYKS1iDHBT8D9z4kCf+OA8
+	Pijw2MnaWscNfjEbiuTTzjjO92ZPRJNZwD+0iC//LmkJPgFag2pdqRHBs4rNwivi/wvP
+	tq/d5rlwH9mbDFXpm2C9Sip+Q24EpadNY+nkF7+pV0XMjIIufvxW2Et4vAV+ACPn1Tmk
+	7CsqmA2LIDn6/sKkRjmxsASIRoTwg9zqsvnYgNWAblbtyS5JjteBLj+3YbLfadykaeGA
+	/0bw==
+X-Received: by 10.15.44.202 with SMTP id z50mr4738954eev.68.1383001594747;
+	Mon, 28 Oct 2013 16:06:34 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A2A8E.dip0.t-ipconnect.de.
+	[91.10.42.142])
+	by mx.google.com with ESMTPSA id i1sm62756400eeg.0.2013.10.28.16.06.33
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 28 Oct 2013 16:04:51 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 28 Oct 2013 16:06:34 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2013 00:04:48 +0100
-Message-Id: <1383001488-4947-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] meta-handheld: adjust EXTRA_IMAGECMD_jffs2 after oe-core changes
+Date: Tue, 29 Oct 2013 00:06:15 +0100
+Message-Id: <1383001576-26578-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Subject: [meta-qt5][RFC] qtbase: fix build for gles2 enabled by PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,92 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2013 23:04:51 -0000
+X-List-Received-Date: Mon, 28 Oct 2013 23:06:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The machine configuration file must specify a customized
-EXTRA_IMAGECMD_jffs2 to override the defaults of image_types.bbclass.
-Images for NOR flashes should be built with cleanmarkers.
+While playing around with QtQuick I needed gles2 support. Doing so I faced tons
+of error messages as mentionet in patch. It is caused by include chain:
 
-Fix the declaration of padding for collie:
-the short form doesn't accept <size> arument
+EGL/egl.h -> EGL/eglplatform.h -> X11/Xlib.h -> X.h
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- conf/machine/collie.conf     | 2 +-
- conf/machine/h3600.conf      | 2 ++
- conf/machine/jornada56x.conf | 2 ++
- conf/machine/jornada7xx.conf | 4 ++++
- conf/machine/simpad.conf     | 2 ++
- 5 files changed, 11 insertions(+), 1 deletion(-)
+In X.h we find definitions like
 
-diff --git a/conf/machine/collie.conf b/conf/machine/collie.conf
-index 8d1042e..bec8842 100644
---- a/conf/machine/collie.conf
-+++ b/conf/machine/collie.conf
-@@ -7,7 +7,7 @@ require conf/machine/include/tune-strongarm1100.inc
- 
- JFFS2_ERASEBLOCK = "0x20000"
- 
--EXTRA_IMAGECMD_jffs2 = "-p 14680064 -l -e ${JFFS2_ERASEBLOCK}"
-+EXTRA_IMAGECMD_jffs2 = "--pad=14680064 -l -e ${JFFS2_ERASEBLOCK}"
- 
- # UBI: max collie (14.125 = 113 PEBs)
- # 14.125 x 1024 : 128 = 113 PEBs
-diff --git a/conf/machine/h3600.conf b/conf/machine/h3600.conf
-index 53e10cd..6e9941b 100644
---- a/conf/machine/h3600.conf
-+++ b/conf/machine/h3600.conf
-@@ -31,6 +31,8 @@ MACHINE_EXTRA_RDEPENDS = "mtd-utils mtd-utils-jffs2"
- MACHINE_EXTRA_RRECOMMENDS = ""
- 
- JFFS2_ERASEBLOCK = "0x40000"
-+# For NOR flash we need the cleanmarkers so override the defaults
-+EXTRA_IMAGECMD_jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
- EXTRA_IMAGECMD_jffs2_append = " ; echo '${IMAGE_NAME}  ${IMAGE_NAME}.rootfs.jffs2 - root' >> ${DEPLOY_DIR_IMAGE}/reflash.ctl"
- 
- #
-diff --git a/conf/machine/jornada56x.conf b/conf/machine/jornada56x.conf
-index 746e1eb..645f128 100644
---- a/conf/machine/jornada56x.conf
-+++ b/conf/machine/jornada56x.conf
-@@ -7,6 +7,8 @@ PREFERRED_PROVIDERS += "virtual/${TARGET_PREFIX}depmod:module-init-tools-cross"
- BOOTSTRAP_EXTRA_RDEPENDS = "kernel kernel-modules module-init-tools" 
- 
- JFFS2_ERASEBLOCK = "0x40000"
-+# For NOR flash we need the cleanmarkers so override the defaults
-+EXTRA_IMAGECMD_jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
- 
- SERIAL_CONSOLE = "115200 ttySA0"
- 
-diff --git a/conf/machine/jornada7xx.conf b/conf/machine/jornada7xx.conf
-index d9f05df..c988694 100644
---- a/conf/machine/jornada7xx.conf
-+++ b/conf/machine/jornada7xx.conf
-@@ -8,6 +8,10 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-jornada7xx"
- MACHINE_FEATURES = "apm alsa pcmcia irda keyboard touchscreen screen vfat"
- MACHINE_EXTRA_RDEPENDS = "kernel-modules bluez-dtl1-workaround"
- 
-+JFFS2_ERASEBLOCK = "0x40000"
-+# For NOR flash we need the cleanmarkers so override the defaults
-+EXTRA_IMAGECMD_jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
-+
- #screeninfo
- MACHINE_GUI_CLASS = "smallscreen"
- MACHINE_DISPLAY_WIDTH_PIXELS = "640"
-diff --git a/conf/machine/simpad.conf b/conf/machine/simpad.conf
-index d5ee19c..a6d49a5 100644
---- a/conf/machine/simpad.conf
-+++ b/conf/machine/simpad.conf
-@@ -9,6 +9,8 @@ MACHINE_FEATURES = "apm pcmcia irda screen touchscreen vfat"
- PREFERRED_PROVIDER_virtual/kernel = "linux"
- 
- JFFS2_ERASEBLOCK = "0x20000"
-+# For NOR flash we need the cleanmarkers so override the defaults
-+EXTRA_IMAGECMD.jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
- 
- MACHINE_GUI_CLASS = "bigscreen"
- MACHINE_DISPLAY_WIDTH_PIXELS = "800"
+#ifndef None
+#define None                 0L	/* universal null resource or null atom */
+#endif
+
+This causes building Qt to crash when using these kind of symbols.
+
+The patch was sent as RFC because:
+
+1.  I would like ro discuss this at interest@qt-project.org and/or 
+    development@qt-project.org but it was not possible to subscribe. I sent
+    a mail to listmaster but no response either.
+2.  qtbase_git might need same (and fails with the patch)
+3.  This is not a proper solution: It is fragile and will return for future
+    changes. Proper soultion would be renaming the symbols Qt but I cannot
+    discuss due to 1.
+4.  Nobody reported a build error for meta-qt5 so far.
+
+Andreas Müller (1):
+  qtbase: fix build for gles2 enabled by PACKAGECONFIG
+
+ ...-reorder-includes-to-fix-build-with-eglfs.patch | 238 +++++++++++++++++++++
+ recipes-qt/qt5/qtbase.inc                          |   1 +
+ 2 files changed, 239 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase-5.1.1/0027-reorder-includes-to-fix-build-with-eglfs.patch
+
 -- 
-1.8.1.5
+1.8.3.1
 
 
