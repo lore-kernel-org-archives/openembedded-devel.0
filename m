@@ -1,45 +1,25 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qc0-f172.google.com (mail-qc0-f172.google.com
-	[209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 08FDF6D041
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2013 14:37:38 +0000 (UTC)
-Received: by mail-qc0-f172.google.com with SMTP id c9so4759280qcz.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2013 07:37:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=pMgsaDwqXmFbvjPAhN6CMjoIG7U7rB5ys6svd84+o0Q=;
-	b=KBQGyy3QFdZQTV9RU4HOm87gYiFrw64z3WHgr47eal24Helqq3id8hd9Dg0bvJuQHs
-	xwmMvz9YOmpLEUAUfj6eRdUclqlzahY1qtPYPbt9LDcMM+11OffIPWOro12sQDULg3CE
-	nTlqiQB8cC/H1TD/uCEduifSsAZslxL5EvXfL7Ykr+8oE8Nn+ssUbF5I+93TIPEOPmrW
-	HeQ70eutDoTTdc3oum84EKIFk2QpnKNstUYklkypfGE1OTytgyuNCgF9IhI6iwjLqoT3
-	KXFfcVuokrQ8q8nSKxmaMHXthk5+4tDyiuQrvxuhKauG7veBajYRkx+5bs11wQNLD8hn
-	PCKg==
-X-Gm-Message-State: ALoCoQmze37KmWnqYG96ZPcJpoNr7pDCXRQkhriH+jy1qaTYG5+W3Bh9K95WZ0RdaXFUhdOKuXTk
-X-Received: by 10.49.4.199 with SMTP id m7mr35947045qem.19.1383057460291;
-	Tue, 29 Oct 2013 07:37:40 -0700 (PDT)
-Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
-	by mx.google.com with ESMTPSA id
-	r5sm65774677qaj.13.2013.10.29.07.37.38
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 29 Oct 2013 07:37:39 -0700 (PDT)
-Date: Tue, 29 Oct 2013 10:37:37 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131029143735.GA9931@deserted.net>
-References: <1382926827-13170-1-git-send-email-rongqing.li@windriver.com>
+Return-Path: <cliff.brake@gmail.com>
+Received: from bec-systems.com (u15414263.onlinehome-server.com
+	[74.208.70.121])
+	by mail.openembedded.org (Postfix) with ESMTP id CA26F6D092;
+	Tue, 29 Oct 2013 14:50:51 +0000 (UTC)
+Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
+	helo=happy.bec-systems.com)
+	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
+	id 1VbAV9-0004op-Mg; Tue, 29 Oct 2013 10:42:40 -0400
 MIME-Version: 1.0
-In-Reply-To: <1382926827-13170-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH meta-networking v2] lowpan-tools: configure python files installation path
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Date: Tue, 29 Oct 2013 14:50:36 GMT
+Message-Id: <1383058236112.f2639d66@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+X-Spam_score: -2.9
+X-Spam_score_int: -28
+X-Spam_bar: --
+Subject: OE Changelog since 2013-10-20 until 2013-10-27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,66 +33,405 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2013 14:37:39 -0000
-X-Groupsio-MsgNum: 46922
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
-Content-Disposition: inline
-
---BOKacYhQ+x31HxR3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Oct 2013 14:50:52 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
--J.
+Changelog since 2013-10-20 until 2013-10-27.  Projects included in this =
+report:
 
-[[oe] [PATCH meta-networking v2] lowpan-tools: configure python files insta=
-llation path] On 13.10.28 (Mon 10:20) rongqing.li@windriver.com wrote:
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> configure python files installation path or else it will use the
-> default value /usr/lib/python*, which is wrong on 64bit and multilibs
-> enabled system
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb |    4 =
-+++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_gi=
-t.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> index cf78b45..152ee49 100644
-> --- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> @@ -13,7 +13,9 @@ SRCREV =3D "a1d9615adde6d1a568813c24a128273ed755af04"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
-> -inherit autotools
-> +inherit autotools python-dir
-> +
-> +CACHED_CONFIGUREVARS +=3D "am_cv_python_pythondir=3D${PYTHON_SITEPACKAGE=
-S_DIR}/lowpan-tools"
-> =20
->  do_install_append() {
->  	rmdir ${D}${localstatedir}/run
---=20
--Joe MacDonald.
-:wq
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
---BOKacYhQ+x31HxR3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Andrea Adami (2):
+=20=20image_types.bbclass: do not force --no-cleanmarkers for jffs2
+=20=20image_types.bbclass: fix endiannes for sumtool (jffs2 summary)
 
-iEYEARECAAYFAlJvyCUACgkQwFvcllog0XywIACfeDmH/+yb6exI+UKD4uApKoUX
-TdsAoIf6ubTHb7DZkdGEnO/rM8nm5bLm
-=DfRb
------END PGP SIGNATURE-----
+Andreas Oberritter (2):
+=20=20mesa: make runtime variables depend on PACKAGECONFIG
+=20=20mesa-gl: use base_set_filespath
 
---BOKacYhQ+x31HxR3--
+Bruce Ashfield (1):
+=20=20linux-yocto/3.10: MinnowBoard support
+
+Chen Qi (1):
+=20=20runqemu-extract-sdk: add --numeric-owner option to tar command
+
+Christopher Larson (1):
+=20=20base.bbclass: fix nondeterministic PACKAGECONFIG processing order
+
+David Nystr=C3=B6m (1):
+=20=20rpm: Add nativesdk to BBCLASSEXTEND
+
+Fathi Boudra (1):
+=20=20openssl: use linux-generic64 target for Aarch64 (LE and BE)
+
+Hongxu Jia (1):
+=20=20kernel-grub.bbclass: add a method to install/update for bzImage
+
+Jackie Huang (1):
+=20=20midori: exclude from self-hosted for mips64
+
+Koen Kooi (1):
+=20=20openssl: switch ARM builds from linux-elf-arm to linux-armv4 config
+
+Konrad Scherer (2):
+=20=20relocate_sdk.py: Allow script to work with Python 2.4 and 3.
+=20=20cracklib: cracklib-native should not depend on zlib
+
+Laurentiu Palcu (8):
+=20=20xmodmap: upgrade to 1.0.8
+=20=20python-setuptools: upgrade to 1.1.6
+=20=20xinit: upgrade to 1.3.3
+=20=20m4: upgrade to 1.4.17
+=20=20tar: upgrade to 1.27
+=20=20tcl: upgrade to 8.6.1
+=20=20mdadm: upgrade to 3.3
+=20=20gdb: upgrade to 7.6.1
+
+Lu Chong (1):
+=20=20minicom: fix -v/-h return value
+
+Marko Lindqvist (7):
+=20=20libxcb: fix build with automake-1.14
+=20=20libcheck: allow build with automake-1.14
+=20=20libfm: upgrade to upstream version 1.1.2.2
+=20=20libfm: allow build with automake-1.14
+=20=20gtk+: upgrade gtk+ to upstream version 2.24.22
+=20=20cairo: upgrade to upstream version 1.12.16
+=20=20harfbuzz: upgrade to upstream version 0.9.22
+
+Maxin B. John (2):
+=20=20dropbear: update to 2013.60 version
+=20=20pigz: bump to 2.3.1
+
+Micha=C3=ABl Burtin (1):
+=20=20initramfs-framework: fix test that filter backup module files
+
+Ming Liu (6):
+=20=20bzip2: replace +=3D with _append for appending to OVERRIDES variables
+=20=20libarchive: replace +=3D with _append for appending to OVERRIDES =
+variables
+=20=20nss: don't need set SRC_URI with both +=3D and _append
+=20=20base-files: remove invalid entries from /etc/shells
+=20=20bash: dynamically add or remove a entry to/from /etc/shells
+=20=20screen: dynamically add or remove a entry to/from /etc/shells
+
+Paul Eggleton (1):
+=20=20buildhistory-diff: add ability to report version changes
+
+Petter Mab=C3=A4cker (1):
+=20=20clutter: remove usage of FILESPATH
+
+Qiang Chen (2):
+=20=20nfs-utils: Stop rpc.statd correctly
+=20=20nfs-utils: nfsserver restart should kill and recreate nfsd kernel =
+threads
+
+Ross Burton (2):
+=20=20packagegroup-base: if zeroconf DISTRO_FEATURE enabled, add libnss-mdns
+=20=20gdk-pixbuf: use PACKAGECONFIG to control legacy X11 sub-library
+
+Roy Li (1):
+=20=20mesa: fix dependency
+
+Saul Wold (3):
+=20=20libcheck: Add native support for kbd-native
+=20=20kbd: Use libcheck instead of check
+=20=20check: Remove duplicate recipe of libcheck
+
+Sujith H (1):
+=20=20nspr: Add LDFLAGS to TARGET_CC_ARCH to fix warning
+
+Tom Zanussi (10):
+=20=20wic: Remove dependency on rt_util module
+=20=20wic: eliminate module checks
+=20=20wic: Remove dependency on rpmmisc
+=20=20wic: Remove dependency on myurlgrab module
+=20=20wic: remove rpm warning code from BackendPlugin
+=20=20wic: Remove rpm and grabber dependencies from BaseImageCreator
+=20=20wic: Remove rpmmisc call from livecd
+=20=20wic: Remove binary dependencies
+=20=20wic: Make find_binary_path() more user-friendly
+=20=20wic: Update and generalize pseudo setup for rootfs generation
+
+Wenzong Fan (1):
+=20=20perf: flag __SANE_USERSPACE_TYPES__ to include int-ll64.h for mips64
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Anders Darander (2):
+=20=20breakpad: add initial recipe
+=20=20ktap: add initial recipe
+
+Andreas M=C3=BCller (2):
+=20=20lxdm: update to latest git version
+=20=20xfconf: fix compile
+
+Chen Qi (1):
+=20=20autofs: fix do_install failure and remove unused /var/run directory
+
+Cliff Brake (1):
+=20=20coriander: add recipe
+
+Khem Raj (6):
+=20=20mikmod: Upgrade 3.3.2 -> 3.3.3
+=20=20gnome-vfs: Fix build error with new autotools
+=20=20libbonobo: Fix build error with new autotools
+=20=20libraw1394: Upgrade 2.0.9 -> 2.1.0
+=20=20libdc1394: Remove redundant dependencies
+=20=20gnumeric: Fix build failure with newer autotools
+
+Koen Kooi (1):
+=20=20libhugetlbfs: kill /opt usage
+
+Olof Johansson (1):
+=20=20rsyslog: fix dependency name (json-c =3D> libjson)
+
+Robert Yang (1):
+=20=20cifs-utils: add --ignore-fail-on-non-empty for rmdir
+
+Roy Li (1):
+=20=20macchanger: fix PN -> BPN in FILES_${PN} for multilibs
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+Andreas M=C3=BCller (1):
+=20=20angstrom.inc: set dummy default MACHINE_KERNEL_PR to "r0"
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Andy Ross (1):
+=20=20busybox: add /usr/bin/stat applet
+
+Chase Maupin (7):
+=20=20u-boot-ti-staging: adapt to base recipe name change
+=20=20ti-tisdk-setup: update setup scripts
+=20=20amsdk-av-files: Add WVGA files for dra7xx devices
+=20=20matrix-gui-apps-git: update for dra7xx multimedia support
+=20=20amsdk-sdk-host: Add oe-layersetup to the SDK
+=20=20sourceipk: Fix git repo in copied sources not original sources
+=20=20arago-core-tisdk-image: Update DTB_FILTER to pickup GP DTB
+
+Tom Rini (3):
+=20=20udev: Re-fix touchscreen detection rule
+=20=20udev: Add rule for automount (and handle removal of) SD cards
+=20=20packagegroup-arago-tisdk-amsdk.bb, mount-sdcard: Remove mount-sdcard
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Daiane Angolini (1):
+=20=20libdrm: Follow OE-Core upgrade to 2.4.47 version
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+Chunrong Guo (1):
+=20=20linux-qoriq-sdk : add config fragments with merge_config.sh from =
+kernel tree
+
+Zhenhua Luo (1):
+=20=20libedit: fix the multilib build issue
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+Andreas M=C3=BCller (2):
+=20=20overo: pin mesa-gl as PREFERRED_PROVIDER_virtual/libgl
+=20=20overo.conf: add PREFERRED_PROVIDER for all gl-libs
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Chang, Rebecca Swee Fun (2):
+=20=20meta-crystalforest: enable linux-yocto_3.10 kernel recipe
+=20=20meta-crystalforest: update machine conf default kernel to v3.10
+
+Ong Boon Leong (4):
+=20=20meta-romley: update linux-yocto_3.8 to v3.8.13
+=20=20meta-romley: Enable linux-yocto_3.10 kernel recipe
+=20=20meta-romley: Update machine default kernel to v3.10
+=20=20meta-romley: remove xserver-xf86-config
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+Christopher Larson (1):
+=20=20packagegroups: add IVI_COREBASE to vardepsexclude
+
+Florin Sarbu (5):
+=20=20audiomanager: Update to version 4.2
+=20=20audiomanager: Remove unneeded patch
+=20=20audiomanager: Update the git .bb to latest sha
+=20=20base-passwd: Update .bbappend to version 3.5.28
+=20=20audiomanager: Add missing depend on common-api-c++-dbus
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Simon Busch (1):
+=20=20maliit-framework-qt5: package only ${libdir}/qt5/mkspecs within =
+${PN}-dev
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Chase Maupin (2):
+=20=20dra7xx-evm: remove u-boot preferred provider
+=20=20linux-ti-staging: Update for AM437x GP EVM DTB
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Hongjeon Ha (1):
+=20=20webos-image: pmloglib=3D41
+
+Keith Derrick (1):
+=20=20webos-image: sleepd=3D20
+
+Maksym Sditanov (1):
+=20=20webos-image: db8=3D91
+
+Martin Jansa (1):
+=20=20buildhistory: Measure time needed for git status and git push
+
+Mykola Kryvonos (1):
+=20=20webos-image: libpbnjson=3D21
+
+Wonhong Kwon (1):
+=20=20alljoyn: remove script/end script to eliminate dangling /bin/sh
+
+hwangmok.cho (1):
+=20=20uchardet: Add recipe for v0.0.1
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Cristian Iorga (1):
+=20=20upstream_tracking: Update manual check for minicom
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+
+
