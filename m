@@ -1,34 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id B9C436D284
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 4581C6CEE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2013 01:43:23 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id as1so12917913iec.27
+	Tue, 29 Oct 2013 08:07:24 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id d41so3893061eek.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2013 18:43:25 -0700 (PDT)
+	Tue, 29 Oct 2013 01:07:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Tsf8y6NdMwNc3o/n06WRCS+ZGk6/sgqurTK+XI0Hx7o=;
-	b=vDmUGxTQ+jwz83vy+hdboUAtn7NuL8wm1VBKJq6AsSm4quELSkaT4I2kKoZJgeNl+J
-	j8MX/e1Lu+Yj3VXqvVkPb/RqoomvlYX22wL3FXTrBzC7teeDj96sVki26aN7C1FePqxy
-	A1KVTCx887IV2o0TOwC1kBoJpw57zC2Oq9nDlGsYVSbGqvo5hfY/v5FIZS1WLH5bjxqz
-	5yG0X47LwDcJIjAw5dtWMqspI0q4Ht6KxagruQN9aFlXWiBjRItUmUkGDeO45vADFp9A
-	+PHvdJhHiny0S6VwSo2zMBDoEpVqIj7koIKIlGFB7fl+RB60DooVDeZyVuwgLYdZIuls
-	brkw==
-X-Received: by 10.50.23.103 with SMTP id l7mr10699411igf.3.1383011005252; Mon,
-	28 Oct 2013 18:43:25 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=dNP5s94E+xp3KbfjIPnNwJG2E+TZ3OeUpDNmd2jsTEs=;
+	b=VvPOEV+ki3NcSmBR4LfiQQtCjF7ztAABsOREhmo1GHVqFNm/26IOw6Rs7/8sZZJTrZ
+	cvtQJfd7fm7FETURvcdmrs+P37cKc7cbEO0aS4wsdJFLhUuRf5L9uib2EjCeXIZG0Cj/
+	jVO42tmAyJUDUh2VWcdUUf0vFIvo0tfrK/aT7O4Mhh/LfGApyv2eaK7yOGrzbsh3J91E
+	fujwQ/RlGbvEK9rllGrenTiNgj4wOWcoDrxq1gYeYXKCKs0mV4CWOghxHwY1xdIuCke+
+	ak4prKMTbRuBONtOGk0RLUrVTPuJxfz2U5peEBpIjQTxKo14nqFtALXvLrY2gZhNlf0r
+	QhXQ==
+X-Received: by 10.14.3.9 with SMTP id 9mr1598093eeg.72.1383034045325;
+	Tue, 29 Oct 2013 01:07:25 -0700 (PDT)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id b42sm67138758eem.9.2013.10.29.01.07.23
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 29 Oct 2013 01:07:24 -0700 (PDT)
+Date: Tue, 29 Oct 2013 08:07:36 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131029070736.GA3697@jama>
+References: <1383001576-26578-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Received: by 10.50.219.195 with HTTP; Mon, 28 Oct 2013 18:42:55 -0700 (PDT)
-In-Reply-To: <1382105347-27538-1-git-send-email-anders.roxell@linaro.org>
-References: <1382105347-27538-1-git-send-email-anders.roxell@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2013 18:42:55 -0700
-Message-ID: <CAMKF1sp9WfTh6qdmNc9noCq24cf=R52OOdvtqEjZU7h10Vun-A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: linaro-networking@linaro.org, "patches@linaro.org" <patches@linaro.org>
-Subject: Re: [PATCH] libhugetlbfs: add support for armv7a
+In-Reply-To: <1383001576-26578-1-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-qt5][RFC] qtbase: fix build for gles2 enabled by PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,54 +46,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2013 01:43:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 29 Oct 2013 08:07:24 -0000
+X-Groupsio-MsgNum: 46912
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IJpNTDwzlM2Ie8A6"
+Content-Disposition: inline
 
-On Fri, Oct 18, 2013 at 7:09 AM, Anders Roxell <anders.roxell@linaro.org> wrote:
-> Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-> ---
->  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> index 24480c3..4f1bfa4 100644
-> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> @@ -20,10 +20,16 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
->
->  S = "${WORKDIR}/git"
->
-> -COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
-> +COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
->
-> +python __anonymous() {
-> +    if base_contains('TARGET_ARCH', 'arm', True, False, d):
-> +        d.setVar('ARCH', 'armv7l')
-> +    else:
-> +        d.setVar('ARCH', d.getVar('TARGET_ARCH'))
-> +}
+--IJpNTDwzlM2Ie8A6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-instead of this fugly anon python you could do
+On Tue, Oct 29, 2013 at 12:06:15AM +0100, Andreas M=FCller wrote:
+> While playing around with QtQuick I needed gles2 support. Doing so I face=
+d tons
+> of error messages as mentionet in patch. It is caused by include chain:
+>=20
+> EGL/egl.h -> EGL/eglplatform.h -> X11/Xlib.h -> X.h
+>=20
+> In X.h we find definitions like
+>=20
+> #ifndef None
+> #define None                 0L	/* universal null resource or null atom */
+> #endif
+>=20
+> This causes building Qt to crash when using these kind of symbols.
+>=20
+> The patch was sent as RFC because:
+>=20
+> 1.  I would like ro discuss this at interest@qt-project.org and/or=20
+>     development@qt-project.org but it was not possible to subscribe. I se=
+nt
+>     a mail to listmaster but no response either.
+> 2.  qtbase_git might need same (and fails with the patch)
+> 3.  This is not a proper solution: It is fragile and will return for futu=
+re
+>     changes. Proper soultion would be renaming the symbols Qt but I cannot
+>     discuss due to 1.
+> 4.  Nobody reported a build error for meta-qt5 so far.
 
-ARCH_arm = "armv7l"
-ARCH ?=  "${TARGET_ARCH}"
+We had similar problem, but fixed gles2 provider instead, in our case we
+were using libhybris and the fix was to prevent loading X11 headers when
+we want to use just gles2 from it.
 
-and btw. we support ARM v4,v5,v6 architectures as well. It seems your
-patch only cares about armv7,
-and if this recipe only works for armv7+ then dont open the floodgates
-for all kind of arm architectures.
+Similar changes were added to mesa lately, can you do the same with
+gles2 provider on your platform?
 
->
-> -EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' BUILDTYPE=NATIVEONLY ${LIBARGS}"
-> +EXTRA_OEMAKE = "'ARCH=${ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' BUILDTYPE=NATIVEONLY ${LIBARGS}"
->  CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
->
->  TARGET_CC_ARCH += "${LDFLAGS}"
-> --
-> 1.8.1.2
->
+I must admit that I haven't read the patch yet and haven't finished
+morning coffee :).
+
+> Andreas M=FCller (1):
+>   qtbase: fix build for gles2 enabled by PACKAGECONFIG
+>=20
+>  ...-reorder-includes-to-fix-build-with-eglfs.patch | 238 +++++++++++++++=
+++++++
+>  recipes-qt/qt5/qtbase.inc                          |   1 +
+>  2 files changed, 239 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtbase-5.1.1/0027-reorder-includes-to-=
+fix-build-with-eglfs.patch
+>=20
+> --=20
+> 1.8.3.1
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IJpNTDwzlM2Ie8A6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlJvXrgACgkQN1Ujt2V2gBy3XACeL0yVl0MU8/UuCELOymvao+ux
+ZpwAn0cXLrrohJZIwr/bkdZsQQy31ggS
+=C2zS
+-----END PGP SIGNATURE-----
+
+--IJpNTDwzlM2Ie8A6--
