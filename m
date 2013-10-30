@@ -1,35 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id F3C136C782
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E21896D478
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 17:24:20 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id e53so819983eek.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 10:24:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UKqedUzsKzuy1wmqcSeGYbvBdUZLjPop+Iu+Ede7Gu0=;
-	b=GuRX15r/lNe9dVyJcZwch0KQmgVEyUX4w0jWoAXr3YXpsrbZ8lhZDUSDfYNAjGzR19
-	ObBSN8S6Cgue5E0z5Ow64OGaKUadNSwmq46PX3K09QcQ3gh2vGE1TEinFkkPUK/qRRGX
-	sItI6MRYDEhWA0KzmAYfvTrsv9U1HOnapCk5J44e2enlnQtGVNMByPI/hIhEB/9hL+V6
-	NdZ01vvjiOch1nFHE0usPglA4z/PhlKuvYFQjDhi7ZHFhuCeSyho8wsNlx7YV3jFyy6x
-	AOQoJz7wShS/sdH2QQczat2h/0cEt50fMjd9qXGCrIElgUkBMxXU64bzUOILtFFewaRc
-	UUdg==
-X-Received: by 10.14.198.66 with SMTP id u42mr3377409een.80.1383153862276;
-	Wed, 30 Oct 2013 10:24:22 -0700 (PDT)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	u46sm85975253eep.17.2013.10.30.10.24.21 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Oct 2013 10:24:21 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Oct 2013 18:24:21 +0100
-Message-Id: <1383153861-1356-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.2
-In-Reply-To: <1383063056-1039-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1383063056-1039-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCHv2] xserver-common: start Xsession when starting Xserver
+	Wed, 30 Oct 2013 18:45:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9UIjhZ3007203
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 30 Oct 2013 11:45:43 -0700 (PDT)
+Received: from yow-masselst-d1.wrs.com (128.224.146.23) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.2.347.0; Wed, 30 Oct 2013 11:45:42 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe@deserted.net>
+Date: Wed, 30 Oct 2013 14:45:54 -0400
+Message-ID: <1383158754-446-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 1.8.3.2
+MIME-Version: 1.0
+X-Originating-IP: [128.224.146.23]
+Subject: [meta-networking][PATCH v2] cyrus-sasl: ensure size_t is defined for use by sasl.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,70 +32,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 17:24:22 -0000
+X-List-Received-Date: Wed, 30 Oct 2013 18:45:45 -0000
+Content-Type: text/plain
 
-* since this commit
-  commit 305038f932fbcb39f3bb6698f8fad18172c30962
-  Author: Jonathan Liu <net147@gmail.com>
-  Date:   Wed Jun 12 08:30:15 2013 +0000
-    xserver-nodm-init: do not execute Xsession twice
+While making use of the cyrus-sasl library an external application
+will most likely include sasl.h which will cause compilation failures
+if steps haven't been taken to define size_t. This should not be the
+responsibility of the application building against the sasl library
+but rather handled already in sasl.h. Here we ensure sasl.h has the
+proper includes to have size_t defined before it is used.
 
-  xserver-nodm-init wasn't working correctly when it was used together
-  with xserver-common which doesn't start Xsession from Xserver (unlike
-  x11-common in oe-core).
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- ...erver-Start-Xsession-like-x11-common-does.patch | 26 ++++++++++++++++++++++
- .../xserver-common/xserver-common_1.34.bb          |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
+v2 changes:
+* using upstream patch. Posix I believe says to use sys/types.h
+  but in any case stddef.h works fine.
+
+* removed PR addition + bump
+
+* added upstream status line
+
+ ...l.h-include-stddef.h-for-size_t-on-NetBSD.patch | 31 ++++++++++++++++++++++
+ .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch
+
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch
 new file mode 100644
-index 0000000..5a75964
+index 0000000..ecbab84
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
-@@ -0,0 +1,26 @@
-+From 8171f89944969a081be1ac193b2a59016e39a345 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Tue, 29 Oct 2013 17:07:21 +0100
-+Subject: [PATCH 14/14] Xserver: Start Xsession like x11-common does
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch
+@@ -0,0 +1,31 @@
++From 92d72789c811b0d55f624a8bac5ccc4412f5996e Mon Sep 17 00:00:00 2001
++From: Ken Murchison <murch@andrew.cmu.edu>
++Date: Thu, 20 Dec 2012 18:14:50 -0500
++Subject: [PATCH] sasl.h: #include <stddef.h> for size_t on NetBSD
 +
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++This patch was imported from git://git.cyrusimap.org/cyrus-sasl
++commit 67a188693796a14e3a76ac603104807fbbfddfc4
++
++Upstream-Status: Backport
++
++Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 +---
-+ X11/Xserver | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ include/sasl.h | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/X11/Xserver b/X11/Xserver
-+index 559f059..4b88637 100755
-+--- a/X11/Xserver
-++++ b/X11/Xserver
-+@@ -4,6 +4,6 @@
-+ . /etc/X11/xserver-common
++diff --git a/include/sasl.h b/include/sasl.h
++index fef4d51..8b8a63f 100755
++--- a/include/sasl.h
+++++ b/include/sasl.h
++@@ -121,6 +121,8 @@
++ #ifndef SASL_H
++ #define SASL_H 1
 + 
-+ echo "tslib: $TSLIB_TSDEVICE"
-+-echo "exec $XSERVER $ARGS -dpi $DPI $*"
-+-exec $XSERVER $ARGS -dpi $DPI $*
-++echo "exec xinit /etc/X11/Xsession -- $BINDIR/$XSERVER $ARGS -dpi $DPI $*"
-+ 
-++exec xinit /etc/X11/Xsession -- $BINDIR/$XSERVER $ARGS -dpi $DPI $*
+++#include <stddef.h>  /* For size_t */
+++
++ /* Keep in sync with win32/common.mak */
++ #define SASL_VERSION_MAJOR 2
++ #define SASL_VERSION_MINOR 1
 +-- 
-+1.8.4.2
++1.8.3.2
 +
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 3bb8b61..481e438 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -23,6 +23,7 @@ SRC_URI_append = " \
-     file://0011-xserver-common-add-support-for-nexus-one-alias-mahim.patch \
-     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
-     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
-+    file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
- "
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+index f05ab85..2abaee2 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+@@ -9,6 +9,7 @@ SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
+ 	   file://Fix-hardcoded-libdir.patch \
+ 	   file://debian_patches_0009_sasldb_al.diff \
+ 	   file://debian_patches_0014_avoid_pic_overwrite.diff \
++	   file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
+ 	   "
  
- do_install_append() {
+ inherit autotools pkgconfig useradd
 -- 
-1.8.4.2
+1.8.3.2
 
 
