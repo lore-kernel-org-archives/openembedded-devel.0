@@ -1,31 +1,34 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-la0-f52.google.com (mail-la0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B9D4610DC;
-	Wed, 30 Oct 2013 08:08:50 +0000 (UTC)
-Received: by mail-la0-f52.google.com with SMTP id eh20so755678lab.25
-	for <multiple recipients>; Wed, 30 Oct 2013 01:08:51 -0700 (PDT)
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 41CFA6B0F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Oct 2013 09:05:33 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id n12so982902wgh.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Oct 2013 02:05:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=AkVM/gtHA+qODT77olpIZ5aXTPLwvsL/KrRusgTPzb0=;
-	b=HsO5nIf3FLsv41U+j7TdF7WzOhSrnKdM4ukxd2UujTnHkWUgNrE3Yi06FlhHcdSfop
-	oYwQgQ1Ml3VeYSAKLRKIoD22cZ9tIy+7zZao5VnyzaBqKR0vqOOQDDGU/tAdX8r2qVOD
-	pOOkXrSFcLpXGjgCU6BCGrgvE/MNrnkAm1k7Pw3BT20ZFwNweHgJpzGijvRygkZAgWG3
-	aJriIIuz1Vh1ZyYLSmTMwk48ZvpIW3Uc1xSS9tuMwB9OQbMGgyQgFHjfiRz0iMip6wCg
-	TzY+wEh9adl0vADkP12NIgI0CSc+u4zE8i70938+eM0M205ZqwPdnjsjgFau8vgPGcus
-	S8+Q==
-MIME-Version: 1.0
-X-Received: by 10.112.158.225 with SMTP id wx1mr517155lbb.37.1383120531330;
-	Wed, 30 Oct 2013 01:08:51 -0700 (PDT)
-Received: by 10.112.52.74 with HTTP; Wed, 30 Oct 2013 01:08:51 -0700 (PDT)
-In-Reply-To: <20131027112740.5FC1D50317@opal>
-References: <20131027112740.5FC1D50317@opal>
-Date: Wed, 30 Oct 2013 09:08:51 +0100
-Message-ID: <CAAQYJAsn6i10jVbwSYV8Y+5ZhEiwOMa3RpoSHokZq1v2ormfNg@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=FGMVc07Kbg/Ng76Y1+6WPWi/vfEWufDEFCLy4/p7fpc=;
+	b=VSXImOOVIJlevjNNFWDrxEr7xFt7zytxKslJdWtjZf3myGmpmk/iOFu4oTI+BoqhQ7
+	WcH0t8JGcZRrUGl6JjNj3YM2+hKjH3S/hfWsr+nDCxgTJ+bWi9mXt34cPgqtu/yrfgAM
+	xxTa8oo4FeJGatayZiX9RCrQInUz2ZDb/kBVwotXpnr50yN+/uC/SDao5ewmx4+Us7mb
+	h8Wtu+DFrou3EiOQwsv4fpXgUNXvTnEMXCi+p/032sG4bzweKW7hvJXht9V2gZ25M715
+	7SvNkXly9sh8k4/qPyGUEfB5XLTsEZUz7lTqnAsIs9L7XG+AkRm9hbRA/ZLkp1+uzixo
+	YSkg==
+X-Received: by 10.194.250.6 with SMTP id yy6mr3411395wjc.13.1383123934290;
+	Wed, 30 Oct 2013 02:05:34 -0700 (PDT)
+Received: from mizar.localdomain
+	(host241-23-dynamic.14-87-r.retail.telecomitalia.it. [87.14.23.241])
+	by mx.google.com with ESMTPSA id i8sm13414697wiy.6.2013.10.30.02.05.33
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Oct 2013 02:05:33 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Openembedded-core@lists.openembedded.org
-Subject: Re: [oe-commits] Laurentiu Palcu : m4: upgrade to 1.4.17
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Oct 2013 10:05:29 +0100
+Message-Id: <1383123929-28906-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH] zaurus.inc: set default IMAGE_CMD_sum.jffs2 for devices with NAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,129 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 08:08:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 30 Oct 2013 09:05:35 -0000
 
-On Sun, Oct 27, 2013 at 12:27 PM,  <git@git.openembedded.org> wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: b7505d7c279888bd1675c1a8387edcf87cae8aac
-> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=b7505d7c279888bd1675c1a8387edcf87cae8aac
->
-> Author: Laurentiu Palcu <laurentiu.palcu@intel.com>
-> Date:   Wed Oct 16 14:59:35 2013 +0300
->
-> m4: upgrade to 1.4.17
->
-> Refreshed remove-gets.patch to apply correctly and changed license
-> checksum since some years were added to the license file.
->
-> Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
->
-> ---
->
->  meta/recipes-devtools/m4/m4-1.4.16.inc             |   16 ----------------
->  meta/recipes-devtools/m4/m4-1.4.17.inc             |   13 +++++++++++++
->  .../{m4-native_1.4.16.bb => m4-native_1.4.17.bb}   |    0
->  meta/recipes-devtools/m4/m4/remove-gets.patch      |   18 ++++++++++--------
->  .../m4/{m4_1.4.16.bb => m4_1.4.17.bb}              |    0
->  5 files changed, 23 insertions(+), 24 deletions(-)
->
-> diff --git a/meta/recipes-devtools/m4/m4-1.4.16.inc b/meta/recipes-devtools/m4/m4-1.4.16.inc
-> deleted file mode 100644
-> index 01016d6..0000000
-> --- a/meta/recipes-devtools/m4/m4-1.4.16.inc
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -require m4.inc
-> -
-> -LICENSE = "GPLv3"
-> -
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
-> -                   file://examples/COPYING;md5=fbc986d45b3dae6725c29870dd6b669d"
-> -
-> -PR = "r4"
-> -SRC_URI += "file://ac_config_links.patch \
-> -            file://remove-gets.patch \
-> -           "
-> -
-> -SRC_URI[md5sum] = "a5dfb4f2b7370e9d34293d23fd09b280"
-> -SRC_URI[sha256sum] = "e9176a35bb13a1b08482359aa554ee8072794f58f00e4827bf0e06b570c827da"
-> -
-> -
-> diff --git a/meta/recipes-devtools/m4/m4-1.4.17.inc b/meta/recipes-devtools/m4/m4-1.4.17.inc
-> new file mode 100644
-> index 0000000..790678e
-> --- /dev/null
-> +++ b/meta/recipes-devtools/m4/m4-1.4.17.inc
-> @@ -0,0 +1,13 @@
-> +require m4.inc
-> +
-> +LICENSE = "GPLv3"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
-> +                   file://examples/COPYING;md5=4031593b2166d6c47cae282d944a7ede"
-> +
-> +SRC_URI += "file://ac_config_links.patch \
-> +            file://remove-gets.patch \
-> +           "
-> +
-> +SRC_URI[md5sum] = "a5e9954b1dae036762f7b13673a2cf76"
-> +SRC_URI[sha256sum] = "3ce725133ee552b8b4baca7837fb772940b25e81b2a9dc92537aeaf733538c9e"
-> diff --git a/meta/recipes-devtools/m4/m4-native_1.4.16.bb b/meta/recipes-devtools/m4/m4-native_1.4.17.bb
-> similarity index 100%
-> rename from meta/recipes-devtools/m4/m4-native_1.4.16.bb
-> rename to meta/recipes-devtools/m4/m4-native_1.4.17.bb
-> diff --git a/meta/recipes-devtools/m4/m4/remove-gets.patch b/meta/recipes-devtools/m4/m4/remove-gets.patch
-> index 9c396d9..effb353 100644
-> --- a/meta/recipes-devtools/m4/m4/remove-gets.patch
-> +++ b/meta/recipes-devtools/m4/m4/remove-gets.patch
-> @@ -4,18 +4,20 @@ undefining it.
->
->  Upstream-Status: Pending
->  Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> -Index: m4-1.4.16/lib/stdio.in.h
-> +Index: m4-1.4.17/lib/stdio.in.h
->  ===================================================================
-> ---- m4-1.4.16.orig/lib/stdio.in.h      2011-03-01 08:39:29.000000000 -0800
-> -+++ m4-1.4.16/lib/stdio.in.h   2012-07-03 08:32:08.145935928 -0700
-> -@@ -161,8 +161,10 @@
-> +--- m4-1.4.17.orig/lib/stdio.in.h      2013-10-16 14:41:01.678496227 +0300
-> ++++ m4-1.4.17/lib/stdio.in.h   2013-10-16 14:41:48.849427839 +0300
-> +@@ -717,10 +717,12 @@
->   /* It is very rare that the developer ever has full control of stdin,
-> -    so any use of gets warrants an unconditional warning.  Assume it is
-> -    always declared, since it is required by C89.  */
-> +    so any use of gets warrants an unconditional warning; besides, C11
-> +    removed it.  */
->  +#if defined gets
->   #undef gets
-> + #if HAVE_RAW_DECL_GETS
->   _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
-> + #endif
->  +#endif
->
-> - #if @GNULIB_FOPEN@
-> - # if @REPLACE_FOPEN@
-> +
-> + #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
-> diff --git a/meta/recipes-devtools/m4/m4_1.4.16.bb b/meta/recipes-devtools/m4/m4_1.4.17.bb
-> similarity index 100%
-> rename from meta/recipes-devtools/m4/m4_1.4.16.bb
-> rename to meta/recipes-devtools/m4/m4_1.4.17.bb
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+Collie will need a customization.
 
-This patch breaks the build of m4-native on Gentoo, it stalls on do_configure:
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ conf/machine/include/zaurus.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- checking whether sigaltstack...
+diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
+index 9817625..333a337 100644
+--- a/conf/machine/include/zaurus.inc
++++ b/conf/machine/include/zaurus.inc
+@@ -3,7 +3,7 @@
+ ########################
+ 
+ IMAGE_FSTYPES ?= "tar.gz jffs2 sum.jffs2 ubifs"
+-EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK}"
++EXTRA_IMAGECMD_sum.jffs2 = "-p -l -e ${JFFS2_ERASEBLOCK} -n"
+ 
+ INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
+ IMAGE_DEVICE_TABLES = ""
+-- 
+1.8.1.5
 
-
-Cheers
-
-Andrea
 
