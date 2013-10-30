@@ -1,35 +1,35 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 37D776AE37
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id BD5736C782
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 16:53:23 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id ar20so2707855iec.40
+	Wed, 30 Oct 2013 17:03:46 +0000 (UTC)
+Received: by mail-ea0-f175.google.com with SMTP id l15so676279eak.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 09:53:25 -0700 (PDT)
+	Wed, 30 Oct 2013 10:03:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=yjEDs4rDOGkiO8mMzQNWb7Uju4UkXSagTAi7/sF505Y=;
-	b=P9hP9WMKKRRS7AjyGpGSa8ByVzs7iJXXyq/ewg2OOznrbenHWfrbr+wGzLHfORB2AX
-	ermH9gnpluludIpfRNOIkStbijLoWpuqi+bKj1yu+KNtlhzboqEA5stJid0I2aVxsso+
-	AJXc0FVcNvm0i2lz7bNfmGl8Mj4aQ46HIoL/4jAUHshswhl/4il09XAi0OiEsQLO4AMa
-	6p6HTFhw1VwUbf+9ENfkag2Enl0kFJEUr8eOtvDqIXIOtDiY9BV8j3B10hkUOco+GMTF
-	lqpAJ5doagbNFDAQSn1ZBNt4x/64eL1jwJrabLiUiNGM8n0NOIOpD4Exh51dJ3rtcbfX
-	S+2Q==
-MIME-Version: 1.0
-X-Received: by 10.42.70.5 with SMTP id d5mr3789457icj.39.1383152003662; Wed,
-	30 Oct 2013 09:53:23 -0700 (PDT)
-Received: by 10.42.119.78 with HTTP; Wed, 30 Oct 2013 09:53:23 -0700 (PDT)
-In-Reply-To: <20131030131634.GB3716@deserted.net>
-References: <1383105036-21256-1-git-send-email-asselsm@gmail.com>
-	<20131030131634.GB3716@deserted.net>
-Date: Wed, 30 Oct 2013 12:53:23 -0400
-Message-ID: <CAPuovE+nMdgqbJXZPEXHEJ=xOiDDDdyQkWmJG-HFijvW6SMmwg@mail.gmail.com>
-From: Mark Asselstine <asselsm@gmail.com>
-To: Joe MacDonald <joe@deserted.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] cyrus-sasl: ensure size_t is defined for use by sasl.h
+	h=from:to:cc:subject:date:message-id;
+	bh=9jB+PH4hDOHc8GCLsbgYT28EhwSDXp0rr9TVoLhUnzU=;
+	b=doc9iMKlKo9JvGzLlAIRcEaMJQKcQOUgMGAd2iU2wRCtRozhhxCrUXp60TVuwrJyoy
+	cK/kfXKajIolg118/7hd8Hjbr4Yh+tXzdmDl9cGCH3fgZ/0fhjNf0g9eNBsiVlUfjCtN
+	nKLotNs8S3oVI6kXL3FIgrTWdUN48KrXHmr2T3Z+1WnKoYDH1UVZlf77HjH65ANAS7vs
+	AD5kgT8uuJpgXeEiFkG9kOY3TMSH2XIQV2+Ib+R7aC+uUuSceG++o8nT5E/957gsyCks
+	UGaf3YrIFILIngtk1+YZp0KzDDLGmrUK5/L7cNEAXfEecHisCSH6zH1dVGg3F4KRxD8+
+	gtHA==
+X-Received: by 10.14.45.70 with SMTP id o46mr6019006eeb.19.1383152628048;
+	Wed, 30 Oct 2013 10:03:48 -0700 (PDT)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id d7sm85670733eem.8.2013.10.30.10.03.47
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Oct 2013 10:03:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Oct 2013 18:03:44 +0100
+Message-Id: <1383152625-1337-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.2
+Subject: [meta-systemd][PATCH 1/2] at: Rename bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,106 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 16:53:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Oct 2013 17:03:47 -0000
 
-On Wed, Oct 30, 2013 at 9:16 AM, Joe MacDonald <joe@deserted.net> wrote:
-> [[meta-networking][PATCH] cyrus-sasl: ensure size_t is defined for use by sasl.h] On 13.10.29 (Tue 23:50) Mark Asselstine wrote:
->
->> While making use of the cyrus-sasl library an external application
->> will most likely include sasl.h which will cause compilation failures
->> if steps haven't been taken to define size_t. This should not be the
->> responsibility of the application building against the sasl library
->> but rather handled already in sasl.h. Here we ensure sasl.h has the
->> proper includes to have size_t defined before it is used.
->>
->> Signed-off-by: Mark Asselstine <asselsm@gmail.com>
->> ---
->>  ...clude-sasl.h-needs-to-include-sys-types.h.patch | 37 ++++++++++++++++++++++
->>  .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |  3 ++
->>  2 files changed, 40 insertions(+)
->>  create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
->>
->> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
->> new file mode 100644
->> index 0000000..ac47b4f
->> --- /dev/null
->> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
->> @@ -0,0 +1,37 @@
->> +From 471b4436a69917fba7c44e366b0393cebc3dace6 Mon Sep 17 00:00:00 2001
->> +From: Mark Asselstine <asselsm@gmail.com>
->> +Date: Tue, 29 Oct 2013 23:07:26 -0400
->> +Subject: [PATCH] include: sasl.h needs to include sys/types.h
->> +
->> +size_t is used in sasl.h yet sys/types.h is neither included directly
->> +or indirectly. This causes build errors if you try to build something
->> +against the sasl library where .c files including sasl.h haven't
->> +included sys/types.h or defined size_t on their own. Similar to this
->> +one:
->> +
->> +In file included from rpc/virnetsaslcontext.h:24:0,
->> +                 from rpc/virnetsaslcontext.c:25:
->> +../poky/x86-64/tmp/sysroots/qemux86-64/usr/include/sasl/sasl.h:230:38: error: unknown type name 'size_t'
->> + typedef void *sasl_realloc_t(void *, size_t);
->> +
->> +Signed-off-by: Mark Asselstine <asselsm@gmail.com>
->
-> Can I get the upstream-status of this?  I can update the patch myself in
-> my tree or you can send out another version, whatever you prefer.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-extended/at/{at_3.1.13.bbappend => at_3.1.14.bbappend}      | 2 --
+ 1 file changed, 2 deletions(-)
+ rename meta-systemd/oe-core/recipes-extended/at/{at_3.1.13.bbappend => at_3.1.14.bbappend} (93%)
 
-I couldn't find their source repo last night and didn't find any
-similar fixes. Of course I look now and find it easily and do find
-that they have fixed this. I will send a v2 using the upstream patch,
-add an upstream status line and remove the PR.
+diff --git a/meta-systemd/oe-core/recipes-extended/at/at_3.1.13.bbappend b/meta-systemd/oe-core/recipes-extended/at/at_3.1.14.bbappend
+similarity index 93%
+rename from meta-systemd/oe-core/recipes-extended/at/at_3.1.13.bbappend
+rename to meta-systemd/oe-core/recipes-extended/at/at_3.1.14.bbappend
+index cae078a..3a22fe3 100644
+--- a/meta-systemd/oe-core/recipes-extended/at/at_3.1.13.bbappend
++++ b/meta-systemd/oe-core/recipes-extended/at/at_3.1.14.bbappend
+@@ -1,7 +1,5 @@
+ inherit systemd
+ 
+-PRINC := "${@int(PRINC) + 2}"
+-
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+-- 
+1.8.4.2
 
-Mark
-
->
->> +---
->> + include/sasl.h | 2 ++
->> + 1 file changed, 2 insertions(+)
->> +
->> +diff --git a/include/sasl.h b/include/sasl.h
->> +index fef4d51..36b2553 100755
->> +--- a/include/sasl.h
->> ++++ b/include/sasl.h
->> +@@ -130,6 +130,8 @@
->> + #define SASL_VERSION_FULL ((SASL_VERSION_MAJOR << 16) |\
->> +       (SASL_VERSION_MINOR << 8) | SASL_VERSION_STEP)
->> +
->> ++#include <sys/types.h>
->> ++
->> + #include "prop.h"
->> +
->> + /*************
->> +--
->> +1.8.1.2
->> +
->> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
->> index f05ab85..5899291 100644
->> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
->> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
->> @@ -4,11 +4,14 @@ DEPENDS = "openssl virtual/db"
->>  LICENSE = "BSD"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
->>
->> +PR = "r1"
->> +
->
-> I'm pretty sure we don't need a PR bump here anymore.
->
-> -J.
->
->>  SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
->>          file://avoid-to-call-AC_TRY_RUN.patch \
->>          file://Fix-hardcoded-libdir.patch \
->>          file://debian_patches_0009_sasldb_al.diff \
->>          file://debian_patches_0014_avoid_pic_overwrite.diff \
->> +        file://include-sasl.h-needs-to-include-sys-types.h.patch \
->>          "
->>
->>  inherit autotools pkgconfig useradd
-> --
-> -Joe MacDonald.
-> :wq
 
