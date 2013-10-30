@@ -1,37 +1,35 @@
-Return-Path: <cazfi74@gmail.com>
-Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
-	[209.85.217.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 186426CA33
+Return-Path: <asselsm@gmail.com>
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 37D776AE37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 13:57:13 +0000 (UTC)
-Received: by mail-lb0-f175.google.com with SMTP id z5so1222412lbh.20
+	Wed, 30 Oct 2013 16:53:23 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id ar20so2707855iec.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2013 06:57:15 -0700 (PDT)
+	Wed, 30 Oct 2013 09:53:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=3JZADRUJVaS1E3yS0X/QpoLxel4pM4xfbypo4IENGNY=;
-	b=C8mJTIkpPFNYzkGvUFvuypAMsbp/9jH6mrbzWg13wn5KtxOU6S/stTfHwFiH9lAvO4
-	42D0GjktlESGbGawKFWoZ7ewHpM4CBNxgpbNiebl0Ii9GslJ77i2wKIghgyUMqRajw9H
-	E4Lv8VIhGC6Kyp5TuIXjtYTY4TtwwvLtIHtnU9NB23OixbFXWSA0xUF6jDUz1hKt8PHp
-	Ic18GVGNi+V76pE5/nzS80PT2plKkx+oB6xSyhzvNUp+BmSey7WhYALo9ohwLgxiJ2Vu
-	a+fgbMKDpWqW8FGAgJ4vvap8atE/TdzXa+OdZQf5Ej7vyhqOdkVs223aSr39kL+EM4Se
-	Wj3w==
-X-Received: by 10.112.167.99 with SMTP id zn3mr1556553lbb.34.1383141434999;
-	Wed, 30 Oct 2013 06:57:14 -0700 (PDT)
-Received: from prime (a91-153-14-158.elisa-laajakaista.fi. [91.153.14.158])
-	by mx.google.com with ESMTPSA id qj3sm16416280lbb.6.2013.10.30.06.57.13
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 30 Oct 2013 06:57:14 -0700 (PDT)
-Received: from cazfi by prime with local (Exim 4.80)
-	(envelope-from <cazfi74@gmail.com>)
-	id 1VbWGm-000817-Bm; Wed, 30 Oct 2013 15:57:12 +0200
-From: Marko Lindqvist <cazfi74@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Oct 2013 15:57:10 +0200
-Message-Id: <1383141430-30778-1-git-send-email-cazfi74@gmail.com>
-X-Mailer: git-send-email 1.8.4.rc3
-Subject: [meta-oe][PATCH] libsdl2-mixer: add recipe
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=yjEDs4rDOGkiO8mMzQNWb7Uju4UkXSagTAi7/sF505Y=;
+	b=P9hP9WMKKRRS7AjyGpGSa8ByVzs7iJXXyq/ewg2OOznrbenHWfrbr+wGzLHfORB2AX
+	ermH9gnpluludIpfRNOIkStbijLoWpuqi+bKj1yu+KNtlhzboqEA5stJid0I2aVxsso+
+	AJXc0FVcNvm0i2lz7bNfmGl8Mj4aQ46HIoL/4jAUHshswhl/4il09XAi0OiEsQLO4AMa
+	6p6HTFhw1VwUbf+9ENfkag2Enl0kFJEUr8eOtvDqIXIOtDiY9BV8j3B10hkUOco+GMTF
+	lqpAJ5doagbNFDAQSn1ZBNt4x/64eL1jwJrabLiUiNGM8n0NOIOpD4Exh51dJ3rtcbfX
+	S+2Q==
+MIME-Version: 1.0
+X-Received: by 10.42.70.5 with SMTP id d5mr3789457icj.39.1383152003662; Wed,
+	30 Oct 2013 09:53:23 -0700 (PDT)
+Received: by 10.42.119.78 with HTTP; Wed, 30 Oct 2013 09:53:23 -0700 (PDT)
+In-Reply-To: <20131030131634.GB3716@deserted.net>
+References: <1383105036-21256-1-git-send-email-asselsm@gmail.com>
+	<20131030131634.GB3716@deserted.net>
+Date: Wed, 30 Oct 2013 12:53:23 -0400
+Message-ID: <CAPuovE+nMdgqbJXZPEXHEJ=xOiDDDdyQkWmJG-HFijvW6SMmwg@mail.gmail.com>
+From: Mark Asselstine <asselsm@gmail.com>
+To: Joe MacDonald <joe@deserted.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] cyrus-sasl: ensure size_t is defined for use by sasl.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,94 +43,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2013 13:57:14 -0000
+X-List-Received-Date: Wed, 30 Oct 2013 16:53:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
----
- .../libsdl2-mixer/libsdl2-mixer/configure.patch    | 26 +++++++++++++++
- .../libsdl2-mixer/libsdl2-mixer_2.0.0.bb           | 39 ++++++++++++++++++++++
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer/configure.patch
- create mode 100644 meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer_2.0.0.bb
+On Wed, Oct 30, 2013 at 9:16 AM, Joe MacDonald <joe@deserted.net> wrote:
+> [[meta-networking][PATCH] cyrus-sasl: ensure size_t is defined for use by sasl.h] On 13.10.29 (Tue 23:50) Mark Asselstine wrote:
+>
+>> While making use of the cyrus-sasl library an external application
+>> will most likely include sasl.h which will cause compilation failures
+>> if steps haven't been taken to define size_t. This should not be the
+>> responsibility of the application building against the sasl library
+>> but rather handled already in sasl.h. Here we ensure sasl.h has the
+>> proper includes to have size_t defined before it is used.
+>>
+>> Signed-off-by: Mark Asselstine <asselsm@gmail.com>
+>> ---
+>>  ...clude-sasl.h-needs-to-include-sys-types.h.patch | 37 ++++++++++++++++++++++
+>>  .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |  3 ++
+>>  2 files changed, 40 insertions(+)
+>>  create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
+>>
+>> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
+>> new file mode 100644
+>> index 0000000..ac47b4f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/include-sasl.h-needs-to-include-sys-types.h.patch
+>> @@ -0,0 +1,37 @@
+>> +From 471b4436a69917fba7c44e366b0393cebc3dace6 Mon Sep 17 00:00:00 2001
+>> +From: Mark Asselstine <asselsm@gmail.com>
+>> +Date: Tue, 29 Oct 2013 23:07:26 -0400
+>> +Subject: [PATCH] include: sasl.h needs to include sys/types.h
+>> +
+>> +size_t is used in sasl.h yet sys/types.h is neither included directly
+>> +or indirectly. This causes build errors if you try to build something
+>> +against the sasl library where .c files including sasl.h haven't
+>> +included sys/types.h or defined size_t on their own. Similar to this
+>> +one:
+>> +
+>> +In file included from rpc/virnetsaslcontext.h:24:0,
+>> +                 from rpc/virnetsaslcontext.c:25:
+>> +../poky/x86-64/tmp/sysroots/qemux86-64/usr/include/sasl/sasl.h:230:38: error: unknown type name 'size_t'
+>> + typedef void *sasl_realloc_t(void *, size_t);
+>> +
+>> +Signed-off-by: Mark Asselstine <asselsm@gmail.com>
+>
+> Can I get the upstream-status of this?  I can update the patch myself in
+> my tree or you can send out another version, whatever you prefer.
 
-diff --git a/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer/configure.patch b/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer/configure.patch
-new file mode 100644
-index 0000000..43477e0
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer/configure.patch
-@@ -0,0 +1,26 @@
-+Upstream-Status: Inappropriate [configure]
-+
-+Adopted from similar patch for libsdl-mixer.
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-+diff -Nurd SDL2_mixer-2.0.0/configure.in SDL2_mixer-2.0.0/configure.in
-+--- SDL2_mixer-2.0.0/configure.in	2013-08-10 20:39:55.000000000 +0300
-++++ SDL2_mixer-2.0.0/configure.in	2013-10-30 15:40:40.508477024 +0200
-+@@ -1,6 +1,5 @@
-+ dnl Process this file with autoconf to produce a configure script.
-+ AC_INIT(README.txt)
-+-AC_CONFIG_AUX_DIR(build-scripts)
-+ 
-+ dnl Set various version strings - taken gratefully from the GTk sources
-+ 
-+@@ -40,10 +39,6 @@
-+ AC_SUBST(LT_REVISION)
-+ AC_SUBST(LT_AGE)
-+ 
-+-dnl Detect the canonical build and host environments
-+-AC_CONFIG_AUX_DIRS($srcdir/build-scripts)
-+-dnl AC_CANONICAL_HOST
-+-
-+ dnl Check for tools
-+ AC_PROG_LIBTOOL
-+ AC_PROG_CC
-diff --git a/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer_2.0.0.bb b/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer_2.0.0.bb
-new file mode 100644
-index 0000000..f016e84
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libsdl2-mixer/libsdl2-mixer_2.0.0.bb
-@@ -0,0 +1,39 @@
-+DESCRIPTION = "Simple DirectMedia Layer mixer library."
-+SECTION = "libs"
-+DEPENDS = "virtual/libsdl2 flac libmikmod libvorbis"
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7d198f6396c6f21fa575129c5b2fe8fe"
-+
-+SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz \
-+           file://configure.patch \
-+"
-+
-+SRC_URI[md5sum] = "65f6d80df073a1fb3bb537fbda031b50"
-+SRC_URI[sha256sum] = "a8ce0e161793791adeff258ca6214267fdd41b3c073d2581cd5265c8646f725b"
-+
-+S = "${WORKDIR}/SDL2_mixer-${PV}"
-+
-+inherit autotools
-+
-+EXTRA_AUTORECONF += "--include=acinclude"
-+EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --enable-music-ogg-tremor LIBS=-L${STAGING_LIBDIR}"
-+
-+PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
-+
-+do_configure () {
-+    # Remove old libtool macros.
-+    MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
-+    for i in ${MACROS}; do
-+        rm -f acinclude/$i
-+    done
-+    cp build-scripts/* . || true
-+    rm -rf build-scripts/
-+    export SYSROOT=$PKG_CONFIG_SYSROOT_DIR
-+
-+    autotools_do_configure
-+
-+    rm config.log
-+    for i in $(find -name "Makefile") ; do
-+        sed -i -e 's:-L/usr/lib:-L${STAGING_LIBDIR}:g' $i
-+    done
-+}
--- 
-1.8.4.rc3
+I couldn't find their source repo last night and didn't find any
+similar fixes. Of course I look now and find it easily and do find
+that they have fixed this. I will send a v2 using the upstream patch,
+add an upstream status line and remove the PR.
 
+Mark
+
+>
+>> +---
+>> + include/sasl.h | 2 ++
+>> + 1 file changed, 2 insertions(+)
+>> +
+>> +diff --git a/include/sasl.h b/include/sasl.h
+>> +index fef4d51..36b2553 100755
+>> +--- a/include/sasl.h
+>> ++++ b/include/sasl.h
+>> +@@ -130,6 +130,8 @@
+>> + #define SASL_VERSION_FULL ((SASL_VERSION_MAJOR << 16) |\
+>> +       (SASL_VERSION_MINOR << 8) | SASL_VERSION_STEP)
+>> +
+>> ++#include <sys/types.h>
+>> ++
+>> + #include "prop.h"
+>> +
+>> + /*************
+>> +--
+>> +1.8.1.2
+>> +
+>> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> index f05ab85..5899291 100644
+>> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> @@ -4,11 +4,14 @@ DEPENDS = "openssl virtual/db"
+>>  LICENSE = "BSD"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
+>>
+>> +PR = "r1"
+>> +
+>
+> I'm pretty sure we don't need a PR bump here anymore.
+>
+> -J.
+>
+>>  SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
+>>          file://avoid-to-call-AC_TRY_RUN.patch \
+>>          file://Fix-hardcoded-libdir.patch \
+>>          file://debian_patches_0009_sasldb_al.diff \
+>>          file://debian_patches_0014_avoid_pic_overwrite.diff \
+>> +        file://include-sasl.h-needs-to-include-sys-types.h.patch \
+>>          "
+>>
+>>  inherit autotools pkgconfig useradd
+> --
+> -Joe MacDonald.
+> :wq
 
