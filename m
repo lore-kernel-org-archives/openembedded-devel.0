@@ -1,36 +1,48 @@
-Return-Path: <s.stirtzel@googlemail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 852A960FC1
+Return-Path: <joe@deserted.net>
+Received: from mail-qa0-f46.google.com (mail-qa0-f46.google.com
+	[209.85.216.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BE0B6D298
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 11:37:02 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id k11so1339207eaj.28
+	Thu, 31 Oct 2013 13:56:36 +0000 (UTC)
+Received: by mail-qa0-f46.google.com with SMTP id j15so4534197qaq.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 04:37:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=k+pufMS8fvnHURZhoVrVdGoox3Zup9XPFC3U/B6hvi4=;
-	b=E8/hzS7qbAuNBkkojJMcdrwQEKHwJejeUp0KH1XM55fdESHSweNo+KwS+Xvbm1TuHn
-	v/ZAV0nY968m5HrKsjt5bdqH3DJ6S8xhhpFMrlueL/3GpEGOKI3JgrYAKoFVZrtzvujT
-	/pmTQHHSwKetrLuXXxR9CCAYYwlwq395PTOESanaS9n3Y2iEAdZVlOkJuFmr1UnwbuIN
-	wMhkWo+qbr/0SRUZ8Qp7xt63jgPmDAKGK5li2QsC3q1M5okm+KhsqqFl0ejEzbbrwde5
-	m7t5Ily+3ZEB3tsIdSY63G0WLIU0PBDXku7u8uWD0kkyetQXNzbBd9lXHkCrWc8PQrI/
-	XVVw==
-X-Received: by 10.14.108.9 with SMTP id p9mr2684490eeg.8.1383219423958;
-	Thu, 31 Oct 2013 04:37:03 -0700 (PDT)
-Received: from s-stirtzel-linux.zera.local
-	(ip-178-200-247-59.unitymediagroup.de. [178.200.247.59])
-	by mx.google.com with ESMTPSA id d7sm7461471eem.8.2013.10.31.04.37.02
+	Thu, 31 Oct 2013 06:56:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=f4mXOBzoFmTigVdFcOEai5Nm8QPUQVigHYetNvNdXEM=;
+	b=hOqcOEM6oOK+z/Q5V+kqNHZgTUShwA9FZ94XpBCnoXcZ+Rjer9yS/8mDnVn55juuea
+	iQ7n2WWDqwH7aCtTebZlYa4cLuYk8+32/SQWJ+dCHZI8MV/4E7424w4L2ZlmPL0E/5Lh
+	/bjbuW4rJp2ELxwEi0QYBg7jj/3w0Hwro6NNfkDYzfeSlnFfT4EFvGR5mR9Oa314pH2L
+	wojUgpyDpvCC/LZweGOeYXQQO0cHNcEi9Vf3xsJlygUXlEufKXWXV9yt5kmeVHoobwpC
+	G3NkvG3RHT114BkYiOv1ajCapK6D1sr9jaziN9yd51Tk/MFwQ5WoBIFUQpLwJkgeg10v
+	o23g==
+X-Gm-Message-State: ALoCoQnbWD1ARd70+VAu4tmNEjsHIQILQwR2y/FLkEzJOOaGuBHh176LsDOsZGSZbk/J7Ht3PEWB
+X-Received: by 10.49.76.6 with SMTP id g6mr4157949qew.41.1383227797481;
+	Thu, 31 Oct 2013 06:56:37 -0700 (PDT)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id x10sm9379410qas.5.2013.10.31.06.56.35
 	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 31 Oct 2013 04:37:03 -0700 (PDT)
-From: Samuel Stirtzel <s.stirtzel@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Oct 2013 12:36:55 +0100
-Message-Id: <1383219415-6769-1-git-send-email-s.stirtzel@googlemail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH v2] utouch-mtview: Add missing dependency to libx11
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 31 Oct 2013 06:56:36 -0700 (PDT)
+Date: Thu, 31 Oct 2013 09:56:33 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: Martin Jansa <martin.jansa@gmail.com>, Zongchun YU <b40527@freescale.com>,
+	'Zongchun Yu' <Zongchun.Yu@freescale.com>
+Message-ID: <20131031135632.GA4563@deserted.net>
+References: <1383205247-8487-1-git-send-email-b40527@freescale.com>
+	<20131031081012.GC32015@jama> <006201ced618$dc97d420$95c77c60$@com>
+	<20131031092314.GF32015@jama>
+MIME-Version: 1.0
+In-Reply-To: <20131031092314.GF32015@jama>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org, b44149@freescale.com
+Subject: Re: [meta-oe][PATCH v2] tcpreplay:add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +56,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 11:37:04 -0000
+X-List-Received-Date: Thu, 31 Oct 2013 13:56:36 -0000
+X-Groupsio-MsgNum: 46961
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Qxx1br4bt0+wmkIi"
+Content-Disposition: inline
 
-Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
----
- .../recipes-support/utouch/utouch-mtview_git.bb    |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--Qxx1br4bt0+wmkIi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/utouch/utouch-mtview_git.bb b/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
-index 0f72479..6ebeb9f 100644
---- a/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
-+++ b/meta-oe/recipes-support/utouch/utouch-mtview_git.bb
-@@ -10,7 +10,7 @@ inherit autotools
- SRC_URI = "git://bitmath.org/git/mtview.git;protocol=http"
- SRCREV = "ad437c38dc111cf3990a03abf14efe1b5d89604b"
- 
--DEPENDS += "mtdev utouch-frame utouch-evemu"
-+DEPENDS += "mtdev utouch-frame utouch-evemu libx11"
- 
- PV = "1.1.7+git${SRCPV}"
- 
--- 
-1.7.9.5
+[Re: [oe] [meta-oe][PATCH v2] tcpreplay:add recipe] On 13.10.31 (Thu 10:23)=
+ Martin Jansa wrote:
 
+> On Thu, Oct 31, 2013 at 05:09:07PM +0800, Zongchun YU wrote:
+> > Hi Martin.
+> >=20
+> > Thanks for your kind comments. I see tcpdump in meta-oe layer too. tcpr=
+eplay
+> > may use packages captured by tcpdump.
+> > putting them in the same layer maybe better. Wish your suggestion?
+> >=20
+> > Best Regards
+> > Zongchun
+>=20
+> +Joe
+>=20
+> tcpdump is used only in one meta-oe recipe, were it can be dropped or
+> replaced with PACKAGECONFIG
+>=20
+> meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb:    tcpdump
+>=20
+> And then we can move tcpdump to meta-networking and add tcpreplay there.
 
+Wow, been a while since I thought about tcpdump's location in the tree.
+I knew we'd discussed moving it to meta-networking it previously and it
+didn't move but I couldn't remember why.  Looks like it was mostly due
+to inertia.  I've no objection to relocating it, I think it's a sensible
+location for it anyway.  Zongchun:  would you be able to prepare a patch
+set that includes the move and the introduction of tcpreplay?
+
+As for the recipe itself, I only noticed two small things on a quick
+scan.  tcpreplay-3.4.4-no-bfp-support.patch is lacking OE headers, at
+least an upstream-status is important here, even though it's pretty
+clear what that'll be.  :-)  Also, I don't think you need the PR in the
+recipe.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--Qxx1br4bt0+wmkIi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlJyYYcACgkQwFvcllog0XzqLQCdHp6MQcKPJ3DhX60jlIHfYDtR
+ixAAniq0QKRD3yPlHKue46GfZK3J8j1g
+=zfH3
+-----END PGP SIGNATURE-----
+
+--Qxx1br4bt0+wmkIi--
