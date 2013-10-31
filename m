@@ -1,46 +1,46 @@
 Return-Path: <B40527@freescale.com>
-Received: from co9outboundpool.messaging.microsoft.com
-	(co9ehsobe002.messaging.microsoft.com [207.46.163.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 24F956D092
+Received: from db9outboundpool.messaging.microsoft.com
+	(mail-db9lp0250.outbound.messaging.microsoft.com [213.199.154.250])
+	by mail.openembedded.org (Postfix) with ESMTP id 17FE16D181
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 07:06:13 +0000 (UTC)
-Received: from mail189-co9-R.bigfish.com (10.236.132.245) by
-	CO9EHSOBE028.bigfish.com (10.236.130.91) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 31 Oct 2013 07:06:14 +0000
-Received: from mail189-co9 (localhost [127.0.0.1])	by
-	mail189-co9-R.bigfish.com (Postfix) with ESMTP id 952D852019A	for
+	Thu, 31 Oct 2013 07:40:53 +0000 (UTC)
+Received: from mail210-db9-R.bigfish.com (10.174.16.249) by
+	DB9EHSOBE003.bigfish.com (10.174.14.66) with Microsoft SMTP Server id
+	14.1.225.22; Thu, 31 Oct 2013 07:40:54 +0000
+Received: from mail210-db9 (localhost [127.0.0.1])	by
+	mail210-db9-R.bigfish.com (Postfix) with ESMTP id 19A882A008F	for
 	<openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 07:06:14 +0000 (UTC)
+	Thu, 31 Oct 2013 07:40:54 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
 X-SpamScore: 0
 X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h17326ah8275bh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h1155h)
-Received: from mail189-co9 (localhost.localdomain [127.0.0.1]) by mail189-co9
-	(MessageSwitch) id 138320317377494_19799;
-	Thu, 31 Oct 2013 07:06:13 +0000 (UTC)
-Received: from CO9EHSMHS004.bigfish.com (unknown [10.236.132.247])	by
-	mail189-co9.bigfish.com (Postfix) with ESMTP id 0F52550005D	for
+Received: from mail210-db9 (localhost.localdomain [127.0.0.1]) by mail210-db9
+	(MessageSwitch) id 1383205252132460_9243;
+	Thu, 31 Oct 2013 07:40:52 +0000 (UTC)
+Received: from DB9EHSMHS027.bigfish.com (unknown [10.174.16.235])	by
+	mail210-db9.bigfish.com (Postfix) with ESMTP id 1D388220268	for
 	<openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 07:06:13 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS004.bigfish.com
-	(10.236.130.14) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 31 Oct 2013 07:06:13 +0000
+	Thu, 31 Oct 2013 07:40:52 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB9EHSMHS027.bigfish.com
+	(10.174.14.37) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Thu, 31 Oct 2013 07:40:51 +0000
 Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 31 Oct 2013 07:06:12 +0000
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Thu, 31 Oct 2013 07:40:51 +0000
 Received: from right.am.freescale.net (right.am.freescale.net [10.82.176.228])
 	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id
-	r9V76BlJ002759; Thu, 31 Oct 2013 00:06:11 -0700
+	r9V7eorw024936; Thu, 31 Oct 2013 00:40:50 -0700
 From: <b40527@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2013 02:06:06 -0500
-Message-ID: <1383203166-32615-1-git-send-email-b40527@freescale.com>
+Date: Thu, 31 Oct 2013 02:40:47 -0500
+Message-ID: <1383205247-8487-1-git-send-email-b40527@freescale.com>
 X-Mailer: git-send-email 1.7.9.7
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
 Cc: Zongchun Yu <Zongchun.Yu@freescale.com>, b44149@freescale.com
-Subject: [meta-oe][PATCH] tcpreplay:add recipe
+Subject: [meta-oe][PATCH v2] tcpreplay:add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,14 +54,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 07:06:13 -0000
+X-List-Received-Date: Thu, 31 Oct 2013 07:40:54 -0000
 Content-Type: text/plain
 
 From: Zongchun Yu <Zongchun.Yu@freescale.com>
 
-*tcpreplay - a suite of BSD GPLv3 licensed tools for UNIX operating
- systems which gives you the ability to use previously captured traffic
- in  libpcap format to test a variety of network devices.
+*tcpreplay - a suite of GPLv3 licensed tools for UNIX operating
+systems which gives you the ability to use previously captured traffic
+in libpcap format to test a variety of network devices.
 
 Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
 ---
@@ -190,7 +190,7 @@ index 0000000..70fa959
 + AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
 diff --git a/meta-oe/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-oe/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
 new file mode 100644
-index 0000000..16b2f08
+index 0000000..98c9c4a
 --- /dev/null
 +++ b/meta-oe/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
 @@ -0,0 +1,23 @@
@@ -199,7 +199,7 @@ index 0000000..16b2f08
 +HOMEPAGE = "http://tcpreplay.synfin.net/"
 +SECTION = "console/network"
 +
-+LICENSE = "Proprietary"
++LICENSE = "GPLv3"
 +LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=c33cccf72cc1603e8a72a84811ae3ac8"
 +
 +PR = "r0"
