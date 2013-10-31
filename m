@@ -1,32 +1,35 @@
-Return-Path: <Xufeng.Zhang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 52A546D3BB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 01:52:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9V1qK12021581
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 30 Oct 2013 18:52:20 -0700 (PDT)
-Received: from [128.224.163.210] (128.224.163.210) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Wed, 30 Oct 2013 18:52:19 -0700
-Message-ID: <5271B7C8.9010504@windriver.com>
-Date: Thu, 31 Oct 2013 09:52:08 +0800
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5 ThunderBrowse/3.82
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 66C826D39E;
+	Thu, 31 Oct 2013 03:26:17 +0000 (UTC)
+Received: by mail-ie0-f175.google.com with SMTP id aq17so3789838iec.6
+	for <multiple recipients>; Wed, 30 Oct 2013 20:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=nN/lKXXgn9uorVw6pA4E909AYCCfT4Krw7NdZ7x48Qg=;
+	b=C73VAZIpcig73WfDXGy/Vw0Z59bvhYwlE3UWWc1AFDBjtEjzJFw9vPuqJERMqOc9Oy
+	+6JOBPzlG7hLXxofRwPjDAzPn7URmEYoUL86pYMdI5hY093sF3FlEQTmdnamhHybPiu8
+	rjvmAIahFmyWYhj3yXXH/y4V0XnCNZbeMGOc5wPN6hg5mTSREtV9WCVi/nB62YpMTXJV
+	0NFw2pRtgqEkd8FlhJDuxRqRGZhzBGT5EKcHR2M3ACISFI1qFQ7cRjYwa9rjlaSR+SiK
+	KHpeJJAUcbC629/m6h4Ns2e0f6I9NKSZOf7ZE+FqFXjrvAVw6XFyl1a3PrA4FksA6jWD
+	/8qg==
+X-Received: by 10.50.26.36 with SMTP id i4mr601566igg.33.1383189978898; Wed,
+	30 Oct 2013 20:26:18 -0700 (PDT)
 MIME-Version: 1.0
-To: Joe MacDonald <joe@deserted.net>
-References: <1382608121-6622-1-git-send-email-xufeng.zhang@windriver.com>
-	<20131024174404.GA3984@deserted.net>
-	<5269CDA0.5030201@windriver.com>
-	<20131025133147.GA4566@deserted.net>
-	<526DDBDD.6040104@windriver.com>
-	<20131030133616.GC3716@deserted.net>
-In-Reply-To: <20131030133616.GC3716@deserted.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal
+Received: by 10.50.219.195 with HTTP; Wed, 30 Oct 2013 20:25:48 -0700 (PDT)
+In-Reply-To: <CAAQYJAsn6i10jVbwSYV8Y+5ZhEiwOMa3RpoSHokZq1v2ormfNg@mail.gmail.com>
+References: <20131027112740.5FC1D50317@opal>
+	<CAAQYJAsn6i10jVbwSYV8Y+5ZhEiwOMa3RpoSHokZq1v2ormfNg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 30 Oct 2013 20:25:48 -0700
+Message-ID: <CAMKF1soTqU9Gd1oX1nTsRwu6ARBF=MrS8KsTHdSd6q4c3MgUZw@mail.gmail.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [oe-commits] Laurentiu Palcu : m4: upgrade to 1.4.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,280 +43,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 01:52:23 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 31 Oct 2013 03:26:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/30/2013 09:36 PM, Joe MacDonald wrote:
-> Hi Xufeng,
+Andreas
+
+Can you replace remove-gets.patch with the one here
+
+http://paste.ubuntu.com/6333696/
+
+and see if it helps ?
+
+-khem
+
+On Wed, Oct 30, 2013 at 1:08 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> On Sun, Oct 27, 2013 at 12:27 PM,  <git@git.openembedded.org> wrote:
+>> Module: openembedded-core.git
+>> Branch: master
+>> Commit: b7505d7c279888bd1675c1a8387edcf87cae8aac
+>> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=b7505d7c279888bd1675c1a8387edcf87cae8aac
+>>
+>> Author: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>> Date:   Wed Oct 16 14:59:35 2013 +0300
+>>
+>> m4: upgrade to 1.4.17
+>>
+>> Refreshed remove-gets.patch to apply correctly and changed license
+>> checksum since some years were added to the license file.
+>>
+>> Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>>
+>> ---
+>>
+>>  meta/recipes-devtools/m4/m4-1.4.16.inc             |   16 ----------------
+>>  meta/recipes-devtools/m4/m4-1.4.17.inc             |   13 +++++++++++++
+>>  .../{m4-native_1.4.16.bb => m4-native_1.4.17.bb}   |    0
+>>  meta/recipes-devtools/m4/m4/remove-gets.patch      |   18 ++++++++++--------
+>>  .../m4/{m4_1.4.16.bb => m4_1.4.17.bb}              |    0
+>>  5 files changed, 23 insertions(+), 24 deletions(-)
+>>
+>> diff --git a/meta/recipes-devtools/m4/m4-1.4.16.inc b/meta/recipes-devtools/m4/m4-1.4.16.inc
+>> deleted file mode 100644
+>> index 01016d6..0000000
+>> --- a/meta/recipes-devtools/m4/m4-1.4.16.inc
+>> +++ /dev/null
+>> @@ -1,16 +0,0 @@
+>> -require m4.inc
+>> -
+>> -LICENSE = "GPLv3"
+>> -
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>> -                   file://examples/COPYING;md5=fbc986d45b3dae6725c29870dd6b669d"
+>> -
+>> -PR = "r4"
+>> -SRC_URI += "file://ac_config_links.patch \
+>> -            file://remove-gets.patch \
+>> -           "
+>> -
+>> -SRC_URI[md5sum] = "a5dfb4f2b7370e9d34293d23fd09b280"
+>> -SRC_URI[sha256sum] = "e9176a35bb13a1b08482359aa554ee8072794f58f00e4827bf0e06b570c827da"
+>> -
+>> -
+>> diff --git a/meta/recipes-devtools/m4/m4-1.4.17.inc b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>> new file mode 100644
+>> index 0000000..790678e
+>> --- /dev/null
+>> +++ b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>> @@ -0,0 +1,13 @@
+>> +require m4.inc
+>> +
+>> +LICENSE = "GPLv3"
+>> +
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>> +                   file://examples/COPYING;md5=4031593b2166d6c47cae282d944a7ede"
+>> +
+>> +SRC_URI += "file://ac_config_links.patch \
+>> +            file://remove-gets.patch \
+>> +           "
+>> +
+>> +SRC_URI[md5sum] = "a5e9954b1dae036762f7b13673a2cf76"
+>> +SRC_URI[sha256sum] = "3ce725133ee552b8b4baca7837fb772940b25e81b2a9dc92537aeaf733538c9e"
+>> diff --git a/meta/recipes-devtools/m4/m4-native_1.4.16.bb b/meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>> similarity index 100%
+>> rename from meta/recipes-devtools/m4/m4-native_1.4.16.bb
+>> rename to meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>> diff --git a/meta/recipes-devtools/m4/m4/remove-gets.patch b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>> index 9c396d9..effb353 100644
+>> --- a/meta/recipes-devtools/m4/m4/remove-gets.patch
+>> +++ b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>> @@ -4,18 +4,20 @@ undefining it.
+>>
+>>  Upstream-Status: Pending
+>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> -Index: m4-1.4.16/lib/stdio.in.h
+>> +Index: m4-1.4.17/lib/stdio.in.h
+>>  ===================================================================
+>> ---- m4-1.4.16.orig/lib/stdio.in.h      2011-03-01 08:39:29.000000000 -0800
+>> -+++ m4-1.4.16/lib/stdio.in.h   2012-07-03 08:32:08.145935928 -0700
+>> -@@ -161,8 +161,10 @@
+>> +--- m4-1.4.17.orig/lib/stdio.in.h      2013-10-16 14:41:01.678496227 +0300
+>> ++++ m4-1.4.17/lib/stdio.in.h   2013-10-16 14:41:48.849427839 +0300
+>> +@@ -717,10 +717,12 @@
+>>   /* It is very rare that the developer ever has full control of stdin,
+>> -    so any use of gets warrants an unconditional warning.  Assume it is
+>> -    always declared, since it is required by C89.  */
+>> +    so any use of gets warrants an unconditional warning; besides, C11
+>> +    removed it.  */
+>>  +#if defined gets
+>>   #undef gets
+>> + #if HAVE_RAW_DECL_GETS
+>>   _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
+>> + #endif
+>>  +#endif
+>>
+>> - #if @GNULIB_FOPEN@
+>> - # if @REPLACE_FOPEN@
+>> +
+>> + #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
+>> diff --git a/meta/recipes-devtools/m4/m4_1.4.16.bb b/meta/recipes-devtools/m4/m4_1.4.17.bb
+>> similarity index 100%
+>> rename from meta/recipes-devtools/m4/m4_1.4.16.bb
+>> rename to meta/recipes-devtools/m4/m4_1.4.17.bb
+>>
+>> _______________________________________________
+>> Openembedded-commits mailing list
+>> Openembedded-commits@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 >
-> [Re: [oe] [OE] [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal] On 13.10.28 (Mon 11:37) Xufeng Zhang wrote:
+> This patch breaks the build of m4-native on Gentoo, it stalls on do_configure:
 >
->    
->> On 10/25/2013 09:31 PM, Joe MacDonald wrote:
->>      
->>> [Re: [oe] [OE] [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal] On 13.10.25 (Fri 09:47) Xufeng Zhang wrote:
->>>
->>>        
->>>> On 10/25/2013 01:44 AM, Joe MacDonald wrote:
->>>>          
->>>>> [[oe] [OE] [PATCH meta-networking] quagga/ripd: Fix two bugs after received SIGHUP signal] On 13.10.24 (Thu 17:48) Xufeng Zhang wrote:
->>>>>
->>>>>            
->>>>>> There are two problems for ripd implementation after received
->>>>>> SIGHUP signal:
->>>>>> 1). ripd didn't clean up ifp->connected list before reload
->>>>>>      configuration file which makes the same advertise packet
->>>>>>      being sent multiple times(depends on how many SIGHUP was recieved).
->>>>>> 2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
->>>>>>      during restart which is different from the flag when ripd is
->>>>>>      firstly started up, leading to unnecessary route to be advertised.
->>>>>>
->>>>>> [YOCTO #5266]
->>>>>>              
->>>>> Hey Xufeng,
->>>>>
->>>>> Normally I wouldn't go this deep into the detail but since you
->>>>> referenced the Yocto bug and the Quagga discussion in the commit log and
->>>>> the bug itself, I thought I'd try to understand what's going on here.
->>>>> The last thing I saw from the Quagga maintainer is this:
->>>>>
->>>>>     The ifp->connected list contains connected prefixes of a given
->>>>>     interface. These exist regardless of particular routing protocols and
->>>>>     emptying the list during ripd reconfiguration would be plain wrong. I
->>>>>     allow for a chance there is a bug that is related to ifp->connected
->>>>>     and SIGHUP handling at once, but not in this specific way.
->>>>>            
->>>> What he said is that this ifp->connected list is exist in all
->>>> routing protocols,
->>>> and if it needs cleanup, it should be done in a more general way, such as
->>>> in zebra client which is independent of routing protocol.
->>>>          
->>> I'm not sure that's the interpretation I would have taken from the
->>> quoted text, but if what you indicate is what the maintainer meant, then
->>> is he not saying that the SIGHUP handling issue also exists for other
->>> routing daemons in the suite?
->>>        
->> quoted the sentence:
->> "
->>
->> The ifp->connected list contains connected prefixes of a given interface. These exist regardless of particular routing protocols and emptying the list during ripd reconfiguration would be plain wrong.
->>
->> "
->> All the other daemons also refer to the ifp->connected list, and I
->> have checked the SIGHUP handler code of all daemons,
->> except ospfd and ospf6d(they only print a log when SIGHUP is
->> received), all the other daemons suffer the same problem as ripd
->> since
->> they reload the configuration file.
->>
->>      
->>> Are you saying a similar patch would then
->>> be required for potentially all daemons in quagga?
->>>        
->> Not all.
->>      
-> Six of eight, then.  ;-)  Nine, if watchquagga also contains dodgy
-> SIGHUP handler code, but it probably doesn't care about the connected
-> list.
+>  checking whether sigaltstack...
 >
->    
->>> Don't get me wrong, repairing one is better than repairing none, but on
->>> my first read of his comments it didn't seem like the maintainer even
->>> agreed that there was a bug at all and your interpretation suggests that
->>> the same bug likely impacts all quagga daemons.  Any sense on whether
->>> that's the case?
->>>        
->> "
->>
->> I allow for a chance there is a bug that is related to ifp->connected and SIGHUP handling at once, but not in this specific way.
->>
->> "
->> My understanding is that if there is a bug related to
->> ifp->connected, we should not fix in such specific way.
->> Yes, the maintainer didn't agree that there is really a bug here,
->> but this is really a abnormal behavior:
->> every time when SIGHUP is received, the same address is appended to
->> ifp->connected list over and over again,
->> so if too much SIGHUP are received, there will be a flood for the
->> advertised packets.
->>      
-> Okay, so given that, I'm inclined to merge this set with a note in the
-> upstream-status in the patch indicating it is unlikely to be merged.
-> How about "Submitted" with a footnote pointing at the discussion thread?
->    
-
-I think it's fine.
-Do I need to send V2 patch?
-
-> Do you think it'd be possible to provide similar patches for the other
-> daemons that suffer this problem?  I'll take the current submission, but
-> if you had time to do a follow-up later on for the other daemons, that'd
-> be great.
->    
-
-Ok, I'll do this job for the other daemons.
-Thanks a lot for the review!
-
-
-
-Thanks,
-Xufeng
-
-
-> Thanks,
-> -J.
 >
->    
->>
->> Thanks,
->> Xufeng
->>
->>      
->>> -J.
->>>
->>>        
->>>> But I have specified the reasons in the above email that why it's
->>>> not easy to
->>>> implement this general way:
->>>> #########################################
->>>> More comments:
->>>> Generally this connected interface address stuff is cleaned up in
->>>> rip_interface_address_delete()
->>>> which is triggered by zsend_interface_address(), but just as the
->>>> annotation said above
->>>> zsend_interface_address() function in zebra/zserv.c,
->>>> ZEBRA_INTERFACE_ADDRESS_DELETE
->>>> message could only happens in two cases:
->>>> 1). ip address uninstall
->>>> 2). RTM_NEWADDR on routing/netlink socket
->>>>
->>>> It didn't take the SIGHUP signal into consideration, but since the
->>>> SIGHUP is handled
->>>> by every daemon independently, this cleanup is not easy to be
->>>> implemented commonly,
->>>> so I think this is a proper way to do this.
->>>> #########################################
->>>> So it needs to redesign a lot of stuff to implement this.
->>>>
->>>>          
->>>>> and it looks like the patch here is the same as the one that the
->>>>> maintainer indicated is "plain wrong".
->>>>>   Can you help me get some
->>>>> confidence that this isn't going to have negative side-effects if we
->>>>> integrate it?
->>>>>            
->>>> Yes, there should be no side-effects:
->>>> 1. This modification is only going into ripd daemon and it only
->>>> takes effect when ripd is restarting.
->>>> 2. The fix for problem 1). just remove the previously connected
->>>> addresses of the interface, and these
->>>>      connected addresses list will be reconstructed when ripd read
->>>> the configuration during restarting.
->>>> 3. The fix for problem 2). definitely has not any side-effect
->>>> because I just restore the horizon flag to
->>>>      the values when ripd daemon is firstly start up.
->>>>
->>>> And the customer has already test the fix for a lot of times, no
->>>> problem is found.
->>>>
->>>>
->>>> Thanks,
->>>> Xufeng
->>>>
->>>>          
->>>>> -J.
->>>>>
->>>>>            
->>>>>> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
->>>>>> ---
->>>>>>   .../ripd-fix-two-bugs-after-received-SIGHUP.patch  |   49 ++++++++++++++++++++
->>>>>>   .../recipes-protocols/quagga/quagga.inc            |    3 +-
->>>>>>   2 files changed, 51 insertions(+), 1 deletions(-)
->>>>>>   create mode 100644 meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
->>>>>>
->>>>>> diff --git a/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch b/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
->>>>>> new file mode 100644
->>>>>> index 0000000..c081143
->>>>>> --- /dev/null
->>>>>> +++ b/meta-networking/recipes-protocols/quagga/files/ripd-fix-two-bugs-after-received-SIGHUP.patch
->>>>>> @@ -0,0 +1,49 @@
->>>>>> +ripd: Fix two bugs after received SIGHUP signal
->>>>>> +
->>>>>> +There are two problems for ripd implementation after received
->>>>>> +SIGHUP signal:
->>>>>> +1). ripd didn't clean up ifp->connected list before reload
->>>>>> +    configuration file.
->>>>>> +2). ripd reset ri->split_horizon flag to RIP_NO_SPLIT_HORIZON
->>>>>> +    which lead to the unnecessary route to be advertised.
->>>>>> +
->>>>>> +Upstream-Status: Pending
->>>>>> +
->>>>>> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
->>>>>> +---
->>>>>> +--- a/ripd/rip_interface.c
->>>>>> ++++ b/ripd/rip_interface.c
->>>>>> +@@ -500,6 +500,8 @@
->>>>>> +   struct listnode *node;
->>>>>> +   struct interface *ifp;
->>>>>> +   struct rip_interface *ri;
->>>>>> ++  struct connected *ifc;
->>>>>> ++  struct listnode *conn_node, *next;
->>>>>> +
->>>>>> +   for (ALL_LIST_ELEMENTS_RO (iflist, node, ifp))
->>>>>> +     {
->>>>>> +@@ -514,6 +516,13 @@
->>>>>> + 	  thread_cancel (ri->t_wakeup);
->>>>>> + 	  ri->t_wakeup = NULL;
->>>>>> + 	}
->>>>>> ++
->>>>>> ++      for (conn_node = listhead (ifp->connected); conn_node; conn_node = next)
->>>>>> ++        {
->>>>>> ++          ifc = listgetdata (conn_node);
->>>>>> ++          next = conn_node->next;
->>>>>> ++          listnode_delete (ifp->connected, ifc);
->>>>>> ++        }
->>>>>> +     }
->>>>>> + }
->>>>>> +
->>>>>> +@@ -548,8 +557,8 @@
->>>>>> + 	  ri->key_chain = NULL;
->>>>>> + 	}
->>>>>> +
->>>>>> +-      ri->split_horizon = RIP_NO_SPLIT_HORIZON;
->>>>>> +-      ri->split_horizon_default = RIP_NO_SPLIT_HORIZON;
->>>>>> ++      ri->split_horizon = RIP_SPLIT_HORIZON;
->>>>>> ++      ri->split_horizon_default = RIP_SPLIT_HORIZON;
->>>>>> +
->>>>>> +       ri->list[RIP_FILTER_IN] = NULL;
->>>>>> +       ri->list[RIP_FILTER_OUT] = NULL;
->>>>>> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
->>>>>> index 89b9f7a..bf37067 100644
->>>>>> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
->>>>>> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
->>>>>> @@ -31,7 +31,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
->>>>>>              file://quagga.default \
->>>>>>              file://watchquagga.init \
->>>>>>              file://watchquagga.default \
->>>>>> -           file://volatiles.03_quagga"
->>>>>> +           file://volatiles.03_quagga \
->>>>>> +           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
->>>>>>
->>>>>>   PACKAGECONFIG ??= ""
->>>>>>   PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
->>>>>>
->>>>>>
->>>>>> _______________________________________________
->>>>>> Openembedded-devel mailing list
->>>>>> Openembedded-devel@lists.openembedded.org
->>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>>              
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>          
->>      
->    
-
+> Cheers
+>
+> Andrea
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
