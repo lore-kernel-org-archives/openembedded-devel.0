@@ -1,34 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id A73FE6D298
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 16:36:04 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id e14so5403961iej.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 09:36:06 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 525436D2C4;
+	Thu, 31 Oct 2013 17:22:13 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id l4so431257lbv.37
+	for <multiple recipients>; Thu, 31 Oct 2013 10:22:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=0pZWbpiBbre/hQCeeyBdcKbjpJX7SMWm5q2APCBvKgc=;
-	b=0+SyqXNWBK2jMl34p89Lr2OieB8evzCviQNLQNyyUw8K2CTeFEtaMhBjElJ2sQoioX
-	9cjExWsyag6y92LqsQQT1EbZhUWeBYks8C1HlMhsYQAu1hDT0KGetTkKKaFwIeM8O8x9
-	V3appr5XpF0SZfY0h1g77OA5zkqSU0/PkQMDhG0CaJpSZz8Prc9WJNy/Qk8+svMuTEEH
-	qu9Pcs5m0G5fLijG4STdrlEHBKTFVKprYKRxHsvH/zC2H06QYI7B5Z2n6k9RijCTRt2o
-	B9ABBl2fqqyyeRynePHqJESW76NsbKsLfLMvvtppaAuEQLmMt7Rsg+OEHdoC4TxriThe
-	IDGQ==
-X-Received: by 10.50.57.44 with SMTP id f12mr137960igq.39.1383237366425; Thu,
-	31 Oct 2013 09:36:06 -0700 (PDT)
+	bh=sL/jbJEQbf9nmysbSPCa6NVnrsVN4NosWffok+PtaHw=;
+	b=Dv9TPmbW7XHmxYn8vrtm4vyAhKw6kz1JrE3KRReZc+cqHnAQ4xD17GivRhO2/bnqQJ
+	QsF+TxD7TXl0CWWk299mJG56WG+3w6xTwl3axpg896MTvFBjgqCrPuyyl3YGOOlIr7vM
+	/Jfj6+NfiSXK6Ku3BNWYV7UiAQttSoFdXzz6FFo/e0JrqPkClNyVuX5XX2yG2FUfpNyO
+	7mtqQicsnX4HZZFIyXdQXLOxdrGcVQZXMellicmAZBbs8g5MW5peSUgyYYUnYSpCBwwB
+	xG0XxdXRb7rRvniOaIePlETnvNEzPNSoy48cvGJMQickGXALioOWg00HrrVIgwNsODln
+	hM7A==
 MIME-Version: 1.0
-Received: by 10.50.219.195 with HTTP; Thu, 31 Oct 2013 09:35:36 -0700 (PDT)
-In-Reply-To: <1383205247-8487-1-git-send-email-b40527@freescale.com>
-References: <1383205247-8487-1-git-send-email-b40527@freescale.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Oct 2013 09:35:36 -0700
-Message-ID: <CAMKF1sqTBq-J_trvVcmVcCT7uuJEaXuECaczSEbjDRNQDWRz3A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Zongchun Yu <Zongchun.Yu@freescale.com>, b44149@freescale.com
-Subject: Re: [meta-oe][PATCH v2] tcpreplay:add recipe
+X-Received: by 10.112.64.36 with SMTP id l4mr3017151lbs.15.1383240134407; Thu,
+	31 Oct 2013 10:22:14 -0700 (PDT)
+Received: by 10.112.52.74 with HTTP; Thu, 31 Oct 2013 10:22:14 -0700 (PDT)
+In-Reply-To: <CAMKF1soTqU9Gd1oX1nTsRwu6ARBF=MrS8KsTHdSd6q4c3MgUZw@mail.gmail.com>
+References: <20131027112740.5FC1D50317@opal>
+	<CAAQYJAsn6i10jVbwSYV8Y+5ZhEiwOMa3RpoSHokZq1v2ormfNg@mail.gmail.com>
+	<CAMKF1soTqU9Gd1oX1nTsRwu6ARBF=MrS8KsTHdSd6q4c3MgUZw@mail.gmail.com>
+Date: Thu, 31 Oct 2013 18:22:14 +0100
+Message-ID: <CAAQYJAtNBaHw=BKHytDHJ3W2NBMU=oCFniAYie7mSkTpeKkM9Q@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [oe-commits] Laurentiu Palcu : m4: upgrade to 1.4.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,11 +44,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 16:36:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 31 Oct 2013 17:22:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Oct 31, 2013 at 12:40 AM,  <b40527@freescale.com> wrote:
-> +PR = "r0"
+On Thu, Oct 31, 2013 at 4:25 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Andreas
+>
+> Can you replace remove-gets.patch with the one here
+>
+> http://paste.ubuntu.com/6333696/
+>
+> and see if it helps ?
+>
+> -khem
+>
 
-get rid of that, and why are the configure patches not ok for upstreaming ?
+I've tried but with same results.
+Howerver this was doing an incremental build.
+
+I'm happy to say the issue has disappeared after cleaning all and
+rebuilding from scratch.
+
+ ...
+checking for sigaltstack... yes
+ ...
+
+Sorry for the noise and thanks.
+
+Andrea
+
+
+
+
+> On Wed, Oct 30, 2013 at 1:08 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>> On Sun, Oct 27, 2013 at 12:27 PM,  <git@git.openembedded.org> wrote:
+>>> Module: openembedded-core.git
+>>> Branch: master
+>>> Commit: b7505d7c279888bd1675c1a8387edcf87cae8aac
+>>> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=b7505d7c279888bd1675c1a8387edcf87cae8aac
+>>>
+>>> Author: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>>> Date:   Wed Oct 16 14:59:35 2013 +0300
+>>>
+>>> m4: upgrade to 1.4.17
+>>>
+>>> Refreshed remove-gets.patch to apply correctly and changed license
+>>> checksum since some years were added to the license file.
+>>>
+>>> Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>>> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>>>
+>>> ---
+>>>
+>>>  meta/recipes-devtools/m4/m4-1.4.16.inc             |   16 ----------------
+>>>  meta/recipes-devtools/m4/m4-1.4.17.inc             |   13 +++++++++++++
+>>>  .../{m4-native_1.4.16.bb => m4-native_1.4.17.bb}   |    0
+>>>  meta/recipes-devtools/m4/m4/remove-gets.patch      |   18 ++++++++++--------
+>>>  .../m4/{m4_1.4.16.bb => m4_1.4.17.bb}              |    0
+>>>  5 files changed, 23 insertions(+), 24 deletions(-)
+>>>
+>>> diff --git a/meta/recipes-devtools/m4/m4-1.4.16.inc b/meta/recipes-devtools/m4/m4-1.4.16.inc
+>>> deleted file mode 100644
+>>> index 01016d6..0000000
+>>> --- a/meta/recipes-devtools/m4/m4-1.4.16.inc
+>>> +++ /dev/null
+>>> @@ -1,16 +0,0 @@
+>>> -require m4.inc
+>>> -
+>>> -LICENSE = "GPLv3"
+>>> -
+>>> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>>> -                   file://examples/COPYING;md5=fbc986d45b3dae6725c29870dd6b669d"
+>>> -
+>>> -PR = "r4"
+>>> -SRC_URI += "file://ac_config_links.patch \
+>>> -            file://remove-gets.patch \
+>>> -           "
+>>> -
+>>> -SRC_URI[md5sum] = "a5dfb4f2b7370e9d34293d23fd09b280"
+>>> -SRC_URI[sha256sum] = "e9176a35bb13a1b08482359aa554ee8072794f58f00e4827bf0e06b570c827da"
+>>> -
+>>> -
+>>> diff --git a/meta/recipes-devtools/m4/m4-1.4.17.inc b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>>> new file mode 100644
+>>> index 0000000..790678e
+>>> --- /dev/null
+>>> +++ b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>>> @@ -0,0 +1,13 @@
+>>> +require m4.inc
+>>> +
+>>> +LICENSE = "GPLv3"
+>>> +
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>>> +                   file://examples/COPYING;md5=4031593b2166d6c47cae282d944a7ede"
+>>> +
+>>> +SRC_URI += "file://ac_config_links.patch \
+>>> +            file://remove-gets.patch \
+>>> +           "
+>>> +
+>>> +SRC_URI[md5sum] = "a5e9954b1dae036762f7b13673a2cf76"
+>>> +SRC_URI[sha256sum] = "3ce725133ee552b8b4baca7837fb772940b25e81b2a9dc92537aeaf733538c9e"
+>>> diff --git a/meta/recipes-devtools/m4/m4-native_1.4.16.bb b/meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>>> similarity index 100%
+>>> rename from meta/recipes-devtools/m4/m4-native_1.4.16.bb
+>>> rename to meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>>> diff --git a/meta/recipes-devtools/m4/m4/remove-gets.patch b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>> index 9c396d9..effb353 100644
+>>> --- a/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>> +++ b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>> @@ -4,18 +4,20 @@ undefining it.
+>>>
+>>>  Upstream-Status: Pending
+>>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> -Index: m4-1.4.16/lib/stdio.in.h
+>>> +Index: m4-1.4.17/lib/stdio.in.h
+>>>  ===================================================================
+>>> ---- m4-1.4.16.orig/lib/stdio.in.h      2011-03-01 08:39:29.000000000 -0800
+>>> -+++ m4-1.4.16/lib/stdio.in.h   2012-07-03 08:32:08.145935928 -0700
+>>> -@@ -161,8 +161,10 @@
+>>> +--- m4-1.4.17.orig/lib/stdio.in.h      2013-10-16 14:41:01.678496227 +0300
+>>> ++++ m4-1.4.17/lib/stdio.in.h   2013-10-16 14:41:48.849427839 +0300
+>>> +@@ -717,10 +717,12 @@
+>>>   /* It is very rare that the developer ever has full control of stdin,
+>>> -    so any use of gets warrants an unconditional warning.  Assume it is
+>>> -    always declared, since it is required by C89.  */
+>>> +    so any use of gets warrants an unconditional warning; besides, C11
+>>> +    removed it.  */
+>>>  +#if defined gets
+>>>   #undef gets
+>>> + #if HAVE_RAW_DECL_GETS
+>>>   _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
+>>> + #endif
+>>>  +#endif
+>>>
+>>> - #if @GNULIB_FOPEN@
+>>> - # if @REPLACE_FOPEN@
+>>> +
+>>> + #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
+>>> diff --git a/meta/recipes-devtools/m4/m4_1.4.16.bb b/meta/recipes-devtools/m4/m4_1.4.17.bb
+>>> similarity index 100%
+>>> rename from meta/recipes-devtools/m4/m4_1.4.16.bb
+>>> rename to meta/recipes-devtools/m4/m4_1.4.17.bb
+>>>
+>>> _______________________________________________
+>>> Openembedded-commits mailing list
+>>> Openembedded-commits@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>>
+>> This patch breaks the build of m4-native on Gentoo, it stalls on do_configure:
+>>
+>>  checking whether sigaltstack...
+>>
+>>
+>> Cheers
+>>
+>> Andrea
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
