@@ -1,25 +1,25 @@
 Return-Path: <Qi.Chen@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AA2EE6D257
+	by mail.openembedded.org (Postfix) with ESMTP id 5FC0D6D472
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2013 06:28:50 +0000 (UTC)
+	Thu, 31 Oct 2013 06:28:52 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9V6Spx0010924
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id r9V6Srg4010927
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 30 Oct 2013 23:28:51 -0700 (PDT)
+	Wed, 30 Oct 2013 23:28:53 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.213) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 30 Oct 2013 23:28:50 -0700
+	14.2.347.0; Wed, 30 Oct 2013 23:28:52 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2013 14:29:44 +0800
-Message-ID: <1383200986-18674-3-git-send-email-Qi.Chen@windriver.com>
+Date: Thu, 31 Oct 2013 14:29:45 +0800
+Message-ID: <1383200986-18674-4-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1383200986-18674-1-git-send-email-Qi.Chen@windriver.com>
 References: <1383200986-18674-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/5] quagga: fix pkg_postinst
+Subject: [meta-networking][PATCH 4/5] ndisc6: chmod in do_install and remove unnecessary pkg_postinst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,76 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2013 06:28:51 -0000
+X-List-Received-Date: Thu, 31 Oct 2013 06:28:52 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
-This patch mainly involves two changes.
-1. Create necessary files at do_install task. Add these configuration
-   files to the CONFFILES variable.
-2. Move the `chmod' and `chown' commands to do_install task.
-
-After these two changes, qugga can run successfully at rootfs time.
+We can use chmod to set the SUID bit for applications in the do_install
+task. If we do so, the pkg_postinsts are no longer needed.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-protocols/quagga/quagga.inc            |   28 +++++++++++++-------
- 1 file changed, 19 insertions(+), 9 deletions(-)
+ .../recipes-support/ndisc6/ndisc6_1.0.2.bb         |   14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 8720876..196bd30 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -73,6 +73,14 @@ do_install () {
-         install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
-     done
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
+index d753912..a958e37 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
+@@ -49,14 +49,8 @@ servers through slateless IPv6 autoconfiguration."
  
-+    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
-+	touch ${D}${sysconfdir}/quagga/$f.conf
-+    done
-+    chown quagga:quaggavty ${D}${sysconfdir}/quagga
-+    chown quagga:quagga ${D}${sysconfdir}/quagga/*.conf
-+    chmod 750 ${D}${sysconfdir}/quagga
-+    chmod 640 ${D}${sysconfdir}/quagga/*.conf
-+
-     # Install quagga
-     oe_runmake install DESTDIR=${D} prefix=${prefix} \
-             sbindir=${sbindir} \
-@@ -108,7 +116,17 @@ FILES_${PN}-watchquagga = "${sbindir}/watchquagga ${sysconfdir}/default/watchqua
-                            ${sysconfdir}/init.d/watchquagga"
- 
- # Indicate that the default files are configuration files
--CONFFILES_${PN} = "${sysconfdir}/default/quagga"
-+CONFFILES_${PN} = "${sysconfdir}/default/quagga \
-+                   ${sysconfdir}/quagga/bgpd.conf \
-+                   ${sysconfdir}/quagga/vtysh.conf \
-+                   ${sysconfdir}/quagga/babeld.conf \
-+                   ${sysconfdir}/quagga/isisd.conf \
-+                   ${sysconfdir}/quagga/ospfd.conf \
-+                   ${sysconfdir}/quagga/ripngd.conf \
-+                   ${sysconfdir}/quagga/zebra.conf \
-+                   ${sysconfdir}/quagga/ripd.conf \
-+                   ${sysconfdir}/quagga/ospf6d.conf \
-+                  "
- CONFFILES_${PN}-watchquagga = "${sysconfdir}/default/watchquagga"
- 
- # Stop the names being rewritten due to the internal shared libraries
-@@ -132,14 +150,6 @@ GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
- USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga quagga"
- 
- pkg_postinst_${PN} () {
--    if [ "x$D" != "x" ] ; then
--        exit 1
--    fi
--    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
--    chown quagga:quaggavty ${sysconfdir}/quagga
--    chown quagga:quagga ${sysconfdir}/quagga/*.conf
--    chmod 750 ${sysconfdir}/quagga
--    chmod 640 ${sysconfdir}/quagga/*.conf
-     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
-         ${sysconfdir}/init.d/populate-volatile.sh update
-     fi
+ do_install_append () {
+     rm -rf ${D}${localstatedir}
+-}
+-# Enable SUID bit for applications that need it
+-pkg_postinst_${PN}-rltraceroute6 () {
+-    chmod 4555 ${bindir}/rltraceroute6
+-}
+-pkg_postinst_${PN}-ndisc6 () {
+-    chmod 4555 ${bindir}/ndisc6
+-}
+-pkg_postinst_${PN}-rdisc6 () {
+-    chmod 4555 ${bindir}/rdisc6
++    # Enable SUID bit for applications that need it
++    chmod 4555 ${D}${bindir}/rltraceroute6
++    chmod 4555 ${D}${bindir}/ndisc6
++    chmod 4555 ${D}${bindir}/rdisc6
+ }
 -- 
 1.7.9.5
 
