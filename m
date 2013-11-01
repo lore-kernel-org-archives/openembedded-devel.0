@@ -1,53 +1,45 @@
 Return-Path: <B40290@freescale.com>
-Received: from co1outboundpool.messaging.microsoft.com
-	(co1ehsobe003.messaging.microsoft.com [216.32.180.186])
-	by mail.openembedded.org (Postfix) with ESMTP id D01686D4F0
+Received: from db8outboundpool.messaging.microsoft.com
+	(mail-db8lp0187.outbound.messaging.microsoft.com [213.199.154.187])
+	by mail.openembedded.org (Postfix) with ESMTP id C74CE61957
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2013 07:15:42 +0000 (UTC)
-Received: from mail193-co1-R.bigfish.com (10.243.78.236) by
-	CO1EHSOBE020.bigfish.com (10.243.66.83) with Microsoft SMTP Server id
-	14.1.225.22; Fri, 1 Nov 2013 07:15:43 +0000
-Received: from mail193-co1 (localhost [127.0.0.1])	by
-	mail193-co1-R.bigfish.com (Postfix) with ESMTP id D1BC1CC0349;
-	Fri,  1 Nov 2013 07:15:43 +0000 (UTC)
+	Fri,  1 Nov 2013 08:37:26 +0000 (UTC)
+Received: from mail21-db8-R.bigfish.com (10.174.8.247) by
+	DB8EHSOBE037.bigfish.com (10.174.4.100) with Microsoft SMTP Server id
+	14.1.225.22; Fri, 1 Nov 2013 08:37:27 +0000
+Received: from mail21-db8 (localhost [127.0.0.1])	by mail21-db8-R.bigfish.com
+	(Postfix) with ESMTP id 9FCE910C0110	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Nov 2013 08:37:27 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -5
-X-BigFish: VS-5(zz98dI9371I936eI542I1432I4015Izz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah8275bh8275dh1de097h186068hz2dh2a8h839h8e2h8e3h941hd25hf0ah1269h1288h12a5h12a9h12bdh12e1h137ah13b6h1441h1504h1537h153bh15d0h162dh1631h1758h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e1dh1fe8h1ff5h21a6h2216hbe9i1155h)
-Received: from mail193-co1 (localhost.localdomain [127.0.0.1]) by mail193-co1
-	(MessageSwitch) id 1383290141378636_4954;
-	Fri,  1 Nov 2013 07:15:41 +0000 (UTC)
-Received: from CO1EHSMHS026.bigfish.com (unknown [10.243.78.252])	by
-	mail193-co1.bigfish.com (Postfix) with ESMTP id 592D740041;
-	Fri,  1 Nov 2013 07:15:41 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS026.bigfish.com
-	(10.243.66.36) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Fri, 1 Nov 2013 07:15:41 +0000
-Received: from 039-SN2MPN1-022.039d.mgd.msft.net ([169.254.2.249]) by
-	039-SN1MMR1-005.039d.mgd.msft.net ([::1]) with mapi id 14.03.0158.002;
-	Fri, 1 Nov 2013 07:15:40 +0000
-From: Chunrong Guo <B40290@freescale.com>
-To: Joe MacDonald <joe@deserted.net>
-Thread-Topic: [oe] [meta-networking][PATCH v2 1/3] snort : add recipe
-Thread-Index: AQHOy9ssoLjaSOZ6ikmIjj030S8NA5oJcaVAgAKuaQCAAF/YEIAAxUKAgAERIbA=
-Date: Fri, 1 Nov 2013 07:15:39 +0000
-Message-ID: <B21730BB6DA1D24B83348D9301EA417E1049357E@039-SN2MPN1-022.039d.mgd.msft.net>
-References: <1382084537-10877-1-git-send-email-b40290@freescale.com>
-	<B21730BB6DA1D24B83348D9301EA417E10491537@039-SN2MPN1-022.039d.mgd.msft.net>
-	<20131029192008.GB9931@deserted.net>
-	<B21730BB6DA1D24B83348D9301EA417E104921E2@039-SN2MPN1-022.039d.mgd.msft.net>
-	<20131030124911.GA3716@deserted.net>
-In-Reply-To: <20131030124911.GA3716@deserted.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.192.208.206]
+X-SpamScore: -1
+X-BigFish: VS-1(zz936eIzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz1de098h17326ah8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h1155h)
+Received: from mail21-db8 (localhost.localdomain [127.0.0.1]) by mail21-db8
+	(MessageSwitch) id 1383295044451086_19436;
+	Fri,  1 Nov 2013 08:37:24 +0000 (UTC)
+Received: from DB8EHSMHS019.bigfish.com (unknown [10.174.8.230])	by
+	mail21-db8.bigfish.com (Postfix) with ESMTP id 69CA71E80040	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Nov 2013 08:37:24 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB8EHSMHS019.bigfish.com
+	(10.174.4.29) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Fri, 1 Nov 2013 08:37:24 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Fri, 1 Nov 2013 08:37:22 +0000
+Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
+	[10.192.208.136])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
+	id rA18bJGE003611;	Fri, 1 Nov 2013 01:37:20 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 1 Nov 2013 16:37:17 +0800
+Message-ID: <1383295037-18257-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.7.5.4
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2 1/3] snort : add recipe
+Subject: [meta-oe][PATCH v3 1/3 ] snort: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,218 +53,359 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2013 07:15:44 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 01 Nov 2013 08:37:28 -0000
+Content-Type: text/plain
 
-SGVsbG+jrGpvZSANCg0KCUkgaW52ZXN0aWdhdGUgIGJhcm55YXJkMiBhbmQgYmFybnlhcmQgLiAN
-CglJIGhhdmUgdGhlIGZvbGxvd2luZyBjb25jbHVzaW9uczogDQogIAkgIDEpIEJhcm55YXJkMiBt
-YWludGFpbnMgbWFqb3JpdHkgb2YgdGhlIGNvbW1hbmQgc3ludGF4IG9mIGJhcm55YXJkLg0KICAJ
-ICAyKSBCYXJueWFyZCAgaGFzIG5vdCBzZWVuIGFuIHVwZGF0ZWQgaW4gb3ZlciA0IHllYXJzICBh
-bmQgaXMgIG5vdCBnb2luZyB0byBiZSBtYWludGFpbmVkIGJ5IHRoZSBvcmlnaW5hbCBkZXZlbG9w
-ZXJzLiANCiAgICAgICAgMykgQmFybnlhcmQyICBpcyBhIHZlcnkgcG9wdWxhciBwbHVnaW4gLg0K
-DQpJIHdpbGwgc3VibWl0IG5ldyBwYXRjaCBhYm91dCAiIHNub3J0ICsgQmFybnlhcmQyIi4NCg0K
-VGhhbmtzLA0KY2h1bnJvbmcNCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IEpv
-ZSBNYWNEb25hbGQgW21haWx0bzpqb2VAZGVzZXJ0ZWQubmV0XSANClNlbnQ6IFdlZG5lc2RheSwg
-T2N0b2JlciAzMCwgMjAxMyA4OjQ5IFBNDQpUbzogR3VvIENodW5yb25nLUI0MDI5MA0KQ2M6IG9w
-ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29l
-XSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2MiAxLzNdIHNub3J0IDogYWRkIHJlY2lwZQ0KDQpb
-UkU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggdjIgMS8zXSBzbm9ydCA6IGFkZCByZWNp
-cGVdIE9uIDEzLjEwLjMwIChXZWQgMDE6NDApIEd1byBDaHVucm9uZy1CNDAyOTAgd3JvdGU6DQoN
-Cj4gSGksIEpvZSBNYWNEb25hbGQNCj4gDQo+IFRoYW5rIHlvdSBmb3IgeW91ciBjb21tZW50cy4N
-Cj4gDQo+IFRoZSBjdXJyZW50IHNub3J0IHNpbXBseSBkbyBub3QgbmVlZCBzeXN2aW5pdCBjb25m
-aWcuDQoNCkkgYXBvbG9naXplLCBJIGRvbid0IG1lYW4gdG8gYmVsYWJvciB0aGUgcG9pbnQsIGJ1
-dCBjYW4geW91IHBvaW50IG1lIGF0IHRoYXQgaW5mb3JtYXRpb24/ICBodHRwOi8vd3d3LnNub3J0
-Lm9yZy9kb2NzLyBjb250YWlucyBhIGxvdCBvZiBkb2N1bWVudGF0aW9uIGFyb3VuZCBnZXR0aW5n
-IHNub3J0IHN0YXJ0ZWQgb24gdmFyaW91cyBzeXN0ZW1zIGFuZCB0aGVyZSBhcmUgYSBudW1iZXIg
-b2Ygc3RhcnR1cCBzY3JpcHRzIHRoZXJlIHRoYXQgaW5kaWNhdGUgdGhleSBiZWxvbmcgaW4gL2V0
-Yy9pbml0LmQgb2YgdGhlaXIgcmVzcGVjdGl2ZSBkaXN0cmlidXRpb25zLiAgUGVyaGFwcyB0aGlu
-Z3MgaGF2ZSBjaGFuZ2VkIGluIHRoZSBtb3N0IHJlY2VudCB2ZXJzaW9uIG9mIHNub3J0LCBidXQg
-dGhlICJTbm9ydCBTdGFydHVwIFNjcmlwdHMiIHNlY3Rpb24gc2VlbSB0byBhcHBseSB0byB0aGUg
-dmVyc2lvbnMgb2Ygc25vcnQgeW91J3JlIHByb3Bvc2luZyB3ZSBpbmNsdWRlIGluIG1ldGEtbmV0
-d29ya2luZy4NCg0KQWxzbywgcGxlYXNlIGRvbid0IGZvcmdldCBhYm91dCB0aGUgaW5jbHVkZSBw
-YXRoIGFuZCBiYXJueWFyZCBxdWVzdGlvbnMuDQoNClRoYW5rcy4NCg0KLUouDQoNCj4gDQo+IA0K
-PiBUaGFua3MsDQo+IENodW5yb25nDQo+IA0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0K
-PiBGcm9tOiBKb2UgTWFjRG9uYWxkIFttYWlsdG86am9lQGRlc2VydGVkLm5ldF0NCj4gU2VudDog
-V2VkbmVzZGF5LCBPY3RvYmVyIDMwLCAyMDEzIDM6MjAgQU0NCj4gVG86IG9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IENjOiBHdW8gQ2h1bnJvbmctQjQwMjkwDQo+
-IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIIHYyIDEvM10gc25vcnQg
-OiBhZGQgcmVjaXBlDQo+IA0KPiBIaSBDaHVucm9uZywNCj4gDQo+IFNvcnJ5IGFib3V0IHRoZSBj
-b25mdXNpb24gaGVyZSwgdGhlcmUgd2VyZSBzdGlsbCBhdCBsZWFzdCBhIGNvdXBsZSBvZiBvdXRz
-dGFuZGluZyBxdWVzdGlvbnMgLyByZXF1ZXN0cywgSSB0aG91Z2h0Lg0KPiANCj4gSSBoYWQgYSBx
-dWljayBsb29rIGJhY2sgYXQgdGhlIGxhdGVzdCBiYXJueWFyZCByZWNpcGUgYW5kIGl0IGFwcGVh
-cnMgdG8gYmUgcmVtb3ZpbmcgdGhlIGluY2x1ZGUgcGF0aCBhcyBvcHBvc2VkIHRvIHVzaW5nIC1J
-PS91c3IvaW5jbHVkZS9wY2FwIHRoYXQgS2hlbSBzdWdnZXN0ZWQsIEkgd2FzIGhvcGluZyB0byBo
-ZWFyIGJhY2sgb24gdGhlIHF1ZXN0aW9uIEkgaGFkIGFzIHdlbGwgV1JUIGJhcm55YXJkIHZlcnN1
-cyBiYXJueWFyZDIgKEkgY291bGQgbWFrZSB0aGUgbGljZW5zZSB0d2VhayBteXNlbGYgc2luY2Ug
-SSdtIGNvbmZpZGVudCB0aGF0IHdvbid0IGludmFsaWRhdGUgYW55IG9mIHlvdXIgd29yaykgYW5k
-IHRoZSBHZW50b28gbWlycm9yIGFzIHRoZSBwcmltYXJ5IHNvdXJjZSBmb3IgdGhpcyB2ZXJzaW9u
-IG9mIEJhcm55YXJkLg0KPiANCj4gSSBhbHNvIG5vdGljZWQgdGhhdCBpbiB0aGUgbW9zdCByZWNl
-bnQgdmVyc2lvbiBvZiB0aGUgc25vcnQgcmVjaXBlIHRoZSANCj4gc3lzdmluaXQgY29tcG9uZW50
-cyBoYXZlIGJlZW4gZHJvcHBlZCBlbnRpcmVseS4gIFdhcyB0aGF0IGR1ZSB0byANCj4gcHJvYmxl
-bXMgaW5oZXJpdGluZyB1cGRhdGUtcmMuZCBhcyBLb2VuIHN1Z2dlc3RlZD8gIChPciBwZXJoYXBz
-IHRoZSANCj4gY3VycmVudCBzbm9ydCBzaW1wbHkgZG9lc24ndCBoYXZlIGEgZnVuY3Rpb25hbCBz
-eXN2aW5pdCBjb25maWc/ICBJIA0KPiBob3BlIHRoYXQncyBub3QgdGhlIGNhc2UuKSAgSSdtIHBy
-b2JhYmx5IG5vdCB0aGUgb25seSBvbmUgc3RpbGwgbWFraW5nIA0KPiB1c2Ugb2Ygc3lzdmluaXQg
-c3R1ZmYgaW4gc29tZSBzY2VuYXJpb3MuICA6LSkNCj4gDQo+IC1KLg0KPiANCj4gW1JlOiBbb2Vd
-IFttZXRhLW5ldHdvcmtpbmddW1BBVENIIHYyIDEvM10gc25vcnQgOiBhZGQgcmVjaXBlXSBPbiAx
-My4xMC4yOCAoTW9uIDAyOjIzKSBHdW8gQ2h1bnJvbmctQjQwMjkwIHdyb3RlOg0KPiANCj4gPiBw
-aW5ncw0KPiA+IA0KPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogR3Vv
-IENodW5yb25nLUI0MDI5MA0KPiA+IFNlbnQ6IEZyaWRheSwgT2N0b2JlciAxOCwgMjAxMyA0OjIy
-IFBNDQo+ID4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-ID4gQ2M6IExpdSBUaW5nLUIyODQ5NTsgTHVvIFpoZW5odWEtQjE5NTM3OyBHdW8gQ2h1bnJvbmct
-QjQwMjkwDQo+ID4gU3ViamVjdDogW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggdjIgMS8zXSBzbm9y
-dCA6IGFkZCByZWNpcGUNCj4gPiANCj4gPiBGcm9tOiBDaHVucm9uZyBHdW8gPEI0MDI5MEBmcmVl
-c2NhbGUuY29tPg0KPiA+IA0KPiA+ICAgICpzbm9ydCAtIGEgZnJlZSBsaWdodHdlaWdodCBuZXR3
-b3JrIGludHJ1c2lvbiBkZXRlY3Rpb24NCj4gPiAgICAgICAgICAgICAgICAgc3lzdGVtIGZvciBV
-TklYIGFuZCBXaW5kb3dzDQo+ID4gDQo+ID4gU2lnbmVkLW9mZi1ieTogQ2h1bnJvbmcgR3VvIDxC
-NDAyOTBAZnJlZXNjYWxlLmNvbT4NCj4gPiAtLS0NCj4gPiAgLi4uL3Nub3J0L2ZpbGVzL2Rpc2Fi
-bGUtZGFwLWFkZHJlc3Mtc3BhY2UtaWQucGF0Y2ggfCAgIDUyICsrKysrKysrKysrKysrDQo+ID4g
-IC4uLi9zbm9ydC9maWxlcy9kaXNhYmxlLWluYWRkci1ub25lLnBhdGNoICAgICAgICAgIHwgICA3
-NSArKysrKysrKysrKysrKysrKysrKw0KPiA+ICAuLi4vcmVjaXBlcy1jb25uZWN0aXZpdHkvc25v
-cnQvc25vcnRfMi45LjQuNi5iYiAgICB8ICAgNjQgKysrKysrKysrKysrKysrKysNCj4gPiAgMyBm
-aWxlcyBjaGFuZ2VkLCAxOTEgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkgIGNyZWF0ZSBt
-b2RlDQo+ID4gMTAwNjQ0DQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5
-L3Nub3J0L2ZpbGVzL2Rpc2FibGUtZGFwLWFkZHJlc3MNCj4gPiAtcw0KPiA+IHBhY2UtaWQucGF0
-Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5l
-Y3Rpdml0eS9zbm9ydC9maWxlcy9kaXNhYmxlLWluYWRkci1ub25lDQo+ID4gLnANCj4gPiBhdGNo
-ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0
-aXZpdHkvc25vcnQvc25vcnRfMi45LjQuNi5iYg0KPiA+IA0KPiA+IGRpZmYgLS1naXQNCj4gPiBh
-L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zbm9ydC9maWxlcy9kaXNhYmxl
-LWRhcC1hZGRyZQ0KPiA+IHNzDQo+ID4gLXNwYWNlLWlkLnBhdGNoDQo+ID4gYi9tZXRhLW5ldHdv
-cmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc25vcnQvZmlsZXMvZGlzYWJsZS1kYXAtYWRkcmUN
-Cj4gPiBzcw0KPiA+IC1zcGFjZS1pZC5wYXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
-ID4gaW5kZXggMDAwMDAwMC4uMzllNWM5Yw0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9t
-ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc25vcnQvZmlsZXMvZGlzYWJsZS1k
-YXAtYQ0KPiA+ICsrKyBkZA0KPiA+ICsrKyByZQ0KPiA+ICsrKyBzcy1zcGFjZS1pZC5wYXRjaA0K
-PiA+IEBAIC0wLDAgKzEsNTIgQEANCj4gPiArVXBzdHJlYW0tU3RhdHVzOkluYXBwcm9wcmlhdGUg
-W2VtYmVkZGVkIHNwZWNpZmljXQ0KPiA+ICsNCj4gPiArZml4IHRoZSBiZWxvdyBlcnJvcjoNCj4g
-PiArY2hlY2tpbmcgZm9yIGRhcCBhZGRyZXNzIHNwYWNlIGlkLi4uIGNvbmZpZ3VyZTogDQo+ID4g
-K2NvbmZpZ3VyZTogZXJyb3I6IGNhbm5vdCBydW4gdGVzdCBwcm9ncmFtIHdoaWxlIGNyb3NzIGNv
-bXBpbGluZw0KPiA+ICsNCj4gPiArDQo+ID4gK1NpZ25lZC1vZmYtYnk6IENodW5yb25nIEd1byA8
-QjQwMjkwQGZyZWVzY2FsZS5jb20+DQo+ID4gKw0KPiA+ICstLS0gYS9jb25maWd1cmUuaW4JMjAx
-My0wOC0yMyAwMDowNjozNy4yMzkzNjE5MzIgLTA1MDANCj4gPiArKysrIGIvY29uZmlndXJlLmlu
-CTIwMTMtMDgtMjMgMDA6MDc6MzIuODYwMjY2NTM0IC0wNTAwDQo+ID4gK0BAIC02NzksMjMgKzY3
-OSwyMyBAQA0KPiA+ICsgDQo+ID4gKyBBQ19DSEVDS19GVU5DUyhbZGFxX2h1cF9hcHBseV0gW2Rh
-cV9hY3F1aXJlX3dpdGhfbWV0YV0pDQo+ID4gKyANCj4gPiArLUFDX01TR19DSEVDS0lORyhbZm9y
-IGRhcSBhZGRyZXNzIHNwYWNlIElEXSkgLUFDX1JVTl9JRkVMU0UoIA0KPiA+ICstW0FDX0xBTkdf
-UFJPR1JBTSggLVtbIC0jaW5jbHVkZSA8ZGFxLmg+IC1dXSwgLVtbDQo+ID4gKy0gICBEQVFfUGt0
-SGRyX3QgaGRyOw0KPiA+ICstICAgaGRyLmFkZHJlc3Nfc3BhY2VfaWQgPSAwOw0KPiA+ICstXV0p
-XSwNCj4gPiArLVtoYXZlX2RhcV9hZGRyZXNzX3NwYWNlX2lkPSJ5ZXMiXSwNCj4gPiArLVtoYXZl
-X2RhcV9hZGRyZXNzX3NwYWNlX2lkPSJubyJdKQ0KPiA+ICstQUNfTVNHX1JFU1VMVCgkaGF2ZV9k
-YXFfYWRkcmVzc19zcGFjZV9pZCkNCj4gPiArLWlmIHRlc3QgIngkaGF2ZV9kYXFfYWRkcmVzc19z
-cGFjZV9pZCIgPSAieHllcyI7IHRoZW4NCj4gPiArLSAgICBBQ19ERUZJTkUoW0hBVkVfREFRX0FE
-RFJFU1NfU1BBQ0VfSURdLFsxXSwNCj4gPiArLSAgICAgICAgW0RBUSB2ZXJzaW9uIHN1cHBvcnRz
-IGFkZHJlc3Mgc3BhY2UgSUQgaW4gaGVhZGVyLl0pDQo+ID4gKy1maQ0KPiA+ICsrI0FDX01TR19D
-SEVDS0lORyhbZm9yIGRhcSBhZGRyZXNzIHNwYWNlIElEXSkgI0FDX1JVTl9JRkVMU0UoIA0KPiA+
-ICsrI1tBQ19MQU5HX1BST0dSQU0oICNbWyAjI2luY2x1ZGUgPGRhcS5oPiAjXV0sICNbWw0KPiA+
-ICsrIyAgIERBUV9Qa3RIZHJfdCBoZHI7DQo+ID4gKysjICAgaGRyLmFkZHJlc3Nfc3BhY2VfaWQg
-PSAwOw0KPiA+ICsrI11dKV0sDQo+ID4gKytoYXZlX2RhcV9hZGRyZXNzX3NwYWNlX2lkPSJ5ZXMi
-DQo+ID4gKysjW2hhdmVfZGFxX2FkZHJlc3Nfc3BhY2VfaWQ9Im5vIl0pDQo+ID4gKysjQUNfTVNH
-X1JFU1VMVCgkaGF2ZV9kYXFfYWRkcmVzc19zcGFjZV9pZCkNCj4gPiArKyNpZiB0ZXN0ICJ4JGhh
-dmVfZGFxX2FkZHJlc3Nfc3BhY2VfaWQiID0gInh5ZXMiOyB0aGVuDQo+ID4gKysjICAgIEFDX0RF
-RklORShbSEFWRV9EQVFfQUREUkVTU19TUEFDRV9JRF0sWzFdLA0KPiA+ICsrIyAgICAgICAgW0RB
-USB2ZXJzaW9uIHN1cHBvcnRzIGFkZHJlc3Mgc3BhY2UgSUQgaW4gaGVhZGVyLl0pDQo+ID4gKysj
-ZmkNCj4gPiArIA0KPiA+ICsgIyBhbnkgc3BhcmMgcGxhdGZvcm0gaGFzIHRvIGhhdmUgdGhpcyBv
-bmUgZGVmaW5lZC4NCj4gPiArIEFDX01TR19DSEVDS0lORyhmb3Igc3BhcmMpDQo+ID4gZGlmZiAt
-LWdpdA0KPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3Nub3J0L2Zp
-bGVzL2Rpc2FibGUtaW5hZGRyLW5vDQo+ID4gbmUNCj4gPiAucGF0Y2gNCj4gPiBiL21ldGEtbmV0
-d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zbm9ydC9maWxlcy9kaXNhYmxlLWluYWRkci1u
-bw0KPiA+IG5lDQo+ID4gLnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRl
-eCAwMDAwMDAwLi45ZGFmZTYzDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0
-d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zbm9ydC9maWxlcy9kaXNhYmxlLWluYWRkDQo+
-ID4gKysrIHItDQo+ID4gKysrIG5vDQo+ID4gKysrIG5lLnBhdGNoDQo+ID4gQEAgLTAsMCArMSw3
-NSBAQA0KPiA+ICtVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2VtYmVkZGVkIHNwZWNp
-ZmljXQ0KPiA+ICsNCj4gPiArZml4IHRoZSBiZWxvdyBlcnJvcjoNCj4gPiArY2hlY2tpbmcgZm9y
-IElOQUREUl9OT05FLi4uIGNvbmZpZ3VyZToNCj4gPiArY29uZmlndXJlOiBlcnJvcjogY2Fubm90
-IHJ1biB0ZXN0IHByb2dyYW0gd2hpbGUgY3Jvc3MgY29tcGlsaW5nDQo+ID4gKw0KPiA+ICtTaWdu
-ZWQtb2ZmLWJ5OiBDaHVucm9uZyBHdW8gPEI0MDI5MEBmcmVlc2NhbGUuY29tPg0KPiA+ICsNCj4g
-PiArDQo+ID4gKy0tLSBhL2NvbmZpZ3VyZS5pbgkyMDEzLTA4LTIxIDAzOjU2OjE3LjE5NzQxNDc4
-OSAtMDUwMA0KPiA+ICsrKysgYi9jb25maWd1cmUuaW4JMjAxMy0wOC0yMSAyMzoxOTowNS4yOTg1
-NTM1NjAgLTA1MDANCj4gPiArQEAgLTI4MSwyNSArMjgxLDcgQEANCj4gPiArIEFDX0NIRUNLX1RZ
-UEVTKFtib29sZWFuXSkNCj4gPiArIA0KPiA+ICsgIyBJbiBjYXNlIElOQUREUl9OT05FIGlzIG5v
-dCBkZWZpbmVkIChsaWtlIG9uIFNvbGFyaXMpIA0KPiA+ICstaGF2ZV9pbmFkZHJfbm9uZT0ibm8i
-DQo+ID4gKy1BQ19NU0dfQ0hFQ0tJTkcoW2ZvciBJTkFERFJfTk9ORV0pIC1BQ19SVU5fSUZFTFNF
-KCANCj4gPiArLVtBQ19MQU5HX1BST0dSQU0oIC1bWyAtI2luY2x1ZGUgPHN5cy90eXBlcy5oPiAt
-I2luY2x1ZGUgDQo+ID4gKzxuZXRpbmV0L2luLmg+IC0jaW5jbHVkZSA8YXJwYS9pbmV0Lmg+IC1d
-XSwgLVtbDQo+ID4gKy0JaWYgKGluZXRfYWRkcigiMTAsNSwyIikgPT0gSU5BRERSX05PTkUpOw0K
-PiA+ICstICAgIHJldHVybiAwOw0KPiA+ICstXV0pXSwNCj4gPiArLVtoYXZlX2luYWRkcl9ub25l
-PSJ5ZXMiXSwNCj4gPiArLVtoYXZlX2luYWRkcl9ub25lPSJubyJdKQ0KPiA+ICstQUNfTVNHX1JF
-U1VMVCgkaGF2ZV9pbmFkZHJfbm9uZSkNCj4gPiArLWlmIHRlc3QgIngkaGF2ZV9pbmFkZHJfbm9u
-ZSIgPSAieG5vIjsgdGhlbg0KPiA+ICstCUFDX0RFRklORShbSU5BRERSX05PTkVdLFstMV0sW0Zv
-ciBJTkFERFJfTk9ORSBkZWZpbml0aW9uXSkNCj4gPiArLWZpDQo+ID4gKytoYXZlX2luYWRkcl9u
-b25lPSJ5ZXMiDQo+ID4gKyANCj4gPiArIEFDX0NPTVBJTEVfSUZFTFNFKFtBQ19MQU5HX1BST0dS
-QU0oW1sNCj4gPiArICNpbmNsdWRlIDxzdGRpby5oPg0KPiA+ICtAQCAtMzk3LDIxICszNzksMjEg
-QEANCj4gPiArICAgZmkNCj4gPiArIGZpDQo+ID4gKyANCj4gPiArLUFDX01TR19DSEVDS0lORyhb
-Zm9yIHBjYXBfbGV4X2Rlc3Ryb3ldKSAtQUNfUlVOX0lGRUxTRSggDQo+ID4gKy1bQUNfTEFOR19Q
-Uk9HUkFNKCAtW1sgLSNpbmNsdWRlIDxwY2FwLmg+IC1dXSwgLVtbDQo+ID4gKy0gICBwY2FwX2xl
-eF9kZXN0cm95KCk7DQo+ID4gKy1dXSldLA0KPiA+ICstW2hhdmVfcGNhcF9sZXhfZGVzdHJveT0i
-eWVzIl0sDQo+ID4gKy1baGF2ZV9wY2FwX2xleF9kZXN0cm95PSJubyJdKQ0KPiA+ICstQUNfTVNH
-X1JFU1VMVCgkaGF2ZV9wY2FwX2xleF9kZXN0cm95KQ0KPiA+ICstaWYgdGVzdCAieCRoYXZlX3Bj
-YXBfbGV4X2Rlc3Ryb3kiID0gInh5ZXMiOyB0aGVuDQo+ID4gKy0gICAgQUNfREVGSU5FKFtIQVZF
-X1BDQVBfTEVYX0RFU1RST1ldLFsxXSxbQ2FuIGNsZWFudXAgbGV4IGJ1ZmZlciBzdGFjayBjcmVh
-dGVkIGJ5IHBjYXAgYnBmIGZpbHRlcl0pDQo+ID4gKy1maQ0KPiA+ICsrI0FDX01TR19DSEVDS0lO
-RyhbZm9yIHBjYXBfbGV4X2Rlc3Ryb3ldKSAjQUNfUlVOX0lGRUxTRSggDQo+ID4gKysjW0FDX0xB
-TkdfUFJPR1JBTSggI1tbICMjaW5jbHVkZSA8cGNhcC5oPiAjXV0sICNbWw0KPiA+ICsrIyAgIHBj
-YXBfbGV4X2Rlc3Ryb3koKTsNCj4gPiArKyNdXSldLA0KPiA+ICsraGF2ZV9wY2FwX2xleF9kZXN0
-cm95PSJ5ZXMiDQo+ID4gKysjW2hhdmVfcGNhcF9sZXhfZGVzdHJveT0ibm8iXSkNCj4gPiArKyNB
-Q19NU0dfUkVTVUxUKCRoYXZlX3BjYXBfbGV4X2Rlc3Ryb3kpDQo+ID4gKysjaWYgdGVzdCAieCRo
-YXZlX3BjYXBfbGV4X2Rlc3Ryb3kiID0gInh5ZXMiOyB0aGVuDQo+ID4gKysjICAgIEFDX0RFRklO
-RShbSEFWRV9QQ0FQX0xFWF9ERVNUUk9ZXSxbMV0sW0NhbiBjbGVhbnVwIGxleCBidWZmZXIgc3Rh
-Y2sgY3JlYXRlZCBieSBwY2FwIGJwZiBmaWx0ZXJdKQ0KPiA+ICsrI2ZpDQo+ID4gKyANCj4gPiAr
-IEFDX01TR19DSEVDS0lORyhbZm9yIHBjYXBfbGliX3ZlcnNpb25dKSBBQ19MSU5LX0lGRUxTRSgN
-Cj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZp
-dHkvc25vcnQvc25vcnRfMi45LjQuNi5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
-Y29ubmVjdGl2aXR5L3Nub3J0L3Nub3J0XzIuOS40LjYuYmINCj4gPiBuZXcgZmlsZSBtb2RlIDEw
-MDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLjg2Mzk2MzkNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4g
-KysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3Nub3J0L3Nub3J0XzIu
-OS40LjYuYmINCj4gPiBAQCAtMCwwICsxLDY0IEBADQo+ID4gK0RFU0NSSVBUSU9OID0gInNub3J0
-IC0gYSBmcmVlIGxpZ2h0d2VpZ2h0IG5ldHdvcmsgaW50cnVzaW9uIGRldGVjdGlvbiBzeXN0ZW0g
-Zm9yIFVOSVggYW5kIFdpbmRvd3MuIg0KPiA+ICtIT01FUEFHRSA9ICJodHRwOi8vd3d3LnNub3J0
-Lm9yZy8iDQo+ID4gK0xJQ0VOU0UgPSAiR1BMLTIuMCINCj4gPiArTElDX0ZJTEVTX0NIS1NVTSA9
-ICJmaWxlOi8vQ09QWUlORzttZDU9NzhmYThlZjk2NmI0OGZiZjkwOTVlMTNjYzkyMzc3YzUiDQo+
-ID4gKw0KPiA+ICtERVBFTkRTID0gImxpYnBjYXAgbGlicGNyZSBkYXEgbGliZG5ldCINCj4gPiAr
-DQo+ID4gKw0KPiA+ICtTUkNfVVJJID0gIiAke0dFTlRPT19NSVJST1J9LyR7QlB9LnRhci5nejtu
-YW1lPXRhcmJhbGwgXA0KPiA+ICsgICAgICAgICAgICBmaWxlOi8vZGlzYWJsZS1pbmFkZHItbm9u
-ZS5wYXRjaCBcDQo+ID4gKyAgICAgICAgICAgIGZpbGU6Ly9kaXNhYmxlLWRhcC1hZGRyZXNzLXNw
-YWNlLWlkLnBhdGNoICINCj4gPiArDQo+ID4gK1NSQ19VUklbdGFyYmFsbC5tZDVzdW1dID0gIjQx
-MTFkZjAxYTRmMjFiZDFkMzI4YTE4Yjc2ZDYyNWJkIg0KPiA+ICtTUkNfVVJJW3RhcmJhbGwuc2hh
-MjU2c3VtXSA9ICJjZmFhNTM5MGIxODQwYWFhYTY4YTZjMDVhNzA3N2RkOTJjYjkxNmU2MTg2YTAx
-NGJhYTQ1MWQ0M2NkYjBiM2JjIg0KPiA+ICsNCj4gPiAraW5oZXJpdCBhdXRvdG9vbHMgIGdldHRl
-eHQNCj4gPiArDQo+ID4gK0VYVFJBX09FQ09ORiA9ICIgXA0KPiA+ICsJLS1lbmFibGUtZ3JlIFwg
-ICAgDQo+ID4gKwktLWVuYWJsZS1saW51eC1zbXAtc3RhdHMgXA0KPiA+ICsJLS1lbmFibGUtcmVs
-b2FkIFwNCj4gPiArCS0tZW5hYmxlLXJlbG9hZC1lcnJvci1yZXN0YXJ0IFwNCj4gPiArCS0tZW5h
-YmxlLXRhcmdldGJhc2VkIFwNCj4gPiArCS0tZGlzYWJsZS1zdGF0aWMtZGFxIFwNCj4gPiArCSIN
-Cj4gPiArDQo+ID4gK2RvX2luc3RhbGxfYXBwZW5kKCkgew0KPiA+ICsJaW5zdGFsbCAtZCAke0R9
-LyR7c3lzY29uZmRpcn0vc25vcnQvcnVsZXMNCj4gPiArCWluc3RhbGwgLWQgJHtEfS8ke3N5c2Nv
-bmZkaXJ9L3Nub3J0L3ByZXByb2NfcnVsZXMNCj4gPiArCWZvciBpIGluIG1hcCBjb25maWcgY29u
-ZiBkdGQ7IGRvDQo+ID4gKwkJY3AgJHtTfS9ldGMvKi4kaSAke0R9LyR7c3lzY29uZmRpcn0vc25v
-cnQvDQo+ID4gKwlkb25lDQo+ID4gKwljcCAke1N9L3ByZXByb2NfcnVsZXMvKi5ydWxlcyAke0R9
-LyR7c3lzY29uZmRpcn0vc25vcnQvcHJlcHJvY19ydWxlcy8NCj4gPiArCW1rZGlyIC1wICR7RH0v
-JHtsb2NhbHN0YXRlZGlyfS9sb2cvc25vcnQgfQ0KPiA+ICsNCj4gPiArRklMRVNfJHtQTn0gKz0g
-IiBcDQo+ID4gKwkke2xpYmRpcn0vc25vcnRfZHluYW1pY2VuZ2luZS8qLnNvLiogXA0KPiA+ICsJ
-JHtsaWJkaXJ9L3Nub3J0X2R5bmFtaWNwcmVwcm9jZXNzb3IvKi5zby4qIFwNCj4gPiArCSR7bGli
-ZGlyfS9zbm9ydF9keW5hbWljcnVsZXMvKi5zby4qIFwNCj4gPiArCSINCj4gPiArRklMRVNfJHtQ
-Tn0tZGJnICs9ICIgXA0KPiA+ICsJJHtsaWJkaXJ9L3Nub3J0X2R5bmFtaWNlbmdpbmUvLmRlYnVn
-IFwNCj4gPiArCSR7bGliZGlyfS9zbm9ydF9keW5hbWljcHJlcHJvY2Vzc29yLy5kZWJ1ZyBcDQo+
-ID4gKwkke2xpYmRpcn0vc25vcnRfZHluYW1pY3J1bGVzLy5kZWJ1ZyBcDQo+ID4gKwkiDQo+ID4g
-K0ZJTEVTXyR7UE59LXN0YXRpY2RldiArPSAiIFwNCj4gPiArCSR7bGliZGlyfS9zbm9ydF9keW5h
-bWljZW5naW5lLyouYSBcDQo+ID4gKwkke2xpYmRpcn0vc25vcnRfZHluYW1pY3ByZXByb2Nlc3Nv
-ci8qLmEgXA0KPiA+ICsJJHtsaWJkaXJ9L3Nub3J0X2R5bmFtaWNydWxlcy8qLmEgXA0KPiA+ICsJ
-JHtsaWJkaXJ9L3Nub3J0L2R5bmFtaWNfcHJlcHJvYy8qLmEgXA0KPiA+ICsJJHtsaWJkaXJ9L3Nu
-b3J0L2R5bmFtaWNfb3V0cHV0LyouYSBcDQo+ID4gKwkiDQo+ID4gK0ZJTEVTXyR7UE59LWRldiAr
-PSAiIFwNCj4gPiArCSR7bGliZGlyfS9zbm9ydF9keW5hbWljZW5naW5lLyoubGEgXA0KPiA+ICsJ
-JHtsaWJkaXJ9L3Nub3J0X2R5bmFtaWNwcmVwcm9jZXNzb3IvKi5sYSBcDQo+ID4gKwkke2xpYmRp
-cn0vc25vcnRfZHluYW1pY3J1bGVzLyoubGEgXA0KPiA+ICsJJHtsaWJkaXJ9L3Nub3J0X2R5bmFt
-aWNlbmdpbmUvKi5zbyBcDQo+ID4gKwkke2xpYmRpcn0vc25vcnRfZHluYW1pY3ByZXByb2Nlc3Nv
-ci8qLnNvIFwNCj4gPiArCSR7bGliZGlyfS9zbm9ydF9keW5hbWljcnVsZXMvKi5zbyBcDQo+ID4g
-Kwkke3ByZWZpeH0vc3JjL3Nub3J0X2R5bmFtaWNzcmMgXA0KPiA+ICsJIg0KPiA+ICsNCj4gPiAr
-UlJFQ09NTUVORFNfJHtQTn0gKz0gImJhcm55YXJkIg0KPiA+IC0tDQo+ID4gMS43LjUuNA0KPiA+
-IA0KPiA+IA0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fDQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRl
-ZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gDQo+IC0tDQo+
-IC1Kb2UgTWFjRG9uYWxkLg0KPiA6d3ENCj4gDQoNCi0tDQotSm9lIE1hY0RvbmFsZC4NCjp3cQ0K
+From: Chunrong Guo <B40290@freescale.com>
+
+   *snort - a free lightweight network intrusion detection
+         system for UNIX and Windows
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ .../snort/files/disable-dap-address-space-id.patch |   52 +++++++++
+ .../snort/files/disable-inaddr-none.patch          |   75 ++++++++++++++
+ .../recipes-connectivity/snort/files/snort.init    |  109 ++++++++++++++++++++
+ .../recipes-connectivity/snort/snort_2.9.4.6.bb    |   71 +++++++++++++
+ 4 files changed, 307 insertions(+), 0 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch
+ create mode 100644 meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch
+ create mode 100644 meta-networking/recipes-connectivity/snort/files/snort.init
+ create mode 100644 meta-networking/recipes-connectivity/snort/snort_2.9.4.6.bb
+
+diff --git a/meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch b/meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch
+new file mode 100644
+index 0000000..39e5c9c
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch
+@@ -0,0 +1,52 @@
++Upstream-Status:Inappropriate [embedded specific]
++
++fix the below error:
++checking for dap address space id... configure: 
++configure: error: cannot run test program while cross compiling
++
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++
++--- a/configure.in	2013-08-23 00:06:37.239361932 -0500
+++++ b/configure.in	2013-08-23 00:07:32.860266534 -0500
++@@ -679,23 +679,23 @@
++ 
++ AC_CHECK_FUNCS([daq_hup_apply] [daq_acquire_with_meta])
++ 
++-AC_MSG_CHECKING([for daq address space ID])
++-AC_RUN_IFELSE(
++-[AC_LANG_PROGRAM(
++-[[
++-#include <daq.h>
++-]],
++-[[
++-   DAQ_PktHdr_t hdr;
++-   hdr.address_space_id = 0;
++-]])],
++-[have_daq_address_space_id="yes"],
++-[have_daq_address_space_id="no"])
++-AC_MSG_RESULT($have_daq_address_space_id)
++-if test "x$have_daq_address_space_id" = "xyes"; then
++-    AC_DEFINE([HAVE_DAQ_ADDRESS_SPACE_ID],[1],
++-        [DAQ version supports address space ID in header.])
++-fi
+++#AC_MSG_CHECKING([for daq address space ID])
+++#AC_RUN_IFELSE(
+++#[AC_LANG_PROGRAM(
+++#[[
+++##include <daq.h>
+++#]],
+++#[[
+++#   DAQ_PktHdr_t hdr;
+++#   hdr.address_space_id = 0;
+++#]])],
+++have_daq_address_space_id="yes"
+++#[have_daq_address_space_id="no"])
+++#AC_MSG_RESULT($have_daq_address_space_id)
+++#if test "x$have_daq_address_space_id" = "xyes"; then
+++#    AC_DEFINE([HAVE_DAQ_ADDRESS_SPACE_ID],[1],
+++#        [DAQ version supports address space ID in header.])
+++#fi
++ 
++ # any sparc platform has to have this one defined.
++ AC_MSG_CHECKING(for sparc)
+diff --git a/meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch b/meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch
+new file mode 100644
+index 0000000..9dafe63
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch
+@@ -0,0 +1,75 @@
++Upstream-Status: Inappropriate [embedded specific]
++
++fix the below error:
++checking for INADDR_NONE... configure:
++configure: error: cannot run test program while cross compiling
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++
++
++--- a/configure.in	2013-08-21 03:56:17.197414789 -0500
+++++ b/configure.in	2013-08-21 23:19:05.298553560 -0500
++@@ -281,25 +281,7 @@
++ AC_CHECK_TYPES([boolean])
++ 
++ # In case INADDR_NONE is not defined (like on Solaris)
++-have_inaddr_none="no"
++-AC_MSG_CHECKING([for INADDR_NONE])
++-AC_RUN_IFELSE(
++-[AC_LANG_PROGRAM(
++-[[
++-#include <sys/types.h>
++-#include <netinet/in.h>
++-#include <arpa/inet.h>
++-]],
++-[[
++-	if (inet_addr("10,5,2") == INADDR_NONE);
++-    return 0;
++-]])],
++-[have_inaddr_none="yes"],
++-[have_inaddr_none="no"])
++-AC_MSG_RESULT($have_inaddr_none)
++-if test "x$have_inaddr_none" = "xno"; then
++-	AC_DEFINE([INADDR_NONE],[-1],[For INADDR_NONE definition])
++-fi
+++have_inaddr_none="yes"
++ 
++ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
++ #include <stdio.h>
++@@ -397,21 +379,21 @@
++   fi
++ fi
++ 
++-AC_MSG_CHECKING([for pcap_lex_destroy])
++-AC_RUN_IFELSE(
++-[AC_LANG_PROGRAM(
++-[[
++-#include <pcap.h>
++-]],
++-[[
++-   pcap_lex_destroy();
++-]])],
++-[have_pcap_lex_destroy="yes"],
++-[have_pcap_lex_destroy="no"])
++-AC_MSG_RESULT($have_pcap_lex_destroy)
++-if test "x$have_pcap_lex_destroy" = "xyes"; then
++-    AC_DEFINE([HAVE_PCAP_LEX_DESTROY],[1],[Can cleanup lex buffer stack created by pcap bpf filter])
++-fi
+++#AC_MSG_CHECKING([for pcap_lex_destroy])
+++#AC_RUN_IFELSE(
+++#[AC_LANG_PROGRAM(
+++#[[
+++##include <pcap.h>
+++#]],
+++#[[
+++#   pcap_lex_destroy();
+++#]])],
+++have_pcap_lex_destroy="yes"
+++#[have_pcap_lex_destroy="no"])
+++#AC_MSG_RESULT($have_pcap_lex_destroy)
+++#if test "x$have_pcap_lex_destroy" = "xyes"; then
+++#    AC_DEFINE([HAVE_PCAP_LEX_DESTROY],[1],[Can cleanup lex buffer stack created by pcap bpf filter])
+++#fi
++ 
++ AC_MSG_CHECKING([for pcap_lib_version])
++ AC_LINK_IFELSE(
+diff --git a/meta-networking/recipes-connectivity/snort/files/snort.init b/meta-networking/recipes-connectivity/snort/files/snort.init
+new file mode 100644
+index 0000000..91cb343
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/snort/files/snort.init
+@@ -0,0 +1,109 @@
++#!/bin/sh
++#
++#   Snort Startup Script modified for OpenEmbedded
++#
++
++# Script variables
++
++LAN_INTERFACE="$2"
++RETURN_VAL=0
++BINARY=/usr/bin/snort
++PATH=/bin:/usr/bin
++PID=/var/run/snort_${LAN_INTERFACE}_ids.pid
++DEL_PID=$PID
++LOGDIR="/var/log/snort"
++DATE=`/bin/date +%Y%m%d`
++CONFIG_FILE=/etc/snort/snort.conf
++PROG=snort
++USER=root
++GROUP=root
++
++if [ ! -x "$BINARY" ]; then
++    echo "ERROR: $BINARY not found."
++    exit 1
++fi
++                                                                                
++if [ ! -r "$CONFIG_FILE" ]; then
++    echo "ERROR: $CONFIG_FILE not found."
++    exit 1
++fi
++
++start()
++{
++     
++    [ -n "$LAN_INTERFACE" ] || return 0
++    # Check if log diratory is present. Otherwise, create it.
++    if [ ! -d $LOGDIR/$DATE ]; then 
++        mkdir -d $LOGDIR/$DATE
++        /bin/chown -R $USER:$USER $LOGDIR/$DATE
++    /bin/chmod -R 700 $LOGDIR/$DATE
++    fi
++
++    /bin/echo "Starting $PROG: "
++    # Snort parameters
++    # -D Run Snort in background (daemon) mode
++    # -i <if> Listen on interface <if> 
++    # -u <uname> Run snort uid as <uname> user (or uid)
++    # -g <gname> Run snort uid as <gname> group (or gid)
++    # -c Load configuration file
++    # -N Turn off logging (alerts still work) (removed to enable logging) :)
++    # -l Log to directory
++    # -t Chroots process to directory after initialization
++    # -R <id> Include 'id' in snort_intf<id>.pid file name
++    
++    $BINARY -D -i $LAN_INTERFACE -u $USER -g $GROUP -c $CONFIG_FILE -l $LOGDIR/$DATE -t $LOGDIR/$DATE -R _ids
++    /bin/echo "$PROG startup complete."
++    return $RETURN_VAL
++}
++
++stop()
++{
++    if [ -s $PID ]; then
++        /bin/echo "Stopping $PROG with PID `cat $PID`: "
++        kill -TERM `cat $PID` 2>/dev/null
++        RETURN_VAL=$?
++        /bin/echo "$PROG shutdown complete."
++        [ -e $DEL_PID ] && rm -f $DEL_PID
++    [ -e $DEL_PID.lck ] && rm -f $DEL_PID.lck
++    else
++        /bin/echo "ERROR: PID in $PID file not found."
++        RETURN_VAL=1
++    fi
++    return $RETURN_VAL
++}
++
++status() {
++        if [ -s $PID ]; then
++                echo "$PROG is running as pid `cat $PID`:"
++        else
++                echo "$PROG is not running."
++        fi
++}
++
++restart()
++{
++    stop
++    start
++    RETURN_VAL=$?
++    return $RETURN_VAL
++}
++
++case "$1" in
++ start)
++       start
++    ;;
++ stop)
++       stop
++    ;;
++ status)
++       status
++    ;;
++ restart|reload)
++       restart
++    ;;
++ *)
++    /bin/echo "Usage: $0 {start|stop|status|restart|reload}"
++    RETURN_VAL=1
++esac
++
++exit $RETURN_VAL 
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.4.6.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.4.6.bb
+new file mode 100644
+index 0000000..829146d
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.4.6.bb
+@@ -0,0 +1,71 @@
++DESCRIPTION = "snort - a free lightweight network intrusion detection system for UNIX and Windows."
++HOMEPAGE = "http://www.snort.org/"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
++
++DEPENDS = "libpcap libpcre daq libdnet"
++
++
++SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
++            file://snort.init \
++            file://disable-inaddr-none.patch \
++            file://disable-dap-address-space-id.patch "
++
++SRC_URI[tarball.md5sum] = "4111df01a4f21bd1d328a18b76d625bd"
++SRC_URI[tarball.sha256sum] = "cfaa5390b1840aaaa68a6c05a7077dd92cb916e6186a014baa451d43cdb0b3bc"
++
++inherit autotools  gettext  update-rc.d
++
++INITSCRIPT_NAME = "snort"
++INITSCRIPT_PARAMS = "defaults"
++
++EXTRA_OECONF = " \
++	--enable-gre \    
++	--enable-linux-smp-stats \
++	--enable-reload \
++	--enable-reload-error-restart \
++	--enable-targetbased \
++	--disable-static-daq \
++	"
++
++do_install_append() {
++	install -d ${D}/${sysconfdir}/snort/rules
++	install -d ${D}/${sysconfdir}/snort/preproc_rules
++    install -d ${D}${sysconfdir}/init.d
++	for i in map config conf dtd; do
++		cp ${S}/etc/*.$i ${D}/${sysconfdir}/snort/
++	done
++	cp ${S}/preproc_rules/*.rules ${D}/${sysconfdir}/snort/preproc_rules/
++    install -m 755 ${WORKDIR}/snort.init ${D}/${sysconfdir}/init.d/snort
++	mkdir -p ${D}/${localstatedir}/log/snort
++    install -d ${D}/var/log/snort
++}
++
++FILES_${PN} += " \
++	${libdir}/snort_dynamicengine/*.so.* \
++	${libdir}/snort_dynamicpreprocessor/*.so.* \
++	${libdir}/snort_dynamicrules/*.so.* \
++	"
++FILES_${PN}-dbg += " \
++	${libdir}/snort_dynamicengine/.debug \
++	${libdir}/snort_dynamicpreprocessor/.debug \
++	${libdir}/snort_dynamicrules/.debug \
++	"
++FILES_${PN}-staticdev += " \
++	${libdir}/snort_dynamicengine/*.a \
++	${libdir}/snort_dynamicpreprocessor/*.a \
++	${libdir}/snort_dynamicrules/*.a \
++	${libdir}/snort/dynamic_preproc/*.a \
++	${libdir}/snort/dynamic_output/*.a \
++	"
++FILES_${PN}-dev += " \
++	${libdir}/snort_dynamicengine/*.la \
++	${libdir}/snort_dynamicpreprocessor/*.la \
++	${libdir}/snort_dynamicrules/*.la \
++	${libdir}/snort_dynamicengine/*.so \
++	${libdir}/snort_dynamicpreprocessor/*.so \
++	${libdir}/snort_dynamicrules/*.so \
++	${prefix}/src/snort_dynamicsrc \
++	"
++
++RRECOMMENDS_${PN} += "barnyard2"
+-- 
+1.7.5.4
+
 
 
