@@ -1,35 +1,36 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E64A6CCC9
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id D1FB36CCC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2013 17:22:43 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id z12so4328800wgg.0
+	Fri,  1 Nov 2013 17:48:10 +0000 (UTC)
+Received: by mail-we0-f175.google.com with SMTP id t61so4220471wes.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2013 10:22:44 -0700 (PDT)
+	Fri, 01 Nov 2013 10:48:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=j+lBwPfoLU3FnNheASLV2j1Gke+kNt2AqbDpgtEvM1Q=;
-	b=Xaj15j6YqOH1+VnBD+iG5cCp5Xjr9qXg2GGgNs+YrOdhXpN87LhdzINuvdX3ZJsFIu
-	X4lZXagLOq4Ba7vXE2CFlAjxYv4qARhaK1lqGcL4jHnai+SVqFeoEq5VR0t/FtCizZyw
-	R7D9GZviURuX/BeQ236lLQPRgFZXlQmrG4nj4spBusnI0bP8dzTeR01WW7iF4l5a4/Um
-	PQZVJaAe12ffovMG9kkiCq6M+bzFj2pXJ6l8tr5XDhgDtSNYvZ04MJv2MqqYkHaQ4uxm
-	JVhF5vh31NVX1qkaEFuC5NhwDdbTTMQVq4F3FZah3GFnqeQ5mIwJgKnPVDcxVZN9SBKh
-	TP+g==
-X-Gm-Message-State: ALoCoQmr1qMpGpOA6AKYvVB3AnEY8rzDydMlrAKjei4/3CaFqr7NhM7pUPiK43hYE+yEIhqimo/6
-X-Received: by 10.180.94.38 with SMTP id cz6mr3212946wib.27.1383326564377;
-	Fri, 01 Nov 2013 10:22:44 -0700 (PDT)
+	bh=velIoU7N4DtmOrzLm8J0W8QWDdZhXhQOWxxopKAFzsU=;
+	b=mdY/k8eW/qgb3xtqcEE/K9A6TVP1a8PFFvY/vlxAlr465LJ97XSbOpwvlWMRk1vvOE
+	pgt32XMVmXIUVGxjz5qm/lwyrC74f4PDBqsWRxxx/kBWzsZb3XecUfE7e8+lrJWIoQlg
+	/iNTJZu4hTUVHmX5Zsd8VKg8pICVkX//9KtPDulaSd2QByosuEqjDfvwIJ2ngOQ24p9E
+	R7YjI/LjB+kVGDvdMqVciZMSxRrg+y+MCEkxJpEeI7Ln92J5mzA94iIi1hRI2vg7HGlr
+	CkUhjx4Jq1DFRmbT0wlKjZbKUqMW5RrMhLJjRbgebb7ulmjZsvULNT9hY1fOmXQI9yq4
+	Xpbw==
+X-Gm-Message-State: ALoCoQnKM8rCCh1FKlulkFyZl1cykIrmfx7qAPaVzHT/POlXKU2oLs19tJGX0STkIN/OSrCvLaQq
+X-Received: by 10.180.78.165 with SMTP id c5mr3337579wix.3.1383328092250;
+	Fri, 01 Nov 2013 10:48:12 -0700 (PDT)
 Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPSA id gg20sm8227675wic.1.2013.11.01.10.22.43
+	by mx.google.com with ESMTPSA id td6sm9582230wic.10.2013.11.01.10.48.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Nov 2013 10:22:43 -0700 (PDT)
+	Fri, 01 Nov 2013 10:48:11 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Nov 2013 17:22:38 +0000
-Message-Id: <1383326558-24008-1-git-send-email-ross.burton@intel.com>
+Date: Fri,  1 Nov 2013 17:48:07 +0000
+Message-Id: <1383328087-1610-1-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH] python-mako: use BBCLASSEXTEND instead of native recipe
+Subject: [meta-oe][PATCH] mesa-glut: add Mesa's OpenGL Utility Toolkit implementation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2013 17:22:43 -0000
-
-There isn't a need for a separate native recipe, so use BBCLASSEXTEND and
-overrides.
+X-List-Received-Date: Fri, 01 Nov 2013 17:48:11 -0000
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb |    5 -----
- meta-oe/recipes-devtools/python/python-mako_0.7.2.bb        |    3 +++
- 2 files changed, 3 insertions(+), 5 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
+ meta-oe/licenses/Kilgard                         |    5 +++++
+ meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb |   14 ++++++++++++++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-oe/licenses/Kilgard
+ create mode 100644 meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
 
-diff --git a/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
-deleted file mode 100644
-index 05479db..0000000
---- a/meta-oe/recipes-devtools/python/python-mako-native_0.7.2.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require python-mako_${PV}.bb
--inherit native pythonnative
--
--DEPENDS = "python-native"
--RDEPENDS_${PN} = ""
-diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-index 9e381f3..1d2bdd7 100644
---- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-@@ -17,3 +17,6 @@ RDEPENDS_${PN} = "python-threading \
-                   python-netclient \
-                   python-html \
- "
-+RDEPENDS_${PN}_class-native = ""
+diff --git a/meta-oe/licenses/Kilgard b/meta-oe/licenses/Kilgard
+new file mode 100644
+index 0000000..8836db1
+--- /dev/null
++++ b/meta-oe/licenses/Kilgard
+@@ -0,0 +1,5 @@
++Copyright (c) Mark J. Kilgard, 1994, 1995, 1996, 1998.
 +
-+BBCLASSEXTEND = "native nativesdk"
++This program is freely distributable without licensing fees  and is
++provided without guarantee or warrantee expressed or  implied. This
++program is -not- in the public domain.
+diff --git a/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb b/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
+new file mode 100644
+index 0000000..7006b41
+--- /dev/null
++++ b/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "OpenGL Utility Toolkit"
++LICENSE = "Kilgard"
++LIC_FILES_CHKSUM = "file://include/GL/glut.h;md5=4aab626c830aed79d7b2e5a76dfa2dd6;startline=4;endline=8"
++
++SRC_URI = "git://anongit.freedesktop.org/mesa/glut"
++
++SRCREV = "ee89e9aeb49604b036e06f1df6478d32006b30cd"
++PV = "8.0.0+git${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu"
 -- 
 1.7.10.4
 
