@@ -1,19 +1,38 @@
-Return-Path: <joe@deserted.net>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EEA636AD31
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2013 18:24:34 +0000 (UTC)
-Received: from yow-assmunch-03.corp.ad.wrs.com (yow-jmacdona-d3.wrs.com
-	[128.224.147.66])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id rA1IOa7d015147
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Nov 2013 11:24:36 -0700 (PDT)
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Nov 2013 14:24:36 -0400
-Message-Id: <1383330276-16354-1-git-send-email-joe@deserted.net>
-X-Mailer: git-send-email 1.8.4
-Subject: [meta-networking][v2][PATCH] autofs: correct QA issues with orphaned systemd files
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-la0-f43.google.com (mail-la0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AAF96D572;
+	Sat,  2 Nov 2013 17:19:06 +0000 (UTC)
+Received: by mail-la0-f43.google.com with SMTP id el20so4362054lab.30
+	for <multiple recipients>; Sat, 02 Nov 2013 10:19:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=C/iSgjexv9zHNOkknlONo/XXyqOJqgMhAGVSOu7CPbE=;
+	b=EGwwiDnThauO44vMwqbk1qES/8WLR2+az6F+FtnxrLzZQ/iYbKi+yfD+8CBh8tY2zE
+	hL9QddkRsm01ItN3I3oogPCUDCxigF2FFI4sB7XypUSaFnbYCeBo1duRE16cd84kDqaf
+	68KOAF/fWXqgu9szpplQMdWfkFPSNm79ODQ5AD0VAZcrBQ2Q1jsJ7gkTPRNs5dZAd0xN
+	1QAcAK32gBkpH+Mp+y//F0ZBch5QC87uvYDyn3OVxRt5UKd7M8S8cmx5WfTdcYfaR2Wo
+	lCXZStpJ+/yYxEGxu2RE4BL/9VmpiT3Pd5lHDbJdjfQ10DQqcH65BQwKtoni9/23G+gH
+	0hTA==
+MIME-Version: 1.0
+X-Received: by 10.112.72.100 with SMTP id c4mr272182lbv.57.1383412746806; Sat,
+	02 Nov 2013 10:19:06 -0700 (PDT)
+Received: by 10.112.52.74 with HTTP; Sat, 2 Nov 2013 10:19:06 -0700 (PDT)
+In-Reply-To: <CAAQYJAsfcQrWfmYvr+sZfcciDpmSry0U2L3tBBQ9Z=HZLJyJvA@mail.gmail.com>
+References: <20131027112740.5FC1D50317@opal>
+	<CAAQYJAsn6i10jVbwSYV8Y+5ZhEiwOMa3RpoSHokZq1v2ormfNg@mail.gmail.com>
+	<CAMKF1soTqU9Gd1oX1nTsRwu6ARBF=MrS8KsTHdSd6q4c3MgUZw@mail.gmail.com>
+	<CAAQYJAtNBaHw=BKHytDHJ3W2NBMU=oCFniAYie7mSkTpeKkM9Q@mail.gmail.com>
+	<CAAQYJAsfcQrWfmYvr+sZfcciDpmSry0U2L3tBBQ9Z=HZLJyJvA@mail.gmail.com>
+Date: Sat, 2 Nov 2013 18:19:06 +0100
+Message-ID: <CAAQYJAty0bE=o+1RTEs1ytjNGk1W6DK2rvSxciRQx_hGSrPu8w@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [oe-commits] Laurentiu Palcu : m4: upgrade to 1.4.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,115 +46,197 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2013 18:24:35 -0000
+X-List-Received-Date: Sat, 02 Nov 2013 17:19:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-If we build a project without systemd support on a system that has systemd
-enabled, the following QA items get flagged:
+On Thu, Oct 31, 2013 at 6:50 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> On Thu, Oct 31, 2013 at 6:22 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>> On Thu, Oct 31, 2013 at 4:25 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> Andreas
+>>>
+>>> Can you replace remove-gets.patch with the one here
+>>>
+>>> http://paste.ubuntu.com/6333696/
+>>>
+>>> and see if it helps ?
+>>>
+>>> -khem
+>>>
+>>
+>> I've tried but with same results.
+>> Howerver this was doing an incremental build.
+>>
+>> I'm happy to say the issue has disappeared after cleaning all and
+>> rebuilding from scratch.
+>>
+>>  ...
+>> checking for sigaltstack... yes
+>>  ...
+>>
+>> Sorry for the noise and thanks.
+>>
+>> Andrea
+>>
+>
+> Well, I spoke too soon (Halloween party calling...)
+> I was building from scratch with the patch reverted.
+>
+> So, yes, on Gentoo 32bit 0: m4-native-1.4.17-r0 do_configure stalls
+> forever on "checking for sigaltstack...".
+> This with the modified patch as well.
+>
+> Sorry to report...
+>
+> Cheers
+> Andrea
+>
 
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/autofs.service
+Further testing after rebuilding/reemerging Gentoo: m4-native_1.4.17
+does now configure and compile.
+The nerw issue is gettext-native:
 
-Trying to keep the solution to the problem as contained as possible in a
-way that may be accepted up-stream by adding an optional parameter to the
---with-systemd flag.
+| DEBUG: Executing shell function do_configure
+| This Perl not built to support threads
+| Compilation failed in require at
+/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/bin/automake line
+138.
 
-Signed-off-by: Joe MacDonald <joe@deserted.net>
----
+So all was originated by perl on buildhost compiled without threads.
 
-Corrected version.  Basically this problem appeared if I built on a
-systemd-system for a system without systemd in DISTRO_FEATURES.  Autodetection
-was still half-happening.
+Cheers
 
- ...emd-allow-with-systemd-to-take-a-path-arg.patch | 47 ++++++++++++++++++++++
- .../recipes-daemons/autofs/autofs_5.0.7.bb         |  4 +-
- 2 files changed, 49 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs-5.0.7/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
+Andrea
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs-5.0.7/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
-new file mode 100644
-index 0000000..742f25d
---- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs-5.0.7/0001-systemd-allow-with-systemd-to-take-a-path-arg.patch
-@@ -0,0 +1,47 @@
-+From 40971911d653bf53de295d7462c643e4073916b9 Mon Sep 17 00:00:00 2001
-+From: Joe MacDonald <joe@deserted.net>
-+Date: Fri, 1 Nov 2013 12:47:18 -0400
-+Subject: [PATCH] systemd: allow --with-systemd to take a path arg
-+
-+If building for a cross-compile environment with systemd it is convenient
-+to be able to specify a systemd path for the target that may not be the
-+same as that on the host.
-+
-+Upstream-status: Submitted [http://www.spinics.net/lists/autofs/msg00740.html]
-+
-+Signed-off-by: Joe MacDonald <joe@deserted.net>
-+---
-+ aclocal.m4 |   10 ++++++++--
-+ 1 file changed, 8 insertions(+), 2 deletions(-)
-+
-+diff --git a/aclocal.m4 b/aclocal.m4
-+index 3e6f223..105e3e9 100644
-+--- a/aclocal.m4
-++++ b/aclocal.m4
-+@@ -229,8 +229,10 @@ dnl Check the location of the systemd unit files directory
-+ dnl --------------------------------------------------------------------------
-+ AC_DEFUN([AF_WITH_SYSTEMD],
-+ [AC_ARG_WITH(systemd,
-+-[  --with-systemd         install systemd unit file if systemd unit directory
-+-			  is found on system],
-++[  --with-systemd@<:@=systemddir@:>@  install systemd unit file.  If 'yes'
-++			  probe the system for unit directory.
-++			  If a path is specified, assume that
-++			  is a valid install path.],
-+ [if test "$withval" = yes; then
-+   if test -z "$systemddir"; then
-+     AC_MSG_CHECKING([location of the systemd unit files directory])
-+@@ -247,6 +249,10 @@ AC_DEFUN([AF_WITH_SYSTEMD],
-+   else
-+     AC_MSG_RESULT(not found)
-+   fi
-++else
-++ if test "$withval" != no; then
-++  systemddir=$withval
-++ fi
-+ fi])
-+ ])
-+ 
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-index c4eea31..54e89f5 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -60,6 +60,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
-            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
-            file://fix_disable_ldap.patch \
-            file://autofs-5.0.7-fix-lib-deps.patch \
-+           file://0001-systemd-allow-with-systemd-to-take-a-path-arg.patch \
- "
- 
- SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
-@@ -73,7 +74,7 @@ INITSCRIPT_PARAMS = "defaults"
- # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
- CFLAGS += "${LDFLAGS}"
- 
--PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
-+PACKAGECONFIG[systemd] = "--with-systemd=${systemd_unitdir}/system,--without-systemd,systemd"
- 
- PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- 
-@@ -85,7 +86,6 @@ EXTRA_OECONF += "--disable-mount-locking \
- "
- CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
-                         ac_cv_path_RPCGEN=rpcgen \
--                        systemddir=${systemd_unitdir}/system \
- "
- 
- do_configure_prepend () {
--- 
-1.8.4
 
+>
+>>
+>>
+>>
+>>> On Wed, Oct 30, 2013 at 1:08 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>>>> On Sun, Oct 27, 2013 at 12:27 PM,  <git@git.openembedded.org> wrote:
+>>>>> Module: openembedded-core.git
+>>>>> Branch: master
+>>>>> Commit: b7505d7c279888bd1675c1a8387edcf87cae8aac
+>>>>> URL:    http://git.openembedded.org/?p=openembedded-core.git&a=commit;h=b7505d7c279888bd1675c1a8387edcf87cae8aac
+>>>>>
+>>>>> Author: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>>>>> Date:   Wed Oct 16 14:59:35 2013 +0300
+>>>>>
+>>>>> m4: upgrade to 1.4.17
+>>>>>
+>>>>> Refreshed remove-gets.patch to apply correctly and changed license
+>>>>> checksum since some years were added to the license file.
+>>>>>
+>>>>> Signed-off-by: Laurentiu Palcu <laurentiu.palcu@intel.com>
+>>>>> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>>>>>
+>>>>> ---
+>>>>>
+>>>>>  meta/recipes-devtools/m4/m4-1.4.16.inc             |   16 ----------------
+>>>>>  meta/recipes-devtools/m4/m4-1.4.17.inc             |   13 +++++++++++++
+>>>>>  .../{m4-native_1.4.16.bb => m4-native_1.4.17.bb}   |    0
+>>>>>  meta/recipes-devtools/m4/m4/remove-gets.patch      |   18 ++++++++++--------
+>>>>>  .../m4/{m4_1.4.16.bb => m4_1.4.17.bb}              |    0
+>>>>>  5 files changed, 23 insertions(+), 24 deletions(-)
+>>>>>
+>>>>> diff --git a/meta/recipes-devtools/m4/m4-1.4.16.inc b/meta/recipes-devtools/m4/m4-1.4.16.inc
+>>>>> deleted file mode 100644
+>>>>> index 01016d6..0000000
+>>>>> --- a/meta/recipes-devtools/m4/m4-1.4.16.inc
+>>>>> +++ /dev/null
+>>>>> @@ -1,16 +0,0 @@
+>>>>> -require m4.inc
+>>>>> -
+>>>>> -LICENSE = "GPLv3"
+>>>>> -
+>>>>> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>>>>> -                   file://examples/COPYING;md5=fbc986d45b3dae6725c29870dd6b669d"
+>>>>> -
+>>>>> -PR = "r4"
+>>>>> -SRC_URI += "file://ac_config_links.patch \
+>>>>> -            file://remove-gets.patch \
+>>>>> -           "
+>>>>> -
+>>>>> -SRC_URI[md5sum] = "a5dfb4f2b7370e9d34293d23fd09b280"
+>>>>> -SRC_URI[sha256sum] = "e9176a35bb13a1b08482359aa554ee8072794f58f00e4827bf0e06b570c827da"
+>>>>> -
+>>>>> -
+>>>>> diff --git a/meta/recipes-devtools/m4/m4-1.4.17.inc b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>>>>> new file mode 100644
+>>>>> index 0000000..790678e
+>>>>> --- /dev/null
+>>>>> +++ b/meta/recipes-devtools/m4/m4-1.4.17.inc
+>>>>> @@ -0,0 +1,13 @@
+>>>>> +require m4.inc
+>>>>> +
+>>>>> +LICENSE = "GPLv3"
+>>>>> +
+>>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504\
+>>>>> +                   file://examples/COPYING;md5=4031593b2166d6c47cae282d944a7ede"
+>>>>> +
+>>>>> +SRC_URI += "file://ac_config_links.patch \
+>>>>> +            file://remove-gets.patch \
+>>>>> +           "
+>>>>> +
+>>>>> +SRC_URI[md5sum] = "a5e9954b1dae036762f7b13673a2cf76"
+>>>>> +SRC_URI[sha256sum] = "3ce725133ee552b8b4baca7837fb772940b25e81b2a9dc92537aeaf733538c9e"
+>>>>> diff --git a/meta/recipes-devtools/m4/m4-native_1.4.16.bb b/meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>>>>> similarity index 100%
+>>>>> rename from meta/recipes-devtools/m4/m4-native_1.4.16.bb
+>>>>> rename to meta/recipes-devtools/m4/m4-native_1.4.17.bb
+>>>>> diff --git a/meta/recipes-devtools/m4/m4/remove-gets.patch b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>>>> index 9c396d9..effb353 100644
+>>>>> --- a/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>>>> +++ b/meta/recipes-devtools/m4/m4/remove-gets.patch
+>>>>> @@ -4,18 +4,20 @@ undefining it.
+>>>>>
+>>>>>  Upstream-Status: Pending
+>>>>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>>> -Index: m4-1.4.16/lib/stdio.in.h
+>>>>> +Index: m4-1.4.17/lib/stdio.in.h
+>>>>>  ===================================================================
+>>>>> ---- m4-1.4.16.orig/lib/stdio.in.h      2011-03-01 08:39:29.000000000 -0800
+>>>>> -+++ m4-1.4.16/lib/stdio.in.h   2012-07-03 08:32:08.145935928 -0700
+>>>>> -@@ -161,8 +161,10 @@
+>>>>> +--- m4-1.4.17.orig/lib/stdio.in.h      2013-10-16 14:41:01.678496227 +0300
+>>>>> ++++ m4-1.4.17/lib/stdio.in.h   2013-10-16 14:41:48.849427839 +0300
+>>>>> +@@ -717,10 +717,12 @@
+>>>>>   /* It is very rare that the developer ever has full control of stdin,
+>>>>> -    so any use of gets warrants an unconditional warning.  Assume it is
+>>>>> -    always declared, since it is required by C89.  */
+>>>>> +    so any use of gets warrants an unconditional warning; besides, C11
+>>>>> +    removed it.  */
+>>>>>  +#if defined gets
+>>>>>   #undef gets
+>>>>> + #if HAVE_RAW_DECL_GETS
+>>>>>   _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
+>>>>> + #endif
+>>>>>  +#endif
+>>>>>
+>>>>> - #if @GNULIB_FOPEN@
+>>>>> - # if @REPLACE_FOPEN@
+>>>>> +
+>>>>> + #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
+>>>>> diff --git a/meta/recipes-devtools/m4/m4_1.4.16.bb b/meta/recipes-devtools/m4/m4_1.4.17.bb
+>>>>> similarity index 100%
+>>>>> rename from meta/recipes-devtools/m4/m4_1.4.16.bb
+>>>>> rename to meta/recipes-devtools/m4/m4_1.4.17.bb
+>>>>>
+>>>>> _______________________________________________
+>>>>> Openembedded-commits mailing list
+>>>>> Openembedded-commits@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>>>>
+>>>> This patch breaks the build of m4-native on Gentoo, it stalls on do_configure:
+>>>>
+>>>>  checking whether sigaltstack...
+>>>>
+>>>>
+>>>> Cheers
+>>>>
+>>>> Andrea
+>>>> _______________________________________________
+>>>> Openembedded-core mailing list
+>>>> Openembedded-core@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
