@@ -1,26 +1,31 @@
-Return-Path: <tobias.henkel@oss.bmw-carit.de>
-Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A12F6CA7E
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id F14A36BE6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2013 15:43:30 +0000 (UTC)
-Received: from duffman.bmw-carit.intra (duffman.bmw-carit.intra
-	[192.168.101.67])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: tobias.henkel)
-	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 664C540016
+	Mon,  4 Nov 2013 16:44:44 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgfinance.com) with ESMTP id 1B52C7240D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2013 15:15:23 +0100 (CET)
-Message-ID: <5277C0A2.407@oss.bmw-carit.de>
-Date: Mon, 04 Nov 2013 16:43:30 +0100
-From: Tobias Henkel <tobias.henkel@oss.bmw-carit.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+	Mon,  4 Nov 2013 17:44:44 +0100 (CET)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0158.001; Mon, 4 Nov 2013 17:44:44 +0100
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Pb compilation with BB_NUMBER_THREADS != 1
+Thread-Index: Ac7ZfSkEPoMMXLdQT8GPRy5WLZp9zQ==
+Date: Mon, 4 Nov 2013 16:44:42 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA06003FE2@SEXCHANGE0100.lpg.priv>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.30]
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
-In-Reply-To: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
-Subject: ruby-native problem (on dylan)
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeeiledrheefucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
+Subject: Pb compilation with BB_NUMBER_THREADS != 1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,80 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 15:43:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Nov 2013 16:44:46 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+I'm on a virtual Ubuntu 12.04 server, 16 cores, 8Go RAM free frequency (max=
+ =3D 163840MHz)
 
-On 10/04/2013 10:09 AM, Nicolas Dechesne wrote:
-> hi,
->
-> we got some build failures in our autobuilders last night, which
-> seemed to be related to ruby-native. We use dylan, but I believe the
-> same problem is there in master/dora too.
->
-> The exact build error was in qtwebkit do_compile:
->
-> ruby /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_cloud/machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-gnueabi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScriptCore/offlineasm/generate_offset_extractor.rb
-> /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_cloud/machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-gnueabi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScriptCore/llint/LowLevelInterpreter.asm
-> LLIntDesiredOffsets.h
->
-> <internal:gem_prelude>:1:in `require': cannot load such file --
-> rubygems.rb (LoadError)
-> from <internal:gem_prelude>:1:in `<compiled>'
->
-> Yesterday I had 'moved' our BUILDDIR location. However for every build, we:
->   - delete the TMPDIR completely
->   - reuse our sstate
->
-> The problem seems to be that 'ruby' has hard coded paths in the
-> binary. This is discussed in [1] or more at length in [2], and easy to
-> check:
->
-> $ strings tmp/sysroots/x86_64-linux/usr/bin/ruby | grep project
-> /work/project/build/tmp/sysroots/x86_64-linux/usr
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby/x86_64-linux
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby/x86_64-linux
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/share/rubygems
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby
-> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/x86_64-linux
->
-> So, the 'ruby' binary which was in the sstate, knew about the *old*
-> paths. When building today, ruby was pulled from sstate, but TMPDIR
-> has changed now, and the hardcoded paths no longer exists, leading to
-> the build failure.
->
-> I verified that the following 'solved' the build issue:
-> $ bitbake -c cleansstate ruby-native
-> $ bitbake ruby-native
-> $ bitbake qtwebkit
->
-> There seems to be a configure option, --enable-load-relative, after
-> using this option in ruby build, still ruby fails to start for the
-> same reason. I might have done something wrong, but i wanted to bring
-> it on the list, to see if anyone has a better solution, as it seems
-> like a big issue.
-I saw the same issue in my setup and looked a bit deeper into it.
-The patch "ruby-1.9.3-custom-rubygems-location.patch" seems to break 
---enable-load-relative.
-When I remove this patch and add "--enable-load-relative" then ruby 
-starts without an error. But this has the side effect that the rubygems 
-directory is /usr/lib/ruby/rubygems instead of /usr/share/rubygems 
-inside the sysroot. I don't know if this matters. Would it break 
-anything else?
->
-> thanks
->
-> nicolas
->
->
-> [1] http://stackoverflow.com/questions/10221387/moving-ruby-installation-causes-it-to-not-function-how-to-get-around-this
-> [2] http://yehudakatz.com/2012/06/
->
+With BB_NUMBER_THREADS =3D '1', the entire project is successfully build in=
+ 12h30.
 
-Best Regards
-Tobias
+With BB_NUMBER_THREADS =3D '4' (same result with 12)
+
+| LD_LIBRARY_PATH=3D/home/xxxxxxxxxxbuild/tmp-angstrom_v2012_05-eglibc/work=
+/x86_64-linux/perl-native-5.14.2-r0/perl-5.14.2:/home/xxxxxxxxxxbuild/tmp-a=
+ngstrom_v2012_05-eglib
+c/sysroots/x86_64-linux/usr/bin/../lib/pseudo/lib:/home/xxxxxxxxxxbuild/tmp=
+-angstrom_v2012_05-eglibc/sysroots/x86_64-linux/usr/bin/../lib/pseudo/lib64=
+  ./perl -f -Ilib pod/buildtoc --
+build-toc -q
+|
+|       Making x2p stuff
+| make[1]: Entering directory `/home/xxxxxxxxxxbuild/tmp-angstrom_v2012_05-=
+eglibc/work/x86_64-linux/perl-native-5.14.2-r0/perl-5.14.2/x2p'
+|
+| make[1]: Leaving directory `/home/xxxxxxxxxxbuild/tmp-angstrom_v2012_05-e=
+glibc/work/x86_64-linux/perl-native-5.14.2-r0/perl-5.14.2/x2p'
+| pod/buildtoc: no pods at pod/buildtoc line 305.
+| make: *** [pod/perltoc.pod] Error 255
+| ERROR: oe_runmake failed
+NOTE: package perl-native-5.14.2-r0: task do_compile: Failed
+NOTE: package perl-5.14.2-r6: task do_fetch: Started
+NOTE: package perl-5.14.2-r6: task do_fetch: Succeeded
+ERROR: Task 1239 (/home/xxxxxxxxxxsources/openembedded-core/meta/recipes-de=
+vtools/perl/perl-native_5.14.2.bb, do_compile) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 4055 tasks of which 4053 didn't need to be r=
+erun and 1 failed.
+
+Summary: 1 task failed:
+  /home/xxxxxxxxxxsources/openembedded-core/meta/recipes-devtools/perl/perl=
+-native_5.14.2.bb, do_compile
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+Known problem ?
+Any solution ?
+
+Thanks
+Daniel.
+
 
