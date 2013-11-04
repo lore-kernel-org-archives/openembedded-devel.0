@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 998CE6AF66
+Return-Path: <Bruce.Ashfield@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 07D096D290
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2013 03:31:47 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id rA43VlXp014021
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 3 Nov 2013 19:31:47 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Sun, 3 Nov 2013 19:31:46 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Nov 2013 11:31:50 +0800
-Message-ID: <1383535910-1944-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Mon,  4 Nov 2013 05:49:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id rA45nhig014317
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 3 Nov 2013 21:49:43 -0800 (PST)
+Received: from yow-bashfiel-d3.corp.ad.wrs.com (128.224.130.89) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Sun, 3 Nov 2013 21:49:43 -0800
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+To: <joe@deserted.net>
+Date: Mon, 4 Nov 2013 00:49:40 -0500
+Message-ID: <1383544182-12671-1-git-send-email-bruce.ashfield@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
 MIME-Version: 1.0
-Subject: [PATCH meta-networking] quagga: backport a patch from 0.99.22 to fix "no ip address" command
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH 0/2]: meta-virtualization derived updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,103 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 03:31:48 -0000
+X-List-Received-Date: Mon, 04 Nov 2013 05:49:43 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+Joe,
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- ...ingering-IP-address-after-deletion-BZ-486.patch |   64 ++++++++++++++++++++
- .../recipes-protocols/quagga/quagga_0.99.21.bb     |    3 +-
- 2 files changed, 66 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/quagga/files/lingering-IP-address-after-deletion-BZ-486.patch
+Here are a couple of changes that I've pulled out of the various layers that
+I've been testing and looking after.
 
-diff --git a/meta-networking/recipes-protocols/quagga/files/lingering-IP-address-after-deletion-BZ-486.patch b/meta-networking/recipes-protocols/quagga/files/lingering-IP-address-after-deletion-BZ-486.patch
-new file mode 100644
-index 0000000..42bdc20
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/lingering-IP-address-after-deletion-BZ-486.patch
-@@ -0,0 +1,64 @@
-+From 7f062c217b262e362a3362c677dea6c5e820adf1 Mon Sep 17 00:00:00 2001
-+From: David Lamparter <equinox@diac24.net>
-+Date: Mon, 1 Feb 2010 16:41:26 +0100
-+Subject: [PATCH] zebra: lingering IP address after deletion (BZ#486)
-+
-+Upstream-status: Backport
-+
-+zebra address bookkeeping is a mess. this is just a workaround to have
-+IPv4 address deletion somewhat working on Linux.
-+
-+the if_unset_prefix call is synchronous, when it returns success the
-+address deletion completed successfully. this is either signaled by a
-+netlink ACK or by an OK return value from ioctl().
-+
-+This version is wrapped by #ifdef HAVE_NETLINK so we don't touch the
-+BSDs for now.
-+
-+* zebra/interface.c: On Linux, update zebra internal state after
-+  deleting an address.
-+
-+Signed-off-by: David Lamparter <equinox@opensourcerouting.org>
-+---
-+ zebra/interface.c |   21 ++++++++++++++++++---
-+ 1 file changed, 18 insertions(+), 3 deletions(-)
-+
-+diff --git a/zebra/interface.c b/zebra/interface.c
-+index 2242259..3578b79 100644
-+--- a/zebra/interface.c
-++++ b/zebra/interface.c
-+@@ -1297,13 +1297,28 @@ ip_address_uninstall (struct vty *vty, struct interface *ifp,
-+ 	       safe_strerror(errno), VTY_NEWLINE);
-+       return CMD_WARNING;
-+     }
-++  /* success! call returned that the address deletion went through.
-++   * this is a synchronous operation, so we know it succeeded and can
-++   * now update all internal state. */
-++
-++  /* the HAVE_NETLINK check is only here because, on BSD, although the
-++   * call above is still synchronous, we get a second confirmation later
-++   * through the route socket, and we don't want to touch that behaviour
-++   * for now.  It should work without the #ifdef, but why take the risk...
-++   * -- equinox 2012-07-13 */
-++#ifdef HAVE_NETLINK
-++
-++  /* Remove connected route. */
-++  connected_down_ipv4 (ifp, ifc);
-+ 
-+-#if 0
-+   /* Redistribute this information. */
-+   zebra_interface_address_delete_update (ifp, ifc);
-+ 
-+-  /* Remove connected route. */
-+-  connected_down_ipv4 (ifp, ifc);
-++  /* IP address propery set. */
-++  UNSET_FLAG (ifc->conf, ZEBRA_IFC_REAL);
-++
-++  /* remove from interface, remark secondaries */
-++  if_subnet_delete (ifp, ifc);
-+ 
-+   /* Free address information. */
-+   listnode_delete (ifp->connected, ifc);
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-index 2b46930..10740bc 100644
---- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-+++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-@@ -2,7 +2,8 @@ require quagga.inc
- 
- PR = "${INC_PR}.0"
- 
--SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch"
-+SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
-+            file://lingering-IP-address-after-deletion-BZ-486.patch"
- 
- SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
- SRC_URI[quagga-0.99.21.sha256sum] = "9b8aea9026b4771a28e254a66cbd854723bcd0d71eebd0201d11838d4eb392ee"
+One is an uprev to dnsmasq to 2.63, and the other is a recipe from meta-virtualization
+that is a better fit in meta-networking.
+
+I tweaked both the recipes slightly as part of updating them for submission to
+meta-networking, and documented the tweaks in the patches themselves. 
+
+Anyway, have a look, and let me know what additional changes you'd like made
+to the recipes.
+
+Cheers,
+
+Bruce
+
+
+Bruce Ashfield (2):
+  dnsmasq: uprev to 2.6.3
+  netcf: move from meta-virtualization to meta-networking
+
+ .../recipes-support/dnsmasq/dnsmasq.inc            |  8 +++++++
+ .../recipes-support/dnsmasq/dnsmasq_2.55.bb        |  6 ------
+ .../recipes-support/dnsmasq/dnsmasq_2.63.bb        |  4 ++++
+ meta-networking/recipes-support/netcf/netcf_git.bb | 25 ++++++++++++++++++++++
+ 4 files changed, 37 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.55.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+ create mode 100644 meta-networking/recipes-support/netcf/netcf_git.bb
+
 -- 
-1.7.10.4
+1.8.1.2
 
 
