@@ -1,26 +1,32 @@
-Return-Path: <Bruce.Ashfield@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3416F6D290
+Return-Path: <p.patat@gmail.com>
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 381C66D290
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2013 05:52:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id rA45q5Kp014607
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  4 Nov 2013 09:59:06 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id x12so1791683wgg.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 3 Nov 2013 21:52:05 -0800 (PST)
-Received: from yow-bashfiel-d3.corp.ad.wrs.com (128.224.130.89) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Sun, 3 Nov 2013 21:52:05 -0800
-From: Bruce Ashfield <bruce.ashfield@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Nov 2013 00:52:04 -0500
-Message-ID: <1383544324-12917-2-git-send-email-bruce.ashfield@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1383544324-12917-1-git-send-email-bruce.ashfield@windriver.com>
-References: <1383544324-12917-1-git-send-email-bruce.ashfield@windriver.com>
+	Mon, 04 Nov 2013 01:59:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:from:date:message-id:subject:to:content-type;
+	bh=f5Z5ZhnVA7Du6FckgSRdi+emAX5vw04bhGuhPRcEm+8=;
+	b=eh+p9WGMcoei1BQtx0Wpcw8bptp7mavgRZKdXU7IL1meRzICyoETSyU7AMcTYLcitq
+	WKtY/MLBcjf5ji+HaXR9yCIv9IIw5OPPubsU9pGCLQG4R1RzvS0DzP/rjv5sE7HDaZNn
+	AjvGdWJP8/MJl8wM32tPHGKuqTQOAR5hIbHbL8pks11o0j6gI1izIkV7zqOt2wLKhcWe
+	GLyC8tkN1Q/XxUzTSDEVcKIB2KPm0+92PAwQVENx0jYjCTvFiu0n5zAAE4Al6hEBffd5
+	EnbdW3jlfF7rfIHNWB20zuquSo/4mwitkeFiTvLB6/SK8Sfm77pKrvh39T7jEsY7tB+y
+	gcWA==
+X-Received: by 10.180.231.6 with SMTP id tc6mr11820127wic.59.1383559146888;
+	Mon, 04 Nov 2013 01:59:06 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] python-greenlet: uprev to 0.4.1
+Sender: p.patat@gmail.com
+Received: by 10.194.9.33 with HTTP; Mon, 4 Nov 2013 01:58:46 -0800 (PST)
+From: patrick patat <patrick.patat@innotis.org>
+Date: Mon, 4 Nov 2013 10:58:46 +0100
+X-Google-Sender-Auth: B2TrQ_lhAcvKs7VRRPICn_L8B3Q
+Message-ID: <CAF+NyK4VcBrm7TNwPZdjzC1t0ma9VgCf+j31DSwD4S63z6T2-Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-multimedia][dora] backport request libao patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,40 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 05:52:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 Nov 2013 09:59:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-During runtime testing of meta-cloud-services several python scripts were
-continunously segfaulting the interpreter. corefiles and gdb pointed at
-the greenlet implementation.
+Hello,
 
-Moving to 0.4.1 fixed the segfaults, and showed no regressions.
+Is it possible to backport this patch
+http://cgit.openembedded.org/meta-openembedded/commit/?id=153372542a75625cda97b864afc25b3cac54772d
+to
+dora?
+Without this we can't install libao plugins.
 
-Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
----
- .../python/{python-greenlet_0.3.4.bb => python-greenlet_0.4.1.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-greenlet_0.3.4.bb => python-greenlet_0.4.1.bb} (76%)
+Thanks,
 
-diff --git a/meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb b/meta-oe/recipes-devtools/python/python-greenlet_0.4.1.bb
-similarity index 76%
-rename from meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb
-rename to meta-oe/recipes-devtools/python/python-greenlet_0.4.1.bb
-index 4a240fa..a6db8ab 100644
---- a/meta-oe/recipes-devtools/python/python-greenlet_0.3.4.bb
-+++ b/meta-oe/recipes-devtools/python/python-greenlet_0.4.1.bb
-@@ -5,8 +5,8 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
- SRC_URI = "http://pypi.python.org/packages/source/g/greenlet/greenlet-${PV}.zip"
--SRC_URI[md5sum] = "530a69acebbb0d66eb5abd83523d8272"
--SRC_URI[sha256sum] = "259ed0f34de9b0c948f42bdaffe378ea53d210d38377c6dcb0c6b728fccad1b0"
-+SRC_URI[md5sum] = "c2deda75bdda59c38cae12a77cc53adc"
-+SRC_URI[sha256sum] = "ea671592f8460541286b133ed46a6cf5311a6b75051cc31b53e2bc38992b775a"
- 
- S = "${WORKDIR}/greenlet-${PV}"
- 
--- 
-1.8.1.2
-
+Patrick
 
