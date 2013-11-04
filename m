@@ -1,32 +1,26 @@
-Return-Path: <p.patat@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 381C66D290
+Return-Path: <tobias.henkel@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A12F6CA7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2013 09:59:06 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id x12so1791683wgg.28
+	Mon,  4 Nov 2013 15:43:30 +0000 (UTC)
+Received: from duffman.bmw-carit.intra (duffman.bmw-carit.intra
+	[192.168.101.67])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: tobias.henkel)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 664C540016
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2013 01:59:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:from:date:message-id:subject:to:content-type;
-	bh=f5Z5ZhnVA7Du6FckgSRdi+emAX5vw04bhGuhPRcEm+8=;
-	b=eh+p9WGMcoei1BQtx0Wpcw8bptp7mavgRZKdXU7IL1meRzICyoETSyU7AMcTYLcitq
-	WKtY/MLBcjf5ji+HaXR9yCIv9IIw5OPPubsU9pGCLQG4R1RzvS0DzP/rjv5sE7HDaZNn
-	AjvGdWJP8/MJl8wM32tPHGKuqTQOAR5hIbHbL8pks11o0j6gI1izIkV7zqOt2wLKhcWe
-	GLyC8tkN1Q/XxUzTSDEVcKIB2KPm0+92PAwQVENx0jYjCTvFiu0n5zAAE4Al6hEBffd5
-	EnbdW3jlfF7rfIHNWB20zuquSo/4mwitkeFiTvLB6/SK8Sfm77pKrvh39T7jEsY7tB+y
-	gcWA==
-X-Received: by 10.180.231.6 with SMTP id tc6mr11820127wic.59.1383559146888;
-	Mon, 04 Nov 2013 01:59:06 -0800 (PST)
+	Mon,  4 Nov 2013 15:15:23 +0100 (CET)
+Message-ID: <5277C0A2.407@oss.bmw-carit.de>
+Date: Mon, 04 Nov 2013 16:43:30 +0100
+From: Tobias Henkel <tobias.henkel@oss.bmw-carit.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
 MIME-Version: 1.0
-Sender: p.patat@gmail.com
-Received: by 10.194.9.33 with HTTP; Mon, 4 Nov 2013 01:58:46 -0800 (PST)
-From: patrick patat <patrick.patat@innotis.org>
-Date: Mon, 4 Nov 2013 10:58:46 +0100
-X-Google-Sender-Auth: B2TrQ_lhAcvKs7VRRPICn_L8B3Q
-Message-ID: <CAF+NyK4VcBrm7TNwPZdjzC1t0ma9VgCf+j31DSwD4S63z6T2-Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-multimedia][dora] backport request libao patch
+References: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
+In-Reply-To: <CAP71WjxknZx_g_1zgCgebb8_PnDW3Ry9NdtLPuDay-7ZgWp4CA@mail.gmail.com>
+Subject: ruby-native problem (on dylan)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,18 +34,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2013 09:59:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 04 Nov 2013 15:43:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 Hello,
 
-Is it possible to backport this patch
-http://cgit.openembedded.org/meta-openembedded/commit/?id=153372542a75625cda97b864afc25b3cac54772d
-to
-dora?
-Without this we can't install libao plugins.
+On 10/04/2013 10:09 AM, Nicolas Dechesne wrote:
+> hi,
+>
+> we got some build failures in our autobuilders last night, which
+> seemed to be related to ruby-native. We use dylan, but I believe the
+> same problem is there in master/dora too.
+>
+> The exact build error was in qtwebkit do_compile:
+>
+> ruby /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_cloud/machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-gnueabi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScriptCore/offlineasm/generate_offset_extractor.rb
+> /mnt/ci_build/workspace/project/branches/dylan/label/oe_persistent_cloud/machines/genericarmv7a/build/tmp/work/armv7ahf-vfp-neon-project-linux-gnueabi/qtwebkit/5.0.2-r0.0/qtwebkit-opensource-src-5.0.2/Source/JavaScriptCore/llint/LowLevelInterpreter.asm
+> LLIntDesiredOffsets.h
+>
+> <internal:gem_prelude>:1:in `require': cannot load such file --
+> rubygems.rb (LoadError)
+> from <internal:gem_prelude>:1:in `<compiled>'
+>
+> Yesterday I had 'moved' our BUILDDIR location. However for every build, we:
+>   - delete the TMPDIR completely
+>   - reuse our sstate
+>
+> The problem seems to be that 'ruby' has hard coded paths in the
+> binary. This is discussed in [1] or more at length in [2], and easy to
+> check:
+>
+> $ strings tmp/sysroots/x86_64-linux/usr/bin/ruby | grep project
+> /work/project/build/tmp/sysroots/x86_64-linux/usr
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/site_ruby/x86_64-linux
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/vendor_ruby/x86_64-linux
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/share/rubygems
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby
+> /work/project/build/tmp/sysroots/x86_64-linux/usr/lib/ruby/x86_64-linux
+>
+> So, the 'ruby' binary which was in the sstate, knew about the *old*
+> paths. When building today, ruby was pulled from sstate, but TMPDIR
+> has changed now, and the hardcoded paths no longer exists, leading to
+> the build failure.
+>
+> I verified that the following 'solved' the build issue:
+> $ bitbake -c cleansstate ruby-native
+> $ bitbake ruby-native
+> $ bitbake qtwebkit
+>
+> There seems to be a configure option, --enable-load-relative, after
+> using this option in ruby build, still ruby fails to start for the
+> same reason. I might have done something wrong, but i wanted to bring
+> it on the list, to see if anyone has a better solution, as it seems
+> like a big issue.
+I saw the same issue in my setup and looked a bit deeper into it.
+The patch "ruby-1.9.3-custom-rubygems-location.patch" seems to break 
+--enable-load-relative.
+When I remove this patch and add "--enable-load-relative" then ruby 
+starts without an error. But this has the side effect that the rubygems 
+directory is /usr/lib/ruby/rubygems instead of /usr/share/rubygems 
+inside the sysroot. I don't know if this matters. Would it break 
+anything else?
+>
+> thanks
+>
+> nicolas
+>
+>
+> [1] http://stackoverflow.com/questions/10221387/moving-ruby-installation-causes-it-to-not-function-how-to-get-around-this
+> [2] http://yehudakatz.com/2012/06/
+>
 
-Thanks,
-
-Patrick
+Best Regards
+Tobias
 
