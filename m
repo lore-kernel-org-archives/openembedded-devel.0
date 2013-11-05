@@ -1,34 +1,24 @@
-Return-Path: <akini@synapticon.com>
-Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
-	[209.85.217.180])
-	by mail.openembedded.org (Postfix) with ESMTP id F21096CEF1
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 5E3AF6D092
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Nov 2013 16:24:13 +0000 (UTC)
-Received: by mail-lb0-f180.google.com with SMTP id y6so6687146lbh.39
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Nov 2013 08:24:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=Ae1QVLIFYaf4AqfbidUvk6pf2AzxB/qW73F7BIoh9OU=;
-	b=PjTAdosnRZ0YUdWhzayK5MM3hUamvRa8Cr0qcuDbLvuJOFp6OMGqS/8IZ7uNJE90QC
-	X5orqs3tV+ZZE4n4mLrZeoBNA3lVMLqNikXee8BPBoWiSTsGCG4+/4Nhe7MoFpoVNtPM
-	O2I1sl/+i1Ytq81OEn4n8+v14xPI5N0I/vT9cgAKnlmntmK5wUKuYyyvlwStFR/rwYdW
-	K7YgRdNJmpMFhgkbJCUJAjXFut8d18fEl9PECXuUTOzmQbJRCJJZ3BxGUBWMOC8y/H6M
-	rHH7XgWK+SzPZ4eg/R9tjs7xkkvnPtvsJeefoTwELe2W9lEU0+KjZ+VnulbuXGWoaO1u
-	D3vA==
-X-Gm-Message-State: ALoCoQkii6no4JhIPD7ouFsRk8JgvcwABBNgePCBilkHh799EptkgJWHN6caGuC/bFJjiEx1XAP5
+	Tue,  5 Nov 2013 16:48:24 +0000 (UTC)
+Received: (qmail 3249 invoked by uid 1003); 5 Nov 2013 16:48:26 -0000
+Received: from unknown (HELO ?172.20.1.188?)
+	(philip@balister.org@12.199.200.124)
+	by mail.geekisp.com with (RC4-MD5 encrypted) SMTP;
+	5 Nov 2013 16:48:25 -0000
+User-Agent: K-9 Mail for Android
+In-Reply-To: <3804059.5QtrfmzGgR@helios>
+References: <3804059.5QtrfmzGgR@helios>
 MIME-Version: 1.0
-X-Received: by 10.112.172.137 with SMTP id bc9mr15964158lbc.21.1383668654820; 
-	Tue, 05 Nov 2013 08:24:14 -0800 (PST)
-Received: by 10.114.192.38 with HTTP; Tue, 5 Nov 2013 08:24:14 -0800 (PST)
-Date: Tue, 5 Nov 2013 17:24:14 +0100
-Message-ID: <CAKS01o=VYbkLvtM-sieawCtcjLRyB1_776qW3bSf4svjwBHVVw@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
+From: Philip Balister <philip@balister.org>
+Date: Tue, 05 Nov 2013 08:48:13 -0800
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <3e23d89f-486d-41d9-9bd4-604126918474@email.android.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: libeigen - unable to locate package during rootfs.
+Subject: Re: Public TSC meeting today
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,67 +32,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2013 16:24:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 05 Nov 2013 16:48:25 -0000
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi All,
+I can't make it. I hope the not is running for you.
 
-I am trying to include Eigen in my rootfs and face the following error:
-
-Building dependency tree...
-| W: Ignoring Provides line with DepCompareOp for package
-pkgconfig__pkg-config__
-| W: You may want to run apt-get update to correct these problems
-| E: Unable to locate package libeigen
-
-When i look into the deploy-debs folder i find only
-- libeigen-dbg_3.2.0-r0_armel.deb
-- libeigen-dev_3.2.0-r0_armel.deb
-
-Has ony1 else experienced a similar problem ?
-
-
-Layers used-
-meta-oe           = "origin/dylan:8aafddccb03f54923927e9d1c8c80223baf581de"
-meta-ros          = "master:d783e0433e4e994ffa8aad241c2f73d1ad2b941a"
-meta-xilinx       =
-"remotes/origin/dylan:21c3cd3f058d736742ebc23a7a954f23456fbea5"
-
+Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>Hi all,
+>
+>Just a reminder, there will be a public OpenEmbedded TSC meeting today.
+>If 
+>you're interested in discussing long-term technical efforts around the 
+>OpenEmbedded project please join us on irc.freenode.net in channel #oe
+>at 
+>17:00 GMT (9am PDT, 11am CDT, 12 EDT, 18:00 CEST, 17:00 BST) today.
+>
+>Cheers,
+>Paul
+>
+>-- 
+>
+>Paul Eggleton
+>Intel Open Source Technology Centre
+>_______________________________________________
+>Openembedded-devel mailing list
+>Openembedded-devel@lists.openembedded.org
+>http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 -- 
+Sent from my Android device with K-9 Mail. Please excuse my brevity.
+From philip@balister.org  Tue Nov  5 23:23:15 2013
+Return-Path: <philip@balister.org>
+X-Original-To: openembedded-devel@lists.openembedded.org
+Delivered-To: openembedded-devel@lists.openembedded.org
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 240AC6D67B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 Nov 2013 23:23:15 +0000 (UTC)
+Received: (qmail 28722 invoked by uid 1003); 5 Nov 2013 23:23:16 -0000
+Received: from unknown (HELO ?10.16.32.54?) (philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	5 Nov 2013 23:23:16 -0000
+Message-ID: <52797DE3.8070203@balister.org>
+Date: Tue, 05 Nov 2013 15:23:15 -0800
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.6
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+Subject: [oe] Create meta-sdr
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.12
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.openembedded.org/mailman/options/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
+List-Archive: <http://lists.openembedded.org/pipermail/openembedded-devel/>
+List-Post: <mailto:openembedded-devel@lists.openembedded.org>
+List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
+List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
+X-List-Received-Date: Tue, 05 Nov 2013 23:23:17 -0000
 
+Based on earlier discussion, we'd like to go ahead and create meta-ssdr
+based on this branch:
 
-*Anup Kini*Systems Engineer
-*------------------------------*
+https://github.com/balister/meta-oe/commits/meta-sdr
 
-*Synapticon*  |  Cyber-Physical System Solutions
+Can someone give me a hand getting this setup in git?
 
-Mobile:
+Thanks,
 
-Direct:
-
-+49 151 / 638 646 73
-
-+49 7335 / 186 999 21
-
-Fax:
-+49 7335 / 186 999 1
-
-
-
-
-
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
+Philip
 
