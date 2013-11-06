@@ -1,44 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
-	[209.85.216.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F7016D5A4
+Received: from mail-qa0-f45.google.com (mail-qa0-f45.google.com
+	[209.85.216.45])
+	by mail.openembedded.org (Postfix) with ESMTP id ED3116D5A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 20:33:59 +0000 (UTC)
-Received: by mail-qa0-f48.google.com with SMTP id w8so190791qac.14
+	Wed,  6 Nov 2013 20:42:12 +0000 (UTC)
+Received: by mail-qa0-f45.google.com with SMTP id hu16so2511479qab.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Nov 2013 12:34:01 -0800 (PST)
+	Wed, 06 Nov 2013 12:42:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=DbjGQeO91u87JXYTFQK+rYVWfFVv3f+MCms1r7/6zrM=;
-	b=UHbKB4rRwWGvSQyXGhpwV9WybnIA6ylZhiV3ljAV4zZb43ko8SkbjLGdCTBTgRyjdS
-	XIfs3aLhYXwws9ixhGXm3HM/qgB5ZfIEMqHrPCe/NcWGdjcAAgTfFW6ZKOm3wG1wpXFV
-	it3BV1YJ105XTwq//cGJTXTJ9OEA2phnI4FzApOk3uPKOUOyl0HK2z2K2gWsa1kuhPwh
-	qVGGQKP+C3W6WEEdjK9nvTbX3xHACQh42NyyfOmZCo3GGroNXqpH9kt7WwRNeFnde78F
-	gQsZv1gnSBnko/eEGzstwnLjyNHBpVI/Mr52wlJBGKzu38bHLIT8rEiWr3C3t159GO5k
-	Q1EA==
-X-Gm-Message-State: ALoCoQlBCVMWJ35aQtXdtIMd+Ovivdbtnc0voicaNIiXH+872sh4eNQyueeL8vZ6HYVfhZka8ZVr
-X-Received: by 10.49.35.144 with SMTP id h16mr7220685qej.35.1383770040974;
-	Wed, 06 Nov 2013 12:34:00 -0800 (PST)
+	bh=0iJd8kX7fDFkABDvdFLpgJQunMSFyHyaEuN9uYm2gRI=;
+	b=ltsK+/knEgQbSm8EZTXwmLOIJZvg/diJkUxmAzUq6wbnt1EIow4lQI+1mMJeWRunM1
+	mQNhFOot5w/jF7o5El9M1bJXtZv7GSMo/Przm0PgwFyf1AjtlV1ZBgB4dkOQIY5a7Zff
+	7dwK/+LCCGok4gya+K6PH8FPbUW2tePE3ceWI7WHu310JrtMeU1XgHR4a9FfahJwciIq
+	s1PIGQZKT67PS0/WZC5w0XCcqFzzJ93yTG2oN1LW+P1M+mt+R8kpBUJfbJ51B3Na5xA8
+	s9JZAVyWDABG1TN+7N+1J6z6tZrU+xe7v8csGCcpHIgo3Rm5zxyErMuC91ZMjaGfFj2s
+	8w1Q==
+X-Gm-Message-State: ALoCoQlhUvxzp7AAe5Wh49eJehn2XWRpoKfPEnPHxL0mhfjl7GWD7w6tITCKLjBQvau8trfkzshD
+X-Received: by 10.224.98.200 with SMTP id r8mr8924984qan.26.1383770534493;
+	Wed, 06 Nov 2013 12:42:14 -0800 (PST)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id h2sm1416777qaf.10.2013.11.06.12.33.59
-	for <openembedded-devel@lists.openembedded.org>
+	by mx.google.com with ESMTPSA id h9sm1504182qaq.9.2013.11.06.12.42.13
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 06 Nov 2013 12:34:00 -0800 (PST)
-Date: Wed, 6 Nov 2013 15:33:57 -0500
+	Wed, 06 Nov 2013 12:42:13 -0800 (PST)
+Date: Wed, 6 Nov 2013 15:42:11 -0500
 From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131106203355.GD3791@deserted.net>
-References: <1383535910-1944-1-git-send-email-rongqing.li@windriver.com>
+To: Bruce Ashfield <bruce.ashfield@windriver.com>
+Message-ID: <20131106204209.GE3791@deserted.net>
+References: <1383544182-12671-1-git-send-email-bruce.ashfield@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1383535910-1944-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1383544182-12671-1-git-send-email-bruce.ashfield@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH meta-networking] quagga: backport a patch from 0.99.22 to fix "no ip address" command
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 0/2]: meta-virtualization derived updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,13 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2013 20:33:59 -0000
-X-Groupsio-MsgNum: 47027
+X-List-Received-Date: Wed, 06 Nov 2013 20:42:13 -0000
+X-Groupsio-MsgNum: 47028
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZmUaFz6apKcXQszQ"
+	protocol="application/pgp-signature"; boundary="5p8PegU4iirBW1oA"
 Content-Disposition: inline
 
---ZmUaFz6apKcXQszQ
+--5p8PegU4iirBW1oA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -66,126 +67,62 @@ Content-Transfer-Encoding: quoted-printable
 Merged, thanks.
 -J.
 
-[[oe] [PATCH meta-networking] quagga: backport a patch from 0.99.22 to fix =
-"no ip address" command] On 13.11.04 (Mon 11:31) rongqing.li@windriver.com =
-wrote:
+[[meta-networking][PATCH 0/2]: meta-virtualization derived updates] On 13.1=
+1.04 (Mon 00:49) Bruce Ashfield wrote:
 
-> From: Roy Li <rongqing.li@windriver.com>
+> Joe,
 >=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  ...ingering-IP-address-after-deletion-BZ-486.patch |   64 ++++++++++++++=
+> Here are a couple of changes that I've pulled out of the various layers t=
+hat
+> I've been testing and looking after.
+>=20
+> One is an uprev to dnsmasq to 2.63, and the other is a recipe from meta-v=
+irtualization
+> that is a better fit in meta-networking.
+>=20
+> I tweaked both the recipes slightly as part of updating them for submissi=
+on to
+> meta-networking, and documented the tweaks in the patches themselves.=20
+>=20
+> Anyway, have a look, and let me know what additional changes you'd like m=
+ade
+> to the recipes.
+>=20
+> Cheers,
+>=20
+> Bruce
+>=20
+>=20
+> Bruce Ashfield (2):
+>   dnsmasq: uprev to 2.6.3
+>   netcf: move from meta-virtualization to meta-networking
+>=20
+>  .../recipes-support/dnsmasq/dnsmasq.inc            |  8 +++++++
+>  .../recipes-support/dnsmasq/dnsmasq_2.55.bb        |  6 ------
+>  .../recipes-support/dnsmasq/dnsmasq_2.63.bb        |  4 ++++
+>  meta-networking/recipes-support/netcf/netcf_git.bb | 25 ++++++++++++++++=
 ++++++
->  .../recipes-protocols/quagga/quagga_0.99.21.bb     |    3 +-
->  2 files changed, 66 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-protocols/quagga/files/linger=
-ing-IP-address-after-deletion-BZ-486.patch
+>  4 files changed, 37 insertions(+), 6 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.55.=
+bb
+>  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.=
+bb
+>  create mode 100644 meta-networking/recipes-support/netcf/netcf_git.bb
 >=20
-> diff --git a/meta-networking/recipes-protocols/quagga/files/lingering-IP-=
-address-after-deletion-BZ-486.patch b/meta-networking/recipes-protocols/qua=
-gga/files/lingering-IP-address-after-deletion-BZ-486.patch
-> new file mode 100644
-> index 0000000..42bdc20
-> --- /dev/null
-> +++ b/meta-networking/recipes-protocols/quagga/files/lingering-IP-address=
--after-deletion-BZ-486.patch
-> @@ -0,0 +1,64 @@
-> +From 7f062c217b262e362a3362c677dea6c5e820adf1 Mon Sep 17 00:00:00 2001
-> +From: David Lamparter <equinox@diac24.net>
-> +Date: Mon, 1 Feb 2010 16:41:26 +0100
-> +Subject: [PATCH] zebra: lingering IP address after deletion (BZ#486)
-> +
-> +Upstream-status: Backport
-> +
-> +zebra address bookkeeping is a mess. this is just a workaround to have
-> +IPv4 address deletion somewhat working on Linux.
-> +
-> +the if_unset_prefix call is synchronous, when it returns success the
-> +address deletion completed successfully. this is either signaled by a
-> +netlink ACK or by an OK return value from ioctl().
-> +
-> +This version is wrapped by #ifdef HAVE_NETLINK so we don't touch the
-> +BSDs for now.
-> +
-> +* zebra/interface.c: On Linux, update zebra internal state after
-> +  deleting an address.
-> +
-> +Signed-off-by: David Lamparter <equinox@opensourcerouting.org>
-> +---
-> + zebra/interface.c |   21 ++++++++++++++++++---
-> + 1 file changed, 18 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/zebra/interface.c b/zebra/interface.c
-> +index 2242259..3578b79 100644
-> +--- a/zebra/interface.c
-> ++++ b/zebra/interface.c
-> +@@ -1297,13 +1297,28 @@ ip_address_uninstall (struct vty *vty, struct in=
-terface *ifp,
-> + 	       safe_strerror(errno), VTY_NEWLINE);
-> +       return CMD_WARNING;
-> +     }
-> ++  /* success! call returned that the address deletion went through.
-> ++   * this is a synchronous operation, so we know it succeeded and can
-> ++   * now update all internal state. */
-> ++
-> ++  /* the HAVE_NETLINK check is only here because, on BSD, although the
-> ++   * call above is still synchronous, we get a second confirmation later
-> ++   * through the route socket, and we don't want to touch that behaviour
-> ++   * for now.  It should work without the #ifdef, but why take the risk=
-=2E..
-> ++   * -- equinox 2012-07-13 */
-> ++#ifdef HAVE_NETLINK
-> ++
-> ++  /* Remove connected route. */
-> ++  connected_down_ipv4 (ifp, ifc);
-> +=20
-> +-#if 0
-> +   /* Redistribute this information. */
-> +   zebra_interface_address_delete_update (ifp, ifc);
-> +=20
-> +-  /* Remove connected route. */
-> +-  connected_down_ipv4 (ifp, ifc);
-> ++  /* IP address propery set. */
-> ++  UNSET_FLAG (ifc->conf, ZEBRA_IFC_REAL);
-> ++
-> ++  /* remove from interface, remark secondaries */
-> ++  if_subnet_delete (ifp, ifc);
-> +=20
-> +   /* Free address information. */
-> +   listnode_delete (ifp->connected, ifc);
-> +--=20
-> +1.7.10.4
-> +
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b=
-/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> index 2b46930..10740bc 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> +++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> @@ -2,7 +2,8 @@ require quagga.inc
-> =20
->  PR =3D "${INC_PR}.0"
-> =20
-> -SRC_URI +=3D "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch"
-> +SRC_URI +=3D "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
-> +            file://lingering-IP-address-after-deletion-BZ-486.patch"
-> =20
->  SRC_URI[quagga-0.99.21.md5sum] =3D "99840adbe57047c90dfba6b6ed9aec7f"
->  SRC_URI[quagga-0.99.21.sha256sum] =3D "9b8aea9026b4771a28e254a66cbd85472=
-3bcd0d71eebd0201d11838d4eb392ee"
 --=20
 -Joe MacDonald.
 :wq
 
---ZmUaFz6apKcXQszQ
+--5p8PegU4iirBW1oA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlJ6p7MACgkQwFvcllog0Xy0agCgjLyG4D0GuY3qmjaBydq0a7xD
-Fw8AnjyWmMrwSQwJPjltZ5NX3wNGBwJd
-=iKCe
+iEYEARECAAYFAlJ6qaEACgkQwFvcllog0XzaVACfUR/VPier2wrVtWuF73EvDZ0g
+KP4AnRI7GRhOk911JQXDstiSDFGvALH1
+=BZY4
 -----END PGP SIGNATURE-----
 
---ZmUaFz6apKcXQszQ--
+--5p8PegU4iirBW1oA--
