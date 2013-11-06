@@ -1,19 +1,21 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id A9C916D6DB
+	by mail.openembedded.org (Postfix) with ESMTP id 1F0136D723
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 16:39:57 +0000 (UTC)
+	Wed,  6 Nov 2013 16:40:04 +0000 (UTC)
 Received: from soylentgreen.sue.net
 	(83-64-248-68.inzersdorf.xdsl-line.inode.at [83.64.248.68])
-	by ptmx.org (Postfix) with ESMTPSA id 05EEF2A6F3
+	by ptmx.org (Postfix) with ESMTPSA id 9BA182B3C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 17:39:53 +0100 (CET)
+	Wed,  6 Nov 2013 17:40:05 +0100 (CET)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Nov 2013 17:39:37 +0100
-Message-Id: <1383755978-16245-1-git-send-email-dv@pseudoterminal.org>
+Date: Wed,  6 Nov 2013 17:39:38 +0100
+Message-Id: <1383755978-16245-2-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH 1/2] htop: upgrade to version 1.0.2
+In-Reply-To: <1383755978-16245-1-git-send-email-dv@pseudoterminal.org>
+References: <1383755978-16245-1-git-send-email-dv@pseudoterminal.org>
+Subject: [meta-oe][PATCH 2/2] libopus: upgrade to version 1.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,39 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2013 16:39:59 -0000
+X-List-Received-Date: Wed, 06 Nov 2013 16:40:04 -0000
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- meta-oe/recipes-support/htop/{htop_0.9.bb => htop_1.0.2.bb} | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-support/htop/{htop_0.9.bb => htop_1.0.2.bb} (55%)
+ .../libopus/{libopus_0.9.14.bb => libopus_1.0.3.bb}                 | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-multimedia/libopus/{libopus_0.9.14.bb => libopus_1.0.3.bb} (72%)
 
-diff --git a/meta-oe/recipes-support/htop/htop_0.9.bb b/meta-oe/recipes-support/htop/htop_1.0.2.bb
-similarity index 55%
-rename from meta-oe/recipes-support/htop/htop_0.9.bb
-rename to meta-oe/recipes-support/htop/htop_1.0.2.bb
-index 6d12d72..3982f66 100644
---- a/meta-oe/recipes-support/htop/htop_0.9.bb
-+++ b/meta-oe/recipes-support/htop/htop_1.0.2.bb
-@@ -8,15 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
- DEPENDS = "ncurses"
- RDEPENDS_${PN} = "ncurses-terminfo"
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.0.3.bb
+similarity index 72%
+rename from meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb
+rename to meta-oe/recipes-multimedia/libopus/libopus_1.0.3.bb
+index 7eb9779..1889775 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_0.9.14.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.0.3.bb
+@@ -6,11 +6,11 @@ technology from Skype's SILK codec and Xiph.Org's CELT codec."
+ HOMEPAGE = "http://www.opus-codec.org/"
+ SECTION = "libs/multimedia"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=6d9f9b3714db6bbcfb6e42170d9c664d"
++LIC_FILES_CHKSUM = "file://COPYING;md5=225b2f817ea798b7c705fe1214694891"
  
--PR = "r1"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz \
--           file://remove-proc-test.patch"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz"
+ SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
+-SRC_URI[md5sum] = "c7161b247a8437ae6b0f11dd872e69e8"
+-SRC_URI[sha256sum] = "b1cad6846a8f819a141009fe3f8f10c946e8eff7e9c2339cd517bb136cc59eae"
++SRC_URI[md5sum] = "86eedbd3c5a0171d2437850435e6edff"
++SRC_URI[sha256sum] = "191a089c92dbc403de6980463dd3604b65beb12d283c607e246c8076363cb49c"
  
- LDFLAGS_append_libc-uclibc = " -lubacktrace"
- 
- inherit autotools
- 
--SRC_URI[md5sum] = "7c5507f35f363f3f40183a2ba3c561f8"
--SRC_URI[sha256sum] = "4de65c38e1886bccd30ed692b30eb9bf195240680781bfe1eaf5faf84ee6fbfd"
-+SRC_URI[md5sum] = "0d01cca8df3349c74569cefebbd9919e"
-+SRC_URI[sha256sum] = "ee60657b044ece0df096c053060df7abf3cce3a568ab34d260049e6a37ccd8a1"
+ S = "${WORKDIR}/opus-${PV}"
  
 -- 
 1.8.3.2
