@@ -1,25 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E8BB6CA17
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id B4D9F6CEB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 11:50:30 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 06 Nov 2013 03:50:31 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,646,1378882800"; d="scan'208";a="428722307"
-Received: from unknown (HELO helios.localnet) ([10.252.121.74])
-	by fmsmga002.fm.intel.com with ESMTP; 06 Nov 2013 03:50:29 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org, Tom King <ka6sox@gmail.com>
-Date: Wed, 06 Nov 2013 11:50:23 +0000
-Message-ID: <2826720.tTDD0GUmWP@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <20131104214636.GF3684@jama>
-References: <CAFZh4h9pmB59YS7wRKD1ubui2_yf1Hjg5NgtW-nDr9eC8im1dA@mail.gmail.com>
-	<20131104214636.GF3684@jama>
+	Wed,  6 Nov 2013 13:06:28 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id c11so4782297wgh.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Nov 2013 05:06:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=eIaRyAje36ZvabcduemP0AkF+h9ruAJdkRl/gPgMTlw=;
+	b=j0aMblQo6GFQ/7ea3NSxbstcfmZyMsprbvvP/FnIF0K8CDn0UcVsZ2oSzuPz6SJcGy
+	/8AY+G3vjCZ3PXzYB1kPBkfI+crvK2YTN/PMZRZwW1Co9eVxeqDmDBDUSWlcF3GS6SGL
+	cckXPMjHehwe4v2s4WFiVe3cMG/kWeoYvp67c0CovWdfzkGwC78/bdaPiArAkCRXjyZq
+	XmmjksSBxzqmJqAuGt/0LNu8XebHtNlyodlBqz2lDtFvlAtf08/WV3l6POnKz+PsfFNa
+	Lwn66mboS3Y3UWUny6qkzfqWsLfz9/7maJ0ZWCUeShLUNjLx/0IPRfUiAQoxCC3wvrrW
+	vXsw==
 MIME-Version: 1.0
-Subject: Re: Still getting gd-2.0.36RC1.tar.gz errors in meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+X-Received: by 10.180.211.7 with SMTP id my7mr2378709wic.17.1383743189210;
+	Wed, 06 Nov 2013 05:06:29 -0800 (PST)
+Received: by 10.194.179.198 with HTTP; Wed, 6 Nov 2013 05:06:29 -0800 (PST)
+In-Reply-To: <1383716430-18050-1-git-send-email-Zongchun.Yu@freescale.com>
+References: <1383716430-18050-1-git-send-email-Zongchun.Yu@freescale.com>
+Date: Wed, 6 Nov 2013 13:06:29 +0000
+Message-ID: <CA+chaQcpPKUwM6LfuKvvStDLvRYBEeBuPmHnxXuJdEee=zv3tA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Zongchun Yu <Zongchun.Yu@freescale.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2013 11:50:31 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 06 Nov 2013 13:06:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Monday 04 November 2013 22:46:36 Martin Jansa wrote:
-> On Mon, Nov 04, 2013 at 04:09:22PM -0500, Brian Hutchinson wrote:
-> > This has been going on for the last month or two.  Apparently this
-> > upstream project name changed and it no longer available at the URL.  I
-> > looked into it several weeks ago but it didn't look like a simple URL path
-> > fix as it looked like other stuff depends on it.  I've been coping the file
-> > from an earlier build to my downloads directory to get my builds to
-> > complete.
-> 
-> grab copy from
-> http://ring.u-toyama.ac.jp/archives/graphics/gd/
-> and put it on your PREMIRROR.
+Please use -M to get smaller diff.
 
-Tom, would you be able to grab 
-http://ring.u-toyama.ac.jp/archives/graphics/gd/gd-2.0.36RC1.tar.gz 
-and put it on the OE source mirror? md5sum should be 
-39ac48e6d5e0012a3bd2248a0102f209.
 
-Thanks,
-Paul
 
--- 
+On Wed, Nov 6, 2013 at 5:40 AM, <Zongchun.Yu@freescale.com> wrote:
 
-Paul Eggleton
-Intel Open Source Technology Centre
+> From: Zongchun Yu <Zongchun.Yu@freescale.com>
+>
+> *mv tcpdump from meta-oe to meta-networking
+> *add tcpreplay - a suite of GPLv3 licensed tools for UNIX operating
+> systems which gives you the ability to use previously captured traffic
+> in libpcap format to test a variety of network devices.
+>
+>
 
