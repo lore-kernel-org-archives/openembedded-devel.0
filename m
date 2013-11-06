@@ -1,24 +1,35 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 5E3AF6D092
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 62B306CC86
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Nov 2013 16:48:24 +0000 (UTC)
-Received: (qmail 3249 invoked by uid 1003); 5 Nov 2013 16:48:26 -0000
-Received: from unknown (HELO ?172.20.1.188?)
-	(philip@balister.org@12.199.200.124)
-	by mail.geekisp.com with (RC4-MD5 encrypted) SMTP;
-	5 Nov 2013 16:48:25 -0000
-User-Agent: K-9 Mail for Android
-In-Reply-To: <3804059.5QtrfmzGgR@helios>
-References: <3804059.5QtrfmzGgR@helios>
-MIME-Version: 1.0
-From: Philip Balister <philip@balister.org>
-Date: Tue, 05 Nov 2013 08:48:13 -0800
+	Wed,  6 Nov 2013 00:44:41 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id kq14so9609993pab.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Nov 2013 16:44:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=cN+98DsXGmCNJvipDXWyksJ3c9h14orAJi0fQpsQSjc=;
+	b=Y6mw2kaBMzFQZF6YHJbb66aKBjDgrpzEkIzzprUTy5QDVcOnBbwTrAAZP3bl0jtYn8
+	xwZT0LU2bIbDcCJ32Jv11Du8c2EOH5iKrTDlDN/CcBc7BZFf08oINTRBX6rLjDDZS0rX
+	6f26cnaTw8lau9ZWddKhHYjqSEEFnRpBV/di46bHtf+AxIVFxMy2IwUGHUZgOTjLaYgp
+	rILzOcdlMGPKWaZcl8EVUueZjEmMd/JyJYlSgN+n1T+RCPPphB8iPW49i43EqoCi/c2V
+	PwIaovBtQCTco/BBskEI1Yo0RYJnXuefLqrqttiwppGNjb95b2Pn7EofjAAHd8gy2oez
+	5aCQ==
+X-Received: by 10.66.187.34 with SMTP id fp2mr1174949pac.12.1383698682919;
+	Tue, 05 Nov 2013 16:44:42 -0800 (PST)
+Received: from isis.gateway.2wire.net
+	(99-57-140-209.lightspeed.sntcca.sbcglobal.net. [99.57.140.209])
+	by mx.google.com with ESMTPSA id ik1sm37277062pbc.9.2013.11.05.16.44.41
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 05 Nov 2013 16:44:42 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <3e23d89f-486d-41d9-9bd4-604126918474@email.android.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Public TSC meeting today
+Date: Tue,  5 Nov 2013 16:41:17 -0800
+Message-Id: <1383698477-7516-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.8.4.2
+Subject: [meta-oe][PATCH] vim: Disable parallel install, it has races
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,85 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2013 16:48:25 -0000
-Content-Type: text/plain;
- charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 06 Nov 2013 00:44:42 -0000
 
-I can't make it. I hope the not is running for you.
+We end up with install errors when using high parallel factor like -j20
 
-Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
->Hi all,
->
->Just a reminder, there will be a public OpenEmbedded TSC meeting today.
->If 
->you're interested in discussing long-term technical efforts around the 
->OpenEmbedded project please join us on irc.freenode.net in channel #oe
->at 
->17:00 GMT (9am PDT, 11am CDT, 12 EDT, 18:00 CEST, 17:00 BST) today.
->
->Cheers,
->Paul
->
->-- 
->
->Paul Eggleton
->Intel Open Source Technology Centre
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+errors like
 
+| mkdir: cannot create directory
+`/``build/tmp-eglibc/work/ppce500v2-poky-linux-gnuspe/vim/7.4.27-r0/image/usr/share/vim/vim74':
+File exists
+| mkdir: cannot create directory
+`/build/tmp-eglibc/work/ppce500v2-poky-linux-gnuspe/vim/7.4.27-r0/image/usr/share/vim/vim74':
+File exists
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/vim/vim_7.4.27.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.27.bb b/meta-oe/recipes-support/vim/vim_7.4.27.bb
+index 77507d4..5cb933b 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.27.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.27.bb
+@@ -7,7 +7,7 @@ LICENSE = "vim"
+ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
+ 
+ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+-	file://configure.in_remove_CC_quotes.patch;patchdir=.."
++	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
+ SRCREV = "v7-4-027"
+ 
+ S = "${WORKDIR}/${PN}/src"
+@@ -61,6 +61,8 @@ do_install_append() {
+     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${PN}/vimrc
+ }
+ 
++PARALLEL_MAKEINST = ""
++
+ PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
+ FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
+ FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
 -- 
-Sent from my Android device with K-9 Mail. Please excuse my brevity.
-From philip@balister.org  Tue Nov  5 23:23:15 2013
-Return-Path: <philip@balister.org>
-X-Original-To: openembedded-devel@lists.openembedded.org
-Delivered-To: openembedded-devel@lists.openembedded.org
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 240AC6D67B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Nov 2013 23:23:15 +0000 (UTC)
-Received: (qmail 28722 invoked by uid 1003); 5 Nov 2013 23:23:16 -0000
-Received: from unknown (HELO ?10.16.32.54?) (philip@opensdr.com@64.186.172.226)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	5 Nov 2013 23:23:16 -0000
-Message-ID: <52797DE3.8070203@balister.org>
-Date: Tue, 05 Nov 2013 15:23:15 -0800
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Enigmail-Version: 1.6
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-Subject: [oe] Create meta-sdr
-X-BeenThere: openembedded-devel@lists.openembedded.org
-X-Mailman-Version: 2.1.12
-Precedence: list
-Reply-To: openembedded-devel@lists.openembedded.org
-List-Id: Using the OpenEmbedded metadata to build Distributions
-	<openembedded-devel.lists.openembedded.org>
-List-Unsubscribe: <http://lists.openembedded.org/mailman/options/openembedded-devel>,
-	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
-List-Archive: <http://lists.openembedded.org/pipermail/openembedded-devel/>
-List-Post: <mailto:openembedded-devel@lists.openembedded.org>
-List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
-List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
-	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2013 23:23:17 -0000
+1.8.4.2
 
-Based on earlier discussion, we'd like to go ahead and create meta-ssdr
-based on this branch:
-
-https://github.com/balister/meta-oe/commits/meta-sdr
-
-Can someone give me a hand getting this setup in git?
-
-Thanks,
-
-Philip
 
