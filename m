@@ -1,36 +1,19 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qe0-f54.google.com (mail-qe0-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AD496CA17
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id A9C916D6DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 15:42:36 +0000 (UTC)
-Received: by mail-qe0-f54.google.com with SMTP id 1so6265103qec.41
+	Wed,  6 Nov 2013 16:39:57 +0000 (UTC)
+Received: from soylentgreen.sue.net
+	(83-64-248-68.inzersdorf.xdsl-line.inode.at [83.64.248.68])
+	by ptmx.org (Postfix) with ESMTPSA id 05EEF2A6F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Nov 2013 07:42:37 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=5SbklxiALwSUp3wE4rTM36/5FuaeCRsyQN/KUmvPBH4=;
-	b=ioyzpIjOUiwJteUgeAaJNlDU9ZvTRAza78y5JFyhMmX1yaA4BWmH5NSgGKKbmPf4C8
-	gWniSbXWB0gJOyZkXFbk+ZGDLRZ6gyW0sEAItaBlQOuB64W6PYLWLol/Pwa1CQ9x9Ojs
-	+ZynVXnjJonKbk9u1vojTPSBBgNx92xRCtfRdf5PBepmXeBi4bMKROTyH+DgtY6RXmpq
-	8EsfJp363CXj8kzjvlZ3FkG9tcAgzrO0ocIL+Z8OuYD5h/JUDlhCznXyx5XWOcl/dkTP
-	t1YHJfoR4O3R7FSCGypm0amvfSc0eW2X/KgpY9qFx3htfLT3VDqkbNDNA4GpKBW/AwOk
-	shlw==
-X-Gm-Message-State: ALoCoQllwRfKDEMBHne+aUrKlSK3wM5Hgc+sd41epLm9Di30voHnSO5g4UnTWxw8A/WceEZwcp3w
-X-Received: by 10.224.103.66 with SMTP id j2mr6809366qao.66.1383752557482;
-	Wed, 06 Nov 2013 07:42:37 -0800 (PST)
-Received: from burninator.corp.ad.wrs.com ([128.224.252.2])
-	by mx.google.com with ESMTPSA id h2sm59795858qaf.10.2013.11.06.07.42.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Nov 2013 07:42:36 -0800 (PST)
-From: Joe MacDonald <joe@deserted.net>
+	Wed,  6 Nov 2013 17:39:53 +0100 (CET)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Nov 2013 10:42:35 -0500
-Message-Id: <1383752555-25620-1-git-send-email-joe@deserted.net>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-networking][PATCH] crda: correct QA issues with sbindir
+Date: Wed,  6 Nov 2013 17:39:37 +0100
+Message-Id: <1383755978-16245-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH 1/2] htop: upgrade to version 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,45 +27,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2013 15:42:37 -0000
+X-List-Received-Date: Wed, 06 Nov 2013 16:39:59 -0000
 
-regdbdump and crda are installed in /sbin/ and still link against stuff in
-/usr/lib, causing QA warnings / errors:
-
-   WARNING: QA Issue: crda: /sbin/regdbdump, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libgcrypt.so.11 => /usr/lib64/libgcrypt.so.11 (0x00000000dead1000)
-   WARNING: QA Issue: crda: /sbin/regdbdump, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libgpg-error.so.0 => /usr/lib64/libgpg-error.so.0 (0x00000000dead3000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libgcrypt.so.11 => /usr/lib64/libgcrypt.so.11 (0x00000000dead1000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libnl-genl-3.so.200 => /usr/lib64/libnl-genl-3.so.200 (0x00000000dead2000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libnl-3.so.200 => /usr/lib64/libnl-3.so.200 (0x00000000dead3000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libnl-nf-3.so.200 => /usr/lib64/libnl-nf-3.so.200 (0x00000000dead4000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libnl-route-3.so.200 => /usr/lib64/libnl-route-3.so.200 (0x00000000dead5000)
-   WARNING: QA Issue: crda: /sbin/crda, installed in the base_prefix, requires a shared library under exec_prefix (/usr): libgpg-error.so.0 => /usr/lib64/libgpg-error.so.0 (0x00000000dead7000)
-
-relocate them to /usr/sbin to squelch the warning.
-
-Signed-off-by: Joe MacDonald <joe@deserted.net>
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
+ meta-oe/recipes-support/htop/{htop_0.9.bb => htop_1.0.2.bb} | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/htop/{htop_0.9.bb => htop_1.0.2.bb} (55%)
 
-The other obvious solution would be to mve these libraries into ${base_libdir}
-but that really doesn't seem appropriate in this case.
-
- meta-networking/recipes-connectivity/crda/crda_1.1.3.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-index 3ef9210..8339893 100644
---- a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-@@ -24,7 +24,7 @@ do_compile() {
- }
+diff --git a/meta-oe/recipes-support/htop/htop_0.9.bb b/meta-oe/recipes-support/htop/htop_1.0.2.bb
+similarity index 55%
+rename from meta-oe/recipes-support/htop/htop_0.9.bb
+rename to meta-oe/recipes-support/htop/htop_1.0.2.bb
+index 6d12d72..3982f66 100644
+--- a/meta-oe/recipes-support/htop/htop_0.9.bb
++++ b/meta-oe/recipes-support/htop/htop_1.0.2.bb
+@@ -8,15 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+ DEPENDS = "ncurses"
+ RDEPENDS_${PN} = "ncurses-terminfo"
  
- do_install() {
--    oe_runmake install
-+    oe_runmake SBINDIR=${sbindir} install
+-PR = "r1"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz \
+-           file://remove-proc-test.patch"
++SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz"
  
-     install -d ${D}${libdir}/crda/
+ LDFLAGS_append_libc-uclibc = " -lubacktrace"
+ 
+ inherit autotools
+ 
+-SRC_URI[md5sum] = "7c5507f35f363f3f40183a2ba3c561f8"
+-SRC_URI[sha256sum] = "4de65c38e1886bccd30ed692b30eb9bf195240680781bfe1eaf5faf84ee6fbfd"
++SRC_URI[md5sum] = "0d01cca8df3349c74569cefebbd9919e"
++SRC_URI[sha256sum] = "ee60657b044ece0df096c053060df7abf3cce3a568ab34d260049e6a37ccd8a1"
  
 -- 
-1.7.10.4
+1.8.3.2
 
 
