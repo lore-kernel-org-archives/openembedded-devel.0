@@ -1,25 +1,20 @@
 Return-Path: <eric@eukrea.com>
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
-	by mail.openembedded.org (Postfix) with ESMTP id BFACE6BE6E
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+	by mail.openembedded.org (Postfix) with ESMTP id B8A7D6BE6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2013 17:11:04 +0000 (UTC)
-Received: from e6520eb (unknown [88.170.243.169])
-	(Authenticated sender: eukrea)
-	by smtp6-g21.free.fr (Postfix) with ESMTPSA id 6DD9882306;
-	Thu,  7 Nov 2013 18:10:59 +0100 (CET)
-Date: Thu, 7 Nov 2013 18:10:58 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: Javier Viguera <javier.viguera@digi.com>
-Message-ID: <20131107181058.1adc9aa0@e6520eb>
-In-Reply-To: <527BC338.4020400@digi.com>
-References: <1383842156-13651-1-git-send-email-eric@eukrea.com>
-	<527BC338.4020400@digi.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] cherokee: use cherokee-project.de mirror
+	Thu,  7 Nov 2013 17:12:55 +0000 (UTC)
+Received: from e6520eb.local.eukrea.com (unknown [88.170.243.169])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id A69534C8213;
+	Thu,  7 Nov 2013 18:12:52 +0100 (CET)
+From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: javier.viguera@digi.com
+Date: Thu,  7 Nov 2013 18:12:49 +0100
+Message-Id: <1383844369-15682-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	=?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [PATCH v3] cherokee: use cherokee-project.de mirror
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,24 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 17:11:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Nov 2013 17:12:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Le Thu, 7 Nov 2013 17:43:36 +0100,
-Javier Viguera <javier.viguera@digi.com> a =E9crit :
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->=20
-> On 07/11/13 17:35, Eric B=E9nard wrote:
-> > -SRC_URI =3D "ftp://ftp.osuosl.org/.1/cherokee/1.2/${PV}/cherokee-${PV}=
-.tar.gz \
-> > +SRC_URI =3D "http://www.cherokee-project.de/mirrors/cherokee/1.2/1.2/$=
-{PV}/cherokee-${PV}.tar.gz \
->=20
-> I'm afraid patch *v2* has the same problem, extra 1.2 in the URL :-)
->=20
-turning on the brain and committing before formatting the patch for
-v3 ;-)
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+index 8cfe58f..45b232a 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+@@ -9,7 +9,7 @@ PR = "r9"
+ 
+ DEPENDS = "libpcre openssl mysql5 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+-SRC_URI = "ftp://ftp.osuosl.org/.1/cherokee/1.2/${PV}/cherokee-${PV}.tar.gz \
++SRC_URI = "http://www.cherokee-project.de/mirrors/cherokee/1.2/${PV}/cherokee-${PV}.tar.gz \
+            file://cherokee.init \
+            file://cherokee.service \
+ "
+-- 
+1.8.3.1
 
-Eric
 
