@@ -1,40 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id F1D6B6D3A7
+Return-Path: <1337ch1770r@googlemail.com>
+Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
+	[209.85.160.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E11B56D3A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2013 09:38:04 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id e51so158269eek.12
+	Thu,  7 Nov 2013 10:05:43 +0000 (UTC)
+Received: by mail-pb0-f50.google.com with SMTP id uo15so379315pbc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2013 01:38:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=d9ZbXawrqetMOT25H+1de7LenYqJ4TkFK5+ZflW9nEM=;
-	b=OYeqE4ri9QS82rD64q0fs5WcYBPWzkee+8mLKXwnE4Cn34EtnMdxkbdGn8Y0c3CzWp
-	vqWMFpUcz0GWmAy5URbKaT767gxj8T6aGoL8Bw0BvXvsCaXXwkwoUv8CWP/tywkyekOm
-	EVRHylN+cWwDeNEm5a9TqZWbjeosfYK1gvk40oRANJtyPrnqjqk+3ZgrDHiY/LFL23lU
-	0olA3Uef4DwylYDSb2TdHnQZMYVkiPxL0ZO3dUurVNAGZFKv64FEr8hiMaUxIy82H+7T
-	pfCXUEg6CF9iXCG8yOAMyivDUIneqCCmbf1yQzm9LsnnVx10A0rK14sEHOrfqhqhhj3U
-	0qyg==
-X-Received: by 10.14.241.141 with SMTP id g13mr880322eer.75.1383817085833;
-	Thu, 07 Nov 2013 01:38:05 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id 8sm6872217eem.15.2013.11.07.01.38.04
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Nov 2013 01:38:04 -0800 (PST)
-Date: Thu, 7 Nov 2013 10:38:18 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Zongchun YU <b40527@freescale.com>
-Message-ID: <20131107093818.GB3682@jama>
-References: <1383792523-9623-1-git-send-email-Zongchun.Yu@freescale.com>
-	<20131107091210.GA3682@jama> <006401cedb9d$209a3ad0$61ceb070$@com>
+	Thu, 07 Nov 2013 02:05:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=8yIsjM8y1FpBOMok5cpcsZbjG8+cv6F+UQAnJDHrYXU=;
+	b=NPPyHACl2jwLosCHAH842UHc4E8XqUUXSL3tiHyvbg9ZR0kduocqVRdMpzRNmmT5nl
+	Otaya+UPciOep0I4gp6MLiIcWYCyNIn05Lqt707aJGHk6+yXq2zWi3wVgc1PtkQ9ncgg
+	SwXqE1U9lC+fErTCc74Pftnmo4TOsjyVlah99ITdDuUY1S6U03qDAN+R0fXhg1o2FRnQ
+	bHOMxBnPQPw/UTwrSdNYn/awWdKT09Lm8Xm1XMXjW5N4zPBiHYR/jAL2dAGB0obSs0vQ
+	/ZldMRYtglVc6dh0NNEnswSo7GGxwQMRhrntBaid348EBXOY/NguNc/KzKPeHJ+UtvGq
+	TMKg==
 MIME-Version: 1.0
-In-Reply-To: <006401cedb9d$209a3ad0$61ceb070$@com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Zongchun.Yu@freescale.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCHv2] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
+X-Received: by 10.68.221.5 with SMTP id qa5mr8215508pbc.36.1383818745651; Thu,
+	07 Nov 2013 02:05:45 -0800 (PST)
+Received: by 10.68.253.70 with HTTP; Thu, 7 Nov 2013 02:05:45 -0800 (PST)
+Date: Thu, 7 Nov 2013 11:05:45 +0100
+Message-ID: <CACCbTU=UQHedAhbGZLcBjpTgTdR_EU+CQWP0ya3avp-cJJ4XEg@mail.gmail.com>
+From: "w201cruiser ." <1337ch1770r@googlemail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: =?UTF-8?B?a8O2bm50IGlociBtYWwgbWl0IGRlciBzcGFtbWVyZWkgYXVmaMO2cmVuPw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,39 +40,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 09:38:05 -0000
-X-Groupsio-MsgNum: 47036
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="v9Ux+11Zm5mwPlX6"
-Content-Disposition: inline
-
---v9Ux+11Zm5mwPlX6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Nov 2013 10:05:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 07, 2013 at 05:38:30PM +0800, Zongchun YU wrote:
-> >Can you update the packagegroup in meta-oe which depends on tcpdump?
-> >PACKAGECONFIG or just dropping tcpdump from it is fine with me.
->=20
-> Martin, please see the last parts of the patch. I have dropped tcpdump in
-> the packagegroup recipe And it is fine with me too.
+ich hab mich schon tr=F6lfmal versucht von eirer fucking liste abzumelden u=
+nd
+trotzdem bombt ihr mein postfach
+DAS NERVT!
 
-Sorry I was blind, thanks!
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---v9Ux+11Zm5mwPlX6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlJ7X4oACgkQN1Ujt2V2gBzeEQCguXTwe6oYfyQjdJPNwiSS8r7U
-V4wAn3kXhd1QyfBr/Bwu2+H+2LD+uOnc
-=ARGW
------END PGP SIGNATURE-----
-
---v9Ux+11Zm5mwPlX6--
