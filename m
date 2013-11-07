@@ -1,18 +1,23 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ED956D437
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CF6A46D44A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 22:59:51 +0000 (UTC)
-Received: from localhost.localdomain (chello080108009040.14.11.vie.surfer.at
-	[80.108.9.40]) by ptmx.org (Postfix) with ESMTPSA id 1EE2F2698E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2013 23:59:53 +0100 (CET)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Nov 2013 00:00:52 +0100
-Message-Id: <1383778852-22175-1-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.4.1
-Subject: [meta-oe][PATCH] orc: version 0.4.18 migrated to oe-core
+	Thu,  7 Nov 2013 02:07:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id rA727ali023785
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 6 Nov 2013 18:07:36 -0800 (PST)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Wed, 6 Nov 2013 18:07:35 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 7 Nov 2013 10:07:31 +0800
+Message-ID: <cover.1383789890.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+MIME-Version: 1.0
+Subject: [PATCH 0/1] accel-ppp: fix qa issue 'found library in wrong location' while multilib enabled on qemux86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,60 +31,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2013 22:59:51 -0000
+X-List-Received-Date: Thu, 07 Nov 2013 02:07:36 -0000
+Content-Type: text/plain
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- meta-oe/recipes-devtools/orc/orc.inc       | 25 -------------------------
- meta-oe/recipes-devtools/orc/orc_0.4.18.bb |  6 ------
- 2 files changed, 31 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/orc/orc.inc
- delete mode 100644 meta-oe/recipes-devtools/orc/orc_0.4.18.bb
+The following changes since commit ffb5434823195cbdc41c76a110eaa6ae04e2b010:
 
-diff --git a/meta-oe/recipes-devtools/orc/orc.inc b/meta-oe/recipes-devtools/orc/orc.inc
-deleted file mode 100644
-index 4a356e4..0000000
---- a/meta-oe/recipes-devtools/orc/orc.inc
-+++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "orc - The Oil Runtime Compiler"
--HOMEPAGE = "http://code.entropywave.com/projects/orc/"
--LICENSE = "orc"
--LIC_FILES_CHKSUM = "file://COPYING;md5=1400bd9d09e8af56b9ec982b3d85797e"
--
--INC_PR = "r1"
--
--SRC_URI = "http://code.entropywave.com/download/orc/orc-${PV}.tar.gz;name=orc"
--
--inherit autotools pkgconfig
--
--BBCLASSEXTEND = "native nativesdk"
--
--PACKAGES =+ "orc-examples"
--FILES_orc-examples = "${libdir}/orc/*"
--FILES_${PN} = "${bindir}/*"
--
--python populate_packages_prepend () {
--    libdir = d.expand('${libdir}')
--    do_split_packages(d, libdir, '^lib(.*)\.so\.*', 'lib%s', 'ORC %s library', extra_depends='', allow_links=True)
--}
--
--do_compile_prepend_virtclass-native () {
--    sed -i -e 's#/tmp#.#g' ${S}/orc/orccodemem.c
--}
-diff --git a/meta-oe/recipes-devtools/orc/orc_0.4.18.bb b/meta-oe/recipes-devtools/orc/orc_0.4.18.bb
-deleted file mode 100644
-index 2375d8c..0000000
---- a/meta-oe/recipes-devtools/orc/orc_0.4.18.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require orc.inc
--
--PR = "${INC_PR}.0"
--
--SRC_URI[orc.md5sum] = "1a2552e8d127526c48d644fe6437b377"
--SRC_URI[orc.sha256sum] = "34d3c8a7259f42bed4dcfbc106c5e3d0cc8e17eeaa73128d1c5eaf92883a6a24"
+  dnsmasq: uprev to 2.6.3 (2013-11-06 15:12:45 -0500)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib hongxu/fix-accel-ppp
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-accel-ppp
+
+Hongxu Jia (1):
+  accel-ppp: fix qa issue 'found library in wrong location' while
+    multilib enabled on qemux86-64
+
+ meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
 -- 
-1.8.4.1
+1.8.1.2
 
 
