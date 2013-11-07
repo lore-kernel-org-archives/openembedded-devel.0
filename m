@@ -1,25 +1,49 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 653806D552
+Return-Path: <Zongchun.Yu@freescale.com>
+Received: from db9outboundpool.messaging.microsoft.com
+	(mail-db9lp0251.outbound.messaging.microsoft.com [213.199.154.251])
+	by mail.openembedded.org (Postfix) with ESMTP id B3FA16D686
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2013 02:10:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.3) with ESMTP id rA72Aqlj020929
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 Nov 2013 18:10:52 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 6 Nov 2013 18:10:51 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Nov 2013 10:10:47 +0800
-Message-ID: <938ba7c6374320f101e870e1c5e97d51f1252875.1383789890.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1383789890.git.hongxu.jia@windriver.com>
-References: <cover.1383789890.git.hongxu.jia@windriver.com>
+	Thu,  7 Nov 2013 03:38:14 +0000 (UTC)
+Received: from mail118-db9-R.bigfish.com (10.174.16.245) by
+	DB9EHSOBE029.bigfish.com (10.174.14.92) with Microsoft SMTP Server id
+	14.1.225.22; Thu, 7 Nov 2013 03:38:15 +0000
+Received: from mail118-db9 (localhost [127.0.0.1])	by
+	mail118-db9-R.bigfish.com (Postfix) with ESMTP id B28022C0187;
+	Thu,  7 Nov 2013 03:38:15 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 3
+X-BigFish: VS3(z37d5kzc89bhc857hzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz1d7338h17326ah8275bh8275dh18c673h1c8fb4h1de097h186068hz2dh109h2a8h5c0h839hd24hd2bhf0ah1288h12a5h12bdh137ah139eh1441h1504h1537h162dh1631h1751h1758h17f1h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh1bceh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h20dbh20f0h2218h2216h1155h)
+Received: from mail118-db9 (localhost.localdomain [127.0.0.1]) by mail118-db9
+	(MessageSwitch) id 1383795494370814_30849;
+	Thu,  7 Nov 2013 03:38:14 +0000 (UTC)
+Received: from DB9EHSMHS014.bigfish.com (unknown [10.174.16.233])	by
+	mail118-db9.bigfish.com (Postfix) with ESMTP id 4520A22004C;
+	Thu,  7 Nov 2013 03:38:14 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by DB9EHSMHS014.bigfish.com
+	(10.174.14.24) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Thu, 7 Nov 2013 03:38:13 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Thu, 7 Nov 2013 03:38:12 +0000
+Received: from b40527c60e6e6f (b40527-c60e6e6f.ap.freescale.net
+	[10.192.208.151])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
+	id rA73cAFp016473;	Wed, 6 Nov 2013 20:38:10 -0700
+From: Zongchun YU <b40527@freescale.com>
+To: 'Martin Jansa' <martin.jansa@gmail.com>
+References: <1383716430-18050-1-git-send-email-Zongchun.Yu@freescale.com>
+	<CA+chaQcpPKUwM6LfuKvvStDLvRYBEeBuPmHnxXuJdEee=zv3tA@mail.gmail.com>
+In-Reply-To: <CA+chaQcpPKUwM6LfuKvvStDLvRYBEeBuPmHnxXuJdEee=zv3tA@mail.gmail.com>
+Date: Thu, 7 Nov 2013 11:42:22 +0800
+Message-ID: <003701cedb6b$5f7bde20$1e739a60$@com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1] accel-ppp: fix qa issue 'found library in wrong location' while multilib enabled on qemux86-64
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: Ac7a8QQJauYiorM0R5CqerZwyTGQuQAd+k9A
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 02:10:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Nov 2013 03:38:15 -0000
+Content-Language: zh-cn
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-While multilib enabled on qemux86-64, accel-ppp-lib should be installed to
-'${baselib}/accel-ppp', but the accel-ppp's CMakeLists.txt hardcoded
-to install to 'lib/accel-ppp', such as:
-...
-INSTALL(TARGETS log_file
-        LIBRARY DESTINATION lib/accel-ppp
-)
-...
+>Please use -M to get smaller diff.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Hello Martin.
 
-diff --git a/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb b/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
-index a7c10f7..dde1f43 100644
---- a/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
-+++ b/meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb
-@@ -30,3 +30,12 @@ PACKAGES =+ "${PN}-libs"
- FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
- INSANE_SKIP_${PN}-libs = "dev-so"
- RDEPENDS_${PN} += "${PN}-libs"
-+
-+do_install_prepend() {
-+    cmlist=`find ${S} -name CMakeLists.txt`
-+    for file in $cmlist; do
-+        sed -i -e "s:LIBRARY DESTINATION lib/accel-ppp:LIBRARY DESTINATION ${baselib}/accel-ppp:g" \
-+               -e "s:\${CMAKE_INSTALL_PREFIX}/lib/accel-ppp:\${CMAKE_INSTALL_PREFIX}/${baselib}/accel-ppp:g" \
-+               $cmlist
-+    done
-+}
--- 
-1.8.1.2
+=20
+
+Thanks for your reminder. I have send one new patch to you and the mail =
+list.=20
+
+But I don=E2=80=99t know why the patch is rejected by the mail list? It =
+is ok before.
+
+If you have suggestion. Please reply to me directly.
+
+=20
+
+Best Regards
+
+Zongchun
 
 
