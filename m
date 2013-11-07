@@ -1,44 +1,43 @@
-Return-Path: <anders.roxell@linaro.org>
-Received: from mail-lb0-f174.google.com (mail-lb0-f174.google.com
-	[209.85.217.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 59DC86D1FF
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 689F26D1FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2013 15:55:50 +0000 (UTC)
-Received: by mail-lb0-f174.google.com with SMTP id q8so587996lbi.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2013 07:55:51 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=GjV05ir3D99WqbcfoXPXLPKboqUiEyhV+26hXz2G72g=;
-	b=VsuOX/Vg2yGwPU6sDwd/TJ1IC5zobs7/hcIH/eanxQEgYElEWj/fZJDbIF2ebglc2v
-	2zlhitQ8Hh4zVi614u9XlVX6o16eBUrqgAs8TuilYmvNXHNRqFdFdgSwoc670BBfRvWL
-	Qdg7CdWeCtA15nvq0tzqclQhdpLVQZLowMKp1DCpiANuDEBRFqDlpK6s79msEk6ErrjW
-	snPLC/KIPnkcQ78xVuZJ/+Z6KAi+UEP5608S6GJ0Pv3+xn8uS/vAi8wy3N7wLlDJPe8P
-	bZq/zl9siN7IqzAt50+BlcM4S+FwAzIb7TNMNFuNpdtmdhbzU5Wyf6ZDcaKSXB6p136e
-	Rang==
-X-Gm-Message-State: ALoCoQmuV30eKcTgF1GU2u+8NMzM/BatXAstLU+uFaOZcfYBjq9v7UIFTLPntKB7aN6KaCH0kuIl
-X-Received: by 10.152.18.131 with SMTP id w3mr574258lad.47.1383839751537;
-	Thu, 07 Nov 2013 07:55:51 -0800 (PST)
-Received: from nexon.se (c-853670d5.07-21-73746f28.cust.bredbandsbolaget.se.
-	[213.112.54.133])
-	by mx.google.com with ESMTPSA id vs11sm4034828lac.3.2013.11.07.07.55.50
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 07 Nov 2013 07:55:50 -0800 (PST)
-Date: Thu, 7 Nov 2013 17:03:47 +0100
-From: Anders Roxell <anders.roxell@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131107160346.GB26197@nexon.se>
-References: <1382105347-27538-1-git-send-email-anders.roxell@linaro.org>
-	<20131028082603.GD3704@jama>
+	Thu,  7 Nov 2013 16:02:30 +0000 (UTC)
+Received: from [216.82.241.196:14345] by server-2.bemta-8.messagelabs.com id
+	F8/63-22589-799BB725; Thu, 07 Nov 2013 16:02:31 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-2.tower-46.messagelabs.com!1383840149!30861893!2
+X-Originating-IP: [66.77.174.13]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.12; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 23710 invoked from network); 7 Nov 2013 16:02:29 -0000
+Received: from mail.mx3.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
+	by server-2.tower-46.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 Nov 2013 16:02:29 -0000
+Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx1.digi.com
+	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 7 Nov 2013 10:02:32 -0600
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by
+	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
+	8.3.327.1; Thu, 7 Nov 2013 10:02:28 -0600
+Received: from [10.101.1.79] (10.101.1.79) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.327.1;
+	Thu, 7 Nov 2013 17:02:26 +0100
+Message-ID: <527BB991.8060008@digi.com>
+Date: Thu, 7 Nov 2013 17:02:25 +0100
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-In-Reply-To: <20131028082603.GD3704@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: linaro-networking@linaro.org, patches@linaro.org
-Subject: Re: [PATCH] libhugetlbfs: add support for armv7a
+To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+References: <5256CE06.60502@digi.com>	<20131010213127.14c4f478@e6520eb>	<527BA8AE.4000306@digi.com>
+	<20131107161445.589ad9ea@e6520eb>
+In-Reply-To: <20131107161445.589ad9ea@e6520eb>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: cherokee wrong SRC_URI (was Dylan backports)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,98 +51,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 15:55:51 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Nov 2013 16:02:31 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 2013-10-28 09:26, Martin Jansa wrote:
-> On Fri, Oct 18, 2013 at 04:09:07PM +0200, Anders Roxell wrote:
-> > Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-> > ---
-> >  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 10 ++++++++--
-> >  1 file changed, 8 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > index 24480c3..4f1bfa4 100644
-> > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > @@ -20,10 +20,16 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
-> >  
-> >  S = "${WORKDIR}/git"
-> >  
-> > -COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
-> > +COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
-> >  
-> > +python __anonymous() {
-> > +    if base_contains('TARGET_ARCH', 'arm', True, False, d):
-> > +        d.setVar('ARCH', 'armv7l')
-> > +    else:
-> > +        d.setVar('ARCH', d.getVar('TARGET_ARCH'))
-> > +}
-> >  
-> > -EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' BUILDTYPE=NATIVEONLY ${LIBARGS}"
-> > +EXTRA_OEMAKE = "'ARCH=${ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' BUILDTYPE=NATIVEONLY ${LIBARGS}"
-> >  CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
-> >  
-> >  TARGET_CC_ARCH += "${LDFLAGS}"
-> 
-> It enables every arm* and fails for qemuarm:
-> 
-> |
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld:
-> error: zero_filesize_segment.ld: SECTIONS seen after other input files;
-> try -T/--script
-> | collect2: error: ld returned 1 exit status
-> | 	 CC32 obj32/linkhuge.o
-> | 	 LD32 (hugelink test) obj32/linkhuge
-> | 	 CC32 obj32/linkhuge_nofd.o
-> | 	 LD32 (hugelink test) obj32/linkhuge_nofd
-> | 	 CC32 obj32/linkshare.o
-> | 	 LD32 (hugelink test) obj32/linkshare
-> | 	 CC32 obj32/linkhuge_rw.o
-> | 	 LD32 (hugelink_rw test) obj32/linkhuge_rw
-> | arm-oe-linux-gnueabi-ld: error: cannot open text-segment=2097152: No
-> such file or directory
-> | arm-oe-linux-gnueabi-ld: fatal error: unable to parse script file
-> text-segment=2097152
-> | collect2: error: ld returned 1 exit status
-> | make[1]: *** [obj32/linkhuge_rw] Error 1
-> | make: *** [tests/all] Error 2
-> | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_compile (log file is located at
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libhugetlbfs/git-r0/temp/log.do_compile.24357)
-> NOTE: recipe libhugetlbfs-git-r0: task do_compile: Failed
-> ERROR: Task 23498
-> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb,
-> do_compile) failed with exit code '1'
-Hi,
+Hi Eric,
 
-I'm sorry for the late response!
+On 07/11/13 16:14, Eric Bénard wrote:
+> that's now pushed, thanks for the reminder.
+>
+> Eric
 
-How can I reproduce this error?
-I tried to build libhugetlbfs for qemuarm and that worked for me...
+Well I should have probably checked that the mirror was still working 
+before sending my e-mail but you know ... Murphy's law.
 
-Cheers,
-Anders
+The thing is that for cherokee the mirror I used to download the package 
+from has removed it since i sent the patch a couple of months ago.
 
-> 
-> 
-> > -- 
-> > 1.8.1.2
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+I'm sorry to have pushed you to merge the patches. Anyway from 
+meta-openembedded point of view the status has *not* gone any worse. It 
+was not working before (with old cherokee url) and it's not working now 
+as well.
 
+I've found a couple of sites with the original package (same md5sum and 
+sha256sum):
 
+<ftp://ftp.nluug.nl/pub/internet/cherokee/1.2/1.2.98/cherokee-1.2.98.tar.gz>
+<ftp://ftp.heanet.ie/mirrors/cherokee/1.2/1.2.98/cherokee-1.2.98.tar.gz>
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+but at this moment I'm not sure whether it's worth to keep changing the 
+SRC_URI time and time again.
+
+Probably the way to go is to revert my patch leaving the original 
+cherokee as a reference and include the package in any of the 
+yoctoproject mirrors.
+
+By the way the recipe is now broken not only in Dylan, but also in 
+*Dora* and *master*.
+
+Comments?
+
+-
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
 
