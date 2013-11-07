@@ -1,44 +1,35 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
-	[216.82.243.202])
-	by mail.openembedded.org (Postfix) with ESMTP id CC6966D3D5
+Return-Path: <alexandre.tuleu@gmail.com>
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by mail.openembedded.org (Postfix) with ESMTP id BF0DB6CA17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2013 17:13:05 +0000 (UTC)
-Received: from [216.82.241.196:61745] by server-10.bemta-8.messagelabs.com id
-	02/28-29333-32ACB725; Thu, 07 Nov 2013 17:13:07 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-8.tower-46.messagelabs.com!1383844370!23991752!1
-X-Originating-IP: [66.77.174.13]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.12; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10802 invoked from network); 7 Nov 2013 17:12:51 -0000
-Received: from mail.mx3.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
-	by server-8.tower-46.messagelabs.com with RC4-SHA encrypted SMTP;
-	7 Nov 2013 17:12:51 -0000
-Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx1.digi.com
-	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.327.1;
-	Thu, 7 Nov 2013 11:12:53 -0600
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH03.digi.com
-	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.158.1;
-	Thu, 7 Nov 2013 11:12:49 -0600
-Received: from [10.101.1.79] (10.101.1.79) by dor-sms-exch01.digi.com
-	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.327.1;
-	Thu, 7 Nov 2013 18:12:48 +0100
-Message-ID: <527BCA0E.1070706@digi.com>
-Date: Thu, 7 Nov 2013 18:12:46 +0100
-From: Javier Viguera <javier.viguera@digi.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, Tom King <ka6sox@gmail.com>
-References: <5256CE06.60502@digi.com> <20131107161445.589ad9ea@e6520eb>
-	<527BB991.8060008@digi.com> <1678132.5T9pc4s1xI@helios>
-In-Reply-To: <1678132.5T9pc4s1xI@helios>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	=?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: cherokee wrong SRC_URI (was Dylan backports)
+	Thu,  7 Nov 2013 18:17:38 +0000 (UTC)
+Received: by mail-we0-f181.google.com with SMTP id t60so935352wes.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Nov 2013 10:17:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=u0ozw/yy6JPGFCZhE6clyixbfwBtcEwz2EGEG2bPlN0=;
+	b=v/9vi13zuf8JJ1/+BJexwUGdqF9p3VHsovaYgA2EOZC5slmrw5nieQg/iiGKcnrqnG
+	N0T769OW+XIhgdY/1SIETW4IA89ELiTwvr7XH/Eii+el7g11O1mSSG4fnFbCDkODMri2
+	ZvxcKg9lzFEd+kwQcRxyUZYSr56yffJZbUnCnt2wGTB+DeqI5WLAcRBGyZRvqffv++9k
+	KrcIWoop+WpZlZXK+4LWR3Spjy37NQVUoSCIho/cjNAuJTHeKNNd7xpyBu1qQAvF3SGu
+	n6Bt7q2yCeQK3BREkB9W1N6alp7wyqeNQL2c3V3coOZ5VX6z5P4Hwe4dRH8O1H1x1Dqk
+	kcnA==
+X-Received: by 10.180.19.133 with SMTP id f5mr3877401wie.60.1383848259235;
+	Thu, 07 Nov 2013 10:17:39 -0800 (PST)
+Received: from localhost.localdomain (gtisr.isr.ist.utl.pt. [193.136.138.62])
+	by mx.google.com with ESMTPSA id
+	ey4sm9242685wic.11.2013.11.07.10.17.38 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Nov 2013 10:17:38 -0800 (PST)
+Sender: alexandre tuleu <alexandre.tuleu@gmail.com>
+From: Alexandre Tuleu <alexandre.tuleu.2005@polytechnique.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Nov 2013 18:17:19 +0000
+Message-Id: <1383848240-8328-1-git-send-email-alexandre.tuleu.2005@polytechnique.org>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH] emacs: Allows non-x11 build on distribution supporting x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,42 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2013 17:13:06 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Nov 2013 18:17:39 -0000
 
-Hi Paul,
+By default emacs will build with x11 if the distribution has x11
+support. However in a .bbappend file a user could strip away x11
+support, even if x11 is supported on the platform. There was another
+check in do_compile_prepend() that checked if the distro has x11
+feature and not if PACAKAGECONFIG enables x11 support.
 
-On 07/11/13 17:45, Paul Eggleton wrote:
+Since in this receipe dbus dependence is only marked if x11 is
+enabled, desactiving x11 support should also desactivate dbus support.
 
-> 2) Longer term the recipe should just be upgraded; last I checked we've fallen
-> quite far behind the current version. Javier, if you're relying on Cherokee is
-> that something you'd be prepared to do?
+Signed-off-by: Alexandre Tuleu <alexandre.tuleu.2005@polytechnique.org>
+---
+ meta-oe/recipes-support/emacs/emacs.inc |    7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-The problem is not the version, the problem is the main cherokee project 
-uses those github autogenerated-from-tags tarballs. See:
+diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
+index fa554ed..7e468c1 100644
+--- a/meta-oe/recipes-support/emacs/emacs.inc
++++ b/meta-oe/recipes-support/emacs/emacs.inc
+@@ -9,7 +9,7 @@ DEPENDS += "qemu-native"
+ DEPENDS +=" liblockfile"
+ 
+ X11DEPENDS = " \
+-    libice libsm atk cairo dbus expat libffi fontconfig freetype gconf giflib \
++    libice libsm atk cairo expat libffi fontconfig freetype gconf giflib \
+     jpeg xz pixman libpng librsvg tiff libcroco \
+     libx11 libxau libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes \
+     libxft libxpm libxrandr libxrender \
+@@ -19,7 +19,8 @@ X11DEPENDS = " \
+ EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+-PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x,${X11DEPENDS}"
++PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x --without-dbus,${X11DEPENDS}"
++
+ 
+ inherit autotools
+ 
+@@ -87,7 +88,7 @@ do_compile_prepend() {
+     ${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
+     ${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
+ 
+-    if [ ! -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ] ; then
++    if [ ! -z "${@base_contains('PACKAGECONFIG', 'x11', 'x11', '', d)}" ] ; then
+         echo "X11 build enabled"
+         # copy only as much stuff as we need
+         # before: 5.5G   ../../qemu-treedir/
+-- 
+1.7.9.5
 
-<http://cherokee-project.com/downloads.html>
-
-Some examples:
-
-<https://github.com/cherokee/webserver/archive/v1.2.103.zip>
-...
-<https://github.com/cherokee/webserver/archive/v1.2.98.zip>
-
-And as far as i know in this case we cannot rely the checksums remain 
-stable.
-
-Anyway at this moment I'm stuck on Dylan working on a BSP layer, so I 
-don't have the time to play with other branches, sorry.
-
-My preference at this moment would be to integrate the patch from Eric 
-with the German mirror (once fixed in version 3) in all the branches and 
-at the same time keep a copy of the tarball in one of the yoctoproject 
-source mirrors.
-
--
-Javier Viguera
-Software Engineer
-Digi International® Spain S.A.U.
 
