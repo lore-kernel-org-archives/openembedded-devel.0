@@ -1,37 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 61A736D663;
-	Fri,  8 Nov 2013 11:23:05 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id hn9so2002080wib.11
-	for <multiple recipients>; Fri, 08 Nov 2013 03:23:06 -0800 (PST)
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BBBC6D663
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  8 Nov 2013 11:29:47 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id l18so1767122wgh.18
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Nov 2013 03:29:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:cc:content-type;
-	bh=xyEXTUdTyvDwF2+J7NYr0rnEFifyj9OBq8tBFMhVEVQ=;
-	b=IpafHyDBgLtjCymAfsGZ2ETugeJaH8ODTpCqA4ElKDVGkrDDbh1hC3qfmyy0JZZ/46
-	KJ34hoRb4XjXK6Z4VREUmt04CFg3efJoURKXcdd9ouLa8xY5O9jqVgy9ISAwPU1p4fdF
-	TpzrRhxcJcm+23AErAqph1hoTjerwlJb0oiFLh8pa2XNy0r9ArR+Psa9HGlSIecuYL2/
-	dCRRnPHexJGP3N7hpkgmZvqPbceGcXZTbLe/W3hQ3AocOthb/n91fZ76C33ablcZ3asr
-	l8HDR5ht2UHty838zh51aUDV34kgFuBhMKkoZlmsGvsH3ieWVAZZksfeFgN937sPrXfr
-	A+cQ==
+	bh=39PtvbJpqjddebnRK/C8P0CobIyocwVkx1VwisNqZzc=;
+	b=oDJQBk4H4311ZtABk9+Rl25b0vgcW79DdiOcQ4Rpge+zLVU2Jt63IUE/mi6QPDOyIa
+	EtMWC940BVorlLoNz3czZ9Ca+cYgf1DWivjRmKnDzhtPKLWOaP8/P/pUqw9M3L43+oT3
+	XVbUwerK2k7+G+pPd1jtHg1gkff+4R0w8iKAeFp1bY4UpqNXpQXFn7+ikpUwLrz93ppa
+	SWgpNISAtUlyVgKG+PUhSqB/obIUSQccIc0VySXffUPpLvGiB41pD8tFQyRbNd6THMtr
+	R6aeYi2MmwTCmvTFnJ/I1XPQuY2dctpxPHARw+K8+PwwcW27QhX3+cXyuDtYy7IzeiFM
+	48BQ==
 MIME-Version: 1.0
-X-Received: by 10.180.72.238 with SMTP id g14mr1921355wiv.17.1383909786616;
-	Fri, 08 Nov 2013 03:23:06 -0800 (PST)
-Received: by 10.194.179.198 with HTTP; Fri, 8 Nov 2013 03:23:06 -0800 (PST)
-In-Reply-To: <1383904061.6271.297.camel@ted>
-References: <1383866326.6271.286.camel@ted>
-	<CAJTo0LYq5PmQtBdwghmDGLs2ccTO6BBwJNGw7s37Yt+zjkWU6Q@mail.gmail.com>
-	<CAAQYJAuMoE6gOMmM2trSN1MY7weCF+07JAJuhQu1K=p5KxO=Yg@mail.gmail.com>
-	<1383904061.6271.297.camel@ted>
-Date: Fri, 8 Nov 2013 12:23:06 +0100
-Message-ID: <CA+chaQfB37mDfsiFreA3_7NBbeEitnk-xO07i0FKc55hPSZocg@mail.gmail.com>
+X-Received: by 10.194.78.51 with SMTP id y19mr542448wjw.62.1383910188794; Fri,
+	08 Nov 2013 03:29:48 -0800 (PST)
+Received: by 10.194.179.198 with HTTP; Fri, 8 Nov 2013 03:29:48 -0800 (PST)
+In-Reply-To: <20131107160346.GB26197@nexon.se>
+References: <1382105347-27538-1-git-send-email-anders.roxell@linaro.org>
+	<20131028082603.GD3704@jama> <20131107160346.GB26197@nexon.se>
+Date: Fri, 8 Nov 2013 12:29:48 +0100
+Message-ID: <CA+chaQeSXF8qXuiW53e5JaQoFU-3dn83pDJZgrfMQdqTJ5ns=A@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH] bitbake.conf: Default DISTRO to nodistro
+Cc: linaro-networking@linaro.org, "patches@linaro.org" <patches@linaro.org>
+Subject: Re: [PATCH] libhugetlbfs: add support for armv7a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,53 +43,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2013 11:23:08 -0000
+X-List-Received-Date: Fri, 08 Nov 2013 11:29:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I don't feel strongly about this, but I have heard people say "distroless"
-and I'm using the same when refering to default oe-core setup.
+I wasn't using anything special to reproduce it, my setup is described here
+http://openembedded.org/wiki/Bitbake_World_Status
 
 
-On Fri, Nov 8, 2013 at 10:47 AM, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
+On Thu, Nov 7, 2013 at 5:03 PM, Anders Roxell <anders.roxell@linaro.org>wrote:
 
-> On Fri, 2013-11-08 at 10:33 +0100, Andrea Adami wrote:
-> > On Fri, Nov 8, 2013 at 10:25 AM, Burton, Ross <ross.burton@intel.com>
-> wrote:
-> > > On 7 November 2013 23:18, Richard Purdie
-> > > <richard.purdie@linuxfoundation.org> wrote:
-> > >> +DISTRO ??= "nodistro"
+> On 2013-10-28 09:26, Martin Jansa wrote:
+> > On Fri, Oct 18, 2013 at 04:09:07PM +0200, Anders Roxell wrote:
+> > > Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+> > > ---
+> > >  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 10
+> ++++++++--
+> > >  1 file changed, 8 insertions(+), 2 deletions(-)
 > > >
-> > > Wouldn't "oe-core" be a better name, considering that's what
-> > > DISTROVERSION becomes if DISTRO is unset?
+> > > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/
+> libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/
+> libhugetlbfs_git.bb
+> > > index 24480c3..4f1bfa4 100644
+> > > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > @@ -20,10 +20,16 @@ SRC_URI = "git://
+> git.code.sf.net/p/libhugetlbfs/code \
 > > >
-> > > Ross
+> > >  S = "${WORKDIR}/git"
+> > >
+> > > -COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
+> > > +COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
+> > >
+> > > +python __anonymous() {
+> > > +    if base_contains('TARGET_ARCH', 'arm', True, False, d):
+> > > +        d.setVar('ARCH', 'armv7l')
+> > > +    else:
+> > > +        d.setVar('ARCH', d.getVar('TARGET_ARCH'))
+> > > +}
+> > >
+> > > -EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}'
+> BUILDTYPE=NATIVEONLY ${LIBARGS}"
+> > > +EXTRA_OEMAKE = "'ARCH=${ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}'
+> BUILDTYPE=NATIVEONLY ${LIBARGS}"
+> > >  CFLAGS += "-fexpensive-optimizations -frename-registers
+> -fomit-frame-pointer -g0"
+> > >
+> > >  TARGET_CC_ARCH += "${LDFLAGS}"
 > >
+> > It enables every arm* and fails for qemuarm:
 > >
-> > Agreed, we already have DISTRO_VERSION = "oe-core.0"
-> > This sounds also the right name for THE default distro.
+> > |
+> >
+> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld:
+> > error: zero_filesize_segment.ld: SECTIONS seen after other input files;
+> > try -T/--script
+> > | collect2: error: ld returned 1 exit status
+> > |      CC32 obj32/linkhuge.o
+> > |      LD32 (hugelink test) obj32/linkhuge
+> > |      CC32 obj32/linkhuge_nofd.o
+> > |      LD32 (hugelink test) obj32/linkhuge_nofd
+> > |      CC32 obj32/linkshare.o
+> > |      LD32 (hugelink test) obj32/linkshare
+> > |      CC32 obj32/linkhuge_rw.o
+> > |      LD32 (hugelink_rw test) obj32/linkhuge_rw
+> > | arm-oe-linux-gnueabi-ld: error: cannot open text-segment=2097152: No
+> > such file or directory
+> > | arm-oe-linux-gnueabi-ld: fatal error: unable to parse script file
+> > text-segment=2097152
+> > | collect2: error: ld returned 1 exit status
+> > | make[1]: *** [obj32/linkhuge_rw] Error 1
+> > | make: *** [tests/all] Error 2
+> > | ERROR: oe_runmake failed
+> > | WARNING: exit code 1 from a shell command.
+> > | ERROR: Function failed: do_compile (log file is located at
+> >
+> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libhugetlbfs/git-r0/temp/log.do_compile.24357)
+> > NOTE: recipe libhugetlbfs-git-r0: task do_compile: Failed
+> > ERROR: Task 23498
+> >
+> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/
+> libhugetlbfs_git.bb,
+> > do_compile) failed with exit code '1'
+> Hi,
 >
-> I disagree and I feel quite strongly about this. OE-Core is not a
-> distro. The whole idea was that OE-Core should build with sane defaults
-> without any distro set. This is a dummy placeholder value and it really
-> does mean to say that no distro is set.
+> I'm sorry for the late response!
 >
-> We did put a value into the DISTRO_VERSION field so you could tell what
-> was being used but again its a placeholder.
->
-> So in my view "nodistro" is clearer about what is meant.
+> How can I reproduce this error?
+> I tried to build libhugetlbfs for qemuarm and that worked for me...
 >
 > Cheers,
+> Anders
 >
-> Richard
+> >
+> >
+> > > --
+> > > 1.8.1.2
+> > >
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
 >
 >
->
->
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
