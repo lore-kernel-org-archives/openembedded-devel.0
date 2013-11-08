@@ -1,35 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BBBC6D663
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2013 11:29:47 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id l18so1767122wgh.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Nov 2013 03:29:48 -0800 (PST)
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 81A996A467;
+	Fri,  8 Nov 2013 11:55:53 +0000 (UTC)
+Received: by mail-ie0-f176.google.com with SMTP id x13so433458ief.35
+	for <multiple recipients>; Fri, 08 Nov 2013 03:55:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=39PtvbJpqjddebnRK/C8P0CobIyocwVkx1VwisNqZzc=;
-	b=oDJQBk4H4311ZtABk9+Rl25b0vgcW79DdiOcQ4Rpge+zLVU2Jt63IUE/mi6QPDOyIa
-	EtMWC940BVorlLoNz3czZ9Ca+cYgf1DWivjRmKnDzhtPKLWOaP8/P/pUqw9M3L43+oT3
-	XVbUwerK2k7+G+pPd1jtHg1gkff+4R0w8iKAeFp1bY4UpqNXpQXFn7+ikpUwLrz93ppa
-	SWgpNISAtUlyVgKG+PUhSqB/obIUSQccIc0VySXffUPpLvGiB41pD8tFQyRbNd6THMtr
-	R6aeYi2MmwTCmvTFnJ/I1XPQuY2dctpxPHARw+K8+PwwcW27QhX3+cXyuDtYy7IzeiFM
-	48BQ==
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=F0BDSFlTtnEUzO0C/mnchUrYeJtQ7MokD7tM12ZdKXU=;
+	b=mE1tfatX5JNHARSnOQIeV3oFzkfQDRBuW3rVtlIdmwaed8Fd10qEruSguXrkw0Jrkr
+	T80f3qL84BlJaMf30z6g03YniQYvK+Dx/AhIvKbsrUIawwdEiUpIQ1mIxPQOkJl368E5
+	KD2mJ2klWCPO8VvDyHZR6C3qpRzX5hF4vBIXOd6VSU2lCt8OawiWwG5NTGPGhwQazcx1
+	HH5zIELzMs/7PeAabfD4499hW+dQfEHK/C07DfqrFniuTb4c5MCZnKuKa/J2Y0rpdS7B
+	QB7V4L8ROxxcS/7rmIjO4Ek+cFMGFgLCNBJwpjDBFK6pz+/z84Am/M8bDN2YV3jVPknT
+	wE0g==
 MIME-Version: 1.0
-X-Received: by 10.194.78.51 with SMTP id y19mr542448wjw.62.1383910188794; Fri,
-	08 Nov 2013 03:29:48 -0800 (PST)
-Received: by 10.194.179.198 with HTTP; Fri, 8 Nov 2013 03:29:48 -0800 (PST)
-In-Reply-To: <20131107160346.GB26197@nexon.se>
-References: <1382105347-27538-1-git-send-email-anders.roxell@linaro.org>
-	<20131028082603.GD3704@jama> <20131107160346.GB26197@nexon.se>
-Date: Fri, 8 Nov 2013 12:29:48 +0100
-Message-ID: <CA+chaQeSXF8qXuiW53e5JaQoFU-3dn83pDJZgrfMQdqTJ5ns=A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: linaro-networking@linaro.org, "patches@linaro.org" <patches@linaro.org>
-Subject: Re: [PATCH] libhugetlbfs: add support for armv7a
+X-Received: by 10.50.45.100 with SMTP id l4mr2031395igm.8.1383911754797; Fri,
+	08 Nov 2013 03:55:54 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.64.20.229 with HTTP; Fri, 8 Nov 2013 03:55:54 -0800 (PST)
+In-Reply-To: <1383866418.6271.288.camel@ted>
+References: <1381358545.29912.50.camel@ted> <20131028151004.34b2af21@e6520eb>
+	<CAMKF1so3GUQZMvLADSCr=Exavo5OVgh==do7aHhe_wUQk9mFHQ@mail.gmail.com>
+	<20131029082852.4399ee5e@e6520eb> <1383146112.25877.34.camel@ted>
+	<20131102094725.14fb6902@e6520eb>
+	<CAAQYJAvvqEByKQRPKRZviqPJmSrDqYt1PvnYPxeJuOSuKO-HaA@mail.gmail.com>
+	<1383520239.6271.96.camel@ted>
+	<CAAQYJAsRd=4bXxG8h42EbJgnspo_3ge=__GYpqShQom9-n11RA@mail.gmail.com>
+	<CAAQYJAttXLv8jQczSLU=8C9iw6z9JS6xbOrOiB7ahaowzLWx8g@mail.gmail.com>
+	<1383866418.6271.288.camel@ted>
+Date: Fri, 8 Nov 2013 09:55:54 -0200
+X-Google-Sender-Auth: 0rrce-VCFTyVToQb0XjaNinBoKk
+Message-ID: <CAP9ODKrfJov9n+EmY1sShuHC6kdghTt3m7eagFcYThcC75f5GQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <Openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] SRC_URI computing order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,119 +51,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2013 11:29:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 08 Nov 2013 11:55:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I wasn't using anything special to reproduce it, my setup is described here
-http://openembedded.org/wiki/Bitbake_World_Status
+On Thu, Nov 7, 2013 at 9:20 PM, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> On Wed, 2013-11-06 at 09:45 +0100, Andrea Adami wrote:
+>> On Mon, Nov 4, 2013 at 11:13 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+>> > On Mon, Nov 4, 2013 at 12:10 AM, Richard Purdie
+>> > <richard.purdie@linuxfoundation.org> wrote:
+>> >> On Sun, 2013-11-03 at 23:16 +0100, Andrea Adami wrote:
+>> >>> I have to report an undesiderate behavior:
+>> >>>
+>> >>> the formfactor files in our .bbappend are not considered :/
+>> >>> DEBUG: Searching for machconfig in paths:....
+>> >>>   /oe/oe-core/meta/recipes-bsp/formfactor/formfactor-0.0/
+>> >>>   /oe/oe-core/meta/recipes-bsp/formfactor/formfactor/
+>> >>>   /oe/oe-core/meta/recipes-bsp/formfactor/files/
+>> >>>   /oe/meta-handheld/recipes-bsp/formfactor/files/poodle
+>> >>>
+>> >>> so we end up with the empty machconfig of
+>> >>> /oe/oe-core/meta/recipes-bsp/formfactor/files/
+>> >>>
+>> >>> Surely this didn't happen when we tested the recipe.
+>> >>
+>> >> With which revision of OE-Core? Was this with the dora release tag,
+>> >> current dora head or master?
+>> >>
+>> >> Cheers,
+>> >>
+>> >> Richard
+>> >>
+>> >>
+>> >
+>> > This was with fresh master:
+>> >
+>> > Build Configuration:
+>> > BB_VERSION        = "1.21.0"
+>> > BUILD_SYS         = "i686-linux"
+>> > NATIVELSBSTRING   = "Gentoo"
+>> > TARGET_SYS        = "arm-oe-linux-gnueabi"
+>> > MACHINE           = "poodle"
+>> > DISTRO_VERSION    = "oe-core.0"
+>> > TUNE_FEATURES     = "armv5 thumb dsp"
+>> > TARGET_FPU        = "soft"
+>> > meta              = "master:511b4194165ed7a5645169e09c27db280d5a5316"
+>> > meta-initramfs    = "master:4d62e7f575e2a87197c74ab4639561b45eec0e60"
+>> > meta-handheld     = "master:55a310666b543e6beca47fa3c197492d5a6cf8ff"
+>> >
+>> > Cheers
+>> FYI
+>> In the hurry for a solution for fixing formfactor and ipaq-boot-params
+>> my quick hack was to revert
+>>
+>> http://cgit.openembedded.org/openembedded-core/commit/meta?id=92cbf7eeea553bfa24c7081473fa8bc4ebc1f552
+>>
+>> That appears to fix the specific issue...
+>
+> Its a hacky workaround. The real issue is that you don't set DISTRO and
+> this puts a :: into FILESOVERRIDES (and OVERRIDES). I've sent a patch
+> out which sets a default for DISTRO since its the nicer way I could find
+> to fix this. The behaviour in the above patch is correct.
 
+Can you point this patch?
 
-On Thu, Nov 7, 2013 at 5:03 PM, Anders Roxell <anders.roxell@linaro.org>wrote:
-
-> On 2013-10-28 09:26, Martin Jansa wrote:
-> > On Fri, Oct 18, 2013 at 04:09:07PM +0200, Anders Roxell wrote:
-> > > Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
-> > > ---
-> > >  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 10
-> ++++++++--
-> > >  1 file changed, 8 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/
-> libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/
-> libhugetlbfs_git.bb
-> > > index 24480c3..4f1bfa4 100644
-> > > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > > @@ -20,10 +20,16 @@ SRC_URI = "git://
-> git.code.sf.net/p/libhugetlbfs/code \
-> > >
-> > >  S = "${WORKDIR}/git"
-> > >
-> > > -COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
-> > > +COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
-> > >
-> > > +python __anonymous() {
-> > > +    if base_contains('TARGET_ARCH', 'arm', True, False, d):
-> > > +        d.setVar('ARCH', 'armv7l')
-> > > +    else:
-> > > +        d.setVar('ARCH', d.getVar('TARGET_ARCH'))
-> > > +}
-> > >
-> > > -EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}'
-> BUILDTYPE=NATIVEONLY ${LIBARGS}"
-> > > +EXTRA_OEMAKE = "'ARCH=${ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}'
-> BUILDTYPE=NATIVEONLY ${LIBARGS}"
-> > >  CFLAGS += "-fexpensive-optimizations -frename-registers
-> -fomit-frame-pointer -g0"
-> > >
-> > >  TARGET_CC_ARCH += "${LDFLAGS}"
-> >
-> > It enables every arm* and fails for qemuarm:
-> >
-> > |
-> >
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/armv5te-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.8.1/ld:
-> > error: zero_filesize_segment.ld: SECTIONS seen after other input files;
-> > try -T/--script
-> > | collect2: error: ld returned 1 exit status
-> > |      CC32 obj32/linkhuge.o
-> > |      LD32 (hugelink test) obj32/linkhuge
-> > |      CC32 obj32/linkhuge_nofd.o
-> > |      LD32 (hugelink test) obj32/linkhuge_nofd
-> > |      CC32 obj32/linkshare.o
-> > |      LD32 (hugelink test) obj32/linkshare
-> > |      CC32 obj32/linkhuge_rw.o
-> > |      LD32 (hugelink_rw test) obj32/linkhuge_rw
-> > | arm-oe-linux-gnueabi-ld: error: cannot open text-segment=2097152: No
-> > such file or directory
-> > | arm-oe-linux-gnueabi-ld: fatal error: unable to parse script file
-> > text-segment=2097152
-> > | collect2: error: ld returned 1 exit status
-> > | make[1]: *** [obj32/linkhuge_rw] Error 1
-> > | make: *** [tests/all] Error 2
-> > | ERROR: oe_runmake failed
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_compile (log file is located at
-> >
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libhugetlbfs/git-r0/temp/log.do_compile.24357)
-> > NOTE: recipe libhugetlbfs-git-r0: task do_compile: Failed
-> > ERROR: Task 23498
-> >
-> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/
-> libhugetlbfs_git.bb,
-> > do_compile) failed with exit code '1'
-> Hi,
->
-> I'm sorry for the late response!
->
-> How can I reproduce this error?
-> I tried to build libhugetlbfs for qemuarm and that worked for me...
->
-> Cheers,
-> Anders
->
-> >
-> >
-> > > --
-> > > 1.8.1.2
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
->
->
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
