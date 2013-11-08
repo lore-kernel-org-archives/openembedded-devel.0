@@ -1,24 +1,30 @@
-Return-Path: <Rongqing.Li@windriver.com>
+Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B9DB86D467
+	by mail.openembedded.org (Postfix) with ESMTP id 74BD76AE37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2013 05:08:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id rA858jAu001555
+	Fri,  8 Nov 2013 08:30:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.3) with ESMTP id rA88Uf55004634
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Nov 2013 21:08:45 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Thu, 7 Nov 2013 21:08:45 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2013 13:08:44 +0800
-Message-ID: <1383887325-8280-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Fri, 8 Nov 2013 00:30:41 -0800 (PST)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
+	Fri, 8 Nov 2013 00:30:41 -0800
+Message-ID: <527CA127.8030202@windriver.com>
+Date: Fri, 8 Nov 2013 16:30:31 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
 MIME-Version: 1.0
-Subject: [PATCH meta-networking] ntp: fix 60-ntpd.list path
+To: Rongqing Li <rongqing.li@windriver.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <cover.1383884700.git.hongxu.jia@windriver.com>
+	<568c0cba0af47d5f6a0402ef4ac8316db7769326.1383884700.git.hongxu.jia@windriver.com>
+	<527C71BF.3020002@windriver.com>
+In-Reply-To: <527C71BF.3020002@windriver.com>
+Subject: Re: [PATCH 1/1] quagga: add pam support for vtysh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,38 +38,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2013 05:08:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 Nov 2013 08:30:39 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+On 11/08/2013 01:08 PM, Rongqing Li wrote:
+>
+>
+> On 11/08/2013 12:32 PM, Hongxu Jia wrote:
+>> According to DISTRO_FEATURES to add pam support for quagga, and import
+>> configure file from Fedora.
+>>
+>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>> ---
+>>   meta-networking/recipes-protocols/quagga/files/quagga.pam | 13 
+>> +++++++++++++
+>>   meta-networking/recipes-protocols/quagga/quagga.inc       | 13 
+>> ++++++++++++-
+>>   2 files changed, 25 insertions(+), 1 deletion(-)
+>>   create mode 100644 
+>> meta-networking/recipes-protocols/quagga/files/quagga.pam
+>>
+>> diff --git 
+>> a/meta-networking/recipes-protocols/quagga/files/quagga.pam 
+>> b/meta-networking/recipes-protocols/quagga/files/quagga.pam
+>> new file mode 100644
+>> index 0000000..3541a97
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-protocols/quagga/files/quagga.pam
+>> @@ -0,0 +1,13 @@
+>> +#
+>> +# The PAM configuration file for the quagga `vtysh' service
+>> +#
+>> +
+>> +# This allows root to change user infomation without being
+>> +# prompted for a password
+>> +auth        sufficient    pam_rootok.so
+>> +
+>> +# The standard Unix authentication modules, used with
+>> +# NIS (man nsswitch) as well as normal /etc/passwd and
+>> +# /etc/shadow entries.
+>> +auth       include      common-auth
+>> +
+>> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc 
+>> b/meta-networking/recipes-protocols/quagga/quagga.inc
+>> index 2106c9b..52cd7a3 100644
+>> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
+>> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+>> @@ -32,10 +32,12 @@ SRC_URI = 
+>> "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
+>>              file://watchquagga.init \
+>>              file://watchquagga.default \
+>>              file://volatiles.03_quagga \
+>> +           file://file://quagga.pam \
+>
+> Why is there be two file://?
+>
 
-60-ntpd.list should be installed into the same path as ntp systemd service
-file, like Fedora core; Orignal path refers
-http://www.freedesktop.org/wiki/Software/systemd/timedated/, but where
-systemd_unitdir is assumed as /usr/lib/systemd, not /lib/systemd
+Oh, sorry for the typo, I have updated the git to correct this.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-networking/recipes-support/ntp/ntp.inc |    5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+   git://git.pokylinux.org/poky-contrib hongxu/fix-quagga-pam
+http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-quagga-pam
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index 65d90de..9ea24e9 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -67,9 +67,8 @@ do_install_append() {
-     install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
-     install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
- 
--    # see http://www.freedesktop.org/wiki/Software/systemd/timedated/
--    install -d ${D}${libdir}/systemd/ntp-units.d
--    install -m 0644 ${WORKDIR}/ntpd.list ${D}${libdir}/systemd/ntp-units.d/60-ntpd.list
-+    install -d ${D}${systemd_unitdir}/ntp-units.d
-+    install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
- }
- 
- PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
--- 
-1.7.10.4
+Thanks,
+Hongxu
+
+>> file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+>>
+>> -PACKAGECONFIG ??= ""
+>> +PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', 
+>> '', d)}"
+>>   PACKAGECONFIG[cap] = 
+>> "--enable-capabilities,--disable-capabilities,libcap"
+>> +PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
+>>
+>>   inherit autotools update-rc.d useradd
+>>
+>> @@ -98,6 +100,15 @@ do_install () {
+>>       # Remove generated info dir file, it doesn't belong in the 
+>> generated
+>>       # package.
+>>       rm -f ${D}${infodir}/dir
+>> +
+>> +    # For PAM
+>> +    for feature in ${DISTRO_FEATURES}; do
+>> +        if [ "$feature" = "pam" ]; then
+>> +            install -D -m 644 ${WORKDIR}/quagga.pam 
+>> ${D}/${sysconfdir}/pam.d/quagga
+>> +            break
+>> +        fi
+>> +    done
+>> +
+>
+>
+> Could you use the below method to simply this loop
+>
+>     if 
+> ${@base_contains('DISTRO_FEATURES','sysvinit','false','true',d)};then
+>     if
+>
+> -Roy
+>
+>>   }
+>>
+>>   # Split into a main package and separate per-protocol packages
+>>
+>
 
 
