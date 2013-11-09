@@ -1,36 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 806FE6D2F5;
-	Fri,  8 Nov 2013 16:28:50 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id e14so3604318iej.36
-	for <multiple recipients>; Fri, 08 Nov 2013 08:28:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=EGkGdlCt87+Yqfvmk3C87JOq0RlQvJMFdoTpexxNkHc=;
-	b=O8cCGrRonm0kNBoy5pHYo3DUIaTmRe1upKwjH+nMccZy4yKvPwuhAD0rZlg3pt+FO1
-	Xvaw6gacVn9CccQFFjbFruYpnXkd8MGLWjjgxnWRC236eavjI7wZkhTo8aYUfrdGK64f
-	tk84SvbDExOR5FXAwvMHwWnj2cekewpSDuah8+IPAtn8ivs0hmGsZb0xIolIUYPPRcgW
-	luKhxtCxDplro5qDQb+rtq/+VYQJw91z0fbDyVy0Giv0bN6YtcDnEnBkKeTbikMy05A3
-	EOenlWzAkFQc3mystfxmvAzOeIT771mLuholMSg6GUl+6h+H2p/bA6bUnpA2JUGN8hFu
-	jeNQ==
-X-Received: by 10.50.22.67 with SMTP id b3mr2918502igf.39.1383928131999; Fri,
-	08 Nov 2013 08:28:51 -0800 (PST)
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id AA0156D4BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  9 Nov 2013 00:47:39 +0000 (UTC)
+Received: (qmail 13130 invoked by uid 1003); 9 Nov 2013 00:47:41 -0000
+Received: from unknown (HELO ?10.16.32.54?) (philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	9 Nov 2013 00:47:40 -0000
+Message-ID: <527D862B.5060500@balister.org>
+Date: Fri, 08 Nov 2013 16:47:39 -0800
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-Received: by 10.50.79.167 with HTTP; Fri, 8 Nov 2013 08:28:21 -0800 (PST)
-In-Reply-To: <1383904061.6271.297.camel@ted>
-References: <1383866326.6271.286.camel@ted>
-	<CAJTo0LYq5PmQtBdwghmDGLs2ccTO6BBwJNGw7s37Yt+zjkWU6Q@mail.gmail.com>
-	<CAAQYJAuMoE6gOMmM2trSN1MY7weCF+07JAJuhQu1K=p5KxO=Yg@mail.gmail.com>
-	<1383904061.6271.297.camel@ted>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 8 Nov 2013 08:28:21 -0800
-Message-ID: <CAMKF1spkbD03MT2x8vbXBQkN+Jv5PE3EQvZek35bC40NHmy1iw@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH] bitbake.conf: Default DISTRO to nodistro
+To: openembedded-devel@lists.openembedded.org
+References: <52797DE3.8070203@balister.org> <527A8C4C.3030007@balister.org>
+	<90F3F14E-8CB6-4F1B-8C00-215FF84F2EBC@gmail.com>
+	<527BE002.30300@balister.org>
+In-Reply-To: <527BE002.30300@balister.org>
+X-Enigmail-Version: 1.6
+Subject: Re: Create meta-sdr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,52 +34,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2013 16:28:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 09 Nov 2013 00:47:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 8, 2013 at 1:47 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> On Fri, 2013-11-08 at 10:33 +0100, Andrea Adami wrote:
->> On Fri, Nov 8, 2013 at 10:25 AM, Burton, Ross <ross.burton@intel.com> wrote:
->> > On 7 November 2013 23:18, Richard Purdie
->> > <richard.purdie@linuxfoundation.org> wrote:
->> >> +DISTRO ??= "nodistro"
->> >
->> > Wouldn't "oe-core" be a better name, considering that's what
->> > DISTROVERSION becomes if DISTRO is unset?
->> >
->> > Ross
+On 11/07/2013 10:46 AM, Philip Balister wrote:
+> On 11/07/2013 06:43 AM, Khem Raj wrote:
+>>
+>> On Nov 6, 2013, at 10:37 AM, Philip Balister <philip@balister.org> wrote:
+>>
+>>> On 11/05/2013 03:23 PM, Philip Balister wrote:
+>>>> Based on earlier discussion, we'd like to go ahead and create meta-ssdr
+>>>> based on this branch:
+>>>>
+>>>> https://github.com/balister/meta-oe/commits/meta-sdr
+>>>>
+>>>> Can someone give me a hand getting this setup in git?
+>>>
+>>> Or should I take this silence to suggest I should just host this on github?
+>>
+>> we can host on oe git but I personally like github as well
+>> do you just want to make a clone of whatever you have on github ?
+
+After some more thought, I'll put this layer on github, then I can use
+the wiki there for some docs. When I have this in pace, I'll send the
+rm's for the existing recipes in meta-oe.
+
+Philip
+
+> 
+> I'd like to merge what I have into github into meta-oe, then get setup
+> so I can push updates to the meta-sdr directory on the meta-oe main server.
+> 
+> Philip
+> 
+>>
+>>>
+>>> Philip
+>>>
+>>>>
+>>>> Thanks,
+>>>>
+>>>> Philip
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>
+>>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >>
 >>
->> Agreed, we already have DISTRO_VERSION = "oe-core.0"
->> This sounds also the right name for THE default distro.
->
-> I disagree and I feel quite strongly about this. OE-Core is not a
-> distro. The whole idea was that OE-Core should build with sane defaults
-> without any distro set. This is a dummy placeholder value and it really
-> does mean to say that no distro is set.
->
-> We did put a value into the DISTRO_VERSION field so you could tell what
-> was being used but again its a placeholder.
->
-> So in my view "nodistro" is clearer about what is meant.
-
-yes I concur. change it to nodistro or distroless and please change
-DISTRO_VERSION accordingly as well
-to be called nodistro.X or distroless.X
-
-
->
-> Cheers,
->
-> Richard
->
->
->
->
->
 > _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
 
