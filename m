@@ -1,36 +1,26 @@
-Return-Path: <linus.walleij@linaro.org>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 49B206D12A
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id B5BA16D331
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Nov 2013 13:03:05 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id ez12so2127341wid.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Nov 2013 05:03:06 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=P5LybRzaCi6Np8vGWV67RIwtc/bG+KVwQZ6zyjCpdx0=;
-	b=NCrMEZhyj9U7Dylgu+jCHMC52rCSHF5K3y4oWFsTphFPK3m1PZ7dP9fpFy9QIDhaYC
-	W8/K+pCSYYFzb43XLnceNpObDG24WgMKdpnOHuOQa21akK1KYjE02c2F6y2cUSMJlzNT
-	KuRtkJZgWde3inkalj8blhtlCOBIcp/IUUIaU9HI7dshrg1juTqh9DCaSnAIj3d7JZh4
-	3tbzEG3bLpSUdJqs3df6D4/r5wnrUVe+w9QC/7FeQAtQmrSNR81hy25ueffxGQOf9JdF
-	sfD5PTP3YLKNpgiMpMwpYf//rvvCDE25ZVPlFAaGzIPGivPNzaBTRYSP8bgqcuIZZ1lq
-	146g==
-X-Gm-Message-State: ALoCoQny5PfF0kWWcE4nVe4NHZpvSNTacfTXVC9eu0Hm9XSRugPhO8TUk5flzqvzxJX774qiV9Zr
-X-Received: by 10.180.24.6 with SMTP id q6mr1488180wif.0.1384174986535;
-	Mon, 11 Nov 2013 05:03:06 -0800 (PST)
-Received: from localhost.localdomain ([85.235.11.236])
-	by mx.google.com with ESMTPSA id y11sm34012240wie.7.2013.11.11.05.03.05
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Nov 2013 05:03:05 -0800 (PST)
-From: Linus Walleij <linus.walleij@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Nov 2013 14:03:03 +0100
-Message-Id: <1384174983-5077-1-git-send-email-linus.walleij@linaro.org>
-X-Mailer: git-send-email 1.8.3.1
-Subject: [meta-handheld] [PATCH 3/3] h3600: build .tar.gz images too
+	Mon, 11 Nov 2013 13:08:07 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 11 Nov 2013 05:04:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,535,1378882800"; d="scan'208";a="433180230"
+Received: from unknown (HELO helios.localnet) ([10.252.121.166])
+	by orsmga002.jf.intel.com with ESMTP; 11 Nov 2013 05:08:08 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Mon, 11 Nov 2013 13:08:06 +0000
+Message-ID: <1467578.ieiFdmrtSX@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1384020128-15779-1-git-send-email-andrea.adami@gmail.com>
+References: <1384020128-15779-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-handheld][PATCH] linux-yocto: collie: add platform data for IrDA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +34,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Nov 2013 13:03:05 -0000
+X-List-Received-Date: Mon, 11 Nov 2013 13:08:07 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-This enables us to output a tar.gz image during the h3600
-build process.
+On Saturday 09 November 2013 19:02:07 Andrea Adami wrote:
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../linux/linux-yocto-3.10/collie/collie.scc       |  1 +
+>  .../patches/patches-sa1100/collie-irda.patch       | 88
+> ++++++++++++++++++++++ 2 files changed, 89 insertions(+)
+>  create mode 100644
+> recipes-kernel/linux/linux-yocto-3.10/patches/patches-sa1100/collie-irda.pa
+> tch
+> 
+> diff --git a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
+> b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc index
+> 3b9b55a..f66b7be 100644
+> --- a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
+> +++ b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
+> @@ -11,3 +11,4 @@ patch ../patches/patches-mtd/collie-eraseinfo.patch
+>  patch ../patches/patches-mtd/collie-force-cfi.patch
+>  patch ../patches/patches-mtd/collie-mtd-resize.patch
+>  patch ../patches/patches-mtd/collie-force-unlock.patch
+> +patch ../patches/patches-sa1100/collie-irda.patch
+> diff --git
+> a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-sa1100/collie-irda.
+> patch
+> b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-sa1100/collie-irda.
+> patch new file mode 100644
+> index 0000000..46ad808
+> --- /dev/null
+> +++
+> b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-sa1100/collie-irda.
+> patch @@ -0,0 +1,88 @@
+> +From c6fb61edf283f255c3763a57366bb89bb36ad79c Mon Sep 17 00:00:00 2001
+> +From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> +Date: Fri, 8 Nov 2013 17:57:32 +0400
+> +Subject: [PATCH] collie: add support for IrDA transceiver
+> +
+> +Collie has onboard IrDA transceiver controlled via active-low gpio. Add
+> +corresponding platform data.
+> +
+> +Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> +---
+> + arch/arm/mach-sa1100/collie.c              | 33
+> ++++++++++++++++++++++++++++++ + arch/arm/mach-sa1100/include/mach/collie.h
+> |  2 +-
+> + 2 files changed, 34 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
+> +index 2349dee..1b9473d 100644
+> +--- a/arch/arm/mach-sa1100/collie.c
+> ++++ b/arch/arm/mach-sa1100/collie.c
+> +@@ -41,6 +41,7 @@
+> + #include <asm/mach/arch.h>
+> + #include <asm/mach/flash.h>
+> + #include <asm/mach/map.h>
+> ++#include <asm/mach/irda.h>
+> +
+> + #include <asm/hardware/scoop.h>
+> + #include <asm/mach/sharpsl_param.h>
+> +@@ -94,6 +95,37 @@ static struct mcp_plat_data collie_mcp_data = {
+> + 	.codec_pdata	= &collie_ucb1x00_data,
+> + };
+> +
+> ++int collie_ir_startup(struct device *dev)
+> ++{
+> ++	int rc = gpio_request(COLLIE_GPIO_IR_ON, "IrDA");
+> ++	if (rc)
+> ++		return rc;
+> ++	rc = gpio_direction_output(COLLIE_GPIO_IR_ON, 1);
+> ++
+> ++	if (!rc)
+> ++		return 0;
+> ++
+> ++	gpio_free(COLLIE_GPIO_IR_ON);
+> ++	return rc;
+> ++}
+> ++
+> ++void collie_ir_shutdown(struct device *dev)
+> ++{
+> ++	gpio_free(COLLIE_GPIO_IR_ON);
+> ++}
+> ++
+> ++static int collie_ir_set_power(struct device *dev, unsigned int state)
+> ++{
+> ++	gpio_set_value(COLLIE_GPIO_IR_ON, !state);
+> ++	return 0;
+> ++}
+> ++
+> ++static struct irda_platform_data collie_ir_data = {
+> ++	.startup = collie_ir_startup,
+> ++	.shutdown = collie_ir_shutdown,
+> ++	.set_power = collie_ir_set_power,
+> ++};
+> ++
+> + /*
+> +  * Collie AC IN
+> +  */
+> +@@ -323,6 +355,7 @@ static void __init collie_init(void)
+> + 	sa11x0_register_mtd(&collie_flash_data, collie_flash_resources,
+> + 			    ARRAY_SIZE(collie_flash_resources));
+> + 	sa11x0_register_mcp(&collie_mcp_data);
+> ++	sa11x0_register_irda(&collie_ir_data);
+> +
+> + 	sharpsl_save_param();
+> + }
+> +diff --git a/arch/arm/mach-sa1100/include/mach/collie.h
+> b/arch/arm/mach-sa1100/include/mach/collie.h +index f33679d..0ef22f9 100644
+> +--- a/arch/arm/mach-sa1100/include/mach/collie.h
+> ++++ b/arch/arm/mach-sa1100/include/mach/collie.h
+> +@@ -78,7 +78,7 @@ extern void locomolcd_power(int on);
+> + #define COLLIE_TC35143_GPIO_VERSION0    UCB_IO_0
+> + #define COLLIE_TC35143_GPIO_TBL_CHK     UCB_IO_1
+> + #define COLLIE_TC35143_GPIO_VPEN_ON     UCB_IO_2
+> +-#define COLLIE_TC35143_GPIO_IR_ON       UCB_IO_3
+> ++#define COLLIE_GPIO_IR_ON		(COLLIE_TC35143_GPIO_BASE + 3)
+> + #define COLLIE_TC35143_GPIO_AMP_ON      UCB_IO_4
+> + #define COLLIE_TC35143_GPIO_VERSION1    UCB_IO_5
+> + #define COLLIE_TC35143_GPIO_FS8KLPF     UCB_IO_5
+> +--
+> +1.8.4.rc3
+> +
 
-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
----
- conf/machine/h3600.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+These two now merged to meta-handheld master, thanks.
 
-diff --git a/conf/machine/h3600.conf b/conf/machine/h3600.conf
-index 6e9941bec1a5..7670c9c0e170 100644
---- a/conf/machine/h3600.conf
-+++ b/conf/machine/h3600.conf
-@@ -24,7 +24,7 @@ INITRAMFS_FSTYPES ?= "cpio.gz cpio.lzma"
- 
- IMAGE_DEVICE_TABLES = ""
- 
--IMAGE_FSTYPES = "jffs2"
-+IMAGE_FSTYPES += "tar.gz jffs2"
- MACHINE_ESSENTIAL_EXTRA_RDEPENDS = "kernel ipaq-boot-params"
- MACHINE_EXTRA_RDEPENDS = "mtd-utils mtd-utils-jffs2"
- 
+Cheers,
+Paul
+
 -- 
-1.8.3.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
