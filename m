@@ -1,35 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
 Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id AF59C6A463
+	by mail.openembedded.org (Postfix) with ESMTP id AE0686D3A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 23:47:50 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id l10so1758198eei.25
+	Tue, 12 Nov 2013 23:47:53 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id l10so1799153eei.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 15:47:52 -0800 (PST)
+	Tue, 12 Nov 2013 15:47:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Bp40yZpB3KJ8KLcbV0W4egEBLg3Fel7XEubpyKWxQxM=;
-	b=KWAKby3ROyQ0o6WruczH2I3XQlx7HBcaptI7stM7dYT0p0vtwzj/kv0PG5DbpnXssp
-	9m+mP8oAaMg3+WnXxKVJp8qahEe0DPWxKQ27RWC5tLLpLuliPGMEmNiP2fOI4g7L00dR
-	d5JCO5EjklGDE/AzCjrrUmBMZLPCpdmTtSaNG+J3lNuCoi8UfWJHifEoCdV1HATo+k7S
-	lXMxPwchsTFcfP2n8MAi2uxijUpTNwg1LCUv9wVUeaUGSpU0p54DZkpYWz19jvK1Nkh9
-	rnJkKQ6LCoql1aiNGNihybdhH4FHpYFAvjXdSPFceecy7iAt2cyIetbrVO+B9LIunk3k
-	yMdg==
-X-Received: by 10.14.241.74 with SMTP id f50mr45461621eer.29.1384300072171;
-	Tue, 12 Nov 2013 15:47:52 -0800 (PST)
+	bh=WWR6QORUXWBT7f+lNuIerAePnGNxD5vPVKgvDxXTg10=;
+	b=SoqY28y8GgVvkqJ+VRJ1bhKSjIWAVwMiVibKQFNQEGagGETz6o0kBHNnHR6Qz5HRjX
+	UwtV+R7IwCkx43/4Y/PTwPlM5MeECoEHCqVrGFCWW1QYG9XNgahXWaHuCRP57RdavPJK
+	O6E6kbigxI7kOO+eednF/KYUJ6bKcTcUzbtbuUfxRKrLXOgQ2qW/wpzwKbwx5Qkb3mnz
+	1bWcHrweAfAJdwB+wbaVoTmAF2wnxvObSxkD09PbMVw1pnx7TSHDd5iVtUvVhPSkMrbA
+	i8GwPFXgIvGJLLrPwaVzOkSlX2QM31ZLJEJhIWGcAImSD7pQ/AU9vhDoaeBa8xvTI0L9
+	BhPA==
+X-Received: by 10.14.251.196 with SMTP id b44mr30460310ees.10.1384300075226;
+	Tue, 12 Nov 2013 15:47:55 -0800 (PST)
 Received: from mizar.localdomain ([95.232.250.41])
-	by mx.google.com with ESMTPSA id i1sm81396914eeg.0.2013.11.12.15.47.51
+	by mx.google.com with ESMTPSA id i1sm81396914eeg.0.2013.11.12.15.47.53
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Nov 2013 15:47:51 -0800 (PST)
+	Tue, 12 Nov 2013 15:47:54 -0800 (PST)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Nov 2013 00:47:43 +0100
-Message-Id: <1384300064-21694-2-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 13 Nov 2013 00:47:44 +0100
+Message-Id: <1384300064-21694-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
 In-Reply-To: <1384300064-21694-1-git-send-email-andrea.adami@gmail.com>
 References: <1384300064-21694-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/3] machine: h1940: switch temporarly to linux-yocto-dev (3.12-rc5)
+Subject: [meta-handheld][PATCH 3/3] linux_3.1: remove, no more machines using it (h1940 is up to 3.12)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +43,3380 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2013 23:47:51 -0000
+X-List-Received-Date: Tue, 12 Nov 2013 23:47:54 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/h1940.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...-s3c24xx-DMA-don-t-use-autoreload-feature.patch |  680 --------
+ .../linux-3.1/h1940/0002-s3cmci-minor-fixups.patch |   40 -
+ ...10-drop-RFKILL-driver-for-H1940-bluetooth.patch |  237 ---
+ ...mtd-nand-s3c2410-add-iPAQ-specific-layout.patch |   28 -
+ ...005-ARM-s3c2410-Add-nand-device-for-h1940.patch |  114 --
+ ...006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch |   41 -
+ ...-ARM-s3c2410-unlock-reset-button-on-H1940.patch |   49 -
+ ...08-ARM-h1940-add-bluetooth-RF-kill-switch.patch |   75 -
+ .../linux-3.1/h1940/0009-rfkill-add-IR-type.patch  |   51 -
+ ...fkill_gpio-add-support-for-inverted-GPIOs.patch |   59 -
+ .../h1940/0011-ARM-h1940-add-IR-switch.patch       |   61 -
+ ...012-ARM-h1940-increase-oversampling-shift.patch |   29 -
+ recipes-kernel/linux/linux-3.1/h1940/defconfig     | 1762 --------------------
+ recipes-kernel/linux/linux_3.1.bb                  |   30 -
+ 14 files changed, 3256 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0002-s3cmci-minor-fixups.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0009-rfkill-add-IR-type.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0011-ARM-h1940-add-IR-switch.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
+ delete mode 100644 recipes-kernel/linux/linux-3.1/h1940/defconfig
+ delete mode 100644 recipes-kernel/linux/linux_3.1.bb
 
-diff --git a/conf/machine/h1940.conf b/conf/machine/h1940.conf
-index cd7e9d2..5945363 100644
---- a/conf/machine/h1940.conf
-+++ b/conf/machine/h1940.conf
-@@ -9,7 +9,7 @@
- require conf/machine/include/tune-arm920t.inc
- 
- # Set preferred providers
--PREFERRED_PROVIDER_virtual/kernel = "linux"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto-dev"
- 
- KERNEL_IMAGETYPE = "uImage"
- UBOOT_LOADADDRESS = "0x30108000"
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch b/recipes-kernel/linux/linux-3.1/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
+deleted file mode 100644
+index 6e277fe..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
++++ /dev/null
+@@ -1,680 +0,0 @@
+-From 5b11095906d31d6e362447e2368da874260b41db Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Mon, 28 Nov 2011 00:15:59 +0300
+-Subject: [PATCH 01/12] s3c24xx: DMA: don't use autoreload feature
+-
+-Some integrated DMA-capable hardware doesn't like autoreload
+-feature of s3c24xx DMA-engine, that's why s3cmci driver
+-didn't work with DMA transfers enabled.
+-
+-I rewrote DMA driver not to use autoreload feature and removed
+-all pre-loading features. Buffer re-load is fast enought to perform
+-it in IRQ handler, and anyway I don't see any reason to waste CPU
+-cycles on waiting for buffer load. Driver is much simplier now,
+-it was tested with s3cmci and s3c24xx-i2s drivers on s3c2442 and
+-s3c2410 SoCs and works just nice.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/include/mach/dma.h |   15 +-
+- arch/arm/plat-s3c24xx/dma.c              |  440 +++++-------------------------
+- 2 files changed, 69 insertions(+), 386 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/include/mach/dma.h b/arch/arm/mach-s3c2410/include/mach/dma.h
+-index b2b2a5b..2d1ab2f 100644
+---- a/arch/arm/mach-s3c2410/include/mach/dma.h
+-+++ b/arch/arm/mach-s3c2410/include/mach/dma.h
+-@@ -79,28 +79,15 @@ enum s3c2410_dma_state {
+-  *
+-  * There are no buffers loaded (the channel should be inactive)
+-  *
+-- * S3C2410_DMA_1LOADED
+-- *
+-- * There is one buffer loaded, however it has not been confirmed to be
+-- * loaded by the DMA engine. This may be because the channel is not
+-- * yet running, or the DMA driver decided that it was too costly to
+-- * sit and wait for it to happen.
+-- *
+-  * S3C2410_DMA_1RUNNING
+-  *
+-- * The buffer has been confirmed running, and not finisged
+-- *
+-- * S3C2410_DMA_1LOADED_1RUNNING
+-+ * The buffer has been confirmed running, and not finished
+-  *
+-- * There is a buffer waiting to be loaded by the DMA engine, and one
+-- * currently running.
+- */
+- 
+- enum s3c2410_dma_loadst {
+- 	S3C2410_DMALOAD_NONE,
+--	S3C2410_DMALOAD_1LOADED,
+- 	S3C2410_DMALOAD_1RUNNING,
+--	S3C2410_DMALOAD_1LOADED_1RUNNING,
+- };
+- 
+- 
+-diff --git a/arch/arm/plat-s3c24xx/dma.c b/arch/arm/plat-s3c24xx/dma.c
+-index 539bd0e..79b3d6dae 100644
+---- a/arch/arm/plat-s3c24xx/dma.c
+-+++ b/arch/arm/plat-s3c24xx/dma.c
+-@@ -133,70 +133,6 @@ dmadbg_showregs(const char *fname, int line, struct s3c2410_dma_chan *chan)
+- #define dbg_showchan(chan) do { } while(0)
+- #endif /* CONFIG_S3C2410_DMA_DEBUG */
+- 
+--/* s3c2410_dma_stats_timeout
+-- *
+-- * Update DMA stats from timeout info
+--*/
+--
+--static void
+--s3c2410_dma_stats_timeout(struct s3c2410_dma_stats *stats, int val)
+--{
+--	if (stats == NULL)
+--		return;
+--
+--	if (val > stats->timeout_longest)
+--		stats->timeout_longest = val;
+--	if (val < stats->timeout_shortest)
+--		stats->timeout_shortest = val;
+--
+--	stats->timeout_avg += val;
+--}
+--
+--/* s3c2410_dma_waitforload
+-- *
+-- * wait for the DMA engine to load a buffer, and update the state accordingly
+--*/
+--
+--static int
+--s3c2410_dma_waitforload(struct s3c2410_dma_chan *chan, int line)
+--{
+--	int timeout = chan->load_timeout;
+--	int took;
+--
+--	if (chan->load_state != S3C2410_DMALOAD_1LOADED) {
+--		printk(KERN_ERR "dma%d: s3c2410_dma_waitforload() called in loadstate %d from line %d\n", chan->number, chan->load_state, line);
+--		return 0;
+--	}
+--
+--	if (chan->stats != NULL)
+--		chan->stats->loads++;
+--
+--	while (--timeout > 0) {
+--		if ((dma_rdreg(chan, S3C2410_DMA_DSTAT) << (32-20)) != 0) {
+--			took = chan->load_timeout - timeout;
+--
+--			s3c2410_dma_stats_timeout(chan->stats, took);
+--
+--			switch (chan->load_state) {
+--			case S3C2410_DMALOAD_1LOADED:
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				break;
+--
+--			default:
+--				printk(KERN_ERR "dma%d: unknown load_state in s3c2410_dma_waitforload() %d\n", chan->number, chan->load_state);
+--			}
+--
+--			return 1;
+--		}
+--	}
+--
+--	if (chan->stats != NULL) {
+--		chan->stats->timeout_failed++;
+--	}
+--
+--	return 0;
+--}
+--
+- /* s3c2410_dma_loadbuffer
+-  *
+-  * load a buffer, and update the channel state
+-@@ -206,66 +142,33 @@ static inline int
+- s3c2410_dma_loadbuffer(struct s3c2410_dma_chan *chan,
+- 		       struct s3c2410_dma_buf *buf)
+- {
+--	unsigned long reload;
+--
+- 	if (buf == NULL) {
+- 		dmawarn("buffer is NULL\n");
+- 		return -EINVAL;
+- 	}
+- 
+--	pr_debug("s3c2410_chan_loadbuffer: loading buff %p (0x%08lx,0x%06x)\n",
+-+	pr_debug("%s: loading buff %p (0x%08lx,0x%06x)\n", __func__,
+- 		 buf, (unsigned long)buf->data, buf->size);
+- 
+- 	/* check the state of the channel before we do anything */
+- 
+--	if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--		dmawarn("load_state is S3C2410_DMALOAD_1LOADED\n");
+--	}
+--
+--	if (chan->load_state == S3C2410_DMALOAD_1LOADED_1RUNNING) {
+--		dmawarn("state is S3C2410_DMALOAD_1LOADED_1RUNNING\n");
+--	}
+-+	if (chan->load_state != S3C2410_DMALOAD_NONE)
+-+		printk(KERN_ERR "dma%d: channel already has buffer loaded\n",
+-+			   chan->number);
+- 
+--	/* it would seem sensible if we are the last buffer to not bother
+--	 * with the auto-reload bit, so that the DMA engine will not try
+--	 * and load another transfer after this one has finished...
+--	 */
+--	if (chan->load_state == S3C2410_DMALOAD_NONE) {
+--		pr_debug("load_state is none, checking for noreload (next=%p)\n",
+--			 buf->next);
+--		reload = (buf->next == NULL) ? S3C2410_DCON_NORELOAD : 0;
+--	} else {
+--		//pr_debug("load_state is %d => autoreload\n", chan->load_state);
+--		reload = S3C2410_DCON_AUTORELOAD;
+--	}
+--
+--	if ((buf->data & 0xf0000000) != 0x30000000) {
+-+	if ((buf->data & 0xf0000000) != 0x30000000)
+- 		dmawarn("dmaload: buffer is %p\n", (void *)buf->data);
+--	}
+- 
+- 	writel(buf->data, chan->addr_reg);
+- 
+- 	dma_wrreg(chan, S3C2410_DMA_DCON,
+--		  chan->dcon | reload | (buf->size/chan->xfer_unit));
+-+		  chan->dcon | S3C2410_DCON_NORELOAD |
+-+		  (buf->size/chan->xfer_unit));
+- 
+--	chan->next = buf->next;
+-+	chan->curr = buf;
+- 
+- 	/* update the state of the channel */
+--
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_NONE:
+--		chan->load_state = S3C2410_DMALOAD_1LOADED;
+--		break;
+--
+--	case S3C2410_DMALOAD_1RUNNING:
+--		chan->load_state = S3C2410_DMALOAD_1LOADED_1RUNNING;
+--		break;
+--
+--	default:
+--		dmawarn("dmaload: unknown state %d in loadbuffer\n",
+--			chan->load_state);
+--		break;
+--	}
+-+	chan->load_state = S3C2410_DMALOAD_1RUNNING;
+- 
+- 	return 0;
+- }
+-@@ -345,7 +248,6 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 	dbg_showchan(chan);
+- 
+- 	/* enable the channel */
+--
+- 	if (!chan->irq_enabled) {
+- 		enable_irq(chan->irq);
+- 		chan->irq_enabled = 1;
+-@@ -360,14 +262,6 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 
+- 	pr_debug("dma%d: %08lx to DMASKTRIG\n", chan->number, tmp);
+- 
+--#if 0
+--	/* the dma buffer loads should take care of clearing the AUTO
+--	 * reloading feature */
+--	tmp = dma_rdreg(chan, S3C2410_DMA_DCON);
+--	tmp &= ~S3C2410_DCON_NORELOAD;
+--	dma_wrreg(chan, S3C2410_DMA_DCON, tmp);
+--#endif
+--
+- 	s3c2410_dma_call_op(chan, S3C2410_DMAOP_START);
+- 
+- 	dbg_showchan(chan);
+-@@ -377,43 +271,11 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 	 * the first buffer is finished, the new one will be loaded onto
+- 	 * the channel */
+- 
+--	if (chan->next != NULL) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				pr_debug("%s: buff not yet loaded, no more todo\n",
+--					 __func__);
+--			} else {
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				s3c2410_dma_loadbuffer(chan, chan->next);
+--			}
+--
+--		} else if (chan->load_state == S3C2410_DMALOAD_1RUNNING) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	}
+--
+--
+- 	local_irq_restore(flags);
+- 
+- 	return 0;
+- }
+- 
+--/* s3c2410_dma_canload
+-- *
+-- * work out if we can queue another buffer into the DMA engine
+--*/
+--
+--static int
+--s3c2410_dma_canload(struct s3c2410_dma_chan *chan)
+--{
+--	if (chan->load_state == S3C2410_DMALOAD_NONE ||
+--	    chan->load_state == S3C2410_DMALOAD_1RUNNING)
+--		return 1;
+--
+--	return 0;
+--}
+--
+- /* s3c2410_dma_enqueue
+-  *
+-  * queue an given buffer for dma transfer.
+-@@ -462,47 +324,19 @@ int s3c2410_dma_enqueue(unsigned int channel, void *id,
+- 
+- 	local_irq_save(flags);
+- 
+--	if (chan->curr == NULL) {
+--		/* we've got nothing loaded... */
+--		pr_debug("%s: buffer %p queued onto empty channel\n",
+--			 __func__, buf);
+--
+--		chan->curr = buf;
+--		chan->end  = buf;
+--		chan->next = NULL;
+-+	if (chan->end == NULL) {
+-+		pr_debug("dma%d: queued buffer onto empty channel\n",
+-+			chan->number);
+-+		chan->next = buf;
+-+		chan->end = buf;
+- 	} else {
+--		pr_debug("dma%d: %s: buffer %p queued onto non-empty channel\n",
+--			 chan->number, __func__, buf);
+--
+--		if (chan->end == NULL)
+--			pr_debug("dma%d: %s: %p not empty, and chan->end==NULL?\n",
+--				 chan->number, __func__, chan);
+--
+-+		pr_debug("dma%d: queued buffer onto non-empty channel\n",
+-+			chan->number);
+- 		chan->end->next = buf;
+- 		chan->end = buf;
+- 	}
+- 
+--	/* if necessary, update the next buffer field */
+--	if (chan->next == NULL)
+--		chan->next = buf;
+--
+--	/* check to see if we can load a buffer */
+--	if (chan->state == S3C2410_DMA_RUNNING) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED && 1) {
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				printk(KERN_ERR "dma%d: loadbuffer:"
+--				       "timeout loading buffer\n",
+--				       chan->number);
+--				dbg_showchan(chan);
+--				local_irq_restore(flags);
+--				return -EINVAL;
+--			}
+--		}
+--
+--		while (s3c2410_dma_canload(chan) && chan->next != NULL) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	} else if (chan->state == S3C2410_DMA_IDLE) {
+-+	if (chan->state == S3C2410_DMA_IDLE) {
+- 		if (chan->flags & S3C2410_DMAF_AUTOSTART) {
+- 			s3c2410_dma_ctrl(chan->number | DMACH_LOW_LEVEL,
+- 					 S3C2410_DMAOP_START);
+-@@ -529,51 +363,6 @@ s3c2410_dma_freebuf(struct s3c2410_dma_buf *buf)
+- 	}
+- }
+- 
+--/* s3c2410_dma_lastxfer
+-- *
+-- * called when the system is out of buffers, to ensure that the channel
+-- * is prepared for shutdown.
+--*/
+--
+--static inline void
+--s3c2410_dma_lastxfer(struct s3c2410_dma_chan *chan)
+--{
+--#if 0
+--	pr_debug("dma%d: s3c2410_dma_lastxfer: load_state %d\n",
+--		 chan->number, chan->load_state);
+--#endif
+--
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_NONE:
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED:
+--		if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				/* flag error? */
+--			printk(KERN_ERR "dma%d: timeout waiting for load (%s)\n",
+--			       chan->number, __func__);
+--			return;
+--		}
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--		/* I believe in this case we do not have anything to do
+--		 * until the next buffer comes along, and we turn off the
+--		 * reload */
+--		return;
+--
+--	default:
+--		pr_debug("dma%d: lastxfer: unhandled load_state %d with no next\n",
+--			 chan->number, chan->load_state);
+--		return;
+--
+--	}
+--
+--	/* hopefully this'll shut the damned thing up after the transfer... */
+--	dma_wrreg(chan, S3C2410_DMA_DCON, chan->dcon | S3C2410_DCON_NORELOAD);
+--}
+--
+--
+- #define dmadbg2(x...)
+- 
+- static irqreturn_t
+-@@ -582,57 +371,25 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 	struct s3c2410_dma_chan *chan = (struct s3c2410_dma_chan *)devpw;
+- 	struct s3c2410_dma_buf  *buf;
+- 
+-+	/* Check for orphaned irq */
+-+	if (chan->state == S3C2410_DMA_IDLE)
+-+		return IRQ_HANDLED;
+-+
+- 	buf = chan->curr;
+- 
+- 	dbg_showchan(chan);
+- 
+- 	/* modify the channel state */
+- 
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_1RUNNING:
+--		/* TODO - if we are running only one buffer, we probably
+--		 * want to reload here, and then worry about the buffer
+--		 * callback */
+--
+--		chan->load_state = S3C2410_DMALOAD_NONE;
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED:
+--		/* iirc, we should go back to NONE loaded here, we
+--		 * had a buffer, and it was never verified as being
+--		 * loaded.
+--		 */
+--
+-+	if (chan->load_state == S3C2410_DMALOAD_1RUNNING)
+- 		chan->load_state = S3C2410_DMALOAD_NONE;
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--		/* we'll worry about checking to see if another buffer is
+--		 * ready after we've called back the owner. This should
+--		 * ensure we do not wait around too long for the DMA
+--		 * engine to start the next transfer
+--		 */
+--
+--		chan->load_state = S3C2410_DMALOAD_1LOADED;
+--		break;
+--
+--	case S3C2410_DMALOAD_NONE:
+-+	else
+- 		printk(KERN_ERR "dma%d: IRQ with no loaded buffer?\n",
+--		       chan->number);
+--		break;
+--
+--	default:
+--		printk(KERN_ERR "dma%d: IRQ in invalid load_state %d\n",
+--		       chan->number, chan->load_state);
+--		break;
+--	}
+-+			chan->number);
+- 
+- 	if (buf != NULL) {
+--		/* update the chain to make sure that if we load any more
+--		 * buffers when we call the callback function, things should
+--		 * work properly */
+--
+--		chan->curr = buf->next;
+-+		chan->curr = NULL;
+-+		chan->next = buf->next;
+- 		buf->next  = NULL;
+- 
+- 		if (buf->magic != BUF_MAGIC) {
+-@@ -640,12 +397,10 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 			       chan->number, __func__, buf);
+- 			return IRQ_HANDLED;
+- 		}
+--
+- 		s3c2410_dma_buffdone(chan, buf, S3C2410_RES_OK);
+- 
+- 		/* free resouces */
+- 		s3c2410_dma_freebuf(buf);
+--	} else {
+- 	}
+- 
+- 	/* only reload if the channel is still running... our buffer done
+-@@ -655,53 +410,36 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 	/* todo: check that when the channel is shut-down from inside this
+- 	 * function, we cope with unsetting reload, etc */
+- 
+--	if (chan->next != NULL && chan->state != S3C2410_DMA_IDLE) {
+--		unsigned long flags;
+--
+--		switch (chan->load_state) {
+--		case S3C2410_DMALOAD_1RUNNING:
+--			/* don't need to do anything for this state */
+--			break;
+--
+--		case S3C2410_DMALOAD_NONE:
+--			/* can load buffer immediately */
+--			break;
+--
+--		case S3C2410_DMALOAD_1LOADED:
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				/* flag error? */
+--				printk(KERN_ERR "dma%d: timeout waiting for load (%s)\n",
+--				       chan->number, __func__);
+--				return IRQ_HANDLED;
+--			}
+--
+--			break;
+--
+--		case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--			goto no_load;
+--
+--		default:
+--			printk(KERN_ERR "dma%d: unknown load_state in irq, %d\n",
+--			       chan->number, chan->load_state);
+--			return IRQ_HANDLED;
+--		}
+-+	if (chan->next != NULL) {
+-+		if (chan->state != S3C2410_DMA_IDLE) {
+-+			unsigned long flags;
+-+			unsigned long tmp;
+- 
+--		local_irq_save(flags);
+--		s3c2410_dma_loadbuffer(chan, chan->next);
+--		local_irq_restore(flags);
+-+			pr_debug("%s: dma%d: continuing with next buffer\n",
+-+				__func__, chan->number);
+-+			local_irq_save(flags);
+-+			s3c2410_dma_loadbuffer(chan, chan->next);
+-+			tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+-+			tmp &= ~S3C2410_DMASKTRIG_STOP;
+-+			tmp |= S3C2410_DMASKTRIG_ON;
+-+			dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+			local_irq_restore(flags);
+-+		} else
+-+			pr_debug("dma%d: buffdone callback stopped dma...\n",
+-+				chan->number);
+- 	} else {
+--		s3c2410_dma_lastxfer(chan);
+-+		/* No more buffers? So no queue */
+-+		chan->end = NULL;
+- 
+- 		/* see if we can stop this channel.. */
+--		if (chan->load_state == S3C2410_DMALOAD_NONE) {
+--			pr_debug("dma%d: end of transfer, stopping channel (%ld)\n",
+-+		if (chan->state != S3C2410_DMA_IDLE) {
+-+			pr_debug("dma%d: end of transfer, stopping channel (%lu)\n",
+- 				 chan->number, jiffies);
+- 			s3c2410_dma_ctrl(chan->number | DMACH_LOW_LEVEL,
+- 					 S3C2410_DMAOP_STOP);
+- 		}
+- 	}
+- 
+-- no_load:
+- 	return IRQ_HANDLED;
+- }
+- 
+-@@ -840,9 +578,20 @@ static int s3c2410_dma_dostop(struct s3c2410_dma_chan *chan)
+- 	s3c2410_dma_call_op(chan,  S3C2410_DMAOP_STOP);
+- 
+- 	tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+--	tmp |= S3C2410_DMASKTRIG_STOP;
+--	//tmp &= ~S3C2410_DMASKTRIG_ON;
+--	dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+	if (tmp & S3C2410_DMASKTRIG_ON) {
+-+		int retries = 1000;
+-+		tmp |= S3C2410_DMASKTRIG_STOP;
+-+		dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+
+-+		while (--retries) {
+-+			tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+-+			if (!(tmp & S3C2410_DMASKTRIG_ON))
+-+				break;
+-+		}
+-+
+-+		if (!retries)
+-+			pr_debug("dma%d: failed to stop??\n", chan->number);
+-+	}
+- 
+- #if 0
+- 	/* should also clear interrupts, according to WinCE BSP */
+-@@ -860,22 +609,6 @@ static int s3c2410_dma_dostop(struct s3c2410_dma_chan *chan)
+- 	return 0;
+- }
+- 
+--static void s3c2410_dma_waitforstop(struct s3c2410_dma_chan *chan)
+--{
+--	unsigned long tmp;
+--	unsigned int timeout = 0x10000;
+--
+--	while (timeout-- > 0) {
+--		tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+--
+--		if (!(tmp & S3C2410_DMASKTRIG_ON))
+--			return;
+--	}
+--
+--	pr_debug("dma%d: failed to stop?\n", chan->number);
+--}
+--
+--
+- /* s3c2410_dma_flush
+-  *
+-  * stop the channel, and remove all current and pending transfers
+-@@ -917,8 +650,6 @@ static int s3c2410_dma_flush(struct s3c2410_dma_chan *chan)
+- 
+- 	dbg_showregs(chan);
+- 
+--	s3c2410_dma_waitforstop(chan);
+--
+- #if 0
+- 	/* should also clear interrupts, according to WinCE BSP */
+- 	{
+-@@ -939,38 +670,8 @@ static int s3c2410_dma_flush(struct s3c2410_dma_chan *chan)
+- 
+- static int s3c2410_dma_started(struct s3c2410_dma_chan *chan)
+- {
+--	unsigned long flags;
+--
+--	local_irq_save(flags);
+--
+--	dbg_showchan(chan);
+--
+--	/* if we've only loaded one buffer onto the channel, then chec
+--	 * to see if we have another, and if so, try and load it so when
+--	 * the first buffer is finished, the new one will be loaded onto
+--	 * the channel */
+--
+--	if (chan->next != NULL) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				pr_debug("%s: buff not yet loaded, no more todo\n",
+--					 __func__);
+--			} else {
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				s3c2410_dma_loadbuffer(chan, chan->next);
+--			}
+--
+--		} else if (chan->load_state == S3C2410_DMALOAD_1RUNNING) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	}
+--
+--
+--	local_irq_restore(flags);
+--
+-+	/* Do nothing */
+- 	return 0;
+--
+- }
+- 
+- int
+-@@ -1041,16 +742,12 @@ int s3c2410_dma_config(enum dma_ch channel,
+- 	case DMACH_PCM_IN:
+- 	case DMACH_PCM_OUT:
+- 	case DMACH_MIC_IN:
+-+	case DMACH_SDI:
+- 	default:
+- 		dcon |= S3C2410_DCON_HANDSHAKE;
+- 		dcon |= S3C2410_DCON_SYNC_PCLK;
+- 		break;
+- 
+--	case DMACH_SDI:
+--		/* note, ensure if need HANDSHAKE or not */
+--		dcon |= S3C2410_DCON_SYNC_PCLK;
+--		break;
+--
+- 	case DMACH_XD0:
+- 	case DMACH_XD1:
+- 		dcon |= S3C2410_DCON_HANDSHAKE;
+-@@ -1228,20 +925,19 @@ static void s3c2410_dma_resume_chan(struct s3c2410_dma_chan *cp)
+- {
+- 	unsigned int no = cp->number | DMACH_LOW_LEVEL;
+- 
+--	/* restore channel's hardware configuration */
+--
+- 	if (!cp->in_use)
+- 		return;
+- 
+--	printk(KERN_INFO "dma%d: restoring configuration\n", cp->number);
+--
+--	s3c2410_dma_config(no, cp->xfer_unit);
+--	s3c2410_dma_devconfig(no, cp->source, cp->dev_addr);
+--
+- 	/* re-select the dma source for this channel */
+- 
+- 	if (cp->map != NULL)
+- 		dma_sel.select(cp, cp->map);
+-+
+-+	/* restore channel's hardware configuration */
+-+	printk(KERN_INFO "dma%d: restoring configuration\n", cp->number);
+-+	s3c2410_dma_config(no, cp->xfer_unit);
+-+	s3c2410_dma_devconfig(no, cp->source, cp->dev_addr);
+-+
+- }
+- 
+- static void s3c2410_dma_resume(void)
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0002-s3cmci-minor-fixups.patch b/recipes-kernel/linux/linux-3.1/h1940/0002-s3cmci-minor-fixups.patch
+deleted file mode 100644
+index 8703012..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0002-s3cmci-minor-fixups.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From 3275ee65bcfbb86aecb7c7c98512124c591bc5dc Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Fri, 13 Aug 2010 20:01:53 +0300
+-Subject: [PATCH 02/12] s3cmci: minor fixups
+-
+-- It's not necessary to start DMA op manually, as we have
+-autostart feature enabled
+-- Restore prescaler before DMA operation, otherwise it
+-takes ages to complete DMA op.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- drivers/mmc/host/s3cmci.c |    4 ++--
+- 1 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/mmc/host/s3cmci.c b/drivers/mmc/host/s3cmci.c
+-index a04f87d..f37fc35 100644
+---- a/drivers/mmc/host/s3cmci.c
+-+++ b/drivers/mmc/host/s3cmci.c
+-@@ -1106,6 +1106,8 @@ static int s3cmci_prepare_dma(struct s3cmci_host *host, struct mmc_data *data)
+- 		    sg_dma_address(&data->sg[i]),
+- 		    sg_dma_len(&data->sg[i]));
+- 
+-+		/* Restore prescaler value */
+-+		writel(host->prescaler, host->base + S3C2410_SDIPRE);
+- 		res = s3c2410_dma_enqueue(host->dma, host,
+- 					  sg_dma_address(&data->sg[i]),
+- 					  sg_dma_len(&data->sg[i]));
+-@@ -1116,8 +1118,6 @@ static int s3cmci_prepare_dma(struct s3cmci_host *host, struct mmc_data *data)
+- 		}
+- 	}
+- 
+--	s3c2410_dma_ctrl(host->dma, S3C2410_DMAOP_START);
+--
+- 	return 0;
+- }
+- 
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch b/recipes-kernel/linux/linux-3.1/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
+deleted file mode 100644
+index dc43a66..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
++++ /dev/null
+@@ -1,237 +0,0 @@
+-From 5e42d393f09ff0804f3c1c115eb11fc6b73d8944 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 1 Dec 2011 22:15:38 +0300
+-Subject: [PATCH 03/12] ARM: s3c2410: drop RFKILL driver for H1940 bluetooth
+-
+-rfkill-gpio can do it's job easily.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/Kconfig           |    8 --
+- arch/arm/mach-s3c2410/Makefile          |    1 -
+- arch/arm/mach-s3c2410/h1940-bluetooth.c |  157 -------------------------------
+- arch/arm/mach-s3c2410/mach-h1940.c      |    6 -
+- 4 files changed, 0 insertions(+), 172 deletions(-)
+- delete mode 100644 arch/arm/mach-s3c2410/h1940-bluetooth.c
+-
+-diff --git a/arch/arm/mach-s3c2410/Kconfig b/arch/arm/mach-s3c2410/Kconfig
+-index 7245a55..281dc03 100644
+---- a/arch/arm/mach-s3c2410/Kconfig
+-+++ b/arch/arm/mach-s3c2410/Kconfig
+-@@ -81,14 +81,6 @@ config ARCH_H1940
+- 	help
+- 	  Say Y here if you are using the HP IPAQ H1940
+- 
+--config H1940BT
+--        tristate "Control the state of H1940 bluetooth chip"
+--        depends on ARCH_H1940
+--        select RFKILL
+--        help
+--          This is a simple driver that is able to control
+--          the state of built in bluetooth chip on h1940.
+--
+- config PM_H1940
+- 	bool
+- 	help
+-diff --git a/arch/arm/mach-s3c2410/Makefile b/arch/arm/mach-s3c2410/Makefile
+-index 8169535..c1e5ce6 100644
+---- a/arch/arm/mach-s3c2410/Makefile
+-+++ b/arch/arm/mach-s3c2410/Makefile
+-@@ -21,7 +21,6 @@ obj-$(CONFIG_S3C2410_PLLTABLE)	+= pll.o
+- 
+- obj-$(CONFIG_ARCH_SMDK2410)	+= mach-smdk2410.o
+- obj-$(CONFIG_ARCH_H1940)	+= mach-h1940.o
+--obj-$(CONFIG_H1940BT)		+= h1940-bluetooth.o
+- obj-$(CONFIG_PM_H1940)		+= pm-h1940.o
+- obj-$(CONFIG_MACH_N30)		+= mach-n30.o
+- obj-$(CONFIG_ARCH_BAST)		+= mach-bast.o usb-simtec.o
+-diff --git a/arch/arm/mach-s3c2410/h1940-bluetooth.c b/arch/arm/mach-s3c2410/h1940-bluetooth.c
+-deleted file mode 100644
+-index a5eeb62..0000000
+---- a/arch/arm/mach-s3c2410/h1940-bluetooth.c
+-+++ /dev/null
+-@@ -1,157 +0,0 @@
+--/*
+-- * arch/arm/mach-s3c2410/h1940-bluetooth.c
+-- * Copyright (c) Arnaud Patard <arnaud.patard@rtp-net.org>
+-- *
+-- * This file is subject to the terms and conditions of the GNU General Public
+-- * License.  See the file COPYING in the main directory of this archive for
+-- * more details.
+-- *
+-- *	    S3C2410 bluetooth "driver"
+-- *
+-- */
+--
+--#include <linux/module.h>
+--#include <linux/platform_device.h>
+--#include <linux/delay.h>
+--#include <linux/string.h>
+--#include <linux/ctype.h>
+--#include <linux/leds.h>
+--#include <linux/gpio.h>
+--#include <linux/rfkill.h>
+--
+--#include <mach/regs-gpio.h>
+--#include <mach/hardware.h>
+--#include <mach/h1940-latch.h>
+--#include <mach/h1940.h>
+--
+--#define DRV_NAME "h1940-bt"
+--
+--/* Bluetooth control */
+--static void h1940bt_enable(int on)
+--{
+--	if (on) {
+--		/* Power on the chip */
+--		gpio_set_value(H1940_LATCH_BLUETOOTH_POWER, 1);
+--		/* Reset the chip */
+--		mdelay(10);
+--
+--		gpio_set_value(S3C2410_GPH(1), 1);
+--		mdelay(10);
+--		gpio_set_value(S3C2410_GPH(1), 0);
+--
+--		h1940_led_blink_set(-EINVAL, GPIO_LED_BLINK, NULL, NULL);
+--	}
+--	else {
+--		gpio_set_value(S3C2410_GPH(1), 1);
+--		mdelay(10);
+--		gpio_set_value(S3C2410_GPH(1), 0);
+--		mdelay(10);
+--		gpio_set_value(H1940_LATCH_BLUETOOTH_POWER, 0);
+--
+--		h1940_led_blink_set(-EINVAL, GPIO_LED_NO_BLINK_LOW, NULL, NULL);
+--	}
+--}
+--
+--static int h1940bt_set_block(void *data, bool blocked)
+--{
+--	h1940bt_enable(!blocked);
+--	return 0;
+--}
+--
+--static const struct rfkill_ops h1940bt_rfkill_ops = {
+--	.set_block = h1940bt_set_block,
+--};
+--
+--static int __devinit h1940bt_probe(struct platform_device *pdev)
+--{
+--	struct rfkill *rfk;
+--	int ret = 0;
+--
+--	ret = gpio_request(S3C2410_GPH(1), dev_name(&pdev->dev));
+--	if (ret) {
+--		dev_err(&pdev->dev, "could not get GPH1\n");
+--		return ret;
+--	}
+--
+--	ret = gpio_request(H1940_LATCH_BLUETOOTH_POWER, dev_name(&pdev->dev));
+--	if (ret) {
+--		gpio_free(S3C2410_GPH(1));
+--		dev_err(&pdev->dev, "could not get BT_POWER\n");
+--		return ret;
+--	}
+--
+--	/* Configures BT serial port GPIOs */
+--	s3c_gpio_cfgpin(S3C2410_GPH(0), S3C2410_GPH0_nCTS0);
+--	s3c_gpio_setpull(S3C2410_GPH(0), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(1), S3C2410_GPIO_OUTPUT);
+--	s3c_gpio_setpull(S3C2410_GPH(1), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(2), S3C2410_GPH2_TXD0);
+--	s3c_gpio_setpull(S3C2410_GPH(2), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+--	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+--
+--	rfk = rfkill_alloc(DRV_NAME, &pdev->dev, RFKILL_TYPE_BLUETOOTH,
+--			&h1940bt_rfkill_ops, NULL);
+--	if (!rfk) {
+--		ret = -ENOMEM;
+--		goto err_rfk_alloc;
+--	}
+--
+--	ret = rfkill_register(rfk);
+--	if (ret)
+--		goto err_rfkill;
+--
+--	platform_set_drvdata(pdev, rfk);
+--
+--	return 0;
+--
+--err_rfkill:
+--	rfkill_destroy(rfk);
+--err_rfk_alloc:
+--	return ret;
+--}
+--
+--static int h1940bt_remove(struct platform_device *pdev)
+--{
+--	struct rfkill *rfk = platform_get_drvdata(pdev);
+--
+--	platform_set_drvdata(pdev, NULL);
+--	gpio_free(S3C2410_GPH(1));
+--
+--	if (rfk) {
+--		rfkill_unregister(rfk);
+--		rfkill_destroy(rfk);
+--	}
+--	rfk = NULL;
+--
+--	h1940bt_enable(0);
+--
+--	return 0;
+--}
+--
+--
+--static struct platform_driver h1940bt_driver = {
+--	.driver		= {
+--		.name	= DRV_NAME,
+--	},
+--	.probe		= h1940bt_probe,
+--	.remove		= h1940bt_remove,
+--};
+--
+--
+--static int __init h1940bt_init(void)
+--{
+--	return platform_driver_register(&h1940bt_driver);
+--}
+--
+--static void __exit h1940bt_exit(void)
+--{
+--	platform_driver_unregister(&h1940bt_driver);
+--}
+--
+--module_init(h1940bt_init);
+--module_exit(h1940bt_exit);
+--
+--MODULE_AUTHOR("Arnaud Patard <arnaud.patard@rtp-net.org>");
+--MODULE_DESCRIPTION("Driver for the iPAQ H1940 bluetooth chip");
+--MODULE_LICENSE("GPL");
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index 2a2fa06..3bb42dd 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -445,11 +445,6 @@ static struct platform_device h1940_device_leds = {
+- 	},
+- };
+- 
+--static struct platform_device h1940_device_bluetooth = {
+--	.name             = "h1940-bt",
+--	.id               = -1,
+--};
+--
+- static void h1940_set_mmc_power(unsigned char power_mode, unsigned short vdd)
+- {
+- 	switch (power_mode) {
+-@@ -637,7 +632,6 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&samsung_asoc_dma,
+- 	&s3c_device_usbgadget,
+- 	&h1940_device_leds,
+--	&h1940_device_bluetooth,
+- 	&s3c_device_sdi,
+- 	&s3c_device_rtc,
+- 	&s3c_device_timer[0],
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch b/recipes-kernel/linux/linux-3.1/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
+deleted file mode 100644
+index dd9898c..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 0d5bfdca2afa65fc2125766ca6a7643edf0e7d72 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:48:46 +0300
+-Subject: [PATCH 04/12] mtd: nand: s3c2410: add iPAQ specific layout
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- drivers/mtd/nand/s3c2410.c |    4 ++--
+- 1 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/mtd/nand/s3c2410.c b/drivers/mtd/nand/s3c2410.c
+-index 4405468..71eeb5b 100644
+---- a/drivers/mtd/nand/s3c2410.c
+-+++ b/drivers/mtd/nand/s3c2410.c
+-@@ -66,8 +66,8 @@ static const int clock_stop = 0;
+- 
+- static struct nand_ecclayout nand_hw_eccoob = {
+- 	.eccbytes = 3,
+--	.eccpos = {0, 1, 2},
+--	.oobfree = {{8, 8}}
+-+	.eccpos = {8, 9, 10},
+-+	.oobfree = {{2, 6}, {11, 5}}
+- };
+- 
+- /* controller and mtd information */
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch b/recipes-kernel/linux/linux-3.1/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
+deleted file mode 100644
+index fdab3a9..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
++++ /dev/null
+@@ -1,114 +0,0 @@
+-From a28513d09d1400b4a1953216a8364577babe95af Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 1 Dec 2011 22:19:33 +0300
+-Subject: [PATCH 05/12] ARM: s3c2410: Add nand device for h1940
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |   62 ++++++++++++++++++++++++++++++++++++
+- 1 files changed, 62 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index 3bb42dd..7e3cea9 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -32,6 +32,9 @@
+- #include <linux/s3c_adc_battery.h>
+- #include <linux/delay.h>
+- 
+-+#include <linux/mtd/mtd.h>
+-+#include <linux/mtd/partitions.h>
+-+
+- #include <video/platform_lcd.h>
+- 
+- #include <linux/mmc/host.h>
+-@@ -66,6 +69,7 @@
+- #include <plat/pm.h>
+- #include <plat/mci.h>
+- #include <plat/ts.h>
+-+#include <plat/nand.h>
+- 
+- #include <sound/uda1380.h>
+- 
+-@@ -467,6 +471,62 @@ static struct s3c24xx_mci_pdata h1940_mmc_cfg __initdata = {
+- 	.ocr_avail     = MMC_VDD_32_33,
+- };
+- 
+-+static struct mtd_partition h1940_nand_part[] = {
+-+	[0] = {
+-+			.name = "Boot0",
+-+			.offset = 0,
+-+			.size = SZ_16K,
+-+			.mask_flags = MTD_WRITEABLE,
+-+	},
+-+	[1] = {
+-+			.name = "Boot1",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_1K * 240,
+-+			.mask_flags = 0,
+-+	},
+-+	[2] = {
+-+			.name = "Env",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_16K,
+-+			.mask_flags = 0,
+-+	},
+-+	[3] = {
+-+			.name = "Opts",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_32K,
+-+			.mask_flags = 0,
+-+	},
+-+	[4] = {
+-+			.name = "Kernel",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_1M * 3,
+-+			.mask_flags = 0,
+-+	},
+-+	[5] = {
+-+			.name = "Filesystem",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = MTDPART_SIZ_FULL,
+-+			.mask_flags = 0,
+-+	},
+-+};
+-+
+-+static struct s3c2410_nand_set h1940_nand_sets[] = {
+-+	[0] = {
+-+			.name = "Internal",
+-+			.nr_chips = 1,
+-+			.nr_partitions = ARRAY_SIZE(h1940_nand_part),
+-+			.partitions = h1940_nand_part,
+-+	},
+-+};
+-+
+-+static struct s3c2410_platform_nand h1940_nand_info = {
+-+	.tacls = 14,
+-+	.twrph0 = 44,
+-+	.twrph1 = 20,
+-+	.nr_sets = ARRAY_SIZE(h1940_nand_sets),
+-+	.sets = h1940_nand_sets,
+-+};
+-+
+- static int h1940_backlight_init(struct device *dev)
+- {
+- 	gpio_request(S3C2410_GPB(0), "Backlight");
+-@@ -634,6 +694,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_device_leds,
+- 	&s3c_device_sdi,
+- 	&s3c_device_rtc,
+-+	&s3c_device_nand,
+- 	&s3c_device_timer[0],
+- 	&h1940_backlight,
+- 	&h1940_lcd_powerdev,
+-@@ -682,6 +743,7 @@ static void __init h1940_init(void)
+-  	s3c24xx_udc_set_platdata(&h1940_udc_cfg);
+- 	s3c24xx_ts_set_platdata(&h1940_ts_cfg);
+- 	s3c_i2c0_set_platdata(NULL);
+-+	s3c_nand_set_platdata(&h1940_nand_info);
+- 
+- 	/* Turn off suspend on both USB ports, and switch the
+- 	 * selectable USB port to USB device mode. */
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch b/recipes-kernel/linux/linux-3.1/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
+deleted file mode 100644
+index 5ff95ff..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From b74e51276ed2c69f7c4857dfd12256e0e8bfb532 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 1 Dec 2011 22:20:28 +0300
+-Subject: [PATCH 06/12] ARM: s3c2410: h1940: don't touch UPLLCON
+-
+-It's a bit late to modify UPLLCON in board init,
+-anyway bootloader already puts correct value in it.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |    7 -------
+- 1 files changed, 0 insertions(+), 7 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index 7e3cea9..3d85e36 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -736,8 +736,6 @@ static void __init h1940_init_irq(void)
+- 
+- static void __init h1940_init(void)
+- {
+--	u32 tmp;
+--
+- 	s3c24xx_fb_set_platdata(&h1940_fb_info);
+- 	s3c24xx_mci_set_platdata(&h1940_mmc_cfg);
+-  	s3c24xx_udc_set_platdata(&h1940_udc_cfg);
+-@@ -752,11 +750,6 @@ static void __init h1940_init(void)
+- 			      S3C2410_MISCCR_USBSUSPND0 |
+- 			      S3C2410_MISCCR_USBSUSPND1, 0x0);
+- 
+--	tmp =   (0x78 << S3C24XX_PLLCON_MDIVSHIFT)
+--	      | (0x02 << S3C24XX_PLLCON_PDIVSHIFT)
+--	      | (0x03 << S3C24XX_PLLCON_SDIVSHIFT);
+--	writel(tmp, S3C2410_UPLLCON);
+--
+- 	gpio_request(S3C2410_GPC(0), "LCD power");
+- 	gpio_request(S3C2410_GPC(1), "LCD power");
+- 	gpio_request(S3C2410_GPC(4), "LCD power");
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch b/recipes-kernel/linux/linux-3.1/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
+deleted file mode 100644
+index 05d0325..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 4b645096c91e62dceff9add8cfb85e3b96932077 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sat, 3 Dec 2011 12:12:21 +0300
+-Subject: [PATCH 07/12] ARM: s3c2410: unlock reset button on H1940
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |   17 +++++++++++++++--
+- 1 files changed, 15 insertions(+), 2 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index 3d85e36..f1764ff 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -220,9 +220,9 @@ static struct s3c2410fb_mach_info h1940_fb_info __initdata = {
+- 	.gpcup =	0x0000ffff,
+- 	.gpcup_mask =	0xffffffff,
+- 	.gpdcon =	0xaa84aaa0,
+--	.gpdcon_mask =	0xffffffff,
+-+	.gpdcon_mask =	0xfffffff3,
+- 	.gpdup =	0x0000faff,
+--	.gpdup_mask =	0xffffffff,
+-+	.gpdup_mask =	0xfffffffd,
+- };
+- 
+- static int power_supply_init(struct device *dev)
+-@@ -787,6 +787,19 @@ static void __init h1940_init(void)
+- 	gpio_direction_output(S3C2410_GPA(7), 0);
+- 	gpio_direction_output(H1940_LATCH_LED_FLASH, 0);
+- 
+-+	gpio_request(S3C2410_GPD(1), "Reset sense");
+-+	gpio_request(S3C2410_GPA(14), "Reset reset");
+-+	gpio_request(S3C2410_GPB(6), "Reset lock");
+-+	gpio_direction_input(S3C2410_GPD(1));
+-+	gpio_direction_output(S3C2410_GPA(14), 0);
+-+	if (gpio_get_value(S3C2410_GPD(1)))
+-+		gpio_set_value(S3C2410_GPA(14), 0);
+-+
+-+	gpio_direction_output(S3C2410_GPA(14), 1);
+-+	mdelay(100);
+-+	gpio_direction_output(S3C2410_GPB(6), 1);
+-+	gpio_direction_output(S3C2410_GPB(6), 0);
+-+
+- 	i2c_register_board_info(0, h1940_i2c_devices,
+- 		ARRAY_SIZE(h1940_i2c_devices));
+- }
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch b/recipes-kernel/linux/linux-3.1/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
+deleted file mode 100644
+index 6ca5693..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
++++ /dev/null
+@@ -1,75 +0,0 @@
+-From 00e890820c8d50198da2de86361cc2da7df9b5aa Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sat, 17 Dec 2011 13:14:51 +0300
+-Subject: [PATCH 08/12] ARM: h1940: add bluetooth RF kill switch
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |   30 ++++++++++++++++++++++++++++++
+- 1 files changed, 30 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index f1764ff..95f231f 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -31,6 +31,7 @@
+- #include <linux/pda_power.h>
+- #include <linux/s3c_adc_battery.h>
+- #include <linux/delay.h>
+-+#include <linux/rfkill-gpio.h>
+- 
+- #include <linux/mtd/mtd.h>
+- #include <linux/mtd/partitions.h>
+-@@ -682,6 +683,21 @@ static struct platform_device h1940_dev_buttons = {
+- 	}
+- };
+- 
+-+static struct rfkill_gpio_platform_data h1940_bt_rfkill_pdata = {
+-+	.name		= "h1940-bt",
+-+	.reset_gpio	= -EINVAL,
+-+	.shutdown_gpio	= H1940_LATCH_BLUETOOTH_POWER,
+-+	.type		= RFKILL_TYPE_BLUETOOTH,
+-+};
+-+
+-+static struct platform_device h1940_bluetooth = {
+-+	.name		= "rfkill_gpio",
+-+	.id		= 0,
+-+	.dev		= {
+-+		.platform_data = &h1940_bt_rfkill_pdata,
+-+	},
+-+};
+-+
+- static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_dev_buttons,
+- 	&s3c_device_ohci,
+-@@ -702,6 +718,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&s3c_device_ts,
+- 	&power_supply,
+- 	&h1940_battery,
+-+	&h1940_bluetooth,
+- };
+- 
+- static void __init h1940_map_io(void)
+-@@ -776,6 +793,19 @@ static void __init h1940_init(void)
+- 	gpio_request(H1940_LATCH_SD_POWER, "SD power");
+- 	gpio_direction_output(H1940_LATCH_SD_POWER, 0);
+- 
+-+	/* Configures BT serial port GPIOs */
+-+	s3c_gpio_cfgpin(S3C2410_GPH(0), S3C2410_GPH0_nCTS0);
+-+	s3c_gpio_setpull(S3C2410_GPH(0), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(1), S3C2410_GPH1_nRTS0);
+-+	s3c_gpio_setpull(S3C2410_GPH(1), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(2), S3C2410_GPH2_TXD0);
+-+	s3c_gpio_setpull(S3C2410_GPH(2), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+-+	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+-+
+-+	gpio_request(S3C2410_GPC(9), "BT reset");
+-+	gpio_direction_output(S3C2410_GPC(9), 1);
+-+
+- 	platform_add_devices(h1940_devices, ARRAY_SIZE(h1940_devices));
+- 
+- 	gpio_request(S3C2410_GPA(1), "Red LED blink");
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0009-rfkill-add-IR-type.patch b/recipes-kernel/linux/linux-3.1/h1940/0009-rfkill-add-IR-type.patch
+deleted file mode 100644
+index 813a907..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0009-rfkill-add-IR-type.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From 3d9ad82e01b03f6eec431e45c3ad711d94c55d89 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:30:22 +0300
+-Subject: [PATCH 09/12] rfkill: add IR type
+-
+-Infrared receivers/transmitters can also be disabled,
+-so add IR type to rfkill subsystem
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- include/linux/rfkill.h |    1 +
+- net/rfkill/core.c      |    4 +++-
+- 2 files changed, 4 insertions(+), 1 deletions(-)
+-
+-diff --git a/include/linux/rfkill.h b/include/linux/rfkill.h
+-index c6c6084..f7b30c6 100644
+---- a/include/linux/rfkill.h
+-+++ b/include/linux/rfkill.h
+-@@ -48,6 +48,7 @@ enum rfkill_type {
+- 	RFKILL_TYPE_WWAN,
+- 	RFKILL_TYPE_GPS,
+- 	RFKILL_TYPE_FM,
+-+	RFKILL_TYPE_IR,
+- 	NUM_RFKILL_TYPES,
+- };
+- 
+-diff --git a/net/rfkill/core.c b/net/rfkill/core.c
+-index be90640..e13f756 100644
+---- a/net/rfkill/core.c
+-+++ b/net/rfkill/core.c
+-@@ -566,7 +566,7 @@ static ssize_t rfkill_name_show(struct device *dev,
+- 
+- static const char *rfkill_get_type_str(enum rfkill_type type)
+- {
+--	BUILD_BUG_ON(NUM_RFKILL_TYPES != RFKILL_TYPE_FM + 1);
+-+	BUILD_BUG_ON(NUM_RFKILL_TYPES != RFKILL_TYPE_IR + 1);
+- 
+- 	switch (type) {
+- 	case RFKILL_TYPE_WLAN:
+-@@ -583,6 +583,8 @@ static const char *rfkill_get_type_str(enum rfkill_type type)
+- 		return "gps";
+- 	case RFKILL_TYPE_FM:
+- 		return "fm";
+-+	case RFKILL_TYPE_IR:
+-+		return "ir";
+- 	default:
+- 		BUG();
+- 	}
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch b/recipes-kernel/linux/linux-3.1/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
+deleted file mode 100644
+index 229f6c8..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
++++ /dev/null
+@@ -1,59 +0,0 @@
+-From f6be67ff7bf7c33aef1a43342fcf79da88867a7e Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:31:32 +0300
+-Subject: [PATCH 10/12] rfkill_gpio: add support for inverted GPIOs
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- include/linux/rfkill-gpio.h |    2 ++
+- net/rfkill/rfkill-gpio.c    |   12 ++++++++----
+- 2 files changed, 10 insertions(+), 4 deletions(-)
+-
+-diff --git a/include/linux/rfkill-gpio.h b/include/linux/rfkill-gpio.h
+-index a175d05..682e347 100644
+---- a/include/linux/rfkill-gpio.h
+-+++ b/include/linux/rfkill-gpio.h
+-@@ -35,7 +35,9 @@
+- struct rfkill_gpio_platform_data {
+- 	char			*name;
+- 	int			reset_gpio;
+-+	int			reset_gpio_inverted;
+- 	int			shutdown_gpio;
+-+	int			shutdown_gpio_inverted;
+- 	const char		*power_clk_name;
+- 	enum rfkill_type	type;
+- };
+-diff --git a/net/rfkill/rfkill-gpio.c b/net/rfkill/rfkill-gpio.c
+-index 256c5dd..e9940ad 100644
+---- a/net/rfkill/rfkill-gpio.c
+-+++ b/net/rfkill/rfkill-gpio.c
+-@@ -53,18 +53,22 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
+- 
+- 	if (blocked) {
+- 		if (gpio_is_valid(rfkill->pdata->shutdown_gpio))
+--			gpio_direction_output(rfkill->pdata->shutdown_gpio, 0);
+-+			gpio_direction_output(rfkill->pdata->shutdown_gpio,
+-+				rfkill->pdata->shutdown_gpio_inverted);
+- 		if (gpio_is_valid(rfkill->pdata->reset_gpio))
+--			gpio_direction_output(rfkill->pdata->reset_gpio, 0);
+-+			gpio_direction_output(rfkill->pdata->reset_gpio,
+-+				rfkill->pdata->reset_gpio_inverted);
+- 		if (rfkill->pwr_clk && PWR_CLK_ENABLED(rfkill))
+- 			clk_disable(rfkill->pwr_clk);
+- 	} else {
+- 		if (rfkill->pwr_clk && PWR_CLK_DISABLED(rfkill))
+- 			clk_enable(rfkill->pwr_clk);
+- 		if (gpio_is_valid(rfkill->pdata->reset_gpio))
+--			gpio_direction_output(rfkill->pdata->reset_gpio, 1);
+-+			gpio_direction_output(rfkill->pdata->reset_gpio,
+-+				!rfkill->pdata->reset_gpio_inverted);
+- 		if (gpio_is_valid(rfkill->pdata->shutdown_gpio))
+--			gpio_direction_output(rfkill->pdata->shutdown_gpio, 1);
+-+			gpio_direction_output(rfkill->pdata->shutdown_gpio,
+-+				!rfkill->pdata->shutdown_gpio_inverted);
+- 	}
+- 
+- 	if (rfkill->pwr_clk)
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0011-ARM-h1940-add-IR-switch.patch b/recipes-kernel/linux/linux-3.1/h1940/0011-ARM-h1940-add-IR-switch.patch
+deleted file mode 100644
+index 9592171..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0011-ARM-h1940-add-IR-switch.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-From 659b820f5825d3ee8e6ff9f143374e6d22ebfdaa Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:29:30 +0300
+-Subject: [PATCH 11/12] ARM: h1940: add IR switch
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |   23 +++++++++++++++++++++++
+- 1 files changed, 23 insertions(+), 0 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index 95f231f..e78944f 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -698,6 +698,22 @@ static struct platform_device h1940_bluetooth = {
+- 	},
+- };
+- 
+-+static struct rfkill_gpio_platform_data h1940_ir_rfkill_pdata = {
+-+	.name		= "h1940-ir",
+-+	.reset_gpio	= -EINVAL,
+-+	.shutdown_gpio	= S3C2410_GPB(9),
+-+	.shutdown_gpio_inverted = 1,
+-+	.type		= RFKILL_TYPE_IR,
+-+};
+-+
+-+static struct platform_device h1940_irda = {
+-+	.name		= "rfkill_gpio",
+-+	.id		= 1,
+-+	.dev		= {
+-+		.platform_data = &h1940_ir_rfkill_pdata,
+-+	},
+-+};
+-+
+- static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_dev_buttons,
+- 	&s3c_device_ohci,
+-@@ -719,6 +735,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&power_supply,
+- 	&h1940_battery,
+- 	&h1940_bluetooth,
+-+	&h1940_irda,
+- };
+- 
+- static void __init h1940_map_io(void)
+-@@ -803,6 +820,12 @@ static void __init h1940_init(void)
+- 	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+- 	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+- 
+-+	/* Configure IR serial port GPIOs */
+-+	s3c_gpio_cfgpin(S3C2410_GPH(6), S3C2410_GPH6_TXD2);
+-+	s3c_gpio_setpull(S3C2410_GPH(6), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(7), S3C2410_GPH7_RXD2);
+-+	s3c_gpio_setpull(S3C2410_GPH(7), S3C_GPIO_PULL_NONE);
+-+
+- 	gpio_request(S3C2410_GPC(9), "BT reset");
+- 	gpio_direction_output(S3C2410_GPC(9), 1);
+- 
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/0012-ARM-h1940-increase-oversampling-shift.patch b/recipes-kernel/linux/linux-3.1/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
+deleted file mode 100644
+index a349e32..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 5eca931becfbd3c045b603b2b69323b53ea1054a Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:47:03 +0300
+-Subject: [PATCH 12/12] ARM: h1940: increase oversampling shift
+-
+-4 samples seems to be not enough for touchscreen driver
+-to work accurately
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c2410/mach-h1940.c |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c2410/mach-h1940.c b/arch/arm/mach-s3c2410/mach-h1940.c
+-index e78944f..23067d1 100644
+---- a/arch/arm/mach-s3c2410/mach-h1940.c
+-+++ b/arch/arm/mach-s3c2410/mach-h1940.c
+-@@ -183,7 +183,7 @@ static struct s3c2410_udc_mach_info h1940_udc_cfg __initdata = {
+- static struct s3c2410_ts_mach_info h1940_ts_cfg __initdata = {
+- 		.delay = 10000,
+- 		.presc = 49,
+--		.oversampling_shift = 2,
+-+		.oversampling_shift = 5,
+- 		.cfg_gpio = s3c24xx_ts_cfg_gpio,
+- };
+- 
+--- 
+-1.7.8
+-
+diff --git a/recipes-kernel/linux/linux-3.1/h1940/defconfig b/recipes-kernel/linux/linux-3.1/h1940/defconfig
+deleted file mode 100644
+index 288e6d0..0000000
+--- a/recipes-kernel/linux/linux-3.1/h1940/defconfig
++++ /dev/null
+@@ -1,1762 +0,0 @@
+-#
+-# Automatically generated file; DO NOT EDIT.
+-# Linux/arm 3.1.0 Kernel Configuration
+-#
+-CONFIG_ARM=y
+-CONFIG_HAVE_PWM=y
+-CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+-CONFIG_GENERIC_GPIO=y
+-CONFIG_ARCH_USES_GETTIMEOFFSET=y
+-CONFIG_KTIME_SCALAR=y
+-CONFIG_HAVE_PROC_CPU=y
+-CONFIG_NO_IOPORT=y
+-CONFIG_STACKTRACE_SUPPORT=y
+-CONFIG_HAVE_LATENCYTOP_SUPPORT=y
+-CONFIG_LOCKDEP_SUPPORT=y
+-CONFIG_TRACE_IRQFLAGS_SUPPORT=y
+-CONFIG_HARDIRQS_SW_RESEND=y
+-CONFIG_GENERIC_IRQ_PROBE=y
+-CONFIG_RWSEM_GENERIC_SPINLOCK=y
+-CONFIG_ARCH_HAS_CPUFREQ=y
+-CONFIG_ARCH_HAS_CPU_IDLE_WAIT=y
+-CONFIG_GENERIC_HWEIGHT=y
+-CONFIG_GENERIC_CALIBRATE_DELAY=y
+-CONFIG_NEED_DMA_MAP_STATE=y
+-CONFIG_VECTORS_BASE=0xffff0000
+-# CONFIG_ARM_PATCH_PHYS_VIRT is not set
+-CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
+-CONFIG_HAVE_IRQ_WORK=y
+-
+-#
+-# General setup
+-#
+-CONFIG_EXPERIMENTAL=y
+-CONFIG_BROKEN_ON_SMP=y
+-CONFIG_INIT_ENV_ARG_LIMIT=32
+-CONFIG_CROSS_COMPILE=""
+-CONFIG_LOCALVERSION=""
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_HAVE_KERNEL_GZIP=y
+-CONFIG_HAVE_KERNEL_LZMA=y
+-CONFIG_HAVE_KERNEL_LZO=y
+-CONFIG_KERNEL_GZIP=y
+-# CONFIG_KERNEL_LZMA is not set
+-# CONFIG_KERNEL_LZO is not set
+-CONFIG_DEFAULT_HOSTNAME="(none)"
+-CONFIG_SWAP=y
+-CONFIG_SYSVIPC=y
+-CONFIG_SYSVIPC_SYSCTL=y
+-# CONFIG_POSIX_MQUEUE is not set
+-# CONFIG_BSD_PROCESS_ACCT is not set
+-# CONFIG_FHANDLE is not set
+-# CONFIG_TASKSTATS is not set
+-# CONFIG_AUDIT is not set
+-CONFIG_HAVE_GENERIC_HARDIRQS=y
+-
+-#
+-# IRQ subsystem
+-#
+-CONFIG_GENERIC_HARDIRQS=y
+-CONFIG_HAVE_SPARSE_IRQ=y
+-CONFIG_GENERIC_IRQ_SHOW=y
+-CONFIG_GENERIC_IRQ_CHIP=y
+-# CONFIG_SPARSE_IRQ is not set
+-
+-#
+-# RCU Subsystem
+-#
+-CONFIG_TINY_RCU=y
+-# CONFIG_PREEMPT_RCU is not set
+-# CONFIG_RCU_TRACE is not set
+-# CONFIG_TREE_RCU_TRACE is not set
+-CONFIG_IKCONFIG=y
+-CONFIG_IKCONFIG_PROC=y
+-CONFIG_LOG_BUF_SHIFT=18
+-# CONFIG_CGROUPS is not set
+-CONFIG_NAMESPACES=y
+-# CONFIG_UTS_NS is not set
+-# CONFIG_IPC_NS is not set
+-# CONFIG_USER_NS is not set
+-# CONFIG_PID_NS is not set
+-# CONFIG_NET_NS is not set
+-# CONFIG_SCHED_AUTOGROUP is not set
+-# CONFIG_SYSFS_DEPRECATED is not set
+-# CONFIG_RELAY is not set
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_INITRAMFS_SOURCE=""
+-CONFIG_RD_GZIP=y
+-CONFIG_RD_BZIP2=y
+-CONFIG_RD_LZMA=y
+-CONFIG_RD_XZ=y
+-CONFIG_RD_LZO=y
+-CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+-CONFIG_SYSCTL=y
+-CONFIG_ANON_INODES=y
+-# CONFIG_EXPERT is not set
+-CONFIG_UID16=y
+-CONFIG_SYSCTL_SYSCALL=y
+-CONFIG_KALLSYMS=y
+-CONFIG_HOTPLUG=y
+-CONFIG_PRINTK=y
+-CONFIG_BUG=y
+-CONFIG_ELF_CORE=y
+-CONFIG_BASE_FULL=y
+-CONFIG_FUTEX=y
+-CONFIG_EPOLL=y
+-CONFIG_SIGNALFD=y
+-CONFIG_TIMERFD=y
+-CONFIG_EVENTFD=y
+-CONFIG_SHMEM=y
+-CONFIG_AIO=y
+-# CONFIG_EMBEDDED is not set
+-CONFIG_HAVE_PERF_EVENTS=y
+-CONFIG_PERF_USE_VMALLOC=y
+-
+-#
+-# Kernel Performance Events And Counters
+-#
+-# CONFIG_PERF_EVENTS is not set
+-# CONFIG_PERF_COUNTERS is not set
+-CONFIG_VM_EVENT_COUNTERS=y
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLAB=y
+-# CONFIG_SLUB is not set
+-# CONFIG_PROFILING is not set
+-CONFIG_HAVE_OPROFILE=y
+-# CONFIG_KPROBES is not set
+-CONFIG_HAVE_KPROBES=y
+-CONFIG_HAVE_KRETPROBES=y
+-CONFIG_HAVE_REGS_AND_STACK_ACCESS_API=y
+-CONFIG_HAVE_CLK=y
+-CONFIG_HAVE_DMA_API_DEBUG=y
+-
+-#
+-# GCOV-based kernel profiling
+-#
+-# CONFIG_GCOV_KERNEL is not set
+-CONFIG_HAVE_GENERIC_DMA_COHERENT=y
+-CONFIG_SLABINFO=y
+-CONFIG_RT_MUTEXES=y
+-CONFIG_BASE_SMALL=0
+-CONFIG_MODULES=y
+-CONFIG_MODULE_FORCE_LOAD=y
+-CONFIG_MODULE_UNLOAD=y
+-CONFIG_MODULE_FORCE_UNLOAD=y
+-# CONFIG_MODVERSIONS is not set
+-# CONFIG_MODULE_SRCVERSION_ALL is not set
+-CONFIG_BLOCK=y
+-CONFIG_LBDAF=y
+-# CONFIG_BLK_DEV_BSG is not set
+-# CONFIG_BLK_DEV_BSGLIB is not set
+-# CONFIG_BLK_DEV_INTEGRITY is not set
+-
+-#
+-# IO Schedulers
+-#
+-CONFIG_IOSCHED_NOOP=y
+-# CONFIG_IOSCHED_DEADLINE is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_DEFAULT_NOOP=y
+-CONFIG_DEFAULT_IOSCHED="noop"
+-# CONFIG_INLINE_SPIN_TRYLOCK is not set
+-# CONFIG_INLINE_SPIN_TRYLOCK_BH is not set
+-# CONFIG_INLINE_SPIN_LOCK is not set
+-# CONFIG_INLINE_SPIN_LOCK_BH is not set
+-# CONFIG_INLINE_SPIN_LOCK_IRQ is not set
+-# CONFIG_INLINE_SPIN_LOCK_IRQSAVE is not set
+-CONFIG_INLINE_SPIN_UNLOCK=y
+-# CONFIG_INLINE_SPIN_UNLOCK_BH is not set
+-CONFIG_INLINE_SPIN_UNLOCK_IRQ=y
+-# CONFIG_INLINE_SPIN_UNLOCK_IRQRESTORE is not set
+-# CONFIG_INLINE_READ_TRYLOCK is not set
+-# CONFIG_INLINE_READ_LOCK is not set
+-# CONFIG_INLINE_READ_LOCK_BH is not set
+-# CONFIG_INLINE_READ_LOCK_IRQ is not set
+-# CONFIG_INLINE_READ_LOCK_IRQSAVE is not set
+-CONFIG_INLINE_READ_UNLOCK=y
+-# CONFIG_INLINE_READ_UNLOCK_BH is not set
+-CONFIG_INLINE_READ_UNLOCK_IRQ=y
+-# CONFIG_INLINE_READ_UNLOCK_IRQRESTORE is not set
+-# CONFIG_INLINE_WRITE_TRYLOCK is not set
+-# CONFIG_INLINE_WRITE_LOCK is not set
+-# CONFIG_INLINE_WRITE_LOCK_BH is not set
+-# CONFIG_INLINE_WRITE_LOCK_IRQ is not set
+-# CONFIG_INLINE_WRITE_LOCK_IRQSAVE is not set
+-CONFIG_INLINE_WRITE_UNLOCK=y
+-# CONFIG_INLINE_WRITE_UNLOCK_BH is not set
+-CONFIG_INLINE_WRITE_UNLOCK_IRQ=y
+-# CONFIG_INLINE_WRITE_UNLOCK_IRQRESTORE is not set
+-# CONFIG_MUTEX_SPIN_ON_OWNER is not set
+-CONFIG_FREEZER=y
+-
+-#
+-# System Type
+-#
+-CONFIG_MMU=y
+-# CONFIG_ARCH_INTEGRATOR is not set
+-# CONFIG_ARCH_REALVIEW is not set
+-# CONFIG_ARCH_VERSATILE is not set
+-# CONFIG_ARCH_VEXPRESS is not set
+-# CONFIG_ARCH_AT91 is not set
+-# CONFIG_ARCH_BCMRING is not set
+-# CONFIG_ARCH_CLPS711X is not set
+-# CONFIG_ARCH_CNS3XXX is not set
+-# CONFIG_ARCH_GEMINI is not set
+-# CONFIG_ARCH_PRIMA2 is not set
+-# CONFIG_ARCH_EBSA110 is not set
+-# CONFIG_ARCH_EP93XX is not set
+-# CONFIG_ARCH_FOOTBRIDGE is not set
+-# CONFIG_ARCH_MXC is not set
+-# CONFIG_ARCH_MXS is not set
+-# CONFIG_ARCH_NETX is not set
+-# CONFIG_ARCH_H720X is not set
+-# CONFIG_ARCH_IOP13XX is not set
+-# CONFIG_ARCH_IOP32X is not set
+-# CONFIG_ARCH_IOP33X is not set
+-# CONFIG_ARCH_IXP23XX is not set
+-# CONFIG_ARCH_IXP2000 is not set
+-# CONFIG_ARCH_IXP4XX is not set
+-# CONFIG_ARCH_DOVE is not set
+-# CONFIG_ARCH_KIRKWOOD is not set
+-# CONFIG_ARCH_LPC32XX is not set
+-# CONFIG_ARCH_MV78XX0 is not set
+-# CONFIG_ARCH_ORION5X is not set
+-# CONFIG_ARCH_MMP is not set
+-# CONFIG_ARCH_KS8695 is not set
+-# CONFIG_ARCH_W90X900 is not set
+-# CONFIG_ARCH_NUC93X is not set
+-# CONFIG_ARCH_TEGRA is not set
+-# CONFIG_ARCH_PNX4008 is not set
+-# CONFIG_ARCH_PXA is not set
+-# CONFIG_ARCH_MSM is not set
+-# CONFIG_ARCH_SHMOBILE is not set
+-# CONFIG_ARCH_RPC is not set
+-# CONFIG_ARCH_SA1100 is not set
+-CONFIG_ARCH_S3C2410=y
+-# CONFIG_ARCH_S3C64XX is not set
+-# CONFIG_ARCH_S5P64X0 is not set
+-# CONFIG_ARCH_S5PC100 is not set
+-# CONFIG_ARCH_S5PV210 is not set
+-# CONFIG_ARCH_EXYNOS4 is not set
+-# CONFIG_ARCH_SHARK is not set
+-# CONFIG_ARCH_TCC_926 is not set
+-# CONFIG_ARCH_U300 is not set
+-# CONFIG_ARCH_U8500 is not set
+-# CONFIG_ARCH_NOMADIK is not set
+-# CONFIG_ARCH_DAVINCI is not set
+-# CONFIG_ARCH_OMAP is not set
+-# CONFIG_PLAT_SPEAR is not set
+-# CONFIG_ARCH_VT8500 is not set
+-# CONFIG_ARCH_ZYNQ is not set
+-# CONFIG_GPIO_PCA953X is not set
+-# CONFIG_KEYBOARD_GPIO_POLLED is not set
+-CONFIG_PLAT_SAMSUNG=y
+-
+-#
+-# Boot options
+-#
+-# CONFIG_S3C_BOOT_WATCHDOG is not set
+-# CONFIG_S3C_BOOT_ERROR_RESET is not set
+-CONFIG_S3C_BOOT_UART_FORCE_FIFO=y
+-CONFIG_S3C_LOWLEVEL_UART_PORT=1
+-CONFIG_S3C_GPIO_CFG_S3C24XX=y
+-CONFIG_S3C_GPIO_PULL_DOWN=y
+-CONFIG_S3C_GPIO_PULL_UP=y
+-CONFIG_SAMSUNG_GPIO_EXTRA=16
+-CONFIG_S3C_GPIO_SPACE=0
+-CONFIG_S3C_ADC=y
+-CONFIG_S3C_DEV_USB_HOST=y
+-CONFIG_S3C_DEV_WDT=y
+-CONFIG_S3C_DEV_NAND=y
+-CONFIG_SAMSUNG_DEV_PWM=y
+-CONFIG_S3C24XX_PWM=y
+-CONFIG_S3C_DMA=y
+-
+-#
+-# Power management
+-#
+-# CONFIG_SAMSUNG_PM_DEBUG is not set
+-# CONFIG_SAMSUNG_PM_CHECK is not set
+-
+-#
+-# Power Domain
+-#
+-CONFIG_PLAT_S3C24XX=y
+-CONFIG_CPU_LLSERIAL_S3C2410=y
+-CONFIG_CPU_LLSERIAL_S3C2440=y
+-CONFIG_S3C2410_CLOCK=y
+-CONFIG_S3C24XX_DCLK=y
+-CONFIG_S3C24XX_GPIO_EXTRA=16
+-CONFIG_S3C2410_DMA=y
+-# CONFIG_S3C2410_DMA_DEBUG is not set
+-CONFIG_S3C2410_SETUP_TS=y
+-
+-#
+-# System MMU
+-#
+-CONFIG_CPU_S3C2410=y
+-CONFIG_CPU_S3C2410_DMA=y
+-CONFIG_S3C2410_PM=y
+-CONFIG_S3C2410_GPIO=y
+-
+-#
+-# S3C2410 Machines
+-#
+-# CONFIG_ARCH_SMDK2410 is not set
+-CONFIG_ARCH_H1940=y
+-CONFIG_PM_H1940=y
+-# CONFIG_MACH_N30 is not set
+-# CONFIG_ARCH_BAST is not set
+-# CONFIG_MACH_OTOM is not set
+-# CONFIG_MACH_AML_M5900 is not set
+-# CONFIG_MACH_TCT_HAMMER is not set
+-# CONFIG_MACH_VR1000 is not set
+-# CONFIG_MACH_QT2410 is not set
+-
+-#
+-# S3C2412 Machines
+-#
+-# CONFIG_MACH_JIVE is not set
+-# CONFIG_MACH_SMDK2413 is not set
+-# CONFIG_MACH_SMDK2412 is not set
+-# CONFIG_MACH_VSTMS is not set
+-
+-#
+-# S3C2416 Machines
+-#
+-# CONFIG_MACH_SMDK2416 is not set
+-CONFIG_CPU_S3C2442=y
+-CONFIG_CPU_S3C244X=y
+-CONFIG_S3C2440_XTAL_16934400=y
+-
+-#
+-# S3C2440 and S3C2442 Machines
+-#
+-# CONFIG_MACH_ANUBIS is not set
+-# CONFIG_MACH_NEO1973_GTA02 is not set
+-# CONFIG_MACH_OSIRIS is not set
+-# CONFIG_MACH_RX3715 is not set
+-# CONFIG_ARCH_S3C2440 is not set
+-# CONFIG_MACH_NEXCODER_2440 is not set
+-# CONFIG_SMDK2440_CPU2440 is not set
+-# CONFIG_SMDK2440_CPU2442 is not set
+-# CONFIG_MACH_AT2440EVB is not set
+-# CONFIG_MACH_MINI2440 is not set
+-CONFIG_MACH_RX1950=y
+-
+-#
+-# S3C2443 Machines
+-#
+-# CONFIG_MACH_SMDK2443 is not set
+-
+-#
+-# Processor Type
+-#
+-CONFIG_CPU_ARM920T=y
+-CONFIG_CPU_32v4T=y
+-CONFIG_CPU_ABRT_EV4T=y
+-CONFIG_CPU_PABRT_LEGACY=y
+-CONFIG_CPU_CACHE_V4WT=y
+-CONFIG_CPU_CACHE_VIVT=y
+-CONFIG_CPU_COPY_V4WB=y
+-CONFIG_CPU_TLB_V4WBI=y
+-CONFIG_CPU_CP15=y
+-CONFIG_CPU_CP15_MMU=y
+-CONFIG_CPU_USE_DOMAINS=y
+-
+-#
+-# Processor Features
+-#
+-CONFIG_ARM_THUMB=y
+-# CONFIG_CPU_ICACHE_DISABLE is not set
+-# CONFIG_CPU_DCACHE_DISABLE is not set
+-# CONFIG_CPU_DCACHE_WRITETHROUGH is not set
+-CONFIG_ARM_L1_CACHE_SHIFT=5
+-
+-#
+-# Bus support
+-#
+-# CONFIG_PCI_SYSCALL is not set
+-# CONFIG_ARCH_SUPPORTS_MSI is not set
+-# CONFIG_PCCARD is not set
+-
+-#
+-# Kernel Features
+-#
+-CONFIG_VMSPLIT_3G=y
+-# CONFIG_VMSPLIT_2G is not set
+-# CONFIG_VMSPLIT_1G is not set
+-CONFIG_PAGE_OFFSET=0xC0000000
+-# CONFIG_PREEMPT_NONE is not set
+-CONFIG_PREEMPT_VOLUNTARY=y
+-# CONFIG_PREEMPT is not set
+-CONFIG_HZ=200
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
+-# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
+-CONFIG_HAVE_ARCH_PFN_VALID=y
+-# CONFIG_HIGHMEM is not set
+-CONFIG_SELECT_MEMORY_MODEL=y
+-CONFIG_FLATMEM_MANUAL=y
+-CONFIG_FLATMEM=y
+-CONFIG_FLAT_NODE_MEM_MAP=y
+-CONFIG_HAVE_MEMBLOCK=y
+-CONFIG_PAGEFLAGS_EXTENDED=y
+-CONFIG_SPLIT_PTLOCK_CPUS=999999
+-# CONFIG_COMPACTION is not set
+-# CONFIG_PHYS_ADDR_T_64BIT is not set
+-CONFIG_ZONE_DMA_FLAG=0
+-CONFIG_VIRT_TO_BUS=y
+-# CONFIG_KSM is not set
+-CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
+-CONFIG_NEED_PER_CPU_KM=y
+-# CONFIG_CLEANCACHE is not set
+-CONFIG_FORCE_MAX_ZONEORDER=11
+-CONFIG_ALIGNMENT_TRAP=y
+-# CONFIG_UACCESS_WITH_MEMCPY is not set
+-# CONFIG_SECCOMP is not set
+-# CONFIG_CC_STACKPROTECTOR is not set
+-# CONFIG_DEPRECATED_PARAM_STRUCT is not set
+-
+-#
+-# Boot options
+-#
+-# CONFIG_USE_OF is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE=""
+-# CONFIG_XIP_KERNEL is not set
+-# CONFIG_KEXEC is not set
+-# CONFIG_CRASH_DUMP is not set
+-# CONFIG_AUTO_ZRELADDR is not set
+-
+-#
+-# CPU Power Management
+-#
+-
+-#
+-# CPU Frequency scaling
+-#
+-# CONFIG_CPU_FREQ is not set
+-CONFIG_CPU_IDLE=y
+-CONFIG_CPU_IDLE_GOV_LADDER=y
+-
+-#
+-# Floating point emulation
+-#
+-
+-#
+-# At least one emulation must be selected
+-#
+-
+-#
+-# Userspace binary formats
+-#
+-CONFIG_BINFMT_ELF=y
+-# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+-CONFIG_HAVE_AOUT=y
+-# CONFIG_BINFMT_AOUT is not set
+-# CONFIG_BINFMT_MISC is not set
+-
+-#
+-# Power management options
+-#
+-CONFIG_SUSPEND=y
+-CONFIG_SUSPEND_FREEZER=y
+-CONFIG_PM_SLEEP=y
+-# CONFIG_PM_RUNTIME is not set
+-CONFIG_PM=y
+-# CONFIG_PM_DEBUG is not set
+-CONFIG_APM_EMULATION=y
+-CONFIG_PM_CLK=y
+-CONFIG_ARCH_SUSPEND_POSSIBLE=y
+-CONFIG_NET=y
+-
+-#
+-# Networking options
+-#
+-CONFIG_PACKET=y
+-CONFIG_UNIX=y
+-# CONFIG_NET_KEY is not set
+-CONFIG_INET=y
+-CONFIG_IP_MULTICAST=y
+-# CONFIG_IP_ADVANCED_ROUTER is not set
+-CONFIG_IP_PNP=y
+-CONFIG_IP_PNP_DHCP=y
+-# CONFIG_IP_PNP_BOOTP is not set
+-# CONFIG_IP_PNP_RARP is not set
+-# CONFIG_NET_IPIP is not set
+-# CONFIG_NET_IPGRE_DEMUX is not set
+-# CONFIG_IP_MROUTE is not set
+-# CONFIG_ARPD is not set
+-# CONFIG_SYN_COOKIES is not set
+-# CONFIG_INET_AH is not set
+-# CONFIG_INET_ESP is not set
+-# CONFIG_INET_IPCOMP is not set
+-# CONFIG_INET_XFRM_TUNNEL is not set
+-# CONFIG_INET_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
+-# CONFIG_INET_XFRM_MODE_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_BEET is not set
+-# CONFIG_INET_LRO is not set
+-CONFIG_INET_DIAG=y
+-CONFIG_INET_TCP_DIAG=y
+-# CONFIG_TCP_CONG_ADVANCED is not set
+-CONFIG_TCP_CONG_CUBIC=y
+-CONFIG_DEFAULT_TCP_CONG="cubic"
+-# CONFIG_TCP_MD5SIG is not set
+-# CONFIG_IPV6 is not set
+-# CONFIG_NETWORK_SECMARK is not set
+-# CONFIG_NETWORK_PHY_TIMESTAMPING is not set
+-# CONFIG_NETFILTER is not set
+-# CONFIG_IP_DCCP is not set
+-# CONFIG_IP_SCTP is not set
+-# CONFIG_RDS is not set
+-# CONFIG_TIPC is not set
+-# CONFIG_ATM is not set
+-# CONFIG_L2TP is not set
+-# CONFIG_BRIDGE is not set
+-# CONFIG_NET_DSA is not set
+-# CONFIG_VLAN_8021Q is not set
+-# CONFIG_DECNET is not set
+-# CONFIG_LLC2 is not set
+-# CONFIG_IPX is not set
+-# CONFIG_ATALK is not set
+-# CONFIG_X25 is not set
+-# CONFIG_LAPB is not set
+-# CONFIG_ECONET is not set
+-# CONFIG_WAN_ROUTER is not set
+-# CONFIG_PHONET is not set
+-# CONFIG_IEEE802154 is not set
+-# CONFIG_NET_SCHED is not set
+-# CONFIG_DCB is not set
+-CONFIG_DNS_RESOLVER=y
+-# CONFIG_BATMAN_ADV is not set
+-
+-#
+-# Network testing
+-#
+-# CONFIG_NET_PKTGEN is not set
+-# CONFIG_HAMRADIO is not set
+-# CONFIG_CAN is not set
+-CONFIG_IRDA=m
+-
+-#
+-# IrDA protocols
+-#
+-# CONFIG_IRLAN is not set
+-CONFIG_IRCOMM=m
+-# CONFIG_IRDA_ULTRA is not set
+-
+-#
+-# IrDA options
+-#
+-CONFIG_IRDA_CACHE_LAST_LSAP=y
+-CONFIG_IRDA_FAST_RR=y
+-# CONFIG_IRDA_DEBUG is not set
+-
+-#
+-# Infrared-port device drivers
+-#
+-
+-#
+-# SIR device drivers
+-#
+-CONFIG_IRTTY_SIR=m
+-
+-#
+-# Dongle support
+-#
+-# CONFIG_DONGLE is not set
+-
+-#
+-# FIR device drivers
+-#
+-CONFIG_BT=m
+-CONFIG_BT_L2CAP=y
+-# CONFIG_BT_SCO is not set
+-CONFIG_BT_RFCOMM=m
+-CONFIG_BT_RFCOMM_TTY=y
+-CONFIG_BT_BNEP=m
+-# CONFIG_BT_BNEP_MC_FILTER is not set
+-# CONFIG_BT_BNEP_PROTO_FILTER is not set
+-
+-#
+-# Bluetooth device drivers
+-#
+-# CONFIG_BT_HCIBTSDIO is not set
+-CONFIG_BT_HCIUART=m
+-CONFIG_BT_HCIUART_H4=y
+-CONFIG_BT_HCIUART_BCSP=y
+-CONFIG_BT_HCIUART_ATH3K=y
+-CONFIG_BT_HCIUART_LL=y
+-# CONFIG_BT_HCIVHCI is not set
+-# CONFIG_BT_MRVL is not set
+-# CONFIG_AF_RXRPC is not set
+-CONFIG_WIRELESS=y
+-CONFIG_WEXT_CORE=y
+-CONFIG_WEXT_PROC=y
+-CONFIG_CFG80211=m
+-# CONFIG_NL80211_TESTMODE is not set
+-# CONFIG_CFG80211_DEVELOPER_WARNINGS is not set
+-# CONFIG_CFG80211_REG_DEBUG is not set
+-CONFIG_CFG80211_DEFAULT_PS=y
+-# CONFIG_CFG80211_DEBUGFS is not set
+-# CONFIG_CFG80211_INTERNAL_REGDB is not set
+-CONFIG_CFG80211_WEXT=y
+-CONFIG_WIRELESS_EXT_SYSFS=y
+-# CONFIG_LIB80211 is not set
+-CONFIG_MAC80211=m
+-CONFIG_MAC80211_HAS_RC=y
+-CONFIG_MAC80211_RC_MINSTREL=y
+-CONFIG_MAC80211_RC_MINSTREL_HT=y
+-CONFIG_MAC80211_RC_DEFAULT_MINSTREL=y
+-CONFIG_MAC80211_RC_DEFAULT="minstrel_ht"
+-# CONFIG_MAC80211_MESH is not set
+-# CONFIG_MAC80211_LEDS is not set
+-# CONFIG_MAC80211_DEBUGFS is not set
+-# CONFIG_MAC80211_DEBUG_MENU is not set
+-# CONFIG_WIMAX is not set
+-CONFIG_RFKILL=m
+-CONFIG_RFKILL_LEDS=y
+-CONFIG_RFKILL_INPUT=y
+-# CONFIG_RFKILL_REGULATOR is not set
+-CONFIG_RFKILL_GPIO=m
+-# CONFIG_NET_9P is not set
+-# CONFIG_CAIF is not set
+-# CONFIG_CEPH_LIB is not set
+-# CONFIG_NFC is not set
+-
+-#
+-# Device Drivers
+-#
+-
+-#
+-# Generic Driver Options
+-#
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-# CONFIG_DEVTMPFS is not set
+-CONFIG_STANDALONE=y
+-CONFIG_PREVENT_FIRMWARE_BUILD=y
+-CONFIG_FW_LOADER=y
+-# CONFIG_FIRMWARE_IN_KERNEL is not set
+-CONFIG_EXTRA_FIRMWARE=""
+-# CONFIG_SYS_HYPERVISOR is not set
+-# CONFIG_CONNECTOR is not set
+-CONFIG_MTD=y
+-# CONFIG_MTD_DEBUG is not set
+-# CONFIG_MTD_TESTS is not set
+-CONFIG_MTD_REDBOOT_PARTS=y
+-CONFIG_MTD_REDBOOT_DIRECTORY_BLOCK=-1
+-CONFIG_MTD_REDBOOT_PARTS_UNALLOCATED=y
+-# CONFIG_MTD_REDBOOT_PARTS_READONLY is not set
+-CONFIG_MTD_CMDLINE_PARTS=y
+-# CONFIG_MTD_AFS_PARTS is not set
+-# CONFIG_MTD_AR7_PARTS is not set
+-
+-#
+-# User Modules And Translation Layers
+-#
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLKDEVS=y
+-CONFIG_MTD_BLOCK=y
+-# CONFIG_FTL is not set
+-# CONFIG_NFTL is not set
+-# CONFIG_INFTL is not set
+-# CONFIG_RFD_FTL is not set
+-# CONFIG_SSFDC is not set
+-# CONFIG_SM_FTL is not set
+-# CONFIG_MTD_OOPS is not set
+-# CONFIG_MTD_SWAP is not set
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_CFI=y
+-CONFIG_MTD_JEDECPROBE=y
+-CONFIG_MTD_GEN_PROBE=y
+-# CONFIG_MTD_CFI_ADV_OPTIONS is not set
+-CONFIG_MTD_MAP_BANK_WIDTH_1=y
+-CONFIG_MTD_MAP_BANK_WIDTH_2=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
+-CONFIG_MTD_CFI_I1=y
+-CONFIG_MTD_CFI_I2=y
+-# CONFIG_MTD_CFI_I4 is not set
+-# CONFIG_MTD_CFI_I8 is not set
+-CONFIG_MTD_CFI_INTELEXT=y
+-CONFIG_MTD_CFI_AMDSTD=y
+-# CONFIG_MTD_CFI_STAA is not set
+-CONFIG_MTD_CFI_UTIL=y
+-# CONFIG_MTD_RAM is not set
+-CONFIG_MTD_ROM=y
+-# CONFIG_MTD_ABSENT is not set
+-
+-#
+-# Mapping drivers for chip access
+-#
+-# CONFIG_MTD_COMPLEX_MAPPINGS is not set
+-# CONFIG_MTD_PHYSMAP is not set
+-# CONFIG_MTD_ARM_INTEGRATOR is not set
+-# CONFIG_MTD_IMPA7 is not set
+-# CONFIG_MTD_PLATRAM is not set
+-
+-#
+-# Self-contained MTD device drivers
+-#
+-# CONFIG_MTD_SLRAM is not set
+-# CONFIG_MTD_PHRAM is not set
+-# CONFIG_MTD_MTDRAM is not set
+-# CONFIG_MTD_BLOCK2MTD is not set
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-# CONFIG_MTD_DOC2000 is not set
+-# CONFIG_MTD_DOC2001 is not set
+-# CONFIG_MTD_DOC2001PLUS is not set
+-CONFIG_MTD_NAND_ECC=y
+-# CONFIG_MTD_NAND_ECC_SMC is not set
+-CONFIG_MTD_NAND=y
+-# CONFIG_MTD_NAND_VERIFY_WRITE is not set
+-# CONFIG_MTD_NAND_ECC_BCH is not set
+-# CONFIG_MTD_SM_COMMON is not set
+-# CONFIG_MTD_NAND_MUSEUM_IDS is not set
+-# CONFIG_MTD_NAND_GPIO is not set
+-CONFIG_MTD_NAND_IDS=y
+-CONFIG_MTD_NAND_S3C2410=y
+-# CONFIG_MTD_NAND_S3C2410_DEBUG is not set
+-CONFIG_MTD_NAND_S3C2410_HWECC=y
+-# CONFIG_MTD_NAND_S3C2410_CLKSTOP is not set
+-# CONFIG_MTD_NAND_DISKONCHIP is not set
+-# CONFIG_MTD_NAND_NANDSIM is not set
+-# CONFIG_MTD_NAND_PLATFORM is not set
+-# CONFIG_MTD_ONENAND is not set
+-
+-#
+-# LPDDR flash memory drivers
+-#
+-# CONFIG_MTD_LPDDR is not set
+-# CONFIG_MTD_UBI is not set
+-# CONFIG_PARPORT is not set
+-CONFIG_BLK_DEV=y
+-# CONFIG_BLK_DEV_COW_COMMON is not set
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_LOOP_MIN_COUNT=8
+-# CONFIG_BLK_DEV_CRYPTOLOOP is not set
+-
+-#
+-# DRBD disabled because PROC_FS, INET or CONNECTOR not selected
+-#
+-# CONFIG_BLK_DEV_NBD is not set
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_COUNT=1
+-CONFIG_BLK_DEV_RAM_SIZE=8192
+-# CONFIG_BLK_DEV_XIP is not set
+-# CONFIG_CDROM_PKTCDVD is not set
+-# CONFIG_ATA_OVER_ETH is not set
+-# CONFIG_MG_DISK is not set
+-# CONFIG_BLK_DEV_RBD is not set
+-# CONFIG_SENSORS_LIS3LV02D is not set
+-# CONFIG_MISC_DEVICES is not set
+-CONFIG_HAVE_IDE=y
+-# CONFIG_IDE is not set
+-
+-#
+-# SCSI device support
+-#
+-CONFIG_SCSI_MOD=y
+-# CONFIG_RAID_ATTRS is not set
+-# CONFIG_SCSI is not set
+-# CONFIG_SCSI_DMA is not set
+-# CONFIG_SCSI_NETLINK is not set
+-# CONFIG_ATA is not set
+-# CONFIG_MD is not set
+-CONFIG_NETDEVICES=y
+-# CONFIG_DUMMY is not set
+-# CONFIG_BONDING is not set
+-# CONFIG_MACVLAN is not set
+-# CONFIG_EQUALIZER is not set
+-# CONFIG_TUN is not set
+-# CONFIG_VETH is not set
+-# CONFIG_MII is not set
+-# CONFIG_PHYLIB is not set
+-# CONFIG_NET_ETHERNET is not set
+-# CONFIG_NETDEV_1000 is not set
+-# CONFIG_NETDEV_10000 is not set
+-CONFIG_WLAN=y
+-# CONFIG_LIBERTAS_THINFIRM is not set
+-# CONFIG_MAC80211_HWSIM is not set
+-# CONFIG_ATH_COMMON is not set
+-# CONFIG_B43 is not set
+-# CONFIG_B43LEGACY is not set
+-# CONFIG_HOSTAP is not set
+-# CONFIG_IWM is not set
+-# CONFIG_LIBERTAS is not set
+-# CONFIG_P54_COMMON is not set
+-# CONFIG_RT2X00 is not set
+-# CONFIG_RTL8192SE is not set
+-# CONFIG_RTL8192DE is not set
+-# CONFIG_WL1251 is not set
+-# CONFIG_WL12XX_MENU is not set
+-# CONFIG_MWIFIEX is not set
+-
+-#
+-# Enable WiMAX (Networking options) to see the WiMAX drivers
+-#
+-# CONFIG_WAN is not set
+-
+-#
+-# CAIF transport drivers
+-#
+-# CONFIG_PPP is not set
+-# CONFIG_SLIP is not set
+-# CONFIG_NETCONSOLE is not set
+-# CONFIG_NETPOLL is not set
+-# CONFIG_NET_POLL_CONTROLLER is not set
+-# CONFIG_ISDN is not set
+-# CONFIG_PHONE is not set
+-
+-#
+-# Input device support
+-#
+-CONFIG_INPUT=y
+-# CONFIG_INPUT_FF_MEMLESS is not set
+-# CONFIG_INPUT_POLLDEV is not set
+-# CONFIG_INPUT_SPARSEKMAP is not set
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV=y
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-# CONFIG_INPUT_JOYDEV is not set
+-CONFIG_INPUT_EVDEV=y
+-# CONFIG_INPUT_EVBUG is not set
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_INPUT_KEYBOARD=y
+-# CONFIG_KEYBOARD_ADP5588 is not set
+-# CONFIG_KEYBOARD_ADP5589 is not set
+-# CONFIG_KEYBOARD_ATKBD is not set
+-# CONFIG_KEYBOARD_QT1070 is not set
+-# CONFIG_KEYBOARD_QT2160 is not set
+-# CONFIG_KEYBOARD_LKKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-# CONFIG_KEYBOARD_TCA6416 is not set
+-# CONFIG_KEYBOARD_MATRIX is not set
+-# CONFIG_KEYBOARD_LM8323 is not set
+-# CONFIG_KEYBOARD_MAX7359 is not set
+-# CONFIG_KEYBOARD_MCS is not set
+-# CONFIG_KEYBOARD_MPR121 is not set
+-# CONFIG_KEYBOARD_NEWTON is not set
+-# CONFIG_KEYBOARD_OPENCORES is not set
+-# CONFIG_KEYBOARD_STOWAWAY is not set
+-# CONFIG_KEYBOARD_SUNKBD is not set
+-# CONFIG_KEYBOARD_XTKBD is not set
+-# CONFIG_INPUT_MOUSE is not set
+-# CONFIG_INPUT_JOYSTICK is not set
+-# CONFIG_INPUT_TABLET is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-# CONFIG_TOUCHSCREEN_AD7879 is not set
+-# CONFIG_TOUCHSCREEN_ATMEL_MXT is not set
+-# CONFIG_TOUCHSCREEN_BU21013 is not set
+-# CONFIG_TOUCHSCREEN_CY8CTMG110 is not set
+-# CONFIG_TOUCHSCREEN_DYNAPRO is not set
+-# CONFIG_TOUCHSCREEN_HAMPSHIRE is not set
+-# CONFIG_TOUCHSCREEN_EETI is not set
+-# CONFIG_TOUCHSCREEN_FUJITSU is not set
+-CONFIG_TOUCHSCREEN_S3C2410=y
+-# CONFIG_TOUCHSCREEN_GUNZE is not set
+-# CONFIG_TOUCHSCREEN_ELO is not set
+-# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
+-# CONFIG_TOUCHSCREEN_MAX11801 is not set
+-# CONFIG_TOUCHSCREEN_MCS5000 is not set
+-# CONFIG_TOUCHSCREEN_MTOUCH is not set
+-# CONFIG_TOUCHSCREEN_INEXIO is not set
+-# CONFIG_TOUCHSCREEN_MK712 is not set
+-# CONFIG_TOUCHSCREEN_PENMOUNT is not set
+-# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
+-# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
+-# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
+-# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
+-# CONFIG_TOUCHSCREEN_TSC2007 is not set
+-# CONFIG_TOUCHSCREEN_W90X900 is not set
+-# CONFIG_TOUCHSCREEN_ST1232 is not set
+-# CONFIG_TOUCHSCREEN_TPS6507X is not set
+-# CONFIG_INPUT_MISC is not set
+-
+-#
+-# Hardware I/O ports
+-#
+-CONFIG_SERIO=y
+-CONFIG_SERIO_SERPORT=y
+-# CONFIG_SERIO_RAW is not set
+-# CONFIG_SERIO_ALTERA_PS2 is not set
+-# CONFIG_SERIO_PS2MULT is not set
+-# CONFIG_GAMEPORT is not set
+-
+-#
+-# Character devices
+-#
+-CONFIG_VT=y
+-CONFIG_CONSOLE_TRANSLATIONS=y
+-CONFIG_VT_CONSOLE=y
+-CONFIG_HW_CONSOLE=y
+-# CONFIG_VT_HW_CONSOLE_BINDING is not set
+-CONFIG_UNIX98_PTYS=y
+-# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
+-# CONFIG_LEGACY_PTYS is not set
+-# CONFIG_SERIAL_NONSTANDARD is not set
+-# CONFIG_N_GSM is not set
+-# CONFIG_TRACE_SINK is not set
+-CONFIG_DEVKMEM=y
+-
+-#
+-# Serial drivers
+-#
+-# CONFIG_SERIAL_8250 is not set
+-
+-#
+-# Non-8250 serial port support
+-#
+-CONFIG_SERIAL_SAMSUNG=y
+-CONFIG_SERIAL_SAMSUNG_UARTS=3
+-CONFIG_SERIAL_SAMSUNG_CONSOLE=y
+-CONFIG_SERIAL_S3C2410=y
+-CONFIG_SERIAL_S3C2440=y
+-CONFIG_SERIAL_CORE=y
+-CONFIG_SERIAL_CORE_CONSOLE=y
+-# CONFIG_SERIAL_TIMBERDALE is not set
+-# CONFIG_SERIAL_ALTERA_JTAGUART is not set
+-# CONFIG_SERIAL_ALTERA_UART is not set
+-# CONFIG_SERIAL_XILINX_PS_UART is not set
+-# CONFIG_HVC_DCC is not set
+-# CONFIG_IPMI_HANDLER is not set
+-# CONFIG_HW_RANDOM is not set
+-# CONFIG_R3964 is not set
+-# CONFIG_RAW_DRIVER is not set
+-# CONFIG_TCG_TPM is not set
+-# CONFIG_RAMOOPS is not set
+-CONFIG_I2C=y
+-CONFIG_I2C_BOARDINFO=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_CHARDEV=m
+-# CONFIG_I2C_MUX is not set
+-CONFIG_I2C_HELPER_AUTO=y
+-
+-#
+-# I2C Hardware Bus support
+-#
+-
+-#
+-# I2C system bus drivers (mostly embedded / system-on-chip)
+-#
+-# CONFIG_I2C_DESIGNWARE is not set
+-# CONFIG_I2C_GPIO is not set
+-# CONFIG_I2C_OCORES is not set
+-# CONFIG_I2C_PCA_PLATFORM is not set
+-# CONFIG_I2C_PXA_PCI is not set
+-CONFIG_HAVE_S3C2410_I2C=y
+-CONFIG_I2C_S3C2410=m
+-# CONFIG_I2C_SIMTEC is not set
+-# CONFIG_I2C_XILINX is not set
+-
+-#
+-# External I2C/SMBus adapter drivers
+-#
+-# CONFIG_I2C_PARPORT_LIGHT is not set
+-# CONFIG_I2C_TAOS_EVM is not set
+-
+-#
+-# Other I2C/SMBus bus drivers
+-#
+-# CONFIG_I2C_STUB is not set
+-# CONFIG_I2C_DEBUG_CORE is not set
+-# CONFIG_I2C_DEBUG_ALGO is not set
+-# CONFIG_I2C_DEBUG_BUS is not set
+-# CONFIG_SPI is not set
+-
+-#
+-# PPS support
+-#
+-# CONFIG_PPS is not set
+-
+-#
+-# PPS generators support
+-#
+-
+-#
+-# PTP clock support
+-#
+-
+-#
+-# Enable Device Drivers -> PPS to see the PTP clock options.
+-#
+-CONFIG_ARCH_REQUIRE_GPIOLIB=y
+-CONFIG_GPIOLIB=y
+-CONFIG_GPIO_SYSFS=y
+-
+-#
+-# Memory mapped GPIO drivers:
+-#
+-# CONFIG_GPIO_GENERIC_PLATFORM is not set
+-# CONFIG_GPIO_IT8761E is not set
+-
+-#
+-# I2C GPIO expanders:
+-#
+-# CONFIG_GPIO_MAX7300 is not set
+-# CONFIG_GPIO_MAX732X is not set
+-# CONFIG_GPIO_PCF857X is not set
+-# CONFIG_GPIO_SX150X is not set
+-# CONFIG_GPIO_ADP5588 is not set
+-
+-#
+-# PCI GPIO expanders:
+-#
+-
+-#
+-# SPI GPIO expanders:
+-#
+-# CONFIG_GPIO_MCP23S08 is not set
+-
+-#
+-# AC97 GPIO expanders:
+-#
+-
+-#
+-# MODULbus GPIO expanders:
+-#
+-# CONFIG_W1 is not set
+-CONFIG_POWER_SUPPLY=y
+-# CONFIG_POWER_SUPPLY_DEBUG is not set
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-# CONFIG_TEST_POWER is not set
+-# CONFIG_BATTERY_DS2780 is not set
+-# CONFIG_BATTERY_DS2782 is not set
+-# CONFIG_BATTERY_BQ20Z75 is not set
+-# CONFIG_BATTERY_BQ27x00 is not set
+-# CONFIG_BATTERY_MAX17040 is not set
+-# CONFIG_BATTERY_MAX17042 is not set
+-CONFIG_BATTERY_S3C_ADC=y
+-# CONFIG_CHARGER_MAX8903 is not set
+-# CONFIG_CHARGER_GPIO is not set
+-# CONFIG_HWMON is not set
+-# CONFIG_THERMAL is not set
+-CONFIG_WATCHDOG=y
+-# CONFIG_WATCHDOG_CORE is not set
+-# CONFIG_WATCHDOG_NOWAYOUT is not set
+-
+-#
+-# Watchdog Device Drivers
+-#
+-# CONFIG_SOFT_WATCHDOG is not set
+-CONFIG_S3C2410_WATCHDOG=y
+-# CONFIG_DW_WATCHDOG is not set
+-# CONFIG_MAX63XX_WATCHDOG is not set
+-CONFIG_SSB_POSSIBLE=y
+-
+-#
+-# Sonics Silicon Backplane
+-#
+-# CONFIG_SSB is not set
+-CONFIG_BCMA_POSSIBLE=y
+-
+-#
+-# Broadcom specific AMBA
+-#
+-# CONFIG_BCMA is not set
+-# CONFIG_MFD_SUPPORT is not set
+-CONFIG_REGULATOR=y
+-# CONFIG_REGULATOR_DEBUG is not set
+-CONFIG_REGULATOR_DUMMY=y
+-# CONFIG_REGULATOR_FIXED_VOLTAGE is not set
+-# CONFIG_REGULATOR_VIRTUAL_CONSUMER is not set
+-# CONFIG_REGULATOR_USERSPACE_CONSUMER is not set
+-# CONFIG_REGULATOR_BQ24022 is not set
+-# CONFIG_REGULATOR_MAX1586 is not set
+-# CONFIG_REGULATOR_MAX8649 is not set
+-# CONFIG_REGULATOR_MAX8660 is not set
+-# CONFIG_REGULATOR_MAX8952 is not set
+-# CONFIG_REGULATOR_LP3971 is not set
+-# CONFIG_REGULATOR_LP3972 is not set
+-# CONFIG_REGULATOR_TPS65023 is not set
+-# CONFIG_REGULATOR_TPS6507X is not set
+-# CONFIG_REGULATOR_ISL6271A is not set
+-# CONFIG_REGULATOR_AD5398 is not set
+-# CONFIG_MEDIA_SUPPORT is not set
+-
+-#
+-# Graphics support
+-#
+-# CONFIG_DRM is not set
+-# CONFIG_VGASTATE is not set
+-# CONFIG_VIDEO_OUTPUT_CONTROL is not set
+-CONFIG_FB=y
+-# CONFIG_FIRMWARE_EDID is not set
+-# CONFIG_FB_DDC is not set
+-# CONFIG_FB_BOOT_VESA_SUPPORT is not set
+-CONFIG_FB_CFB_FILLRECT=y
+-CONFIG_FB_CFB_COPYAREA=y
+-CONFIG_FB_CFB_IMAGEBLIT=y
+-# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
+-# CONFIG_FB_SYS_FILLRECT is not set
+-# CONFIG_FB_SYS_COPYAREA is not set
+-# CONFIG_FB_SYS_IMAGEBLIT is not set
+-# CONFIG_FB_FOREIGN_ENDIAN is not set
+-# CONFIG_FB_SYS_FOPS is not set
+-# CONFIG_FB_WMT_GE_ROPS is not set
+-# CONFIG_FB_SVGALIB is not set
+-# CONFIG_FB_MACMODES is not set
+-# CONFIG_FB_BACKLIGHT is not set
+-# CONFIG_FB_MODE_HELPERS is not set
+-# CONFIG_FB_TILEBLITTING is not set
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-# CONFIG_FB_S1D13XXX is not set
+-CONFIG_FB_S3C2410=y
+-CONFIG_FB_S3C2410_DEBUG=y
+-# CONFIG_FB_VIRTUAL is not set
+-# CONFIG_FB_METRONOME is not set
+-# CONFIG_FB_BROADSHEET is not set
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CLASS_DEVICE=y
+-CONFIG_LCD_PLATFORM=y
+-CONFIG_BACKLIGHT_CLASS_DEVICE=y
+-# CONFIG_BACKLIGHT_GENERIC is not set
+-CONFIG_BACKLIGHT_PWM=y
+-# CONFIG_BACKLIGHT_ADP8860 is not set
+-# CONFIG_BACKLIGHT_ADP8870 is not set
+-
+-#
+-# Display device support
+-#
+-# CONFIG_DISPLAY_SUPPORT is not set
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_DUMMY_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+-# CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+-CONFIG_FONTS=y
+-# CONFIG_FONT_8x8 is not set
+-# CONFIG_FONT_8x16 is not set
+-# CONFIG_FONT_6x11 is not set
+-# CONFIG_FONT_7x14 is not set
+-# CONFIG_FONT_PEARL_8x8 is not set
+-# CONFIG_FONT_ACORN_8x8 is not set
+-CONFIG_FONT_MINI_4x6=y
+-# CONFIG_FONT_SUN8x16 is not set
+-# CONFIG_FONT_SUN12x22 is not set
+-# CONFIG_FONT_10x18 is not set
+-# CONFIG_LOGO is not set
+-CONFIG_SOUND=m
+-CONFIG_SOUND_OSS_CORE=y
+-CONFIG_SOUND_OSS_CORE_PRECLAIM=y
+-CONFIG_SND=m
+-CONFIG_SND_TIMER=m
+-CONFIG_SND_PCM=m
+-CONFIG_SND_JACK=y
+-# CONFIG_SND_SEQUENCER is not set
+-CONFIG_SND_OSSEMUL=y
+-CONFIG_SND_MIXER_OSS=m
+-CONFIG_SND_PCM_OSS=m
+-CONFIG_SND_PCM_OSS_PLUGINS=y
+-# CONFIG_SND_DYNAMIC_MINORS is not set
+-CONFIG_SND_SUPPORT_OLD_API=y
+-CONFIG_SND_VERBOSE_PROCFS=y
+-# CONFIG_SND_VERBOSE_PRINTK is not set
+-# CONFIG_SND_DEBUG is not set
+-# CONFIG_SND_RAWMIDI_SEQ is not set
+-# CONFIG_SND_OPL3_LIB_SEQ is not set
+-# CONFIG_SND_OPL4_LIB_SEQ is not set
+-# CONFIG_SND_SBAWE_SEQ is not set
+-# CONFIG_SND_EMU10K1_SEQ is not set
+-# CONFIG_SND_DRIVERS is not set
+-# CONFIG_SND_ARM is not set
+-CONFIG_SND_SOC=m
+-# CONFIG_SND_SOC_CACHE_LZO is not set
+-CONFIG_SND_SOC_SAMSUNG=m
+-CONFIG_SND_S3C24XX_I2S=m
+-# CONFIG_SND_SOC_SAMSUNG_LN2440SBC_ALC650 is not set
+-# CONFIG_SND_SOC_SAMSUNG_S3C24XX_UDA134X is not set
+-# CONFIG_SND_SOC_SAMSUNG_SIMTEC_TLV320AIC23 is not set
+-# CONFIG_SND_SOC_SAMSUNG_SIMTEC_HERMES is not set
+-CONFIG_SND_SOC_SAMSUNG_H1940_UDA1380=m
+-CONFIG_SND_SOC_SAMSUNG_RX1950_UDA1380=m
+-CONFIG_SND_SOC_I2C_AND_SPI=m
+-# CONFIG_SND_SOC_ALL_CODECS is not set
+-CONFIG_SND_SOC_UDA1380=m
+-# CONFIG_SOUND_PRIME is not set
+-# CONFIG_HID_SUPPORT is not set
+-CONFIG_USB_SUPPORT=y
+-CONFIG_USB_ARCH_HAS_HCD=y
+-CONFIG_USB_ARCH_HAS_OHCI=y
+-# CONFIG_USB_ARCH_HAS_EHCI is not set
+-# CONFIG_USB is not set
+-
+-#
+-# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
+-#
+-CONFIG_USB_GADGET=y
+-# CONFIG_USB_GADGET_DEBUG_FILES is not set
+-# CONFIG_USB_GADGET_DEBUG_FS is not set
+-CONFIG_USB_GADGET_VBUS_DRAW=100
+-# CONFIG_USB_FUSB300 is not set
+-# CONFIG_USB_R8A66597 is not set
+-CONFIG_USB_S3C2410=y
+-# CONFIG_USB_S3C2410_DEBUG is not set
+-# CONFIG_USB_S3C_HSUDC is not set
+-# CONFIG_USB_M66592 is not set
+-# CONFIG_USB_NET2272 is not set
+-# CONFIG_USB_ZERO is not set
+-# CONFIG_USB_AUDIO is not set
+-CONFIG_USB_ETH=y
+-CONFIG_USB_ETH_RNDIS=y
+-# CONFIG_USB_ETH_EEM is not set
+-# CONFIG_USB_G_NCM is not set
+-# CONFIG_USB_GADGETFS is not set
+-# CONFIG_USB_FUNCTIONFS is not set
+-# CONFIG_USB_FILE_STORAGE is not set
+-# CONFIG_USB_MASS_STORAGE is not set
+-# CONFIG_USB_G_SERIAL is not set
+-# CONFIG_USB_MIDI_GADGET is not set
+-# CONFIG_USB_G_PRINTER is not set
+-# CONFIG_USB_CDC_COMPOSITE is not set
+-# CONFIG_USB_G_MULTI is not set
+-# CONFIG_USB_G_HID is not set
+-# CONFIG_USB_G_DBGP is not set
+-
+-#
+-# OTG and related infrastructure
+-#
+-# CONFIG_USB_GPIO_VBUS is not set
+-# CONFIG_USB_ULPI is not set
+-# CONFIG_NOP_USB_XCEIV is not set
+-CONFIG_MMC=y
+-# CONFIG_MMC_DEBUG is not set
+-CONFIG_MMC_UNSAFE_RESUME=y
+-# CONFIG_MMC_CLKGATE is not set
+-
+-#
+-# MMC/SD/SDIO Card Drivers
+-#
+-CONFIG_MMC_BLOCK=y
+-CONFIG_MMC_BLOCK_MINORS=8
+-CONFIG_MMC_BLOCK_BOUNCE=y
+-# CONFIG_SDIO_UART is not set
+-# CONFIG_MMC_TEST is not set
+-
+-#
+-# MMC/SD/SDIO Host Controller Drivers
+-#
+-# CONFIG_MMC_SDHCI is not set
+-# CONFIG_MMC_SDHCI_PXAV3 is not set
+-# CONFIG_MMC_SDHCI_PXAV2 is not set
+-CONFIG_MMC_S3C=y
+-# CONFIG_MMC_S3C_HW_SDIO_IRQ is not set
+-# CONFIG_MMC_S3C_PIO is not set
+-CONFIG_MMC_S3C_DMA=y
+-# CONFIG_MMC_S3C_PIODMA is not set
+-# CONFIG_MMC_DW is not set
+-# CONFIG_MEMSTICK is not set
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-
+-#
+-# LED drivers
+-#
+-# CONFIG_LEDS_LM3530 is not set
+-# CONFIG_LEDS_S3C24XX is not set
+-# CONFIG_LEDS_PCA9532 is not set
+-CONFIG_LEDS_GPIO=y
+-# CONFIG_LEDS_LP3944 is not set
+-# CONFIG_LEDS_LP5521 is not set
+-# CONFIG_LEDS_LP5523 is not set
+-# CONFIG_LEDS_PCA955X is not set
+-# CONFIG_LEDS_PWM is not set
+-# CONFIG_LEDS_REGULATOR is not set
+-# CONFIG_LEDS_BD2802 is not set
+-# CONFIG_LEDS_LT3593 is not set
+-CONFIG_LEDS_TRIGGERS=y
+-
+-#
+-# LED Triggers
+-#
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-# CONFIG_LEDS_TRIGGER_HEARTBEAT is not set
+-# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
+-# CONFIG_LEDS_TRIGGER_GPIO is not set
+-# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
+-
+-#
+-# iptables trigger is under Netfilter config (LED target)
+-#
+-# CONFIG_ACCESSIBILITY is not set
+-CONFIG_RTC_LIB=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_HCTOSYS=y
+-CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
+-# CONFIG_RTC_DEBUG is not set
+-
+-#
+-# RTC interfaces
+-#
+-CONFIG_RTC_INTF_SYSFS=y
+-# CONFIG_RTC_INTF_PROC is not set
+-CONFIG_RTC_INTF_DEV=y
+-# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
+-# CONFIG_RTC_DRV_TEST is not set
+-
+-#
+-# I2C RTC drivers
+-#
+-# CONFIG_RTC_DRV_DS1307 is not set
+-# CONFIG_RTC_DRV_DS1374 is not set
+-# CONFIG_RTC_DRV_DS1672 is not set
+-# CONFIG_RTC_DRV_DS3232 is not set
+-# CONFIG_RTC_DRV_MAX6900 is not set
+-# CONFIG_RTC_DRV_RS5C372 is not set
+-# CONFIG_RTC_DRV_ISL1208 is not set
+-# CONFIG_RTC_DRV_ISL12022 is not set
+-# CONFIG_RTC_DRV_X1205 is not set
+-# CONFIG_RTC_DRV_PCF8563 is not set
+-# CONFIG_RTC_DRV_PCF8583 is not set
+-# CONFIG_RTC_DRV_M41T80 is not set
+-# CONFIG_RTC_DRV_BQ32K is not set
+-# CONFIG_RTC_DRV_S35390A is not set
+-# CONFIG_RTC_DRV_FM3130 is not set
+-# CONFIG_RTC_DRV_RX8581 is not set
+-# CONFIG_RTC_DRV_RX8025 is not set
+-# CONFIG_RTC_DRV_EM3027 is not set
+-# CONFIG_RTC_DRV_RV3029C2 is not set
+-
+-#
+-# SPI RTC drivers
+-#
+-
+-#
+-# Platform RTC drivers
+-#
+-# CONFIG_RTC_DRV_CMOS is not set
+-# CONFIG_RTC_DRV_DS1286 is not set
+-# CONFIG_RTC_DRV_DS1511 is not set
+-# CONFIG_RTC_DRV_DS1553 is not set
+-# CONFIG_RTC_DRV_DS1742 is not set
+-# CONFIG_RTC_DRV_STK17TA8 is not set
+-# CONFIG_RTC_DRV_M48T86 is not set
+-# CONFIG_RTC_DRV_M48T35 is not set
+-# CONFIG_RTC_DRV_M48T59 is not set
+-# CONFIG_RTC_DRV_MSM6242 is not set
+-# CONFIG_RTC_DRV_BQ4802 is not set
+-# CONFIG_RTC_DRV_RP5C01 is not set
+-# CONFIG_RTC_DRV_V3020 is not set
+-
+-#
+-# on-CPU RTC drivers
+-#
+-CONFIG_RTC_DRV_S3C=y
+-# CONFIG_DMADEVICES is not set
+-# CONFIG_AUXDISPLAY is not set
+-# CONFIG_UIO is not set
+-
+-#
+-# Virtio drivers
+-#
+-# CONFIG_VIRTIO_BALLOON is not set
+-CONFIG_STAGING=y
+-# CONFIG_ECHO is not set
+-# CONFIG_BRCMUTIL is not set
+-# CONFIG_POHMELFS is not set
+-# CONFIG_IIO is not set
+-CONFIG_XVMALLOC=y
+-CONFIG_ZRAM=m
+-# CONFIG_ZRAM_DEBUG is not set
+-# CONFIG_FB_SM7XX is not set
+-# CONFIG_ATH6K_LEGACY is not set
+-# CONFIG_FT1000 is not set
+-
+-#
+-# Speakup console speech
+-#
+-# CONFIG_SPEAKUP is not set
+-# CONFIG_TOUCHSCREEN_CLEARPAD_TM1217 is not set
+-# CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4 is not set
+-# CONFIG_ALTERA_STAPL is not set
+-CONFIG_CLKDEV_LOOKUP=y
+-# CONFIG_IOMMU_SUPPORT is not set
+-# CONFIG_VIRT_DRIVERS is not set
+-
+-#
+-# File systems
+-#
+-CONFIG_EXT2_FS=y
+-# CONFIG_EXT2_FS_XATTR is not set
+-# CONFIG_EXT2_FS_XIP is not set
+-CONFIG_EXT3_FS=m
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-CONFIG_EXT3_FS_XATTR=y
+-# CONFIG_EXT3_FS_POSIX_ACL is not set
+-# CONFIG_EXT3_FS_SECURITY is not set
+-# CONFIG_EXT4_FS is not set
+-CONFIG_JBD=m
+-# CONFIG_JBD_DEBUG is not set
+-CONFIG_FS_MBCACHE=m
+-# CONFIG_REISERFS_FS is not set
+-# CONFIG_JFS_FS is not set
+-# CONFIG_XFS_FS is not set
+-# CONFIG_GFS2_FS is not set
+-# CONFIG_BTRFS_FS is not set
+-# CONFIG_NILFS2_FS is not set
+-# CONFIG_FS_POSIX_ACL is not set
+-CONFIG_FILE_LOCKING=y
+-CONFIG_FSNOTIFY=y
+-CONFIG_DNOTIFY=y
+-CONFIG_INOTIFY_USER=y
+-# CONFIG_FANOTIFY is not set
+-# CONFIG_QUOTA is not set
+-# CONFIG_QUOTACTL is not set
+-# CONFIG_AUTOFS4_FS is not set
+-CONFIG_FUSE_FS=m
+-# CONFIG_CUSE is not set
+-
+-#
+-# Caches
+-#
+-# CONFIG_FSCACHE is not set
+-
+-#
+-# CD-ROM/DVD Filesystems
+-#
+-# CONFIG_ISO9660_FS is not set
+-# CONFIG_UDF_FS is not set
+-
+-#
+-# DOS/FAT/NT Filesystems
+-#
+-CONFIG_FAT_FS=y
+-# CONFIG_MSDOS_FS is not set
+-CONFIG_VFAT_FS=y
+-CONFIG_FAT_DEFAULT_CODEPAGE=866
+-CONFIG_FAT_DEFAULT_IOCHARSET="utf8"
+-# CONFIG_NTFS_FS is not set
+-
+-#
+-# Pseudo filesystems
+-#
+-CONFIG_PROC_FS=y
+-CONFIG_PROC_SYSCTL=y
+-CONFIG_PROC_PAGE_MONITOR=y
+-CONFIG_SYSFS=y
+-CONFIG_TMPFS=y
+-# CONFIG_TMPFS_POSIX_ACL is not set
+-# CONFIG_TMPFS_XATTR is not set
+-# CONFIG_HUGETLB_PAGE is not set
+-# CONFIG_CONFIGFS_FS is not set
+-CONFIG_MISC_FILESYSTEMS=y
+-# CONFIG_ADFS_FS is not set
+-# CONFIG_AFFS_FS is not set
+-# CONFIG_ECRYPT_FS is not set
+-# CONFIG_HFS_FS is not set
+-# CONFIG_HFSPLUS_FS is not set
+-# CONFIG_BEFS_FS is not set
+-# CONFIG_BFS_FS is not set
+-# CONFIG_EFS_FS is not set
+-# CONFIG_JFFS2_FS is not set
+-# CONFIG_LOGFS is not set
+-# CONFIG_CRAMFS is not set
+-# CONFIG_SQUASHFS is not set
+-# CONFIG_VXFS_FS is not set
+-# CONFIG_MINIX_FS is not set
+-# CONFIG_OMFS_FS is not set
+-# CONFIG_HPFS_FS is not set
+-# CONFIG_QNX4FS_FS is not set
+-# CONFIG_ROMFS_FS is not set
+-# CONFIG_PSTORE is not set
+-# CONFIG_SYSV_FS is not set
+-# CONFIG_UFS_FS is not set
+-CONFIG_NETWORK_FILESYSTEMS=y
+-CONFIG_NFS_FS=y
+-CONFIG_NFS_V3=y
+-# CONFIG_NFS_V3_ACL is not set
+-CONFIG_NFS_V4=y
+-# CONFIG_NFS_V4_1 is not set
+-CONFIG_ROOT_NFS=y
+-# CONFIG_NFS_USE_LEGACY_DNS is not set
+-CONFIG_NFS_USE_KERNEL_DNS=y
+-# CONFIG_NFS_USE_NEW_IDMAPPER is not set
+-# CONFIG_NFSD is not set
+-CONFIG_LOCKD=y
+-CONFIG_LOCKD_V4=y
+-CONFIG_NFS_COMMON=y
+-CONFIG_SUNRPC=y
+-CONFIG_SUNRPC_GSS=y
+-# CONFIG_CEPH_FS is not set
+-# CONFIG_CIFS is not set
+-# CONFIG_NCP_FS is not set
+-# CONFIG_CODA_FS is not set
+-# CONFIG_AFS_FS is not set
+-
+-#
+-# Partition Types
+-#
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ACORN_PARTITION is not set
+-# CONFIG_OSF_PARTITION is not set
+-# CONFIG_AMIGA_PARTITION is not set
+-# CONFIG_ATARI_PARTITION is not set
+-# CONFIG_MAC_PARTITION is not set
+-CONFIG_MSDOS_PARTITION=y
+-CONFIG_BSD_DISKLABEL=y
+-# CONFIG_MINIX_SUBPARTITION is not set
+-# CONFIG_SOLARIS_X86_PARTITION is not set
+-# CONFIG_UNIXWARE_DISKLABEL is not set
+-# CONFIG_LDM_PARTITION is not set
+-# CONFIG_SGI_PARTITION is not set
+-# CONFIG_ULTRIX_PARTITION is not set
+-# CONFIG_SUN_PARTITION is not set
+-# CONFIG_KARMA_PARTITION is not set
+-# CONFIG_EFI_PARTITION is not set
+-# CONFIG_SYSV68_PARTITION is not set
+-CONFIG_NLS=y
+-CONFIG_NLS_DEFAULT="utf8"
+-# CONFIG_NLS_CODEPAGE_437 is not set
+-# CONFIG_NLS_CODEPAGE_737 is not set
+-# CONFIG_NLS_CODEPAGE_775 is not set
+-# CONFIG_NLS_CODEPAGE_850 is not set
+-# CONFIG_NLS_CODEPAGE_852 is not set
+-# CONFIG_NLS_CODEPAGE_855 is not set
+-# CONFIG_NLS_CODEPAGE_857 is not set
+-# CONFIG_NLS_CODEPAGE_860 is not set
+-# CONFIG_NLS_CODEPAGE_861 is not set
+-# CONFIG_NLS_CODEPAGE_862 is not set
+-# CONFIG_NLS_CODEPAGE_863 is not set
+-# CONFIG_NLS_CODEPAGE_864 is not set
+-# CONFIG_NLS_CODEPAGE_865 is not set
+-CONFIG_NLS_CODEPAGE_866=y
+-# CONFIG_NLS_CODEPAGE_869 is not set
+-# CONFIG_NLS_CODEPAGE_936 is not set
+-# CONFIG_NLS_CODEPAGE_950 is not set
+-# CONFIG_NLS_CODEPAGE_932 is not set
+-# CONFIG_NLS_CODEPAGE_949 is not set
+-# CONFIG_NLS_CODEPAGE_874 is not set
+-# CONFIG_NLS_ISO8859_8 is not set
+-# CONFIG_NLS_CODEPAGE_1250 is not set
+-CONFIG_NLS_CODEPAGE_1251=y
+-# CONFIG_NLS_ASCII is not set
+-# CONFIG_NLS_ISO8859_1 is not set
+-# CONFIG_NLS_ISO8859_2 is not set
+-# CONFIG_NLS_ISO8859_3 is not set
+-# CONFIG_NLS_ISO8859_4 is not set
+-# CONFIG_NLS_ISO8859_5 is not set
+-# CONFIG_NLS_ISO8859_6 is not set
+-# CONFIG_NLS_ISO8859_7 is not set
+-# CONFIG_NLS_ISO8859_9 is not set
+-# CONFIG_NLS_ISO8859_13 is not set
+-# CONFIG_NLS_ISO8859_14 is not set
+-# CONFIG_NLS_ISO8859_15 is not set
+-# CONFIG_NLS_KOI8_R is not set
+-# CONFIG_NLS_KOI8_U is not set
+-CONFIG_NLS_UTF8=y
+-
+-#
+-# Kernel hacking
+-#
+-# CONFIG_PRINTK_TIME is not set
+-CONFIG_DEFAULT_MESSAGE_LOGLEVEL=4
+-CONFIG_ENABLE_WARN_DEPRECATED=y
+-CONFIG_ENABLE_MUST_CHECK=y
+-CONFIG_FRAME_WARN=1024
+-CONFIG_MAGIC_SYSRQ=y
+-# CONFIG_STRIP_ASM_SYMS is not set
+-# CONFIG_UNUSED_SYMBOLS is not set
+-CONFIG_DEBUG_FS=y
+-# CONFIG_HEADERS_CHECK is not set
+-# CONFIG_DEBUG_SECTION_MISMATCH is not set
+-# CONFIG_DEBUG_KERNEL is not set
+-# CONFIG_HARDLOCKUP_DETECTOR is not set
+-# CONFIG_SPARSE_RCU_POINTER is not set
+-CONFIG_DEBUG_BUGVERBOSE=y
+-CONFIG_DEBUG_MEMORY_INIT=y
+-# CONFIG_LKDTM is not set
+-# CONFIG_SYSCTL_SYSCALL_CHECK is not set
+-CONFIG_HAVE_FUNCTION_TRACER=y
+-CONFIG_HAVE_FUNCTION_GRAPH_TRACER=y
+-CONFIG_HAVE_DYNAMIC_FTRACE=y
+-CONFIG_HAVE_FTRACE_MCOUNT_RECORD=y
+-CONFIG_HAVE_C_RECORDMCOUNT=y
+-CONFIG_TRACING_SUPPORT=y
+-# CONFIG_FTRACE is not set
+-# CONFIG_DYNAMIC_DEBUG is not set
+-# CONFIG_DMA_API_DEBUG is not set
+-# CONFIG_ATOMIC64_SELFTEST is not set
+-# CONFIG_SAMPLES is not set
+-CONFIG_HAVE_ARCH_KGDB=y
+-# CONFIG_TEST_KSTRTOX is not set
+-# CONFIG_STRICT_DEVMEM is not set
+-CONFIG_ARM_UNWIND=y
+-CONFIG_DEBUG_USER=y
+-# CONFIG_OC_ETM is not set
+-CONFIG_DEBUG_S3C_UART=1
+-
+-#
+-# Security options
+-#
+-CONFIG_KEYS=y
+-# CONFIG_KEYS_DEBUG_PROC_KEYS is not set
+-# CONFIG_SECURITY_DMESG_RESTRICT is not set
+-# CONFIG_SECURITY is not set
+-# CONFIG_SECURITYFS is not set
+-CONFIG_DEFAULT_SECURITY_DAC=y
+-CONFIG_DEFAULT_SECURITY=""
+-CONFIG_CRYPTO=y
+-
+-#
+-# Crypto core or helper
+-#
+-CONFIG_CRYPTO_ALGAPI=y
+-CONFIG_CRYPTO_ALGAPI2=y
+-CONFIG_CRYPTO_AEAD2=y
+-CONFIG_CRYPTO_BLKCIPHER=y
+-CONFIG_CRYPTO_BLKCIPHER2=y
+-CONFIG_CRYPTO_HASH=y
+-CONFIG_CRYPTO_HASH2=y
+-CONFIG_CRYPTO_RNG=y
+-CONFIG_CRYPTO_RNG2=y
+-CONFIG_CRYPTO_PCOMP2=y
+-CONFIG_CRYPTO_MANAGER=y
+-CONFIG_CRYPTO_MANAGER2=y
+-CONFIG_CRYPTO_MANAGER_DISABLE_TESTS=y
+-# CONFIG_CRYPTO_GF128MUL is not set
+-# CONFIG_CRYPTO_NULL is not set
+-CONFIG_CRYPTO_WORKQUEUE=y
+-# CONFIG_CRYPTO_CRYPTD is not set
+-# CONFIG_CRYPTO_AUTHENC is not set
+-# CONFIG_CRYPTO_TEST is not set
+-
+-#
+-# Authenticated Encryption with Associated Data
+-#
+-# CONFIG_CRYPTO_CCM is not set
+-# CONFIG_CRYPTO_GCM is not set
+-# CONFIG_CRYPTO_SEQIV is not set
+-
+-#
+-# Block modes
+-#
+-CONFIG_CRYPTO_CBC=y
+-# CONFIG_CRYPTO_CTR is not set
+-# CONFIG_CRYPTO_CTS is not set
+-CONFIG_CRYPTO_ECB=y
+-# CONFIG_CRYPTO_LRW is not set
+-# CONFIG_CRYPTO_PCBC is not set
+-# CONFIG_CRYPTO_XTS is not set
+-
+-#
+-# Hash modes
+-#
+-# CONFIG_CRYPTO_HMAC is not set
+-# CONFIG_CRYPTO_XCBC is not set
+-# CONFIG_CRYPTO_VMAC is not set
+-
+-#
+-# Digest
+-#
+-# CONFIG_CRYPTO_CRC32C is not set
+-# CONFIG_CRYPTO_GHASH is not set
+-# CONFIG_CRYPTO_MD4 is not set
+-CONFIG_CRYPTO_MD5=y
+-CONFIG_CRYPTO_MICHAEL_MIC=y
+-# CONFIG_CRYPTO_RMD128 is not set
+-# CONFIG_CRYPTO_RMD160 is not set
+-# CONFIG_CRYPTO_RMD256 is not set
+-# CONFIG_CRYPTO_RMD320 is not set
+-# CONFIG_CRYPTO_SHA1 is not set
+-# CONFIG_CRYPTO_SHA256 is not set
+-# CONFIG_CRYPTO_SHA512 is not set
+-# CONFIG_CRYPTO_TGR192 is not set
+-# CONFIG_CRYPTO_WP512 is not set
+-
+-#
+-# Ciphers
+-#
+-CONFIG_CRYPTO_AES=y
+-# CONFIG_CRYPTO_ANUBIS is not set
+-CONFIG_CRYPTO_ARC4=y
+-# CONFIG_CRYPTO_BLOWFISH is not set
+-# CONFIG_CRYPTO_CAMELLIA is not set
+-# CONFIG_CRYPTO_CAST5 is not set
+-# CONFIG_CRYPTO_CAST6 is not set
+-CONFIG_CRYPTO_DES=y
+-# CONFIG_CRYPTO_FCRYPT is not set
+-# CONFIG_CRYPTO_KHAZAD is not set
+-# CONFIG_CRYPTO_SALSA20 is not set
+-# CONFIG_CRYPTO_SEED is not set
+-# CONFIG_CRYPTO_SERPENT is not set
+-# CONFIG_CRYPTO_TEA is not set
+-# CONFIG_CRYPTO_TWOFISH is not set
+-
+-#
+-# Compression
+-#
+-# CONFIG_CRYPTO_DEFLATE is not set
+-# CONFIG_CRYPTO_ZLIB is not set
+-# CONFIG_CRYPTO_LZO is not set
+-
+-#
+-# Random Number Generation
+-#
+-CONFIG_CRYPTO_ANSI_CPRNG=y
+-# CONFIG_CRYPTO_USER_API_HASH is not set
+-# CONFIG_CRYPTO_USER_API_SKCIPHER is not set
+-CONFIG_CRYPTO_HW=y
+-# CONFIG_BINARY_PRINTF is not set
+-
+-#
+-# Library routines
+-#
+-CONFIG_BITREVERSE=y
+-CONFIG_CRC_CCITT=y
+-CONFIG_CRC16=y
+-# CONFIG_CRC_T10DIF is not set
+-# CONFIG_CRC_ITU_T is not set
+-CONFIG_CRC32=y
+-# CONFIG_CRC7 is not set
+-# CONFIG_LIBCRC32C is not set
+-# CONFIG_CRC8 is not set
+-CONFIG_ZLIB_INFLATE=y
+-CONFIG_LZO_COMPRESS=m
+-CONFIG_LZO_DECOMPRESS=y
+-CONFIG_XZ_DEC=y
+-CONFIG_XZ_DEC_X86=y
+-CONFIG_XZ_DEC_POWERPC=y
+-CONFIG_XZ_DEC_IA64=y
+-CONFIG_XZ_DEC_ARM=y
+-CONFIG_XZ_DEC_ARMTHUMB=y
+-CONFIG_XZ_DEC_SPARC=y
+-CONFIG_XZ_DEC_BCJ=y
+-# CONFIG_XZ_DEC_TEST is not set
+-CONFIG_DECOMPRESS_GZIP=y
+-CONFIG_DECOMPRESS_BZIP2=y
+-CONFIG_DECOMPRESS_LZMA=y
+-CONFIG_DECOMPRESS_XZ=y
+-CONFIG_DECOMPRESS_LZO=y
+-CONFIG_HAS_IOMEM=y
+-CONFIG_HAS_DMA=y
+-CONFIG_NLATTR=y
+-CONFIG_GENERIC_ATOMIC64=y
+-CONFIG_AVERAGE=y
+-# CONFIG_CORDIC is not set
+diff --git a/recipes-kernel/linux/linux_3.1.bb b/recipes-kernel/linux/linux_3.1.bb
+deleted file mode 100644
+index bf2d203..0000000
+--- a/recipes-kernel/linux/linux_3.1.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-require linux.inc
+-
+-PR = "${INC_PR}.11"
+-COMPATIBLE_MACHINE = "h1940"
+-
+-SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v3.x/linux-${PV}.tar.bz2;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v3.x/patch-${PV}.10.bz2;apply=yes;name=stablepatch \
+-           file://defconfig \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_h1940 = " \
+-                        file://0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch \
+-                        file://0002-s3cmci-minor-fixups.patch \
+-                        file://0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch \
+-                        file://0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch \
+-                        file://0005-ARM-s3c2410-Add-nand-device-for-h1940.patch \
+-                        file://0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch \
+-                        file://0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch \
+-                        file://0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch \
+-                        file://0009-rfkill-add-IR-type.patch \
+-                        file://0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch \
+-                        file://0011-ARM-h1940-add-IR-switch.patch \
+-                        file://0012-ARM-h1940-increase-oversampling-shift.patch \
+-                        "
+-
+-SRC_URI[kernel.md5sum] = "8d43453f8159b2332ad410b19d86a931"
+-SRC_URI[kernel.sha256sum] = "2573d2378c754b0c602b57586e9311e5b38c5d1e6c137f02873833633a4b9359"
+-SRC_URI[stablepatch.md5sum] = "a8e1c25a93a685ec2a1c3a808715fe9d"
+-SRC_URI[stablepatch.sha256sum] = "f25126052d1a083a415ddd313b40c7fcdb3742f40474cb4a826af7e43fee29d3"
 -- 
 1.8.1.5
 
