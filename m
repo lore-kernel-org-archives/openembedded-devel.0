@@ -1,36 +1,38 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id CB25C6D357
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-ob0-f182.google.com (mail-ob0-f182.google.com
+	[209.85.214.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 24FE56D7EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 21:41:30 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id z16so304190ead.34
+	Tue, 12 Nov 2013 21:57:03 +0000 (UTC)
+Received: by mail-ob0-f182.google.com with SMTP id wp18so6766362obc.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 13:41:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=V2lGe7U7S9X4KHmL3AOyDFIh1vwqGmulJ8QanKMqtec=;
-	b=PlJzqU6vrh1wEW/chRNDg07sFnWjL/vU31YUgSQ9CNyXsvDveiRXRoPpsCvBE2JxQK
-	elObyNEuqI7amJbu5/PCUZRI4/e0HOPdJbygB5tUrKAlBwViybVCUaE/iXWCtAsGhmr+
-	vPJKpgv0GcvA6c9xpTQfTxZpF40Iq8b28Y9+T7nbLqKoKEvaN78/oGOcDyWn5SSMg+Wp
-	SwIoeMJfQB3m4QCCfw4gPKC5TC+35PQWOLCckGvS6z9kq7JAwxtTtOw9zpdFCKMmBtUi
-	lJKNmPy+jm26oveuXIA+feCM342Ib9qE1JBZzyeedEhxlDPDZxStPszCinF7z4e2QJ6G
-	T3Kw==
-X-Received: by 10.14.219.198 with SMTP id m46mr43878808eep.41.1384292491931;
-	Tue, 12 Nov 2013 13:41:31 -0800 (PST)
-Received: from mizar.localdomain ([95.232.250.41])
-	by mx.google.com with ESMTPSA id 8sm80503340eem.15.2013.11.12.13.41.31
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Nov 2013 13:41:31 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Nov 2013 22:41:19 +0100
-Message-Id: <1384292479-15815-3-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-In-Reply-To: <1384292479-15815-1-git-send-email-andrea.adami@gmail.com>
-References: <1384292479-15815-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH] linux-yocto: collie: properly readd cfi_probe
+	Tue, 12 Nov 2013 13:57:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=JsaAg2GEJbDuCq+Fzh1aRMEG5J2TRm/8CcjLaZWrzhg=;
+	b=NDlclXdZ87nmWjeZC1enzmflh0+RteAXDPpMWgSeaEz6dngbEynuV0ZNQSp6pCWH8E
+	Kp9cvrEaQ4WQS66sulJF/7u98FIx+gl229PvIS+4v77ugaIjLGOX6Sj6WJ+TLc1VgRdq
+	csCtQw6qg9hRVTzFcXu2+JzAJEeih0Eq9vdkQNLw+awpCbbmtBYGKnxA0Nuu0bbJTmUx
+	lh8f/+mb0Bl2kgj14FAxLB8ajfFQjBWpmXHIxoWqSs4i4r+3pYCkxnMpwp9fxlRbIgeJ
+	nTOPejOhoeEYa8A5k5Up9Z/mV6ePwj3Sh9UO1Y0bXZLUT9vylfRHLtxrkixNAeKSxIGM
+	THtA==
+X-Gm-Message-State: ALoCoQlKmOJxBvjFOqRzlwC8YOWDqLVMc0kCIyFAW+quiaBPMiZc3v3lbK/dSH6E8k64719SOd0H
+X-Received: by 10.182.251.194 with SMTP id zm2mr3150857obc.99.1384293424575;
+	Tue, 12 Nov 2013 13:57:04 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.76.156.40 with HTTP; Tue, 12 Nov 2013 13:56:44 -0800 (PST)
+In-Reply-To: <CAKS01okUK2TYZ6OrnGt71wqgVinNehY8Rs9buy3JZEUrJf26kg@mail.gmail.com>
+References: <CAKS01oniO3YHFg2CAarKKaXfkSXnkEhy_JCwZNobQGqcNdM=cw@mail.gmail.com>
+	<1384273172.6460.13.camel@ted>
+	<CAKS01okUK2TYZ6OrnGt71wqgVinNehY8Rs9buy3JZEUrJf26kg@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Tue, 12 Nov 2013 22:56:44 +0100
+Message-ID: <CAP71Wjw81hCY3pWe=oiedTcCSCd0_ypZ0xyiJf7=Os5QiCp9fA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: how to populate sysroot with dev packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,67 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2013 21:41:31 -0000
+X-List-Received-Date: Tue, 12 Nov 2013 21:57:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../linux/linux-yocto-3.10/collie/collie.scc       |  3 ++-
- .../patches-mtd/collie-cfi-probe-again.patch       | 29 ++++++++++++++++++++++
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-probe-again.patch
+On Tue, Nov 12, 2013 at 6:36 PM, Anup Kini <akini@synapticon.com> wrote:
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
-index f15c53e..d8c2360 100644
---- a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
-@@ -6,9 +6,10 @@ patch ../patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
- patch ../patches/patches-power/collie_battery-dev-pm.patch
- patch ../patches/patches-mfd/mcp-device.patch
- patch ../patches/patches-mfd/ucb1x00-device.patch
--//patch ../patches/patches-mtd/collie-jedec-probe.patch
-+patch ../patches/patches-mtd/collie-jedec-probe.patch
- patch ../patches/patches-mtd/collie-eraseinfo.patch
- // for 3.12
-+patch ../patches/patches-mtd/collie-cfi-probe-again.patch
- patch ../patches/patches-mtd/collie-force-cfi.patch
- patch ../patches/patches-mtd/collie-mtd-resize.patch
- patch ../patches/patches-mtd/collie-force-unlock.patch
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-probe-again.patch b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-probe-again.patch
-new file mode 100644
-index 0000000..7a0dbe5
---- /dev/null
-+++ b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-probe-again.patch
-@@ -0,0 +1,29 @@
-+From 35957eda21bdd2f22c84fa269c1b856f5039c308 Mon Sep 17 00:00:00 2001
-+From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Tue, 12 Nov 2013 22:32:26 +0100
-+Subject: [PATCH] sa1100: collie: detect NOR again with cfi_probe
-+
-+Ehile the detection is still forced we switch away from jedec:
-+the CFI code allows us to set the necessary fixups.
-+
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+---
-+ arch/arm/mach-sa1100/collie.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
-+index 799902d..8c088cc 100644
-+--- a/arch/arm/mach-sa1100/collie.c
-++++ b/arch/arm/mach-sa1100/collie.c
-+@@ -326,7 +326,7 @@ static void collie_flash_exit(void)
-+ }
-+ 
-+ static struct flash_platform_data collie_flash_data = {
-+-	.map_name	= "jedec_probe",
-++	.map_name	= "cfi_probe",
-+ 	.init		= collie_flash_init,
-+ 	.set_vpp	= collie_set_vpp,
-+ 	.exit		= collie_flash_exit,
-+-- 
-+1.8.1.5
-+
--- 
-1.8.1.5
-
+> I did try that, but it does not add the A-dev.deb.
+> It will only deploy the A.deb files.
+>
+> I want to populate the A-dev.deb also...
+>
+>
+i think you might be confused between sysroot and image (or rootfs) here,
+no? what is it that you are calling 'sysroot'? in fact packages (e.g. .deb
+files) are not installed in the sysroot, but in images. sysroot is being
+populated independently of packages. on the other hand A-dev.deb would
+indeed not be installed by default in an image that you create, unless you
+specifically add the package to IMAGE_INSTALL.
 
