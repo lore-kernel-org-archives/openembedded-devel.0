@@ -1,34 +1,33 @@
-Return-Path: <akini@synapticon.com>
-Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 67CDF6D885
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
+	by mail.openembedded.org (Postfix) with ESMTP id A48D26D8FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 15:36:56 +0000 (UTC)
-Received: by mail-lb0-f179.google.com with SMTP id w6so4758843lbh.10
+	Tue, 12 Nov 2013 16:19:42 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	rACGJcdv022540 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Nov 2013 16:19:39 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id VqkHtiusMnfd
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 07:36:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=dMtaucFlUDWreOLNUeCKzrI5p1islMrGSVQ04yq4WgQ=;
-	b=hgtVVOOjrzY4hJdtWQh+vaZguQGNU4RX5Fsa8O3GZ79HDycVeHY4R7AGIcpxAZrJXT
-	ZKGmsaIvBma5Cr/s5oOk1Nrl9lYlEObsfXKNaeO5LhulcVyywZUrTe/e4/9Wb471WAWr
-	tWdkEudz1EfH74am/NxsJ10pJwkng6yfGSf9ZVHFqk00Y0cbv/WeUGftKef8rIkOY6AF
-	aSLyeZjyu3M0p9jBoqeeufXp9MhiCZPdekCW3Tyz0he92nP+YOnVPo7Q2Q36xP6KG6LM
-	mL9qu1mOGjygpw49R/NJWDTeirCZllLZPsJSj2PtHpOwQawvVqQOwkRebNUs0YnIQjCa
-	2kow==
-X-Gm-Message-State: ALoCoQm40JSloYc/vZYQSPDPhN51v+08F6kGjjXiJkxjjnd2xTogzg+Kik2IKt7wF7M0ymyY9jn/
-MIME-Version: 1.0
-X-Received: by 10.152.30.8 with SMTP id o8mr129204lah.54.1384270617677; Tue,
-	12 Nov 2013 07:36:57 -0800 (PST)
-Received: by 10.114.18.139 with HTTP; Tue, 12 Nov 2013 07:36:57 -0800 (PST)
-Date: Tue, 12 Nov 2013 16:36:57 +0100
-Message-ID: <CAKS01oniO3YHFg2CAarKKaXfkSXnkEhy_JCwZNobQGqcNdM=cw@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: how to populate sysroot with dev packages.
+	Tue, 12 Nov 2013 16:19:38 +0000 (GMT)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	rACGJZEa022528
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Nov 2013 16:19:37 GMT
+Message-ID: <1384273172.6460.13.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Nov 2013 16:19:32 +0000
+In-Reply-To: <CAKS01oniO3YHFg2CAarKKaXfkSXnkEhy_JCwZNobQGqcNdM=cw@mail.gmail.com>
+References: <CAKS01oniO3YHFg2CAarKKaXfkSXnkEhy_JCwZNobQGqcNdM=cw@mail.gmail.com>
+X-Mailer: Evolution 3.6.4-0ubuntu1 
+Mime-Version: 1.0
+Subject: Re: how to populate sysroot with dev packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,52 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2013 15:36:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Nov 2013 16:19:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+On Tue, 2013-11-12 at 16:36 +0100, Anup Kini wrote:
+> Hi All,
+> 
+> I am trying to build package-B which needs a few files from package-A-dev
+> How do i deploy/install package-A-dev in sysroot such that when i build
+> package-B it can access those files.
+> 
+> I know that i can install dev-pkgs in the image but i would like to know
+> how to deploy them in the sysroot.
 
-I am trying to build package-B which needs a few files from package-A-dev
-How do i deploy/install package-A-dev in sysroot such that when i build
-package-B it can access those files.
+The act of building A should put its output into the sysroot. You'd
+therefore just need a DEPENDS = "A" in recipe B.
 
-I know that i can install dev-pkgs in the image but i would like to know
-how to deploy them in the sysroot.
+Cheers,
 
--- 
-
-
-*Anup Kini*Systems Engineer
-*------------------------------*
-
-*Synapticon*  |  Cyber-Physical System Solutions
-
-Mobile:
-
-Direct:
-
-+49 151 / 638 646 73
-
-+49 7335 / 186 999 21
-
-Fax:
-+49 7335 / 186 999 1
+Richard
 
 
-
-
-
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
 
