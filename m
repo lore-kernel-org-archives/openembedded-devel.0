@@ -1,39 +1,34 @@
-Return-Path: <akini@synapticon.com>
-Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id AC8456D6F1
+Return-Path: <dbaryshkov@gmail.com>
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C53B6D75A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 23:07:15 +0000 (UTC)
-Received: by mail-lb0-f181.google.com with SMTP id x18so5181823lbi.12
+	Tue, 12 Nov 2013 23:31:51 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id tp5so4331466ieb.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2013 15:07:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=U/XrNyRb0GD0JQwotdDZx8QEFsLQuEGpIlK8+qasUbw=;
-	b=N9b7enjGidPsBeE1EJRkAAqD7NqZ4CuZpjNwoxxhqPI6oi0Jqw14mSP1eRok7QC8SZ
-	gI8Mn14sZtqYkEDIHHeOLXdbYrqfDrFrgo1Uy5nJiygBNoWPLSlBOeLMgcssIFlHEdve
-	daxnfXcnVT024wUBFTA6sApxNYocNSrGEh2PH9EUMgVw5y9KchJW++lcb1Ntnsr0ncga
-	rddQcgWUC00XHmTkyMpzytrY2pWibVZlfTvHS4nvh3HuIRTU7m5VN3q3PBQKPoUpSf6d
-	BoWSlTZBNcTlF/3khq+7ydhleLPotXPotReXf7+V7b/Kimdt3KhREzqJHtfcFXp4D9/C
-	V5Hg==
-X-Gm-Message-State: ALoCoQkqPyMgthH7slb7MMNswhx/kG0Bw8Iaa6PMYoyC3mTEkbr8T9zgGMGw7puRxvEXaeMX++04
+	Tue, 12 Nov 2013 15:31:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=swTcS6EUPvPDG35dgLnNoDDe6og9h/MYI5xoO33KGQI=;
+	b=FmGnT0b2ND3GG0gmJWcACnCQknjoahTa64S6RjaTFU6ZYDj3oVRZ5NSfLHeiKcT2lS
+	nB+hP3KAotee9NyW4QczN9HKAmTnBVINV0tCnhWGwhmUQoxVHuC9V/Og/HB+RHGixnrk
+	aleD6HjxDi4oY5AX0r+LXvnbuRWp4etng2gu3HANygFvOCUiISJWzDiu0oHpCo20pwix
+	RoPSzl+ngF5yGagsFlwheAzxS55ZCqeTAvOQSAkynPoFY4O6JpASE7QF0x7O3z6aLofa
+	gFKdOEqVq14WpXUs95oNVtL+XS29L2iFyVzknbcInPZ0vbQRUi0SqsvN14HnR8u8HWyC
+	NlBw==
 MIME-Version: 1.0
-X-Received: by 10.112.168.170 with SMTP id zx10mr28026355lbb.0.1384297636841; 
-	Tue, 12 Nov 2013 15:07:16 -0800 (PST)
-Received: by 10.114.18.139 with HTTP; Tue, 12 Nov 2013 15:07:16 -0800 (PST)
-In-Reply-To: <CAP71Wjw81hCY3pWe=oiedTcCSCd0_ypZ0xyiJf7=Os5QiCp9fA@mail.gmail.com>
-References: <CAKS01oniO3YHFg2CAarKKaXfkSXnkEhy_JCwZNobQGqcNdM=cw@mail.gmail.com>
-	<1384273172.6460.13.camel@ted>
-	<CAKS01okUK2TYZ6OrnGt71wqgVinNehY8Rs9buy3JZEUrJf26kg@mail.gmail.com>
-	<CAP71Wjw81hCY3pWe=oiedTcCSCd0_ypZ0xyiJf7=Os5QiCp9fA@mail.gmail.com>
-Date: Wed, 13 Nov 2013 00:07:16 +0100
-Message-ID: <CAKS01onxqC9we0_RgSNqAWeK7xJv87iMKKQCnsdeFPquPsSGrA@mail.gmail.com>
-From: Anup Kini <akini@synapticon.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: how to populate sysroot with dev packages.
+X-Received: by 10.50.57.115 with SMTP id h19mr17399182igq.2.1384299112727;
+	Tue, 12 Nov 2013 15:31:52 -0800 (PST)
+Received: by 10.64.250.37 with HTTP; Tue, 12 Nov 2013 15:31:52 -0800 (PST)
+In-Reply-To: <1384292479-15815-1-git-send-email-andrea.adami@gmail.com>
+References: <1384292479-15815-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 13 Nov 2013 03:31:52 +0400
+Message-ID: <CALT56yO=e=o-ZJQqjFS=tYGjeX6YcgfRosTuxn_NnM7g1dHB4Q@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-handheld][PATCH] linux-yocto: collie: add pcmcia clock fixes for sa11xx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,84 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2013 23:07:17 -0000
+X-List-Received-Date: Tue, 12 Nov 2013 23:31:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I should have explained more clearly before.
+Hello,
 
-I am trying to build ethercat master software with realtime feature for
-xenomai enabled.
-I first installed xenomai, but few of the files from the bin are picked and
-placed in the xenomai-dev.deb
+On Wed, Nov 13, 2013 at 1:41 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  .../linux/linux-yocto-3.10/collie/collie.scc       |   5 +-
+>  .../patches-sa1100/pcmcia-clock-alias-sa1111.patch |  31 +++++++
+>  .../pcmcia-sa1100-device-clock.patch               | 100 +++++++++++++++++++++
+>  .../pcmcia-sa1111-device-clock.patch               |  44 +++++++++
 
-While building ethercat i need to provide the xenomai root dir i.e
-xenomai-dir=${STAGING_DIR}/usr
-STAGING_DIR = build/tmp/sysroot/$MACHINE/usr/bin/  -- (this is the sysroot
-i mentioned in the previous mail)
-I want to place xenomai-dev files also in the STAGING_DIR so that ethercat
-pick those files too.
-
-Kindly help me how to fix this.
-
-
-On 12 November 2013 22:56, Nicolas Dechesne <nicolas.dechesne@linaro.org>wrote:
-
-> On Tue, Nov 12, 2013 at 6:36 PM, Anup Kini <akini@synapticon.com> wrote:
->
-> > I did try that, but it does not add the A-dev.deb.
-> > It will only deploy the A.deb files.
-> >
-> > I want to populate the A-dev.deb also...
-> >
-> >
-> i think you might be confused between sysroot and image (or rootfs) here,
-> no? what is it that you are calling 'sysroot'? in fact packages (e.g. .deb
-> files) are not installed in the sysroot, but in images. sysroot is being
-> populated independently of packages. on the other hand A-dev.deb would
-> indeed not be installed by default in an image that you create, unless you
-> specifically add the package to IMAGE_INSTALL.
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
-
+I'd suggest to get only pcmcia-sa1100-device-clock.patch and drop two
+other patches.
+They are not of use for collie, since they are for devices with sa1111
+companion chip
 
 -- 
-
-
-*Anup Kini*Systems Engineer
-*------------------------------*
-
-*Synapticon*  |  Cyber-Physical System Solutions
-
-Mobile:
-
-Direct:
-
-+49 151 / 638 646 73
-
-+49 7335 / 186 999 21
-
-Fax:
-+49 7335 / 186 999 1
-
-
-
-
-
-
-synapticon.com <http://www.synapticon.com/>  |
-@synapticon_co<https://twitter.com/#!/synapticon_co>
-
-Synapticon GmbH  |  Hohlbachweg 2  |  73344 Gruibingen, DE
-Secretary +49 7335 / 186 999 0  |  General Manager: Nikolai Ensslen
-Registry Court Ulm HRB 725114  |  USt-ID DE271647127
-
-This message and any files transmitted with it are confidential and
-intended
-solely for the use of the individual or entity to whom they are addressed.
-Please notify the sender immediately if you have received this e-mail by
-mistake and delete it from your system.
+With best wishes
+Dmitry
 
