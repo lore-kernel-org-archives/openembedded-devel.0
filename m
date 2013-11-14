@@ -1,35 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vb0-f51.google.com (mail-vb0-f51.google.com
-	[209.85.212.51])
-	by mail.openembedded.org (Postfix) with ESMTP id CC7B56D159
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 83D736D802
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2013 12:58:25 +0000 (UTC)
-Received: by mail-vb0-f51.google.com with SMTP id w5so1648538vbf.24
+	Thu, 14 Nov 2013 17:16:49 +0000 (UTC)
+Received: by mail-vc0-f179.google.com with SMTP id hz11so926151vcb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2013 04:58:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Thu, 14 Nov 2013 09:16:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=TpW/caOskWxK/BJ0psuSaKd9rSnmcPhpV7dyqfci2y4=;
-	b=SS51wk88FRoUFfuae9dN+kBS5fInBXEDKOKhDWX4iQZr2e9/5PTVIgijgXpTIbOBZV
-	bK8LTZLptD86/Nt6JqEWYe4udvBdYSlla4kzCqthirsMOmVOKH7wTOyAjBnrAab2oVZ+
-	IyZRpwyDkathcSdDuNG6En/noA1aAgiFFu17HQYOqtbbRZ1nrmuxxhfHc2ZMarzBnU/J
-	yxNT93ndTM0GmEhm/njxAYVHECS4wttPjqS7Ild0Q5+/JkgEV5JK13aQMEP9mRP2wlE7
-	FIpUW3bjMYQHnMTk07gtKU2OhyRcKe9/IGGdNUzgYMBg0LgHyl7O+TvSsjZBZJexDn21
-	nbtg==
+	:content-type; bh=edGCPFZuHt94Evstdv9Zdx/A87uCDdUTe6vMzRMZKPU=;
+	b=EULjFhFLFVNy5NdBFeVZc5oNTCR1llRpwPgzL74/XIgTnuoEnjuVrx/cHSDFsYcIQz
+	8UU8cJMYjc6Qdzg+1/Ql4o740dzSkjQpE/RN3OrptVPliN2Ao2JfM6YM3N/sFJKyAt/m
+	IOqzMVCEO3IUxXXcRLahoNgoqcWcdzOnanaAidwdUVh7T6/w8ecG6sJjuUDHt+LKVm0r
+	3RBH9cS8ycGZ6czO1Fg92ZAE9+lrzWAwNxqSjYhI9M7QLf10R62vKhrpwkWT85rOl61E
+	6SCyFz7nJhUU8vWpretPLzakcktVMahToCF3/JzwYg13xuTLE9fJFt26RgN83tnFMjL7
+	CzAg==
 MIME-Version: 1.0
-X-Received: by 10.58.133.77 with SMTP id pa13mr616951veb.21.1384433907058;
-	Thu, 14 Nov 2013 04:58:27 -0800 (PST)
-Received: by 10.52.106.202 with HTTP; Thu, 14 Nov 2013 04:58:26 -0800 (PST)
-In-Reply-To: <11078227.Ap2jLt1X9L@helios>
+X-Received: by 10.58.254.38 with SMTP id af6mr302373ved.85.1384449410377; Thu,
+	14 Nov 2013 09:16:50 -0800 (PST)
+Received: by 10.52.185.9 with HTTP; Thu, 14 Nov 2013 09:16:50 -0800 (PST)
+In-Reply-To: <CALbNGRSiUdEzPLoP5Le58QDV1cqKcLRRyWxxTGyG4dKu7tqB3Q@mail.gmail.com>
 References: <CAFeBWL4xeq+4cL9gvnCDSU1Va8edf+1zT+G7BfYto7Yvp8HXXQ@mail.gmail.com>
 	<CAFeBWL4R46JrAhCfe8GZXTipHAp_i+Fcu_BTTTuopfdfKf9r5g@mail.gmail.com>
 	<11078227.Ap2jLt1X9L@helios>
-Date: Thu, 14 Nov 2013 13:58:26 +0100
-Message-ID: <CALbNGRSiUdEzPLoP5Le58QDV1cqKcLRRyWxxTGyG4dKu7tqB3Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	<CALbNGRSiUdEzPLoP5Le58QDV1cqKcLRRyWxxTGyG4dKu7tqB3Q@mail.gmail.com>
+Date: Thu, 14 Nov 2013 09:16:50 -0800
+Message-ID: <CAFeBWL4YZ-izwN-3oaqfoaPSi=h=WQ+M0=BU_eGOXtx=q6AfPw@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: libmpd-11.8.17 gets 404 Not Found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,46 +45,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2013 12:58:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Nov 2013 17:16:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 14, 2013 at 12:57 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Tuesday 12 November 2013 19:14:22 Adam Lee wrote:
->> Sorry, I shouldn't have mentioned anything about updating to Dora from
->> Dylan.
->> This 404 is happening in Dylan build.
->>
->> On Tue, Nov 12, 2013 at 7:07 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
->> > Hello everyone, my first post here. Not sure if I am posting at the right
->> > place.
->> > I am updating my meta layer to Dora from Dylan. At the moment,
->> > libmpd-11.8.17 is getting 404 Not Found. It is here -
->> > http://downloads.sourceforge.net/musicpd/libmpd/11.8.17/libmpd-11.8.17.tar
->> > .gz .
->> >
->> > Not sure if it's a temporary issue. Anyone else ran into this?
->
-> Looks like it's vanished upstream... :/ I'm not familiar with this particular
-> project and I can't tell what's going on with this particular component, but I
-> did find an alternative download location:
->
-> http://download.sarine.nl/Programs/gmpc/11.8/libmpd-11.8.17.tar.gz
->
-> Until we figure out what's happened upstream we can add this to the OE source
-> mirror. Tom, could you please take care of that?
->
-> Cheers,
-> Paul
->
-I included (lib)mpd and am using it from time to time with XFCE environment.
+What should be my course of action? Add the new provider to the OE mirror,
+or patch the entire recipe? I can do either, but just not sure what the
+right thing to do. Trying not to pollute. Thanks.
 
-Somehow libmpd turned obsolete and libmpd's homepage is linked to mpd.
-Since I don't have time for it at the moment:
+On Thursday, November 14, 2013, Andreas M=FCller wrote:
 
-Could somebody please fix download location?
-
-As soon as I have some spare cycles I will take care how to fix properly.
-
-Andreas
+> On Thu, Nov 14, 2013 at 12:57 PM, Paul Eggleton
+> <paul.eggleton@linux.intel.com <javascript:;>> wrote:
+> > On Tuesday 12 November 2013 19:14:22 Adam Lee wrote:
+> >> Sorry, I shouldn't have mentioned anything about updating to Dora from
+> >> Dylan.
+> >> This 404 is happening in Dylan build.
+> >>
+> >> On Tue, Nov 12, 2013 at 7:07 PM, Adam Lee <adam.yh.lee@gmail.com<javas=
+cript:;>>
+> wrote:
+> >> > Hello everyone, my first post here. Not sure if I am posting at the
+> right
+> >> > place.
+> >> > I am updating my meta layer to Dora from Dylan. At the moment,
+> >> > libmpd-11.8.17 is getting 404 Not Found. It is here -
+> >> >
+> http://downloads.sourceforge.net/musicpd/libmpd/11.8.17/libmpd-11.8.17.ta=
+r
+> >> > .gz .
+> >> >
+> >> > Not sure if it's a temporary issue. Anyone else ran into this?
+> >
+> > Looks like it's vanished upstream... :/ I'm not familiar with this
+> particular
+> > project and I can't tell what's going on with this particular component=
+,
+> but I
+> > did find an alternative download location:
+> >
+> > http://download.sarine.nl/Programs/gmpc/11.8/libmpd-11.8.17.tar.gz
+> >
+> > Until we figure out what's happened upstream we can add this to the OE
+> source
+> > mirror. Tom, could you please take care of that?
+> >
+> > Cheers,
+> > Paul
+> >
+> I included (lib)mpd and am using it from time to time with XFCE
+> environment.
+>
+> Somehow libmpd turned obsolete and libmpd's homepage is linked to mpd.
+> Since I don't have time for it at the moment:
+>
+> Could somebody please fix download location?
+>
+> As soon as I have some spare cycles I will take care how to fix properly.
+>
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org <javascript:;>
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
