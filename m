@@ -1,37 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id D79626DAB6
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vb0-f46.google.com (mail-vb0-f46.google.com
+	[209.85.212.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 671FB6D582
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2013 20:58:15 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id e49so1309627eek.35
+	Fri, 15 Nov 2013 21:28:03 +0000 (UTC)
+Received: by mail-vb0-f46.google.com with SMTP id i3so1170099vbh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2013 12:58:17 -0800 (PST)
+	Fri, 15 Nov 2013 13:28:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1jXGz51RcjteOe7/7IcPSvhysiXfFMB61ujYrR7FT/k=;
-	b=fi7eyauW3etWGBh+l64dejcx8j/46rLIWoQoIZJLSFqsB0BWRhDLlsyuvtqFPqI5FX
-	ghdMRQHLjQpUJ1UazcNwbvLN+fN8IkkJh3JkSnndpWSbSqCkHnN7RL5TbyHaeyY58vIu
-	cvsOq3+XbaIUaLntwG2Lv9kwYMaf6XwKuauq5LFqHx2ti0ngd3TVK/yr6sWNZmHTvCvi
-	avpYjD3QWDrcaiHAuLkbsdhIpNMRb7tZBl3IyDcM3PGtjmGfnE/M/RRwRwQPqtLCLI48
-	9tuFWnfNREbraX8Wb8JTH4kMRRe8oqPNsPSSgQj7Y9V9iUGCCdIfO8matXmHB5aEo/tF
-	gTzg==
-X-Received: by 10.14.210.200 with SMTP id u48mr4626007eeo.63.1384549097287;
-	Fri, 15 Nov 2013 12:58:17 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id k7sm9810363eeg.13.2013.11.15.12.58.16
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Nov 2013 12:58:16 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Nov 2013 21:58:32 +0100
-Message-Id: <1384549112-5646-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.3
-In-Reply-To: <1384549112-5646-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1384549112-5646-1-git-send-email-Martin.Jansa@gmail.com>
-Cc: Martin Jansa <martin.jansa@lge.com>
-Subject: [meta-oe][PATCH 2/2] rfkill: Fix build when WORKDIR is included in some git checkout
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=/dJoTpnjIGdMULICKDU2uLzq5D9ZaEnK7z7o+g15A2E=;
+	b=ndUBAmAhMa581DLPVeHNR4caz4fC6OQPiKTyC8rfZ+NJXPPLSBwG+ERnzZQyBjskxf
+	CoCfYhXmC3N4ZGyx92lokQpsL1SNGd8k7L9fsE7zi2XEuil90wK4BXab78gYyKTPHcyY
+	72otsizzKbC4ClD2JDjG/jgisWC31lbm3//KUqeVmtttrsZjo7jR/AcN0Qy4elwfv+uI
+	e7LiswS/BsjPbMfXsFjHaDi6S2olTuGCGwC/RL+hPUPNjtaa50pHJxW7XK+IXOvacBKh
+	Vr5tNZp9ZUB9QDEyahBvbBPrsBtDPC6GaKozQZhuWJlQpjXSWJ0W2e0qPgsnBiDW8Y9Q
+	S4Fg==
+MIME-Version: 1.0
+X-Received: by 10.52.233.2 with SMTP id ts2mr701939vdc.44.1384550884570; Fri,
+	15 Nov 2013 13:28:04 -0800 (PST)
+Received: by 10.52.185.9 with HTTP; Fri, 15 Nov 2013 13:28:04 -0800 (PST)
+In-Reply-To: <CALbNGRQcVwRpqKvWpgnNBpN-4bn+kJSj6m8j=eV0zme0md8j9w@mail.gmail.com>
+References: <CAFeBWL4xeq+4cL9gvnCDSU1Va8edf+1zT+G7BfYto7Yvp8HXXQ@mail.gmail.com>
+	<CAFeBWL4R46JrAhCfe8GZXTipHAp_i+Fcu_BTTTuopfdfKf9r5g@mail.gmail.com>
+	<11078227.Ap2jLt1X9L@helios>
+	<CALbNGRSiUdEzPLoP5Le58QDV1cqKcLRRyWxxTGyG4dKu7tqB3Q@mail.gmail.com>
+	<CAFeBWL4YZ-izwN-3oaqfoaPSi=h=WQ+M0=BU_eGOXtx=q6AfPw@mail.gmail.com>
+	<CAP9ODKpMTNOWRkHTv2gWEattq1Bhj-jvbBk80NLt23eV5UzUuw@mail.gmail.com>
+	<CAFeBWL7fDEJtkHosrJJUx76ssMiau+bb3EtATWoybNWyb=1FGA@mail.gmail.com>
+	<CALbNGRQcVwRpqKvWpgnNBpN-4bn+kJSj6m8j=eV0zme0md8j9w@mail.gmail.com>
+Date: Fri, 15 Nov 2013 13:28:04 -0800
+Message-ID: <CAFeBWL5uKWtT2QBdqXucnG2Wpj+ye72xStus396_Q8Swp1_sAQ@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: libmpd-11.8.17 gets 404 Not Found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,70 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2013 20:58:16 -0000
+X-List-Received-Date: Fri, 15 Nov 2013 21:28:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Martin Jansa <martin.jansa@lge.com>
+There is a pull request on this -
+https://github.com/openembedded/meta-oe/pull/15
 
-Signed-off-by: Martin Jansa <martin.jansa@lge.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../dont.call.git.rev-parse.on.parent.dir.patch    | 31 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb  |  3 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/rfkill/rfkill/dont.call.git.rev-parse.on.parent.dir.patch
 
-diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill/dont.call.git.rev-parse.on.parent.dir.patch b/meta-oe/recipes-connectivity/rfkill/rfkill/dont.call.git.rev-parse.on.parent.dir.patch
-new file mode 100644
-index 0000000..2b83689
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/rfkill/rfkill/dont.call.git.rev-parse.on.parent.dir.patch
-@@ -0,0 +1,31 @@
-+When WORKDIR is included in some other git checkout, version.sh calls git rev-parse
-+and it returns some description from that upper git checkout even when rfkill is
-+being built from release tarball.
-+
-+When returned description doesn't match with expected v0.4, version.sh exits
-+without creating version.c
-+    # on git builds check that the version number above
-+    # is correct...
-+    [ "${descr%%-*}" = "v$VERSION" ] || exit 2
-+
-+and build fails a bit later:
-+    | NOTE: make -j 32 -e MAKEFLAGS=
-+    |  CC   rfkill.o
-+    |  GEN  version.c
-+    | make: *** [version.c] Error 2
-+    | make: *** Waiting for unfinished jobs....
-+    | ERROR: oe_runmake failed
-+
-+Don't try git rev-parse, if there isn't .git in ${S}.
-+
-+--- a/version.sh	2013-11-15 03:43:12.587744366 -0800
-++++ b/version.sh	2013-11-15 03:42:40.699743320 -0800
-+@@ -12,7 +12,7 @@
-+ 
-+ if test "x$SUFFIX" != 'x'; then
-+ 	v="$VERSION$SUFFIX"
-+-elif head=`git rev-parse --verify HEAD 2>/dev/null`; then
-++elif test -d .git && head=`git rev-parse --verify HEAD 2>/dev/null`; then
-+ 	git update-index --refresh --unmerged > /dev/null
-+ 	descr=$(git describe 2>/dev/null || echo "v$VERSION")
-+ 
-diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-index f90736d..1c2930a 100644
---- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-+++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
- PR = "r1"
- 
- SRC_URI = "http://wireless.kernel.org/download/${PN}/${P}.tar.bz2 \
--           file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch"
-+           file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch \
-+           file://dont.call.git.rev-parse.on.parent.dir.patch"
- 
- SRC_URI[md5sum] = "727892c0fb35c80ee3849fbe89b45350"
- SRC_URI[sha256sum] = "ca10e4827a5f0a36e093aee6ad81b5febf81f8097d7d858889ac51ff364168c1"
--- 
-1.8.4.3
+On Thu, Nov 14, 2013 at 1:48 PM, Andreas M=FCller <
+schnitzeltony@googlemail.com> wrote:
 
+> On Thu, Nov 14, 2013 at 8:41 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+> > Thanks Otavio. Quick question - is there a reason not to use the
+> upstream?
+> > - http://www.musicpd.org/download/mpd/stable/
+> >
+> > Thanks,
+> >
+> > Adam
+> >
+> patches welcome - but please check for xfce4-mpc-plugin and xfmpc are
+> still building with mpc.
+>
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
