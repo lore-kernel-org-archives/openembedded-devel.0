@@ -1,31 +1,24 @@
-Return-Path: <gwt.scott@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id DCD4D6D7D0
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C4BB6D767
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2013 05:57:59 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id hi5so2017861wib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2013 21:58:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=7mcnel8Ah1z06iZEcc3392I9yQlLk74KtP/1mDfMyB8=;
-	b=g6nM+HS2KRWtTCcZsI3tTYMhIb0VPDa18CRC+InOjVUZDOhXHPS7WX3eiGCAYdD+qN
-	Xd9tn4S46eAPl8Ia/vC+fyNq28oMLZFSVqSKYmAkgA79uBKwYDSeZ1Ix0oszzZ7CUo92
-	uGmaXfVit7L8MI78VTpfWgEoLp+5IEauaLC4SByIXn0Dc6gssQtGFVO9OzJhxnoD+cyC
-	S0fw13xAtyzNMS5uRDogL0mjwUrNO2mD/Iuti3pO3tB0zF6eTQoGUYLrXzdH5M+GE6Yq
-	cRZ0pBv2c+KZ8RXXpYMQT8mpF53gs6xaUqrHH5RinOUKDyaDTfZQEhggYm9MRcgcqJWE
-	1xCQ==
+	Fri, 15 Nov 2013 08:33:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rAF8XA5C011943
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 15 Nov 2013 00:33:10 -0800 (PST)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Fri, 15 Nov 2013 00:33:10 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 15 Nov 2013 16:33:05 +0800
+Message-ID: <cover.1384504242.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
 MIME-Version: 1.0
-X-Received: by 10.180.86.102 with SMTP id o6mr5937543wiz.30.1384495081228;
-	Thu, 14 Nov 2013 21:58:01 -0800 (PST)
-Received: by 10.194.76.10 with HTTP; Thu, 14 Nov 2013 21:58:00 -0800 (PST)
-Date: Thu, 14 Nov 2013 22:58:00 -0700
-Message-ID: <CAOXsvCQhMLr+U=FOmoeSW_yWoMfnMA7VReKKhNuwfDTf1a868Q@mail.gmail.com>
-From: Scott Penner <gwt.scott@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: How to add PHP
+Cc: paul.eggleton@linux.intel.com
+Subject: [PATCH 0/1] mariadb: fix QA Issue ELF binary has relocations in .text while multilib enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,24 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2013 05:58:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 15 Nov 2013 08:33:09 -0000
+Content-Type: text/plain
 
-Hi and thanks for this resource,
+The following changes since commit 20f352810d46daea9a20989b77f347fb8564ebf0:
 
-I am trying to add PHP to my image and cannot!
-I've tried a few different attempts, sort of documented
-here<https://community.freescale.com/message/359851#359851>
-Its for a imx6sabrelite board and I'm trying to modify the fsl-image-test
-image.
-I can add the apache server, and it works, but get errors during the bake
-when adding PHP.
-Should I be using the PHP packages in the webserver directory or devtools
-directory?
-Do you have any working examples of a lamp install or just apache/PHP
-install procedure?
+  cherokee: use cherokee-project.de mirror (2013-11-11 13:11:15 +0000)
 
-Thanks for any insight,
+are available in the git repository at:
 
-Scott Penner
+  git://git.pokylinux.org/poky-contrib hongxu/fix-mariadb-qa
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-mariadb-qa
+
+Hongxu Jia (1):
+  mariadb: fix QA Issue ELF binary has relocations in .text while
+    multilib enabled
+
+ ...orage-forbids-absolute-addresses-on-IA-32.patch | 44 ++++++++++++++++++++++
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc   |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/storage-forbids-absolute-addresses-on-IA-32.patch
+
+-- 
+1.8.1.2
+
 
