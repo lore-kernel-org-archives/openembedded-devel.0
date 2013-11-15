@@ -1,36 +1,38 @@
 Return-Path: <philip.balister@gmail.com>
-Received: from mail-qc0-f176.google.com (mail-qc0-f176.google.com
-	[209.85.216.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FAF96D582
+Received: from mail-qc0-f180.google.com (mail-qc0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id E00126D582
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2013 00:14:18 +0000 (UTC)
-Received: by mail-qc0-f176.google.com with SMTP id s19so1699152qcw.35
+	Fri, 15 Nov 2013 00:14:38 +0000 (UTC)
+Received: by mail-qc0-f180.google.com with SMTP id e9so1718503qcy.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2013 16:14:20 -0800 (PST)
+	Thu, 14 Nov 2013 16:14:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=3+p0mV0A8NcCMcLHAUqUhJhhjuxOxxQiU2i3KAAOSdk=;
-	b=LRTxjQIHeB0BbiZZcH8gf4S1qq2TroAUPny2FFe8p48BjakcBgrzqVRx2g4RXyr1QY
-	b2yhiODS1Twwvf2egXjiFfKR6B5zv76scoktUDgW4wbYamqgb1LMyQ1fw0JN+lQimKvu
-	81CZJfWFIMPxasc8H+jqNckjRlVDxzFX33bBaRxz3byxe8Jd/Q2Uz+IujKPUyahBP16+
-	ASlyxfamPD3hX3wx3KSBUZEZQbSOVJs36/F+IEwc2fn+a+KDjs4ir9zB5X90H9aHIyjc
-	3v/urd3o/syx7SZDCvhG9pydq3dvWGJC4yQr8uU04OnT7N5tM3FAW8G/hdCw75v9yAvQ
-	501A==
-X-Received: by 10.224.131.133 with SMTP id x5mr6489465qas.70.1384474459812;
-	Thu, 14 Nov 2013 16:14:19 -0800 (PST)
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=E40JiCSnDQVyscsJgVJtbpTBJc+2IIaSbdz6wqthAnA=;
+	b=A8h4pLbqkUkLW1aZ/tIRNxWavJbnQBpMdySWTaXkBYsrXwup8694opdoma9BtATac0
+	5/Z2sTe7d9Dr9pIgA7TBc7DPCXHDdBPvJC4J9Ha3VYQIRkqRybwCqmOHwcHl52FI9ogp
+	6fEBXcPkgM5Oa6H32WIWwzuP1fCz695jX90oeX0b6VJuwftrTkP7j0veXDbZzpd+0+vC
+	O1PMc+dJ1BEodOoD/4rV/dGLJUgEnDnm7EEKxPjDIlxJ3NxNdJ4GyKWFqrjC6zSycrgM
+	Rb74OUKgysTLxLTrP9is6eXkEutmYbc7FPexz9PI5RYu/CSr+XMwET6K9U0760vnvOKo
+	XkLg==
+X-Received: by 10.49.117.196 with SMTP id kg4mr6422579qeb.21.1384474480677;
+	Thu, 14 Nov 2013 16:14:40 -0800 (PST)
 Received: from localhost.localdomain
 	(pool-108-44-82-190.ronkva.east.verizon.net. [108.44.82.190])
-	by mx.google.com with ESMTPSA id a9sm834102qed.6.2013.11.14.16.14.18
+	by mx.google.com with ESMTPSA id a9sm834102qed.6.2013.11.14.16.14.39
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Nov 2013 16:14:19 -0800 (PST)
+	Thu, 14 Nov 2013 16:14:40 -0800 (PST)
 Sender: Philip Balister <philip.balister@gmail.com>
 From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Nov 2013 19:14:11 -0500
-Message-Id: <1384474452-14955-1-git-send-email-philip@balister.org>
+Date: Thu, 14 Nov 2013 19:14:12 -0500
+Message-Id: <1384474452-14955-2-git-send-email-philip@balister.org>
 X-Mailer: git-send-email 1.8.3.1
-Subject: [meta-oe][PATCH 1/2] uhd : Remove from meta-oe. Now lives in meta-sdr.
+In-Reply-To: <1384474452-14955-1-git-send-email-philip@balister.org>
+References: <1384474452-14955-1-git-send-email-philip@balister.org>
+Subject: [meta-oe][PATCH 2/2] gnuradio : Remove recipes. Now lives in meta-sdr.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,196 +46,234 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2013 00:14:19 -0000
+X-List-Received-Date: Fri, 15 Nov 2013 00:14:39 -0000
 
 https://github.com/balister/meta-sdr
 
 Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../uhd/uhd-firmware_003.005.003.bb                | 27 ---------------
- meta-oe/recipes-connectivity/uhd/uhd.inc           | 35 -------------------
- ...01-HACK-work-around-Wl-as-needed-problems.patch | 40 ----------------------
- .../0001-use-uint8_t-from-boost-namespace.patch    | 29 ----------------
- meta-oe/recipes-connectivity/uhd/uhd_git.bb        | 11 ------
- 5 files changed, 142 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd.inc
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd/0001-HACK-work-around-Wl-as-needed-problems.patch
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
- delete mode 100644 meta-oe/recipes-connectivity/uhd/uhd_git.bb
+ ...n-t-add-usr-include-and-usr-lib-to-config.patch |  58 ------------
+ .../gnuradio/0001-gr-trellis-Kill-docs-hard.patch  |  38 --------
+ .../recipes-connectivity/gnuradio/gnuradio_git.bb  | 100 ---------------------
+ 3 files changed, 196 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-buildsys-don-t-add-usr-include-and-usr-lib-to-config.patch
+ delete mode 100644 meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
+ delete mode 100644 meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
 
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb b/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
+diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-buildsys-don-t-add-usr-include-and-usr-lib-to-config.patch b/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-buildsys-don-t-add-usr-include-and-usr-lib-to-config.patch
 deleted file mode 100644
-index 4369907..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd-firmware_003.005.003.bb
+index 7caaf51..0000000
+--- a/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-buildsys-don-t-add-usr-include-and-usr-lib-to-config.patch
 +++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION = "Universal Hardware Driver Firmware"
--HOMEPAGE = "http://www.ettus.com"
+@@ -1,58 +0,0 @@
+-From a130153ae84d8bb5914879cef94df09f06825c10 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Sat, 18 Jun 2011 11:25:36 +0200
+-Subject: [PATCH] buildsys: don't add /usr/include and /usr/lib to configure tests for libusb
 -
--PE = "1"
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- config/usrp_libusb.m4 |   13 -------------
+- 1 files changed, 0 insertions(+), 13 deletions(-)
 -
+-diff --git a/config/usrp_libusb.m4 b/config/usrp_libusb.m4
+-index cc3410f..b421820 100644
+---- a/config/usrp_libusb.m4
+-+++ b/config/usrp_libusb.m4
+-@@ -117,10 +117,6 @@ AC_DEFUN([USRP_LIBUSB], [
+-       dnl configured to find this header.
+-       AC_LANG_PUSH(C)
+-       save_CPPFLAGS="$CPPFLAGS"
+--      if test x$USB_INCLUDEDIR != x; then
+--        USB_INCLUDES="-I$USB_INCLUDEDIR"
+--        CPPFLAGS="$USB_INCLUDES"
+--      fi
+-       AC_MSG_CHECKING([$libusb_name for header $usb_header])
+-       AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+-         #include "$usb_header"
+-@@ -172,9 +168,6 @@ AC_DEFUN([USRP_LIBUSB], [
+-             *)
+-               AC_LANG_PUSH(C)
+-               save_CPPFLAGS="$CPPFLAGS"
+--              if test x$USB_INCLUDEDIR != x; then
+--                CPPFLAGS="$USB_INCLUDES"
+--              fi
+-               save_LIBS="$LIBS"
+-               LIBS="$USB_LIBS"
+-               AC_MSG_CHECKING([$libusb_name for symbol usb_debug in library $usb_lib_name])
+-@@ -217,9 +210,6 @@ AC_DEFUN([USRP_LIBUSB], [
+-     dnl final error checking, mostly to create #define's
+-     AC_LANG_PUSH(C)
+-     save_CPPFLAGS="$CPPFLAGS"
+--    if test x$USB_INCLUDEDIR != x; then
+--      CPPFLAGS="$USB_INCLUDES"
+--    fi
+-     dnl Check for the header.
+-     AC_CHECK_HEADERS([$usb_header], [], [libusbok=no])
+-     CPPFLAGS="$save_CPPFLAGS"
+-@@ -231,9 +221,6 @@ AC_DEFUN([USRP_LIBUSB], [
+-       dnl check for the library (again)
+-       AC_LANG_PUSH(C)
+-       save_CPPFLAGS="$CPPFLAGS"
+--      if test x$USB_INCLUDEDIR != x; then
+--        CPPFLAGS="$USB_INCLUDES"
+--      fi
+-       save_LIBS="$LIBS"
+-       LIBS="$USB_LIBS"
+-       AC_CHECK_LIB([$usb_lib_name], [$usb_lib_func], [], [
+--- 
+-1.6.6.1
+-
+diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch b/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
+deleted file mode 100644
+index 38c3a10..0000000
+--- a/meta-oe/recipes-connectivity/gnuradio/gnuradio/0001-gr-trellis-Kill-docs-hard.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 473342055e423384e2b17cc0957613299382fb79 Mon Sep 17 00:00:00 2001
+-From: Philip Balister <philip@balister.org>
+-Date: Mon, 17 Jun 2013 10:58:29 -0400
+-Subject: [PATCH] gr-trellis : Kill docs hard.
+-
+-Signed-off-by: Philip Balister <philip@balister.org>
+----
+- gr-trellis/CMakeLists.txt | 7 -------
+- 1 file changed, 7 deletions(-)
+-
+-diff --git a/gr-trellis/CMakeLists.txt b/gr-trellis/CMakeLists.txt
+-index 16a3e7c..95e1420 100644
+---- a/gr-trellis/CMakeLists.txt
+-+++ b/gr-trellis/CMakeLists.txt
+-@@ -50,12 +50,6 @@ if(ENABLE_GR_TRELLIS)
+- include(GrPackage)
+- CPACK_SET(CPACK_COMPONENT_GROUP_TRELLIS_DESCRIPTION "GNU Radio Trellis Blocks")
+- 
+--CPACK_COMPONENT("trellis_docs"
+--    GROUP        "Trellis"
+--    DISPLAY_NAME "Documentation"
+--    DESCRIPTION  "Doxygen HTML and XML"
+--)
+--
+- CPACK_COMPONENT("trellis_runtime"
+-     GROUP        "Trellis"
+-     DISPLAY_NAME "Runtime"
+-@@ -95,7 +89,6 @@ CPACK_COMPONENT("trellis_swig"
+- # Add subdirectories
+- ########################################################################
+- add_subdirectory(src/lib)
+--add_subdirectory(doc)
+- if(ENABLE_PYTHON)
+-     add_subdirectory(grc)
+-     add_subdirectory(src/python)
+--- 
+-1.7.11.7
+-
+diff --git a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb b/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
+deleted file mode 100644
+index 1a78575..0000000
+--- a/meta-oe/recipes-connectivity/gnuradio/gnuradio_git.bb
++++ /dev/null
+@@ -1,100 +0,0 @@
+-DESCRIPTION = "GNU Radio"
+-URL = "http://gnuradio.org"
+-SECTION =  "apps"
 -LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=e86f2186823b264efc627aafc0ad60a2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 -
--inherit allarch
+-DEPENDS = "gsl fftwf python alsa-lib boost cppunit \
+-           swig-native python-numpy python-cheetah-native orc"
 -
--SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
--SRC_URI[md5sum] = "65cf76fd363d576ceff9c1527ade297b"
--SRC_URI[sha256sum] = "9079586def30b6805053092673d942c0051f1f99eebc676b871f070c04b66e35"
+-#Available PACKAGECONFIG options are qt grc uhd
+-PACKAGECONFIG ??= "qtgui grc uhd"
 -
--S = "${WORKDIR}/uhd-images_${PV}-release"
+-PACKAGECONFIG[uhd] = "-DENABLE_GR_UHD=ON,-DENABLE_GR_UHD=OFF,uhd,"
+-PACKAGECONFIG[grc] = "-DENABLE_GRC=ON,-DENABLE_GRC=OFF,python-pygtk python-cheetah, "
 -
--do_install() {
--    install -d ${D}${datadir}/uhd/images
--    install -d ${D}${datadir}/uhd/images/bit
--    install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
--    rm -rf ${S}/share/uhd/images/bit
--    install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
+-PACKAGECONFIG[qtgui] = "-DENABLE_GR_QTGUI=ON,-DENABLE_GR_QTGUI=OFF,qt4-x11-free qwt, "
+-
+-
+-inherit distutils-base cmake pkgconfig
+-
+-export BUILD_SYS
+-export HOST_SYS="${MULTIMACH_TARGET_SYS}"
+-
+-RDEPENDS_${PN} = "python-core python-audio python-threading python-codecs \
+-                  python-lang python-textutils python-shell python-pickle \
+-                  python-compiler python-pkgutil python-pydoc python-mmap \
+-                  python-netclient python-difflib \
+-                  python-pprint python-numpy  \
+-"
+-RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah python-netserver"
+-
+-C_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+-
+-do_configure_prepend() {
+-    ${BUILD_CC} ${S}/gr-vocoder/lib/codec2/generate_codebook.c -o ${S}/gr-vocoder/lib/generate_codebook -lm
+-    echo "ADD_EXECUTABLE(generate_codebook IMPORTED)" >${S}/gr-vocoder/lib/generate_codebook.txt
+-    echo "SET_PROPERTY(TARGET generate_codebook APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)" >>${S}/gr-vocoder/lib/generate_codebook.txt
+-    echo 'SET_TARGET_PROPERTIES(generate_codebook PROPERTIES IMPORTED_LOCATION_RELEASE "${S}/gr-vocoder/lib/generate_codebook")' >>${S}/gr-vocoder/lib/generate_codebook.txt
 -}
 -
--PACKAGES = "${PN}"
--FILES_${PN} = "${datadir}/uhd/images"
+-do_compile_prepend() {
+-    cp ${S}/gr-vocoder/lib/codec2/defines.h ${OECMAKE_BUILDPATH}/gr-vocoder/lib/codec2
+-}
 -
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd.inc b/meta-oe/recipes-connectivity/uhd/uhd.inc
-deleted file mode 100644
-index da1fbd8..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd.inc
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "Universal Hardware Driver for Ettus Research products."
--HOMEPAGE = "http://www.ettus.com"
--LICENSE = "GPLv3+"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=51b35d652c070d136bf20244494be2d3"
+-PACKAGES += " \
+-    ${PN}-grc \
+-    ${PN}-examples \
+-"
 -
--DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-native ncurses"
--RDEPENDS_${PN} += "uhd-firmware"
+-FILES_${PN}-grc = "${datadir}/gnuradio/grc"
+-FILES_${PN}-examples = "${datadir}/gnuradio/examples"
 -
--PE = "1"
--INC_PR = "r3"
+-FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/gnuradio"
+-FILES_${PN} += "${datadir}/gnuradio/modtool"
+-# The following needs fixing upstream
+-FILES_${PN} += "${prefix}/etc/gnuradio"
 -
--inherit cmake pythonnative
+-FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/.debug \
+-                    ${PYTHON_SITEPACKAGES_DIR}/gnuradio/*/.debug \
+-                    ${datadir}/gnuradio/examples/*/.debug \
+-"
 -
--PACKAGES =+ "${PN}-tests ${PN}-examples ${PN}-e1xx"
+-PV = "3.6.5"
 -
--INSANE_SKIP_${PN} = "dev-so"
+-FILESPATHPKG_prepend = "gnuradio-git:"
 -
--FILES_${PN} += "${libdir}/libuhd.so \
--                ${datadir}/uhd/utils/*"
--FILES_${PN}-tests += "${datadir}/uhd/tests/*"
--FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
--                    ${datadir}/uhd/utils/.debug/* \
--                    ${datadir}/uhd/tests/.debug/* \
--                    ${datadir}/uhd/usrp_e_utils/.debug/*"
--FILES_${PN}-examples = "${datadir}/uhd/examples/*"
+-SRCREV = "a7b3a9339106aaba72195b693dfeaa98f194e0d5"
+-
+-# Make it easy to test against developer repos and branches
+-GIT_REPO = "gnuradio.git"
+-GIT_BRANCH = "master"
+-
+-SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH} \
+-           file://0001-gr-trellis-Kill-docs-hard.patch \
+-"
+-
+-S="${WORKDIR}/git"
 -
 -OECMAKE_BUILDPATH = "${S}/build"
 -OECMAKE_SOURCEPATH = "${S}"
 -
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[orc] = "-DENABLE_ORC=ON,-DENABLE_ORC=OFF,orc"
+-EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE \
+-                 -DENABLE_GR_FCD=OFF \
+-                 -DENABLE_GR_WXGUI=OFF \
+-                 -DENABLE_GR_VIDEO_SDL=OFF \
+-                 -DENABLE_SPHINX=OFF -DENABLE_DOXYGEN=OFF \
+-                 -DIMPORT_EXECUTABLES=${S}/gr-vocoder/lib/generate_codebook.txt \
+-                 -DQT_HEADERS_DIR=${STAGING_INCDIR}/qt4 \
+-                 -DQT_QTCORE_INCLUDE_DIR=${STAGING_INCDIR}/qt4/QtCore \
+-                 -DQT_LIBRARY_DIR=${STAGING_LIBDIR} \
+-                 -DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so \
+-                 -DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so \
+-                 ${@base_contains('TUNE_FEATURES', 'neon', \
+-                     '-Dhave_mfpu_neon=1', '-Dhave_mfpu_neon=0', d)} \
+-"
 -
--EXTRA_OECMAKE = "-DENABLE_E100=TRUE"
+-inherit distutils-base cmake pkgconfig
 -
 -EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd/0001-HACK-work-around-Wl-as-needed-problems.patch b/meta-oe/recipes-connectivity/uhd/uhd/0001-HACK-work-around-Wl-as-needed-problems.patch
-deleted file mode 100644
-index eb05cc0..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd/0001-HACK-work-around-Wl-as-needed-problems.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From 77be3026cbfe77b3ee1aaa549a27f5ad50320f9d Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Fri, 17 Jun 2011 19:44:04 +0200
--Subject: [PATCH] HACK: work around -Wl,as-needed problems
 -
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-----
-- host/lib/types/CMakeLists.txt    |    2 +-
-- host/usrp_e_utils/CMakeLists.txt |    2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/host/lib/types/CMakeLists.txt b/host/lib/types/CMakeLists.txt
--index 957dfd3..3147747 100644
----- a/host/lib/types/CMakeLists.txt
--+++ b/host/lib/types/CMakeLists.txt
--@@ -59,7 +59,7 @@ CHECK_CXX_SOURCE_COMPILES("
-- IF(HAVE_CLOCK_GETTIME)
--     MESSAGE(STATUS "  High resolution timing supported through clock_gettime.")
--     SET(TIME_SPEC_DEFS HAVE_CLOCK_GETTIME)
---    LIBUHD_APPEND_LIBS("-lrt")
--+    LIBUHD_APPEND_LIBS("-lrt -lpthread -lncurses")
-- ELSEIF(HAVE_MACH_ABSOLUTE_TIME)
--     MESSAGE(STATUS "  High resolution timing supported through mach_absolute_time.")
--     SET(TIME_SPEC_DEFS HAVE_MACH_ABSOLUTE_TIME)
--diff --git a/host/usrp_e_utils/CMakeLists.txt b/host/usrp_e_utils/CMakeLists.txt
--index 9162a20..18414ad 100644
----- a/host/usrp_e_utils/CMakeLists.txt
--+++ b/host/usrp_e_utils/CMakeLists.txt
--@@ -38,7 +38,7 @@ IF(ENABLE_USRP_E_UTILS)
--     FOREACH(util_source ${usrp_e_utils_sources})
--         GET_FILENAME_COMPONENT(util_name ${util_source} NAME_WE)
--         ADD_EXECUTABLE(${util_name} ${util_source})
---        TARGET_LINK_LIBRARIES(${util_name} ${Boost_LIBRARIES})
--+        TARGET_LINK_LIBRARIES(${util_name} ${Boost_LIBRARIES} -lpthread -lncurses)
--         INSTALL(TARGETS ${util_name} RUNTIME DESTINATION ${PKG_DATA_DIR}/usrp_e_utils)
--     ENDFOREACH(util_source)
-- 
---- 
--1.6.6.1
--
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch b/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
-deleted file mode 100644
-index 8978ddc..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd/0001-use-uint8_t-from-boost-namespace.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 317f6f08cedf005ce1f2d6f0d04cfb2659863423 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 30 Jun 2013 22:10:50 -0700
--Subject: [PATCH] use uint8_t from boost namespace
--
--Fixes errors like
--codec_ctrl.cpp:113:10: error: 'uint8_t' was not declared in this scope
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- host/lib/usrp/e100/codec_ctrl.cpp |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/host/lib/usrp/e100/codec_ctrl.cpp b/host/lib/usrp/e100/codec_ctrl.cpp
--index 13b3bc9..2c13176 100644
----- a/host/lib/usrp/e100/codec_ctrl.cpp
--+++ b/host/lib/usrp/e100/codec_ctrl.cpp
--@@ -110,7 +110,7 @@ e100_codec_ctrl_impl::e100_codec_ctrl_impl(spi_iface::sptr iface){
--     //_ad9862_regs.dis2 = ad9862_regs_t::DIS2_DIS; needed for transmit
-- 
--     //write the register settings to the codec
---    for (uint8_t addr = 0; addr <= 25; addr++){
--+    for (boost::uint8_t addr = 0; addr <= 25; addr++){
--         this->send_reg(addr);
--     }
-- 
---- 
--1.7.9.5
--
-diff --git a/meta-oe/recipes-connectivity/uhd/uhd_git.bb b/meta-oe/recipes-connectivity/uhd/uhd_git.bb
-deleted file mode 100644
-index ee02cc7..0000000
---- a/meta-oe/recipes-connectivity/uhd/uhd_git.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require uhd.inc
--
--PV = "3.5.3"
--PR = "${INC_PR}.0"
--
--SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;branch=maint \
--           file://0001-use-uint8_t-from-boost-namespace.patch;striplevel=2 \
--          "
--S = "${WORKDIR}/git/host"
--
--SRCREV = "f4c58120dc1e3674ee0228213f0f0011a0f80dcf"
 -- 
 1.8.3.1
 
