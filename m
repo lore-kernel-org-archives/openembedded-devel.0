@@ -1,25 +1,34 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from bec-systems.com (u15414263.onlinehome-server.com
-	[74.208.70.121])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BAE36D3DE;
-	Mon, 18 Nov 2013 15:57:12 +0000 (UTC)
-Received: from oh-67-76-203-50.sta.embarqhsd.net ([67.76.203.50]
-	helo=happy.bec-systems.com)
-	by bec-systems.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.71) (envelope-from <cliff.brake@gmail.com>)
-	id 1ViR3h-0000ql-37; Mon, 18 Nov 2013 10:48:26 -0500
-MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 18 Nov 2013 15:56:57 GMT
-Message-Id: <1384790217561.64470dd@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-X-Spam_score: -2.9
-X-Spam_score_int: -28
-X-Spam_bar: --
-Subject: OE Changelog since 2013-11-10 until 2013-11-17
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DF296D06A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Nov 2013 22:21:13 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id b57so2838221eek.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Nov 2013 14:21:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=x3Jy4x+48j85fd/usQ7lYYFsypFiHx1eq9aXH5WEos0=;
+	b=jqDiGqjbuC217ORrrjxEIbi2S25b1oGOclIQddvrERRG+YVCf55vsVK6fnF8Hj9vNa
+	cWccyTM9+3yrqcJ8Ynub/4DOScp5D67webM0+VXGrXl8VqFr/uHD9MHrgu++F5cE3TdI
+	2cjhdAVlWLd2DtMx18HwuGx2bOuyc3lRT4nhBlDgioRsG/cowgCDNf3t1ZcP7gH1RHqC
+	VV3N5z76EDuerjQxxfoKloWNvSsmCPfTLYm09Ub3DNOu0EoCn811eL5tijJMRH9yeGUH
+	UPdyWoxZICAtKIBTTWW7GZz50M8epwnCUma6X1X3ZiYR5km0IQu0Arp8tnL5NJ4e33pw
+	WhJA==
+X-Received: by 10.14.32.196 with SMTP id o44mr15824928eea.43.1384813274641;
+	Mon, 18 Nov 2013 14:21:14 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id a6sm42073086eei.10.2013.11.18.14.21.13
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 18 Nov 2013 14:21:14 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Nov 2013 23:21:09 +0100
+Message-Id: <1384813274-7231-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-oe][PATCH 1/6] meta-efl: upgrade efl to 1.7.9, e-wm to 0.17.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,457 +42,349 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Nov 2013 15:57:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2013-11-10 until 2013-11-17.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Alexandru DAMIAN (5):
-=20=20toaster: fix tasks showing as NoExec
-=20=20toaster: remove author field
-=20=20toasterui: mark failed sceneQueue tasks as failed
-=20=20toaster: fix path to buildstats file
-=20=20cooker, toaster: variable definition tracking
-
-Cristiana Voicu (5):
-=20=20toaster: convert build_package size to bytes to keep consistence
-=20=20cooker: replace "w" file opening mode with "a" mode
-=20=20hob: refresh tables when the user is redirected to Edit packages
-=20=20hob/hoblistmodel: check if vals of packages/recipes names are not None
-=20=20toaster: task with outcome 2 (sstate), should have sstate_result!=3D0
-
-Paul Eggleton (1):
-=20=20cooker: warn if user specifies a target listed in ASSUME_PROVIDED
-
-Trevor Woerner (1):
-=20=20newbb.vim: fix spelling
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Bruce Ashfield (5):
-=20=20linux-yocto/3.10: meta: ARM: OMAP3: Add USB PHY driver for Beagleboard
-=20=20linux-yocto-rt/3.10: fix ntp merge issue
-=20=20linux-yocto/3.10: meta: ARM: OMAP3: Add USB PHY driver for Beagleboard
-=20=20kernel.bbclass: test for hardlinks before installing
-=20=20kernel.bbclass: fix hardlink test
-
-Enrico Scholz (1):
-=20=20vala: cleanup DEPENDS
-
-Jackie Huang (2):
-=20=20packagegroup-core-basic: define VIRTUAL-RUNTIME_syslog
-=20=20autogen-native: remove the unnecessary RDEPENDS
-
-Jeffrey C Honig (1):
-=20=20perl: perl-ptest.inc polutes package dependencies when ptest not =
-enabled
-
-Khem Raj (2):
-=20=20systemd: Upgrade 206 -> 208
-=20=20Revert "glib-2.0: Specify libiconv when building on uclibc"
-
-Lei Liu (3):
-=20=20image-mklibs: Fix grep pattern when mklibs collects executables in =
-rootfs
-=20=20mklibs: add dependency on dpkg-native
-=20=20gcc-common: Enable building multiarch mips gcc
-
-Ming Liu (1):
-=20=20qemu: use PACKAGECONFIG to address xfsprogs dependency
-
-Paul Eggleton (16):
-=20=20cmake: upgrade to 2.8.12.1
-=20=20nfs-utils: upgrade to 1.2.9
-=20=20ethtool: upgrade to 3.12.1
-=20=20openssh: upgrade to 6.4p1
-=20=20classes/image-empty: remove
-=20=20scripts/create-recipe: fix handling of --help
-=20=20classes/insane: improve LIC_FILES_CHKSUM messages
-=20=20bitbake.conf: remove BOOTSTRAP_EXTRA_* variable defaults
-=20=20classes/sanity: validate SDKMACHINE value
-=20=20bitbake.conf: remove CPU_FEATURES defaults
-=20=20gtk-immodules-cache: fix error message to use correct names
-=20=20classes/license: fix comments
-=20=20systemd: fix comments
-=20=20classes/pkg_distribute: remove
-=20=20classes/pkg_metainfo: remove
-=20=20classes/license: use "1" to set boolean variables
-
-Phil Blundell (2):
-=20=20insane, license: Trap MalformedUrl exceptions when parsing =
-LIC_FILES_CHKSUM
-=20=20binutils: Add gnu-config-native to DEPENDS
-
-Richard Purdie (6):
-=20=20kernel: Use hardlinks during do_install for speed
-=20=20lib/oe/path: Fix performance issue got copyhardlinktree()
-=20=20lib/oe/path: Fixup handling of .* files in top level paths for =
-copyhardlinkt
-=20=20kernel: Use hardlinks for do_populate_sysroot for speed
-=20=20bitbake.conf: Default DISTRO to nodistro
-=20=20staging: Use hardlinking for sysroot_stage_dir
-
-Robert Yang (1):
-=20=20e2fsprogs: fix tests/f_extent_oobounds
-
-Ross Burton (6):
-=20=20glib-2.0: move more logic to the .inc
-=20=20syslinux: add APPEND to dependency list
-=20=20freetype: upgrade to 2.5.0.1
-=20=20clutter-gtk-1.0: upgrade to 1.4.4
-=20=20weston-init: use /run instead of /var/run
-=20=20core-image-weston: add SSH and hwcodecs to the image
-
-Roy Li (1):
-=20=20elfutils: remove eu-objdump if it does not work
-
-Steve Sakoman (1):
-=20=20wpa-supplicant: enable CONFIG_CTRL_IFACE_DBUS_NEW
-
-Tobias Henkel (8):
-=20=20icecc: Log reason in error cases
-=20=20icecc: Reduce verbosity with empty PARALLEL_MAKE
-=20=20icecc: Add blacklist vars to BB_HASHBASE_WHITELIST
-=20=20icecc: Add dummy python version of set_icecc_env
-=20=20icecc: Enable icecc also for install step
-=20=20icecc: Support shell evaluation of KERNEL_CC
-=20=20icecc: Add package whitelist
-=20=20icecc: Fix race condition when packaging toolchain
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Eric B=C3=A9nard (1):
-=20=20cherokee: use cherokee-project.de mirror
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Khem Raj (1):
-=20=20arm-defaults.inc: Tweak DEFAULTTUNE with anonymous pything instead of =
-overri
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Chase Maupin (4):
-=20=20input-utils: Add the input-utils package recipe
-=20=20arago-test: Add input-utils to test packages
-=20=20linaro-pm-qa-utils: Add utils used by Linaro PM scripts
-=20=20arago-test: add linaro-pm-qa-utils to test packages
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-Khem Raj (1):
-=20=20nspr: match bbappend with recipe PV in OE-core
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Javier Viguera (1):
-=20=20imx-bootlets: Fix removal of symbolic link in do_deploy
-
-Lauren Post (9):
-=20=20u-boot-imx (2013.04): Update 3.10.9-1.0.0 alpha
-=20=20linux-imx: Upgrade 3.5.7-1.0.0_alpha to 3.10.9-1.0.0_alpha kernel
-=20=20imxdlsabreauto.conf: Add gpmi-weim DTS
-=20=20imx6dlsabresd.conf: Add in ldo and hdcp DTS
-=20=20imx6qsabreauto.conf: Add gpmi-weim DTS
-=20=20imx6qsabresd.conf: Add ldo and hdcp DTS
-=20=20imx6slevk.conf: Add ldo device tree
-=20=20imx6solosabresd.conf: Add ldo device tree
-=20=20fsl-alsa-plugins: Update for 3.10 uapi headers
-
-Otavio Salvador (5):
-=20=20fsl-default-providers.inc: Make virtual/kernel assigment delayed
-=20=20linux-imx.inc: Drop extra sysroot staging
-=20=20linux-fslc: Update to revision 928c8b1
-=20=20linux-imx.inc: Remove imx-test specific hack
-=20=20gst-fsl-plugin.inc: Add libgstfsl-0.10.so in ${PN}-libgstfsl
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Mario Domenech Goulart (1):
-=20=20linux-wandboard_3.0.35: update to d35902c7
-
-Otavio Salvador (2):
-=20=20m28evk: Do not enable GStreamer plugin
-=20=20m53evk: Do not enable GStreamer plugin
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-Andrea Adami (12):
-=20=20linux-yocto: collie: add platform data for IrDA
-=20=20linux-yocto: collie: readd bootblock partition
-=20=20linux-yocto-dev: add ipaq h1940 3.12-rc5 patchset
-=20=20machine: h1940: switch temporarly to linux-yocto-dev (3.12-rc5)
-=20=20linux_3.1: remove, no more machines using it (h1940 is up to 3.12)
-=20=20linux-yocto-dev: remove upstreamed sharpsl_param patch
-=20=20linux-yocto: collie: add sa1100 framebuffer clock fixup
-=20=20linux-yocto: collie: MTD: disable erase suspend on write
-=20=20linux-yocto: collie: add pcmcia clock fixes for sa1100
-=20=20linux-yocto: collie: add fix for locomo driver
-=20=20linux-yocto: collie: properly readd cfi_probe
-=20=20linux-yocto-tiny-kexecboot: collie: resync patches with =
-linux-yocto_3.10
-
-Linus Walleij (3):
-=20=20h3600: add rebased microcontroller patches
-=20=20h3600: update defconfig
-=20=20h3600: build .tar.gz images too
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-Nitin A Kamble (8):
-=20=20chiefriver: linux-yocto-3.10: update kernel srcrevs
-=20=20crownbay: linux-yocto-3.10: update kernel srcrevs
-=20=20emenlow: linux-yocto-3.10: update kernel srcrevs
-=20=20fri2: linux-yocto-3.10: update kernel srcrevs
-=20=20jasperforest: linux-yocto-3.10: update kernel srcrevs
-=20=20nuc: linux-yocto-3.10: update kernel srcrevs
-=20=20sugarbay: linux-yocto-3.10: update kernel srcrevs
-=20=20sys940x: linux-yocto-3.10: update kernel srcrevs
-
-Ong Boon Leong (3):
-=20=20meta-crystalforest: update linux-yocto_3.10 SRCREV
-=20=20meta-romley: update linux-yocto_3.10 SRCREV
-=20=20meta-haswell-wc: update linux-yocto_3.10 SRCREV
-
-Ross Burton (4):
-=20=20mesa: remove, mesa-gl is used with EMGD now
-=20=20libva-intel-driver: upgrade to 1.2.1
-=20=20gstreamer-vaapi: add 0.5.6
-=20=20emgd-driver-bin: add missing GLchar typedef to gl2.h
-
-Tom Zanussi (4):
-=20=20crownbay: Remove mesa PREFERRED_VERSION
-=20=20fri2: Remove mesa PREFERRED_VERSION
-=20=20emenlow: Remove mesa PREFERRED_VERSION
-=20=20sys940x: Remove mesa PREFERRED_VERSION
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Holger Behrens (2):
-=20=20xserver-xorg: upgrade to 1.14.4
-=20=20libical: use recipe added back to oe-core
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-Martin Jansa (1):
-=20=20cmake: Rename .bbappend to match new version from oe-core
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-Alexandru Niculita (5):
-=20=20Refactor kernel recipes to reduce code duplication
-=20=20Remove tabs from recipe
-=20=20Make Linux 3.6 the default for Raspberry Pi
-=20=20Add kernel 3.8 and 3.11 for Raspberry Pi
-=20=20bcm2835: Update to version 1.32
-
-Andrei Gherzan (13):
-=20=20mesa: Modify version to match the one from oe-core
-=20=20mesa: Remove egl and gles only for raspberrypi machine
-=20=20Merge "mesa: Remove egl and gles only for raspberrypi machine"
-=20=20Merge "sdcard_image-rpi.bbclass: Allow optional compression"
-=20=20README: Add info
-=20=20Merge "README: Add info"
-=20=20Merge "README: Fix IMAGE_FSTYPES example"
-=20=20Merge "raspberrypi.conf: is not a usb gadget"
-=20=20linux-raspberrypi: Update available versions to HEAD
-=20=20linux-raspberrypi: Add version 3.10.18 and 3.12.0
-=20=20rpi-default-providers: Use 3.10.X as default kernel
-=20=20firmware.inc: Update to HEAD on 2013-11-13
-=20=20userland: Update to HEAD on 2013-11-13
-
-Dan McGregor (1):
-=20=20raspberrypi.conf: is not a usb gadget
-
-Paul Barker (2):
-=20=20sdcard_image-rpi.bbclass: Allow optional compression
-=20=20README: Fix IMAGE_FSTYPES example
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Denys Dmytriyenko (1):
-=20=20layer.conf: revert previous prepending to BBPATH change
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-DongHeon Jang (1):
-=20=20webos-image: activitymanager=3D118
-
-Ed Chejlava (1):
-=20=20webos-image: upstart=3D1.10
-
-Gayathri Srinivasan (1):
-=20=20webos-image: pmklogd=3D15-r3
-
-Herb Kuta (2):
-=20=20base-files: Create pre-installed catalog apps directory
-=20=20webos-filesystem-paths: Add locations of fonts and SmartKey data
-
-Hongjeon Ha (3):
-=20=20webos-image: pmloglib=3D44
-=20=20webos-image: pmlogdaemon=3D113
-=20=20webos-image: pmloglib=3D45
-
-Iyad Qumei (2):
-=20=20packagegroup-webos-extended: Drop WEBOS_MISSING_FROM_RDEPENDS
-=20=20packagegroups-webos-{extended,test}: Move binutils to developer image
-
-Keith Derrick (1):
-=20=20webos-image: luna-service2=3D161
-
-Mark Bessey (1):
-=20=20webos-image: mojoservicelauncher=3D79
-
-Martin Jansa (2):
-=20=20base-files: Create webos_cryptofsdir
-=20=20webos-image: parted=3D0
-
-Nikolay Orliuk (1):
-=20=20webos-image: Install all tzdata packages
-
-Susan Montooth (1):
-=20=20Revert "webos-image: pmloglib=3D44"
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-Sipke Vriend (1):
-=20=20recipes-devtools:qemu Update qemu recipe version to match upstream.
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Bruce Ashfield (1):
-=20=20meta-yocto-bsp: update SRCREVs for 3.10.17 and beagleboard fixes
-
-Olof Johansson (1):
-=20=20poky.conf: add Debian 7.2 to SANITY_TESTED_DISTROS
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
+X-List-Received-Date: Mon, 18 Nov 2013 22:21:13 -0000
+
+* announcement:
+  http://www.mail-archive.com/enlightenment-devel@lists.sourceforge.net/msg56588.html
+* most likely last bump I'll do in meta-efl before upgrading recipes to 1.8
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/e17/{e-wm_0.17.4.bb => e-wm_0.17.5.bb}     | 4 ++--
+ meta-efl/recipes-efl/efl/{ecore_1.7.8.bb => ecore_1.7.9.bb}     | 4 ++--
+ meta-efl/recipes-efl/efl/edbus_1.7.8.bb                         | 8 --------
+ meta-efl/recipes-efl/efl/edbus_1.7.9.bb                         | 8 ++++++++
+ meta-efl/recipes-efl/efl/{edje_1.7.8.bb => edje_1.7.9.bb}       | 4 ++--
+ meta-efl/recipes-efl/efl/{eet_1.7.8.bb => eet_1.7.9.bb}         | 4 ++--
+ meta-efl/recipes-efl/efl/{eeze_1.7.8.bb => eeze_1.7.9.bb}       | 4 ++--
+ meta-efl/recipes-efl/efl/{efreet_1.7.8.bb => efreet_1.7.9.bb}   | 4 ++--
+ meta-efl/recipes-efl/efl/{eina_1.7.8.bb => eina_1.7.9.bb}       | 4 ++--
+ meta-efl/recipes-efl/efl/{eio_1.7.8.bb => eio_1.7.9.bb}         | 4 ++--
+ meta-efl/recipes-efl/efl/elementary_1.7.8.bb                    | 8 --------
+ meta-efl/recipes-efl/efl/elementary_1.7.9.bb                    | 8 ++++++++
+ meta-efl/recipes-efl/efl/{embryo_1.7.8.bb => embryo_1.7.9.bb}   | 4 ++--
+ meta-efl/recipes-efl/efl/{emotion_1.7.8.bb => emotion_1.7.9.bb} | 4 ++--
+ meta-efl/recipes-efl/efl/{ethumb_1.7.8.bb => ethumb_1.7.9.bb}   | 4 ++--
+ meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb          | 8 --------
+ meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb          | 8 ++++++++
+ meta-efl/recipes-efl/efl/{evas_1.7.8.bb => evas_1.7.9.bb}       | 4 ++--
+ meta-efl/recipes-efl/efl/expedite_1.7.8.bb                      | 8 --------
+ meta-efl/recipes-efl/efl/expedite_1.7.9.bb                      | 8 ++++++++
+ 20 files changed, 56 insertions(+), 56 deletions(-)
+ rename meta-efl/recipes-efl/e17/{e-wm_0.17.4.bb => e-wm_0.17.5.bb} (59%)
+ rename meta-efl/recipes-efl/efl/{ecore_1.7.8.bb => ecore_1.7.9.bb} (96%)
+ delete mode 100644 meta-efl/recipes-efl/efl/edbus_1.7.8.bb
+ create mode 100644 meta-efl/recipes-efl/efl/edbus_1.7.9.bb
+ rename meta-efl/recipes-efl/efl/{edje_1.7.8.bb => edje_1.7.9.bb} (93%)
+ rename meta-efl/recipes-efl/efl/{eet_1.7.8.bb => eet_1.7.9.bb} (79%)
+ rename meta-efl/recipes-efl/efl/{eeze_1.7.8.bb => eeze_1.7.9.bb} (77%)
+ rename meta-efl/recipes-efl/efl/{efreet_1.7.8.bb => efreet_1.7.9.bb} (81%)
+ rename meta-efl/recipes-efl/efl/{eina_1.7.8.bb => eina_1.7.9.bb} (70%)
+ rename meta-efl/recipes-efl/efl/{eio_1.7.8.bb => eio_1.7.9.bb} (65%)
+ delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.8.bb
+ create mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.9.bb
+ rename meta-efl/recipes-efl/efl/{embryo_1.7.8.bb => embryo_1.7.9.bb} (71%)
+ rename meta-efl/recipes-efl/efl/{emotion_1.7.8.bb => emotion_1.7.9.bb} (83%)
+ rename meta-efl/recipes-efl/efl/{ethumb_1.7.8.bb => ethumb_1.7.9.bb} (80%)
+ delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb
+ rename meta-efl/recipes-efl/efl/{evas_1.7.8.bb => evas_1.7.9.bb} (97%)
+ delete mode 100644 meta-efl/recipes-efl/efl/expedite_1.7.8.bb
+ create mode 100644 meta-efl/recipes-efl/efl/expedite_1.7.9.bb
+
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.17.4.bb b/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
+similarity index 59%
+rename from meta-efl/recipes-efl/e17/e-wm_0.17.4.bb
+rename to meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
+index 6d64620..57eefdb 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.17.4.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
+@@ -10,5 +10,5 @@ SRC_URI = "\
+     file://applications.menu \
+ "
+ 
+-SRC_URI[md5sum] = "ce3b7c8f05975521bdfe1edb72c8e245"
+-SRC_URI[sha256sum] = "090447607c850f98ce8c2089c55e15d77b35a9014eddff9119f38b0e0e49f0b7"
++SRC_URI[md5sum] = "5aefb55df0b1a0a0ae0cf9d0610cf7c7"
++SRC_URI[sha256sum] = "25d4967277cf27d4efb474a9b8eceb1200aa813a51c248b61cc23f69291bff0f"
+diff --git a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb b/meta-efl/recipes-efl/efl/ecore_1.7.9.bb
+similarity index 96%
+rename from meta-efl/recipes-efl/efl/ecore_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/ecore_1.7.9.bb
+index 0f09160..c34eb27 100644
+--- a/meta-efl/recipes-efl/efl/ecore_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/ecore_1.7.9.bb
+@@ -120,5 +120,5 @@ SRC_URI = "\
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[wayland] = "--enable-ecore-wayland,--disable-ecore-wayland,wayland xkbcommon"
+ 
+-SRC_URI[md5sum] = "5a8ca096d8c15647b2493d4664a4b895"
+-SRC_URI[sha256sum] = "26cb1dc02213a221fdec32ef4ea4ece608e5239bdbd19c9d62b09cf931863738"
++SRC_URI[md5sum] = "2d5a4fb8f702628f5c7b785309be01ab"
++SRC_URI[sha256sum] = "c145cc00280d3a310c76e5e6a9fb509c81b8b173f04458c97ea4ae6bf563eaf3"
+diff --git a/meta-efl/recipes-efl/efl/edbus_1.7.8.bb b/meta-efl/recipes-efl/efl/edbus_1.7.8.bb
+deleted file mode 100644
+index a9250e9..0000000
+--- a/meta-efl/recipes-efl/efl/edbus_1.7.8.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "8711070b57873b2b2a0024b198e50906"
+-SRC_URI[sha256sum] = "9e94f1c522ac9faec991cd90c91e4e26b355909dbba21b42585359841937af78"
+diff --git a/meta-efl/recipes-efl/efl/edbus_1.7.9.bb b/meta-efl/recipes-efl/efl/edbus_1.7.9.bb
+new file mode 100644
+index 0000000..64e77e6
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/edbus_1.7.9.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "8f72da14e5664aad8c45eeeca0e3ff5f"
++SRC_URI[sha256sum] = "c328c4cf1424629cb67c83689ccc1f95967abcb4c03dffd437e93b799ff151c1"
+diff --git a/meta-efl/recipes-efl/efl/edje_1.7.8.bb b/meta-efl/recipes-efl/efl/edje_1.7.9.bb
+similarity index 93%
+rename from meta-efl/recipes-efl/efl/edje_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/edje_1.7.9.bb
+index ed43c32..2e8c566 100644
+--- a/meta-efl/recipes-efl/efl/edje_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/edje_1.7.9.bb
+@@ -68,5 +68,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "06399e95de312de12342df8f16c7c885"
+-SRC_URI[sha256sum] = "924eae1be1fe755997be8074d32af4b6a83ed7e57057edccb2cf46b83c33202d"
++SRC_URI[md5sum] = "49152d8636aefcd028af0f97483391ef"
++SRC_URI[sha256sum] = "dac12e5fd81ab303151bec6742971b63f2de577ef940ed0b6af20419130300ab"
+diff --git a/meta-efl/recipes-efl/efl/eet_1.7.8.bb b/meta-efl/recipes-efl/efl/eet_1.7.9.bb
+similarity index 79%
+rename from meta-efl/recipes-efl/efl/eet_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/eet_1.7.9.bb
+index 8258973..9521e68 100644
+--- a/meta-efl/recipes-efl/efl/eet_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/eet_1.7.9.bb
+@@ -26,5 +26,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "2db9527a95412af26df8f79429ffcc95"
+-SRC_URI[sha256sum] = "faad73b713c08f8f3c9ed76a0f8e4161f969e5ec8215db1dd5108d3f6eeb3a20"
++SRC_URI[md5sum] = "225eadf514465be321a44a003d687a55"
++SRC_URI[sha256sum] = "3345e0889bbc29536dbe0f6236ed1ae6a9d685b8e39877d5404fa6217bd12ec6"
+diff --git a/meta-efl/recipes-efl/efl/eeze_1.7.8.bb b/meta-efl/recipes-efl/efl/eeze_1.7.9.bb
+similarity index 77%
+rename from meta-efl/recipes-efl/efl/eeze_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/eeze_1.7.9.bb
+index f081f33..7ae7fbb 100644
+--- a/meta-efl/recipes-efl/efl/eeze_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/eeze_1.7.9.bb
+@@ -19,5 +19,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "3ee68667f65860a0bdb7126e555155ff"
+-SRC_URI[sha256sum] = "9a4df9d086575c54d0116164d46b2c9e29362cc32398ea606c2365cbdf4157dd"
++SRC_URI[md5sum] = "1e6119b4c12f2539ae5d191659652a89"
++SRC_URI[sha256sum] = "1b4b38943bfc564ddd18d4314a6a12af5ce656b551e69154e818ad14231050b8"
+diff --git a/meta-efl/recipes-efl/efl/efreet_1.7.8.bb b/meta-efl/recipes-efl/efl/efreet_1.7.9.bb
+similarity index 81%
+rename from meta-efl/recipes-efl/efl/efreet_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/efreet_1.7.9.bb
+index e7abdaa..0d87eb7 100644
+--- a/meta-efl/recipes-efl/efl/efreet_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/efreet_1.7.9.bb
+@@ -18,5 +18,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "42ccb6672be6c3cbd7359c9b71a8e587"
+-SRC_URI[sha256sum] = "b462c6d230af00d052674e175dbd269f1a4aa0ea510f704b2118895429127426"
++SRC_URI[md5sum] = "5972833cf78ca93440403b94ed4ed74d"
++SRC_URI[sha256sum] = "d5037c04ac8130879bf87d924e6b83cf479e7dee8235321ed1a49f97083b611b"
+diff --git a/meta-efl/recipes-efl/efl/eina_1.7.8.bb b/meta-efl/recipes-efl/efl/eina_1.7.9.bb
+similarity index 70%
+rename from meta-efl/recipes-efl/efl/eina_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/eina_1.7.9.bb
+index 68a6667..3638123 100644
+--- a/meta-efl/recipes-efl/efl/eina_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/eina_1.7.9.bb
+@@ -15,5 +15,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "4c7715b636f71a5e07be4f33e72c6a69"
+-SRC_URI[sha256sum] = "e39c5d9cc9d0854521983fe653b8f2efe2946e74066c7c0456ffe62342535d18"
++SRC_URI[md5sum] = "cddf2755e20bfb3f90764fd2b689b888"
++SRC_URI[sha256sum] = "b7fe26d98b80479d0f72be47b2584dfa243e4d18774cb824acc398354a45d520"
+diff --git a/meta-efl/recipes-efl/efl/eio_1.7.8.bb b/meta-efl/recipes-efl/efl/eio_1.7.9.bb
+similarity index 65%
+rename from meta-efl/recipes-efl/efl/eio_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/eio_1.7.9.bb
+index f5827da..5bf34b2 100644
+--- a/meta-efl/recipes-efl/efl/eio_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/eio_1.7.9.bb
+@@ -11,5 +11,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "a5e1608a629667de3cfd17289d599b07"
+-SRC_URI[sha256sum] = "f18831389f6b735e73c74d7f411602722dc8ce214ac3f4171b59d216d842a3b0"
++SRC_URI[md5sum] = "f4d6cbd216a9ae5983fa8ee8dadf04cb"
++SRC_URI[sha256sum] = "35ce08ecf6afd5faa4fe857764537e15aede2b0d2c37922e55e97e2dff3352de"
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.7.8.bb b/meta-efl/recipes-efl/efl/elementary_1.7.8.bb
+deleted file mode 100644
+index 8dfe880..0000000
+--- a/meta-efl/recipes-efl/efl/elementary_1.7.8.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "c9d387243a1ffa9318a491315c7007c8"
+-SRC_URI[sha256sum] = "b02bcc17ba9f80a1a9df456ae95584b98747a2ff14f90c9c0471a16869bd35dc"
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.7.9.bb b/meta-efl/recipes-efl/efl/elementary_1.7.9.bb
+new file mode 100644
+index 0000000..712d668
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/elementary_1.7.9.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "6a3acb394b640697b1fd2dd61d990d0b"
++SRC_URI[sha256sum] = "3667c6da3d89be5a46363509645be59e3deb1f052bfa14239986ac9499da52fb"
+diff --git a/meta-efl/recipes-efl/efl/embryo_1.7.8.bb b/meta-efl/recipes-efl/efl/embryo_1.7.9.bb
+similarity index 71%
+rename from meta-efl/recipes-efl/efl/embryo_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/embryo_1.7.9.bb
+index c4dfbca..08d7e49 100644
+--- a/meta-efl/recipes-efl/efl/embryo_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/embryo_1.7.9.bb
+@@ -16,5 +16,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "8fee23d51be07c72f9a7edf707e1f43f"
+-SRC_URI[sha256sum] = "fe8af458b2f3e5e561181c7e86b763e2623397a2a4bbbfe08e58be06ed052306"
++SRC_URI[md5sum] = "98614ec48376ff6d3a39187504b70ed4"
++SRC_URI[sha256sum] = "6b2739a53c3ab2fcf44edfb9c3a4c56d11aba91e27e556a9e70116a161201e34"
+diff --git a/meta-efl/recipes-efl/efl/emotion_1.7.8.bb b/meta-efl/recipes-efl/efl/emotion_1.7.9.bb
+similarity index 83%
+rename from meta-efl/recipes-efl/efl/emotion_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/emotion_1.7.9.bb
+index c6eae15..b7e1b16 100644
+--- a/meta-efl/recipes-efl/efl/emotion_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/emotion_1.7.9.bb
+@@ -18,5 +18,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "e04679ac7967e698c8c4013b9fd209a1"
+-SRC_URI[sha256sum] = "54c96192cb46f5dce851934adb1633b45e5b007ad3cd05495102eeb255bced31"
++SRC_URI[md5sum] = "171bbc41a5e5d202d0dc57c34e318c14"
++SRC_URI[sha256sum] = "ff72204490e740adaa7980bad1a060dae8113c308c6083e5bcee380a11dad1f4"
+diff --git a/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb b/meta-efl/recipes-efl/efl/ethumb_1.7.9.bb
+similarity index 80%
+rename from meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/ethumb_1.7.9.bb
+index 1d36322..d0a5389 100644
+--- a/meta-efl/recipes-efl/efl/ethumb_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/ethumb_1.7.9.bb
+@@ -23,5 +23,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "9c5936d06ff79aea0dd81c5be0bf511e"
+-SRC_URI[sha256sum] = "9047a88122c8713444d66294b3343c07feb15817a1809c7cbc9478ba91587e2d"
++SRC_URI[md5sum] = "d71a6fbcce2c6a8f46ea9b9b9d53cbab"
++SRC_URI[sha256sum] = "a97c39a9184ec7e1b352a7f251d97992b8082e3a0d6735ea1f34e4e40129a12f"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
+deleted file mode 100644
+index de71858..0000000
+--- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.8.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "8d6c7f56db854fdf931fc9270d0fda87"
+-SRC_URI[sha256sum] = "4f5f2a00eb065049de3e31cd86aee7de3b0593b9aec70aeb851f4f8189233d34"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb
+new file mode 100644
+index 0000000..45eea84
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "01bb7cf2c97014f087bbba4de237b3e8"
++SRC_URI[sha256sum] = "e163a97db7311cbc8489572f201c404929a52099b3156e54a9af2181f8389824"
+diff --git a/meta-efl/recipes-efl/efl/evas_1.7.8.bb b/meta-efl/recipes-efl/efl/evas_1.7.9.bb
+similarity index 97%
+rename from meta-efl/recipes-efl/efl/evas_1.7.8.bb
+rename to meta-efl/recipes-efl/efl/evas_1.7.9.bb
+index c6486f7..588f74e 100644
+--- a/meta-efl/recipes-efl/efl/evas_1.7.8.bb
++++ b/meta-efl/recipes-efl/efl/evas_1.7.9.bb
+@@ -173,5 +173,5 @@ SRC_URI = "\
+     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "ca6a5a28f0fc5b0eac36210d4df139fb"
+-SRC_URI[sha256sum] = "048f16454c2601851e9b17591579f60e25727c09beadaf3567fa443dfbaed0da"
++SRC_URI[md5sum] = "c96a23ede14cd0adb7e8e549e8acdee1"
++SRC_URI[sha256sum] = "1fd687e43ebe3031be4ac7628043eae1aafca83ce6d1d1f06ff3b59fb4c027f0"
+diff --git a/meta-efl/recipes-efl/efl/expedite_1.7.8.bb b/meta-efl/recipes-efl/efl/expedite_1.7.8.bb
+deleted file mode 100644
+index 8be92c2..0000000
+--- a/meta-efl/recipes-efl/efl/expedite_1.7.8.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "378d4abb513fd4ae1d2e2f75a2d970e4"
+-SRC_URI[sha256sum] = "ac80d3f13af4f644e048a1fcb71fd5f12fdef7c11c19fe61c868273bf3f4deb9"
+diff --git a/meta-efl/recipes-efl/efl/expedite_1.7.9.bb b/meta-efl/recipes-efl/efl/expedite_1.7.9.bb
+new file mode 100644
+index 0000000..cee2d60
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/expedite_1.7.9.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "954fe8e40fec6a561190ff0fb75b6bdd"
++SRC_URI[sha256sum] = "a05be096c911e0d66d4bdc497ebb935a04ad23696de9084aed9959b5172a593e"
+-- 
+1.8.4.3
 
 
