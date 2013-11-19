@@ -1,20 +1,26 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id EDE176D03A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2013 16:25:56 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 19 Nov 2013 08:25:58 -0800
+	by mail.openembedded.org (Postfix) with ESMTP id 61DBC6D03A;
+	Tue, 19 Nov 2013 16:30:16 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 19 Nov 2013 08:30:18 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,729,1378882800"; d="scan'208";a="436093254"
-Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.121.202])
-	by fmsmga002.fm.intel.com with ESMTP; 19 Nov 2013 08:25:57 -0800
+X-IronPort-AV: E=Sophos;i="4.93,729,1378882800"; d="scan'208";a="430335306"
+Received: from unknown (HELO helios.localnet) ([10.252.121.202])
+	by fmsmga001.fm.intel.com with ESMTP; 19 Nov 2013 08:30:11 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Nov 2013 16:25:48 +0000
-Message-Id: <1384878348-16319-1-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-networking][PATCH] lowpan-tools: fix do_install failure
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 19 Nov 2013 16:30:09 +0000
+Message-ID: <4441466.Qb3TimoIEF@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <20131119155040.GD3708@jama>
+References: <20130520130635.GA32431@jama> <20131030230825.GB32015@jama>
+	<20131119155040.GD3708@jama>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: State of bitbake world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,80 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2013 16:25:57 -0000
+X-List-Received-Date: Tue, 19 Nov 2013 16:30:17 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-We don't have a proper help2man so building the manpages fails; just
-disable building them to fix this as we do elsewhere.
+Hi Martin,
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../lowpan-tools/lowpan-tools/no-help2man.patch    | 41 ++++++++++++++++++++++
- .../lowpan-tools/lowpan-tools_git.bb               |  3 +-
- 2 files changed, 43 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
+On Tuesday 19 November 2013 16:50:40 Martin Jansa wrote:
+> On Thu, Oct 31, 2013 at 12:08:25AM +0100, Martin Jansa wrote:
+> > Starting now I'll use
+> > http://openembedded.org/wiki/Bitbake_World_Status
+> > to post results from my bitbake world buils.
+> 
+> It was updated few times since this e-mail and I've received no
+> feedback.
+> 
+> Should I continue to post them or nobody except me is really interested?
 
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
-new file mode 100644
-index 0000000..9ecd707
---- /dev/null
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
-@@ -0,0 +1,41 @@
-+Disable building manpages so that make install doesn't fail due to lack of help2man
-+
-+Upstream-Status: Inappropriate [config]
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 46c4017..d6ed312 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -9,11 +9,6 @@ izcoordinator_DESC = "simple coordinator for IEEE 802.15.4 network"
-+ iz_DESC = "configure an IEEE 802.15.4 interface"
-+ izchat_DESC = "simple chat program using IEEE 802.15.4"
-+ 
-+-if MANPAGES
-+-dist_man_MANS = $(manpages)
-+-endif
-+-EXTRA_DIST = $(manpages)
-+-
-+ izattach_SOURCES = serial.c
-+ 
-+ iz_SOURCES = iz.c iz-common.c iz-mac.c iz-phy.c
-+@@ -27,18 +22,6 @@ izcoordinator_LDADD = ../addrdb/libaddrdb.la $(LDADD) $(NL_LIBS) $(LEXLIB)
-+ iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
-+ iz_LDADD = $(LDADD) $(NL_LIBS)
-+ 
-+-izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
-+-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izattach_DESC) $(builddir)/izattach
-+-
-+-izcoordinator.8: $(izcoordinator_SOURCES) $(top_srcdir)/configure.ac
-+-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izcoordinator_DESC) $(builddir)/izcoordinator
-+-
-+-iz.8: $(iz_SOURCES) $(top_srcdir)/configure.ac
-+-	-$(HELP2MAN) -o $@ -s 8 -N -n $(iz_DESC) $(builddir)/iz
-+-
-+-izchat.1: $(izchat_SOURCES) $(top_srcdir)/configure.ac
-+-	-$(HELP2MAN) -o $@ -s 1 -N -n $(izchat_DESC) $(builddir)/izchat
-+-
-+ install-data-hook:
-+ 	$(mkinstalldirs) $(DESTDIR)`dirname $(leasefile)`
-+ 	$(mkinstalldirs) $(DESTDIR)`dirname $(pidfile)`
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index 152ee49..5fc0de3 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "libnl python"
- 
- PV = "0.3+git${SRCPV}"
--SRC_URI = "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee/linux-zigbee"
-+SRC_URI = "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee/linux-zigbee \
-+           file://no-help2man.patch"
- SRCREV = "a1d9615adde6d1a568813c24a128273ed755af04"
- 
- S = "${WORKDIR}/git"
+I'm interested in this; I haven't contributed much to the fixing though. I hope 
+that most of the production of the reporting can be automated if it isn't 
+already...?
+
+FWIW however I did just send a patch to fix the lowpan-tools do_install 
+failure.
+
+Cheers,
+Paul
+
 -- 
-1.8.1.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
