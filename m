@@ -1,37 +1,20 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 43A276B4BD;
-	Tue, 19 Nov 2013 16:01:05 +0000 (UTC)
-Received: by mail-lb0-f181.google.com with SMTP id q8so4981442lbi.40
-	for <multiple recipients>; Tue, 19 Nov 2013 08:01:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=ZHC1JSxUJ3s2Wb+cMkQOimYAnmD4lsVkyMO63+ZJxFQ=;
-	b=qyTmzRwIeJ6UOm2PpMp0nQTUQOpxi30OstVU2TVaJafgKtkWYvC5zwuYeRBKH3kkRH
-	XRk+ik8dCq8MoDzlAVZcF8FJrc6vBGKI9X7yMqnH/70ySI35dBJncSOF02fshcTuLRYP
-	cldKC+XOTPrX8j5o4MNIXUsUX2K2u3ZlyS1an5BdnvueizNfYtMsOvsmzgGR7VWmK/XB
-	crkOpl7KYGg1+NJzhlUupwhNhYXXz8yujxagnOBXdCT4d0wn+5GHDDTgNFaUVXo7N9WL
-	9L+qDCfZqCvMmoZaCtTDQIFnIb+KStxOH6SXM6IO9/6tYiZW1uVdd5TORyBC3KmsTC/K
-	G9Og==
-MIME-Version: 1.0
-X-Received: by 10.152.23.137 with SMTP id m9mr19248967laf.17.1384876866469;
-	Tue, 19 Nov 2013 08:01:06 -0800 (PST)
-Received: by 10.112.52.74 with HTTP; Tue, 19 Nov 2013 08:01:06 -0800 (PST)
-In-Reply-To: <20131119155622.GA10619@deserted.net>
-References: <20130603151008.GC3279@jama> <20130611160434.GI3233@jama>
-	<20130622181656.GK14021@jama> <20130725162341.GA3280@jama>
-	<20130808225419.GB17945@jama> <20130811114403.GG17945@jama>
-	<20130917123058.GC7313@jama> <20131020194345.GB3709@jama>
-	<20131030230825.GB32015@jama> <20131119155040.GD3708@jama>
-	<20131119155622.GA10619@deserted.net>
-Date: Tue, 19 Nov 2013 17:01:06 +0100
-Message-ID: <CAAQYJAvoXz-n7XiZEATZ3kfkWv0XTMdONCegiL3DMMmJQbkcXw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id EDE176D03A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Nov 2013 16:25:56 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 19 Nov 2013 08:25:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,729,1378882800"; d="scan'208";a="436093254"
+Received: from unknown (HELO helios.ger.corp.intel.com) ([10.252.121.202])
+	by fmsmga002.fm.intel.com with ESMTP; 19 Nov 2013 08:25:57 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Nov 2013 16:25:48 +0000
+Message-Id: <1384878348-16319-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [meta-networking][PATCH] lowpan-tools: fix do_install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,78 +28,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2013 16:01:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 19 Nov 2013 16:25:57 -0000
 
-On Tue, Nov 19, 2013 at 4:56 PM, Joe MacDonald <joe@deserted.net> wrote:
-> [Re: [OE-core] State of bitbake world] On 13.11.19 (Tue 16:50) Martin Jansa wrote:
->
->> On Thu, Oct 31, 2013 at 12:08:25AM +0100, Martin Jansa wrote:
->> > Starting now I'll use
->> > http://openembedded.org/wiki/Bitbake_World_Status
->> > to post results from my bitbake world buils.
->>
->> It was updated few times since this e-mail and I've received no
->> feedback.
->>
->> Should I continue to post them or nobody except me is really interested?
->
-> I'm interested.  I've not had nearly as much time to hunt down the ones
-> I own as I'd like, but I do appreciate the mail and I flag them in my
-> mailboxes for easy reference later.
->
-> -J.
->
->>
->> The stats also show that nobody is interested in fixing them, some issues are
->> there for 6+ months.
->>
+We don't have a proper help2man so building the manpages fails; just
+disable building them to fix this as we do elsewhere.
 
-Martin,
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ .../lowpan-tools/lowpan-tools/no-help2man.patch    | 41 ++++++++++++++++++++++
+ .../lowpan-tools/lowpan-tools_git.bb               |  3 +-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
 
-thanks for the time you're spending on it.
-About the failure concerning my maintainance fields, I see:
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
+new file mode 100644
+index 0000000..9ecd707
+--- /dev/null
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2man.patch
+@@ -0,0 +1,41 @@
++Disable building manpages so that make install doesn't fail due to lack of help2man
++
++Upstream-Status: Inappropriate [config]
++
++Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
++
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 46c4017..d6ed312 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -9,11 +9,6 @@ izcoordinator_DESC = "simple coordinator for IEEE 802.15.4 network"
++ iz_DESC = "configure an IEEE 802.15.4 interface"
++ izchat_DESC = "simple chat program using IEEE 802.15.4"
++ 
++-if MANPAGES
++-dist_man_MANS = $(manpages)
++-endif
++-EXTRA_DIST = $(manpages)
++-
++ izattach_SOURCES = serial.c
++ 
++ iz_SOURCES = iz.c iz-common.c iz-mac.c iz-phy.c
++@@ -27,18 +22,6 @@ izcoordinator_LDADD = ../addrdb/libaddrdb.la $(LDADD) $(NL_LIBS) $(LEXLIB)
++ iz_CFLAGS = $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
++ iz_LDADD = $(LDADD) $(NL_LIBS)
++ 
++-izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
++-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izattach_DESC) $(builddir)/izattach
++-
++-izcoordinator.8: $(izcoordinator_SOURCES) $(top_srcdir)/configure.ac
++-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izcoordinator_DESC) $(builddir)/izcoordinator
++-
++-iz.8: $(iz_SOURCES) $(top_srcdir)/configure.ac
++-	-$(HELP2MAN) -o $@ -s 8 -N -n $(iz_DESC) $(builddir)/iz
++-
++-izchat.1: $(izchat_SOURCES) $(top_srcdir)/configure.ac
++-	-$(HELP2MAN) -o $@ -s 1 -N -n $(izchat_DESC) $(builddir)/izchat
++-
++ install-data-hook:
++ 	$(mkinstalldirs) $(DESTDIR)`dirname $(leasefile)`
++ 	$(mkinstalldirs) $(DESTDIR)`dirname $(pidfile)`
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index 152ee49..5fc0de3 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "libnl python"
+ 
+ PV = "0.3+git${SRCPV}"
+-SRC_URI = "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee/linux-zigbee"
++SRC_URI = "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee/linux-zigbee \
++           file://no-help2man.patch"
+ SRCREV = "a1d9615adde6d1a568813c24a128273ed755af04"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.8.1.2
 
-| Logfile is clean
-| makedevs: No entry for root in search list
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_rootfs (log file is located at
-/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/qemux86-oe-linux/initramfs-kexecboot-klibc-image/1.0-r0/temp/log.do_rootfs.5623)
-
-
-So I grep in oe-core for " makedevs: No entry for root in search list"
-and find a serie of commits touching it...
-
-Most probable origin of the issue. Starnge that itfails only on x86, though.
-
-Cheers
-
-Andrea
-
-
-
-
-
-
-
-
-
-
->> Date                   Failed tasks            QA     QA-w/o-unrecognized
->>                 qemuarm       qemux86 qemux86_64      qemuarm qemux86 qemux86_64      qemuarm qemux86 qemux86_64
->> 2013-11-19    12      17      19      141     142     131     29      27      18
->> 2013-11-03    11      18      19      96      127     123     22      21      16
->> 2013-10-31    9       17      19      74      114     107     23      21      14
->> 2013-10-30    11      16      18      224     191     184     28      23      16
->>
->>
-> --
-> -Joe MacDonald.
-> :wq
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
