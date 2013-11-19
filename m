@@ -1,27 +1,37 @@
-Return-Path: <Xufeng.Zhang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 85CA26D331
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vb0-f43.google.com (mail-vb0-f43.google.com
+	[209.85.212.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BB1506D2F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2013 07:01:39 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rAJ71eBR003646
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Nov 2013 23:01:40 -0800 (PST)
-Received: from [128.224.163.210] (128.224.163.210) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Mon, 18 Nov 2013 23:01:39 -0800
-Message-ID: <528B0D8A.2090101@windriver.com>
-Date: Tue, 19 Nov 2013 15:04:42 +0800
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5 ThunderBrowse/3.82
+	Tue, 19 Nov 2013 08:47:54 +0000 (UTC)
+Received: by mail-vb0-f43.google.com with SMTP id q12so1920911vbe.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Nov 2013 00:47:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=6Y5T27LZ8A9R9rU2OodyDixtfvCiBmry95HCVKavevw=;
+	b=tI7yetnWKKiijLmTKltn1ndJIADFxGQUbMKXbHR0w8ThW2sFUHBhVxIG/1mqkbzW3t
+	BBeiA9ZYZOIJozoxT5KbgxTJeE4tu+XjnVfm+Qu2ORxIM67BixuMuhED2jTc9CxELZtK
+	/BJZ8RidpOr1hqCV0XLCRgxnw+gG8wVqaWgVg3NKtGLBn+ums7rK/lwzCk+S8E5UVnQA
+	3axJGjLc8tihtjo3324syLEeyPSjC89nD81IgnB2SGZBqlmQbwxVUVDS4TLU8YRNL1uH
+	HQYEZ/aLNXiEdnsF/MG2NjuC9MxAxpYi1VD5jjLzeirtenyDNYzMdIszoVJDemnTqwTq
+	3sQA==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Joe MacDonald
-	<joe@deserted.net>
-References: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
-In-Reply-To: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
-Subject: Re: [PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list
+X-Received: by 10.52.165.131 with SMTP id yy3mr683220vdb.25.1384850875930;
+	Tue, 19 Nov 2013 00:47:55 -0800 (PST)
+Received: by 10.52.106.202 with HTTP; Tue, 19 Nov 2013 00:47:55 -0800 (PST)
+In-Reply-To: <20131118222319.GK3727@jama>
+References: <1384548309-29331-1-git-send-email-schnitzeltony@googlemail.com>
+	<1384548309-29331-2-git-send-email-schnitzeltony@googlemail.com>
+	<20131118222319.GK3727@jama>
+Date: Tue, 19 Nov 2013 09:47:55 +0100
+Message-ID: <CALbNGRTmJbjEiLdWaC7v71ALUaEBup9-6F9uSU7BDf1kpF8Rgg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/2] mpd: update to 0.18.4 and get sources from musicpd.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,110 +45,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2013 07:01:40 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Nov 2013 08:47:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Joe,
-
-After this fix, we can do nothing to other daemons.
-
-
-Thanks,
-Xufeng
-
-On 11/19/2013 03:02 PM, Xufeng Zhang wrote:
-> commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
-> introduces an regression: ifp->connected list is cleaned up when ripd is
-> restarting, however, for interface addresses which are not specified in
-> ripd configuration file, they are never to be added into ifp->connected
-> again, this will lead to some abnormal behavior for route advertising.
+On Mon, Nov 18, 2013 at 11:23 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Fri, Nov 15, 2013 at 09:45:09PM +0100, Andreas M=C3=BCller wrote:
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>  .../musicpd/{mpd_0.17.1.bb =3D> mpd_0.18.4.bb}                   | 10 +=
+++++-----
+>>  1 file changed, 5 insertions(+), 5 deletions(-)
+>>  rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.17.1.bb =3D> m=
+pd_0.18.4.bb} (89%)
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb b/=
+meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
+>> similarity index 89%
+>> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
+>> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
+>> index 6f2a912..b89eb0e 100644
+>> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.17.1.bb
+>> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
+>> @@ -5,15 +5,15 @@ HOMEPAGE =3D"http://sourceforge.net/projects/musicpd"
+>>
+>>  DEPENDS =3D "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2=
+ ffmpeg curl sqlite bzip2 pulseaudio"
+>>
+>> -PR =3D "r4"
+>> -
+>>  SRC_URI =3D " \
+>> -    ${SOURCEFORGE_MIRROR}/musicpd/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
+>> +    http://www.musicpd.org/download/${PN}/stable/${PN}-0.18.tar.xz \
+>>      file://mpd.conf.in \
+>>  "
+>>
+>> -SRC_URI[md5sum] =3D "da3f3d6617a877192db4c6f53504cd38"
+>> -SRC_URI[sha256sum] =3D "b18cdb1b779ca2ab323e212a0af4a567b7da4881a4e9686=
+8a8979bdfdbe7c2e8"
+>> +SRC_URI[md5sum] =3D "0d881fb32f9d31afcdb0bb13cb78b9ab"
+>> +SRC_URI[sha256sum] =3D "6b171985f192603150c879d105dc4d05d701ac60a2db416=
+30a4dce823e068388"
+>> +
+>> +S =3D "${WORKDIR}/${PN}-0.18"
+>>
 >
-> Instead of cleaning up the ifp->connected list to avoid duplicated
-> connected address being added into this list, we can check this
-> condition during interface address adding process and return early
-> when an identical address has already been added.
+> Can you please review/test
 >
-> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
-> ---
->   .../quagga-Avoid-duplicate-connected-address.patch |   53 ++++++++++++++++++++
->   .../recipes-protocols/quagga/quagga.inc            |    3 +-
->   2 files changed, 55 insertions(+), 1 deletions(-)
->   create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
+> http://patchwork.openembedded.org/patch/56953/
 >
-> diff --git a/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
-> new file mode 100644
-> index 0000000..585dc29
-> --- /dev/null
-> +++ b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
-> @@ -0,0 +1,53 @@
-> +quagga: Avoid duplicate connected address adding to the list
-> +
-> +commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
-> +introduces an regression: ifp->connected list is cleaned up when ripd is
-> +restarting, however, for interface addresses which are not specified in
-> +ripd configuration file, they are never to be added into ifp->connected
-> +again, this will lead to some abnormal behavior for route advertising.
-> +
-> +Instead of cleaning up the ifp->connected list to avoid duplicated
-> +connected address being added into this list, we can check this
-> +condition during interface address adding process and return early
-> +when an identical address has already been added.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hu Yadi<Yadi.hu@windriver.com>
-> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
-> +---
-> +--- a/lib/if.c
-> ++++ b/lib/if.c
-> +@@ -738,6 +738,16 @@
-> +                          struct prefix *destination)
-> + {
-> +   struct connected *ifc;
-> ++  struct listnode *cnode;
-> ++  struct connected *c;
-> ++  int ret = 0;
-> ++
-> ++  for (ALL_LIST_ELEMENTS_RO (ifp->connected, cnode, c))
-> ++    {
-> ++      ret = connected_same_prefix (p, (c->address));
-> ++      if(ret == 1)
-> ++        return NULL;
-> ++    }
-> +
-> +   /* Allocate new connected address. */
-> +   ifc = connected_new ();
-> +--- a/ripd/rip_interface.c
-> ++++ b/ripd/rip_interface.c
-> +@@ -516,13 +516,6 @@
-> + 	  thread_cancel (ri->t_wakeup);
-> + 	  ri->t_wakeup = NULL;
-> + 	}
-> +-
-> +-      for (conn_node = listhead (ifp->connected); conn_node; conn_node = next)
-> +-	{
-> +-	  ifc = listgetdata (conn_node);
-> +-	  next = conn_node->next;
-> +-	  listnode_delete (ifp->connected, ifc);
-> +-	}
-> +     }
-> + }
-> +
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-> index 2106c9b..21c2028 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
-> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> @@ -32,7 +32,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
->              file://watchquagga.init \
->              file://watchquagga.default \
->              file://volatiles.03_quagga \
-> -           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
-> +           file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
-> +           file://quagga-Avoid-duplicate-connected-address.patch"
+> thanks
 >
->   PACKAGECONFIG ??= ""
->   PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
->    
+OK - hope to find time for that next week. Could you take the
+libmpd-patch meanwhile?
 
+Andreas
 
