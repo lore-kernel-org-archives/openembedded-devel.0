@@ -1,36 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id F33526D7BB;
-	Wed, 20 Nov 2013 12:21:22 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id e51so3698018eek.13
-	for <multiple recipients>; Wed, 20 Nov 2013 04:21:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=PB4wgjJ1n2o/XAjv9g8o+M3I9t556O72CEy5jQVaJtU=;
-	b=Y2Z1kQuL77ftnwBTrYD+jf/YCJAPWAwJ/G1JAUeE7maPlPXLvNK3IUPwkX8puQwjkp
-	yu7iGdv7FfF7O1Ac4Pphdbc1dTtCzP1eDNvD5XnOtpeWANpcI7foi3mxAphssazFuRLM
-	x2HDJASYPrknuWAjNYOocSMJBYCvnyoNG/HUKgIsWcIQsrx0UL5YOoIDRvurxMNAbG7k
-	HdMo93FaaV1QE0PDrn4K+7PKYGLh1YWndkZpVxH3ytTmg8dCz4fXlZ4+fvJycaKADEqt
-	zdPzASfyR8DfZneZl6N2SUbbgRpBktr9UT2xqI2Fs1gMlua3GE8DyIahyvjmOK+ja2Ks
-	LAYw==
-X-Received: by 10.14.210.8 with SMTP id t8mr412064eeo.39.1384950083801;
-	Wed, 20 Nov 2013 04:21:23 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id b42sm59277458eem.9.2013.11.20.04.21.22
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Nov 2013 04:21:23 -0800 (PST)
-Date: Wed, 20 Nov 2013 13:21:26 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core@lists.openembedded.org
-Message-ID: <20131120122126.GM3708@jama>
+Return-Path: <ross.burton@intel.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 40AA66D734
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Nov 2013 15:52:39 +0000 (UTC)
+Received: by mail-vc0-f176.google.com with SMTP id lf12so1521779vcb.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Nov 2013 07:52:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=KnN3XoQgPXxbav0JjvyNb9NX6aDJUE49N53Rqbhzx58=;
+	b=hDZFpbxks9e3zTkjrUhZxk1n34NhJqtI/XX6U19Geq4OqX/Ae3DCdi+SWJmIvwC76k
+	awiVdZW03KqVWiS0E6gCXRuQWGlgxLs9vZ5bDf6ouQm5hSRHTCQODUeYd5qYdwnbRmtO
+	XJBrsZbObN5T7m8hvWvm4FxRDsMwmnavwYXLg03Nj9+XIlwcCuhDq68d9zO4Uq02YO+c
+	YTD/ZHXKMLJV5j2V2b4ulesjbN0bAQXdIVEs3R70m390ESJERW8KtccjtMDJx556cJLr
+	wkSy4aqePlTwTUL/c1iauM4bzN8irairy6gSMDVeCbtbA1CTzEUifkto/hUo+WTKhC0t
+	eLgQ==
+X-Gm-Message-State: ALoCoQkYovjBJO3rWnuvu3iZabhWUmvjsiRThabq4WgXaULuJ7OxzsAaPXsrtSzprAzRjk+2n0ta
+X-Received: by 10.220.174.200 with SMTP id u8mr984610vcz.6.1384962760459; Wed,
+	20 Nov 2013 07:52:40 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: State of bitbake world, Failed tasks Wed Nov 20
+Received: by 10.220.71.201 with HTTP; Wed, 20 Nov 2013 07:52:20 -0800 (PST)
+In-Reply-To: <20131120122126.GM3708@jama>
+References: <20131120122126.GM3708@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 20 Nov 2013 15:52:20 +0000
+Message-ID: <CAJTo0LbddOTBfon=xp4WByGCzB9aiNxH+jD2KiGxJcjBfdUAfg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks Wed Nov 20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,98 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2013 12:21:23 -0000
-X-Groupsio-MsgNum: 47207
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="QqzFzR/RUlLahzby"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Nov 2013 15:52:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
---QqzFzR/RUlLahzby
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 20 November 2013 12:21, Martin Jansa <martin.jansa@gmail.com> wrote:
+>     * openembedded-core/meta/recipes-graphics/wayland/weston_1.3.0.bb, do_patch
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+This is a patch in your branch that isn't in oe-core.
 
-=3D=3D Failed tasks Wed Nov 20 12:20:32 UTC 2013 =3D=3D
+>     * openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb, do_fetch
 
-=3D=3D=3D common (13) =3D=3D=3D
-    * meta-browser/recipes-mozilla/mozilla-devscripts/mozilla-devscripts_gi=
-t.bb, do_fetch
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
-b, do_compile
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
-b, do_compile
-    * meta-openembedded/meta-networking/recipes-support/lowpan-tools/lowpan=
--tools_git.bb, do_install
-    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_i=
-nstall
-    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
-ompile
-    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
-    * meta-smartphone/meta-fso/recipes-freesmartphone/cornucopia/fsogsmd_0.=
-12.0.bb, do_compile
-    * openembedded-core/meta/recipes-graphics/wayland/weston_1.3.0.bb, do_p=
-atch
-    * openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-omapfb=
-_git.bb, do_fetch
-    * openembedded-core/meta/recipes-support/ca-certificates/ca-certificate=
-s_20130610.bb, do_fetch
+For anyone who isn't aware the upstream repository was deleted and the
+best available clone (git.debian.org) has just had catastrophic disk
+failure.
 
-=3D=3D=3D common-x86 (5) =3D=3D=3D
-    * meta-browser/recipes-browser/chromium/chromium_29.0.1518.2.bb, do_com=
-pile
-    * meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecbo=
-ot-klibc-image.bb, do_rootfs
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+Ross
 
-=3D=3D=3D qemuarm (1) =3D=3D=3D
-    * meta-qt5/recipes-qt/qt5/qtlocation_git.bb, do_compile
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
-de_2.11.14.bb, do_compile
-
-=3D=3D=3D qemux86_64 (3) =3D=3D=3D
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
-obiledevice_1.1.4.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.2=
-1.1.bb, do_compile
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131119_093807.log/
-|-
-||qemux86       ||20    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131119_200735.log/
-|-
-||qemux86_64    ||21    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131120_065548.log/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---QqzFzR/RUlLahzby
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlKMqUYACgkQN1Ujt2V2gByy4ACggKesJv/n9hH0Wu9c9uZWQYEs
-79UAoJpfCwPEQobhog1kC0Y6dRRE2Dtk
-=ZR09
------END PGP SIGNATURE-----
-
---QqzFzR/RUlLahzby--
