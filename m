@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CDD826D610
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id E9DB46D610
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 16:40:22 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id l9so4034825eaj.14
+	Wed, 20 Nov 2013 16:42:24 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id c50so3590022eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 08:40:24 -0800 (PST)
+	Wed, 20 Nov 2013 08:42:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IRW/AVNFzPR4YYkOchyP9D/xtS0bpDr3bD5LLRDW7gI=;
-	b=Z+Mer4m7fxvw+PbiMRrYWh/oFQUibY0z4qu7yx9txDGkfTTTKJcdIaz4Ijnan+3F85
-	GDh2j2fUCPbefdLcjU6LuACA9oQyeASgcuhmyMuBgujSThz0Ebpx+RzOiqRW3rdcIkXH
-	RXr+fHTOzSNKU5RcfyIy2NgfmYYx46Eq3h74l7rlCSxzWbQ0fK47U/ujcoVl4Jk6gPTf
-	vhoRznEwMLWEebsE4YScupRb+4iKEYxesy1nwVNBFJpGW1z3ttNkughSnkAfb4ZIrRxQ
-	gAfQ/U0VlIsuZ6DRxSSzSFr+PADLpef/4k/XWTNmnz0FmP0MeFfHa9fgBpJor7JTikst
-	RHFw==
-X-Received: by 10.14.212.72 with SMTP id x48mr2195363eeo.0.1384965623960;
-	Wed, 20 Nov 2013 08:40:23 -0800 (PST)
+	bh=x7T7HPV0Wp4UqyV33vHZJluY9PenbcbmWMWvTfcJKoE=;
+	b=XziS5bgB1/yum6OgKnKtE17diLxtRdRcECqLbpUS0JP3639OcCOmew+eO1wom4bsVj
+	LwIh7OScTghoW1ZtLmZywp6sbSmocYQMJkd+JALUIvEhaV5NE4rqAck82Ait++UV1RJp
+	41woJckzRPHYLwSD+lJyNL6W1CwPEpR5fTUdpSVr1iORdh1RrCG1EVPHOaumnmz7nnfI
+	KIems7Nx8wTz1qmZsjGifBpnaobYPM93YPbcYlCwe/Bq9YemeLoQfy0ZwGgKm0IXugK8
+	Cwnx5mG9ZmJP6jodgI6hGGdavpkv71qZwzV1BrYQRCdvdXku8oi6UtnIhz527c5qP9we
+	aASQ==
+X-Received: by 10.15.33.73 with SMTP id b49mr65294eev.68.1384965746188;
+	Wed, 20 Nov 2013 08:42:26 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	v45sm11785971eef.11.2013.11.20.08.40.23
-	for <openembedded-devel@lists.openembedded.org>
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id b42sm61754689eem.9.2013.11.20.08.42.25
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Nov 2013 08:40:23 -0800 (PST)
-Date: Wed, 20 Nov 2013 17:40:26 +0100
+	Wed, 20 Nov 2013 08:42:25 -0800 (PST)
+Date: Wed, 20 Nov 2013 17:42:28 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131120164026.GS3708@jama>
-References: <1384917768-28022-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+Message-ID: <20131120164228.GT3708@jama>
+References: <1384944262-4850-1-git-send-email-zhenhua.luo@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <1384917768-28022-1-git-send-email-daniel.mcdougall@liftoffsoftware.com>
+In-Reply-To: <1384944262-4850-1-git-send-email-zhenhua.luo@freescale.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] gateone: Updated to version 1.2
+Cc: b40527@freescale.com
+Subject: Re: [meta-oe/meta-oe][PATCH 1/2] Fix python-numpy build failure on powerpc architecture.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,268 +47,300 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2013 16:40:24 -0000
-X-Groupsio-MsgNum: 47211
+X-List-Received-Date: Wed, 20 Nov 2013 16:42:25 -0000
+X-Groupsio-MsgNum: 47212
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="QRtLtq+kfJNLc57H"
+	protocol="application/pgp-signature"; boundary="IQvoI1rdlCKiYEYW"
 Content-Disposition: inline
 
---QRtLtq+kfJNLc57H
+--IQvoI1rdlCKiYEYW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 20, 2013 at 03:22:48AM +0000, Dan McDougall wrote:
-> This new version of Gate One uses a new configuration file format which
-> means the old server.conf is gone.  It now stores configuration files in
-> /etc/gateone/conf.d.  The /opt/gateone directory is also gone and
-> instead the package installs like a regular Python module in
-> site-packages.  SSL certificates/keys are stored in /etc/gateone/ssl/.
->=20
-> The new version requires python-tornado 3.1.1 (which was submitted
-> earlier today) and the python-futures package (which was also submitted
-> today).
->=20
-> An 80oe.conf file has been added specific to OpenEmbedded that replaces
-> the old pre-configured server.conf functionality.
->=20
-> The old patch that removes the init script checks has been deprecated by
-> the use of the --skip_init_scripts option which is now being passed to
-> setup.py.
->=20
-> Lastly, Gate One 1.2 is about twice as fast (benchmarked) as Gate One
-> 1.1 on the Beaglebone platform.
->=20
-> Signed-off-by: Dan McDougall <daniel.mcdougall@liftoffsoftware.com>
+On Wed, Nov 20, 2013 at 06:44:21PM +0800, Zhenhua Luo wrote:
+> Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
 > ---
->  ...move-init-check-it-looks-outside-the-sysr.patch | 38 ----------------=
-------
->  .../recipes-connectivity/gateone/gateone/80oe.conf | 23 +++++++++++++
->  .../gateone/gateone/server.conf                    |  5 ---
->  .../recipes-connectivity/gateone/gateone_git.bb    | 32 ++++++++++------=
---
->  .../gateone/gateone/gateone.service                |  2 +-
->  5 files changed, 43 insertions(+), 57 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/gateone/gateone/0001-set=
-up.py-remove-init-check-it-looks-outside-the-sysr.patch
->  create mode 100644 meta-oe/recipes-connectivity/gateone/gateone/80oe.conf
->  delete mode 100644 meta-oe/recipes-connectivity/gateone/gateone/server.c=
-onf
+>  .../python/python-numpy/ppc/config.h               |  21 ++++
+>  .../python/python-numpy/ppc/numpyconfig.h          |  17 +++
+>  .../python/python-numpy/ppc64/_numpyconfig.h       |  30 +++++
+>  .../python/python-numpy/ppc64/config.h             | 139 +++++++++++++++=
+++++++
+>  .../recipes-devtools/python/python-numpy_1.7.0.bb  |   9 ++
 
-2013-11-20 17:39:42
-URL:http://patchwork.openembedded.org/patch/62017/mbox/ [8592] ->
-"pw-am-62017.patch" [1]
-Applying: gateone: Updated to version 1.2
-error:
-meta-oe/recipes-connectivity/gateone/gateone/0001-setup.py-remove-init-chec=
-k-it-looks-outside-the-sysr.patch:
-does not exist in index
-error: patch failed:
-meta-oe/recipes-connectivity/gateone/gateone_git.bb:1
-error: meta-oe/recipes-connectivity/gateone/gateone_git.bb: patch does
-not apply
-error:
-meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/gateone.service:
-does not exist in index
-Patch failed at 0001 gateone: Updated to version 1.2
-The copy of the patch that failed is found in:
-   /OE/meta-openembedded/.git/rebase-apply/patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
+put them into right directories powerpc/powerpc64 and you won't need
+following commit.
 
-
+>  5 files changed, 216 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/ppc/conf=
+ig.h
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/ppc/nump=
+yconfig.h
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/ppc64/_n=
+umpyconfig.h
+>  create mode 100644 meta-oe/recipes-devtools/python/python-numpy/ppc64/co=
+nfig.h
 >=20
-> diff --git a/meta-oe/recipes-connectivity/gateone/gateone/0001-setup.py-r=
-emove-init-check-it-looks-outside-the-sysr.patch b/meta-oe/recipes-connecti=
-vity/gateone/gateone/0001-setup.py-remove-init-check-it-looks-outside-the-s=
-ysr.patch
-> deleted file mode 100644
-> index ef3a95b..0000000
-> --- a/meta-oe/recipes-connectivity/gateone/gateone/0001-setup.py-remove-i=
-nit-check-it-looks-outside-the-sysr.patch
-> +++ /dev/null
-> @@ -1,38 +0,0 @@
-> -From a65ad6683688bb427efefe5e52137928c2736137 Mon Sep 17 00:00:00 2001
-> -From: Koen Kooi <koen@dominion.thruhere.net>
-> -Date: Thu, 4 Apr 2013 13:04:03 +0200
-> -Subject: [PATCH] setup.py: remove init check, it looks outside the sysro=
-ot
-> -
-> -Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ----
-> - setup.py | 14 --------------
-> - 1 file changed, 14 deletions(-)
-> -
-> -diff --git a/setup.py b/setup.py
-> -index 00c8ba1..4568679 100755
-> ---- a/setup.py
-> -+++ b/setup.py
-> -@@ -112,20 +112,6 @@ redhat_script =3D os.path.join(setup_dir, 'scripts/=
-init/gateone-redhat.sh')
-> - gentoo_script =3D os.path.join(setup_dir, 'scripts/init/gateone-gentoo.=
-sh')
-> - temp_script_path =3D os.path.join(setup_dir, 'build/gateone')
-> - temp_confd_path =3D os.path.join(setup_dir, 'build/gateone')
-> --if os.path.exists('/etc/debian_version'):
-> --    shutil.copy(debian_script, temp_script_path)
-> --elif os.path.exists('/etc/redhat-release'):
-> --    shutil.copy(redhat_script, temp_script_path)
-> --elif os.path.exists('/etc/gentoo-release'):
-> --    shutil.copy(gentoo_script, temp_script_path)
-> --    conf_file =3D [('/etc/conf.d', [
-> --        os.path.join(setup_dir, 'scripts/conf/gateone')
-> --    ])]
-> --
-> --if os.path.exists(temp_script_path):
-> --    init_script =3D [('/etc/init.d', [
-> --        temp_script_path
-> --    ])]
-> -=20
-> - # Put it all together
-> - data_files =3D (
-> ---=20
-> -1.8.1.4
-> -
-> diff --git a/meta-oe/recipes-connectivity/gateone/gateone/80oe.conf b/met=
-a-oe/recipes-connectivity/gateone/gateone/80oe.conf
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/ppc/config.h b/=
+meta-oe/recipes-devtools/python/python-numpy/ppc/config.h
 > new file mode 100644
-> index 0000000..cde98bc
+> index 0000000..17ef186
 > --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/gateone/gateone/80oe.conf
-> @@ -0,0 +1,23 @@
-> +// Some custom Gate One settings for OpenEmbedded
-> +{
-> +    "*": {
-> +        "gateone": { // These settings apply to all of Gate One
-> +            "log_file_max_size": 5242880, // 5 megabyte logs for OE by d=
-efault (default would normally be 100Mb)
-> +            "log_file_num_backups": 2, // Default is normally 10
-> +            "origins": ["*"], // Every device has a unique origin
-> +            "logging": "info",
-> +            "pid_file": "/var/run/gateone.pid",
-> +            "session_dir": "/tmp/gateone",
-> +            "user_dir": "/var/lib/gateone/users"
-> +        },
-> +        "terminal": {
-> +            // Disabling session logging for embedded devices is a good =
-idea (limited/slow storage)
-> +            "session_logging": false,
-> +            "syslog_session_logging": false
-> +//             "commands": {
-> +//                 // For some reason this doesn't work (never asks for =
-the password)
-> +//                 "login": "setsid /bin/login" // Normally this would e=
-mulate logging into the host console
-> +//             }
-> +        }
-> +    }
-> +}
-> diff --git a/meta-oe/recipes-connectivity/gateone/gateone/server.conf b/m=
-eta-oe/recipes-connectivity/gateone/gateone/server.conf
-> deleted file mode 100644
-> index 988b0d0..0000000
-> --- a/meta-oe/recipes-connectivity/gateone/gateone/server.conf
-> +++ /dev/null
-> @@ -1,5 +0,0 @@
-> -session_logging =3D False
-> -origins =3D "*"
-> -command =3D "/var/lib/gateone/plugins/ssh/scripts/ssh_connect.py -S '/tm=
-p/gateone/%SESSION%/%SHORT_SOCKET%' --sshfp -a '-oUserKnownHostsFile=3D%USE=
-RDIR%/%USER%/ssh/known_hosts'"
-> -log_file_prefix =3D "/var/log/gateone.log"
-> -
-> diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-o=
-e/recipes-connectivity/gateone/gateone_git.bb
-> index c5586b5..9c41a3b 100644
-> --- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-> +++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
-> @@ -1,40 +1,46 @@
->  DESCRIPTION =3D "HTML5 (plugin-free) web-based terminal emulator and SSH=
- client"
->  LICENSE =3D "AGPLv3"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dee5b168fc7de89a0cadc49e27=
-830aa2c"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D834cbc6995db88433db17cdf8=
-953a428"
-> +HOMEPAGE =3D "http://liftoffsoftware.com/Products/GateOne"
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/ppc/config.h
+> @@ -0,0 +1,21 @@
+> +/* ./src.linux-i686-2.5/numpy/core/include/numpy/config.h */
+> +/* #define SIZEOF_SHORT 2 */
+> +/* #define SIZEOF_INT 4 */
+> +/* #define SIZEOF_LONG 4 */
+> +/* #define SIZEOF_FLOAT 4 */
+> +/* #define SIZEOF_DOUBLE 8 */
+> +#define SIZEOF_LONG_DOUBLE 12
+> +#define SIZEOF_PY_INTPTR_T 4
+> +/* #define SIZEOF_LONG_LONG 8 */
+> +#define SIZEOF_PY_LONG_LONG 8
+> +/* #define CHAR_BIT 8 */
+> +#define MATHLIB m
+> +#define HAVE_FLOAT_FUNCS
+> +#define HAVE_LOG1P
+> +#define HAVE_EXPM1
+> +#define HAVE_INVERSE_HYPERBOLIC
+> +#define HAVE_INVERSE_HYPERBOLIC_FLOAT
+> +#define HAVE_ISNAN
+> +#define HAVE_ISINF
+> +#define HAVE_RINT
+> +
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/ppc/numpyconfig=
+=2Eh b/meta-oe/recipes-devtools/python/python-numpy/ppc/numpyconfig.h
+> new file mode 100644
+> index 0000000..c4bf654
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/ppc/numpyconfig.h
+> @@ -0,0 +1,17 @@
+> +/* cat ./src.linux-i686-2.5/numpy/core/include/numpy/numpyconfig.h */
+> +/*
+> + *  * This file is generated by numpy/core/setup.pyc. DO NOT EDIT=20
+> + *   */
+> +#define NPY_SIZEOF_SHORT 2=20
+> +#define NPY_SIZEOF_INT 4=20
+> +#define NPY_SIZEOF_LONG 4=20
+> +#define NPY_SIZEOF_FLOAT 4=20
+> +#define NPY_SIZEOF_DOUBLE 8=20
+> +#define NPY_SIZEOF_LONGDOUBLE 12=20
+> +#define NPY_SIZEOF_PY_INTPTR_T 4=20
+> +#define NPY_NO_SMP 0
+> +
+> +#define NPY_SIZEOF_LONGLONG 8=20
+> +#define NPY_SIZEOF_PY_LONG_LONG 8=20
+> +/* #define CHAR_BIT 8 */
+> +
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/ppc64/_numpycon=
+fig.h b/meta-oe/recipes-devtools/python/python-numpy/ppc64/_numpyconfig.h
+> new file mode 100644
+> index 0000000..be57ac2
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/ppc64/_numpyconfig.h
+> @@ -0,0 +1,30 @@
+> +#define NPY_HAVE_ENDIAN_H 1
+> +#define NPY_SIZEOF_SHORT SIZEOF_SHORT
+> +#define NPY_SIZEOF_INT SIZEOF_INT
+> +#define NPY_SIZEOF_LONG SIZEOF_LONG
+> +#define NPY_SIZEOF_FLOAT 4
+> +#define NPY_SIZEOF_COMPLEX_FLOAT 8
+> +#define NPY_SIZEOF_DOUBLE 8
+> +#define NPY_SIZEOF_COMPLEX_DOUBLE 16
+> +#define NPY_SIZEOF_LONGDOUBLE 16
+> +#define NPY_SIZEOF_COMPLEX_LONGDOUBLE 32
+> +#define NPY_SIZEOF_PY_INTPTR_T 8
+> +#define NPY_SIZEOF_PY_LONG_LONG 8
+> +#define NPY_SIZEOF_LONGLONG 8
+> +#define NPY_NO_SMP 0
+> +#define NPY_HAVE_DECL_ISNAN
+> +#define NPY_HAVE_DECL_ISINF
+> +#define NPY_HAVE_DECL_ISFINITE
+> +#define NPY_HAVE_DECL_SIGNBIT
+> +#define NPY_USE_C99_COMPLEX 1
+> +#define NPY_HAVE_COMPLEX_DOUBLE 1
+> +#define NPY_HAVE_COMPLEX_FLOAT 1
+> +#define NPY_HAVE_COMPLEX_LONG_DOUBLE 1
+> +#define NPY_USE_C99_FORMATS 1
+> +#define NPY_VISIBILITY_HIDDEN __attribute__((visibility("hidden")))
+> +#define NPY_ABI_VERSION 0x01000009
+> +#define NPY_API_VERSION 0x00000007
+> +
+> +#ifndef __STDC_FORMAT_MACROS
+> +#define __STDC_FORMAT_MACROS 1
+> +#endif
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy/ppc64/config.h =
+b/meta-oe/recipes-devtools/python/python-numpy/ppc64/config.h
+> new file mode 100644
+> index 0000000..c30b868
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-numpy/ppc64/config.h
+> @@ -0,0 +1,139 @@
+> +#define HAVE_ENDIAN_H 1
+> +#define SIZEOF_PY_INTPTR_T 8
+> +#define SIZEOF_PY_LONG_LONG 8
+> +#define MATHLIB m
+> +#define HAVE_SIN 1
+> +#define HAVE_COS 1
+> +#define HAVE_TAN 1
+> +#define HAVE_SINH 1
+> +#define HAVE_COSH 1
+> +#define HAVE_TANH 1
+> +#define HAVE_FABS 1
+> +#define HAVE_FLOOR 1
+> +#define HAVE_CEIL 1
+> +#define HAVE_SQRT 1
+> +#define HAVE_LOG10 1
+> +#define HAVE_LOG 1
+> +#define HAVE_EXP 1
+> +#define HAVE_ASIN 1
+> +#define HAVE_ACOS 1
+> +#define HAVE_ATAN 1
+> +#define HAVE_FMOD 1
+> +#define HAVE_MODF 1
+> +#define HAVE_FREXP 1
+> +#define HAVE_LDEXP 1
+> +#define HAVE_RINT 1
+> +#define HAVE_TRUNC 1
+> +#define HAVE_EXP2 1
+> +#define HAVE_LOG2 1
+> +#define HAVE_ATAN2 1
+> +#define HAVE_POW 1
+> +#define HAVE_NEXTAFTER 1
+> +#define HAVE_SINF 1
+> +#define HAVE_COSF 1
+> +#define HAVE_TANF 1
+> +#define HAVE_SINHF 1
+> +#define HAVE_COSHF 1
+> +#define HAVE_TANHF 1
+> +#define HAVE_FABSF 1
+> +#define HAVE_FLOORF 1
+> +#define HAVE_CEILF 1
+> +#define HAVE_RINTF 1
+> +#define HAVE_TRUNCF 1
+> +#define HAVE_SQRTF 1
+> +#define HAVE_LOG10F 1
+> +#define HAVE_LOGF 1
+> +#define HAVE_LOG1PF 1
+> +#define HAVE_EXPF 1
+> +#define HAVE_EXPM1F 1
+> +#define HAVE_ASINF 1
+> +#define HAVE_ACOSF 1
+> +#define HAVE_ATANF 1
+> +#define HAVE_ASINHF 1
+> +#define HAVE_ACOSHF 1
+> +#define HAVE_ATANHF 1
+> +#define HAVE_HYPOTF 1
+> +#define HAVE_ATAN2F 1
+> +#define HAVE_POWF 1
+> +#define HAVE_FMODF 1
+> +#define HAVE_MODFF 1
+> +#define HAVE_FREXPF 1
+> +#define HAVE_LDEXPF 1
+> +#define HAVE_EXP2F 1
+> +#define HAVE_LOG2F 1
+> +#define HAVE_COPYSIGNF 1
+> +#define HAVE_NEXTAFTERF 1
+> +#define HAVE_SINL 1
+> +#define HAVE_COSL 1
+> +#define HAVE_TANL 1
+> +#define HAVE_SINHL 1
+> +#define HAVE_COSHL 1
+> +#define HAVE_TANHL 1
+> +#define HAVE_FABSL 1
+> +#define HAVE_FLOORL 1
+> +#define HAVE_CEILL 1
+> +#define HAVE_RINTL 1
+> +#define HAVE_TRUNCL 1
+> +#define HAVE_SQRTL 1
+> +#define HAVE_LOG10L 1
+> +#define HAVE_LOGL 1
+> +#define HAVE_LOG1PL 1
+> +#define HAVE_EXPL 1
+> +#define HAVE_EXPM1L 1
+> +#define HAVE_ASINL 1
+> +#define HAVE_ACOSL 1
+> +#define HAVE_ATANL 1
+> +#define HAVE_ASINHL 1
+> +#define HAVE_ACOSHL 1
+> +#define HAVE_ATANHL 1
+> +#define HAVE_HYPOTL 1
+> +#define HAVE_ATAN2L 1
+> +#define HAVE_POWL 1
+> +#define HAVE_FMODL 1
+> +#define HAVE_MODFL 1
+> +#define HAVE_FREXPL 1
+> +#define HAVE_LDEXPL 1
+> +#define HAVE_EXP2L 1
+> +#define HAVE_LOG2L 1
+> +#define HAVE_COPYSIGNL 1
+> +#define HAVE_NEXTAFTERL 1
+> +#define HAVE_DECL_SIGNBIT
+> +#define HAVE_COMPLEX_H 1
+> +#define HAVE_CREAL 1
+> +#define HAVE_CIMAG 1
+> +#define HAVE_CABS 1
+> +#define HAVE_CARG 1
+> +#define HAVE_CEXP 1
+> +#define HAVE_CSQRT 1
+> +#define HAVE_CLOG 1
+> +#define HAVE_CCOS 1
+> +#define HAVE_CSIN 1
+> +#define HAVE_CPOW 1
+> +#define HAVE_CREALF 1
+> +#define HAVE_CIMAGF 1
+> +#define HAVE_CABSF 1
+> +#define HAVE_CARGF 1
+> +#define HAVE_CEXPF 1
+> +#define HAVE_CSQRTF 1
+> +#define HAVE_CLOGF 1
+> +#define HAVE_CCOSF 1
+> +#define HAVE_CSINF 1
+> +#define HAVE_CPOWF 1
+> +#define HAVE_CREALL 1
+> +#define HAVE_CIMAGL 1
+> +#define HAVE_CABSL 1
+> +#define HAVE_CARGL 1
+> +#define HAVE_CEXPL 1
+> +#define HAVE_CSQRTL 1
+> +#define HAVE_CLOGL 1
+> +#define HAVE_CCOSL 1
+> +#define HAVE_CSINL 1
+> +#define HAVE_CPOWL 1
+> +#define HAVE_LDOUBLE_IEEE_QUAD_LE 1
+> +#ifndef __cplusplus
+> +/* #undef inline */
+> +#endif
+> +
+> +#ifndef _NPY_NPY_CONFIG_H_
+> +#error config.h should never be included directly, include npy_config.h =
+instead
+> +#endif
+> diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb b/meta=
+-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> index e6d328f..99662da 100644
+> --- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> +++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
+> @@ -34,6 +34,15 @@ CONFIGFILESURI_x86-64 =3D " \
+>      file://_numpyconfig.h \
+>  "
 > =20
-> -PR =3D "r8"
-> +PR =3D "r1"
+> +CONFIGFILESURI_powerpc =3D " \
+> +    file://config.h \
+> +    file://numpyconfig.h \
+> +"
+> +CONFIGFILESURI_powerpc64 =3D " \
+> +    file://config.h \
+> +    file://_numpyconfig.h \
+> +"
+> +
+>  S =3D "${WORKDIR}/numpy-${PV}"
 > =20
-> -PV =3D "1.1"
-> -SRCREV =3D "ea5db3dcb3bbbe445ae6d1a5611c1f8d547c57b9"
-> +PV =3D "1.2"
-> +SRCREV =3D "1528d324088fc1c180b7fdf50f5b5c1af057eef6"
->  SRC_URI =3D "git://github.com/liftoff/GateOne.git \
->             file://gateone-avahi.service \
-> -           file://server.conf \
-> +           file://80oe.conf \
->            "
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
-> -inherit distutils allarch
-> +inherit distutils
-> +export prefix =3D "${localstatedir}"
-> =20
-> -export prefix =3D "${localstatedir}/lib"
-> +DISTUTILS_INSTALL_ARGS =3D "--root=3D${D} \
-> +    --prefix=3D${prefix} \
-> +    --install-lib=3D${PYTHON_SITEPACKAGES_DIR} \
-> +    --install-data=3D${PYTHON_SITEPACKAGES_DIR} \
-> +    --install-scripts=3D${bindir} \
-> +    --skip_init_scripts"
-> =20
->  do_install_append() {
-> -	install -d ${D}${localstatedir}/log/${BPN}
-> -
->  	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
->  	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avah=
-i/services/
-> =20
-> -	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
-> +	install -m 0755 -d ${D}${sysconfdir}/gateone/conf.d/
-> +	install -m 0644 ${WORKDIR}/80oe.conf ${D}${sysconfdir}/gateone/conf.d/8=
-0oe.conf
->  }
-> =20
-> -FILES_${PN} =3D "${localstatedir}/lib ${localstatedir}/log ${base_libdir=
-} ${sysconfdir} ${libdir}/python*"
-> -RDEPENDS_${PN} =3D "file \
-> -                  mime-support \
-> +FILES_${PN} =3D "${localstatedir}/lib ${bindir} ${base_libdir} ${sysconf=
-dir} ${libdir}/python*"
-> +RDEPENDS_${PN} =3D "mime-support \
->                    openssh-ssh \
->                    python-compression \
->                    python-crypt \
->                    python-datetime \
->                    python-email \
->                    python-fcntl \
-> +                  python-futures \
->                    python-html \
->                    python-imaging \
->                    python-io \
-> diff --git a/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/ga=
-teone.service b/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/g=
-ateone.service
-> index 7ff6002..7b14d3e 100644
-> --- a/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/gateone.s=
-ervice
-> +++ b/meta-systemd/meta-oe/recipes-connectivity/gateone/gateone/gateone.s=
-ervice
-> @@ -4,7 +4,7 @@ ConditionPathExists=3D|/var/lib/gateone
-> =20
->  [Service]
->  WorkingDirectory=3D/var/lib/gateone
-> -ExecStart=3D/usr/bin/python gateone.py
-> +ExecStart=3D/usr/bin/python /usr/bin/gateone
-> =20
->  [Install]
->  WantedBy=3Dmulti-user.target
+>  inherit distutils
 > --=20
-> 1.8.1.2
+> 1.8.3.1
+>=20
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -318,16 +350,16 @@ ervice
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---QRtLtq+kfJNLc57H
+--IQvoI1rdlCKiYEYW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlKM5foACgkQN1Ujt2V2gByuygCfaSmd08d6yk0EvKMn+HRRgXa1
-8JIAoLVxpg1TcIYU2dpuTTIAvVl/0mPE
-=67tJ
+iEYEARECAAYFAlKM5nQACgkQN1Ujt2V2gByt3ACgtAJiF3CnngdSUVB0SFPL1Wcg
+W9kAn13uxwIwjimSmMBKK11Hcxu+zUvr
+=xog5
 -----END PGP SIGNATURE-----
 
---QRtLtq+kfJNLc57H--
+--IQvoI1rdlCKiYEYW--
