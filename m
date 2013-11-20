@@ -1,48 +1,27 @@
-Return-Path: <zhenhua.luo@freescale.com>
-Received: from db9outboundpool.messaging.microsoft.com
-	(mail-db9lp0253.outbound.messaging.microsoft.com [213.199.154.253])
-	by mail.openembedded.org (Postfix) with ESMTP id 389EB6CC86
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id DA4FA6CC86
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 10:44:32 +0000 (UTC)
-Received: from mail16-db9-R.bigfish.com (10.174.16.254) by
-	DB9EHSOBE012.bigfish.com (10.174.14.75) with Microsoft SMTP Server id
-	14.1.225.22; Wed, 20 Nov 2013 10:44:33 +0000
-Received: from mail16-db9 (localhost [127.0.0.1])	by mail16-db9-R.bigfish.com
-	(Postfix) with ESMTP id 2FFC71A01EC	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 10:44:33 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h1155h)
-Received: from mail16-db9 (localhost.localdomain [127.0.0.1]) by mail16-db9
-	(MessageSwitch) id 1384944271593759_12692;
-	Wed, 20 Nov 2013 10:44:31 +0000 (UTC)
-Received: from DB9EHSMHS011.bigfish.com (unknown [10.174.16.232])	by
-	mail16-db9.bigfish.com (Postfix) with ESMTP id 831072600AA	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 10:44:31 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB9EHSMHS011.bigfish.com
-	(10.174.14.21) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Wed, 20 Nov 2013 10:44:31 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Wed, 20 Nov 2013 10:44:29 +0000
-Received: from localhost.localdomain (B19537-03.ap.freescale.net
-	[10.192.208.102])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id rAKAiODs020425;	Wed, 20 Nov 2013 03:44:27 -0700
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Nov 2013 18:44:22 +0800
-Message-ID: <1384944262-4850-2-git-send-email-zhenhua.luo@freescale.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1384944262-4850-1-git-send-email-zhenhua.luo@freescale.com>
-References: <1384944262-4850-1-git-send-email-zhenhua.luo@freescale.com>
+	Wed, 20 Nov 2013 10:55:35 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 20 Nov 2013 02:55:37 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,736,1378882800"; d="scan'208";a="436575710"
+Received: from unknown (HELO helios.localnet) ([10.252.121.237])
+	by fmsmga002.fm.intel.com with ESMTP; 20 Nov 2013 02:55:23 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 20 Nov 2013 10:55:22 +0000
+Message-ID: <12826321.nELrz9JS6g@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <20131120104331.GK3708@jama>
+References: <1384813274-7231-1-git-send-email-Martin.Jansa@gmail.com>
+	<1404521.4vplx1e1VT@helios> <20131120104331.GK3708@jama>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: b40527@freescale.com
-Subject: [meta-oe/meta-oe][PATCH 2/2] python-numpy: fix incorrect path of config files
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 6/6] usb-modeswitch-data: Drop allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,90 +35,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2013 10:44:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 20 Nov 2013 10:55:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Fix following two build issues
-1. WARNING: Failed to fetch URL file://config.h, attempting MIRRORS if available
-   ERROR: Fetcher failure: Unable to find file file://config.h anywhere. The paths that were searched were:
-   ... [snip] ...
-   ERROR: Function failed: Fetcher failure for URL: 'file://config.h'. Unable to fetch URL from any source.
-2. cp: cannot stat `.../python-numpy/1.7.0-r0/*config.h': No such file or directory
+On Wednesday 20 November 2013 11:43:31 Martin Jansa wrote:
+> On Wed, Nov 20, 2013 at 10:29:46AM +0000, Paul Eggleton wrote:
+> > Hi Martin,
+> > 
+> > On Monday 18 November 2013 23:21:14 Martin Jansa wrote:
+> > > * has runtime dependency on TUNE_PKGARCH usb-modeswitch
+> > > 
+> > >   Hash for dependent task usb-modeswitch_1.2.5.bb.do_packagedata changed
+> > > 
+> > > from 5709ee415d286847b58e7b438b5b9f75 to
+> > > fbef5eee3bb2bacb805a0bead2095b52
+> > > 
+> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > ---
+> > > 
+> > >  meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
+> > >  | 2
+> > > 
+> > > -- 1 file changed, 2 deletions(-)
+> > > 
+> > > diff --git
+> > > a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
+> > > b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
+> > > index fc0fbfb..8b71618 100644
+> > > ---
+> > > a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.b
+> > > b +++
+> > > b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
+> > > @@
+> > > -2,8 +2,6 @@ DESCRIPTION = "Data files for usbmodeswitch"
+> > > 
+> > >  LICENSE = "GPLv2"
+> > >  LIC_FILES_CHKSUM =
+> > >  "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+> > > 
+> > > -inherit allarch
+> > > -
+> > > 
+> > >  SRC_URI =
+> > > 
+> > > "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-${PV}.tar
+> > > .bz
+> > > 2" SRC_URI[md5sum] = "91feff51deba6e48e78506b8f4db2274"
+> > > 
+> > >  SRC_URI[sha256sum] =
+> > > 
+> > > "a3114e2c1f38eed3ad0067df30e53a96313908a9539a8ea5d94a4d35651699eb"
+> > 
+> > To be honest I view these in the same way as the corresponding OE-Core
+> > patches - if the contents of the output package or its metadata does not
+> > change dependent on the other package, then we should use other means to
+> > fix this issue rather than the huge hammer of removing allarch.
+> 
+> OK, I'll send patch for layer.conf, but the point is that incorrectly
+> using allarch is worse than not using it at all.
+> 
+> Most allarch recipes are very quick to build and their signatures stay
+> valid for long time even after they are changed to TUNE_PKGARCH, but with
+> issue like this and allarch they are rebuilt after each MACHINE switch.
+> 
+> So on concrete example of SHR distribution with 3 supported
+> TUNE_PKGARCHs in binary feed, it's faster to build
+> 3x TUNE_PKGARCH usb-modeswitch-data and keep the same .ipk for some time
+> than build it 3 times as allarch every single day in daily build which
+> populates binary feed.
 
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
----
- .../recipes-devtools/python/python-numpy_1.7.0.bb  | 34 +++++++++++-----------
- 1 file changed, 17 insertions(+), 17 deletions(-)
+Yes I understand the problem, but there's a question of fixing it the right 
+way, particularly as this is by no means a new problem. I don't think 
+selective use of allarch is a good path for us to be going down, because if 
+nothing else it makes it harder for users to know when to apply it. (If we 
+need to have some kind of QA check to report when allarch recipes depend upon 
+non-allarch recipes with a coherent message telling the user what they need to 
+do, then let's add that.)
 
-diff --git a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-index 99662da..a61827c 100644
---- a/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-numpy_1.7.0.bb
-@@ -10,37 +10,37 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
- CONFIGFILESURI ?= ""
- 
- CONFIGFILESURI_aarch64 = " \
--    file://config.h \
--    file://_numpyconfig.h \
-+    file://aarch64/config.h \
-+    file://aarch64/_numpyconfig.h \
- "
- CONFIGFILESURI_arm = " \
--    file://config.h \
--    file://numpyconfig.h \
-+    file://arm/config.h \
-+    file://arm/numpyconfig.h \
- "
- CONFIGFILESURI_armeb = " \
--    file://config.h \
--    file://numpyconfig.h \
-+    file://armeb/config.h \
-+    file://armeb/numpyconfig.h \
- "
- CONFIGFILESURI_mipsel = " \
--    file://config.h \
--    file://numpyconfig.h \
-+    file://mipsel/config.h \
-+    file://mipsel/numpyconfig.h \
- "
- CONFIGFILESURI_i586 = " \
--    file://config.h \
--    file://numpyconfig.h \
-+    file://i586/config.h \
-+    file://i586/numpyconfig.h \
- "
- CONFIGFILESURI_x86-64 = " \
--    file://config.h \
--    file://_numpyconfig.h \
-+    file://x86-64/config.h \
-+    file://x86-64/_numpyconfig.h \
- "
- 
- CONFIGFILESURI_powerpc = " \
--    file://config.h \
--    file://numpyconfig.h \
-+    file://ppc/config.h \
-+    file://ppc/numpyconfig.h \
- "
- CONFIGFILESURI_powerpc64 = " \
--    file://config.h \
--    file://_numpyconfig.h \
-+    file://ppc64/config.h \
-+    file://ppc64/_numpyconfig.h \
- "
- 
- S = "${WORKDIR}/numpy-${PV}"
-@@ -53,7 +53,7 @@ do_compile_prepend() {
-     BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
-     ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
-     true
--    cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
-+    cp ${WORKDIR}/*/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
- }
- 
- FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
+Cheers,
+Paul
+
 -- 
-1.8.3.1
 
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
