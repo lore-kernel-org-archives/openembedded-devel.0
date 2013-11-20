@@ -1,43 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f176.google.com (mail-ea0-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D9566D915
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 11:58:35 +0000 (UTC)
-Received: by mail-ea0-f176.google.com with SMTP id h14so1593668eaj.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2013 03:58:37 -0800 (PST)
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id F33526D7BB;
+	Wed, 20 Nov 2013 12:21:22 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e51so3698018eek.13
+	for <multiple recipients>; Wed, 20 Nov 2013 04:21:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=XbIptOi3d5Vtah44CjTxnhDMLBZPEGXxSn6Y/UhIyXg=;
-	b=KaZNlDtSwnHl1N1IjaK94Cp6NLRu1lbMQsM66Fib+Eigm+6wGUo/NL1jZPwfaO397t
-	W34aoKZrdTF9riyhhWWEkcwyyT5A+TsIp/FEI+85K5jpQlygBImHVVSMZpC/RHaIAHYr
-	NROeEHsZKPBtwfwOK0XQgRbPl9hj/p0GqBWsdzTmyV9aG5jD7ObGArfUvbY1Nu8Xk+h0
-	SKCVJ/b3ZNLNbsxKy2LNcuuIcIKpYYwWu4Nb2ZV4IcHb6h6vVGZo/8azu3VZrzVIO9PQ
-	2cGIEgLucgJ6mIzoninW0OXoKlDnhRvSwBFjU5AhAzvxkyVnr1zbWxw3egDg3UOdXVaK
-	pdGg==
-X-Received: by 10.15.108.73 with SMTP id cc49mr232336eeb.93.1384948717332;
-	Wed, 20 Nov 2013 03:58:37 -0800 (PST)
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=PB4wgjJ1n2o/XAjv9g8o+M3I9t556O72CEy5jQVaJtU=;
+	b=Y2Z1kQuL77ftnwBTrYD+jf/YCJAPWAwJ/G1JAUeE7maPlPXLvNK3IUPwkX8puQwjkp
+	yu7iGdv7FfF7O1Ac4Pphdbc1dTtCzP1eDNvD5XnOtpeWANpcI7foi3mxAphssazFuRLM
+	x2HDJASYPrknuWAjNYOocSMJBYCvnyoNG/HUKgIsWcIQsrx0UL5YOoIDRvurxMNAbG7k
+	HdMo93FaaV1QE0PDrn4K+7PKYGLh1YWndkZpVxH3ytTmg8dCz4fXlZ4+fvJycaKADEqt
+	zdPzASfyR8DfZneZl6N2SUbbgRpBktr9UT2xqI2Fs1gMlua3GE8DyIahyvjmOK+ja2Ks
+	LAYw==
+X-Received: by 10.14.210.8 with SMTP id t8mr412064eeo.39.1384950083801;
+	Wed, 20 Nov 2013 04:21:23 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id h48sm2881586eev.3.2013.11.20.03.58.36
+	by mx.google.com with ESMTPSA id b42sm59277458eem.9.2013.11.20.04.21.22
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Nov 2013 03:58:36 -0800 (PST)
-Date: Wed, 20 Nov 2013 12:58:39 +0100
+	Wed, 20 Nov 2013 04:21:23 -0800 (PST)
+Date: Wed, 20 Nov 2013 13:21:26 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20131120115839.GL3708@jama>
-References: <1384813274-7231-1-git-send-email-Martin.Jansa@gmail.com>
-	<1404521.4vplx1e1VT@helios> <20131120104331.GK3708@jama>
-	<12826321.nELrz9JS6g@helios>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core@lists.openembedded.org
+Message-ID: <20131120122126.GM3708@jama>
 MIME-Version: 1.0
-In-Reply-To: <12826321.nELrz9JS6g@helios>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 6/6] usb-modeswitch-data: Drop allarch
+Subject: State of bitbake world, Failed tasks Wed Nov 20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,172 +44,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2013 11:58:36 -0000
-X-Groupsio-MsgNum: 47206
+X-List-Received-Date: Wed, 20 Nov 2013 12:21:23 -0000
+X-Groupsio-MsgNum: 47207
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hdW7zL/qDS6RXdAL"
+	protocol="application/pgp-signature"; boundary="QqzFzR/RUlLahzby"
 Content-Disposition: inline
 
---hdW7zL/qDS6RXdAL
+--QqzFzR/RUlLahzby
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 20, 2013 at 10:55:22AM +0000, Paul Eggleton wrote:
-> On Wednesday 20 November 2013 11:43:31 Martin Jansa wrote:
-> > On Wed, Nov 20, 2013 at 10:29:46AM +0000, Paul Eggleton wrote:
-> > > Hi Martin,
-> > >=20
-> > > On Monday 18 November 2013 23:21:14 Martin Jansa wrote:
-> > > > * has runtime dependency on TUNE_PKGARCH usb-modeswitch
-> > > >=20
-> > > >   Hash for dependent task usb-modeswitch_1.2.5.bb.do_packagedata ch=
-anged
-> > > >=20
-> > > > from 5709ee415d286847b58e7b438b5b9f75 to
-> > > > fbef5eee3bb2bacb805a0bead2095b52
-> > > >=20
-> > > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > > ---
-> > > >=20
-> > > >  meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2013080=
-7.bb
-> > > >  | 2
-> > > >=20
-> > > > -- 1 file changed, 2 deletions(-)
-> > > >=20
-> > > > diff --git
-> > > > a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201308=
-07.bb
-> > > > b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201308=
-07.bb
-> > > > index fc0fbfb..8b71618 100644
-> > > > ---
-> > > > a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201308=
-07.b
-> > > > b +++
-> > > > b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201308=
-07.bb
-> > > > @@
-> > > > -2,8 +2,6 @@ DESCRIPTION =3D "Data files for usbmodeswitch"
-> > > >=20
-> > > >  LICENSE =3D "GPLv2"
-> > > >  LIC_FILES_CHKSUM =3D
-> > > >  "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae19f"
-> > > >=20
-> > > > -inherit allarch
-> > > > -
-> > > >=20
-> > > >  SRC_URI =3D
-> > > >=20
-> > > > "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-${PV=
-}.tar
-> > > > .bz
-> > > > 2" SRC_URI[md5sum] =3D "91feff51deba6e48e78506b8f4db2274"
-> > > >=20
-> > > >  SRC_URI[sha256sum] =3D
-> > > >=20
-> > > > "a3114e2c1f38eed3ad0067df30e53a96313908a9539a8ea5d94a4d35651699eb"
-> > >=20
-> > > To be honest I view these in the same way as the corresponding OE-Core
-> > > patches - if the contents of the output package or its metadata does =
-not
-> > > change dependent on the other package, then we should use other means=
- to
-> > > fix this issue rather than the huge hammer of removing allarch.
-> >=20
-> > OK, I'll send patch for layer.conf, but the point is that incorrectly
-> > using allarch is worse than not using it at all.
-> >=20
-> > Most allarch recipes are very quick to build and their signatures stay
-> > valid for long time even after they are changed to TUNE_PKGARCH, but wi=
-th
-> > issue like this and allarch they are rebuilt after each MACHINE switch.
-> >=20
-> > So on concrete example of SHR distribution with 3 supported
-> > TUNE_PKGARCHs in binary feed, it's faster to build
-> > 3x TUNE_PKGARCH usb-modeswitch-data and keep the same .ipk for some time
-> > than build it 3 times as allarch every single day in daily build which
-> > populates binary feed.
->=20
-> Yes I understand the problem, but there's a question of fixing it the rig=
-ht=20
-> way, particularly as this is by no means a new problem. I don't think=20
-> selective use of allarch is a good path for us to be going down, because =
-if=20
-> nothing else it makes it harder for users to know when to apply it. (If w=
-e=20
-> need to have some kind of QA check to report when allarch recipes depend =
-upon=20
-> non-allarch recipes with a coherent message telling the user what they ne=
-ed to=20
-> do, then let's add that.)
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-FWIW I've added new job to my jenkins world builds with will compare
-signatures for different MACHINEs and report when native or allarch
-signatures are different + different TUNE_PKGARCH signatures for
-identical machines with just different name.
+=3D=3D Failed tasks Wed Nov 20 12:20:32 UTC 2013 =3D=3D
 
-It looks like this:
-openembedded-core/scripts/sstate-diff-machines.sh --machines=3D"qemuarm qem=
-ux86 qemux86copy qemux86-64" --targets=3Dworld --tmpdir=3Dtmp-eglibc/;
+=3D=3D=3D common (13) =3D=3D=3D
+    * meta-browser/recipes-mozilla/mozilla-devscripts/mozilla-devscripts_gi=
+t.bb, do_fetch
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
+b, do_compile
+    * meta-openembedded/meta-networking/recipes-support/lowpan-tools/lowpan=
+-tools_git.bb, do_install
+    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_i=
+nstall
+    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
+compile
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
+ompile
+    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
+    * meta-smartphone/meta-fso/recipes-freesmartphone/cornucopia/fsogsmd_0.=
+12.0.bb, do_compile
+    * openembedded-core/meta/recipes-graphics/wayland/weston_1.3.0.bb, do_p=
+atch
+    * openembedded-core/meta/recipes-graphics/xorg-driver/xf86-video-omapfb=
+_git.bb, do_fetch
+    * openembedded-core/meta/recipes-support/ca-certificates/ca-certificate=
+s_20130610.bb, do_fetch
 
-function compareSignatures() {
-  MACHINE1=3D$1
-  MACHINE2=3D$2
-  PATTERN=3D$3
-  PRE_PATTERN=3D""
-  [ -n "${PATTERN}" ] || PRE_PATTERN=3D"-v"
-  [ -n "${PATTERN}" ] || PATTERN=3D"MACHINE"
-  for TASK in do_configure.sigdata do_populate_sysroot.sigdata do_package_w=
-rite_ipk.sigdata; do
-    printf "\n\n =3D=3D=3D Comparing signatures for task ${TASK} =3D=3D=3D\=
-n"
-    diff tmp-eglibc/sstate-diff/*/${MACHINE1}/list.M tmp-eglibc/sstate-diff=
-/*/${MACHINE2}/list.M | grep ${PRE_PATTERN} "${PATTERN}" | grep ${TASK} > l=
-ist.${TASK}
-    for i in `cat list.${TASK} | sed 's#[^/]*/\([^/]*\)/.*#\1#g' | sort -u =
-| xargs`; do
-      [ -e BUILD/sstate-diff/*/${MACHINE1}/*/$i/*${TASK}* ] || echo "Task $=
-{i}.${TASK} doesn't exist in ${MACHINE1}" >&2
-      [ -e BUILD/sstate-diff/*/${MACHINE1}/*/$i/*${TASK}* ] || continue
-      [ -e BUILD/sstate-diff/*/${MACHINE2}/*/$i/*${TASK}* ] || echo "Task $=
-{i}.${TASK} doesn't exist in ${MACHINE2}" >&2
-      [ -e BUILD/sstate-diff/*/${MACHINE2}/*/$i/*${TASK}* ] || continue
-      printf "\n =3D=3D Comparing signatures for ${i}.${TASK} =3D=3D\n"
+=3D=3D=3D common-x86 (5) =3D=3D=3D
+    * meta-browser/recipes-browser/chromium/chromium_29.0.1518.2.bb, do_com=
+pile
+    * meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecbo=
+ot-klibc-image.bb, do_rootfs
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
 
-      printf "# (R)DEPENDS on \nPACKAGE_ARCH_pn-$i =3D \"\${MACHINE_ARCH}\"=
-\n";
-      bitbake-diffsigs tmp-eglibc/sstate-diff/*/${MACHINE1}/*/$i/*${TASK}* =
-tmp-eglibc/sstate-diff/*/${MACHINE2}/*/$i/*${TASK}*;
-      echo
-    done | tee list.${TASK}.inc
-  done
-}
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * meta-qt5/recipes-qt/qt5/qtlocation_git.bb, do_compile
 
-# TUNE_PKGARCH should be the same between qemux86 and qemux86copy
-compareSignatures qemux86 qemux86copy
+=3D=3D=3D qemux86 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
+de_2.11.14.bb, do_compile
 
-# native and allarch should be the same for all MACHINES
-compareSignatures qemux86 qemuarm "\(^< all\)\|\(^< x86_64-linux\)"
+=3D=3D=3D qemux86_64 (3) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.2=
+1.1.bb, do_compile
 
-It needs first patch from jansa/tune2-test branch for qemux86copy MACHINE:
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Djansa/tune2-=
-test
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20131119_093807.log/
+|-
+||qemux86       ||20    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20131119_200735.log/
+|-
+||qemux86_64    ||21    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20131120_065548.log/
+|}
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hdW7zL/qDS6RXdAL
+--QqzFzR/RUlLahzby
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlKMo+8ACgkQN1Ujt2V2gByHIQCgh6laiKpTZHfhNNVm6+S8RJ7t
-AQwAn0k16LLwo4xjk2JPVYhTdh6SVIaN
-=BTj3
+iEYEARECAAYFAlKMqUYACgkQN1Ujt2V2gByy4ACggKesJv/n9hH0Wu9c9uZWQYEs
+79UAoJpfCwPEQobhog1kC0Y6dRRE2Dtk
+=ZR09
 -----END PGP SIGNATURE-----
 
---hdW7zL/qDS6RXdAL--
+--QqzFzR/RUlLahzby--
