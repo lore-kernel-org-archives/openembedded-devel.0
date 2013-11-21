@@ -1,34 +1,43 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 61C006D700
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-bk0-f49.google.com (mail-bk0-f49.google.com
+	[209.85.214.49])
+	by mail.openembedded.org (Postfix) with ESMTP id AF4516D76F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 08:34:21 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id p61so5463810wes.8
+	Thu, 21 Nov 2013 08:40:53 +0000 (UTC)
+Received: by mail-bk0-f49.google.com with SMTP id my13so179631bkb.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 00:34:20 -0800 (PST)
+	Thu, 21 Nov 2013 00:40:52 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=G24f/2wq3aJEzduXFlSkELlqxhuYCdEJTx1TQHgFWKw=;
-	b=Pf/sdRDTQlCue/D9ep7spx0wHwLU+hb9vJbHo2X3U/I0qQxld4gs6l+OXIcbcHoaEW
-	SSVU4XjbzcAXoTE8SSWJVzkqQPO8mbEoiDFuPsD/Qnznfr4bPt5rta6n308sYzO4PxfX
-	+OyfPlVDyqmmPLliT4GxS/sd96Nb/buk3t7+yWA/Qy/gjiXDZ45zCqRQrF6Dei+1aSsJ
-	AwfhTEe776x0prs9tU1U2E4oYMEJqdoqJ4es+86TO/uo4JNkTNSc65L/bYV51SeDovPk
-	NKQ+srjnMI127wzlaCXp6rYGFbnhNZwjDNfZIohOiMO6W+uxITSdYn/wfTPDZWEE7k/C
-	TJ4A==
-X-Gm-Message-State: ALoCoQkQiwc4okKAAYC5axlIdaqarONLK4ex642dx2EdP9XgmdULUl3jzPUclfp78YHr95UWGToI
-X-Received: by 10.180.219.33 with SMTP id pl1mr4786731wic.49.1385022859960;
-	Thu, 21 Nov 2013 00:34:19 -0800 (PST)
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=z6h/YnwrtiXqBF0sJzFxDeKceYU7M1z8pNelbKWOxpA=;
+	b=Ygi2IrZzxcTNV3yGMtKpm1rwcI6vscijjoAhDzQVzARhCuFt+m4r4jdJsFKCKlpwlr
+	Sdij82ETU2UFqdNFizoNygSAYv3lhlQ404W63e4wlUlrv5gQ10j+I+9pogKTyTAsae54
+	XyypXYImsf5J0CQSrcBxsjoWod3zKoFOSHVveHMl3Z+nSKKE0dJIs3ZZWKNsDSqs+2BL
+	pxe0qNaRaofan/kS/uh+ahLDJD74GyCrzDEym+5OWJK3JmsRlnnt28L4wh1OgAzRLNWQ
+	rOEahS3VYm5pKzfDzsT1b8W/FRqmlKIeUmQZNEiBu4+krKex8cNE6XEZmuOE3snkZWgA
+	S0YQ==
+X-Gm-Message-State: ALoCoQnUo3ZdgMCVejkvHngji6TKo97ub9XEezn5v91P5FGwlN0qSQlcDBsgyrEfn4EMnS8Aq/u9
+X-Received: by 10.205.71.193 with SMTP id yl1mr437684bkb.45.1385023252440;
+	Thu, 21 Nov 2013 00:40:52 -0800 (PST)
+Received: from iMac.local ([2001:610:612:0:5883:6093:ff12:ee4b])
+	by mx.google.com with ESMTPSA id m1sm22100751bkr.10.2013.11.21.00.40.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 21 Nov 2013 00:40:50 -0800 (PST)
+Message-ID: <528DC845.9040408@dominion.thruhere.net>
+Date: Thu, 21 Nov 2013 09:45:57 +0100
+From: Koen Kooi <koen@dominion.thruhere.net>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
 MIME-Version: 1.0
-Received: by 10.180.211.172 with HTTP; Thu, 21 Nov 2013 00:33:59 -0800 (PST)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Thu, 21 Nov 2013 09:33:59 +0100
-Message-ID: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: making qt5 package machine specific
+To: openembedded-devel@lists.openembedded.org
+References: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
+In-Reply-To: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
+X-Enigmail-Version: 1.6
+Subject: Re: making qt5 package machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,34 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2013 08:34:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Nov 2013 08:40:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-we are building a product/distro with qt5 with support for various SoC. the
-way qt5 recipes are designed, it kind of forces the resulting packages to
-be  <machine> specific, not <arch> specific.
+Nicolas Dechesne schreef op 21-11-13 09:33:
+> hi,
+> 
+> we are building a product/distro with qt5 with support for various SoC.
+> the way qt5 recipes are designed, it kind of forces the resulting
+> packages to be  <machine> specific, not <arch> specific.
+> 
+> first each <machine> has a different provider for GL/GLES and it impacts 
+> the RDEPENDS, on top of that we have machine specific patches in Qt5 in 
+> each of our BSP layer, whether we like it or not, that's a reality that
+> we cannot have the very same Qt5 config + source code for all platforms.
+> 
+> so we end up with many  <qt pkgs>-<arch> which are <machine> specific,
+> not <arch>, and it messes up badly with sstate for example, especially
+> when cleaning up the sstate (e.g. using sstate-cache-management -d).
+> 
+> so i have a couple of questions:
+> 
+> - are we doing something really wrong here? or are we getting issues
+> that anyone would get when trying to have a OE based product with Qt5
+> and multiple machines from the same <arch>?
 
-first each <machine> has a different provider for GL/GLES and it impacts
-the RDEPENDS, on top of that we have machine specific patches in Qt5 in
-each of our BSP layer, whether we like it or not, that's a reality that we
-cannot have the very same Qt5 config + source code for all platforms.
+You are getting issues that anyone with machine specific libs (e.g. GLES,
+clutter, wayland) gets in a multimachine scenario :(
 
-so we end up with many  <qt pkgs>-<arch> which are <machine> specific, not
-<arch>, and it messes up badly with sstate for example, especially when
-cleaning up the sstate (e.g. using sstate-cache-management -d).
+> - assuming this is a typical use case... i wish there was an easy 
+> mechanism to 'mark' all Qt5 packages as PACKAGE_ARCH =
+> "${MACHINE_ARCH}", without having to .bbappend every single recipe. It is
+> indeed quite common to have a .bbappend for qtbase, but not for the other
+> packages...
 
-so i have a couple of questions:
+No idea on that, sorry.
 
- - are we doing something really wrong here? or are we getting issues that
-anyone would get when trying to have a OE based product with Qt5 and
-multiple machines from the same <arch>?
+regards,
 
- - assuming this is a typical use case... i wish there was an easy
-mechanism to 'mark' all Qt5 packages as PACKAGE_ARCH = "${MACHINE_ARCH}",
-without having to .bbappend every single recipe. It is indeed quite common
-to have a .bbappend for qtbase, but not for the other packages...
+Koen
 
-thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD4DBQFSjchFMkyGM64RGpERAkVvAJjvUEaYUnLHT9Y0akrxXC/fmj+NAJ4sFyr9
+0JdnxMHb7/3P4JZoIEwmew==
+=hr2K
+-----END PGP SIGNATURE-----
 
