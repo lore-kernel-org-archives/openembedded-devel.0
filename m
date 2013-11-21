@@ -1,33 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 16E186D611
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8798E6D611
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 17:28:02 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id c13so21689eek.16
+	Thu, 21 Nov 2013 17:30:47 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id b10so25163eae.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 09:28:01 -0800 (PST)
+	Thu, 21 Nov 2013 09:30:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=FndCgQqsSxAaH3J64Fzy6BUvDrAdk5g17tFOoxAQ0NI=;
-	b=IIgly4NpCCEdXgXPqzSfnwwoxHpMH0BClYjmphki4/MnnGYZ1MQrleP6EO/8Cy8JWI
-	vfU9iPVtDGhIyGksUYUsjfJ+Ta59n5JRSP+cFBU8OtUF/1r2LY/bzV/e/sUzPxF3ABW0
-	NvY30Mm/Gz74nT4+iWPBDIvEO4P3eP4ef6Suvvjh6JesVW6fLwRKauhQsLN5obhPjYbj
-	OPqvZBFqTaQOxeG2luv41W0/emuL1XOV0+c+NzFXh16zWYsUonUBVdwNQOg9s3yF4D68
-	CTaK7YPeZp9FfjNHG8Fp9LGTgXwpH7Y5+iyrnaj6/1rx+a9176fejG/xB6mFDfuLQsQC
-	cxEA==
-X-Received: by 10.15.35.135 with SMTP id g7mr44904eev.139.1385054881139;
-	Thu, 21 Nov 2013 09:28:01 -0800 (PST)
+	bh=ORl09vh3ms1uxs/jzi9fdx9ztcFgCiUKDlEKl0R3quo=;
+	b=ipcVkAOmpjQQ5hw94qae74ERFh5nu+68uLUT4yO7kah+H+lRGYuMfIppGfnwO9dDck
+	iIGPo843BwAJ4ut616S4Wi5wYBQcaxUgX6/WcDLBF3LK5X5c9+BMc9GzDhiewCaZVo7o
+	PkSTU3nTIIrlarQbkwJbT9bY+b9oa+STKLpCWOM+dRROPrFBEfhqvMeVFpkDTqsXNMb7
+	P1ao9drSwG1KQd63N2kBitLH7+nf8LjKXqO2D6AofeSWkDMbfhiuI+Axaf2rOxnEs/rw
+	TR5Wex1dBnM77RFzi/e26kGfvdxUmDc4dXqoK0LRhPFDDthaQnp57Q8kpdltETk3qmZ3
+	bCQg==
+X-Received: by 10.14.98.5 with SMTP id u5mr333096eef.69.1385055046783;
+	Thu, 21 Nov 2013 09:30:46 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id x4sm72097889eef.1.2013.11.21.09.27.59
+	by mx.google.com with ESMTPSA id 44sm72134323eek.5.2013.11.21.09.30.45
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Nov 2013 09:28:00 -0800 (PST)
-Date: Thu, 21 Nov 2013 18:28:04 +0100
+	Thu, 21 Nov 2013 09:30:46 -0800 (PST)
+Date: Thu, 21 Nov 2013 18:30:50 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131121172804.GZ3708@jama>
+Message-ID: <20131121173050.GA3708@jama>
 References: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
 	<20131121123904.GX3708@jama>
 	<CAP71WjxW7KZp3D+gTEGV2ZzDfwPhwxqLUP5qw4Rj4XN_z1=cQA@mail.gmail.com>
@@ -49,13 +50,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2013 17:28:04 -0000
-X-Groupsio-MsgNum: 47232
+X-List-Received-Date: Thu, 21 Nov 2013 17:30:48 -0000
+X-Groupsio-MsgNum: 47233
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dZHW955j1vPFHE0Q"
+	protocol="application/pgp-signature"; boundary="+HwY7O+GdaLKMYOv"
 Content-Disposition: inline
 
---dZHW955j1vPFHE0Q
+--+HwY7O+GdaLKMYOv
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -87,13 +88,6 @@ te:
 > thanks. how about getting something like this merged? i believe our
 > situation is going to be an issue for others as well, so perhaps it's nice
 > to build the infrastructure to make it simpler for people to use
-
-Looks useful, would you mind sending it with send-email so that it
-correctly shows up in patchwork (now it breaks author and commit
-message).
-
-I'll let other reviewers some time to comment, but can merge it later.
-
 >=20
 > =3D=3D=3D=3D=3D=3D=3D=3D=3D
 >=20
@@ -116,6 +110,20 @@ lly
 >=20
 > We have to be careful though to only change the architecture of the
 > resulting packages if we're not compiling a 'native' package.
+
+Ah one more comment.
+
+qmake5_base.bbclass doesn't look like best place for it.
+
+I guess you have only target qtbase being MACHINE_ARCH, right?
+
+qmake5_base.bbclass can be inherited by many packages which are
+TUNE_PKGARCH and don't use (depend) on target qtbase at all, so
+QMAKE_PACKAGE_ARCH would be used in more recipes then where it's really
+needed.
+
+Cheers,
+
 >=20
 > Signed-off-by: Andr=E9 Draszik <andre.draszik@linaro.org>
 > ---
@@ -152,16 +160,16 @@ lly
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---dZHW955j1vPFHE0Q
+--+HwY7O+GdaLKMYOv
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlKOQqQACgkQN1Ujt2V2gBz6iwCgqL1L+mSLE2HoYwENo30wyEED
-vLsAn0N/c4uh+lRWsGE0cgnbo07vbbeQ
-=HUbA
+iEYEARECAAYFAlKOQ0oACgkQN1Ujt2V2gBxskACfawXp+Bh7T10H//g9GOuxgmu4
+1xUAn0ViwYeK2YMRHBlTjMVPmQXkgYfB
+=HrjV
 -----END PGP SIGNATURE-----
 
---dZHW955j1vPFHE0Q--
+--+HwY7O+GdaLKMYOv--
