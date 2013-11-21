@@ -1,32 +1,44 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from euronet.mzplanet.com (mzplanet.com [91.82.101.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 591DB6A463
+Return-Path: <olof.johansson@axis.com>
+Received: from ra.se.axis.com (ra.se.axis.com [195.60.68.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9839561637
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 10:49:30 +0000 (UTC)
-Received: from owm.eumx.net (unknown [10.1.1.70])
-	by euronet.mzplanet.com (Postfix) with ESMTPS id B754CCE1B08
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 10:49:28 +0000 (UTC)
-Received: from localhost ([127.0.0.1]:36039 helo=owm.eumx.net)
-	by owm.eumx.net with esmtp (Exim 4.72)
-	(envelope-from <ml@communistcode.co.uk>) id 1VjRpA-0000Tn-Fi
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Nov 2013 10:49:28 +0000
-Received: from cbnluk-gw0.cambridgebroadband.com ([212.44.17.78]:42785
-	helo=[10.0.0.72])
-	by owm.eumx.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.72) (envelope-from <ml@communistcode.co.uk>)
-	id 1VjRpA-0000Tk-D6 for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Nov 2013 10:49:28 +0000
-Message-ID: <528DE53B.202@communistcode.co.uk>
-Date: Thu, 21 Nov 2013 10:49:31 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Thu, 21 Nov 2013 10:54:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by ra.se.axis.com (Postfix) with ESMTP id F13483C2707;
+	Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ra.se.axis.com
+Received: from ra.se.axis.com ([127.0.0.1])
+	by localhost (ra.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id DutCv4uwa5+i; Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
+	by ra.se.axis.com (Postfix) with ESMTP id 8ABA03C26EE;
+	Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+Received: from boulder.se.axis.com (localhost [127.0.0.1])
+	by postfix.imss71 (Postfix) with ESMTP id 750E78F2;
+	Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+Received: from thoth.se.axis.com (thoth.se.axis.com [10.0.2.173])
+	by boulder.se.axis.com (Postfix) with ESMTP id 6A207634;
+	Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
+	by thoth.se.axis.com (Postfix) with ESMTP id 68F9D3404E;
+	Thu, 21 Nov 2013 11:54:57 +0100 (CET)
+Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
+	Microsoft SMTP Server (TLS) id 8.2.255.0;
+	Thu, 21 Nov 2013 11:54:57 +0100
+Date: Thu, 21 Nov 2013 11:54:56 +0100
+From: Olof Johansson <olof.johansson@axis.com>
+To: Jack Mitchell <ml@communistcode.co.uk>
+Message-ID: <20131121105455.GV20888@axis.com>
 References: <1385028253-13293-1-git-send-email-olof.johansson@axis.com>
-In-Reply-To: <1385028253-13293-1-git-send-email-olof.johansson@axis.com>
+	<528DE53B.202@communistcode.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <528DE53B.202@communistcode.co.uk>
+Thread-Topic: [oe] [meta-oe][PATCH] rsyslog: rename libjson to json-c in
+	DEPENDS
+Accept-Language: en-US, sv-SE
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] rsyslog: rename libjson to json-c in DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,38 +53,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2013 10:49:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Nov 2013 10:54:59 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+Content-Language: en-US
 
-On 21/11/13 10:04, Olof Johansson wrote:
-> The libjson recipe was renamed to json-c in commit 533c1db2 of oe-core.
-> 
-> Signed-off-by: Olof Johansson <olof.johansson@axis.com>
-> ---
->  meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> index 238b484..0101004 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> @@ -1,5 +1,5 @@
->  DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
-> -DEPENDS = "zlib libestr libjson"
-> +DEPENDS = "zlib libestr json-c"
->  DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
->  HOMEPAGE = "http://www.rsyslog.com/"
->  LICENSE = "GPLv3"
-> 
+On 13-11-21 11:49 +0100, Jack Mitchell wrote:
+> Cheers Olof, it was a longer haul than I anticipated trying to get that
+> recipe in!
 
-Cheers Olof, it was a longer haul than I anticipated trying to get that
-recipe in!
+Heh, good things come to those who wait. Good job anyhow :).
 
+Cheers,
 -- 
-  Jack Mitchell (jack@embed.me.uk)
-  Embedded Systems Engineer
-  Cambridgeshire, UK
-  http://www.embed.me.uk
--- 
+olofjn
 
