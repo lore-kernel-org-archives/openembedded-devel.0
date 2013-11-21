@@ -1,28 +1,34 @@
-Return-Path: <ulf@emagii.com>
-Received: from smtprelay-b32.telenor.se (smtprelay-b32.telenor.se
-	[213.150.131.21])
-	by mail.openembedded.org (Postfix) with ESMTP id A809F6D700
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 61C006D700
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 08:24:13 +0000 (UTC)
-Received: from ipb5.telenor.se (ipb5.telenor.se [195.54.127.168])
-	by smtprelay-b32.telenor.se (Postfix) with ESMTP id C7D97C3EF
+	Thu, 21 Nov 2013 08:34:21 +0000 (UTC)
+Received: by mail-we0-f177.google.com with SMTP id p61so5463810wes.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 09:24:11 +0100 (CET)
-X-SENDER-IP: [83.227.57.102]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AuVzAHrCjVJT4zlmPGdsb2JhbABYgwYBATeIBa5fhySBHBcDAQEBATg1gncBCiNPSwotiAUBtEYBjDyPax2EHAOYEpU5Ow
-X-IronPort-AV: E=Sophos;i="4.93,742,1378850400"; d="scan'208";a="433849269"
-Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	Hydra.bredbandsbolaget.se) ([83.227.57.102])
-	by ipb5.telenor.se with ESMTP; 21 Nov 2013 09:23:53 +0100
-From: Ulf Samuelsson <ulf@emagii.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Nov 2013 09:23:50 +0100
-Message-Id: <1385022230-30471-1-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH] pangomm,goffice: Add missing dependencies
+	Thu, 21 Nov 2013 00:34:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=G24f/2wq3aJEzduXFlSkELlqxhuYCdEJTx1TQHgFWKw=;
+	b=Pf/sdRDTQlCue/D9ep7spx0wHwLU+hb9vJbHo2X3U/I0qQxld4gs6l+OXIcbcHoaEW
+	SSVU4XjbzcAXoTE8SSWJVzkqQPO8mbEoiDFuPsD/Qnznfr4bPt5rta6n308sYzO4PxfX
+	+OyfPlVDyqmmPLliT4GxS/sd96Nb/buk3t7+yWA/Qy/gjiXDZ45zCqRQrF6Dei+1aSsJ
+	AwfhTEe776x0prs9tU1U2E4oYMEJqdoqJ4es+86TO/uo4JNkTNSc65L/bYV51SeDovPk
+	NKQ+srjnMI127wzlaCXp6rYGFbnhNZwjDNfZIohOiMO6W+uxITSdYn/wfTPDZWEE7k/C
+	TJ4A==
+X-Gm-Message-State: ALoCoQkQiwc4okKAAYC5axlIdaqarONLK4ex642dx2EdP9XgmdULUl3jzPUclfp78YHr95UWGToI
+X-Received: by 10.180.219.33 with SMTP id pl1mr4786731wic.49.1385022859960;
+	Thu, 21 Nov 2013 00:34:19 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.180.211.172 with HTTP; Thu, 21 Nov 2013 00:33:59 -0800 (PST)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Thu, 21 Nov 2013 09:33:59 +0100
+Message-ID: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: making qt5 package machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,44 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2013 08:24:13 -0000
+X-List-Received-Date: Thu, 21 Nov 2013 08:34:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- .../recipes-support/goffice/goffice_0.10.1.bb      |    5 ++++-
- meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb   |    2 +-
- 2 files changed, 5 insertions(+), 2 deletions(-)
+hi,
 
-diff --git a/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb b/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
-index 5b46d99..77dd60e 100644
---- a/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
-+++ b/meta-gnome/recipes-support/goffice/goffice_0.10.1.bb
-@@ -3,7 +3,10 @@ DESCRIPTION="Gnome Office Library"
- LICENSE="GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6dc33ff21e1ba1ac1a2a1069d361e29e"
- 
--DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl"
-+DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl librsvg gdk-pixbuf"
-+
-+# The following dependencies exists, but are they handled in OpenEmbedded?
-+# DEPENDS = "gobject-2.0 gmodule-2.0 gio-2.0"
- 
- inherit gnome pkgconfig perlnative
- 
-diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-index 4419113..302062c 100644
---- a/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-+++ b/meta-oe/recipes-graphics/pango/pangomm_2.28.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
- 
- PR = "r2"
- 
--DEPENDS = "mm-common cairomm glibmm"
-+DEPENDS = "mm-common cairomm glibmm pango"
- 
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
- 
--- 
-1.7.9.5
+we are building a product/distro with qt5 with support for various SoC. the
+way qt5 recipes are designed, it kind of forces the resulting packages to
+be  <machine> specific, not <arch> specific.
 
+first each <machine> has a different provider for GL/GLES and it impacts
+the RDEPENDS, on top of that we have machine specific patches in Qt5 in
+each of our BSP layer, whether we like it or not, that's a reality that we
+cannot have the very same Qt5 config + source code for all platforms.
+
+so we end up with many  <qt pkgs>-<arch> which are <machine> specific, not
+<arch>, and it messes up badly with sstate for example, especially when
+cleaning up the sstate (e.g. using sstate-cache-management -d).
+
+so i have a couple of questions:
+
+ - are we doing something really wrong here? or are we getting issues that
+anyone would get when trying to have a OE based product with Qt5 and
+multiple machines from the same <arch>?
+
+ - assuming this is a typical use case... i wish there was an easy
+mechanism to 'mark' all Qt5 packages as PACKAGE_ARCH = "${MACHINE_ARCH}",
+without having to .bbappend every single recipe. It is indeed quite common
+to have a .bbappend for qtbase, but not for the other packages...
+
+thanks!
 
