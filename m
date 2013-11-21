@@ -1,37 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B9D561637
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C52AF616F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 12:39:02 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id c4so4606748eek.5
+	Thu, 21 Nov 2013 15:11:21 +0000 (UTC)
+Received: by mail-ob0-f175.google.com with SMTP id uz6so3820729obc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2013 04:39:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KM13RtMlz7cnnxM4YILEtEyujKdnt5OFuEVRW6M1DqM=;
-	b=H06OCM8pF3vMMHOsbU0+GjerQdm+SXsQO9WQ9soz4K6Ea1pj5pCag0+TKwSrc9tQxk
-	gY/EQNLBqmwlkFa1UTQg2b+Mp4RifppvM56zQbLhw4iup0NNd1qEpvQK34cww5WgY+80
-	8XRirhR/crhv2rp6CFPvlk6jYR0kE/76x4TNGaFoirf9fiMkl8RxD4w4dEUEvBLNjebL
-	KaCu8wjiRI6/eTrpoORasL2BtMex1VYsFrsIuQ4cw3/vPNJ1myUIbS4LQWacTlQcjQyi
-	06/4jLqmaWoQ9FILKhf0tDv8iCKtZGTvGib/dL2O8VqVoAuB+yV+yuqYVCLl21fM9XbC
-	U2lQ==
-X-Received: by 10.15.24.142 with SMTP id j14mr2373623eeu.52.1385037541406;
-	Thu, 21 Nov 2013 04:39:01 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id o45sm51694515eep.2.2013.11.21.04.38.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Nov 2013 04:39:00 -0800 (PST)
-Date: Thu, 21 Nov 2013 13:39:04 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131121123904.GX3708@jama>
-References: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
+	Thu, 21 Nov 2013 07:11:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=XS1vlUlydXRmcKA4edcId+SRHOwXHFGEb6lycQy63yo=;
+	b=ia/xUCrimr7MpRyXiXfc/0Hy8GUQzCh1Pxz3CiVvETeUVlJFtvhSEFtWS1ptV2iBYg
+	qPg73S3XFsJBbWogWER3nluLMbI3bSBXVxWo7F4uDHENU9lvHjAIR8KUctcntvv5wpUd
+	BNGZbrFS/6Yduv9k57Bjf8PZD/4f1hXYKzOAZwauSfVcnQx57MUGxHTdUJPMb7JrflgJ
+	KuUlR43/qWh6wEot9GHmMsIbCEEBH37AN972HnRUtNOhRSANumf1gQ4zjBsFESCMx4u5
+	hzC8TpRN9m85XfDzMhflJO6tjR0f7caEISZzOImvDc7ATlcjE3aYb3P/0mWPK0qsdD2Z
+	vwgA==
+X-Gm-Message-State: ALoCoQnUOcjhFUIxBV+1hrOLqMYe8luUypXDS20bEmy8P9HRbT572wWA6ibK4aCfLJ/td2f4YbN0
+X-Received: by 10.60.161.10 with SMTP id xo10mr908685oeb.71.1385046680857;
+	Thu, 21 Nov 2013 07:11:20 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
+Received: by 10.76.156.40 with HTTP; Thu, 21 Nov 2013 07:11:00 -0800 (PST)
+In-Reply-To: <20131121123904.GX3708@jama>
+References: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
+	<20131121123904.GX3708@jama>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Thu, 21 Nov 2013 16:11:00 +0100
+Message-ID: <CAP71WjxW7KZp3D+gTEGV2ZzDfwPhwxqLUP5qw4Rj4XN_z1=cQA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Andre Draszik <andre.draszik@linaro.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: making qt5 package machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -46,78 +46,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2013 12:39:03 -0000
-X-Groupsio-MsgNum: 47229
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="v6gilOcl2gU05R9Q"
-Content-Disposition: inline
-
---v6gilOcl2gU05R9Q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Nov 2013 15:11:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 21, 2013 at 09:33:59AM +0100, Nicolas Dechesne wrote:
-> hi,
->=20
-> we are building a product/distro with qt5 with support for various SoC. t=
-he
-> way qt5 recipes are designed, it kind of forces the resulting packages to
-> be  <machine> specific, not <arch> specific.
->=20
-> first each <machine> has a different provider for GL/GLES and it impacts
-> the RDEPENDS, on top of that we have machine specific patches in Qt5 in
-> each of our BSP layer, whether we like it or not, that's a reality that we
-> cannot have the very same Qt5 config + source code for all platforms.
->=20
-> so we end up with many  <qt pkgs>-<arch> which are <machine> specific, not
-> <arch>, and it messes up badly with sstate for example, especially when
-> cleaning up the sstate (e.g. using sstate-cache-management -d).
->=20
-> so i have a couple of questions:
->=20
->  - are we doing something really wrong here? or are we getting issues that
-> anyone would get when trying to have a OE based product with Qt5 and
-> multiple machines from the same <arch>?
->=20
->  - assuming this is a typical use case... i wish there was an easy
-> mechanism to 'mark' all Qt5 packages as PACKAGE_ARCH =3D "${MACHINE_ARCH}=
-",
-> without having to .bbappend every single recipe. It is indeed quite common
-> to have a .bbappend for qtbase, but not for the other packages...
+On Thu, Nov 21, 2013 at 1:39 PM, Martin Jansa <martin.jansa@gmail.com>wrote=
+:
 
-There are 2 ways and I'm using both in different scenarios (different
-builds)
+> There are 2 ways and I'm using both in different scenarios (different
+> builds)
+>
+> 1) .inc file with
+> PACKAGE_ARCH_pn-qtbase =3D "${MACHINE_ARCH}"
+> PACKAGE_ARCH_pn-qtdeclarative =3D "${MACHINE_ARCH}"
+> ...
+> for whole qt* stack (use sstate-diff-machines.sh script to see that you
+> get them all).
+>
+> 2) SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
+> # Depending on MACHINE_ARCH GL/GLES binaries (or mesa)
+> SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS +=3D "\
+>     qtbase->other-gl-gles-provider \
+>     qtbase->mesa \
+> "
+>
+> 2) doesn't solve your MACHINE specific patches of course
+>
 
-1) .inc file with
-PACKAGE_ARCH_pn-qtbase =3D "${MACHINE_ARCH}"
-PACKAGE_ARCH_pn-qtdeclarative =3D "${MACHINE_ARCH}"
-=2E..
-for whole qt* stack (use sstate-diff-machines.sh script to see that you
-get them all).
+thanks. how about getting something like this merged? i believe our
+situation is going to be an issue for others as well, so perhaps it's nice
+to build the infrastructure to make it simpler for people to use
 
-2) SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS
-# Depending on MACHINE_ARCH GL/GLES binaries (or mesa)
-SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS +=3D "\
-    qtbase->other-gl-gles-provider \
-    qtbase->mesa \
-"
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-2) doesn't solve your MACHINE specific patches of course
+From c562d011f196b1ee8ceced76833dc80e48dd599f Mon Sep 17 00:00:00 2001
+From: =3D?UTF-8?q?Andr=3DC3=3DA9=3D20Draszik?=3D <andre.draszik@linaro.org>
+Date: Thu, 21 Nov 2013 13:48:45 +0000
+Subject: [PATCH] qmake5_base.bbclass: allow to set the package arch globall=
+y
+MIME-Version: 1.0
+Content-Type: text/plain; charset=3DUTF-8
+Content-Transfer-Encoding: 8bit
 
+Packages built using a (machine) specific qmake, will also be
+machine specific.
+Since it is not feasible to add PACKAGE_ARCH=3D... to each and every
+recipe that is built using qmake, we introduce a new variable,
+QMAKE_PACKAGE_ARCH, that can be set by the machine configuration as
+needed.
+
+We have to be careful though to only change the architecture of the
+resulting packages if we're not compiling a 'native' package.
+
+Signed-off-by: Andr=E9 Draszik <andre.draszik@linaro.org>
+---
+ classes/qmake5_base.bbclass | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 2db0fa3..e77dd73 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -1,3 +1,15 @@
++python __anonymous() {
++    barch =3D d.getVar("BUILD_ARCH", True) or ''
++    tarch =3D d.getVar("TARGET_ARCH", True) or ''
++    # do not do anything if we are building a native package
++    if barch =3D=3D tarch:
++        True
++    else:
++        tarch =3D d.getVar("QMAKE_PACKAGE_ARCH", True) or ''
++        if tarch:
++            d.setVar("PACKAGE_ARCH", tarch)
++}
++
+ # This is useful for target recipes to reference native mkspecs
+ QMAKE_MKSPEC_PATH_NATIVE =3D "${STAGING_LIBDIR_NATIVE}/${QT_DIR_NAME}"
+ QMAKE_MKSPEC_PATH_TARGET =3D "${STAGING_LIBDIR}/${QT_DIR_NAME}"
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.8.2
 
---v6gilOcl2gU05R9Q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlKN/ugACgkQN1Ujt2V2gBxqGQCeLuxVuKrwU9rLBAJnReMxsRHH
-MbsAnAo9RmQEvJg57C8Wq+dJGpNg92bo
-=A4OB
------END PGP SIGNATURE-----
-
---v6gilOcl2gU05R9Q--
