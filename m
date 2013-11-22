@@ -1,42 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 35F276CDCB
+Return-Path: <andre.draszik@linaro.org>
+Received: from mail-bk0-f49.google.com (mail-bk0-f49.google.com
+	[209.85.214.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 8682F6B39C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2013 10:51:13 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id d10so420414eaj.23
+	Fri, 22 Nov 2013 12:12:53 +0000 (UTC)
+Received: by mail-bk0-f49.google.com with SMTP id my13so758630bkb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2013 02:51:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=lBQdLSSIlFv1IodQAVfFYS0+naFNyfMqiRmziJYYfdQ=;
-	b=FVF/TBmaDFWSz8huMQ0E58Qq/PAXmq+9n5+kj/SwBL5N592FUu/mfcHAcGqNynWd18
-	FcVOQZ1Y9n0vo6EZlU0zA/41jfH/syfJRDHB92/McAOq9puvadbrbMgrHzBMYjzcH4TB
-	neY3ec2cY24qUbUpEpJXLPOwQ5kuwp5LtfjuYWe5QNKya0BX+HXnGITLnLCYeRjtrkDH
-	/KtDne5ZkJmXIIbfGqz922KhhUlqLrc+YCsMXAwxtFFBQg6+4n7GOVqhYmwpAG8gqjuZ
-	RXQNkTQBQDacOPYkgfCYVUEnvxbufsua2J8Cw8tHYPFW1PB7S4n/utNJujKbQeydba7k
-	P9aw==
-X-Received: by 10.14.172.133 with SMTP id t5mr15786171eel.35.1385117471904;
-	Fri, 22 Nov 2013 02:51:11 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id a45sm60059908eem.6.2013.11.22.02.51.11
+	Fri, 22 Nov 2013 04:12:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:content-type:mime-version:content-transfer-encoding;
+	bh=QRGRBYGwrnmLfuS/ZyIY9TPRKyfHlIy/ol3hAg0TLWk=;
+	b=dPzya1uc90SOAQXvUgpH6b2iV+ll2TCscLcP91fUKlFWhCK4otGEqdYpu5NFvvQkDl
+	JidPXxN9M1Vqvc/8GTWrpNQ+2r7kEZUe1fXUqzjNCcS6XZc9SVgNCc7w7Acn3O7bUukT
+	kr6O+wA5Cea8A7szGneefyOAWvf1M8LgY7JfJk1VPO87+wL6QyfMusjhlFEEvqcnbW1g
+	fNZwkBFpzNOkWO+Kwkfd4e8tnQanzaoX/UXbH5S0RPhJIjyCDGLGGHcYp/FYVBLwrVxP
+	keWVPX96x3naCs8fr7y5dC+yVgbvbe7aikqS2bvVx9Obu70/cVn8LTnZIwYf3WGhzQI6
+	PzZw==
+X-Gm-Message-State: ALoCoQlfpNumnOUAtSG4ZllJ1QZNX1mxH2VRFUVATnqjVbCtHylByDcBfeYzuc87bwv0KhS/zDoc
+X-Received: by 10.205.78.5 with SMTP id zk5mr9636900bkb.25.1385122372195;
+	Fri, 22 Nov 2013 04:12:52 -0800 (PST)
+Received: from [10.65.4.44] (sushi.andred.org. [85.214.105.253])
+	by mx.google.com with ESMTPSA id
+	on10sm31881802bkb.13.2013.11.22.04.12.51
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Nov 2013 02:51:11 -0800 (PST)
-Date: Fri, 22 Nov 2013 11:51:17 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 22 Nov 2013 04:12:51 -0800 (PST)
+Message-ID: <1385122369.23183.107.camel@bril0118.bri.st.com>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131122105117.GB3708@jama>
+Date: Fri, 22 Nov 2013 12:12:49 +0000
+In-Reply-To: <20131122105117.GB3708@jama>
 References: <CAP71Wjy9mGKjDnzAKED7zFUY6J1c_2-ysUpH8uHgczZe5zNi9A@mail.gmail.com>
 	<20131121123904.GX3708@jama>
 	<CAP71WjxW7KZp3D+gTEGV2ZzDfwPhwxqLUP5qw4Rj4XN_z1=cQA@mail.gmail.com>
 	<20131121173050.GA3708@jama>
 	<1385109648.23183.38.camel@bril0118.bri.st.com>
-MIME-Version: 1.0
-In-Reply-To: <1385109648.23183.38.camel@bril0118.bri.st.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
+	<20131122105117.GB3708@jama>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
+Mime-Version: 1.0
 Subject: Re: making qt5 package machine specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,61 +54,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2013 10:51:14 -0000
-X-Groupsio-MsgNum: 47237
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jE+K4o1MICf3EEet"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Nov 2013 12:12:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---jE+K4o1MICf3EEet
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks Martin!
 
-On Fri, Nov 22, 2013 at 08:40:48AM +0000, Andr=E9 Draszik wrote:
-> Hi Martin,
->=20
-> On Thu, 2013-11-21 at 18:30 +0100, Martin Jansa wrote:
-> > Ah one more comment.
-> >=20
-> > qmake5_base.bbclass doesn't look like best place for it.
-> >=20
-> > I guess you have only target qtbase being MACHINE_ARCH, right?
->=20
-> Everything that was built using the previously configured qtbase, e.g.
-> qtwebkit - see below.
->=20
-> > qmake5_base.bbclass can be inherited by many packages which are
-> > TUNE_PKGARCH and don't use (depend) on target qtbase at all, so
-> > QMAKE_PACKAGE_ARCH would be used in more recipes then where it's really
-> > needed.
->=20
-> I don't know enough about qmake, but my thinking is that qmake will
-> store the (qtbase) configure options somewhere (from the time when you
-> configure qtbase for the target), i.e. qmake during the qtwebkit build
-> has access to the configuration from the time qtbase was configured.
-> Hence the idea is to make all (target) packages that use (inherit)
-> qmake5 to use the same PACKAGE_ARCH override.
+On Fri, 2013-11-22 at 11:51 +0100, Martin Jansa wrote:
+> You can have recipes which use only qtbase-native and qmake only as
+> build tool and don't use target qtbase at all.
+> 
+> Such recipes inherit qmake5_base to setup paths etc and shouldn't became
+> MACHINE_ARCH just because target qtbase (which they don't use at all) is.
 
-You can have recipes which use only qtbase-native and qmake only as
-build tool and don't use target qtbase at all.
+OK.
 
-Such recipes inherit qmake5_base to setup paths etc and shouldn't became
-MACHINE_ARCH just because target qtbase (which they don't use at all) is.
+Would it be better / ok to move my patch into qt5.inc then?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+My only (maybe unjustified) concern with this is: What defines if some
+source code uses / can see configuration options from qtbase configure
+time when invoking qmake? Purely that projects own build system? I can't
+see anything in meta-qt5 that could affect this, unless I'm missing
+something.
 
---jE+K4o1MICf3EEet
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+In other words, could a recipe build sources that depend on the Qt
+configuration, without including qt5.inc?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlKPNyUACgkQN1Ujt2V2gByw2ACdHdkURRm5iJfIwdibeP1X6VnI
-B04AnRG92y14ora0/+0EWRa+dsK+yV2P
-=p2P1
------END PGP SIGNATURE-----
+Cheers,
+Andre'
 
---jE+K4o1MICf3EEet--
+
+
