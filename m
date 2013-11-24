@@ -1,36 +1,35 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
-	[209.85.219.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 681306D977
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 580596D977
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Nov 2013 14:33:04 +0000 (UTC)
-Received: by mail-oa0-f44.google.com with SMTP id m1so3332982oag.17
+	Sun, 24 Nov 2013 14:49:10 +0000 (UTC)
+Received: by mail-ea0-f170.google.com with SMTP id k10so1853540eaj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Nov 2013 06:33:03 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=aRWr8zGRskQKH2GD2FrT3ZOnkKvbG2kV7oyaWwPRzxA=;
-	b=HKftI1iCH4sUi9xtZfEemVJoC+dUXJ9DYuyz/KbK7K3Qs3DuLRpDfor0A6Xcmmc0k1
-	9x7qD9G0RIsK90967BeHMxSXnq+bTOaBKkoTu28YQ7Lj0hyfLsKlYwN5M9KGB1Zhki17
-	LfWQzlmygyqP6h48VvTD4tJz+wuuycjidL6utmu6FC7UdGaaHzsRUqz5/FrJjTl65ZoT
-	dvunvh3hle59JfvYsZ/t9kA2AZv8V8wJ7I0ZDjzdvl/KQbLI/mFg+Wlm5U87EcF8QVrl
-	aUCm6QE1BWkxGs/21YGUsaHfg9bHyY7AwNebfsMzz+wTDI91WxqREmk8j0342TE5bJpQ
-	r+Qg==
-X-Gm-Message-State: ALoCoQlxSw8VtdUYs0gZAyrbZ321WbLo0ZD4x27pPhGfw9lbKWtmoYydAYUK3MYSvYRZjidVjTua
-X-Received: by 10.60.44.193 with SMTP id g1mr705838oem.47.1385303583479; Sun,
-	24 Nov 2013 06:33:03 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.0.50 with HTTP; Sun, 24 Nov 2013 06:32:43 -0800 (PST)
-In-Reply-To: <alpine.DEB.2.02.1311240834020.2268@oneiric>
-References: <alpine.DEB.2.02.1311240834020.2268@oneiric>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Sun, 24 Nov 2013 15:32:43 +0100
-Message-ID: <CAP71Wjyf+B_TSTkVRNG7srBxty6fXPNSK7y789EONTHq3rcQAQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: missing leading space for EXTRA_OECONF_append?
+	Sun, 24 Nov 2013 06:49:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=0s6+OJvtqeZTkCWJbmG3cD3ikNF6OpFRccC+/j9X2Z0=;
+	b=X1UPmUnozjB9DQuascbLVSyDppAc0ftZqYQiriOGlQPNM1aN70yEvpyUEAhDG+k5E7
+	k1C/9V+H7fUI+PqjtfhsAeVoCx5mfy43fZJSMTt4RUI0D5JucS/d0cnJw4ndEpLlh3eM
+	wTgWebYVkXqiGA63H1/Jd86AmRlUIXsCLGlOnBUN0C8FOeYeed0HlInXMw9FwxczgRUY
+	kjSwoyBAbyz9BtLPpni5r9Zgfxr7pZzGJVP4XMqvNKFCspvpiwzBmUEfJYOCDTQnvTGe
+	lUc5k3shcW/1V+sJw50okID1F8QJA3cwB08N+HwheCmt1mOWBoezG8PuoNE1cMuF4yLL
+	yBgQ==
+X-Received: by 10.14.105.200 with SMTP id k48mr29808675eeg.1.1385304549612;
+	Sun, 24 Nov 2013 06:49:09 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id e43sm13820188eep.7.2013.11.24.06.49.08
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Nov 2013 06:49:09 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 24 Nov 2013 15:49:08 +0100
+Message-Id: <1385304548-11573-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-systemd][PATCH] lighttpd: Rename .bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Nov 2013 14:33:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 24 Nov 2013 14:49:10 -0000
 
-On Sun, Nov 24, 2013 at 2:35 PM, Robert P. J. Day <rpjday@crashcourse.ca>wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../lighttpd/{lighttpd_1.4.32.bbappend => lighttpd_1.4.33.bbappend}     | 2 --
+ 1 file changed, 2 deletions(-)
+ rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.32.bbappend => lighttpd_1.4.33.bbappend} (77%)
 
->   is this correct?
->
-> meta/recipes-devtools/gdb/gdb-cross-canadian.inc:EXTRA_OECONF_append =
-> "--with-python=${WORKDIR}/python"
->
-> does there not need to be a leading space in that string?
->
+diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
+similarity index 77%
+rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
+rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
+index 5cb6bf4..f006b3f 100644
+--- a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.32.bbappend
++++ b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
+@@ -1,5 +1,3 @@
+-PRINC := "${@int(PRINC) + 2}"
+-
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+-- 
+1.8.4.3
 
-indeed, you're right.
-
-a quick 'dummy' grep in my layers show there is another instance (at
-least... there can be more not caught by my regexp)
-
-$ repo grep '_append.*= *\"--'
-meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb:EXTRA_OECONF_append_armv7a
-= "--cpu=cortex-a8"
-openembedded-core/meta/recipes-devtools/gdb/gdb-cross-canadian.inc:EXTRA_OECONF_append
-= "--with-python=${WORKDIR}/python"
 
