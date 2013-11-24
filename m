@@ -1,32 +1,40 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 096BB6D822
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id D692F61227
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Nov 2013 13:35:36 +0000 (UTC)
-Received: from [173.34.6.101] (port=51117 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1VkZqX-0003Ba-36 for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Nov 2013 08:35:33 -0500
-Date: Sun, 24 Nov 2013 08:35:27 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@oneiric
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.02.1311240834020.2268@oneiric>
-User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+	Sun, 24 Nov 2013 14:12:47 +0000 (UTC)
+Received: by mail-ea0-f177.google.com with SMTP id n15so1747710ead.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Nov 2013 06:12:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=0QtRG7pi2oithOEEEG1VkJwbwJCUCXzLeOy7/3sozAg=;
+	b=aH4nUUEehRv1GRi4sbZtlfL4jrQ76cryxEAGQAIY6GrdmGm7b2ClIZuk6F97LlBks2
+	VSg8GdnGTNWyyCfJDWoCtSUv0eKqouDkp3a6QA+Zot9mt+HHF3OedR77bpLHlYtRcm+X
+	9dd7pdSpJVsg7QYDBekcAMoFJRU+GsA5tvjFYkcCFStyQfB218Z8PaWYwFgfY/VtBXM1
+	CIjFbOwGjV6f05tcWc9OKHwPyk9BtRpH1lpQ49p27oGpqFZj83fPj1h+beDS5506lHO2
+	klWoGPrcIQvUfDiwTlGptglBwsEbZNLyuDHJkeEY9L5DbBvJfezOacJOSFFTW14xZzmq
+	X0Zw==
+X-Received: by 10.15.67.195 with SMTP id u43mr5842162eex.14.1385302366712;
+	Sun, 24 Nov 2013 06:12:46 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id z1sm92513507eeo.14.2013.11.24.06.12.45
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Nov 2013 06:12:45 -0800 (PST)
+Date: Sun, 24 Nov 2013 15:12:46 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131124141246.GA2870@jama>
+References: <1385022086-30386-1-git-send-email-ulf@emagii.com>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: missing leading space for EXTRA_OECONF_append?
+In-Reply-To: <1385022086-30386-1-git-send-email-ulf@emagii.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: Re: [PATCH] Ignore Edit backup files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,25 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Nov 2013 13:35:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 24 Nov 2013 14:12:48 -0000
+X-Groupsio-MsgNum: 47243
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="9jxsPFA5p3P2qPhR"
+Content-Disposition: inline
 
+--9jxsPFA5p3P2qPhR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  is this correct?
+On Thu, Nov 21, 2013 at 09:21:26AM +0100, Ulf Samuelsson wrote:
+> Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
+> ---
+>  .gitignore |    2 ++
+>  1 file changed, 2 insertions(+)
+>  create mode 100644 .gitignore
+>=20
+> diff --git a/.gitignore b/.gitignore
+> new file mode 100644
+> index 0000000..5236e1e
+> --- /dev/null
+> +++ b/.gitignore
+> @@ -0,0 +1,2 @@
+> +*~
+> +
 
-meta/recipes-devtools/gdb/gdb-cross-canadian.inc:EXTRA_OECONF_append = "--with-python=${WORKDIR}/python"
+I'll add few more to match with oe-core
 
-does there not need to be a leading space in that string?
+/*.patch
+*.swp
+*.orig
+*.rej
+*~
 
-rday
+> --=20
+> 1.7.9.5
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
--- 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
+--9jxsPFA5p3P2qPhR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
+iEYEARECAAYFAlKSCV4ACgkQN1Ujt2V2gBzLNQCfeJpofiVLcFFi9d/kzjy9TaeH
+msgAniEVUyH61ej61EJkcTfNv8XD+I33
+=SJrC
+-----END PGP SIGNATURE-----
+
+--9jxsPFA5p3P2qPhR--
