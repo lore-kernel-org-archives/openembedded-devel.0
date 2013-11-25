@@ -1,45 +1,36 @@
-Return-Path: <Zongchun.Yu@freescale.com>
-Received: from am1outboundpool.messaging.microsoft.com
-	(am1ehsobe002.messaging.microsoft.com [213.199.154.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 14D816D46F
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
+	[209.85.219.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 048F26DBF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2013 07:59:17 +0000 (UTC)
-Received: from mail44-am1-R.bigfish.com (10.3.201.251) by
-	AM1EHSOBE019.bigfish.com (10.3.207.141) with Microsoft SMTP Server id
-	14.1.225.22; Mon, 25 Nov 2013 07:59:15 +0000
-Received: from mail44-am1 (localhost [127.0.0.1])	by mail44-am1-R.bigfish.com
-	(Postfix) with ESMTP id 9C1684801B3;
-	Mon, 25 Nov 2013 07:59:15 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 4
-X-BigFish: VS4(z37d5kzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz8275ch1de098h17326ah8275bh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h222bi1155h)
-X-Forefront-Antispam-FastScan: 1<63074397001>
-Received: from mail44-am1 (localhost.localdomain [127.0.0.1]) by mail44-am1
-	(MessageSwitch) id 1385366353304503_10463;
-	Mon, 25 Nov 2013 07:59:13 +0000 (UTC)
-Received: from AM1EHSMHS007.bigfish.com (unknown [10.3.201.232])	by
-	mail44-am1.bigfish.com (Postfix) with ESMTP id 3CAE1405FB;
-	Mon, 25 Nov 2013 07:59:13 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS007.bigfish.com
-	(10.3.207.107) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Mon, 25 Nov 2013 07:59:12 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Mon, 25 Nov 2013 07:59:11 +0000
-Received: from localhost.localdomain (b40527-01.ap.freescale.net
-	[10.192.208.92])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id rAP7x72t014266;	Mon, 25 Nov 2013 00:59:08 -0700
-From: <b40527@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Nov 2013 16:00:03 +0800
-Message-ID: <1385366403-5491-1-git-send-email-b40527@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
+	Mon, 25 Nov 2013 14:11:21 +0000 (UTC)
+Received: by mail-oa0-f45.google.com with SMTP id o6so4402573oag.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Nov 2013 06:11:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=3dWlNd2gnTrYDX6IDhrz6n2ZieKDGUiNGqguqa+UGa4=;
+	b=bxUZGjC5NFVZCsiRVMgTlxcwsM+uJgbdDcOBNIyUZ0mr/TccJ9rYKPcN2+TQJGvNZg
+	9iUq1o0yCPWzkh/IGwkzZsim5iKvDZM6aPY5Hg+Yp1rfXVWFIgryNtjNuH8ZvXPdn9/b
+	PTK3SvOLaOmkbVFXsFuCg5ZwGb8sp7nAPaSTmvU5Xd1zYrO4ucemOWKsmRJW4rXaAy9j
+	k/LLQ3jsux+ZiN2IMrIKTB02M3U/F1FpYxY0vqYcb/1DddLC9zpwmyjMOJOMO6EAhJr0
+	8CBg+jHSvlI0VNKd+zQ2A93XmP+W9OyG+WKlcsI/K8vM/hUMetA5sfUuZPtEIqooYY8s
+	tBsA==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-Received: by 10.60.135.130 with SMTP id ps2mr5553673oeb.46.1385388681135;
+	Mon, 25 Nov 2013 06:11:21 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Mon, 25 Nov 2013 06:11:21 -0800 (PST)
+In-Reply-To: <1385366403-5491-1-git-send-email-b40527@freescale.com>
+References: <1385366403-5491-1-git-send-email-b40527@freescale.com>
+Date: Mon, 25 Nov 2013 12:11:21 -0200
+X-Google-Sender-Auth: UPJ9jRz2y1aiQlUDCYC8WSl7RWQ
+Message-ID: <CAP9ODKo9KDmcMMG3ay8E-nTzpyyRK_tAa3Aq5-MhfF4pO-+rOQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Cc: Zongchun Yu <Zongchun.Yu@freescale.com>
-Subject: [meta-oe][meta-networking][PATCHv2] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
+Subject: Re: [meta-oe][meta-networking][PATCHv2] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,243 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2013 07:59:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Nov 2013 14:11:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Zongchun Yu <Zongchun.Yu@freescale.com>
+On Mon, Nov 25, 2013 at 6:00 AM,  <b40527@freescale.com> wrote:
+> From: Zongchun Yu <Zongchun.Yu@freescale.com>
+>
+> *mv tcpdump from meta-oe to meta-networking
+> *add tcpreplay - a suite of GPLv3 licensed tools for UNIX operating
+> systems which gives you the ability to use previously captured traffic
+> in libpcap format to test a variety of network devices.
+>
+> Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
 
-*mv tcpdump from meta-oe to meta-networking
-*add tcpreplay - a suite of GPLv3 licensed tools for UNIX operating
-systems which gives you the ability to use previously captured traffic
-in libpcap format to test a variety of network devices.
+Please split the patch in two, one for the move for meta-networking
+and another to add the tcpreplay utility.
 
-Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
----
- .../0001-minimal-IEEE802.15.4-allowed.patch        |    0
- .../tcpdump/tcpdump-4.3.0/configure.patch          |    0
- .../tcpdump/tcpdump-4.3.0/ipv6-cross.patch         |    0
- .../tcpdump-4.3.0/tcpdump_configure_no_-O2.patch   |    0
- .../recipes-support/tcpdump/tcpdump_4.3.0.bb       |    0
- .../files/tcpreplay-3.4.4-cross-compile.patch      |   92 ++++++++++++++++++++
- ...ay-3.4.4-fix-unable-to-link-libpcap-issue.patch |   17 ++++
- .../files/tcpreplay-3.4.4-no-bfp-support.patch     |   15 +++
- .../recipes-support/tcpreplay/tcpreplay_3.4.4.bb   |   22 +++++
- .../packagegroups/packagegroup-cli-tools.bb        |    1 -
- 10 files changed, 146 insertions(+), 1 deletions(-)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump_4.3.0.bb (100%)
- create mode 100755 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
- create mode 100644 meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
-new file mode 100755
-index 0000000..a856b18
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
-@@ -0,0 +1,92 @@
-+Uptream-Status: Pending
-+
-+Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
-+
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -402,7 +402,6 @@
-+ 
-+ dnl 0.9.6 (which is still thinks it is 0.9.5 due to a bug) introduces an important
-+ dnl fix for OSX.  See: http://tcpreplay.synfin.net/trac/ticket/167
-+-libpcap_version_096=no
-+ AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-+ #include <string.h>
-+ #include <stdlib.h>
-+@@ -419,11 +418,12 @@
-+             exit(0);
-+ 
-+     exit(1);
-+-]]), [
-+-    libpcap_version_096=yes
-+-])
-++]]),
-++ [libpcap_version_096=yes],
-++ [libpcap_version_096=no],
-++ [libpcap_version_096=yes]
-++)
-+ 
-+-libpcap_ver8=no
-+ AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-+ #include <string.h>
-+ #include <stdlib.h>
-+@@ -444,13 +444,12 @@
-+         exit(0);
-+ 
-+     exit(1);
-+-]]), [
-+-    libpcap_ver8=yes
-+-], [
-+-    libpcap_ver8=no
-+-])
-++]]),
-++ [libpcap_ver8=yes],
-++ [libpcap_ver8=no],
-++ [libpcap_ver8=yes]
-++)
-+ 
-+-libpcap_ver7=no
-+ AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-+ #include <string.h>
-+ #include <stdlib.h>
-+@@ -469,11 +468,11 @@
-+             exit(0);
-+ 
-+     exit(1);
-+-]]), [
-+-    libpcap_ver7=yes
-+-], [
-+-    libpcap_ver7=no
-+-])
-++]]),
-++ [libpcap_ver7=yes],
-++ [libpcap_ver7=no],
-++ [libpcap_ver7=yes]
-++)
-+ 
-+ if test x$libpcap_ver8 = xyes ; then
-+     AC_MSG_RESULT(>= 0.8.0)
-+@@ -761,8 +760,8 @@
-+ 
-+ have_bpf=no
-+ dnl Check for BSD's BPF
-+-AC_MSG_CHECKING(for BPF device sending support)
-+-AC_TRY_RUN([
-++AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
-++[AC_TRY_RUN([
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <sys/types.h>
-+@@ -796,8 +795,11 @@
-+             [Do we have BPF device support?])
-+     AC_MSG_RESULT(yes)
-+     have_bpf=yes
-+-],[
-+-    AC_MSG_RESULT(no)
-++],
-++[AC_MSG_RESULT(no)],
-++[AC_MSG_ERROR([cross-compiling,
-++  presetting ac_cv_have_bpf=(yes|no) will help])]
-++)
-+ ])
-+ 
-+ 
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
-new file mode 100644
-index 0000000..5f36c68
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
-@@ -0,0 +1,17 @@
-+Uptream-Status: Pending
-+
-+Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
-+
-+Index: tcpreplay-3.4.4/configure.ac
-+===================================================================
-+--- tcpreplay-3.4.4.orig/configure.ac
-++++ tcpreplay-3.4.4/configure.ac
-+@@ -389,7 +389,7 @@ CFLAGS="$CFLAGS -I$LPCAPINCDIR"
-+ AC_SEARCH_LIBS([pcap_close], [pcap],
-+     LPCAPLIB="$LIBS",
-+     AC_ERROR([Unable to link libpcap in ${foundpcap}]),
-+-    -lnl)
-++    -lnl-3)
-+ 
-+ AC_SUBST(LPCAPINC)
-+ AC_SUBST(LPCAPLIB)
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
-new file mode 100644
-index 0000000..3c11c92
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
-@@ -0,0 +1,15 @@
-+Uptream-Status: Pending
-+
-+Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
-+
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -758,6 +758,8 @@
-+     AC_MSG_RESULT(no)
-+ ])
-+ 
-++ac_cv_have_bpf=no
-++
-+ have_bpf=no
-+ dnl Check for BSD's BPF
-+ AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-new file mode 100644
-index 0000000..d211888
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Use previously captured traffic to test network devices"
-+
-+HOMEPAGE = "http://tcpreplay.synfin.net/"
-+SECTION = "console/network"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=c33cccf72cc1603e8a72a84811ae3ac8"
-+
-+SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.tar.gz \
-+           file://tcpreplay-3.4.4-cross-compile.patch \
-+           file://tcpreplay-3.4.4-no-bfp-support.patch \
-+           file://tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch \
-+           "
-+SRC_URI[md5sum] = "22725feb9b2590809f9350308ec65180"
-+SRC_URI[sha256sum] = "7a809c58ddec86407fd6e5597ac883d7874a19bea81d716bb2b1c6e3b0e7b58f"
-+
-+DEPENDS = "libpcap"
-+
-+EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}/usr"
-+
-+inherit siteinfo autotools
-+
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-index fa53a67..8807fd1 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-@@ -45,7 +45,6 @@ RDEPENDS_${PN}-debug = "\
-     s3c64xx-gpio \
-     serial-forward \
-     strace \
--    tcpdump \
- "
- 
- RRECOMMENDS_${PN}-debug = "\
 -- 
-1.7.0.4
-
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
