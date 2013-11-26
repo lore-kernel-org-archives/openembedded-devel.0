@@ -1,49 +1,25 @@
-Return-Path: <Zongchun.Yu@freescale.com>
-Received: from ch1outboundpool.messaging.microsoft.com
-	(ch1ehsobe001.messaging.microsoft.com [216.32.181.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CAEB6DD07
+Return-Path: <denis@denix.org>
+Received: from vms173003pub.verizon.net (vms173003pub.verizon.net
+	[206.46.173.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F4786BC20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 02:57:16 +0000 (UTC)
-Received: from mail211-ch1-R.bigfish.com (10.43.68.227) by
-	CH1EHSOBE019.bigfish.com (10.43.70.76) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 26 Nov 2013 02:57:14 +0000
-Received: from mail211-ch1 (localhost [127.0.0.1])	by
-	mail211-ch1-R.bigfish.com (Postfix) with ESMTP id D39F2360AF9;
-	Tue, 26 Nov 2013 02:57:14 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzda00hdc73hzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzzz2dh109h2a8h5c0h839h944hd24hd2bhf0ah1220h1288h12a5h12a9h12bdh137ah139eh13b6h1441h1504h1537h162dh1631h1751h1758h17f1h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h20dbh2218h2216h226dh22d0h1155h)
-Received: from mail211-ch1 (localhost.localdomain [127.0.0.1]) by mail211-ch1
-	(MessageSwitch) id 1385434633181142_24703;
-	Tue, 26 Nov 2013 02:57:13 +0000 (UTC)
-Received: from CH1EHSMHS021.bigfish.com (snatpool1.int.messaging.microsoft.com
-	[10.43.68.240])	by mail211-ch1.bigfish.com (Postfix) with ESMTP id
-	1E1F9260160;	Tue, 26 Nov 2013 02:57:13 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS021.bigfish.com
-	(10.43.70.21) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 26 Nov 2013 02:57:11 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 26 Nov 2013 02:57:10 +0000
-Received: from b40527c60e6e6f (b40527-c60e6e6f.ap.freescale.net
-	[10.192.208.151])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id rAQ2v7o3016496;	Mon, 25 Nov 2013 19:57:08 -0700
-From: Zongchun YU <b40527@freescale.com>
-To: 'Otavio Salvador' <otavio@ossystems.com.br>, 'OpenEmbedded Devel List'
-	<openembedded-devel@lists.openembedded.org>
-References: <1385366403-5491-1-git-send-email-b40527@freescale.com>
-	<CAP9ODKo9KDmcMMG3ay8E-nTzpyyRK_tAa3Aq5-MhfF4pO-+rOQ@mail.gmail.com>
-In-Reply-To: <CAP9ODKo9KDmcMMG3ay8E-nTzpyyRK_tAa3Aq5-MhfF4pO-+rOQ@mail.gmail.com>
-Date: Tue, 26 Nov 2013 10:58:08 +0800
-Message-ID: <005701ceea53$57670ec0$06352c40$@com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: Ac7p6Drj5RQe5glfTdeGXEkOVlfkRwAasCog
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: 'Zongchun Yu' <Zongchun.Yu@freescale.com>
-Subject: Re: [meta-oe][meta-networking][PATCHv2] tcpdump, tcpreplay:relocate tcpdump and add tcpreplay recipe
+	Tue, 26 Nov 2013 04:33:49 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [96.231.138.104])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0MWU00K8QSOCRO03@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	25 Nov 2013 22:33:49 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 85ACD2008E; Mon,
+	25 Nov 2013 23:33:48 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Nov 2013 23:33:44 -0500
+Message-id: <1385440424-13435-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH] qttools-native: remove previous license workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,14 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2013 02:57:17 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: zh-cn
+X-List-Received-Date: Tue, 26 Nov 2013 04:33:49 -0000
 
->Please split the patch in two, one for the move for meta-networking and
-another to add the tcpreplay utility.
-Thanks for your comments. I have resent the patches. Please review.
+From: Denys Dmytriyenko <denys@ti.com>
 
+Previously license files were missing for qttools module, so we used to point
+to generic files with same license.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-qt/qt5/qttools-native.inc      | 7 -------
+ recipes-qt/qt5/qttools-native_5.1.1.bb | 5 -----
+ 2 files changed, 12 deletions(-)
+
+diff --git a/recipes-qt/qt5/qttools-native.inc b/recipes-qt/qt5/qttools-native.inc
+index cc1e056..03b88cd 100644
+--- a/recipes-qt/qt5/qttools-native.inc
++++ b/recipes-qt/qt5/qttools-native.inc
+@@ -1,10 +1,3 @@
+-# doesn't have GFDL-1.3 like qtbase, LICENSE files are missing in 5.0.0 and 5.0.1, this is for 5.0.2 and git
+-LICENSE = "LGPL-2.1 | GPL-3.0"
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
+-                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-"
+-
+ DEPENDS = "qtbase-native"
+ 
+ QT_MODULE = "qttools"
+diff --git a/recipes-qt/qt5/qttools-native_5.1.1.bb b/recipes-qt/qt5/qttools-native_5.1.1.bb
+index 82b8c01..e10484e 100644
+--- a/recipes-qt/qt5/qttools-native_5.1.1.bb
++++ b/recipes-qt/qt5/qttools-native_5.1.1.bb
+@@ -1,10 +1,5 @@
+ require qt5-${PV}.inc
+ require ${PN}.inc
+ 
+-# LICENSE files are missing in 5.0.0 and 5.0.1
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
+-                    file://${COMMON_LICENSE_DIR}/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891 \
+-"
+-
+ SRC_URI[md5sum] = "022073d32ff9d408de0182b5d1f01781"
+ SRC_URI[sha256sum] = "2b42c6d5feeccffb67e890b86a150bae64dd2ff550be39a3cc449ee0e95462b6"
+-- 
+1.8.3.2
 
 
