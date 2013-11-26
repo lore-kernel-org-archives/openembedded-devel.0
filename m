@@ -1,44 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-qe0-f41.google.com (mail-qe0-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 527176BCA5
+Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
+	[209.85.216.50])
+	by mail.openembedded.org (Postfix) with ESMTP id D92756BCA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 16:23:52 +0000 (UTC)
-Received: by mail-qe0-f41.google.com with SMTP id gh4so3372173qeb.28
+	Tue, 26 Nov 2013 16:24:15 +0000 (UTC)
+Received: by mail-qa0-f50.google.com with SMTP id i13so8248493qae.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 08:23:51 -0800 (PST)
+	Tue, 26 Nov 2013 08:24:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=9RkYTld6KZai070//hXXJuf5tfgn2lcvfcHrTn2pWFw=;
-	b=UpY/KOdjYP1tbcPpM9RCEEI16WkiQ4dCJZgoDR7VIqcPgPtstGQNMi8KCNq9lNBXKq
-	L0ljR0DaVd4ef2hEKKLXhCOMBUYoyevp1rPGkPeeDBMNUvP3L8vY2Ae+WE3g1cS73MqW
-	J+7G9LLBwmZ6Z00KphSUzsIuEKtqbklx12mYLSb1YPt2JRqYffxehgJh45hOJSX/rjTS
-	9rVYfk11WsR85uKbZl61pqda//LVfSWwhzdx27Tyt80dVmqN1HxL+sDyA0EjZOmFpOdi
-	bVC3lqlW5lkljs38emrWpMoCvdMeGOAMh9NFbsbW2eOm2dQFVQkDOsVz/J4JBlsB7ohx
-	Losg==
-X-Gm-Message-State: ALoCoQmaXNVoFQxz2a0z1W1LUJ1E6PcdAYQVJ0n5wfqI35HnEnNTC9pmHcFAKMc2Y2Gaiv1x/eDk
-X-Received: by 10.229.5.4 with SMTP id 4mr57496770qct.2.1385483031570;
-	Tue, 26 Nov 2013 08:23:51 -0800 (PST)
+	bh=T4t/cZP6GOmUDXViVw0VtRV1LPcpz5+dmAtNhubZxIM=;
+	b=bnAI2ufgXFLpfvsh9dxJFDNQfNKBoUCsydNMyIX+6Cjc8wBznOxH03fFUcNA50LIC3
+	webO8GIBN4CTAWKtQaSBCMVqkcm/NFx6VkxeytVgYo+emJ16Upx/1GTF7jB5oJKMdRQ6
+	MUZ4OCZkAZkVZ93RfxEVaz16TwXZ9fhqHpj8J3/FCLKpYVWvqo6Wl69NCYyBUeAgfr9B
+	NTwIZczakaa7Z1JGHMpEku/Q4YsHqhT9VnevZNkw6cEV5OvKUXUcKU9XTHPIEVioC9uk
+	GjEsTlKcVF23v4vVcmigqm1uPeiEN00+uNF6v8set9Wqk4RcUavEBSaCw0/z/SBxcfeV
+	4L8g==
+X-Gm-Message-State: ALoCoQlC52RSOSAjWKRrZ59svhUfKmyOB0ioptAH96joYr44WQ7XEvicFQv8XAGpSL2bvyBiyKc/
+X-Received: by 10.49.131.69 with SMTP id ok5mr34069106qeb.77.1385483055499;
+	Tue, 26 Nov 2013 08:24:15 -0800 (PST)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id n7sm6620368qai.1.2013.11.26.08.23.50
-	for <openembedded-devel@lists.openembedded.org>
+	by mx.google.com with ESMTPSA id b4sm21729369qai.7.2013.11.26.08.24.13
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 26 Nov 2013 08:23:50 -0800 (PST)
-Date: Tue, 26 Nov 2013 11:23:48 -0500
+	Tue, 26 Nov 2013 08:24:14 -0800 (PST)
+Date: Tue, 26 Nov 2013 11:24:12 -0500
 From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131126162347.GC3939@deserted.net>
-References: <1384291464-12185-1-git-send-email-liezhi.yang@windriver.com>
+To: Xufeng Zhang <xufeng.zhang@windriver.com>
+Message-ID: <20131126162410.GD3939@deserted.net>
+References: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1384291464-12185-1-git-send-email-liezhi.yang@windriver.com>
+In-Reply-To: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking] [PATCH] quagga: use /bin/false as the login shell
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,13 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2013 16:23:52 -0000
-X-Groupsio-MsgNum: 47269
+X-List-Received-Date: Tue, 26 Nov 2013 16:24:16 -0000
+X-Groupsio-MsgNum: 47270
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="raC6veAxrt5nqIoY"
+	protocol="application/pgp-signature"; boundary="q9KOos5vDmpwPx9o"
 Content-Disposition: inline
 
---raC6veAxrt5nqIoY
+--q9KOos5vDmpwPx9o
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -66,48 +67,124 @@ Content-Transfer-Encoding: quoted-printable
 Merged, thanks.
 -J.
 
-[[oe] [meta-networking] [PATCH] quagga: use /bin/false as the login shell] =
-On 13.11.13 (Wed 05:24) Robert Yang wrote:
+[[oe] [OE][PATCH meta-networking] quagga: Avoid duplicate connected address=
+ adding to the list] On 13.11.19 (Tue 15:02) Xufeng Zhang wrote:
 
-> Use /bin/false as the login shell, just like what Ubuntu does,
-> otherwise there might be secure issue.
+> commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
+> introduces an regression: ifp->connected list is cleaned up when ripd is
+> restarting, however, for interface addresses which are not specified in
+> ripd configuration file, they are never to be added into ifp->connected
+> again, this will lead to some abnormal behavior for route advertising.
 >=20
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> Instead of cleaning up the ifp->connected list to avoid duplicated
+> connected address being added into this list, we can check this
+> condition during interface address adding process and return early
+> when an identical address has already been added.
+>=20
+> Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
 > ---
->  meta-networking/recipes-protocols/quagga/quagga.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  .../quagga-Avoid-duplicate-connected-address.patch |   53 ++++++++++++++=
+++++++
+>  .../recipes-protocols/quagga/quagga.inc            |    3 +-
+>  2 files changed, 55 insertions(+), 1 deletions(-)
+>  create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga=
+-Avoid-duplicate-connected-address.patch
 >=20
+> diff --git a/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-=
+duplicate-connected-address.patch b/meta-networking/recipes-protocols/quagg=
+a/files/quagga-Avoid-duplicate-connected-address.patch
+> new file mode 100644
+> index 0000000..585dc29
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplica=
+te-connected-address.patch
+> @@ -0,0 +1,53 @@
+> +quagga: Avoid duplicate connected address adding to the list
+> +
+> +commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal=
+")
+> +introduces an regression: ifp->connected list is cleaned up when ripd is
+> +restarting, however, for interface addresses which are not specified in
+> +ripd configuration file, they are never to be added into ifp->connected
+> +again, this will lead to some abnormal behavior for route advertising.
+> +
+> +Instead of cleaning up the ifp->connected list to avoid duplicated
+> +connected address being added into this list, we can check this
+> +condition during interface address adding process and return early
+> +when an identical address has already been added.
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Hu Yadi <Yadi.hu@windriver.com>
+> +Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+> +---
+> +--- a/lib/if.c
+> ++++ b/lib/if.c
+> +@@ -738,6 +738,16 @@
+> +                          struct prefix *destination)
+> + {
+> +   struct connected *ifc;
+> ++  struct listnode *cnode;
+> ++  struct connected *c;
+> ++  int ret =3D 0;
+> ++
+> ++  for (ALL_LIST_ELEMENTS_RO (ifp->connected, cnode, c))
+> ++    {
+> ++      ret =3D connected_same_prefix (p, (c->address));
+> ++      if(ret =3D=3D 1)
+> ++        return NULL;
+> ++    }
+> +=20
+> +   /* Allocate new connected address. */
+> +   ifc =3D connected_new ();
+> +--- a/ripd/rip_interface.c
+> ++++ b/ripd/rip_interface.c
+> +@@ -516,13 +516,6 @@
+> + 	  thread_cancel (ri->t_wakeup);
+> + 	  ri->t_wakeup =3D NULL;
+> + 	}
+> +-     =20
+> +-      for (conn_node =3D listhead (ifp->connected); conn_node; conn_nod=
+e =3D next)
+> +-	{
+> +-	  ifc =3D listgetdata (conn_node);
+> +-	  next =3D conn_node->next;
+> +-	  listnode_delete (ifp->connected, ifc);
+> +-	}
+> +     }
+> + }
+> +=20
 > diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-n=
 etworking/recipes-protocols/quagga/quagga.inc
-> index 2106c9b..677b1c5 100644
+> index 2106c9b..21c2028 100644
 > --- a/meta-networking/recipes-protocols/quagga/quagga.inc
 > +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> @@ -148,7 +148,7 @@ INITSCRIPT_PARAMS_${PN}-watchquagga     =3D "defaults=
- 90 10"
->  # Add quagga's user and group
->  USERADD_PACKAGES =3D "${PN}"
->  GROUPADD_PARAM_${PN} =3D "--system quagga ; --system quaggavty"
-> -USERADD_PARAM_${PN} =3D "--system --home ${localstatedir}/run/quagga/ -M=
- -g quagga quagga"
-> +USERADD_PARAM_${PN} =3D "--system --home ${localstatedir}/run/quagga/ -M=
- -g quagga --shell /bin/false quagga"
+> @@ -32,7 +32,8 @@ SRC_URI =3D "http://download.savannah.gnu.org/releases/=
+quagga${QUAGGASUBDIR}/quagg
+>             file://watchquagga.init \
+>             file://watchquagga.default \
+>             file://volatiles.03_quagga \
+> -           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+> +           file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
+> +           file://quagga-Avoid-duplicate-connected-address.patch"
 > =20
->  pkg_postinst_${PN} () {
->      if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[cap] =3D "--enable-capabilities,--disable-capabilities,lib=
+cap"
 --=20
 -Joe MacDonald.
 :wq
 
---raC6veAxrt5nqIoY
+--q9KOos5vDmpwPx9o
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEUEARECAAYFAlKUyxMACgkQwFvcllog0Xx6fgCXaC4M3w4sdWpLkusEo6A6efWb
-wwCfZWFo4//EKnSR6GXrgdTwVb1jgoE=
-=4SsI
+iEYEARECAAYFAlKUyyoACgkQwFvcllog0XwywACfa9IlmL5plFQac7fk5OlhIdis
+EKoAn3MXJrTQ+ik+snp7syDQUp0Hijwn
+=62H+
 -----END PGP SIGNATURE-----
 
---raC6veAxrt5nqIoY--
+--q9KOos5vDmpwPx9o--
