@@ -1,44 +1,45 @@
-Return-Path: <Zongchun.Yu@freescale.com>
-Received: from co1outboundpool.messaging.microsoft.com
-	(co1ehsobe002.messaging.microsoft.com [216.32.180.185])
-	by mail.openembedded.org (Postfix) with ESMTP id 82F1C6DD0C
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4018D6DD0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 02:53:19 +0000 (UTC)
-Received: from mail119-co1-R.bigfish.com (10.243.78.231) by
-	CO1EHSOBE027.bigfish.com (10.243.66.90) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 26 Nov 2013 02:53:18 +0000
-Received: from mail119-co1 (localhost [127.0.0.1])	by
-	mail119-co1-R.bigfish.com (Postfix) with ESMTP id BA7E4C00B3C;
-	Tue, 26 Nov 2013 02:53:18 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h1d1ah1d2ah1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h1354h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h1155h)
-Received: from mail119-co1 (localhost.localdomain [127.0.0.1]) by mail119-co1
-	(MessageSwitch) id 1385434397658192_9977;
-	Tue, 26 Nov 2013 02:53:17 +0000 (UTC)
-Received: from CO1EHSMHS025.bigfish.com (unknown [10.243.78.240])	by
-	mail119-co1.bigfish.com (Postfix) with ESMTP id 934032C0068;
-	Tue, 26 Nov 2013 02:53:17 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS025.bigfish.com
-	(10.243.66.35) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 26 Nov 2013 02:53:17 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 26 Nov 2013 02:53:16 +0000
-Received: from localhost.localdomain (b40527-01.ap.freescale.net
-	[10.192.208.92])	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP
-	id rAQ2rDLt015073;	Mon, 25 Nov 2013 19:53:14 -0700
-From: <b40527@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Nov 2013 10:54:12 +0800
-Message-ID: <1385434452-4083-1-git-send-email-b40527@freescale.com>
-X-Mailer: git-send-email 1.7.0.4
+	Tue, 26 Nov 2013 02:53:43 +0000 (UTC)
+Received: by mail-ie0-f175.google.com with SMTP id x13so8407080ief.34
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Nov 2013 18:53:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=3w84W+enOmLgrXmNSsFCK/g7IOOO+DQV5k6diWAesJo=;
+	b=hY5c/g5ZleA0DN/D71tASdx+46vD+mK9ZxKQ0NhwrcKiFHBZ/W2gmgKFNF8+Owpo32
+	icBSTCPP1xM+GaYbGuZc/1KRmeHnetdIQxTgccuB55Eyi4caK7mPXW7vlJnQD16T7Gi7
+	iLZO8GuBMh6zVDa5ShrO2aJDwI6aHTLu0JSRnN07Cv3YnVMd1a8I0RsfFN9zgaOqcEcH
+	YlM8rkW1kUWtVpcUIs4hqZwa9ji0Fc84PpRwtrqyxqTtEGElSfdmMKpZFMeJ8bSbwOPQ
+	FOz6DZUjesFh1BY5nVzZhcykv1dvNOnb1ny01t8fqHdWMkLngK4t3KA+0YNdHtIk4k3S
+	86Rg==
+X-Gm-Message-State: ALoCoQmax9IJ3qEJMj1dZtn31YodqjRrrzrHif4zHyFq+jDJ4t0T4IXr+T/zUD+6lIA0UWNReKcz
+X-Received: by 10.50.29.4 with SMTP id f4mr15377544igh.11.1385434422310;
+	Mon, 25 Nov 2013 18:53:42 -0800 (PST)
+Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
+	by mx.google.com with ESMTPSA id
+	u1sm29321327ige.1.2013.11.25.18.53.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 25 Nov 2013 18:53:41 -0800 (PST)
+Date: Mon, 25 Nov 2013 21:53:39 -0500
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131126025337.GA5596@deserted.net>
+References: <1384878348-16319-1-git-send-email-paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-Cc: Zongchun Yu <Zongchun.Yu@freescale.com>, otavio.salvador@gmail.com
-Subject: [meta-oe][meta-networking][PATCH] tcpdump: move from meta-oe to meta-networking
+In-Reply-To: <1384878348-16319-1-git-send-email-paul.eggleton@linux.intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] lowpan-tools: fix do_install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,60 +53,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2013 02:53:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Nov 2013 02:53:43 -0000
+X-Groupsio-MsgNum: 47260
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="a8Wt8u1KmwUX3Y2C"
+Content-Disposition: inline
 
-From: Zongchun Yu <Zongchun.Yu@freescale.com>
+--a8Wt8u1KmwUX3Y2C
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
----
- .../0001-minimal-IEEE802.15.4-allowed.patch        |    0
- .../tcpdump/tcpdump-4.3.0/configure.patch          |    0
- .../tcpdump/tcpdump-4.3.0/ipv6-cross.patch         |    0
- .../tcpdump-4.3.0/tcpdump_configure_no_-O2.patch   |    0
- .../recipes-support/tcpdump/tcpdump_4.3.0.bb       |    0
- .../packagegroups/packagegroup-cli-tools.bb        |    1 -
- 6 files changed, 0 insertions(+), 1 deletions(-)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch (100%)
- rename {meta-oe => meta-networking}/recipes-support/tcpdump/tcpdump_4.3.0.bb (100%)
+Merged, thanks.
 
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configure_no_-O2.patch
-diff --git a/meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-similarity index 100%
-rename from meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-index fa53a67..8807fd1 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-@@ -45,7 +45,6 @@ RDEPENDS_${PN}-debug = "\
-     s3c64xx-gpio \
-     serial-forward \
-     strace \
--    tcpdump \
- "
- 
- RRECOMMENDS_${PN}-debug = "\
--- 
-1.7.0.4
+-J.
 
+[[oe] [meta-networking][PATCH] lowpan-tools: fix do_install failure] On 13.=
+11.19 (Tue 16:25) Paul Eggleton wrote:
 
+> We don't have a proper help2man so building the manpages fails; just
+> disable building them to fix this as we do elsewhere.
+>=20
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  .../lowpan-tools/lowpan-tools/no-help2man.patch    | 41 ++++++++++++++++=
+++++++
+>  .../lowpan-tools/lowpan-tools_git.bb               |  3 +-
+>  2 files changed, 43 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-t=
+ools/no-help2man.patch
+>=20
+> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no=
+-help2man.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools=
+/no-help2man.patch
+> new file mode 100644
+> index 0000000..9ecd707
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/no-help2m=
+an.patch
+> @@ -0,0 +1,41 @@
+> +Disable building manpages so that make install doesn't fail due to lack =
+of help2man
+> +
+> +Upstream-Status: Inappropriate [config]
+> +
+> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> +
+> +diff --git a/src/Makefile.am b/src/Makefile.am
+> +index 46c4017..d6ed312 100644
+> +--- a/src/Makefile.am
+> ++++ b/src/Makefile.am
+> +@@ -9,11 +9,6 @@ izcoordinator_DESC =3D "simple coordinator for IEEE 802=
+=2E15.4 network"
+> + iz_DESC =3D "configure an IEEE 802.15.4 interface"
+> + izchat_DESC =3D "simple chat program using IEEE 802.15.4"
+> +=20
+> +-if MANPAGES
+> +-dist_man_MANS =3D $(manpages)
+> +-endif
+> +-EXTRA_DIST =3D $(manpages)
+> +-
+> + izattach_SOURCES =3D serial.c
+> +=20
+> + iz_SOURCES =3D iz.c iz-common.c iz-mac.c iz-phy.c
+> +@@ -27,18 +22,6 @@ izcoordinator_LDADD =3D ../addrdb/libaddrdb.la $(LDAD=
+D) $(NL_LIBS) $(LEXLIB)
+> + iz_CFLAGS =3D $(AM_CFLAGS) $(NL_CFLAGS) -D_GNU_SOURCE
+> + iz_LDADD =3D $(LDADD) $(NL_LIBS)
+> +=20
+> +-izattach.8: $(izattach_SOURCES) $(top_srcdir)/configure.ac
+> +-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izattach_DESC) $(builddir)/izattach
+> +-
+> +-izcoordinator.8: $(izcoordinator_SOURCES) $(top_srcdir)/configure.ac
+> +-	-$(HELP2MAN) -o $@ -s 8 -N -n $(izcoordinator_DESC) $(builddir)/izcoor=
+dinator
+> +-
+> +-iz.8: $(iz_SOURCES) $(top_srcdir)/configure.ac
+> +-	-$(HELP2MAN) -o $@ -s 8 -N -n $(iz_DESC) $(builddir)/iz
+> +-
+> +-izchat.1: $(izchat_SOURCES) $(top_srcdir)/configure.ac
+> +-	-$(HELP2MAN) -o $@ -s 1 -N -n $(izchat_DESC) $(builddir)/izchat
+> +-
+> + install-data-hook:
+> + 	$(mkinstalldirs) $(DESTDIR)`dirname $(leasefile)`
+> + 	$(mkinstalldirs) $(DESTDIR)`dirname $(pidfile)`
+> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_gi=
+t.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> index 152ee49..5fc0de3 100644
+> --- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+> @@ -8,7 +8,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954=
+499f7abaabaa882bbe"
+>  DEPENDS =3D "libnl python"
+> =20
+>  PV =3D "0.3+git${SRCPV}"
+> -SRC_URI =3D "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee=
+/linux-zigbee"
+> +SRC_URI =3D "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee=
+/linux-zigbee \
+> +           file://no-help2man.patch"
+>  SRCREV =3D "a1d9615adde6d1a568813c24a128273ed755af04"
+> =20
+>  S =3D "${WORKDIR}/git"
+--=20
+-Joe MacDonald.
+:wq
 
+--a8Wt8u1KmwUX3Y2C
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlKUDRsACgkQwFvcllog0XxjKACcCRw5bclTka9U/zhNqrY3VG9g
+VykAoLi61+vvIJglvAJgPk1u8tOf08/u
+=Zoms
+-----END PGP SIGNATURE-----
+
+--a8Wt8u1KmwUX3Y2C--
