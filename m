@@ -1,44 +1,29 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qe0-f51.google.com (mail-qe0-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F7416C76F
+Return-Path: <Xufeng.Zhang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 59B306B5D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 17:53:31 +0000 (UTC)
-Received: by mail-qe0-f51.google.com with SMTP id 1so3974266qee.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2013 09:53:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=WHO9jXszOQsk1NfS70mI49QILAZPiKI2pIX4+i1Y3BA=;
-	b=cqmn7LKS4fCbEs7Bi/TdkhMVD3PZP8jKRHGG90mcr77+fOMVN4Wqrcfqdfk/jcbijW
-	2Iu/5t2ku+aDNKqG4ug9Np9Ic3jcrEbSN+sRZgudEtS2Ou6KfPxt3o3x+G5C9u1Zh+ZF
-	1WVE0EkzhXKGAJrMAZwi9QZALotUyw3YRatiDpIoKexPjKXdwUWF3KOv9vkRA4mtz5GU
-	cua7HLzb9ujSUGgzl3LsQDevYEU9/eDv2EbLny/1EcJ9e87f6nzevGLMEAWoQ/Y6TnYD
-	/MxfwDPJJYamUVmohKQjeL8AXNB3QTSfRNBrY5fKsIQhsS6hjxc7foZCl9JdGgR3O43v
-	nVjQ==
-X-Gm-Message-State: ALoCoQl4GNwqe0Hjpavov27frIPlsT6nt7sMISsBjOOmeeM88KOvocImQpz1tOJ6lpNniWEL5MMt
-X-Received: by 10.224.62.4 with SMTP id v4mr52589999qah.41.1385488410470;
-	Tue, 26 Nov 2013 09:53:30 -0800 (PST)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id o10sm87507224qaa.6.2013.11.26.09.53.29
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 26 Nov 2013 09:53:29 -0800 (PST)
-Date: Tue, 26 Nov 2013 12:53:27 -0500
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131126175325.GI3939@deserted.net>
-References: <1383887325-8280-1-git-send-email-rongqing.li@windriver.com>
+	Wed, 27 Nov 2013 02:10:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rAR2ASlT029786
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 26 Nov 2013 18:10:28 -0800 (PST)
+Received: from [128.224.163.210] (128.224.163.210) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
+	Tue, 26 Nov 2013 18:10:27 -0800
+Message-ID: <52955598.7030406@windriver.com>
+Date: Wed, 27 Nov 2013 10:14:48 +0800
+From: Xufeng Zhang <xufeng.zhang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5 ThunderBrowse/3.82
 MIME-Version: 1.0
-In-Reply-To: <1383887325-8280-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH meta-networking] ntp: fix 60-ntpd.list path
+To: Joe MacDonald <joe@deserted.net>
+References: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
+	<528B0D8A.2090101@windriver.com>
+	<20131126145058.GA3939@deserted.net>
+In-Reply-To: <20131126145058.GA3939@deserted.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,71 +37,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2013 17:53:31 -0000
-X-Groupsio-MsgNum: 47273
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pe+tqlI1iYzVj1X/"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Nov 2013 02:10:31 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---pe+tqlI1iYzVj1X/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11/26/2013 10:51 PM, Joe MacDonald wrote:
+> [Re: [oe] [OE][PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list] On 13.11.19 (Tue 15:04) Xufeng Zhang wrote:
+>
+>    
+>> Hi Joe,
+>>
+>> After this fix, we can do nothing to other daemons.
+>>      
+> Nice.  Thanks for following up on this, Xufeng.  Do you think it is
+> reasonable to remove ripd-fix-two-bugs-after-received-SIGHUP.patch, or
+> is it still required for ripd?
+>    
 
-Almost forgot about this one.  Also merged earlier today.  Thanks.
+We should still keep it since 
+ripd-fix-two-bugs-after-received-SIGHUP.patch also
+fix another bug(RIP_NO_SPLIT_HORIZON flag problem).
 
--J.
 
-[[oe] [PATCH meta-networking] ntp: fix 60-ntpd.list path] On 13.11.08 (Fri =
-13:08) rongqing.li@windriver.com wrote:
+Thanks,
+Xufeng
 
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> 60-ntpd.list should be installed into the same path as ntp systemd service
-> file, like Fedora core; Orignal path refers
-> http://www.freedesktop.org/wiki/Software/systemd/timedated/, but where
-> systemd_unitdir is assumed as /usr/lib/systemd, not /lib/systemd
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  meta-networking/recipes-support/ntp/ntp.inc |    5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networkin=
-g/recipes-support/ntp/ntp.inc
-> index 65d90de..9ea24e9 100644
-> --- a/meta-networking/recipes-support/ntp/ntp.inc
-> +++ b/meta-networking/recipes-support/ntp/ntp.inc
-> @@ -67,9 +67,8 @@ do_install_append() {
->      install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/syste=
-m/
->      install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/syste=
-m/
-> =20
-> -    # see http://www.freedesktop.org/wiki/Software/systemd/timedated/
-> -    install -d ${D}${libdir}/systemd/ntp-units.d
-> -    install -m 0644 ${WORKDIR}/ntpd.list ${D}${libdir}/systemd/ntp-units=
-=2Ed/60-ntpd.list
-> +    install -d ${D}${systemd_unitdir}/ntp-units.d
-> +    install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-unit=
-s.d/60-ntpd.list
->  }
-> =20
->  PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
---=20
--Joe MacDonald.
-:wq
+> -J.
+>
+>    
+>>
+>> Thanks,
+>> Xufeng
+>>
+>> On 11/19/2013 03:02 PM, Xufeng Zhang wrote:
+>>      
+>>> commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
+>>> introduces an regression: ifp->connected list is cleaned up when ripd is
+>>> restarting, however, for interface addresses which are not specified in
+>>> ripd configuration file, they are never to be added into ifp->connected
+>>> again, this will lead to some abnormal behavior for route advertising.
+>>>
+>>> Instead of cleaning up the ifp->connected list to avoid duplicated
+>>> connected address being added into this list, we can check this
+>>> condition during interface address adding process and return early
+>>> when an identical address has already been added.
+>>>
+>>> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+>>> ---
+>>>   .../quagga-Avoid-duplicate-connected-address.patch |   53 ++++++++++++++++++++
+>>>   .../recipes-protocols/quagga/quagga.inc            |    3 +-
+>>>   2 files changed, 55 insertions(+), 1 deletions(-)
+>>>   create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
+>>>
+>>> diff --git a/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
+>>> new file mode 100644
+>>> index 0000000..585dc29
+>>> --- /dev/null
+>>> +++ b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
+>>> @@ -0,0 +1,53 @@
+>>> +quagga: Avoid duplicate connected address adding to the list
+>>> +
+>>> +commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
+>>> +introduces an regression: ifp->connected list is cleaned up when ripd is
+>>> +restarting, however, for interface addresses which are not specified in
+>>> +ripd configuration file, they are never to be added into ifp->connected
+>>> +again, this will lead to some abnormal behavior for route advertising.
+>>> +
+>>> +Instead of cleaning up the ifp->connected list to avoid duplicated
+>>> +connected address being added into this list, we can check this
+>>> +condition during interface address adding process and return early
+>>> +when an identical address has already been added.
+>>> +
+>>> +Upstream-Status: Pending
+>>> +
+>>> +Signed-off-by: Hu Yadi<Yadi.hu@windriver.com>
+>>> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+>>> +---
+>>> +--- a/lib/if.c
+>>> ++++ b/lib/if.c
+>>> +@@ -738,6 +738,16 @@
+>>> +                          struct prefix *destination)
+>>> + {
+>>> +   struct connected *ifc;
+>>> ++  struct listnode *cnode;
+>>> ++  struct connected *c;
+>>> ++  int ret = 0;
+>>> ++
+>>> ++  for (ALL_LIST_ELEMENTS_RO (ifp->connected, cnode, c))
+>>> ++    {
+>>> ++      ret = connected_same_prefix (p, (c->address));
+>>> ++      if(ret == 1)
+>>> ++        return NULL;
+>>> ++    }
+>>> +
+>>> +   /* Allocate new connected address. */
+>>> +   ifc = connected_new ();
+>>> +--- a/ripd/rip_interface.c
+>>> ++++ b/ripd/rip_interface.c
+>>> +@@ -516,13 +516,6 @@
+>>> + 	  thread_cancel (ri->t_wakeup);
+>>> + 	  ri->t_wakeup = NULL;
+>>> + 	}
+>>> +-
+>>> +-      for (conn_node = listhead (ifp->connected); conn_node; conn_node = next)
+>>> +-	{
+>>> +-	  ifc = listgetdata (conn_node);
+>>> +-	  next = conn_node->next;
+>>> +-	  listnode_delete (ifp->connected, ifc);
+>>> +-	}
+>>> +     }
+>>> + }
+>>> +
+>>> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+>>> index 2106c9b..21c2028 100644
+>>> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
+>>> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+>>> @@ -32,7 +32,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
+>>>              file://watchquagga.init \
+>>>              file://watchquagga.default \
+>>>              file://volatiles.03_quagga \
+>>> -           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+>>> +           file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
+>>> +           file://quagga-Avoid-duplicate-connected-address.patch"
+>>>
+>>>   PACKAGECONFIG ??= ""
+>>>   PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+>>>        
+>>      
+>    
 
---pe+tqlI1iYzVj1X/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlKU4BUACgkQwFvcllog0XzPcgCfcL6BGSpMLHf5upOEMfHkEr3t
-b7UAoIzm96DXyz9ylwGVE/jLSpa04jvt
-=CLYe
------END PGP SIGNATURE-----
-
---pe+tqlI1iYzVj1X/--
