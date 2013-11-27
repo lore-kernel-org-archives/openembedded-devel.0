@@ -1,46 +1,37 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 909D46D586
+Return-Path: <cjb.sw.nospam@gmail.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DE806DE3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 20:26:18 +0000 (UTC)
-Received: by mail-ie0-f176.google.com with SMTP id at1so12325713iec.7
+	Wed, 27 Nov 2013 20:26:38 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id x13so7306513wgg.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 12:26:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=Xh+3COe3WOUYppZe21yxBftE/K3RoAfm8USOYGos/vs=;
-	b=RHqnqIDwt1agK/xq8w2lznn+f/Kxv2e4EaeWIOxZAxpLoI/m2FMzQmxGU6H87nW2mc
-	8S79IM+kFXZvF0PmIfbzqpg8RzsP22Qy3LIF3mdkoPBGCQHCO86MdDgoVIPJduWoN6N9
-	x3YwGqHxLn7UpGZeEf3wJIWGrworYqX5z1f1isUMFJu76XiByLj1UUmXRVPGdNq8QJvY
-	MXsjvdL1LBpt7Ec2yVYwJig6/wp1Cp+5j69auqIPwALgkxjhSCck+Sg+IiXAC8WvS7Ga
-	NzexQ9ohV2qPzfdgNaFCUQARCw/MUHblHPSvo9H3dYupwe8oEq3Q/DAC7xB9zyRWgVH6
-	tJbQ==
-X-Gm-Message-State: ALoCoQlDQ0oltJALyWtAd0W/Mpa/pApJIW3Tl12UVtgfIzfwYOuspkFLzQem6r4JT5ewUESi62gj
-X-Received: by 10.51.17.71 with SMTP id gc7mr4254167igd.55.1385583978037;
-	Wed, 27 Nov 2013 12:26:18 -0800 (PST)
-Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
-	by mx.google.com with ESMTPSA id
-	x5sm40833577iga.6.2013.11.27.12.26.16
+	Wed, 27 Nov 2013 12:26:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:from:content-type:message-id:date:to
+	:content-transfer-encoding:mime-version;
+	bh=qWve8YORv8YJ/dqQLz5Q6T0vdgfqURx2JS3ZpvxE2VA=;
+	b=0dddTXkseQK+rGqD+55ot2mL6o5Y+dSt/kPrGnNSiq87RizreuXiyUPHsIWdCnUlRi
+	2AczTb2b1t6HZ0Op8cywKkFzHk0vHXRW5EenF4tNtNEZJFhwf156F88Ve25Zuuop6iEC
+	9wm383fVcfkACLc16kHeJWfvV1UfLUMGD4hE7L9hEeFRCtaGNSzzxRr6BgvTQlRlYlzn
+	XEriiCvyyUKdMt98dfmtjEKDSugVORkN8SBhS+42D8ZnTa+3DyT8S9kdXpNZFiOaunB8
+	RIMB1ysbMKl+MPM+h7BF0PFD5Gj/z7HCB9VAr52A6ZaztfHKH4Hx5nYu+4y52STIrFz0
+	TMyQ==
+X-Received: by 10.180.160.239 with SMTP id xn15mr24220801wib.17.1385583997826; 
+	Wed, 27 Nov 2013 12:26:37 -0800 (PST)
+Received: from [10.12.214.143] (to-18-93-73.service.infuturo.it.
+	[151.18.93.73]) by mx.google.com with ESMTPSA id
+	bk7sm74711949wib.10.2013.11.27.12.26.36
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 27 Nov 2013 12:26:17 -0800 (PST)
-Date: Wed, 27 Nov 2013 15:26:14 -0500
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131127202612.GB4355@deserted.net>
-References: <1385004460-3166-1-git-send-email-rongqing.li@windriver.com>
-	<5295AA14.6080105@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <5295AA14.6080105@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH] quagga: Backport a patch to fix extract.pl for cross compilation
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 27 Nov 2013 12:26:36 -0800 (PST)
+From: Simone <cjb.sw.nospam@gmail.com>
+X-Mailer: iPad Mail (11A501)
+Message-Id: <548EF836-E57E-42CC-8E0A-0D77045DE0AE@gmail.com>
+Date: Wed, 27 Nov 2013 21:26:37 +0100
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (1.0)
+Subject: Meta-qt5 sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,129 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 20:26:19 -0000
-X-Groupsio-MsgNum: 47285
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="K8nIJk4ghYZn606h"
-Content-Disposition: inline
-
---K8nIJk4ghYZn606h
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Nov 2013 20:26:39 -0000
+Content-Type: text/plain;
+	charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [PATCH] quagga: Backport a patch to fix extract.pl for cross comp=
-ilation] On 13.11.27 (Wed 16:15) Rongqing Li wrote:
+Hello to all,
+I'm new to this mailing list.
 
-> Hi Joe:
->=20
-> Welcome you back oe-devel, This patch needs to merge too.
+I'm writing because i want to ask the actual status of meta-qt5 layer.
+Actuallly, we are able to build qt5 with examples for our fsl based platform=
+.
+The problem is that, compared to qt4, there is no meta-toolchain-qt5 availab=
+le.
+The problem is how to configure host system (development pc with qtcreator) f=
+or cross compiling application and deploy/debugging them to remote ARM targe=
+t.
 
-I must've missed this when I was doing a scan of my mail backlog since
-it wasn't tagged meta-networking.  There's a much higher miss-rate on
-those.  :-)
+As for qt4, it would be necessary the famous toolchain that contain all libr=
+aries, paths and links for qt5, to cross develop application for arm target.=
 
-Merged now.
 
--J.
+Is this job planned to do by someone?
+If not, there is an alternative solution (maybe documented) to configure qtc=
+reator manually?
 
-> Thanks
->=20
-> -Roy
->=20
->=20
->=20
-> On 11/21/2013 11:27 AM, rongqing.li@windriver.com wrote:
-> >From: Roy Li <rongqing.li@windriver.com>
-> >
-> >Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> >---
-> >  ...uild-fix-extract.pl-for-cross-compilation.patch |   31 ++++++++++++=
-++++++++
-> >  .../recipes-protocols/quagga/quagga_0.99.21.bb     |    4 ++-
-> >  2 files changed, 34 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-networking/recipes-protocols/quagga/files/buil=
-d-fix-extract.pl-for-cross-compilation.patch
-> >
-> >diff --git a/meta-networking/recipes-protocols/quagga/files/build-fix-ex=
-tract.pl-for-cross-compilation.patch b/meta-networking/recipes-protocols/qu=
-agga/files/build-fix-extract.pl-for-cross-compilation.patch
-> >new file mode 100644
-> >index 0000000..e3ccc2a
-> >--- /dev/null
-> >+++ b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.p=
-l-for-cross-compilation.patch
-> >@@ -0,0 +1,31 @@
-> >+Upstream-Status: Backport
-> >+
-> >+From ed6e297972318a0070ad4d973401fbc6e0def558 Mon Sep 17 00:00:00 2001
-> >+From: Serj Kalichev <serj.kalichev@gmail.com>
-> >+Date: Fri, 7 Sep 2012 13:29:42 +0400
-> >+Subject: [PATCH] build: fix extract.pl for cross compilation
-> >+
-> >+extract.pl should invoke the C preprocessor for the target system, not =
-the
-> >+host.
-> >+
-> >+* vtysh/extract.pl.in: use @CPP@ to get target cpp
-> >+---
-> >+ vtysh/extract.pl.in |    2 +-
-> >+ 1 files changed, 1 insertions(+), 1 deletions(-)
-> >+
-> >+diff --git a/vtysh/extract.pl.in b/vtysh/extract.pl.in
-> >+index 7612aff..4c3a47f 100755
-> >+--- a/vtysh/extract.pl.in
-> >++++ b/vtysh/extract.pl.in
-> >+@@ -63,7 +63,7 @@ $ignore{'"show history"'} =3D "ignore";
-> >+ foreach (@ARGV) {
-> >+     $file =3D $_;
-> >+
-> >+-    open (FH, "cpp -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@t=
-op_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/is=
-isd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> >++    open (FH, "@cpp@ -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I=
-@top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/=
-isisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> >+     local $/; undef $/;
-> >+     $line =3D <FH>;
-> >+     close (FH);
-> >+--
-> >+1.7.1
-> >+
-> >diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb =
-b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> >index 10740bc..ae93952 100644
-> >--- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> >+++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> >@@ -3,7 +3,9 @@ require quagga.inc
-> >  PR =3D "${INC_PR}.0"
-> >
-> >  SRC_URI +=3D "file://0001-doc-fix-makeinfo-errors-and-one-warning.patc=
-h \
-> >-            file://lingering-IP-address-after-deletion-BZ-486.patch"
-> >+            file://lingering-IP-address-after-deletion-BZ-486.patch \
-> >+            file://build-fix-extract.pl-for-cross-compilation.patch \
-> >+"
-> >
-> >  SRC_URI[quagga-0.99.21.md5sum] =3D "99840adbe57047c90dfba6b6ed9aec7f"
-> >  SRC_URI[quagga-0.99.21.sha256sum] =3D "9b8aea9026b4771a28e254a66cbd854=
-723bcd0d71eebd0201d11838d4eb392ee"
-> >
->=20
---=20
--Joe MacDonald.
-:wq
+I think it would be very useful also for a lot of other people.
 
---K8nIJk4ghYZn606h
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Any suggestion?
+Regards
+Thanks=20
+Simone
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlKWVWQACgkQwFvcllog0XzxNwCeKwUMMwLrwNP9c2uGGCg/ZZx/
-Mf0AoLKQ+6lTSN0F69pgpFcYB4bVHzTS
-=GfdK
------END PGP SIGNATURE-----
 
---K8nIJk4ghYZn606h--
