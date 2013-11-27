@@ -1,39 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 892006D128
+Return-Path: <voipio@kos.to>
+Received: from afflict.kos.to (afflict.kos.to [92.243.29.197])
+	by mail.openembedded.org (Postfix) with ESMTP id 72FC76DCE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 13:43:03 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g15so4707044eak.4
+	Wed, 27 Nov 2013 15:19:04 +0000 (UTC)
+Received: from kos.to (91-157-196-38.elisa-laajakaista.fi [91.157.196.38])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by afflict.kos.to (Postfix) with ESMTPSA id C18B126554
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 05:43:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=5uKNnWH/PQim4FZo+1MmswEIDP0g0HGleE9vNNt0lkI=;
-	b=JADfyG4edDkT3KR51QRKdqw8Q08NvCq7UetdOhjMepmwxPjyrZDDGqRbeAUMAJSFLE
-	wAeuvfkWNMwN/p01XGkR1mozBoYu5XsVgVSd5RorPzjSJZBRgxWXpfm/M3W2RtOzDjLH
-	9Bgbc8YY8jBl++OYKWd1q6lJjRVqcnZ6t9VEckNOvkj9aMoF/HX/xyXwqlEGoite49dp
-	Ivc+YRexpkia3PeeyQNzIJAtcVL3HttlrIihoAJB481UXc50RLOI+R9lwehAmu+kg2oT
-	rcBgK6hbVO9dZZcCUm9UMi3wJNOWUNwYeas3gbCGJ1qbP67X6i+u/DEgfEJW4z8Vspmh
-	OoMw==
-X-Received: by 10.14.215.199 with SMTP id e47mr119933eep.107.1385559782666;
-	Wed, 27 Nov 2013 05:43:02 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id b42sm19742070eem.9.2013.11.27.05.42.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 Nov 2013 05:43:01 -0800 (PST)
-Date: Wed, 27 Nov 2013 14:43:02 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 27 Nov 2013 16:19:01 +0100 (CET)
+Received: from voipio (uid 1000) (envelope-from voipio@kos.to) id 5e06d5
+	by kos.to (DragonFly Mail Agent); Wed, 27 Nov 2013 17:19:00 +0200
+From: Riku Voipio <riku.voipio@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131127134302.GP2870@jama>
-References: <1385548830-6541-1-git-send-email-nickdademo@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1385548830-6541-1-git-send-email-nickdademo@gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] opencv: bump SRCREV and make recipe multilib build compatible
+Date: Wed, 27 Nov 2013 17:18:54 +0200
+Message-Id: <1385565534-17423-1-git-send-email-riku.voipio@linaro.org>
+X-Mailer: git-send-email 1.8.1.2
+Cc: otavio@ossystems.com.br, patches@linaro.org
+Subject: [meta-browser][PATCH] nss: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,89 +31,248 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 13:43:03 -0000
-X-Groupsio-MsgNum: 47279
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oN4OvwWIcd1E23D1"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Nov 2013 15:19:05 -0000
 
---oN4OvwWIcd1E23D1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+nss has been added to OE-core, so an old copy in meta-browser
+is just confusing.
 
-On Wed, Nov 27, 2013 at 09:40:30PM +1100, Nick D'Ademo wrote:
-> Pass LIB_SUFFIX to CMake during a multilib build so that the generated li=
-brary folder has the correct suffix.
->=20
-> Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_2.4.bb |   10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recip=
-es-support/opencv/opencv_2.4.bb
-> index 9dd9cd0..8d4d8da 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> @@ -9,7 +9,7 @@ ARM_INSTRUCTION_SET =3D "arm"
-> =20
->  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gli=
-b-2.0"
-> =20
-> -SRCREV =3D "c5afaa4e8dfe507e87531f7688b9cf65c1f701c6"
-> +SRCREV =3D "1253c2101b22b9e89400553fd220858cda8d6ea5"
->  SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
->             file://opencv-fix-pkgconfig-generation.patch \
->  "
-> @@ -27,6 +27,8 @@ EXTRA_OECMAKE =3D "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=3D${=
-STAGING_LIBDIR}/${PYTHON_DIR}
->                   -DWITH_GSTREAMER=3DOFF \
->                   -DCMAKE_SKIP_RPATH=3DON \
->                   ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENA=
-BLE_SSE=3D1 -DENABLE_SSE2=3D1 -DENABLE_SSE3=3D1 -DENABLE_SSSE3=3D1", "", d)=
-} \
-> +                 ${@bb.utils.contains("libdir", "/usr/lib64", "-DLIB_SUF=
-FIX=3D64", "", d)} \
-> +                 ${@bb.utils.contains("libdir", "/usr/lib32", "-DLIB_SUF=
-FIX=3D32", "", d)} \
+Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
+---
+ recipes-support/nss/nss-3.13.3/native_cc.patch    |  55 ----------
+ recipes-support/nss/nss-3.13.3/nss.pc.in          |  11 --
+ recipes-support/nss/nss-3.13.3/skip_signing.patch |  18 ----
+ recipes-support/nss/nss_3.13.3.bb                 | 116 ----------------------
+ 4 files changed, 200 deletions(-)
+ delete mode 100644 recipes-support/nss/nss-3.13.3/native_cc.patch
+ delete mode 100644 recipes-support/nss/nss-3.13.3/nss.pc.in
+ delete mode 100644 recipes-support/nss/nss-3.13.3/skip_signing.patch
+ delete mode 100644 recipes-support/nss/nss_3.13.3.bb
 
-do you need contains here? Why not base_conditional?
->  "
-> =20
->  PACKAGECONFIG ??=3D "eigen gtk jpeg libav png tiff v4l"
-> @@ -88,4 +90,10 @@ RDEPENDS_python-opencv =3D "python-core python-numpy"
->  do_install_append() {
->      cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
->      sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
-> +
-> +    # Move Python files into correct library folder (for multilib build)
-> +    if [ "$libdir" !=3D "/usr/lib" ]; then
-> +        mv ${D}/usr/lib/* ${D}/${libdir}/
-> +        rm -rf ${D}/usr/lib
-> +    fi
->  }
-> --=20
-> 1.7.9.5
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-support/nss/nss-3.13.3/native_cc.patch b/recipes-support/nss/nss-3.13.3/native_cc.patch
+deleted file mode 100644
+index 41d4980..0000000
+--- a/recipes-support/nss/nss-3.13.3/native_cc.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-we need to override ARCHFLAG as well since this is set to either -m32 or -m64
+-and LDFLAGS add it explicitly which means when NATIVE_CC is defined then we build
+-the objects as 64bit but link them to be 32bit binary which may not fly
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Index: mozilla/security/coreconf/mkdepend/Makefile
+-===================================================================
+---- mozilla.orig/security/coreconf/mkdepend/Makefile	2013-01-09 13:23:51.747694602 -0800
+-+++ mozilla/security/coreconf/mkdepend/Makefile	2013-01-09 13:56:27.003734720 -0800
+-@@ -64,11 +64,11 @@
+- endif
+- 
+- ifdef NATIVE_CC
+--CC=$(NATIVE_CC)
+-+override CC=$(NATIVE_CC)
+- endif
+- 
+- ifdef NATIVE_FLAGS
+--OS_CFLAGS=$(NATIVE_FLAGS)
+-+override OS_CFLAGS=$(NATIVE_FLAGS)
+- endif
+- 
+- include $(DEPTH)/coreconf/rules.mk
+-Index: mozilla/security/coreconf/nsinstall/Makefile
+-===================================================================
+---- mozilla.orig/security/coreconf/nsinstall/Makefile	2013-01-09 13:23:51.747694602 -0800
+-+++ mozilla/security/coreconf/nsinstall/Makefile	2013-01-09 13:56:11.775734407 -0800
+-@@ -58,11 +58,11 @@
+- endif
+- 
+- ifdef NATIVE_CC
+--CC=$(NATIVE_CC)
+-+override CC=$(NATIVE_CC)
+- endif
+- 
+- ifdef NATIVE_FLAGS
+--OS_CFLAGS=$(NATIVE_FLAGS)
+-+override OS_CFLAGS=$(NATIVE_FLAGS)
+- endif
+- 
+- include $(DEPTH)/coreconf/rules.mk
+-Index: mozilla/security/coreconf/Linux.mk
+-===================================================================
+---- mozilla.orig/security/coreconf/Linux.mk	2013-01-09 13:50:01.427726808 -0800
+-+++ mozilla/security/coreconf/Linux.mk	2013-01-09 13:55:58.815734141 -0800
+-@@ -98,6 +98,9 @@
+- endif
+- endif
+- 
+-+ifdef NATIVE_FLAGS
+-+    override ARCHFLAG=
+-+endif
+- 
+- LIBC_TAG		= _glibc
+- 
+diff --git a/recipes-support/nss/nss-3.13.3/nss.pc.in b/recipes-support/nss/nss-3.13.3/nss.pc.in
+deleted file mode 100644
+index abbc850..0000000
+--- a/recipes-support/nss/nss-3.13.3/nss.pc.in
++++ /dev/null
+@@ -1,11 +0,0 @@
+-prefix=OEPREFIX
+-exec_prefix=OEEXECPREFIX
+-libdir=OELIBDIR
+-includedir=OEINCDIR
+-
+-Name: NSS
+-Description: Mozilla Network Security Services
+-Version: @VERSION@
+-Requires: nspr
+-Libs: -L${libdir} -lnss3 -lnssutil3 -lsmime3 -lssl3 
+-Cflags: -I${includedir} -I${includedir}/mozilla/nss
+diff --git a/recipes-support/nss/nss-3.13.3/skip_signing.patch b/recipes-support/nss/nss-3.13.3/skip_signing.patch
+deleted file mode 100644
+index 64e440d..0000000
+--- a/recipes-support/nss/nss-3.13.3/skip_signing.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+-# HG changeset patch
+-# User Ted Mielczarek <ted.mielczarek@gmail.com>
+-# Date 1314190279 14400
+-# Node ID a993dd883a502a15d0a8acebb7bf31fdbd0fd18f
+-# Parent  5a4a2b65e7b4950aa7cadc03aac43489ee314ba7
+-[mq]: skip-shlibsigh
+-
+-diff --git a/security/nss/cmd/shlibsign/Makefile b/security/nss/cmd/shlibsign/Makefile
+---- a/security/nss/cmd/shlibsign/Makefile
+-+++ b/security/nss/cmd/shlibsign/Makefile
+-@@ -120,5 +120,6 @@
+- 	$(call core_abspath,$(NSPR_LIB_DIR)) $(call core_abspath,$<)
+- endif
+- 
+-+ifndef SKIP_SHLIBSIGN
+- libs install :: $(CHECKLOC)
+--
+-+endif
+diff --git a/recipes-support/nss/nss_3.13.3.bb b/recipes-support/nss/nss_3.13.3.bb
+deleted file mode 100644
+index ac77547..0000000
+--- a/recipes-support/nss/nss_3.13.3.bb
++++ /dev/null
+@@ -1,116 +0,0 @@
+-DESCRIPTION = "Mozilla's SSL and TLS implementation"
+-HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
+-
+-PR = "r4"
+-
+-LICENSE = "MPL1.1 GPL LGPL"
+-LIC_FILES_CHKSUM = "file://security/nss/manifest.mn;md5=d71978748f23eae3156c38ac2a691924"
+-
+-DEPENDS = "sqlite3 nspr nspr-native"
+-
+-SRC_URI = "\
+-	http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_13_3_RTM/src/${PN}-${PV}.tar.gz \
+-	file://nss.pc.in \
+-	file://skip_signing.patch \
+-        file://native_cc.patch \
+-"
+-
+-S = "${WORKDIR}/${P}/mozilla"
+-
+-SRC_URI[md5sum] = "006cb82fa900e9e664b4b14a9b7810ca"
+-SRC_URI[sha256sum] = "efa10f2c70da4bddabf1a6081964969bb23359b93d6eadbf4739274a77bc3587"
+-
+-TD = "${S}/tentative-dist"
+-
+-PARALLEL_MAKE = ""
+-
+-USE64BIT_x86-64 = "USE_64=1"
+-USE64BIT_mips64 = "USE_64=1"
+-USE64BIT_mips64el = "USE_64=1"
+-USE64BIT ?= ""
+-
+-do_compile() {
+-#	sed -e 's:SOURCE_PREFIX = $(CORE_DEPTH)/\.\./dist:SOURCE_PREFIX = $(CORE_DEPTH)/dist:' -i ${S}/security/coreconf/source.mk
+-	make -C security/nss \
+-		build_coreconf \
+-		build_dbm \
+-		export libs program \
+-		MOZILLA_CLIENT=1 \
+-		BUILD_OPT=1 \
+-		SKIP_SHLIBSIGN=1 \
+-		OS_TARGET="Linux" \
+-		OS_TARGET_RELEASE="2.6" \
+-		OS_TEST="${TARGET_ARCH}" \
+-		NSPR_INCLUDE_DIR="${STAGING_INCDIR}/mozilla/nspr" \
+-		NSPR_LIB_DIR="${STAGING_LIBDIR}" \
+-		SQLITE3_INCLUDE_DIR="${STAGING_INCDIR}" \
+-		OPTIMIZER="${CFLAGS}" \
+-		NS_USE_GCC=1 \
+-		NSS_USE_SYSTEM_SQLITE=1 \
+-		NSS_ENABLE_ECC=1 \
+-		DEFAULT_COMPILER="${TARGET_CC}" \
+-		CC="${CC}" \
+-		CCC="${CXX}" \
+-		CXX="${CXX}" \
+-		RANLIB="${RANLIB}" \
+-		NATIVE_CC="${BUILD_CC}" \
+-		NATIVE_FLAGS="${BUILD_CFLAGS}" \
+-		${USE64BIT}
+-}
+-
+-do_install() {
+-	make -C security/nss \
+-		install \
+-		MOZILLA_CLIENT=1 \
+-		BUILD_OPT=1 \
+-		SKIP_SHLIBSIGN=1 \
+-		OS_TARGET=Linux \
+-		OS_TARGET_RELEASE="2.6" \
+-		OS_TEST="${TARGET_ARCH}" \
+-		NSPR_INCLUDE_DIR="${STAGING_INCDIR}/mozilla/nspr" \
+-		NSPR_LIB_DIR="${STAGING_LIBDIR}" \
+-		NS_USE_GCC=1 \
+-		NSS_USE_SYSTEM_SQLITE=1 \
+-		NSS_ENABLE_ECC=1 \
+-		FREEBL_CHILD_BUILD=1 \
+-		CC="${CC}" \
+-		SOURCE_LIB_DIR="${TD}/${libdir}" \
+-		SOURCE_BIN_DIR="${TD}/${bindir}" \
+-		${USE64BIT}
+-
+-	install -d ${D}/${libdir}
+-
+-	for shared_lib in ${TD}/${libdir}/*.so*
+-	do
+-#		oe_libinstall -C ${TD}/${libdir} `basename $shared_lib .so` ${D}/${libdir}
+-		cp $shared_lib ${D}/${libdir}
+-#		ln -sf $(basename $shared_lib) ${D}/${libdir}/$(basename $shared_lib .1oe)
+-	done
+-
+-	install -d ${D}/${includedir}/mozilla/nss
+-	install -m 644 -t ${D}/${includedir}/mozilla/nss ${S}/dist/public/nss/*
+-
+-	for static_lib in ${TD}/${libdir}/*.a
+-	do
+-		oe_libinstall -C ${TD}/${libdir} `basename $static_lib .a` ${D}/${libdir}
+-	done
+-
+-	install -d ${D}/${bindir}
+-	for binary in ${TD}/${bindir}/*
+-	do
+-		install -m 755 -t ${D}/${bindir} $binary
+-	done
+-
+-	install -D ${WORKDIR}/nss.pc.in ${D}${libdir}/pkgconfig/nss.pc
+-	sed -i s:@VERSION@:${PV}:g ${D}${libdir}/pkgconfig/nss.pc
+-	sed -i s:OEPREFIX:${prefix}:g ${D}${libdir}/pkgconfig/nss.pc
+-	sed -i s:OELIBDIR:${libdir}:g ${D}${libdir}/pkgconfig/nss.pc
+-	sed -i s:OEINCDIR:${includedir}:g ${D}${libdir}/pkgconfig/nss.pc
+-	sed -i s:OEEXECPREFIX:${exec_prefix}:g ${D}${libdir}/pkgconfig/nss.pc
+-
+-	sed -i s:/usr/local/bin/perl:${bindir}/perl:g ${D}${bindir}/smime
+-}
+-
+-FILES_SOLIBSDEV := ""
+-FILES_${PN} += "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*${SOLIBSDEV}"
+-RDEPENDS_${PN} += "perl"
+-- 
+1.8.1.2
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---oN4OvwWIcd1E23D1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlKV9uYACgkQN1Ujt2V2gByAWgCfcIHxrIL5I2uYQ+XcP8lEscyr
-cDwAnjj3BA2S2IKtHfaTtxXBZPzWE9YY
-=hT43
------END PGP SIGNATURE-----
-
---oN4OvwWIcd1E23D1--
