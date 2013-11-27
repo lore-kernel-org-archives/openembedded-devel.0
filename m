@@ -1,37 +1,48 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 12E2C6DE3D
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ADD86D014
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 17:50:31 +0000 (UTC)
-Received: by mail-pd0-f180.google.com with SMTP id q10so10309677pdj.25
+	Wed, 27 Nov 2013 20:19:14 +0000 (UTC)
+Received: by mail-ie0-f178.google.com with SMTP id lx4so12735542iec.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 09:50:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=/fJcEr+GQQtpLUfHYrWFBAr3i4bMrQE0pp6DH6+Tv6Y=;
-	b=uu1xUe0D8w+hqHv1fc2c0diorknnhhCW3eLa+xhGYewrc//S8/awYem0yth3IxfOYY
-	Sy8Hw+/OKO9GIgmJFrpE/ZhZSOlDqMItkEdpsPL938edas3bcXjbPrnKH20+9YET5v5e
-	dOluoBXok3cxpVmc7X3fxOP3mMHmRuAJp+KIZRvF4P+99M9KdSBjoNT9mBsvNeHkGowH
-	4IO+ubcsWRe/xbu/7va0CxxZTMb/4ihLw0CdGhHLqS3MRjm8xLBrM8J2mU+WCH3mJyXe
-	6lkfNiAun+zBrXHGWA0PObeUPNPpVRAiAjfVvHk04NeqL9VDWcYs6N/N66BIzCW/26S5
-	l7DQ==
-X-Received: by 10.68.221.233 with SMTP id qh9mr6368144pbc.103.1385574630942;
-	Wed, 27 Nov 2013 09:50:30 -0800 (PST)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	Wed, 27 Nov 2013 12:19:13 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=uSKSafTLmarerbNjDYxSTFl62K4KnrFg2vg2g8NNzig=;
+	b=X/HSOPwndoxOXssjXkQIOKaymdYIzGbzOY8MsM3wM13p4hH9b2QMj32P+R4qE082QU
+	GoTtAlM7CqFLGbHf/5BQTMLmAgJ/jYg9DGbDPOoPU+vV+GoTmtAXm8cCZvkrK7FftBwK
+	aSB5zujvhfRaEcHJ0rDD/BZL0i/lEQXwdxtHkeqJh5cAz42GIjiuceZ1mpJnapjt3tR/
+	mnhJLC5vvXN4gYi9j7iEH+BZ+oQwJP5WpxCAyTucN+120sRHjZoqbBrThqn8VaHNGNqy
+	ce1Y4tzvDxaGE1p4LvMmGPStfLwxV07GO7HCWeREVzHIyAQEVXZLJb/Lrmu67UREV9kA
+	JtPQ==
+X-Gm-Message-State: ALoCoQkGJHEU/XUoJ32n8V9yub5KaXVmWmCLYYsafb53zLxXtssqfL+Np7rSIx1gT8cozDFxM0Cb
+X-Received: by 10.50.56.50 with SMTP id x18mr23180271igp.48.1385583553413;
+	Wed, 27 Nov 2013 12:19:13 -0800 (PST)
+Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
 	by mx.google.com with ESMTPSA id
-	sg1sm89415355pbb.16.2013.11.27.09.50.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 27 Nov 2013 09:50:29 -0800 (PST)
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Nov 2013 10:50:20 -0700
-Message-Id: <1385574620-9408-2-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.8.3.4
-In-Reply-To: <1385574620-9408-1-git-send-email-kergoth@gmail.com>
-References: <1385574620-9408-1-git-send-email-kergoth@gmail.com>
-Subject: [meta-oe][PATCH 2/2] lmbench: fix the CONFIG path in lmbench-run
+	k6sm40789883igx.8.2013.11.27.12.19.11 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 27 Nov 2013 12:19:12 -0800 (PST)
+Date: Wed, 27 Nov 2013 15:19:09 -0500
+From: Joe MacDonald <joe@deserted.net>
+To: Xufeng Zhang <xufeng.zhang@windriver.com>
+Message-ID: <20131127201907.GA4355@deserted.net>
+References: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
+	<528B0D8A.2090101@windriver.com>
+	<20131126145058.GA3939@deserted.net>
+	<52955598.7030406@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <52955598.7030406@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +56,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 17:50:33 -0000
+X-List-Received-Date: Wed, 27 Nov 2013 20:19:16 -0000
+X-Groupsio-MsgNum: 47284
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="17pEHd4RhPHOinZp"
+Content-Disposition: inline
 
-The 'config' script which gets run returns '../scripts/CONFIG.<machine>', so
-the current value was '${datadir}/lmbench/../scripts/CONFIG.<machine>', which
-is obviously not ideal. Remove the $SHAREDIR prefix, as the relative path will
-work from the scripts dir where lmbench-run runs. With this, we can install
-a custom CONFIG.qemux86 into ${datadir}/lmbench/scripts/, for example.
+--17pEHd4RhPHOinZp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Christopher Larson <kergoth@gmail.com>
----
- meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[Re: [oe] [OE][PATCH meta-networking] quagga: Avoid duplicate connected add=
+ress adding to the list] On 13.11.27 (Wed 10:14) Xufeng Zhang wrote:
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index fb8cf4f..b4020d7 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -55,7 +55,7 @@ do_install () {
-     install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
-     sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
-            -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
--           -e 's,^CONFIG=.*$,CONFIG=$SHAREDIR/`$SCRIPTSDIR/config`,;' \
-+           -e 's,^CONFIG=.*$,CONFIG=`$SCRIPTSDIR/config`,;' \
-            ${D}${bindir}/lmbench-run
-     install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
-     install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
--- 
-1.8.3.4
+> On 11/26/2013 10:51 PM, Joe MacDonald wrote:
+> >[Re: [oe] [OE][PATCH meta-networking] quagga: Avoid duplicate connected =
+address adding to the list] On 13.11.19 (Tue 15:04) Xufeng Zhang wrote:
+> >
+> >>Hi Joe,
+> >>
+> >>After this fix, we can do nothing to other daemons.
+> >Nice.  Thanks for following up on this, Xufeng.  Do you think it is
+> >reasonable to remove ripd-fix-two-bugs-after-received-SIGHUP.patch, or
+> >is it still required for ripd?
+>=20
+> We should still keep it since
+> ripd-fix-two-bugs-after-received-SIGHUP.patch also
+> fix another bug(RIP_NO_SPLIT_HORIZON flag problem).
 
+That's what I was thinking after I looked at the patch again, but thanks
+for the confirmation.
 
+-J.
+
+>=20
+>=20
+> Thanks,
+> Xufeng
+>=20
+> >-J.
+> >
+> >>
+> >>Thanks,
+> >>Xufeng
+> >>
+> >>On 11/19/2013 03:02 PM, Xufeng Zhang wrote:
+> >>>commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP sign=
+al")
+> >>>introduces an regression: ifp->connected list is cleaned up when ripd =
+is
+> >>>restarting, however, for interface addresses which are not specified in
+> >>>ripd configuration file, they are never to be added into ifp->connected
+> >>>again, this will lead to some abnormal behavior for route advertising.
+> >>>
+> >>>Instead of cleaning up the ifp->connected list to avoid duplicated
+> >>>connected address being added into this list, we can check this
+> >>>condition during interface address adding process and return early
+> >>>when an identical address has already been added.
+> >>>
+> >>>Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+> >>>---
+> >>>  .../quagga-Avoid-duplicate-connected-address.patch |   53 ++++++++++=
+++++++++++
+> >>>  .../recipes-protocols/quagga/quagga.inc            |    3 +-
+> >>>  2 files changed, 55 insertions(+), 1 deletions(-)
+> >>>  create mode 100644 meta-networking/recipes-protocols/quagga/files/qu=
+agga-Avoid-duplicate-connected-address.patch
+> >>>
+> >>>diff --git a/meta-networking/recipes-protocols/quagga/files/quagga-Avo=
+id-duplicate-connected-address.patch b/meta-networking/recipes-protocols/qu=
+agga/files/quagga-Avoid-duplicate-connected-address.patch
+> >>>new file mode 100644
+> >>>index 0000000..585dc29
+> >>>--- /dev/null
+> >>>+++ b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-dupl=
+icate-connected-address.patch
+> >>>@@ -0,0 +1,53 @@
+> >>>+quagga: Avoid duplicate connected address adding to the list
+> >>>+
+> >>>+commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP sig=
+nal")
+> >>>+introduces an regression: ifp->connected list is cleaned up when ripd=
+ is
+> >>>+restarting, however, for interface addresses which are not specified =
+in
+> >>>+ripd configuration file, they are never to be added into ifp->connect=
+ed
+> >>>+again, this will lead to some abnormal behavior for route advertising.
+> >>>+
+> >>>+Instead of cleaning up the ifp->connected list to avoid duplicated
+> >>>+connected address being added into this list, we can check this
+> >>>+condition during interface address adding process and return early
+> >>>+when an identical address has already been added.
+> >>>+
+> >>>+Upstream-Status: Pending
+> >>>+
+> >>>+Signed-off-by: Hu Yadi<Yadi.hu@windriver.com>
+> >>>+Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+> >>>+---
+> >>>+--- a/lib/if.c
+> >>>++++ b/lib/if.c
+> >>>+@@ -738,6 +738,16 @@
+> >>>+                          struct prefix *destination)
+> >>>+ {
+> >>>+   struct connected *ifc;
+> >>>++  struct listnode *cnode;
+> >>>++  struct connected *c;
+> >>>++  int ret =3D 0;
+> >>>++
+> >>>++  for (ALL_LIST_ELEMENTS_RO (ifp->connected, cnode, c))
+> >>>++    {
+> >>>++      ret =3D connected_same_prefix (p, (c->address));
+> >>>++      if(ret =3D=3D 1)
+> >>>++        return NULL;
+> >>>++    }
+> >>>+
+> >>>+   /* Allocate new connected address. */
+> >>>+   ifc =3D connected_new ();
+> >>>+--- a/ripd/rip_interface.c
+> >>>++++ b/ripd/rip_interface.c
+> >>>+@@ -516,13 +516,6 @@
+> >>>+ 	  thread_cancel (ri->t_wakeup);
+> >>>+ 	  ri->t_wakeup =3D NULL;
+> >>>+ 	}
+> >>>+-
+> >>>+-      for (conn_node =3D listhead (ifp->connected); conn_node; conn_=
+node =3D next)
+> >>>+-	{
+> >>>+-	  ifc =3D listgetdata (conn_node);
+> >>>+-	  next =3D conn_node->next;
+> >>>+-	  listnode_delete (ifp->connected, ifc);
+> >>>+-	}
+> >>>+     }
+> >>>+ }
+> >>>+
+> >>>diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/met=
+a-networking/recipes-protocols/quagga/quagga.inc
+> >>>index 2106c9b..21c2028 100644
+> >>>--- a/meta-networking/recipes-protocols/quagga/quagga.inc
+> >>>+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+> >>>@@ -32,7 +32,8 @@ SRC_URI =3D "http://download.savannah.gnu.org/releas=
+es/quagga${QUAGGASUBDIR}/quagg
+> >>>             file://watchquagga.init \
+> >>>             file://watchquagga.default \
+> >>>             file://volatiles.03_quagga \
+> >>>-           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
+> >>>+           file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
+> >>>+           file://quagga-Avoid-duplicate-connected-address.patch"
+> >>>
+> >>>  PACKAGECONFIG ??=3D ""
+> >>>  PACKAGECONFIG[cap] =3D "--enable-capabilities,--disable-capabilities=
+,libcap"
+>=20
+
+--=20
+-Joe MacDonald.
+:wq
+
+--17pEHd4RhPHOinZp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlKWU64ACgkQwFvcllog0XzqHACfYtQVLV1AZzRCQbXkfHEdY6RE
+5GIAnjeMwWUlAk0VYucFHrKSJboRxZZp
+=P3s9
+-----END PGP SIGNATURE-----
+
+--17pEHd4RhPHOinZp--
