@@ -1,27 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CB5FF6C738
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 66B356D86B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 08:15:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rAR8FIqD007699
+	Wed, 27 Nov 2013 08:37:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rAR8bC3c012348
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 00:15:18 -0800 (PST)
-Received: from [128.224.162.168] (128.224.162.168) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Wed, 27 Nov 2013 00:15:17 -0800
-Message-ID: <5295AA14.6080105@windriver.com>
-Date: Wed, 27 Nov 2013 16:15:16 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Wed, 27 Nov 2013 00:37:12 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.347.0; Wed, 27 Nov 2013 00:37:11 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 27 Nov 2013 16:37:10 +0800
+Message-ID: <1385541430-19861-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, <Joe.macdonald@windriver.com>
-References: <1385004460-3166-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1385004460-3166-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH] quagga: Backport a patch to fix extract.pl for cross compilation
+Subject: [PATCH meta-networking] proftpd: move pidfile from /var/ to /var/run/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,84 +32,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 08:15:19 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 Nov 2013 08:37:12 -0000
+Content-Type: text/plain
 
-Hi Joe:
+From: Roy Li <rongqing.li@windriver.com>
 
-Welcome you back oe-devel, This patch needs to merge too.
-Thanks
+/var/run/ is more suitable to store pidfile for OE, and this fixes
+"/etc/init.d/proftpd stop" failure too, since this script assumes
+the pidfile is under /var/run
 
--Roy
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../proftpd/files/move-pidfile-to-var-run.patch    |   39 ++++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
 
-
-
-On 11/21/2013 11:27 AM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   ...uild-fix-extract.pl-for-cross-compilation.patch |   31 ++++++++++++++++++++
->   .../recipes-protocols/quagga/quagga_0.99.21.bb     |    4 ++-
->   2 files changed, 34 insertions(+), 1 deletion(-)
->   create mode 100644 meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
->
-> diff --git a/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
-> new file mode 100644
-> index 0000000..e3ccc2a
-> --- /dev/null
-> +++ b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
-> @@ -0,0 +1,31 @@
-> +Upstream-Status: Backport
-> +
-> +From ed6e297972318a0070ad4d973401fbc6e0def558 Mon Sep 17 00:00:00 2001
-> +From: Serj Kalichev <serj.kalichev@gmail.com>
-> +Date: Fri, 7 Sep 2012 13:29:42 +0400
-> +Subject: [PATCH] build: fix extract.pl for cross compilation
-> +
-> +extract.pl should invoke the C preprocessor for the target system, not the
-> +host.
-> +
-> +* vtysh/extract.pl.in: use @CPP@ to get target cpp
-> +---
-> + vtysh/extract.pl.in |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/vtysh/extract.pl.in b/vtysh/extract.pl.in
-> +index 7612aff..4c3a47f 100755
-> +--- a/vtysh/extract.pl.in
-> ++++ b/vtysh/extract.pl.in
-> +@@ -63,7 +63,7 @@ $ignore{'"show history"'} = "ignore";
-> + foreach (@ARGV) {
-> +     $file = $_;
-> +
-> +-    open (FH, "cpp -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/isisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> ++    open (FH, "@cpp@ -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/isisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> +     local $/; undef $/;
-> +     $line = <FH>;
-> +     close (FH);
-> +--
-> +1.7.1
-> +
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> index 10740bc..ae93952 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> +++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-> @@ -3,7 +3,9 @@ require quagga.inc
->   PR = "${INC_PR}.0"
->
->   SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
-> -            file://lingering-IP-address-after-deletion-BZ-486.patch"
-> +            file://lingering-IP-address-after-deletion-BZ-486.patch \
-> +            file://build-fix-extract.pl-for-cross-compilation.patch \
-> +"
->
->   SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
->   SRC_URI[quagga-0.99.21.sha256sum] = "9b8aea9026b4771a28e254a66cbd854723bcd0d71eebd0201d11838d4eb392ee"
->
-
+diff --git a/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
+new file mode 100644
+index 0000000..953bbdd
+--- /dev/null
++++ b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
+@@ -0,0 +1,39 @@
++move pidfile to /var/run
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ configure    |    2 +-
++ configure.in |    2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/configure b/configure
++index e6268f5..ebed38e 100755
++--- a/configure
+++++ b/configure
++@@ -33587,7 +33587,7 @@ cat >>confdefs.h <<_ACEOF
++ _ACEOF
++ 
++ cat >>confdefs.h <<_ACEOF
++-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
+++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
++ _ACEOF
++ 
++ 
++diff --git a/configure.in b/configure.in
++index df9186a..e2ae868 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -2790,7 +2790,7 @@ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
++ 
++ AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
++ AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
++-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
+++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
++ 
++ prefix="$pr_saved_prefix"
++ exec_prefix="$pr_saved_exec_prefix"
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+index 6571b9c..14d88cf 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+@@ -12,6 +12,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://contrib.patch \
+            file://proftpd-basic.init \
+            file://default \
++           file://move-pidfile-to-var-run.patch \
+ "
+ 
+ SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.7.10.4
+
 
