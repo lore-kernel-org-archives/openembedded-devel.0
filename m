@@ -1,24 +1,35 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 66B356D86B
+Return-Path: <nickdademo@gmail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 70BB76D586
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 08:37:12 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rAR8bC3c012348
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 27 Nov 2013 10:30:27 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id y13so9639070pdi.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 00:37:12 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 27 Nov 2013 00:37:11 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Nov 2013 16:37:10 +0800
-Message-ID: <1385541430-19861-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Subject: [PATCH meta-networking] proftpd: move pidfile from /var/ to /var/run/
+	Wed, 27 Nov 2013 02:30:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=mGQ8VyW3dq9CzQr+NNIErpEnV1a2J7mwgvcvLe2l8bA=;
+	b=af57Sd/+JqgiSBMe3AwRJbfdnXXG2xUGQlhlKVCZnjikSpOsiB+oK3kaiNky3ty6tR
+	TAfpMU6KUyc5p4cE+kOXUSoCE1WHScnedVkas9IMzM6JcsHFLoIjvVN5EtsGH0r4vErM
+	PF8fx41ODp5jixvlTzLWFZPRL6KPgCUR8I5RK4NIOqkHqwSl2LVA23t1o+vUmuUcOQu2
+	feidizVKUX4bpcjsy6EQMbbFY05ef8FAkPADtuUPb5ma7uGaolAIUqAWkel6QD0Qw8OK
+	l5XkhXraDu0DCBjtHOnDCz188NX5HhWeft8iGahfJAEI4gCLiTWcmO7DNK9cQncWAKyM
+	yiMg==
+X-Received: by 10.66.162.195 with SMTP id yc3mr40332073pab.64.1385548227217;
+	Wed, 27 Nov 2013 02:30:27 -0800 (PST)
+Received: from localhost.localdomain
+	(d110-32-96-161.meb801.vic.optusnet.com.au. [110.32.96.161])
+	by mx.google.com with ESMTPSA id xe9sm98437295pab.0.2013.11.27.02.30.25
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 27 Nov 2013 02:30:26 -0800 (PST)
+From: Nick D'Ademo <nickdademo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Nov 2013 21:29:42 +1100
+Message-Id: <1385548182-6355-1-git-send-email-nickdademo@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] tk: make multilib build compatible and fix library install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,80 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 08:37:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Nov 2013 10:30:27 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
+Pass libdir to EXTRA_OECONF so that recipe generates the correct library folder in a multilib build.
 
-/var/run/ is more suitable to store pidfile for OE, and this fixes
-"/etc/init.d/proftpd stop" failure too, since this script assumes
-the pidfile is under /var/run
+Install shared library symbolic link to image.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
 ---
- .../proftpd/files/move-pidfile-to-var-run.patch    |   39 ++++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
+ meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb |   17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
-new file mode 100644
-index 0000000..953bbdd
---- /dev/null
-+++ b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
-@@ -0,0 +1,39 @@
-+move pidfile to /var/run
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ configure    |    2 +-
-+ configure.in |    2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure b/configure
-+index e6268f5..ebed38e 100755
-+--- a/configure
-++++ b/configure
-+@@ -33587,7 +33587,7 @@ cat >>confdefs.h <<_ACEOF
-+ _ACEOF
-+ 
-+ cat >>confdefs.h <<_ACEOF
-+-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
-++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
-+ _ACEOF
-+ 
-+ 
-+diff --git a/configure.in b/configure.in
-+index df9186a..e2ae868 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -2790,7 +2790,7 @@ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
-+ 
-+ AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
-+ AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
-+-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
-++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
-+ 
-+ prefix="$pr_saved_prefix"
-+ exec_prefix="$pr_saved_exec_prefix"
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-index 6571b9c..14d88cf 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-@@ -12,6 +12,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-            file://contrib.patch \
-            file://proftpd-basic.init \
-            file://default \
-+           file://move-pidfile-to-var-run.patch \
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+index b76f58f..e999522 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+@@ -24,18 +24,31 @@ EXTRA_OECONF = "\
+     --enable-threads \
+     --with-x \
+     --with-tcl=${STAGING_BINDIR_CROSS} \
++    --libdir=${libdir} \
  "
  
- SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
+ do_install_append() {
+-    mv libtk8.6.so libtk8.6.so.0
++    ln -sf libtk8.6.so ${D}${libdir}/libtk8.6.so.0
+     oe_libinstall -so libtk8.6 ${D}${libdir}
+     ln -sf wish8.6 ${D}${bindir}/wish
++	
++    # Even after passing libdir=${libdir} at config, some incorrect dirs are still generated for the multilib build
++    if [ "$libdir" != "/usr/lib" ]; then
++        # Move files to correct library directory
++        mv ${D}/usr/lib/tk8.6/* ${D}/${libdir}/tk8.6/
++        # Remove unneeded/incorrect dir ('usr/lib/')
++        rm -rf ${D}/usr/lib
++    fi
+ }
+ 
+ PACKAGES =+ "${PN}-lib"
+ 
+-FILES_${PN}-lib = "${libdir}/libtk8.6.so.*"
++FILES_${PN}-lib = "${libdir}/libtk8.6.so*"
+ FILES_${PN} += "${libdir}/tk*"
+ 
++# isn't getting picked up by shlibs code
++RDEPENDS_${PN} += "tk-lib"
++RDEPENDS_${PN}_class-native = ""
++
+ BINCONFIG_GLOB = "*Config.sh"
+ BBCLASSEXTEND = "native"
 -- 
-1.7.10.4
+1.7.9.5
 
 
