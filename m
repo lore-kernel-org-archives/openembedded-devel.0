@@ -1,29 +1,27 @@
-Return-Path: <Xufeng.Zhang@windriver.com>
+Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 59B306B5D9
+	by mail.openembedded.org (Postfix) with ESMTP id CB5FF6C738
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 02:10:29 +0000 (UTC)
+	Wed, 27 Nov 2013 08:15:18 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rAR2ASlT029786
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 26 Nov 2013 18:10:28 -0800 (PST)
-Received: from [128.224.163.210] (128.224.163.210) by ALA-HCA.corp.ad.wrs.com
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rAR8FIqD007699
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Nov 2013 00:15:18 -0800 (PST)
+Received: from [128.224.162.168] (128.224.162.168) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Tue, 26 Nov 2013 18:10:27 -0800
-Message-ID: <52955598.7030406@windriver.com>
-Date: Wed, 27 Nov 2013 10:14:48 +0800
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5 ThunderBrowse/3.82
+	Wed, 27 Nov 2013 00:15:17 -0800
+Message-ID: <5295AA14.6080105@windriver.com>
+Date: Wed, 27 Nov 2013 16:15:16 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-To: Joe MacDonald <joe@deserted.net>
-References: <1384844550-18276-1-git-send-email-xufeng.zhang@windriver.com>
-	<528B0D8A.2090101@windriver.com>
-	<20131126145058.GA3939@deserted.net>
-In-Reply-To: <20131126145058.GA3939@deserted.net>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list
+To: <openembedded-devel@lists.openembedded.org>, <Joe.macdonald@windriver.com>
+References: <1385004460-3166-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1385004460-3166-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH] quagga: Backport a patch to fix extract.pl for cross compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,133 +35,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 02:10:31 -0000
+X-List-Received-Date: Wed, 27 Nov 2013 08:15:19 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 11/26/2013 10:51 PM, Joe MacDonald wrote:
-> [Re: [oe] [OE][PATCH meta-networking] quagga: Avoid duplicate connected address adding to the list] On 13.11.19 (Tue 15:04) Xufeng Zhang wrote:
+Hi Joe:
+
+Welcome you back oe-devel, This patch needs to merge too.
+Thanks
+
+-Roy
+
+
+
+On 11/21/2013 11:27 AM, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
 >
->    
->> Hi Joe,
->>
->> After this fix, we can do nothing to other daemons.
->>      
-> Nice.  Thanks for following up on this, Xufeng.  Do you think it is
-> reasonable to remove ripd-fix-two-bugs-after-received-SIGHUP.patch, or
-> is it still required for ripd?
->    
-
-We should still keep it since 
-ripd-fix-two-bugs-after-received-SIGHUP.patch also
-fix another bug(RIP_NO_SPLIT_HORIZON flag problem).
-
-
-Thanks,
-Xufeng
-
-> -J.
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>   ...uild-fix-extract.pl-for-cross-compilation.patch |   31 ++++++++++++++++++++
+>   .../recipes-protocols/quagga/quagga_0.99.21.bb     |    4 ++-
+>   2 files changed, 34 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
 >
->    
->>
->> Thanks,
->> Xufeng
->>
->> On 11/19/2013 03:02 PM, Xufeng Zhang wrote:
->>      
->>> commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
->>> introduces an regression: ifp->connected list is cleaned up when ripd is
->>> restarting, however, for interface addresses which are not specified in
->>> ripd configuration file, they are never to be added into ifp->connected
->>> again, this will lead to some abnormal behavior for route advertising.
->>>
->>> Instead of cleaning up the ifp->connected list to avoid duplicated
->>> connected address being added into this list, we can check this
->>> condition during interface address adding process and return early
->>> when an identical address has already been added.
->>>
->>> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
->>> ---
->>>   .../quagga-Avoid-duplicate-connected-address.patch |   53 ++++++++++++++++++++
->>>   .../recipes-protocols/quagga/quagga.inc            |    3 +-
->>>   2 files changed, 55 insertions(+), 1 deletions(-)
->>>   create mode 100644 meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
->>>
->>> diff --git a/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
->>> new file mode 100644
->>> index 0000000..585dc29
->>> --- /dev/null
->>> +++ b/meta-networking/recipes-protocols/quagga/files/quagga-Avoid-duplicate-connected-address.patch
->>> @@ -0,0 +1,53 @@
->>> +quagga: Avoid duplicate connected address adding to the list
->>> +
->>> +commit 27ba970b9("quagga/ripd: Fix two bugs after received SIGHUP signal")
->>> +introduces an regression: ifp->connected list is cleaned up when ripd is
->>> +restarting, however, for interface addresses which are not specified in
->>> +ripd configuration file, they are never to be added into ifp->connected
->>> +again, this will lead to some abnormal behavior for route advertising.
->>> +
->>> +Instead of cleaning up the ifp->connected list to avoid duplicated
->>> +connected address being added into this list, we can check this
->>> +condition during interface address adding process and return early
->>> +when an identical address has already been added.
->>> +
->>> +Upstream-Status: Pending
->>> +
->>> +Signed-off-by: Hu Yadi<Yadi.hu@windriver.com>
->>> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
->>> +---
->>> +--- a/lib/if.c
->>> ++++ b/lib/if.c
->>> +@@ -738,6 +738,16 @@
->>> +                          struct prefix *destination)
->>> + {
->>> +   struct connected *ifc;
->>> ++  struct listnode *cnode;
->>> ++  struct connected *c;
->>> ++  int ret = 0;
->>> ++
->>> ++  for (ALL_LIST_ELEMENTS_RO (ifp->connected, cnode, c))
->>> ++    {
->>> ++      ret = connected_same_prefix (p, (c->address));
->>> ++      if(ret == 1)
->>> ++        return NULL;
->>> ++    }
->>> +
->>> +   /* Allocate new connected address. */
->>> +   ifc = connected_new ();
->>> +--- a/ripd/rip_interface.c
->>> ++++ b/ripd/rip_interface.c
->>> +@@ -516,13 +516,6 @@
->>> + 	  thread_cancel (ri->t_wakeup);
->>> + 	  ri->t_wakeup = NULL;
->>> + 	}
->>> +-
->>> +-      for (conn_node = listhead (ifp->connected); conn_node; conn_node = next)
->>> +-	{
->>> +-	  ifc = listgetdata (conn_node);
->>> +-	  next = conn_node->next;
->>> +-	  listnode_delete (ifp->connected, ifc);
->>> +-	}
->>> +     }
->>> + }
->>> +
->>> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
->>> index 2106c9b..21c2028 100644
->>> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
->>> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
->>> @@ -32,7 +32,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
->>>              file://watchquagga.init \
->>>              file://watchquagga.default \
->>>              file://volatiles.03_quagga \
->>> -           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
->>> +           file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
->>> +           file://quagga-Avoid-duplicate-connected-address.patch"
->>>
->>>   PACKAGECONFIG ??= ""
->>>   PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
->>>        
->>      
->    
+> diff --git a/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
+> new file mode 100644
+> index 0000000..e3ccc2a
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl-for-cross-compilation.patch
+> @@ -0,0 +1,31 @@
+> +Upstream-Status: Backport
+> +
+> +From ed6e297972318a0070ad4d973401fbc6e0def558 Mon Sep 17 00:00:00 2001
+> +From: Serj Kalichev <serj.kalichev@gmail.com>
+> +Date: Fri, 7 Sep 2012 13:29:42 +0400
+> +Subject: [PATCH] build: fix extract.pl for cross compilation
+> +
+> +extract.pl should invoke the C preprocessor for the target system, not the
+> +host.
+> +
+> +* vtysh/extract.pl.in: use @CPP@ to get target cpp
+> +---
+> + vtysh/extract.pl.in |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/vtysh/extract.pl.in b/vtysh/extract.pl.in
+> +index 7612aff..4c3a47f 100755
+> +--- a/vtysh/extract.pl.in
+> ++++ b/vtysh/extract.pl.in
+> +@@ -63,7 +63,7 @@ $ignore{'"show history"'} = "ignore";
+> + foreach (@ARGV) {
+> +     $file = $_;
+> +
+> +-    open (FH, "cpp -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/isisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
+> ++    open (FH, "@cpp@ -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/isisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
+> +     local $/; undef $/;
+> +     $line = <FH>;
+> +     close (FH);
+> +--
+> +1.7.1
+> +
+> diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+> index 10740bc..ae93952 100644
+> --- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+> +++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+> @@ -3,7 +3,9 @@ require quagga.inc
+>   PR = "${INC_PR}.0"
+>
+>   SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
+> -            file://lingering-IP-address-after-deletion-BZ-486.patch"
+> +            file://lingering-IP-address-after-deletion-BZ-486.patch \
+> +            file://build-fix-extract.pl-for-cross-compilation.patch \
+> +"
+>
+>   SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
+>   SRC_URI[quagga-0.99.21.sha256sum] = "9b8aea9026b4771a28e254a66cbd854723bcd0d71eebd0201d11838d4eb392ee"
+>
 
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
