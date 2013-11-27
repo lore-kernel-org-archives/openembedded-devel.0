@@ -1,37 +1,45 @@
-Return-Path: <cjb.sw.nospam@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DE806DE3E
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 449F46B0F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 20:26:38 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id x13so7306513wgg.31
+	Wed, 27 Nov 2013 20:54:38 +0000 (UTC)
+Received: by mail-ie0-f169.google.com with SMTP id e14so12854777iej.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2013 12:26:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:from:content-type:message-id:date:to
-	:content-transfer-encoding:mime-version;
-	bh=qWve8YORv8YJ/dqQLz5Q6T0vdgfqURx2JS3ZpvxE2VA=;
-	b=0dddTXkseQK+rGqD+55ot2mL6o5Y+dSt/kPrGnNSiq87RizreuXiyUPHsIWdCnUlRi
-	2AczTb2b1t6HZ0Op8cywKkFzHk0vHXRW5EenF4tNtNEZJFhwf156F88Ve25Zuuop6iEC
-	9wm383fVcfkACLc16kHeJWfvV1UfLUMGD4hE7L9hEeFRCtaGNSzzxRr6BgvTQlRlYlzn
-	XEriiCvyyUKdMt98dfmtjEKDSugVORkN8SBhS+42D8ZnTa+3DyT8S9kdXpNZFiOaunB8
-	RIMB1ysbMKl+MPM+h7BF0PFD5Gj/z7HCB9VAr52A6ZaztfHKH4Hx5nYu+4y52STIrFz0
-	TMyQ==
-X-Received: by 10.180.160.239 with SMTP id xn15mr24220801wib.17.1385583997826; 
-	Wed, 27 Nov 2013 12:26:37 -0800 (PST)
-Received: from [10.12.214.143] (to-18-93-73.service.infuturo.it.
-	[151.18.93.73]) by mx.google.com with ESMTPSA id
-	bk7sm74711949wib.10.2013.11.27.12.26.36
+	Wed, 27 Nov 2013 12:54:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=SdgPoPdQdFLN7Eg072lzqOsQ905AYN7V0cgfk+CCif8=;
+	b=jLycZ2t50OyjsSt1lXa+yohmK/lS7ZxH9DnFAFD+OyFeDU6+0SMgBkPYvyjFPTKEJw
+	mpdtXBSQ9zmRHK2gW1MQcm7DvuF0MCIDHjYO3u/s2ZVgWplI7boecW+h4Uz3hc3hSvdv
+	zt4tRMTA41t4ilRXzbJhJ3MCKwboVYV8x/kRn0qMaKwy1WQdvqN4Y7CN78X+3VglMiMy
+	4/I+j9n0quW2ZalG757O9AtQ2c1Y2Xf0KTZmPNFW89s2Aoorf7EjYfbU6GEkVokyq38v
+	hNP/rT2Bv/4+YprlXH4I8s4hjNqsTwLGPkXxjaFCYofVYNhX+WFN3OunKtPWvTA9Na6W
+	Dv4w==
+X-Gm-Message-State: ALoCoQl6z5GRar6TUiAGqWQHQ6YsB+pFVkBzjdMpSFBFOqDyQkNdTXKKZfAWwU93SE51k8/4opTA
+X-Received: by 10.50.36.70 with SMTP id o6mr23125131igj.58.1385585677435;
+	Wed, 27 Nov 2013 12:54:37 -0800 (PST)
+Received: from deserted.net (198-84-238-35.cpe.teksavvy.com. [198.84.238.35])
+	by mx.google.com with ESMTPSA id
+	p14sm40302898igr.7.2013.11.27.12.54.35
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 27 Nov 2013 12:26:36 -0800 (PST)
-From: Simone <cjb.sw.nospam@gmail.com>
-X-Mailer: iPad Mail (11A501)
-Message-Id: <548EF836-E57E-42CC-8E0A-0D77045DE0AE@gmail.com>
-Date: Wed, 27 Nov 2013 21:26:37 +0100
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (1.0)
-Subject: Meta-qt5 sdk
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 27 Nov 2013 12:54:35 -0800 (PST)
+Date: Wed, 27 Nov 2013 15:54:33 -0500
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20131127205431.GC4355@deserted.net>
+References: <1385541430-19861-1-git-send-email-rongqing.li@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1385541430-19861-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH meta-networking] proftpd: move pidfile from /var/ to /var/run/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,37 +53,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2013 20:26:39 -0000
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Wed, 27 Nov 2013 20:54:38 -0000
+X-Groupsio-MsgNum: 47287
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="CblX+4bnyfN0pR09"
+Content-Disposition: inline
+
+--CblX+4bnyfN0pR09
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hello to all,
-I'm new to this mailing list.
+Merged, thanks.
+-J.
 
-I'm writing because i want to ask the actual status of meta-qt5 layer.
-Actuallly, we are able to build qt5 with examples for our fsl based platform=
-.
-The problem is that, compared to qt4, there is no meta-toolchain-qt5 availab=
-le.
-The problem is how to configure host system (development pc with qtcreator) f=
-or cross compiling application and deploy/debugging them to remote ARM targe=
-t.
+[[oe] [PATCH meta-networking] proftpd: move pidfile from /var/ to /var/run/=
+] On 13.11.27 (Wed 16:37) rongqing.li@windriver.com wrote:
 
-As for qt4, it would be necessary the famous toolchain that contain all libr=
-aries, paths and links for qt5, to cross develop application for arm target.=
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> /var/run/ is more suitable to store pidfile for OE, and this fixes
+> "/etc/init.d/proftpd stop" failure too, since this script assumes
+> the pidfile is under /var/run
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>  .../proftpd/files/move-pidfile-to-var-run.patch    |   39 ++++++++++++++=
+++++++
+>  .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    1 +
+>  2 files changed, 40 insertions(+)
+>  create mode 100644 meta-networking/recipes-daemons/proftpd/files/move-pi=
+dfile-to-var-run.patch
+>=20
+> diff --git a/meta-networking/recipes-daemons/proftpd/files/move-pidfile-t=
+o-var-run.patch b/meta-networking/recipes-daemons/proftpd/files/move-pidfil=
+e-to-var-run.patch
+> new file mode 100644
+> index 0000000..953bbdd
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-r=
+un.patch
+> @@ -0,0 +1,39 @@
+> +move pidfile to /var/run
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +---
+> + configure    |    2 +-
+> + configure.in |    2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/configure b/configure
+> +index e6268f5..ebed38e 100755
+> +--- a/configure
+> ++++ b/configure
+> +@@ -33587,7 +33587,7 @@ cat >>confdefs.h <<_ACEOF
+> + _ACEOF
+> +=20
+> + cat >>confdefs.h <<_ACEOF
+> +-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
+> ++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"=
+`"
+> + _ACEOF
+> +=20
+> +=20
+> +diff --git a/configure.in b/configure.in
+> +index df9186a..e2ae868 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -2790,7 +2790,7 @@ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${l=
+ocale_dir}"`")
+> +=20
+> + AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
+> + AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/prof=
+tpd.conf"`")
+> +-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/prof=
+tpd.pid"`")
+> ++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/=
+proftpd.pid"`")
+> +=20
+> + prefix=3D"$pr_saved_prefix"
+> + exec_prefix=3D"$pr_saved_exec_prefix"
+> +--=20
+> +1.7.10.4
+> +
+> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/=
+meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> index 6571b9c..14d88cf 100644
+> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> @@ -12,6 +12,7 @@ SRC_URI =3D "ftp://ftp.proftpd.org/distrib/source/${BPN=
+}-${PV}.tar.gz \
+>             file://contrib.patch \
+>             file://proftpd-basic.init \
+>             file://default \
+> +           file://move-pidfile-to-var-run.patch \
+>  "
+> =20
+>  SRC_URI[md5sum] =3D "0871e0b93c9c3c88ca950b6d9a04aed2"
+--=20
+-Joe MacDonald.
+:wq
 
+--CblX+4bnyfN0pR09
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Is this job planned to do by someone?
-If not, there is an alternative solution (maybe documented) to configure qtc=
-reator manually?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-I think it would be very useful also for a lot of other people.
+iEYEARECAAYFAlKWXAcACgkQwFvcllog0Xwy1gCeOuNLVLoIp4SPA8aXBGxNYGC9
+SJQAn3x4nnyXKkS5mK7XpMtoEsI5jdBc
+=7aq5
+-----END PGP SIGNATURE-----
 
-Any suggestion?
-Regards
-Thanks=20
-Simone
-
-
-
+--CblX+4bnyfN0pR09--
