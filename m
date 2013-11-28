@@ -1,46 +1,41 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
-	[209.85.216.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E3B816D8D5
+Return-Path: <cjb.sw.nospam@gmail.com>
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F7DB6D4FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 19:02:25 +0000 (UTC)
-Received: by mail-qa0-f42.google.com with SMTP id k4so1047267qaq.8
+	Thu, 28 Nov 2013 21:00:36 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id g15so6189756eak.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 11:02:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=xPqSTCCBl53zzO+AhQdK6WqkttYMQ7dfkt2YHhBZpqg=;
-	b=d+ISE8VCA2gIR9Cen0Nyw1wuTnxIxHVLp+X+FZ7U13Sg0Erfa/L5bidmEi1zrnNphI
-	mGKtHv8EWmSkuBO7Qeoj6eM3pZO6sOnyUpk2l8/M08FV82jM5iRiTEtSbJn9sGje11IO
-	e45nQmQs2ru2WhH7QZWexYDXeCw3xEdikJ7enSk5IKnlYaHw+6WvSRaJ5JEUrZt5PY8C
-	ySBFeduZiSa6Z/h993K3dEnbt7ZVjkpwBX3kgk6uvE82A1HC8xBee/he9VcT89ipXhIC
-	olhVt5G0uo3a5RBpIkLnz443d4m8k/mRLvjhvdDv6ya02TDjpt8F5PUpzpQEKPk7fu46
-	iogw==
-X-Gm-Message-State: ALoCoQkWkRTXUC7iXRNgJq004AtixpX7bBj3z1oPaDMidOjtvPhteeeVKr5K+18S2MQH951ZdRUo
-X-Received: by 10.49.76.7 with SMTP id g7mr49821844qew.25.1385665344969;
-	Thu, 28 Nov 2013 11:02:24 -0800 (PST)
-Received: from deserted.net ([128.224.252.2]) by mx.google.com with ESMTPSA id
-	p20sm108082200qay.0.2013.11.28.11.02.24
+	Thu, 28 Nov 2013 13:00:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:references:from:content-type:in-reply-to:message-id:date:to
+	:content-transfer-encoding:mime-version;
+	bh=YPeeYLz9VcOoa6UqQAGV/rMKFiQ+I0M68MgWkFAmniU=;
+	b=e0DJ2IfilCGgOvsurT4sO6WDF+sYiyyqJqAGnwDP44j3kmTFWNVX/nQDBOxBingAo7
+	Zj30Ww83aQiFvBfSNmbbMC5pBcSFsFQFOqRbTsiN2SCsmIhvR4fIfYqJJ8U3RJRLWyt8
+	ZrhjLUaGgJnbWIS01oxiY9mh7XTV7Con1RJyU0Z/q+lVR0IcJ73hcE9Jq8PJ3wooD85l
+	AA2H588BbyZEAAWh602DdbG+ccUelr2hOe5PuDQAFqoiZL2mYnzATWZFjMGbGJ3XUR5+
+	aVaR303/YkL/t8u04vI/vZCs9BI6BKYyMGjDR1Ndy7DPxyBSlQcMjVVAciNlx4/oVoJA
+	5O7w==
+X-Received: by 10.14.173.7 with SMTP id u7mr2138896eel.24.1385672435966;
+	Thu, 28 Nov 2013 13:00:35 -0800 (PST)
+Received: from [10.45.218.135] (to-18-82-181.service.infuturo.it.
+	[151.18.82.181])
+	by mx.google.com with ESMTPSA id h3sm8587516eem.15.2013.11.28.13.00.33
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 28 Nov 2013 11:02:24 -0800 (PST)
-Date: Thu, 28 Nov 2013 14:02:22 -0500
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20131128190221.GD3724@deserted.net>
-References: <CAMCfZKEEYRnDP36tKtn=rqXEdY3VVucDMv0FdYntjYmaw3=fMg@mail.gmail.com>
-	<20131128182423.GC3724@deserted.net>
-	<CAMCfZKFLW-FzmEDdquj2+H8ePnOOAZDGpoRPV+CPhD_VvzDW7Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMCfZKFLW-FzmEDdquj2+H8ePnOOAZDGpoRPV+CPhD_VvzDW7Q@mail.gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: Change to vsftpd recipe
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 28 Nov 2013 13:00:34 -0800 (PST)
+References: <548EF836-E57E-42CC-8E0A-0D77045DE0AE@gmail.com>
+	<20131127214440.GR2870@jama>
+From: Simone <cjb.sw.nospam@gmail.com>
+X-Mailer: iPad Mail (11A501)
+In-Reply-To: <20131127214440.GR2870@jama>
+Message-Id: <34764D13-4A13-431F-B39D-E1B61004BBE9@gmail.com>
+Date: Thu, 28 Nov 2013 22:00:33 +0100
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0 (1.0)
+Subject: Re: Meta-qt5 sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,94 +49,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 19:02:26 -0000
-X-Groupsio-MsgNum: 47307
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LKTjZJSUETSlgu2t"
-Content-Disposition: inline
-
---LKTjZJSUETSlgu2t
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 28 Nov 2013 21:00:37 -0000
+Content-Type: text/plain;
+	charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] Change to vsftpd recipe] On 13.11.28 (Thu 16:52) Diego Sueiro wro=
-te:
+Hello Martin,
+Thank you for your reply!
+I want to test this sdk, but i don't know how to build it.
 
-> On Thu, Nov 28, 2013 at 4:24 PM, Joe MacDonald <joe@deserted.net> wrote:
->=20
-> > Care to take a run at reverting 1c4921817 in your tree and see if that
-> > clears things up for you?  I'd do it myself but I'm waist-deep in a
-> > different investigation right now and it sounds like you might be able
-> > to do a quick test.
-> >
->=20
-> Joe,
->=20
-> I did not get this QA error.
-> The installed directory should be "/var/run/vsftpd/empty" and not
-> "/run/vsftpd/empty" as pointed on error message.
-> Did you added "install -d ${D}${localstatedir}/run/vsftpd/empty" on
-> do_install function?
+What i have to bitbake?
+What does it produce? An installer?
+Gdb is included?
 
-Yep, here's the modified do_install in its entirety:
+Thank you for your time!
+Regards
+Simone
 
-------------------------------------------------------------------------
-do_install() {
-    install -d ${D}${sbindir}
-    install -d ${D}${mandir}/man8
-    install -d ${D}${mandir}/man5
-    oe_runmake 'DESTDIR=3D${D}' install
-    install -d ${D}${sysconfdir}
-    install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
-    install -d ${D}${sysconfdir}/init.d/
-    install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
-    install -d ${D}/${sysconfdir}/default/volatiles
-    install -m 644 ${WORKDIR}/volatiles.99_vsftpd ${D}/${sysconfdir}/defaul=
-t/volatiles/99_vsftpd
 
-    install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
-    install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-    if ! test -z "${PAMLIB}" ; then
-        install -d ${D}${sysconfdir}/pam.d/
-        cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
-        sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}=
-/pam.d/vsftpd
-        sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
-    fi
-    install -d ${D}${localstatedir}/run/vsftpd/empty
-}
-------------------------------------------------------------------------
 
--J.
 
+
+> Il giorno 27/nov/2013, alle ore 22:44, Martin Jansa <martin.jansa@gmail.co=
+m> ha scritto:
 >=20
-> Regards,
+>> On Wed, Nov 27, 2013 at 09:26:37PM +0100, Simone wrote:
+>> Hello to all,
+>> I'm new to this mailing list.
+>>=20
+>> I'm writing because i want to ask the actual status of meta-qt5 layer.
+>> Actuallly, we are able to build qt5 with examples for our fsl based platf=
+orm.
+>> The problem is that, compared to qt4, there is no meta-toolchain-qt5 avai=
+lable.
+>> The problem is how to configure host system (development pc with qtcreato=
+r) for cross compiling application and deploy/debugging them to remote ARM t=
+arget.
+>>=20
+>> As for qt4, it would be necessary the famous toolchain that contain all l=
+ibraries, paths and links for qt5, to cross develop application for arm targ=
+et.
+>>=20
+>> Is this job planned to do by someone?
+>> If not, there is an alternative solution (maybe documented) to configure q=
+tcreator manually?
+>>=20
+>> I think it would be very useful also for a lot of other people.
 >=20
-> --
-> *dS
-> Diego Sueiro
+> Yes it would, please check
+> https://github.com/meta-qt5/meta-qt5/wiki/SDK
 >=20
-> /*long live rock 'n roll*/
+> and test/review proposed solution.
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
--Joe MacDonald.
-:wq
-
---LKTjZJSUETSlgu2t
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlKXkz0ACgkQwFvcllog0Xy0CQCgsb99ZVv2jSG2iBEiDP3V0elt
-4QUAmgJ3ep8hxDZYRc8Hvyzt7Pnzpdps
-=Mh49
------END PGP SIGNATURE-----
-
---LKTjZJSUETSlgu2t--
