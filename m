@@ -1,41 +1,31 @@
-Return-Path: <cjb.sw.nospam@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F7DB6D4FC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 21:00:36 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g15so6189756eak.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 13:00:36 -0800 (PST)
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B34F2610D4
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Nov 2013 22:00:05 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id ea20so6205473lab.26
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Nov 2013 14:00:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:references:from:content-type:in-reply-to:message-id:date:to
-	:content-transfer-encoding:mime-version;
-	bh=YPeeYLz9VcOoa6UqQAGV/rMKFiQ+I0M68MgWkFAmniU=;
-	b=e0DJ2IfilCGgOvsurT4sO6WDF+sYiyyqJqAGnwDP44j3kmTFWNVX/nQDBOxBingAo7
-	Zj30Ww83aQiFvBfSNmbbMC5pBcSFsFQFOqRbTsiN2SCsmIhvR4fIfYqJJ8U3RJRLWyt8
-	ZrhjLUaGgJnbWIS01oxiY9mh7XTV7Con1RJyU0Z/q+lVR0IcJ73hcE9Jq8PJ3wooD85l
-	AA2H588BbyZEAAWh602DdbG+ccUelr2hOe5PuDQAFqoiZL2mYnzATWZFjMGbGJ3XUR5+
-	aVaR303/YkL/t8u04vI/vZCs9BI6BKYyMGjDR1Ndy7DPxyBSlQcMjVVAciNlx4/oVoJA
-	5O7w==
-X-Received: by 10.14.173.7 with SMTP id u7mr2138896eel.24.1385672435966;
-	Thu, 28 Nov 2013 13:00:35 -0800 (PST)
-Received: from [10.45.218.135] (to-18-82-181.service.infuturo.it.
-	[151.18.82.181])
-	by mx.google.com with ESMTPSA id h3sm8587516eem.15.2013.11.28.13.00.33
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 28 Nov 2013 13:00:34 -0800 (PST)
-References: <548EF836-E57E-42CC-8E0A-0D77045DE0AE@gmail.com>
-	<20131127214440.GR2870@jama>
-From: Simone <cjb.sw.nospam@gmail.com>
-X-Mailer: iPad Mail (11A501)
-In-Reply-To: <20131127214440.GR2870@jama>
-Message-Id: <34764D13-4A13-431F-B39D-E1B61004BBE9@gmail.com>
-Date: Thu, 28 Nov 2013 22:00:33 +0100
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Mime-Version: 1.0 (1.0)
-Subject: Re: Meta-qt5 sdk
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Nitv1fsZQV4XFVk6VQU+a12EIWBmlBMmOxtyJvKgYvw=;
+	b=s8qncr9WzcR01RqebwkLA8DzjUBHXuLwhmp+ddZ9N5KBQGrDyxyS9/Gg7zxp8f0vJq
+	QnJD7tddniBHUxZd9R6kkr7uSuBaSAvlHNeHHtNX7DgWYHS75qhQYXzyaaGSFs+47bnB
+	iPVBba/zvoWnnGcW1SyFobEa9bvGM8+WgCn3nQpCjVvwPrwUxk7GOP4ls4qeQ+wy/SH7
+	KOc9G0LE64gKF9rmnfp3voA70lK7/qBFzuGYATjc75HE3+ceJ+wlQfKer6h2PaYV9E4H
+	tUbKgsaMjTjHWjtVWUKoxhHROF8s+VO4RVEfOfObirobJyuc1qIuPIJGeHSsJZ3kdXx3
+	p0Ag==
+MIME-Version: 1.0
+X-Received: by 10.112.167.3 with SMTP id zk3mr16744834lbb.23.1385676004244;
+	Thu, 28 Nov 2013 14:00:04 -0800 (PST)
+Received: by 10.114.74.174 with HTTP; Thu, 28 Nov 2013 14:00:04 -0800 (PST)
+Date: Thu, 28 Nov 2013 14:00:04 -0800
+Message-ID: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: xbmc build failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,62 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 21:00:37 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Nov 2013 22:00:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Martin,
-Thank you for your reply!
-I want to test this sdk, but i don't know how to build it.
+using angstrom-v2013.12-yocto1.5 on Ubuntu 12.04.3 LTS x86_64:
 
-What i have to bitbake?
-What does it produce? An installer?
-Gdb is included?
+xbmc fails building euphoria screen saver-- configure problem?:
 
-Thank you for your time!
-Regards
-Simone
-
-
-
-
-
-> Il giorno 27/nov/2013, alle ore 22:44, Martin Jansa <martin.jansa@gmail.co=
-m> ha scritto:
->=20
->> On Wed, Nov 27, 2013 at 09:26:37PM +0100, Simone wrote:
->> Hello to all,
->> I'm new to this mailing list.
->>=20
->> I'm writing because i want to ask the actual status of meta-qt5 layer.
->> Actuallly, we are able to build qt5 with examples for our fsl based platf=
-orm.
->> The problem is that, compared to qt4, there is no meta-toolchain-qt5 avai=
-lable.
->> The problem is how to configure host system (development pc with qtcreato=
-r) for cross compiling application and deploy/debugging them to remote ARM t=
-arget.
->>=20
->> As for qt4, it would be necessary the famous toolchain that contain all l=
-ibraries, paths and links for qt5, to cross develop application for arm targ=
-et.
->>=20
->> Is this job planned to do by someone?
->> If not, there is an alternative solution (maybe documented) to configure q=
-tcreator manually?
->>=20
->> I think it would be very useful also for a lot of other people.
->=20
-> Yes it would, please check
-> https://github.com/meta-qt5/meta-qt5/wiki/SDK
->=20
-> and test/review proposed solution.
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+| make[4]: Entering directory
+`/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/work/armv7ahf-vfp-neon-angstrom-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55da-r14/git/xbmc/screensavers/rsxs-0.9/src'
+| Making all in euphoria
+| make[5]: Entering directory
+`/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/work/armv7ahf-vfp-neon-angstrom-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55da-r14/git/xbmc/screensavers/rsxs-0.9/src/euphoria'
+| depbase=`echo ../common.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+| arm-angstrom-linux-gnueabi-g++  -march=armv7-a -marm -mthumb-interwork
+-mfloat-abi=hard -mfpu=neon
+--sysroot=/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/sysroots/beaglebone
+-DHAVE_CONFIG_H -I. -I../..  -DPKGDATADIR=\"/usr/share/rsxs\" -I./..
+-I../../lib  -D_LINUX -DXBMC
+-I/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/sysroots/beaglebone/usr/include/libpng16
+  -fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math
+-fpermissive -fvisibility-inlines-hidden -fPIC -DPIC -D_REENTRANT
+-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -g -D_DEBUG -Wall -O2
+-mno-apcs-stack-check -MT ../common.o -MD -MP -MF $depbase.Tpo -c -o
+../common.o ../common.cc &&\
+| mv -f $depbase.Tpo $depbase.Po
+| In file included from ../common.cc:50:0:
+|
+/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/sysroots/beaglebone/usr/include/c++/ctime:70:11:
+error: '::gmtime' has not been declared
+|    using ::gmtime;
+|            ^
+|
+/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/sysroots/beaglebone/usr/include/c++/ctime:71:11:
+error: '::localtime' has not been declared
+|    using ::localtime;
+|            ^
+| make[5]: *** [../common.o] Error 1
+| make[5]: Leaving directory
+`/mnt/work/setup-scripts/build/tmp-angstrom_v2013_12-eglibc/work/armv7ahf-vfp-neon-angstrom-linux-gnueabi/xbmc/11.0+gitrAUTOINC+82388d55da-r14/git/xbmc/screensavers/rsxs-0.9/src/euphoria'
 
