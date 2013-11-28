@@ -1,35 +1,45 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id EC3276D8D5
+Return-Path: <joe@deserted.net>
+Received: from mail-qa0-f44.google.com (mail-qa0-f44.google.com
+	[209.85.216.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F6F86D3DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 11:03:27 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VlzNR-0000ZK-ST for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Nov 2013 12:03:21 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 12:03:21 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 28 Nov 2013 15:56:00 +0000 (UTC)
+Received: by mail-qa0-f44.google.com with SMTP id i13so881160qae.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 12:03:21 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 28 Nov 2013 07:55:59 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=2ndoHpt71etZ9rXWbicjBkb3SpnvAnAF/RvQReatDDg=;
+	b=RbyyIBqmvjzzb3s99z+AcVVzr8ZmFGsoH3a9g3JjES3ZXRyMkl4bJy7qb1BSv34JHp
+	sr3mKgIepFC38TD4wy9fELbxyHvZAwLoqhMqj5zHP4XWo5oPLaCCnanhiZcpfJyt2Qim
+	bZyuzLfPmsK2NwrgzQ3fx4We0svWfaOErYC0CxvZi4HLEjegOMzCF0IhjOsihz3nDBXb
+	AuHW7wJG66g3/HaXEEBi9uhlIRkR9k/7P3zmvPb/XpTwRakfKP/CNwa9aewIBBTxbwQy
+	Dqde8n8woEpNx+Acp43lUixN7T9DifTaIwo9y27g/Mb22YQSTPHx6br2HeBbSTiR5QW+
+	sM1A==
+X-Gm-Message-State: ALoCoQn+V50fW2l+nmJD0zr4HYeYCwXupLMZ2TohJUCtI23Rd2eHsPwRF/DNffUCbZMKRsi6r4o4
+X-Received: by 10.49.116.141 with SMTP id jw13mr77754802qeb.2.1385654159487;
+	Thu, 28 Nov 2013 07:55:59 -0800 (PST)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id m7sm50123140qax.8.2013.11.28.07.55.58
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 28 Nov 2013 07:55:58 -0800 (PST)
+Date: Thu, 28 Nov 2013 10:55:55 -0500
+From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 28 Nov 2013 12:03:09 +0100
-Message-ID: <l777t2$pcq$1@ger.gmane.org>
-References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>	<14902072.IG3b8o4YqW@helios>
-	<l77732$ggi$1@ger.gmane.org> <1825979.KGUos5WM3r@helios>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-In-Reply-To: <1825979.KGUos5WM3r@helios>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH] packagekit: Updated to 0.8.13
+Message-ID: <20131128155553.GA3724@deserted.net>
+References: <1385434452-4083-1-git-send-email-b40527@freescale.com>
+MIME-Version: 1.0
+In-Reply-To: <1385434452-4083-1-git-send-email-b40527@freescale.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Zongchun Yu <Zongchun.Yu@freescale.com>, otavio.salvador@gmail.com
+Subject: Re: [meta-oe][meta-networking][PATCH] tcpdump: move from meta-oe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,88 +53,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 11:03:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Nov 2013 15:56:01 -0000
+X-Groupsio-MsgNum: 47301
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+HP7ph2BbKc20aGI"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--+HP7ph2BbKc20aGI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Paul Eggleton schreef op 28-11-13 11:58:
-> On Thursday 28 November 2013 11:49:18 Koen Kooi wrote:
->> Paul Eggleton schreef op 28-11-13 11:32:
->>> Hi Koen / Felipe,
->>> 
->>> On Thursday 28 November 2013 10:22:31 Koen Kooi wrote:
->>>> Felipe F. Tonello schreef op 28-11-13 01:56:
->>>>> From: "Felipe F. Tonello" <eu@felipetonello.com> This recipe
->>>>> supports the backend for packagekit dynamically based on the
->>>>> IMAGE_PKGTYPE.
->>>> 
->>>> NAK! IMAGE_FEATURES should *never* change non-image recipe params. 
->>>> This breaks using feeds horribly.
->>> 
->>> IMAGE_PKGTYPE is influenced by PACKAGE_CLASSES; so this is not about 
->>> IMAGE_FEATURES, and correct me if I'm wrong but maintaining package
->>> feeds
->>> 
->>> would generally preclude switching to an alternative package
->>> manager,
->>> 
->>> right?
->> 
->> No, it's perfectly possible to build both opkg and rpm, which is what
->> I'm currently doing. When doing that the DISTRO.conf does need to make
->> a decision on what to support for things like packagekit.
->> 
->>> Some options:
->>> 
->>> 1) Apply the patch as-is. Changing the order/value of
->>> PACKAGE_CLASSES will mean this and anything that depends upon it will
->>> rebuild.
->>> 
->>> 2) Install the appropriate backend via some code in the image
->>> recipe. Obviously this means you have to do this for every image
->>> recipe though.
->>> 
->>> 3) Use non-dynamic PACKAGECONFIG. Of course this means you'll have
->>> to remember to change this manually if you change PACKAGE_CLASSES or
->>> it'll just be broken at runtime.
->>> 
->>> Honestly, option 1 sounds like the best course to me here. This is
->>> rather a special case compared to other recipes.
->> 
->> 1) will let you end up with packagekit_1.0.ipk that only supports RPM
-> 
-> Correct, it would. I agree that's not ideal. Neither is having it broken
-> by default for some people though (unless you just set all backends to on
-> by default, that is.)
-> 
->> 2) Is what we would really want, but I don't think packagekit supports
->> that :(
-> 
-> This patch looks like it is splitting out the backends into separate 
-> packages...
+Merged, thanks.
+-J.
 
-If that's the case, 2) is the route to go.
+[[oe] [meta-oe][meta-networking][PATCH] tcpdump: move from meta-oe to meta-=
+networking] On 13.11.26 (Tue 10:54) b40527@freescale.com wrote:
 
-> 
->> So that leaves 3, which makes it a clear DISTRO decision, like it
->> should be.
-> 
-> It's worth pointing out that the patch sets PACKAGECONFIG with ??= so it
->  doesn't stop you from doing this.
-> 
-> Cheers, Paul
-> 
+> From: Zongchun Yu <Zongchun.Yu@freescale.com>
+>=20
+> Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
+> ---
+>  .../0001-minimal-IEEE802.15.4-allowed.patch        |    0
+>  .../tcpdump/tcpdump-4.3.0/configure.patch          |    0
+>  .../tcpdump/tcpdump-4.3.0/ipv6-cross.patch         |    0
+>  .../tcpdump-4.3.0/tcpdump_configure_no_-O2.patch   |    0
+>  .../recipes-support/tcpdump/tcpdump_4.3.0.bb       |    0
+>  .../packagegroups/packagegroup-cli-tools.bb        |    1 -
+>  6 files changed, 0 insertions(+), 1 deletions(-)
+>  rename {meta-oe =3D> meta-networking}/recipes-support/tcpdump/tcpdump-4.=
+3.0/0001-minimal-IEEE802.15.4-allowed.patch (100%)
+>  rename {meta-oe =3D> meta-networking}/recipes-support/tcpdump/tcpdump-4.=
+3.0/configure.patch (100%)
+>  rename {meta-oe =3D> meta-networking}/recipes-support/tcpdump/tcpdump-4.=
+3.0/ipv6-cross.patch (100%)
+>  rename {meta-oe =3D> meta-networking}/recipes-support/tcpdump/tcpdump-4.=
+3.0/tcpdump_configure_no_-O2.patch (100%)
+>  rename {meta-oe =3D> meta-networking}/recipes-support/tcpdump/tcpdump_4.=
+3.0.bb (100%)
+>=20
+> diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-I=
+EEE802.15.4-allowed.patch b/meta-networking/recipes-support/tcpdump/tcpdump=
+-4.3.0/0001-minimal-IEEE802.15.4-allowed.patch
+> similarity index 100%
+> rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/0001-minimal-IE=
+EE802.15.4-allowed.patch
+> rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-mini=
+mal-IEEE802.15.4-allowed.patch
+> diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patc=
+h b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
+> similarity index 100%
+> rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/configure.patch
+> rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configure=
+=2Epatch
+> diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.pat=
+ch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
+> similarity index 100%
+> rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cross.patch
+> rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cros=
+s.patch
+> diff --git a/meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_config=
+ure_no_-O2.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tc=
+pdump_configure_no_-O2.patch
+> similarity index 100%
+> rename from meta-oe/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_configu=
+re_no_-O2.patch
+> rename to meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_c=
+onfigure_no_-O2.patch
+> diff --git a/meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb b/meta-netw=
+orking/recipes-support/tcpdump/tcpdump_4.3.0.bb
+> similarity index 100%
+> rename from meta-oe/recipes-support/tcpdump/tcpdump_4.3.0.bb
+> rename to meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb=
+ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+> index fa53a67..8807fd1 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+> @@ -45,7 +45,6 @@ RDEPENDS_${PN}-debug =3D "\
+>      s3c64xx-gpio \
+>      serial-forward \
+>      strace \
+> -    tcpdump \
+>  "
+> =20
+>  RRECOMMENDS_${PN}-debug =3D "\
+--=20
+-Joe MacDonald.
+:wq
+
+--+HP7ph2BbKc20aGI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iD8DBQFSlyLtMkyGM64RGpERAmfuAJ9DTZhTFkAQ7AwRYQbSVzHGyRCtigCeLU92
-psvh/e2iCRGJLTUfAWzoF5I=
-=vIts
+iEYEARECAAYFAlKXZ38ACgkQwFvcllog0Xza1ACdGRAIP8hS/4NLt7K8FVsvxhwB
++1sAmwe5ibYWrIRH22G29HvS9QihRhDZ
+=440C
 -----END PGP SIGNATURE-----
 
-
+--+HP7ph2BbKc20aGI--
