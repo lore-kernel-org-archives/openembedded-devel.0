@@ -1,43 +1,39 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-bk0-f54.google.com (mail-bk0-f54.google.com
-	[209.85.214.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D6B56D2A3
+Return-Path: <riku.voipio@linaro.org>
+Received: from mail-bk0-f42.google.com (mail-bk0-f42.google.com
+	[209.85.214.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EA0B6D75C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 09:22:03 +0000 (UTC)
-Received: by mail-bk0-f54.google.com with SMTP id v16so3730371bkz.27
+	Thu, 28 Nov 2013 09:40:39 +0000 (UTC)
+Received: by mail-bk0-f42.google.com with SMTP id w11so3706055bkz.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 01:22:02 -0800 (PST)
+	Thu, 28 Nov 2013 01:40:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=0HDc16dx2S5VO9TtsmuGXFj+h8RzUfS63FIUoVdUWTo=;
-	b=iyfeoD0EK1FxfaZAp/zafJXAb/najBjxQXI1/sqZVcYV85dGwCksE+KiZ8suQnKKho
-	7Y3oA8eB5c3oNfX0uu+IVzVxHOpg2MZHV3ufkIXJxtS8WeWXJ9CM+0AlJuLAqEeyAF0u
-	uCOFuwFWj74TlAuDMFkQ773KvG6ZnlnWQs+lSM7PDQoh6O3OUx9Y77GU5HkEI0rbpWvS
-	NocODxUO0o6CvdNzQSyok6Ka0mipNhCOdAmukyF5E92FPY0bqC5sdGmspFJ5w8r1C2BG
-	uwvQrFJABb8WHJ8Vf8PU06ARuFvnaoICNLv1ltDGVbEMqLcyFMGQFi8kFWZ5aArfpu2c
-	3yqA==
-X-Gm-Message-State: ALoCoQnLbFS9IMx8mQStbGZ+cmhsypctaTKemRskR6qOD1UnRm9p971tBWsGkAg+jTF1qf1uBrPP
-X-Received: by 10.204.163.138 with SMTP id a10mr34029528bky.9.1385630521898;
-	Thu, 28 Nov 2013 01:22:01 -0800 (PST)
-Received: from iMac.local ([2001:610:612:0:38e3:4758:80cb:a13])
-	by mx.google.com with ESMTPSA id k9sm31065404bko.16.2013.11.28.01.22.00
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 28 Nov 2013 01:22:00 -0800 (PST)
-Message-ID: <52970B57.3050700@dominion.thruhere.net>
-Date: Thu, 28 Nov 2013 10:22:31 +0100
-From: Koen Kooi <koen@dominion.thruhere.net>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=1i21TM4myf8KNLzpGQYx/0F4RMv/zVGukPWGHEbxJJY=;
+	b=cZIINiN9iEI8rCAt1wlJxOoKHpapHg2R/eOZH5fOROi8BG2jGkHNGSh7h2vmhycxNE
+	YGx154/FEyW2FtQQXrOCKrCn0dRlPowFLrd2zj5cjllKzLEO9MUGInjH+aOonu8EVZ4L
+	BtQTNIW0NVn8UZ4bYIDm3aI3XhPfrC50s38zN5FXaN1wIIkeJyvxJWhbBdmjhcaAXeK3
+	VgUyetdLpmiLF1zEuuRLZWqkYll32hB429GBfJzKuzfsDDC9bK/bpWXk/oyj6sgaQ+RI
+	GGpFeHITDJyEUyfP+pwspYqPw8QG5w+9xysn87h+4uwIFRha5fDiRo3FtBBKbvt5XTsx
+	juKQ==
+X-Gm-Message-State: ALoCoQnbpmfYJIKxAc+y2vg+gel+FrVa9/agDcKxGA4hLztxJAz9jxzfBHQm26oehSqdjpdKspSg
 MIME-Version: 1.0
+X-Received: by 10.204.114.68 with SMTP id d4mr24080161bkq.13.1385631638201;
+	Thu, 28 Nov 2013 01:40:38 -0800 (PST)
+Received: by 10.204.78.196 with HTTP; Thu, 28 Nov 2013 01:40:38 -0800 (PST)
+In-Reply-To: <CAAqcGH=u646zYz-rDx31fes_7OB9KcX+Dj-Aw3FqVXEZv3+pUA@mail.gmail.com>
+References: <1385565534-17423-1-git-send-email-riku.voipio@linaro.org>
+	<CAMKF1srN9fjvzo8hN=xn4hxSWbSwoa5g3xy=s9Qr2h-DAP4JCA@mail.gmail.com>
+	<CAAqcGH=u646zYz-rDx31fes_7OB9KcX+Dj-Aw3FqVXEZv3+pUA@mail.gmail.com>
+Date: Thu, 28 Nov 2013 11:40:38 +0200
+Message-ID: <CAAqcGHnq4yiJwsXFQSqUjk4m90AW7vYyXvKrr1Zwt03gnhiWJA@mail.gmail.com>
+From: Riku Voipio <riku.voipio@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>
-In-Reply-To: <1385600219-18495-1-git-send-email-eu@felipetonello.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH] packagekit: Updated to 0.8.13
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "otavio@ossystems.com.br" <otavio@ossystems.com.br>
+Subject: Re: [meta-browser][PATCH] nss: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,456 +47,336 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 09:22:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Nov 2013 09:40:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 28 November 2013 09:59, Riku Voipio <riku.voipio@linaro.org> wrote:
 
-Felipe F. Tonello schreef op 28-11-13 01:56:
-> From: "Felipe F. Tonello" <eu@felipetonello.com>
-> 
-> This recipe supports the backend for packagekit dynamically based on the 
-> IMAGE_PKGTYPE.
-
-NAK! IMAGE_FEATURES should *never* change non-image recipe params. This
-breaks using feeds horribly.
-
-> 
-> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com> --- 
-> ...deprecated-glib-functions-and-use-the-new.patch | 166 -------- 
-> .../packagekit/packagekit-0.5.6/configurefix.patch |  13 - 
-> .../packagekit/packagekit-0.5.6/opkgfixes.patch    | 422
-> --------------------- .../packagekit/packagekit_0.5.6.bb
-> |  62 --- .../packagekit/packagekit_0.8.13.bb                |  71 ++++ 5
-> files changed, 71 insertions(+), 663 deletions(-) delete mode 100644
-> meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch
+> On 27 November 2013 17:46, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> 
-delete mode 100644
-meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/configurefix.patch
-> delete mode 100644
-> meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/opkgfixes.patch 
-> delete mode 100644
-> meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb create mode
-> 100644 meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb
-> 
-> diff --git
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch
-> b/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch
+>> On Wednesday, November 27, 2013, Riku Voipio wrote:
+>>
+>> > nss has been added to OE-core, so an old copy in meta-browser
+>> > is just confusing.
+>> >
+>> >
+>>
+>> Can you also report if there are any feature differences between these
+>> recipes and one from oe-core ?
+>>
 >
-> 
-deleted file mode 100644
-> index ecf8e74..0000000 ---
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch
 >
-> 
-+++ /dev/null
-> @@ -1,166 +0,0 @@ -From 869e52a9055c72970fed036a1510f676e6ce0824 Mon Sep
-> 17 00:00:00 2001 -From: Khem Raj <raj.khem@gmail.com> -Date: Thu, 13 Jun
-> 2013 01:24:19 -0700 -Subject: [PATCH] Don't call deprecated glib
-> functions and use the new gthread - API. - -Signed-off-by: Khem Raj
-> <raj.khem@gmail.com> - -Upstream-Status: Inappropriate[version
-> Unmaintained Upstream] ---- - client/pk-console.c
-> |    3 ++- - client/pk-generate-pack.c                        |    3 ++- 
-> - client/pk-monitor.c                              |    3 ++- -
-> contrib/command-not-found/PackageKit.sh          |    2 +- -
-> contrib/command-not-found/pk-command-not-found.c |    4 ++-- -
-> contrib/debuginfo-install/pk-debuginfo-install.c |    4 ++-- -
-> src/pk-backend.c                                 |    7 +++++++ -
-> src/pk-main.c                                    |    4 ++-- - 10 files
-> changed, 20 insertions(+), 10 deletions(-) - -diff --git
-> a/client/pk-console.c b/client/pk-console.c -index de927e1..2435f27
-> 100644 ---- a/client/pk-console.c -+++ b/client/pk-console.c -@@ -1264,11
-> +1264,12 @@ main (int argc, char *argv[]) - 	bindtextdomain
-> (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset
-> (GETTEXT_PACKAGE, "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - 	g_type_init (); - 	dbus_g_thread_init (); 
-> -+#endif - - 	/* do stuff on ctrl-c */ - 	signal (SIGINT,
-> pk_console_sigint_cb); -diff --git a/client/pk-generate-pack.c
-> b/client/pk-generate-pack.c -index 0b2b40f..20d7e8d 100644 ----
-> a/client/pk-generate-pack.c -+++ b/client/pk-generate-pack.c -@@ -251,12
-> +251,13 @@ main (int argc, char *argv[]) - 	bindtextdomain
-> (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset
-> (GETTEXT_PACKAGE, "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - - 	g_type_init (); - 	dbus_g_thread_init (); 
-> -+#endif - - 	/* do stuff on ctrl-c */ - 	signal (SIGINT,
-> pk_generate_pack_sigint_cb); -diff --git a/client/pk-monitor.c
-> b/client/pk-monitor.c -index f230f7a..d43007f 100644 ----
-> a/client/pk-monitor.c -+++ b/client/pk-monitor.c -@@ -285,11 +285,12 @@
-> main (int argc, char *argv[]) - 	bindtextdomain (GETTEXT_PACKAGE,
-> PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset (GETTEXT_PACKAGE,
-> "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - 	g_type_init (); - 	dbus_g_thread_init (); 
-> -+#endif - - 	context = g_option_context_new (NULL); - 	/* TRANSLATORS:
-> this is a program that monitors PackageKit */ -diff --git
-> a/contrib/command-not-found/PackageKit.sh
-> b/contrib/command-not-found/PackageKit.sh -index d08989c..d708fff 100644 
-> ---- a/contrib/command-not-found/PackageKit.sh -+++
-> b/contrib/command-not-found/PackageKit.sh -@@ -18,7 +18,7 @@
-> command_not_found_handle () { - - 	# run the command, or just print a
-> warning - 	if [ $runcnf -eq 1 ]; then --
-> /home/hughsie/.root/libexec/pk-command-not-found $1 -+
-> /usr/lib/packagekit/pk-command-not-found $1 - 		retval=$? - 	else -
-> echo "bash: $1: command not found" -diff --git
-> a/contrib/command-not-found/pk-command-not-found.c
-> b/contrib/command-not-found/pk-command-not-found.c -index
-> 70679c0..9f81ce4 100644 ----
-> a/contrib/command-not-found/pk-command-not-found.c -+++
-> b/contrib/command-not-found/pk-command-not-found.c -@@ -659,12 +659,12 @@
-> main (int argc, char *argv[]) - 	bindtextdomain (GETTEXT_PACKAGE,
-> PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset (GETTEXT_PACKAGE,
-> "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - 	dbus_g_thread_init (); - 	g_type_init (); -- 
-> -+#endif - 	context = g_option_context_new (NULL); - 	/* TRANSLATORS:
-> tool that gets called when the command is not found */ -
-> g_option_context_set_summary (context, _("PackageKit Command Not
-> Found")); -diff --git a/contrib/debuginfo-install/pk-debuginfo-install.c
-> b/contrib/debuginfo-install/pk-debuginfo-install.c -index
-> c12aca5..b0e1e7c 100644 ----
-> a/contrib/debuginfo-install/pk-debuginfo-install.c -+++
-> b/contrib/debuginfo-install/pk-debuginfo-install.c -@@ -532,11 +532,11 @@
-> main (int argc, char *argv[]) - 	bindtextdomain (GETTEXT_PACKAGE,
-> PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset (GETTEXT_PACKAGE,
-> "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - 	g_type_init (); -- -+#endif - 	context =
-> g_option_context_new (NULL); - 	/* TRANSLATORS: tool that gets called
-> when the command is not found */ - 	g_option_context_set_summary
-> (context, _("PackageKit Debuginfo Installer")); -diff --git
-> a/src/pk-backend.c b/src/pk-backend.c -index 5216b63..5b83ae4 100644 ----
-> a/src/pk-backend.c -+++ b/src/pk-backend.c -@@ -2103,7 +2103,14 @@
-> pk_backend_thread_create (PkBackend *backend, PkBackendThreadFunc func) -
-> egg_warning ("already has thread"); - 		return FALSE; - 	} -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	backend->priv->thread = g_thread_create
-> ((GThreadFunc) func, backend, FALSE, NULL); -+#else -+
-> backend->priv->thread = g_thread_try_new ("daemon thread", (GThreadFunc)
-> func, backend, NULL); -+	if (backend->priv->thread != NULL) { -+
-> g_thread_unref(backend->priv->thread); -+	} -+#endif - 	if
-> (backend->priv->thread == NULL) { - 		egg_warning ("failed to create
-> thread"); - 		return FALSE; -diff --git a/src/pk-main.c b/src/pk-main.c 
-> -index 4c758cd..8fa2482 100644 ---- a/src/pk-main.c -+++ b/src/pk-main.c 
-> -@@ -219,12 +219,12 @@ main (int argc, char *argv[]) - 	bindtextdomain
-> (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR); - 	bind_textdomain_codeset
-> (GETTEXT_PACKAGE, "UTF-8"); - 	textdomain (GETTEXT_PACKAGE); -- -+#if
-> !GLIB_CHECK_VERSION(2,32,0) - 	if (! g_thread_supported ()) -
-> g_thread_init (NULL); - 	dbus_g_thread_init (); - 	g_type_init (); -- 
-> -+#endif - 	/* TRANSLATORS: describing the service that is running */ -
-> context = g_option_context_new (_("PackageKit service")); -
-> g_option_context_add_main_entries (context, options, NULL); --- -1.7.9.5 
-> - diff --git
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/configurefix.patch
-> b/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/configurefix.patch
+> A quick recap of differences:
 >
-> 
-deleted file mode 100644
-> index 48f9591..0000000 ---
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/configurefix.patch
+> - nss in meta-browser skips signing libraries, while in oe-core lets user
+> sign libraries on target device
+> - nss in meta-browser makes staticdev (*.a) package
+> - nss in meta-browser disables parallel make
+> - nss in meta-oe enables lowhash support, meta-browser doesn't
 >
-> 
-+++ /dev/null
-> @@ -1,13 +0,0 @@ -Index: PackageKit-0.6.0/configure.ac 
-> -=================================================================== ----
-> PackageKit-0.6.0.orig/configure.ac	2010-01-04 16:32:18.000000000 +0000 
-> -+++ PackageKit-0.6.0/configure.ac	2010-01-29 11:33:48.000000000 +0000 
-> -@@ -90,7 +90,7 @@ - 							enable_strict=$default_strict) - if test
-> x$enable_strict != xno; then - 	if test "$GCC" = "yes"; then --
-> WARNINGFLAGS_CPP="$WARNINGFLAGS_CPP -Werror" -+		: - 	fi - fi - diff
-> --git
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/opkgfixes.patch
-> b/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/opkgfixes.patch 
-> deleted file mode 100644 index 5a73a19..0000000 ---
-> a/meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/opkgfixes.patch 
-> +++ /dev/null @@ -1,422 +0,0 @@ -Index:
-> PackageKit-0.6.0/backends/opkg/pk-backend-opkg.c 
-> -=================================================================== ----
-> PackageKit-0.6.0.orig/backends/opkg/pk-backend-opkg.c	2010-01-29
-> 09:39:33.000000000 +0000 -+++
-> PackageKit-0.6.0/backends/opkg/pk-backend-opkg.c	2010-01-29
-> 11:30:51.000000000 +0000 -@@ -29,8 +29,7 @@ - -+#include <stdio.h> -
-> #include <libopkg/opkg.h> - --static opkg_t *opkg; -- - enum { -
-> SEARCH_NAME, - 	SEARCH_DESCRIPTION, -@@ -62,7 +60,7 @@ -  * check an opkg
-> package for known GUI dependancies -  */ - static gboolean 
-> --opkg_is_gui_pkg (opkg_package_t *pkg) -+opkg_is_gui_pkg (pkg_t *pkg) -
-> { - -   /* TODO: check appropriate tag */ -@@ -84,7 +82,7 @@ -  * check
-> an opkg package to determine if it is a development package -  */ -
-> static gboolean --opkg_is_devel_pkg (opkg_package_t *pkg) 
-> -+opkg_is_devel_pkg (pkg_t *pkg) - { -   if (g_strrstr (pkg->name,
-> "-dev")) -       return TRUE; -@@ -105,7 +103,7 @@ -  * returns true if
-> the tag is present -  */ - static gboolean --opkg_check_tag
-> (opkg_package_t *pkg, const gchar *tag) -+opkg_check_tag (pkg_t *pkg,
-> const gchar *tag) - { - 	if (pkg->tags && tag) - 		return (g_strrstr
-> (pkg->tags, tag) != NULL); -@@ -118,7 +116,7 @@ - { - 	switch (err) - 	{ 
-> --	case OPKG_NO_ERROR: -+/*	case OPKG_NO_ERROR: - 		break; - 	case
-> OPKG_PACKAGE_NOT_INSTALLED: - 		pk_backend_error_code (backend,
-> PK_ERROR_ENUM_PACKAGE_NOT_INSTALLED, NULL); -@@ -140,7 +138,7 @@ -
-> break; - 	case OPKG_PACKAGE_NOT_AVAILABLE: - 		pk_backend_error_code
-> (backend, PK_ERROR_ENUM_PACKAGE_NOT_FOUND, NULL); --		break; -+
-> break;*/ - 	default: - 		opkg_unknown_error (backend, err, "Update
-> package"); - 	} -@@ -152,7 +150,7 @@ - static void - backend_initialize
-> (PkBackend *backend) - { --	opkg = opkg_new (); -+	int opkg = opkg_new
-> (); - - 	if (!opkg) { - 		pk_backend_error_code (backend, -@@ -162,8
-> +160,8 @@ - 	} - - #ifdef OPKG_OFFLINE_ROOT --	opkg_set_option (opkg,
-> (char *) "offline_root", OPKG_OFFLINE_ROOT); --	opkg_re_read_config_files
-> (opkg); -+	opkg_set_option ((char *) "offline_root", OPKG_OFFLINE_ROOT); 
-> -+	opkg_re_read_config_files (); - #endif - - } -@@ -174,22 +172,22 @@ -
-> static void - backend_destroy (PkBackend *backend) - { --	opkg_free
-> (opkg); -+	opkg_free (); - } - - - static void --pk_opkg_progress_cb
-> (opkg_t *_opkg, const opkg_progress_data_t *pdata, void *data) 
-> -+pk_opkg_progress_cb (const opkg_progress_data_t *pdata, void *data) -
-> { --	PkBackend *backend = PK_BACKEND (data); -+	PkBackend *backend =
-> (PkBackend*) data; - 	if (!backend) - 		return; - -
-> pk_backend_set_percentage (backend, pdata->percentage); --	if
-> (pdata->package) -+	if (pdata->pkg) - 	{ - 		gchar *uid; --
-> opkg_package_t *pkg = pdata->package; -+		pkg_t *pkg = pdata->pkg; -
-> gint status = PK_INFO_ENUM_UNKNOWN; - - 		uid = g_strdup_printf
-> ("%s;%s;%s;", -@@ -225,12 +223,12 @@ - { - 	int ret; - --	ret =
-> opkg_update_package_lists (opkg, pk_opkg_progress_cb, backend); -+	ret =
-> opkg_update_package_lists (pk_opkg_progress_cb, backend); - - 	if (ret)
-> { --		if (ret == OPKG_DOWNLOAD_FAILED) --			pk_backend_error_code
-> (backend, PK_ERROR_ENUM_REPO_NOT_AVAILABLE, NULL); --		else -+//		if (ret
-> == OPKG_DOWNLOAD_FAILED) -+//			pk_backend_error_code (backend,
-> PK_ERROR_ENUM_REPO_NOT_AVAILABLE, NULL); -+//		else -
-> opkg_unknown_error (backend, ret, "Refreshing cache"); - 	} -
-> pk_backend_finished (backend); -@@ -256,7 +254,7 @@ -  */ - - static
-> void --pk_opkg_package_list_cb (opkg_t *_opkg, opkg_package_t *pkg, void
-> *data) -+pk_opkg_package_list_cb (pkg_t *pkg, void *data) - { -
-> SearchParams *params = (SearchParams*) data; - 	gchar *uid; -@@ -298,7
-> +296,7 @@ - 	uid = g_strdup_printf ("%s;%s;%s;", - 		pkg->name,
-> pkg->version, pkg->architecture); - --	if (pkg->installed) -+	if
-> (pkg->state_status == SS_INSTALLED) - 		status = PK_INFO_ENUM_INSTALLED; 
-> - 	else - 		status = PK_INFO_ENUM_AVAILABLE; -@@ -318,10 +316,10 @@ -
-> opkg_is_gui_pkg (pkg)) - 		goto end_handle; - 	if
-> (pk_bitfield_contain(filters, PK_FILTER_ENUM_INSTALLED) && --
-> (!pkg->installed)) -+                (pkg->state_status !=
-> SS_INSTALLED)) - 		goto end_handle; - 	if (pk_bitfield_contain(filters,
-> PK_FILTER_ENUM_NOT_INSTALLED) && --                (pkg->installed)) -+
-> (pkg->state_status == SS_INSTALLED)) - 		goto end_handle; - -
-> pk_backend_package (params->backend, status, uid, pkg->description); -@@
-> -338,7 +336,7 @@ - - 	params = pk_backend_get_pointer (backend,
-> "search-params"); - --	opkg_list_packages (opkg, pk_opkg_package_list_cb,
-> params); -+	opkg_list_packages (pk_opkg_package_list_cb, params); - -
-> pk_backend_finished (params->backend); - -@@ -349,7 +347,7 @@ - } - -
-> static void --backend_search_name (PkBackend *backend, PkBitfield
-> filters, const gchar *search) -+backend_search_name (PkBackend *backend,
-> PkBitfield filters, gchar **search) - { - 	SearchParams *params; - -@@
-> -360,7 +358,7 @@ - 	params = g_new0 (SearchParams, 1); - 	params->filters
-> = filters; - 	params->search_type = SEARCH_NAME; --	params->needle =
-> g_utf8_strdown (search, -1); -+	params->needle = g_utf8_strdown
-> (search[0], -1); - 	params->backend = backend; - -
-> pk_backend_set_pointer (backend, "search-params", params); -@@ -371,7
-> +369,7 @@ -  * backend_search_description: -  */ - static void 
-> --backend_search_description (PkBackend *backend, PkBitfield filters,
-> const gchar *search) -+backend_search_description (PkBackend *backend,
-> PkBitfield filters, gchar **search) - { - 	SearchParams *params; - -@@
-> -382,7 +380,7 @@ - 	params = g_new0 (SearchParams, 1); - 	params->filters
-> = filters; - 	params->search_type = SEARCH_DESCRIPTION; --	params->needle
-> = g_utf8_strdown (search, -1); -+	params->needle = g_utf8_strdown
-> (search[0], -1); - 	params->backend = backend; - -
-> pk_backend_set_pointer (backend, "search-params", params); -@@ -390,7
-> +388,7 @@ - } - - static void --backend_search_group (PkBackend *backend,
-> PkBitfield filters, const gchar *search) -+backend_search_group
-> (PkBackend *backend, PkBitfield filters, gchar **search) - { -
-> SearchParams *params; - -@@ -401,7 +399,7 @@ - 	params = g_new0
-> (SearchParams, 1); - 	params->filters = filters; - 	params->search_type =
-> SEARCH_TAG; --	params->needle = g_strdup_printf ("group::%s", search); -+
-> params->needle = g_strdup_printf ("group::%s", search[0]); -
-> params->backend = backend; - - 	pk_backend_set_pointer (backend,
-> "search-params", params); -@@ -412,9 +410,9 @@ - static gboolean -
-> backend_install_packages_thread (PkBackend *backend) - { --	PkPackageId
-> *pi; - 	gint err, i; - 	gchar **package_ids; -+	gchar **parts; - -
-> package_ids = pk_backend_get_strv (backend, "pkids"); - -@@ -424,13
-> +422,13 @@ - 	{ - 		pk_backend_package (backend, PK_INFO_ENUM_INSTALLING,
-> package_ids[i], NULL); - --		pi = pk_package_id_new_from_string
-> (package_ids[i]); -+		parts = pk_package_id_split (package_ids[i]); - --
-> err = opkg_install_package (opkg, pi->name, pk_opkg_progress_cb,
-> backend); -+		err = opkg_install_package (parts[PK_PACKAGE_ID_NAME],
-> pk_opkg_progress_cb, backend); - 		if (err) - 			handle_install_error
-> (backend, err); - --		pk_package_id_free (pi); -+		g_strfreev (parts); -
-> if (err != 0) - 			break; - 	} -@@ -453,9 +451,9 @@ - static gboolean -
-> backend_remove_packages_thread (PkBackend *backend) - { --	PkPackageId
-> *pi; - 	gint err, i; - 	gchar **package_ids; -+	gchar **parts; -
-> gboolean allow_deps; - 	gboolean autoremove; - 	gpointer *data; -@@
-> -467,29 +465,30 @@ - 	autoremove = GPOINTER_TO_INT (data[2]); - 	g_free
-> (data); - --	opkg_set_option (opkg, (char *)"autoremove", &autoremove); 
-> --	opkg_set_option (opkg, (char *)"force_removal_of_dependent_packages",
-> &allow_deps); -+	opkg_set_option ((char *)"autoremove", &autoremove); -+
-> opkg_set_option ((char *)"force_removal_of_dependent_packages",
-> &allow_deps); - - 	err = 0; - - 	for (i = 0; package_ids[i]; i++) - 	{ --
-> pi = pk_package_id_new_from_string (package_ids[i]); -
-> pk_backend_package (backend, PK_INFO_ENUM_REMOVING, package_ids[i],
-> NULL); - --		err = opkg_remove_package (opkg, pi->name,
-> pk_opkg_progress_cb, backend); -+		parts = pk_package_id_split
-> (package_ids[i]); -+ -+		err = opkg_remove_package
-> (parts[PK_PACKAGE_ID_NAME], pk_opkg_progress_cb, backend); - - 		switch
-> (err) - 		{ --		case OPKG_NO_ERROR: --			break; --		case
-> OPKG_PACKAGE_NOT_INSTALLED: --			pk_backend_error_code (backend,
-> PK_ERROR_ENUM_PACKAGE_NOT_INSTALLED, NULL); --			break; -+		//case
-> OPKG_NO_ERROR: -+		//	break; -+		//case OPKG_PACKAGE_NOT_INSTALLED: -+
-> //	pk_backend_error_code (backend, PK_ERROR_ENUM_PACKAGE_NOT_INSTALLED,
-> NULL); -+		//	break; - 		default: - 			opkg_unknown_error (backend, err,
-> "Remove"); - 		} --		pk_package_id_free (pi); -+		g_strfreev (parts); - -
-> if (err != 0) - 			break; -@@ -540,7 +539,7 @@ - 	gint err; - - 	/*
-> FIXME: support only_trusted */ --	err = opkg_upgrade_all (opkg,
-> pk_opkg_progress_cb, backend); -+	err = opkg_upgrade_all
-> (pk_opkg_progress_cb, backend); - - 	if (err) - 		opkg_unknown_error
-> (backend, err, "Upgrading system"); -@@ -564,29 +563,28 @@ - static
-> gboolean - backend_update_package_thread (PkBackend *backend) - { --
-> PkPackageId *pi; -+        gchar **parts; - 	gint err = 0; - 	const gchar
-> *package_id; - - 	/* FIXME: support only_trusted */ - 	package_id =
-> pk_backend_get_string (backend, "pkgid"); --	pi =
-> pk_package_id_new_from_string (package_id); -+	parts =
-> pk_package_id_split (package_id); - --	if (!pi->name || !pi->version) -+
-> if (!parts) - 	{ - 		pk_backend_error_code (backend,
-> PK_ERROR_ENUM_PACKAGE_NOT_FOUND, - 				"Package not found"); --
-> pk_package_id_free (pi); - 		pk_backend_finished (backend); - 		return
-> FALSE; - 	} - --	err = opkg_upgrade_package (opkg, pi->name,
-> pk_opkg_progress_cb, backend); -+	err = opkg_upgrade_package
-> (parts[PK_PACKAGE_ID_NAME], pk_opkg_progress_cb, backend); - 	if (err) -
-> handle_install_error (backend, err); - - --	pk_package_id_free (pi); -+
-> g_strfreev (parts); - 	pk_backend_finished (backend); - 	return (err !=
-> 0); - } -@@ -610,13 +608,13 @@ -  */ - - static void 
-> --pk_opkg_list_upgradable_cb (opkg_t *_opkg, opkg_package_t *pkg, void
-> *data) -+pk_opkg_list_upgradable_cb (pkg_t *pkg, void *data) - { --
-> PkBackend *backend = PK_BACKEND (data); -+	PkBackend *backend =
-> (PkBackend*) data; - 	gchar *uid; - 	gint status; - --	if
-> (pkg->installed) -+	if (pkg->state_status == SS_INSTALLED) - 		status =
-> PK_INFO_ENUM_INSTALLED; - 	else - 		status = PK_INFO_ENUM_AVAILABLE; -@@
-> -631,7 +629,7 @@ - static gboolean - backend_get_updates_thread
-> (PkBackend *backend) - { --	opkg_list_upgradable_packages (opkg,
-> pk_opkg_list_upgradable_cb, backend); -+	opkg_list_upgradable_packages
-> (pk_opkg_list_upgradable_cb, backend); - 	pk_backend_finished (backend); 
-> - 	return TRUE; - } -@@ -668,16 +666,18 @@ - static gboolean -
-> backend_get_details_thread (PkBackend *backend) - { --	PkPackageId *pi; -
-> gchar **package_ids; -+        gchar **parts; - 	int group_index; -
-> PkGroupEnum group = 0; --	opkg_package_t *pkg; -+	pkg_t *pkg; - 	gchar
-> *newid; - -         package_ids = pk_backend_get_strv(backend,
-> "package_ids"); --	pi = pk_package_id_new_from_string (package_ids[0]); 
-> --	if (pi == NULL) -+	parts = pk_package_id_split (package_ids[0]); -+ 
-> -+ -+	if (!parts) - 	{ - 		pk_backend_error_code (backend,
-> PK_ERROR_ENUM_PACKAGE_ID_INVALID, "invalid package id"); -
-> pk_backend_finished (backend); -@@ -685,8 +685,8 @@ - 	} - - --	pkg =
-> opkg_find_package (opkg, pi->name, pi->version, pi->arch, pi->data); --
-> pk_package_id_free (pi); -+	pkg = opkg_find_package
-> (parts[PK_PACKAGE_ID_NAME], parts[PK_PACKAGE_ID_VERSION],
-> parts[PK_PACKAGE_ID_ARCH], parts[PK_PACKAGE_ID_DATA]); -+	g_strfreev
-> (parts); - - 	if (!pkg) - 	{ -@@ -695,7 +695,7 @@ - 		return FALSE; - 	} 
-> - --	newid = g_strdup_printf ("%s;%s;%s;%s", pkg->name, pkg->version,
-> pkg->architecture, pkg->repository); -+	newid = g_strdup_printf
-> ("%s;%s;%s;%s", pkg->name, pkg->version, pkg->architecture,
-> pkg->src->name); - - 	if (pkg->tags) { - 		for (group_index = 0; group <
-> PK_GROUP_ENUM_LAST; group_index++) { -@@ -706,9 +706,8 @@ - 		} - 	} - --
-> pk_backend_details (backend, newid, NULL, group, pkg->description,
-> pkg->url, pkg->size); -+	pk_backend_details (backend, newid, NULL, group,
-> pkg->description, NULL, pkg->size); - 	g_free (newid); --
-> opkg_package_free(pkg); - 	pk_backend_finished (backend); - 	return
-> TRUE; - } diff --git
-> a/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb
-> b/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb deleted file
-> mode 100644 index 7d9c2bf..0000000 ---
-> a/meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb +++ /dev/null 
-> @@ -1,62 +0,0 @@ -DESCRIPTION = "PackageKit package management
-> abstraction" -SECTION = "libs" -LICENSE = "GPL-2.0+" -LIC_FILES_CHKSUM =
-> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" -DEPENDS = "gtk+
-> python polkit dbus dbus-glib glib-2.0 sqlite3 opkg intltool
-> intltool-native" -RDEPENDS_${PN} = "opkg" - -inherit gnome pythonnative 
-> - -SRC_URI =
-> "http://www.packagekit.org/releases/PackageKit-${PV}.tar.gz;name=archive
-> \ -           file://configurefix.patch \ -
-> file://opkgfixes.patch \ -
-> file://0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch \ 
-> -          " - -SRC_URI[archive.md5sum] =
-> "6c8d9c48e21b82abeea15c3fd5066242" -SRC_URI[archive.sha256sum] =
-> "0eafd1be5516a41ebc0f0c3acff0b0763da105a4178b5eee0ff16d66ccd04408" - -S =
-> "${WORKDIR}/PackageKit-${PV}" - -PACKAGECONFIG ??= "" 
-> -PACKAGECONFIG[service-packs] =
-> "--enable-service-packs,--disable-service-packs,libarchive" - 
-> -EXTRA_OECONF = "--with-security-framework=dummy \ -
-> --with-default-backend=opkg \ -                --enable-opkg \ -
-> --disable-tests \ -                --disable-ruck \ -
-> --disable-qt \ -                --disable-gstreamer-plugin \ -
-> --disable-local  \ -                --disable-networkmanager \ -
-> ac_cv_path_XMLTO=no \ -" - -#do_configure_prepend() { -#    mkdir -p m4 
-> -#    echo "EXTRA_DIST=" > gtk-doc.make -#} - -do_configure_append() { -
-> for i in $(find . -name Makefile) ; do -        sed -i -e
-> s:${STAGING_DIR_NATIVE}::g \ -               -e
-> s:${bindir}/mkdir:${STAGING_BINDIR_NATIVE}/mkdir:g \ -               -e
-> s:/usr/bin/intltool-merge:${STAGING_BINDIR_NATIVE}/intltool-merge:g \ -
-> $i -    done -} - -PACKAGES =+ "${PN}-website" -FILES_${PN}-website =
-> "${datadir}/PackageKit/website" - -PACKAGES =+ "${PN}-python" 
-> -FILES_${PN}-python = "${libdir}/python*" - -PACKAGES =+
-> "${PN}-gtkmodule" -FILES_${PN}-gtkmodule = "${libdir}/gtk-2.0/*/*.so" - 
-> -FILES_${PN} += "${libdir}/packagekit-backend/*.so ${libdir}/pm-utils
-> ${datadir}/dbus-1/system-services/ ${datadir}/PolicyKit
-> ${datadir}/PackageKit" -FILES_${PN}-dbg +=
-> "${libdir}/packagekit-backend/.debug/*.so ${libdir}/gtk-2.0/*/.debug" 
-> -FILES_${PN}-dev += "${libdir}/packagekit-backend/*.la
-> ${libdir}/gtk-2.0/*/*.la" -FILES_${PN}-staticdev +=
-> "${libdir}/packagekit-backend/*.a ${libdir}/gtk-2.0/*/*.a" diff --git
-> a/meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb
-> b/meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb new file mode
-> 100644 index 0000000..4bd751e --- /dev/null +++
-> b/meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb @@ -0,0 +1,71
-> @@ +DESCRIPTION = "PackageKit package management abstraction" +SECTION =
-> "libs" +LICENSE = "GPL-2.0+" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" +DEPENDS = "python
-> polkit dbus dbus-glib glib-2.0 sqlite3 intltool intltool-native" + 
-> +inherit autotools gtk-doc pkgconfig pythonnative + +# we declare the
-> packages the OE supports so we can define proper RDEPENDS to them 
-> +PACKAGES =+ "${PN}-python ${PN}-backend-smart ${PN}-backend-opkg
-> ${PN}-backend-apt" +PACKAGES_DYNAMIC += "^pulseaudio-plugin.*
-> ^pulseaudio-backend.*" + +SRC_URI =
-> "http://www.packagekit.org/releases/PackageKit-${PV}.tar.xz" + 
-> +SRC_URI[md5sum] = "c8f7207cca4fcdb3d62d012b67c2f319" +SRC_URI[sha256sum]
-> = "110da1afcbfb9d56da18ece3161e8554f77bc3f90793332406ca54129ec43c76" + +S
-> = "${WORKDIR}/PackageKit-${PV}" + +PACKAGECONFIG ??= " \ +
-> ${@base_contains('IMAGE_PKGTYPE', 'deb', 'apt', '', d)} \ +
-> ${@base_contains('IMAGE_PKGTYPE', 'ipk', 'opkg', '', d)} \ +
-> ${@base_contains('IMAGE_PKGTYPE', 'rpm', 'smart', '', d)} \ +" + 
-> +PACKAGECONFIG[apt] = "--with-default-backend=apt
-> --enable-apt,--disable-apt,apt,${PN}-backend-apt" +PACKAGECONFIG[opkg] =
-> "--with-default-backend=opkg
-> --enable-opkg,--disable-opkg,opkg,${PN}-backend-opkg" 
-> +PACKAGECONFIG[smart] = "--with-default-backend=smart
-> --enable-smart,--disable-smart,python-smartpm,${PN}-backend-smart" + 
-> +EXTRA_OECONF = " \ +  --with-security-framework=dummy \ +
-> --disable-tests \ +  --disable-cron \ +  --disable-connman \ +
-> --disable-strict \ +  --disable-systemd \ +  --disable-systemd-updates \ 
-> +  --disable-bash-completion \ +  --disable-gstreamer-plugin \ +
-> --disable-local  \ +  --disable-networkmanager \ +  --disable-gtk-module
-> \ +  --disable-browser-plugin \ +  --disable-python3 \ +
-> ac_cv_path_XMLTO=no \ +" + +FILES_${PN}-python = "${libdir}/python*" 
-> +RDEPENDS_${PN}-python = "python" + +FILES_${PN} += " \ +
-> ${datadir}/dbus-1 \ +  ${datadir}/PackageKit \ +  ${datadir}/mime \ +" 
-> +FILES_${PN}-dbg += "${libdir}/packagekit-backend/.debug/*.so
-> ${libdir}/packagekit-plugins/.debug/*.so" +FILES_${PN}-dev +=
-> "${libdir}/packagekit-backend/*.la ${libdir}/packagekit-plugins/*.la" 
-> +FILES_${PN}-staticdev += "${libdir}/packagekit-backend/*.a
-> ${libdir}/packagekit-plugins/*.a" + +FILES_${PN}-backend-smart +=
-> "${datadir}/PackageKit/helpers/smart" +RDEPENDS_${PN}-backend-smart +=
-> "${PN} ${PN}-python smartpm" + +RDEPENDS_${PN}-backend-apt += "${PN}
-> apt" +RDEPENDS_${PN}-backend-opkg += "${PN} opkg" + +python
-> populate_packages_prepend() { +    backenddir =
-> d.expand('${libdir}/packagekit-backend/') +    do_split_packages(d,
-> backenddir, '^libpk_backend_(.*)\.so$', 'packagekit-backend-%s',
-> 'PackageKit backend for %s', extra_depends='', prepend=True) +
-> plugindir = d.expand('${libdir}/packagekit-plugins/') +
-> do_split_packages(d, plugindir, '^libpk_plugin[_\-](.*)\.so$',
-> 'packagekit-plugin-%s', 'PackageKit plugin for %s', extra_depends='',
-> prepend=True) +}
-> 
+> So the only thing lost would be staticdev package, which I don't think is
+> being used anyway.
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFSlwtXMkyGM64RGpERAtZ0AJ9+8Z1VRSUiCD4a/I6ZTWCF6bMuygCfXFn+
-99xN0L04mgjrkcshBtc9X2E=
-=oteQ
------END PGP SIGNATURE-----
+The nss-staticdev in meta-browser was conflicting with openssl anyways:
+
+WARNING: The recipe openssl is trying to install files into a shared area
+when those files already exist. Those files and their manifest location are:
+   /srv/oe/build/tmp-eglibc/sysroots/genericarmv7a/usr/lib/libssl.a
+   Matched in manifest-genericarmv7a-nss
+
+
+
+
+
+>
+>
+> Riku
+>
+>
+>>
+>>
+>> > Signed-off-by: Riku Voipio <riku.voipio@linaro.org <javascript:;>>
+>> > ---
+>> >  recipes-support/nss/nss-3.13.3/native_cc.patch    |  55 ----------
+>> >  recipes-support/nss/nss-3.13.3/nss.pc.in          |  11 --
+>> >  recipes-support/nss/nss-3.13.3/skip_signing.patch |  18 ----
+>> >  recipes-support/nss/nss_3.13.3.bb                 | 116
+>> > ----------------------
+>> >  4 files changed, 200 deletions(-)
+>> >  delete mode 100644 recipes-support/nss/nss-3.13.3/native_cc.patch
+>> >  delete mode 100644 recipes-support/nss/nss-3.13.3/nss.pc.in
+>> >  delete mode 100644 recipes-support/nss/nss-3.13.3/skip_signing.patch
+>> >  delete mode 100644 recipes-support/nss/nss_3.13.3.bb
+>> >
+>> > diff --git a/recipes-support/nss/nss-3.13.3/native_cc.patch
+>> > b/recipes-support/nss/nss-3.13.3/native_cc.patch
+>> > deleted file mode 100644
+>> > index 41d4980..0000000
+>> > --- a/recipes-support/nss/nss-3.13.3/native_cc.patch
+>> > +++ /dev/null
+>> > @@ -1,55 +0,0 @@
+>> > -we need to override ARCHFLAG as well since this is set to either -m32
+>> or
+>> > -m64
+>> > -and LDFLAGS add it explicitly which means when NATIVE_CC is defined
+>> then
+>> > we build
+>> > -the objects as 64bit but link them to be 32bit binary which may not fly
+>> > -
+>> > -Signed-off-by: Khem Raj <raj.khem@gmail.com <javascript:;>>
+>> > -Index: mozilla/security/coreconf/mkdepend/Makefile
+>> > -===================================================================
+>> > ---- mozilla.orig/security/coreconf/mkdepend/Makefile   2013-01-09
+>> > 13:23:51.747694602 -0800
+>> > -+++ mozilla/security/coreconf/mkdepend/Makefile        2013-01-09
+>> > 13:56:27.003734720 -0800
+>> > -@@ -64,11 +64,11 @@
+>> > - endif
+>> > -
+>> > - ifdef NATIVE_CC
+>> > --CC=$(NATIVE_CC)
+>> > -+override CC=$(NATIVE_CC)
+>> > - endif
+>> > -
+>> > - ifdef NATIVE_FLAGS
+>> > --OS_CFLAGS=$(NATIVE_FLAGS)
+>> > -+override OS_CFLAGS=$(NATIVE_FLAGS)
+>> > - endif
+>> > -
+>> > - include $(DEPTH)/coreconf/rules.mk
+>> > -Index: mozilla/security/coreconf/nsinstall/Makefile
+>> > -===================================================================
+>> > ---- mozilla.orig/security/coreconf/nsinstall/Makefile  2013-01-09
+>> > 13:23:51.747694602 -0800
+>> > -+++ mozilla/security/coreconf/nsinstall/Makefile       2013-01-09
+>> > 13:56:11.775734407 -0800
+>> > -@@ -58,11 +58,11 @@
+>> > - endif
+>> > -
+>> > - ifdef NATIVE_CC
+>> > --CC=$(NATIVE_CC)
+>> > -+override CC=$(NATIVE_CC)
+>> > - endif
+>> > -
+>> > - ifdef NATIVE_FLAGS
+>> > --OS_CFLAGS=$(NATIVE_FLAGS)
+>> > -+override OS_CFLAGS=$(NATIVE_FLAGS)
+>> > - endif
+>> > -
+>> > - include $(DEPTH)/coreconf/rules.mk
+>> > -Index: mozilla/security/coreconf/Linux.mk
+>> > -===================================================================
+>> > ---- mozilla.orig/security/coreconf/Linux.mk    2013-01-09
+>> > 13:50:01.427726808 -0800
+>> > -+++ mozilla/security/coreconf/Linux.mk 2013-01-09 13:55:58.815734141
+>> -0800
+>> > -@@ -98,6 +98,9 @@
+>> > - endif
+>> > - endif
+>> > -
+>> > -+ifdef NATIVE_FLAGS
+>> > -+    override ARCHFLAG=
+>> > -+endif
+>> > -
+>> > - LIBC_TAG              = _glibc
+>> > -
+>> > diff --git
+>> a/recipes-support/nss/nss-3.13.3/nss.pc.inb/recipes-support/nss/nss-3.13.3/
+>> > nss.pc.in
+>> > deleted file mode 100644
+>> > index abbc850..0000000
+>> > --- a/recipes-support/nss/nss-3.13.3/nss.pc.in
+>> > +++ /dev/null
+>> > @@ -1,11 +0,0 @@
+>> > -prefix=OEPREFIX
+>> > -exec_prefix=OEEXECPREFIX
+>> > -libdir=OELIBDIR
+>> > -includedir=OEINCDIR
+>> > -
+>> > -Name: NSS
+>> > -Description: Mozilla Network Security Services
+>> > -Version: @VERSION@
+>> > -Requires: nspr
+>> > -Libs: -L${libdir} -lnss3 -lnssutil3 -lsmime3 -lssl3
+>> > -Cflags: -I${includedir} -I${includedir}/mozilla/nss
+>> > diff --git a/recipes-support/nss/nss-3.13.3/skip_signing.patch
+>> > b/recipes-support/nss/nss-3.13.3/skip_signing.patch
+>> > deleted file mode 100644
+>> > index 64e440d..0000000
+>> > --- a/recipes-support/nss/nss-3.13.3/skip_signing.patch
+>> > +++ /dev/null
+>> > @@ -1,18 +0,0 @@
+>> > -# HG changeset patch
+>> > -# User Ted Mielczarek <ted.mielczarek@gmail.com <javascript:;>>
+>> > -# Date 1314190279 14400
+>> > -# Node ID a993dd883a502a15d0a8acebb7bf31fdbd0fd18f
+>> > -# Parent  5a4a2b65e7b4950aa7cadc03aac43489ee314ba7
+>> > -[mq]: skip-shlibsigh
+>> > -
+>> > -diff --git a/security/nss/cmd/shlibsign/Makefile
+>> > b/security/nss/cmd/shlibsign/Makefile
+>> > ---- a/security/nss/cmd/shlibsign/Makefile
+>> > -+++ b/security/nss/cmd/shlibsign/Makefile
+>> > -@@ -120,5 +120,6 @@
+>> > -       $(call core_abspath,$(NSPR_LIB_DIR)) $(call core_abspath,$<)
+>> > - endif
+>> > -
+>> > -+ifndef SKIP_SHLIBSIGN
+>> > - libs install :: $(CHECKLOC)
+>> > --
+>> > -+endif
+>> > diff --git a/recipes-support/nss/nss_3.13.3.bb b/recipes-support/nss/
+>> > nss_3.13.3.bb
+>> > deleted file mode 100644
+>> > index ac77547..0000000
+>> > --- a/recipes-support/nss/nss_3.13.3.bb
+>> > +++ /dev/null
+>> > @@ -1,116 +0,0 @@
+>> > -DESCRIPTION = "Mozilla's SSL and TLS implementation"
+>> > -HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
+>> > -
+>> > -PR = "r4"
+>> > -
+>> > -LICENSE = "MPL1.1 GPL LGPL"
+>> > -LIC_FILES_CHKSUM = "file://security/nss/manifest.mn
+>> > ;md5=d71978748f23eae3156c38ac2a691924"
+>> > -
+>> > -DEPENDS = "sqlite3 nspr nspr-native"
+>> > -
+>> > -SRC_URI = "\
+>> > -
+>> >
+>> http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_13_3_RTM/src/${PN}-${PV}.tar.gz\
+>> > -       file://nss.pc.in \
+>> > -       file://skip_signing.patch \
+>> > -        file://native_cc.patch \
+>> > -"
+>> > -
+>> > -S = "${WORKDIR}/${P}/mozilla"
+>> > -
+>> > -SRC_URI[md5sum] = "006cb82fa900e9e664b4b14a9b7810ca"
+>> > -SRC_URI[sha256sum] =
+>> > "efa10f2c70da4bddabf1a6081964969bb23359b93d6eadbf4739274a77bc3587"
+>> > -
+>> > -TD = "${S}/tentative-dist"
+>> > -
+>> > -PARALLEL_MAKE = ""
+>> > -
+>> > -USE64BIT_x86-64 = "USE_64=1"
+>> > -USE64BIT_mips64 = "USE_64=1"
+>> > -USE64BIT_mips64el = "USE_64=1"
+>> > -USE64BIT ?= ""
+>> > -
+>> > -do_compile() {
+>> > -#      sed -e 's:SOURCE_PREFIX = $(CORE_DEPTH)/\.\./dist:SOURCE_PREFIX
+>> =
+>> > $(CORE_DEPTH)/dist:' -i ${S}/security/coreconf/source.mk
+>> > -       make -C security/nss \
+>> > -               build_coreconf \
+>> > -               build_dbm \
+>> > -               export libs program \
+>> > -               MOZILLA_CLIENT=1 \
+>> > -               BUILD_OPT=1 \
+>> > -               SKIP_SHLIBSIGN=1 \
+>> > -               OS_TARGET="Linux" \
+>> > -               OS_TARGET_RELEASE="2.6" \
+>> > -               OS_TEST="${TARGET_ARCH}" \
+>> > -               NSPR_INCLUDE_DIR="${STAGING_INCDIR}/mozilla/nspr" \
+>> > -               NSPR_LIB_DIR="${STAGING_LIBDIR}" \
+>> > -               SQLITE3_INCLUDE_DIR="${STAGING_INCDIR}" \
+>> > -               OPTIMIZER="${CFLAGS}" \
+>> > -               NS_USE_GCC=1 \
+>> > -               NSS_USE_SYSTEM_SQLITE=1 \
+>> > -               NSS_ENABLE_ECC=1 \
+>> > -               DEFAULT_COMPILER="${TARGET_CC}" \
+>> > -               CC="${CC}" \
+>> > -               CCC="${CXX}" \
+>> > -               CXX="${CXX}" \
+>> > -               RANLIB="${RANLIB}" \
+>> > -               NATIVE_CC="${BUILD_CC}" \
+>> > -               NATIVE_FLAGS="${BUILD_CFLAGS}" \
+>> > -               ${USE64BIT}
+>> > -}
+>> > -
+>> > -do_install() {
+>> > -       make -C security/nss \
+>> > -               install \
+>> > -               MOZILLA_CLIENT=1 \
+>> > -               BUILD_OPT=1 \
+>> > -               SKIP_SHLIBSIGN=1 \
+>> > -               OS_TARGET=Linux \
+>> > -               OS_TARGET_RELEASE="2.6" \
+>> > -               OS_TEST="${TARGET_ARCH}" \
+>> > -               NSPR_INCLUDE_DIR="${STAGING_INCDIR}/mozilla/nspr" \
+>> > -               NSPR_LIB_DIR="${STAGING_LIBDIR}" \
+>> > -               NS_USE_GCC=1 \
+>> > -               NSS_USE_SYSTEM_SQLITE=1 \
+>> > -               NSS_ENABLE_ECC=1 \
+>> > -               FREEBL_CHILD_BUILD=1 \
+>> > -               CC="${CC}" \
+>> > -               SOURCE_LIB_DIR="${TD}/${libdir}" \
+>> > -               SOURCE_BIN_DIR="${TD}/${bindir}" \
+>> > -               ${USE64BIT}
+>> > -
+>> > -       install -d ${D}/${libdir}
+>> > -
+>> > -       for shared_lib in ${TD}/${libdir}/*.so*
+>> > -       do
+>> > -#              oe_libinstall -C ${TD}/${libdir} `basename $shared_lib
+>> > .so` ${D}/${libdir}
+>> > -               cp $shared_lib ${D}/${libdir}
+>> > -#              ln -sf $(basename $shared_lib) ${D}/${libdir}/$(basename
+>> > $shared_lib .1oe)
+>> > -       done
+>> > -
+>> > -       install -d ${D}/${includedir}/mozilla/nss
+>> > -       install -m 644 -t ${D}/${includedir}/mozilla/nss
+>> > ${S}/dist/public/nss/*
+>> > -
+>> > -       for static_lib in ${TD}/${libdir}/*.a
+>> > -       do
+>> > -               oe_libinstall -C ${TD}/${libdir} `basename $static_lib
+>> .a`
+>> > ${D}/${libdir}
+>> > -       done
+>> > -
+>> > -       install -d ${D}/${bindir}
+>> > -       for binary in ${TD}/${bindir}/*
+>> > -       do
+>> > -               install -m 755 -t ${D}/${bindir} $binary
+>> > -       done
+>> > -
+>> > -       install -D ${WORKDIR}/nss.pc.in ${D}${libdir}/pkgconfig/nss.pc
+>> > -       sed -i s:@VERSION@:${PV}:g ${D}${libdir}/pkgconfig/nss.pc
+>> > -       sed -i s:OEPREFIX:${prefix}:g ${D}${libdir}/pkgconfig/nss.pc
+>> > -       sed -i s:OELIBDIR:${libdir}:g ${D}${libdir}/pkgconfig/nss.pc
+>> > -       sed -i s:OEINCDIR:${includedir}:g ${D}${libdir}/pkgconfig/nss.pc
+>> > -       sed -i s:OEEXECPREFIX:${exec_prefix}:g
+>> > ${D}${libdir}/pkgconfig/nss.pc
+>> > -
+>> > -       sed -i s:/usr/local/bin/perl:${bindir}/perl:g
+>> ${D}${bindir}/smime
+>> > -}
+>> > -
+>> > -FILES_SOLIBSDEV := ""
+>> > -FILES_${PN} += "${base_libdir}/lib*${SOLIBSDEV}
+>> > ${libdir}/lib*${SOLIBSDEV}"
+>> > -RDEPENDS_${PN} += "perl"
+>> > --
+>> > 1.8.1.2
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org <javascript:;>
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
