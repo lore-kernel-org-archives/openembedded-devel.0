@@ -1,26 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D0AE6D77B
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 48A2D6D77B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 10:32:49 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 28 Nov 2013 02:32:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,790,1378882800"; d="scan'208";a="443622438"
-Received: from unknown (HELO helios.localnet) ([10.252.122.17])
-	by orsmga002.jf.intel.com with ESMTP; 28 Nov 2013 02:32:48 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>,
-	"Felipe F. Tonello" <eu@felipetonello.com>
-Date: Thu, 28 Nov 2013 10:32:46 +0000
-Message-ID: <14902072.IG3b8o4YqW@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <52970B57.3050700@dominion.thruhere.net>
-References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>
-	<52970B57.3050700@dominion.thruhere.net>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
+	Thu, 28 Nov 2013 10:49:30 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VlzA0-0008QX-Ax for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Nov 2013 11:49:28 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Nov 2013 11:49:28 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Nov 2013 11:49:28 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 28 Nov 2013 11:49:18 +0100
+Message-ID: <l77732$ggi$1@ger.gmane.org>
+References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>	<52970B57.3050700@dominion.thruhere.net>
+	<14902072.IG3b8o4YqW@helios>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+In-Reply-To: <14902072.IG3b8o4YqW@helios>
+X-Enigmail-Version: 1.6
 Subject: Re: [PATCH] packagekit: Updated to 0.8.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,45 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 10:32:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 28 Nov 2013 10:49:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Koen / Felipe,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thursday 28 November 2013 10:22:31 Koen Kooi wrote:
-> Felipe F. Tonello schreef op 28-11-13 01:56:
-> > From: "Felipe F. Tonello" <eu@felipetonello.com>
-> > This recipe supports the backend for packagekit dynamically based on the
-> > IMAGE_PKGTYPE.
+Paul Eggleton schreef op 28-11-13 11:32:
+> Hi Koen / Felipe,
 > 
-> NAK! IMAGE_FEATURES should *never* change non-image recipe params. This
-> breaks using feeds horribly.
+> On Thursday 28 November 2013 10:22:31 Koen Kooi wrote:
+>> Felipe F. Tonello schreef op 28-11-13 01:56:
+>>> From: "Felipe F. Tonello" <eu@felipetonello.com> This recipe supports
+>>> the backend for packagekit dynamically based on the IMAGE_PKGTYPE.
+>> 
+>> NAK! IMAGE_FEATURES should *never* change non-image recipe params.
+>> This breaks using feeds horribly.
+> 
+> IMAGE_PKGTYPE is influenced by PACKAGE_CLASSES; so this is not about 
+> IMAGE_FEATURES, and correct me if I'm wrong but maintaining package feeds
+>  would generally preclude switching to an alternative package manager,
+> right?
 
-IMAGE_PKGTYPE is influenced by PACKAGE_CLASSES; so this is not about 
-IMAGE_FEATURES, and correct me if I'm wrong but maintaining package feeds 
-would generally preclude switching to an alternative package manager, right?
+No, it's perfectly possible to build both opkg and rpm, which is what I'm
+currently doing. When doing that the DISTRO.conf does need to make a
+decision on what to support for things like packagekit.
 
-Some options:
+> Some options:
+> 
+> 1) Apply the patch as-is. Changing the order/value of PACKAGE_CLASSES
+> will mean this and anything that depends upon it will rebuild.
+> 
+> 2) Install the appropriate backend via some code in the image recipe. 
+> Obviously this means you have to do this for every image recipe though.
+> 
+> 3) Use non-dynamic PACKAGECONFIG. Of course this means you'll have to
+> remember to change this manually if you change PACKAGE_CLASSES or it'll
+> just be broken at runtime.
+> 
+> Honestly, option 1 sounds like the best course to me here. This is rather
+> a special case compared to other recipes.
 
-1) Apply the patch as-is. Changing the order/value of PACKAGE_CLASSES will 
-mean this and anything that depends upon it will rebuild.
+1) will let you end up with packagekit_1.0.ipk that only supports RPM
+2) Is what we would really want, but I don't think packagekit supports that :(
 
-2) Install the appropriate backend via some code in the image recipe. 
-Obviously this means you have to do this for every image recipe though.
+So that leaves 3, which makes it a clear DISTRO decision, like it should be.
 
-3) Use non-dynamic PACKAGECONFIG. Of course this means you'll have to remember 
-to change this manually if you change PACKAGE_CLASSES or it'll just be broken 
-at runtime.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Honestly, option 1 sounds like the best course to me here. This is rather a 
-special case compared to other recipes.
+iD8DBQFSlx+uMkyGM64RGpERAklsAJ0dtXhGERpNu+IizQN05XNliTk50wCfR8nl
+xGpfq7tjqZPsx1V0hSYW5qs=
+=1or8
+-----END PGP SIGNATURE-----
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
