@@ -1,36 +1,24 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AA6E610D4
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B22846D014
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 22:03:04 +0000 (UTC)
-Received: by mail-ie0-f172.google.com with SMTP id qd12so15059720ieb.31
+	Fri, 29 Nov 2013 02:37:39 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rAT2bcEM012013
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2013 14:03:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=juIHbGky3RqfDImu+cUD8vQEidPOJMDjQTO4VekJTUw=;
-	b=d1z6jhYV29apPcyOw0bQ4LgCyaUkSSUCEpRvIUUe7RDfnHZNnwvw3C2Kw1MrMs7ROg
-	Je+CK2LDeRjJPxofQPKJn/oVSWfVCGoIcxKcq1UOign4MqlrANxDlfcz/IwhKBGaxiMU
-	1AvkoA9rBZlOsBaLr0554A+vI4ZCjp1/fuGYsxdANeVsG2M+FoqSRIWdPTaoaLR+akbb
-	uGCANek5u5w4FHKwaG8HCk2GpGfpEUWHhD0VkbqmxPviW1Ee5hd3oa8R8u3lf4tefJsY
-	hl8jOmkQrIT4/7a7eSvLLZVHIy7y50eyOwOhZqEscvp9NEA/uwqRDiKcItzD4h8z5dol
-	ufIA==
-X-Received: by 10.43.151.12 with SMTP id kq12mr2809icc.55.1385676183565; Thu,
-	28 Nov 2013 14:03:03 -0800 (PST)
+	Thu, 28 Nov 2013 18:37:38 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.2.347.0; Thu, 28 Nov 2013 18:37:38 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Nov 2013 10:37:37 +0800
+Message-ID: <1385692657-10783-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Received: by 10.64.26.233 with HTTP; Thu, 28 Nov 2013 14:02:43 -0800 (PST)
-In-Reply-To: <20131128190221.GD3724@deserted.net>
-References: <CAMCfZKEEYRnDP36tKtn=rqXEdY3VVucDMv0FdYntjYmaw3=fMg@mail.gmail.com>
-	<20131128182423.GC3724@deserted.net>
-	<CAMCfZKFLW-FzmEDdquj2+H8ePnOOAZDGpoRPV+CPhD_VvzDW7Q@mail.gmail.com>
-	<20131128190221.GD3724@deserted.net>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Thu, 28 Nov 2013 20:02:43 -0200
-Message-ID: <CAMCfZKGaTKreSQmLcmNMbUD0TeGWhCbFidBwUKq0SAPEAskeeA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Change to vsftpd recipe
+Subject: [PATCH meta-networking] ntp: comment out the invalid server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,103 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2013 22:03:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Nov 2013 02:37:40 -0000
+Content-Type: text/plain
 
-Joe,
+From: Roy Li <rongqing.li@windriver.com>
 
-Looking at your commit, you are populating "/var/run/vsftpd/empty" using
-the file "/etc/default/volatiles/99_vsftpd". This file is used in a
-sysVinit system.
+When ntpd starts, it will create a daemon to connect this invalid server,
+and fail, then ntpd will create other daemon to connect the local-only
+(127.127.1.0) server.
 
-Since I'm using systemd, I believe that "/etc/default/volatiles/" is not
-scanned by Yocto as you can see here:
-http://git.yoctoproject.org/cgit.cgi/poky/plain/meta/recipes-core/initscripts/initscripts-1.0/populate-volatile.sh
+The users should be aware that they need to configure the correct ntp
+servers, a invalid server will lead to a redundant daemon, so it is better
+to comment this example server to wait user to configure
 
-So, I think we need an universal solution.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-networking/recipes-support/ntp/files/ntp.conf |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Regards,
+diff --git a/meta-networking/recipes-support/ntp/files/ntp.conf b/meta-networking/recipes-support/ntp/files/ntp.conf
+index a9cc838..e26b615 100644
+--- a/meta-networking/recipes-support/ntp/files/ntp.conf
++++ b/meta-networking/recipes-support/ntp/files/ntp.conf
+@@ -5,7 +5,9 @@ driftfile /etc/ntp.drift
+ # This obtains a random server which will be close
+ # (in IP terms) to the machine.  Add other servers
+ # as required, or change this.
+-server time.server.example.com
++# 
++# server time.server.example.com
++#
+ # Using local hardware clock as fallback
+ # Disable this when using ntpd -q -g -x as ntpdate or it will sync to itself
+ server 127.127.1.0
+-- 
+1.7.10.4
 
---
-*dS
-Diego Sueiro
-
-/*long live rock 'n roll*/
-
-
-On Thu, Nov 28, 2013 at 5:02 PM, Joe MacDonald <joe@deserted.net> wrote:
-
-> [Re: [oe] Change to vsftpd recipe] On 13.11.28 (Thu 16:52) Diego Sueiro
-> wrote:
->
-> > On Thu, Nov 28, 2013 at 4:24 PM, Joe MacDonald <joe@deserted.net> wrote:
-> >
-> > > Care to take a run at reverting 1c4921817 in your tree and see if that
-> > > clears things up for you?  I'd do it myself but I'm waist-deep in a
-> > > different investigation right now and it sounds like you might be able
-> > > to do a quick test.
-> > >
-> >
-> > Joe,
-> >
-> > I did not get this QA error.
-> > The installed directory should be "/var/run/vsftpd/empty" and not
-> > "/run/vsftpd/empty" as pointed on error message.
-> > Did you added "install -d ${D}${localstatedir}/run/vsftpd/empty" on
-> > do_install function?
->
-> Yep, here's the modified do_install in its entirety:
->
-> ------------------------------------------------------------------------
-> do_install() {
->     install -d ${D}${sbindir}
->     install -d ${D}${mandir}/man8
->     install -d ${D}${mandir}/man5
->     oe_runmake 'DESTDIR=${D}' install
->     install -d ${D}${sysconfdir}
->     install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
->     install -d ${D}${sysconfdir}/init.d/
->     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
->     install -d ${D}/${sysconfdir}/default/volatiles
->     install -m 644 ${WORKDIR}/volatiles.99_vsftpd
-> ${D}/${sysconfdir}/default/volatiles/99_vsftpd
->
->     install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
->     install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
->     if ! test -z "${PAMLIB}" ; then
->         install -d ${D}${sysconfdir}/pam.d/
->         cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
->         sed -i "s:/lib/security:${base_libdir}/security:"
-> ${D}${sysconfdir}/pam.d/vsftpd
->         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
->     fi
->     install -d ${D}${localstatedir}/run/vsftpd/empty
-> }
-> ------------------------------------------------------------------------
->
-> -J.
->
-> >
-> > Regards,
-> >
-> > --
-> > *dS
-> > Diego Sueiro
-> >
-> > /*long live rock 'n roll*/
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> -Joe MacDonald.
-> :wq
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
