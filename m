@@ -1,35 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F4846AB73
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f41.google.com (mail-oa0-f41.google.com
+	[209.85.219.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 88B226D82A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2013 15:08:31 +0000 (UTC)
-Received: by mail-ea0-f182.google.com with SMTP id o10so10182472eaj.41
+	Sat, 30 Nov 2013 22:29:42 +0000 (UTC)
+Received: by mail-oa0-f41.google.com with SMTP id j17so11780551oag.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2013 07:08:30 -0800 (PST)
+	Sat, 30 Nov 2013 14:29:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=kd3BioVgfvdgfxnI28lvQUMbsPsNOKEev7kW7+X+PJk=;
-	b=fv2dmPa/lD8jj5zdWdV9oWDcSUQyXql3ZK734ojGlGDViEws6O49VvRod4FvhFrvi8
-	CtfUCb5mab8dHT2UFGz5tcLC/31Zs0gAy8aeqMg112VEVwKpNNP0NafRRy4axb8wdC+f
-	qOSVlxsqiItmxpS6Ql604r6HZ3oIChP0TLWnF/SU/cdY+7BooANWoUjLMguBUTqw3iJ+
-	Cz7rCR4c8sLA0y+bJGKhYb2ziDUS91DHamJjMd8T4ky5oKMXVph/TDmmmDj+VanpJvxF
-	CgzULum3R3PA9G/7jeS2IHDOPSWsB4fJH42DS/cN6A+uQ0y6syJf19F7eE/RrKiqRNPR
-	dqyA==
-X-Received: by 10.15.34.5 with SMTP id d5mr58051902eev.20.1385824110799;
-	Sat, 30 Nov 2013 07:08:30 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id a51sm51672256eeh.8.2013.11.30.07.08.29
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 30 Nov 2013 07:08:30 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Nov 2013 16:08:33 +0100
-Message-Id: <1385824113-4414-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.3
-Subject: [meta-oe][PATCH] xserver-common: Rename Xsession.d files to end with .sh extension
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=jlS55E77WXJscVyHbz7TESQEA6zYOjeSQXwPq3dLe7k=;
+	b=VpQI12FJldyMe++B9lwv4Q5JFWXwIGbdchOoWlwt95p94YbXZHEsv48dBvYkGI+GhB
+	jZV6pZqeoMiSHKuQjveHkK2TR7k7EAGmLrHeVYAXW7sZglP3kisXvsXOX+PEH/flIRSg
+	+97oA7GkJeR3Aumf88Jp6glZ2tQlKuKTIwWHHKiB1Xxu3tVXUe8jkbVkuTvEEkhpCLbC
+	mUk/oA9P5Io1+V73QChunhlHilSFe6gUHOEkH/CjPgFKto/MMM9uJKByljrYAE8Gq9DG
+	aDbXvvkwh6Z6JtRZR3YtYF+ne8r+sqxVGc4GHvF0iAafCMi66M23vDzFop7w03C7klnZ
+	COVA==
+MIME-Version: 1.0
+X-Received: by 10.60.40.5 with SMTP id t5mr48273735oek.26.1385850581119; Sat,
+	30 Nov 2013 14:29:41 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Sat, 30 Nov 2013 14:29:41 -0800 (PST)
+In-Reply-To: <34764D13-4A13-431F-B39D-E1B61004BBE9@gmail.com>
+References: <548EF836-E57E-42CC-8E0A-0D77045DE0AE@gmail.com>
+	<20131127214440.GR2870@jama>
+	<34764D13-4A13-431F-B39D-E1B61004BBE9@gmail.com>
+Date: Sat, 30 Nov 2013 20:29:41 -0200
+X-Google-Sender-Auth: 3UnhuU1FLemKeuYU27H5M_yvOQs
+Message-ID: <CAP9ODKq8McmPkA1_P_xo4pJYF-gUU8FB3AZZMqr+LQH=D7SHhA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Meta-qt5 sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,39 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Nov 2013 15:08:31 -0000
+X-List-Received-Date: Sat, 30 Nov 2013 22:29:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* oe-core version of xinput-calibrator installs
-  30xinput_calibrate.sh and ls -X used in Xsession script sorts it as
-  last (not respecting the numbers) and xinput-calibrator is executed
-  too late (after 90xXWindowManager)
-* don't forget to update all your components installing Xsession.d
-  files as well
+On Thu, Nov 28, 2013 at 7:00 PM, Simone <cjb.sw.nospam@gmail.com> wrote:
+> Hello Martin,
+> Thank you for your reply!
+> I want to test this sdk, but i don't know how to build it.
+>
+> What i have to bitbake?
+> What does it produce? An installer?
+> Gdb is included?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+Please check the link Martin has post.
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 481e438..5bc37b0 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -28,6 +28,13 @@ SRC_URI_append = " \
- 
- do_install_append() {
-     sed -i 's:^BINDIR=.*$:BINDIR=${bindir}:' ${D}/etc/X11/xserver-common
-+    # Rename all Xsession files not ending with .sh
-+    # Unfortunatelly when xinput-calibrator was moved to oe-core
-+    # its Xsession file got name 30xinput_calibrate.sh and ls -X sorts it
-+    # last, not respecting numbers for sorting them
-+    for i in ${D}/${sysconfdir}/X11/Xsession.d/*; do
-+        echo $i | grep '.sh$' || mv $i $i.sh
-+    done
- }
- 
- inherit allarch
 -- 
-1.8.4.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
