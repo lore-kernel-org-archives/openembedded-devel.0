@@ -1,28 +1,26 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 112566DD15
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 46C166D87A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2013 15:04:55 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 02 Dec 2013 07:00:58 -0800
+	Mon,  2 Dec 2013 15:23:39 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 02 Dec 2013 07:23:38 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,811,1378882800"; d="scan'208";a="445349825"
+X-IronPort-AV: E=Sophos;i="4.93,811,1378882800"; d="scan'208";a="417990963"
 Received: from pmcgurk-mobl.ger.corp.intel.com (HELO helios.localnet)
 	([10.252.121.184])
-	by orsmga002.jf.intel.com with ESMTP; 02 Dec 2013 07:03:35 -0800
+	by orsmga001.jf.intel.com with ESMTP; 02 Dec 2013 07:23:37 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Sebastien MENNETRIER <s.mennetrier@innotis.org>
-Date: Mon, 02 Dec 2013 15:03:05 +0000
-Message-ID: <1618185.ZWhYWpivda@helios>
+To: Ulf Samuelsson <ulf@emagii.com>
+Date: Mon, 02 Dec 2013 15:23:35 +0000
+Message-ID: <3167183.WWpGOO4rZZ@helios>
 Organization: Intel Corporation
 User-Agent: KMail/4.10.5 (Linux/3.8.0-31-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <CABgO3_PQBTfeogsTJjSs6u_04jP5FceqVvqkRjNnpZgiOt+OaQ@mail.gmail.com>
-References: <1385993511-14838-1-git-send-email-s.mennetrier@innotis.org>
-	<l7i615$91m$1@ger.gmane.org>
-	<CABgO3_PQBTfeogsTJjSs6u_04jP5FceqVvqkRjNnpZgiOt+OaQ@mail.gmail.com>
+In-Reply-To: <1385984797-6864-1-git-send-email-ulf@emagii.com>
+References: <1385984797-6864-1-git-send-email-ulf@emagii.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH] Add nginx http webserver
+Subject: Re: [PATCH] curlpp: add curl c++ bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,39 +34,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2013 15:04:55 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 02 Dec 2013 15:23:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Monday 02 December 2013 15:56:34 Sebastien MENNETRIER wrote:
-> 2013/12/2 Koen Kooi <koen@dominion.thruhere.net>
-> > S=E9bastien Mennetrier schreef op 02-12-13 15:11:
-> > > +    install -d ${D}${sysconfdir}/init.d +    cat ${WORKDIR}/init=
- | \ +
-> > > sed -e 's,/usr/sbin/,${sbindir}/,g' \ +            -e
-> > > 's,/etc/,${sysconfdir}/,g' > ${D}/${sysconfdir}/init.d/nginx +   =
- chmod
-> > > 755 ${D}/${sysconfdir}/init.d/nginx
-> >=20
-> > I think using sed -i will be easier to understand, I haven't seen a=
-ny pipe
-> > based modifications in an OE recipe yet.
-> >=20
- > This method is used in apache2 recipe... But I can modify if it's
-> necessary.
+Hi Ulf,
 
-Right, it's probably not ideal there either (and it was probably me tha=
-t wrote=20
-that...) When you do change this for the nginx recipe, be sure to sed -=
-i the=20
-destination file after copying (rather than the source before) so that =
-re-
-executing do_install will work.
+On Monday 02 December 2013 12:46:37 Ulf Samuelsson wrote:
+> +DESCRIPTION = "C++ library for client-side URL transfers."
+
+Please set SUMMARY instead for a short one-line description, this will set 
+DESCRIPTION as well.
+
+> +HOMEPAGE = "http://code.google.com/p/curlpp/"
+> +SECTION = "console/network"
+> +LICENSE = "freely distributable"
+
+The correct LICENSE value is "MIT" according to the website above.
+
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=fd0c9adf285a69aa3b4faf34384e1029"
+> +
+> +DEPENDS = "curl boost"
+> +DEPENDS_class-native = "curl-native"
+> +PR = "r1"
+
+Drop PR here please
+
+> +
+> +SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
+> +	"
+> +
+> +SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
+> +SRC_URI[sha256sum] =
+> "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5" 
+> +
+> +inherit autotools pkgconfig binconfig
+> +
+> +EXTRA_OECONF = "--prefix=${STAGING_DIR} \
+> +		--with-boost=${STAGING_DIR} \
+> +		"
+> +#		--host=arm-angstrom-linux-gnueabi \
+
+Drop this (and any other commented out lines)
 
 Cheers,
 Paul
 
---=20
+-- 
 
 Paul Eggleton
 Intel Open Source Technology Centre
