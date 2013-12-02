@@ -1,28 +1,34 @@
-Return-Path: <ulf@emagii.com>
-Received: from smtprelay-h32.telenor.se (smtprelay-h32.telenor.se
-	[213.150.131.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E046E6A35B
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 663736A35B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2013 14:34:34 +0000 (UTC)
-Received: from ipb4.telenor.se (ipb4.telenor.se [195.54.127.167])
-	by smtprelay-h32.telenor.se (Postfix) with ESMTP id 380DAE8AD7
+	Mon,  2 Dec 2013 14:38:53 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VnUeA-0004Cq-LB for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Dec 2013 15:38:50 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Dec 2013 15:38:50 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2013 15:34:33 +0100 (CET)
-X-SENDER-IP: [83.227.57.102]
-X-LISTENER: [smtp.bredband.net]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AnZSAOuZnFJT4zlmPGdsb2JhbABZgwYBATeyDIcogSMXAwEBAQE4NYJ3AQojT0sKJAmIBQEItEUBi02PCIQ6A5gUgTCUDTs
-X-IronPort-AV: E=Sophos;i="4.93,811,1378850400"; d="scan'208";a="381527118"
-Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	hexagon.bredbandsbolaget.se) ([83.227.57.102])
-	by ipb4.telenor.se with ESMTP; 02 Dec 2013 15:34:32 +0100
-From: Ulf Samuelsson <ulf@emagii.com>
+	Mon, 02 Dec 2013 15:38:50 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Dec 2013 12:46:37 +0100
-Message-Id: <1385984797-6864-1-git-send-email-ulf@emagii.com>
-X-Mailer: git-send-email 1.7.9.5
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH] curlpp: add curl c++ bindings
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 02 Dec 2013 15:38:44 +0100
+Message-ID: <l7i615$91m$1@ger.gmane.org>
+References: <1385993511-14838-1-git-send-email-s.mennetrier@innotis.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+In-Reply-To: <1385993511-14838-1-git-send-email-s.mennetrier@innotis.org>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-webserver][PATCH] Add nginx http webserver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,157 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2013 14:34:35 -0000
+X-List-Received-Date: Mon, 02 Dec 2013 14:38:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
----
- .../curlpp/curlpp/pkgconfig_fix.patch              |   38 +++++++++
- meta/recipes-support/curlpp/curlpp_0.7.3.bb        |   90 ++++++++++++++++++++
- 2 files changed, 128 insertions(+)
- create mode 100644 meta/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
- create mode 100644 meta/recipes-support/curlpp/curlpp_0.7.3.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta/recipes-support/curlpp/curlpp/pkgconfig_fix.patch b/meta/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
-new file mode 100644
-index 0000000..ad73c00
---- /dev/null
-+++ b/meta/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
-@@ -0,0 +1,38 @@
-+Upstream-Status: Inappropriate [packaging]
-+
-+
-+Index: curl-7.20.0/libcurl.pc.in
-+===================================================================
-+--- curl-7.20.0.orig/libcurl.pc.in	2009-11-17 18:11:07.000000000 +0000
-++++ curl-7.20.0/libcurl.pc.in	2010-03-25 12:13:26.814051066 +0000
-+@@ -35,6 +35,7 @@
-+ URL: http://curl.haxx.se/
-+ Description: Library to transfer files with ftp, http, etc.
-+ Version: @CURLVERSION@
-+-Libs: -L${libdir} -lcurl @LIBS@
-+-Libs.private: @LIBCURL_LIBS@ @LIBS@
-++Requires.private: @GNUTLS_REQUIRED@
-++Libs: -L${libdir} -lcurl
-++Libs.private: -ldl -lz
-+ Cflags: -I${includedir}
-+Index: curl-7.20.0/configure.ac
-+===================================================================
-+--- curl-7.20.0.orig/configure.ac	2010-02-04 21:41:46.000000000 +0000
-++++ curl-7.20.0/configure.ac	2010-03-25 12:12:18.673129001 +0000
-+@@ -1668,6 +1668,7 @@
-+        AC_SUBST(USE_GNUTLS, [1])
-+        GNUTLS_ENABLED=1
-+        USE_GNUTLS="yes"
-++       GNUTLS_REQUIRED="gnutls"
-+        curl_ssl_msg="enabled (GnuTLS)"
-+        ],
-+        [
-+@@ -1696,6 +1697,8 @@
-+ 
-+ fi dnl OPENSSL != 1
-+ 
-++AC_SUBST(GNUTLS_REQUIRED)
-++
-+ dnl ----------------------------------------------------
-+ dnl NSS. Only check if GnuTLS and OpenSSL are not enabled
-+ dnl ----------------------------------------------------
-diff --git a/meta/recipes-support/curlpp/curlpp_0.7.3.bb b/meta/recipes-support/curlpp/curlpp_0.7.3.bb
-new file mode 100644
-index 0000000..1dc72f1
---- /dev/null
-+++ b/meta/recipes-support/curlpp/curlpp_0.7.3.bb
-@@ -0,0 +1,90 @@
-+DESCRIPTION = "C++ library for client-side URL transfers."
-+HOMEPAGE = "http://code.google.com/p/curlpp/"
-+SECTION = "console/network"
-+LICENSE = "freely distributable"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fd0c9adf285a69aa3b4faf34384e1029"
-+
-+DEPENDS = "curl boost"
-+DEPENDS_class-native = "curl-native"
-+PR = "r1"
-+
-+SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
-+	"
-+
-+SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
-+SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
-+
-+inherit autotools pkgconfig binconfig
-+
-+EXTRA_OECONF = "--prefix=${STAGING_DIR} \
-+		--with-boost=${STAGING_DIR} \
-+		"
-+#		--host=arm-angstrom-linux-gnueabi \
-+
-+
-+do_install() {
-+	install -d ${D}/${includedir}/curlpp
-+	cp -r include/curlpp/* 					${D}${includedir}/curlpp
-+
-+	install -d ${D}${includedir}/utilspp
-+	cp -r include/utilspp/* 				${D}${includedir}/utilspp
-+
-+	install -d ${D}/${libdir}
-+	install	-m 664 src/curlpp/.libs/libcurlpp.a		${D}/${libdir}
-+#	install	-m 664 src/curlpp/.libs/libcurlpp.la		${D}/${libdir}
-+	install	-m 664 src/curlpp/.libs/libcurlpp.lai		${D}/${libdir}/libcurlpp.la
-+
-+	install	-m 775 src/curlpp/.libs/libcurlpp.so		${D}/${libdir}
-+	install	-m 775 src/curlpp/.libs/libcurlpp.so.0		${D}/${libdir}
-+	install	-m 775 src/curlpp/.libs/libcurlpp.so.0.0.2	${D}/${libdir}
-+
-+	install	-m 664 src/utilspp/.libs/libutilspp.a		${D}/${libdir}
-+#	install	-m 664 src/utilspp/.libs/libutilspp.la		${D}/${libdir}
-+	install	-m 664 src/utilspp/.libs/libutilspp.lai		${D}/${libdir}/libutilspp.la
-+
-+	install	-m 664 src/utilspp/.libs/libutilspp.so		${D}/${libdir}
-+	install	-m 664 src/utilspp/.libs/libutilspp.so.0	${D}/${libdir}
-+	install	-m 664 src/utilspp/.libs/libutilspp.so.0.0.0	${D}/${libdir}
-+
-+	install -d ${D}/${libdir}/pkgconfig
-+	install	-m 664 curlpp.pc				${D}/${libdir}/pkgconfig
-+
-+	install -d ${D}/${bindir}
-+	install	-m 755 curlpp-config 				${D}/${bindir}
-+
-+	install -d ${D}/${includedir}/curlpp
-+	install -d ${D}/${includedir}/curlpp/internal
-+	install -d ${D}/${includedir}/utilspp
-+	install -d ${D}/${includedir}/utilspp/functor
-+	install -d ${D}/${includedir}/utilspp/singleton
-+
-+	install	-m 664 include/curlpp/config*			${D}/${includedir}/curlpp
-+	install	-m 664 include/curlpp/*.h*			${D}/${includedir}/curlpp
-+	install	-m 664 include/curlpp/*.inl			${D}/${includedir}/curlpp
-+
-+	install	-m 664 include/curlpp/internal/*.h*		${D}/${includedir}/curlpp/internal
-+	install	-m 664 include/curlpp/internal/*.inl		${D}/${includedir}/curlpp/internal
-+
-+	install	-m 664 include/utilspp/*.h*			${D}/${includedir}/utilspp
-+	install	-m 664 include/utilspp/*.inl			${D}/${includedir}/utilspp
-+
-+	install	-m 664 include/utilspp/functor/*.h*		${D}/${includedir}/utilspp/functor
-+	install	-m 664 include/utilspp/singleton/*.h*		${D}/${includedir}/utilspp/singleton
-+	install	-m 664 include/utilspp/singleton/*.inl		${D}/${includedir}/utilspp/singleton
-+	install -m 755 curlpp-config				${D}/${bindir}
-+}
-+
-+PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
-+
-+FILES_lib${BPN} = "${libdir}/lib*.so.* \
-+                      ${libdir}/lib*.so \
-+		"
-+
-+FILES_lib${BPN}-dev = "${includedir} \
-+                      ${libdir}/lib*.la \
-+                      ${libdir}/pkgconfig \
-+                      ${bindir}/*-config"
-+
-+FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-1.7.9.5
+Sébastien Mennetrier schreef op 02-12-13 15:11:
+> From: Sébastien <s.mennetrier@innotis.org>
+=
+> +    install -d ${D}${sysconfdir}/init.d +    cat ${WORKDIR}/init | \ +
+> sed -e 's,/usr/sbin/,${sbindir}/,g' \ +            -e
+> 's,/etc/,${sysconfdir}/,g' > ${D}/${sysconfdir}/init.d/nginx +    chmod
+> 755 ${D}/${sysconfdir}/init.d/nginx
+
+I think using sed -i will be easier to understand, I haven't seen any pipe
+based modifications in an OE recipe yet.
+
+
+> + +    install -d ${D}${sysconfdir}/nginx +    cat ${WORKDIR}/nginx.conf
+> | \ +        sed -e 's,/var/,${localstatedir}/,g' >
+> ${D}/${sysconfdir}/nginx/nginx.conf +    chmod 644
+> ${D}/${sysconfdir}/nginx/nginx.conf +    install -d
+> ${D}${sysconfdir}/nginx/sites-enabled + +    install -d
+> ${D}${sysconfdir}/default/volatiles +    cat
+> ${WORKDIR}/nginx-volatile.conf | \ +        sed -e
+> 's,/var/,${localstatedir}/,g' >
+> ${D}${sysconfdir}/default/volatiles/99_nginx +    chmod 644
+> ${D}${sysconfdir}/default/volatiles/99_nginx + +    rm -fr
+> "${D}${localstatedir}/run" +} + +CONFFILES_${PN} =
+> "${sysconfdir}/nginx/nginx.conf \ +
+> ${sysconfdir}/nginx/fastcgi.conf\ +
+> ${sysconfdir}/nginx/fastcgi_params \ +        ${sysconfdir}/nginx/koi-utf
+> \ +        ${sysconfdir}/nginx/koi-win \ +
+> ${sysconfdir}/nginx/mime.types \ +        ${sysconfdir}/nginx/scgi_params
+> \ +        ${sysconfdir}/nginx/uwsgi_params \ +
+> ${sysconfdir}/nginx/win-utf \ +        ${sysconfdir}/init.d/nginx \ +" + 
+> +INITSCRIPT_NAME = "nginx" +INITSCRIPT_PARAMS = "defaults 92 20" + 
+> +FILES_${PN} += "${localstatedir} \ +                /run \ +
+> " + +USERADD_PACKAGES = "${PN}" +USERADD_PARAM_${PN} = " \ +    --system
+> --no-create-home \ +    --home ${localstatedir}/www/localhost \ +
+> --groups www-data \ +    --user-group www"
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFSnJt0MkyGM64RGpERAu5zAJ40O7GXBDLlkBdThmA1OBstF+mJ9ACgmmjs
+HwVpGhfux7+iRWIOYfJgTbw=
+=QBo2
+-----END PGP SIGNATURE-----
 
 
