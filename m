@@ -1,27 +1,40 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 25AF06D27E
+Return-Path: <dominik.holland@pelagicore.com>
+Received: from mail-bk0-f54.google.com (mail-bk0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 326CE6CEEA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2013 09:20:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rB29KlML004116
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  2 Dec 2013 12:10:59 +0000 (UTC)
+Received: by mail-bk0-f54.google.com with SMTP id v16so5312577bkz.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Dec 2013 01:20:47 -0800 (PST)
-Received: from [128.224.162.168] (128.224.162.168) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Mon, 2 Dec 2013 01:20:47 -0800
-Message-ID: <529C50F2.7050601@windriver.com>
-Date: Mon, 2 Dec 2013 17:20:50 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Mon, 02 Dec 2013 04:10:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:content-type:content-transfer-encoding;
+	bh=n5y2FRh4kokC5mxTPTkaWJ0u+/thIgR+wV0KegyeQ9U=;
+	b=jLRcMWYnpkrt8OqwG06yLQotM+WOR3ZpfSi9iXRsoGDS2DEIUe29WB/6U7XP3yTJ7g
+	dAIBfqo+lkKMZLcShlbdAblI4ytfjruaOsx3JGJAGqisMaoCIPBlU+na0E5WjDS0YpaL
+	dzU3Cg3RRmNv4UHBlaJZCshN14vSIm/IOQlBlO6kLO0JHjyvGYJyZUI+4OqbPKeK5Ufe
+	bge7xhu2PXxMp1gtsY4/HoA23D6Vjh+NvCGWjEEZztwkXrUpx6rDnvlF1H1czpG2uHxi
+	Z1wohn22LQKaJGNjz25NI/l36WK/7QvPFcJCluv6w+iCRFBYqrMepqppc+c3sA/G0r9n
+	D9jA==
+X-Gm-Message-State: ALoCoQkcPpkAbyJztf8TXkhTlzgBK9NoHIFUUjWf3jtW24UlN6DRaN24yJUcpIMc2wfzN/+z5X4I
+X-Received: by 10.205.64.9 with SMTP id xg9mr1067061bkb.52.1385986257951;
+	Mon, 02 Dec 2013 04:10:57 -0800 (PST)
+Received: from [10.10.1.61] (ppp-46-244-214-173.dynamic.mnet-online.de.
+	[46.244.214.173])
+	by mx.google.com with ESMTPSA id l5sm29547688bko.7.2013.12.02.04.10.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 02 Dec 2013 04:10:57 -0800 (PST)
+Message-ID: <529C78D0.8030902@pelagicore.com>
+Date: Mon, 02 Dec 2013 13:10:56 +0100
+From: Dominik Holland <dominik.holland@pelagicore.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1385959473-23420-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1385959473-23420-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH meta-networking v2] proftpd: use /bin/false as the login shell and add home-dir
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-qt5][PATCH 0/2] Add nativesdk tools for Qt5 SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2013 09:20:48 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Mon, 02 Dec 2013 12:11:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Drop it, test shows it does not work since /bin/false is not valid
-shell, even if set RequireValidShell to off
+Hi all,
 
-On 12/02/2013 12:44 PM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Use /bin/false as the login shell, just like what Ubuntu does,
-> otherwise there might be secure issue; add /var/lib/ftp as user
-> ftp home-dir.
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> index 6537b77..0006a2a 100644
-> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> @@ -62,6 +62,7 @@ INITSCRIPT_PARAM = "defaults 85 15"
->
->   USERADD_PACKAGES = "${PN}"
->   GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
-> -USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
-> +USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --no-create-home \
-> +                       --shell /bin/false ${FTPUSER}"
->
->   FILES_${PN} += "/home/${FTPUSER}"
->
+i'm the author of the merge-request on github.
 
--- 
-Best Reagrds,
-Roy | RongQing Li
+The patchset from Denys looks nice. Especially because it cross compiles 
+the host tools for the SDK_MACHINE which i forgot todo in my patchset.
+
+I think the best way would be a combined version of both patchsets.
+
+Because some of you think my patchset is too complicated i want to 
+highlight why i added the complicated creation of the qt.conf and the 
+additional patching of the mkspec files etc.
+
+I didn't tested Denys version but i think it only works if you source 
+the environment scripts of the SDK before.
+
+As a Qt developer it's the defacto standard to get a SDK which works out 
+of the box for your projects by just invoking qmake and no need to 
+source a script before which changes your environment.
+
+To get this done you need to patch the mkspec folder and the qt.conf to 
+use relative paths instead the hardcoded paths which where created 
+during the yocto build.
+
+In addition i created a linux-oe-sdk-g++ which contains the real values 
+of the environment variables but without --sysroot. This will be set by 
+qt itself by using the CROSS_COMPILE prefix.
+
+
+I hope you understand that this is really needed if you want to get a 
+good qt5 integration into a OE SDK.
+
+Best Reagrds
+
+  Dominik
+
+P.S. If you want to use the qmake inside qtcreator you would need to set 
+all the env variable of the environment script inside qtcreator which is 
+really inconvenient
 
