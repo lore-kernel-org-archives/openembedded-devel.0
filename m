@@ -1,35 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 231B56D2A3
+Received: from mail-pb0-f43.google.com (mail-pb0-f43.google.com
+	[209.85.160.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E5076DEF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 05:38:18 +0000 (UTC)
-Received: by mail-pd0-f171.google.com with SMTP id z10so21597834pdj.2
+	Wed,  4 Dec 2013 07:36:34 +0000 (UTC)
+Received: by mail-pb0-f43.google.com with SMTP id rq2so22966189pbb.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Dec 2013 21:38:17 -0800 (PST)
+	Tue, 03 Dec 2013 23:36:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=he4qhlQnMs69jkOCcoaaWrOrBJC+cSYg8h7W6tKCLa8=;
-	b=sELU31+agz620bsB/sgUVWHzfbR2cYKxtEgiNUNbJ0vq6Qk68843KtLmnuNQ9qDshe
-	T2QilyTqeGCUBxaGWYm5d1n6PKKE5ce1kGc/e8tfpzR2eV9o5UzhYT0UOxsTOcn2vEum
-	9noRR+o0IipoVUlmwqwHuK5tc4OTH6tA4iWBfytMhdHzMyQJzBAd4G56HxAEUzvfK/06
-	pDN5J/a1da6Z2OqvRiXjFt30nNaeMwc/nKsJ6vCf6Wmy7FWR9DPYoq4+IwO7cWOe/l+a
-	mAS1XIFuwBfQD0vyA6CoISCqT0Vrdn/+iC76zzZWd2fCyyO0t2YzfvfIc6Ejvtap2FHR
-	DIhA==
-X-Received: by 10.66.11.202 with SMTP id s10mr80347233pab.86.1386135497650;
-	Tue, 03 Dec 2013 21:38:17 -0800 (PST)
+	bh=1MBMp4z4NzPTXb8GwRi7Zdru1C1B7jiBFr6wDxpb5yw=;
+	b=MLvgC3nEUwtAuU0NvrgLMeQGQmk2cAOLijvARZWqm0eVJxKhQzxdx0uv13owFs6+Lu
+	GuLyRA5pgSFd88EHk1F19aKblW0hqlshkcltWWxzwYJEehE6XSBShvg/3DTVVWBUNLE8
+	L0uqyNkF3K9BtdDtDXpF0BUH7CZ9haOCD2P9cfsnzmJ0Zhiz1cehv0ayVFJKo6cxHIdQ
+	kNywJ7Xk6UkXv15oAlRb8Djb41nGSJxOJ2kG3abdJGW7FZhpnNN46kBLQ+Xg/J/NQGGb
+	fCwxVy2yVS9tAzallvNyC4sk7Vm2apjhAUSz7xB2OIBrUTsrQ7gw3waJZlPqB6W7/xPT
+	r2Vw==
+X-Received: by 10.68.206.171 with SMTP id lp11mr40662828pbc.109.1386142593811; 
+	Tue, 03 Dec 2013 23:36:33 -0800 (PST)
 Received: from ghoda.gateway.pace.com
 	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
 	by mx.google.com with ESMTPSA id
-	er3sm134412346pbb.40.2013.12.03.21.38.16 for <multiple recipients>
+	rx4sm154520564pab.13.2013.12.03.23.36.32 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Dec 2013 21:38:17 -0800 (PST)
+	Tue, 03 Dec 2013 23:36:33 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Dec 2013 21:38:15 -0800
-Message-Id: <1386135495-4343-1-git-send-email-raj.khem@gmail.com>
+Date: Tue,  3 Dec 2013 23:36:34 -0800
+Message-Id: <1386142594-20793-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] nginx: new recipe, updated from aging original in rpi layer (has not been scrubbed for any potential policy issues).
+Subject: [PATCH V2] nginx: new recipe, updated from aging original in rpi layer (has not been scrubbed for any potential policy issues).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 05:38:19 -0000
+X-List-Received-Date: Wed, 04 Dec 2013 07:36:36 -0000
 
 From: "stephen.arnold42" <stephen.arnold42@gmail.com>
 
@@ -53,8 +53,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  .../recipes-httpd/nginx/files/nginx-cross.patch    |  217 ++++++++++++++++++++
  .../recipes-httpd/nginx/files/nginx.conf           |  118 +++++++++++
  .../recipes-httpd/nginx/files/nginx.init           |   52 +++++
- meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb  |   94 +++++++++
- 4 files changed, 481 insertions(+)
+ meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb  |  113 ++++++++++
+ 4 files changed, 500 insertions(+)
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/nginx.conf
  create mode 100755 meta-webserver/recipes-httpd/nginx/files/nginx.init
@@ -467,10 +467,10 @@ index 0000000..0f38b9c
 +exit 0
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb
 new file mode 100644
-index 0000000..d78333d
+index 0000000..20e9ab5
 --- /dev/null
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb
-@@ -0,0 +1,94 @@
+@@ -0,0 +1,113 @@
 +SUMMARY = "HTTP and reverse proxy server"
 +
 +DESCRIPTION = "Nginx is a web server and a reverse proxy server for \
@@ -529,6 +529,16 @@ index 0000000..d78333d
 +do_install () {
 +	oe_runmake 'DESTDIR=${D}' install
 +	rm -fr ${D}${localstatedir}/run ${D}/run
++	install -d ${D}${sysconfdir}/default/volatiles
++	echo "d root root 0755 ${localstatedir}/run/${BPN} none" \
++	     > ${D}${sysconfdir}/default/volatiles/99_${BPN}
++	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++		install -d ${D}${sysconfdir}/tmpfiles.d
++		echo "d /run/${BPN} - - - -" \
++		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++	fi
++	install -d ${D}${sysconfdir}/${BPN}
++	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
 +	install -d ${D}${localstatedir}/www/localhost
 +	mv ${D}/usr/html ${D}${localstatedir}/www/localhost/
 +	chown www:www-data -R ${D}${localstatedir}
@@ -541,6 +551,15 @@ index 0000000..d78333d
 +	install -d ${D}${sysconfdir}/default/volatiles
 +	echo "d www www-data 0755 ${localstatedir}/run/nginx none" \
 +		> ${D}${sysconfdir}/default/volatiles/99_nginx
++}
++pkg_postinst_${PN} () {
++	if [ -z "$D" ]; then
++		if command -v systemd-tmpfiles >/dev/null; then
++			systemd-tmpfiles --create
++		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++			${sysconfdir}/init.d/populate-volatile.sh update
++		fi
++	fi
 +}
 +
 +FILES_${PN} += "${localstatedir}/"
