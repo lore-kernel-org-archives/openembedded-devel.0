@@ -1,35 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f174.google.com (mail-ob0-f174.google.com
-	[209.85.214.174])
-	by mail.openembedded.org (Postfix) with ESMTP id A60D16AA18
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 282EA6DF4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Dec 2013 23:40:35 +0000 (UTC)
-Received: by mail-ob0-f174.google.com with SMTP id wn1so15204447obc.19
+	Wed,  4 Dec 2013 01:35:33 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id m10so10352024eaj.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Dec 2013 15:40:34 -0800 (PST)
+	Tue, 03 Dec 2013 17:35:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=6uoVeE/l2cBMB0e8/sTe5jIDfF6c6MYtJo+lXRoUjtw=;
-	b=DhSZ/n0HtVa/2E4qRRyq2NlQ5xYqJmCCChBsNinZE2fhnVsPR8czOxcFGiG9zVBnUv
-	okaAmlJa8fgQ3aCU/vzYn5sjtxwRDC+TTH4JK1+GTKgitiP/XwHuqP73/fNY6BQyoYON
-	mvqBeTL05nHxbBQfZSp+Ipw/1AVn1GZGOVyflRemAFHBpGF46jYN0R3mGw5H+fpmjG0h
-	UUdTpK83nYSDGKAVIjodN+I1jleqTpsHcUGnp58oAf2azxS8yPuos2bQrmJrYIdpWU4H
-	0TE6acAhUMRM74w2r5DzPia+EsMhV+CM7xg8H0alXsWZPadX9tsP+g3OVDZHF8wH+OR5
-	oP3A==
-MIME-Version: 1.0
-X-Received: by 10.182.143.103 with SMTP id sd7mr20598obb.70.1386114034730;
-	Tue, 03 Dec 2013 15:40:34 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Tue, 3 Dec 2013 15:40:34 -0800 (PST)
-In-Reply-To: <20131203230542.GG3714@jama>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=85TWsPKyzb2WKBcxgnllVkitBGq4ZF0IITXjZ6u/XIc=;
+	b=CGyZG1NAv5H9xEovqZ9Bs9k9V5sIJy535L0oCaxWPmP2UXqWGCiLhKyrOTM3OmZAjM
+	dL6evCdnU0dB7W/OYBVXMEhQ0NrRZSDKDpr22A2tO1GCm3oGSuaF4JOYCnJAu/RK4Mdb
+	0a1mw0nXfXioBQb8cFGZVEHQUTCABSW1YmODtZFMwtVyiyYYjx6fzpZEMb//BlKNqesK
+	yrmfecBsyltHRwQUC0jcBMkc+8u1WnBRlPqFHtw/Z2oIdJAyPHzarVxzsecfs4KgY51/
+	7NZsIZu3YlSeGjo6vaQORsyaPNxLs4JM7vGyhX1TE6VtFFHFMcySD2cmnhUDOvO8ptMQ
+	k+Gg==
+X-Received: by 10.15.82.136 with SMTP id a8mr5043482eez.81.1386120931734;
+	Tue, 03 Dec 2013 17:35:31 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	b41sm65198886eef.16.2013.12.03.17.35.30 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 03 Dec 2013 17:35:30 -0800 (PST)
+Date: Wed, 4 Dec 2013 02:35:41 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20131204013541.GH3714@jama>
 References: <1386107047-27409-1-git-send-email-otavio@ossystems.com.br>
 	<20131203230542.GG3714@jama>
-Date: Tue, 3 Dec 2013 21:40:34 -0200
-X-Google-Sender-Auth: Axj25OB6Te_rpk9yKIpIHtFTSqE
-Message-ID: <CAP9ODKq16jf4Q1p+3uQu2N5o1sf2oA_9cnBcLAUXQw=Crbm+VQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
+	<CAP9ODKq16jf4Q1p+3uQu2N5o1sf2oA_9cnBcLAUXQw=Crbm+VQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKq16jf4Q1p+3uQu2N5o1sf2oA_9cnBcLAUXQw=Crbm+VQ@mail.gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe 1/5] meta-oe: Drop pointercal-xinput from SIGGEN_EXCLUDERECIPES_ABISAFE
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -45,20 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Dec 2013 23:40:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 04 Dec 2013 01:35:33 -0000
+X-Groupsio-MsgNum: 47351
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="AzNpbZlgThVzWita"
+Content-Disposition: inline
 
-On Tue, Dec 3, 2013 at 9:05 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Dec 03, 2013 at 07:44:03PM -0200, Otavio Salvador wrote:
->> The pointercal-xinput has been moved to OE-Core so we should handle it
->> here.
->
-> Is there patch for oe-core doing that?
+--AzNpbZlgThVzWita
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-No but I can send one. Do you handle it or want me to do?
+On Tue, Dec 03, 2013 at 09:40:34PM -0200, Otavio Salvador wrote:
+> On Tue, Dec 3, 2013 at 9:05 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> > On Tue, Dec 03, 2013 at 07:44:03PM -0200, Otavio Salvador wrote:
+> >> The pointercal-xinput has been moved to OE-Core so we should handle it
+> >> here.
+> >
+> > Is there patch for oe-core doing that?
+>=20
+> No but I can send one. Do you handle it or want me to do?
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Please do, there was enough breakage from xinput-calibrator move to
+oe-core (in xserver-common mostly) so I would like someone's else eyes
+on that too.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--AzNpbZlgThVzWita
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlKehu0ACgkQN1Ujt2V2gBxBogCfTsz89XrjWeToVxgkjJH6DMCo
+9BIAnizFCTBnN9buEYg5CzSVnrh5Emv7
+=YQP6
+-----END PGP SIGNATURE-----
+
+--AzNpbZlgThVzWita--
