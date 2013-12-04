@@ -1,27 +1,34 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FC0F6DF41
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id EAF3F6D915
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 10:34:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rB4AY98e013827
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  4 Dec 2013 10:38:27 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Vo9qb-0008NX-6P for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Dec 2013 11:38:25 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Dec 2013 11:38:25 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Dec 2013 02:34:09 -0800 (PST)
-Received: from pek-cc-pb05l.wrs.com (128.224.157.65) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 4 Dec 2013 02:34:08 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Dec 2013 18:33:55 +0800
-Message-ID: <1386153235-16411-2-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.8.3
-In-Reply-To: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
+	Wed, 04 Dec 2013 11:38:25 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 04 Dec 2013 11:39:38 +0100
+Message-ID: <l7n0m9$4go$1@ger.gmane.org>
 References: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
-MIME-Version: 1.0
-Cc: li.wang@windriver.com
-Subject: [meta-networking][PATCH 2/2] inetutils: add --with-libreadline-prefix to avoid host contamination
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+In-Reply-To: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,32 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 10:34:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Dec 2013 10:38:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Fix the do_rootfs error:
-| Computing transaction...error: Can't install inetutils-telnetd-1.9.1-r1.1@i686: no package provides libreadline.so.5
+jackie.huang@windriver.com schreef op 04-12-13 11:33:
+> From: Jackie Huang <jackie.huang@windriver.com>
+> 
+> Correct the usage of alternative link and target:
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+Make the above the summary, 'fix simple bb rule error' is too vague when
+looking through the output of 'git log --oneline'
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-index 59a22aa..edff60a 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-@@ -38,6 +38,7 @@ EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
-         --with-path-procnet-dev=/proc/net/dev \
-         ${noipv6} \
-         --with-path-login=/bin/login \
-+        --with-libreadline-prefix=${STAGING_DIR_HOST}${prefix} \
- "
- 
- do_configure_prepend () {
--- 
-1.8.3
+iD8DBQFSnwZqMkyGM64RGpERAvn8AJwJgmIczTwCWNuTe6TdkiGUyl+kKgCdHrcA
+ub+FZU7aXb7K84C447kCCqk=
+=6wkg
+-----END PGP SIGNATURE-----
 
 
