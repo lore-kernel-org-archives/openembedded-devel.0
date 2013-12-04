@@ -1,34 +1,46 @@
-Return-Path: <p.patat@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 82DF76DEE2
+Return-Path: <joe@deserted.net>
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A5EA56D761
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 15:04:46 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id b13so12404193wgh.30
+	Wed,  4 Dec 2013 21:10:21 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id f15so11033941eak.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Dec 2013 07:04:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=CHGLq8x00jhjEO8ftKAdSmqgp/TqFqiFsF3ajbT+228=;
-	b=oHgCA2N3S6mr6pG42PxWf1hgbnl64Idyiyrg4LbN6ctolLvZVQsWGkMa148+aNRcy+
-	zBDmDDRLRkafHFOyR36NRBihrPejz6fWqB1hFpG/JtmbJQL3Qh7G4+d6ed7MFEbqZMaF
-	j6C20QZqzI1zLksIPNKpyRTDKiLRc5EcoUHcHjnjAiIhNQWloW7ZzucLd09d4JEAIv9T
-	eTmXVmQThWy58//kjmfVypeBR3RFm+DeIkMsUOR7/ZODmalWnTtnGKiQMILjcbPUfWSr
-	NAe7DmNJCLN1JgWRpBbGz5sRw4MYU4xdRFbVVXM6RTR0CsChWoMX6n0ejGds67hQRokC
-	AQPQ==
-X-Received: by 10.180.90.114 with SMTP id bv18mr7733687wib.16.1386169485587;
-	Wed, 04 Dec 2013 07:04:45 -0800 (PST)
-Received: from ppatat-desktop.mpl.mstarsemi.fr ([94.103.137.126])
-	by mx.google.com with ESMTPSA id g16sm7731422wiw.6.2013.12.04.07.04.44
+	Wed, 04 Dec 2013 13:10:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=FrvZY+sMDOilZV4ischNCJkNiIAzf0yOnvKt0lpTJjg=;
+	b=IiE9+wHcfoY1gS3+C16uKHnx0o4t0gJRSr/NHvp1jxvcIDkRDXJ078I+tegz5Yh1pV
+	KP8pkKmKCq8a857uB8pFSJyrkd8WNF9kAYqlfKv8263bDloQ/FrCKFxqvzSUbn2mZEt6
+	5CvzELFO+xl8wPuBOcF90+qdru/u3/NsIquNKe661gzS+WT+1WubHqQ4IQmg+xoDkaz6
+	0ojB2F1DSagKTrilx1vic0e8PcaiTOfipnkaK8LumT+chu7SspiDQURjYJTLuHoRIzFl
+	LxWrkpDnGJWfwrMWq+59yfcr9PwDTY1Dofs5fEWbxkwbzGruZEL6l2xLmJDwRj+SwfI4
+	bFXQ==
+X-Gm-Message-State: ALoCoQkxL3ZKLJDKj1/Cq/AvsU8QuOPO0J1dFMqN6niLyliuzfWmMxG0MISb4XM8igZp9u6Yk6t9
+X-Received: by 10.14.215.199 with SMTP id e47mr1371171eep.107.1386191420310;
+	Wed, 04 Dec 2013 13:10:20 -0800 (PST)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id a51sm98469612eeh.8.2013.12.04.13.10.18
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Dec 2013 07:04:45 -0800 (PST)
-Sender: patrick patat <p.patat@gmail.com>
-From: Patrick Patat <patrick.patat@innotis.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Dec 2013 16:04:39 +0100
-Message-Id: <1386169479-16925-1-git-send-email-patrick.patat@innotis.org>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-perl][PATCH] add libcrypt-openssl-random-perl
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 04 Dec 2013 13:10:19 -0800 (PST)
+Date: Wed, 4 Dec 2013 16:10:15 -0500
+From: Joe MacDonald <joe@deserted.net>
+To: jackie.huang@windriver.com, koen@dominion.thruhere.net
+Message-ID: <20131204211012.GE5677@deserted.net>
+References: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
+	<l7n0m9$4go$1@ger.gmane.org> <20131204134937.GA5677@deserted.net>
+MIME-Version: 1.0
+In-Reply-To: <20131204134937.GA5677@deserted.net>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +54,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 15:04:47 -0000
+X-List-Received-Date: Wed, 04 Dec 2013 21:10:23 -0000
+X-Groupsio-MsgNum: 47377
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wTWi5aaYRw9ix9vO"
+Content-Disposition: inline
 
-This recipe build cpan module Crypt-OpenSSL-Random
+--wTWi5aaYRw9ix9vO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Patrick Patat <patrick.patat@innotis.org>
----
- .../libcrypt/libcrypt-openssl-random-perl_0.04.bb         |   13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb
+[Re: [oe] [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error]=
+ On 13.12.04 (Wed 08:49) Joe MacDonald wrote:
 
-diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb
-new file mode 100644
-index 0000000..7638426
---- /dev/null
-+++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-random-perl_0.04.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Crypt Openssl Random cpan module"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
-+
-+SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Random-${PV}.tar.gz "
-+SRC_URI[md5sum] = "c56ac5dbdd46122eb9b8da59613b7b0a"
-+SRC_URI[sha256sum] = "acf7eb81023cd1f40d8c60b893096d041513df2be2aefe145cc7ae1a3dcc78c7"
-+
-+S = "${WORKDIR}/Crypt-OpenSSL-Random-${PV}"
-+
-+inherit cpan
--- 
-1.7.10.4
+> [Re: [oe] [meta-networking][PATCH 1/2] inetutils: fix simple bb rule erro=
+r] On 13.12.04 (Wed 11:39) Koen Kooi wrote:
+>=20
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >=20
+> > jackie.huang@windriver.com schreef op 04-12-13 11:33:
+> > > From: Jackie Huang <jackie.huang@windriver.com>
+> > >=20
+> > > Correct the usage of alternative link and target:
+> >=20
+> > Make the above the summary, 'fix simple bb rule error' is too vague when
+> > looking through the output of 'git log --oneline'
+>=20
+> Agreed.  If there's no objection, I'll change this to:
+>=20
+> inetutils: use new update-alternatives syntax
+>=20
+> Though that does tend to render the rest of the commit log redundant.
+> :-)
 
+Okay, I went ahead and merged what I suggested I would.  I'm seeing QA
+issues with bad RPATH values, but those don't appear to be new, so I'll
+look at them separately.
 
+-J.
+
+>=20
+> -J.
+>=20
+> > -----BEGIN PGP SIGNATURE-----
+> > Version: GnuPG v1.4.5 (Darwin)
+> > Comment: GPGTools - http://gpgtools.org
+> >=20
+> > iD8DBQFSnwZqMkyGM64RGpERAvn8AJwJgmIczTwCWNuTe6TdkiGUyl+kKgCdHrcA
+> > ub+FZU7aXb7K84C447kCCqk=3D
+> > =3D6wkg
+> > -----END PGP SIGNATURE-----
+> >=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--wTWi5aaYRw9ix9vO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlKfmjQACgkQwFvcllog0XwbFQCghYrCyCzHOUdpwVyIHH4lucI2
+T/UAoJeIB0j3nXbSPla9sQm2b6L0+5H9
+=hUGq
+-----END PGP SIGNATURE-----
+
+--wTWi5aaYRw9ix9vO--
