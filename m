@@ -1,37 +1,37 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C9CE6DEF2
+Received: from mail-pb0-f41.google.com (mail-pb0-f41.google.com
+	[209.85.160.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CB476DF41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 09:29:24 +0000 (UTC)
-Received: by mail-pd0-f178.google.com with SMTP id y10so21994246pdj.37
+	Wed,  4 Dec 2013 10:01:30 +0000 (UTC)
+Received: by mail-pb0-f41.google.com with SMTP id jt11so23269381pbb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Dec 2013 01:29:23 -0800 (PST)
+	Wed, 04 Dec 2013 02:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:mime-version:content-type
 	:content-transfer-encoding;
-	bh=Vn4eD2e66G9XunhObZa+tEdGXmOHXuSsgXMMhJb1fPM=;
-	b=ij2FPmh9ZqbbkCx7662m+INMEKBl44+xCmCZnTfwb+Z6N6bGYkzQGX1rH1IqTJr3Fb
-	uGWYzknBAjPYJnihAgc+mrD62fNEJWqjZGyTLSfqY4Av82hOrBJ/zwxPHUtzVaip+HlF
-	9awD46fhllwmV6x7yXegQueVdO02KNHxKbjJgOWXFDW0bKi9Xz47fbbWpQsTV2wHCrg/
-	+tWxW/yhh6zqxCyvw6XkEeaPBFQXBf4FTe0aZlEvS9iREqHUzNcTgpuK8L3N8U1UUVpA
-	A2RVu2mrRqcvtoGYeIysufxp2Yb7Nbug1sJmK75j+kdjSNamtV202xLRc/pvLrbZy5bJ
-	Dv0g==
-X-Received: by 10.68.129.99 with SMTP id nv3mr44845919pbb.40.1386149362810;
-	Wed, 04 Dec 2013 01:29:22 -0800 (PST)
+	bh=CVn4mnx9UWk+Cn9SjKdu2MdNftrx+2c8WwHE5isdCrE=;
+	b=dsFit6W3VQdMh/aj/dRctfH5fUzG0L74QJUQ7ClCErx2Fsf8syMkBInQ8w83IrC03x
+	AMse+g3gugyrIF3dOgD0mWWvRDMqdqmJ1PCoejbPYloSI+msNfhE+4uHgaox7+EQpbrN
+	TR3sAwPujritl8IWn1JyPaTVS1gJxf1ZRvbk/FCywDJxZQ4zZ8ex3u86rnf97A848DDH
+	eQ33SGZIzqNaGL3OBcYk7wxY696RbeZLpX+4eYXY8gXh43q2iEJ0yPwhvhkeBEWH5BO6
+	JS/UFbBqpKlO7UVi5sRzP/ueZv4Aofi6faDSTy3F90RII8Bgr1Z4QRxsx0RRhvW+MrXN
+	3k8Q==
+X-Received: by 10.67.23.164 with SMTP id ib4mr81220500pad.42.1386151288888;
+	Wed, 04 Dec 2013 02:01:28 -0800 (PST)
 Received: from ghoda.gateway.pace.com
 	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id
-	er3sm135937709pbb.40.2013.12.04.01.29.21 for <multiple recipients>
+	by mx.google.com with ESMTPSA id vf7sm20851827pbc.5.2013.12.04.02.01.26
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Dec 2013 01:29:22 -0800 (PST)
+	Wed, 04 Dec 2013 02:01:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Dec 2013 01:29:21 -0800
-Message-Id: <1386149361-28076-1-git-send-email-raj.khem@gmail.com>
+Date: Wed,  4 Dec 2013 02:01:27 -0800
+Message-Id: <1386151287-30020-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH V3] nginx: new recipe
+Subject: [meta-webserver][PATCH V4] nginx: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 09:29:25 -0000
+X-List-Received-Date: Wed, 04 Dec 2013 10:01:30 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -57,14 +57,14 @@ New recipe and init script contributed by this author.  Built and
 tested on master branches using author's fork of meta-raspberrypi.
 
 Signed-off-by: stephen.arnold42 <stephen.arnold42@gmail.com>
-Signed-off-by: Sébastien Mennetrier <s.mennetrier@innotis.org
+Signed-off-by: Sébastien Mennetrier <s.mennetrier@innotis.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-httpd/nginx/files/nginx-cross.patch    |  217 ++++++++++++++++++++
- .../recipes-httpd/nginx/files/nginx-volatile.conf  |    2 +
- .../recipes-httpd/nginx/files/nginx.conf           |  118 +++++++++++
- .../recipes-httpd/nginx/files/nginx.init           |   52 +++++
- meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb  |  120 +++++++++++
+ .../recipes-httpd/nginx/files/nginx-cross.patch    | 217 +++++++++++++++++++++
+ .../recipes-httpd/nginx/files/nginx-volatile.conf  |   2 +
+ .../recipes-httpd/nginx/files/nginx.conf           | 118 +++++++++++
+ .../recipes-httpd/nginx/files/nginx.init           |  52 +++++
+ meta-webserver/recipes-httpd/nginx/nginx_1.4.4.bb  | 120 ++++++++++++
  5 files changed, 509 insertions(+)
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/nginx-volatile.conf
@@ -612,6 +612,6 @@ index 0000000..ea2c8bb
 +    --groups www-data \
 +    --user-group www"
 -- 
-1.7.10.4
+1.8.4.2
 
 
