@@ -1,46 +1,37 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from ra.se.axis.com (ra.se.axis.com [195.60.68.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CE0B26D99E
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
+	[209.85.219.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 89F426D99E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 13:05:12 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by ra.se.axis.com (Postfix) with ESMTP id 0749813ABD
+	Wed,  4 Dec 2013 13:16:33 +0000 (UTC)
+Received: by mail-oa0-f51.google.com with SMTP id i7so16727557oag.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:09 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ra.se.axis.com
-Received: from ra.se.axis.com ([127.0.0.1])
-	by localhost (ra.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id x0Uf8gzI166f
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:08 +0100 (CET)
-Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
-	by ra.se.axis.com (Postfix) with ESMTP id 711793F20C4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:08 +0100 (CET)
-Received: from boulder.se.axis.com (localhost [127.0.0.1])
-	by postfix.imss71 (Postfix) with ESMTP id 568A96AE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:08 +0100 (CET)
-Received: from seth.se.axis.com (seth.se.axis.com [10.0.2.172])
-	by boulder.se.axis.com (Postfix) with ESMTP id 4BA64618
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:08 +0100 (CET)
-Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
-	by seth.se.axis.com (Postfix) with ESMTP id 49D793E06F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:05:08 +0100 (CET)
-Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
-	Microsoft SMTP Server (TLS) id 8.2.255.0; Wed, 4 Dec 2013 14:05:08 +0100
-Date: Wed, 4 Dec 2013 14:05:07 +0100
-From: Olof Johansson <olof.johansson@axis.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20131204130506.GB31548@axis.com>
-References: <1386154747-14820-1-git-send-email-patrick.patat@innotis.org>
+	Wed, 04 Dec 2013 05:16:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=YNUr/5/tNNabx3J4tL8mQAvFHrHsm/AreCE3IYc3yWs=;
+	b=GadDP+lb+mRDxF1VhmU5VDxcRcXAE3q9nm2sYcWanhULUdQQoXN+pfUfdM57wAyzTe
+	MUsi3bzOyfJToqT23X8ba+GEDcb59vJE/OnuFBttrmcnto0jjI71TA8bN8G+E7Na3J2b
+	zaDRPQOroW4m/eYcR+So1XwZiF6wFoDlDUE/6lwEMi1T5Um7L/oK10n9ngqu+1UJB9Um
+	vpBpywHTJtQjgWBHd4wz3paNyobdYbZBrZAMr1MSx4SoCarnKHuzc6N7dEgV1v9xDEvD
+	Iq2gGsJ/tVUAkDIWGIyklCGdMBjsgL1JxkH8s81ldGVUQ3DLkpKjf/+NON/NDk8Bw/AH
+	LXag==
 MIME-Version: 1.0
-In-Reply-To: <1386154747-14820-1-git-send-email-patrick.patat@innotis.org>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-perl][PATCH] add libcrypt-openssl-rsa-perl
+X-Received: by 10.60.58.134 with SMTP id r6mr16810264oeq.17.1386162992319;
+	Wed, 04 Dec 2013 05:16:32 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Wed, 4 Dec 2013 05:16:32 -0800 (PST)
+In-Reply-To: <l7mogt$5cp$1@ger.gmane.org>
+References: <1386107047-27409-1-git-send-email-otavio@ossystems.com.br>
+	<1386107047-27409-2-git-send-email-otavio@ossystems.com.br>
+	<l7mogt$5cp$1@ger.gmane.org>
+Date: Wed, 4 Dec 2013 11:16:32 -0200
+X-Google-Sender-Auth: -mKKsHXmy3cIugtj4y3mvj6WxVQ
+Message-ID: <CAP9ODKpy+pLLboraV=nNeEB1i3oVdg=DarEmF9Mem+do4sGC9w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe 2/5] proj: Use 'lib_package' class and add data files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,17 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 13:05:13 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Dec 2013 13:16:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 13-12-04 11:59 +0100, Patrick Patat wrote:
-> +LICENSE = "MIT"
+Hello Koen,
 
-Where did you get MIT from? From what I can tell, it's
-GPL1+/Artistic as usual. "Same as perl"
+On Wed, Dec 4, 2013 at 6:20 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>> -inherit autotools pkgconfig +inherit autotools pkgconfig lib_package
+>>
+>> +FILES_${PN} += "${datadir}/proj"
+>
+> Will this cause renaming of the output packages?
 
-Regards,
+It does:
+
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-bin_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-dbg_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-dev_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-doc_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-staticdev_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj0_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
+
+Do you want me to add a transitional package?
+
 -- 
-olofjn
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
