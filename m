@@ -1,46 +1,46 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A3A36C737
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C9EC6C737
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 13:49:45 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id g15so10658278eak.4
+	Wed,  4 Dec 2013 13:57:06 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so2485058eei.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Dec 2013 05:49:44 -0800 (PST)
+	Wed, 04 Dec 2013 05:57:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=lSXlSz+Qhlox3mPqkAYdTuNUW+tIapjD3eZkOnRHOoo=;
-	b=KWWxIAQLp6MNfAsZ3DkUU/IgMjopTgBGSXaRZLjMiQwhrPGy6cXVHf7wYAVnjBzlfp
-	NI3whhOUMOgwxjA6EErSoDANWvzO7hmh44crJx2irQBP1qEMn0euoG1tvlg4OcEYk2uw
-	XC7+qZ3TCnio3f/gqcOfRq292/RjXBdZXzzGloCAi5UT2b0fSpetEOSlPzcxTlQuwXFk
-	MC/uuEa+YGY28jvG/uCHnRgWgQnGH69+NgZwOT/pPg0vd374+REapmo131XcFC6n4qFh
-	A5GH83qICwfnw1jrsnIMAj7YnY7VbBA7+KF5/f+boQwLZitPMYva/OJLedK+TkpOKqfo
-	dLdg==
-X-Gm-Message-State: ALoCoQmibrVLW3opbxpHrp0wcsIC6tIL2DxCWotulB4HKvno1gMH9XL5nORhRSX19aCEOD+1E1yY
-X-Received: by 10.15.63.134 with SMTP id m6mr7599967eex.74.1386164984669;
-	Wed, 04 Dec 2013 05:49:44 -0800 (PST)
+	bh=NJ2X9jAH8O0kJG2iST1nQntrOCSSPtFdenzqKy4ssTE=;
+	b=LjN6IenLybA/7figPCmbA2EKhTqMNcPeZZL5Xk5tJAwduCzWpywmFvscLSvdOm0xkY
+	z1aPgO2YBEI+K/fVgl9CZb7Mx2Y39aRCHTzOrjVIjoUwnazg7JVA/54bFo1o5KWxttq0
+	/qxTfQEEDy+gUzzu4Vhs7lX5QtD3zJA+GBeXHSF5NuNZsw21LcSG41PmOooeQykBawsk
+	UpxBrtbEhlHLxu5APDeXoaEIJ02dQQLXrYYdCaiN63+WUrJDQ3hBDKD6XRXwNuktbNYK
+	JGfLKlQOlumyE7QXxhYJL9fWRq65+B3QEHtNK77b7g22Aqm8VY/h8wiRTqznY2TaumDI
+	HLPQ==
+X-Gm-Message-State: ALoCoQmUgOj1qpSwgmmOS8Bvk/cnWjYPe2x5Q5hojy6XcafZNvXBEWqFgCJLdlASYdL2iGX6c/Yd
+X-Received: by 10.14.207.194 with SMTP id n42mr7711175eeo.76.1386165425440;
+	Wed, 04 Dec 2013 05:57:05 -0800 (PST)
 Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id a45sm94439139eem.6.2013.12.04.05.49.42
+	by mx.google.com with ESMTPSA id p45sm4668009eeg.1.2013.12.04.05.57.03
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 04 Dec 2013 05:49:43 -0800 (PST)
-Date: Wed, 4 Dec 2013 08:49:39 -0500
+	Wed, 04 Dec 2013 05:57:04 -0800 (PST)
+Date: Wed, 4 Dec 2013 08:56:59 -0500
 From: Joe MacDonald <joe@deserted.net>
-To: jackie.huang@windriver.com, koen@dominion.thruhere.net
-Message-ID: <20131204134937.GA5677@deserted.net>
-References: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
-	<l7n0m9$4go$1@ger.gmane.org>
+To: Rongqing Li <rongqing.li@windriver.com>,
+	Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <20131204135658.GB5677@deserted.net>
+References: <1385959473-23420-1-git-send-email-rongqing.li@windriver.com>
+	<529C50F2.7050601@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <l7n0m9$4go$1@ger.gmane.org>
+In-Reply-To: <529C50F2.7050601@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error
+Subject: Re: [PATCH meta-networking v2] proftpd: use /bin/false as the login shell and add home-dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,68 +54,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 13:49:45 -0000
-X-Groupsio-MsgNum: 47372
+X-List-Received-Date: Wed, 04 Dec 2013 13:57:08 -0000
+X-Groupsio-MsgNum: 47373
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+	protocol="application/pgp-signature"; boundary="KFztAG8eRSV9hGtP"
 Content-Disposition: inline
 
---UlVJffcvxoiEqYs2
+--KFztAG8eRSV9hGtP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error]=
- On 13.12.04 (Wed 11:39) Koen Kooi wrote:
+[Re: [oe] [PATCH meta-networking v2] proftpd: use /bin/false as the login s=
+hell and add home-dir] On 13.12.02 (Mon 17:20) Rongqing Li wrote:
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> jackie.huang@windriver.com schreef op 04-12-13 11:33:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >=20
-> > Correct the usage of alternative link and target:
->=20
-> Make the above the summary, 'fix simple bb rule error' is too vague when
-> looking through the output of 'git log --oneline'
+> Drop it, test shows it does not work since /bin/false is not valid
+> shell, even if set RequireValidShell to off
 
-Agreed.  If there's no objection, I'll change this to:
+Hmm, so, there's something else at play here, given:
 
-inetutils: use new update-alternatives syntax
+------------------------------------------------------------------------
+commit b613318e14a0038b4fc6d5a7378b1affb64fd471
+Author: Robert Yang <liezhi.yang@windriver.com>
+Date:   Wed Nov 13 05:24:24 2013 +0800
 
-Though that does tend to render the rest of the commit log redundant.
-:-)
+    quagga: use /bin/false as the login shell
 
+    Use /bin/false as the login shell, just like what Ubuntu does,
+    otherwise there might be secure issue.
+
+    Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+    Signed-off-by: Joe MacDonald <joe@deserted.net>
+
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-net=
+working/recipes-protocols/quagga/quagga.inc
+index 2106c9b..677b1c5 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -148,7 +148,7 @@ INITSCRIPT_PARAMS_${PN}-watchquagga     =3D "defaults 9=
+0 10"
+ # Add quagga's user and group
+ USERADD_PACKAGES =3D "${PN}"
+ GROUPADD_PARAM_${PN} =3D "--system quagga ; --system quaggavty"
+-USERADD_PARAM_${PN} =3D "--system --home ${localstatedir}/run/quagga/ -M -=
+g quagga quagga"
++USERADD_PARAM_${PN} =3D "--system --home ${localstatedir}/run/quagga/ -M -=
+g quagga --shell /bin/false quagga"
+=20
+ pkg_postinst_${PN} () {
+     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
+------------------------------------------------------------------------
+
+Is it that proftpd actually needs to spawn a shell somewhere or that
+/bin/false simply isn't listed as a valid shell?  (If the latter,
+something should've shown up with the quagga commit, shouldn't it?)
+
+Can you guys sync and get back to me on this?
+
+Thanks,
 -J.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
 >=20
-> iD8DBQFSnwZqMkyGM64RGpERAvn8AJwJgmIczTwCWNuTe6TdkiGUyl+kKgCdHrcA
-> ub+FZU7aXb7K84C447kCCqk=3D
-> =3D6wkg
-> -----END PGP SIGNATURE-----
+> On 12/02/2013 12:44 PM, rongqing.li@windriver.com wrote:
+> >From: Roy Li <rongqing.li@windriver.com>
+> >
+> >Use /bin/false as the login shell, just like what Ubuntu does,
+> >otherwise there might be secure issue; add /var/lib/ftp as user
+> >ftp home-dir.
+> >
+> >Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> >---
+> >  meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> >diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b=
+/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> >index 6537b77..0006a2a 100644
+> >--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> >+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+> >@@ -62,6 +62,7 @@ INITSCRIPT_PARAM =3D "defaults 85 15"
+> >
+> >  USERADD_PACKAGES =3D "${PN}"
+> >  GROUPADD_PARAM_${PN} =3D "--system ${FTPGROUP}"
+> >-USERADD_PARAM_${PN} =3D "--system -g ${FTPGROUP} ${FTPUSER}"
+> >+USERADD_PARAM_${PN} =3D "--system -g ${FTPGROUP} --home-dir /var/lib/${=
+FTPUSER} --no-create-home \
+> >+                       --shell /bin/false ${FTPUSER}"
+> >
+> >  FILES_${PN} +=3D "/home/${FTPUSER}"
+> >
 >=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
 --=20
 -Joe MacDonald.
 :wq
 
---UlVJffcvxoiEqYs2
+--KFztAG8eRSV9hGtP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlKfMukACgkQwFvcllog0XyMLQCeLPlBx2HzHbv8DY9skMTkpMGi
-weoAoIBahIptuyg7+pE8c9l15D126/Hb
-=1lc4
+iEYEARECAAYFAlKfNKoACgkQwFvcllog0Xy9TQCgquVi6GYLso3rkxn4ZGIEVVUS
+IloAnia7cXZsdH2JXpFfqrJTTnVh7ytY
+=Hw0o
 -----END PGP SIGNATURE-----
 
---UlVJffcvxoiEqYs2--
+--KFztAG8eRSV9hGtP--
