@@ -1,39 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
-	[209.85.219.52])
-	by mail.openembedded.org (Postfix) with ESMTP id CCD266D2A3
+Return-Path: <p.patat@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id CC4B36D756
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Dec 2013 14:13:47 +0000 (UTC)
-Received: by mail-oa0-f52.google.com with SMTP id h16so16795796oag.11
+	Wed,  4 Dec 2013 14:59:18 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id hi5so8373736wib.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Dec 2013 06:13:47 -0800 (PST)
+	Wed, 04 Dec 2013 06:59:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=N8syA5sMiQoE7Zo3mm8sj28MF2jcMQz9rjzNqAeqWI4=;
-	b=bFmLarRebn7qELgSI25R4e3teHu6ScEOm6yVQjkTXMAeZeboq+pDDcDuZKrsLtM231
-	tvH8IkJj3shuBh1cN6NfTqH9NnSyDq3N6s6E4sXSticFT4xnUq6Rd00A4UsUu5e1mBAz
-	irUrNxUSaQr9ewxXjom6XxjlKSdoK+0Y1tu0vPIJYlvmql/6Sqsf6JpRDWRn39oRGZVh
-	yX19NML2egiKkiRMBWQmjnX0aL5JWrI/IUgxfPf7h41shmjsueehQk3xRv+2uwba66BG
-	HzMjDxvfbVXpDR36618Eg3R2QZVC6X2Rcxc4IY00vxthdHzGngqCM94NyAvjQ3ZefQvJ
-	W/kw==
-MIME-Version: 1.0
-X-Received: by 10.182.45.195 with SMTP id p3mr64244941obm.29.1386166427083;
-	Wed, 04 Dec 2013 06:13:47 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 4 Dec 2013 06:13:47 -0800 (PST)
-In-Reply-To: <l7nag8$s69$1@ger.gmane.org>
-References: <1386107047-27409-1-git-send-email-otavio@ossystems.com.br>
-	<1386107047-27409-2-git-send-email-otavio@ossystems.com.br>
-	<l7mogt$5cp$1@ger.gmane.org>
-	<CAP9ODKpy+pLLboraV=nNeEB1i3oVdg=DarEmF9Mem+do4sGC9w@mail.gmail.com>
-	<l7nag8$s69$1@ger.gmane.org>
-Date: Wed, 4 Dec 2013 12:13:47 -0200
-X-Google-Sender-Auth: e1-G1uKohoI_EiaDDPguXdi_crw
-Message-ID: <CAP9ODKoahD-SLwSmA5oKTuoeVkZeVCgjHRUF3RgXqkef1tj3Tw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe 2/5] proj: Use 'lib_package' class and add data files
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=G7qo0wy67Q+8H53kfzOMf0fDApX+Fo9A6H7oLeYBmBE=;
+	b=Y2tyeGpay8Pu5z4KaXwgYTVYHS2WruCr6Pi0hPYId+ehXh7ie3y7ih/lC+zUgzUN5j
+	l9uk8e6vJCtz/DQ9PiDI+BHSn+9EMecuHIBzK46ku4YSfsXv/E8wk2dJHbqZZvZmxJRC
+	xEGzlI9uQdXrwShQsSceHVohq/mVoE6T7raKV7hKM9CQaU5L14pylYRYU8VC+E46a/ED
+	axj3R9uN78ly+QkyFaNC9zKE9nNQ72nWrlYTv1I2ePjo3pFXgu/56eEe8YFPMwWL4U+i
+	j7qinaPHSlVjuUQRi3jGBM6BkPgaJjvwG1+TLDOU95srYEq6Lkm/chON8yHnT4CveeMu
+	LB2Q==
+X-Received: by 10.194.142.142 with SMTP id rw14mr1674749wjb.87.1386169157794; 
+	Wed, 04 Dec 2013 06:59:17 -0800 (PST)
+Received: from ppatat-desktop.mpl.mstarsemi.fr ([94.103.137.126])
+	by mx.google.com with ESMTPSA id
+	uc18sm7657149wib.11.2013.12.04.06.59.17 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Dec 2013 06:59:17 -0800 (PST)
+Sender: patrick patat <p.patat@gmail.com>
+From: Patrick Patat <patrick.patat@innotis.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Dec 2013 15:59:10 +0100
+Message-Id: <1386169150-16816-1-git-send-email-patrick.patat@innotis.org>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-perl][PATCH V2] add libcrypt-openssl-rsa-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,48 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Dec 2013 14:13:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 04 Dec 2013 14:59:20 -0000
 
-On Wed, Dec 4, 2013 at 11:25 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Otavio Salvador schreef op 04-12-13 14:16:
->> Hello Koen,
->>
->> On Wed, Dec 4, 2013 at 6:20 AM, Koen Kooi <koen@dominion.thruhere.net>
->> wrote:
->>>> -inherit autotools pkgconfig +inherit autotools pkgconfig
->>>> lib_package
->>>>
->>>> +FILES_${PN} += "${datadir}/proj"
->>>
->>> Will this cause renaming of the output packages?
->>
->> It does:
->>
->> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-bin_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->>
->>
-> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-dbg_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-dev_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->>
->>
-> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-doc_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj-staticdev_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->>
->>
-> tmp/deploy/ipk/cortexa9hf-vfp-neon/libproj0_4.8.0-r0.2_cortexa9hf-vfp-neon.ipk
->>
->> Do you want me to add a transitional package?
->
-> No, just being curious. I couldn't remember how it was before the change.
+This recipe build cpan module Crypt-OpenSSL-RSA
 
-It had all in proj, as the binaries were not split.
+Signed-off-by: Patrick Patat <patrick.patat@innotis.org>
+---
+ .../libcrypt/libcrypt-openssl-rsa-perl_0.28.bb     |   24 ++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
 
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
+new file mode 100644
+index 0000000..f0c610f
+--- /dev/null
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Crypt Openssl RSA cpan module"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
++
++SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz "
++
++SRC_URI[md5sum] = "86217a5036fc63779c30420b5fd84129"
++SRC_URI[sha256sum] = "5357f977464bb3a8184cf2d3341851a10d5515b4b2b0dfb88bf78995c0ded7be"
++
++DEPENDS += "openssl"
++
++RDEPENDS_${PN}="libcrypt-openssl-random-perl"
++
++EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
++
++S = "${WORKDIR}/Crypt-OpenSSL-RSA-${PV}"
++
++inherit cpan
++
++do_compile() {
++    export OTHERLDFLAGS='-Wl,-rpath'
++    cpan_do_compile
++}
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.7.10.4
+
 
