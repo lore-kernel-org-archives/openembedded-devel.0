@@ -1,28 +1,30 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CD0036DF77
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 661626DF6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2013 02:06:50 +0000 (UTC)
+	Thu,  5 Dec 2013 06:50:59 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rB526iEi007691
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rB56oxHn016234
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 4 Dec 2013 18:06:44 -0800 (PST)
-Received: from [128.224.162.190] (128.224.162.190) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Wed, 4 Dec 2013 18:06:44 -0800
-Message-ID: <529FDFB2.4000409@windriver.com>
-Date: Thu, 5 Dec 2013 10:06:42 +0800
-From: jhuang0 <jackie.huang@windriver.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
+	Wed, 4 Dec 2013 22:50:59 -0800 (PST)
+Received: from [128.224.162.213] (128.224.162.213) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.347.0;
+	Wed, 4 Dec 2013 22:50:58 -0800
+Message-ID: <52A0227C.6050603@windriver.com>
+Date: Thu, 5 Dec 2013 14:51:40 +0800
+From: ChenQi <Qi.Chen@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130804 Thunderbird/17.0.8
 MIME-Version: 1.0
-To: Joe MacDonald <joe@deserted.net>, <koen@dominion.thruhere.net>
-References: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
-	<l7n0m9$4go$1@ger.gmane.org> <20131204134937.GA5677@deserted.net>
-In-Reply-To: <20131204134937.GA5677@deserted.net>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <1385087849-30272-1-git-send-email-Qi.Chen@windriver.com>
+	<6163089.YiV9QuLgku@helios> <529DB651.2080505@windriver.com>
+	<27180610.K2R9aiVLnQ@helios>
+In-Reply-To: <27180610.K2R9aiVLnQ@helios>
+X-Originating-IP: [128.224.162.213]
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error
+Subject: Re: [meta-webserver][PATCH] webmin: fix failures in do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,60 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2013 02:06:51 -0000
+X-List-Received-Date: Thu, 05 Dec 2013 06:51:00 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-
-
-On 12/4/2013 9:49 PM, Joe MacDonald wrote:
-> [Re: [oe] [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error] On 13.12.04 (Wed 11:39) Koen Kooi wrote:
+On 12/03/2013 07:02 PM, Paul Eggleton wrote:
+> On Tuesday 03 December 2013 18:45:37 ChenQi wrote:
+>> On 12/03/2013 06:19 PM, Paul Eggleton wrote:
+>>> On Friday 22 November 2013 10:37:29 Qi.Chen@windriver.com wrote:
+>>>> -    export perl=perl
+>>>> +    export perl=${OECMAKE_PERLNATIVE_DIR}/perl
+>>> I'm afraid I don't like the look of this - OECMAKE_PERLNATIVE_DIR is set
+>>> for use by cmake, and perlnative.bbclass should be putting our perl
+>>> binary into PATH so it should be run anyway. Is this change actually
+>>> necessary?
+>> Please drop this patch. I found that the do_install task in webmin runs
+>> some perl scripts (e.g. postinstall.pl and enable-collections.pl) that
+>> are supposed to be run on target. I suspect webmin has never worked
+>> correctly on target as a result. I'm gonna propose another fix. The goal
+>> is to make it work on target.
+> I can assure you that it has worked on the target; at least it did about 6
+> months ago (perhaps more by chance rather than design though).
 >
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> jackie.huang@windriver.com schreef op 04-12-13 11:33:
->>> From: Jackie Huang <jackie.huang@windriver.com>
->>>
->>> Correct the usage of alternative link and target:
->>
->> Make the above the summary, 'fix simple bb rule error' is too vague when
->> looking through the output of 'git log --oneline'
->
-> Agreed.  If there's no objection, I'll change this to:
-
-No objection, thanks!
-
-Thanks,
-Jackie
-
->
-> inetutils: use new update-alternatives syntax
->
-> Though that does tend to render the rest of the commit log redundant.
-> :-)
->
-> -J.
->
->> -----BEGIN PGP SIGNATURE-----
->> Version: GnuPG v1.4.5 (Darwin)
->> Comment: GPGTools - http://gpgtools.org
->>
->> iD8DBQFSnwZqMkyGM64RGpERAvn8AJwJgmIczTwCWNuTe6TdkiGUyl+kKgCdHrcA
->> ub+FZU7aXb7K84C447kCCqk=
->> =6wkg
->> -----END PGP SIGNATURE-----
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Cheers,
+> Paul
 >
 
--- 
-Jackie Huang
-WIND RIVER | China Development Center
-MSN:jackielily@hotmail.com
-Tel: +86 8477 8594
-Mobile: +86 138 1027 4745
+Hi Paul,
+
+Thanks for your information :)
+
+I just tried it out on sato image with 'webmin' and 'midori' installed.
+1) https://localhost:10000
+Cannot connect
+2) http://localhost:10000
+Login page appeared, but I cannot login even if I provided the correct 
+username and password.
+
+I did this test on qemu, but I think the result should have nothing to 
+do with qemu.
+
+Best Regards,
+Chen Qi
 
