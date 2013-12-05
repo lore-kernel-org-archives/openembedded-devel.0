@@ -1,26 +1,20 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A166B6DF6E
+Return-Path: <jukka.rissanen@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id B0C166DF6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2013 07:10:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rB57AfAi016669
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Dec 2013 23:10:41 -0800 (PST)
-Received: from pek-wfan-d2.wrs.com (128.224.162.202) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 4 Dec 2013 23:10:41 -0800
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Dec 2013 15:10:38 +0800
-Message-ID: <427446e772574bf40b2ee7b9fc46048efd9601c7.1386227209.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <cover.1386227209.git.wenzong.fan@windriver.com>
-References: <cover.1386227209.git.wenzong.fan@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 1/1] mariadb-native: fix link error on Ubuntu 13.10
+	Thu,  5 Dec 2013 08:11:53 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by azsmga101.ch.intel.com with ESMTP; 05 Dec 2013 00:11:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,831,1378882800"; d="scan'208";a="438947748"
+Received: from jrissane-mobl.ger.corp.intel.com ([10.237.66.155])
+	by fmsmga001.fm.intel.com with ESMTP; 05 Dec 2013 00:11:43 -0800
+From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Dec 2013 10:11:40 +0200
+Message-Id: <1386231100-13446-1-git-send-email-jukka.rissanen@linux.intel.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-oe][PATCH] mosh: Perl module dependencies were missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,94 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2013 07:10:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Dec 2013 08:11:55 -0000
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
-
-Below errors only occurs on Ubuntu 13.10:
-
-$arch-linux-libtool: link: g++ ... -o .libs/mysqltest_embedded \
-    ../../libmysqld/.libs/libmysqld.so -ldl
-
-    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlopen'
-    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlclose'
-    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlerror'
-    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlsym'
-
-GCC/ld verion on the host:
-    gcc (Ubuntu/Linaro 4.8.1-10ubuntu8) 4.8.1
-    GNU ld (GNU Binutils for Ubuntu) 2.23.52.20130913
-
-This is a strange behavior on Ub13.10, it fails even '-ldl' in the
-link command line. This patch will append '-ldl' to dependency_libs
-in libmysqld.la.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
 ---
- .../recipes-support/mysql/mariadb-native_5.1.67.bb |    3 ++
- .../mysql/mariadb/fix-link-error-ub1310.patch      |   37 ++++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-support/mysql/mariadb/fix-link-error-ub1310.patch
+ meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-index a55c2ab..dccbfd0 100644
---- a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-+++ b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-@@ -8,6 +8,9 @@ PACKAGES = ""
- EXTRA_OEMAKE = ""
- EXTRA_OECONF = " --with-embedded-server "
+diff --git a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb b/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+index c0d03c5..5a8e336 100644
+--- a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
++++ b/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+@@ -24,8 +24,15 @@ inherit autotools
+ PACKAGE_BEFORE_PN += "${PN}-server"
+ FILES_${PN}-server = "${bindir}/mosh-server"
  
-+SRC_URI += "file://fix-link-error-ub1310.patch \
-+	"
++NEEDED_PERL_MODULES = "\
++	perl-module-socket \
++	perl-module-getopt-long \
++	perl-module-errno \
++	perl-module-io-socket-inet \
++	perl-module-posix \
++"
 +
- do_install() {
-     oe_runmake 'DESTDIR=${D}' install
-     mv -f ${D}${libdir}/mysql/* ${D}${libdir}
-diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-link-error-ub1310.patch b/meta-oe/recipes-support/mysql/mariadb/fix-link-error-ub1310.patch
-new file mode 100644
-index 0000000..a528ea7
---- /dev/null
-+++ b/meta-oe/recipes-support/mysql/mariadb/fix-link-error-ub1310.patch
-@@ -0,0 +1,37 @@
-+mariadb-native: fix link error on Ubuntu 13.10
-+
-+Below errors only occurs on Ubuntu 13.10:
-+
-+$arch-linux-libtool: link: g++ ... -o .libs/mysqltest_embedded \
-+    ../../libmysqld/.libs/libmysqld.so -ldl
-+
-+    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlopen'
-+    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlclose'
-+    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlerror'
-+    ../../libmysqld/.libs/libmysqld.so: undefined reference to `dlsym'
-+
-+GCC/ld verion on the host:
-+    gcc (Ubuntu/Linaro 4.8.1-10ubuntu8) 4.8.1
-+    GNU ld (GNU Binutils for Ubuntu) 2.23.52.20130913
-+
-+This is a strange behavior on Ub13.10, it fails even '-ldl' in the
-+link command line. Below fix will append '-ldl' to dependency_libs
-+in libmysqld.la.
-+
-+Upstream-Status: Submitted [https://mariadb.atlassian.net/browse/MDEV-5362]
-+
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-+================================================
-+diff --git a/libmysqld/Makefile.am b/libmysqld/Makefile.am
-+index 7a2c92e..eee501e 100644
-+--- a/libmysqld/Makefile.am
-++++ b/libmysqld/Makefile.am
-+@@ -92,7 +92,7 @@ INC_LIB=	$(top_builddir)/regex/libregex.la \
-+                 @ndbcluster_libs@ @NDB_SCI_LIBS@ \
-+ 		@mysql_embedded_plugin_libs@ \
-+ 		$(libevent_inc_libs) \
-+-		$(yassl_inc_libs)
-++		$(yassl_inc_libs) @LIBDL@
-+ 
-+ if HAVE_YASSL
-+ yassl_inc_libs=	$(top_builddir)/extra/yassl/src/libyassl.la \
+ # mosh uses SSH to authenticate and the client uses OpenSSH-specific features
+-RDEPENDS_${PN} += "openssh-ssh"
++RDEPENDS_${PN} += "openssh-ssh ${NEEDED_PERL_MODULES}"
+ # The server seemed not to work with dropbear either
+-RDEPENDS_${PN}-server += "openssh-sshd"
+-
++RDEPENDS_${PN}-server += "openssh-sshd ${NEEDED_PERL_MODULES}"
 -- 
-1.7.10.4
+1.8.3.1
 
 
