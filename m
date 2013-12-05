@@ -1,39 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 09B356DC00;
-	Thu,  5 Dec 2013 00:54:50 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id q10so11084869ead.3
-	for <multiple recipients>; Wed, 04 Dec 2013 16:54:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=atmPFf/DHX6nBlvLbMfJQVNbpD1XQLN+BlhR2D+wKJ0=;
-	b=YFMmOkws0kWOCPy2kauBByJsMynHTDbeLt9mxa9xPqv4FHjE/SIierrz2idDErQ7Q6
-	L14qZ4TuzuxbnLxSTZuy4DJc0pOCkKrGKNv24k0HgGDX9s8cZnNiw3sciC0cp7e9Gi3T
-	XFohvulOunGOwCuRcQ+ZEjJfQYC2gwpJwcg6KtGSa1gqnbYDj/gS1eZI5tuxTFRokj1y
-	cf5V6rDWmqdSqhFJ7dRLG1LnHkDQVCWOufHx9mw5+EsTDjc+vWZBhph8MYhWXaJrVKcY
-	HVqzjMGHqrzLM/pmwCFWK3wuRly3R1Xbi86Huj9M3Fz2Sar+EYDSpF8ZLltV/3vrOZsA
-	gh8A==
-X-Received: by 10.14.115.133 with SMTP id e5mr9664600eeh.91.1386204890182;
-	Wed, 04 Dec 2013 16:54:50 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id h3sm75039369eem.15.2013.12.04.16.54.48
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Dec 2013 16:54:49 -0800 (PST)
-Date: Thu, 5 Dec 2013 01:55:01 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Ross Burton <ross.burton@intel.com>
-Message-ID: <20131205005501.GB3724@jama>
-References: <1386203938-13338-1-git-send-email-ross.burton@intel.com>
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CD0036DF77
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Dec 2013 02:06:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rB526iEi007691
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 4 Dec 2013 18:06:44 -0800 (PST)
+Received: from [128.224.162.190] (128.224.162.190) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
+	Wed, 4 Dec 2013 18:06:44 -0800
+Message-ID: <529FDFB2.4000409@windriver.com>
+Date: Thu, 5 Dec 2013 10:06:42 +0800
+From: jhuang0 <jackie.huang@windriver.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
 MIME-Version: 1.0
-In-Reply-To: <1386203938-13338-1-git-send-email-ross.burton@intel.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [RFC][PATCH] cmake: respect ${S} and ${B}
+To: Joe MacDonald <joe@deserted.net>, <koen@dominion.thruhere.net>
+References: <1386153235-16411-1-git-send-email-jackie.huang@windriver.com>
+	<l7n0m9$4go$1@ger.gmane.org> <20131204134937.GA5677@deserted.net>
+In-Reply-To: <20131204134937.GA5677@deserted.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,89 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2013 00:54:53 -0000
-X-Groupsio-MsgNum: 47381
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NDin8bjvE/0mNLFQ"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Dec 2013 02:06:51 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---NDin8bjvE/0mNLFQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 05, 2013 at 12:38:57AM +0000, Ross Burton wrote:
-> Hi,
->=20
-> This is a Request For Comments because it changes behaviour of the cmake =
-class
-> and I'm not entirely knowledgeable in cmake.
 
-Neither am I, but patch looks reasonable and I like it, because I was
-planing to do something similar.
+On 12/4/2013 9:49 PM, Joe MacDonald wrote:
+> [Re: [oe] [meta-networking][PATCH 1/2] inetutils: fix simple bb rule error] On 13.12.04 (Wed 11:39) Koen Kooi wrote:
+>
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> jackie.huang@windriver.com schreef op 04-12-13 11:33:
+>>> From: Jackie Huang <jackie.huang@windriver.com>
+>>>
+>>> Correct the usage of alternative link and target:
+>>
+>> Make the above the summary, 'fix simple bb rule error' is too vague when
+>> looking through the output of 'git log --oneline'
+>
+> Agreed.  If there's no objection, I'll change this to:
 
-> For some reason, cmake.bbclass doesn't use ${S} and ${B}, but instead has=
- it's
-> own variables OECMAKE_SOURCEPATH ("." by default) and OECMAKE_BUILDPATH (=
-"" by
-> default).  Those defaults meant that the build happened in the source dir=
-ectory,
-> which conveniently was ${S}.  Unless ${B} was also set, in which case it =
-all
-> broke.
->=20
-> I don't see a good reason for cmake.bbclass having it's own special versi=
-ons of
-> ${S} and ${B}, so this patch drops them and replicates some of the logic =
-in
-> autotools.bbclass: specifically the part where if ${S} and ${B} are diffe=
-rent,
-> delete ${B} before building.  This ensures that switching machine doesn't=
- re-use
-> the same build directory, which was the cause of me going back to look at=
- this
-> (libproxy trying to use the nuc sysroot when I'm building for qemux86-64).
->=20
-> Some open questions:
->=20
-> 1) As I understand it cmake has more reliable support for out-of-tree bui=
-lds
-> than autotools.  If this is the case should cmake.bbclass set B ?=3D
-> "${WORKDIR}/build", or leave setting of B to separatebuilddir.inc?  Are t=
-here
-> known recipes using cmake that fail with out-of-tree builds?
->=20
-> 2) Is dropping OECMAKE_SOURCEPATH and OECMAKE_BUILDPATH acceptable?  Noth=
-ing in
-> oe-core uses them and there's three (IIRC) recipes in meta-oe that use th=
-em.
-> Assuming the answer to (1) is "separatebuilddir.inc" then the only fallout
-> should be these recipes using in-tree builds until OECMAKE_BUILDPATH is r=
-eplaced
-> with B.
->=20
-> Feedback and testing from people who actively use cmake very welcome.
->=20
-> Cheers,
-> Ross
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+No objection, thanks!
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Thanks,
+Jackie
 
---NDin8bjvE/0mNLFQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+>
+> inetutils: use new update-alternatives syntax
+>
+> Though that does tend to render the rest of the commit log redundant.
+> :-)
+>
+> -J.
+>
+>> -----BEGIN PGP SIGNATURE-----
+>> Version: GnuPG v1.4.5 (Darwin)
+>> Comment: GPGTools - http://gpgtools.org
+>>
+>> iD8DBQFSnwZqMkyGM64RGpERAvn8AJwJgmIczTwCWNuTe6TdkiGUyl+kKgCdHrcA
+>> ub+FZU7aXb7K84C447kCCqk=
+>> =6wkg
+>> -----END PGP SIGNATURE-----
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+-- 
+Jackie Huang
+WIND RIVER | China Development Center
+MSN:jackielily@hotmail.com
+Tel: +86 8477 8594
+Mobile: +86 138 1027 4745
 
-iEYEARECAAYFAlKfzuUACgkQN1Ujt2V2gBwrbQCcCemD7FElBv24XTqw3KHcNstS
-mfUAn0Nkb3W93cJ9q81VcCJ25Kv19XoY
-=8DiX
------END PGP SIGNATURE-----
-
---NDin8bjvE/0mNLFQ--
