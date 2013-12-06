@@ -1,24 +1,37 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 31B176E20A
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 25B646DF9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2013 08:34:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rB68YBAX020972
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  6 Dec 2013 10:13:29 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id u57so424173wes.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 Dec 2013 00:34:11 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Fri, 6 Dec 2013 00:34:10 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Dec 2013 16:34:16 +0800
-Message-ID: <1386318856-1566-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Subject: [PATCH meta-networking v2] proftpd: use /bin/false as the login shell and add home-dir
+	Fri, 06 Dec 2013 02:13:29 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Cgql6ItO6+FsVeITfFEa+hot+zVN4gxKLaGSznxyf0I=;
+	b=T1B1C6llgXxZuGt7kgNyalswc92Yh5PGQpwPMwn84GTuxCSaVvOMm8d3kdw2qT1UaH
+	QBxHLlwc8fnfvtiS02BRIRQ7Ny0GLKrlGiMVlsS24Xo7WOiXDEot2Ifk9nmLyOo+ZlZA
+	5vpYF43SKS5Fja3aHq03wAea9dTPmPXRh8xHDqWS/BqmrPCJhTP0A5OOmVCTHJAduNnH
+	SY9aLcKMkK0/4QOcxmqIGW1UAOwyKHSDEqRBLSy/0u7UZxV0OA/rMfjo1QRm/vIvJP+/
+	3240M83bK4hbL+C9dKnE7r5kr5kfhqLESVyzeYRMZxCaZDg67TDqTvJq1wxFRJEoinz+
+	Tcsg==
+X-Gm-Message-State: ALoCoQmjpkR13Lbitn5xL0kZMNUSUwO425VE8otXiBuge8JPaxoPIQzXDhmJ8T5LuA1KijBCPMfG
+X-Received: by 10.180.189.68 with SMTP id gg4mr1717376wic.46.1386324809055;
+	Fri, 06 Dec 2013 02:13:29 -0800 (PST)
+Received: from localhost (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id fu1sm4741887wib.8.2013.12.06.02.13.27
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Dec 2013 02:13:28 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Dec 2013 11:13:19 +0100
+Message-Id: <1386324799-30305-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-networking][PATCH] transmission: add 3.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,77 +45,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2013 08:34:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 Dec 2013 10:13:31 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
+Transmission is a cross-platform BitTorrent client.
 
-Use /bin/false as the login shell, just like what Ubuntu does,
-otherwise there might be secure issue; add /var/lib/ftp as user
-ftp home-dir.
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../files/close-RequireValidShell-check.patch      |   27 ++++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    4 ++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
+ .../transmission/transmission_2.82.bb              | 52 ++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/transmission/transmission_2.82.bb
 
-diff --git a/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch b/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
+diff --git a/meta-networking/recipes-protocols/transmission/transmission_2.82.bb b/meta-networking/recipes-protocols/transmission/transmission_2.82.bb
 new file mode 100644
-index 0000000..cb73c2d
+index 0000000..3ca6c5a
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
-@@ -0,0 +1,27 @@
-+close RequireValidShell check
++++ b/meta-networking/recipes-protocols/transmission/transmission_2.82.bb
+@@ -0,0 +1,52 @@
++DESCRIPTION = "Transmission is a BitTorrent client w/ a built-in Ajax-Powered Webif GUI."
++SECTION = "network"
 +
-+Upstream-Status: Inappropriate [configuration]
++HOMEPAGE = "www.transmissionbt.com/"
 +
-+close RequireValidShell check since we like to make /bin/false as shell
-+for ftp user
++DEPENDS = "libevent gnutls openssl libtool intltool-native curl"
 +
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ sample-configurations/basic.conf |    1 +
-+ 1 file changed, 1 insertion(+)
++LICENSE = "MIT & GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7ee657ac1dce0e7353033fc06c8087d2"
 +
-+diff --git a/sample-configurations/basic.conf b/sample-configurations/basic.conf
-+index 314eb79..abcb284 100644
-+--- a/sample-configurations/basic.conf
-++++ b/sample-configurations/basic.conf
-+@@ -53,6 +53,7 @@ AllowOverwrite		on
-+   # We want clients to be able to login with "anonymous" as well as "ftp"
-+   UserAlias			anonymous ftp
-+ 
-++  RequireValidShell	 	off	
-+   # Limit the maximum number of anonymous logins
-+   MaxClients			10
-+ 
-+-- 
-+1.7.10.4
++SRC_URI = "http://download.transmissionbt.com/files/transmission-${PV}.tar.xz"
++SRC_URI[md5sum] = "a5ef870c0410b12d10449c2d36fa4661"                                                                   
++SRC_URI[sha256sum] = "3996651087df67a85f1e1b4a92b1b518ddefdd84c654b8df6fbccb0b91f03522" 
 +
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-index 6537b77..eb502d6 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-            file://proftpd-basic.init \
-            file://default \
-            file://move-pidfile-to-var-run.patch \
-+           file://close-RequireValidShell-check.patch \
- "
- 
- SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
-@@ -62,6 +63,7 @@ INITSCRIPT_PARAM = "defaults 85 15"
- 
- USERADD_PACKAGES = "${PN}"
- GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
--USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
-+USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --no-create-home \
-+                       --shell /bin/false ${FTPUSER}"
- 
- FILES_${PN} += "/home/${FTPUSER}"
++inherit autotools gettext useradd systemd
++
++PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
++                 ${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++
++PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+,"
++PACKAGECONFIG[systemd] = "--with-systemd-daemon,--without-systemd-daemon,systemd,"
++
++# Configure aborts with:
++# config.status: error: po/Makefile.in.in was not created by intltoolize.
++do_configure_prepend() {
++    sed -i /AM_GLIB_GNU_GETTEXT/d ${S}/configure.ac
++    intltoolize --copy --force --automake
++}
++
++do_install_append() {
++	install -d ${D}${nonarch_base_libdir}/systemd/system
++	install -m 0644 ${S}/daemon/transmission-daemon.service ${D}${nonarch_base_libdir}/systemd/system
++}
++
++PACKAGES += "${PN}-gui ${PN}-client"
++
++FILES_${PN}-client = "${bindir}/transmission-remote ${bindir}/transmission-cli ${bindir}/transmission-create ${bindir}/transmission-show ${bindir}/transmission-edit"
++FILES_${PN}-gui += "${bindir}/transmission-gtk ${datadir}/icons ${datadir}/applications ${datadir}/pixmaps"
++
++FILES_${PN} = "${bindir}/transmission-daemon ${datadir}/transmission ${sysconfdir}"
++
++SYSTEMD_SERVICE_${PN} = "transmission-daemon.service"
++
++USERADD_PACKAGES = "${PN}"
++GROUPADD_PARAM_${PN} = "--system transmission"
++USERADD_PARAM_${PN} = "--home ${localstatedir}/lib/transmission-daemon --create-home \
++                       --gid transmission \
++                       --shell ${base_bindir}/false \
++                       --system \
++                       transmission"
++
++
 -- 
-1.7.10.4
+1.8.4.2
 
 
