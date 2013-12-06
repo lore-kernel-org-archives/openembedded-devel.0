@@ -1,32 +1,24 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 045526DF96;
-	Thu,  5 Dec 2013 22:23:52 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	rB5MNSa5031120; Thu, 5 Dec 2013 22:23:28 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 3U9T27aR_DTx; Thu,  5 Dec 2013 22:23:28 +0000 (GMT)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	rB5MNQKr031116
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-CAMELLIA256-SHA bits=256
-	verify=NOT); Thu, 5 Dec 2013 22:23:27 GMT
-Message-ID: <1386282201.25847.29.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Philip Balister <philip@balister.org>
-Date: Thu, 05 Dec 2013 22:23:21 +0000
-In-Reply-To: <52A0FBC5.6090009@balister.org>
-References: <1386203938-13338-1-git-send-email-ross.burton@intel.com>
-	<1386203938-13338-2-git-send-email-ross.burton@intel.com>
-	<52A0FBC5.6090009@balister.org>
-X-Mailer: Evolution 3.6.4-0ubuntu1 
-Mime-Version: 1.0
-Cc: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] [PATCH] cmake: respect ${S} and ${B}
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 31B176E20A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  6 Dec 2013 08:34:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id rB68YBAX020972
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 6 Dec 2013 00:34:11 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Fri, 6 Dec 2013 00:34:10 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 Dec 2013 16:34:16 +0800
+Message-ID: <1386318856-1566-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH meta-networking v2] proftpd: use /bin/false as the login shell and add home-dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,32 +32,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2013 22:23:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Dec 2013 08:34:12 -0000
+Content-Type: text/plain
 
-On Thu, 2013-12-05 at 17:18 -0500, Philip Balister wrote:
-> On 12/04/2013 07:38 PM, Ross Burton wrote:
-> > Instead of the class-specific variables OECMAKE_BUILDPATH and
-> > OECMAKE_SOURCEPATH, just use ${B} and ${S}.
-> > 
-> > If these two paths are different, delete any existing ${B} before running a
-> > build so that previous builds don't taint the current build.
-> > 
-> > Note that OECMAKE_SOURCEPATH and OECMAKE_BUILDPATH are not respected at all, so
-> > recipes that manually set these in the past will need to be updated to either
-> > use something along the lines of separatebuilddir.inc or set B themselves.
-> 
-> I'm carrying EXTRA_OEMAKE = "-C $(OECMAKE_BUILDPATH)" in recipes. It
-> looks like this removes the need for this also? My cmake invocation is
-> rusty :)
+From: Roy Li <rongqing.li@windriver.com>
 
-do_compile runs by default in ${B} so in most cases that shouldn't be
-needed. The new equivalent would be "-C ${B}" but that shouldn't be
-needed in most cases.
+Use /bin/false as the login shell, just like what Ubuntu does,
+otherwise there might be secure issue; add /var/lib/ftp as user
+ftp home-dir.
 
-Cheers,
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../files/close-RequireValidShell-check.patch      |   27 ++++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |    4 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
 
-Richard
+diff --git a/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch b/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
+new file mode 100644
+index 0000000..cb73c2d
+--- /dev/null
++++ b/meta-networking/recipes-daemons/proftpd/files/close-RequireValidShell-check.patch
+@@ -0,0 +1,27 @@
++close RequireValidShell check
++
++Upstream-Status: Inappropriate [configuration]
++
++close RequireValidShell check since we like to make /bin/false as shell
++for ftp user
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ sample-configurations/basic.conf |    1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/sample-configurations/basic.conf b/sample-configurations/basic.conf
++index 314eb79..abcb284 100644
++--- a/sample-configurations/basic.conf
+++++ b/sample-configurations/basic.conf
++@@ -53,6 +53,7 @@ AllowOverwrite		on
++   # We want clients to be able to login with "anonymous" as well as "ftp"
++   UserAlias			anonymous ftp
++ 
+++  RequireValidShell	 	off	
++   # Limit the maximum number of anonymous logins
++   MaxClients			10
++ 
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+index 6537b77..eb502d6 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://proftpd-basic.init \
+            file://default \
+            file://move-pidfile-to-var-run.patch \
++           file://close-RequireValidShell-check.patch \
+ "
+ 
+ SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
+@@ -62,6 +63,7 @@ INITSCRIPT_PARAM = "defaults 85 15"
+ 
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
+-USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
++USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --no-create-home \
++                       --shell /bin/false ${FTPUSER}"
+ 
+ FILES_${PN} += "/home/${FTPUSER}"
+-- 
+1.7.10.4
 
 
