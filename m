@@ -1,35 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AAE3C6D749
+Return-Path: <ulf@emagii.com>
+Received: from smtprelay-b21.telenor.se (smtprelay-b21.telenor.se
+	[195.54.99.212])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B4086CF08
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2013 09:25:35 +0000 (UTC)
-Received: by mail-pd0-f174.google.com with SMTP id y13so2326726pdi.19
+	Sat,  7 Dec 2013 21:58:10 +0000 (UTC)
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 92430EA416
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Dec 2013 01:25:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=XHtRYcb7cMbulIMVy3mAoaOdrIid32nqR8XdYE3ULJg=;
-	b=YbpQBNlWcAHyDITcOcNp9giKf69zvE0msG838lFNr+3gnaK1lfwgF7KWjD61XY+lA6
-	tLs01u5WxAPdFmJPZ5JM66AS+4X44Hj2lhDWI1MpXRF+lv1YkRgpEZNz6ot6xXl2nuxl
-	umSsnxosDisIqs8D7Ou4s4h0CwEfPajniciEA5soZWbru6t7PBGLErYq0HczNcr9SiaH
-	ltR7rCbGWCJANE2tveebPWapEdWD6VCp4HAZjpX1FWGDjW7np9++3KPGNLdLvl2oTbr/
-	nZMxdkC5p8fWrSgCbq19E/kzuUS8ZbyHpez4wW3B7P2Q4FR2zFSQBHKOQzd3AGEqP1KJ
-	+hqQ==
-X-Received: by 10.68.143.196 with SMTP id sg4mr9170766pbb.155.1386408335394;
-	Sat, 07 Dec 2013 01:25:35 -0800 (PST)
-Received: from ghoda.gateway.pace.com
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id vi2sm3102759pbc.21.2013.12.07.01.25.34
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 07 Dec 2013 01:25:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat,  7 Dec 2013 22:58:08 +0100 (CET)
+X-SENDER-IP: [83.227.57.102]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Am5kAMKYo1JT4zlmPGdsb2JhbABZgwYBATeyPYcpgRgXAwEBAQE4NYJ3AQojT0sKJAmIBgEItgIBiiwXjxCEOgOUMgWDXYEwlA07
+X-IronPort-AV: E=Sophos;i="4.93,848,1378850400"; d="scan'208";a="698471947"
+Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	Hydra.bredbandsbolaget.se) ([83.227.57.102])
+	by ipb1.telenor.se with ESMTP; 07 Dec 2013 22:58:08 +0100
+From: Ulf Samuelsson <ulf@emagii.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Dec 2013 01:25:33 -0800
-Message-Id: <1386408333-18772-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-gnome][PATCH] libgnomeprint: Upgrade 2.18.7 -> 2.18.8
+Date: Sat,  7 Dec 2013 22:58:04 +0100
+Message-Id: <1386453484-40502-1-git-send-email-ulf@emagii.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: [PATCH v3] curlpp add package with c++ curl bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +36,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Dec 2013 09:25:36 -0000
+X-List-Received-Date: Sat, 07 Dec 2013 21:58:11 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- .../gnome/{libgnomeprint_2.18.7.bb => libgnomeprint_2.18.8.bb}  |    7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-gnome/recipes-gnome/gnome/{libgnomeprint_2.18.7.bb => libgnomeprint_2.18.8.bb} (76%)
+ .../curlpp/curlpp/pkgconfig_fix.patch              |   38 +++++++++
+ .../recipes-support/curlpp/curlpp_0.7.3.bb         |   87 ++++++++++++++++++++
+ 2 files changed, 125 insertions(+)
+ create mode 100644 meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
+ create mode 100644 meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb b/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
-similarity index 76%
-rename from meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb
-rename to meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
-index 606c752..13550d7 100644
---- a/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb
-+++ b/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
-@@ -1,8 +1,6 @@
- LICENSE = "GPLv2"
- SECTION = "x11/gnome/libs"
- 
--PR = "r2"
--
- DEPENDS = "libxml2 libgnomecups glib-2.0 pango libart-lgpl fontconfig popt gnome-common freetype"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-@@ -12,9 +10,8 @@ inherit pkgconfig gnome
- SRC_URI += "file://fix.includes.patch \
-             file://freetype.patch \
-            "
--
--SRC_URI[archive.md5sum] = "d66b81ee8aa3b3a33f5efc9a47ce07e3"
--SRC_URI[archive.sha256sum] = "8b34f81599423ef3da9c43775495da602f83cbbee069c9e760ffeae6aa4768e6"
-+SRC_URI[archive.md5sum] = "63b05ffb5386e131487c6af30f4c56ac"
-+SRC_URI[archive.sha256sum] = "1034ec8651051f84d2424e7a1da61c530422cc20ce5b2d9e107e1e46778d9691"
- 
- FILES_${PN}-dbg += "\
-     ${libdir}/${PN}/${PV}/modules/.debug \
+diff --git a/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch b/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
+new file mode 100644
+index 0000000..ad73c00
+--- /dev/null
++++ b/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
+@@ -0,0 +1,38 @@
++Upstream-Status: Inappropriate [packaging]
++
++
++Index: curl-7.20.0/libcurl.pc.in
++===================================================================
++--- curl-7.20.0.orig/libcurl.pc.in	2009-11-17 18:11:07.000000000 +0000
+++++ curl-7.20.0/libcurl.pc.in	2010-03-25 12:13:26.814051066 +0000
++@@ -35,6 +35,7 @@
++ URL: http://curl.haxx.se/
++ Description: Library to transfer files with ftp, http, etc.
++ Version: @CURLVERSION@
++-Libs: -L${libdir} -lcurl @LIBS@
++-Libs.private: @LIBCURL_LIBS@ @LIBS@
+++Requires.private: @GNUTLS_REQUIRED@
+++Libs: -L${libdir} -lcurl
+++Libs.private: -ldl -lz
++ Cflags: -I${includedir}
++Index: curl-7.20.0/configure.ac
++===================================================================
++--- curl-7.20.0.orig/configure.ac	2010-02-04 21:41:46.000000000 +0000
+++++ curl-7.20.0/configure.ac	2010-03-25 12:12:18.673129001 +0000
++@@ -1668,6 +1668,7 @@
++        AC_SUBST(USE_GNUTLS, [1])
++        GNUTLS_ENABLED=1
++        USE_GNUTLS="yes"
+++       GNUTLS_REQUIRED="gnutls"
++        curl_ssl_msg="enabled (GnuTLS)"
++        ],
++        [
++@@ -1696,6 +1697,8 @@
++ 
++ fi dnl OPENSSL != 1
++ 
+++AC_SUBST(GNUTLS_REQUIRED)
+++
++ dnl ----------------------------------------------------
++ dnl NSS. Only check if GnuTLS and OpenSSL are not enabled
++ dnl ----------------------------------------------------
+diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+new file mode 100644
+index 0000000..605cd5a
+--- /dev/null
++++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+@@ -0,0 +1,87 @@
++SUMMARY = "C++ library for client-side URL transfers."
++HOMEPAGE = "http://code.google.com/p/curlpp/"
++SECTION = "console/network"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++DEPENDS = "curl boost"
++DEPENDS_class-native = "curl-native"
++
++SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
++	"
++
++SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
++SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
++
++inherit autotools pkgconfig binconfig
++
++EXTRA_OECONF = "--prefix=${STAGING_DIR} \
++		--with-boost=${STAGING_DIR} \
++		"
++
++do_install() {
++	install -d ${D}/${includedir}/curlpp
++	cp -r include/curlpp/* 					${D}${includedir}/curlpp
++
++	install -d ${D}${includedir}/utilspp
++	cp -r include/utilspp/* 				${D}${includedir}/utilspp
++
++	install -d ${D}/${libdir}
++	install	-m 664 src/curlpp/.libs/libcurlpp.a		${D}/${libdir}
++	install	-m 664 src/curlpp/.libs/libcurlpp.lai		${D}/${libdir}/libcurlpp.la
++
++	install	-m 775 src/curlpp/.libs/libcurlpp.so.0.0.2	${D}/${libdir}
++
++	install	-m 664 src/utilspp/.libs/libutilspp.a		${D}/${libdir}
++	install	-m 664 src/utilspp/.libs/libutilspp.lai		${D}/${libdir}/libutilspp.la
++
++	install	-m 664 src/utilspp/.libs/libutilspp.so.0.0.0	${D}/${libdir}
++
++	install -d ${D}/${libdir}/pkgconfig
++	install	-m 664 curlpp.pc				${D}/${libdir}/pkgconfig
++
++	install -d ${D}/${bindir}
++	install	-m 755 curlpp-config 				${D}/${bindir}
++
++	install -d ${D}/${includedir}/curlpp
++	install -d ${D}/${includedir}/curlpp/internal
++	install -d ${D}/${includedir}/utilspp
++	install -d ${D}/${includedir}/utilspp/functor
++	install -d ${D}/${includedir}/utilspp/singleton
++
++	install	-m 664 include/curlpp/config*			${D}/${includedir}/curlpp
++	install	-m 664 include/curlpp/*.h*			${D}/${includedir}/curlpp
++	install	-m 664 include/curlpp/*.inl			${D}/${includedir}/curlpp
++
++	install	-m 664 include/curlpp/internal/*.h*		${D}/${includedir}/curlpp/internal
++	install	-m 664 include/curlpp/internal/*.inl		${D}/${includedir}/curlpp/internal
++
++	install	-m 664 include/utilspp/*.h*			${D}/${includedir}/utilspp
++	install	-m 664 include/utilspp/*.inl			${D}/${includedir}/utilspp
++
++	install	-m 664 include/utilspp/functor/*.h*		${D}/${includedir}/utilspp/functor
++	install	-m 664 include/utilspp/singleton/*.h*		${D}/${includedir}/utilspp/singleton
++	install	-m 664 include/utilspp/singleton/*.inl		${D}/${includedir}/utilspp/singleton
++	install -m 755 curlpp-config				${D}/${bindir}
++}
++
++pkg_postinst_${PN}() {
++	ln	-sf	libcurlpp.so.0.0.2			/usr/lib/libcurlpp.so.0
++	ln	-sf	libcurlpp.so.0.0.2			/usr/lib/libcurlpp.so
++	ln	-sf	libutilspp.so.0.0.0			/usr/lib/libutilspp.so.0
++	ln	-sf	libutilspp.so.0.0.0			/usr/lib/libutilspp.so
++}
++
++PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
++
++FILES_lib${BPN} = "${libdir}/lib*.so.* \
++		"
++
++FILES_lib${BPN}-dev = "${includedir} \
++                      ${libdir}/lib*.la \
++                      ${libdir}/pkgconfig \
++                      ${bindir}/*-config"
++
++FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-1.7.10.4
+1.7.9.5
 
 
