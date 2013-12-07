@@ -1,28 +1,28 @@
 Return-Path: <ulf@emagii.com>
-Received: from smtprelay-b21.telenor.se (smtprelay-b21.telenor.se
-	[195.54.99.212])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B4086CF08
+Received: from smtprelay-b31.telenor.se (smtprelay-b31.telenor.se
+	[213.150.131.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 62A3B615B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2013 21:58:10 +0000 (UTC)
+	Sat,  7 Dec 2013 22:30:06 +0000 (UTC)
 Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b21.telenor.se (Postfix) with ESMTP id 92430EA416
+	by smtprelay-b31.telenor.se (Postfix) with ESMTP id C1700E9510
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2013 22:58:08 +0100 (CET)
+	Sat,  7 Dec 2013 23:30:04 +0100 (CET)
 X-SENDER-IP: [83.227.57.102]
 X-LISTENER: [smtp.bredband.net]
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Am5kAMKYo1JT4zlmPGdsb2JhbABZgwYBATeyPYcpgRgXAwEBAQE4NYJ3AQojT0sKJAmIBgEItgIBiiwXjxCEOgOUMgWDXYEwlA07
-X-IronPort-AV: E=Sophos;i="4.93,848,1378850400"; d="scan'208";a="698471947"
+X-IronPort-Anti-Spam-Result: AphzAPqgo1JT4zlmPGdsb2JhbABZgwYBATeIDKoxhymBGBcDAQEBATg1gncBCiNPMxgKLYdwAxMBtg0BgzYNhmcXjH2BL2QdhB0DlimBa4xaiGM7gSw
+X-IronPort-AV: E=Sophos;i="4.93,848,1378850400"; d="scan'208";a="698490828"
 Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	Hydra.bredbandsbolaget.se) ([83.227.57.102])
-	by ipb1.telenor.se with ESMTP; 07 Dec 2013 22:58:08 +0100
+	by ipb1.telenor.se with ESMTP; 07 Dec 2013 23:30:04 +0100
 From: Ulf Samuelsson <ulf@emagii.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Dec 2013 22:58:04 +0100
-Message-Id: <1386453484-40502-1-git-send-email-ulf@emagii.com>
+Date: Sat,  7 Dec 2013 23:29:41 +0100
+Message-Id: <1386455381-40913-1-git-send-email-ulf@emagii.com>
 X-Mailer: git-send-email 1.7.9.5
 Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: [PATCH v3] curlpp add package with c++ curl bindings
+Subject: [PATCH] xfconfig: use sysroot and target perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,153 +36,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Dec 2013 21:58:11 -0000
+X-List-Received-Date: Sat, 07 Dec 2013 22:30:08 -0000
+
+xfconf-4.10.0 does not use OE sysroot as is.
+--with-sysroot=yes 
+will make configure run CC --print-sysroot
+and use that.
+
+When searching the PATH for perl, no target perl is found,
+since PATH does not contain any reference.
+Instead native perl is found, and if certain perl packages
+are installed on the host machine, the xfconf perl support
+is enabled which may cause the build to fail on 64 bit hosts.
+If the perl packages are not installed on the host, then
+perl support in xfconf is disabled, and the xfconf build
+will succeed, even on 64 bit hosts.
+
+If native perl is found, and the perl packages are available
+on the host, the perl support is enabled.
+
+Since native perl is used, the native linker is used to link the 
+resulting *target* code.  
+
+The perl support requires some libraries, which are built for the target.
+If the host is 64 bit (x86_64) and the target is 32 bit (ARM?), 
+there is a mismatch which is detected by the linker, 
+and the libraries found are rejected.
+
+If the host does not have the correct libraries,
+then the xfconf build fails.
+If the host has the correct libraries, then the linker will try
+to link host libraries with the target application.
+
+The patch will define PERL as the target perl.
+This means that configure will look for the required perl
+packages in the target sysroot, instead of in the native filesystem.
+
+The patch has been tested in Angstrom master, which does not
+build the required perl packages, and thus perl support
+in xfconf is disabled, and the build succeeds.
+
+A simpler way to do this, proposed by Charles Ash <ashcharles@gmail.com>
+is to simply disable the perl-support in xfconf.
+This patch will be better, if ever the support for the needed
+perl packages is added to the OpenEmbedded/Angstrom build.
+
 
 Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
 ---
- .../curlpp/curlpp/pkgconfig_fix.patch              |   38 +++++++++
- .../recipes-support/curlpp/curlpp_0.7.3.bb         |   87 ++++++++++++++++++++
- 2 files changed, 125 insertions(+)
- create mode 100644 meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
- create mode 100644 meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+ meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch b/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
-new file mode 100644
-index 0000000..ad73c00
---- /dev/null
-+++ b/meta-networking/recipes-support/curlpp/curlpp/pkgconfig_fix.patch
-@@ -0,0 +1,38 @@
-+Upstream-Status: Inappropriate [packaging]
+diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
+index 4ea2b88..6d5bf57 100644
+--- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
++++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
+@@ -2,10 +2,14 @@ DESCRIPTION = "Xfce configuration daemon and utilities"
+ SECTION = "x11/wm"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-DEPENDS = "dbus-glib libxfce4util perl-native"
++DEPENDS = "dbus-glib libxfce4util perl"
++PR="r1"
+ 
+ inherit xfce
+ 
++EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
++EXTRA_OECONF += "--with-sysroot=yes"
 +
-+
-+Index: curl-7.20.0/libcurl.pc.in
-+===================================================================
-+--- curl-7.20.0.orig/libcurl.pc.in	2009-11-17 18:11:07.000000000 +0000
-++++ curl-7.20.0/libcurl.pc.in	2010-03-25 12:13:26.814051066 +0000
-+@@ -35,6 +35,7 @@
-+ URL: http://curl.haxx.se/
-+ Description: Library to transfer files with ftp, http, etc.
-+ Version: @CURLVERSION@
-+-Libs: -L${libdir} -lcurl @LIBS@
-+-Libs.private: @LIBCURL_LIBS@ @LIBS@
-++Requires.private: @GNUTLS_REQUIRED@
-++Libs: -L${libdir} -lcurl
-++Libs.private: -ldl -lz
-+ Cflags: -I${includedir}
-+Index: curl-7.20.0/configure.ac
-+===================================================================
-+--- curl-7.20.0.orig/configure.ac	2010-02-04 21:41:46.000000000 +0000
-++++ curl-7.20.0/configure.ac	2010-03-25 12:12:18.673129001 +0000
-+@@ -1668,6 +1668,7 @@
-+        AC_SUBST(USE_GNUTLS, [1])
-+        GNUTLS_ENABLED=1
-+        USE_GNUTLS="yes"
-++       GNUTLS_REQUIRED="gnutls"
-+        curl_ssl_msg="enabled (GnuTLS)"
-+        ],
-+        [
-+@@ -1696,6 +1697,8 @@
-+ 
-+ fi dnl OPENSSL != 1
-+ 
-++AC_SUBST(GNUTLS_REQUIRED)
-++
-+ dnl ----------------------------------------------------
-+ dnl NSS. Only check if GnuTLS and OpenSSL are not enabled
-+ dnl ----------------------------------------------------
-diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-new file mode 100644
-index 0000000..605cd5a
---- /dev/null
-+++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-@@ -0,0 +1,87 @@
-+SUMMARY = "C++ library for client-side URL transfers."
-+HOMEPAGE = "http://code.google.com/p/curlpp/"
-+SECTION = "console/network"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-+
-+DEPENDS = "curl boost"
-+DEPENDS_class-native = "curl-native"
-+
-+SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
-+	"
-+
-+SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
-+SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
-+
-+inherit autotools pkgconfig binconfig
-+
-+EXTRA_OECONF = "--prefix=${STAGING_DIR} \
-+		--with-boost=${STAGING_DIR} \
-+		"
-+
-+do_install() {
-+	install -d ${D}/${includedir}/curlpp
-+	cp -r include/curlpp/* 					${D}${includedir}/curlpp
-+
-+	install -d ${D}${includedir}/utilspp
-+	cp -r include/utilspp/* 				${D}${includedir}/utilspp
-+
-+	install -d ${D}/${libdir}
-+	install	-m 664 src/curlpp/.libs/libcurlpp.a		${D}/${libdir}
-+	install	-m 664 src/curlpp/.libs/libcurlpp.lai		${D}/${libdir}/libcurlpp.la
-+
-+	install	-m 775 src/curlpp/.libs/libcurlpp.so.0.0.2	${D}/${libdir}
-+
-+	install	-m 664 src/utilspp/.libs/libutilspp.a		${D}/${libdir}
-+	install	-m 664 src/utilspp/.libs/libutilspp.lai		${D}/${libdir}/libutilspp.la
-+
-+	install	-m 664 src/utilspp/.libs/libutilspp.so.0.0.0	${D}/${libdir}
-+
-+	install -d ${D}/${libdir}/pkgconfig
-+	install	-m 664 curlpp.pc				${D}/${libdir}/pkgconfig
-+
-+	install -d ${D}/${bindir}
-+	install	-m 755 curlpp-config 				${D}/${bindir}
-+
-+	install -d ${D}/${includedir}/curlpp
-+	install -d ${D}/${includedir}/curlpp/internal
-+	install -d ${D}/${includedir}/utilspp
-+	install -d ${D}/${includedir}/utilspp/functor
-+	install -d ${D}/${includedir}/utilspp/singleton
-+
-+	install	-m 664 include/curlpp/config*			${D}/${includedir}/curlpp
-+	install	-m 664 include/curlpp/*.h*			${D}/${includedir}/curlpp
-+	install	-m 664 include/curlpp/*.inl			${D}/${includedir}/curlpp
-+
-+	install	-m 664 include/curlpp/internal/*.h*		${D}/${includedir}/curlpp/internal
-+	install	-m 664 include/curlpp/internal/*.inl		${D}/${includedir}/curlpp/internal
-+
-+	install	-m 664 include/utilspp/*.h*			${D}/${includedir}/utilspp
-+	install	-m 664 include/utilspp/*.inl			${D}/${includedir}/utilspp
-+
-+	install	-m 664 include/utilspp/functor/*.h*		${D}/${includedir}/utilspp/functor
-+	install	-m 664 include/utilspp/singleton/*.h*		${D}/${includedir}/utilspp/singleton
-+	install	-m 664 include/utilspp/singleton/*.inl		${D}/${includedir}/utilspp/singleton
-+	install -m 755 curlpp-config				${D}/${bindir}
-+}
-+
-+pkg_postinst_${PN}() {
-+	ln	-sf	libcurlpp.so.0.0.2			/usr/lib/libcurlpp.so.0
-+	ln	-sf	libcurlpp.so.0.0.2			/usr/lib/libcurlpp.so
-+	ln	-sf	libutilspp.so.0.0.0			/usr/lib/libutilspp.so.0
-+	ln	-sf	libutilspp.so.0.0.0			/usr/lib/libutilspp.so
-+}
-+
-+PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
-+
-+FILES_lib${BPN} = "${libdir}/lib*.so.* \
-+		"
-+
-+FILES_lib${BPN}-dev = "${includedir} \
-+                      ${libdir}/lib*.la \
-+                      ${libdir}/pkgconfig \
-+                      ${bindir}/*-config"
-+
-+FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
-+
-+BBCLASSEXTEND = "native nativesdk"
+ SRC_URI += "file://0001-Simplify-checks.patch"
+ SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
+ SRC_URI[sha256sum] = "175219a441cc7d0f210bbd1a3b0abba41598627cd9db27235811400c3e100576"
 -- 
 1.7.9.5
 
