@@ -1,35 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id B713A6162C
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id AAE3C6D749
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2013 09:14:46 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id jt11so2435596pbb.22
+	Sat,  7 Dec 2013 09:25:35 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id y13so2326726pdi.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Dec 2013 01:14:46 -0800 (PST)
+	Sat, 07 Dec 2013 01:25:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=WMU3thfQi7gi4sKTnpppsY/IBYRMxhSz0pBWQgaMl8M=;
-	b=K6IfobDap3gRZ8KzuqRlYva3dhLx4L0ue1kYE6J3/FknzWUb4jxmbvIW4tP0LJaFHY
-	9tajp6gJHkL/RZCCmOgFQ507Kf8mTGwkActC8WIrDB7EroM+uEojUR+uzYnEUgr0cpUu
-	puxDb2Jt+PsWcrCfr1O/6ZcVYxn1/REzGtjpHfhPglF8zxRkF43oQeOAZELWZIicueKX
-	x9IPfRKxexioob680njGtp+shxDrjtinpYWGFK0CQWSEsq+cvfcYFkYHl3N1mQXANbvJ
-	9QGL36/BeXwlglzFq4N+wVvH2QLaFYZeo0wWxoFlo3wml5opoHapyrK6S00NaagPa9Py
-	OXoQ==
-X-Received: by 10.67.3.34 with SMTP id bt2mr8992864pad.3.1386407686089;
-	Sat, 07 Dec 2013 01:14:46 -0800 (PST)
+	bh=XHtRYcb7cMbulIMVy3mAoaOdrIid32nqR8XdYE3ULJg=;
+	b=YbpQBNlWcAHyDITcOcNp9giKf69zvE0msG838lFNr+3gnaK1lfwgF7KWjD61XY+lA6
+	tLs01u5WxAPdFmJPZ5JM66AS+4X44Hj2lhDWI1MpXRF+lv1YkRgpEZNz6ot6xXl2nuxl
+	umSsnxosDisIqs8D7Ou4s4h0CwEfPajniciEA5soZWbru6t7PBGLErYq0HczNcr9SiaH
+	ltR7rCbGWCJANE2tveebPWapEdWD6VCp4HAZjpX1FWGDjW7np9++3KPGNLdLvl2oTbr/
+	nZMxdkC5p8fWrSgCbq19E/kzuUS8ZbyHpez4wW3B7P2Q4FR2zFSQBHKOQzd3AGEqP1KJ
+	+hqQ==
+X-Received: by 10.68.143.196 with SMTP id sg4mr9170766pbb.155.1386408335394;
+	Sat, 07 Dec 2013 01:25:35 -0800 (PST)
 Received: from ghoda.gateway.pace.com
 	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id by1sm2602825pbd.25.2013.12.07.01.14.45
+	by mx.google.com with ESMTPSA id vi2sm3102759pbc.21.2013.12.07.01.25.34
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 07 Dec 2013 01:14:45 -0800 (PST)
+	Sat, 07 Dec 2013 01:25:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Dec 2013 01:14:58 -0800
-Message-Id: <1386407698-24915-1-git-send-email-raj.khem@gmail.com>
+Date: Sat,  7 Dec 2013 01:25:33 -0800
+Message-Id: <1386408333-18772-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH] gimp: Upgrade 2.8.2 -> 2.8.10
+Subject: [meta-gnome][PATCH] libgnomeprint: Upgrade 2.18.7 -> 2.18.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,81 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Dec 2013 09:14:46 -0000
-
-Also fix build with freetype 2.5.1
+X-List-Received-Date: Sat, 07 Dec 2013 09:25:36 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/gimp/gimp/freetype.patch  |   30 ++++++++++++++++++++
- .../gimp/{gimp_2.8.2.bb => gimp_2.8.10.bb}         |    9 ++++--
- 2 files changed, 36 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/gimp/gimp/freetype.patch
- rename meta-oe/recipes-graphics/gimp/{gimp_2.8.2.bb => gimp_2.8.10.bb} (68%)
+ .../gnome/{libgnomeprint_2.18.7.bb => libgnomeprint_2.18.8.bb}  |    7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome/{libgnomeprint_2.18.7.bb => libgnomeprint_2.18.8.bb} (76%)
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp/freetype.patch b/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
-new file mode 100644
-index 0000000..ed6c097
---- /dev/null
-+++ b/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
-@@ -0,0 +1,30 @@
-+Include the freetype headers via macros ( recommended way)
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Backport
-+
-+From 6c73f28b6d87a2afd11974552a075bffec52347f Mon Sep 17 00:00:00 2001
-+From: Michael Natterer <mitch@gimp.org>
-+Date: Fri, 29 Nov 2013 20:57:46 +0000
-+Subject: Bug 719560 - Build failure with freetype 2.5.1
-+
-+Apply patch from su-v that fixes the freetype include to
-+the madness devised and recommended by freetype.
-+---
-+diff --git a/app/text/gimpfont.c b/app/text/gimpfont.c
-+index 4045ca9..66c6e52 100644
-+--- a/app/text/gimpfont.c
-++++ b/app/text/gimpfont.c
-+@@ -28,7 +28,9 @@
-+ 
-+ #define PANGO_ENABLE_ENGINE  1   /* Argh */
-+ #include <pango/pango-ot.h>
-+-#include <freetype/tttables.h>
-++
-++#include <ft2build.h>
-++#include FT_TRUETYPE_TABLES_H
-+ 
-+ #include "text-types.h"
-+ 
-+--
-+cgit v0.9.2
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-similarity index 68%
-rename from meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb
-rename to meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-index e9bbdcf..c747168 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-@@ -8,9 +8,11 @@ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webk
+diff --git a/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb b/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
+similarity index 76%
+rename from meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb
+rename to meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
+index 606c752..13550d7 100644
+--- a/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7.bb
++++ b/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb
+@@ -1,8 +1,6 @@
+ LICENSE = "GPLv2"
+ SECTION = "x11/gnome/libs"
  
- inherit gnome
+-PR = "r2"
+-
+ DEPENDS = "libxml2 libgnomecups glib-2.0 pango libart-lgpl fontconfig popt gnome-common freetype"
  
--SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2"
--SRC_URI[md5sum] = "b542138820ca3a41cbd63fc331907955"
--SRC_URI[sha256sum] = "0cd1a7e67e132ead810e16e31ff929394c83fcf841e4a295c45d6f3829601ad9"
-+SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-+           file://freetype.patch \
-+          "
-+SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
-+SRC_URI[sha256sum] = "e7fd8b19f989138d826003c75f56bd5b6f136eef597e86e3978ede0bba470ae6"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+@@ -12,9 +10,8 @@ inherit pkgconfig gnome
+ SRC_URI += "file://fix.includes.patch \
+             file://freetype.patch \
+            "
+-
+-SRC_URI[archive.md5sum] = "d66b81ee8aa3b3a33f5efc9a47ce07e3"
+-SRC_URI[archive.sha256sum] = "8b34f81599423ef3da9c43775495da602f83cbbee069c9e760ffeae6aa4768e6"
++SRC_URI[archive.md5sum] = "63b05ffb5386e131487c6af30f4c56ac"
++SRC_URI[archive.sha256sum] = "1034ec8651051f84d2424e7a1da61c530422cc20ce5b2d9e107e1e46778d9691"
  
- EXTRA_OECONF = "--disable-python \
-                 --without-wmf"
-@@ -21,3 +23,4 @@ do_configure_append() {
- }
- 
- FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
-+FILES_${PN}  += "${datadir}/appdata"
+ FILES_${PN}-dbg += "\
+     ${libdir}/${PN}/${PV}/modules/.debug \
 -- 
 1.7.10.4
 
