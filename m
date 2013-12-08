@@ -1,34 +1,35 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id BB3396DEC8
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id B23D86DF9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Dec 2013 10:32:17 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Vpbep-0004Ef-RL for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Dec 2013 11:32:15 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2013 11:32:15 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sun,  8 Dec 2013 17:03:44 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id c41so1157806eek.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2013 11:32:15 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 08 Dec 2013 09:03:43 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=mTVAUejW1tqfnyx1D/L/9eynt9dHQOcSFEL5cgrbzAM=;
+	b=L8zeet1WEF5BfhpWWPasmjX2aENcREVGMln6KVqsf9ny6ZRMtEpRiQF78eL3zT1G5O
+	fa2RB8d0eEqi87FaqpdTnodEWkzuvbp6onXK4Bnufjj8JUvybGxRNmymhguY0dZQHlmc
+	YiLbE0jvhDIDnaxpc4cDVZRWWKp5my0F8MRhmfJPFFl6em1K9prLGUKJjPAV+bp4pGL0
+	JwonEXHmLvPuwgguqu5rwltj8jJweIMFpe9cdQTT9Rcp3P9uiYGhrgLK1HBv6eFpaJIU
+	fui4Zo7gBI709Aa5lPdXZeIsJNXXASa89vnTajoPCPGPQjwJiGPjmTcyuorb3o9AirE/
+	QGpQ==
+X-Gm-Message-State: ALoCoQnyU/dWHUaBCCTYkDzUnRSvTdb3v9iKL4h6asKby5XTxBFhU3U4ybutm8Jh5pqkvQk9fC9n
+X-Received: by 10.14.109.5 with SMTP id r5mr43666eeg.110.1386522223539;
+	Sun, 08 Dec 2013 09:03:43 -0800 (PST)
+Received: from otp-agherzan-l1.corp.ad.wrs.com ([89.121.200.106])
+	by mx.google.com with ESMTPSA id n1sm19013698eep.20.2013.12.08.09.03.42
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 08 Dec 2013 09:03:42 -0800 (PST)
+From: Andrei Gherzan <andrei@gherzan.ro>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 08 Dec 2013 11:34:16 +0100
-Message-ID: <l81hqp$jma$1@ger.gmane.org>
-References: <1386455381-40913-1-git-send-email-ulf@emagii.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-In-Reply-To: <1386455381-40913-1-git-send-email-ulf@emagii.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH] xfconfig: use sysroot and target perl
+Date: Sun,  8 Dec 2013 19:03:34 +0200
+Message-Id: <1386522214-7407-1-git-send-email-andrei@gherzan.ro>
+X-Mailer: git-send-email 1.8.1.4
+Subject: [meta-multimedia][PATCH] xbmc: Update to v12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,77 +43,408 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Dec 2013 10:32:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 Dec 2013 17:03:46 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* added missing dependency on taglib
+* remove already merged patches
+* define PACKAGECONFIG for sdl, airplay and ssh configuration
+* have above PACKAGECONFIG values activated by default
+* use internal ffmpeg - there are some known issues while compiling
+with external libav
+* define use_arch to be passed to internal ffmpeg configuration
+script
 
-Ulf Samuelsson schreef op 07-12-13 23:29:
-> xfconf-4.10.0 does not use OE sysroot as is. --with-sysroot=yes will make
-> configure run CC --print-sysroot and use that.
-> 
-> When searching the PATH for perl, no target perl is found, since PATH
-> does not contain any reference. Instead native perl is found, and if
-> certain perl packages are installed on the host machine, the xfconf perl
-> support is enabled which may cause the build to fail on 64 bit hosts. If
-> the perl packages are not installed on the host, then perl support in
-> xfconf is disabled, and the xfconf build will succeed, even on 64 bit
-> hosts.
-> 
-> If native perl is found, and the perl packages are available on the host,
-> the perl support is enabled.
-> 
-> Since native perl is used, the native linker is used to link the 
-> resulting *target* code.
-> 
-> The perl support requires some libraries, which are built for the
-> target. If the host is 64 bit (x86_64) and the target is 32 bit (ARM?), 
-> there is a mismatch which is detected by the linker, and the libraries
-> found are rejected.
-> 
-> If the host does not have the correct libraries, then the xfconf build
-> fails. If the host has the correct libraries, then the linker will try to
-> link host libraries with the target application.
-> 
-> The patch will define PERL as the target perl. This means that configure
-> will look for the required perl packages in the target sysroot, instead
-> of in the native filesystem.
-> 
-> The patch has been tested in Angstrom master, which does not build the
-> required perl packages, and thus perl support in xfconf is disabled, and
-> the build succeeds.
-> 
-> A simpler way to do this, proposed by Charles Ash <ashcharles@gmail.com> 
-> is to simply disable the perl-support in xfconf. This patch will be
-> better, if ever the support for the needed perl packages is added to the
-> OpenEmbedded/Angstrom build.
-> 
-> 
-> Signed-off-by: Ulf Samuelsson <ulf@emagii.com> --- 
-> meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb |    6 +++++- 1 file
-> changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-> b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb index 4ea2b88..6d5bf57
-> 100644 --- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb +++
-> b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb @@ -2,10 +2,14 @@
-> DESCRIPTION = "Xfce configuration daemon and utilities" SECTION =
-> "x11/wm" LICENSE = "GPLv2" LIC_FILES_CHKSUM =
-> "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552" -DEPENDS =
-> "dbus-glib libxfce4util perl-native" +DEPENDS = "dbus-glib libxfce4util
-> perl" +PR="r1"
+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+Change-Id: I538f4907a9d1dd5df31648bfb60a18cacfed9d69
+---
+ ...d-ios-Add-memory-barriers-to-atomic-Add-S.patch | 118 ++++++++++-----------
+ ...d-ios-Add-memory-barriers-to-cas-assembly.patch |  82 +++++++-------
+ ...igure-cope-with-ld-is-gold-DISTRO_FEATURE.patch |  43 --------
+ .../xbmc/configure.in-Avoid-running-code.patch     |  32 ------
+ .../xbmc/{xbmc_git.bb => xbmc_12.2.bb}             |  24 ++---
+ 5 files changed, 105 insertions(+), 194 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
+ delete mode 100644 meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
+ rename meta-multimedia/recipes-mediacentre/xbmc/{xbmc_git.bb => xbmc_12.2.bb} (75%)
 
-PR is deprecated and shouldn't be used anymore
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSpEsoMkyGM64RGpERAlIhAJ4kMnyd5FMTUs9Cn4Vq7h9pSh+UOACgk9cw
-eLnKna8CgytIcQ2+jalZA7I=
-=5hcf
------END PGP SIGNATURE-----
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch
+index e0a4037..d3ae75e 100644
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch
+@@ -24,74 +24,68 @@ The build (OpenEmbedded `angstrom-2010.x` for `MACHINE = "beagleboard") fails wi
+         make[1]: *** [Atomics.o] Error 1
+         make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+9a10c48710df79118e39e9b3bb0a15bf1fe694d1/git/xbmc/threads'
+         make: *** [xbmc/threads/threads.a] Error 2
+----
+- xbmc/threads/Atomics.cpp |    8 --------
+- 1 files changed, 0 insertions(+), 8 deletions(-)
+ 
+-diff --git a/xbmc/threads/Atomics.cpp b/xbmc/threads/Atomics.cpp
+-index 5b09f18..0a98a7e 100644
+---- a/xbmc/threads/Atomics.cpp
+-+++ b/xbmc/threads/Atomics.cpp
+-@@ -194,14 +194,12 @@ long AtomicIncrement(volatile long* pAddr)
+- {
++Index: git/xbmc/threads/Atomics.cpp
++===================================================================
++--- git.orig/xbmc/threads/Atomics.cpp
+++++ git/xbmc/threads/Atomics.cpp
++@@ -168,14 +166,12 @@ long AtomicIncrement(volatile long* pAdd
++ #elif defined(__arm__) && !defined(__ARM_ARCH_5__)
+    register long val;
+    asm volatile (
+--                "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+-                 "1:                     \n" 
+-                 "ldrex   %0, [%1]       \n" // (val = *pAddr)
+-                 "add     %0,  #1        \n" // (val += 1)
+-                 "strex   r1,  %0, [%1]	\n"
+-                 "cmp     r1,   #0       \n"
+-                 "bne     1b             \n"
+--                "dmb     ish            \n" // Memory barrier.
+-                 : "=&r" (val)
+-                 : "r"(pAddr)
+-                 : "r1"
+-@@ -273,14 +271,12 @@ long AtomicAdd(volatile long* pAddr, long amount)
+- {
++-    "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
++     "1:                     \n" 
++     "ldrex   %0, [%1]       \n" // (val = *pAddr)
++     "add     %0,  #1        \n" // (val += 1)
++     "strex   r1,  %0, [%1]	\n"
++     "cmp     r1,   #0       \n"
++     "bne     1b             \n"
++-    "dmb     ish            \n" // Memory barrier.
++     : "=&r" (val)
++     : "r"(pAddr)
++     : "r1"
++@@ -246,14 +242,12 @@ long AtomicAdd(volatile long* pAddr, lon
++ #elif defined(__arm__) && !defined(__ARM_ARCH_5__)
+    register long val;
+    asm volatile (
+--                "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+-                 "1:                     \n" 
+-                 "ldrex   %0, [%1]       \n" // (val = *pAddr)
+-                 "add     %0,  %2        \n" // (val += amount)
+-                 "strex   r1,  %0, [%1]	\n"
+-                 "cmp     r1,   #0       \n"
+-                 "bne     1b             \n"
+--                "dmb     ish            \n" // Memory barrier.
+-                 : "=&r" (val)
+-                 : "r"(pAddr), "r"(amount)
+-                 : "r1"
+-@@ -351,14 +347,12 @@ long AtomicDecrement(volatile long* pAddr)
+- {
++-    "dmb      ish           \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
++   "1:                       \n" 
++     "ldrex   %0, [%1]       \n" // (val = *pAddr)
++     "add     %0,  %2        \n" // (val += amount)
++     "strex   r1,  %0, [%1]	\n"
++     "cmp     r1,   #0       \n"
++     "bne     1b             \n"
++-    "dmb     ish            \n" // Memory barrier.
++     : "=&r" (val)
++     : "r"(pAddr), "r"(amount)
++     : "r1"
++@@ -324,14 +318,12 @@ long AtomicDecrement(volatile long* pAdd
++ #elif defined(__arm__)
+    register long val;
+    asm volatile (
+--                "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+-                 "1:                     \n" 
+-                 "ldrex   %0, [%1]       \n" // (val = *pAddr)
+-                 "sub     %0,  #1        \n" // (val -= 1)
+-                 "strex   r1,  %0, [%1]	\n"
+-                 "cmp     r1,   #0       \n"
+-                 "bne     1b             \n"
+--                "dmb     ish            \n" // Memory barrier.
+-                 : "=&r" (val)
+-                 : "r"(pAddr)
+-                 : "r1"
+-@@ -431,14 +425,12 @@ long AtomicSubtract(volatile long* pAddr, long amount)
+- {
++-    "dmb      ish           \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
++     "1:                     \n" 
++     "ldrex   %0, [%1]       \n" // (val = *pAddr)
++     "sub     %0,  #1        \n" // (val -= 1)
++     "strex   r1,  %0, [%1]	\n"
++     "cmp     r1,   #0       \n"
++     "bne     1b             \n"
++-    "dmb     ish            \n" // Memory barrier.
++     : "=&r" (val)
++     : "r"(pAddr)
++     : "r1"
++@@ -403,14 +395,12 @@ long AtomicSubtract(volatile long* pAddr
++ #elif defined(__arm__)
+    register long val;
+    asm volatile (
+--                "dmb     ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+-                 "1:                     \n" 
+-                 "ldrex   %0, [%1]       \n" // (val = *pAddr)
+-                 "sub     %0,  %2        \n" // (val -= amount)
+-                 "strex   r1,  %0, [%1]	\n"
+-                 "cmp     r1,   #0       \n"
+-                 "bne     1b             \n"
+--                "dmb     ish            \n" // Memory barrier.
+-                 : "=&r" (val)
+-                 : "r"(pAddr), "r"(amount)
+-                 : "r1"
+--- 
+-1.7.2.5
+-
++-    "dmb     ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
++     "1:                     \n" 
++     "ldrex   %0, [%1]       \n" // (val = *pAddr)
++     "sub     %0,  %2        \n" // (val -= amount)
++     "strex   r1,  %0, [%1]	\n"
++     "cmp     r1,   #0       \n"
++     "bne     1b             \n"
++-    "dmb     ish            \n" // Memory barrier.
++     : "=&r" (val)
++     : "r"(pAddr), "r"(amount)
++     : "r1"
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch
+index 629017b..f93fa9e 100644
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch
+@@ -16,54 +16,50 @@ The build (OpenEmbedded `angstrom-2010.x` for `MACHINE = "beagleboard") fails wi
+         make[1]: *** [Atomics.o] Error 1
+         make[1]: Leaving directory `/oe/build-angstrom-next/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/xbmc-10.05-r11+gitr0+92bab651e2253d172879995b50985645b77fecd2/git/xbmc/threads'
+         make: *** [xbmc/threads/threads.a] Error 2
+----
+- xbmc/threads/Atomics.cpp |   33 ++++++++++++++++-----------------
+- 1 files changed, 16 insertions(+), 17 deletions(-)
+-
+-diff --git a/xbmc/threads/Atomics.cpp b/xbmc/threads/Atomics.cpp
+-index 0a98a7e..0967eb2 100644
+---- a/xbmc/threads/Atomics.cpp
+-+++ b/xbmc/threads/Atomics.cpp
+-@@ -49,23 +49,22 @@ long cas(volatile long *pAddr, long expectedVal, long swapVal)
+- #elif defined(__arm__)
+- long cas(volatile long* pAddr, long expectedVal, long swapVal)
+- {
++Index: git/xbmc/threads/Atomics.cpp
++===================================================================
++--- git.orig/xbmc/threads/Atomics.cpp
+++++ git/xbmc/threads/Atomics.cpp
++@@ -43,24 +43,24 @@ long cas(volatile long *pAddr, long expe
++     : "cc", "memory");                              /* Clobbers */
++   return prev;
++ 
++-#elif defined(__arm__)
+ -  register long prev;
+ -  asm volatile (
+--                "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+--                "1:                      \n"
+--                "ldrex    %0, [%1]       \n" // Load the current value of *pAddr(%1) into prev (%0) and lock pAddr,
+--                "cmp      %0,  %2        \n" // Verify that the current value (%0) == old value (%2)
+--                "bne      2f             \n" // Bail if the two values are not equal [not as expected]
+--                "strex    r1,  %3, [%1]  \n"
+--                "cmp      r1,  #0        \n"
+--                "bne      1b             \n"
+--                "dmb      ish            \n" // Memory barrier.
+--                "2:                      \n"
+--                : "=&r" (prev)
+--                : "r"(pAddr), "r"(expectedVal),"r"(swapVal)
+--                : "r1"
+--                );
++-    "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
++-    "1:                      \n"
++-    "ldrex    %0, [%1]       \n" // Load the current value of *pAddr(%1) into prev (%0) and lock pAddr,
++-    "cmp      %0,  %2        \n" // Verify that the current value (%0) == old value (%2)
++-    "bne      2f             \n" // Bail if the two values are not equal [not as expected]
++-    "strex    r1,  %3, [%1]  \n"
++-    "cmp      r1,  #0        \n"
++-    "bne      1b             \n"
++-    "dmb      ish            \n" // Memory barrier.
++-    "2:                      \n"
++-    : "=&r" (prev)
++-    : "r"(pAddr), "r"(expectedVal),"r"(swapVal)
++-    : "r1"
++-    );
+ -  return prev;
+-+  return(__sync_val_compare_and_swap(pAddr, expectedVal, swapVal));
+++//#elif defined(__arm__)
+ +//  register long prev;
+ +//  asm volatile (
+-+//                "1:                      \n"
+-+//                "ldrex    %0, [%1]       \n" /* Load the current value of *pAddr(%1) into prev (%0) and lock pAddr,  */
+-+//                "cmp      %0,  %2        \n" /* Verify that the current value (%0) == old value (%2) */
+-+//                "bne      2f             \n" /* Bail if the two values are not equal [not as expected] */
+-+//                "strex    r1,  %3, [%1]  \n"
+-+//                "cmp      r1,  #0        \n"                
+-+//                "bne      1b             \n"
+-+//                "2:                        "
+-+//                : "=&r" (prev)
+-+//                : "r"(pAddr), "r"(expectedVal),"r"(swapVal)
+-+//                : "r1"
+-+//                );
+++//    "dmb      ish            \n" // Memory barrier. Make sure all memory accesses appearing before this complete before any that appear after
+++//    "1:                      \n"
+++//    "ldrex    %0, [%1]       \n" // Load the current value of *pAddr(%1) into prev (%0) and lock pAddr,
+++//    "cmp      %0,  %2        \n" // Verify that the current value (%0) == old value (%2)
+++//    "bne      2f             \n" // Bail if the two values are not equal [not as expected]
+++//    "strex    r1,  %3, [%1]  \n"
+++//    "cmp      r1,  #0        \n"
+++//    "bne      1b             \n"
+++//    "dmb      ish            \n" // Memory barrier.
+++//    "2:                      \n"
+++//    : "=&r" (prev)
+++//    : "r"(pAddr), "r"(expectedVal),"r"(swapVal)
+++//    : "r1"
+++//    );
+ +//  return prev;
+- }
+  
+  #elif defined(__mips__)
+--- 
+-1.7.2.5
+-
++ // TODO:
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
+deleted file mode 100644
+index 345e20e..0000000
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From fd8f73826240aae543a41a2bfeea0056e2fe594d Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Mon, 11 Mar 2013 11:04:29 +0100
+-Subject: [PATCH] configure: cope with ld-is-gold DISTRO_FEATURE
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+-
+-Upstream-Stature: backport
+-
+- configure.in |   12 +++++++-----
+- 1 files changed, 7 insertions(+), 5 deletions(-)
+-
+-diff --git a/configure.in b/configure.in
+-index ef94683..c8b459b 100755
+---- a/configure.in
+-+++ b/configure.in
+-@@ -18,9 +18,14 @@ tolower(){
+- # check for library basenames
+- AC_DEFUN([XB_FIND_SONAME],
+- [
+-+  #set -x
+-   if [[ "$host_vendor" != "apple" ]]; then
+-     AC_MSG_CHECKING([for lib$2 soname])
+-     $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 -Wl,-M 2>/dev/null | grep "^LOAD.*$2" | awk '{V=2; print $V}')
+-+    if [[ -z $$1_FILENAME ]]; then
+-+      #try gold linker syntax
+-+      $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS -l$2 -Wl,-t 3>&1 1>&2 2>&3 | grep "$2")
+-+    fi
+-     if [[ ! -z $$1_FILENAME ]]; then
+-       $1_SONAME=$(objdump -p $$1_FILENAME | grep "SONAME.*$2" | awk '{V=2; print $V}')
+-     fi
+-@@ -55,6 +60,7 @@ AC_DEFUN([XB_FIND_SONAME],
+-     AC_MSG_RESULT([$$1_SONAME])
+-     AC_SUBST($1_SONAME)
+-   fi
+-+  #set +x
+- ])
+- 
+- # Function to push and pop libs and includes for a command
+--- 
+-1.7.7.6
+-
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch b/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
+deleted file mode 100644
+index 5c14059..0000000
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc/configure.in-Avoid-running-code.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From cfd851660a594801a591e80dc820c65cb7bd7836 Mon Sep 17 00:00:00 2001
+-From: Otavio Salvador <otavio@ossystems.com.br>
+-Date: Sat, 6 Oct 2012 06:40:03 -0300
+-Subject: [PATCH] configure.in: Avoid running code or we break cross-compile
+-
+-Upstream-Status: Backport [similar change done for 12.0]
+-
+-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+----
+- configure.in |    6 +-----
+- 1 files changed, 1 insertions(+), 5 deletions(-)
+-
+-diff --git a/configure.in b/configure.in
+-index ef94683..d7efcb0 100755
+---- a/configure.in
+-+++ b/configure.in
+-@@ -1246,11 +1246,7 @@ if test "$use_external_ffmpeg" = "yes"; then
+-   AC_DEFINE([USE_EXTERNAL_FFMPEG], [1], [Whether to use external FFmpeg libraries.])
+- 
+-   # Disable vdpau support if external libavcodec doesn't have it
+--  AC_RUN_IFELSE(
+--    AC_LANG_PROGRAM([[#include <libavcodec/avcodec.h>]],
+--      [[avcodec_register_all();
+--        AVCodec *codec = avcodec_find_decoder_by_name("vc1_vdpau");
+--        return (codec) ? 0 : 1;]]),,
+-+  AC_CHECK_LIB([avcodec], [ff_vdpau_vc1_decode_picture],,
+-     [if test "x$use_vdpau" = "xyes"; then
+-       AC_MSG_ERROR($ffmpeg_vdpau_not_supported)
+-     else
+--- 
+-1.7.2.5
+-
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.2.bb
+similarity index 75%
+rename from meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+rename to meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.2.bb
+index 2316fb7..54c70eb 100644
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.2.bb
+@@ -3,20 +3,14 @@ DESCRIPTION = "XBMC Media Center"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
+ 
+-DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml libmad"
++DEPENDS = "libusb1 libcec expat yajl gperf-native libxmu fribidi mpeg2dec samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 jasper zip-native zlib libtinyxml libmad taglib"
+ #require recipes/egl/egl.inc
+ 
+-
+-SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
+-
+-PV = "11.0+gitr${SRCPV}"
+-PR = "r14"
+-SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden \
++SRCREV = "32b1a5ef9e7f257a2559a3b766e85a55b22aec5f"
++SRC_URI = "git://github.com/xbmc/xbmc.git;branch=frodo \
+            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
+            file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \
+            file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \
+-           file://0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch \
+-           file://configure.in-Avoid-running-code.patch \
+ "
+ 
+ inherit autotools gettext python-dir
+@@ -30,18 +24,20 @@ CACHED_CONFIGUREVARS += " \
+     ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
+ "
+ 
+-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
++PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)} sdl airplay ssh"
+ PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
+ PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
++PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,libsdl-mixer libsdl-image"
++PACKAGECONFIG[airplay] = "--enable-airplay,--disable-airplay,libplist"
++PACKAGECONFIG[ssh] = "--enable-ssh,--disable-ssh,libssh"
+ 
+ EXTRA_OECONF = " \
+-    --disable-rpath \
+     --enable-libusb \
+-    --enable-airplay \
+     --disable-optical-drive \
+     --enable-external-libraries \
+-    ${@base_contains('DISTRO_FEATURES', 'opengl', '--enable-gl', '--enable-gles', d)} \
+-"
++    --disable-external-ffmpeg \
++    --with-arch=${TARGET_ARCH} \
++    "
+ 
+ FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
+ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+-- 
+1.8.1.4
 
 
