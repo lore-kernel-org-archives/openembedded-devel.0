@@ -1,35 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
-	[209.85.214.179])
-	by mail.openembedded.org (Postfix) with ESMTP id AEE5A6D990
+Return-Path: <eu@felipetonello.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0035C6E242
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2013 00:45:23 +0000 (UTC)
-Received: by mail-ob0-f179.google.com with SMTP id wm4so4595032obc.24
+	Tue, 10 Dec 2013 01:15:46 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id hn9so4622247wib.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2013 16:45:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=hAB/pdBgHvQ0uH4SfaMVmgIigSNYm4H6EZJA++hV78U=;
-	b=LVAOzoqfFI4s2l/U09XiT2sObE3zAT1YVgC2ZmdjW4A4P48aBM6lf2Wx9OPUKFOYMM
-	yonxOWC0R0ReOnXIY+cp+SiqwjS1Tp+OCH875SglSlnixeDF53GUETj5UbAyCy/xaNrg
-	xvMUT3ID2P8XWEBb7GMIX/PtxPJS1oAIi049C5o8D9hJvd4ReshmUCs8Uboq56S/Z7Nu
-	LeNzim62ZE+gjvcXX8JBLWrZGpGTVO72TrPLmfacEbWQYo4NoOpx+QGmFpx6AVvJgq1k
-	pHsohd53V43/PjSvLtWRyeFSxBBuHL/4vXNy57hK7CrN6IujjYk9npZb+iHx9r1dWZLA
-	1g6A==
+	Mon, 09 Dec 2013 17:15:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=ASLX2qvu377EXjFno2rYi+9ecE8YCNjAl0S2AXc9pRw=;
+	b=SxK+kM8xLNVeuaUXTJPLrYY1nihmjiZdsMEseZkK+h2+SdT8IVG6f/Y7X+LBqwVYH1
+	4lALkKSIajDtN+Uw4b7NJy9diqB2ljNjkjULnI2XJXJCF00IIyn0AMZ0vledFz/PcZev
+	sGXS05EauRYYV5VcIzSfkpYMVo6EzGGEiVCNH0QSnjNQVrIHjWegjZFemkqP2NYEhahp
+	biNLiuFfG2T5fZmZ5863ALgiZrrSV7QYK3ucKSK7J7gAztiK16W6/Vv6Y8KbOEuA8MQn
+	kVbLk8a9ZvCBFg1+0TKVJlYXn/eyLhq6rgAiyt+QLE3hzHxfrC6A3+vDkFOXJd3h1LPs
+	TFhQ==
+X-Gm-Message-State: ALoCoQkiuhHhJtws0Kv8nMj8Me8c0YnYIljzqrC26L+0bkqJEY/E6MpLNs3a6MyUy6WNK4WaqZxg
 MIME-Version: 1.0
-X-Received: by 10.60.165.2 with SMTP id yu2mr938497oeb.78.1386636322683; Mon,
-	09 Dec 2013 16:45:22 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Mon, 9 Dec 2013 16:45:22 -0800 (PST)
-In-Reply-To: <20131209192301.GA524@windriver.com>
-References: <20131209192301.GA524@windriver.com>
-Date: Mon, 9 Dec 2013 22:45:22 -0200
-X-Google-Sender-Auth: 1qLttsVvh0LPwb7uztS8oRIfIiQ
-Message-ID: <CAP9ODKroiJuuJXqfPVAsnOLzY-dXct4DHWB0mTpL19gcidMWpg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] Uprev classpath-initial and jamvm-initial
+X-Received: by 10.194.20.202 with SMTP id p10mr45204223wje.39.1386638145675;
+	Mon, 09 Dec 2013 17:15:45 -0800 (PST)
+Received: by 10.194.240.201 with HTTP; Mon, 9 Dec 2013 17:15:45 -0800 (PST)
+In-Reply-To: <l777t2$pcq$1@ger.gmane.org>
+References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>
+	<14902072.IG3b8o4YqW@helios> <l77732$ggi$1@ger.gmane.org>
+	<1825979.KGUos5WM3r@helios> <l777t2$pcq$1@ger.gmane.org>
+Date: Mon, 9 Dec 2013 17:15:45 -0800
+Message-ID: <CAGrhNMxmYUKdgcH9kgSxqkF8nDqNrEpxZbqm9WewDem5zkAtSQ@mail.gmail.com>
+From: Felipe Tonello <eu@felipetonello.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] packagekit: Updated to 0.8.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,23 +45,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2013 00:45:26 -0000
+X-List-Received-Date: Tue, 10 Dec 2013 01:15:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Dec 9, 2013 at 5:23 PM, Amy Fong <amy.fong@windriver.com> wrote:
-> Note:
-> 1. the segfaults were regularly observed when using gcc versions 4.8.*
-> 2. precompiled glibj.zip not attached to message (too big: 9.5M in size).
+I just found a typo in the patch, I will have to fix it.
 
-...
-> diff --git a/recipes-core/classpath/classpath-0.98/glibj.zip b/recipes-core/classpath/classpath-0.98/glibj.zip
-...
-
-NACK! Store this file somewhere else, not in the repository. This is
-not need and will make it bigger for no good reason.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Felipe
 
