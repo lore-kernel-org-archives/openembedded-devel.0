@@ -1,37 +1,28 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 207B9608BE
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 55BF26DC90
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2013 09:26:06 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VqJZt-0008Qf-9Y for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Dec 2013 10:26:05 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2013 10:26:05 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 10 Dec 2013 09:34:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id rBA9YGkU029922
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2013 10:26:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 10 Dec 2013 10:26:28 +0100
-Message-ID: <l86mmo$28c$1@ger.gmane.org>
-References: <1385600219-18495-1-git-send-email-eu@felipetonello.com>	<14902072.IG3b8o4YqW@helios>
-	<l77732$ggi$1@ger.gmane.org>	<1825979.KGUos5WM3r@helios>
-	<l777t2$pcq$1@ger.gmane.org>
-	<CAGrhNMxYxbA-dL0iQFB_mD-s94nrKupCx-vJaijp=sPy5herwQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-In-Reply-To: <CAGrhNMxYxbA-dL0iQFB_mD-s94nrKupCx-vJaijp=sPy5herwQ@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH] packagekit: Updated to 0.8.13
+	Tue, 10 Dec 2013 01:34:16 -0800 (PST)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.2.347.0;
+	Tue, 10 Dec 2013 01:34:15 -0800
+Message-ID: <52A6E00D.5080306@windriver.com>
+Date: Tue, 10 Dec 2013 17:34:05 +0800
+From: Lu Chong <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1386664325-15756-1-git-send-email-Chong.Lu@windriver.com>
+In-Reply-To: <1386664325-15756-1-git-send-email-Chong.Lu@windriver.com>
+X-Originating-IP: [128.224.162.204]
+Subject: Re: [PATCH meta-networking] modphp: enable endian check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +36,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2013 09:26:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Dec 2013 09:34:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Please ignore this one. I will resend.
 
-Felipe Tonello schreef op 10-12-13 02:17:
+Best Regards
+Chong
 
-> It does split into packages. I splited it up in packages just so if the
-> user wants to have different backend options, it can.
-> 
-> The problem with this aproach, is that you will add the apt and opkg 
-> dependency to the build even if the user doesn't care about it. I don't
-> like this option to be honest.
-
-It's only 2 small build time dependencies saving a lot of rebuilding and
-runtime headaches.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSpt5EMkyGM64RGpERAuUXAKClv7R7D5BQ2HAHq/izXFFasdIgTwCgmxGS
-ABJMGP0RcNAnlQNUb24eXds=
-=Dzav
------END PGP SIGNATURE-----
+On 12/10/2013 04:32 PM, Chong.Lu@windriver.com wrote:
+> From: Chong Lu <Chong.Lu@windriver.com>
+>
+> Previously, modphp estimates endian on host rather than checks it on
+> target. If the host is little-endian and the target is big-endian,
+> modphp claims that endian is little. As a result, a memory location
+> that it is not allowed to access when calling libphp5.so module on
+> target. It will occur segmentation fault.
+> This patch enables endian check support for modphp.
+>
+> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ---
+>   recipes-php/modphp/modphp5.inc |    2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/recipes-php/modphp/modphp5.inc b/recipes-php/modphp/modphp5.inc
+> index 19f1be9..425faa2 100644
+> --- a/recipes-php/modphp/modphp5.inc
+> +++ b/recipes-php/modphp/modphp5.inc
+> @@ -44,6 +44,8 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
+>                   --enable-mbstring \
+>                   --with-config-file-path=${sysconfdir}/php/apache2-php5"
+>   
+> +EXTRA_OECONF += "${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)}"
+> +
+>   PACKAGECONFIG ??= "mysql"
+>   PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5"
+>   PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,mysql5"
 
 
