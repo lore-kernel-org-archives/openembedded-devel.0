@@ -1,26 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BD766C732
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2013 12:18:46 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 12 Dec 2013 04:18:45 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.93,877,1378882800"; d="scan'208";a="448909605"
-Received: from mmckenna-mobl1.ger.corp.intel.com (HELO helios.localnet)
-	([10.252.121.252])
-	by fmsmga002.fm.intel.com with ESMTP; 12 Dec 2013 04:18:45 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Chong.Lu@windriver.com
-Date: Thu, 12 Dec 2013 12:18:43 +0000
-Message-ID: <3205539.QQKxxM1edb@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <1386669781-26578-1-git-send-email-Chong.Lu@windriver.com>
-References: <1386669781-26578-1-git-send-email-Chong.Lu@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH meta-webserver] modphp: enable endian check
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 35EF96E309
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Dec 2013 13:39:31 +0000 (UTC)
+Received: by mail-qc0-f175.google.com with SMTP id e9so290423qcy.34
+	for <openembedded-devel@openembedded.org>;
+	Thu, 12 Dec 2013 05:39:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=9EK5tE6WWRc96ecKvamB0kaGKRfL19hJ9setjo78ays=;
+	b=vvgW1Y+FNqJguyxKrxgiKczavNfU3AFhsAKnAxFVWpXX4yeI7UtGyeNoO4cUQ2YTZ3
+	6GJY6kmBO/iAro75pVQf4EaroFWTlQ6nMuOHB5khYYfEy9Tyjs4+UCVuaXiM/jX5o31c
+	lAS+A7WE9E2CLqo+aBaXwgDU5+J0ikA60VjDJIItw7PNEX5JbPZooSgvAOr21OtgSDdm
+	pCiRGSuN3NxSpFfYF0+FfMSZzp5PM2pnab0GZPXBCCprv1a0dpm0pHGBH6F8B03AdXci
+	lisMY3+g2qhjCUC02CbSRUj4BmbMWe6bdQSGeCT/ixcVNU9L97K2XIWMpK1dXQ70rIaa
+	3ecg==
+X-Received: by 10.49.81.206 with SMTP id c14mr13189119qey.79.1386855570289;
+	Thu, 12 Dec 2013 05:39:30 -0800 (PST)
+Received: from localhost.localdomain
+	(pool-108-44-82-190.ronkva.east.verizon.net. [108.44.82.190])
+	by mx.google.com with ESMTPSA id o10sm71578825qaa.6.2013.12.12.05.39.29
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Dec 2013 05:39:29 -0800 (PST)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@openembedded.org
+Date: Thu, 12 Dec 2013 08:39:26 -0500
+Message-Id: <1386855566-11059-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-oe][PATCHv2] mcpp : Add recipe. mcpp is a c/c++ preprocessor.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +44,255 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2013 12:18:46 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 12 Dec 2013 13:39:32 -0000
 
-Hi Chong,
+Includes a patch from Zeroc to help with ice builds.
 
-On Tuesday 10 December 2013 18:03:01 Chong.Lu@windriver.com wrote:
-> From: Chong Lu <Chong.Lu@windriver.com>
-> 
-> Previously, modphp estimates endian on host rather than checks it on
-> target. If the host is little-endian and the target is big-endian,
-> modphp claims that endian is little. As a result, a memory location
-> that it is not allowed to access when calling libphp5.so module on
-> target. It will occur segmentation fault.
-> This patch enables endian check support for modphp.
-> 
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch | 208 +++++++++++++++++++++
+ meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb        |  16 ++
+ 2 files changed, 224 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch
+ create mode 100644 meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
 
-Merged, with a minor tweak to add the value to the end of the existing 
-EXTRA_OECONF value rather than using +=. Thanks!
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch b/meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch
+new file mode 100644
+index 0000000..8103cf0
+--- /dev/null
++++ b/meta-oe/recipes-devtools/mcpp/files/ice-mcpp.patch
+@@ -0,0 +1,208 @@
++diff -r -c -N ../mcpp-2.7.2-old/noconfig/vc2010.dif ./noconfig/vc2010.dif
++*** ../mcpp-2.7.2-old/noconfig/vc2010.dif	Wed Dec 31 20:30:00 1969
++--- ./noconfig/vc2010.dif	Fri May 14 12:47:22 2010
++***************
++*** 0 ****
++--- 1,67 ----
+++ *** noconfig.H	Thu Sep 25 15:34:56 2008
+++ --- noconfig.H.vc2005	Thu Sep 25 17:23:49 2008
+++ ***************
+++ *** 15,21 ****
+++    */
+++   
+++   /* Define target operating-system.  */
+++ ! #define SYSTEM              SYS_FREEBSD
+++   
+++   /* Define target compiler.          */
+++   #ifndef COMPILER
+++ --- 15,21 ----
+++    */
+++   
+++   /* Define target operating-system.  */
+++ ! #define SYSTEM              SYS_WIN32
+++   
+++   /* Define target compiler.          */
+++   #ifndef COMPILER
+++ ***************
+++ *** 26,36 ****
+++   #define HOST_SYSTEM         SYSTEM
+++   
+++   /* Define host compiler.            */
+++ ! #define HOST_COMPILER       GNUC
+++   
+++   /* Version message.                 */
+++   /* "MCPP V.2.* (200y/mm) compiled by " precedes VERSION_MSG */
+++ ! #define VERSION_MSG         "GCC 3.4"
+++   #if     0
+++       "LCC-Win32 2006-03"
+++       "Visual C 2005"
+++ --- 26,36 ----
+++   #define HOST_SYSTEM         SYSTEM
+++   
+++   /* Define host compiler.            */
+++ ! #define HOST_COMPILER       MSC
+++   
+++   /* Version message.                 */
+++   /* "MCPP V.2.* (200y/mm) compiled by " precedes VERSION_MSG */
+++ ! #define VERSION_MSG         "Visual C 2010"
+++   #if     0
+++       "LCC-Win32 2006-03"
+++       "Visual C 2005"
+++ ***************
+++ *** 212,221 ****
+++   #define ONE_PASS            TRUE
+++   #endif
+++   #define COMPILER_EXT        "_MSC_VER"
+++ ! #define COMPILER_EXT_VAL    "1500"      /* VC 6.0: "1200"   */
+++       /* VC 2002: "1300", VC 2003: "1310", VC 2005: "1400", VC 2008: "1500"   */
+++   #define COMPILER_EXT2       "_MSC_FULL_VER"
+++ ! #define COMPILER_EXT2_VAL   "150021022" /* VC 6.0: "12008804"       */
+++       /* VC 2002: "13009466", VC 2003: "13103077", VC 2005: "140050320"       */
+++       /* VC 2008: "150021022" */
+++   #define COMPILER_SP1        "_MSC_EXTENSIONS"
+++ --- 212,221 ----
+++   #define ONE_PASS            TRUE
+++   #endif
+++   #define COMPILER_EXT        "_MSC_VER"
+++ ! #define COMPILER_EXT_VAL    "1600"      /* VC 6.0: "1200"   */
+++       /* VC 2002: "1300", VC 2003: "1310", VC 2005: "1400", VC 2008: "1500"   */
+++   #define COMPILER_EXT2       "_MSC_FULL_VER"
+++ ! #define COMPILER_EXT2_VAL   "160030319" /* VC 6.0: "12008804"       */
+++       /* VC 2002: "13009466", VC 2003: "13103077", VC 2005: "140050320"       */
+++       /* VC 2008: "150021022" */
+++   #define COMPILER_SP1        "_MSC_EXTENSIONS"
++diff -r -c -N ../mcpp-2.7.2-old/src/internal.H ./src/internal.H
++*** ../mcpp-2.7.2-old/src/internal.H	Wed Aug 27 10:31:16 2008
++--- ./src/internal.H	Fri May 14 12:40:56 2010
++***************
++*** 390,395 ****
++--- 390,397 ----
++  extern char     identifier[];       /* Lastly scanned name          */
++  extern IFINFO   ifstack[];          /* Information of #if nesting   */
++  extern char     work_buf[];
+++ extern FILEINFO * sh_file;
+++ extern int      sh_line;
++          /* Temporary buffer for directive line and macro expansion  */
++  
++  /* main.c   */
++***************
++*** 557,562 ****
++  #endif
++  #endif
++  
++! #if HOST_HAVE_STPCPY
++  extern char *   stpcpy( char * dest, const char * src);
++  #endif
++--- 559,564 ----
++  #endif
++  #endif
++  
++! #if HOST_HAVE_STPCPY && !defined(stpcpy)
++  extern char *   stpcpy( char * dest, const char * src);
++  #endif
++diff -r -c -N ../mcpp-2.7.2-old/src/main.c ./src/main.c
++*** ../mcpp-2.7.2-old/src/main.c	Wed Nov  5 05:04:46 2008
++--- ./src/main.c	Fri May 14 12:40:56 2010
++***************
++*** 326,331 ****
++--- 326,333 ----
++              = FALSE;
++      option_flags.trig = TRIGRAPHS_INIT;
++      option_flags.dig = DIGRAPHS_INIT;
+++     sh_file = NULL;
+++     sh_line = 0;
++  }
++  
++  int     mcpp_lib_main
++diff -r -c -N ../mcpp-2.7.2-old/src/support.c ./src/support.c
++*** ../mcpp-2.7.2-old/src/support.c	Tue Jun 10 06:02:33 2008
++--- ./src/support.c	Fri May 14 12:40:56 2010
++***************
++*** 188,194 ****
++      size_t      length
++  )
++  {
++!     if (mem_buf_p->bytes_avail < length) {  /* Need to allocate more memory */
++          size_t size = MAX( BUF_INCR_SIZE, length);
++  
++          if (mem_buf_p->buffer == NULL) {            /* 1st append   */
++--- 188,194 ----
++      size_t      length
++  )
++  {
++!     if (mem_buf_p->bytes_avail < length + 1) {  /* Need to allocate more memory */
++          size_t size = MAX( BUF_INCR_SIZE, length);
++  
++          if (mem_buf_p->buffer == NULL) {            /* 1st append   */
++***************
++*** 1722,1727 ****
++--- 1722,1729 ----
++                      sp -= 2;
++                      while (*sp != '\n')     /* Until end of line    */
++                          mcpp_fputc( *sp++, OUT);
+++                     mcpp_fputc( '\n', OUT);
+++                     wrong_line = TRUE;
++                  }
++                  goto  end_line;
++              default:                        /* Not a comment        */
++diff -r -c -N ../mcpp-2.7.2-old/src/system.c ./src/system.c
++*** ../mcpp-2.7.2-old/src/system.c      2008-11-26 10:53:51.000000000 +0100
++--- ./src/system.c      2011-02-21 16:18:05.678058106 +0100
++***************
++*** 3534,3539 ****
++--- 3534,3565 ----
++      FILEINFO *      file;
++      const char *    too_many_include_nest =
++              "More than %.0s%ld nesting of #include";    /* _F_ _W4_ */
+++             
+++     //
+++     // When encoding is UTF-8, skip BOM if present.
+++     //
+++     if(mbchar == UTF8 && fp != NULL && ftell(fp) == 0)
+++     {
+++         const unsigned char UTF8_BOM[3] = {0xEF, 0xBB, 0xBF};
+++         unsigned char FILE_HEAD[3] = {0, 0, 0};
+++         int i;
+++         for(i = 0; i < 3; ++i)
+++         {
+++             FILE_HEAD[i] = getc(fp);
+++             if(FILE_HEAD[i] != UTF8_BOM[i])
+++             {
+++                 if(FILE_HEAD[i] == (unsigned char)EOF)
+++                 {
+++                     i--;
+++                 }
+++                 for(; i >= 0; --i)
+++                 {
+++                     ungetc(FILE_HEAD[i], fp);
+++                 }
+++                 break;
+++             }
+++         }
+++     }
++  
++      filename = set_fname( filename);    /* Search or append to fnamelist[]  */
++      fullname = set_fname( fullname);    /* Search or append to fnamelist[]  */
++***************
++*** 3858,3863 ****
++--- 3884,3892 ----
++  }
++  #endif
++  
+++ FILEINFO*       sh_file;
+++ int             sh_line;
+++ 
++  void    sharp(
++      FILEINFO *  sharp_file,
++      int         flag        /* Flag to append to the line for GCC   */
++***************
++*** 3868,3875 ****
++   * else (i.e. 'sharp_file' is NULL) 'infile'.
++   */
++  {
++-     static FILEINFO *   sh_file;
++-     static int  sh_line;
++      FILEINFO *  file;
++      int         line;
++  
++--- 3897,3902 ----
+diff --git a/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb b/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
+new file mode 100644
+index 0000000..a7163a3
+--- /dev/null
++++ b/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "MCPP is a portable C/C++ preprocessor"
++HOMEPAGE = "http://mcpp.sourceforge.net/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5ca370b75ec890321888a00cea9bc1d5"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
++           file://ice-mcpp.patch "
++SRC_URI[md5sum] = "512de48c87ab023a69250edc7a0c7b05"
++SRC_URI[sha256sum] = "3b9b4421888519876c4fc68ade324a3bbd81ceeb7092ecdbbc2055099fcb8864"
++
++inherit autotools
++
++EXTRA_OECONF = " --enable-mcpplib "
++
++BBCLASSEXTEND = "native nativesdk"
++
 -- 
+1.8.3.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
