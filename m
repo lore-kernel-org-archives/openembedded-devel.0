@@ -1,34 +1,26 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 96CCC6BEFB
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BD766C732
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2013 11:12:03 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Vr4BR-0001Mr-N1 for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Dec 2013 12:11:57 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2013 12:11:57 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2013 12:11:57 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 12 Dec 2013 12:12:13 +0100
-Message-ID: <l8c5l6$shd$1@ger.gmane.org>
-References: <1386792469-1451-1-git-send-email-philip@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
-In-Reply-To: <1386792469-1451-1-git-send-email-philip@balister.org>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH] mcpp : Add recipe. mcpp is a c/c++ preprocessor.
+	Thu, 12 Dec 2013 12:18:46 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 12 Dec 2013 04:18:45 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.93,877,1378882800"; d="scan'208";a="448909605"
+Received: from mmckenna-mobl1.ger.corp.intel.com (HELO helios.localnet)
+	([10.252.121.252])
+	by fmsmga002.fm.intel.com with ESMTP; 12 Dec 2013 04:18:45 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Chong.Lu@windriver.com
+Date: Thu, 12 Dec 2013 12:18:43 +0000
+Message-ID: <3205539.QQKxxM1edb@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1386669781-26578-1-git-send-email-Chong.Lu@windriver.com>
+References: <1386669781-26578-1-git-send-email-Chong.Lu@windriver.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH meta-webserver] modphp: enable endian check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,52 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2013 11:12:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Dec 2013 12:18:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Chong,
 
-Philip Balister schreef op 11-12-13 21:07:
-> Includes a patch from Zeroc to help with ice builds.
+On Tuesday 10 December 2013 18:03:01 Chong.Lu@windriver.com wrote:
+> From: Chong Lu <Chong.Lu@windriver.com>
 > 
-> Signed-off-by: Philip Balister <philip@balister.org> ---
-e/recipes-devtools/mcpp/mcpp_2.7.2.bb
-b/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb
-> new file mode 100644 index 0000000..6a635c5 --- /dev/null +++
-> b/meta-oe/recipes-devtools/mcpp/mcpp_2.7.2.bb @@ -0,0 +1,19 @@ 
-> +DESCRIPTION = "MCPP is a portable C/C++ preprocessor"
-
-S/DESCRIPTION/SUMMARY/
-
-> +HOMEPAGE = "http://mcpp.sourceforge.net/" +LICENSE = "BSD"
-
-LIC_FILES_CHKSUM goes here
-
-> + +SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \ +
-> file://ice-mcpp.patch "
-
-SRC_URI sums go here
-
-> + +inherit autotools + +EXTRA_OECONF = " --enable-mcpplib " + 
-> +BBCLASSEXTEND = "native nativesdk"
-
-Delete everything below here
-
-> + + +LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=5ca370b75ec890321888a00cea9bc1d5" + + 
-> +SRC_URI[md5sum] = "512de48c87ab023a69250edc7a0c7b05" +SRC_URI[sha256sum]
-> = "3b9b4421888519876c4fc68ade324a3bbd81ceeb7092ecdbbc2055099fcb8864"
+> Previously, modphp estimates endian on host rather than checks it on
+> target. If the host is little-endian and the target is big-endian,
+> modphp claims that endian is little. As a result, a memory location
+> that it is not allowed to access when calling libphp5.so module on
+> target. It will occur segmentation fault.
+> This patch enables endian check support for modphp.
 > 
+> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Merged, with a minor tweak to add the value to the end of the existing 
+EXTRA_OECONF value rather than using +=. Thanks!
 
-iD8DBQFSqZoNMkyGM64RGpERAkEmAJ95ZnPmjoXWeOY6RUV38Ef0WEQXZQCeN3ld
-9YrSiUGZMnDs3qx1COBxhs8=
-=XNJE
------END PGP SIGNATURE-----
+Cheers,
+Paul
 
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
