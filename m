@@ -1,37 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id A44216BA1D;
-	Fri, 13 Dec 2013 15:40:28 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id o10so962025eaj.4
-	for <multiple recipients>; Fri, 13 Dec 2013 07:40:27 -0800 (PST)
+Return-Path: <kergoth@gmail.com>
+Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
+	[209.85.160.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 04894610DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Dec 2013 16:08:42 +0000 (UTC)
+Received: by mail-pb0-f49.google.com with SMTP id jt11so2754087pbb.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Dec 2013 08:08:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=wzjA75DwzwVcyG6A9BeIYg51AsJ7+dADzIjROkjNcbo=;
-	b=VLntxe2Q7EDVWKibImdqDMutxLIUyxxcExG5c4snNZZYzHRZK9/ArWtVoZvIGUpHsm
-	79iB0otp+0uDZO6yu112tP9CtWnTb2x4k1lrbRaByEkQYmdYcNkPEWaYXqb8bK/m1H3k
-	fNbkhW2FUbftWW0pQL280mf6RuPagvRiy3FiIO8A0RbR4lLwj9vmcegdJzuuYMnXnKxv
-	oD+kt+MUCeLz0FcCTciyZ6zEPMnREbVTBLT4msE9NoqKjZ4KOK2N+Aa/jv7U/Tc2EMr2
-	Vk21ui+jkCDzKBzMNQOTGXevd4ExZRHYar27HyT4iaaWbakAMr1bLFbH7/4DM0/Wf3kR
-	LtCQ==
-X-Received: by 10.15.63.77 with SMTP id l53mr3547170eex.89.1386949227729;
-	Fri, 13 Dec 2013 07:40:27 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id a51sm8036401eeh.8.2013.12.13.07.40.26
+	h=from:to:cc:subject:date:message-id;
+	bh=06N5Ncywia2c8bqAwkTdIo6wOwhcrgXdH4z+Ofs/vQo=;
+	b=ROs6+2jV5lXBKVYdMXWkLq8KNB99z4PxnVLJUSjCnwVHDpv1QwNPPhRTod/sGeCw7Z
+	7PGfAaMY4IwDbSIOlbJW9f4NL9onWleorJGe2Cun5elpsAje4AIzywd0zNwAOEfPDKys
+	xPHCkI2rsONQpsc3wapzgGCLWwKYhyx0ArmNl6vKgcE7eBHpQwAW8TxrWcuWWLHiPI0P
+	vQRkhEIMbqH4KD3/L1jaoInVWwpVDxZIMCnKXrM2oywP5sxeRLdzw0W4oeYSFsNojm+O
+	8MfW204Rtvdx9kAJGTNRVDzk5BqCxGmrfBjWYMZBvYE4fdQq1Y7+ouLYrGa6aClZLjPE
+	eStA==
+X-Received: by 10.68.194.71 with SMTP id hu7mr4269634pbc.68.1386950921663;
+	Fri, 13 Dec 2013 08:08:41 -0800 (PST)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by mx.google.com with ESMTPSA id bp5sm5882411pbb.18.2013.12.13.08.08.39
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 13 Dec 2013 07:40:26 -0800 (PST)
-Date: Fri, 13 Dec 2013 16:40:51 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core@lists.openembedded.org
-Message-ID: <20131213154051.GD3715@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: State of bitbake world, Failed tasks Fri Dec 13
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 13 Dec 2013 08:08:40 -0800 (PST)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Dec 2013 09:08:25 -0700
+Message-Id: <1386950905-25658-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 1.8.3.4
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH] postgresql: apply upstream parallel make fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,132 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Dec 2013 15:40:29 -0000
-X-Groupsio-MsgNum: 47457
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VMt1DrMGOVs3KQwf"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Dec 2013 16:08:43 -0000
 
---VMt1DrMGOVs3KQwf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reported-by: Drew Moseley <drew_moseley@mentor.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ .../postgresql-9.2.4/ecpg-parallel-make-fix.patch  | 31 ++++++++++++++++++++++
+ .../recipes-support/postgresql/postgresql_9.2.4.bb |  5 +++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+diff --git a/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
+new file mode 100644
+index 0000000..63615cd
+--- /dev/null
++++ b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
+@@ -0,0 +1,31 @@
++Upstream-status: backport
++
++From 602070f9cce790debd8d1469254e7726ab499ae7 Mon Sep 17 00:00:00 2001
++From: Peter Eisentraut <peter_e@gmx.net>
++Date: Fri, 29 Mar 2013 21:39:55 -0400
++Subject: [PATCH] ecpg: Parallel make fix
++
++In some parallel make situations, the install-headers target could be
++called before the installation directories are created by installdirs,
++causing the installation to fail.  Fix that by making install-headers
++depend on installdirs.
++---
++ src/interfaces/ecpg/include/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/interfaces/ecpg/include/Makefile b/src/interfaces/ecpg/include/Makefile
++index eab833b..e92e56f 100644
++--- a/src/interfaces/ecpg/include/Makefile
+++++ b/src/interfaces/ecpg/include/Makefile
++@@ -18,7 +18,7 @@ ecpg_headers = ecpgerrno.h ecpglib.h ecpgtype.h sqlca.h sql3types.h ecpg_informi
++ 	sqlda.h sqlda-compat.h sqlda-native.h
++ informix_headers = datetime.h decimal.h sqltypes.h
++ 
++-install-headers: $(ecpg_headers) $(informix_headers)
+++install-headers: $(ecpg_headers) $(informix_headers) installdirs
++ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(ecpg_headers)) '$(DESTDIR)$(includedir)/'
++ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(informix_headers)) '$(DESTDIR)$(informix_esql_dir)/'
++ 	$(INSTALL_DATA) $(ecpg_config_h) '$(DESTDIR)$(includedir)'
++-- 
++1.8.3.4
++
+diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
+index 59665da..49ca53f 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
++++ b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
+@@ -4,7 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ab55a5887d3f8ba77d0fd7db787e4bab"
+ 
+ PR = "${INC_PR}.0"
+ 
+-SRC_URI += "file://remove.autoconf.version.check.patch"
++SRC_URI += "\
++    file://remove.autoconf.version.check.patch \
++    file://ecpg-parallel-make-fix.patch \
++"
+ 
+ SRC_URI[md5sum] = "6ee5bb53b97da7c6ad9cb0825d3300dd"
+ SRC_URI[sha256sum] = "d97dd918a88a4449225998f46aafa85216a3f89163a3411830d6890507ffae93"
+-- 
+1.8.3.4
 
-=3D=3D Failed tasks Fri Dec 13 15:36:19 UTC 2013 =3D=3D
 
-=3D=3D=3D common (26) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/efl/evas_1.7.9.bb, do_compile
-    * meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/smbne=
-tfs_git.bb, do_packagedata
-    * meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-data-server_=
-git.bb, do_fetch
-    * meta-openembedded/meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.7=
-=2Ebb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git=
-=2Ebb, do_install
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
-b, do_fetch
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
-b, do_compile
-    * meta-openembedded/meta-networking/recipes-connectivity/inetutils/inet=
-utils_1.9.1.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_f=
-etch
-    * meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.8.=
-13.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-    * meta-openembedded/meta-oe/recipes-graphics/gimp/gimp_2.8.2.bb, do_com=
-pile
-    * meta-openembedded/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb, do_=
-fetch
-    * meta-openembedded/meta-oe/recipes-kernel/ktap/ktap_0.3.bb, do_fetch
-    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
-configure
-    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-navigation/navit/navit_svn.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman-e_git.bb, do_f=
-etch
-    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman_git.bb, do_fet=
-ch
-    * meta-openembedded/meta-oe/recipes-qt/qtserialport/qtserialport-e_5.1.=
-0.bb, do_fetch
-    * meta-openembedded/meta-oe/recipes-support/freerdp/freerdp_git.bb, do_=
-fetch
-    * meta-openembedded/meta-webserver/recipes-webadmin/ajenti/ajenti_git.b=
-b, do_fetch
-    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
-    * openembedded-core/meta/recipes-devtools/python/python-imaging_1.1.7.b=
-b, do_compile
-    * openembedded-core/meta/recipes-support/ca-certificates/ca-certificate=
-s_20130610.bb, do_packagedata
-
-=3D=3D=3D common-x86 (6) =3D=3D=3D
-    * meta-browser/recipes-devtools/ninja/ninja-native_1.4.0.bb, do_fetch
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexecbo=
-ot-klibc-image.bb, do_rootfs
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-
-=3D=3D=3D qemuarm (6) =3D=3D=3D
-    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
-bb, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_i=
-nstall
-    * meta-qt5/recipes-qt/qt5/qtconnectivity_git.bb, do_fetch
-    * meta-qt5/recipes-qt/qt5/qtlocation_git.bb, do_fetch
-    * meta-qt5/recipes-qt/qt5/qtsystems_git.bb, do_fetch
-    * openembedded-core/meta/recipes-kernel/linux/linux-yocto_3.10.bb, do_f=
-etch
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
-de_2.11.14.bb, do_compile
-
-=3D=3D=3D qemux86_64 (4) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
-_git.bb, do_fetch
-    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
-obiledevice_1.1.4.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.2=
-1.1.bb, do_compile
-    * meta-qt5/recipes-qt/qt5/qtlocation_git.bb, do_compile
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||32    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131212_013114.log/
-|-
-||qemux86       ||36    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131212_104746.log/
-|-
-||qemux86_64    ||38    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20131212_160129.log/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---VMt1DrMGOVs3KQwf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlKrKoMACgkQN1Ujt2V2gBx6NQCgqLl0PfkvTuh3tchjmYQ/Rntr
-Qq4AmgJJR/psG4gzUvITLzfS4Rhiwdj4
-=EUnr
------END PGP SIGNATURE-----
-
---VMt1DrMGOVs3KQwf--
