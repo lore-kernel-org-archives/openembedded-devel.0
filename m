@@ -1,26 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C03E6E243
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D7B66E243
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2013 10:34:16 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 13 Dec 2013 02:33:57 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,477,1384329600"; d="scan'208";a="451747206"
-Received: from junemccl-mobl.ger.corp.intel.com (HELO helios.localnet)
-	([10.252.122.17])
-	by orsmga002.jf.intel.com with ESMTP; 13 Dec 2013 02:33:56 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Joe MacDonald <joe@deserted.net>
-Date: Fri, 13 Dec 2013 10:33:55 +0000
-Message-ID: <27197377.bBKUcS7Jmv@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <1386874857-8596-1-git-send-email-joe@deserted.net>
-References: <1386874857-8596-1-git-send-email-joe@deserted.net>
+	Fri, 13 Dec 2013 10:45:36 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id d10so778963eaj.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Dec 2013 02:45:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Vdk+cPss01V1AYzoUqNDmHscjMfvfZqCR52dKdyFgc0=;
+	b=JNNOQE96QJitkpWYfQz38/U40SUPCpVX38q/piEu/AibohDW2sZmBBMETafcvnXmoI
+	3Owv8xIw21ZhAzGHRLojP3O4AySKi4SBKFkUInz2z6vsdMWe+hzEiz+844+Li9Vyh9iR
+	ZxwuXi3xgRYghdHLLJvAApbEtoBgMaBKJgLVZj5/YTHb7Sj6O6/sgT78XkG4lOZEZJQh
+	MQnpBaI9PCm5gh7rnrKy97FXEmsxx7DpFHQCoSnmSMjljQH1YF9G9DHq1DlZNfP2ldn7
+	B+ty6A4Tw5mlyDakf5PR49u5mzUzc9u79vlGyfg27Dv1K/jh+L2Nu+xYfZquI+WjZ7hu
+	QfLw==
+X-Received: by 10.14.7.2 with SMTP id 2mr2143743eeo.16.1386931535629;
+	Fri, 13 Dec 2013 02:45:35 -0800 (PST)
+Received: from localhost.localdomain (ip-109-91-251-248.unitymediagroup.de.
+	[109.91.251.248])
+	by mx.google.com with ESMTPSA id e43sm5317796eep.7.2013.12.13.02.45.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 13 Dec 2013 02:45:35 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Dec 2013 11:45:27 +0100
+Message-Id: <1386931527-12034-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] vsftpd: install volatiles file based on init system
+Subject: [meta-systemd] connman: follow oe-core to 1.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,65 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Dec 2013 10:34:18 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 13 Dec 2013 10:45:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Joe,
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../connman/{connman_1.19.bbappend => connman_1.20.bbappend}              | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.19.bbappend => connman_1.20.bbappend} (100%)
 
-On Thursday 12 December 2013 14:00:57 Joe MacDonald wrote:
-> The sysvinit populate-volatile.sh scans for volatiles in
-> /etc/default/volatiles.  systemd expects the same format files to live in
-> /etc/tmpfiles.d.  Depedning on the DISTRO_FEATURE list, install vsftpd's
-> volatiles file to the expected location.  While we're here, drop the
-> creation of the empty ${localstatedir}/run/ hierarchy since they should be
-> created by the volatiles processing.
-> 
-> Signed-off-by: Joe MacDonald <joe@deserted.net>
-> ---
->  meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb |   10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb index
-> 0698a63..9d82fd7 100644
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> @@ -59,8 +59,13 @@ do_install() {
->      install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
->      install -d ${D}${sysconfdir}/init.d/
->      install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
-> -    install -d ${D}/${sysconfdir}/default/volatiles
-> -    install -m 644 ${WORKDIR}/volatiles.99_vsftpd
-> ${D}/${sysconfdir}/default/volatiles/99_vsftpd +    if
-> ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then +
->        install -d ${D}/${sysconfdir}/tmpfiles.d
-> +        install -m 644 ${WORKDIR}/volatiles.99_vsftpd
-> ${D}/${sysconfdir}/tmpfiles.d/99_vsftpd +    else
-> +        install -d ${D}/${sysconfdir}/default/volatiles
-> +        install -m 644 ${WORKDIR}/volatiles.99_vsftpd
-> ${D}/${sysconfdir}/default/volatiles/99_vsftpd +    fi
-> 
->      install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
->      install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-> @@ -70,7 +75,6 @@ do_install() {
->          sed -i "s:/lib/security:${base_libdir}/security:"
-> ${D}${sysconfdir}/pam.d/vsftpd sed -i "s:ftpusers:vsftpd.ftpusers:"
-> ${D}${sysconfdir}/pam.d/vsftpd fi
-> -    install -d ${D}${localstatedir}/run/vsftpd/empty
->  }
-> 
->  INITSCRIPT_PACKAGES = "${PN}"
-
-I think there might be a problem with this: the DISTRO_FEATURES options aren't 
-mutually exclusive - both can be enabled at the same time (usually where you 
-want sysvinit for some rescue/initramfs image and systemd for the main image).
-
-Cheers,
-Paul
-
+diff --git a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.19.bbappend b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
+similarity index 100%
+rename from meta-systemd/oe-core/recipes-connectivity/connman/connman_1.19.bbappend
+rename to meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
 -- 
+1.8.3.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
