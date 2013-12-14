@@ -1,35 +1,32 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 04894610DC
+Return-Path: <visgupta07@gmail.com>
+Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
+	[209.85.220.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 20F096E3DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2013 16:08:42 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id jt11so2754087pbb.22
+	Sat, 14 Dec 2013 07:17:45 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id hz1so489554pad.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2013 08:08:41 -0800 (PST)
+	Fri, 13 Dec 2013 23:17:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=06N5Ncywia2c8bqAwkTdIo6wOwhcrgXdH4z+Ofs/vQo=;
-	b=ROs6+2jV5lXBKVYdMXWkLq8KNB99z4PxnVLJUSjCnwVHDpv1QwNPPhRTod/sGeCw7Z
-	7PGfAaMY4IwDbSIOlbJW9f4NL9onWleorJGe2Cun5elpsAje4AIzywd0zNwAOEfPDKys
-	xPHCkI2rsONQpsc3wapzgGCLWwKYhyx0ArmNl6vKgcE7eBHpQwAW8TxrWcuWWLHiPI0P
-	vQRkhEIMbqH4KD3/L1jaoInVWwpVDxZIMCnKXrM2oywP5sxeRLdzw0W4oeYSFsNojm+O
-	8MfW204Rtvdx9kAJGTNRVDzk5BqCxGmrfBjWYMZBvYE4fdQq1Y7+ouLYrGa6aClZLjPE
-	eStA==
-X-Received: by 10.68.194.71 with SMTP id hu7mr4269634pbc.68.1386950921663;
-	Fri, 13 Dec 2013 08:08:41 -0800 (PST)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPSA id bp5sm5882411pbb.18.2013.12.13.08.08.39
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Dec 2013 08:08:40 -0800 (PST)
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Dec 2013 09:08:25 -0700
-Message-Id: <1386950905-25658-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.8.3.4
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [PATCH] postgresql: apply upstream parallel make fix
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	bh=8R/rAUM2jTH6p3guAVxC3pUJlBw8TPyN10iTo/mvRWE=;
+	b=PUz18XueOmIdl3PUq0pWElbGclERsGhNbSSjL8iCV0V/n44cZVKxpImgur/5B/vUgl
+	dOxKPJ0fQm99ptHV/AsdJk6qDfiCl6aEMUEQ/btvq84CvuaQnGNyYHmH9ETPPoPo2Y5u
+	CrXfIZqhLoq/16U/VBXQuv5MX9g6iErzczHDutRWjEk4vftMWdLSQ+0uy77DyT9IIaJz
+	oWL5/caHfFIZ1tSBgz/WDFS+cE4XiBVSnL52ZA9CIDKlnx9htI2WgDkZ5SCFOXfIPNWb
+	3l1z9NAFhaAd5969yGnypbTMIUg0tVrWH9YXxM/8IFIz3NSwJtNZ2M+h+VRfgfX02lj6
+	N6Dg==
+MIME-Version: 1.0
+X-Received: by 10.68.130.130 with SMTP id oe2mr7882347pbb.135.1387005463788;
+	Fri, 13 Dec 2013 23:17:43 -0800 (PST)
+Received: by 10.67.14.169 with HTTP; Fri, 13 Dec 2013 23:17:43 -0800 (PST)
+Date: Sat, 14 Dec 2013 12:47:43 +0530
+Message-ID: <CAMGfQQrxmk9seHii6OH0bDXWpZgJD_zHnkfn6S_fbnm-TXG8uw@mail.gmail.com>
+From: vishal gupta <visgupta07@gmail.com>
+To: koen@dominion.thruhere.net
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
+Subject: Compiling the kernel source from Angstrom distribution & building an OS console-image.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,70 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Dec 2013 16:08:43 -0000
+X-List-Received-Date: Sat, 14 Dec 2013 07:17:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Reported-by: Drew Moseley <drew_moseley@mentor.com>
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- .../postgresql-9.2.4/ecpg-parallel-make-fix.patch  | 31 ++++++++++++++++++++++
- .../recipes-support/postgresql/postgresql_9.2.4.bb |  5 +++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
+Thank you Koen for the reply.
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
-new file mode 100644
-index 0000000..63615cd
---- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/ecpg-parallel-make-fix.patch
-@@ -0,0 +1,31 @@
-+Upstream-status: backport
-+
-+From 602070f9cce790debd8d1469254e7726ab499ae7 Mon Sep 17 00:00:00 2001
-+From: Peter Eisentraut <peter_e@gmx.net>
-+Date: Fri, 29 Mar 2013 21:39:55 -0400
-+Subject: [PATCH] ecpg: Parallel make fix
-+
-+In some parallel make situations, the install-headers target could be
-+called before the installation directories are created by installdirs,
-+causing the installation to fail.  Fix that by making install-headers
-+depend on installdirs.
-+---
-+ src/interfaces/ecpg/include/Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/interfaces/ecpg/include/Makefile b/src/interfaces/ecpg/include/Makefile
-+index eab833b..e92e56f 100644
-+--- a/src/interfaces/ecpg/include/Makefile
-++++ b/src/interfaces/ecpg/include/Makefile
-+@@ -18,7 +18,7 @@ ecpg_headers = ecpgerrno.h ecpglib.h ecpgtype.h sqlca.h sql3types.h ecpg_informi
-+ 	sqlda.h sqlda-compat.h sqlda-native.h
-+ informix_headers = datetime.h decimal.h sqltypes.h
-+ 
-+-install-headers: $(ecpg_headers) $(informix_headers)
-++install-headers: $(ecpg_headers) $(informix_headers) installdirs
-+ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(ecpg_headers)) '$(DESTDIR)$(includedir)/'
-+ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(informix_headers)) '$(DESTDIR)$(informix_esql_dir)/'
-+ 	$(INSTALL_DATA) $(ecpg_config_h) '$(DESTDIR)$(includedir)'
-+-- 
-+1.8.3.4
-+
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-index 59665da..49ca53f 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-@@ -4,7 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ab55a5887d3f8ba77d0fd7db787e4bab"
- 
- PR = "${INC_PR}.0"
- 
--SRC_URI += "file://remove.autoconf.version.check.patch"
-+SRC_URI += "\
-+    file://remove.autoconf.version.check.patch \
-+    file://ecpg-parallel-make-fix.patch \
-+"
- 
- SRC_URI[md5sum] = "6ee5bb53b97da7c6ad9cb0825d3300dd"
- SRC_URI[sha256sum] = "d97dd918a88a4449225998f46aafa85216a3f89163a3411830d6890507ffae93"
--- 
-1.8.3.4
+I made the local changes so that i can include some features in my kernel.
+The features are:
+1.The camera driver mt9t112 for LI-LBCM3M1 from leopard imaging.
+2.The camera driver mt9v113 for LI-LBCMVGA from leopard imaging.
 
+As per a small test carried out by me i found that both the above camera
+modules work fine with the pre-build image with Kernel  Version 2.6.32 from
+Narccissus Image Builder.
+
+So i downloaded the source of this Narccissus image from Angstrom
+Distribution (https://github.com/Angstrom-distribution/meta-angstrom) and i
+went for making the below listed local changes to change the default kernel
+version which is 3.2.28 to the kernel version 2.6.32.
+
+In the beagleboard.conf file present in the meta-ti layer i made the
+following changes.
+""
+#PREFERRED_PROVIDER_virtual/kernel = "linux-mainline"
+PREFERRED_PROVIDER_virtual/kernel = "linux-omap-psp"
+
+""
+
+& adding an smc.patch to resolve  another error which i got when i compiled
+above changed ,below is the error what i got.
+""
+/tmp/ccWRvvsG.s:309: Error: selected processor does not support ARM mode
+`smc #0'
+""
+
+This error was resolved as i added the smc.patch.
+
+But encountered with the error when command "MACHINE=beagleboard bitbake
+console-image" is run  i got the error as presented in previous mail and
+below again :
+"
+cp: cannot stat `include/generated/bounds.h': No such file or directory
+ERROR: Function failed: do_compileconfigs (see
+/home/vishal/oe-nad/setup-scripts/build/tmp-angstrom_v2012_12-eglibc/work/beagleboard-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r122c+gitr5fc29e7b2a76a64a739f857858ef0b98294aa155/temp/log.do_compileconfigs.22554
+for further information)
+"
+
+Now I hope you have more information...!!
+Sorry that i was not clear in explanation in my previous mail.
+
+Please guide me to debug this "Function failed: do_compileconfigs" issue..
+
+Vishal
 
