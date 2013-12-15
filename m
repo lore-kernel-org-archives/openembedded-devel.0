@@ -1,22 +1,35 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by mail.openembedded.org (Postfix) with ESMTP id C762A6148C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 64FE26DAAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2013 08:56:58 +0000 (UTC)
-Received: from e6520eb (unknown [82.233.81.124]) (Authenticated sender: eukrea)
-	by smtp2-g21.free.fr (Postfix) with ESMTPSA id 3CA6D4B009B;
-	Sun, 15 Dec 2013 09:56:50 +0100 (CET)
-Date: Sun, 15 Dec 2013 09:56:49 +0100
-From: Eric =?ISO-8859-1?B?QuluYXJk?= <eric@eukrea.com>
-To: prabhu.sundararaj@freescale.com
-Message-ID: <20131215095649.51ae12b8@e6520eb>
-In-Reply-To: <1387063799-2777-1-git-send-email-prabhu.sundararaj@freescale.com>
-References: <1387063799-2777-1-git-send-email-prabhu.sundararaj@freescale.com>
-Organization: =?ISO-8859-1?B?RXVrculh?= Electromatique
-X-Mailer: Claws Mail 3.9.2 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-browser][PATCH] Chromium : update to version 33
+	Sun, 15 Dec 2013 16:05:42 +0000 (UTC)
+Received: by mail-ea0-f179.google.com with SMTP id r15so1766092ead.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Dec 2013 08:05:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=sMYs2XYpAfIoUeRMWJSqU2xtWjS0Ji0HGz4G+OsB2vU=;
+	b=YG0YTyJJ2SKr1Xv//6BoJNz/POTV7bUAFUh0eOFr2Y70NY+6abmMAIcGwRNzrvJlWv
+	PsVr3t7QYqYKd8q4sHTrK3FvwhwcRiOfYimd+ZEfKkHSMxvXtv9TEnR8lYQRF5pBLbd0
+	JO/7BetyuJ3erS7Mw2g4xZVRqXLFwb6AvNVECJCFVzZ+67m6W5BAJv8LA2Zv3duUqZhK
+	NdU84Fg2CZT/WMdDF9jmK0SwVn8q+K688xMnGCgtmCVyEhzoPXL6JlqyWTh2TkWDhZpR
+	lFWOQD/itATlSE7qxVlbz5unNhgMYMuz0ZqE3FuqmgyqsP/3oiJcRgD7fOohAhT3d+2M
+	zgNg==
+X-Received: by 10.14.115.133 with SMTP id e5mr12254699eeh.91.1387123541648;
+	Sun, 15 Dec 2013 08:05:41 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id 1sm31594641eeg.4.2013.12.15.08.05.40
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 15 Dec 2013 08:05:40 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Dec 2013 17:06:07 +0100
+Message-Id: <1387123567-25357-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-systemd][PATCH] rpcbind: Rename .bbappend to match any version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,37 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Dec 2013 08:57:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 15 Dec 2013 16:05:42 -0000
 
-Hi Prahbu,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../rpcbind/{rpcbind_0.2.0.bbappend => rpcbind_%.bbappend}              | 2 --
+ 1 file changed, 2 deletions(-)
+ rename meta-systemd/oe-core/recipes-extended/rpcbind/{rpcbind_0.2.0.bbappend => rpcbind_%.bbappend} (77%)
 
-Le Sat, 14 Dec 2013 17:29:59 -0600,
-Prabhu Sundararaj <prabhu.sundararaj@freescale.com> a =E9crit :
+diff --git a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend b/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_%.bbappend
+similarity index 77%
+rename from meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
+rename to meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_%.bbappend
+index 5cb6bf4..f006b3f 100644
+--- a/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_0.2.0.bbappend
++++ b/meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_%.bbappend
+@@ -1,5 +1,3 @@
+-PRINC := "${@int(PRINC) + 2}"
+-
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+-- 
+1.8.4.3
 
-> Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
-> ---
->  .../chromium-29.0.1518.2/armv6/include.gypi        |   8 -
->  .../chromium-29.0.1518.2/armv6/oe-defaults.gypi    |  15 --
->  .../chromium-29.0.1518.2/armv7a/include.gypi       |   9 -
->  .../chromium-29.0.1518.2/armv7a/oe-defaults.gypi   |  15 --
->  .../chromium/chromium-29.0.1518.2/google-chrome    |   7 -
->  .../chromium-29.0.1518.2/google-chrome.desktop     | 222 ---------------=
-------
->  .../chromium-29.0.1518.2/i586/include.gypi         |   5 -
->  .../chromium-29.0.1518.2/i586/oe-defaults.gypi     |  15 --
->  .../uninitialised-warning.patch                    |  90 ---------
->  .../chromium/chromium-29.0.1518.2/unistd-2.patch   |  27 ---
->  .../chromium-29.0.1518.2/x86-64/include.gypi       |   5 -
->  .../chromium-29.0.1518.2/x86-64/oe-defaults.gypi   |  15 --
->  recipes-browser/chromium/chromium_29.0.1518.2.bb   |  66 +-----
->  13 files changed, 6 insertions(+), 493 deletions(-)
-
-it seems that you forget to add the files for the new version.
-Please also add in the commit message how you tested the new version
-(platform and tests you did).
-
-Thanks,
-Eric
 
