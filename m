@@ -1,42 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
-	[209.85.216.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 39CF06E589
+Return-Path: <p.patat@gmail.com>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D0DA60C23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Dec 2013 00:31:39 +0000 (UTC)
-Received: by mail-qa0-f50.google.com with SMTP id i13so2094587qae.2
+	Tue, 17 Dec 2013 15:34:58 +0000 (UTC)
+Received: by mail-wg0-f54.google.com with SMTP id n12so6112444wgh.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2013 16:31:38 -0800 (PST)
+	Tue, 17 Dec 2013 07:34:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=MPfUqIF3lA1cJOco6Y4xTjXZxZQ39p+3t1/jAQZit+M=;
-	b=LYJrCxHqPq4PrCrYhs6L4P3appXKjaDq81zoA/H3ycJ/vLz9xEi4SULF2unIAVm9NF
-	IvCdW5SvCc3X/LZMsq20Cs4xe/rP5x3OCw9PlLA4ns1PK8jNM/GeVLLX6FyfMtI1y8rJ
-	V3LnzftUF5QOmz/iK35gdfnX7unNhUZAOFUROC8tDlK2vc1PEcOKEuZygjmkW83PZTjN
-	6vdxw88PeyekwoQ6cuN2mJlvwdfVEUf6hVpmhNid9t9ZvEasSsn+ll2YXfVhD8MqbUH5
-	uxMSs2Jlmo2ycyX2k4bsBolSktHJwWDUr3JZ1vYdfoQOPTXbO+8BWpINwTh+Ca2nVWJL
-	bW/w==
-X-Received: by 10.224.138.4 with SMTP id y4mr36998418qat.65.1387240298546;
-	Mon, 16 Dec 2013 16:31:38 -0800 (PST)
-Received: from nano.lab.ossystems.com.br ([187.90.230.254])
-	by mx.google.com with ESMTPSA id hb2sm45371983qeb.6.2013.12.16.16.31.32
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Dec 2013 16:31:37 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 44F6317643BB5; Mon, 16 Dec 2013 22:31:14 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Dec 2013 22:31:01 -0200
-Message-Id: <1387240261-7045-6-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.4.3
-In-Reply-To: <1387240261-7045-1-git-send-email-otavio@ossystems.com.br>
-References: <1387240261-7045-1-git-send-email-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe PATCH v2 6/6] geos: Fix -dev installation and upgrade path
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=0dapnltlmxie/mJC8+Cmz3ymzA1R+RPzeRTuaeeaels=;
+	b=BpwGLEohM903YY2UFI1MCp/QO2UNpn2RdzMUc8OtdLj/P/M2CGorT86QwC21vMu4eA
+	lmJxkFx170MM1VBdvxcz1u3QPo+zmu32j0qEPAtsiLbxB2SQlzrNvCS0abWTozlNy08m
+	v4av9BHoeTtdos1y9BEKvlM0gAdq53xXKIKL+FLU4M6Ph7gNTbhgVmoSFiYl5zarxALb
+	f//+jS9iEEQYVws2+WvxA4laVAqKcLutyTockKaZTdmRzKDhl59DgVMBlAd3rx/PKTbU
+	q+JNtBqMq1wexpF/y26ilyhMJTogDuIud3ozz7plez3AdZTgt44RDxr8bSYhrxXcujNK
+	pHjg==
+X-Received: by 10.194.95.198 with SMTP id dm6mr13045773wjb.57.1387294498709;
+	Tue, 17 Dec 2013 07:34:58 -0800 (PST)
+MIME-Version: 1.0
+Sender: p.patat@gmail.com
+Received: by 10.194.9.33 with HTTP; Tue, 17 Dec 2013 07:34:38 -0800 (PST)
+In-Reply-To: <1386169150-16816-1-git-send-email-patrick.patat@innotis.org>
+References: <1386169150-16816-1-git-send-email-patrick.patat@innotis.org>
+From: patrick patat <patrick.patat@innotis.org>
+Date: Tue, 17 Dec 2013 16:34:38 +0100
+X-Google-Sender-Auth: 5Bh-CaHmS_CSYQ73037VWsaGGlA
+Message-ID: <CAF+NyK5patvnud=V=DUC28y4b8BKEXL1vc67brY8FNir7T5d_g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-perl][PATCH V2] add libcrypt-openssl-rsa-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,35 +43,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Dec 2013 00:31:39 -0000
+X-List-Received-Date: Tue, 17 Dec 2013 15:34:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Using 'lib_package' renames the binaries and we need a transitional
-package to be used as upgrade path. This is done using an empty 'geos'
-package which installs the new ones as runtime dependency.
+ping
 
-This same package is used to satisfy -dev dependency of geos package
-allowing for its inclusion into SDK.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
-Changes in v2:
-- new patch
+On Wed, Dec 4, 2013 at 3:59 PM, Patrick Patat <patrick.patat@innotis.org>wrote:
 
- meta-oe/recipes-navigation/geos/geos.inc | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-oe/recipes-navigation/geos/geos.inc b/meta-oe/recipes-navigation/geos/geos.inc
-index 5fae12e..2e308b4 100644
---- a/meta-oe/recipes-navigation/geos/geos.inc
-+++ b/meta-oe/recipes-navigation/geos/geos.inc
-@@ -16,3 +16,6 @@ FILES_${PN}lib += "${libdir}/libgeos-${PV}.so"
- 
- DESCRIPTION_${PN}-c1 = "Geometry engine for Geographic Information Systems - C Library"
- FILES_${PN}-c1 += "${libdir}/libgeos_c.so.*"
-+
-+ALLOW_EMPTY_${PN} = "1"
-+RDEPENDS_${PN} += "geoslib ${PN}-c1"
--- 
-1.8.4.3
-
+> This recipe build cpan module Crypt-OpenSSL-RSA
+>
+> Signed-off-by: Patrick Patat <patrick.patat@innotis.org>
+> ---
+>  .../libcrypt/libcrypt-openssl-rsa-perl_0.28.bb     |   24
+> ++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-perl/recipes-perl/libcrypt/
+> libcrypt-openssl-rsa-perl_0.28.bb
+>
+> diff --git a/meta-perl/recipes-perl/libcrypt/
+> libcrypt-openssl-rsa-perl_0.28.bb b/meta-perl/recipes-perl/libcrypt/
+> libcrypt-openssl-rsa-perl_0.28.bb
+> new file mode 100644
+> index 0000000..f0c610f
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "Crypt Openssl RSA cpan module"
+> +SECTION = "libs"
+> +LICENSE = "Artistic-1.0 | GPL-1.0+"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
+> +
+> +SRC_URI = "
+> http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "86217a5036fc63779c30420b5fd84129"
+> +SRC_URI[sha256sum] =
+> "5357f977464bb3a8184cf2d3341851a10d5515b4b2b0dfb88bf78995c0ded7be"
+> +
+> +DEPENDS += "openssl"
+> +
+> +RDEPENDS_${PN}="libcrypt-openssl-random-perl"
+> +
+> +EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR}
+> -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
+> +
+> +S = "${WORKDIR}/Crypt-OpenSSL-RSA-${PV}"
+> +
+> +inherit cpan
+> +
+> +do_compile() {
+> +    export OTHERLDFLAGS='-Wl,-rpath'
+> +    cpan_do_compile
+> +}
+> --
+> 1.7.10.4
+>
+>
 
