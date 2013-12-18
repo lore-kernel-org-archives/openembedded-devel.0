@@ -1,34 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A86C60D8A
+Return-Path: <david.c.nystrom@gmail.com>
+Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 0051760D7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 13:43:51 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id d49so3482045eek.18
+	Wed, 18 Dec 2013 14:34:34 +0000 (UTC)
+Received: by mail-la0-f47.google.com with SMTP id ep20so3891431lab.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 05:43:51 -0800 (PST)
+	Wed, 18 Dec 2013 06:34:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=QYltFU7yaVZ4Rd+Il2/0SC/jxnU1fAH5vcPG7P2N+Uw=;
-	b=HWYyk/4e0A+jwA76vL+LEdcbiaKPGbipT+iqodtpPBQ0llMzHzrDNogZDGznzh2H9a
-	UXGxesJsHk+er3aX7eUdZ+iuE44IUTw46CTyNnfJzqEC4h+3wqTbez4AVeHvE7FSCDXA
-	EzK1bzjytW9TRV44IU8Vm8bCfDy5gQnOWhDE0Rit5/yY9H3OhQO2DUGnDmCU5B2JeUAz
-	CMn7w9+3UUXBgshUMwkDjbAqJFoNivHrPMG8Xc4B+qTH8dV4JPEZ2BMF9Z9v4Sz7mHWF
-	MKGM2gtPK6l3QpJ3ugs7R+lkiEsGpb+5+A30pMDoKPX7LyDrmox4JJ4s4x+ZiVupyqeA
-	YoIg==
-X-Received: by 10.15.23.206 with SMTP id h54mr29225288eeu.17.1387374231798;
-	Wed, 18 Dec 2013 05:43:51 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id a51sm189038eeh.8.2013.12.18.05.43.50
+	h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=UxLEDz1lCHQz2sBtucRrdI7kXP2A1NI/2xvI/xI26h0=;
+	b=bfTG1UAnYN3v3wcSXfz2b186yzxy9vaD4ezpVUp/RDUAFust/J3kaOzgiGAb9ef/su
+	8fxgR/VZaueBc3EOtVQzPat97zfR2jP4DowWBPThln1KXDNrOloqAyV2xRp7DQXCVsjg
+	vCPiJ2GYEnDB32FtiPbrS2FV39IqWQzDUkoD6D4RouUssD2LlHQeaQ+WkziRXO0r8DHg
+	WXllOBpSq3J91YN9sGq9zUzEnxQ1acgGhs4SJmpf9R+gg9RpbRZUmGK4/68cWECQQBpy
+	YZ4AxeMG2j9ZeRl6KXb545L1AIsYxVN6XaruuA7wDjRpdAxZmpx+MtzafV6NH/LD+Hh+
+	22mg==
+X-Received: by 10.152.244.130 with SMTP id xg2mr11477875lac.4.1387377275086;
+	Wed, 18 Dec 2013 06:34:35 -0800 (PST)
+Received: from nysan (sestofw01.enea.se. [192.36.1.252])
+	by mx.google.com with ESMTPSA id sd11sm182450lab.2.2013.12.18.06.34.32
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Dec 2013 05:43:50 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 18 Dec 2013 06:34:34 -0800 (PST)
+Received: by nysan (Postfix, from userid 1000)
+	id D58161C1391; Wed, 18 Dec 2013 15:34:25 +0100 (CET)
+From: "=?UTF-8?q?David=20Nystr=C3=B6m?=" <david.c.nystrom@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Dec 2013 14:44:21 +0100
-Message-Id: <1387374261-6840-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.3
-Subject: [meta-multimedia][PATCH] tvheadend: Disable dvdscan
+Date: Wed, 18 Dec 2013 15:34:24 +0100
+Message-Id: <1387377264-27790-1-git-send-email-david.nystrom@enea.com>
+X-Mailer: git-send-email 1.8.3.2
+MIME-Version: 1.0
+Cc: =?UTF-8?q?David=20Nystr=C3=B6m?= <david.nystrom@enea.com>
+Subject: [PATCH] [meta-oe] pcsc-lite: Fixed md5sum for tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 13:43:52 -0000
+X-List-Received-Date: Wed, 18 Dec 2013 14:34:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-* when enabled it will try to download
-  http://linuxtv.org/hg/dvb-apps/archive/tip.tar.bz2
-  from do_configure (bypassing PREMIRROR and bitbake fetcher), but
-  what's worse even when it fetches it, it fails in do_install, because
-  dvb-scan directory is empty, reading the script called from configure
-  3.3-r0/git/support/getmuxlist, I don't know how it could work before,
-  because it first moves files to dvb-scan directory and then removes
-  them all one by one.
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: David Nyström <david.nystrom@enea.com>
 ---
- meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-index 7c8b959..65d43c6 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -20,6 +20,7 @@ do_configure() {
-                 --bindir=${bindir} \
-                 --datadir=${datadir} \
-                 --arch=${TARGET_ARCH} \
-+                --disable-dvbscan \
-                 --disable-bundle
- }
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
+index 266781a..7aae334 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a39d325b7d9cf2f07826a5154b16500c"
+ DEPENDS = "udev"
+ 
+ SRC_URI = "https://alioth.debian.org/frs/download.php/3757/pcsc-lite-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
+-SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
++SRC_URI[md5sum] = "d41d8cd98f00b204e9800998ecf8427e"
++SRC_URI[sha256sum] = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ 
+ PR = "r3"
  
 -- 
-1.8.4.3
+1.8.3.2
 
 
