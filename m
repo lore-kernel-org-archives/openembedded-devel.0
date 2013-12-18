@@ -1,19 +1,41 @@
-Return-Path: <eric@eukrea.com>
-Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 856A560D5A
+Return-Path: <david.c.nystrom@gmail.com>
+Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id BCA5560DCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 17:27:25 +0000 (UTC)
-Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp4-g21.free.fr (Postfix) with ESMTP id 20D664C80D0
+	Wed, 18 Dec 2013 19:57:40 +0000 (UTC)
+Received: by mail-lb0-f177.google.com with SMTP id q8so51953lbi.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 18:27:21 +0100 (CET)
-From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Dec 2013 18:27:39 +0100
-Message-Id: <1387387659-14541-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.8.5.1
+	Wed, 18 Dec 2013 11:57:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=Gnga/YZnlw3cSf4DAysuhCjooD+Tnu9uj8GKixFu0B0=;
+	b=QFm07MudMPMQd5Ej0+EcBGjjjW0fjCoR7qHC0TLdaiJbIRV6M2FfHsLzi2id3vbcFE
+	PuOS0WhsNiWYy2ZrtM6R57D3rEsATL0+cktFDgD0y78CMvttm3hNYhBSG+oa6Jo6Rbtz
+	SniaRcd73Ltqee71owhvwLg0JY3rbduPAEqVFBV231iNNUfn8E+TVm7DMF+mmgPnOlBc
+	cZGpNXBH1hsJWgxCyuM1ONanjb+oXh30VFLT4Oh5J5rYWJUvc9MlbGNy63Ow0F2DAQdA
+	2+Li2+cgXxi/YrVGQB7G3A7zEYfwYYbDxNX6ftpx8sq7auu24i7CN4y0kSZIjcBFQFsW
+	qYZw==
+X-Received: by 10.152.88.8 with SMTP id bc8mr6210807lab.47.1387396660829;
+	Wed, 18 Dec 2013 11:57:40 -0800 (PST)
+Received: from [192.168.43.232] ([94.234.170.49])
+	by mx.google.com with ESMTPSA id z3sm854163lag.10.2013.12.18.11.57.39
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 18 Dec 2013 11:57:39 -0800 (PST)
+Message-ID: <52B1FE31.8040109@gmail.com>
+Date: Wed, 18 Dec 2013 20:57:37 +0100
+From: =?UTF-8?B?RGF2aWQgTnlzdHLDtm0=?= <david.c.nystrom@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH v2] inetutils: fix compile error when PATH_PROCNET_DEV is undefined
+To: openembedded-devel@lists.openembedded.org
+References: <1387377264-27790-1-git-send-email-david.nystrom@enea.com>
+	<20131218155821.GM3706@jama>
+In-Reply-To: <20131218155821.GM3706@jama>
+Cc: =?UTF-8?B?RGF2aWQgTnlzdHLDtm0=?= <david.nystrom@enea.com>
+Subject: Re: [PATCH] [meta-oe] pcsc-lite: Fixed md5sum for tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,62 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 17:27:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 18 Dec 2013 19:57:42 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- .../inetutils-1.9-PATH_PROCNET_DEV.patch           | 26 ++++++++++++++++++++++
- .../inetutils/inetutils_1.9.1.bb                   |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch
+On ons 18 dec 2013 16:58:21, Martin Jansa wrote:
+> On Wed, Dec 18, 2013 at 03:34:24PM +0100, David Nyström wrote:
+>> Signed-off-by: David Nyström <david.nystrom@enea.com>
+>
+> Can you download old tarball from some mirror and describe content diff
+> in commit message?
+>
+> If you fail to find tarball with old checksum I'll send it to you from
+> my world builds.
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch
-new file mode 100644
-index 0000000..2592989
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch
-@@ -0,0 +1,26 @@
-+inetutils: define PATH_PROCNET_DEV if not already defined
-+
-+this prevents the following compilation error :
-+system/linux.c:401:15: error: 'PATH_PROCNET_DEV' undeclared (first use in this function)
-+
-+this patch comes from :
-+ http://repository.timesys.com/buildsources/i/inetutils/inetutils-1.9/
-+
-+Upstream-Status: Inappropriate [not author]
-+
-+Signed-of-by: Eric Bénard <eric@eukrea.com>
-+---
-+diff -Naur inetutils-1.9.orig/ifconfig/system/linux.c inetutils-1.9/ifconfig/system/linux.c
-+--- inetutils-1.9.orig/ifconfig/system/linux.c	2012-01-04 16:31:36.000000000 -0500
-++++ inetutils-1.9/ifconfig/system/linux.c	2012-01-04 16:40:53.000000000 -0500
-+@@ -49,6 +49,10 @@
-+ #include "../ifconfig.h"
-+ 
-+ 
-++#ifndef PATH_PROCNET_DEV
-++  #define PATH_PROCNET_DEV "/proc/net/dev"
-++#endif
-++
-+ /* ARPHRD stuff.  */
-+ 
-+ static void
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-index d12ad39..97fc6a1 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-@@ -20,6 +20,7 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
-            file://rsh.xinetd.inetutils \
-            file://telnet.xinetd.inetutils \
-            file://tftpd.xinetd.inetutils \
-+           file://inetutils-1.9-PATH_PROCNET_DEV.patch \
- "
- 
- SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
--- 
-1.8.5.1
+Hmm, the link seems to be corrupt.
+tarball cant be unpacked, may have fired away this patch prematurely.
+Will return with V2,
+
+sorry about that.
+/David
+
+
+>> ---
+>>   meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
 
 
