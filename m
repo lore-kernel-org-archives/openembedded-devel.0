@@ -1,34 +1,34 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 2136760D7F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A86C60D8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 13:36:00 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VtHI5-0008LA-Iv for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Dec 2013 14:35:57 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 14:35:57 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 18 Dec 2013 13:43:51 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d49so3482045eek.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 14:35:57 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 18 Dec 2013 05:43:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=QYltFU7yaVZ4Rd+Il2/0SC/jxnU1fAH5vcPG7P2N+Uw=;
+	b=HWYyk/4e0A+jwA76vL+LEdcbiaKPGbipT+iqodtpPBQ0llMzHzrDNogZDGznzh2H9a
+	UXGxesJsHk+er3aX7eUdZ+iuE44IUTw46CTyNnfJzqEC4h+3wqTbez4AVeHvE7FSCDXA
+	EzK1bzjytW9TRV44IU8Vm8bCfDy5gQnOWhDE0Rit5/yY9H3OhQO2DUGnDmCU5B2JeUAz
+	CMn7w9+3UUXBgshUMwkDjbAqJFoNivHrPMG8Xc4B+qTH8dV4JPEZ2BMF9Z9v4Sz7mHWF
+	MKGM2gtPK6l3QpJ3ugs7R+lkiEsGpb+5+A30pMDoKPX7LyDrmox4JJ4s4x+ZiVupyqeA
+	YoIg==
+X-Received: by 10.15.23.206 with SMTP id h54mr29225288eeu.17.1387374231798;
+	Wed, 18 Dec 2013 05:43:51 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id a51sm189038eeh.8.2013.12.18.05.43.50
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 18 Dec 2013 05:43:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 18 Dec 2013 14:35:49 +0100
-Message-ID: <l8s8b8$s3a$1@ger.gmane.org>
-References: <1387298449-20000-1-git-send-email-andrei@gherzan.ro>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
-In-Reply-To: <1387298449-20000-1-git-send-email-andrei@gherzan.ro>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-multimedia][PATCH 1/1] xbmc: Update to v12.2
+Date: Wed, 18 Dec 2013 14:44:21 +0100
+Message-Id: <1387374261-6840-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-multimedia][PATCH] tvheadend: Disable dvdscan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 13:36:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Dec 2013 13:43:52 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* when enabled it will try to download
+  http://linuxtv.org/hg/dvb-apps/archive/tip.tar.bz2
+  from do_configure (bypassing PREMIRROR and bitbake fetcher), but
+  what's worse even when it fetches it, it fails in do_install, because
+  dvb-scan directory is empty, reading the script called from configure
+  3.3-r0/git/support/getmuxlist, I don't know how it could work before,
+  because it first moves files to dvb-scan directory and then removes
+  them all one by one.
 
-Andrei Gherzan schreef op 17-12-13 17:40:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-> - -SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa" - -PV =
-> "11.0+gitr${SRCPV}" -PR = "r14" -SRC_URI =
-> "git://github.com/xbmc/xbmc.git;branch=eden \ +SRCREV =
-> "32b1a5ef9e7f257a2559a3b766e85a55b22aec5f" +SRC_URI =
-> "git://github.com/xbmc/xbmc.git;branch=frodo \ 
-> file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \ 
-> file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \ 
-> file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \ 
-> -
-> file://0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch \ -
-> file://configure.in-Avoid-running-code.patch \
-
-FWIW, with binutils >2.22 those assembly patches shouldn't be needed anymore
-for ARM.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSsaS1MkyGM64RGpERAjfUAKCQtHAKeeMZ8z/vU6r+yYCRL2qr8ACfdChd
-ENyo1YwVrJfN/Yq+PpzTj+A=
-=un8I
------END PGP SIGNATURE-----
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index 7c8b959..65d43c6 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -20,6 +20,7 @@ do_configure() {
+                 --bindir=${bindir} \
+                 --datadir=${datadir} \
+                 --arch=${TARGET_ARCH} \
++                --disable-dvbscan \
+                 --disable-bundle
+ }
+ 
+-- 
+1.8.4.3
 
 
