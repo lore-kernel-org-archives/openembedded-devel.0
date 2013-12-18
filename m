@@ -1,19 +1,19 @@
 Return-Path: <eric@eukrea.com>
 Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7363660D5A
+	by mail.openembedded.org (Postfix) with ESMTP id 6958A60D8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2013 15:19:46 +0000 (UTC)
+	Wed, 18 Dec 2013 15:20:06 +0000 (UTC)
 Received: from buildor.local.eukrea.com (unknown [88.170.243.169])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id C51BDD480CB;
-	Wed, 18 Dec 2013 16:19:42 +0100 (CET)
+	by smtp5-g21.free.fr (Postfix) with ESMTP id BB83AD48183;
+	Wed, 18 Dec 2013 16:20:03 +0100 (CET)
 From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Dec 2013 16:20:00 +0100
-Message-Id: <1387380000-20286-1-git-send-email-eric@eukrea.com>
+Date: Wed, 18 Dec 2013 16:20:21 +0100
+Message-Id: <1387380021-20465-1-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.8.5.1
 MIME-Version: 1.0
 Cc: joe.macdonald@windriver.com
-Subject: [PATCH] inetutils: fix compile error when PATH_PROCNET_DEV is undefined
+Subject: [meta-networking][PATCH] inetutils: fix compile error when PATH_PROCNET_DEV is undefined
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,7 +27,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2013 15:19:50 -0000
+X-List-Received-Date: Wed, 18 Dec 2013 15:20:08 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
