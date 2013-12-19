@@ -1,26 +1,38 @@
-Return-Path: <sgw@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id EA38260DEC;
-	Thu, 19 Dec 2013 15:21:44 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 19 Dec 2013 07:21:19 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,512,1384329600"; d="scan'208";a="454913152"
-Received: from unknown (HELO [10.255.15.132]) ([10.255.15.132])
-	by orsmga002.jf.intel.com with ESMTP; 19 Dec 2013 07:21:10 -0800
-Message-ID: <52B30EE5.6050901@linux.intel.com>
-Date: Thu, 19 Dec 2013 07:21:09 -0800
-From: Saul Wold <sgw@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.1.0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id EC5EE6AD15
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Dec 2013 18:30:07 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id p61so1513639wes.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Dec 2013 10:30:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=8OXBGbgyDJwh9Uz46RkFMg4S7vCMoWtmGBZLWTCE3es=;
+	b=g6hpxL25iOiEfYDOlcFuWwOUjjKrTRexG3k7CC4/SKfjJUO37gsl+0381FEpXyn9DN
+	cEWORSpmkL7hLMn1F+7Wk6Lj/6Q1i+sxUFJCimOjpdgHJ0s9jbrwl4Ab99b4e3S7kgbb
+	QGYzZPS9tkKICc4nGw9RHh/AKt0oPXRfRai3Sxk7BuOhQ+MrhbD8F+x3+ktUJxLOV1Nt
+	PirB2+CKYmUdbC9kNMi0RwyxMkyjJQiV/vhHQJO0C87sBIeL/QC2dpRFgAvMlSzvq+OI
+	ifLbPX2eeSO6uVMtLms2JBepWkRRtDVG0VTmIWaHvIi8ne4/iqw2DSaqlM+w2JRqsbqj
+	SaZA==
+X-Received: by 10.194.6.161 with SMTP id c1mr329325wja.89.1387477808600;
+	Thu, 19 Dec 2013 10:30:08 -0800 (PST)
+Received: from localhost.localdomain (ip-109-91-251-248.unitymediagroup.de.
+	[109.91.251.248])
+	by mx.google.com with ESMTPSA id 1sm11606551eeg.4.2013.12.19.10.30.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 19 Dec 2013 10:30:07 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Dec 2013 19:29:56 +0100
+Message-Id: <1387477797-28104-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-References: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
-In-Reply-To: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
-Subject: Re: [OE-core] [RFC] Binutils upgrade to 2.24
+Subject: [meta-qt / branch jansa/qt5-5.2.0][PATCH 0/1] qtbase: fix paths in packageconfig *.pc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,89 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2013 15:21:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Dec 2013 18:30:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 12/16/2013 12:03 PM, Khem Raj wrote:
-> Hi
->
-> I have pushed a contrib branch for binutils 2.24 upgrade here
->
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/binutils-2.24
->
-> I have tested it on both uclibc/eglibc and qemu machines. But it would
-> be nice if
-> it gets more testing for machines I havent tested
->
+Note: Dependency tracking for packageconfig seems broken in oe-core (see
+package.bbclass and try to find a *.pcdeps in workdir) so currently this patch
+does not cause any effect.
 
-Looks like we tickled an LD bug of somekind, we are seeing the following 
-failure across all machines, this was a second build using binutils 
-2.24, so there was some shared state usage.
+Andreas Müller (1):
+  qtbase: fix paths in packageconfig *.pc files
 
-RP pointed out the --as-needed option was used with -lm as those symbols 
-are math related.
+ .../0020-fix-paths-in-packageconfig-files.patch    | 42 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase_git.bb                       |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase-git/0020-fix-paths-in-packageconfig-files.patch
 
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwconfig iwconfig.o libiw.so.29 -lm
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwlist iwlist.o libiw.so.29 -lm
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwpriv iwpriv.o libiw.so.29 -lm
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwspy iwspy.o libiw.so.29 -lm
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwgetid iwgetid.o libiw.so.29 -lm
-> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29  -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwevent iwevent.o libiw.so.29 -lm
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwconfig] Error 1
-> | make: *** Waiting for unfinished jobs....
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwgetid] Error 1
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwspy] Error 1
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwpriv] Error 1
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwlist] Error 1
-> | libiw.so.29: undefined reference to `ceil'
-> | libiw.so.29: undefined reference to `pow'
-> | libiw.so.29: undefined reference to `log10'
-> | libiw.so.29: undefined reference to `floor'
-> | collect2: error: ld returned 1 exit status
-> | make: *** [iwevent] Error 1
-> | ERROR: oe_runmake failed
+-- 
+1.8.3.1
 
-
-Link to the AB example, this is one of many.
-
-http://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds/54/steps/Building%20Images/logs/stdio
-
-
-Sau!
-
-> Thanks
->
-> -Khem
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
->
 
