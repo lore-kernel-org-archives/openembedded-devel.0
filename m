@@ -1,35 +1,36 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 7878161110
+Return-Path: <eu@felipetonello.com>
+Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
+	[209.85.219.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D8F160D68
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2013 00:09:41 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id d10so740391eaj.23
+	Fri, 20 Dec 2013 18:54:43 +0000 (UTC)
+Received: by mail-oa0-f44.google.com with SMTP id m1so3295472oag.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2013 16:09:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=OHNwQ7rHr+rfiGhKnBM8w2KJfQ6modi/rPHvbb0h4os=;
-	b=ovE2IIfFxhX2YbMTAAaqvinvmA+j/Vno+kCFhRqmhCLlGnRoAY7tiNHO80YaWLTFLE
-	EmbLigbDTV2QCHw6BVaHWSSRDS+OrnBrsAJMyKlqIGZ3Y37b3XMXelYwu8q80EUbP7A9
-	1rLj8cdhV4WDjLATFfh8x4LGKREZmc7I/iylNs8bLQa6tZ29k0zisvFfard9aAFLHY1N
-	+tFJ7hsxGJu1SCzOxUVp5vq0agBZIHRnu48MY8+PhcV+oGbpvaPmJDgt8b6RZdKJXhIs
-	CuJ9UdBh+VP8SzyUdWXrNknr+2KGpG8CfQzXLjf8KEPzq9puUngsLtCKXuhd8XWh42Iu
-	TzpQ==
-X-Received: by 10.14.2.73 with SMTP id 49mr2268749eee.15.1387498181781;
-	Thu, 19 Dec 2013 16:09:41 -0800 (PST)
-Received: from mizar.localdomain
-	(host247-89-dynamic.45-79-r.retail.telecomitalia.it. [79.45.89.247])
-	by mx.google.com with ESMTPSA id
-	o47sm13703869eem.21.2013.12.19.16.09.40 for <multiple recipients>
+	Fri, 20 Dec 2013 10:54:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=X6Pc7xeXLhi/83wQs3basAHn0Xgc3ixmA/iWSFPHVh4=;
+	b=ViWV3Uvaz1GDeFqhljoFM+fkUIlRm1hDPUyLCPcuVUpiiXyIvmQgQzBWFrTAKyi/tY
+	KWzsBHxxpwRl4HJHxgp0A7QFDNX3mCJzroakciTdsHJJ6+Day8R5Jtrt58cJ5VQibqdR
+	2T+6svn0B5IuF7s22SG8MhdrqC/C1IVafI8C7Kl6FUlFWtiDuXgDdUFLrmwCuvrV3+6W
+	n4BGxFlMmKNVuKDm+hQGcCap4IRKgGKTzP7vUP29etmACQv9Y81/QVnKL/f0Yd8UexQJ
+	WrUAUcGlyAqjzB9f1uTNK/FCWkfAOjGdUjoaNOnIzROMPhF2FUN6YtnIEn/xksdtYVmh
+	YMZA==
+X-Gm-Message-State: ALoCoQkMX9ld8iMP9SuUNWtoL+c75EN5fXa//2LoKYa7fX+znm9MsMHxEyTfVTIv//omCsJWnJ0I
+X-Received: by 10.182.48.130 with SMTP id l2mr7548561obn.44.1387565683879;
+	Fri, 20 Dec 2013 10:54:43 -0800 (PST)
+Received: from localhost.localdomain.com (wsip-70-183-20-162.oc.oc.cox.net.
+	[70.183.20.162]) by mx.google.com with ESMTPSA id
+	oo13sm12767263oeb.0.2013.12.20.10.54.41 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Dec 2013 16:09:41 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 20 Dec 2013 10:54:42 -0800 (PST)
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2013 01:09:34 +0100
-Message-Id: <1387498174-9872-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] linux-yocto*: zaurus: slim down kernel size
+Date: Fri, 20 Dec 2013 10:54:38 -0800
+Message-Id: <1387565678-16496-1-git-send-email-eu@felipetonello.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [PATCH] fingerterm: Make is executable to other users by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,110 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Dec 2013 00:09:42 -0000
+X-List-Received-Date: Fri, 20 Dec 2013 18:54:43 -0000
 
-Adding a separate fragment with MD, ethernet and debug options removed 
-which can be easily reenabled. Size is now around 2,3-2,5 megabytes.
+From: "Felipe F. Tonello" <eu@felipetonello.com>
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+By default "xuser" cannot execute this binary. So we fix it.
+
+Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
 ---
- .../linux/linux-yocto-3.10/shrink_kernel.cfg       | 28 ++++++++++++++++++++++
- .../linux/linux-yocto-3.10/zaurus-common.scc       |  2 ++
- .../linux/linux-yocto-dev/shrink_kernel.cfg        | 28 ++++++++++++++++++++++
- .../linux/linux-yocto-dev/zaurus-common.scc        |  2 ++
- 4 files changed, 60 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-yocto-3.10/shrink_kernel.cfg
- create mode 100644 recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
+ meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/shrink_kernel.cfg b/recipes-kernel/linux/linux-yocto-3.10/shrink_kernel.cfg
-new file mode 100644
-index 0000000..e784c03
---- /dev/null
-+++ b/recipes-kernel/linux/linux-yocto-3.10/shrink_kernel.cfg
-@@ -0,0 +1,28 @@
-+# CONFIG_MD is not set
-+
-+# CONFIG_NET_VENDOR_3COM is not set
-+# CONFIG_NET_VENDOR_AMD is not set
-+# CONFIG_NET_CADENCE is not set
-+# CONFIG_NET_VENDOR_BROADCOM is not set
-+# CONFIG_NET_VENDOR_CIRRUS is not set
-+# CONFIG_NET_VENDOR_FARADAY is not set
-+# CONFIG_NET_VENDOR_FUJITSU is not set
-+# CONFIG_NET_VENDOR_HP is not set
-+# CONFIG_NET_VENDOR_INTEL is not set
-+# CONFIG_NET_VENDOR_MARVELL is not set
-+# CONFIG_NET_VENDOR_MICREL is not set
-+# CONFIG_NET_VENDOR_MICROCHIP is not set
-+# CONFIG_NET_VENDOR_SEEQ is not set
-+# CONFIG_NET_VENDOR_SMSC is not set
-+# CONFIG_NET_VENDOR_STMICRO is not set
-+# CONFIG_NET_VENDOR_WIZNET is not set
-+# CONFIG_NET_VENDOR_XIRCOM is not set
-+
-+# CONFIG_FTRACE is not set
-+# CONFIG_BRANCH_PROFILE_NONE is not set
-+# CONFIG_BINARY_PRINTF is not set
-+
-+# CONFIG_KPROBES is not set
-+# CONFIG_DEBUG_BUGVERBOSE is not set
-+# CONFIG_DEBUG_INFO is not set
-+# CONFIG_KGDB is not set
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc b/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc
-index 6946ae0..b2354f8 100644
---- a/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc
-+++ b/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc
-@@ -10,3 +10,5 @@ include features/vfat/vfat.scc
- include features/scsi/disk.scc
- include features/hostapd/hostapd.scc
- include features/mac80211/mac80211.scc
-+
-+kconf hardware shrink_kernel.cfg
-diff --git a/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg b/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
-new file mode 100644
-index 0000000..e784c03
---- /dev/null
-+++ b/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
-@@ -0,0 +1,28 @@
-+# CONFIG_MD is not set
-+
-+# CONFIG_NET_VENDOR_3COM is not set
-+# CONFIG_NET_VENDOR_AMD is not set
-+# CONFIG_NET_CADENCE is not set
-+# CONFIG_NET_VENDOR_BROADCOM is not set
-+# CONFIG_NET_VENDOR_CIRRUS is not set
-+# CONFIG_NET_VENDOR_FARADAY is not set
-+# CONFIG_NET_VENDOR_FUJITSU is not set
-+# CONFIG_NET_VENDOR_HP is not set
-+# CONFIG_NET_VENDOR_INTEL is not set
-+# CONFIG_NET_VENDOR_MARVELL is not set
-+# CONFIG_NET_VENDOR_MICREL is not set
-+# CONFIG_NET_VENDOR_MICROCHIP is not set
-+# CONFIG_NET_VENDOR_SEEQ is not set
-+# CONFIG_NET_VENDOR_SMSC is not set
-+# CONFIG_NET_VENDOR_STMICRO is not set
-+# CONFIG_NET_VENDOR_WIZNET is not set
-+# CONFIG_NET_VENDOR_XIRCOM is not set
-+
-+# CONFIG_FTRACE is not set
-+# CONFIG_BRANCH_PROFILE_NONE is not set
-+# CONFIG_BINARY_PRINTF is not set
-+
-+# CONFIG_KPROBES is not set
-+# CONFIG_DEBUG_BUGVERBOSE is not set
-+# CONFIG_DEBUG_INFO is not set
-+# CONFIG_KGDB is not set
-diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc b/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
-index 6946ae0..b2354f8 100644
---- a/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
-+++ b/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
-@@ -10,3 +10,5 @@ include features/vfat/vfat.scc
- include features/scsi/disk.scc
- include features/hostapd/hostapd.scc
- include features/mac80211/mac80211.scc
-+
-+kconf hardware shrink_kernel.cfg
+diff --git a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+index c466a3d..155d282 100644
+--- a/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
++++ b/meta-oe/recipes-qt/fingerterm/fingerterm_1.0.2.bb
+@@ -27,7 +27,7 @@ FILES_${PN} = " \
+ 
+ do_install() {
+     install -d ${D}${bindir}
+-    install -m 0744 ${S}/${PN} ${D}${bindir}
++    install -m 0755 ${S}/${PN} ${D}${bindir}
+ 
+     sed -i -e '/Exec.*/d' fingerterm.desktop
+     sed -i -e '/Icon.*/d' fingerterm.desktop
 -- 
-1.8.1.5
+1.8.3.1
 
 
