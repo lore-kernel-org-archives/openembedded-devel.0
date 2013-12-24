@@ -1,34 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 567626A596
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 3CF51615E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Dec 2013 20:29:58 +0000 (UTC)
-Received: by mail-ig0-f177.google.com with SMTP id uy17so14067303igb.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Dec 2013 12:29:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=SwIC/CUiFcPQg0b89ydZ48rirPP2DDLzx7f4cUK8q4U=;
-	b=InytnWS2W5mz6PiKJ0PhOn+tBma3bx05DW5mFRdVOT1kGNyX4SO/+gn/o/e2eTyTdO
-	th6FKkofCLq8lKBV5Hi8xJRvEmDCKAkZm4v3eJC7HanSy3tyVCcaEoAeHBuNe9lM6w5P
-	YiHXMmqum7yY/y6ZZg3nY70tONMDKmKt0oaX+4bif0FKXNFn0QjjGqa7aB+VdCVmo3dC
-	4HPIG7NmYqNDMc3Ho2cAlHVhO4dVgEFKJF1iIv5DEv+X5SnUN6lDalTmlRp3/s6tbqlq
-	XZSgD01cRuyRnbUh7SvrDw8Y5v2e1kqzm5dCyf5k/ALzXbM8twkfifXh/1wuCylTWV5Z
-	a+zQ==
-X-Received: by 10.50.49.11 with SMTP id q11mr22999789ign.1.1387830599368; Mon,
-	23 Dec 2013 12:29:59 -0800 (PST)
+	Tue, 24 Dec 2013 01:09:31 +0000 (UTC)
+Received: (qmail 246 invoked by uid 1003); 24 Dec 2013 01:09:31 -0000
+Received: from unknown (HELO ?192.168.1.113?)
+	(philip@opensdr.com@108.44.82.190)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	24 Dec 2013 01:09:31 -0000
+Message-ID: <52B8DECA.6060704@balister.org>
+Date: Mon, 23 Dec 2013 20:09:30 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-Received: by 10.50.79.167 with HTTP; Mon, 23 Dec 2013 12:29:29 -0800 (PST)
-In-Reply-To: <CAJTo0LbvjK-4j5dDzZuMk=osskjktH8doWfOERpo6BsRsC8m+g@mail.gmail.com>
-References: <1386931527-12034-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAJTo0LbvjK-4j5dDzZuMk=osskjktH8doWfOERpo6BsRsC8m+g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 23 Dec 2013 12:29:29 -0800
-Message-ID: <CAMKF1sroEz4wbfPn=mvxaOM8Qoc15sqUn5+oyBFbxv6_2tDUgg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-systemd] connman: follow oe-core to 1.20
+To: "Burton, Ross" <ross.burton@intel.com>
+References: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
+In-Reply-To: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
+X-Enigmail-Version: 1.6
+Cc: Poky Project <poky@yoctoproject.org>,
+	OE-devel <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Piglit in Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,34 +36,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Dec 2013 20:29:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Dec 2013 01:09:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 13, 2013 at 3:14 AM, Burton, Ross <ross.burton@intel.com> wrote=
-:
-> On 13 December 2013 10:45, Andreas M=C3=BCller <schnitzeltony@googlemail.=
-com> wrote:
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  .../connman/{connman_1.19.bbappend =3D> connman_1.20.bbappend}         =
-     | 0
->
-> For trivial appends like this you might want to start using bitbake's
-> support for wildcards in bbappends.
->
-> http://cgit.openembedded.org/bitbake/commit/?id=3D31bc9af9cd56e7b31892486=
-9970e850993fafc5f
->
+On 12/23/2013 01:01 PM, Burton, Ross wrote:
+> Hi,
+> 
+> We'd like to integrate Piglit (an OpenGL test suite) into Poky so that
+> we can run automated QA on the GL stack.  Piglit is currently residing
+> in meta-oe, but as Poky is a self-contained project we can't just add
+> meta-oe to it:  apart from the size of meta-oe, we can't ensure
+> stability if meta-oe makes incompatible changes that affect Poky.
+> 
+> Piglit isn't a stand-alone package, there are the dependencies of
+> waffle, python-mako and python-numpy to consider too.  There are two
+> possibilities I can see:
+> 
+> 1) Move piglit and deps to oe-core.  Piglit is for QA purposes only
+> and pushes the boundaries of "core platform".  In a sense this is a
+> repeat of the discussion we had with Midori...  does oe-core contain
+> everything needed to sufficiently exercise the core components it
+> ships or not?
 
-Its a good feature but for beginning
-I would keep it this manual seeing amount of layers we use in
-angstrom, I like explicit errors there are so many bbappends
-in play, it can easily bite us back.
+I expect Richard will push back on this, and I would support him here.
 
+> 
+> 2) Add piglit and deps to meta-yocto.  Probably a new layer called
+> meta-yocto-qa (or similar) because the Yocto Compatible guidelines
+> forbid mixing distribution policy and recipes.  We'd need to sync
+> meta-yocto-qa with the pieces of meta-oe that we want somehow, but
+> that's our problem.
+
+So meta-yocto is right out. I'm a user of numpy, and I certainly do not
+want to include something called meta-yocto-qa just to pick up numpy.
+
+So this presents a quandry. Moving numpy to a special layer to support a
+specific recipe is just not the right thing to do. Conceivably, we could
+create a layer for the bits of meta-oe that are python related, but I am
+not sure that solves your entire problem.
+
+I certainly do not want to see one recipe appear in two layers. That is
+a recipe for trouble.
+
+Long term, we need to make the layer model work for the entire project
+and get over the reluctance to use other peoples layers.
+
+Philip
+
+> 
+> Thoughts and opinions welcome over Christmas, otherwise I'll toss a coin. :)
+> 
 > Ross
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> 
 
