@@ -1,34 +1,42 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F78260E22
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 4238460DFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Dec 2013 14:31:18 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VvT0u-00053e-Hv for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Dec 2013 15:31:16 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Dec 2013 15:31:16 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 27 Dec 2013 05:15:31 +0000 (UTC)
+Received: by mail-yh0-f43.google.com with SMTP id a41so1906037yho.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Dec 2013 15:31:16 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 24 Dec 2013 15:31:07 +0100
-Message-ID: <l9c5qu$71s$1@ger.gmane.org>
-References: <1386931527-12034-1-git-send-email-schnitzeltony@googlemail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <1386931527-12034-1-git-send-email-schnitzeltony@googlemail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-systemd] connman: follow oe-core to 1.20
+	Thu, 26 Dec 2013 21:15:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization; bh=6k049QRzHEKs1nFiPKMTlq1cfbvVAEi7BHXrDuE6+bU=;
+	b=n/PomIhB/KELXnoO6c/KeIAhlW8Uhdhw2dFBNValhanmXbtVECpYMWHYY57bWjfp6o
+	mF3GSmBBCLQ8Abu86+wDU6PPqbt0msnZWN0No1F3wjkcXKCv5TPa/0zvaUnKK7zh8aG9
+	g6W7vdix+DKLAaau5Hzb1FFXMkGh+9QicQLcqxGzrON6MR5JT1JWWE6DbmvayLMHmsey
+	JTU8hTdad/d4Kl0Dq4/04CQcO6bPJW0/QJMYbkJx8O0Z6TkPLHCsub6WwFKkfsLcunxA
+	RW/M51aOhwX3Nv6B6XGsHRgu9KNA/78LdA001ov0k+4mj0fKSMuH47rrRK8avYBWy4dx
+	aW1w==
+X-Received: by 10.236.105.236 with SMTP id k72mr32348058yhg.30.1388121332036; 
+	Thu, 26 Dec 2013 21:15:32 -0800 (PST)
+Received: from nano.lab.ossystems.com.br (72.17.156.179.nw.nuvox.net.
+	[72.17.156.179]) by mx.google.com with ESMTPSA id
+	r64sm44852204yhc.23.2013.12.26.21.15.24 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Dec 2013 21:15:31 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id F41AB17647491; Fri, 27 Dec 2013 03:15:14 -0200 (BRST)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 27 Dec 2013 03:15:14 -0200
+Message-Id: <1388121314-6630-3-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.8.4.3
+In-Reply-To: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
+References: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][for-dora 3/3] ntfs-3g-ntfsprogs: Fix runtime dependency for development package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Dec 2013 14:31:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 27 Dec 2013 05:15:32 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The -dev has a runtime dependency against ${PN} which is empty; we
+allow it to be empty to satisfy the dependency instead of mangingling
+the -dev dependencies.
 
-Andreas Müller schreef op 13-12-13 11:45:
-> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com> --- 
-> .../connman/{connman_1.19.bbappend => connman_1.20.bbappend}
-> | 0 1 file changed, 0 insertions(+), 0 deletions(-) rename
-> meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.19.bbappend
-> => connman_1.20.bbappend} (100%)
-> 
-> diff --git
-> a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.19.bbappend
-> b/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
->
-> 
-similarity index 100%
-> rename from
-> meta-systemd/oe-core/recipes-connectivity/connman/connman_1.19.bbappend 
-> rename to
-> meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb                   | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Do we actually still need those appends? I know we did 2 releases ago, be we
-shouldn't need them anymore, right?
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFSuZqrMkyGM64RGpERAua8AJ996vZ7700j9DOMkR5ej0/KsYJcnQCffMI9
-2LggTo/r9y41XLrP++Dwi2Q=
-=e1x2
------END PGP SIGNATURE-----
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
+index c1392cc..2e7a616 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2013.1.13.bb
+@@ -34,3 +34,6 @@ do_install_append() {
+     # when called. Add the symbolic to let mount could find ntfs.
+     ln -sf mount.ntfs-3g ${D}/${base_sbindir}/mount.ntfs
+ }
++
++# Satisfy the -dev runtime dependency
++ALLOW_EMPTY_${PN} = "1"
+-- 
+1.8.4.3
 
 
