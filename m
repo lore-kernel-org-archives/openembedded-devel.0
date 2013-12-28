@@ -1,43 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
-	[209.85.213.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 661656B40A
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F0D0615BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2013 05:15:34 +0000 (UTC)
-Received: by mail-yh0-f50.google.com with SMTP id b6so1910664yha.37
+	Sat, 28 Dec 2013 09:15:32 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VwpzW-0001dr-CZ for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Dec 2013 10:15:30 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 28 Dec 2013 10:15:30 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Dec 2013 21:15:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=WoHT3HI1l7ic8J6WYBH2Z929lEOKl23lIImwjwcbef0=;
-	b=ecAy0S2QyOntM9BTF8cExmKULFE35sLqxqvzzfgEvBr2qLA3w+olrgmKeZ8SWkhBeC
-	JEph4tcIqihqSfBS1LPuc6XI5z65JLl4aXthPYAPe9DGKQkwcINF9Y16OH1Otvsq2FRF
-	inNxZICefaOnVXUw1uEwhXGJW742jc0JhiwkGTPTZQehK3LbASDYXvKSpeFs5mtpNAeb
-	cY0N5z0D9yqy/UdrBHBKvgjHBINps9LPNskidtD3k3dyC3BuTjajjvF8RYgatZugv2kx
-	wCFDmEyBgvplKV2/zLbFkviTjffoOAjOjATrvJLkuPMH2tlg7twlfUpWl7UUztu7hAg1
-	Yiiw==
-X-Received: by 10.236.91.101 with SMTP id g65mr31611506yhf.35.1388121335377;
-	Thu, 26 Dec 2013 21:15:35 -0800 (PST)
-Received: from nano.lab.ossystems.com.br (72.17.156.179.nw.nuvox.net.
-	[72.17.156.179])
-	by mx.google.com with ESMTPSA id 48sm44882858yhq.11.2013.12.26.21.15.24
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 26 Dec 2013 21:15:34 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id F195D1764748F; Fri, 27 Dec 2013 03:15:14 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Dec 2013 03:15:13 -0200
-Message-Id: <1388121314-6630-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.4.3
-In-Reply-To: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
+	Sat, 28 Dec 2013 10:15:30 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 28 Dec 2013 10:15:21 +0100
+Message-ID: <l9m4qt$96c$1@ger.gmane.org>
 References: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][for-dora 2/3] gdal: Add recipe for 1.10.1 version
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+In-Reply-To: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe][for-dora 1/3] geos: Update to 3.4.2 and rework the packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,127 +42,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2013 05:15:34 -0000
+X-List-Received-Date: Sat, 28 Dec 2013 09:15:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb | 105 +++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+All 3 patches look good to me for going into the dora branch
+
+Otavio Salvador schreef op 27-12-13 06:15:
+> * This updates to the 3.4.2 release and rework the packaging splitting 
+> the C bindings in another binary package to reduce footprint in rootfs;
+> this also moves geos-config to the development package as it should.
+> 
+> * Fix -dev installation and upgrade path Using 'lib_package' renames the
+> binaries and we need a transitional package to be used as upgrade path.
+> This is done using an empty 'geos' package which installs the new ones as
+> runtime dependency.
+> 
+> This same package is used to satisfy -dev dependency of geos package 
+> allowing for its inclusion into SDK.
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br> Signed-off-by:
+> Martin Jansa <Martin.Jansa@gmail.com> --- 
+> .../geos-config-Add-includedir-variable.patch      | 39
+> ++++++++++++++++++++++ meta-oe/recipes-navigation/geos/geos.inc
+> | 22 ++++++------ meta-oe/recipes-navigation/geos/geos_3.3.2.bb      |  7
+> ---- meta-oe/recipes-navigation/geos/geos_3.4.2.bb      |  6 ++++ 4 files
+> changed, 56 insertions(+), 18 deletions(-) create mode 100644
+> meta-oe/recipes-navigation/geos/files/geos-config-Add-includedir-variable.patch
+>
+> 
+delete mode 100644 meta-oe/recipes-navigation/geos/geos_3.3.2.bb
+> create mode 100644 meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+> 
+> diff --git
+> a/meta-oe/recipes-navigation/geos/files/geos-config-Add-includedir-variable.patch
+> b/meta-oe/recipes-navigation/geos/files/geos-config-Add-includedir-variable.patch
+>
+> 
 new file mode 100644
-index 0000000..4632944
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
-@@ -0,0 +1,105 @@
-+DESCRIPTION = "GDAL is a translator library for raster geospatial data formats"
-+HOMEPAGE = "http://www.gdal.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
-+
-+DEPENDS = "proj sqlite3"
-+
-+SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${P}.tar.xz"
-+
-+SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
-+SRC_URI[sha256sum] = "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
-+
-+inherit autotools lib_package binconfig
-+
-+EXTRA_OECONF = "--without-perl \
-+                --without-php \
-+                --without-ruby \
-+                --without-python \
-+                \
-+                --without-grass \
-+                --without-libgrass \
-+                --without-cfitsio \
-+                --without-dds \
-+                --without-gta \
-+                --without-pcidsk \
-+                --without-ogdi \
-+                --without-fme \
-+                --without-hdf4 \
-+                --without-hdf5 \
-+                --without-pg \
-+                --without-jpeg12 \
-+                --without-ogdi \
-+                --without-netcdf \
-+                --without-openjpeg \
-+                --without-fgdb \
-+                --without-ecw \
-+                --without-kakadu \
-+                --without-mrsid \
-+                --without-jp2mrsid \
-+                --without-mrsid_lidar \
-+                --without-msg \
-+                --without-bsb \
-+                --without-grib \
-+                --without-mysql \
-+                --without-ingres \
-+                --without-odbc \
-+                --without-dods_root \
-+                --without-xml2 \
-+                --without-spatialite \
-+                --without-pcre \
-+                --without-dwgdirect \
-+                --without-dwgdirect \
-+                --without-idb \
-+                --without-sde \
-+                --without-sde-version \
-+                --without-epsilon \
-+                --without-webp \
-+                --without-opencl \
-+                --without-opencl-include \
-+                --without-opencl-lib \
-+                --without-freexl \
-+                --without-pam \
-+                --without-poppler \
-+                --without-podofo \
-+                --without-podofo-lib \
-+                --without-podofo-extra-lib-for-test \
-+                --without-static_proj4 \
-+                --without-perl \
-+                --without-php \
-+                --without-ruby \
-+                --without-python \
-+                --without-java \
-+                --without-mdb \
-+                --without-jvm-lib \
-+                --without-jvm-lib-add-rpath \
-+                --without-rasdaman \
-+                --without-armadillo \
-+                \
-+                --with-pcraster=internal \
-+                --with-geotiff=internal \
-+"
-+
-+EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
-+
-+PACKAGECONFIG ?= "geos png jasper"
-+PACKAGECONFIG[geos] = "--with-geos,--without-geos,geos"
-+PACKAGECONFIG[lzma] = "--with-liblzma,--without-liblzma,xz"
-+PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
-+PACKAGECONFIG[tiff] = "--with-libtiff,--without-tiff,tiff"
-+PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
-+PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
-+PACKAGECONFIG[z] = "--with-libz,--without-libz,zlib"
-+PACKAGECONFIG[jasper] = "--with-jasper,--without-jasper,jasper"
-+PACKAGECONFIG[curl] = "--with-curl,--without-curl,curl"
-+
-+do_configure_prepend () {
-+    # The configure script has many hardcoded paths to search
-+    # for the library headers when using external libraries,
-+    # workaround it.
-+    sed -e 's,/usr/include,NON_EXISTENT_DIR,g' \
-+        -e 's,/usr/lib,NON_EXISTENT_DIR,g' \
-+        -i ${S}/configure.in
-+}
-+
-+FILES_${PN} += "${libdir}/gdalplugins"
--- 
-1.8.4.3
+> index 0000000..645e6f6 --- /dev/null +++
+> b/meta-oe/recipes-navigation/geos/files/geos-config-Add-includedir-variable.patch
+>
+> 
+@@ -0,0 +1,39 @@
+> +From 9d51027c228dafd7db2d0cffca1f0fc695e950fd Mon Sep 17 00:00:00 2001 
+> +From: Otavio Salvador <otavio@ossystems.com.br> +Date: Mon, 2 Dec 2013
+> 11:33:26 -0200 +Subject: [PATCH] geos-config: Add includedir variable + 
+> +This fixes cross-compile as it is easier to mangle the includedir 
+> +during sysroot generation. + +Upstream-Status: Pending + +Signed-off-by:
+> Otavio Salvador <otavio@ossystems.com.br> +--- + tools/geos-config.in |
+> 3 ++- + 1 file changed, 2 insertions(+), 1 deletion(-) + +diff --git
+> a/tools/geos-config.in b/tools/geos-config.in +index 9b45b5f..1749892
+> 100644 +--- a/tools/geos-config.in ++++ b/tools/geos-config.in +@@ -1,6
+> +1,7 @@ + #!/bin/sh + prefix=@prefix@ + exec_prefix=@exec_prefix@ 
+> ++includedir=@includedir@ + libdir=@libdir@ + + usage() +@@ -38,7 +39,7
+> @@ case $1 in +     echo @VERSION@ +      ;; +     --cflags) +-    echo
+> -I${prefix}/include ++    echo -I${includedir} +       ;; +     --libs) +
+> # TODO: make an alias for --clibs +-- +1.7.10.4 + diff --git
+> a/meta-oe/recipes-navigation/geos/geos.inc
+> b/meta-oe/recipes-navigation/geos/geos.inc index e0c82bc..2e308b4 100644 
+> --- a/meta-oe/recipes-navigation/geos/geos.inc +++
+> b/meta-oe/recipes-navigation/geos/geos.inc @@ -2,20 +2,20 @@ DESCRIPTION
+> = "GEOS - Geometry Engine, Open Source" HOMEPAGE =
+> "http://trac.osgeo.org/geos/" SECTION = "libs"
+> 
+> -INC_PR = "r1" - LICENSE = "LGPLv2.1+" LIC_FILES_CHKSUM =
+> "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+> 
+> SRC_URI = "http://download.osgeo.org/geos/geos-${PV}.tar.bz2"
+> 
+> -inherit autotools pkgconfig +inherit autotools pkgconfig binconfig + 
+> +PACKAGES =+ "geoslib ${PN}-c1" + +DESCRIPTION_${PN}lib = "Geometry
+> engine for Geographic Information Systems - C++ Library" +FILES_${PN}lib
+> += "${libdir}/libgeos-${PV}.so" + +DESCRIPTION_${PN}-c1 = "Geometry
+> engine for Geographic Information Systems - C Library" +FILES_${PN}-c1 +=
+> "${libdir}/libgeos_c.so.*"
+> 
+> -# libgeos-${PV}.so is needed in PV -FILES_SOLIBSDEV = "" 
+> -FILES_${PN}-dev = "${libdir}/*.la \ -
+> ${libdir}/libgeos.so \ -                   ${libdir}/libgeos_c.so \ -
+> ${includedir}" -FILES_${PN} += " ${libdir}/libgeos-${PV}.so" 
+> -INSANE_SKIP_${PN} = "dev-so" +ALLOW_EMPTY_${PN} = "1" +RDEPENDS_${PN} +=
+> "geoslib ${PN}-c1" diff --git
+> a/meta-oe/recipes-navigation/geos/geos_3.3.2.bb
+> b/meta-oe/recipes-navigation/geos/geos_3.3.2.bb deleted file mode 100644 
+> index e57ca6b..0000000 ---
+> a/meta-oe/recipes-navigation/geos/geos_3.3.2.bb +++ /dev/null @@ -1,7
+> +0,0 @@ -require geos.inc - -PR = "${INC_PR}.0" - -SRC_URI[md5sum] =
+> "5b7270c73fd1c516f368af8fd1962323" -SRC_URI[sha256sum] =
+> "ec64d3a92540a1618aa3b91dc1235caae1c370ec23afd59a2734062bf182ed5b" - diff
+> --git a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+> b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb new file mode 100644 
+> index 0000000..3a9a028 --- /dev/null +++
+> b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb @@ -0,0 +1,6 @@ +require
+> geos.inc + +SRC_URI +=
+> "file://geos-config-Add-includedir-variable.patch" + +SRC_URI[md5sum] =
+> "fc5df2d926eb7e67f988a43a92683bae" +SRC_URI[sha256sum] =
+> "15e8bfdf7e29087a957b56ac543ea9a80321481cef4d4f63a7b268953ad26c53"
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFSvpapMkyGM64RGpERAu23AKCTwqKh/MOVeen0WBKbAtq1CLTDYgCgkXRe
+ZhxeqjTmCOJbU8SGJowgWuE=
+=qqxF
+-----END PGP SIGNATURE-----
 
 
