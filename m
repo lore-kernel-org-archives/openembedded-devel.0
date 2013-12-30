@@ -1,33 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A8B96B2BC
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 02B186B2BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Dec 2013 14:54:19 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id d49so5077789eek.19
+	Mon, 30 Dec 2013 14:54:54 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d49so5113156eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
+	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=/bPYWQkpam47qr3c3FVKzkZdWyv/daqsXGZDeAqHDYU=;
-	b=SLv5SNobLvTqaqKlYkZ9wHGV+rfAT/OuTNC+rrlS+nAfstOc30snPsd+0Td3NTo8Y5
-	RP2MA+88sI8RQs9+eOrGsgkjcps3usHV/0EgB/nLhPFK0demyksRLVQOkiHCNiNPo67X
-	bzj++mkGTx4j7Cn7MG8jaT+zXEJ6Fu+ekabL9rQKDprkT0qo9Qa1TqY9t0jttSlyJLtE
-	qr7R2xOf7p39kvQdlOn9CMJFDoOAcW3jw+gq3jfzzDoYJgDPB3HipP0N0yd92hHiRjei
-	GDXPW8uv9G73reohDMLigJeys6udFhtHR2yMrk3rQQyLNn7Ycfz/ekjg9k/Fb7FatnS4
-	JQcg==
-X-Received: by 10.14.221.1 with SMTP id q1mr81662eep.116.1388415260529;
-	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
+	bh=IEQhD/SZwc5ROvqqIiZC+gctaSx5oamBFM4/tNl3TLs=;
+	b=ru8HFv/FzrO7IN4fSPNev4zk9NL/EHtOLUFgtS+pjY6wFSSR5C2X2NkB3y7LHF4l9h
+	TiRiSaTOGY8UJ1nPXFiwnicp3+T9LANdUmVBqQCOm28yDidu7zzb1qFcZUNxKCEbq0DO
+	wLrim3nJODEo5tXwXXHwVo03QUw0D51Z96lmO0Hz2eKPLBrINag2vXOzlIGBMyPAN25R
+	xpwan0akDTp7PVBv2VAUr02IOikTund+N1Sc0hBBXxJt1wFe1U7g6nGGPcBEpJ9qcYjq
+	bJuFwInzUOK5c2dnTUcTalpHgGLF/LIVFDY4gHluv8BYB/aYvo77UVHvUWpG1bplXB9k
+	tBzQ==
+X-Received: by 10.14.223.198 with SMTP id v46mr54518906eep.20.1388415295571;
+	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	z42sm109375249eeo.17.2013.12.30.06.54.19 for <multiple recipients>
+	b41sm109378263eef.16.2013.12.30.06.54.54 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
+	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Dec 2013 15:54:19 +0100
-Message-Id: <1388415259-6360-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 30 Dec 2013 15:54:55 +0100
+Message-Id: <1388415295-6461-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.4.3
-Subject: [meta-oe][PATCH] mariadb-native: fix dependencies
+Subject: [meta-multimedia][PATCH] sound-theme-freedesktop: Don't set PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,56 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Dec 2013 14:54:20 -0000
+X-List-Received-Date: Mon, 30 Dec 2013 14:54:55 -0000
 
-* unlike BBCLASSEXTENDed native support, dependencies in mariadb-native don't get
-  automatic -native suffix, so mariadb-native was depending on target ncurses and zlib.
-* move the dependency from .inc and apply it with right suffix
+* either fix build to prevent trying to access compiler or don't set
+  PACKAGE_ARCH, signature is different for different MACHINEs
+  e.g.
+  List of dependencies for variable TUNE_ARCH changed from 'set(['X86ARCH32', 'X86ARCH64'])' to 'set([])'
+  Hash for dependent task gettext_0.18.3.1.bb.do_populate_sysroot changed from 915bae004926e982f835d12f511a5f2b to 24c8263bb82124c9000fff3eab16d293
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb | 1 +
- meta-oe/recipes-support/mysql/mariadb_5.1.67.bb        | 2 +-
- meta-oe/recipes-support/mysql/mariadb_5.1.67.inc       | 2 --
- 3 files changed, 2 insertions(+), 3 deletions(-)
+ meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-index e8382e2..15605d0 100644
---- a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-+++ b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
-@@ -2,6 +2,7 @@ require mariadb_${PV}.inc
- inherit native
+diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+index 97a1dba..446cdfa 100644
+--- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
++++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+@@ -5,9 +5,6 @@ LIC_FILES_CHKSUM = "file://CREDITS;md5=3213e601ce34bb42ddc3498903ac4e69"
  
- PROVIDES += "mysql5-native"
-+DEPENDS = "ncurses-native zlib-native"
+ inherit autotools gettext
  
- RDEPENDS_${PN} = ""
- PACKAGES = ""
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-index fc499d4..3b15c00 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
-@@ -1,6 +1,6 @@
- require ${PN}_${PV}.inc
- 
--DEPENDS += "mariadb-native"
-+DEPENDS += "mariadb-native ncurses-native zlib-native"
- 
- PROVIDES += "mysql5"
- 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-index e66f215..7cedd9e 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-@@ -4,8 +4,6 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "ncurses zlib"
+-# with allarch.bbclass configure fails fo no compiler found
+-PACKAGE_ARCH = "all"
 -
- SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x86/mariadb-${PV}.tar.gz \
-            file://configure.in.patch \
-            file://plug.in.patch \
+ SRC_URI = "http://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "d7387912cfd275282d1ec94483cb2f62"
+ SRC_URI[sha256sum] = "cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14"
 -- 
 1.8.4.3
 
