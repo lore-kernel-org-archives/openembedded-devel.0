@@ -1,37 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
-	[209.85.219.52])
-	by mail.openembedded.org (Postfix) with ESMTP id EA30660E7C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A8B96B2BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Dec 2013 03:44:24 +0000 (UTC)
-Received: by mail-oa0-f52.google.com with SMTP id h16so10925557oag.39
+	Mon, 30 Dec 2013 14:54:19 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id d49so5077789eek.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2013 19:44:25 -0800 (PST)
+	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=E4FArepWZ3//Z8tivHAqzCgnX81byXd6zLkIzdR5RP4=;
-	b=Gg2GGouJVSElu+rTm5Z8d1WxsrKG/sT/AEaqiVxqqF3uiOiO8JM+yjLCuwhBjfxaDI
-	QZYGlbLB+C9mp0BbCx3zG9giI/ywBsAOaqZw23HMY1S/8ghO9oquX+KulKhlR6SoyqPV
-	UtkXWNY2z+LQx7X3cfVOaOzfTYcbdA4eY/xpcgXBKPzgRwZPR36lkGpEHwOBvFxsBV4h
-	/ZJ0BxXWQ0tuHjArbbiqsgqJgfgTWJqHqMBsenFwX1u14LTA/c/fk6XQKfrcxpc5yVXX
-	Z5TaYqXT5Sqxj2CroSn29eLtyaVeshFWg9drVQESCDfGPkCt6p95pJsa1dlz4ZB4HlGH
-	1FDA==
-MIME-Version: 1.0
-X-Received: by 10.60.233.9 with SMTP id ts9mr10813919oec.65.1388288665325;
-	Sat, 28 Dec 2013 19:44:25 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Sat, 28 Dec 2013 19:44:25 -0800 (PST)
-In-Reply-To: <l9m4qt$96c$1@ger.gmane.org>
-References: <1388121314-6630-1-git-send-email-otavio@ossystems.com.br>
-	<l9m4qt$96c$1@ger.gmane.org>
-Date: Sun, 29 Dec 2013 01:44:25 -0200
-X-Google-Sender-Auth: 1k3IRvHqqffGSe_4qImbORCMe-8
-Message-ID: <CAP9ODKokWPh=Cii=fyyDLf0_DRahzVD=1PEY6BS-YmOGfUcL_Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe][for-dora 1/3] geos: Update to 3.4.2 and rework the packaging
+	h=from:to:cc:subject:date:message-id;
+	bh=/bPYWQkpam47qr3c3FVKzkZdWyv/daqsXGZDeAqHDYU=;
+	b=SLv5SNobLvTqaqKlYkZ9wHGV+rfAT/OuTNC+rrlS+nAfstOc30snPsd+0Td3NTo8Y5
+	RP2MA+88sI8RQs9+eOrGsgkjcps3usHV/0EgB/nLhPFK0demyksRLVQOkiHCNiNPo67X
+	bzj++mkGTx4j7Cn7MG8jaT+zXEJ6Fu+ekabL9rQKDprkT0qo9Qa1TqY9t0jttSlyJLtE
+	qr7R2xOf7p39kvQdlOn9CMJFDoOAcW3jw+gq3jfzzDoYJgDPB3HipP0N0yd92hHiRjei
+	GDXPW8uv9G73reohDMLigJeys6udFhtHR2yMrk3rQQyLNn7Ycfz/ekjg9k/Fb7FatnS4
+	JQcg==
+X-Received: by 10.14.221.1 with SMTP id q1mr81662eep.116.1388415260529;
+	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	z42sm109375249eeo.17.2013.12.30.06.54.19 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 30 Dec 2013 06:54:20 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Dec 2013 15:54:19 +0100
+Message-Id: <1388415259-6360-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-oe][PATCH] mariadb-native: fix dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,18 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Dec 2013 03:44:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Dec 2013 14:54:20 -0000
 
-Hello Martin,
+* unlike BBCLASSEXTENDed native support, dependencies in mariadb-native don't get
+  automatic -native suffix, so mariadb-native was depending on target ncurses and zlib.
+* move the dependency from .inc and apply it with right suffix
 
-On Sat, Dec 28, 2013 at 7:15 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> All 3 patches look good to me for going into the dora branch
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb | 1 +
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.bb        | 2 +-
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc       | 2 --
+ 3 files changed, 2 insertions(+), 3 deletions(-)
 
-Can you review those for dora?
-
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+index e8382e2..15605d0 100644
+--- a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
++++ b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+@@ -2,6 +2,7 @@ require mariadb_${PV}.inc
+ inherit native
+ 
+ PROVIDES += "mysql5-native"
++DEPENDS = "ncurses-native zlib-native"
+ 
+ RDEPENDS_${PN} = ""
+ PACKAGES = ""
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
+index fc499d4..3b15c00 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
++++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
+@@ -1,6 +1,6 @@
+ require ${PN}_${PV}.inc
+ 
+-DEPENDS += "mariadb-native"
++DEPENDS += "mariadb-native ncurses-native zlib-native"
+ 
+ PROVIDES += "mysql5"
+ 
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+index e66f215..7cedd9e 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+@@ -4,8 +4,6 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-DEPENDS = "ncurses zlib"
+-
+ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x86/mariadb-${PV}.tar.gz \
+            file://configure.in.patch \
+            file://plug.in.patch \
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.8.4.3
+
 
