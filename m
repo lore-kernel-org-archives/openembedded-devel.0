@@ -1,33 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 02B186B2BC
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B96F6158A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Dec 2013 14:54:54 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id d49so5113156eek.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=IEQhD/SZwc5ROvqqIiZC+gctaSx5oamBFM4/tNl3TLs=;
-	b=ru8HFv/FzrO7IN4fSPNev4zk9NL/EHtOLUFgtS+pjY6wFSSR5C2X2NkB3y7LHF4l9h
-	TiRiSaTOGY8UJ1nPXFiwnicp3+T9LANdUmVBqQCOm28yDidu7zzb1qFcZUNxKCEbq0DO
-	wLrim3nJODEo5tXwXXHwVo03QUw0D51Z96lmO0Hz2eKPLBrINag2vXOzlIGBMyPAN25R
-	xpwan0akDTp7PVBv2VAUr02IOikTund+N1Sc0hBBXxJt1wFe1U7g6nGGPcBEpJ9qcYjq
-	bJuFwInzUOK5c2dnTUcTalpHgGLF/LIVFDY4gHluv8BYB/aYvo77UVHvUWpG1bplXB9k
-	tBzQ==
-X-Received: by 10.14.223.198 with SMTP id v46mr54518906eep.20.1388415295571;
-	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	b41sm109378263eef.16.2013.12.30.06.54.54 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 30 Dec 2013 06:54:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Dec 2013 15:54:55 +0100
-Message-Id: <1388415295-6461-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.3
-Subject: [meta-multimedia][PATCH] sound-theme-freedesktop: Don't set PACKAGE_ARCH
+	Mon, 30 Dec 2013 18:26:21 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 30 Dec 2013 10:22:28 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,575,1384329600"; d="scan'208";a="459525224"
+Received: from acdivito-mobl.gar.corp.intel.com (HELO helios.localnet)
+	([10.252.122.91])
+	by orsmga002.jf.intel.com with ESMTP; 30 Dec 2013 10:26:21 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 30 Dec 2013 18:26:20 +0000
+Message-ID: <1402408.P9TClDLlYA@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <1388415259-6360-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1388415259-6360-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] mariadb-native: fix dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,34 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Dec 2013 14:54:55 -0000
+X-List-Received-Date: Mon, 30 Dec 2013 18:26:21 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* either fix build to prevent trying to access compiler or don't set
-  PACKAGE_ARCH, signature is different for different MACHINEs
-  e.g.
-  List of dependencies for variable TUNE_ARCH changed from 'set(['X86ARCH32', 'X86ARCH64'])' to 'set([])'
-  Hash for dependent task gettext_0.18.3.1.bb.do_populate_sysroot changed from 915bae004926e982f835d12f511a5f2b to 24c8263bb82124c9000fff3eab16d293
+Hi Martin,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb | 3 ---
- 1 file changed, 3 deletions(-)
+On Monday 30 December 2013 15:54:19 Martin Jansa wrote:
+> * unlike BBCLASSEXTENDed native support, dependencies in mariadb-native
+> don't get automatic -native suffix, so mariadb-native was depending on
+> target ncurses and zlib. * move the dependency from .inc and apply it with
+> right suffix
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb | 1 +
+>  meta-oe/recipes-support/mysql/mariadb_5.1.67.bb        | 2 +-
+>  meta-oe/recipes-support/mysql/mariadb_5.1.67.inc       | 2 --
+>  3 files changed, 2 insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+> b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb index
+> e8382e2..15605d0 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+> +++ b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+> @@ -2,6 +2,7 @@ require mariadb_${PV}.inc
+>  inherit native
+> 
+>  PROVIDES += "mysql5-native"
+> +DEPENDS = "ncurses-native zlib-native"
+> 
+>  RDEPENDS_${PN} = ""
+>  PACKAGES = ""
+> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
+> b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb index fc499d4..3b15c00
+> 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
+> +++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.bb
+> @@ -1,6 +1,6 @@
+>  require ${PN}_${PV}.inc
+> 
+> -DEPENDS += "mariadb-native"
+> +DEPENDS += "mariadb-native ncurses-native zlib-native"
 
-diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-index 97a1dba..446cdfa 100644
---- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-+++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-@@ -5,9 +5,6 @@ LIC_FILES_CHKSUM = "file://CREDITS;md5=3213e601ce34bb42ddc3498903ac4e69"
- 
- inherit autotools gettext
- 
--# with allarch.bbclass configure fails fo no compiler found
--PACKAGE_ARCH = "all"
--
- SRC_URI = "http://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "d7387912cfd275282d1ec94483cb2f62"
- SRC_URI[sha256sum] = "cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14"
+I'm not following this - does the target version really need ncurses-native 
+and zlib-native?
+
+Cheers,
+Paul
+
 -- 
-1.8.4.3
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
