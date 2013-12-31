@@ -1,41 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-gg0-f181.google.com (mail-gg0-f181.google.com
-	[209.85.161.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2091961223
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 923B760DD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2013 02:08:46 +0000 (UTC)
-Received: by mail-gg0-f181.google.com with SMTP id y1so2419774ggc.40
+	Tue, 31 Dec 2013 09:49:27 +0000 (UTC)
+Received: by mail-ea0-f177.google.com with SMTP id n15so5450124ead.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Dec 2013 18:08:46 -0800 (PST)
+	Tue, 31 Dec 2013 01:49:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=bFLEAT8Dt48Jl4uIqMQvr0RBSzTBi2Zfj50OWx+lHN0=;
-	b=ztjlrLtmlwUsVRvYM+oWAwDqbrj3XgjIsqT3i6Zd3wDtOwAjt8Y8/vAAzlPxVTAHWJ
-	rPCt/mjXzkKr5WHqdFTs+YSuvJA4vtGeTYdoZkFX7X6t8VKF44zF2023mS8uM+GfQLxj
-	JENoR9f/j0iVstUDL//798F7jGMaURSq6gsnTPHaEvhLVELKKJS48qdfMtHparwt1mYP
-	dinW3dFpYhATcsLIZzZLVoIqN5X2bzsJfx8G3tL1SwjYaAIxk9elRTaZsOnbwEK8Ru/G
-	kldLOgOxWjtknwkMEByt7jwWFRRuP847elKb7+f10IdNu4Fqed8/VjLFuzz2BMeMaj85
-	liaw==
-X-Received: by 10.236.129.135 with SMTP id h7mr5162288yhi.75.1388455726765;
-	Mon, 30 Dec 2013 18:08:46 -0800 (PST)
-Received: from nano.lab.ossystems.com.br (72.17.156.179.nw.nuvox.net.
-	[72.17.156.179])
-	by mx.google.com with ESMTPSA id h23sm64211412yhc.0.2013.12.30.18.08.42
-	for <multiple recipients>
+	h=from:to:cc:subject:date:message-id;
+	bh=KkaPyf6x6Q5sZ3/UoODzSm96HN2ihDRvqkyTJMjzdGc=;
+	b=BmILjI6uTrWJn+UnAMQzpJRs7ZljouiMpUqKmQrLWDSP/0xLRleZ2rqiFhMKlOjXjX
+	kWDoqAt9px9luDPJFSdwQNlk+DDf/9IBetKaJBpyop8R8BvZmVKEJnUdznMPgSo9D3VS
+	ufuY6+VFgHMb4WvAtI9UOjwgPlUemtv/T+6QEk3XtDsLt4yM5eSb7MaHYFP7ZBq7MTmx
+	RvPA2gkwhwHhMpsGRofnxqz2FAJTNUgGoSIJ5zAfolYW59QxH5WxiPk/ZygOk4rQy7pB
+	9mwSaggNs56QHxp+Na8tEjmTfGIaPF4pYzm0bvdevPXPOUTBTc9DvYNyVeb7vajcc5sr
+	gSWQ==
+X-Received: by 10.14.100.4 with SMTP id y4mr5845520eef.40.1388483368361;
+	Tue, 31 Dec 2013 01:49:28 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	g47sm116591771eeo.19.2013.12.31.01.49.27 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 30 Dec 2013 18:08:46 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 234171769348F; Tue, 31 Dec 2013 00:08:32 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 31 Dec 2013 00:08:31 -0200
-Message-Id: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.8.5.2
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe] tearofsteel-1080p: Add recipe
+	Tue, 31 Dec 2013 01:49:27 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Dec 2013 10:49:13 +0100
+Message-Id: <1388483363-28575-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-oe][for-dora][PATCH 01/11] libmikmod: use SOURCEFORGE_MIRROR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,38 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2013 02:08:46 -0000
+X-List-Received-Date: Tue, 31 Dec 2013 09:49:28 -0000
 
-This adds the Tears of Steel movie in 1080P as a sample content for
-easy addition in images.
+* archives are no longer available on old URL
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../sample-content/tearsofsteel-1080p.bb                   | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+ meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-new file mode 100644
-index 0000000..86e79f3
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Tears of Steel movie - 1080P"
-+LICENSE = "CC-BY-3.0"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
-+
-+SRC_URI = "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov"
-+
-+inherit allarch
-+
-+do_install() {
-+	install -d ${D}${datadir}/movies
-+	install -m 0644 ${WORKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/
-+}
-+
-+FILES_${PN} += "${datadir}/movies"
+diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
+index 4ab293f..e0a04ae 100644
+--- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
++++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
+ DEPENDS = "alsa-lib texinfo"
+ 
+ SRC_URI = "\
+-    http://mikmod.shlomifish.org/files/${P}.tar.gz \
++    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+ "
+ SRC_URI[md5sum] = "60ac77a804d082230df3009af11ef44f"
+ SRC_URI[sha256sum] = "2311b209255bf24e95161907a16778cb054ac6d447fd8d05f1f0e41a555c7580"
 -- 
-1.8.5.2
+1.8.4.3
 
 
