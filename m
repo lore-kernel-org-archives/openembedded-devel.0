@@ -1,37 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 87F226B5D1
+Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E61260DD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2013 09:49:38 +0000 (UTC)
-Received: by mail-ea0-f180.google.com with SMTP id f15so5470172eak.11
+	Tue, 31 Dec 2013 11:37:53 +0000 (UTC)
+Received: by mail-ea0-f169.google.com with SMTP id l9so4751637eaj.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2013 01:49:39 -0800 (PST)
+	Tue, 31 Dec 2013 03:37:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IEQhD/SZwc5ROvqqIiZC+gctaSx5oamBFM4/tNl3TLs=;
-	b=QK7thVbwrjlTQSh2z6rFsdtGUxCIozyYNwduB6P3cXN4+GARVuhT50qEhvK5Ub1LOv
-	X0wI0E/0Dn1kC/5UJpAwLIxctEanhLnHIrezGGvShej/Mpd79Byq/duOtpq4Uub2nLD7
-	KFJTP9fPMHfw6omqroRWynkY8H/w2mJHo3Fzyh/HDmir+AgWICSADvcBm8HjW+gvwJPT
-	XuTrTPLdPICJk4dvDTFiXgEDKWor1Oen4hv1RLCNkSbuY0Hwd2G3cifJ27OPYUR28OsC
-	ZriBybP5BYrFsfID5T5kOagHqS7QZ47CDDFOzdc9nIaO7TUt4+A9ssgL9Sia8wNko/QT
-	690w==
-X-Received: by 10.14.48.74 with SMTP id u50mr3940010eeb.107.1388483379291;
-	Tue, 31 Dec 2013 01:49:39 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=olxKoF2+jR505wk46H0h1r76ADOWOW0C9q1xiqAAfJI=;
+	b=0m5ZAvryjonM2l7JPVqVZRLyesSjDTxJwwoLQCHN8vQEWKk9xRTbFqRn8SgY08KLR/
+	8FjYrADuoUQIpZWbswHleBtH5RSeTDA76+kKVBDQNzzkFV1WgKNyCAOlbaX7r/PgT+Dy
+	oa49igK2zrwqTxueobZCWeNJ6YjrIwz5o5+isJs4PvWOBuusNDxTkS2IuSWtyy3ihmbG
+	O6uzKwoY1gQKztB6CKIp0Rhcu5WXgnGxrUgf6N563Kip2vbvN2tuEpLmsia3pgFzewBW
+	UBjLOEsEvwcsI0rv+pL2mdcThewRwK6rvwOSabVD3kQTuTOQ1iWXweI5IYasH/b1EgCE
+	BFYw==
+X-Received: by 10.15.31.196 with SMTP id y44mr6229732eeu.96.1388489874859;
+	Tue, 31 Dec 2013 03:37:54 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id m1sm116634377eeg.0.2013.12.31.01.49.38
-	for <multiple recipients>
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	l4sm117415793een.13.2013.12.31.03.37.54 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Dec 2013 01:49:38 -0800 (PST)
+	Tue, 31 Dec 2013 03:37:54 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Dec 2013 10:49:23 +0100
-Message-Id: <1388483363-28575-11-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 31 Dec 2013 12:37:51 +0100
+Message-Id: <1388489871-14502-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.4.3
-In-Reply-To: <1388483363-28575-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1388483363-28575-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][for-dora][PATCH 11/11] sound-theme-freedesktop: Don't set PACKAGE_ARCH
+Subject: [meta-qt5][PATCH] qtwebkit: Depend on gstreamer-1.0 instead of 0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2013 09:49:38 -0000
+X-List-Received-Date: Tue, 31 Dec 2013 11:37:55 -0000
 
-* either fix build to prevent trying to access compiler or don't set
-  PACKAGE_ARCH, signature is different for different MACHINEs
-  e.g.
-  List of dependencies for variable TUNE_ARCH changed from 'set(['X86ARCH32', 'X86ARCH64'])' to 'set([])'
-  Hash for dependent task gettext_0.18.3.1.bb.do_populate_sysroot changed from 915bae004926e982f835d12f511a5f2b to 24c8263bb82124c9000fff3eab16d293
+* since this commit:
+  commit e0debe138cb59c140ebbc69755d36028d2b89459
+  Author: Allan Sandfeld Jensen <allan.jensen@digia.com>
+  Date:   Thu Feb 28 13:42:27 2013 +0100
+  Subject: Switch QtWebKit to GStreamer 1.0.
+
+  qtwebkit supports 1.0 and will use that by default when found
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ recipes-qt/qt5/qtwebkit.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-index 97a1dba..446cdfa 100644
---- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-+++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
-@@ -5,9 +5,6 @@ LIC_FILES_CHKSUM = "file://CREDITS;md5=3213e601ce34bb42ddc3498903ac4e69"
+diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+index c0e0648..9b334ae 100644
+--- a/recipes-qt/qt5/qtwebkit.inc
++++ b/recipes-qt/qt5/qtwebkit.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://Source/WebCore/rendering/RenderApplet.h;endline=22;md
+                     file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
+                     file://Source/JavaScriptCore/parser/Parser.h;endline=23;md5=b57c8a2952a8d0e655988fa0ecb2bf7f"
  
- inherit autotools gettext
+-DEPENDS += "qtdeclarative qtlocation qtsensors ${ICU} ruby-native sqlite3 glib-2.0 gstreamer gst-plugins-base libxslt"
++DEPENDS += "qtdeclarative qtlocation qtsensors ${ICU} ruby-native sqlite3 glib-2.0 gstreamer-1.0 gst-plugins-base-1.0 libxslt"
  
--# with allarch.bbclass configure fails fo no compiler found
--PACKAGE_ARCH = "all"
--
- SRC_URI = "http://people.freedesktop.org/~mccann/dist/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "d7387912cfd275282d1ec94483cb2f62"
- SRC_URI[sha256sum] = "cb518b20eef05ec2e82dda1fa89a292c1760dc023aba91b8aa69bafac85e8a14"
+ # qtwebkit gets terribly big when linking with all debug info, disable by default
+ QTWEBKIT_DEBUG = "QMAKE_CFLAGS+=-g0 QMAKE_CXXFLAGS+=-g0"
 -- 
 1.8.4.3
 
