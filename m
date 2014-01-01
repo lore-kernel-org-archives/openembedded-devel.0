@@ -1,24 +1,38 @@
-Return-Path: <anders@chargestorm.se>
-Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
-	[83.145.59.143])
-	by mail.openembedded.org (Postfix) with ESMTP id C3BFB6B7B8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DA6B6B6F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 18:19:05 +0000 (UTC)
-Received: from [192.168.1.68] (78.70.193.230) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Wed, 1 Jan 2014 19:19:04 +0100
-User-Agent: K-9 Mail for Android
-In-Reply-To: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
+	Wed,  1 Jan 2014 21:12:22 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id e49so5890524eek.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jan 2014 13:12:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=LcrzctTyk42rbVRFjxJeHDNLa9EAhB9mj9+SmUXkbgQ=;
+	b=U6UIXsMDBUywbEcQ0ok4yEQOrLmWu6aCLezRAKMxVRA7hAtYO08uFYa8x3H87eFrDt
+	ukm3ZAtxyGKQM9T6jKyRqD5Bm0+FBR9iOgTo2KWUuLQkkJ37bJln2NSO2OTXzj6ADo5T
+	jFARg0Exz6BzmeN9OV1sfwOJEJXL7CiM+qSEgenG58XiO6j1SYfL8z7i0p0WesF4FLHd
+	q8fc6XdFTIZovRLNYcY4uGWA/voxMDb2LvpvSvKLXnUjJB0opxeplTX0gPDImfsnkK+1
+	xPAIMIazsc4Ehlroc0CkwF1P1Xb+FF0/cra/TepGnDDGyQ9wnJvUuBiishcrqkVZUuc7
+	3Ehg==
+X-Received: by 10.14.208.199 with SMTP id q47mr12645435eeo.77.1388610742740;
+	Wed, 01 Jan 2014 13:12:22 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	h48sm130256718eev.3.2014.01.01.13.12.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Jan 2014 13:12:22 -0800 (PST)
+Date: Wed, 1 Jan 2014 22:12:24 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140101211224.GA3717@jama>
+References: <1388577530-4557-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-From: Anders Darander <anders@chargestorm.se>
-Date: Wed, 1 Jan 2014 19:18:44 +0100
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-Message-ID: <d67ca952-cdaf-4916-bdc0-66b4f61a788d@email.android.com>
-X-GFI-SMTP-Submission: 1
-Subject: Re: [meta-oe][WIP][PATCH 1/8] ktap: upgrade to 0.4
+In-Reply-To: <1388577530-4557-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-oe][PATCH] udisks: Don't enable acl PACKAGECONFIG by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,29 +46,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 18:19:07 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 01 Jan 2014 21:12:23 -0000
+X-Groupsio-MsgNum: 47560
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
+Content-Disposition: inline
 
+--2oS5YaxWCcQjTEyO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Jan 01, 2014 at 12:58:50PM +0100, Martin Jansa wrote:
+> * libacl isn't available in oe-core/meta-oe
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-support/udisks/udisks_2.1.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/udisks/udisks_2.1.1.bb b/meta-oe/rec=
+ipes-support/udisks/udisks_2.1.1.bb
+> index d4c6eff..a0bf148 100644
+> --- a/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
+> +++ b/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
+> @@ -14,7 +14,7 @@ SRC_URI[sha256sum] =3D "013b09ff38aa256b89c01525771f456=
+5cb088724d5c8c79b32e9f811e8
 
-Martin Jansa <martin.jansa@gmail.com> wrote:
->* tag v0.3 (and its SRCREV) doesn't exist in any branch so latest
->bitbake refuses to fetch it
->
->Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+newer udisks also breaks=20
+| configure: error: Package requirements (udisks  >=3D 1.0.0 udisks < 1.1.0=
+) were not met:
 
-This one looks OK to me. I was planning to do the update next week, but that patch could just as well be based on this one instead of the v0.3 recipe. 
+NOTE: recipe gnome-disk-utility-2.32.0-r4: task do_configure: Failed
+ERROR: Task 366
+(/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-gnome/r=
+ecipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb,
+do_configure) failed with exit code '1'
 
-So if we want a quick fix for the bitbake fetcher issue, take this patch. 
+so newer udisks needs to wait for gnome-disk-utility update.
 
-Acked-by: Anders Darander <anders@chargestorm.se>
+> =20
+>  inherit autotools systemd
+> =20
+> -PACKAGECONFIG ??=3D "atasmart polkit acl ${@base_contains('DISTRO_FEATUR=
+ES', 'systemd', 'systemd-login', '', d)}"
+> +PACKAGECONFIG ??=3D "atasmart polkit ${@base_contains('DISTRO_FEATURES',=
+ 'systemd', 'systemd-login', '', d)}"
+>  PACKAGECONFIG[atasmart] =3D "--enable-libatasmart,--disable-libatasmart,=
+libatasmart"
+>  PACKAGECONFIG[polkit] =3D "--enable-polkit,--disable-polkit,polkit"
+>  PACKAGECONFIG[acl] =3D "--enable-acl,--disable-acl,libacl"
+> --=20
+> 1.8.4.3
+>=20
 
--- 
-Anders Darander
-ChargeStorm AB          Tel: +46 702 44 84 36 
-Drottninggatan 20       Email: anders@chargestorm.se
-602 24 Norrköping       Web: www.chargestorm.se
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Sent from my Android phone with K-9 Mail. Please excuse my brevity.
+--2oS5YaxWCcQjTEyO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLEhLgACgkQN1Ujt2V2gBwJvgCeLXPUUw1lbg4f0g75ykdUkkGa
+gKMAoILeCpZCMLvil32wr3eDeascbkKJ
+=QozG
+-----END PGP SIGNATURE-----
+
+--2oS5YaxWCcQjTEyO--
