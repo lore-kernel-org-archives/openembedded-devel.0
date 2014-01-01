@@ -1,34 +1,34 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 63FB8611E8
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 92F276A413
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2013 17:09:53 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id c41so5562157eek.37
+	Wed,  1 Jan 2014 10:53:26 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1VyJQO-0001fr-Tc for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Jan 2014 11:53:20 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jan 2014 11:53:20 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2013 09:09:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8iAYmPoY5VvQsvdWLycD9BdAMAFPzueHsd/4CczLJgI=;
-	b=pFH8YHY6eTKdRxh+9L7qQgfpO5gtzXu5/KtAf0u/wspkIfH7KGKQWdMtg7goG2Y3K4
-	klytgqlvpnHj4FAvftQ5CuI9zuFUg0KIxDZs8K0VdvmcF4Da1bFpMf4hRCFE73TNFufi
-	kvU8/a4dG8UI+jmsW1Nlxdu9Cc/LwTGbGGzWuSbND9Jz0d9ipC72N21Df++i52yKREj4
-	QR5TxJHYKZcpWRtLVxm8KkxithruTe68AQPezqIcHKcwX6F0lZu/cx2rPQjuffnz4o1j
-	jLq3Yvsq6p3Tb1k3ey3Y+cwGFGUl/50cNHDuIBsJnJOc7SqIHA1nCkwxCevQAaTsVHni
-	E8Tg==
-X-Received: by 10.15.43.10 with SMTP id w10mr61251089eev.13.1388509793543;
-	Tue, 31 Dec 2013 09:09:53 -0800 (PST)
-Received: from mizar.localdomain
-	(host45-150-dynamic.9-87-r.retail.telecomitalia.it. [87.9.150.45])
-	by mx.google.com with ESMTPSA id
-	o47sm119806950eem.21.2013.12.31.09.09.52 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Dec 2013 09:09:52 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 01 Jan 2014 11:53:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Dec 2013 18:09:48 +0100
-Message-Id: <1388509788-22249-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld] pull request 20131231
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 01 Jan 2014 11:53:46 +0100
+Message-ID: <la0s29$taa$1@ger.gmane.org>
+References: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+In-Reply-To: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe] tearofsteel-1080p: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,61 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2013 17:09:55 -0000
+X-List-Received-Date: Wed, 01 Jan 2014 10:53:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The following changes since commit debdd39695a7f476d3be75a2e51535db4f94f7df:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-  README.zaurus: add some more details for flashing (2013-12-15 17:33:30 +0100)
+Otavio Salvador schreef op 31-12-13 03:08:
+> This adds the Tears of Steel movie in 1080P as a sample content for easy
+> addition in images.
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-are available in the git repository at:
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 
-  https://github.com/andrea-adami/meta-handheld master
+> --- .../sample-content/tearsofsteel-1080p.bb                   | 14
+> ++++++++++++++ 1 file changed, 14 insertions(+) create mode 100644
+> meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+> 
+> diff --git
+> a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+> b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+>
+> 
+new file mode 100644
+> index 0000000..86e79f3 --- /dev/null +++
+> b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+>
+> 
+@@ -0,0 +1,14 @@
+> +DESCRIPTION = "Tears of Steel movie - 1080P" +LICENSE = "CC-BY-3.0" 
+> +LIC_FILES_CHKSUM =
+> "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+>
+> 
++
+> +SRC_URI =
+> "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov"
+>
+> 
++
+> +inherit allarch + +do_install() { +	install -d ${D}${datadir}/movies +
+> install -m 0644 ${WORKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/ +} + 
+> +FILES_${PN} += "${datadir}/movies"
+> 
 
-for you to fetch changes up to 969bf7ae90c221d2f6e7d9beef1deb5d00723248:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-  linux-yocto*: collie: update Partition Configuration Register patch (2013-12-31 17:55:25 +0100)
-
-----------------------------------------------------------------
-Andrea Adami (5):
-      linux-yocto*: zaurus: beat kernel size down to 2,5 MB
-      linux-yocto*: collie: revert brute hack for CFI detection
-      linux-yocto*: collie: apply workaround for CFI NOR misdetection
-      linux-yocto*: collie: fixup for the CFI reading of nr of hw partitions
-      linux-yocto*: collie: update Partition Configuration Register patch
-
- .../linux/linux-yocto-3.10/collie/collie.scc       |  3 +-
- .../patches/patches-mtd/collie-PCR.patch           | 90 ++++++++++++----------
- .../patches-mtd/collie-cfi-partitions.patch        | 48 ++++++++++++
- .../patches/patches-mtd/collie-force-cfi.patch     | 30 --------
- .../patches/patches-mtd/collie-match-cfi-qry.patch | 29 +++++++
- .../linux/linux-yocto-3.10/shrink_kernel.cfg       | 28 +++++++
- .../linux/linux-yocto-3.10/zaurus-common.scc       |  2 +
- .../linux/linux-yocto-dev/collie/collie.scc        |  3 +-
- .../patches/patches-mtd/collie-PCR.patch           | 90 ++++++++++++----------
- .../patches-mtd/collie-cfi-partitions.patch        | 48 ++++++++++++
- .../patches/patches-mtd/collie-force-cfi.patch     | 30 --------
- .../patches/patches-mtd/collie-match-cfi-qry.patch | 29 +++++++
- .../linux/linux-yocto-dev/shrink_kernel.cfg        | 28 +++++++
- .../linux/linux-yocto-dev/zaurus-common.scc        |  2 +
- .../patches/patches-mtd/collie-PCR.patch           | 90 ++++++++++++----------
- .../patches-mtd/collie-cfi-partitions.patch        | 48 ++++++++++++
- .../patches/patches-mtd/collie-force-cfi.patch     | 30 --------
- .../patches/patches-mtd/collie-match-cfi-qry.patch | 29 +++++++
- .../linux/linux-yocto-tiny-kexecboot_3.10.bbappend |  3 +-
- 19 files changed, 450 insertions(+), 210 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-partitions.patch
- delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-force-cfi.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.10/shrink_kernel.cfg
- create mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-partitions.patch
- delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-force-cfi.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-cfi-partitions.patch
- delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-force-cfi.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
-
--- 
-1.8.1.5
+iD8DBQFSw/O6MkyGM64RGpERAvjqAJ9MoQTYPB8+ByPpjR9ZJQL6VGmNiwCfUUzo
+8ElWYkklCTC8ZLlrykxkKcc=
+=JL0h
+-----END PGP SIGNATURE-----
 
 
