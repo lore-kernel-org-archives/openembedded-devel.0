@@ -1,36 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 645676B89F
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
+	[209.85.219.47])
+	by mail.openembedded.org (Postfix) with ESMTP id D4D896B7AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 12:57:33 +0000 (UTC)
-Received: by mail-ea0-f177.google.com with SMTP id n15so5846428ead.22
+	Wed,  1 Jan 2014 16:04:57 +0000 (UTC)
+Received: by mail-oa0-f47.google.com with SMTP id k1so13945393oag.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 04:57:34 -0800 (PST)
+	Wed, 01 Jan 2014 08:04:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dP95guqyZIFf7muLVEBqW4Q30X7D49DDJw0tyvKR0rw=;
-	b=aAr705OEN0l7kOpucB93ELQPhe8S1dvmOyFF88tKDTF4MAnxOz/NrUTki7uVmEwwyP
-	pl6yv2kd3TfXyZxTFJPbArnsh2ngq8rqk5vvto7tMpWgobTz+7sJKKblzfx5JKGaBYop
-	c5YGdS1w2JznL1ojB3ABk7hpU0LpUHo2J+h8wN9jAJ7PZymT2bujlm7Ze7vPONTPoZ9f
-	ZOTMOZItNz1AIx0wCkD9lyjdohQR0FBP5cSpz3RHSLA0nPVylvYMyWtJ3SWribPAi+hw
-	Vo0ASBqynwWNQsfSM18SLouUxAXSApAxE8MBe+ErOl+6gps0LwkOAzxPukjdCmINbjPl
-	K7wQ==
-X-Received: by 10.15.65.1 with SMTP id p1mr4606735eex.108.1388581054111;
-	Wed, 01 Jan 2014 04:57:34 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	z42sm126867069eeo.17.2014.01.01.04.57.33 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jan 2014 04:57:33 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jan 2014 13:57:26 +0100
-Message-Id: <1388581046-8713-8-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.4.3
-In-Reply-To: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 8/8] cloud9: Fix branch param
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=TvumxM7zt+/5sKTMNQmtEOUvpCsCbIclZT6wMtRLedo=;
+	b=FaqstUnQ1cjKDNQmQ9jcV0FmgpaXcFoVAsNGByYUG0gNpRbVWTs1fNHUtQbx1K69+p
+	+3dl1ui5oeiEGytsvaw8/D1Y+7XgtO1gyjSBpmkxmtheWgw/+CpF2nT/AyQskc2mr8hE
+	JKNp97NU+sUEAwHW/zB2hWlULWIi2XWiqUzhrFsdzUEx6TLbJ46vjsPn1dKItnn4TUwc
+	FhaWV+5C2D4QgfafBP1N4EzPO1K6rR7aqp982dtgYOJUSalGl3H/9BrSypX9aRslCQuT
+	kkydXoE5xvsIKF4KyZgb7er0C0sVkisbk9fyuAx6rmvOiSqKWpQ6R5ncVhkap81su4qy
+	ZhWA==
+MIME-Version: 1.0
+X-Received: by 10.60.52.14 with SMTP id p14mr52477709oeo.28.1388592298423;
+	Wed, 01 Jan 2014 08:04:58 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Wed, 1 Jan 2014 08:04:58 -0800 (PST)
+Received: by 10.182.232.166 with HTTP; Wed, 1 Jan 2014 08:04:58 -0800 (PST)
+In-Reply-To: <20140101123757.GD11840@jama>
+References: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
+	<20140101123757.GD11840@jama>
+Date: Wed, 1 Jan 2014 14:04:58 -0200
+X-Google-Sender-Auth: 6RJHgglwz2XD2IC0z4Rl_FZ-BP8
+Message-ID: <CAP9ODKrkmJfSCRJE_Dv_9eeC00y90Ub_aieksmqdWGsjB2JgmQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] tearofsteel-1080p: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 12:57:34 -0000
+X-List-Received-Date: Wed, 01 Jan 2014 16:04:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Em 01/01/2014 07:37, "Martin Jansa" <martin.jansa@gmail.com> escreveu:
+>
+> On Tue, Dec 31, 2013 at 12:08:31AM -0200, Otavio Salvador wrote:
+> > This adds the Tears of Steel movie in 1080P as a sample content for
+> > easy addition in images.
+>
+> ERROR: No checksum specified for
+/home/jenkins/oe/shr-core-branches/shr-core/downloads/ToS-4k-1920.mov,
+please add at least one to the recipe:
+> SRC_URI[md5sum] = "e3fee55b1779c553e37b1d3988e6fad6"
+> SRC_URI[sha256sum] =
+"bd2b5bc6c16d4085034f47ef7e4b3938afe86b4eec4ac3cf2685367d3b0b23b0"
+> ERROR: Function failed: Fetcher failure for URL: '
+http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov'.
+Missing SRC_URI checksum
+>
+> I'll fix, but please be more careful next time.
 
-diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-index a755470..44b2142 100644
---- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-+++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
-            git://github.com/ajaxorg/ace.wiki.git;destsuffix=git/support/ace/doc/wiki;name=acewiki \
-            git://github.com/ajaxorg/apf.git;destsuffix=git/support/apf;name=apf \
-            git://github.com/ajaxorg/async.js.git;destsuffix=git/support/asyncjs;name=asyncjs \
--           git://github.com/ajaxorg/connect.git;destsuffix=git/support/connect;name=connect \
-+           git://github.com/ajaxorg/connect.git;destsuffix=git/support/connect;name=connect;branch=ajaxorg \
-            git://github.com/jashkenas/coffee-script.git;destsuffix=git/support/connect/support/coffee-script;name=coffee-script \
-            git://github.com/visionmedia/expresso.git;destsuffix=git/support/connect/support/expresso;name=expresso \
-            git://github.com/visionmedia/node-jscoverage.git;destsuffix=git/support/connect/support/expresso/deps/jscoverage;name=jscoverage \
-@@ -29,7 +29,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
-            git://github.com/Gozala/streamer.git;destsuffix=git/support/jsdav/support/jsftp/support/streamer;name=streamer \
-            git://github.com/ajaxorg/node-sftp.git;destsuffix=git/support/jsdav/support/node-sftp;name=sftp \
-            git://github.com/ajaxorg/lib-v8debug.git;destsuffix=git/support/lib-v8debug;name=lib-v8debug \
--           git://github.com/ajaxorg/socket.io.git;destsuffix=git/support/socket.io;name=socketio \
-+           git://github.com/ajaxorg/socket.io.git;destsuffix=git/support/socket.io;name=socketio;branch=cadorn-upstream \
-            git://github.com/LearnBoost/socket.io-client.git;destsuffix=git/support/socket.io-client;name=socketio-client \
-            git://github.com/ajaxorg/treehugger.git;destsuffix=git/support/treehugger;name=treehugger \
-            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
--- 
-1.8.4.3
+Sorry for missing it, I noticed this patch in a branch I had in my laptop
+and preferred to send it instead of losing it.
 
+You know I usually send good patches so I'm sorry for this one.
 
