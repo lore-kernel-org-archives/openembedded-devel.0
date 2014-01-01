@@ -1,38 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E9DCC60D27
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 8481F6A413
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 12:37:54 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id d17so5863705eek.39
+	Wed,  1 Jan 2014 12:57:26 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id o10so5889643eaj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 04:37:55 -0800 (PST)
+	Wed, 01 Jan 2014 04:57:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wbGwMbqtj+Dx4lvQqc0y963UAGhszn9sBKV1pe1S7Uo=;
-	b=eETFBIyMrMicqclyg0T7D/lXiybKg6LJZOV0S6aXOLQd/+/SVqQLO950Ee8giMfgbu
-	auEwimEfvn9QE0KffKInD4tL29mOTYxEEDK9usVUzWVpinRmK49dQ9Ss4ZJE3RAbVBj9
-	y4l03Vy+nYa6ucfiA5NLnrcTQwaTjdqywLyNdQhTlvXOiyv7nRNjNQQytmJlgYNyljeF
-	EdjTp6M7xO5RhF3mzYoKN+yUE3fp/qFjJ8xWpKU0AWVWlQHaIg4VY2mvw96awTDSupU9
-	fBlvA7OMRilwOPgoBEKE0hvKXEmTvsVtsaeGCIQVpP6iYoRd3e4xJw1HJIDoLtxcZ6IS
-	vVXA==
-X-Received: by 10.15.77.134 with SMTP id p6mr64632968eey.0.1388579875725;
-	Wed, 01 Jan 2014 04:37:55 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=+uWPXEPJub+LcGiUuRfB76UQSqGyzLGI7ZSRLaMe9N0=;
+	b=rEwj288wmtaOoN/RoB0qo1US3C2BTK/yBMZf1eyZfUUy5tW7WDrpd++AvBIpPXFYQ5
+	YpaxMSnof7EkQhk1TdiFw0hJ0SMi9DpP7oukzImGePbWkquCT24Q7WWsmd6QiD/W5vLr
+	B3A8Pv2mwMz32t5q/o+8GbgpZcOhZmh3e3gve5ZC7Iqq/kFD0VXTUKH2SY7ikGKQRpvQ
+	Pp4aI13yb8ei4Twmgmn3AqpZ6SDwU5+cOBYbYqBXMtmQEviUJkrtJcooDGDpDtty43bs
+	RAvsgeAbF46DzVmfc88Tw+GDq3G1C7pfzeB7fcsiit/1K23kRH1EzKsI9HhrmfvGBIum
+	AXEg==
+X-Received: by 10.14.149.139 with SMTP id x11mr10930682eej.35.1388581046862;
+	Wed, 01 Jan 2014 04:57:26 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	n1sm126730190eep.20.2014.01.01.04.37.54 for <multiple recipients>
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id 4sm126867602eed.14.2014.01.01.04.57.26
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jan 2014 04:37:54 -0800 (PST)
-Date: Wed, 1 Jan 2014 13:37:57 +0100
+	Wed, 01 Jan 2014 04:57:26 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140101123757.GD11840@jama>
-References: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-MIME-Version: 1.0
-In-Reply-To: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe] tearofsteel-1080p: Add recipe
+Date: Wed,  1 Jan 2014 13:57:19 +0100
+Message-Id: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.4.3
+Subject: [meta-oe][WIP][PATCH 1/8] ktap: upgrade to 0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,86 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 12:37:56 -0000
-X-Groupsio-MsgNum: 47549
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NtwzykIc2mflq5ck"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Jan 2014 12:57:28 -0000
 
---NtwzykIc2mflq5ck
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* tag v0.3 (and its SRCREV) doesn't exist in any branch so latest bitbake refuses to fetch it
 
-On Tue, Dec 31, 2013 at 12:08:31AM -0200, Otavio Salvador wrote:
-> This adds the Tears of Steel movie in 1080P as a sample content for
-> easy addition in images.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-kernel/ktap/{ktap-module_0.3.bb => ktap-module_0.4.bb} | 0
+ meta-oe/recipes-kernel/ktap/ktap.inc                                   | 2 +-
+ meta-oe/recipes-kernel/ktap/{ktap_0.3.bb => ktap_0.4.bb}               | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-kernel/ktap/{ktap-module_0.3.bb => ktap-module_0.4.bb} (100%)
+ rename meta-oe/recipes-kernel/ktap/{ktap_0.3.bb => ktap_0.4.bb} (100%)
 
-ERROR: No checksum specified for /home/jenkins/oe/shr-core-branches/shr-cor=
-e/downloads/ToS-4k-1920.mov, please add at least one to the recipe:
-SRC_URI[md5sum] =3D "e3fee55b1779c553e37b1d3988e6fad6"
-SRC_URI[sha256sum] =3D "bd2b5bc6c16d4085034f47ef7e4b3938afe86b4eec4ac3cf268=
-5367d3b0b23b0"
-ERROR: Function failed: Fetcher failure for URL: 'http://ftp.nluug.nl/pub/g=
-raphics/blender/demo/movies/ToS/ToS-4k-1920.mov'. Missing SRC_URI checksum
+diff --git a/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb b/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
+similarity index 100%
+rename from meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb
+rename to meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
+diff --git a/meta-oe/recipes-kernel/ktap/ktap.inc b/meta-oe/recipes-kernel/ktap/ktap.inc
+index 278b63e..7e60453 100644
+--- a/meta-oe/recipes-kernel/ktap/ktap.inc
++++ b/meta-oe/recipes-kernel/ktap/ktap.inc
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.ktap.org"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE-GPL;md5=eb723b61539feef013de476e68b5c50a"
+ 
+-SRCREV = "c507eeca662ff00bf67f8c94df35254e0966f214"
++SRCREV = "c8401e07c89cdec9a5f673da4ddb12b7982b522b"
+ SRC_URI = "git://github.com/ktap/ktap.git"
+ 
+ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.3.bb b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
+similarity index 100%
+rename from meta-oe/recipes-kernel/ktap/ktap_0.3.bb
+rename to meta-oe/recipes-kernel/ktap/ktap_0.4.bb
+-- 
+1.8.4.3
 
-I'll fix, but please be more careful next time.
 
->=20
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  .../sample-content/tearsofsteel-1080p.bb                   | 14 ++++++++=
-++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/sample-content/tea=
-rsofsteel-1080p.bb
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/sample-content/tearsofste=
-el-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/tearsofstee=
-l-1080p.bb
-> new file mode 100644
-> index 0000000..86e79f3
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080=
-p.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION =3D "Tears of Steel movie - 1080P"
-> +LICENSE =3D "CC-BY-3.0"
-> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/CC-B=
-Y-3.0;md5=3Ddfa02b5755629022e267f10b9c0a2ab7"
-> +
-> +SRC_URI =3D "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/To=
-S-4k-1920.mov"
-> +
-> +inherit allarch
-> +
-> +do_install() {
-> +	install -d ${D}${datadir}/movies
-> +	install -m 0644 ${WORKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/
-> +}
-> +
-> +FILES_${PN} +=3D "${datadir}/movies"
-> --=20
-> 1.8.5.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---NtwzykIc2mflq5ck
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLEDCUACgkQN1Ujt2V2gBxxAgCfTKJ0+f7JHV4IdIvonF5OX2k2
-eQsAnAwGk+7i5frqVDwV7SlMmCie7mRt
-=WKKk
------END PGP SIGNATURE-----
-
---NtwzykIc2mflq5ck--
