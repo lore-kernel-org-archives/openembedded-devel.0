@@ -1,34 +1,35 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 92F276A413
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 10:53:26 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1VyJQO-0001fr-Tc for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Jan 2014 11:53:20 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 11:53:20 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 11:53:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 01 Jan 2014 11:53:46 +0100
-Message-ID: <la0s29$taa$1@ger.gmane.org>
-References: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe] tearofsteel-1080p: Add recipe
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 075746A413;
+	Wed,  1 Jan 2014 11:49:55 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id d17so5862387eek.11
+	for <multiple recipients>; Wed, 01 Jan 2014 03:49:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=sfFoQhFRyGNcQMki3ZaxubADDE1BkPMWp4TLALgavPE=;
+	b=VO/PLqRsE7dmqZ6kFZGr1oM9lbPZr4eRvpFuFHGiuo0ZpbkExXSzhCjJILyQsikHCV
+	Wbj22rOKMu1lcTnA1JsPCbxHY18qDrMHZyTTAfNLBlhMrgq3SMz+GR7ShNab49auUl2E
+	a/c9W0d8aHSnErdhWgU+ZeX2W9HwoIsY9fNP/FnX3c9YwZpMZ9DQLtIWKQTyRgHgrc3r
+	SRCJB+nnsCQyCDU6ve0eU8B6HLBLTpc1GCB6c09V3j2ZoF9tn1A+7POl0lzi+WB5g9Kw
+	bV4fMJDo/OCc8bRFDkSSL75hrjcJAJx3a2dHFQ1ZWLyE48ijh7XbrFIEy399Kh90vDN9
+	T0kg==
+X-Received: by 10.14.204.135 with SMTP id h7mr9004560eeo.104.1388576996554;
+	Wed, 01 Jan 2014 03:49:56 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id v1sm126428020eef.9.2014.01.01.03.49.55
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Jan 2014 03:49:55 -0800 (PST)
+Date: Wed, 1 Jan 2014 12:49:57 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140101114957.GA11840@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: State of bitbake world, Failed tasks Wed Jan
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +43,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 10:53:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Jan 2014 11:49:57 -0000
+X-Groupsio-MsgNum: 47545
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--gKMricLos+KVdGMg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Otavio Salvador schreef op 31-12-13 03:08:
-> This adds the Tears of Steel movie in 1080P as a sample content for easy
-> addition in images.
-> 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+I'll take care of fetch issues in meta-oe git recipes
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-> --- .../sample-content/tearsofsteel-1080p.bb                   | 14
-> ++++++++++++++ 1 file changed, 14 insertions(+) create mode 100644
-> meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-> 
-> diff --git
-> a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-> b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
->
-> 
-new file mode 100644
-> index 0000000..86e79f3 --- /dev/null +++
-> b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
->
-> 
-@@ -0,0 +1,14 @@
-> +DESCRIPTION = "Tears of Steel movie - 1080P" +LICENSE = "CC-BY-3.0" 
-> +LIC_FILES_CHKSUM =
-> "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
->
-> 
-+
-> +SRC_URI =
-> "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov"
->
-> 
-+
-> +inherit allarch + +do_install() { +	install -d ${D}${datadir}/movies +
-> install -m 0644 ${WORKDIR}/ToS-4k-1920.mov ${D}${datadir}/movies/ +} + 
-> +FILES_${PN} += "${datadir}/movies"
-> 
+== Failed tasks Wed Jan  1 11:45:17 UTC 2014 ==
+
+=== common (21) ===
+    * meta-openembedded/meta-efl/recipes-efl/efl/evas_1.7.9.bb, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb, do_fetch
+    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb, do_compile
+    * meta-openembedded/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-kernel/ktap/ktap-module_0.3.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-kernel/ktap/ktap_0.3.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-navigation/navit/navit_svn.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman-e_git.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman_git.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-qt/qtserialport/qtserialport-e_5.1.0.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-support/freerdp/freerdp_git.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-support/libssh/libssh_0.5.5.bb, do_fetch
+    * meta-openembedded/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb, do_fetch
+    * meta-qt5/recipes-qt/qt5/qtlocation_git.bb, do_compile
+    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
+
+=== common-x86 (4) ===
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+=== qemuarm (0) ===
+
+=== qemux86 (1) ===
+    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.14.bb, do_compile
+
+=== qemux86_64 (3) ===
+    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb, do_compile
+
+=== Number of failed tasks ===
+{| class=wikitable
+|-
+||qemuarm       ||21    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20131231_122037.log/
+|-
+||qemux86       ||26    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20131231_161849.log/
+|-
+||qemux86_64    ||28    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20131231_201114.log/
+|}
+
+--gKMricLos+KVdGMg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-iD8DBQFSw/O6MkyGM64RGpERAvjqAJ9MoQTYPB8+ByPpjR9ZJQL6VGmNiwCfUUzo
-8ElWYkklCTC8ZLlrykxkKcc=
-=JL0h
+iEYEARECAAYFAlLEAOUACgkQN1Ujt2V2gBxdbgCbBD51uIb8+vDv8HhItmiWF9x4
+uQwAniR5W14fs8+3trWoUfe6OfQPrh1p
+=N/hL
 -----END PGP SIGNATURE-----
 
-
+--gKMricLos+KVdGMg--
