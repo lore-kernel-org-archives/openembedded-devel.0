@@ -1,39 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
-	[209.85.219.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D4D896B7AF
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
+	[83.145.59.143])
+	by mail.openembedded.org (Postfix) with ESMTP id C3BFB6B7B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 16:04:57 +0000 (UTC)
-Received: by mail-oa0-f47.google.com with SMTP id k1so13945393oag.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 08:04:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=TvumxM7zt+/5sKTMNQmtEOUvpCsCbIclZT6wMtRLedo=;
-	b=FaqstUnQ1cjKDNQmQ9jcV0FmgpaXcFoVAsNGByYUG0gNpRbVWTs1fNHUtQbx1K69+p
-	+3dl1ui5oeiEGytsvaw8/D1Y+7XgtO1gyjSBpmkxmtheWgw/+CpF2nT/AyQskc2mr8hE
-	JKNp97NU+sUEAwHW/zB2hWlULWIi2XWiqUzhrFsdzUEx6TLbJ46vjsPn1dKItnn4TUwc
-	FhaWV+5C2D4QgfafBP1N4EzPO1K6rR7aqp982dtgYOJUSalGl3H/9BrSypX9aRslCQuT
-	kkydXoE5xvsIKF4KyZgb7er0C0sVkisbk9fyuAx6rmvOiSqKWpQ6R5ncVhkap81su4qy
-	ZhWA==
+	Wed,  1 Jan 2014 18:19:05 +0000 (UTC)
+Received: from [192.168.1.68] (78.70.193.230) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Wed, 1 Jan 2014 19:19:04 +0100
+User-Agent: K-9 Mail for Android
+In-Reply-To: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.60.52.14 with SMTP id p14mr52477709oeo.28.1388592298423;
-	Wed, 01 Jan 2014 08:04:58 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 1 Jan 2014 08:04:58 -0800 (PST)
-Received: by 10.182.232.166 with HTTP; Wed, 1 Jan 2014 08:04:58 -0800 (PST)
-In-Reply-To: <20140101123757.GD11840@jama>
-References: <1388455711-20416-1-git-send-email-otavio@ossystems.com.br>
-	<20140101123757.GD11840@jama>
-Date: Wed, 1 Jan 2014 14:04:58 -0200
-X-Google-Sender-Auth: 6RJHgglwz2XD2IC0z4Rl_FZ-BP8
-Message-ID: <CAP9ODKrkmJfSCRJE_Dv_9eeC00y90Ub_aieksmqdWGsjB2JgmQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] tearofsteel-1080p: Add recipe
+From: Anders Darander <anders@chargestorm.se>
+Date: Wed, 1 Jan 2014 19:18:44 +0100
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+Message-ID: <d67ca952-cdaf-4916-bdc0-66b4f61a788d@email.android.com>
+X-GFI-SMTP-Submission: 1
+Subject: Re: [meta-oe][WIP][PATCH 1/8] ktap: upgrade to 0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,29 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 16:04:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Jan 2014 18:19:07 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
 
-Em 01/01/2014 07:37, "Martin Jansa" <martin.jansa@gmail.com> escreveu:
->
-> On Tue, Dec 31, 2013 at 12:08:31AM -0200, Otavio Salvador wrote:
-> > This adds the Tears of Steel movie in 1080P as a sample content for
-> > easy addition in images.
->
-> ERROR: No checksum specified for
-/home/jenkins/oe/shr-core-branches/shr-core/downloads/ToS-4k-1920.mov,
-please add at least one to the recipe:
-> SRC_URI[md5sum] = "e3fee55b1779c553e37b1d3988e6fad6"
-> SRC_URI[sha256sum] =
-"bd2b5bc6c16d4085034f47ef7e4b3938afe86b4eec4ac3cf2685367d3b0b23b0"
-> ERROR: Function failed: Fetcher failure for URL: '
-http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov'.
-Missing SRC_URI checksum
->
-> I'll fix, but please be more careful next time.
 
-Sorry for missing it, I noticed this patch in a branch I had in my laptop
-and preferred to send it instead of losing it.
 
-You know I usually send good patches so I'm sorry for this one.
+Martin Jansa <martin.jansa@gmail.com> wrote:
+>* tag v0.3 (and its SRCREV) doesn't exist in any branch so latest
+>bitbake refuses to fetch it
+>
+>Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+This one looks OK to me. I was planning to do the update next week, but that patch could just as well be based on this one instead of the v0.3 recipe. 
+
+So if we want a quick fix for the bitbake fetcher issue, take this patch. 
+
+Acked-by: Anders Darander <anders@chargestorm.se>
+
+-- 
+Anders Darander
+ChargeStorm AB          Tel: +46 702 44 84 36 
+Drottninggatan 20       Email: anders@chargestorm.se
+602 24 Norrköping       Web: www.chargestorm.se
+
+Sent from my Android phone with K-9 Mail. Please excuse my brevity.
 
