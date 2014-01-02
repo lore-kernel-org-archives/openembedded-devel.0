@@ -1,38 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DA6B6B6F4
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 774726B7AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jan 2014 21:12:22 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id e49so5890524eek.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 13:12:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=LcrzctTyk42rbVRFjxJeHDNLa9EAhB9mj9+SmUXkbgQ=;
-	b=U6UIXsMDBUywbEcQ0ok4yEQOrLmWu6aCLezRAKMxVRA7hAtYO08uFYa8x3H87eFrDt
-	ukm3ZAtxyGKQM9T6jKyRqD5Bm0+FBR9iOgTo2KWUuLQkkJ37bJln2NSO2OTXzj6ADo5T
-	jFARg0Exz6BzmeN9OV1sfwOJEJXL7CiM+qSEgenG58XiO6j1SYfL8z7i0p0WesF4FLHd
-	q8fc6XdFTIZovRLNYcY4uGWA/voxMDb2LvpvSvKLXnUjJB0opxeplTX0gPDImfsnkK+1
-	xPAIMIazsc4Ehlroc0CkwF1P1Xb+FF0/cra/TepGnDDGyQ9wnJvUuBiishcrqkVZUuc7
-	3Ehg==
-X-Received: by 10.14.208.199 with SMTP id q47mr12645435eeo.77.1388610742740;
-	Wed, 01 Jan 2014 13:12:22 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	h48sm130256718eev.3.2014.01.01.13.12.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jan 2014 13:12:22 -0800 (PST)
-Date: Wed, 1 Jan 2014 22:12:24 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140101211224.GA3717@jama>
-References: <1388577530-4557-1-git-send-email-Martin.Jansa@gmail.com>
+	Thu,  2 Jan 2014 00:06:26 +0000 (UTC)
+Received: (qmail 24900 invoked by uid 1003); 2 Jan 2014 00:06:26 -0000
+Received: from unknown (HELO ?192.168.1.122?)
+	(philip@opensdr.com@71.171.44.145)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	2 Jan 2014 00:06:26 -0000
+Message-ID: <52C4AD81.8070803@balister.org>
+Date: Wed, 01 Jan 2014 19:06:25 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-In-Reply-To: <1388577530-4557-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] udisks: Don't enable acl PACKAGECONFIG by default
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+X-Enigmail-Version: 1.6
+Subject: Call for demos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,73 +36,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jan 2014 21:12:23 -0000
-X-Groupsio-MsgNum: 47560
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Jan 2014 00:06:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---2oS5YaxWCcQjTEyO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I was thinking about demos for FOSDEM (thanks to the people that have
+already offered some) and realized I should reach out to the broader
+community.
 
-On Wed, Jan 01, 2014 at 12:58:50PM +0100, Martin Jansa wrote:
-> * libacl isn't available in oe-core/meta-oe
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-support/udisks/udisks_2.1.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-support/udisks/udisks_2.1.1.bb b/meta-oe/rec=
-ipes-support/udisks/udisks_2.1.1.bb
-> index d4c6eff..a0bf148 100644
-> --- a/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
-> +++ b/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
-> @@ -14,7 +14,7 @@ SRC_URI[sha256sum] =3D "013b09ff38aa256b89c01525771f456=
-5cb088724d5c8c79b32e9f811e8
+OpenEmbedded has a stand (table) at FOSDEM to show of the project to the
+oen source community. Typically, whoever comes to FOSDEM brings whatever
+cool thing they are working on with OE at the time. I'd liek to try and
+get some more diverse hardware on display to show how flexible the
+project is.
 
-newer udisks also breaks=20
-| configure: error: Package requirements (udisks  >=3D 1.0.0 udisks < 1.1.0=
-) were not met:
+A good demo should be visually interesting. Blinking lights/ LCD panels
+etc. A few static seriously embedded things are fine, but people love to
+see blinking lights :)
 
-NOTE: recipe gnome-disk-utility-2.32.0-r4: task do_configure: Failed
-ERROR: Task 366
-(/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-gnome/r=
-ecipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb,
-do_configure) failed with exit code '1'
+Long term, I'd like to build up a set of physically small demos we can
+pass around as people attend various conferences to show off
+OpenEmbedded (and the Yocto Project) capabilities.
 
-so newer udisks needs to wait for gnome-disk-utility update.
+What I am looking for is boards with good BSP layers that are well
+supported (preferably by the manufacturer in some way) and have an image
+that is easy for people to reproduce. (Basically, we should show stuff
+that people can go home, order hardware, and build the demo image
+without a lot of tweaking).
 
-> =20
->  inherit autotools systemd
-> =20
-> -PACKAGECONFIG ??=3D "atasmart polkit acl ${@base_contains('DISTRO_FEATUR=
-ES', 'systemd', 'systemd-login', '', d)}"
-> +PACKAGECONFIG ??=3D "atasmart polkit ${@base_contains('DISTRO_FEATURES',=
- 'systemd', 'systemd-login', '', d)}"
->  PACKAGECONFIG[atasmart] =3D "--enable-libatasmart,--disable-libatasmart,=
-libatasmart"
->  PACKAGECONFIG[polkit] =3D "--enable-polkit,--disable-polkit,polkit"
->  PACKAGECONFIG[acl] =3D "--enable-acl,--disable-acl,libacl"
-> --=20
-> 1.8.4.3
->=20
+So what I am looking for is:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1) Donations of hardware we can demo
+2) Software support for the hardware
 
---2oS5YaxWCcQjTEyO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+I'd like to use this as a way for us to show support for vendors that
+support us.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Philip
 
-iEYEARECAAYFAlLEhLgACgkQN1Ujt2V2gBwJvgCeLXPUUw1lbg4f0g75ykdUkkGa
-gKMAoILeCpZCMLvil32wr3eDeascbkKJ
-=QozG
------END PGP SIGNATURE-----
-
---2oS5YaxWCcQjTEyO--
