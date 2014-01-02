@@ -1,28 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B60D60CF1
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 96D3C610CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2014 20:29:17 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 02 Jan 2014 12:25:22 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,592,1384329600"; d="scan'208";a="433154556"
-Received: from unknown (HELO helios.localnet) ([10.252.122.88])
-	by orsmga001.jf.intel.com with ESMTP; 02 Jan 2014 12:29:04 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 02 Jan 2014 20:28:56 +0000
-Message-ID: <1806373.Cm6jJ4qLDy@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <20140102075724.GC3717@jama>
-References: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
-	<1388581046-8713-7-git-send-email-Martin.Jansa@gmail.com>
-	<20140102075724.GC3717@jama>
+	Thu,  2 Jan 2014 23:18:14 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id hq4so18502694wib.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jan 2014 15:18:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=0ezP5OGafLbM1bPlqPhkSDfUcaWfdxArfQXuNQIOYnw=;
+	b=kPApDH5opaYRYDpnWR7KpBAR72auuqbj8ydoxMK4VW1VAyDo45vMzVxjHCThhSRt17
+	kFxVDiJ59/VQMgs9X8eRRNeDBLrwhVhvPFfmLU7/NVXOh9QXPsWbk+Bb0EUOlTVYMcMz
+	TSi+C99eZaKsj4f5ofkcLGPUY8vbofqtL9nc5SpUuGoezScCirJWDA0EjzWbRa8UZtVE
+	lO2Roe2ZE8SQeU3kKU53vnulept46GZmQB7ztGSvOaS6PLWkNoW1+Hg1TCAscPvHqKvf
+	5H24XADpUxEZOIpHTGzS0d5gJgRgIck/l2NYL36GabwcIgDiYz9uvy8gSi00PZ4ZpZ5A
+	Fihg==
+X-Gm-Message-State: ALoCoQlfl5U9I/DdliZOzD4XQdZQsILGwWIpyWyuTDo8Y4IDTMjQAPHLftLHJB/mMnvPMqbIpVxt
+X-Received: by 10.180.97.39 with SMTP id dx7mr7740728wib.10.1388704694736;
+	Thu, 02 Jan 2014 15:18:14 -0800 (PST)
 MIME-Version: 1.0
-Cc: Kevin Strasser <kevin.strasser@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][WIP][PATCH 7/8] ajenti: Bump SRCREV a bit got get revision included in some branch
+Received: by 10.217.150.199 with HTTP; Thu, 2 Jan 2014 15:17:54 -0800 (PST)
+X-Originating-IP: [5.13.221.193]
+In-Reply-To: <1387298509-20865-2-git-send-email-andrei@gherzan.ro>
+References: <1387298509-20865-1-git-send-email-andrei@gherzan.ro>
+	<1387298509-20865-2-git-send-email-andrei@gherzan.ro>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Fri, 3 Jan 2014 01:17:54 +0200
+Message-ID: <CAK18fxG_hv1GJegCQg=Q=S8tMtm2DkD5RmubZ_pey0CFDkcFyA@mail.gmail.com>
+To: openembedded <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Alexandru Niculita <alexnick87@gmail.com>
+Subject: Re: [meta-oe][PATCH 2/2] libsdl-image: Add support for libsdl-image-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,62 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2014 20:29:17 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 02 Jan 2014 23:18:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Martin,
+On Tue, Dec 17, 2013 at 6:41 PM, Andrei Gherzan <andrei@gherzan.ro> wrote:
 
-On Thursday 02 January 2014 08:57:24 Martin Jansa wrote:
-> On Wed, Jan 01, 2014 at 01:57:25PM +0100, Martin Jansa wrote:
-> > * old c08fb4da65923aebd09116750a1f43f13b98a51a exists only in 0.6.2 tag
-> > and latest> 
-> >   bitbake refuses to fetch it
-> > 
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> > 
-> >  meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb | 5 ++---
-> >  1 file changed, 2 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> > b/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb index
-> > 83e92f6..f499339 100644
-> > --- a/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> > +++ b/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> > @@ -9,7 +9,7 @@ DEPENDS += "python-pyopenssl python-lxml python-gevent
-> > python-greenlet \> 
-> >  PV = "0.6.2+git${SRCPV}"
-> > 
-> > -SRC_URI = "git://github.com/Eugeny/ajenti.git \
-> > +SRC_URI = "git://github.com/Eugeny/ajenti.git;branch=ajenti-0.6.x \
-> > 
-> >             file://0001-setup.py-remove-extra-data-files.patch \
-> >             file://0002-plugins-hddstat-fix-disk-usage-check-to-work-with-
-> >             bu.patch \
-> >             file://0003-plugins-sysload-fix-to-work-with-busybox.patch \
-> > 
-> > @@ -22,8 +22,7 @@ SRC_URI = "git://github.com/Eugeny/ajenti.git \
-> > 
-> >  DISTRO_FILES = "file://distro-detection-openembedded.patch \
-> >  
-> >                  file://distributor-logo-openembedded.png"
-> 
-> This one wasn't merged, because the patches need to be rebased, is there
-> someone who cares about ajenti and will test it properly in runtime?
-> 
-> Paul? Kevin?
-> Paul? Kevin?
-
-Unfortunately upstream have recently changed their licensing scheme for newer 
-versions, to the point where I'm much less interested in maintaining the 
-recipe. I have a patch here to just drop it which I'll send out soon.
-
-Cheers,
-Paul
+> From: Alexandru Niculita <alexnick87@gmail.com>
+>
+> Change-Id: If4a11d3e0d7aa800081ac3361cf2662bb979dd7c
+> Signed-off-by: Alexandru Niculita <alexnick87@gmail.com>
+> Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> ---
+>  meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-multimedia/libsdl-image/
+> libsdl-image_1.2.12.bb b/meta-oe/recipes-multimedia/libsdl-image/
+> libsdl-image_1.2.12.bb
+> index 459bf12..19dd4a4 100644
+> --- a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
+> +++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
+> @@ -29,3 +29,5 @@ do_configure_prepend() {
+>      rm -f acinclude/ltsugar.m4
+>      rm -f acinclude/ltversion.m4
+>  }
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 1.8.1.4
+>
+>
+PING?
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+*ag*
 
