@@ -1,41 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 252706B5C4
+Return-Path: <eric@eric-weiss.de>
+Received: from eric-weiss.de (unknown [83.223.64.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 46D996A596
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2014 07:57:22 +0000 (UTC)
-Received: by mail-ea0-f180.google.com with SMTP id f15so6053113eak.25
+	Thu,  2 Jan 2014 11:58:19 +0000 (UTC)
+Received: by eric-weiss.de (Postfix, from userid 1022)
+	id 20162141332; Thu,  2 Jan 2014 12:58:18 +0100 (CET)
+Received: from [10.1.0.4] (hydra.local [10.1.0.4])
+	by eric-weiss.de (Postfix) with ESMTP id B4C7C13EC41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2014 23:57:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+Vcn0Hd2cIP4Mz1NHMgVuT6RUzNQoB+TJgTe5klgDbc=;
-	b=JlPTeRUFoYREKrTumwx8Vf0XCNrAwcNhXFv/YBNgWA7WJxJ0jArZRPVtpjKit4C5wY
-	i7GvsrwtnGgLeGopKA19N4L1WTAJIBlZ6GZCj0A4atCKHt/fTkKrDn4PV1vqIWWqGDdW
-	9IhpQuRA49F5cIj6WRsGMGPElwmHC9waUMSZWt1EcNwW531k/9bj9R7bNSDLTrOp/h7C
-	g4jVbiUS3U8LUV9ljzVuBGUjD3NEC/WgoSCdmVmw1lC3RPRFazt6tVr4qrvHDBnOi7Bz
-	C8WL6530LsxS7hfhMQThSOiqfiit7I6oZcQwvzkD1f18PytP8fYN8V1flg1NNcGJK58a
-	9/ww==
-X-Received: by 10.15.53.4 with SMTP id q4mr330862eew.113.1388649442010;
-	Wed, 01 Jan 2014 23:57:22 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	l4sm133686175een.13.2014.01.01.23.57.20 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jan 2014 23:57:21 -0800 (PST)
-Date: Thu, 2 Jan 2014 08:57:24 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140102075724.GC3717@jama>
-References: <1388581046-8713-1-git-send-email-Martin.Jansa@gmail.com>
-	<1388581046-8713-7-git-send-email-Martin.Jansa@gmail.com>
+	Thu,  2 Jan 2014 12:58:14 +0100 (CET)
+Message-ID: <52C55454.204@eric-weiss.de>
+Date: Thu, 02 Jan 2014 11:58:12 +0000
+From: eric <eric@eric-weiss.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:11.0) Gecko/20120418 Icedove/11.0
 MIME-Version: 1.0
-In-Reply-To: <1388581046-8713-7-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Kevin Strasser <kevin.strasser@linux.intel.com>,
-	Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: [meta-oe][WIP][PATCH 7/8] ajenti: Bump SRCREV a bit got get revision included in some branch
+To: openembedded-devel@lists.openembedded.org
+References: <52C4AD81.8070803@balister.org>
+In-Reply-To: <52C4AD81.8070803@balister.org>
+Subject: Re: Call for demos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,76 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2014 07:57:24 -0000
-X-Groupsio-MsgNum: 47563
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DIOMP1UsTsWJauNi"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Jan 2014 11:58:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---DIOMP1UsTsWJauNi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 01/02/14 00:06, Philip Balister wrote:
+> I was thinking about demos for FOSDEM (thanks to the people that have
+> already offered some) and realized I should reach out to the broader
+> community.
+>
+> OpenEmbedded has a stand (table) at FOSDEM to show of the project to the
+> oen source community. Typically, whoever comes to FOSDEM brings whatever
+> cool thing they are working on with OE at the time. I'd liek to try and
+> get some more diverse hardware on display to show how flexible the
+> project is.
+>
+> A good demo should be visually interesting. Blinking lights/ LCD panels
+> etc. A few static seriously embedded things are fine, but people love to
+> see blinking lights :)
+>
+> Long term, I'd like to build up a set of physically small demos we can
+> pass around as people attend various conferences to show off
+> OpenEmbedded (and the Yocto Project) capabilities.
+>
+> What I am looking for is boards with good BSP layers that are well
+> supported (preferably by the manufacturer in some way) and have an image
+> that is easy for people to reproduce. (Basically, we should show stuff
+> that people can go home, order hardware, and build the demo image
+> without a lot of tweaking).
+>
+> So what I am looking for is:
+>
+> 1) Donations of hardware we can demo
+> 2) Software support for the hardware
+i would like to bring in an ouya game console ( need and hdmi for 
+monitor it )
+and maybe ( depends on if i get repaired the display glass right in 
+time) an  asus tf201  transformer.
 
-On Wed, Jan 01, 2014 at 01:57:25PM +0100, Martin Jansa wrote:
-> * old c08fb4da65923aebd09116750a1f43f13b98a51a exists only in 0.6.2 tag a=
-nd latest
->   bitbake refuses to fetch it
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb b/meta-=
-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> index 83e92f6..f499339 100644
-> --- a/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> +++ b/meta-webserver/recipes-webadmin/ajenti/ajenti_git.bb
-> @@ -9,7 +9,7 @@ DEPENDS +=3D "python-pyopenssl python-lxml python-gevent =
-python-greenlet \
-> =20
->  PV =3D "0.6.2+git${SRCPV}"
-> =20
-> -SRC_URI =3D "git://github.com/Eugeny/ajenti.git \
-> +SRC_URI =3D "git://github.com/Eugeny/ajenti.git;branch=3Dajenti-0.6.x \
->             file://0001-setup.py-remove-extra-data-files.patch \
->             file://0002-plugins-hddstat-fix-disk-usage-check-to-work-with=
--bu.patch \
->             file://0003-plugins-sysload-fix-to-work-with-busybox.patch \
-> @@ -22,8 +22,7 @@ SRC_URI =3D "git://github.com/Eugeny/ajenti.git \
->  DISTRO_FILES =3D "file://distro-detection-openembedded.patch \
->                  file://distributor-logo-openembedded.png"
+> I'd like to use this as a way for us to show support for vendors that
+> support us.
+>
+> Philip
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-This one wasn't merged, because the patches need to be rebased, is there
-someone who cares about ajenti and will test it properly in runtime?
 
-Paul? Kevin?
-
-> =20
-> -# Corresponds to the 0.6.2 tag
-> -SRCREV =3D "c08fb4da65923aebd09116750a1f43f13b98a51a"
-> +SRCREV =3D "411acfd0b96ad7a9bd79b3bdc1f9eef394f62198"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
-> --=20
-> 1.8.4.3
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---DIOMP1UsTsWJauNi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLFG+QACgkQN1Ujt2V2gBzWNgCgrDHjLRSyDQGTgfXD/kwckFT8
-mQMAoKXhIOePITF/WkWoWTy2D/WNY/OP
-=RSNA
------END PGP SIGNATURE-----
-
---DIOMP1UsTsWJauNi--
