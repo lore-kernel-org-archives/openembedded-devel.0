@@ -1,41 +1,38 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FA356B938
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id CD8C26BC1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2014 15:06:47 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id b13so13322113wgh.18
+	Fri,  3 Jan 2014 18:01:35 +0000 (UTC)
+Received: by mail-ob0-f181.google.com with SMTP id uy5so15535462obc.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jan 2014 07:06:47 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=imKGslmOLjfyStDOO4HQ/Z1avzf/YeWpYbtpipmSenU=;
-	b=Ikrw3clT0WjaJeWvsf8diu6wtZtvHdPO/QTCzUv7cOJdjg9n+xL8PFEi4pZ/RUD/Rz
-	e8gEje/ywPt5gfbq9OPyfOuFhaGlboszurUAC9z7bjqibuBH0kmBlGSta5BpDjjqfonX
-	cieLO/X1X4UQg6Fg9QB7vtB/uPoZ+TuyDJoGvtdCiTAKmpaACROtFnqZLMNEUuBXhqvn
-	Nmf6LZqCVXqdl5EH60H66XxHCbspzexh5JjxtV6IO/z8vMWoWgTE/i4tgB9jjjCHRzPy
-	jEk2YGHH+fb95Bye24pdg/TR4HPeZ5/lXOaVZ4zamZwAciyIe3Ej4NpnLqN44g8DH2aX
-	o/wA==
-X-Gm-Message-State: ALoCoQlRwTpIZ0V7+jQ+DCx8bvroWhSNmoYgKPaxTe6mpS1+dzzFZpOfCwvpzxm8YpzJc2OHlvcZ
-X-Received: by 10.180.23.99 with SMTP id l3mr2268637wif.26.1388761607765; Fri,
-	03 Jan 2014 07:06:47 -0800 (PST)
+	Fri, 03 Jan 2014 10:01:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=sXwbCQowI83IJNDsgsRVwdzPTnASZNE/BzrxtmcTVjg=;
+	b=iBPMJhxr14dqZOVtED7ICrTW70WEIwjB5u4+n3NXlCO9wEXm3Fg/94sXKiptqZkl3F
+	q28QS+LSXQ7DzHwE30neowdehOoMj/Nl/J7NOR1ITGVrGcrvGFkApVT62R24woUysuQf
+	nJvO9xSSToT9FcC7ndQBzezRL1+WjWs3UOxWiOK8jfxhLGPkYB72KOnfQaoTHfhQAIiV
+	ibLEh7kFDwLBYw3xv6Gbk94Hi2RJ8NhRIBlfpngtJVQnH8M5YpFhLXFTSe6eiONUnECM
+	RJaeRPEf3+1Qxn/5fE4tyTmhITKxSqULUkdKOwNhGlQLauSoQklo83kgWH3/htj/KJ7H
+	aZWQ==
 MIME-Version: 1.0
-Received: by 10.217.150.199 with HTTP; Fri, 3 Jan 2014 07:06:27 -0800 (PST)
-X-Originating-IP: [5.13.221.193]
-In-Reply-To: <8077054.ZVN9KvzOmn@helios>
-References: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
-	<l9pfvj$rqa$1@ger.gmane.org> <20140103112512.GA30264@gmail.com>
-	<8077054.ZVN9KvzOmn@helios>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 3 Jan 2014 17:06:27 +0200
-Message-ID: <CAK18fxEZNNDK4MOT9+qUwHg5UXcYbqmrAXAHjPSTqiCVnBuRCA@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded <openembedded-devel@lists.openembedded.org>,
-	openembedded <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Piglit in Poky
+X-Received: by 10.60.34.3 with SMTP id v3mr1226351oei.67.1388772096421; Fri,
+	03 Jan 2014 10:01:36 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.232.166 with HTTP; Fri, 3 Jan 2014 10:01:36 -0800 (PST)
+In-Reply-To: <20140101123625.GC11840@jama>
+References: <1387240261-7045-1-git-send-email-otavio@ossystems.com.br>
+	<1387240261-7045-4-git-send-email-otavio@ossystems.com.br>
+	<20140101123625.GC11840@jama>
+Date: Fri, 3 Jan 2014 16:01:36 -0200
+X-Google-Sender-Auth: LOCMK_IQddFXbCQvSbaedf-JCaM
+Message-ID: <CAP9ODKoxN6pb3JvjzY7x8NPmDj2U0jVtsUgYxrgdx7ney5J2cw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe PATCH v2 4/6] gdal: Add recipe for 1.10.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,104 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2014 15:06:47 -0000
+X-List-Received-Date: Fri, 03 Jan 2014 18:01:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Jan 3, 2014 at 3:26 PM, Paul Eggleton <paul.eggleton@linux.intel.com
-> wrote:
+Hello Martin,
 
-> On Friday 03 January 2014 13:25:13 Andrei Gherzan wrote:
-> > On Sun, Dec 29, 2013 at 04:44:52PM +0100, Koen Kooi wrote:
-> > > -----BEGIN PGP SIGNED MESSAGE-----
-> > > Hash: SHA1
-> > >
-> > > Philip Balister schreef op 28-12-13 23:33:
-> > > > On 12/28/2013 10:28 AM, Koen Kooi wrote:
-> > > >> Paul Eggleton schreef op 28-12-13 12:48:
-> > > >>> Hi Koen,
-> > > >>>
-> > > >>> On Tuesday 24 December 2013 15:22:32 Koen Kooi wrote:
-> > > >>>> Burton, Ross schreef op 23-12-13 19:01:
-> > > >>>>> We'd like to integrate Piglit (an OpenGL test suite) into Poky
-> > > >>>>> so that we can run automated QA on the GL stack.  Piglit is
-> > > >>>>> currently residing in meta-oe, but as Poky is a self-contained
-> > > >>>>> project we can't just add meta-oe to it:  apart from the size of
-> > > >>>>> meta-oe, we can't ensure stability if meta-oe makes incompatible
-> > > >>>>> changes that affect Poky.
-> > > >>>>>
-> > > >>>>> Piglit isn't a stand-alone package, there are the dependencies
-> > > >>>>> of waffle, python-mako and python-numpy to consider too.  There
-> > > >>>>> are two possibilities I can see:
-> > > >>>>>
-> > > >>>>> 1) Move piglit and deps to oe-core.  Piglit is for QA purposes
-> > > >>>>> only and pushes the boundaries of "core platform".  In a sense
-> > > >>>>> this is a repeat of the discussion we had with Midori...  does
-> > > >>>>> oe-core contain everything needed to sufficiently exercise the
-> > > >>>>> core components it ships or not?
-> > > >>>>>
-> > > >>>>> 2) Add piglit and deps to meta-yocto.  Probably a new layer
-> > > >>>>> called meta-yocto-qa (or similar) because the Yocto Compatible
-> > > >>>>> guidelines forbid mixing distribution policy and recipes.
-> > > >>>>
-> > > >>>> Speaking of layers, can you *please* rename meta-yocto to
-> > > >>>> meta-poky? It's what it's actually is and would remove a lot of
-> > > >>>> confusion when trying to explain that yocto is not a distro, even
-> > > >>>> if the distro layer is called 'meta-yocto'.
-> > > >>>
-> > > >>> This is a tangent, but a couple of points:
-> > > >>>
-> > > >>> 1) This rename would not come for free. We'd need to update
-> people's
-> > > >>> existing bblayers.conf files on the fly, as we did when
-> > > >>> meta-yocto-bsp was split out of meta-yocto, and thus bump
-> > > >>> LCONF_VERSION; however, doing this only in poky has resulted in
-> > > >>> annoying problems when users remove poky from their configurations
-> > > >>> (since LCONF_VERSION is out-of-step between Poky and OE-Core,
-> leading
-> > > >>> to confusing errors in this situation). Thus I think we'd want to
-> > > >>> solve this once and for all by bumping the value in OE-Core as well
-> > > >>> as Poky.
-> > > >>>
-> > > >>> 2) If you propose this rename, perhaps you will also consider
-> > > >>> renaming meta-oe, since that name within a similarly named
-> > > >>> meta-openembedded repository leads to a similar level of
-> > > >>> confusion...?
-> > > >>
-> > > >> I have no problems with renaming that layer since I get confused by
-> > > >> this a few times a week myself :)
-> > > >
-> > > > What would we we rename it to?
-> > >
-> > > I'm very tempted to suggest 'meta-yocto'
-> >
-> > I definitely find meta-yocto a better option here. It would save me from
-> > some confusion when talking about yocto to other people.
+On Wed, Jan 1, 2014 at 10:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Dec 16, 2013 at 10:30:59PM -0200, Otavio Salvador wrote:
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> ---
+>> Changes in v2: None
 >
-> I'm not following; meta-yocto is already called meta-yocto ... ? Maybe you
-> didn't realise Koen was joking...
+> Please fix following error detected in:
+> http://jenkins.nas-admin.org/job/oe_shr-image-all_tmpfs_qemuarm/173/consoleFull
 >
->
-Misread that. I thought he was talking about poky. Taking back my stupid
-statement.
+> ERROR: This autoconf log indicates errors, it looked at host include
+> and/or library paths while determining system capabilities.
+> Rerun configure task after fixing this. The path was
+> '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gdal/1.10.1-r0/gdal-1.10.1'
+> ERROR: Function failed: do_qa_configure
+> ERROR: Logfile of failure stored in:
+> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gdal/1.10.1-r0/temp/log.do_configure.883
+> NOTE: recipe gdal-1.10.1-r0: task do_configure: Failed
+> ERROR: Task 14201
+> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb,
+> do_configure) failed with exit code '1'
 
-
-
->  > Related to meta-oe, even if that would be a smaller problem, I think
-> > meta-openembedded is a better name for that layer too.
->
-> That doesn't solve the problem I was talking about, namely that there's
-> little
-> distinction between meta-openembedded the repository (that contains a
-> number
-> of layers) and meta-oe which is one of those layers. These are two
-> different
-> things and the similar naming makes it hard to always know which one people
-> are talking about.
-
-
-In that case the collection of layers should be meta-openembedded and the
-meta-oe layer something like meta-openembedded-common or whatever.
+Can you send me the full log? I failed to identify  what causes it.
 
 -- 
-*ag*
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
