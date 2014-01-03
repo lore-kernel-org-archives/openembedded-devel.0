@@ -1,41 +1,41 @@
 Return-Path: <andrei@gherzan.ro>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id E75A960F29
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FA356B938
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2014 14:56:52 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id z2so541765wiv.6
+	Fri,  3 Jan 2014 15:06:47 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so13322113wgh.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jan 2014 06:56:53 -0800 (PST)
+	Fri, 03 Jan 2014 07:06:47 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type;
-	bh=TXSQKB+Ltdtc2qVd8nK9LQhNQA613Kri8Ob5qfw2eE4=;
-	b=FafT6nf6YJ9da2SroZYi6I9NkuWyuNz38U1QvHnHnqUGNWkg3SVQpokTpBfGG+u4Sd
-	gOQthoRg75131X2D/WQ2J6POY+l6t1nWDBXesh/65HVtqOJ7JrxYOOXEvbSqwnm3qYWO
-	k9SO/I1HtknNq1Qhy3GUsBjdwyqXZQ429JU7TlGpBJZ1rMUusVY6OBBSnX6sI2U8lmV3
-	oThaUqatqw5ah13rb4Zl3DJTXjfUXveEz/ak1J/2EDB4CczEBQi4qKC4njHuyavu5MO0
-	MCMRrhvqsaCc7uY6IvXpBg5n9zZeQRh/v8t7IpxXolK+IuK3OZdfAyH5zSfcQrsFJkYp
-	voeg==
-X-Gm-Message-State: ALoCoQl5H6Wax+doivMaglSrHqf96kYVfOM0sQEOykvXVYdRpyJmc5udoubyUoSQn1F6o4/44JIB
-X-Received: by 10.180.23.99 with SMTP id l3mr2231731wif.26.1388761013588; Fri,
-	03 Jan 2014 06:56:53 -0800 (PST)
+	bh=imKGslmOLjfyStDOO4HQ/Z1avzf/YeWpYbtpipmSenU=;
+	b=Ikrw3clT0WjaJeWvsf8diu6wtZtvHdPO/QTCzUv7cOJdjg9n+xL8PFEi4pZ/RUD/Rz
+	e8gEje/ywPt5gfbq9OPyfOuFhaGlboszurUAC9z7bjqibuBH0kmBlGSta5BpDjjqfonX
+	cieLO/X1X4UQg6Fg9QB7vtB/uPoZ+TuyDJoGvtdCiTAKmpaACROtFnqZLMNEUuBXhqvn
+	Nmf6LZqCVXqdl5EH60H66XxHCbspzexh5JjxtV6IO/z8vMWoWgTE/i4tgB9jjjCHRzPy
+	jEk2YGHH+fb95Bye24pdg/TR4HPeZ5/lXOaVZ4zamZwAciyIe3Ej4NpnLqN44g8DH2aX
+	o/wA==
+X-Gm-Message-State: ALoCoQlRwTpIZ0V7+jQ+DCx8bvroWhSNmoYgKPaxTe6mpS1+dzzFZpOfCwvpzxm8YpzJc2OHlvcZ
+X-Received: by 10.180.23.99 with SMTP id l3mr2268637wif.26.1388761607765; Fri,
+	03 Jan 2014 07:06:47 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.217.150.199 with HTTP; Fri, 3 Jan 2014 06:56:33 -0800 (PST)
+Received: by 10.217.150.199 with HTTP; Fri, 3 Jan 2014 07:06:27 -0800 (PST)
 X-Originating-IP: [5.13.221.193]
-In-Reply-To: <20140103002808.GA3707@jama>
-References: <1387298509-20865-1-git-send-email-andrei@gherzan.ro>
-	<1387298509-20865-2-git-send-email-andrei@gherzan.ro>
-	<CAK18fxG_hv1GJegCQg=Q=S8tMtm2DkD5RmubZ_pey0CFDkcFyA@mail.gmail.com>
-	<20140103002808.GA3707@jama>
+In-Reply-To: <8077054.ZVN9KvzOmn@helios>
+References: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
+	<l9pfvj$rqa$1@ger.gmane.org> <20140103112512.GA30264@gmail.com>
+	<8077054.ZVN9KvzOmn@helios>
 From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Fri, 3 Jan 2014 16:56:33 +0200
-Message-ID: <CAK18fxEJ1kAALVeQEFAjxrr5qdXLkz69xQC2kmU5c6c3Qmzm=w@mail.gmail.com>
-To: openembedded <openembedded-devel@lists.openembedded.org>
+Date: Fri, 3 Jan 2014 17:06:27 +0200
+Message-ID: <CAK18fxEZNNDK4MOT9+qUwHg5UXcYbqmrAXAHjPSTqiCVnBuRCA@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Alexandru Niculita <alexnick87@gmail.com>
-Subject: Re: [meta-oe][PATCH 2/2] libsdl-image: Add support for libsdl-image-native
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded <openembedded-devel@lists.openembedded.org>,
+	openembedded <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Piglit in Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,53 +49,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2014 14:56:55 -0000
+X-List-Received-Date: Fri, 03 Jan 2014 15:06:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Jan 3, 2014 at 2:28 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> On Fri, Jan 03, 2014 at 01:17:54AM +0200, Andrei Gherzan wrote:
-> > On Tue, Dec 17, 2013 at 6:41 PM, Andrei Gherzan <andrei@gherzan.ro>
+On Fri, Jan 3, 2014 at 3:26 PM, Paul Eggleton <paul.eggleton@linux.intel.com
 > wrote:
-> >
-> > > From: Alexandru Niculita <alexnick87@gmail.com>
-> > >
-> > > Change-Id: If4a11d3e0d7aa800081ac3361cf2662bb979dd7c
-> > > Signed-off-by: Alexandru Niculita <alexnick87@gmail.com>
-> > > Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
-> > > ---
-> > >  meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb | 2 ++
-> > >  1 file changed, 2 insertions(+)
-> > >
-> > > diff --git a/meta-oe/recipes-multimedia/libsdl-image/
-> > > libsdl-image_1.2.12.bb b/meta-oe/recipes-multimedia/libsdl-image/
-> > > libsdl-image_1.2.12.bb
-> > > index 459bf12..19dd4a4 100644
-> > > --- a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-> > > +++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
-> > > @@ -29,3 +29,5 @@ do_configure_prepend() {
-> > >      rm -f acinclude/ltsugar.m4
-> > >      rm -f acinclude/ltversion.m4
-> > >  }
-> > > +
-> > > +BBCLASSEXTEND = "native"
-> > > --
-> > > 1.8.1.4
-> > >
-> > >
-> > PING?
->
-> It cannot be merged without libsdl-native merged in oe-core, so until
-> this is resolved:
->
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-December/087633.html
->
-> there is no point in merging it in meta-oe (libsdl-image-native failed
-> in last world build).
->
->
-Indeed. Will ping oe-core for that one. Thanks.
 
+> On Friday 03 January 2014 13:25:13 Andrei Gherzan wrote:
+> > On Sun, Dec 29, 2013 at 04:44:52PM +0100, Koen Kooi wrote:
+> > > -----BEGIN PGP SIGNED MESSAGE-----
+> > > Hash: SHA1
+> > >
+> > > Philip Balister schreef op 28-12-13 23:33:
+> > > > On 12/28/2013 10:28 AM, Koen Kooi wrote:
+> > > >> Paul Eggleton schreef op 28-12-13 12:48:
+> > > >>> Hi Koen,
+> > > >>>
+> > > >>> On Tuesday 24 December 2013 15:22:32 Koen Kooi wrote:
+> > > >>>> Burton, Ross schreef op 23-12-13 19:01:
+> > > >>>>> We'd like to integrate Piglit (an OpenGL test suite) into Poky
+> > > >>>>> so that we can run automated QA on the GL stack.  Piglit is
+> > > >>>>> currently residing in meta-oe, but as Poky is a self-contained
+> > > >>>>> project we can't just add meta-oe to it:  apart from the size of
+> > > >>>>> meta-oe, we can't ensure stability if meta-oe makes incompatible
+> > > >>>>> changes that affect Poky.
+> > > >>>>>
+> > > >>>>> Piglit isn't a stand-alone package, there are the dependencies
+> > > >>>>> of waffle, python-mako and python-numpy to consider too.  There
+> > > >>>>> are two possibilities I can see:
+> > > >>>>>
+> > > >>>>> 1) Move piglit and deps to oe-core.  Piglit is for QA purposes
+> > > >>>>> only and pushes the boundaries of "core platform".  In a sense
+> > > >>>>> this is a repeat of the discussion we had with Midori...  does
+> > > >>>>> oe-core contain everything needed to sufficiently exercise the
+> > > >>>>> core components it ships or not?
+> > > >>>>>
+> > > >>>>> 2) Add piglit and deps to meta-yocto.  Probably a new layer
+> > > >>>>> called meta-yocto-qa (or similar) because the Yocto Compatible
+> > > >>>>> guidelines forbid mixing distribution policy and recipes.
+> > > >>>>
+> > > >>>> Speaking of layers, can you *please* rename meta-yocto to
+> > > >>>> meta-poky? It's what it's actually is and would remove a lot of
+> > > >>>> confusion when trying to explain that yocto is not a distro, even
+> > > >>>> if the distro layer is called 'meta-yocto'.
+> > > >>>
+> > > >>> This is a tangent, but a couple of points:
+> > > >>>
+> > > >>> 1) This rename would not come for free. We'd need to update
+> people's
+> > > >>> existing bblayers.conf files on the fly, as we did when
+> > > >>> meta-yocto-bsp was split out of meta-yocto, and thus bump
+> > > >>> LCONF_VERSION; however, doing this only in poky has resulted in
+> > > >>> annoying problems when users remove poky from their configurations
+> > > >>> (since LCONF_VERSION is out-of-step between Poky and OE-Core,
+> leading
+> > > >>> to confusing errors in this situation). Thus I think we'd want to
+> > > >>> solve this once and for all by bumping the value in OE-Core as well
+> > > >>> as Poky.
+> > > >>>
+> > > >>> 2) If you propose this rename, perhaps you will also consider
+> > > >>> renaming meta-oe, since that name within a similarly named
+> > > >>> meta-openembedded repository leads to a similar level of
+> > > >>> confusion...?
+> > > >>
+> > > >> I have no problems with renaming that layer since I get confused by
+> > > >> this a few times a week myself :)
+> > > >
+> > > > What would we we rename it to?
+> > >
+> > > I'm very tempted to suggest 'meta-yocto'
+> >
+> > I definitely find meta-yocto a better option here. It would save me from
+> > some confusion when talking about yocto to other people.
+>
+> I'm not following; meta-yocto is already called meta-yocto ... ? Maybe you
+> didn't realise Koen was joking...
+>
+>
+Misread that. I thought he was talking about poky. Taking back my stupid
+statement.
+
+
+
+>  > Related to meta-oe, even if that would be a smaller problem, I think
+> > meta-openembedded is a better name for that layer too.
+>
+> That doesn't solve the problem I was talking about, namely that there's
+> little
+> distinction between meta-openembedded the repository (that contains a
+> number
+> of layers) and meta-oe which is one of those layers. These are two
+> different
+> things and the similar naming makes it hard to always know which one people
+> are talking about.
+
+
+In that case the collection of layers should be meta-openembedded and the
+meta-oe layer something like meta-openembedded-common or whatever.
 
 -- 
 *ag*
