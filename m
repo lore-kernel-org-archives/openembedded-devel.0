@@ -1,38 +1,41 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id A60B16BBB8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B9B7615B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2014 20:59:32 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id c13so6937099eek.30
+	Fri,  3 Jan 2014 21:59:25 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e51so5930823eek.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jan 2014 12:59:33 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=8RbyhH7nWQLcWvv9FRYV9eLjN7Q1AHuXDIl8cAyXYKQ=;
-	b=jRd8U+5Dn2+dTLXJLpLyho6uiZpOn8PVXqNUY4W9N+ufqesN6mZNjVyF/jj6mCJRjW
-	2/MXyrEQ/toRJe4Oqngc9RoAAxg7qJhN4AXGdDraCH1xBz6H5q5xMsljrdzRm4fhSUFO
-	ibrJpEKUfeypsnowtxySd2Hh77U62kus7ia4STGKWDtrud6HYK4uSTv3Lb1h9efUVhqm
-	cwlXyAQ9VhDESTwGseMMk++unbnI4sp9MW3234T9cn2BSCMjprH29fc0YdoqgnCXfpLX
-	i84eLyzJWhq5GrI790eAnxmnb+d7anXqaoo+jVXZQt4bws/+DfbQiVfkh9OTEYjMaEwK
-	jO9g==
-X-Gm-Message-State: ALoCoQknViUMj8PhprWx3qsre2AVgN3Ud1GgBPTaWM1iQ/cyZudwilD7K0oeXVhVtr37VhxLCGWn
-X-Received: by 10.14.87.2 with SMTP id x2mr4142579eee.79.1388782773473;
-	Fri, 03 Jan 2014 12:59:33 -0800 (PST)
-Received: from localhost.localdomain (5-13-221-193.residential.rdsnet.ro.
-	[5.13.221.193]) by mx.google.com with ESMTPSA id
-	p45sm148062011eeg.1.2014.01.03.12.59.32 for <multiple recipients>
+	Fri, 03 Jan 2014 13:59:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XxafobvnVH3GNpqxUTkpVE4slFXesR+5Hy//u2KlBT8=;
+	b=AoVwLZyvu7HLi4eiK3VIYdz4uA/l8jPn4DM1HjuRzUF3VALHjLpFuSniA2IYL7KkOA
+	hBXr7q8LB3NKUjl+fj12maX4TBmHpS8N0OOyUSetl8AOADNXJoNqCSeLBiwLXVVlWse1
+	O61pJpz93uVEOukRkZw5SowNbmjFX2nC3flArtSa76okU48kT7DU0IELk/hx1m9GKygp
+	9TVUjAqCN4T+Fw1IwspaogxCJRO0CsJa1cfA57v5+XOu3/VtN0ui76qD2RIoBliLmWSX
+	btJEERivKZk9uImz0C4t0x3iVMmqyUim522vG1rv20jPSOlVxTlN1yANITJuiAySe+r9
+	A+VA==
+X-Received: by 10.14.173.7 with SMTP id u7mr75493816eel.24.1388786365937;
+	Fri, 03 Jan 2014 13:59:25 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	h48sm148412416eev.3.2014.01.03.13.59.24 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 03 Jan 2014 12:59:33 -0800 (PST)
-From: Andrei Gherzan <andrei@gherzan.ro>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Jan 2014 22:59:25 +0200
-Message-Id: <1388782765-16266-3-git-send-email-andrei@gherzan.ro>
-X-Mailer: git-send-email 1.8.1.4
-In-Reply-To: <1388782765-16266-1-git-send-email-andrei@gherzan.ro>
-References: <1388782765-16266-1-git-send-email-andrei@gherzan.ro>
-Subject: [meta-oe][PATCH 3/3] libass: Remove unrecognised --enable-png options
+	Fri, 03 Jan 2014 13:59:25 -0800 (PST)
+Date: Fri, 3 Jan 2014 22:59:30 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20140103215930.GI3707@jama>
+References: <1387240261-7045-1-git-send-email-otavio@ossystems.com.br>
+	<1387240261-7045-4-git-send-email-otavio@ossystems.com.br>
+	<20140101123625.GC11840@jama>
+	<CAP9ODKoxN6pb3JvjzY7x8NPmDj2U0jVtsUgYxrgdx7ney5J2cw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKoxN6pb3JvjzY7x8NPmDj2U0jVtsUgYxrgdx7ney5J2cw@mail.gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe PATCH v2 4/6] gdal: Add recipe for 1.10.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +49,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2014 20:59:33 -0000
+X-List-Received-Date: Fri, 03 Jan 2014 21:59:26 -0000
+X-Groupsio-MsgNum: 47584
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="UthUFkbMtH2ceUK2"
+Content-Disposition: inline
 
-Change-Id: Ib748bfbd3437e3cfdeaba7283b99aa55ad479a6a
-Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
----
- meta-oe/recipes-multimedia/libass/libass.inc | 1 -
- 1 file changed, 1 deletion(-)
+--UthUFkbMtH2ceUK2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
-index a0dc564..64405ff 100644
---- a/meta-oe/recipes-multimedia/libass/libass.inc
-+++ b/meta-oe/recipes-multimedia/libass/libass.inc
-@@ -19,7 +19,6 @@ PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
- EXTRA_OECONF = " \
-     --enable-enca \
-     --enable-fontconfig \
--    --enable-png \
- "
- 
- PACKAGES =+ "${PN}-tests"
--- 
-1.8.1.4
+On Fri, Jan 03, 2014 at 04:01:36PM -0200, Otavio Salvador wrote:
+> Hello Martin,
+>=20
+> On Wed, Jan 1, 2014 at 10:36 AM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+> > On Mon, Dec 16, 2013 at 10:30:59PM -0200, Otavio Salvador wrote:
+> >> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> >> ---
+> >> Changes in v2: None
+> >
+> > Please fix following error detected in:
+> > http://jenkins.nas-admin.org/job/oe_shr-image-all_tmpfs_qemuarm/173/con=
+soleFull
+> >
+> > ERROR: This autoconf log indicates errors, it looked at host include
+> > and/or library paths while determining system capabilities.
+> > Rerun configure task after fixing this. The path was
+> > '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe=
+-linux-gnueabi/gdal/1.10.1-r0/gdal-1.10.1'
+> > ERROR: Function failed: do_qa_configure
+> > ERROR: Logfile of failure stored in:
+> > /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-=
+linux-gnueabi/gdal/1.10.1-r0/temp/log.do_configure.883
+> > NOTE: recipe gdal-1.10.1-r0: task do_configure: Failed
+> > ERROR: Task 14201
+> > (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/=
+recipes-navigation/gdal/gdal_1.10.1.bb,
+> > do_configure) failed with exit code '1'
+>=20
+> Can you send me the full log? I failed to identify  what causes it.
 
+It's already gone running another build but next time I see it I'll try
+to keep the log.
 
+>=20
+> --=20
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--UthUFkbMtH2ceUK2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLHMsIACgkQN1Ujt2V2gBxN4wCfXw9yAvRKTP2+BXVSEJS6QCPe
+cx0An3ed3YtR8DnktCiZ+7tJg8TKM/wd
+=jOop
+-----END PGP SIGNATURE-----
+
+--UthUFkbMtH2ceUK2--
