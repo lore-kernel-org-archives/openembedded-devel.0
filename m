@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 933396B961
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0ACBD6BA13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Jan 2014 11:14:07 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id c41so7001633eek.23
+	Sat,  4 Jan 2014 11:14:08 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id m10so7158492eaj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Jan 2014 03:14:08 -0800 (PST)
+	Sat, 04 Jan 2014 03:14:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:in-reply-to:references;
-	bh=r2tONMSdcK8n0NW3NlPHt6wvEXEX+ag9Prj6OAck4/Q=;
-	b=LnuuGa85KLHtG4jYnCucSC/ErXVdLdIYwH/76LMyejHTn0/Mp71noIk5YgJmHnqL19
-	yOxJeLCyKHIe3oE0/cbWfktadZxQOMVacQTkBFiNa/RjmNHo9HujdXOHpDLNnUIvyTRL
-	vbKfXA10pdmFEifShZ8WdOCIfBetDf3yoKPLi8Bx0Ch7O4B3Nclusq5SOYJJU8Mn2KDe
-	3dayRTwieH6SEXhXieDLZsGc5aGP5xmUt2MM9joRdZ84hr57hVbWLjhM1MgiyXl82i39
-	wax0mVbZtRz8XlDfwcBj9nnj/sOKi4erILYlTlLpkR/jDMjJ8E2qr8J06F/ojZ2WPHCM
-	mWPw==
-X-Received: by 10.15.110.8 with SMTP id cg8mr25830517eeb.42.1388834048299;
-	Sat, 04 Jan 2014 03:14:08 -0800 (PST)
+	bh=xn1zAX19TMTZKV6P8zV1yrAX9XjSHKQGQ4xhIp/pp68=;
+	b=TqU6HyYd4YLFX1R3qIQjd4RkjG2qja5cxPzAx6j/paz/2NX9q96g1vo4yJhMCHCAe1
+	uG8mPw2MWs2kksaBr/uK8YzlL4Pa7fXhY4h3QTlgUd7t9OYmFvsu06ujlsFU5LtGQ2by
+	wwc07BzRAWEI3P9YsqYnleQVUj/tOaDu+k9wfb/dnx6Y+/SZhCEBD3tM+rmqmViJc87k
+	pevmQmYNWmpDUslSdsyjYc13n952N4rQlNWqZMYH2ymW/OWhUDJuF9C/2kPygB14f8XM
+	xTMMrW77HjPSELWGZf0sgZQtDGQkv29RoTrIarP33lX8tYbmUp4YLjl7j+k+ud/Ggy4l
+	9sQA==
+X-Received: by 10.15.32.73 with SMTP id z49mr79079221eeu.27.1388834049731;
+	Sat, 04 Jan 2014 03:14:09 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id 4sm152645027eed.14.2014.01.04.03.14.07
-	for <multiple recipients>
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	o47sm152646531eem.21.2014.01.04.03.14.09 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 04 Jan 2014 03:14:07 -0800 (PST)
+	Sat, 04 Jan 2014 03:14:09 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Jan 2014 12:13:59 +0100
-Message-Id: <80e8c34db0c96ba2fe7c1838312df99001ff6602.1388833883.git.Martin.Jansa@gmail.com>
+Date: Sat,  4 Jan 2014 12:14:00 +0100
+Message-Id: <7ffd054687958b403e3413ddc7dcf6e73b7f7732.1388833883.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.4.3
 In-Reply-To: <cover.1388833883.git.Martin.Jansa@gmail.com>
 References: <cover.1388833883.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1388833883.git.Martin.Jansa@gmail.com>
 References: <cover.1388833883.git.Martin.Jansa@gmail.com>
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [meta-oe][for-dylan][PATCH 3/9] cifs-utils: Add PACKAGECONFIG for cifscreds, cifsupcall
+Subject: [meta-oe][for-dylan][PATCH 4/9] gateone: Drop allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jan 2014 11:14:07 -0000
+X-List-Received-Date: Sat, 04 Jan 2014 11:14:09 -0000
 
-From: Martin Jansa <martin.jansa@gmail.com>
-
-* make files in bindir/sbindir a bit more deterministic
+* runtime dependencies are TUNE_PKGARCH causing do_package_write_*
+  task to have different signature for MACHINEs with different
+  TUNE_PKGARCH
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe@deserted.net>
 ---
- meta-networking/recipes-support/cifs/cifs-utils_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-connectivity/gateone/gateone_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-index 3d15ff3..0d0f5c6 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-@@ -13,6 +13,10 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-connectivity/gateone/gateone_git.bb b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+index e5b8527..e94376f 100644
+--- a/meta-oe/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-oe/recipes-connectivity/gateone/gateone_git.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/liftoff/GateOne.git \
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
-+# when enabled, it creates ${bindir}/cifscreds and --ignore-fail-on-non-empty in do_install_append is needed
-+PACKAGECONFIG[cifscreds] = "--enable-cifscreds,--disable-cifscreds,keyutils"
-+# when enabled, it creates ${sbindir}/cifs.upcall and --ignore-fail-on-non-empty in do_install_append is needed
-+PACKAGECONFIG[cifsupcall] = "--enable-cifsupcall,--disable-cifsupcall,krb5 talloc keyutils"
+ S = "${WORKDIR}/git"
  
- inherit autotools pkgconfig
+-inherit distutils allarch python-dir systemd
++inherit distutils python-dir systemd
+ 
+ export prefix = "${localstatedir}/lib"
  
 -- 
 1.8.4.3
