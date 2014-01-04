@@ -1,34 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id D4EE560C02
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F3D460D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Jan 2014 07:46:03 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id c13so6963496eek.2
+	Sat,  4 Jan 2014 11:14:02 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id d17so6997715eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jan 2014 23:46:04 -0800 (PST)
+	Sat, 04 Jan 2014 03:14:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=LYiorHT5Or0pArXpkFgmjkcyc3RmCJvRDAN1iNnN/uA=;
-	b=Y96xrODUMz2GxDwNPPvEoceMhCKVblDtERHdByLDK/LrFySmpxptfdMXDDK6QsNoYg
-	e15Ut/QTW/u2wD/bTeiOJ+gE4EJvXbbkf0MLaE2c8Qa1xt3JAQGGPSiidDAhShz7gj2T
-	UvrDd/ALsGdCDgENX4EwVkwadYOV6FgJTNI5zBLesckeMOg/1iO7kj+XYAkqpKjltWYW
-	iWoZU2wtlW+4nmKZBNJrfWziMAlU4vm/AGSoN0srW2UvUBjDEdp2NDzTOuWqkzZF6ery
-	2Jp64TxQx2HB2yi1T74BETyuzr2TUuiDUiKUR10IZ5LE9D8KLF0HMI9PVhcBdQngMUKA
-	XCRw==
-X-Received: by 10.14.127.132 with SMTP id d4mr6476051eei.66.1388821564613;
-	Fri, 03 Jan 2014 23:46:04 -0800 (PST)
+	bh=ZuoDS1iru6Gpxj8IYJG2WVyZNRY+o61TgYYr+rmwcro=;
+	b=WqtZZR4hO0kQPR363RCUUDwoDFmzGm7v6D+ZmpPFTpwEfdyB7Bh1nhqbTc/FOmO7YO
+	Are9u5VsfvheErWUHESTmWxex+CACbRI689xLixiePlAjXH7YQ1TyDytECE0ZLFMC5i+
+	LnAgYoIgwDGoVEH4HXaHcA6Pc9eu8x5mp0y6Z/7DbdpbRk0rDQW33fqCGMCn+Hj/lzGM
+	QDqpBYqeK7nfXof1KAkYRNy+LBgDgFMpHL1554m9Eb/5LeOFoh7PKED4Dla1By/P6OhN
+	TDyGMXHvoGkvnPy/kI5OTqZ4pcxmKp7VEQkihwOZskeoDLhKUCjfTtwcpT5sztSGq2H9
+	2HnA==
+X-Received: by 10.14.6.136 with SMTP id 8mr78064155een.11.1388834042665;
+	Sat, 04 Jan 2014 03:14:02 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id m1sm151346474eeg.0.2014.01.03.23.46.03
-	for <multiple recipients>
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	g47sm152645453eeo.19.2014.01.04.03.14.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 03 Jan 2014 23:46:04 -0800 (PST)
+	Sat, 04 Jan 2014 03:14:02 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Jan 2014 08:46:08 +0100
-Message-Id: <1388821568-16253-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  4 Jan 2014 12:13:56 +0100
+Message-Id: <cover.1388833883.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.4.3
-Subject: [meta-oe][PATCH] Update after toplevel LICENSE file checksum change
+Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+Subject: [meta-oe][for-dylan][PATCH 0/9] Dylan backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,199 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jan 2014 07:46:04 -0000
+X-List-Received-Date: Sat, 04 Jan 2014 11:14:03 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb              | 2 +-
- .../recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb | 2 +-
- meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb               | 2 +-
- meta-oe/recipes-core/llvm/llvm-common.bb                                | 2 +-
- meta-oe/recipes-core/packagegroups/packagegroup-basic.bb                | 2 +-
- meta-oe/recipes-core/packagegroups/packagegroup-boot.bb                 | 2 +-
- meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb       | 2 +-
- meta-oe/recipes-extended/polkit/polkit-group-rule-datetime.bb           | 2 +-
- meta-oe/recipes-extended/polkit/polkit-group-rule-network.bb            | 2 +-
- meta-oe/recipes-extended/zram/zram_0.1.bb                               | 2 +-
- meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb          | 2 +-
- .../recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb    | 2 +-
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb          | 2 +-
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb      | 2 +-
- 14 files changed, 14 insertions(+), 14 deletions(-)
+The following changes since commit 44754206632dd5b0725aeb43e99e4ff9e0245dca:
 
-diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-index 25f5357..fa261a5 100644
---- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Efl Software Development Kit"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- 
- ALLOW_EMPTY_${PN} = "1"
-diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-index 70a88d7..b761317 100644
---- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Efl Software Development Kit"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- 
- ALLOW_EMPTY_${PN} = "1"
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
-index ff91b20..ec476f8 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Configuration files for kexecboot"
- DESCRIPTION = "Default icon and boot.cfg for kexecboot linux-as-bootloader."
- SECTION = "base"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- PR = "r14"
- 
- SRC_URI = "file://icon.xpm"
-diff --git a/meta-oe/recipes-core/llvm/llvm-common.bb b/meta-oe/recipes-core/llvm/llvm-common.bb
-index 395ab01..cedfde7 100644
---- a/meta-oe/recipes-core/llvm/llvm-common.bb
-+++ b/meta-oe/recipes-core/llvm/llvm-common.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Helper script for OE's llvm support"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420 \
- "
- 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-index c100b79..4f7e705 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-@@ -3,7 +3,7 @@
- 
- DESCRIPTION = "Basic task to get a device online"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- PR = "r13"
- 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-index a46f4fa..c29d9ef 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Basic task to get a device booting"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- PR = "r58"
- 
-diff --git a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-index b9e5a29..346ccf1 100644
---- a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-+++ b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Packages required for a target (on-device) SDK"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- PR = "r1"
- 
-diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule-datetime.bb b/meta-oe/recipes-extended/polkit/polkit-group-rule-datetime.bb
-index 373e4f0..eced4b6 100644
---- a/meta-oe/recipes-extended/polkit/polkit-group-rule-datetime.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit-group-rule-datetime.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Create usergroup datetime. All members off this group are allowed set date/time/timezone via system dbus"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- require polkit-group-rule.inc
- 
-diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule-network.bb b/meta-oe/recipes-extended/polkit/polkit-group-rule-network.bb
-index bba1136..551ed3e 100644
---- a/meta-oe/recipes-extended/polkit/polkit-group-rule-network.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit-group-rule-network.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Create usergroup network. All members off this group are allowed to modify networkmanager settings"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- require polkit-group-rule.inc
- 
-diff --git a/meta-oe/recipes-extended/zram/zram_0.1.bb b/meta-oe/recipes-extended/zram/zram_0.1.bb
-index 02abb12..1a89e7e 100644
---- a/meta-oe/recipes-extended/zram/zram_0.1.bb
-+++ b/meta-oe/recipes-extended/zram/zram_0.1.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Linux zram compressed in-memory swap"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- inherit update-rc.d systemd
- 
-diff --git a/meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb b/meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
-index 9512986..56130f2 100644
---- a/meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
-+++ b/meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Machine specific systemd units"
- 
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
-diff --git a/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb b/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-index b869572..d9e0ae6 100644
---- a/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-+++ b/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "All packages multimedia packages available for XFCE"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- inherit packagegroup
- 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-index 3d8b062..4b789b2 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "All packages required for a base installation of XFCE"
- SECTION = "x11/wm"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- PR = "r5"
- 
- inherit packagegroup
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 30fd138..bf0135a 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "All packages for full XFCE installation"
- SECTION = "x11/wm"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- 
- PR = "r10"
- 
+  net-snmp: Backport fix for NETSNMP_NO_SYSTEMD typos (2013-10-10 21:30:38 +0200)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib jansa/dylan-backports
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/dylan-backports
+
+Martin Jansa (9):
+  tbb: Disable thumb
+  rfkill: Fix build when WORKDIR is included in some git checkout
+  cifs-utils: Add PACKAGECONFIG for cifscreds, cifsupcall
+  gateone: Drop allarch
+  mime-support: Drop allarch
+  zram: Drop allarch
+  usb-modeswitch-data: Exclude SIGGEN dependency on usb-modeswitch
+  fbset-modes: Explicitly set MACHINE_ARCH
+  tvheadend: Disable dvdscan
+
+ .../recipes-dvb/tvheadend/tvheadend_git.bb         |  1 +
+ .../recipes-support/cifs/cifs-utils_git.bb         |  4 +++
+ meta-oe/conf/layer.conf                            |  4 +++
+ .../recipes-connectivity/gateone/gateone_git.bb    |  2 +-
+ .../dont.call.git.rev-parse.on.parent.dir.patch    | 31 ++++++++++++++++++++++
+ meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb  |  3 ++-
+ meta-oe/recipes-extended/zram/zram_0.1.bb          |  5 ++--
+ meta-oe/recipes-support/fbset/fbset-modes.bb       |  6 ++++-
+ .../mime-support/mime-support_3.48.bb              |  1 -
+ meta-oe/recipes-support/tbb/tbb_4.1.bb             |  8 ++++++
+ 10 files changed, 59 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/rfkill/rfkill/dont.call.git.rev-parse.on.parent.dir.patch
+
 -- 
 1.8.4.3
 
