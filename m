@@ -1,38 +1,26 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-ob0-f178.google.com (mail-ob0-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B572A60D7F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2014 11:04:03 +0000 (UTC)
-Received: by mail-ob0-f178.google.com with SMTP id uz6so18392991obc.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2014 03:04:04 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=ONQb+1yL2y3v1uBqdZ27wpPajVsEgq+w9wbwPjnrAi8=;
-	b=AXrxkv5SbdTiVD/UpW9Q3YeJQsyvVQnBEW8eYAGC2xHIxE8DzThAn8Aoq/oqW0krpJ
-	A6/CUMdLfrujEOoyjaObged3LAWqN8/Rp0gLtrQf9RNNqX1NARhD7zvjfUgWqM1U4B6J
-	KF7WWllTx+ZgRiZB/AtNX39BJrfBqv1L7hu9govCAC2bfy3Hv3dSaK7t+0drwdGhi/nf
-	ICtQH+8lQpKhogtPnWVRqbGoV/HAsQ2WHawEibH/Zs++G/Zml1VbUcJrRV3648eG3Pcc
-	gcpT2cFjAJpGyAaLWIeQgq0oWTfxO1jIkyb8gHxnQ/oRKWfSVO73Z584sNjlaMDkI7bX
-	jD0Q==
-X-Gm-Message-State: ALoCoQkJ2rCcxOPesmxb8PU8kLGAjPi0OlP5+bqvCIilkqo5wycsTdU7OlNb1SMQCFFtIbFDxk43
-X-Received: by 10.60.115.138 with SMTP id jo10mr249745oeb.71.1389006244584;
-	Mon, 06 Jan 2014 03:04:04 -0800 (PST)
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id C786760D2D;
+	Mon,  6 Jan 2014 11:22:56 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 06 Jan 2014 03:22:57 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,612,1384329600"; d="scan'208";a="434436285"
+Received: from unknown (HELO helios.localnet) ([10.252.122.119])
+	by orsmga001.jf.intel.com with ESMTP; 06 Jan 2014 03:22:56 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 06 Jan 2014 11:22:55 +0000
+Message-ID: <1424614.QymdokhKXO@helios>
+Organization: Intel Corporation
+User-Agent: KMail/4.10.5 (Linux/3.8.0-34-generic; KDE/4.10.5; i686; ; )
+In-Reply-To: <20131224105050.GX3706@jama>
+References: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
+	<52B8DECA.6060704@balister.org> <20131224105050.GX3706@jama>
 MIME-Version: 1.0
-Received: by 10.76.89.143 with HTTP; Mon, 6 Jan 2014 03:03:44 -0800 (PST)
-In-Reply-To: <20140106103211.GF3709@jama>
-References: <1388489871-14502-1-git-send-email-Martin.Jansa@gmail.com>
-	<CAP71Wjwq17ZZ9K_tWPBEq3A3rOPe4HmCfhOEKHfgy_0pVzmpUg@mail.gmail.com>
-	<20140106103211.GF3709@jama>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Mon, 6 Jan 2014 12:03:44 +0100
-Message-ID: <CAP71WjzWHewqb6U7R9aLkYHbrOHmBUK2nCWz6TyaRvCXOQvqtw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] qtwebkit: Depend on gstreamer-1.0 instead of 0.10
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] Piglit in Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,36 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2014 11:04:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Jan 2014 11:22:57 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Jan 6, 2014 at 11:32 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
+On Tuesday 24 December 2013 11:50:50 Martin Jansa wrote:
+> On Mon, Dec 23, 2013 at 08:09:30PM -0500, Philip Balister wrote:
+> > On 12/23/2013 01:01 PM, Burton, Ross wrote:
+> > > We'd like to integrate Piglit (an OpenGL test suite) into Poky so that
+> > > we can run automated QA on the GL stack.  Piglit is currently residing
+> > > in meta-oe, but as Poky is a self-contained project we can't just add
+> > > meta-oe to it:  apart from the size of meta-oe, we can't ensure
+> > > stability if meta-oe makes incompatible changes that affect Poky.
+> > > 
+> > > Piglit isn't a stand-alone package, there are the dependencies of
+> > > waffle, python-mako and python-numpy to consider too.  There are two
+> > > possibilities I can see:
+> > > 
+> > > 1) Move piglit and deps to oe-core.  Piglit is for QA purposes only
+> > > and pushes the boundaries of "core platform".  In a sense this is a
+> > > repeat of the discussion we had with Midori...  does oe-core contain
+> > > everything needed to sufficiently exercise the core components it
+> > > ships or not?
+> > 
+> > I expect Richard will push back on this, and I would support him here.
+> > 
+> > > 2) Add piglit and deps to meta-yocto.  Probably a new layer called
+> > > meta-yocto-qa (or similar) because the Yocto Compatible guidelines
+> > > forbid mixing distribution policy and recipes.  We'd need to sync
+> > > meta-yocto-qa with the pieces of meta-oe that we want somehow, but
+> > > that's our problem.
+> > 
+> > So meta-yocto is right out. I'm a user of numpy, and I certainly do not
+> > want to include something called meta-yocto-qa just to pick up numpy.
+> > 
+> > So this presents a quandry. Moving numpy to a special layer to support a
+> > specific recipe is just not the right thing to do. Conceivably, we could
+> > create a layer for the bits of meta-oe that are python related, but I am
+> > not sure that solves your entire problem.
+> > 
+> > I certainly do not want to see one recipe appear in two layers. That is
+> > a recipe for trouble.
+> > 
+> > Long term, we need to make the layer model work for the entire project
+> > and get over the reluctance to use other peoples layers.
+> 
+> Agreed, meta-python in meta-oe repository sounds a lot better than
+> having the same recipe in 2 layers.
 
-> > right now i am using the dora branch and qt5.1.1 which hasn't been
-> updated
-> > for a while, which is fine.
->
-> This is only for master which will soon became just qt5.2.0 where
-> gstreamer-1.0 is used by default and I believe more tested than
-> integration with gstreamer-0.10.
->
-> So it won't change anything for people using 5.1.1 from dora branch. If
-> someone really wants to use gst-0.10 with 5.2.0 I would accept patch for
-> PACKAGECONFIG.
->
+FWIW, independent of this issue I'd like to see us have a meta-python layer in 
+the meta-openembedded repo anyway. I'll even volunteer to maintain it if it 
+helps.
 
-Ok. thanks. I don't need it, now, at least. if we ever move to qt5.2 and
-still use gst0.10, then i will submit the patch
+Cheers,
+Paul
 
->
-> gst-1.0* seems to be working fine for our ARM project and
-> we've removed all gst-0.10 from our images lately - that's why I've
-> noticed this qtwebkit dependency.
+-- 
 
-
-well, assuming you get the video codec plugins ported onto gst1.0 ;-) which
-might not always be a trivial thing.. anyways, right now we don't have the
-choice and gst0.10 is required!
-
-thanks for your quick answer.
+Paul Eggleton
+Intel Open Source Technology Centre
 
