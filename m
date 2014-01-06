@@ -1,38 +1,39 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
-	[195.245.230.168])
-	by mail.openembedded.org (Postfix) with ESMTP id F29586077F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D70E260DFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2014 12:19:26 +0000 (UTC)
-Received: from [85.158.137.19:13664] by server-8.bemta-3.messagelabs.com id
-	FE/F9-31081-E4F9AC25; Mon, 06 Jan 2014 12:19:26 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-16.tower-39.messagelabs.com!1389010766!17821518!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 18719 invoked from network); 6 Jan 2014 12:19:26 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-16.tower-39.messagelabs.com with RC4-SHA encrypted SMTP;
-	6 Jan 2014 12:19:26 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Mon, 6 Jan 2014
-	12:19:26 +0000
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Jan 2014 12:19:25 +0000
-Thread-Topic: Patch to fix libxml++ build failure in meta-oe
-Thread-Index: Ac8K2YwEfm5xmGAsQAKYiI9XBVkj/g==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E78F@GBTWK10E001.Technology.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon,  6 Jan 2014 12:32:03 +0000 (UTC)
+Received: by mail-ea0-f171.google.com with SMTP id h10so7811972eak.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Jan 2014 04:32:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=oTK/Nxx8FQXTS3NS78eUSCWd3w4t4cpDV1bmmh3mJsk=;
+	b=0Nw6b9RayYuzR2C664ld5v8rsvoDigm8DqQ66LTejLzBVZt42hYL0b/4kYsLbKk4FS
+	/x2eK2hsD7/2jMVziO20uB5fzyJJ72ozIorNEzP+xneOU207tQoRbPPttc4ecQ9kXA1p
+	u65Pr32Zqkc91zipXdqtMDC/t9P3/2rGyQ8zznwzryhqs3PUEVNijpL/9XhCkEc2641J
+	Z/f3TPjr+l8r7849N6i6mg7c7IsMaeHtEWHlCqJhyOptmkwjaBgoSDESG3c0uFb+1lEO
+	Tc3qwq0/Lbu6P7By7OuW4d0yXGx/GQTIiH7hYv5MCW1QM1FqhMcTmTFWlYN0rmQzo8CJ
+	d8hA==
+X-Received: by 10.15.44.4 with SMTP id y4mr15703656eev.71.1389011524202;
+	Mon, 06 Jan 2014 04:32:04 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	z42sm170570492eeo.17.2014.01.06.04.32.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Jan 2014 04:32:03 -0800 (PST)
+Date: Mon, 6 Jan 2014 13:32:11 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140106123211.GI3709@jama>
+References: <AAE0766F5AF36B46BAB7E0EFB9273206331489E78F@GBTWK10E001.Technology.local>
 MIME-Version: 1.0
-Subject: Patch to fix libxml++ build failure in meta-oe
+In-Reply-To: <AAE0766F5AF36B46BAB7E0EFB9273206331489E78F@GBTWK10E001.Technology.local>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: Patch to fix libxml++ build failure in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,144 +47,266 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2014 12:19:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 06 Jan 2014 12:32:05 -0000
+X-Groupsio-MsgNum: 47611
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Xssso5lpTBgMxDfe"
+Content-Disposition: inline
 
-VGhlIGxpYnhtbCsrIHJlY2lwZSBkb2VzIG5vdCBhcHBlYXIgdG8gYnVpbGQgZHVlIHRvIGFuIGlu
-Y29tcGF0aWJpbGl0eSBvZiBsaWJ4bWwrKyAyLjM1LjMgd2l0aCBuZXdlciB2ZXJzaW9ucyBvZiBt
-YWtlLiBsaWJ4bWwrKyAyLjM3LjEgY29udGFpbnMgYSBmaXggZm9yIHRoaXMgcHJvYmxlbS4gUGxl
-YXNlIGZpbmQgYmVsb3cgYSBwYXRjaCB0aGF0IGNoYW5nZXMgdGhlIG5hbWUgb2YgdGhlIHJlY2lw
-ZSB0byBtZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKytfMi4zNy4xLmJiIHRvIGZl
-dGNoIHRoaXMgdmVyc2lvbiBhbmQgYW1lbmRzIHRoZSBjaGVja3N1bXMgdG8gc3VpdC4gSXQgYWxz
-byBhZGRzIHB0ZXN0IHN1cHBvcnQuDQoNCg0KU2lnbmVkLW9mZi1ieTogTmljayBMZXdpcyA8bmlj
-ay5sZXdpc0B1c2EuZzRzLmNvbT4NCg0KDQoNCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMt
-Y29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4xL2xpYnhtbCsrX3B0ZXN0LnBhdGNoIGIvbWV0YS1v
-ZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9saWJ4bWwrK19wdGVzdC5wYXRj
-aA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAuLmExODgyMmYNCi0tLSAvZGV2
-L251bGwNCisrKyBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEv
-bGlieG1sKytfcHRlc3QucGF0Y2gNCkBAIC0wLDAgKzEsNzMgQEANCitkaWZmIC0tZ2l0IGEvTWFr
-ZWZpbGUuYW0gYi9NYWtlZmlsZS5hbQ0KK2luZGV4IGQ0YWFkYjEuLjBlMzY3NTYgMTAwNjQ0DQor
-LS0tIGEvTWFrZWZpbGUuYW0NCisrKysgYi9NYWtlZmlsZS5hbQ0KK0BAIC0yNTMsNSArMjUzLDgg
-QEAgcG9zdC1odG1sOiBkb2NzL2luZGV4Lmh0bWwNCisgICAgICAgcnN5bmMgJChyc3luY19hcmdz
-KSAtciBkb2NzL2luZGV4Lmh0bWwgJCRVU0VSLGxpYnhtbHBsdXNwbHVzQHdlYi5zb3VyY2Vmb3Jn
-ZS5uZXQ6JCh3ZWJfcGF0aF9wcm9qZWN0KQ0KKyAgICAgICByc3luYyAkKHJzeW5jX2FyZ3MpIC1y
-IGV4YW1wbGVzICQkVVNFUixsaWJ4bWxwbHVzcGx1c0B3ZWIuc291cmNlZm9yZ2UubmV0OiQod2Vi
-X3BhdGhfcHJvamVjdCkNCisNCisraW5zdGFsbC1wdGVzdDoNCisrICAgICAgbWFrZSAtQyBleGFt
-cGxlcyBpbnN0YWxsLXB0ZXN0DQorKw0KKyAjIE9wdGlvbmFsOiBhdXRvLWdlbmVyYXRlIHRoZSBD
-aGFuZ2VMb2cgZmlsZSBmcm9tIHRoZSBnaXQgbG9nIG9uIG1ha2UgZGlzdA0KKyBpbmNsdWRlICQo
-dG9wX3NyY2RpcikvbWFjcm9zL2Rpc3QtY2hhbmdlbG9nLmFtDQorZGlmZiAtLWdpdCBhL2V4YW1w
-bGVzL01ha2VmaWxlLmFtIGIvZXhhbXBsZXMvTWFrZWZpbGUuYW0NCitpbmRleCBkOTU0MWNhLi5j
-MjhiNDljIDEwMDY0NA0KKy0tLSBhL2V4YW1wbGVzL01ha2VmaWxlLmFtDQorKysrIGIvZXhhbXBs
-ZXMvTWFrZWZpbGUuYW0NCitAQCAtMzYsNiArMzYsMjMgQEAgY2hlY2tfUFJPR1JBTVMgPSBcDQor
-ICAgc2NoZW1hdmFsaWRhdGlvbi9zY2hlbWF2YWxpZGF0aW9uIFwNCisgICB0ZXh0cmVhZGVyL3Rl
-eHRyZWFkZXINCisNCisrY2hlY2tfRE9UTElCUyA9IFwNCisrICBkb21fYnVpbGQvLmxpYnMvZG9t
-X2J1aWxkIFwNCisrICBkb21fcGFyc2VfZW50aXRpZXMvLmxpYnMvZG9tX3BhcnNlX2VudGl0aWVz
-IFwNCisrICBkb21fcGFyc2VyLy5saWJzL2RvbV9wYXJzZXIgXA0KKysgIGRvbV9wYXJzZXJfcmF3
-Ly5saWJzL2RvbV9wYXJzZXJfcmF3IFwNCisrICBkb21fcmVhZF93cml0ZS8ubGlicy9kb21fcmVh
-ZF93cml0ZSBcDQorKyAgZG9tX3hpbmNsdWRlLy5saWJzL2RvbV94aW5jbHVkZSBcDQorKyAgZG9t
-X3hwYXRoLy5saWJzL2RvbV94cGF0aCBcDQorKyAgZHRkdmFsaWRhdGlvbi8ubGlicy9kdGR2YWxp
-ZGF0aW9uIFwNCisrICBpbXBvcnRfbm9kZS8ubGlicy9pbXBvcnRfbm9kZSBcDQorKyAgc2F4X2V4
-Y2VwdGlvbi8ubGlicy9zYXhfZXhjZXB0aW9uIFwNCisrICBzYXhfcGFyc2VyLy5saWJzL3NheF9w
-YXJzZXIgXA0KKysgIHNheF9wYXJzZXJfYnVpbGRfZG9tLy5saWJzL3NheF9wYXJzZXJfYnVpbGRf
-ZG9tIFwNCisrICBzYXhfcGFyc2VyX2VudGl0aWVzLy5saWJzL3NheF9wYXJzZXJfZW50aXRpZXMg
-XA0KKysgIHNjaGVtYXZhbGlkYXRpb24vLmxpYnMvc2NoZW1hdmFsaWRhdGlvbiBcDQorKyAgdGV4
-dHJlYWRlci8ubGlicy90ZXh0cmVhZGVyDQorKw0KKyAjIFNoZWxsIHNjcmlwdHMgdGhhdCBjYWxs
-IHRoZSBleGFtcGxlIHByb2dyYW1zLg0KKyBjaGVja19TQ1JJUFRTID0gXA0KKyAgIGRvbV9idWls
-ZC9tYWtlX2NoZWNrLnNoIFwNCitAQCAtMTQ3LDEwICsxNjQsMTAgQEAgZGlzdF9ub2luc3RfREFU
-QSA9IFwNCisgIyBmaWxlIGFyZSBsb2NhdGVkIGluIGRpZmZlcmVudCBkaXJlY3Rvcmllcy4NCisg
-ZG9tX3JlYWRfd3JpdGUvbWFrZV9jaGVjay5zaDogTWFrZWZpbGUNCisgICAgICAgZWNobyAnIyBH
-ZW5lcmF0ZWQgYW5kIHVzZWQgYnkgIm1ha2UgY2hlY2siJyA+JEANCistICAgICAgZWNobyAnZG9t
-X3JlYWRfd3JpdGUvZG9tX3JlYWRfd3JpdGUgIiQoc3JjZGlyKS9kb21fcmVhZF93cml0ZS9leGFt
-cGxlLnhtbCIgZG9tX3JlYWRfd3JpdGUvZXhhbXBsZV9vdXRwdXQueG1sID4vZGV2L251bGwnID4+
-JEANCisrICAgICAgZWNobyAnZG9tX3JlYWRfd3JpdGUvLmxpYnMvZG9tX3JlYWRfd3JpdGUgIiQo
-c3JjZGlyKS9kb21fcmVhZF93cml0ZS9leGFtcGxlLnhtbCIgZG9tX3JlYWRfd3JpdGUvZXhhbXBs
-ZV9vdXRwdXQueG1sID4vZGV2L251bGwnID4+JEANCisgICAgICAgY2htb2QgK3ggJEANCisNCist
-c2NyaXB0X3RlbXBsYXRlID0gY2QgIiQoc3JjZGlyKS88IXByb2duYW1lIT4iICYmICIkKGFic19i
-dWlsZGRpcikvPCFwcm9nbmFtZSE+LzwhcHJvZ25hbWUhPiIgPi9kZXYvbnVsbA0KKytzY3JpcHRf
-dGVtcGxhdGUgPSBjZCAiJChzcmNkaXIpLzwhcHJvZ25hbWUhPiIgJiYgIi5saWJzLzwhcHJvZ25h
-bWUhPiIgPi9kZXYvbnVsbA0KKyBzdGFuZGFyZF9zY3JpcHRzID0gJChmaWx0ZXItb3V0IGRvbV9y
-ZWFkX3dyaXRlL21ha2VfY2hlY2suc2gsJChjaGVja19TQ1JJUFRTKSkNCisNCisgIyBBbGwgb3Ro
-ZXIgc2NyaXB0IGZpbGVzIGFyZSBnZW5lcmF0ZWQgbGlrZSBzbzoNCitAQCAtMTYyLDMgKzE3OSwx
-OCBAQCAkKHN0YW5kYXJkX3NjcmlwdHMpOiBNYWtlZmlsZQ0KKyBDTEVBTkZJTEVTID0gXA0KKyAg
-IGRvbV9yZWFkX3dyaXRlL2V4YW1wbGVfb3V0cHV0LnhtbCBcDQorICAgJChjaGVja19TQ1JJUFRT
-KQ0KKysNCisrYnVpbGR0ZXN0OiBhbGwNCisrICAgICAgJChNQUtFKSAkKEFNX01BS0VGTEFHUykg
-JChjaGVja19QUk9HUkFNUykgJChjaGVja19TQ1JJUFRTKQ0KKysgICAgICAkKE1BS0UpICQoQU1f
-TUFLRUZMQUdTKSBidWlsZHRlc3QtVEVTVFMNCisrDQorK2luc3RhbGwtcHRlc3Q6DQorKyAgICAg
-ICQoTUtESVJfUCkgJChERVNURElSKS9leGFtcGxlcw0KKysgICAgICBjcCAtLXBhcmVudHMgJChj
-aGVja19ET1RMSUJTKSAkKERFU1RESVIpL2V4YW1wbGVzDQorKyAgICAgIGNwIC0tcGFyZW50cyAk
-KGNoZWNrX1NDUklQVFMpICQoREVTVERJUikvZXhhbXBsZXMNCisrICAgICAgY3AgLS1wYXJlbnRz
-ICQoZGlzdF9ub2luc3RfREFUQSkgJChERVNURElSKS9leGFtcGxlcw0KKysgICAgICBjcCBNYWtl
-ZmlsZSAkKERFU1RESVIpL2V4YW1wbGVzDQorKyAgICAgICQoTUtESVJfUCkgJChERVNURElSKS9t
-YWNyb3MNCisrICAgICAgY3AgLi4vbWFjcm9zL3Rlc3QtZHJpdmVyICQoREVTVERJUikvbWFjcm9z
-DQorKyAgICAgIHNlZCAtaSAtZSAnc3xeTWFrZWZpbGU6fF9NYWtlZmlsZTp8JyAkKERFU1RESVIp
-L2V4YW1wbGVzL01ha2VmaWxlDQorKw0KZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1jb3Jl
-L2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvcnVuLXB0ZXN0IGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUv
-bGlieG1sL2xpYnhtbCsrLTIuMzcuMS9ydW4tcHRlc3QNCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQpp
-bmRleCAwMDAwMDAwLi4yMzZmNjY3DQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLW9lL3JlY2lw
-ZXMtY29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4xL3J1bi1wdGVzdA0KQEAgLTAsMCArMSwzIEBA
-DQorIyEvYmluL3NoDQorY2QgZXhhbXBsZXMNCittYWtlIC1rIGNoZWNrLVRFU1RTDQpkaWZmIC0t
-Z2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrXzIuMzUuMy5iYiBiL21l
-dGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrK18yLjM1LjMuYmINCmRlbGV0ZWQgZmls
-ZSBtb2RlIDEwMDY0NA0KaW5kZXggZmI5Y2RkOS4uMDAwMDAwMA0KLS0tIGEvbWV0YS1vZS9yZWNp
-cGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrXzIuMzUuMy5iYg0KKysrIC9kZXYvbnVsbA0KQEAgLTEs
-MjIgKzAsMCBAQA0KLVNVTU1BUlkgPSAiQysrIHdyYXBwZXIgZm9yIGxpYnhtbCBsaWJyYXJ5Ig0K
-LURFU0NSSVBUSU9OID0gIkMrKyB3cmFwcGVyIGZvciBsaWJ4bWwgbGlicmFyeSINCi1IT01FUEFH
-RSA9ICJodHRwOi8vbGlieG1scGx1c3BsdXMuc291cmNlZm9yZ2UubmV0Ig0KLUJVR1RSQUNLRVIg
-PSAiaHR0cDovL2J1Z3ppbGxhLmdub21lLm9yZy9idWdsaXN0LmNnaT9wcm9kdWN0PWxpYnhtbCUy
-QiUyQiINCi1TRUNUSU9OID0gImxpYnMiDQotTElDRU5TRSA9ICJHUEx2MiINCi1MSUNfRklMRVNf
-Q0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT03ZmJjMzM4MzA5YWMzOGZlZmNkNjRiMDRiYjkw
-M2UzNCAiDQotDQotUFIgPSAicjEiDQotDQotU0hSVF9WRVIgPSAiJHtAZC5nZXRWYXIoJ1BWJyxU
-cnVlKS5zcGxpdCgnLicpWzBdfS4ke0BkLmdldFZhcignUFYnLFRydWUpLnNwbGl0KCcuJylbMV19
-Ig0KLVNSQ19VUkkgPSAiJHtHTk9NRV9NSVJST1J9LyR7QlBOfS8ke1NIUlRfVkVSfS8ke0JQfS50
-YXIueHoiDQotDQotU1JDX1VSSVttZDVzdW1dID0gIjE5NmEyZGNkYzg0YWI5ODdmZTM4NTJiM2Yy
-OWNhZmQ3Ig0KLVNSQ19VUklbc2hhMjU2c3VtXSA9ICI3MTVhNDIxNGJiZmY5MDM2NWNjODQwNmEy
-OGU0MjdmZWJkOTA0NjEwMDZkNjA4ZmJkY2RjZWE3ZmM5ODkxZWFmIg0KLQ0KLURFUEVORFMgPSAi
-bGlieG1sMiBnbGlibW0iDQotDQotaW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnDQotDQotRklM
-RVNfJHtQTn0tZG9jICs9ICIke2RhdGFkaXJ9L2RldmhlbHAiDQotRklMRVNfJHtQTn0tZGV2ICs9
-ICIke2xpYmRpcn0vbGlieG1sKystMi42L2luY2x1ZGUvbGlieG1sKytjb25maWcuaCINCmRpZmYg
-LS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKytfMi4zNy4xLmJiIGIv
-bWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrXzIuMzcuMS5iYg0KbmV3IGZpbGUg
-bW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAuLjYwNDg3N2QNCi0tLSAvZGV2L251bGwNCisrKyBi
-L21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrK18yLjM3LjEuYmINCkBAIC0wLDAg
-KzEsMzQgQEANCitTVU1NQVJZID0gIkMrKyB3cmFwcGVyIGZvciBsaWJ4bWwgbGlicmFyeSINCitE
-RVNDUklQVElPTiA9ICJDKysgd3JhcHBlciBmb3IgbGlieG1sIGxpYnJhcnkiDQorSE9NRVBBR0Ug
-PSAiaHR0cDovL2xpYnhtbHBsdXNwbHVzLnNvdXJjZWZvcmdlLm5ldCINCitCVUdUUkFDS0VSID0g
-Imh0dHA6Ly9idWd6aWxsYS5nbm9tZS5vcmcvYnVnbGlzdC5jZ2k/cHJvZHVjdD1saWJ4bWwlMkIl
-MkIiDQorU0VDVElPTiA9ICJsaWJzIg0KK0xJQ0VOU0UgPSAiR1BMdjIiDQorTElDX0ZJTEVTX0NI
-S1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9N2ZiYzMzODMwOWFjMzhmZWZjZDY0YjA0YmI5MDNl
-MzQgIg0KKw0KK1BSID0gInIwIg0KKw0KK1NIUlRfVkVSID0gIiR7QGQuZ2V0VmFyKCdQVicsVHJ1
-ZSkuc3BsaXQoJy4nKVswXX0uJHtAZC5nZXRWYXIoJ1BWJyxUcnVlKS5zcGxpdCgnLicpWzFdfSIN
-CitTUkNfVVJJID0gIiR7R05PTUVfTUlSUk9SfS8ke0JQTn0vJHtTSFJUX1ZFUn0vJHtCUH0udGFy
-Lnh6Ig0KKw0KK1NSQ19VUklbbWQ1c3VtXSA9ICIyZjkzNzJhNmViYTZlNDAyMDZjMTFmNTU4YThm
-YmMzMiINCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiZjNiMTgzNjAwNTMyYTkyYWYzNTU3MTkyMTAy
-MjNmODU4ODU3MDkyYjhiMTUzMWM3OTA3MTU1YzU5YTZkYjM5ZiINCisNCitERVBFTkRTID0gImxp
-YnhtbDIgZ2xpYm1tIg0KKw0KK2luaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZw0KKw0KK0ZJTEVT
-XyR7UE59LWRvYyArPSAiJHtkYXRhZGlyfS9kZXZoZWxwIg0KK0ZJTEVTXyR7UE59LWRldiArPSAi
-JHtsaWJkaXJ9L2xpYnhtbCsrLTIuNi9pbmNsdWRlL2xpYnhtbCsrY29uZmlnLmgiDQorDQorU1JD
-X1VSSSArPSAiZmlsZTovL2xpYnhtbCsrX3B0ZXN0LnBhdGNoIFwNCisgICAgICAgICAgICBmaWxl
-Oi8vcnVuLXB0ZXN0Ig0KKw0KK2luaGVyaXQgcHRlc3QNCisNCitSREVQRU5EU18ke1BOfS1wdGVz
-dCArPSAibWFrZSINCisNCitkb19jb21waWxlX3B0ZXN0KCkgew0KKyAgb2VfcnVubWFrZSAtQyBl
-eGFtcGxlcyBidWlsZHRlc3QNCit9DQorDQoNCg0KDQotLQ0KDQpOaWNrIExld2lzDQpuaWNrLmxl
-d2lzQHVzYS5nNHMuY29tDQorNDQgMTY4NCAyNzcxMzcNCnd3dy5nNHN0ZWNobm9sb2d5LmNvbQ0K
-TmV3IENoYWxsZW5nZSBIb3VzZSwgSW50ZXJuYXRpb25hbCBEcml2ZSwgVGV3a2VzYnVyeSwgR2xv
-dWNlc3RlcnNoaXJlLCBHTDIwIDhVUSwgVUsNCg0K74GQIFBsZWFzZSBjb25zaWRlciB0aGUgZW52
-aXJvbm1lbnQgYmVmb3JlIHByaW50aW5nIHRoaXMgZW1haWwNCg0KDQoNClRoZSBkZXRhaWxzIG9m
-IHRoaXMgY29tcGFueSBhcmUgYXMgZm9sbG93czoNCkc0UyBUZWNobm9sb2d5IExpbWl0ZWQsIFJl
-Z2lzdGVyZWQgT2ZmaWNlOiBDaGFsbGVuZ2UgSG91c2UsIEludGVybmF0aW9uYWwgRHJpdmUsIFRl
-d2tlc2J1cnksIEdsb3VjZXN0ZXJzaGlyZSBHTDIwIDhVUSwgUmVnaXN0ZXJlZCBpbiBFbmdsYW5k
-IE5vLiAyMzgyMzM4Lg0KDQpUaGlzIGNvbW11bmljYXRpb24gbWF5IGNvbnRhaW4gaW5mb3JtYXRp
-b24gd2hpY2ggaXMgY29uZmlkZW50aWFsLCBwZXJzb25hbCBhbmQvb3IgcHJpdmlsZWdlZC4NCg0K
-SXQgaXMgZm9yIHRoZSBleGNsdXNpdmUgdXNlIG9mIHRoZSBpbnRlbmRlZCByZWNpcGllbnQocyku
-DQpJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLCBwbGVhc2Ugbm90ZSB0
-aGF0IGFueSBkaXN0cmlidXRpb24sIGZvcndhcmRpbmcsIGNvcHlpbmcgb3IgdXNlIG9mIHRoaXMg
-Y29tbXVuaWNhdGlvbiBvciB0aGUgaW5mb3JtYXRpb24gaW4gaXQgaXMgc3RyaWN0bHkgcHJvaGli
-aXRlZC4NCg0KQW55IHBlcnNvbmFsIHZpZXdzIGV4cHJlc3NlZCBpbiB0aGlzIGUtbWFpbCBhcmUg
-dGhvc2Ugb2YgdGhlIGluZGl2aWR1YWwgc2VuZGVyIGFuZCB0aGUgY29tcGFueSBkb2VzIG5vdCBl
-bmRvcnNlIG9yIGFjY2VwdCByZXNwb25zaWJpbGl0eSBmb3IgdGhlbS4NCg0KUHJpb3IgdG8gdGFr
-aW5nIGFueSBhY3Rpb24gYmFzZWQgdXBvbiB0aGlzIGUtbWFpbCBtZXNzYWdlLCB5b3Ugc2hvdWxk
-IHNlZWsgYXBwcm9wcmlhdGUgY29uZmlybWF0aW9uIG9mIGl0cyBhdXRoZW50aWNpdHkuDQoNClRo
-aXMgZS1tYWlsIGhhcyBiZWVuIHNjYW5uZWQgZm9yIGFsbCB2aXJ1c2VzIGJ5IE1lc3NhZ2VMYWJz
-Lg0K
+--Xssso5lpTBgMxDfe
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Jan 06, 2014 at 12:19:25PM +0000, Lewis, Nick wrote:
+> The libxml++ recipe does not appear to build due to an incompatibility of=
+ libxml++ 2.35.3 with newer versions of make. libxml++ 2.37.1 contains a fi=
+x for this problem. Please find below a patch that changes the name of the =
+recipe to meta-oe/recipes-core/libxml/libxml++_2.37.1.bb to fetch this vers=
+ion and amends the checksums to suit. It also adds ptest support.
+>=20
+
+Thanks for patch, but can you send it once more with git send-email -M (as
+described in README)?
+
+It's a bit messy when you look at it in patchwork:
+http://patchwork.openembedded.org/patch/64147/
+
+>=20
+> Signed-off-by: Nick Lewis <nick.lewis@usa.g4s.com>
+>=20
+>=20
+>=20
+> diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.p=
+atch b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
+> new file mode 100644
+> index 0000000..a18822f
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
+> @@ -0,0 +1,73 @@
+> +diff --git a/Makefile.am b/Makefile.am
+> +index d4aadb1..0e36756 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -253,5 +253,8 @@ post-html: docs/index.html
+> +       rsync $(rsync_args) -r docs/index.html $$USER,libxmlplusplus@web.=
+sourceforge.net:$(web_path_project)
+> +       rsync $(rsync_args) -r examples $$USER,libxmlplusplus@web.sourcef=
+orge.net:$(web_path_project)
+> +
+> ++install-ptest:
+> ++      make -C examples install-ptest
+> ++
+> + # Optional: auto-generate the ChangeLog file from the git log on make d=
+ist
+> + include $(top_srcdir)/macros/dist-changelog.am
+> +diff --git a/examples/Makefile.am b/examples/Makefile.am
+> +index d9541ca..c28b49c 100644
+> +--- a/examples/Makefile.am
+> ++++ b/examples/Makefile.am
+> +@@ -36,6 +36,23 @@ check_PROGRAMS =3D \
+> +   schemavalidation/schemavalidation \
+> +   textreader/textreader
+> +
+> ++check_DOTLIBS =3D \
+> ++  dom_build/.libs/dom_build \
+> ++  dom_parse_entities/.libs/dom_parse_entities \
+> ++  dom_parser/.libs/dom_parser \
+> ++  dom_parser_raw/.libs/dom_parser_raw \
+> ++  dom_read_write/.libs/dom_read_write \
+> ++  dom_xinclude/.libs/dom_xinclude \
+> ++  dom_xpath/.libs/dom_xpath \
+> ++  dtdvalidation/.libs/dtdvalidation \
+> ++  import_node/.libs/import_node \
+> ++  sax_exception/.libs/sax_exception \
+> ++  sax_parser/.libs/sax_parser \
+> ++  sax_parser_build_dom/.libs/sax_parser_build_dom \
+> ++  sax_parser_entities/.libs/sax_parser_entities \
+> ++  schemavalidation/.libs/schemavalidation \
+> ++  textreader/.libs/textreader
+> ++
+> + # Shell scripts that call the example programs.
+> + check_SCRIPTS =3D \
+> +   dom_build/make_check.sh \
+> +@@ -147,10 +164,10 @@ dist_noinst_DATA =3D \
+> + # file are located in different directories.
+> + dom_read_write/make_check.sh: Makefile
+> +       echo '# Generated and used by "make check"' >$@
+> +-      echo 'dom_read_write/dom_read_write "$(srcdir)/dom_read_write/exa=
+mple.xml" dom_read_write/example_output.xml >/dev/null' >>$@
+> ++      echo 'dom_read_write/.libs/dom_read_write "$(srcdir)/dom_read_wri=
+te/example.xml" dom_read_write/example_output.xml >/dev/null' >>$@
+> +       chmod +x $@
+> +
+> +-script_template =3D cd "$(srcdir)/<!progname!>" && "$(abs_builddir)/<!p=
+rogname!>/<!progname!>" >/dev/null
+> ++script_template =3D cd "$(srcdir)/<!progname!>" && ".libs/<!progname!>"=
+ >/dev/null
+> + standard_scripts =3D $(filter-out dom_read_write/make_check.sh,$(check_=
+SCRIPTS))
+> +
+> + # All other script files are generated like so:
+> +@@ -162,3 +179,18 @@ $(standard_scripts): Makefile
+> + CLEANFILES =3D \
+> +   dom_read_write/example_output.xml \
+> +   $(check_SCRIPTS)
+> ++
+> ++buildtest: all
+> ++      $(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_SCRIPTS)
+> ++      $(MAKE) $(AM_MAKEFLAGS) buildtest-TESTS
+> ++
+> ++install-ptest:
+> ++      $(MKDIR_P) $(DESTDIR)/examples
+> ++      cp --parents $(check_DOTLIBS) $(DESTDIR)/examples
+> ++      cp --parents $(check_SCRIPTS) $(DESTDIR)/examples
+> ++      cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples
+> ++      cp Makefile $(DESTDIR)/examples
+> ++      $(MKDIR_P) $(DESTDIR)/macros
+> ++      cp ../macros/test-driver $(DESTDIR)/macros
+> ++      sed -i -e 's|^Makefile:|_Makefile:|' $(DESTDIR)/examples/Makefile
+> ++
+> diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest b/meta=
+-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
+> new file mode 100644
+> index 0000000..236f667
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
+> +cd examples
+> +make -k check-TESTS
+> diff --git a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb b/meta-oe/rec=
+ipes-core/libxml/libxml++_2.35.3.bb
+> deleted file mode 100644
+> index fb9cdd9..0000000
+> --- a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -SUMMARY =3D "C++ wrapper for libxml library"
+> -DESCRIPTION =3D "C++ wrapper for libxml library"
+> -HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
+> -BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2=
+B%2B"
+> -SECTION =3D "libs"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
+e34 "
+> -
+> -PR =3D "r1"
+> -
+> -SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',Tru=
+e).split('.')[1]}"
+> -SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
+> -
+> -SRC_URI[md5sum] =3D "196a2dcdc84ab987fe3852b3f29cafd7"
+> -SRC_URI[sha256sum] =3D "715a4214bbff90365cc8406a28e427febd90461006d608fb=
+dcdcea7fc9891eaf"
+> -
+> -DEPENDS =3D "libxml2 glibmm"
+> -
+> -inherit autotools pkgconfig
+> -
+> -FILES_${PN}-doc +=3D "${datadir}/devhelp"
+> -FILES_${PN}-dev +=3D "${libdir}/libxml++-2.6/include/libxml++config.h"
+> diff --git a/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb b/meta-oe/rec=
+ipes-core/libxml/libxml++_2.37.1.bb
+> new file mode 100644
+> index 0000000..604877d
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb
+> @@ -0,0 +1,34 @@
+> +SUMMARY =3D "C++ wrapper for libxml library"
+> +DESCRIPTION =3D "C++ wrapper for libxml library"
+> +HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
+> +BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2=
+B%2B"
+> +SECTION =3D "libs"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
+e34 "
+> +
+> +PR =3D "r0"
+> +
+> +SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',Tru=
+e).split('.')[1]}"
+> +SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
+> +
+> +SRC_URI[md5sum] =3D "2f9372a6eba6e40206c11f558a8fbc32"
+> +SRC_URI[sha256sum] =3D "f3b183600532a92af355719210223f858857092b8b1531c7=
+907155c59a6db39f"
+> +
+> +DEPENDS =3D "libxml2 glibmm"
+> +
+> +inherit autotools pkgconfig
+> +
+> +FILES_${PN}-doc +=3D "${datadir}/devhelp"
+> +FILES_${PN}-dev +=3D "${libdir}/libxml++-2.6/include/libxml++config.h"
+> +
+> +SRC_URI +=3D "file://libxml++_ptest.patch \
+> +            file://run-ptest"
+> +
+> +inherit ptest
+> +
+> +RDEPENDS_${PN}-ptest +=3D "make"
+> +
+> +do_compile_ptest() {
+> +  oe_runmake -C examples buildtest
+> +}
+> +
+>=20
+>=20
+>=20
+> --
+>=20
+> Nick Lewis
+> nick.lewis@usa.g4s.com
+> +44 1684 277137
+> www.g4stechnology.com
+> New Challenge House, International Drive, Tewkesbury, Gloucestershire, GL=
+20 8UQ, UK
+>=20
+> =EF=81=90 Please consider the environment before printing this email
+>=20
+>=20
+>=20
+> The details of this company are as follows:
+> G4S Technology Limited, Registered Office: Challenge House, International=
+ Drive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 238=
+2338.
+>=20
+> This communication may contain information which is confidential, persona=
+l and/or privileged.
+>=20
+> It is for the exclusive use of the intended recipient(s).
+> If you are not the intended recipient(s), please note that any distributi=
+on, forwarding, copying or use of this communication or the information in =
+it is strictly prohibited.
+>=20
+> Any personal views expressed in this e-mail are those of the individual s=
+ender and the company does not endorse or accept responsibility for them.
+>=20
+> Prior to taking any action based upon this e-mail message, you should see=
+k appropriate confirmation of its authenticity.
+>=20
+> This e-mail has been scanned for all viruses by MessageLabs.
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Xssso5lpTBgMxDfe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLKoksACgkQN1Ujt2V2gBxpugCfSXNS0w96qogSfLgCWRkKiSsu
+hesAoLTUxQbHERd7v1yEnMrubvF5womk
+=MqSx
+-----END PGP SIGNATURE-----
+
+--Xssso5lpTBgMxDfe--
