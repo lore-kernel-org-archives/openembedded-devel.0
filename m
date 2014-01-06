@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
-	[209.85.215.171])
-	by mail.openembedded.org (Postfix) with ESMTP id D70E260DFD
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qc0-f170.google.com (mail-qc0-f170.google.com
+	[209.85.216.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D43860D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2014 12:32:03 +0000 (UTC)
-Received: by mail-ea0-f171.google.com with SMTP id h10so7811972eak.2
+	Mon,  6 Jan 2014 13:55:09 +0000 (UTC)
+Received: by mail-qc0-f170.google.com with SMTP id x13so17897564qcv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2014 04:32:04 -0800 (PST)
+	Mon, 06 Jan 2014 05:55:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=oTK/Nxx8FQXTS3NS78eUSCWd3w4t4cpDV1bmmh3mJsk=;
-	b=0Nw6b9RayYuzR2C664ld5v8rsvoDigm8DqQ66LTejLzBVZt42hYL0b/4kYsLbKk4FS
-	/x2eK2hsD7/2jMVziO20uB5fzyJJ72ozIorNEzP+xneOU207tQoRbPPttc4ecQ9kXA1p
-	u65Pr32Zqkc91zipXdqtMDC/t9P3/2rGyQ8zznwzryhqs3PUEVNijpL/9XhCkEc2641J
-	Z/f3TPjr+l8r7849N6i6mg7c7IsMaeHtEWHlCqJhyOptmkwjaBgoSDESG3c0uFb+1lEO
-	Tc3qwq0/Lbu6P7By7OuW4d0yXGx/GQTIiH7hYv5MCW1QM1FqhMcTmTFWlYN0rmQzo8CJ
-	d8hA==
-X-Received: by 10.15.44.4 with SMTP id y4mr15703656eev.71.1389011524202;
-	Mon, 06 Jan 2014 04:32:04 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	z42sm170570492eeo.17.2014.01.06.04.32.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Jan 2014 04:32:03 -0800 (PST)
-Date: Mon, 6 Jan 2014 13:32:11 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=a29tfeyrjTdejVnG0NF2a5I2QEKfLJtBa2uJchiEv8w=;
+	b=oP0zu5H7/SqC3VvZXtudUGY4uDoq5BAqXEsTb7QdIyFhJBTMlwO79y6gOGB8QSmwIg
+	sfUS/xja5WSOcP0c+bu89yGdTyQNUNlTAsyElTmUFH1YrDFPerj2TblqRavk2TTkiEx8
+	SYBhlRVk6RmE8ys9sw0qyvKbDTEqoQESBFV9s59mhIdOaiJblC0eWCEWZaZmooQmLmSR
+	UIiSDEpsjdecUw6TRRO7zbSPeUH89ezDzW1Ov69WeXOF5IeznwMAXIFbxxurZ618uJob
+	yvYyHFQZTdkj+eu2yO3gzxpyICC7ntp4T4e2+LRzG162DEbPzCcbhmOtCTQzEyQkUitI
+	mQkA==
+X-Received: by 10.224.60.135 with SMTP id p7mr40076933qah.94.1389016510346;
+	Mon, 06 Jan 2014 05:55:10 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id
+	ki4sm105291650qeb.0.2014.01.06.05.55.08 for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 06 Jan 2014 05:55:09 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140106123211.GI3709@jama>
-References: <AAE0766F5AF36B46BAB7E0EFB9273206331489E78F@GBTWK10E001.Technology.local>
-MIME-Version: 1.0
-In-Reply-To: <AAE0766F5AF36B46BAB7E0EFB9273206331489E78F@GBTWK10E001.Technology.local>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: Patch to fix libxml++ build failure in meta-oe
+Date: Mon,  6 Jan 2014 11:54:30 -0200
+Message-Id: <1389016470-29712-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe] gdal: Avoid host headers use for SQlite3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,266 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2014 12:32:05 -0000
-X-Groupsio-MsgNum: 47611
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Xssso5lpTBgMxDfe"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 06 Jan 2014 13:55:11 -0000
 
---Xssso5lpTBgMxDfe
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This fixes the host contamination when the host has the SQLite3
+headers available.
 
-On Mon, Jan 06, 2014 at 12:19:25PM +0000, Lewis, Nick wrote:
-> The libxml++ recipe does not appear to build due to an incompatibility of=
- libxml++ 2.35.3 with newer versions of make. libxml++ 2.37.1 contains a fi=
-x for this problem. Please find below a patch that changes the name of the =
-recipe to meta-oe/recipes-core/libxml/libxml++_2.37.1.bb to fetch this vers=
-ion and amends the checksums to suit. It also adds ptest support.
->=20
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb |    2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks for patch, but can you send it once more with git send-email -M (as
-described in README)?
+diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+index 525ead2..4ce5d33 100644
+--- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
++++ b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+@@ -80,6 +80,8 @@ EXTRA_OECONF = "--without-perl \
+                 \
+                 --with-pcraster=internal \
+                 --with-geotiff=internal \
++                \
++                --with-sqlite3=${STAGING_LIBDIR} \
+ "
+ 
+ EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
+-- 
+1.7.10.4
 
-It's a bit messy when you look at it in patchwork:
-http://patchwork.openembedded.org/patch/64147/
 
->=20
-> Signed-off-by: Nick Lewis <nick.lewis@usa.g4s.com>
->=20
->=20
->=20
-> diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.p=
-atch b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-> new file mode 100644
-> index 0000000..a18822f
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-> @@ -0,0 +1,73 @@
-> +diff --git a/Makefile.am b/Makefile.am
-> +index d4aadb1..0e36756 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -253,5 +253,8 @@ post-html: docs/index.html
-> +       rsync $(rsync_args) -r docs/index.html $$USER,libxmlplusplus@web.=
-sourceforge.net:$(web_path_project)
-> +       rsync $(rsync_args) -r examples $$USER,libxmlplusplus@web.sourcef=
-orge.net:$(web_path_project)
-> +
-> ++install-ptest:
-> ++      make -C examples install-ptest
-> ++
-> + # Optional: auto-generate the ChangeLog file from the git log on make d=
-ist
-> + include $(top_srcdir)/macros/dist-changelog.am
-> +diff --git a/examples/Makefile.am b/examples/Makefile.am
-> +index d9541ca..c28b49c 100644
-> +--- a/examples/Makefile.am
-> ++++ b/examples/Makefile.am
-> +@@ -36,6 +36,23 @@ check_PROGRAMS =3D \
-> +   schemavalidation/schemavalidation \
-> +   textreader/textreader
-> +
-> ++check_DOTLIBS =3D \
-> ++  dom_build/.libs/dom_build \
-> ++  dom_parse_entities/.libs/dom_parse_entities \
-> ++  dom_parser/.libs/dom_parser \
-> ++  dom_parser_raw/.libs/dom_parser_raw \
-> ++  dom_read_write/.libs/dom_read_write \
-> ++  dom_xinclude/.libs/dom_xinclude \
-> ++  dom_xpath/.libs/dom_xpath \
-> ++  dtdvalidation/.libs/dtdvalidation \
-> ++  import_node/.libs/import_node \
-> ++  sax_exception/.libs/sax_exception \
-> ++  sax_parser/.libs/sax_parser \
-> ++  sax_parser_build_dom/.libs/sax_parser_build_dom \
-> ++  sax_parser_entities/.libs/sax_parser_entities \
-> ++  schemavalidation/.libs/schemavalidation \
-> ++  textreader/.libs/textreader
-> ++
-> + # Shell scripts that call the example programs.
-> + check_SCRIPTS =3D \
-> +   dom_build/make_check.sh \
-> +@@ -147,10 +164,10 @@ dist_noinst_DATA =3D \
-> + # file are located in different directories.
-> + dom_read_write/make_check.sh: Makefile
-> +       echo '# Generated and used by "make check"' >$@
-> +-      echo 'dom_read_write/dom_read_write "$(srcdir)/dom_read_write/exa=
-mple.xml" dom_read_write/example_output.xml >/dev/null' >>$@
-> ++      echo 'dom_read_write/.libs/dom_read_write "$(srcdir)/dom_read_wri=
-te/example.xml" dom_read_write/example_output.xml >/dev/null' >>$@
-> +       chmod +x $@
-> +
-> +-script_template =3D cd "$(srcdir)/<!progname!>" && "$(abs_builddir)/<!p=
-rogname!>/<!progname!>" >/dev/null
-> ++script_template =3D cd "$(srcdir)/<!progname!>" && ".libs/<!progname!>"=
- >/dev/null
-> + standard_scripts =3D $(filter-out dom_read_write/make_check.sh,$(check_=
-SCRIPTS))
-> +
-> + # All other script files are generated like so:
-> +@@ -162,3 +179,18 @@ $(standard_scripts): Makefile
-> + CLEANFILES =3D \
-> +   dom_read_write/example_output.xml \
-> +   $(check_SCRIPTS)
-> ++
-> ++buildtest: all
-> ++      $(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_SCRIPTS)
-> ++      $(MAKE) $(AM_MAKEFLAGS) buildtest-TESTS
-> ++
-> ++install-ptest:
-> ++      $(MKDIR_P) $(DESTDIR)/examples
-> ++      cp --parents $(check_DOTLIBS) $(DESTDIR)/examples
-> ++      cp --parents $(check_SCRIPTS) $(DESTDIR)/examples
-> ++      cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples
-> ++      cp Makefile $(DESTDIR)/examples
-> ++      $(MKDIR_P) $(DESTDIR)/macros
-> ++      cp ../macros/test-driver $(DESTDIR)/macros
-> ++      sed -i -e 's|^Makefile:|_Makefile:|' $(DESTDIR)/examples/Makefile
-> ++
-> diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest b/meta=
--oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
-> new file mode 100644
-> index 0000000..236f667
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +cd examples
-> +make -k check-TESTS
-> diff --git a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb b/meta-oe/rec=
-ipes-core/libxml/libxml++_2.35.3.bb
-> deleted file mode 100644
-> index fb9cdd9..0000000
-> --- a/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -SUMMARY =3D "C++ wrapper for libxml library"
-> -DESCRIPTION =3D "C++ wrapper for libxml library"
-> -HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
-> -BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2=
-B%2B"
-> -SECTION =3D "libs"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
-e34 "
-> -
-> -PR =3D "r1"
-> -
-> -SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',Tru=
-e).split('.')[1]}"
-> -SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
-> -
-> -SRC_URI[md5sum] =3D "196a2dcdc84ab987fe3852b3f29cafd7"
-> -SRC_URI[sha256sum] =3D "715a4214bbff90365cc8406a28e427febd90461006d608fb=
-dcdcea7fc9891eaf"
-> -
-> -DEPENDS =3D "libxml2 glibmm"
-> -
-> -inherit autotools pkgconfig
-> -
-> -FILES_${PN}-doc +=3D "${datadir}/devhelp"
-> -FILES_${PN}-dev +=3D "${libdir}/libxml++-2.6/include/libxml++config.h"
-> diff --git a/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb b/meta-oe/rec=
-ipes-core/libxml/libxml++_2.37.1.bb
-> new file mode 100644
-> index 0000000..604877d
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY =3D "C++ wrapper for libxml library"
-> +DESCRIPTION =3D "C++ wrapper for libxml library"
-> +HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
-> +BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2=
-B%2B"
-> +SECTION =3D "libs"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
-e34 "
-> +
-> +PR =3D "r0"
-> +
-> +SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',Tru=
-e).split('.')[1]}"
-> +SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
-> +
-> +SRC_URI[md5sum] =3D "2f9372a6eba6e40206c11f558a8fbc32"
-> +SRC_URI[sha256sum] =3D "f3b183600532a92af355719210223f858857092b8b1531c7=
-907155c59a6db39f"
-> +
-> +DEPENDS =3D "libxml2 glibmm"
-> +
-> +inherit autotools pkgconfig
-> +
-> +FILES_${PN}-doc +=3D "${datadir}/devhelp"
-> +FILES_${PN}-dev +=3D "${libdir}/libxml++-2.6/include/libxml++config.h"
-> +
-> +SRC_URI +=3D "file://libxml++_ptest.patch \
-> +            file://run-ptest"
-> +
-> +inherit ptest
-> +
-> +RDEPENDS_${PN}-ptest +=3D "make"
-> +
-> +do_compile_ptest() {
-> +  oe_runmake -C examples buildtest
-> +}
-> +
->=20
->=20
->=20
-> --
->=20
-> Nick Lewis
-> nick.lewis@usa.g4s.com
-> +44 1684 277137
-> www.g4stechnology.com
-> New Challenge House, International Drive, Tewkesbury, Gloucestershire, GL=
-20 8UQ, UK
->=20
-> =EF=81=90 Please consider the environment before printing this email
->=20
->=20
->=20
-> The details of this company are as follows:
-> G4S Technology Limited, Registered Office: Challenge House, International=
- Drive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 238=
-2338.
->=20
-> This communication may contain information which is confidential, persona=
-l and/or privileged.
->=20
-> It is for the exclusive use of the intended recipient(s).
-> If you are not the intended recipient(s), please note that any distributi=
-on, forwarding, copying or use of this communication or the information in =
-it is strictly prohibited.
->=20
-> Any personal views expressed in this e-mail are those of the individual s=
-ender and the company does not endorse or accept responsibility for them.
->=20
-> Prior to taking any action based upon this e-mail message, you should see=
-k appropriate confirmation of its authenticity.
->=20
-> This e-mail has been scanned for all viruses by MessageLabs.
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Xssso5lpTBgMxDfe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLKoksACgkQN1Ujt2V2gBxpugCfSXNS0w96qogSfLgCWRkKiSsu
-hesAoLTUxQbHERd7v1yEnMrubvF5womk
-=MqSx
------END PGP SIGNATURE-----
-
---Xssso5lpTBgMxDfe--
