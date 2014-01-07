@@ -1,24 +1,25 @@
 Return-Path: <apelete@seketeli.net>
 Received: from ms.seketeli.fr (seketeli.net [94.23.218.202])
-	by mail.openembedded.org (Postfix) with ESMTP id D288E6CE97
+	by mail.openembedded.org (Postfix) with ESMTP id D05DD6C963
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue,  7 Jan 2014 18:31:48 +0000 (UTC)
 Received: from amegan.ahome.fr (176-26-190-109.dsl.ovh.fr [109.190.26.176])
-	by ms.seketeli.fr (Postfix) with ESMTPSA id 76EA5236005A;
-	Tue,  7 Jan 2014 19:31:47 +0100 (CET)
+	by ms.seketeli.fr (Postfix) with ESMTPSA id 91B5F2360059;
+	Tue,  7 Jan 2014 19:31:43 +0100 (CET)
 Received: by amegan.ahome.fr (Postfix, from userid 1000)
-	id 80D5AA4017E; Tue,  7 Jan 2014 19:31:46 +0100 (CET)
+	id 33DF2A4005A; Tue,  7 Jan 2014 19:31:44 +0100 (CET)
 From: Apelete Seketeli <apelete@seketeli.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jan 2014 19:31:04 +0100
-Message-Id: <192412aae6ddd6e4df2d424b011cb8c8ae622b88.1389118170.git.apelete@seketeli.net>
+Date: Tue,  7 Jan 2014 19:31:03 +0100
+Message-Id: <dc4ce9b49816b21b78a0b0658d0a178d79c91998.1389118170.git.apelete@seketeli.net>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <cover.1389118170.git.apelete@seketeli.net>
 References: <cover.1389118170.git.apelete@seketeli.net>
 In-Reply-To: <cover.1389118170.git.apelete@seketeli.net>
 References: <cover.1389118170.git.apelete@seketeli.net>
+MIME-Version: 1.0
 Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: [meta-handheld][PATCH 2/2] linux-qi-ben-nanonote: rename previous linux-jlime-ben-nanonote recipe
+Subject: [meta-handheld][PATCH 1/2] linux-jlime-ben-nanonote: update recipe to kernel 3.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +34,4842 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 07 Jan 2014 18:31:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The kernel recipe for the Ben Nanonote machine is now relying on the
-Qi-Hardware kernel source code instead of the JLime kernel source code
-initially.
-Rename linux-jlime-ben-nanonote recipe to linux-qi-ben-nanonote to
-reflect the change.
+Qi-Hardware community kernel now has an upstream compliant driver to
+provide USB support for the Ben Nanonote, along with other features
+and fixes.
+Update the recipe to build from qi-kernel 3.12 source until the
+Qi-Hardware patches land upstream.
 
 Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
 ---
- conf/machine/ben-nanonote.conf                                       |    2 +-
- ...inux-jlime-ben-nanonote_3.12.bb => linux-qi-ben-nanonote_3.12.bb} |    0
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename recipes-kernel/linux/{linux-jlime-ben-nanonote_3.12.bb => linux-qi-ben-nanonote_3.12.bb} (100%)
+ .../config-ben-nanonote                            | 1301 ----------
+ .../fix-gcc-4.6.0-build-errors.patch               |  124 -
+ .../jz4740-udc.patch                               | 2561 --------------------
+ .../logo_linux_clut224.tar.gz                      |  Bin 8416 -> 0 bytes
+ .../modifier-keys.patch                            |  604 -----
+ ..._2.6.36.bb => linux-jlime-ben-nanonote_3.12.bb} |   13 +-
+ 6 files changed, 3 insertions(+), 4600 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/config-ben-nanonote
+ delete mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/fix-gcc-4.6.0-build-errors.patch
+ delete mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/jz4740-udc.patch
+ delete mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/logo_linux_clut224.tar.gz
+ delete mode 100644 recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/modifier-keys.patch
+ rename recipes-kernel/linux/{linux-jlime-ben-nanonote_2.6.36.bb => linux-jlime-ben-nanonote_3.12.bb} (68%)
 
-diff --git a/conf/machine/ben-nanonote.conf b/conf/machine/ben-nanonote.conf
-index e09eb70..d5e86bd 100644
---- a/conf/machine/ben-nanonote.conf
-+++ b/conf/machine/ben-nanonote.conf
-@@ -4,7 +4,7 @@
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/config-ben-nanonote b/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/config-ben-nanonote
+deleted file mode 100644
+index 1b07454..0000000
+--- a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/config-ben-nanonote
++++ /dev/null
+@@ -1,1301 +0,0 @@
+-#
+-# Automatically generated make config: don't edit
+-# Linux kernel version: 2.6.36
+-# Wed Nov  3 18:41:44 2010
+-#
+-CONFIG_MIPS=y
+-
+-#
+-# Machine selection
+-#
+-# CONFIG_MIPS_ALCHEMY is not set
+-# CONFIG_AR7 is not set
+-# CONFIG_BCM47XX is not set
+-# CONFIG_BCM63XX is not set
+-# CONFIG_MIPS_COBALT is not set
+-# CONFIG_MACH_DECSTATION is not set
+-# CONFIG_MACH_JAZZ is not set
+-CONFIG_MACH_JZ4740=y
+-# CONFIG_LASAT is not set
+-# CONFIG_MACH_LOONGSON is not set
+-# CONFIG_MIPS_MALTA is not set
+-# CONFIG_MIPS_SIM is not set
+-# CONFIG_NEC_MARKEINS is not set
+-# CONFIG_MACH_VR41XX is not set
+-# CONFIG_NXP_STB220 is not set
+-# CONFIG_NXP_STB225 is not set
+-# CONFIG_PNX8550_JBS is not set
+-# CONFIG_PNX8550_STB810 is not set
+-# CONFIG_PMC_MSP is not set
+-# CONFIG_PMC_YOSEMITE is not set
+-# CONFIG_POWERTV is not set
+-# CONFIG_SGI_IP22 is not set
+-# CONFIG_SGI_IP27 is not set
+-# CONFIG_SGI_IP28 is not set
+-# CONFIG_SGI_IP32 is not set
+-# CONFIG_SIBYTE_CRHINE is not set
+-# CONFIG_SIBYTE_CARMEL is not set
+-# CONFIG_SIBYTE_CRHONE is not set
+-# CONFIG_SIBYTE_RHONE is not set
+-# CONFIG_SIBYTE_SWARM is not set
+-# CONFIG_SIBYTE_LITTLESUR is not set
+-# CONFIG_SIBYTE_SENTOSA is not set
+-# CONFIG_SIBYTE_BIGSUR is not set
+-# CONFIG_SNI_RM is not set
+-# CONFIG_MACH_TX39XX is not set
+-# CONFIG_MACH_TX49XX is not set
+-# CONFIG_MIKROTIK_RB532 is not set
+-# CONFIG_WR_PPMC is not set
+-# CONFIG_CAVIUM_OCTEON_SIMULATOR is not set
+-# CONFIG_CAVIUM_OCTEON_REFERENCE_BOARD is not set
+-# CONFIG_ALCHEMY_GPIO_INDIRECT is not set
+-CONFIG_JZ4740_QI_LB60=y
+-CONFIG_HAVE_PWM=y
+-CONFIG_LOONGSON_UART_BASE=y
+-# CONFIG_LOONGSON_MC146818 is not set
+-CONFIG_RWSEM_GENERIC_SPINLOCK=y
+-# CONFIG_ARCH_HAS_ILOG2_U32 is not set
+-# CONFIG_ARCH_HAS_ILOG2_U64 is not set
+-CONFIG_ARCH_SUPPORTS_OPROFILE=y
+-CONFIG_GENERIC_FIND_NEXT_BIT=y
+-CONFIG_GENERIC_HWEIGHT=y
+-CONFIG_GENERIC_CALIBRATE_DELAY=y
+-CONFIG_GENERIC_CLOCKEVENTS=y
+-CONFIG_GENERIC_CMOS_UPDATE=y
+-CONFIG_SCHED_OMIT_FRAME_POINTER=y
+-CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=y
+-CONFIG_DMA_NONCOHERENT=y
+-CONFIG_NEED_DMA_MAP_STATE=y
+-CONFIG_SYS_HAS_EARLY_PRINTK=y
+-# CONFIG_NO_IOPORT is not set
+-CONFIG_GENERIC_GPIO=y
+-CONFIG_CPU_LITTLE_ENDIAN=y
+-CONFIG_SYS_SUPPORTS_LITTLE_ENDIAN=y
+-CONFIG_IRQ_CPU=y
+-CONFIG_MIPS_L1_CACHE_SHIFT=5
+-
+-#
+-# CPU selection
+-#
+-CONFIG_CPU_MIPS32_R1=y
+-CONFIG_SYS_HAS_CPU_MIPS32_R1=y
+-CONFIG_CPU_MIPS32=y
+-CONFIG_CPU_MIPSR1=y
+-CONFIG_SYS_SUPPORTS_32BIT_KERNEL=y
+-CONFIG_CPU_SUPPORTS_32BIT_KERNEL=y
+-CONFIG_HARDWARE_WATCHPOINTS=y
+-
+-#
+-# Kernel type
+-#
+-CONFIG_32BIT=y
+-CONFIG_PAGE_SIZE_4KB=y
+-# CONFIG_PAGE_SIZE_16KB is not set
+-# CONFIG_PAGE_SIZE_64KB is not set
+-CONFIG_CPU_HAS_PREFETCH=y
+-CONFIG_MIPS_MT_DISABLED=y
+-# CONFIG_ARCH_PHYS_ADDR_T_64BIT is not set
+-CONFIG_CPU_HAS_SYNC=y
+-CONFIG_GENERIC_HARDIRQS=y
+-CONFIG_GENERIC_IRQ_PROBE=y
+-CONFIG_CPU_SUPPORTS_HIGHMEM=y
+-CONFIG_ARCH_FLATMEM_ENABLE=y
+-CONFIG_ARCH_POPULATES_NODE_MAP=y
+-CONFIG_SELECT_MEMORY_MODEL=y
+-CONFIG_FLATMEM_MANUAL=y
+-CONFIG_FLATMEM=y
+-CONFIG_FLAT_NODE_MEM_MAP=y
+-CONFIG_PAGEFLAGS_EXTENDED=y
+-CONFIG_SPLIT_PTLOCK_CPUS=4
+-# CONFIG_PHYS_ADDR_T_64BIT is not set
+-CONFIG_ZONE_DMA_FLAG=0
+-CONFIG_VIRT_TO_BUS=y
+-# CONFIG_KSM is not set
+-CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
+-# CONFIG_NO_HZ is not set
+-# CONFIG_HIGH_RES_TIMERS is not set
+-CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
+-# CONFIG_HZ_48 is not set
+-CONFIG_HZ_100=y
+-# CONFIG_HZ_128 is not set
+-# CONFIG_HZ_250 is not set
+-# CONFIG_HZ_256 is not set
+-# CONFIG_HZ_1000 is not set
+-# CONFIG_HZ_1024 is not set
+-CONFIG_SYS_SUPPORTS_ARBIT_HZ=y
+-CONFIG_HZ=100
+-# CONFIG_PREEMPT_NONE is not set
+-# CONFIG_PREEMPT_VOLUNTARY is not set
+-CONFIG_PREEMPT=y
+-# CONFIG_KEXEC is not set
+-# CONFIG_SECCOMP is not set
+-CONFIG_LOCKDEP_SUPPORT=y
+-CONFIG_STACKTRACE_SUPPORT=y
+-CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
+-CONFIG_CONSTRUCTORS=y
+-
+-#
+-# General setup
+-#
+-CONFIG_EXPERIMENTAL=y
+-CONFIG_BROKEN_ON_SMP=y
+-CONFIG_LOCK_KERNEL=y
+-CONFIG_INIT_ENV_ARG_LIMIT=32
+-CONFIG_CROSS_COMPILE=""
+-CONFIG_LOCALVERSION=""
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_SWAP=y
+-CONFIG_SYSVIPC=y
+-CONFIG_SYSVIPC_SYSCTL=y
+-# CONFIG_POSIX_MQUEUE is not set
+-# CONFIG_BSD_PROCESS_ACCT is not set
+-# CONFIG_TASKSTATS is not set
+-# CONFIG_AUDIT is not set
+-
+-#
+-# RCU Subsystem
+-#
+-# CONFIG_TREE_RCU is not set
+-# CONFIG_TREE_PREEMPT_RCU is not set
+-CONFIG_TINY_RCU=y
+-# CONFIG_TREE_RCU_TRACE is not set
+-# CONFIG_IKCONFIG is not set
+-CONFIG_LOG_BUF_SHIFT=14
+-# CONFIG_CGROUPS is not set
+-# CONFIG_SYSFS_DEPRECATED_V2 is not set
+-# CONFIG_RELAY is not set
+-# CONFIG_NAMESPACES is not set
+-# CONFIG_BLK_DEV_INITRD is not set
+-# CONFIG_CC_OPTIMIZE_FOR_SIZE is not set
+-CONFIG_SYSCTL=y
+-CONFIG_ANON_INODES=y
+-CONFIG_EMBEDDED=y
+-CONFIG_SYSCTL_SYSCALL=y
+-# CONFIG_KALLSYMS is not set
+-CONFIG_HOTPLUG=y
+-CONFIG_PRINTK=y
+-CONFIG_BUG=y
+-CONFIG_ELF_CORE=y
+-# CONFIG_PCSPKR_PLATFORM is not set
+-CONFIG_BASE_FULL=y
+-CONFIG_FUTEX=y
+-CONFIG_EPOLL=y
+-CONFIG_SIGNALFD=y
+-CONFIG_TIMERFD=y
+-CONFIG_EVENTFD=y
+-CONFIG_SHMEM=y
+-CONFIG_AIO=y
+-
+-#
+-# Kernel Performance Events And Counters
+-#
+-# CONFIG_VM_EVENT_COUNTERS is not set
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLAB=y
+-# CONFIG_SLUB is not set
+-# CONFIG_SLOB is not set
+-# CONFIG_PROFILING is not set
+-CONFIG_HAVE_OPROFILE=y
+-# CONFIG_KPROBES is not set
+-CONFIG_HAVE_KPROBES=y
+-CONFIG_HAVE_KRETPROBES=y
+-
+-#
+-# GCOV-based kernel profiling
+-#
+-# CONFIG_GCOV_KERNEL is not set
+-CONFIG_HAVE_GENERIC_DMA_COHERENT=y
+-CONFIG_SLABINFO=y
+-CONFIG_RT_MUTEXES=y
+-CONFIG_BASE_SMALL=0
+-CONFIG_MODULES=y
+-# CONFIG_MODULE_FORCE_LOAD is not set
+-CONFIG_MODULE_UNLOAD=y
+-# CONFIG_MODULE_FORCE_UNLOAD is not set
+-# CONFIG_MODVERSIONS is not set
+-# CONFIG_MODULE_SRCVERSION_ALL is not set
+-CONFIG_BLOCK=y
+-CONFIG_LBDAF=y
+-# CONFIG_BLK_DEV_BSG is not set
+-# CONFIG_BLK_DEV_INTEGRITY is not set
+-
+-#
+-# IO Schedulers
+-#
+-CONFIG_IOSCHED_NOOP=y
+-CONFIG_IOSCHED_DEADLINE=y
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_DEFAULT_DEADLINE=y
+-# CONFIG_DEFAULT_NOOP is not set
+-CONFIG_DEFAULT_IOSCHED="deadline"
+-# CONFIG_INLINE_SPIN_TRYLOCK is not set
+-# CONFIG_INLINE_SPIN_TRYLOCK_BH is not set
+-# CONFIG_INLINE_SPIN_LOCK is not set
+-# CONFIG_INLINE_SPIN_LOCK_BH is not set
+-# CONFIG_INLINE_SPIN_LOCK_IRQ is not set
+-# CONFIG_INLINE_SPIN_LOCK_IRQSAVE is not set
+-# CONFIG_INLINE_SPIN_UNLOCK is not set
+-# CONFIG_INLINE_SPIN_UNLOCK_BH is not set
+-# CONFIG_INLINE_SPIN_UNLOCK_IRQ is not set
+-# CONFIG_INLINE_SPIN_UNLOCK_IRQRESTORE is not set
+-# CONFIG_INLINE_READ_TRYLOCK is not set
+-# CONFIG_INLINE_READ_LOCK is not set
+-# CONFIG_INLINE_READ_LOCK_BH is not set
+-# CONFIG_INLINE_READ_LOCK_IRQ is not set
+-# CONFIG_INLINE_READ_LOCK_IRQSAVE is not set
+-# CONFIG_INLINE_READ_UNLOCK is not set
+-# CONFIG_INLINE_READ_UNLOCK_BH is not set
+-# CONFIG_INLINE_READ_UNLOCK_IRQ is not set
+-# CONFIG_INLINE_READ_UNLOCK_IRQRESTORE is not set
+-# CONFIG_INLINE_WRITE_TRYLOCK is not set
+-# CONFIG_INLINE_WRITE_LOCK is not set
+-# CONFIG_INLINE_WRITE_LOCK_BH is not set
+-# CONFIG_INLINE_WRITE_LOCK_IRQ is not set
+-# CONFIG_INLINE_WRITE_LOCK_IRQSAVE is not set
+-# CONFIG_INLINE_WRITE_UNLOCK is not set
+-# CONFIG_INLINE_WRITE_UNLOCK_BH is not set
+-# CONFIG_INLINE_WRITE_UNLOCK_IRQ is not set
+-# CONFIG_INLINE_WRITE_UNLOCK_IRQRESTORE is not set
+-# CONFIG_MUTEX_SPIN_ON_OWNER is not set
+-CONFIG_FREEZER=y
+-
+-#
+-# Bus options (PCI, PCMCIA, EISA, ISA, TC)
+-#
+-# CONFIG_ARCH_SUPPORTS_MSI is not set
+-CONFIG_MMU=y
+-# CONFIG_PCCARD is not set
+-
+-#
+-# Executable file formats
+-#
+-CONFIG_BINFMT_ELF=y
+-# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+-# CONFIG_HAVE_AOUT is not set
+-# CONFIG_BINFMT_MISC is not set
+-CONFIG_TRAD_SIGNALS=y
+-
+-#
+-# Power management options
+-#
+-CONFIG_ARCH_HIBERNATION_POSSIBLE=y
+-CONFIG_ARCH_SUSPEND_POSSIBLE=y
+-CONFIG_PM=y
+-# CONFIG_PM_DEBUG is not set
+-CONFIG_PM_SLEEP=y
+-CONFIG_SUSPEND_NVS=y
+-CONFIG_SUSPEND=y
+-CONFIG_SUSPEND_FREEZER=y
+-# CONFIG_HIBERNATION is not set
+-# CONFIG_PM_RUNTIME is not set
+-CONFIG_PM_OPS=y
+-CONFIG_NET=y
+-
+-#
+-# Networking options
+-#
+-CONFIG_PACKET=y
+-CONFIG_UNIX=y
+-# CONFIG_NET_KEY is not set
+-CONFIG_INET=y
+-CONFIG_IP_MULTICAST=y
+-CONFIG_IP_ADVANCED_ROUTER=y
+-CONFIG_ASK_IP_FIB_HASH=y
+-# CONFIG_IP_FIB_TRIE is not set
+-CONFIG_IP_FIB_HASH=y
+-CONFIG_IP_MULTIPLE_TABLES=y
+-CONFIG_IP_ROUTE_MULTIPATH=y
+-CONFIG_IP_ROUTE_VERBOSE=y
+-# CONFIG_IP_PNP is not set
+-# CONFIG_NET_IPIP is not set
+-# CONFIG_NET_IPGRE is not set
+-CONFIG_IP_MROUTE=y
+-CONFIG_IP_MROUTE_MULTIPLE_TABLES=y
+-# CONFIG_IP_PIMSM_V1 is not set
+-# CONFIG_IP_PIMSM_V2 is not set
+-# CONFIG_ARPD is not set
+-# CONFIG_SYN_COOKIES is not set
+-# CONFIG_INET_AH is not set
+-# CONFIG_INET_ESP is not set
+-# CONFIG_INET_IPCOMP is not set
+-# CONFIG_INET_XFRM_TUNNEL is not set
+-# CONFIG_INET_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
+-# CONFIG_INET_XFRM_MODE_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_BEET is not set
+-# CONFIG_INET_LRO is not set
+-# CONFIG_INET_DIAG is not set
+-CONFIG_TCP_CONG_ADVANCED=y
+-# CONFIG_TCP_CONG_BIC is not set
+-# CONFIG_TCP_CONG_CUBIC is not set
+-CONFIG_TCP_CONG_WESTWOOD=y
+-# CONFIG_TCP_CONG_HTCP is not set
+-# CONFIG_TCP_CONG_HSTCP is not set
+-# CONFIG_TCP_CONG_HYBLA is not set
+-# CONFIG_TCP_CONG_VEGAS is not set
+-# CONFIG_TCP_CONG_SCALABLE is not set
+-# CONFIG_TCP_CONG_LP is not set
+-# CONFIG_TCP_CONG_VENO is not set
+-# CONFIG_TCP_CONG_YEAH is not set
+-# CONFIG_TCP_CONG_ILLINOIS is not set
+-CONFIG_DEFAULT_WESTWOOD=y
+-# CONFIG_DEFAULT_RENO is not set
+-CONFIG_DEFAULT_TCP_CONG="westwood"
+-# CONFIG_TCP_MD5SIG is not set
+-# CONFIG_IPV6 is not set
+-# CONFIG_NETWORK_SECMARK is not set
+-# CONFIG_NETWORK_PHY_TIMESTAMPING is not set
+-# CONFIG_NETFILTER is not set
+-# CONFIG_IP_DCCP is not set
+-# CONFIG_IP_SCTP is not set
+-# CONFIG_RDS is not set
+-# CONFIG_TIPC is not set
+-# CONFIG_ATM is not set
+-# CONFIG_L2TP is not set
+-# CONFIG_BRIDGE is not set
+-# CONFIG_NET_DSA is not set
+-# CONFIG_VLAN_8021Q is not set
+-# CONFIG_DECNET is not set
+-# CONFIG_LLC2 is not set
+-# CONFIG_IPX is not set
+-# CONFIG_ATALK is not set
+-# CONFIG_X25 is not set
+-# CONFIG_LAPB is not set
+-# CONFIG_ECONET is not set
+-# CONFIG_WAN_ROUTER is not set
+-# CONFIG_PHONET is not set
+-# CONFIG_IEEE802154 is not set
+-# CONFIG_NET_SCHED is not set
+-# CONFIG_DCB is not set
+-
+-#
+-# Network testing
+-#
+-# CONFIG_NET_PKTGEN is not set
+-# CONFIG_HAMRADIO is not set
+-# CONFIG_CAN is not set
+-# CONFIG_IRDA is not set
+-# CONFIG_BT is not set
+-# CONFIG_AF_RXRPC is not set
+-CONFIG_FIB_RULES=y
+-CONFIG_WIRELESS=y
+-# CONFIG_CFG80211 is not set
+-# CONFIG_LIB80211 is not set
+-
+-#
+-# CFG80211 needs to be enabled for MAC80211
+-#
+-
+-#
+-# Some wireless drivers require a rate control algorithm
+-#
+-# CONFIG_WIMAX is not set
+-# CONFIG_RFKILL is not set
+-# CONFIG_NET_9P is not set
+-# CONFIG_CAIF is not set
+-
+-#
+-# Device Drivers
+-#
+-
+-#
+-# Generic Driver Options
+-#
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-# CONFIG_DEVTMPFS is not set
+-CONFIG_STANDALONE=y
+-CONFIG_PREVENT_FIRMWARE_BUILD=y
+-CONFIG_FW_LOADER=y
+-# CONFIG_FIRMWARE_IN_KERNEL is not set
+-CONFIG_EXTRA_FIRMWARE=""
+-# CONFIG_SYS_HYPERVISOR is not set
+-# CONFIG_CONNECTOR is not set
+-CONFIG_MTD=y
+-# CONFIG_MTD_DEBUG is not set
+-# CONFIG_MTD_TESTS is not set
+-# CONFIG_MTD_CONCAT is not set
+-CONFIG_MTD_PARTITIONS=y
+-# CONFIG_MTD_REDBOOT_PARTS is not set
+-# CONFIG_MTD_CMDLINE_PARTS is not set
+-# CONFIG_MTD_AR7_PARTS is not set
+-
+-#
+-# User Modules And Translation Layers
+-#
+-CONFIG_MTD_CHAR=y
+-CONFIG_MTD_BLKDEVS=y
+-CONFIG_MTD_BLOCK=y
+-# CONFIG_FTL is not set
+-# CONFIG_NFTL is not set
+-# CONFIG_INFTL is not set
+-# CONFIG_RFD_FTL is not set
+-# CONFIG_SSFDC is not set
+-# CONFIG_SM_FTL is not set
+-# CONFIG_MTD_OOPS is not set
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-# CONFIG_MTD_CFI is not set
+-# CONFIG_MTD_JEDECPROBE is not set
+-CONFIG_MTD_MAP_BANK_WIDTH_1=y
+-CONFIG_MTD_MAP_BANK_WIDTH_2=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
+-# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
+-CONFIG_MTD_CFI_I1=y
+-CONFIG_MTD_CFI_I2=y
+-# CONFIG_MTD_CFI_I4 is not set
+-# CONFIG_MTD_CFI_I8 is not set
+-# CONFIG_MTD_RAM is not set
+-# CONFIG_MTD_ROM is not set
+-# CONFIG_MTD_ABSENT is not set
+-
+-#
+-# Mapping drivers for chip access
+-#
+-# CONFIG_MTD_COMPLEX_MAPPINGS is not set
+-# CONFIG_MTD_PLATRAM is not set
+-
+-#
+-# Self-contained MTD device drivers
+-#
+-# CONFIG_MTD_DATAFLASH is not set
+-# CONFIG_MTD_M25P80 is not set
+-# CONFIG_MTD_SST25L is not set
+-# CONFIG_MTD_SLRAM is not set
+-# CONFIG_MTD_PHRAM is not set
+-# CONFIG_MTD_MTDRAM is not set
+-# CONFIG_MTD_BLOCK2MTD is not set
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-# CONFIG_MTD_DOC2000 is not set
+-# CONFIG_MTD_DOC2001 is not set
+-# CONFIG_MTD_DOC2001PLUS is not set
+-CONFIG_MTD_NAND_ECC=y
+-# CONFIG_MTD_NAND_ECC_SMC is not set
+-CONFIG_MTD_NAND=y
+-# CONFIG_MTD_NAND_VERIFY_WRITE is not set
+-# CONFIG_MTD_SM_COMMON is not set
+-# CONFIG_MTD_NAND_MUSEUM_IDS is not set
+-CONFIG_MTD_NAND_IDS=y
+-# CONFIG_MTD_NAND_DISKONCHIP is not set
+-# CONFIG_MTD_NAND_NANDSIM is not set
+-# CONFIG_MTD_NAND_PLATFORM is not set
+-CONFIG_MTD_NAND_JZ4740=y
+-# CONFIG_MTD_ONENAND is not set
+-
+-#
+-# LPDDR flash memory drivers
+-#
+-# CONFIG_MTD_LPDDR is not set
+-
+-#
+-# UBI - Unsorted block images
+-#
+-CONFIG_MTD_UBI=y
+-CONFIG_MTD_UBI_WL_THRESHOLD=4096
+-CONFIG_MTD_UBI_BEB_RESERVE=1
+-# CONFIG_MTD_UBI_GLUEBI is not set
+-
+-#
+-# UBI debugging options
+-#
+-# CONFIG_MTD_UBI_DEBUG is not set
+-# CONFIG_PARPORT is not set
+-CONFIG_BLK_DEV=y
+-# CONFIG_BLK_DEV_COW_COMMON is not set
+-# CONFIG_BLK_DEV_LOOP is not set
+-
+-#
+-# DRBD disabled because PROC_FS, INET or CONNECTOR not selected
+-#
+-# CONFIG_BLK_DEV_NBD is not set
+-# CONFIG_BLK_DEV_RAM is not set
+-# CONFIG_CDROM_PKTCDVD is not set
+-# CONFIG_ATA_OVER_ETH is not set
+-# CONFIG_BLK_DEV_HD is not set
+-CONFIG_MISC_DEVICES=y
+-# CONFIG_AD525X_DPOT is not set
+-# CONFIG_ENCLOSURE_SERVICES is not set
+-# CONFIG_TI_DAC7512 is not set
+-# CONFIG_C2PORT is not set
+-
+-#
+-# EEPROM support
+-#
+-# CONFIG_EEPROM_AT25 is not set
+-# CONFIG_EEPROM_93CX6 is not set
+-# CONFIG_IWMC3200TOP is not set
+-CONFIG_HAVE_IDE=y
+-# CONFIG_IDE is not set
+-
+-#
+-# SCSI device support
+-#
+-CONFIG_SCSI_MOD=y
+-# CONFIG_RAID_ATTRS is not set
+-# CONFIG_SCSI is not set
+-# CONFIG_SCSI_DMA is not set
+-# CONFIG_SCSI_NETLINK is not set
+-# CONFIG_ATA is not set
+-# CONFIG_MD is not set
+-CONFIG_NETDEVICES=y
+-# CONFIG_DUMMY is not set
+-# CONFIG_BONDING is not set
+-# CONFIG_MACVLAN is not set
+-# CONFIG_EQUALIZER is not set
+-# CONFIG_TUN is not set
+-# CONFIG_VETH is not set
+-# CONFIG_PHYLIB is not set
+-# CONFIG_NET_ETHERNET is not set
+-# CONFIG_NETDEV_1000 is not set
+-# CONFIG_NETDEV_10000 is not set
+-CONFIG_WLAN=y
+-# CONFIG_HOSTAP is not set
+-
+-#
+-# Enable WiMAX (Networking options) to see the WiMAX drivers
+-#
+-# CONFIG_WAN is not set
+-
+-#
+-# CAIF transport drivers
+-#
+-# CONFIG_PPP is not set
+-# CONFIG_SLIP is not set
+-# CONFIG_NETCONSOLE is not set
+-# CONFIG_NETPOLL is not set
+-# CONFIG_NET_POLL_CONTROLLER is not set
+-CONFIG_ISDN=y
+-# CONFIG_ISDN_I4L is not set
+-# CONFIG_ISDN_CAPI is not set
+-# CONFIG_ISDN_DRV_GIGASET is not set
+-# CONFIG_MISDN is not set
+-# CONFIG_PHONE is not set
+-
+-#
+-# Input device support
+-#
+-CONFIG_INPUT=y
+-# CONFIG_INPUT_FF_MEMLESS is not set
+-# CONFIG_INPUT_POLLDEV is not set
+-# CONFIG_INPUT_SPARSEKMAP is not set
+-
+-#
+-# Userland interfaces
+-#
+-# CONFIG_INPUT_MOUSEDEV is not set
+-# CONFIG_INPUT_JOYDEV is not set
+-CONFIG_INPUT_EVDEV=y
+-# CONFIG_INPUT_EVBUG is not set
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_INPUT_KEYBOARD=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-# CONFIG_KEYBOARD_LKKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_MATRIX=y
+-# CONFIG_KEYBOARD_NEWTON is not set
+-# CONFIG_KEYBOARD_OPENCORES is not set
+-# CONFIG_KEYBOARD_STOWAWAY is not set
+-# CONFIG_KEYBOARD_SUNKBD is not set
+-# CONFIG_KEYBOARD_XTKBD is not set
+-# CONFIG_INPUT_MOUSE is not set
+-# CONFIG_INPUT_JOYSTICK is not set
+-# CONFIG_INPUT_TABLET is not set
+-# CONFIG_INPUT_TOUCHSCREEN is not set
+-CONFIG_INPUT_MISC=y
+-# CONFIG_INPUT_AD714X is not set
+-# CONFIG_INPUT_ATI_REMOTE is not set
+-# CONFIG_INPUT_ATI_REMOTE2 is not set
+-# CONFIG_INPUT_KEYSPAN_REMOTE is not set
+-# CONFIG_INPUT_POWERMATE is not set
+-# CONFIG_INPUT_YEALINK is not set
+-# CONFIG_INPUT_CM109 is not set
+-# CONFIG_INPUT_UINPUT is not set
+-CONFIG_INPUT_PWM_BEEPER=y
+-# CONFIG_INPUT_GPIO_ROTARY_ENCODER is not set
+-# CONFIG_INPUT_ADXL34X is not set
+-
+-#
+-# Hardware I/O ports
+-#
+-# CONFIG_SERIO is not set
+-# CONFIG_GAMEPORT is not set
+-
+-#
+-# Character devices
+-#
+-CONFIG_VT=y
+-CONFIG_CONSOLE_TRANSLATIONS=y
+-CONFIG_VT_CONSOLE=y
+-CONFIG_HW_CONSOLE=y
+-CONFIG_VT_HW_CONSOLE_BINDING=y
+-# CONFIG_DEVKMEM is not set
+-# CONFIG_SERIAL_NONSTANDARD is not set
+-# CONFIG_N_GSM is not set
+-
+-#
+-# Serial drivers
+-#
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
+-CONFIG_SERIAL_8250_NR_UARTS=2
+-CONFIG_SERIAL_8250_RUNTIME_UARTS=2
+-# CONFIG_SERIAL_8250_EXTENDED is not set
+-
+-#
+-# Non-8250 serial port support
+-#
+-# CONFIG_SERIAL_MAX3100 is not set
+-# CONFIG_SERIAL_MAX3107 is not set
+-CONFIG_SERIAL_CORE=y
+-CONFIG_SERIAL_CORE_CONSOLE=y
+-# CONFIG_SERIAL_TIMBERDALE is not set
+-# CONFIG_SERIAL_ALTERA_JTAGUART is not set
+-# CONFIG_SERIAL_ALTERA_UART is not set
+-CONFIG_UNIX98_PTYS=y
+-# CONFIG_DEVPTS_MULTIPLE_INSTANCES is not set
+-CONFIG_LEGACY_PTYS=y
+-CONFIG_LEGACY_PTY_COUNT=2
+-# CONFIG_IPMI_HANDLER is not set
+-# CONFIG_HW_RANDOM is not set
+-# CONFIG_R3964 is not set
+-# CONFIG_RAW_DRIVER is not set
+-# CONFIG_TCG_TPM is not set
+-# CONFIG_RAMOOPS is not set
+-# CONFIG_I2C is not set
+-CONFIG_SPI=y
+-CONFIG_SPI_MASTER=y
+-
+-#
+-# SPI Master Controller Drivers
+-#
+-CONFIG_SPI_BITBANG=y
+-CONFIG_SPI_GPIO=y
+-# CONFIG_SPI_XILINX is not set
+-# CONFIG_SPI_DESIGNWARE is not set
+-
+-#
+-# SPI Protocol Masters
+-#
+-# CONFIG_SPI_SPIDEV is not set
+-# CONFIG_SPI_TLE62X0 is not set
+-
+-#
+-# PPS support
+-#
+-# CONFIG_PPS is not set
+-CONFIG_ARCH_REQUIRE_GPIOLIB=y
+-CONFIG_GPIOLIB=y
+-# CONFIG_GPIO_SYSFS is not set
+-
+-#
+-# Memory mapped GPIO expanders:
+-#
+-# CONFIG_GPIO_IT8761E is not set
+-
+-#
+-# I2C GPIO expanders:
+-#
+-
+-#
+-# PCI GPIO expanders:
+-#
+-
+-#
+-# SPI GPIO expanders:
+-#
+-# CONFIG_GPIO_MAX7301 is not set
+-# CONFIG_GPIO_MCP23S08 is not set
+-# CONFIG_GPIO_MC33880 is not set
+-
+-#
+-# AC97 GPIO expanders:
+-#
+-
+-#
+-# MODULbus GPIO expanders:
+-#
+-# CONFIG_W1 is not set
+-CONFIG_POWER_SUPPLY=y
+-# CONFIG_POWER_SUPPLY_DEBUG is not set
+-# CONFIG_PDA_POWER is not set
+-# CONFIG_TEST_POWER is not set
+-# CONFIG_BATTERY_DS2760 is not set
+-CONFIG_BATTERY_JZ4740=y
+-CONFIG_CHARGER_GPIO=y
+-# CONFIG_HWMON is not set
+-# CONFIG_THERMAL is not set
+-# CONFIG_WATCHDOG is not set
+-CONFIG_SSB_POSSIBLE=y
+-
+-#
+-# Sonics Silicon Backplane
+-#
+-# CONFIG_SSB is not set
+-CONFIG_MFD_SUPPORT=y
+-CONFIG_MFD_CORE=y
+-# CONFIG_MFD_SM501 is not set
+-# CONFIG_HTC_PASIC3 is not set
+-# CONFIG_MFD_TMIO is not set
+-# CONFIG_MFD_MC13783 is not set
+-# CONFIG_ABX500_CORE is not set
+-# CONFIG_EZX_PCAP is not set
+-# CONFIG_AB8500_CORE is not set
+-CONFIG_MFD_JZ4740_ADC=y
+-# CONFIG_REGULATOR is not set
+-# CONFIG_MEDIA_SUPPORT is not set
+-
+-#
+-# Graphics support
+-#
+-# CONFIG_DRM is not set
+-# CONFIG_VGASTATE is not set
+-# CONFIG_VIDEO_OUTPUT_CONTROL is not set
+-CONFIG_FB=y
+-# CONFIG_FIRMWARE_EDID is not set
+-# CONFIG_FB_DDC is not set
+-# CONFIG_FB_BOOT_VESA_SUPPORT is not set
+-# CONFIG_FB_CFB_FILLRECT is not set
+-# CONFIG_FB_CFB_COPYAREA is not set
+-# CONFIG_FB_CFB_IMAGEBLIT is not set
+-# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
+-CONFIG_FB_SYS_FILLRECT=y
+-CONFIG_FB_SYS_COPYAREA=y
+-CONFIG_FB_SYS_IMAGEBLIT=y
+-# CONFIG_FB_FOREIGN_ENDIAN is not set
+-# CONFIG_FB_SYS_FOPS is not set
+-# CONFIG_FB_SVGALIB is not set
+-# CONFIG_FB_MACMODES is not set
+-# CONFIG_FB_BACKLIGHT is not set
+-# CONFIG_FB_MODE_HELPERS is not set
+-# CONFIG_FB_TILEBLITTING is not set
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-# CONFIG_FB_S1D13XXX is not set
+-# CONFIG_FB_TMIO is not set
+-# CONFIG_FB_VIRTUAL is not set
+-# CONFIG_FB_METRONOME is not set
+-# CONFIG_FB_MB862XX is not set
+-# CONFIG_FB_BROADSHEET is not set
+-CONFIG_FB_JZ4740=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CLASS_DEVICE=y
+-# CONFIG_LCD_L4F00242T03 is not set
+-# CONFIG_LCD_LMS283GF05 is not set
+-# CONFIG_LCD_LTV350QV is not set
+-CONFIG_LCD_ILI8960=y
+-# CONFIG_LCD_TDO24M is not set
+-# CONFIG_LCD_VGG2432A4 is not set
+-# CONFIG_LCD_PLATFORM is not set
+-# CONFIG_BACKLIGHT_CLASS_DEVICE is not set
+-
+-#
+-# Display device support
+-#
+-# CONFIG_DISPLAY_SUPPORT is not set
+-
+-#
+-# Console display driver support
+-#
+-# CONFIG_VGA_CONSOLE is not set
+-CONFIG_DUMMY_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
+-# CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+-CONFIG_FONTS=y
+-# CONFIG_FONT_8x8 is not set
+-# CONFIG_FONT_8x16 is not set
+-# CONFIG_FONT_6x11 is not set
+-# CONFIG_FONT_7x14 is not set
+-# CONFIG_FONT_PEARL_8x8 is not set
+-CONFIG_FONT_ACORN_8x8=y
+-# CONFIG_FONT_MINI_4x6 is not set
+-# CONFIG_FONT_SUN8x16 is not set
+-# CONFIG_FONT_SUN12x22 is not set
+-# CONFIG_FONT_10x18 is not set
+-CONFIG_LOGO=y
+-# CONFIG_LOGO_LINUX_MONO is not set
+-# CONFIG_LOGO_LINUX_VGA16 is not set
+-CONFIG_LOGO_LINUX_CLUT224=y
+-CONFIG_SOUND=y
+-CONFIG_SOUND_OSS_CORE=y
+-CONFIG_SOUND_OSS_CORE_PRECLAIM=y
+-CONFIG_SND=y
+-CONFIG_SND_TIMER=y
+-CONFIG_SND_PCM=y
+-CONFIG_SND_JACK=y
+-# CONFIG_SND_SEQUENCER is not set
+-CONFIG_SND_OSSEMUL=y
+-CONFIG_SND_MIXER_OSS=y
+-CONFIG_SND_PCM_OSS=y
+-CONFIG_SND_PCM_OSS_PLUGINS=y
+-# CONFIG_SND_DYNAMIC_MINORS is not set
+-# CONFIG_SND_SUPPORT_OLD_API is not set
+-# CONFIG_SND_VERBOSE_PROCFS is not set
+-# CONFIG_SND_VERBOSE_PRINTK is not set
+-# CONFIG_SND_DEBUG is not set
+-# CONFIG_SND_RAWMIDI_SEQ is not set
+-# CONFIG_SND_OPL3_LIB_SEQ is not set
+-# CONFIG_SND_OPL4_LIB_SEQ is not set
+-# CONFIG_SND_SBAWE_SEQ is not set
+-# CONFIG_SND_EMU10K1_SEQ is not set
+-# CONFIG_SND_DRIVERS is not set
+-# CONFIG_SND_SPI is not set
+-# CONFIG_SND_MIPS is not set
+-CONFIG_SND_SOC=y
+-CONFIG_SND_JZ4740_SOC=y
+-CONFIG_SND_JZ4740_SOC_I2S=y
+-CONFIG_SND_JZ4740_SOC_QI_LB60=y
+-CONFIG_SND_SOC_I2C_AND_SPI=y
+-# CONFIG_SND_SOC_ALL_CODECS is not set
+-CONFIG_SND_SOC_JZ4740_CODEC=y
+-# CONFIG_SOUND_PRIME is not set
+-# CONFIG_HID_SUPPORT is not set
+-CONFIG_USB_SUPPORT=y
+-CONFIG_USB_ARCH_HAS_HCD=y
+-CONFIG_USB_ARCH_HAS_OHCI=y
+-# CONFIG_USB_ARCH_HAS_EHCI is not set
+-# CONFIG_USB is not set
+-# CONFIG_USB_OTG_WHITELIST is not set
+-# CONFIG_USB_OTG_BLACKLIST_HUB is not set
+-
+-#
+-# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may
+-#
+-CONFIG_USB_GADGET=y
+-# CONFIG_USB_GADGET_DEBUG_FILES is not set
+-# CONFIG_USB_GADGET_DEBUG_FS is not set
+-CONFIG_USB_GADGET_VBUS_DRAW=2
+-CONFIG_USB_GADGET_SELECTED=y
+-CONFIG_USB_GADGET_JZ4740=y
+-CONFIG_USB_JZ4740=y
+-# CONFIG_USB_GADGET_M66592 is not set
+-CONFIG_USB_GADGET_DUALSPEED=y
+-# CONFIG_USB_ZERO is not set
+-# CONFIG_USB_AUDIO is not set
+-CONFIG_USB_ETH=y
+-CONFIG_USB_ETH_RNDIS=y
+-# CONFIG_USB_ETH_EEM is not set
+-# CONFIG_USB_GADGETFS is not set
+-# CONFIG_USB_FUNCTIONFS is not set
+-# CONFIG_USB_FILE_STORAGE is not set
+-# CONFIG_USB_MASS_STORAGE is not set
+-# CONFIG_USB_G_SERIAL is not set
+-# CONFIG_USB_MIDI_GADGET is not set
+-# CONFIG_USB_G_PRINTER is not set
+-# CONFIG_USB_CDC_COMPOSITE is not set
+-# CONFIG_USB_G_MULTI is not set
+-# CONFIG_USB_G_HID is not set
+-# CONFIG_USB_G_DBGP is not set
+-
+-#
+-# OTG and related infrastructure
+-#
+-# CONFIG_USB_GPIO_VBUS is not set
+-# CONFIG_NOP_USB_XCEIV is not set
+-CONFIG_MMC=y
+-# CONFIG_MMC_DEBUG is not set
+-CONFIG_MMC_UNSAFE_RESUME=y
+-
+-#
+-# MMC/SD/SDIO Card Drivers
+-#
+-CONFIG_MMC_BLOCK=y
+-# CONFIG_MMC_BLOCK_BOUNCE is not set
+-# CONFIG_SDIO_UART is not set
+-# CONFIG_MMC_TEST is not set
+-
+-#
+-# MMC/SD/SDIO Host Controller Drivers
+-#
+-# CONFIG_MMC_SDHCI is not set
+-# CONFIG_MMC_SPI is not set
+-CONFIG_MMC_JZ4740=y
+-# CONFIG_MEMSTICK is not set
+-# CONFIG_NEW_LEDS is not set
+-# CONFIG_ACCESSIBILITY is not set
+-CONFIG_RTC_LIB=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_HCTOSYS=y
+-CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
+-# CONFIG_RTC_DEBUG is not set
+-
+-#
+-# RTC interfaces
+-#
+-CONFIG_RTC_INTF_SYSFS=y
+-CONFIG_RTC_INTF_PROC=y
+-CONFIG_RTC_INTF_DEV=y
+-# CONFIG_RTC_INTF_DEV_UIE_EMUL is not set
+-# CONFIG_RTC_DRV_TEST is not set
+-
+-#
+-# SPI RTC drivers
+-#
+-# CONFIG_RTC_DRV_M41T94 is not set
+-# CONFIG_RTC_DRV_DS1305 is not set
+-# CONFIG_RTC_DRV_DS1390 is not set
+-# CONFIG_RTC_DRV_MAX6902 is not set
+-# CONFIG_RTC_DRV_R9701 is not set
+-# CONFIG_RTC_DRV_RS5C348 is not set
+-# CONFIG_RTC_DRV_DS3234 is not set
+-# CONFIG_RTC_DRV_PCF2123 is not set
+-
+-#
+-# Platform RTC drivers
+-#
+-# CONFIG_RTC_DRV_CMOS is not set
+-# CONFIG_RTC_DRV_DS1286 is not set
+-# CONFIG_RTC_DRV_DS1511 is not set
+-# CONFIG_RTC_DRV_DS1553 is not set
+-# CONFIG_RTC_DRV_DS1742 is not set
+-# CONFIG_RTC_DRV_STK17TA8 is not set
+-# CONFIG_RTC_DRV_M48T86 is not set
+-# CONFIG_RTC_DRV_M48T35 is not set
+-# CONFIG_RTC_DRV_M48T59 is not set
+-# CONFIG_RTC_DRV_MSM6242 is not set
+-# CONFIG_RTC_DRV_BQ4802 is not set
+-# CONFIG_RTC_DRV_RP5C01 is not set
+-# CONFIG_RTC_DRV_V3020 is not set
+-
+-#
+-# on-CPU RTC drivers
+-#
+-CONFIG_RTC_DRV_JZ4740=y
+-# CONFIG_DMADEVICES is not set
+-# CONFIG_AUXDISPLAY is not set
+-# CONFIG_UIO is not set
+-# CONFIG_STAGING is not set
+-
+-#
+-# File systems
+-#
+-CONFIG_EXT2_FS=y
+-# CONFIG_EXT2_FS_XATTR is not set
+-# CONFIG_EXT2_FS_XIP is not set
+-CONFIG_EXT3_FS=y
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-# CONFIG_EXT3_FS_XATTR is not set
+-# CONFIG_EXT4_FS is not set
+-CONFIG_JBD=y
+-# CONFIG_JBD_DEBUG is not set
+-# CONFIG_REISERFS_FS is not set
+-# CONFIG_JFS_FS is not set
+-# CONFIG_FS_POSIX_ACL is not set
+-# CONFIG_XFS_FS is not set
+-# CONFIG_GFS2_FS is not set
+-# CONFIG_OCFS2_FS is not set
+-# CONFIG_BTRFS_FS is not set
+-# CONFIG_NILFS2_FS is not set
+-CONFIG_FILE_LOCKING=y
+-CONFIG_FSNOTIFY=y
+-CONFIG_DNOTIFY=y
+-CONFIG_INOTIFY_USER=y
+-# CONFIG_QUOTA is not set
+-# CONFIG_AUTOFS_FS is not set
+-# CONFIG_AUTOFS4_FS is not set
+-# CONFIG_FUSE_FS is not set
+-
+-#
+-# Caches
+-#
+-# CONFIG_FSCACHE is not set
+-
+-#
+-# CD-ROM/DVD Filesystems
+-#
+-# CONFIG_ISO9660_FS is not set
+-# CONFIG_UDF_FS is not set
+-
+-#
+-# DOS/FAT/NT Filesystems
+-#
+-CONFIG_FAT_FS=y
+-# CONFIG_MSDOS_FS is not set
+-CONFIG_VFAT_FS=y
+-CONFIG_FAT_DEFAULT_CODEPAGE=437
+-CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
+-# CONFIG_NTFS_FS is not set
+-
+-#
+-# Pseudo filesystems
+-#
+-CONFIG_PROC_FS=y
+-CONFIG_PROC_KCORE=y
+-CONFIG_PROC_SYSCTL=y
+-# CONFIG_PROC_PAGE_MONITOR is not set
+-CONFIG_SYSFS=y
+-CONFIG_TMPFS=y
+-# CONFIG_TMPFS_POSIX_ACL is not set
+-# CONFIG_HUGETLB_PAGE is not set
+-# CONFIG_CONFIGFS_FS is not set
+-CONFIG_MISC_FILESYSTEMS=y
+-# CONFIG_ADFS_FS is not set
+-# CONFIG_AFFS_FS is not set
+-# CONFIG_HFS_FS is not set
+-# CONFIG_HFSPLUS_FS is not set
+-# CONFIG_BEFS_FS is not set
+-# CONFIG_BFS_FS is not set
+-# CONFIG_EFS_FS is not set
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_FS_DEBUG=0
+-CONFIG_JFFS2_FS_WRITEBUFFER=y
+-# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
+-CONFIG_JFFS2_SUMMARY=y
+-# CONFIG_JFFS2_FS_XATTR is not set
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-# CONFIG_JFFS2_ZLIB is not set
+-# CONFIG_JFFS2_LZO is not set
+-CONFIG_JFFS2_RTIME=y
+-# CONFIG_JFFS2_RUBIN is not set
+-# CONFIG_JFFS2_CMODE_NONE is not set
+-CONFIG_JFFS2_CMODE_PRIORITY=y
+-# CONFIG_JFFS2_CMODE_SIZE is not set
+-# CONFIG_JFFS2_CMODE_FAVOURLZO is not set
+-CONFIG_UBIFS_FS=y
+-# CONFIG_UBIFS_FS_XATTR is not set
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_UBIFS_FS_LZO=y
+-CONFIG_UBIFS_FS_ZLIB=y
+-# CONFIG_UBIFS_FS_DEBUG is not set
+-# CONFIG_LOGFS is not set
+-# CONFIG_CRAMFS is not set
+-# CONFIG_SQUASHFS is not set
+-# CONFIG_VXFS_FS is not set
+-# CONFIG_MINIX_FS is not set
+-# CONFIG_OMFS_FS is not set
+-# CONFIG_HPFS_FS is not set
+-# CONFIG_QNX4FS_FS is not set
+-# CONFIG_ROMFS_FS is not set
+-# CONFIG_SYSV_FS is not set
+-# CONFIG_UFS_FS is not set
+-# CONFIG_NETWORK_FILESYSTEMS is not set
+-
+-#
+-# Partition Types
+-#
+-CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_ACORN_PARTITION is not set
+-# CONFIG_OSF_PARTITION is not set
+-# CONFIG_AMIGA_PARTITION is not set
+-# CONFIG_ATARI_PARTITION is not set
+-# CONFIG_MAC_PARTITION is not set
+-CONFIG_MSDOS_PARTITION=y
+-# CONFIG_BSD_DISKLABEL is not set
+-# CONFIG_MINIX_SUBPARTITION is not set
+-# CONFIG_SOLARIS_X86_PARTITION is not set
+-# CONFIG_UNIXWARE_DISKLABEL is not set
+-# CONFIG_LDM_PARTITION is not set
+-# CONFIG_SGI_PARTITION is not set
+-# CONFIG_ULTRIX_PARTITION is not set
+-# CONFIG_SUN_PARTITION is not set
+-# CONFIG_KARMA_PARTITION is not set
+-# CONFIG_EFI_PARTITION is not set
+-# CONFIG_SYSV68_PARTITION is not set
+-CONFIG_NLS=y
+-CONFIG_NLS_DEFAULT="iso8859-1"
+-CONFIG_NLS_CODEPAGE_437=y
+-CONFIG_NLS_CODEPAGE_737=y
+-CONFIG_NLS_CODEPAGE_775=y
+-CONFIG_NLS_CODEPAGE_850=y
+-CONFIG_NLS_CODEPAGE_852=y
+-CONFIG_NLS_CODEPAGE_855=y
+-CONFIG_NLS_CODEPAGE_857=y
+-CONFIG_NLS_CODEPAGE_860=y
+-CONFIG_NLS_CODEPAGE_861=y
+-CONFIG_NLS_CODEPAGE_862=y
+-CONFIG_NLS_CODEPAGE_863=y
+-CONFIG_NLS_CODEPAGE_864=y
+-CONFIG_NLS_CODEPAGE_865=y
+-CONFIG_NLS_CODEPAGE_866=y
+-CONFIG_NLS_CODEPAGE_869=y
+-CONFIG_NLS_CODEPAGE_936=y
+-CONFIG_NLS_CODEPAGE_950=y
+-CONFIG_NLS_CODEPAGE_932=y
+-CONFIG_NLS_CODEPAGE_949=y
+-CONFIG_NLS_CODEPAGE_874=y
+-CONFIG_NLS_ISO8859_8=y
+-CONFIG_NLS_CODEPAGE_1250=y
+-CONFIG_NLS_CODEPAGE_1251=y
+-CONFIG_NLS_ASCII=y
+-CONFIG_NLS_ISO8859_1=y
+-CONFIG_NLS_ISO8859_2=y
+-CONFIG_NLS_ISO8859_3=y
+-CONFIG_NLS_ISO8859_4=y
+-CONFIG_NLS_ISO8859_5=y
+-CONFIG_NLS_ISO8859_6=y
+-CONFIG_NLS_ISO8859_7=y
+-CONFIG_NLS_ISO8859_9=y
+-CONFIG_NLS_ISO8859_13=y
+-CONFIG_NLS_ISO8859_14=y
+-CONFIG_NLS_ISO8859_15=y
+-CONFIG_NLS_KOI8_R=y
+-CONFIG_NLS_KOI8_U=y
+-CONFIG_NLS_UTF8=y
+-# CONFIG_DLM is not set
+-
+-#
+-# Kernel hacking
+-#
+-CONFIG_TRACE_IRQFLAGS_SUPPORT=y
+-CONFIG_PRINTK_TIME=y
+-CONFIG_ENABLE_WARN_DEPRECATED=y
+-CONFIG_ENABLE_MUST_CHECK=y
+-CONFIG_FRAME_WARN=1024
+-# CONFIG_MAGIC_SYSRQ is not set
+-CONFIG_STRIP_ASM_SYMS=y
+-# CONFIG_UNUSED_SYMBOLS is not set
+-CONFIG_DEBUG_FS=y
+-# CONFIG_HEADERS_CHECK is not set
+-# CONFIG_DEBUG_KERNEL is not set
+-# CONFIG_HARDLOCKUP_DETECTOR is not set
+-# CONFIG_DEBUG_MEMORY_INIT is not set
+-# CONFIG_LKDTM is not set
+-CONFIG_SYSCTL_SYSCALL_CHECK=y
+-CONFIG_HAVE_FUNCTION_TRACER=y
+-CONFIG_HAVE_FUNCTION_GRAPH_TRACER=y
+-CONFIG_HAVE_FUNCTION_TRACE_MCOUNT_TEST=y
+-CONFIG_HAVE_DYNAMIC_FTRACE=y
+-CONFIG_HAVE_FTRACE_MCOUNT_RECORD=y
+-CONFIG_TRACING_SUPPORT=y
+-# CONFIG_FTRACE is not set
+-# CONFIG_DYNAMIC_DEBUG is not set
+-# CONFIG_ATOMIC64_SELFTEST is not set
+-# CONFIG_SAMPLES is not set
+-CONFIG_HAVE_ARCH_KGDB=y
+-CONFIG_EARLY_PRINTK=y
+-# CONFIG_CMDLINE_BOOL is not set
+-# CONFIG_SPINLOCK_TEST is not set
+-
+-#
+-# Security options
+-#
+-# CONFIG_KEYS is not set
+-# CONFIG_SECURITY is not set
+-# CONFIG_SECURITYFS is not set
+-CONFIG_DEFAULT_SECURITY_DAC=y
+-CONFIG_DEFAULT_SECURITY=""
+-CONFIG_CRYPTO=y
+-
+-#
+-# Crypto core or helper
+-#
+-CONFIG_CRYPTO_ALGAPI=y
+-CONFIG_CRYPTO_ALGAPI2=y
+-CONFIG_CRYPTO_PCOMP=y
+-CONFIG_CRYPTO_PCOMP2=y
+-# CONFIG_CRYPTO_MANAGER is not set
+-# CONFIG_CRYPTO_MANAGER2 is not set
+-# CONFIG_CRYPTO_GF128MUL is not set
+-# CONFIG_CRYPTO_NULL is not set
+-# CONFIG_CRYPTO_CRYPTD is not set
+-# CONFIG_CRYPTO_AUTHENC is not set
+-# CONFIG_CRYPTO_TEST is not set
+-
+-#
+-# Authenticated Encryption with Associated Data
+-#
+-# CONFIG_CRYPTO_CCM is not set
+-# CONFIG_CRYPTO_GCM is not set
+-# CONFIG_CRYPTO_SEQIV is not set
+-
+-#
+-# Block modes
+-#
+-# CONFIG_CRYPTO_CBC is not set
+-# CONFIG_CRYPTO_CTR is not set
+-# CONFIG_CRYPTO_CTS is not set
+-# CONFIG_CRYPTO_ECB is not set
+-# CONFIG_CRYPTO_LRW is not set
+-# CONFIG_CRYPTO_PCBC is not set
+-# CONFIG_CRYPTO_XTS is not set
+-
+-#
+-# Hash modes
+-#
+-# CONFIG_CRYPTO_HMAC is not set
+-# CONFIG_CRYPTO_XCBC is not set
+-# CONFIG_CRYPTO_VMAC is not set
+-
+-#
+-# Digest
+-#
+-# CONFIG_CRYPTO_CRC32C is not set
+-# CONFIG_CRYPTO_GHASH is not set
+-# CONFIG_CRYPTO_MD4 is not set
+-# CONFIG_CRYPTO_MD5 is not set
+-# CONFIG_CRYPTO_MICHAEL_MIC is not set
+-# CONFIG_CRYPTO_RMD128 is not set
+-# CONFIG_CRYPTO_RMD160 is not set
+-# CONFIG_CRYPTO_RMD256 is not set
+-# CONFIG_CRYPTO_RMD320 is not set
+-# CONFIG_CRYPTO_SHA1 is not set
+-# CONFIG_CRYPTO_SHA256 is not set
+-# CONFIG_CRYPTO_SHA512 is not set
+-# CONFIG_CRYPTO_TGR192 is not set
+-# CONFIG_CRYPTO_WP512 is not set
+-
+-#
+-# Ciphers
+-#
+-# CONFIG_CRYPTO_AES is not set
+-# CONFIG_CRYPTO_ANUBIS is not set
+-# CONFIG_CRYPTO_ARC4 is not set
+-# CONFIG_CRYPTO_BLOWFISH is not set
+-# CONFIG_CRYPTO_CAMELLIA is not set
+-# CONFIG_CRYPTO_CAST5 is not set
+-# CONFIG_CRYPTO_CAST6 is not set
+-# CONFIG_CRYPTO_DES is not set
+-# CONFIG_CRYPTO_FCRYPT is not set
+-# CONFIG_CRYPTO_KHAZAD is not set
+-# CONFIG_CRYPTO_SALSA20 is not set
+-# CONFIG_CRYPTO_SEED is not set
+-# CONFIG_CRYPTO_SERPENT is not set
+-# CONFIG_CRYPTO_TEA is not set
+-# CONFIG_CRYPTO_TWOFISH is not set
+-
+-#
+-# Compression
+-#
+-CONFIG_CRYPTO_DEFLATE=y
+-CONFIG_CRYPTO_ZLIB=y
+-CONFIG_CRYPTO_LZO=y
+-
+-#
+-# Random Number Generation
+-#
+-# CONFIG_CRYPTO_ANSI_CPRNG is not set
+-CONFIG_CRYPTO_HW=y
+-# CONFIG_BINARY_PRINTF is not set
+-
+-#
+-# Library routines
+-#
+-CONFIG_BITREVERSE=y
+-CONFIG_GENERIC_FIND_LAST_BIT=y
+-# CONFIG_CRC_CCITT is not set
+-CONFIG_CRC16=y
+-# CONFIG_CRC_T10DIF is not set
+-# CONFIG_CRC_ITU_T is not set
+-CONFIG_CRC32=y
+-# CONFIG_CRC7 is not set
+-# CONFIG_LIBCRC32C is not set
+-CONFIG_ZLIB_INFLATE=y
+-CONFIG_ZLIB_DEFLATE=y
+-CONFIG_LZO_COMPRESS=y
+-CONFIG_LZO_DECOMPRESS=y
+-CONFIG_HAS_IOMEM=y
+-CONFIG_HAS_IOPORT=y
+-CONFIG_HAS_DMA=y
+-CONFIG_NLATTR=y
+-CONFIG_GENERIC_ATOMIC64=y
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/fix-gcc-4.6.0-build-errors.patch b/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/fix-gcc-4.6.0-build-errors.patch
+deleted file mode 100644
+index 61c0724..0000000
+--- a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/fix-gcc-4.6.0-build-errors.patch
++++ /dev/null
+@@ -1,124 +0,0 @@
+-Fix GCC-4.6.0 'unused but set variables' build errors
+-
+-GCC-4.6 can find more unused code than previous versions could.
+-This fixes relevant code as in upstream mainline kernel in changesets
+-#f1b6a505, #c726b822, #7a6e4ca1, #91b51f30, #71271aab and #d3ce0e98.
+-
+-Signed-off-by: Apelete Seketeli <apelete@seketeli.net>
+-
+-Upstream-Status: Backport
+-
+-diff --git a/arch/mips/jz4740/dma.c b/arch/mips/jz4740/dma.c
+-index 5ebe75a..d7feb89 100644
+---- a/arch/mips/jz4740/dma.c
+-+++ b/arch/mips/jz4740/dma.c
+-@@ -242,9 +242,7 @@ EXPORT_SYMBOL_GPL(jz4740_dma_get_residue);
+- 
+- static void jz4740_dma_chan_irq(struct jz4740_dma_chan *dma)
+- {
+--	uint32_t status;
+--
+--	status = jz4740_dma_read(JZ_REG_DMA_STATUS_CTRL(dma->id));
+-+	(void) jz4740_dma_read(JZ_REG_DMA_STATUS_CTRL(dma->id));
+- 
+- 	jz4740_dma_write_mask(JZ_REG_DMA_STATUS_CTRL(dma->id), 0,
+- 		JZ_DMA_STATUS_CTRL_ENABLE | JZ_DMA_STATUS_CTRL_TRANSFER_DONE);
+-diff --git a/arch/mips/kernel/signal.c b/arch/mips/kernel/signal.c
+-index 5922342..dbbe0ce 100644
+---- a/arch/mips/kernel/signal.c
+-+++ b/arch/mips/kernel/signal.c
+-@@ -84,7 +84,7 @@ static int protected_save_fp_context(struct sigcontext __user *sc)
+- 
+- static int protected_restore_fp_context(struct sigcontext __user *sc)
+- {
+--	int err, tmp;
+-+	int err, tmp __maybe_unused;
+- 	while (1) {
+- 		lock_fpu_owner();
+- 		own_fpu_inatomic(0);
+-diff --git a/arch/mips/kernel/signal32.c b/arch/mips/kernel/signal32.c
+-index a0ed0e0..aae9866 100644
+---- a/arch/mips/kernel/signal32.c
+-+++ b/arch/mips/kernel/signal32.c
+-@@ -115,7 +115,7 @@ static int protected_save_fp_context32(struct sigcontext32 __user *sc)
+- 
+- static int protected_restore_fp_context32(struct sigcontext32 __user *sc)
+- {
+--	int err, tmp;
+-+	int err, tmp __maybe_unused;
+- 	while (1) {
+- 		lock_fpu_owner();
+- 		own_fpu_inatomic(0);
+-diff --git a/arch/mips/kernel/syscall.c b/arch/mips/kernel/syscall.c
+-index 1dc6edf..18cd6f9 100644
+---- a/arch/mips/kernel/syscall.c
+-+++ b/arch/mips/kernel/syscall.c
+-@@ -383,12 +383,11 @@ save_static_function(sys_sysmips);
+- static int __used noinline
+- _sys_sysmips(nabi_no_regargs struct pt_regs regs)
+- {
+--	long cmd, arg1, arg2, arg3;
+-+	long cmd, arg1, arg2;
+- 
+- 	cmd = regs.regs[4];
+- 	arg1 = regs.regs[5];
+- 	arg2 = regs.regs[6];
+--	arg3 = regs.regs[7];
+- 
+- 	switch (cmd) {
+- 	case MIPS_ATOMIC_SET:
+-diff --git a/arch/mips/math-emu/ieee754int.h b/arch/mips/math-emu/ieee754int.h
+-index 1a846c5..9f867cd 100644
+---- a/arch/mips/math-emu/ieee754int.h
+-+++ b/arch/mips/math-emu/ieee754int.h
+-@@ -71,7 +71,7 @@
+- 
+- 
+- #define COMPXSP \
+--  unsigned xm; int xe; int xs; int xc
+-+  unsigned xm; int xe; int xs __maybe_unused; int xc
+- 
+- #define COMPYSP \
+-   unsigned ym; int ye; int ys; int yc
+-@@ -105,7 +105,7 @@
+- 
+- 
+- #define COMPXDP \
+--u64 xm; int xe; int xs; int xc
+-+u64 xm; int xe; int xs __maybe_unused; int xc
+- 
+- #define COMPYDP \
+- u64 ym; int ye; int ys; int yc
+-diff --git a/arch/mips/mm/c-r4k.c b/arch/mips/mm/c-r4k.c
+-index 6721ee2..8b24bcd 100644
+---- a/arch/mips/mm/c-r4k.c
+-+++ b/arch/mips/mm/c-r4k.c
+-@@ -1076,7 +1076,6 @@ static int __cpuinit probe_scache(void)
+- 	unsigned long flags, addr, begin, end, pow2;
+- 	unsigned int config = read_c0_config();
+- 	struct cpuinfo_mips *c = &current_cpu_data;
+--	int tmp;
+- 
+- 	if (config & CONF_SC)
+- 		return 0;
+-@@ -1109,7 +1108,6 @@ static int __cpuinit probe_scache(void)
+- 
+- 	/* Now search for the wrap around point. */
+- 	pow2 = (128 * 1024);
+--	tmp = 0;
+- 	for (addr = begin + (128 * 1024); addr < end; addr = begin + pow2) {
+- 		cache_op(Index_Load_Tag_SD, addr);
+- 		__asm__ __volatile__("nop; nop; nop; nop;"); /* hazard... */
+-diff --git a/arch/mips/mm/init.c b/arch/mips/mm/init.c
+-index 2efcbd2..279599e 100644
+---- a/arch/mips/mm/init.c
+-+++ b/arch/mips/mm/init.c
+-@@ -324,7 +324,7 @@ int page_is_ram(unsigned long pagenr)
+- void __init paging_init(void)
+- {
+- 	unsigned long max_zone_pfns[MAX_NR_ZONES];
+--	unsigned long lastpfn;
+-+	unsigned long lastpfn __maybe_unused;
+- 
+- 	pagetable_init();
+- 
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/jz4740-udc.patch b/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/jz4740-udc.patch
+deleted file mode 100644
+index 67dca33..0000000
+--- a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/jz4740-udc.patch
++++ /dev/null
+@@ -1,2561 +0,0 @@
+-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+-index 607d0db..35d5fbc 100644
+---- a/drivers/usb/gadget/Kconfig
+-+++ b/drivers/usb/gadget/Kconfig
+-@@ -121,11 +121,25 @@ choice
+- #
+- # Integrated controllers
+- #
+-+config USB_GADGET_JZ4740
+-+	boolean "JZ4740 UDC"
+-+	depends on MACH_JZ4740
+-+	select USB_GADGET_SELECTED
+-+	select USB_GADGET_DUALSPEED
+-+	help
+-+    	   Select this to support the Ingenic JZ4740 processor
+-+           high speed USB device controller.
+-+
+-+config USB_JZ4740
+-+	tristate
+-+	depends on USB_GADGET_JZ4740
+-+	default USB_GADGET
+-
+- config USB_GADGET_AT91
+- 	boolean "Atmel AT91 USB Device Port"
+- 	depends on ARCH_AT91 && !ARCH_AT91SAM9RL && !ARCH_AT91CAP9 && !ARCH_AT91SAM9G45
+- 	select USB_GADGET_SELECTED
+-+
+- 	help
+- 	   Many Atmel AT91 processors (such as the AT91RM2000) have a
+- 	   full speed USB Device Port with support for five configurable
+-diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
+-index 5780db4..c148025 100644
+---- a/drivers/usb/gadget/Makefile
+-+++ b/drivers/usb/gadget/Makefile
+-@@ -24,6 +24,7 @@ obj-$(CONFIG_USB_FSL_QE)	+= fsl_qe_udc.o
+- obj-$(CONFIG_USB_CI13XXX)	+= ci13xxx_udc.o
+- obj-$(CONFIG_USB_S3C_HSOTG)	+= s3c-hsotg.o
+- obj-$(CONFIG_USB_LANGWELL)	+= langwell_udc.o
+-+obj-$(CONFIG_USB_JZ4740)	+= jz4740_udc.o
+-
+- #
+- # USB gadget drivers
+-diff --git a/drivers/usb/gadget/gadget_chips.h b/drivers/usb/gadget/gadget_chips.h
+-index e511fec..b2ec5fb 100644
+---- a/drivers/usb/gadget/gadget_chips.h
+-+++ b/drivers/usb/gadget/gadget_chips.h
+-@@ -15,6 +15,12 @@
+- #ifndef __GADGET_CHIPS_H
+- #define __GADGET_CHIPS_H
+-
+-+#ifdef CONFIG_USB_GADGET_JZ4740
+-+#define	gadget_is_jz4740(g)	!strcmp("ingenic_hsusb", (g)->name)
+-+#else
+-+#define	gadget_is_jz4740(g)	0
+-+#endif
+-+
+- #ifdef CONFIG_USB_GADGET_NET2280
+- #define	gadget_is_net2280(g)	!strcmp("net2280", (g)->name)
+- #else
+-@@ -200,6 +206,9 @@ static inline int usb_gadget_controller_number(struct usb_gadget *gadget)
+- 		return 0x25;
+- 	else if (gadget_is_s3c_hsotg(gadget))
+- 		return 0x26;
+-+	else if (gadget_is_jz4740(gadget))
+-+		return 0x27;
+-+
+- 	return -ENOENT;
+- }
+-
+-diff --git a/drivers/usb/gadget/jz4740_udc.c b/drivers/usb/gadget/jz4740_udc.c
+-new file mode 100644
+-index 0000000..68e511a
+---- /dev/null
+-+++ b/drivers/usb/gadget/jz4740_udc.c
+-@@ -0,0 +1,2377 @@
+-+/*
+-+ * linux/drivers/usb/gadget/jz4740_udc.c
+-+ *
+-+ * Ingenic JZ4740 on-chip high speed USB device controller
+-+ *
+-+ * Copyright (C) 2006 - 2008 Ingenic Semiconductor Inc.
+-+ * Author: <jlwei@ingenic.cn>
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License as published by
+-+ * the Free Software Foundation; either version 2 of the License, or
+-+ * (at your option) any later version.
+-+ */
+-+
+-+/*
+-+ * This device has ep0, two bulk-in/interrupt-in endpoints, and one bulk-out endpoint.
+-+ *
+-+ *  - Endpoint numbering is fixed: ep0, ep1in-int, ep2in-bulk, ep1out-bulk.
+-+ *  - DMA works with bulk-in (channel 1) and bulk-out (channel 2) endpoints.
+-+ */
+-+
+-+#include <linux/kernel.h>
+-+#include <linux/module.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/delay.h>
+-+#include <linux/ioport.h>
+-+#include <linux/slab.h>
+-+#include <linux/errno.h>
+-+#include <linux/init.h>
+-+#include <linux/list.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/usb.h>
+-+#include <linux/usb/gadget.h>
+-+#include <linux/clk.h>
+-+
+-+#include <asm/byteorder.h>
+-+#include <asm/io.h>
+-+#include <asm/irq.h>
+-+#include <asm/system.h>
+-+#include <asm/mach-jz4740/clock.h>
+-+
+-+#include "jz4740_udc.h"
+-+
+-+#define JZ_REG_UDC_FADDR	0x00 /* Function Address 8-bit */
+-+#define JZ_REG_UDC_POWER	0x01 /* Power Management 8-bit */
+-+#define JZ_REG_UDC_INTRIN	0x02 /* Interrupt IN 16-bit */
+-+#define JZ_REG_UDC_INTROUT	0x04 /* Interrupt OUT 16-bit */
+-+#define JZ_REG_UDC_INTRINE	0x06 /* Intr IN enable 16-bit */
+-+#define JZ_REG_UDC_INTROUTE	0x08 /* Intr OUT enable 16-bit */
+-+#define JZ_REG_UDC_INTRUSB	0x0a /* Interrupt USB 8-bit */
+-+#define JZ_REG_UDC_INTRUSBE	0x0b /* Interrupt USB Enable 8-bit */
+-+#define JZ_REG_UDC_FRAME	0x0c /* Frame number 16-bit */
+-+#define JZ_REG_UDC_INDEX	0x0e /* Index register 8-bit */
+-+#define JZ_REG_UDC_TESTMODE	0x0f /* USB test mode 8-bit */
+-+
+-+#define JZ_REG_UDC_CSR0		0x12 /* EP0 CSR 8-bit */
+-+#define JZ_REG_UDC_INMAXP	0x10 /* EP1-2 IN Max Pkt Size 16-bit */
+-+#define JZ_REG_UDC_INCSR	0x12 /* EP1-2 IN CSR LSB 8/16bit */
+-+#define JZ_REG_UDC_INCSRH	0x13 /* EP1-2 IN CSR MSB 8-bit */
+-+#define JZ_REG_UDC_OUTMAXP	0x14 /* EP1 OUT Max Pkt Size 16-bit */
+-+#define JZ_REG_UDC_OUTCSR	0x16 /* EP1 OUT CSR LSB 8/16bit */
+-+#define JZ_REG_UDC_OUTCSRH	0x17 /* EP1 OUT CSR MSB 8-bit */
+-+#define JZ_REG_UDC_OUTCOUNT	0x18 /* bytes in EP0/1 OUT FIFO 16-bit */
+-+
+-+#define JZ_REG_UDC_EP_FIFO(x)	(4 * (x) + 0x20)
+-+
+-+#define JZ_REG_UDC_EPINFO	0x78 /* Endpoint information */
+-+#define JZ_REG_UDC_RAMINFO	0x79 /* RAM information */
+-+
+-+#define JZ_REG_UDC_INTR		0x200 /* DMA pending interrupts */
+-+#define JZ_REG_UDC_CNTL1	0x204 /* DMA channel 1 control */
+-+#define JZ_REG_UDC_ADDR1	0x208 /* DMA channel 1 AHB memory addr */
+-+#define JZ_REG_UDC_COUNT1	0x20c /* DMA channel 1 byte count */
+-+#define JZ_REG_UDC_CNTL2	0x214 /* DMA channel 2 control */
+-+#define JZ_REG_UDC_ADDR2	0x218 /* DMA channel 2 AHB memory addr */
+-+#define JZ_REG_UDC_COUNT2	0x21c /* DMA channel 2 byte count */
+-+
+-+/* Power register bit masks */
+-+#define USB_POWER_SUSPENDM	0x01
+-+#define USB_POWER_RESUME	0x04
+-+#define USB_POWER_HSMODE	0x10
+-+#define USB_POWER_HSENAB	0x20
+-+#define USB_POWER_SOFTCONN	0x40
+-+
+-+/* Interrupt register bit masks */
+-+#define USB_INTR_SUSPEND	0x01
+-+#define USB_INTR_RESUME		0x02
+-+#define USB_INTR_RESET		0x04
+-+
+-+#define USB_INTR_EP0		0x0001
+-+#define USB_INTR_INEP1		0x0002
+-+#define USB_INTR_INEP2		0x0004
+-+#define USB_INTR_OUTEP1		0x0002
+-+
+-+/* CSR0 bit masks */
+-+#define USB_CSR0_OUTPKTRDY	0x01
+-+#define USB_CSR0_INPKTRDY	0x02
+-+#define USB_CSR0_SENTSTALL	0x04
+-+#define USB_CSR0_DATAEND	0x08
+-+#define USB_CSR0_SETUPEND	0x10
+-+#define USB_CSR0_SENDSTALL	0x20
+-+#define USB_CSR0_SVDOUTPKTRDY	0x40
+-+#define USB_CSR0_SVDSETUPEND	0x80
+-+
+-+/* Endpoint CSR register bits */
+-+#define USB_INCSRH_AUTOSET	0x80
+-+#define USB_INCSRH_ISO		0x40
+-+#define USB_INCSRH_MODE		0x20
+-+#define USB_INCSRH_DMAREQENAB	0x10
+-+#define USB_INCSRH_DMAREQMODE	0x04
+-+#define USB_INCSR_CDT		0x40
+-+#define USB_INCSR_SENTSTALL	0x20
+-+#define USB_INCSR_SENDSTALL	0x10
+-+#define USB_INCSR_FF		0x08
+-+#define USB_INCSR_UNDERRUN	0x04
+-+#define USB_INCSR_FFNOTEMPT	0x02
+-+#define USB_INCSR_INPKTRDY	0x01
+-+#define USB_OUTCSRH_AUTOCLR	0x80
+-+#define USB_OUTCSRH_ISO		0x40
+-+#define USB_OUTCSRH_DMAREQENAB	0x20
+-+#define USB_OUTCSRH_DNYT	0x10
+-+#define USB_OUTCSRH_DMAREQMODE	0x08
+-+#define USB_OUTCSR_CDT		0x80
+-+#define USB_OUTCSR_SENTSTALL	0x40
+-+#define USB_OUTCSR_SENDSTALL	0x20
+-+#define USB_OUTCSR_FF		0x10
+-+#define USB_OUTCSR_DATAERR	0x08
+-+#define USB_OUTCSR_OVERRUN	0x04
+-+#define USB_OUTCSR_FFFULL	0x02
+-+#define USB_OUTCSR_OUTPKTRDY	0x01
+-+
+-+/* DMA control bits */
+-+#define USB_CNTL_ENA		0x01
+-+#define USB_CNTL_DIR_IN		0x02
+-+#define USB_CNTL_MODE_1		0x04
+-+#define USB_CNTL_INTR_EN	0x08
+-+#define USB_CNTL_EP(n)		((n) << 4)
+-+#define USB_CNTL_BURST_0	(0 << 9)
+-+#define USB_CNTL_BURST_4	(1 << 9)
+-+#define USB_CNTL_BURST_8	(2 << 9)
+-+#define USB_CNTL_BURST_16	(3 << 9)
+-+
+-+
+-+#ifndef DEBUG
+-+# define DEBUG(fmt,args...) do {} while(0)
+-+#endif
+-+#ifndef DEBUG_EP0
+-+# define NO_STATES
+-+# define DEBUG_EP0(fmt,args...) do {} while(0)
+-+#endif
+-+#ifndef DEBUG_SETUP
+-+# define DEBUG_SETUP(fmt,args...) do {} while(0)
+-+#endif
+-+
+-+static unsigned int use_dma = 0;   /* 1: use DMA, 0: use PIO */
+-+
+-+module_param(use_dma, int, 0);
+-+MODULE_PARM_DESC(use_dma, "DMA mode enable flag");
+-+
+-+static struct jz4740_udc jz4740_udc_controller;
+-+
+-+/*
+-+ * Local declarations.
+-+ */
+-+static void jz4740_ep0_kick(struct jz4740_udc *dev, struct jz4740_ep *ep);
+-+static void jz4740_handle_ep0(struct jz4740_udc *dev, uint32_t intr);
+-+
+-+static void done(struct jz4740_ep *ep, struct jz4740_request *req,
+-+		 int status);
+-+static void pio_irq_enable(struct jz4740_ep *ep);
+-+static void pio_irq_disable(struct jz4740_ep *ep);
+-+static void stop_activity(struct jz4740_udc *dev,
+-+			  struct usb_gadget_driver *driver);
+-+static void nuke(struct jz4740_ep *ep, int status);
+-+static void flush(struct jz4740_ep *ep);
+-+static void udc_set_address(struct jz4740_udc *dev, unsigned char address);
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/* inline functions of register read/write/set/clear  */
+-+
+-+static inline uint8_t usb_readb(struct jz4740_udc *udc, size_t reg)
+-+{
+-+	return readb(udc->base + reg);
+-+}
+-+
+-+static inline uint16_t usb_readw(struct jz4740_udc *udc, size_t reg)
+-+{
+-+	return readw(udc->base + reg);
+-+}
+-+
+-+static inline uint32_t usb_readl(struct jz4740_udc *udc, size_t reg)
+-+{
+-+	return readl(udc->base + reg);
+-+}
+-+
+-+static inline void usb_writeb(struct jz4740_udc *udc, size_t reg, uint8_t val)
+-+{
+-+	writeb(val, udc->base + reg);
+-+}
+-+
+-+static inline void usb_writew(struct jz4740_udc *udc, size_t reg, uint16_t val)
+-+{
+-+	writew(val, udc->base + reg);
+-+}
+-+
+-+static inline void usb_writel(struct jz4740_udc *udc, size_t reg, uint32_t val)
+-+{
+-+	writel(val, udc->base + reg);
+-+}
+-+
+-+static inline void usb_setb(struct jz4740_udc *udc, size_t reg, uint8_t mask)
+-+{
+-+	usb_writeb(udc, reg, usb_readb(udc, reg) | mask);
+-+}
+-+
+-+static inline void usb_setw(struct jz4740_udc *udc, size_t reg, uint8_t mask)
+-+{
+-+	usb_writew(udc, reg, usb_readw(udc, reg) | mask);
+-+}
+-+
+-+static inline void usb_clearb(struct jz4740_udc *udc, size_t reg, uint8_t mask)
+-+{
+-+	usb_writeb(udc, reg, usb_readb(udc, reg) & ~mask);
+-+}
+-+
+-+static inline void usb_clearw(struct jz4740_udc *udc, size_t reg, uint16_t mask)
+-+{
+-+	usb_writew(udc, reg, usb_readw(udc, reg) & ~mask);
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static inline void jz_udc_set_index(struct jz4740_udc *udc, uint8_t index)
+-+{
+-+	usb_writeb(udc, JZ_REG_UDC_INDEX, index);
+-+}
+-+
+-+static inline void jz_udc_select_ep(struct jz4740_ep *ep)
+-+{
+-+	jz_udc_set_index(ep->dev, ep_index(ep));
+-+}
+-+
+-+static inline int write_packet(struct jz4740_ep *ep,
+-+				   struct jz4740_request *req, unsigned int count)
+-+{
+-+	uint8_t *buf;
+-+	unsigned int length, nlong, nbyte;
+-+	void __iomem *fifo = ep->dev->base + ep->fifo;
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	buf = req->req.buf + req->req.actual;
+-+	prefetch(buf);
+-+
+-+	length = req->req.length - req->req.actual;
+-+	if (length > count)
+-+		length = count;
+-+	req->req.actual += length;
+-+
+-+	DEBUG("Write %d (count %d), fifo %x\n", length, count, ep->fifo);
+-+
+-+	nlong = length >> 2;
+-+	nbyte = length & 0x3;
+-+	while (nlong--) {
+-+		writel(*((uint32_t *)buf), fifo);
+-+		buf += 4;
+-+	}
+-+	while (nbyte--)
+-+		writeb(*buf++, fifo);
+-+
+-+	return length;
+-+}
+-+
+-+static int read_packet(struct jz4740_ep *ep,
+-+				  struct jz4740_request *req, unsigned int count)
+-+{
+-+	uint8_t *buf;
+-+	unsigned int length, nlong, nbyte;
+-+	void __iomem *fifo = ep->dev->base + ep->fifo;
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	buf = req->req.buf + req->req.actual;
+-+	prefetchw(buf);
+-+
+-+	length = req->req.length - req->req.actual;
+-+	if (length > count)
+-+		length = count;
+-+	req->req.actual += length;
+-+
+-+	DEBUG("Read %d, fifo %x\n", length, ep->fifo);
+-+	nlong = length >> 2;
+-+	nbyte = length & 0x3;
+-+	while (nlong--) {
+-+		*((uint32_t *)buf) = readl(fifo);
+-+		buf += 4;
+-+	}
+-+	while (nbyte--)
+-+		*buf++ = readb(fifo);
+-+
+-+	return length;
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/*
+-+ * 	udc_disable - disable USB device controller
+-+ */
+-+static void udc_disable(struct jz4740_udc *dev)
+-+{
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	udc_set_address(dev, 0);
+-+
+-+	/* Disable interrupts */
+-+	usb_writew(dev, JZ_REG_UDC_INTRINE, 0);
+-+	usb_writew(dev, JZ_REG_UDC_INTROUTE, 0);
+-+	usb_writeb(dev, JZ_REG_UDC_INTRUSBE, 0);
+-+
+-+	/* Disable DMA */
+-+	usb_writel(dev, JZ_REG_UDC_CNTL1, 0);
+-+	usb_writel(dev, JZ_REG_UDC_CNTL2, 0);
+-+
+-+	/* Disconnect from usb */
+-+	usb_clearb(dev, JZ_REG_UDC_POWER, USB_POWER_SOFTCONN);
+-+
+-+	/* Disable the USB PHY */
+-+	clk_disable(dev->clk);
+-+
+-+	dev->ep0state = WAIT_FOR_SETUP;
+-+	dev->gadget.speed = USB_SPEED_UNKNOWN;
+-+
+-+	return;
+-+}
+-+
+-+/*
+-+ * 	udc_reinit - initialize software state
+-+ */
+-+static void udc_reinit(struct jz4740_udc *dev)
+-+{
+-+	int i;
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	/* device/ep0 records init */
+-+	INIT_LIST_HEAD(&dev->gadget.ep_list);
+-+	INIT_LIST_HEAD(&dev->gadget.ep0->ep_list);
+-+	dev->ep0state = WAIT_FOR_SETUP;
+-+
+-+	for (i = 0; i < UDC_MAX_ENDPOINTS; i++) {
+-+		struct jz4740_ep *ep = &dev->ep[i];
+-+
+-+		if (i != 0)
+-+			list_add_tail(&ep->ep.ep_list, &dev->gadget.ep_list);
+-+
+-+		INIT_LIST_HEAD(&ep->queue);
+-+		ep->desc = 0;
+-+		ep->stopped = 0;
+-+	}
+-+}
+-+
+-+/* until it's enabled, this UDC should be completely invisible
+-+ * to any USB host.
+-+ */
+-+static void udc_enable(struct jz4740_udc *dev)
+-+{
+-+	int i;
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	/* UDC state is incorrect - Added by River */
+-+	if (dev->state != UDC_STATE_ENABLE) {
+-+		return;
+-+	}
+-+
+-+	dev->gadget.speed = USB_SPEED_UNKNOWN;
+-+
+-+	/* Flush FIFO for each */
+-+	for (i = 0; i < UDC_MAX_ENDPOINTS; i++) {
+-+		struct jz4740_ep *ep = &dev->ep[i];
+-+
+-+		jz_udc_set_index(dev, ep_index(ep));
+-+		flush(ep);
+-+	}
+-+
+-+	/* Set this bit to allow the UDC entering low-power mode when
+-+	 * there are no actions on the USB bus.
+-+	 * UDC still works during this bit was set.
+-+	 */
+-+	jz4740_clock_udc_enable_auto_suspend();
+-+
+-+	/* Enable the USB PHY */
+-+	clk_enable(dev->clk);
+-+
+-+	/* Disable interrupts */
+-+/*	usb_writew(dev, JZ_REG_UDC_INTRINE, 0);
+-+	usb_writew(dev, JZ_REG_UDC_INTROUTE, 0);
+-+	usb_writeb(dev, JZ_REG_UDC_INTRUSBE, 0);*/
+-+
+-+	/* Enable interrupts */
+-+	usb_setw(dev, JZ_REG_UDC_INTRINE, USB_INTR_EP0);
+-+	usb_setb(dev, JZ_REG_UDC_INTRUSBE, USB_INTR_RESET);
+-+	/* Don't enable rest of the interrupts */
+-+	/* usb_setw(dev, JZ_REG_UDC_INTRINE, USB_INTR_INEP1 | USB_INTR_INEP2);
+-+	   usb_setw(dev, JZ_REG_UDC_INTROUTE, USB_INTR_OUTEP1); */
+-+
+-+	/* Enable SUSPEND */
+-+	/* usb_setb(dev, JZ_REG_UDC_POWER, USB_POWER_SUSPENDM); */
+-+
+-+	/* Enable HS Mode */
+-+	usb_setb(dev, JZ_REG_UDC_POWER, USB_POWER_HSENAB);
+-+
+-+	/* Let host detect UDC:
+-+	 * Software must write a 1 to the PMR:USB_POWER_SOFTCONN bit to turn this
+-+	 * transistor on and pull the USBDP pin HIGH.
+-+	 */
+-+	usb_setb(dev, JZ_REG_UDC_POWER, USB_POWER_SOFTCONN);
+-+
+-+	return;
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/* keeping it simple:
+-+ * - one bus driver, initted first;
+-+ * - one function driver, initted second
+-+ */
+-+
+-+/*
+-+ * Register entry point for the peripheral controller driver.
+-+ */
+-+
+-+int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+-+{
+-+	struct jz4740_udc *dev = &jz4740_udc_controller;
+-+	int retval;
+-+
+-+	if (!driver || !driver->bind)
+-+		return -EINVAL;
+-+
+-+	if (!dev)
+-+		return -ENODEV;
+-+
+-+	if (dev->driver)
+-+		return -EBUSY;
+-+
+-+	/* hook up the driver */
+-+	dev->driver = driver;
+-+	dev->gadget.dev.driver = &driver->driver;
+-+
+-+	retval = driver->bind(&dev->gadget);
+-+	if (retval) {
+-+		DEBUG("%s: bind to driver %s --> error %d\n", dev->gadget.name,
+-+		            driver->driver.name, retval);
+-+		dev->driver = 0;
+-+		return retval;
+-+	}
+-+
+-+	/* then enable host detection and ep0; and we're ready
+-+	 * for set_configuration as well as eventual disconnect.
+-+	 */
+-+	udc_enable(dev);
+-+
+-+	DEBUG("%s: registered gadget driver '%s'\n", dev->gadget.name,
+-+	      driver->driver.name);
+-+
+-+	return 0;
+-+}
+-+EXPORT_SYMBOL(usb_gadget_register_driver);
+-+
+-+static void stop_activity(struct jz4740_udc *dev,
+-+			  struct usb_gadget_driver *driver)
+-+{
+-+	int i;
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	/* don't disconnect drivers more than once */
+-+	if (dev->gadget.speed == USB_SPEED_UNKNOWN)
+-+		driver = 0;
+-+	dev->gadget.speed = USB_SPEED_UNKNOWN;
+-+
+-+	/* prevent new request submissions, kill any outstanding requests  */
+-+	for (i = 0; i < UDC_MAX_ENDPOINTS; i++) {
+-+		struct jz4740_ep *ep = &dev->ep[i];
+-+
+-+		ep->stopped = 1;
+-+
+-+		jz_udc_set_index(dev, ep_index(ep));
+-+		nuke(ep, -ESHUTDOWN);
+-+	}
+-+
+-+	/* report disconnect; the driver is already quiesced */
+-+	if (driver) {
+-+		spin_unlock(&dev->lock);
+-+		driver->disconnect(&dev->gadget);
+-+		spin_lock(&dev->lock);
+-+	}
+-+
+-+	/* re-init driver-visible data structures */
+-+	udc_reinit(dev);
+-+}
+-+
+-+
+-+/*
+-+ * Unregister entry point for the peripheral controller driver.
+-+ */
+-+int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-+{
+-+	struct jz4740_udc *dev = &jz4740_udc_controller;
+-+	unsigned long flags;
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	if (!dev)
+-+		return -ENODEV;
+-+	if (!driver || driver != dev->driver)
+-+		return -EINVAL;
+-+	if (!driver->unbind)
+-+		return -EBUSY;
+-+
+-+	spin_lock_irqsave(&dev->lock, flags);
+-+	dev->driver = 0;
+-+	stop_activity(dev, driver);
+-+	spin_unlock_irqrestore(&dev->lock, flags);
+-+
+-+	driver->unbind(&dev->gadget);
+-+
+-+	udc_disable(dev);
+-+
+-+	DEBUG("unregistered driver '%s'\n", driver->driver.name);
+-+
+-+	return 0;
+-+}
+-+
+-+EXPORT_SYMBOL(usb_gadget_unregister_driver);
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/*
+-+ * Starting DMA using mode 1
+-+ */
+-+static void kick_dma(struct jz4740_ep *ep, struct jz4740_request *req)
+-+{
+-+	struct jz4740_udc *dev = ep->dev;
+-+	uint32_t count = req->req.length;
+-+	uint32_t physaddr = virt_to_phys((void *)req->req.buf);
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	jz_udc_select_ep(ep);
+-+
+-+	if (ep_is_in(ep)) { /* Bulk-IN transfer using DMA channel 1 */
+-+		ep->reg_addr = JZ_REG_UDC_ADDR1;
+-+
+-+		dma_cache_wback_inv((unsigned long)req->req.buf, count);
+-+
+-+		pio_irq_enable(ep);
+-+
+-+		usb_writeb(dev, JZ_REG_UDC_INCSRH,
+-+			   USB_INCSRH_DMAREQENAB | USB_INCSRH_AUTOSET | USB_INCSRH_DMAREQMODE);
+-+
+-+		usb_writel(dev, JZ_REG_UDC_ADDR1, physaddr);
+-+		usb_writel(dev, JZ_REG_UDC_COUNT1, count);
+-+		usb_writel(dev, JZ_REG_UDC_CNTL1, USB_CNTL_ENA | USB_CNTL_DIR_IN | USB_CNTL_MODE_1 |
+-+			   USB_CNTL_INTR_EN | USB_CNTL_BURST_16 | USB_CNTL_EP(ep_index(ep)));
+-+	}
+-+	else { /* Bulk-OUT transfer using DMA channel 2 */
+-+		ep->reg_addr = JZ_REG_UDC_ADDR2;
+-+
+-+		dma_cache_wback_inv((unsigned long)req->req.buf, count);
+-+
+-+		pio_irq_enable(ep);
+-+
+-+		usb_setb(dev, JZ_REG_UDC_OUTCSRH,
+-+			 USB_OUTCSRH_DMAREQENAB | USB_OUTCSRH_AUTOCLR | USB_OUTCSRH_DMAREQMODE);
+-+
+-+		usb_writel(dev, JZ_REG_UDC_ADDR2, physaddr);
+-+		usb_writel(dev, JZ_REG_UDC_COUNT2, count);
+-+		usb_writel(dev, JZ_REG_UDC_CNTL2, USB_CNTL_ENA | USB_CNTL_MODE_1 |
+-+			   USB_CNTL_INTR_EN | USB_CNTL_BURST_16 | USB_CNTL_EP(ep_index(ep)));
+-+	}
+-+}
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+/** Write request to FIFO (max write == maxp size)
+-+ *  Return:  0 = still running, 1 = completed, negative = errno
+-+ *  NOTE: INDEX register must be set for EP
+-+ */
+-+static int write_fifo(struct jz4740_ep *ep, struct jz4740_request *req)
+-+{
+-+	struct jz4740_udc *dev = ep->dev;
+-+	uint32_t max, csr;
+-+	uint32_t physaddr = virt_to_phys((void *)req->req.buf);
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+	max = le16_to_cpu(ep->desc->wMaxPacketSize);
+-+
+-+	if (use_dma) {
+-+		uint32_t dma_count;
+-+
+-+		/* DMA interrupt generated due to the last packet loaded into the FIFO */
+-+
+-+		dma_count = usb_readl(dev, ep->reg_addr) - physaddr;
+-+		req->req.actual += dma_count;
+-+
+-+		if (dma_count % max) {
+-+			/* If the last packet is less than MAXP, set INPKTRDY manually */
+-+			usb_setb(dev, ep->csr, USB_INCSR_INPKTRDY);
+-+		}
+-+
+-+		done(ep, req, 0);
+-+		if (list_empty(&ep->queue)) {
+-+			pio_irq_disable(ep);
+-+			return 1;
+-+		}
+-+		else {
+-+			/* advance the request queue */
+-+			req = list_entry(ep->queue.next, struct jz4740_request, queue);
+-+			kick_dma(ep, req);
+-+			return 0;
+-+		}
+-+	}
+-+
+-+	/*
+-+	 * PIO mode handling starts here ...
+-+	 */
+-+
+-+	csr = usb_readb(dev, ep->csr);
+-+
+-+	if (!(csr & USB_INCSR_FFNOTEMPT)) {
+-+		unsigned count;
+-+		int is_last, is_short;
+-+
+-+		count = write_packet(ep, req, max);
+-+		usb_setb(dev, ep->csr, USB_INCSR_INPKTRDY);
+-+
+-+		/* last packet is usually short (or a zlp) */
+-+		if (unlikely(count != max))
+-+			is_last = is_short = 1;
+-+		else {
+-+			if (likely(req->req.length != req->req.actual)
+-+			    || req->req.zero)
+-+				is_last = 0;
+-+			else
+-+				is_last = 1;
+-+			/* interrupt/iso maxpacket may not fill the fifo */
+-+			is_short = unlikely(max < ep_maxpacket(ep));
+-+		}
+-+
+-+		DEBUG("%s: wrote %s %d bytes%s%s %d left %p\n", __FUNCTION__,
+-+		      ep->ep.name, count,
+-+		      is_last ? "/L" : "", is_short ? "/S" : "",
+-+		      req->req.length - req->req.actual, req);
+-+
+-+		/* requests complete when all IN data is in the FIFO */
+-+		if (is_last) {
+-+			done(ep, req, 0);
+-+			if (list_empty(&ep->queue)) {
+-+				pio_irq_disable(ep);
+-+			}
+-+			return 1;
+-+		}
+-+	} else {
+-+		DEBUG("Hmm.. %d ep FIFO is not empty!\n", ep_index(ep));
+-+	}
+-+
+-+	return 0;
+-+}
+-+
+-+/** Read to request from FIFO (max read == bytes in fifo)
+-+ *  Return:  0 = still running, 1 = completed, negative = errno
+-+ *  NOTE: INDEX register must be set for EP
+-+ */
+-+static int read_fifo(struct jz4740_ep *ep, struct jz4740_request *req)
+-+{
+-+	struct jz4740_udc *dev = ep->dev;
+-+	uint32_t csr;
+-+	unsigned count, is_short;
+-+
+-+#if 0
+-+	uint32_t physaddr = virt_to_phys((void *)req->req.buf);
+-+
+-+	if (use_dma) {
+-+		uint32_t dma_count;
+-+
+-+		/* DMA interrupt generated due to a packet less than MAXP loaded into the FIFO */
+-+
+-+		dma_count = usb_readl(dev, ep->reg_addr) - physaddr;
+-+		req->req.actual += dma_count;
+-+
+-+		/* Disable interrupt and DMA */
+-+		pio_irq_disable(ep);
+-+		usb_writel(dev, JZ_REG_UDC_CNTL2, 0);
+-+
+-+		/* Read all bytes from this packet */
+-+		count = usb_readw(dev, JZ_REG_UDC_OUTCOUNT);
+-+		count = read_packet(ep, req, count);
+-+
+-+		if (count) {
+-+			/* If the last packet is greater than zero, clear OUTPKTRDY manually */
+-+			usb_clearb(dev, ep->csr, USB_OUTCSR_OUTPKTRDY);
+-+		}
+-+		done(ep, req, 0);
+-+
+-+		if (!list_empty(&ep->queue)) {
+-+			/* advance the request queue */
+-+			req = list_entry(ep->queue.next, struct jz4740_request, queue);
+-+			kick_dma(ep, req);
+-+		}
+-+
+-+		return 1;
+-+	}
+-+#endif
+-+	/*
+-+	 * PIO mode handling starts here ...
+-+	 */
+-+
+-+	/* make sure there's a packet in the FIFO. */
+-+	csr = usb_readb(dev, ep->csr);
+-+	if (!(csr & USB_OUTCSR_OUTPKTRDY)) {
+-+		DEBUG("%s: Packet NOT ready!\n", __FUNCTION__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	/* read all bytes from this packet */
+-+	count = usb_readw(dev, JZ_REG_UDC_OUTCOUNT);
+-+
+-+	is_short = (count < ep->ep.maxpacket);
+-+
+-+	count = read_packet(ep, req, count);
+-+
+-+	DEBUG("read %s %02x, %d bytes%s req %p %d/%d\n",
+-+	      ep->ep.name, csr, count,
+-+	      is_short ? "/S" : "", req, req->req.actual, req->req.length);
+-+
+-+	/* Clear OutPktRdy */
+-+	usb_clearb(dev, ep->csr, USB_OUTCSR_OUTPKTRDY);
+-+
+-+	/* completion */
+-+	if (is_short || req->req.actual == req->req.length) {
+-+		done(ep, req, 0);
+-+
+-+		if (list_empty(&ep->queue))
+-+			pio_irq_disable(ep);
+-+		return 1;
+-+	}
+-+
+-+	/* finished that packet.  the next one may be waiting... */
+-+	return 0;
+-+}
+-+
+-+/*
+-+ *	done - retire a request; caller blocked irqs
+-+ *  INDEX register is preserved to keep same
+-+ */
+-+static void done(struct jz4740_ep *ep, struct jz4740_request *req, int status)
+-+{
+-+	unsigned int stopped = ep->stopped;
+-+	uint32_t index;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, ep);
+-+	list_del_init(&req->queue);
+-+
+-+	if (likely(req->req.status == -EINPROGRESS))
+-+		req->req.status = status;
+-+	else
+-+		status = req->req.status;
+-+
+-+	if (status && status != -ESHUTDOWN)
+-+		DEBUG("complete %s req %p stat %d len %u/%u\n",
+-+		      ep->ep.name, &req->req, status,
+-+		      req->req.actual, req->req.length);
+-+
+-+	/* don't modify queue heads during completion callback */
+-+	ep->stopped = 1;
+-+	/* Read current index (completion may modify it) */
+-+	index = usb_readb(ep->dev, JZ_REG_UDC_INDEX);
+-+	spin_unlock_irqrestore(&ep->dev->lock, ep->dev->lock_flags);
+-+
+-+	req->req.complete(&ep->ep, &req->req);
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, ep->dev->lock_flags);
+-+	/* Restore index */
+-+	jz_udc_set_index(ep->dev, index);
+-+	ep->stopped = stopped;
+-+}
+-+
+-+/** Enable EP interrupt */
+-+static void pio_irq_enable(struct jz4740_ep *ep)
+-+{
+-+	uint8_t index = ep_index(ep);
+-+	struct jz4740_udc *dev = ep->dev;
+-+	DEBUG("%s: EP%d %s\n", __FUNCTION__, ep_index(ep), ep_is_in(ep) ? "IN": "OUT");
+-+
+-+	if (ep_is_in(ep)) {
+-+		switch (index) {
+-+		case 1:
+-+		case 2:
+-+			usb_setw(dev, JZ_REG_UDC_INTRINE, BIT(index));
+-+			break;
+-+		default:
+-+			DEBUG("Unknown endpoint: %d\n", index);
+-+			break;
+-+		}
+-+	}
+-+	else {
+-+		switch (index) {
+-+		case 1:
+-+			usb_setw(dev, JZ_REG_UDC_INTROUTE, BIT(index));
+-+			break;
+-+		default:
+-+			DEBUG("Unknown endpoint: %d\n", index);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+/** Disable EP interrupt */
+-+static void pio_irq_disable(struct jz4740_ep *ep)
+-+{
+-+	uint8_t index = ep_index(ep);
+-+
+-+	DEBUG("%s: EP%d %s\n", __FUNCTION__, ep_index(ep), ep_is_in(ep) ? "IN": "OUT");
+-+
+-+	if (ep_is_in(ep)) {
+-+		switch (ep_index(ep)) {
+-+		case 1:
+-+		case 2:
+-+			usb_clearw(ep->dev, JZ_REG_UDC_INTRINE, BIT(index));
+-+			break;
+-+		default:
+-+			DEBUG("Unknown endpoint: %d\n", index);
+-+			break;
+-+		}
+-+	}
+-+	else {
+-+		switch (ep_index(ep)) {
+-+		case 1:
+-+			usb_clearw(ep->dev, JZ_REG_UDC_INTROUTE, BIT(index));
+-+			break;
+-+		default:
+-+			DEBUG("Unknown endpoint: %d\n", index);
+-+			break;
+-+	    }
+-+	}
+-+}
+-+
+-+/*
+-+ * 	nuke - dequeue ALL requests
+-+ */
+-+static void nuke(struct jz4740_ep *ep, int status)
+-+{
+-+	struct jz4740_request *req;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, ep);
+-+
+-+	/* Flush FIFO */
+-+	flush(ep);
+-+
+-+	/* called with irqs blocked */
+-+	while (!list_empty(&ep->queue)) {
+-+		req = list_entry(ep->queue.next, struct jz4740_request, queue);
+-+		done(ep, req, status);
+-+	}
+-+
+-+	/* Disable IRQ if EP is enabled (has descriptor) */
+-+	if (ep->desc)
+-+		pio_irq_disable(ep);
+-+}
+-+
+-+/** Flush EP FIFO
+-+ * NOTE: INDEX register must be set before this call
+-+ */
+-+static void flush(struct jz4740_ep *ep)
+-+{
+-+	DEBUG("%s: %s\n", __FUNCTION__, ep->ep.name);
+-+
+-+	switch (ep->type) {
+-+	case ep_bulk_in:
+-+	case ep_interrupt:
+-+		usb_setb(ep->dev, ep->csr, USB_INCSR_FF);
+-+		break;
+-+	case ep_bulk_out:
+-+		usb_setb(ep->dev, ep->csr, USB_OUTCSR_FF);
+-+		break;
+-+	case ep_control:
+-+		break;
+-+	}
+-+}
+-+
+-+/**
+-+ * jz4740_in_epn - handle IN interrupt
+-+ */
+-+static void jz4740_in_epn(struct jz4740_udc *dev, uint32_t ep_idx, uint32_t intr)
+-+{
+-+	uint32_t csr;
+-+	struct jz4740_ep *ep = &dev->ep[ep_idx + 1];
+-+	struct jz4740_request *req;
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	jz_udc_set_index(dev, ep_index(ep));
+-+
+-+	csr = usb_readb(dev, ep->csr);
+-+	DEBUG("%s: %d, csr %x\n", __FUNCTION__, ep_idx, csr);
+-+
+-+	if (csr & USB_INCSR_SENTSTALL) {
+-+		DEBUG("USB_INCSR_SENTSTALL\n");
+-+		usb_clearb(dev, ep->csr, USB_INCSR_SENTSTALL);
+-+		return;
+-+	}
+-+
+-+	if (!ep->desc) {
+-+		DEBUG("%s: NO EP DESC\n", __FUNCTION__);
+-+		return;
+-+	}
+-+
+-+	if (!list_empty(&ep->queue)) {
+-+		req = list_first_entry(&ep->queue, struct jz4740_request, queue);
+-+		write_fifo(ep, req);
+-+	}
+-+}
+-+
+-+/*
+-+ * Bulk OUT (recv)
+-+ */
+-+static void jz4740_out_epn(struct jz4740_udc *dev, uint32_t ep_idx, uint32_t intr)
+-+{
+-+	struct jz4740_ep *ep = &dev->ep[ep_idx];
+-+	struct jz4740_request *req;
+-+
+-+	DEBUG("%s: %d\n", __FUNCTION__, ep_idx);
+-+
+-+	jz_udc_select_ep(ep);
+-+	if (ep->desc) {
+-+		uint32_t csr;
+-+
+-+		if (use_dma) {
+-+			/* DMA starts here ... */
+-+			if (!list_empty(&ep->queue)) {
+-+				req = list_first_entry(&ep->queue, struct jz4740_request, queue);
+-+				read_fifo(ep, req);
+-+			}
+-+			return;
+-+		}
+-+
+-+		/*
+-+		 * PIO mode starts here ...
+-+		 */
+-+
+-+		while ((csr = usb_readb(dev, ep->csr)) &
+-+		       (USB_OUTCSR_OUTPKTRDY | USB_OUTCSR_SENTSTALL)) {
+-+			DEBUG("%s: %x\n", __FUNCTION__, csr);
+-+
+-+			if (csr & USB_OUTCSR_SENTSTALL) {
+-+				DEBUG("%s: stall sent, flush fifo\n",
+-+				      __FUNCTION__);
+-+				/* usb_set(USB_OUT_CSR1_FIFO_FLUSH, ep->csr1); */
+-+				flush(ep);
+-+			} else if (csr & USB_OUTCSR_OUTPKTRDY) {
+-+				if (list_empty(&ep->queue))
+-+					req = 0;
+-+				else
+-+					req =
+-+						list_entry(ep->queue.next,
+-+							   struct jz4740_request,
+-+							   queue);
+-+
+-+				if (!req) {
+-+					DEBUG("%s: NULL REQ %d\n",
+-+					      __FUNCTION__, ep_idx);
+-+					break;
+-+				} else {
+-+					read_fifo(ep, req);
+-+				}
+-+			}
+-+		}
+-+	} else {
+-+		/* Throw packet away.. */
+-+		DEBUG("%s: ep %p ep_indx %d No descriptor?!?\n", __FUNCTION__, ep, ep_idx);
+-+		flush(ep);
+-+	}
+-+}
+-+
+-+/** Halt specific EP
+-+ *  Return 0 if success
+-+ *  NOTE: Sets INDEX register to EP !
+-+ */
+-+static int jz4740_set_halt(struct usb_ep *_ep, int value)
+-+{
+-+	struct jz4740_udc *dev;
+-+	struct jz4740_ep *ep;
+-+	unsigned long flags;
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (unlikely(!_ep || (!ep->desc && ep->type != ep_control))) {
+-+		DEBUG("%s, bad ep\n", __FUNCTION__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	dev = ep->dev;
+-+
+-+	spin_lock_irqsave(&dev->lock, flags);
+-+
+-+	jz_udc_select_ep(ep);
+-+
+-+	DEBUG("%s, ep %d, val %d\n", __FUNCTION__, ep_index(ep), value);
+-+
+-+	if (ep_index(ep) == 0) {
+-+		/* EP0 */
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SENDSTALL);
+-+	} else if (ep_is_in(ep)) {
+-+		uint32_t csr = usb_readb(dev, ep->csr);
+-+		if (value && ((csr & USB_INCSR_FFNOTEMPT)
+-+			      || !list_empty(&ep->queue))) {
+-+			/*
+-+			 * Attempts to halt IN endpoints will fail (returning -EAGAIN)
+-+			 * if any transfer requests are still queued, or if the controller
+-+			 * FIFO still holds bytes that the host hasnt collected.
+-+			 */
+-+			spin_unlock_irqrestore(&dev->lock, flags);
+-+			DEBUG
+-+			    ("Attempt to halt IN endpoint failed (returning -EAGAIN) %d %d\n",
+-+			     (csr & USB_INCSR_FFNOTEMPT),
+-+			     !list_empty(&ep->queue));
+-+			return -EAGAIN;
+-+		}
+-+		flush(ep);
+-+		if (value) {
+-+			usb_setb(dev, ep->csr, USB_INCSR_SENDSTALL);
+-+		} else {
+-+			usb_clearb(dev, ep->csr, USB_INCSR_SENDSTALL);
+-+			usb_setb(dev, ep->csr, USB_INCSR_CDT);
+-+		}
+-+	} else {
+-+
+-+		flush(ep);
+-+		if (value) {
+-+			usb_setb(dev, ep->csr, USB_OUTCSR_SENDSTALL);
+-+		} else {
+-+			usb_clearb(dev, ep->csr, USB_OUTCSR_SENDSTALL);
+-+			usb_setb(dev, ep->csr, USB_OUTCSR_CDT);
+-+		}
+-+	}
+-+
+-+	ep->stopped = value;
+-+
+-+	spin_unlock_irqrestore(&dev->lock, flags);
+-+
+-+	DEBUG("%s %s halted\n", _ep->name, value == 0 ? "NOT" : "IS");
+-+
+-+	return 0;
+-+}
+-+
+-+
+-+static int jz4740_ep_enable(struct usb_ep *_ep,
+-+			    const struct usb_endpoint_descriptor *desc)
+-+{
+-+	struct jz4740_ep *ep;
+-+	struct jz4740_udc *dev;
+-+	unsigned long flags;
+-+	uint32_t max, csrh = 0;
+-+
+-+	DEBUG("%s: trying to enable %s\n", __FUNCTION__, _ep->name);
+-+
+-+	if (!_ep || !desc)
+-+		return -EINVAL;
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (ep->desc || ep->type == ep_control
+-+	    || desc->bDescriptorType != USB_DT_ENDPOINT
+-+	    || ep->bEndpointAddress != desc->bEndpointAddress) {
+-+		DEBUG("%s, bad ep or descriptor\n", __FUNCTION__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	/* xfer types must match, except that interrupt ~= bulk */
+-+	if (ep->bmAttributes != desc->bmAttributes
+-+	    && ep->bmAttributes != USB_ENDPOINT_XFER_BULK
+-+	    && desc->bmAttributes != USB_ENDPOINT_XFER_INT) {
+-+		DEBUG("%s, %s type mismatch\n", __FUNCTION__, _ep->name);
+-+		return -EINVAL;
+-+	}
+-+
+-+	dev = ep->dev;
+-+	if (!dev->driver || dev->gadget.speed == USB_SPEED_UNKNOWN) {
+-+		DEBUG("%s, bogus device state\n", __FUNCTION__);
+-+		return -ESHUTDOWN;
+-+	}
+-+
+-+	max = le16_to_cpu(desc->wMaxPacketSize);
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, flags);
+-+
+-+	/* Configure the endpoint */
+-+	jz_udc_select_ep(ep);
+-+	if (ep_is_in(ep)) {
+-+		usb_writew(dev, JZ_REG_UDC_INMAXP, max);
+-+		switch (desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK) {
+-+		case USB_ENDPOINT_XFER_BULK:
+-+		case USB_ENDPOINT_XFER_INT:
+-+			csrh &= ~USB_INCSRH_ISO;
+-+			break;
+-+		case USB_ENDPOINT_XFER_ISOC:
+-+			csrh |= USB_INCSRH_ISO;
+-+			break;
+-+		}
+-+		usb_writeb(dev, JZ_REG_UDC_INCSRH, csrh);
+-+	}
+-+	else {
+-+		usb_writew(dev, JZ_REG_UDC_OUTMAXP, max);
+-+		switch (desc->bmAttributes & USB_ENDPOINT_XFERTYPE_MASK) {
+-+		case USB_ENDPOINT_XFER_BULK:
+-+			 csrh &= ~USB_OUTCSRH_ISO;
+-+			break;
+-+		case USB_ENDPOINT_XFER_INT:
+-+			csrh &= ~USB_OUTCSRH_ISO;
+-+			csrh |= USB_OUTCSRH_DNYT;
+-+			break;
+-+		case USB_ENDPOINT_XFER_ISOC:
+-+			csrh |= USB_OUTCSRH_ISO;
+-+			break;
+-+		}
+-+		usb_writeb(dev, JZ_REG_UDC_OUTCSRH, csrh);
+-+	}
+-+
+-+
+-+	ep->stopped = 0;
+-+	ep->desc = desc;
+-+	ep->ep.maxpacket = max;
+-+
+-+	spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+
+-+	/* Reset halt state (does flush) */
+-+	jz4740_set_halt(_ep, 0);
+-+
+-+	DEBUG("%s: enabled %s\n", __FUNCTION__, _ep->name);
+-+
+-+	return 0;
+-+}
+-+
+-+/** Disable EP
+-+ *  NOTE: Sets INDEX register
+-+ */
+-+static int jz4740_ep_disable(struct usb_ep *_ep)
+-+{
+-+	struct jz4740_ep *ep;
+-+	unsigned long flags;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, _ep);
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (!_ep || !ep->desc) {
+-+		DEBUG("%s, %s not enabled\n", __FUNCTION__,
+-+		      _ep ? ep->ep.name : NULL);
+-+		return -EINVAL;
+-+	}
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, flags);
+-+
+-+	jz_udc_select_ep(ep);
+-+
+-+	/* Nuke all pending requests (does flush) */
+-+	nuke(ep, -ESHUTDOWN);
+-+
+-+	/* Disable ep IRQ */
+-+	pio_irq_disable(ep);
+-+
+-+	ep->desc = 0;
+-+	ep->stopped = 1;
+-+
+-+	spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+
+-+	DEBUG("%s: disabled %s\n", __FUNCTION__, _ep->name);
+-+	return 0;
+-+}
+-+
+-+static struct usb_request *jz4740_alloc_request(struct usb_ep *ep, gfp_t gfp_flags)
+-+{
+-+	struct jz4740_request *req;
+-+
+-+	req = kzalloc(sizeof(*req), gfp_flags);
+-+	if (!req)
+-+		return NULL;
+-+
+-+	INIT_LIST_HEAD(&req->queue);
+-+
+-+	return &req->req;
+-+}
+-+
+-+static void jz4740_free_request(struct usb_ep *ep, struct usb_request *_req)
+-+{
+-+	struct jz4740_request *req;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, ep);
+-+
+-+	req = container_of(_req, struct jz4740_request, req);
+-+	WARN_ON(!list_empty(&req->queue));
+-+	kfree(req);
+-+}
+-+
+-+/*--------------------------------------------------------------------*/
+-+
+-+/** Queue one request
+-+ *  Kickstart transfer if needed
+-+ *  NOTE: Sets INDEX register
+-+ */
+-+static int jz4740_queue(struct usb_ep *_ep, struct usb_request *_req,
+-+			gfp_t gfp_flags)
+-+{
+-+	struct jz4740_request *req;
+-+	struct jz4740_ep *ep;
+-+	struct jz4740_udc *dev;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, _ep);
+-+
+-+	req = container_of(_req, struct jz4740_request, req);
+-+	if (unlikely
+-+	    (!_req || !_req->complete || !_req->buf
+-+	     || !list_empty(&req->queue))) {
+-+		DEBUG("%s, bad params\n", __FUNCTION__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (unlikely(!_ep || (!ep->desc && ep->type != ep_control))) {
+-+		DEBUG("%s, bad ep\n", __FUNCTION__);
+-+		return -EINVAL;
+-+	}
+-+
+-+	dev = ep->dev;
+-+	if (unlikely(!dev->driver || dev->gadget.speed == USB_SPEED_UNKNOWN)) {
+-+		DEBUG("%s, bogus device state %p\n", __FUNCTION__, dev->driver);
+-+		return -ESHUTDOWN;
+-+	}
+-+
+-+	DEBUG("%s queue req %p, len %d buf %p\n", _ep->name, _req, _req->length,
+-+	      _req->buf);
+-+
+-+	spin_lock_irqsave(&dev->lock, dev->lock_flags);
+-+
+-+	_req->status = -EINPROGRESS;
+-+	_req->actual = 0;
+-+
+-+	/* kickstart this i/o queue? */
+-+	DEBUG("Add to %d Q %d %d\n", ep_index(ep), list_empty(&ep->queue),
+-+	      ep->stopped);
+-+	if (list_empty(&ep->queue) && likely(!ep->stopped)) {
+-+		uint32_t csr;
+-+
+-+		if (unlikely(ep_index(ep) == 0)) {
+-+			/* EP0 */
+-+			list_add_tail(&req->queue, &ep->queue);
+-+			jz4740_ep0_kick(dev, ep);
+-+			req = 0;
+-+		} else if (use_dma) {
+-+			/* DMA */
+-+			kick_dma(ep, req);
+-+		}
+-+		/* PIO */
+-+		else if (ep_is_in(ep)) {
+-+			/* EP1 & EP2 */
+-+			jz_udc_select_ep(ep);
+-+			csr = usb_readb(dev, ep->csr);
+-+			pio_irq_enable(ep);
+-+			if (!(csr & USB_INCSR_FFNOTEMPT)) {
+-+				if (write_fifo(ep, req) == 1)
+-+					req = 0;
+-+			}
+-+		} else {
+-+			/* EP1 */
+-+			jz_udc_select_ep(ep);
+-+			csr = usb_readb(dev, ep->csr);
+-+			pio_irq_enable(ep);
+-+			if (csr & USB_OUTCSR_OUTPKTRDY) {
+-+				if (read_fifo(ep, req) == 1)
+-+					req = 0;
+-+			}
+-+		}
+-+	}
+-+
+-+	/* pio or dma irq handler advances the queue. */
+-+	if (likely(req != 0))
+-+		list_add_tail(&req->queue, &ep->queue);
+-+
+-+	spin_unlock_irqrestore(&dev->lock, dev->lock_flags);
+-+
+-+	return 0;
+-+}
+-+
+-+/* dequeue JUST ONE request */
+-+static int jz4740_dequeue(struct usb_ep *_ep, struct usb_request *_req)
+-+{
+-+	struct jz4740_ep *ep;
+-+	struct jz4740_request *req;
+-+	unsigned long flags;
+-+
+-+	DEBUG("%s, %p\n", __FUNCTION__, _ep);
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (!_ep || ep->type == ep_control)
+-+		return -EINVAL;
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, flags);
+-+
+-+	/* make sure it's actually queued on this endpoint */
+-+	list_for_each_entry(req, &ep->queue, queue) {
+-+		if (&req->req == _req)
+-+			break;
+-+	}
+-+	if (&req->req != _req) {
+-+		spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+		return -EINVAL;
+-+	}
+-+	done(ep, req, -ECONNRESET);
+-+
+-+	spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+	return 0;
+-+}
+-+
+-+/** Return bytes in EP FIFO
+-+ *  NOTE: Sets INDEX register to EP
+-+ */
+-+static int jz4740_fifo_status(struct usb_ep *_ep)
+-+{
+-+	uint32_t csr;
+-+	int count = 0;
+-+	struct jz4740_ep *ep;
+-+	unsigned long flags;
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (!_ep) {
+-+		DEBUG("%s, bad ep\n", __FUNCTION__);
+-+		return -ENODEV;
+-+	}
+-+
+-+	DEBUG("%s, %d\n", __FUNCTION__, ep_index(ep));
+-+
+-+	/* LPD can't report unclaimed bytes from IN fifos */
+-+	if (ep_is_in(ep))
+-+		return -EOPNOTSUPP;
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, flags);
+-+	jz_udc_select_ep(ep);
+-+
+-+	csr = usb_readb(ep->dev, ep->csr);
+-+	if (ep->dev->gadget.speed != USB_SPEED_UNKNOWN ||
+-+	    csr & 0x1) {
+-+		count = usb_readw(ep->dev, JZ_REG_UDC_OUTCOUNT);
+-+	}
+-+
+-+	spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+
+-+	return count;
+-+}
+-+
+-+/** Flush EP FIFO
+-+ *  NOTE: Sets INDEX register to EP
+-+ */
+-+static void jz4740_fifo_flush(struct usb_ep *_ep)
+-+{
+-+	struct jz4740_ep *ep;
+-+	unsigned long flags;
+-+
+-+	DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	ep = container_of(_ep, struct jz4740_ep, ep);
+-+	if (unlikely(!_ep || (!ep->desc && ep->type == ep_control))) {
+-+		DEBUG("%s, bad ep\n", __FUNCTION__);
+-+		return;
+-+	}
+-+
+-+	spin_lock_irqsave(&ep->dev->lock, flags);
+-+
+-+	jz_udc_select_ep(ep);
+-+	flush(ep);
+-+
+-+	spin_unlock_irqrestore(&ep->dev->lock, flags);
+-+}
+-+
+-+/****************************************************************/
+-+/* End Point 0 related functions                                */
+-+/****************************************************************/
+-+
+-+/* return:  0 = still running, 1 = completed, negative = errno */
+-+static int write_fifo_ep0(struct jz4740_ep *ep, struct jz4740_request *req)
+-+{
+-+	uint32_t max;
+-+	unsigned count;
+-+	int is_last;
+-+
+-+    DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+	max = ep_maxpacket(ep);
+-+
+-+	count = write_packet(ep, req, max);
+-+
+-+	/* last packet is usually short (or a zlp) */
+-+	if (unlikely(count != max))
+-+		is_last = 1;
+-+	else {
+-+		if (likely(req->req.length != req->req.actual) || req->req.zero)
+-+			is_last = 0;
+-+		else
+-+			is_last = 1;
+-+	}
+-+
+-+	DEBUG_EP0("%s: wrote %s %d bytes%s %d left %p\n", __FUNCTION__,
+-+		  ep->ep.name, count,
+-+		  is_last ? "/L" : "", req->req.length - req->req.actual, req);
+-+
+-+	/* requests complete when all IN data is in the FIFO */
+-+	if (is_last) {
+-+		done(ep, req, 0);
+-+		return 1;
+-+	}
+-+
+-+	return 0;
+-+}
+-+
+-+static inline int jz4740_fifo_read(struct jz4740_ep *ep,
+-+				       unsigned char *cp, int max)
+-+{
+-+	int bytes;
+-+	int count = usb_readw(ep->dev, JZ_REG_UDC_OUTCOUNT);
+-+
+-+	if (count > max)
+-+		count = max;
+-+	bytes = count;
+-+	while (count--)
+-+		*cp++ = usb_readb(ep->dev, ep->fifo);
+-+
+-+	return bytes;
+-+}
+-+
+-+static inline void jz4740_fifo_write(struct jz4740_ep *ep,
+-+					 unsigned char *cp, int count)
+-+{
+-+	DEBUG("fifo_write: %d %d\n", ep_index(ep), count);
+-+	while (count--)
+-+		usb_writeb(ep->dev, ep->fifo, *cp++);
+-+}
+-+
+-+static int read_fifo_ep0(struct jz4740_ep *ep, struct jz4740_request *req)
+-+{
+-+	struct jz4740_udc *dev = ep->dev;
+-+	uint32_t csr;
+-+	uint8_t *buf;
+-+	unsigned bufferspace, count, is_short;
+-+
+-+	DEBUG_EP0("%s\n", __FUNCTION__);
+-+
+-+	csr = usb_readb(dev, JZ_REG_UDC_CSR0);
+-+	if (!(csr & USB_CSR0_OUTPKTRDY))
+-+		return 0;
+-+
+-+	buf = req->req.buf + req->req.actual;
+-+	prefetchw(buf);
+-+	bufferspace = req->req.length - req->req.actual;
+-+
+-+	/* read all bytes from this packet */
+-+	if (likely(csr & USB_CSR0_OUTPKTRDY)) {
+-+		count = usb_readw(dev, JZ_REG_UDC_OUTCOUNT);
+-+		req->req.actual += min(count, bufferspace);
+-+	} else			/* zlp */
+-+		count = 0;
+-+
+-+	is_short = (count < ep->ep.maxpacket);
+-+	DEBUG_EP0("read %s %02x, %d bytes%s req %p %d/%d\n",
+-+		  ep->ep.name, csr, count,
+-+		  is_short ? "/S" : "", req, req->req.actual, req->req.length);
+-+
+-+	while (likely(count-- != 0)) {
+-+		uint8_t byte = (uint8_t)usb_readl(dev, ep->fifo);
+-+
+-+		if (unlikely(bufferspace == 0)) {
+-+			/* this happens when the driver's buffer
+-+			 * is smaller than what the host sent.
+-+			 * discard the extra data.
+-+			 */
+-+			if (req->req.status != -EOVERFLOW)
+-+				DEBUG_EP0("%s overflow %d\n", ep->ep.name,
+-+					  count);
+-+			req->req.status = -EOVERFLOW;
+-+		} else {
+-+			*buf++ = byte;
+-+			bufferspace--;
+-+		}
+-+	}
+-+
+-+	/* completion */
+-+	if (is_short || req->req.actual == req->req.length) {
+-+		done(ep, req, 0);
+-+		return 1;
+-+	}
+-+
+-+	/* finished that packet.  the next one may be waiting... */
+-+	return 0;
+-+}
+-+
+-+/**
+-+ * udc_set_address - set the USB address for this device
+-+ * @address:
+-+ *
+-+ * Called from control endpoint function after it decodes a set address setup packet.
+-+ */
+-+static void udc_set_address(struct jz4740_udc *dev, unsigned char address)
+-+{
+-+	DEBUG_EP0("%s: %d\n", __FUNCTION__, address);
+-+
+-+	usb_writeb(dev, JZ_REG_UDC_FADDR, address);
+-+}
+-+
+-+/*
+-+ * DATA_STATE_RECV (USB_CSR0_OUTPKTRDY)
+-+ *      - if error
+-+ *              set USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND | USB_CSR0_SENDSTALL bits
+-+ *      - else
+-+ *              set USB_CSR0_SVDOUTPKTRDY bit
+-+ 				if last set USB_CSR0_DATAEND bit
+-+ */
+-+static void jz4740_ep0_out(struct jz4740_udc *dev, uint32_t csr, int kickstart)
+-+{
+-+	struct jz4740_request *req;
+-+	struct jz4740_ep *ep = &dev->ep[0];
+-+	int ret;
+-+
+-+	DEBUG_EP0("%s: %x\n", __FUNCTION__, csr);
+-+
+-+	if (list_empty(&ep->queue))
+-+		req = 0;
+-+	else
+-+		req = list_entry(ep->queue.next, struct jz4740_request, queue);
+-+
+-+	if (req) {
+-+		if (req->req.length == 0) {
+-+			DEBUG_EP0("ZERO LENGTH OUT!\n");
+-+			usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));
+-+			dev->ep0state = WAIT_FOR_SETUP;
+-+			return;
+-+		} else if (kickstart) {
+-+			usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY));
+-+			return;
+-+		}
+-+		ret = read_fifo_ep0(ep, req);
+-+		if (ret) {
+-+			/* Done! */
+-+			DEBUG_EP0("%s: finished, waiting for status\n",
+-+				  __FUNCTION__);
+-+			usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));
+-+			dev->ep0state = WAIT_FOR_SETUP;
+-+		} else {
+-+			/* Not done yet.. */
+-+			DEBUG_EP0("%s: not finished\n", __FUNCTION__);
+-+			usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SVDOUTPKTRDY);
+-+		}
+-+	} else {
+-+		DEBUG_EP0("NO REQ??!\n");
+-+	}
+-+}
+-+
+-+/*
+-+ * DATA_STATE_XMIT
+-+ */
+-+static int jz4740_ep0_in(struct jz4740_udc *dev, uint32_t csr)
+-+{
+-+	struct jz4740_request *req;
+-+	struct jz4740_ep *ep = &dev->ep[0];
+-+	int ret, need_zlp = 0;
+-+
+-+	DEBUG_EP0("%s: %x\n", __FUNCTION__, csr);
+-+
+-+	if (list_empty(&ep->queue))
+-+		req = 0;
+-+	else
+-+		req = list_entry(ep->queue.next, struct jz4740_request, queue);
+-+
+-+	if (!req) {
+-+		DEBUG_EP0("%s: NULL REQ\n", __FUNCTION__);
+-+		return 0;
+-+	}
+-+
+-+	if (req->req.length == 0) {
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_INPKTRDY | USB_CSR0_DATAEND));
+-+		dev->ep0state = WAIT_FOR_SETUP;
+-+		return 1;
+-+	}
+-+
+-+	if (req->req.length - req->req.actual == EP0_MAXPACKETSIZE) {
+-+		/* Next write will end with the packet size, */
+-+		/* so we need zero-length-packet */
+-+		need_zlp = 1;
+-+	}
+-+
+-+	ret = write_fifo_ep0(ep, req);
+-+
+-+	if (ret == 1 && !need_zlp) {
+-+		/* Last packet */
+-+		DEBUG_EP0("%s: finished, waiting for status\n", __FUNCTION__);
+-+
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_INPKTRDY | USB_CSR0_DATAEND));
+-+		dev->ep0state = WAIT_FOR_SETUP;
+-+	} else {
+-+		DEBUG_EP0("%s: not finished\n", __FUNCTION__);
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_INPKTRDY);
+-+	}
+-+
+-+	if (need_zlp) {
+-+		DEBUG_EP0("%s: Need ZLP!\n", __FUNCTION__);
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_INPKTRDY);
+-+		dev->ep0state = DATA_STATE_NEED_ZLP;
+-+	}
+-+
+-+	return 1;
+-+}
+-+
+-+static int jz4740_handle_get_status(struct jz4740_udc *dev,
+-+				    struct usb_ctrlrequest *ctrl)
+-+{
+-+	struct jz4740_ep *ep0 = &dev->ep[0];
+-+	struct jz4740_ep *qep;
+-+	int reqtype = (ctrl->bRequestType & USB_RECIP_MASK);
+-+	uint16_t val = 0;
+-+
+-+    DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+
+-+	if (reqtype == USB_RECIP_INTERFACE) {
+-+		/* This is not supported.
+-+		 * And according to the USB spec, this one does nothing..
+-+		 * Just return 0
+-+		 */
+-+		DEBUG_SETUP("GET_STATUS: USB_RECIP_INTERFACE\n");
+-+	} else if (reqtype == USB_RECIP_DEVICE) {
+-+		DEBUG_SETUP("GET_STATUS: USB_RECIP_DEVICE\n");
+-+		val |= (1 << 0);	/* Self powered */
+-+		/*val |= (1<<1); *//* Remote wakeup */
+-+	} else if (reqtype == USB_RECIP_ENDPOINT) {
+-+		int ep_num = (ctrl->wIndex & ~USB_DIR_IN);
+-+
+-+		DEBUG_SETUP
+-+			("GET_STATUS: USB_RECIP_ENDPOINT (%d), ctrl->wLength = %d\n",
+-+			 ep_num, ctrl->wLength);
+-+
+-+		if (ctrl->wLength > 2 || ep_num > 3)
+-+			return -EOPNOTSUPP;
+-+
+-+		qep = &dev->ep[ep_num];
+-+		if (ep_is_in(qep) != ((ctrl->wIndex & USB_DIR_IN) ? 1 : 0)
+-+		    && ep_index(qep) != 0) {
+-+			return -EOPNOTSUPP;
+-+		}
+-+
+-+		jz_udc_set_index(dev, ep_index(qep));
+-+
+-+		/* Return status on next IN token */
+-+		switch (qep->type) {
+-+		case ep_control:
+-+			val =
+-+			    (usb_readb(dev, qep->csr) & USB_CSR0_SENDSTALL) ==
+-+			    USB_CSR0_SENDSTALL;
+-+			break;
+-+		case ep_bulk_in:
+-+		case ep_interrupt:
+-+			val =
+-+			    (usb_readb(dev, qep->csr) & USB_INCSR_SENDSTALL) ==
+-+			    USB_INCSR_SENDSTALL;
+-+			break;
+-+		case ep_bulk_out:
+-+			val =
+-+			    (usb_readb(dev, qep->csr) & USB_OUTCSR_SENDSTALL) ==
+-+			    USB_OUTCSR_SENDSTALL;
+-+			break;
+-+		}
+-+
+-+		/* Back to EP0 index */
+-+		jz_udc_set_index(dev, 0);
+-+
+-+		DEBUG_SETUP("GET_STATUS, ep: %d (%x), val = %d\n", ep_num,
+-+			    ctrl->wIndex, val);
+-+	} else {
+-+		DEBUG_SETUP("Unknown REQ TYPE: %d\n", reqtype);
+-+		return -EOPNOTSUPP;
+-+	}
+-+
+-+	/* Clear "out packet ready" */
+-+	usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SVDOUTPKTRDY);
+-+	/* Put status to FIFO */
+-+	jz4740_fifo_write(ep0, (uint8_t *)&val, sizeof(val));
+-+	/* Issue "In packet ready" */
+-+	usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_INPKTRDY | USB_CSR0_DATAEND));
+-+
+-+	return 0;
+-+}
+-+
+-+/*
+-+ * WAIT_FOR_SETUP (OUTPKTRDY)
+-+ *      - read data packet from EP0 FIFO
+-+ *      - decode command
+-+ *      - if error
+-+ *              set USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND | USB_CSR0_SENDSTALL bits
+-+ *      - else
+-+ *              set USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND bits
+-+ */
+-+static void jz4740_ep0_setup(struct jz4740_udc *dev, uint32_t csr)
+-+{
+-+	struct jz4740_ep *ep = &dev->ep[0];
+-+	struct usb_ctrlrequest ctrl;
+-+	int i;
+-+
+-+	DEBUG_SETUP("%s: %x\n", __FUNCTION__, csr);
+-+
+-+	/* Nuke all previous transfers */
+-+	nuke(ep, -EPROTO);
+-+
+-+	/* read control req from fifo (8 bytes) */
+-+	jz4740_fifo_read(ep, (unsigned char *)&ctrl, 8);
+-+
+-+	DEBUG_SETUP("SETUP %02x.%02x v%04x i%04x l%04x\n",
+-+		    ctrl.bRequestType, ctrl.bRequest,
+-+		    ctrl.wValue, ctrl.wIndex, ctrl.wLength);
+-+
+-+	/* Set direction of EP0 */
+-+	if (likely(ctrl.bRequestType & USB_DIR_IN)) {
+-+		ep->bEndpointAddress |= USB_DIR_IN;
+-+	} else {
+-+		ep->bEndpointAddress &= ~USB_DIR_IN;
+-+	}
+-+
+-+	/* Handle some SETUP packets ourselves */
+-+	switch (ctrl.bRequest) {
+-+	case USB_REQ_SET_ADDRESS:
+-+		if (ctrl.bRequestType != (USB_TYPE_STANDARD | USB_RECIP_DEVICE))
+-+			break;
+-+
+-+		DEBUG_SETUP("USB_REQ_SET_ADDRESS (%d)\n", ctrl.wValue);
+-+		udc_set_address(dev, ctrl.wValue);
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));
+-+		return;
+-+
+-+	case USB_REQ_SET_CONFIGURATION:
+-+		if (ctrl.bRequestType != (USB_TYPE_STANDARD | USB_RECIP_DEVICE))
+-+			break;
+-+
+-+		DEBUG_SETUP("USB_REQ_SET_CONFIGURATION (%d)\n", ctrl.wValue);
+-+/*		usb_setb(JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));*/
+-+
+-+		/* Enable RESUME and SUSPEND interrupts */
+-+		usb_setb(dev, JZ_REG_UDC_INTRUSBE, (USB_INTR_RESUME | USB_INTR_SUSPEND));
+-+		break;
+-+
+-+	case USB_REQ_SET_INTERFACE:
+-+		if (ctrl.bRequestType != (USB_TYPE_STANDARD | USB_RECIP_DEVICE))
+-+			break;
+-+
+-+		DEBUG_SETUP("USB_REQ_SET_INTERFACE (%d)\n", ctrl.wValue);
+-+/*		usb_setb(JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));*/
+-+		break;
+-+
+-+	case USB_REQ_GET_STATUS:
+-+		if (jz4740_handle_get_status(dev, &ctrl) == 0)
+-+			return;
+-+
+-+	case USB_REQ_CLEAR_FEATURE:
+-+	case USB_REQ_SET_FEATURE:
+-+		if (ctrl.bRequestType == USB_RECIP_ENDPOINT) {
+-+			struct jz4740_ep *qep;
+-+			int ep_num = (ctrl.wIndex & 0x0f);
+-+
+-+			/* Support only HALT feature */
+-+			if (ctrl.wValue != 0 || ctrl.wLength != 0
+-+			    || ep_num > 3 || ep_num < 1)
+-+				break;
+-+
+-+			qep = &dev->ep[ep_num];
+-+			spin_unlock(&dev->lock);
+-+			if (ctrl.bRequest == USB_REQ_SET_FEATURE) {
+-+				DEBUG_SETUP("SET_FEATURE (%d)\n",
+-+					    ep_num);
+-+				jz4740_set_halt(&qep->ep, 1);
+-+			} else {
+-+				DEBUG_SETUP("CLR_FEATURE (%d)\n",
+-+					    ep_num);
+-+				jz4740_set_halt(&qep->ep, 0);
+-+			}
+-+			spin_lock(&dev->lock);
+-+
+-+			jz_udc_set_index(dev, 0);
+-+
+-+			/* Reply with a ZLP on next IN token */
+-+			usb_setb(dev, JZ_REG_UDC_CSR0,
+-+				 (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND));
+-+			return;
+-+		}
+-+		break;
+-+
+-+	default:
+-+		break;
+-+	}
+-+
+-+	/* gadget drivers see class/vendor specific requests,
+-+	 * {SET,GET}_{INTERFACE,DESCRIPTOR,CONFIGURATION},
+-+	 * and more.
+-+	 */
+-+	if (dev->driver) {
+-+		/* device-2-host (IN) or no data setup command, process immediately */
+-+		spin_unlock(&dev->lock);
+-+
+-+		i = dev->driver->setup(&dev->gadget, &ctrl);
+-+		spin_lock(&dev->lock);
+-+
+-+		if (unlikely(i < 0)) {
+-+			/* setup processing failed, force stall */
+-+			DEBUG_SETUP
+-+			    ("  --> ERROR: gadget setup FAILED (stalling), setup returned %d\n",
+-+			     i);
+-+			jz_udc_set_index(dev, 0);
+-+			usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_SVDOUTPKTRDY | USB_CSR0_DATAEND | USB_CSR0_SENDSTALL));
+-+
+-+			/* ep->stopped = 1; */
+-+			dev->ep0state = WAIT_FOR_SETUP;
+-+		}
+-+		else {
+-+			DEBUG_SETUP("gadget driver setup ok (%d)\n", ctrl.wLength);
+-+/*			if (!ctrl.wLength) {
+-+				usb_setb(JZ_REG_UDC_CSR0, USB_CSR0_SVDOUTPKTRDY);
+-+			}*/
+-+		}
+-+	}
+-+}
+-+
+-+/*
+-+ * DATA_STATE_NEED_ZLP
+-+ */
+-+static void jz4740_ep0_in_zlp(struct jz4740_udc *dev, uint32_t csr)
+-+{
+-+	DEBUG_EP0("%s: %x\n", __FUNCTION__, csr);
+-+
+-+	usb_setb(dev, JZ_REG_UDC_CSR0, (USB_CSR0_INPKTRDY | USB_CSR0_DATAEND));
+-+	dev->ep0state = WAIT_FOR_SETUP;
+-+}
+-+
+-+/*
+-+ * handle ep0 interrupt
+-+ */
+-+static void jz4740_handle_ep0(struct jz4740_udc *dev, uint32_t intr)
+-+{
+-+	struct jz4740_ep *ep = &dev->ep[0];
+-+	uint32_t csr;
+-+
+-+    DEBUG("%s:%s[%d]\n", __FILE__, __func__, __LINE__);
+-+	/* Set index 0 */
+-+	jz_udc_set_index(dev, 0);
+-+	csr = usb_readb(dev, JZ_REG_UDC_CSR0);
+-+
+-+	DEBUG_EP0("%s: csr = %x  state = \n", __FUNCTION__, csr);//, state_names[dev->ep0state]);
+-+
+-+	/*
+-+	 * if SENT_STALL is set
+-+	 *      - clear the SENT_STALL bit
+-+	 */
+-+	if (csr & USB_CSR0_SENTSTALL) {
+-+		DEBUG_EP0("%s: USB_CSR0_SENTSTALL is set: %x\n", __FUNCTION__, csr);
+-+		usb_clearb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SENDSTALL | USB_CSR0_SENTSTALL);
+-+		nuke(ep, -ECONNABORTED);
+-+		dev->ep0state = WAIT_FOR_SETUP;
+-+		return;
+-+	}
+-+
+-+	/*
+-+	 * if a transfer is in progress && INPKTRDY and OUTPKTRDY are clear
+-+	 *      - fill EP0 FIFO
+-+	 *      - if last packet
+-+	 *      -       set IN_PKT_RDY | DATA_END
+-+	 *      - else
+-+	 *              set IN_PKT_RDY
+-+	 */
+-+	if (!(csr & (USB_CSR0_INPKTRDY | USB_CSR0_OUTPKTRDY))) {
+-+		DEBUG_EP0("%s: INPKTRDY and OUTPKTRDY are clear\n",
+-+			  __FUNCTION__);
+-+
+-+		switch (dev->ep0state) {
+-+		case DATA_STATE_XMIT:
+-+			DEBUG_EP0("continue with DATA_STATE_XMIT\n");
+-+			jz4740_ep0_in(dev, csr);
+-+			return;
+-+		case DATA_STATE_NEED_ZLP:
+-+			DEBUG_EP0("continue with DATA_STATE_NEED_ZLP\n");
+-+			jz4740_ep0_in_zlp(dev, csr);
+-+			return;
+-+		default:
+-+			/* Stall? */
+-+//			DEBUG_EP0("Odd state!! state = %s\n",
+-+//				  state_names[dev->ep0state]);
+-+			dev->ep0state = WAIT_FOR_SETUP;
+-+			/* nuke(ep, 0); */
+-+			/* usb_setb(ep->csr, USB_CSR0_SENDSTALL); */
+-+//			break;
+-+			return;
+-+		}
+-+	}
+-+
+-+	/*
+-+	 * if SETUPEND is set
+-+	 *      - abort the last transfer
+-+	 *      - set SERVICED_SETUP_END_BIT
+-+	 */
+-+	if (csr & USB_CSR0_SETUPEND) {
+-+		DEBUG_EP0("%s: USB_CSR0_SETUPEND is set: %x\n", __FUNCTION__, csr);
+-+
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SVDSETUPEND);
+-+		nuke(ep, 0);
+-+		dev->ep0state = WAIT_FOR_SETUP;
+-+	}
+-+
+-+	/*
+-+	 * if USB_CSR0_OUTPKTRDY is set
+-+	 *      - read data packet from EP0 FIFO
+-+	 *      - decode command
+-+	 *      - if error
+-+	 *              set SVDOUTPKTRDY | DATAEND | SENDSTALL bits
+-+	 *      - else
+-+	 *              set SVDOUTPKTRDY | DATAEND bits
+-+	 */
+-+	if (csr & USB_CSR0_OUTPKTRDY) {
+-+
+-+		DEBUG_EP0("%s: EP0_OUT_PKT_RDY is set: %x\n", __FUNCTION__,
+-+			  csr);
+-+
+-+		switch (dev->ep0state) {
+-+		case WAIT_FOR_SETUP:
+-+			DEBUG_EP0("WAIT_FOR_SETUP\n");
+-+			jz4740_ep0_setup(dev, csr);
+-+			break;
+-+
+-+		case DATA_STATE_RECV:
+-+			DEBUG_EP0("DATA_STATE_RECV\n");
+-+			jz4740_ep0_out(dev, csr, 0);
+-+			break;
+-+
+-+		default:
+-+			/* send stall? */
+-+			DEBUG_EP0("strange state!! 2. send stall? state = %d\n",
+-+				  dev->ep0state);
+-+			break;
+-+		}
+-+	}
+-+}
+-+
+-+static void jz4740_ep0_kick(struct jz4740_udc *dev, struct jz4740_ep *ep)
+-+{
+-+	uint32_t csr;
+-+
+-+	jz_udc_set_index(dev, 0);
+-+
+-+	DEBUG_EP0("%s: %x\n", __FUNCTION__, csr);
+-+
+-+	/* Clear "out packet ready" */
+-+
+-+	if (ep_is_in(ep)) {
+-+		usb_setb(dev, JZ_REG_UDC_CSR0, USB_CSR0_SVDOUTPKTRDY);
+-+		csr = usb_readb(dev, JZ_REG_UDC_CSR0);
+-+		dev->ep0state = DATA_STATE_XMIT;
+-+		jz4740_ep0_in(dev, csr);
+-+	} else {
+-+		csr = usb_readb(dev, JZ_REG_UDC_CSR0);
+-+		dev->ep0state = DATA_STATE_RECV;
+-+		jz4740_ep0_out(dev, csr, 1);
+-+	}
+-+}
+-+
+-+/** Handle USB RESET interrupt
+-+ */
+-+static void jz4740_reset_irq(struct jz4740_udc *dev)
+-+{
+-+	dev->gadget.speed = (usb_readb(dev, JZ_REG_UDC_POWER) & USB_POWER_HSMODE) ?
+-+		USB_SPEED_HIGH : USB_SPEED_FULL;
+-+
+-+	DEBUG_SETUP("%s: address = %d, speed = %s\n", __FUNCTION__, 0,
+-+		    (dev->gadget.speed == USB_SPEED_HIGH) ? "HIGH":"FULL" );
+-+}
+-+
+-+/*
+-+ *	jz4740 usb device interrupt handler.
+-+ */
+-+static irqreturn_t jz4740_udc_irq(int irq, void *devid)
+-+{
+-+	struct jz4740_udc *jz4740_udc = devid;
+-+	uint8_t index;
+-+
+-+	uint32_t intr_usb = usb_readb(jz4740_udc, JZ_REG_UDC_INTRUSB) & 0x7; /* mask SOF */
+-+	uint32_t intr_in  = usb_readw(jz4740_udc, JZ_REG_UDC_INTRIN);
+-+	uint32_t intr_out = usb_readw(jz4740_udc, JZ_REG_UDC_INTROUT);
+-+	uint32_t intr_dma = usb_readb(jz4740_udc, JZ_REG_UDC_INTR);
+-+
+-+	if (!intr_usb && !intr_in && !intr_out && !intr_dma)
+-+		return IRQ_HANDLED;
+-+
+-+
+-+	DEBUG("intr_out=%x intr_in=%x intr_usb=%x\n",
+-+	      intr_out, intr_in, intr_usb);
+-+
+-+	spin_lock(&jz4740_udc->lock);
+-+	index = usb_readb(jz4740_udc, JZ_REG_UDC_INDEX);
+-+
+-+	/* Check for resume from suspend mode */
+-+	if ((intr_usb & USB_INTR_RESUME) &&
+-+	    (usb_readb(jz4740_udc, JZ_REG_UDC_INTRUSBE) & USB_INTR_RESUME)) {
+-+		DEBUG("USB resume\n");
+-+		jz4740_udc->driver->resume(&jz4740_udc->gadget); /* We have suspend(), so we must have resume() too. */
+-+	}
+-+
+-+	/* Check for system interrupts */
+-+	if (intr_usb & USB_INTR_RESET) {
+-+		DEBUG("USB reset\n");
+-+		jz4740_reset_irq(jz4740_udc);
+-+	}
+-+
+-+	/* Check for endpoint 0 interrupt */
+-+	if (intr_in & USB_INTR_EP0) {
+-+		DEBUG("USB_INTR_EP0 (control)\n");
+-+		jz4740_handle_ep0(jz4740_udc, intr_in);
+-+	}
+-+
+-+	/* Check for Bulk-IN DMA interrupt */
+-+	if (intr_dma & 0x1) {
+-+		int ep_num;
+-+		struct jz4740_ep *ep;
+-+		ep_num = (usb_readl(jz4740_udc, JZ_REG_UDC_CNTL1) >> 4) & 0xf;
+-+		ep = &jz4740_udc->ep[ep_num + 1];
+-+		jz_udc_set_index(jz4740_udc, ep_num);
+-+		usb_setb(jz4740_udc, ep->csr, USB_INCSR_INPKTRDY);
+-+/*		jz4740_in_epn(jz4740_udc, ep_num, intr_in);*/
+-+	}
+-+
+-+	/* Check for Bulk-OUT DMA interrupt */
+-+	if (intr_dma & 0x2) {
+-+		int ep_num;
+-+		ep_num = (usb_readl(jz4740_udc, JZ_REG_UDC_CNTL2) >> 4) & 0xf;
+-+		jz4740_out_epn(jz4740_udc, ep_num, intr_out);
+-+	}
+-+
+-+	/* Check for each configured endpoint interrupt */
+-+	if (intr_in & USB_INTR_INEP1) {
+-+		DEBUG("USB_INTR_INEP1\n");
+-+		jz4740_in_epn(jz4740_udc, 1, intr_in);
+-+	}
+-+
+-+	if (intr_in & USB_INTR_INEP2) {
+-+		DEBUG("USB_INTR_INEP2\n");
+-+		jz4740_in_epn(jz4740_udc, 2, intr_in);
+-+	}
+-+
+-+	if (intr_out & USB_INTR_OUTEP1) {
+-+		DEBUG("USB_INTR_OUTEP1\n");
+-+		jz4740_out_epn(jz4740_udc, 1, intr_out);
+-+	}
+-+
+-+	/* Check for suspend mode */
+-+	if ((intr_usb & USB_INTR_SUSPEND) &&
+-+	    (usb_readb(jz4740_udc, JZ_REG_UDC_INTRUSBE) & USB_INTR_SUSPEND)) {
+-+		DEBUG("USB suspend\n");
+-+		jz4740_udc->driver->suspend(&jz4740_udc->gadget);
+-+		/* Host unloaded from us, can do something, such as flushing
+-+		 the NAND block cache etc. */
+-+	}
+-+
+-+    jz_udc_set_index(jz4740_udc, index);
+-+
+-+	spin_unlock(&jz4740_udc->lock);
+-+
+-+	return IRQ_HANDLED;
+-+}
+-+
+-+
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+
+-+static inline struct jz4740_udc *gadget_to_udc(struct usb_gadget *gadget)
+-+{
+-+	return container_of(gadget, struct jz4740_udc, gadget);
+-+}
+-+
+-+static int jz4740_udc_get_frame(struct usb_gadget *_gadget)
+-+{
+-+	DEBUG("%s, %p\n", __FUNCTION__, _gadget);
+-+	return usb_readw(gadget_to_udc(_gadget), JZ_REG_UDC_FRAME);
+-+}
+-+
+-+static int jz4740_udc_wakeup(struct usb_gadget *_gadget)
+-+{
+-+	/* host may not have enabled remote wakeup */
+-+	/*if ((UDCCS0 & UDCCS0_DRWF) == 0)
+-+	   return -EHOSTUNREACH;
+-+	   udc_set_mask_UDCCR(UDCCR_RSM); */
+-+	return -ENOTSUPP;
+-+}
+-+
+-+static int jz4740_udc_pullup(struct usb_gadget *_gadget, int on)
+-+{
+-+	struct jz4740_udc *udc = gadget_to_udc(_gadget);
+-+	unsigned long flags;
+-+
+-+	local_irq_save(flags);
+-+
+-+	if (on) {
+-+		udc->state = UDC_STATE_ENABLE;
+-+		udc_enable(udc);
+-+	} else {
+-+		udc->state = UDC_STATE_DISABLE;
+-+		udc_disable(udc);
+-+	}
+-+
+-+	local_irq_restore(flags);
+-+
+-+	return 0;
+-+}
+-+
+-+
+-+static const struct usb_gadget_ops jz4740_udc_ops = {
+-+	.get_frame = jz4740_udc_get_frame,
+-+	.wakeup = jz4740_udc_wakeup,
+-+	.pullup = jz4740_udc_pullup,
+-+};
+-+
+-+static struct usb_ep_ops jz4740_ep_ops = {
+-+	.enable		= jz4740_ep_enable,
+-+	.disable	= jz4740_ep_disable,
+-+
+-+	.alloc_request	= jz4740_alloc_request,
+-+	.free_request	= jz4740_free_request,
+-+
+-+	.queue		= jz4740_queue,
+-+	.dequeue	= jz4740_dequeue,
+-+
+-+	.set_halt	= jz4740_set_halt,
+-+	.fifo_status	= jz4740_fifo_status,
+-+	.fifo_flush	= jz4740_fifo_flush,
+-+};
+-+
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static struct jz4740_udc jz4740_udc_controller = {
+-+	.gadget = {
+-+		.ops = &jz4740_udc_ops,
+-+		.ep0 = &jz4740_udc_controller.ep[0].ep,
+-+		.name = "jz4740-udc",
+-+		.dev = {
+-+			.init_name = "gadget",
+-+		},
+-+	},
+-+
+-+	/* control endpoint */
+-+	.ep[0] = {
+-+		.ep = {
+-+			.name = "ep0",
+-+			.ops = &jz4740_ep_ops,
+-+			.maxpacket = EP0_MAXPACKETSIZE,
+-+		},
+-+		.dev = &jz4740_udc_controller,
+-+
+-+		.bEndpointAddress = 0,
+-+		.bmAttributes = 0,
+-+
+-+		.type = ep_control,
+-+		.fifo = JZ_REG_UDC_EP_FIFO(0),
+-+		.csr = JZ_REG_UDC_CSR0,
+-+	},
+-+
+-+	/* bulk out endpoint */
+-+	.ep[1] = {
+-+		.ep = {
+-+			.name = "ep1out-bulk",
+-+			.ops = &jz4740_ep_ops,
+-+			.maxpacket = EPBULK_MAXPACKETSIZE,
+-+		},
+-+		.dev = &jz4740_udc_controller,
+-+
+-+		.bEndpointAddress = 1,
+-+		.bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+
+-+		.type = ep_bulk_out,
+-+		.fifo = JZ_REG_UDC_EP_FIFO(1),
+-+		.csr = JZ_REG_UDC_OUTCSR,
+-+	},
+-+
+-+	/* bulk in endpoint */
+-+	.ep[2] = {
+-+		.ep = {
+-+			.name = "ep1in-bulk",
+-+			.ops = &jz4740_ep_ops,
+-+			.maxpacket = EPBULK_MAXPACKETSIZE,
+-+		},
+-+		.dev = &jz4740_udc_controller,
+-+
+-+		.bEndpointAddress = 1 | USB_DIR_IN,
+-+		.bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+
+-+		.type = ep_bulk_in,
+-+		.fifo = JZ_REG_UDC_EP_FIFO(1),
+-+		.csr = JZ_REG_UDC_INCSR,
+-+	},
+-+
+-+	/* interrupt in endpoint */
+-+	.ep[3] = {
+-+		.ep = {
+-+			.name = "ep2in-int",
+-+			.ops = &jz4740_ep_ops,
+-+			.maxpacket = EPINTR_MAXPACKETSIZE,
+-+		},
+-+		.dev = &jz4740_udc_controller,
+-+
+-+		.bEndpointAddress = 2 | USB_DIR_IN,
+-+		.bmAttributes = USB_ENDPOINT_XFER_INT,
+-+
+-+		.type = ep_interrupt,
+-+		.fifo = JZ_REG_UDC_EP_FIFO(2),
+-+		.csr = JZ_REG_UDC_INCSR,
+-+	},
+-+};
+-+
+-+static int __devinit jz4740_udc_probe(struct platform_device *pdev)
+-+{
+-+	struct jz4740_udc *jz4740_udc = &jz4740_udc_controller;
+-+	int ret;
+-+
+-+	spin_lock_init(&jz4740_udc->lock);
+-+
+-+	jz4740_udc->dev = &pdev->dev;
+-+	jz4740_udc->gadget.dev.parent = &pdev->dev;
+-+	jz4740_udc->gadget.dev.dma_mask = pdev->dev.dma_mask;
+-+
+-+	ret = device_register(&jz4740_udc->gadget.dev);
+-+	if (ret)
+-+		return ret;
+-+
+-+	jz4740_udc->clk = clk_get(&pdev->dev, "udc");
+-+	if (IS_ERR(jz4740_udc->clk)) {
+-+		ret = PTR_ERR(jz4740_udc->clk);
+-+		dev_err(&pdev->dev, "Failed to get udc clock: %d\n", ret);
+-+		goto err_device_unregister;
+-+	}
+-+
+-+	platform_set_drvdata(pdev, jz4740_udc);
+-+
+-+	jz4740_udc->mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+-+
+-+	if (!jz4740_udc->mem) {
+-+		ret = -ENOENT;
+-+		dev_err(&pdev->dev, "Failed to get mmio memory resource\n");
+-+		goto err_clk_put;
+-+	}
+-+
+-+	jz4740_udc->mem = request_mem_region(jz4740_udc->mem->start,
+-+	resource_size(jz4740_udc->mem), pdev->name);
+-+
+-+	if (!jz4740_udc->mem) {
+-+		ret = -EBUSY;
+-+		dev_err(&pdev->dev, "Failed to request mmio memory region\n");
+-+		goto err_device_unregister;
+-+	}
+-+
+-+	jz4740_udc->base = ioremap(jz4740_udc->mem->start, resource_size(jz4740_udc->mem));
+-+
+-+	if (!jz4740_udc->base) {
+-+		ret = -EBUSY;
+-+		dev_err(&pdev->dev, "Failed to ioremap mmio memory\n");
+-+		goto err_release_mem_region;
+-+	}
+-+
+-+	jz4740_udc->irq = platform_get_irq(pdev, 0);
+-+	ret = request_irq(jz4740_udc->irq, jz4740_udc_irq, 0, pdev->name,
+-+	jz4740_udc);
+-+        if (ret) {
+-+                dev_err(&pdev->dev, "Failed to request irq: %d\n", ret);
+-+                goto err_iounmap;
+-+	}
+-+
+-+	udc_disable(jz4740_udc);
+-+	udc_reinit(jz4740_udc);
+-+
+-+	return 0;
+-+
+-+err_iounmap:
+-+	iounmap(jz4740_udc->base);
+-+err_release_mem_region:
+-+	release_mem_region(jz4740_udc->mem->start, resource_size(jz4740_udc->mem));
+-+err_clk_put:
+-+	clk_put(jz4740_udc->clk);
+-+err_device_unregister:
+-+	device_unregister(&jz4740_udc->gadget.dev);
+-+	platform_set_drvdata(pdev, NULL);
+-+
+-+	return ret;
+-+}
+-+
+-+static int __devexit jz4740_udc_remove(struct platform_device *pdev)
+-+{
+-+	struct jz4740_udc *dev = platform_get_drvdata(pdev);
+-+
+-+	if (dev->driver)
+-+		return -EBUSY;
+-+
+-+	udc_disable(dev);
+-+
+-+	free_irq(dev->irq, dev);
+-+	iounmap(dev->base);
+-+	release_mem_region(dev->mem->start, resource_size(dev->mem));
+-+	clk_put(dev->clk);
+-+
+-+	platform_set_drvdata(pdev, NULL);
+-+	device_unregister(&dev->gadget.dev);
+-+
+-+	return 0;
+-+}
+-+
+-+#ifdef CONFIG_PM
+-+
+-+static int jz4740_udc_suspend(struct device *dev)
+-+{
+-+	struct jz4740_udc *jz4740_udc = dev_get_drvdata(dev);
+-+
+-+	if (jz4740_udc->state == UDC_STATE_ENABLE)
+-+		udc_disable(jz4740_udc);
+-+
+-+	return 0;
+-+}
+-+
+-+static int jz4740_udc_resume(struct device *dev)
+-+{
+-+	struct jz4740_udc *jz4740_udc = dev_get_drvdata(dev);
+-+
+-+	if (jz4740_udc->state == UDC_STATE_ENABLE)
+-+		udc_enable(jz4740_udc);
+-+
+-+	return 0;
+-+}
+-+
+-+static const struct dev_pm_ops jz4740_udc_pm_ops = {
+-+	.suspend = jz4740_udc_suspend,
+-+	.resume = jz4740_udc_resume,
+-+};
+-+
+-+#define JZ4740_UDC_PM_OPS (&jz4740_udc_pm_ops)
+-+
+-+#else
+-+#define JZ4740_UDC_PM_OPS NULL
+-+#endif
+-+
+-+static struct platform_driver udc_driver = {
+-+	.probe		= jz4740_udc_probe,
+-+	.remove		= __devexit_p(jz4740_udc_remove),
+-+	.driver		= {
+-+		.name	= "jz-udc",
+-+		.owner	= THIS_MODULE,
+-+		.pm		= JZ4740_UDC_PM_OPS,
+-+	},
+-+};
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+static int __init udc_init (void)
+-+{
+-+	return platform_driver_register(&udc_driver);
+-+}
+-+module_init(udc_init);
+-+
+-+static void __exit udc_exit (void)
+-+{
+-+	platform_driver_unregister(&udc_driver);
+-+}
+-+module_exit(udc_exit);
+-+
+-+MODULE_DESCRIPTION("JZ4740 USB Device Controller");
+-+MODULE_AUTHOR("Wei Jianli <jlwei@ingenic.cn>");
+-+MODULE_LICENSE("GPL");
+-diff --git a/drivers/usb/gadget/jz4740_udc.h b/drivers/usb/gadget/jz4740_udc.h
+-new file mode 100644
+-index 0000000..53fd1da
+---- /dev/null
+-+++ b/drivers/usb/gadget/jz4740_udc.h
+-@@ -0,0 +1,101 @@
+-+/*
+-+ * linux/drivers/usb/gadget/jz4740_udc.h
+-+ *
+-+ * Ingenic JZ4740 on-chip high speed USB device controller
+-+ *
+-+ * Copyright (C) 2006 Ingenic Semiconductor Inc.
+-+ * Author: <jlwei@ingenic.cn>
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License as published by
+-+ * the Free Software Foundation; either version 2 of the License, or
+-+ * (at your option) any later version.
+-+ */
+-+
+-+#ifndef __USB_GADGET_JZ4740_H__
+-+#define __USB_GADGET_JZ4740_H__
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+// Max packet size
+-+#define EP0_MAXPACKETSIZE  	64
+-+#define EPBULK_MAXPACKETSIZE  	512
+-+#define EPINTR_MAXPACKETSIZE  	64
+-+
+-+#define UDC_MAX_ENDPOINTS       4
+-+
+-+/*-------------------------------------------------------------------------*/
+-+
+-+enum ep_type {
+-+	ep_control, ep_bulk_in, ep_bulk_out, ep_interrupt
+-+};
+-+
+-+struct jz4740_ep {
+-+	struct usb_ep ep;
+-+	struct jz4740_udc *dev;
+-+
+-+	const struct usb_endpoint_descriptor *desc;
+-+
+-+	uint8_t stopped;
+-+	uint8_t bEndpointAddress;
+-+	uint8_t bmAttributes;
+-+
+-+	enum ep_type type;
+-+	size_t fifo;
+-+	uint32_t csr;
+-+
+-+	uint32_t reg_addr;
+-+	struct list_head queue;
+-+};
+-+
+-+struct jz4740_request {
+-+	struct usb_request req;
+-+	struct list_head queue;
+-+};
+-+
+-+enum ep0state {
+-+	WAIT_FOR_SETUP,		/* between STATUS ack and SETUP report */
+-+	DATA_STATE_XMIT, 	/* data tx stage */
+-+	DATA_STATE_NEED_ZLP,	/* data tx zlp stage */
+-+	WAIT_FOR_OUT_STATUS,	/* status stages */
+-+	DATA_STATE_RECV,	/* data rx stage */
+-+};
+-+
+-+/* For function binding with UDC Disable - Added by River */
+-+typedef enum {
+-+	UDC_STATE_ENABLE = 0,
+-+	UDC_STATE_DISABLE,
+-+}udc_state_t;
+-+
+-+struct jz4740_udc {
+-+	struct usb_gadget gadget;
+-+	struct usb_gadget_driver *driver;
+-+	struct device *dev;
+-+	spinlock_t lock;
+-+	unsigned long lock_flags;
+-+
+-+	enum ep0state ep0state;
+-+	struct jz4740_ep ep[UDC_MAX_ENDPOINTS];
+-+
+-+	udc_state_t state;
+-+
+-+	struct resource *mem;
+-+	void __iomem *base;
+-+	int irq;
+-+
+-+	struct clk *clk;
+-+};
+-+
+-+#define ep_maxpacket(EP) 	((EP)->ep.maxpacket)
+-+
+-+static inline bool ep_is_in(const struct jz4740_ep *ep)
+-+{
+-+	return (ep->bEndpointAddress & USB_DIR_IN) == USB_DIR_IN;
+-+}
+-+
+-+static inline uint8_t ep_index(const struct jz4740_ep *ep)
+-+{
+-+	return ep->bEndpointAddress & 0xf;
+-+}
+-+
+-+#endif /* __USB_GADGET_JZ4740_H__ */
+-
+-
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/logo_linux_clut224.tar.gz b/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/logo_linux_clut224.tar.gz
+deleted file mode 100644
+index 06de727a05c99d3e487982ee007d710c0bc11162..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+HcmV?d00001
+
+literal 8416
+zcmeI1*E<`G+sC`9wnnS82vw_AQF|qiTD7XB_Nu*SNYsdys?|`VVtdRKC1#8mwP&am
+zgitfJg%}}tf4@KAJ$%pJ`{+LUT%YTE-6!|;<%*-da?R^h_saEcf<?kXpKlMT1&0j$
+zG{=5FVAzV0SLJ!uBaLqso#J1+e)YJYFs>{|5jc#E%1Sf!08Yeg%AM(jS;d09XWEh>
+z??V41fX=7%+bAT4FzW2(`5F{-v5o5VIqA;5AcH_khiHH|vXlE9qsUc%w6MM7uarA{
+z#s$H2QvBtzU!R>b%o1$n0AVNS&>gR?`nK~`RNMJMy*G$@?0tERT#(+WC!g<<kIK&1
+zc3aPvQJ3pn7t0G_=f?{dt2SYjGViw2dK=go5kx(iTDYXlhFx5Ygi$*6!>H)9Zm$|H
+z^um`;h$Kfs<|qlI_W$#Llt33c3j2XtzxDx4;AoSa9r??{0ajC^W*lYNLT9mF)0VAU
+zZOYEa347*GpDq#6km1w=T;&X4{}OJaNJL9%pfU+D8Z&z|8{gW1?>ep^VQOk2br=3(
+zL|%C<tU$FbHIch6>fA}L5VD_k38n7v)rZ>8k)<zpojs*;&d6kjwSTa^;(#8~D;r%Q
+zTA^#7ulxrPxfl}$<X)#(zqX&k!VtrrXSOv9$fJvfnOvDO)uXJ-<7#;iaAwa82aEih
+zgS_z+@m@jE$3yC=CJtA7=$<^aBT~YEhF0S(6`A9KNo)qn!AdHC!L^g@&J(61pG&}e
+z9);;>Q9U@7j?R8x&PFy$LLy6+#xVGIAd|oB-0`q$!k$aQo2_FWYVm(y3F;MTprKQx
+zDt3JXjD((L4|vR#s-^_<rg~(xDr}7vyR-yvDz%DtdVw3$u5cg5G?e9E@)F|jw5amr
+zD!vVm{uF(}<iX0jreAHKy8!3%k0RY!Hgm7nZ`maJvQt#|_&j|PaU00pyvcbYx$!(J
+z9!oPlUin@7POn}fZ!L44Dj)jbZ&Y<e0g+?wQOQ$P1IIpX`@W*NMj44tZ>;RjYoQee
+zwXWQ$J*5{6{mG|YzSA7~nVm3dP3~)V;@lkaU>Y{p6VQAB%qCYvWdX<J`HaMdp=g6K
+zt+PZKga*Uk>wk}naq6w97VBUAwVjh1q;sz5BSZGhCsXdJF}Rv9UsdAFfyt4dd_AjL
+zSVgAu8-2ZWF35p|{%xQ$srY;QF+6aQSl`F)sAy7asoD#bar)91%61O~FBFIr5nvvp
+zdAbzb^jqRZ0&43nCx$y)Z@=V7Zr)o?c}_c99J$18K=Ti5f*=@ha}M2;{O7^|JzQc?
+zGlI+^FJ6il2I*-UhKb<a$bZ{+ibbvT1<^`=9Q4aydZWR=AKAqMY){i-4T1r}n+iI3
+zfw|U1xhV;{Eu>4O-c@I@M4xBoi28SdGWJl%vG~ju$<`~&WlBI|)}_JRtE)WQ-ChV9
+zD)Tn^*DSdf!oMwLFz_$UVqOQ`+nY?JNfu&0MZYFXW+me2<*P)YUoh%!20D9WE{bY)
+zkut1R;`XL6vhwlyx1MnB!_2Q3C!PCi0^!E1S9f)U;xHnj<<={btBoOSahaAuPq5F;
+zbw{lW#H)w0T@*Nw(2p)}L`XG}j?*POctI>5e#(3wIBGDQ6?NWKKw53sGH6@y(Pc<k
+z!_#MbvPPp1Gq9!FBc8E&zr&+XfGh&Mlr51)N8o~Tk_9JFKT{H7{)%V2fkkX6-EWbp
+zm*GSZUO2MCpJq8sp<iD2hXV8w_H=UA1Bz)}oA;QVj@Oi7N)2gifPTjuE8*)pWRAJ-
+zmQ4amMFg#aq^P2;B)?(DIZ4S8Xa%jS{RPesB42n9Y2wp7VjF}VBhec_N{m$BSOtVO
+zY&Vp=Yt?crBv%)=)(r+ei(hB83!xUNYtc$XN24U^CA?PLy%`d3OPmw8y3-i>Z-qWH
+zT>LABS=oD0n2f<n)MMA_<GRy+?Bt&v2fCCfZ3N-~#a9*C9PtIlyaPiI<9qYJzO&)I
+z`AW^4%TWO*+XxzH7<+B6Qa5-qN8ex9&AC03RB$>_WW>lcdYYxib6tY`*_{4%V}Yez
+zD;v&jt*g*io9o4V5Qklbs#oz%1zpK_nZs;6qIXgGv?^bzpeUVE=eqWITcBhu-58qW
+z|EodzFDI>3!Lo33+bwwSb$A8bWVc7#u<*-7NmENI`&OTntCashl3`BK`-te13!v<@
+znsjD7Cn9u5p%DwvF<UCP<B4#rvojPNF1!ke!mhvhk}lY8N$)tW#&KRH2mSjm0N~u5
+zX0h}0w&<a}dSnK-SRX`zVDiKD2K&Mkudi)r<>({HDaDZGo%auZ9tta)0~eL<dyE}u
+zWqWo0e(Vt~8y!6&O)qmGu=ixTu<g(CV=$<zCdFant1e6H<MLp|^dF<DQrX8Q%u@a!
+zAs)viCGY^2jNJxCrExsmQa)<@AXE=gSnZMl=1KJ}c}9bko0_Gi`3c7yCJyYPc&Tc=
+z8W%&0(@BPhVcO_KUT~kz*tXt(PvG*6=xjrke7nLqxNV{VOeCz;!uqOS)0d&h3($XU
+z>hpJc&5Dkfw{Aa$@w0|wL#k5e-zN{yPlbd}CRZ?f*CI7AZ&Tf5Wei0e!)voipZ25H
+z-d)HM^@p79WEd6GN_vdRj@J@Woc5c+v#A(e`zQwam9!S|7`;K$qs0y<lX52o`a2JP
+z1ytAHC_9dk_Tp{i4L_`M0s*43vC;<$7~mfz?kTAX5U-{q>@v5<U$WJ0*7e@Mq&}oc
+zkStJ5;b{He0bID*n<SSdvo{IT^+h?t_m!&s_d>(m@xcZbpZ6Y~MMURLMkQgT_zJ5x
+zbSkgK<;3zWcSX1#N^z|v<saQw=OX0Iic3z~58O!R6wMCunhoMI#Pw&}uN#I|g=?E$
+zEe-JME@JDKTojTS8{_%uKHpz+k7h<mZ2BZ!9~CcCLBc1&IatH^)=rg5aG&?OyN{bL
+zx6OVwjGm-(UYgw@PrOW=#S%FIFPNVO<tAr33<suVX1Gtg-cvQ~+y1yzA73hd&B$-S
+zR!F2sEvZ5%FsDMcSx=yIU4<B~zv0?nAhZ9YFcZR5Kz7y}F$n4-^%sR%N|z9vWwM9I
+zabO1pqL#KVBGvNUKRO_D_}J4qMKW~KDPG6_+uL7YU5XE--=+%VY&p`XATR84@?>=i
+zcvL0?6-nU`>0CarELem!*V)6r=+<D|!_4Cp#crfR5(lH2bLz^bI2zt3AcDm~9Sa}S
+zLc+NEP5g|wYxqY5`%GXR#+W6$V(_}UKwYJwm{9jsO&OE9#^`tJn?zTJSoD0aWuQdD
+zCjeAY6k8u0oaWyUYh@<M-%n4UAq=hGq(NADpmE5~7>7M$X4F`m;?8Jb6ayEkFn606
+zZ-RFT8HB6S`5Ei04p<t{x%0|>_<8yhjjNE^@NUK9YN8G!pIFpvS&pJm2tU0_I=d95
+zQpISv#^yAI8O_1^A6=MQh<<J|8sG9UyF4?0*uv1=Qo+e}8gNh|ee>(ny$0<GM<J)8
+z2^puV@c^NVug>fKFE~356}XYnFIGUE-jrdq-bs>yfoNjDs;HIYsG1hsSfTv6IbMQ|
+zQXzRUbl4JYA-rVF1I22VLX_joEf51o0?tznYbyRzr?{;Gn(VZ(v}0pg7o3N#NsC?t
+z-N7ud#rDYcn=K_EI4u1F*^A@>-@0lPZyPkuWym7`z2?GA(P_u<t6*7zW|{uAuYL);
+z3gkH3Mx_$MoRiT_%xk9+-{(0Q@*?|3^!H1su}$e$9OS!DTN}&>u=#}tpr~P)j41g&
+z{#wPI&Z9VUC+XsvHF#PgfPdR1rTx7l;HU8!Uhh~w?PlfR93*4ka)7xw+j-jaAPePx
+z`YNLPHR8qj;pYY)GQ#?R+>9OdFo9?tIW0so%0k&6EP1JB*|>~#=aZa!p|65&9ar3Z
+zTqti7S%o~#5rlcUmPpJc>`riy62`p^gSs|Ge~5hl4dzM)u8aobc0}%5j_4fy3f;of
+z2Yus<_q1Z$M<jrGI%>)Mk*Zvq!%<4da#nm*yPlLnqI*G5Oa4@7H$aU#2kB`gp++R?
+zJEvuP@|eZff~NSy=m4opOU2mW-Yl8~;sD!i^&AC#u9y+lS&WcYIosNPG{v$_5=;KE
+z&fprKzFq@~{k&}7D=&d+4Cu4<>0?zQthpEB>5Y>2D&!Yitfai=Of%M<P~QzeK!E+}
+z_yf-4<9~L7<&GPL<{yA<-aJlu<)Q-u5I@W;o;>+!d37@nEnf*QdV#w&Yf`(spUa>L
+zOUvSdLYu8vjGsFlfR!;h3)lMB)n2Ok1B-4=bKUaXve5mwIA*H4(W0z7{>a1IGqHb6
+zQmeZv?s0!^xanz7lg;VOx$TB>=w{L|&)67!QT#;KLi`6vzUT#@_?pIPWebMW@764V
+zEHn76$=_jr4J~_H236#%eH#Kz_Z#?N!mPY0$&!H;XQl_YiRbyKKl3+I*|x<fGRttP
+zn_#9Z=pvWvdsSsxi6%5WhSEYpCg^2S;vYwJ$p<`S{>bC^k$C1k7Cw}KV=*bhFymHB
+zoZZqW{F%}`J^O^t_o%$eG8}Suh|DT<c@>{t_s0Rty#Bs^{V4J4v`}(29<(%dC|J}%
+zt`7p;QyZ^x|Ng|q;P*>@k6~JPac0JTw%}%Zpn%rzLQtDqtJ!xwx)>*wd$)7Y%Z)Cx
+z0Fmk~PYoq+gS*v_-!jBtqYV)Yc?v9JWC_jwH`W44i?I&Ryw8bzof=5D#1BDBYUN_n
+zU!)Z8m)qmZdB62)`(a$w+g0rq`A=MxM|bnODjTa5m}YofIcw{F>)3}!Pe7)Q7V(6g
+zw5J6&>FiCpM=#$hi$$4z)UOB8SZRNbwwazJiJhCJvx?5NicUDiMrfLi1Q=0gwcCeM
+zZ+NaL>PiS1?Zw6bWWv*_^_i!s2Ty?GG#)yi@86QXdfM~OVo3U)=rerI%2Hyi@^nUC
+zgbX8IdWH87%V59gYI{Ta!5<maczyxH?N7ol-!qP^u>RQr+E00JupdYL(zZzGx2my{
+zPEs!G9Am!4o-j*i4`$q8b2BX~9<IZ@chV0X(>={hgfT(0P40;uRpxL97emi%^6T`?
+z!a6sLKrgtKrbrJ9t|OBc{A4R*!ZQ4%E{w#)-Y+je9z2gS$Ryb=+n6W9=FZC=U!A@i
+zTHM({8wxp7|64O|uoW)sbm@-J{uc4(&PUtJD%XwZF7ZP>05NLP1b0zbg7RJUy7w81
+z1kNl5Z6s?jiQ}x-$3DZ~$9nR3Oo$QRq<rPn3I$ThTWR_#<_yhk%rnngPSx*YHiC~f
+z_jOmzPT)`}|Amz)XU92F?behtMhQw5%sTtqD2Q+6F$p!cY@s_j`N-+i6B8Q(R>eeZ
+zzv{625-lqGoQTPn3}#=$6umJK+^Z|#yxFQfku15RQ()b)Qjbn$?kzDQRRC9fsZYQ_
+z<Xhh|@b}x%?ZZ;B?l6=kev^&rY~!ow+9=?O(tGFhGv^|myy-Twn_JOCrB7V0^!gXM
+z-JhDVK3X22+NVl=3B11_TLy0}=R<OPTZq^#MP(BZ$E7^ft^1)(ui~t~x9fJ$_WX6d
+zI$~+0OT3ZEX;Gt<zWDYChcn)hZ1=*GLg3?pC-Vj`cXF0gq`lR<4hnWT69O+98-CU+
+zEX}lzYE&Oc!q2nMvz+y4gn6uMoowAzx_Yb|9j|#7nk)LD0@RZ!b<cV<Ak6Qi5d_2<
+z?nVp7FzojyMU=hjFI6fXQ2q}f>Vq=K%6a%pQ<0OSR-5fIBCtwF)cx;^xaX_^Ek23B
+zb-(9L{sEAv7$0?;a+cc%y0N5aD+d0@8|v7t!n?r%xbAoLOW(4;gb2;v-)q(WCEVn)
+z>FYIl<3?^54(OQ8V6jU}zs4g4afLl}ICYzH_sq{|t$wZvFu^v}ZB8|K4iwi)OwAih
+z`wQ$^F>2;AkJ6LeF$(zgN$m&+#03ZZ>hk;K?8f_u5K*_8KYoNElLA@9r%7t67=N%{
+z7}FqkP}3V7dEu!Q1u)!vc7~0ix<++>=&1BSwARfTGO7k_w0o8K7yb6VJC`unUonCJ
+zX*$sukhy_b`guvXsfanrx&u*JbmIInX==?oJv@LE*^H@uTD-s~``8Go6;9xIJk^R*
+zq0Ka$XafFyD(4lzotg04THeRdy7<pa&d;DO)C#yW*Lqg?ZkT59dF3qXp7*CAkupRp
+zMP_x%8jrg>Su^U*J~AwBBWqjn=ohPgp|mt6-_kS==42B~Z?RpZJX9mPr7d>wcI$Qj
+zVu0s@GNu0o+V3f1MK<?hR|^Jzjn@B0or`WE@`7T_3`CPz9bo|xIvAYhp)xmR5}`&9
+zDdE)6GyNb%(dx9u?Btp8FW6cbdY}7s{8#SJ>7J};vI%)zJE>o}RkpEfg_V+F{RR>|
+zlvj3QW_Tj`uzH|Rnf-DLFM>y3KdR+vXbQ4f^=pwuL<U<tY<g6I+_v+5ShEn+B0nC%
+zUN|q#B$M!iv-fP==EM5%#fiW!3v`G7qQ#K9*+A_o{T&cSJvaoiszq3phJ^=eQ6&++
+zXS9i1%Cl?Xu;&*N&eutID05_FiK7y>h~rQOKu*yo;eE>%CjAS*3|owC%lzg=V!B~R
+z;g8my2UXS8ezD#ld|$E@N7kc_b8r{2*3OFVD-G!g^XJD7!Ud;8Mff2P^9MJir?h}L
+zuVr!b-F+bm$hDXj{-|aSwo7uX9<&$Km{gM0y(!U=Dw0VNQ=jy&qupO9r4nfdDfBHp
+zM!nQK&|L%Xj7tYZA>%su%K~3a;n;O5e&42-gK<_SV$<PImbGF5QUX~K0RN!3^)I)C
+zSNyQTVd|jU6PS8#5^+viu;VG=B~4L}JX}G?w<7IY9@rAgaT`EmYF$%qa6@Ft_Fdw5
+zpd)|WbPH|f_b2s}A6WLc^e7cWZjA-FA;BZ*U&Bw30(0Bjj5+(eZFLfX`mcYD@yWHh
+zvpmg0^S0b7OKNZ-1DqR)^h*b3!?`nx)s~h2l5}daKHtk-<+UF6E<!lSOPV!orf2wq
+z+wmXAT!vIjZ2t4K9x{sh4v>5ai=j;MPohp5t+-Zrc~%_X_-()1&xF)x;NMQr?OV7N
+zeXiM!_TzsvQ#@yK+(-Tld3Ut*`A6n&HODV^j3G|8tgH{LCMcyPruVbuPqsM(-m1Tr
+z^NWY;Uz5H4x+5oLd4o`8j?l5%>a8so|J4sQWFrvo(QxZ5jXWrrJ60S;OAb)xc<&uw
+zYvmoFtmi1d9S#)=R8O&h-j)l7&zv^l+wH;ttlaAZL2wS@t%<j>s?;E$Z11}4to&<a
+z#Fu~usR%pjAXG#(iBjshk+A+qRMg~QS><1}hpxreUFk&~*7NZ((`H&yDYD>L6ufPb
+ze<%K5|F`auZ-T4q-UVUfI_^5@8E>n&XYJGI1$e`IN~Yk^NrrgWyB24zOlhrh0-)dE
+z$SY%Wo*A1Z;r+WOkmo}!Pq1}3NB6?UZO`((bk|{&wSZ1CGYF$(XawOmWgD^i*&(_&
+z1vVn!R$=U#Np>7dtcQuuWV1tK<#Sap#xkzd6PWLCV)h;&3tX<R8L;jDLz40I^|CmM
+zZ2eAU5ps6oNBMu$;QqOvQp&wk&fEBnSUY00<nSgw&Mxcj=i}=e?44=o!R47y^1$j$
+zZ9}&~Tj`3N@>FOs2eF_lYQXn`?|e@FHQNh^2@w`T^72-<RQO~JdwNCHqxbqL1)NdQ
+zMy&Z+S;xEs>wDy9gRasdx;`qYaf(K)G|By`Qs!<(LRmUh`MokjU-7f9oPOp$6&!>%
+z#`V;U(UHw@tK8+a6-HgC=iR<UlvJw5L5$8k-?mT|+99;-ec44v<-zh#3%tyLZ+k(r
+zRBz+S(F(^@^csAA5<2V)(+{cj_pZl)vs&XTpw`ypRat`~(Oh1(aWiuOs;mdsNEyT~
+zGV;oGq3pB%tbw-mwR{MKk~^!<9@wvmZd`Y-E>WK2c(A*%ayLhhJZ)=Q-et`CzQ7sJ
+zPN+@5FcHGX)k7<Tg@0fL$|TS^`z6)E8WFr0lBQTA2B)7uTd_SK)?>v*2#*T3^FM%7
+ze7R!0+V2F~_=8cG=Vk9-?WciQZ+ucM)i|6dIBV3Owog^pw#;=7OollMu4?3Z`mD~M
+z7Ab@?1;FRujj=Bw(6TK6!|E9Z{_4m@(QIYhYTD6xc<SROF|aM7z)sxTP69)zeS{(j
+zhkm((A^qYWRq;^}G#Y@PzI5>iTWMU>w3#uzHjc%a-9ps+2g-<^SLprBZpShc)_Of1
+zH5M9nI}DC$=b4xT_I`!jFwvA_eaQAOJ?d!|YQkf)#RHJ6n)`T>O}e1xd1LsWbEXP`
+zijmzYxe608VU{q0^@8YM^KzQAKYDVP3NGJq%{zX&ZgDr0R~Xwee3LRS>7o4cEmFqb
+zNt+%wdD@5AFhO~-hth2WmGzK#$$qz;s~#rTxMCqq*E?q;Aq92n84|<rFXNBufghEN
+ziXtO>j8sDH=Py@<fs?~q027r-=$U0lvtsv6XJ^DiE^Xf(HcJ(Uq<+DqY$~nP2YG*v
+z^A^F1xA#*3E?Y^NrKJ`-AIis*UV0<KC#UcNN2iY13W}f9)UfqRPExiYX(rEqox#9-
+zIOG`pHSjd9QE_+hI6{;m18E%Uy#*boR#4@kFadE>dQusNk+ibx!AKh8O4Px>#+cRv
+z=hQ%Xl0rj#cA0slVHqAu2IXd@aSFh?%nyssiVV^7VnUPs;w?{Ik)aJ}?SQC~XTIB9
+zBk0y5i`P-ExeIQZ^>(Qk5tmBZ2#nod0u$;XFJZ=7K(+!N*ebQbo>a{h6X^Gd{lms~
+z*G}s7iRUI^*vh)A`Yeav6lQU7c(SGJZgl3OZJI$*6pKMWwEfPuM)A#L^|kAjJEc{V
+zvhz*A*(kKVaWl^x_mT(G&Kl@8+fJd*zmIncVMr71-w#J|^|j*lxh4WKWj=)rm}S^>
+z*{ie^)>?l(rg4Qeoz~((pxT0$_ixKNyXOV#7wPWHIpG5S=Aq&aqYqoUyxz5pI}qJp
+z@#iDA8sd_tPgA|r4d&L9N}ssq|GWG5;Hv)pPd3_v-@!YeZJf>*py_<}W{9l0eYS+f
+z@cKYNF+wbj5U40Ve?I%{k83NY-b(=U7S3{b?#pwQ8V89(`HgHew=T}dqKD8hXY1cG
+zTBv7JTBU9GMtK#wP)>p6{O7@9H@{Y>L9?4~ZJ8KLui2$cT-N60y&bT>BYGPFtu?ne
+zVr{0)`6z|sjOLi}s<x;Yc&K?MgTX56w?|Vbx^*K=Vxm~ZUWN3mZ*0rA+e6fMB+G+x
+z=NW)*{qmJLgJj-aHlU%4o)@Q*fa*wSK^=Q5cXwJ(DxY|T8Oo+q8*Vk}&d{e~DtFtY
+zqA3p~<NXR^&Z&FLnnE<R$@>{X4ocVG|I@5>c>>ckcWoi+ty-(uIHaT(tMAusCQJwA
+zh%RNAPgUxLos3!Rn|o*mxfRiJHpf>;^*@vCLb;yp6L%c!Xd1PkNET0*7DJulSACm#
+zHFV+9#T#{3;4&5_vLu`J5;y7R=i{c&r}g1K#Z;!~T-@2<T)TL`b3s{|=>Vzl&y%e$
+zzibljrtZ5d`J|P1Xp+TD?ay|e$gn)}*z(zo29=GH=xO8GmEqApUbmgW<K7Gq|B<)J
+ze4MtODk8`P6FuGGDc9sIKd(tp+BwbLhP8ro?kS9i!0?cjug=*qsWh^a7oJ^ZxkXhQ
+z<TkfK_zioLn%yC(R_-VuaP_R$;yXTwEdn@F#N=2W8DPVerx4EnP(aPYB-e6e=%QMF
+zrw7BF{f`u<cVDBu!XE5b%r5Wd$y{rx(m36fxYd|FDT{lmhmz|XmaFzE=UX8*_N2zy
+zz?w$^3YXh67t0A_Z@o%2vz(1$sO+O{-4^KyC*ddG?_Dqs_#A9!z+&FN9JA*Efiw#w
+zikp1zvfIZf4o{W=^Tob9;&RGC)v%FsR7dE@kI>Qf-UOrIJBOdtjvu1fT+x$*z28}x
+zd|!wpNI5m1H2jtzDK<oRBfTexV$w}Psb{vv2woOgMQC;1Zeq^3{aHlFNXa4T?6_^y
+zJ;7l1pl)_+VgCW$6To5i86A*o5ykuzcB8ZTjaWANR^Vy+T^r=6gxL@2XFik2%Q}JI
+znipHgS;M&bOD3+cG7vO#1iue1Q$z*EN1vE&pS<_8$vYF4Jp~<r{0z=%y}3egs6QhQ
+z;~7b1jYrpeTRQ7n5n&Y5$mr;WIMnk-7ze0hROA1sTK#{lni~1y7o1(zYp%g}x#xdd
+Ru=STT4u~bED<5gD{13LXyY2u0
+
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/modifier-keys.patch b/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/modifier-keys.patch
+deleted file mode 100644
+index 825601d..0000000
+--- a/recipes-kernel/linux/linux-jlime-ben-nanonote-2.6.36/modifier-keys.patch
++++ /dev/null
+@@ -1,604 +0,0 @@
+-From b6325b84e3ea906745900fec13ebd12e27eca762 Mon Sep 17 00:00:00 2001
+-From: Lars-Peter Clausen <lars@metafoo.de>
+-Date: Sat, 24 Apr 2010 12:22:25 +0200
+-Subject: [PATCH] Modify keymap for ben nanonote
+-
+----
+- drivers/char/defkeymap.c_shipped |  308 +++++++++++++++++++++++++++++---------
+- drivers/char/defkeymap.map       |   74 +++++++---
+- 2 files changed, 286 insertions(+), 96 deletions(-)
+-
+---- a/drivers/char/defkeymap.c_shipped
+-+++ b/drivers/char/defkeymap.c_shipped
+-@@ -9,10 +9,10 @@ u_short plain_map[NR_KEYS] = {
+- 	0xf200,	0xf01b,	0xf031,	0xf032,	0xf033,	0xf034,	0xf035,	0xf036,
+- 	0xf037,	0xf038,	0xf039,	0xf030,	0xf02d,	0xf03d,	0xf07f,	0xf009,
+- 	0xfb71,	0xfb77,	0xfb65,	0xfb72,	0xfb74,	0xfb79,	0xfb75,	0xfb69,
+--	0xfb6f,	0xfb70,	0xf05b,	0xf05d,	0xf201,	0xf702,	0xfb61,	0xfb73,
+-+	0xfb6f,	0xfb70,	0xf05b,	0xf05d,	0xf201,	0xf706,	0xfb61,	0xfb73,
+- 	0xfb64,	0xfb66,	0xfb67,	0xfb68,	0xfb6a,	0xfb6b,	0xfb6c,	0xf03b,
+- 	0xf027,	0xf060,	0xf700,	0xf05c,	0xfb7a,	0xfb78,	0xfb63,	0xfb76,
+--	0xfb62,	0xfb6e,	0xfb6d,	0xf02c,	0xf02e,	0xf02f,	0xf700,	0xf30c,
+-+	0xfb62,	0xfb6e,	0xfb6d,	0xf02c,	0xf02e,	0xf02f,	0xf701,	0xf30c,
+- 	0xf703,	0xf020,	0xf207,	0xf100,	0xf101,	0xf102,	0xf103,	0xf104,
+- 	0xf105,	0xf106,	0xf107,	0xf108,	0xf109,	0xf208,	0xf209,	0xf307,
+- 	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+-@@ -22,54 +22,102 @@ u_short plain_map[NR_KEYS] = {
+- 	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short shift_map[NR_KEYS] = {
+-+static u_short shift_map[NR_KEYS] = {
+- 	0xf200,	0xf01b,	0xf021,	0xf040,	0xf023,	0xf024,	0xf025,	0xf05e,
+- 	0xf026,	0xf02a,	0xf028,	0xf029,	0xf05f,	0xf02b,	0xf07f,	0xf009,
+- 	0xfb51,	0xfb57,	0xfb45,	0xfb52,	0xfb54,	0xfb59,	0xfb55,	0xfb49,
+--	0xfb4f,	0xfb50,	0xf07b,	0xf07d,	0xf201,	0xf702,	0xfb41,	0xfb53,
+-+	0xfb4f,	0xfb50,	0xf07b,	0xf07d,	0xf201,	0xf706,	0xfb41,	0xfb53,
+- 	0xfb44,	0xfb46,	0xfb47,	0xfb48,	0xfb4a,	0xfb4b,	0xfb4c,	0xf03a,
+- 	0xf022,	0xf07e,	0xf700,	0xf07c,	0xfb5a,	0xfb58,	0xfb43,	0xfb56,
+--	0xfb42,	0xfb4e,	0xfb4d,	0xf03c,	0xf03e,	0xf03f,	0xf700,	0xf30c,
+-+	0xfb42,	0xfb4e,	0xfb4d,	0xf03b,	0xf03a,	0xf03f,	0xf701,	0xf30c,
+- 	0xf703,	0xf020,	0xf207,	0xf10a,	0xf10b,	0xf10c,	0xf10d,	0xf10e,
+- 	0xf10f,	0xf110,	0xf111,	0xf112,	0xf113,	0xf213,	0xf203,	0xf307,
+- 	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+- 	0xf302,	0xf303,	0xf300,	0xf310,	0xf206,	0xf200,	0xf03e,	0xf10a,
+- 	0xf10b,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+--	0xf30e,	0xf702,	0xf30d,	0xf200,	0xf701,	0xf205,	0xf114,	0xf603,
+-+	0xf30e,	0xf702,	0xf30d,	0xf01c,	0xf701,	0xf205,	0xf114,	0xf603,
+- 	0xf20b,	0xf601,	0xf602,	0xf117,	0xf600,	0xf20a,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short altgr_map[NR_KEYS] = {
+-+static u_short altgr_map[NR_KEYS] = {
+- 	0xf200,	0xf200,	0xf200,	0xf040,	0xf200,	0xf024,	0xf200,	0xf200,
+--	0xf07b,	0xf05b,	0xf05d,	0xf07d,	0xf05c,	0xf200,	0xf200,	0xf200,
+--	0xfb71,	0xfb77,	0xf918,	0xfb72,	0xfb74,	0xfb79,	0xfb75,	0xfb69,
+--	0xfb6f,	0xfb70,	0xf200,	0xf07e,	0xf201,	0xf702,	0xf914,	0xfb73,
+--	0xf917,	0xf919,	0xfb67,	0xfb68,	0xfb6a,	0xfb6b,	0xfb6c,	0xf200,
+--	0xf200,	0xf200,	0xf700,	0xf200,	0xfb7a,	0xfb78,	0xf916,	0xfb76,
+--	0xf915,	0xfb6e,	0xfb6d,	0xf200,	0xf200,	0xf200,	0xf700,	0xf30c,
+--	0xf703,	0xf200,	0xf207,	0xf50c,	0xf50d,	0xf50e,	0xf50f,	0xf510,
+--	0xf511,	0xf512,	0xf513,	0xf514,	0xf515,	0xf208,	0xf202,	0xf911,
+-+	0xf07b,	0xf05b,	0xf05d,	0xf07d,	0xf05c,	0xf07e,	0xf008,	0xf200,
+-+	0xf021,	0xf040,	0xf023,	0xf024,	0xf025,	0xf05e,	0xf026,	0xf02a,
+-+	0xf028,	0xf029,	0xf200,	0xf07e,	0xf201,	0xf706,	0xf0b0,	0xf0a8,
+-+	0xf0a4,	0xf02d,	0xf05f,	0xf07b,	0xf05b,	0xf05d,	0xf07d,	0xf200,
+-+	0xf200,	0xf200,	0xf700,	0xf200,	0xf039,	0xf030,	0xf916,	0xfb76,
+-+	0xf915,	0xf03c,	0xf03e,	0xf027,	0xf022,	0xf200,	0xf701,	0xf30c,
+-+	0xf703,	0xf200,	0xf207,	0xf031,	0xf032,	0xf033,	0xf034,	0xf035,
+-+	0xf036,	0xf037,	0xf038,	0xf514,	0xf515,	0xf208,	0xf202,	0xf911,
+- 	0xf912,	0xf913,	0xf30b,	0xf90e,	0xf90f,	0xf910,	0xf30a,	0xf90b,
+- 	0xf90c,	0xf90d,	0xf90a,	0xf310,	0xf206,	0xf200,	0xf07c,	0xf516,
+- 	0xf517,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+--	0xf30e,	0xf702,	0xf30d,	0xf200,	0xf701,	0xf205,	0xf114,	0xf603,
+-+	0xf30e,	0xf702,	0xf30d,	0xf01c,	0xf701,	0xf205,	0xf114,	0xf603,
+- 	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short ctrl_map[NR_KEYS] = {
+-+static u_short ctrl_map[NR_KEYS] = {
+- 	0xf200,	0xf200,	0xf200,	0xf000,	0xf01b,	0xf01c,	0xf01d,	0xf01e,
+--	0xf01f,	0xf07f,	0xf200,	0xf200,	0xf01f,	0xf200,	0xf008,	0xf200,
+-+	0xf01f,	0xf07f,	0xf200,	0xf200,	0xf01f,	0xf200,	0xf200,	0xf200,
+- 	0xf011,	0xf017,	0xf005,	0xf012,	0xf014,	0xf019,	0xf015,	0xf009,
+--	0xf00f,	0xf010,	0xf01b,	0xf01d,	0xf201,	0xf702,	0xf001,	0xf013,
+-+	0xf00f,	0xf010,	0xf01b,	0xf01d,	0xf201,	0xf706,	0xf001,	0xf013,
+- 	0xf004,	0xf006,	0xf007,	0xf008,	0xf00a,	0xf00b,	0xf00c,	0xf200,
+- 	0xf007,	0xf000,	0xf700,	0xf01c,	0xf01a,	0xf018,	0xf003,	0xf016,
+--	0xf002,	0xf00e,	0xf00d,	0xf200,	0xf20e,	0xf07f,	0xf700,	0xf30c,
+-+	0xf002,	0xf00e,	0xf00d,	0xf200,	0xf20e,	0xf07f,	0xf701,	0xf30c,
+- 	0xf703,	0xf000,	0xf207,	0xf100,	0xf101,	0xf102,	0xf103,	0xf104,
+- 	0xf105,	0xf106,	0xf107,	0xf108,	0xf109,	0xf208,	0xf204,	0xf307,
+- 	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+-@@ -79,35 +127,67 @@ u_short ctrl_map[NR_KEYS] = {
+- 	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short shift_ctrl_map[NR_KEYS] = {
+-+static u_short shift_ctrl_map[NR_KEYS] = {
+- 	0xf200,	0xf200,	0xf200,	0xf000,	0xf200,	0xf200,	0xf200,	0xf200,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf01f,	0xf200,	0xf200,	0xf200,
+- 	0xf011,	0xf017,	0xf005,	0xf012,	0xf014,	0xf019,	0xf015,	0xf009,
+--	0xf00f,	0xf010,	0xf200,	0xf200,	0xf201,	0xf702,	0xf001,	0xf013,
+-+	0xf00f,	0xf010,	0xf200,	0xf200,	0xf201,	0xf706,	0xf001,	0xf013,
+- 	0xf004,	0xf006,	0xf007,	0xf008,	0xf00a,	0xf00b,	0xf00c,	0xf200,
+- 	0xf200,	0xf200,	0xf700,	0xf200,	0xf01a,	0xf018,	0xf003,	0xf016,
+--	0xf002,	0xf00e,	0xf00d,	0xf200,	0xf200,	0xf200,	0xf700,	0xf30c,
+-+	0xf002,	0xf00e,	0xf00d,	0xf200,	0xf200,	0xf200,	0xf701,	0xf30c,
+- 	0xf703,	0xf200,	0xf207,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf208,	0xf200,	0xf307,
+- 	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+- 	0xf302,	0xf303,	0xf300,	0xf310,	0xf206,	0xf200,	0xf200,	0xf200,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+--	0xf30e,	0xf702,	0xf30d,	0xf200,	0xf701,	0xf205,	0xf114,	0xf603,
+-+	0xf30e,	0xf702,	0xf30d,	0xf01c,	0xf701,	0xf205,	0xf114,	0xf603,
+- 	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short alt_map[NR_KEYS] = {
+-+static u_short alt_map[NR_KEYS] = {
+- 	0xf200,	0xf81b,	0xf831,	0xf832,	0xf833,	0xf834,	0xf835,	0xf836,
+- 	0xf837,	0xf838,	0xf839,	0xf830,	0xf82d,	0xf83d,	0xf87f,	0xf809,
+- 	0xf871,	0xf877,	0xf865,	0xf872,	0xf874,	0xf879,	0xf875,	0xf869,
+--	0xf86f,	0xf870,	0xf85b,	0xf85d,	0xf80d,	0xf702,	0xf861,	0xf873,
+-+	0xf86f,	0xf870,	0xf85b,	0xf85d,	0xf80d,	0xf706,	0xf861,	0xf873,
+- 	0xf864,	0xf866,	0xf867,	0xf868,	0xf86a,	0xf86b,	0xf86c,	0xf83b,
+- 	0xf827,	0xf860,	0xf700,	0xf85c,	0xf87a,	0xf878,	0xf863,	0xf876,
+--	0xf862,	0xf86e,	0xf86d,	0xf82c,	0xf82e,	0xf82f,	0xf700,	0xf30c,
+-+	0xf862,	0xf86e,	0xf86d,	0xf200,	0xf200,	0xf82f,	0xf701,	0xf30c,
+- 	0xf703,	0xf820,	0xf207,	0xf500,	0xf501,	0xf502,	0xf503,	0xf504,
+- 	0xf505,	0xf506,	0xf507,	0xf508,	0xf509,	0xf208,	0xf209,	0xf907,
+- 	0xf908,	0xf909,	0xf30b,	0xf904,	0xf905,	0xf906,	0xf30a,	0xf901,
+-@@ -117,35 +197,115 @@ u_short alt_map[NR_KEYS] = {
+- 	0xf118,	0xf210,	0xf211,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+--u_short ctrl_alt_map[NR_KEYS] = {
+-+static u_short ctrl_alt_map[NR_KEYS] = {
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- 	0xf811,	0xf817,	0xf805,	0xf812,	0xf814,	0xf819,	0xf815,	0xf809,
+--	0xf80f,	0xf810,	0xf200,	0xf200,	0xf201,	0xf702,	0xf801,	0xf813,
+-+	0xf80f,	0xf810,	0xf200,	0xf200,	0xf201,	0xf706,	0xf801,	0xf813,
+- 	0xf804,	0xf806,	0xf807,	0xf808,	0xf80a,	0xf80b,	0xf80c,	0xf200,
+- 	0xf200,	0xf200,	0xf700,	0xf200,	0xf81a,	0xf818,	0xf803,	0xf816,
+--	0xf802,	0xf80e,	0xf80d,	0xf200,	0xf200,	0xf200,	0xf700,	0xf30c,
+-+	0xf802,	0xf80e,	0xf80d,	0xf200,	0xf200,	0xf200,	0xf701,	0xf30c,
+- 	0xf703,	0xf200,	0xf207,	0xf500,	0xf501,	0xf502,	0xf503,	0xf504,
+- 	0xf505,	0xf506,	0xf507,	0xf508,	0xf509,	0xf208,	0xf200,	0xf307,
+- 	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+- 	0xf302,	0xf303,	0xf300,	0xf20c,	0xf206,	0xf200,	0xf200,	0xf50a,
+- 	0xf50b,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+--	0xf30e,	0xf702,	0xf30d,	0xf200,	0xf701,	0xf205,	0xf114,	0xf603,
+-+	0xf30e,	0xf702,	0xf30d,	0xf01c,	0xf701,	0xf205,	0xf114,	0xf603,
+- 	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf20c,
+- 	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+- 	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+};
+-+
+-+static u_short ctl_map[NR_KEYS] = {
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf033,	0xf200,	0xf200,
+-+	0xfb71,	0xfb77,	0xfb65,	0xfb72,	0xfb74,	0xfb79,	0xf037,	0xf038,
+-+	0xf039,	0xfb70,	0xf200,	0xf200,	0xf201,	0xf706,	0xfb61,	0xfb73,
+-+	0xfb64,	0xfb66,	0xfb67,	0xfb68,	0xf034,	0xf035,	0xf036,	0xf200,
+-+	0xf200,	0xf200,	0xf700,	0xf200,	0xfb7a,	0xfb78,	0xfb63,	0xfb76,
+-+	0xfb62,	0xf031,	0xf032,	0xf200,	0xf200,	0xf030,	0xf701,	0xf30c,
+-+	0xf703,	0xf200,	0xf207,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf208,	0xf200,	0xf307,
+-+	0xf308,	0xf309,	0xf30b,	0xf304,	0xf305,	0xf306,	0xf30a,	0xf301,
+-+	0xf302,	0xf303,	0xf300,	0xf310,	0xf206,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf30e,	0xf702,	0xf30d,	0xf01c,	0xf701,	0xf205,	0xf114,	0xf603,
+-+	0xf118,	0xf601,	0xf602,	0xf117,	0xf600,	0xf119,	0xf115,	0xf116,
+-+	0xf11a,	0xf10c,	0xf10d,	0xf11b,	0xf11c,	0xf110,	0xf311,	0xf11d,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+-+	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,	0xf200,
+- };
+- 
+- ushort *key_maps[MAX_NR_KEYMAPS] = {
+--	plain_map, shift_map, altgr_map, NULL,
+--	ctrl_map, shift_ctrl_map, NULL, NULL,
+--	alt_map, NULL, NULL, NULL,
+--	ctrl_alt_map, NULL
+-+	plain_map, shift_map, altgr_map, 0,
+-+	ctrl_map, shift_ctrl_map, 0, 0,
+-+	alt_map, 0, 0, 0,
+-+	ctrl_alt_map, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	0, 0, 0, 0,
+-+	ctl_map,	0
+- };
+- 
+--unsigned int keymap_count = 7;
+-+unsigned int keymap_count = 8;
+- 
+- /*
+-  * Philosophy: most people do not define more strings, but they who do
+-@@ -216,47 +376,47 @@ char *func_table[MAX_NR_FUNC] = {
+- 	func_buf + 135,
+- 	func_buf + 140,
+- 	func_buf + 145,
+--	NULL,
+--	NULL,
+-+	0,
+-+	0,
+- 	func_buf + 149,
+--	NULL,
+-+	0,
+- };
+- 
+--struct kbdiacruc accent_table[MAX_DIACR] = {
+--	{'`', 'A', 0300},	{'`', 'a', 0340},
+--	{'\'', 'A', 0301},	{'\'', 'a', 0341},
+--	{'^', 'A', 0302},	{'^', 'a', 0342},
+--	{'~', 'A', 0303},	{'~', 'a', 0343},
+--	{'"', 'A', 0304},	{'"', 'a', 0344},
+--	{'O', 'A', 0305},	{'o', 'a', 0345},
+--	{'0', 'A', 0305},	{'0', 'a', 0345},
+--	{'A', 'A', 0305},	{'a', 'a', 0345},
+--	{'A', 'E', 0306},	{'a', 'e', 0346},
+--	{',', 'C', 0307},	{',', 'c', 0347},
+--	{'`', 'E', 0310},	{'`', 'e', 0350},
+--	{'\'', 'E', 0311},	{'\'', 'e', 0351},
+--	{'^', 'E', 0312},	{'^', 'e', 0352},
+--	{'"', 'E', 0313},	{'"', 'e', 0353},
+--	{'`', 'I', 0314},	{'`', 'i', 0354},
+--	{'\'', 'I', 0315},	{'\'', 'i', 0355},
+--	{'^', 'I', 0316},	{'^', 'i', 0356},
+--	{'"', 'I', 0317},	{'"', 'i', 0357},
+--	{'-', 'D', 0320},	{'-', 'd', 0360},
+--	{'~', 'N', 0321},	{'~', 'n', 0361},
+--	{'`', 'O', 0322},	{'`', 'o', 0362},
+--	{'\'', 'O', 0323},	{'\'', 'o', 0363},
+--	{'^', 'O', 0324},	{'^', 'o', 0364},
+--	{'~', 'O', 0325},	{'~', 'o', 0365},
+--	{'"', 'O', 0326},	{'"', 'o', 0366},
+--	{'/', 'O', 0330},	{'/', 'o', 0370},
+--	{'`', 'U', 0331},	{'`', 'u', 0371},
+--	{'\'', 'U', 0332},	{'\'', 'u', 0372},
+--	{'^', 'U', 0333},	{'^', 'u', 0373},
+--	{'"', 'U', 0334},	{'"', 'u', 0374},
+--	{'\'', 'Y', 0335},	{'\'', 'y', 0375},
+--	{'T', 'H', 0336},	{'t', 'h', 0376},
+--	{'s', 's', 0337},	{'"', 'y', 0377},
+--	{'s', 'z', 0337},	{'i', 'j', 0377},
+-+struct kbdiacr accent_table[MAX_DIACR] = {
+-+	{'`', 'A', '\300'},	{'`', 'a', '\340'},
+-+	{'\'', 'A', '\301'},	{'\'', 'a', '\341'},
+-+	{'^', 'A', '\302'},	{'^', 'a', '\342'},
+-+	{'~', 'A', '\303'},	{'~', 'a', '\343'},
+-+	{'"', 'A', '\304'},	{'"', 'a', '\344'},
+-+	{'O', 'A', '\305'},	{'o', 'a', '\345'},
+-+	{'0', 'A', '\305'},	{'0', 'a', '\345'},
+-+	{'A', 'A', '\305'},	{'a', 'a', '\345'},
+-+	{'A', 'E', '\306'},	{'a', 'e', '\346'},
+-+	{',', 'C', '\307'},	{',', 'c', '\347'},
+-+	{'`', 'E', '\310'},	{'`', 'e', '\350'},
+-+	{'\'', 'E', '\311'},	{'\'', 'e', '\351'},
+-+	{'^', 'E', '\312'},	{'^', 'e', '\352'},
+-+	{'"', 'E', '\313'},	{'"', 'e', '\353'},
+-+	{'`', 'I', '\314'},	{'`', 'i', '\354'},
+-+	{'\'', 'I', '\315'},	{'\'', 'i', '\355'},
+-+	{'^', 'I', '\316'},	{'^', 'i', '\356'},
+-+	{'"', 'I', '\317'},	{'"', 'i', '\357'},
+-+	{'-', 'D', '\320'},	{'-', 'd', '\360'},
+-+	{'~', 'N', '\321'},	{'~', 'n', '\361'},
+-+	{'`', 'O', '\322'},	{'`', 'o', '\362'},
+-+	{'\'', 'O', '\323'},	{'\'', 'o', '\363'},
+-+	{'^', 'O', '\324'},	{'^', 'o', '\364'},
+-+	{'~', 'O', '\325'},	{'~', 'o', '\365'},
+-+	{'"', 'O', '\326'},	{'"', 'o', '\366'},
+-+	{'/', 'O', '\330'},	{'/', 'o', '\370'},
+-+	{'`', 'U', '\331'},	{'`', 'u', '\371'},
+-+	{'\'', 'U', '\332'},	{'\'', 'u', '\372'},
+-+	{'^', 'U', '\333'},	{'^', 'u', '\373'},
+-+	{'"', 'U', '\334'},	{'"', 'u', '\374'},
+-+	{'\'', 'Y', '\335'},	{'\'', 'y', '\375'},
+-+	{'T', 'H', '\336'},	{'t', 'h', '\376'},
+-+	{'s', 's', '\337'},	{'"', 'y', '\377'},
+-+	{'s', 'z', '\337'},	{'i', 'j', '\377'},
+- };
+- 
+- unsigned int accent_table_size = 68;
+---- a/drivers/char/defkeymap.map
+-+++ b/drivers/char/defkeymap.map
+-@@ -1,5 +1,5 @@
+- # Default kernel keymap. This uses 7 modifier combinations.
+--keymaps 0-2,4-5,8,12
+-+keymaps 0-2,4-5,8,12,64
+- # Change the above line into
+- #	keymaps 0-2,4-6,8,12
+- # in case you want the entries
+-@@ -45,24 +45,38 @@ keycode  12 = minus            underscor
+- 	control	keycode  12 = Control_underscore
+- 	shift	control	keycode  12 = Control_underscore
+- 	alt	keycode  12 = Meta_minus      
+--keycode  13 = equal            plus            
+-+keycode  13 = equal            plus             
+- 	alt     keycode  13 = Meta_equal      
+-+	altgr   keycode  13 = asciitilde 
+-+	ctrll   keycode  13 = three
+- keycode  14 = Delete           Delete          
+--	control keycode  14 = BackSpace
+-+	altgr   keycode  14 = BackSpace
+- 	alt     keycode  14 = Meta_Delete     
+- keycode  15 = Tab              Tab             
+- 	alt     keycode  15 = Meta_Tab        
+- keycode  16 = q               
+-+	altgr   keycode  16 = exclam
+- keycode  17 = w               
+-+	altgr   keycode  17 = at
+- keycode  18 = e
+--	altgr   keycode  18 = Hex_E   
+-+	altgr   keycode  18 = numbersign
+- keycode  19 = r               
+-+	altgr   keycode  19 = dollar
+- keycode  20 = t               
+-+	altgr   keycode  20 = percent
+- keycode  21 = y               
+-+	altgr   keycode  21 = asciicircum 
+- keycode  22 = u               
+-+	altgr   keycode  22 = ampersand
+-+	ctrll   keycode  22 = seven
+- keycode  23 = i               
+-+	altgr   keycode  23 = asterisk
+-+	ctrll   keycode  23 = eight
+- keycode  24 = o               
+-+	altgr   keycode  24 = parenleft
+-+	ctrll   keycode  24 = nine
+- keycode  25 = p               
+-+	altgr   keycode  25 = parenright
+- keycode  26 = bracketleft      braceleft       
+- 	control keycode  26 = Escape          
+- 	alt     keycode  26 = Meta_bracketleft
+-@@ -71,19 +85,28 @@ keycode  27 = bracketright     bracerigh
+- 	alt     keycode  27 = Meta_bracketright
+- keycode  28 = Return          
+- 	alt     keycode  28 = Meta_Control_m  
+--keycode  29 = Control         
+-+keycode  29 = CtrlL         
+- keycode  30 = a
+--	altgr   keycode  30 = Hex_A
+-+	altgr   keycode  30 = U+00B0
+- keycode  31 = s               
+-+	altgr   keycode  31 = U+00A8
+- keycode  32 = d
+--	altgr   keycode  32 = Hex_D   
+-+	altgr   keycode  32 = U+20AC
+- keycode  33 = f
+--	altgr   keycode  33 = Hex_F               
+-+	altgr   keycode  33 = minus
+- keycode  34 = g               
+-+	altgr   keycode  34 = underscore
+- keycode  35 = h               
+-+	altgr   keycode  35 = braceleft
+- keycode  36 = j               
+-+	altgr   keycode  36 = bracketleft
+-+	ctrll   keycode  36 = four
+- keycode  37 = k               
+-+	altgr   keycode  37 = bracketright
+-+	ctrll   keycode  37 = five
+- keycode  38 = l               
+-+	altgr   keycode  38 = braceright
+-+	ctrll   keycode  38 = six
+- keycode  39 = semicolon        colon           
+- 	alt     keycode  39 = Meta_semicolon  
+- keycode  40 = apostrophe       quotedbl        
+-@@ -97,58 +120,65 @@ keycode  43 = backslash        bar      
+- 	control keycode  43 = Control_backslash
+- 	alt     keycode  43 = Meta_backslash  
+- keycode  44 = z               
+-+	altgr   keycode  44 = nine
+- keycode  45 = x               
+-+	altgr   keycode  45 = zero
+- keycode  46 = c
+- 	altgr   keycode  46 = Hex_C   
+- keycode  47 = v               
+- keycode  48 = b
+- 	altgr   keycode  48 = Hex_B
+- keycode  49 = n               
+-+	altgr   keycode  49 = less
+-+	ctrll   keycode  49 = one
+- keycode  50 = m               
+--keycode  51 = comma            less            
+--	alt     keycode  51 = Meta_comma      
+--keycode  52 = period           greater         
+-+	altgr   keycode  50 = greater
+-+	ctrll   keycode  50 = two
+-+keycode  51 = comma            semicolon
+-+	altgr   keycode  51 = apostrophe
+-+keycode  52 = period           colon
+- 	control keycode  52 = Compose         
+--	alt     keycode  52 = Meta_period     
+-+	altgr   keycode  52 =  quotedbl
+- keycode  53 = slash            question        
+- 	control keycode  53 = Delete          
+- 	alt     keycode  53 = Meta_slash      
+--keycode  54 = Shift           
+-+	ctrll   keycode  53 = zero
+-+keycode  54 = AltGr
+- keycode  55 = KP_Multiply     
+- keycode  56 = Alt             
+- keycode  57 = space            space           
+- 	control keycode  57 = nul             
+- 	alt     keycode  57 = Meta_space      
+- keycode  58 = Caps_Lock       
+--keycode  59 = F1               F11              Console_13      
+-+keycode  59 = F1               F11              one
+- 	control keycode  59 = F1              
+- 	alt     keycode  59 = Console_1       
+- 	control alt     keycode  59 = Console_1       
+--keycode  60 = F2               F12              Console_14      
+-+keycode  60 = F2               F12              two
+- 	control keycode  60 = F2              
+- 	alt     keycode  60 = Console_2       
+- 	control alt     keycode  60 = Console_2       
+--keycode  61 = F3               F13              Console_15      
+-+keycode  61 = F3               F13              three
+- 	control keycode  61 = F3              
+- 	alt     keycode  61 = Console_3       
+- 	control alt     keycode  61 = Console_3       
+--keycode  62 = F4               F14              Console_16      
+-+keycode  62 = F4               F14              four
+- 	control keycode  62 = F4              
+- 	alt     keycode  62 = Console_4       
+- 	control alt     keycode  62 = Console_4       
+--keycode  63 = F5               F15              Console_17      
+-+keycode  63 = F5               F15              five
+- 	control keycode  63 = F5              
+- 	alt     keycode  63 = Console_5       
+- 	control alt     keycode  63 = Console_5       
+--keycode  64 = F6               F16              Console_18      
+-+keycode  64 = F6               F16              six
+- 	control keycode  64 = F6              
+- 	alt     keycode  64 = Console_6       
+- 	control alt     keycode  64 = Console_6       
+--keycode  65 = F7               F17              Console_19      
+-+keycode  65 = F7               F17              seven
+- 	control keycode  65 = F7              
+- 	alt     keycode  65 = Console_7       
+- 	control alt     keycode  65 = Console_7       
+--keycode  66 = F8               F18              Console_20      
+-+keycode  66 = F8               F18              eight
+- 	control keycode  66 = F8              
+- 	alt     keycode  66 = Console_8       
+- 	control alt     keycode  66 = Console_8       
+-@@ -220,7 +250,7 @@ keycode  93 =
+- keycode  94 =
+- keycode  95 =
+- keycode  96 = KP_Enter        
+--keycode  97 = Control         
+-+keycode  97 = Control
+- keycode  98 = KP_Divide       
+- keycode  99 = Control_backslash
+- 	control keycode  99 = Control_backslash
+diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote_2.6.36.bb b/recipes-kernel/linux/linux-jlime-ben-nanonote_3.12.bb
+similarity index 68%
+rename from recipes-kernel/linux/linux-jlime-ben-nanonote_2.6.36.bb
+rename to recipes-kernel/linux/linux-jlime-ben-nanonote_3.12.bb
+index c2c1ade..0a232c0 100644
+--- a/recipes-kernel/linux/linux-jlime-ben-nanonote_2.6.36.bb
++++ b/recipes-kernel/linux/linux-jlime-ben-nanonote_3.12.bb
+@@ -1,4 +1,4 @@
+-DESCRIPTION = "Linux 2.6.36 kernel for the Ben Nanonote"
++DESCRIPTION = "Linux kernel 3.12 for the Ben Nanonote"
+ SECTION = "kernel"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+@@ -12,13 +12,7 @@ COMPATIBLE_MACHINE = "ben-nanonote"
  
- require conf/machine/include/tune-mips32.inc
+ KERNEL_IMAGETYPE = "vmlinux.bin"
  
--PREFERRED_PROVIDER_virtual/kernel = "linux-jlime-ben-nanonote"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-qi-ben-nanonote"
+-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/kristoffer/linux-hpc.git;protocol=git;branch=v2.6.36-hpc \
+-	   file://logo_linux_clut224.tar.gz \
+-	   file://modifier-keys.patch \
+-	   file://config-ben-nanonote \
+-	   file://jz4740-udc.patch \
+-	   file://fix-gcc-4.6.0-build-errors.patch \
+-	   "
++SRC_URI = "git://projects.qi-hardware.com/qi-kernel.git;protocol=git;branch=jz-3.12"
  
- # With 2.6.37 there is not yet uImage target (pending patches)
- #KERNEL_IMAGETYPE = "uImage"
-diff --git a/recipes-kernel/linux/linux-jlime-ben-nanonote_3.12.bb b/recipes-kernel/linux/linux-qi-ben-nanonote_3.12.bb
-similarity index 100%
-rename from recipes-kernel/linux/linux-jlime-ben-nanonote_3.12.bb
-rename to recipes-kernel/linux/linux-qi-ben-nanonote_3.12.bb
+ S = "${WORKDIR}/git"
+ 
+@@ -27,8 +21,7 @@ inherit kernel
+ FILES_kernel-image = "/boot/uImage*"
+ 
+ do_configure_prepend() {
+-	install -m 0644 ${WORKDIR}/config-ben-nanonote ${S}/.config
+-	mv -f ${WORKDIR}/logo_linux_clut224.ppm ${S}/drivers/video/logo
++	install -m 0644 ${S}/arch/mips/configs/qi_lb60_defconfig ${S}/.config
+ }
+ 
+ do_install_append() {
 -- 
 1.7.10.4
 
