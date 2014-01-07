@@ -1,36 +1,38 @@
-Return-Path: <kirgene@gmail.com>
-Received: from mail-qa0-f46.google.com (mail-qa0-f46.google.com
-	[209.85.216.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E8426B961
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
+	[193.109.254.119])
+	by mail.openembedded.org (Postfix) with ESMTP id ECCB86BE7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2014 02:44:28 +0000 (UTC)
-Received: by mail-qa0-f46.google.com with SMTP id j5so164801qaq.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2014 18:44:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=LiDLv3Wc9E1g5oJYmYj2iSVd+pBJfU7Az4d6cdxNzak=;
-	b=PHhPWBqsLZCDRw4lBGE7H9561WXmbwww0Av3SxNb3HGHbfUEGIcbqcdihtF2nW99gG
-	ZYQJ4TBIRWamUheI5raFnli9h3PHBW8nWt4qnQJbxgSOLfP2T6NItGTv2t62x2Nb1a2u
-	5mq1D8EYTNUj+3PsUGNHHQvUbEf1LLlG0F9SX3OciUtKYbXeiliRwJCrhlJDnnQpg1wS
-	WCIuGiyOBVY6TLL+CZW2V7y+IAB82xSVLGmsakNOWnCL2Dj57v32LW81SiR9Lh9KyRQR
-	/N4cCY/fr0zRsCZLZQHBSYsPW0cGZjVcq84unmBY4hqJlVmujKYwCuyg1e8xQBWipUV3
-	6j1w==
-MIME-Version: 1.0
-X-Received: by 10.49.1.10 with SMTP id 10mr192091093qei.6.1389062669901; Mon,
-	06 Jan 2014 18:44:29 -0800 (PST)
-Received: by 10.96.177.105 with HTTP; Mon, 6 Jan 2014 18:44:29 -0800 (PST)
-In-Reply-To: <C43D5437-90C2-4BF6-9519-43A8B7244576@dominion.thruhere.net>
-References: <1389024737-56946-1-git-send-email-koen@dominion.thruhere.net>
-	<C43D5437-90C2-4BF6-9519-43A8B7244576@dominion.thruhere.net>
-Date: Tue, 7 Jan 2014 04:44:29 +0200
-Message-ID: <CADV-EXG2Febjf6kNmOVjBDinyv=02J+K5KhkJdORDubzZJKFuA@mail.gmail.com>
-From: Yevhen Kyriukha <kirgene@gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "openembedded-devel@lists.openembedded.org List"
+	Tue,  7 Jan 2014 10:28:39 +0000 (UTC)
+Received: from [85.158.140.211:48015] by server-15.bemta-14.messagelabs.com id
+	F0/7B-22186-8D6DBC25; Tue, 07 Jan 2014 10:28:40 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-4.tower-194.messagelabs.com!1389090519!14803563!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11056 invoked from network); 7 Jan 2014 10:28:39 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
+	(89.206.228.155)
+	by server-4.tower-194.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 Jan 2014 10:28:39 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Tue, 7 Jan 2014
+	10:28:39 +0000
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] udisks: updated to v2.1.1.
+Date: Tue, 7 Jan 2014 10:28:38 +0000
+Thread-Topic: [oe] Patch to fix libxml++ build failure in meta-oe
+Thread-Index: Ac8K9fplYt7QYmMqTDaR6cxOxnVidwAk6OsgAAJeaZA=
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E794@GBTWK10E001.Technology.local>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+Subject: Re: Patch to fix libxml++ build failure in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,97 +46,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2014 02:44:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Jan 2014 10:28:40 -0000
+X-Groupsio-MsgNum: 47623
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_002_AAE0766F5AF36B46BAB7E0EFB9273206331489E794GBTWK10E001Te_"
 
-2014/1/6 Koen Kooi <koen@dominion.thruhere.net>:
->
-> Op 6 jan. 2014, om 17:12 heeft Koen Kooi <koen@dominion.thruhere.net> het volgende geschreven:
->
->> From: Yevhen Kyriukha <kirgene@gmail.com>
->>
->> One patch was removed because changes are already exist in upstream version.
->> Added patch to turn libatasmart, polkit, acl and libsystemd-login into optional dependencies.
->>
->> Signed-off-by: Yevhen Kyriukha <kirgene@gmail.com>
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->
-> Gah, stupid muscle memory, that SOB is premature
->
->> ---
->
-> I played a bit with this patch and I have a few questions
->
->
->> diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb b/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
->> similarity index 34%
->> rename from meta-oe/recipes-support/udisks/udisks_1.0.4.bb
->> rename to meta-oe/recipes-support/udisks/udisks_2.1.1.bb
->> index 32f0c11..9eff5e1 100644
->> --- a/meta-oe/recipes-support/udisks/udisks_1.0.4.bb
->> +++ b/meta-oe/recipes-support/udisks/udisks_2.1.1.bb
->> @@ -1,39 +1,38 @@
->> DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces that can be used to query and manipulate storage devices."
->> LICENSE = "GPLv2+"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
->>
->> -DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
->> -# optional dependencies: device-mapper parted
->> +DEPENDS = "udev dbus-glib glib-2.0"
->>
->> DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
->
-> [..]
->
->> inherit autotools systemd
->>
->> -PACKAGECONFIG ??= ""
->> -PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
->> +PACKAGECONFIG ??= "atasmart polkit acl ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd-login', '', d)}"
->> +PACKAGECONFIG[atasmart] = "--enable-libatasmart,--disable-libatasmart,libatasmart"
->> +PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
->> +PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl"
->> +PACKAGECONFIG[systemd-login] = "--enable-libsystemd-login,--disable-libsystemd-login,systemd"
->
-> I think 3 different ways to add systemd to DEPENDS is a bit much, the inherit + PACKAGECONFIG should be enough. Also, what happened to the parted PACKAGECONFIG?
->
+--_002_AAE0766F5AF36B46BAB7E0EFB9273206331489E794GBTWK10E001Te_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-You're right, I'll remove redundant DEPENDS statement for systemd.
-As for parted, udisks doesn't depend on it already during compile.
 
-> regards,
->
-> Koen
->
->
->>
->> -EXTRA_OECONF = "--disable-man-pages"
->> +EXTRA_OECONF = "--disable-man"
->> +
->> +PACKAGES =+ "${PN}-bash-completion"
->>
->> FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
->>                 ${datadir}/dbus-1/ \
->>                 ${datadir}/polkit-1 \
->>                 ${base_libdir}/udev/* \
->> +                ${libdir}/udisks2/* \
->> "
->> +FILES_${PN}-dbg += "${base_libdir}/udev/.debug \
->> +             ${libdir}/udisks2/.debug"
->> +FILES_${PN}-bash-completion = "${datadir}/bash-completion"
->>
->> -FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
->> -
->> -RPROVIDES_${PN} += "${PN}-systemd"
->> -RREPLACES_${PN} += "${PN}-systemd"
->> -RCONFLICTS_${PN} += "${PN}-systemd"
->> -SYSTEMD_SERVICE_${PN} = "udisks-daemon.service"
->> +SYSTEMD_SERVICE_${PN} = "udisks2.service"
->> SYSTEMD_AUTO_ENABLE = "disable"
->> --
->> 1.8.4
->>
->>
->
+>Using git format-patch and sending created file as attachment would probab=
+ly be better, but still not picked correctly by patchwork imho.
+>Please try it and we'll see.
 
+I hope this helps. I will also do another email with it pasted inline rathe=
+r than attached
+
+--
+
+The details of this company are as follows:
+G4S Technology Limited, Registered Office: Challenge House, International D=
+rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
+38.
+
+This communication may contain information which is confidential, personal =
+and/or privileged.
+
+It is for the exclusive use of the intended recipient(s).
+If you are not the intended recipient(s), please note that any distribution=
+, forwarding, copying or use of this communication or the information in it=
+ is strictly prohibited.
+
+Any personal views expressed in this e-mail are those of the individual sen=
+der and the company does not endorse or accept responsibility for them.
+
+Prior to taking any action based upon this e-mail message, you should seek =
+appropriate confirmation of its authenticity.
+
+This e-mail has been scanned for all viruses by MessageLabs.
+
+--_002_AAE0766F5AF36B46BAB7E0EFB9273206331489E794GBTWK10E001Te_
+Content-Type: application/octet-stream;
+	name="0001-Use-libxml-version-2.37.1-and-add-ptest-support.patch"
+Content-Description: 0001-Use-libxml-version-2.37.1-and-add-ptest-support.patch
+Content-Disposition: attachment;
+	filename="0001-Use-libxml-version-2.37.1-and-add-ptest-support.patch";
+	size=6718; creation-date="Tue, 07 Jan 2014 09:18:43 GMT";
+	modification-date="Tue, 07 Jan 2014 09:15:18 GMT"
+Content-Transfer-Encoding: base64
+
+RnJvbSBjNzdjNmFkZjA3NWYzMTQyMDlmN2NkMDcxZmI1Yjk5YzBkOGQwZTcwIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBOaWNrIExld2lzIDxuaWNrLmxld2lzQHVzYS5nNHMuY29tPgpE
+YXRlOiBNb24sIDYgSmFuIDIwMTQgMTc6MTY6MDMgKzAwMDAKU3ViamVjdDogW1BBVENIXSBVc2Ug
+bGlieG1sKysgdmVyc2lvbiAyLjM3LjEgYW5kIGFkZCBwdGVzdCBzdXBwb3J0CgotLS0KIC4uLi9s
+aWJ4bWwvbGlieG1sKystMi4zNy4xL2xpYnhtbCsrX3B0ZXN0LnBhdGNoICAgIHwgICA3MyArKysr
+KysrKysrKysrKysrKysrKwogLi4uL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4x
+L3J1bi1wdGVzdCAgfCAgICAzICsKIG1ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwr
+K18yLjM1LjMuYmIgICAgIHwgICAyMiAtLS0tLS0KIG1ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnht
+bC9saWJ4bWwrK18yLjM3LjEuYmIgICAgIHwgICAzNCArKysrKysrKysKIDQgZmlsZXMgY2hhbmdl
+ZCwgMTEwIGluc2VydGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0
+IG1ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRl
+c3QucGF0Y2gKIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwv
+bGlieG1sKystMi4zNy4xL3J1bi1wdGVzdAogZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVj
+aXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrK18yLjM1LjMuYmIKIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
+ZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKytfMi4zNy4xLmJiCgpkaWZmIC0tZ2l0
+IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9saWJ4bWwrK19w
+dGVzdC5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEv
+bGlieG1sKytfcHRlc3QucGF0Y2gKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4u
+YTE4ODIyZgotLS0gL2Rldi9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9s
+aWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRlc3QucGF0Y2gKQEAgLTAsMCArMSw3MyBAQAorZGlm
+ZiAtLWdpdCBhL01ha2VmaWxlLmFtIGIvTWFrZWZpbGUuYW0KK2luZGV4IGQ0YWFkYjEuLjBlMzY3
+NTYgMTAwNjQ0CistLS0gYS9NYWtlZmlsZS5hbQorKysrIGIvTWFrZWZpbGUuYW0KK0BAIC0yNTMs
+NSArMjUzLDggQEAgcG9zdC1odG1sOiBkb2NzL2luZGV4Lmh0bWwKKyAJcnN5bmMgJChyc3luY19h
+cmdzKSAtciBkb2NzL2luZGV4Lmh0bWwgJCRVU0VSLGxpYnhtbHBsdXNwbHVzQHdlYi5zb3VyY2Vm
+b3JnZS5uZXQ6JCh3ZWJfcGF0aF9wcm9qZWN0KQorIAlyc3luYyAkKHJzeW5jX2FyZ3MpIC1yIGV4
+YW1wbGVzICQkVVNFUixsaWJ4bWxwbHVzcGx1c0B3ZWIuc291cmNlZm9yZ2UubmV0OiQod2ViX3Bh
+dGhfcHJvamVjdCkKKyAKKytpbnN0YWxsLXB0ZXN0OgorKwltYWtlIC1DIGV4YW1wbGVzIGluc3Rh
+bGwtcHRlc3QKKysKKyAjIE9wdGlvbmFsOiBhdXRvLWdlbmVyYXRlIHRoZSBDaGFuZ2VMb2cgZmls
+ZSBmcm9tIHRoZSBnaXQgbG9nIG9uIG1ha2UgZGlzdAorIGluY2x1ZGUgJCh0b3Bfc3JjZGlyKS9t
+YWNyb3MvZGlzdC1jaGFuZ2Vsb2cuYW0KK2RpZmYgLS1naXQgYS9leGFtcGxlcy9NYWtlZmlsZS5h
+bSBiL2V4YW1wbGVzL01ha2VmaWxlLmFtCitpbmRleCBkOTU0MWNhLi5jMjhiNDljIDEwMDY0NAor
+LS0tIGEvZXhhbXBsZXMvTWFrZWZpbGUuYW0KKysrKyBiL2V4YW1wbGVzL01ha2VmaWxlLmFtCitA
+QCAtMzYsNiArMzYsMjMgQEAgY2hlY2tfUFJPR1JBTVMgPSBcCisgICBzY2hlbWF2YWxpZGF0aW9u
+L3NjaGVtYXZhbGlkYXRpb24gXAorICAgdGV4dHJlYWRlci90ZXh0cmVhZGVyCisgCisrY2hlY2tf
+RE9UTElCUyA9IFwKKysgIGRvbV9idWlsZC8ubGlicy9kb21fYnVpbGQgXAorKyAgZG9tX3BhcnNl
+X2VudGl0aWVzLy5saWJzL2RvbV9wYXJzZV9lbnRpdGllcyBcCisrICBkb21fcGFyc2VyLy5saWJz
+L2RvbV9wYXJzZXIgXAorKyAgZG9tX3BhcnNlcl9yYXcvLmxpYnMvZG9tX3BhcnNlcl9yYXcgXAor
+KyAgZG9tX3JlYWRfd3JpdGUvLmxpYnMvZG9tX3JlYWRfd3JpdGUgXAorKyAgZG9tX3hpbmNsdWRl
+Ly5saWJzL2RvbV94aW5jbHVkZSBcCisrICBkb21feHBhdGgvLmxpYnMvZG9tX3hwYXRoIFwKKysg
+IGR0ZHZhbGlkYXRpb24vLmxpYnMvZHRkdmFsaWRhdGlvbiBcCisrICBpbXBvcnRfbm9kZS8ubGli
+cy9pbXBvcnRfbm9kZSBcCisrICBzYXhfZXhjZXB0aW9uLy5saWJzL3NheF9leGNlcHRpb24gXAor
+KyAgc2F4X3BhcnNlci8ubGlicy9zYXhfcGFyc2VyIFwKKysgIHNheF9wYXJzZXJfYnVpbGRfZG9t
+Ly5saWJzL3NheF9wYXJzZXJfYnVpbGRfZG9tIFwKKysgIHNheF9wYXJzZXJfZW50aXRpZXMvLmxp
+YnMvc2F4X3BhcnNlcl9lbnRpdGllcyBcCisrICBzY2hlbWF2YWxpZGF0aW9uLy5saWJzL3NjaGVt
+YXZhbGlkYXRpb24gXAorKyAgdGV4dHJlYWRlci8ubGlicy90ZXh0cmVhZGVyCisrCisgIyBTaGVs
+bCBzY3JpcHRzIHRoYXQgY2FsbCB0aGUgZXhhbXBsZSBwcm9ncmFtcy4KKyBjaGVja19TQ1JJUFRT
+ID0gXAorICAgZG9tX2J1aWxkL21ha2VfY2hlY2suc2ggXAorQEAgLTE0NywxMCArMTY0LDEwIEBA
+IGRpc3Rfbm9pbnN0X0RBVEEgPSBcCisgIyBmaWxlIGFyZSBsb2NhdGVkIGluIGRpZmZlcmVudCBk
+aXJlY3Rvcmllcy4KKyBkb21fcmVhZF93cml0ZS9tYWtlX2NoZWNrLnNoOiBNYWtlZmlsZQorIAll
+Y2hvICcjIEdlbmVyYXRlZCBhbmQgdXNlZCBieSAibWFrZSBjaGVjayInID4kQAorLQllY2hvICdk
+b21fcmVhZF93cml0ZS9kb21fcmVhZF93cml0ZSAiJChzcmNkaXIpL2RvbV9yZWFkX3dyaXRlL2V4
+YW1wbGUueG1sIiBkb21fcmVhZF93cml0ZS9leGFtcGxlX291dHB1dC54bWwgPi9kZXYvbnVsbCcg
+Pj4kQAorKwllY2hvICdkb21fcmVhZF93cml0ZS8ubGlicy9kb21fcmVhZF93cml0ZSAiJChzcmNk
+aXIpL2RvbV9yZWFkX3dyaXRlL2V4YW1wbGUueG1sIiBkb21fcmVhZF93cml0ZS9leGFtcGxlX291
+dHB1dC54bWwgPi9kZXYvbnVsbCcgPj4kQAorIAljaG1vZCAreCAkQAorIAorLXNjcmlwdF90ZW1w
+bGF0ZSA9IGNkICIkKHNyY2RpcikvPCFwcm9nbmFtZSE+IiAmJiAiJChhYnNfYnVpbGRkaXIpLzwh
+cHJvZ25hbWUhPi88IXByb2duYW1lIT4iID4vZGV2L251bGwKKytzY3JpcHRfdGVtcGxhdGUgPSBj
+ZCAiJChzcmNkaXIpLzwhcHJvZ25hbWUhPiIgJiYgIi5saWJzLzwhcHJvZ25hbWUhPiIgPi9kZXYv
+bnVsbAorIHN0YW5kYXJkX3NjcmlwdHMgPSAkKGZpbHRlci1vdXQgZG9tX3JlYWRfd3JpdGUvbWFr
+ZV9jaGVjay5zaCwkKGNoZWNrX1NDUklQVFMpKQorIAorICMgQWxsIG90aGVyIHNjcmlwdCBmaWxl
+cyBhcmUgZ2VuZXJhdGVkIGxpa2Ugc286CitAQCAtMTYyLDMgKzE3OSwxOCBAQCAkKHN0YW5kYXJk
+X3NjcmlwdHMpOiBNYWtlZmlsZQorIENMRUFORklMRVMgPSBcCisgICBkb21fcmVhZF93cml0ZS9l
+eGFtcGxlX291dHB1dC54bWwgXAorICAgJChjaGVja19TQ1JJUFRTKQorKworK2J1aWxkdGVzdDog
+YWxsCisrCSQoTUFLRSkgJChBTV9NQUtFRkxBR1MpICQoY2hlY2tfUFJPR1JBTVMpICQoY2hlY2tf
+U0NSSVBUUykKKysJJChNQUtFKSAkKEFNX01BS0VGTEFHUykgYnVpbGR0ZXN0LVRFU1RTCisrCisr
+aW5zdGFsbC1wdGVzdDoKKysJJChNS0RJUl9QKSAkKERFU1RESVIpL2V4YW1wbGVzCisrCWNwIC0t
+cGFyZW50cyAkKGNoZWNrX0RPVExJQlMpICQoREVTVERJUikvZXhhbXBsZXMKKysJY3AgLS1wYXJl
+bnRzICQoY2hlY2tfU0NSSVBUUykgJChERVNURElSKS9leGFtcGxlcworKwljcCAtLXBhcmVudHMg
+JChkaXN0X25vaW5zdF9EQVRBKSAkKERFU1RESVIpL2V4YW1wbGVzCisrCWNwIE1ha2VmaWxlICQo
+REVTVERJUikvZXhhbXBsZXMKKysJJChNS0RJUl9QKSAkKERFU1RESVIpL21hY3JvcworKwljcCAu
+Li9tYWNyb3MvdGVzdC1kcml2ZXIgJChERVNURElSKS9tYWNyb3MKKysJc2VkIC1pIC1lICdzfF5N
+YWtlZmlsZTp8X01ha2VmaWxlOnwnICQoREVTVERJUikvZXhhbXBsZXMvTWFrZWZpbGUKKysKZGlm
+ZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvcnVu
+LXB0ZXN0IGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9ydW4t
+cHRlc3QKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMjM2ZjY2NwotLS0gL2Rl
+di9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEv
+cnVuLXB0ZXN0CkBAIC0wLDAgKzEsMyBAQAorIyEvYmluL3NoCitjZCBleGFtcGxlcworbWFrZSAt
+ayBjaGVjay1URVNUUwpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xp
+YnhtbCsrXzIuMzUuMy5iYiBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrK18y
+LjM1LjMuYmIKZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IGZiOWNkZDkuLjAwMDAwMDAK
+LS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrXzIuMzUuMy5iYgorKysg
+L2Rldi9udWxsCkBAIC0xLDIyICswLDAgQEAKLVNVTU1BUlkgPSAiQysrIHdyYXBwZXIgZm9yIGxp
+YnhtbCBsaWJyYXJ5IgotREVTQ1JJUFRJT04gPSAiQysrIHdyYXBwZXIgZm9yIGxpYnhtbCBsaWJy
+YXJ5IgotSE9NRVBBR0UgPSAiaHR0cDovL2xpYnhtbHBsdXNwbHVzLnNvdXJjZWZvcmdlLm5ldCIK
+LUJVR1RSQUNLRVIgPSAiaHR0cDovL2J1Z3ppbGxhLmdub21lLm9yZy9idWdsaXN0LmNnaT9wcm9k
+dWN0PWxpYnhtbCUyQiUyQiIKLVNFQ1RJT04gPSAibGlicyIKLUxJQ0VOU0UgPSAiR1BMdjIiCi1M
+SUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT03ZmJjMzM4MzA5YWMzOGZlZmNk
+NjRiMDRiYjkwM2UzNCAiCi0KLVBSID0gInIxIgotCi1TSFJUX1ZFUiA9ICIke0BkLmdldFZhcign
+UFYnLFRydWUpLnNwbGl0KCcuJylbMF19LiR7QGQuZ2V0VmFyKCdQVicsVHJ1ZSkuc3BsaXQoJy4n
+KVsxXX0iCi1TUkNfVVJJID0gIiR7R05PTUVfTUlSUk9SfS8ke0JQTn0vJHtTSFJUX1ZFUn0vJHtC
+UH0udGFyLnh6IgotCi1TUkNfVVJJW21kNXN1bV0gPSAiMTk2YTJkY2RjODRhYjk4N2ZlMzg1MmIz
+ZjI5Y2FmZDciCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiNzE1YTQyMTRiYmZmOTAzNjVjYzg0MDZh
+MjhlNDI3ZmViZDkwNDYxMDA2ZDYwOGZiZGNkY2VhN2ZjOTg5MWVhZiIKLQotREVQRU5EUyA9ICJs
+aWJ4bWwyIGdsaWJtbSIKLQotaW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnCi0KLUZJTEVTXyR7
+UE59LWRvYyArPSAiJHtkYXRhZGlyfS9kZXZoZWxwIgotRklMRVNfJHtQTn0tZGV2ICs9ICIke2xp
+YmRpcn0vbGlieG1sKystMi42L2luY2x1ZGUvbGlieG1sKytjb25maWcuaCIKZGlmZiAtLWdpdCBh
+L21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrK18yLjM3LjEuYmIgYi9tZXRhLW9l
+L3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKytfMi4zNy4xLmJiCm5ldyBmaWxlIG1vZGUgMTAw
+NjQ0CmluZGV4IDAwMDAwMDAuLjYwNDg3N2QKLS0tIC9kZXYvbnVsbAorKysgYi9tZXRhLW9lL3Jl
+Y2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKytfMi4zNy4xLmJiCkBAIC0wLDAgKzEsMzQgQEAKK1NV
+TU1BUlkgPSAiQysrIHdyYXBwZXIgZm9yIGxpYnhtbCBsaWJyYXJ5IgorREVTQ1JJUFRJT04gPSAi
+QysrIHdyYXBwZXIgZm9yIGxpYnhtbCBsaWJyYXJ5IgorSE9NRVBBR0UgPSAiaHR0cDovL2xpYnht
+bHBsdXNwbHVzLnNvdXJjZWZvcmdlLm5ldCIKK0JVR1RSQUNLRVIgPSAiaHR0cDovL2J1Z3ppbGxh
+Lmdub21lLm9yZy9idWdsaXN0LmNnaT9wcm9kdWN0PWxpYnhtbCUyQiUyQiIKK1NFQ1RJT04gPSAi
+bGlicyIKK0xJQ0VOU0UgPSAiR1BMdjIiCitMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZ
+SU5HO21kNT03ZmJjMzM4MzA5YWMzOGZlZmNkNjRiMDRiYjkwM2UzNCAiCisKK1BSID0gInIwIgor
+CitTSFJUX1ZFUiA9ICIke0BkLmdldFZhcignUFYnLFRydWUpLnNwbGl0KCcuJylbMF19LiR7QGQu
+Z2V0VmFyKCdQVicsVHJ1ZSkuc3BsaXQoJy4nKVsxXX0iCitTUkNfVVJJID0gIiR7R05PTUVfTUlS
+Uk9SfS8ke0JQTn0vJHtTSFJUX1ZFUn0vJHtCUH0udGFyLnh6IgorCitTUkNfVVJJW21kNXN1bV0g
+PSAiMmY5MzcyYTZlYmE2ZTQwMjA2YzExZjU1OGE4ZmJjMzIiCitTUkNfVVJJW3NoYTI1NnN1bV0g
+PSAiZjNiMTgzNjAwNTMyYTkyYWYzNTU3MTkyMTAyMjNmODU4ODU3MDkyYjhiMTUzMWM3OTA3MTU1
+YzU5YTZkYjM5ZiIKKworREVQRU5EUyA9ICJsaWJ4bWwyIGdsaWJtbSIKKworaW5oZXJpdCBhdXRv
+dG9vbHMgcGtnY29uZmlnCisKK0ZJTEVTXyR7UE59LWRvYyArPSAiJHtkYXRhZGlyfS9kZXZoZWxw
+IgorRklMRVNfJHtQTn0tZGV2ICs9ICIke2xpYmRpcn0vbGlieG1sKystMi42L2luY2x1ZGUvbGli
+eG1sKytjb25maWcuaCIKKworU1JDX1VSSSArPSAiZmlsZTovL2xpYnhtbCsrX3B0ZXN0LnBhdGNo
+IFwKKyAgICAgICAgICAgIGZpbGU6Ly9ydW4tcHRlc3QiCisKK2luaGVyaXQgcHRlc3QKKworUkRF
+UEVORFNfJHtQTn0tcHRlc3QgKz0gIm1ha2UiCisKK2RvX2NvbXBpbGVfcHRlc3QoKSB7CisgIG9l
+X3J1bm1ha2UgLUMgZXhhbXBsZXMgYnVpbGR0ZXN0Cit9CisKLS0gCjEuNy45LjUKCg==
+
+--_002_AAE0766F5AF36B46BAB7E0EFB9273206331489E794GBTWK10E001Te_--
