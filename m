@@ -1,39 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F3106BF4E
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
+	[195.245.231.150])
+	by mail.openembedded.org (Postfix) with ESMTP id EA4AD6C73F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2014 13:08:41 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id d49so60842eek.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jan 2014 05:08:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8cpzWP/cMWVrQbVVZ8+2B2EF90j4YTV9v+j8IyLMLgo=;
-	b=lfX9S8KGNWtjuzwnfVvDhhahTtmVNsImz/co8Bix+hbtgARuEwsWhniEnDvmw/IH/f
-	o8Z3FOpbVOwVMDXmbYR4TTDRCVZkAQM3K7yUWNSfESxmyqOiMdNfmvVfezyaca//z4g8
-	IU7mAAMl7ybq4HcD57oBs/x8+3pPKD5hGud54MkTkaHVfGb274AaXUmkvB76FZ5dlELW
-	G6CkHLXH0pk+WBlMclaOUakLJKpSdV+Vpm1/N8z3lehZS4fYLDWngSj01oQLuoriVXHb
-	b0OUXIJRO1NPkqYM3rLWLg2WiEGrb/YqzaCWs7WQnwznIzSatqsthALkOpUn9wHCpuMz
-	HaiA==
-X-Received: by 10.14.204.70 with SMTP id g46mr21470721eeo.84.1389100122012;
-	Tue, 07 Jan 2014 05:08:42 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	j46sm179947676eew.18.2014.01.07.05.08.40 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Jan 2014 05:08:41 -0800 (PST)
-Date: Tue, 7 Jan 2014 14:08:49 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140107130849.GP3709@jama>
-References: <cover.1389098317.git.anders@chargestorm.se>
-	<9df199bd032977929fa715af7710e4607a19f91e.1389098317.git.anders@chargestorm.se>
+	Tue,  7 Jan 2014 13:23:59 +0000 (UTC)
+Received: from [85.158.139.19:29480] by server-14.bemta-5.messagelabs.com id
+	DA/C5-24200-FEFFBC25; Tue, 07 Jan 2014 13:23:59 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-6.tower-178.messagelabs.com!1389101038!32370105!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 8602 invoked from network); 7 Jan 2014 13:23:59 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
+	(89.206.228.155)
+	by server-6.tower-178.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 Jan 2014 13:23:59 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Tue, 7 Jan 2014
+	13:23:58 +0000
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Jan 2014 13:23:58 +0000
+Thread-Topic: [oe] Patch to fix libxml++ build failure in meta-oe
+Thread-Index: Ac8LpTziiTKmXMa5RaeXmt3kn1/e7wABNILA
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E797@GBTWK10E001.Technology.local>
+References: <AAE0766F5AF36B46BAB7E0EFB9273206331489E795@GBTWK10E001.Technology.local>
+	<7aae89dde8c24d33afead65e63bf0225@CH1PRD0410HT005.namprd04.prod.outlook.com>
+In-Reply-To: <7aae89dde8c24d33afead65e63bf0225@CH1PRD0410HT005.namprd04.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <9df199bd032977929fa715af7710e4607a19f91e.1389098317.git.anders@chargestorm.se>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: Re: [meta-oe][PATCH 1/1] ktap: add configs for elfutils and ffi
+Subject: Re: Patch to fix libxml++ build failure in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,120 +49,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2014 13:08:42 -0000
-X-Groupsio-MsgNum: 47628
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7a4X6VOqfbl9xMrG"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Jan 2014 13:24:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---7a4X6VOqfbl9xMrG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+PiBTT0IgbGluZSBpcyBtaXNzaW5nLCBidXQgSSd2ZSBhbHJlYWR5IGFkZGVkIGl0IG1hbnVhbGx5
+IGZyb20geW91IGZpcnN0IHZlcnNpb24gb2YgdGhpcyBwYXRjaC4NCj4gaHR0cDovL3BhdGNod29y
+ay5vcGVuZW1iZWRkZWQub3JnL3BhdGNoLzY0MjA3Lw0KPiBzZWVtcyB0byB3b3JrLCB2ZXJzaW9u
+IHdpdGggYXR0YWNoZW1lbnQgd2Fzbid0IHBpY2tlZCBieSBwYXRjaHdvcmsNCg0KT2sgdGhhbmsg
+eW91IGZvciBjb3B5aW5nIG92ZXIgdGhlIFNPQiBsaW5lIG1hbnVhbGx5DQoNCi4uLg0KPj4gKysg
+ICAgICBjcCBNYWtlZmlsZSAkKERFU1RESVIpL2V4YW1wbGVzDQo+PiArKyAgICAgICQoTUtESVJf
+UCkgJChERVNURElSKS9tYWNyb3MNCj4+ICsrICAgICAgY3AgLi4vbWFjcm9zL3Rlc3QtZHJpdmVy
+ICQoREVTVERJUikvbWFjcm9zDQo+PiArKyAgICAgIHNlZCAtaSAtZSAnc3xeTWFrZWZpbGU6fF9N
+YWtlZmlsZTp8JyArKyQoREVTVERJUikvZXhhbXBsZXMvTWFrZWZpbGUNCj4NCj4gVGhlc2UgbGFz
+dCA0IGxpbmVzIGFyZSBtaXNzaW5nIGluIHRoZSBwYXRjaCB5b3UgaGF2ZSBzZW50IGFzIGF0dGFj
+aGVtZW50LCB3aGljaCB2ZXJzaW9uIGlzIHRoZSByaWdodCBvbmU/DQoNClRoZSBsaW5lcyAiY3Ag
+Li4uIGV4YW1wbGVzIiB0byAic2VkIC4uLiBNYWtlZmlsZSIgc2hvdWxkIGJlIHByZXNlbnQNCg0K
+LS0NCk5pY2sNCg0KDQpUaGUgZGV0YWlscyBvZiB0aGlzIGNvbXBhbnkgYXJlIGFzIGZvbGxvd3M6
+DQpHNFMgVGVjaG5vbG9neSBMaW1pdGVkLCBSZWdpc3RlcmVkIE9mZmljZTogQ2hhbGxlbmdlIEhv
+dXNlLCBJbnRlcm5hdGlvbmFsIERyaXZlLCBUZXdrZXNidXJ5LCBHbG91Y2VzdGVyc2hpcmUgR0wy
+MCA4VVEsIFJlZ2lzdGVyZWQgaW4gRW5nbGFuZCBOby4gMjM4MjMzOC4NCg0KVGhpcyBjb21tdW5p
+Y2F0aW9uIG1heSBjb250YWluIGluZm9ybWF0aW9uIHdoaWNoIGlzIGNvbmZpZGVudGlhbCwgcGVy
+c29uYWwgYW5kL29yIHByaXZpbGVnZWQuDQoNCkl0IGlzIGZvciB0aGUgZXhjbHVzaXZlIHVzZSBv
+ZiB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLg0KSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVk
+IHJlY2lwaWVudChzKSwgcGxlYXNlIG5vdGUgdGhhdCBhbnkgZGlzdHJpYnV0aW9uLCBmb3J3YXJk
+aW5nLCBjb3B5aW5nIG9yIHVzZSBvZiB0aGlzIGNvbW11bmljYXRpb24gb3IgdGhlIGluZm9ybWF0
+aW9uIGluIGl0IGlzIHN0cmljdGx5IHByb2hpYml0ZWQuDQoNCkFueSBwZXJzb25hbCB2aWV3cyBl
+eHByZXNzZWQgaW4gdGhpcyBlLW1haWwgYXJlIHRob3NlIG9mIHRoZSBpbmRpdmlkdWFsIHNlbmRl
+ciBhbmQgdGhlIGNvbXBhbnkgZG9lcyBub3QgZW5kb3JzZSBvciBhY2NlcHQgcmVzcG9uc2liaWxp
+dHkgZm9yIHRoZW0uDQoNClByaW9yIHRvIHRha2luZyBhbnkgYWN0aW9uIGJhc2VkIHVwb24gdGhp
+cyBlLW1haWwgbWVzc2FnZSwgeW91IHNob3VsZCBzZWVrIGFwcHJvcHJpYXRlIGNvbmZpcm1hdGlv
+biBvZiBpdHMgYXV0aGVudGljaXR5Lg0KDQpUaGlzIGUtbWFpbCBoYXMgYmVlbiBzY2FubmVkIGZv
+ciBhbGwgdmlydXNlcyBieSBNZXNzYWdlTGFicy4NCg==
 
-On Tue, Jan 07, 2014 at 01:39:49PM +0100, Anders Darander wrote:
-> libelf (elfutils) is required for resolving symbols in DSO and for sdt (t=
-aken
-> from ktap docs). The earlier v0.4 recipe built ktap against libelf if it =
-was
-> found, thus enable it per default.
->=20
-> FFI needs to be enabled for both userspace and kernel module. Currently, =
-it is
-> only supported for x86_64 (enforced when building ktap-module).
->=20
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
-> ---
->  meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb |  5 ++++-
->  meta-oe/recipes-kernel/ktap/ktap.inc           |  2 ++
->  meta-oe/recipes-kernel/ktap/ktap_0.4.bb        | 12 +++++++++++-
->  3 files changed, 17 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb b/meta-oe/rec=
-ipes-kernel/ktap/ktap-module_0.4.bb
-> index 12167ea..ce6885c 100644
-> --- a/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
-> +++ b/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
-> @@ -6,8 +6,11 @@ DESCRIPTION =3D "KTAP is a scripting dynamic tracing too=
-l for Linux"
-> =20
->  inherit module
-> =20
-> +# Available package configs: ffi (only supported on x86_64)
-> +PACKAGECONFIG ?=3D ""
-> +
->  # Only build the module
-> -MAKE_TARGETS =3D "mod"
-> +MAKE_TARGETS =3D "${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=3D1', ''=
-, d)} mod"
-> =20
->  # Kernel module packages MUST begin with 'kernel-module-', otherwise
->  # multilib image generation can fail.
-> diff --git a/meta-oe/recipes-kernel/ktap/ktap.inc b/meta-oe/recipes-kerne=
-l/ktap/ktap.inc
-> index 7e60453..93a4e2c 100644
-> --- a/meta-oe/recipes-kernel/ktap/ktap.inc
-> +++ b/meta-oe/recipes-kernel/ktap/ktap.inc
-> @@ -9,3 +9,5 @@ SRC_URI =3D "git://github.com/ktap/ktap.git"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
-> +# Package config is abused as a general compile time configuration tool.
-> +PACKAGECONFIG[ffi] =3D ""
-> diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb b/meta-oe/recipes-ke=
-rnel/ktap/ktap_0.4.bb
-> index f5dd62f..a703aec 100644
-> --- a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-> +++ b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-> @@ -5,8 +5,18 @@ require ktap.inc
->  SUMMARY =3D "KTAP is a scripting dynamic tracing tool for Linux"
->  DEPENDS =3D "ktap-module"
-> =20
-> +#Available package configs:
-> +# libelf - needed to resolve symbols in DSO and for sdt
-> +# ffi    - only supports x86_64 for now!. Needs to be enabled for ktap-m=
-odule too.
-> +PACKAGECONFIG ?=3D "libelf"
-> +
-> +PACKAGECONFIG[libelf] =3D ",,elfutils"
-> +PACKAGECONFIG[ffi] =3D ""
-
-This line is already in ktap.inc
-
-Otherwise looks good, I like deterministic shiny things.
-
-> +
->  # Only build the userspace app
-> -EXTRA_OEMAKE =3D "ktap"
-> +EXTRA_OEMAKE =3D "${@base_contains('PACKAGECONFIG', 'libelf', '', 'NO_LI=
-BELF=3D1', d)} \
-> +             ${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=3D1', '', d)}=
- \
-> +             ktap"
-> =20
->  do_install() {
->      install -d ${D}${bindir}
-> --=20
-> 1.8.5.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---7a4X6VOqfbl9xMrG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLL/GEACgkQN1Ujt2V2gBxN9gCcDAya3056HigZ9fJKpZvUznYJ
-jRUAoIWlDmwJ3nmDHtQYvAapAYUHxwcj
-=X2uk
------END PGP SIGNATURE-----
-
---7a4X6VOqfbl9xMrG--
