@@ -1,25 +1,27 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C49A6CF40
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AEE26D006
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 09:32:32 +0000 (UTC)
+	Wed,  8 Jan 2014 09:32:34 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s089WXwb001952
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s089WZLK014524
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Jan 2014 01:32:33 -0800 (PST)
+	Wed, 8 Jan 2014 01:32:35 -0800 (PST)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 8 Jan 2014 01:32:32 -0800
+	14.2.347.0; Wed, 8 Jan 2014 01:32:34 -0800
 From: <wenzong.fan@windriver.com>
 To: <xin.ouyang@windriver.com>, <mark.hatle@windriver.com>,
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Jan 2014 04:32:20 -0500
-Message-ID: <cover.1389171235.git.wenzong.fan@windriver.com>
+Date: Wed, 8 Jan 2014 04:32:21 -0500
+Message-ID: <252c9fb3020d2323753a32907632ffd3892de7fd.1389171235.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1389171235.git.wenzong.fan@windriver.com>
+References: <cover.1389171235.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-selinux][PATCH 00/10] selinux userspace: uprev packages to release 20131030
+Subject: [meta-selinux][PATCH 01/10] selinux userspace: uprev packages to release 20131030
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,123 +35,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 09:32:33 -0000
+X-List-Received-Date: Wed, 08 Jan 2014 09:32:34 -0000
 Content-Type: text/plain
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Changes:
-1) Uprev selinux packages to release 20131030;
-2) Fix build dependency to libsemanage;
-3) Fix QA issues to policycoreutils;
-4) Update LIC_FILES_CHKSUM for selinux packagegroups.
+Upreved packages:
+ - checkpolicy to 2.2
+ - libselinux to 2.2
+ - libsemanage to 2.2
+ - libsepol to 2.2
+ - policycoreutils to 2.2.5
+ - sepolgen to 1.2.1
 
-Some Tests:
-1) build test:
-- add meta-selinux path to conf/bblayers.conf;
-- add DISTRO_FEATURES_append=" pam selinux" to conf/local.conf;
-- build selinux image:
-  $ bitbake core-image-selinux
+Migrate patches in next commits.
 
-- add below configs to conf/local.conf and run image build:
-  PREFERRED_VERSION_checkpolicy = "2.2+gitAUTOINC+edc2e99687"
-  PREFERRED_VERSION_libselinux = "2.2+gitAUTOINC+edc2e99687"
-  PREFERRED_VERSION_libsemanage = "2.2+gitAUTOINC+edc2e99687"
-  PREFERRED_VERSION_libsepol = "2.2+gitAUTOINC+edc2e99687"
-  PREFERRED_VERSION_policycoreutils = "2.2.5+gitAUTOINC+edc2e99687"
-  PREFERRED_VERSION_sepolgen = "1.2.1+gitAUTOINC+edc2e99687"
-
-All builds successfully.
-
-2) basic verification on target:
-$ runqemu qemux86 core-image-selinux ext3 nographic qemuparams="-m 1024"
-
-qemux86 login: root
-root@qemux86:~# id -Z
-root:sysadm_r:sysadm_t:s0-s15:c0.c1023
-
-root@qemux86:~# sestatus
-SELinux status:                 enabled
-SELinuxfs mount:                /sys/fs/selinux
-SELinux root directory:         /etc/selinux
-Loaded policy name:             mls
-Current mode:                   enforcing
-Mode from config file:          enforcing
-Policy MLS status:              enabled
-Policy deny_unknown status:     allowed
-Max kernel policy version:      28
-
-
-The following changes since commit 2209cb5fc21c1ad5a7471897528ed64170f70219:
-
-  policy: Create compressed_policy distro feature (2013-12-05 09:03:41 -0500)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib wenzong/selinux-uprev
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/selinux-uprev
-
-Wenzong Fan (10):
-  selinux userspace: uprev packages to release 20131030
-  checkpolicy: migrate SRC_URI to 2.2
-  libselinux: migrate SRC_URI and patches to 2.2
-  libsemanage: migrate SRC_URI to 2.2
-  libsepol: migrate SRC_URI to 2.2
-  policycoreutils: migrate SRC_URI and patches to 2.2.5
-  sepolgen: migrate SRC_URI to 1.2.1
-  libsemanage: add audit dependency
-  policycoreutils: fix QA issues
-  selinux packagegroups: update LIC_FILES_CHKSUM
-
- recipes-security/audit/audit_2.3.2.bb              |    8 ++++-
- .../packagegroups/packagegroup-core-selinux.bb     |    2 +-
- .../packagegroups/packagegroup-selinux-minimal.bb  |    2 +-
- .../packagegroup-selinux-policycoreutils.bb        |    2 +-
- recipes-security/selinux/checkpolicy_2.1.12.bb     |    9 ------
- recipes-security/selinux/checkpolicy_2.2.bb        |    9 ++++++
- recipes-security/selinux/checkpolicy_git.bb        |    2 +-
- .../libselinux-fix-init-load-policy.patch          |   27 ----------------
- .../libselinux/libselinux-pcre-link-order.patch    |   31 ------------------
- .../{libselinux_2.1.13.bb => libselinux_2.2.bb}    |    8 ++---
- recipes-security/selinux/libselinux_git.bb         |   10 ++++--
- recipes-security/selinux/libsemanage.inc           |    2 +-
- .../libsemanage/libsemanage-fix-path-nologin.patch |    9 +++---
- .../{libsemanage_2.1.10.bb => libsemanage_2.2.bb}  |    6 ++--
- recipes-security/selinux/libsemanage_git.bb        |    3 +-
- recipes-security/selinux/libsepol.inc              |    5 ++-
- ...ibsepol-Change-ranlib-for-cross-compiling.patch |   31 ------------------
- recipes-security/selinux/libsepol_2.1.9.bb         |   11 -------
- recipes-security/selinux/libsepol_2.2.bb           |    9 ++++++
- recipes-security/selinux/libsepol_git.bb           |    4 +--
- recipes-security/selinux/policycoreutils.inc       |   12 ++++---
- ...policycoreutils-fix-sepolicy-install-path.patch |   18 +++++------
- .../policycoreutils-fix-strict-prototypes.patch    |   34 --------------------
- .../policycoreutils-make-O_CLOEXEC-optional.patch  |   28 ++++++++--------
- ...oreutils_2.1.14.bb => policycoreutils_2.2.5.bb} |    9 +++---
- recipes-security/selinux/policycoreutils_git.bb    |    8 +++--
- recipes-security/selinux/selinux_20130423.inc      |   12 -------
- recipes-security/selinux/selinux_20131030.inc      |   12 +++++++
- recipes-security/selinux/selinux_git.inc           |    4 +--
- recipes-security/selinux/sepolgen_1.1.9.bb         |    9 ------
- recipes-security/selinux/sepolgen_1.2.1.bb         |    9 ++++++
- recipes-security/selinux/sepolgen_git.bb           |    2 +-
- 32 files changed, 117 insertions(+), 230 deletions(-)
- delete mode 100644 recipes-security/selinux/checkpolicy_2.1.12.bb
- create mode 100644 recipes-security/selinux/checkpolicy_2.2.bb
- delete mode 100644 recipes-security/selinux/libselinux/libselinux-fix-init-load-policy.patch
- delete mode 100644 recipes-security/selinux/libselinux/libselinux-pcre-link-order.patch
- rename recipes-security/selinux/{libselinux_2.1.13.bb => libselinux_2.2.bb} (58%)
- rename recipes-security/selinux/{libsemanage_2.1.10.bb => libsemanage_2.2.bb} (70%)
- delete mode 100644 recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch
- delete mode 100644 recipes-security/selinux/libsepol_2.1.9.bb
- create mode 100644 recipes-security/selinux/libsepol_2.2.bb
- delete mode 100644 recipes-security/selinux/policycoreutils/policycoreutils-fix-strict-prototypes.patch
- rename recipes-security/selinux/{policycoreutils_2.1.14.bb => policycoreutils_2.2.5.bb} (55%)
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ .../{checkpolicy_2.1.12.bb => checkpolicy_2.2.bb}  |    0
+ .../{libselinux_2.1.13.bb => libselinux_2.2.bb}    |    0
+ .../{libsemanage_2.1.10.bb => libsemanage_2.2.bb}  |    0
+ .../selinux/{libsepol_2.1.9.bb => libsepol_2.2.bb} |    0
+ ...oreutils_2.1.14.bb => policycoreutils_2.2.5.bb} |    0
+ recipes-security/selinux/selinux_20130423.inc      |   12 ------------
+ recipes-security/selinux/selinux_20131030.inc      |   12 ++++++++++++
+ recipes-security/selinux/selinux_git.inc           |    4 +---
+ .../{sepolgen_1.1.9.bb => sepolgen_1.2.1.bb}       |    0
+ 9 files changed, 13 insertions(+), 15 deletions(-)
+ rename recipes-security/selinux/{checkpolicy_2.1.12.bb => checkpolicy_2.2.bb} (100%)
+ rename recipes-security/selinux/{libselinux_2.1.13.bb => libselinux_2.2.bb} (100%)
+ rename recipes-security/selinux/{libsemanage_2.1.10.bb => libsemanage_2.2.bb} (100%)
+ rename recipes-security/selinux/{libsepol_2.1.9.bb => libsepol_2.2.bb} (100%)
+ rename recipes-security/selinux/{policycoreutils_2.1.14.bb => policycoreutils_2.2.5.bb} (100%)
  delete mode 100644 recipes-security/selinux/selinux_20130423.inc
  create mode 100644 recipes-security/selinux/selinux_20131030.inc
- delete mode 100644 recipes-security/selinux/sepolgen_1.1.9.bb
- create mode 100644 recipes-security/selinux/sepolgen_1.2.1.bb
+ rename recipes-security/selinux/{sepolgen_1.1.9.bb => sepolgen_1.2.1.bb} (100%)
 
+diff --git a/recipes-security/selinux/checkpolicy_2.1.12.bb b/recipes-security/selinux/checkpolicy_2.2.bb
+similarity index 100%
+rename from recipes-security/selinux/checkpolicy_2.1.12.bb
+rename to recipes-security/selinux/checkpolicy_2.2.bb
+diff --git a/recipes-security/selinux/libselinux_2.1.13.bb b/recipes-security/selinux/libselinux_2.2.bb
+similarity index 100%
+rename from recipes-security/selinux/libselinux_2.1.13.bb
+rename to recipes-security/selinux/libselinux_2.2.bb
+diff --git a/recipes-security/selinux/libsemanage_2.1.10.bb b/recipes-security/selinux/libsemanage_2.2.bb
+similarity index 100%
+rename from recipes-security/selinux/libsemanage_2.1.10.bb
+rename to recipes-security/selinux/libsemanage_2.2.bb
+diff --git a/recipes-security/selinux/libsepol_2.1.9.bb b/recipes-security/selinux/libsepol_2.2.bb
+similarity index 100%
+rename from recipes-security/selinux/libsepol_2.1.9.bb
+rename to recipes-security/selinux/libsepol_2.2.bb
+diff --git a/recipes-security/selinux/policycoreutils_2.1.14.bb b/recipes-security/selinux/policycoreutils_2.2.5.bb
+similarity index 100%
+rename from recipes-security/selinux/policycoreutils_2.1.14.bb
+rename to recipes-security/selinux/policycoreutils_2.2.5.bb
+diff --git a/recipes-security/selinux/selinux_20130423.inc b/recipes-security/selinux/selinux_20130423.inc
+deleted file mode 100644
+index d692a57..0000000
+--- a/recipes-security/selinux/selinux_20130423.inc
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SELINUX_RELEASE = "20130423"
+-
+-SRC_URI = "http://userspace.selinuxproject.org/releases/${SELINUX_RELEASE}/${BPN}-${PV}.tar.gz"
+-
+-PREFERRED_VERSION_checkpolicy = "2.1.12"
+-PREFERRED_VERSION_libselinux = "2.1.13"
+-PREFERRED_VERSION_libsemanage = "2.1.10"
+-PREFERRED_VERSION_libsepol = "2.1.9"
+-PREFERRED_VERSION_policycoreutils = "2.1.14"
+-PREFERRED_VERSION_sepolgen = "1.1.9"
+-
+-include selinux_common.inc
+diff --git a/recipes-security/selinux/selinux_20131030.inc b/recipes-security/selinux/selinux_20131030.inc
+new file mode 100644
+index 0000000..807a37c
+--- /dev/null
++++ b/recipes-security/selinux/selinux_20131030.inc
+@@ -0,0 +1,12 @@
++SELINUX_RELEASE = "20131030"
++
++SRC_URI = "http://userspace.selinuxproject.org/releases/${SELINUX_RELEASE}/${BPN}-${PV}.tar.gz"
++
++PREFERRED_VERSION_checkpolicy = "2.2"
++PREFERRED_VERSION_libselinux = "2.2"
++PREFERRED_VERSION_libsemanage = "2.2"
++PREFERRED_VERSION_libsepol = "2.2"
++PREFERRED_VERSION_policycoreutils = "2.2.5"
++PREFERRED_VERSION_sepolgen = "1.2.1"
++
++include selinux_common.inc
+diff --git a/recipes-security/selinux/selinux_git.inc b/recipes-security/selinux/selinux_git.inc
+index 37ea8e8..bb64d0d 100644
+--- a/recipes-security/selinux/selinux_git.inc
++++ b/recipes-security/selinux/selinux_git.inc
+@@ -1,8 +1,6 @@
+-SRCREV = "3f52a123af40bae33bde2a1f2ecfb2320b61f9ad"
++SRCREV = "edc2e99687b050d5be21a78a66d038aa1fc068d9"
+ 
+ SRC_URI = "git://oss.tresys.com/git/selinux.git;protocol=http"
+-SRC_URI[md5sum] = "4ec64a0d24aaa77c80b86e74d271e464"
+-SRC_URI[sha256sum] = "9c8a8643c9a4dd0eb76fcda1420d636b750b84b27656c6f8bc6886a829d7e520"
+ 
+ S = "${WORKDIR}/git/${BPN}"
+ 
+diff --git a/recipes-security/selinux/sepolgen_1.1.9.bb b/recipes-security/selinux/sepolgen_1.2.1.bb
+similarity index 100%
+rename from recipes-security/selinux/sepolgen_1.1.9.bb
+rename to recipes-security/selinux/sepolgen_1.2.1.bb
 -- 
 1.7.9.5
 
