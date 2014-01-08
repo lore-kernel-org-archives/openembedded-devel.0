@@ -1,38 +1,25 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
-	[195.245.231.145])
-	by mail.openembedded.org (Postfix) with ESMTP id E2F0D6CF1B
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C49A6CF40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 09:12:36 +0000 (UTC)
-Received: from [85.158.139.51:22862] by server-9.bemta-5.messagelabs.com id
-	40/9A-15098-4861DC25; Wed, 08 Jan 2014 09:12:36 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-4.tower-180.messagelabs.com!1389172355!31529812!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 11382 invoked from network); 8 Jan 2014 09:12:36 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-4.tower-180.messagelabs.com with RC4-SHA encrypted SMTP;
-	8 Jan 2014 09:12:36 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 8 Jan 2014
-	09:12:35 +0000
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
+	Wed,  8 Jan 2014 09:32:32 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s089WXwb001952
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 8 Jan 2014 01:32:33 -0800 (PST)
+Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Wed, 8 Jan 2014 01:32:32 -0800
+From: <wenzong.fan@windriver.com>
+To: <xin.ouyang@windriver.com>, <mark.hatle@windriver.com>,
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Jan 2014 09:12:34 +0000
-Thread-Topic: Re: [oe] Patch to fix libxml++ build failure in meta-oe
-Thread-Index: Ac8MUcdWx79Wbv1HRLeyDDpUgjqRRQ==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E79F@GBTWK10E001.Technology.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+Date: Wed, 8 Jan 2014 04:32:20 -0500
+Message-ID: <cover.1389171235.git.wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: Re: Patch to fix libxml++ build failure in meta-oe
+Subject: [meta-selinux][PATCH 00/10] selinux userspace: uprev packages to release 20131030
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,194 +33,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 09:12:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Jan 2014 09:32:33 -0000
+Content-Type: text/plain
 
-From 172c9f6886a78d90f95560d61b92b7afa7098251 Mon Sep 17 00:00:00 2001
-From: Nick Lewis <nick.lewis@usa.g4s.com>
-Date: Wed, 8 Jan 2014 08:43:50 +0000
-Subject: [PATCH] Use libxml++ version 2.37.1 and add ptest support
+From: Wenzong Fan <wenzong.fan@windriver.com>
+
+Changes:
+1) Uprev selinux packages to release 20131030;
+2) Fix build dependency to libsemanage;
+3) Fix QA issues to policycoreutils;
+4) Update LIC_FILES_CHKSUM for selinux packagegroups.
+
+Some Tests:
+1) build test:
+- add meta-selinux path to conf/bblayers.conf;
+- add DISTRO_FEATURES_append=" pam selinux" to conf/local.conf;
+- build selinux image:
+  $ bitbake core-image-selinux
+
+- add below configs to conf/local.conf and run image build:
+  PREFERRED_VERSION_checkpolicy = "2.2+gitAUTOINC+edc2e99687"
+  PREFERRED_VERSION_libselinux = "2.2+gitAUTOINC+edc2e99687"
+  PREFERRED_VERSION_libsemanage = "2.2+gitAUTOINC+edc2e99687"
+  PREFERRED_VERSION_libsepol = "2.2+gitAUTOINC+edc2e99687"
+  PREFERRED_VERSION_policycoreutils = "2.2.5+gitAUTOINC+edc2e99687"
+  PREFERRED_VERSION_sepolgen = "1.2.1+gitAUTOINC+edc2e99687"
+
+All builds successfully.
+
+2) basic verification on target:
+$ runqemu qemux86 core-image-selinux ext3 nographic qemuparams="-m 1024"
+
+qemux86 login: root
+root@qemux86:~# id -Z
+root:sysadm_r:sysadm_t:s0-s15:c0.c1023
+
+root@qemux86:~# sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             mls
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Max kernel policy version:      28
 
 
-Signed-off-by: Nick Lewis <nick.lewis@usa.g4s.com>
----
- .../libxml/libxml++-2.37.1/libxml++_ptest.patch    |   73 ++++++++++++++++=
-++++
- .../recipes-core/libxml/libxml++-2.37.1/run-ptest  |    3 +
- meta-oe/recipes-core/libxml/libxml++_2.37.1.bb     |   34 +++++++++
- 3 files changed, 110 insertions(+)
- create mode 100644 meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_pt=
-est.patch
- create mode 100644 meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
- create mode 100644 meta-oe/recipes-core/libxml/libxml++_2.37.1.bb
+The following changes since commit 2209cb5fc21c1ad5a7471897528ed64170f70219:
 
-diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.pat=
-ch b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-new file mode 100644
-index 0000000..a18822f
---- /dev/null
-+++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-@@ -0,0 +1,73 @@
-+diff --git a/Makefile.am b/Makefile.am
-+index d4aadb1..0e36756 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -253,5 +253,8 @@ post-html: docs/index.html
-+       rsync $(rsync_args) -r docs/index.html $$USER,libxmlplusplus@web.so=
-urceforge.net:$(web_path_project)
-+       rsync $(rsync_args) -r examples $$USER,libxmlplusplus@web.sourcefor=
-ge.net:$(web_path_project)
-+
-++install-ptest:
-++      make -C examples install-ptest
-++
-+ # Optional: auto-generate the ChangeLog file from the git log on make dis=
-t
-+ include $(top_srcdir)/macros/dist-changelog.am
-+diff --git a/examples/Makefile.am b/examples/Makefile.am
-+index d9541ca..c28b49c 100644
-+--- a/examples/Makefile.am
-++++ b/examples/Makefile.am
-+@@ -36,6 +36,23 @@ check_PROGRAMS =3D \
-+   schemavalidation/schemavalidation \
-+   textreader/textreader
-+
-++check_DOTLIBS =3D \
-++  dom_build/.libs/dom_build \
-++  dom_parse_entities/.libs/dom_parse_entities \
-++  dom_parser/.libs/dom_parser \
-++  dom_parser_raw/.libs/dom_parser_raw \
-++  dom_read_write/.libs/dom_read_write \
-++  dom_xinclude/.libs/dom_xinclude \
-++  dom_xpath/.libs/dom_xpath \
-++  dtdvalidation/.libs/dtdvalidation \
-++  import_node/.libs/import_node \
-++  sax_exception/.libs/sax_exception \
-++  sax_parser/.libs/sax_parser \
-++  sax_parser_build_dom/.libs/sax_parser_build_dom \
-++  sax_parser_entities/.libs/sax_parser_entities \
-++  schemavalidation/.libs/schemavalidation \
-++  textreader/.libs/textreader
-++
-+ # Shell scripts that call the example programs.
-+ check_SCRIPTS =3D \
-+   dom_build/make_check.sh \
-+@@ -147,10 +164,10 @@ dist_noinst_DATA =3D \
-+ # file are located in different directories.
-+ dom_read_write/make_check.sh: Makefile
-+       echo '# Generated and used by "make check"' >$@
-+-      echo 'dom_read_write/dom_read_write "$(srcdir)/dom_read_write/examp=
-le.xml" dom_read_write/example_output.xml >/dev/null' >>$@
-++      echo 'dom_read_write/.libs/dom_read_write "$(srcdir)/dom_read_write=
-/example.xml" dom_read_write/example_output.xml >/dev/null' >>$@
-+       chmod +x $@
-+
-+-script_template =3D cd "$(srcdir)/<!progname!>" && "$(abs_builddir)/<!pro=
-gname!>/<!progname!>" >/dev/null
-++script_template =3D cd "$(srcdir)/<!progname!>" && ".libs/<!progname!>" >=
-/dev/null
-+ standard_scripts =3D $(filter-out dom_read_write/make_check.sh,$(check_SC=
-RIPTS))
-+
-+ # All other script files are generated like so:
-+@@ -162,3 +179,18 @@ $(standard_scripts): Makefile
-+ CLEANFILES =3D \
-+   dom_read_write/example_output.xml \
-+   $(check_SCRIPTS)
-++
-++buildtest: all
-++      $(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_SCRIPTS)
-++      $(MAKE) $(AM_MAKEFLAGS) buildtest-TESTS
-++
-++install-ptest:
-++      $(MKDIR_P) $(DESTDIR)/examples
-++      cp --parents $(check_DOTLIBS) $(DESTDIR)/examples
-++      cp --parents $(check_SCRIPTS) $(DESTDIR)/examples
-++      cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples
-++      cp Makefile $(DESTDIR)/examples
-++      $(MKDIR_P) $(DESTDIR)/macros
-++      cp ../macros/test-driver $(DESTDIR)/macros
-++      sed -i -e 's|^Makefile:|_Makefile:|' $(DESTDIR)/examples/Makefile
-++
-diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest b/meta-o=
-e/recipes-core/libxml/libxml++-2.37.1/run-ptest
-new file mode 100644
-index 0000000..236f667
---- /dev/null
-+++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+cd examples
-+make -k check-TESTS
-diff --git a/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb b/meta-oe/recip=
-es-core/libxml/libxml++_2.37.1.bb
-new file mode 100644
-index 0000000..604877d
---- /dev/null
-+++ b/meta-oe/recipes-core/libxml/libxml++_2.37.1.bb
-@@ -0,0 +1,34 @@
-+SUMMARY =3D "C++ wrapper for libxml library"
-+DESCRIPTION =3D "C++ wrapper for libxml library"
-+HOMEPAGE =3D "http://libxmlplusplus.sourceforge.net"
-+BUGTRACKER =3D "http://bugzilla.gnome.org/buglist.cgi?product=3Dlibxml%2B%=
-2B"
-+SECTION =3D "libs"
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903e3=
-4 "
-+
-+PR =3D "r0"
-+
-+SHRT_VER =3D "${@d.getVar('PV',True).split('.')[0]}.${@d.getVar('PV',True)=
-.split('.')[1]}"
-+SRC_URI =3D "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz"
-+
-+SRC_URI[md5sum] =3D "2f9372a6eba6e40206c11f558a8fbc32"
-+SRC_URI[sha256sum] =3D "f3b183600532a92af355719210223f858857092b8b1531c790=
-7155c59a6db39f"
-+
-+DEPENDS =3D "libxml2 glibmm"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN}-doc +=3D "${datadir}/devhelp"
-+FILES_${PN}-dev +=3D "${libdir}/libxml++-2.6/include/libxml++config.h"
-+
-+SRC_URI +=3D "file://libxml++_ptest.patch \
-+            file://run-ptest"
-+
-+inherit ptest
-+
-+RDEPENDS_${PN}-ptest +=3D "make"
-+
-+do_compile_ptest() {
-+  oe_runmake -C examples buildtest
-+}
-+
---
+  policy: Create compressed_policy distro feature (2013-12-05 09:03:41 -0500)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib wenzong/selinux-uprev
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/selinux-uprev
+
+Wenzong Fan (10):
+  selinux userspace: uprev packages to release 20131030
+  checkpolicy: migrate SRC_URI to 2.2
+  libselinux: migrate SRC_URI and patches to 2.2
+  libsemanage: migrate SRC_URI to 2.2
+  libsepol: migrate SRC_URI to 2.2
+  policycoreutils: migrate SRC_URI and patches to 2.2.5
+  sepolgen: migrate SRC_URI to 1.2.1
+  libsemanage: add audit dependency
+  policycoreutils: fix QA issues
+  selinux packagegroups: update LIC_FILES_CHKSUM
+
+ recipes-security/audit/audit_2.3.2.bb              |    8 ++++-
+ .../packagegroups/packagegroup-core-selinux.bb     |    2 +-
+ .../packagegroups/packagegroup-selinux-minimal.bb  |    2 +-
+ .../packagegroup-selinux-policycoreutils.bb        |    2 +-
+ recipes-security/selinux/checkpolicy_2.1.12.bb     |    9 ------
+ recipes-security/selinux/checkpolicy_2.2.bb        |    9 ++++++
+ recipes-security/selinux/checkpolicy_git.bb        |    2 +-
+ .../libselinux-fix-init-load-policy.patch          |   27 ----------------
+ .../libselinux/libselinux-pcre-link-order.patch    |   31 ------------------
+ .../{libselinux_2.1.13.bb => libselinux_2.2.bb}    |    8 ++---
+ recipes-security/selinux/libselinux_git.bb         |   10 ++++--
+ recipes-security/selinux/libsemanage.inc           |    2 +-
+ .../libsemanage/libsemanage-fix-path-nologin.patch |    9 +++---
+ .../{libsemanage_2.1.10.bb => libsemanage_2.2.bb}  |    6 ++--
+ recipes-security/selinux/libsemanage_git.bb        |    3 +-
+ recipes-security/selinux/libsepol.inc              |    5 ++-
+ ...ibsepol-Change-ranlib-for-cross-compiling.patch |   31 ------------------
+ recipes-security/selinux/libsepol_2.1.9.bb         |   11 -------
+ recipes-security/selinux/libsepol_2.2.bb           |    9 ++++++
+ recipes-security/selinux/libsepol_git.bb           |    4 +--
+ recipes-security/selinux/policycoreutils.inc       |   12 ++++---
+ ...policycoreutils-fix-sepolicy-install-path.patch |   18 +++++------
+ .../policycoreutils-fix-strict-prototypes.patch    |   34 --------------------
+ .../policycoreutils-make-O_CLOEXEC-optional.patch  |   28 ++++++++--------
+ ...oreutils_2.1.14.bb => policycoreutils_2.2.5.bb} |    9 +++---
+ recipes-security/selinux/policycoreutils_git.bb    |    8 +++--
+ recipes-security/selinux/selinux_20130423.inc      |   12 -------
+ recipes-security/selinux/selinux_20131030.inc      |   12 +++++++
+ recipes-security/selinux/selinux_git.inc           |    4 +--
+ recipes-security/selinux/sepolgen_1.1.9.bb         |    9 ------
+ recipes-security/selinux/sepolgen_1.2.1.bb         |    9 ++++++
+ recipes-security/selinux/sepolgen_git.bb           |    2 +-
+ 32 files changed, 117 insertions(+), 230 deletions(-)
+ delete mode 100644 recipes-security/selinux/checkpolicy_2.1.12.bb
+ create mode 100644 recipes-security/selinux/checkpolicy_2.2.bb
+ delete mode 100644 recipes-security/selinux/libselinux/libselinux-fix-init-load-policy.patch
+ delete mode 100644 recipes-security/selinux/libselinux/libselinux-pcre-link-order.patch
+ rename recipes-security/selinux/{libselinux_2.1.13.bb => libselinux_2.2.bb} (58%)
+ rename recipes-security/selinux/{libsemanage_2.1.10.bb => libsemanage_2.2.bb} (70%)
+ delete mode 100644 recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch
+ delete mode 100644 recipes-security/selinux/libsepol_2.1.9.bb
+ create mode 100644 recipes-security/selinux/libsepol_2.2.bb
+ delete mode 100644 recipes-security/selinux/policycoreutils/policycoreutils-fix-strict-prototypes.patch
+ rename recipes-security/selinux/{policycoreutils_2.1.14.bb => policycoreutils_2.2.5.bb} (55%)
+ delete mode 100644 recipes-security/selinux/selinux_20130423.inc
+ create mode 100644 recipes-security/selinux/selinux_20131030.inc
+ delete mode 100644 recipes-security/selinux/sepolgen_1.1.9.bb
+ create mode 100644 recipes-security/selinux/sepolgen_1.2.1.bb
+
+-- 
 1.7.9.5
 
-
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
 
