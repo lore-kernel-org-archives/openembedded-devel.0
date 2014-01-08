@@ -1,27 +1,43 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A9E336D179
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
+	[193.109.254.119])
+	by mail.openembedded.org (Postfix) with ESMTP id 517366D09D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 09:32:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s089Wq3M001970
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Jan 2014 01:32:52 -0800 (PST)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 8 Jan 2014 01:32:52 -0800
-From: <wenzong.fan@windriver.com>
-To: <xin.ouyang@windriver.com>, <mark.hatle@windriver.com>,
+	Wed,  8 Jan 2014 10:00:42 +0000 (UTC)
+Received: from [85.158.140.195:45942] by server-15.bemta-14.messagelabs.com id
+	95/CD-22186-AC12DC25; Wed, 08 Jan 2014 10:00:42 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-3.tower-193.messagelabs.com!1389175242!13963380!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 23681 invoked from network); 8 Jan 2014 10:00:42 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
+	(89.206.228.155)
+	by server-3.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
+	8 Jan 2014 10:00:42 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 8 Jan 2014
+	10:00:42 +0000
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Jan 2014 04:32:30 -0500
-Message-ID: <2bfa3f4b33f050d63fa6d3a42193810c2d5d69fd.1389171235.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1389171235.git.wenzong.fan@windriver.com>
-References: <cover.1389171235.git.wenzong.fan@windriver.com>
+Date: Wed, 8 Jan 2014 10:00:41 +0000
+Thread-Topic: [oe] Patch to fix libxml++ build failure in meta-oe
+Thread-Index: Ac8LpTziiTKmXMa5RaeXmt3kn1/e7wABNILAAClW1vAAAYJhkA==
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E7A1@GBTWK10E001.Technology.local>
+References: <AAE0766F5AF36B46BAB7E0EFB9273206331489E795@GBTWK10E001.Technology.local>
+	<7aae89dde8c24d33afead65e63bf0225@CH1PRD0410HT005.namprd04.prod.outlook.com>
+	<19ea91c55bc945d5b54695d25bcbd2d7@CH1PRD0410HT004.namprd04.prod.outlook.com>
+	<abe23dd392e240d4bb004f4ad944dce8@CH1PRD0410HT003.namprd04.prod.outlook.com>
+In-Reply-To: <abe23dd392e240d4bb004f4ad944dce8@CH1PRD0410HT003.namprd04.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Subject: [meta-selinux][PATCH 10/10] selinux packagegroups: update LIC_FILES_CHKSUM
+Subject: Re: Patch to fix libxml++ build failure in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,55 +51,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 09:32:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 08 Jan 2014 10:00:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+> I will have another go at generating and sending the patch
+I now understand the problem. I am being defeated by my mail client. It is =
+spuriously adding line breaks and various "+" and tabs for the following li=
+nes
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../packagegroups/packagegroup-core-selinux.bb     |    2 +-
- .../packagegroups/packagegroup-selinux-minimal.bb  |    2 +-
- .../packagegroup-selinux-policycoreutils.bb        |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+++ "$(srcdir)/dom_read_write/example.xml"
+++ dom_read_write/example_output.xml >/dev/null' >>$@
 
-diff --git a/recipes-security/packagegroups/packagegroup-core-selinux.bb b/recipes-security/packagegroups/packagegroup-core-selinux.bb
-index 76863b0..1852aba 100644
---- a/recipes-security/packagegroups/packagegroup-core-selinux.bb
-+++ b/recipes-security/packagegroups/packagegroup-core-selinux.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "SELinux packagegroup for Poky"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- PR = "r0"
- 
-diff --git a/recipes-security/packagegroups/packagegroup-selinux-minimal.bb b/recipes-security/packagegroups/packagegroup-selinux-minimal.bb
-index bae15ea..2ff16f8 100644
---- a/recipes-security/packagegroups/packagegroup-selinux-minimal.bb
-+++ b/recipes-security/packagegroups/packagegroup-selinux-minimal.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "SELinux packagegroup with only packages required for basic operations"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
- PR = "r0"
- 
-diff --git a/recipes-security/packagegroups/packagegroup-selinux-policycoreutils.bb b/recipes-security/packagegroups/packagegroup-selinux-policycoreutils.bb
-index bb221eb..7f56d7c 100644
---- a/recipes-security/packagegroups/packagegroup-selinux-policycoreutils.bb
-+++ b/recipes-security/packagegroups/packagegroup-selinux-policycoreutils.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "SELinux policycoreutils packagegroup"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
-                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420 \
- "
- PR = "r0"
--- 
-1.7.9.5
++"$(abs_builddir)/<!progname!>/<!progname!>" >/dev/null
 
+++>/dev/null
+
+
+These lines should be part of the previous lines (as per the attachment)
+
+The extra lines cause the patch to be 77 lines long instead of the 73 speci=
+fied by
+@@ -0,0 +1,73 @@
+which his why the last 4 lines are not applied
+
+but these extra lines will also cause the libxml++_ptest.patch to fail to a=
+pply during do_patch or the Makefile.am to error during do_compile
+
+
+Martin - would it be possible for you to use the attachment instead?
+
+--
+Nick
+
+
+
+
+
+The details of this company are as follows:
+G4S Technology Limited, Registered Office: Challenge House, International D=
+rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
+38.
+
+This communication may contain information which is confidential, personal =
+and/or privileged.
+
+It is for the exclusive use of the intended recipient(s).
+If you are not the intended recipient(s), please note that any distribution=
+, forwarding, copying or use of this communication or the information in it=
+ is strictly prohibited.
+
+Any personal views expressed in this e-mail are those of the individual sen=
+der and the company does not endorse or accept responsibility for them.
+
+Prior to taking any action based upon this e-mail message, you should seek =
+appropriate confirmation of its authenticity.
+
+This e-mail has been scanned for all viruses by MessageLabs.
 
