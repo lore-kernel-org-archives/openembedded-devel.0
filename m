@@ -1,27 +1,27 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E43996D053
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F4456D114
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 09:32:39 +0000 (UTC)
+	Wed,  8 Jan 2014 09:32:42 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s089WfEn001958
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s089WhGj014536
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Jan 2014 01:32:41 -0800 (PST)
+	Wed, 8 Jan 2014 01:32:43 -0800 (PST)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Wed, 8 Jan 2014 01:32:40 -0800
+	14.2.347.0; Wed, 8 Jan 2014 01:32:42 -0800
 From: <wenzong.fan@windriver.com>
 To: <xin.ouyang@windriver.com>, <mark.hatle@windriver.com>,
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Jan 2014 04:32:24 -0500
-Message-ID: <9bea9ea4a159ebd6f4b0d95eead4cbb2a5517245.1389171235.git.wenzong.fan@windriver.com>
+Date: Wed, 8 Jan 2014 04:32:25 -0500
+Message-ID: <4350c06664508c44cd1e0be1cad4fce1ffea18d8.1389171235.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1389171235.git.wenzong.fan@windriver.com>
 References: <cover.1389171235.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-selinux][PATCH 04/10] libsemanage: migrate SRC_URI to 2.2
+Subject: [meta-selinux][PATCH 05/10] libsepol: migrate SRC_URI to 2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,61 +35,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 09:32:40 -0000
+X-List-Received-Date: Wed, 08 Jan 2014 09:32:42 -0000
 Content-Type: text/plain
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Updated patch:
- - libsemanage-fix-path-nologin.patch
+Removed patch and ported changes to 2.2 bbfile:
+ - libsepol-Change-ranlib-for-cross-compiling.patch
 
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../libsemanage/libsemanage-fix-path-nologin.patch |    9 +++++----
- recipes-security/selinux/libsemanage_2.2.bb        |    6 +++---
- recipes-security/selinux/libsemanage_git.bb        |    3 ++-
- 3 files changed, 10 insertions(+), 8 deletions(-)
+ recipes-security/selinux/libsepol.inc              |    5 +++-
+ ...ibsepol-Change-ranlib-for-cross-compiling.patch |   31 --------------------
+ recipes-security/selinux/libsepol_2.2.bb           |    8 ++---
+ recipes-security/selinux/libsepol_git.bb           |    4 +--
+ 4 files changed, 8 insertions(+), 40 deletions(-)
+ delete mode 100644 recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch
 
-diff --git a/recipes-security/selinux/libsemanage/libsemanage-fix-path-nologin.patch b/recipes-security/selinux/libsemanage/libsemanage-fix-path-nologin.patch
-index 7ce586b..5fc1e17 100644
---- a/recipes-security/selinux/libsemanage/libsemanage-fix-path-nologin.patch
-+++ b/recipes-security/selinux/libsemanage/libsemanage-fix-path-nologin.patch
-@@ -6,12 +6,13 @@ shadow package of oe-core and Debian has installed nologin into
- Upstream-Status: Inappropriate [configuration]
+diff --git a/recipes-security/selinux/libsepol.inc b/recipes-security/selinux/libsepol.inc
+index 8f0dc33..b7509e2 100644
+--- a/recipes-security/selinux/libsepol.inc
++++ b/recipes-security/selinux/libsepol.inc
+@@ -10,5 +10,8 @@ LICENSE = "LGPLv2+"
  
- Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
- ---
-  src/genhomedircon.c |    4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
+ inherit lib_package
  
- diff --git a/src/genhomedircon.c b/src/genhomedircon.c
--index 262a6cd..a50e03d 100644
-+index f3b9b5c..4f4865a 100644
- --- a/src/genhomedircon.c
- +++ b/src/genhomedircon.c
- @@ -58,7 +58,7 @@
-@@ -23,12 +24,12 @@ index 262a6cd..a50e03d 100644
-  
-  /* comments written to context file */
-  #define COMMENT_FILE_CONTEXT_HEADER "#\n#\n# " \
--@@ -392,7 +392,7 @@ static semanage_list_t *get_home_dirs(genhomedircon_settings_t * s)
-+@@ -393,7 +393,7 @@ static semanage_list_t *get_home_dirs(genhomedircon_settings_t * s)
-  
-  			/* NOTE: old genhomedircon printed a warning on match */
-  			if (hand.matched) {
---				WARN(s->h_semanage, "%s homedir %s or its parent directory conflicts with a file context already specified in the policy.  This usually indicates an incorrectly defined system account.  If it is a system account please make sure its uid is less than %u or its login shell is /sbin/nologin.", pwbuf->pw_name, pwbuf->pw_dir, minuid);
--+				WARN(s->h_semanage, "%s homedir %s or its parent directory conflicts with a file context already specified in the policy.  This usually indicates an incorrectly defined system account.  If it is a system account please make sure its uid is less than %u or its login shell is /usr/sbin/nologin.", pwbuf->pw_name, pwbuf->pw_dir, minuid);
-+-				WARN(s->h_semanage, "%s homedir %s or its parent directory conflicts with a file context already specified in the policy.  This usually indicates an incorrectly defined system account.  If it is a system account please make sure its uid is less than %u or greater than %u or its login shell is /sbin/nologin.", pwbuf->pw_name, pwbuf->pw_dir, minuid, maxuid);
-++				WARN(s->h_semanage, "%s homedir %s or its parent directory conflicts with a file context already specified in the policy.  This usually indicates an incorrectly defined system account.  If it is a system account please make sure its uid is less than %u or greater than %u or its login shell is /usr/sbin/nologin.", pwbuf->pw_name, pwbuf->pw_dir, minuid, maxuid);
-  			} else {
-  				if (semanage_list_push(&homedir_list, path))
-  					goto fail;
-diff --git a/recipes-security/selinux/libsemanage_2.2.bb b/recipes-security/selinux/libsemanage_2.2.bb
-index 900d608..4ee93c0 100644
---- a/recipes-security/selinux/libsemanage_2.2.bb
-+++ b/recipes-security/selinux/libsemanage_2.2.bb
-@@ -1,12 +1,12 @@
+-BBCLASSEXTEND = "native"
++# Change RANLIB for cross compiling, use host-tools $(AR) rather than
++# local ranlib.
++EXTRA_OEMAKE += "RANLIB='$(AR) s'"
+ 
++BBCLASSEXTEND = "native"
+diff --git a/recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch b/recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch
+deleted file mode 100644
+index f2fc313..0000000
+--- a/recipes-security/selinux/libsepol/libsepol-Change-ranlib-for-cross-compiling.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 2ee1e9651ec4aa78daf15dfef74e0b6aaeb8db1e Mon Sep 17 00:00:00 2001
+-From: Xin Ouyang <Xin.Ouyang@windriver.com>
+-Date: Tue, 21 Feb 2012 14:47:45 +0800
+-Subject: [PATCH] libsepol: Change ranlib for cross compiling.
+-
+-Use target host-tools to encapsulate any difference between local tools
+-on different machines. For example, on local PC, libsepol.a's index could
+-be added successfully by local ranlib, however, it will fail on some sever,
+-so we'd better use host-tools $(AR) rather than any local ranlib.
+-
+-Signed-off-by: Harry Ciao<qingtao.cao@windriver.com>
+----
+- src/Makefile |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/src/Makefile b/src/Makefile
+-index cd8e767..beea232 100644
+---- a/src/Makefile
+-+++ b/src/Makefile
+-@@ -21,7 +21,7 @@ all: $(LIBA) $(LIBSO) $(LIBPC)
+- 
+- $(LIBA):  $(OBJS)
+- 	$(AR) rcs $@ $^
+--	ranlib $@
+-+	$(AR) s $@
+- 
+- $(LIBSO): $(LOBJS)
+- 	$(CC) $(CFLAGS) $(LDFLAGS) -shared -o $@ $^ -Wl,-soname,$(LIBSO),--version-script=libsepol.map,-z,defs
+--- 
+-1.7.5.4
+-
+diff --git a/recipes-security/selinux/libsepol_2.2.bb b/recipes-security/selinux/libsepol_2.2.bb
+index efedb63..b4d717c 100644
+--- a/recipes-security/selinux/libsepol_2.2.bb
++++ b/recipes-security/selinux/libsepol_2.2.bb
+@@ -1,11 +1,9 @@
  PR = "r0"
  
 -include selinux_20130423.inc
@@ -98,30 +116,27 @@ index 900d608..4ee93c0 100644
  
  LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
  
--SRC_URI[md5sum] = "44fc8a3387486378a21d8df7454b9d42"
--SRC_URI[sha256sum] = "de2e8077245581e94576276f54e80a53c23c28d6961d2dfbe2f004eaba452e91"
-+SRC_URI[md5sum] = "2a939538645de6023633bc2247a5e72e"
-+SRC_URI[sha256sum] = "11f60bfa0f1c6063cd9bd99ce0cb4acc9d6d9e9b8d7743d39e847bcd7803bd75"
- 
- SRC_URI += "\
- 	file://libsemanage-Fix-execve-segfaults-on-Ubuntu.patch \
-diff --git a/recipes-security/selinux/libsemanage_git.bb b/recipes-security/selinux/libsemanage_git.bb
-index 6553c6b..c3799fd 100644
---- a/recipes-security/selinux/libsemanage_git.bb
-+++ b/recipes-security/selinux/libsemanage_git.bb
-@@ -1,5 +1,5 @@
+-SRC_URI[md5sum] = "980964224683fa29d4ed65beb94b56ee"
+-SRC_URI[sha256sum] = "290d17f583635a4a5d8a2141511272adf0571c4205cdea38b5a68df20d58a70b"
+-
+-SRC_URI += "file://libsepol-Change-ranlib-for-cross-compiling.patch"
++SRC_URI[md5sum] = "41cbe38ea809b5752f520bdeac4d2cf8"
++SRC_URI[sha256sum] = "77a4b27006295805bdbd7f240038cb32a49be1d60847d413899501702933fc0f"
+diff --git a/recipes-security/selinux/libsepol_git.bb b/recipes-security/selinux/libsepol_git.bb
+index 1fa83a4..bc2bd8f 100644
+--- a/recipes-security/selinux/libsepol_git.bb
++++ b/recipes-security/selinux/libsepol_git.bb
+@@ -1,9 +1,7 @@
  PR = "r0"
--PV = "2.1.10+git${SRCPV}"
+-PV = "2.1.9+git${SRCPV}"
 +PV = "2.2+git${SRCPV}"
  
  include selinux_git.inc
  include ${BPN}.inc
-@@ -11,4 +11,5 @@ SRC_URI += "\
- 	file://libsemanage-fix-path-len-limit.patch \
- 	file://libsemanage-fix-path-nologin.patch \
- 	file://libsemanage-drop-Wno-unused-but-set-variable.patch \
-+	file://libsemanage-define-FD_CLOEXEC-as-necessary.patch;striplevel=2 \
- 	"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+-
+-SRC_URI += "file://libsepol-Change-ranlib-for-cross-compiling.patch"
 -- 
 1.7.9.5
 
