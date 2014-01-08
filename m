@@ -1,43 +1,40 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
-	[193.109.254.119])
-	by mail.openembedded.org (Postfix) with ESMTP id 517366D09D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0946D14A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 10:00:42 +0000 (UTC)
-Received: from [85.158.140.195:45942] by server-15.bemta-14.messagelabs.com id
-	95/CD-22186-AC12DC25; Wed, 08 Jan 2014 10:00:42 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-3.tower-193.messagelabs.com!1389175242!13963380!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 23681 invoked from network); 8 Jan 2014 10:00:42 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-3.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
-	8 Jan 2014 10:00:42 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 8 Jan 2014
-	10:00:42 +0000
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Jan 2014 10:00:41 +0000
-Thread-Topic: [oe] Patch to fix libxml++ build failure in meta-oe
-Thread-Index: Ac8LpTziiTKmXMa5RaeXmt3kn1/e7wABNILAAClW1vAAAYJhkA==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB9273206331489E7A1@GBTWK10E001.Technology.local>
-References: <AAE0766F5AF36B46BAB7E0EFB9273206331489E795@GBTWK10E001.Technology.local>
-	<7aae89dde8c24d33afead65e63bf0225@CH1PRD0410HT005.namprd04.prod.outlook.com>
-	<19ea91c55bc945d5b54695d25bcbd2d7@CH1PRD0410HT004.namprd04.prod.outlook.com>
-	<abe23dd392e240d4bb004f4ad944dce8@CH1PRD0410HT003.namprd04.prod.outlook.com>
-In-Reply-To: <abe23dd392e240d4bb004f4ad944dce8@CH1PRD0410HT003.namprd04.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed,  8 Jan 2014 11:55:11 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id f15so767110eak.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Jan 2014 03:55:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=jzyTbhHNRVv1rwlWSgRdgBU7vEvh1NDgZS+wtTWcgzo=;
+	b=pgDoiBu40Ixdaq+/2Kc481FvQA7d8HPYcZTs1pA9StooXAlUtPqV4YwdtBrZ/Qbp7s
+	gbsFBPlNAdFL0UyUguqT92Ysj/alK+utTsY+Xknb12fyp3GU2kj+cbXP21wxpVemnU63
+	4XdS+GApNu71mkLH+p8URG7hWg4asHYjRQShcSIM+75C1cklvsJakNLG/5Nm0MqedlL9
+	E7IOVknvEwmXWMcIlrksEcJd9wUmMb7iM21cx2tpyzxxmKPnI5ekcGCVYFOvVRm+gGiT
+	/aLP4USQYgBvcsCktdafFM/3H2kqsbtzqC6J4e/Wn24zah7go/hAut4El8m57iR3eoSL
+	b9KQ==
+X-Received: by 10.15.32.73 with SMTP id z49mr98951657eeu.27.1389182111986;
+	Wed, 08 Jan 2014 03:55:11 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id v7sm188633715eel.2.2014.01.08.03.55.10
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Jan 2014 03:55:10 -0800 (PST)
+Date: Wed, 8 Jan 2014 12:55:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140108115521.GW3709@jama>
+References: <1389016470-29712-1-git-send-email-otavio@ossystems.com.br>
 MIME-Version: 1.0
-Subject: Re: Patch to fix libxml++ build failure in meta-oe
+In-Reply-To: <1389016470-29712-1-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe] gdal: Avoid host headers use for SQlite3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,62 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 10:00:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 08 Jan 2014 11:55:14 -0000
+X-Groupsio-MsgNum: 47653
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tAdHiH28s3ybHVSb"
+Content-Disposition: inline
+
+--tAdHiH28s3ybHVSb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-> I will have another go at generating and sending the patch
-I now understand the problem. I am being defeated by my mail client. It is =
-spuriously adding line breaks and various "+" and tabs for the following li=
-nes
+On Mon, Jan 06, 2014 at 11:54:30AM -0200, Otavio Salvador wrote:
+> This fixes the host contamination when the host has the SQLite3
+> headers available.
+>=20
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb |    2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/rec=
+ipes-navigation/gdal/gdal_1.10.1.bb
+> index 525ead2..4ce5d33 100644
+> --- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+> +++ b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+> @@ -80,6 +80,8 @@ EXTRA_OECONF =3D "--without-perl \
+>                  \
+>                  --with-pcraster=3Dinternal \
+>                  --with-geotiff=3Dinternal \
+> +                \
+> +                --with-sqlite3=3D${STAGING_LIBDIR} \
+>  "
+> =20
+>  EXTRA_OEMAKE +=3D "INST_DATA=3D"${datadir}/gdal""
 
-++ "$(srcdir)/dom_read_write/example.xml"
-++ dom_read_write/example_output.xml >/dev/null' >>$@
+can you also fix
+gdal-1.10.1: gdal: configure was passed unrecognised options: --without-tiff
 
-+"$(abs_builddir)/<!progname!>/<!progname!>" >/dev/null
+?
 
-++>/dev/null
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--tAdHiH28s3ybHVSb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-These lines should be part of the previous lines (as per the attachment)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-The extra lines cause the patch to be 77 lines long instead of the 73 speci=
-fied by
-@@ -0,0 +1,73 @@
-which his why the last 4 lines are not applied
+iEYEARECAAYFAlLNPKkACgkQN1Ujt2V2gBz63wCglVzPeNuxMxLdWVNbEheHJF8d
+JVYAn1uTdc3EY7UtQ/FZMSw9HvbUdoTj
+=bTn9
+-----END PGP SIGNATURE-----
 
-but these extra lines will also cause the libxml++_ptest.patch to fail to a=
-pply during do_patch or the Makefile.am to error during do_compile
-
-
-Martin - would it be possible for you to use the attachment instead?
-
---
-Nick
-
-
-
-
-
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
-
+--tAdHiH28s3ybHVSb--
