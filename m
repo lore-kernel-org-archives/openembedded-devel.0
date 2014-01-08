@@ -1,25 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E38C26CA92
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
+	[209.85.216.51])
+	by mail.openembedded.org (Postfix) with ESMTP id C87226C7E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2014 12:28:39 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 08 Jan 2014 04:24:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,624,1384329600"; d="scan'208";a="435678169"
-Received: from unknown (HELO helios.localnet) ([10.252.122.128])
-	by orsmga001.jf.intel.com with ESMTP; 08 Jan 2014 04:28:38 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: wenzong.fan@windriver.com
-Date: Wed, 08 Jan 2014 12:28:37 +0000
-Message-ID: <2431425.11TSRmdoOt@helios>
-Organization: Intel Corporation
-User-Agent: KMail/4.10.5 (Linux/3.8.0-35-generic; KDE/4.10.5; i686; ; )
-In-Reply-To: <cover.1389171235.git.wenzong.fan@windriver.com>
-References: <cover.1389171235.git.wenzong.fan@windriver.com>
+	Wed,  8 Jan 2014 16:09:30 +0000 (UTC)
+Received: by mail-qa0-f51.google.com with SMTP id i13so1890637qae.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Jan 2014 08:09:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=Zx1oUm5E8XqxMiuaalxYNdvHck+oUSaXQ03AGrfT8UU=;
+	b=ltLTtuZXgjL3Y9XpGUDZEG/WsjH/rU+mbegVAkFRC1CoPLs5KQqTNU8euAUMX48b0l
+	MXCBTBMHy2CGYGRoQNg8A4JEwTN+AqcYFvD5QbCBEwoVY47GeI0719b0HaUKgrJYsyQk
+	OjFL8kFgbAvC/pJEsQnN8/B5hlZwLP9B42ckXUZLxcAC1wMo1LUj5zXAYVOl6Zdfu56j
+	wnJXzabSY4dcNWp+/Okqi5y23rVAca/qrGaB4hGdMqABZJRek2xId91+X70wENhwq5uN
+	FCQjypwiER6fLdbl/ukjJL6jgntzPONQtXzF0YWbde4o5BugLOQas7iOxOYPv9CiW4IX
+	G38A==
+X-Gm-Message-State: ALoCoQkU/tBwR6Dxojic4Axar1GKzPutZZDHZpMRE3sGqaMM4vvWtiEwZPtyoHOi5UTQCetXaQAm
+X-Received: by 10.229.122.195 with SMTP id m3mr201502894qcr.7.1389197371300;
+	Wed, 08 Jan 2014 08:09:31 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-selinux][PATCH 00/10] selinux userspace: uprev packages to release 20131030
+Received: by 10.96.179.105 with HTTP; Wed, 8 Jan 2014 08:09:10 -0800 (PST)
+In-Reply-To: <52B8DECA.6060704@balister.org>
+References: <CAJTo0LZsBfxGm=OJPa++egDjL6L0ZABMebTtTr_Bmw_TdQrohg@mail.gmail.com>
+	<52B8DECA.6060704@balister.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 8 Jan 2014 16:09:10 +0000
+Message-ID: <CAJTo0LaEgLWZHk34e-_-+z69Zw3J+S1zGFFJAONjfYBDQ1TehQ@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
+Cc: Poky Project <poky@yoctoproject.org>,
+	OE-devel <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Piglit in Poky
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,24 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2014 12:28:41 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 08 Jan 2014 16:09:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Wenzong,
+Hi,
 
-On Wednesday 08 January 2014 04:32:20 wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->...
+Despite a good start this thread got rapidly hijacked, so let's try again!
 
-Patches for meta-selinux need to be sent to the yocto@yoctoproject.org mailing 
-list as noted in the MAINTAINERS file in meta-selinux, not this mailing list.
+On 24 December 2013 01:09, Philip Balister <philip@balister.org> wrote:
+>> 1) Move piglit and deps to oe-core.  Piglit is for QA purposes only
+>> and pushes the boundaries of "core platform".  In a sense this is a
+>> repeat of the discussion we had with Midori...  does oe-core contain
+>> everything needed to sufficiently exercise the core components it
+>> ships or not?
+>
+> I expect Richard will push back on this, and I would support him here.
 
-Cheers,
-Paul
+Probably best to let Richard speak for himself here. :)
 
--- 
+>> 2) Add piglit and deps to meta-yocto.  Probably a new layer called
+>> meta-yocto-qa (or similar) because the Yocto Compatible guidelines
+>> forbid mixing distribution policy and recipes.  We'd need to sync
+>> meta-yocto-qa with the pieces of meta-oe that we want somehow, but
+>> that's our problem.
+>
+> So meta-yocto is right out. I'm a user of numpy, and I certainly do not
+> want to include something called meta-yocto-qa just to pick up numpy.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+Right, so my point with the syncing was that this meta-yocto-qa layer
+would be a copy of recipes from other places through combo-layer, and
+would be clearly marked as such.
+
+Reviewing the options:
+
+1) Add python-mako, python-numpy, waffle and piglit to oe-core, for
+all BSPs to use.
+2) Add python-mako, python-numpy, waffle and piglit to meta-yocto
+(effectively read-only clones with combo-layer, maintained in meta-oe
+still) for Poky to use.
+3) Add meta-python layer to Poky, and waffle/piglit to meta-yocto
+(read-only clones) for Poky to use.
+
+Paul raises a good point about other BSPs potentially using Piglit to
+test their GL stacks.  Do any other BSPs test their GL integration,
+and if so what tooling to they use?  I'm only pushing for Piglit
+because it's what the Intel driver team use to test Mesa, but if
+nobody else wants to use it then that's an argument for keeping it in
+Poky (or even cloning it into meta-intel?).
+
+Ross
 
