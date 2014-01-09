@@ -1,34 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FA8A617AA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2014 14:39:08 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id d17so1368815eek.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2014 06:39:09 -0800 (PST)
+	by mail.openembedded.org (Postfix) with ESMTP id 1C8FE6A463;
+	Thu,  9 Jan 2014 14:46:14 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id d17so1380092eek.39
+	for <multiple recipients>; Thu, 09 Jan 2014 06:46:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Wszg9OpkmR6MP6imKCS57rNBpZ2FKIAW09sFfG2iYyI=;
-	b=EJbDKwrNfOL1wmREARUU+ke4CbPYD80h7yb+k5L24JGWCV3D0/8cbAvpklvZXB7PgG
-	hn9qXdJqLuu6rhJovffufde9smsIoYlSjNbUhKAtvLDMS3edhpO3Vg646tGMgTk3/W6t
-	0AInJDsyE6r0C04gk6b/dhs+I68r+es9g86ctIXVSrAcyen9WwSkKxqo5vHCFrt1IP6s
-	LaUwUPsWMMPvx5zYiHEy5kIJ/S0VIBUMgVzsyLOAxBBXvxuSi7UpDWNSL5xdYlv8w5Kk
-	3rJuB07r84pJmEGLnsY/ohSzDvJ/8n5QDTuXMA5CNodA0U8bXkHjsCbwgRQW/s3hK7xf
-	4g1g==
-X-Received: by 10.15.83.8 with SMTP id b8mr3769015eez.6.1389278349567;
-	Thu, 09 Jan 2014 06:39:09 -0800 (PST)
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=HSrJsz5nSyFzFJqZCi0D9HZ7oExlW+MBf/IESmcNHc8=;
+	b=zF6olyBFZBCa5k9w6DPSy2Y7b6tSmPPBfE8osia/dMaGfFOjKdWr0/G8vEOVlpZw82
+	UoP6ewsDF+EobkmCD7qUcL4gFsAPgJt1FUepivof4qp//otyhVk+2FCE1A/0HZNo+HUx
+	PQCVR1W6K7HqPX+nwSnfUGVCDkvQCfqpM3tfwX+S+KLC8kBrXoGRLoseuggKmfsijZuV
+	WagmlvK0E7T+7sT8vitRWdsard3vrAOIzVQnQjEbwwis6ID/DU3Ya6zelv7XlgD+ow2H
+	+t25OU6jkM8IxQuTZqK+qkzQtx6tBp4+A2xhqFXma+pjGhahzVW6GEfe62cqY7rhBALH
+	KlDQ==
+X-Received: by 10.14.148.138 with SMTP id v10mr3765427eej.37.1389278775792;
+	Thu, 09 Jan 2014 06:46:15 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id e3sm6083383eeg.11.2014.01.09.06.39.08
+	by mx.google.com with ESMTPSA id o47sm6136082eem.21.2014.01.09.06.46.14
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 Jan 2014 06:39:09 -0800 (PST)
+	Thu, 09 Jan 2014 06:46:14 -0800 (PST)
+Date: Thu, 9 Jan 2014 15:46:26 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Jan 2014 15:39:14 +0100
-Message-Id: <1389278354-25293-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.5.2
-Subject: [meta-systemd][PATCH] ofono: Rename .bbappend to match new version from oe-core
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140109144626.GG3709@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: State of bitbake world, Failed tasks 2014-01-09
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,19 +43,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2014 14:39:10 -0000
+X-List-Received-Date: Thu, 09 Jan 2014 14:46:16 -0000
+X-Groupsio-MsgNum: 47665
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="wnLTWEf+vlzHZaR9"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-connectivity/ofono/{ofono_1.13.bbappend => ofono_%.bbappend}  | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/oe-core/recipes-connectivity/ofono/{ofono_1.13.bbappend => ofono_%.bbappend} (100%)
+--wnLTWEf+vlzHZaR9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/ofono/ofono_1.13.bbappend b/meta-systemd/oe-core/recipes-connectivity/ofono/ofono_%.bbappend
-similarity index 100%
-rename from meta-systemd/oe-core/recipes-connectivity/ofono/ofono_1.13.bbappend
-rename to meta-systemd/oe-core/recipes-connectivity/ofono/ofono_%.bbappend
--- 
-1.8.5.2
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
+=3D=3D Failed tasks 2014-01-09 =3D=3D
 
+=3D=3D=3D common (6) =3D=3D=3D
+    * meta-openembedded/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb, do_c=
+onfigure
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_fetch
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-extended/gnuplot/gnuplot_4.4.4.bb, =
+do_compile
+    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
+ompile
+    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
+
+=3D=3D=3D common-x86 (5) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
+b, do_compile
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
+    * openembedded-core/meta/recipes-devtools/autogen/autogen-native_5.18.2=
+=2Ebb, do_compile
+
+=3D=3D=3D qemuarm (5) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
+bb, do_compile
+    * meta-openembedded/meta-networking/recipes-support/traceroute/tracerou=
+te_2.0.18.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/bash-completion/bash-comple=
+tion_2.0.bb, do_install
+    * openembedded-core/meta/recipes-devtools/make/make_4.0.bb, do_compile
+    * openembedded-core/meta/recipes-multimedia/gstreamer/gst-plugins-bad_0=
+=2E10.23.bb, do_compile
+
+=3D=3D=3D qemux86 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
+de_2.11.14.bb, do_compile
+
+=3D=3D=3D qemux86_64 (4) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
+_git.bb, do_fetch
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
+compile
+    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.2=
+1.1.bb, do_compile
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||11    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140107_145350.log/
+|-
+||qemux86       ||12    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140108_115626.log/
+|-
+||qemux86_64    ||15    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140109_011732.log/
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--wnLTWEf+vlzHZaR9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLOtkIACgkQN1Ujt2V2gBxiFQCgrDDHoylKm1qswftUNsAMTmcv
+tokAoJdHy8746rYN/g4e0S/G6HyeqcIc
+=7jEh
+-----END PGP SIGNATURE-----
+
+--wnLTWEf+vlzHZaR9--
