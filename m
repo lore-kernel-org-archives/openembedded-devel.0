@@ -1,23 +1,21 @@
 Return-Path: <anders@chargestorm.se>
-Received: from stoexhubfe01.domain01.net (STOEXHUBFE01.domain01.net
-	[83.145.59.140])
-	by mail.openembedded.org (Postfix) with ESMTP id 32ACF601AA
+Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
+	[83.145.59.141])
+	by mail.openembedded.org (Postfix) with ESMTP id 3625E60CF1
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 10 Jan 2014 06:47:53 +0000 (UTC)
-Received: from localhost (213.114.79.21) by stoexhubfe01.domain01.net
-	(10.12.10.6) with Microsoft SMTP Server id 8.3.279.1; Fri, 10 Jan 2014
-	07:47:41 +0100
+Received: from localhost (213.114.79.21) by stoexhubfe02.domain01.net
+	(10.12.10.7) with Microsoft SMTP Server id 8.3.279.1; Fri, 10 Jan 2014
+	07:47:39 +0100
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 10 Jan 2014 07:47:51 +0100
-Message-ID: <e9faf20404cfc8c31b6192b2889f3deda8571d42.1389336448.git.anders@chargestorm.se>
+Date: Fri, 10 Jan 2014 07:47:49 +0100
+Message-ID: <cover.1389336448.git.anders@chargestorm.se>
 X-Mailer: git-send-email 1.8.5.2
-In-Reply-To: <cover.1389336448.git.anders@chargestorm.se>
-References: <cover.1389336448.git.anders@chargestorm.se>
 MIME-Version: 1.0
 X-GFI-SMTP-Submission: 1
 Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH v2 1/1] ktap: add configs for elfutils and ffi
+Subject: [meta-oe][PATCH v2 0/1] ktap: deterministic build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,70 +32,52 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 10 Jan 2014 06:47:53 -0000
 Content-Type: text/plain
 
-libelf (elfutils) is required for resolving symbols in DSO and for sdt (taken
-from ktap docs). The earlier v0.4 recipe built ktap against libelf if it was
-found, thus enable it per default.
 
-FFI needs to be enabled for both userspace and kernel module. Currently, it is
-only supported for x86_64 (enforced when building ktap-module).
+Add some configuration to the build process of ktap, to get a more 
+deterministic build. Currently, the v0.4 recipe will build with 
+libelf support (from the elfutils recipe), if that is found during
+the compile stage, thus we have a non-deterministic build going on.
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
+At the same time, I'm also adding support for the FFI configuration.
+This part has only been imlemented with a limited build test, as it's
+only supported on x86_64 (which I'm not normally building for).
+
+The configuration of both LIBELF and FFI has been implemented using 
+PACKAGECONFIG, even though it's only the LIBELF part that make any 
+real use of that infrastructure. For FFI, it's only been used to get
+a consistent configuration tool for both options.
+
+
+    * basic FFI support (depend on CONFIG_KTAP_FFI)
+	FFI will allow call kernel function from ktap script
+
+	cdef [[ int printk(char *fmt, ...); ]]
+	C.printk("this is ffi printk from ktap\n")
+
+	(currently only support basic C types, structure support is ongoing)
+
 ---
+Changes v1 -> v2:
+	* Remove PACKAGECONFIG[ffi] from ktap_v0.4.bb, as it's already defined
+	  in ktap.inc.
+
+The following changes since commit 3402bfac6b595c622e4590a8ff5eaaa854e2a2a3:
+
+  inetutils: fix compile error when PATH_PROCNET_DEV is undefined (2014-01-08 22:26:26 +0000)
+
+are available in the git repository at:
+
+  git://github.com/darander/meta-oe ktap_v0.4
+  https://github.com/darander/meta-oe/tree/ktap_v0.4
+
+Anders Darander (1):
+  ktap: add configs for elfutils and ffi
+
  meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb |  5 ++++-
  meta-oe/recipes-kernel/ktap/ktap.inc           |  2 ++
  meta-oe/recipes-kernel/ktap/ktap_0.4.bb        | 11 ++++++++++-
  3 files changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb b/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
-index 12167ea..ce6885c 100644
---- a/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
-+++ b/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb
-@@ -6,8 +6,11 @@ DESCRIPTION = "KTAP is a scripting dynamic tracing tool for Linux"
- 
- inherit module
- 
-+# Available package configs: ffi (only supported on x86_64)
-+PACKAGECONFIG ?= ""
-+
- # Only build the module
--MAKE_TARGETS = "mod"
-+MAKE_TARGETS = "${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} mod"
- 
- # Kernel module packages MUST begin with 'kernel-module-', otherwise
- # multilib image generation can fail.
-diff --git a/meta-oe/recipes-kernel/ktap/ktap.inc b/meta-oe/recipes-kernel/ktap/ktap.inc
-index 7e60453..93a4e2c 100644
---- a/meta-oe/recipes-kernel/ktap/ktap.inc
-+++ b/meta-oe/recipes-kernel/ktap/ktap.inc
-@@ -9,3 +9,5 @@ SRC_URI = "git://github.com/ktap/ktap.git"
- 
- S = "${WORKDIR}/git"
- 
-+# Package config is abused as a general compile time configuration tool.
-+PACKAGECONFIG[ffi] = ""
-diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-index f5dd62f..20f94d5 100644
---- a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-+++ b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-@@ -5,8 +5,17 @@ require ktap.inc
- SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
- DEPENDS = "ktap-module"
- 
-+#Available package configs:
-+# libelf - needed to resolve symbols in DSO and for sdt
-+# ffi    - only supports x86_64 for now!. Needs to be enabled for ktap-module too.
-+PACKAGECONFIG ?= "libelf"
-+
-+PACKAGECONFIG[libelf] = ",,elfutils"
-+
- # Only build the userspace app
--EXTRA_OEMAKE = "ktap"
-+EXTRA_OEMAKE = "${@base_contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
-+             ${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
-+             ktap"
- 
- do_install() {
-     install -d ${D}${bindir}
 -- 
 1.8.5.2
 
