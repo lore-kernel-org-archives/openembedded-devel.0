@@ -1,21 +1,37 @@
-Return-Path: <anders@chargestorm.se>
-Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
-	[83.145.59.141])
-	by mail.openembedded.org (Postfix) with ESMTP id 3625E60CF1
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B74096B7AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2014 06:47:53 +0000 (UTC)
-Received: from localhost (213.114.79.21) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.279.1; Fri, 10 Jan 2014
-	07:47:39 +0100
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 10 Jan 2014 07:47:49 +0100
-Message-ID: <cover.1389336448.git.anders@chargestorm.se>
-X-Mailer: git-send-email 1.8.5.2
-MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH v2 0/1] ktap: deterministic build
+	Fri, 10 Jan 2014 07:07:13 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id en1so7916168wid.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Jan 2014 23:07:14 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jPK7Ru/Vh8S2wfNa7iXhE/Gs0j6ZEfuyoH+6bdKD4rA=;
+	b=As1Yx5/T9Y0JrLoiFLIcF7YtPe62F7TwUOjUH8hrJiCauuaFr/W6PerNJjJLkzYOv1
+	GxEKCEF/LCzUTvnAoF+92xDqCzg/XN7y6lH4SN5xJocT92ucKtDGUB3tdMZPIve2AAg2
+	CpgsIQDvlKo73nWTxyLsLlJZpA5amXGh8Fh/D8Rt3CbinUkVconrkt/HlWejDfs5vTf6
+	xxkaR95P2WG3wxBjir3ChKFe6eNwZSG2mncScR6Ppc0JpX1vm4AU7J59GehFtt6SGqwH
+	ADWc+A8fPEvV/Zn4UM+voWbosaetVmWoqIyrFQA1sUT0Xj2QGd2A5PIv2Bt2wAqMl2D9
+	fYGQ==
+X-Gm-Message-State: ALoCoQk/61go5/YqKzSsidZAhWFzf2b6ZOHyUqK+xmKXIQgolhPvxr/8OV+n37Z3GOkIVIwR12Qi
+X-Received: by 10.194.92.7 with SMTP id ci7mr6742592wjb.58.1389337634293;
+	Thu, 09 Jan 2014 23:07:14 -0800 (PST)
+Received: from localhost ([2001:610:612:0:223:32ff:fece:c738])
+	by mx.google.com with ESMTPSA id ot9sm3325433wjc.0.2014.01.09.23.07.12
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Jan 2014 23:07:13 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jan 2014 08:07:08 +0100
+Message-Id: <1389337631-1844-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 1/4] oscam: bump SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,56 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2014 06:47:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Jan 2014 07:07:14 -0000
 
-
-Add some configuration to the build process of ktap, to get a more 
-deterministic build. Currently, the v0.4 recipe will build with 
-libelf support (from the elfutils recipe), if that is found during
-the compile stage, thus we have a non-deterministic build going on.
-
-At the same time, I'm also adding support for the FFI configuration.
-This part has only been imlemented with a limited build test, as it's
-only supported on x86_64 (which I'm not normally building for).
-
-The configuration of both LIBELF and FFI has been implemented using 
-PACKAGECONFIG, even though it's only the LIBELF part that make any 
-real use of that infrastructure. For FFI, it's only been used to get
-a consistent configuration tool for both options.
-
-
-    * basic FFI support (depend on CONFIG_KTAP_FFI)
-	FFI will allow call kernel function from ktap script
-
-	cdef [[ int printk(char *fmt, ...); ]]
-	C.printk("this is ffi printk from ktap\n")
-
-	(currently only support basic C types, structure support is ongoing)
-
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
-Changes v1 -> v2:
-	* Remove PACKAGECONFIG[ffi] from ktap_v0.4.bb, as it's already defined
-	  in ktap.inc.
+ meta-multimedia/recipes-dvb/oscam/oscam_svn.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The following changes since commit 3402bfac6b595c622e4590a8ff5eaaa854e2a2a3:
-
-  inetutils: fix compile error when PATH_PROCNET_DEV is undefined (2014-01-08 22:26:26 +0000)
-
-are available in the git repository at:
-
-  git://github.com/darander/meta-oe ktap_v0.4
-  https://github.com/darander/meta-oe/tree/ktap_v0.4
-
-Anders Darander (1):
-  ktap: add configs for elfutils and ffi
-
- meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb |  5 ++++-
- meta-oe/recipes-kernel/ktap/ktap.inc           |  2 ++
- meta-oe/recipes-kernel/ktap/ktap_0.4.bb        | 11 ++++++++++-
- 3 files changed, 16 insertions(+), 2 deletions(-)
-
+diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+index f466aff..ab74cc4 100644
+--- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
++++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "libusb1 openssl"
+ 
+ SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
+-SRCREV = "7974"
++SRCREV = "9164"
+ PV = "1.10+${SRCPV}"
+ 
+ S = "${WORKDIR}/trunk"
 -- 
-1.8.5.2
+1.8.4.2
 
 
