@@ -1,36 +1,37 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id C9F3F60D8A
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id C2DCA60EB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2014 17:37:11 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id bz8so5147310wib.17
+	Sat, 11 Jan 2014 16:41:18 +0000 (UTC)
+Received: by mail-we0-f179.google.com with SMTP id q59so5074009wes.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2014 09:37:12 -0800 (PST)
+	Sat, 11 Jan 2014 08:41:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=BmIgepbqA83UQccvRNKCJy1HtiEEYFgxkKjxf1XpR7I=;
-	b=gUbiV0nthanQpyflDQRimCVCgsUzC/NGOY3gxqR6kMDHD2PH6c1fjWqlt/jJZvHqoC
-	MITTCHT/er711skzJ8x9H7s/qDY8mmKaJFQqHAaQMbaBQFRrssgkz5GM4vQ1fqfzCReA
-	NMdXxncm8gzhT55MABxdeDEPcJybJpAhcKdvawelZQpPfGkINyvtCprX+TDzUV2ZmODa
-	Fa/bwuSodyATkMssqA588L+She11HQBf1u9q6cgO92q7HCfriCOD77oXpq4T/78CXraG
-	JYd0jLmvkQU8cBATiTwlO8vsL/mOiIV6PtPCPetxqwXnqw3XYbmyklo+brjS5Mhc154I
-	NZ1Q==
-X-Gm-Message-State: ALoCoQkPQRFXIsC1blKvwk1MbhnoaAV2Rd3yEJHopuM3Au6631O2hhbAqFbeJ5hS8nEqQQlmZcyN
-X-Received: by 10.180.188.100 with SMTP id fz4mr3759976wic.57.1389375431354;
-	Fri, 10 Jan 2014 09:37:11 -0800 (PST)
-Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
-	by mx.google.com with ESMTPSA id uq2sm4689783wjc.5.2014.01.10.09.37.10
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fF+xX9fkTNgSiOVZG8TM+UMJVgTyBW6IClAHGD/2Z5Q=;
+	b=H+zHpvUz+yahEMtWnBaGP9+9MPBI01iGgKVpZBQNlyHxr8Z/iI6l3aKT3lCkH9vEAD
+	GIQukW2hmu6irxozdO71FzNfawiLeSu3dyaSPG2asYzkENaQsPBlhEW9quEup9tbTLhe
+	LfrK2Bk3/pZ9qqJ5xwKt5kJ9l0KHAlt+p4n8mFTmw0C53Qqi8NcbQv/ifQE6gl1cjU4T
+	pEKg46vladNpNiwMcFTyLB7Q11yUbANf7OvcMX5qtiQT5aG+dl/ttKs7+k5kZAIs1BV1
+	GJZINq9SkSwW6zF0TjgupjcbNUHW3niaZprjzI3tWIXq9yaRZLi/GKUq09DY7UevqJnn
+	a5yA==
+X-Gm-Message-State: ALoCoQmBbVM3ZR4bQ18OVRVpz16TRPeZQ+Ixr3+6VXRGRSGNFRzxChlRLbc7MXx5ADTTUfxASy+H
+X-Received: by 10.194.82.68 with SMTP id g4mr104180wjy.85.1389458479375;
+	Sat, 11 Jan 2014 08:41:19 -0800 (PST)
+Received: from localhost ([2001:610:612:0:21c:42ff:fef0:7f75])
+	by mx.google.com with ESMTPSA id ks3sm6958854wjc.10.2014.01.11.08.41.18
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Jan 2014 09:37:10 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Sat, 11 Jan 2014 08:41:18 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Jan 2014 17:37:05 +0000
-Message-Id: <1389375425-21914-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] libsyncml: move build dependencies from RRECOMMENDS to DEPENDS
+Date: Sat, 11 Jan 2014 17:41:17 +0100
+Message-Id: <1389458477-14514-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-initramfs][PATCH] dracut: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +45,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2014 17:37:12 -0000
+X-List-Received-Date: Sat, 11 Jan 2014 16:41:19 -0000
 
-Putting build dependencies into RRECOMMENDS isn't going to work, so move them to
-DEPENDS.
-
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb |    3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ ...-xz-lzma-option-to-use-all-cores-for-mult.patch | 39 ++++++++++++++++++++++
+ .../recipes-devtools/dracut/dracut_git.bb          | 38 +++++++++++++++++++++
+ 2 files changed, 77 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
+ create mode 100644 meta-initramfs/recipes-devtools/dracut/dracut_git.bb
 
-diff --git a/meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb b/meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb
-index 9cf9243..8053eda 100644
---- a/meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb
-+++ b/meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb
-@@ -4,8 +4,7 @@ SECTION = "libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
- 
--DEPENDS = "libxml2 glib-2.0"
--RRECOMMENDS_${PN} = "wbxml2 openobex libsoup-2.4"
-+DEPENDS = "libxml2 glib-2.0 libsoup-2.4 openobex wbxml2"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/libsyncml/libsyncml-${PV}.tar.gz"
- SRC_URI[md5sum] = "84879ed7cb94618530fbcb801a1a4f95"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
+new file mode 100644
+index 0000000..7dc62de
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
+@@ -0,0 +1,39 @@
++From c92ea797c43aa811e98b6bd8fb4aae921fa08592 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Fri, 10 Jan 2014 21:11:40 +0100
++Subject: [PATCH] Use builtin xz/lzma option to use all cores for multihreaded
++ compression
++
++This removes the dependency on 'getconf' as well, which is not installed by default on my embedded systems.
++
++Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
++Upstream-status: Submitted
++
++---
++ dracut.sh | 6 ++----
++ 1 file changed, 2 insertions(+), 4 deletions(-)
++
++diff --git a/dracut.sh b/dracut.sh
++index 11dcd0e..2e6ea67 100755
++--- a/dracut.sh
+++++ b/dracut.sh
++@@ -697,14 +697,12 @@ stdloglvl=$((stdloglvl + verbosity_mod_l))
++ # eliminate IFS hackery when messing with fw_dir
++ fw_dir=${fw_dir//:/ }
++ 
++-cpu_count=$(getconf _NPROCESSORS_ONLN)
++-
++ # handle compression options.
++ [[ $compress ]] || compress="gzip"
++ case $compress in
++     bzip2) compress="bzip2 -9";;
++-    lzma)  compress="lzma -9 ${cpu_count:+-T$cpu_count}";;
++-    xz)    compress="xz --check=crc32 --lzma2=dict=1MiB ${cpu_count:+-T$cpu_count}";;
+++    lzma)  compress="lzma -9 -T0";;
+++    xz)    compress="xz --check=crc32 --lzma2=dict=1MiB -T0";;
++     gzip)  compress="gzip -9"; command -v pigz > /dev/null 2>&1 && compress="pigz -9";;
++     lzo)   compress="lzop -9";;
++     lz4)   compress="lz4 -9";;
++-- 
++1.8.0
++
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+new file mode 100644
+index 0000000..ccc4e7d
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Initramfs generator using udev"
++DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the tool) is used to create an initramfs image by copying tools and files from an installed system and combining it with the dracut framework, usually found in /usr/lib/dracut/modules.d."
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRCREV = "bb1ba3a1ca9dd6284f6319eb197de4a757a7f99d"
++SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git \
++           file://0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch \
++          "
++
++S = "${WORKDIR}/git"
++
++do_configure() {
++    ./configure --prefix=${prefix} \
++                --libdir=${libdir} \
++                --datadir=${datadir} \
++                --sysconfdir=${sysconfdir} \
++                --sbindir=${sbindir} \
++                --disable-documentation \
++                --bindir=${bindir} \
++                --includedir=${includedir} \
++                --localstatedir=${localstatedir} \
++}
++
++do_install() {
++    oe_runmake install DESTDIR=${D}
++}
++
++FILES_${PN} += "${datadir}/bash-completion \ 
++                ${libdir}/kernel \
++               "
++
++RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid bash ldd"
++# This could be optimized a bit, but let's avoid non-booting systems :)
++RRECOMMENDS_${PN} = " \
++                     kernel-modules \ 
++                    "
 -- 
-1.7.10.4
+1.8.4.2
 
 
