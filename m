@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 63E276B5D8
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 85E706B5DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jan 2014 17:54:22 +0000 (UTC)
-Received: by mail-ea0-f181.google.com with SMTP id m10so2901426eaj.26
+	Sun, 12 Jan 2014 17:54:23 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id o10so2862909eaj.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jan 2014 09:54:23 -0800 (PST)
+	Sun, 12 Jan 2014 09:54:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7acCktyOyLkwK3d14st2JHeCzZA/KyWEie1ru/2la20=;
-	b=LcZSoI1/RqMuXm6fVDmv2vJD/O42BCiuCaNBBn8gHzjNlJqIgACt4Ms8Q6wVAxzvn2
-	ZtPiSny7JkHsyuFnwcVhTmdPuMDJYvQa/WEkLDNV3IhqVislK78E7bcirpcfs1Xb1vRX
-	aFNCJCc9Ey64ABT5e0zvJQjJstwwGCQD8xwmJKwO20dZoDZruGxeQsB3AlvyVvsR6G3P
-	87zNG+b9S+U07WcqBbvT6pFqpQnSx4ngINz09tiSPqIH+X0BIjjhQa6XXWYLqGKHrZFO
-	tC4IYMiPjIgMcPt52LBhBxO+fu8CZeoZV1kWjiVlFjrfGND+K/gw3HRwXw2AzFZ+336O
-	uq3A==
-X-Received: by 10.14.3.130 with SMTP id 2mr22552114eeh.36.1389549263056;
-	Sun, 12 Jan 2014 09:54:23 -0800 (PST)
+	bh=koippfj4IbVNgm8j/iXHf1il9fjybkPHOh0ECcYDJdk=;
+	b=I3ZWnSbc+7M2KFRyR8AWFx2y9GGyh5PoqXwHJ2A3dC5PEWwWM88lylGSCHrDAeoIzZ
+	9glir0AnzLca22FRo8i7z1NPRGJ/lEayAeMv5+YcoZvk9nIRKcKHsXqqu+5KqEB3gzzy
+	hJtSZN/3dIZoX/aTRK5HSdm5WemFV7KDMVRL4NIoXgrXK+8kaxqnQpyW8WzpMhnFlFQS
+	FSJrVFDILJ8W+6iMO7OPSjNtt070CTC5DGNt+tzVYhKoSiicHfitx37YuWWu7kvanDJV
+	iBxTmKCqw9W4omzWECF8llrK2TzafNhhWYYlATQidWddu/GEmflsloWP3ssU34m3ZgP7
+	zvDA==
+X-Received: by 10.15.42.133 with SMTP id u5mr22412110eev.47.1389549264191;
+	Sun, 12 Jan 2014 09:54:24 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id m48sm14803632eef.6.2014.01.12.09.54.22
+	by mx.google.com with ESMTPSA id l4sm32834879een.13.2014.01.12.09.54.23
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 12 Jan 2014 09:54:22 -0800 (PST)
+	Sun, 12 Jan 2014 09:54:23 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Jan 2014 18:54:34 +0100
-Message-Id: <1389549275-4775-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 12 Jan 2014 18:54:35 +0100
+Message-Id: <1389549275-4775-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.5.2
 In-Reply-To: <1389549275-4775-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1389549275-4775-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-efl][WIP][PATCH 2/3] webkit-efl: Add recipe with snapshot from r159807
+Subject: [meta-efl][WIP][PATCH 3/3] enjoy: Upgrade to version from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,63 +47,98 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 12 Jan 2014 17:54:24 -0000
 
-* announcement:
-  http://sourceforge.net/mailarchive/message.php?msg_id=31742684
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../webkit/webkit-efl_2.3.2+svnr159807.bb          | 42 ++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
+ ...ays-use-position-as-percent-and-define-a-1-second.patch | 14 +++++++-------
+ meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb}    | 10 ++++------
+ 2 files changed, 11 insertions(+), 13 deletions(-)
+ rename meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} (90%)
 
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
-new file mode 100644
-index 0000000..1f9c2f5
---- /dev/null
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "Webkit browser engine, EFL edition"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8bab0b12 \
-+                    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
-+                    file://Source/WebKit/efl/ewk/EWebKit.h;endline=20;md5=55ea170b1582797d2c69712de850f2fa \
-+"
-+
-+# you need harfbuzz with icu enabled, you can add this to your config:
-+# PACKAGECONFIG_append_pn-harfbuzz = " icu"
-+DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
-+           libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
-+           libxml2 pango eina ecore evas edje edbus gstreamer gst-plugins-base harfbuzz"
-+
-+SRC_URI = "\
-+    ${E_RELEASES}/libs/webkit-efl/webkit-efl-159807.tar.xz \
-+"
-+SRC_URI[md5sum] = "3e1377d976460dd14db0dd3cd39b8e48"
-+SRC_URI[sha256sum] = "a99531299e41ba4671b32bbf46c3efc4d65960c9c87949a87f76e622c284f178"
-+
-+S = "${WORKDIR}/${BPN}"
-+
-+inherit cmake lib_package pkgconfig perlnative pythonnative
-+
-+ARM_INSTRUCTION_SET = "arm"
-+
-+EXTRA_OECMAKE = " \
-+    -DPORT=Efl \
-+    -DSHARED_CORE=On \
-+    -DENABLE_DRAG_SUPPORT=On \
-+    -DENABLE_WEB_AUDIO=Off \
-+    -DENABLE_VIDEO=Off \
-+    -DENABLE_VIDEO_TRACK=Off \
-+    -DENABLE_ACCESSIBILITY=Off \
-+    -DENABLE_BATTERY_STATUS=Off \
-+"
-+
-+LEAD_SONAME = "libewebkit.so"
-+PACKAGES =+ "${PN}launcher-dbg ${PN}launcher"
-+
-+FILES_${PN} += "${datadir}/webkit-1.0/theme/default.edj ${datadir}/ewebkit-0/themes/default.edj"
-+FILES_${PN}launcher = "${bindir}/EWebLauncher"
-+FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
+diff --git a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+index 45f02b7..0962450 100644
+--- a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
++++ b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
+@@ -1,4 +1,4 @@
+-From ac4c8a57e8a042acd4b8ff803d3d3574b0e7a7fb Mon Sep 17 00:00:00 2001
++From 751505501e0db31cf766ec0ae95a6968b4d1eb93 Mon Sep 17 00:00:00 2001
+ From: Alban Browaeys <prahal@yahoo.com>
+ Date: Wed, 5 Sep 2012 02:58:26 +0000
+ Subject: [PATCH] always use position as percent and define a 1 seconds
+@@ -7,12 +7,12 @@ Subject: [PATCH] always use position as percent and define a 1 seconds
+ Fix "reverb" effect: ie loop between setting the slider to match
+ the position and handling slider to position (seek).
+ ---
+- data/themes/default.edc |    8 +++-----
+- src/bin/win.c           |   28 ++++++++++++++++++++++------
++ data/themes/default.edc |  8 +++-----
++ src/bin/win.c           | 28 ++++++++++++++++++++++------
+  2 files changed, 25 insertions(+), 11 deletions(-)
+ 
+ diff --git a/data/themes/default.edc b/data/themes/default.edc
+-index 65efddf..27bb9e4 100644
++index ebf8ba4..7a906b1 100644
+ --- a/data/themes/default.edc
+ +++ b/data/themes/default.edc
+ @@ -186,7 +186,6 @@ collections {
+@@ -42,7 +42,7 @@ index 65efddf..27bb9e4 100644
+              } else if (type == MSG_INT && id == MSG_SHUFFLE) {
+                 external_param_set_bool(PART:"buttons.shuffle", "state", getarg(2));
+              } else if (type == MSG_INT && id == MSG_LOOP) {
+-@@ -687,7 +685,7 @@ collections {
++@@ -689,7 +687,7 @@ collections {
+              source: "progress.slider";
+              signal: "changed";
+              script {
+@@ -52,7 +52,7 @@ index 65efddf..27bb9e4 100644
+           }
+           program {
+ diff --git a/src/bin/win.c b/src/bin/win.c
+-index 63951db..ad93ab5 100644
++index 2f65953..428e268 100644
+ --- a/src/bin/win.c
+ +++ b/src/bin/win.c
+ @@ -194,8 +194,8 @@ _win_play_eval(Win *w)
+@@ -129,5 +129,5 @@ index 63951db..ad93ab5 100644
+  }
+  
+ -- 
+-1.7.7
++1.8.5.2
+ 
+diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_git.bb
+similarity index 90%
+rename from meta-efl/recipes-efl/e17/enjoy_svn.bb
+rename to meta-efl/recipes-efl/e17/enjoy_git.bb
+index aa99898..c9ff070 100644
+--- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
++++ b/meta-efl/recipes-efl/e17/enjoy_git.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "Enjoy music player"
+ LICENSE = "LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+ DEPENDS = "evas ecore edje elementary emotion lightmediascanner eldbus gst-plugins-good"
+-SRCREV = "${EFL_SRCREV}"
+-PV = "0.0+svnr${SRCPV}"
+ 
++SRCREV = "aa8fec69e885eec048a849c2b34059ec58404e02"
++PV = "0.1.0+gitr${SRCPV}"
+ 
+ #1st needed for all formats
+ #2nd needed for mp3 playback
+@@ -20,12 +20,10 @@ RDEPENDS_${PN} += "\
+ 
+ inherit e gettext
+ SRC_URI = " \
+-    ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
++    git://git.enlightenment.org/apps/enjoy.git \
+     file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
+ "
+-S = "${WORKDIR}/${SRCNAME}"
+-
+-PR = "r1"
++S = "${WORKDIR}/git"
+ 
+ FILES_${PN} += "${datadir}/icons/"
+ 
 -- 
 1.8.5.2
 
