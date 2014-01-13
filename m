@@ -1,37 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 85E706B5DC
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
+	[209.85.217.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 73D166B565
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jan 2014 17:54:23 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id o10so2862909eaj.18
+	Mon, 13 Jan 2014 00:58:25 +0000 (UTC)
+Received: by mail-lb0-f181.google.com with SMTP id z5so2476303lbh.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Jan 2014 09:54:24 -0800 (PST)
+	Sun, 12 Jan 2014 16:58:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=koippfj4IbVNgm8j/iXHf1il9fjybkPHOh0ECcYDJdk=;
-	b=I3ZWnSbc+7M2KFRyR8AWFx2y9GGyh5PoqXwHJ2A3dC5PEWwWM88lylGSCHrDAeoIzZ
-	9glir0AnzLca22FRo8i7z1NPRGJ/lEayAeMv5+YcoZvk9nIRKcKHsXqqu+5KqEB3gzzy
-	hJtSZN/3dIZoX/aTRK5HSdm5WemFV7KDMVRL4NIoXgrXK+8kaxqnQpyW8WzpMhnFlFQS
-	FSJrVFDILJ8W+6iMO7OPSjNtt070CTC5DGNt+tzVYhKoSiicHfitx37YuWWu7kvanDJV
-	iBxTmKCqw9W4omzWECF8llrK2TzafNhhWYYlATQidWddu/GEmflsloWP3ssU34m3ZgP7
-	zvDA==
-X-Received: by 10.15.42.133 with SMTP id u5mr22412110eev.47.1389549264191;
-	Sun, 12 Jan 2014 09:54:24 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id l4sm32834879een.13.2014.01.12.09.54.23
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 12 Jan 2014 09:54:23 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=LGAfYfqVZj05aKbayR4B1tPSEzGBAR1N4lg8agwFU7Q=;
+	b=drFlgp08nq1xAk1713WII5dRSKvyD/EBmAhSnvuyf0239xAKZKHI22TDI2X/VJmD/h
+	Z/KPxBSAngrVr+9LOjn+p6ChxnF/GxVgy3/KHyflKwtQpK1A0nF0XwYD4K4x5qamipwz
+	JUjYU1MOq6XKa9vz3A/rkrCEMVLXfsPrtKswmlGctMyr6ZdniekiwcWmOZTxkDbXPtQ3
+	Uaxysn6sboEvLXL0kEM2EfdumTxwQG6KId/QhAViNWFYkb0VuuxwdNtca5DLxYaDVxaI
+	yLE8/64jCBmMlbR6DsvaaUagh0emxHfslSxm4cAMLMnb8tYElVwclWTmLKpPrgGBV+vn
+	4qCQ==
+MIME-Version: 1.0
+X-Received: by 10.152.121.105 with SMTP id lj9mr9468024lab.6.1389574705845;
+	Sun, 12 Jan 2014 16:58:25 -0800 (PST)
+Received: by 10.112.145.6 with HTTP; Sun, 12 Jan 2014 16:58:25 -0800 (PST)
+Date: Mon, 13 Jan 2014 01:58:25 +0100
+Message-ID: <CAPbeDCnrC84D8tqjT-A29YLO_hn2K1wQ5a_cK85uMVfGEzbrhQ@mail.gmail.com>
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Jan 2014 18:54:35 +0100
-Message-Id: <1389549275-4775-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.5.2
-In-Reply-To: <1389549275-4775-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1389549275-4775-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-efl][WIP][PATCH 3/3] enjoy: Upgrade to version from git
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5][jansa/qt5-5.2.0] libQt5*.la references OE build directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,101 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Jan 2014 17:54:24 -0000
+X-List-Received-Date: Mon, 13 Jan 2014 00:58:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- ...ays-use-position-as-percent-and-define-a-1-second.patch | 14 +++++++-------
- meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb}    | 10 ++++------
- 2 files changed, 11 insertions(+), 13 deletions(-)
- rename meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} (90%)
+Hi,
 
-diff --git a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
-index 45f02b7..0962450 100644
---- a/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
-+++ b/meta-efl/recipes-efl/e17/enjoy/0001-always-use-position-as-percent-and-define-a-1-second.patch
-@@ -1,4 +1,4 @@
--From ac4c8a57e8a042acd4b8ff803d3d3574b0e7a7fb Mon Sep 17 00:00:00 2001
-+From 751505501e0db31cf766ec0ae95a6968b4d1eb93 Mon Sep 17 00:00:00 2001
- From: Alban Browaeys <prahal@yahoo.com>
- Date: Wed, 5 Sep 2012 02:58:26 +0000
- Subject: [PATCH] always use position as percent and define a 1 seconds
-@@ -7,12 +7,12 @@ Subject: [PATCH] always use position as percent and define a 1 seconds
- Fix "reverb" effect: ie loop between setting the slider to match
- the position and handling slider to position (seek).
- ---
-- data/themes/default.edc |    8 +++-----
-- src/bin/win.c           |   28 ++++++++++++++++++++++------
-+ data/themes/default.edc |  8 +++-----
-+ src/bin/win.c           | 28 ++++++++++++++++++++++------
-  2 files changed, 25 insertions(+), 11 deletions(-)
- 
- diff --git a/data/themes/default.edc b/data/themes/default.edc
--index 65efddf..27bb9e4 100644
-+index ebf8ba4..7a906b1 100644
- --- a/data/themes/default.edc
- +++ b/data/themes/default.edc
- @@ -186,7 +186,6 @@ collections {
-@@ -42,7 +42,7 @@ index 65efddf..27bb9e4 100644
-              } else if (type == MSG_INT && id == MSG_SHUFFLE) {
-                 external_param_set_bool(PART:"buttons.shuffle", "state", getarg(2));
-              } else if (type == MSG_INT && id == MSG_LOOP) {
--@@ -687,7 +685,7 @@ collections {
-+@@ -689,7 +687,7 @@ collections {
-              source: "progress.slider";
-              signal: "changed";
-              script {
-@@ -52,7 +52,7 @@ index 65efddf..27bb9e4 100644
-           }
-           program {
- diff --git a/src/bin/win.c b/src/bin/win.c
--index 63951db..ad93ab5 100644
-+index 2f65953..428e268 100644
- --- a/src/bin/win.c
- +++ b/src/bin/win.c
- @@ -194,8 +194,8 @@ _win_play_eval(Win *w)
-@@ -129,5 +129,5 @@ index 63951db..ad93ab5 100644
-  }
-  
- -- 
--1.7.7
-+1.8.5.2
- 
-diff --git a/meta-efl/recipes-efl/e17/enjoy_svn.bb b/meta-efl/recipes-efl/e17/enjoy_git.bb
-similarity index 90%
-rename from meta-efl/recipes-efl/e17/enjoy_svn.bb
-rename to meta-efl/recipes-efl/e17/enjoy_git.bb
-index aa99898..c9ff070 100644
---- a/meta-efl/recipes-efl/e17/enjoy_svn.bb
-+++ b/meta-efl/recipes-efl/e17/enjoy_git.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "Enjoy music player"
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- DEPENDS = "evas ecore edje elementary emotion lightmediascanner eldbus gst-plugins-good"
--SRCREV = "${EFL_SRCREV}"
--PV = "0.0+svnr${SRCPV}"
- 
-+SRCREV = "aa8fec69e885eec048a849c2b34059ec58404e02"
-+PV = "0.1.0+gitr${SRCPV}"
- 
- #1st needed for all formats
- #2nd needed for mp3 playback
-@@ -20,12 +20,10 @@ RDEPENDS_${PN} += "\
- 
- inherit e gettext
- SRC_URI = " \
--    ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
-+    git://git.enlightenment.org/apps/enjoy.git \
-     file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
- "
--S = "${WORKDIR}/${SRCNAME}"
--
--PR = "r1"
-+S = "${WORKDIR}/git"
- 
- FILES_${PN} += "${datadir}/icons/"
- 
--- 
-1.8.5.2
+I'm seeing what I believe is a problem with the *.la files in the Qt5
+dev-packages.
+The files references paths in my OE build environment, like so:
 
+...
+# Libraries that this one depends upon.
+dependency_libs='-lQt5Gui
+-L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-solo/usr/lib
+-lQt5Core -lpthread '
+...
+# Directory that this library needs to be installed in:
+libdir='/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-solo/usr'
+...
+
+I noticed this since my Qt5 autotools project wouldn't link properly when
+using the SDK, unless I first removed all libQt5*.la files.
+
+I'm not quite sure where to look for the problem so any pointers would be
+appreciated.
+
+  -- Jacob
 
