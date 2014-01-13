@@ -1,51 +1,21 @@
-Return-Path: <gjohnson@agleader.com>
-Received: from barracuda.agleader.com (mail.agleader.com [69.66.249.33])
-	by mail.openembedded.org (Postfix) with SMTP id D1DAE60155
+Return-Path: <jake42@rommel.stw.uni-erlangen.de>
+Received: from sheldon.rommel.stw.uni-erlangen.de
+	(mail.rommel.stw.uni-erlangen.de [131.188.24.4])
+	by mail.openembedded.org (Postfix) with ESMTP id E105B6DEF9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2014 15:06:54 +0000 (UTC)
-X-ASG-Debug-ID: 1389625613-06561d54c4380550001-aWHRdb
-Received: from mailout.agleader.com (agmail-caht.agleader.local
-	[192.168.16.10]) by barracuda.agleader.com with ESMTP id
-	bZfkLyQLe86xZh5N for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2014 09:06:53 -0600 (CST)
-X-Barracuda-Envelope-From: gjohnson@agleader.com
-X-Barracuda-RBL-Trusted-Forwarder: 192.168.16.10
-Received: from agmail-mb1.agleader.local ([127.0.0.1]) by
-	agmail-caht.agleader.local ([192.168.16.10]) with mapi; Mon, 13 Jan 2014
-	09:06:53 -0600
-From: Gabe Johnson <gjohnson@agleader.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Jan 2014 09:05:56 -0600
-Thread-Topic: [meta-qt5][PATCH] nativesdk-qtbase_5.1.1.bb: Add path to
-	qtbase patches.
-X-ASG-Orig-Subj: [meta-qt5][PATCH] nativesdk-qtbase_5.1.1.bb: Add path to
-	qtbase patches.
-Thread-Index: Ac8NY6c44pcjQP/WRvK/9Gg8gcK9HwAAIhMPAMMxkpY=
-Message-ID: <EF93C63B81FE3D4F81C98317512457471295D9D45B@agmail-mb1>
-References: <1389289978-29274-1-git-send-email-gjohnson@agleader.com>,
-	<EF93C63B81FE3D4F81C98317512457471295D9D459@agmail-mb1>
-In-Reply-To: <EF93C63B81FE3D4F81C98317512457471295D9D459@agmail-mb1>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-Barracuda-Connect: agmail-caht.agleader.local[192.168.16.10]
-X-Barracuda-Start-Time: 1389625613
-X-Barracuda-URL: http://barracuda.agleader.com:8000/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at agleader.com
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Spam-Score: 0.00
-X-Barracuda-Spam-Status: No,
-	SCORE=0.00 using per-user scores of TAG_LEVEL=1000.0
-	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=9.0 tests=
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.2.144041
-	Rule breakdown below
-	pts rule name              description
-	---- ----------------------
-	--------------------------------------------------
-Subject: [meta-qt5][PATCH] nativesdk-qtbase_5.1.1.bb: Add path to qtbase patches.
+	Mon, 13 Jan 2014 15:38:18 +0000 (UTC)
+Received: from rommel-9-145.rommel.stw.uni-erlangen.de ([172.17.9.145]
+	helo=ahorn.rommel.stw.uni-erlangen.de)
+	by sheldon.rommel.stw.uni-erlangen.de with esmtpsa
+	(TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256) (Exim 4.80)
+	(envelope-from <jake42@rommel.stw.uni-erlangen.de>)
+	id 1W2jak-00049b-SQ; Mon, 13 Jan 2014 16:38:18 +0100
+From: Jakob Drexel <jake42@rommel.stw.uni-erlangen.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Jan 2014 16:38:11 +0100
+Message-Id: <1389627492-4327-1-git-send-email-jake42@rommel.stw.uni-erlangen.de>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-oe][PATCH 1/2] pidgin: Add libotr recipe and patch to fix QA-issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,32 +29,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2014 15:06:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 13 Jan 2014 15:38:19 -0000
 
-The package would not build because the patches could not be found.
-Signed-off-by: Gabe Johnson <gjohnson at agleader.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_5.1.1.bb |    2 ++
- 1 file changed, 2 insertions(+)
+ .../pidgin/libotr/fix_qa-issue_include.patch               |  8 ++++++++
+ meta-oe/recipes-support/pidgin/libotr_4.0.0.bb             | 14 ++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pidgin/libotr/fix_qa-issue_include.patch
+ create mode 100644 meta-oe/recipes-support/pidgin/libotr_4.0.0.bb
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_5.1.1.bb b/recipes-qt/qt5/nati=
-vesdk-qtbase_5.1.1.bb
-index 8fd161a..6e4f488 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_5.1.1.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_5.1.1.bb
-@@ -1,5 +1,7 @@
- require qt5-${PV}.inc
- require ${PN}.inc
-
-+FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qtbase-${PV}:"
+diff --git a/meta-oe/recipes-support/pidgin/libotr/fix_qa-issue_include.patch b/meta-oe/recipes-support/pidgin/libotr/fix_qa-issue_include.patch
+new file mode 100644
+index 0000000..b70662f
+--- /dev/null
++++ b/meta-oe/recipes-support/pidgin/libotr/fix_qa-issue_include.patch
+@@ -0,0 +1,8 @@
++--- a/toolkit/Makefile.am	2012-05-03 15:52:22.000000000 +0200
+++++ b/toolkit/Makefile.am	2014-01-13 12:12:26.030369357 +0100
++@@ -1,4 +1,4 @@
++-INCLUDES = -I$(includedir) -I../src @LIBGCRYPT_CFLAGS@
+++INCLUDES = -I../src @LIBGCRYPT_CFLAGS@
++ 
++ noinst_HEADERS = aes.h ctrmode.h parse.h sesskeys.h readotr.h sha1hmac.h
++ 
+diff --git a/meta-oe/recipes-support/pidgin/libotr_4.0.0.bb b/meta-oe/recipes-support/pidgin/libotr_4.0.0.bb
+new file mode 100644
+index 0000000..bb79501
+--- /dev/null
++++ b/meta-oe/recipes-support/pidgin/libotr_4.0.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "(OTR) Messaging allows you to have private conversations over instant messaging"
++HOMEPAGE = "http://www.cypherpunks.ca/otr/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=92fe174bad6da3763f6e9e9eaff6df24"
++DEPENDS = "libgcrypt libgpg-error"
 +
- SRC_URI[md5sum] =3D "955d1e4da875f3872ef3208f21a757dd"
- SRC_URI[sha256sum] =3D "d4620e0b1aff6d2b6f4d8066e6f8258e012a8b5507af7c03b6=
-61029a1ffa75c9"
---
-1.7.9.5
++SRC_URI = "http://www.cypherpunks.ca/otr/${P}.tar.gz \
++           file://fix_qa-issue_include.patch \
++"
++
++SRC_URI[md5sum] = "00979dca82d70383fcd1b01f3974363c"
++SRC_URI[sha256sum] = "3f911994409898e74527730745ef35ed75c352c695a1822a677a34b2cf0293b4"
++
++inherit autotools pkgconfig
+-- 
+1.8.3.2
 
 
