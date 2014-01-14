@@ -1,37 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 9468A6AE73;
-	Tue, 14 Jan 2014 12:13:27 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id b15so91343eek.18
-	for <multiple recipients>; Tue, 14 Jan 2014 04:13:28 -0800 (PST)
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 305F16A566;
+	Tue, 14 Jan 2014 13:33:25 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id m10so3976299eaj.12
+	for <multiple recipients>; Tue, 14 Jan 2014 05:33:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9lY88ePVmB8JF6TRXj8Kltc/1Ps7yHOLxrU3scY/M/g=;
-	b=lcqQ76MJY+XdnJ9ZELQpGgxhMStUvH42JZROS7R6MtN8kE4/94NWg68IlzBu0JARp6
-	0kRSwD9yrXFZl/a0HLbVCvREEHTVDp5MvfyGT3xtSDe7bhFCDh05z+KjP3M5dqdmZ0y3
-	5l/sXzwaHwxAEQDySUlZweU+mnHmoUl+EQEJB5CRMcRT/X94nCQIQ/meBx/w4CUrn3mN
-	i1uOPnCE4ugtyyLTjybp3By24md91Nblc4naEMO5FWBV/KsIaJrTNe3+bkfljoH04OfA
-	1f4PVVvDB7KyDaZoclX5vcB5kZnSgjpwW8V9YJ92B12fiJDdbKMiGXmn+iGXzPaimCG2
-	vjOQ==
-X-Received: by 10.15.45.135 with SMTP id b7mr1781652eew.88.1389701608252;
-	Tue, 14 Jan 2014 04:13:28 -0800 (PST)
+	bh=S68Ch5KggF9aTqI/k2ez9R7a7uXwbuTXTdlQRH2Bbvg=;
+	b=xXX0gbTK2JMsD3rN4IHOChSCg0I+QnmTfc8S2x8k94es+ekNVw2wQnFWoTqZnxckro
+	zKj8eUslG/I7SS+M59NVT7URCB3orhPdzYK1JnqNTIWlt+JEy2UEiNev9FBVzYPKyGDH
+	a9KeTRJG39cYUkmvE1i1EH5XpbXd44gTm0zby9x2+y8fnxt+Jk+uR8OAM9TVxLPhC+kk
+	w02FX6aezFeeqXkAYae1ZNtJiNjxZ6pChUqch7/P4j5d2O4SxUOh3sxi2jY4dyMZfxFW
+	swrDQESnSljK819R2MN1kUX6qQxfveay4WS2IZcnyuOkQaJ+oRQYaSKTR5kIV2eOHtM+
+	6Xag==
+X-Received: by 10.14.113.199 with SMTP id a47mr2191046eeh.41.1389706405768;
+	Tue, 14 Jan 2014 05:33:25 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id a51sm1107997eeh.8.2014.01.14.04.13.27
+	by mx.google.com with ESMTPSA id 4sm1669095eed.14.2014.01.14.05.33.22
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Jan 2014 04:13:27 -0800 (PST)
-Date: Tue, 14 Jan 2014 13:13:47 +0100
+	Tue, 14 Jan 2014 05:33:24 -0800 (PST)
+Date: Tue, 14 Jan 2014 14:33:39 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140114121347.GB3717@jama>
-References: <7166127.YkfX3aIoNI@helios>
+To: Phil Blundell <pb@pbcl.net>
+Message-ID: <20140114133339.GC3717@jama>
+References: <7166127.YkfX3aIoNI@helios> <20140114121347.GB3717@jama>
+	<1389704128.19023.11.camel@phil-desktop.brightsign>
 MIME-Version: 1.0
-In-Reply-To: <7166127.YkfX3aIoNI@helios>
+In-Reply-To: <1389704128.19023.11.camel@phil-desktop.brightsign>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: Public TSC / OE Workgroup meeting today
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] Public TSC / OE Workgroup meeting today
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,70 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 12:13:28 -0000
-X-Groupsio-MsgNum: 47724
+X-List-Received-Date: Tue, 14 Jan 2014 13:33:26 -0000
+X-Groupsio-MsgNum: 47725
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tjCHc7DPkfUGtrlw"
+	protocol="application/pgp-signature"; boundary="lCAWRPmW1mITcIfM"
 Content-Disposition: inline
 
---tjCHc7DPkfUGtrlw
+--lCAWRPmW1mITcIfM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 14, 2014 at 10:08:35AM +0000, Paul Eggleton wrote:
-> Hi all,
+On Tue, Jan 14, 2014 at 12:55:28PM +0000, Phil Blundell wrote:
+> On Tue, 2014-01-14 at 13:13 +0100, Martin Jansa wrote:
+> > Not sure if it's worth new item on agenda, but maybe we should move
+> > meta/classes/image-prelink.bbclass functionality to package.bbclass,
+> > maybe we have more cases like this where image build is changing files
+> > which are provided by normal packages (such cases are lost after
+> > upgrading on device with packagemanager).
 >=20
-> There will be a public OpenEmbedded TSC/workgroup meeting today - there=
-=20
-> wouldn't normally be one scheduled but there was quite a lot of discussio=
-n=20
-> last time (which is a good thing!). If you're interested in discussing lo=
-ng-
-> term technical efforts around the OpenEmbedded project please join us on=
-=20
-> irc.freenode.net in channel #oe at=20
-> 17:00 GMT (9am PST, 11am CST, 12 EST, 18:00 CET) today.
->=20
-> Topics we covered last meeting:
->=20
-> * Qt 4 / 5 recipes in OE-Core
-> * Rising bug count in Bugzilla and what we can do about it
-> * (briefly) Patch review/merging process
-> * Absentee layer maintainers
->=20
-> Issues we didn't get to last time (that weren't resolved on the mailing l=
-ist):
-> - janitorial day/week?
-> - "bitbake world" failures scrub
-> - initrdscripts/init-live needs work
-> - lava evaluation
-> - website and other infrastructure issues
-> - next release
->=20
-> New issues for discussion are also welcome.
+> How would that work?  I'm not sure that it's possible (in the general
+> case) to prelink in any sensible way prior to rootfs construction.  The
+> same applies to image-mklibs.bbclass.
 
-Not sure if it's worth new item on agenda, but maybe we should move
-meta/classes/image-prelink.bbclass functionality to package.bbclass,
-maybe we have more cases like this where image build is changing files
-which are provided by normal packages (such cases are lost after
-upgrading on device with packagemanager).
+Hmm, you're right.
 
-Cheers,
+The reason why I was thinking about this, is that someone reported to me
+that libc-dbg doesn't work after prelink changed libc headers in
+do_rootfs (external toolchain).
 
+IIRC there was some discussion about issues caused by prelink changing head=
+ers,
+I'll try to find it in archives, sorry for noise.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---tjCHc7DPkfUGtrlw
+--lCAWRPmW1mITcIfM
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlLVKfsACgkQN1Ujt2V2gBwYYQCgtcmHMctvoPP+jto2qQbE9R/b
-nk4An1+VCh457MOoMdK39wKokUpTOQv4
-=nqT5
+iEYEARECAAYFAlLVPLMACgkQN1Ujt2V2gBznHwCeNQpU3XEyex7+zvDqiPYuCriY
+lAcAoKwZ9GO5NxcIv1eVj0DR0UGkmz+x
+=wGXx
 -----END PGP SIGNATURE-----
 
---tjCHc7DPkfUGtrlw--
+--lCAWRPmW1mITcIfM--
