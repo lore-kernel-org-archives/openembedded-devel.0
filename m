@@ -1,45 +1,40 @@
-Return-Path: <ting.liu@freescale.com>
-Received: from ch1outboundpool.messaging.microsoft.com
-	(ch1ehsobe003.messaging.microsoft.com [216.32.181.183])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B8486AE73
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E9C736A566
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 09:10:19 +0000 (UTC)
-Received: from mail24-ch1-R.bigfish.com (10.43.68.243) by
-	CH1EHSOBE001.bigfish.com (10.43.70.51) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 14 Jan 2014 09:10:19 +0000
-Received: from mail24-ch1 (localhost [127.0.0.1])	by mail24-ch1-R.bigfish.com
-	(Postfix) with ESMTP id 652603E0247	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 09:10:19 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h1155h)
-Received: from mail24-ch1 (localhost.localdomain [127.0.0.1]) by mail24-ch1
-	(MessageSwitch) id 1389690617194432_25627;
-	Tue, 14 Jan 2014 09:10:17 +0000 (UTC)
-Received: from CH1EHSMHS031.bigfish.com (snatpool2.int.messaging.microsoft.com
-	[10.43.68.236])	by mail24-ch1.bigfish.com (Postfix) with ESMTP id
-	20403440046;	Tue, 14 Jan 2014 09:10:17 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS031.bigfish.com
-	(10.43.70.31) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 14 Jan 2014 09:10:14 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-003.039d.mgd.msft.net (10.84.1.16) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 14 Jan 2014 09:10:14 +0000
-Received: from b28495.ap.freescale.net (b28495.ap.freescale.net
-	[10.193.20.146])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id s0E9AB0u003871;	Tue, 14 Jan 2014 02:10:12 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Jan 2014 17:10:09 +0800
-Message-ID: <1389690610-4230-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.3.4
+	Tue, 14 Jan 2014 09:21:19 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id d49so71166eek.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jan 2014 01:21:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=EKUYBBHFT8knSNexxFKPWtl5AJsdrXkKZqSZSwMdH64=;
+	b=xiTVeNska7nXCLceqg5K6pUz0JibEm+pdADcIyTy9/4N9t1LsDmmbzNNuK2GWxsB1G
+	FDopf1Ua9aNjCYnjHuNKYzfEbnWR0kj9dLbFvSYyTA+sUOvocZ8mF05nGwd+7EEZxQkS
+	7bebGlcKN4SHzoJLBmIdh6qrtKJ1DC0+xHQymJEL+Aiegf07LSk9BR/nT7/Uf+mowWEI
+	D6E/vy15+DwfHJl263kNbsrkYAlnJ+XY5n0oOmC+DQJA6BhJo/98ZSdEC+j57tNwWMcw
+	gem5x3+G9kUF1QRBKynB6P0wh1fu3Nt2APTW2i3YmU+hvWA8B7O2Vs+rMcse2yTSM4U0
+	DUZA==
+X-Received: by 10.14.32.132 with SMTP id o4mr831592eea.14.1389691280092;
+	Tue, 14 Jan 2014 01:21:20 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id m1sm46868391eeg.0.2014.01.14.01.21.18
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Jan 2014 01:21:19 -0800 (PST)
+Date: Tue, 14 Jan 2014 10:21:39 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: b28495@freescale.com
+Message-ID: <20140114092139.GO16995@jama>
+References: <1389690610-4230-1-git-send-email-b28495@freescale.com>
+	<1389690610-4230-2-git-send-email-b28495@freescale.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH 1/2] lmbench: use base_libdir instead of hardcoded /lib
+In-Reply-To: <1389690610-4230-2-git-send-email-b28495@freescale.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 2/2] inetutils: not hard coded libreadline path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,76 +48,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 09:10:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 14 Jan 2014 09:21:21 -0000
+X-Groupsio-MsgNum: 47719
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="A7FgPGrDEcSmmdo/"
+Content-Disposition: inline
 
-From: Ting Liu <b28495@freescale.com>
+--A7FgPGrDEcSmmdo/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix the below QA warning when building 64bit target:
-| WARNING: QA Issue: lmbench: Files/directories were installed but not
-| shipped
-| /usr/lib
-| /usr/lib/libmbench.a
+On Tue, Jan 14, 2014 at 05:10:10PM +0800, b28495@freescale.com wrote:
+> From: Ting Liu <b28495@freescale.com>
+>=20
+> Avoid below QA issues:
+> | ERROR: QA Issue: package inetutils-ftp contains bad RPATH
+> | ERROR: QA Issue: package inetutils-telnet contains bad RPATH
+> | ERROR: QA Issue: package inetutils-telnetd contains bad RPATH
+> | ERROR: QA run found fatal errors. Please consider fixing them.
+> | ERROR: Function failed: do_package_qa
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- .../use-base_libdir-instead-of-hardcoded-lib.patch |   32 ++++++++++++++++++++
- .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |    1 +
- 2 files changed, 33 insertions(+), 0 deletions(-)
- create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
+Doesn't it autodetect libreadline?
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
-new file mode 100644
-index 0000000..3351ce8
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
-@@ -0,0 +1,32 @@
-+From 0d09e31970616e09beb7f238c2b59bfc541148fb Mon Sep 17 00:00:00 2001
-+From: Ting Liu <b28495@freescale.com>
-+Date: Fri, 22 Nov 2013 15:20:08 +0800
-+Subject: [PATCH] use base_libdir instead of hardcoded /lib
-+
-+Upsteam Status: Inappropriate [configuration]
-+
-+Signed-off-by: Ting Liu <b28495@freescale.com>
-+---
-+ src/Makefile |    4 ++--
-+ 1 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index c7a8c79..c7e4e3c 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -143,10 +143,10 @@ install-target:
-+ 	if [ ! -d $(BASE) ]; then mkdir $(BASE); fi
-+ 	if [ ! -d $(BASE)/bin ]; then mkdir $(BASE)/bin; fi
-+ 	if [ ! -d $(BASE)/include ]; then mkdir $(BASE)/include; fi
-+-	if [ ! -d $(BASE)/lib ]; then mkdir $(BASE)/lib; fi
-++	if [ ! -d $(BASE)$(base_libdir) ]; then mkdir $(BASE)$(base_libdir); fi
-+ 	cp $(EXES) $(BASE)/bin
-+ 	cp $(INCS) $(BASE)/include
-+-	cp $O/lmbench.a $(BASE)/lib/libmbench.a
-++	cp $O/lmbench.a $(BASE)$(base_libdir)
-+ 	cd ../doc; env MAKEFLAGS="$(MAKEFLAGS)" make CC="${CC}" OS="${OS}" BASE="$(BASE)" install
-+ 
-+ 
-+-- 
-+1.7.5.4
-+
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index b4020d7..eb38f07 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-            file://update-results-script.patch \
-            file://obey-ranlib.patch \
-            file://update-config-script.patch \ 
-+           file://use-base_libdir-instead-of-hardcoded-lib.patch \ 
- "
- SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
- SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
--- 
-1.7.3.4
+> Signed-off-by: Ting Liu <b28495@freescale.com>
+> ---
+>  .../inetutils/inetutils_1.9.1.bb                   |    1 -
+>  1 files changed, 0 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
+=2E1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> index 97fc6a1..03b8e65 100644
+> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> @@ -37,7 +37,6 @@ PACKAGECONFIG[uucpd] =3D "--enable-uucpd,--disable-uucp=
+d,readline"
+> =20
+>  EXTRA_OECONF =3D "--with-ncurses-include-dir=3D${STAGING_INCDIR} \
+>          ${noipv6} \
+> -        --with-libreadline-prefix=3D${STAGING_DIR_HOST}${prefix} \
+>  "
+> =20
+>  do_configure_prepend () {
+> --=20
+> 1.7.3.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--A7FgPGrDEcSmmdo/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLVAaMACgkQN1Ujt2V2gBwnMQCdGrpuzK7jQM0RCoWJXaN5AGBb
+9jsAoK8IL2EHr5oVMVIcUrGRIv3xa1mn
+=jqL8
+-----END PGP SIGNATURE-----
+
+--A7FgPGrDEcSmmdo/--
