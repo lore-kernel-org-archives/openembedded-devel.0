@@ -1,38 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
-	[209.85.219.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 435C16B269
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 40FC56B880
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2014 20:36:31 +0000 (UTC)
-Received: by mail-oa0-f48.google.com with SMTP id g12so3375658oah.21
+	Tue, 14 Jan 2014 00:04:05 +0000 (UTC)
+Received: by mail-la0-f49.google.com with SMTP id y1so1664284lam.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2014 12:36:31 -0800 (PST)
+	Mon, 13 Jan 2014 16:04:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=gKtWyJdfDlDdA0/khpqNST81Xpv82lzd1FLHOoJ4z0c=;
-	b=Ed4uRWtdYpZq9HfWr02AIWKrlnCmcXcgJiwPZPMwQmWbmqM7mzVepYNdRAwFzZn29i
-	hwm1XoW4xpNPBkGFQV89pY1jgDB38re6f0Gg/aGaMw1Q5yLeoaGaIbUxjWaBeX8WgSky
-	3T3UjZCoUlS6c2yniPBV1eJK6tYw2P/Eu0i3DDhvJcGpHePMMTEjoX1UYXrURuMQ435e
-	AwUbkRz1NbFXzpzL0GaDgRVJKTGVC30HY/CKQfmkkBOpCj/fdin5imfefsMgz7f1gvLs
-	43AKXHxSdor0vjk5arSUU8g6Ak4sVqTHjZv5356RQDuZdwZFisGPEQDwuwNunJuA7Ejb
-	4gkg==
+	h=date:from:to:subject:in-reply-to:message-id:references:user-agent
+	:mime-version:content-type;
+	bh=IBZPYHo1pIdMrGOefgv30ke0DbGGs47Bw0uT508dG58=;
+	b=yjgc0DtbNLZLS/FKtTPWAjK2TtYvlQJsy7hBQhazzGGchvc7821YlntWdsXC9C8u0f
+	m8+zpYrLx6wMbS/IQ+kpw9LuOowNBWXo1kEnd8v60r31ACzo3lLbDTar7kvbsV1BNERc
+	jWxNgkKAZO+e3nTl2xLEv7wF2EE3QC4lxJJIajmPJMn4HBlX//e2bGamZ5wkTBO0Vuvo
+	MI9PcCbC5RIjnGBZ128s1+xLU/NOIE1J4uF7aJQyjSAshAVP23wx8gKN/Nx7yOu6Eu9f
+	Z5mK5n/O9MfhDEcOJ+83KdQaNC12ImMyaXx4KpaRPRA88nFSeEteP16krKYft0txgLfi
+	3hzg==
+X-Received: by 10.152.163.69 with SMTP id yg5mr12054463lab.33.1389657845210;
+	Mon, 13 Jan 2014 16:04:05 -0800 (PST)
+Received: from [192.168.0.156] (89-253-118-72.customers.ownit.se.
+	[89.253.118.72])
+	by mx.google.com with ESMTPSA id c3sm4964569lbp.2.2014.01.13.16.04.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 13 Jan 2014 16:04:04 -0800 (PST)
+Date: Tue, 14 Jan 2014 01:03:49 +0100 (CET)
+From: Jacob Kroon <jacob.kroon@gmail.com>
+X-X-Sender: jkroon@localhost.localdomain
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20140113101147.GI16995@jama>
+Message-ID: <alpine.LFD.2.11.1401140055500.20049@localhost.localdomain>
+References: <CAPbeDCnrC84D8tqjT-A29YLO_hn2K1wQ5a_cK85uMVfGEzbrhQ@mail.gmail.com>
+	<20140113101147.GI16995@jama>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-X-Received: by 10.60.50.202 with SMTP id e10mr22141697oeo.39.1389645391686;
-	Mon, 13 Jan 2014 12:36:31 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Mon, 13 Jan 2014 12:36:31 -0800 (PST)
-In-Reply-To: <20140113202933.GN16995@jama>
-References: <1389640209-2487-1-git-send-email-otavio@ossystems.com.br>
-	<20140113202933.GN16995@jama>
-Date: Mon, 13 Jan 2014 18:36:31 -0200
-X-Google-Sender-Auth: 7L7h24vdyppPBFN8NXGlZx8Wv0E
-Message-ID: <CAP9ODKr4BU0T6p0+xS-NvPT2xj9knQx6+Lu+wG0qgKJNBx6rew@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] gdal: Use external TIFF support
+Subject: Re: [meta-qt5][jansa/qt5-5.2.0] libQt5*.la references OE build directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,28 +49,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2014 20:36:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 Jan 2014 00:04:06 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Mon, Jan 13, 2014 at 6:29 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-> On Mon, Jan 13, 2014 at 05:10:09PM -0200, Otavio Salvador wrote:
-> > The TIFF support cannot be disabled so prefer to depends on 'tiff' and
-> > use external by default.
+On Mon, 13 Jan 2014, Martin Jansa wrote:
+
+> On Mon, Jan 13, 2014 at 01:58:25AM +0100, Jacob Kroon wrote:
+>> Hi,
+>>
+>> I'm seeing what I believe is a problem with the *.la files in the Qt5
+>> dev-packages.
+>> The files references paths in my OE build environment, like so:
+>>
+>> ...
+>> # Libraries that this one depends upon.
+>> dependency_libs='-lQt5Gui
+>> -L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-solo/usr/lib
+>> -lQt5Core -lpthread '
+>> ...
+>> # Directory that this library needs to be installed in:
+>> libdir='/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-solo/usr'
+>> ...
+>>
+>> I noticed this since my Qt5 autotools project wouldn't link properly when
+>> using the SDK, unless I first removed all libQt5*.la files.
+>>
+>> I'm not quite sure where to look for the problem so any pointers would be
+>> appreciated.
 >
-> I haven't looked at configure script, but isn't it only caused by
-> typo in PACKAGECONFIG?
+> Probably bad rebase on my side, please compare
 >
-> --without-tiff
-> instead of
-> --without-libtiff (to match --with variant)?
+> mkspecs/features/qt_module.prf in 5.1.1 and 5.2.0
+>
+> changed in:
+> https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase-5.1.1/0008-qt_module-Fix-pkgconfig-replacement.patch
+> and
+> https://github.com/meta-qt5/meta-qt5/blob/jansa/qt5-5.2.0/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+>
+> Or better in meta-qt5's qtbase repo:
+> https://github.com/meta-qt5/qtbase/blob/b5.1.1/mkspecs/features/qt_module.prf
+> https://github.com/meta-qt5/qtbase/blob/b5.2.0/mkspecs/features/qt_module.prf
+>
 
+I tried building Qt 5.1.1 from master again, the .la-files do look 
+better, "libdir" looks correct (taken from libQt5Svg.la):
 
-The configure.in force it to be internal in case it does not find it. This
-seems to be the safest route for it.
+<snip>
+# Directory that this library needs to be installed in:
+libdir='/usr/lib'
+</snip>
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+however
+
+<snip>
+dependency_libs='-lQt5Gui 
+-L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-solo/usr/lib 
+-lQt5Core -lpthread '
+</snip>
+
+Dunno wether this is a problem or not, I never tried building the 
+project with 5.1.1 using the SDK.
+
+Will hopefully have some time tomorrow to look at the links you sent.
+
+Thanks,
+
+Jacob
 
