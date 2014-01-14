@@ -1,31 +1,47 @@
-Return-Path: <mryndzionek@gmail.com>
-Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
-	[209.85.214.175])
-	by mail.openembedded.org (Postfix) with ESMTP id AADF76AE73
+Return-Path: <ting.liu@freescale.com>
+Received: from co1outboundpool.messaging.microsoft.com
+	(co1ehsobe004.messaging.microsoft.com [216.32.180.187])
+	by mail.openembedded.org (Postfix) with ESMTP id 434C56A566
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 08:58:28 +0000 (UTC)
-Received: by mail-ob0-f175.google.com with SMTP id uz6so8854986obc.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 00:58:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=RAygA7YaC1ro9PgXmssvbkOQ7nUSPVW7GRHoI16m+sQ=;
-	b=ejHDMGdrMryuwWVTHXSjXu6RKfDw4XZ6sxEGIYmD7W5l86uHcn9f4lOVnKMI3y0Ewt
-	n2OxOB9yeS5nOcunr1i5Wvl/SGV8sYb4cBkkNeXGMYrPl/hzRKyr0ui+Mrai/f/4idOX
-	HPFXiLmIHImaan/GcgAadvNdM7RH3qDw7anKSeM5YEZk7Wv0YX6ZqkOuOmUOQyNZ56yD
-	HsEu0ixMxmPcKW8Q7bVMBEyqOMvAiJB27JAU6hu4rW03QckoCSWn8D7/UFOPZv84nFhW
-	TNP7ZL2j5QuI5PrQ19Vp4LB497dRowNGYLBlApIN9SJUElljVkk0xqwC37XcXPO7+F6A
-	YHDg==
+	Tue, 14 Jan 2014 09:10:19 +0000 (UTC)
+Received: from mail48-co1-R.bigfish.com (10.243.78.233) by
+	CO1EHSOBE005.bigfish.com (10.243.66.68) with Microsoft SMTP Server id
+	14.1.225.22; Tue, 14 Jan 2014 09:10:19 +0000
+Received: from mail48-co1 (localhost [127.0.0.1])	by mail48-co1-R.bigfish.com
+	(Postfix) with ESMTP id ABE40A4026B	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jan 2014 09:10:19 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h1155h)
+Received: from mail48-co1 (localhost.localdomain [127.0.0.1]) by mail48-co1
+	(MessageSwitch) id 138969061879419_32332;
+	Tue, 14 Jan 2014 09:10:18 +0000 (UTC)
+Received: from CO1EHSMHS032.bigfish.com (unknown [10.243.78.227])	by
+	mail48-co1.bigfish.com (Postfix) with ESMTP id 0F71530004F;
+	Tue, 14 Jan 2014 09:10:18 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS032.bigfish.com
+	(10.243.66.42) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Tue, 14 Jan 2014 09:10:17 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Tue, 14 Jan 2014 09:10:15 +0000
+Received: from b28495.ap.freescale.net (b28495.ap.freescale.net
+	[10.193.20.146])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
+	ESMTP id s0E9AB0v003871;	Tue, 14 Jan 2014 02:10:14 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 14 Jan 2014 17:10:10 +0800
+Message-ID: <1389690610-4230-2-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
+In-Reply-To: <1389690610-4230-1-git-send-email-b28495@freescale.com>
+References: <1389690610-4230-1-git-send-email-b28495@freescale.com>
 MIME-Version: 1.0
-X-Received: by 10.182.117.195 with SMTP id kg3mr191919obb.17.1389689909552;
-	Tue, 14 Jan 2014 00:58:29 -0800 (PST)
-Received: by 10.76.130.204 with HTTP; Tue, 14 Jan 2014 00:58:29 -0800 (PST)
-Date: Tue, 14 Jan 2014 09:58:29 +0100
-Message-ID: <CADxgXkV-YtMG-GLbScW3We-GOekxE6=7cBENaoy2gxv8Lp2tMA@mail.gmail.com>
-From: Mariusz Ryndzionek <mryndzionek@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-java][PATCH] openjdk: make the pkg_postinst work on busybox based systems
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
+Subject: [meta-oe][PATCH 2/2] inetutils: not hard coded libreadline path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,99 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 08:58:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 Jan 2014 09:10:20 -0000
+Content-Type: text/plain
 
-From cb6ebd77ca41e024f7168a1208523a81f158ed93 Mon Sep 17 00:00:00 2001
-From: Mariusz Ryndzionek <mryndzionek@gmail.com>
-Date: Tue, 14 Jan 2014 09:45:03 +0100
-Subject: [PATCH] openjdk: make the pkg_postinst work on busybox based
-systems
+From: Ting Liu <b28495@freescale.com>
 
-The 'head -1' option is not available on some busybox systems.
-Change the command to 'head -n 1'.
+Avoid below QA issues:
+| ERROR: QA Issue: package inetutils-ftp contains bad RPATH
+| ERROR: QA Issue: package inetutils-telnet contains bad RPATH
+| ERROR: QA Issue: package inetutils-telnetd contains bad RPATH
+| ERROR: QA run found fatal errors. Please consider fixing them.
+| ERROR: Function failed: do_package_qa
+
+Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- recipes-core/openjdk/openjdk-postinst.inc |   10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ .../inetutils/inetutils_1.9.1.bb                   |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-diff --git a/recipes-core/openjdk/openjdk-postinst.inc
-b/recipes-core/openjdk/openjdk-postinst.inc
-index e63a451..ad275d7 100644
---- a/recipes-core/openjdk/openjdk-postinst.inc
-+++ b/recipes-core/openjdk/openjdk-postinst.inc
-@@ -11,7 +11,7 @@ pkg_postinst_${JDKPN}-vm-shark () {
- pkg_prerm_${JDKPN}-vm-shark () {
-  sed -i -e "/^\-shark.*/d" -e "/^$/d"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         if grep -q "KNOWN" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg && grep
--q "\-server ERROR" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg; then
--          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -1`
-+          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -n 1`
-           sed -i -e "/${FIRST_KNOWN}/d" -e
- "s|\(^\-server*\)|${FIRST_KNOWN}\n\1|"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         fi
-
-@@ -29,7 +29,7 @@ pkg_postinst_${JDKPN}-vm-cacao () {
- pkg_prerm_${JDKPN}-vm-cacao () {
-  sed -i -e "/^\-cacao.*/d" -e "/^$/d"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         if grep -q "KNOWN" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg && grep
--q "\-server ERROR" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg; then
--          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -1`
-+          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -n 1`
-           sed -i -e "/${FIRST_KNOWN}/d" -e
- "s|\(^\-server*\)|${FIRST_KNOWN}\n\1|"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         fi
-
-@@ -47,7 +47,7 @@ pkg_postinst_${JDKPN}-vm-jamvm () {
- pkg_prerm_${JDKPN}-vm-jamvm () {
-  sed -i -e "/^\-jamvm.*/d" -e "/^$/d"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         if grep -q "KNOWN" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg && grep
--q "\-server ERROR" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg; then
--          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -1`
-+          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -n 1`
-           sed -i -e "/${FIRST_KNOWN}/d" -e
- "s|\(^\-server*\)|${FIRST_KNOWN}\n\1|"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         fi
-
-@@ -56,7 +56,7 @@ pkg_prerm_${JDKPN}-vm-jamvm () {
-
- pkg_postinst_${JDKPN}-vm-zero () {
-         if grep -q "KNOWN" $D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg &&
-grep -q "\-server ERROR" $D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg; then
--           FIRST_KNOWN=`grep "KNOWN"
-$D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -1`
-+           FIRST_KNOWN=`grep "KNOWN"
-$D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -n 1`
-            sed -i -e "/${FIRST_KNOWN}/d" -e "/^$/d"
-$D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-            echo ${FIRST_KNOWN} >>
-$D/${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         fi
-@@ -67,7 +67,7 @@ pkg_postinst_${JDKPN}-vm-zero () {
- pkg_prerm_${JDKPN}-vm-zero () {
-  sed -i -e "/^\-server.*/\-server ERROR"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         if grep -q "KNOWN" ${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg; then
--          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -1`
-+          FIRST_KNOWN=`grep "KNOWN"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg | head -n 1`
-           sed -i -e "/${FIRST_KNOWN}/d" -e
- "s|\(^\-server*\)|${FIRST_KNOWN}\n\1|"
-${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
-         fi
- }
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+index 97fc6a1..03b8e65 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+@@ -37,7 +37,6 @@ PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
+ 
+ EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
+         ${noipv6} \
+-        --with-libreadline-prefix=${STAGING_DIR_HOST}${prefix} \
+ "
+ 
+ do_configure_prepend () {
 -- 
-1.7.9.5
+1.7.3.4
+
+
 
