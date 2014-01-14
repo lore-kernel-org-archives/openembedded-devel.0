@@ -1,45 +1,31 @@
-Return-Path: <ting.liu@freescale.com>
-Received: from db8outboundpool.messaging.microsoft.com
-	(mail-db8lp0187.outbound.messaging.microsoft.com [213.199.154.187])
-	by mail.openembedded.org (Postfix) with ESMTP id DCDEF6CF24
+Return-Path: <mryndzionek@gmail.com>
+Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
+	[209.85.219.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 198A86AE73
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 04:01:21 +0000 (UTC)
-Received: from mail174-db8-R.bigfish.com (10.174.8.232) by
-	DB8EHSOBE025.bigfish.com (10.174.4.88) with Microsoft SMTP Server id
-	14.1.225.22; Tue, 14 Jan 2014 04:01:22 +0000
-Received: from mail174-db8 (localhost [127.0.0.1])	by
-	mail174-db8-R.bigfish.com (Postfix) with ESMTP id 5F4F81E00DB	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2014 04:01:22 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h1155h)
-Received: from mail174-db8 (localhost.localdomain [127.0.0.1]) by mail174-db8
-	(MessageSwitch) id 1389672079453160_5445;
-	Tue, 14 Jan 2014 04:01:19 +0000 (UTC)
-Received: from DB8EHSMHS015.bigfish.com (unknown [10.174.8.227])	by
-	mail174-db8.bigfish.com (Postfix) with ESMTP id 699903C0071;
-	Tue, 14 Jan 2014 04:01:19 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by DB8EHSMHS015.bigfish.com
-	(10.174.4.25) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Tue, 14 Jan 2014 04:01:19 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Tue, 14 Jan 2014 04:00:49 +0000
-Received: from right.am.freescale.net (right.am.freescale.net [10.81.116.70])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	s0E40ntK009509; Mon, 13 Jan 2014 21:00:49 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Jan 2014 22:00:48 -0600
-Message-ID: <1389672049-3309-1-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.7.9.7
+	Tue, 14 Jan 2014 08:21:55 +0000 (UTC)
+Received: by mail-oa0-f51.google.com with SMTP id m1so9252303oag.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jan 2014 00:21:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=Rnc2MeffoQsbty0AyE4xy2bpE+ny67VksQLrF/biV2M=;
+	b=ORQ359PvJGu3lZDpy5xtWaGBDkr75J+OUPooCvHDMifNdbJzF+yoWsoQ2OIzv3aiM9
+	hBrHIReBRdOknZEiL5BSlCtyxXptGbEsQyma4SivguBuy7eVxeJHB/2lUS8OdHNFedPh
+	V3+EBGeOAe6BeICM6ZEu9PXPBEpacFrxzyxdhw2YG9pW+VplbP2fYJpcOaO3rq1LH5kF
+	zmftJRCnbEBsVYKE9jQT/j8tRIJxKKkK86l9lLlJ/XZc8r31CsW4KL+kXG5H91cAkcRN
+	Nc4MfwFFLqPh55ulFg5lKlXOLIc3DHRpaJGofsdQbAcJBFvqhPKOPy4sRwNP4n3CUr7T
+	JrIQ==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH 1/2] ipsec-tools: fix unrecognised --without-gssapi option
+X-Received: by 10.182.135.194 with SMTP id pu2mr157346obb.38.1389687715506;
+	Tue, 14 Jan 2014 00:21:55 -0800 (PST)
+Received: by 10.76.130.204 with HTTP; Tue, 14 Jan 2014 00:21:55 -0800 (PST)
+Date: Tue, 14 Jan 2014 09:21:55 +0100
+Message-ID: <CADxgXkWFCkAADLWsZJPTv4bDuXkd706FyvmRxY1sntg0Tyqwvg@mail.gmail.com>
+From: Mariusz Ryndzionek <mryndzionek@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-java] openjdk-6-common ipk package - wrong dependency - unable to install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,30 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2014 04:01:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 14 Jan 2014 08:21:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Ting Liu <b28495@freescale.com>
+Hi,
 
-Signed-off-by: Ting Liu <b28495@freescale.com>
----
- .../ipsec-tools/ipsec-tools_0.8.1.bb               |    1 -
- 1 file changed, 1 deletion(-)
+The openjdk-6-common ipk package depends on openjdk-6-vm-zero. It creates
+circular dependency and opkg is unable to install Java. This issue was
+introduced by the patch:
+d0eeda3107951433db2b6d4ed602573ae52e166e
+openjdk: link libjvm.so from hotspot to archdir
 
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-index fc39a55..e931745 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-@@ -44,7 +44,6 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
-                 --with-readline \
-                 --with-openssl=${STAGING_LIBDIR}/.. \
-                 --without-libradius \
--                --without-gssapi \
-                 --without-libpam \
-                 --disable-security-context \
-                 --enable-shared \
--- 
-1.7.9.7
+Linking the libjvm.so causes shlibdeps to pull the dependency into RDEPENDS.
+Unfortunately I'm not able to fix this by myself but I think it is quite
+serious issue and I hope it will be fixed soon.
 
-
+Best regards,
 
