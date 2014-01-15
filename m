@@ -1,38 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 795376B4F7
+Return-Path: <ross.burton@intel.com>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CDDAC6B4F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 10:29:10 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id c41so758428eek.16
+	Wed, 15 Jan 2014 10:47:42 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id t60so1551993wes.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 02:29:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ARZgf/1RW/Q45S/BZGJp+L+Wy8kJCVw6BMaR5vNHTrw=;
-	b=WKyTVh73ig6ztPHTwNPfhTZHwMEfJo7RAPdq35NXYCQCaQMYeRJ3FdUA6/2UwUEpPk
-	mrwUl1IEt6eEVZFr+1kqwX4ICY1sSc/sUMpG1bK3tXaKYv2rP6JaA8JUKaUwSuQBeQM7
-	wTqsAnOVcnjX8PNNERm7gSuWPsWx8OxIN4h9As4mRcJ4CiP/eGprowGij5ueuc4eUBsR
-	gsCv6vUCt46rKpCmIWDqTl/2rkdCJMLfOVQntGMsGna5JflY4eJgOvwXsEs1sGnhX5kY
-	lFT2iregYgU7ucyA2fwjxxxVQCxO8y+5o0IlxuCce+n/VWbf1zJLY4x8QdoYW+CQDvTz
-	7aIQ==
-X-Received: by 10.14.3.1 with SMTP id 1mr1858789eeg.94.1389781748846;
-	Wed, 15 Jan 2014 02:29:08 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id w4sm9058614eef.20.2014.01.15.02.29.07
+	Wed, 15 Jan 2014 02:47:43 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=9ZF1Z1a/fRofvuNHtLaO61TiNF0B2e4jUs41gUi4mw8=;
+	b=KD/AqiI2yr+XU0EDLVYVlHtqMWN7NXlrMHJestCRyRpwI3wU+Akt/G3HmeDkecmh4N
+	jQwV+oA5CC7bAPykxvkMl+PQgsf1TOScmoVeVP51av1XGLPZV1Cvw0tTN9ROt035vWs5
+	eUIspnurpddaDxym8PoJJy2B8UJ0heEEvBb04ZjPwpkbJ4QR5B9Y8gqKr6xYj02IVuyT
+	elvts0sRtonI0mspksN7TqjmliQPTYEWYqFQVYjfB7f29UoqIJwJh1QaNOW0mc0FS3JD
+	y7x7T2Elm7L8OMXJqbKscQD1EuWX6DlzOuDrMtv2Qc/g3u7v5i7lEy67qwCE3kR4yoW+
+	lWhg==
+X-Gm-Message-State: ALoCoQniN2LTNOhx6Del7o8RnOvhfo6ctGHrYSYr2XYb/DuVYITjyeWuGgG4OD+lyyEpr7RQrE9E
+X-Received: by 10.180.221.38 with SMTP id qb6mr1547160wic.26.1389782863002;
+	Wed, 15 Jan 2014 02:47:43 -0800 (PST)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPSA id j3sm6016854wiy.3.2014.01.15.02.47.41
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Jan 2014 02:29:08 -0800 (PST)
-Date: Wed, 15 Jan 2014 11:29:29 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 15 Jan 2014 02:47:41 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140115102929.GG3717@jama>
-References: <1389771373-5181-1-git-send-email-b28495@freescale.com>
-MIME-Version: 1.0
-In-Reply-To: <1389771373-5181-1-git-send-email-b28495@freescale.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH v2] inetutils: fix libreadline path to fix QA errors
+Date: Wed, 15 Jan 2014 10:47:30 +0000
+Message-Id: <1389782854-14355-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH][meta-oe 1/5] piglit: remove, migrated to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,73 +44,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 10:29:10 -0000
-X-Groupsio-MsgNum: 47734
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3xoW37o/FfUZJwQG"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Jan 2014 10:47:44 -0000
 
---3xoW37o/FfUZJwQG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-oe/recipes-graphics/piglit/piglit_git.bb |   44 -------------------------
+ 1 file changed, 44 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/piglit/piglit_git.bb
 
-On Wed, Jan 15, 2014 at 01:36:13AM -0600, b28495@freescale.com wrote:
-> From: Ting Liu <b28495@freescale.com>
->=20
-> If wrong path set, inetutils configure script will add a absolute
-> rpath, which result in the below QA errors:
-> | ERROR: QA Issue: package inetutils-ftp contains bad RPATH
-> | ERROR: QA Issue: package inetutils-telnet contains bad RPATH
-> | ERROR: QA Issue: package inetutils-telnetd contains bad RPATH
-> | ERROR: QA run found fatal errors. Please consider fixing them.
-> | ERROR: Function failed: do_package_qa
->=20
-> Signed-off-by: Ting Liu <b28495@freescale.com>
-> ---
->  .../inetutils/inetutils_1.9.1.bb                   |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
-=2E1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-> index 97fc6a1..80022c7 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
-> @@ -37,7 +37,7 @@ PACKAGECONFIG[uucpd] =3D "--enable-uucpd,--disable-uucp=
-d,readline"
-> =20
->  EXTRA_OECONF =3D "--with-ncurses-include-dir=3D${STAGING_INCDIR} \
->          ${noipv6} \
-> -        --with-libreadline-prefix=3D${STAGING_DIR_HOST}${prefix} \
-> +        --with-libreadline-prefix=3D${STAGING_LIBDIR} \
+diff --git a/meta-oe/recipes-graphics/piglit/piglit_git.bb b/meta-oe/recipes-graphics/piglit/piglit_git.bb
+deleted file mode 100644
+index 7c4f9a0..0000000
+--- a/meta-oe/recipes-graphics/piglit/piglit_git.bb
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SUMMARY = "OpenGL driver testing framework"
+-LICENSE = "MIT & LGPLv2+ & GPLv3 & GPLv2+ & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b2beded7103a3d8a442a2a0391d607b0"
+-
+-SRC_URI = "git://anongit.freedesktop.org/piglit"
+-
+-# From 2012/12/30.
+-SRCREV = "bbeff5d21b06d37338ad28e42d88f499bef13268"
+-# (when PV goes above 1.0 remove the trailing r)
+-PV = "1.0+gitr${SRCPV}"
+-
+-S = "${WORKDIR}/git"
+-
+-DEPENDS = "virtual/libx11 waffle virtual/libgl libglu python-mako-native python-numpy-native"
+-
+-inherit cmake pythonnative
+-
+-# CMake sets the rpath at build time with the source tree, and will reset it at
+-# install time. As we don't install this doesn't happen, so force the rpath to
+-# what we need.
+-EXTRA_OECMAKE = "-DCMAKE_BUILD_WITH_INSTALL_RPATH=1 -DCMAKE_INSTALL_RPATH=${libdir}/piglit/lib"
+-
+-do_install() {
+-	install -d ${D}${bindir}
+-        install -m 0755 piglit-*.py ${D}${bindir}
+-
+-        install -d ${D}${libdir}/piglit/
+-
+-        install -d ${D}${libdir}/piglit/bin
+-        install -m 755 ${S}/bin/* ${D}${libdir}/piglit/bin
+-
+-        cp -a lib/ ${D}${libdir}/piglit/
+-        cp -a framework/ ${D}${libdir}/piglit/
+-        cp -a generated_tests/ ${D}${libdir}/piglit/
+-        cp -a tests/ ${D}${libdir}/piglit/
+-        cp -a templates/ ${D}${libdir}/piglit/
+-
+-        sed -i -e 's|sys.path.append(.*)|sys.path.append("${libdir}/piglit")|' ${D}${bindir}/piglit-*.py
+-        sed -i -e 's|^templatedir = .*$|templatedir = "${libdir}/piglit/templates"|' ${D}${bindir}/piglit-summary-html.py
+-}
+-
+-FILES_${PN}-dbg += "${libdir}/piglit/*/.debug/"
+-
+-RDEPENDS_${PN} = "python waffle python-json python-subprocess python-multiprocessing python-textutils python-netserver python-shell mesa-demos"
+-- 
+1.7.10.4
 
-Can you confirm that libreadline support is still enabled after this change?
 
->  "
-> =20
->  do_configure_prepend () {
-> --=20
-> 1.7.9.7
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3xoW37o/FfUZJwQG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLWYwkACgkQN1Ujt2V2gBxgOQCfZjc0H2e0JI5e5YAGyP6hklD6
-o9AAnRLGGhUIfbGL/nWqK6vIZKxsB3zR
-=PAX2
------END PGP SIGNATURE-----
-
---3xoW37o/FfUZJwQG--
