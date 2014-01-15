@@ -1,34 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 5867E6C7FE
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B2BB6E50F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 17:17:41 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id d49so250290eek.34
+	Wed, 15 Jan 2014 17:17:49 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id d17so1009425eek.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 09:17:40 -0800 (PST)
+	Wed, 15 Jan 2014 09:17:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=w2oaRV/di0DifuqUoKcK1r+9NBkEynUhzocds8PWXoA=;
-	b=pypZOuVdlAIgLQrALlh4I5GdhP1dhqbSLpSDx4piFbtucZ54EL7a9TeVHw0STsR7rj
-	0/HYqO+qWmm383QeiroW7tgGVcamiuPF+M4418g8pwszZHr7dKn40Wh+3cou7jQER7d9
-	ocT+nn1FiEflJXxB8kknc6KVdMuuqtg9WpyboxXfa4SOVBEDD4IyPFhPOw+v8ZGrDU8h
-	/pmCJMl43PiRIVnaMi/lpczY1Te+44yka63nVRjgu42eJlXD8rOk+yMnr9TQ7sF2S0RO
-	/4BXUGccBGQQSMkQlcKcqlV8sJvHqHMqr7ao6nLS8eCl7+LTp/9UwSLusePWJzlSmJMF
-	53ZQ==
-X-Received: by 10.14.101.73 with SMTP id a49mr4501518eeg.100.1389806259912;
-	Wed, 15 Jan 2014 09:17:39 -0800 (PST)
+	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
+	:references; bh=Mzkc/69cCLY7zXMYgkfRqGCgxJPePTxJiU6OBx7fZNU=;
+	b=i0uCaqgfRh4PPrlA5ExFScE6sLGLBriruFY95uvAOpeRwn8Of+wS1A9iAm0tc6lji/
+	qgx/a7NN8aDm5JG83kCJRLaVvjxpIshDAQZx3vUqBt9Ntd42odvtBDD9ttKLeeA4pO62
+	l7J6v82/SViR5uPBGzUeymUvf3GqGhRCqwCDJpPwEtIW4JlIFinYaRDPGu4Nit0xiU+d
+	nL1hOBn37ok+mLijVigY3zIq/dQVt8w7/NEQpVCAHksDT0CRt9LhtBIaH3qIRhBp96JN
+	/1Qvgp8kYZlyfWuCy7rKiYkVj6Bg66Lu78vIBRrms0K578UIvwafSdR6rN9lJLic1QA0
+	Qk0Q==
+X-Received: by 10.15.36.135 with SMTP id i7mr4707795eev.93.1389806268699;
+	Wed, 15 Jan 2014 09:17:48 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id v7sm11759023eel.2.2014.01.15.09.17.39
+	[89.176.104.107]) by mx.google.com with ESMTPSA id
+	l41sm11753608eep.17.2014.01.15.09.17.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Jan 2014 09:17:39 -0800 (PST)
+	Wed, 15 Jan 2014 09:17:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jan 2014 18:17:50 +0100
-Message-Id: <cover.1389805976.git.Martin.Jansa@gmail.com>
+Date: Wed, 15 Jan 2014 18:17:52 +0100
+Message-Id: <a8731dd56a3dec8f72ce0dbf786c1475e452df3c.1389805976.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.5.2
-Subject: [meta-efl][WIP][PATCHv2 0/7] Major efl upgrade
+In-Reply-To: <cover.1389805976.git.Martin.Jansa@gmail.com>
+References: <cover.1389805976.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1389805976.git.Martin.Jansa@gmail.com>
+References: <cover.1389805976.git.Martin.Jansa@gmail.com>
+Subject: [meta-efl][WIP][PATCHv2 2/7] webkit-efl: Add recipe with snapshot from r159807
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,161 +46,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 17:17:43 -0000
+X-List-Received-Date: Wed, 15 Jan 2014 17:17:49 -0000
 
-WIP because it's only build tested and webkit-efl is failing for armv[45].
-for other architectures you need to fix cmake in oe-core:
-http://lists.openembedded.org/pipermail/openembedded-core/2014-January/088218.html
+* announcement:
+  http://sourceforge.net/mailarchive/message.php?msg_id=31742684
 
-Sharing as WIP, because 1.7 is pretty much dead and we need to start updating
-apps to work with this 1.8 (and eventually also upgrade e-wm to 18).
-
-Good thing is that unlike earlier elementary upgrades this really has
-quite stable API, so I had to change only few SHR apps which are built with -Werror
-and were using some deprecated API.
-
-Hopefully we'll get this in shape before closing 1.6.
-
-Testers, contributions welcome.
-
-Does someone care about upgrade path here? See first patch it doesn't even build
-correctly in incremental build (because of oe bug), so I'm tempted to ignore it this time.
-
-The following changes since commit a1b6699ad26e1035f5c29918e059b8b57fde57ff:
-
-  add libcrypt-openssl-rsa-perl (2014-01-13 09:59:45 +0000)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib jansa/efl
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/efl
-
-Martin Jansa (7):
-  meta-efl: Add efl 1.8.4, elementary 1.8.3, terminology 0.4.0 and
-    python-efl 1.8.0 recipes
-  webkit-efl: Add recipe with snapshot from r159807
-  enjoy: Upgrade to version from git
-  libeflvala: Fix build of tests
-  eve: bump SRCREV to catch up with edbus2 -> eldbus rename
-  e-wm: Drop evas-.*-loader.* from RDEPENDS
-  webkit-efl: Try to disable llint/jit to fix armv[45] build
-
- meta-efl/conf/layer.conf                           |   1 +
- meta-efl/recipes-devtools/python/python-ecore.inc  |   5 -
- .../recipes-devtools/python/python-ecore_1.7.0.bb  |   5 -
- .../recipes-devtools/python/python-ecore_svn.bb    |   8 -
- meta-efl/recipes-devtools/python/python-edbus.inc  |  50 +++++-
- .../recipes-devtools/python/python-edbus_1.7.0.bb  |   3 +-
- .../recipes-devtools/python/python-edbus_svn.bb    |   8 -
- meta-efl/recipes-devtools/python/python-edje.inc   |   6 -
- .../python-edje/0001-fix-unicode-conversion.patch  |  38 -----
- .../recipes-devtools/python/python-edje_1.7.0.bb   |   6 -
- .../recipes-devtools/python/python-edje_svn.bb     |  10 --
- meta-efl/recipes-devtools/python/python-efl.inc    |  36 ++---
- .../recipes-devtools/python/python-efl_1.8.0.bb    |   4 +
- .../recipes-devtools/python/python-elementary.inc  |   5 -
- .../python/python-elementary_1.7.0.bb              |   5 -
- .../python/python-elementary_svn.bb                |   8 -
- .../recipes-devtools/python/python-emotion.inc     |   5 -
- .../python/python-emotion_1.7.0.bb                 |   5 -
- .../recipes-devtools/python/python-emotion_svn.bb  |   8 -
- meta-efl/recipes-devtools/python/python-evas.inc   |   4 -
- .../recipes-devtools/python/python-evas_1.7.0.bb   |   5 -
- .../recipes-devtools/python/python-evas_svn.bb     |   8 -
- meta-efl/recipes-efl/e17/e-wm.inc                  |   4 -
- ...position-as-percent-and-define-a-1-second.patch |  14 +-
- .../recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} |  12 +-
- meta-efl/recipes-efl/e17/eve_svn.bb                |   4 +-
- meta-efl/recipes-efl/e17/terminology_0.3.0.bb      |  10 --
- meta-efl/recipes-efl/e17/terminology_0.4.0.bb      |  10 ++
- meta-efl/recipes-efl/efl/ecore_1.7.9.bb            | 124 --------------
- meta-efl/recipes-efl/efl/edbus2.inc                |  11 --
- meta-efl/recipes-efl/efl/edbus2_svn.bb             |  14 --
- meta-efl/recipes-efl/efl/edbus_svn.bb              |  13 --
- meta-efl/recipes-efl/efl/edje_1.7.9.bb             |  72 ---------
- meta-efl/recipes-efl/efl/eet_1.7.9.bb              |  30 ----
- meta-efl/recipes-efl/efl/eeze_1.7.9.bb             |  23 ---
- meta-efl/recipes-efl/efl/efl.inc                   | 145 +++++++++++++++++
- ...igure.ac-Don-t-check-for-Xprint-extension.patch |  27 ++++
- meta-efl/recipes-efl/efl/efl_1.8.4.bb              |  17 ++
- meta-efl/recipes-efl/efl/efreet_1.7.9.bb           |  22 ---
- meta-efl/recipes-efl/efl/eina_1.7.9.bb             |  19 ---
- meta-efl/recipes-efl/efl/eio_1.7.9.bb              |  15 --
- meta-efl/recipes-efl/efl/elementary.inc            |  29 ++--
- ...e-elm_prefs_cc-and-elementary_codegen-def.patch |  61 +++++++
- meta-efl/recipes-efl/efl/elementary_1.7.9.bb       |   8 -
- meta-efl/recipes-efl/efl/elementary_1.8.3.bb       |  12 ++
- meta-efl/recipes-efl/efl/embryo_1.7.9.bb           |  20 ---
- .../recipes-efl/efl/emotion-generic-players.inc    |  10 ++
- .../efl/emotion-generic-players_1.8.0.bb           |   8 +
- meta-efl/recipes-efl/efl/emotion_1.7.9.bb          |  22 ---
- meta-efl/recipes-efl/efl/ethumb_1.7.9.bb           |  27 ----
- meta-efl/recipes-efl/efl/evas-generic-loaders.inc  |   2 +-
- .../recipes-efl/efl/evas-generic-loaders_1.7.9.bb  |   8 -
- .../recipes-efl/efl/evas-generic-loaders_1.8.1.bb  |   8 +
- ...s_font_load-Fix-build-with-newer-freetype.patch |  26 ---
- meta-efl/recipes-efl/efl/evas_1.7.9.bb             | 178 ---------------------
- meta-efl/recipes-efl/efl/expedite_1.7.9.bb         |   8 -
- .../efl/libeflvala/disable.eina.test.patch         |  44 +++++
- meta-efl/recipes-efl/efl/libeflvala_svn.bb         |   1 +
- ...lines.h-remove-indexingHeader-preCapacity.patch |  27 ++++
- ...KitHelpers.cmake-Add-Wno-error-cast-align.patch |  29 ++++
- .../webkit/webkit-efl/gcc-4.8.2.fix.patch          |  15 ++
- .../webkit/webkit-efl_2.3.2+svnr159807.bb          |  51 ++++++
- 62 files changed, 563 insertions(+), 850 deletions(-)
- delete mode 100644 meta-efl/recipes-devtools/python/python-ecore.inc
- delete mode 100644 meta-efl/recipes-devtools/python/python-ecore_1.7.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-ecore_svn.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-edbus_svn.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-edje.inc
- delete mode 100644 meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch
- delete mode 100644 meta-efl/recipes-devtools/python/python-edje_1.7.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-edje_svn.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-efl_1.8.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-elementary.inc
- delete mode 100644 meta-efl/recipes-devtools/python/python-elementary_1.7.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-elementary_svn.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-emotion.inc
- delete mode 100644 meta-efl/recipes-devtools/python/python-emotion_1.7.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-emotion_svn.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-evas.inc
- delete mode 100644 meta-efl/recipes-devtools/python/python-evas_1.7.0.bb
- delete mode 100644 meta-efl/recipes-devtools/python/python-evas_svn.bb
- rename meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} (88%)
- delete mode 100644 meta-efl/recipes-efl/e17/terminology_0.3.0.bb
- create mode 100644 meta-efl/recipes-efl/e17/terminology_0.4.0.bb
- delete mode 100644 meta-efl/recipes-efl/efl/ecore_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/edbus2.inc
- delete mode 100644 meta-efl/recipes-efl/efl/edbus2_svn.bb
- delete mode 100644 meta-efl/recipes-efl/efl/edbus_svn.bb
- delete mode 100644 meta-efl/recipes-efl/efl/edje_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eet_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eeze_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/efl.inc
- create mode 100644 meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch
- create mode 100644 meta-efl/recipes-efl/efl/efl_1.8.4.bb
- delete mode 100644 meta-efl/recipes-efl/efl/efreet_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eina_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/eio_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/elementary/0001-Makefile-Use-elm_prefs_cc-and-elementary_codegen-def.patch
- delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/elementary_1.8.3.bb
- delete mode 100644 meta-efl/recipes-efl/efl/embryo_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players.inc
- create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.8.0.bb
- delete mode 100644 meta-efl/recipes-efl/efl/emotion_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/ethumb_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.8.1.bb
- delete mode 100644 meta-efl/recipes-efl/efl/evas/0001-evas_font_load-Fix-build-with-newer-freetype.patch
- delete mode 100644 meta-efl/recipes-efl/efl/evas_1.7.9.bb
- delete mode 100644 meta-efl/recipes-efl/efl/expedite_1.7.9.bb
- create mode 100644 meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...lines.h-remove-indexingHeader-preCapacity.patch | 27 ++++++++++++
+ ...KitHelpers.cmake-Add-Wno-error-cast-align.patch | 29 +++++++++++++
+ .../webkit/webkit-efl/gcc-4.8.2.fix.patch          | 15 +++++++
+ .../webkit/webkit-efl_2.3.2+svnr159807.bb          | 48 ++++++++++++++++++++++
+ 4 files changed, 119 insertions(+)
  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch
  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/gcc-4.8.2.fix.patch
  create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
 
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch
+new file mode 100644
+index 0000000..003a1d1
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch
+@@ -0,0 +1,27 @@
++From 5b9bbf9c056e3690e2872cc74a8962ec6a21a020 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 13 Jan 2014 19:00:46 +0100
++Subject: [PATCH] ButterflyInlines.h: remove
++ !indexingHeader()->preCapacity(oldStructure)
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ Source/JavaScriptCore/runtime/ButterflyInlines.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Source/JavaScriptCore/runtime/ButterflyInlines.h b/Source/JavaScriptCore/runtime/ButterflyInlines.h
++index f5439bb..d5c828f 100644
++--- a/Source/JavaScriptCore/runtime/ButterflyInlines.h
+++++ b/Source/JavaScriptCore/runtime/ButterflyInlines.h
++@@ -128,7 +128,7 @@ inline Butterfly* Butterfly::growArrayRight(
++     bool hadIndexingHeader, size_t oldIndexingPayloadSizeInBytes,
++     size_t newIndexingPayloadSizeInBytes)
++ {
++-    ASSERT_UNUSED(oldStructure, !indexingHeader()->preCapacity(oldStructure));
+++//    ASSERT_UNUSED(oldStructure, !indexingHeader()->preCapacity(oldStructure));
++     ASSERT_UNUSED(oldStructure, hadIndexingHeader == oldStructure->hasIndexingHeader(intendedOwner));
++     void* theBase = base(0, propertyCapacity);
++     size_t oldSize = totalSize(0, propertyCapacity, hadIndexingHeader, oldIndexingPayloadSizeInBytes);
++-- 
++1.8.5.2
++
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
+new file mode 100644
+index 0000000..5df0f8a
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
+@@ -0,0 +1,29 @@
++From bfabbcab5dc4fe29bc91bbfbd9c9a404a3e2538b Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 13 Jan 2014 17:21:25 +0100
++Subject: [PATCH] WebKitHelpers.cmake: Add -Wno-error=cast-align
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ Source/cmake/WebKitHelpers.cmake | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/Source/cmake/WebKitHelpers.cmake b/Source/cmake/WebKitHelpers.cmake
++index 1e51ebc..d813117 100644
++--- a/Source/cmake/WebKitHelpers.cmake
+++++ b/Source/cmake/WebKitHelpers.cmake
++@@ -42,7 +42,10 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
++ 
++         # Enable errors on warning
++         if (OPTION_ENABLE_WERROR)
++-            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter ${OLD_COMPILE_FLAGS}")
+++            # /OE/build/shr-core/tmp-eglibc/work/x86_64-oe-linux/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/WebCore/platform/graphics/GlyphPage.h: In member function 'void WebCore::OpenTypeVerticalData::substituteWithVerticalGlyphs(const WebCore::SimpleFontData*, WebCore::GlyphPage*, unsigned int, unsigned int) const': /OE/build/shr-core/tmp-eglibc/work/x86_64-oe-linux/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/WebCore/platform/graphics/GlyphPage.h:120:30: error: array subscript is above array bounds [-Werror=array-bounds]
+++            # | /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:13:50: error: 'GType soup_proxy_uri_resolver_get_type()' is deprecated (declared at /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:48) [-Werror=deprecated-declarations]
+++            # | /OE/build/shr-core/tmp-eglibc/work/cortexa8-vfp-neon-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:120:133: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::IntegralTypedArrayAdaptor<short int, JSC::GenericTypedArrayView<JSC::Int16Adaptor>, JSC::JSGenericTypedArrayView<JSC::Int16Adaptor>, (JSC::TypedArrayType)4u>::Type* {aka short int*}' increases required alignment of target type [-Werror=cast-align]
+++            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=array-bounds -Wno-error=deprecated-declarations -Wno-error=cast-align ${OLD_COMPILE_FLAGS}")
++         endif ()
++ 
++         # Disable C++0x compat warnings for GCC >= 4.6.0 until we build
++-- 
++1.8.5.2
++
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/gcc-4.8.2.fix.patch b/meta-efl/recipes-efl/webkit/webkit-efl/gcc-4.8.2.fix.patch
+new file mode 100644
+index 0000000..635c1cb
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/gcc-4.8.2.fix.patch
+@@ -0,0 +1,15 @@
++Upstream-Status: Backport http://trac.webkit.org/changeset/160834
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
++Index: a/Source/WTF/wtf/dtoa/double-conversion.cc
++===================================================================
++--- a/Source/WTF/wtf/dtoa/double-conversion.cc	(revision 160833)
+++++ b/Source/WTF/wtf/dtoa/double-conversion.cc	(revision 160834)
++@@ -447,5 +447,5 @@
++         const int kBufferSize = kMaxSignificantDigits + 10;
++         char buffer[kBufferSize];  // NOLINT: size is known at compile time.
++-        int buffer_pos = 0;
+++        unsigned buffer_pos = 0;
++         
++         // Exponent will be adjusted if insignificant digits of the integer part
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
+new file mode 100644
+index 0000000..879ff1f
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
+@@ -0,0 +1,48 @@
++DESCRIPTION = "Webkit browser engine, EFL edition"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8bab0b12 \
++                    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
++                    file://Source/WebKit/efl/ewk/EWebKit.h;endline=20;md5=55ea170b1582797d2c69712de850f2fa \
++"
++
++# you need harfbuzz with icu enabled, you can add this to your config:
++# PACKAGECONFIG_append_pn-harfbuzz = " icu"
++DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
++           libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
++           libxml2 pango eina ecore evas edje eldbus harfbuzz enchant \
++           ruby-native"
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/webkit-efl/webkit-efl-159807.tar.xz \
++    file://gcc-4.8.2.fix.patch \
++    file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
++    file://0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch \
++"
++SRC_URI[md5sum] = "3e1377d976460dd14db0dd3cd39b8e48"
++SRC_URI[sha256sum] = "a99531299e41ba4671b32bbf46c3efc4d65960c9c87949a87f76e622c284f178"
++
++S = "${WORKDIR}/${BPN}"
++
++inherit cmake lib_package pkgconfig perlnative pythonnative
++
++ARM_INSTRUCTION_SET = "arm"
++
++EXTRA_OECMAKE = " \
++    -DPORT=Efl \
++    -DSHARED_CORE=On \
++    -DENABLE_DRAG_SUPPORT=On \
++    -DENABLE_WEB_AUDIO=Off \
++    -DENABLE_VIDEO=Off \
++    -DENABLE_VIDEO_TRACK=Off \
++    -DENABLE_ACCESSIBILITY=Off \
++    -DENABLE_BATTERY_STATUS=Off \
++"
++
++LEAD_SONAME = "libewebkit.so"
++PACKAGES =+ "${PN}launcher-dbg ${PN}launcher ${PN}-inspector"
++
++FILES_${PN} += "${datadir}/webkit-1.0/theme/default.edj ${datadir}/ewebkit-0/themes/default.edj"
++FILES_${PN}-dev += "${libdir}/cmake"
++FILES_${PN}launcher = "${bindir}/EWebLauncher"
++FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
++FILES_${PN}-inspector += "${datadir}/ewebkit-0/inspector"
 -- 
 1.8.5.2
 
