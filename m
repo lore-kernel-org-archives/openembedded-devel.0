@@ -1,43 +1,44 @@
 Return-Path: <t_dufff@yahoo.ca>
-Received: from nm31.bullet.mail.gq1.yahoo.com (nm31.bullet.mail.gq1.yahoo.com
-	[98.136.217.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 0192A61039
+Received: from nm31-vm1.bullet.mail.gq1.yahoo.com
+	(nm31-vm1.bullet.mail.gq1.yahoo.com [98.136.216.208])
+	by mail.openembedded.org (Postfix) with ESMTP id 604816E3FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 19:07:48 +0000 (UTC)
-Received: from [216.39.60.182] by nm31.bullet.mail.gq1.yahoo.com with NNFMP;
-	15 Jan 2014 19:07:49 -0000
-Received: from [216.39.60.211] by tm18.bullet.mail.gq1.yahoo.com with NNFMP;
-	15 Jan 2014 19:07:49 -0000
-Received: from [127.0.0.1] by omp1098.mail.gq1.yahoo.com with NNFMP;
-	15 Jan 2014 19:07:49 -0000
+	Wed, 15 Jan 2014 19:07:53 +0000 (UTC)
+Received: from [98.137.12.59] by nm31.bullet.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:54 -0000
+Received: from [98.137.12.200] by tm4.bullet.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:54 -0000
+Received: from [127.0.0.1] by omp1008.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:54 -0000
 X-Yahoo-Newman-Property: ymail-3
-X-Yahoo-Newman-Id: 492601.82215.bm@omp1098.mail.gq1.yahoo.com
-Received: (qmail 12337 invoked by uid 60001); 15 Jan 2014 19:07:49 -0000
+X-Yahoo-Newman-Id: 258473.32905.bm@omp1008.mail.gq1.yahoo.com
+Received: (qmail 99103 invoked by uid 60001); 15 Jan 2014 19:07:54 -0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.ca; s=s1024;
-	t=1389812869; bh=ymhUtqQs2rH/pK9TliANJKSqp3tjfD/tLv5zyx4DppY=;
-	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=KhNJbcPpINIUqAuSsgh68CXnaDfP4sSBqfSuXiuPqKGib4yPoJ9Bw2bIu2zw16CzzBe5uPlwVypKBcN+R3RRXo3J75OBZHTg+dyrWxecnkMsgEYJaQ0EpbaDerDIfHUFdjZ5X9gwS8Z0Cz6eB5qWtfUTW25/LuRX06BibsEB+Bc=
+	t=1389812874; bh=zCfjiv1AJfNf0pqeQdGIMrkJaRRSsjJQC8/p/jZAvLM=;
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:References:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=YSrhZHjiBo+jpJ9zPamgK4SFfplyKr3OK0sUitKFvwxDrAVZXQgDBshD3uO2G47G6Mtx7m9H7SNFg5XM8bPY86nGI/b7rqYxFHRB4WvQ5oTTGlYBT1K9aL5K8FVrgBBCpKFSXuWdb2dy28vkBwdjJBkK0sa9gmw+E+F6rr1uVBI=
 DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.ca;
-	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
-	b=tHF/cYXK8qh8q5LUON2IN6Pj3Jd0WaDXnFreg/uUCDWFHtMiUq+fTUC3LqFRLRk/XJMEtlJ6ZVxFKgnzL2rx5dkUwoljrCKvRnIRtoByb2KLSgjV8FDmBrDrZjqb4H+D9TsggXVCH9p5blW0CbWjnj3yVySppEE+nvtP5DU/Y+A=;
-X-YMail-OSG: ELUaMK8VM1k1Wy4Mx8gp03GFbgDSAN3Up5T4aQbjJN.F32H
-	NRLdxCAmUNmt1K7ZqStb3Z5s9.v8kTMbcZw2c5w818R0FniY0OsLaipMGE1f
-	AwbKpbX9GDCuGSVZgwOckgaOa__79VqUSpEcHIcvmQ1gu3lQVfRQWBGKPb84
-	.r4TzQvdRt7CbpHt4uzk4Fvle4cVKtneZp4p9PjSPHnZPLEVYlW_p4MJeqTH
-	nannHsmJq4NCA.EBYrWJ7A0SAHh_ry924UleIS1.fVgBekW2cT2tv8pOulEk
-	EHPz9ZkxHRCtuYBJ7G.XVJW0oL5NSQMPv48YPHfnDnufNRTUyU9Iypq2EZsM
-	Ap3JusuIu.wee9mbU7H5iZjDsf6kbJN5Z7XQ445_AO_cVrtbUX2ZEOYoe4Ew
-	CH_LIrOYvMLwLAdMJHzY5ZKJZgdrgwsL6RRrBCvwGpgi61zTx3r44x82onM1
-	hUgj5ur0bCwQslJv0WgECS9vrtWbVMglq.gh0LaZMh4n3Kqa0iv2qiE9X8oA
-	5kBlr0qzeFIIVsBxUgGbhBu.24edLGRbnFQuNndWNdTrYOtDaSwZN0adLHH_
-	RgjmMKde7OKM-
-Received: from [173.178.26.39] by web164705.mail.gq1.yahoo.com via HTTP;
-	Wed, 15 Jan 2014 11:07:49 PST
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:References:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=OKt2d9uiYUmClkm8BQ6G/Wrxk5kg1MMHS+2mW0bChrCzrxLq/pHGV16Zs+nGaGKPUHN3vCVBkqnxe76U82IziihjvVS8AQqE+YxZ8R99+09JVIYIYUkr7/CTns8AXSpR9ihojFBisvujsD5HtdMu1SJd9uruMSHE87+lsm17wcc=;
+X-YMail-OSG: qNRtq1MVM1nzC91cMCqkplnvG3GiPg8zeGj.WyfSKU5J8LH
+	VDHJXdQn9P_n0ehslW0K1igQvCGTvXuSe1X9Ye0x6UauihO9zSTYsSm4T_0F
+	mNZT9KJFZn01K_uSysIy71NRUDYQHa.jDpaLjr5Hn8XHqDTOdJtcLEeX3aNC
+	co6O5I5uncc5Q_k08G2p740yDuTlJa7bdnGlW5eOGEvZWIealav5L.hVi_fs
+	f6sVoK74iHLaDgNE17EpracV7qXzz7LxQodhzpYtKU8Csk84GwjMRXY077HU
+	kvlxUSeboDOBtS582lIDgzep5lpkT4TzVTSgyzbx4l2SjemOnQKCqUtSyG8h
+	Z5wYxPxk4ylttm0OtH_2oPMDwDcA83M2CzVFjOV7oci.70MljR4ymlb90Rb9
+	aygdre.AOk_NZdFg4YMsvmCqq7AZkufSCG8Ax0d9tphh.UGgo92PrRvGe0xL
+	G3dnnJXf_gmYRjDmY_ZTwEZiTCRaCBCNnTD.1NY.xtBL8rGL0yIOEVIXPrTZ
+	KYMdlzCDlbmEtQ2Y0ek7dNtLBrN_GFs31yLAYN.4Z6ewNjWLQZK58J_09abx
+	tukzZrRVSAIc-
+Received: from [173.178.26.39] by web164702.mail.gq1.yahoo.com via HTTP;
+	Wed, 15 Jan 2014 11:07:53 PST
 X-Rocket-MIMEInfo: 002.001,
-	SGVsbG8sCgpJJ20gd29ya2luZyB0byBwb3J0IGEgY3VzdG9tIHNvZnR3YXJlLgoKYml0YmFrZSBjb21wbGFpbiBhYm91dCA6CgpOT1RFOiBDaGVja2luZyBQYWNrYWdlOiBmY2dpCkVSUk9SOgogUUEgSXNzdWU6IG5vbiBkZWJ1ZyBwYWNrYWdlIGNvbnRhaW5zIC5kZWJ1ZyBkaXJlY3Rvcnk6IGZjZ2kgcGF0aCAKL3dvcmsvYXJtdjdhLXZmcC1uZW9uLXBva3ktbGludXgtZ251ZWFiaS9mY2dpLTAuMjUtcjAvcGFja2FnZXMtc3BsaXQvZmNnaS91c3IvYmluLy5kZWJ1Zy9mYXN0LmZjZ2kKRVJST1I6IFFBIHJ1biABMAEBAQE-
+	SGVsbG8sCgpJJ20gd29ya2luZyB0byBwb3J0IGEgY3VzdG9tIHNvZnR3YXJlLgoKYml0YmFrZSBjb21wbGFpbiBhYm91dCA6CgpOT1RFOiBDaGVja2luZyBQYWNrYWdlOiBmY2dpCkVSUk9SOiBRQSBJc3N1ZTogbm9uIGRlYnVnIHBhY2thZ2UgY29udGFpbnMgLmRlYnVnIGRpcmVjdG9yeTogZmNnaSBwYXRoIC93b3JrL2FybXY3YS12ZnAtbmVvbi1wb2t5LWxpbnV4LWdudWVhYmkvZmNnaS0wLjI1LXIwL3BhY2thZ2VzLXNwbGl0L2ZjZ2kvdXNyL2Jpbi8uZGVidWcvZmFzdC5mY2dpCkVSUk9SOiBRQSBydW4gZm8BMAEBAQE-
 X-Mailer: YahooMailWebService/0.8.172.614
-Message-ID: <1389812869.5889.YahooMailNeo@web164705.mail.gq1.yahoo.com>
-Date: Wed, 15 Jan 2014 11:07:49 -0800 (PST)
+References: 
+Message-ID: <1389812873.92918.YahooMailNeo@web164702.mail.gq1.yahoo.com>
+Date: Wed, 15 Jan 2014 11:07:53 -0800 (PST)
 From: kris duff <t_dufff@yahoo.ca>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
@@ -57,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 19:07:49 -0000
+X-List-Received-Date: Wed, 15 Jan 2014 19:07:53 -0000
 Content-Type: text/plain; charset=us-ascii
 
 Hello,
@@ -67,9 +68,7 @@ I'm working to port a custom software.
 bitbake complain about :
 
 NOTE: Checking Package: fcgi
-ERROR:
- QA Issue: non debug package contains .debug directory: fcgi path 
-/work/armv7a-vfp-neon-poky-linux-gnueabi/fcgi-0.25-r0/packages-split/fcgi/usr/bin/.debug/fast.fcgi
+ERROR: QA Issue: non debug package contains .debug directory: fcgi path /work/armv7a-vfp-neon-poky-linux-gnueabi/fcgi-0.25-r0/packages-split/fcgi/usr/bin/.debug/fast.fcgi
 ERROR: QA run found fatal errors. Please consider fixing them.
 
 In my recipe I added : 
