@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id C94066B4F7
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 795376B4F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 10:27:26 +0000 (UTC)
-Received: by mail-ea0-f172.google.com with SMTP id q10so309690ead.3
+	Wed, 15 Jan 2014 10:29:10 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id c41so758428eek.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 02:27:27 -0800 (PST)
+	Wed, 15 Jan 2014 02:29:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=DtU0DMA1KomopaoML4tQhajSGtHKYXGwK+P1mLh6mKI=;
-	b=lYFZaVgglw0L4HM2ADVGVVeIi/z1PVpL5LflRKUFnumQuImPP5o5fwSart/+OohrLl
-	594WEBD7YQIp1+v038cqBZzktZUi5dYZTrZmxHF3GLe7elCuRbvB9D1y+AhVVGg59YTW
-	utMWU+D24Q3ok+fNgvqcr5O+Hokhcj7zVa7bWX1nR9okTihzcb2rWwFQgIUii5hbX6zQ
-	XhNJCSYzdBuURUGX384rfUiMZFiwa5rkBMFMGnJdzN5ahNYR+eugvEFWMJJBrd5Ysk8t
-	ES4pkrIqSwBQoCxU0E46DF6Q8ITNFJDjBHaIaXUqhY0+SgZu1P5OohNJMH5l6k/ewVEw
-	BDUw==
-X-Received: by 10.15.83.8 with SMTP id b8mr2622047eez.6.1389781647127;
-	Wed, 15 Jan 2014 02:27:27 -0800 (PST)
+	bh=ARZgf/1RW/Q45S/BZGJp+L+Wy8kJCVw6BMaR5vNHTrw=;
+	b=WKyTVh73ig6ztPHTwNPfhTZHwMEfJo7RAPdq35NXYCQCaQMYeRJ3FdUA6/2UwUEpPk
+	mrwUl1IEt6eEVZFr+1kqwX4ICY1sSc/sUMpG1bK3tXaKYv2rP6JaA8JUKaUwSuQBeQM7
+	wTqsAnOVcnjX8PNNERm7gSuWPsWx8OxIN4h9As4mRcJ4CiP/eGprowGij5ueuc4eUBsR
+	gsCv6vUCt46rKpCmIWDqTl/2rkdCJMLfOVQntGMsGna5JflY4eJgOvwXsEs1sGnhX5kY
+	lFT2iregYgU7ucyA2fwjxxxVQCxO8y+5o0IlxuCce+n/VWbf1zJLY4x8QdoYW+CQDvTz
+	7aIQ==
+X-Received: by 10.14.3.1 with SMTP id 1mr1858789eeg.94.1389781748846;
+	Wed, 15 Jan 2014 02:29:08 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id l4sm9051340een.13.2014.01.15.02.27.26
+	by mx.google.com with ESMTPSA id w4sm9058614eef.20.2014.01.15.02.29.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Jan 2014 02:27:26 -0800 (PST)
-Date: Wed, 15 Jan 2014 11:27:47 +0100
+	Wed, 15 Jan 2014 02:29:08 -0800 (PST)
+Date: Wed, 15 Jan 2014 11:29:29 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140115102747.GF3717@jama>
-References: <1389751948-7861-1-git-send-email-b40290@freescale.com>
+Message-ID: <20140115102929.GG3717@jama>
+References: <1389771373-5181-1-git-send-email-b28495@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <1389751948-7861-1-git-send-email-b40290@freescale.com>
+In-Reply-To: <1389771373-5181-1-git-send-email-b28495@freescale.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] python-mako: fix SRC_URI
+Subject: Re: [meta-oe][PATCH v2] inetutils: fix libreadline path to fix QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,50 +46,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 10:27:28 -0000
-X-Groupsio-MsgNum: 47733
+X-List-Received-Date: Wed, 15 Jan 2014 10:29:10 -0000
+X-Groupsio-MsgNum: 47734
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3oCie2+XPXTnK5a5"
+	protocol="application/pgp-signature"; boundary="3xoW37o/FfUZJwQG"
 Content-Disposition: inline
 
---3oCie2+XPXTnK5a5
+--3xoW37o/FfUZJwQG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 15, 2014 at 10:12:28AM +0800, b40290@freescale.com wrote:
-> From: Chunrong Guo <B40290@freescale.com>
+On Wed, Jan 15, 2014 at 01:36:13AM -0600, b28495@freescale.com wrote:
+> From: Ting Liu <b28495@freescale.com>
 >=20
->    The package is no longer available in the
->    official Mako site, so download it from a mirror.
-
-It was moved to oe-core yesterday, so we should just drop it from
-meta-oe (together with other moved packages).
-
-> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> If wrong path set, inetutils configure script will add a absolute
+> rpath, which result in the below QA errors:
+> | ERROR: QA Issue: package inetutils-ftp contains bad RPATH
+> | ERROR: QA Issue: package inetutils-telnet contains bad RPATH
+> | ERROR: QA Issue: package inetutils-telnetd contains bad RPATH
+> | ERROR: QA run found fatal errors. Please consider fixing them.
+> | ERROR: Function failed: do_package_qa
+>=20
+> Signed-off-by: Ting Liu <b28495@freescale.com>
 > ---
->  meta-oe/recipes-devtools/python/python-mako_0.7.2.bb | 2 +-
+>  .../inetutils/inetutils_1.9.1.bb                   |    2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-=
-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> index 1d2bdd7..6993a3f 100644
-> --- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> +++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dda8dd26ed9751e=
-e0cfdf9df1a16bbb54"
+> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
+=2E1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> index 97fc6a1..80022c7 100644
+> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> @@ -37,7 +37,7 @@ PACKAGECONFIG[uucpd] =3D "--enable-uucpd,--disable-uucp=
+d,readline"
 > =20
->  PR =3D "r2"
+>  EXTRA_OECONF =3D "--with-ncurses-include-dir=3D${STAGING_INCDIR} \
+>          ${noipv6} \
+> -        --with-libreadline-prefix=3D${STAGING_DIR_HOST}${prefix} \
+> +        --with-libreadline-prefix=3D${STAGING_LIBDIR} \
+
+Can you confirm that libreadline support is still enabled after this change?
+
+>  "
 > =20
-> -SRC_URI =3D "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
-> +SRC_URI =3D "https://pypi.python.org/packages/source/M/Mako/Mako-${PV}.t=
-ar.gz"
->  SRC_URI[md5sum] =3D "e3c0a677aa4216da9e89ef8fa76cbafb"
->  SRC_URI[sha256sum] =3D "fe8698e845035586bd711a6748e4e40a208a58de276b9138=
-026164700494b68f"
-> =20
+>  do_configure_prepend () {
 > --=20
-> 1.8.3.2
+> 1.7.9.7
 >=20
 >=20
 > _______________________________________________
@@ -101,16 +103,16 @@ ar.gz"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---3oCie2+XPXTnK5a5
+--3xoW37o/FfUZJwQG
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlLWYqMACgkQN1Ujt2V2gBySZQCcDZI7Sqj/mrgdB6zI3qsv+x+b
-qNgAnRK6iNSe/LRuaRxJJs9hr9rySS/4
-=dPaR
+iEYEARECAAYFAlLWYwkACgkQN1Ujt2V2gBxgOQCfZjc0H2e0JI5e5YAGyP6hklD6
+o9AAnRLGGhUIfbGL/nWqK6vIZKxsB3zR
+=PAX2
 -----END PGP SIGNATURE-----
 
---3oCie2+XPXTnK5a5--
+--3xoW37o/FfUZJwQG--
