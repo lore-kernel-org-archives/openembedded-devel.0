@@ -1,45 +1,36 @@
-Return-Path: <B40290@freescale.com>
-Received: from tx2outboundpool.messaging.microsoft.com
-	(tx2ehsobe002.messaging.microsoft.com [65.55.88.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 771386AE73
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A3A56AE73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 02:12:39 +0000 (UTC)
-Received: from mail135-tx2-R.bigfish.com (10.9.14.252) by
-	TX2EHSOBE007.bigfish.com (10.9.40.27) with Microsoft SMTP Server id
-	14.1.225.22; Wed, 15 Jan 2014 02:12:39 +0000
-Received: from mail135-tx2 (localhost [127.0.0.1])	by
-	mail135-tx2-R.bigfish.com (Postfix) with ESMTP id BFE3A601D9	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 02:12:39 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h17326ah8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h2487h1155h)
-Received: from mail135-tx2 (localhost.localdomain [127.0.0.1]) by mail135-tx2
-	(MessageSwitch) id 1389751958302817_9478;
-	Wed, 15 Jan 2014 02:12:38 +0000 (UTC)
-Received: from TX2EHSMHS005.bigfish.com (unknown [10.9.14.231])	by
-	mail135-tx2.bigfish.com (Postfix) with ESMTP id 237142005A;
-	Wed, 15 Jan 2014 02:12:38 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by TX2EHSMHS005.bigfish.com
-	(10.9.99.105) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Wed, 15 Jan 2014 02:12:34 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Wed, 15 Jan 2014 02:12:33 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id s0F2CUFq017618;	Tue, 14 Jan 2014 19:12:32 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 15 Jan 2014 10:12:28 +0800
-Message-ID: <1389751948-7861-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.8.3.2
-MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH] python-mako: fix SRC_URI
+	Wed, 15 Jan 2014 02:13:58 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id cc10so1571808wib.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jan 2014 18:13:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=qy/BN1g54vzf/vTA9nY+XPHPIxza+ysctQDaNHzOEFY=;
+	b=qtOoKBm4t7kP8hQGqzAzXbRRvzkADUv9ENw0r5wqis2+T1mKIyb0fxMOXFvpO8hMzR
+	FxxwS7n61u10vYchCehXyKA1mZfllKioTJasq0kaw34smTktxrsLviQbTGjMU89CleoR
+	5ZmvhFicxGt2rkRVPVTJ6jIsdEpd+py1eteYqAee2nV+lcMd9WaRc8eiaa+7+4iq/tqG
+	cvuBnE9HRE/vpNJnjEIKCWFZpcG60zTMGX3a+fa8u5wU2c/nYBgi60eN+xoEh/2TxYy7
+	FoH85Q8+kJNnsVLiT1DO+mckqdZNjhHNZOnaj3r3jI4t/6Ox1vcLjITJF9KRiqE9rJTQ
+	m7xA==
+X-Received: by 10.180.221.129 with SMTP id qe1mr14291247wic.17.1389752039598; 
+	Tue, 14 Jan 2014 18:13:59 -0800 (PST)
+Received: from netbook.betafive.co.uk (94-192-12-83.zone6.bethere.co.uk.
+	[94.192.12.83])
+	by mx.google.com with ESMTPSA id md9sm26010089wic.1.2014.01.14.18.13.58
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 14 Jan 2014 18:13:58 -0800 (PST)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Jan 2014 02:13:45 +0000
+Message-Id: <1389752025-4210-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 1.8.5.2
+Subject: [PATCH] vim: Upgrade to version 7.4.155
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 02:12:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Jan 2014 02:13:59 -0000
 
-From: Chunrong Guo <B40290@freescale.com>
-
-   The package is no longer available in the
-   official Mako site, so download it from a mirror.
-
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- meta-oe/recipes-devtools/python/python-mako_0.7.2.bb | 2 +-
+ meta-oe/recipes-support/vim/{vim_7.4.27.bb => vim_7.4.155.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vim/{vim_7.4.27.bb => vim_7.4.155.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-index 1d2bdd7..6993a3f 100644
---- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=da8dd26ed9751ee0cfdf9df1a16bbb54"
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.27.bb b/meta-oe/recipes-support/vim/vim_7.4.155.bb
+similarity index 99%
+rename from meta-oe/recipes-support/vim/vim_7.4.27.bb
+rename to meta-oe/recipes-support/vim/vim_7.4.155.bb
+index 5cb933b..0d98e7a 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.27.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.155.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc77069
  
- PR = "r2"
+ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+ 	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
+-SRCREV = "v7-4-027"
++SRCREV = "v7-4-155"
  
--SRC_URI = "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
-+SRC_URI = "https://pypi.python.org/packages/source/M/Mako/Mako-${PV}.tar.gz"
- SRC_URI[md5sum] = "e3c0a677aa4216da9e89ef8fa76cbafb"
- SRC_URI[sha256sum] = "fe8698e845035586bd711a6748e4e40a208a58de276b9138026164700494b68f"
+ S = "${WORKDIR}/${PN}/src"
  
 -- 
-1.8.3.2
-
+1.8.5.2
 
 
