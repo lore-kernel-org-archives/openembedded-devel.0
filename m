@@ -1,40 +1,37 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id B3DB96DA89
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id ABAB06E2E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 14:43:05 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id r15so522764ead.24
+	Wed, 15 Jan 2014 14:43:09 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id b57so903741eek.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 06:43:06 -0800 (PST)
+	Wed, 15 Jan 2014 06:43:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=hvFFrRvw0Xdpid2MLfL/zbNOtb1b22LSOWHWPjy9PRs=;
-	b=Qzfm/XtiVgnuRfBIRm03VtczUhyrqMXEko2LYBLPM/f20x14H4Uj78CisJXWG/3AMl
-	z47GTgzlPaj1LdJ02kgTJPv4Sm5mgA5qVDjGGp5LUmLJMuCKSK2zhvKoGoycA/1p5L5n
-	L+fJCQIQTH21yjRwEUV4vHTwUCcRkunjlc9KCQZOMUT2muHY9nYnnoJjFRe9j1kfPuxg
-	9FqDQyFOJamlsX0Ml8n0N8lP1JpzSBF+KkAnbcf9waBa9Xo4U1vH1eSu69R/UKM47YCV
-	OD5JyN0NaVerUHsJTrMs/kHyiRdZepXFSPBRh/Kad8ltrPLTK1Q/s/2S2dLvYoCxAjad
-	G+TQ==
-X-Received: by 10.15.49.9 with SMTP id i9mr3322111eew.112.1389796986292;
-	Wed, 15 Jan 2014 06:43:06 -0800 (PST)
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=u9EO+I8C4w4UfNztFKggZNzuhRyscbKsfXowFN3Mqqw=;
+	b=GFby0yc2ebZv6f2eF1nBWF2ZBvPBwjprD4PIpkL2UTnboEfBWDXtNzHadLFZITB5/A
+	Zuc9XbahFaWuxe7VOaH8pwgT80cfcgDKEa4HNaxxBdtRKJ+SMTn2E2G3qCt5ZtFBgVHy
+	GDYzNdlU0rl/rwFJ7gDViZwcgZpCJEkVYIyxLDzPNK0eoMlG62fO7mri8v0iKv0W3IX1
+	jtZGAd3XFxTbcVU+5H67H/xo3U4+vHBlwrJAOJ5CE3eSEgpg+Fdi2h/e8uIQ/1OCrB0m
+	fN/6omjeF55c9+nrK65z/3E9ZFOc7m/wLTlXyvPyOJSTJPzmR5mYf8Gz8nv2JtPuC1hi
+	FaGw==
+X-Received: by 10.14.2.73 with SMTP id 49mr4225302eee.15.1389796985076;
+	Wed, 15 Jan 2014 06:43:05 -0800 (PST)
 Received: from localhost.localdomain (ip-109-91-251-248.unitymediagroup.de.
 	[109.91.251.248])
-	by mx.google.com with ESMTPSA id 7sm10764574eee.12.2014.01.15.06.43.05
+	by mx.google.com with ESMTPSA id 7sm10764574eee.12.2014.01.15.06.43.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Jan 2014 06:43:05 -0800 (PST)
+	Wed, 15 Jan 2014 06:43:04 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jan 2014 15:42:57 +0100
-Message-Id: <1389796977-30387-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 Jan 2014 15:42:56 +0100
+Message-Id: <1389796977-30387-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1389796977-30387-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1389796977-30387-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1] dconf: update to 0.18.0
+Subject: [PATCH 0/1] dconf: update to 0.18.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,82 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 14:43:06 -0000
+X-List-Received-Date: Wed, 15 Jan 2014 14:43:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
+tested with xfce and gnome image but world test will tell..
+
+Andreas Müller (1):
+  dconf: update to 0.18.0
+
  meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 29 ++++++++++++++++++++++++++
  meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb  | 23 --------------------
  2 files changed, 29 insertions(+), 23 deletions(-)
  create mode 100644 meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
  delete mode 100644 meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
 
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-new file mode 100644
-index 0000000..ae9c809
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "configuation database system"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+
-+SECTION = "x11/gnome"
-+
-+inherit gnome gsettings
-+SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
-+SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
-+GNOME_COMPRESS_TYPE = "xz"
-+
-+DEPENDS = "glib-2.0 gtk+3"
-+
-+inherit vala gtk-doc
-+
-+EXTRA_OECONF += "--disable-man"
-+
-+PACKAGES =+ "dconf-editor"
-+
-+FILES_${PN} += " \
-+	${datadir}/dbus-1 \
-+	${libdir}/gio/modules/*.so \
-+"
-+FILES_dconf-editor = " \
-+	${bindir}/dconf-editor \
-+	${datadir}/icons \
-+	${datadir}/bash-completion \
-+"
-+FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
-deleted file mode 100644
-index 7d11cf8..0000000
---- a/meta-gnome/recipes-gnome/dconf/dconf_0.7.5.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "configuation database system"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
--
--SECTION = "x11/gnome"
--
--inherit gnome gsettings
--SRC_URI[archive.md5sum] = "d784f8afca04473d194a72047595c28e"
--SRC_URI[archive.sha256sum] = "e2103e8207744903790e9fac6427fa394bb485a0c7f4e0d03b0fb43268c34f33"
--
--DEPENDS = "glib-2.0 gtk+3"
--
--inherit vala
--
--PR = "r2"
--
--PACKAGES =+ "dconf-editor"
--
--FILES_dconf-editor = "${bindir}/dconf-editor ${datadir}/dconf-editor/"
--FILES_${PN} += "${datadir}/dbus-1/ \
--                ${libdir}/gio/modules/*.so \
--"
--FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 -- 
 1.8.3.1
 
