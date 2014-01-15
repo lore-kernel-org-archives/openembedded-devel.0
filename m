@@ -1,37 +1,49 @@
-Return-Path: <Joshua.Vanderpool@raymondcorp.com>
-Received: from smtp.raymondcorp.com (smtp.raymondcorp.com [24.97.209.121])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F0156B186
+Return-Path: <t_dufff@yahoo.ca>
+Received: from nm31.bullet.mail.gq1.yahoo.com (nm31.bullet.mail.gq1.yahoo.com
+	[98.136.217.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 0192A61039
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 18:57:24 +0000 (UTC)
-Received: from usnygrcas1.raymondcorp.local (nothing.attdns.com
-	[130.1.155.194] (may be forged))
-	by smtp.raymondcorp.com (8.14.3/8.14.3) with ESMTP id s0FIvO3F027653
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 12:57:25 -0600
-Received: from USNYGRMBX4.raymondcorp.local ([169.254.4.152]) by usnygrcas1
-	([130.1.155.198]) with mapi id 14.03.0158.001; Wed, 15 Jan 2014 13:57:25
-	-0500
-From: Vanderpool Josh <Joshua.Vanderpool@raymondcorp.com>
+	Wed, 15 Jan 2014 19:07:48 +0000 (UTC)
+Received: from [216.39.60.182] by nm31.bullet.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:49 -0000
+Received: from [216.39.60.211] by tm18.bullet.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:49 -0000
+Received: from [127.0.0.1] by omp1098.mail.gq1.yahoo.com with NNFMP;
+	15 Jan 2014 19:07:49 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 492601.82215.bm@omp1098.mail.gq1.yahoo.com
+Received: (qmail 12337 invoked by uid 60001); 15 Jan 2014 19:07:49 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.ca; s=s1024;
+	t=1389812869; bh=ymhUtqQs2rH/pK9TliANJKSqp3tjfD/tLv5zyx4DppY=;
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=KhNJbcPpINIUqAuSsgh68CXnaDfP4sSBqfSuXiuPqKGib4yPoJ9Bw2bIu2zw16CzzBe5uPlwVypKBcN+R3RRXo3J75OBZHTg+dyrWxecnkMsgEYJaQ0EpbaDerDIfHUFdjZ5X9gwS8Z0Cz6eB5qWtfUTW25/LuRX06BibsEB+Bc=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.ca;
+	h=X-YMail-OSG:Received:X-Rocket-MIMEInfo:X-Mailer:Message-ID:Date:From:Reply-To:Subject:To:MIME-Version:Content-Type;
+	b=tHF/cYXK8qh8q5LUON2IN6Pj3Jd0WaDXnFreg/uUCDWFHtMiUq+fTUC3LqFRLRk/XJMEtlJ6ZVxFKgnzL2rx5dkUwoljrCKvRnIRtoByb2KLSgjV8FDmBrDrZjqb4H+D9TsggXVCH9p5blW0CbWjnj3yVySppEE+nvtP5DU/Y+A=;
+X-YMail-OSG: ELUaMK8VM1k1Wy4Mx8gp03GFbgDSAN3Up5T4aQbjJN.F32H
+	NRLdxCAmUNmt1K7ZqStb3Z5s9.v8kTMbcZw2c5w818R0FniY0OsLaipMGE1f
+	AwbKpbX9GDCuGSVZgwOckgaOa__79VqUSpEcHIcvmQ1gu3lQVfRQWBGKPb84
+	.r4TzQvdRt7CbpHt4uzk4Fvle4cVKtneZp4p9PjSPHnZPLEVYlW_p4MJeqTH
+	nannHsmJq4NCA.EBYrWJ7A0SAHh_ry924UleIS1.fVgBekW2cT2tv8pOulEk
+	EHPz9ZkxHRCtuYBJ7G.XVJW0oL5NSQMPv48YPHfnDnufNRTUyU9Iypq2EZsM
+	Ap3JusuIu.wee9mbU7H5iZjDsf6kbJN5Z7XQ445_AO_cVrtbUX2ZEOYoe4Ew
+	CH_LIrOYvMLwLAdMJHzY5ZKJZgdrgwsL6RRrBCvwGpgi61zTx3r44x82onM1
+	hUgj5ur0bCwQslJv0WgECS9vrtWbVMglq.gh0LaZMh4n3Kqa0iv2qiE9X8oA
+	5kBlr0qzeFIIVsBxUgGbhBu.24edLGRbnFQuNndWNdTrYOtDaSwZN0adLHH_
+	RgjmMKde7OKM-
+Received: from [173.178.26.39] by web164705.mail.gq1.yahoo.com via HTTP;
+	Wed, 15 Jan 2014 11:07:49 PST
+X-Rocket-MIMEInfo: 002.001,
+	SGVsbG8sCgpJJ20gd29ya2luZyB0byBwb3J0IGEgY3VzdG9tIHNvZnR3YXJlLgoKYml0YmFrZSBjb21wbGFpbiBhYm91dCA6CgpOT1RFOiBDaGVja2luZyBQYWNrYWdlOiBmY2dpCkVSUk9SOgogUUEgSXNzdWU6IG5vbiBkZWJ1ZyBwYWNrYWdlIGNvbnRhaW5zIC5kZWJ1ZyBkaXJlY3Rvcnk6IGZjZ2kgcGF0aCAKL3dvcmsvYXJtdjdhLXZmcC1uZW9uLXBva3ktbGludXgtZ251ZWFiaS9mY2dpLTAuMjUtcjAvcGFja2FnZXMtc3BsaXQvZmNnaS91c3IvYmluLy5kZWJ1Zy9mYXN0LmZjZ2kKRVJST1I6IFFBIHJ1biABMAEBAQE-
+X-Mailer: YahooMailWebService/0.8.172.614
+Message-ID: <1389812869.5889.YahooMailNeo@web164705.mail.gq1.yahoo.com>
+Date: Wed, 15 Jan 2014 11:07:49 -0800 (PST)
+From: kris duff <t_dufff@yahoo.ca>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: image fails to fetch php
-Thread-Index: Ac8SIuUhwMYB+YqmSBWmURdxcf6zYwAAJung
-Date: Wed, 15 Jan 2014 18:57:24 +0000
-Message-ID: <7D1F292BE8E4CC4F93079C1A7A58D5622BA33FA9@USNYGRMBX4.raymondcorp.local>
-References: <7D1F292BE8E4CC4F93079C1A7A58D5622BA33F8D@USNYGRMBX4.raymondcorp.local>
-In-Reply-To: <7D1F292BE8E4CC4F93079C1A7A58D5622BA33F8D@USNYGRMBX4.raymondcorp.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [130.1.155.15]
 MIME-Version: 1.0
-X-MessageScreenMessageID: 1389812245.253165.1642.968966155
-X-MessageScreenContentScore: Score of 0 assigned to Content
-X-MessageScreenUCEScore: Score of 0 assigned to UCE
-X-MessageScreen: Analyzed by IntelliReach MessageScreen(tm)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: FW: image fails to fetch php
+Subject: non debug package contains .debug directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,75 +57,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 18:57:26 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Jan 2014 19:07:49 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On 01/15/2014 11:54 AM, Maupin, Chase wrote:
-From: meta-arago-bounces@arago-project.org<mailto:meta-arago-bounces@arag=
-o-project.org> [mailto:meta-arago-bounces@arago-project.org] On Behalf Of=
- Vanderpool Josh
-Sent: Wednesday, January 15, 2014 10:20 AM
-To: meta-arago@arago-project.org<mailto:meta-arago@arago-project.org>
-Subject: [meta-arago] Building the tisdk image fails to fetch php
+Hello,
 
-This is in the meta-openembeded layer but might be fixed in the master...=
+I'm working to port a custom software.
 
-I use the git://arago-project.org/git/projects/oe-layersetup.git to get r=
-elease configs.
+bitbake complain about :
 
-Anyway the SRC_URI is invalid for php-5.5.14 as they move them
+NOTE: Checking Package: fcgi
+ERROR:
+ QA Issue: non debug package contains .debug directory: fcgi path 
+/work/armv7a-vfp-neon-poky-linux-gnueabi/fcgi-0.25-r0/packages-split/fcgi/usr/bin/.debug/fast.fcgi
+ERROR: QA run found fatal errors. Please consider fixing them.
 
-[CEM] Do you mean 5.4.14?
-/JDV yes 5.4.14
+In my recipe I added : 
+FILES_${PN}-dbg += "${WORKDIR}/trunk/Debug"
+FILES_${PN}-dbg += "${WORKDIR}/trunk/Debug/*"
 
+I also tried : 
+FILES_${PN}-dbg += "${D}/usr/bin/.debug"
+FILES_${PN}-dbg += "${D}/usr/bin/.debug/*"
 
+no luck for now. I tried few other things and I don't understand how to do that.
 
-from: http://www.php.net/distributions/php-${PV}.tar.bz2
-to: http://museum.php.net/php5/php-${PV}.tar.bz2
+Any help would be highly appreciated!
 
-I just changed the php.inc at /tisdk/sources/meta-openembedded/meta-oe/re=
-cipes-devtools/php/php.inc
+Thank you
 
-I am just learning about layers i assume there is something i could have =
-done in my local.conf but have not discovered yet...
-
-Just wanted it to be noted in case others run into the issue.
-
-[CEM] Josh, you may want to submit this patch to meta-openembedded@openem=
-bedded.org<mailto:meta-openembedded@openembedded.org>.  I don't see that =
-the master, dora, or dylan branches have been updated.  I didn't notice a=
-nything on the list for this already
-/JDV ok maybe the http://museum.php.net/php5<http://museum.php.net/php5/p=
-hp-$> should be added as a mirror??
-[CEM] I might just update the .inc
-
-
-
-
-
--Josh
-Confidentiality Notice: The preceding e-mail message (including any attac=
-hments) contains information that may be confidential, protected by appli=
-cable legal privileges, or constitute non-public information. It is inten=
-ded to be conveyed only to the designated recipient(s). If you are not an=
- intended recipient of this message, please notify the sender by replying=
- to this message and then delete it from your system. Use, dissemination,=
- distribution or reproduction of this message by unintended recipients is=
- not authorized and may be unlawful.
-
-
-Confidentiality Notice:
-
-The preceding e-mail message (including any attachments) contains informa=
-tion that may be confidential, protected by applicable legal privileges, =
-or constitute non-public information. It is intended to be conveyed only =
-to the designated recipient(s). If you are not an intended recipient of t=
-his message, please notify the sender by replying to this message and the=
-n delete it from your system. Use, dissemination, distribution or reprodu=
-ction of this message by unintended recipients is=20
-not authorized and may be unlawful.
-
-
+Kris
 
