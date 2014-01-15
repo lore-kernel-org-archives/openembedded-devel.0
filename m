@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 0401B6E514
+Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 21CFE6E6FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 17:17:54 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id d17so1009471eek.37
+	Wed, 15 Jan 2014 17:17:58 +0000 (UTC)
+Received: by mail-ea0-f182.google.com with SMTP id a15so619157eae.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2014 09:17:55 -0800 (PST)
+	Wed, 15 Jan 2014 09:17:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=6E5jd+pEy4U4S1TnuoYoSXXWiTBbGsXY6PxuoDYaeVA=;
-	b=o6T8klHXQqEk6qbIZpxgxngWqjqP98lZhb3EE+Bf1NDrWSaHgSR3k+yoo00zjp3hGh
-	aIABWGMk8UYQStYZomepnglsmazC+2HZtVcMb/kieBkkNBr6Jk31FULl1OXQUrymgpcZ
-	xpCu3wnwkZ2SkxjTfe3+840ub/XkytHzBrcDJvvuzsGT6duI7hz78wxHyDknd9YjFNdU
-	BLHDs7q7U8kXAmrQLkptHGgqpS0Jbccnk2V0tERPAGOZX9njC8i9zyAZzyD4kZkEst1U
-	6YuiJBpCab7mi0awxrswTbmZtg9SVA7ogH76j9S5ZI3PmkLreuZ0qE2zaIJE7aUliVdF
-	H9zg==
-X-Received: by 10.15.52.136 with SMTP id p8mr5244253eew.11.1389806275559;
-	Wed, 15 Jan 2014 09:17:55 -0800 (PST)
+	:references; bh=87/3xRe9MTPuRaxcOvullE7/LIpj0m1dacJtZzP3vm8=;
+	b=HAJfA/gWzy7k5woWxiARrRK7tYFzJzvw/f7akiQzPjnn/ZLrP+xy0sgMOD1BOuLSj1
+	jCIulUZSNfO6xH+XIzuUJqjteHNZV4V4g1uk+Zm3tk5dV+uOmWoi/YOsrh1S94U7uN1D
+	ECyxofhkQXcYwQoI5aO2wQzwoRXOyfenZ1pAG2RosDyk5oH0XnABbrkT1O+oAl9tzfnn
+	Wob5eUCjDS+5MFue2Ku3cyVj9JtD6MswlVOS1x7b4D3OXWYJpGPYbBC0k78W3u68s/+y
+	lI5SwwnZLOyJeyUSJEy5UZ5LKn7fgdnGqKfF+CgF3rX12aAGSujoODj1K44V4AGaeY4z
+	XGWQ==
+X-Received: by 10.15.75.200 with SMTP id l48mr4494966eey.109.1389806272985;
+	Wed, 15 Jan 2014 09:17:52 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	o13sm11752868eex.19.2014.01.15.09.17.54
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id z46sm11765395een.1.2014.01.15.09.17.52
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Jan 2014 09:17:55 -0800 (PST)
+	Wed, 15 Jan 2014 09:17:52 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jan 2014 18:17:57 +0100
-Message-Id: <fb6feaa2b3e29d09392c1645bf1e92dafdb00789.1389805976.git.Martin.Jansa@gmail.com>
+Date: Wed, 15 Jan 2014 18:17:55 +0100
+Message-Id: <3225469ca5bca054b862c351d5a3fe51b3a5cd84.1389805976.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.5.2
 In-Reply-To: <cover.1389805976.git.Martin.Jansa@gmail.com>
 References: <cover.1389805976.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1389805976.git.Martin.Jansa@gmail.com>
 References: <cover.1389805976.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][WIP][PATCHv2 7/7] webkit-efl: Try to disable llint/jit to fix armv[45] build
+Subject: [meta-efl][WIP][PATCHv2 5/7] eve: bump SRCREV to catch up with edbus2 -> eldbus rename
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2014 17:17:55 -0000
+X-List-Received-Date: Wed, 15 Jan 2014 17:17:59 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-efl/recipes-efl/e17/eve_svn.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
-index 879ff1f..59a05a0 100644
---- a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
-@@ -37,6 +37,9 @@ EXTRA_OECMAKE = " \
-     -DENABLE_ACCESSIBILITY=Off \
-     -DENABLE_BATTERY_STATUS=Off \
- "
-+# generated ASM code isn't compatible with armv[45]
-+EXTRA_OECMAKE_append_armv4 = " -DENABLE_LLINT=Off -DENABLE_JIT=Off -DENABLE_DFG_JIT=Off -DENABLE_FTL_JIT=Off"
-+EXTRA_OECMAKE_append_armv5 = " -DENABLE_LLINT=Off -DENABLE_JIT=Off -DENABLE_DFG_JIT=Off -DENABLE_FTL_JIT=Off"
+diff --git a/meta-efl/recipes-efl/e17/eve_svn.bb b/meta-efl/recipes-efl/e17/eve_svn.bb
+index c7f7b1a..67d1188 100644
+--- a/meta-efl/recipes-efl/e17/eve_svn.bb
++++ b/meta-efl/recipes-efl/e17/eve_svn.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+ DEPENDS = "evas ecore edje elementary webkit-efl eldbus"
+ PV = "0.3.0.0+svnr${SRCPV}"
+-SRCREV = "${EFL_SRCREV}"
++SRCREV = "84579"
  
- LEAD_SONAME = "libewebkit.so"
- PACKAGES =+ "${PN}launcher-dbg ${PN}launcher ${PN}-inspector"
+ inherit e gettext
+ SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 -- 
 1.8.5.2
 
