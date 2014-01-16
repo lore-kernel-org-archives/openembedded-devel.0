@@ -1,39 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E33E6DC62
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 97CFA6DC62
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 16:16:14 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id d17so1652078eek.9
+	Thu, 16 Jan 2014 16:23:12 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id w62so3359944wes.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 08:16:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=F+1iM2PhWcUKhxXoQjGscgqXMMfOhhp6qDBInF61+cM=;
-	b=vTzWnSAGAeLFGxrTIaF0Js6jVozKTqeF6TdnFNsx6d1ivwp55N4YBHASSINFofyrrY
-	SbMCLeoeauOJnuy5lZJnSdLeDazjh22i7joYdqUv4t+ip2KLMxre9yB7FmKs0CdNsswW
-	MpEY3WhBpkhHlBBUbim/ZsLNq063/o6LCywHFND+4YsJ+7iqPUxz9GsksBFD+lrAQKEE
-	ZboBkpjqg88eS4NqN1mHwleMwI5s9B8mBYu8OcYYopUCu1jlV5cWDg5cjcd7b8skXqPU
-	rltVxbMdXVWPJLYTXeIsGuqECTmdHogdUEpGdPitfiz73znsbWiNmMQ1rLpqEFCU+Yvg
-	HFgA==
-X-Received: by 10.15.23.139 with SMTP id h11mr13514436eeu.25.1389888975022;
-	Thu, 16 Jan 2014 08:16:15 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id m1sm19362411eeg.0.2014.01.16.08.16.13
+	Thu, 16 Jan 2014 08:23:13 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1/wo9VFWqPQA26/GWEahSSzrU1kOflgRlJgObrWtVkw=;
+	b=YBKjgWlY1MZGBrNkoAKyQzngwDwpfAZDBB+iALFtd5hoKGuu7LLd69jOf21q6Ijn6B
+	aB+8DdUGaauAninGp3HQlqJZPWRnKGH4/NrdZaYJ++eKpzJHSblrlIH4ild7eShueORI
+	cdfFNLubNLMcd4a0Dl1cWUm79KWZxnu4kGHwIy3UVZ6v2vRo9f7eC3s7CokSO8lnx6oN
+	/4Pn1qt8EeDmgsq1QXJBsXo5xPSCoaAi9FDUSU4I9o/G/lR/qzKlGJDMTrOJbd0WrOa3
+	2Xxxehki0s7PRug8pleWEiOM4+0emUZqrV1qYzq4to62WkD30IX9wkOZRsv9+RwiQuyV
+	AX3g==
+X-Gm-Message-State: ALoCoQnh4k0bUzfXbGBMlVLSOJvWj/MqrLlUdYdgpJ/RYRQ3SX8N/biMSlszooazgjy8S5WUuQGG
+X-Received: by 10.180.99.39 with SMTP id en7mr9118432wib.10.1389889393084;
+	Thu, 16 Jan 2014 08:23:13 -0800 (PST)
+Received: from localhost ([2001:610:612:0:21c:42ff:fef0:7f75])
+	by mx.google.com with ESMTPSA id eh7sm34449776wic.2.2014.01.16.08.23.11
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Jan 2014 08:16:14 -0800 (PST)
-Date: Thu, 16 Jan 2014 17:16:36 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 16 Jan 2014 08:23:12 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140116161636.GH3742@jama>
-References: <1389888244-1899-1-git-send-email-ulf@emagii.com>
-MIME-Version: 1.0
-In-Reply-To: <1389888244-1899-1-git-send-email-ulf@emagii.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Ulf Samuelsson <ulf@emagii.com>
-Subject: Re: [PATCH] python-nose: avoid duplicate install of setup.py*
+Date: Thu, 16 Jan 2014 17:23:09 +0100
+Message-Id: <1389889389-6514-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-java][PATCH] openjdk-7: use icetea6-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,63 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 16:16:14 -0000
-X-Groupsio-MsgNum: 47778
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PWfwoUCx3AFJRUBq"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Jan 2014 16:23:14 -0000
 
---PWfwoUCx3AFJRUBq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Since icetea6-native fails to build on all my machines and icedtea7-native works, switch to that.
 
-On Thu, Jan 16, 2014 at 05:04:04PM +0100, Ulf Samuelsson wrote:
-> Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
-> ---
->  .../recipes-devtools/python/python-nose_1.2.1.bb   |    4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb b/meta-=
-oe/recipes-devtools/python/python-nose_1.2.1.bb
-> index 083d052..1cf3869 100644
-> --- a/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb
-> +++ b/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb
-> @@ -11,4 +11,8 @@ SRC_URI[sha256sum] =3D "2171e9202d118d302d5db1decb52dd8=
-62b79e2a626ca19653a6914574a
-> =20
->  S =3D "${WORKDIR}/nose-${PV}"
-> =20
-> +do_install_append() {
-> +	rm -f ${D}${libdir}/python*/site-packages/site.py*
-> +}
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ recipes-core/openjdk/openjdk-7-common.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-it was moved to oe-core and I believe that fixed there by RP (change of
-inherit)
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index 9ecc990..206bf12 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
+@@ -26,7 +26,7 @@ PN = "${JDKPN}-jre"
+ PROVIDES += "${JDKPN}"
+ 
+ DEPENDS = " \
+-           icedtea6-native zip-native ant-native \
++           icedtea7-native zip-native ant-native \
+            zlib \
+ 	   jpeg libpng giflib \
+            gtk+ glib-2.0 \
+@@ -101,7 +101,7 @@ EXTRA_OECONF = " \
+ 	\
+         --enable-zero \
+ 	\
+-	--with-jdk-home=${STAGING_LIBDIR_JVM_NATIVE}/icedtea6-native \
++	--with-jdk-home=${STAGING_LIBDIR_JVM_NATIVE}/icedtea7-native \
+ 	--with-rhino=${STAGING_DATADIR_JAVA}/rhino.jar \
+ 	\
+         --with-openjdk-src-zip=${WORKDIR}/${OPENJDK_FILE} \
+-- 
+1.8.4.2
 
-> +
->  inherit distutils
-> --=20
-> 1.7.9.5
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---PWfwoUCx3AFJRUBq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLYBeQACgkQN1Ujt2V2gBw/ngCfXQ4mJXccEWJk9raqihOjwWgd
-heMAn3nmBJ7yW0P8y8H1nos8hVAG/rSp
-=igc7
------END PGP SIGNATURE-----
-
---PWfwoUCx3AFJRUBq--
