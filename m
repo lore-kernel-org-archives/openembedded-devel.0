@@ -1,33 +1,39 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f42.google.com (mail-oa0-f42.google.com
-	[209.85.219.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 08CD36C9B4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id C28576C9B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 23:35:15 +0000 (UTC)
-Received: by mail-oa0-f42.google.com with SMTP id i7so1505795oag.29
+	Thu, 16 Jan 2014 23:52:22 +0000 (UTC)
+Received: by mail-ea0-f179.google.com with SMTP id q10so708982ead.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 15:35:16 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=Yx0CswP8tgpLxejRqtk9lmrYXZwRwwWvrjvzc7A5lGc=;
-	b=g4tlBDuKIgyWIMaRecdPgdsCLWiyx1y1IFK483Lpyqs/eEwamkRpCIOiO4PS2smvKb
-	gdWklg5N1dwoPo7jK+QpSt8qUzKQpG/oNzqifgUdU4hXVeessh6MtMtlIvg1/vrHUoGH
-	4dDslQYRZXncQbkSKTPDZWccHB5YXRa8nfT5TWBg/EqVSrkruOMaGEqKZbZ7eiQsA6hN
-	Qr6vjGZJqsUmEOlFiv0alS86QRR2iO/5tRPLFNQpmfoF1nbMLL78o6wP+QAYVLgrGYku
-	+1Ri1UrQes/Thhnn2NcuwdSc9gD/IQa8vLCElbDi2YgFFr1yOpskneTIREoD09WL2q20
-	IGlA==
-X-Gm-Message-State: ALoCoQkyxcZKVFA29ne+HEQhIXBbbf7qk2sWSiUSPaPt+4q5j8Ct/3I0fzJtiUUqUC8c/ayi8Z0q
-X-Received: by 10.182.65.36 with SMTP id u4mr9391174obs.31.1389915316698; Thu,
-	16 Jan 2014 15:35:16 -0800 (PST)
+	Thu, 16 Jan 2014 15:52:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=SIukazgQySCjZ7DPHvEgFIKND1Si5U/Rr18ND0OH6IA=;
+	b=rY3n+4BpbHF8GFZA+Hnl7eG1rdiYaH72dhTL3Gg2wAul2lm0OA21SLJxhl9Sqrju8l
+	zQ24L6ysSeiil/DjS/mGlFpiHLE8tzVk/sMiSRhu44qu0MgnnzRJbb+udZijc7pdPSnY
+	QsdafJ6LuuBOl6uHf9PHg2QqEZPOtxbbyf+YRf+WkvbJID7mECmZI9HkZ+RMg2TEo6+E
+	/DJvys1uzqnHjk8L6OVyZJxNEBdQidx81Eu64H+BwQn2FYVXxTWDteiajqD1fyi0OCxp
+	m2IzNPjCdNpXLH+n16jY2PL8ZBZqdMK0O+5OTGIoymp1j4FR9T27iV8QoV8b4sZF6Nzl
+	kaqw==
+X-Received: by 10.15.49.9 with SMTP id i9mr121761eew.112.1389916343194;
+	Thu, 16 Jan 2014 15:52:23 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id 7sm22205161eee.12.2014.01.16.15.52.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Jan 2014 15:52:22 -0800 (PST)
+Date: Fri, 17 Jan 2014 00:52:45 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140116235245.GK3742@jama>
+References: <CAP71WjydArvSEYRdK0NRWs5tTS_KuYBjZena8nas9eE0tHbv6g@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.76.84.233 with HTTP; Thu, 16 Jan 2014 15:34:56 -0800 (PST)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Fri, 17 Jan 2014 00:34:56 +0100
-Message-ID: <CAP71WjydArvSEYRdK0NRWs5tTS_KuYBjZena8nas9eE0tHbv6g@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: qt5 and virtualbox
+In-Reply-To: <CAP71WjydArvSEYRdK0NRWs5tTS_KuYBjZena8nas9eE0tHbv6g@mail.gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: qt5 and virtualbox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,21 +47,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 23:35:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 16 Jan 2014 23:52:24 -0000
+X-Groupsio-MsgNum: 47784
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lHuqAdgBYNjQz/wy"
+Content-Disposition: inline
 
-hi there,
+--lHuqAdgBYNjQz/wy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-has anyone be able to run qt5 applications in virtualbox or qemu? if
-so, what build configuration was used: xcb? eglfs?
+On Fri, Jan 17, 2014 at 12:34:56AM +0100, Nicolas Dechesne wrote:
+> hi there,
+>=20
+> has anyone be able to run qt5 applications in virtualbox or qemu? if
+> so, what build configuration was used: xcb? eglfs?
+>=20
+> When running a 'desktop' distro in VirtualBox we can enable adds-on to
+> get some support for acceleration, iirc with proper X11 video drivers.
+> can that be used to run Qt5 application built with OE too?
+>=20
+> any detail/instructions publicly available which I might have missed?
 
-When running a 'desktop' distro in VirtualBox we can enable adds-on to
-get some support for acceleration, iirc with proper X11 video drivers.
-can that be used to run Qt5 application built with OE too?
+Check .bbappends in
+https://github.com/webos-ports/meta-webos-ports
 
-any detail/instructions publicly available which I might have missed?
+there is branch also for 5.2.0 and if you check webos-ports wiki you'll
+even find VirtualBox appliance build to test it without building it yoursel=
+f.
 
-thanks
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-nicolas
+--lHuqAdgBYNjQz/wy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLYcM0ACgkQN1Ujt2V2gByQVQCfV80hDet2DM8Oo0Jv8QkzX86i
+6nUAn3A8ncAI6m2McJuhe/uS6cLMQ6IX
+=nguk
+-----END PGP SIGNATURE-----
+
+--lHuqAdgBYNjQz/wy--
