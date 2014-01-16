@@ -1,45 +1,37 @@
-Return-Path: <B40290@freescale.com>
-Received: from co1outboundpool.messaging.microsoft.com
-	(co1ehsobe004.messaging.microsoft.com [216.32.180.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 13C0D6B2E6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F0076E3AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 03:59:40 +0000 (UTC)
-Received: from mail148-co1-R.bigfish.com (10.243.78.235) by
-	CO1EHSOBE005.bigfish.com (10.243.66.68) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 16 Jan 2014 03:59:39 +0000
-Received: from mail148-co1 (localhost [127.0.0.1])	by
-	mail148-co1-R.bigfish.com (Postfix) with ESMTP id 08828A000B9	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 03:59:39 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h2487h1155h)
-Received: from mail148-co1 (localhost.localdomain [127.0.0.1]) by mail148-co1
-	(MessageSwitch) id 138984477711297_6028;
-	Thu, 16 Jan 2014 03:59:37 +0000 (UTC)
-Received: from CO1EHSMHS024.bigfish.com (unknown [10.243.78.235])	by
-	mail148-co1.bigfish.com (Postfix) with ESMTP id E838034004C;
-	Thu, 16 Jan 2014 03:59:36 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS024.bigfish.com
-	(10.243.66.34) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 16 Jan 2014 03:59:36 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 16 Jan 2014 03:59:35 +0000
-Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
-	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id s0G3xWTR026888;	Wed, 15 Jan 2014 20:59:34 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jan 2014 11:59:30 +0800
-Message-ID: <1389844770-9491-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.8.3.2
+	Thu, 16 Jan 2014 09:27:22 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id d17so1384118eek.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Jan 2014 01:27:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=FvjjoBccj18y8qSHwNBbPrMV3ANcEclk6JdhD/jXuAI=;
+	b=qBoGzjVbGMKLraMp4swjiRAl9ibMW36jEIRaZlHlx0XSbOcngwWEuzCkHx/xiI3jW6
+	C2yrs1hnpRVORbEwjy3cp763yQxDo4cUp92Jg+ae59jIBd1SZBC8fqtk3TruwpR1q2RC
+	beLyOaQciiUSG0a9u9TYKsUdpsV0afLm/ceWjd9674+XvftF/uHHaOWX7vRIhOgZaMMr
+	8kON/ychqBzql4rCOV/pxSK0yX8HSVkw8P/pTwqMUvzLzPsLELAcWQLyP9XF+0PGaTod
+	l+BgJg+rVPl3tFVMbbvq0RLUhj65k7QKrCXS5rkdI0jRQtFzcnjjwHV9t+Bo1Jq4FNZu
+	A4sw==
+X-Received: by 10.14.0.201 with SMTP id 49mr10914508eeb.38.1389864441441;
+	Thu, 16 Jan 2014 01:27:21 -0800 (PST)
+Received: from localhost ([89.176.104.107])
+	by mx.google.com with ESMTPSA id z46sm16859992een.1.2014.01.16.01.27.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Jan 2014 01:27:20 -0800 (PST)
+Date: Thu, 16 Jan 2014 10:27:31 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140116092731.GE3742@jama>
+References: <1389842914-12116-1-git-send-email-b40290@freescale.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH] piglit: remove
+In-Reply-To: <1389842914-12116-1-git-send-email-b40290@freescale.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-oe][PATCH] python-mako: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,71 +45,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 03:59:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Jan 2014 09:27:23 -0000
+X-Groupsio-MsgNum: 47771
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="i3lJ51RuaGWuFYNw"
+Content-Disposition: inline
 
-From: Chunrong Guo <B40290@freescale.com>
+--i3lJ51RuaGWuFYNw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  *This recipe is now back in OE-Core.
+On Thu, Jan 16, 2014 at 11:28:34AM +0800, b40290@freescale.com wrote:
+> From: Chunrong Guo <B40290@freescale.com>
+>=20
+>     *This recipe is now back in OE-Core.
+>=20
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-graphics/piglit/piglit_git.bb | 44 ---------------------------
- 1 file changed, 44 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/piglit/piglit_git.bb
+Ross already sent removal for all these yesterday.
 
-diff --git a/meta-oe/recipes-graphics/piglit/piglit_git.bb b/meta-oe/recipes-graphics/piglit/piglit_git.bb
-deleted file mode 100644
-index 7c4f9a0..0000000
---- a/meta-oe/recipes-graphics/piglit/piglit_git.bb
-+++ /dev/null
-@@ -1,44 +0,0 @@
--SUMMARY = "OpenGL driver testing framework"
--LICENSE = "MIT & LGPLv2+ & GPLv3 & GPLv2+ & BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b2beded7103a3d8a442a2a0391d607b0"
--
--SRC_URI = "git://anongit.freedesktop.org/piglit"
--
--# From 2012/12/30.
--SRCREV = "bbeff5d21b06d37338ad28e42d88f499bef13268"
--# (when PV goes above 1.0 remove the trailing r)
--PV = "1.0+gitr${SRCPV}"
--
--S = "${WORKDIR}/git"
--
--DEPENDS = "virtual/libx11 waffle virtual/libgl libglu python-mako-native python-numpy-native"
--
--inherit cmake pythonnative
--
--# CMake sets the rpath at build time with the source tree, and will reset it at
--# install time. As we don't install this doesn't happen, so force the rpath to
--# what we need.
--EXTRA_OECMAKE = "-DCMAKE_BUILD_WITH_INSTALL_RPATH=1 -DCMAKE_INSTALL_RPATH=${libdir}/piglit/lib"
--
--do_install() {
--	install -d ${D}${bindir}
--        install -m 0755 piglit-*.py ${D}${bindir}
--
--        install -d ${D}${libdir}/piglit/
--
--        install -d ${D}${libdir}/piglit/bin
--        install -m 755 ${S}/bin/* ${D}${libdir}/piglit/bin
--
--        cp -a lib/ ${D}${libdir}/piglit/
--        cp -a framework/ ${D}${libdir}/piglit/
--        cp -a generated_tests/ ${D}${libdir}/piglit/
--        cp -a tests/ ${D}${libdir}/piglit/
--        cp -a templates/ ${D}${libdir}/piglit/
--
--        sed -i -e 's|sys.path.append(.*)|sys.path.append("${libdir}/piglit")|' ${D}${bindir}/piglit-*.py
--        sed -i -e 's|^templatedir = .*$|templatedir = "${libdir}/piglit/templates"|' ${D}${bindir}/piglit-summary-html.py
--}
--
--FILES_${PN}-dbg += "${libdir}/piglit/*/.debug/"
--
--RDEPENDS_${PN} = "python waffle python-json python-subprocess python-multiprocessing python-textutils python-netserver python-shell mesa-demos"
--- 
-1.8.3.2
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> ---
+>  .../recipes-devtools/python/python-mako_0.7.2.bb   | 22 ----------------=
+------
+>  1 file changed, 22 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb b/meta-=
+oe/recipes-devtools/python/python-mako_0.7.2.bb
+> deleted file mode 100644
+> index 1d2bdd7..0000000
+> --- a/meta-oe/recipes-devtools/python/python-mako_0.7.2.bb
+> +++ /dev/null
+> @@ -1,22 +0,0 @@
+> -DESCRIPTION =3D "Templating library for Python"
+> -SECTION =3D "devel/python"
+> -LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dda8dd26ed9751ee0cfdf9df1a16bb=
+b54"
+> -
+> -PR =3D "r2"
+> -
+> -SRC_URI =3D "http://www.makotemplates.org/downloads/Mako-${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "e3c0a677aa4216da9e89ef8fa76cbafb"
+> -SRC_URI[sha256sum] =3D "fe8698e845035586bd711a6748e4e40a208a58de276b9138=
+026164700494b68f"
+> -
+> -S =3D "${WORKDIR}/Mako-${PV}"
+> -
+> -inherit setuptools
+> -
+> -RDEPENDS_${PN} =3D "python-threading \
+> -                  python-netclient \
+> -                  python-html \
+> -"
+> -RDEPENDS_${PN}_class-native =3D ""
+> -
+> -BBCLASSEXTEND =3D "native nativesdk"
+> --=20
+> 1.8.3.2
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--i3lJ51RuaGWuFYNw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLXpgMACgkQN1Ujt2V2gBwpiQCePwNUP0amb46ng1uA2yZ6tKAa
+WpgAoKYc7T36qUKA25oRWyGjReZWMS6H
+=vwnf
+-----END PGP SIGNATURE-----
+
+--i3lJ51RuaGWuFYNw--
