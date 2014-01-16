@@ -1,30 +1,28 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 249E86D899
+Return-Path: <ulf@emagii.com>
+Received: from smtprelay-b22.telenor.se (smtprelay-b22.telenor.se
+	[195.54.99.213])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C0566D899
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 15:24:28 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s0GFOTHw000072
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 16 Jan 2014 07:24:29 -0800 (PST)
-Received: from [128.224.146.203] (128.224.146.203) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Thu, 16 Jan 2014 07:24:28 -0800
-Message-ID: <52D7F9AB.5040108@windriver.com>
-Date: Thu, 16 Jan 2014 10:24:27 -0500
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <cover.1389609476.git.paul.eggleton@linux.intel.com>
-	<52D7ED40.3080505@windriver.com>
-	<1857113.0unWlYmFcc@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <1857113.0unWlYmFcc@peggleto-mobl5.ger.corp.intel.com>
-X-Originating-IP: [128.224.146.203]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 0/3] Apache / PHP upgrades
+	Thu, 16 Jan 2014 16:08:27 +0000 (UTC)
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b22.telenor.se (Postfix) with ESMTP id 16B2FEAED4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Jan 2014 17:08:26 +0100 (CET)
+X-SENDER-IP: [83.227.57.102]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AkuSAKoC2FJT4zlmPGdsb2JhbABZgwoBATeDFYR5rCaHLYELFwMBAQEBODWCdwEKI09LCi2ICAGtAwGXUheOfx2EIgSYIZVFOw
+X-IronPort-AV: E=Sophos;i="4.95,668,1384297200"; d="scan'208";a="781117644"
+Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	Hydra.bredbandsbolaget.se) ([83.227.57.102])
+	by ipb2.telenor.se with ESMTP; 16 Jan 2014 17:04:16 +0100
+From: Ulf Samuelsson <ulf@emagii.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Jan 2014 17:04:04 +0100
+Message-Id: <1389888244-1899-1-git-send-email-ulf@emagii.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: [PATCH] python-nose: avoid duplicate install of setup.py*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,96 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 15:24:29 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jan 2014 16:08:27 -0000
 
-On 14-01-16 10:15 AM, Paul Eggleton wrote:
-> Hi Randy,
->
-> On Thursday 16 January 2014 09:31:28 Randy MacLeod wrote:
->> You asked me about dropping this patch and I've done a bit of digging.
->>
->> My conclusion is that the  patch is not integrated into 2.4.7 and
->> it would be "nice to have" since we've supported it so far.
->> It seems that apache2-2.6.x will include the patch.
->>
->> The intended use is primarily to support SPDY as described here:
->>      https://technotes.googlecode.com/git/nextprotoneg.html
->> and I skimmed though this:
->>
->> http://googledevelopers.blogspot.ca/2012/04/add-spdy-support-to-your-apache-> server.html
->>
->>
->> As for generating a new patch, the STATUS file in 2.4.7 says:
->> ...
->>      * mod_ssl: Add support for Next Protocol Negotiation.
->>        Trunk patch:
->>          http://svn.apache.org/viewvc?view=revision&revision=1332643
->>        2.4.x patch:
->>          Trunk patch works.
->>        +1: ben
->>        sf says: Needs r1345599, too.
->>             And wrowe's comment about the 2.2 patch is also valid for 2.4:
->>             http://svn.apache.org/viewvc?view=revision&revision=1354823
->>
->>
->> Does that help? Do you want someone @WR to work on the patch, the
->> mod_spdy module and testing? A few more comments and links given
->> below.
->>
->> ../Randy
->>
->> ---
->>
->> This patch has:
->>      Upstream-Status: Backport
->> and I do see the _reworked_ feature and our patch upstream
->> in the git-svn repo:
->>      https://github.com/apache/httpd.git
->> specifically, the re-worked commit here:
->>
->> https://github.com/apache/httpd/commit/afa9bc99edf96a8ff3a81786cc4ef52a9f3cf
->> 310
->>
->> and a commit with identical content to our patch here:
->>
->> https://github.com/apache/httpd/commit/79d4d4d3ce586bf526178ed6d05e1b0dca705
->> 1c4
->>
->> but they are both on the trunk branch (aka 2.5) so
->> they are not include in 2.4.7.
->>
->> The original defect is:
->>      https://issues.apache.org/bugzilla/show_bug.cgi?id=52210
->>
->>      OpenSSL 1.0.1 added support for TLS Next Protocol Negotiation (NPN)
->>      [1], a feature which allows client and server to negotiate what
->>      protocol should be used over the secure connection.  I propose
->>      adding hooks into mod_ssl to allow other modules to access
->>      this feature.
->
->
-> Thanks for looking deeper into this. I'm not quite sure what they mean by
-> "Trunk patch works" but I just retrieved the trunk patch and tried to apply it
-> but there are conflicts; I also tried a cherry-pick on that git repository but
-> that didn't work either.
->
-> I suspect that it would be good to have someone else who knows more about this
-> feature create and test a new patch, so if you have someone who could do that
-> that would be great.
+Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
+---
+ .../recipes-devtools/python/python-nose_1.2.1.bb   |    4 ++++
+ 1 file changed, 4 insertions(+)
 
-Will do. It may have to wait until after the Chinese Spring festival but
-we'll get it on the "to do" list.
-
-../Randy
->
-> Cheers,
-> Paul
->
-
-
+diff --git a/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb b/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb
+index 083d052..1cf3869 100644
+--- a/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb
++++ b/meta-oe/recipes-devtools/python/python-nose_1.2.1.bb
+@@ -11,4 +11,8 @@ SRC_URI[sha256sum] = "2171e9202d118d302d5db1decb52dd862b79e2a626ca19653a6914574a
+ 
+ S = "${WORKDIR}/nose-${PV}"
+ 
++do_install_append() {
++	rm -f ${D}${libdir}/python*/site-packages/site.py*
++}
++
+ inherit distutils
 -- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350
+1.7.9.5
+
 
