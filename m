@@ -1,45 +1,45 @@
 Return-Path: <B40290@freescale.com>
-Received: from am1outboundpool.messaging.microsoft.com
-	(am1ehsobe005.messaging.microsoft.com [213.199.154.208])
-	by mail.openembedded.org (Postfix) with ESMTP id 2978F6B2E6
+Received: from co1outboundpool.messaging.microsoft.com
+	(co1ehsobe004.messaging.microsoft.com [216.32.180.187])
+	by mail.openembedded.org (Postfix) with ESMTP id 13C0D6B2E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 03:57:08 +0000 (UTC)
-Received: from mail31-am1-R.bigfish.com (10.3.201.243) by
-	AM1EHSOBE008.bigfish.com (10.3.204.28) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 16 Jan 2014 03:57:08 +0000
-Received: from mail31-am1 (localhost [127.0.0.1])	by mail31-am1-R.bigfish.com
-	(Postfix) with ESMTP id 1C60CA022B	for
+	Thu, 16 Jan 2014 03:59:40 +0000 (UTC)
+Received: from mail148-co1-R.bigfish.com (10.243.78.235) by
+	CO1EHSOBE005.bigfish.com (10.243.66.68) with Microsoft SMTP Server id
+	14.1.225.22; Thu, 16 Jan 2014 03:59:39 +0000
+Received: from mail148-co1 (localhost [127.0.0.1])	by
+	mail148-co1-R.bigfish.com (Postfix) with ESMTP id 08828A000B9	for
 	<openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 03:57:08 +0000 (UTC)
+	Thu, 16 Jan 2014 03:59:39 +0000 (UTC)
 X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
 	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: -1
-X-BigFish: VS-1(zz936eIzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h17326ah8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h2487h1155h)
-Received: from mail31-am1 (localhost.localdomain [127.0.0.1]) by mail31-am1
-	(MessageSwitch) id 1389844626296089_17211;
-	Thu, 16 Jan 2014 03:57:06 +0000 (UTC)
-Received: from AM1EHSMHS003.bigfish.com (unknown [10.3.201.245])	by
-	mail31-am1.bigfish.com (Postfix) with ESMTP id 430D23C004B;
-	Thu, 16 Jan 2014 03:57:06 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by AM1EHSMHS003.bigfish.com
-	(10.3.207.103) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 16 Jan 2014 03:57:05 +0000
+X-SpamScore: 0
+X-BigFish: VS0(zzzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21a7h1fc6hzz1de098h8275bh8275dh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h2327h2336h2438h2461h2487h1155h)
+Received: from mail148-co1 (localhost.localdomain [127.0.0.1]) by mail148-co1
+	(MessageSwitch) id 138984477711297_6028;
+	Thu, 16 Jan 2014 03:59:37 +0000 (UTC)
+Received: from CO1EHSMHS024.bigfish.com (unknown [10.243.78.235])	by
+	mail148-co1.bigfish.com (Postfix) with ESMTP id E838034004C;
+	Thu, 16 Jan 2014 03:59:36 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO1EHSMHS024.bigfish.com
+	(10.243.66.34) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Thu, 16 Jan 2014 03:59:36 +0000
 Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-001.039d.mgd.msft.net (10.84.1.13) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 16 Jan 2014 03:57:04 +0000
+	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Thu, 16 Jan 2014 03:59:35 +0000
 Received: from sbuilder136.ap.freescale.net (sun.ap.freescale.net
 	[10.192.208.136])	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with
-	ESMTP id s0G3v0cN025459;	Wed, 15 Jan 2014 20:57:02 -0700
+	ESMTP id s0G3xWTR026888;	Wed, 15 Jan 2014 20:59:34 -0700
 From: <b40290@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jan 2014 11:56:55 +0800
-Message-ID: <1389844615-22890-1-git-send-email-b40290@freescale.com>
+Date: Thu, 16 Jan 2014 11:59:30 +0800
+Message-ID: <1389844770-9491-1-git-send-email-b40290@freescale.com>
 X-Mailer: git-send-email 1.8.3.2
 MIME-Version: 1.0
 X-OriginatorOrg: freescale.com
 X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
 X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH] waffle : remove
+Subject: [meta-oe][PATCH] piglit: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2014 03:57:08 -0000
+X-List-Received-Date: Thu, 16 Jan 2014 03:59:40 -0000
 Content-Type: text/plain
 
 From: Chunrong Guo <B40290@freescale.com>
@@ -62,85 +62,60 @@ From: Chunrong Guo <B40290@freescale.com>
 
 Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- meta-oe/recipes-graphics/waffle/files/cflags.patch | 27 -----------------
- meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb    | 34 ----------------------
- 2 files changed, 61 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/waffle/files/cflags.patch
- delete mode 100644 meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb
+ meta-oe/recipes-graphics/piglit/piglit_git.bb | 44 ---------------------------
+ 1 file changed, 44 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/piglit/piglit_git.bb
 
-diff --git a/meta-oe/recipes-graphics/waffle/files/cflags.patch b/meta-oe/recipes-graphics/waffle/files/cflags.patch
+diff --git a/meta-oe/recipes-graphics/piglit/piglit_git.bb b/meta-oe/recipes-graphics/piglit/piglit_git.bb
 deleted file mode 100644
-index 3819756..0000000
---- a/meta-oe/recipes-graphics/waffle/files/cflags.patch
+index 7c4f9a0..0000000
+--- a/meta-oe/recipes-graphics/piglit/piglit_git.bb
 +++ /dev/null
-@@ -1,27 +0,0 @@
--Upstream-Status: Backport
--Signed-off-by: Ross Burton <ross.burton@intel.com>
+@@ -1,44 +0,0 @@
+-SUMMARY = "OpenGL driver testing framework"
+-LICENSE = "MIT & LGPLv2+ & GPLv3 & GPLv2+ & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b2beded7103a3d8a442a2a0391d607b0"
 -
--From 2abec1cb3c17fa5ec8d945d79acd74a39c38293a Mon Sep 17 00:00:00 2001
--From: Ross Burton <ross.burton@intel.com>
--Date: Wed, 12 Dec 2012 12:57:18 +0000
--Subject: cmake: respect existing CMAKE_C_FLAGS
+-SRC_URI = "git://anongit.freedesktop.org/piglit"
 -
--When cross-compiling it's not unusual to need specific arguments passed to gcc
--such as --sysroot.  Ensure that these are passed on from the toolchain file by
--appending to CMAKE_C_FLAGS instead of overwriting it.
+-# From 2012/12/30.
+-SRCREV = "bbeff5d21b06d37338ad28e42d88f499bef13268"
+-# (when PV goes above 1.0 remove the trailing r)
+-PV = "1.0+gitr${SRCPV}"
 -
--Signed-off-by: Ross Burton <ross.burton@intel.com>
+-S = "${WORKDIR}/git"
 -
--Index: waffle-1.2.2/CMakeLists.txt
--===================================================================
----- waffle-1.2.2.orig/CMakeLists.txt	2012-11-28 00:43:40.000000000 +0000
--+++ waffle-1.2.2/CMakeLists.txt	2013-02-13 11:34:02.476188233 +0000
--@@ -212,7 +212,7 @@
-- # ------------------------------------------------------------------------------
-- 
-- # FIXME: Only enable c99 if compiler supports it.
---set(CMAKE_C_FLAGS "--std=c99 -Wall -Werror=implicit-function-declaration")
--+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --std=c99 -Wall -Werror=implicit-function-declaration")
-- if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
--     # On MacOS, the SSE2 headers trigger this error.
--     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror=missing-prototypes")
-diff --git a/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb b/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb
-deleted file mode 100644
-index 4f80191..0000000
---- a/meta-oe/recipes-graphics/waffle/waffle_1.2.2.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--SUMMARY = "cross-platform C library to defer selection of GL API and of window system"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4c5154407c2490750dd461c50ad94797 \
--                    file://include/waffle/waffle.h;endline=24;md5=61dbf8697f61c78645e75a93c585b1bf"
+-DEPENDS = "virtual/libx11 waffle virtual/libgl libglu python-mako-native python-numpy-native"
 -
--SRC_URI = "http://people.freedesktop.org/~chadversary/waffle/files/release/${BPN}-${PV}/${BPN}-${PV}.tar.xz \
--           file://cflags.patch"
+-inherit cmake pythonnative
 -
--SRC_URI[md5sum] = "fdd07cea7709422fbf72418ee63a285d"
--SRC_URI[sha256sum] = "7e342c859b58d4e051b347ef3d7740ed2f3b6c506b93daec272724afe7dd1311"
+-# CMake sets the rpath at build time with the source tree, and will reset it at
+-# install time. As we don't install this doesn't happen, so force the rpath to
+-# what we need.
+-EXTRA_OECMAKE = "-DCMAKE_BUILD_WITH_INSTALL_RPATH=1 -DCMAKE_INSTALL_RPATH=${libdir}/piglit/lib"
 -
--inherit cmake
+-do_install() {
+-	install -d ${D}${bindir}
+-        install -m 0755 piglit-*.py ${D}${bindir}
 -
--# This should be overridden per-machine to reflect the capabilities of the GL
--# stack.
--PACKAGECONFIG ??= "glx"
+-        install -d ${D}${libdir}/piglit/
 -
--# I say virtual/libgl, actually wants gl.pc
--PACKAGECONFIG[glx] = "-Dwaffle_has_glx=1,,virtual/libgl libx11"
+-        install -d ${D}${libdir}/piglit/bin
+-        install -m 755 ${S}/bin/* ${D}${libdir}/piglit/bin
 -
--# I say virtual/libgl, actually wants wayland-egl.pc, egl.pc, and the wayland
--# DISTRO_FEATURE.
--PACKAGECONFIG[wayland] = "-Dwaffle_has_wayland=1,,virtual/libgl wayland"
+-        cp -a lib/ ${D}${libdir}/piglit/
+-        cp -a framework/ ${D}${libdir}/piglit/
+-        cp -a generated_tests/ ${D}${libdir}/piglit/
+-        cp -a tests/ ${D}${libdir}/piglit/
+-        cp -a templates/ ${D}${libdir}/piglit/
 -
--# I say virtual/libgl, actually wants gbm.pc egl.pc
--PACKAGECONFIG[gbm] = "-Dwaffle_has_wayland=1,,virtual/libgl udev"
+-        sed -i -e 's|sys.path.append(.*)|sys.path.append("${libdir}/piglit")|' ${D}${bindir}/piglit-*.py
+-        sed -i -e 's|^templatedir = .*$|templatedir = "${libdir}/piglit/templates"|' ${D}${bindir}/piglit-summary-html.py
+-}
 -
--# I say virtual/libgl, actually wants egl.pc
--PACKAGECONFIG[x11-egl] = "-Dwaffle_has_x11_egl=1,,virtual/libgl libxcb"
+-FILES_${PN}-dbg += "${libdir}/piglit/*/.debug/"
 -
--# Take the flags added by PACKAGECONFIG and pass them to cmake.
--EXTRA_OECMAKE = "${EXTRA_OECONF}"
--
--FILES_${PN}-dev += "${datadir}/cmake/Modules/FindWaffle.cmake"
+-RDEPENDS_${PN} = "python waffle python-json python-subprocess python-multiprocessing python-textutils python-netserver python-shell mesa-demos"
 -- 
 1.8.3.2
 
