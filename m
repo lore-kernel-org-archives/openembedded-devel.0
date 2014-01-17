@@ -1,15 +1,15 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 11D5E6AA18
+	by mail.openembedded.org (Postfix) with ESMTP id 826776AA18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2014 13:30:59 +0000 (UTC)
+	Fri, 17 Jan 2014 13:35:08 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jan 2014 13:30:48 +0000
-Message-Id: <1389965448-4957-1-git-send-email-ml@communistcode.co.uk>
+Date: Fri, 17 Jan 2014 13:34:58 +0000
+Message-Id: <1389965698-5352-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.5.2
 Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCHv3] opus-tools: add 0.1.8
+Subject: [meta-oe][PATCHv3] libsoc: update to 0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,37 +23,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 13:30:59 -0000
+X-List-Received-Date: Fri, 17 Jan 2014 13:35:08 -0000
 
 From: Jack Mitchell <jack@embed.me.uk>
 
 Signed-off-by: Jack Mitchell <jack@embed.me.uk>
 ---
- meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
+ meta-oe/recipes-support/libsoc/{libsoc_0.4.bb => libsoc_0.5.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libsoc/{libsoc_0.4.bb => libsoc_0.5.bb} (87%)
 
-diff --git a/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-new file mode 100644
-index 0000000..ff63111
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/opus-tools/opus-tools_0.1.8.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Opus Audio Tools"
-+HOMEPAGE = "http://www.opus-codec.org/"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=843a066da9f1facfcc6ea6f616ffecb1"
-+
-+SRC_URI = "http://downloads.xiph.org/releases/opus/opus-tools-${PV}.tar.gz"
-+SRC_URI[md5sum] = "b424790eda9357a4df394e2d7ca19eac"
-+SRC_URI[sha256sum] = "e4e188579ea1c4e4d5066460d4a7214a7eafe3539e9a4466fdc98af41ba4a2f6"
-+
-+S = "${WORKDIR}/opus-tools-${PV}"
-+
-+DEPENDS = "libopus flac"
-+
-+inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.4.bb b/meta-oe/recipes-support/libsoc/libsoc_0.5.bb
+similarity index 87%
+rename from meta-oe/recipes-support/libsoc/libsoc_0.4.bb
+rename to meta-oe/recipes-support/libsoc/libsoc_0.5.bb
+index da3c442..c381799 100644
+--- a/meta-oe/recipes-support/libsoc/libsoc_0.4.bb
++++ b/meta-oe/recipes-support/libsoc/libsoc_0.5.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
+ 
+ inherit autotools
+ 
+-SRCREV = "f6827b7b5c581b586d3bcc4813d418101ae1e85b"
++SRCREV = "e5846ca199316603f0fec0748c57a781ced46950"
+ SRC_URI = "git://github.com/jackmitch/libsoc.git"
+ 
+ S = "${WORKDIR}/git"
 -- 
 1.8.5.2
 
