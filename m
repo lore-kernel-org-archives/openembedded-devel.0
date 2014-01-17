@@ -1,15 +1,15 @@
 Return-Path: <ml@communistcode.co.uk>
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 81FAD6AA18
+	by mail.openembedded.org (Postfix) with ESMTP id 11D5E6AA18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2014 13:30:24 +0000 (UTC)
+	Fri, 17 Jan 2014 13:30:59 +0000 (UTC)
 From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jan 2014 13:30:15 +0000
-Message-Id: <1389965415-4912-1-git-send-email-ml@communistcode.co.uk>
+Date: Fri, 17 Jan 2014 13:30:48 +0000
+Message-Id: <1389965448-4957-1-git-send-email-ml@communistcode.co.uk>
 X-Mailer: git-send-email 1.8.5.2
 Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCHv2] opus-tools: add 0.1.8
+Subject: [meta-oe][PATCHv3] opus-tools: add 0.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,7 +23,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 13:30:26 -0000
+X-List-Received-Date: Fri, 17 Jan 2014 13:30:59 -0000
 
 From: Jack Mitchell <jack@embed.me.uk>
 
