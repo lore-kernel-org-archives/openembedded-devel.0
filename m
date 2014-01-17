@@ -1,35 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C0FB60D98
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B9E06B6A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2014 07:50:41 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id r10so3683678pdi.20
+	Fri, 17 Jan 2014 09:11:44 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id l18so4251959wgh.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2014 23:50:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=UcXg+u6SueFX4wcsVdRfWTKUdCQD2CagM7mFQZChnGg=;
-	b=eIugBgwsPhMRH7L5PjdKd2ZYzXtWnO0rnSdPps1ZcgAlka+DunTd6pwXXql33KICfn
-	hY5e53XY/AaNnGrcqlG9NmZNkiG0oN6+ArYYdlwwlYZ319SybVvkgt6C8+B5ZTKBEoGD
-	GWRpHb4bRcY0ybMaNwXe08Jh8CH73gn3eLM20YkLG6d5Tv52y5mUfTRRliiQFtSUfcvY
-	cttVBNpzet+h5qDAgkB/22/+KRDOrbT4/sMnl+5F/rJImQD+P9GJ7avxM6r4jVeTdsFc
-	8+MdXkFRlaB/d+tBF0JEvKZKAQ80IDimOLBCYZQCZLh9BAk1Ko2xtG2sT9AHd2kaXysG
-	BjGA==
-X-Received: by 10.66.13.138 with SMTP id h10mr535660pac.148.1389945042239;
-	Thu, 16 Jan 2014 23:50:42 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id
-	vn10sm20490054pbc.21.2014.01.16.23.50.40 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Jan 2014 23:50:41 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 17 Jan 2014 01:11:44 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=cDnHacTkxyTm7X2iQFwSNQM3cQa+GtkaSE682sZGbls=;
+	b=FXEQluDqvYpfEFHnUB0/EnabFVaStKbR2qBO1Vbq8DsQWV57R8fVDdiTDAz9loa63I
+	/b1UFakVibaVqDXwgz8PfRAzr+jpAGhb/DSPDLtp3sRADfyLyE1XKXZO6YqUk8cpEoGE
+	xqblhVYlwL8Diov9UpQ1cNgRBuPo86b/ZAE/1eeLdU/Fyjv4+jl6FdwWLaz+YDYqJ1zn
+	ONqj4J+9RhAXlFDBwcjnHWCUDBo+hd0slcYvcIQnawm+X8Vg6Cq2hPiDz+ti5X1qL8vr
+	8eutbld2aqb+09eTV/fpF3ypvZ1VX+qPu128ZQtgQPSmSxGgU8EPre+5uvSS09mBRca5
+	RRBw==
+X-Gm-Message-State: ALoCoQnpQHWZQl4ffi079c7ssdv3cvRnif2zKrq4fE3S+ufkUh2+NI30+GZbStIFxuxe77f+/QDq
+X-Received: by 10.180.81.38 with SMTP id w6mr1150284wix.27.1389949904493;
+	Fri, 17 Jan 2014 01:11:44 -0800 (PST)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id p1sm2148302wie.1.2014.01.17.01.11.43
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 17 Jan 2014 01:11:43 -0800 (PST)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jan 2014 23:50:51 -0800
-Message-Id: <1389945051-29080-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.8.5.2
-Subject: [meta-oe][master/dora][PATCH] Fix QA errors when building with multilib
+Date: Fri, 17 Jan 2014 10:11:39 +0100
+Message-Id: <1389949899-29086-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] acpica: update to 20140114 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2014 07:50:42 -0000
+X-List-Received-Date: Fri, 17 Jan 2014 09:11:44 -0000
 
-We do not take care of default libdir which accidently
-works out to be ok for non-multilib case since its /usr/lib
-
-Fixes error like
-
-ERROR: QA Issue: mozjs: Files/directories were installed but not shipped
-  /usr/lib
-  /usr/lib/libmozjs-17.0.a
-  /usr/lib/libmozjs-17.0.so
-  /usr/lib/pkgconfig
-  /usr/lib/.debug
-  /usr/lib/pkgconfig/mozjs-17.0.pc
-  /usr/lib/.debug/libmozjs-17.0.so
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb |    1 +
- 1 file changed, 1 insertion(+)
+ .../acpica/{acpica_20131115.bb => acpica_20140114.bb}                | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/acpica/{acpica_20131115.bb => acpica_20140114.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-index 311372f..891ae9d 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-@@ -23,6 +23,7 @@ EXTRA_OECONF = " \
-     --prefix=${prefix} \
-     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
-     --enable-threadsafe \
-+    --libdir=${libdir} \
- "
+diff --git a/meta-oe/recipes-extended/acpica/acpica_20131115.bb b/meta-oe/recipes-extended/acpica/acpica_20140114.bb
+similarity index 91%
+rename from meta-oe/recipes-extended/acpica/acpica_20131115.bb
+rename to meta-oe/recipes-extended/acpica/acpica_20140114.bb
+index 8c9ecd4..5cc2d5a 100644
+--- a/meta-oe/recipes-extended/acpica/acpica_20131115.bb
++++ b/meta-oe/recipes-extended/acpica/acpica_20140114.bb
+@@ -15,9 +15,8 @@ SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
+     file://cross-compile.patch \
+     file://no-werror.patch \
+     "
+-
+-SRC_URI[md5sum] = "1bd5b14c4c567ca2a113c05f4b28f29c"
+-SRC_URI[sha256sum] = "d699a880b84e04205eda2d5ad048c1c38a57289240caa5f0fb7ebdcd3aac83d2"
++SRC_URI[md5sum] = "fcd4b7304f1bfabc7d4b9cfdecc6b0c6"
++SRC_URI[sha256sum] = "0d5bd32690ab77e21ab143ef25361c314a4ed13c33a5fb3ddd6f5559ab24ebc3"
  
- # mozjs requires autoreconf 2.13
+ S = "${WORKDIR}/acpica-unix2-${PV}"
+ 
 -- 
-1.7.9.5
+1.8.4.2
 
 
