@@ -1,35 +1,43 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 810526DA91
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B9716B9DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2014 11:29:49 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1W4U60-0001bx-6n for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Jan 2014 12:29:48 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2014 12:29:48 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sat, 18 Jan 2014 11:37:50 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id o10so2143330eaj.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2014 12:29:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 18 Jan 2014 12:29:40 +0100
-Message-ID: <lbdoim$e43$1@ger.gmane.org>
-References: <cover.1389979930.git.paul.eggleton@linux.intel.com>
-	<d81dfc5a3416ffd765d53e5ea4089b7f2018d94f.1389979930.git.paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <d81dfc5a3416ffd765d53e5ea4089b7f2018d94f.1389979930.git.paul.eggleton@linux.intel.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-filesystems][PATCH 1/1] aufs-util: add new recipe
+	Sat, 18 Jan 2014 03:37:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=TCz1oOEQnzEXd3oYsLAw/FxAUZAote7emvISHPGHEF4=;
+	b=d791d2jcQeqKvBUhdfXsaB8vTX+CzX82o6MDuKxv7iOBhg2om6kkmIN0kebEg0ldPI
+	nDWjFTQ37+ted0+FqvhKNcxo+YKbS8bCvROcQ4ZDgNUsJTDGTpQEtKa7dgW2LQJztlo8
+	TbqIQCnWjxHybjG/Z8gw9X2eQ315vhtYaPQUfBR55h68mo0ofLTTgxTbk/sKqYOeAYml
+	MlMiBTRmuVddTm0SntXi4meQCFQmU6EUE/PnqVboeMTJOF+5wkSZ9nw/JlLdkLc906+F
+	a/fm4VBbuxsM1l3TxKZlow5Z372Lrq07slSV1JcsncHFLfbUlHqGFTvjCY63BM17Fbbg
+	w9mw==
+X-Received: by 10.14.32.67 with SMTP id n43mr7723302eea.17.1390045070336;
+	Sat, 18 Jan 2014 03:37:50 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id k41sm10599977eey.0.2014.01.18.03.37.49
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 18 Jan 2014 03:37:49 -0800 (PST)
+Date: Sat, 18 Jan 2014 12:38:14 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <20140118113814.GR3742@jama>
+References: <CAPbeDCnrC84D8tqjT-A29YLO_hn2K1wQ5a_cK85uMVfGEzbrhQ@mail.gmail.com>
+	<20140113101147.GI16995@jama>
+	<alpine.LFD.2.11.1401140055500.20049@localhost.localdomain>
+	<CAPbeDCkCM3U=qXv-sUKDNxH1zGyC76m2_fsz_DZLouJovCCceA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAPbeDCkCM3U=qXv-sUKDNxH1zGyC76m2_fsz_DZLouJovCCceA@mail.gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][jansa/qt5-5.2.0] libQt5*.la references OE build directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,69 +51,332 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jan 2014 11:29:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Jan 2014 11:37:50 -0000
+X-Groupsio-MsgNum: 47813
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="0blaZc+aUkVqY8MO"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--0blaZc+aUkVqY8MO
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Paul Eggleton schreef op 17-01-14 18:36:
-/recipes-utils/aufs-util/aufs-util_git.bb
-b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-> new file mode 100644 index 0000000..cea3636 --- /dev/null +++
-> b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb @@ -0,0 +1,48
-> @@ +SUMMARY = "Tools for managing AUFS mounts" +SECTION = "base" 
-> +HOMEPAGE = "http://http://aufs.sourceforge.net/" +LICENSE = "GPLv2" 
-> +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a" + +DEPENDS =
-> "aufs-util-native" +DEPENDS_class-native = "" + +SRCREV =
-> "f29056fe396d56fc2a06a96312feabaebbe14c59" +SRC_URI =
-> "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.x-rcN
-> \ +           file://aufs-util-don-t-strip-executables.patch \ +
-> file://include/linux/aufs_type.h \ +
-> file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \ +" + 
-> +PV = "3.x-rcN+git${SRCPV}"
+On Sat, Jan 18, 2014 at 11:03:09AM +0100, Jacob Kroon wrote:
+> Hi Andreas and Martin,
+>=20
+> On Tue, Jan 14, 2014 at 1:03 AM, Jacob Kroon <jacob.kroon@gmail.com> wrot=
+e:
+>=20
+> >
+> > On Mon, 13 Jan 2014, Martin Jansa wrote:
+> >
+> >  On Mon, Jan 13, 2014 at 01:58:25AM +0100, Jacob Kroon wrote:
+> >>
+> >>> Hi,
+> >>>
+> >>> I'm seeing what I believe is a problem with the *.la files in the Qt5
+> >>> dev-packages.
+> >>> The files references paths in my OE build environment, like so:
+> >>>
+> >>> ...
+> >>> # Libraries that this one depends upon.
+> >>> dependency_libs=3D'-lQt5Gui
+> >>> -L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/
+> >>> sysroots/wandboard-solo/usr/lib
+> >>> -lQt5Core -lpthread '
+> >>> ...
+> >>> # Directory that this library needs to be installed in:
+> >>> libdir=3D'/home/jkroon/Projects/oe-devel/build/tmp-eglibc/
+> >>> sysroots/wandboard-solo/usr'
+> >>> ...
+> >>>
+> >>> I noticed this since my Qt5 autotools project wouldn't link properly =
+when
+> >>> using the SDK, unless I first removed all libQt5*.la files.
+> >>>
+> >>> I'm not quite sure where to look for the problem so any pointers woul=
+d be
+> >>> appreciated.
+> >>>
+> >>
+> >> Probably bad rebase on my side, please compare
+> >>
+> >> mkspecs/features/qt_module.prf in 5.1.1 and 5.2.0
+> >>
+> >> changed in:
+> >> https://github.com/meta-qt5/meta-qt5/blob/master/recipes-
+> >> qt/qt5/qtbase-5.1.1/0008-qt_module-Fix-pkgconfig-replacement.patch
+> >> and
+> >> https://github.com/meta-qt5/meta-qt5/blob/jansa/qt5-5.2.0/
+> >> recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+> >>
+> >> Or better in meta-qt5's qtbase repo:
+> >> https://github.com/meta-qt5/qtbase/blob/b5.1.1/mkspecs/
+> >> features/qt_module.prf
+> >> https://github.com/meta-qt5/qtbase/blob/b5.2.0/mkspecs/
+> >> features/qt_module.prf
+> >>
+> >>
+> > I tried building Qt 5.1.1 from master again, the .la-files do look bett=
+er,
+> > "libdir" looks correct (taken from libQt5Svg.la):
+> >
+> > <snip>
+> >
+> > # Directory that this library needs to be installed in:
+> > libdir=3D'/usr/lib'
+> > </snip>
+> >
+> > however
+> >
+> > <snip>
+> >
+> > dependency_libs=3D'-lQt5Gui -L/home/jkroon/Projects/oe-
+> > devel/build/tmp-eglibc/sysroots/wandboard-solo/usr/lib -lQt5Core
+> > -lpthread '
+> > </snip>
+> >
+> > Dunno wether this is a problem or not, I never tried building the proje=
+ct
+> > with 5.1.1 using the SDK.
+> >
+> > Will hopefully have some time tomorrow to look at the links you sent.
+> >
+> > Thanks,
+> >
+> > Jacob
+> >
+>=20
+> I'm trying to get the .la-files for Qt5 dev-packages correct.
+>=20
+> What I've come up with so far is attached in the patch (to be applied in
+> top of "jansa-qt5-5.2.0", b8a236df79c25802c1f2eb2525e8a534e73e608e)
+>=20
+> With the patch applied I can still build both an image and an SDK, and al=
+so
+> the resulting SDK can be used to build my QT5 autotools projects. But I g=
+et
+> these warnings when building for instance "qtxmlpatterns":
+>=20
+> WARNING: QA Issue: qtxmlpatterns: The compile log indicates that host
+> include and/or library paths were used.
 
-This is a new low for upstream versioning :/ I've looked at the git repo for
-aufs-util and it seems 3.x-rcN is identical to 3.9, could we use that for
-the aufs-utils recipe to avoid using that horrid, horrid PV above?
+This warning is the reason why I've originally created this patch, so
+something is definitely wrong in new version.
+
+I know it's very confusing .prf (and last upstream changes didn't make
+it any easier), I'll try to look at it this weekend.
+
+It would be great to prepare some nice reproducer which we can use in
+upstream gerrit to show that this really doesn't work well in more
+complicated case (like our cross-compile with "sstate-relocateable"
+=2Eprl,.la,.pc files, where we really don't want to include host paths).
+
+Do you have something like smaller test case or were you testing it on
+"big" qtbase build?
+
+> With my patch applied,
+> recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch looks
+> like this:
+>=20
+> --- qtbase-opensource-src-5.2.0.orig/mkspecs/features/qt_module.prf
+> +++ qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+> @@ -135,30 +135,36 @@ load(qt_installs)
+>      rplbase =3D $$dirname(_QMAKE_SUPER_CACHE_)/[^/][^/]*
+>  else: \
+>      rplbase =3D $$MODULE_BASE_OUTDIR
+> -include_replace.match =3D $$rplbase/include
+> -include_replace.replace =3D $$[QT_INSTALL_HEADERS/raw]
+> -include_replace.CONFIG =3D path
+> +pkgconfig_include_replace.match =3D $$rplbase/include
+> +pkgconfig_include_replace.replace =3D "\$$\\{includedir}"
+> +pkgconfig_include_replace.CONFIG =3D path
+> +pkgconfig_lib_replace.match =3D $$rplbase/lib
+> +pkgconfig_lib_replace.replace =3D "\$$\\{libdir}"
+> +pkgconfig_lib_replace.CONFIG =3D path
+>  lib_replace.match =3D $$rplbase/lib
+>  host_build: \
+>      lib_replace.replace =3D $$[QT_HOST_LIBS]
+>  else: \
+>      lib_replace.replace =3D $$[QT_INSTALL_LIBS/raw]
+>  lib_replace.CONFIG =3D path
+> -QMAKE_PRL_INSTALL_REPLACE +=3D include_replace lib_replace
+> +QMAKE_PRL_INSTALL_REPLACE +=3D lib_replace
+>=20
+>  unix|win32-g++* {
+>     CONFIG +=3D create_pc
+>     QMAKE_PKGCONFIG_LIBDIR =3D $$lib_replace.replace
+> -   QMAKE_PKGCONFIG_INCDIR =3D $$include_replace.replace
+> +   QMAKE_PKGCONFIG_INCDIR =3D $$[QT_INSTALL_HEADERS/raw]
+>     QMAKE_PKGCONFIG_CFLAGS =3D -I${includedir}/$$MODULE_INCNAME
+>     QMAKE_PKGCONFIG_DESTDIR =3D pkgconfig
+> -   QMAKE_PKGCONFIG_INSTALL_REPLACE +=3D include_replace lib_replace
+> +   QMAKE_PKGCONFIG_INSTALL_REPLACE +=3D pkgconfig_include_replace
+> pkgconfig_lib_replace
+>  }
+>=20
+>  unix {
+> +   lafile_replace.match =3D "-L$$[QT_INSTALL_LIBS/raw]"
+> +   lafile_replace.replace =3D ""
+> +   lafile_replace.CONFIG =3D path
+>     CONFIG +=3D create_libtool explicitlib
+>     QMAKE_LIBTOOL_LIBDIR =3D $$lib_replace.replace
+> -   QMAKE_LIBTOOL_INSTALL_REPLACE +=3D include_replace lib_replace
+> +   QMAKE_LIBTOOL_INSTALL_REPLACE +=3D lib_replace lafile_replace
+>  }
+>=20
+> The lafile_replace does the substitution "-L/usr/lib" -> "". Maybe this is
+> needed for the .prl-files aswell ? Is the QMAKE_PRL_BUILD_DIR needed at a=
+ll
+> ? With all the sed:ing going on, that path looks phony to me...
+>=20
+> From native "sysroots/x86_64-linux/usr/lib/libQt5Xml.prl":
+> QMAKE_PRL_BUILD_DIR =3D
+> /home/jkroon/Projects/oe-devel/build/tmp-eglibc/work/x86_64-linux/qtbase-=
+native/5.2.0-r0/build/src/xml
+> QMAKE_PRL_LIBS =3D
+> -L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/x86_64-linux/u=
+sr/lib
+> -lQt5Core -lpthread
+>=20
+> From native "sysroots/x86_64-linux/usr/lib/libQt5Xml.la":
+> dependency_libs=3D' -lQt5Core -lpthread '
+> libdir=3D'/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/x86_64=
+-linux/usr/lib'
+>=20
+> From target "sysroots/wandboard-solo/usr/lib/libQt5Xml.prl":
+> QMAKE_PRL_BUILD_DIR =3D
+> /home/jkroon/Projects/oe-devel/build/tmp-eglibc/work/cortexa9hf-vfp-neon-=
+mx6-oe-linux-gnueabi/qtbase/5.2.0-r0/build/src/xml
+> QMAKE_PRL_LIBS =3D -L/usr/lib -lQt5Core -lpthread
+>=20
+> From target "sysroots/wandboard-solo/usr/lib/libQt5Xml.la":
+> dependency_libs=3D' -lQt5Core -lpthread '
+> libdir=3D'/usr/lib'
+>=20
+>   -- Jacob (very confused)
+
+> diff --git a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replaceme=
+nt.patch b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.p=
+atch
+> index f85fb33..5503e1a 100644
+> --- a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+> +++ b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+> @@ -46,57 +46,36 @@ Signed-off-by: Andreas M=FCller <schnitzeltony@google=
+mail.com>
+>   mkspecs/features/qt_module.prf | 43 ++++++++++++++++++++++++++++++-----=
+-------
+>   1 file changed, 31 insertions(+), 12 deletions(-)
+> =20
+> -diff --git a/mkspecs/features/qt_module.prf b/mkspecs/features/qt_module=
+=2Eprf
+> -index 11509ee..2f95684 100644
+> ---- a/mkspecs/features/qt_module.prf
+> -+++ b/mkspecs/features/qt_module.prf
+> -@@ -135,30 +135,49 @@ load(qt_installs)
+> +Index: qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- qtbase-opensource-src-5.2.0.orig/mkspecs/features/qt_module.prf
+> ++++ qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+> +@@ -135,30 +135,36 @@ load(qt_installs)
+>       rplbase =3D $$dirname(_QMAKE_SUPER_CACHE_)/[^/][^/]*
+>   else: \
+>       rplbase =3D $$MODULE_BASE_OUTDIR
+>  -include_replace.match =3D $$rplbase/include
+>  -include_replace.replace =3D $$[QT_INSTALL_HEADERS/raw]
+>  -include_replace.CONFIG =3D path
+> --lib_replace.match =3D $$rplbase/lib
+> --host_build: \
+> --    lib_replace.replace =3D $$[QT_HOST_LIBS]
+> --else: \
+>  +pkgconfig_include_replace.match =3D $$rplbase/include
+>  +pkgconfig_include_replace.replace =3D "\$$\\{includedir}"
+> ++pkgconfig_include_replace.CONFIG =3D path
+>  +pkgconfig_lib_replace.match =3D $$rplbase/lib
+>  +pkgconfig_lib_replace.replace =3D "\$$\\{libdir}"
+> -+!exists($$[QT_SYSROOT]) {
+> -+    include_replace.match =3D $$rplbase/include
+> -+    include_replace.replace =3D $$[QT_INSTALL_HEADERS/raw]
+> -+    include_replace.CONFIG =3D path
+> -+    lib_replace.match =3D $$rplbase/lib
+> ++pkgconfig_lib_replace.CONFIG =3D path
+> + lib_replace.match =3D $$rplbase/lib
+> + host_build: \
+> +     lib_replace.replace =3D $$[QT_HOST_LIBS]
+> + else: \
+>       lib_replace.replace =3D $$[QT_INSTALL_LIBS/raw]
+> --lib_replace.CONFIG =3D path
+> -+    lib_replace.CONFIG =3D path
+> -+    lafile_replace.match =3D $$rplbase
+> -+    lafile_replace.replace =3D "$$[QT_INSTALL_PREFIX/raw]"
+> -+} else {
+> -+    # include_replace and lib_replace are duplicate, but we don't want =
+to
+> -+    # make QMAKE_PKGCONFIG_INSTALL_REPLACE, QMAKE_PRL_INSTALL_REPLACE c=
+onditional
+> -+    include_replace.match =3D $$rplbase
+> -+    include_replace.replace =3D $$[QT_SYSROOT]$$[QT_INSTALL_PREFIX/raw]
+> -+    include_replace.CONFIG =3D path
+> -+    lib_replace.match =3D $$rplbase
+> -+    lib_replace.replace =3D $$[QT_SYSROOT]$$[QT_INSTALL_PREFIX/raw]
+> -+    lib_replace.CONFIG =3D path
+> -+    lafile_replace.match =3D $$rplbase
+> -+    lafile_replace.replace =3D "=3D$$[QT_INSTALL_PREFIX/raw]"
+> -+}
+> - QMAKE_PRL_INSTALL_REPLACE +=3D include_replace lib_replace
+> + lib_replace.CONFIG =3D path
+> +-QMAKE_PRL_INSTALL_REPLACE +=3D include_replace lib_replace
+> ++QMAKE_PRL_INSTALL_REPLACE +=3D lib_replace
+>  =20
+>   unix|win32-g++* {
+>      CONFIG +=3D create_pc
+> --   QMAKE_PKGCONFIG_LIBDIR =3D $$lib_replace.replace
+> +    QMAKE_PKGCONFIG_LIBDIR =3D $$lib_replace.replace
+>  -   QMAKE_PKGCONFIG_INCDIR =3D $$include_replace.replace
+> -+   host_build: \
+> -+       QMAKE_PKGCONFIG_LIBDIR =3D $$[QT_HOST_LIBS]
+> -+   else: \
+> -+       QMAKE_PKGCONFIG_LIBDIR =3D $$[QT_INSTALL_LIBS/raw]
+>  +   QMAKE_PKGCONFIG_INCDIR =3D $$[QT_INSTALL_HEADERS/raw]
+>      QMAKE_PKGCONFIG_CFLAGS =3D -I${includedir}/$$MODULE_INCNAME
+>      QMAKE_PKGCONFIG_DESTDIR =3D pkgconfig
+> @@ -105,13 +84,13 @@ index 11509ee..2f95684 100644
+>   }
+>  =20
+>   unix {
+> ++   lafile_replace.match =3D "-L$$[QT_INSTALL_LIBS/raw]"
+> ++   lafile_replace.replace =3D ""
+> ++   lafile_replace.CONFIG =3D path
+>      CONFIG +=3D create_libtool explicitlib
+>      QMAKE_LIBTOOL_LIBDIR =3D $$lib_replace.replace
+>  -   QMAKE_LIBTOOL_INSTALL_REPLACE +=3D include_replace lib_replace
+> -+   QMAKE_LIBTOOL_INSTALL_REPLACE +=3D include_replace lib_replace lafil=
+e_replace
+> ++   QMAKE_LIBTOOL_INSTALL_REPLACE +=3D lib_replace lafile_replace
+>   }
+>  =20
+>   unix|win32-g++* {
+> ---=20
+> -1.8.5.2
+> -
 
 
-> + +S = "${WORKDIR}/git/" + +do_configure_append () { +	if [ "${PN}" !=
-> "aufs-util-native" ]; then +		for i in ver c2sh c2tmac; do +			cp
-> ${STAGING_BINDIR_NATIVE}/aufs-util-${PV}/$i ./ +		done +	fi +}
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-
-Change to do_configure_append_class-target ?
-
-> + +do_compile () { +	oe_runmake CPPFLAGS="-I${WORKDIR}/include
-> -I${S}/libau" +} + +do_compile_class-native () { +	oe_runmake tools
-> CPPFLAGS="-I${WORKDIR}/include -I${S}/libau" +} + +do_install () { +
-> oe_runmake 'DESTDIR=${D}' install_sbin install_ubin install_etc +} + 
-> +do_install_class-native () { +	install -d ${D}${bindir}/aufs-util-${PV} 
-> +	for i in ver c2sh c2tmac; do +		install -m 755 $i
-> ${D}${bindir}/aufs-util-${PV}/$i +	done +}
-
-And you'll probably want a
-
-RRECOMMENDS_${PN} = "kernel-module-aufs"
-
-here to drag in the aufs modules.
-
-> +BBCLASSEXTEND = "native"
-
-regards,
-
-Koen
+--0blaZc+aUkVqY8MO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-iD8DBQFS2mWkMkyGM64RGpERAshzAJ9nGpCEOIKCbecMf8Bv8AMAhjl9+ACfRX9U
-ti6UhcFJhgfQuos3XrxSCJQ=
-=6cZo
+iEYEARECAAYFAlLaZ6YACgkQN1Ujt2V2gBywcQCgtz2k5ngVJb4z9QfGSzX+JC+f
+64MAnjAiZB4Ijej8IW4HDDIx3wQegn+9
+=1PBW
 -----END PGP SIGNATURE-----
 
-
+--0blaZc+aUkVqY8MO--
