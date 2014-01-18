@@ -1,40 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 81C2E6DE07
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C1BB6B9DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2014 12:05:15 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id e49so2582641eek.29
+	Sat, 18 Jan 2014 12:14:18 +0000 (UTC)
+Received: by mail-la0-f51.google.com with SMTP id c6so4416864lan.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2014 04:05:15 -0800 (PST)
+	Sat, 18 Jan 2014 04:14:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=uU34NExMeaAI8clVm6yaSnkgNCmqC+gWNkDIRl6Nl2Y=;
-	b=O+2d3egfgDHe8XCodtAU1sC8iO/a97BjQ0VLRtXc+La0lLU43tjI2GMt7tFJFmbGxy
-	8V96bVSBRduP3gqnRJfvJ+9ELH15IkAhtBrZuVZwnT4+xEeTyE3gTlUYDwOWazHLityp
-	jC5GyDpqyDDEpnfd4MZGfO38/whLWOIQKpuK78l7+n62Nl7xxN9KrcxU7JyJWhOxJasD
-	65OwRYoBeifITXlKLtq68d4TF6QKIiTRVbARgRBGQEZ1ZvcM4ycc9SG3UASd56m5iPfc
-	RAngu/fTUUOHql1sl7Yg26jRbHfXQQB4mLxvbcW+b7SSS3GbMhfSCh3UavpAI4FVkiR1
-	Rd0w==
-X-Received: by 10.15.36.65 with SMTP id h41mr7962699eev.0.1390046715642;
-	Sat, 18 Jan 2014 04:05:15 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id w4sm34747857eef.20.2014.01.18.04.05.14
+	h=date:from:to:cc:subject:in-reply-to:message-id:references
+	:user-agent:mime-version:content-type;
+	bh=aO8j3jDsvuGQwVbsrrEZz97l2egPrPC0MwA49x08Xy4=;
+	b=03XRYSaj4W6PehmocZOyEFY/MbOaVlGtq6JoVSUZWIGuS6grCB5zMSM+ZyeOUHHuOJ
+	YYacsUrJ/xjD1HCaZIwJtoLrLRXjpRHTzYNkJypbUdYQnMWFgVqIxwnKgPXNhFjVoPOH
+	IvfE/YZDcM6dLYskfYaec2xIJ62S3VjGm0hB9VO2NlaNQGZvE+8jvODBUcoJKCdfrx8d
+	7LsSx2/BoOv013oXY1BzASYfKZ8qQslQjNG5Ptmnewe878L0E6D5sfAsK8dzZlAlohxT
+	Df80Q6LmEPL/gsv+BEBx0MK8H4cNPyu67ATvPbpqG+rVB2EM83fgF/spwlZxsTMzxGmZ
+	1gpQ==
+X-Received: by 10.112.181.232 with SMTP id dz8mr4079382lbc.8.1390047258896;
+	Sat, 18 Jan 2014 04:14:18 -0800 (PST)
+Received: from [192.168.0.156] (89-253-118-72.customers.ownit.se.
+	[89.253.118.72])
+	by mx.google.com with ESMTPSA id g8sm7428555lae.1.2014.01.18.04.14.18
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 18 Jan 2014 04:05:14 -0800 (PST)
-Date: Sat, 18 Jan 2014 13:05:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140118120539.GT3742@jama>
-References: <cover.1389979930.git.paul.eggleton@linux.intel.com>
-	<d81dfc5a3416ffd765d53e5ea4089b7f2018d94f.1389979930.git.paul.eggleton@linux.intel.com>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 18 Jan 2014 04:14:18 -0800 (PST)
+Date: Sat, 18 Jan 2014 13:13:48 +0100 (CET)
+From: Jacob Kroon <jacob.kroon@gmail.com>
+X-X-Sender: jkroon@localhost.localdomain
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <20140118113814.GR3742@jama>
+Message-ID: <alpine.LFD.2.11.1401181305380.13045@localhost.localdomain>
+References: <CAPbeDCnrC84D8tqjT-A29YLO_hn2K1wQ5a_cK85uMVfGEzbrhQ@mail.gmail.com>
+	<20140113101147.GI16995@jama>
+	<alpine.LFD.2.11.1401140055500.20049@localhost.localdomain>
+	<CAPbeDCkCM3U=qXv-sUKDNxH1zGyC76m2_fsz_DZLouJovCCceA@mail.gmail.com>
+	<20140118113814.GR3742@jama>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-In-Reply-To: <d81dfc5a3416ffd765d53e5ea4089b7f2018d94f.1389979930.git.paul.eggleton@linux.intel.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Bruce Ashfield <bruce.ashfield@windriver.com>
-Subject: Re: [meta-filesystems][PATCH 1/1] aufs-util: add new recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][jansa/qt5-5.2.0] libQt5*.la references OE build directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,462 +53,308 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jan 2014 12:05:17 -0000
-X-Groupsio-MsgNum: 47814
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cqG5pBpskktEuCrX"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Jan 2014 12:14:20 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-19963888-1390047258=:13045"
 
---cqG5pBpskktEuCrX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--8323328-19963888-1390047258=:13045
+Content-Type: TEXT/PLAIN; charset=iso-8859-1; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-On Fri, Jan 17, 2014 at 05:36:04PM +0000, Paul Eggleton wrote:
-> Introducing the aufs-util target recipe. This would be used in
-> conjuction with the aufs kernel feature to provide union mounts suitable
-> for live boot applications.
->=20
-> Only the target binaries are currently packages, with man pages,
-> libraries and other artifacts skipped in this initial integration.
->=20
-> (Integration work done by Bruce Ashfield <bruce.ashfield@windriver.com>
-> and Chen Qi <Qi.Chen@windriver.com> .)
->=20
-> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> ---
->  ...dd-tool-concept-to-Makefile-for-cross-com.patch |  27 +++
->  .../aufs-util-don-t-strip-executables.patch        |  37 ++++
->  .../aufs-util/aufs-util/include/linux/aufs_type.h  | 210 +++++++++++++++=
-++++++
->  .../recipes-utils/aufs-util/aufs-util_git.bb       |  48 +++++
->  4 files changed, 322 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/au=
-fs-util-add-tool-concept-to-Makefile-for-cross-com.patch
->  create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/au=
-fs-util-don-t-strip-executables.patch
->  create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/in=
-clude/linux/aufs_type.h
->  create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util_gi=
-t.bb
->=20
-> diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util=
--add-tool-concept-to-Makefile-for-cross-com.patch b/meta-filesystems/recipe=
-s-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cros=
-s-com.patch
-> new file mode 100644
-> index 0000000..8c5b143
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-to=
-ol-concept-to-Makefile-for-cross-com.patch
-> @@ -0,0 +1,27 @@
-> +Subject: [PATCH] aufs-util: add tool concept to Makefile for cross compi=
-ling
-> + purpose
-> +
-> +In a cross compilation environment, c2sh, c2tmac and ver need to be crea=
-ted first.
-> +Add a tools target to Makefile to allow for this.
-> +
-> +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> +---
-> + Makefile |    2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index 2f905ad..49c3cd5 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -85,7 +85,7 @@ aufs.5: aufs.in.5 c2tmac
-> + 	chmod a-w $@
-> +=20
-> + c2sh c2tmac ver: CC =3D ${HOSTCC}
-> +-.INTERMEDIATE: c2sh c2tmac ver
-> ++tools: c2sh c2tmac ver
-> +=20
-> + Install =3D install -o root -g root -p
-> + install_sbin: File =3D auibusy auplink mount.aufs umount.aufs
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util=
--don-t-strip-executables.patch b/meta-filesystems/recipes-utils/aufs-util/a=
-ufs-util/aufs-util-don-t-strip-executables.patch
-> new file mode 100644
-> index 0000000..48727e6
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-=
-strip-executables.patch
-> @@ -0,0 +1,37 @@
-> +From 244863eca77fcaa1187884836c3e28d6b6d1504a Mon Sep 17 00:00:00 2001
-> +From: Bruce Ashfield <bruce.ashfield@windriver.com>
-> +Date: Tue, 9 Apr 2013 18:50:34 -0700
-> +Subject: [PATCH] aufs-util: don't strip executables
-> +
-> +By default, aufs-util strips its binaries. This produces QA warnings
-> +as follows:
-> +
-> +   WARNING: File '/sbin/mount.aufs' from aufs-util was already stripped,=
- this will prevent future debugging!
-> +   WARNING: File '/sbin/auplink' from aufs-util was already stripped, th=
-is will prevent future debugging!
-> +   WARNING: File '/sbin/umount.aufs' from aufs-util was already stripped=
-, this will prevent future debugging!
-> +   WARNING: File '/sbin/auibusy' from aufs-util was already stripped, th=
-is will prevent future debugging!
-> +   WARNING: File '/usr/lib/libau.so.2.6' from aufs-util was already stri=
-pped, this will prevent future debugging!
-> +
-> +To prevent this, we remove -s from LDFLAGS.
-> +
-> +Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
-> +---
-> + Makefile |    2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index 2f905ad..e0c6dcd 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -56,7 +56,7 @@ all: ver_test ${Man} ${Bin} ${Etc}
-> + ver_test: ver
-> + 	./ver
-> +=20
-> +-${Bin}: LDFLAGS +=3D -static -s
-> ++${Bin}: LDFLAGS +=3D -static
-> + ${Bin}: LDLIBS =3D -L. -lautil
-> + ${BinObj}: %.o: %.c ${LibUtilHdr} ${LibUtil}
-> +=20
-> +--=20
-> +1.7.10.4
-> +
-> diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/include/l=
-inux/aufs_type.h b/meta-filesystems/recipes-utils/aufs-util/aufs-util/inclu=
-de/linux/aufs_type.h
-> new file mode 100644
-> index 0000000..cb439ba
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/include/linux/au=
-fs_type.h
-> @@ -0,0 +1,210 @@
-> +/*
-> + * Copyright (C) 2005-2013 Junjiro R. Okajima
-> + *
-> + * This program, aufs is free software; you can redistribute it and/or m=
-odify
-> + * it under the terms of the GNU General Public License as published by
-> + * the Free Software Foundation; either version 2 of the License, or
-> + * (at your option) any later version.
-> + *
-> + * This program is distributed in the hope that it will be useful,
-> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> + * GNU General Public License for more details.
-> + *
-> + * You should have received a copy of the GNU General Public License
-> + * along with this program; if not, write to the Free Software
-> + * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301=
-  USA
-> + */
-> +
-> +#ifndef __AUFS_TYPE_H__
-> +#define __AUFS_TYPE_H__
-> +
-> +#define AUFS_NAME	"aufs"
-> +
-> +#include <stdint.h>
-> +#include <sys/types.h>
-> +
-> +#include <linux/limits.h>
-> +
-> +#define AUFS_VERSION	"3.8-20130325"
-> +
-> +/* todo? move this to linux-2.6.19/include/magic.h */
-> +#define AUFS_SUPER_MAGIC	('a' << 24 | 'u' << 16 | 'f' << 8 | 's')
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +#ifdef CONFIG_AUFS_BRANCH_MAX_127
-> +typedef int8_t aufs_bindex_t;
-> +#define AUFS_BRANCH_MAX 127
-> +#else
-> +typedef int16_t aufs_bindex_t;
-> +#ifdef CONFIG_AUFS_BRANCH_MAX_511
-> +#define AUFS_BRANCH_MAX 511
-> +#elif defined(CONFIG_AUFS_BRANCH_MAX_1023)
-> +#define AUFS_BRANCH_MAX 1023
-> +#elif defined(CONFIG_AUFS_BRANCH_MAX_32767)
-> +#define AUFS_BRANCH_MAX 32767
-> +#endif
-> +#endif
-> +
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +#define AUFS_FSTYPE		AUFS_NAME
-> +
-> +#define AUFS_ROOT_INO		2
-> +#define AUFS_FIRST_INO		11
-> +
-> +#define AUFS_WH_PFX		".wh."
-> +#define AUFS_WH_PFX_LEN		((int)sizeof(AUFS_WH_PFX) - 1)
-> +#define AUFS_WH_TMP_LEN		4
-> +/* a limit for rmdir/rename a dir */
-> +#define AUFS_MAX_NAMELEN	(NAME_MAX \
-> +				- AUFS_WH_PFX_LEN * 2	/* doubly whiteouted */\
-> +				- 1			/* dot */\
-> +				- AUFS_WH_TMP_LEN)	/* hex */
-> +#define AUFS_XINO_FNAME		"." AUFS_NAME ".xino"
-> +#define AUFS_XINO_DEFPATH	"/tmp/" AUFS_XINO_FNAME
-> +#define AUFS_XINO_TRUNC_INIT	64 /* blocks */
-> +#define AUFS_XINO_TRUNC_STEP	4  /* blocks */
-> +#define AUFS_DIRWH_DEF		3
-> +#define AUFS_RDCACHE_DEF	10 /* seconds */
-> +#define AUFS_RDCACHE_MAX	3600 /* seconds */
-> +#define AUFS_RDBLK_DEF		512 /* bytes */
-> +#define AUFS_RDHASH_DEF		32
-> +#define AUFS_WKQ_NAME		AUFS_NAME "d"
-> +#define AUFS_MFS_DEF_SEC	30 /* seconds */
-> +#define AUFS_MFS_MAX_SEC	3600 /* seconds */
-> +#define AUFS_PLINK_WARN		100 /* number of plinks */
-> +
-> +/* pseudo-link maintenace under /proc */
-> +#define AUFS_PLINK_MAINT_NAME	"plink_maint"
-> +#define AUFS_PLINK_MAINT_DIR	"fs/" AUFS_NAME
-> +#define AUFS_PLINK_MAINT_PATH	AUFS_PLINK_MAINT_DIR "/" AUFS_PLINK_MAINT_=
-NAME
-> +
-> +#define AUFS_DIROPQ_NAME	AUFS_WH_PFX ".opq" /* whiteouted doubly */
-> +#define AUFS_WH_DIROPQ		AUFS_WH_PFX AUFS_DIROPQ_NAME
-> +
-> +#define AUFS_BASE_NAME		AUFS_WH_PFX AUFS_NAME
-> +#define AUFS_PLINKDIR_NAME	AUFS_WH_PFX "plnk"
-> +#define AUFS_ORPHDIR_NAME	AUFS_WH_PFX "orph"
-> +
-> +/* doubly whiteouted */
-> +#define AUFS_WH_BASE		AUFS_WH_PFX AUFS_BASE_NAME
-> +#define AUFS_WH_PLINKDIR	AUFS_WH_PFX AUFS_PLINKDIR_NAME
-> +#define AUFS_WH_ORPHDIR		AUFS_WH_PFX AUFS_ORPHDIR_NAME
-> +
-> +/* branch permissions and attributes */
-> +#define AUFS_BRPERM_RW		"rw"
-> +#define AUFS_BRPERM_RO		"ro"
-> +#define AUFS_BRPERM_RR		"rr"
-> +#define AUFS_BRRATTR_WH		"wh"
-> +#define AUFS_BRWATTR_NLWH	"nolwh"
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +/* ioctl */
-> +enum {
-> +	/* readdir in userspace */
-> +	AuCtl_RDU,
-> +	AuCtl_RDU_INO,
-> +
-> +	/* pathconf wrapper */
-> +	AuCtl_WBR_FD,
-> +
-> +	/* busy inode */
-> +	AuCtl_IBUSY
-> +};
-> +
-> +/* borrowed from linux/include/linux/kernel.h */
-> +#ifndef ALIGN
-> +#define ALIGN(x, a)		__ALIGN_MASK(x, (typeof(x))(a)-1)
-> +#define __ALIGN_MASK(x, mask)	(((x)+(mask))&~(mask))
-> +#endif
-> +
-> +/* borrowed from linux/include/linux/compiler-gcc3.h */
-> +#ifndef __aligned
-> +#define __aligned(x)			__attribute__((aligned(x)))
-> +#endif
-> +
-> +
-> +struct au_rdu_cookie {
-> +	uint64_t	h_pos;
-> +	int16_t		bindex;
-> +	uint8_t		flags;
-> +	uint8_t		pad;
-> +	uint32_t	generation;
-> +} __aligned(8);
-> +
-> +struct au_rdu_ent {
-> +	uint64_t	ino;
-> +	int16_t		bindex;
-> +	uint8_t		type;
-> +	uint8_t		nlen;
-> +	uint8_t		wh;
-> +	char		name[0];
-> +} __aligned(8);
-> +
-> +static __inline__ int au_rdu_len(int nlen)
-> +{
-> +	/* include the terminating NULL */
-> +	return ALIGN(sizeof(struct au_rdu_ent) + nlen + 1,
-> +		     sizeof(uint64_t));
-> +}
-> +
-> +union au_rdu_ent_ul {
-> +	struct au_rdu_ent *e;
-> +	uint64_t			ul;
-> +};
-> +
-> +enum {
-> +	AufsCtlRduV_SZ,
-> +	AufsCtlRduV_End
-> +};
-> +
-> +struct aufs_rdu {
-> +	/* input */
-> +	union {
-> +		uint64_t	sz;	/* AuCtl_RDU */
-> +		uint64_t	nent;	/* AuCtl_RDU_INO */
-> +	};
-> +	union au_rdu_ent_ul	ent;
-> +	uint16_t		verify[AufsCtlRduV_End];
-> +
-> +	/* input/output */
-> +	uint32_t		blk;
-> +
-> +	/* output */
-> +	union au_rdu_ent_ul	tail;
-> +	/* number of entries which were added in a single call */
-> +	uint64_t		rent;
-> +	uint8_t			full;
-> +	uint8_t			shwh;
-> +
-> +	struct au_rdu_cookie	cookie;
-> +} __aligned(8);
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +struct aufs_wbr_fd {
-> +	uint32_t	oflags;
-> +	int16_t		brid;
-> +} __aligned(8);
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +struct aufs_ibusy {
-> +	uint64_t	ino, h_ino;
-> +	int16_t		bindex;
-> +} __aligned(8);
-> +
-> +/* ---------------------------------------------------------------------=
-- */
-> +
-> +#define AuCtlType		'A'
-> +#define AUFS_CTL_RDU		_IOWR(AuCtlType, AuCtl_RDU, struct aufs_rdu)
-> +#define AUFS_CTL_RDU_INO	_IOWR(AuCtlType, AuCtl_RDU_INO, struct aufs_rdu)
-> +#define AUFS_CTL_WBR_FD		_IOW(AuCtlType, AuCtl_WBR_FD, \
-> +				     struct aufs_wbr_fd)
-> +#define AUFS_CTL_IBUSY		_IOWR(AuCtlType, AuCtl_IBUSY, struct aufs_ibusy)
-> +
-> +#endif /* __AUFS_TYPE_H__ */
-> diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/=
-meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-> new file mode 100644
-> index 0000000..cea3636
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-> @@ -0,0 +1,48 @@
-> +SUMMARY =3D "Tools for managing AUFS mounts"
-> +SECTION =3D "base"
-> +HOMEPAGE =3D "http://http://aufs.sourceforge.net/"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa=
-63a"
-> +
-> +DEPENDS =3D "aufs-util-native"
-> +DEPENDS_class-native =3D ""
-> +
-> +SRCREV =3D "f29056fe396d56fc2a06a96312feabaebbe14c59"
-> +SRC_URI =3D "git://git.code.sf.net/p/aufs/aufs-util;protocol=3Dgit;branc=
-h=3Daufs3.x-rcN \
-> +           file://aufs-util-don-t-strip-executables.patch \
-> +           file://include/linux/aufs_type.h \
 
-Can please drop include/linux/ prefix and put it in right place just in
-do_compile_class-native?
+On Sat, 18 Jan 2014, Martin Jansa wrote:
 
-> +           file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.p=
-atch \
-> +"
-> +
-> +PV =3D "3.x-rcN+git${SRCPV}"
+> On Sat, Jan 18, 2014 at 11:03:09AM +0100, Jacob Kroon wrote:
+>> Hi Andreas and Martin,
+>>
+>> On Tue, Jan 14, 2014 at 1:03 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
+>>
+>>>
+>>> On Mon, 13 Jan 2014, Martin Jansa wrote:
+>>>
+>>>  On Mon, Jan 13, 2014 at 01:58:25AM +0100, Jacob Kroon wrote:
+>>>>
+>>>>> Hi,
+>>>>>
+>>>>> I'm seeing what I believe is a problem with the *.la files in the Qt5
+>>>>> dev-packages.
+>>>>> The files references paths in my OE build environment, like so:
+>>>>>
+>>>>> ...
+>>>>> # Libraries that this one depends upon.
+>>>>> dependency_libs='-lQt5Gui
+>>>>> -L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/
+>>>>> sysroots/wandboard-solo/usr/lib
+>>>>> -lQt5Core -lpthread '
+>>>>> ...
+>>>>> # Directory that this library needs to be installed in:
+>>>>> libdir='/home/jkroon/Projects/oe-devel/build/tmp-eglibc/
+>>>>> sysroots/wandboard-solo/usr'
+>>>>> ...
+>>>>>
+>>>>> I noticed this since my Qt5 autotools project wouldn't link properly when
+>>>>> using the SDK, unless I first removed all libQt5*.la files.
+>>>>>
+>>>>> I'm not quite sure where to look for the problem so any pointers would be
+>>>>> appreciated.
+>>>>>
+>>>>
+>>>> Probably bad rebase on my side, please compare
+>>>>
+>>>> mkspecs/features/qt_module.prf in 5.1.1 and 5.2.0
+>>>>
+>>>> changed in:
+>>>> https://github.com/meta-qt5/meta-qt5/blob/master/recipes-
+>>>> qt/qt5/qtbase-5.1.1/0008-qt_module-Fix-pkgconfig-replacement.patch
+>>>> and
+>>>> https://github.com/meta-qt5/meta-qt5/blob/jansa/qt5-5.2.0/
+>>>> recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+>>>>
+>>>> Or better in meta-qt5's qtbase repo:
+>>>> https://github.com/meta-qt5/qtbase/blob/b5.1.1/mkspecs/
+>>>> features/qt_module.prf
+>>>> https://github.com/meta-qt5/qtbase/blob/b5.2.0/mkspecs/
+>>>> features/qt_module.prf
+>>>>
+>>>>
+>>> I tried building Qt 5.1.1 from master again, the .la-files do look better,
+>>> "libdir" looks correct (taken from libQt5Svg.la):
+>>>
+>>> <snip>
+>>>
+>>> # Directory that this library needs to be installed in:
+>>> libdir='/usr/lib'
+>>> </snip>
+>>>
+>>> however
+>>>
+>>> <snip>
+>>>
+>>> dependency_libs='-lQt5Gui -L/home/jkroon/Projects/oe-
+>>> devel/build/tmp-eglibc/sysroots/wandboard-solo/usr/lib -lQt5Core
+>>> -lpthread '
+>>> </snip>
+>>>
+>>> Dunno wether this is a problem or not, I never tried building the project
+>>> with 5.1.1 using the SDK.
+>>>
+>>> Will hopefully have some time tomorrow to look at the links you sent.
+>>>
+>>> Thanks,
+>>>
+>>> Jacob
+>>>
+>>
+>> I'm trying to get the .la-files for Qt5 dev-packages correct.
+>>
+>> What I've come up with so far is attached in the patch (to be applied in
+>> top of "jansa-qt5-5.2.0", b8a236df79c25802c1f2eb2525e8a534e73e608e)
+>>
+>> With the patch applied I can still build both an image and an SDK, and also
+>> the resulting SDK can be used to build my QT5 autotools projects. But I get
+>> these warnings when building for instance "qtxmlpatterns":
+>>
+>> WARNING: QA Issue: qtxmlpatterns: The compile log indicates that host
+>> include and/or library paths were used.
+>
+> This warning is the reason why I've originally created this patch, so
+> something is definitely wrong in new version.
 
-I have similar recipe (for 3.2 version) in one of our layers with following=
- changes, can
-you please check if they are still valid for 3.x and latest linux-yocto?
-It looks like aufs_type.h in SRC_URI should solve this.
+I got rid of this warning by adding the "-L/usr/lib" -> "" substitution 
+for the .prl file aswell. But it's an ugly hack I guess..
 
-# Needs AUFS support in kernel headers (e.g. aufs_type.h isn't included
-# in default linux-yocto kernel)
-DEPENDS =3D "virtual/kernel"
+> I know it's very confusing .prf (and last upstream changes didn't make
+> it any easier), I'll try to look at it this weekend.
+>
+> It would be great to prepare some nice reproducer which we can use in
+> upstream gerrit to show that this really doesn't work well in more
+> complicated case (like our cross-compile with "sstate-relocateable"
+> .prl,.la,.pc files, where we really don't want to include host paths).
+>
+> Do you have something like smaller test case or were you testing it on
+> "big" qtbase build?
+>
 
-# because it depends on kernel
-PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+Unfortunately no, I did all testing on the big 
+qtbase-native/qtbase/nativesdk-qtbase packages (pats my poor laptop 
+harddrive). Do you have an idea of where to start for creating such a test 
+case ? Something like a recipe that uses qtbase but only builds qmake + a 
+minimal Qt module ?
 
-> +S =3D "${WORKDIR}/git/"
-> +
-> +do_configure_append () {
-> +	if [ "${PN}" !=3D "aufs-util-native" ]; then
-> +		for i in ver c2sh c2tmac; do
-> +			cp ${STAGING_BINDIR_NATIVE}/aufs-util-${PV}/$i ./
-> +		done
-> +	fi
-> +}
-> +
-> +do_compile () {
-> +	oe_runmake CPPFLAGS=3D"-I${WORKDIR}/include -I${S}/libau"
-> +}
-> +
-> +do_compile_class-native () {
-> +	oe_runmake tools CPPFLAGS=3D"-I${WORKDIR}/include -I${S}/libau"
-> +}
-> +
-> +do_install () {
-> +	oe_runmake 'DESTDIR=3D${D}' install_sbin install_ubin install_etc
-> +}
-> +
-> +do_install_class-native () {
-> +	install -d ${D}${bindir}/aufs-util-${PV}
-> +	for i in ver c2sh c2tmac; do
-> +		install -m 755 $i ${D}${bindir}/aufs-util-${PV}/$i
-> +	done
-> +}
+>> With my patch applied,
+>> recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch looks
+>> like this:
+>>
+>> --- qtbase-opensource-src-5.2.0.orig/mkspecs/features/qt_module.prf
+>> +++ qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+>> @@ -135,30 +135,36 @@ load(qt_installs)
+>>      rplbase = $$dirname(_QMAKE_SUPER_CACHE_)/[^/][^/]*
+>>  else: \
+>>      rplbase = $$MODULE_BASE_OUTDIR
+>> -include_replace.match = $$rplbase/include
+>> -include_replace.replace = $$[QT_INSTALL_HEADERS/raw]
+>> -include_replace.CONFIG = path
+>> +pkgconfig_include_replace.match = $$rplbase/include
+>> +pkgconfig_include_replace.replace = "\$$\\{includedir}"
+>> +pkgconfig_include_replace.CONFIG = path
+>> +pkgconfig_lib_replace.match = $$rplbase/lib
+>> +pkgconfig_lib_replace.replace = "\$$\\{libdir}"
+>> +pkgconfig_lib_replace.CONFIG = path
+>>  lib_replace.match = $$rplbase/lib
+>>  host_build: \
+>>      lib_replace.replace = $$[QT_HOST_LIBS]
+>>  else: \
+>>      lib_replace.replace = $$[QT_INSTALL_LIBS/raw]
+>>  lib_replace.CONFIG = path
+>> -QMAKE_PRL_INSTALL_REPLACE += include_replace lib_replace
+>> +QMAKE_PRL_INSTALL_REPLACE += lib_replace
+>>
+>>  unix|win32-g++* {
+>>     CONFIG += create_pc
+>>     QMAKE_PKGCONFIG_LIBDIR = $$lib_replace.replace
+>> -   QMAKE_PKGCONFIG_INCDIR = $$include_replace.replace
+>> +   QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS/raw]
+>>     QMAKE_PKGCONFIG_CFLAGS = -I${includedir}/$$MODULE_INCNAME
+>>     QMAKE_PKGCONFIG_DESTDIR = pkgconfig
+>> -   QMAKE_PKGCONFIG_INSTALL_REPLACE += include_replace lib_replace
+>> +   QMAKE_PKGCONFIG_INSTALL_REPLACE += pkgconfig_include_replace
+>> pkgconfig_lib_replace
+>>  }
+>>
+>>  unix {
+>> +   lafile_replace.match = "-L$$[QT_INSTALL_LIBS/raw]"
+>> +   lafile_replace.replace = ""
+>> +   lafile_replace.CONFIG = path
+>>     CONFIG += create_libtool explicitlib
+>>     QMAKE_LIBTOOL_LIBDIR = $$lib_replace.replace
+>> -   QMAKE_LIBTOOL_INSTALL_REPLACE += include_replace lib_replace
+>> +   QMAKE_LIBTOOL_INSTALL_REPLACE += lib_replace lafile_replace
+>>  }
+>>
+>> The lafile_replace does the substitution "-L/usr/lib" -> "". Maybe this is
+>> needed for the .prl-files aswell ? Is the QMAKE_PRL_BUILD_DIR needed at all
+>> ? With all the sed:ing going on, that path looks phony to me...
+>>
+>> From native "sysroots/x86_64-linux/usr/lib/libQt5Xml.prl":
+>> QMAKE_PRL_BUILD_DIR =
+>> /home/jkroon/Projects/oe-devel/build/tmp-eglibc/work/x86_64-linux/qtbase-native/5.2.0-r0/build/src/xml
+>> QMAKE_PRL_LIBS =
+>> -L/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib
+>> -lQt5Core -lpthread
+>>
+>> From native "sysroots/x86_64-linux/usr/lib/libQt5Xml.la":
+>> dependency_libs=' -lQt5Core -lpthread '
+>> libdir='/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/x86_64-linux/usr/lib'
+>>
+>> From target "sysroots/wandboard-solo/usr/lib/libQt5Xml.prl":
+>> QMAKE_PRL_BUILD_DIR =
+>> /home/jkroon/Projects/oe-devel/build/tmp-eglibc/work/cortexa9hf-vfp-neon-mx6-oe-linux-gnueabi/qtbase/5.2.0-r0/build/src/xml
+>> QMAKE_PRL_LIBS = -L/usr/lib -lQt5Core -lpthread
+>>
+>> From target "sysroots/wandboard-solo/usr/lib/libQt5Xml.la":
+>> dependency_libs=' -lQt5Core -lpthread '
+>> libdir='/usr/lib'
+>>
+>>   -- Jacob (very confused)
+>
+>> diff --git a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+>> index f85fb33..5503e1a 100644
+>> --- a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+>> +++ b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+>> @@ -46,57 +46,36 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+>>   mkspecs/features/qt_module.prf | 43 ++++++++++++++++++++++++++++++------------
+>>   1 file changed, 31 insertions(+), 12 deletions(-)
+>>
+>> -diff --git a/mkspecs/features/qt_module.prf b/mkspecs/features/qt_module.prf
+>> -index 11509ee..2f95684 100644
+>> ---- a/mkspecs/features/qt_module.prf
+>> -+++ b/mkspecs/features/qt_module.prf
+>> -@@ -135,30 +135,49 @@ load(qt_installs)
+>> +Index: qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+>> +===================================================================
+>> +--- qtbase-opensource-src-5.2.0.orig/mkspecs/features/qt_module.prf
+>> ++++ qtbase-opensource-src-5.2.0/mkspecs/features/qt_module.prf
+>> +@@ -135,30 +135,36 @@ load(qt_installs)
+>>       rplbase = $$dirname(_QMAKE_SUPER_CACHE_)/[^/][^/]*
+>>   else: \
+>>       rplbase = $$MODULE_BASE_OUTDIR
+>>  -include_replace.match = $$rplbase/include
+>>  -include_replace.replace = $$[QT_INSTALL_HEADERS/raw]
+>>  -include_replace.CONFIG = path
+>> --lib_replace.match = $$rplbase/lib
+>> --host_build: \
+>> --    lib_replace.replace = $$[QT_HOST_LIBS]
+>> --else: \
+>>  +pkgconfig_include_replace.match = $$rplbase/include
+>>  +pkgconfig_include_replace.replace = "\$$\\{includedir}"
+>> ++pkgconfig_include_replace.CONFIG = path
+>>  +pkgconfig_lib_replace.match = $$rplbase/lib
+>>  +pkgconfig_lib_replace.replace = "\$$\\{libdir}"
+>> -+!exists($$[QT_SYSROOT]) {
+>> -+    include_replace.match = $$rplbase/include
+>> -+    include_replace.replace = $$[QT_INSTALL_HEADERS/raw]
+>> -+    include_replace.CONFIG = path
+>> -+    lib_replace.match = $$rplbase/lib
+>> ++pkgconfig_lib_replace.CONFIG = path
+>> + lib_replace.match = $$rplbase/lib
+>> + host_build: \
+>> +     lib_replace.replace = $$[QT_HOST_LIBS]
+>> + else: \
+>>       lib_replace.replace = $$[QT_INSTALL_LIBS/raw]
+>> --lib_replace.CONFIG = path
+>> -+    lib_replace.CONFIG = path
+>> -+    lafile_replace.match = $$rplbase
+>> -+    lafile_replace.replace = "$$[QT_INSTALL_PREFIX/raw]"
+>> -+} else {
+>> -+    # include_replace and lib_replace are duplicate, but we don't want to
+>> -+    # make QMAKE_PKGCONFIG_INSTALL_REPLACE, QMAKE_PRL_INSTALL_REPLACE conditional
+>> -+    include_replace.match = $$rplbase
+>> -+    include_replace.replace = $$[QT_SYSROOT]$$[QT_INSTALL_PREFIX/raw]
+>> -+    include_replace.CONFIG = path
+>> -+    lib_replace.match = $$rplbase
+>> -+    lib_replace.replace = $$[QT_SYSROOT]$$[QT_INSTALL_PREFIX/raw]
+>> -+    lib_replace.CONFIG = path
+>> -+    lafile_replace.match = $$rplbase
+>> -+    lafile_replace.replace = "=$$[QT_INSTALL_PREFIX/raw]"
+>> -+}
+>> - QMAKE_PRL_INSTALL_REPLACE += include_replace lib_replace
+>> + lib_replace.CONFIG = path
+>> +-QMAKE_PRL_INSTALL_REPLACE += include_replace lib_replace
+>> ++QMAKE_PRL_INSTALL_REPLACE += lib_replace
+>>
+>>   unix|win32-g++* {
+>>      CONFIG += create_pc
+>> --   QMAKE_PKGCONFIG_LIBDIR = $$lib_replace.replace
+>> +    QMAKE_PKGCONFIG_LIBDIR = $$lib_replace.replace
+>>  -   QMAKE_PKGCONFIG_INCDIR = $$include_replace.replace
+>> -+   host_build: \
+>> -+       QMAKE_PKGCONFIG_LIBDIR = $$[QT_HOST_LIBS]
+>> -+   else: \
+>> -+       QMAKE_PKGCONFIG_LIBDIR = $$[QT_INSTALL_LIBS/raw]
+>>  +   QMAKE_PKGCONFIG_INCDIR = $$[QT_INSTALL_HEADERS/raw]
+>>      QMAKE_PKGCONFIG_CFLAGS = -I${includedir}/$$MODULE_INCNAME
+>>      QMAKE_PKGCONFIG_DESTDIR = pkgconfig
+>> @@ -105,13 +84,13 @@ index 11509ee..2f95684 100644
+>>   }
+>>
+>>   unix {
+>> ++   lafile_replace.match = "-L$$[QT_INSTALL_LIBS/raw]"
+>> ++   lafile_replace.replace = ""
+>> ++   lafile_replace.CONFIG = path
+>>      CONFIG += create_libtool explicitlib
+>>      QMAKE_LIBTOOL_LIBDIR = $$lib_replace.replace
+>>  -   QMAKE_LIBTOOL_INSTALL_REPLACE += include_replace lib_replace
+>> -+   QMAKE_LIBTOOL_INSTALL_REPLACE += include_replace lib_replace lafile_replace
+>> ++   QMAKE_LIBTOOL_INSTALL_REPLACE += lib_replace lafile_replace
+>>   }
+>>
+>>   unix|win32-g++* {
+>> ---
+>> -1.8.5.2
+>> -
+>
+>
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
 
-Use 4 spaces instead of tabs.
-
-> +BBCLASSEXTEND =3D "native"
-> --=20
-> 1.8.4.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---cqG5pBpskktEuCrX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLabhMACgkQN1Ujt2V2gBx31ACdFKb9RVSAzNE/XeL+CSEWAYKv
-E+sAoKBXD3nxMCHGrMktu88SOuIai7+d
-=iS31
------END PGP SIGNATURE-----
-
---cqG5pBpskktEuCrX--
+--8323328-19963888-1390047258=:13045--
