@@ -1,26 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id A01A96B678
+Return-Path: <jacques.guillou@pelagicore.com>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CB566CCF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 14:56:43 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 20 Jan 2014 06:52:39 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,691,1384329600"; d="scan'208";a="441696648"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.122.239])
-	by orsmga001.jf.intel.com with ESMTP; 20 Jan 2014 06:56:36 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: jackie.huang@windriver.com
-Date: Mon, 20 Jan 2014 14:56:34 +0000
-Message-ID: <1500081.lxhvWhSdf3@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.11.5 (Linux/3.12.7-300.fc20.x86_64; KDE/4.11.5; x86_64; ; )
-In-Reply-To: <1389940848-376-1-git-send-email-jackie.huang@windriver.com>
-References: <1389940848-376-1-git-send-email-jackie.huang@windriver.com>
+	Mon, 20 Jan 2014 14:57:38 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id va2so3687566obc.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jan 2014 06:57:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=nrxNYpI/7aMlMBxiNWYy1aiAnZOWZp3eceDLXlmR3+A=;
+	b=io6QX2hEDu9XhFGmxJ/4vQOp9QHj01DofPrku3YkCiFxYKbTsmD3QQnY3Kq9+dw3tW
+	qha5TzrxmRxgUU9sX59CpoZmnjMXC2bCze4UeUM+IcS061mK3lP+HU2RTClthV3HJgOe
+	OcZPFLJAWaD3btfejL5Z+1QQ2yh6gG4ju1XSzD1I5cCyATHb5GJmtu+1lWg++2hGB9/P
+	pVhuyTlNp1Yr+jN9RJnUhoeMdpxzv8tUK04Ve97OMunE4earC9+mbyBqvFhcHGEHN+8k
+	nmz4ZOaECHTxIvAS8zg1dLyB6RBuND7C6qF9HooA6xeg9bZFH15ddfvYV8ElMEfop96l
+	w8rg==
+X-Gm-Message-State: ALoCoQkFOv0SZEYTdP9XLqaHaNf4f0G6Hygx04e0iVfMO6OqlKY8iGW0gW1A6TG51mH99yQEt44S
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] strongswan: update verion to 5.1.1
+X-Received: by 10.182.18.9 with SMTP id s9mr16108947obd.15.1390229859745; Mon,
+	20 Jan 2014 06:57:39 -0800 (PST)
+Received: by 10.76.92.65 with HTTP; Mon, 20 Jan 2014 06:57:39 -0800 (PST)
+Date: Mon, 20 Jan 2014 15:57:39 +0100
+Message-ID: <CAAfCovAgZXFnAJa+OsFUUOAiJ=t13ZuzEn-Y0AR-TXdkjTta+A@mail.gmail.com>
+From: Jacques Guillou <jacques.guillou@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Bitbake command to clean dependees ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,20 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 14:56:43 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 20 Jan 2014 14:57:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Friday 17 January 2014 14:40:48 jackie.huang@windriver.com wrote:
-> * Add rdepends on strongswan-plugins.
+Hello,
 
-Is this really correct? Does strongswan not work without the plugins?
+By default (at least with Yocto), it seems like forcing the rebuild of a
+specific package (via "bitbake -c cleanall MyPackage") does not mark
+dependees as "to be rebuilt", which is a problem for me. Is there a way to
+change that behavior ? Maybe there is a specific command or parameters to
+be passed to bitbake so that performing a "cleanall" on a given package
+also performs a "cleanall" on all dependees ?
 
-Cheers,
-Paul
+I am not sure this is the correct mailing list for that question. If not,
+please apologize and point me to the mailing list I should use instead.
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Best regards
+Jacques
 
