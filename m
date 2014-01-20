@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f175.google.com (mail-ea0-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id C8BF86C8FB
+Received: from mail-ea0-f181.google.com (mail-ea0-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id B4A7E6C8FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 17:42:39 +0000 (UTC)
-Received: by mail-ea0-f175.google.com with SMTP id z10so3275848ead.34
+	Mon, 20 Jan 2014 17:42:40 +0000 (UTC)
+Received: by mail-ea0-f181.google.com with SMTP id m10so3279565eaj.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 09:42:40 -0800 (PST)
+	Mon, 20 Jan 2014 09:42:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=a+cViTokT4qgDFzfuJm13pxCfXr/nhzHVlh05DAiVBw=;
-	b=ubHR4quWqN7u/W+4H/2gjcapT0DdjaVr/+zUrQseUMlw4yJxr1VvY9XD57S4f0OjBK
-	lrqIAWWYo0SFHv4uILWXcotq2EZQgKl22JqCBKFHRy1yyQfulCzVrmQWD8Tr6StrwAKw
-	MIBIMyEy+EfrE7ax59bET7A0++XgCiArGCEbHLLCsF7ypSxovH5SAokX5Mg6+8Kww5Go
-	Y73B5l5Q5lYJ57kBgUnDBYcDDJdg29TSbURGParslzVvoqd96DCXeD6yIDZqWb2y0KBy
-	H7MWBqkYShuhoRMdWY1g8o8R4zKlDRvBz45aSGxq7gqqpvKCjgVs4Fn82O5M9Ao/fZ+H
-	/10w==
-X-Received: by 10.14.204.9 with SMTP id g9mr3440320eeo.82.1390239760411;
-	Mon, 20 Jan 2014 09:42:40 -0800 (PST)
+	bh=U2dqJxi8/3OR+RIntBZfBdMB0Zfb653mUgbJwHyAoZo=;
+	b=t12yyD+ds3nkNmFFysIOQrqf8lEKRpa0cWNigM1PdlgP3faPBtsnT2vONNvJeq+Dps
+	F3UQ3r995nLW4bBEr9/0ZXTxOwLJMSDVqTltLVrp5jqrq8F1leasrxdbzsX9p72DnSZ9
+	0cHDC2XdWuxNB4etZ+3KpG04AStBFz+2FD/fF1VGRTzgP0t8teuW+0mdWCmWgclzSpds
+	4KyVlc/6ggdYfsyLO8CDNIUR1kJSF1jbzkfYkcvVe5CZYYk/v7RuFmL+Zmz9S/UzicUM
+	bbJsYC5dIUuIVGCuGPMo5bDUQRCGqh0tgZ9VuafR+oYqKUVGsEwKGjQbr1FHwQMrAnQc
+	ghzg==
+X-Received: by 10.14.193.132 with SMTP id k4mr18698530een.55.1390239761466;
+	Mon, 20 Jan 2014 09:42:41 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id i2sm5440645eem.6.2014.01.20.09.42.39
+	by mx.google.com with ESMTPSA id k41sm5450078eey.0.2014.01.20.09.42.40
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Jan 2014 09:42:39 -0800 (PST)
+	Mon, 20 Jan 2014 09:42:41 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2014 18:42:36 +0100
-Message-Id: <1390239757-27055-3-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 20 Jan 2014 18:42:37 +0100
+Message-Id: <1390239757-27055-4-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.5.3
 In-Reply-To: <1390239757-27055-1-git-send-email-Martin.Jansa@gmail.com>
 References: <cover.1389805976.git.Martin.Jansa@gmail.com>
 	<1390239757-27055-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH 3/4] python-efl: Upgrade to 1.8.1 and update packaging to match old packages
+Subject: [PATCH 4/4] e-wm: Add recipe for 0.18.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,100 +46,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 17:42:40 -0000
+X-List-Received-Date: Mon, 20 Jan 2014 17:42:41 -0000
 
-* announcement:
-  http://sourceforge.net/mailarchive/message.php?msg_id=31862842
-* like in efl recipe create packages matching with old separate recipes
+* keep old 0.17.* around because new enlightenment is more picky on where it
+  will run (compositor is now mandatory)
+* announcement
+  http://sourceforge.net/mailarchive/message.php?msg_id=31789335
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-devtools/python/python-efl.inc    | 41 ++++++++++++++++++++--
- .../recipes-devtools/python/python-efl_1.8.0.bb    |  4 ---
- .../recipes-devtools/python/python-efl_1.8.1.bb    |  4 +++
- 3 files changed, 43 insertions(+), 6 deletions(-)
- delete mode 100644 meta-efl/recipes-devtools/python/python-efl_1.8.0.bb
- create mode 100644 meta-efl/recipes-devtools/python/python-efl_1.8.1.bb
+ meta-efl/recipes-efl/e17/e-wm.inc       | 14 +++-----------
+ meta-efl/recipes-efl/e17/e-wm_0.17.5.bb | 12 ++++++++++++
+ meta-efl/recipes-efl/e17/e-wm_0.18.2.bb | 20 ++++++++++++++++++++
+ 3 files changed, 35 insertions(+), 11 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/e-wm_0.18.2.bb
 
-diff --git a/meta-efl/recipes-devtools/python/python-efl.inc b/meta-efl/recipes-devtools/python/python-efl.inc
-index c608bac..cca3562 100644
---- a/meta-efl/recipes-devtools/python/python-efl.inc
-+++ b/meta-efl/recipes-devtools/python/python-efl.inc
-@@ -12,7 +12,6 @@ DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
- RDEPENDS_${PN} += "python-lang"
+diff --git a/meta-efl/recipes-efl/e17/e-wm.inc b/meta-efl/recipes-efl/e17/e-wm.inc
+index 3f24b62..08fe25f 100644
+--- a/meta-efl/recipes-efl/e17/e-wm.inc
++++ b/meta-efl/recipes-efl/e17/e-wm.inc
+@@ -7,7 +7,8 @@ SRCNAME = "e"
+ inherit e update-alternatives gettext
+ S = "${WORKDIR}/${SRCNAME}"
  
- PROVIDES = "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas"
--RPROVIDES_${PN} += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas"
+-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
++PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
++                   ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
  
- # necessary to let the call for python-config succeed
- export BUILD_SYS
-@@ -27,7 +26,45 @@ SRC_URI = "\
- "
- S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
+ EXTRA_OECONF = "\
+@@ -30,16 +31,6 @@ do_install_append() {
+     # xinit[418]: ERROR: CONFIGURATION FILE HAS BAD PERMISSIONS
+     chmod 600 ${D}/${sysconfdir}/enlightenment/sysactions.conf
  
-+do_install_append() {
-+    # drop all .pyo, pyc files
-+    find ${D}${libdir}/${PYTHON_DIR}/site-packages -name \*.pyo -o -name \*.pyc | xargs rm -f
-+}
-+
-+PACKAGES += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas ${PN}-examples"
-+
-+FILES_${PN} = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/python_efl*egg-info \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/eo.so \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/utils \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/__init__.py \
-+"
- FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*.egg/*/*/.debug"
-+FILES_${PN}-dev += "${libdir}/${PYTHON_DIR}/site-packages/*/*.la"
- 
--PACKAGES += "${PN}-examples"
- FILES_${PN}-examples = "${datadir}/${PN}/examples"
-+
-+FILES_python-ecore = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/ecore/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore.so \
-+"
-+FILES_python-eldbus = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/e_dbus/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/dbus_mainloop.so \
-+"
-+FILES_python-edje = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/edje/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/edje*so \
-+"
-+FILES_python-elementary = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/elementary/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/elementary/ \
-+"
-+FILES_python-emotion = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/emotion/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/emotion.so \
-+"
-+FILES_python-evas = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/evas/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/efl/evas.so \
-+"
-diff --git a/meta-efl/recipes-devtools/python/python-efl_1.8.0.bb b/meta-efl/recipes-devtools/python/python-efl_1.8.0.bb
-deleted file mode 100644
-index a6ae64e..0000000
---- a/meta-efl/recipes-devtools/python/python-efl_1.8.0.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require ${BPN}.inc
+-    install -d ${D}/${datadir}/applications/
+-    install -m 644 ${S}/src/modules/fileman/module.desktop ${D}/${datadir}/applications/efm.desktop
+-    sed "s#Type=Link#Type=Application#g" -i ${D}/${datadir}/applications/efm.desktop
+-    echo "Exec=enlightenment_remote -efm-open-dir" >> ${D}/${datadir}/applications/efm.desktop
+-    echo "Terminal=false" >> ${D}/${datadir}/applications/efm.desktop
+-    echo "Categories=Application;" >> ${D}/${datadir}/applications/efm.desktop
+-    echo "StartupNotify=true" >> ${D}/${datadir}/applications/efm.desktop
+-    install -d ${D}/${datadir}/icons/
+-    install -m 644 ${S}/data/themes/img/O/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
 -
--SRC_URI[md5sum] = "58a55193caee3c2c74fd962cc17bc9c1"
--SRC_URI[sha256sum] = "8f883c325e30ee3eb2fa38822fa353a22207441b385f4e167cf9c1cf855638f7"
-diff --git a/meta-efl/recipes-devtools/python/python-efl_1.8.1.bb b/meta-efl/recipes-devtools/python/python-efl_1.8.1.bb
+     install -d ${D}/${sysconfdir}/xdg/menus
+     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
+     for I in `find ${D}/${libdir}/enlightenment -name "*.a" -print`; do rm -f $I; done
+@@ -124,6 +115,7 @@ FILES_${PN} = "\
+     ${datadir}/enlightenment/COPYING \
+     ${datadir}/xsessions/enlightenment.desktop \
+     ${sysconfdir}/xdg \
++    ${systemd_unitdir} \
+ "
+ 
+ FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb b/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
+index 57eefdb..d374680 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.17.5.bb
+@@ -12,3 +12,15 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "5aefb55df0b1a0a0ae0cf9d0610cf7c7"
+ SRC_URI[sha256sum] = "25d4967277cf27d4efb474a9b8eceb1200aa813a51c248b61cc23f69291bff0f"
++
++do_install_append() {
++    install -d ${D}/${datadir}/applications/
++    install -m 644 ${S}/src/modules/fileman/module.desktop ${D}/${datadir}/applications/efm.desktop
++    sed "s#Type=Link#Type=Application#g" -i ${D}/${datadir}/applications/efm.desktop
++    echo "Exec=enlightenment_remote -efm-open-dir" >> ${D}/${datadir}/applications/efm.desktop
++    echo "Terminal=false" >> ${D}/${datadir}/applications/efm.desktop
++    echo "Categories=Application;" >> ${D}/${datadir}/applications/efm.desktop
++    echo "StartupNotify=true" >> ${D}/${datadir}/applications/efm.desktop
++    install -d ${D}/${datadir}/icons/
++    install -m 644 ${S}/data/themes/img/O/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
++}
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.18.2.bb b/meta-efl/recipes-efl/e17/e-wm_0.18.2.bb
 new file mode 100644
-index 0000000..15009f6
+index 0000000..ab96e9a
 --- /dev/null
-+++ b/meta-efl/recipes-devtools/python/python-efl_1.8.1.bb
-@@ -0,0 +1,4 @@
++++ b/meta-efl/recipes-efl/e17/e-wm_0.18.2.bb
+@@ -0,0 +1,20 @@
 +require ${BPN}.inc
 +
-+SRC_URI[md5sum] = "ca71f501c7e0479f15d2746380b0f81d"
-+SRC_URI[sha256sum] = "90ea20d0a90448fd1dcd56210bf34cb9a78905852d83620617bf164f1cef5edc"
++SRCNAME = "enlightenment"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++SRC_URI = "\
++    ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++    file://enlightenment_start.oe \
++    file://applications.menu \
++"
++
++SRC_URI[md5sum] = "eea52b438b143ac318d5ed8e09e06f2b"
++SRC_URI[sha256sum] = "106a6949b14ce3eae0c1eb82bf09492fa8417df0b26faf595f5050f0e89b5483"
++
++do_configure_prepend() {
++    sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
++}
++
++PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 -- 
 1.8.5.3
 
