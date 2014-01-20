@@ -1,14 +1,29 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D1456CB7C
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 374106CBB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 15:08:41 +0000 (UTC)
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2014 16:08:39 +0100
-Message-Id: <1390230519-21756-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] libconnman-qt: update to 1.0.46, add recipe for qte
+	Mon, 20 Jan 2014 15:24:35 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 20 Jan 2014 07:24:34 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,691,1384329600"; d="scan'208";a="441710346"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.122.239])
+	by orsmga001.jf.intel.com with ESMTP; 20 Jan 2014 07:24:33 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andreas Oberritter <obi@opendreambox.org>
+Date: Mon, 20 Jan 2014 15:24:32 +0000
+Message-ID: <1819285.AVA7ztf3Qp@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.11.5 (Linux/3.12.7-300.fc20.x86_64; KDE/4.11.5; x86_64; ; )
+In-Reply-To: <52DD39CF.5040401@opendreambox.org>
+References: <1382009929-6537-1-git-send-email-obi@opendreambox.org>
+	<644C5C58-7C6F-4D66-AAB0-BA7C3A0099A2@dominion.thruhere.net>
+	<52DD39CF.5040401@opendreambox.org>
+MIME-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-filesystems][PATCH v2] xfsprogs: change DESCRIPTION to SUMMARY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -22,144 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 15:08:41 -0000
+X-List-Received-Date: Mon, 20 Jan 2014 15:24:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* Use _git version suffix, because it really is a Git recipe.
-* Create an inc file to be shared between qt4x11 and qt4e.
-* Use CONFIG+=notests, because CONFIG+=notest has no effect now.
-* Reorder some variables according to style guide.
-* Remove unneeded PROVIDES for ${PN}-plugin, which is already listed
-  in PACKAGES.
-* Hardcode branch to master, because no other branch exists upstream.
-* Simplify do_install.
+On Monday 20 January 2014 15:59:27 Andreas Oberritter wrote:
+> This trivial patch is still waiting for inclusion.
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../{libconnman-qt_1.0.7.bb => libconnman-qt.inc}  | 61 +++++++++-------------
- .../recipes-qt/libconnman-qt/libconnman-qt_git.bb  |  3 ++
- .../recipes-qt/libconnman-qt/libconnman-qte_git.bb |  3 ++
- 3 files changed, 30 insertions(+), 37 deletions(-)
- rename meta-oe/recipes-qt/libconnman-qt/{libconnman-qt_1.0.7.bb => libconnman-qt.inc} (65%)
- create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qt_git.bb
- create mode 100644 meta-oe/recipes-qt/libconnman-qt/libconnman-qte_git.bb
+OK, I have merged this and the yaffs2-utils patch at Hongxu's request (which I 
+received this morning).
 
-diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_1.0.7.bb b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-similarity index 65%
-rename from meta-oe/recipes-qt/libconnman-qt/libconnman-qt_1.0.7.bb
-rename to meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-index 2288c4f..e4f68db 100644
---- a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_1.0.7.bb
-+++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-@@ -1,66 +1,53 @@
- DESCRIPTION = "Qt Library for ConnMan"
- HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
-+SECTION = "qt/lib"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
-+SRCREV = "ddbeaf72b4d3c49285b0513b28948edacfc40b51"
-+PV = "1.0.46+git${SRCPV}"
- 
--SECTION = "qt/lib"
--
--
--inherit qt4x11 pkgconfig
--
--RDEPENDS_${PN} = "connman"
--RDEPENDS_${PN}-plugin = "${PN}"
--
--PROVIDES += "${PN}-plugin"
--
--PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
--RRECOMMENDS_${PN} = "${PN}-plugin"
--
--BRANCH = "master"
--SRCREV = "6a5e4f981112a90a8c19d82bd671da389d2af993"
--
--SRC_URI = " \
--    git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
--"
-+SRC_URI = "git://github.com/nemomobile/libconnman-qt.git;branch=master"
- 
- S = "${WORKDIR}/git"
- 
--QT_IMPORTS_DIR = "${libdir}/qt4/imports"
--# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
--PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
-+inherit pkgconfig
- 
--EXTRA_QMAKEVARS_PRE = " \
--    CONFIG+=notest \
--"
-+EXTRA_QMAKEVARS_PRE = "CONFIG+=notests"
- 
- do_configure_prepend() {
-     # Hack *.pro variables
-     find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
- }
--
- do_install() {
--    export INSTALL_ROOT=${D}
--    oe_runmake install
-+    oe_runmake install INSTALL_ROOT=${D}
- }
- 
-+PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
-+
-+RDEPENDS_${PN} = "connman"
-+RDEPENDS_${PN}-plugin = "${PN}"
-+
-+RRECOMMENDS_${PN} = "${PN}-plugin"
-+
- FILES_${PN} = " \
--    ${libdir}/libconnman-qt4${SOLIBS} \
-+    ${libdir}/libconnman-qt*${SOLIBS} \
- "
--
- FILES_${PN}-dev = " \
--    ${includedir}/connman-qt/* \
--    ${libdir}/libconnman-qt4${SOLIBSDEV} \
--    ${libdir}/libconnman-qt4.prl \
--    ${libdir}/pkgconfig/connman-qt4.pc \
--    ${libdir}/connman-qt4.pc \
-+    ${includedir}/connman-qt*/* \
-+    ${libdir}/libconnman-qt*${SOLIBSDEV} \
-+    ${libdir}/libconnman-qt*.prl \
-+    ${libdir}/pkgconfig/connman-qt*.pc \
-+    ${libdir}/connman-qt*.pc \
- "
--
- FILES_${PN}-plugin = " \
-     ${PLUGINS_TARGET}/qmldir \
-     ${PLUGINS_TARGET}/lib*.so \
- "
--
- FILES_${PN}-plugin-dbg = " \
-     ${PLUGINS_TARGET}/.debug \
-     ${PLUGINS_TARGET}/.debug/* \
- "
-+
-+QT_IMPORTS_DIR = "${libdir}/qt4/imports"
-+# the plugin target needs to be the same as 'target.path' and 'qmldir.path' in ${S}/plugin/plugin.pro
-+PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
-diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_git.bb b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_git.bb
-new file mode 100644
-index 0000000..8d8822c
---- /dev/null
-+++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt_git.bb
-@@ -0,0 +1,3 @@
-+inherit qt4x11
-+
-+require libconnman-qt.inc
-diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qte_git.bb b/meta-oe/recipes-qt/libconnman-qt/libconnman-qte_git.bb
-new file mode 100644
-index 0000000..7ee4bdb
---- /dev/null
-+++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qte_git.bb
-@@ -0,0 +1,3 @@
-+inherit qt4e
-+
-+require libconnman-qt.inc
+Cheers,
+Paul
+
 -- 
-1.8.3.2
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
