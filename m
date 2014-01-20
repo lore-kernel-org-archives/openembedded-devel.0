@@ -1,35 +1,24 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 109D96CBD7
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B6CE6CBD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 11:51:53 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1W5DOP-0000Ee-IK for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jan 2014 12:51:49 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 12:51:49 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 20 Jan 2014 12:52:25 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s0KCqQia017143
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 12:51:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 20 Jan 2014 12:53:09 +0100
-Message-ID: <lbj2ju$fnu$1@ger.gmane.org>
-References: <1390043044-20352-1-git-send-email-koen@dominion.thruhere.net>
-	<20140119134327.GB5565@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <20140119134327.GB5565@jama>
-X-Enigmail-Version: 1.6
-Subject: Re: [RFC][meta-oe][PATCH] jenkins: add 1.547
+	Mon, 20 Jan 2014 04:52:26 -0800 (PST)
+Received: from pek-blade16.wrs.com (128.224.153.44) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.2.347.0;
+	Mon, 20 Jan 2014 04:52:26 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Jan 2014 20:52:35 +0800
+Message-ID: <1390222355-9757-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Subject: [meta-networking] [PATCH] traceroute: filter-out patches dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,60 +32,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 11:51:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Jan 2014 12:52:27 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The $(subdirs) contains all the dirs under the ${B}, and this one:
 
-Martin Jansa schreef op 19-01-14 14:43:
-> On Sat, Jan 18, 2014 at 12:04:04PM +0100, Koen Kooi wrote:
->> The package split is based on the debian packages which have
->> -common/-server and -slave.
->> 
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net> ---
->> 
->> This introduces a dependency on meta-java, which is of course a big
->> no-no for meta-oe :( That leaves me with a few questions:
->> 
->> 1) What's the best place for the jenkins recipe?
-> 
-> That's really hard question, I can only think that meta-java or completly
-> new layer would fit.
+do_unpack[cleandirs] = "${S}/patches"
 
-That's what I feared, I'll think about creating yet-another-layer.
+will create a "patches" dir, then there will be compile errors, filter
+out the patches will fix the problem.
 
-> 
->> 2) Do we have a virtual/runtime thing to express a dependency on
->> /usr/bin/java without dragging in meta-java?
-> 
-> I think this isn't enough, because it would still show error that 
-> virtual/java-foo isn't provided in included layers.
-> 
-> You can make it PACKAGECONFIG (sort of like RP did with python for 
-> opkg-utils) which means that without PACKAGECONFIG change it won't build 
-> at all.
-> 
->> 3) Any ideas for the contents and deps of the jenkins-slave package?
-> 
-> Just something like jenkins user and runtime dependency on java and
-> leave slave setup on jenkins master?
+Note: poky doesn't have this problem since it separates the ${S} and
+${B}
 
-That is pretty much what I had in mind, except I'd like to add openssh-sshd,
-scp and rsync to the mix as well.
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ .../filter-out-the-patches-from-subdirs.patch      | 47 ++++++++++++++++++++++
+ .../traceroute/traceroute_2.0.18.bb                |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
 
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFS3Q4lMkyGM64RGpERAisiAKCePl0geAlE8oVO8jVJ7iyrKW+I2ACgrJeG
-N9n2LW9ZUqt2eW8Z0QAjiHk=
-=mDag
------END PGP SIGNATURE-----
+diff --git a/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch b/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
+new file mode 100644
+index 0000000..2c030b5
+--- /dev/null
++++ b/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
+@@ -0,0 +1,47 @@
++From e273e0ebc753645555909bcc4874c72458b17891 Mon Sep 17 00:00:00 2001
++From: Robert Yang <liezhi.yang@windriver.com>
++Date: Fri, 17 Jan 2014 03:17:44 -0500
++Subject: [PATCH] Make.rules: filter-out the patches from subdirs
++
++The $(subdirs) contains all the dirs under the ${B}, and this one:
++
++do_unpack[cleandirs] = "${S}/patches"
++
++will create a "patches" dir, then there will be compile errors, filter
++out the patches will fix the problem.
++
++Note: poky doesn't have this problem since it separates the ${S} and
++${B}
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++---
++ Make.rules |    4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/Make.rules b/Make.rules
++index b077cd5..0bfce2d 100644
++--- a/Make.rules
+++++ b/Make.rules
++@@ -97,7 +97,7 @@ endif
++ subdirs := $(filter-out $(SKIPDIRS), $(subdirs))
++ endif
++ 
++-install install-%: subdirs := $(filter-out $(SKIPINSTALL), $(subdirs))
+++install install-%: subdirs := $(filter-out $(SKIPINSTALL) patches, $(subdirs))
++ 
++ 
++ override MAKE += srcdir=$(srcdir) subdirs="$(subdirs)" shared=$(shared)
++@@ -106,7 +106,7 @@ override MAKE += srcdir=$(srcdir) subdirs="$(subdirs)" shared=$(shared)
++ INCLUDEDIRS := $(filter $(INCLUDEDIRS), $(subdirs))
++ LIBDIRS := $(filter $(LIBDIRS), $(subdirs))
++ MODDIRS := $(filter $(MODDIRS), $(subdirs))
++-EXEDIRS := $(filter-out $(INCLUDEDIRS) $(LIBDIRS) $(MODDIRS), $(subdirs))
+++EXEDIRS := $(filter-out $(INCLUDEDIRS) $(LIBDIRS) $(MODDIRS) patches, $(subdirs))
++ MODUSERS := $(filter $(MODUSERS), $(subdirs))
++ SBINUSERS := $(filter $(SBINUSERS), $(subdirs))
++ 
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+index e6718db..31c16aa 100644
+--- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
++++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+@@ -16,6 +16,7 @@ PR = "r1"
+ inherit update-alternatives
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
++           file://filter-out-the-patches-from-subdirs.patch \
+ "
+ 
+ SRC_URI[md5sum] = "b7254149b7f081cce07f4b9e065ba5ef"
+-- 
+1.8.3.1
 
 
