@@ -1,24 +1,26 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B6CE6CBD7
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id A01A96B678
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 12:52:25 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s0KCqQia017143
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 04:52:26 -0800 (PST)
-Received: from pek-blade16.wrs.com (128.224.153.44) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.2.347.0;
-	Mon, 20 Jan 2014 04:52:26 -0800
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Jan 2014 20:52:35 +0800
-Message-ID: <1390222355-9757-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 20 Jan 2014 14:56:43 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 20 Jan 2014 06:52:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,691,1384329600"; d="scan'208";a="441696648"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.122.239])
+	by orsmga001.jf.intel.com with ESMTP; 20 Jan 2014 06:56:36 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: jackie.huang@windriver.com
+Date: Mon, 20 Jan 2014 14:56:34 +0000
+Message-ID: <1500081.lxhvWhSdf3@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.11.5 (Linux/3.12.7-300.fc20.x86_64; KDE/4.11.5; x86_64; ; )
+In-Reply-To: <1389940848-376-1-git-send-email-jackie.huang@windriver.com>
+References: <1389940848-376-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking] [PATCH] traceroute: filter-out patches dir
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] strongswan: update verion to 5.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,92 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 12:52:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Jan 2014 14:56:43 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The $(subdirs) contains all the dirs under the ${B}, and this one:
+On Friday 17 January 2014 14:40:48 jackie.huang@windriver.com wrote:
+> * Add rdepends on strongswan-plugins.
 
-do_unpack[cleandirs] = "${S}/patches"
+Is this really correct? Does strongswan not work without the plugins?
 
-will create a "patches" dir, then there will be compile errors, filter
-out the patches will fix the problem.
+Cheers,
+Paul
 
-Note: poky doesn't have this problem since it separates the ${S} and
-${B}
-
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../filter-out-the-patches-from-subdirs.patch      | 47 ++++++++++++++++++++++
- .../traceroute/traceroute_2.0.18.bb                |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
-
-diff --git a/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch b/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
-new file mode 100644
-index 0000000..2c030b5
---- /dev/null
-+++ b/meta-networking/recipes-support/traceroute/traceroute/filter-out-the-patches-from-subdirs.patch
-@@ -0,0 +1,47 @@
-+From e273e0ebc753645555909bcc4874c72458b17891 Mon Sep 17 00:00:00 2001
-+From: Robert Yang <liezhi.yang@windriver.com>
-+Date: Fri, 17 Jan 2014 03:17:44 -0500
-+Subject: [PATCH] Make.rules: filter-out the patches from subdirs
-+
-+The $(subdirs) contains all the dirs under the ${B}, and this one:
-+
-+do_unpack[cleandirs] = "${S}/patches"
-+
-+will create a "patches" dir, then there will be compile errors, filter
-+out the patches will fix the problem.
-+
-+Note: poky doesn't have this problem since it separates the ${S} and
-+${B}
-+
-+Upstream-Status: Inappropriate [OE specific]
-+
-+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-+---
-+ Make.rules |    4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Make.rules b/Make.rules
-+index b077cd5..0bfce2d 100644
-+--- a/Make.rules
-++++ b/Make.rules
-+@@ -97,7 +97,7 @@ endif
-+ subdirs := $(filter-out $(SKIPDIRS), $(subdirs))
-+ endif
-+ 
-+-install install-%: subdirs := $(filter-out $(SKIPINSTALL), $(subdirs))
-++install install-%: subdirs := $(filter-out $(SKIPINSTALL) patches, $(subdirs))
-+ 
-+ 
-+ override MAKE += srcdir=$(srcdir) subdirs="$(subdirs)" shared=$(shared)
-+@@ -106,7 +106,7 @@ override MAKE += srcdir=$(srcdir) subdirs="$(subdirs)" shared=$(shared)
-+ INCLUDEDIRS := $(filter $(INCLUDEDIRS), $(subdirs))
-+ LIBDIRS := $(filter $(LIBDIRS), $(subdirs))
-+ MODDIRS := $(filter $(MODDIRS), $(subdirs))
-+-EXEDIRS := $(filter-out $(INCLUDEDIRS) $(LIBDIRS) $(MODDIRS), $(subdirs))
-++EXEDIRS := $(filter-out $(INCLUDEDIRS) $(LIBDIRS) $(MODDIRS) patches, $(subdirs))
-+ MODUSERS := $(filter $(MODUSERS), $(subdirs))
-+ SBINUSERS := $(filter $(SBINUSERS), $(subdirs))
-+ 
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-index e6718db..31c16aa 100644
---- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-+++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
-@@ -16,6 +16,7 @@ PR = "r1"
- inherit update-alternatives
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
-+           file://filter-out-the-patches-from-subdirs.patch \
- "
- 
- SRC_URI[md5sum] = "b7254149b7f081cce07f4b9e065ba5ef"
 -- 
-1.8.3.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
