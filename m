@@ -1,34 +1,37 @@
-Return-Path: <jacques.guillou@pelagicore.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CB566CCF4
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1425A6CCF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 14:57:38 +0000 (UTC)
-Received: by mail-ob0-f170.google.com with SMTP id va2so3687566obc.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2014 06:57:39 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=nrxNYpI/7aMlMBxiNWYy1aiAnZOWZp3eceDLXlmR3+A=;
-	b=io6QX2hEDu9XhFGmxJ/4vQOp9QHj01DofPrku3YkCiFxYKbTsmD3QQnY3Kq9+dw3tW
-	qha5TzrxmRxgUU9sX59CpoZmnjMXC2bCze4UeUM+IcS061mK3lP+HU2RTClthV3HJgOe
-	OcZPFLJAWaD3btfejL5Z+1QQ2yh6gG4ju1XSzD1I5cCyATHb5GJmtu+1lWg++2hGB9/P
-	pVhuyTlNp1Yr+jN9RJnUhoeMdpxzv8tUK04Ve97OMunE4earC9+mbyBqvFhcHGEHN+8k
-	nmz4ZOaECHTxIvAS8zg1dLyB6RBuND7C6qF9HooA6xeg9bZFH15ddfvYV8ElMEfop96l
-	w8rg==
-X-Gm-Message-State: ALoCoQkFOv0SZEYTdP9XLqaHaNf4f0G6Hygx04e0iVfMO6OqlKY8iGW0gW1A6TG51mH99yQEt44S
+	Mon, 20 Jan 2014 14:59:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 616543148A20;
+	Mon, 20 Jan 2014 15:59:32 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id WgyDWxHOrV-K; Mon, 20 Jan 2014 15:59:29 +0100 (CET)
+Received: from [172.22.22.61] (unknown [212.255.40.44])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 211C63148A1F;
+	Mon, 20 Jan 2014 15:59:29 +0100 (CET)
+Message-ID: <52DD39CF.5040401@opendreambox.org>
+Date: Mon, 20 Jan 2014 15:59:27 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.182.18.9 with SMTP id s9mr16108947obd.15.1390229859745; Mon,
-	20 Jan 2014 06:57:39 -0800 (PST)
-Received: by 10.76.92.65 with HTTP; Mon, 20 Jan 2014 06:57:39 -0800 (PST)
-Date: Mon, 20 Jan 2014 15:57:39 +0100
-Message-ID: <CAAfCovAgZXFnAJa+OsFUUOAiJ=t13ZuzEn-Y0AR-TXdkjTta+A@mail.gmail.com>
-From: Jacques Guillou <jacques.guillou@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Bitbake command to clean dependees ?
+To: Koen Kooi <koen@dominion.thruhere.net>
+References: <1382009929-6537-1-git-send-email-obi@opendreambox.org>
+	<1382010620-6944-1-git-send-email-obi@opendreambox.org>
+	<52A075E3.5020707@opendreambox.org>
+	<644C5C58-7C6F-4D66-AAB0-BA7C3A0099A2@dominion.thruhere.net>
+In-Reply-To: <644C5C58-7C6F-4D66-AAB0-BA7C3A0099A2@dominion.thruhere.net>
+Cc: "openembedded-devel@lists.openembedded.org List"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH v2] xfsprogs: change DESCRIPTION to SUMMARY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,21 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2014 14:57:39 -0000
+X-List-Received-Date: Mon, 20 Jan 2014 14:59:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Ping. :-)
 
-By default (at least with Yocto), it seems like forcing the rebuild of a
-specific package (via "bitbake -c cleanall MyPackage") does not mark
-dependees as "to be rebuilt", which is a problem for me. Is there a way to
-change that behavior ? Maybe there is a specific command or parameters to
-be passed to bitbake so that performing a "cleanall" on a given package
-also performs a "cleanall" on all dependees ?
+This trivial patch is still waiting for inclusion.
 
-I am not sure this is the correct mailing list for that question. If not,
-please apologize and point me to the mailing list I should use instead.
+Regards,
+Andreas
 
-Best regards
-Jacques
+On 05.12.2013 15:12, Koen Kooi wrote:
+> Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+> 
+> Op 5 dec. 2013, om 13:47 heeft Andreas Oberritter <obi@opendreambox.org> het volgende geschreven:
+> 
+>> Ping.
+>>
+>> On 17.10.2013 13:50, Andreas Oberritter wrote:
+>>> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+>>> ---
+>>> meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+>>> index ceb0ddf..1dc6f09 100644
+>>> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+>>> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+>>> @@ -1,4 +1,4 @@
+>>> -DESCRIPTION = "XFS Filesystem Utilities"
+>>> +SUMMARY = "XFS Filesystem Utilities"
+>>> HOMEPAGE = "http://oss.sgi.com/projects/xfs"
+>>> SECTION = "base"
+>>> LICENSE = "GPLv2"
+>>>
+>>
+>>
+> 
+
 
