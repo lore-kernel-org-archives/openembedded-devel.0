@@ -1,37 +1,45 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
-	[209.85.214.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 235FD6B389
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C9096B389
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:28:03 +0000 (UTC)
-Received: by mail-ob0-f179.google.com with SMTP id wo20so466683obc.24
+	Wed, 22 Jan 2014 14:29:06 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id t60so367432wes.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:28:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=JmYltrqdf6sav616eNAoVOvThuBWP93Au7lslo6T6oY=;
-	b=WBICH2npyIG/Uu52q9YLIIHBNATTIDbub631AKfxxR/14lyWWwonLnCVruY55c8Ykc
-	acoAOVVu1cQvB4jSupASUuiHQG206kA/wV47xTAUNQP3HhGL9zJdACiUqUH8uEGFAiCe
-	+hGhDOt3+jbM21Fkh9cX4jhx2djv0epOn2EZYMfEr7PwpbeOH1sRHKfCb0Z19sM+gkjL
-	mRLMYZpWxncxuxuE4UWBjntThF3HqMjU3m1Xs9xgG2tDslsXgPBTnuEkEbPzDqE4au5E
-	q4+EB57RiJjNOCSOwPvJucQCBw9PWDf6q9bEJh6u8Hq1RjH26nkHgeLwl/DFL7S4UpLg
-	/vAQ==
+	Wed, 22 Jan 2014 06:29:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=CRTwUez43d9hqzSaFtL/dBblf0NJCjyFIqPFUPW5DI4=;
+	b=X/Uti/gLYEt4Kjz15WMrfBBQfN5GGxtm95Oxls6M0+e7uacqGTItrvRgsm/dXGVAsY
+	23c3iIIxuL963xS4/a/CJUBGkPDe4/y30/ufiGHd7P5vs1L+5rfppDeH9k3aX58SplQ0
+	MNPa1xYs749jTkwZ/LwbUMito4xKdBiyf3UvJ3vrjTYYJ+ZCdt0ObYPCsbv/dOTPT3LJ
+	40Ze7GgcuO/hLv/3vDaN3+Ru8lcUvqo/55uI8abMksYwUc4s+PE3/UiNE4rP9OGCmX0/
+	J0Xo62Fc0u2gYQ5BQcytWuBjBn7mB74o8gGgW6A0jRi1fIudDiw8FmePHKuUWUEnH50k
+	S5zA==
+X-Gm-Message-State: ALoCoQnEocUQznlm+hszVC7qZhEUNkYIgFmUBKFjWz6L15KASI0ZcLAy1BCEd4AQ5IAPB7HAHueB
+X-Received: by 10.181.11.201 with SMTP id ek9mr3492746wid.54.1390400946158;
+	Wed, 22 Jan 2014 06:29:06 -0800 (PST)
+Received: from ?IPv6:2001:610:612:0:5e51:4fff:fec8:7c15?
+	([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id
+	bj3sm15203280wjb.14.2014.01.22.06.29.04 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 22 Jan 2014 06:29:05 -0800 (PST)
+Message-ID: <52DFD5B0.2010205@linaro.org>
+Date: Wed, 22 Jan 2014 15:29:04 +0100
+From: Koen Kooi <koen.kooi@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.60.37.99 with SMTP id x3mr1435305oej.61.1390400883997; Wed,
-	22 Jan 2014 06:28:03 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:28:03 -0800 (PST)
-In-Reply-To: <1390239757-27055-3-git-send-email-Martin.Jansa@gmail.com>
-References: <cover.1389805976.git.Martin.Jansa@gmail.com>
-	<1390239757-27055-1-git-send-email-Martin.Jansa@gmail.com>
-	<1390239757-27055-3-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 22 Jan 2014 12:28:03 -0200
-X-Google-Sender-Auth: -_flLDSwCIziStIuidD7-N3lhAc
-Message-ID: <CAP9ODKpFx0Gp3XqG8kGEB2TP95MXnfp7wrKWgGrnVYrrAx2_GA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/4] python-efl: Upgrade to 1.8.1 and update packaging to match old packages
+To: Otavio Salvador <otavio@ossystems.com.br>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <1389960374-16694-1-git-send-email-koen.kooi@linaro.org>	<1389960374-16694-2-git-send-email-koen.kooi@linaro.org>
+	<CAP9ODKr8u4ybYPFzsjXZWxQW32Pf72+Vb_wJkRfb5OSR_a9zZg@mail.gmail.com>
+In-Reply-To: <CAP9ODKr8u4ybYPFzsjXZWxQW32Pf72+Vb_wJkRfb5OSR_a9zZg@mail.gmail.com>
+Subject: Re: [meta-oe][PATCHv2 2/3] acpica: replace patch with EXTRA_OEMAKE args
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,24 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:28:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Jan 2014 14:29:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 20, 2014 at 3:42 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * announcement:
->   http://sourceforge.net/mailarchive/message.php?msg_id=31862842
-> * like in efl recipe create packages matching with old separate recipes
+On 01/22/2014 03:13 PM, Otavio Salvador wrote:
+> On Fri, Jan 17, 2014 at 10:06 AM, Koen Kooi <koen.kooi@linaro.org> wrote:
+>> No need to patch the makefile when you can just passs CC=${TARGET_PREFIX}gcc to make.
+>>
+>> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 >
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> You have a typo in the commit log: "pass"
+>
+> What about the HOST variable from the Makefile which were removed and
+> now set to _CYGWIN?
 
-
-Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
-
-I'd prefer this in two patches (one reworking the packaging and
-another for the update) but I think it is fine.
+I didn't touch HOST, the patch only touched CC and now the patch isn't 
+applied anymore. So either way, no changes to HOST.
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Koen Kooi
+Builds and Baselines | Release Manager
+Linaro.org | Open source software for ARM SoCs
 
