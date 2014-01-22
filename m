@@ -1,39 +1,36 @@
-Return-Path: <david.c.nystrom@gmail.com>
-Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DCE576C921
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f180.google.com (mail-ie0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D02460017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 16:17:21 +0000 (UTC)
-Received: by mail-lb0-f181.google.com with SMTP id z5so484456lbh.26
+	Wed, 22 Jan 2014 17:21:46 +0000 (UTC)
+Received: by mail-ie0-f180.google.com with SMTP id at1so9039756iec.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 08:17:22 -0800 (PST)
+	Wed, 22 Jan 2014 09:21:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=p28vDzFTx9n/23L5A51cFisFOpDNU9kpz+bvnQNG3No=;
-	b=dcgcy+n0chszKheYEpCrs5KX2lZpIZ1XJD9DW/gNyqEmJIC6KCkJzeF43F0ZiKZFDm
-	23IYvSA1skDSJEf7D2j+diW6U4c4l9TX8Bo0UJ3HcN/sbbOv/Z+bNIPBUTpWiFN8Zbrv
-	ItE/XO3jUwcbOtS+1kzqn4XYaLKfbgLar3dm5xjqkuGrq6BYUTs7vRVBixGnFiK0G2Hs
-	itK+pXcQod9mucw6ReHjylERUOXWoHfCd8XuVsqhWExaG1OeebYeWRFkbEJ74sP0FzmU
-	lhCavIEp+QoEaQa1oIgHazUVMbAqfsserRDzF6aX9T1SLFZE43/naYinAKPfSOivoOJF
-	8vVw==
-X-Received: by 10.152.19.133 with SMTP id f5mr1646437lae.52.1390407441969;
-	Wed, 22 Jan 2014 08:17:21 -0800 (PST)
-Received: from nysan (sestofw01.enea.se. [192.36.1.252])
-	by mx.google.com with ESMTPSA id ox6sm8070683lbb.6.2014.01.22.08.17.20
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 22 Jan 2014 08:17:21 -0800 (PST)
-Received: by nysan (Postfix, from userid 1000)
-	id 6EA5F1C61BD; Wed, 22 Jan 2014 17:17:13 +0100 (CET)
-From: "=?UTF-8?q?David=20Nystr=C3=B6m?=" <david.c.nystrom@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jan 2014 17:17:12 +0100
-Message-Id: <1390407432-22077-1-git-send-email-david.nystrom@enea.com>
-X-Mailer: git-send-email 1.8.3.2
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=98wBR52vOGPOO9cqN13+2bL3/3U58AMAm5TOrgdqOzw=;
+	b=FlMDEOKTVym/nTY5/odU9SJ0kZm1U4tAyNO+AgawJ5049LMabvONUHoWj8MhZMwz2d
+	QcK+7b297lqbLlRq+lHk/9ze8gOhkNyxXlW3zEXZ64VGFvMWMYNzYAayVevUoBMcxJ8V
+	2Yl0OnM775v+Gq1khov03Tt7ECxkr4GDo6viMZWztzqpQw4D5LJPzpAygpDEM8MlLUMf
+	1DiuddHnRFjB+sC2Ykylev/fESFme5+7rKVfyRqIOGA7kUQCeP8ATs444LxlcihlrV4a
+	DFFkaX/GhFxAdvgTyBNLZ/sr5qi7lIKQrKOwoEeY6VHuwyQ64ycCokU+VUFDa9LcbhMI
+	vRvg==
+X-Received: by 10.43.153.68 with SMTP id kz4mr2100618icc.29.1390411307445;
+	Wed, 22 Jan 2014 09:21:47 -0800 (PST)
 MIME-Version: 1.0
-Cc: =?UTF-8?q?David=20Nystr=C3=B6m?= <david.nystrom@enea.com>
-Subject: [meta-browser][PATCH] nspr: Remove BBCLASSEXTED override since its already set to native in oe-core.
+Received: by 10.50.79.167 with HTTP; Wed, 22 Jan 2014 09:21:17 -0800 (PST)
+In-Reply-To: <CAP9ODKrEm_WCLnx2quebWu8rrpnGbvjXKp9Vn5_8c_J1unhMwg@mail.gmail.com>
+References: <1390302526-3333-1-git-send-email-koen@dominion.thruhere.net>
+	<1688777.CYGoEHJ1ll@leo>
+	<CAP9ODKrEm_WCLnx2quebWu8rrpnGbvjXKp9Vn5_8c_J1unhMwg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Jan 2014 09:21:17 -0800
+Message-ID: <CAMKF1sru7FBY7o5guup7zvHD6BxJzkvav+DRqSzoe9t+KTnyJA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-initramfs][PATCHv2] dracut: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,27 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 16:17:22 -0000
+X-List-Received-Date: Wed, 22 Jan 2014 17:21:48 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Signed-off-by: David Nyström <david.nystrom@enea.com>
----
- recipes-support/nspr/nspr_4.10.2.bbappend | 3 ---
- 1 file changed, 3 deletions(-)
+On Wed, Jan 22, 2014 at 6:35 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> I am not sure this is 'core'; maybe 'recipes-support'?
 
-diff --git a/recipes-support/nspr/nspr_4.10.2.bbappend b/recipes-support/nspr/nspr_4.10.2.bbappend
-index 3296e91..947164f 100644
---- a/recipes-support/nspr/nspr_4.10.2.bbappend
-+++ b/recipes-support/nspr/nspr_4.10.2.bbappend
-@@ -1,6 +1,3 @@
--# nspr-native is needed by nss
--BBCLASSEXTEND = "native"
--
- # don't build tests : this ICE on armv7
- do_configure_append() {
- 	sed -i "s:CSRCS =:CSRCS = \nDONTBUILD =:g" ${S}/pr/tests/Makefile
--- 
-1.8.3.2
 
+well we are in initramfs layer and dracut could be a core recipe for
+initramfs layer
 
