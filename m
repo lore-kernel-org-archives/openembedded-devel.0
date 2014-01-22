@@ -1,37 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F80D6E744;
-	Tue, 21 Jan 2014 22:41:55 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id e53so4400019eek.39
-	for <multiple recipients>; Tue, 21 Jan 2014 14:41:56 -0800 (PST)
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ea0-f177.google.com (mail-ea0-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B63560CEB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jan 2014 00:02:16 +0000 (UTC)
+Received: by mail-ea0-f177.google.com with SMTP id n15so4162427ead.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jan 2014 16:02:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=N92CLHKrOu8+X4+RbrIiVJdt/ooSWAhBz00JptDCycw=;
-	b=HjWcbWEnfw+l8VsrYagz03onA7JcLd+OhdKT0PEzL8Zs2ikiQhR3tpuCKsik2HAHDO
-	V96QKN7MdRg7/NjVG153xZrbHkQcrlFXUlOtT8igQlMLYPSzFeyexHYS6TUx6mKerQIU
-	ggzGhFf1ZALSa0oxSykYwTjJKCGMzq6ldX9QS73DpiYB3gHDhE+gwd/7FMCh/UCjNnRs
-	XyLTQA36+nPi0gyf9dcvtbQ3i02GOaNMXFP+mpr2ny36WMaxglV/OgIoH3cLO1r1poyn
-	Mqh4Vq4nWQFzQUJUJdDTbn7GHihKQ/Revbeo+ZG67HnLDs3bjvI2lX+KSpgxZjnhbK2L
-	Ukhw==
-X-Received: by 10.15.56.132 with SMTP id y4mr21013881eew.61.1390344116573;
-	Tue, 21 Jan 2014 14:41:56 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107])
-	by mx.google.com with ESMTPSA id h3sm19766231eem.15.2014.01.21.14.41.55
-	for <multiple recipients>
+	h=from:to:cc:subject:date:message-id;
+	bh=pNx+ft2bd8lLWZflAlvX2rp5RwT6B5hV2c4OzU0eyG0=;
+	b=it8BxtNdJwy1571jskOFb4Ll2hKlNlzLooCTuh0VSVUbhAmLpGpShljjmu8ITHR8bZ
+	uBWzwpHVCG2IfQKWsIIo0tr73CeNX/qhs4LXK4g6WhJqnPodx+iti/Gj89UD3SRao6xJ
+	oXlLNsoCNFERELilsWXK+VkjtsJl8TdJKSGFMAkZ1NzZwlpCxRPLfBHYqZgS5s4PaHU4
+	sCpcChueHY0lx8Vzl1QCW85HjdGleiKRfvFiA19ql7ni/ON3YebPqQawph6L1FE3Cl+y
+	cNPryQ1H5HqX+EQukXJtynLkYRxyScCNih7UE2StFMUSyf+cpLjT3xD+UntMv4D1MQBE
+	rkGA==
+X-Received: by 10.14.32.67 with SMTP id n43mr26685261eea.17.1390348936922;
+	Tue, 21 Jan 2014 16:02:16 -0800 (PST)
+Received: from mizar.localdomain
+	(host229-63-dynamic.24-79-r.retail.telecomitalia.it. [79.24.63.229])
+	by mx.google.com with ESMTPSA id
+	o13sm20368931eex.19.2014.01.21.16.02.16 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 Jan 2014 14:41:55 -0800 (PST)
-Date: Tue, 21 Jan 2014 23:41:55 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 21 Jan 2014 16:02:16 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140121224155.GJ4100@jama>
-References: <20140119164038.2027F502E0@opal>
-MIME-Version: 1.0
-In-Reply-To: <20140119164038.2027F502E0@opal>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Paul Barker : default-providers: Change update-alternatives provider to opkg-utils
+Date: Wed, 22 Jan 2014 01:02:01 +0100
+Message-Id: <1390348921-711-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld] Pull Request 20140122
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,102 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2014 22:41:56 -0000
-X-Groupsio-MsgNum: 47846
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="P6YfpwaDcfcOCJkJ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Jan 2014 00:02:16 -0000
 
---P6YfpwaDcfcOCJkJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 066a4d4da6e2a2b6398b96e2144215d36f686104:
 
-On Sun, Jan 19, 2014 at 04:40:38PM +0000, git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: 2f18289493f9c2c67ba343fb8e16743bf5dfee24
-> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
-;h=3D2f18289493f9c2c67ba343fb8e16743bf5dfee24
->=20
-> Author: Paul Barker <paul@paulbarker.me.uk>
-> Date:   Thu Jan 16 17:59:25 2014 +0000
->=20
-> default-providers: Change update-alternatives provider to opkg-utils
->=20
-> This allows dependencies to be added to the opkg recipe without causing c=
-ircular
-> dependency loops. As opkg-utils has minimal dependencies it is the best r=
-ecipe
-> to provide update-alternatives.
->=20
-> This partially solves Yocto Project issue 4836. More work is still needed=
- for a
-> complete solution.
->=20
-> Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
->=20
-> ---
->=20
->  meta/conf/distro/include/default-providers.inc | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta/conf/distro/include/default-providers.inc b/meta/conf/d=
-istro/include/default-providers.inc
-> index e2b0892..419ffcd 100644
-> --- a/meta/conf/distro/include/default-providers.inc
-> +++ b/meta/conf/distro/include/default-providers.inc
-> @@ -10,15 +10,15 @@ PREFERRED_PROVIDER_virtual/libgl ?=3D "mesa"
->  PREFERRED_PROVIDER_virtual/libgles1 ?=3D "mesa"
->  PREFERRED_PROVIDER_virtual/libgles2 ?=3D "mesa"
->  PREFERRED_PROVIDER_virtual/mesa ?=3D "mesa"
-> -PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg"
-> -PREFERRED_PROVIDER_virtual/update-alternatives-native ?=3D "opkg-native"
-> +PREFERRED_PROVIDER_virtual/update-alternatives ?=3D "opkg-utils"
-> +PREFERRED_PROVIDER_virtual/update-alternatives-native ?=3D "opkg-utils-n=
-ative"
->  PREFERRED_PROVIDER_virtual/libx11 ?=3D "libx11"
->  PREFERRED_PROVIDER_xf86-video-intel ?=3D "xf86-video-intel"
-> =20
->  #
->  # Default virtual runtime providers
->  #
-> -VIRTUAL-RUNTIME_update-alternatives ?=3D "update-alternatives-cworth"
-> +VIRTUAL-RUNTIME_update-alternatives ?=3D "update-alternatives-opkg"
+  Update LIC_FILES_CHKSUM after toplevel LICENSE file checksum change (2014-01-17 12:09:20 +0000)
 
-Can we add RREPLACES/RCONFLICTS/RPROVIDES combo to opkg-utils recipe to
-fix upgrade-path on target?
+are available in the git repository at:
 
- * check_data_file_clashes: Package update-alternatives-opkg wants to
- * install file /usr/bin/update-alternatives
-        But that file is already provided by package  * update-alternatives=
--cworth
+  https://github.com/andrea-adami/meta-handheld master
 
-I'll send patch.
+for you to fetch changes up to 2f3054d6daf1cbbf6a769c118ac3768f19a03410:
 
->  VIRTUAL-RUNTIME_apm ?=3D "apm"
->  VIRTUAL-RUNTIME_alsa-state ?=3D "alsa-state"
-> =20
->=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+  linux-yocto*: collie: unified patch for LH28F640BF NOR flash (2014-01-22 00:43:01 +0100)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+----------------------------------------------------------------
+Andrea Adami (4):
+      linux-yocto*: collie: re-enable buffered write for NOR flash
+      linux-yocto*: collie: update collie-match-cfi-qry.patch
+      linux-yocto*: collie: remove previous MTD CFI patches
+      linux-yocto*: collie: unified patch for LH28F640BF NOR flash
 
---P6YfpwaDcfcOCJkJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ .../linux/linux-yocto-3.10/collie/collie.scc       |   5 +-
+ .../patches/patches-mtd/collie-LH28F640BF.patch    | 131 +++++++++++++++++++++
+ .../patches/patches-mtd/collie-PCR.patch           |  71 -----------
+ .../patches-mtd/collie-cfi-partitions.patch        |  48 --------
+ .../patches/patches-mtd/collie-force-unlock.patch  |  22 ----
+ .../patches/patches-mtd/collie-match-cfi-qry.patch |  15 ++-
+ .../patches/patches-mtd/collie-no-buf-write.patch  |  31 -----
+ .../linux/linux-yocto-dev/collie/collie.scc        |   5 +-
+ .../patches/patches-mtd/collie-LH28F640BF.patch    | 131 +++++++++++++++++++++
+ .../patches/patches-mtd/collie-PCR.patch           |  71 -----------
+ .../patches-mtd/collie-cfi-partitions.patch        |  48 --------
+ .../patches/patches-mtd/collie-force-unlock.patch  |  22 ----
+ .../patches/patches-mtd/collie-match-cfi-qry.patch |  15 ++-
+ .../patches/patches-mtd/collie-no-buf-write.patch  |  31 -----
+ .../patches/patches-mtd/collie-LH28F640BF.patch    | 131 +++++++++++++++++++++
+ .../patches/patches-mtd/collie-PCR.patch           |  71 -----------
+ .../patches-mtd/collie-cfi-partitions.patch        |  48 --------
+ .../patches/patches-mtd/collie-force-unlock.patch  |  22 ----
+ .../patches/patches-mtd/collie-match-cfi-qry.patch |  15 ++-
+ .../patches/patches-mtd/collie-no-buf-write.patch  |  31 -----
+ .../linux/linux-yocto-tiny-kexecboot_3.10.bbappend |   5 +-
+ 21 files changed, 426 insertions(+), 543 deletions(-)
+ create mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-LH28F640BF.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-PCR.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-cfi-partitions.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-force-unlock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-no-buf-write.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-PCR.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-partitions.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-force-unlock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-no-buf-write.patch
+ create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-LH28F640BF.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-PCR.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-cfi-partitions.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-force-unlock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-no-buf-write.patch
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlLe97MACgkQN1Ujt2V2gBxSQwCfRlzFfx5wqEAGehektjXSTcrE
-108AoKsh10gPNpy521UklHgDoVtvYNNs
-=bKA6
------END PGP SIGNATURE-----
-
---P6YfpwaDcfcOCJkJ--
