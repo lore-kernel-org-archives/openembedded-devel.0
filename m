@@ -1,35 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f54.google.com (mail-oa0-f54.google.com
-	[209.85.219.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D51FD60017
+Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F46860017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:22:13 +0000 (UTC)
-Received: by mail-oa0-f54.google.com with SMTP id i4so491824oah.13
+	Wed, 22 Jan 2014 14:23:56 +0000 (UTC)
+Received: by mail-ob0-f181.google.com with SMTP id va2so466161obc.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:22:14 -0800 (PST)
+	Wed, 22 Jan 2014 06:23:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=yI+LbBTFrbCPs/J0U4BsWSatgkHsde+onIC/4qXF4oU=;
-	b=bQfi6lqchxT1L2n2ZIyQB38J7HyqG3fPpoexJOb2N426p29DvrWcT5lnd7eTTYfNWx
-	Iqa2P6mrWi0g8+cYMSrVJFjoIRrVJcqdooWf6yFesl0WkkDOQX4z+pfRZc/S1qzmoa9L
-	h1jWboMuCdaZ28u3ulcDDZZdnzZh4/huMtXTVNQKMAjUg4HVO+dtbfOZsrZiSgAIiJ89
-	mEkyVZBdNypZDg8/dL/I0AJtQ4Cv2Bz7zr6OeTB7u3fR89Hfb6hNtFQu7m/93CEp/0pK
-	xbHDg2Gj3+xCRyyLQAewPWCkMnqupxJs4PT/M58NFFe1usQjnohMFOSid0w5+gjMZFFv
-	8rvw==
+	bh=VG1LQy9TG73dPczCyozyshc8uGYUDUHo+uxIPqxCP/w=;
+	b=ip8qcckEU8hlD6rryFHpp4Ci55CNtyH7FCI21xDzG9yLv1ZNfBXT2t3H9RYsT2uKkR
+	V9zVsVF7ixGIOHKVmxzbCx58VQkwGEFvgsRWCxr2SklR8zQW5N3Y8NG95CNRmV68jgA9
+	TlE+kAEmCPDDurq4ujbaMXM5xevjW3zZurQPC82Et1TDZOtt8nxcl7qv+2HZIygM+Fgy
+	Ow7Pt22A0Jq77wuRK6uXbVwG376QRWQ/cTW93Wzpc45HmQ1p0D5TQqDzXLydi0ED/wK4
+	oTVAY6JAIgPbHEPQOqEOb5y19a77uG5BQPPOJ1YfJim1NKn72eANGSu6JPksCCKNVtn1
+	Cp5g==
 MIME-Version: 1.0
-X-Received: by 10.182.233.77 with SMTP id tu13mr1499858obc.58.1390400534810;
-	Wed, 22 Jan 2014 06:22:14 -0800 (PST)
+X-Received: by 10.60.135.130 with SMTP id ps2mr1520508oeb.46.1390400638031;
+	Wed, 22 Jan 2014 06:23:58 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:22:14 -0800 (PST)
-In-Reply-To: <1390230447-20844-1-git-send-email-obi@opendreambox.org>
-References: <1390230447-20844-1-git-send-email-obi@opendreambox.org>
-Date: Wed, 22 Jan 2014 12:22:14 -0200
-X-Google-Sender-Auth: _7qMb6atP9HzKo6iZmxmkZ2KZP0
-Message-ID: <CAP9ODKrLOdEdTFpaPYXDaOwq0r3XYH3fDuPUjAsDDLQyqKjLjA@mail.gmail.com>
+Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:23:57 -0800 (PST)
+In-Reply-To: <1390230519-21756-1-git-send-email-obi@opendreambox.org>
+References: <1390230519-21756-1-git-send-email-obi@opendreambox.org>
+Date: Wed, 22 Jan 2014 12:23:57 -0200
+X-Google-Sender-Auth: xz3miQjE5L_jx4m6vbHErjs2cZs
+Message-ID: <CAP9ODKqebrBf4vV9oBFFcHYGbyWZV5F6OO6uJMDwBEcxD+EW+g@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] dietsplash: bump SRCREV
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	"Felipe F. Tonello" <ftonello@cercacor.com>
+Subject: Re: [meta-oe][PATCH] libconnman-qt: update to 1.0.46, add recipe for qte
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,18 +44,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:22:14 -0000
+X-List-Received-Date: Wed, 22 Jan 2014 14:23:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Jan 20, 2014 at 1:07 PM, Andreas Oberritter
+On Mon, Jan 20, 2014 at 1:08 PM, Andreas Oberritter
 <obi@opendreambox.org> wrote:
-> Includes a fix to use /sbin/init instead of an obsolete path to systemd.
+> * Use _git version suffix, because it really is a Git recipe.
+> * Create an inc file to be shared between qt4x11 and qt4e.
+> * Use CONFIG+=notests, because CONFIG+=notest has no effect now.
+> * Reorder some variables according to style guide.
+> * Remove unneeded PROVIDES for ${PN}-plugin, which is already listed
+>   in PACKAGES.
+> * Hardcode branch to master, because no other branch exists upstream.
+> * Simplify do_install.
 >
 > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 
-
 Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
 
+Felipe, as I know you use this, may you take a second look here?
 
 -- 
 Otavio Salvador                             O.S. Systems
