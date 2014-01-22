@@ -1,37 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f173.google.com (mail-ob0-f173.google.com
-	[209.85.214.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AC506E76C
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 08A0F6E76C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:36:30 +0000 (UTC)
-Received: by mail-ob0-f173.google.com with SMTP id vb8so490864obc.32
+	Wed, 22 Jan 2014 14:37:36 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id q8so386580lbi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:36:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=lZgG25LkmMpewkLmOCvt9vVSj0sa1+h2/hkkQ7aUuvM=;
-	b=eBvUq4wAqODb5xRWsXKCn4rIfDmUIGa+GxyswJoELTisuRCwDq0VEE4bnMBTQEnx20
-	JOOgtxsbcxt532asDJ09iIhpYYYdAQRB6BxDJGCepZsYPaQZTKbDxHicdpJnMJKQBXxQ
-	+PrGmRODZGUQRkbVBs7/+eQJLDtMgsFmjzaXPRmCC7st6sAY3WvffTU91dymLVQN+UWa
-	0wEQ0wJBUr9cuhrnCTSleij5i35PEE8iV8i4xw5Kalq+s9egCh3dgybQ5w0jBqKzsav5
-	ygDZyuflcQegXIV8Ha2iP/S1rKX91+Jb4+RsL0uAy9bktxa7Vo9XxHmATDGtkvUpGqO8
-	6EQg==
+	Wed, 22 Jan 2014 06:37:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=hR/deVyHZRj9BEexl6MyltqT/HWEg2x6o8ohX+9lRrk=;
+	b=NJiwz8blvXXScF2XHyUzm4VbY1s2UH7khZfpN8Yu/eISnTI3mP+ENErm+pxHhBOz6m
+	yhAgV9OT+Pmz/0HcSNFU26T+qOu4/+foXseWBMwAz8cpoDJdcwciR/izZRmccx/Uciex
+	REyT2gfiDVGmXZWfbMkgL6+NhVcRL6Gm1BX+UXkpcJmofuSEzpDlD02M9OlFgixXdFwB
+	xWOAJtv/+6rq1gvpy9eAIqncheH0Ss2P45lngnt4P/fkTl1e28OZZhKrWtV9saAScxKE
+	o5hmff+OnOxTEdNXG3SJzsjy9cEXFwAEAV1Xm/wYzT5yPxjKyR5F0A7ttJ+WrNRun4TL
+	5ybw==
+X-Gm-Message-State: ALoCoQm6Pc4K/GOivYOtj+QRUxojyUOxgHW/pf3MkQS2M0ux/0Q5R0K6cr6GoMnnxfw2D1fDy12y
 MIME-Version: 1.0
-X-Received: by 10.182.113.195 with SMTP id ja3mr1589618obb.46.1390401391171;
-	Wed, 22 Jan 2014 06:36:31 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:36:31 -0800 (PST)
-In-Reply-To: <CAJTo0LZOjUDhRCN7QPHwPckvDxzbvOWwEb3iT7ZRdnWwD3zZew@mail.gmail.com>
-References: <1390332748-31444-1-git-send-email-koen@dominion.thruhere.net>
-	<CAJTo0LZOjUDhRCN7QPHwPckvDxzbvOWwEb3iT7ZRdnWwD3zZew@mail.gmail.com>
-Date: Wed, 22 Jan 2014 12:36:31 -0200
-X-Google-Sender-Auth: TenehAfhKn5BAVyCJ66rR3XIgMI
-Message-ID: <CAP9ODKr+d8tG=XUsAR=btn3=vfetvQusu=oid-bCkPGonmGXsw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] xf86-video-ati: recommend linux-firmware
+X-Received: by 10.112.126.135 with SMTP id my7mr1239440lbb.56.1390401457428;
+	Wed, 22 Jan 2014 06:37:37 -0800 (PST)
+Received: by 10.112.45.230 with HTTP; Wed, 22 Jan 2014 06:37:37 -0800 (PST)
+In-Reply-To: <52DFD5B0.2010205@linaro.org>
+References: <1389960374-16694-1-git-send-email-koen.kooi@linaro.org>
+	<1389960374-16694-2-git-send-email-koen.kooi@linaro.org>
+	<CAP9ODKr8u4ybYPFzsjXZWxQW32Pf72+Vb_wJkRfb5OSR_a9zZg@mail.gmail.com>
+	<52DFD5B0.2010205@linaro.org>
+Date: Wed, 22 Jan 2014 16:37:37 +0200
+Message-ID: <CAGNsrLCeBGkOb9Mim-19jiNguwJOPhHPF9=khY0MD6e_e-qOoQ@mail.gmail.com>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCHv2 2/3] acpica: replace patch with EXTRA_OEMAKE args
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,20 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:36:30 -0000
+X-List-Received-Date: Wed, 22 Jan 2014 14:37:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Jan 21, 2014 at 6:21 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 21 January 2014 19:32, Koen Kooi <koen@dominion.thruhere.net> wrote:
->> Technically it won't work without, but it's possible to build the firmware into the kernel, so use RRECOMMENDS.
+Tested-by: Fathi Boudra <fathi.boudra@linaro.org>
+
+On 22 January 2014 16:29, Koen Kooi <koen.kooi@linaro.org> wrote:
+> On 01/22/2014 03:13 PM, Otavio Salvador wrote:
+>>
+>> On Fri, Jan 17, 2014 at 10:06 AM, Koen Kooi <koen.kooi@linaro.org> wrote:
+>>>
+>>> No need to patch the makefile when you can just passs
+>>> CC=${TARGET_PREFIX}gcc to make.
+>>>
+>>> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+>>
+>>
+>> You have a typo in the commit log: "pass"
+>>
+>> What about the HOST variable from the Makefile which were removed and
+>> now set to _CYGWIN?
 >
-> A blanket recommendation like that seems like you should be splitting
-> the relevant firmware into a separate package first.
-
-Agreed; this helps to reduce the footprint increase from this change.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>
+> I didn't touch HOST, the patch only touched CC and now the patch isn't
+> applied anymore. So either way, no changes to HOST.
+>
+> --
+> Koen Kooi
+> Builds and Baselines | Release Manager
+> Linaro.org | Open source software for ARM SoCs
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
