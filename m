@@ -1,32 +1,33 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
-	[209.85.219.47])
-	by mail.openembedded.org (Postfix) with ESMTP id E436960017
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 492B660017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:10:54 +0000 (UTC)
-Received: by mail-oa0-f47.google.com with SMTP id m1so468629oag.20
+	Wed, 22 Jan 2014 14:11:44 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id va2so449531obc.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:10:55 -0800 (PST)
+	Wed, 22 Jan 2014 06:11:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=HNbr1T3pppdMNqoP8F6GHsNPXAhjwyPHmdm+RQxdjV8=;
-	b=i/a7Tpx+THlkUHK8bWxLJwJmY8UEo7z0za/hegkIz6plXyPYSY88ksZ5ON8ZM36Fss
-	10NoMq+6lU3/EL4lwRV82xOO1hWIaaM2wne/LAJwk9ewULtRbf/FHmajOpKFuPmu3B9s
-	FyTobPCQ758ZGmlXfgdhMTiMUwmCXXOtvIidk+HcRhiyvK5yvsuAHBhFWbFmcqSFW9ht
-	+9HC2Viz0p+PQT8PizNLdeavIH0D5gix3OeJkbPg1iDUj/vTnsVJkn2lzqZZtp7HdElh
-	gTBQnBXnGdeIwRdOPIW1ZRII7MsU4c5b3XVMQrcIjNjJA/RzGIqy+tgv/goNFN6slMWp
-	Mg0Q==
+	bh=beXk+QmpeVPVragcmnKvQ7yzw/ifLoMTNlF6BCCTsho=;
+	b=e3L7ip19Djws8ayfhWjymw95u2aGjWYqoSNVIhgeVfA+x8EhE22KCBEQqmnyjyY33j
+	voNFn2C15od+eI7BsUpg2pd6nCKOii1obliRwXmUy+n24XJYpHxoccCi/P8OS0a459Ch
+	bHeUZe08iVeKdG+mNSavMIEcH0dqQobKON3lM4VYKIDahyoQBBk6Y47L6ETdw+9kvxs6
+	vBYQnnDY05EoxNKbathy3XWbW4NSZcdgW52LLtklhOwMZqX2SaS6kR+pnd+osYCM60zX
+	TR21Ew5BzyeSRg7JRtdkW9vdeK32/4K3SiVMW/HAT4kQlFsz830kVsI4YmtQaLGesDIx
+	+C+w==
 MIME-Version: 1.0
-X-Received: by 10.182.233.77 with SMTP id tu13mr1450771obc.58.1390399855082;
-	Wed, 22 Jan 2014 06:10:55 -0800 (PST)
+X-Received: by 10.60.56.70 with SMTP id y6mr1480960oep.32.1390399905233; Wed,
+	22 Jan 2014 06:11:45 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:10:55 -0800 (PST)
-In-Reply-To: <1389943552-8083-1-git-send-email-kai.kang@windriver.com>
+Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:11:45 -0800 (PST)
+In-Reply-To: <CAP9ODKo77V1CUCyr8p5tVJv9dR0LBmB20BOBBVF+jQXZGVXhqA@mail.gmail.com>
 References: <1389943552-8083-1-git-send-email-kai.kang@windriver.com>
-Date: Wed, 22 Jan 2014 12:10:55 -0200
-X-Google-Sender-Auth: QWEF-GGlOnjjHx-zm5xdaw7pMKM
-Message-ID: <CAP9ODKo77V1CUCyr8p5tVJv9dR0LBmB20BOBBVF+jQXZGVXhqA@mail.gmail.com>
+	<CAP9ODKo77V1CUCyr8p5tVJv9dR0LBmB20BOBBVF+jQXZGVXhqA@mail.gmail.com>
+Date: Wed, 22 Jan 2014 12:11:45 -0200
+X-Google-Sender-Auth: XJFG-l6A32WVrXjqlJnQukI5uX4
+Message-ID: <CAP9ODKo2g+HMY6OoZ25r1vcMd9ydqt_8pOyw7BGzyH_zXwY8Ww@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] radvd: update to 1.9.8
@@ -43,139 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:10:56 -0000
+X-List-Received-Date: Wed, 22 Jan 2014 14:11:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Jan 17, 2014 at 5:25 AM, Kai Kang <kai.kang@windriver.com> wrote:
-> Update radvd to version 1.9.8
+On Wed, Jan 22, 2014 at 12:10 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Fri, Jan 17, 2014 at 5:25 AM, Kai Kang <kai.kang@windriver.com> wrote:
+>> Update radvd to version 1.9.8
+>>
+>> * remove change-scanner-dependency.patch which is merged
+>> * add 'status' subcommand for radvd.init
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 >
-> * remove change-scanner-dependency.patch which is merged
-> * add 'status' subcommand for radvd.init
+> Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
 >
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> For a subsequent patch, couldn't it be moved to meta-networking?
 
-Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+Ignore it; the missing of meta-networking in the patch subject
+confused me. It is there already.
 
-For a subsequent patch, couldn't it be moved to meta-networking?
-
-> ---
->  .../radvd/files/change-scanner-dependency.patch    | 24 ----------------------
->  .../recipes-daemons/radvd/files/radvd.init         |  9 +++++++-
->  meta-networking/recipes-daemons/radvd/radvd.inc    |  7 +++++++
->  .../radvd/{radvd_1.9.1.bb => radvd_1.9.8.bb}       |  9 +++-----
->  4 files changed, 18 insertions(+), 31 deletions(-)
->  delete mode 100644 meta-networking/recipes-daemons/radvd/files/change-scanner-dependency.patch
->  rename meta-networking/recipes-daemons/radvd/{radvd_1.9.1.bb => radvd_1.9.8.bb} (8%)
->
-> diff --git a/meta-networking/recipes-daemons/radvd/files/change-scanner-dependency.patch b/meta-networking/recipes-daemons/radvd/files/change-scanner-dependency.patch
-> deleted file mode 100644
-> index b190866..0000000
-> --- a/meta-networking/recipes-daemons/radvd/files/change-scanner-dependency.patch
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -scanner.c is generated by flex using scanner.l, scanner.l needs gram.h
-> -when produce scanner.c, so redefine the dependency relation
-> -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> ----
-> - Makefile.am |    3 +--
-> - 1 files changed, 1 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/Makefile.am b/Makefile.am
-> -index 04b834b..2da986c 100644
-> ---- a/Makefile.am
-> -+++ b/Makefile.am
-> -@@ -131,5 +131,4 @@ dist-hook:
-> -       rm -f $(distdir)/gram.h
-> -       rm -f $(distdir)/scanner.c
-> -
-> --scanner.o: gram.h
-> --
-> -+scanner.c: gram.h
-> ---
-> -1.7.4.1
-> -
-> diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.init b/meta-networking/recipes-daemons/radvd/files/radvd.init
-> index a48dff8..921384c 100755
-> --- a/meta-networking/recipes-daemons/radvd/files/radvd.init
-> +++ b/meta-networking/recipes-daemons/radvd/files/radvd.init
-> @@ -9,6 +9,9 @@
->  # Description:    router advertisement daemon
->  ### END INIT INFO
->
-> +# Source function library.
-> +. /etc/init.d/functions
-> +
->  PATH=/sbin:/bin:/usr/sbin:/usr/bin
->  DAEMON=/usr/sbin/radvd
->  NAME=radvd
-> @@ -95,6 +98,10 @@ case "$1" in
->         rm -f $SAVED_SETTINGS
->         echo "$NAME."
->         ;;
-> +  status)
-> +       status $DAEMON;
-> +       exit $?
-> +       ;;
->    reload|force-reload)
->         echo "Reloading $DESC configuration files."
->         start-stop-daemon --stop --signal HUP --quiet --pidfile \
-> @@ -116,7 +123,7 @@ case "$1" in
->         ;;
->    *)
->         N=/etc/init.d/$NAME
-> -       echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
-> +       echo "Usage: $N {start|stop|status|restart|reload|force-reload}" >&2
->         exit 1
->         ;;
->  esac
-> diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-> index f314fee..9e19401 100644
-> --- a/meta-networking/recipes-daemons/radvd/radvd.inc
-> +++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-> @@ -1,4 +1,11 @@
->  SUMMARY = "IPv6 router advertisement daemon"
-> +DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
-> +listens to router solicitations and sends router \
-> +advertisements as described in RFC 2461, Neighbor \
-> +Discovery for IP Version 6 (IPv6). With these \
-> +advertisements hosts can automatically configure their \
-> +addresses and some other parameters. They also can \
-> +choose a default router based on these advertisements."
->  HOMEPAGE = "http://www.litech.org/radvd/"
->  SECTION = "console/network"
->  DEPENDS = "flex-native libdaemon"
-> diff --git a/meta-networking/recipes-daemons/radvd/radvd_1.9.1.bb b/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
-> similarity index 8%
-> rename from meta-networking/recipes-daemons/radvd/radvd_1.9.1.bb
-> rename to meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
-> index 0dccded..407eb43 100644
-> --- a/meta-networking/recipes-daemons/radvd/radvd_1.9.1.bb
-> +++ b/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
-> @@ -1,9 +1,6 @@
-> -PR = "r1"
-> +PR = "r0"
->
->  require radvd.inc
->
-> -SRC_URI[md5sum] = "e807ad7e9a76d46b6133df391385cd31"
-> -SRC_URI[sha256sum] = "54eb5704a2b710ba946fa30d2bca811fa23b1b3bfab322c38cb0c2a9619aa933"
-> -
-> -SRC_URI += "\
-> -    file://change-scanner-dependency.patch"
-> +SRC_URI[md5sum] = "7a96a38252c3964ee18bbc1fdeae25fa"
-> +SRC_URI[sha256sum] = "645ccf1c9b16e769ff4179813712e580e2c8786d64a888d8afa1e296c057c1c1"
-> --
-> 1.8.1.2
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+Thanks...
 
 -- 
 Otavio Salvador                             O.S. Systems
