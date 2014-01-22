@@ -1,38 +1,37 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C0D96B389
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 044306E786
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:34:10 +0000 (UTC)
-Received: by mail-ob0-f181.google.com with SMTP id va2so481848obc.40
+	Wed, 22 Jan 2014 14:35:25 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id va2so485465obc.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:34:11 -0800 (PST)
+	Wed, 22 Jan 2014 06:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:cc:content-type;
-	bh=PljVeV0OHnln2DRhVVjAsKrlsznxVD60NSa+VS6OMFE=;
-	b=euglZFMrBQoyXx/FAQFgvrNXu9X11R3YHZIQYUZ1X3cIIxsgFUbbnutBG3VYS/pPJz
-	iv5PTn0DRHxnz+I3btOajP++5DY5hM14myu8GHZHeGLMHVTQh/DjbAlO8l1T2j54lVro
-	V8+o6860+qdNVX7OBGfY3t8E3XZxHu+B3HynYvDtGMHhjWjx20ZCa4OO1dI1s4lGypih
-	nzrLZfUmM2iGehLEINxFEHfOEx/8lZIG0qHLvq3cJFjCiBgwDf4kbOz1aJcL8ocfsiBr
-	MC9irVS7c/8pOL2cSzjSMeGhyMttA9vzIP51ZPYp4v19HbCf0KEzF+i5m+/CzjH748e5
-	wGPg==
+	bh=0nZalDgxGDlNPPyexEDKatqwqxXhe+l8+X+8TkGs+iY=;
+	b=YNsRN9M+RuSwNghmkx5XI0ROvK22cR4KsnquMXmaGBibejau5M5fNAnifEJfYwVDfE
+	90vEWuey0AC1NdSpzmkD3hHypGkmvYwxX9ueiyrHiC/XG1gEtrxpwSA7BE66YztIYqAp
+	VcMKIs5fVC2wKD5aQPOWy3b4QT6zHkbrrcm6+kLdtNwoFaQfa8cUFDp6OJNbW7NOApi9
+	tSFyBdA9cIsVxilKZ8jhSipjBk7tzy3Myeqc/FcUqQVbbUung8GOV9BYijyN1XHlP2gA
+	1lrk7dXczw0kiIm2cYu4Oiu2d1LS25NL6H6ma4G5A8GWeaP/hyZc8SIHudRjmu7ll9oX
+	yKTA==
 MIME-Version: 1.0
-X-Received: by 10.182.233.77 with SMTP id tu13mr1549931obc.58.1390401251141;
-	Wed, 22 Jan 2014 06:34:11 -0800 (PST)
+X-Received: by 10.60.56.70 with SMTP id y6mr1581325oep.32.1390401327007; Wed,
+	22 Jan 2014 06:35:27 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:34:11 -0800 (PST)
-In-Reply-To: <CAP9ODKqBucf99MSJphErZw1dsu6CKqGTQzxXrGSVxQbanJ8iSQ@mail.gmail.com>
-References: <cover.1389979930.git.paul.eggleton@linux.intel.com>
-	<d81dfc5a3416ffd765d53e5ea4089b7f2018d94f.1389979930.git.paul.eggleton@linux.intel.com>
-	<CAP9ODKqBucf99MSJphErZw1dsu6CKqGTQzxXrGSVxQbanJ8iSQ@mail.gmail.com>
-Date: Wed, 22 Jan 2014 12:34:11 -0200
-X-Google-Sender-Auth: HyxFHnDnrUPd99wDJ1wuIuWiXSg
-Message-ID: <CAP9ODKqdORh5PieRD6-uWB0zpnV1t_H3G0qoA_PuthakCZQ6OA@mail.gmail.com>
+Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:35:26 -0800 (PST)
+In-Reply-To: <1688777.CYGoEHJ1ll@leo>
+References: <1390302526-3333-1-git-send-email-koen@dominion.thruhere.net>
+	<1688777.CYGoEHJ1ll@leo>
+Date: Wed, 22 Jan 2014 12:35:26 -0200
+X-Google-Sender-Auth: HmB6uBg18FQQLQayEJDcLfUIvas
+Message-ID: <CAP9ODKrEm_WCLnx2quebWu8rrpnGbvjXKp9Vn5_8c_J1unhMwg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Bruce Ashfield <bruce.ashfield@windriver.com>
-Subject: Re: [meta-filesystems][PATCH 1/1] aufs-util: add new recipe
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-initramfs][PATCHv2] dracut: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:34:10 -0000
+X-List-Received-Date: Wed, 22 Jan 2014 14:35:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Jan 22, 2014 at 12:31 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Fri, Jan 17, 2014 at 3:36 PM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
->> Introducing the aufs-util target recipe. This would be used in
->> conjuction with the aufs kernel feature to provide union mounts suitable
->> for live boot applications.
+On Tue, Jan 21, 2014 at 4:29 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tuesday, January 21, 2014 12:08:46 PM Koen Kooi wrote:
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
 >>
->> Only the target binaries are currently packages, with man pages,
->> libraries and other artifacts skipped in this initial integration.
+>> Changes since v1:
+>>       Fix PV
 >>
->> (Integration work done by Bruce Ashfield <bruce.ashfield@windriver.com>
->> and Chen Qi <Qi.Chen@windriver.com> .)
+>> To make it work properly in systemd mode you'll need
+>> http://patches.openembedded.org/patch/65317/ as well.
 >>
->> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
->> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>  ...-xz-lzma-option-to-use-all-cores-for-mult.patch |   39
+>> +++++++++++++++++++ .../recipes-devtools/dracut/dracut_git.bb          |
+>> 40 ++++++++++++++++++++ 2 files changed, 79 insertions(+)
+>>  create mode 100644
 >
->
-> Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+> recipes-devtools does not sound appropriate location maybe recipes-core is
+> better ?
 
-Too early ... I read Martin and Koen comments and I missed those
-improvements. So please ignore my 'review'.
+I am not sure this is 'core'; maybe 'recipes-support'?
 
 -- 
 Otavio Salvador                             O.S. Systems
