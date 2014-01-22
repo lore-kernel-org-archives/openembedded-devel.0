@@ -1,37 +1,46 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
-	[209.85.219.48])
-	by mail.openembedded.org (Postfix) with ESMTP id C381460017
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 038526B389
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 14:26:47 +0000 (UTC)
-Received: by mail-oa0-f48.google.com with SMTP id l6so492876oag.21
+	Wed, 22 Jan 2014 14:27:46 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id b13so376382wgh.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 06:26:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=W7iOc2FT5Ip8XpB2D57JCuwlE9D1QJuNl5uBgbQ2Gjw=;
-	b=u7KIkxMelmv3AAk6aeVKQBljHo1/ArnbBLkrje1Ro1f0EqiYArmYcaQgYG8ikMwkJC
-	K3tzktEHDTSO2wDG6Ktq5gQ8obIwfyVBIARjZ4NLMzJZLKbNuXlimu6rDXkbMuNKqK/4
-	UlIKYh+tWipk9Y4Fpj9qiv7BCKN6OjA73lbWrEn1F+uJz3RAUpY6L6b74TEF2gbV+jSX
-	3Iy+sEORjOy6SdLqM7SiRbAVgRaKLukbbD41KW7g90P/gcJ7QKKyvqY1MfQvuq+1ar+c
-	t4umeRPLkw8ClpAEe8VW9gkY6SqpbZ0JXZtsIfLoQYBratw79xsGUNaXbvcmryjwkxpq
-	TIXA==
+	Wed, 22 Jan 2014 06:27:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=Rpn6W+YbAxjzQpTvrDFPZUcTM2vPpAxrGvAX2HoTpgU=;
+	b=OZ5CkCsffx5GruvpOmKKMrFuKyAC+DamBd8vY/ieqYLu/Q/knKAvFOEKWTubZr8NfY
+	MfHNFVO9ilDNPdW06ucgCF/WrcPA4q8l1B3LLczl9J0ABTlbIqGnFkeNSNjEhWwchCH9
+	7PXKe10Jf3EoXx+tdpO8o0vrGZKbKQcSDAlEfhqDWBCOPPZxgUnECZ5h/b8jSA0usaB5
+	K/4ZT29w/6qSpS8+rlOArX6O7A4p1m2REwTl6yTppPnvW5a+2GlyoBuzVlA2PdneRmkf
+	IygQw3NtthA/BtZUk7xxEN5lE8VeDZLPmnNCq9WCaBS4IlM9TLPofk4/RaSiQP9n8kRT
+	IM7g==
+X-Gm-Message-State: ALoCoQmxejfvKEh1tdNjhHTg1wMtH7sqiJjcvfaXas0GoX1b1TborGTh4WlSYq9d3ukY60czdf1u
+X-Received: by 10.180.19.35 with SMTP id b3mr20319044wie.20.1390400866884;
+	Wed, 22 Jan 2014 06:27:46 -0800 (PST)
+Received: from ?IPv6:2001:610:612:0:5e51:4fff:fec8:7c15?
+	([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id po3sm15217728wjc.3.2014.01.22.06.27.45
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 22 Jan 2014 06:27:46 -0800 (PST)
+Message-ID: <52DFD561.7030505@linaro.org>
+Date: Wed, 22 Jan 2014 15:27:45 +0100
+From: Koen Kooi <koen.kooi@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.182.114.132 with SMTP id jg4mr1481783obb.29.1390400808573;
-	Wed, 22 Jan 2014 06:26:48 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Wed, 22 Jan 2014 06:26:48 -0800 (PST)
-In-Reply-To: <1390239757-27055-2-git-send-email-Martin.Jansa@gmail.com>
-References: <cover.1389805976.git.Martin.Jansa@gmail.com>
-	<1390239757-27055-1-git-send-email-Martin.Jansa@gmail.com>
-	<1390239757-27055-2-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 22 Jan 2014 12:26:48 -0200
-X-Google-Sender-Auth: ChbIhypE1cohX0Q5Rr7LYyfeVyc
-Message-ID: <CAP9ODKrOWFyLn-JRDpC-K+ewEQws+yVB8N79mC+h3esE6uP_dg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/4] efl: Adjust packaging to match more with old 1.7 separate recipes
+To: Otavio Salvador <otavio@ossystems.com.br>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Martin Jansa <martin.jansa@gmail.com>
+References: <1389965698-5352-1-git-send-email-ml@communistcode.co.uk>
+	<CAP9ODKr63fqJWSAV8DxGySTD+ctjr=yfRbsUDA5H2Ui820AV5Q@mail.gmail.com>
+In-Reply-To: <CAP9ODKr63fqJWSAV8DxGySTD+ctjr=yfRbsUDA5H2Ui820AV5Q@mail.gmail.com>
+Cc: Jack Mitchell <jack@embed.me.uk>
+Subject: Re: [meta-oe][PATCHv3] libsoc: update to 0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,22 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 14:26:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 22 Jan 2014 14:27:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 20, 2014 at 3:42 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * it improves upgrade-path, it's not perfect and I was testing it only on
->   my SHR images which include lot of efl stuff, but not all, so some packages
->   can still be a bit different
+On 01/22/2014 03:16 PM, Otavio Salvador wrote:
+> On Fri, Jan 17, 2014 at 11:34 AM, Jack Mitchell <ml@communistcode.co.uk> wrote:
+>> From: Jack Mitchell <jack@embed.me.uk>
+>>
+>> Signed-off-by: Jack Mitchell <jack@embed.me.uk>
 >
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> Could this be backported to Dora branch as well?
 
-Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+That's OK by my, can you send a backport patch so Martin and I have less 
+trouble keeping track of the backports?
 
-Gosh, this is ugly ...
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Koen Kooi
+Builds and Baselines | Release Manager
+Linaro.org | Open source software for ARM SoCs
 
