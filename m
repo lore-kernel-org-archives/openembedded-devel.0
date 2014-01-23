@@ -1,37 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-bk0-f43.google.com (mail-bk0-f43.google.com
-	[209.85.214.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 057CF6B05F
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.103])
+	by mail.openembedded.org (Postfix) with ESMTP id BCAED6B05F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 15:32:41 +0000 (UTC)
-Received: by mail-bk0-f43.google.com with SMTP id mx11so440959bkb.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 07:32:42 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8toY4xNGPdMSYEmbWNOdnr+XGZ2tn8AmwfGcrg+CTWs=;
-	b=hSXl/oDAzupAWzotd0NRNiWZU4YsJjvPPcDelJjir/yeWAE+XsmgCvNH411gEE0ihL
-	S/xR8MrrS6CsOgVDT1IJgeWFjOR0/3VS25ciPYs9TJ2mUDeNAkj7yQxyPB1KLxJYEoFJ
-	1lcTjD9jw55tc2B2cDcSeHLhBlTK0QiNFkOW6eeM0a4m29UZEay7L/kHcBJt+E9Gu9po
-	djw8ceG5P+FoK8JgoboK4fOE2DMU+NM7rxXGD1wOnDP+wSw1KN30n2Jqa5UkcHJLY8g4
-	4yT3oHIpw8atltBLCVrb1k/Br4aM37durakRe1xTsbCtt1oZNiXli/F5kgdKK4pLb83T
-	7BFw==
-X-Gm-Message-State: ALoCoQlCvTk3dc3uAGienKxlq+FoEkAyOH/8sjfHLD/JmUVtbR1/g2eL+nH0Jhlpv+nqi24oH02o
-X-Received: by 10.205.97.6 with SMTP id ci6mr701896bkc.153.1390491161913;
-	Thu, 23 Jan 2014 07:32:41 -0800 (PST)
-Received: from localhost ([2001:610:612:0:21f:c6ff:feaa:c5fb])
-	by mx.google.com with ESMTPSA id s9sm9417876bkg.15.2014.01.23.07.32.40
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
-	Thu, 23 Jan 2014 07:32:40 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jan 2014 16:32:28 +0100
-Message-Id: <1390491148-20966-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.7.10
-Cc: Koen Kooi <koen@dominion.thruhere.net>, mporter@linaro.org
-Subject: [meta-oe][PATCH] libusbg: add 0.1.0
+	Thu, 23 Jan 2014 15:55:37 +0000 (UTC)
+Received: from [216.82.254.211:58128] by server-7.bemta-7.messagelabs.com id
+	B3/39-27376-A7B31E25; Thu, 23 Jan 2014 15:55:38 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-11.tower-201.messagelabs.com!1390492537!6135695!1
+X-Originating-IP: [66.77.174.13]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 8681 invoked from network); 23 Jan 2014 15:55:37 -0000
+Received: from mail.mx1.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
+	by server-11.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
+	23 Jan 2014 15:55:37 -0000
+Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx1.digi.com
+	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Thu, 23 Jan 2014 09:55:38 -0600
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH03.digi.com
+	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Thu, 23 Jan 2014 09:55:36 -0600
+Received: from log-cln-jviguera.digi.com (10.101.2.54) by
+	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
+	8.3.342.0; Thu, 23 Jan 2014 16:55:34 +0100
+From: Javier Viguera <javier.viguera@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 23 Jan 2014 16:55:33 +0100
+Message-ID: <1390492533-56999-1-git-send-email-javier.viguera@digi.com>
+X-Mailer: git-send-email 1.8.5.2
+MIME-Version: 1.0
+Subject: [meta-oe][master/dora][PATCH] networkmanager: fix incorrect configure option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,37 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2014 15:32:42 -0000
+X-List-Received-Date: Thu, 23 Jan 2014 15:55:38 -0000
+Content-Type: text/plain
 
-This needs a 3.11.x kernel or newer for the configfs stuff.
+The wrong option was breaking the build with:
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+configure: error: invalid package name: systemdsystemunitdir=
+
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
 ---
- meta-oe/recipes-support/libusbg/libusbg_git.bb |   14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-support/libusbg/libusbg_git.bb
+ meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-new file mode 100644
-index 0000000..ed5ac65
---- /dev/null
-+++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "USB Gadget Configfs Library"
-+
-+LICENSE = "GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
-+
-+inherit autotools
-+
-+PV = "0.1.0"
-+SRCREV = "7e2b04363f319e8936a606bdb122dbde249a2f58"
-+SRC_URI = "git://github.com/libusbg/libusbg.git"
-+
-+S = "${WORKDIR}/git"
-+
--- 
-1.7.10
-
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
+index f190dfd8f7bc..fb58f6891e44 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
+@@ -35,7 +35,7 @@ EXTRA_OECONF = " \
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
+ PACKAGECONFIG[systemd] = " \
+     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
+-    --without-systemdsystemunitdir=, \
++    --without-systemdsystemunitdir, \
+     polkit \
+ "
+ # consolekit is not picked by shlibs, so add it to RDEPENDS too
 
