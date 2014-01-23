@@ -1,38 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f53.google.com (mail-oa0-f53.google.com
-	[209.85.219.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CD366E7D7
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-bk0-f43.google.com (mail-bk0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 057CF6B05F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 10:42:26 +0000 (UTC)
-Received: by mail-oa0-f53.google.com with SMTP id m1so1863949oag.26
+	Thu, 23 Jan 2014 15:32:41 +0000 (UTC)
+Received: by mail-bk0-f43.google.com with SMTP id mx11so440959bkb.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 02:42:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=dUPb4okIZQ3mO97qHdrts/99plZ379WYRoU8QDu0Fiw=;
-	b=zbIZsTbg2a+E1KVlQ/zWLasqWepLcCtfF6aKhCUbHA/14UcmUhdUZUQ7chmZ6xBQgR
-	ncb7DREHOumTBhwzi/DNf7Os823d6rAgUZgsaD8HP0Kp1xOMgWxiIZPAF3l3Y75/nRyE
-	EwvFRROgfZRcfrhpqFOU3yWO8qcxiUsKPdIm23ha6FcGUxsxyjzXBdL5GB0x00f7x9c5
-	Fzu5rsZcl7ZU3DfPTLK/EmIGtMEpfqq4dX37e6Gd+d/2ETuR6RHW8SaqbVYXT4BeYGP9
-	776mrLq0dsPZlu9elmrXWK/idKgkCn7wDKOztXP0F6sOaRq24a6p31z9PwRaOvVEOAQg
-	sf5w==
-MIME-Version: 1.0
-X-Received: by 10.60.119.70 with SMTP id ks6mr2156040oeb.45.1390473747022;
-	Thu, 23 Jan 2014 02:42:27 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Thu, 23 Jan 2014 02:42:26 -0800 (PST)
-In-Reply-To: <lbqp0j$b55$2@ger.gmane.org>
-References: <1390332748-31444-1-git-send-email-koen@dominion.thruhere.net>
-	<CAJTo0LZOjUDhRCN7QPHwPckvDxzbvOWwEb3iT7ZRdnWwD3zZew@mail.gmail.com>
-	<CAP9ODKr+d8tG=XUsAR=btn3=vfetvQusu=oid-bCkPGonmGXsw@mail.gmail.com>
-	<lbqp0j$b55$2@ger.gmane.org>
-Date: Thu, 23 Jan 2014 08:42:26 -0200
-X-Google-Sender-Auth: xgbi88n93dhSIjac137_GRbVeEQ
-Message-ID: <CAP9ODKqPQ+NU1rYPGvtSAYaiMbqzOoSv4xFoFJ8ZoVMiR+8mYQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] xf86-video-ati: recommend linux-firmware
+	Thu, 23 Jan 2014 07:32:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8toY4xNGPdMSYEmbWNOdnr+XGZ2tn8AmwfGcrg+CTWs=;
+	b=hSXl/oDAzupAWzotd0NRNiWZU4YsJjvPPcDelJjir/yeWAE+XsmgCvNH411gEE0ihL
+	S/xR8MrrS6CsOgVDT1IJgeWFjOR0/3VS25ciPYs9TJ2mUDeNAkj7yQxyPB1KLxJYEoFJ
+	1lcTjD9jw55tc2B2cDcSeHLhBlTK0QiNFkOW6eeM0a4m29UZEay7L/kHcBJt+E9Gu9po
+	djw8ceG5P+FoK8JgoboK4fOE2DMU+NM7rxXGD1wOnDP+wSw1KN30n2Jqa5UkcHJLY8g4
+	4yT3oHIpw8atltBLCVrb1k/Br4aM37durakRe1xTsbCtt1oZNiXli/F5kgdKK4pLb83T
+	7BFw==
+X-Gm-Message-State: ALoCoQlCvTk3dc3uAGienKxlq+FoEkAyOH/8sjfHLD/JmUVtbR1/g2eL+nH0Jhlpv+nqi24oH02o
+X-Received: by 10.205.97.6 with SMTP id ci6mr701896bkc.153.1390491161913;
+	Thu, 23 Jan 2014 07:32:41 -0800 (PST)
+Received: from localhost ([2001:610:612:0:21f:c6ff:feaa:c5fb])
+	by mx.google.com with ESMTPSA id s9sm9417876bkg.15.2014.01.23.07.32.40
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
+	Thu, 23 Jan 2014 07:32:40 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Jan 2014 16:32:28 +0100
+Message-Id: <1390491148-20966-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+Cc: Koen Kooi <koen@dominion.thruhere.net>, mporter@linaro.org
+Subject: [meta-oe][PATCH] libusbg: add 0.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,34 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2014 10:42:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 23 Jan 2014 15:32:42 -0000
 
-On Thu, Jan 23, 2014 at 7:57 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Otavio Salvador schreef op 22-01-14 15:36:
->> On Tue, Jan 21, 2014 at 6:21 PM, Burton, Ross <ross.burton@intel.com>
->> wrote:
->>> On 21 January 2014 19:32, Koen Kooi <koen@dominion.thruhere.net>
->>> wrote:
->>>> Technically it won't work without, but it's possible to build the
->>>> firmware into the kernel, so use RRECOMMENDS.
->>>
->>> A blanket recommendation like that seems like you should be splitting
->>> the relevant firmware into a separate package first.
->>
->> Agreed; this helps to reduce the footprint increase from this change.
->
-> http://patches.openembedded.org/patch/65573/
->
-> I'll send an updated patch for xf86-video-ati after the above lands in oe-core.
+This needs a 3.11.x kernel or newer for the configfs stuff.
 
-Thanks a lot
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-support/libusbg/libusbg_git.bb |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libusbg/libusbg_git.bb
 
+diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+new file mode 100644
+index 0000000..ed5ac65
+--- /dev/null
++++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "USB Gadget Configfs Library"
++
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
++
++inherit autotools
++
++PV = "0.1.0"
++SRCREV = "7e2b04363f319e8936a606bdb122dbde249a2f58"
++SRC_URI = "git://github.com/libusbg/libusbg.git"
++
++S = "${WORKDIR}/git"
++
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.7.10
+
 
