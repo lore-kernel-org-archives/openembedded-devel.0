@@ -1,44 +1,27 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1042C60E7C
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 949C160017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 20:13:58 +0000 (UTC)
-Received: by mail-ob0-f181.google.com with SMTP id va2so1013945obc.12
+	Thu, 23 Jan 2014 05:48:27 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s0N5mTKG024298
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2014 12:14:00 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=NbJzmBUY6kb2c0BtPm6+aIw5dlSULbhZRAOTK4MlxxM=;
-	b=FDK5GMUufxHEAy0Ca4d8r1LKyY2vMbLRt46WWt5P3BnchDSp4RrJ7ig2yS6xvfPH6w
-	5a3OWDIwcqnd2UL3/tUkfcjfs9jQwElIY+xZ/iNmq9FmuUecojr5lkQDnruml8BXzhPZ
-	P/biT+FanK4BV/n7MZDyNHDE4GDuNRuTJ17vWZjE5Q9Wxoqih3nHNOiX/LY5ujC0VnbP
-	tMsA/Bcx0SXMqk0fz5LQgr4/UJeJyqh0TVEV8zWZlg/yfQoFthOEXfLQsz6ZpWgf/xFS
-	y8D5K+hA0PF17mT1OwNvt7+RBT0wAIvNfmLMWr96LQaUncM13iXvb9EKCLWAVtlFMvx2
-	0wVQ==
-X-Gm-Message-State: ALoCoQm6hvg5Vha5A152NrjliBkthjVP9JuEdKJEiwEdsgKHf+kH847xpsVEY+PDOJUcYaCZ/pJG
-X-Received: by 10.182.48.130 with SMTP id l2mr3099645obn.44.1390421639980;
-	Wed, 22 Jan 2014 12:13:59 -0800 (PST)
-Received: from localhost.localdomain (wsip-70-183-20-162.oc.oc.cox.net.
-	[70.183.20.162])
-	by mx.google.com with ESMTPSA id qh4sm15736277obc.4.2014.01.22.12.13.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 22 Jan 2014 12:13:58 -0800 (PST)
-Message-ID: <52E02685.6060003@felipetonello.com>
-Date: Wed, 22 Jan 2014 12:13:57 -0800
-From: Felipe Ferreri Tonello <eu@felipetonello.com>
+	Wed, 22 Jan 2014 21:48:29 -0800 (PST)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.2.347.0;
+	Wed, 22 Jan 2014 21:48:28 -0800
+Message-ID: <52E0AD1C.6060802@windriver.com>
+Date: Thu, 23 Jan 2014 13:48:12 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1387232705-18081-1-git-send-email-eu@felipetonello.com>	<52E00310.4000808@felipetonello.com>
-	<20140122180208.GW4100@jama>
-In-Reply-To: <20140122180208.GW4100@jama>
-Subject: Re: [PATCH v2] packagekit: Updated to 0.8.13
+To: <openembedded-devel@lists.openembedded.org>
+References: <1390391045-16689-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1390391045-16689-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [meta-filesystems][PATCHv2] yaffs2-utils: Fix formatting, drop PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,48 +35,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2014 20:13:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 23 Jan 2014 05:48:27 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Martin
+On 01/22/2014 07:44 PM, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-On 01/22/2014 10:02 AM, Martin Jansa wrote:
-> On Wed, Jan 22, 2014 at 09:42:40AM -0800, Felipe Ferreri Tonello wrote:
->> On 12/16/2013 02:25 PM, Felipe F. Tonello wrote:
->>> From: "Felipe F. Tonello" <eu@felipetonello.com>
->>>
->>> Packagekit will compile support for all backend supported by OE-core. Images
->>> that want to install packagekit should specify its correct backend dependency
->>> as well.
->>>
->>> Ex.: install the following packages to an image that uses rpm:
->>>    * packagekit
->>>    * packagekit-backend-smart
->>>
->>> Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
->>> ---
->>>    ...deprecated-glib-functions-and-use-the-new.patch | 166 --------
->>>    .../packagekit/packagekit-0.5.6/configurefix.patch |  13 -
->>>    .../packagekit/packagekit-0.5.6/opkgfixes.patch    | 422 ---------------------
->>>    .../packagekit/packagekit_0.5.6.bb                 |  62 ---
->>>    .../packagekit/packagekit_0.8.13.bb                |  64 ++++
->>>    5 files changed, 64 insertions(+), 663 deletions(-)
->>>    delete mode 100644 meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/0001-Don-t-call-deprecated-glib-functions-and-use-the-new.patch
->>>    delete mode 100644 meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/configurefix.patch
->>>    delete mode 100644 meta-oe/recipes-devtools/packagekit/packagekit-0.5.6/opkgfixes.patch
->>>    delete mode 100644 meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb
->>>    create mode 100644 meta-oe/recipes-devtools/packagekit/packagekit_0.8.13.bb
->>>
->>
+Reviewed-by: Hongxu Jia <hongxu.jia@windriver.comx>
+
+//Hongxu
+
+> ---
+>   .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb  | 21 +++++++++------------
+>   1 file changed, 9 insertions(+), 12 deletions(-)
 >
-> Looks good to me, I'm just waiting for Koen's ACK as he had some
-> comments before.
->
+> diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+> index 2b7452b..0e1e460 100644
+> --- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+> +++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+> @@ -1,38 +1,35 @@
+>   SUMMARY = "Yet Another Flash File System"
+> -
+>   DESCRIPTION = "Tools for managing 'yaffs2' file systems."
+>   
+>   SECTION = "base"
+>   HOMEPAGE = "http://www.yaffs.net"
+> +
+>   LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://utils/mkyaffs2image.c;beginline=12;endline=14;md5=5f5464f9b3e981ca574e65b00e438561"
+>   
+> -PR = "r0"
+>   PV = "0.0+git${SRCPV}"
+>   
+>   DEPENDS = "mtd-utils"
+> -S = "${WORKDIR}/git"
+>   
+>   # Source is the HEAD of master branch at the time of writing this recipe
+> -SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
+> -          "
+> +SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master"
+>   SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
+> -
+> -LIC_FILES_CHKSUM = "file://utils/mkyaffs2image.c;beginline=12;endline=14;md5=5f5464f9b3e981ca574e65b00e438561"
+> +S = "${WORKDIR}/git"
+>   
+>   CFLAGS_append = " -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES"
+>   
+>   do_compile() {
+> -	cd utils && oe_runmake
+> +    cd utils && oe_runmake
+>   }
+>   
+>   INSTALL_FILES = "mkyaffsimage \
+>                    mkyaffs2image \
+>                   "
+>   do_install() {
+> -	install -d ${D}${sbindir}/
+> -	for i in ${INSTALL_FILES}; do
+> -		install -m 0755 utils/$i ${D}${sbindir}/
+> -	done
+> +    install -d ${D}${sbindir}/
+> +    for i in ${INSTALL_FILES}; do
+> +        install -m 0755 utils/$i ${D}${sbindir}/
+> +    done
+>   }
+>   
+>   BBCLASSEXTEND = "native"
 
-It seems that is crashing because of python-apt.
-
-I will have to check this later.
-
-Felipe
 
