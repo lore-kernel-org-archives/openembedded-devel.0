@@ -1,36 +1,35 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 6593E6CBB2
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 79A8B6B05F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 09:22:06 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id l18so1218377wgh.29
+	Thu, 23 Jan 2014 09:55:33 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1W6H0W-00080y-GW for openembedded-devel@lists.openembedded.org;
+	Thu, 23 Jan 2014 10:55:32 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jan 2014 10:55:32 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 01:22:06 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RX/vlAlLoFZFG2zC95Xf3FKi6ys6TA0xxPP6rSZsUu0=;
-	b=YargsA947f+0E5tdT/cAKx92MeVrZjmP9hxQok7ITfGbZRAg6CsE6z5pLTRCOeoX2W
-	7MZIRSBFAqcPXmeLot8Y7wSX7DZh4XN3rac5IPcUDA5SB/lVmGS9Y4qozYi5cyQBjs32
-	02kv0NyevFC4vNbXXnjpdX9wskkWU4mIJgET9MwQT5ahsx7blMxN2HpGrUoXv+dwUiHv
-	h5UKgB3V77EO9jieQnK6h9aReGbdYTKs5VmQ/XUAmJCE0JJCJlYpyZpPPuoZoaRmjWcw
-	DvOYbUH4THcEdZ1sz+7yEnXO2HmunNCn5RyDo9trbOCMUv2YATKhjc8mBNT9kW4nr/UF
-	Jk8g==
-X-Gm-Message-State: ALoCoQnprz9mgCf+mr8EFBff5fgO3gYLzS6SLx1rNRBWsWvH8soiRHi2oz1SsTDoxpLYxoQ8+8/P
-X-Received: by 10.195.13.113 with SMTP id ex17mr5948841wjd.0.1390468926871;
-	Thu, 23 Jan 2014 01:22:06 -0800 (PST)
-Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id eo4sm25993040wib.9.2014.01.23.01.22.05
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 Jan 2014 01:22:06 -0800 (PST)
-From: Koen Kooi <koen.kooi@linaro.org>
+	Thu, 23 Jan 2014 10:55:32 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jan 2014 10:22:02 +0100
-Message-Id: <1390468922-32245-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.8.4.2
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] libhugetlbfs: ensure package strip logic stays the same after oe-core package.bbclass changes
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 23 Jan 2014 10:56:03 +0100
+Message-ID: <lbqotu$b55$1@ger.gmane.org>
+References: <1390302526-3333-1-git-send-email-koen@dominion.thruhere.net>	<1688777.CYGoEHJ1ll@leo>	<CAP9ODKrEm_WCLnx2quebWu8rrpnGbvjXKp9Vn5_8c_J1unhMwg@mail.gmail.com>	<CAMKF1sru7FBY7o5guup7zvHD6BxJzkvav+DRqSzoe9t+KTnyJA@mail.gmail.com>
+	<CAP9ODKpY8vTBn1uvs6umJsnfvf85hYHSF_UFG1KcR_p=ahXFqg@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+In-Reply-To: <CAP9ODKpY8vTBn1uvs6umJsnfvf85hYHSF_UFG1KcR_p=ahXFqg@mail.gmail.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-initramfs][PATCHv2] dracut: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,26 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2014 09:22:06 -0000
+X-List-Received-Date: Thu, 23 Jan 2014 09:55:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-See http://patches.openembedded.org/patch/65311/
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+Otavio Salvador schreef op 22-01-14 18:26:
+> On Wed, Jan 22, 2014 at 3:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Wed, Jan 22, 2014 at 6:35 AM, Otavio Salvador 
+>> <otavio@ossystems.com.br> wrote:
+>>> I am not sure this is 'core'; maybe 'recipes-support'?
+>> 
+>> 
+>> well we are in initramfs layer and dracut could be a core recipe for 
+>> initramfs layer
+> 
+> Ok; agreed.
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 41fd0bd..5d0963c 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -47,4 +47,5 @@ FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhuget
- FILES_${PN}-perl = "${libdir}/perl"
- FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
- 
-+INHIBIT_PACKAGE_STRIP = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--- 
-1.8.4.2
+I'll send a new patch for that soon.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFS4OczMkyGM64RGpERApRoAKC5MEwEuI3vdh7FN17Y2qi48vD9AQCgkYPK
+u3CEw87X2dR2NJw6us9bhoQ=
+=QQ2J
+-----END PGP SIGNATURE-----
 
 
