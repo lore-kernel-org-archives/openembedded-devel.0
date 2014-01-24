@@ -1,37 +1,14 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
-	[216.82.254.103])
-	by mail.openembedded.org (Postfix) with ESMTP id BCAED6B05F
+Return-Path: <obi@opendreambox.org>
+Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 267B06A35B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2014 15:55:37 +0000 (UTC)
-Received: from [216.82.254.211:58128] by server-7.bemta-7.messagelabs.com id
-	B3/39-27376-A7B31E25; Thu, 23 Jan 2014 15:55:38 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-11.tower-201.messagelabs.com!1390492537!6135695!1
-X-Originating-IP: [66.77.174.13]
-X-StarScan-Received: 
-X-StarScan-Version: 6.9.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8681 invoked from network); 23 Jan 2014 15:55:37 -0000
-Received: from mail.mx1.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
-	by server-11.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
-	23 Jan 2014 15:55:37 -0000
-Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx1.digi.com
-	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Thu, 23 Jan 2014 09:55:38 -0600
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH03.digi.com
-	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Thu, 23 Jan 2014 09:55:36 -0600
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
-	8.3.342.0; Thu, 23 Jan 2014 16:55:34 +0100
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 23 Jan 2014 16:55:33 +0100
-Message-ID: <1390492533-56999-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 1.8.5.2
-MIME-Version: 1.0
-Subject: [meta-oe][master/dora][PATCH] networkmanager: fix incorrect configure option
+	Fri, 24 Jan 2014 00:03:01 +0000 (UTC)
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Jan 2014 01:02:55 +0100
+Message-Id: <1390521775-32420-1-git-send-email-obi@opendreambox.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-qt5][PATCH] cmake-native: disable test for Qt5Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +22,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2014 15:55:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 24 Jan 2014 00:03:02 -0000
 
-The wrong option was breaking the build with:
+Fixes the same build error as 671313d, but for the -native recipe.
 
-configure: error: invalid package name: systemdsystemunitdir=
-
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../cmake/cmake-native_2.8.12.1.bbappend             | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-index f190dfd8f7bc..fb58f6891e44 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.0.bb
-@@ -35,7 +35,7 @@ EXTRA_OECONF = " \
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
- PACKAGECONFIG[systemd] = " \
-     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
--    --without-systemdsystemunitdir=, \
-+    --without-systemdsystemunitdir, \
-     polkit \
- "
- # consolekit is not picked by shlibs, so add it to RDEPENDS too
+diff --git a/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend b/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
+new file mode 100644
+index 0000000..ebacf72
+--- /dev/null
++++ b/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
+@@ -0,0 +1,20 @@
++# Ugly hack to work around undefined OE_QMAKE_PATH_EXTERNAL_HOST_BINS variable
++# and possibly missing qmake binary (qtbase-native can be removed from sysroot
++# e.g. in order to upgrade it, even when there is target qtbase)
++
++#| -- Performing Test run_pic_test - Success
++#| CMake Error at tmp-eglibc/sysroots/qemuarm/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:27 (message):
++#|   The imported target "Qt5::Core" references the file
++#|
++#|      "/qmake"
++#|
++#|   but this file does not exist.  Possible reasons include:
++
++do_configure_prepend() {
++    sed -i 's/^find_package(Qt5Core QUIET)$/#find_package(Qt5Core QUIET)/g' ${S}/Tests/RunCMake/CMakeLists.txt
++    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/RunCMake/IncompatibleQt/IncompatibleQt.cmake
++    sed -i 's/^  find_package(Qt5Widgets REQUIRED)/#  find_package(Qt5Widgets REQUIRED)/g' ${S}/Tests/QtAutomoc/CMakeLists.txt
++    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/Qt4And5Automoc/CMakeLists.txt
++    sed -i 's/^  find_package(Qt5Widgets QUIET NO_MODULE)/#  find_package(Qt5Widgets QUIET NO_MODULE)/g' ${S}/Tests/CMakeLists.txt
++    sed -i 's/^find_package(Qt5Widgets QUIET)/#find_package(Qt5Widgets QUIET)/g' ${S}/Source/QtDialog/CMakeLists.txt
++}
+-- 
+1.8.3.2
+
 
