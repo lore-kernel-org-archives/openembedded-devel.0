@@ -1,34 +1,23 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 584066E721
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2014 10:38:54 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1W6e9z-0006Km-EG for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Jan 2014 11:38:51 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2014 11:38:51 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2014 11:38:51 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 24 Jan 2014 11:40:07 +0100
-Message-ID: <lbtfr4$a1r$1@ger.gmane.org>
-References: <1390492533-56999-1-git-send-email-javier.viguera@digi.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <1390492533-56999-1-git-send-email-javier.viguera@digi.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][master/dora][PATCH] networkmanager: fix incorrect configure option
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A3666B05F;
+	Fri, 24 Jan 2014 19:07:15 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 24 Jan 2014 11:06:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,714,1384329600"; d="scan'208";a="470374203"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.123.57])
+	by fmsmga002.fm.intel.com with ESMTP; 24 Jan 2014 11:06:56 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Jan 2014 19:06:55 +0000
+Message-ID: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.11.5 (Linux/3.12.8-300.fc20.x86_64; KDE/4.11.5; x86_64; ; )
+MIME-Version: 1.0
+Subject: FOSDEM 2014
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,29 +31,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2014 10:38:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Jan 2014 19:07:16 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi folks,
 
-Javier Viguera schreef op 23-01-14 16:55:
-> The wrong option was breaking the build with:
-> 
-> configure: error: invalid package name: systemdsystemunitdir=
-> 
-> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+As previously discussed, OpenEmbedded will be present at FOSDEM this year in 
+Brussels in a week's time:
 
-Acked-by: Koen Kooi <koen@dominion.thruhere.net>
+https://fosdem.org/2014/
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+If you will be at the conference, please add yourself to the appropriate 
+section on the following wiki page (or ask me to if you have trouble editing):
 
-iD8DBQFS4kMHMkyGM64RGpERArZLAJ4xWt95oDCd6oyV87wjjsywVg2ryQCfazyd
-+VeA8Y8GJAftIWIc7rnz4Go=
-=SCDi
------END PGP SIGNATURE-----
+http://openembedded.org/wiki/FOSDEM_2014
 
+We're still keen to have people bring hardware running OE to show off at the 
+booth (and folks willing to stand behind the booth and talk to people about 
+OE). We have two tables this year so there should be plenty of room :)
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
