@@ -1,14 +1,38 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 267B06A35B
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f46.google.com (mail-oa0-f46.google.com
+	[209.85.219.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 4548D600AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2014 00:03:01 +0000 (UTC)
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Jan 2014 01:02:55 +0100
-Message-Id: <1390521775-32420-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-qt5][PATCH] cmake-native: disable test for Qt5Core
+	Fri, 24 Jan 2014 00:38:34 +0000 (UTC)
+Received: by mail-oa0-f46.google.com with SMTP id n16so3027280oag.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jan 2014 16:38:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=UrzLEsW4pbhOKrSh6sGuiHSaAMnkB5P672kktDcDiTI=;
+	b=i7OmHXDd/24du3y29oHzJfWDdkMCwR0ZUHJb9e4YXbAQNZ3x2FoNvNJoGbaDWM0e5s
+	tikT7wHy0S3MasK4izc65sSZlzN//rBaBPKOgkbPtRAq5Pj8lNDlX8IRgrww5FDzRDu0
+	ncLBl2mr60LK8jwLnn6xcWPur8VXTCV6jZ0f5EKvpOP4FXdpOSiQ3y3ArgVz0EhNHMpc
+	ESFlbRBTOfW7a471/q9djWD+GIndJNQDoGGaR53429GH80ryMeWgN05mE8rzO6+wTmk9
+	sob73QxqSMaxyfneaKiJt+NI/7Iy0oojuLu2Qloj8VVlfPIkaskWGbm/YQyexJWqABx8
+	z2eA==
+X-Gm-Message-State: ALoCoQkzuian0c+W8uGijnX9fqMVXfO9umEBGzjQYcU7wNTtpScIacFpvw6UoscVl5DE4aQ2ICKH
+X-Received: by 10.60.96.167 with SMTP id dt7mr112356oeb.66.1390523915064; Thu,
+	23 Jan 2014 16:38:35 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.76.182.99 with HTTP; Thu, 23 Jan 2014 16:38:14 -0800 (PST)
+In-Reply-To: <2040901.xScSF211cV@nirvana>
+References: <CAP71WjydArvSEYRdK0NRWs5tTS_KuYBjZena8nas9eE0tHbv6g@mail.gmail.com>
+	<20140116235245.GK3742@jama>
+	<CAP71Wjw=izSkOfwTHpLG_OZpX=4tUHeKgiZboT-2rg3jStNYog@mail.gmail.com>
+	<2040901.xScSF211cV@nirvana>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 24 Jan 2014 01:38:14 +0100
+Message-ID: <CAP71WjxnP9N+S9UMzXd=hMQu3w8ckcvrvdp8P8FA-5dN--9EWg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: qt5 and virtualbox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -22,43 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2014 00:03:02 -0000
+X-List-Received-Date: Fri, 24 Jan 2014 00:38:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Fixes the same build error as 671313d, but for the -native recipe.
+Simon,
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../cmake/cmake-native_2.8.12.1.bbappend             | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
+On Fri, Jan 17, 2014 at 6:51 PM, Simon Busch <morphis@gravedo.de> wrote:
+> Thanks a lot! We're building currently three different target machines (one is
+> qemux86 based and for virtualbox) from the same tree and it's working very
+> well :) Every target has the same core system with just some changed runtime
+> configuration.
+>
+> If you have any questions about how to configure the setup feel free to ask :)
 
-diff --git a/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend b/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
-new file mode 100644
-index 0000000..ebacf72
---- /dev/null
-+++ b/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
-@@ -0,0 +1,20 @@
-+# Ugly hack to work around undefined OE_QMAKE_PATH_EXTERNAL_HOST_BINS variable
-+# and possibly missing qmake binary (qtbase-native can be removed from sysroot
-+# e.g. in order to upgrade it, even when there is target qtbase)
-+
-+#| -- Performing Test run_pic_test - Success
-+#| CMake Error at tmp-eglibc/sysroots/qemuarm/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:27 (message):
-+#|   The imported target "Qt5::Core" references the file
-+#|
-+#|      "/qmake"
-+#|
-+#|   but this file does not exist.  Possible reasons include:
-+
-+do_configure_prepend() {
-+    sed -i 's/^find_package(Qt5Core QUIET)$/#find_package(Qt5Core QUIET)/g' ${S}/Tests/RunCMake/CMakeLists.txt
-+    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/RunCMake/IncompatibleQt/IncompatibleQt.cmake
-+    sed -i 's/^  find_package(Qt5Widgets REQUIRED)/#  find_package(Qt5Widgets REQUIRED)/g' ${S}/Tests/QtAutomoc/CMakeLists.txt
-+    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/Qt4And5Automoc/CMakeLists.txt
-+    sed -i 's/^  find_package(Qt5Widgets QUIET NO_MODULE)/#  find_package(Qt5Widgets QUIET NO_MODULE)/g' ${S}/Tests/CMakeLists.txt
-+    sed -i 's/^find_package(Qt5Widgets QUIET)/#find_package(Qt5Widgets QUIET)/g' ${S}/Source/QtDialog/CMakeLists.txt
-+}
--- 
-1.8.3.2
+so I was able to replicate a similar config with our distro and custom
+layer (Qt5 apps). that works quite well, i haven't integrated any
+'input' for now, but that will be the next step. and for the record, i
+am using eglfs, not wayland as the backend.
 
+i noticed that you added the vboxguestdrivers in the image, however i
+think i am getting more or less the same behaviour whether i install
+them or not. what do you expect vboxvideo kernel driver to bring?
+
+cheers
 
