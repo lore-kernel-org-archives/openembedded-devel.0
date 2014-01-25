@@ -1,23 +1,25 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A3666B05F;
-	Fri, 24 Jan 2014 19:07:15 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 24 Jan 2014 11:06:58 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,714,1384329600"; d="scan'208";a="470374203"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.123.57])
-	by fmsmga002.fm.intel.com with ESMTP; 24 Jan 2014 11:06:56 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Jan 2014 19:06:55 +0000
-Message-ID: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.11.5 (Linux/3.12.8-300.fc20.x86_64; KDE/4.11.5; x86_64; ; )
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 326066E83C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Jan 2014 09:41:29 +0000 (UTC)
+Received: from LMUC430092 (unknown [10.242.2.10])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 2CBD340092
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 25 Jan 2014 09:07:11 +0100 (CET)
+From: "Lukas Bulwahn" <lukas.bulwahn@oss.bmw-carit.de>
+To: <openembedded-devel@lists.openembedded.org>
+References: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
+Date: Sat, 25 Jan 2014 10:41:26 +0100
+Message-ID: <00c801cf19b1$9e679cd0$db36d670$@oss.bmw-carit.de>
 MIME-Version: 1.0
-Subject: FOSDEM 2014
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQIjw10K9zzrHNgbmfvdZGNI9jQnSpnr2IJQ
+Subject: Re: FOSDEM 2014
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,31 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2014 19:07:16 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 25 Jan 2014 09:41:30 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: de
 
-Hi folks,
+Hi Paul,
 
-As previously discussed, OpenEmbedded will be present at FOSDEM this year in 
-Brussels in a week's time:
+> 
+> If you will be at the conference, please add yourself to the appropriate
+> section on the following wiki page (or ask me to if you have trouble
+editing):
+> 
 
-https://fosdem.org/2014/
+I will be at FOSDEM 2014 on Saturday and Sunday, and can lend a power
+adapter if there is a general shortage.
+I do not have a wiki account and did not want to go through the work of
+writing a proper description and CV for the registration :)
 
-If you will be at the conference, please add yourself to the appropriate 
-section on the following wiki page (or ask me to if you have trouble editing):
 
-http://openembedded.org/wiki/FOSDEM_2014
+Lukas Bulwahn, BMW Car IT GmbH
 
-We're still keen to have people bring hardware running OE to show off at the 
-booth (and folks willing to stand behind the booth and talk to people about 
-OE). We have two tables this year so there should be plenty of room :)
 
-Cheers,
-Paul
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
