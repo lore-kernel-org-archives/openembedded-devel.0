@@ -1,28 +1,28 @@
 Return-Path: <chase.maupin@ti.com>
 Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by mail.openembedded.org (Postfix) with ESMTP id D8B7A6E831
+	by mail.openembedded.org (Postfix) with ESMTP id 71CA86E831
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2014 15:00:03 +0000 (UTC)
+	Tue, 28 Jan 2014 15:00:26 +0000 (UTC)
 Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0SF04cE024495;
-	Tue, 28 Jan 2014 09:00:04 -0600
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s0SF0Rap024558;
+	Tue, 28 Jan 2014 09:00:27 -0600
 Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0SF03rl007441;
-	Tue, 28 Jan 2014 09:00:04 -0600
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s0SF0RTT008173;
+	Tue, 28 Jan 2014 09:00:27 -0600
 Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE73.ent.ti.com
 	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
-	Tue, 28 Jan 2014 09:00:01 -0600
+	Tue, 28 Jan 2014 09:00:26 -0600
 Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
 	[172.24.170.38])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	s0SExwVf014067;	Tue, 28 Jan 2014 09:00:00 -0600
+	s0SF0NHN015228;	Tue, 28 Jan 2014 09:00:25 -0600
 From: Chase Maupin <chase.maupin@ti.com>
 To: <joshua.vanderpool@raymondcorp.com>,
 	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Jan 2014 08:59:55 -0600
-Message-ID: <1390921195-18862-1-git-send-email-chase.maupin@ti.com>
+Date: Tue, 28 Jan 2014 09:00:21 -0600
+Message-ID: <1390921221-18909-1-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] php: update SRC_URI for new download location
+Subject: [PATCH][for-dora] php: update SRC_URI for new download location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,7 +36,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2014 15:00:05 -0000
+X-List-Received-Date: Tue, 28 Jan 2014 15:00:26 -0000
 Content-Type: text/plain
 
 * The old downloads location of http://www.php.net/distributions
