@@ -1,31 +1,33 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
-	[209.85.216.42])
-	by mail.openembedded.org (Postfix) with ESMTP id A7F386E7DA
+Return-Path: <openembedded@emagii.com>
+Received: from smtprelay-h22.telenor.se (smtprelay-h22.telenor.se
+	[195.54.99.197])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FA9E6E87E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jan 2014 12:10:33 +0000 (UTC)
-Received: by mail-qa0-f42.google.com with SMTP id k4so2309959qaq.29
+	Wed, 29 Jan 2014 12:13:16 +0000 (UTC)
+Received: from ipb5.telenor.se (ipb5.telenor.se [195.54.127.168])
+	by smtprelay-h22.telenor.se (Postfix) with ESMTP id 21076E9467
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jan 2014 04:10:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=yoluXwQCq+CgenD/Ze7BxDEPv+mKS37r06Maee+lAy4=;
-	b=Y5Bkg7lcyFE+MwLcyc08WEmGvJbmlP4gMnoF8eHABMvU1iIaxeqBi09x4l+fl+NViK
-	m4UVgqav6YfmmSjoByQe6QCtSyf42j2SiG+wUlxbz/cxckuwJnfjfHCLFQxa47fzInOH
-	VeW2JcLloMX7KRdEYzIGuGqA3meFzRF1N1IRun2ocQ3AIGaZInmgYWo8pQH0y3mnbUbL
-	Dush7KvQxIFzIxAlteQjalQPm0Mb6XHQwP7zjMMPr9Ro32xGZMWo+E7KhPWdgMibNnL0
-	NDvI1H1V97MQ7kuVNxL4N886BJjeDhx6rVFcbzV9N4bUmp0M8snayM3Raggbha9bRYsm
-	g52Q==
-X-Received: by 10.140.106.225 with SMTP id e88mr10575142qgf.66.1390997434127; 
-	Wed, 29 Jan 2014 04:10:34 -0800 (PST)
+	Wed, 29 Jan 2014 13:13:15 +0100 (CET)
+X-SENDER-IP: [83.227.57.102]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Ah8SAFfv6FJT4zlmPGdsb2JhbAANTINEvVSBGwMBAQEBOIJbAQEEODAQEQshDQEIDwkDAgECATEUEwYCAQGIBgipCKBNF44dEAIBVhIBA4QiBJgogTKUG4FpBw
+X-IPAS-Result: Ah8SAFfv6FJT4zlmPGdsb2JhbAANTINEvVSBGwMBAQEBOIJbAQEEODAQEQshDQEIDwkDAgECATEUEwYCAQGIBgipCKBNF44dEAIBVhIBA4QiBJgogTKUG4FpBw
+X-IronPort-AV: E=Sophos;i="4.95,741,1384297200"; d="scan'208";a="561567268"
+Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.199]) ([83.227.57.102])
+	by ipb5.telenor.se with ESMTP; 29 Jan 2014 13:13:15 +0100
+Message-ID: <52E8F05A.7080604@emagii.com>
+Date: Wed, 29 Jan 2014 13:13:14 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+Organization: eMagii
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.1.1
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Wed, 29 Jan 2014 04:10:14 -0800 (PST)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Wed, 29 Jan 2014 10:10:14 -0200
-Message-ID: <CAMCfZKEwQWimV0j8FE1Z1KVW=xUCZgR36_Li1fNuiZfwYm7yrA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Systemd journald (206) storage issue
+References: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <2517159.s5K5La3RH6@peggleto-mobl5.ger.corp.intel.com>
+Subject: Re: FOSDEM 2014
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,54 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jan 2014 12:10:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 29 Jan 2014 12:13:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Folks,
+2014-01-24 20:06, Paul Eggleton skrev:
+> Hi folks,
+>
+> As previously discussed, OpenEmbedded will be present at FOSDEM this year in
+> Brussels in a week's time:
+>
+> https://fosdem.org/2014/
+>
+> If you will be at the conference, please add yourself to the appropriate
+> section on the following wiki page (or ask me to if you have trouble editing):
+>
+> http://openembedded.org/wiki/FOSDEM_2014
+>
+> We're still keen to have people bring hardware running OE to show off at the
+> booth (and folks willing to stand behind the booth and talk to people about
+> OE). We have two tables this year so there should be plenty of room :)
+>
+> Cheers,
+> Paul
+>
+Will be there and bring an "Internet of Things"  demo running on the 
+Beaglebone.
 
-It seems that journald version 206 has an issue with storage. It is not
-respecting the configuration and my storage is getting full after sometime.
+Hope to have an Atmel SAMD5 kit for a raffle to attract people as usual.
+It was still in Hong-Kong late last night, so it will be tight.
 
-Here is my journald.conf:
+Long time since I logged into the OpenEmbedded wiki, so have no clue of 
+the login details.
+Tried recovering, but I didnt get any mail in 10 minutes.
 
-[Journal]
-#Storage=auto
-#Compress=yes
-#Seal=yes
-#SplitMode=login
-#SyncIntervalSec=5m
-#RateLimitInterval=30s
-#RateLimitBurst=1000
-SystemMaxUse=32M
-#SystemKeepFree=
-SystemMaxFileSize=4M
-#RuntimeMaxUse=
-#RuntimeKeepFree=
-#RuntimeMaxFileSize=
-#MaxRetentionSec=
-#MaxFileSec=1month
-#ForwardToSyslog=yes
-#ForwardToKMsg=no
-#ForwardToConsole=no
-#TTYPath=/dev/console
-#MaxLevelStore=debug
-#MaxLevelSyslog=debug
-#MaxLevelKMsg=notice
-#MaxLevelConsole=info
-
-
-I'd tested journald version 208 with the same config and it worked.
-
-I'm using dora branch.
-
-Any thoughts?
+Think that it may still contain my "ulf@atmel.com" email.
+If so, can someone change the email to "ulf@emagii.com", and I will 
+update the wiki.
 
 
-Regards,
+-- 
+Best Regards
+Ulf Samuelsson
+ulf@emagii.com
++46 722 427437
 
---
-*dS
-Diego Sueiro
-
-/*long live rock 'n roll*/
 
