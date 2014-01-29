@@ -1,35 +1,31 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 116AE6E791
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
+	[209.85.216.42])
+	by mail.openembedded.org (Postfix) with ESMTP id A7F386E7DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jan 2014 10:41:11 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1W8SZz-0002Qt-M6 for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Jan 2014 11:41:11 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jan 2014 11:41:11 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 29 Jan 2014 12:10:33 +0000 (UTC)
+Received: by mail-qa0-f42.google.com with SMTP id k4so2309959qaq.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Jan 2014 11:41:11 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 29 Jan 2014 04:10:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=yoluXwQCq+CgenD/Ze7BxDEPv+mKS37r06Maee+lAy4=;
+	b=Y5Bkg7lcyFE+MwLcyc08WEmGvJbmlP4gMnoF8eHABMvU1iIaxeqBi09x4l+fl+NViK
+	m4UVgqav6YfmmSjoByQe6QCtSyf42j2SiG+wUlxbz/cxckuwJnfjfHCLFQxa47fzInOH
+	VeW2JcLloMX7KRdEYzIGuGqA3meFzRF1N1IRun2ocQ3AIGaZInmgYWo8pQH0y3mnbUbL
+	Dush7KvQxIFzIxAlteQjalQPm0Mb6XHQwP7zjMMPr9Ro32xGZMWo+E7KhPWdgMibNnL0
+	NDvI1H1V97MQ7kuVNxL4N886BJjeDhx6rVFcbzV9N4bUmp0M8snayM3Raggbha9bRYsm
+	g52Q==
+X-Received: by 10.140.106.225 with SMTP id e88mr10575142qgf.66.1390997434127; 
+	Wed, 29 Jan 2014 04:10:34 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.25.47 with HTTP; Wed, 29 Jan 2014 04:10:14 -0800 (PST)
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Wed, 29 Jan 2014 10:10:14 -0200
+Message-ID: <CAMCfZKEwQWimV0j8FE1Z1KVW=xUCZgR36_Li1fNuiZfwYm7yrA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 29 Jan 2014 11:41:42 +0100
-Message-ID: <lcalrg$uah$1@ger.gmane.org>
-References: <1390943894-18907-1-git-send-email-Martin.Jansa@gmail.com>	<lcac4m$c5i$2@ger.gmane.org>
-	<20140129101553.GP3718@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <20140129101553.GP3718@jama>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-systemd][PATCH] connman: Rename .bbappend to match new version from oe-core
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Systemd journald (206) storage issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,61 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jan 2014 10:41:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Jan 2014 12:10:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Folks,
 
-Martin Jansa schreef op 29-01-14 11:15:
-> On Wed, Jan 29, 2014 at 08:55:50AM +0100, Koen Kooi wrote: Martin Jansa
-> schreef op 28-01-14 22:18:
->>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
->>>> .../connman/{connman_1.20.bbappend => connman_%.bbappend} | 0 1
->>>> file changed, 0 insertions(+), 0 deletions(-) rename 
->>>> meta-systemd/oe-core/recipes-connectivity/connman/{connman_1.20.bbappend
->>>>
->>>> 
-=> connman_%.bbappend} (100%)
->>>> 
->>>> diff --git 
->>>> a/meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
->>>>
->>>> 
-b/meta-systemd/oe-core/recipes-connectivity/connman/connman_%.bbappend
->>>> similarity index 100% rename from 
->>>> meta-systemd/oe-core/recipes-connectivity/connman/connman_1.20.bbappend
->>>>  rename to 
->>>> meta-systemd/oe-core/recipes-connectivity/connman/connman_%.bbappend
->
->>>> 
-> Can we come up with a plan to drop these packaging bbappends? We've
-> already had more than one OE (well yoctoproject) release so distros have
-> had ample time to adjust to the new packaging system.
-> 
->> I have already updated SHR as distro, but that doesn't fix
->> upgrade-path on target (for crazy folks who would try to opkg upgrade
->> themselves from dylan to master).
+It seems that journald version 206 has an issue with storage. It is not
+respecting the configuration and my storage is getting full after sometime.
 
-I think we need to be pragmatic here, dylan -> master won't work when using
-opkg (haven't tried RPM), so I'd like to get rid of bbappends that are
-present purely for historical reasons.
-I'm sure someone can come up with a image recipe in dylan where upgrade to
-master does work, but it breaks for the commonly used angstrom images.
+Here is my journald.conf:
 
-So after 'dizzy' (or whatever RP will call it) can we drop these bbappends?
+[Journal]
+#Storage=auto
+#Compress=yes
+#Seal=yes
+#SplitMode=login
+#SyncIntervalSec=5m
+#RateLimitInterval=30s
+#RateLimitBurst=1000
+SystemMaxUse=32M
+#SystemKeepFree=
+SystemMaxFileSize=4M
+#RuntimeMaxUse=
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#MaxRetentionSec=
+#MaxFileSec=1month
+#ForwardToSyslog=yes
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#TTYPath=/dev/console
+#MaxLevelStore=debug
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I'd tested journald version 208 with the same config and it worked.
 
-iD8DBQFS6NrmMkyGM64RGpERAtf+AJ4wQeFFJUPngxOudYONWaKcH2kF2QCfclab
-MDqmkEQ+AWT9bmozHspawxE=
-=eQfD
------END PGP SIGNATURE-----
+I'm using dora branch.
 
+Any thoughts?
+
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+/*long live rock 'n roll*/
 
