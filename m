@@ -1,25 +1,25 @@
 Return-Path: <gcho-openembedded-devel@m.gmane.org>
 Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id A0D696E98D
+	by mail.openembedded.org (Postfix) with ESMTP id D55AC6E98F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2014 22:04:01 +0000 (UTC)
+	Thu, 30 Jan 2014 22:10:08 +0000 (UTC)
 Received: from list by plane.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1W8ziL-0003m9-CN for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Jan 2014 23:04:01 +0100
+	id 1W8zoC-0007N7-AN for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jan 2014 23:10:04 +0100
 Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2014 23:04:01 +0100
+	Thu, 30 Jan 2014 23:10:04 +0100
 Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2014 23:04:01 +0100
+	Thu, 30 Jan 2014 23:10:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 30 Jan 2014 23:03:59 +0100
-Message-ID: <lcei7n$1fo$1@ger.gmane.org>
+Date: Thu, 30 Jan 2014 23:07:40 +0100
+Message-ID: <lceiek$4oe$1@ger.gmane.org>
 References: <1391086167-31517-1-git-send-email-chase.maupin@ti.com>	<CAMKF1spT1epjxfM1Nyi86wFCk23BAZ26zun-Ju94JkcYiXwE7A@mail.gmail.com>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EC@BLRINMSMBX01.bglrodc.lntinfotech.com>	<1761269.AxNLyBI4PD@leo>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8ED@BLRINMSMBX01.bglrodc.lntinfotech.com>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EF@BLRINMSMBX01.bglrodc.lntinfotech.com>
 	<CAP71WjxE3bO7f1N9hJtY0JvLnE555z+N+jZ3mrZSWB-k6xSpCw@mail.gmail.com>
 Mime-Version: 1.0
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2014 22:04:03 -0000
+X-List-Received-Date: Thu, 30 Jan 2014 22:10:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -73,18 +73,29 @@ Nicolas Dechesne schreef op 30-01-14 22:07:
 > 
 > I am cc'ing riku and koen since that needs fixing in meta-linaro 
 > (nativesdk-qemu does not build).
-> 
-> for now, it's safe to follow Khem's suggestion and use the OE-core qemu.
 
-AUTOREV strikes again :(
+Can you push cherry-picks for:
+
+http://git.linaro.org/openembedded/meta-linaro.git/commit/2def4e0a5548cadfedcf9511f835af9456b40953
+
+and
+
+http://git.linaro.org/openembedded/meta-linaro.git/commit/fc9473336a77603edabda89ae0bac58ef652d649
+
+to gerrit? I'm off to fosdem tomorrow and have a day off monday, so tuesday
+is the earliest I can look at it.
+
+regards,
+
+Koen
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFS6sxPMkyGM64RGpERApmZAJ90opJ7oe/w01M3JeUHmtJIKLYGUgCggfEN
-daR9kp8t0Jf/SN0Md1moXxU=
-=yKgI
+iD8DBQFS6s0sMkyGM64RGpERAoqHAJsEe/DFtL4TZYq/Hx+CDA0YVwKXpACggj6+
+wIlhhY8LamC7C+lf/BobULY=
+=8Jo3
 -----END PGP SIGNATURE-----
 
 
