@@ -1,43 +1,34 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-ob0-f173.google.com (mail-ob0-f173.google.com
-	[209.85.214.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D2456E98D
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id A0D696E98D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2014 21:08:13 +0000 (UTC)
-Received: by mail-ob0-f173.google.com with SMTP id vb8so4154558obc.32
+	Thu, 30 Jan 2014 22:04:01 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1W8ziL-0003m9-CN for openembedded-devel@lists.openembedded.org;
+	Thu, 30 Jan 2014 23:04:01 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jan 2014 23:04:01 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2014 13:08:13 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=LpqAw6KeRY4Kob5TF70h9pWcOYOlL5W6576qDT44r+8=;
-	b=F37RzibbPkftWJRAp4CVwBBi2FLO/Vfda5q8pFsJe2Y87slggrH09BI6vFsPgT3lAZ
-	j7Tx+NxregUn7Vm91gTPH+Lg3i/xmSf0xDeWlqPB6ANqUADFo4yx4SB9sw7feaeWMbbO
-	StkrkR2cFsKmp3RH/X8CMMu+dO7RSJK7M4RhkJ0tZRXhv6acjedaxtn3SlY5z7YA6p5K
-	LDYRkuSQd3Y/ALBSr+MeeScwgzB8g8xXCImr+D6asyUbjJozWY1GKPtEx/qL3vv+i6XS
-	N9sPRJwDv/UlqTpCSM+BQM5tTrLg17aoGhgqwylirnb3MbN07kEVZcy9upP4ufBny5v+
-	HfHQ==
-X-Gm-Message-State: ALoCoQmJetnjBgarTWKvztDPBEV5jZr1ToZBOnHUk+W/WGhPRRAcEAnGtVvKv3dSgmSGKd137hTS
-X-Received: by 10.182.250.163 with SMTP id zd3mr13603153obc.20.1391116093853; 
-	Thu, 30 Jan 2014 13:08:13 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.182.99 with HTTP; Thu, 30 Jan 2014 13:07:53 -0800 (PST)
-In-Reply-To: <EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EF@BLRINMSMBX01.bglrodc.lntinfotech.com>
-References: <1391086167-31517-1-git-send-email-chase.maupin@ti.com>
-	<CAMKF1spT1epjxfM1Nyi86wFCk23BAZ26zun-Ju94JkcYiXwE7A@mail.gmail.com>
-	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EC@BLRINMSMBX01.bglrodc.lntinfotech.com>
-	<1761269.AxNLyBI4PD@leo>
-	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8ED@BLRINMSMBX01.bglrodc.lntinfotech.com>
-	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EF@BLRINMSMBX01.bglrodc.lntinfotech.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Thu, 30 Jan 2014 13:07:53 -0800
-Message-ID: <CAP71WjxE3bO7f1N9hJtY0JvLnE555z+N+jZ3mrZSWB-k6xSpCw@mail.gmail.com>
-To: Ridish RA <Ridish.RA@lntinfotech.com>, Koen Kooi <koen.kooi@linaro.org>, 
-	Riku Voipio <riku.voipio@linaro.org>
-Cc: KalyanKumar Nagabhirava <KalyanKumar.Nagabhirava@lntinfotech.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	Thu, 30 Jan 2014 23:04:01 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 30 Jan 2014 23:03:59 +0100
+Message-ID: <lcei7n$1fo$1@ger.gmane.org>
+References: <1391086167-31517-1-git-send-email-chase.maupin@ti.com>	<CAMKF1spT1epjxfM1Nyi86wFCk23BAZ26zun-Ju94JkcYiXwE7A@mail.gmail.com>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EC@BLRINMSMBX01.bglrodc.lntinfotech.com>	<1761269.AxNLyBI4PD@leo>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8ED@BLRINMSMBX01.bglrodc.lntinfotech.com>	<EFF5E6A1D0DAA14BA6B30C755A7B0FE13131B2C8EF@BLRINMSMBX01.bglrodc.lntinfotech.com>
+	<CAP71WjxE3bO7f1N9hJtY0JvLnE555z+N+jZ3mrZSWB-k6xSpCw@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+In-Reply-To: <CAP71WjxE3bO7f1N9hJtY0JvLnE555z+N+jZ3mrZSWB-k6xSpCw@mail.gmail.com>
+X-Enigmail-Version: 1.6
 Subject: Re: Errors when using populate_sdk - has anyone encountered this before?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -52,28 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2014 21:08:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 30 Jan 2014 22:04:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Thu, Jan 30, 2014 at 10:52 AM, Ridish RA <Ridish.RA@lntinfotech.com> wrote:
-> I think I got the root cause of the issue, meta-linaro that we have depends on openembedded-core dylan-qt5.1, but Nicolas recently updated
-> openembedded-core to dora. And I think this is the root cause of the issue of the relocatable patch being not able to apply?
->
-> So do we have meta-linaro layer based openembedded-core dora?
->
+Nicolas Dechesne schreef op 30-01-14 22:07:
+> hi,
+> 
+> On Thu, Jan 30, 2014 at 10:52 AM, Ridish RA <Ridish.RA@lntinfotech.com>
+> wrote:
+>> I think I got the root cause of the issue, meta-linaro that we have
+>> depends on openembedded-core dylan-qt5.1, but Nicolas recently updated 
+>> openembedded-core to dora. And I think this is the root cause of the
+>> issue of the relocatable patch being not able to apply?
+>> 
+>> So do we have meta-linaro layer based openembedded-core dora?
+>> 
+> 
+> yes, the problem is a misalignment between oe-core and meta-linaro. 
+> meta-linaro is using a recent qemu upstream commit, and the list of 
+> patches from oe-core no longer works with meta-linaro qemu_git recipe. 
+> the 2 commits in upstream qemu responsible for the misalignment are:
+> 
+> 53db78543e473bdf7650a406767d0901c6e26480 
+> 964c6fa16f50a607f9da5068d6bf15ccc93872c0
+> 
+> I am cc'ing riku and koen since that needs fixing in meta-linaro 
+> (nativesdk-qemu does not build).
+> 
+> for now, it's safe to follow Khem's suggestion and use the OE-core qemu.
 
-yes, the problem is a misalignment between oe-core and meta-linaro.
-meta-linaro is using a recent qemu upstream commit, and the list of
-patches from oe-core no longer works with meta-linaro qemu_git recipe.
-the 2 commits in upstream qemu responsible for the misalignment are:
+AUTOREV strikes again :(
 
-53db78543e473bdf7650a406767d0901c6e26480
-964c6fa16f50a607f9da5068d6bf15ccc93872c0
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-I am cc'ing riku and koen since that needs fixing in meta-linaro
-(nativesdk-qemu does not build).
+iD8DBQFS6sxPMkyGM64RGpERApmZAJ90opJ7oe/w01M3JeUHmtJIKLYGUgCggfEN
+daR9kp8t0Jf/SN0Md1moXxU=
+=yKgI
+-----END PGP SIGNATURE-----
 
-for now, it's safe to follow Khem's suggestion and use the OE-core qemu.
 
