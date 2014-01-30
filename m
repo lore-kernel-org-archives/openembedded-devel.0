@@ -1,35 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 922156CDF2;
-	Thu, 30 Jan 2014 04:34:14 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id j1so6400615iga.2
-	for <multiple recipients>; Wed, 29 Jan 2014 20:34:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=lExgPXmXdDKXz59FDqYdXeuwPyR29931s9KhJiSqW6I=;
-	b=MqfMdmqGbdPC6+htewzKAnH5aMuZfeNkcwa0/XWmHg8OCFOFNzkJTP/ULl+Gl6pjyg
-	+ZaOaDzL2Knd8ZZFydtvDs91xM0MSQAjJhTmRUiJGRCeC/qsOxsBguudxYhDCMJX2yox
-	QQCYzS/VlP+dZWUFwUMNxtAFi1YaYeSvH3x5kFLA7fRbKZguN1UQ0T95JbSYsFnRBSH/
-	WNdI1/mHJVisO3tFjy4O48nL4CBLCDnTQhYLdes2cwppPky9FF+1NNp84EMNdCpoVUV+
-	/63redD8DlaMfDrDbCwteaQKxwX08C3ICUUrzMnFeQ3IyPx43Kj89L8QZ2iVuU85PUnD
-	B3Eg==
-X-Received: by 10.42.246.131 with SMTP id ly3mr9222583icb.8.1391056455610;
-	Wed, 29 Jan 2014 20:34:15 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.8.137 with HTTP; Wed, 29 Jan 2014 20:33:45 -0800 (PST)
-In-Reply-To: <52B30EE5.6050901@linux.intel.com>
-References: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
-	<52B30EE5.6050901@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Jan 2014 20:33:45 -0800
-Message-ID: <CAMKF1sqABZeBKTBP-MB3HvOFfBadofBQaaaMf8u2F5ExmCiVrw@mail.gmail.com>
-To: Saul Wold <sgw@linux.intel.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Binutils upgrade to 2.24
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 16ED26E9BF
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jan 2014 09:05:56 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id m15so5724517wgh.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jan 2014 01:05:57 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VbWezOiIhYBN0buvH4RnkDUz8Gr5UF1UWf3Ri+MYuZk=;
+	b=iyEvuuuTlp5JwhXFxXsDXK7x2YgWY3vVqTdj/SHg70KIiC0DK1ARgekNpecfMolX5O
+	ESu35pcq8ZYjkM87iXfaEwMDHCoVxGsGGZTP12t5rinNEDPbLeLpQud3FjJdKmkfmqC3
+	4yvKJvTm4Ocw1rvrglnRQ96Pt2+g5fCfHREyt0HWZVVAANnVwluifcU1rzPAvpI8yQJk
+	sJON6kPDqe7cVYZR5PxQOH8a4xRS54zeUDjQIOJ2ne0eRkFP+2artmZ9OiAhEMTFV7fH
+	yX2mzy98yV2turuCsU/8MmdXhBcdn/UYmQBf1QoHVZOvun21oa60I4EXqYGkrvXdevHg
+	O4+w==
+X-Gm-Message-State: ALoCoQmasuYCodiTh8XkwDEPHWwe5MY55MX4cS1MRmWEC5dO8Invp7AXGwV0Up/GCPr1B43rkUkt
+X-Received: by 10.180.108.130 with SMTP id hk2mr22687056wib.16.1391072757700; 
+	Thu, 30 Jan 2014 01:05:57 -0800 (PST)
+Received: from localhost ([2001:610:612:0:21f:c6ff:feaa:c5fb])
+	by mx.google.com with ESMTPSA id gc5sm11217012wib.0.2014.01.30.01.05.56
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=RC4-SHA bits=128/128);
+	Thu, 30 Jan 2014 01:05:57 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 30 Jan 2014 10:05:50 +0100
+Message-Id: <1391072750-8210-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.7.10
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-initramfs][PATCH] dracut: update to 036
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,129 +44,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2014 04:34:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Jan 2014 09:05:57 -0000
 
-On Thu, Dec 19, 2013 at 7:21 AM, Saul Wold <sgw@linux.intel.com> wrote:
-> On 12/16/2013 12:03 PM, Khem Raj wrote:
->>
->> Hi
->>
->> I have pushed a contrib branch for binutils 2.24 upgrade here
->>
->>
->> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/binutils-2.24
->>
->> I have tested it on both uclibc/eglibc and qemu machines. But it would
->> be nice if
->> it gets more testing for machines I havent tested
->>
->
-> Looks like we tickled an LD bug of somekind, we are seeing the following
-> failure across all machines, this was a second build using binutils 2.24, so
-> there was some shared state usage.
->
-> RP pointed out the --as-needed option was used with -lm as those symbols are
-> math related.
->
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwconfig iwconfig.o
->> libiw.so.29 -lm
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwlist iwlist.o
->> libiw.so.29 -lm
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwpriv iwpriv.o
->> libiw.so.29 -lm
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwspy iwspy.o
->> libiw.so.29 -lm
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwgetid iwgetid.o
->> libiw.so.29 -lm
->> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwevent iwevent.o
->> libiw.so.29 -lm
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwconfig] Error 1
->> | make: *** Waiting for unfinished jobs....
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwgetid] Error 1
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwspy] Error 1
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwpriv] Error 1
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwlist] Error 1
->> | libiw.so.29: undefined reference to `ceil'
->> | libiw.so.29: undefined reference to `pow'
->> | libiw.so.29: undefined reference to `log10'
->> | libiw.so.29: undefined reference to `floor'
->> | collect2: error: ld returned 1 exit status
->> | make: *** [iwevent] Error 1
->> | ERROR: oe_runmake failed
->
->
+* Patch was applied upstream, delete it
+* Add coreutils dep to stop scripts from erroring out
+* bump PE to since 'git' > '036'
 
-I tested OE-Core builds for qemuppc
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ...-xz-lzma-option-to-use-all-cores-for-mult.patch | 39 ----------------------
+ .../recipes-devtools/dracut/dracut_git.bb          | 13 +++++---
+ 2 files changed, 8 insertions(+), 44 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
 
-1. build from scratch  ( MACHINE=qemuppc bitbake wirelesstools)
-2. build from sstate ( MACHINE=qemuppc bitbake -cclean wirelesstools
-and then step 1)
-3. Build second time just wireless-tools ( MACHINE=qemuppc bitbake
--ccleanall wirelesstools and then step 1 )
-4. Rebuild all from sstate ( rm -rf tmp/ and then step 1)
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch b/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
+deleted file mode 100644
+index 7dc62de..0000000
+--- a/meta-initramfs/recipes-devtools/dracut/dracut/0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From c92ea797c43aa811e98b6bd8fb4aae921fa08592 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 10 Jan 2014 21:11:40 +0100
+-Subject: [PATCH] Use builtin xz/lzma option to use all cores for multihreaded
+- compression
+-
+-This removes the dependency on 'getconf' as well, which is not installed by default on my embedded systems.
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+-Upstream-status: Submitted
+-
+----
+- dracut.sh | 6 ++----
+- 1 file changed, 2 insertions(+), 4 deletions(-)
+-
+-diff --git a/dracut.sh b/dracut.sh
+-index 11dcd0e..2e6ea67 100755
+---- a/dracut.sh
+-+++ b/dracut.sh
+-@@ -697,14 +697,12 @@ stdloglvl=$((stdloglvl + verbosity_mod_l))
+- # eliminate IFS hackery when messing with fw_dir
+- fw_dir=${fw_dir//:/ }
+- 
+--cpu_count=$(getconf _NPROCESSORS_ONLN)
+--
+- # handle compression options.
+- [[ $compress ]] || compress="gzip"
+- case $compress in
+-     bzip2) compress="bzip2 -9";;
+--    lzma)  compress="lzma -9 ${cpu_count:+-T$cpu_count}";;
+--    xz)    compress="xz --check=crc32 --lzma2=dict=1MiB ${cpu_count:+-T$cpu_count}";;
+-+    lzma)  compress="lzma -9 -T0";;
+-+    xz)    compress="xz --check=crc32 --lzma2=dict=1MiB -T0";;
+-     gzip)  compress="gzip -9"; command -v pigz > /dev/null 2>&1 && compress="pigz -9";;
+-     lzo)   compress="lzop -9";;
+-     lz4)   compress="lz4 -9";;
+--- 
+-1.8.0
+-
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index ccc4e7d..945ba0f 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -4,10 +4,12 @@ DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the t
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-SRCREV = "bb1ba3a1ca9dd6284f6319eb197de4a757a7f99d"
+-SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git \
+-           file://0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch \
+-          "
++PE = "1"
++PV = "036"
++
++# v036 tag
++SRCREV = "d50a99c5ceeb7107f624c5d3238d37509b2217a8"
++SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -34,5 +36,6 @@ FILES_${PN} += "${datadir}/bash-completion \
+ RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid bash ldd"
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS_${PN} = " \
+-                     kernel-modules \ 
++                     kernel-modules \
++                     coreutils \ 
+                     "
+-- 
+1.8.3.4
 
-I could not reproduce this issue at all. The differences are I did it
-with OE-Core and not with Poky autbuilders run with poky distro
-policies.
-we should also actually regress OE-Core alone
-
-My build machine here is debian/wheezy and ubuntu 12.04 both 64bit)
-
-I am on commit c3f3fed1b397b6ee6d44e7d39e63d084e4a88e30 of OE-Core
-
-At this point I am out of ideas how to reproduce this.
-
-If there is some other developer out there who can try this patch and
-get the same errors,that would be interesting and probably we
-will get to root of it.
 
