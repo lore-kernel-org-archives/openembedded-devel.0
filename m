@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 15CCF6EAE9
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 09FF26EADC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 15:11:27 +0000 (UTC)
-Received: by mail-pb0-f48.google.com with SMTP id rr13so4497651pbb.7
+	Fri, 31 Jan 2014 15:11:29 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id rd3so4477260pab.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 07:11:28 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ZqiA0El3/DGayN74hW6Rrh9CbnV/XlblfioxpS0hjvU=;
-	b=r54gjj0aM/YChmv4/eVEN6KA0Ppp4F4BvNEAzQpEoaYDnwhgE9K1LfxCyMl8Nif4Hj
-	PusDN56o7S/f5rdcvxusgNqWRtdy/22kE9R+wxP4FxIr6SLPfl3RxpdBcdxUoLXqS2Ir
-	X8wVFMpM8IavmkJBiuS8anFBl7FnbLUDA1069NKUde8jAY1wzPZ8R0xcs/ymjjQKTuR+
-	ENXAtYtjWb2Y5lgbxJa86atnCokY1NXafi/OLd12rYzqGCWle7CT3rwW47i2QzedaWHA
-	p8sQ6pYYt1cSDlzLgorhA6i/JDQxYAJl70H/EgqaHxzNc1hTRJf7CGQKBlZDVrcy19Xz
-	U+1Q==
-X-Received: by 10.69.20.139 with SMTP id hc11mr21343732pbd.63.1391181088150;
-	Fri, 31 Jan 2014 07:11:28 -0800 (PST)
+	bh=YdR2OuZHidEogg3HA5wdYwJIq+qN+qirH80lo9b56tI=;
+	b=xmYBaJC1Q+43IhsVYaqrAK4HC8C38kt/cT/bUDo8xtPSPEDtXN7bOsDGyspaG887Zy
+	9YHbg5hZD/2xAdPhA0XLuvEqT0uP5OkBDnd9kqzd3dmfqngSGQlfgUlhk5zntu2TlxFs
+	m2NRJ76IOJhYlnPFrYyn3icwfZhkNcUbO+xCvl2HfUdgtlodzglL9ywfEl9kNswKBiiJ
+	/YWdx3/Q/c+aRVRh4fO26CtakH7JytrR/HIxhrW2/hFVVXDyk8wlb5yJnej48GJCEZ19
+	DZ0BhttVBoMJgmh3bEFBXh1Dgr9Uma/t7rN430W2CRSeaLvRpl21v5GKwUiBNqGIWx0w
+	FYiQ==
+X-Received: by 10.66.197.135 with SMTP id iu7mr21033820pac.149.1391181090332; 
+	Fri, 31 Jan 2014 07:11:30 -0800 (PST)
 Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	zc6sm69486700pab.18.2014.01.31.07.11.26
+	zc6sm69486700pab.18.2014.01.31.07.11.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Jan 2014 07:11:26 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:29 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jan 2014 07:11:35 -0800
-Message-Id: <1391181100-32525-4-git-send-email-ticotimo@gmail.com>
+Date: Fri, 31 Jan 2014 07:11:36 -0800
+Message-Id: <1391181100-32525-5-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
 References: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH 4/9] perl-module-runtime: add 0.013
+Subject: [meta-perl][PATCH 5/9] perl-module-extutils-config: add 0.007
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,54 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 15:11:27 -0000
+X-List-Received-Date: Fri, 31 Jan 2014 15:11:29 -0000
 
 [Description from CPAN]
-The functions exported by this module deal with runtime handling of Perl modules, which are normally handled at compile time. This module avoids using any other modules, so that it can be used in low-level infrastructure.
+ExtUtils::Config is an abstraction around the %Config hash.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../module-runtime/perl-module-runtime_0.013.bb    |   34 ++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-perl/recipes-perl/module-runtime/perl-module-runtime_0.013.bb
+ .../extutils/perl-module-extutils-config_0.007.bb  |   23 ++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/extutils/perl-module-extutils-config_0.007.bb
 
-diff --git a/meta-perl/recipes-perl/module-runtime/perl-module-runtime_0.013.bb b/meta-perl/recipes-perl/module-runtime/perl-module-runtime_0.013.bb
+diff --git a/meta-perl/recipes-perl/extutils/perl-module-extutils-config_0.007.bb b/meta-perl/recipes-perl/extutils/perl-module-extutils-config_0.007.bb
 new file mode 100644
-index 0000000..a8f1216
+index 0000000..88de263
 --- /dev/null
-+++ b/meta-perl/recipes-perl/module-runtime/perl-module-runtime_0.013.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Module::Runtime - runtime module handling"
-+DESCRIPTION = "The functions exported by this module deal with runtime \
-+handling of Perl modules, which are normally handled at compile time. This \
-+module avoids using any other modules, so that it can be used in low-level \
-+infrastructure. \
-+The parts of this module that work with module names apply the same syntax \
-+that is used for barewords in Perl source. In principle this syntax can vary \
-+between versions of Perl, and this module applies the syntax of the Perl on \
-+which it is running. In practice the usable syntax hasn't changed yet, but \
-+there's a good chance of it changing in Perl 5.18. \
-+The functions of this module whose purpose is to load modules include \
-+workarounds for three old Perl core bugs regarding require. These workarounds \
-+are applied on any Perl version where the bugs exist, except for a case where \
-+one of the bugs cannot be adequately worked around in pure Perl."
++++ b/meta-perl/recipes-perl/extutils/perl-module-extutils-config_0.007.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "ExtUtils::Config - A wrapper for perl's configuration"
++DESCRIPTION = "ExtUtils::Config is an abstraction around the %Config hash."
 +
-+HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
++HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Config/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;beginline=42;endline=43;md5=62e24a93342fede7221d66335c716f34"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b1b813683bd988732e7fd6a796bf7f47"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/Module-Runtime-${PV}.tar.gz"
-+SRC_URI[md5sum] = "62b88b1f5f0e975a5d7c80cd46167b97"
-+SRC_URI[sha256sum] = "ec37e03d90dc905679dab62a82f42cf0897ed79244b87fd9d531438dc3c31023"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
++SRC_URI[md5sum] = "2829c0dfa8a7e51b3f582efbee4bb128"
++SRC_URI[sha256sum] = "2c1465078b876fd16a90507092805265528c2532d4937b03547a6dbdb8ac0eef"
 +
-+S = "${WORKDIR}/Module-Runtime-${PV}"
++S = "${WORKDIR}/ExtUtils-Config-${PV}"
 +
-+inherit cpan_build
++inherit cpan
 +
-+RDEPENDS_${PN} = " perl-module-test-more \
-+                   perl-module-strict \
-+                   perl-module-build \
++RDEPENDS_${PN} = " perl-module-extutils-makemaker \
++                   perl-module-data-dumper \
++                   perl-module-test-more \
++                   perl-module-file-temp \
 +"
 +
 +BBCLASSEXTEND = "native"
