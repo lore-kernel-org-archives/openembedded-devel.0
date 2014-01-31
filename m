@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id E7CD86E9BA
+Received: from mail-pb0-f44.google.com (mail-pb0-f44.google.com
+	[209.85.160.44])
+	by mail.openembedded.org (Postfix) with ESMTP id ED5AC6EADC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 15:11:22 +0000 (UTC)
-Received: by mail-pd0-f181.google.com with SMTP id y10so4359083pdj.40
+	Fri, 31 Jan 2014 15:11:24 +0000 (UTC)
+Received: by mail-pb0-f44.google.com with SMTP id rq2so4508729pbb.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 07:11:24 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=6H/h4jQoGf+24e8Nwmz71c5jI8sUJWyi8henyWNov0w=;
-	b=P8+G+pqKsDXrTj1m4RyZ//H8f0NLh0vutUbkOr7nHgzpReVfKq4TgWozp+QQvhG9Zn
-	UL0bGD+r3rWoxXUWMuoz/GB1Ia2ubeTuFy14WiLBQ6e5DlaQQGpS9giHifp4t5GwQ2RH
-	NIFM1D/+1buiE30nFyD3B4FkrzPTg6lFrs+8p0G1HsLQKXylgfPy3ELHaikSAa8rOsMp
-	d55y1zGZEZeJIC8Q4isvZL7y7WHBzRHk0ayhr1WOwhHEoUVCMf+8mY+kA0iPO+8/XoTj
-	6TFJ+g8WPDnYDjsHclE6TFUA14BjKXuM/mDnv4vl4cJpx/dZ5cqkgoQtF30HHjUHkRBB
-	L9+A==
-X-Received: by 10.66.142.132 with SMTP id rw4mr21699388pab.6.1391181084163;
-	Fri, 31 Jan 2014 07:11:24 -0800 (PST)
+	bh=uLuTezVQ1Az0Eyj5oya/IYXTE4TLUwX3jU5PS88jCtc=;
+	b=Csn+ydTKQAMc2oaL/IbKBwMTkzA/fcFUAzG7uOjQC3LY5kUELI3ovPhScB+3yuBqZG
+	sEXzWg80mf7mx5sGd5EL9GaxxFwEqvZlSZ+L3InCWyEdDk45PXI0KMWRceeDX6XFaMTm
+	4XTEnVcTZQ1J9o2OWplfT4MI3HAHySWE5mfiwQuKKAwvWUMKe5C0RZgjjmi7ESIOZFT1
+	PGJJd+cn1ht0Byz/FyEf8gzFpGvQk+U3j5WAgtdL36qMCHJZF4Z3TEJvRLFf6zIoA3ED
+	BKwdbJ5bSfB+x4bYLcqSGkeoIO/fIgut8cM3eBd5NC7nHi5oRclQElGew5HRwTgBkNXz
+	tr+g==
+X-Received: by 10.66.179.143 with SMTP id dg15mr21528187pac.52.1391181086152; 
+	Fri, 31 Jan 2014 07:11:26 -0800 (PST)
 Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	zc6sm69486700pab.18.2014.01.31.07.11.21
+	zc6sm69486700pab.18.2014.01.31.07.11.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Jan 2014 07:11:22 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:24 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jan 2014 07:11:33 -0800
-Message-Id: <1391181100-32525-2-git-send-email-ticotimo@gmail.com>
+Date: Fri, 31 Jan 2014 07:11:34 -0800
+Message-Id: <1391181100-32525-3-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
 References: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH 2/9] perl-module-text-diff: add 1.41
+Subject: [meta-perl][PATCH 3/9] perl-module-capture-tiny: add 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,46 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 15:11:23 -0000
+X-List-Received-Date: Fri, 31 Jan 2014 15:11:25 -0000
 
 [Description from CPAN]
-diff() provides a basic set of services akin to the GNU diff utility. It is not anywhere near as feature complete as GNU diff, but it is better integrated with Perl and available on all platforms. It is often faster than shelling out to a system's diff executable for small files, and generally slower on larger files.
+Capture::Tiny provides a simple, portable way to capture almost anything sent to STDOUT or STDERR, regardless of whether it comes from Perl, from XS code or from an external program. Optionally, output can be teed so that it is captured while being passed through to the original filehandles. Yes, it even works on Windows (usually). Stop guessing which of a dozen capturing modules to use in any particular situation and just use this one.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../text-diff/perl-module-text-diff_1.41.bb        |   26 ++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-perl/recipes-perl/text-diff/perl-module-text-diff_1.41.bb
+ .../capture-tiny/perl-module-capture-tiny_0.23.bb  |   35 ++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/capture-tiny/perl-module-capture-tiny_0.23.bb
 
-diff --git a/meta-perl/recipes-perl/text-diff/perl-module-text-diff_1.41.bb b/meta-perl/recipes-perl/text-diff/perl-module-text-diff_1.41.bb
+diff --git a/meta-perl/recipes-perl/capture-tiny/perl-module-capture-tiny_0.23.bb b/meta-perl/recipes-perl/capture-tiny/perl-module-capture-tiny_0.23.bb
 new file mode 100644
-index 0000000..0daf360
+index 0000000..0c4166d
 --- /dev/null
-+++ b/meta-perl/recipes-perl/text-diff/perl-module-text-diff_1.41.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Text::Diff - Perform diffs on files and record sets"
-+DESCRIPTION = "diff() provides a basic set of services akin to the GNU diff \
-+utility. It is not anywhere near as feature complete as GNU diff, but it is \
-+better integrated with Perl and available on all platforms. It is often \
-+faster than shelling out to a system's diff executable for small files, \
-+and generally slower on larger files."
++++ b/meta-perl/recipes-perl/capture-tiny/perl-module-capture-tiny_0.23.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Capture::Tiny - Capture STDOUT and STDERR from Perl, XS or external programs."
++DESCRIPTION = "Capture::Tiny provies a simple, portable way to capture \
++almost anything sent to STDOUT or STDERR, regardless of whether it comes \
++from Perl, from XS code or from an external program. Optionally, output can \
++be teed so that it is captured while being passed through to the original \
++filehandles. Yes, it even works on Windows (usually). Stop guessing which of \
++a dozen capturing modules to use in any particular situation and just use \
++this one."
 +
-+HOMEPAGE = "http://search.cpan.org/~ovid/Text-Diff/"
++HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz"
-+SRC_URI[md5sum] = "30d56e6dd5551ca16b8e16cc7299dc21"
-+SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-${PV}.tar.gz"
++SRC_URI[md5sum] = "7c6f63671802d004c0df5dbcba93e5b4"
++SRC_URI[sha256sum] = "427814015824014b41f666c16afadab0ea551db946e494fdfbc59c44c9569bdf"
 +
-+S = "${WORKDIR}/Text-Diff-${PV}"
++S = "${WORKDIR}/Capture-Tiny-${PV}"
 +
 +inherit cpan
 +
-+RDEPENDS_${PN} = " perl-module-extutils-makemaker \
-+                   perl-module-algorthm-diff \
++RDEPENDS_${PN} = " perl-module-scalar-util \
++                   perl-module-io-file \
++                   perl-module-extutils-makemaker \
++                   perl-module-file-spec \
 +                   perl-module-exporter \
++                   perl-module-carp \
++                   perl-module-test-more \
++                   perl-module-file-temp \
++                   perl-module-lib \
++                   perl-module-build \
 +"
 +
 +BBCLASSEXTEND = "native"
