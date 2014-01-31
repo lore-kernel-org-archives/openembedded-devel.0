@@ -1,30 +1,35 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id C703B6E71A
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
+	[209.85.160.50])
+	by mail.openembedded.org (Postfix) with ESMTP id D0A676E987
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 14:30:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.95,758,1384297200"; d="scan'208";a="40366186"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 31 Jan 2014 15:30:54 +0100
-Received: from COSNPREXC3.usr.ingenico.loc (10.1.1.182) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	id 14.2.318.1; Fri, 31 Jan 2014 15:30:53 +0100
-thread-index: Ac8ekQvhwxw6ecyJQau8rcqaVIFdXw==
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.3790.3168
-Importance: normal
-Priority: normal
-Received: from u85.usr.ingenico.loc ([10.23.7.85]) by
-	COSNPREXC3.usr.ingenico.loc with Microsoft SMTPSVC(6.0.3790.1830);
-	Fri, 31 Jan 2014 15:30:53 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Jan 2014 15:25:46 +0100
-Message-ID: <1391178346-11804-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.7.10.4
-X-OriginalArrivalTime: 31 Jan 2014 14:30:53.0423 (UTC)
-	FILETIME=[0BCED7F0:01CF1E91]
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] libnetfilter-log: add newrecipe for version 1.0.1
+	Fri, 31 Jan 2014 15:11:20 +0000 (UTC)
+Received: by mail-pb0-f50.google.com with SMTP id rq2so4524940pbb.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 07:11:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=lIGrBm3fIBNxdhuNWtQoRJcNscdX4twuwnrbeu67s88=;
+	b=x9fmoA3OKyYsFZuhonmhEgQAl8G0xsHEUEYF85U/L6F9Pzv8bruupTqdzGlZp5MOAn
+	6wUNILVf2zXMNWpdATFeaJCKWi+s0FQXfl0/DGDCZ4kQ2Nnj2BPk02nVbmBeJbkXTpaa
+	ZJTCnuToAr1W73FTi8XtsvzDcFuULe3GcBOmAj4KmWLvO/DqmXOmt9EGd3ODgPBq+Mwk
+	9BtGa0/UhI9mqlsleeBq+5WfcoY3cknnLjMIJsZ3nL4S9YZDNAt9Yu57efxrixW+MwHJ
+	sRJcUZilKeZ0MaQglb74etJbjunaM4Fizmj5u9cUIi49CVXayz2urVpQ0kTQoBNvFUin
+	0+3A==
+X-Received: by 10.68.130.169 with SMTP id of9mr21268953pbb.79.1391181081680;
+	Fri, 31 Jan 2014 07:11:21 -0800 (PST)
+Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150]) by mx.google.com with ESMTPSA id
+	zc6sm69486700pab.18.2014.01.31.07.11.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 31 Jan 2014 07:11:20 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Jan 2014 07:11:32 -0800
+Message-Id: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-perl][PATCH 1/9] perl-module-metadata: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,71 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 14:30:57 -0000
-Content-Class: urn:content-classes:message
-Content-Type: text/plain
+X-List-Received-Date: Fri, 31 Jan 2014 15:11:22 -0000
 
-This library is usefull for userspace netfilter log messages
-(c.f. iptables and -j NFLOG target).
+[Description from CPAN]
+This module provides a standard way to gather metadata about a .pm file through (mostly) static analysis and (some) code execution. When determining the version of a module, the $VERSION assignment is "eval"ed, as is traditional in the CPAN toolchain.
 
-libnetfilter-conntrack, libnetfilter-cttimeout, libnetfilter-cthelper and
-libnetfilter-queue are already available since december of 2012.
-
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb  | 14 
-++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 
-meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+ .../perl-module-metadata_1.000019.bb               |   32 ++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/module-metadata/perl-module-metadata_1.000019.bb
 
-diff --git 
-a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb 
-b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+diff --git a/meta-perl/recipes-perl/module-metadata/perl-module-metadata_1.000019.bb b/meta-perl/recipes-perl/module-metadata/perl-module-metadata_1.000019.bb
 new file mode 100644
-index 0000000..81909b8
+index 0000000..974cc80
 --- /dev/null
-+++ 
-b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Netfilter logging library"
-+DESCRIPTION = "Userspace library providing a programming interface (API) 
-to the Linux kernel netfilter log message (NFLOG)"
-+HOMEPAGE = 
-"http://www.netfilter.org/projects/libnetfilter_log/index.html"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-+DEPENDS = "libnfnetlink"
++++ b/meta-perl/recipes-perl/module-metadata/perl-module-metadata_1.000019.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Module::Metadata - Gather package and POD information from perl module files"
++DESCRIPTION = "This module provides a standard way to gather metadata about \
++a .pm files through (mostly) static analysis and (some) code execution. When \
++determining the version of a module, the $VERSION assignment is eval-ed, as \
++is traditional in the CPAN toolchain."
 +
-+SRC_URI = 
-"http://www.netfilter.org/projects/libnetfilter_log/files/libnetfilter_log-${PV}.tar.bz2;name=tar"
-+SRC_URI[tar.md5sum] = "2a4bb0654ae675a52d2e8d1c06090b94"
-+SRC_URI[tar.sha256sum] = 
-"74e0fe75753dba3ac114531b5e73240452c789a3f3adccf5c51217da1d933b21"
++HOMEPAGE = "http://search.cpan.org/~ether/Module-Metadata/"
 +
-+S = "${WORKDIR}/libnetfilter_log-${PV}"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://README;beginline=185;endline=190;md5=e1b24eebe5d819b40bb68ad06b72d3ee"
 +
-+inherit autotools pkgconfig
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Module-Metadata-${PV}.tar.gz"
++SRC_URI[md5sum] = "838ecf97f7daff79e0f81e104a6be823"
++SRC_URI[sha256sum] = "5afca94dc0213608101ad519eb1b25133cdc9e44c2a053a45a5a59422c2ee554"
++
++S = "${WORKDIR}/Module-Metadata-${PV}"
++
++inherit cpan
++
++RDEPENDS_${PN} = " perl-module-io-file \
++                   perl-module-data-dumper \
++                   perl-module-extutils-makemaker \
++                   perl-module-file-spec \
++                   perl-module-version \
++                   perl-module-exporter \
++                   perl-module-carp \
++                   perl-module-test-more \
++                   perl-module-file-temp \
++                   perl-module-file-path \
++"
++
++BBCLASSEXTEND = "native"
 -- 
-1.8.2.1
-
-
-
-About Ingenico (Euronext: FR0000125346 – ING)
-Ingenico is a leading provider of payment solutions, with over 20 million 
-terminals deployed in more than 125 countries. Its 4,000 employees 
-worldwide support retailers, banks and service providers to optimize and 
-secure their electronic payments solutions, develop their offer of 
-services and increase their point of sales revenue. More information on 
-http://www.ingenico.com/ | http://twitter.com/Ingenico.
-This message may contain confidential and/or privileged information. If 
-you are not the addressee or authorized to receive this for the addressee, 
-you must not use, copy, disclose or take any action based on this message 
-or any information herein. If you have received this message in error, 
-please advise the sender immediately by reply e-mail and delete this 
-message. Thank you for your cooperation.
-P Please consider the environment before printing this e-mail
-
-
+1.7.9.5
 
 
