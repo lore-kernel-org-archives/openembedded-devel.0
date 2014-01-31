@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id DC6316EAF9
+Received: from mail-pb0-f51.google.com (mail-pb0-f51.google.com
+	[209.85.160.51])
+	by mail.openembedded.org (Postfix) with ESMTP id F3C716E987
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 15:11:32 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id x10so4355804pdj.22
+	Fri, 31 Jan 2014 15:11:34 +0000 (UTC)
+Received: by mail-pb0-f51.google.com with SMTP id un15so4524773pbc.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 07:11:34 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=enEGZgaUKnD8B2v9W8a585DWbext54RGD7Vmib75HUo=;
-	b=FK4xdimo+k5eT3nPbtKXxNqopG7wqhqFkxmwGzSIsGx2m2OgCkTEfqee6Lm/7BDnLr
-	Kcr7ARN6LUbxEIPY03tV9yKIOkhg5HHNYyLn0gQtUwddG50oNdlntdNwIf/RmKTE7au5
-	vTT4njFAXqc4mh2W/LcBQTxwsRaqr5Mi2mB8TBq7bLcDQNc2LCLRpw0onTsab9L9Nf7h
-	Enzusr8XEfe8lxmtoKldf30fQ/qSkqGb5x0vN3U+9izP5xOhv3rhaROaZYZlr3Bko33G
-	9Q33im+r/cJfJlCoIeStqs57oJcnczDlihKeaBd7+56341mHn+U5bhU4VGADkYXZnuBh
-	2g1A==
-X-Received: by 10.66.164.70 with SMTP id yo6mr21501006pab.85.1391181094190;
-	Fri, 31 Jan 2014 07:11:34 -0800 (PST)
+	bh=0wZOnXJsqFSbnKlPl8N/RHwJJcRhMglnXb50nNqW2/I=;
+	b=G1tp1dwmNLx7z3ydkRUQAf8A/dbTtSX6qEiO0AP/oM4QY33dn90V8iLCQVSik6ctbY
+	GxjGNDgFJNWD06DhS1Ka0eTAAN/Lya6fUuvY44W7dpatv2GPe+IgQlmBTHcaEOEMjs9m
+	tiGHb+mC47e0MKzlBbKies5b0IISoNzgFiKK509c15z6CHOvDDD6xkoO2GebyYfohM9Q
+	g+on7ykv+oVo9WiwazVCTclVhyb4bqg3GgHzpb4RQCE9oxtmHuHMcaSwD6yt7rLV5V+A
+	z4FME7nmuD+7OH4dTgiOJjhaWLDqgJiP8bCnZ4WOENHWbpzhzpfvMljVzSMUztVb8iXs
+	+AtA==
+X-Received: by 10.66.121.164 with SMTP id ll4mr21697611pab.48.1391181096201;
+	Fri, 31 Jan 2014 07:11:36 -0800 (PST)
 Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	zc6sm69486700pab.18.2014.01.31.07.11.32
+	zc6sm69486700pab.18.2014.01.31.07.11.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Jan 2014 07:11:33 -0800 (PST)
+	Fri, 31 Jan 2014 07:11:35 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jan 2014 07:11:38 -0800
-Message-Id: <1391181100-32525-7-git-send-email-ticotimo@gmail.com>
+Date: Fri, 31 Jan 2014 07:11:39 -0800
+Message-Id: <1391181100-32525-8-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
 References: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH 7/9] perl-module-extutils-installpaths: add 0.010
+Subject: [meta-perl][PATCH 8/9] perl-module-build-tiny: add 0.030
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,46 +45,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 15:11:33 -0000
+X-List-Received-Date: Fri, 31 Jan 2014 15:11:35 -0000
 
 [Description from CPAN]
-This module tries to make install path resolution as easy as possible.
+Many Perl distributions use a Build.PL file instead of a Makefile.PL file to drive distribution configuration, build, test and installation. Traditionally, Build.PL uses Module::Build as the underlying build system. This module provides a simple, lightweight, drop-in replacement.
 
-When you want to install a module, it needs to figure out where to install things. The nutshell version of how this works is that default installation locations are determined from ExtUtils::Config, and they may be individually overridden by using the install_path attribute. An install_base attribute lets you specify an alternative installation root like /home/foo and prefix does something similar in a rather different (and more complicated) way. destdir lets you specify a temporary installation directory like /tmp/install in case you want to create bundled-up installable packages.
+Whereas Module::Build has over 6,700 lines of code; this module has less than 120, yet supports the features needed by most distributions.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../perl-module-extutils-installpaths_0.010.bb     |   24 ++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-perl/recipes-perl/extutils/perl-module-extutils-installpaths_0.010.bb
+ .../module-build/perl-module-build-tiny_0.030.bb   |   54 ++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/module-build/perl-module-build-tiny_0.030.bb
 
-diff --git a/meta-perl/recipes-perl/extutils/perl-module-extutils-installpaths_0.010.bb b/meta-perl/recipes-perl/extutils/perl-module-extutils-installpaths_0.010.bb
+diff --git a/meta-perl/recipes-perl/module-build/perl-module-build-tiny_0.030.bb b/meta-perl/recipes-perl/module-build/perl-module-build-tiny_0.030.bb
 new file mode 100644
-index 0000000..e95aec9
+index 0000000..f024415
 --- /dev/null
-+++ b/meta-perl/recipes-perl/extutils/perl-module-extutils-installpaths_0.010.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "ExtUtils::InstallPaths - Build.PL install path logic made easy"
-+DESCRIPTION = "This module tries to make install path resolution as easy \
-+as possible."
++++ b/meta-perl/recipes-perl/module-build/perl-module-build-tiny_0.030.bb
+@@ -0,0 +1,54 @@
++SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
++DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
++Makefile.PL file to drive distribution configuration, build, test and \
++installation. Traditionally, Build.PL uses Module::Build as the underlying \
++build system. This module provides a simple, lightweight, drop-in replacement. \
++Whereas Module::Build has over 6,700 lines of code; this module has less than \
++120, yet supports the features needed by most distributions."
 +
-+HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-InstallPaths/"
++HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=15bbcc2806d297df9e944b8955b38d82"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=aaca61412962cf972aec0cdad99d0a84"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-${PV}.tar.gz"
-+SRC_URI[md5sum] = "f0b00cc6c04653588a6298fa1f16c07f"
-+SRC_URI[sha256sum] = "d14cbff118e467900c2c488b55b83ef697d6eb1b8f592c0521f1d82848bf2156"
++DEPENDS = "perl-module-extutils-config-native perl-module-extutils-helpers-native perl-module-extutils-installpaths-native"
 +
-+S = "${WORKDIR}/ExtUtils-InstallPaths-${PV}"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
++SRC_URI[md5sum] = "1c54bf4c602eec87f98950314699402e"
++SRC_URI[sha256sum] = "dfd418ad0e8290cf645ab11be209a1bf6865e5a562c5a1592da99d5fd24718a8"
 +
-+inherit cpan
++S = "${WORKDIR}/Module-Build-Tiny-${PV}"
 +
-+RDEPENDS_${PN} = " perl-module-extutils-makemaker \
-+                   perl-module-data-dumper \
++inherit cpan_build
++
++do_install () {
++        cpan_build_do_install
++}
++
++RDEPENDS_${PN} = " perl-module-xsloader \
++                   perl-module-file-spec \
++                   perl-module-io-handle \
++                   perl-module-tap-harness-env \
++                   perl-module-extutils-install \
++                   perl-module-ipc-open3 \
++                   perl-module-file-path \
++                   perl-module-cpan-meta \
++                   perl-module-extutils-cbuilder \
++                   perl-module-getopt-long \
++                   perl-module-extutils-helpers \
++                   perl-module-extutils-makemaker \
++                   perl-module-exporter \
++                   perl-module-carp \
 +                   perl-module-test-more \
++                   perl-module-text-parsewords \
++                   perl-module-module-load \
 +                   perl-module-file-temp \
++                   perl-module-data-dumper \
++                   perl-module-extutils-parsexs \
++                   perl-module-pod-man \
++                   perl-module-extutils-installpaths \
++                   perl-module-extutils-config \
++                   perl-module-json-pp \
 +"
 +
 +BBCLASSEXTEND = "native"
