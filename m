@@ -1,34 +1,28 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
-	[209.85.216.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 643196E87D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 20:04:13 +0000 (UTC)
-Received: by mail-qa0-f48.google.com with SMTP id f11so6946745qae.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 12:04:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=liFZjXh/sJVrEv8FKhVydWQ6ufCNjIKkx69y9L3JGqY=;
-	b=ukHT9UU/dBODNJOfk+EAizN0+Ydy+8iYE6lzxTASEmXU7tu7LTtnWm4WnHcaZ6SfvL
-	zKyPJKDLAF3db8xZCfzEGuM/SJSTHvRHmKrrBotzBkBOAsj5abj8pLIuxFjLekvDv4hs
-	ReWxpD6BFf8qPq2RVydF+367j0S2sXDggVKvrgw7v7s2g7P3nzIFVCWPQhJdEYxa+XfZ
-	5WBzwNJduSDyLBv1SKyHsDl+wyBJs/nNc3nrRXxfvSd3mTjmp47Hi7AVA4LBa0AR6w8F
-	AMoTfCG4EsxwT7xbnZ1PERMw4jwkc8OeDlmhxJ3VI2wVgMgrz4JRLAM3TSAFfL4eetYH
-	3Oyg==
-X-Received: by 10.229.139.199 with SMTP id f7mr34943216qcu.2.1391198654083;
-	Fri, 31 Jan 2014 12:04:14 -0800 (PST)
-Received: from localhost.localdomain ([187.106.25.157])
-	by mx.google.com with ESMTPSA id g68sm14870676qge.7.2014.01.31.12.04.12
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Jan 2014 12:04:13 -0800 (PST)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jan 2014 18:04:04 -0200
-Message-Id: <1391198644-9408-1-git-send-email-diego.sueiro@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [for-dora] systemd: journald fix ignored disk space restrictions
+Return-Path: <sgw@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E3566E9A9;
+	Fri, 31 Jan 2014 21:36:56 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 31 Jan 2014 13:32:47 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,759,1384329600"; d="scan'208";a="447857923"
+Received: from unknown (HELO [10.255.12.79]) ([10.255.12.79])
+	by orsmga001.jf.intel.com with ESMTP; 31 Jan 2014 13:36:36 -0800
+Message-ID: <52EC1764.8080602@linux.intel.com>
+Date: Fri, 31 Jan 2014 13:36:36 -0800
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+MIME-Version: 1.0
+To: Khem Raj <raj.khem@gmail.com>
+References: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
+	<52B30EE5.6050901@linux.intel.com>
+	<CAMKF1sqABZeBKTBP-MB3HvOFfBadofBQaaaMf8u2F5ExmCiVrw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqABZeBKTBP-MB3HvOFfBadofBQaaaMf8u2F5ExmCiVrw@mail.gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFC] Binutils upgrade to 2.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,112 +36,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 20:04:14 -0000
+X-List-Received-Date: Fri, 31 Jan 2014 21:36:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The upstream bug report can be seen at:
-[Systemd #68161] -- https://bugs.freedesktop.org/show_bug.cgi?id=68161
+On 01/29/2014 08:33 PM, Khem Raj wrote:
+> On Thu, Dec 19, 2013 at 7:21 AM, Saul Wold <sgw@linux.intel.com> wrote:
+>> On 12/16/2013 12:03 PM, Khem Raj wrote:
+>>>
+>>> Hi
+>>>
+>>> I have pushed a contrib branch for binutils 2.24 upgrade here
+>>>
+>>>
+>>> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/binutils-2.24
+>>>
+>>> I have tested it on both uclibc/eglibc and qemu machines. But it would
+>>> be nice if
+>>> it gets more testing for machines I havent tested
+>>>
+>>
+>> Looks like we tickled an LD bug of somekind, we are seeing the following
+>> failure across all machines, this was a second build using binutils 2.24, so
+>> there was some shared state usage.
+>>
+>> RP pointed out the --as-needed option was used with -lm as those symbols are
+>> math related.
+>>
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwconfig iwconfig.o
+>>> libiw.so.29 -lm
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwlist iwlist.o
+>>> libiw.so.29 -lm
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwpriv iwpriv.o
+>>> libiw.so.29 -lm
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwspy iwspy.o
+>>> libiw.so.29 -lm
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwgetid iwgetid.o
+>>> libiw.so.29 -lm
+>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwevent iwevent.o
+>>> libiw.so.29 -lm
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwconfig] Error 1
+>>> | make: *** Waiting for unfinished jobs....
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwgetid] Error 1
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwspy] Error 1
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwpriv] Error 1
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwlist] Error 1
+>>> | libiw.so.29: undefined reference to `ceil'
+>>> | libiw.so.29: undefined reference to `pow'
+>>> | libiw.so.29: undefined reference to `log10'
+>>> | libiw.so.29: undefined reference to `floor'
+>>> | collect2: error: ld returned 1 exit status
+>>> | make: *** [iwevent] Error 1
+>>> | ERROR: oe_runmake failed
+>>
+>>
+>
+> I tested OE-Core builds for qemuppc
+>
+> 1. build from scratch  ( MACHINE=qemuppc bitbake wirelesstools)
+> 2. build from sstate ( MACHINE=qemuppc bitbake -cclean wirelesstools
+> and then step 1)
+> 3. Build second time just wireless-tools ( MACHINE=qemuppc bitbake
+> -ccleanall wirelesstools and then step 1 )
+> 4. Rebuild all from sstate ( rm -rf tmp/ and then step 1)
+>
+> I could not reproduce this issue at all. The differences are I did it
+> with OE-Core and not with Poky autbuilders run with poky distro
+> policies.
+> we should also actually regress OE-Core alone
+>
+> My build machine here is debian/wheezy and ubuntu 12.04 both 64bit)
+>
+> I am on commit c3f3fed1b397b6ee6d44e7d39e63d084e4a88e30 of OE-Core
+>
+> At this point I am out of ideas how to reproduce this.
+>
+> If there is some other developer out there who can try this patch and
+> get the same errors,that would be interesting and probably we
+> will get to root of it.
+>
+>
+Sorry Khem, failed again!
 
-This backports the patches need to address this in the 206 version.
+Build Configuration:
+BB_VERSION        = "1.21.1"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-13.10"
+TARGET_SYS        = "powerpc-poky-linux"
+MACHINE           = "qemuppc"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.5+snapshot-20140131"
+TUNE_FEATURES     = "m32 fpu-hard ppc7400 altivec"
+TARGET_FPU        = ""
+meta
+meta-yocto
+meta-yocto-bsp    = "mut:980faeefaac3466aff38822479bf7d9fff4994eb"
 
-Signed-off-by: Diego Sueiro <diego.sueiro@gmail.com>
----
- ...ournald-fix-fd-leak-in-journal_file_empty.patch |   27 ++++++++++++++
- ...urnald-fix-vacuuming-of-archived-journals.patch |   37 ++++++++++++++++++++
- meta/recipes-core/systemd/systemd_206.bb           |    2 ++
- 3 files changed, 66 insertions(+)
- create mode 100644 meta/recipes-core/systemd/systemd/journald-fix-fd-leak-in-journal_file_empty.patch
- create mode 100644 meta/recipes-core/systemd/systemd/journald-fix-vacuuming-of-archived-journals.patch
 
-diff --git a/meta/recipes-core/systemd/systemd/journald-fix-fd-leak-in-journal_file_empty.patch b/meta/recipes-core/systemd/systemd/journald-fix-fd-leak-in-journal_file_empty.patch
-new file mode 100644
-index 0000000..a83c858
---- /dev/null
-+++ b/meta/recipes-core/systemd/systemd/journald-fix-fd-leak-in-journal_file_empty.patch
-@@ -0,0 +1,27 @@
-+journald: fix fd leak in journal_file_empty
-+Before my previous patch, journal_file_empty wasn't be called with the
-+correct filename. Now that it's being called with the correct filename
-+it leaks file descriptors. This patch closes the file descriptors before
-+returning.
-+
-+Signed-off-by: George McCollister <george.mccollister@gmail.com>
-+
-+
-+Index: systemd-206/src/journal/journal-vacuum.c
-+===================================================================
-+--- systemd-206.orig/src/journal/journal-vacuum.c	2013-07-21 19:43:28.146183128 -0300
-++++ systemd-206/src/journal/journal-vacuum.c	2014-01-29 20:43:27.492343295 -0200
-+@@ -129,9 +129,9 @@
-+ }
-+ 
-+ static int journal_file_empty(int dir_fd, const char *name) {
-+-        int fd, r;
-++        int r;
-+         le64_t n_entries;
-+-
-++        _cleanup_close_ int fd;
-+         fd = openat(dir_fd, name, O_RDONLY|O_CLOEXEC|O_NOFOLLOW|O_NONBLOCK);
-+         if (fd < 0)
-+                 return -errno;
-+
-+Upstream-Status: Backport [207]
-diff --git a/meta/recipes-core/systemd/systemd/journald-fix-vacuuming-of-archived-journals.patch b/meta/recipes-core/systemd/systemd/journald-fix-vacuuming-of-archived-journals.patch
-new file mode 100644
-index 0000000..7c59200
---- /dev/null
-+++ b/meta/recipes-core/systemd/systemd/journald-fix-vacuuming-of-archived-journals.patch
-@@ -0,0 +1,37 @@
-+journald: fix vacuuming of archived journals
-+d_name is modified on line 227 so if the entire journal name is needed
-+again p must be used. Before this change when journal_file_empty was called
-+on archived journals it would always return with -2.
-+
-+Signed-off-by: George McCollister <george.mccollister@gmail.com>
-+
-+Index: systemd-206/src/journal/journal-vacuum.c
-+===================================================================
-+--- systemd-206.orig/src/journal/journal-vacuum.c	2014-01-29 20:43:27.492343295 -0200
-++++ systemd-206/src/journal/journal-vacuum.c	2014-01-29 20:48:55.076356876 -0200
-+@@ -265,18 +265,18 @@
-+                         /* We do not vacuum active files or unknown files! */
-+                         continue;
-+ 
-+-                if (journal_file_empty(dirfd(d), de->d_name)) {
-++                if (journal_file_empty(dirfd(d), p)) {
-+ 
-+                         /* Always vacuum empty non-online files. */
-+ 
-+-                        if (unlinkat(dirfd(d), de->d_name, 0) >= 0)
-+-                                log_debug("Deleted empty journal %s/%s.", directory, de->d_name);
-++                        if (unlinkat(dirfd(d), p, 0) >= 0)
-++                                log_debug("Deleted empty journal %s/%s.", directory, p);
-+                         else if (errno != ENOENT)
-+-                                log_warning("Failed to delete %s/%s: %m", directory, de->d_name);
-++                                log_warning("Failed to delete %s/%s: %m", directory, p);
-+                         continue;
-+                 }
-+ 
-+-                patch_realtime(directory, de->d_name, &st, &realtime);
-++                patch_realtime(directory, p, &st, &realtime);
-+ 
-+                 GREEDY_REALLOC(list, n_allocated, n_list + 1);
-+
-+
-+Upstream-Status: Backport [207] 
-diff --git a/meta/recipes-core/systemd/systemd_206.bb b/meta/recipes-core/systemd/systemd_206.bb
-index a1a8bd7..e7d0f1f 100644
---- a/meta/recipes-core/systemd/systemd_206.bb
-+++ b/meta/recipes-core/systemd/systemd_206.bb
-@@ -21,6 +21,8 @@ SRC_URI = "http://www.freedesktop.org/software/systemd/systemd-${PV}.tar.xz \
-            file://0001-use-CAP_MKNOD-ConditionCapability.patch \
-            file://0001-Use-bin-mkdir-instead-of-host-mkdir-path.patch \
-            file://binfmt-install.patch \
-+           file://journald-fix-fd-leak-in-journal_file_empty.patch \
-+           file://journald-fix-vacuuming-of-archived-journals.patch \
-            file://touchscreen.rules \
-            ${UCLIBCPATCHES} \
-            file://00-create-volatile.conf \
--- 
-1.7.10.4
+I did a bitbake -c cleansstate binutils-native eglibc wireless-tools 
+followed by a bitbake of wireless-tools and I still get this same failure.
+
+My build info above.
+
+I tried with OE-Core alone and still got the same failure (this time 
+with ARM!)
+
+Build Configuration:
+BB_VERSION        = "1.21.1"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-13.10"
+TARGET_SYS        = "arm-oe-linux-gnueabi"
+MACHINE           = "qemuarm"
+DISTRO            = "nodistro"
+DISTRO_VERSION    = "nodistro.0"
+TUNE_FEATURES     = "armv5 thumb dsp"
+TARGET_FPU        = "soft"
+meta              = "binutils:e20eeca128f362d500e19c5757e13cc7dab86b3a"
+
+
+Totally clean build area.
+
+
+
+Sau!
 
 
