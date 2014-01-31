@@ -1,49 +1,34 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 498886E987
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f49.google.com (mail-qa0-f49.google.com
+	[209.85.216.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 0791A6E987
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 17:27:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by anubis.se.axis.com (Postfix) with ESMTP id AD8211A0EE
+	Fri, 31 Jan 2014 17:35:58 +0000 (UTC)
+Received: by mail-qa0-f49.google.com with SMTP id w8so6545107qac.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:27:09 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
-Received: from anubis.se.axis.com ([127.0.0.1])
-	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id TYN+zgwWAeE3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:27:07 +0100 (CET)
-Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
-	by anubis.se.axis.com (Postfix) with ESMTP id 8832E1A0F7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
-Received: from boulder.se.axis.com (localhost [127.0.0.1])
-	by postfix.imss71 (Postfix) with ESMTP id 69FB3A0B
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
-Received: from thoth.se.axis.com (thoth.se.axis.com [10.0.2.173])
-	by boulder.se.axis.com (Postfix) with ESMTP id 5F11F9D3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
-Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
-	by thoth.se.axis.com (Postfix) with ESMTP id 5DA823404E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
-Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
-	Microsoft SMTP Server (TLS) id 8.2.255.0;
-	Fri, 31 Jan 2014 18:26:49 +0100
-Date: Fri, 31 Jan 2014 18:26:48 +0100
-From: Olof Johansson <olof.johansson@axis.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20140131172647.GE23583@axis.com>
-References: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
+	Fri, 31 Jan 2014 09:35:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=U/FAWshlxvRF142eDOGQ+JZrHedPqwoL/rAPqNbFTqw=;
+	b=zUPI0jcoN96QbYReAZ0U5JQa0r4xbTFFlXaSoXZE7gfJi7bNuWN1Fs7thhN3WkdvrX
+	p4LrZObVaP+34DBJFifqrEmYWC8LvdIQKLoLO05db9CtpKz/TOWJVfrZgONqO7FQ6ioi
+	VinX0+ncT09Pihak4ktlMkD8BPscTwzSqqwGUAVR22HAjOftmZs2k3kDDAsyj8WOmDOF
+	viuU6O1cQoXMfxnCT7VFYmRrYvXNC0sr4P1wQIoBpbHjd+TOGEurXhyI9gJkSLVogXXX
+	E8jPehwPrCFAZsg4QQtghGLLfI1WRzqMh0GHdDLHdqPtSoBFwojxa+oT06Lpx5RDsS9y
+	QGMQ==
+X-Received: by 10.229.179.69 with SMTP id bp5mr33613445qcb.17.1391189759610;
+	Fri, 31 Jan 2014 09:35:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
-Thread-Topic: [oe] [meta-perl][PATCH 1/9] perl-module-metadata: add 1.000019
-Accept-Language: en-US, sv-SE
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-perl][PATCH 1/9] perl-module-metadata: add 1.000019
+Received: by 10.140.25.47 with HTTP; Fri, 31 Jan 2014 09:35:39 -0800 (PST)
+In-Reply-To: <CAP9ODKp_JRLSYgh_LrUjtsUkG9_FLibNbmYuoa-gPRkVxyLxqg@mail.gmail.com>
+References: <CAMCfZKEwQWimV0j8FE1Z1KVW=xUCZgR36_Li1fNuiZfwYm7yrA@mail.gmail.com>
+	<CAP9ODKp_JRLSYgh_LrUjtsUkG9_FLibNbmYuoa-gPRkVxyLxqg@mail.gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Fri, 31 Jan 2014 15:35:39 -0200
+Message-ID: <CAMCfZKFg-39ZX0hpWxbYLQSz0eo-6NW9This3Kcg6D600-w9Yg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Systemd journald (206) storage issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 17:27:14 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-Content-Language: en-US
+X-List-Received-Date: Fri, 31 Jan 2014 17:35:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 14-01-31 16:11 +0100, Tim Orling wrote:
-> This module provides a standard way to gather metadata about a
-> .pm file through (mostly) static analysis and (some) code
-> execution. When determining the version of a module, the
-> $VERSION assignment is "eval"ed, as is traditional in the CPAN
-> toolchain.
+On Wed, Jan 29, 2014 at 6:26 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
-For me, it seems strange to skip out the first part of the module
-name, just because it's part of the recipe perl-module- prefix. I
-agree it's a bit ugly to call it perl-module-module-metadata, but
-I think it would cause less confusion.
+> Please isolate the patch which fixes the issue in 208 so we can
+> backport it to the Dora version.
+>
 
-On the other hand, the naming convention within meta-perl seems
-to be consistently lib<module name>-perl, like it is in Debian.
-Same for oecore, except the core modules provided by the perl
-recipe. This would make the proper name for this recipe be
-libmodule-metadata-perl. Why use the perl-module- prefix?
+Otavio,
+I found this bug on systemd project:
+Bug 68161 - journalctl ignored disk space restrictions
+https://bugs.freedesktop.org/show_bug.cgi?id=68161
+
+And applied these patches:
+http://cgit.freedesktop.org/systemd/systemd/commit/?id=629bfc5a
+http://cgit.freedesktop.org/systemd/systemd/commit/?id=48979861
+
+I tested and it solved the issue.
+
+Should I have to send these patches and the modified recipe to ML?
+
 
 Regards,
--- 
-olofjn
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
 
