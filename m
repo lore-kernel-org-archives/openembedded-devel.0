@@ -1,37 +1,49 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 02DB96E987
+Return-Path: <olof.johansson@axis.com>
+Received: from anubis.se.axis.com (anubis.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 498886E987
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 15:11:36 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kp14so4501960pab.34
+	Fri, 31 Jan 2014 17:27:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by anubis.se.axis.com (Postfix) with ESMTP id AD8211A0EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 07:11:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=xJNmBeLYI1XV6EX/yn59/gvz6OcVq1ZzPALS9k5ueAc=;
-	b=rN63UbwXCOLF6vL4s+OMhYUSYzXeXVwT8OKPxsG0DDqjHj0jiMVpktDYwUdwR5CUx0
-	4qBGn9UmDMd+PF79niRqyYwlg84pPSOFP+zqdgd7PZthQvfR9g1doRHR7kLhJTIbRIeN
-	dAcLw9iYuM1Wo/Guk2N8djGOY2By/CQksaGuHUnhGBDZ1g10hjxPmoQfFBXbMcYj4j8M
-	/WJlXu9XYRUtWWEqFJAy4C/baJYXao3ou1gB8s0povs0w9Yugn7X6JVUNAZJ8gMhssAY
-	6LKhQbLrVXtnnenMhHeiy+fEJ17x9Kc+2xYz4ND5hUwTB6HwEmi6u37NjkRdlPoet7et
-	G2JA==
-X-Received: by 10.66.124.230 with SMTP id ml6mr16928487pab.29.1391181098307;
-	Fri, 31 Jan 2014 07:11:38 -0800 (PST)
-Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	zc6sm69486700pab.18.2014.01.31.07.11.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Jan 2014 07:11:37 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Jan 2014 07:11:40 -0800
-Message-Id: <1391181100-32525-9-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
+	Fri, 31 Jan 2014 18:27:09 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at anubis.se.axis.com
+Received: from anubis.se.axis.com ([127.0.0.1])
+	by localhost (anubis.se.axis.com [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id TYN+zgwWAeE3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 18:27:07 +0100 (CET)
+Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
+	by anubis.se.axis.com (Postfix) with ESMTP id 8832E1A0F7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
+Received: from boulder.se.axis.com (localhost [127.0.0.1])
+	by postfix.imss71 (Postfix) with ESMTP id 69FB3A0B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
+Received: from thoth.se.axis.com (thoth.se.axis.com [10.0.2.173])
+	by boulder.se.axis.com (Postfix) with ESMTP id 5F11F9D3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
+Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
+	by thoth.se.axis.com (Postfix) with ESMTP id 5DA823404E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 18:26:49 +0100 (CET)
+Received: from axis.com (10.92.17.1) by xmail2.se.axis.com (10.0.5.74) with
+	Microsoft SMTP Server (TLS) id 8.2.255.0;
+	Fri, 31 Jan 2014 18:26:49 +0100
+Date: Fri, 31 Jan 2014 18:26:48 +0100
+From: Olof Johansson <olof.johansson@axis.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20140131172647.GE23583@axis.com>
 References: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH 9/9] perl-module-extutils-cppguess: add 0.07
+MIME-Version: 1.0
+In-Reply-To: <1391181100-32525-1-git-send-email-ticotimo@gmail.com>
+Thread-Topic: [oe] [meta-perl][PATCH 1/9] perl-module-metadata: add 1.000019
+Accept-Language: en-US, sv-SE
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-perl][PATCH 1/9] perl-module-metadata: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,63 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 15:11:37 -0000
+X-List-Received-Date: Fri, 31 Jan 2014 17:27:14 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+Content-Language: en-US
 
-[Description from CPAN]
-ExtUtils::CppGuess attempts to guess the system's C++ compiler that is compatible with the C compiler that your perl was built with.
+On 14-01-31 16:11 +0100, Tim Orling wrote:
+> This module provides a standard way to gather metadata about a
+> .pm file through (mostly) static analysis and (some) code
+> execution. When determining the version of a module, the
+> $VERSION assignment is "eval"ed, as is traditional in the CPAN
+> toolchain.
 
-It can generate the necessary options to the Module::Build constructor or to ExtUtils::MakeMaker's WriteMakefile function.
+For me, it seems strange to skip out the first part of the module
+name, just because it's part of the recipe perl-module- prefix. I
+agree it's a bit ugly to call it perl-module-module-metadata, but
+I think it would cause less confusion.
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- .../extutils/perl-module-extutils-cppguess_0.07.bb |   37 ++++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 meta-perl/recipes-perl/extutils/perl-module-extutils-cppguess_0.07.bb
+On the other hand, the naming convention within meta-perl seems
+to be consistently lib<module name>-perl, like it is in Debian.
+Same for oecore, except the core modules provided by the perl
+recipe. This would make the proper name for this recipe be
+libmodule-metadata-perl. Why use the perl-module- prefix?
 
-diff --git a/meta-perl/recipes-perl/extutils/perl-module-extutils-cppguess_0.07.bb b/meta-perl/recipes-perl/extutils/perl-module-extutils-cppguess_0.07.bb
-new file mode 100644
-index 0000000..b75c451
---- /dev/null
-+++ b/meta-perl/recipes-perl/extutils/perl-module-extutils-cppguess_0.07.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "ExtUtils::CppGuess - guess C++ compiler and flags"
-+DESCRIPTION = "ExtUtils::CppGuess attempts to guess the system's C++ \
-+compiler that is compatible with the C compiler that your perl was built \
-+with. \
-+It can generate the necessary options to the Module::Build constructor or \
-+to ExtUtils::MakeMaker's WriteMakefile function."
-+
-+HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SM/SMUELLER/ExtUtils-CppGuess-${PV}.tar.gz"
-+SRC_URI[md5sum] = "350dd7c661189ea770d6c9354ebbc6c2"
-+SRC_URI[sha256sum] = "1cd83ee8452351219b987c79ddb25cc25ee8c396318ba36c5211a92b5c87e7a8"
-+
-+S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
-+
-+inherit cpan_build
-+
-+do_install () {
-+        cpan_build_do_install
-+}
-+
-+RDEPENDS_${PN} = " perl-module-capture-tiny \
-+                   perl-module-scalar-util \
-+                   perl-module-io-file \
-+                   perl-module-extutils-makemaker \
-+                   perl-module-file-spec \
-+                   perl-module-exporter \
-+                   perl-module-carp \
-+                   perl-module-file-temp \
-+                   perl-module-lib \
-+                   perl-module-build \
-+"
-+
-+BBCLASSEXTEND = "native"
+Regards,
 -- 
-1.7.9.5
-
+olofjn
 
