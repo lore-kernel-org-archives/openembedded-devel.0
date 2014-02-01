@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BA5216EA39
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id C47196EB50
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2014 07:34:41 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id d17so2716894eek.9
+	Sat,  1 Feb 2014 07:34:43 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id e53so2643352eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 23:34:42 -0800 (PST)
+	Fri, 31 Jan 2014 23:34:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=nd5zEYbKbJeDF2XhkXdADLd6q6XElIf69auLc6RhvVw=;
-	b=PGAmUhRzf113e7biWb5El3Xbg8InDwS6oDRs773JECbRm/325tEMBOSHRd38ZsgJu4
-	AScxVZULtkubsJ2b6vbdtzJ+UzSzzfNHcRdHufe1+bxQIJskhw/4kpnNjLJ9BVSpjN4f
-	9CPNi/JDfNcj9y5zVWnOF5xMFCcxp23wJrvpl0i0obEJntoBDfgUG1xnBjpwRTvc+21J
-	DbtnXGojqp3cVmqQFFRf3J5GJaWiVZaNZiG80fLnbjXE5Op46lo6nE4tAB26KcVRdnou
-	TaQ052J+UuEn1qRyvu6+m3OBhdDyD+mL9U0BmKl3USufFH1c+WAxL4wNQrIph+yh8+Wj
-	wHhg==
-X-Received: by 10.14.175.131 with SMTP id z3mr284533eel.65.1391240082484;
-	Fri, 31 Jan 2014 23:34:42 -0800 (PST)
+	:references; bh=6y3HnKwTVfS8asjg74oRPMFWdlYpiEFlwoJLWtSUyss=;
+	b=fNg1Ton9L+Ic+V1LmDp0G34fHefcdz7NIFbOytAB8VHE5bIHLnDuf99e2PuhElI31a
+	QKmNJra23HItvMFHKgFfSCjFN4zaRB5MMbVv6x2w39eUE1bIzkS7ne/AlFIyc7207HTA
+	BAPfRVOQqDw+otLKOkUYtqVr5cK67jFpmISpz7hyGbZkYBLC/d6jwOouwMXuAjfYYzPi
+	sc8ahkZXMjG0h9goB/NIyI+0kKqVC1xHflWLjgyc2LUqQR7R1zEOi/jQXM8ad6MmkJbf
+	OOcos8b65Z/j6BpljUJcufBAMGin2DuVFZoku2spbBAGh3/rszSlXWqZO8/EOYKh4N6I
+	RXxg==
+X-Received: by 10.15.52.194 with SMTP id p42mr29579731eew.11.1391240084415;
+	Fri, 31 Jan 2014 23:34:44 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	b41sm46491685eef.16.2014.01.31.23.34.41
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id v7sm46156216eel.2.2014.01.31.23.34.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Jan 2014 23:34:41 -0800 (PST)
+	Fri, 31 Jan 2014 23:34:43 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Feb 2014 08:34:13 +0100
-Message-Id: <8316209b9b517d12e60ce2fdb612eb645b4f300a.1391239970.git.Martin.Jansa@gmail.com>
+Date: Sat,  1 Feb 2014 08:34:14 +0100
+Message-Id: <ca9950ccdb4a6d0927cdbdb1f9b5bdde3f1c1702.1391239970.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.8.5.3
 In-Reply-To: <cover.1391239970.git.Martin.Jansa@gmail.com>
 References: <cover.1391239970.git.Martin.Jansa@gmail.com>
 In-Reply-To: <cover.1391239970.git.Martin.Jansa@gmail.com>
 References: <cover.1391239970.git.Martin.Jansa@gmail.com>
-Subject: [PATCH 17/20] libeflvala: Fix build of tests
+Subject: [PATCH 18/20] elfe: Replace svn with git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,77 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2014 07:34:42 -0000
+X-List-Received-Date: Sat, 01 Feb 2014 07:34:44 -0000
+
+* bump PE to cope with +svn -> +git
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../efl/libeflvala/disable.eina.test.patch         | 44 ++++++++++++++++++++++
- meta-efl/recipes-efl/efl/libeflvala_svn.bb         |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch
+ meta-efl/recipes-efl/e17/{elfe_svn.bb => elfe_git.bb} | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+ rename meta-efl/recipes-efl/e17/{elfe_svn.bb => elfe_git.bb} (41%)
 
-diff --git a/meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch b/meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch
-new file mode 100644
-index 0000000..84be133
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch
-@@ -0,0 +1,44 @@
-+It causes testeina.c build to fail linking to internal eina_.*_{init,shutdown} symbols
-+as reported in:
-+http://lists.alioth.debian.org/pipermail/pkg-fso-maint/2010-May/003056.html
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+diff -uNr vala/tests/testeina.vala ../../../arm920tt-oe-linux-gnueabi/libeflvala/1_2011.01.13.1+svnr82070-r2/vala/tests/testeina.vala
-+--- vala/tests/testeina.vala	2014-01-13 16:16:53.984999035 +0100
-++++ ../../../arm920tt-oe-linux-gnueabi/libeflvala/1_2011.01.13.1+svnr82070-r2/vala/tests/testeina.vala	2010-02-26 09:02:06.000000000 +0100
-+@@ -153,22 +153,22 @@
-+ 
-+ void test_eina_benchmark()
-+ {
-+-    assert( Eina.Module.init() );
-+-    assert( Eina.List.init() );
-+-    assert( Eina.Array.init() );
-+-    assert( Eina.Benchmark.init() );
-+-    assert( Eina.Mempool.init() );
-++//  assert( Eina.Module.init() );
-++//  assert( Eina.List.init() );
-++//  assert( Eina.Array.init() );
-++//  assert( Eina.Benchmark.init() );
-++//  assert( Eina.Mempool.init() );
-+     var b = new Eina.Benchmark( "test", "test");
-+     assert( b.register( "bogus", spec_one, 0, 100, 5 ) );
-+     unowned Eina.Array<string> result = b.run();
-+     assert( result.count_get() == 2 );
-+     result = null;
-+     b = null;
-+-    assert( Eina.Mempool.shutdown() );
-+-    assert( Eina.Benchmark.shutdown() );
-+-    assert( Eina.Array.shutdown() );
-+-    assert( Eina.List.shutdown() );
-+-    assert( Eina.Module.shutdown() );
-++//  assert( Eina.Mempool.shutdown() );
-++//  assert( Eina.Benchmark.shutdown() );
-++//  assert( Eina.Array.shutdown() );
-++//  assert( Eina.List.shutdown() );
-++//  assert( Eina.Module.shutdown() );
-+ }
-+ 
-+ //===========================================================================
-diff --git a/meta-efl/recipes-efl/efl/libeflvala_svn.bb b/meta-efl/recipes-efl/efl/libeflvala_svn.bb
-index 1eb9c13..ab37a68 100644
---- a/meta-efl/recipes-efl/efl/libeflvala_svn.bb
-+++ b/meta-efl/recipes-efl/efl/libeflvala_svn.bb
-@@ -13,6 +13,7 @@ SRCNAME = "vala"
- inherit e-base autotools pkgconfig vala
+diff --git a/meta-efl/recipes-efl/e17/elfe_svn.bb b/meta-efl/recipes-efl/e17/elfe_git.bb
+similarity index 41%
+rename from meta-efl/recipes-efl/e17/elfe_svn.bb
+rename to meta-efl/recipes-efl/e17/elfe_git.bb
+index f6d6fdb..fcb97a9 100644
+--- a/meta-efl/recipes-efl/e17/elfe_svn.bb
++++ b/meta-efl/recipes-efl/e17/elfe_git.bb
+@@ -1,10 +1,15 @@
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
+-PV = "0.0.1+svnr${SRCPV}"
+-PR = "${INC_PR}.1"
++PV = "0.0.1+gitr${SRCPV}"
++PE = "1"
  
- SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};protocol=http \
-+    file://disable.eina.test.patch \
- "
- S = "${WORKDIR}/${SRCNAME}"
+ require e-module.inc
  
+-SRCREV = "${EFL_SRCREV}"
++SRC_URI = " \
++    git://git.enlightenment.org/enlightenment/modules/${BPN}.git \
++"
++S = "${WORKDIR}/git"
++
++SRCREV = "1ec0e7713c3ca901014811ff78277d9e2aaac981"
+ 
+ DEPENDS += "elementary"
 -- 
 1.8.5.3
 
