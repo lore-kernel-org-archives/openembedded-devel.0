@@ -1,40 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id E4B6B6E9B4
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 334706EA47
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2014 07:50:39 +0000 (UTC)
-Received: by mail-ea0-f173.google.com with SMTP id d10so2695915eaj.18
+	Sat,  1 Feb 2014 09:03:05 +0000 (UTC)
+Received: by mail-qc0-f174.google.com with SMTP id x13so8542692qcv.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2014 23:50:40 -0800 (PST)
+	Sat, 01 Feb 2014 01:03:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1S7yv3zerVLfrm5S6O7FASEgb+aO1EbLujnSvzTcO3I=;
-	b=vwEu0jkzJq/ZVQ88ly8EnDvxhBL65BGnLa4HFIwak9K1UOacpFGGatnjrdU2Aa9Thy
-	/sGtH33dds7CXpeTUF2GNWmu7RzyIVseC5N23DHa+QYVPuXqBUlMl+xpUKebEoimcc5o
-	5VZsbh2589kCw5/NpgiYzLHwydcQcqwY3DjAdlKU7EQcWLvUM2WsbeXqs7a6lmY35Wl8
-	6NppCIW0uFZjWI/B+3MvpDtrJuNxw8SGsf0Y6gTtwEZ5VbAJ1WZa7N+HD+S4iBdUu5in
-	MCZORUGxiu4WgOvj2A1+LVjm4dVVHSY+yRAvYOVLVzoRIsw9AqItLA+vGYaoRMgtYXey
-	DsOA==
-X-Received: by 10.14.183.132 with SMTP id q4mr296038eem.91.1391241040540;
-	Fri, 31 Jan 2014 23:50:40 -0800 (PST)
-Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
-	[89.176.104.107]) by mx.google.com with ESMTPSA id
-	k41sm35934489een.19.2014.01.31.23.50.38
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Jan 2014 23:50:39 -0800 (PST)
-Date: Sat, 1 Feb 2014 08:50:48 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140201075048.GB3718@jama>
-References: <20140128143329.GK3718@jama>
-	<1390923283-17138-1-git-send-email-obi@opendreambox.org>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Fqw7bYgeniM4jphn2fUq2Ss/L1iYjvlMotfajBLX4aA=;
+	b=AlOlaVJyfFHcg1MYX0OYFrhHnR/PKLhwBwcjOEcx6Mg2YWiA2vgxh61nIC/Jurp+FW
+	NeU0rUFYjfneLrjE6sN4F8Pw8DJ8EBMS2DT0L6/1viKn8elwbAxHGHZx9S9KPPZNQT6P
+	PYiikREQP7ZMy4GVgyBK1J9E30SNTvS3972C/GD6M7qLF+Nq4Xodc/OycjAIBqniWKAu
+	V39FPGXjOufqgWJHKLe15+An6/GvVJowAY7nChjyuesQEfJyBGV9md3Urh/ea7lGyMAR
+	6Fh5vTaiesqqApcVRC7D5wzKKbBuHKWdc6fdbiy7HGQbSfr63CR/6WnnjRx2LmCqMKz2
+	/C2A==
+X-Received: by 10.224.151.147 with SMTP id c19mr38790694qaw.86.1391245385637; 
+	Sat, 01 Feb 2014 01:03:05 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1390923283-17138-1-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] libconnman-qt: fix linking and packaging with Qt4/Embedded
+Received: by 10.140.25.47 with HTTP; Sat, 1 Feb 2014 01:02:45 -0800 (PST)
+In-Reply-To: <20140201074259.GA3718@jama>
+References: <1391198644-9408-1-git-send-email-diego.sueiro@gmail.com>
+	<20140201074259.GA3718@jama>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Sat, 1 Feb 2014 07:02:45 -0200
+Message-ID: <CAMCfZKE77D8YXHJXwzndCLQ8VgojKTtSv6h=KDxVQtA69FMGvQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [for-dora] systemd: journald fix ignored disk space restrictions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,135 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2014 07:50:40 -0000
-X-Groupsio-MsgNum: 48017
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="p//XFgTqeVWI1epd"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 01 Feb 2014 09:03:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---p//XFgTqeVWI1epd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Feb 1, 2014 at 5:42 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-On Tue, Jan 28, 2014 at 04:34:43PM +0100, Andreas Oberritter wrote:
-> * Don't overwrite EXTRA_QMAKEVARS_PRE, because qt4e.bbclass uses
->   it to pass on QT_LIBINFX.
-> * Generalize QT_IMPORTS_DIR to make it valid for qte.
->=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc b/meta-oe=
-/recipes-qt/libconnman-qt/libconnman-qt.inc
-> index e4f68db..77e70e8 100644
-> --- a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-> @@ -12,7 +12,7 @@ S =3D "${WORKDIR}/git"
-> =20
->  inherit pkgconfig
-> =20
-> -EXTRA_QMAKEVARS_PRE =3D "CONFIG+=3Dnotests"
-> +EXTRA_QMAKEVARS_PRE +=3D "CONFIG+=3Dnotests"
-> =20
->  do_configure_prepend() {
->      # Hack *.pro variables
-> @@ -48,6 +48,6 @@ FILES_${PN}-plugin-dbg =3D " \
->      ${PLUGINS_TARGET}/.debug/* \
->  "
-> =20
-> -QT_IMPORTS_DIR =3D "${libdir}/qt4/imports"
-> +QT_IMPORTS_DIR =3D "${libdir}/${QT_DIR_NAME}/imports"
->  # the plugin target needs to be the same as 'target.path' and 'qmldir.pa=
-th' in ${S}/plugin/plugin.pro
->  PLUGINS_TARGET =3D "${QT_IMPORTS_DIR}/MeeGo/Connman"
+> Hello Diego, this belongs to openembedded-core ML.
+>
+Sorry about this.
 
-Can qte version install files in sysroot with different names? Currently
-they conflict with qt version:
+>
+> It's not clear from the bug report, but these patches are included in
+> 208 release right?
+>
+I believe that these patches are included in 207 release.
 
-NOTE: recipe libconnman-qt-1.0.46+gitAUTOINC+ddbeaf72b4-r0: task do_populat=
-e_sysroot: Started
-NOTE: recipe libconnman-qt-1.0.46+gitAUTOINC+ddbeaf72b4-r0: task do_package=
-: Started
-WARNING: The recipe libconnman-qt is trying to install files into a shared =
-area when those files already exist. Those files and their manifest locatio=
-n are:
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/libconnman-qt4.so.1.0.46
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/libconnman-qt4.so
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/libconnman-qt4.so.1
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/libconnman-qt4.so.1.0
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/libconnman-qt4.prl
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/connman-qt4.pc
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/lib/pkgconfig/connman-qt4.pc
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/networkmanager.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/networktechnology.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/networkservice.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/commondbustypes.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/connmannetworkproxyfactory.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/clockmodel.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/useragent.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/sessionagent.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/networksession.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-   /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/=
-usr/include/connman-qt/counter.h
-   Matched in manifest-qemuarm-libconnman-qte.populate_sysroot
-Please verify which package should provide the above files.
+> Please check and mention it in commit message to
+> explain that this isn't needed in oe-core/master.
+>
+Ok.
 
-> --=20
-> 1.8.3.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Thanks for reviewing it.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Regards,
 
---p//XFgTqeVWI1epd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+--
+*dS
+Diego Sueiro
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Administrador do Embarcados
+www.embarcados.com.br
 
-iEYEARECAAYFAlLsp1gACgkQN1Ujt2V2gByOCACeIs6v8LD/+g2v4f466IzQrQIq
-3zcAoI0nJ25UUtc3O6l8UgTAL811LULE
-=BeDg
------END PGP SIGNATURE-----
+/*long live rock 'n roll*/
 
---p//XFgTqeVWI1epd--
