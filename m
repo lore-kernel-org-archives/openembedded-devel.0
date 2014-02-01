@@ -1,34 +1,40 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 334706EA47
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2014 09:03:05 +0000 (UTC)
-Received: by mail-qc0-f174.google.com with SMTP id x13so8542692qcv.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Feb 2014 01:03:05 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 55F596E9AE;
+	Sat,  1 Feb 2014 09:05:33 +0000 (UTC)
+Received: by mail-ie0-f178.google.com with SMTP id x13so4934310ief.23
+	for <multiple recipients>; Sat, 01 Feb 2014 01:05:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Fqw7bYgeniM4jphn2fUq2Ss/L1iYjvlMotfajBLX4aA=;
-	b=AlOlaVJyfFHcg1MYX0OYFrhHnR/PKLhwBwcjOEcx6Mg2YWiA2vgxh61nIC/Jurp+FW
-	NeU0rUFYjfneLrjE6sN4F8Pw8DJ8EBMS2DT0L6/1viKn8elwbAxHGHZx9S9KPPZNQT6P
-	PYiikREQP7ZMy4GVgyBK1J9E30SNTvS3972C/GD6M7qLF+Nq4Xodc/OycjAIBqniWKAu
-	V39FPGXjOufqgWJHKLe15+An6/GvVJowAY7nChjyuesQEfJyBGV9md3Urh/ea7lGyMAR
-	6Fh5vTaiesqqApcVRC7D5wzKKbBuHKWdc6fdbiy7HGQbSfr63CR/6WnnjRx2LmCqMKz2
-	/C2A==
-X-Received: by 10.224.151.147 with SMTP id c19mr38790694qaw.86.1391245385637; 
-	Sat, 01 Feb 2014 01:03:05 -0800 (PST)
+	:cc:content-type;
+	bh=voLXWbVAF4cRWfkFlQJMb4X/dJ51S6byJKYqaf0/T1U=;
+	b=kAalPDU9P9d+TyJ2RWIAC01rv+6whYz5waU9QCcuIW3IQer1/rGDuy/ypK+fLsr/rB
+	++LolBXm1wdsYOXZi2AqG4e3u4xCnEDIQQ4NA7YXkxSt+Ou2EfTUVwTjl2a0Y8pcG31i
+	SAJAk3NH1sfbvkJiYhHiuKD7DB0fQj329dK0UoR/FVi4xgsBpnMXvS4fYWxmJeE72dGq
+	tC5er+lgYKxBbjNVUw4D/QdtwNefGiMxl/Iw2japZnqFomnRtoKHc5wzxvtXFjJT3GHp
+	GRPHfWmBreyrmOfpOyKlhaMROk063bTVDoxstkFbdHyg/t6ZF6pFikUJMMt0upOjrkCU
+	vZYg==
+X-Received: by 10.43.60.139 with SMTP id ws11mr19130442icb.12.1391245534365;
+	Sat, 01 Feb 2014 01:05:34 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Sat, 1 Feb 2014 01:02:45 -0800 (PST)
-In-Reply-To: <20140201074259.GA3718@jama>
-References: <1391198644-9408-1-git-send-email-diego.sueiro@gmail.com>
-	<20140201074259.GA3718@jama>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Sat, 1 Feb 2014 07:02:45 -0200
-Message-ID: <CAMCfZKE77D8YXHJXwzndCLQ8VgojKTtSv6h=KDxVQtA69FMGvQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [for-dora] systemd: journald fix ignored disk space restrictions
+Received: by 10.50.8.137 with HTTP; Sat, 1 Feb 2014 01:05:04 -0800 (PST)
+In-Reply-To: <CAMKF1soZFUbDRm3Tqg1YTcUwycVJbxe0fk_ir4pmCEtH0L8rFA@mail.gmail.com>
+References: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
+	<52B30EE5.6050901@linux.intel.com>
+	<CAMKF1sqABZeBKTBP-MB3HvOFfBadofBQaaaMf8u2F5ExmCiVrw@mail.gmail.com>
+	<52EC1764.8080602@linux.intel.com>
+	<CAMKF1soCsegjEBaeE+Z1bzXOrLobnMkcuSWMQuVDw1yhfx-DSw@mail.gmail.com>
+	<52EC252C.6040602@linux.intel.com>
+	<CAMKF1soZFUbDRm3Tqg1YTcUwycVJbxe0fk_ir4pmCEtH0L8rFA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 1 Feb 2014 01:05:04 -0800
+Message-ID: <CAMKF1sr5jjc5oYbeWtxdjn67aERvxQu3Oc1T+0fG5fsNQjAa3g@mail.gmail.com>
+To: Saul Wold <sgw@linux.intel.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFC] Binutils upgrade to 2.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +48,261 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2014 09:03:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 01 Feb 2014 09:05:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sat, Feb 1, 2014 at 5:42 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> Hello Diego, this belongs to openembedded-core ML.
+On Fri, Jan 31, 2014 at 3:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Fri, Jan 31, 2014 at 2:35 PM, Saul Wold <sgw@linux.intel.com> wrote:
+>> On 01/31/2014 02:08 PM, Khem Raj wrote:
+>>>
+>>> On Fri, Jan 31, 2014 at 1:36 PM, Saul Wold <sgw@linux.intel.com> wrote:
+>>>>
+>>>> On 01/29/2014 08:33 PM, Khem Raj wrote:
+>>>>>
+>>>>>
+>>>>> On Thu, Dec 19, 2013 at 7:21 AM, Saul Wold <sgw@linux.intel.com> wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 12/16/2013 12:03 PM, Khem Raj wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> Hi
+>>>>>>>
+>>>>>>> I have pushed a contrib branch for binutils 2.24 upgrade here
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/binutils-2.24
+>>>>>>>
+>>>>>>> I have tested it on both uclibc/eglibc and qemu machines. But it would
+>>>>>>> be nice if
+>>>>>>> it gets more testing for machines I havent tested
+>>>>>>>
+>>>>>>
+>>>>>> Looks like we tickled an LD bug of somekind, we are seeing the
+>>>>>> following
+>>>>>> failure across all machines, this was a second build using binutils
+>>>>>> 2.24,
+>>>>>> so
+>>>>>> there was some shared state usage.
+>>>>>>
+>>>>>> RP pointed out the --as-needed option was used with -lm as those
+>>>>>> symbols
+>>>>>> are
+>>>>>> math related.
+>>>>>>
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwconfig
+>>>>>>> iwconfig.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwlist
+>>>>>>> iwlist.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwpriv
+>>>>>>> iwpriv.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwspy iwspy.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwgetid
+>>>>>>> iwgetid.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
+>>>>>>>
+>>>>>>>
+>>>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
+>>>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+>>>>>>>
+>>>>>>>
+>>>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
+>>>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwevent
+>>>>>>> iwevent.o
+>>>>>>> libiw.so.29 -lm
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwconfig] Error 1
+>>>>>>> | make: *** Waiting for unfinished jobs....
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwgetid] Error 1
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwspy] Error 1
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwpriv] Error 1
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwlist] Error 1
+>>>>>>> | libiw.so.29: undefined reference to `ceil'
+>>>>>>> | libiw.so.29: undefined reference to `pow'
+>>>>>>> | libiw.so.29: undefined reference to `log10'
+>>>>>>> | libiw.so.29: undefined reference to `floor'
+>>>>>>> | collect2: error: ld returned 1 exit status
+>>>>>>> | make: *** [iwevent] Error 1
+>>>>>>> | ERROR: oe_runmake failed
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>
+>>>>> I tested OE-Core builds for qemuppc
+>>>>>
+>>>>> 1. build from scratch  ( MACHINE=qemuppc bitbake wirelesstools)
+>>>>> 2. build from sstate ( MACHINE=qemuppc bitbake -cclean wirelesstools
+>>>>> and then step 1)
+>>>>> 3. Build second time just wireless-tools ( MACHINE=qemuppc bitbake
+>>>>> -ccleanall wirelesstools and then step 1 )
+>>>>> 4. Rebuild all from sstate ( rm -rf tmp/ and then step 1)
+>>>>>
+>>>>> I could not reproduce this issue at all. The differences are I did it
+>>>>> with OE-Core and not with Poky autbuilders run with poky distro
+>>>>> policies.
+>>>>> we should also actually regress OE-Core alone
+>>>>>
+>>>>> My build machine here is debian/wheezy and ubuntu 12.04 both 64bit)
+>>>>>
+>>>>> I am on commit c3f3fed1b397b6ee6d44e7d39e63d084e4a88e30 of OE-Core
+>>>>>
+>>>>> At this point I am out of ideas how to reproduce this.
+>>>>>
+>>>>> If there is some other developer out there who can try this patch and
+>>>>> get the same errors,that would be interesting and probably we
+>>>>> will get to root of it.
+>>>>>
+>>>>>
+>>>> Sorry Khem, failed again!
+>>>>
+>>>> Build Configuration:
+>>>> BB_VERSION        = "1.21.1"
+>>>> BUILD_SYS         = "x86_64-linux"
+>>>> NATIVELSBSTRING   = "Ubuntu-13.10"
+>>>> TARGET_SYS        = "powerpc-poky-linux"
+>>>> MACHINE           = "qemuppc"
+>>>> DISTRO            = "poky"
+>>>> DISTRO_VERSION    = "1.5+snapshot-20140131"
+>>>> TUNE_FEATURES     = "m32 fpu-hard ppc7400 altivec"
+>>>> TARGET_FPU        = ""
+>>>> meta
+>>>> meta-yocto
+>>>> meta-yocto-bsp    = "mut:980faeefaac3466aff38822479bf7d9fff4994eb"
+>>>>
+>>>>
+>>>> I did a bitbake -c cleansstate binutils-native eglibc wireless-tools
+>>>> followed by a bitbake of wireless-tools and I still get this same
+>>>> failure.
+>>>>
+>>>
+>>> OK still cant get it here. For above, you did those cmds on clean tmp/
+>>> and sstate being around ? or tmp with previous build in there
+>>>
+>> Yes, but I just did another clean sstate, clean tmp dir of both of these
+>> build and they both still fail.
+>>
+>> Do you have a newer machine than 12.04?  What's the compiler/binutils that
+>> you have on 12.04 for the native build. I have binutils-2.23.52 and
+>> gcc-4.8.1 on my Ubuntu 13.10.
 >
-Sorry about this.
-
+> Mine is debian/wheezy here. I think I have access to 13.10 box
+> somewhere, let me try it there
 >
-> It's not clear from the bug report, but these patches are included in
-> 208 release right?
 >
-I believe that these patches are included in 207 release.
+>>
+>> Sau!
+>>
+>>
+>>>
+>>>> My build info above.
+>>>>
+>>>> I tried with OE-Core alone and still got the same failure (this time with
+>>>> ARM!)
+>>>>
+>>>> Build Configuration:
+>>>> BB_VERSION        = "1.21.1"
+>>>> BUILD_SYS         = "x86_64-linux"
+>>>> NATIVELSBSTRING   = "Ubuntu-13.10"
+>>>> TARGET_SYS        = "arm-oe-linux-gnueabi"
+>>>> MACHINE           = "qemuarm"
+>>>> DISTRO            = "nodistro"
+>>>> DISTRO_VERSION    = "nodistro.0"
+>>>> TUNE_FEATURES     = "armv5 thumb dsp"
+>>>> TARGET_FPU        = "soft"
+>>>> meta              = "binutils:e20eeca128f362d500e19c5757e13cc7dab86b3a"
+>>>>
+>>>>
+>>>> Totally clean build area.
+>>>>
+>>>
+>>> and no sstate ?
+>>>
+>>
+>> Build again with NO Sstate and clean build area
 
-> Please check and mention it in commit message to
-> explain that this isn't needed in oe-core/master.
->
-Ok.
+I was able to reproduce it, I have fixed it in wireless-tools
+and sent out a new patchset to ml as pull request, test it out
+in your setup
 
-Thanks for reviewing it.
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
+>>
+>>>>
+>>>>
+>>>> Sau!
+>>>>
+>>>
+>>>
+>>
 
