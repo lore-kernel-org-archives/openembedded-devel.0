@@ -1,39 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id EEF1A6E8AE;
-	Fri, 31 Jan 2014 23:43:00 +0000 (UTC)
-Received: by mail-ie0-f174.google.com with SMTP id tp5so4758937ieb.5
-	for <multiple recipients>; Fri, 31 Jan 2014 15:43:02 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F9CF6E9A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  1 Feb 2014 07:34:11 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id c41so2664731eek.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Jan 2014 23:34:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=jqUhZtN/yuXPKkIgjcW75GSAH906eYJv1wTcTQdU+40=;
-	b=Wk8RNL9UKzex6hqWyzh5yhXekWIMJKd5goPNwrzY7yxF8hCe+qqBvAdGKVPIQnXHAQ
-	lD3pmaeyaYin9XibdpxT/mEeR/fQVEiuA9gvz8gOkAFI34A8iIEx4upCUpZfiZLMceUA
-	YWCMxNBFcscRA68hhW3Vf8ORse+ZV+f2FVlVzI0SklsTL1HC8ClyAJo8Tts+DGeObESh
-	pcWBn3Ace3Hdp+FZN/47lXjHJpaOll1IYXS4O0SUnri2+x0rr+PeJxD5zRJmemh8uONz
-	42fPrMYAkQcDy/2Vr6US4qJZ1jPHnyqmMumnlNIOCrOy5im2Fg4NJRvbyuEYisSg+IwY
-	CqWg==
-X-Received: by 10.50.43.131 with SMTP id w3mr1018803igl.17.1391211781918; Fri,
-	31 Jan 2014 15:43:01 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.8.137 with HTTP; Fri, 31 Jan 2014 15:42:31 -0800 (PST)
-In-Reply-To: <52EC252C.6040602@linux.intel.com>
-References: <CAMKF1spWnFvXRAp-GuoBL9vXceg29h5Numv7PYhZNWUJu8rMRw@mail.gmail.com>
-	<52B30EE5.6050901@linux.intel.com>
-	<CAMKF1sqABZeBKTBP-MB3HvOFfBadofBQaaaMf8u2F5ExmCiVrw@mail.gmail.com>
-	<52EC1764.8080602@linux.intel.com>
-	<CAMKF1soCsegjEBaeE+Z1bzXOrLobnMkcuSWMQuVDw1yhfx-DSw@mail.gmail.com>
-	<52EC252C.6040602@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 31 Jan 2014 15:42:31 -0800
-Message-ID: <CAMKF1soZFUbDRm3Tqg1YTcUwycVJbxe0fk_ir4pmCEtH0L8rFA@mail.gmail.com>
-To: Saul Wold <sgw@linux.intel.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC] Binutils upgrade to 2.24
+	h=from:to:subject:date:message-id;
+	bh=m4f6FQO5UCzpp+Et8pW5pyK/U90bJwpJ5/KsbAb2zfg=;
+	b=0xuqhki9Fru+/mFycKrJt6QfXTk5k5CAXHM6hLPAH9Hrh7dQCDd5ihbIQXL/xYNpRW
+	cqaU29J4RcxOC1yK/o3VSjG9C2NqzIjFNeQ9NbLEhMaqxv6iZ3OJnaGKhRwdzxTYasxU
+	lFaiviRBx+Zbj56rGh3PZ2a7V1e4+tATCdm9BSl41vjtYs6A85zcMxuqS3me4xELg/W8
+	EwMmy3CgDxdO2XiuDkstQo0Akw16jcKhEngsVfBIDhCrJqk6MaclP3U2v29+IrMstLVq
+	G51W5l2O6uIFft2YnsAybDWy4EaChpwQhzNvkt9CJ2YWXdRVlskwjugQOPOspdXAAdJ5
+	Y1vQ==
+X-Received: by 10.14.100.204 with SMTP id z52mr250243eef.68.1391240051779;
+	Fri, 31 Jan 2014 23:34:11 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id u7sm46333845eep.11.2014.01.31.23.34.10
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Jan 2014 23:34:11 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  1 Feb 2014 08:33:56 +0100
+Message-Id: <cover.1391239970.git.Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [PATCH 00/20] EFL 1.8 and friends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,255 +42,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2014 23:43:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 01 Feb 2014 07:34:11 -0000
 
-On Fri, Jan 31, 2014 at 2:35 PM, Saul Wold <sgw@linux.intel.com> wrote:
-> On 01/31/2014 02:08 PM, Khem Raj wrote:
->>
->> On Fri, Jan 31, 2014 at 1:36 PM, Saul Wold <sgw@linux.intel.com> wrote:
->>>
->>> On 01/29/2014 08:33 PM, Khem Raj wrote:
->>>>
->>>>
->>>> On Thu, Dec 19, 2013 at 7:21 AM, Saul Wold <sgw@linux.intel.com> wrote:
->>>>>
->>>>>
->>>>> On 12/16/2013 12:03 PM, Khem Raj wrote:
->>>>>>
->>>>>>
->>>>>>
->>>>>> Hi
->>>>>>
->>>>>> I have pushed a contrib branch for binutils 2.24 upgrade here
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/binutils-2.24
->>>>>>
->>>>>> I have tested it on both uclibc/eglibc and qemu machines. But it would
->>>>>> be nice if
->>>>>> it gets more testing for machines I havent tested
->>>>>>
->>>>>
->>>>> Looks like we tickled an LD bug of somekind, we are seeing the
->>>>> following
->>>>> failure across all machines, this was a second build using binutils
->>>>> 2.24,
->>>>> so
->>>>> there was some shared state usage.
->>>>>
->>>>> RP pointed out the --as-needed option was used with -lm as those
->>>>> symbols
->>>>> are
->>>>> math related.
->>>>>
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwconfig
->>>>>> iwconfig.o
->>>>>> libiw.so.29 -lm
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwlist
->>>>>> iwlist.o
->>>>>> libiw.so.29 -lm
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwpriv
->>>>>> iwpriv.o
->>>>>> libiw.so.29 -lm
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwspy iwspy.o
->>>>>> libiw.so.29 -lm
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwgetid
->>>>>> iwgetid.o
->>>>>> libiw.so.29 -lm
->>>>>> | powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400
->>>>>>
->>>>>>
->>>>>> --sysroot=/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/sysroots/qemuppc
->>>>>> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->>>>>>
->>>>>>
->>>>>> -I/home/pokybuild/yocto-autobuilder/yocto-slave/nightly-ppc/build/build/tmp/work/ppc7400-poky-linux/wireless-tools/1_29-r4/wireless_tools.29
->>>>>> -O2 -pipe -g -feliminate-unused-debug-types -MMD     -o iwevent
->>>>>> iwevent.o
->>>>>> libiw.so.29 -lm
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwconfig] Error 1
->>>>>> | make: *** Waiting for unfinished jobs....
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwgetid] Error 1
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwspy] Error 1
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwpriv] Error 1
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwlist] Error 1
->>>>>> | libiw.so.29: undefined reference to `ceil'
->>>>>> | libiw.so.29: undefined reference to `pow'
->>>>>> | libiw.so.29: undefined reference to `log10'
->>>>>> | libiw.so.29: undefined reference to `floor'
->>>>>> | collect2: error: ld returned 1 exit status
->>>>>> | make: *** [iwevent] Error 1
->>>>>> | ERROR: oe_runmake failed
->>>>>
->>>>>
->>>>>
->>>>>
->>>>
->>>> I tested OE-Core builds for qemuppc
->>>>
->>>> 1. build from scratch  ( MACHINE=qemuppc bitbake wirelesstools)
->>>> 2. build from sstate ( MACHINE=qemuppc bitbake -cclean wirelesstools
->>>> and then step 1)
->>>> 3. Build second time just wireless-tools ( MACHINE=qemuppc bitbake
->>>> -ccleanall wirelesstools and then step 1 )
->>>> 4. Rebuild all from sstate ( rm -rf tmp/ and then step 1)
->>>>
->>>> I could not reproduce this issue at all. The differences are I did it
->>>> with OE-Core and not with Poky autbuilders run with poky distro
->>>> policies.
->>>> we should also actually regress OE-Core alone
->>>>
->>>> My build machine here is debian/wheezy and ubuntu 12.04 both 64bit)
->>>>
->>>> I am on commit c3f3fed1b397b6ee6d44e7d39e63d084e4a88e30 of OE-Core
->>>>
->>>> At this point I am out of ideas how to reproduce this.
->>>>
->>>> If there is some other developer out there who can try this patch and
->>>> get the same errors,that would be interesting and probably we
->>>> will get to root of it.
->>>>
->>>>
->>> Sorry Khem, failed again!
->>>
->>> Build Configuration:
->>> BB_VERSION        = "1.21.1"
->>> BUILD_SYS         = "x86_64-linux"
->>> NATIVELSBSTRING   = "Ubuntu-13.10"
->>> TARGET_SYS        = "powerpc-poky-linux"
->>> MACHINE           = "qemuppc"
->>> DISTRO            = "poky"
->>> DISTRO_VERSION    = "1.5+snapshot-20140131"
->>> TUNE_FEATURES     = "m32 fpu-hard ppc7400 altivec"
->>> TARGET_FPU        = ""
->>> meta
->>> meta-yocto
->>> meta-yocto-bsp    = "mut:980faeefaac3466aff38822479bf7d9fff4994eb"
->>>
->>>
->>> I did a bitbake -c cleansstate binutils-native eglibc wireless-tools
->>> followed by a bitbake of wireless-tools and I still get this same
->>> failure.
->>>
->>
->> OK still cant get it here. For above, you did those cmds on clean tmp/
->> and sstate being around ? or tmp with previous build in there
->>
-> Yes, but I just did another clean sstate, clean tmp dir of both of these
-> build and they both still fail.
->
-> Do you have a newer machine than 12.04?  What's the compiler/binutils that
-> you have on 12.04 for the native build. I have binutils-2.23.52 and
-> gcc-4.8.1 on my Ubuntu 13.10.
+The following changes since commit 6572316557e742c2dc93848e4d560242bf0c3995:
 
-Mine is debian/wheezy here. I think I have access to 13.10 box
-somewhere, let me try it there
+  yaffs2-utils: Fix formatting, drop PR (2014-01-23 10:04:37 +0000)
 
+are available in the git repository at:
 
->
-> Sau!
->
->
->>
->>> My build info above.
->>>
->>> I tried with OE-Core alone and still got the same failure (this time with
->>> ARM!)
->>>
->>> Build Configuration:
->>> BB_VERSION        = "1.21.1"
->>> BUILD_SYS         = "x86_64-linux"
->>> NATIVELSBSTRING   = "Ubuntu-13.10"
->>> TARGET_SYS        = "arm-oe-linux-gnueabi"
->>> MACHINE           = "qemuarm"
->>> DISTRO            = "nodistro"
->>> DISTRO_VERSION    = "nodistro.0"
->>> TUNE_FEATURES     = "armv5 thumb dsp"
->>> TARGET_FPU        = "soft"
->>> meta              = "binutils:e20eeca128f362d500e19c5757e13cc7dab86b3a"
->>>
->>>
->>> Totally clean build area.
->>>
->>
->> and no sstate ?
->>
->
-> Build again with NO Sstate and clean build area
->
->>>
->>>
->>> Sau!
->>>
->>
->>
->
+  git://git.openembedded.org/meta-openembedded-contrib jansa/efl
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/efl
+
+Martin Jansa (20):
+  efl: upgrade from separate recipes to shared efl-1.8.5
+  efl: Adjust packaging to match more with old 1.7 separate recipes
+  python-efl: upgrade from separate recipes to shared python-efl-1.8.1
+  python-efl: update packaging to match old packages
+  elementary: upgrade to 1.8.4
+  elementary: Add PACKAGECONFIG for ewebkit and disable it by default
+  terminology: upgrade to 0.4.0
+  evas-generic-loaders: upgrade to 1.8.1
+  emotion-generic-players: add recipe for 1.8.1
+  e-wm: Drop evas-.*-loader.* from RDEPENDS
+  e-wm: Add recipe for 0.18.2
+  enjoy: switch from svn to newer git and update dependency from edbus2
+    to eldbus
+  edbus: remove old edbus(1) svn recipe
+  webkit-efl: Add recipe with snapshot from r159807
+  webkit-efl: Try to disable llint/jit to fix armv[45] build
+  eve: bump SRCREV and update dependency from edbus2 to eldbus
+  libeflvala: Fix build of tests
+  elfe: Replace svn with git version
+  packagegroup-efl-sdk: Update SDK-EFL for shared source tree efl
+  expedite: Replace old svn recipe with git version
+
+ meta-efl/conf/layer.conf                           |   1 +
+ meta-efl/recipes-devtools/python/python-ecore.inc  |   5 -
+ .../recipes-devtools/python/python-ecore_1.7.0.bb  |   5 -
+ .../recipes-devtools/python/python-ecore_svn.bb    |   8 -
+ meta-efl/recipes-devtools/python/python-edbus.inc  |  50 ++++-
+ .../recipes-devtools/python/python-edbus_1.7.0.bb  |   3 +-
+ .../recipes-devtools/python/python-edbus_svn.bb    |   8 -
+ meta-efl/recipes-devtools/python/python-edje.inc   |   6 -
+ .../python-edje/0001-fix-unicode-conversion.patch  |  38 ----
+ .../recipes-devtools/python/python-edje_1.7.0.bb   |   6 -
+ .../recipes-devtools/python/python-edje_svn.bb     |  10 -
+ meta-efl/recipes-devtools/python/python-efl.inc    |  69 ++++--
+ .../recipes-devtools/python/python-efl_1.8.1.bb    |   4 +
+ .../recipes-devtools/python/python-elementary.inc  |   5 -
+ .../python/python-elementary_1.7.0.bb              |   5 -
+ .../python/python-elementary_svn.bb                |   8 -
+ .../recipes-devtools/python/python-emotion.inc     |   5 -
+ .../python/python-emotion_1.7.0.bb                 |   5 -
+ .../recipes-devtools/python/python-emotion_svn.bb  |   8 -
+ meta-efl/recipes-devtools/python/python-evas.inc   |   4 -
+ .../recipes-devtools/python/python-evas_1.7.0.bb   |   5 -
+ .../recipes-devtools/python/python-evas_svn.bb     |   8 -
+ meta-efl/recipes-efl/e17/e-wm.inc                  |  18 +-
+ meta-efl/recipes-efl/e17/e-wm_0.17.5.bb            |  12 +
+ meta-efl/recipes-efl/e17/e-wm_0.18.3.bb            |  20 ++
+ .../recipes-efl/e17/{elfe_svn.bb => elfe_git.bb}   |  11 +-
+ ...position-as-percent-and-define-a-1-second.patch |  14 +-
+ .../recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} |  12 +-
+ meta-efl/recipes-efl/e17/eve_svn.bb                |   4 +-
+ meta-efl/recipes-efl/e17/terminology.inc           |   1 -
+ meta-efl/recipes-efl/e17/terminology_0.3.0.bb      |  10 -
+ meta-efl/recipes-efl/e17/terminology_0.4.0.bb      |   8 +
+ meta-efl/recipes-efl/efl/ecore_1.7.9.bb            | 124 -----------
+ meta-efl/recipes-efl/efl/edbus2.inc                |  11 -
+ meta-efl/recipes-efl/efl/edbus2_svn.bb             |  14 --
+ meta-efl/recipes-efl/efl/edbus_svn.bb              |  13 --
+ meta-efl/recipes-efl/efl/edje_1.7.9.bb             |  72 ------
+ meta-efl/recipes-efl/efl/eet_1.7.9.bb              |  30 ---
+ meta-efl/recipes-efl/efl/eeze_1.7.9.bb             |  23 --
+ meta-efl/recipes-efl/efl/efl.inc                   | 248 +++++++++++++++++++++
+ ...igure.ac-Don-t-check-for-Xprint-extension.patch |  27 +++
+ meta-efl/recipes-efl/efl/efl_1.8.5.bb              |  17 ++
+ meta-efl/recipes-efl/efl/efreet_1.7.9.bb           |  22 --
+ meta-efl/recipes-efl/efl/eina_1.7.9.bb             |  19 --
+ meta-efl/recipes-efl/efl/eio_1.7.9.bb              |  15 --
+ meta-efl/recipes-efl/efl/elementary.inc            |  30 ++-
+ ...e-elm_prefs_cc-and-elementary_codegen-def.patch |  61 +++++
+ meta-efl/recipes-efl/efl/elementary_1.7.9.bb       |   8 -
+ meta-efl/recipes-efl/efl/elementary_1.8.4.bb       |  12 +
+ meta-efl/recipes-efl/efl/embryo_1.7.9.bb           |  20 --
+ .../recipes-efl/efl/emotion-generic-players.inc    |  12 +
+ .../efl/emotion-generic-players_1.8.1.bb           |   8 +
+ meta-efl/recipes-efl/efl/emotion_1.7.9.bb          |  22 --
+ meta-efl/recipes-efl/efl/ethumb_1.7.9.bb           |  27 ---
+ meta-efl/recipes-efl/efl/evas-generic-loaders.inc  |  49 +++-
+ .../recipes-efl/efl/evas-generic-loaders_1.7.9.bb  |   8 -
+ .../recipes-efl/efl/evas-generic-loaders_1.8.1.bb  |   8 +
+ ...s_font_load-Fix-build-with-newer-freetype.patch |  26 ---
+ meta-efl/recipes-efl/efl/evas_1.7.9.bb             | 178 ---------------
+ meta-efl/recipes-efl/efl/expedite_git.bb           |  11 +
+ meta-efl/recipes-efl/efl/expedite_svn.bb           |  13 --
+ .../efl/libeflvala/disable.eina.test.patch         |  44 ++++
+ meta-efl/recipes-efl/efl/libeflvala_svn.bb         |   1 +
+ .../packagegroups/packagegroup-efl-sdk.inc         |   9 +-
+ ...lines.h-remove-indexingHeader-preCapacity.patch |  27 +++
+ ...KitHelpers.cmake-Add-Wno-error-cast-align.patch |  29 +++
+ .../webkit/webkit-efl/gcc-4.8.2.fix.patch          |  15 ++
+ .../webkit/webkit-efl_2.3.2+svnr159807.bb          |  51 +++++
+ 68 files changed, 801 insertions(+), 879 deletions(-)
+ delete mode 100644 meta-efl/recipes-devtools/python/python-ecore.inc
+ delete mode 100644 meta-efl/recipes-devtools/python/python-ecore_1.7.0.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-ecore_svn.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-edbus_svn.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-edje.inc
+ delete mode 100644 meta-efl/recipes-devtools/python/python-edje/0001-fix-unicode-conversion.patch
+ delete mode 100644 meta-efl/recipes-devtools/python/python-edje_1.7.0.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-edje_svn.bb
+ create mode 100644 meta-efl/recipes-devtools/python/python-efl_1.8.1.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-elementary.inc
+ delete mode 100644 meta-efl/recipes-devtools/python/python-elementary_1.7.0.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-elementary_svn.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-emotion.inc
+ delete mode 100644 meta-efl/recipes-devtools/python/python-emotion_1.7.0.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-emotion_svn.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-evas.inc
+ delete mode 100644 meta-efl/recipes-devtools/python/python-evas_1.7.0.bb
+ delete mode 100644 meta-efl/recipes-devtools/python/python-evas_svn.bb
+ create mode 100644 meta-efl/recipes-efl/e17/e-wm_0.18.3.bb
+ rename meta-efl/recipes-efl/e17/{elfe_svn.bb => elfe_git.bb} (41%)
+ rename meta-efl/recipes-efl/e17/{enjoy_svn.bb => enjoy_git.bb} (88%)
+ delete mode 100644 meta-efl/recipes-efl/e17/terminology_0.3.0.bb
+ create mode 100644 meta-efl/recipes-efl/e17/terminology_0.4.0.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/ecore_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/edbus2.inc
+ delete mode 100644 meta-efl/recipes-efl/efl/edbus2_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/edbus_svn.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/edje_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eet_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eeze_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/efl.inc
+ create mode 100644 meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch
+ create mode 100644 meta-efl/recipes-efl/efl/efl_1.8.5.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/efreet_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eina_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/eio_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/elementary/0001-Makefile-Use-elm_prefs_cc-and-elementary_codegen-def.patch
+ delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/elementary_1.8.4.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/embryo_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players.inc
+ create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.8.1.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/ethumb_1.7.9.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.8.1.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas/0001-evas_font_load-Fix-build-with-newer-freetype.patch
+ delete mode 100644 meta-efl/recipes-efl/efl/evas_1.7.9.bb
+ create mode 100644 meta-efl/recipes-efl/efl/expedite_git.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/expedite_svn.bb
+ create mode 100644 meta-efl/recipes-efl/efl/libeflvala/disable.eina.test.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/gcc-4.8.2.fix.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr159807.bb
+
+-- 
+1.8.5.3
+
 
