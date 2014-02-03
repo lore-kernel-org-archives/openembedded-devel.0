@@ -1,29 +1,50 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 62C1A6E91D
+Return-Path: <gjohnson@agleader.com>
+Received: from barracuda.agleader.com (mail.agleader.com [69.66.249.33])
+	by mail.openembedded.org (Postfix) with SMTP id 3E6326D8F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Feb 2014 17:43:19 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 2ADC6F811D8; Mon,  3 Feb 2014 10:43:20 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 57F4BF8119A;
-	Mon,  3 Feb 2014 10:43:16 -0700 (MST)
-Message-ID: <52EFD53A.8060009@mlbassoc.com>
-Date: Mon, 03 Feb 2014 10:43:22 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Mon,  3 Feb 2014 20:18:06 +0000 (UTC)
+X-ASG-Debug-ID: 1391458685-06561d10e712160001-aWHRdb
+Received: from mailout.agleader.com (agmail-caht.agleader.local
+	[192.168.16.10]) by barracuda.agleader.com with ESMTP id
+	CMPWvJFpG2HQY9gp for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Feb 2014 14:18:05 -0600 (CST)
+X-Barracuda-Envelope-From: gjohnson@agleader.com
+X-Barracuda-RBL-Trusted-Forwarder: 192.168.16.10
+Received: from agmail-mb1.agleader.local ([127.0.0.1]) by
+	agmail-caht.agleader.local ([192.168.16.10]) with mapi; Mon, 3 Feb 2014
+	14:18:05 -0600
+From: Gabe Johnson <gjohnson@agleader.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 3 Feb 2014 14:14:14 -0600
+Thread-Topic: [meta-qt5][PATCH] Fix file search paths for nativesdk packages.
+X-ASG-Orig-Subj: [meta-qt5][PATCH] Fix file search paths for nativesdk
+	packages.
+Thread-Index: Ac8hHGUsxdzVNaZDTI+CDYQWIVEQuAAABznE
+Message-ID: <EF93C63B81FE3D4F81C98317512457471295D9D477@agmail-mb1>
+References: <1391458395-9941-1-git-send-email-gjohnson@agleader.com>
+In-Reply-To: <1391458395-9941-1-git-send-email-gjohnson@agleader.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CACgAsMeiKrLgjPnsZwOJtncRJ4nKExvjtS23VXNXcwyMsWtaDw@mail.gmail.com>
-	<20140203173755.GE3698@jama>
-In-Reply-To: <20140203173755.GE3698@jama>
-Subject: Re: meta-qt5
+X-Barracuda-Connect: agmail-caht.agleader.local[192.168.16.10]
+X-Barracuda-Start-Time: 1391458685
+X-Barracuda-URL: http://barracuda.agleader.com:8000/cgi-mod/mark.cgi
+X-Virus-Scanned: by bsmtpd at agleader.com
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Spam-Score: 0.50
+X-Barracuda-Spam-Status: No,
+	SCORE=0.50 using per-user scores of TAG_LEVEL=1000.0
+	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=9.0 tests=BSF_RULE7568M
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.2.144798
+	Rule breakdown below
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+	0.50 BSF_RULE7568M          Custom Rule 7568M
+Subject: [meta-qt5][PATCH] Fix file search paths for nativesdk packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,63 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Feb 2014 17:43:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 03 Feb 2014 20:18:08 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 2014-02-03 10:37, Martin Jansa wrote:
-> On Mon, Feb 03, 2014 at 12:07:30PM -0500, Kevyn-Alexandre Paré wrote:
->> Morning Martin,
->
-> morning,
->
->> I found your email from here:
->> http://layers.openembedded.org/layerindex/branch/master/layer/meta-qt5/
->>
->> I'm searching for help on that package/doc
->>
->> If you prefer I can send my question to a specific mailing list if you
->> pin point me where?
->
-> openembedded-devel@lists.openembedded.org is better place (see README
-> file)
->
->> So my goal is to run qt5 on my OMAP3 board by using yocto.
->>
->> I have fallow :
->> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
->> and &
->> http://gpupowered.org/node/20
->>
->> Try to run this:
->> root@overo:/# export QT_DEBUG_BACKINGSTORE=1
->> root@overo:/# export QT_QPA_PLATFORM=minimal
->> root@overo:/# Qt5_CinematicExperience -plugin tslib
->> libpng warning: iCCP: known incorrect sRGB profile
->> libpng warning: iCCP: known incorrect sRGB profile
->> This plugin does not support createPlatformOpenGLContext!
->> QtQuick: failed to create OpenGL context
->> This plugin does not support createPlatformOpenGLContext!
->> QtQuick: failed to create OpenGL context
->>
->> Result:
->> nothing is visible on my LCD except the console...
->>
->> So do you have any idea where I should start digging to simply start
->> by making a qt5 example run on my board?
->
-> I've no experience with wandaboard, but few people asked about it with
-> relation to qt5, so maybe someone will respond on ML.
->
+Signed-off-by: Gabe Johnson
+---
+ recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb  |    2 ++
+ recipes-qt/qt5/nativesdk-qttools_5.2.0.bb |    2 ++
+ 2 files changed, 4 insertions(+)
 
-This works on my SabreLite which I built without X11 support.  I did not
-use any of your QT_xxx exports, only this command line.
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb b/recipes-qt/qt5/nati=
+vesdk-qtbase_5.2.0.bb
+index aca8dea..223baa3 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
+@@ -1,5 +1,7 @@
+ require qt5-${PV}.inc
+ require ${PN}.inc
 
-   # Qt5_CinematicExperience -platform eglfs -plugin tslib:/dev/input/touchscreen0
++FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qtbase:"
++
+ SRC_URI[md5sum] =3D "c94bbaf1bb7f0f4a32d2caa7501416e1"
+ SRC_URI[sha256sum] =3D "51556cd2562a6d4bbb70ffcc93e8ef83ec79b170753aac6e4b=
+195957c61cb628"
+diff --git a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb b/recipes-qt/qt5/nat=
+ivesdk-qttools_5.2.0.bb
+index 0effa1b..3d2c05a 100644
+--- a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
++++ b/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
+@@ -1,5 +1,7 @@
+ require qt5-${PV}.inc
+ require ${PN}.inc
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
++FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qttools:"
++
+ SRC_URI[md5sum] =3D "76a0992967b6d02220ecb69a5ba04ef1"
+ SRC_URI[sha256sum] =3D "ff331510ecb776b3059953e216e9fa7a4c0736eeb148c4cf11=
+acc8150811b7f0"
+--
+1.7.9.5
+
 
