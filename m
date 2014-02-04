@@ -1,34 +1,31 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BFD26E89B
+Return-Path: <openembedded@emagii.com>
+Received: from smtprelay-b22.telenor.se (smtprelay-b22.telenor.se
+	[195.54.99.213])
+	by mail.openembedded.org (Postfix) with ESMTP id E8B316E8FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Feb 2014 09:30:00 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WAcKO-0002B8-CC for openembedded-devel@lists.openembedded.org;
-	Tue, 04 Feb 2014 10:30:00 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Feb 2014 10:30:00 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue,  4 Feb 2014 11:32:03 +0000 (UTC)
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b22.telenor.se (Postfix) with ESMTP id 97434EAB7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Feb 2014 10:30:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 04 Feb 2014 10:33:20 +0100
-Message-ID: <lcqbu0$vme$1@ger.gmane.org>
-References: <1391240222-2020-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	Tue,  4 Feb 2014 12:32:03 +0100 (CET)
+X-SENDER-IP: [83.227.57.102]
+X-LISTENER: [smtp.bredband.net]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgQdANDO8FJT4zlmPGdsb2JhbAANTINEiBKvMYhLAwEBAQE4gxkTASw9FhgDAgECATEnCAEBiAasB4VWAZx5jxKEIgSYKpVP
+X-IPAS-Result: AgQdANDO8FJT4zlmPGdsb2JhbAANTINEiBKvMYhLAwEBAQE4gxkTASw9FhgDAgECATEnCAEBiAasB4VWAZx5jxKEIgSYKpVP
+X-IronPort-AV: E=Sophos;i="4.95,779,1384297200"; d="scan'208";a="795864156"
+Received: from c-6639e353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.199]) ([83.227.57.102])
+	by ipb1.telenor.se with ESMTP; 04 Feb 2014 12:32:03 +0100
+Message-ID: <52F0CFB2.2040708@emagii.com>
+Date: Tue, 04 Feb 2014 12:32:02 +0100
+From: Ulf Samuelsson <openembedded@emagii.com>
+Organization: eMagii
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <1391240222-2020-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH][meta-multimedia 1/2] vlc: fix build with kernel headers 3.9 and newer
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: Could not update ICEauthority file /var/lib/gdm/.ICEauthority
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,27 +39,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Feb 2014 09:30:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Feb 2014 11:32:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I built a derivative of cloud9-gnome-image/Angstrom-1.4  for the 
+Beaglebone Black on an Ubuntu 12.04 host.
 
-Martin Jansa schreef op 01-02-14 08:37:
-> * V4L2_CID_HCENTER and V4L2_CID_VCENTER removed from linux v3.9
+When I boot, I get a popup window with the text:
 
-Any volunteers to update vlc to 1.1.13 (2 years old) or 2.1.2 (2 months old)?
+"Could not update ICEauthority file /var/lib/gdm/.ICEauthority"
+
+This appears because /var/lib/gdm is not owned by gdm.
+Instead it is owned by 115:125
+
+I manually changed the owner and rebooted, and this time I did not get 
+the error message.
+
+I tracked down why:
+
+The recipe for gdm in 
+meta-openembedded/meta-gnome/recipes-gnome/gdm_2.32.2.bb contains:
 
 
+------------------------------------------------------------------------------
+do_install_append() {
+     ...
+     chown -R gdm:gdm ${D}${localstatedir}/lib/gdm
+     chmod 0750 ${D}${localstatedir}/lib/gdm
+     ...
+}
+------------------------------------------------------------------------------
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Problem with this approach is that the chown command is using the 
+user:group of the host .
 
-iD8DBQFS8LPgMkyGM64RGpERAus7AJ9DvBIc0TQlxq0x5gaHc0EYeIuK4QCfTbLC
-DMm4ye2CFWLT4S01BGJdmT8=
-=4PkK
------END PGP SIGNATURE-----
+If I do
+<host> # cat /etc/passwd | grep gdm
+I get:
+
+gdm:x:115:125:Gnome Display Manager:/var/lib/gdm:/bin/false
+
+If I do the same on the target I get:
+
+root@beaglebone:~# cat /etc/passwd | grep gdm
+I get:
+gdm:x:997:993::/var/lib/gdm:/bin/sh
+
+so I think that setting the user:group must be done in a postinstall task.
+
+
+-- 
+Best Regards
+Ulf Samuelsson
 
 
