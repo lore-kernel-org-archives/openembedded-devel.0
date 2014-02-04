@@ -1,35 +1,38 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vc0-f169.google.com (mail-vc0-f169.google.com
-	[209.85.220.169])
-	by mail.openembedded.org (Postfix) with ESMTP id E51776E44F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 75E156E944
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Feb 2014 15:30:10 +0000 (UTC)
-Received: by mail-vc0-f169.google.com with SMTP id hq11so6040416vcb.0
+	Tue,  4 Feb 2014 15:42:44 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id t10so4348010eei.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Feb 2014 07:30:11 -0800 (PST)
+	Tue, 04 Feb 2014 07:42:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=fRNCL4qMvLzB3jJVY30GfGjiqbQdvkfb0zC5E6TNqMk=;
-	b=wZFVLOLCZSR7egFG6N9tfrzzsJ1Xks2ZOeJavAz42DHi/BeFd5YdUCB0g2Hl/jzPYm
-	TYXxoxRX8yP9FfiFrH0lv5CK1tL/II+5xOFGzWBdWJnZWtGOi19MHD2FwCGvtyQNiUUB
-	ZY99jc5i3Qo6QVuCY8Z0+jt08DMq24oTL1t8zocERV1d8SqO3iJHgPUSCPrDskiKU9An
-	4PJXR2Fa4I0JoE4ZCy5Kmi8J/pmBlgRaam1u+ej57Mqk8rGTW/W5LrircNcrSXpv/ITS
-	ba7jXAVJyrVrGajN300JEh9tQP5DXs8BYO4VRibhClhuzS74IHpIFn+D/iM6IKX7jfiM
-	yUoQ==
-X-Received: by 10.221.20.199 with SMTP id qp7mr6464699vcb.24.1391527811507;
-	Tue, 04 Feb 2014 07:30:11 -0800 (PST)
-MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.239.135 with HTTP; Tue, 4 Feb 2014 07:29:31 -0800 (PST)
-In-Reply-To: <lcqbu0$vme$1@ger.gmane.org>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=AoiMBuHp43rA0eySQl2uabC1HQexjCRUMyGW/fz6JG0=;
+	b=daqnBKlFdCIEUM5zMX1jPZrHO7K5VCIs2NrkDzwZ8SYDq3CIrB3ABHMg4q8uV38ksZ
+	cp/nYrONbzPk1QLYiiongBBwIQuLUpE3e4sXvvjTpKssBMDEFLBVnts1xCmZJLrUSLzX
+	TPluO0c60tj4uSORGiDESE+NXlvTfy6FyhDLOsMAsWYKk+ZiE9j+PJHjZXS8vij5gd3e
+	1pnDOzZllXnKxUcyT/l3fwQRKVt4lHIOGNg0a2pqYtBy2wXa2sTUe23wI7TQMbDtLNJi
+	VhSsFxnDu/CYri6XozUlf9v7gPLhBaKEyU3YSkcscUteNXdvwZuf+5lo9TWZh57XYYGt
+	TyZg==
+X-Received: by 10.14.206.194 with SMTP id l42mr3307306eeo.107.1391528564370;
+	Tue, 04 Feb 2014 07:42:44 -0800 (PST)
+Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
+	[89.176.104.107])
+	by mx.google.com with ESMTPSA id l4sm90318245een.13.2014.02.04.07.42.42
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 04 Feb 2014 07:42:43 -0800 (PST)
+Date: Tue, 4 Feb 2014 16:42:55 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140204154255.GI3698@jama>
 References: <1391240222-2020-1-git-send-email-Martin.Jansa@gmail.com>
 	<lcqbu0$vme$1@ger.gmane.org>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Tue, 4 Feb 2014 15:29:31 +0000
-X-Google-Sender-Auth: KhQmQPEBXng7wUNlWwf5M_zMij0
-Message-ID: <CANyK_8ds4sAPTuT-W3ZJ4XeEm+AF6Y9mv0Wx150D8GOfqmFUGw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <lcqbu0$vme$1@ger.gmane.org>
+User-Agent: Mutt/1.5.22 (2013-10-16)
 Subject: Re: [PATCH][meta-multimedia 1/2] vlc: fix build with kernel headers 3.9 and newer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,26 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Feb 2014 15:30:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 Feb 2014 15:42:46 -0000
+X-Groupsio-MsgNum: 48043
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FCKy2vjPBX+S/5dE"
+Content-Disposition: inline
 
-On 4 February 2014 09:33, Koen Kooi <koen@dominion.thruhere.net> wrote:
+--FCKy2vjPBX+S/5dE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Feb 04, 2014 at 10:33:20AM +0100, Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
->
+>=20
 > Martin Jansa schreef op 01-02-14 08:37:
->> * V4L2_CID_HCENTER and V4L2_CID_VCENTER removed from linux v3.9
->
-> Any volunteers to update vlc to 1.1.13 (2 years old) or 2.1.2 (2 months old)?
->
+> > * V4L2_CID_HCENTER and V4L2_CID_VCENTER removed from linux v3.9
+>=20
+> Any volunteers to update vlc to 1.1.13 (2 years old) or 2.1.2 (2 months o=
+ld)?
 
-I tried this about 6 months ago (for the then-current 2.x.x version of
-vlc) but ran into a bunch of problems. I can't remember what they were
-though - that'll teach me to keep a few notes in future!
+I would like to see 2* (required by emotion-generic-players), but don't
+have plans to work on it myself, because I have no use for that in
+runtime.
 
--- 
-Paul Barker
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+--FCKy2vjPBX+S/5dE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlLxCn8ACgkQN1Ujt2V2gBxiIACdH7e1Bb5fIVHAdGC5pFfDBM9s
+TLgAnieyTU+3etdKIaPxYIoJwsFVr52n
+=3lDB
+-----END PGP SIGNATURE-----
+
+--FCKy2vjPBX+S/5dE--
