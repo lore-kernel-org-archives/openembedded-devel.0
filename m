@@ -1,15 +1,30 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B5536E3EC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2014 16:55:03 +0000 (UTC)
-From: Jack Mitchell <ml@communistcode.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Feb 2014 16:54:54 +0000
-Message-Id: <1391619294-13051-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 1.8.5.3
-Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCH] libsoc: update to 0.6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F6D06E3EC;
+	Wed,  5 Feb 2014 17:21:30 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id c10so3611202igq.0
+	for <multiple recipients>; Wed, 05 Feb 2014 09:21:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=zZbtokBtHx78guoNB4LDwEhd2SJQAzuYEN3E3o8MaD4=;
+	b=uiQ9ZxlSVKCYsDKfACItOpDB0gcHoQz2BvgnyoOK5H/zLjbsA2dKJkG7c07HX+pc3R
+	zy2uBYjsIdMbvqeuUGjJIHvg/JNNhs/MYX7VWMOpuoCBvOSUsBEl0FAWrI3lrmgslzk3
+	ulRv2F5XyEGn/f+27bkv32WlIpb8fV8kO9sMFSCYvNrFGZNt09FnfP+wqzEVBgsd9uz3
+	mrxdL4nwt/0cnXJbf45hcqdO35QtpSS8Q3TGa98qjTpMhZ+KYTsXIxpHd0vgp6vXmmh6
+	MDHz7qZanlHyefNVxdKMnRm66aSn7BtUuw7/Lo7ryog1SjwHoeSLdJ4IehzQIk/DUYLr
+	pP/Q==
+X-Received: by 10.50.38.171 with SMTP id h11mr4395550igk.20.1391620891150;
+	Wed, 05 Feb 2014 09:21:31 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.50.8.137 with HTTP; Wed, 5 Feb 2014 09:21:01 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 5 Feb 2014 09:21:01 -0800
+Message-ID: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Upcoming Bug blitz weekend ( Feb 21 - Feb 24)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,33 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2014 16:55:04 -0000
+X-List-Received-Date: Wed, 05 Feb 2014 17:21:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Jack Mitchell <jack@embed.me.uk>
+Hi All
 
-Signed-off-by: Jack Mitchell <jack@embed.me.uk>
----
- meta-oe/recipes-support/libsoc/{libsoc_0.5.bb => libsoc_0.6.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libsoc/{libsoc_0.5.bb => libsoc_0.6.bb} (87%)
+I would like to invite everyone to the bug fixing weekend which is
+coming in 3 weeks from Feb 21 to Feb 24
 
-diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.5.bb b/meta-oe/recipes-support/libsoc/libsoc_0.6.bb
-similarity index 87%
-rename from meta-oe/recipes-support/libsoc/libsoc_0.5.bb
-rename to meta-oe/recipes-support/libsoc/libsoc_0.6.bb
-index c381799..ceb2b86 100644
---- a/meta-oe/recipes-support/libsoc/libsoc_0.5.bb
-+++ b/meta-oe/recipes-support/libsoc/libsoc_0.6.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
- 
- inherit autotools
- 
--SRCREV = "e5846ca199316603f0fec0748c57a781ced46950"
-+SRCREV = "3643cf161a4b37bfbdfd05437166c4a29ac3ed8d"
- SRC_URI = "git://github.com/jackmitch/libsoc.git"
- 
- S = "${WORKDIR}/git"
--- 
-1.8.5.3
+Bugs in NEW status for OE-Core & related categories:
 
+http://tinyurl.com/pu8vlaf
+
+All bugs/enhancements in NEW status in interesting categories:
+
+http://tinyurl.com/pjhrpwr
+
+Please feel free to pick any of the bugs which you are interested in
+and has no owner assigned to it
+or no one committed to it in comments or so. If there is a doubt
+please add a comment to bug or send email to existing assignee to
+coordinate your fix.
+
+Please assign the bugs to yourself beforehand and set the status to ACCEPTED
+
+This is a potential list but not exhaustive, you are free to pick any
+bugs that are not listed here
+and fix them,
+
+I also think it will be good to utilize IRC channel during the bug
+blitz weekend for communicating
+to supplement emails and mailing list communications
+
+I will send the reminders of the event as we come close to it.
+
+Looking forward to it
+
+-Khem
 
