@@ -1,36 +1,36 @@
-Return-Path: <otavio.salvador@gmail.com>
+Return-Path: <nickdademo@gmail.com>
 Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
 	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 85C906E706
+	by mail.openembedded.org (Postfix) with ESMTP id 06A926E706
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Feb 2014 13:47:15 +0000 (UTC)
-Received: by mail-ob0-f181.google.com with SMTP id va2so3991498obc.40
+	Fri,  7 Feb 2014 13:53:28 +0000 (UTC)
+Received: by mail-ob0-f181.google.com with SMTP id va2so4031057obc.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Feb 2014 05:47:16 -0800 (PST)
+	Fri, 07 Feb 2014 05:53:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=XNJgeyzT176CoCgwZEsuXyoQALKoIBRPc9o4rGGyeAk=;
-	b=RJ5YnwnHCP+w9SuVYQJPSXxRNWxZgXEZnMESJVK1dLXZFwduLFDVwnll+ibGJi0Thj
-	dqLGij+a9M0OYAF7NZ2zPakkz0hN1LFDGZNGU9bM6Vk2yJn8oXe3+pNMvh28eX8AaY5g
-	PMx/DL/PJegZ7OqZQXW+mA/FX4NrDQkbTtR3fyjegTVX7Dsl7PAxwHwSfoHaxe7Z/GYc
-	vr0YPgFcAPTk8e5FPCdkSM6mDz/G+9SRmLj9SrxC4aoCXytNsR8b5A+9U9hL/yY46783
-	hy/rYNYkGoqcvG53Y6j+QMq7lOAc8ZGzEshdPAJNk9CBPuhCu8Ki0KVnsf6Xt5W6HChD
-	KuKw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Hn8rkezERZzTurQcOp+XBlT72l0HILg3jVizR3CtxRI=;
+	b=ZrKqfkjKaNfgEILsXJfDGwFhzkOgLBTcBBH68+qrW8xLaZQOjGyy11P8eSTDzJswva
+	rE2A4a5z+/WH4kIdkEHEZr3hdPHVFQXYqG+9Ivfd0DgcmRaMWENbMNIU20y7mK7xqu86
+	0iqWmmVb1OH3k0WlE7+sAX1BHnUNtqDoESdTxI4UYx1GDeh2N9bdi38tQfna4pHEXgfq
+	rU4V3jFFRrXtWEka7IBsOwb7aTc2HjsNqaWY51tkBrwp0y5L8f0a3ZdfKmFfAFt2rroO
+	G2JfvKuLXe9HlMzNK+e2E97i0W72QM5NWiINjsEvdzSksLEbC6RGa3sGWDG9vpuqQjyO
+	TU/Q==
+X-Received: by 10.182.16.33 with SMTP id c1mr12992920obd.4.1391781209588; Fri,
+	07 Feb 2014 05:53:29 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.182.34.196 with SMTP id b4mr1821144obj.13.1391780836185;
-	Fri, 07 Feb 2014 05:47:16 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.182.232.166 with HTTP; Fri, 7 Feb 2014 05:47:16 -0800 (PST)
-In-Reply-To: <52EFD53A.8060009@mlbassoc.com>
-References: <CACgAsMeiKrLgjPnsZwOJtncRJ4nKExvjtS23VXNXcwyMsWtaDw@mail.gmail.com>
-	<20140203173755.GE3698@jama> <52EFD53A.8060009@mlbassoc.com>
-Date: Fri, 7 Feb 2014 11:47:16 -0200
-X-Google-Sender-Auth: 6W2wUwGAY606y7_zyN1QKU-XoYg
-Message-ID: <CAP9ODKpW=jrTZQfxwYrdTDwtsHh0AQoFU4w3KiX2earOcwxPAw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-qt5
+Received: by 10.76.79.165 with HTTP; Fri, 7 Feb 2014 05:53:09 -0800 (PST)
+In-Reply-To: <CANyK_8eseDidQWN6tfCFXF3dXy6pQMH0uSCSyGAHDJfE_zfwzw@mail.gmail.com>
+References: <CANR6C54WmokZxiFHThuXkZ-kiocewgnGVg7AtbH=FHjr1AFHsg@mail.gmail.com>
+	<CANR6C56W7g63xx1D5WOA40YL8B_5j-q=uwt6VgFPW72eNZ=k7Q@mail.gmail.com>
+	<CANyK_8eseDidQWN6tfCFXF3dXy6pQMH0uSCSyGAHDJfE_zfwzw@mail.gmail.com>
+From: "Nick D'Ademo" <nickdademo@gmail.com>
+Date: Sat, 8 Feb 2014 00:53:09 +1100
+Message-ID: <CANR6C55tvGxPN1DsJaupK53Z4HdWM=Zi5X8L7ZXM9k5FRH2LWQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	paul@paulbarker.me.uk
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: tk 8.6.0: strange error: "oe_runmake: command not found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,74 +44,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2014 13:47:15 -0000
+X-List-Received-Date: Fri, 07 Feb 2014 13:53:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Thanks Paul.
 
-On Mon, Feb 3, 2014 at 3:43 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> On 2014-02-03 10:37, Martin Jansa wrote:
->>
->> On Mon, Feb 03, 2014 at 12:07:30PM -0500, Kevyn-Alexandre Par=E9 wrote:
->>>
->>> Morning Martin,
->>
->>
->> morning,
->>
->>> I found your email from here:
->>> http://layers.openembedded.org/layerindex/branch/master/layer/meta-qt5/
->>>
->>> I'm searching for help on that package/doc
->>>
->>> If you prefer I can send my question to a specific mailing list if you
->>> pin point me where?
->>
->>
->> openembedded-devel@lists.openembedded.org is better place (see README
->> file)
->>
->>> So my goal is to run qt5 on my OMAP3 board by using yocto.
->>>
->>> I have fallow :
->>> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboa=
-rd
->>> and &
->>> http://gpupowered.org/node/20
->>>
->>> Try to run this:
->>> root@overo:/# export QT_DEBUG_BACKINGSTORE=3D1
->>> root@overo:/# export QT_QPA_PLATFORM=3Dminimal
->>> root@overo:/# Qt5_CinematicExperience -plugin tslib
->>> libpng warning: iCCP: known incorrect sRGB profile
->>> libpng warning: iCCP: known incorrect sRGB profile
->>> This plugin does not support createPlatformOpenGLContext!
->>> QtQuick: failed to create OpenGL context
->>> This plugin does not support createPlatformOpenGLContext!
->>> QtQuick: failed to create OpenGL context
->>>
->>> Result:
->>> nothing is visible on my LCD except the console...
->>>
->>> So do you have any idea where I should start digging to simply start
->>> by making a qt5 example run on my board?
->>
->>
->> I've no experience with wandaboard, but few people asked about it with
->> relation to qt5, so maybe someone will respond on ML.
->>
+The run log has *oe_runmake* called via:
+
+autotools_do_install() {
+>     *oe_runmake*'DESTDIR=/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image'
+> install
+>     # Info dir listing isn't interesting at this point so remove it if it
+> exists.
+>     if [ -e
+> "/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr/share/info/dir"
+> ]; then
+>         rm -f
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr/share/info/dir
+>     fi
 >
-> This works on my SabreLite which I built without X11 support.  I did not
-> use any of your QT_xxx exports, only this command line.
+> }
 >
->   # Qt5_CinematicExperience -platform eglfs -plugin
-> tslib:/dev/input/touchscreen0
 
-Same works for Wandboard. I have one customer using it.
+My base.bbclass (meta/classes) also has oe_runmake defined:
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+oe_runmake() {
+>     bbnote ${MAKE} ${EXTRA_OEMAKE} "$@"
+>     ${MAKE} ${EXTRA_OEMAKE} "$@" || die "oe_runmake failed"
+> }
+>
+
+So I'm very puzzled as to why the recipe can't find oe_runmake...
+
+
+
+On Sat, Feb 8, 2014 at 12:06 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+
+> On 7 February 2014 12:11, Nick D'Ademo <nickdademo@gmail.com> wrote:
+> > No progress on working this one out unfortunately...
+> > This is still a build show-stopper for me - anyone have any ideas?
+> >
+> > Thanks,
+> > Nick
+> >
+> >
+> > On Thu, Jan 30, 2014 at 10:57 PM, Nick D'Ademo <nickdademo@gmail.com>
+> wrote:
+> >
+> >> I'm encountering a strange error at the install step with the tk 8.6.0
+> >> recipe (full log below). Does anyone have any ideas on this?
+> >> This recipe was compiling fine before (and has not been recently
+> changed -
+> >> last change Dec 5 2013) so I'm not sure what has broken it...
+> >>
+> >> Thanks,
+> >> Nick
+> >>
+> >> ERROR: Function failed: do_install (log file is located at
+> >>>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/log.do_install.1831)
+> >>> ERROR: Logfile of failure stored in:
+> >>>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/log.do_install.1831
+> >>> Log data follows:
+> >>> | DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
+> >>> 'bit-64', 'x86_64-linux', 'common']
+> >>> | DEBUG: Executing shell function do_install
+> >>> |
+> >>>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/run.do_install.1831:
+> >>> line 269: oe_runmake: command not found
+> >>> | WARNING:
+> >>>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/run.do_install.1831:1
+> >>> exit 127 from
+> >>> |   oe_runmake
+> >>>
+> 'DESTDIR=/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image'
+> >>> install
+> >>> | ERROR: Function failed: do_install (log file is located at
+> >>>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/log.do_install.1831)
+> >>> ERROR: Task 2098
+> >>> (/home/nick/poky/meta-openembedded/meta-oe/recipes-devtools/tcltk/
+> >>> tk_8.6.0.bb, do_install) failed with exit code '1'
+> >>> NOTE: Tasks Summary: Attempted 6752 tasks of which 6751 didn't need to
+> be
+> >>> rerun and 1 failed.
+> >>> No currently running tasks (2879 of 6817)
+> >>>
+> >>> Summary: 1 task failed:
+> >>>   /home/nick/poky/meta-openembedded/meta-oe/recipes-devtools/tcltk/
+> >>> tk_8.6.0.bb, do_install
+> >>> Summary: There was 1 ERROR message shown, returning a non-zero exit
+> code.
+> >>>
+> >>
+>
+> Have you looked at the log and run files mentioned?
+>
+>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/run.do_install.1831
+> contains all the commands for the do_install stage and should define
+> oe_runmake.
+>
+>
+> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/temp/log.do_install.1831
+> contains the output from running those commands.
+>
+> The number after the final '.' is the pid so will change each time
+> bitbake runs that step.
+>
+> If you can't spot anything in these files, send them to the mailing
+> list, maybe someone else can.
+>
+> --
+> Paul Barker
+>
+> Email: paul@paulbarker.me.uk
+> http://www.paulbarker.me.uk
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
