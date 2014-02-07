@@ -1,30 +1,37 @@
-Return-Path: <denys@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D8EF6CCF4
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
+	[209.85.219.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 95C946CAD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Feb 2014 01:54:16 +0000 (UTC)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id s171sFwi015589;
-	Thu, 6 Feb 2014 19:54:15 -0600
-Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s171sFRH007234;
-	Thu, 6 Feb 2014 19:54:15 -0600
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE72.ent.ti.com
-	(128.247.5.109) with Microsoft SMTP Server id 14.2.342.3;
-	Thu, 6 Feb 2014 19:54:14 -0600
-Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id s171sENP001154;
-	Thu, 6 Feb 2014 19:54:14 -0600
-Date: Thu, 6 Feb 2014 20:54:14 -0500
-From: Denys Dmytriyenko <denys@ti.com>
-To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Message-ID: <20140207015414.GL31128@edge>
+	Fri,  7 Feb 2014 09:27:55 +0000 (UTC)
+Received: by mail-oa0-f45.google.com with SMTP id i11so3882952oag.18
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Feb 2014 01:27:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=5DohPhcH7+E0C7cYpHRPXfz9PjMgq9+TxnozwOtmC2M=;
+	b=VTCUbDkO5Qrum/ThK6Q1e5i62m0j3whFTYahh4Go6FjINfaxH6E+vr05NG/88CANS5
+	/O/Bff7+URSZeliAXdh9Y/0VpNEEC5fUmEl3XU/q6vwH0mQhy2Bc5RzeP8ixWSJcS7mH
+	xoAbu82nvLVucleb/WVlnOYW8cuTnN33TlYPYrgBrYC3ENCNWT0CGf8WiH193WXvKY0h
+	7otUkge9Ip4My+eU2nIBlZ1U7sWOJOKAZab9xuoAsYGxRBuFKej03ar7ngNIEFMvAIzx
+	gIpzigQOCZpnY+IJMBh1C8Q1PN8QRUzKIXFMDnlXwmnVoa0W9+QksdA1hqyzK4H8WioA
+	Umzg==
+X-Gm-Message-State: ALoCoQlZrKkf4OLjauH9/FzL0o5QWM0OsE+MbLbA4uTT3XZv/SuIBRykowuIw/GngQy5qRPSdCat
+X-Received: by 10.182.219.197 with SMTP id pq5mr781913obc.64.1391765276158;
+	Fri, 07 Feb 2014 01:27:56 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.76.182.99 with HTTP; Fri, 7 Feb 2014 01:27:36 -0800 (PST)
+In-Reply-To: <20140207015414.GL31128@edge>
 References: <1385430478-31824-1-git-send-email-denis@denix.org>
 	<1385430478-31824-2-git-send-email-denis@denix.org>
 	<CAP71Wjx52AHWurONaP7Fsq9A9jGKuy1S9+xviYQ7+iCUGYnRdw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP71Wjx52AHWurONaP7Fsq9A9jGKuy1S9+xviYQ7+iCUGYnRdw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20140207015414.GL31128@edge>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 7 Feb 2014 10:27:36 +0100
+Message-ID: <CAP71WjwJ6ckOKNXpRWj3TE_3TvL73ae2FBxdmr+4sE6bY09jSQ@mail.gmail.com>
+To: Denys Dmytriyenko <denys@ti.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCH 1/2] nativesdk-qtbase: add nativesdk version of qtbase necessary for SDK tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,44 +47,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2014 01:54:17 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Feb 2014 09:27:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Feb 07, 2014 at 01:15:34AM +0100, Nicolas Dechesne wrote:
-> hi,
-> 
-> On Tue, Nov 26, 2013 at 2:47 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > +do_install() {
-> > +    # Fix install paths for all
-> > +    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
-> > +
-> > +    # switch back the proper qmake
-> > +    rm ${B}/bin/qmake
-> > +    mv ${B}/bin/qmake-real ${B}/bin/qmake
-> > +
-> > +    oe_runmake install INSTALL_ROOT=${D}
-> > +
-> > +    # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
-> > +    # e.g. qt3d, qtwayland
-> > +    ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
-> > +}
-> 
-> about this patch (which was merged already), i am wondering if this is
-> okay to do something like above. basically in the do_install task we
-> are 'corrupting' the output of the do_compile task. Here we remove
-> ${B}/bin/qmake for example. so if the do_install fails for whatever
-> reason, it will never be able to resume properly, since ${B} is no
-> longer what it should be after a legitimate do_compile. i was
-> debugging some weird build issues, and I am wondering if my problem
-> doesn't come from that...
+On Fri, Feb 7, 2014 at 2:54 AM, Denys Dmytriyenko <denys@ti.com> wrote:
+> 1. Make the qmake switch above at the end of do_compile instead
+> 2. Keep it in do_install, but manipulate ${D} instead of ${B} by installing
+> ${B}/qmake-real into ${D}/qmake
 
-Hmm, never thought of it like that. I guess there are couple options:
-
-1. Make the qmake switch above at the end of do_compile instead
-2. Keep it in do_install, but manipulate ${D} instead of ${B} by installing 
-${B}/qmake-real into ${D}/qmake
-
--- 
-Denys
+i would say #2. since the 'hack' is needed for do_install, let's keep
+the dirty stuff in do_install ;-)
 
