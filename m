@@ -1,28 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D8C76C83B
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 78DD16CD74
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Feb 2014 16:37:38 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 06 Feb 2014 08:36:47 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,793,1384329600"; d="scan'208";a="477060665"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.123.186])
-	by fmsmga002.fm.intel.com with ESMTP; 06 Feb 2014 08:36:46 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-Date: Thu, 06 Feb 2014 16:36:45 +0000
-Message-ID: <2152652.8pt6yVNpI0@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.2 (Linux/3.12.9-301.fc20.x86_64; KDE/4.12.2; x86_64; ; )
-In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050B5753EA63@COSNADEXC13.usr.ingenico.loc>
-References: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
-	<2202785.DFxSppnA1B@peggleto-mobl5.ger.corp.intel.com>
-	<8672BB614B4CCA40A6B3BDD6FD82050B5753EA63@COSNADEXC13.usr.ingenico.loc>
+	Fri,  7 Feb 2014 00:15:54 +0000 (UTC)
+Received: by mail-ob0-f181.google.com with SMTP id va2so3185263obc.40
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Feb 2014 16:15:55 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=jJuQLtc+uPNigjAslJpw7g0dDN1mc4pFSsoaZY7Azjs=;
+	b=O37pA/xAmQmUeM5vPkoJqHQF8lMJgUL0aIXtbka6Y1OUidsSrcT4PbMwX1jxdafQEd
+	YJ69ju86/AGFOumdQS+Y1kGlAXgsw7WmHY8rGZrUCKHBNV1liX6I6OJsgXhzebM4mFIZ
+	J8dEOtHCakF83j6Sna5sPlEZQh99kC7Azj3/xtNLMzQJSO6FknxmGcbSfxSNraLazFMw
+	DvRESo5JXt4VAGP9H2llrfpijEZbWnUddWyZziVeC14QPqewnVpnMgkozWWGUL5f3OOM
+	xJYHSre7aUEbHgnYlcOci2WoQmEZ42LjFjyWKnLUmZQxHI5kQOiC3462MRLOVdXNwDjr
+	Celg==
+X-Gm-Message-State: ALoCoQkEmZrDXyUj5McQUt3cWWT2cM6H0ypuGDa+gvdCG96xYko2E0HT/MouOKbXgIiMDtsZeg2r
+X-Received: by 10.60.84.199 with SMTP id b7mr5081120oez.55.1391732154992; Thu,
+	06 Feb 2014 16:15:54 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] Upcoming Bug blitz weekend ( Feb 21 - Feb 24)
+Received: by 10.76.182.99 with HTTP; Thu, 6 Feb 2014 16:15:34 -0800 (PST)
+In-Reply-To: <1385430478-31824-2-git-send-email-denis@denix.org>
+References: <1385430478-31824-1-git-send-email-denis@denix.org>
+	<1385430478-31824-2-git-send-email-denis@denix.org>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 7 Feb 2014 01:15:34 +0100
+Message-ID: <CAP71Wjx52AHWurONaP7Fsq9A9jGKuy1S9+xviYQ7+iCUGYnRdw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][PATCH 1/2] nativesdk-qtbase: add nativesdk version of qtbase necessary for SDK tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,27 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Feb 2014 16:37:40 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 07 Feb 2014 00:15:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Matthieu,
+hi,
 
-On Thursday 06 February 2014 16:26:18 Matthieu CRAPET wrote:
-> I'd like to help. Is there anything to register?
+On Tue, Nov 26, 2013 at 2:47 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> +do_install() {
+> +    # Fix install paths for all
+> +    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+> +
+> +    # switch back the proper qmake
+> +    rm ${B}/bin/qmake
+> +    mv ${B}/bin/qmake-real ${B}/bin/qmake
+> +
+> +    oe_runmake install INSTALL_ROOT=${D}
+> +
+> +    # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
+> +    # e.g. qt3d, qtwayland
+> +    ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+> +}
 
-You should create yourself an account on http://bugzilla.yoctoproject.org , 
-but otherwise there's nothing to do except look through the bugs linked in 
-Khem's email, and if you find one that looks like something you'd be able to 
-work on, assign it to yourself and be around to work on it during the bug 
-weekend. (Of course if you want to you don't have to wait for the weekend to 
-start working on it if you prefer :)
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+about this patch (which was merged already), i am wondering if this is
+okay to do something like above. basically in the do_install task we
+are 'corrupting' the output of the do_compile task. Here we remove
+${B}/bin/qmake for example. so if the do_install fails for whatever
+reason, it will never be able to resume properly, since ${B} is no
+longer what it should be after a legitimate do_compile. i was
+debugging some weird build issues, and I am wondering if my problem
+doesn't come from that...
 
