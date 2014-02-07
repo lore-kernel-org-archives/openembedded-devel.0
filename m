@@ -1,32 +1,35 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vb0-f51.google.com (mail-vb0-f51.google.com
-	[209.85.212.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3205B6E8CE
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f45.google.com (mail-qa0-f45.google.com
+	[209.85.216.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 586866E8CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Feb 2014 18:59:10 +0000 (UTC)
-Received: by mail-vb0-f51.google.com with SMTP id 11so2899822vbe.24
+	Fri,  7 Feb 2014 19:51:23 +0000 (UTC)
+Received: by mail-qa0-f45.google.com with SMTP id ii20so6006890qab.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Feb 2014 10:59:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=5OWz9ufdcMMeOqiNhicI4j8D2/ZVs6p35NHe/uLZxFg=;
-	b=ldzkCv8qU9OwLyhmWC/8oCH1/FFzcXXBHl+hZAZTUs1C+gBodtvo8bhobRFiaijSlr
-	R5oer7Rcpc9003/3cVflazQfsxR1f4GC+sPVORd+tgWWRLEN9eS8AikCVZX9YCKRy9H1
-	/UQvoa+JSBq7NLE4PZpIZ+vC/OBjA6aU3iaQpP/o+GS+E9jj4AV78V/eJ1O7/v2UGdZ5
-	GLR2xeCxRsjAmwdFEbHHQv/U3tJm5+b/3Oi4kujTLJaxrdWTOO8w2eK+SdiXJ/XrzI2z
-	jbUuDYxolYqf4qTl1GLJGqt9meNlFWud97nlEZwfhGOGar8sXZZ21V9kRa5bAOuGV8UX
-	zDKQ==
+	Fri, 07 Feb 2014 11:51:23 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=U3997DzBe6UAPMorVLXQLBMUDrB5juJWwP4aalv4+ho=;
+	b=k6hstmrkavHwmiPW7TIYPVn2QUuG3gv3HT52vOXXoNz7q2iXdgY+aA2dGp80itH2K7
+	7Ha7NZPzg6q3jwl4IESzeUrMFPWoHzYKufgjq8FEkX4BDFhTEV1Qe1SJlOfPUYCucT1L
+	ML1oGfEZjn2cLpz1t0r6YStLalDm7whvA6YpSWkOwrnbYx9zN4evklfAyCX2YUZGBy36
+	5dFl9GU3XUfAYnUp31f/VvFtYn7Jz5QzRJcwepRCsv0LuxNceGysOLUwYrP2sqhMGuJ9
+	TLI2GoaWk6i3uzFTeeKb5TMwbhe4xec68JsamJYaA/kIRmSNoVX4XRAeGM5qc5NhrabU
+	eHdA==
+X-Gm-Message-State: ALoCoQkN6wUg5Yv4G3SGg/ZE5z0r6SdLxfNfnx8jHS0ivaAluBaSV2WNQLivZ96vf9Vl2tiAyZ+i
+X-Received: by 10.224.134.196 with SMTP id k4mr25347384qat.22.1391802683494;
+	Fri, 07 Feb 2014 11:51:23 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.58.86.230 with SMTP id s6mr11611166vez.16.1391799550496;
-	Fri, 07 Feb 2014 10:59:10 -0800 (PST)
-Received: by 10.52.182.68 with HTTP; Fri, 7 Feb 2014 10:59:10 -0800 (PST)
-Date: Fri, 7 Feb 2014 10:59:10 -0800
-Message-ID: <CAFeBWL5iManz=rkRY+FZ4aK-6+KdwZRBhQnso6HiLP32yFF7Gw@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: dbus-daemon-proxy repository has disappeared
+Received: by 10.140.48.79 with HTTP; Fri, 7 Feb 2014 11:51:01 -0800 (PST)
+In-Reply-To: <CAFeBWL5iManz=rkRY+FZ4aK-6+KdwZRBhQnso6HiLP32yFF7Gw@mail.gmail.com>
+References: <CAFeBWL5iManz=rkRY+FZ4aK-6+KdwZRBhQnso6HiLP32yFF7Gw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 7 Feb 2014 19:51:01 +0000
+Message-ID: <CAJTo0LbcJjzSdUj20JbH=5ym9zhuMQUCG5j4zW3Y5j=Ucf4HyA@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: dbus-daemon-proxy repository has disappeared
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,19 +43,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2014 18:59:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Feb 2014 19:51:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Good day y'all,
+On 7 February 2014 18:59, Adam Lee <adam.yh.lee@gmail.com> wrote:
+> I am tracking refs/heads/dora and this morning I got a fetch failure on
+> dbus-daemon-proxy (git://
+> git.collabora.co.uk/git/user/alban/dbus-daemon-proxy). No available
+> mirrors, so I am build blocked.
 
-I am tracking refs/heads/dora and this morning I got a fetch failure on
-dbus-daemon-proxy (git://
-git.collabora.co.uk/git/user/alban/dbus-daemon-proxy). No available
-mirrors, so I am build blocked.
+Have you tried emailing Alban at Collabora?
 
-Anyone figured this out?
-
-Thanks!
-
-Adam
+Ross
 
