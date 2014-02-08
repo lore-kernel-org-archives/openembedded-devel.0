@@ -1,36 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AD3FC6E30D;
-	Sat,  8 Feb 2014 18:37:32 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id b10so2180037eae.33
-	for <multiple recipients>; Sat, 08 Feb 2014 10:37:33 -0800 (PST)
+Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F3B86E30D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  8 Feb 2014 18:46:14 +0000 (UTC)
+Received: by mail-ea0-f170.google.com with SMTP id g15so396921eak.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 Feb 2014 10:46:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=DA1GigKCpACOtvf+TSKQk3fggTIcjxoEJvdmYUqSl1I=;
-	b=crQshuNfVZ7ZZY9QbruF1JoaixrNXDigswIN5gepcDz7K5g9l3/4shs0DciJFipzkz
-	z9ULR7wvjDzN9XGUdcjHginfKVQTEYqdqaJZkMlsr7dM6FESZ2nlmAdKMPRe7MmsSM9o
-	7oihZR9Y1dSQy7VhTE8yhOss/MOsGgMojjMLgwXmHV3vM8NGT8rCgrOKnU39ArKb6yPx
-	6W4x3LJDYj+ZHgDT6QVn5ZCQ3lVx+szGBObWN/pZeKGDeMFhAWlCol6LCljgpf/nNKqN
-	vpuG5k6H6MB1Kl96eHHu0bfyI9g/DFBZJV9qrN7hmC770jodY+ADynTFNu5Z/syA110A
-	pO2A==
-X-Received: by 10.15.45.194 with SMTP id b42mr257410eew.103.1391884652593;
-	Sat, 08 Feb 2014 10:37:32 -0800 (PST)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=FxKBZq4ZO3fGfsaWpVQCk/IeFV/bliqKTT8HI1FZWlc=;
+	b=z4aR62s1W/MQuu3t2mGNGz9iv90+7sMlDu42Ix7vwzH13h44dOa7YykC7/KHZHge4j
+	MP6W/h4xnz2QnvVVobKHGpCChDtXz6z4D4bomJ1Oi5bJWXFo1NcCxq8UF5HlPYqPFti0
+	wDaH8hnabcroWioY9Ou9Ur813akS05Xp/xHuqm0400p8pFHtq+HxRg4GW9xtsAie+V4O
+	jHGdDW5oUKXC/vwmvLV0n0NC5jjYHz5sbtbdKjYgC70TTrCl2X1SGn9VP2S4CtZa0p5q
+	sgzpsHKESUmBxYvVOjBUoMWAiyF9hNQleAyaZZEK82xhdKdtV8mUO3R6o6K855BKYps1
+	Z8pg==
+X-Received: by 10.14.202.8 with SMTP id c8mr3065065eeo.88.1391885174608;
+	Sat, 08 Feb 2014 10:46:14 -0800 (PST)
 Received: from localhost (ip-89-176-104-107.net.upcbroadband.cz.
 	[89.176.104.107])
-	by mx.google.com with ESMTPSA id k6sm31962307eep.17.2014.02.08.10.37.31
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id x2sm31961241eeo.8.2014.02.08.10.46.11
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 08 Feb 2014 10:37:31 -0800 (PST)
-Date: Sat, 8 Feb 2014 19:37:48 +0100
+	Sat, 08 Feb 2014 10:46:13 -0800 (PST)
+Date: Sat, 8 Feb 2014 19:46:29 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140208183748.GO3698@jama>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140208184629.GP3698@jama>
+References: <1391628912-17880-1-git-send-email-schnitzeltony@googlemail.com>
+	<1391628912-17880-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
+In-Reply-To: <1391628912-17880-2-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: State of bitbake world, Failed tasks 2014-02-08
+Subject: Re: [PATCH][meta-qt5 2/2] qtwayland: fix qml-compositor shader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,98 +48,162 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Feb 2014 18:37:34 -0000
-X-Groupsio-MsgNum: 48071
+X-List-Received-Date: Sat, 08 Feb 2014 18:46:14 -0000
+X-Groupsio-MsgNum: 48072
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uGrbifh0UoBBidu/"
+	protocol="application/pgp-signature"; boundary="pwWdILMQNxDD/Cps"
 Content-Disposition: inline
 
---uGrbifh0UoBBidu/
-Content-Type: text/plain; charset=us-ascii
+--pwWdILMQNxDD/Cps
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=3D=3D Failed tasks 2014-02-08 =3D=3D
+On Wed, Feb 05, 2014 at 08:35:12PM +0100, Andreas M=FCller wrote:
+> running
+>=20
+> | qmlcompositor -platform eglfs
+> | qmlscene -platform wayland foo.qml
+>=20
+> causes
+>=20
+> QOpenGLShader::compile(Fragment): Compile failed.
+> ERROR: 0:6: 'float' : No precision defined for this type
+> ERROR: 0:7: 'vec4' : No precision defined for this type
+> ERROR: 0:8: 'float' : No precision defined for this type
+> ERROR: 0:11: 'vec4' : No precision defined for this type
+> ERROR: 0:12: 'vec3' : No precision defined for this type
+> ERROR: 0:13: 'vec3' : No precision defined for this type
+> ERROR: 6 compilation errors. No code generated.
+>=20
+> *** Problematic Fragment shader source code ***
+>=20
+>     uniform sampler2D source;
+>     uniform float qt_Opacity;
+>     uniform vec4 color;
+>     uniform float blend;
+>     varying highp vec2 qt_TexCoord0;
+>     void main() {
+>         vec4 sourceColor =3D texture2D(source, qt_TexCoord0);
+>         vec3 delta =3D sourceColor.rgb - vec3(0.5);
+>         vec3 lowerContrast =3D vec3(0.5) + 0.4 * delta;
+>         gl_FragColor =3D qt_Opacity * mix(sourceColor, color * sourceColo=
+r.a * dot(lowerContrast, vec3(11, 16, 5) * (1. /  32.)), blend);
+>     }
+>=20
+> ***
+>=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  ...002-Fix-ConstrastEffect-in-qml-compositor.patch | 48 ++++++++++++++++=
+++++++
+>  recipes-qt/qt5/qtwayland_git.bb                    |  4 ++
+>  2 files changed, 52 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtwayland/0002-Fix-ConstrastEffect-in-=
+qml-compositor.patch
+>=20
+> diff --git a/recipes-qt/qt5/qtwayland/0002-Fix-ConstrastEffect-in-qml-com=
+positor.patch b/recipes-qt/qt5/qtwayland/0002-Fix-ConstrastEffect-in-qml-co=
+mpositor.patch
+> new file mode 100644
+> index 0000000..1b40be6
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtwayland/0002-Fix-ConstrastEffect-in-qml-compositor=
+=2Epatch
+> @@ -0,0 +1,48 @@
+> +From 309e9b03d24eb6b0b8fff04d883329c2f93a6a1c Mon Sep 17 00:00:00 2001
+> +From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+> +Date: Sun, 29 Dec 2013 14:15:41 +0100
+> +Subject: [PATCH] Fix ConstrastEffect in qml-compositor
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=3DUTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +Specify precision to make the shader working.
+> +
+> +Change-Id: I055fe47e1073403dc981274236fa82e091e0eca4
+> +Reviewed-by: J=F8rgen Lind <jorgen.lind@digia.com>
+> +Reviewed-by: Andy Nichols <andy.nichols@digia.com>
+> +Upstream-status: applied
 
-=3D=3D=3D common (17) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/e17/e-tasks_git.bb, do_compile
-    * meta-openembedded/meta-efl/recipes-efl/e17/emprint_svn.bb, do_compile
-    * meta-openembedded/meta-efl/recipes-efl/e17/news_svn.bb, do_compile
-    * meta-openembedded/meta-efl/recipes-efl/e17/rage_svn.bb, do_compile
-    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
-bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.2.=
-bb, do_fetch
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
-b, do_compile
-    * meta-openembedded/meta-networking/recipes-support/traceroute/tracerou=
-te_2.0.18.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_i=
-nstall
-    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.8.=
-13.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
-ompile
-    * meta-qt5/recipes-qt/qt5/qtwebkit_5.2.0.bb, do_compile
-    * meta-smartphone/meta-fso/recipes-freesmartphone/freesmartphone/zhone_=
-git.bb, do_compile
-    * meta-smartphone/meta-shr/recipes-shr/themes/e-wm-theme-illume-neo_git=
-=2Ebb, do_compile
-    * openembedded-core/meta/recipes-devtools/cmake/cmake-native_2.8.12.1.b=
-b, do_configure
+This one should be Backport, but please check jansa/qt5-5.2.1 branch,
+I've updated all recipes for 5.2.1 release and newer qtwayland revision
+used there includes this patch already.
 
-=3D=3D=3D common-x86 (4) =3D=3D=3D
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_configure
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+Your qtbase patch still does apply, I'll add that to branch now.
 
-=3D=3D=3D qemuarm (3) =3D=3D=3D
-    * meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/smbne=
-tfs_git.bb, do_packagedata
-    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
-    * openembedded-core/meta/recipes-support/ca-certificates/ca-certificate=
-s_20130610.bb, do_packagedata
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
-de_2.11.14.bb, do_compile
-
-=3D=3D=3D qemux86_64 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-devtools/python/python-m2crypto_0.2=
-1.1.bb, do_compile
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||20    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140205_201530.log/
-|-
-||qemux86       ||24    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140206_155623.log/
-|-
-||qemux86_64    ||22    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140207_100027.log/
-|}
+> +---
+> + examples/qml-compositor/ContrastEffect.qml | 14 +++++++-------
+> + 1 file changed, 7 insertions(+), 7 deletions(-)
+> +
+> +diff --git a/examples/qml-compositor/ContrastEffect.qml b/examples/qml-c=
+ompositor/ContrastEffect.qml
+> +index 5159950..c284b29 100644
+> +--- a/examples/qml-compositor/ContrastEffect.qml
+> ++++ b/examples/qml-compositor/ContrastEffect.qml
+> +@@ -75,15 +75,15 @@ ShaderEffect {
+> +     vertexShader: source && source.isYInverted ? vShaderInvertedY : vSh=
+ader
+> +=20
+> +     fragmentShader: "
+> +-    uniform sampler2D source;
+> +-    uniform float qt_Opacity;
+> +-    uniform vec4 color;
+> +-    uniform float blend;
+> ++    uniform lowp sampler2D source;
+> ++    uniform highp float qt_Opacity;
+> ++    uniform highp vec4 color;
+> ++    uniform highp float blend;
+> +     varying highp vec2 qt_TexCoord0;
+> +     void main() {
+> +-        vec4 sourceColor =3D texture2D(source, qt_TexCoord0);
+> +-        vec3 delta =3D sourceColor.rgb - vec3(0.5);
+> +-        vec3 lowerContrast =3D vec3(0.5) + 0.4 * delta;
+> ++        highp vec4 sourceColor =3D texture2D(source, qt_TexCoord0);
+> ++        highp vec3 delta =3D sourceColor.rgb - vec3(0.5);
+> ++        highp vec3 lowerContrast =3D vec3(0.5) + 0.4 * delta;
+> +         gl_FragColor =3D qt_Opacity * mix(sourceColor, color * sourceCo=
+lor.a * dot(lowerContrast, vec3(11, 16, 5) * (1. /  32.)), blend);
+> +     }
+> +     "
+> +--=20
+> +1.8.3.1
+> +
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_g=
+it.bb
+> index 640373e..cf91908 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -5,3 +5,7 @@ require ${PN}.inc
+>  # qt5-git PV is only to indicate that this recipe is compatible with qt5=
+ 5.2.0
+> =20
+>  SRCREV =3D "3e9412e2fd91e64a565ed8ddbef76f57ca9413d5"
+> +
+> +SRC_URI +=3D " \
+> +    file://0002-Fix-ConstrastEffect-in-qml-compositor.patch \
+> +"
+> --=20
+> 1.8.3.1
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---uGrbifh0UoBBidu/
+--pwWdILMQNxDD/Cps
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlL2eXwACgkQN1Ujt2V2gBydIQCeJEfKaPMaH/5sKtMkfpAHjoyt
-yKIAoJO2JYWJONc4RCs0FGQFR7X5+mWP
-=5Zxa
+iEYEARECAAYFAlL2e4UACgkQN1Ujt2V2gBz2LgCffay48k3NYwwOlusVA0oPCr49
+ehsAn0sfEuSd/aHe5Bv+i/nOVTlhelwX
+=oEG3
 -----END PGP SIGNATURE-----
 
---uGrbifh0UoBBidu/--
+--pwWdILMQNxDD/Cps--
