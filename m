@@ -1,34 +1,36 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BA486E70E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2014 18:55:24 +0000 (UTC)
-Received: by mail-ie0-f176.google.com with SMTP id tp5so2998970ieb.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2014 10:55:25 -0800 (PST)
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id C66EB6E746;
+	Mon, 10 Feb 2014 07:31:56 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id k19so6061752igc.5
+	for <multiple recipients>; Sun, 09 Feb 2014 23:31:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=7i9PADqGiz3h1/mXJHy+auJwUDRm7uJiyx6Fv+VZkkg=;
-	b=YjSJJUFouF24xwhIQEgKZZZAaFuazPrT4dagcCDeSb6jUQkbd5dlzldCjSyCBoveY4
-	+3A8PD1p7zH/QeWsYrlNyXF3F1g/bmVGnyjvVxARmoEI/wWzfMTN+KDtX6vobl+hYVAQ
-	rcoDCXr0NKslmyla8Z1dLfe4MaulA6+V3hXNjGlm9n8Z5Qj0096oOCNJS3jOdtu4SUyI
-	+m0ohxvaKtSFrDpgFKTR36WuNbx+Ar2fKGRHl0owjD8lux9qd3XvmUF+D0I2egw/5HEj
-	+pz0uH8VXw8qtNZ56xc/XPmeXv73Ouk7vova2+nv9pyx2W/qmjmLQs89EoQz3jy4feqh
-	IyzQ==
-X-Received: by 10.50.29.9 with SMTP id f9mr10712353igh.2.1391972124871; Sun,
-	09 Feb 2014 10:55:24 -0800 (PST)
+	:cc:content-type:content-transfer-encoding;
+	bh=+rphmacguwuYXClqmWhioiFfMudzHVWYQId4YZRoq8g=;
+	b=Ngk6omCDdM2y0U6KV8m8vdgqGVuYVTi2Nz7PcQkDhF9AU1cYb2ZkfvRuw8DZsoIYfs
+	mCl/8bn+fac02ojVM1suCATGChqK5u6kvwHFoSZCiWFa9LiY5AxJgDUBFyidlf/RUMyh
+	TuVsctL11zwwHtPo5qvIZ8bSjCq7Ytt89o8i2hMciFLFRgQYWr5gjc3hMQYgZOwJ72Kq
+	9qOmp8xff6uhTrCDLwOtPm0fXsYMHS+g0OpZMU86R9rxqs6Oi2zwejrIbHFPDgfNIS/5
+	JBy2034vS8NMCAlsSGyRhMNZuQXpo2y2tj+hVYKzu6KLZIECtMqFNMNCKk67atvK/rFI
+	AaIQ==
+X-Received: by 10.43.65.145 with SMTP id xm17mr14324912icb.35.1392017517706;
+	Sun, 09 Feb 2014 23:31:57 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.50.8.137 with HTTP; Sun, 9 Feb 2014 10:54:54 -0800 (PST)
-In-Reply-To: <CAMHavcJu66O8Z+-h_cneGJr2_N_KVpah94SDv+w7JydgX0qBKA@mail.gmail.com>
-References: <CAMHavcJu66O8Z+-h_cneGJr2_N_KVpah94SDv+w7JydgX0qBKA@mail.gmail.com>
+Received: by 10.50.8.137 with HTTP; Sun, 9 Feb 2014 23:31:27 -0800 (PST)
+In-Reply-To: <31681ec9-08a2-426e-b3d2-72f6c0d22073@AM1EHSMHS015.ehs.local>
+References: <CAMKF1sptnVxCrjm7PAOCtRWzmSsxPv4nc0nUO82jMPQ+BCz9Hg@mail.gmail.com>
+	<31681ec9-08a2-426e-b3d2-72f6c0d22073@AM1EHSMHS015.ehs.local>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 9 Feb 2014 18:54:54 +0000
-Message-ID: <CAMKF1spr0iPpMsBfA5BwSvxkUWCEO5MpLY9iGiPBRDyOh3-73g@mail.gmail.com>
-To: Ridish Rema Aravindan <ridishonline@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Packaging issue in rdk-generic-image
+Date: Sun, 9 Feb 2014 23:31:27 -0800
+Message-ID: <CAMKF1srC03NP0XkoL2Qy9X7hRt_FhQy3tG_rf=mbqhYvJ=soig@mail.gmail.com>
+To: Nathan Rossi <nathan.rossi@xilinx.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] eglibc 2.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,83 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2014 18:55:25 -0000
+X-List-Received-Date: Mon, 10 Feb 2014 07:31:57 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 8, 2014 at 10:51 PM, Ridish Rema Aravindan
-<ridishonline@gmail.com> wrote:
-> Hello,
+On Sun, Feb 9, 2014 at 9:32 PM, Nathan Rossi <nathan.rossi@xilinx.com> wrot=
+e:
+>> -----Original Message-----
+>> From: openembedded-core-bounces@lists.openembedded.org
+>> [mailto:openembedded-core-bounces@lists.openembedded.org] On Behalf Of
+>> Khem Raj
+>> Sent: Sunday, February 09, 2014 2:08 AM
+>> To: Patches and discussions about the oe-core layer; openembeded-devel;
+>> yocto@yoctoproject.org
+>> Subject: [OE-core] [RFT] eglibc 2.19
+>>
+>> Hi all
+>>
+>> I have staged a branch with eglibc 2.19 upgraded recipes here
+>>
+>> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/egli=
+bc-
+>> 2.19
+>>
+>> These are not final recipes there may be tweaks needed like adjusting
+>> SRC_URI
+>> later on.
+>>
+>> please help testing it out in your environments and machines
+>> I would be happy to help out with issues we find
 >
-> While compiling for RDK emulator for rdk-generic-image I see that
-> gst-plugins-good, base and bad are not
-> installed in the rootfs after I generated the vmdk first time.
+> Hi Khem,
 >
-> So I tried giving FILES_${PN} += " ${libdir}/gstreamer-0.10/*.so" in
-> bbappend of gst-plugins in meta-rdk but the build failed as below:
+> I have given it a test with the machines on the meta-xilinx layer, specif=
+ically ARM Cortex A9 and MicroBlaze architectures. And there appears to be =
+no issues.
 
-if you do not see packages  in your images then you should add the
-packages to IMAGE_INSTALL either via packagegroups or individual
-package names.
-
-If they were unpackaged in gst-plugins-* recipes then above change
-will be good however the regexp is greedy. Usually *.so.* go into
-packages and system should already take care of packaging *.so into
--dev packages
-
-You should also include the changes you are making as well as your
-image/packagegroups recipes and any other information like it compiled
-fine on arm but not on x86 etc. to help you out better.
+Thanks for the report.
 
 >
-> | Configuring packagegroup-machine-base.
-> | Configuring packagegroup-base.
-> | Configuring packagegroup-base-extended.
-> | Collected errors:
-> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for
-> packagegroup-rdk-debug:
-> |  *     gst-plugins-good-debug *         gst-plugins-base-gio *
-> gst-plugins-base-volume *        gst-plugins-base-audioresample *
-> gst-plugins-base-videoscale *    gst-plugins-base-typefindfunctions *
-> gst-plugins-good-autodetect *    gst-plugins-base-audioconvert *
-> gst-plugins-base-decodebin2 *    gst-plugins-good-souphttpsrc *
-> gst-plugins-base-decodebin *     gst-plugins-base-alsa *
-> gst-plugins-base-playbin *       gst-plugins-base-ffmpegcolorspace *
-> gst-plugins-base-audiotestsrc *  gst-plugins-base-videotestsrc *
-> |  * opkg_install_cmd: Cannot install package packagegroup-rdk-debug.
-> |  * satisfy_dependencies_for: Cannot satisfy the following dependencies for
-> packagegroup-rdk-oss:
-> |  *     gst-plugins-good-isomp4 *        gst-plugins-good-avi *
-> gst-plugins-good-matroska *      gst-plugins-base-theora *
-> gst-plugins-base-vorbis *        gst-plugins-good-wavparse *
-> gst-plugins-good-flac *  gst-plugins-base-ogg *
-> |  * opkg_install_cmd: Cannot install package packagegroup-rdk-oss.
-> | WARNING:
-> /home/ubuntu/RDK_EMULATOR_DEMO/build-qemux86/tmp/work/qemux86-rdk-linux/rdk-generic-image/1.0-r0/temp/run.do_rootfs.2423:1
-> exit 255 from
-> |   opkg-cl ${ipkg_args} install ${package_to_install}
-> | ERROR: Function failed: do_rootfs (log file is located at
-> /home/ubuntu/RDK_EMULATOR_DEMO/build-qemux86/tmp/work/qemux86-rdk-linux/rdk-generic-image/1.0-r0/temp/log.do_rootfs.2423)
-> ERROR: Task 7
-> (/home/ubuntu/RDK_EMULATOR_DEMO/meta-rdk/recipes-core/images/rdk-generic-image.bb,
-> do_rootfs) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 4129 tasks of which 4009 didn't need to be
-> rerun and 1 failed.
-> NOTE: Writing buildhistory
-> No currently running tasks (4129 of 4134)
+> Also I couldn't access your eglibc source tarball because of pesky corpor=
+ate web filters, so I used a direct svn export of the upstream repo at the =
+revision 25243, I assume there should be no differences?
+
+there are no functional differences.
+
 >
-> Summary: 1 task failed:
+> On a side note, I haven't seen any mention of what is next regarding oe-c=
+ore and eglibc. Since the eglibc project has closed its development (http:/=
+/www.eglibc.org/archives/patches/msg01327.html), and that 2.19 is the final=
+ version. Are there any plans to switch oe-core to using glibc for the futu=
+re? Just curious is all.
+
+Sure there definitely are and we discussed it in Last OE meeting on
+IRC recently, we will plan moving to using glibc after 2.19, so these
+will be last 2.19 eglibc recipes.
+
 >
-> /home/ubuntu/RDK_EMULATOR_DEMO/meta-rdk/recipes-core/images/rdk-generic-image.bb,
-> do_rootfs
-> Summary: There was 1 WARNING message shown.
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> ubuntu@buildvm-2:~/RDK_EMULATOR_DEMO/build-qemux86$
+> Regards,
+> Nathan
 >
-> Could you please help how and where to fix it?
+>>
+>> Thank you
+>>
+>> -Khem
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 >
-> Disclaimer: I'm a novice at yocto build system :)
->
-> Thanks,
-> Ridish
 >
 
