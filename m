@@ -1,36 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id C66EB6E746;
-	Mon, 10 Feb 2014 07:31:56 +0000 (UTC)
-Received: by mail-ig0-f172.google.com with SMTP id k19so6061752igc.5
-	for <multiple recipients>; Sun, 09 Feb 2014 23:31:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=+rphmacguwuYXClqmWhioiFfMudzHVWYQId4YZRoq8g=;
-	b=Ngk6omCDdM2y0U6KV8m8vdgqGVuYVTi2Nz7PcQkDhF9AU1cYb2ZkfvRuw8DZsoIYfs
-	mCl/8bn+fac02ojVM1suCATGChqK5u6kvwHFoSZCiWFa9LiY5AxJgDUBFyidlf/RUMyh
-	TuVsctL11zwwHtPo5qvIZ8bSjCq7Ytt89o8i2hMciFLFRgQYWr5gjc3hMQYgZOwJ72Kq
-	9qOmp8xff6uhTrCDLwOtPm0fXsYMHS+g0OpZMU86R9rxqs6Oi2zwejrIbHFPDgfNIS/5
-	JBy2034vS8NMCAlsSGyRhMNZuQXpo2y2tj+hVYKzu6KLZIECtMqFNMNCKk67atvK/rFI
-	AaIQ==
-X-Received: by 10.43.65.145 with SMTP id xm17mr14324912icb.35.1392017517706;
-	Sun, 09 Feb 2014 23:31:57 -0800 (PST)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ve0-f169.google.com (mail-ve0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id D05656E746
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2014 08:36:28 +0000 (UTC)
+Received: by mail-ve0-f169.google.com with SMTP id oy12so4814994veb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2014 00:36:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=mT7IbRrU7CWHDwpOCJIH7MaE0mE3oF43YsRPv1RRcEc=;
+	b=bjabubYoRbhup7WOKOvXbXP0kr/+Pq+ey40jwvZ5UxehcVOVgF1JAseZe5D8rogRRh
+	qR8xiOOGQ+o/EWFYshkyFIeTlTu9ND2fHQbkZIuBwLhX2PKlXIe4O9/YrGBpTB7fJkUM
+	38n0Vu0585j5YgrqYOHD1llevmo+JaBtm5le4xNiip87M2Hy9OCfFeE/q7J/Z47bXsSO
+	N63KKkk27zknaSGcH4dSl59hlPKnLilw0P1na4QcgDFPBOLJHZ+IBL/d2EkyvkpYCMKZ
+	Ke7LYq/OVQ7I/sszsH7Pb26nQknPhN/jz03M3FAD9THkJ0TKJAqSPf9XNEiJgXnk6icg
+	DWiQ==
 MIME-Version: 1.0
-Received: by 10.50.8.137 with HTTP; Sun, 9 Feb 2014 23:31:27 -0800 (PST)
-In-Reply-To: <31681ec9-08a2-426e-b3d2-72f6c0d22073@AM1EHSMHS015.ehs.local>
-References: <CAMKF1sptnVxCrjm7PAOCtRWzmSsxPv4nc0nUO82jMPQ+BCz9Hg@mail.gmail.com>
-	<31681ec9-08a2-426e-b3d2-72f6c0d22073@AM1EHSMHS015.ehs.local>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 9 Feb 2014 23:31:27 -0800
-Message-ID: <CAMKF1srC03NP0XkoL2Qy9X7hRt_FhQy3tG_rf=mbqhYvJ=soig@mail.gmail.com>
-To: Nathan Rossi <nathan.rossi@xilinx.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] eglibc 2.19
+X-Received: by 10.58.69.111 with SMTP id d15mr22665449veu.3.1392021388911;
+	Mon, 10 Feb 2014 00:36:28 -0800 (PST)
+Received: by 10.52.28.41 with HTTP; Mon, 10 Feb 2014 00:36:28 -0800 (PST)
+In-Reply-To: <20140208184629.GP3698@jama>
+References: <1391628912-17880-1-git-send-email-schnitzeltony@googlemail.com>
+	<1391628912-17880-2-git-send-email-schnitzeltony@googlemail.com>
+	<20140208184629.GP3698@jama>
+Date: Mon, 10 Feb 2014 09:36:28 +0100
+Message-ID: <CALbNGRRv-qj5_=ra2seGoymzZPGL+cBX6cUQyqMMpRiY-=vyjw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-qt5 2/2] qtwayland: fix qml-compositor shader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,74 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2014 07:31:57 -0000
+X-List-Received-Date: Mon, 10 Feb 2014 08:36:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 9, 2014 at 9:32 PM, Nathan Rossi <nathan.rossi@xilinx.com> wrot=
-e:
->> -----Original Message-----
->> From: openembedded-core-bounces@lists.openembedded.org
->> [mailto:openembedded-core-bounces@lists.openembedded.org] On Behalf Of
->> Khem Raj
->> Sent: Sunday, February 09, 2014 2:08 AM
->> To: Patches and discussions about the oe-core layer; openembeded-devel;
->> yocto@yoctoproject.org
->> Subject: [OE-core] [RFT] eglibc 2.19
->>
->> Hi all
->>
->> I have staged a branch with eglibc 2.19 upgraded recipes here
->>
->> http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/egli=
-bc-
->> 2.19
->>
->> These are not final recipes there may be tweaks needed like adjusting
->> SRC_URI
->> later on.
->>
->> please help testing it out in your environments and machines
->> I would be happy to help out with issues we find
+On Sat, Feb 8, 2014 at 7:46 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+>> +Change-Id: I055fe47e1073403dc981274236fa82e091e0eca4
+>> +Reviewed-by: J=C3=B8rgen Lind <jorgen.lind@digia.com>
+>> +Reviewed-by: Andy Nichols <andy.nichols@digia.com>
+>> +Upstream-status: applied
 >
-> Hi Khem,
+> This one should be Backport, but please check jansa/qt5-5.2.1 branch,
+> I've updated all recipes for 5.2.1 release and newer qtwayland revision
+> used there includes this patch already.
 >
-> I have given it a test with the machines on the meta-xilinx layer, specif=
-ically ARM Cortex A9 and MicroBlaze architectures. And there appears to be =
-no issues.
+> Your qtbase patch still does apply, I'll add that to branch now.
+>
+Will give 5.2.1 a test this week
 
-Thanks for the report.
-
->
-> Also I couldn't access your eglibc source tarball because of pesky corpor=
-ate web filters, so I used a direct svn export of the upstream repo at the =
-revision 25243, I assume there should be no differences?
-
-there are no functional differences.
-
->
-> On a side note, I haven't seen any mention of what is next regarding oe-c=
-ore and eglibc. Since the eglibc project has closed its development (http:/=
-/www.eglibc.org/archives/patches/msg01327.html), and that 2.19 is the final=
- version. Are there any plans to switch oe-core to using glibc for the futu=
-re? Just curious is all.
-
-Sure there definitely are and we discussed it in Last OE meeting on
-IRC recently, we will plan moving to using glibc after 2.19, so these
-will be last 2.19 eglibc recipes.
-
->
-> Regards,
-> Nathan
->
->>
->> Thank you
->>
->> -Khem
->> _______________________________________________
->> Openembedded-core mailing list
->> Openembedded-core@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
->
+Andreas
 
