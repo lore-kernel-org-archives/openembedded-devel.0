@@ -1,36 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ve0-f182.google.com (mail-ve0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E6726E7AF
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f47.google.com (mail-qa0-f47.google.com
+	[209.85.216.47])
+	by mail.openembedded.org (Postfix) with ESMTP id DF7616E753
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 11:47:49 +0000 (UTC)
-Received: by mail-ve0-f182.google.com with SMTP id jy13so4788727veb.41
+	Mon, 10 Feb 2014 13:16:42 +0000 (UTC)
+Received: by mail-qa0-f47.google.com with SMTP id j5so9509167qaq.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 03:47:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=klG3Csdpypqd/TevCcsXVKU1+tU0pV7U9Xf/+b2JhHc=;
-	b=hkgN7LiLKPskYMYJL9Z9YgwCvWElmzriimHT3ndF/KnWlaeHty93hCfo3wsMXr8Kq8
-	pv+KpBPZM3zlJT9kRmLtmnkNGZ5zn6OTRd1NKuFm3cLb0MZI6wmZkpTPCKqJVXgL6LAL
-	PpGsPQVP9UkZV2XZQny5XG3DoD4etfKK5d+BGJ950+czmcHaRR4qgjDP1nB2Y9k6Xfas
-	w4ozuSwCwNeOa7uQzFEx5FE8h4xdIGfeciPKSPDq1l87ju/ornRh49CuQ313OeHvEMQx
-	gh+pRkCzgzNPVp/yNuF9Tp9CzDBBVed270QA884uW/k9TMZ+nddV3A+Xm3/j+dJ+vRgl
-	bJCg==
+	Mon, 10 Feb 2014 05:16:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=L9HBNBFTysurZZC3r9TaAFZBPCaFRQY3HOSsP9gwuHY=;
+	b=SbAo91LYKXrHb7/jzJevdO+iTRoygaRb+aXJiNSsCcaiAOi/BA/6WEMEa7NefB+5Kn
+	0Zi/z2w1tJTZyPh+xpp7RcqdbkZEeCgJcOY9GpT31NEiaBLAIf+BXlzdj0estmRsJwBj
+	z8o8w+jVTNoMGCFgj3XUWlVJj7TkUwwLyq9DtRxNFDRfDl3yjWSZafQA8cyRu8SFD451
+	GqF9cIkWGb/esQikXm3TPKJZdFu4QHpmw5keeoe0gJbI+JVc3eByk0Z/+Uw7/FlFfwZU
+	r1/X1+MDxMVDvKlteKeUWIquOjIpv6ABEs4q3NqGA7rh3TuwTZBCbgqw+s0LPgct8vFu
+	sQWg==
+X-Received: by 10.140.35.211 with SMTP id n77mr13525440qgn.82.1392038203242;
+	Mon, 10 Feb 2014 05:16:43 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.52.171.68 with SMTP id as4mr19787294vdc.0.1392032869797;
-	Mon, 10 Feb 2014 03:47:49 -0800 (PST)
-Received: by 10.52.28.41 with HTTP; Mon, 10 Feb 2014 03:47:49 -0800 (PST)
-In-Reply-To: <1389286106-30118-2-git-send-email-schnitzeltony@googlemail.com>
-References: <1389286106-30118-1-git-send-email-schnitzeltony@googlemail.com>
-	<1389286106-30118-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Mon, 10 Feb 2014 12:47:49 +0100
-Message-ID: <CALbNGRQwnmOWkUC9dTWTBHnh0odWSUm5L8s9Xz8wOK7pKtz86w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-qt5][jansa/qt5-5.2.0]] qtbase: fix typo in PATH_EXTERNAL_HOST_BINS-patch
+Received: by 10.140.25.47 with HTTP; Mon, 10 Feb 2014 05:16:22 -0800 (PST)
+In-Reply-To: <CAMCfZKFW8mb1d=Q2eJ9mRx8xprbN2dHUQJwZvG-UkUF5Q6TRXw@mail.gmail.com>
+References: <CAMCfZKFW8mb1d=Q2eJ9mRx8xprbN2dHUQJwZvG-UkUF5Q6TRXw@mail.gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Mon, 10 Feb 2014 11:16:22 -0200
+Message-ID: <CAMCfZKFNHREoyX9L2xbwYAoxrcUq1R8-=74u2V1Aiw45QmkC6g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: xbmc build failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,51 +41,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2014 11:47:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 10 Feb 2014 13:16:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Jan 9, 2014 at 5:48 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> libraries based on cmake and depending on qt5qml failed to configure with=
-:
+Folks,
+
+To workaround the screensaver compilation error I've added "--disable-rsxs"
+on EXTRA_OECONF.
+
+Looking at "xbmc/screensavers/rsxs-0.9/configure" It's possible to pass
+"--disable-euphoria" option to configure.
+How can I accomplish this from xbm_git.bb recipe?
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
+
+
+On Sun, Feb 9, 2014 at 8:28 AM, Diego Sueiro <diego.sueiro@gmail.com> wrote:
+
+> Folks,
 >
-> |   The imported target "Qt5::DBus" references the file
-> |
-> |      "/home/a.mueller/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin/=
-qt5/qdbusxml2xml"
+> I'm trying to get xbcm built for beaglebone black (dora branch), but it's
+> failing.
 >
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  .../0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determine-pa.patch     =
-| 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> I'm having the same issue as this e-mail sent 2 months ago:
 >
-> diff --git a/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_B=
-INS-to-determine-pa.patch b/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EX=
-TERNAL_HOST_BINS-to-determine-pa.patch
-> index e3f1b72..ea3364e 100644
-> --- a/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-=
-determine-pa.patch
-> +++ b/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-=
-determine-pa.patch
-> @@ -54,7 +54,7 @@ index 1d94715..617efa8 100644
->       set(imported_location \"${_qt5DBus_install_prefix}/$${CMAKE_BIN_DIR=
-}qdbuscpp2xml$$CMAKE_BIN_SUFFIX\")
->   !!ELSE
->  -    set(imported_location \"$${CMAKE_BIN_DIR}qdbuscpp2xml$$CMAKE_BIN_SU=
-FFIX\")
-> -+    set(imported_location \"${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qdbusxm=
-l2xml$$CMAKE_BIN_SUFFIX\")
-> ++    set(imported_location \"${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qdbuscp=
-p2xml$$CMAKE_BIN_SUFFIX\")
->   !!ENDIF
->       _qt5_DBus_check_file_exists(${imported_location})
+> http://lists.openembedded.org/pipermail/openembedded-devel/2013-November/093304.html
+>
+>  Searching on internet I couldn't find any fix.
+>
+>
+> Regards,
 >
 > --
-> 1.8.3.1
+> *dS
+> Diego Sueiro
 >
-This one is back in 5.2.1. Shall I send a patch?
-
-Andreas
+> Administrador do Embarcados
+> www.embarcados.com.br
+>
+> /*long live rock 'n roll*/
+>
 
