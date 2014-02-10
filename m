@@ -1,39 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id EEDCE6EC80
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F48A6E6B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 16:05:50 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id t10so2991052eei.21
+	Mon, 10 Feb 2014 17:52:21 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id v1so5472014yhn.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 08:05:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=kWiKCSkZKZUHluHsA4VeXhswJU8nslg2Vh0ogNnUKAQ=;
-	b=OupqERIWaNkdHkBxFnBQHdoHqEsIFVhRba7L8DpUouujFArqz5ynWNb5bXzhYEF5TA
-	GKSHDdSrO3YL8WzpvJcaiCalRnnGosPZKaAbUFaBmVGFl1/Ca7xAlYbAflrLrlk9/V/C
-	Rz9tO73c+x7Mg3yOjyxkfB3o46LJMvJuosegCjJQAgqcEwBoZIbFYkhZJ/rWYTXLubrV
-	pnNBG4wLXLsFA3AToqgZqqJQo0zrcGM42IN9caR0UkkrNY0sMoLtKx70WUy1R9dmscv1
-	rmnpnxWcyi+/AFuUdIA7bKghYX5sfopFq2/v3+8Rv6X71O6IJuO5EDt6rNsztW+yNuEg
-	l/9A==
-X-Received: by 10.14.219.73 with SMTP id l49mr1145323eep.112.1392048351505;
-	Mon, 10 Feb 2014 08:05:51 -0800 (PST)
-Received: from localhost.localdomain (ip-109-91-251-124.unitymediagroup.de.
-	[109.91.251.124]) by mx.google.com with ESMTPSA id
-	o43sm56086885eef.12.2014.02.10.08.05.50
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Feb 2014 08:05:50 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Feb 2014 17:05:41 +0100
-Message-Id: <1392048341-24963-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1392048341-24963-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1392048341-24963-1-git-send-email-schnitzeltony@googlemail.com>
+	Mon, 10 Feb 2014 09:52:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=FSBi7MrVaky03GdLnXgrmPT3e6WbSv0fi/i4MwSZo/Q=;
+	b=I6keEPh4mKmcfrilDT89xUJi0DAmOjY2malW4i/YFcGbKJjBLODq0edQLcIF3VNiF1
+	WKPARJhd6hwkA56bBuhv2/7FLahfBhj2n2s4458m2RURGvBLHHblw2kl2zDU/EHM8atr
+	HUDY296yNXq905jjRygIr8xhYhqKxzF4J+d8cLPIf2P2KGyfOoHk7s5r/1M+0aRywecX
+	ab8V4r1xd1VsKgPimKECunHKDlZpGAbyZGP3oXKjUjwsA//8Mfre8nh/QMGtunYINlc1
+	Ye98eOMLLZmS52h+ATLLoz+0PIWtPeQQFvXMVgbscJjeZvcgrh2nLbAyjcS5VDpBjj0C
+	N1yQ==
 MIME-Version: 1.0
-Subject: [PATCH][meta-qt5][jansa/qt5-5.2.1] 2/2] qtwayland.inc: fix QA warnings
+X-Received: by 10.236.87.1 with SMTP id x1mr18279816yhe.51.1392054741877; Mon,
+	10 Feb 2014 09:52:21 -0800 (PST)
+Received: by 10.170.205.66 with HTTP; Mon, 10 Feb 2014 09:52:21 -0800 (PST)
+In-Reply-To: <CALbNGRQwnmOWkUC9dTWTBHnh0odWSUm5L8s9Xz8wOK7pKtz86w@mail.gmail.com>
+References: <1389286106-30118-1-git-send-email-schnitzeltony@googlemail.com>
+	<1389286106-30118-2-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRQwnmOWkUC9dTWTBHnh0odWSUm5L8s9Xz8wOK7pKtz86w@mail.gmail.com>
+Date: Mon, 10 Feb 2014 18:52:21 +0100
+Message-ID: <CA+chaQfw=d8U74hZJJtPfQuDTkQk72a2Ldma+XMo9jdFXOiuHA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-qt5][jansa/qt5-5.2.0]] qtbase: fix typo in PATH_EXTERNAL_HOST_BINS-patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,43 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2014 16:05:51 -0000
+X-List-Received-Date: Mon, 10 Feb 2014 17:52:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-WARNING: QA Issue: qtwayland: Files/directories were installed but not shipped
-  /usr/lib/qt5/plugins/wayland-graphics-integration
-  /usr/lib/qt5/plugins/wayland-graphics-integration/client
-  /usr/lib/qt5/plugins/wayland-graphics-integration/server
-  /usr/lib/qt5/plugins/wayland-graphics-integration/client/libwayland-egl.so
-  /usr/lib/qt5/plugins/wayland-graphics-integration/client/.debug
-  /usr/lib/qt5/plugins/wayland-graphics-integration/client/.debug/libwayland-egl.so
-  /usr/lib/qt5/plugins/wayland-graphics-integration/server/libwayland-egl.so
-  /usr/lib/qt5/plugins/wayland-graphics-integration/server/.debug
-  /usr/lib/qt5/plugins/wayland-graphics-integration/server/.debug/libwayland-egl.so
+Ah sorry, it wasn't included in "stable" branch of meta-qt5/qtbase which I
+used to rebase for 5.2.1, I've seen your patch already, I'll integrate it
+in next few days.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-qt/qt5/qtwayland.inc | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/recipes-qt/qt5/qtwayland.inc b/recipes-qt/qt5/qtwayland.inc
-index 29c6b27..abeb15f 100644
---- a/recipes-qt/qt5/qtwayland.inc
-+++ b/recipes-qt/qt5/qtwayland.inc
-@@ -14,3 +14,11 @@ QT_WAYLAND_BUILD_PARTS ?= "examples"
- EXTRA_QMAKEVARS_PRE += "CONFIG+=${QT_WAYLAND_CONFIG}"
- EXTRA_QMAKEVARS_PRE += "DEFINES+=${QT_WAYLAND_DEFINES}"
- EXTRA_QMAKEVARS_PRE += "QT_BUILD_PARTS+=${QT_WAYLAND_BUILD_PARTS}"
-+
-+FILES_${PN}-plugins += " \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
-+"
-+
-+FILES_${PN}-plugins-dbg += " \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug/* \
-+"
--- 
-1.8.3.1
+On Mon, Feb 10, 2014 at 12:47 PM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
 
+> On Thu, Jan 9, 2014 at 5:48 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+> > libraries based on cmake and depending on qt5qml failed to configure
+> with:
+> >
+> > |   The imported target "Qt5::DBus" references the file
+> > |
+> > |
+>  "/home/a.mueller/tmp/oe-core-eglibc/sysroots/x86_64-linux/usr/bin/qt5/qd=
+busxml2xml"
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> > ---
+> >  .../0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determine-pa.patch
+> | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git
+> a/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-dete=
+rmine-pa.patch
+> b/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-dete=
+rmine-pa.patch
+> > index e3f1b72..ea3364e 100644
+> > ---
+> a/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-dete=
+rmine-pa.patch
+> > +++
+> b/recipes-qt/qt5/qtbase/0014-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-dete=
+rmine-pa.patch
+> > @@ -54,7 +54,7 @@ index 1d94715..617efa8 100644
+> >       set(imported_location
+> \"${_qt5DBus_install_prefix}/$${CMAKE_BIN_DIR}qdbuscpp2xml$$CMAKE_BIN_SUF=
+FIX\")
+> >   !!ELSE
+> >  -    set(imported_location
+> \"$${CMAKE_BIN_DIR}qdbuscpp2xml$$CMAKE_BIN_SUFFIX\")
+> > -+    set(imported_location
+> \"${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qdbusxml2xml$$CMAKE_BIN_SUFFIX\")
+> > ++    set(imported_location
+> \"${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qdbuscpp2xml$$CMAKE_BIN_SUFFIX\")
+> >   !!ENDIF
+> >       _qt5_DBus_check_file_exists(${imported_location})
+> >
+> > --
+> > 1.8.3.1
+> >
+> This one is back in 5.2.1. Shall I send a patch?
+>
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
