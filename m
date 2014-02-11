@@ -1,36 +1,32 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 21A296EBB3
+Return-Path: <denys@ti.com>
+Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
+	by mail.openembedded.org (Postfix) with ESMTP id F31766EAF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 15:15:08 +0000 (UTC)
-Received: by mail-qc0-f174.google.com with SMTP id x13so13194373qcv.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 07:15:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=YfS1KVM92DL5RIIT6h7Vqpqi8hVd3lLpemsEIZujaog=;
-	b=k9hkjxbZ7s5WN1moFo+bCXwb6C7ZERYaPnfS8KOQhgTonKaBqWNsMKIk17iIIseLF0
-	qjOUEhm+UNektlCS9Eo2PqAoyI24KeUDm3XnWWYWxaV35xIeM3qidS250TNJ12TkVZbV
-	5+kpDeoSC9Uc476fZIhpezJibuM7dKzVq6F52dUfb2qX1E+KN4Iz8m08pumXek1mQtdt
-	HBlAxSk5rWFzN91+xs2sASC24blrYO65vW2ShzhI9EpxMq93RVajucoUU4i34oFT4hXQ
-	hDvvn7kGhG4CfH9UOozThSuQklpOC8y91rGmHAoDI1V2+oV4Rxjx7cg2xIazCR614c2x
-	lFzQ==
-X-Received: by 10.140.31.75 with SMTP id e69mr55225656qge.76.1392131708815;
-	Tue, 11 Feb 2014 07:15:08 -0800 (PST)
+	Tue, 11 Feb 2014 16:41:19 +0000 (UTC)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id s1BGfKUa021551;
+	Tue, 11 Feb 2014 10:41:20 -0600
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BGfKhU005449;
+	Tue, 11 Feb 2014 10:41:20 -0600
+Received: from dflp32.itg.ti.com (10.64.6.15) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.2.342.3;
+	Tue, 11 Feb 2014 10:41:19 -0600
+Received: from localhost (ileax41-snat.itg.ti.com [10.172.224.153])	by
+	dflp32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s1BGfJLl026038;
+	Tue, 11 Feb 2014 10:41:19 -0600
+Date: Tue, 11 Feb 2014 11:41:19 -0500
+From: Denys Dmytriyenko <denys@ti.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20140211164119.GM3131@edge>
+References: <1392067015-16328-1-git-send-email-denis@denix.org>
+	<1392067015-16328-2-git-send-email-denis@denix.org>
+	<CAP9ODKpyPBJMu+ieCKBZarnGaJTTpq+4w_3zHJxPEuTrSi=g7w@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 07:14:48 -0800 (PST)
-In-Reply-To: <CAMKF1sq=9ycj9XRr9PrMopyy9qpHg_cyxy_6fH++Nq6MqsGU8g@mail.gmail.com>
-References: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
-	<FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
-	<CAMCfZKH74FMry8-LvajWMEMbx0fEF2OzmZV+iDCkZ6djUCXsrA@mail.gmail.com>
-	<CAMKF1sq=9ycj9XRr9PrMopyy9qpHg_cyxy_6fH++Nq6MqsGU8g@mail.gmail.com>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 11 Feb 2014 13:14:48 -0200
-Message-ID: <CAMCfZKF7dxy+y8mx_qiM2T9xVNqdLLZ7DX_KjzT9piDqApEpeQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: xbmc build failing
+In-Reply-To: <CAP9ODKpyPBJMu+ieCKBZarnGaJTTpq+4w_3zHJxPEuTrSi=g7w@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 1/3] packagegroup-qt5-toolchain-target: add Qt5 SDK target packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 15:15:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Feb 2014 16:41:21 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Tue, Feb 11, 2014 at 1:08 PM, Khem Raj <raj.khem@gmail.com> wrote:
+On Tue, Feb 11, 2014 at 12:20:09PM -0200, Otavio Salvador wrote:
+> On Mon, Feb 10, 2014 at 7:16 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > From: Denys Dmytriyenko <denys@ti.com>
+> >
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> 
+> This includes some new package we were not installing. Those are:
+> 
+> +    libsqlite3-dev \
+> +    qtscript-mkspecs \
+> +    qtxmlpatterns-mkspecs \
+> +    qtsensors-mkspecs \
+> +    qt3d-mkspecs \
+> +    qtlocation-mkspecs \
+> +    qtsvg-mkspecs \
+> +    qtdeclarative-dev \
+> +    qtscript-dev \
+> +    qt3d-dev \
+> +    qtlocation-dev \
+> +    qtsensors-dev \
+> 
+> Do you want to do a commit on top of mine or should I just squash it
+> into my previous commit and put a note in the commit log thanking you
+> for the contribution?
 
-> also check version of gcc in meta-angstrom search for ANGSTROM_GCC e.g.
+Otavio,
 
+As I mentioned in the cover letter, I was already rebaing this on top of your 
+WIP branch and should have the patch ready with the above differences - you 
+can apply it on top.
 
-Angstrom:
-ANGSTROM_GCC_VERSION_arm                         ?= "linaro-4.8%"
-Poky
-GCCVERSION ?= "4.8%"
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
+-- 
+Denys
 
