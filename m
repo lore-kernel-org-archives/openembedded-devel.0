@@ -1,38 +1,38 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CF79D6E8C3
+Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 47E636EE06
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 17:57:16 +0000 (UTC)
-Received: by mail-yk0-f173.google.com with SMTP id 10so12018071ykt.4
+	Tue, 11 Feb 2014 17:57:29 +0000 (UTC)
+Received: by mail-yh0-f41.google.com with SMTP id f73so7247734yha.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 09:57:17 -0800 (PST)
+	Tue, 11 Feb 2014 09:57:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=zjknWfzvtxAfcRTD0qDV0/xC2fMQ8CSBzSTEbo+AoDY=;
-	b=dRRdIzApllWE49HH6nrPLaTuV0MXeIx8Qp/TV3sHh4Py3v7qi5+93dgBpEOM8/JpCF
-	zcftSEKaBdqh/aO3aHv2sz6z2w0c7235Che8TId1OUoY1ORGAUoG3tggNRCSs5I/lsRg
-	EDDNDihNhmAwXPjg7XE73g9HXA9MRRewvOAiaAbU8aBdrpzkJH+j4oAnEh2ui5MLCpMP
-	mOQBMvVwlsdNGTmkAfQH22t7Wiv5oZg6xo10DnCUFbHCKh7VRlwbg1vPIRBSs1zVuawn
-	ylTacWRJBuSPFob9YNU4w5Tf42hObkGf8yfe5NWfIXYZIlhzEhUs7DpiU1/H35aEqaky
-	7fFA==
-X-Received: by 10.236.129.198 with SMTP id h46mr35597238yhi.17.1392141437608; 
-	Tue, 11 Feb 2014 09:57:17 -0800 (PST)
+	bh=grCkCBX7TCZucuq4TJ0IMJCW5hplpnjRIMdHR6X5ru0=;
+	b=VVpswe1r1oQ8WohSNrw3AGuJ0YbAM6IFrkr16MlKzpGgVDw5zrD+noy+sJiPOv2tPq
+	gPR5p1UtcIYpJPtfNa1gupMXsbwxZoB1AY9I1wt7ANguDNiVn6BVSW/5Axc1A2S++4p1
+	YewzKcUmbZaOflQ0t0YWNQubzhH86/0/hIfDcqIQ79Q1beQjxJSP8gWQnyqIRUPiyaCY
+	l59kKfnoQI8vy70JHcS5w5K3rMVcfoqCLOBt/mDXQPr8gIrOFKbM/hT3dbTdHh3cUwo4
+	Awm+QyOQxXgNFXio0Q7GNyE3velOcp7PF7KwDnIzBE4nJ894/KiSJ2gNpjQJ0AU4HN7O
+	x8qQ==
+X-Received: by 10.236.102.102 with SMTP id c66mr1144033yhg.153.1392141450107; 
+	Tue, 11 Feb 2014 09:57:30 -0800 (PST)
 Received: from monster.lab.ossystems.com.br ([177.194.208.225])
 	by mx.google.com with ESMTPSA id
-	b24sm61434799yhl.25.2014.02.11.09.57.08 for <multiple recipients>
+	b24sm61434799yhl.25.2014.02.11.09.57.20 for <multiple recipients>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 11 Feb 2014 09:57:16 -0800 (PST)
+	Tue, 11 Feb 2014 09:57:29 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Feb 2014 15:56:24 -0200
-Message-Id: <1392141388-25288-2-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 11 Feb 2014 15:56:25 -0200
+Message-Id: <1392141388-25288-3-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1392141388-25288-1-git-send-email-otavio@ossystems.com.br>
 References: <1392141388-25288-1-git-send-email-otavio@ossystems.com.br>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH 1/5] README: Reword the section about github forking
+Subject: [meta-qt5][PATCH 2/5] nativesdk-packagegroup-qt5-toolchain-host: Add packagegroup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,36 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 17:57:17 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 17:57:30 -0000
 
-This splits the lines in 80 cols and rework the text a little bit to
-easy reading.
+Allow easy inclusion of host packages for the Qt5 standalone SDK or
+external toolchain.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- README |    9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ .../nativesdk-packagegroup-qt5-toolchain-host.bb         |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
 
-diff --git a/README b/README
-index a5a5812..06335bb 100644
---- a/README
-+++ b/README
-@@ -18,7 +18,14 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-qt5]
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-qt5][PATCH'
- 
--You are encouraged to fork the mirror on github https://github.com/meta-qt5/meta-qt5/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
-+You are encouraged to fork the mirror on github[1] to share your
-+patches. This is preferred for patch sets consisting of more than one
-+patch. Other services like gitorious, repo.or.cz or self hosted setups
-+are of course accepted as well, 'git fetch <remote>' works the same on
-+all of them. We recommend github because it is free, easy to use, has
-+been proven to be reliable and has a really good web GUI.
+diff --git a/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb b/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
+new file mode 100644
+index 0000000..4cc0b93
+--- /dev/null
++++ b/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
+@@ -0,0 +1,14 @@
++# Copyright (C) 2014 O.S. Systems Software LTDA.
 +
-+1. https://github.com/meta-qt5/meta-qt5/
- 
- Main layer maintainers:
-   Martin 'JaMa' Jansa <martin.jansa@gmail.com>
++SUMMARY = "Host packages for the Qt5 standalone SDK or external toolchain"
++LICENSE = "MIT"
++
++inherit nativesdk packagegroup
++
++PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
++
++RDEPENDS_${PN} += " \
++    nativesdk-packagegroup-sdk-host \
++    nativesdk-qttools \
++    nativesdk-qtbase-tools \
++"
 -- 
 1.7.10.4
 
