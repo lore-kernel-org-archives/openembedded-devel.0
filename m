@@ -1,38 +1,25 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f173.google.com (mail-qc0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 24A0F6E717
+Return-Path: <denis@denix.org>
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F3176E744
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 17:23:32 +0000 (UTC)
-Received: by mail-qc0-f173.google.com with SMTP id i8so13443830qcq.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 09:23:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=De/t+9uBlpi7Sun9SXwqXhoqHqAF25xKFSoephZuS+U=;
-	b=zs7CbQaKg+Ci0nnYv2VkfcB4fsCuN0YqHuBmv5/75CcdFHszLrG/YtEBsyv5hhZRlh
-	rlvCCqZ3yqwGEpkRBwL/mibGihdiRE5hpjHlmTQ+q7ca6ZcOfdMHcbdmJjmZlQXmnx0F
-	jkvlywrqPI1VFQQstVncaZRg/PZ5VaaMAjMB3jZ/hRdghOLvhyXQsEBZKtOe7x/kA7VV
-	LL5X6i/5PD68r/pW84JDYHUIbmb670KFS4/C24pOdJSTFcpdZulQcGUUqNa9geuA7imU
-	xm6QdUImPPkhb4HbCvfCK9BC7SQbvlXkABGN6dExeHcnnTwgrYC7fdEPIvsfRDCRMLxj
-	ktjg==
-X-Received: by 10.224.75.73 with SMTP id x9mr60233242qaj.36.1392139412411;
-	Tue, 11 Feb 2014 09:23:32 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 09:23:12 -0800 (PST)
-In-Reply-To: <CAMKF1sqrgQCf+EegF3qqe4chVBmO+qBDnhGD76uDX+mxOrV2cA@mail.gmail.com>
-References: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
-	<FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
-	<CAMCfZKH74FMry8-LvajWMEMbx0fEF2OzmZV+iDCkZ6djUCXsrA@mail.gmail.com>
-	<CAMKF1sq=9ycj9XRr9PrMopyy9qpHg_cyxy_6fH++Nq6MqsGU8g@mail.gmail.com>
-	<CAMCfZKF7dxy+y8mx_qiM2T9xVNqdLLZ7DX_KjzT9piDqApEpeQ@mail.gmail.com>
-	<CAMKF1sqrgQCf+EegF3qqe4chVBmO+qBDnhGD76uDX+mxOrV2cA@mail.gmail.com>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 11 Feb 2014 15:23:12 -0200
-Message-ID: <CAMCfZKGW7_yu3nB71FN8ru64HGjbzD6NJaOzZR0D-Gkuvojyow@mail.gmail.com>
+	Tue, 11 Feb 2014 17:27:34 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173023.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N0U008RKDTNRO40@vms173023.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	11 Feb 2014 11:27:23 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id F41A720018; Tue,
+	11 Feb 2014 12:27:22 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: xbmc build failing
+Date: Tue, 11 Feb 2014 12:27:22 -0500
+Message-id: <1392139642-5871-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5/ossystems/nativesdk][PATCH] populate_sdk_qt5: update with few additional vars and fix typos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 17:23:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Feb 2014 17:27:35 -0000
 
-On Tue, Feb 11, 2014 at 3:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
+From: Denys Dmytriyenko <denys@ti.com>
 
-> > Angstrom:
-> > ANGSTROM_GCC_VERSION_arm                         ?= "linaro-4.8%"
-> > Poky
-> > GCCVERSION ?= "4.8%"
->
-> OK how about eglibc
+* Since qt5 binaries are in separate subdir, add that to PATH
+* Fix rcc binary name
+* Fix qdbusxml2cpp name
+* Fix tabs vs. spaces indentation
+* Gracefully handle qt.conf creation/addition, in case it's already there
+* Set HostPrefix in qt.conf just to be safe
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ classes/populate_sdk_qt5.bbclass | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
 
-Angstrom:
-Could not find. :(
-Poky:
-EGLIBCVERSION ?= "2.18"
+diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+index 81a18af..3b849e9 100644
+--- a/classes/populate_sdk_qt5.bbclass
++++ b/classes/populate_sdk_qt5.bbclass
+@@ -7,6 +7,7 @@ TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
+ inherit qmake5_paths
+ 
+ toolchain_create_sdk_env_script_append () {
++    echo 'export PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}:$PATH' >> $script
+     echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
+     echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
+     echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
+@@ -18,20 +19,21 @@ toolchain_create_sdk_env_script_append () {
+     echo 'export OE_QMAKE_INCDIR_QT=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $script
+     echo 'export OE_QMAKE_MOC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/moc' >> $script
+     echo 'export OE_QMAKE_UIC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/uic' >> $script
+-    echo 'export OE_QMAKE_RCC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/rcc4' >> $script
++    echo 'export OE_QMAKE_RCC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/rcc' >> $script
+     echo 'export OE_QMAKE_QDBUSCPP2XML=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbuscpp2xml' >> $script
+-    echo 'export OE_QMAKE_QDBUSXML2CPP=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/dbusxml2cpp' >> $script
++    echo 'export OE_QMAKE_QDBUSXML2CPP=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbusxml2cpp' >> $script
+     echo 'export OE_QMAKE_QT_CONFIG=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
+     echo 'export QMAKESPEC=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/linux-oe-g++' >> $script
+     echo 'export QT_CONF_PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
+ 
+-	# make a symbolic link to mkspecs for compatibility with QTCreator
++    # make a symbolic link to mkspecs for compatibility with QTCreator
+     (cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; \
+          ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+ 
+-	# Generate a qt.conf file to be deployed with the SDK
+-	qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
+-	echo '[Paths]' > $qtconf
++    # Generate a qt.conf file to be deployed with the SDK
++    qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
++    touch $qtconf
++    echo '[Paths]' >> $qtconf
+     echo 'Prefix = ${SDKTARGETSYSROOT}' >> $qtconf
+     echo 'Headers = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
+     echo 'Libraries = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}' >> $qtconf
+@@ -47,5 +49,6 @@ toolchain_create_sdk_env_script_append () {
+     echo 'Settings = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
+     echo 'Examples = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
+     echo 'Tests = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
++    echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
+     echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
+ }
+-- 
+1.8.3.2
 
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
 
