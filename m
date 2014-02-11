@@ -1,35 +1,35 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E5186E9F8
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id C626D6E7F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 07:15:03 +0000 (UTC)
-Received: by mail-pa0-f50.google.com with SMTP id kp14so7317540pab.9
+	Tue, 11 Feb 2014 09:12:38 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1WD9ON-0003jR-Ek for openembedded-devel@lists.openembedded.org;
+	Tue, 11 Feb 2014 10:12:35 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Feb 2014 10:12:35 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 23:15:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=FxLGQrGJ6hb76CRlu/uLS7CjEg0e8CVV7RccBtrXkNk=;
-	b=kDoanbywqvLGXT62C4VNn/qzJhilzSloyi1sOpLrcChbdbeZSUsvkXVZ/H0r8zLEeI
-	2+F1NZWc6OU70gfhgkMFB0YN32MuhUzkM7Ar+1ca62n7cHsudKxG/Jhg/IbS/LYSQDBU
-	aamsxI5//jaGmom8xH3ft4cr3jtmIvj1EuZOruv/f59J/F9hPGcREsqUyQFVWpXoZEyq
-	5oqV3vRdkDSi1zL8HtNQHjvzywNKuCwSHW16Z6ExVtgVngDpesVlo/R4ND8E+Mb20A0R
-	BAqCUztjUma7n3n8/PtI1xW/OMxOnD7UQ2UWQ4SchO11huMNxGk/Md/h1wbC4Gm6haDl
-	qIvw==
-X-Received: by 10.68.66.103 with SMTP id e7mr42326165pbt.120.1392102903660;
-	Mon, 10 Feb 2014 23:15:03 -0800 (PST)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id
-	ac5sm49574301pbc.37.2014.02.10.23.15.01 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Feb 2014 23:15:02 -0800 (PST)
-From: Jonathan Liu <net147@gmail.com>
+	Tue, 11 Feb 2014 10:12:35 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Feb 2014 18:19:04 +1100
-Message-Id: <1392103144-18040-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.8.5.3
-Subject: [meta-oe][PATCH] xf86-input-tslib: fix crash with xserver 1.12 and later
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 11 Feb 2014 10:14:02 +0100
+Message-ID: <ldcph7$d94$1@ger.gmane.org>
+References: <CAMCfZKFW8mb1d=Q2eJ9mRx8xprbN2dHUQJwZvG-UkUF5Q6TRXw@mail.gmail.com>	<CAMCfZKFNHREoyX9L2xbwYAoxrcUq1R8-=74u2V1Aiw45QmkC6g@mail.gmail.com>
+	<2E2B5ECF-3678-407E-A9DE-58A4F3B271B0@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+In-Reply-To: <2E2B5ECF-3678-407E-A9DE-58A4F3B271B0@gmail.com>
+X-Enigmail-Version: 1.6
+Subject: Re: xbmc build failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,65 +43,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 07:15:03 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 09:12:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- ...f86-input-tslib-0.0.6-xf86XInputSetScreen.patch | 31 ++++++++++++++++++++++
- .../xorg-driver/xf86-input-tslib_0.0.6.bb          |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch
-new file mode 100644
-index 0000000..d16b4a5
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch
-@@ -0,0 +1,31 @@
-+Fixes crash when a touchscreen event is received with xserver 1.12 and later:
-+X: symbol lookup error: /usr/lib/xorg/modules/input/tslib_drv.so: undefined symbol: xf86XInputSetScreen
-+
-+Upstream-Status: Pending
-+
-+Taken from Gentoo:
-+https://bugs.gentoo.org/show_bug.cgi?id=446432
-+
-+diff -ur xf86-input-tslib-0.0.6.orig/src/tslib.c xf86-input-tslib-0.0.6/src/tslib.c
-+--- xf86-input-tslib-0.0.6.orig/src/tslib.c	2012-12-05 01:12:16.286597071 +0100
-++++ xf86-input-tslib-0.0.6/src/tslib.c	2012-12-05 01:11:02.686598595 +0100
-+@@ -75,6 +75,19 @@
-+ #define COLLECT_INPUT_OPTIONS(pInfo, options) xf86CollectInputOptions((pInfo), (options))
-+ #endif
-+ 
-++#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) > 13
-++static void
-++xf86XInputSetScreen(InputInfoPtr	pInfo,
-++		    int			screen_number,
-++		    int			x,
-++		    int			y)
-++{
-++    if (miPointerGetScreen(pInfo->dev) !=
-++          screenInfo.screens[screen_number]) {
-++	miPointerSetScreen(pInfo->dev, screen_number, x, y);
-++    }
-++}
-++#endif
-+ 
-+ enum { TSLIB_ROTATE_NONE=0, TSLIB_ROTATE_CW=270, TSLIB_ROTATE_UD=180, TSLIB_ROTATE_CCW=90 };
-+ 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-index fab7fab..acc7528 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-inp
-            file://xserver-174-XGetPointerControl.patch \
-            file://99-xf86-input-tslib.rules \
-            file://xf86-input-tslib-port-ABI-12-r48.patch \
-+           file://xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch \
- "
- 
- SRC_URI[md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
--- 
-1.8.5.3
+Khem Raj schreef op 11-02-14 07:17:
+> 
+> On Feb 10, 2014, at 5:16 AM, Diego Sueiro <diego.sueiro@gmail.com>
+> wrote:
+> 
+>> Folks,
+>> 
+>> To workaround the screensaver compilation error I've added
+>> "--disable-rsxs" on EXTRA_OECONF.
+>> 
+>> Looking at "xbmc/screensavers/rsxs-0.9/configure" It's possible to
+>> pass "--disable-euphoria" option to configure. How can I accomplish
+>> this from xbm_git.bb recipe?
+> 
+> 
+> EXTRA_OECONF += “--disable-euphoria” ?
+
+It's a sub configure, so --disable-rsxs is the only way to disable euphoria
+right now.
+
+regards,
+
+Koen
+
+
+> 
+>> 
+>> Regards,
+>> 
+>> -- *dS Diego Sueiro
+>> 
+>> Administrador do Embarcados www.embarcados.com.br
+>> 
+>> /*long live rock 'n roll*/
+>> 
+>> 
+>> On Sun, Feb 9, 2014 at 8:28 AM, Diego Sueiro <diego.sueiro@gmail.com>
+>> wrote:
+>> 
+>>> Folks,
+>>> 
+>>> I'm trying to get xbcm built for beaglebone black (dora branch), but
+>>> it's failing.
+>>> 
+>>> I'm having the same issue as this e-mail sent 2 months ago:
+>>> 
+>>> http://lists.openembedded.org/pipermail/openembedded-devel/2013-November/093304.html
+>>>
+>>>
+>>> 
+Searching on internet I couldn't find any fix.
+>>> 
+>>> 
+>>> Regards,
+>>> 
+>>> -- *dS Diego Sueiro
+>>> 
+>>> Administrador do Embarcados www.embarcados.com.br
+>>> 
+>>> /*long live rock 'n roll*/
+>>> 
+>> _______________________________________________ Openembedded-devel
+>> mailing list Openembedded-devel@lists.openembedded.org 
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFS+enaMkyGM64RGpERAvioAJsEx7qOFkcgv8vr7oM30US8CY35yACeJCej
+2NyEo7SEsJwjWAChYhyil7Y=
+=Ml/y
+-----END PGP SIGNATURE-----
 
 
