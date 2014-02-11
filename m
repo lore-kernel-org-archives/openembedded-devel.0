@@ -1,25 +1,28 @@
 Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F3176E744
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id D10A06E903
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 17:27:34 +0000 (UTC)
+	Tue, 11 Feb 2014 17:51:11 +0000 (UTC)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
+	by vms173025.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0U008RKDTNRO40@vms173023.mailsrvcs.net> for
+	2009)) with ESMTPA id <0N0U00BPIEWSWIB0@vms173025.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	11 Feb 2014 11:27:23 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id F41A720018; Tue,
-	11 Feb 2014 12:27:22 -0500 (EST)
+	11 Feb 2014 11:50:53 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 75F5D200BE; Tue,
+	11 Feb 2014 12:50:52 -0500 (EST)
+Date: Tue, 11 Feb 2014 12:50:52 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Feb 2014 12:27:22 -0500
-Message-id: <1392139642-5871-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.8.3.2
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5/ossystems/nativesdk][PATCH] populate_sdk_qt5: update with few additional vars and fix typos
+Message-id: <20140211175052.GM22890@denix.org>
+References: <1391458395-9941-1-git-send-email-gjohnson@agleader.com>
+	<EF93C63B81FE3D4F81C98317512457471295D9D477@agmail-mb1>
+	<20140204221559.GK3698@jama>
+MIME-version: 1.0
+In-reply-to: <20140204221559.GK3698@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-qt5][PATCH] Fix file search paths for nativesdk packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,70 +36,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 17:27:35 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 17:51:12 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Tue, Feb 04, 2014 at 11:15:59PM +0100, Martin Jansa wrote:
+> On Mon, Feb 03, 2014 at 02:14:14PM -0600, Gabe Johnson wrote:
+> > Signed-off-by: Gabe Johnson
+> 
+> Is this really needed now when all local patches are in BPN directories?
+> It was needed before when there were patches in BPN-PV and we needed to
+> put them in FILESPATH before the BPN/override version IIRC, but that's
+> not the case anymore.
 
-* Since qt5 binaries are in separate subdir, add that to PATH
-* Fix rcc binary name
-* Fix qdbusxml2cpp name
-* Fix tabs vs. spaces indentation
-* Gracefully handle qt.conf creation/addition, in case it's already there
-* Set HostPrefix in qt.conf just to be safe
+FWIW, that FILESPATH addition is still needed when you use meta-qt5 with past 
+stable releases. Of course, it's not needed on master.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- classes/populate_sdk_qt5.bbclass | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
 
-diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
-index 81a18af..3b849e9 100644
---- a/classes/populate_sdk_qt5.bbclass
-+++ b/classes/populate_sdk_qt5.bbclass
-@@ -7,6 +7,7 @@ TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
- inherit qmake5_paths
- 
- toolchain_create_sdk_env_script_append () {
-+    echo 'export PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}:$PATH' >> $script
-     echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
-     echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
-     echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
-@@ -18,20 +19,21 @@ toolchain_create_sdk_env_script_append () {
-     echo 'export OE_QMAKE_INCDIR_QT=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $script
-     echo 'export OE_QMAKE_MOC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/moc' >> $script
-     echo 'export OE_QMAKE_UIC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/uic' >> $script
--    echo 'export OE_QMAKE_RCC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/rcc4' >> $script
-+    echo 'export OE_QMAKE_RCC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/rcc' >> $script
-     echo 'export OE_QMAKE_QDBUSCPP2XML=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbuscpp2xml' >> $script
--    echo 'export OE_QMAKE_QDBUSXML2CPP=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/dbusxml2cpp' >> $script
-+    echo 'export OE_QMAKE_QDBUSXML2CPP=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbusxml2cpp' >> $script
-     echo 'export OE_QMAKE_QT_CONFIG=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
-     echo 'export QMAKESPEC=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/linux-oe-g++' >> $script
-     echo 'export QT_CONF_PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
- 
--	# make a symbolic link to mkspecs for compatibility with QTCreator
-+    # make a symbolic link to mkspecs for compatibility with QTCreator
-     (cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; \
-          ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
- 
--	# Generate a qt.conf file to be deployed with the SDK
--	qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
--	echo '[Paths]' > $qtconf
-+    # Generate a qt.conf file to be deployed with the SDK
-+    qtconf=${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf
-+    touch $qtconf
-+    echo '[Paths]' >> $qtconf
-     echo 'Prefix = ${SDKTARGETSYSROOT}' >> $qtconf
-     echo 'Headers = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $qtconf
-     echo 'Libraries = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}' >> $qtconf
-@@ -47,5 +49,6 @@ toolchain_create_sdk_env_script_append () {
-     echo 'Settings = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_SETTINGS}' >> $qtconf
-     echo 'Examples = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_EXAMPLES}' >> $qtconf
-     echo 'Tests = ${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_TESTS}' >> $qtconf
-+    echo 'HostPrefix = ${SDKPATHNATIVE}' >> $qtconf
-     echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
- }
--- 
-1.8.3.2
+> OE qemux86@ ~/build/oe-core $ grep ^FILESPATH= env.nativesdk-qtbase | sed "s/=\"/\n/g; s/:/\n/g"
+> FILESPATH
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/nodistro
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/nodistro
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/nodistro
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/qemux86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/qemux86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/qemux86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/qemuall
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/qemuall
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/qemuall
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/x86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/x86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/x86
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/x86-64
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/x86-64
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/x86-64
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/
+> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/"
+> 
+> > ---
+> >  recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb  |    2 ++
+> >  recipes-qt/qt5/nativesdk-qttools_5.2.0.bb |    2 ++
+> >  2 files changed, 4 insertions(+)
+> > 
+> > diff --git a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb b/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
+> > index aca8dea..223baa3 100644
+> > --- a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
+> > +++ b/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
+> > @@ -1,5 +1,7 @@
+> >  require qt5-${PV}.inc
+> >  require ${PN}.inc
+> > 
+> > +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
+> > +
+> >  SRC_URI[md5sum] = "c94bbaf1bb7f0f4a32d2caa7501416e1"
+> >  SRC_URI[sha256sum] = "51556cd2562a6d4bbb70ffcc93e8ef83ec79b170753aac6e4b195957c61cb628"
+> > diff --git a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb b/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
+> > index 0effa1b..3d2c05a 100644
+> > --- a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
+> > +++ b/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
+> > @@ -1,5 +1,7 @@
+> >  require qt5-${PV}.inc
+> >  require ${PN}.inc
+> > 
+> > +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qttools:"
+> > +
+> >  SRC_URI[md5sum] = "76a0992967b6d02220ecb69a5ba04ef1"
+> >  SRC_URI[sha256sum] = "ff331510ecb776b3059953e216e9fa7a4c0736eeb148c4cf11acc8150811b7f0"
+> > --
+> > 1.7.9.5
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
