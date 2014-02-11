@@ -1,39 +1,37 @@
-Return-Path: <nickdademo@gmail.com>
-Received: from mail-oa0-f46.google.com (mail-oa0-f46.google.com
-	[209.85.219.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 1249E6EE67
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 045A26EE8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 13:01:56 +0000 (UTC)
-Received: by mail-oa0-f46.google.com with SMTP id n16so9134852oag.33
+	Tue, 11 Feb 2014 14:11:52 +0000 (UTC)
+Received: by mail-yh0-f50.google.com with SMTP id 29so6781614yhl.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 05:01:56 -0800 (PST)
+	Tue, 11 Feb 2014 06:11:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=s98G2aZSTn1a7qzQ1iX+as/ibYv85XwAYo5Y38AT0pk=;
-	b=vxD1N1bS8GAEZjknaTtVSUuDva/jdBcCd3+PWw4pFrmGnSW85YRmZcqs64NAe0NCRf
-	gZ/trsOIeWCRxoCClMoXaDDV6GfccQOFZ1Bjx3qjUtsihp2FYDXVz1bfL/rEJAnRLesn
-	gs6qYaUGGnmfujMChV8xinl1JsD+1I1xxmVBXVRf3hGJ2zDiHdNJWaU5YWguhMnYcTW7
-	Z5K26XDjL14GHy5RNMvo7dCouJjiK8CCmfqb0Ugg7m5QNMgQqo2ffzyqHkkuZ/9xoxv5
-	42xUwbKBeJqXrWKSymsvHQG+dKLvGEMBuNyW5hfvVQ2zqR7WBsUSb+DjDE3bGn/THPuj
-	YDvg==
-X-Received: by 10.182.44.167 with SMTP id f7mr31472464obm.3.1392123716705;
-	Tue, 11 Feb 2014 05:01:56 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=OLsPpF3XYG7My01IULMX0HbAE0ZbNbTg40PnFL2fVvw=;
+	b=C4sIhNjmjMB+b5WrY1HWHI+qNPnhc9fde7+r5N4m9DDvTGc70pHyEF33W2TvwsP4yG
+	fvPOLn1EUNXM4npcE5DdkcxiCTCqK/ArVSmDD3y4vH3jkVQWVllkGZv6yQlgB0Ys5Lv9
+	rHzvC4vY70G3OzSdRN68kbxSdhpTvz6NzyGuqLyLLdUjzkNZdrEzP+v7O9BV8nz94uod
+	T2KvDB+lp540lPK85cxifhE66Y614l0tiMS2+Qi4OBWIH2Q5BpmajixU0ije40jT7TZW
+	m5iIlf9z71FC0UsROUp7/jMNu3O6tWWvH4lk7kusa9c/kDCkY8U6Ndpp80vWGntmh+wR
+	jFhw==
 MIME-Version: 1.0
-Received: by 10.76.79.165 with HTTP; Tue, 11 Feb 2014 05:01:36 -0800 (PST)
-In-Reply-To: <CANyK_8cKnc87R3AGRy1MpNJB9hbPhq1qr4LL5TdNWuBCZ55=+Q@mail.gmail.com>
-References: <CANR6C54WmokZxiFHThuXkZ-kiocewgnGVg7AtbH=FHjr1AFHsg@mail.gmail.com>
-	<CANR6C56W7g63xx1D5WOA40YL8B_5j-q=uwt6VgFPW72eNZ=k7Q@mail.gmail.com>
-	<CANyK_8eseDidQWN6tfCFXF3dXy6pQMH0uSCSyGAHDJfE_zfwzw@mail.gmail.com>
-	<CANR6C55tvGxPN1DsJaupK53Z4HdWM=Zi5X8L7ZXM9k5FRH2LWQ@mail.gmail.com>
-	<CANyK_8cKnc87R3AGRy1MpNJB9hbPhq1qr4LL5TdNWuBCZ55=+Q@mail.gmail.com>
-From: "Nick D'Ademo" <nickdademo@gmail.com>
-Date: Wed, 12 Feb 2014 00:01:36 +1100
-Message-ID: <CANR6C5466yB62G30Bg6LhdNYqz6KHb7hJVHEhLWSp1tC=BzGRQ@mail.gmail.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: tk 8.6.0: strange error: "oe_runmake: command not found"
+X-Received: by 10.236.118.201 with SMTP id l49mr2210540yhh.78.1392127913187;
+	Tue, 11 Feb 2014 06:11:53 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.161.3 with HTTP; Tue, 11 Feb 2014 06:11:53 -0800 (PST)
+In-Reply-To: <1392067015-16328-3-git-send-email-denis@denix.org>
+References: <1392067015-16328-1-git-send-email-denis@denix.org>
+	<1392067015-16328-3-git-send-email-denis@denix.org>
+Date: Tue, 11 Feb 2014 12:11:53 -0200
+X-Google-Sender-Auth: sexQp_pIf3BI_fpSP-i4GKdCVLA
+Message-ID: <CAP9ODKr-Sbmcv_DPketp02-PgXWscW=emmqP1jQmAMXY-jBoHA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][PATCH 2/3] nativesdk-packagegroup-qt5-toolchain-host: add Qt5 SDK host tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,452 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 13:01:57 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 14:11:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-The only reference to "oe_runmake" in the run file is within the
-autotools_do_install() function (as pasted in my previous message).
+On Mon, Feb 10, 2014 at 7:16 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-Complete run file below:
+I checked this and the installed packages are the same we are
+installing in our branch[1].
 
-#!/bin/sh
->
-> # Emit a useful diagnostic if something fails:
-> bb_exit_handler() {
->     ret=3D$?
->     case $ret in
->     0)  ;;
->     *)  case $BASH_VERSION in
->         "")   echo "WARNING: exit code $ret from a shell command.";;
->         *)    echo "WARNING: ${BASH_SOURCE[0]}:${BASH_LINENO[0]} exit $re=
-t
-> from
->   "$BASH_COMMAND"";;
->         esac
->         exit $ret
->     esac
-> }
-> trap 'bb_exit_handler' 0
-> set -e
-> export localstatedir=3D"/var"
-> export prefix=3D"/usr"
-> export LD=3D"x86_64-poky-linux-ld
-> --sysroot=3D/home/nick/poky/build/tmp/sysroots/nuc  "
-> export RANLIB=3D"x86_64-poky-linux-ranlib"
-> export CXX=3D"x86_64-poky-linux-g++  -m64 -march=3Dcorei7 -mtune=3Dcorei7
-> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/nu=
-c"
-> export lt_cv_sys_lib_dlsearch_path_spec=3D"/usr/lib64 /lib64"
-> export servicedir=3D"/srv"
-> export sysconfdir=3D"/etc"
-> export TARGET_LDFLAGS=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed"
-> export PKG_CONFIG_DISABLE_UNINSTALLED=3D"yes"
-> export STRINGS=3D"x86_64-poky-linux-strings"
-> export
-> BUILD_CFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/usr=
-/include
-> -O2 -pipe"
-> export base_prefix=3D""
-> export CPP=3D"x86_64-poky-linux-gcc -E
-> --sysroot=3D/home/nick/poky/build/tmp/sysroots/nuc  -m64 -march=3Dcorei7
-> -mtune=3Dcorei7 -mfpmath=3Dsse -msse4.2"
-> export
-> PSEUDO_LOCALSTATEDIR=3D"/home/nick/poky/build/tmp/work/corei7-64-poky-lin=
-ux/tk/8.6.0-r0/pseudo/"
-> export LOGNAME=3D"nick"
-> export STRIP=3D"x86_64-poky-linux-strip"
-> export datadir=3D"/usr/share"
-> export PKG_CONFIG_SYSROOT_DIR=3D"/home/nick/poky/build/tmp/sysroots/nuc"
-> export bindir=3D"/usr/bin"
-> export mandir=3D"/usr/share/man"
-> export
-> CPPFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-lin=
-ux/usr/include"
-> export PATCH_GET=3D"0"
-> export LDFLAGS=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed
-> -Wl,-rpath,/usr/lib64/tcltk/8.6.0/lib"
-> export MAKE=3D"make"
-> export
-> PKG_CONFIG_PATH=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pkgco=
-nfig:/home/nick/poky/build/tmp/sysroots/nuc/usr/share/pkgconfig"
-> export LD_FOR_BUILD=3D"ld "
-> export AS=3D"x86_64-poky-linux-as  "
-> export AR=3D"x86_64-poky-linux-ar"
-> export exec_prefix=3D"/usr"
-> export LC_ALL=3D"C"
-> export base_libdir=3D"/lib64"
-> export
-> PATH=3D"/home/nick/poky/scripts:/home/nick/poky/build/tmp/sysroots/i686-l=
-inux/usr/bin/corei7-64-poky-linux:/home/nick/poky/build/tmp/sysroots/nuc/us=
-r/bin/crossscripts:/home/nick/poky/build/tmp/sysroots/i686-linux/usr/sbin:/=
-home/nick/poky/build/tmp/sysroots/i686-linux/usr/bin:/home/nick/poky/build/=
-tmp/sysroots/i686-linux/sbin:/home/nick/poky/build/tmp/sysroots/i686-linux/=
-bin:/home/nick/poky/scripts:/home/nick/poky/bitbake/bin:/usr/lib/lightdm/li=
-ghtdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/gam=
-es:/home/nick/workspace/tye-firmware/util/arm-2011.03/bin"
-> export infodir=3D"/usr/share/info"
-> export BUILD_CC=3D"gcc "
-> export
-> BUILD_LDFLAGS=3D"-L/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
-> -L/home/nick/poky/build/tmp/sysroots/i686-linux/lib
-> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
-> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/lib
-> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
-> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/lib -Wl,-O1"
-> export BUILD_CCLD=3D"gcc "
-> export
-> CFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux=
-/usr/include
-> -O2 -pipe"
-> export CC=3D"x86_64-poky-linux-gcc  -m64 -march=3Dcorei7 -mtune=3Dcorei7
-> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/nu=
-c"
-> export CPPFLAGS=3D""
-> export OBJCOPY=3D"x86_64-poky-linux-objcopy"
-> export systemd_unitdir=3D"/lib/systemd"
-> export
-> PKG_CONFIG_DIR=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pkgcon=
-fig"
-> export CCLD=3D"x86_64-poky-linux-gcc  -m64 -march=3Dcorei7 -mtune=3Dcorei=
-7
-> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/nu=
-c"
-> export base_bindir=3D"/bin"
-> export
-> PKG_CONFIG_LIBDIR=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pkg=
-config"
-> export sbindir=3D"/usr/sbin"
-> export CFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types"
-> export
-> LDFLAGS_FOR_BUILD=3D"-L/home/nick/poky/build/tmp/sysroots/i686-linux/usr/=
-lib
-> -L/home/nick/poky/build/tmp/sysroots/i686-linux/lib
-> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
-> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/lib
-> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
-> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/lib -Wl,-O1"
-> export docdir=3D"/usr/share/doc"
-> export TERM=3D"xterm"
-> export CCACHE_DISABLE=3D"1"
-> export
-> BUILD_CXXFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/u=
-sr/include
-> -O2 -pipe -fpermissive"
-> export FC=3D"x86_64-poky-linux-gfortran  -m64 -march=3Dcorei7 -mtune=3Dco=
-rei7
-> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/nu=
-c"
-> export HOME=3D"/home/nick"
-> export CXXFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types -fpermiss=
-ive
-> -fvisibility-inlines-hidden"
-> unset MACHINE
-> export BUILD_STRIP=3D"strip"
-> export PSEUDO_PASSWD=3D"/home/nick/poky/build/tmp/sysroots/nuc"
-> export libexecdir=3D"/usr/lib64/tk"
-> export TARGET_CXXFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types
-> -fpermissive"
-> export includedir=3D"/usr/include"
-> export BUILD_LD=3D"ld "
-> export oldincludedir=3D"/usr/include"
-> export BUILD_RANLIB=3D"ranlib"
-> export BUILD_NM=3D"nm"
-> export BUILD_AR=3D"ar"
-> export BUILD_AS=3D"as "
-> export sharedstatedir=3D"/com"
-> export CONFIG_SITE=3D"/home/nick/poky/meta/site/endian-little
-> /home/nick/poky/meta/site/common-linux
-> /home/nick/poky/meta/site/common-glibc
-> /home/nick/poky/meta/site/x86_64-linux /home/nick/poky/meta/site/common
-> /home/nick/poky/meta-openembedded/meta-oe/site/endian-little "
-> export PSEUDO_DISABLED=3D"0"
-> export CXX_FOR_BUILD=3D"g++ "
-> export libdir=3D"/usr/lib64"
-> export nonarch_base_libdir=3D"/lib"
-> export BUILD_CXX=3D"g++ "
-> unset TARGET_ARCH
-> export CCACHE_DIR=3D"/home/nick"
-> export PSEUDO_PREFIX=3D"/home/nick/poky/build/tmp/sysroots/i686-linux/usr=
-"
-> export BUILD_CPP=3D"cpp "
-> export base_sbindir=3D"/sbin"
-> export USER=3D"nick"
-> export NM=3D"x86_64-poky-linux-nm"
-> export
-> BUILD_CPPFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/u=
-sr/include"
-> export BUILD_FC=3D"gfortran "
-> export CPP_FOR_BUILD=3D"cpp "
-> export TARGET_CPPFLAGS=3D""
-> export
-> CXXFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-lin=
-ux/usr/include
-> -O2 -pipe -fpermissive"
-> export TARGET_CFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types"
-> export OBJDUMP=3D"x86_64-poky-linux-objdump"
-> unset DISTRO
-> export CC_FOR_BUILD=3D"gcc "
-> export SHELL=3D"/bin/bash"
-> export PSEUDO_NOSYMLINKEXP=3D"1"
-> do_install() {
->     autotools_do_install
->     ln -sf libtk8.6.so/home/nick/poky/build/tmp/work/corei7-64-poky-linux=
-/tk/8.6.0-r0/image/usr/lib64/libtk8.6.so.0
->     oe_libinstall -so libtk8.6
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/lib64
->     ln -sf wish8.6
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/bin/wish
->
->     # Even after passing libdir=3D/usr/lib64 at config, some incorrect di=
-rs
-> are still generated for the multilib build
->     if [ "$libdir" !=3D "/usr/lib" ]; then
->         # Move files to correct library directory
->         mv
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/lib/tk8.6/*
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image//us=
-r/lib64/tk8.6/
->         # Remove unneeded/incorrect dir ('usr/lib/')
->         rm -rf
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/lib
->     fi
->
-> }
->
-> oe_libinstall() {
->     # Purpose: Install a library, in all its forms
->     # Example
->     #
->     # oe_libinstall libltdl
-> /home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/
->     # oe_libinstall -C src/libblah libblah
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image//us=
-r/lib64/
->     dir=3D""
->     libtool=3D""
->     silent=3D""
->     require_static=3D""
->     require_shared=3D""
->     staging_install=3D""
->     while [ "$#" -gt 0 ]; do
->         case "$1" in
->         -C)
->             shift
->             dir=3D"$1"
->             ;;
->         -s)
->             silent=3D1
->             ;;
->         -a)
->             require_static=3D1
->             ;;
->         -so)
->             require_shared=3D1
->             ;;
->         -*)
->             bbfatal "oe_libinstall: unknown option: $1"
->             ;;
->         *)
->             break;
->             ;;
->         esac
->         shift
->     done
->
->     libname=3D"$1"
->     shift
->     destpath=3D"$1"
->     if [ -z "$destpath" ]; then
->         bbfatal "oe_libinstall: no destination path specified"
->     fi
->     if echo "$destpath/" | egrep
-> '^/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/' >/dev/null
->     then
->         staging_install=3D1
->     fi
->
->     __runcmd () {
->         if [ -z "$silent" ]; then
->             echo >&2 "oe_libinstall: $*"
->         fi
->         $*
->     }
->
->     if [ -z "$dir" ]; then
->         dir=3D`pwd`
->     fi
->
->     dotlai=3D$libname.lai
->
->     # Sanity check that the libname.lai is unique
->     number_of_files=3D`(cd $dir; find . -name "$dotlai") | wc -l`
->     if [ $number_of_files -gt 1 ]; then
->         bbfatal "oe_libinstall: $dotlai is not unique in $dir"
->     fi
->
->
->     dir=3D$dir`(cd $dir;find . -name "$dotlai") | sed
-> "s/^\.//;s/\/$dotlai\$//;q"`
->     olddir=3D`pwd`
->     __runcmd cd $dir
->
->     lafile=3D$libname.la
->
->     # If such file doesn't exist, try to cut version suffix
->     if [ ! -f "$lafile" ]; then
->         libname1=3D`echo "$libname" | sed 's/-[0-9.]*$//'`
->         lafile1=3D$libname.la
->         if [ -f "$lafile1" ]; then
->             libname=3D$libname1
->             lafile=3D$lafile1
->         fi
->     fi
->
->     if [ -f "$lafile" ]; then
->         # libtool archive
->         eval `cat $lafile|grep "^library_names=3D"`
->         libtool=3D1
->     else
->         library_names=3D"$libname.so* $libname.dll.a $libname.*.dylib"
->     fi
->
->     __runcmd install -d $destpath/
->     dota=3D$libname.a
->     if [ -f "$dota" -o -n "$require_static" ]; then
->         rm -f $destpath/$dota
->         __runcmd install -m 0644 $dota $destpath/
->     fi
->     if [ -f "$dotlai" -a -n "$libtool" ]; then
->         rm -f $destpath/$libname.la
->         __runcmd install -m 0644 $dotlai $destpath/$libname.la
->     fi
->
->     for name in $library_names; do
->         files=3D`eval echo $name`
->         for f in $files; do
->             if [ ! -e "$f" ]; then
->                 if [ -n "$libtool" ]; then
->                     bbfatal "oe_libinstall: $dir/$f not found."
->                 fi
->             elif [ -L "$f" ]; then
->                 __runcmd cp -P "$f" $destpath/
->             elif [ ! -L "$f" ]; then
->                 libfile=3D"$f"
->                 rm -f $destpath/$libfile
->                 __runcmd install -m 0755 $libfile $destpath/
->             fi
->         done
->     done
->
->     if [ -z "$libfile" ]; then
->         if  [ -n "$require_shared" ]; then
->             bbfatal "oe_libinstall: unable to locate shared library"
->         fi
->     elif [ -z "$libtool" ]; then
->         # special case hack for non-libtool .so.#.#.# links
->         baselibfile=3D`basename "$libfile"`
->         if (echo $baselibfile | grep -qE '^lib.*\.so\.[0-9.]*$'); then
->             sonamelink=3D`x86_64-poky-linux-readelf -d $libfile |grep
-> 'Library soname:' |sed -e 's/.*\[\(.*\)\].*/\1/'`
->             solink=3D`echo $baselibfile | sed -e 's/\.so\..*/.so/'`
->             if [ -n "$sonamelink" -a x"$baselibfile" !=3D x"$sonamelink" =
-];
-> then
->                 __runcmd ln -sf $baselibfile $destpath/$sonamelink
->             fi
->             __runcmd ln -sf $baselibfile $destpath/$solink
->         fi
->     fi
->
->     __runcmd cd "$olddir"
->
-> }
->
-> autotools_do_install() {
->     oe_runmake
-> 'DESTDIR=3D/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r=
-0/image'
-> install
->     # Info dir listing isn't interesting at this point so remove it if it
-> exists.
->     if [ -e
-> "/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
-r/share/info/dir"
-> ]; then
->         rm -f
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/share/info/dir
->     fi
->
-> }
->
-> bbfatal() {
->     echo "ERROR: $*"
->     exit 1
->
-> }
->
-> cd
-> '/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/tk8.6.0/=
-unix'
-> do_install
->
-> # cleanup
-> ret=3D$?
-> trap '' 0
-> exit $?
->
+1. https://github.com/meta-qt5/meta-qt5/blob/ossystems/nativesdk/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
 
+I will discard this one.
 
-
-
-On Tue, Feb 11, 2014 at 10:42 PM, Paul Barker <paul@paulbarker.me.uk> wrote=
-:
-
-> On 7 February 2014 13:53, Nick D'Ademo <nickdademo@gmail.com> wrote:
-> > Thanks Paul.
-> >
-> > The run log has oe_runmake called via:
-> >
-> >> autotools_do_install() {
-> >>     oe_runmake
-> >>
-> 'DESTDIR=3D/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r=
-0/image'
-> >> install
-> >>     # Info dir listing isn't interesting at this point so remove it if
-> it
-> >> exists.
-> >>     if [ -e
-> >>
-> "/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
-r/share/info/dir"
-> >> ]; then
-> >>         rm -f
-> >>
-> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr=
-/share/info/dir
-> >>     fi
-> >>
-> >> }
-> >
->
-> You should see the definition of oe_runmake() in the run file itself,
-> possibly after the autotools_do_install() function. That run file
-> should include everything that is needed. Could you confirm that is
-> there, maybe post the whole run file for further investigation?
->
-> Thanks,
->
-> --
-> Paul Barker
->
-> Email: paul@paulbarker.me.uk
-> http://www.paulbarker.me.uk
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
