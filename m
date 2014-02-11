@@ -1,38 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 47E636EE06
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C1AA6E498
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 17:57:29 +0000 (UTC)
-Received: by mail-yh0-f41.google.com with SMTP id f73so7247734yha.28
+	Tue, 11 Feb 2014 18:36:27 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id kp14so8022229pab.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 09:57:30 -0800 (PST)
+	Tue, 11 Feb 2014 10:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=grCkCBX7TCZucuq4TJ0IMJCW5hplpnjRIMdHR6X5ru0=;
-	b=VVpswe1r1oQ8WohSNrw3AGuJ0YbAM6IFrkr16MlKzpGgVDw5zrD+noy+sJiPOv2tPq
-	gPR5p1UtcIYpJPtfNa1gupMXsbwxZoB1AY9I1wt7ANguDNiVn6BVSW/5Axc1A2S++4p1
-	YewzKcUmbZaOflQ0t0YWNQubzhH86/0/hIfDcqIQ79Q1beQjxJSP8gWQnyqIRUPiyaCY
-	l59kKfnoQI8vy70JHcS5w5K3rMVcfoqCLOBt/mDXQPr8gIrOFKbM/hT3dbTdHh3cUwo4
-	Awm+QyOQxXgNFXio0Q7GNyE3velOcp7PF7KwDnIzBE4nJ894/KiSJ2gNpjQJ0AU4HN7O
-	x8qQ==
-X-Received: by 10.236.102.102 with SMTP id c66mr1144033yhg.153.1392141450107; 
-	Tue, 11 Feb 2014 09:57:30 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	h=from:to:cc:subject:date:message-id;
+	bh=vNQNb7rpuHVlVwBNyhsjBczHYMuiSE6h0pjTSgxJo1I=;
+	b=cmlDZXHJpjOQFWsI1hInsxw+v6yKX3XY4roX0My11+IzbShhALQ4o/7+mB+Zmx2ZQC
+	kNqZezULSlukVnk34/0B0Li2Wcss1qN1mbb4kgVojg7yhK98RbzRe73pFAWIlUX7F4hp
+	rUfvs3UxcH/LLGgHKjQQbOyQc3kGCBlM5pRkcqjzxQ1OWQ7a06vTY6F8H4ZbZGekZG3A
+	Hs9Z0eV08BjiYQcMN2AJIc61j1z6om5/9MQweeQj3byz/TpLptbP1dki28ApW8aQfFNd
+	IJw8PabJ3nzCLx0tqrzH1BcNRlyCmPpxuc2hmShj7LcUis3eB57olKzITQA12+vCci2c
+	/hFg==
+X-Received: by 10.68.229.164 with SMTP id sr4mr45597567pbc.82.1392143788529;
+	Tue, 11 Feb 2014 10:36:28 -0800 (PST)
+Received: from localhost.localdomain
+	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
 	by mx.google.com with ESMTPSA id
-	b24sm61434799yhl.25.2014.02.11.09.57.20 for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 11 Feb 2014 09:57:29 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	tu3sm141398465pab.1.2014.02.11.10.36.27 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Feb 2014 10:36:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Feb 2014 15:56:25 -0200
-Message-Id: <1392141388-25288-3-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 11 Feb 2014 10:36:52 -0800
+Message-Id: <1392143812-27800-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1392141388-25288-1-git-send-email-otavio@ossystems.com.br>
-References: <1392141388-25288-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH 2/5] nativesdk-packagegroup-qt5-toolchain-host: Add packagegroup
+Subject: [meta-oe][PATCH] ltp-ddt: Fix build break with newer kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,37 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 17:57:30 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 18:36:27 -0000
 
-Allow easy inclusion of host packages for the Qt5 standalone SDK or
-external toolchain.
+We need to point KERNEL_INC at include-generic otherwise
+we end up with errors like
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+|                  from src/parser/st_i2c_parser.c:42:
+|
+/home/kraj/work/angstrom-2013.12/build/tmp-angstrom_v2013_12-eglibc/sysroots/beaglebone/usr/src/kernel/include/linux/wait.h:8:25:
+fatal error: asm/current.h: No such file or directory
+|  #include <asm/current.h>
+|                          ^
+| compilation terminated.
+| make[2]: *** [i2c_tests] Error 1
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../nativesdk-packagegroup-qt5-toolchain-host.bb         |   14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
+ meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb b/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
-new file mode 100644
-index 0000000..4cc0b93
---- /dev/null
-+++ b/recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
-@@ -0,0 +1,14 @@
-+# Copyright (C) 2014 O.S. Systems Software LTDA.
-+
-+SUMMARY = "Host packages for the Qt5 standalone SDK or external toolchain"
-+LICENSE = "MIT"
-+
-+inherit nativesdk packagegroup
-+
-+PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
-+
-+RDEPENDS_${PN} += " \
-+    nativesdk-packagegroup-sdk-host \
-+    nativesdk-qttools \
-+    nativesdk-qtbase-tools \
-+"
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb
+index c6ddf3d..da81964 100644
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb
+@@ -12,7 +12,7 @@ inherit autotools
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "5fba3d42f126ce13333fb7d0412d729b753ee5a4"
++SRCREV = "46e8aa7d0dd095300709309301e1c79f0003df40"
+ BRANCH ?= "master"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
+@@ -25,7 +25,7 @@ EXTRA_OEMAKE_append = " \
+     prefix=${LTPROOT} \
+     CROSS_COMPILE=${HOST_PREFIX} \
+     SKIP_IDCHECK=1 \
+-    KERNEL_INC=${STAGING_KERNEL_DIR}/include \
++    KERNEL_INC=${STAGING_KERNEL_DIR}/include-generic \
+     KERNEL_USR_INC=${STAGING_INCDIR} \
+     ALSA_INCPATH=${STAGING_INCDIR} \
+     ALSA_LIBPATH=${STAGING_LIBDIR} \
 -- 
 1.7.10.4
 
