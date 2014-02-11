@@ -1,28 +1,36 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id D10A06E903
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 0542A6E99A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 17:51:11 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N0U00BPIEWSWIB0@vms173025.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	11 Feb 2014 11:50:53 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 75F5D200BE; Tue,
-	11 Feb 2014 12:50:52 -0500 (EST)
-Date: Tue, 11 Feb 2014 12:50:52 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 11 Feb 2014 17:57:07 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 142so11980541ykq.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Feb 2014 09:57:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=jqZ85t0lI4OKna8jBL6MWvLd8cVLVO+G8JcwvCeSUKY=;
+	b=xmliTckxgf8h0Z61Nu+rEldFnVOvPir89wmFfHoaLyrBTo/FEigux2ACUevqbtt+f5
+	H8T642nVvYqKVHItcpERe8ojZpqRQT9013A/WcPXWtwKD2QdPNM3DJJZfG3decR7Vqp1
+	8BN5B/KOJiX6fN7qRtajj1bOvug2ModGH8vN2eXelLo7X+JO0OjjjHSNltrgTCFRgTEX
+	8N/EYnkBSjmAp3SGtzFG1H3GpYT1Qu7ewo/pqTASBXTyZovw2GoMePU7wPxWv353UvRb
+	3boZLSVHpTDp6mTQvnldPksWfRtKjHi8fcko1lNza0er7ocvViYAxQxk6D6Ew1c1gJk4
+	tRRA==
+X-Received: by 10.236.7.231 with SMTP id 67mr35746077yhp.30.1392141428237;
+	Tue, 11 Feb 2014 09:57:08 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id
+	b24sm61434799yhl.25.2014.02.11.09.57.00 for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Tue, 11 Feb 2014 09:57:07 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20140211175052.GM22890@denix.org>
-References: <1391458395-9941-1-git-send-email-gjohnson@agleader.com>
-	<EF93C63B81FE3D4F81C98317512457471295D9D477@agmail-mb1>
-	<20140204221559.GK3698@jama>
-MIME-version: 1.0
-In-reply-to: <20140204221559.GK3698@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-qt5][PATCH] Fix file search paths for nativesdk packages.
+Date: Tue, 11 Feb 2014 15:56:23 -0200
+Message-Id: <1392141388-25288-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH 0/5] Qt5 SDK integration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,89 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 17:51:12 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 11 Feb 2014 17:57:09 -0000
 
-On Tue, Feb 04, 2014 at 11:15:59PM +0100, Martin Jansa wrote:
-> On Mon, Feb 03, 2014 at 02:14:14PM -0600, Gabe Johnson wrote:
-> > Signed-off-by: Gabe Johnson
-> 
-> Is this really needed now when all local patches are in BPN directories?
-> It was needed before when there were patches in BPN-PV and we needed to
-> put them in FILESPATH before the BPN/override version IIRC, but that's
-> not the case anymore.
+Hello,
 
-FWIW, that FILESPATH addition is still needed when you use meta-qt5 with past 
-stable releases. Of course, it's not needed on master.
+This patchset integrates the current nativesdk recipes into the
+OE-Core toolchain generation logic. It includes many contributions and
+reworks suggested by Denys and the final patchset seems quite good.
 
+For every image, using Qt5, to add support for the 'populate_sdk'
+command to proper generate a working toolchain, just need to 'inherit
+populate_sdk_qt5'; for convinience, Denys also sent a
+meta-toolchain-qt5 recipe so it works as qt4.
 
-> OE qemux86@ ~/build/oe-core $ grep ^FILESPATH= env.nativesdk-qtbase | sed "s/=\"/\n/g; s/:/\n/g"
-> FILESPATH
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/nodistro
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/nodistro
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/nodistro
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/qemux86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/qemux86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/qemux86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/qemuall
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/qemuall
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/qemuall
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/x86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/x86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/x86
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/x86-64
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/x86-64
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/x86-64
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase-5.2.0/
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/qtbase/
-> /OE/build/oe-core/meta-qt5/recipes-qt/qt5/files/"
-> 
-> > ---
-> >  recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb  |    2 ++
-> >  recipes-qt/qt5/nativesdk-qttools_5.2.0.bb |    2 ++
-> >  2 files changed, 4 insertions(+)
-> > 
-> > diff --git a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb b/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
-> > index aca8dea..223baa3 100644
-> > --- a/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
-> > +++ b/recipes-qt/qt5/nativesdk-qtbase_5.2.0.bb
-> > @@ -1,5 +1,7 @@
-> >  require qt5-${PV}.inc
-> >  require ${PN}.inc
-> > 
-> > +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
-> > +
-> >  SRC_URI[md5sum] = "c94bbaf1bb7f0f4a32d2caa7501416e1"
-> >  SRC_URI[sha256sum] = "51556cd2562a6d4bbb70ffcc93e8ef83ec79b170753aac6e4b195957c61cb628"
-> > diff --git a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb b/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
-> > index 0effa1b..3d2c05a 100644
-> > --- a/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
-> > +++ b/recipes-qt/qt5/nativesdk-qttools_5.2.0.bb
-> > @@ -1,5 +1,7 @@
-> >  require qt5-${PV}.inc
-> >  require ${PN}.inc
-> > 
-> > +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qttools:"
-> > +
-> >  SRC_URI[md5sum] = "76a0992967b6d02220ecb69a5ba04ef1"
-> >  SRC_URI[sha256sum] = "ff331510ecb776b3059953e216e9fa7a4c0736eeb148c4cf11acc8150811b7f0"
-> > --
-> > 1.7.9.5
-> > 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Denys Dmytriyenko (1):
+  meta-toolchain-qt5: add Qt5 SDK standalone meta recipe
 
+Otavio Salvador (4):
+  README: Reword the section about github forking
+  nativesdk-packagegroup-qt5-toolchain-host: Add packagegroup
+  packagegroup-qt5-toolchain-target: Add packagegroup
+  populate_sdk_qt5.bbclass: Allow generation of toolchain
 
+ README                                             |    9 +++-
+ classes/populate_sdk_qt5.bbclass                   |   54 ++++++++++++++++++++
+ recipes-qt/meta/meta-toolchain-qt5.bb              |    7 +++
+ .../nativesdk-packagegroup-qt5-toolchain-host.bb   |   14 +++++
+ .../packagegroup-qt5-toolchain-target.bb           |   40 +++++++++++++++
+ 5 files changed, 123 insertions(+), 1 deletion(-)
+ create mode 100644 classes/populate_sdk_qt5.bbclass
+ create mode 100644 recipes-qt/meta/meta-toolchain-qt5.bb
+ create mode 100644 recipes-qt/packagegroups/nativesdk-packagegroup-qt5-toolchain-host.bb
+ create mode 100644 recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+1.7.10.4
 
 
