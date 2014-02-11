@@ -1,33 +1,31 @@
 Return-Path: <diego.sueiro@gmail.com>
 Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
 	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 97C516E99A
+	by mail.openembedded.org (Postfix) with ESMTP id EB3EE6E99A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 09:51:58 +0000 (UTC)
-Received: by mail-qc0-f175.google.com with SMTP id x13so12627495qcv.34
+	Tue, 11 Feb 2014 10:15:39 +0000 (UTC)
+Received: by mail-qc0-f175.google.com with SMTP id x13so12661314qcv.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 01:51:59 -0800 (PST)
+	Tue, 11 Feb 2014 02:15:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=s375j7ltmCgLDh5eAf+Jsv14PUNLN37VFcS1g1fh71I=;
-	b=HnOzuQw+hgMdv1K2gkei92PPn12xOznHtwRSagyLZG2tYQv+e7ovbVVFeWJL75B6F9
-	dJO2Aq7VaXAymbiaKVBgVxOHG4eSZwCafnPsFkShtlqbiOMvmzkJw5mxmb5mFZmpG6hr
-	10xmrHYLv88Gmq5mOFPD+OeDCbaCBnMSE8T6GMWMsGAHa+xRMYIzEg9xcj8s/zueUmz6
-	hV92BvuAw/0rojuiT2FrHEg7ZDEymPVAQLNzdV59MGbSKMIrL+7Er4u04bfhyMgp7UG0
-	zAtjWaV+e87WWQxFVCBDtLTHrgk0aEVMXYkEVNBLO107TKz06tqEGdLUeuSwWbELxxUM
-	A6qA==
-X-Received: by 10.140.31.75 with SMTP id e69mr52736484qge.76.1392112318799;
-	Tue, 11 Feb 2014 01:51:58 -0800 (PST)
+	:content-type; bh=/EZe7NWxPrEx2cAWdzoL9Ww5/oWzlWM6WC4C3sSST6Q=;
+	b=aTaCROE+iTkJRSTuOktx4wmCHGzPRFL9OOh5BfcoKee0okAN/rsui5Ki6ImVkgNWbm
+	5WsCCTBYLmCATulRGxekHporlj2/UuT1BfCjgyeqFIkN0qA2TkTZ/t2g67RksCNNcwFj
+	YZjMxO3uEFNVgJBH3KZLwFgZ5mmMFSo//3W91T2MIMe1G293beyUsEJM1iQo51V57aRU
+	in7lqhA+xok7lYzsAwDfoqrJeeqwJ7hNS9Tmwah64dv/Wgs1Lb76cQbFPRW2lKGY0XXL
+	PWOmTZi9MEnbDavLxVfnK6t/0zgd9XkEpH5GhYgZQ7HnfTclAVyJIV6vWiTLm5Vx74f4
+	plLA==
+X-Received: by 10.140.91.198 with SMTP id z64mr2285330qgd.32.1392113740369;
+	Tue, 11 Feb 2014 02:15:40 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 01:51:38 -0800 (PST)
-In-Reply-To: <ldcph7$d94$1@ger.gmane.org>
-References: <CAMCfZKFW8mb1d=Q2eJ9mRx8xprbN2dHUQJwZvG-UkUF5Q6TRXw@mail.gmail.com>
-	<CAMCfZKFNHREoyX9L2xbwYAoxrcUq1R8-=74u2V1Aiw45QmkC6g@mail.gmail.com>
-	<2E2B5ECF-3678-407E-A9DE-58A4F3B271B0@gmail.com>
-	<ldcph7$d94$1@ger.gmane.org>
+Received: by 10.140.25.47 with HTTP; Tue, 11 Feb 2014 02:15:19 -0800 (PST)
+In-Reply-To: <FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
+References: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
+	<FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
 From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 11 Feb 2014 07:51:38 -0200
-Message-ID: <CAMCfZKERD8d1_+x0TMJ3Hq13-qXVkMvzNC=Q7mihD7WXM_QqXA@mail.gmail.com>
+Date: Tue, 11 Feb 2014 08:15:19 -0200
+Message-ID: <CAMCfZKH74FMry8-LvajWMEMbx0fEF2OzmZV+iDCkZ6djUCXsrA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: xbmc build failing
@@ -44,31 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 09:51:59 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 10:15:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Feb 11, 2014 at 7:14 AM, Koen Kooi <koen@dominion.thruhere.net>wrote:
+On Tue, Feb 11, 2014 at 2:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> >> To workaround the screensaver compilation error I've added
-> >> "--disable-rsxs" on EXTRA_OECONF.
-> >>
-> >> Looking at "xbmc/screensavers/rsxs-0.9/configure" It's possible to
-> >> pass "--disable-euphoria" option to configure. How can I accomplish
-> >> this from xbm_git.bb recipe?
-> >
-> >
-> > EXTRA_OECONF += "--disable-euphoria" ?
->
-> It's a sub configure, so --disable-rsxs is the only way to disable euphoria
-> right now.
+> seems like its not including proper headers may be you need to include
+> unistd.h
 >
 
-That's what a thought. Is this a limitation from oe or xbmc autotools build
-chain?
+Not sure about this. The strange thing is: When using poky as DISTRO this
+error is raised, but when using Angstrom instead, the error isn't raised.
+Could it be related to eglibc version? How can I check which version is
+used on both distros?
 
 Regards,
 
 --
 *dS
 Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
 
