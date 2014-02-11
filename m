@@ -1,35 +1,39 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F51B6E8E6
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vb0-f45.google.com (mail-vb0-f45.google.com
+	[209.85.212.45])
+	by mail.openembedded.org (Postfix) with ESMTP id B3EA26E7F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 10:24:34 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WDAW0-000064-Us for openembedded-devel@lists.openembedded.org;
-	Tue, 11 Feb 2014 11:24:32 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 11:24:32 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 11 Feb 2014 11:43:10 +0000 (UTC)
+Received: by mail-vb0-f45.google.com with SMTP id m10so5661133vbh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 11:24:32 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 11 Feb 2014 11:26:06 +0100
-Message-ID: <ldcto9$v43$1@ger.gmane.org>
-References: <CAMCfZKFW8mb1d=Q2eJ9mRx8xprbN2dHUQJwZvG-UkUF5Q6TRXw@mail.gmail.com>	<CAMCfZKFNHREoyX9L2xbwYAoxrcUq1R8-=74u2V1Aiw45QmkC6g@mail.gmail.com>	<2E2B5ECF-3678-407E-A9DE-58A4F3B271B0@gmail.com>	<ldcph7$d94$1@ger.gmane.org>
-	<CAMCfZKERD8d1_+x0TMJ3Hq13-qXVkMvzNC=Q7mihD7WXM_QqXA@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <CAMCfZKERD8d1_+x0TMJ3Hq13-qXVkMvzNC=Q7mihD7WXM_QqXA@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: xbmc build failing
+	Tue, 11 Feb 2014 03:43:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=KQEsGPNTr7eCZAnAO+zUfAWyXIacAoakNRV0Qoc2P+g=;
+	b=VPTEckqzzm+q2lcbUEximr3rA5cuDUIXpke9itmPIRQ/bMhjKGVCz054Q+j7Q4Qy12
+	rDSh5XSL/ij/Az2d0rN07U6sD2+pzgY31WWaXa+VLjUQ7qsq7up9YlwhsaGWZT7wxjxe
+	oz3PhsdxvenirkvMR3B9ndEKRaDdxVK2hL6xZW8417wK/z2JurjJ8R/U1APAI1O8/3uW
+	dXNFFC3A0jYx9/sQxMJbVccXPzRqAXmZFS2eldZklhQOCyJz4MZ4F76KDjSHNCzSHb1G
+	p0hFCG5DBEKsWp1OONsZhtFeBvKYahFLg3i8RC4q0qpiLkWG92OV4uySiQIsgfQMVzFW
+	M3Wg==
+X-Received: by 10.52.230.105 with SMTP id sx9mr23803896vdc.10.1392118991177;
+	Tue, 11 Feb 2014 03:43:11 -0800 (PST)
+MIME-Version: 1.0
+Sender: paul.betafive@gmail.com
+Received: by 10.220.239.135 with HTTP; Tue, 11 Feb 2014 03:42:31 -0800 (PST)
+In-Reply-To: <CANR6C55tvGxPN1DsJaupK53Z4HdWM=Zi5X8L7ZXM9k5FRH2LWQ@mail.gmail.com>
+References: <CANR6C54WmokZxiFHThuXkZ-kiocewgnGVg7AtbH=FHjr1AFHsg@mail.gmail.com>
+	<CANR6C56W7g63xx1D5WOA40YL8B_5j-q=uwt6VgFPW72eNZ=k7Q@mail.gmail.com>
+	<CANyK_8eseDidQWN6tfCFXF3dXy6pQMH0uSCSyGAHDJfE_zfwzw@mail.gmail.com>
+	<CANR6C55tvGxPN1DsJaupK53Z4HdWM=Zi5X8L7ZXM9k5FRH2LWQ@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Tue, 11 Feb 2014 11:42:31 +0000
+X-Google-Sender-Auth: YJEKzQ5sbEy8LVQoWWZeCk--BSw
+Message-ID: <CANyK_8cKnc87R3AGRy1MpNJB9hbPhq1qr4LL5TdNWuBCZ55=+Q@mail.gmail.com>
+To: "Nick D'Ademo" <nickdademo@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: tk 8.6.0: strange error: "oe_runmake: command not found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,50 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 10:24:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Feb 2014 11:43:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 7 February 2014 13:53, Nick D'Ademo <nickdademo@gmail.com> wrote:
+> Thanks Paul.
+>
+> The run log has oe_runmake called via:
+>
+>> autotools_do_install() {
+>>     oe_runmake
+>> 'DESTDIR=/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image'
+>> install
+>>     # Info dir listing isn't interesting at this point so remove it if it
+>> exists.
+>>     if [ -e
+>> "/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr/share/info/dir"
+>> ]; then
+>>         rm -f
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/usr/share/info/dir
+>>     fi
+>>
+>> }
+>
 
-Diego Sueiro schreef op 11-02-14 10:51:
-> On Tue, Feb 11, 2014 at 7:14 AM, Koen Kooi
-> <koen@dominion.thruhere.net>wrote:
-> 
->>>> To workaround the screensaver compilation error I've added 
->>>> "--disable-rsxs" on EXTRA_OECONF.
->>>> 
->>>> Looking at "xbmc/screensavers/rsxs-0.9/configure" It's possible to 
->>>> pass "--disable-euphoria" option to configure. How can I
->>>> accomplish this from xbm_git.bb recipe?
->>> 
->>> 
->>> EXTRA_OECONF += "--disable-euphoria" ?
->> 
->> It's a sub configure, so --disable-rsxs is the only way to disable
->> euphoria right now.
->> 
-> 
-> That's what a thought. Is this a limitation from oe or xbmc autotools
-> build chain?
+You should see the definition of oe_runmake() in the run file itself,
+possibly after the autotools_do_install() function. That run file
+should include everything that is needed. Could you confirm that is
+there, maybe post the whole run file for further investigation?
 
-Both :)
+Thanks,
 
-Give http://dominion.thruhere.net/koen/angstrom/xbmc_12.9.12.bb a try, it
-builds but segfaults on x86 and x86_32 (just like the current recipe).
+-- 
+Paul Barker
 
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFS+fq+MkyGM64RGpERAkyxAKCZRGu5izOshsfyABASNUhJ4yy2tACdHtgh
-9xBdwK+Jk++tUmLkHeZ03Vg=
-=KWuA
------END PGP SIGNATURE-----
-
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
