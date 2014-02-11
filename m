@@ -1,39 +1,39 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 401D56E8E5
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id DA9B76E901
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2014 03:53:39 +0000 (UTC)
-Received: by mail-pd0-f171.google.com with SMTP id g10so6940825pdj.16
+	Tue, 11 Feb 2014 03:59:32 +0000 (UTC)
+Received: by mail-pd0-f178.google.com with SMTP id y13so6960004pdi.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2014 19:53:40 -0800 (PST)
+	Mon, 10 Feb 2014 19:59:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
 	:content-transfer-encoding:message-id:references:to;
-	bh=woJ/5jASGpKoBiFr5+fpjPQJyQOi5xgnNJBAmmnnh5g=;
-	b=en3OKHMyKrZR8j6G8Mplj2SFVyoDaGV2/YrV/lgeqxYkVVDz7aAbWnCKa0Vp71Aa4Z
-	chRcbVTjGh6ErLA2VI8pQICnS+LmD9z/NzZevXLjQdInY31uPoDjd+ZPZNzF3caAjyoo
-	z+U9g84+juiprZuVTyYeo9r5ZU1DtmxpUeUb9DvIijCZTesYPIKBJ24TTW44ZKRpE6hU
-	L73cdrj5Z1YQgwqM3ErSxg/VLgPJm/NsZvJNe8M/W1jSC59R81am7l2E78ome7wyfeM5
-	YPxhpXFt8HlOohgzkmDOCbaeWHNYSOGOtVTKZaTPfEwpy198/05TCKn2Wiwx98XLGfpb
-	lmwA==
-X-Received: by 10.66.136.71 with SMTP id py7mr30271743pab.2.1392090819995;
-	Mon, 10 Feb 2014 19:53:39 -0800 (PST)
+	bh=JQPt23vHkurklUZeq9SpNFRS72H1blPlBDuUcMEtuZ4=;
+	b=HxpylCYqswp7QF0Lev75VQzTUtCasg6cm5Q+VPE9QZe5+zpxD+2PoNNrIPTnT/AJhu
+	bD0DcYbnwr89Vn3+8Ztq/GZemUWwgMu7ibZ9dmJ8qtUIgZMrEHH7MlpKlds6g6UoAhBH
+	h3D75RU+QHFA5OZGz8RDIT+0CcPkLkGHvHqZchjNCUs6STCyq3fO200dQ6Y5fSL10ve4
+	oLG5ArsT4GjxdR/00tApy1P0oUB169Y4rw8d/Hw8r567yWu9sXsFzIl93APFRsKNic+F
+	mu6yXHak/b1eos+aXHsBbKajRs4SbytsmyULq+vzEG6TLwmeZ+twloI5euVMsZGhPJAy
+	zZFQ==
+X-Received: by 10.66.149.231 with SMTP id ud7mr30198549pab.8.1392091173670;
+	Mon, 10 Feb 2014 19:59:33 -0800 (PST)
 Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
 	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	os1sm125832114pac.20.2014.02.10.19.53.38
-	for <openembedded-devel@lists.openembedded.org>
+	sy10sm125956527pac.15.2014.02.10.19.59.32 for <multiple recipients>
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 10 Feb 2014 19:53:39 -0800 (PST)
+	Mon, 10 Feb 2014 19:59:32 -0800 (PST)
 Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1384174975-5042-1-git-send-email-linus.walleij@linaro.org>
-Date: Mon, 10 Feb 2014 19:53:37 -0800
-Message-Id: <204AF634-A305-4BA7-AFAC-629AD28AC3F1@gmail.com>
-References: <1384174975-5042-1-git-send-email-linus.walleij@linaro.org>
+In-Reply-To: <1384363435-25984-1-git-send-email-ml@communistcode.co.uk>
+Date: Mon, 10 Feb 2014 19:59:30 -0800
+Message-Id: <54F7CC09-2FEA-43F9-82C5-0FF75945714D@gmail.com>
+References: <1384363435-25984-1-git-send-email-ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.1827)
-Subject: Re: [meta-handheld] [PATCH 2/3] h3600: update defconfig
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: Re: [meta-oe][PATCH 1/2] libgc: initial add 7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +47,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2014 03:53:39 -0000
+X-List-Received-Date: Tue, 11 Feb 2014 03:59:33 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi Linus
 
-On Nov 11, 2013, at 5:02 AM, Linus Walleij <linus.walleij@linaro.org> =
-wrote:
+On Nov 13, 2013, at 9:23 AM, Jack Mitchell <ml@communistcode.co.uk> wrote:
 
-> Enable some vital kernel options such as DEVTMPFS and
-> EABI.
->=20
-> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
-> ---
-> .../linux/linux-yocto-3.10/h3600/defconfig         | 23 =
-++++++++++++++++++++--
-> 1 file changed, 21 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-kernel/linux/linux-yocto-3.10/h3600/defconfig =
-b/recipes-kernel/linux/linux-yocto-3.10/h3600/defconfig
-> index 2b4adc5f89d9..612502a801fb 100644
-> --- a/recipes-kernel/linux/linux-yocto-3.10/h3600/defconfig
-> +++ b/recipes-kernel/linux/linux-yocto-3.10/h3600/defconfig
-> @@ -1,6 +1,5 @@
-> CONFIG_SYSVIPC=3Dy
-> CONFIG_NO_HZ_IDLE=3Dy
-> -CONFIG_HIGH_RES_TIMERS=3Dy
+> +FILES_${PN}-docs = "/usr/share/gc"
 
-Did you intend to disable highres timers ?
-
+its too late but whenever you update it, change that to ${datadir}/gc
 
