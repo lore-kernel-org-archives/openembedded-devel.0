@@ -1,41 +1,21 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f51.google.com (mail-pb0-f51.google.com
-	[209.85.160.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 70C756E89C;
-	Wed, 12 Feb 2014 18:20:36 +0000 (UTC)
-Received: by mail-pb0-f51.google.com with SMTP id un15so9593271pbc.38
-	for <multiple recipients>; Wed, 12 Feb 2014 10:20:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=NCj+IqXdVpdrUtvjQfg0BnjjvYJQybUnC1UaKlJTJmc=;
-	b=OGSLXo5nNpSi9V4AXtMHUxU2z7JWLMlu46boFf9TONetSUMpJXqgHmgcPUGELF6jjx
-	2R3c9FZA7mSjeOh3YXBihNphGJtlt2auRPCIhrdvnyCmjhV0U8+A8kfSQPVWpzLAdZLe
-	L67cGgCkTdiZ2H5AiT3s7k1GdzT+iDPgcRU6n013lNYh3kan5z2qAIJ69tCFkr/kJcoD
-	1RIiQdiVZfpCg8Xzj+0EAxQVtSOoGkhwgsyTCvp5FQixIXEy1wzhk4YM4Nk4cTGiM5c5
-	e8M8Tk7ANa8gGzOTnva8Cgeuz+FwsuXX/zDBSfA+n/LbLGqaBweTX3g2UTLpo5VoRNup
-	ToLA==
-X-Received: by 10.68.226.9 with SMTP id ro9mr53347327pbc.72.1392229237073;
-	Wed, 12 Feb 2014 10:20:37 -0800 (PST)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	nv7sm65854090pbc.31.2014.02.12.10.20.35 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Feb 2014 10:20:36 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1392219682.14081.1.camel@ted>
-Date: Wed, 12 Feb 2014 10:20:34 -0800
-Message-Id: <81756FDA-0EA9-4393-A4F2-0004E8377A7F@gmail.com>
-References: <CAMKF1sptnVxCrjm7PAOCtRWzmSsxPv4nc0nUO82jMPQ+BCz9Hg@mail.gmail.com>
-	<1392219682.14081.1.camel@ted>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Mailer: Apple Mail (2.1827)
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] eglibc 2.19
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 87FB26E89C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Feb 2014 19:46:23 +0000 (UTC)
+Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
+	[192.168.101.5])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 868F240083;
+	Wed, 12 Feb 2014 19:10:45 +0100 (CET)
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Feb 2014 20:46:07 +0100
+Message-Id: <1392234367-1895-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [PATCH v2] python-m2crypto: special setting for x86-64 architecture
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,56 +29,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 18:20:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Feb 2014 19:46:23 -0000
 
+After python-m2crypto was reported as failed task in bitbake world
+on 2014-02-08 by Martin Jansa, I investigated python-m2crypto with
+MACHINE = "qemux86-64" setting. When compiling python-m2crypto for
+qemux86-64, the setup.py aborts in the swig call with:
 
-On Feb 12, 2014, at 7:41 AM, Richard Purdie =
-<richard.purdie@linuxfoundation.org> wrote:
+  | swig -python -I[...]/tmp-eglibc/sysroots/qemux86-64/usr/include/python2.7 -I[...]/tmp-eglibc/sysroots/qemux86-64/usr/include -includeall -o SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
+  | [...]/tmp-eglibc/sysroots/qemux86-64/usr/include/openssl/opensslconf.h:41: Error: Unable to find 'openssl/opensslconf-32.h'
+  | error: command 'swig' failed with exit status 1
+  | ERROR: python setup.py build_ext execution failed.
+  | WARNING: exit code 1 from a shell command.
 
-> On Sat, 2014-02-08 at 08:08 -0800, Khem Raj wrote:
->> Hi all
->>=20
->> I have staged a branch with eglibc 2.19 upgraded recipes here
->>=20
->> =
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/eglibc=
--2.19
->>=20
->> These are not final recipes there may be tweaks needed like adjusting =
-SRC_URI
->> later on.
->>=20
->> please help testing it out in your environments and machines
->> I would be happy to help out with issues we find
->=20
-> The autobuilder is still going but it found:
->=20
-> =
-http://autobuilder.yoctoproject.org/main/builders/nightly-fsl-ppc/builds/2=
-5/steps/BuildImages/logs/stdio
+To compile for x86-64 architecture, opensslconf.h shall include
+opensslconf-64.h, not opensslconf-32.h. Properly including
+opensslconf-64.h can be configured through the bits/wordsize.h
+header and setting the __x86_64__ directive in the swig call. To
+set the directive, the SWIG_FEATURES variable for x86-64 is
+set and exported in the recipe.
 
-I could reproduce it.
+Compiling python-m2crypto for qemumips still fails and needs
+further adjustments, but is not addressed here.
 
-This seems to be surfaced by a commit in glibc where the  math_ldbl.h =
-implementations for ppc were unified. I have for now reverted it via =
-patch and pushed to pull branch. however thats not only the one issue =
-:(. I am now seeing
+This patch follows Khem Raj's suggestion on the openembedded-devel
+mailing list after submission of the first commit to this issue.
 
-| ../sysdeps/powerpc/fpu/fenv_libc.h:48:6: error: impossible constraint =
-in 'asm'
-|       asm volatile ("mtfsf 0xff,%0" : : "f" (d)); \
-|       ^
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+---
+ meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-
-
->=20
-> so far.
->=20
-> Cheers,
->=20
-> Richard
->=20
+diff --git a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
+index 9babc04..c88b935 100644
+--- a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
++++ b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
+@@ -16,4 +16,8 @@ S = "${WORKDIR}/M2Crypto-${PV}"
+ 
+ inherit setuptools
+ 
++SWIG_FEATURES_x86-64 = "-D__x86_64__"
++SWIG_FEATURES ?= ""
++export SWIG_FEATURES
++
+ BBCLASSEXTEND = "native"
+-- 
+1.8.3.2
 
 
