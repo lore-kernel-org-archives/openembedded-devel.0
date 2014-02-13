@@ -1,21 +1,46 @@
-Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
-Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
-	by mail.openembedded.org (Postfix) with ESMTP id 87FB26E89C
+Return-Path: <joe@deserted.net>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 85F296E8DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Feb 2014 19:46:23 +0000 (UTC)
-Received: from AFplatform.bmw-carit.intra (afplatform.bmw-carit.intra
-	[192.168.101.5])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: lukas.bulwahn)
-	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 868F240083;
-	Wed, 12 Feb 2014 19:10:45 +0100 (CET)
-From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+	Thu, 13 Feb 2014 00:59:28 +0000 (UTC)
+Received: by mail-ig0-f170.google.com with SMTP id m12so2688955iga.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Feb 2014 16:59:29 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=yC/CcECUndqZFGQTcFvHAEtPz5qGitlJf2JLjQbJRnY=;
+	b=Ej3tmaGestuuTLyGqZe488BOxaUhv520LjATqvmIuo7n5sVTZIgEu01rit4umt+hfO
+	SH2gmQz9MfEKGrMWxbzCtRMXlg00umsulFVa8a5Q06jGFOSUYG7TL62ak5LMc6qIx2Z4
+	R9sW+HsPH8RENciTEDvyPBYbIEczelikVC1jHyvtQ9eHR0hPcidHK1EQ1YS6pUWRaIq0
+	yVZw+siJtSios+GBtZx14RzVzvzJm1C1fGR2+NKUVcyXwc7PAivkOzajN5MGU53bMjhw
+	xHgfbrmhAlZtvX0/NMQ9yf6zRb4dwf/NitupFAqncY+FHVvz2D2MhjklqxDTUbXhCRQk
+	RmYg==
+X-Gm-Message-State: ALoCoQnQpua+l5FwDqsH0zwNEyqNwDJkREj8yCXPULq+W7uWKRwUSNG6OlyTeRuxw441+HJqatFn
+X-Received: by 10.50.153.79 with SMTP id ve15mr611966igb.40.1392253169561;
+	Wed, 12 Feb 2014 16:59:29 -0800 (PST)
+Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
+	by mx.google.com with ESMTPSA id
+	om7sm1529648igb.10.2014.02.12.16.59.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 12 Feb 2014 16:59:28 -0800 (PST)
+Date: Wed, 12 Feb 2014 19:59:26 -0500
+From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Feb 2014 20:46:07 +0100
-Message-Id: <1392234367-1895-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [PATCH v2] python-m2crypto: special setting for x86-64 architecture
+Message-ID: <20140213005923.GE23405@deserted.net>
+References: <1390222355-9757-1-git-send-email-liezhi.yang@windriver.com>
+	<CAP9ODKr5h8uX9yp+b9n8MpniGGosZ+MW_YEk9dKPR8QHj-XO7A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKr5h8uX9yp+b9n8MpniGGosZ+MW_YEk9dKPR8QHj-XO7A@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking] [PATCH] traceroute: filter-out patches dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,51 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Feb 2014 19:46:23 -0000
+X-List-Received-Date: Thu, 13 Feb 2014 00:59:28 -0000
+X-Groupsio-MsgNum: 48130
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dgjlcl3Tl+kb3YDk"
+Content-Disposition: inline
 
-After python-m2crypto was reported as failed task in bitbake world
-on 2014-02-08 by Martin Jansa, I investigated python-m2crypto with
-MACHINE = "qemux86-64" setting. When compiling python-m2crypto for
-qemux86-64, the setup.py aborts in the swig call with:
+--dgjlcl3Tl+kb3YDk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  | swig -python -I[...]/tmp-eglibc/sysroots/qemux86-64/usr/include/python2.7 -I[...]/tmp-eglibc/sysroots/qemux86-64/usr/include -includeall -o SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
-  | [...]/tmp-eglibc/sysroots/qemux86-64/usr/include/openssl/opensslconf.h:41: Error: Unable to find 'openssl/opensslconf-32.h'
-  | error: command 'swig' failed with exit status 1
-  | ERROR: python setup.py build_ext execution failed.
-  | WARNING: exit code 1 from a shell command.
+[Re: [oe] [meta-networking] [PATCH] traceroute: filter-out patches dir] On =
+14.01.22 (Wed 12:21) Otavio Salvador wrote:
 
-To compile for x86-64 architecture, opensslconf.h shall include
-opensslconf-64.h, not opensslconf-32.h. Properly including
-opensslconf-64.h can be configured through the bits/wordsize.h
-header and setting the __x86_64__ directive in the swig call. To
-set the directive, the SWIG_FEATURES variable for x86-64 is
-set and exported in the recipe.
+> On Mon, Jan 20, 2014 at 10:52 AM, Robert Yang <liezhi.yang@windriver.com>=
+ wrote:
+> > The $(subdirs) contains all the dirs under the ${B}, and this one:
+> >
+> > do_unpack[cleandirs] =3D "${S}/patches"
+> >
+> > will create a "patches" dir, then there will be compile errors, filter
+> > out the patches will fix the problem.
+> >
+> > Note: poky doesn't have this problem since it separates the ${S} and
+> > ${B}
+> >
+> > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>=20
+> Couldn't we change it for OE-Core as well? So we avoid having to patch
+> the build system.
 
-Compiling python-m2crypto for qemumips still fails and needs
-further adjustments, but is not addressed here.
+That seems sensible.  I've not seen any follow-up on this, so I'm going
+to drop this patch and assume this is a change being done in OE-Core (if
+it hasn't already been done there).
 
-This patch follows Khem Raj's suggestion on the openembedded-devel
-mailing list after submission of the first commit to this issue.
+--=20
+-Joe MacDonald.
+:wq
 
-Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
----
- meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+--dgjlcl3Tl+kb3YDk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-diff --git a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-index 9babc04..c88b935 100644
---- a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-@@ -16,4 +16,8 @@ S = "${WORKDIR}/M2Crypto-${PV}"
- 
- inherit setuptools
- 
-+SWIG_FEATURES_x86-64 = "-D__x86_64__"
-+SWIG_FEATURES ?= ""
-+export SWIG_FEATURES
-+
- BBCLASSEXTEND = "native"
--- 
-1.8.3.2
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
+iEYEARECAAYFAlL8GOsACgkQwFvcllog0XzeJQCgr2N6mWGtm91XWES4hnYLq6TR
+Y5QAn36VCeWweuBv2MvpGv7C9OYPyIdC
+=RsBe
+-----END PGP SIGNATURE-----
 
+--dgjlcl3Tl+kb3YDk--
