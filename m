@@ -1,24 +1,39 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 1A7706E9F9
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
+	[209.85.216.51])
+	by mail.openembedded.org (Postfix) with ESMTP id C43F66E88D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 17:01:09 +0000 (UTC)
-Received: (qmail 12412 invoked by uid 1003); 13 Feb 2014 17:01:09 -0000
-Received: from unknown (HELO ?192.168.1.122?)
-	(philip@opensdr.com@71.171.41.155)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	13 Feb 2014 17:01:08 -0000
-Message-ID: <52FCFA41.5050002@balister.org>
-Date: Thu, 13 Feb 2014 12:00:49 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
+	Thu, 13 Feb 2014 17:55:25 +0000 (UTC)
+Received: by mail-qa0-f51.google.com with SMTP id f11so16479690qae.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Feb 2014 09:55:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=oUr/5qvLEfIRaRV27BFw/GPYslGRgwoHqe7uNJsaAP0=;
+	b=H7Vp5tWIzCwNaSe2UGXpop89iruc1CUoahV5XbjvraNLTPzUqEgKjvde7QubuBoiRu
+	vNRl9zaEVqTI3FufV/FOrogOiKfjaQx8S3Am+JKcJYVNtJYbsbC62LrAdJEoGpQtPl/g
+	jWCUFLAEysCGVckpnE7YNJpb269VyYjDNNb3FbFz8om80aEc2kMGbiuHBE63zECaR1/d
+	Ql9sG3GDt3qwxI4yJTSJ9mz8LCKxyLJ8pZnkMGRTk5diHdFsF+2DvOWS+4raQvP6H+S6
+	yeypNgL+Vc7r7jldP+NjF0C2h+H65V3EKrWY36ZAJXLcTddfSXhJ3eJYBaT6quOiwJeD
+	hV3w==
+X-Received: by 10.224.75.73 with SMTP id x9mr5021016qaj.36.1392314126290; Thu,
+	13 Feb 2014 09:55:26 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.140.25.47 with HTTP; Thu, 13 Feb 2014 09:55:06 -0800 (PST)
+In-Reply-To: <CAMCfZKGW7_yu3nB71FN8ru64HGjbzD6NJaOzZR0D-Gkuvojyow@mail.gmail.com>
+References: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
+	<FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
+	<CAMCfZKH74FMry8-LvajWMEMbx0fEF2OzmZV+iDCkZ6djUCXsrA@mail.gmail.com>
+	<CAMKF1sq=9ycj9XRr9PrMopyy9qpHg_cyxy_6fH++Nq6MqsGU8g@mail.gmail.com>
+	<CAMCfZKF7dxy+y8mx_qiM2T9xVNqdLLZ7DX_KjzT9piDqApEpeQ@mail.gmail.com>
+	<CAMKF1sqrgQCf+EegF3qqe4chVBmO+qBDnhGD76uDX+mxOrV2cA@mail.gmail.com>
+	<CAMCfZKGW7_yu3nB71FN8ru64HGjbzD6NJaOzZR0D-Gkuvojyow@mail.gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Thu, 13 Feb 2014 15:55:06 -0200
+Message-ID: <CAMCfZKHKL+X77Xr0xDy4-5nV=iL7D8a7uTGJj+SWv6WrxyYxsw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <52FCA09E.1070507@pseudoterminal.org>
-In-Reply-To: <52FCA09E.1070507@pseudoterminal.org>
-X-Enigmail-Version: 1.6
-Subject: Re: OE and SSDs
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: xbmc build failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 17:01:10 -0000
+X-List-Received-Date: Thu, 13 Feb 2014 17:55:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 02/13/2014 05:38 AM, Carlos Rafael Giani wrote:
-> Hello,
-> 
-> we are considering purchasing SSDs for our development machines, for
-> faster I/O and better latency. One open question is whether to buy TLC-
-> or MLC-based drives. TLCs are considerably cheaper. They would not be
-> used in build bots, but on the other hand, people will build entire
-> images with OE by themselves during development.
-> 
-> So I wonder about the impact on the drive's lifespan, and whether or not
-> it is severe enough to warrant the more expensive MLC drives (up to 2
-> times more expensive).
-> 
-> Did anybody made experiences with these? Any recommendations?
+On Tue, Feb 11, 2014 at 3:23 PM, Diego Sueiro <diego.sueiro@gmail.com>wrote:
 
-A lot of people use as much ram as they can fit in the box and use
-tmpfs'. You might try that approach first.
+> Angstrom:
+> Could not find. :(
+> Poky:
+> EGLIBCVERSION ?= "2.18"
+>
 
-Philip
+Any thoughts ?
 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> 
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
 
