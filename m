@@ -1,34 +1,28 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 4876C6E8C6
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A696E890
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 02:35:53 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id hz1so10046332pad.22
+	Thu, 13 Feb 2014 03:04:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s1D348pk023268
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Feb 2014 18:35:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ho/SxU5ey95KwrgoIrxaVFNK5GatRe2jrNbEEFa1MOk=;
-	b=nvTyf2A4mV4k9g7pLhYJiqlj/DOhkpmzRBMYw95lXUJsDMdOepNRtyKjMNCVhRVnVE
-	UP/FPA59LCKqoXz3EajOST73MkXGVJI/INA8vW6TQ8LL75ZhaiijyHGFHl5SZmNxff5B
-	4yFwXfl3J3YgScAMQLt4a37k+IEEm22b6Fif5ZD+QuHGHTKhwpgmXC4p6y/miPh18tj4
-	K2C8CdifJM98vm/B5fNWj7HhlnTAoJjzN/e63sR/5TlG0y29vBF9XSRHxsma3m99t+6O
-	SPvSsID7QdHGmLwTpeZMtEgPQigAMzExCbIlNOMvZgd19/XV7uIBZRisZmrflXOrh56L
-	FGTw==
-X-Received: by 10.66.124.230 with SMTP id ml6mr43890805pab.29.1392258954085;
-	Wed, 12 Feb 2014 18:35:54 -0800 (PST)
-Received: from t420s.entropic-communications.com ([12.199.200.26])
-	by mx.google.com with ESMTPSA id un5sm2528044pab.3.2014.02.12.18.35.52
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 12 Feb 2014 18:35:53 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Feb 2014 18:35:28 -0800
-Message-Id: <1392258928-32123-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.8.1.2
-Subject: [meta-qt5][dora][PATCH] qtbase.inc: PACKAGECONFIG[gstreamer] gst-plugins-base dependency missing
+	Wed, 12 Feb 2014 19:04:09 -0800 (PST)
+Received: from [128.224.162.226] (128.224.162.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
+	Wed, 12 Feb 2014 19:03:59 -0800
+Message-ID: <52FC361E.4030708@windriver.com>
+Date: Thu, 13 Feb 2014 11:03:58 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1390222355-9757-1-git-send-email-liezhi.yang@windriver.com>
+	<CAP9ODKr5h8uX9yp+b9n8MpniGGosZ+MW_YEk9dKPR8QHj-XO7A@mail.gmail.com>
+In-Reply-To: <CAP9ODKr5h8uX9yp+b9n8MpniGGosZ+MW_YEk9dKPR8QHj-XO7A@mail.gmail.com>
+Subject: Re: [meta-networking] [PATCH] traceroute: filter-out patches dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 02:35:54 -0000
+X-List-Received-Date: Thu, 13 Feb 2014 03:04:08 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-When testing for GStreamer support, the qtbase 5.1.1 configure script
-tries to determine pkg-config information for both gstreamer-0.10 and
-gstreamer-plugins-base-0.10.
 
-If either one is unavailable then the configure test fails (with the
-slightly confusing error that gst/gst.h can't be found, even when the
-gstreamer header files are present in sysroot).
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- recipes-qt/qt5/qtbase.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 01/22/2014 10:21 PM, Otavio Salvador wrote:
+> On Mon, Jan 20, 2014 at 10:52 AM, Robert Yang <liezhi.yang@windriver.com> wrote:
+>> The $(subdirs) contains all the dirs under the ${B}, and this one:
+>>
+>> do_unpack[cleandirs] = "${S}/patches"
+>>
+>> will create a "patches" dir, then there will be compile errors, filter
+>> out the patches will fix the problem.
+>>
+>> Note: poky doesn't have this problem since it separates the ${S} and
+>> ${B}
+>>
+>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>
+> Couldn't we change it for OE-Core as well? So we avoid having to patch
+> the build system.
+>
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 7018c69..71da726 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -104,7 +104,7 @@ PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
- PACKAGECONFIG[xkb] = "-xkb,-no-xkb,libxkbcommon"
- PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
- # depends on glib
--PACKAGECONFIG[gstreamer] = "-gstreamer,-no-gstreamer,gstreamer"
-+PACKAGECONFIG[gstreamer] = "-gstreamer,-no-gstreamer,gstreamer gst-plugins-base"
- PACKAGECONFIG[fontconfig] = "-fontconfig,-no-fontconfig,fontconfig"
- PACKAGECONFIG[gtkstyle] = "-gtkstyle,-no-gtkstyle,gtk+"
- PACKAGECONFIG[directfb] = "-directfb,-no-directfb,directfb"
--- 
-1.8.1.2
+Hi Otavio,
 
+I'm sorry, I don't quite understand what do you mean, this patch didn't
+change the build system, it changed the Make.rules.
+
+// Robert
 
