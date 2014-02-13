@@ -1,45 +1,43 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BE9B6E8DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 03:57:14 +0000 (UTC)
-Received: by mail-ig0-f182.google.com with SMTP id uy17so12290857igb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Feb 2014 19:57:15 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=eIG5nQvclTAjMlDU2AxhkcSpeBGzm5jSaJYtzSFFhoA=;
-	b=EpZksTt2mH3Sq3AqnvUq26xIa2r1rBsre5/mvl25DwhDsZcQdZovQV/JFAi5jEdwRn
-	mPxIgaMb6hI9EIyutzm+8iKH1Ek3bpKRj0lFxfM+QvE8C6vxStoylAN1E1x3Cwa0K1vc
-	6KBR40OtmQWTpSmxXIFbceBSOPyEccQjEeN4Ld83Uains96wy7PjpBgIxBOGrqRvRQ2C
-	Uk74iJd8iJZOUDSIKzdNLZ6PmUA2TbLuodD+YBAkfGNvQMPBcRTymSVFhyNALG4wcUtR
-	tDxQ3QJdJ/MdiARxJ8yKlKqt0Iu7dgV4lOpSfLmMYWKgXFrfzKLOlC4mk/2O8cPGE0TC
-	sJQQ==
-X-Gm-Message-State: ALoCoQl8Tf/PnqCX8UM8zqFLnTt02jhLTT9luBNUK+oEQX5wTDzzpFEEYVW9vDKESEoN73JFvZXz
-X-Received: by 10.50.11.36 with SMTP id n4mr1411284igb.3.1392263835354;
-	Wed, 12 Feb 2014 19:57:15 -0800 (PST)
-Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id
-	pn6sm2703517igb.4.2014.02.12.19.57.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 12 Feb 2014 19:57:14 -0800 (PST)
-Date: Wed, 12 Feb 2014 22:57:12 -0500
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140213035710.GI23405@deserted.net>
-References: <1390973218-16702-1-git-send-email-rongqing.li@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1390973218-16702-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH meta-networking] quagga: fix a typOS
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C1E86E898;
+	Thu, 13 Feb 2014 05:45:42 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id z10so10090250pdj.33
+	for <multiple recipients>; Wed, 12 Feb 2014 21:45:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=n8dY1lrLaIi0YB8Nfq3QkFhV0216dy4mYqTUSfSlOtw=;
+	b=YsQSwFE8PNHyXFEmpI3JttqebTsGzu0MZjPEsKGjY3rGCkia1HPuo7bXx8PwFaCcY7
+	3nJDrd/l4Q9i9h0PMMC/e9yQmDmMK8r27aVpOKIHaO3J72R5rnwIAf03h+KOuwh78YtY
+	fI2Mhvc0OjPS5ezApM8WxnmQhkO+q9j/KmvRcahIpU0d6oQ1Y5TJPOb0EEuV4Gfq+7tL
+	wuuN91QUb6vuhDb7TGN1XgalkKdOoq7Y3sF0m0M37Nm1Z1MYaGV1hrbWioE2Lcos2V+r
+	UetfHBz8w1zjpvMQYGm6GhnoRFkAO0+E7HCYQjaEJAbD40ob4SEAfp4TG7hP4+hYVeK7
+	jegw==
+X-Received: by 10.66.217.133 with SMTP id oy5mr44752755pac.46.1392270342687;
+	Wed, 12 Feb 2014 21:45:42 -0800 (PST)
+Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.30])
+	by mx.google.com with ESMTPSA id id1sm2360087pbc.11.2014.02.12.21.45.41
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 12 Feb 2014 21:45:41 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <81756FDA-0EA9-4393-A4F2-0004E8377A7F@gmail.com>
+Date: Wed, 12 Feb 2014 21:45:39 -0800
+Message-Id: <9BE5B941-F71B-444F-84A3-07EF3CA6F9E5@gmail.com>
+References: <CAMKF1sptnVxCrjm7PAOCtRWzmSsxPv4nc0nUO82jMPQ+BCz9Hg@mail.gmail.com>
+	<1392219682.14081.1.camel@ted>
+	<81756FDA-0EA9-4393-A4F2-0004E8377A7F@gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Mailer: Apple Mail (2.1827)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] eglibc 2.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,70 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 03:57:14 -0000
-X-Groupsio-MsgNum: 48137
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="k1BdFSKqAqVdu8k/"
-Content-Disposition: inline
-
---k1BdFSKqAqVdu8k/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 Feb 2014 05:45:43 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
--J.
+Hi Richard, All
 
-[[oe] [PATCH meta-networking] quagga: fix a typOS] On 14.01.29 (Wed 13:26) =
-rongqing.li@windriver.com wrote:
+On Feb 12, 2014, at 10:20 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> From: Roy Li <rongqing.li@windriver.com>
 >=20
-> it should be CPP, not cpp; this typOS makes vtysh unable to work.
+> On Feb 12, 2014, at 7:41 AM, Richard Purdie =
+<richard.purdie@linuxfoundation.org> wrote:
 >=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  .../quagga/files/build-fix-extract.pl-for-cross-compilation.patch    |  =
-  2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>> On Sat, 2014-02-08 at 08:08 -0800, Khem Raj wrote:
+>>> Hi all
+>>>=20
+>>> I have staged a branch with eglibc 2.19 upgraded recipes here
+>>>=20
+>>> =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/eglibc=
+-2.19
+>>>=20
+>>> These are not final recipes there may be tweaks needed like =
+adjusting SRC_URI
+>>> later on.
+>>>=20
+>>> please help testing it out in your environments and machines
+>>> I would be happy to help out with issues we find
+>>=20
+>> The autobuilder is still going but it found:
+>>=20
+>> =
+http://autobuilder.yoctoproject.org/main/builders/nightly-fsl-ppc/builds/2=
+5/steps/BuildImages/logs/stdio
 >=20
-> diff --git a/meta-networking/recipes-protocols/quagga/files/build-fix-ext=
-ract.pl-for-cross-compilation.patch b/meta-networking/recipes-protocols/qua=
-gga/files/build-fix-extract.pl-for-cross-compilation.patch
-> index e3ccc2a..7e5beef 100644
-> --- a/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl=
--for-cross-compilation.patch
-> +++ b/meta-networking/recipes-protocols/quagga/files/build-fix-extract.pl=
--for-cross-compilation.patch
-> @@ -22,7 +22,7 @@ index 7612aff..4c3a47f 100755
->       $file =3D $_;
->  =20
->  -    open (FH, "cpp -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@to=
-p_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/isi=
-sd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> -+    open (FH, "@cpp@ -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@=
-top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/i=
-sisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
-> ++    open (FH, "@CPP@ -DHAVE_CONFIG_H -DVTYSH_EXTRACT_PL -DHAVE_IPV6 -I@=
-top_builddir@ -I@srcdir@/ -I@srcdir@/.. -I@top_srcdir@/lib -I@top_srcdir@/i=
-sisd/topology @SNMP_INCLUDES@ @CPPFLAGS@ $file |");
->       local $/; undef $/;
->       $line =3D <FH>;
->       close (FH);
---=20
--Joe MacDonald.
-:wq
+> I could reproduce it.
+>=20
+> This seems to be surfaced by a commit in glibc where the  math_ldbl.h =
+implementations for ppc were unified. I have for now reverted it via =
+patch and pushed to pull branch. however thats not only the one issue =
+:(. I am now seeing
+>=20
+> | ../sysdeps/powerpc/fpu/fenv_libc.h:48:6: error: impossible =
+constraint in 'asm'
+> |       asm volatile ("mtfsf 0xff,%0" : : "f" (d)); \
+> |       ^
+>=20
 
---k1BdFSKqAqVdu8k/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Alright, the real problem was that in glibc 2.19 the SPE patch was =
+upsteamed from eglibc and now the SPE support lives under nofpu/ which =
+is correct unlike
+eglibc where it was living under fpu/ class. We were not passing =
+=97without-fp
+to eglibc configure which caused this issue. I have now fixed it in =
+metadata
+and pushed a new set of patches ( total 2) to the pull branch, which =
+should take of this issue as well as valgrind issue.=20
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Thanks
+-Khem
 
-iEYEARECAAYFAlL8QpYACgkQwFvcllog0XxOMACfV3DcH9rvS/OJbmNJvdVFNCYV
-ClUAni6MwhRGQ0CqEb3SNcqnkuZlHyLZ
-=W1zy
------END PGP SIGNATURE-----
 
---k1BdFSKqAqVdu8k/--
+
