@@ -1,39 +1,27 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
-	[209.85.216.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C43F66E88D
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 0083F6E374
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 17:55:25 +0000 (UTC)
-Received: by mail-qa0-f51.google.com with SMTP id f11so16479690qae.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 09:55:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=oUr/5qvLEfIRaRV27BFw/GPYslGRgwoHqe7uNJsaAP0=;
-	b=H7Vp5tWIzCwNaSe2UGXpop89iruc1CUoahV5XbjvraNLTPzUqEgKjvde7QubuBoiRu
-	vNRl9zaEVqTI3FufV/FOrogOiKfjaQx8S3Am+JKcJYVNtJYbsbC62LrAdJEoGpQtPl/g
-	jWCUFLAEysCGVckpnE7YNJpb269VyYjDNNb3FbFz8om80aEc2kMGbiuHBE63zECaR1/d
-	Ql9sG3GDt3qwxI4yJTSJ9mz8LCKxyLJ8pZnkMGRTk5diHdFsF+2DvOWS+4raQvP6H+S6
-	yeypNgL+Vc7r7jldP+NjF0C2h+H65V3EKrWY36ZAJXLcTddfSXhJ3eJYBaT6quOiwJeD
-	hV3w==
-X-Received: by 10.224.75.73 with SMTP id x9mr5021016qaj.36.1392314126290; Thu,
-	13 Feb 2014 09:55:26 -0800 (PST)
+	Thu, 13 Feb 2014 18:22:14 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 13 Feb 2014 10:22:15 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.95,840,1384329600"; d="scan'208";a="481036322"
+Received: from akagikob-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.58])
+	by fmsmga002.fm.intel.com with ESMTP; 13 Feb 2014 10:21:43 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Feb 2014 18:21:42 +0000
+Message-ID: <30942504.aDmGqzKfcz@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.2 (Linux/3.12.10-300.fc20.x86_64; KDE/4.12.2; x86_64; ;
+	)
+In-Reply-To: <1392270611-7344-1-git-send-email-raj.khem@gmail.com>
+References: <1392270611-7344-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Thu, 13 Feb 2014 09:55:06 -0800 (PST)
-In-Reply-To: <CAMCfZKGW7_yu3nB71FN8ru64HGjbzD6NJaOzZR0D-Gkuvojyow@mail.gmail.com>
-References: <CANx9H-DMjo0JaHyGqgxh31wX77Z_OmpjF=cgAayLKyYcKLenxw@mail.gmail.com>
-	<FC0A8257-46FF-46AD-8061-AD3396E8B243@gmail.com>
-	<CAMCfZKH74FMry8-LvajWMEMbx0fEF2OzmZV+iDCkZ6djUCXsrA@mail.gmail.com>
-	<CAMKF1sq=9ycj9XRr9PrMopyy9qpHg_cyxy_6fH++Nq6MqsGU8g@mail.gmail.com>
-	<CAMCfZKF7dxy+y8mx_qiM2T9xVNqdLLZ7DX_KjzT9piDqApEpeQ@mail.gmail.com>
-	<CAMKF1sqrgQCf+EegF3qqe4chVBmO+qBDnhGD76uDX+mxOrV2cA@mail.gmail.com>
-	<CAMCfZKGW7_yu3nB71FN8ru64HGjbzD6NJaOzZR0D-Gkuvojyow@mail.gmail.com>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Thu, 13 Feb 2014 15:55:06 -0200
-Message-ID: <CAMCfZKHKL+X77Xr0xDy4-5nV=iL7D8a7uTGJj+SWv6WrxyYxsw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: xbmc build failing
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libmicrohttpd: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,28 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 17:55:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 Feb 2014 18:22:15 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Tue, Feb 11, 2014 at 3:23 PM, Diego Sueiro <diego.sueiro@gmail.com>wrote:
+On Wednesday 12 February 2014 21:50:11 Khem Raj wrote:
+> libmicrohttpd is needed by systemd-journald-gatewayd
 
-> Angstrom:
-> Could not find. :(
-> Poky:
-> EGLIBCVERSION ?= "2.18"
->
+meta-oe already contains libmicrohttpd:
 
-Any thoughts ?
+meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb
+meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb
 
+We should probably replace the old versions assuming there isn't a good reason 
+to keep them around.
 
-Regards,
+Cheers,
+Paul
 
---
-*dS
-Diego Sueiro
+-- 
 
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
+Paul Eggleton
+Intel Open Source Technology Centre
 
