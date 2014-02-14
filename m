@@ -1,35 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 216D76E3EB
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 30E1E6EFEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 18:27:37 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id uq10so13647474igb.2
+	Fri, 14 Feb 2014 03:30:01 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id to1so7110436ieb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2014 10:27:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=SIZnfsqdTNhGoyAm9Ju8UieIw6wdwiQsStIjIOgsgVY=;
-	b=v0yvGKGSVqMqnsNlReXMxfmgDIhTbcDLCPQ4vhurQMNeoMBX/MWEnSmH8l8lUtGAKf
-	xlEvwKxYTccmK523dbjSXz1zlHHfbPzvR2MqYngfQEjgxVAsxqZ9HDB04faxk2RJjeK3
-	Sl/id8LfAdQ0LLXBT0GjmixXhak2bNqkP4aKldpB5xSbALCnLT4A6Bu2hKT2Na7nT+xu
-	FIwjgWuYHz0MdiEON6SV/E2waYhWHb8LaCc3ziTYyukqbmXouNLj0gbGjoEZjQw4+H7y
-	+IFZX/jC15155v25bLftTnmxryOyJBaAswFaSunXkRhQfNPYZcrqXXemhq2sagIQ3E1K
-	QbLg==
-X-Received: by 10.43.153.68 with SMTP id kz4mr2334825icc.29.1392316057934;
-	Thu, 13 Feb 2014 10:27:37 -0800 (PST)
+	Thu, 13 Feb 2014 19:30:01 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=5NimJenuidJ0SQuLmbZ+wTLGD7ntYRC+fRYZ8+nBrMs=;
+	b=WFgwAOTE9LolxfTRPML8UUMbFUpbGvsRdHEG7HN2gwIMj7GodFGmFocPuIbZ6O+gbw
+	ss8rcG3SG0CIQ97Vg23cWTr/u0Umd4sbx/x51X0ebM9oG+ftJ4DyR6uGqwQVRik1xbo+
+	3xnPfViJlC9dgdo+uOwBVygOngyEZpIZIIvPFsyQQi7Sj+QAPCmxWtfktswhorgoUxHJ
+	YkgQkAw626UzxckIUtwJNCOHalrdbQ+qoQI9ZrSxI4fmBn13/0GInWFpO1p/zeMs8jHf
+	JLZ15sCizUvAsORLuzBp/UPvF9kZSI0EbEYqWlXe/MRfoLBJJ65D71Ci55J5evRcrYzO
+	GOtA==
+X-Gm-Message-State: ALoCoQmflphlS4tpd4MdOlqKoFexGNyxr2mJlYE4JqqWqCTEbGuThEEeAhokWfdJqD3tN/Bwm/It
+X-Received: by 10.50.25.33 with SMTP id z1mr494439igf.6.1392348600643;
+	Thu, 13 Feb 2014 19:30:00 -0800 (PST)
+Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
+	by mx.google.com with ESMTPSA id m6sm613906igx.9.2014.02.13.19.29.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 13 Feb 2014 19:29:59 -0800 (PST)
+Date: Thu, 13 Feb 2014 22:29:56 -0500
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140214032954.GL23405@deserted.net>
+References: <1390222355-9757-1-git-send-email-liezhi.yang@windriver.com>
+	<CAP9ODKr5h8uX9yp+b9n8MpniGGosZ+MW_YEk9dKPR8QHj-XO7A@mail.gmail.com>
+	<52FC361E.4030708@windriver.com>
+	<CAP9ODKoWiCTHvBbDaupueGM5buzvGTG6fYSrZ2+eTipmpDMVyg@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.50.8.137 with HTTP; Thu, 13 Feb 2014 10:27:07 -0800 (PST)
-In-Reply-To: <30942504.aDmGqzKfcz@peggleto-mobl5.ger.corp.intel.com>
-References: <1392270611-7344-1-git-send-email-raj.khem@gmail.com>
-	<30942504.aDmGqzKfcz@peggleto-mobl5.ger.corp.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Feb 2014 10:27:07 -0800
-Message-ID: <CAMKF1sryMX-yX=Kw+BJmG9msEjCzD1qcZ8C-ufgGcm0cNiCB=w@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libmicrohttpd: add recipe
+In-Reply-To: <CAP9ODKoWiCTHvBbDaupueGM5buzvGTG6fYSrZ2+eTipmpDMVyg@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking] [PATCH] traceroute: filter-out patches dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +56,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2014 18:27:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 14 Feb 2014 03:30:01 -0000
+X-Groupsio-MsgNum: 48146
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="P9KQiUGMzYCFwWCN"
+Content-Disposition: inline
 
-On Thu, Feb 13, 2014 at 10:21 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Wednesday 12 February 2014 21:50:11 Khem Raj wrote:
->> libmicrohttpd is needed by systemd-journald-gatewayd
->
-> meta-oe already contains libmicrohttpd:
->
-> meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb
-> meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb
->
-> We should probably replace the old versions assuming there isn't a good reason
-> to keep them around.
->
+--P9KQiUGMzYCFwWCN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-ah yes I will send a patch to remove them and may be bundle it with this one
+[Re: [oe] [meta-networking] [PATCH] traceroute: filter-out patches dir] On =
+14.02.13 (Thu 08:40) Otavio Salvador wrote:
 
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
+> On Thu, Feb 13, 2014 at 1:03 AM, Robert Yang <liezhi.yang@windriver.com> =
+wrote:
+> >
+> >
+> > On 01/22/2014 10:21 PM, Otavio Salvador wrote:
+> >>
+> >> On Mon, Jan 20, 2014 at 10:52 AM, Robert Yang <liezhi.yang@windriver.c=
+om>
+> >> wrote:
+> >>>
+> >>> The $(subdirs) contains all the dirs under the ${B}, and this one:
+> >>>
+> >>> do_unpack[cleandirs] =3D "${S}/patches"
+> >>>
+> >>> will create a "patches" dir, then there will be compile errors, filter
+> >>> out the patches will fix the problem.
+> >>>
+> >>> Note: poky doesn't have this problem since it separates the ${S} and
+> >>> ${B}
+> >>>
+> >>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> >>
+> >>
+> >> Couldn't we change it for OE-Core as well? So we avoid having to patch
+> >> the build system.
+> >>
+> >
+> > I'm sorry, I don't quite understand what do you mean, this patch didn't
+> > change the build system, it changed the Make.rules.
+>=20
+>=20
+> To be sincere I didn't understand my comment as well ...  don't recall
+> what I thought... I'd say to ignore it.
 
+Oh.  Heh.  I thought you were proposing a change to oe-core's build
+approach that would mean we didn't need to have a patch here to
+traceroute to separate $(B) and $(S).  At least that's what I got from
+it based on the commit log.  I'm still a bit confused about what's so
+different about traceroute's build system that it needs special handling
+=2E..
+
+--=20
+-Joe MacDonald.
+:wq
+
+--P9KQiUGMzYCFwWCN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlL9jbIACgkQwFvcllog0XzW3gCePA18DrFVsmebvwlaQJjefxXl
+hccAoKXozr8T9sKVQiskcHveQEZtfigL
+=k4QX
+-----END PGP SIGNATURE-----
+
+--P9KQiUGMzYCFwWCN--
