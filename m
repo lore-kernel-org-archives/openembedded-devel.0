@@ -1,38 +1,45 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
-	[209.85.220.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E1A76E374
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 1810A6E74B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2014 21:02:51 +0000 (UTC)
-Received: by mail-vc0-f179.google.com with SMTP id lh14so9885285vcb.10
+	Sat, 15 Feb 2014 01:25:21 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id lx4so3789247iec.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2014 13:02:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TrPN73l3cYfslNY4tj1p95oY++rFd19Vnw2KQ16AZMc=;
-	b=a0hYDgfzp16Jw3xxDKiZwv5Z6enTzRsMaMawdfsP9kCKGGoucauTfLAtTvQJLnQcZo
-	DkFFWbyFkXNaEKJtBYyf/Ak4Z92oKFupK6Mc9d7T0VsTuA4vq0vRAyzwo7im3hSDo/nr
-	36vNvTx9A6gz2tsK3MKeyvRp108ptxwYVh1WaQYHwJ8mPcHja1EAN5ZWVucq4dx1d27m
-	M5j/hbUqKYAiAPvsLZFTjEfTZM/tLFImy8PtUxQtTgg4+eZd2KxWqnlnDAL2Q44401AX
-	NZwKqmG9VmfQO0gAUS2y/H3rpGICfqLVqvrMJLYqM7JqXq7Lbf3/3awQotrdc6px30tF
-	Z/rw==
-X-Received: by 10.52.170.241 with SMTP id ap17mr5703951vdc.13.1392411772957;
-	Fri, 14 Feb 2014 13:02:52 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id ay4sm17507546vdb.4.2014.02.14.13.02.51
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 14 Feb 2014 13:02:52 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 14 Feb 2014 17:25:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=GNeVNKRs83JS/3ouknHRvQDb7gaINyblF1kBKkvcu1U=;
+	b=gQGYutkn5JjppLI9d4GwfAEls0y5gWESUZ1lFazkZi6Y/wNzqVBni7+yxTczdoJnM+
+	bMIeLFf3OXO6do+WGC7nOQ1+J/7xJXFN5PPN+jmTkcw5iqKiaSzdEMWLPtMIwL9LamvZ
+	KVi9QWYfvof26d00/X2VkZQV7+N2mBPOdbbp0nhAEswCN51GC/y8k406R20nJO/RdzDU
+	IbZQbscpbhwp7GqZjC+sUTvUdX3jjBFtYTOCXHrOQZRu1It2mRBu5o9easpFBwwTOFUD
+	c9nFhgdhu48wubJfMiWtBPJFr11xyz+ZbRjT3zojqFTYQIwk01EX/aB5VNCm4dkYGAxN
+	nZSg==
+X-Gm-Message-State: ALoCoQlOzcJiZ7jdTBa/ttCstuB6c+KgnLzFPC6oIUK7LRM3bwoPzocP6KNeUVyfaG46lA6uDApi
+X-Received: by 10.42.250.132 with SMTP id mo4mr8690050icb.34.1392427521705;
+	Fri, 14 Feb 2014 17:25:21 -0800 (PST)
+Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
+	by mx.google.com with ESMTPSA id
+	kb5sm8972019igb.1.2014.02.14.17.25.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 14 Feb 2014 17:25:21 -0800 (PST)
+Date: Fri, 14 Feb 2014 20:25:18 -0500
+From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2014 19:02:34 -0200
-Message-Id: <1392411754-10608-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1392411754-10608-1-git-send-email-otavio@ossystems.com.br>
-References: <1392411754-10608-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH 2/2] nativesdk-qtbase.inc: Remove unused contents
+Message-ID: <20140215012516.GO23405@deserted.net>
+References: <1391178346-11804-1-git-send-email-Matthieu.Crapet@ingenico.com>
+MIME-Version: 1.0
+In-Reply-To: <1391178346-11804-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking][PATCH] libnetfilter-log: add newrecipe for version 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,37 +53,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2014 21:02:52 -0000
+X-List-Received-Date: Sat, 15 Feb 2014 01:25:21 -0000
+X-Groupsio-MsgNum: 48155
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="N5iGxCIPT7YMRg16"
+Content-Disposition: inline
 
-Fixes:
+--N5iGxCIPT7YMRg16
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-ERROR: QA Issue: nativesdk-qtbase: Files/directories were installed but not shipped
-  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib
-  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/include
-  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/share
-  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Test.so
-  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Network.so
-  ...
+Merged, thanks.
+-J.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-qt/qt5/nativesdk-qtbase.inc |    4 ++++
- 1 file changed, 4 insertions(+)
+[[oe] [meta-networking][PATCH] libnetfilter-log: add newrecipe for version =
+1.0.1] On 14.01.31 (Fri 15:25) Matthieu Crapet wrote:
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
-index 36bc334..fe80c9b 100644
---- a/recipes-qt/qt5/nativesdk-qtbase.inc
-+++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-@@ -188,4 +188,8 @@ do_install() {
-     # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
-     # e.g. qt3d, qtwayland
-     ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
-+
-+    # remove things unused in nativesdk; things are statically link
-+    # and we just use the binaries so drop all unused files
-+    rm -rf ${D}${includedir} ${D}${libdir} ${D}${datadir}/doc
- }
--- 
-1.7.10.4
+> This library is usefull for userspace netfilter log messages
+> (c.f. iptables and -j NFLOG target).
+>=20
+> libnetfilter-conntrack, libnetfilter-cttimeout, libnetfilter-cthelper and
+> libnetfilter-queue are already available since december of 2012.
+>=20
+> Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+> ---
+>  .../recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb  | 14=20
+> ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644=20
+> meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+>=20
+> diff --git=20
+> a/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb=
+=20
+> b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+> new file mode 100644
+> index 0000000..81909b8
+> --- /dev/null
+> +++=20
+> b/meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY =3D "Netfilter logging library"
+> +DESCRIPTION =3D "Userspace library providing a programming interface (AP=
+I)=20
+> to the Linux kernel netfilter log message (NFLOG)"
+> +HOMEPAGE =3D=20
+> "http://www.netfilter.org/projects/libnetfilter_log/index.html"
+> +LICENSE =3D "GPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c=
+28b"
+> +DEPENDS =3D "libnfnetlink"
+> +
+> +SRC_URI =3D=20
+> "http://www.netfilter.org/projects/libnetfilter_log/files/libnetfilter_lo=
+g-${PV}.tar.bz2;name=3Dtar"
+> +SRC_URI[tar.md5sum] =3D "2a4bb0654ae675a52d2e8d1c06090b94"
+> +SRC_URI[tar.sha256sum] =3D=20
+> "74e0fe75753dba3ac114531b5e73240452c789a3f3adccf5c51217da1d933b21"
+> +
+> +S =3D "${WORKDIR}/libnetfilter_log-${PV}"
+> +
+> +inherit autotools pkgconfig
+--=20
+-Joe MacDonald.
+:wq
 
+--N5iGxCIPT7YMRg16
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlL+wfwACgkQwFvcllog0XymKgCfeaznhfGAmqwaIiuKJzlYg0Dr
+Ac8AoI4L+xXdnee8/gAeXOx/dS8mM/Zu
+=D/oF
+-----END PGP SIGNATURE-----
+
+--N5iGxCIPT7YMRg16--
