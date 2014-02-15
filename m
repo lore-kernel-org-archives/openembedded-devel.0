@@ -1,37 +1,40 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DF1C6E7E5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2014 10:09:57 +0000 (UTC)
-Received: by mail-we0-f173.google.com with SMTP id x48so3691374wes.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2014 02:09:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+vde5/zaF5ptNxvIYaUIOaXTMb/geIkDAoUXAJ4gftA=;
-	b=N22rn1Y8rWKaBGBHERbLdGzMzxjd3GWTyJEUITWZX7Ti1I1gU+VagHZSavxCTVA7Or
-	wQXb0jYUMS/EkfnWf711bGvmmulMTFc13dtyt5jD5I+uaKGESvoWEUWafBOWTajzjXRe
-	TLRHN7ZnTL1W3DrE9oIBZHP2IhVb+KoY2dNKKaXhk9ZpAfEL47TTXllFe1inQFDBhMOY
-	hCOWGmmWb62NKnatQ+o/Grya10Hm3A/DntHS3AjaN7lODMGVhIA5CHsv031MSxpZeGBy
-	pbZvzsbHdH4m0dCVin4VR+6Se+yYEcxqE17TH1qpxEfen0sRIhaAbDkvLlCKMF+ZNdsp
-	fnmA==
-X-Gm-Message-State: ALoCoQlY+JqSE7Ycdarj7Q/ToPbXvLXBKBYK7BtmySC1DpfM76Bygh2xGnuY0qZabYU8P1nk8NwG
-X-Received: by 10.180.107.1 with SMTP id gy1mr5570527wib.47.1392458997695;
-	Sat, 15 Feb 2014 02:09:57 -0800 (PST)
-Received: from localhost ([2001:610:612:0:21c:42ff:fef0:7f75])
-	by mx.google.com with ESMTPSA id
-	k10sm19421971wjf.11.2014.02.15.02.09.55 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 15 Feb 2014 02:09:55 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Feb 2014 11:09:55 +0100
-Message-Id: <1392458995-13404-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.8.5.3
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-gnome][PATCH] gnome-keyring: fix PAM install
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 69E7B6EC51;
+	Sat, 15 Feb 2014 21:40:14 +0000 (UTC)
+Received: by mail-pb0-f48.google.com with SMTP id rr13so13697287pbb.21
+	for <multiple recipients>; Sat, 15 Feb 2014 13:40:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=Z33MTdrIBHHKUBtYXfTSZslqv99y2es0PvfcSc8Mh7w=;
+	b=WdSBl1EEz00BY1Od14kwwsxD4/WKTl0oG4teaBMQKIWX7oW/vInMOQNXvMfKQCZDKr
+	DNXXyc4Yyxveq/Mi+FSYV6zGxKNZsW5HVdXopt8wt19gEW3uj/OUffR7X8GrjKisTpMq
+	ruQaHdmh6/akQy9Lx55tnCzcUu8NQ8CJVwU2wr+GpsVl3KjK1RznXF8r5jCN3AfGUCb2
+	dgD+zBSu+y69WkYyumIloym9qZjYnrywpO/xE73OxW0CFcUphHu+nDUy+EJRch9MylkB
+	+v1eCvxhuwXYyceYkMQYUje35K2TP/X3A6rbEnWW0sJ/6ZS0nmSFLQt8alaFps129TOc
+	dL9A==
+X-Received: by 10.68.139.100 with SMTP id qx4mr17158789pbb.144.1392500415088; 
+	Sat, 15 Feb 2014 13:40:15 -0800 (PST)
+Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.30])
+	by mx.google.com with ESMTPSA id vf7sm30289525pbc.5.2014.02.15.13.40.13
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 15 Feb 2014 13:40:13 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
+Date: Sat, 15 Feb 2014 13:40:11 -0800
+Message-Id: <FEBAFA47-8E03-4C04-AF2A-D06F269E77D2@gmail.com>
+References: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Yocto list discussion <yocto@yoctoproject.org>
+X-Mailer: Apple Mail (2.1827)
+Subject: Re: Upcoming Bug blitz weekend ( Feb 21 - Feb 24)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,38 +48,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2014 10:09:58 -0000
+X-List-Received-Date: Sat, 15 Feb 2014 21:40:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-PAM plugins belong in ${PN}, don't let the .so suffix fool you.
+Fellow Developers,
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Here I would like to remind us all that bug squash weekend is coming. In =
+addition to the bugs mentioned in bugzilla, if you are interested to fix
+bugs in other layers besides OE-Core then there are some world build =
+failures recorded on OE wiki
 
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-index 0d0f171..e94b49a 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-@@ -25,13 +25,15 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-
- SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
- SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
- 
--FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
-+FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
-+                ${base_libdir}/security/*${SOLIBSDEV} \
-+               "
- 
- FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
-                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
-                     ${libdir}/${BPN}/standalone/*.la \
-                     ${base_libdir}/security/*.la \
--                    ${base_libdir}/security/*${SOLIBSDEV}"
-+                   "
- 
- FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
-                     ${libdir}/${BPN}/devel/.debug/ \
--- 
-1.8.3.4
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+The links to failures logs are towards the end in above document.
+
+Thanks
+-Khem
+
+
+On Feb 5, 2014, at 9:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Hi All
+>=20
+> I would like to invite everyone to the bug fixing weekend which is
+> coming in 3 weeks from Feb 21 to Feb 24
+>=20
+> Bugs in NEW status for OE-Core & related categories:
+>=20
+> http://tinyurl.com/pu8vlaf
+>=20
+> All bugs/enhancements in NEW status in interesting categories:
+>=20
+> http://tinyurl.com/pjhrpwr
+>=20
+> Please feel free to pick any of the bugs which you are interested in
+> and has no owner assigned to it
+> or no one committed to it in comments or so. If there is a doubt
+> please add a comment to bug or send email to existing assignee to
+> coordinate your fix.
+>=20
+> Please assign the bugs to yourself beforehand and set the status to =
+ACCEPTED
+>=20
+> This is a potential list but not exhaustive, you are free to pick any
+> bugs that are not listed here
+> and fix them,
+>=20
+> I also think it will be good to utilize IRC channel during the bug
+> blitz weekend for communicating
+> to supplement emails and mailing list communications
+>=20
+> I will send the reminders of the event as we come close to it.
+>=20
+> Looking forward to it
+>=20
+> -Khem
 
 
