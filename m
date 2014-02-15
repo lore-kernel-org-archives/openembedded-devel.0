@@ -1,35 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D3976E9AD
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DF1C6E7E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2014 04:48:36 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id up15so13049571pbc.8
+	Sat, 15 Feb 2014 10:09:57 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id x48so3691374wes.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2014 20:48:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=OZ1CY27UJJhSuAegF6j+okjMJ93OEJkK1jrwR1apfng=;
-	b=JRbMYYUYIAh3vV6j3ZWqhJWdgX1YJ3LsE39uYFrlo9oEJdsz/d9OvtL68zC2++j29b
-	yytZPFwcFWZdHP7sO+WDiqzKpQEYCUSj1crtQ5eue9zwhuCzuIDbNglKBsdaXVxZeNZs
-	O9sW5Y3eF1WZRDSrvLwPtw843rpfDlF3Nws6JH4MmLu/ORHx/wrfwNEvlZuRCTUJuiQj
-	0Tul2sQifFkh5+AWEJRubmb0rs8+nXMOsoIn4W5ScD+AXkgZ7iHxF1sfkr/XAjUlXny4
-	WfELaMTHKVxTRaEslbxzfJMu/mXIgNE/cctXNls/wjXLqFXAEfEdWYYPUP7lcYa5T2TK
-	ZAoQ==
-X-Received: by 10.68.203.102 with SMTP id kp6mr13425277pbc.14.1392439717007;
-	Fri, 14 Feb 2014 20:48:37 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
+	Sat, 15 Feb 2014 02:09:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+vde5/zaF5ptNxvIYaUIOaXTMb/geIkDAoUXAJ4gftA=;
+	b=N22rn1Y8rWKaBGBHERbLdGzMzxjd3GWTyJEUITWZX7Ti1I1gU+VagHZSavxCTVA7Or
+	wQXb0jYUMS/EkfnWf711bGvmmulMTFc13dtyt5jD5I+uaKGESvoWEUWafBOWTajzjXRe
+	TLRHN7ZnTL1W3DrE9oIBZHP2IhVb+KoY2dNKKaXhk9ZpAfEL47TTXllFe1inQFDBhMOY
+	hCOWGmmWb62NKnatQ+o/Grya10Hm3A/DntHS3AjaN7lODMGVhIA5CHsv031MSxpZeGBy
+	pbZvzsbHdH4m0dCVin4VR+6Se+yYEcxqE17TH1qpxEfen0sRIhaAbDkvLlCKMF+ZNdsp
+	fnmA==
+X-Gm-Message-State: ALoCoQlY+JqSE7Ycdarj7Q/ToPbXvLXBKBYK7BtmySC1DpfM76Bygh2xGnuY0qZabYU8P1nk8NwG
+X-Received: by 10.180.107.1 with SMTP id gy1mr5570527wib.47.1392458997695;
+	Sat, 15 Feb 2014 02:09:57 -0800 (PST)
+Received: from localhost ([2001:610:612:0:21c:42ff:fef0:7f75])
 	by mx.google.com with ESMTPSA id
-	id1sm22941733pbc.11.2014.02.14.20.48.35 for <multiple recipients>
+	k10sm19421971wjf.11.2014.02.15.02.09.55 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 14 Feb 2014 20:48:35 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 15 Feb 2014 02:09:55 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2014 20:48:59 -0800
-Message-Id: <1392439739-14570-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH V3] libmicrohttpd: upgrade to 0.9.33
+Date: Sat, 15 Feb 2014 11:09:55 +0100
+Message-Id: <1392458995-13404-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.8.5.3
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-gnome][PATCH] gnome-keyring: fix PAM install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,83 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2014 04:48:36 -0000
+X-List-Received-Date: Sat, 15 Feb 2014 10:09:58 -0000
 
-libmicrohttpd is needed by systemd-journald-gatewayd
-Remove older recipes and move to recipes-support
+PAM plugins belong in ${PN}, don't let the .so suffix fool you.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../libmicrohttpd/libmicrohttpd_0.4.6.bb           |   16 -------------
- .../libmicrohttpd/libmicrohttpd_0.9.33.bb}         |   24 ++++++++++++++------
- 2 files changed, 17 insertions(+), 23 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb
- rename meta-oe/{recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb => recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb} (18%)
+ meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb b/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb
-deleted file mode 100644
-index ebaa485..0000000
---- a/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.4.6.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--DESCRIPTION = "GNU libmicrohttpd is a small C library that is supposed to make it easy to run an HTTP server as part of another application."
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
--
--DEPENDS = "libgcrypt curl"
--
--# ftp://ftp.nluug.nl/pub/gnu/${PN}/ has only 0.9.* and newer now
--SRC_URI = "http://mirrors.usc.edu/pub/gnu/${PN}/${P}.tar.gz"
--SRC_URI[md5sum] = "61698da6aa04744ea076c327f66fc05a"
--SRC_URI[sha256sum] = "0cb09e26678d1531a4fd40a748abff5142bfdad3ae11cfe3bb7ad7317a99e371"
--
--inherit autotools lib_package
--
--do_compile_append() {
--    sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
--}
-diff --git a/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-similarity index 18%
-rename from meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-index 802ae40..523b8dd 100644
---- a/meta-oe/recipes-connectivity/libmicrohttpd/libmicrohttpd_0.9.27.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-@@ -1,16 +1,26 @@
--DESCRIPTION = "GNU libmicrohttpd is a small C library that is supposed to make it easy to run an HTTP server as part of another application."
--LICENSE = "LGPLv2.1"
-+DESCRIPTION = "A small C library that is supposed to make it easy to run an HTTP server as part of another application"
-+HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
-+LICENSE = "LGPL-2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
-+SECTION = "net"
-+DEPENDS = "libgcrypt gnutls"
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+index 0d0f171..e94b49a 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+@@ -25,13 +25,15 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-
+ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
+ SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
  
--DEPENDS = "libgcrypt curl"
-+SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "013b10f9de1cda5448b29c81305354a3"
-+SRC_URI[sha256sum] = "d9587e8497548f820650cd607daf3615ea3272435779378983032c570f1cd559"
+-FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
++FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
++                ${base_libdir}/security/*${SOLIBSDEV} \
++               "
  
--SRC_URI = "ftp://ftp.nluug.nl/pub/gnu/libmicrohttpd//libmicrohttpd-${PV}.tar.gz"
--SRC_URI[md5sum] = "a10496b7f1b495aaf6897584da52f51b"
--SRC_URI[sha256sum] = "d532edf64c3a9da472114c2d10fc94606e3b31f21b883ec2e796ab8478f7e9cb"
-+inherit autotools lib_package
+ FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
+                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
+                     ${libdir}/${BPN}/standalone/*.la \
+                     ${base_libdir}/security/*.la \
+-                    ${base_libdir}/security/*${SOLIBSDEV}"
++                   "
  
-+EXTRA_OECONF += "-disable-static --enable-gnutls"
- 
--inherit autotools lib_package
-+PACKAGECONFIG ?= "curl"
-+PACKAGECONFIG_append_class-target = "\
-+        ${@base_contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)} \
-+"
-+PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
-+PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
- 
- do_compile_append() {
- 	sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
- }
-+
+ FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
+                     ${libdir}/${BPN}/devel/.debug/ \
 -- 
-1.7.10.4
+1.8.3.4
 
 
