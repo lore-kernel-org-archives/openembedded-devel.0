@@ -1,28 +1,25 @@
 Return-Path: <denis@denix.org>
 Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
 	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 741826EFA5
+	by mail.openembedded.org (Postfix) with ESMTP id D32876B89F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 20:36:45 +0000 (UTC)
+	Mon, 17 Feb 2014 21:05:10 +0000 (UTC)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
 	by vms173025.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1500594QLAZCK0@vms173025.mailsrvcs.net> for
+	2009)) with ESMTPA id <0N150023RRWE9YQ0@vms173025.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	17 Feb 2014 14:36:46 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 44CC8200BE; Mon,
-	17 Feb 2014 15:36:46 -0500 (EST)
-Date: Mon, 17 Feb 2014 15:36:46 -0500
+	17 Feb 2014 15:05:03 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id B749B20018; Mon,
+	17 Feb 2014 16:05:02 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20140217203646.GT22890@denix.org>
-References: <1392667529-4881-1-git-send-email-otavio@ossystems.com.br>
-	<1392667529-4881-2-git-send-email-otavio@ossystems.com.br>
-MIME-version: 1.0
-In-reply-to: <1392667529-4881-2-git-send-email-otavio@ossystems.com.br>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5][PATCH 2/2] nativesdk-qttools.inc: Fix installation and packaging
+Date: Mon, 17 Feb 2014 16:05:02 -0500
+Message-id: <1392671102-13391-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,45 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 20:36:45 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 17 Feb 2014 21:05:10 -0000
 
-On Mon, Feb 17, 2014 at 05:05:29PM -0300, Otavio Salvador wrote:
-> We must to fix the installation paths as did in nativesdk-qtbase.inc
-> and remove the files unused from the packages. This fixes the
-> packaging errors and allows for a successful build for SDK.
-> 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+From: Denys Dmytriyenko <denys@ti.com>
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
+This way we don't mangle ${B} and can repeat do_install if necessary. And
+previously it would require running do_compile again to restore the proper
+state of ${B}.
 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-qt/qt5/nativesdk-qtbase.inc | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-> ---
->  recipes-qt/qt5/nativesdk-qttools.inc |    6 ++++++
->  1 file changed, 6 insertions(+)
-> 
-> diff --git a/recipes-qt/qt5/nativesdk-qttools.inc b/recipes-qt/qt5/nativesdk-qttools.inc
-> index e9b2949..494c7b8 100644
-> --- a/recipes-qt/qt5/nativesdk-qttools.inc
-> +++ b/recipes-qt/qt5/nativesdk-qttools.inc
-> @@ -21,5 +21,11 @@ do_configure() {
->  }
->  
->  do_install() {
-> +    # Fix install paths for all
-> +    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
-> +
->      oe_runmake install INSTALL_ROOT=${D}
-> +
-> +    # remove things unused in nativesdk
-> +    rm -rf ${D}${libdir}
->  }
-> -- 
-> 1.7.10.4
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
+index a7809d3..14a3cbe 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase.inc
++++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+@@ -189,14 +189,12 @@ do_install() {
+     # Fix install paths for all
+     find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+ 
+-    # switch back the proper qmake
+-    if [ -e ${B}/bin/qmake-real ]; then
+-        rm ${B}/bin/qmake
+-        mv ${B}/bin/qmake-real ${B}/bin/qmake
+-    fi
+-
+     oe_runmake install INSTALL_ROOT=${D}
+ 
++    # replace the native qmake installed above with nativesdk version
++    rm -rf ${D}${bindir}/qmake
++    install -m 755 ${B}/bin/qmake-real ${D}${bindir}/qmake
++
+     # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
+     # e.g. qt3d, qtwayland
+     ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+-- 
+1.8.3.2
+
 
