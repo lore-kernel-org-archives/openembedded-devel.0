@@ -1,36 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 863686E927
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E6EE6E927
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 07:45:10 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id e53so6772498eek.25
+	Mon, 17 Feb 2014 09:36:27 +0000 (UTC)
+Received: by mail-vc0-f180.google.com with SMTP id ks9so11251484vcb.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Feb 2014 23:45:10 -0800 (PST)
+	Mon, 17 Feb 2014 01:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=tAtUHeqk37PODnGJP80TeKXyGbEEuSkONiveRx82fRY=;
-	b=GCvJDEI7e3mH+x31jfvFwmMSe6AR3WklT9hn8SZBvudBl0JKd7iTEyKMt7q2olhB4c
-	8QMmha0N3nN3w8UqJKp1AcWeXeqM7uXHXMOrQxkv0X8Hr84QV1k7f6U+nFVLUjsivfU/
-	45q3upcjmLyumNXrMYkY/hHTvNhUDaAuSKvUoGcdkbTA6++hEJXB3wGEO8GOssRsKShR
-	X9KFQWJvtHQXTJ22A35Emxt4iJOXyZNnAwiBrhiDAMy94Fmsa0wiuugZgrjG7Ofahckq
-	gGVZeGFBGuTF0Yyp3d1M9I6MIpa8lhuaMrCi4ayAhk9goPbmtSSyokL3NFXpLGhv7Avp
-	kc7w==
-X-Received: by 10.15.64.4 with SMTP id n4mr16433eex.110.1392623110528;
-	Sun, 16 Feb 2014 23:45:10 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	g1sm54168939eet.6.2014.02.16.23.45.08 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 16 Feb 2014 23:45:09 -0800 (PST)
-Date: Mon, 17 Feb 2014 08:45:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Andrea Adami <andrea.adami@gmail.com>
-Message-ID: <20140217074539.GD4067@jama>
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type:content-transfer-encoding;
+	bh=Hp+6y2fxaP4CoyP8fUzzJGJc4CoCkeYrsqvyILYcD8I=;
+	b=LyCrm1dFOMYCcLHtnEts29dXxxCFgK/DYQRm7xBHDM6ZSLM33UAfDpgK1t8Yctm/HU
+	itoM7SSoYTUB0IJsvvnV5wN2JF1vdKn+y1yzeVi5sNXSQ3mipKXd/tSQVZLJlK6vn18y
+	CPMv5hFHxdLy2DY8PHY85kug+/fseT3Xc6k6x5SbYtL39J0oC2YC766pc4lyr66XquaS
+	Ulp6t59kOeieOZwICWjereZv5MvcTPv2UzGVTbMD6dmj3U6KgUR2IvUgGdr1WbKt5cfd
+	yc8Ax3ZzP0+6c6BqtKF/tItTtTuFOXJPwF5wmPoXcqYJ/Sw/8fpLgHeksoHOYG0nOoqo
+	gTtg==
+X-Received: by 10.52.102.235 with SMTP id fr11mr39766vdb.51.1392629788357;
+	Mon, 17 Feb 2014 01:36:28 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: spitz linux-yocto 3.10 fails to patch
+Sender: paul.betafive@gmail.com
+Received: by 10.220.239.135 with HTTP; Mon, 17 Feb 2014 01:35:48 -0800 (PST)
+In-Reply-To: <CANR6C5466yB62G30Bg6LhdNYqz6KHb7hJVHEhLWSp1tC=BzGRQ@mail.gmail.com>
+References: <CANR6C54WmokZxiFHThuXkZ-kiocewgnGVg7AtbH=FHjr1AFHsg@mail.gmail.com>
+	<CANR6C56W7g63xx1D5WOA40YL8B_5j-q=uwt6VgFPW72eNZ=k7Q@mail.gmail.com>
+	<CANyK_8eseDidQWN6tfCFXF3dXy6pQMH0uSCSyGAHDJfE_zfwzw@mail.gmail.com>
+	<CANR6C55tvGxPN1DsJaupK53Z4HdWM=Zi5X8L7ZXM9k5FRH2LWQ@mail.gmail.com>
+	<CANyK_8cKnc87R3AGRy1MpNJB9hbPhq1qr4LL5TdNWuBCZ55=+Q@mail.gmail.com>
+	<CANR6C5466yB62G30Bg6LhdNYqz6KHb7hJVHEhLWSp1tC=BzGRQ@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Mon, 17 Feb 2014 09:35:48 +0000
+X-Google-Sender-Auth: vW7xzxigMKbuctHQIUvTjJapKYs
+Message-ID: <CANyK_8fbDxMDXkvoi0o1v6UwVaQx5+rp5C3qWjc=qv-BP5hC3w@mail.gmail.com>
+To: "Nick D'Ademo" <nickdademo@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: tk 8.6.0: strange error: "oe_runmake: command not found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,74 +49,428 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 07:45:10 -0000
-X-Groupsio-MsgNum: 48159
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WK3l2KTTmXPVedZ6"
-Content-Disposition: inline
-
---WK3l2KTTmXPVedZ6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Feb 2014 09:36:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On 11 February 2014 13:01, Nick D'Ademo <nickdademo@gmail.com> wrote:
+> The only reference to "oe_runmake" in the run file is within the
+> autotools_do_install() function (as pasted in my previous message).
+>
+> Complete run file below:
+>
+>> #!/bin/sh
+>>
+>> # Emit a useful diagnostic if something fails:
+>> bb_exit_handler() {
+>>     ret=3D$?
+>>     case $ret in
+>>     0)  ;;
+>>     *)  case $BASH_VERSION in
+>>         "")   echo "WARNING: exit code $ret from a shell command.";;
+>>         *)    echo "WARNING: ${BASH_SOURCE[0]}:${BASH_LINENO[0]} exit $r=
+et
+>> from
+>>   "$BASH_COMMAND"";;
+>>         esac
+>>         exit $ret
+>>     esac
+>> }
+>> trap 'bb_exit_handler' 0
+>> set -e
+>> export localstatedir=3D"/var"
+>> export prefix=3D"/usr"
+>> export LD=3D"x86_64-poky-linux-ld
+>> --sysroot=3D/home/nick/poky/build/tmp/sysroots/nuc  "
+>> export RANLIB=3D"x86_64-poky-linux-ranlib"
+>> export CXX=3D"x86_64-poky-linux-g++  -m64 -march=3Dcorei7 -mtune=3Dcorei=
+7
+>> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/n=
+uc"
+>> export lt_cv_sys_lib_dlsearch_path_spec=3D"/usr/lib64 /lib64"
+>> export servicedir=3D"/srv"
+>> export sysconfdir=3D"/etc"
+>> export TARGET_LDFLAGS=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed"
+>> export PKG_CONFIG_DISABLE_UNINSTALLED=3D"yes"
+>> export STRINGS=3D"x86_64-poky-linux-strings"
+>> export
+>> BUILD_CFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/us=
+r/include
+>> -O2 -pipe"
+>> export base_prefix=3D""
+>> export CPP=3D"x86_64-poky-linux-gcc -E
+>> --sysroot=3D/home/nick/poky/build/tmp/sysroots/nuc  -m64 -march=3Dcorei7
+>> -mtune=3Dcorei7 -mfpmath=3Dsse -msse4.2"
+>> export
+>> PSEUDO_LOCALSTATEDIR=3D"/home/nick/poky/build/tmp/work/corei7-64-poky-li=
+nux/tk/8.6.0-r0/pseudo/"
+>> export LOGNAME=3D"nick"
+>> export STRIP=3D"x86_64-poky-linux-strip"
+>> export datadir=3D"/usr/share"
+>> export PKG_CONFIG_SYSROOT_DIR=3D"/home/nick/poky/build/tmp/sysroots/nuc"
+>> export bindir=3D"/usr/bin"
+>> export mandir=3D"/usr/share/man"
+>> export
+>> CPPFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-li=
+nux/usr/include"
+>> export PATCH_GET=3D"0"
+>> export LDFLAGS=3D"-Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed
+>> -Wl,-rpath,/usr/lib64/tcltk/8.6.0/lib"
+>> export MAKE=3D"make"
+>> export
+>> PKG_CONFIG_PATH=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pkgc=
+onfig:/home/nick/poky/build/tmp/sysroots/nuc/usr/share/pkgconfig"
+>> export LD_FOR_BUILD=3D"ld "
+>> export AS=3D"x86_64-poky-linux-as  "
+>> export AR=3D"x86_64-poky-linux-ar"
+>> export exec_prefix=3D"/usr"
+>> export LC_ALL=3D"C"
+>> export base_libdir=3D"/lib64"
+>> export
+>> PATH=3D"/home/nick/poky/scripts:/home/nick/poky/build/tmp/sysroots/i686-=
+linux/usr/bin/corei7-64-poky-linux:/home/nick/poky/build/tmp/sysroots/nuc/u=
+sr/bin/crossscripts:/home/nick/poky/build/tmp/sysroots/i686-linux/usr/sbin:=
+/home/nick/poky/build/tmp/sysroots/i686-linux/usr/bin:/home/nick/poky/build=
+/tmp/sysroots/i686-linux/sbin:/home/nick/poky/build/tmp/sysroots/i686-linux=
+/bin:/home/nick/poky/scripts:/home/nick/poky/bitbake/bin:/usr/lib/lightdm/l=
+ightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga=
+mes:/home/nick/workspace/tye-firmware/util/arm-2011.03/bin"
+>> export infodir=3D"/usr/share/info"
+>> export BUILD_CC=3D"gcc "
+>> export
+>> BUILD_LDFLAGS=3D"-L/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
+>> -L/home/nick/poky/build/tmp/sysroots/i686-linux/lib
+>> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
+>> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/lib
+>> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
+>> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/lib -Wl,-O1"
+>> export BUILD_CCLD=3D"gcc "
+>> export
+>> CFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linu=
+x/usr/include
+>> -O2 -pipe"
+>> export CC=3D"x86_64-poky-linux-gcc  -m64 -march=3Dcorei7 -mtune=3Dcorei7
+>> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/n=
+uc"
+>> export CPPFLAGS=3D""
+>> export OBJCOPY=3D"x86_64-poky-linux-objcopy"
+>> export systemd_unitdir=3D"/lib/systemd"
+>> export
+>> PKG_CONFIG_DIR=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pkgco=
+nfig"
+>> export CCLD=3D"x86_64-poky-linux-gcc  -m64 -march=3Dcorei7 -mtune=3Dcore=
+i7
+>> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/n=
+uc"
+>> export base_bindir=3D"/bin"
+>> export
+>> PKG_CONFIG_LIBDIR=3D"/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/pk=
+gconfig"
+>> export sbindir=3D"/usr/sbin"
+>> export CFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types"
+>> export
+>> LDFLAGS_FOR_BUILD=3D"-L/home/nick/poky/build/tmp/sysroots/i686-linux/usr=
+/lib
+>> -L/home/nick/poky/build/tmp/sysroots/i686-linux/lib
+>> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
+>> -Wl,-rpath-link,/home/nick/poky/build/tmp/sysroots/i686-linux/lib
+>> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/usr/lib
+>> -Wl,-rpath,/home/nick/poky/build/tmp/sysroots/i686-linux/lib -Wl,-O1"
+>> export docdir=3D"/usr/share/doc"
+>> export TERM=3D"xterm"
+>> export CCACHE_DISABLE=3D"1"
+>> export
+>> BUILD_CXXFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/=
+usr/include
+>> -O2 -pipe -fpermissive"
+>> export FC=3D"x86_64-poky-linux-gfortran  -m64 -march=3Dcorei7 -mtune=3Dc=
+orei7
+>> -mfpmath=3Dsse -msse4.2 --sysroot=3D/home/nick/poky/build/tmp/sysroots/n=
+uc"
+>> export HOME=3D"/home/nick"
+>> export CXXFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types -fpermis=
+sive
+>> -fvisibility-inlines-hidden"
+>> unset MACHINE
+>> export BUILD_STRIP=3D"strip"
+>> export PSEUDO_PASSWD=3D"/home/nick/poky/build/tmp/sysroots/nuc"
+>> export libexecdir=3D"/usr/lib64/tk"
+>> export TARGET_CXXFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types
+>> -fpermissive"
+>> export includedir=3D"/usr/include"
+>> export BUILD_LD=3D"ld "
+>> export oldincludedir=3D"/usr/include"
+>> export BUILD_RANLIB=3D"ranlib"
+>> export BUILD_NM=3D"nm"
+>> export BUILD_AR=3D"ar"
+>> export BUILD_AS=3D"as "
+>> export sharedstatedir=3D"/com"
+>> export CONFIG_SITE=3D"/home/nick/poky/meta/site/endian-little
+>> /home/nick/poky/meta/site/common-linux
+>> /home/nick/poky/meta/site/common-glibc
+>> /home/nick/poky/meta/site/x86_64-linux /home/nick/poky/meta/site/common
+>> /home/nick/poky/meta-openembedded/meta-oe/site/endian-little "
+>> export PSEUDO_DISABLED=3D"0"
+>> export CXX_FOR_BUILD=3D"g++ "
+>> export libdir=3D"/usr/lib64"
+>> export nonarch_base_libdir=3D"/lib"
+>> export BUILD_CXX=3D"g++ "
+>> unset TARGET_ARCH
+>> export CCACHE_DIR=3D"/home/nick"
+>> export PSEUDO_PREFIX=3D"/home/nick/poky/build/tmp/sysroots/i686-linux/us=
+r"
+>> export BUILD_CPP=3D"cpp "
+>> export base_sbindir=3D"/sbin"
+>> export USER=3D"nick"
+>> export NM=3D"x86_64-poky-linux-nm"
+>> export
+>> BUILD_CPPFLAGS=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-linux/=
+usr/include"
+>> export BUILD_FC=3D"gfortran "
+>> export CPP_FOR_BUILD=3D"cpp "
+>> export TARGET_CPPFLAGS=3D""
+>> export
+>> CXXFLAGS_FOR_BUILD=3D"-isystem/home/nick/poky/build/tmp/sysroots/i686-li=
+nux/usr/include
+>> -O2 -pipe -fpermissive"
+>> export TARGET_CFLAGS=3D" -O2 -pipe -g -feliminate-unused-debug-types"
+>> export OBJDUMP=3D"x86_64-poky-linux-objdump"
+>> unset DISTRO
+>> export CC_FOR_BUILD=3D"gcc "
+>> export SHELL=3D"/bin/bash"
+>> export PSEUDO_NOSYMLINKEXP=3D"1"
+>> do_install() {
+>>     autotools_do_install
+>>     ln -sf libtk8.6.so
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/lib64/libtk8.6.so.0
+>>     oe_libinstall -so libtk8.6
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/lib64
+>>     ln -sf wish8.6
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/bin/wish
+>>
+>>     # Even after passing libdir=3D/usr/lib64 at config, some incorrect d=
+irs
+>> are still generated for the multilib build
+>>     if [ "$libdir" !=3D "/usr/lib" ]; then
+>>         # Move files to correct library directory
+>>         mv
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/lib/tk8.6/*
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image//u=
+sr/lib64/tk8.6/
+>>         # Remove unneeded/incorrect dir ('usr/lib/')
+>>         rm -rf
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/lib
+>>     fi
+>>
+>> }
+>>
+>> oe_libinstall() {
+>>     # Purpose: Install a library, in all its forms
+>>     # Example
+>>     #
+>>     # oe_libinstall libltdl
+>> /home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/
+>>     # oe_libinstall -C src/libblah libblah
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image//u=
+sr/lib64/
+>>     dir=3D""
+>>     libtool=3D""
+>>     silent=3D""
+>>     require_static=3D""
+>>     require_shared=3D""
+>>     staging_install=3D""
+>>     while [ "$#" -gt 0 ]; do
+>>         case "$1" in
+>>         -C)
+>>             shift
+>>             dir=3D"$1"
+>>             ;;
+>>         -s)
+>>             silent=3D1
+>>             ;;
+>>         -a)
+>>             require_static=3D1
+>>             ;;
+>>         -so)
+>>             require_shared=3D1
+>>             ;;
+>>         -*)
+>>             bbfatal "oe_libinstall: unknown option: $1"
+>>             ;;
+>>         *)
+>>             break;
+>>             ;;
+>>         esac
+>>         shift
+>>     done
+>>
+>>     libname=3D"$1"
+>>     shift
+>>     destpath=3D"$1"
+>>     if [ -z "$destpath" ]; then
+>>         bbfatal "oe_libinstall: no destination path specified"
+>>     fi
+>>     if echo "$destpath/" | egrep
+>> '^/home/nick/poky/build/tmp/sysroots/nuc/usr/lib64/' >/dev/null
+>>     then
+>>         staging_install=3D1
+>>     fi
+>>
+>>     __runcmd () {
+>>         if [ -z "$silent" ]; then
+>>             echo >&2 "oe_libinstall: $*"
+>>         fi
+>>         $*
+>>     }
+>>
+>>     if [ -z "$dir" ]; then
+>>         dir=3D`pwd`
+>>     fi
+>>
+>>     dotlai=3D$libname.lai
+>>
+>>     # Sanity check that the libname.lai is unique
+>>     number_of_files=3D`(cd $dir; find . -name "$dotlai") | wc -l`
+>>     if [ $number_of_files -gt 1 ]; then
+>>         bbfatal "oe_libinstall: $dotlai is not unique in $dir"
+>>     fi
+>>
+>>
+>>     dir=3D$dir`(cd $dir;find . -name "$dotlai") | sed
+>> "s/^\.//;s/\/$dotlai\$//;q"`
+>>     olddir=3D`pwd`
+>>     __runcmd cd $dir
+>>
+>>     lafile=3D$libname.la
+>>
+>>     # If such file doesn't exist, try to cut version suffix
+>>     if [ ! -f "$lafile" ]; then
+>>         libname1=3D`echo "$libname" | sed 's/-[0-9.]*$//'`
+>>         lafile1=3D$libname.la
+>>         if [ -f "$lafile1" ]; then
+>>             libname=3D$libname1
+>>             lafile=3D$lafile1
+>>         fi
+>>     fi
+>>
+>>     if [ -f "$lafile" ]; then
+>>         # libtool archive
+>>         eval `cat $lafile|grep "^library_names=3D"`
+>>         libtool=3D1
+>>     else
+>>         library_names=3D"$libname.so* $libname.dll.a $libname.*.dylib"
+>>     fi
+>>
+>>     __runcmd install -d $destpath/
+>>     dota=3D$libname.a
+>>     if [ -f "$dota" -o -n "$require_static" ]; then
+>>         rm -f $destpath/$dota
+>>         __runcmd install -m 0644 $dota $destpath/
+>>     fi
+>>     if [ -f "$dotlai" -a -n "$libtool" ]; then
+>>         rm -f $destpath/$libname.la
+>>         __runcmd install -m 0644 $dotlai $destpath/$libname.la
+>>     fi
+>>
+>>     for name in $library_names; do
+>>         files=3D`eval echo $name`
+>>         for f in $files; do
+>>             if [ ! -e "$f" ]; then
+>>                 if [ -n "$libtool" ]; then
+>>                     bbfatal "oe_libinstall: $dir/$f not found."
+>>                 fi
+>>             elif [ -L "$f" ]; then
+>>                 __runcmd cp -P "$f" $destpath/
+>>             elif [ ! -L "$f" ]; then
+>>                 libfile=3D"$f"
+>>                 rm -f $destpath/$libfile
+>>                 __runcmd install -m 0755 $libfile $destpath/
+>>             fi
+>>         done
+>>     done
+>>
+>>     if [ -z "$libfile" ]; then
+>>         if  [ -n "$require_shared" ]; then
+>>             bbfatal "oe_libinstall: unable to locate shared library"
+>>         fi
+>>     elif [ -z "$libtool" ]; then
+>>         # special case hack for non-libtool .so.#.#.# links
+>>         baselibfile=3D`basename "$libfile"`
+>>         if (echo $baselibfile | grep -qE '^lib.*\.so\.[0-9.]*$'); then
+>>             sonamelink=3D`x86_64-poky-linux-readelf -d $libfile |grep
+>> 'Library soname:' |sed -e 's/.*\[\(.*\)\].*/\1/'`
+>>             solink=3D`echo $baselibfile | sed -e 's/\.so\..*/.so/'`
+>>             if [ -n "$sonamelink" -a x"$baselibfile" !=3D x"$sonamelink"=
+ ];
+>> then
+>>                 __runcmd ln -sf $baselibfile $destpath/$sonamelink
+>>             fi
+>>             __runcmd ln -sf $baselibfile $destpath/$solink
+>>         fi
+>>     fi
+>>
+>>     __runcmd cd "$olddir"
+>>
+>>
+>> }
+>>
+>> autotools_do_install() {
+>>     oe_runmake
+>> 'DESTDIR=3D/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-=
+r0/image'
+>> install
+>>     # Info dir listing isn't interesting at this point so remove it if i=
+t
+>> exists.
+>>     if [ -e
+>> "/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/u=
+sr/share/info/dir"
+>> ]; then
+>>         rm -f
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/image/us=
+r/share/info/dir
+>>     fi
+>>
+>> }
+>>
+>> bbfatal() {
+>>     echo "ERROR: $*"
+>>     exit 1
+>>
+>> }
+>>
+>> cd
+>> '/home/nick/poky/build/tmp/work/corei7-64-poky-linux/tk/8.6.0-r0/tk8.6.0=
+/unix'
+>> do_install
+>>
+>> # cleanup
+>> ret=3D$?
+>> trap '' 0
+>> exit $?
+>
 
-is this known issue?
+Sorry, I'm lost on where to look next on this. The run files in my
+builds include the definition of oe_runmake() and the other functions
+which are used so I assume that's what's supposed to happen. I was
+hoping someone else would notice this thread and have a better idea
+what the underlying problem might be. I've never really looked at the
+internals of bitbake or how these scripts are generated.
 
-ERROR: Function failed: do_patch (log file is located at /OE/build/shr-core=
-/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8a=
-f5a3b1_3e0a296fae-r0/temp/log.do_patch.25528)
-ERROR: Logfile of failure stored in: /OE/build/shr-core/tmp-eglibc/work/spi=
-tz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae-r0=
-/temp/log.do_patch.25528
-Log data follows:
-| DEBUG: Executing shell function do_patch
-| Deleted branch meta-temp (was f58e62b).
-| ERROR: could not find file cfg/serial-8250.cfg, included from /OE/build/s=
-hr-core/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOI=
-NC+8f8af5a3b1_3e0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/m=
-eta-handheld/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc
-| ERROR: could not process input files: /OE/build/shr-core/tmp-eglibc/work/=
-spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae=
--r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld/recipes-ker=
-nel/linux/linux-yocto-3.10/spitz/spitz-standard.scc /OE/build/shr-core/tmp-=
-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b=
-1_3e0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld=
-/recipes-kernel/linux/linux-yocto-3.10/feature-top.scc
-| ERROR. A meta series could not be created for /OE/build/shr-core/tmp-egli=
-bc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e=
-0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld/rec=
-ipes-kernel/linux/linux-yocto-3.10/spitz/spitz-standard.scc
-| ERROR. Could not locate meta series for spitz
-| ERROR. Could not apply patches for spitz.
-|        Patch failures can be resolved in the devshell (bitbake -c devshel=
-l linux-yocto)
-| WARNING: /OE/build/shr-core/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-=
-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae-r0/temp/run.do_patch.25528:1=
- exit 1 from
-|   exit 1
-| ERROR: Function failed: do_patch (log file is located at /OE/build/shr-co=
-re/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f=
-8af5a3b1_3e0a296fae-r0/temp/log.do_patch.25528)
-ERROR: Task 3 (/OE/build/shr-core/openembedded-core/meta/recipes-kernel/lin=
-ux/linux-yocto_3.10.bb, do_patch) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 387 tasks of which 382 didn't need to be rer=
-un and 1 failed.
+I'd suggest asking on the #oe or #yocto channels on irc.freenode.net,
+plus maybe reposting to yocto@yoctoproject.org if no-one else replies
+to this and you still need help.
+
+Sorry I can't be any more help.
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Paul Barker
 
---WK3l2KTTmXPVedZ6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlMBviMACgkQN1Ujt2V2gBxVQACgpOcHk+4ucTvHyhKmXYhRRCa8
-L/AAoI10eA2lh5TcTi0/Vx5kCH8tqwnW
-=UjOh
------END PGP SIGNATURE-----
-
---WK3l2KTTmXPVedZ6--
