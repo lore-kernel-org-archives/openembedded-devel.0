@@ -1,28 +1,28 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 454346E7BE
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by mail.openembedded.org (Postfix) with ESMTP id C37836D14A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 16:41:27 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 17 Feb 2014 08:41:27 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.95,861,1384329600"; d="scan'208";a="482991593"
-Received: from nithyasr-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.246])
-	by fmsmga002.fm.intel.com with ESMTP; 17 Feb 2014 08:41:26 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Mon, 17 Feb 2014 17:36:48 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N15005VVI8KDJ60@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	17 Feb 2014 11:36:31 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BD2CE200DD; Mon,
+	17 Feb 2014 12:36:20 -0500 (EST)
+Date: Mon, 17 Feb 2014 12:36:20 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Feb 2014 16:41:25 +0000
-Message-ID: <66319671.qyeNrjsMK8@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.2 (Linux/3.12.10-300.fc20.x86_64; KDE/4.12.2; x86_64; ;
-	)
-In-Reply-To: <1392655039-10538-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1392655039-10538-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Eric =?ISO-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Subject: Re: [meta-browser][PATCH] nspr: Rename .bbappend to match new version from oe-core
+Message-id: <20140217173620.GP22890@denix.org>
+References: <1392411754-10608-1-git-send-email-otavio@ossystems.com.br>
+	<1392411754-10608-2-git-send-email-otavio@ossystems.com.br>
+MIME-version: 1.0
+In-reply-to: <1392411754-10608-2-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH 2/2] nativesdk-qtbase.inc: Remove unused contents
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,31 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 16:41:27 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 17 Feb 2014 17:36:49 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Monday 17 February 2014 17:37:19 Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  recipes-support/nspr/{nspr_4.10.2.bbappend => nspr_4.10.3.bbappend} | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename recipes-support/nspr/{nspr_4.10.2.bbappend => nspr_4.10.3.bbappend}
-> (100%)
+On Fri, Feb 14, 2014 at 07:02:34PM -0200, Otavio Salvador wrote:
+> Fixes:
 > 
-> diff --git a/recipes-support/nspr/nspr_4.10.2.bbappend
-> b/recipes-support/nspr/nspr_4.10.3.bbappend similarity index 100%
-> rename from recipes-support/nspr/nspr_4.10.2.bbappend
-> rename to recipes-support/nspr/nspr_4.10.3.bbappend
+> ERROR: QA Issue: nativesdk-qtbase: Files/directories were installed but not shipped
+>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib
+>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/include
+>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/share
+>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Test.so
+>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Network.so
+>   ...
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-This bbappend should be merged back into OE-Core - meta-browser shouldn't be 
-carrying generic fixes for a core recipe. Could someone please sort that out?
+Acked-by: Denys Dmytriyenko <denys@ti.com>
 
-Thanks,
-Paul 
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+> ---
+>  recipes-qt/qt5/nativesdk-qtbase.inc |    4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
+> index 36bc334..fe80c9b 100644
+> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
+> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+> @@ -188,4 +188,8 @@ do_install() {
+>      # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
+>      # e.g. qt3d, qtwayland
+>      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+> +
+> +    # remove things unused in nativesdk; things are statically link
+> +    # and we just use the binaries so drop all unused files
+> +    rm -rf ${D}${includedir} ${D}${libdir} ${D}${datadir}/doc
+>  }
+> -- 
+> 1.7.10.4
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
