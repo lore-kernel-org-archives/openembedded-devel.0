@@ -1,38 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E36A06F019
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B1D96EFA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 20:05:46 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id j5so5555837qga.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 12:05:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=R5apE/WDWcvgVWtJj3/wPtjEuylRwY3Tre/iYRJm7PI=;
-	b=RnW9oovMspqXQKTDlc8drxDvsakqQHp1TBKlpthX9DO056u/omCQ155JAT5MMEPsN8
-	R83SstxPj7cb/e/6vwN5zTamzYO4JbzqjSA0S+B2cxtM1WA8pblZv35EHUTV5/llO0+8
-	REQfq3VG2usfB7WJexuxh7pa4XHN/TCLj7CY8QVi63ZBzWCqONwzA2gYKrXDbUoN+7+H
-	gX3z+sf+APWSTp6wREk9+rsiMwxk1vh0JShKU+PkLX8UgqGz4Rv6iShb+UxR5FV9IPpJ
-	ZCzV24nebsq+jJsKFUWeJVZ+A+Pel+VTr7p9fafK06jDrt9EPUVmYv9BjUOx81clc+SU
-	kg5g==
-X-Received: by 10.140.86.51 with SMTP id o48mr34941900qgd.67.1392667547833;
-	Mon, 17 Feb 2014 12:05:47 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id d15sm38073513qaq.4.2014.02.17.12.05.46
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 17 Feb 2014 12:05:47 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Mon, 17 Feb 2014 20:36:25 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N1500GILQKPJZ50@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	17 Feb 2014 14:36:26 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id AC0A3200BE; Mon,
+	17 Feb 2014 15:36:25 -0500 (EST)
+Date: Mon, 17 Feb 2014 15:36:25 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Feb 2014 17:05:29 -0300
-Message-Id: <1392667529-4881-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1392667529-4881-1-git-send-email-otavio@ossystems.com.br>
+Message-id: <20140217203625.GS22890@denix.org>
 References: <1392667529-4881-1-git-send-email-otavio@ossystems.com.br>
+MIME-version: 1.0
+In-reply-to: <1392667529-4881-1-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH 2/2] nativesdk-qttools.inc: Fix installation and packaging
+Subject: Re: [meta-qt5][PATCH 1/2] qmake5_base.bbclass: Fix mkspec path when building nativesdk binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,34 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 20:05:47 -0000
+X-List-Received-Date: Mon, 17 Feb 2014 20:36:25 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-We must to fix the installation paths as did in nativesdk-qtbase.inc
-and remove the files unused from the packages. This fixes the
-packaging errors and allows for a successful build for SDK.
+On Mon, Feb 17, 2014 at 05:05:28PM -0300, Otavio Salvador wrote:
+> When building nativesdk binaries we ought to rely in the native
+> mkspecs.
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-qt/qt5/nativesdk-qttools.inc |    6 ++++++
- 1 file changed, 6 insertions(+)
+Acked-by: Denys Dmytriyenko <denys@ti.com>
 
-diff --git a/recipes-qt/qt5/nativesdk-qttools.inc b/recipes-qt/qt5/nativesdk-qttools.inc
-index e9b2949..494c7b8 100644
---- a/recipes-qt/qt5/nativesdk-qttools.inc
-+++ b/recipes-qt/qt5/nativesdk-qttools.inc
-@@ -21,5 +21,11 @@ do_configure() {
- }
- 
- do_install() {
-+    # Fix install paths for all
-+    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
-+
-     oe_runmake install INSTALL_ROOT=${D}
-+
-+    # remove things unused in nativesdk
-+    rm -rf ${D}${libdir}
- }
--- 
-1.7.10.4
 
+> ---
+>  classes/qmake5_base.bbclass |    1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 2db0fa3..3861cd0 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -4,6 +4,7 @@ QMAKE_MKSPEC_PATH_TARGET = "${STAGING_LIBDIR}/${QT_DIR_NAME}"
+>  
+>  QMAKE_MKSPEC_PATH = "${QMAKE_MKSPEC_PATH_TARGET}"
+>  QMAKE_MKSPEC_PATH_class-native = "${QMAKE_MKSPEC_PATH_NATIVE}"
+> +QMAKE_MKSPEC_PATH_class-nativesdk = "${QMAKE_MKSPEC_PATH_NATIVE}"
+>  
+>  # hardcode linux, because that's what 0001-Add-linux-oe-g-platform.patch adds
+>  OE_QMAKE_PLATFORM_NATIVE = "linux-oe-g++"
+> -- 
+> 1.7.10.4
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
