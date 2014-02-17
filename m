@@ -1,27 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id BA9F16E71A
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ea0-f172.google.com (mail-ea0-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id C5CD36E71A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 21:46:22 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1500LCBTTBRO20@vms173025.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	17 Feb 2014 15:46:23 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 66D2420173; Mon,
-	17 Feb 2014 16:46:23 -0500 (EST)
-Date: Mon, 17 Feb 2014 16:46:23 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 17 Feb 2014 21:54:08 +0000 (UTC)
+Received: by mail-ea0-f172.google.com with SMTP id l9so6917211eaj.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Feb 2014 13:54:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=PMO2kezyIM94ZXyyWyPeQxvb3yrletAVNxxR/V+ZlqI=;
+	b=r1Nt6hdy16aVMIuT7s5hMEdt7ESGv1pxD46tZZPFvq3E6fKPtOF87JmjMdOHfzOGoL
+	v/s1E0sCGrGE1xakPB1Zj6L7aMhOynMrFINAI5+/S2xNcxSX+UbyxL2Y9e+tbwQOeG2Y
+	0q/At8trURbgyXaZNk9Kj2YUpmLKkbV0Z49eZXqbHUmo/FPtCk3QhoXtZ2t5wOmvYaEb
+	+WbOEBz8Av6kkm+pkMinPlnvw2pY/cvBt+q/vvSVHD9eG0CsTkYX8YmOwtpJ4dRXz6o8
+	5mfNVxGhaD0jvygxF/dqoJw6A0Efa9R/P1QRPRoWcUcFpQMHdfrR8Rm7R7Vgs52qVlHP
+	P/CA==
+X-Received: by 10.15.22.65 with SMTP id e41mr29447650eeu.5.1392674048825;
+	Mon, 17 Feb 2014 13:54:08 -0800 (PST)
+Received: from mizar.localdomain
+	(host53-14-dynamic.21-79-r.retail.telecomitalia.it. [79.21.14.53])
+	by mx.google.com with ESMTPSA id m1sm62134917een.7.2014.02.17.13.54.07
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 17 Feb 2014 13:54:08 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20140217214623.GU22890@denix.org>
-References: <CAP71Wjy4dxnDZFb3x_5zPg5HV-VOakeYtFz+8o0h2xk08R1=zQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAP71Wjy4dxnDZFb3x_5zPg5HV-VOakeYtFz+8o0h2xk08R1=zQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Andre McCurdy <andre.mccurdy@entropic.com>
-Subject: Re: [meta-qt5] why does Qt5 build with ARM_INSTRUCTION_SET = "arm"
+Date: Mon, 17 Feb 2014 22:54:03 +0100
+Message-Id: <1392674044-20769-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.8.1.5
+Subject: [meta-handheld][PATCH 1/2] linux-yocto*: mtd: collie: refactor headers of collie-match-cfi-qry.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,34 +43,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 21:46:23 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 17 Feb 2014 21:54:09 -0000
 
-On Mon, Feb 17, 2014 at 02:27:51PM -0700, Nicolas Dechesne wrote:
-> hi,
-> 
-> does anybody know why in Qt5/qtbase.inc, we have:
-> 
-> ARM_INSTRUCTION_SET = "arm"
-> 
-> Could it be an a low hanging fruit from the past? e.g. before
-> https://bugreports.qt-project.org/browse/QTBUG-16402 or
-> https://qt.gitorious.org/qt/qtbase/commit/a3bd9d4c0f3d9e80dbe35bd88649b245dca5f410?
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../patches/patches-mtd/collie-match-cfi-qry.patch    | 19 ++++++++++++++++---
+ .../patches/patches-mtd/collie-match-cfi-qry.patch    | 19 ++++++++++++++++---
+ .../patches/patches-mtd/collie-match-cfi-qry.patch    | 19 ++++++++++++++++---
+ 3 files changed, 48 insertions(+), 9 deletions(-)
 
-Hmm, I would assume that's here from 4.8 days, although I haven't tried 
-dropping that line for latest Qt5... Would make sense to do some more testing.
-
-
-> as a matter of fact, for our project Qt5 (and QtWebkit) are building
-> (and working fine) when built with Thumb2, outside of OE. Also using
-> ARM instruction set instead of Thumb2 enforces Webkit to use the ARM
-> version of the javascript JIT, while the Thumb2 JIT engine seems to
-> work a lot better in our testing...
-
-Seems like worth the effort to re-test the need for that setting. Unless 
-someone else has tried it already and found out the issue is still there
-
+diff --git a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
+index e3fbf2e..a315d93 100644
+--- a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
++++ b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
+@@ -1,8 +1,18 @@
++From 66ec11df6561d5ba7cdf41977af828a53ba6b99f Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sat, 1 Feb 2014 13:17:24 +0100
++Subject: [PATCH] mtd: cfi_util.c: force CFI detection of 2x LH28F640BF
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ drivers/mtd/chips/cfi_util.c | 16 ++++++++++++++++
++ 1 file changed, 16 insertions(+)
++
+ diff --git a/drivers/mtd/chips/cfi_util.c b/drivers/mtd/chips/cfi_util.c
+-index f992418..7139d028 100644
++index f992418..2c7a13d 100644
+ --- a/drivers/mtd/chips/cfi_util.c
+ +++ b/drivers/mtd/chips/cfi_util.c
+-@@ -29,6 +29,7 @@
++@@ -29,6 +29,7 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	int osf = cfi->interleave * cfi->device_type;	/* scale factor */
+  	map_word val[3];
+  	map_word qry[3];
+@@ -10,7 +20,7 @@ index f992418..7139d028 100644
+  
+  	qry[0] = cfi_build_cmd('Q', map, cfi);
+  	qry[1] = cfi_build_cmd('R', map, cfi);
+-@@ -38,6 +39,21 @@
++@@ -38,6 +39,21 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	val[1] = map_read(map, base + osf*0x11);
+  	val[2] = map_read(map, base + osf*0x12);
+  
+@@ -32,3 +42,6 @@ index f992418..7139d028 100644
+  	if (!map_word_equal(map, qry[0], val[0]))
+  		return 0;
+  
++-- 
++1.8.1.5
++
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
+index e3fbf2e..a315d93 100644
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
++++ b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
+@@ -1,8 +1,18 @@
++From 66ec11df6561d5ba7cdf41977af828a53ba6b99f Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sat, 1 Feb 2014 13:17:24 +0100
++Subject: [PATCH] mtd: cfi_util.c: force CFI detection of 2x LH28F640BF
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ drivers/mtd/chips/cfi_util.c | 16 ++++++++++++++++
++ 1 file changed, 16 insertions(+)
++
+ diff --git a/drivers/mtd/chips/cfi_util.c b/drivers/mtd/chips/cfi_util.c
+-index f992418..7139d028 100644
++index f992418..2c7a13d 100644
+ --- a/drivers/mtd/chips/cfi_util.c
+ +++ b/drivers/mtd/chips/cfi_util.c
+-@@ -29,6 +29,7 @@
++@@ -29,6 +29,7 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	int osf = cfi->interleave * cfi->device_type;	/* scale factor */
+  	map_word val[3];
+  	map_word qry[3];
+@@ -10,7 +20,7 @@ index f992418..7139d028 100644
+  
+  	qry[0] = cfi_build_cmd('Q', map, cfi);
+  	qry[1] = cfi_build_cmd('R', map, cfi);
+-@@ -38,6 +39,21 @@
++@@ -38,6 +39,21 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	val[1] = map_read(map, base + osf*0x11);
+  	val[2] = map_read(map, base + osf*0x12);
+  
+@@ -32,3 +42,6 @@ index f992418..7139d028 100644
+  	if (!map_word_equal(map, qry[0], val[0]))
+  		return 0;
+  
++-- 
++1.8.1.5
++
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
+index e3fbf2e..a315d93 100644
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
+@@ -1,8 +1,18 @@
++From 66ec11df6561d5ba7cdf41977af828a53ba6b99f Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sat, 1 Feb 2014 13:17:24 +0100
++Subject: [PATCH] mtd: cfi_util.c: force CFI detection of 2x LH28F640BF
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ drivers/mtd/chips/cfi_util.c | 16 ++++++++++++++++
++ 1 file changed, 16 insertions(+)
++
+ diff --git a/drivers/mtd/chips/cfi_util.c b/drivers/mtd/chips/cfi_util.c
+-index f992418..7139d028 100644
++index f992418..2c7a13d 100644
+ --- a/drivers/mtd/chips/cfi_util.c
+ +++ b/drivers/mtd/chips/cfi_util.c
+-@@ -29,6 +29,7 @@
++@@ -29,6 +29,7 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	int osf = cfi->interleave * cfi->device_type;	/* scale factor */
+  	map_word val[3];
+  	map_word qry[3];
+@@ -10,7 +20,7 @@ index f992418..7139d028 100644
+  
+  	qry[0] = cfi_build_cmd('Q', map, cfi);
+  	qry[1] = cfi_build_cmd('R', map, cfi);
+-@@ -38,6 +39,21 @@
++@@ -38,6 +39,21 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+  	val[1] = map_read(map, base + osf*0x11);
+  	val[2] = map_read(map, base + osf*0x12);
+  
+@@ -32,3 +42,6 @@ index f992418..7139d028 100644
+  	if (!map_word_equal(map, qry[0], val[0]))
+  		return 0;
+  
++-- 
++1.8.1.5
++
 -- 
-Denys
+1.8.1.5
+
 
