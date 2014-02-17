@@ -1,34 +1,36 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
-	[209.85.216.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A4176E877
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qc0-f178.google.com (mail-qc0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 585B36F019
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 19:20:12 +0000 (UTC)
-Received: by mail-qa0-f51.google.com with SMTP id f11so22053763qae.24
+	Mon, 17 Feb 2014 20:05:45 +0000 (UTC)
+Received: by mail-qc0-f178.google.com with SMTP id m20so24194824qcx.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 11:20:13 -0800 (PST)
+	Mon, 17 Feb 2014 12:05:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=3hD+QZVMfVt/Fafp+rTCvazEjU3XhGOrARQZVMkT3vo=;
-	b=rzcV5i8sstpbN81ElsvMz23rOmSf2pzIgl4PGJIS42FAi1XgYlM6Z1VlqdiWRByaPw
-	BpzvV4qRwJ2PeBbOLyEd1aMpYE15Vaxrh89zinL4ndkq1ZRD6RpXU9yf4lTt88Df2e5T
-	MugK63hTs7BvcZc6A5henUHD4hwQJZoXNOLV4DDrovKzcgYL3vo199o5pStt3EUihFy8
-	rW1FnxmQckExvzdrPJt6IQXAuL1SK539HlIgvwuxsXVf3ATrZj2FhBIWpLQRCboAFhtv
-	KNiD4vWvIgJF/E2xaJEDRkQd6CLqoAakxj4JacMkg5oFCRRsQnLgg32B14mt3mGH/9lr
-	a+aQ==
-X-Received: by 10.224.151.147 with SMTP id c19mr4585286qaw.86.1392664810850;
-	Mon, 17 Feb 2014 11:20:10 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Mon, 17 Feb 2014 11:19:50 -0800 (PST)
-In-Reply-To: <20140217191334.GR22890@denix.org>
-References: <CAMCfZKG5Pk5W4nuDQvTrJb1CHdrTmKNBdN2_nkOmr9PfX_0b=w@mail.gmail.com>
-	<20140217191334.GR22890@denix.org>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Mon, 17 Feb 2014 16:19:50 -0300
-Message-ID: <CAMCfZKGFdYeF=xEn8bj_r5oBTeUUM=zDkcVeL1xXbRdN4g5MiA@mail.gmail.com>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=LDqABgu4d64LJPk8roV9vc1hzhJHAZgevF6JQPJ5G1I=;
+	b=V+Y3bhuA15PL6lq5zY6dzSxe7mjvI94ia4dbyTH4IlexW8db1sXFZbf+WD/wa7Fbka
+	dznfYIN78t0dupOkEshK0pNkh0rhfG+fesJq4c2wrUI4fu1SLJm0jm/697sCRkYXq1VX
+	K0PRNCXDeh3CysZXUJwaStOxJx3xy6ZV2vFoMs1KuqM6BPMhR3s3rpSrYhzbP1SklbCe
+	SQwh2Fv9qpcFYXz2RcA7NrR778tFn3QysFS2x/aONu45nZC0eJaHwPzX6jSXoccQmBAU
+	ZLN5VTSVcLA6mioHgyhAv8q74GKw6sTmReXp3sR2Dh/gMx6tK8uu5DaA3+UIopM90mE8
+	2A6w==
+X-Received: by 10.224.14.2 with SMTP id e2mr5523284qaa.73.1392667546009;
+	Mon, 17 Feb 2014 12:05:46 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id d15sm38073513qaq.4.2014.02.17.12.05.44
+	for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Mon, 17 Feb 2014 12:05:45 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: mpeg2dec license
+Date: Mon, 17 Feb 2014 17:05:28 -0300
+Message-Id: <1392667529-4881-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH 1/2] qmake5_base.bbclass: Fix mkspec path when building nativesdk binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,42 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 19:20:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 Feb 2014 20:05:46 -0000
 
-Hi Denys,
+When building nativesdk binaries we ought to rely in the native
+mkspecs.
 
-On Mon, Feb 17, 2014 at 4:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ classes/qmake5_base.bbclass |    1 +
+ 1 file changed, 1 insertion(+)
 
-> LICENSE = "GPLv2+"
-> LICENSE_FLAGS = "commercial"
-> LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
->
-> file://include/mpeg2.h;beginline=1;endline=22;md5=ead62602d4638329d3b5b86a55803154"
->
->
-> http://cgit.openembedded.org/openembedded-core/commit/?id=43410523a07d9eb52a7d57ae3dc1cc320cbbc6f9
->
-> The code is still marked as GPLv2+, but the flag is set as commercial due
-> to
-> MPEG2 licensing agreement - basically, you are required to pay licensing
-> fees
-> to MPEG LA in order to use MPEG2 codec:
->
-> http://www.mpegla.com/main/programs/M2/Pages/Agreement.aspx
-> http://en.wikipedia.org/wiki/MPEG-2#Patent_pool
->
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 2db0fa3..3861cd0 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -4,6 +4,7 @@ QMAKE_MKSPEC_PATH_TARGET = "${STAGING_LIBDIR}/${QT_DIR_NAME}"
+ 
+ QMAKE_MKSPEC_PATH = "${QMAKE_MKSPEC_PATH_TARGET}"
+ QMAKE_MKSPEC_PATH_class-native = "${QMAKE_MKSPEC_PATH_NATIVE}"
++QMAKE_MKSPEC_PATH_class-nativesdk = "${QMAKE_MKSPEC_PATH_NATIVE}"
+ 
+ # hardcode linux, because that's what 0001-Add-linux-oe-g-platform.patch adds
+ OE_QMAKE_PLATFORM_NATIVE = "linux-oe-g++"
+-- 
+1.7.10.4
 
-Thanks for the explanation.
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
 
