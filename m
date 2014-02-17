@@ -1,36 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BBA06E786
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-ve0-f176.google.com (mail-ve0-f176.google.com
+	[209.85.128.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 09A5B6E786
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 22:44:57 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id at1so3424174iec.6
+	Mon, 17 Feb 2014 23:00:19 +0000 (UTC)
+Received: by mail-ve0-f176.google.com with SMTP id jx11so5451459veb.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 14:44:58 -0800 (PST)
+	Mon, 17 Feb 2014 15:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=2R3i7qE3liZ5cTyQWCcMGQCta+WDAfVEAAbwYEpiM38=;
-	b=Xetu7QBnXIpyvPXSn24dHpCoVni3Y7UefS9cDuiIKQIYhBAdNDrR845m8SVRzvrYpF
-	mjeQewvQTkKWaJFs02wdmoihBt3YQEYVafzAaiWAm8Yp8DOJGcSJOKQQ7ydXbiJGat4B
-	2S4jgtE0psl48AY6HvvMXZpY2jvtjiHWa6y9xD7jcYRPJf5dIanBUr7yDrUddb0QqUGx
-	V0oTBlW3UnsU+2xc9zdGE89D/JK1r8b3DltgC0FusHG1+bK80x9A7E4KQ4AYyOs4zecD
-	bSRh/B4dj/5ezef/EcTuQKxixrDCnk6228HQZFFY+U+Ub/uAv37rvUuxK5mIPG1Uzke8
-	GzDA==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=7zXpexRaw8lud8Z+IXL8HWymiyWuphh6vs9UBN65cpU=;
+	b=W3ZEiNoFXVIZh4dSeFcuYtkl7Oo++te5R1TVP37yntLKzwWS5PWSGpFPUbjUxNAN8U
+	4JHSJv6A6plGy4nF1paXsnrWHyDboz/+B1YXtnak/I1/SuA+WlGFXiQg6EpEy5AUELn0
+	01zFKSwR9rU0VIHadTT5xufK0wyeyXb4BgPx603dfP1+ds+7Y5QrDXMZ/lj2esUtcMqt
+	rsFkKOUAWpMhxuHq9HQ88z1VWkx5YMCCLayWRq52TRBS7HgNzGGqO7OShwDV7WBW8LDp
+	GuGNfj9s1a3slh9pb3tLWy3qTEyiChvDs9js1FuK6vGmQKUuYRSmTiFyyuoKcA/8Jqsf
+	Dvmg==
 MIME-Version: 1.0
-X-Received: by 10.50.20.100 with SMTP id m4mr18573731ige.17.1392677098429;
-	Mon, 17 Feb 2014 14:44:58 -0800 (PST)
-Received: by 10.50.224.137 with HTTP; Mon, 17 Feb 2014 14:44:58 -0800 (PST)
-Received: by 10.50.224.137 with HTTP; Mon, 17 Feb 2014 14:44:58 -0800 (PST)
-In-Reply-To: <CAP71Wjy4dxnDZFb3x_5zPg5HV-VOakeYtFz+8o0h2xk08R1=zQ@mail.gmail.com>
-References: <CAP71Wjy4dxnDZFb3x_5zPg5HV-VOakeYtFz+8o0h2xk08R1=zQ@mail.gmail.com>
-Date: Mon, 17 Feb 2014 14:44:58 -0800
-Message-ID: <CAMKF1sr6b1MNt4s08AmZKg02d79w9cM2DpqL3-u8OtpiP+S4kg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.52.168.39 with SMTP id zt7mr2526318vdb.42.1392678020046;
+	Mon, 17 Feb 2014 15:00:20 -0800 (PST)
+Received: by 10.52.169.99 with HTTP; Mon, 17 Feb 2014 15:00:20 -0800 (PST)
+Date: Mon, 17 Feb 2014 15:00:20 -0800
+Message-ID: <CAFeBWL67tUiY5BZ6Fp6dz5H00Y=smW+fvdS6dzz3A0scqaysuQ@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Andre McCurdy <andre.mccurdy@entropic.com>
-Subject: Re: [meta-qt5] why does Qt5 build with ARM_INSTRUCTION_SET = "arm"
+Subject: pam_gnome_keyring.so not getting packaged into my rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 22:44:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 17 Feb 2014 23:00:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
--Khem
-On Feb 17, 2014 1:28 PM, "Nicolas Dechesne" <nicolas.dechesne@linaro.org>
-wrote:
->
-> hi,
->
-> does anybody know why in Qt5/qtbase.inc, we have:
->
-> ARM_INSTRUCTION_SET = "arm"
+Hello everyone, my gdm logs in /var/log/gdm is complaining about these
+missing files:
 
-there were issues with thumb1 and i guess legacy continued may be its not
-needed any longer test it out and send a patch
-make sure that when its using thumb1 then current logic still kicks in
->
-> Could it be an a low hanging fruit from the past? e.g. before
-> https://bugreports.qt-project.org/browse/QTBUG-16402 or
->
-https://qt.gitorious.org/qt/qtbase/commit/a3bd9d4c0f3d9e80dbe35bd88649b245dca5f410
-?
->
-> as a matter of fact, for our project Qt5 (and QtWebkit) are building
-> (and working fine) when built with Thumb2, outside of OE. Also using
-> ARM instruction set instead of Thumb2 enforces Webkit to use the ARM
-> version of the javascript JIT, while the Thumb2 JIT engine seems to
-> work a lot better in our testing...
->
-> cheers
->
-> nico
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+- polkit-gnome-authentication-agent-1
+- ck-get-x11-display-device
+- pam_gnome_keyring.so
+
+The first two files are found in paths GDM wasn't aware of, so all I had to
+do was create symbolic links to
+/usr/lib/gdm/{polkit-gnome-authentication-agent-1,
+ck-get-x11-display-device}.
+
+The last file, pam_gnome_keyring.so, is not in my rootfs. The file gets
+generated and it's in my build directory however. I can create a bbappend
+to install this shared object into the rootfs, but I wanted to ask in the
+list to see if I missed something obvious.
+
+Thank you for your help!
+
+Adam
 
