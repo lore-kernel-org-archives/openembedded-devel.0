@@ -1,27 +1,38 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id A9CF96D14A
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FCFB6E839
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 17:38:29 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173025.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N1500JZFIBOATI0@vms173025.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	17 Feb 2014 11:38:12 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 46EF0200DD; Mon,
-	17 Feb 2014 12:38:11 -0500 (EST)
-Date: Mon, 17 Feb 2014 12:38:11 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20140217173811.GQ22890@denix.org>
+	Mon, 17 Feb 2014 17:45:26 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id v1so14306941yhn.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Feb 2014 09:45:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=7chc4AaEBAdOSFKjTm71MEqjB7SXqutUtaKDcYovIFA=;
+	b=OmU0p2zcMnyu7NDaqc4Ol1WSHZh4KT2hVwBubfa2IgvuNVZuZRmc+I+Wx195bTYnS0
+	ZbidsPi8qx2Qy1jKjXsNyf1k8Db6NMclWO635VhCd9ULIeiMuvCkRdmFhLGBiK7t+L1H
+	KkXHWIB6/jXmwa16k57y7KszagpCI5wA2tKTkHNvnGNtMfyb0NT+1ND3m72p8SLX2uqS
+	0KN/QzMAIpHi2QwPEpBl7+3vhCHAn/7Z0eTH3LzAllBgeaE7zsQxA3qHwatkgfQ0IJhe
+	MQRvbUCFajnV0nf+bCTOt/yQbvi/rvKgMsbY//cu5vvlVYFfJfm5qxVL5MthIDHDsebg
+	ogGw==
+MIME-Version: 1.0
+X-Received: by 10.236.121.162 with SMTP id r22mr23956411yhh.47.1392659126779; 
+	Mon, 17 Feb 2014 09:45:26 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Mon, 17 Feb 2014 09:45:26 -0800 (PST)
+In-Reply-To: <20140217173620.GP22890@denix.org>
 References: <1392411754-10608-1-git-send-email-otavio@ossystems.com.br>
-MIME-version: 1.0
-In-reply-to: <1392411754-10608-1-git-send-email-otavio@ossystems.com.br>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5][PATCH 1/2] nativesdk-qtbase: Fix install error in case install task is rerun
+	<1392411754-10608-2-git-send-email-otavio@ossystems.com.br>
+	<20140217173620.GP22890@denix.org>
+Date: Mon, 17 Feb 2014 14:45:26 -0300
+X-Google-Sender-Auth: z10R8CXR_NiT1fOggXfQW-_ykAw
+Message-ID: <CAP9ODKpgFR1uHe97v4zUBThoZfk1wRVdFAq=zzXFy8HNWdqVfA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 2/2] nativesdk-qtbase.inc: Remove unused contents
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,48 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2014 17:38:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 17 Feb 2014 17:45:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Feb 14, 2014 at 07:02:33PM -0200, Otavio Salvador wrote:
-> In case changes are done in do_install and the sstate checksums
-> change, the task would fail as the qmake binary has already been
-> replaced. Avoid this error checking for the original filename.
+On Mon, Feb 17, 2014 at 2:36 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Fri, Feb 14, 2014 at 07:02:34PM -0200, Otavio Salvador wrote:
+>> Fixes:
+>>
+>> ERROR: QA Issue: nativesdk-qtbase: Files/directories were installed but not shipped
+>>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib
+>>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/include
+>>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/share
+>>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Test.so
+>>   /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/lib/libQt5Network.so
+>>   ...
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> Acked-by: Denys Dmytriyenko <denys@ti.com>
 
-BTW, I was working on a different change in this area, which would do the 
-qmake swap in ${D} instead of ${B} - that way it would be safe to repeat 
-do_install if it fails and it would fix the above issue. Would you rather want 
-that change or keep yours?
+I applied it and found it broke the build afterwards. I fixed this one
+(will send the patch in some minutes) but this uncovered another issue
+I am working on now.
 
-
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->  recipes-qt/qt5/nativesdk-qtbase.inc |    6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
-> index c4ef6e8..36bc334 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
-> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-> @@ -178,8 +178,10 @@ do_install() {
->      find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
->  
->      # switch back the proper qmake
-> -    rm ${B}/bin/qmake
-> -    mv ${B}/bin/qmake-real ${B}/bin/qmake
-> +    if [ -e ${B}/bin/qmake-real ]; then
-> +        rm ${B}/bin/qmake
-> +        mv ${B}/bin/qmake-real ${B}/bin/qmake
-> +    fi
->  
->      oe_runmake install INSTALL_ROOT=${D}
->  
-> -- 
-> 1.7.10.4
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
