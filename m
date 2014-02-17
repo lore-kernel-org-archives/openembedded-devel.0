@@ -1,40 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 69E7B6EC51;
-	Sat, 15 Feb 2014 21:40:14 +0000 (UTC)
-Received: by mail-pb0-f48.google.com with SMTP id rr13so13697287pbb.21
-	for <multiple recipients>; Sat, 15 Feb 2014 13:40:15 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 863686E927
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Feb 2014 07:45:10 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id e53so6772498eek.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Feb 2014 23:45:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=Z33MTdrIBHHKUBtYXfTSZslqv99y2es0PvfcSc8Mh7w=;
-	b=WdSBl1EEz00BY1Od14kwwsxD4/WKTl0oG4teaBMQKIWX7oW/vInMOQNXvMfKQCZDKr
-	DNXXyc4Yyxveq/Mi+FSYV6zGxKNZsW5HVdXopt8wt19gEW3uj/OUffR7X8GrjKisTpMq
-	ruQaHdmh6/akQy9Lx55tnCzcUu8NQ8CJVwU2wr+GpsVl3KjK1RznXF8r5jCN3AfGUCb2
-	dgD+zBSu+y69WkYyumIloym9qZjYnrywpO/xE73OxW0CFcUphHu+nDUy+EJRch9MylkB
-	+v1eCvxhuwXYyceYkMQYUje35K2TP/X3A6rbEnWW0sJ/6ZS0nmSFLQt8alaFps129TOc
-	dL9A==
-X-Received: by 10.68.139.100 with SMTP id qx4mr17158789pbb.144.1392500415088; 
-	Sat, 15 Feb 2014 13:40:15 -0800 (PST)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30])
-	by mx.google.com with ESMTPSA id vf7sm30289525pbc.5.2014.02.15.13.40.13
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 15 Feb 2014 13:40:13 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
-Date: Sat, 15 Feb 2014 13:40:11 -0800
-Message-Id: <FEBAFA47-8E03-4C04-AF2A-D06F269E77D2@gmail.com>
-References: <CAMKF1srght3j6YgXJq-f+pzCnRCbWTEVuxuss5KjPthUaq+JTg@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Yocto list discussion <yocto@yoctoproject.org>
-X-Mailer: Apple Mail (2.1827)
-Subject: Re: Upcoming Bug blitz weekend ( Feb 21 - Feb 24)
+	h=date:from:to:cc:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=tAtUHeqk37PODnGJP80TeKXyGbEEuSkONiveRx82fRY=;
+	b=GCvJDEI7e3mH+x31jfvFwmMSe6AR3WklT9hn8SZBvudBl0JKd7iTEyKMt7q2olhB4c
+	8QMmha0N3nN3w8UqJKp1AcWeXeqM7uXHXMOrQxkv0X8Hr84QV1k7f6U+nFVLUjsivfU/
+	45q3upcjmLyumNXrMYkY/hHTvNhUDaAuSKvUoGcdkbTA6++hEJXB3wGEO8GOssRsKShR
+	X9KFQWJvtHQXTJ22A35Emxt4iJOXyZNnAwiBrhiDAMy94Fmsa0wiuugZgrjG7Ofahckq
+	gGVZeGFBGuTF0Yyp3d1M9I6MIpa8lhuaMrCi4ayAhk9goPbmtSSyokL3NFXpLGhv7Avp
+	kc7w==
+X-Received: by 10.15.64.4 with SMTP id n4mr16433eex.110.1392623110528;
+	Sun, 16 Feb 2014 23:45:10 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	g1sm54168939eet.6.2014.02.16.23.45.08 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 16 Feb 2014 23:45:09 -0800 (PST)
+Date: Mon, 17 Feb 2014 08:45:39 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Andrea Adami <andrea.adami@gmail.com>
+Message-ID: <20140217074539.GD4067@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: spitz linux-yocto 3.10 fails to patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,61 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2014 21:40:14 -0000
+X-List-Received-Date: Mon, 17 Feb 2014 07:45:10 -0000
+X-Groupsio-MsgNum: 48159
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WK3l2KTTmXPVedZ6"
+Content-Disposition: inline
+
+--WK3l2KTTmXPVedZ6
 Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Fellow Developers,
+Hi,
 
-Here I would like to remind us all that bug squash weekend is coming. In =
-addition to the bugs mentioned in bugzilla, if you are interested to fix
-bugs in other layers besides OE-Core then there are some world build =
-failures recorded on OE wiki
+is this known issue?
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+ERROR: Function failed: do_patch (log file is located at /OE/build/shr-core=
+/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8a=
+f5a3b1_3e0a296fae-r0/temp/log.do_patch.25528)
+ERROR: Logfile of failure stored in: /OE/build/shr-core/tmp-eglibc/work/spi=
+tz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae-r0=
+/temp/log.do_patch.25528
+Log data follows:
+| DEBUG: Executing shell function do_patch
+| Deleted branch meta-temp (was f58e62b).
+| ERROR: could not find file cfg/serial-8250.cfg, included from /OE/build/s=
+hr-core/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOI=
+NC+8f8af5a3b1_3e0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/m=
+eta-handheld/recipes-kernel/linux/linux-yocto-3.10/zaurus-common.scc
+| ERROR: could not process input files: /OE/build/shr-core/tmp-eglibc/work/=
+spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae=
+-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld/recipes-ker=
+nel/linux/linux-yocto-3.10/spitz/spitz-standard.scc /OE/build/shr-core/tmp-=
+eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b=
+1_3e0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld=
+/recipes-kernel/linux/linux-yocto-3.10/feature-top.scc
+| ERROR. A meta series could not be created for /OE/build/shr-core/tmp-egli=
+bc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e=
+0a296fae-r0/linux/.meta/cfg/scratch/obj/OE/build/shr-core/meta-handheld/rec=
+ipes-kernel/linux/linux-yocto-3.10/spitz/spitz-standard.scc
+| ERROR. Could not locate meta series for spitz
+| ERROR. Could not apply patches for spitz.
+|        Patch failures can be resolved in the devshell (bitbake -c devshel=
+l linux-yocto)
+| WARNING: /OE/build/shr-core/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-=
+yocto/3.10.28+gitAUTOINC+8f8af5a3b1_3e0a296fae-r0/temp/run.do_patch.25528:1=
+ exit 1 from
+|   exit 1
+| ERROR: Function failed: do_patch (log file is located at /OE/build/shr-co=
+re/tmp-eglibc/work/spitz-oe-linux-gnueabi/linux-yocto/3.10.28+gitAUTOINC+8f=
+8af5a3b1_3e0a296fae-r0/temp/log.do_patch.25528)
+ERROR: Task 3 (/OE/build/shr-core/openembedded-core/meta/recipes-kernel/lin=
+ux/linux-yocto_3.10.bb, do_patch) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 387 tasks of which 382 didn't need to be rer=
+un and 1 failed.
 
-The links to failures logs are towards the end in above document.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Thanks
--Khem
+--WK3l2KTTmXPVedZ6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-On Feb 5, 2014, at 9:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
+iEYEARECAAYFAlMBviMACgkQN1Ujt2V2gBxVQACgpOcHk+4ucTvHyhKmXYhRRCa8
+L/AAoI10eA2lh5TcTi0/Vx5kCH8tqwnW
+=UjOh
+-----END PGP SIGNATURE-----
 
-> Hi All
->=20
-> I would like to invite everyone to the bug fixing weekend which is
-> coming in 3 weeks from Feb 21 to Feb 24
->=20
-> Bugs in NEW status for OE-Core & related categories:
->=20
-> http://tinyurl.com/pu8vlaf
->=20
-> All bugs/enhancements in NEW status in interesting categories:
->=20
-> http://tinyurl.com/pjhrpwr
->=20
-> Please feel free to pick any of the bugs which you are interested in
-> and has no owner assigned to it
-> or no one committed to it in comments or so. If there is a doubt
-> please add a comment to bug or send email to existing assignee to
-> coordinate your fix.
->=20
-> Please assign the bugs to yourself beforehand and set the status to =
-ACCEPTED
->=20
-> This is a potential list but not exhaustive, you are free to pick any
-> bugs that are not listed here
-> and fix them,
->=20
-> I also think it will be good to utilize IRC channel during the bug
-> blitz weekend for communicating
-> to supplement emails and mailing list communications
->=20
-> I will send the reminders of the event as we come close to it.
->=20
-> Looking forward to it
->=20
-> -Khem
-
-
+--WK3l2KTTmXPVedZ6--
