@@ -1,34 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 2937A6E8A6
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f44.google.com (mail-yh0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id A5F9F6EB0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 15:36:39 +0000 (UTC)
-Received: by mail-ea0-f174.google.com with SMTP id z10so4553733ead.5
+	Tue, 18 Feb 2014 17:01:53 +0000 (UTC)
+Received: by mail-yh0-f44.google.com with SMTP id f73so15731796yha.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 07:36:39 -0800 (PST)
+	Tue, 18 Feb 2014 09:01:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=cyOISUWnaQR2njTT5M3okvObOoBky0KY4SJvOgIH2lI=;
-	b=YWTNAHQGiqKIa+GWnTROmeLrPeQaW8PngOSXnZSdJwHSx52j48ADKHE0z8Du3EjXnO
-	QZy/njqAZzrXnMB8Oj5POYdumaWpLjvEIzehHPWN0q5feZup4+J+J1mryruX8/hVqCiU
-	CX1lEv5p3qv4McgTDjYXNBNDAFvlbi+8pUVnJJcle9wDah79DnkDX3uApAg50MtC8oe3
-	Bcrd2WoyTEWxo3DJBQFreaxttGpz4CzD+NvTxpp7W2LZg31R3ak6HwdGr16GwoGZh+m3
-	NkelxISjaCp0oq+ld714WUpkYq0fqN0ezu5n8PBGTbbXbm7pHZPVKsbb9ptSvU+PGVZm
-	glYw==
-X-Received: by 10.15.44.202 with SMTP id z50mr4760419eev.81.1392737799659;
-	Tue, 18 Feb 2014 07:36:39 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	y47sm71534938eel.14.2014.02.18.07.36.36 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Feb 2014 07:36:38 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2014 16:37:05 +0100
-Message-Id: <1392737825-11241-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.5.3
-Subject: [meta-qt5][PATCH] qtbase-native: explicitly disable icu
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=x86Q3GwsSwtd6qfEfZ1jBzm3sSycVjifw/KCwakMB4w=;
+	b=z+iWiw56hwmymGhR2psC49CnSp94JB7CxVxFjChXSAZpfcIjeY2frvzHFawwEMIi7Y
+	s2b8hhkqb/v/QMepIIpd2ZrGaISyTgS7ondiiZ3dswdDopoeWRWZxmI5k23icWcz5muk
+	vkvhM9WzxUvkFdaVlcEcfh9m8Yr95eftFqXNwf9A70n6PlcSmxxkC80yy8I45M0zYLhY
+	jeJ2lEgYDJ8xboUyMhHcHINV3CKRuQPQ6UgLehCY+HBlNmjyBDfptE9xepUaK5v4f6NA
+	jCL7+5G9Hv8rht4v/N5TVy4TildxWxMIzT8e/TeNvgD99Wws1Luu0Hl9SxcsCu1cXWGO
+	/SEg==
+MIME-Version: 1.0
+X-Received: by 10.236.98.39 with SMTP id u27mr36240916yhf.27.1392742914155;
+	Tue, 18 Feb 2014 09:01:54 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Tue, 18 Feb 2014 09:01:53 -0800 (PST)
+In-Reply-To: <1392737825-11241-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1392737825-11241-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 18 Feb 2014 14:01:53 -0300
+X-Google-Sender-Auth: kxzQrrnmduOOj7Wza26TIMHEAmY
+Message-ID: <CAP9ODKpd-pW2pJoDMw65w2=XYh_KGKhU-jpoj1psD3s=X8S4oQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtbase-native: explicitly disable icu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,30 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 15:36:39 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 17:01:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Jonathan Liu reported that qtbase-native was failing to build for him
-  and it looks like qtbase-native was trying to link against icu from his
-  host (instead of icu-native because it isn't in DEPENDS)
+On Tue, Feb 18, 2014 at 12:37 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * Jonathan Liu reported that qtbase-native was failing to build for him
+>   and it looks like qtbase-native was trying to link against icu from his
+>   host (instead of icu-native because it isn't in DEPENDS)
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtbase-native.inc | 1 +
- 1 file changed, 1 insertion(+)
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
-index b9193e4..860bc29 100644
---- a/recipes-qt/qt5/qtbase-native.inc
-+++ b/recipes-qt/qt5/qtbase-native.inc
-@@ -51,6 +51,7 @@ EXTRA_OECONF = " \
-     -no-opengl \
-     -no-openssl \
-     -no-xcb \
-+    -no-icu \
-     -verbose \
-     -release \
-     -prefix ${OE_QMAKE_PATH_PREFIX} \
 -- 
-1.8.5.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
