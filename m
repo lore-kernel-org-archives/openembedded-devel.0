@@ -1,34 +1,33 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vc0-f171.google.com (mail-vc0-f171.google.com
-	[209.85.220.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 957FD6D14A
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D1B06F0E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 02:04:26 +0000 (UTC)
-Received: by mail-vc0-f171.google.com with SMTP id le5so12531322vcb.16
+	Tue, 18 Feb 2014 05:33:10 +0000 (UTC)
+Received: by mail-qc0-f175.google.com with SMTP id x13so24709389qcv.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2014 18:04:27 -0800 (PST)
+	Mon, 17 Feb 2014 21:33:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=9FkJMBv5XEZ/HC9dy7tz6KL0DNFhtXeceoMlCEiRgvI=;
-	b=pitCxwe2MvmoqQv0ljoMx0UX1QbQrRjK0GHebLpiYiTXYGGt8oyQ3zYbmPOcKdTK+a
-	Qlk7ekyz85JGG9JZzyTbhuPIgd/+A6VKdiLy7lu0/z5AsQ1qgE5M4eOPV1MMJoZV1wUV
-	I4tPlR+ZAy931AC9GnWhuUWerusdat2wgTe+apSjTgjcDOXkEzRgJoIKRoX7XSL19cde
-	sHQ9puZOhisxONxNVdZFOWgYN1oFIxIs3bdb/1JDj58hCtxmDw+qaTo7MHWpWVC3BoQi
-	uRlZKDYzvYxuqOE0njtIHemH0WaBfEi6a/wm5+VYB9aGEWtAz4CR0p8sod39+KB4E+kE
-	ytcQ==
+	:content-type; bh=lW5X1M0Ubz4SK+I8GuDuEYBzRAeqCep4VF1riova7IA=;
+	b=BcbIhUpKtydHTHodYD8ZNPV3ae2lOoq7QstRDa8WJbkRDUhS5CSmIdq2GO4u+e7HFu
+	ETsUvZT8RGmFjbaMWAOW8efG6o8djvrp62cO8njGGKKFaZtrBLEWv7KzabW2kXv/ZHxD
+	UmXnRZExf3EU0IDLmWq/pn/Gc1Tw+TSHPHc1z/omHEY6YyZNKm1BtMi7LUVcvftLpAOv
+	DyRq+9KWyVP83vHgrfNoTieQRf781mrslfCMapFRgVGpDUUSSaPZxsro1PNyEOfkNlz/
+	5f5qHvGvu9B7qE4uA1Ny5TF/4CE7b3XT93Fkl0+jqI8EBlPZZMOXBnk52q4UOL2P9FgX
+	hlKw==
 MIME-Version: 1.0
-X-Received: by 10.52.37.103 with SMTP id x7mr2686vdj.75.1392689066983; Mon, 17
-	Feb 2014 18:04:26 -0800 (PST)
-Received: by 10.52.169.99 with HTTP; Mon, 17 Feb 2014 18:04:26 -0800 (PST)
-In-Reply-To: <CAFeBWL67tUiY5BZ6Fp6dz5H00Y=smW+fvdS6dzz3A0scqaysuQ@mail.gmail.com>
-References: <CAFeBWL67tUiY5BZ6Fp6dz5H00Y=smW+fvdS6dzz3A0scqaysuQ@mail.gmail.com>
-Date: Mon, 17 Feb 2014 18:04:26 -0800
-Message-ID: <CAFeBWL5CeF69bJ+rzt0srJ02U6rjwDRzofnRzSkA_S6ktQgHGw@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: pam_gnome_keyring.so not getting packaged into my rootfs
+X-Received: by 10.229.119.73 with SMTP id y9mr7800233qcq.18.1392701591023;
+	Mon, 17 Feb 2014 21:33:11 -0800 (PST)
+Received: by 10.96.5.70 with HTTP; Mon, 17 Feb 2014 21:33:10 -0800 (PST)
+In-Reply-To: <20140217230307.GE4067@jama>
+References: <CAP71Wjy4dxnDZFb3x_5zPg5HV-VOakeYtFz+8o0h2xk08R1=zQ@mail.gmail.com>
+	<20140217214623.GU22890@denix.org> <20140217230307.GE4067@jama>
+Date: Mon, 17 Feb 2014 21:33:10 -0800
+Message-ID: <CAJ86T=XEkEEMn-Tu=Ja4-1C5o=Ur7LdnsoN-RYskz_W_V0t2Rw@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5] why does Qt5 build with ARM_INSTRUCTION_SET = "arm"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,43 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 02:04:27 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 05:33:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Just learned ConsoleKit is no longer maintained and is replaced by
-Systemd's Logind (http://www.freedesktop.org/wiki/Software/ConsoleKit/).
-Judging by the fact that GDM still relies on ck (ck-get-x11-display-device
-handle), I am inclined to say OE's gdm recipe is not up to date.
-However I am not too familiar with the scene and I may have missed details.
+On Mon, Feb 17, 2014 at 3:03 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Feb 17, 2014 at 04:46:23PM -0500, Denys Dmytriyenko wrote:
+>> On Mon, Feb 17, 2014 at 02:27:51PM -0700, Nicolas Dechesne wrote:
+>> > hi,
+>> >
+>> > does anybody know why in Qt5/qtbase.inc, we have:
+>> >
+>> > ARM_INSTRUCTION_SET = "arm"
+>> >
+>> > Could it be an a low hanging fruit from the past? e.g. before
+>> > https://bugreports.qt-project.org/browse/QTBUG-16402 or
+>> > https://qt.gitorious.org/qt/qtbase/commit/a3bd9d4c0f3d9e80dbe35bd88649b245dca5f410?
+>>
+>> Hmm, I would assume that's here from 4.8 days, although I haven't tried
+>> dropping that line for latest Qt5... Would make sense to do some more testing.
+>>
+>> > as a matter of fact, for our project Qt5 (and QtWebkit) are building
+>> > (and working fine) when built with Thumb2, outside of OE. Also using
+>> > ARM instruction set instead of Thumb2 enforces Webkit to use the ARM
+>> > version of the javascript JIT, while the Thumb2 JIT engine seems to
+>> > work a lot better in our testing...
+>>
+>> Seems like worth the effort to re-test the need for that setting. Unless
+>> someone else has tried it already and found out the issue is still there
+>
+> IIRC it was failing to build for armv4t (at least with 5.0.0) if someone
+> tests that armv4t builds with 5.2.*, I'll accept the patch.
 
-Any clarification on this?
+With ARM_INSTRUCTION_SET forced to thumb I'm able to build qtbase
+5.1.1 and 5.2.1 tuned for both armv4t and cortexa9thf-neon.
 
-Adam
-
-
-On Mon, Feb 17, 2014 at 3:00 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
-
-> Hello everyone, my gdm logs in /var/log/gdm is complaining about these
-> missing files:
->
-> - polkit-gnome-authentication-agent-1
-> - ck-get-x11-display-device
-> - pam_gnome_keyring.so
->
-> The first two files are found in paths GDM wasn't aware of, so all I had
-> to do was create symbolic links to
-> /usr/lib/gdm/{polkit-gnome-authentication-agent-1,
-> ck-get-x11-display-device}.
->
-> The last file, pam_gnome_keyring.so, is not in my rootfs. The file gets
-> generated and it's in my build directory however. I can create a bbappend
-> to install this shared object into the rootfs, but I wanted to ask in the
-> list to see if I missed something obvious.
->
-> Thank you for your help!
->
-> Adam
->
->
->
+Andre
+--
 
