@@ -1,34 +1,35 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 516396E8E1
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
+	[209.85.216.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 229916E8E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 13:54:56 +0000 (UTC)
-Received: by mail-yh0-f41.google.com with SMTP id f73so15402759yha.14
+	Tue, 18 Feb 2014 14:10:49 +0000 (UTC)
+Received: by mail-qc0-f182.google.com with SMTP id c9so25380589qcz.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 05:54:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=CDsK1fdDlllYfcy5Bzb1i+D+TNZgTD27fW8p9Bs+1Ow=;
-	b=hbpl0gr2sppad0RQ96tEVukNd+3IeouNKj1Je+QgLpSiSNxWhKve9OlIBHapLePcER
-	QUFeXEfmRps+dBj2i3rD6fhGsOB4XJAvlgfOo5fPJrv/Rl4192nxMX3bGF91jiY98Oil
-	/Z8dvw1TYoYehcZmQEOSjxXPn6sIKJLkOAWSivNUiiV/MZ9Rzg+4ZEh3VmVRqy5Dtwfo
-	O6Vjsc0MdiTnJBQ+dXspOaS5IH8PHWQ2/M5GnpyfwLyam4t3sC9qQf3qI9/Hi0g1ies7
-	KoSbXis9E42Wb2dk3aaL8LEidAIlxnC1LFc4Ri2FOZb+v7pysI9s6FLHC4sNvG3Bpokr
-	U2jw==
-X-Received: by 10.236.74.162 with SMTP id x22mr3821196yhd.131.1392731697170;
-	Tue, 18 Feb 2014 05:54:57 -0800 (PST)
-Received: from localhost.localdomain ([201.82.73.213])
-	by mx.google.com with ESMTPSA id q9sm59219244yhk.16.2014.02.18.05.54.55
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Feb 2014 05:54:56 -0800 (PST)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2014 10:54:41 -0300
-Message-Id: <1392731681-6149-1-git-send-email-diego.sueiro@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-openembedded][PATCH] libao: Add PACKAGECONFIG for esound support
+	Tue, 18 Feb 2014 06:10:49 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=Qiq2/nY9vwVkVMcn8Dvg38uLCU0x9zQE46y85cD/nqc=;
+	b=PJLF274/H4tbccJFCKJaQvNOTmGdCIxit1eSpjF+Kx3oJNEDFy5/OJjGM2zLwVwNql
+	h9QqVcmzLiApJVZF6bxBDQP0Edu6fE+euKIeuaDo0LH57KFPAozfquTag0ZCfO+1w0ez
+	474YARKqe/By6xPPiN5WI/BBm7Y7KRzBZRg5eaF6nzqq2Hc31r6M3bWsWbr6eOEv7XgX
+	d3IaECRBuYyj3//Hga3aWdUc/ehrwFw2RnwbgbOUh17OmBj14BzLI8umWMsTH6W7QTBz
+	s7AEGUj/7ErTyDE/GacBGvGyoxbK6q6wgI9nZKsBeuFx0NJrUGvvsESGxSL6OfYZ0L8+
+	Sicw==
+X-Gm-Message-State: ALoCoQkTBRQrr97m60A6/za8aM2XDnCgxkrXUy5x3ztdUFpoiaAXxVX+bnikNPWUxBwv3x/Z0Ziz
+X-Received: by 10.224.45.197 with SMTP id g5mr43192316qaf.52.1392732649421;
+	Tue, 18 Feb 2014 06:10:49 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.48.79 with HTTP; Tue, 18 Feb 2014 06:10:29 -0800 (PST)
+In-Reply-To: <1392731681-6149-1-git-send-email-diego.sueiro@gmail.com>
+References: <1392731681-6149-1-git-send-email-diego.sueiro@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 18 Feb 2014 14:10:29 +0000
+Message-ID: <CAJTo0LYn3t67V_u=SA5KT0Ooj616SCHOUH-8qv+=TBONzrCptA@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openembedded][PATCH] libao: Add PACKAGECONFIG for esound support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,28 +43,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 13:54:56 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 14:10:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-libao compiling is failing because of a dependency on esound.
-Adding PACKAGECONFIG to fix the issue.
+On 18 February 2014 13:54, Diego Sueiro <diego.sueiro@gmail.com> wrote:
+> +PACKAGECONFIG ?= ""
 
-Signed-off-by: Diego Sueiro <diego.sueiro@gmail.com>
----
- meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb |    3 +++
- 1 file changed, 3 insertions(+)
+Shouldn't that be "??=" ?
 
-diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-index efd5ec3..1ca140a 100644
---- a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-@@ -23,3 +23,6 @@ python populate_packages_prepend () {
-     do_split_packages(d, rootdir, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s', description='AO %s plugin')
-     do_split_packages(d, rootdir_dbg, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s-dbg', description='AO %s plugin debug data')
- }
-+
-+PACKAGECONFIG ?= ""
-+PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
--- 
-1.7.10.4
-
+Ross
 
