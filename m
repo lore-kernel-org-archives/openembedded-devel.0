@@ -1,37 +1,33 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
-	[209.85.160.45])
-	by mail.openembedded.org (Postfix) with ESMTP id C7E996EEE6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DA0E6D14A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 08:01:57 +0000 (UTC)
-Received: by mail-pb0-f45.google.com with SMTP id un15so16349063pbc.18
+	Tue, 18 Feb 2014 10:26:03 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id e53so7694155eek.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 00:01:58 -0800 (PST)
+	Tue, 18 Feb 2014 02:26:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=S6OetpOHH8yHAGQcdbracMRDe8q5fwKQWYt+HIfRRvY=;
-	b=WaVkb0fKDtZlJn75nUOd0uI64bZxMboe5kK08G6qjRvB/OJIXpxUAtDYBCTe9/96po
-	YMqPhaHXrwLM1NwJjXlZJU/rBCaSA+HpuLPwPQy554wZGI4xXM5mL63j1Imh79iZBQCt
-	UXiH5ILpLhkmBoMQTP3DgkCBMO7NbG6w++wWtVow98Wc1dAg0KP97yAtPFyDAd9D6you
-	uDTKG8CaW/iJvGVJSJUFVCp+nf2p65jGIZXLfMw2LqZOZmtcbZIq2w9b8MEehk+WMWci
-	HbTDrRgVOz9R1F25qmUwNSEUkj4paby6sd25faLFW53R+0wmryfDFdj+5qIdWcUy/4n0
-	g5rg==
-X-Received: by 10.66.26.176 with SMTP id m16mr8673540pag.142.1392710518792;
-	Tue, 18 Feb 2014 00:01:58 -0800 (PST)
-Received: from t420s.gateway.sonic.net (173-228-90-200.dsl.dynamic.sonic.net.
-	[173.228.90.200])
-	by mx.google.com with ESMTPSA id ja8sm53140007pbd.3.2014.02.18.00.01.56
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Feb 2014 00:01:57 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=oAy3eEex/6Ud6BA9AKmFEinI0+YMd0EbPzM30Q2332s=;
+	b=BH7T+jsm9omhjDF+rbUPc/dwecGIPoihXpe87LGIs7DhSwKEiDGzjEslpe6o1xUROg
+	+85yUuCEH08kBW23bXo1IVP4ZqXdDn3hF4lTqiVXhOZ6zyUKvQZPHORfC5exquY44PZp
+	nGIhWLtFxMr8WufSJ+YuH2tzTqq7qsMZzPPEpWIf3x4kcgmNer+/2mgOCe192W/6BE09
+	mUmkysitlwI/sSs+s16dOjVxUC84L7fScCE94Hs/B6kXJ92qZ3TrRgb2ig2/g3ZqxX9L
+	ABAWcAMMmW1kiwmAACUDOKCH3UZN4vCIA85jMJ40DnHHRD2WTYsE7rvXrX8mHjkIbXKG
+	HLgQ==
+X-Received: by 10.15.55.193 with SMTP id v41mr3182987eew.80.1392719162856;
+	Tue, 18 Feb 2014 02:26:02 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	o43sm68443960eef.12.2014.02.18.02.25.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Feb 2014 02:26:01 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2014 00:01:28 -0800
-Message-Id: <1392710488-7191-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <20140218065625.GG4067@jama>
-References: <20140218065625.GG4067@jama>
-Subject: [meta-qt5][PATCH] qtbase.inc: don't force ARM_INSTRUCTION_SET to arm
+Date: Tue, 18 Feb 2014 11:26:25 +0100
+Message-Id: <1392719185-11585-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-qt5][PATCH] qtbase: add PACKAGECONFIG for mtdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 08:01:57 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 10:26:03 -0000
 
-Forcing ARM_INSTRUCTION_SET to arm when building qtbase no longer
-seems to be required.
-
-Confirmed by forcing ARM_INSTRUCTION_SET to thumb and building
-qtbase 5.1.1 and 5.2.1 tuned for both armv4t and cortexa9thf-neon.
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtbase.inc | 3 ---
- 1 file changed, 3 deletions(-)
+ recipes-qt/qt5/qtbase.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index f056393..ff62297 100644
+index 4c1c6dd..116c86f 100644
 --- a/recipes-qt/qt5/qtbase.inc
 +++ b/recipes-qt/qt5/qtbase.inc
-@@ -126,9 +126,6 @@ QT_CONFIG_FLAGS += " \
-     ${EXTRA_OECONF} \
- "
- 
--# Qt uses atomic instructions not supported in thumb mode
--ARM_INSTRUCTION_SET = "arm"
--
- do_generate_qt_config_file_append() {
-     cat >> ${QT_CONF_PATH} <<EOF
- 
+@@ -101,6 +101,7 @@ PACKAGECONFIG[openvg] = "-openvg,-no-openvg"
+ PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
+ PACKAGECONFIG[xkb] = "-xkb,-no-xkb,libxkbcommon"
+ PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
++PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
+ # depends on glib
+ PACKAGECONFIG[fontconfig] = "-fontconfig,-no-fontconfig,fontconfig"
+ PACKAGECONFIG[gtkstyle] = "-gtkstyle,-no-gtkstyle,gtk+"
 -- 
-1.8.1.2
+1.8.5.3
 
 
