@@ -1,34 +1,34 @@
 Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f180.google.com (mail-qc0-f180.google.com
-	[209.85.216.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9ACB36E8E1
+Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 516396E8E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 13:54:03 +0000 (UTC)
-Received: by mail-qc0-f180.google.com with SMTP id i17so25246078qcy.25
+	Tue, 18 Feb 2014 13:54:56 +0000 (UTC)
+Received: by mail-yh0-f41.google.com with SMTP id f73so15402759yha.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 05:54:04 -0800 (PST)
+	Tue, 18 Feb 2014 05:54:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=howBmMakBVIIwprws2q7rJoWtpGqCpvLQEb4BYc7t2M=;
-	b=rKbxV3ZnAdQKoHSLa0lMXgh/oKJVnJRz0znItB2pmUVvIu9K3RaDQdh8oLsd5fnncs
-	dAhfvXmXE/g26tu8dqCqp+n+WKN/wZVZrV0x891rzAIr7piEV7fo1HrBmzNQec73qFg1
-	rMmOlfYrjBmZmMBZigfiZl/7jiBlDQ+Lo4XHoNQUXO8XAEACdIe/trI8mtxrvbfnOE4H
-	k/oUWhd6p8ikRU0RKJ9NX6oxwEURDZ4H7hyaQg1J6ViFxaGOw3FjWsAmnf61fQ9VMeQa
-	wSBLpH9f5Q0+BCQbc6LrKHuPPD+DKg9ge74zLs7N6VVIbKLDPazVBREbhKm44rF815rD
-	l7NA==
-X-Received: by 10.224.5.136 with SMTP id 8mr43369742qav.42.1392731644396; Tue,
-	18 Feb 2014 05:54:04 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 18 Feb 2014 05:53:44 -0800 (PST)
-In-Reply-To: <1392731525-6096-1-git-send-email-diego.sueiro@gmail.com>
-References: <1392731525-6096-1-git-send-email-diego.sueiro@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=CDsK1fdDlllYfcy5Bzb1i+D+TNZgTD27fW8p9Bs+1Ow=;
+	b=hbpl0gr2sppad0RQ96tEVukNd+3IeouNKj1Je+QgLpSiSNxWhKve9OlIBHapLePcER
+	QUFeXEfmRps+dBj2i3rD6fhGsOB4XJAvlgfOo5fPJrv/Rl4192nxMX3bGF91jiY98Oil
+	/Z8dvw1TYoYehcZmQEOSjxXPn6sIKJLkOAWSivNUiiV/MZ9Rzg+4ZEh3VmVRqy5Dtwfo
+	O6Vjsc0MdiTnJBQ+dXspOaS5IH8PHWQ2/M5GnpyfwLyam4t3sC9qQf3qI9/Hi0g1ies7
+	KoSbXis9E42Wb2dk3aaL8LEidAIlxnC1LFc4Ri2FOZb+v7pysI9s6FLHC4sNvG3Bpokr
+	U2jw==
+X-Received: by 10.236.74.162 with SMTP id x22mr3821196yhd.131.1392731697170;
+	Tue, 18 Feb 2014 05:54:57 -0800 (PST)
+Received: from localhost.localdomain ([201.82.73.213])
+	by mx.google.com with ESMTPSA id q9sm59219244yhk.16.2014.02.18.05.54.55
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 18 Feb 2014 05:54:56 -0800 (PST)
 From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 18 Feb 2014 10:53:44 -0300
-Message-ID: <CAMCfZKHfhkeu79f50-gFoVB5gzLSsYYdcgNpHHVwwgSnOHkgBA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [dora][meta-openembedded][PATCH] libao: Add PACKAGECONFIG for esound support
+Date: Tue, 18 Feb 2014 10:54:41 -0300
+Message-Id: <1392731681-6149-1-git-send-email-diego.sueiro@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-openembedded][PATCH] libao: Add PACKAGECONFIG for esound support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,47 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 13:54:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 Feb 2014 13:54:56 -0000
 
-On Tue, Feb 18, 2014 at 10:52 AM, Diego Sueiro <diego.sueiro@gmail.com>wrote:
+libao compiling is failing because of a dependency on esound.
+Adding PACKAGECONFIG to fix the issue.
 
-> ibao compiling is failing because of a dependency on esound.
-> Adding PACKAGECONFIG to fix the issue.
->
-> Signed-off-by: Diego Sueiro <diego.sueiro@gmail.com>
-> ---
->  meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb |    3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bbb/meta-multimedia/recipes-multimedia/libao/
-> libao_1.1.0.bb
-> index efd5ec3..1ca140a 100644
-> --- a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
-> @@ -23,3 +23,6 @@ python populate_packages_prepend () {
->      do_split_packages(d, rootdir, '^(.*)\.so
-> , output_pattern='${BPN}-plugin-%s', description='AO %s plugin')
->      do_split_packages(d, rootdir_dbg, '^(.*)\.so,
-> output_pattern='${BPN}-plugin-%s-dbg', description='AO %s plugin debug
-> data')
->  }
-> +
-> +PACKAGECONFIG ?= ""
-> +PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
+Signed-off-by: Diego Sueiro <diego.sueiro@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb |    3 +++
+ 1 file changed, 3 insertions(+)
 
+diff --git a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
+index efd5ec3..1ca140a 100644
+--- a/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
++++ b/meta-multimedia/recipes-multimedia/libao/libao_1.1.0.bb
+@@ -23,3 +23,6 @@ python populate_packages_prepend () {
+     do_split_packages(d, rootdir, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s', description='AO %s plugin')
+     do_split_packages(d, rootdir_dbg, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s-dbg', description='AO %s plugin debug data')
+ }
++
++PACKAGECONFIG ?= ""
++PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
+-- 
+1.7.10.4
 
-The email subject is wrong. Sorry about that.
-I'm going to send another one.
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-
-/*long live rock 'n roll*/
 
