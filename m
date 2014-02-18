@@ -1,34 +1,36 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f176.google.com (mail-qc0-f176.google.com
-	[209.85.216.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 40C7B6E9F6
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E7E4E6E8A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 14:28:40 +0000 (UTC)
-Received: by mail-qc0-f176.google.com with SMTP id e16so25294224qcx.21
+	Tue, 18 Feb 2014 14:58:39 +0000 (UTC)
+Received: by mail-yh0-f51.google.com with SMTP id t59so15440214yho.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 06:28:40 -0800 (PST)
+	Tue, 18 Feb 2014 06:58:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Vq2+W+MEdSsArvvTNIYLCsZDZErRc3bWsNxPWF291wM=;
-	b=xtMCaU6aMiaijut5PULpXx4wz5HFtEtJg2UlXAwCcC2rPNmhDMrWzjOShTDvHHH8dT
-	GhdyOVqHNeguAQr0le4G5VytTW83cztwtyi5P8Pu0ophU0hzPMYqx0DSdIRDfY2X63Rd
-	6i4OOvVyoblMawpLavS+CCUqNFG2TL5r+EP6ZM+CZgJtp5nsoLLhoS71E/omdXRAOG8F
-	yY5cePf8HV72ON6rlk06Yro54Mxbm8BS3EujbttATvQwzP0v1tiEWm2DR5YabTZAQ3kf
-	SzOY9Tt5jA/QUgno9hTSB7iaw9FkKZha+mF/PpEMKHNyO5izUgIUAvV3Ln55Rvnollxc
-	XNLA==
-X-Received: by 10.140.35.211 with SMTP id n77mr10050745qgn.82.1392733720436;
-	Tue, 18 Feb 2014 06:28:40 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=HNNQfk9Q7+M/pnFBe/zEyAw2b7z6pT8aTBpJQFzP/Dc=;
+	b=ne14XW3yzX/Po5lQ+aHIQ6pV4Qt19lMz6iK0HPgccCbOJvfGsxJOJmKSfvrpXABJiQ
+	AR/ydS/DjFNYqJRuniddQKttSLHdQjNz6UxG7O7WWv+ZM8aUJeEW4+p1LJKLecfIuWDV
+	DOc/Pn2Az9A9NMPbFwagGDCJMjaHetN4aqYndN57NTP+KyaFktGKZKmQIA+Fr4I17Q5O
+	wsI1nyN5TfeyyUhHq6pwrpufAGmpmvVOHMuJA0OXvHzhose6FIxa59T6Sg53+sJgmamn
+	WLTeHD1OldWSRWI/DmNuBNj2Sb6/WpOEk6M8MpQ32jehwOYnHNJK4OqS439QgmQllQBN
+	rzlA==
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 18 Feb 2014 06:28:20 -0800 (PST)
-In-Reply-To: <CAJTo0LYn3t67V_u=SA5KT0Ooj616SCHOUH-8qv+=TBONzrCptA@mail.gmail.com>
-References: <1392731681-6149-1-git-send-email-diego.sueiro@gmail.com>
-	<CAJTo0LYn3t67V_u=SA5KT0Ooj616SCHOUH-8qv+=TBONzrCptA@mail.gmail.com>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 18 Feb 2014 11:28:20 -0300
-Message-ID: <CAMCfZKEPS_2xstq+x_Tpi-PjAGyxChmJ+JnACgBL_euPtQYPSA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-openembedded][PATCH] libao: Add PACKAGECONFIG for esound support
+X-Received: by 10.236.5.174 with SMTP id 34mr24132789yhl.48.1392735520025;
+	Tue, 18 Feb 2014 06:58:40 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Tue, 18 Feb 2014 06:58:39 -0800 (PST)
+In-Reply-To: <1392671102-13391-1-git-send-email-denis@denix.org>
+References: <1392671102-13391-1-git-send-email-denis@denix.org>
+Date: Tue, 18 Feb 2014 11:58:39 -0300
+X-Google-Sender-Auth: m9xo9ftdduJWj_bQTdaZ_BxFQMc
+Message-ID: <CAP9ODKoDMk-DCZ54Rky=9pjXBB5eYoMYPPoE7JyxmpmmOgx_gQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,29 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 14:28:41 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 14:58:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Ross,
-On Tue, Feb 18, 2014 at 11:10 AM, Burton, Ross <ross.burton@intel.com>wrote:
+Hello Denys,
 
-> > +PACKAGECONFIG ?= ""
+On Mon, Feb 17, 2014 at 6:05 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
 >
-> Shouldn't that be "??=" ?
+> This way we don't mangle ${B} and can repeat do_install if necessary. And
+> previously it would require running do_compile again to restore the proper
+> state of ${B}.
 >
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 
-I've just followed Martin instructions:
-http://lists.openembedded.org/pipermail/openembedded-devel/2014-February/094191.html
+This seems to not work as expected.
 
+| make[1]: Leaving directory
+`.../yocto/build/tmp/work/i686-nativesdk-oelsdk-linux/nativesdk-qtbase/5.2.0-r0/build/src'
+| install: cannot stat
+`.../yocto/build/tmp/work/i686-nativesdk-oelsdk-linux/nativesdk-qtbase/5.2.0-r0/build/bin/qmake-real':
+No such file or directory
 
-Regards,
+This happens when we have a work dir populated. So as do_compile hash
+will match we need to bump the PR to ensure a full rebuild.
 
---
-*dS
-Diego Sueiro
+Another issue:
 
-Administrador do Embarcados
-www.embarcados.com.br
+ERROR: QA Issue: nativesdk-qtbase: Files/directories were installed
+but not shipped
+  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/bin/qmake
+  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/bin/.debug
+  /opt/oel/13.0+snapshot/sysroots/i686-oelsdk-linux/usr/bin/.debug/qmake
 
-/*long live rock 'n roll*/
+You should install it at OE_QMAKE_PATH_QT_BINS so we can have multiple
+Qt toolchains in same SDK.
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
