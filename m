@@ -1,34 +1,37 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C6AC6E9F6
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
+	[209.85.160.45])
+	by mail.openembedded.org (Postfix) with ESMTP id C7E996EEE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 07:44:56 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WFfMN-0007Kk-Gw for openembedded-devel@lists.openembedded.org;
-	Tue, 18 Feb 2014 08:44:55 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 08:44:55 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 18 Feb 2014 08:01:57 +0000 (UTC)
+Received: by mail-pb0-f45.google.com with SMTP id un15so16349063pbc.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 08:44:55 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 18 Feb 2014 00:01:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=S6OetpOHH8yHAGQcdbracMRDe8q5fwKQWYt+HIfRRvY=;
+	b=WaVkb0fKDtZlJn75nUOd0uI64bZxMboe5kK08G6qjRvB/OJIXpxUAtDYBCTe9/96po
+	YMqPhaHXrwLM1NwJjXlZJU/rBCaSA+HpuLPwPQy554wZGI4xXM5mL63j1Imh79iZBQCt
+	UXiH5ILpLhkmBoMQTP3DgkCBMO7NbG6w++wWtVow98Wc1dAg0KP97yAtPFyDAd9D6you
+	uDTKG8CaW/iJvGVJSJUFVCp+nf2p65jGIZXLfMw2LqZOZmtcbZIq2w9b8MEehk+WMWci
+	HbTDrRgVOz9R1F25qmUwNSEUkj4paby6sd25faLFW53R+0wmryfDFdj+5qIdWcUy/4n0
+	g5rg==
+X-Received: by 10.66.26.176 with SMTP id m16mr8673540pag.142.1392710518792;
+	Tue, 18 Feb 2014 00:01:58 -0800 (PST)
+Received: from t420s.gateway.sonic.net (173-228-90-200.dsl.dynamic.sonic.net.
+	[173.228.90.200])
+	by mx.google.com with ESMTPSA id ja8sm53140007pbd.3.2014.02.18.00.01.56
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 18 Feb 2014 00:01:57 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 18 Feb 2014 08:47:05 +0100
-Message-ID: <ldv30v$jfq$1@ger.gmane.org>
-References: <CAFeBWL67tUiY5BZ6Fp6dz5H00Y=smW+fvdS6dzz3A0scqaysuQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-In-Reply-To: <CAFeBWL67tUiY5BZ6Fp6dz5H00Y=smW+fvdS6dzz3A0scqaysuQ@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: pam_gnome_keyring.so not getting packaged into my rootfs
+Date: Tue, 18 Feb 2014 00:01:28 -0800
+Message-Id: <1392710488-7191-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <20140218065625.GG4067@jama>
+References: <20140218065625.GG4067@jama>
+Subject: [meta-qt5][PATCH] qtbase.inc: don't force ARM_INSTRUCTION_SET to arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 07:44:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 Feb 2014 08:01:57 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Forcing ARM_INSTRUCTION_SET to arm when building qtbase no longer
+seems to be required.
 
-Adam Lee schreef op 18-02-14 00:00:
-> Hello everyone, my gdm logs in /var/log/gdm is complaining about these 
-> missing files:
-> 
-> - polkit-gnome-authentication-agent-1 - ck-get-x11-display-device -
-> pam_gnome_keyring.so
-> 
-> The first two files are found in paths GDM wasn't aware of, so all I had
-> to do was create symbolic links to 
-> /usr/lib/gdm/{polkit-gnome-authentication-agent-1, 
-> ck-get-x11-display-device}.
-> 
-> The last file, pam_gnome_keyring.so, is not in my rootfs. The file gets 
-> generated and it's in my build directory however. I can create a
-> bbappend to install this shared object into the rootfs, but I wanted to
-> ask in the list to see if I missed something obvious.
+Confirmed by forcing ARM_INSTRUCTION_SET to thumb and building
+qtbase 5.1.1 and 5.2.1 tuned for both armv4t and cortexa9thf-neon.
 
-Give http://patches.openembedded.org/patch/66793/ a try
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ recipes-qt/qt5/qtbase.inc | 3 ---
+ 1 file changed, 3 deletions(-)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFTAw/5MkyGM64RGpERAkDGAKCyFB1qqElkH2gRAtSL/578jYFa5gCgl7hE
-Z9hpU5nZuPs+VJcYxDpVKNU=
-=2Bsi
------END PGP SIGNATURE-----
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index f056393..ff62297 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -126,9 +126,6 @@ QT_CONFIG_FLAGS += " \
+     ${EXTRA_OECONF} \
+ "
+ 
+-# Qt uses atomic instructions not supported in thumb mode
+-ARM_INSTRUCTION_SET = "arm"
+-
+ do_generate_qt_config_file_append() {
+     cat >> ${QT_CONF_PATH} <<EOF
+ 
+-- 
+1.8.1.2
 
 
