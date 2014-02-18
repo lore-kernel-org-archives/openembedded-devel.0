@@ -1,33 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DA0E6D14A
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
+	[209.85.216.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BA216EFD9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 10:26:03 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id e53so7694155eek.13
+	Tue, 18 Feb 2014 11:29:51 +0000 (UTC)
+Received: by mail-qa0-f48.google.com with SMTP id f11so23070397qae.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 02:26:03 -0800 (PST)
+	Tue, 18 Feb 2014 03:29:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=oAy3eEex/6Ud6BA9AKmFEinI0+YMd0EbPzM30Q2332s=;
-	b=BH7T+jsm9omhjDF+rbUPc/dwecGIPoihXpe87LGIs7DhSwKEiDGzjEslpe6o1xUROg
-	+85yUuCEH08kBW23bXo1IVP4ZqXdDn3hF4lTqiVXhOZ6zyUKvQZPHORfC5exquY44PZp
-	nGIhWLtFxMr8WufSJ+YuH2tzTqq7qsMZzPPEpWIf3x4kcgmNer+/2mgOCe192W/6BE09
-	mUmkysitlwI/sSs+s16dOjVxUC84L7fScCE94Hs/B6kXJ92qZ3TrRgb2ig2/g3ZqxX9L
-	ABAWcAMMmW1kiwmAACUDOKCH3UZN4vCIA85jMJ40DnHHRD2WTYsE7rvXrX8mHjkIbXKG
-	HLgQ==
-X-Received: by 10.15.55.193 with SMTP id v41mr3182987eew.80.1392719162856;
-	Tue, 18 Feb 2014 02:26:02 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o43sm68443960eef.12.2014.02.18.02.25.58 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Feb 2014 02:26:01 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=Lgv51Qvr0YkBETMhgtS2QF15BDnz09eh+si2e2tsk4o=;
+	b=cx9XLh03ODdJ97ca5OBCFnLWcnvyZxpfK+uvblgZWTzV2+GjMKRLfjDHBqX1KcEFEL
+	rYytcHF0iZkeINm/d3jD726yzNzNPckf4D6qxFfYYQA/soNFptHpqVTEURI2QxXGwwwb
+	uG2JINIo8rq0AXUS1F8VF0gfcDDkRUmOab1ekE7191HQ7NEfcVVD1Tju0MKQm9Y+8Qu/
+	wXErzlwqVT0666rVyoyusqvufcZPu1UGifO//CIBrEpE3jusDZYpHI/1enlHW/UudWZL
+	10t17nwg7MkWC/TXw+/pr5HB5UEtXEe2nSTY18v6zl8Ku9dMDI6sZbAjarHfsjIv/6jI
+	nAkA==
+X-Received: by 10.140.21.179 with SMTP id 48mr8923877qgl.78.1392722991313;
+	Tue, 18 Feb 2014 03:29:51 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.25.47 with HTTP; Tue, 18 Feb 2014 03:29:31 -0800 (PST)
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Tue, 18 Feb 2014 08:29:31 -0300
+Message-ID: <CAMCfZKFpTVoRJJ68m+vLdD_Pv-WkocXWKcxh6F0DnwP_sJ4t0Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2014 11:26:25 +0100
-Message-Id: <1392719185-11585-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.5.3
-Subject: [meta-qt5][PATCH] qtbase: add PACKAGECONFIG for mtdev
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: libao build fails on dora and master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,26 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 10:26:03 -0000
+X-List-Received-Date: Tue, 18 Feb 2014 11:29:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtbase.inc | 1 +
- 1 file changed, 1 insertion(+)
+Folks,
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 4c1c6dd..116c86f 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -101,6 +101,7 @@ PACKAGECONFIG[openvg] = "-openvg,-no-openvg"
- PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
- PACKAGECONFIG[xkb] = "-xkb,-no-xkb,libxkbcommon"
- PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
-+PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
- # depends on glib
- PACKAGECONFIG[fontconfig] = "-fontconfig,-no-fontconfig,fontconfig"
- PACKAGECONFIG[gtkstyle] = "-gtkstyle,-no-gtkstyle,gtk+"
--- 
-1.8.5.3
+libao compiling is failing because of a dependency on esound.
+Adding EXTRA_OECONF += "--disable-esd" to recipe fix the issue.
 
+Should I have to send a patch?
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+
+/*long live rock 'n roll*/
 
