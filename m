@@ -1,36 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 319016E904
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 88ECA6E7FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 03:22:56 +0000 (UTC)
-Received: by mail-yh0-f51.google.com with SMTP id t59so16296697yho.24
+	Wed, 19 Feb 2014 07:37:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s1J7b6rO023814
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 19:22:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=e6CQ0N4YIcp1w9YpzpEBZVW+mKklqpoq+Gfi9RafCpU=;
-	b=AMR9S8mKYk6GaiFvJ5EEvhtGe+eB8EGL855AJ40OTkATGObFhwrs02IfnGR6N4gWyX
-	J7jjcL8wooGsSP0FuZX8t3MzLZ5AwgtO9URQ4Oy4pDQHAnrXAtuuo2oIH96kJzw6lfXC
-	HsUQG6SdDvL25Tgf5wai7CvorInAtJZDHFgLFr5ouy/jZwiOiUKMBmR+ViwpHBIzK5GO
-	QzsvWCmpkMy405/888Ci2LZZlDhc+eoHk5i6qqKvXjEIJjCWS0FVGNZ2DcCPnEzl1mZh
-	hnsiDbQ4YgCu5qRERsJjMw/MXa2wo6GSCwYWW6Z45bi8YdH5rT3UtcA68yCMlUd/dBUh
-	/8tg==
-X-Received: by 10.236.93.208 with SMTP id l56mr8320148yhf.112.1392780177018;
-	Tue, 18 Feb 2014 19:22:57 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id m9sm65514381yha.2.2014.02.18.19.22.55
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 18 Feb 2014 19:22:56 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Feb 2014 00:22:36 -0300
-Message-Id: <1392780156-11122-1-git-send-email-otavio@ossystems.com.br>
+	Tue, 18 Feb 2014 23:37:06 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Tue, 18 Feb 2014 23:37:05 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Feb 2014 15:38:03 +0800
+Message-ID: <1392795483-17050-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH] qmake5_base.bbclass: Use Qt version specific paths
+MIME-Version: 1.0
+Subject: [PATCH][meta-networking] quagga: close the stdout/stderr as in other daemons
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,53 +32,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2014 03:22:57 -0000
+X-List-Received-Date: Wed, 19 Feb 2014 07:37:05 -0000
+Content-Type: text/plain
 
-When looking for Qt5 components and files we ought to use the Qt5
-specific path. In case the distribution wants to have a flat tree it
-can set QT_DIR_NAME and it will still works as expected.
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Once babald becomes a background daemon, it should not output information to
+stdout, so need to close stdout.
+
+In fact, other daemons close their stdout when they run into background, like
+ospfd, isisd and bgpd, by calling daemon() which is in lib/daemon.c
+
+Closing the stdout can fix a tee hang issue { #/usr/sbin/babeld -d |tee tmp }
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
-I have built two image and the SDK from scratch using this with no
-issues. Could someone also give this a try?
+ ...ose-the-stdout-stderr-as-in-other-daemons.patch |   50 ++++++++++++++++++++
+ .../recipes-protocols/quagga/quagga_0.99.21.bb     |    1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
 
- classes/qmake5_base.bbclass |   16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
-
-diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-index 3861cd0..ec0267a 100644
---- a/classes/qmake5_base.bbclass
-+++ b/classes/qmake5_base.bbclass
-@@ -57,20 +57,20 @@ do_generate_qt_config_file() {
-     cat > ${QT_CONF_PATH} <<EOF
- [Paths]
- Prefix = ${OE_QMAKE_PATH_PREFIX}
--Headers = ${OE_QMAKE_PATH_HEADERS}
-+Headers = ${OE_QMAKE_PATH_QT_HEADERS}
- Libraries = ${OE_QMAKE_PATH_LIBS}
--ArchData = ${OE_QMAKE_PATH_ARCHDATA}
--Data = ${OE_QMAKE_PATH_DATA}
-+ArchData = ${OE_QMAKE_PATH_QT_ARCHDATA}
-+Data = ${OE_QMAKE_PATH_QT_DATA}
- Binaries = ${OE_QMAKE_PATH_BINS}
- LibraryExecutables = ${OE_QMAKE_PATH_LIBEXECS}
- Plugins = ${OE_QMAKE_PATH_PLUGINS}
- Imports = ${OE_QMAKE_PATH_IMPORTS}
- Qml2Imports = ${OE_QMAKE_PATH_QML}
--Translations = ${OE_QMAKE_PATH_TRANSLATIONS}
--Documentation = ${OE_QMAKE_PATH_DOCS}
--Settings = ${OE_QMAKE_PATH_SETTINGS}
--Examples = ${OE_QMAKE_PATH_EXAMPLES}
--Tests = ${OE_QMAKE_PATH_TESTS}
-+Translations = ${OE_QMAKE_PATH_QT_TRANSLATIONS}
-+Documentation = ${OE_QMAKE_PATH_QT_DOCS}
-+Settings = ${OE_QMAKE_PATH_QT_SETTINGS}
-+Examples = ${OE_QMAKE_PATH_QT_EXAMPLES}
-+Tests = ${OE_QMAKE_PATH_QT_TESTS}
- HostBinaries = ${OE_QMAKE_PATH_HOST_BINS}
- HostData = ${OE_QMAKE_PATH_HOST_DATA}
- HostLibraries = ${OE_QMAKE_PATH_HOST_LIBS}
+diff --git a/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch b/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
+new file mode 100644
+index 0000000..c2757a2
+--- /dev/null
++++ b/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
+@@ -0,0 +1,50 @@
++From ba71f768e6dbb1f2ac72ed3bd880bff75a48d345 Mon Sep 17 00:00:00 2001
++From: Roy Li <rongqing.li@windriver.com>
++Date: Wed, 19 Feb 2014 14:13:40 +0800
++Subject: [PATCH] babeld: close stdout once the background daemon is created
++
++Upstream-Status: pending
++
++Once babald becomes a background daemon, it should not output information to
++stdout, so need to close stdout.
++
++In fact, other daemons close their stdout when they run into background, like
++ospfd, isisd and bgpd, by calling daemon() which is in lib/daemon.c
++
++Closing the stdout can fix a tee hang issue { #/usr/sbin/babeld -d |tee tmp }
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ babeld/util.c |   10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/babeld/util.c b/babeld/util.c
++index 011f382..76203bc 100644
++--- a/babeld/util.c
+++++ b/babeld/util.c
++@@ -425,7 +425,7 @@ uchar_to_in6addr(struct in6_addr *dest, const unsigned char *src)
++ int
++ daemonise()
++ {
++-    int rc;
+++    int rc, fd;
++ 
++     fflush(stdout);
++     fflush(stderr);
++@@ -441,5 +441,13 @@ daemonise()
++     if(rc < 0)
++         return -1;
++ 
+++    fd = open("/dev/null", O_RDWR, 0);
+++    if (fd != -1)
+++    {
+++        dup2(fd, STDOUT_FILENO);
+++        if (fd > 2)
+++            close(fd);
+++    }
+++
++     return 1;
++ }
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+index ae93952..db2a67b 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
++++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
+@@ -5,6 +5,7 @@ PR = "${INC_PR}.0"
+ SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
+             file://lingering-IP-address-after-deletion-BZ-486.patch \
+             file://build-fix-extract.pl-for-cross-compilation.patch \
++            file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
+ "
+ 
+ SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
 -- 
 1.7.10.4
 
