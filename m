@@ -1,34 +1,37 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B0E26E7FE
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 02DB36CBDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 08:00:28 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WG24u-0005Tm-W8 for openembedded-devel@lists.openembedded.org;
-	Wed, 19 Feb 2014 09:00:24 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 09:00:24 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 19 Feb 2014 08:23:44 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id bs8so252197wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 09:00:24 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 19 Feb 2014 00:23:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=trQso5k/9NQaU+M6dkGVveH+Gvot4UzDxz5hsgI7uSI=;
+	b=h8yfgRdZBheDO+CGSd/iYWcfFxYBKMrJnm4XqDyWSRT0q1n1slVudjYJFj/uKAzLmq
+	uizbeXugG36lhi3l8eQPzrw9vwV+V0Hz8KnhgVPshuDHWWRwqvYc4G1UYoWDSBuAzNqd
+	i9Q8UOEKZzbtoZgnYIQvZw9YvzIdX3ti7bKkWm4ayns7/dey14xSnSPKX63S9seuw07q
+	I8R4mC/Ji8xpZ5ANPla8hK9ZgevhS5CIO8pQdVkV0gy3ouKFz0/kzytzzLJ3k3fk0YVJ
+	Ie/TPaX+HpVsQyj8jyU57Not3vGHnF5Auhkm4wzNLOTclr9J55fZDWcjJc7+S3sgeoEG
+	wNhw==
+X-Gm-Message-State: ALoCoQm2TIoK0eiFi2SMKM2TGlAmK0S71aPEACLWhTeeJfLXhJjA7rlKLRxKIDKO2uN1ij4h7xUW
+X-Received: by 10.180.207.10 with SMTP id ls10mr200670wic.4.1392798225544;
+	Wed, 19 Feb 2014 00:23:45 -0800 (PST)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id
+	ci4sm51968558wjc.21.2014.02.19.00.23.44 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 19 Feb 2014 00:23:44 -0800 (PST)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 19 Feb 2014 09:00:40 +0100
-Message-ID: <le1o9u$sbk$1@ger.gmane.org>
-References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-In-Reply-To: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: GDM alternative?
+Date: Wed, 19 Feb 2014 09:23:38 +0100
+Message-Id: <1392798218-17950-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.8.4.2
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] mariadb: move linker fix to .inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,53 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2014 08:00:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Feb 2014 08:23:45 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+When using a recent cross-binutils you need this fix as well, so move it from -native to the .inc.
 
-Adam Lee schreef op 18-02-14 22:24:
-> Hello everyone, I am sure this has been asked before but I haven't found
-> a solution.
-> 
-> I am currently integrating GDM to my XFCE image. I was hoping that it's
-> as easy as adding GDM as the graphical init manager (in local.conf), but
-> it looks like PolicyKit, Console Kit, PAM, gconf, gconf-sanity (as per 
-> meta-angstrom) all need to be correctly configured for GDM to work. This 
-> integration of multiple frameworks is not what I had in mind. So I am
-> now searching for alternative - something more lightweight and with less 
-> dependency.
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb | 3 ---
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc       | 4 +++-
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-GDM works without the pk-gnome and ck libdir symlinks, but it's a pain in
-the ass to get it working with a non-GNOME session by default.
-
-To get autologin working again:
-
-https://github.com/Angstrom-distribution/meta-oe/commit/26d1cca7ef9bb2e656ba6998adc4c99810654fb9
-
-This used to work, but I'm debugging why it doesn't anymore:
-
-https://github.com/Angstrom-distribution/meta-angstrom/blob/angstrom-v2013.12-yocto1.5/recipes-tweaks/gdm/angstrom-gdm-xfce-hack.bb
-
-I'm slowly debugging GDM issues for Angstrom v2013.12 and will send patches
-to meta-oe/master soon(-ish).
-
-But to answer your question: Andreas uses 'lxdm' in his xfce images in the
-meta-misc layer. It's on my list to try out so I can't say if it works right
-now.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFTBGSoMkyGM64RGpERApCvAJ9N9N+3YY6DvDXJMAi+hLmgR/aw8QCgq9Qc
-NUOrhTxjxhLllVNETM8QU00=
-=m7et
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+index 15605d0..942afcc 100644
+--- a/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
++++ b/meta-oe/recipes-support/mysql/mariadb-native_5.1.67.bb
+@@ -9,9 +9,6 @@ PACKAGES = ""
+ EXTRA_OEMAKE = ""
+ EXTRA_OECONF = " --with-embedded-server "
+ 
+-SRC_URI += "file://fix-link-error-ub1310.patch \
+-"
+-
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' install
+     mv -f ${D}${libdir}/mysql/* ${D}${libdir}
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+index e311ed7..100b3a7 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+@@ -17,7 +17,9 @@ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x8
+            file://storage-forbids-absolute-addresses-on-IA-32.patch \
+            file://my.cnf \
+            file://mysqld.sh \
+-           file://avoid-plugin-options-warnings.patch"
++           file://avoid-plugin-options-warnings.patch \
++           file://fix-link-error-ub1310.patch \
++          "
+ 
+ SRC_URI[md5sum] = "44c331fa91943155e4796f89e17a0612"
+ SRC_URI[sha256sum] = "33471e9275c9b03919cabc38eb39f807d645adabf6a1a18f2e41ed73f47677c8"
+-- 
+1.8.4.2
 
 
