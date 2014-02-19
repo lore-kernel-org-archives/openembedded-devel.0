@@ -1,40 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7588B6B8DF
+Received: from mail-pb0-f46.google.com (mail-pb0-f46.google.com
+	[209.85.160.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C3DC6E8DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 23:06:56 +0000 (UTC)
-Received: by mail-pd0-f173.google.com with SMTP id y10so16814438pdj.18
+	Wed, 19 Feb 2014 01:59:26 +0000 (UTC)
+Received: by mail-pb0-f46.google.com with SMTP id um1so17431002pbc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2014 15:06:57 -0800 (PST)
+	Tue, 18 Feb 2014 17:59:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=nN+hFe7qG+Ai+NTrxEar2OH91eKxxav/IaGnyThYJ+c=;
-	b=iSlQwpqF3PXbikC1dBkHCJ8oOI3rn52ACnbMYbuu+07iSTXzA1M4+ayWH2yIHbfcw3
-	pWYkrn51VCmpbw9JJ6jnabBEWcyI4ffAuFFTJdlU9CF3OOetjy+r9RS7n+T+KnTyFWKb
-	mjdKZ6x/spK3Yo4VRpKcoaAoNpEIeH38w/gy6MgMFgBY66D1kJR+kYdXoYWPw/kFNk/W
-	V4I7E9RbgFxY4MYUdPh7fr8PZzBYsiJf3Z0grPgCe8jSBHNuBHrCRSpL/H7WfhxdZYIo
-	uTPJMeGGY8fjRzjJZ3TYcCMLBid3XHqgUsN8dvnZpWwt2VA3kN2X8YizqurkyXJWLUDU
-	MlEQ==
-X-Received: by 10.66.166.175 with SMTP id zh15mr35946517pab.36.1392764817145; 
-	Tue, 18 Feb 2014 15:06:57 -0800 (PST)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244]) by mx.google.com with ESMTPSA id
-	iu7sm59596598pbc.45.2014.02.18.15.06.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Feb 2014 15:06:56 -0800 (PST)
-Message-ID: <5303E613.2000309@gmail.com>
-Date: Wed, 19 Feb 2014 10:00:35 +1100
+	h=from:to:cc:subject:date:message-id;
+	bh=vmAADeMd1YQK2JcrOyIZqXN2xJ6FkGmNoY3c0RsbTS8=;
+	b=DZ5grHvcNNDylU44OAYp+SJi3xkjQ2QcBMJnNTcHLnH8uRvJzb87s6FarZz4g6pnZa
+	616xKL681GOB2QTn8OXRefN7uDoaF3v2a2IR1D5G26Ra1OfQLN8I03T6igZMMcWsGTEr
+	qaDuy03BD97qU2wTLDzmIMnMj/NhH48aQ3uBcKIjNYmCsbJliz4a3tMerHbFzygT41P5
+	RcU7CqPnRL0pOh5aGvgCXSMd3W39jHLeD9hbt357+DUpyFgxFOeekvNjh91JsY3PVjYY
+	ci5kBkxk9f/ipOZfEygfNca2swfYXZ6xUrplUdEJLzWNL9ENkC+IfG3oPKcQJg2OnS4d
+	zp5w==
+X-Received: by 10.68.134.130 with SMTP id pk2mr7230849pbb.167.1392775167727;
+	Tue, 18 Feb 2014 17:59:27 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id n6sm60493726pbj.22.2014.02.18.17.59.25
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Feb 2014 17:59:27 -0800 (PST)
 From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1392737825-11241-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1392737825-11241-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: Re: [meta-qt5][PATCH] qtbase-native: explicitly disable icu
+Date: Wed, 19 Feb 2014 13:03:11 +1100
+Message-Id: <1392775391-1469-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.8.5.4
+Subject: [meta-qt5][jansa/qt5-5.2.1][PATCH] qtbase: add mtdev packageconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,31 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2014 23:06:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 19 Feb 2014 01:59:26 -0000
 
-On 19/02/2014 2:37 AM, Martin Jansa wrote:
-> * Jonathan Liu reported that qtbase-native was failing to build for him
->    and it looks like qtbase-native was trying to link against icu from his
->    host (instead of icu-native because it isn't in DEPENDS)
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->   recipes-qt/qt5/qtbase-native.inc | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
-> index b9193e4..860bc29 100644
-> --- a/recipes-qt/qt5/qtbase-native.inc
-> +++ b/recipes-qt/qt5/qtbase-native.inc
-> @@ -51,6 +51,7 @@ EXTRA_OECONF = " \
->       -no-opengl \
->       -no-openssl \
->       -no-xcb \
-> +    -no-icu \
->       -verbose \
->       -release \
->       -prefix ${OE_QMAKE_PATH_PREFIX} \
-Acked-by: Jonathan Liu <net147@gmail.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qtbase.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index f056393..3468211 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -74,6 +74,7 @@ PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
+ # gl or gles2 is needed in order to build qtdeclarative (qtdeclarative.do_configure fails to find quick module without)
+ PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
+ PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
++PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
+ PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
+ PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
+ PACKAGECONFIG[xcb] = "-xcb,-no-xcb,xcb-util-wm xcb-util-image xcb-util-keysyms"
+-- 
+1.8.5.4
+
 
