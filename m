@@ -1,36 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A96D6F1E0
+Return-Path: <urs@bytesatwork.ch>
+Received: from bytesatwork.ch (bytesatwork.ch [91.135.72.15])
+	by mail.openembedded.org (Postfix) with ESMTP id D59B96F19E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 07:36:01 +0000 (UTC)
-Received: by mail-vc0-f175.google.com with SMTP id ij19so1495547vcb.20
+	Thu, 20 Feb 2014 07:50:53 +0000 (UTC)
+Received: from [192.168.2.20] (8-89.61-188.cust.bluewin.ch [188.61.89.8])
+	(using SSLv3 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested) (Authenticated sender: urs)
+	by bytesatwork.ch (Postfix) with ESMTPSA id EDE8BCC18E3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 23:36:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=/a8spnBxoJWO1H04w6+nN8X0uq/+uuWkO7o8ZM5O+/w=;
-	b=O5WFwaqCvj+dQ++/M89AftNngS4bnGOASnvgAnCRbDagQIvpCjOyPjBiIUXROmH3gg
-	K/tomE532fzkbpNyeUpc2/JOUeV6XYRmJO8uNfCMNHGaSEwDj4Ht6YeNMvw8jbvTlxJl
-	dVPsNAjgjuQVxlD0cRvoyHjhl6H9U9F+JoQY9mXoDdkxgXYG2bdeO0S/+kPQAqG31uGg
-	GpU9yc/RrjoflR/w/8TDPYZEWjN43g+Nl3G6rbJFqOAzzxu+gqW+4NHhwtbmVgeQZRO4
-	q+GXc3nJor7DxE+zEV0doH2N6h7e0lJmVEq9KhqlRGjz+AuNhu3jDEDzKos9mUZq3gmK
-	5GFA==
-MIME-Version: 1.0
-X-Received: by 10.220.225.71 with SMTP id ir7mr179034vcb.50.1392881762225;
-	Wed, 19 Feb 2014 23:36:02 -0800 (PST)
-Received: by 10.52.35.170 with HTTP; Wed, 19 Feb 2014 23:36:02 -0800 (PST)
-In-Reply-To: <CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
-References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
-	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
-Date: Thu, 20 Feb 2014 08:36:02 +0100
-Message-ID: <CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: GDM alternative?
+	Thu, 20 Feb 2014 08:42:13 +0100 (CET)
+Message-ID: <1392882657.29514.3.camel@mars.bytesatwork.ch>
+From: Urs =?ISO-8859-1?Q?F=E4ssler?= <urs@bytesatwork.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Feb 2014 08:50:57 +0100
+In-Reply-To: <CAP9ODKo96otJprbv_3OboT4WpiKUdXJdyKdkt6ppJK3aC+kzDg@mail.gmail.com>
+References: <1392780156-11122-1-git-send-email-otavio@ossystems.com.br>
+	<CAP9ODKo96otJprbv_3OboT4WpiKUdXJdyKdkt6ppJK3aC+kzDg@mail.gmail.com>
+X-Mailer: Evolution 3.4.4-3 
+Mime-Version: 1.0
+Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: Use Qt version specific paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,19 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 07:36:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Feb 2014 07:50:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
-> Thank you Koen and Andreas. That has been really helped in clearing up my
-> confusion and setting the path forward.
->
-> I think I will try LXDM in meta-misc in meta-oe. Is there any special
-> configuration that I should be aware of (other then setting it as the
-> graphical init manager)?
+On Mit, 2014-02-19 at 16:11 -0300, Otavio Salvador wrote:
+> On Wed, Feb 19, 2014 at 12:22 AM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+> > When looking for Qt5 components and files we ought to use the Qt5
+> > specific path. In case the distribution wants to have a flat tree it
+> > can set QT_DIR_NAME and it will still works as expected.
+> >
+> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> > ---
+> > I have built two image and the SDK from scratch using this with no
+> > issues. Could someone also give this a try?
+> 
+> Today I rebuilt 5.2.1 image and SDK in two build machines (one Debian
+> Sid and another Debian 7.4 based) and both succeed.
+> 
+> Did someone try this one?
+> 
 
-meta-misc is my personal playground - it might have dependencies to
-other layers and some things might not work as expected...
+I successfully built Qt 5.2.1 (from the 5.2.1 repository, not the above
+patch) for ARM on Debian 7.4. I had some problems with cmake stuff, but
+not sure if this has to do with my configuration.
 
-Andreas
+
+-- 
+bytes at work
+Konradstrasse 15
+CH-8400 Winterthur
+Switzerland
+
+phone: +41 52 213 79 79
+fax:   +41 52 203 27 13
+
+
 
