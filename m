@@ -1,24 +1,26 @@
-Return-Path: <urs@bytesatwork.ch>
-Received: from bytesatwork.ch (bytesatwork.ch [91.135.72.15])
-	by mail.openembedded.org (Postfix) with ESMTP id D59B96F19E
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1D36F160
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 07:50:53 +0000 (UTC)
-Received: from [192.168.2.20] (8-89.61-188.cust.bluewin.ch [188.61.89.8])
-	(using SSLv3 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
-	(No client certificate requested) (Authenticated sender: urs)
-	by bytesatwork.ch (Postfix) with ESMTPSA id EDE8BCC18E3A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 08:42:13 +0100 (CET)
-Message-ID: <1392882657.29514.3.camel@mars.bytesatwork.ch>
-From: Urs =?ISO-8859-1?Q?F=E4ssler?= <urs@bytesatwork.ch>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Feb 2014 08:50:57 +0100
-In-Reply-To: <CAP9ODKo96otJprbv_3OboT4WpiKUdXJdyKdkt6ppJK3aC+kzDg@mail.gmail.com>
-References: <1392780156-11122-1-git-send-email-otavio@ossystems.com.br>
-	<CAP9ODKo96otJprbv_3OboT4WpiKUdXJdyKdkt6ppJK3aC+kzDg@mail.gmail.com>
-X-Mailer: Evolution 3.4.4-3 
-Mime-Version: 1.0
-Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: Use Qt version specific paths
+	Thu, 20 Feb 2014 09:19:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,511,1389740400"; d="scan'208";a="41474394"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 20 Feb 2014 10:19:00 +0100
+Received: from COSNPREXC3.usr.ingenico.loc (10.1.1.182) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	id 14.2.328.9; Thu, 20 Feb 2014 10:19:00 +0100
+Received: from u85.usr.ingenico.loc ([10.23.7.85]) by
+	COSNPREXC3.usr.ingenico.loc with Microsoft SMTPSVC(6.0.3790.1830);
+	Thu, 20 Feb 2014 10:19:00 +0100
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 20 Feb 2014 10:13:49 +0100
+Message-ID: <1392887629-27256-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.8.5.4
+X-OriginalArrivalTime: 20 Feb 2014 09:19:00.0349 (UTC)
+	FILETIME=[CA355AD0:01CF2E1C]
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] xmlstarlet: add newrecipe for version 1.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +34,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 07:50:56 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Feb 2014 09:19:04 -0000
+Content-Type: text/plain
 
-On Mit, 2014-02-19 at 16:11 -0300, Otavio Salvador wrote:
-> On Wed, Feb 19, 2014 at 12:22 AM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
-> > When looking for Qt5 components and files we ought to use the Qt5
-> > specific path. In case the distribution wants to have a flat tree it
-> > can set QT_DIR_NAME and it will still works as expected.
-> >
-> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> > ---
-> > I have built two image and the SDK from scratch using this with no
-> > issues. Could someone also give this a try?
-> 
-> Today I rebuilt 5.2.1 image and SDK in two build machines (one Debian
-> Sid and another Debian 7.4 based) and both succeed.
-> 
-> Did someone try this one?
-> 
+Useful CLI tool for XML data manipulation.
 
-I successfully built Qt 5.2.1 (from the 5.2.1 repository, not the above
-patch) for ARM on Debian 7.4. I had some problems with cmake stuff, but
-not sure if this has to do with my configuration.
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ .../xmlstarlet/files/configure.ac.patch            | 28 ++++++++++++++++++++++
+ .../recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb | 25 +++++++++++++++++++
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
+ create mode 100644 meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
 
-
+diff --git a/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch b/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
+new file mode 100644
+index 0000000..e55f4f3
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
+@@ -0,0 +1,28 @@
++configure.ac: don't use xml-config if --with-libxml-prefix is specified to configure
++
++Same behavior for xslt-config.
++
++diff --git a/configure.ac b/configure.ac
++index ed04e0c..39d5d4c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -40,7 +40,8 @@ AC_ARG_PROGRAM          dnl Transforming Program Names When Installing
++ AC_PROG_SED
++ AC_PROG_AWK
++ 
++-XSTAR_LIB_CHECK([LIBXML], [xml2-config])
+++AS_IF([test "x$LIBXML_PREFIX" = x],
+++      [XSTAR_LIB_CHECK([LIBXML], [xml2-config])])
++ 
++ AS_IF([test "x$LIBXML_SRCDIR" != x],
++       [LIBXML_INCDIR="$LIBXML_SRCDIR/include"])
++@@ -56,7 +57,8 @@ AS_IF([test "x$STATIC_LIBS" != xno],
++ [LIBXML_LDFLAGS="-L$LIBXML_LIBDIR"]
++ 
++ 
++-XSTAR_LIB_CHECK([LIBXSLT], [xslt-config])
+++AS_IF([test "x$LIBXSLT_PREFIX" = x],
+++      [XSTAR_LIB_CHECK([LIBXSLT], [xslt-config])])
++ 
++ AS_IF([test "x$LIBXSLT_SRCDIR" != x],
++       [XSLTPROC_PATH="$LIBXSLT_SRCDIR/xsltproc:$PATH"
+diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
+new file mode 100644
+index 0000000..770ccab
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Command line XML toolkit"
++DESCRIPTION = "XMLStarlet is a command line XML toolkit which can be used to \
++               transform, query, validate, and edit XML documents and files \
++               using  simple set of shell commands in similar way it is done \
++               for plain text files using grep/sed/awk/tr/diff/patch."
++HOMEPAGE = "http://xmlstar.sourceforge.net/"
++BUGTRACKER = "http://xmlstar.sourceforge.net/bugs/"
++
++SECTION = "console/utils"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c04760d09e8b0fe73283d0cc9e8bea53"
++
++DEPENDS = "libxml2 libxslt"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BPN}-${PV}.tar.gz \
++           file://configure.ac.patch"
++SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
++SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af49fceb303f84da7214779ccf99fffc6bbba"
++
++inherit autotools
++
++# doc build: requires (native) xstlproc, fop, pdf2ps
++EXTRA_OECONF="--disable-build-docs \
++  --with-libxml-prefix=${STAGING_LIBDIR}/.. \
++  --with-libxslt-prefix=${STAGING_LIBDIR}/.."
 -- 
-bytes at work
-Konradstrasse 15
-CH-8400 Winterthur
-Switzerland
-
-phone: +41 52 213 79 79
-fax:   +41 52 203 27 13
-
+1.8.5.4
 
 
