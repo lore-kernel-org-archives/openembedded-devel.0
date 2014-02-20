@@ -1,37 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 546406E6F0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A96D6F1E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 06:10:15 +0000 (UTC)
-Received: by mail-pb0-f48.google.com with SMTP id rr13so1454622pbb.35
+	Thu, 20 Feb 2014 07:36:01 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id ij19so1495547vcb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2014 22:10:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GGii/l6FvXbWvU0HCxx9lzpUyGl1YDjjaY4mlo08ul4=;
-	b=DDgOIxxG0PisrvHG3h01/WsHDtdL8REpUTLVoadsymIo3vxbzugSTmSTc6JPEjc8Qv
-	qT2gJM2Zy83/dhNoBnWw/wVB8miYVWHzFGibB+rJSSX0zsu+cJ7gJxRcVHNsecul9VMn
-	is7jHaZ1apgMHWdfSrbFiRP29nObFLzGHGrMpG8bcblBrogmiwHj/rOMBIjIg5XhMNPs
-	MUnHmzg2wg/pFsrUmTjjSn/DfVsfwuRvWDFNVSqi2md5Lsfl7KYQdjt8vMqLmQ4Vcf3W
-	dl+HSPhg4BEsz4yeFHZyl9+BXhGRDT56nVkFnQn/zOAERreSHvDfOpw6OoIXhq8O6CiF
-	pmvA==
-X-Received: by 10.66.129.133 with SMTP id nw5mr40355pab.98.1392876616178;
-	Wed, 19 Feb 2014 22:10:16 -0800 (PST)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id ns7sm7007572pbc.32.2014.02.19.22.10.14
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 19 Feb 2014 22:10:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Feb 2014 22:11:24 -0800
-Message-Id: <1392876684-2422-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1392876684-2422-1-git-send-email-raj.khem@gmail.com>
-References: <1392876684-2422-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] python-cloudeebus: DEPEND on python-distribute instead of python-setuptools
+	Wed, 19 Feb 2014 23:36:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=/a8spnBxoJWO1H04w6+nN8X0uq/+uuWkO7o8ZM5O+/w=;
+	b=O5WFwaqCvj+dQ++/M89AftNngS4bnGOASnvgAnCRbDagQIvpCjOyPjBiIUXROmH3gg
+	K/tomE532fzkbpNyeUpc2/JOUeV6XYRmJO8uNfCMNHGaSEwDj4Ht6YeNMvw8jbvTlxJl
+	dVPsNAjgjuQVxlD0cRvoyHjhl6H9U9F+JoQY9mXoDdkxgXYG2bdeO0S/+kPQAqG31uGg
+	GpU9yc/RrjoflR/w/8TDPYZEWjN43g+Nl3G6rbJFqOAzzxu+gqW+4NHhwtbmVgeQZRO4
+	q+GXc3nJor7DxE+zEV0doH2N6h7e0lJmVEq9KhqlRGjz+AuNhu3jDEDzKos9mUZq3gmK
+	5GFA==
+MIME-Version: 1.0
+X-Received: by 10.220.225.71 with SMTP id ir7mr179034vcb.50.1392881762225;
+	Wed, 19 Feb 2014 23:36:02 -0800 (PST)
+Received: by 10.52.35.170 with HTTP; Wed, 19 Feb 2014 23:36:02 -0800 (PST)
+In-Reply-To: <CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
+References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
+	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
+	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
+Date: Thu, 20 Feb 2014 08:36:02 +0100
+Message-ID: <CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: GDM alternative?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 06:10:15 -0000
+X-List-Received-Date: Thu, 20 Feb 2014 07:36:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-python-setuptools has been removed in OE-Core
+On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+> Thank you Koen and Andreas. That has been really helped in clearing up my
+> confusion and setting the path forward.
+>
+> I think I will try LXDM in meta-misc in meta-oe. Is there any special
+> configuration that I should be aware of (other then setting it as the
+> graphical init manager)?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/python/python-cloudeebus_0.6.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+meta-misc is my personal playground - it might have dependencies to
+other layers and some things might not work as expected...
 
-diff --git a/meta-oe/recipes-devtools/python/python-cloudeebus_0.6.0.bb b/meta-oe/recipes-devtools/python/python-cloudeebus_0.6.0.bb
-index 5c1fa9c..120a8a7 100644
---- a/meta-oe/recipes-devtools/python/python-cloudeebus_0.6.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-cloudeebus_0.6.0.bb
-@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
- 
- inherit distutils 
- 
--DEPENDS_${PN} = "python python-setuptools"
-+DEPENDS_${PN} = "python python-distribute"
- RDEPENDS_${PN} = "python python-dbus python-json python-argparse python-pygobject python-autobahn python-twisted python-subprocess"
- 
- do_install_prepend() {
--- 
-1.9.0
-
+Andreas
 
