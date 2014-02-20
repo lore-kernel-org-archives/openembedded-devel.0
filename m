@@ -1,26 +1,37 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F1D36F160
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f47.google.com (mail-yh0-f47.google.com
+	[209.85.213.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C5F996EE66
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 09:19:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,511,1389740400"; d="scan'208";a="41474394"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 20 Feb 2014 10:19:00 +0100
-Received: from COSNPREXC3.usr.ingenico.loc (10.1.1.182) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	id 14.2.328.9; Thu, 20 Feb 2014 10:19:00 +0100
-Received: from u85.usr.ingenico.loc ([10.23.7.85]) by
-	COSNPREXC3.usr.ingenico.loc with Microsoft SMTPSVC(6.0.3790.1830);
-	Thu, 20 Feb 2014 10:19:00 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Feb 2014 10:13:49 +0100
-Message-ID: <1392887629-27256-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
-X-OriginalArrivalTime: 20 Feb 2014 09:19:00.0349 (UTC)
-	FILETIME=[CA355AD0:01CF2E1C]
+	Thu, 20 Feb 2014 11:57:41 +0000 (UTC)
+Received: by mail-yh0-f47.google.com with SMTP id c41so468449yho.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Feb 2014 03:57:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=gvH3K40Si/n0LV5NtzP++R5RzNGJC7ZwciX2Cw6Z7zQ=;
+	b=fB8qOnywFSm4gom2MbpqcmzZghf9qeN+AoeAqxcVjznDTHOUP32IrKYcfzHTJ0cnWl
+	XAYBdizI3u+clliSa6/93VUcPG9QzFjmqORu/MS7ZfnuQMtXb2cb02vaHHp3hGGVolBI
+	FIlNmuYFwUJPEv2wZVwBESuS2WHYVSxQU8kGhZgrXeeXitvUl8KUnnrusWw09B0EHDF7
+	OVvDDiY1UMDyncxB7AbAmIBoL/WLocZhPfz6x+bX+sPMqf/0sy1VnGO0Cvxu+CiZWg/b
+	J++ge87J6hv07wNCsmq9Nvz9oX+GHtzwkPl5VZd58zWUQV+3sxUm7LSNknwyzrAEBvAY
+	5Jgg==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] xmlstarlet: add newrecipe for version 1.5.0
+X-Received: by 10.236.84.135 with SMTP id s7mr2393180yhe.148.1392897461893;
+	Thu, 20 Feb 2014 03:57:41 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Thu, 20 Feb 2014 03:57:41 -0800 (PST)
+In-Reply-To: <1392882657.29514.3.camel@mars.bytesatwork.ch>
+References: <1392780156-11122-1-git-send-email-otavio@ossystems.com.br>
+	<CAP9ODKo96otJprbv_3OboT4WpiKUdXJdyKdkt6ppJK3aC+kzDg@mail.gmail.com>
+	<1392882657.29514.3.camel@mars.bytesatwork.ch>
+Date: Thu, 20 Feb 2014 08:57:41 -0300
+X-Google-Sender-Auth: uvGswdEaON5rPNhXMLdFWj59d94
+Message-ID: <CAP9ODKoJB79eNAzqzuuTOMA20Wt9nOwoe46fS93DcA5BAtx6KQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: Use Qt version specific paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,85 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 09:19:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 20 Feb 2014 11:57:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Useful CLI tool for XML data manipulation.
+On Thu, Feb 20, 2014 at 4:50 AM, Urs F=E4ssler <urs@bytesatwork.ch> wrote:
+> On Mit, 2014-02-19 at 16:11 -0300, Otavio Salvador wrote:
+>> On Wed, Feb 19, 2014 at 12:22 AM, Otavio Salvador
+>> <otavio@ossystems.com.br> wrote:
+>> > When looking for Qt5 components and files we ought to use the Qt5
+>> > specific path. In case the distribution wants to have a flat tree it
+>> > can set QT_DIR_NAME and it will still works as expected.
+>> >
+>> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> > ---
+>> > I have built two image and the SDK from scratch using this with no
+>> > issues. Could someone also give this a try?
+>>
+>> Today I rebuilt 5.2.1 image and SDK in two build machines (one Debian
+>> Sid and another Debian 7.4 based) and both succeed.
+>>
+>> Did someone try this one?
+>>
+>
+> I successfully built Qt 5.2.1 (from the 5.2.1 repository, not the above
+> patch) for ARM on Debian 7.4. I had some problems with cmake stuff, but
+> not sure if this has to do with my configuration.
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- .../xmlstarlet/files/configure.ac.patch            | 28 ++++++++++++++++++++++
- .../recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb | 25 +++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
- create mode 100644 meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
+It may be related, can you elaborate so I can confirm at my side? Do
+you have a test recipe for me to try?
 
-diff --git a/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch b/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
-new file mode 100644
-index 0000000..e55f4f3
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlstarlet/files/configure.ac.patch
-@@ -0,0 +1,28 @@
-+configure.ac: don't use xml-config if --with-libxml-prefix is specified to configure
-+
-+Same behavior for xslt-config.
-+
-+diff --git a/configure.ac b/configure.ac
-+index ed04e0c..39d5d4c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -40,7 +40,8 @@ AC_ARG_PROGRAM          dnl Transforming Program Names When Installing
-+ AC_PROG_SED
-+ AC_PROG_AWK
-+ 
-+-XSTAR_LIB_CHECK([LIBXML], [xml2-config])
-++AS_IF([test "x$LIBXML_PREFIX" = x],
-++      [XSTAR_LIB_CHECK([LIBXML], [xml2-config])])
-+ 
-+ AS_IF([test "x$LIBXML_SRCDIR" != x],
-+       [LIBXML_INCDIR="$LIBXML_SRCDIR/include"])
-+@@ -56,7 +57,8 @@ AS_IF([test "x$STATIC_LIBS" != xno],
-+ [LIBXML_LDFLAGS="-L$LIBXML_LIBDIR"]
-+ 
-+ 
-+-XSTAR_LIB_CHECK([LIBXSLT], [xslt-config])
-++AS_IF([test "x$LIBXSLT_PREFIX" = x],
-++      [XSTAR_LIB_CHECK([LIBXSLT], [xslt-config])])
-+ 
-+ AS_IF([test "x$LIBXSLT_SRCDIR" != x],
-+       [XSLTPROC_PATH="$LIBXSLT_SRCDIR/xsltproc:$PATH"
-diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-new file mode 100644
-index 0000000..770ccab
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Command line XML toolkit"
-+DESCRIPTION = "XMLStarlet is a command line XML toolkit which can be used to \
-+               transform, query, validate, and edit XML documents and files \
-+               using  simple set of shell commands in similar way it is done \
-+               for plain text files using grep/sed/awk/tr/diff/patch."
-+HOMEPAGE = "http://xmlstar.sourceforge.net/"
-+BUGTRACKER = "http://xmlstar.sourceforge.net/bugs/"
-+
-+SECTION = "console/utils"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c04760d09e8b0fe73283d0cc9e8bea53"
-+
-+DEPENDS = "libxml2 libxslt"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BPN}-${PV}.tar.gz \
-+           file://configure.ac.patch"
-+SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
-+SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af49fceb303f84da7214779ccf99fffc6bbba"
-+
-+inherit autotools
-+
-+# doc build: requires (native) xstlproc, fop, pdf2ps
-+EXTRA_OECONF="--disable-build-docs \
-+  --with-libxml-prefix=${STAGING_LIBDIR}/.. \
-+  --with-libxslt-prefix=${STAGING_LIBDIR}/.."
--- 
-1.8.5.4
-
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
