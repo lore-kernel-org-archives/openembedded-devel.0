@@ -1,36 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 251706EFEF
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B6846F176
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 17:52:27 +0000 (UTC)
-Received: by mail-yk0-f174.google.com with SMTP id 20so2498869yks.5
+	Thu, 20 Feb 2014 21:36:18 +0000 (UTC)
+Received: by mail-vc0-f174.google.com with SMTP id im17so2496338vcb.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 09:52:28 -0800 (PST)
+	Thu, 20 Feb 2014 13:36:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=hIHkV7EEx1PHRNxG8l7t/gY7XwiW3xtqCy+717N7HdI=;
-	b=H6yHVV0uljQE36pVFyqTok4MYaAaIA7zFDwUUS9f1ABlxCaiFGdPwg4XI7ZPOWOIiJ
-	C2VRRFKhVzQoHBWqmLrf+8tlE4Fs5K2ujoX/iJ5jXtLK5RoGK2d+0qwKut6DfqWRUfIc
-	vucXxp7MmMQlgiNrd171463mixnpeynnDRKNh10KnSqZJc1hGESx90fjzdAMae/cjT3s
-	vEKyEb756ykY/bnaLwZst1ZYXeyC5lJjYBpx1oxT63VRsMolIjxXHQXi9eGFxnSjUSKx
-	KMPpgf7czEKfImMHXBG/NpWHvSXDPY62bsBE0YIZTE80lMxbU2fRXREB063QZReAfuym
-	W54A==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=l6ryJEfDcjFpqgLQ5QZvNgGJfXGSGVMUZT+Isl1vb84=;
+	b=ZUJtSXYBwSOA1Fz+NAymJRJrIyz7EnQ0Ow13ckKkDmLAp3ZZEnSJ8mx67bQCiX/ffU
+	3Jpi7tadtEHrfS7mk75nvczWMGeDYj+fNFEYyEFeVdBq+u7iDopr+mRpmsMaPDwP8Tum
+	BCbUDd3tTZP764/f8tBa0FmHaR+o9trA2nQkSPAXyBcQpry2paXEqiQMuybgVI4n4dBc
+	F9xRepEahPtZFzn5+02LI+FLuGERg9r+DeNRYPsGyEYgh5pwsnmiO2DG/B0B2WAJUBrH
+	O+b7Kw6rkOvbUF9iCDJgGOXJ70L5fpW+9gN3wzdMxeSXh2Z3qoBIhwoq7zhoU51rKHhd
+	Oc6g==
 MIME-Version: 1.0
-X-Received: by 10.236.158.226 with SMTP id q62mr5262802yhk.2.1392918748003;
-	Thu, 20 Feb 2014 09:52:28 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Thu, 20 Feb 2014 09:52:27 -0800 (PST)
-In-Reply-To: <1392916331-30391-1-git-send-email-denis@denix.org>
-References: <1392916331-30391-1-git-send-email-denis@denix.org>
-Date: Thu, 20 Feb 2014 14:52:27 -0300
-X-Google-Sender-Auth: 5u8m-yxlJj66ChiogdiYiD7I0dI
-Message-ID: <CAP9ODKoav75vbvCQgx8OijAzC6Zu77vdw3wQtxCVfhNdVe1NdA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCHv2] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
+X-Received: by 10.52.166.9 with SMTP id zc9mr2063042vdb.16.1392932179433; Thu,
+	20 Feb 2014 13:36:19 -0800 (PST)
+Received: by 10.52.169.99 with HTTP; Thu, 20 Feb 2014 13:36:19 -0800 (PST)
+In-Reply-To: <CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
+References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
+	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
+	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
+	<CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
+Date: Thu, 20 Feb 2014 13:36:19 -0800
+Message-ID: <CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: GDM alternative?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,29 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 17:52:31 -0000
+X-List-Received-Date: Thu, 20 Feb 2014 21:36:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello Denys,
+Andreas, LXDM from meta-oe works well with minimal configuration on my part
+:)
+I didn't have to add another layer to satisfy dependencies. Thanks :)
 
-On Thu, Feb 20, 2014 at 2:12 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
+Adam
+
+
+On Wed, Feb 19, 2014 at 11:36 PM, Andreas M=FCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+> > Thank you Koen and Andreas. That has been really helped in clearing up =
+my
+> > confusion and setting the path forward.
+> >
+> > I think I will try LXDM in meta-misc in meta-oe. Is there any special
+> > configuration that I should be aware of (other then setting it as the
+> > graphical init manager)?
 >
-> * This way we don't mangle ${B} and can repeat do_install if necessary. And
->   previously it would require running do_compile again to restore the proper
->   state of ${B}.
-> * Need to bump PR, since do_compile isn't changing, but needs to re-run to
->   re-populate qmake-real binary.
+> meta-misc is my personal playground - it might have dependencies to
+> other layers and some things might not work as expected...
 >
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
-Works like a charm. I will wait until tomorrow to see if someone has
-any extra feedback and push it.
-
-Thanks for reworking the patch.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> Andreas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
