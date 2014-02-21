@@ -1,40 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f44.google.com (mail-yh0-f44.google.com
-	[209.85.213.44])
-	by mail.openembedded.org (Postfix) with ESMTP id E38F16E890
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 764276B86F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2014 20:41:40 +0000 (UTC)
-Received: by mail-yh0-f44.google.com with SMTP id f73so2954654yha.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2014 12:41:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=CY2uwCps2zoAv7NVcHvI+U6NHQKTDi36A6RuhrREQ48=;
-	b=g4ZsN9pjsmRr2rimJ3CxCe8wPindHJGPBzdCCTevbcHi9WwVELLiixDDYqi44zFG3P
-	UryaROOrSi895Wy4CVOJgJChGx/d/Eym5gM0E1/nvvSbM5yYSxFcgAKXbHNDANBxafpL
-	YAjuGA59qBKVJiYN6WYM6Xv/gK20eHXDeZkaPHiKKSjzmhZyzfeCA/bmIOV9enLRtxhb
-	ta4Q78XCqDG2HLuPUDjqSZh82GIMSVj1sdyks0VQHuIIDG5Jghcgf5PuBi2uWcSU+rYQ
-	vr/qEJwIwqkxmlUpXz3JSSbdD+5JFPyCP8NNzST6921Ff/GLH7c/41Bs/RSSbi2Gs3i9
-	vR+A==
-X-Received: by 10.236.148.48 with SMTP id u36mr13827601yhj.67.1393015300805;
-	Fri, 21 Feb 2014 12:41:40 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id n4sm22057317yhc.13.2014.02.21.12.41.37
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Fri, 21 Feb 2014 12:41:39 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 21 Feb 2014 21:12:43 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N1D008T06W87610@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	21 Feb 2014 15:12:08 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 057A2200BA; Fri,
+	21 Feb 2014 16:12:07 -0500 (EST)
+Date: Fri, 21 Feb 2014 16:12:07 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Feb 2014 17:41:04 -0300
-Message-Id: <1393015264-8343-4-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1393015264-8343-1-git-send-email-otavio@ossystems.com.br>
+Message-id: <20140221211207.GW22890@denix.org>
 References: <1393015264-8343-1-git-send-email-otavio@ossystems.com.br>
-MIME-Version: 1.0
-Cc: =?UTF-8?q?Giulian=20Gon=C3=A7alves=20Vivan?= <giulian@ossystems.com.br>
-Subject: [meta-qt5][PATCH 4/4] qsiv: add the qsiv 1.1 example app
+MIME-version: 1.0
+In-reply-to: <1393015264-8343-1-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH 1/4] qmake5_base.bbclass: Use Qt version path for headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,55 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2014 20:41:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 21 Feb 2014 21:12:44 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-From: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
+On Fri, Feb 21, 2014 at 05:41:01PM -0300, Otavio Salvador wrote:
+> When looking for Qt5 headers we ought to use the Qt5 specific path. In
+> case the distribution wants to have a flat tree it can set QT_DIR_NAME
+> and it will still works as expected.
+> 
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-This provides a simple image viewer for demonstration purposes.
+Acked-by: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
----
- recipes-qt/qsiv/qsiv_1.1.bb |   28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 recipes-qt/qsiv/qsiv_1.1.bb
+Martin,
 
-diff --git a/recipes-qt/qsiv/qsiv_1.1.bb b/recipes-qt/qsiv/qsiv_1.1.bb
-new file mode 100644
-index 0000000..bb2efa6
---- /dev/null
-+++ b/recipes-qt/qsiv/qsiv_1.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Qt Simple Image Viewer"
-+DESCRIPTION = "A simple image viewer using a mix of C++ and qml code for demonstration."
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11c7965a9059e287de5d93b98adf6d1a"
-+DEPENDS = "qtdeclarative"
-+
-+SRCREV = "7b9810b0f02f9ac74fae3ead6e2e9fb5c1382173"
-+SRC_URI = "git://code.ossystems.com.br/qt/qsiv;protocol=http"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit qmake5
-+
-+EXTRA_QMAKEVARS_PRE += "target.path=${libdir}/${P}"
-+
-+do_install_append() {
-+    install -d ${D}${bindir}
-+    echo "#!/bin/sh" > ${D}${bindir}/qsiv
-+    echo "export QML_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "export QML2_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "${libdir}/${P}/qsiv \$* " >> ${D}${bindir}/qsiv
-+    chmod +x ${D}${bindir}/qsiv
-+}
-+
-+FILES_${PN} += "${libdir}/${P}"
-+RDEPENDS_${PN} += "qtdeclarative-qmlplugins"
-+
-+FILES_${PN}-dbg += "${libdir}/${P}/.debug"
--- 
-1.7.10.4
+Thinking about what you said in that Wiki section - I believe the number of 
+apps consuming headers from /usr/include/qt5 is much higher than number of 
+non-Qt5 libs/modules potentially installing headers in there... So, we 
+shouldn't require every app recipe to set PATH_HEADERS properly.
 
+
+> ---
+>  classes/qmake5_base.bbclass |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 3861cd0..0cfb5a4 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -57,7 +57,7 @@ do_generate_qt_config_file() {
+>      cat > ${QT_CONF_PATH} <<EOF
+>  [Paths]
+>  Prefix = ${OE_QMAKE_PATH_PREFIX}
+> -Headers = ${OE_QMAKE_PATH_HEADERS}
+> +Headers = ${OE_QMAKE_PATH_QT_HEADERS}
+>  Libraries = ${OE_QMAKE_PATH_LIBS}
+>  ArchData = ${OE_QMAKE_PATH_ARCHDATA}
+>  Data = ${OE_QMAKE_PATH_DATA}
+> -- 
+> 1.7.10.4
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
