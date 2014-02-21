@@ -1,33 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
-	[209.85.214.171])
-	by mail.openembedded.org (Postfix) with ESMTP id C5DEB6CAD5
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E9AEE6028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2014 17:33:48 +0000 (UTC)
-Received: by mail-ob0-f171.google.com with SMTP id vb8so4313534obc.2
+	Fri, 21 Feb 2014 20:41:28 +0000 (UTC)
+Received: by mail-yh0-f51.google.com with SMTP id t59so2941985yho.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2014 09:33:48 -0800 (PST)
+	Fri, 21 Feb 2014 12:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=QkLKYKqdJ4rZuKY9aF6xOCWnTMR84oAYtlDc3FQvV5w=;
-	b=ksgojHO4m7uZ/HIw9MtLe9qXLrGZ/YOD5QWHjqL2VWvyf908I03X2KQAG64agIrmKw
-	XG3sZZbcisvbXyWczSJVXc1oSkUkcBGaWACKLqtZB+cCUJpU9W3ysFz68zeFncvVcoFl
-	bZ8Lr0lQ6HiLGf2AJ+X1mcfgHZYASYhc5MOSKQ4M/QGaMeQhnEm76AAJ76qjfztoa/hy
-	dvlrntKFIEeeLgMQ/X0rVAcOMPMVLS47RDi2AHT9DcNDiF1i13JQArcbyqgHdD0xqD4J
-	uH+WN5F416r1sdDe9HHk3N/y0eSQJT6VtSUvpWhd1mV4ruo4Df1DLoKyNQuQxY2B82z5
-	PKQw==
-X-Received: by 10.42.85.140 with SMTP id q12mr3599800icl.51.1393004028592;
-	Fri, 21 Feb 2014 09:33:48 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.224.137 with HTTP; Fri, 21 Feb 2014 09:33:18 -0800 (PST)
-In-Reply-To: <1392963430-16876-2-git-send-email-armccurdy@gmail.com>
-References: <1392963430-16876-1-git-send-email-armccurdy@gmail.com>
-	<1392963430-16876-2-git-send-email-armccurdy@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 21 Feb 2014 09:33:18 -0800
-Message-ID: <CAMKF1sptmyKyxT9hwxNKHkQT2ZtfH03kx_kUfGC8+=pj98j1BQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 2/2] qtwebkit-examples: add missing RDEPENDS for ca-certificates
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=d6rPjtSQTeXfUVcx+iOdBIvLakJXTCB9x9vmNE0eyRo=;
+	b=AGYnKRN0UZp9SFc1DopBM4qIXmqKCSveGHUyIP4D0Vtoz8j7F7GKvnZqnoH45UUMyJ
+	Ztoe7SNBljFSnNVVWoagqvspgLCrDAX6/ucpW5qwdycO+bEsIknOal9s2PEWccUQcubO
+	V3d1ggMA/APoRygZJLLhs9MBGurDT094TW10bNH22UYPu397HRdbWCH2qWqmxRzfd933
+	L/W4IiL97iVyTE+osYxWd6mHvjsWMA7v+sAW0+8ZGHF395AIY/zz0VSlEhaJRIox1yqJ
+	Vbua+24Leitp0VGpaSXdDt7vv2+ZMePU4t3TBc85CXcpFY+VJa9qXluS3/D4NLHn7y8k
+	g+iQ==
+X-Received: by 10.236.17.34 with SMTP id i22mr13342521yhi.110.1393015289156;
+	Fri, 21 Feb 2014 12:41:29 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id n4sm22057317yhc.13.2014.02.21.12.41.24
+	for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Fri, 21 Feb 2014 12:41:27 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Feb 2014 17:41:01 -0300
+Message-Id: <1393015264-8343-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH 1/4] qmake5_base.bbclass: Use Qt version path for headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,40 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2014 17:33:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Feb 2014 20:41:29 -0000
 
-On Thu, Feb 20, 2014 at 10:17 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> If qtbase is configured with openssl support (as it is by default)
-> then the qtwebkit example browser apps require CA certificates to
-> check the authenticity of https connections.
->
-> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-> ---
->  recipes-qt/qt5/qtwebkit-examples.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-qt/qt5/qtwebkit-examples.inc b/recipes-qt/qt5/qtwebkit-examples.inc
-> index 50c28cd..8a8e000 100644
-> --- a/recipes-qt/qt5/qtwebkit-examples.inc
-> +++ b/recipes-qt/qt5/qtwebkit-examples.inc
-> @@ -9,4 +9,4 @@ SRC_URI += " \
->  "
->
->  DEPENDS += "qtwebkit"
-> -RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
-> +RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins ca-certificates"
+When looking for Qt5 headers we ought to use the Qt5 specific path. In
+case the distribution wants to have a flat tree it can set QT_DIR_NAME
+and it will still works as expected.
 
-if this is dependent upon a PACKAGECONFIG feature from other package
-turn this one  unto same/similar PACKAGECONFIG as well otherwise the
-dependency will be lurking around if openssl is disabled.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ classes/qmake5_base.bbclass |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 3861cd0..0cfb5a4 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -57,7 +57,7 @@ do_generate_qt_config_file() {
+     cat > ${QT_CONF_PATH} <<EOF
+ [Paths]
+ Prefix = ${OE_QMAKE_PATH_PREFIX}
+-Headers = ${OE_QMAKE_PATH_HEADERS}
++Headers = ${OE_QMAKE_PATH_QT_HEADERS}
+ Libraries = ${OE_QMAKE_PATH_LIBS}
+ ArchData = ${OE_QMAKE_PATH_ARCHDATA}
+ Data = ${OE_QMAKE_PATH_DATA}
+-- 
+1.7.10.4
 
-> --
-> 1.8.1.2
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
