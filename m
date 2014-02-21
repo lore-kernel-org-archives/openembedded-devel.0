@@ -1,37 +1,25 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B6846F176
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 03A8F6EF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 21:36:18 +0000 (UTC)
-Received: by mail-vc0-f174.google.com with SMTP id im17so2496338vcb.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2014 13:36:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=l6ryJEfDcjFpqgLQ5QZvNgGJfXGSGVMUZT+Isl1vb84=;
-	b=ZUJtSXYBwSOA1Fz+NAymJRJrIyz7EnQ0Ow13ckKkDmLAp3ZZEnSJ8mx67bQCiX/ffU
-	3Jpi7tadtEHrfS7mk75nvczWMGeDYj+fNFEYyEFeVdBq+u7iDopr+mRpmsMaPDwP8Tum
-	BCbUDd3tTZP764/f8tBa0FmHaR+o9trA2nQkSPAXyBcQpry2paXEqiQMuybgVI4n4dBc
-	F9xRepEahPtZFzn5+02LI+FLuGERg9r+DeNRYPsGyEYgh5pwsnmiO2DG/B0B2WAJUBrH
-	O+b7Kw6rkOvbUF9iCDJgGOXJ70L5fpW+9gN3wzdMxeSXh2Z3qoBIhwoq7zhoU51rKHhd
-	Oc6g==
+	Fri, 21 Feb 2014 00:03:25 +0000 (UTC)
+Received: (qmail 7561 invoked by uid 1003); 21 Feb 2014 00:03:25 -0000
+Received: from unknown (HELO ?192.168.1.146?)
+	(philip@opensdr.com@71.171.41.155)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	21 Feb 2014 00:03:25 -0000
+Message-ID: <530697CC.5050402@balister.org>
+Date: Thu, 20 Feb 2014 19:03:24 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130625 Thunderbird/17.0.7
 MIME-Version: 1.0
-X-Received: by 10.52.166.9 with SMTP id zc9mr2063042vdb.16.1392932179433; Thu,
-	20 Feb 2014 13:36:19 -0800 (PST)
-Received: by 10.52.169.99 with HTTP; Thu, 20 Feb 2014 13:36:19 -0800 (PST)
-In-Reply-To: <CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
-References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
-	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
-	<CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
-Date: Thu, 20 Feb 2014 13:36:19 -0800
-Message-ID: <CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: GDM alternative?
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+X-Enigmail-Version: 1.6
+Subject: OEDAM: OpenEmbedded Developers (Americas) Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2014 21:36:28 -0000
+X-List-Received-Date: Fri, 21 Feb 2014 00:03:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Andreas, LXDM from meta-oe works well with minimal configuration on my part
-:)
-I didn't have to add another layer to satisfy dependencies. Thanks :)
+The OpenEmbedded Project is holding a developers meeting May 2-3,
+2014, in Santa Clara, CA. This meeting is immediately after the Embedded
+Linux Conference North America. All active OpenEmbedded and Yocto
+Project developers are invited to attend.
 
-Adam
+NOTE: this is a development meeting for the project itself, not a
+training session.
 
+May 2-3, 2014
+time TBD
 
-On Wed, Feb 19, 2014 at 11:36 PM, Andreas M=FCller <
-schnitzeltony@googlemail.com> wrote:
+Ettus Research/National Instruments
+4600 Patrick Henry Drive
+Santa Clara, CA 95054 USA
 
-> On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
-> > Thank you Koen and Andreas. That has been really helped in clearing up =
-my
-> > confusion and setting the path forward.
-> >
-> > I think I will try LXDM in meta-misc in meta-oe. Is there any special
-> > configuration that I should be aware of (other then setting it as the
-> > graphical init manager)?
->
-> meta-misc is my personal playground - it might have dependencies to
-> other layers and some things might not work as expected...
->
-> Andreas
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Lunch will be provided on both days.
+
+For more information and to add yourself to the list of attendees, see
+the wiki page at
+http://openembedded.org/wiki/OEDAM
+
+Here are a couple of photos from 2009:
+
+http://www.flickr.com/photos/32615155@N00/sets/72157622653686647/
+
+I'd like to thank Jefro for help with this announcement. Any errors are
+mine though.
+
+Philip, OpenEmbedded eV Chair.
 
