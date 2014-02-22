@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 235746B7AD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Feb 2014 14:33:54 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id t10so2196829eei.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Feb 2014 06:33:55 -0800 (PST)
+Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 00EFD6F179;
+	Sat, 22 Feb 2014 18:09:06 +0000 (UTC)
+Received: by mail-ea0-f169.google.com with SMTP id d10so1018110eaj.28
+	for <multiple recipients>; Sat, 22 Feb 2014 10:09:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=l0EAMIwRSQOwWOnIEwbGC0FyWCfICclSqvRnZIoOY4U=;
-	b=pJ+3Jy/tjM4gB27YJyuOYhpVOrVUnvis9pPK4b1hp839MoYfnez1/uAfrTLQnG/Utu
-	6E6thgnhyCi28lQMvkVtOHaLm7O4Fxvjzr9TqyHCNfHefelTkTyssCfDSoJwCq/ZZJ0f
-	NZq7HIhPLPFsB0VTnsnx7wsCTGQ2rfokEVAJOsjq/36NUWjhd4afDJ/NOraql4NhCxsq
-	o11k49DdaoCZUoRFBmZFysceHD3gstrK4EJ8fgNBq2ov33dpMPxfiS9jq43zLmKiZgzD
-	ENzjxMrl5XibS0A18kxQQgr2CeqIGqqcDHcCBG9ml0GETI59J7YSioKfOFryMgLIuJpq
-	tuAg==
-X-Received: by 10.14.3.72 with SMTP id 48mr14889815eeg.34.1393079635197;
-	Sat, 22 Feb 2014 06:33:55 -0800 (PST)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=2lr2M935Fmyf0X1w2RSPGe+dA/Z2JA2Hbk1ijG9UCqE=;
+	b=EjsMEIs/eVFvMX3a8FydAtP16hahBGmTELkfdTaaYmKNmujBvc2Gd664vkNcHoEkpj
+	bin6jvlnYse6E3gL6AUnvTyL4wFti+ngyRKgjS8pF9pNHvknnX8ivYApZum+gYahHDUV
+	pAO3rsMOF9wjzmdBn6gwuDY8c2nDXOLCuOhvr343TBpriNxibN1gXNIRVVAzKNAzDhPI
+	b8tGB80ipqEC//Q1ZvC+xiTEh63bHhhh2iwJwRdxm8GtXXXbKoFoHU6T3NiEWNZkfh2d
+	iDqRCCMaq5jWO6HTM1afz6KUtjJ0BOKHSBYGSsEm9kSHl7b9cYczHanbElv62j2eSPRv
+	xH4w==
+X-Received: by 10.14.179.129 with SMTP id h1mr15698122eem.26.1393092546910;
+	Sat, 22 Feb 2014 10:09:06 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	j42sm39524074eep.21.2014.02.22.06.33.53 for <multiple recipients>
+	n48sm20690176eew.0.2014.02.22.10.09.05 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 22 Feb 2014 06:33:54 -0800 (PST)
+	Sat, 22 Feb 2014 10:09:05 -0800 (PST)
+Date: Sat, 22 Feb 2014 19:09:42 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Feb 2014 15:34:29 +0100
-Message-Id: <1393079669-10800-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.8.5.3
-In-Reply-To: <20140222133327.GO3854@jama>
-References: <20140222133327.GO3854@jama>
-Subject: [PATCH] rage, emprint, news: Move to nonworking
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140222180942.GP3854@jama>
+References: <20140221160142.GH3854@jama>
+MIME-Version: 1.0
+In-Reply-To: <20140221160142.GH3854@jama>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: State of bitbake world, Failed tasks 2014-02-21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,80 +45,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Feb 2014 14:33:57 -0000
+X-List-Received-Date: Sat, 22 Feb 2014 18:09:12 -0000
+X-Groupsio-MsgNum: 48273
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tZCmRiovzb4sxAVa"
+Content-Disposition: inline
 
-* if you want to use these modules with E18, then you need to update
-  them to git recipes fetching newer sources from
-  http://git.enlightenment.org/enlightenment/modules/news.git/
-  http://git.enlightenment.org/apps/rage.git/
-  http://git.enlightenment.org/apps/emprint.git/
+--tZCmRiovzb4sxAVa
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/emprint_svn.bb | 12 ------------
- meta-efl/recipes-efl/e17/news_svn.bb    | 12 ------------
- meta-efl/recipes-efl/e17/rage_svn.bb    | 13 -------------
- 3 files changed, 37 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/e17/emprint_svn.bb
- delete mode 100644 meta-efl/recipes-efl/e17/news_svn.bb
- delete mode 100644 meta-efl/recipes-efl/e17/rage_svn.bb
+On Fri, Feb 21, 2014 at 05:01:42PM +0100, Martin Jansa wrote:
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>=20
+> =3D=3D Failed tasks 2014-02-21 =3D=3D
+>=20
+> =3D=3D=3D common (20) =3D=3D=3D
+>     * meta-openembedded/meta-efl/recipes-efl/e17/e-tasks_git.bb, do_compi=
+le
 
-diff --git a/meta-efl/recipes-efl/e17/emprint_svn.bb b/meta-efl/recipes-efl/e17/emprint_svn.bb
-deleted file mode 100644
-index 777e302..0000000
---- a/meta-efl/recipes-efl/e17/emprint_svn.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--DESCRIPTION = "Emprint is a utility for taking screenshots of the entire screen, a specific window, or a specific region."
--LICENSE = "MIT BSD"
--DEPENDS = "imlib2 virtual/libx11 ecore evas edje eina"
--PV = "0.0.1+svnr${SRCPV}"
--LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
--SRCREV = "${EFL_SRCREV}"
--
--inherit e
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
--
--FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
-diff --git a/meta-efl/recipes-efl/e17/news_svn.bb b/meta-efl/recipes-efl/e17/news_svn.bb
-deleted file mode 100644
-index 9b89d80..0000000
---- a/meta-efl/recipes-efl/e17/news_svn.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--PV = "0.1.0+svnr${SRCPV}"
--PR = "${INC_PR}.0"
--
--require e-module.inc
--
--do_configure_prepend() {
--    sed -i -e /po/d configure.ac 
--    sed -i -e s:\ po::g Makefile.am
--}
-diff --git a/meta-efl/recipes-efl/e17/rage_svn.bb b/meta-efl/recipes-efl/e17/rage_svn.bb
-deleted file mode 100644
-index 3cf576f..0000000
---- a/meta-efl/recipes-efl/e17/rage_svn.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "Rage is a media center application based on EFL"
--AUTHOR = "Carsten 'The Rasterman' Haitzler"
--HOMEPAGE = "http://www.rasterman.com"
--LICENSE = "MIT BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
--DEPENDS = "emotion evas ecore edje"
--SECTION = "x11/multimedia"
--PV = "0.3.0.042+svnr${SRCPV}"
--SRCREV = "${EFL_SRCREV}"
--
--inherit e
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
--- 
-1.8.5.3
+Fixed.
+
+>     * meta-openembedded/meta-efl/recipes-efl/e17/emprint_svn.bb, do_compi=
+le
+>     * meta-openembedded/meta-efl/recipes-efl/e17/news_svn.bb, do_compile
+>     * meta-openembedded/meta-efl/recipes-efl/e17/rage_svn.bb, do_compile
+
+Removed (see efl-1.8 thread in oe-devel ML)
+
+>     * meta-openembedded/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr=
+159807.bb, do_configure
+
+Missing icu in harfbuzz PACKAGECONFIG.
+
+>     * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.2=
+4.bb, do_compile
+>     * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.=
+2.bb, do_fetch
+>     * meta-openembedded/meta-multimedia/recipes-multimedia/musicbrainz/li=
+bmusicbrainz_git.bb, do_configure
+>     * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11=
+=2Ebb, do_compile
+
+Most likely broken by
+commit 85ac4d82c77e3cab6a5867e4ec110ba07023838b
+Author: Cristian Iorga <cristian.iorga@intel.com>
+Date:   Wed Feb 12 18:42:32 2014 +0200
+
+    flac: upgrade to 1.3.0
+
+I'm working on this.
+
+>     * meta-openembedded/meta-networking/recipes-support/traceroute/tracer=
+oute_2.0.18.bb, do_compile
+>     * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do=
+_install
+>     * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, d=
+o_compile
+>     * meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.=
+8.13.bb, do_configure
+>     * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_co=
+mpile
+>     * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do=
+_compile
+>     * meta-openembedded/meta-oe/recipes-support/inih/libinih_git.bb, do_i=
+nstall
+>     * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_compile
+
+fixed compilation without gles2 (with gl only), patches in meta-qt5/master-=
+next
+
+>     * meta-smartphone/meta-fso/recipes-freesmartphone/freesmartphone/zhon=
+e_git.bb, do_compile
+
+Fixed.
+
+>     * meta-smartphone/meta-shr/recipes-shr/themes/e-wm-theme-illume-neo_g=
+it.bb, do_compile
+
+Fixed.
+
+>     * openembedded-core/meta/recipes-graphics/wayland/weston_1.4.0.bb, do=
+_configure
+
+Probably fixed by adding wayland to jenkins's DISTRO_FEATURES
+
+The rest is free for other people to blitz during this bug squashing
+weekend.
+
+If you start working on some of these, please leave an message here,
+I'll do the same if I find time to work on some more.
+
+> =3D=3D=3D common-x86 (5) =3D=3D=3D
+>     * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_comp=
+ile
+>     * meta-openembedded/meta-initramfs/recipes-bsp/images/initramfs-kexec=
+boot-klibc-image.bb, do_rootfs
+>     * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_c=
+ompile
+>     * meta-openembedded/meta-oe/recipes-support/ode/ode_0.9.bb, do_config=
+ure
+>     * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+>=20
+> =3D=3D=3D qemuarm (2) =3D=3D=3D
+>     * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, d=
+o_compile
+>     * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+>=20
+> =3D=3D=3D qemux86 (1) =3D=3D=3D
+>     * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-g=
+eode_2.11.14.bb, do_compile
+>=20
+> =3D=3D=3D qemux86_64 (1) =3D=3D=3D
+>     * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/lib=
+imobiledevice_1.1.4.bb, do_configure
+>=20
+> =3D=3D=3D Number of failed tasks =3D=3D=3D
+> {| class=3Dwikitable
+> |-
+> ||qemuarm       ||22    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr=
+-core-branches//log.world.20140219_131156.log/
+> |-
+> ||qemux86       ||26    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr=
+-core-branches//log.world.20140220_075930.log/
+> |-
+> ||qemux86_64    ||26    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr=
+-core-branches//log.world.20140218_180012.log/
+> |}
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--tZCmRiovzb4sxAVa
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMI5+YACgkQN1Ujt2V2gBwImwCfc3q/EUP5BF6lXEGInJL/k/qU
+uKEAnA/AhIHD3EVvTyGbTR+lFn/HHFDy
+=Burs
+-----END PGP SIGNATURE-----
+
+--tZCmRiovzb4sxAVa--
