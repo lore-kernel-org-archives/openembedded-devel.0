@@ -1,38 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F9236E3E0
+Received: from mail-ea0-f174.google.com (mail-ea0-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 918FE6E7E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Feb 2014 08:04:29 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id e53so461009eek.18
+	Sat, 22 Feb 2014 08:24:26 +0000 (UTC)
+Received: by mail-ea0-f174.google.com with SMTP id m10so1745469eaj.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Feb 2014 00:04:29 -0800 (PST)
+	Sat, 22 Feb 2014 00:24:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yVkkln0EccW27apW4j5Px2pg7RNLn6PX6Etyc8RLxT4=;
-	b=pU/V9qaTRcwSrEtse+nzF/zrIfvmfx8R8dicqYzdF09TaRQ5mi14G9yCjUMblzC5qo
-	NZ17hAdi63CY9LxCGOO6MzppEElHVGdkvsaoAqT4WhxvyxolSlrW77TSYl0CYv2yDQ2X
-	KRBf576WQ85xVuhb1r3yL27pXwDeVjV4y/ugHu8KvYQsEieN62odMT8MigctdzkDxFQi
-	y2aa5i73c47CJuDs6ZbPTr5NlEWFMXZrFgqNrppCNnN4uNpGrY9k7Y/8qqqHtELkYlqm
-	W76h20oBt0ZnD1ZeAfc/yXhxmj+uC3cm41riOvnSfjA5ljQiTG94vOuMcwzF1Q54y6DG
-	if8g==
-X-Received: by 10.14.221.4 with SMTP id q4mr12727843eep.47.1393056269848;
-	Sat, 22 Feb 2014 00:04:29 -0800 (PST)
+	bh=7uu8gAklnirGrnbErwkeB+lBCWBv6cPbqn1d+0FiyjM=;
+	b=g10J7OUiWmqFWEfi7djQHc25PJfsWePZft9j6d2jf85VMCXso9r21a914/u0LYXHD9
+	ZhmU65ViGAgivctqygH/sgDkvTxZ+9lSXmmpw37e2Wv2NDxz4CgBcr50JMOfoTDNuQPD
+	BWLug8prtD46M/egbChpipDWVNtJ01Xjt3Ud/hG8OL5aehfms2O8kubIzwxVBFPWTmqv
+	5MFL11+YWoEC7qgkF9m+ID/3N/iOEnLsczbkojWEFxKieKvvTtnjRsjsvQxTAH+qWTN3
+	6wMfbyKGfHcv1H0Yx7qysfFqZuYSURIfJjxPgEv46u+EskDoU8lCLdTJKWWmimNQ5uoh
+	9zjg==
+X-Received: by 10.14.177.135 with SMTP id d7mr1429265eem.33.1393057466969;
+	Sat, 22 Feb 2014 00:24:26 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	43sm34158018eeh.13.2014.02.22.00.04.28 for <multiple recipients>
+	v6sm36097795eef.2.2014.02.22.00.24.25
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 22 Feb 2014 00:04:28 -0800 (PST)
-Date: Sat, 22 Feb 2014 09:05:05 +0100
+	Sat, 22 Feb 2014 00:24:25 -0800 (PST)
+Date: Sat, 22 Feb 2014 09:25:02 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140222080505.GK3854@jama>
-References: <1392916331-30391-1-git-send-email-denis@denix.org>
+Message-ID: <20140222082502.GL3854@jama>
+References: <1393047007-20507-1-git-send-email-armccurdy@gmail.com>
+	<1393047007-20507-2-git-send-email-armccurdy@gmail.com>
+	<20140222063919.GJ3854@jama>
 MIME-Version: 1.0
-In-Reply-To: <1392916331-30391-1-git-send-email-denis@denix.org>
+In-Reply-To: <20140222063919.GJ3854@jama>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCHv2] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
+Subject: Re: [meta-qt5][PATCH v2 2/2] qtwebkit-examples: add RDEPENDS for ca-certificates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,94 +49,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Feb 2014 08:04:33 -0000
-X-Groupsio-MsgNum: 48265
+X-List-Received-Date: Sat, 22 Feb 2014 08:24:29 -0000
+X-Groupsio-MsgNum: 48266
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Tv3+oRj6D9L8lW+H"
+	protocol="application/pgp-signature"; boundary="AQNmCumFClRcGgHG"
 Content-Disposition: inline
 
---Tv3+oRj6D9L8lW+H
+--AQNmCumFClRcGgHG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 20, 2014 at 12:12:11PM -0500, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
+On Sat, Feb 22, 2014 at 07:39:19AM +0100, Martin Jansa wrote:
+> On Fri, Feb 21, 2014 at 09:30:07PM -0800, Andre McCurdy wrote:
+> > If qtbase is configured with openssl support then the
+> > qtwebkit browser example apps require CA certificates.
+> >=20
+> > Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> > ---
+> >  recipes-qt/qt5/qt5.inc               | 2 ++
+> >  recipes-qt/qt5/qtbase.inc            | 2 +-
+> >  recipes-qt/qt5/qtwebkit-examples.inc | 1 +
+> >  3 files changed, 4 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+> > index 7e739c5..e2a1662 100644
+> > --- a/recipes-qt/qt5/qt5.inc
+> > +++ b/recipes-qt/qt5/qt5.inc
+> > @@ -7,6 +7,8 @@ inherit qmake5
+> >  ICU =3D "icu "
+> >  ICU_powerpc =3D "pango"
+> > =20
+> > +PACKAGECONFIG_OPENSSL ?=3D "openssl"
+> > +
+> >  QT_MODULE ?=3D "${BPN}"
+> > =20
+> >  # we don't want conflicts with qt4
+> > diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> > index 6a0149a..d805c47 100644
+> > --- a/recipes-qt/qt5/qtbase.inc
+> > +++ b/recipes-qt/qt5/qtbase.inc
+> > @@ -47,7 +47,7 @@ PACKAGECONFIG ??=3D " \
+> >      udev \
+> >      evdev \
+> >      widgets \
+> > -    openssl \
+> > +    ${PACKAGECONFIG_OPENSSL} \
+> >      ${PACKAGECONFIG_GL} \
+> >      ${PACKAGECONFIG_FB} \
+> >      ${PACKAGECONFIG_X11} \
+> > diff --git a/recipes-qt/qt5/qtwebkit-examples.inc b/recipes-qt/qt5/qtwe=
+bkit-examples.inc
+> > index 50c28cd..84f16a4 100644
+> > --- a/recipes-qt/qt5/qtwebkit-examples.inc
+> > +++ b/recipes-qt/qt5/qtwebkit-examples.inc
+> > @@ -10,3 +10,4 @@ SRC_URI +=3D " \
+> > =20
+> >  DEPENDS +=3D "qtwebkit"
+> >  RDEPENDS_${PN}-examples +=3D "qtwebkit-qmlplugins"
+> > +RDEPENDS_${PN}-examples +=3D "${@base_contains('PACKAGECONFIG_OPENSSL'=
+, 'openssl', 'ca-certificates', '', d)}"
 >=20
-> * This way we don't mangle ${B} and can repeat do_install if necessary. A=
-nd
->   previously it would require running do_compile again to restore the pro=
-per
->   state of ${B}.
-> * Need to bump PR, since do_compile isn't changing, but needs to re-run to
->   re-populate qmake-real binary.
->=20
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  recipes-qt/qt5/nativesdk-qtbase.inc | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/natives=
-dk-qtbase.inc
-> index fa44009..3cb9b0e 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
-> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-> @@ -10,6 +10,8 @@ require nativesdk-qt5.inc
->  # it's already included with newer oe-core, but include it here for dylan
->  FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qtbase:"
-> =20
-> +PR =3D "r1"
-> +
+> This should be checking PACKAGECONFIG variable (not
+> PACKAGECONFIG_OPENSSL).
 
-It's already merged, but please don't add new PRs, especially to .inc
-files.
+Please ignore my comment, I haven't noticed that you've added
+PACKAGECONFIG_OPENSSL to qt5.inc and it's actually "from qtbase's
+PACKAGECONFIG".
 
->  # common with -native and target version
->  SRC_URI +=3D "\
->      file://0001-Add-linux-oe-g-platform.patch \
-> @@ -192,14 +194,12 @@ do_install() {
->      # Fix install paths for all
->      find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR=
-_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
-> =20
-> -    # switch back the proper qmake
-> -    if [ -e ${B}/bin/qmake-real ]; then
-> -        rm ${B}/bin/qmake
-> -        mv ${B}/bin/qmake-real ${B}/bin/qmake
-> -    fi
-> -
->      oe_runmake install INSTALL_ROOT=3D${D}
-> =20
-> +    # replace the native qmake installed above with nativesdk version
-> +    rm -rf ${D}${OE_QMAKE_PATH_HOST_BINS}/qmake
-> +    install -m 755 ${B}/bin/qmake-real ${D}${OE_QMAKE_PATH_HOST_BINS}/qm=
-ake
-> +
->      # for modules which are still using syncqt and call qtPrepareTool(QM=
-AKE_SYNCQT, syncqt)
->      # e.g. qt3d, qtwayland
->      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
-> --=20
-> 1.8.3.2
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I've added comment in qtbase.inc and integrated this to master-next.
 
+Thanks
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Tv3+oRj6D9L8lW+H
+--AQNmCumFClRcGgHG
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMIWjEACgkQN1Ujt2V2gBw3AACcD2p4YLCnRXFjg2rymt6HsFrB
-E5MAnA9T0/DrkCIdLE/oLec1bicXINWW
-=/mF0
+iEYEARECAAYFAlMIXt4ACgkQN1Ujt2V2gBy03gCfYBPshVuwIPK7MPr5hd3f8FQa
+OxgAoLdk5GJZ4k6a3ExWzkYAvS/4Y78l
+=w1Gf
 -----END PGP SIGNATURE-----
 
---Tv3+oRj6D9L8lW+H--
+--AQNmCumFClRcGgHG--
