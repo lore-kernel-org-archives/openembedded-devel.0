@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id B56CA6B7AD
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F9236E3E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Feb 2014 06:38:43 +0000 (UTC)
-Received: by mail-ee0-f51.google.com with SMTP id b57so2010802eek.38
+	Sat, 22 Feb 2014 08:04:29 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id e53so461009eek.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2014 22:38:44 -0800 (PST)
+	Sat, 22 Feb 2014 00:04:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=mnxkYmWFB6UyefjZPFeSmQC/PaCwJ36ZWp/cgGk7vRc=;
-	b=hCFdyPsHKNic/+itNyiUUtJ2KeXmctpkNwCNJLMw8LLIXqXTqoV51nyKdsdCRcjrZ1
-	dDRD8M07p6/7WmYNInF0PPoRH6VJAvYHQm9T3BFKWxUG1qlXMQbnmB4kPd/F5DnYjjUP
-	vnZPEq5sMJKL7xpvgIgfbNyKu4LcrE8ubCUPsW32LoCJ8PJtsn81D9tfaPPZTTVyQoNt
-	mBdx4SX8QzhdaOrEQ1wFANn1uBO3vzYapxnuM2faPIcfDoDjbupYxoChV/cK9A2OVk/+
-	OogtV6DttphAiZwZBB/ht9OnF4ui4CR+OrTY/n7yBbANJgWfQw04fvlyapqydK7QE3hF
-	Lo9w==
-X-Received: by 10.14.209.3 with SMTP id r3mr6609877eeo.85.1393051124049;
-	Fri, 21 Feb 2014 22:38:44 -0800 (PST)
+	bh=yVkkln0EccW27apW4j5Px2pg7RNLn6PX6Etyc8RLxT4=;
+	b=pU/V9qaTRcwSrEtse+nzF/zrIfvmfx8R8dicqYzdF09TaRQ5mi14G9yCjUMblzC5qo
+	NZ17hAdi63CY9LxCGOO6MzppEElHVGdkvsaoAqT4WhxvyxolSlrW77TSYl0CYv2yDQ2X
+	KRBf576WQ85xVuhb1r3yL27pXwDeVjV4y/ugHu8KvYQsEieN62odMT8MigctdzkDxFQi
+	y2aa5i73c47CJuDs6ZbPTr5NlEWFMXZrFgqNrppCNnN4uNpGrY9k7Y/8qqqHtELkYlqm
+	W76h20oBt0ZnD1ZeAfc/yXhxmj+uC3cm41riOvnSfjA5ljQiTG94vOuMcwzF1Q54y6DG
+	if8g==
+X-Received: by 10.14.221.4 with SMTP id q4mr12727843eep.47.1393056269848;
+	Sat, 22 Feb 2014 00:04:29 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o43sm35185258eef.12.2014.02.21.22.38.42
-	for <openembedded-devel@lists.openembedded.org>
+	43sm34158018eeh.13.2014.02.22.00.04.28 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Feb 2014 22:38:42 -0800 (PST)
-Date: Sat, 22 Feb 2014 07:39:19 +0100
+	Sat, 22 Feb 2014 00:04:28 -0800 (PST)
+Date: Sat, 22 Feb 2014 09:05:05 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140222063919.GJ3854@jama>
-References: <1393047007-20507-1-git-send-email-armccurdy@gmail.com>
-	<1393047007-20507-2-git-send-email-armccurdy@gmail.com>
+Message-ID: <20140222080505.GK3854@jama>
+References: <1392916331-30391-1-git-send-email-denis@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <1393047007-20507-2-git-send-email-armccurdy@gmail.com>
+In-Reply-To: <1392916331-30391-1-git-send-email-denis@denix.org>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-qt5][PATCH v2 2/2] qtwebkit-examples: add RDEPENDS for ca-certificates
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][PATCHv2] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,82 +46,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Feb 2014 06:38:46 -0000
-X-Groupsio-MsgNum: 48264
+X-List-Received-Date: Sat, 22 Feb 2014 08:04:33 -0000
+X-Groupsio-MsgNum: 48265
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="EVh9lyqKgK19OcEf"
+	protocol="application/pgp-signature"; boundary="Tv3+oRj6D9L8lW+H"
 Content-Disposition: inline
 
---EVh9lyqKgK19OcEf
+--Tv3+oRj6D9L8lW+H
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 21, 2014 at 09:30:07PM -0800, Andre McCurdy wrote:
-> If qtbase is configured with openssl support then the
-> qtwebkit browser example apps require CA certificates.
+On Thu, Feb 20, 2014 at 12:12:11PM -0500, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
 >=20
-> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> * This way we don't mangle ${B} and can repeat do_install if necessary. A=
+nd
+>   previously it would require running do_compile again to restore the pro=
+per
+>   state of ${B}.
+> * Need to bump PR, since do_compile isn't changing, but needs to re-run to
+>   re-populate qmake-real binary.
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 > ---
->  recipes-qt/qt5/qt5.inc               | 2 ++
->  recipes-qt/qt5/qtbase.inc            | 2 +-
->  recipes-qt/qt5/qtwebkit-examples.inc | 1 +
->  3 files changed, 4 insertions(+), 1 deletion(-)
+>  recipes-qt/qt5/nativesdk-qtbase.inc | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 >=20
-> diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-> index 7e739c5..e2a1662 100644
-> --- a/recipes-qt/qt5/qt5.inc
-> +++ b/recipes-qt/qt5/qt5.inc
-> @@ -7,6 +7,8 @@ inherit qmake5
->  ICU =3D "icu "
->  ICU_powerpc =3D "pango"
+> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/natives=
+dk-qtbase.inc
+> index fa44009..3cb9b0e 100644
+> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
+> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+> @@ -10,6 +10,8 @@ require nativesdk-qt5.inc
+>  # it's already included with newer oe-core, but include it here for dylan
+>  FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/qtbase:"
 > =20
-> +PACKAGECONFIG_OPENSSL ?=3D "openssl"
+> +PR =3D "r1"
 > +
->  QT_MODULE ?=3D "${BPN}"
-> =20
->  # we don't want conflicts with qt4
-> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-> index 6a0149a..d805c47 100644
-> --- a/recipes-qt/qt5/qtbase.inc
-> +++ b/recipes-qt/qt5/qtbase.inc
-> @@ -47,7 +47,7 @@ PACKAGECONFIG ??=3D " \
->      udev \
->      evdev \
->      widgets \
-> -    openssl \
-> +    ${PACKAGECONFIG_OPENSSL} \
->      ${PACKAGECONFIG_GL} \
->      ${PACKAGECONFIG_FB} \
->      ${PACKAGECONFIG_X11} \
-> diff --git a/recipes-qt/qt5/qtwebkit-examples.inc b/recipes-qt/qt5/qtwebk=
-it-examples.inc
-> index 50c28cd..84f16a4 100644
-> --- a/recipes-qt/qt5/qtwebkit-examples.inc
-> +++ b/recipes-qt/qt5/qtwebkit-examples.inc
-> @@ -10,3 +10,4 @@ SRC_URI +=3D " \
-> =20
->  DEPENDS +=3D "qtwebkit"
->  RDEPENDS_${PN}-examples +=3D "qtwebkit-qmlplugins"
-> +RDEPENDS_${PN}-examples +=3D "${@base_contains('PACKAGECONFIG_OPENSSL', =
-'openssl', 'ca-certificates', '', d)}"
 
-This should be checking PACKAGECONFIG variable (not
-PACKAGECONFIG_OPENSSL).
+It's already merged, but please don't add new PRs, especially to .inc
+files.
+
+>  # common with -native and target version
+>  SRC_URI +=3D "\
+>      file://0001-Add-linux-oe-g-platform.patch \
+> @@ -192,14 +194,12 @@ do_install() {
+>      # Fix install paths for all
+>      find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR=
+_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+> =20
+> -    # switch back the proper qmake
+> -    if [ -e ${B}/bin/qmake-real ]; then
+> -        rm ${B}/bin/qmake
+> -        mv ${B}/bin/qmake-real ${B}/bin/qmake
+> -    fi
+> -
+>      oe_runmake install INSTALL_ROOT=3D${D}
+> =20
+> +    # replace the native qmake installed above with nativesdk version
+> +    rm -rf ${D}${OE_QMAKE_PATH_HOST_BINS}/qmake
+> +    install -m 755 ${B}/bin/qmake-real ${D}${OE_QMAKE_PATH_HOST_BINS}/qm=
+ake
+> +
+>      # for modules which are still using syncqt and call qtPrepareTool(QM=
+AKE_SYNCQT, syncqt)
+>      # e.g. qt3d, qtwayland
+>      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+> --=20
+> 1.8.3.2
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---EVh9lyqKgK19OcEf
+--Tv3+oRj6D9L8lW+H
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMIRhcACgkQN1Ujt2V2gBzSnQCeLepMeE4Cmd+iUcwysG6jVQ72
-Sw4AoLCofO0qhXQGIbZtVprGet7WewQY
-=rlsw
+iEYEARECAAYFAlMIWjEACgkQN1Ujt2V2gBw3AACcD2p4YLCnRXFjg2rymt6HsFrB
+E5MAnA9T0/DrkCIdLE/oLec1bicXINWW
+=/mF0
 -----END PGP SIGNATURE-----
 
---EVh9lyqKgK19OcEf--
+--Tv3+oRj6D9L8lW+H--
