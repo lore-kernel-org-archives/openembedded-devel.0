@@ -1,40 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f45.google.com (mail-yh0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A8256F239
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f180.google.com (mail-ea0-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B343F6EC7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 13:50:38 +0000 (UTC)
-Received: by mail-yh0-f45.google.com with SMTP id i57so4212567yha.32
+	Sun, 23 Feb 2014 15:01:53 +0000 (UTC)
+Received: by mail-ea0-f180.google.com with SMTP id o10so2587172eaj.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 05:50:39 -0800 (PST)
+	Sun, 23 Feb 2014 07:01:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=CY2uwCps2zoAv7NVcHvI+U6NHQKTDi36A6RuhrREQ48=;
-	b=ul4kIhA8Jjg5yZKbHGrP4yy4q6kquGXPdX29KC7KA7czqEGONQjDGNoRXMAal+k6K3
-	0xwI+kRmckGPp/LS5WcOLlXcALAIFePvt/H55ylgT4EB5mvGIFBPnXnyBJAxWe/jUnmv
-	rFtKIJZAFhBUCJvSYY5EpSQHmbeVg58+a+yP7KCG7QDrpXwjAgQEpgV7SH8almRajT9B
-	kKwOM5YXcYK7RK0vW0Fvc1QW6rLN8o2S54nSMzmD/DAajhNz05PP4XdBkQwoHo3vHb3s
-	3XMJK3Hkm5lVEX7G6FcpRrATxUBmJOXrICDbAxRgpJ0706YskGJcx7NZyBNStw04SsQA
-	JowA==
-X-Received: by 10.236.123.38 with SMTP id u26mr24070122yhh.93.1393163439732;
-	Sun, 23 Feb 2014 05:50:39 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id p63sm4246689yhl.15.2014.02.23.05.50.38
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 23 Feb 2014 05:50:39 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=dZA+rEZ7SpLVjZ/upV9GqgftE7zRqJs5zIsvMwxaLK0=;
+	b=d3MaF8C/qwVheipxGpV0HOAZuy5olwJv/y+OFHkOjbOyNlksWTmS6BL6FbRG/kIlc8
+	J4m6TmqsaK1r/9CKBZPCJFZpWg/YMofzqS00tI7bdem1OmDqsdLnOUiTN77PwTfVoAz2
+	X445AO6Lcfth70aYdpes7r2WSKOY+xlHSC6YaUfms5Xrh8pCAjHWqsidPoRyGFfKsnG7
+	JVSYD25ZcC7iqOBBuTWF9vkrkAQhkK3xFDnP+p0kYCzc+MiQG5Ux0ajSmPfpmXh3BzwE
+	0m3LKPujkobiF+iCb22vAV6Os6q1TJZvOchGuu8q/O2ALt5Lsu/t0Gcv2MBuHAqGQ2XR
+	+x1w==
+X-Received: by 10.14.176.66 with SMTP id a42mr19363405eem.101.1393167713982;
+	Sun, 23 Feb 2014 07:01:53 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	43sm50250074eeh.13.2014.02.23.07.01.48 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 23 Feb 2014 07:01:49 -0800 (PST)
+Date: Sun, 23 Feb 2014 16:02:27 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Feb 2014 10:50:14 -0300
-Message-Id: <1393163414-9494-4-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1393163414-9494-1-git-send-email-otavio@ossystems.com.br>
+Message-ID: <20140223150227.GT3854@jama>
 References: <1393163414-9494-1-git-send-email-otavio@ossystems.com.br>
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Giulian=20Gon=C3=A7alves=20Vivan?= <giulian@ossystems.com.br>
-Subject: [meta-qt5][PATCH v2 4/4] qsiv: add the qsiv 1.1 example app
+In-Reply-To: <1393163414-9494-1-git-send-email-otavio@ossystems.com.br>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH v2 1/4] qmake5_base.bbclass: Use Qt version path for headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,55 +47,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2014 13:50:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 23 Feb 2014 15:01:56 -0000
+X-Groupsio-MsgNum: 48282
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nDmTXYS4kVhtHHfR"
+Content-Disposition: inline
 
-From: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
+--nDmTXYS4kVhtHHfR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This provides a simple image viewer for demonstration purposes.
+On Sun, Feb 23, 2014 at 10:50:11AM -0300, Otavio Salvador wrote:
+> When looking for Qt5 headers we ought to use the Qt5 specific path. In
+> case the distribution wants to have a flat tree it can set QT_DIR_NAME
+> and it will still works as expected.
+>=20
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  classes/qmake5_base.bbclass |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 3861cd0..db6834f 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -57,7 +57,7 @@ do_generate_qt_config_file() {
+>      cat > ${QT_CONF_PATH} <<EOF
+>  [Paths]
+>  Prefix =3D ${OE_QMAKE_PATH_PREFIX}
+> -Headers =3D ${OE_QMAKE_PATH_HEADERS}
+> +Headers =3D ${OE_QMAKE_PATH_HEADERS}/${QT_DIR_NAME}
 
-Signed-off-by: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
----
- recipes-qt/qsiv/qsiv_1.1.bb |   28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 recipes-qt/qsiv/qsiv_1.1.bb
+classes/qmake5_paths.bbclass:OE_QMAKE_PATH_HEADERS =3D "${includedir}"
 
-diff --git a/recipes-qt/qsiv/qsiv_1.1.bb b/recipes-qt/qsiv/qsiv_1.1.bb
-new file mode 100644
-index 0000000..bb2efa6
---- /dev/null
-+++ b/recipes-qt/qsiv/qsiv_1.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Qt Simple Image Viewer"
-+DESCRIPTION = "A simple image viewer using a mix of C++ and qml code for demonstration."
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11c7965a9059e287de5d93b98adf6d1a"
-+DEPENDS = "qtdeclarative"
-+
-+SRCREV = "7b9810b0f02f9ac74fae3ead6e2e9fb5c1382173"
-+SRC_URI = "git://code.ossystems.com.br/qt/qsiv;protocol=http"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit qmake5
-+
-+EXTRA_QMAKEVARS_PRE += "target.path=${libdir}/${P}"
-+
-+do_install_append() {
-+    install -d ${D}${bindir}
-+    echo "#!/bin/sh" > ${D}${bindir}/qsiv
-+    echo "export QML_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "export QML2_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "${libdir}/${P}/qsiv \$* " >> ${D}${bindir}/qsiv
-+    chmod +x ${D}${bindir}/qsiv
-+}
-+
-+FILES_${PN} += "${libdir}/${P}"
-+RDEPENDS_${PN} += "qtdeclarative-qmlplugins"
-+
-+FILES_${PN}-dbg += "${libdir}/${P}/.debug"
--- 
-1.7.10.4
+is the right place
 
+>  Libraries =3D ${OE_QMAKE_PATH_LIBS}
+>  ArchData =3D ${OE_QMAKE_PATH_ARCHDATA}
+>  Data =3D ${OE_QMAKE_PATH_DATA}
+> --=20
+> 1.7.10.4
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--nDmTXYS4kVhtHHfR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMKDYMACgkQN1Ujt2V2gBxckwCeO75xgCAv7F3nI3EnsmMBjjcf
+9tQAn0gSQ/gt5EyAHVNeNy8kn1yPsLwv
+=4nYw
+-----END PGP SIGNATURE-----
+
+--nDmTXYS4kVhtHHfR--
