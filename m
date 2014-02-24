@@ -1,38 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DC1F6EC6B
+Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 50AC46EC6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 00:40:23 +0000 (UTC)
-Received: by mail-yk0-f171.google.com with SMTP id q9so12656395ykb.2
+	Mon, 24 Feb 2014 00:40:25 +0000 (UTC)
+Received: by mail-yk0-f172.google.com with SMTP id 200so12658538ykr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 16:40:24 -0800 (PST)
+	Sun, 23 Feb 2014 16:40:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=t60F2EkiUIlSi6We6oGqdTn3DSk0JmMLftPNLjXcyQY=;
-	b=ldVzDhpMOg6Cnfup56HUDJY9xir46HoGp8BgFo+x0Tjgau0Uwc0rgkKYlwaqpJ91W+
-	MmVVVMYuNpJulz2zqwUKVaGG4DvY1lxT79oO8J1nWlWgXEkcj0JHT3lxFdZPOP9s9JLz
-	O92x4HrikYl0eKde9ZyPxplwbVfKlO+FMeGm8vfB7NlAqXGSWt5NWuEfx0uJkNV+WqKM
-	52QAZtjykA3T7WY/+oKA8BwQATRl2q5nDLO2v/d28WNEaxqkPG7b61nz9sLt/wlEDOVK
-	97LlajpKGXuL8bRXWqZKkb2MqBbVvZwrMc4p6wPSLchUD2Jqz7aTLl4zSgdO3uZ2wE8U
-	3Aaw==
-X-Received: by 10.236.74.162 with SMTP id x22mr27451283yhd.131.1393202424583; 
-	Sun, 23 Feb 2014 16:40:24 -0800 (PST)
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-type:content-transfer-encoding;
+	bh=CY2uwCps2zoAv7NVcHvI+U6NHQKTDi36A6RuhrREQ48=;
+	b=vIHmDmtrtWmImz0qStGgP+41y3YGr4G2rOo0LM1+qHZa4Aps0RP4tduGV7xwBeKb43
+	kC8Z3mAhYXUYJ+g40Om8F8o6T/L2pcpFtzlR3KAUA+WI2bK0UfN+FEC4vasCpWtTVJnC
+	kOcRUY+Qw+II2cJTLghuKUnYUNSwCfdiu2gTr/gcT7/rJXyhhZXdv8p1Ys1z0Kyv7MTr
+	Hb2R2syR8Ca15FggU6eeLDTrUsIYcSftLvIOaZDWMDJp2MCZY+GAzcAXwCnNED91tIFw
+	uqGaNbq0A0bR6lQzxohYezYuz0H9p3tlrbJNKLV5HZAYtFC81toAdjLHbDfKd44owX3d
+	esGA==
+X-Received: by 10.236.23.71 with SMTP id u47mr27116114yhu.143.1393202426434;
+	Sun, 23 Feb 2014 16:40:26 -0800 (PST)
 Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id 48sm44205160yhq.11.2014.02.23.16.40.22
+	by mx.google.com with ESMTPSA id 48sm44205160yhq.11.2014.02.23.16.40.24
 	for <multiple recipients>
 	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 23 Feb 2014 16:40:23 -0800 (PST)
+	Sun, 23 Feb 2014 16:40:25 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Feb 2014 21:39:55 -0300
-Message-Id: <1393202396-11130-3-git-send-email-otavio@ossystems.com.br>
+Date: Sun, 23 Feb 2014 21:39:56 -0300
+Message-Id: <1393202396-11130-4-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1393202396-11130-1-git-send-email-otavio@ossystems.com.br>
 References: <1393202396-11130-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH v3 3/4] mallit-plugins-qt5: Don't set OE_QMAKE_PATH_HEADERS
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Giulian=20Gon=C3=A7alves=20Vivan?= <giulian@ossystems.com.br>
+Subject: [meta-qt5][PATCH v3 4/4] qsiv: add the qsiv 1.1 example app
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 00:40:25 -0000
+X-List-Received-Date: Mon, 24 Feb 2014 00:40:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The qmake class now respects the QT_DIR_NAME setting when setting the
-headers path, so this change is not needed anymore.
+From: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+This provides a simple image viewer for demonstration purposes.
+
+Signed-off-by: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
 ---
- recipes-qt/maliit/maliit-plugins-qt5_git.bb |    5 -----
- 1 file changed, 5 deletions(-)
+ recipes-qt/qsiv/qsiv_1.1.bb |   28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 recipes-qt/qsiv/qsiv_1.1.bb
 
-diff --git a/recipes-qt/maliit/maliit-plugins-qt5_git.bb b/recipes-qt/maliit/maliit-plugins-qt5_git.bb
-index 273b3e4..7dc1a73 100644
---- a/recipes-qt/maliit/maliit-plugins-qt5_git.bb
-+++ b/recipes-qt/maliit/maliit-plugins-qt5_git.bb
-@@ -6,11 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f29b21caa8e460097bfad9c026a33621"
- 
- inherit qmake5
- 
--# Set path of qt5 headers as qmake5_base.bbclass sets this to just ${includedir}
--# but
--# actually it is ${includedir}/qt5
--OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
--
- DEPENDS = "maliit-framework-qt5"
- 
- RDEPENDS_${PN} += "qtsvg-plugins"
+diff --git a/recipes-qt/qsiv/qsiv_1.1.bb b/recipes-qt/qsiv/qsiv_1.1.bb
+new file mode 100644
+index 0000000..bb2efa6
+--- /dev/null
++++ b/recipes-qt/qsiv/qsiv_1.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Qt Simple Image Viewer"
++DESCRIPTION = "A simple image viewer using a mix of C++ and qml code for demonstration."
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11c7965a9059e287de5d93b98adf6d1a"
++DEPENDS = "qtdeclarative"
++
++SRCREV = "7b9810b0f02f9ac74fae3ead6e2e9fb5c1382173"
++SRC_URI = "git://code.ossystems.com.br/qt/qsiv;protocol=http"
++
++S = "${WORKDIR}/git"
++
++inherit qmake5
++
++EXTRA_QMAKEVARS_PRE += "target.path=${libdir}/${P}"
++
++do_install_append() {
++    install -d ${D}${bindir}
++    echo "#!/bin/sh" > ${D}${bindir}/qsiv
++    echo "export QML_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
++    echo "export QML2_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
++    echo "${libdir}/${P}/qsiv \$* " >> ${D}${bindir}/qsiv
++    chmod +x ${D}${bindir}/qsiv
++}
++
++FILES_${PN} += "${libdir}/${P}"
++RDEPENDS_${PN} += "qtdeclarative-qmlplugins"
++
++FILES_${PN}-dbg += "${libdir}/${P}/.debug"
 -- 
 1.7.10.4
 
