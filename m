@@ -1,31 +1,26 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f173.google.com (mail-qc0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id E5BD26E717
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D8176D75D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 11:42:58 +0000 (UTC)
-Received: by mail-qc0-f173.google.com with SMTP id x3so326916qcv.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 03:42:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=nqhK7d4Z9MJWAiAIhcwrXiJ0bAwn9745ODOAeDxqDU4=;
-	b=T+R92Ew+HdyTSs2FCBEibfmHysq+NexluPkAxgCmcbe8lUMQ61Kv0wfKjFyIpbOt8h
-	8OyXTiekNdpwYE8cGsAEZ6cvQvldf5UOSjjLcY890nA0lJMMdN0yJAao1JLHR1XQsIkT
-	o4BQ0wJvzvClqytdRWaSLkZNnScj4BQaV72Fot9gvjuI7fzafE9wRWmQv+bvDxzyUHDo
-	67QyQp6GtDpFpmWOx+xxfQB26U4thluZa20ZCWpeqYiuc6Pkvh0xoqGJMhnA64o9TN5a
-	70alwMwdyPYWFYg6zHqUupwbWxKD/336sANT9mnWgweyHe6zAYZwRVBDpnk00OsqQ/Qh
-	jxmg==
-X-Received: by 10.224.162.200 with SMTP id w8mr29124445qax.1.1393242179289;
-	Mon, 24 Feb 2014 03:42:59 -0800 (PST)
+	Mon, 24 Feb 2014 12:15:39 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 24 Feb 2014 04:15:40 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,534,1389772800"; d="scan'208";a="487029387"
+Received: from mcmahond-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.208])
+	by fmsmga002.fm.intel.com with ESMTP; 24 Feb 2014 04:15:35 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Mon, 24 Feb 2014 12:15:34 +0000
+Message-ID: <3829871.fcosCAaezP@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.2 (Linux/3.13.3-201.fc20.x86_64; KDE/4.12.2; x86_64; ; )
+In-Reply-To: <CAMCfZKHGAHVN0e9PkAQw5x98OeSOgHVXxZwNzdJZB1YxxOv1tg@mail.gmail.com>
+References: <CAMCfZKHGAHVN0e9PkAQw5x98OeSOgHVXxZwNzdJZB1YxxOv1tg@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Mon, 24 Feb 2014 03:42:39 -0800 (PST)
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Mon, 24 Feb 2014 08:42:39 -0300
-Message-ID: <CAMCfZKHGAHVN0e9PkAQw5x98OeSOgHVXxZwNzdJZB1YxxOv1tg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: New recipes and recipes from oe-classic
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: New recipes and recipes from oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,23 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 11:42:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Feb 2014 12:15:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Folks,
+Hi Diego,
 
-What are the policies to add new recipes and recipes from openembedded
-classic?
-I could not found anything about this in openembedded wiki page.
+On Monday 24 February 2014 08:42:39 Diego Sueiro wrote:
+> What are the policies to add new recipes and recipes from openembedded
+> classic?
+> I could not found anything about this in openembedded wiki page.
 
-Regards,
+I don't know if there really are policies, other than:
 
---
-*dS
-Diego Sueiro
+* Find a layer where the recipe fits in; or, if the recipe fits into a new 
+category and there are likely to be others added soon that will also fit into 
+it, create a new layer; otherwise, add it to meta-oe.
 
-Administrador do Embarcados
-www.embarcados.com.br<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+* Note in the commit message that the recipe is being migrated over from OE-
+Classic.
 
-/*long live rock 'n roll*/
+As far as the migration goes please refer to the following wiki page:
+
+  http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
+
+Hope this helps.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
