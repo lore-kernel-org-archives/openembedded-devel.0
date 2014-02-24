@@ -1,28 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 93FEC6E8DC
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oa0-f46.google.com (mail-oa0-f46.google.com
+	[209.85.219.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 46FFA6DC4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 17:43:35 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 24 Feb 2014 09:39:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,535,1389772800"; d="scan'208";a="461326749"
-Received: from mcmahond-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.208])
-	by orsmga001.jf.intel.com with ESMTP; 24 Feb 2014 09:43:34 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Feb 2014 17:43:33 +0000
-Message-ID: <2343897.GsqDN18PkL@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.2 (Linux/3.13.3-201.fc20.x86_64; KDE/4.12.2; x86_64; ; )
-In-Reply-To: <12554563.r7d5IAgdqr@leo>
-References: <94BAA6DD-BBE2-46CE-8248-E8432BE9F242@blom.org>
-	<33174762.dysyrZqJd4@peggleto-mobl5.ger.corp.intel.com>
-	<12554563.r7d5IAgdqr@leo>
+	Mon, 24 Feb 2014 18:06:48 +0000 (UTC)
+Received: by mail-oa0-f46.google.com with SMTP id l6so796021oag.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Feb 2014 10:06:49 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=UD0hBYBHgXxtDQF/UW6keSVBGBnr41Zlp+ckgZXijEA=;
+	b=T22B8oSzfO8Asg+ehyzcMQNN8f4uk5LHx2BD9BWFl4K82Bab7ipG+ANTbPyQthl53z
+	eH30YhvzVGCTfBWhd8NlAihOh8sz0jqirm0lj7BR9dQcAyY8uawKBMRhxBdo/BPx8FKo
+	yAUEM2S5CM9+s3VV/bmHQl1ukogoDtrRIAAK4pkS/9x+sfqlV415s9/Xd4LliPFHPZHT
+	5+p0RkVHlqkU4HOv1kYAzzo6TghzW9+5K8UcmYpbdB2CTcZcRByyLc02eYRB8f5UPdrv
+	g5iwV2T7XhsKwdZ5rlfK2uyD2Z2wd/2BRwUPfO2Jr8BgNXvQx6k798S+Br+rz0CKgti0
+	qCww==
+X-Gm-Message-State: ALoCoQkKyDtjTe+MfPqZOffl3NUQkMuCGa5NT6npQx6Mtds5bGnazLe+m0vek1DlJu+JOwI1rW48
+X-Received: by 10.60.130.234 with SMTP id oh10mr22835194oeb.60.1393265209424; 
+	Mon, 24 Feb 2014 10:06:49 -0800 (PST)
 MIME-Version: 1.0
-Cc: Tobias Blom <tobias@blom.org>, openembedded-devel@lists.openembedded.org
-Subject: Re: python-netifaces in oe?
+Received: by 10.76.182.99 with HTTP; Mon, 24 Feb 2014 10:06:29 -0800 (PST)
+In-Reply-To: <20140222082502.GL3854@jama>
+References: <1393047007-20507-1-git-send-email-armccurdy@gmail.com>
+	<1393047007-20507-2-git-send-email-armccurdy@gmail.com>
+	<20140222063919.GJ3854@jama> <20140222082502.GL3854@jama>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Mon, 24 Feb 2014 19:06:29 +0100
+Message-ID: <CAP71WjzXR=qCBBqHLK1UtvtwJ4Cr8wy60tjvmsHsB5ajr4HU0Q@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v2 2/2] qtwebkit-examples: add RDEPENDS for ca-certificates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,49 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 17:43:39 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 24 Feb 2014 18:06:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 24 February 2014 09:41:45 Khem Raj wrote:
-> On Monday, February 24, 2014 12:19:07 PM Paul Eggleton wrote:
-> > On Sunday 23 February 2014 22:26:34 Khem Raj wrote:
-> > > On Feb 23, 2014, at 10:23 PM, Lukas Bulwahn
-> > > <lukas.bulwahn@oss.bmw-carit.de>> > 
-> > > wrote:
-> > > > We provide a recipe for python-netifaces in the meta-ros layer as
-> > > > well. In
-> > > > fact, a quick search on the OpenEmbedded Layer Index [1] reveals that
-> > > > meta-ros and meta-openstack both provide a recipe for
-> > > > python-netifaces.
-> > > > With your use case and recipe, we would have now three recipes. So, I
-> > > > suggest to unify all three recipes and come up with the best
-> > > > (complete)
-> > > > recipe from these three versions and add them to the meta-oe layer. We
-> > > > then can remove the duplicate recipes in the application layers.
-> > > 
-> > > If these layers have dependency on meta-oe then please add the recipe
-> > > there
-> > > and remove from other places.
-> > 
-> > There has been some discussion about creating a meta-python layer (within
-> > the meta-openembedded repository) for these kinds of recipes. I think the
-> > time has come to actually do that, before we add any further python
-> > recipes to the general meta-oe layer. Could someone send a patch to
-> > create meta-python?
+On Sat, Feb 22, 2014 at 9:25 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Please ignore my comment, I haven't noticed that you've added
+> PACKAGECONFIG_OPENSSL to qt5.inc and it's actually "from qtbase's
+> PACKAGECONFIG".
 >
-> meta-python is good. I always worry about layer being maintained, in fact I
-> have some python 3 extra recipes that I wanted to contribute which dont
-> belong to core.
+> I've added comment in qtbase.inc and integrated this to master-next.
 
-Agreed, continued maintenance is important. I would be happy to be co-
-maintainer of this if someone else will help me out...
+hmm. still i don't get it. openssl can be added to PACKAGECONFIG
+without being added in PACKAGECONFIG_OPENSSL, right? so why don't we
+test is openssl is in PACKAGECONFIG?
 
-Cheers,
-Paul
+Am I missing anything?
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+nico
 
