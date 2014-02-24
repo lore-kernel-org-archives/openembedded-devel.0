@@ -1,39 +1,48 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 10DE4605F8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 66FE66E8DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 15:47:10 +0000 (UTC)
-Received: by mail-yh0-f41.google.com with SMTP id f73so5373827yha.14
+	Mon, 24 Feb 2014 17:41:52 +0000 (UTC)
+Received: by mail-pb0-f47.google.com with SMTP id up15so345688pbc.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 07:47:11 -0800 (PST)
+	Mon, 24 Feb 2014 09:41:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=OXYetCz3yqjk/ISngrudVawh37Kivz0UK13XrcNufW4=;
-	b=p7iAERC+FbCcfHKRmsFzDJLTBkk/zVpoMLBS1V/HtFU7aReGlqs8s50OSTzk2P5agg
-	jgDdNtRPLc4o6z3XmEspyQN9UNCJYQGIUpqZxKRQ/VbZ2djlxzA8pcrf4wruEvHlIoAM
-	9xYvv0zPoC2tTpVGStNuXcCuC6T9WnUmFwBJG5MVH7GMlwhxiMZg2t25NCKHPu4nFBcj
-	v6L1w1Ea2vun15Rll6td6y3ANLyE8YV6vUCyymQYWQB5h20GbE/u0z4fePknSmwu0b9k
-	nLzxZmpfnz26MGMiDWpBNWeKTZZHPL5UMfaoy4nXSaDgRQ63j80GgUr8i0nIHhpoNn72
-	Uo4w==
+	h=from:to:cc:subject:date:message-id:organization:user-agent
+	:in-reply-to:references:mime-version:content-type;
+	bh=T84TIBWU3PxAv/Jsd41ORdUtjEjMJn+QOEOmQ3uNvk0=;
+	b=RaZfaH+nN6mu0zxa+qT+1C2JVBQpUsB8UrexXekB2XSGAPP6vD/H4nnpk1QXC+rd5/
+	hNk1Zi4KiSznGd7NJklysM5pD3yD9YrMizwnAdGJmeRu4nzcWHL86TbICPKPOLvfgL+T
+	adifTkfiUH19SD0jgqe0BfzPwtDHzVm1vKCMOdLG5EoEORFdw9lU+9bjwhLT0T8220mH
+	gwKo32+Oy66lH6LvbFZAzTBsT40o1EV6ACZc1Br5Z14jSBJSxc1+N0daAlyWKxu/VqjA
+	zjWWb0Uviu1DR5aAO3mMkUk5nCmDgPpvnBCZF2+BnCfSPoif2wmmUd6JudLlLHVcdcMl
+	GH8A==
+X-Received: by 10.68.189.100 with SMTP id gh4mr962804pbc.21.1393263713308;
+	Mon, 24 Feb 2014 09:41:53 -0800 (PST)
+Received: from leo.localnet (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.30])
+	by mx.google.com with ESMTPSA id oz7sm1953205pbc.41.2014.02.24.09.41.51
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Feb 2014 09:41:52 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Mon, 24 Feb 2014 09:41:45 -0800
+Message-ID: <12554563.r7d5IAgdqr@leo>
+Organization: Himvis LLC
+X-Face: "r2#Te[Vd[r&41P}v3a{\jUcEEz4&|KRK5|)5HC&!!$q5nGWwa.D_?oxdsx1~me-5G$n}g
+	*fLiTNxg"wR4~UUl3NN~Ru/un!"UQt%M5%+(NUYxFxw(vcF.@Poe\&K9jFrC'v=A/;
+	KGGF 7?b>`5Ehi,RB\-_t{J;
+	bdUatO'v?{A}hIsi?tJg3rk.E"EM-VhpPxUH-'5$&/Ap*i!CCTh
+	L:,oj1O_K7FFGdo/^i4IL<_ZwA]W#9hRXp&T$+SYBB~7k\#:+NnU*FQ7TjQE~mVm<P
+User-Agent: KMail/4.12.2 (Linux/3.13.0-12-generic; KDE/4.12.2; x86_64; ; )
+In-Reply-To: <33174762.dysyrZqJd4@peggleto-mobl5.ger.corp.intel.com>
+References: <94BAA6DD-BBE2-46CE-8248-E8432BE9F242@blom.org>
+	<7A897146-8E97-4991-8003-2FFA5E6E866C@gmail.com>
+	<33174762.dysyrZqJd4@peggleto-mobl5.ger.corp.intel.com>
 MIME-Version: 1.0
-X-Received: by 10.236.60.68 with SMTP id t44mr30153380yhc.47.1393256831316;
-	Mon, 24 Feb 2014 07:47:11 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Mon, 24 Feb 2014 07:47:11 -0800 (PST)
-In-Reply-To: <20140224154437.GH26981@jama>
-References: <1392916331-30391-1-git-send-email-denis@denix.org>
-	<20140222080505.GK3854@jama>
-	<CAP9ODKpHFfexkFfqFvQWZGiXmoZKcigmCJukizYh1hJkGWkgoQ@mail.gmail.com>
-	<20140224154437.GH26981@jama>
-Date: Mon, 24 Feb 2014 12:47:11 -0300
-X-Google-Sender-Auth: dmV_KgZoCIzSB9tnj24hstrV7g8
-Message-ID: <CAP9ODKpB=+tBO0=oWLodwKSqcJ5g0fvSaJxPw=EMgm+Et5SX1A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCHv2] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
+Cc: Tobias Blom <tobias@blom.org>, openembedded-devel@lists.openembedded.org
+Subject: Re: python-netifaces in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,60 +56,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 15:47:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Feb 2014 17:41:53 -0000
+X-Groupsio-MsgNum: 48313
+Content-Type: multipart/signed; boundary="nextPart10557666.5yFvMrnhIZ";
+	micalg="pgp-sha1"; protocol="application/pgp-signature"
 
-On Mon, Feb 24, 2014 at 12:44 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Feb 24, 2014 at 12:18:48PM -0300, Otavio Salvador wrote:
->> Hello Martin,
->>
->> On Sat, Feb 22, 2014 at 5:05 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > On Thu, Feb 20, 2014 at 12:12:11PM -0500, Denys Dmytriyenko wrote:
->> >> From: Denys Dmytriyenko <denys@ti.com>
->> >>
->> >> * This way we don't mangle ${B} and can repeat do_install if necessary. And
->> >>   previously it would require running do_compile again to restore the proper
->> >>   state of ${B}.
->> >> * Need to bump PR, since do_compile isn't changing, but needs to re-run to
->> >>   re-populate qmake-real binary.
->> >>
->> >> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->> >> ---
->> >>  recipes-qt/qt5/nativesdk-qtbase.inc | 12 ++++++------
->> >>  1 file changed, 6 insertions(+), 6 deletions(-)
->> >>
->> >> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
->> >> index fa44009..3cb9b0e 100644
->> >> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
->> >> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
->> >> @@ -10,6 +10,8 @@ require nativesdk-qt5.inc
->> >>  # it's already included with newer oe-core, but include it here for dylan
->> >>  FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
->> >>
->> >> +PR = "r1"
->> >> +
->> >
->> > It's already merged, but please don't add new PRs, especially to .inc
->> > files.
->>
->> As explained by Denys this is really need, in this case.  I agree it
->> could have been put in the bb recipe though.
->
-> Sorry I've overlooked it in message.
->
-> with rm_work you wouldn't see this issue, but for cost of reexecuting
-> do_compile :)
->
->> Denys, could you move this to the bb recipe? This avoids the PR to be
->> kept when we update to newer version.
->
-> I can try to remember this and remove it when doing next upgrade to
-> 5.2.2.
+--nextPart10557666.5yFvMrnhIZ
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Yes but I keep rm_work off in my builders to get this kind of failure ;-)
+On Monday, February 24, 2014 12:19:07 PM Paul Eggleton wrote:
+> On Sunday 23 February 2014 22:26:34 Khem Raj wrote:
+> > On Feb 23, 2014, at 10:23 PM, Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+> > wrote:
+> > > We provide a recipe for python-netifaces in the meta-ros layer as well. In
+> > > fact, a quick search on the OpenEmbedded Layer Index [1] reveals that
+> > > meta-ros and meta-openstack both provide a recipe for python-netifaces.
+> > > With your use case and recipe, we would have now three recipes. So, I
+> > > suggest to unify all three recipes and come up with the best (complete)
+> > > recipe from these three versions and add them to the meta-oe layer. We
+> > > then can remove the duplicate recipes in the application layers.
+> >
+> > If these layers have dependency on meta-oe then please add the recipe there
+> > and remove from other places.
+> 
+> There has been some discussion about creating a meta-python layer (within the 
+> meta-openembedded repository) for these kinds of recipes. I think the time has 
+> come to actually do that, before we add any further python recipes to the 
+> general meta-oe layer. Could someone send a patch to create meta-python?
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+meta-python is good. I always worry about layer being maintained, in fact I have some python
+3 extra recipes that I wanted to contribute which dont belong to core.
 
+--nextPart10557666.5yFvMrnhIZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEABECAAYFAlMLhFkACgkQuwUzVZGdMxRwiACeO8AHymPMOxTkJR7qzxzlScNa
+5iQAmgJRDQDFvgZJ9MbKZd0dfj8DjoWC
+=7CER
+-----END PGP SIGNATURE-----
+
+--nextPart10557666.5yFvMrnhIZ--
