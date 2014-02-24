@@ -1,40 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D2FC46E754
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f173.google.com (mail-ea0-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C32CC6E759
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 06:26:39 +0000 (UTC)
-Received: by mail-pb0-f47.google.com with SMTP id rp16so6086888pbb.34
+	Mon, 24 Feb 2014 09:22:58 +0000 (UTC)
+Received: by mail-ea0-f173.google.com with SMTP id n15so1822739ead.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 22:26:40 -0800 (PST)
+	Mon, 24 Feb 2014 01:22:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=+eAnTWYNO5YzTjS9zCOD/V85UiElElqYRK8+aEkN6Wc=;
-	b=dbKEPSSBYJ+j65ZO3HfpCJcBnhC/UOA6Q4cfQOu7TbBLY6EJQxQLOxyL5G5PIBWg0n
-	UaFXUZz2ZoR9H7m9HjwgTTCLAEPz1hCR8XKJFHpeSPwo7kBnXAn0M89F3DK+x3dTORLO
-	N7zXnBjJOohYgLeocshX3dN+jcqkGdkC/lP+80BrW63x5tEzfb7X8e5UdkXhJ3TBFADS
-	qDwYZ57t3oSkhz3c2oLJO+uGzc1OjKMMMApgzM69ZbgS6N2vt+tTMt7okuMQSyhAiM+6
-	s7ypHL2RvR4nFYUQOn1GtTZI57RJpMx7Moaj69+EZVFqFsID85mgp9Nrwp3Re6JrsuPw
-	VOfQ==
-X-Received: by 10.68.189.5 with SMTP id ge5mr23190107pbc.42.1393223200256;
-	Sun, 23 Feb 2014 22:26:40 -0800 (PST)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	qh2sm111955263pab.13.2014.02.23.22.26.38 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sun, 23 Feb 2014 22:26:39 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 7.1 \(1827\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <530AE55F.9090108@oss.bmw-carit.de>
-Date: Sun, 23 Feb 2014 22:26:34 -0800
-Message-Id: <7A897146-8E97-4991-8003-2FFA5E6E866C@gmail.com>
-References: <94BAA6DD-BBE2-46CE-8248-E8432BE9F242@blom.org>
-	<20140220144314.GF3854@jama> <530AE55F.9090108@oss.bmw-carit.de>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1827)
-Cc: Tobias Blom <tobias@blom.org>
-Subject: Re: python-netifaces in oe?
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=6rB38c6IlSFRSM685Ij+N5zkcG13T6LhdYHYqsXL6Eo=;
+	b=mBPB6shwcN01iIXv0gzc7ZrxAJSscv921Q/b9xJDx1hUf1JK6kB6Y5DfHCDq4jZtQ6
+	V5zbZSwPEnEnCrnVELhOdkZjNjd6FAYTWJmFr/GnIvjE+7oKHXdClfR12LmhUOiDcycy
+	GGYQxA0GxMWaPdn/QsNRs/XW3NyVucDnLfPleIBja9W9KSjFu8/crKTnkqnqKsAvfi/+
+	0xkAmwu4qo0cfCJzmky9f6q9ga4tIVe5osfRyIlog56c/Gy4JRDxm1m3BSbWbgdDBANd
+	ZpxCmYt5Y8Vt7gVyUP76t8WHKYcDyc2UMb2iJ6eiRD8VP/PIrcXQPGI21imZTWpdn9xC
+	rExQ==
+X-Received: by 10.15.75.193 with SMTP id l41mr23239822eey.114.1393233778374;
+	Mon, 24 Feb 2014 01:22:58 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	m1sm61519007een.7.2014.02.24.01.22.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Feb 2014 01:22:57 -0800 (PST)
+Date: Mon, 24 Feb 2014 10:22:56 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140224092256.GA26981@jama>
+References: <1393194113-24177-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1393194113-24177-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-oe][meta-efl][PATCH] ode: Move to nonworking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,89 +47,185 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 06:26:41 -0000
-X-Groupsio-MsgNum: 48293
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_804A8978-B598-4685-A47D-FE0BEF4CFC53";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 24 Feb 2014 09:22:59 -0000
+X-Groupsio-MsgNum: 48294
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
+Content-Disposition: inline
 
---Apple-Mail=_804A8978-B598-4685-A47D-FE0BEF4CFC53
+--FL5UXtIhxfXey3p5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
+On Sun, Feb 23, 2014 at 11:21:53PM +0100, Martin Jansa wrote:
+> * according to http://www.openembedded.org/wiki/Bitbake_World_Status
+>   it's broken at least since 2013-10-30 and nobody seems to care
 
-On Feb 23, 2014, at 10:23 PM, Lukas Bulwahn =
-<lukas.bulwahn@oss.bmw-carit.de> wrote:
+mokomaze depends on ode, so I'll try to fix this one instead.
 
-> Hi Tobias,
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../nonworking/ode/ode/install.patch               | 23 ++++++++++++++++=
++++++
+>  meta-oe/recipes-support/nonworking/ode/ode_0.9.bb  | 24 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-support/ode/ode/install.patch      | 23 ----------------=
+-----
+>  meta-oe/recipes-support/ode/ode_0.9.bb             | 24 ----------------=
+------
+>  4 files changed, 47 insertions(+), 47 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/nonworking/ode/ode/install.pa=
+tch
+>  create mode 100644 meta-oe/recipes-support/nonworking/ode/ode_0.9.bb
+>  delete mode 100644 meta-oe/recipes-support/ode/ode/install.patch
+>  delete mode 100644 meta-oe/recipes-support/ode/ode_0.9.bb
 >=20
-> We provide a recipe for python-netifaces in the meta-ros layer as =
-well. In fact, a quick search on the OpenEmbedded Layer Index [1] =
-reveals that meta-ros and meta-openstack both provide a recipe for =
-python-netifaces. With your use case and recipe, we would have now three =
-recipes. So, I suggest to unify all three recipes and come up with the =
-best (complete) recipe from these three versions and add them to the =
-meta-oe layer. We then can remove the duplicate recipes in the =
-application layers.
+> diff --git a/meta-oe/recipes-support/nonworking/ode/ode/install.patch b/m=
+eta-oe/recipes-support/nonworking/ode/ode/install.patch
+> new file mode 100644
+> index 0000000..2f6cdb0
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/nonworking/ode/ode/install.patch
+> @@ -0,0 +1,23 @@
+> +--- ode-0.9.orig/Makefile.am	2007-02-21 15:54:54.000000000 +0100
+> ++++ ode-0.9/Makefile.am	2010-08-21 16:15:55.000000000 +0200
+> +@@ -25,13 +25,13 @@
+> +=20
+> + if USE_SONAME
+> + install-exec-hook:
+> +-	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> +-	$(libdir)/libode.so
+> +-	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> +-	$(libdir)/@ODE_SONAME@
+> +-	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> +-	$(libdir)/@ODE_SONAME@.@ODE_REVISION@
+> +-	/sbin/ldconfig
+> ++	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> ++	$(DESTDIR)/$(libdir)/libode.so
+> ++	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> ++	$(DESTDIR)/$(libdir)/@ODE_SONAME@
+> ++	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> ++	$(DESTDIR)/$(libdir)/@ODE_SONAME@.@ODE_REVISION@
+> ++	echo /sbin/ldconfig
+> + else
+> + install-exec-hook:
+> + endif
+> diff --git a/meta-oe/recipes-support/nonworking/ode/ode_0.9.bb b/meta-oe/=
+recipes-support/nonworking/ode/ode_0.9.bb
+> new file mode 100644
+> index 0000000..1f3a5ca
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/nonworking/ode/ode_0.9.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY =3D "ODE is an Open Source Physics Engine"
+> +SECTION =3D "libs"
+> +HOMEPAGE =3D "http://www.ode.org"
+> +LICENSE =3D "LGPLv2.1 & BSD"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE-BSD.TXT;md5=3Dc74e6304a772117e05945=
+8fb9763a928 \
+> +                    file://LICENSE.TXT;md5=3D771782cb6245c7fbbe74bc0ec05=
+9beff"
+> +
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/opende/ode-src-${PV}.zip \
+> +           file://install.patch"
+> +
+> +SRC_URI[md5sum] =3D "4c03759b76a0649a6d5108c8e172e1e4"
+> +SRC_URI[sha256sum] =3D "460d0851b743b1f144ef2a8259004d6774504c95d08e9357=
+a96a296111496feb"
+> +
+> +inherit autotools binconfig
+> +
+> +EXTRA_OECONF =3D "--disable-demos --enable-soname"
+> +
+> +do_configure_append() {
+> +    echo "#define dInfinity DBL_MAX" >>include/ode/config.h
+> +}
+> +
+> +FILES_${PN} =3D "${libdir}/lib*${SOLIBS}"
+> +
+> diff --git a/meta-oe/recipes-support/ode/ode/install.patch b/meta-oe/reci=
+pes-support/ode/ode/install.patch
+> deleted file mode 100644
+> index 2f6cdb0..0000000
+> --- a/meta-oe/recipes-support/ode/ode/install.patch
+> +++ /dev/null
+> @@ -1,23 +0,0 @@
+> ---- ode-0.9.orig/Makefile.am	2007-02-21 15:54:54.000000000 +0100
+> -+++ ode-0.9/Makefile.am	2010-08-21 16:15:55.000000000 +0200
+> -@@ -25,13 +25,13 @@
+> -=20
+> - if USE_SONAME
+> - install-exec-hook:
+> --	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> --	$(libdir)/libode.so
+> --	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> --	$(libdir)/@ODE_SONAME@
+> --	ln -s $(libdir)/@ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> --	$(libdir)/@ODE_SONAME@.@ODE_REVISION@
+> --	/sbin/ldconfig
+> -+	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> -+	$(DESTDIR)/$(libdir)/libode.so
+> -+	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> -+	$(DESTDIR)/$(libdir)/@ODE_SONAME@
+> -+	ln -s @ODE_SONAME@.@ODE_REVISION@.@ODE_AGE@ \
+> -+	$(DESTDIR)/$(libdir)/@ODE_SONAME@.@ODE_REVISION@
+> -+	echo /sbin/ldconfig
+> - else
+> - install-exec-hook:
+> - endif
+> diff --git a/meta-oe/recipes-support/ode/ode_0.9.bb b/meta-oe/recipes-sup=
+port/ode/ode_0.9.bb
+> deleted file mode 100644
+> index 1f3a5ca..0000000
+> --- a/meta-oe/recipes-support/ode/ode_0.9.bb
+> +++ /dev/null
+> @@ -1,24 +0,0 @@
+> -SUMMARY =3D "ODE is an Open Source Physics Engine"
+> -SECTION =3D "libs"
+> -HOMEPAGE =3D "http://www.ode.org"
+> -LICENSE =3D "LGPLv2.1 & BSD"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE-BSD.TXT;md5=3Dc74e6304a772117e05945=
+8fb9763a928 \
+> -                    file://LICENSE.TXT;md5=3D771782cb6245c7fbbe74bc0ec05=
+9beff"
+> -
+> -
+> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/opende/ode-src-${PV}.zip \
+> -           file://install.patch"
+> -
+> -SRC_URI[md5sum] =3D "4c03759b76a0649a6d5108c8e172e1e4"
+> -SRC_URI[sha256sum] =3D "460d0851b743b1f144ef2a8259004d6774504c95d08e9357=
+a96a296111496feb"
+> -
+> -inherit autotools binconfig
+> -
+> -EXTRA_OECONF =3D "--disable-demos --enable-soname"
+> -
+> -do_configure_append() {
+> -    echo "#define dInfinity DBL_MAX" >>include/ode/config.h
+> -}
+> -
+> -FILES_${PN} =3D "${libdir}/lib*${SOLIBS}"
+> -
+> --=20
+> 1.9.0
+>=20
 
-If these layers have dependency on meta-oe then please add the recipe =
-there and remove from other places.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
->=20
-> Lukas
->=20
-> [1] =
-http://layers.openembedded.org/layerindex/branch/master/recipes/?q=3Dpytho=
-n-netifaces
->=20
->=20
-> On 02/20/2014 03:43 PM, Martin Jansa wrote:
->> On Thu, Feb 20, 2014 at 03:35:19PM +0100, Tobias Blom wrote:
->>> Hi Martin,
->> Hi Tobias,
->>=20
->>> I'm working with a yocto-project and needed a python module =
-(netifaces). I now have a recipe for this, and I just wonder if it's of =
-any interest push this upstream?
->> Better to ask in openembedded-devel@lists.openembedded.org
->>=20
->> Generally good recipes are always welcome.
->>=20
->>> I'm pretty new to Yocto / OE, so I don't really know how things =
-works. Saw your name in the logs, and thought I'd just send an email and =
-ask...
->>>=20
->>> By the way, thanks for your work!
->> You're welcome
->>=20
->>=20
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_804A8978-B598-4685-A47D-FE0BEF4CFC53
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+--FL5UXtIhxfXey3p5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMK5hoACgkQuwUzVZGdMxSnFwCfeTW2hv/g+UrwfqzFy1zJdntG
-Wj4An0WnxL2h+n0ll18WcnQySia+5Igc
-=LHJc
+iEYEARECAAYFAlMLD3AACgkQN1Ujt2V2gBxdHACfb5d/MEmEtHwYShNi+6tpln+h
+FaUAoINZ20D3iDQJaaJaKnj76qjTFk2u
+=UMFy
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_804A8978-B598-4685-A47D-FE0BEF4CFC53--
+--FL5UXtIhxfXey3p5--
