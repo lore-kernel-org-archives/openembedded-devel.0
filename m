@@ -1,28 +1,30 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [143.182.124.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 9114C60172
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 226096E9D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 13:10:47 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by azsmga102.ch.intel.com with ESMTP; 24 Feb 2014 05:10:48 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,534,1389772800"; d="scan'208";a="480751660"
-Received: from mcmahond-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.208])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Feb 2014 05:10:32 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 24 Feb 2014 13:10:30 +0000
-Message-ID: <1786205.hqTn0yd8um@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.2 (Linux/3.13.3-201.fc20.x86_64; KDE/4.12.2; x86_64; ; )
-In-Reply-To: <20140224123516.GD26981@jama>
-References: <94BAA6DD-BBE2-46CE-8248-E8432BE9F242@blom.org>
-	<33174762.dysyrZqJd4@peggleto-mobl5.ger.corp.intel.com>
-	<20140224123516.GD26981@jama>
+	Mon, 24 Feb 2014 13:34:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,534,1389740400"; d="scan'208";a="41663714"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 24 Feb 2014 14:34:11 +0100
+Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.243]) by
+	COSNADEXC22.usr.ingenico.loc ([10.31.4.222]) with mapi id
+	14.02.0318.001; Mon, 24 Feb 2014 14:34:11 +0100
+From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] vim: add (custom) license file
+Thread-Index: AQHPMVqPjwkQKp8xjUKS2Znu2PUMjJrEZP1w
+Date: Mon, 24 Feb 2014 13:34:10 +0000
+Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B575439AE@COSNADEXC13.usr.ingenico.loc>
+References: <1393238980-18471-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<20140224121811.GC26981@jama>
+In-Reply-To: <20140224121811.GC26981@jama>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.31.16.119]
 MIME-Version: 1.0
-Cc: Tobias Blom <tobias@blom.org>, openembedded-devel@lists.openembedded.org
-Subject: Re: python-netifaces in oe?
+Subject: Re: [meta-oe][PATCH] vim: add (custom) license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,50 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 13:10:51 -0000
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Mon, 24 Feb 2014 13:34:15 -0000
+Content-Language: fr-FR
 Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Monday 24 February 2014 13:35:16 Martin Jansa wrote:
-> On Mon, Feb 24, 2014 at 12:19:07PM +0000, Paul Eggleton wrote:
-> > On Sunday 23 February 2014 22:26:34 Khem Raj wrote:
-> > > On Feb 23, 2014, at 10:23 PM, Lukas Bulwahn
-> > > <lukas.bulwahn@oss.bmw-carit.de>> > 
-> > > wrote:
-> > > > We provide a recipe for python-netifaces in the meta-ros layer as
-> > > > well. In
-> > > > fact, a quick search on the OpenEmbedded Layer Index [1] reveals that
-> > > > meta-ros and meta-openstack both provide a recipe for
-> > > > python-netifaces.
-> > > > With your use case and recipe, we would have now three recipes. So, I
-> > > > suggest to unify all three recipes and come up with the best
-> > > > (complete)
-> > > > recipe from these three versions and add them to the meta-oe layer. We
-> > > > then can remove the duplicate recipes in the application layers.
-> > > 
-> > > If these layers have dependency on meta-oe then please add the recipe
-> > > there
-> > > and remove from other places.
-> > 
-> > There has been some discussion about creating a meta-python layer (within
-> > the meta-openembedded repository) for these kinds of recipes. I think the
-> > time has come to actually do that, before we add any further python
-> > recipes to the general meta-oe layer. Could someone send a patch to
-> > create meta-python?
-> I don't mind accepting patch for creating meta-python layer, but the main
-> reason for it (python-numpy, python-nose, python-mako) were already merged
-> into oe-core before this question was answered :/
-> 
-> http://lists.openembedded.org/pipermail/openembedded-core/2014-January/08808
-> 9.html
+> couple of lines seem to be wrapped by your e-mail client, can you resend =
+it?
 
-Well, FWIW I have a few python recipes that could go there and I'm sure there 
-will be others as well.
+Microsoft "ESMTP" mail server reformats the mail (generated by git send-ema=
+il). It also adds (randomly) company footer signature. I reported this to m=
+y local IT.
+I reposted (correct patch) to oe-core ML : ok, wrong ML, this is my mistake=
+ here!
 
-Cheers,
-Paul
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Matthieu
 
