@@ -1,24 +1,28 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 543436F2D9
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 8462E6B4F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 14:45:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,535,1389740400"; d="scan'208";a="41669354"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 24 Feb 2014 15:45:52 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.2.328.9; Mon, 24 Feb 2014 15:45:52 +0100
-Received: from u85.usr.ingenico.loc (10.23.7.85) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Mon, 24 Feb 2014 15:45:52 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Feb 2014 15:40:41 +0100
-Message-ID: <1393252841-1470-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] xdelta3: add new recipe for version 3.0.8
+	Mon, 24 Feb 2014 14:47:05 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N1I00DLR91NCJ00@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	24 Feb 2014 08:46:45 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 12BD2200A9; Mon,
+	24 Feb 2014 09:46:35 -0500 (EST)
+Date: Mon, 24 Feb 2014 09:46:34 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20140224144634.GY22890@denix.org>
+References: <1392916331-30391-1-git-send-email-denis@denix.org>
+	<20140222080505.GK3854@jama>
+MIME-version: 1.0
+In-reply-to: <20140222080505.GK3854@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][PATCHv2] nativesdk-qtbase: do qmake replacement in ${D} instead of ${B}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,76 +36,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 14:45:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Feb 2014 14:47:07 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Useful command line tool for handling binary diff.
+On Sat, Feb 22, 2014 at 09:05:05AM +0100, Martin Jansa wrote:
+> On Thu, Feb 20, 2014 at 12:12:11PM -0500, Denys Dmytriyenko wrote:
+> > From: Denys Dmytriyenko <denys@ti.com>
+> > 
+> > * This way we don't mangle ${B} and can repeat do_install if necessary. And
+> >   previously it would require running do_compile again to restore the proper
+> >   state of ${B}.
+> > * Need to bump PR, since do_compile isn't changing, but needs to re-run to
+> >   re-populate qmake-real binary.
+> > 
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > ---
+> >  recipes-qt/qt5/nativesdk-qtbase.inc | 12 ++++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
+> > index fa44009..3cb9b0e 100644
+> > --- a/recipes-qt/qt5/nativesdk-qtbase.inc
+> > +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+> > @@ -10,6 +10,8 @@ require nativesdk-qt5.inc
+> >  # it's already included with newer oe-core, but include it here for dylan
+> >  FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
+> >  
+> > +PR = "r1"
+> > +
+> 
+> It's already merged, but please don't add new PRs, especially to .inc
+> files.
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- .../xdelta/files/compilation-fix.patch             | 29 ++++++++++++++++++++++
- meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb    | 15 +++++++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-support/xdelta/files/compilation-fix.patch
- create mode 100644 meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
+Please read the commit description above that explains the reason PR is 
+required here. Without it, the build will be broken for everyone who already 
+built nativesdk-qtbase and would require a clean up or rerun of do_compile
 
-diff --git a/meta-oe/recipes-support/xdelta/files/compilation-fix.patch b/meta-oe/recipes-support/xdelta/files/compilation-fix.patch
-new file mode 100644
-index 0000000..377a043
---- /dev/null
-+++ b/meta-oe/recipes-support/xdelta/files/compilation-fix.patch
-@@ -0,0 +1,29 @@
-+Upstream-Status: Pending
-+http://code.google.com/p/xdelta/issues/detail?id=174
-+
-+Compilation fix:
-+<code>
-+| testing/regtest.cc:763:3: error: no matching function for call to 'max(xoff_t, size_t&)'
-+</code>
-+
-+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-+---
-+ testing/regtest.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/testing/regtest.cc b/testing/regtest.cc
-+index 12b712e..b63a1f9 100644
-+--- a/testing/regtest.cc
-++++ b/testing/regtest.cc
-+@@ -12,7 +12,7 @@ public:
-+     Options() : encode_srcwin_maxsz(1<<20), 
-+ 		block_size(Constants::BLOCK_SIZE),
-+ 		size_known(false) { }
-+-    size_t encode_srcwin_maxsz;
-++    xoff_t encode_srcwin_maxsz;
-+     size_t block_size;
-+     bool size_known;
-+   };
-+-- 
-+1.8.5.4
-+
-diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-new file mode 100644
-index 0000000..16a72ee
---- /dev/null
-+++ b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Xdelta is a tool for differential compression"
-+DESCRIPTION = "Open-source binary diff, differential compression tools, \
-+               VCDIFF (RFC 3284) delta compression."
-+HOMEPAGE = "http://xdelta.org/"
-+SECTION = "console/utils"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
-+
-+SRC_URI = "http://xdelta.googlecode.com/files/${BPN}-${PV}.tar.xz \
-+           file://compilation-fix.patch"
-+SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3"
-+SRC_URI[sha256sum] = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
-+
-+inherit autotools
--- 
-1.8.5.4
+
+> >  # common with -native and target version
+> >  SRC_URI += "\
+> >      file://0001-Add-linux-oe-g-platform.patch \
+> > @@ -192,14 +194,12 @@ do_install() {
+> >      # Fix install paths for all
+> >      find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+> >  
+> > -    # switch back the proper qmake
+> > -    if [ -e ${B}/bin/qmake-real ]; then
+> > -        rm ${B}/bin/qmake
+> > -        mv ${B}/bin/qmake-real ${B}/bin/qmake
+> > -    fi
+> > -
+> >      oe_runmake install INSTALL_ROOT=${D}
+> >  
+> > +    # replace the native qmake installed above with nativesdk version
+> > +    rm -rf ${D}${OE_QMAKE_PATH_HOST_BINS}/qmake
+> > +    install -m 755 ${B}/bin/qmake-real ${D}${OE_QMAKE_PATH_HOST_BINS}/qmake
+> > +
+> >      # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
+> >      # e.g. qt3d, qtwayland
+> >      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+> > -- 
+> > 1.8.3.2
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
