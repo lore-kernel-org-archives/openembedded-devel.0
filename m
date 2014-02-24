@@ -1,37 +1,26 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
-	[209.85.160.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E59E6E901
+Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
+Received: from linuxmail.bmw-carit.de (mail.bmw-carit.de [62.245.222.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 66C9D6E754
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 01:34:59 +0000 (UTC)
-Received: by mail-yk0-f169.google.com with SMTP id 142so12817401ykq.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 17:35:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=abE1820W0wCEr5OTy92mLyzTGadmR0bm1rMrhnCZk0Q=;
-	b=W5J3bicJ8/UyyHAq65+PazRxdG6tkamQKxZk0ZuBt21ooPwnMyRicK1nTKp24uYSoh
-	o1xI/zEYwNjNFC7ZZPVQSaGnED7HYeMRcljhrhEpVMHnMuuEgSa7xLXdIJ5xD4cwIpZe
-	/XEGYMwS4yELPboNyYwAhG2qWH4y3QRGTW0DzEpDFW3QtXukf7HRfXtHWR2RmQ8YRAwH
-	EwVVYWlqaM70RzpiJIERHA4eLyBioZ9R5KWTwypJHQxhJ11XN3h+VWvzD5h9vvCEeIyf
-	XrsoRqyZwlHs3cXWdGvn6NzVIMEHe3qVFMihb7DV5X2dWFLYyVlpjrJqPPC0q2b4T4hP
-	W40A==
+	Mon, 24 Feb 2014 06:23:37 +0000 (UTC)
+Received: from [192.168.101.5] (afplatform.bmw-carit.intra [192.168.101.5])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: lukas.bulwahn)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTPSA id 4620840086;
+	Mon, 24 Feb 2014 05:47:06 +0100 (CET)
+Message-ID: <530AE55F.9090108@oss.bmw-carit.de>
+Date: Mon, 24 Feb 2014 07:23:27 +0100
+From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-X-Received: by 10.236.158.226 with SMTP id q62mr27795071yhk.2.1393205700797;
-	Sun, 23 Feb 2014 17:35:00 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Sun, 23 Feb 2014 17:35:00 -0800 (PST)
-In-Reply-To: <20140223150227.GT3854@jama>
-References: <1393163414-9494-1-git-send-email-otavio@ossystems.com.br>
-	<20140223150227.GT3854@jama>
-Date: Sun, 23 Feb 2014 22:35:00 -0300
-X-Google-Sender-Auth: fS75QPCunw1EDXGR-6Dh-WFabME
-Message-ID: <CAP9ODKpBvjYemm-RWWz-LzYg6iko-BPvMU-Pp2XyObNLkVxbhw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v2 1/4] qmake5_base.bbclass: Use Qt version path for headers
+To: openembedded-devel@lists.openembedded.org, Tobias Blom <tobias@blom.org>
+References: <94BAA6DD-BBE2-46CE-8248-E8432BE9F242@blom.org>
+	<20140220144314.GF3854@jama>
+In-Reply-To: <20140220144314.GF3854@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: python-netifaces in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 01:35:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Feb 2014 06:23:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 23, 2014 at 12:02 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sun, Feb 23, 2014 at 10:50:11AM -0300, Otavio Salvador wrote:
->> When looking for Qt5 headers we ought to use the Qt5 specific path. In
->> case the distribution wants to have a flat tree it can set QT_DIR_NAME
->> and it will still works as expected.
->>
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->> ---
->>  classes/qmake5_base.bbclass |    2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
->> index 3861cd0..db6834f 100644
->> --- a/classes/qmake5_base.bbclass
->> +++ b/classes/qmake5_base.bbclass
->> @@ -57,7 +57,7 @@ do_generate_qt_config_file() {
->>      cat > ${QT_CONF_PATH} <<EOF
->>  [Paths]
->>  Prefix = ${OE_QMAKE_PATH_PREFIX}
->> -Headers = ${OE_QMAKE_PATH_HEADERS}
->> +Headers = ${OE_QMAKE_PATH_HEADERS}/${QT_DIR_NAME}
+Hi Tobias,
+
+We provide a recipe for python-netifaces in the meta-ros layer as well. 
+In fact, a quick search on the OpenEmbedded Layer Index [1] reveals that 
+meta-ros and meta-openstack both provide a recipe for python-netifaces. 
+With your use case and recipe, we would have now three recipes. So, I 
+suggest to unify all three recipes and come up with the best (complete) 
+recipe from these three versions and add them to the meta-oe layer. We 
+then can remove the duplicate recipes in the application layers.
+
+Lukas
+
+[1] 
+http://layers.openembedded.org/layerindex/branch/master/recipes/?q=python-netifaces
+
+
+On 02/20/2014 03:43 PM, Martin Jansa wrote:
+> On Thu, Feb 20, 2014 at 03:35:19PM +0100, Tobias Blom wrote:
+>> Hi Martin,
+> Hi Tobias,
 >
-> classes/qmake5_paths.bbclass:OE_QMAKE_PATH_HEADERS = "${includedir}"
+>> I'm working with a yocto-project and needed a python module (netifaces). I now have a recipe for this, and I just wonder if it's of any interest push this upstream?
+> Better to ask in openembedded-devel@lists.openembedded.org
 >
-> is the right place
+> Generally good recipes are always welcome.
+>
+>> I'm pretty new to Yocto / OE, so I don't really know how things works. Saw your name in the logs, and thought I'd just send an email and ask...
+>>
+>> By the way, thanks for your work!
+> You're welcome
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Sorry for missing this, indeed. Fixed in v4.
-
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
