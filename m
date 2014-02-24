@@ -1,40 +1,37 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 50AC46EC6B
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E59E6E901
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 00:40:25 +0000 (UTC)
-Received: by mail-yk0-f172.google.com with SMTP id 200so12658538ykr.3
+	Mon, 24 Feb 2014 01:34:59 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 142so12817401ykq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2014 16:40:26 -0800 (PST)
+	Sun, 23 Feb 2014 17:35:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-type:content-transfer-encoding;
-	bh=CY2uwCps2zoAv7NVcHvI+U6NHQKTDi36A6RuhrREQ48=;
-	b=vIHmDmtrtWmImz0qStGgP+41y3YGr4G2rOo0LM1+qHZa4Aps0RP4tduGV7xwBeKb43
-	kC8Z3mAhYXUYJ+g40Om8F8o6T/L2pcpFtzlR3KAUA+WI2bK0UfN+FEC4vasCpWtTVJnC
-	kOcRUY+Qw+II2cJTLghuKUnYUNSwCfdiu2gTr/gcT7/rJXyhhZXdv8p1Ys1z0Kyv7MTr
-	Hb2R2syR8Ca15FggU6eeLDTrUsIYcSftLvIOaZDWMDJp2MCZY+GAzcAXwCnNED91tIFw
-	uqGaNbq0A0bR6lQzxohYezYuz0H9p3tlrbJNKLV5HZAYtFC81toAdjLHbDfKd44owX3d
-	esGA==
-X-Received: by 10.236.23.71 with SMTP id u47mr27116114yhu.143.1393202426434;
-	Sun, 23 Feb 2014 16:40:26 -0800 (PST)
-Received: from monster.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id 48sm44205160yhq.11.2014.02.23.16.40.24
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 23 Feb 2014 16:40:25 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Feb 2014 21:39:56 -0300
-Message-Id: <1393202396-11130-4-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1393202396-11130-1-git-send-email-otavio@ossystems.com.br>
-References: <1393202396-11130-1-git-send-email-otavio@ossystems.com.br>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=abE1820W0wCEr5OTy92mLyzTGadmR0bm1rMrhnCZk0Q=;
+	b=W5J3bicJ8/UyyHAq65+PazRxdG6tkamQKxZk0ZuBt21ooPwnMyRicK1nTKp24uYSoh
+	o1xI/zEYwNjNFC7ZZPVQSaGnED7HYeMRcljhrhEpVMHnMuuEgSa7xLXdIJ5xD4cwIpZe
+	/XEGYMwS4yELPboNyYwAhG2qWH4y3QRGTW0DzEpDFW3QtXukf7HRfXtHWR2RmQ8YRAwH
+	EwVVYWlqaM70RzpiJIERHA4eLyBioZ9R5KWTwypJHQxhJ11XN3h+VWvzD5h9vvCEeIyf
+	XrsoRqyZwlHs3cXWdGvn6NzVIMEHe3qVFMihb7DV5X2dWFLYyVlpjrJqPPC0q2b4T4hP
+	W40A==
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Giulian=20Gon=C3=A7alves=20Vivan?= <giulian@ossystems.com.br>
-Subject: [meta-qt5][PATCH v3 4/4] qsiv: add the qsiv 1.1 example app
+X-Received: by 10.236.158.226 with SMTP id q62mr27795071yhk.2.1393205700797;
+	Sun, 23 Feb 2014 17:35:00 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Sun, 23 Feb 2014 17:35:00 -0800 (PST)
+In-Reply-To: <20140223150227.GT3854@jama>
+References: <1393163414-9494-1-git-send-email-otavio@ossystems.com.br>
+	<20140223150227.GT3854@jama>
+Date: Sun, 23 Feb 2014 22:35:00 -0300
+X-Google-Sender-Auth: fS75QPCunw1EDXGR-6Dh-WFabME
+Message-ID: <CAP9ODKpBvjYemm-RWWz-LzYg6iko-BPvMU-Pp2XyObNLkVxbhw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v2 1/4] qmake5_base.bbclass: Use Qt version path for headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,55 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2014 00:40:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Feb 2014 01:35:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
+On Sun, Feb 23, 2014 at 12:02 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, Feb 23, 2014 at 10:50:11AM -0300, Otavio Salvador wrote:
+>> When looking for Qt5 headers we ought to use the Qt5 specific path. In
+>> case the distribution wants to have a flat tree it can set QT_DIR_NAME
+>> and it will still works as expected.
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> ---
+>>  classes/qmake5_base.bbclass |    2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+>> index 3861cd0..db6834f 100644
+>> --- a/classes/qmake5_base.bbclass
+>> +++ b/classes/qmake5_base.bbclass
+>> @@ -57,7 +57,7 @@ do_generate_qt_config_file() {
+>>      cat > ${QT_CONF_PATH} <<EOF
+>>  [Paths]
+>>  Prefix = ${OE_QMAKE_PATH_PREFIX}
+>> -Headers = ${OE_QMAKE_PATH_HEADERS}
+>> +Headers = ${OE_QMAKE_PATH_HEADERS}/${QT_DIR_NAME}
+>
+> classes/qmake5_paths.bbclass:OE_QMAKE_PATH_HEADERS = "${includedir}"
+>
+> is the right place
 
-This provides a simple image viewer for demonstration purposes.
+Sorry for missing this, indeed. Fixed in v4.
 
-Signed-off-by: Giulian Gonçalves Vivan <giulian@ossystems.com.br>
----
- recipes-qt/qsiv/qsiv_1.1.bb |   28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 recipes-qt/qsiv/qsiv_1.1.bb
 
-diff --git a/recipes-qt/qsiv/qsiv_1.1.bb b/recipes-qt/qsiv/qsiv_1.1.bb
-new file mode 100644
-index 0000000..bb2efa6
---- /dev/null
-+++ b/recipes-qt/qsiv/qsiv_1.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Qt Simple Image Viewer"
-+DESCRIPTION = "A simple image viewer using a mix of C++ and qml code for demonstration."
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11c7965a9059e287de5d93b98adf6d1a"
-+DEPENDS = "qtdeclarative"
-+
-+SRCREV = "7b9810b0f02f9ac74fae3ead6e2e9fb5c1382173"
-+SRC_URI = "git://code.ossystems.com.br/qt/qsiv;protocol=http"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit qmake5
-+
-+EXTRA_QMAKEVARS_PRE += "target.path=${libdir}/${P}"
-+
-+do_install_append() {
-+    install -d ${D}${bindir}
-+    echo "#!/bin/sh" > ${D}${bindir}/qsiv
-+    echo "export QML_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "export QML2_IMPORT_PATH=${libdir}/${P}/qml/qsiv" >> ${D}${bindir}/qsiv
-+    echo "${libdir}/${P}/qsiv \$* " >> ${D}${bindir}/qsiv
-+    chmod +x ${D}${bindir}/qsiv
-+}
-+
-+FILES_${PN} += "${libdir}/${P}"
-+RDEPENDS_${PN} += "qtdeclarative-qmlplugins"
-+
-+FILES_${PN}-dbg += "${libdir}/${P}/.debug"
 -- 
-1.7.10.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
