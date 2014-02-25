@@ -1,25 +1,38 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B5FE76F348
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id E775B6E97D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 10:54:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1PAsNJP029657
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 25 Feb 2014 02:54:24 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.2.347.0; Tue, 25 Feb 2014 02:54:22 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Feb 2014 18:54:16 +0800
-Message-ID: <a1776d6a50c9a7fcd20a4fc7ce55931088872cfb.1393325556.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1393325556.git.hongxu.jia@windriver.com>
-References: <cover.1393325556.git.hongxu.jia@windriver.com>
+	Tue, 25 Feb 2014 11:36:22 +0000 (UTC)
+Received: by mail-yk0-f171.google.com with SMTP id q9so607258ykb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Feb 2014 03:36:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=Nfo8N9R+H3IhW4kDIMVO3I6U+9rRFx05X3ZVm8p9RTg=;
+	b=fObtzud7Px+QlmbmNhaVFqSenqvkjFp+qbjgWpVnTZBdBAfsN6PhVWGWtewrfPlKcn
+	E872MhWtwb/uoLQMn4DaVx+If6CTSNAD0tqb3/dO3PUd1CJltpAWlziA2PEEB+lgYPuW
+	/IC8gpEK9qQzmpVmj1RqvDrUfOlSdl5StT2lBaCKq4LULu/dwCNc0TLGDGX7J71u299z
+	niFsanWdIpfocYJbkSNe0ZJom8QjQTaim5fzBsg5IC9DQ7ahka9284Ytr7pe+WGQ96AO
+	K/KH/qJW1jcCaMVvf5rEY40BlBfq9B+W1NkPrk/sxkAChrNdC4uEFFV0y+dVJyKlzLuM
+	/eKg==
 MIME-Version: 1.0
-Subject: [PATCH 1/1] strongswan: fix building lib32-strongswan failed while systemd enabled
+X-Received: by 10.236.94.243 with SMTP id n79mr5494571yhf.46.1393328183136;
+	Tue, 25 Feb 2014 03:36:23 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Tue, 25 Feb 2014 03:36:22 -0800 (PST)
+In-Reply-To: <CAMKF1sor8AfGAjLODy5W9N91HQsBTTvAhh0+j3S-Obn_Gdv2Nw@mail.gmail.com>
+References: <1393273696-9249-1-git-send-email-otavio@ossystems.com.br>
+	<1393273696-9249-3-git-send-email-otavio@ossystems.com.br>
+	<CAMKF1sor8AfGAjLODy5W9N91HQsBTTvAhh0+j3S-Obn_Gdv2Nw@mail.gmail.com>
+Date: Tue, 25 Feb 2014 08:36:22 -0300
+X-Google-Sender-Auth: h2aWfVptPooAwDK4LBD28e43alE
+Message-ID: <CAP9ODKp_b4MmZZ38DSB5JwWevucrOmE3tzFeL2F-DKe9=LyEnA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Khem Raj <raj.khem@gmail.com>, Giulian Vivan <giulian@ossystems.com.br>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 2/3] packagegroup-qt5-qtcreator-debug: Add package group
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,36 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 10:54:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Feb 2014 11:36:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-While systemd enabled, there was an error to build lib32-strongswan:
-...
-| ERROR: Function failed: SYSTEMD_SERVICE_lib32-strongswan value
-lib32-strongswan.service does not exist
-...
+On Tue, Feb 25, 2014 at 2:52 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Feb 24, 2014 at 12:28 PM, Otavio Salvador
+>> +RDEPENDS_${PN} = " \
+>> +    gdbserver \
+>> +    openssh \
+>
+> one could use dropbear or openssh for providing ssh server can we rely on that
+> instead of hardcoding openssh here ?
 
-The name of the service file should be the hardcoded
-'strongswan.service' rather than '${PN}.service', so
-the 'strongswan.service' will be found while building
-lib32-strongswan.
+We can try and see if it works.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Giulian, could you give this a try?
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb b/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
-index eb49494..e45e81a 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
-@@ -33,4 +33,4 @@ INSANE_SKIP_${PN}-plugins = "staticdev"
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "${PN}.service"
-+SYSTEMD_SERVICE_${PN} = "strongswan.service"
 -- 
-1.8.1.2
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
