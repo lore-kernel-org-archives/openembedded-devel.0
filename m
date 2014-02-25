@@ -1,23 +1,35 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B86796F18B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 461826E9A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 06:14:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1P6EZsg026982
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Feb 2014 22:14:35 -0800 (PST)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.2.347.0; Mon, 24 Feb 2014 22:14:34 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Feb 2014 14:14:29 +0800
-Message-ID: <cover.1393308745.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-MIME-Version: 1.0
-Subject: [PATCH 0/1] traceroute: rename alternatives name
+	Tue, 25 Feb 2014 06:38:57 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id g10so1718419pdj.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Feb 2014 22:38:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Pb4W8U8Qt6DGS6AM3BnAUEEDQrAISNNTagBhlokJixc=;
+	b=FciyBx12sZ98ksn17BrsfBwBDX4VdB44u1McrvC82emu6Il87jw+3lD76MJMq1N5xv
+	qtYhmBq60pJ33+UBt3X4qptn8m6FNPo8Lr63LbYCHlXd0rGqrdt+ZXdYWFCMjpMubTUh
+	Jc8G9ymO979OIvn73RXVH+md3wmRgjGxn2JMgVKNHa3ZmbT8+iUcVtQoPT7BtImzmg/c
+	rQ8J7qv4RygHwSqTAHKYefMW/GkTQ5NpJ+i7BDGSRp5z8OUAvH0Un3VmtPSrgTV/CQF+
+	gQ9uxJ9O8kGI7YelSBQhSRQCKXPaHDCDnoG2HbU2jHoBO1XLvhcnV7DvnAyqy0oP14zQ
+	q8AA==
+X-Received: by 10.66.252.135 with SMTP id zs7mr19083076pac.13.1393310338407;
+	Mon, 24 Feb 2014 22:38:58 -0800 (PST)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id dk1sm6740418pbc.46.2014.02.24.22.38.56
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Feb 2014 22:38:57 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 24 Feb 2014 22:40:37 -0800
+Message-Id: <1393310437-18094-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-multimedia][PATCH] xbmc: disable rxsx (euphoria)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,25 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 06:14:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Feb 2014 06:39:00 -0000
 
-The following changes since commit 8089aa451827cb791c7d795b9899dc152d1ceb66:
+From: Tim Orling <TicoTimo@gmail.com>
 
-  vlc: Fix build with flac-1.3.0 (2014-02-24 10:10:25 +0100)
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib hongxu/fix-traceroute
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-traceroute
-
-Hongxu Jia (1):
-  traceroute: rename alternatives name
-
- meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
+diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+index f438a2d..b72a0d5 100644
+--- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
++++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
+@@ -35,6 +35,7 @@ PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
+ PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
+ 
+ EXTRA_OECONF = " \
++    --disable-rxsx \
+     --disable-rpath \
+     --enable-libusb \
+     --enable-airplay \
 -- 
-1.8.1.2
+1.8.3.2
 
 
