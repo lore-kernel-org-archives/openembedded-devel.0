@@ -1,38 +1,38 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E775B6E97D
+Received: from mail-yh0-f47.google.com (mail-yh0-f47.google.com
+	[209.85.213.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C1296E97D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 11:36:22 +0000 (UTC)
-Received: by mail-yk0-f171.google.com with SMTP id q9so607258ykb.2
+	Tue, 25 Feb 2014 11:38:05 +0000 (UTC)
+Received: by mail-yh0-f47.google.com with SMTP id c41so6631977yho.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 03:36:23 -0800 (PST)
+	Tue, 25 Feb 2014 03:38:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:cc:content-type;
-	bh=Nfo8N9R+H3IhW4kDIMVO3I6U+9rRFx05X3ZVm8p9RTg=;
-	b=fObtzud7Px+QlmbmNhaVFqSenqvkjFp+qbjgWpVnTZBdBAfsN6PhVWGWtewrfPlKcn
-	E872MhWtwb/uoLQMn4DaVx+If6CTSNAD0tqb3/dO3PUd1CJltpAWlziA2PEEB+lgYPuW
-	/IC8gpEK9qQzmpVmj1RqvDrUfOlSdl5StT2lBaCKq4LULu/dwCNc0TLGDGX7J71u299z
-	niFsanWdIpfocYJbkSNe0ZJom8QjQTaim5fzBsg5IC9DQ7ahka9284Ytr7pe+WGQ96AO
-	K/KH/qJW1jcCaMVvf5rEY40BlBfq9B+W1NkPrk/sxkAChrNdC4uEFFV0y+dVJyKlzLuM
-	/eKg==
+	bh=Uj77gyF1eu4WH3eDd9LD04Mv1w9DEf7BnBPp3ZkiiwA=;
+	b=tOpI0hz1S11xD0ofXP8ErHf/qSY9PQMULmi3kjdE7SDhb46EUDe72W0znPDN+cr7pN
+	NKCuU3CegRsh2ZKrC3cFmLiKjof6nhT3EklP/W+XZEEXtxWrvdwS0fTjlO1aOvn5DkDI
+	e/OxPdOkHvIOZ/HFKxA+PSvJOrtr7Ur/E1lAQCnAUyrSKtXJyfmtJV4KGXNtl53dF6AT
+	xn6IXAZQ28TBzYPjQi4mZav68UNLw2+AIzbsfK8oOC+pXn4NOmJwokQ1ARJ002XNW2a9
+	50E/Fu/R2vG0266sLlPVtVZXWMO82vXQAdrkmQ07ShOnPgXDFYtj5T0NJWkuoju/IqpL
+	m4QA==
 MIME-Version: 1.0
-X-Received: by 10.236.94.243 with SMTP id n79mr5494571yhf.46.1393328183136;
-	Tue, 25 Feb 2014 03:36:23 -0800 (PST)
+X-Received: by 10.236.135.172 with SMTP id u32mr1034883yhi.107.1393328286494; 
+	Tue, 25 Feb 2014 03:38:06 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Tue, 25 Feb 2014 03:36:22 -0800 (PST)
-In-Reply-To: <CAMKF1sor8AfGAjLODy5W9N91HQsBTTvAhh0+j3S-Obn_Gdv2Nw@mail.gmail.com>
+Received: by 10.170.217.136 with HTTP; Tue, 25 Feb 2014 03:38:06 -0800 (PST)
+In-Reply-To: <CANwerB1b00ngQgTeeRbiV8kYrmd4rk1Ru2XhYGTD2xx7aF-KgA@mail.gmail.com>
 References: <1393273696-9249-1-git-send-email-otavio@ossystems.com.br>
-	<1393273696-9249-3-git-send-email-otavio@ossystems.com.br>
-	<CAMKF1sor8AfGAjLODy5W9N91HQsBTTvAhh0+j3S-Obn_Gdv2Nw@mail.gmail.com>
-Date: Tue, 25 Feb 2014 08:36:22 -0300
-X-Google-Sender-Auth: h2aWfVptPooAwDK4LBD28e43alE
-Message-ID: <CAP9ODKp_b4MmZZ38DSB5JwWevucrOmE3tzFeL2F-DKe9=LyEnA@mail.gmail.com>
+	<1393273696-9249-2-git-send-email-otavio@ossystems.com.br>
+	<CANwerB1b00ngQgTeeRbiV8kYrmd4rk1Ru2XhYGTD2xx7aF-KgA@mail.gmail.com>
+Date: Tue, 25 Feb 2014 08:38:06 -0300
+X-Google-Sender-Auth: H5oRNx0zQLCuoUcqHfhhVhcxKkg
+Message-ID: <CAP9ODKpEZ229hKeS6ajkYQp14Z9OGbUhOU-8jR7UtApo+7ZvSQ@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Khem Raj <raj.khem@gmail.com>, Giulian Vivan <giulian@ossystems.com.br>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 2/3] packagegroup-qt5-qtcreator-debug: Add package group
+To: Jonathan Liu <net147@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 1/3] populate_sdk_qt5.bbclass: Fix symlink location for QtCreator use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,21 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 11:36:23 -0000
+X-List-Received-Date: Tue, 25 Feb 2014 11:38:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Feb 25, 2014 at 2:52 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Feb 24, 2014 at 12:28 PM, Otavio Salvador
->> +RDEPENDS_${PN} = " \
->> +    gdbserver \
->> +    openssh \
+On Tue, Feb 25, 2014 at 12:20 AM, Jonathan Liu <net147@gmail.com> wrote:
+> On 25 February 2014 07:28, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>> The QtCreator is quite broken regarding finding the mkspecs files; so
+>> to workaround it we must to add a symlink to it. The workaround was in
+>> place but in the wrong sysroot, it must to be in the /native/ one.
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> ---
+>>  classes/populate_sdk_qt5.bbclass |    2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+>> index 3b849e9..635dd6d 100644
+>> --- a/classes/populate_sdk_qt5.bbclass
+>> +++ b/classes/populate_sdk_qt5.bbclass
+>> @@ -27,7 +27,7 @@ toolchain_create_sdk_env_script_append () {
+>>      echo 'export QT_CONF_PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
+>>
+>>      # make a symbolic link to mkspecs for compatibility with QTCreator
+>> -    (cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; \
+>> +    (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
+>>           ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+>>
+>>      # Generate a qt.conf file to be deployed with the SDK
 >
-> one could use dropbear or openssh for providing ssh server can we rely on that
-> instead of hardcoding openssh here ?
+> Acked-by: Jonathan Liu <net147@gmail.com>
+>
+> Tested and working. Qt Creator now finds the mkspec after applying this patch.
 
-We can try and see if it works.
-
-Giulian, could you give this a try?
+I  applied this one as it fixes the error. Thanks for testing it.
 
 -- 
 Otavio Salvador                             O.S. Systems
