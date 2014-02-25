@@ -1,33 +1,36 @@
 Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id A24B06BF88
+Received: from mail-qa0-f54.google.com (mail-qa0-f54.google.com
+	[209.85.216.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E65016EEFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 11:44:25 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id q107so717413qgd.1
+	Tue, 25 Feb 2014 12:07:05 +0000 (UTC)
+Received: by mail-qa0-f54.google.com with SMTP id i13so244809qae.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 03:44:26 -0800 (PST)
+	Tue, 25 Feb 2014 04:07:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=dZrIJH65mCOUv3IoNt6EFAPXLvF8VfXC7kWg5rLvk9A=;
-	b=JOCqgnLnf8gk0QEw2NUtySpPHQ3Xa1MzDntFY25miN3ymdu0+XxR0zzHem1l4urNZ7
-	Rt23SoN/BBvN2DY4/ZX4nFV7oSHJ01qcICm9zHO4pMCqegblrHhrIpfPC4OGvhfyUI1Z
-	EMF+UPab3RpqPcXvByo+J5z5Q0xozerp2l5dDG0IPLcvGEppGRWFi7SDGoov1U5oH4a+
-	0XiHMfifh8vHq82woLm8sedm5iViEiQgK/586d92pRDH9d+rE82vvnyX7CIy4nVu/co0
-	pI2ZHency2p8sqmRmv9TondWNMEn3npPyY15il/KQRDlOPvuGNstyPSgEPxBYXrcyM67
-	FIfQ==
-X-Received: by 10.224.151.147 with SMTP id c19mr36774525qaw.86.1393328666047; 
-	Tue, 25 Feb 2014 03:44:26 -0800 (PST)
+	:cc:content-type;
+	bh=/DSlO31E4qoBGTgeFim7oiEnqV9aclOMUquJ+AZo0FU=;
+	b=MWr1FpORicFjXBZ3y784bldhY65CDL2qylbfgap/6p/NtUWNIFZveurZokWJ0j7TXA
+	iNlpHeueyh/uynE0R6gSWGf0t8tT+e2AH10yx54ooYAJTG4IOiWR7ttxvZJ8ltDSKeGU
+	ikwbvBZrZ77+pzRDPt0zxXDxC1Qn+AZQ/VjfdB2gk3J5IJoKGJoM0GGmE4zolsrIFBVj
+	xF1twAWIrDZN/XmKSXi+Uassj+7hDdiiRk1Q+0v6vuyQOCtlNfSFw/DrnG5VpQUAXhqJ
+	BTah1UI3lbLoYiZwKWCIKpYKbTcuylMU5hJ38sSpdfQ0APhxnXGAzIHis5UJDTUuiwFm
+	viJw==
+X-Received: by 10.140.106.225 with SMTP id e88mr34966210qgf.66.1393330026104; 
+	Tue, 25 Feb 2014 04:07:06 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.25.47 with HTTP; Tue, 25 Feb 2014 03:44:05 -0800 (PST)
-In-Reply-To: <1393310437-18094-1-git-send-email-ticotimo@gmail.com>
-References: <1393310437-18094-1-git-send-email-ticotimo@gmail.com>
+Received: by 10.140.25.47 with HTTP; Tue, 25 Feb 2014 04:06:46 -0800 (PST)
+In-Reply-To: <3829871.fcosCAaezP@peggleto-mobl5.ger.corp.intel.com>
+References: <CAMCfZKHGAHVN0e9PkAQw5x98OeSOgHVXxZwNzdJZB1YxxOv1tg@mail.gmail.com>
+	<3829871.fcosCAaezP@peggleto-mobl5.ger.corp.intel.com>
 From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Tue, 25 Feb 2014 08:44:05 -0300
-Message-ID: <CAMCfZKHDXE+fswg1oFuBqaxHgdAJSuO7-OVX8y_nLwNc7A_Y0Q@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Feb 2014 09:06:46 -0300
+Message-ID: <CAMCfZKFJX392DbWg9Sx2EEGha_9i--nRYYuvi=KxiAp6+_r_pw@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-multimedia][PATCH] xbmc: disable rxsx (euphoria)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: New recipes and recipes from oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,39 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 11:44:26 -0000
+X-List-Received-Date: Tue, 25 Feb 2014 12:07:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Tim,
-On Tue, Feb 25, 2014 at 3:40 AM, Tim Orling <ticotimo@gmail.com> wrote:
+On Mon, Feb 24, 2014 at 9:15 AM, Paul Eggleton <
+paul.eggleton@linux.intel.com> wrote:
 
-> From: Tim Orling <TicoTimo@gmail.com>
+> I don't know if there really are policies, other than:
 >
-> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> ---
->  meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb | 1 +
->  1 file changed, 1 insertion(+)
+> * Find a layer where the recipe fits in; or, if the recipe fits into a new
+> category and there are likely to be others added soon that will also fit
+> into
+> it, create a new layer; otherwise, add it to meta-oe.
 >
-> diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bbb/meta-multimedia/recipes-mediacentre/xbmc/
-> xbmc_git.bb
-> index f438a2d..b72a0d5 100644
-> --- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-> +++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-> @@ -35,6 +35,7 @@ PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
->  PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
+> * Note in the commit message that the recipe is being migrated over from
+> OE-
+> Classic.
 >
->  EXTRA_OECONF = " \
-> +    --disable-rxsx \
->      --disable-rpath \
->      --enable-libusb \
->      --enable-airplay \
+> As far as the migration goes please refer to the following wiki page:
+>
+>   http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
+>
+> Hope this helps.
 >
 
-
-Is this a workaround for this issue?
-https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg33876.html
-
-Did you tried to fix the euphoria compile error?
+Thanks Paul.
 
 Regards,
 
