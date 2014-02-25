@@ -1,27 +1,35 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 92F6460DFA
+Return-Path: <net147@gmail.com>
+Received: from mail-qc0-f181.google.com (mail-qc0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BFD06EE66
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 02:58:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s1P2wpcp021636
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 25 Feb 2014 03:20:43 +0000 (UTC)
+Received: by mail-qc0-f181.google.com with SMTP id c9so9776769qcz.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 18:58:51 -0800 (PST)
-Received: from [128.224.162.168] (128.224.162.168) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Mon, 24 Feb 2014 18:58:51 -0800
-Message-ID: <530C072A.4090208@windriver.com>
-Date: Tue, 25 Feb 2014 10:59:54 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Mon, 24 Feb 2014 19:20:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=M4aMspeN/vZaLWedHUIubOWHIBKAF7LvndJooM4vD1Y=;
+	b=FMipSCiGZwPvhuBNxZ0dwmjAzt+Zu4Jo65Op6pla8yqjeZ3ZBaYwoL9mpC4Gd3ktUQ
+	oL1sTVXMjz7juxbo0EpIKkd3bRYAyYQNlh7J2Eu8VhaeIxP9HcoMJ3r1sucCuRY6Lj86
+	f89wqI7uQNnPNCp4UuOsIheQ5KD+IEh5tN9QrCfnVKTCd5bBWHC0B5TTJ0Akvcx65jFb
+	pxXT3SucOw0o6+/0e0tq/DkPPDjfQt3P22Vi9ykDPTGh8w06yP8XYqOUuz+6ePfnx3UJ
+	lBQe91TCn6sNaaQotHOvtbFo9NvdBYFY18N2Vatgyetcqjc1HtuAQgVhXKE3OYhAUgBH
+	pSBg==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1393290614-21483-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1393290614-21483-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH][meta-networking] bridge-utils: PN -> BPN to fix multilib ALTERNATIVE error
+X-Received: by 10.224.165.133 with SMTP id i5mr35114849qay.75.1393298444241;
+	Mon, 24 Feb 2014 19:20:44 -0800 (PST)
+Received: by 10.96.78.193 with HTTP; Mon, 24 Feb 2014 19:20:44 -0800 (PST)
+In-Reply-To: <1393273696-9249-2-git-send-email-otavio@ossystems.com.br>
+References: <1393273696-9249-1-git-send-email-otavio@ossystems.com.br>
+	<1393273696-9249-2-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 25 Feb 2014 14:20:44 +1100
+Message-ID: <CANwerB1b00ngQgTeeRbiV8kYrmd4rk1Ru2XhYGTD2xx7aF-KgA@mail.gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH 1/3] populate_sdk_qt5.bbclass: Fix symlink location for QtCreator use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,42 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 02:58:55 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Feb 2014 03:20:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Please drop this one
-
--Roy
-
-On 02/25/2014 09:10 AM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
+On 25 February 2014 07:28, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> The QtCreator is quite broken regarding finding the mkspecs files; so
+> to workaround it we must to add a symlink to it. The workaround was in
+> place but in the wrong sysroot, it must to be in the /native/ one.
 >
-> update-alternatives.bbclass does not create the brctl symbolic links for
-> multilib, since the wrong use of PN generates
-> /usr/sbin/brctl.lib32-bridge-utils, not /usr/sbin/brctl.bridge-utils
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 > ---
->   recipes-support/bridge-utils/bridge-utils.inc |    2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>  classes/populate_sdk_qt5.bbclass |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/recipes-support/bridge-utils/bridge-utils.inc b/recipes-support/bridge-utils/bridge-utils.inc
-> index bcdc04a..b4ca3f1 100644
-> --- a/recipes-support/bridge-utils/bridge-utils.inc
-> +++ b/recipes-support/bridge-utils/bridge-utils.inc
-> @@ -20,7 +20,7 @@ ALTERNATIVE_LINK_NAME[brctl] = "${sbindir}/brctl"
->   EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
+> diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+> index 3b849e9..635dd6d 100644
+> --- a/classes/populate_sdk_qt5.bbclass
+> +++ b/classes/populate_sdk_qt5.bbclass
+> @@ -27,7 +27,7 @@ toolchain_create_sdk_env_script_append () {
+>      echo 'export QT_CONF_PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
 >
->   do_install_append () {
-> -    mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
-> +    mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${BPN}
->       install -d ${D}/${datadir}/bridge-utils
->       install -d ${D}/${sysconfdir}/network/if-pre-up.d
->       install -d ${D}/${sysconfdir}/network/if-post-down.d
+>      # make a symbolic link to mkspecs for compatibility with QTCreator
+> -    (cd ${SDK_OUTPUT}/${SDKTARGETSYSROOT}; \
+> +    (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
+>           ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
 >
+>      # Generate a qt.conf file to be deployed with the SDK
+> --
+> 1.7.10.4
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
--- 
-Best Reagrds,
-Roy | RongQing Li
+Acked-by: Jonathan Liu <net147@gmail.com>
+
+Tested and working. Qt Creator now finds the mkspec after applying this patch.
+
+Regards,
+Jonathan
 
