@@ -1,35 +1,24 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 461826E9A3
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E85106AFB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 06:38:57 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id g10so1718419pdj.8
+	Tue, 25 Feb 2014 07:57:32 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1P7vXV4027796
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2014 22:38:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Pb4W8U8Qt6DGS6AM3BnAUEEDQrAISNNTagBhlokJixc=;
-	b=FciyBx12sZ98ksn17BrsfBwBDX4VdB44u1McrvC82emu6Il87jw+3lD76MJMq1N5xv
-	qtYhmBq60pJ33+UBt3X4qptn8m6FNPo8Lr63LbYCHlXd0rGqrdt+ZXdYWFCMjpMubTUh
-	Jc8G9ymO979OIvn73RXVH+md3wmRgjGxn2JMgVKNHa3ZmbT8+iUcVtQoPT7BtImzmg/c
-	rQ8J7qv4RygHwSqTAHKYefMW/GkTQ5NpJ+i7BDGSRp5z8OUAvH0Un3VmtPSrgTV/CQF+
-	gQ9uxJ9O8kGI7YelSBQhSRQCKXPaHDCDnoG2HbU2jHoBO1XLvhcnV7DvnAyqy0oP14zQ
-	q8AA==
-X-Received: by 10.66.252.135 with SMTP id zs7mr19083076pac.13.1393310338407;
-	Mon, 24 Feb 2014 22:38:58 -0800 (PST)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150])
-	by mx.google.com with ESMTPSA id dk1sm6740418pbc.46.2014.02.24.22.38.56
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Feb 2014 22:38:57 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Feb 2014 22:40:37 -0800
-Message-Id: <1393310437-18094-1-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-multimedia][PATCH] xbmc: disable rxsx (euphoria)
+	Mon, 24 Feb 2014 23:57:33 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.168) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.2.347.0; Mon, 24 Feb 2014 23:57:32 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Feb 2014 15:58:34 +0800
+Message-ID: <1393315114-26254-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH][meta-networking] bridge-utils: fix the no brctl error when enable multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,28 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2014 06:39:00 -0000
+X-List-Received-Date: Tue, 25 Feb 2014 07:57:33 -0000
+Content-Type: text/plain
 
-From: Tim Orling <TicoTimo@gmail.com>
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+update-alternatives.bbclass does not create the brctl symbolic links for
+multilib, since the wrong use of PN generates
+/usr/sbin/brctl.lib32-bridge-utils, not /usr/sbin/brctl.bridge-utils;
+
+In fact, no need to rename brctl by calling mv, since update-alternatives
+will handle it
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/bridge-utils/bridge-utils.inc |    1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-index f438a2d..b72a0d5 100644
---- a/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-+++ b/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb
-@@ -35,6 +35,7 @@ PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
- PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+index bcdc04a..e06c32e 100644
+--- a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+@@ -20,7 +20,6 @@ ALTERNATIVE_LINK_NAME[brctl] = "${sbindir}/brctl"
+ EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
  
- EXTRA_OECONF = " \
-+    --disable-rxsx \
-     --disable-rpath \
-     --enable-libusb \
-     --enable-airplay \
+ do_install_append () {
+-    mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
+     install -d ${D}/${datadir}/bridge-utils
+     install -d ${D}/${sysconfdir}/network/if-pre-up.d
+     install -d ${D}/${sysconfdir}/network/if-post-down.d
 -- 
-1.8.3.2
+1.7.10.4
 
 
