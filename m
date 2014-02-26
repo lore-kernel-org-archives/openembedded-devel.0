@@ -1,37 +1,34 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 259D06BF88
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 7215F6EE5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 03:49:10 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id f8so1610768wiw.9
+	Wed, 26 Feb 2014 05:38:14 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id y10so473946pdj.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2014 19:49:10 -0800 (PST)
+	Tue, 25 Feb 2014 21:38:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=0J6/hD7S0lscGrWyAbQXa7NR2GU7L5nP8ytlk9cMvjM=;
-	b=uPukl/RKGJQxzJWgyiqtmPwUv6tA+hZ2kctjPYqceUZGhUDatI1nURfRUv0zleAcYd
-	bU0gAO75Wq412mAiqrJ9gBZFxHsPBJp8DetfPndu2UA5KZgSM6DFXrQOXVHGflZ09h3H
-	gGD53xo05MNpmyKkcg5iP+mg2sogD5h3tLVcf1GW3k0iHnoXmvDc3ScI1+aJSaBUDIi5
-	9EhhZ0kaxhOJYYgJKxzuNpYELl8T7iEZCDY8KeqjkpVE1viDFNbUWQBDiTXDePXmbPuN
-	3qggekCrSQ9LoNlQPF6ZgzpxSwlEeadbu4n0U72dqWovvXfi/hKWAfcmtdMGoHQMIqbd
-	scvw==
-MIME-Version: 1.0
-X-Received: by 10.180.95.100 with SMTP id dj4mr1916861wib.35.1393386550697;
-	Tue, 25 Feb 2014 19:49:10 -0800 (PST)
-Received: by 10.194.59.228 with HTTP; Tue, 25 Feb 2014 19:49:10 -0800 (PST)
-In-Reply-To: <CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
-References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
-	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
-	<CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
-	<CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
-Date: Tue, 25 Feb 2014 19:49:10 -0800
-Message-ID: <CAOLEWZXkxbWSqWvJwHP4V+iMLOJ9OeHrht_S9eQj1qBc05xH3w@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=FdC9i1Zj1koRUxRTYeZbCTyAmmms5TzbgfHVzC2sFus=;
+	b=aKq1LWqkZEH+0cFx4/E3ZtDxhhLePVgfYqDEpGyVemkgtkpCHVALKHi/dD2iiVTlS0
+	2arK5RiZHVbqbvAlphsRJjJe3cs/vP15sRHY9L1Lqh44UBs5XOLgjj/9+6n3+9+FA1cV
+	nFzSpk26oK7gMbe/Bm3Ddv/vmXYNVsBLEvAT0mLRQP5RfFbGx+jkjlU7kFoJoj8/FzUs
+	GywD+H4Zto261FStpELl2htyNlAFQtrAlQQhMnHjS8L3ShwAY1sWXUgrGphXpDWhWpAg
+	ZU8svK2wInvSVGgCRxbnF+T/oMbxplKf75vo8jgz6FW9UkoNqydmttnKkHKseU9VfEuj
+	zV9A==
+X-Received: by 10.68.106.130 with SMTP id gu2mr4307438pbb.59.1393393094445;
+	Tue, 25 Feb 2014 21:38:14 -0800 (PST)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150]) by mx.google.com with ESMTPSA id
+	vx10sm158944384pac.17.2014.02.25.21.38.12 for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Tue, 25 Feb 2014 21:38:13 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: GDM alternative?
+Date: Tue, 25 Feb 2014 21:39:54 -0800
+Message-Id: <1393393197-23806-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-multimedia][PATCH v2 0/3] update vlc to 2.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,56 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2014 03:49:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Feb 2014 05:38:14 -0000
 
-Is there any interest in reviving slim?  I'm using it on gentoo-arm on
-several devices; works just like x86.  Since I haven't tried it or
-otherwise looked at it in oe yet, I have no idea why it's in a non-working
-state.  That said, it was on my todo list until I noticed lxdm, so I'll
-probably check it out at some point; never a bad idea to have another
-lightweight alternative...
+From: Tim Orling <TicoTimo@gmail.com>
 
-Steve
+v2: Incorporating JaMa's comments
 
+Tim Orling (3):
+  libdvdcss: update to 1.2.13
+  live555: update to 2013.04.30
+  vlc: update to 2.1.2
 
-On Thu, Feb 20, 2014 at 1:36 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+ .../vlc/files/0001-enable-subdir-objects.patch        | 13 +++++++++++++
+ .../files/0002-glibc-does-not-provide-strlcpy.patch   | 17 +++++++++++++++++
+ .../vlc/{libdvdcss_1.2.10.bb => libdvdcss_1.2.13.bb}  |  5 ++---
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc        | 10 +++++++---
+ meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb  | 19 -------------------
+ meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb   | 17 +++++++++++++++++
+ .../recipes-multimedia/live555/live555_20110314.bb    | 10 ----------
+ .../recipes-multimedia/live555/live555_20130430.bb    |  7 +++++++
+ 8 files changed, 63 insertions(+), 35 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/files/0001-enable-subdir-objects.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/files/0002-glibc-does-not-provide-strlcpy.patch
+ rename meta-multimedia/recipes-multimedia/vlc/{libdvdcss_1.2.10.bb => libdvdcss_1.2.13.bb} (71%)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
+ delete mode 100644 meta-oe/recipes-multimedia/live555/live555_20110314.bb
+ create mode 100644 meta-oe/recipes-multimedia/live555/live555_20130430.bb
 
-> Andreas, LXDM from meta-oe works well with minimal configuration on my pa=
-rt
-> :)
-> I didn't have to add another layer to satisfy dependencies. Thanks :)
->
-> Adam
->
->
-> On Wed, Feb 19, 2014 at 11:36 PM, Andreas M=FCller <
-> schnitzeltony@googlemail.com> wrote:
->
-> > On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com> wrote=
-:
-> > > Thank you Koen and Andreas. That has been really helped in clearing u=
-p
-> my
-> > > confusion and setting the path forward.
-> > >
-> > > I think I will try LXDM in meta-misc in meta-oe. Is there any special
-> > > configuration that I should be aware of (other then setting it as the
-> > > graphical init manager)?
-> >
-> > meta-misc is my personal playground - it might have dependencies to
-> > other layers and some things might not work as expected...
-> >
-> > Andreas
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+1.8.3.2
+
 
