@@ -1,33 +1,39 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FA3A60B9B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F79360B9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 21:50:26 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id d17so900531eek.15
+	Wed, 26 Feb 2014 23:11:35 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id c41so933325eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 13:50:27 -0800 (PST)
+	Wed, 26 Feb 2014 15:11:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=AaZcO/0DF/PGCDeDQBg9AdZE6BZPszcF6mL2ftCEzEg=;
-	b=ILDiDSR4BOTP8Kkpcx9AFx5RqL2dy8BqFfOhZukcjxfxXwCCeEdGdbLHLN6QN1BndW
-	qcbVGAXxuRTyMzak1F3Zq2uHFjBK/bHFfstcXxmIHSSMLQtYCypyH14Fq3wRZJwZfdps
-	j+ILRNNoF5e+rM82H64fo4e7pEHZ0R6C2IkvuHBGnfX9ZnWL8AZOHgurCstOXiaW620G
-	9x/fP0UPs6n7Yp+7e47lTxwOF3+r+p6Om91crLtnf/d10KFVL08Tem+i8cegvD01d0yH
-	4lQZwGjlloks6q7TQnOvUW2iLizU/BHZf28QuLi1zqc+dSEQo+2BnNGHuEPIALC3xU2F
-	vzOg==
-X-Received: by 10.14.2.193 with SMTP id 41mr9131767eef.55.1393451422412;
-	Wed, 26 Feb 2014 13:50:22 -0800 (PST)
-Received: from mizar.localdomain ([95.232.250.139])
-	by mx.google.com with ESMTPSA id y51sm8674601eeu.0.2014.02.26.13.50.21
-	for <multiple recipients>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=dmdn+EWdVg9tw6Bv20yG1cpeCZmZh77ocmwYTOFTDqE=;
+	b=nwaIQH4xm8WsCfkjEaT0B97eB5x5VtxdFs4hfF3PO6OORmahi6BfxjlR2sPAGU1s1b
+	mfUC9sWuqToCMEY9neIdCCMCsoYuICjoGoKKW+g/ExZD61my2eRQbiiFCTw4iESTIrRh
+	KEmRnzvf0pph+NrAsQJlyP6rBzf/mBCIwgtu7+N78CgOWfxkDK/ddsBexQgFX1JJLpdu
+	MG4/wb2W8iKmwxvnDau0U6qLhFmrXkBk9KAcdfAZ21RQKvc6HMZ+vCvOshuzXfz9ygcZ
+	WCMtGXEKXyuwj0TVsCXBm1UWDgWYv4bJb7FE0XH2fXyY8op84koCEBaTVBBxZJH40cFH
+	HCkQ==
+X-Received: by 10.15.22.65 with SMTP id e41mr9679071eeu.5.1393456294576;
+	Wed, 26 Feb 2014 15:11:34 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	i1sm9444029eeo.16.2014.02.26.15.11.32 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Feb 2014 13:50:21 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Feb 2014 22:49:57 +0100
-Message-Id: <1393451397-23105-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] klcc-cross: force rebuild for each MACHINE of the same arch
+	Wed, 26 Feb 2014 15:11:33 -0800 (PST)
+Date: Thu, 27 Feb 2014 00:11:34 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20140226231134.GU26981@jama>
+References: <cover.1393308745.git.hongxu.jia@windriver.com>
+	<69f299d4f94277fcebacb27c0820b30d27dca4c1.1393308745.git.hongxu.jia@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <69f299d4f94277fcebacb27c0820b30d27dca4c1.1393308745.git.hongxu.jia@windriver.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/1] traceroute: rename alternatives name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,34 +47,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2014 21:50:33 -0000
+X-List-Received-Date: Wed, 26 Feb 2014 23:11:39 -0000
+X-Groupsio-MsgNum: 48372
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="bE2XbrxqIoa/xW9+"
+Content-Disposition: inline
 
-In case of subsequent builds for machines belonging to the same arch
-we have to rebuild the klcc-cross wrapper because it is harcoding
-the path to the headers in machine sysroot.
-This hack is necessary to avoid to mark the klibc infrastructure as
-machine-specific.
+--bE2XbrxqIoa/xW9+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+On Tue, Feb 25, 2014 at 02:14:30PM +0800, Hongxu Jia wrote:
+> Rename traceroute's alternatives name from 'traceroute6' to 'traceroute'.
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
-index 40a65fd..068b3d5 100644
---- a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
-@@ -28,3 +28,9 @@ do_package_write_ipk[noexec] = "1"
- do_package_write_rpm[noexec] = "1"
- do_package_write_deb[noexec] = "1"
- do_package_write_tar[noexec] = "1"
-+
-+# The linux-libc-headers and klibc custom headers are not machine-specific
-+# but are installed into machine sysroot.
-+# Klcc wrapper is hardcoding som eof these paths thus, to keep te recipe
-+# arch-specific, we force the rebuild of klcc-cross for each machine.
-+do_compile[vardeps] += "MACHINE"
--- 
-1.8.1.5
+Please use [meta-networking] tag in subject so it's easier to filter
+them on patchwork to separate bundles.
 
+>=20
+> The 'traceroute6' is equivalent to 'traceroute -6' which means traceroute
+> in IPv6, and traceroute also supports IPv4. So traceroute6 is part of
+> traceroute and they are not equivalent.
+>=20
+> The Ubuntu 13.04 treated them as two different alternatives name also.
+> ...
+> $ ls -al /usr/bin/traceroute*
+> lrwxrwxrwx 1 root root    28 Feb 25 13:31 /usr/bin/traceroute -> /etc/alt=
+ernatives/traceroute
+> lrwxrwxrwx 1 root root    29 Oct 22  2012 /usr/bin/traceroute6 -> /etc/al=
+ternatives/traceroute6
+> ...
+>=20
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.0.18=
+=2Ebb b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+> index e6718db..83ac5a7 100644
+> --- a/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb
+> @@ -39,5 +39,5 @@ do_install() {
+> =20
+>  }
+> =20
+> -ALTERNATIVE_${PN} =3D "traceroute6"
+> -ALTERNATIVE_LINK_NAME[traceroute6] =3D "${bindir}/traceroute"
+> +ALTERNATIVE_${PN} =3D "traceroute"
+> +ALTERNATIVE_LINK_NAME[traceroute] =3D "${bindir}/traceroute"
+> --=20
+> 1.8.1.2
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--bE2XbrxqIoa/xW9+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMOdKYACgkQN1Ujt2V2gBzXggCfecCd6afwZoUst90RF2OCjSb6
+XocAoKRSVVHp9DEksUbXxkJ7iQPjkSE9
+=dsfZ
+-----END PGP SIGNATURE-----
+
+--bE2XbrxqIoa/xW9+--
