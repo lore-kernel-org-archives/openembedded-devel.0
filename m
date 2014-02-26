@@ -1,38 +1,38 @@
-Return-Path: <giulian@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C4856DC27
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
+	[209.85.213.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 1647B6DC27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 12:39:13 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id kq14so761486pab.24
+	Wed, 26 Feb 2014 12:40:33 +0000 (UTC)
+Received: by mail-yh0-f48.google.com with SMTP id z6so678612yhz.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 04:39:14 -0800 (PST)
+	Wed, 26 Feb 2014 04:40:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=XQP22oP5WjaT50i+4UYB+slHQ0YRe/KyN4+hRNvDTow=;
-	b=NQYPDcnapRayuH2LOJHWLZ6KwMzLBqxkrrTJkbRGASJQi5V0AuGGcljtjgyk56on2k
-	ffoNxHSB4lMa/qappkyBk9aeqghMGdgQu/qVOpXZMmnxPi99HH7OuhNgwczv4HpQ0RI0
-	QhjsJZomVV2mBCNRc5ON2oiNniSf3AxEd0evX6h1XzSSJkN7zLYckIP+UQtLVEIM+yco
-	8vRQmAgdTxl83VKbIjck8s+hGkAeOf/ONIB5BF8eaBOTBSkKyAA13EyPsOG63Wz8zpF+
-	Y8Zdk2ArV84E9DOT+FV0BKlXxj6z3E0TXAmToPt3qhsAeywtB7WH3S8mqp4Z60SzsP13
-	MCfg==
-X-Received: by 10.68.216.133 with SMTP id oq5mr6616766pbc.72.1393418354594;
-	Wed, 26 Feb 2014 04:39:14 -0800 (PST)
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=SEXGo28m87F6be7zn/y7hWKizFZwDpUx098+FFOVOx4=;
+	b=MgTzze+Rdc2lPy58r4iNH5Rzopa6tqrC6rdkYRuQsGTz9H6pm/yYV5vbU96fxIXImr
+	iLmF/nxHeorMnFbjTDeXlRB6ovzJf8ubBIPhuQhzeqQyoiuF0oFgebJkyeMiofZJnz/z
+	CHCc069Mqop4ib3o2gShFiIF1dY6rQpJ2nseHbCWnuAxPAnhMYsGhk4A4gv+7CW2NIEH
+	0c7bCEYLZQ+6Z/QrxA4SMCSRfVN7X5tmuRKXylAbDCxNXtzY7IrFkSnW4VG+QZ2Rp2WQ
+	M+2+ZImrG0dxCay5zQZsm+E934K4HMfM66d7l5GILLcoKjDLeZkp0ifWOLKZ7knvvoSh
+	/KSA==
 MIME-Version: 1.0
-Sender: giulian@gmail.com
-Received: by 10.66.8.225 with HTTP; Wed, 26 Feb 2014 04:38:54 -0800 (PST)
-In-Reply-To: <CAP9ODKp_b4MmZZ38DSB5JwWevucrOmE3tzFeL2F-DKe9=LyEnA@mail.gmail.com>
+X-Received: by 10.236.158.226 with SMTP id q62mr7333791yhk.2.1393418434444;
+	Wed, 26 Feb 2014 04:40:34 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Wed, 26 Feb 2014 04:40:34 -0800 (PST)
+In-Reply-To: <CAFYUCi7N-M1DVsnnxqcmMy8YJFsocDeYOn5Y3qBt8Ku1GB4_NA@mail.gmail.com>
 References: <1393273696-9249-1-git-send-email-otavio@ossystems.com.br>
 	<1393273696-9249-3-git-send-email-otavio@ossystems.com.br>
 	<CAMKF1sor8AfGAjLODy5W9N91HQsBTTvAhh0+j3S-Obn_Gdv2Nw@mail.gmail.com>
 	<CAP9ODKp_b4MmZZ38DSB5JwWevucrOmE3tzFeL2F-DKe9=LyEnA@mail.gmail.com>
-From: Giulian Vivan <giulian@ossystems.com.br>
-Date: Wed, 26 Feb 2014 09:38:54 -0300
-X-Google-Sender-Auth: nsYjLvzF10eJ7fVq-7KTIUFb8Us
-Message-ID: <CAFYUCi6HYOU3c1Mo4W3sXzv=D3E5NGuFQ=JCWkdvVkWZ+m+y7g@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAFYUCi7N-M1DVsnnxqcmMy8YJFsocDeYOn5Y3qBt8Ku1GB4_NA@mail.gmail.com>
+Date: Wed, 26 Feb 2014 09:40:34 -0300
+X-Google-Sender-Auth: -P63I3_qaMPklSqWyAbOfv_f0LQ
+Message-ID: <CAP9ODKp0UPWJypF9F6f+bL+xL8eaHYHb9H=RYG_sKV8DMyS=SA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Giulian Vivan <giulian@ossystems.com.br>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCH 2/3] packagegroup-qt5-qtcreator-debug: Add package group
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -48,42 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2014 12:39:14 -0000
+X-List-Received-Date: Wed, 26 Feb 2014 12:40:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Hello
+Hello Khem,
 
-We tested it and when qtcreator tries to connect to the device with
-dropbear, it gets "server rejected password". A connection done through a
-terminal is accepted normally.
+On Wed, Feb 26, 2014 at 9:18 AM, Giulian Vivan <giulian@ossystems.com.br> wrote:
+> We tested it and when qtcreator tries to connect to the device with
+> dropbear, it gets "server rejected password". A connection done through a
+> terminal is accepted normally.
 
-Giulian Gon=E7alves Vivan
-O.S. Systems Software Ltda.
-www.ossystems.com.br
-+55 53 3282-2787
+Any specific reason to prefer Dropbear?
 
-
-On Tue, Feb 25, 2014 at 8:36 AM, Otavio Salvador <otavio@ossystems.com.br>w=
-rote:
-
-> On Tue, Feb 25, 2014 at 2:52 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Mon, Feb 24, 2014 at 12:28 PM, Otavio Salvador
-> >> +RDEPENDS_${PN} =3D " \
-> >> +    gdbserver \
-> >> +    openssh \
-> >
-> > one could use dropbear or openssh for providing ssh server can we rely
-> on that
-> > instead of hardcoding openssh here ?
->
-> We can try and see if it works.
->
-> Giulian, could you give this a try?
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
