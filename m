@@ -1,34 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id A3EF36F3A2
+Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FAAF6F3A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 09:48:52 +0000 (UTC)
-Received: by mail-ea0-f170.google.com with SMTP id g15so1644218eak.15
+	Thu, 27 Feb 2014 09:53:35 +0000 (UTC)
+Received: by mail-ea0-f178.google.com with SMTP id a15so1634798eae.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 01:48:53 -0800 (PST)
+	Thu, 27 Feb 2014 01:53:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Gwixi0U/AA6KLP1fgpJE/3CUdoeSK4baKJ7Jzn9aHYM=;
-	b=l/sSJeWurwUBuy+QpYRktwerML+Go76BTze28Vdfn6/+gYVCZUYuzQY2+uFtu/qL/o
-	I0zYQs3dw7rR6DhppAm/tXihxx1abivjlg+yJLiuQ4sQbE3laZMH2q2YcJ93Q3M93bVN
-	DonOIx5AwEnDJdL7tEgmIAa1/gljMuEc7abmB74/y+AbQSZk8JvA/EK4L5mDioBYO8KC
-	dgTkWMQ1V9JTRIwaMX68yn+VqYKKInlvE/CGaQEOqDJJXfAZlpTNmHK8BcX66AGHzyak
-	SfxEHXrhM/BWluPM/cg3+29wYcgeHXhyvKL2oPaIuV7RiW4mN/EzYYdNew03VA0tB4vL
-	UcGA==
-X-Received: by 10.15.61.134 with SMTP id i6mr2547418eex.106.1393494533263;
-	Thu, 27 Feb 2014 01:48:53 -0800 (PST)
+	bh=z19fHfLhOKriYpfnw7FmrTX6YSlIXnIqpXdTAb+5sqo=;
+	b=MYjkEVoCFpp8jef8zmVH1iLl+ifGEjDk35imUCPwkKHRI/AUcZjoKdDH6ZMxuRDInE
+	lUL+RKU3iQIxPadFLyeWLcBoUL7turYZ1lQllFncWvp+F/kgHGp8IyeZkhrWh3+BmHzn
+	xw87ZbKj++qJLjbj21wbWdD/q9DFYsi2Nrpk38fK1C4utDyrwJWhig/BlT5cMe6emDm0
+	+Fbnm/p2fTXI9hK6Pf/FyweAUEa+CcM5VpYgTFfdGFXxAwaPKh7t0u4zDS9OhIkB5t2Y
+	Wo0Zrqs+kX74KZyeTuJsiS4H/8aHkuA7o6RrbuQ6PGk6JAGPNRPhq+/UnH/D/ZHNVEyK
+	YemA==
+X-Received: by 10.15.48.1 with SMTP id g1mr12220621eew.51.1393494816532;
+	Thu, 27 Feb 2014 01:53:36 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	x2sm14750547eeo.8.2014.02.27.01.48.50
+	j41sm14801756eeg.10.2014.02.27.01.53.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Feb 2014 01:48:51 -0800 (PST)
-Date: Thu, 27 Feb 2014 10:48:52 +0100
+	Thu, 27 Feb 2014 01:53:35 -0800 (PST)
+Date: Thu, 27 Feb 2014 10:53:35 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140227094852.GX26981@jama>
+Message-ID: <20140227095335.GY26981@jama>
 References: <1393456501-30516-1-git-send-email-Martin.Jansa@gmail.com>
 	<1393456501-30516-2-git-send-email-Martin.Jansa@gmail.com>
 	<CAMKF1spDft7cojVXq0Q7mtmDNTdXTsr-5A1nGVxAYUJVHN6eKw@mail.gmail.com>
@@ -49,13 +49,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 09:48:55 -0000
-X-Groupsio-MsgNum: 48395
+X-List-Received-Date: Thu, 27 Feb 2014 09:53:37 -0000
+X-Groupsio-MsgNum: 48396
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kdyvsFMDMDKuFgXB"
+	protocol="application/pgp-signature"; boundary="kr6QJ6xGUOmSrVQA"
 Content-Disposition: inline
 
---kdyvsFMDMDKuFgXB
+--kr6QJ6xGUOmSrVQA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -75,7 +75,11 @@ ote:
 > >
 >=20
 > git format-patch -M please
->=20
+
+It was sent with -M..
+
+-M48 and higher sends it like this and the default is 50%
+
 > > diff --git a/meta-oe/recipes-support/ode/ode_0.13.bb b/meta-oe/recipes-=
 support/ode/ode_0.13.bb
 > > new file mode 100644
@@ -97,11 +101,6 @@ t's dual licensed
 in next tarball
 >=20
 > can this be added as a patch ?
-
-Yes, but I don't know the real intentions in upstream, so I would rather
-keep it as comment and return it in next release (if they return it as
-well).
-
 >=20
 > > +# file://LICENSE-BSD.TXT;md5=3Dc74e6304a772117e059458fb9763a928
 > > +
@@ -180,16 +179,16 @@ le-double-precision"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---kdyvsFMDMDKuFgXB
+--kr6QJ6xGUOmSrVQA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMPCgQACgkQN1Ujt2V2gBxu0QCfd424Fr2OFekzQP+o8w6TgjLf
-mAYAn2LrWlMnJUkPEimu1vYcyWw38sJx
-=jqVW
+iEYEARECAAYFAlMPCx8ACgkQN1Ujt2V2gBwcAACaAlcaUGeJMWIHk6pI0XbYHTj0
+we0AmgKhZdvyoLy8z6Yvt8e6wgoZFO8+
+=7ndE
 -----END PGP SIGNATURE-----
 
---kdyvsFMDMDKuFgXB--
+--kr6QJ6xGUOmSrVQA--
