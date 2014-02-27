@@ -1,32 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 41A116EEF5
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
+	[209.85.160.45])
+	by mail.openembedded.org (Postfix) with ESMTP id D354B6028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 04:11:32 +0000 (UTC)
-Received: by mail-ie0-f178.google.com with SMTP id ar20so1629183iec.9
+	Thu, 27 Feb 2014 07:12:52 +0000 (UTC)
+Received: by mail-pb0-f45.google.com with SMTP id un15so2138460pbc.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2014 20:11:33 -0800 (PST)
+	Wed, 26 Feb 2014 23:12:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=7XhE31982Lmy33bEsyPTWaQzWgKmMA3YLH9sQ8R1RWo=;
-	b=g54Gs8hHzpdq0NPDvBBVLWU5/8x58jZYNJccaZgFc7DNfWyB+Ahd1sua8YV+FkOcSI
-	z8qcoWf/CnpVI+99Rlw+RegiPtua9U4P30loBAKsF6ykFVWqA4jV8BenUSVAiH5/p22T
-	zcwgvOOEUo78alyfpAav617Eo0SAlmOAWH3VWQv/ITJjksKYMxyN9HhMGkgzkiCENKjd
-	Z67M7fVlwJ4vqVLMHhO3cC4nb93aCkFFHcAuzBSf73L9P+e9QswA9NhhIZFnQwIl2B54
-	cXeJR/n59DwQGBwbf4cB3CJN14ZvRXMf7GlHr6E6qwpO5vYJHKqH6FQYy/p69/8hEv/B
-	DUZg==
-X-Received: by 10.50.43.170 with SMTP id x10mr3749125igl.20.1393474293366;
-	Wed, 26 Feb 2014 20:11:33 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.50.224.137 with HTTP; Wed, 26 Feb 2014 20:11:03 -0800 (PST)
-In-Reply-To: <1393471102-14702-1-git-send-email-net147@gmail.com>
-References: <1393471102-14702-1-git-send-email-net147@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Feb 2014 20:11:03 -0800
-Message-ID: <CAMKF1soSVSoiqNW=yriY=OwiqpvVBmw9fW6QSJgND=V7_H6s_g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] xterm: split out resize into a separate package
+	h=from:to:cc:subject:date:message-id;
+	bh=J56UoupRVXy6NtSpgeC2n5DEau78zd4raoYmoBE7zD8=;
+	b=S6W13YpbP0nlycvvX9yR10AaDN7XYStrg/TcdXDtM9sYNFwbwImg1NrV0E+dg7LS5X
+	h35xwPUnBjuWUmAz/ywrJ6WftuE6MS4vR5caP8a7m8eCHv85KO3jnugfNrRESWN1KBv0
+	Asxb3x/rvnS4cEdhgdOpk8BmXBh4t2dcI6tEWPKRe7qpQOOWnoFdEdxgzvbmVxHCLBQq
+	q48RA2pIHxI8uK7gIXDrFHUL/XiXFdfrTiz0S2zwq9In+BhZaS6Xk9uVXMYcaNlcXNFc
+	NGOpwzqvbIIwJLOubfTBgbs9JOkJtLfEeLbX3s0yhcI9XX9ot89fxs3HnDurXLjiDqYc
+	0/sg==
+X-Received: by 10.66.26.130 with SMTP id l2mr3344338pag.107.1393485173434;
+	Wed, 26 Feb 2014 23:12:53 -0800 (PST)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id ug9sm7166026pbc.11.2014.02.26.23.12.44
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Wed, 26 Feb 2014 23:12:48 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Feb 2014 23:14:31 -0800
+Message-Id: <1393485271-24402-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-multimedia][PATCH] libmusicbrainz: workaround for build-native/do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,14 +43,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 04:11:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 27 Feb 2014 07:12:52 -0000
 
-On Wed, Feb 26, 2014 at 7:18 PM, Jonathan Liu <net147@gmail.com> wrote:
-> -FILES_${PN} += " /usr/lib/X11"
-> +PACKAGES =+ "${PN}-resize ${PN}-resize-dbg ${PN}-resize-doc"
-> +
-> +FILES_${PN} += "${libdir}/X11"
+From: Tim Orling <TicoTimo@gmail.com>
 
-Multilib case needs testing since libdir will change in that case
+* drop PR
+* default cmake_do_configure deletes build/ which wipes out build-native
+* workaround to stash build-native first
+* <ugly>hack</ugly>
+
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ .../musicbrainz/libmusicbrainz_git.bb              | 49 +++++++++++++++++++++-
+ 1 file changed, 47 insertions(+), 2 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+index f6a8f53..b4d1ad3 100644
+--- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
++++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
+ DEPENDS = "expat neon"
+ 
+ PV = "5.0.1+git${SRCPV}"
+-PR = "r1"
+ 
+ SRCREV = "0749dd0a35b4a54316da064475863a4ac6e28e7e"
+ SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
+@@ -30,9 +29,55 @@ do_configure_prepend() {
+           -DCMAKE_C_COMPILER=${BUILD_CC} \
+           -DCMAKE_CXX_FLAGS=${BUILD_CXXFLAGS} \
+           -DCMAKE_CXX_COMPILER=${BUILD_CXX} \
+-          ..
++          ${S} 
+     make make-c-interface
+     cd ..
++
++    # the first thing cmake_do_configure does is delete ${B}
++    # stash it first
++    cp -r build-native ..
++}
++
++# recreate default here, with work around for build-native
++cmake_do_configure() {
++	if [ "${OECMAKE_BUILDPATH}" -o "${OECMAKE_SOURCEPATH}" ]; then
++		bbnote "cmake.bbclass no longer uses OECMAKE_SOURCEPATH and OECMAKE_BUILDPATH.  The default behaviour is now out-of-tree builds with B=WORKDIR/build."
++	fi
++
++	if [ "${S}" != "${B}" ]; then
++		rm -rf ${B}
++		mkdir -p ${B}
++		cd ${B}
++	fi
++
++	# bring build-native back into build/
++	mv ../build-native .
++
++	# Just like autotools cmake can use a site file to cache result that need generated binaries to run
++	if [ -e ${WORKDIR}/site-file.cmake ] ; then
++		OECMAKE_SITEFILE=" -C ${WORKDIR}/site-file.cmake"
++	else
++		OECMAKE_SITEFILE=""
++	fi
++
++	cmake \
++	  ${OECMAKE_SITEFILE} \
++	  ${S} \
++	  -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
++	  -DCMAKE_INSTALL_BINDIR:PATH=${bindir} \
++	  -DCMAKE_INSTALL_SBINDIR:PATH=${sbindir} \
++	  -DCMAKE_INSTALL_LIBEXECDIR:PATH=${libexecdir} \
++	  -DCMAKE_INSTALL_SYSCONFDIR:PATH=${sysconfdir} \
++	  -DCMAKE_INSTALL_SHAREDSTATEDIR:PATH=${sharedstatedir} \
++	  -DCMAKE_INSTALL_LOCALSTATEDIR:PATH=${localstatedir} \
++	  -DCMAKE_INSTALL_LIBDIR:PATH=${libdir} \
++	  -DCMAKE_INSTALL_INCLUDEDIR:PATH=${includedir} \
++	  -DCMAKE_INSTALL_DATAROOTDIR:PATH=${datadir} \
++	  -DCMAKE_INSTALL_SO_NO_EXE=0 \
++	  -DCMAKE_TOOLCHAIN_FILE=${WORKDIR}/toolchain.cmake \
++	  -DCMAKE_VERBOSE_MAKEFILE=1 \
++	  ${EXTRA_OECMAKE} \
++	  -Wno-dev
+ }
+ 
+ EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:PATH=${libdir} \
+-- 
+1.8.3.2
+
 
