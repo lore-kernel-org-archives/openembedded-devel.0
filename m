@@ -1,30 +1,43 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 854A56B7A6
+Return-Path: <waltergoossens@home.nl>
+Received: from smtpq4.gn.mail.iss.as9143.net (smtpq4.gn.mail.iss.as9143.net
+	[212.54.34.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 440856EE30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 19:08:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1RJ816m007668
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 27 Feb 2014 11:08:01 -0800 (PST)
-Received: from [128.224.147.243] (128.224.147.243) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
-	Thu, 27 Feb 2014 11:08:01 -0800
-Message-ID: <530F8D10.3020302@windriver.com>
-Date: Thu, 27 Feb 2014 14:08:00 -0500
-From: Randy MacLeod <randy.macleod@windriver.com>
+	Thu, 27 Feb 2014 19:25:04 +0000 (UTC)
+Received: from [212.54.34.133] (helo=smtp2.gn.mail.iss.as9143.net)
+	by smtpq4.gn.mail.iss.as9143.net with esmtp (Exim 4.71)
+	(envelope-from <waltergoossens@home.nl>) id 1WJ6Zr-0005Hf-L3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Feb 2014 20:25:03 +0100
+Received: from 541f9ead.cm-5-8c.dynamic.ziggo.nl ([84.31.158.173]
+	helo=[192.168.2.118]) by smtp2.gn.mail.iss.as9143.net with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.71)
+	(envelope-from <waltergoossens@home.nl>) id 1WJ6Zp-0006MT-WA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Feb 2014 20:25:03 +0100
+Message-ID: <530F91E8.1040707@home.nl>
+Date: Thu, 27 Feb 2014 20:28:40 +0100
+From: Walter Goossens <waltergoossens@home.nl>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-To: Hongxu Jia <hongxu.jia@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <cover.1393470790.git.hongxu.jia@windriver.com>
-	<a72ac6d3c23badba74f4a042cb5d17b24cfc7549.1393470790.git.hongxu.jia@windriver.com>
-In-Reply-To: <a72ac6d3c23badba74f4a042cb5d17b24cfc7549.1393470790.git.hongxu.jia@windriver.com>
-X-Originating-IP: [128.224.147.243]
-Cc: paul.eggleton@linux.intel.com
-Subject: Re: [PATCH 4/4][meta-webserver] apache2-2.4.7: added support for TLS Next Protocol Negotiation
+To: openembedded-devel@lists.openembedded.org
+References: <1393393197-23806-1-git-send-email-ticotimo@gmail.com>
+	<1393393197-23806-4-git-send-email-ticotimo@gmail.com>
+	<530DE2A2.5000608@home.nl>
+	<19638B13-5CD4-431E-811D-F184416165C3@gmail.com>
+In-Reply-To: <19638B13-5CD4-431E-811D-F184416165C3@gmail.com>
+X-Authenticated-Sender: waltergoossens@home.nl (via SMTP)
+X-Ziggo-spambar: +
+X-Ziggo-spamscore: 1.5
+X-Ziggo-spamreport: ALL_TRUSTED=-1, BAYES_00=-1.9, CM_META_TB_NOARR=0.5,
+	HK_MUCHMONEY=0.3, TW_BD=0.077, TW_BV=0.077, TW_BX=0.077,
+	TW_DB=0.077, TW_IB=0.077, TW_LV=0.077, URIBL_BLACK=3,
+	WORDPRESS_PLUS=0.12
+X-Ziggo-Spam-Status: No
+X-Spam-Status: No
+X-Spam-Flag: No
+Subject: Re: [meta-multimedia][PATCH v2 3/3] vlc: update to 2.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,351 +51,210 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 19:08:02 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Thu, 27 Feb 2014 19:25:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 14-02-26 10:22 PM, Hongxu Jia wrote:
-> The previous npn support patch (httpd-2.4.4-r1332643.patch) worked on
-> apache2-2.4.6 and conflicted with apache2-2.4.7, this patch fixed the
-> confliction with 2.4.7.
-
-Hongxu,
-
-Thanks, that's a good step. Even better would be to add the
-apache module that supports SPDY and confirm that it works
-with your desktop (google-chrome) browser.
-
-See:
-http://lists.openembedded.org/pipermail/openembedded-devel/2014-January/093772.html
-
-and
-
-https://code.google.com/p/mod-spdy/wiki/GettingStarted
-
-It doesn't seem to be a huge task but let us know what you find out.
-
-../Randy
-
+On 02/27/14 18:18, Timothy Orling wrote:
+> On Feb 26, 2014, at 4:48 AM, Walter Goossens <waltergoossens@home.nl> wrote:
 >
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->   .../apache2/apache2/npn-patch-2.4.7.patch          | 289 +++++++++++++++++++++
->   .../recipes-httpd/apache2/apache2_2.4.7.bb         |   1 +
->   2 files changed, 290 insertions(+)
->   create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
+>> Hi Tim,
+>>
+>> I've been working on slimmed down version of this recipe for audio only
+>> and I got stuck on the lua scripts being incorrectly compiled, have you
+>> looked at the scripts for this recipe?
+>> It's not entirely clear to me how (in)portable lua bytecode is as the
+>> documentation seems inconclusive about this. It seems the word-size
+>> should at least be the same, but I've also read the endianness should be
+>> the same.
+>> Anyway, I'm using an x86_64 machine to compile for a raspberry pi
+>> (arm-le) and it doesn't work out of the box, and also when using a 32bit
+>> lua compiler (as suggested
+>> https://wiki.videolan.org/Win32Compile_Under_Fedora/#Install_32-bit_Lua)
+>> I'll be trying your recipe soon but I fear it'll have the same problem.
+>>
+> I have not looked into the lua/scripts yet. I was just happy to get it to compile!
 >
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch b/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
-> new file mode 100644
-> index 0000000..a4f1855
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2/npn-patch-2.4.7.patch
-> @@ -0,0 +1,289 @@
-> +Add support for TLS Next Protocol Negotiation:
-> +
-> +* modules/ssl/mod_ssl.c, modules/ssl/mod_ssl.h: Add and implement new
-> +  hooks for next protocol advertisement/discovery.
-> +
-> +* modules/ssl/ssl_engine_init.c (ssl_init_ctx_callbacks): Enable
-> +  NPN advertisement callback in handshake.
-> +
-> +* modules/ssl/ssl_engine_io.c (ssl_io_filter_input): Invoke
-> +  next-protocol discovery hook.
-> +
-> +* modules/ssl/ssl_engine_kernel.c (ssl_callback_AdvertiseNextProtos):
-> +  New callback.
-> +
-> +* modules/ssl/ssl_private.h: Add prototype.
-> +
-> +Submitted by: Matthew Steele <mdsteele google.com>
-> +  with slight tweaks by jorton
-> +
-> +http://svn.apache.org/viewvc?view=revision&revision=1332643
-> +https://bugzilla.redhat.com//show_bug.cgi?id=809599
-> +Upstream-Status: Backport
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + CHANGES                         |  2 +
-> + modules/ssl/mod_ssl.c           | 12 ++++++
-> + modules/ssl/mod_ssl.h           | 21 +++++++++++
-> + modules/ssl/ssl_engine_init.c   |  5 +++
-> + modules/ssl/ssl_engine_io.c     | 24 ++++++++++++
-> + modules/ssl/ssl_engine_kernel.c | 82 +++++++++++++++++++++++++++++++++++++++++
-> + modules/ssl/ssl_private.h       |  6 +++
-> + 7 files changed, 152 insertions(+)
-> +
-> +diff --git a/CHANGES b/CHANGES
-> +--- a/CHANGES
-> ++++ b/CHANGES
-> +@@ -1,6 +1,8 @@
-> +                                                          -*- coding: utf-8 -*-
-> +
-> + Changes with Apache 2.4.7
-> ++  *) mod_ssl: Add support for TLS Next Protocol Negotiation.  PR 52210.
-> ++     [Matthew Steele <mdsteele google.com>]
-> +
-> +   *) APR 1.5.0 or later is now required for the event MPM.
-> +
-> +diff --git a/modules/ssl/mod_ssl.c b/modules/ssl/mod_ssl.c
-> +--- a/modules/ssl/mod_ssl.c
-> ++++ b/modules/ssl/mod_ssl.c
-> +@@ -275,6 +275,18 @@ static const command_rec ssl_config_cmds[] = {
-> +     AP_END_CMD
-> + };
-> +
-> ++/* Implement 'modssl_run_npn_advertise_protos_hook'. */
-> ++APR_IMPLEMENT_OPTIONAL_HOOK_RUN_ALL(
-> ++    modssl, AP, int, npn_advertise_protos_hook,
-> ++    (conn_rec *connection, apr_array_header_t *protos),
-> ++    (connection, protos), OK, DECLINED);
-> ++
-> ++/* Implement 'modssl_run_npn_proto_negotiated_hook'. */
-> ++APR_IMPLEMENT_OPTIONAL_HOOK_RUN_ALL(
-> ++    modssl, AP, int, npn_proto_negotiated_hook,
-> ++    (conn_rec *connection, const char *proto_name, apr_size_t proto_name_len),
-> ++    (connection, proto_name, proto_name_len), OK, DECLINED);
-> ++
-> + /*
-> +  *  the various processing hooks
-> +  */
-> +diff --git a/modules/ssl/mod_ssl.h b/modules/ssl/mod_ssl.h
-> +--- a/modules/ssl/mod_ssl.h
-> ++++ b/modules/ssl/mod_ssl.h
-> +@@ -63,5 +63,26 @@ APR_DECLARE_OPTIONAL_FN(int, ssl_proxy_enable, (conn_rec *));
-> +
-> + APR_DECLARE_OPTIONAL_FN(int, ssl_engine_disable, (conn_rec *));
-> +
-> ++/** The npn_advertise_protos optional hook allows other modules to add entries
-> ++ * to the list of protocol names advertised by the server during the Next
-> ++ * Protocol Negotiation (NPN) portion of the SSL handshake.  The hook callee is
-> ++ * given the connection and an APR array; it should push one or more char*'s
-> ++ * pointing to null-terminated strings (such as "http/1.1" or "spdy/2") onto
-> ++ * the array and return OK, or do nothing and return DECLINED. */
-> ++APR_DECLARE_EXTERNAL_HOOK(modssl, AP, int, npn_advertise_protos_hook,
-> ++                          (conn_rec *connection, apr_array_header_t *protos));
-> ++
-> ++/** The npn_proto_negotiated optional hook allows other modules to discover the
-> ++ * name of the protocol that was chosen during the Next Protocol Negotiation
-> ++ * (NPN) portion of the SSL handshake.  Note that this may be the empty string
-> ++ * (in which case modules should probably assume HTTP), or it may be a protocol
-> ++ * that was never even advertised by the server.  The hook callee is given the
-> ++ * connection, a non-null-terminated string containing the protocol name, and
-> ++ * the length of the string; it should do something appropriate (i.e. insert or
-> ++ * remove filters) and return OK, or do nothing and return DECLINED. */
-> ++APR_DECLARE_EXTERNAL_HOOK(modssl, AP, int, npn_proto_negotiated_hook,
-> ++                          (conn_rec *connection, const char *proto_name,
-> ++                           apr_size_t proto_name_len));
-> ++
-> + #endif /* __MOD_SSL_H__ */
-> + /** @} */
-> +diff --git a/modules/ssl/ssl_engine_init.c b/modules/ssl/ssl_engine_init.c
-> +--- a/modules/ssl/ssl_engine_init.c
-> ++++ b/modules/ssl/ssl_engine_init.c
-> +@@ -546,6 +546,11 @@ static void ssl_init_ctx_callbacks(server_rec *s,
-> +     SSL_CTX_set_tmp_dh_callback(ctx,  ssl_callback_TmpDH);
-> +
-> +     SSL_CTX_set_info_callback(ctx, ssl_callback_Info);
-> ++
-> ++#ifdef HAVE_TLS_NPN
-> ++    SSL_CTX_set_next_protos_advertised_cb(
-> ++        ctx, ssl_callback_AdvertiseNextProtos, NULL);
-> ++#endif
-> + }
-> +
-> + static void ssl_init_ctx_verify(server_rec *s,
-> +diff --git a/modules/ssl/ssl_engine_io.c b/modules/ssl/ssl_engine_io.c
-> +--- a/modules/ssl/ssl_engine_io.c
-> ++++ b/modules/ssl/ssl_engine_io.c
-> +@@ -28,6 +28,7 @@
-> +                                   core keeps dumping.''
-> +                                             -- Unknown    */
-> + #include "ssl_private.h"
-> ++#include "mod_ssl.h"
-> + #include "apr_date.h"
-> +
-> + /*  _________________________________________________________________
-> +@@ -297,6 +298,7 @@ typedef struct {
-> +     apr_pool_t *pool;
-> +     char buffer[AP_IOBUFSIZE];
-> +     ssl_filter_ctx_t *filter_ctx;
-> ++    int npn_finished;  /* 1 if NPN has finished, 0 otherwise */
-> + } bio_filter_in_ctx_t;
-> +
-> + /*
-> +@@ -1412,6 +1414,27 @@ static apr_status_t ssl_io_filter_input(ap_filter_t *f,
-> +         APR_BRIGADE_INSERT_TAIL(bb, bucket);
-> +     }
-> +
-> ++#ifdef HAVE_TLS_NPN
-> ++    /* By this point, Next Protocol Negotiation (NPN) should be completed (if
-> ++     * our version of OpenSSL supports it).  If we haven't already, find out
-> ++     * which protocol was decided upon and inform other modules by calling
-> ++     * npn_proto_negotiated_hook. */
-> ++    if (!inctx->npn_finished) {
-> ++        const unsigned char *next_proto = NULL;
-> ++        unsigned next_proto_len = 0;
-> ++
-> ++        SSL_get0_next_proto_negotiated(
-> ++            inctx->ssl, &next_proto, &next_proto_len);
-> ++        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, APR_SUCCESS, f->c,
-> ++                      "SSL NPN negotiated protocol: '%s'",
-> ++                      apr_pstrmemdup(f->c->pool, (const char*)next_proto,
-> ++                                     next_proto_len));
-> ++        modssl_run_npn_proto_negotiated_hook(
-> ++            f->c, (const char*)next_proto, next_proto_len);
-> ++        inctx->npn_finished = 1;
-> ++    }
-> ++#endif
-> ++
-> +     return APR_SUCCESS;
-> + }
-> +
-> +@@ -1893,6 +1916,7 @@ static void ssl_io_input_add_filter(ssl_filter_ctx_t *filter_ctx, conn_rec *c,
-> +     inctx->block = APR_BLOCK_READ;
-> +     inctx->pool = c->pool;
-> +     inctx->filter_ctx = filter_ctx;
-> ++    inctx->npn_finished = 0;
-> + }
-> +
-> + /* The request_rec pointer is passed in here only to ensure that the
-> +diff --git a/modules/ssl/ssl_engine_kernel.c b/modules/ssl/ssl_engine_kernel.c
-> +--- a/modules/ssl/ssl_engine_kernel.c
-> ++++ b/modules/ssl/ssl_engine_kernel.c
-> +@@ -29,6 +29,7 @@
-> +                                   time I was too famous.''
-> +                                             -- Unknown                */
-> + #include "ssl_private.h"
-> ++#include "mod_ssl.h"
-> + #include "util_md5.h"
-> +
-> + static void ssl_configure_env(request_rec *r, SSLConnRec *sslconn);
-> +@@ -2139,3 +2140,84 @@ int ssl_callback_SRPServerParams(SSL *ssl, int *ad, void *arg)
-> + }
-> +
-> + #endif /* HAVE_SRP */
-> ++
-> ++#ifdef HAVE_TLS_NPN
-> ++/*
-> ++ * This callback function is executed when SSL needs to decide what protocols
-> ++ * to advertise during Next Protocol Negotiation (NPN).  It must produce a
-> ++ * string in wire format -- a sequence of length-prefixed strings -- indicating
-> ++ * the advertised protocols.  Refer to SSL_CTX_set_next_protos_advertised_cb
-> ++ * in OpenSSL for reference.
-> ++ */
-> ++int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data_out,
-> ++                                     unsigned int *size_out, void *arg)
-> ++{
-> ++    conn_rec *c = (conn_rec*)SSL_get_app_data(ssl);
-> ++    apr_array_header_t *protos;
-> ++    int num_protos;
-> ++    unsigned int size;
-> ++    int i;
-> ++    unsigned char *data;
-> ++    unsigned char *start;
-> ++
-> ++    *data_out = NULL;
-> ++    *size_out = 0;
-> ++
-> ++    /* If the connection object is not available, then there's nothing for us
-> ++     * to do. */
-> ++    if (c == NULL) {
-> ++        return SSL_TLSEXT_ERR_OK;
-> ++    }
-> ++
-> ++    /* Invoke our npn_advertise_protos hook, giving other modules a chance to
-> ++     * add alternate protocol names to advertise. */
-> ++    protos = apr_array_make(c->pool, 0, sizeof(char*));
-> ++    modssl_run_npn_advertise_protos_hook(c, protos);
-> ++    num_protos = protos->nelts;
-> ++
-> ++    /* We now have a list of null-terminated strings; we need to concatenate
-> ++     * them together into a single string, where each protocol name is prefixed
-> ++     * by its length.  First, calculate how long that string will be. */
-> ++    size = 0;
-> ++    for (i = 0; i < num_protos; ++i) {
-> ++        const char *string = APR_ARRAY_IDX(protos, i, const char*);
-> ++        unsigned int length = strlen(string);
-> ++        /* If the protocol name is too long (the length must fit in one byte),
-> ++         * then log an error and skip it. */
-> ++        if (length > 255) {
-> ++            ap_log_cerror(APLOG_MARK, APLOG_ERR, 0, c,
-> ++                          "SSL NPN protocol name too long (length=%u): %s",
-> ++                          length, string);
-> ++            continue;
-> ++        }
-> ++        /* Leave room for the length prefix (one byte) plus the protocol name
-> ++         * itself. */
-> ++        size += 1 + length;
-> ++    }
-> ++
-> ++    /* If there is nothing to advertise (either because no modules added
-> ++     * anything to the protos array, or because all strings added to the array
-> ++     * were skipped), then we're done. */
-> ++    if (size == 0) {
-> ++        return SSL_TLSEXT_ERR_OK;
-> ++    }
-> ++
-> ++    /* Now we can build the string.  Copy each protocol name string into the
-> ++     * larger string, prefixed by its length. */
-> ++    data = apr_palloc(c->pool, size * sizeof(unsigned char));
-> ++    start = data;
-> ++    for (i = 0; i < num_protos; ++i) {
-> ++        const char *string = APR_ARRAY_IDX(protos, i, const char*);
-> ++        apr_size_t length = strlen(string);
-> ++        *start = (unsigned char)length;
-> ++        ++start;
-> ++        memcpy(start, string, length * sizeof(unsigned char));
-> ++        start += length;
-> ++    }
-> ++
-> ++    /* Success. */
-> ++    *data_out = data;
-> ++    *size_out = size;
-> ++    return SSL_TLSEXT_ERR_OK;
-> ++}
-> ++#endif /* HAVE_TLS_NPN */
-> +diff --git a/modules/ssl/ssl_private.h b/modules/ssl/ssl_private.h
-> +--- a/modules/ssl/ssl_private.h
-> ++++ b/modules/ssl/ssl_private.h
-> +@@ -123,6 +123,11 @@
-> + #define MODSSL_SSL_METHOD_CONST
-> + #endif
-> +
-> ++#if OPENSSL_VERSION_NUMBER >= 0x10001000L && !defined(OPENSSL_NO_NEXTPROTONEG) \
-> ++    && !defined(OPENSSL_NO_TLSEXT)
-> ++#define HAVE_TLS_NPN
-> ++#endif
-> ++
-> + #if defined(OPENSSL_FIPS)
-> + #define HAVE_FIPS
-> + #endif
-> +@@ -800,6 +805,7 @@ int          ssl_callback_ServerNameIndication(SSL *, int *, modssl_ctx_t *);
-> + int         ssl_callback_SessionTicket(SSL *, unsigned char *, unsigned char *,
-> +                                        EVP_CIPHER_CTX *, HMAC_CTX *, int);
-> + #endif
-> ++int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data, unsigned int *len, void *arg);
-> +
-> + /**  Session Cache Support  */
-> + void         ssl_scache_init(server_rec *, apr_pool_t *);
-> +--
-> +1.8.1.2
-> +
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
-> index f23776f..3c038a9 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
-> @@ -15,6 +15,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
->              file://replace-lynx-to-curl-in-apachectl-script.patch \
->              file://apache-ssl-ltmain-rpath.patch \
->              file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-> +           file://npn-patch-2.4.7.patch \
->              file://init \
->              file://apache2-volatile.conf"
->
+> Any feedback is welcomed.
+
+Well... to be quite honest, I haven't found a _real_ solution yet...
+right now I create a script to compile the lua file on the target at
+first boot but that really shouldn't be needed. There should be a way to
+do decent lua cross-compiles but I have zero experience with lua, and
+this error seemed so obvious to me that I'm still looking at what I've
+done wrong. The llvm-lua stuff seems to be able to crosscompile but that
+seemed like a hassle as well.
+I was just wondering if compiling a lua script can be for the target
+_really_ isn't possible and no-one has ever noticed or that I'm missing
+something.
+Keep you posted!
+
+Walter
+ 
+
+>> Walter
+>>
+>> On 02/26/14 06:39, Tim Orling wrote:
+>>> From: Tim Orling <TicoTimo@gmail.com>
+>>>
+>>> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+>>> ---
+>>> .../vlc/files/0001-enable-subdir-objects.patch        | 13 +++++++++++++
+>>> .../files/0002-glibc-does-not-provide-strlcpy.patch   | 17 +++++++++++++++++
+>>> meta-multimedia/recipes-multimedia/vlc/vlc.inc        | 10 +++++++---
+>>> meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb  | 19 -------------------
+>>> meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb   | 17 +++++++++++++++++
+>>> 5 files changed, 54 insertions(+), 22 deletions(-)
+>>> create mode 100644 meta-multimedia/recipes-multimedia/vlc/files/0001-enable-subdir-objects.patch
+>>> create mode 100644 meta-multimedia/recipes-multimedia/vlc/files/0002-glibc-does-not-provide-strlcpy.patch
+>>> delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+>>> create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
+>>>
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/files/0001-enable-subdir-objects.patch b/meta-multimedia/recipes-multimedia/vlc/files/0001-enable-subdir-objects.patch
+>>> new file mode 100644
+>>> index 0000000..9f0e708
+>>> --- /dev/null
+>>> +++ b/meta-multimedia/recipes-multimedia/vlc/files/0001-enable-subdir-objects.patch
+>>> @@ -0,0 +1,13 @@
+>>> +Index: vlc-2.1.2/configure.ac
+>>> +===================================================================
+>>> +--- vlc-2.1.2.orig/configure.ac
+>>> ++++ vlc-2.1.2/configure.ac
+>>> +@@ -24,7 +24,7 @@ AC_CANONICAL_BUILD
+>>> + AC_CANONICAL_HOST
+>>> + AC_PRESERVE_HELP_ORDER
+>>> + 
+>>> +-AM_INIT_AUTOMAKE(tar-ustar color-tests foreign)
+>>> ++AM_INIT_AUTOMAKE(tar-ustar color-tests foreign subdir-objects)
+>>> + AC_CONFIG_HEADERS([config.h])
+>>> + 
+>>> + # Disable with "./configure --disable-silent-rules" or "make V=1"
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/files/0002-glibc-does-not-provide-strlcpy.patch b/meta-multimedia/recipes-multimedia/vlc/files/0002-glibc-does-not-provide-strlcpy.patch
+>>> new file mode 100644
+>>> index 0000000..6d2a46f
+>>> --- /dev/null
+>>> +++ b/meta-multimedia/recipes-multimedia/vlc/files/0002-glibc-does-not-provide-strlcpy.patch
+>>> @@ -0,0 +1,17 @@
+>>> +Index: vlc-2.1.2/src/input/subtitles.c
+>>> +===================================================================
+>>> +--- vlc-2.1.2.orig/src/input/subtitles.c
+>>> ++++ vlc-2.1.2/src/input/subtitles.c
+>>> +@@ -44,6 +44,12 @@
+>>> + #include "input_internal.h"
+>>> + 
+>>> + /**
+>>> ++ * Drepper's alternative 
+>>> ++ * http://en.wikibooks.org/wiki/C_Programming/C_Reference/nonstandard/strlcpy
+>>> ++ */
+>>> ++#define strlcpy(dst, src, n) *((char* ) mempcpy(dst, src, n)) = '\0'
+>>> ++
+>>> ++/**
+>>> +  * We are not going to autodetect more subtitle files than this.
+>>> +  */
+>>> + #define MAX_SUBTITLE_FILES 128
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> index 6400719..976c3bf 100644
+>>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+>>> @@ -5,13 +5,13 @@ SECTION = "multimedia"
+>>>
+>>> DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib"
+>>>
+>>> -SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+>>> +SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.xz"
+>>>
+>>> inherit autotools gettext
+>>>
+>>> ARM_INSTRUCTION_SET = "arm"
+>>>
+>>> -DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1"
+>>> +DEPENDS += "libdvdcss libdvdread lua-native lua"
+>>>
+>>> LEAD_SONAME = "libvlc.so.5"
+>>>
+>>> @@ -36,6 +36,8 @@ FILES_libvlc-dbg = "\
+>>>
+>>> FILES_libvlc = "${libdir}/lib*.so.*"
+>>>
+>>> +FILES_libvlc-staticdev = "${libdir}/vlc/plugins/*/*.a"
+>>> +
+>>> FILES_${PN} += "${bindir}/vlc \
+>>>     ${datadir}/applications \
+>>>     ${datadir}/vlc/ \
+>>> @@ -71,6 +73,7 @@ PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
+>>> PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+>>> PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
+>>> PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+>>> +PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
+>>>
+>>> do_configure() {
+>>>     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
+>>> @@ -81,6 +84,7 @@ do_configure() {
+>>>     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
+>>>     oe_runconf
+>>>     rm config.log
+>>> -    sed -i -e s:-L/usr/lib:-L${STAGING_LIBDIR}/:g vlc-config
+>>> +    #sed -i -e s:-L/usr/lib:-L${STAGING_LIBDIR}/:g vlc-config
+>>>     sed -i -e s:'$(MOC) $(DEFS) $(CPPFLAGS)':'$(MOC) $(DEFS)'\ -I${S}/include\ -DSYS_LINUX:g ${S}/modules/gui/qt4/Makefile
+>>> +    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_ARCH}-${DISTRO}-${TARGET_OS}-libtool:g doltlibtool
+>>> }
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+>>> deleted file mode 100644
+>>> index 368db59..0000000
+>>> --- a/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.bb
+>>> +++ /dev/null
+>>> @@ -1,19 +0,0 @@
+>>> -# This recipe packages vlc as a library as well, so qt4 dependencies
+>>> -# can be avoided when only the library is installed.
+>>> -
+>>> -LIC_FILES_CHKSUM = "file://COPYING;md5=ed7e492ee44e70125a5d42e118354a13"
+>>> -
+>>> -require vlc.inc
+>>> -
+>>> -SRC_URI += "file://0001-V4L2-mark-horizontal-and-vertical-center-controls-ob.patch"
+>>> -SRC_URI += "file://0002-fix-build-with-newer-freetype.patch"
+>>> -SRC_URI += "file://0003-fix-build-with-newer-flac-1.3.0.patch"
+>>> -
+>>> -PR = "r4"
+>>> -
+>>> -# work around build failure
+>>> -EXTRA_OECONF += " --enable-libxml2=no"
+>>> -
+>>> -SRC_URI[md5sum] = "a64846d6f21ea179ae8e8bfb6f9447fe"
+>>> -SRC_URI[sha256sum] = "682560be08b82bedfaf30d8a611d80093c5883c1de72fcbcf05715b8e9f4e1cb"
+>>> -
+>>> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
+>>> new file mode 100644
+>>> index 0000000..a33f93f
+>>> --- /dev/null
+>>> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
+>>> @@ -0,0 +1,17 @@
+>>> +# This recipe packages vlc as a library as well, so qt4 dependencies
+>>> +# can be avoided when only the library is installed.
+>>> +
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>>> +
+>>> +require vlc.inc
+>>> +
+>>> +# work around build failure
+>>> +EXTRA_OECONF += " --enable-libxml2=no"
+>>> +
+>>> +SRC_URI += "file://0001-enable-subdir-objects.patch \
+>>> +            file://0002-glibc-does-not-provide-strlcpy.patch \
+>>> +"
+>>> +
+>>> +SRC_URI[md5sum] = "fb6787ad749aadcfaeab3471939b3426"
+>>> +SRC_URI[sha256sum] = "219b812be1bc2eba40faa86419d0aa2c479a7380af8af216e8bfa22eb6fc8ec4"
+>>> +
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --Tim
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
-
--- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350
 
