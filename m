@@ -1,29 +1,35 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B8786B8DF
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 1370C6F317
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 01:46:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1R1kPRQ026088
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 26 Feb 2014 17:46:26 -0800 (PST)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.2.347.0;
-	Wed, 26 Feb 2014 17:46:25 -0800
-Message-ID: <530E98EB.1050203@windriver.com>
-Date: Thu, 27 Feb 2014 09:46:19 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <cover.1393325556.git.hongxu.jia@windriver.com>
-	<a1776d6a50c9a7fcd20a4fc7ce55931088872cfb.1393325556.git.hongxu.jia@windriver.com>
-	<20140226231150.GV26981@jama>
-In-Reply-To: <20140226231150.GV26981@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] strongswan: fix building lib32-strongswan failed while systemd enabled
+	Thu, 27 Feb 2014 02:02:06 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id kx10so1794882pab.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Feb 2014 18:02:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=828BL+mRuFS19EkInkRjkeCG/Gw35wJFFiq/oYw11JU=;
+	b=vdg5/6s55ZopcXHjChtHKel+Ou0PQ1n2XVizIyPN2mWIlu72rY258notJu0at+2MW+
+	hrjEql57RRtaBmQlTG/jGpOo6B2e6tsVA3iLHo4jcpSvv4TUigg1oOcXmjF1ZMqhe9g7
+	fRQ+WZ/n596PGxAb4nLOhmPta8W7+/5FScrtXMf7b4eBeIyRXl5HRHoVZrgcCjzbVICQ
+	yVnANsQ5YTOZ2uK4OMkS1crxTnaekrRG+oQpIwejhnxeWQ3yV1cMgWVcqr4p4EkMHKmv
+	RNJvE0QH2djCe3FMgulcLUiM/RzVgeuwW6CkSDs1mb1TGNXBaij2Tz3reVsIR7FkyVkP
+	N/WQ==
+X-Received: by 10.66.250.202 with SMTP id ze10mr12416035pac.153.1393466527473; 
+	Wed, 26 Feb 2014 18:02:07 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id c7sm7928455pbt.0.2014.02.26.18.02.05
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 26 Feb 2014 18:02:06 -0800 (PST)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Feb 2014 13:06:38 +1100
+Message-Id: <1393466798-13105-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-oe][PATCH] xterm: split out resize into a separate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 01:46:28 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Feb 2014 02:02:07 -0000
 
-On 02/27/2014 07:11 AM, Martin Jansa wrote:
-> On Tue, Feb 25, 2014 at 06:54:16PM +0800, Hongxu Jia wrote:
->> While systemd enabled, there was an error to build lib32-strongswan:
->> ...
->> | ERROR: Function failed: SYSTEMD_SERVICE_lib32-strongswan value
->> lib32-strongswan.service does not exist
->> ...
-> Please use [meta-networking] tag in subject so it's easier to filter
-> them on patchwork to separate bundles.
+The resize program is useful on its own without xterm. For example, it
+may be used to resize a serial console.
 
-Sorry for the missing, should I resend them?
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-app/xterm_293.bb | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-//Hongxu
-
->> The name of the service file should be the hardcoded
->> 'strongswan.service' rather than '${PN}.service', so
->> the 'strongswan.service' will be found while building
->> lib32-strongswan.
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->> ---
->>   meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb b/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
->> index eb49494..e45e81a 100644
->> --- a/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
->> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.0.0.bb
->> @@ -33,4 +33,4 @@ INSANE_SKIP_${PN}-plugins = "staticdev"
->>   RPROVIDES_${PN} += "${PN}-systemd"
->>   RREPLACES_${PN} += "${PN}-systemd"
->>   RCONFLICTS_${PN} += "${PN}-systemd"
->> -SYSTEMD_SERVICE_${PN} = "${PN}.service"
->> +SYSTEMD_SERVICE_${PN} = "strongswan.service"
->> -- 
->> 1.8.1.2
->>
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_293.bb b/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
+index 67853b9..acc5b87 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
+@@ -20,4 +20,13 @@ do_configure() {
+     oe_runconf
+ }
+ 
+-FILES_${PN} += " /usr/lib/X11"
++PACKAGES =+ "${PN}-resize ${PN}-resize-dbg ${PN}-resize-doc"
++
++FILES_${PN} += "/usr/lib/X11"
++FILES_${PN}-resize += "${bindir}/resize"
++FILES_${PN}-resize-dbg += "${bindir}/.debug/resize"
++FILES_${PN}-resize-doc += "${mandir}/man1/resize.1"
++
++RRECOMMENDS_${PN} += "${PN}-resize"
++RRECOMMENDS_${PN}-dbg += "${PN}-resize-dbg"
++RRECOMMENDS_${PN}-doc += "${PN}-resize-doc"
+-- 
+1.9.0
 
 
