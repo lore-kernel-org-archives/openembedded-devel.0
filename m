@@ -1,41 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 225796F305
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 976966AFB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 18:12:19 +0000 (UTC)
-Received: by mail-yk0-f177.google.com with SMTP id q200so1457071ykb.8
+	Thu, 27 Feb 2014 18:25:11 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id e49so1640594eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 10:12:20 -0800 (PST)
+	Thu, 27 Feb 2014 10:25:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=siDUn8fNI9z6i0yxtw2WdxMZqgFVLodmMce8MSnqSAA=;
-	b=T4fBP1Vo0n+rk6/hPcSDYay7emZ4FyWOLkqyBlvCJe3NmXRdUR9ReycUCyjmzjse8H
-	qS9KQlLGHjQu+M6kLzAck5gIfkrLhKx0oZIuPm3hjZOvIR3JQTSereqnWIEpgd9zCcvc
-	F20njU8/4UjGOySAnsF4eZkMtCAlJR/PO/wbtUuQ6DduAua260rYoJMy0mvGJakVnx3v
-	fFumAhZeReWZfcBjsfcP1quWK79sxnYmGz63lBFnCW/s+R7VD46YmgfF56O6PC3/cv1f
-	UIyWnS/asbZ6bXryert/SW6gjz+Z8QZBjN19ZXJdmc0gdSQL9ZCPbhpm+QvwZ7ygfy4B
-	qUsw==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=uzfxYAcPiOMsdPbjbPSiYU42qcLGpER3kMbOsCF+I1Y=;
+	b=QK4JnyfapqRb+WjpgA5see/4U+fF652+tm9AgphtkaZC/Kf1GoVa5VGws6PGIE2BAP
+	yBKeWk2+otB5dIG2pMrmtItGtKWeoy5kSgIOwc5evhZRGZfZZMC8KRs3afNeMu+amAby
+	+qsfmB6d7zfd/lDUeYhYoH30UUUWhhLCAWGG5X65iVaGktByOPrz9U48G1AjODU9uHbI
+	nseyPft2sxGk9I5cfeoJdR0HOqvWPD41Jbf6fn+3awmn/a8tXcdN5J+/qj3HwPOrd2kB
+	+362qm9qiLWpEmZzN4YDtV4xguPS7LWH20ZVeXMPL+ubAsdIsuKvm2yXexpXktnMrD7B
+	2ulg==
+X-Received: by 10.14.204.9 with SMTP id g9mr14893156eeo.82.1393525512393;
+	Thu, 27 Feb 2014 10:25:12 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id u6sm500617eep.11.2014.02.27.10.25.08
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Feb 2014 10:25:08 -0800 (PST)
+Date: Thu, 27 Feb 2014 19:25:05 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140227182505.GD26981@jama>
+References: <1393518954-15100-1-git-send-email-nicolas.dechesne@linaro.org>
+	<1393518954-15100-2-git-send-email-nicolas.dechesne@linaro.org>
+	<1393518954-15100-3-git-send-email-nicolas.dechesne@linaro.org>
+	<1393518954-15100-4-git-send-email-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
-X-Received: by 10.236.150.164 with SMTP id z24mr16824924yhj.75.1393524740410; 
-	Thu, 27 Feb 2014 10:12:20 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Thu, 27 Feb 2014 10:12:20 -0800 (PST)
-In-Reply-To: <E2D50EB5-29C8-4FC6-9373-4E445C5B77F9@gmail.com>
-References: <1393521090-20876-1-git-send-email-otavio@ossystems.com.br>
-	<1393521090-20876-2-git-send-email-otavio@ossystems.com.br>
-	<90CD9C88-7366-4942-82AB-B4E909189BAD@gmail.com>
-	<CAP9ODKoCpaMUV58V3o7t6pGweB93QeugwouLOBgdgohh=JmgnA@mail.gmail.com>
-	<7167B982-98BA-4A58-8FD2-C8BA54D56F25@gmail.com>
-	<CAP9ODKog_2cBFMehH5rWfh6HgA7oseWrdR02LUp8u6p4=Fn3Qg@mail.gmail.com>
-	<E2D50EB5-29C8-4FC6-9373-4E445C5B77F9@gmail.com>
-Date: Thu, 27 Feb 2014 15:12:20 -0300
-X-Google-Sender-Auth: QBTAA70zRU8Z3uK3UfmiHmy9fX0
-Message-ID: <CAP9ODKr1A1PF5F2N6-7_oKovqbdJxLTPS9KTBGNdSzD5OA1Pqw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v2 1/2] packagegroup-qt5-qtcreator-debug: Add package group
+In-Reply-To: <1393518954-15100-4-git-send-email-nicolas.dechesne@linaro.org>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-qt5][PATCH dora 3/3] qtwebkit-examples: add RDEPENDS for ca-certificates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,41 +48,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 18:12:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 Feb 2014 18:25:15 -0000
+X-Groupsio-MsgNum: 48419
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="JSVXQxoTSdH0Ya++"
+Content-Disposition: inline
 
-On Thu, Feb 27, 2014 at 3:04 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Feb 27, 2014, at 9:33 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
->
->> and how you think we can allow user to override it?
->
-> there is -B option that can be passed to dropbear to let it accept
-> blank passwords.
+--JSVXQxoTSdH0Ya++
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-+++ b/recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb
-@@ -0,0 +1,16 @@
-+# Copyright (C) 2014 O.S. Systems Software LTDA.
-+
-+SUMMARY = "Remote debugging tools for QtCreator integration"
-+LICENSE = "MIT"
-+
-+inherit packagegroup
-+
-+# Override by distro if needed
-+VIRTUAL-RUNTIME_qtcreator-debug-ssh-daemon ?= "openssh-sshd"
-+
-+RDEPENDS_${PN} = " \
-+    gdbserver \
-+    ${VIRTUAL-RUNTIME_qtcreator-debug-ssh-daemon} \
-+    openssh-sftp-server \
-+    qtdeclarative-plugins \
-+"
+On Thu, Feb 27, 2014 at 05:35:54PM +0100, Nicolas Dechesne wrote:
+> From: Andre McCurdy <armccurdy@gmail.com>
+>=20
+> If qtbase is configured with openssl support then the
+> qtwebkit browser example apps require CA certificates.
+>=20
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+>=20
+> Conflicts:
+> 	recipes-qt/qt5/qtbase.inc
 
-Looks good?
+Please drop this
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>=20
+> ---
+>  recipes-qt/qt5/qt5.inc               | 2 ++
+>  recipes-qt/qt5/qtbase.inc            | 4 +++-
+>  recipes-qt/qt5/qtwebkit-examples.inc | 1 +
+>  3 files changed, 6 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+> index 7669efc..d9ebbff 100644
+> --- a/recipes-qt/qt5/qt5.inc
+> +++ b/recipes-qt/qt5/qt5.inc
+> @@ -7,6 +7,8 @@ inherit qmake5
+>  ICU =3D "icu "
+>  ICU_powerpc =3D "pango"
+> =20
+> +PACKAGECONFIG_OPENSSL ?=3D "openssl"
+> +
+>  QT_MODULE ?=3D "${BPN}"
+> =20
+>  # we don't want conflicts with qt4
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index 4f81f8e..eb22e40 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -43,6 +43,8 @@ PACKAGECONFIG_FONTS ?=3D ""
+>  PACKAGECONFIG_SYSTEM ?=3D "jpeg libpng zlib"
+>  PACKAGECONFIG_MULTIMEDIA ?=3D "${@base_contains('DISTRO_FEATURES', 'puls=
+eaudio', 'pulseaudio', '', d)}"
+>  PACKAGECONFIG_DISTRO ?=3D ""
+> +# This is in qt5.inc, because qtwebkit-examples are using it to enable c=
+a-certificates dependency
+> +# PACKAGECONFIG_OPENSSL ?=3D "openssl"
+> =20
+>  PACKAGECONFIG ??=3D " \
+>      release \
+> @@ -50,7 +52,7 @@ PACKAGECONFIG ??=3D " \
+>      udev \
+>      evdev \
+>      widgets \
+> -    openssl \
+> +    ${PACKAGECONFIG_OPENSSL} \
+>      ${PACKAGECONFIG_GL} \
+>      ${PACKAGECONFIG_FB} \
+>      ${PACKAGECONFIG_X11} \
+> diff --git a/recipes-qt/qt5/qtwebkit-examples.inc b/recipes-qt/qt5/qtwebk=
+it-examples.inc
+> index 50c28cd..84f16a4 100644
+> --- a/recipes-qt/qt5/qtwebkit-examples.inc
+> +++ b/recipes-qt/qt5/qtwebkit-examples.inc
+> @@ -10,3 +10,4 @@ SRC_URI +=3D " \
+> =20
+>  DEPENDS +=3D "qtwebkit"
+>  RDEPENDS_${PN}-examples +=3D "qtwebkit-qmlplugins"
+> +RDEPENDS_${PN}-examples +=3D "${@base_contains('PACKAGECONFIG_OPENSSL', =
+'openssl', 'ca-certificates', '', d)}"
+> --=20
+> 1.9.0
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--JSVXQxoTSdH0Ya++
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMPgwEACgkQN1Ujt2V2gBw2oACggyr4IRoB4dFVxrZtxxIn5Om7
+1P0An05FkpHWsW1sNzjO8sy1kLS7ABPZ
+=lqCz
+-----END PGP SIGNATURE-----
+
+--JSVXQxoTSdH0Ya++--
