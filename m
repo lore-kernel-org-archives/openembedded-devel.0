@@ -1,43 +1,39 @@
-Return-Path: <nicolas.dechesne@linaro.org>
+Return-Path: <stephen.arnold42@gmail.com>
 Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
 	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BD2F6F41C
+	by mail.openembedded.org (Postfix) with ESMTP id 6F6616F301
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 22:20:48 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id f8so39555wiw.1
+	Thu, 27 Feb 2014 22:29:05 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id f8so44310wiw.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 14:20:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=AZKQMqSlYrqvb82jel1NzRDUFSLXyDXNrVaDUsL4oRU=;
-	b=gBdxGn0nLT/jiELy8tO62uTj9lLi3VnB6Yn20y6JuedzMihmqUViTlEciKTeg5LDHr
-	jhAJ6CFuvh3z9tC+/cEPwi7CsWmnJF2mEYlJkNlurlvmXXYjzNJ2DoP5GAChFfHiQKet
-	C6j4ExhmZ+uPaR3kZmVHM14d61qKILJ9C1AJHCcbiX4Rjh+8hyWYmcYf5RbRrURQbV3K
-	DjanjKo2vQjMeJo4WWjcDC/cxdMDmcdmUUD2v6srpOvI7YqOB8DZNXNkaIvQ1C6arjMW
-	Bq2gLX/krK5GhsP29RgoXimGfwSzAh80tt/7DocLvxxfxz8/KGx12tIJFxGgB1S10YxW
-	biDg==
-X-Gm-Message-State: ALoCoQmx+TSu4zGEEE8rkX/7fcT2QRDrwj0DI12UKnxNQI8kXgJiIaqGh6S5sgPFfKxbEAsw0Gkv
-X-Received: by 10.194.81.196 with SMTP id c4mr5060786wjy.57.1393539648921;
-	Thu, 27 Feb 2014 14:20:48 -0800 (PST)
-Received: from localhost.localdomain (gau06-1-78-243-126-63.fbx.proxad.net.
-	[78.243.126.63])
-	by mx.google.com with ESMTPSA id ju6sm14526019wjc.1.2014.02.27.14.20.47
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Feb 2014 14:20:48 -0800 (PST)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+	Thu, 27 Feb 2014 14:29:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=6FZixnE5/qv460rMTfVBeXjWO1uCV2w3IUDaNXy5Tfk=;
+	b=OOmk22c6lvPB5HZRwCqs+AjC62t6o91//sl5/+cMqN+3Hl4aZXE7ER/HkXi2LyTRxq
+	G8yqifp/f24BFi0qvu9wZs+fGvn3MzYOnl6XPgDPZTjW2uNmdF6qNrtvCmegE1B8eqqk
+	LOJ3I1jTkzLTbASNg/aA52VoGVTlcQFoD0kRMarAm4cuWwLkRI4wm1ml/O3TdoM3E5zj
+	DJ1DiFa6yylakXTmQM9RKzr7e7SpSwm8rE6HrFNiMNBhPIEfpeRIVgX1BR/PAFlgAqB+
+	xdQ/we4AXlfKm065SDv3lL22qdjNASaNqKDvKEsS25rOtn+BHzmwtdnMckZJQY2uEyX5
+	h2Hg==
+MIME-Version: 1.0
+X-Received: by 10.180.89.225 with SMTP id br1mr363919wib.38.1393540146489;
+	Thu, 27 Feb 2014 14:29:06 -0800 (PST)
+Received: by 10.194.59.228 with HTTP; Thu, 27 Feb 2014 14:29:06 -0800 (PST)
+In-Reply-To: <CAFeBWL45oks2uq5RLaPrCCbfMaBrA9-yb0DYOLd9jTuey+qC9w@mail.gmail.com>
+References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
+	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
+	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
+	<CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
+	<CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
+	<CAOLEWZXkxbWSqWvJwHP4V+iMLOJ9OeHrht_S9eQj1qBc05xH3w@mail.gmail.com>
+	<CAFeBWL45oks2uq5RLaPrCCbfMaBrA9-yb0DYOLd9jTuey+qC9w@mail.gmail.com>
+Date: Thu, 27 Feb 2014 14:29:06 -0800
+Message-ID: <CAOLEWZVWNDNTTggnOEinOYtKZDuse5T_v=JOhRvyi-L9z5oUZQ@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2014 23:20:38 +0100
-Message-Id: <1393539638-18126-4-git-send-email-nicolas.dechesne@linaro.org>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1393539638-18126-3-git-send-email-nicolas.dechesne@linaro.org>
-References: <1393539638-18126-1-git-send-email-nicolas.dechesne@linaro.org>
-	<1393539638-18126-2-git-send-email-nicolas.dechesne@linaro.org>
-	<1393539638-18126-3-git-send-email-nicolas.dechesne@linaro.org>
-Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-qt5][PATCH dora v2 3/3] qtwebkit-examples: add RDEPENDS for ca-certificates
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: GDM alternative?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,66 +47,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 22:20:50 -0000
+X-List-Received-Date: Thu, 27 Feb 2014 22:29:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Andre McCurdy <armccurdy@gmail.com>
+It's a bit more subtle than just "obvious advantage" since the deps are
+different, config options are different, etc.  Slim is probably "lighter"
+than lxdm, in both features and dependency bloat.  The former pretty
+depends only on X11 libs and png (with optional pam and dbus/consolekit
+integration).  OTOH, lxdm has about the same pam/consolekit features, but
+depends on gtk[2|3].  So, a bit fancier and a little more bloat.  Which one
+do you think is easier to theme?  ;)
 
-If qtbase is configured with openssl support then the
-qtwebkit browser example apps require CA certificates.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
----
- recipes-qt/qt5/qt5.inc               | 2 ++
- recipes-qt/qt5/qtbase.inc            | 4 +++-
- recipes-qt/qt5/qtwebkit-examples.inc | 1 +
- 3 files changed, 6 insertions(+), 1 deletion(-)
+On Wed, Feb 26, 2014 at 3:28 PM, Adam Lee <adam@gumstix.com> wrote:
 
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index 7669efc..d9ebbff 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -7,6 +7,8 @@ inherit qmake5
- ICU = "icu "
- ICU_powerpc = "pango"
- 
-+PACKAGECONFIG_OPENSSL ?= "openssl"
-+
- QT_MODULE ?= "${BPN}"
- 
- # we don't want conflicts with qt4
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 4f81f8e..eb22e40 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -43,6 +43,8 @@ PACKAGECONFIG_FONTS ?= ""
- PACKAGECONFIG_SYSTEM ?= "jpeg libpng zlib"
- PACKAGECONFIG_MULTIMEDIA ?= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
- PACKAGECONFIG_DISTRO ?= ""
-+# This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
-+# PACKAGECONFIG_OPENSSL ?= "openssl"
- 
- PACKAGECONFIG ??= " \
-     release \
-@@ -50,7 +52,7 @@ PACKAGECONFIG ??= " \
-     udev \
-     evdev \
-     widgets \
--    openssl \
-+    ${PACKAGECONFIG_OPENSSL} \
-     ${PACKAGECONFIG_GL} \
-     ${PACKAGECONFIG_FB} \
-     ${PACKAGECONFIG_X11} \
-diff --git a/recipes-qt/qt5/qtwebkit-examples.inc b/recipes-qt/qt5/qtwebkit-examples.inc
-index 50c28cd..84f16a4 100644
---- a/recipes-qt/qt5/qtwebkit-examples.inc
-+++ b/recipes-qt/qt5/qtwebkit-examples.inc
-@@ -10,3 +10,4 @@ SRC_URI += " \
- 
- DEPENDS += "qtwebkit"
- RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
-+RDEPENDS_${PN}-examples += "${@base_contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
--- 
-1.9.0
-
+> Are there any obvious advantages over one another between LXDM and Slim?
+> I love how LXDM doesn't require complicated authentication framework like
+> GDM.
+>
+> Adam
+>
+>
+> On Tue, Feb 25, 2014 at 7:49 PM, Stephen Arnold
+> <stephen.arnold42@gmail.com>wrote:
+>
+> > Is there any interest in reviving slim?  I'm using it on gentoo-arm on
+> > several devices; works just like x86.  Since I haven't tried it or
+> > otherwise looked at it in oe yet, I have no idea why it's in a
+> non-working
+> > state.  That said, it was on my todo list until I noticed lxdm, so I'll
+> > probably check it out at some point; never a bad idea to have another
+> > lightweight alternative...
+> >
+> > Steve
+> >
+> >
+> > On Thu, Feb 20, 2014 at 1:36 PM, Adam Lee <adam.yh.lee@gmail.com> wrote=
+:
+> >
+> > > Andreas, LXDM from meta-oe works well with minimal configuration on m=
+y
+> > part
+> > > :)
+> > > I didn't have to add another layer to satisfy dependencies. Thanks :)
+> > >
+> > > Adam
+> > >
+> > >
+> > > On Wed, Feb 19, 2014 at 11:36 PM, Andreas M=FCller <
+> > > schnitzeltony@googlemail.com> wrote:
+> > >
+> > > > On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.com>
+> > wrote:
+> > > > > Thank you Koen and Andreas. That has been really helped in cleari=
+ng
+> > up
+> > > my
+> > > > > confusion and setting the path forward.
+> > > > >
+> > > > > I think I will try LXDM in meta-misc in meta-oe. Is there any
+> special
+> > > > > configuration that I should be aware of (other then setting it as
+> the
+> > > > > graphical init manager)?
+> > > >
+> > > > meta-misc is my personal playground - it might have dependencies to
+> > > > other layers and some things might not work as expected...
+> > > >
+> > > > Andreas
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > >
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
