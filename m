@@ -1,35 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f178.google.com (mail-ea0-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E7736F1A4;
-	Wed, 26 Feb 2014 23:50:00 +0000 (UTC)
-Received: by mail-ea0-f178.google.com with SMTP id a15so1348071eae.23
-	for <multiple recipients>; Wed, 26 Feb 2014 15:50:01 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 829EC6EFBE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Feb 2014 00:07:31 +0000 (UTC)
+Received: by mail-ie0-f172.google.com with SMTP id as1so919458iec.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Feb 2014 16:07:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=BvdhzAqNuNCjtC8zz3nyUY5JZhRl+wi8cYlPtTCNz6Y=;
-	b=D1upzZsw4tUK05QdQRmGrRz+VcluHstDuCAHWGC31bMJJrUWA8GgPuM+A/8qhzvjDK
-	Qga9fG74XjMRAJ8yCmJhhHZt9xY2nFmdySrTTVyFcB5apIS4Uar5SI3/Ogsp0hoMt3Tt
-	ey54qM3BZUEc8JddjBeydn2Ks17RT4eaI3/1GrXMJ0MIkr+5wh2THQ45PtiAHIMTWr+6
-	0G+up/uqFdMLA3UIaosF1ykQx2vGtxCkol4bnRFq/ydYIj2A7RXlfI/gIDQsKxnGybh0
-	k35LO+aM/L/g0vzUHy5CSjRE66fXOmV1CC/yDM3uHa+/AO/nK21HqvvjtcmrPj3myTtU
-	JEpw==
-X-Received: by 10.15.73.134 with SMTP id h6mr9965699eey.15.1393458601629;
-	Wed, 26 Feb 2014 15:50:01 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	j42sm9856274eep.21.2014.02.26.15.49.59 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Feb 2014 15:50:00 -0800 (PST)
-Date: Thu, 27 Feb 2014 00:50:01 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140226235001.GW26981@jama>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=90QXo+c4TaHf+4IJaHNOTznmBFYCsp9JyuL725Xyv0c=;
+	b=PVvB1BKZItWNaA1vcuq6ysl4A68t0KXkOOa+5j2/x3cWD7h8wmJ8+vIUj9+k5xl3mQ
+	06WZ8PgHVO4el7zQBne3RGw94D8+RiiLbH3NkphEYbghkrQ7T03TdBmarsWHKPmqxSmO
+	hkpUNWlDJ1+5E/+4M2Z1mwOjZUAAoZLDay0O3Kxvzc1GZzeRxabLQqokwEjSDm/lUO0M
+	JiULfL+uZcQRDiGTk4RvBrAJh7tiIRk7ChIiXl6cAB/sU1ILmr94cEgPd37LFV2l23xO
+	+X830K5WLn26QRgj4w7PC60vRqxrYyEGBWX8Kuqq/7sHYEprT/373MUpxTw1rm3N9YrI
+	FfBg==
+X-Received: by 10.50.20.100 with SMTP id m4mr2596143ige.17.1393459652468; Wed,
+	26 Feb 2014 16:07:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: State of bitbake world, Failed tasks 2014-02-27
+Received: by 10.50.224.137 with HTTP; Wed, 26 Feb 2014 16:07:01 -0800 (PST)
+In-Reply-To: <1393456501-30516-2-git-send-email-Martin.Jansa@gmail.com>
+References: <1393456501-30516-1-git-send-email-Martin.Jansa@gmail.com>
+	<1393456501-30516-2-git-send-email-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 26 Feb 2014 16:07:01 -0800
+Message-ID: <CAMKF1spDft7cojVXq0Q7mtmDNTdXTsr-5A1nGVxAYUJVHN6eKw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] ode: upgrade to 0.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,98 +41,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2014 23:50:02 -0000
-X-Groupsio-MsgNum: 48378
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hblleJHDxiLJUoyx"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Feb 2014 00:07:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
---hblleJHDxiLJUoyx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Feb 26, 2014 at 3:15 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-support/ode/ode_0.13.bb | 27 +++++++++++++++++++++++++++
+>  meta-oe/recipes-support/ode/ode_0.9.bb  | 28 ----------------------------
+>  2 files changed, 27 insertions(+), 28 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/ode/ode_0.13.bb
+>  delete mode 100644 meta-oe/recipes-support/ode/ode_0.9.bb
+>
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+git format-patch -M please
 
-=3D=3D Failed tasks 2014-02-26 =3D=3D
+> diff --git a/meta-oe/recipes-support/ode/ode_0.13.bb b/meta-oe/recipes-support/ode/ode_0.13.bb
+> new file mode 100644
+> index 0000000..8e9eb15
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/ode/ode_0.13.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY = "ODE is an Open Source Physics Engine"
+> +SECTION = "libs"
+> +HOMEPAGE = "http://www.ode.org"
+> +LICENSE = "LGPLv2.1 & BSD"
+> +LIC_FILES_CHKSUM = " \
+> +    file://COPYING;md5=1de906ee96808d9776dd72a5f9a79a22 \
+> +    file://LICENSE.TXT;md5=771782cb6245c7fbbe74bc0ec059beff \
+> +"
+> +# LICENSE-BSD.TXT is missing in 0.13 tarball, but COPYING still says it's dual licensed
+> +# and svn repo still contains LICENSE-BSD.TXT so maybe it will return in next tarball
 
-=3D=3D=3D common (8) =3D=3D=3D
-    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
-bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-multimedia/musicbrainz/libm=
-usicbrainz_git.bb, do_configure
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_1.1.11.b=
-b, do_compile
-    * meta-openembedded/meta-networking/recipes-support/traceroute/tracerou=
-te_2.0.18.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/networkmanager/network=
-manager_0.9.8.0.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-support/inih/libinih_git.bb, do_ins=
-tall
+can this be added as a patch ?
 
-=3D=3D=3D common-x86 (5) =3D=3D=3D
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
-b, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb, do_i=
-nstall
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+> +# file://LICENSE-BSD.TXT;md5=c74e6304a772117e059458fb9763a928
+> +
+> +
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/opende/ode-${PV}.tar.bz2"
+> +SRC_URI[md5sum] = "04b32c9645c147e18caff7a597a19f84"
+> +SRC_URI[sha256sum] = "34ce3e236e313bf109a0cb5546d2fca462aed99f29a42e62bc1463b803c31ef9"
+> +
+> +inherit autotools binconfig
+> +
+> +EXTRA_OECONF = "--disable-demos --enable-soname"
+> +
+> +FILES_${PN} = "${libdir}/lib*${SOLIBS}"
+> +
+> +PACKAGECONFIG ?= ""
+> +# if it isn't explicitly selected and "$build_os" == "$target_os", then configure will run
+> +# series of AC_TRY_RUN which won't work for cross-compilation and configure fails
+> +PACKAGECONFIG[double-precision] = "--enable-double-precision,--disable-double-precision"
+> diff --git a/meta-oe/recipes-support/ode/ode_0.9.bb b/meta-oe/recipes-support/ode/ode_0.9.bb
+> deleted file mode 100644
+> index 8b9955e..0000000
+> --- a/meta-oe/recipes-support/ode/ode_0.9.bb
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -SUMMARY = "ODE is an Open Source Physics Engine"
+> -SECTION = "libs"
+> -HOMEPAGE = "http://www.ode.org"
+> -LICENSE = "LGPLv2.1 & BSD"
+> -LIC_FILES_CHKSUM = "file://LICENSE-BSD.TXT;md5=c74e6304a772117e059458fb9763a928 \
+> -                    file://LICENSE.TXT;md5=771782cb6245c7fbbe74bc0ec059beff"
+> -
+> -
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/opende/ode-src-${PV}.zip \
+> -           file://install.patch"
+> -
+> -SRC_URI[md5sum] = "4c03759b76a0649a6d5108c8e172e1e4"
+> -SRC_URI[sha256sum] = "460d0851b743b1f144ef2a8259004d6774504c95d08e9357a96a296111496feb"
+> -
+> -inherit autotools binconfig
+> -
+> -EXTRA_OECONF = "--disable-demos --enable-soname"
+> -
+> -do_configure_append() {
+> -    echo "#define dInfinity DBL_MAX" >>include/ode/config.h
+> -}
+> -
+> -FILES_${PN} = "${libdir}/lib*${SOLIBS}"
+> -
+> -PACKAGECONFIG ?= ""
+> -# if it isn't explicitly selected and "$build_os" == "$target_os", then configure will run
+> -# series of AC_TRY_RUN which won't work for cross-compilation and configure fails
+> -PACKAGECONFIG[double-precision] = "--enable-double-precision,--disable-double-precision"
+> --
+> 1.9.0
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-=3D=3D=3D qemuarm (7) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/webkit/webkit-efl_2.3.2+svnr15=
-9807.bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_12.2.=
-bb, do_fetch
-    * meta-openembedded/meta-oe/recipes-core/libxml/libxml++_2.35.3.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-devtools/packagekit/packagekit_0.8.=
-13.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-extended/gnuplot/gnuplot_4.4.4.bb, =
-do_compile
-    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_=
-compile
-    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-initramfs/recipes-kernel/linux/linux-yocto-tin=
-y-kexecboot_3.10.bb, do_compile
-
-=3D=3D=3D qemux86_64 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
-obiledevice_1.1.4.bb, do_configure
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||15    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140224_083255.log/
-|-
-||qemux86       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140224_180733.log/
-|-
-||qemux86_64    ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140225_233246.log/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---hblleJHDxiLJUoyx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlMOfakACgkQN1Ujt2V2gBwwDQCeP+C78zn1BArz5QzBSp5Pn1Xw
-3ssAoJhfn8ay99KxUfqOJfZS8l2V/9/t
-=9A27
------END PGP SIGNATURE-----
-
---hblleJHDxiLJUoyx--
