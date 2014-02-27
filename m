@@ -1,40 +1,38 @@
 Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 6829460017
+Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
+	[74.125.82.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 35E7760017
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 22:18:07 +0000 (UTC)
-Received: by mail-ob0-f177.google.com with SMTP id wo20so773259obc.22
+	Thu, 27 Feb 2014 22:20:43 +0000 (UTC)
+Received: by mail-we0-f171.google.com with SMTP id u56so3474661wes.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 14:18:07 -0800 (PST)
+	Thu, 27 Feb 2014 14:20:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=tCycZR8DFyBWZ4nIzjC3ZTKwOm6d42PZahvHK7gYCb4=;
-	b=gL/2ly+k6m5xZ/r4f29KNHk1JS6c4lO0BN5mEYesKplq7vHzsOKfftBCzdgdPpUXYI
-	xx5AquuKecyp6GNIwFCdELDWwHUvghUOoRB640fGw2tguYxBybyskTNXOPYNJlA9SXaE
-	CBPFR7Ma976VBuSMiO8AR/M0KKyoNG7Aeg3BitRdca1dZqo9TS7BhPdwgZn8MN9drzDf
-	rlg9MvBcvBfZNB4sw5uE46jYF+rOhvCLBan3dEuz6uwIoLEDqfmKIRSEhm8/FDvCF0dM
-	FPupOIQ9HpmWs1iCrrt986f0Xv7mT5lUcWjXVchcE57+CS0NQEkElaHoJ9txcGO7kgQ5
-	Hn1Q==
-X-Gm-Message-State: ALoCoQkcgky4m2nmYj++EkPZxNXMX3tf/T6wQ8YIYs/bOGh2JgjUWP+fkWWIhoIIgA7hBTl6YwMa
-X-Received: by 10.182.188.73 with SMTP id fy9mr4077634obc.68.1393539487676;
-	Thu, 27 Feb 2014 14:18:07 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.76.182.99 with HTTP; Thu, 27 Feb 2014 14:17:47 -0800 (PST)
-In-Reply-To: <20140227182505.GD26981@jama>
-References: <1393518954-15100-1-git-send-email-nicolas.dechesne@linaro.org>
-	<1393518954-15100-2-git-send-email-nicolas.dechesne@linaro.org>
-	<1393518954-15100-3-git-send-email-nicolas.dechesne@linaro.org>
-	<1393518954-15100-4-git-send-email-nicolas.dechesne@linaro.org>
-	<20140227182505.GD26981@jama>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ANCMcj7Gblkb8QcW9FfkwbTrxclt4kUpuCgvS0y4AUI=;
+	b=c3ZsHr7blSsfl33dlrNrIAEDlXyFI2s96YriIo/9IHV34ptjoLS155UZQIrz4+OSMX
+	DRZAJzWMR5W2auIfzTGd3wvLUoM5T2x4pLJ1uSMzaLLtdwBDLnow06Y1Ne0OfsmT0iZ1
+	zs6ju22uhuWEkZcB19zOg64hWA9ren2CFHQjC9fbAvXv0vOz6K2hlwCy8PvYftX/THqX
+	EtdUgrCzu6VQxGUaRWmOR7CPGWE4lKp2KZHkQ2UizhXqv1W/ToqNjkYfZ2GHVJcxjBKm
+	wzf9Te4Q835+5GChR0jMwb2G2iHY+V7OG6Waa9U4DpAbYss8oeY/znFaHGI3dNrUoFe/
+	3vRw==
+X-Gm-Message-State: ALoCoQnvgDlkIytvaIpM+QZOt9TtjBJqSiqkldz/IXJrGgIKsbGKDmlf26b5PP+jNFFtjPBu9AKz
+X-Received: by 10.180.19.35 with SMTP id b3mr373275wie.20.1393539644284;
+	Thu, 27 Feb 2014 14:20:44 -0800 (PST)
+Received: from localhost.localdomain (gau06-1-78-243-126-63.fbx.proxad.net.
+	[78.243.126.63])
+	by mx.google.com with ESMTPSA id ju6sm14526019wjc.1.2014.02.27.14.20.42
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 27 Feb 2014 14:20:43 -0800 (PST)
 From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Thu, 27 Feb 2014 23:17:47 +0100
-Message-ID: <CAP71WjzsoSKw7sArFk5ZZTR0tM9_796maHzRgaY4wt+aTe2PWA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH dora 3/3] qtwebkit-examples: add RDEPENDS for ca-certificates
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Feb 2014 23:20:35 +0100
+Message-Id: <1393539638-18126-1-git-send-email-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-qt5][PATCH dora v2 0/3] A couple of backport for dora
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,14 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2014 22:18:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 Feb 2014 22:20:44 -0000
 
-On Thu, Feb 27, 2014 at 7:25 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> Conflicts:
->>       recipes-qt/qt5/qtbase.inc
->
-> Please drop this
+Hi Martin,
 
-oops. sorry. i messed up with my git aliases... and resent the same.. will fix
+the following commits were recently merged in master branch. I have
+rebased/backported on dora and tested on ARM board. Only 1 minor had
+to be resolved. Can you please merge them in dora branch?
+
+Changes in v2:
+
+ - cleanup commit message in 0003, as per Martin request.
+
+thanks
+
+nico
+
+Andre McCurdy (3):
+  qtbase.inc: don't force ARM_INSTRUCTION_SET to arm
+  qtbase: configure with -openssl-linked instead of -openssl
+  qtwebkit-examples: add RDEPENDS for ca-certificates
+
+ recipes-qt/qt5/qt5.inc               |  2 ++
+ recipes-qt/qt5/qtbase.inc            | 10 +++++-----
+ recipes-qt/qt5/qtwebkit-examples.inc |  1 +
+ 3 files changed, 8 insertions(+), 5 deletions(-)
+
+-- 
+1.9.0
+
 
