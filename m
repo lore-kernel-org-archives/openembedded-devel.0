@@ -1,28 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E75746F09E
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id D083C60E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2014 16:25:48 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 28 Feb 2014 08:21:25 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,562,1389772800"; d="scan'208";a="491674999"
-Received: from davidllo-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.227])
-	by orsmga002.jf.intel.com with ESMTP; 28 Feb 2014 08:24:42 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 28 Feb 2014 16:24:41 +0000
-Message-ID: <2290381.1DV3oX1vSN@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.2 (Linux/3.13.4-200.fc20.x86_64; KDE/4.12.2; x86_64; ; )
-In-Reply-To: <20140228155754.GK26981@jama>
-References: <1393592670-3088-1-git-send-email-Matthieu.Crapet@ingenico.com>
-	<8822299.R2rVXokoOe@peggleto-mobl5.ger.corp.intel.com>
-	<20140228155754.GK26981@jama>
+	Fri, 28 Feb 2014 16:58:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,562,1389740400"; d="scan'208";a="41953856"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 28 Feb 2014 17:58:10 +0100
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Fri, 28 Feb 2014 17:58:10 +0100
+Received: from u85.usr.ingenico.loc (10.23.7.85) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Fri, 28 Feb 2014 17:58:09 +0100
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 28 Feb 2014 17:51:01 +0100
+Message-ID: <1393606261-26991-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.8.5.4
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] fbida 2.09: cleanups and use PACKAGECONFIG
+Subject: [meta-oe][PATCH] fim: add newrecipe for version 0.4-rc1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,42 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2014 16:25:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 28 Feb 2014 16:58:12 -0000
+Content-Type: text/plain
 
-On Friday 28 February 2014 16:57:54 Martin Jansa wrote:
-> On Fri, Feb 28, 2014 at 03:43:56PM +0000, Paul Eggleton wrote:
-> > On Friday 28 February 2014 15:45:32 Martin Jansa wrote:
-> > > On Fri, Feb 28, 2014 at 02:21:58PM +0000, Matthieu CRAPET wrote:
-> > > > Thanks Martin for your great help!
-> > > > 
-> > > > Concerning shell function & tabs, maybe a line may be added in wiki:
-> > > > http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
-> > > 
-> > > Updated there and in
-> > > http://www.openembedded.org/wiki/Styleguide
-> > 
-> > IMO, I think four spaces for multi-line indentation is not ideal. The
-> > indentation is there for readability; it should line up with the opening
-> > quote on the first line if there is one. IIRC we only ended up with these
-> > after your search and replace in meta-oe because it was too hard to do
-> > otherwise.
->
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/082663
-> .html
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/08266
-> 5.html
-> http://lists.openembedded.org/pipermail/openembedded-core/2013-August/08286
-> 8.html
+FIM (Fbi IMproved) is a framebuffer (customizable and scriptable) image viewer.
+It is based on Fbi image viewer.
 
-My comment still stands.
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb | 48 +++++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+new file mode 100644
+index 0000000..01aa87c
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+@@ -0,0 +1,48 @@
++SUMMARY = "Framebuffer (scriptable) image viewer"
++DESCRIPTION = "FIM (Fbi IMproved) aims to be a highly customizable and scriptable \
++               image viewer targeted at users who are comfortable with software \
++               like the Vim text editor or the Mutt mail user agent."
++SECTION = "utils"
++HOMEPAGE = "http://www.autistici.org/dezperado/fim/"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
++
++# flex with provide /usr/include/FlexLexer.h
++DEPENDS = "flex-native bison-native flex"
++
++SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
++SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
++
++PARALLEL_MAKE = ""
++
++inherit autotools
++
++# Don't use provided regex.c
++EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
++    --enable-framebuffer \
++    --disable-djvu \
++    --disable-ps \
++    --disable-xcftopnm \
++    --disable-convert \
++    --disable-inkscape \
++    --disable-xfig \
++    --disable-dia \
++    --disable-aa \
++    --disable-sdl \
++    --enable-read-dirs \
++    --enable-recursive-dirs \
++    --enable-custom-status-bar \
++"
++
++# Note: imlib2 is located in meta-efl layer.
++PACKAGECONFIG ??= "jpeg rl"
++PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
++PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
++PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
++PACKAGECONFIG[gif] = "--enable-gif,--disable-gif,giflib"
++PACKAGECONFIG[pdf] = "--enable-poppler,--disable-poppler,poppler"
++PACKAGECONFIG[magick] = "--enable-graphicsmagick,--disable-graphicsmagick,imagemagick"
++PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
++PACKAGECONFIG[rl] = "--enable-readline,--disable-readline,readline"
 -- 
+1.8.5.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
