@@ -1,24 +1,35 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A8366EFC4
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
+	[209.85.213.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BDFE6EFBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2014 13:11:40 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,561,1389740400"; d="scan'208";a="41935987"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 28 Feb 2014 14:11:39 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Fri, 28 Feb 2014 14:11:39 +0100
-Received: from u85.usr.ingenico.loc (10.23.7.85) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Fri, 28 Feb 2014 14:11:38 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Feb 2014 14:04:30 +0100
-Message-ID: <1393592670-3088-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
+	Fri, 28 Feb 2014 13:26:43 +0000 (UTC)
+Received: by mail-yh0-f48.google.com with SMTP id z6so613630yhz.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Feb 2014 05:26:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=JLgPfa+G0WP90C7NduoDN2Dr0UCN68mFJD1jj7Gvif0=;
+	b=yrTXHUxSYo64hyuwP0VjNlD4xPtrF+ytVbz4NC7vW1ZOnlbyir/KHwKTx9o5cLGJY0
+	wEcTcXfFDq2sqCotw20MZ2qdq5KiW0TB0kLtXlsn9lZnyGMjG4U+OnB2OzWYMPs+KnJn
+	HlQmGI+Qky8lbXq549TzBWL/qr8el1vEt8Unh1B+d3mX4q3xGb4SRsK/HAwh7Q/ScRUq
+	Wc1rKqcW/kmNZQ66Qr733b9L3zq99rmVTvWOemX260X938SqRJ1wvhkZ75zxWeZUfvR1
+	finYC/uayrLHy4lSpqz8c/TUv8xGpGQMQZ7i1/qrjnQ5xRsN2eE1DSBzufIHyRK7dRby
+	zxYA==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fbida 2.09: cleanups and use PACKAGECONFIG
+X-Received: by 10.236.39.140 with SMTP id d12mr396623yhb.155.1393594004219;
+	Fri, 28 Feb 2014 05:26:44 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.217.136 with HTTP; Fri, 28 Feb 2014 05:26:44 -0800 (PST)
+In-Reply-To: <1393580032-3910-1-git-send-email-jacob.kroon@mikrodidakt.se>
+References: <1393580032-3910-1-git-send-email-jacob.kroon@mikrodidakt.se>
+Date: Fri, 28 Feb 2014 10:26:44 -0300
+X-Google-Sender-Auth: QaKYZl50WmImU4CIi8vCyUETsCI
+Message-ID: <CAP9ODKooPNfAAF2Z_t4jSmpjt4+zUHVcGvyzeU6NHFNKf6m9GQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v2] Explicitly disable Debian-style package renaming for nativesdk-qtbase-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,90 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2014 13:11:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Feb 2014 13:26:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-There are now 3 packageconfig variables: gif, png, tiff.
+On Fri, Feb 28, 2014 at 6:33 AM, Jacob Kroon <jacob.kroon@mikrodidakt.se> wrote:
+> Since commit 8da5017712a7ddcb8488e095b9aa03b0273f23e9, libQt5*.so files
+> are included in the nativesdk-qtbase-tools package. However, this together
+> with the fact that the binaries are placed in a subdir "qt5" of bin will
+> confuse the Debian-style package renaming logic in debian.bbclass, causing the
+> resulting ipk package to be created as "nativesdk-libqt5core5".
+>
+> Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
 
-Changes:
-- fix missing $ for STAGING_INCDIR (jpeg version detection)
-- use TABS for (shell) indentation
-- add DESCRIPTION
-- no more QA warnings
-Use this to reveal:
-sed -i -e '/^verbose/s/no/yes/' ${S}/mk/Autoconf.mk
+Please rework the commitlog as:
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-graphics/fbida/fbida_2.09.bb | 39 +++++++++++++++++++++++-----
- 1 file changed, 33 insertions(+), 6 deletions(-)
+nativesdk-qtbase-tools: disable Debian-style package renaming
 
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb b/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
-index 32f376f..a3abf8f 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
-@@ -1,27 +1,54 @@
-+SUMMARY = "Framebuffer image and doc viewer tools"
-+DESCRIPTION = "The fbida project contains a few applications for viewing and editing images, \
-+               with the main focus being photos."
- HOMEPAGE = "http://linux.bytesex.org/fbida/"
--SUMMARY = "frame buffer image and doc viewer tools"
- AUTHOR = "Gerd Hoffmann"
- SECTION = "utils"
- 
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
--DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif curl libungif tiff"
-+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif curl"
- 
-+PR = "r1"
-+
-+# Note: SRCREV is 3 revisions ahead of 2.09
- SRC_URI = "git://git.kraxel.org/fbida"
- SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
- S = "${WORKDIR}/git"
- 
- EXTRA_OEMAKE = "STRIP="
- 
-+PACKAGECONFIG ??= "gif png"
-+PACKAGECONFIG[gif] = ",,libungif"
-+PACKAGECONFIG[png] = ",,libpng"
-+PACKAGECONFIG[tiff] = ",,tiff"
-+
- do_compile() {
--    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I{STAGING_INCDIR}:g' GNUmakefile
--    oe_runmake
-+	sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
-+	sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
-+
-+	if [ -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ]; then
-+		sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+	fi
-+
-+	# Be sure to respect preferences (force to "no")
-+	# Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
-+	if [ -z "${@base_contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
-+		sed -i -e '/^HAVE_LIBUNGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+	fi
-+	if [ -z "${@base_contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
-+		sed -i -e '/^HAVE_LIBPNG/s/:=.*$/:= no/' ${S}/GNUmakefile
-+	fi
-+	if [ -z "${@base_contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
-+		sed -i -e '/^HAVE_LIBTIFF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+	fi
-+
-+	oe_runmake
- }
- 
- do_install() {
--    oe_runmake 'DESTDIR=${D}' install
-+	oe_runmake 'DESTDIR=${D}' install
- }
- 
- RDEPENDS_${PN} = "ttf-dejavu-sans-mono"
--
+Since commit 8da5017712a7ddcb8488e095b9aa03b0273f23e9, libQt5*.so files
+are included in the nativesdk-qtbase-tools package. However, this together
+with the fact that the binaries are placed in a subdir "qt5" of bin will
+confuse the Debian-style package renaming logic in debian.bbclass, causing the
+resulting ipk package to be created as "nativesdk-libqt5core5".
+
+Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+
+and please add my Acked-by.
+
 -- 
-1.8.5.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
