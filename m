@@ -1,24 +1,28 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id D083C60E79
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id B4CE46F203
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2014 16:58:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,562,1389740400"; d="scan'208";a="41953856"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 28 Feb 2014 17:58:10 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.2.328.9; Fri, 28 Feb 2014 17:58:10 +0100
-Received: from u85.usr.ingenico.loc (10.23.7.85) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Fri, 28 Feb 2014 17:58:09 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Feb 2014 17:51:01 +0100
-Message-ID: <1393606261-26991-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fim: add newrecipe for version 0.4-rc1
+	Fri, 28 Feb 2014 16:59:59 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N1P00E45TVA9E10@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	28 Feb 2014 10:59:49 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 48D1F20370; Fri,
+	28 Feb 2014 11:59:34 -0500 (EST)
+Date: Fri, 28 Feb 2014 11:59:34 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20140228165934.GZ22890@denix.org>
+References: <1393446351-9280-1-git-send-email-obi@opendreambox.org>
+	<20140226210522.GT26981@jama> <530FDF58.8040505@opendreambox.org>
+	<20140228011301.GG26981@jama>
+MIME-version: 1.0
+In-reply-to: <20140228011301.GG26981@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-qt5][PATCH] qtwebkit: accept gstreamer 0.10 as an option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,73 +36,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2014 16:58:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Feb 2014 17:00:01 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-FIM (Fbi IMproved) is a framebuffer (customizable and scriptable) image viewer.
-It is based on Fbi image viewer.
+On Fri, Feb 28, 2014 at 02:13:01AM +0100, Martin Jansa wrote:
+> On Fri, Feb 28, 2014 at 01:59:04AM +0100, Andreas Oberritter wrote:
+> > On 26.02.2014 22:05, Martin Jansa wrote:
+> > > On Wed, Feb 26, 2014 at 09:25:51PM +0100, Andreas Oberritter wrote:
+> > >> There's no configuration knob, though. QtWebKit will prefer
+> > >> gstreamer 1.0 if available.
+> > > 
+> > > Can you please add configuration knob first?
+> > > 
+> > > The problem is that without the knob it will be undeterministic, with
+> > > gstreamer010 in PACKAGECONFIG you can run 2nd build with gstreamer10
+> > > already staged for some other component and the resulting qtwebkit will
+> > > be different than in 1st build.
+> > 
+> > I'll see what I can do. I'm not a big fan of (Qt)WebKit's build system,
+> > so this might take a while.
+> 
+> You can use the same hack as I've used in qtmultimedia, it's not nice,
+> but works.
+> 
+> > FWIW, I noticed that qtlocation and qtsensors are optional build
+> > dependencies which need packageconfigs, too.
+> 
+> True, we're even disabling qtlocation in some our builds (because of
+> qt3d dependency), so having PACKAGECONFIG would be very appreciated.
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb | 48 +++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
++1 on this one!
 
-diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-new file mode 100644
-index 0000000..01aa87c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-@@ -0,0 +1,48 @@
-+SUMMARY = "Framebuffer (scriptable) image viewer"
-+DESCRIPTION = "FIM (Fbi IMproved) aims to be a highly customizable and scriptable \
-+               image viewer targeted at users who are comfortable with software \
-+               like the Vim text editor or the Mutt mail user agent."
-+SECTION = "utils"
-+HOMEPAGE = "http://www.autistici.org/dezperado/fim/"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
-+
-+# flex with provide /usr/include/FlexLexer.h
-+DEPENDS = "flex-native bison-native flex"
-+
-+SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
-+SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
-+
-+PARALLEL_MAKE = ""
-+
-+inherit autotools
-+
-+# Don't use provided regex.c
-+EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
-+    --enable-framebuffer \
-+    --disable-djvu \
-+    --disable-ps \
-+    --disable-xcftopnm \
-+    --disable-convert \
-+    --disable-inkscape \
-+    --disable-xfig \
-+    --disable-dia \
-+    --disable-aa \
-+    --disable-sdl \
-+    --enable-read-dirs \
-+    --enable-recursive-dirs \
-+    --enable-custom-status-bar \
-+"
-+
-+# Note: imlib2 is located in meta-efl layer.
-+PACKAGECONFIG ??= "jpeg rl"
-+PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
-+PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
-+PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
-+PACKAGECONFIG[gif] = "--enable-gif,--disable-gif,giflib"
-+PACKAGECONFIG[pdf] = "--enable-poppler,--disable-poppler,poppler"
-+PACKAGECONFIG[magick] = "--enable-graphicsmagick,--disable-graphicsmagick,imagemagick"
-+PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
-+PACKAGECONFIG[rl] = "--enable-readline,--disable-readline,readline"
--- 
-1.8.5.4
+> > >> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> > >> ---
+> > >>  recipes-qt/qt5/qtwebkit.inc | 6 +++++-
+> > >>  1 file changed, 5 insertions(+), 1 deletion(-)
+> > >>
+> > >> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+> > >> index aea9dad..5e96f39 100644
+> > >> --- a/recipes-qt/qt5/qtwebkit.inc
+> > >> +++ b/recipes-qt/qt5/qtwebkit.inc
+> > >> @@ -5,7 +5,11 @@ LIC_FILES_CHKSUM = "file://Source/WebCore/rendering/RenderApplet.h;endline=22;md
+> > >>                      file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
+> > >>                      file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee"
+> > >>  
+> > >> -DEPENDS += "qtdeclarative qtlocation qtsensors ${ICU} ruby-native sqlite3 glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base libxslt"
+> > >> +DEPENDS += "qtdeclarative qtlocation qtsensors ${ICU} ruby-native sqlite3 glib-2.0 libxslt"
+> > >> +
+> > >> +PACKAGECONFIG ??= "gstreamer10"
+> > >> +PACKAGECONFIG[gstreamer010] = ",,gstreamer gst-plugins-base"
+> > >> +PACKAGECONFIG[gstreamer10] = ",,gstreamer1.0 gstreamer1.0-plugins-base"
+> > >>  
+> > >>  # qtwebkit gets terribly big when linking with all debug info, disable by default
+> > >>  QTWEBKIT_DEBUG = "QMAKE_CFLAGS+=-g0 QMAKE_CXXFLAGS+=-g0"
+> > >> -- 
+> > >> 1.8.3.2
+> > >>
+> > >> _______________________________________________
+> > >> Openembedded-devel mailing list
+> > >> Openembedded-devel@lists.openembedded.org
+> > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > 
+> > > 
+> > > 
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > 
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
