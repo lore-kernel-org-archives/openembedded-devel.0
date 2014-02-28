@@ -1,26 +1,32 @@
 Return-Path: <Matthieu.CRAPET@ingenico.com>
 Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id B1A4F6F3EA
+	by mail.openembedded.org (Postfix) with ESMTP id 7FFC66F36F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2014 14:18:12 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,562,1389740400"; d="scan'208";a="41940542"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 28 Feb 2014 15:18:14 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Fri, 28 Feb 2014 15:18:12 +0100
-Received: from u85.usr.ingenico.loc (10.23.7.85) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Fri, 28 Feb 2014 15:18:12 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Feb 2014 15:11:04 +0100
-Message-ID: <1393596664-1302-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
-In-Reply-To: <1393594900-16092-1-git-send-email-Matthieu.Crapet@ingenico.com>
-References: <1393594900-16092-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	Fri, 28 Feb 2014 14:21:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,562,1389740400"; d="scan'208";a="41940864"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 28 Feb 2014 15:21:59 +0100
+Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.243]) by
+	COSNADEXC21.usr.ingenico.loc ([10.31.4.221]) with mapi id
+	14.02.0328.009; Fri, 28 Feb 2014 15:21:59 +0100
+From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2] fbida 2.09: cleanups and use
+	PACKAGECONFIG
+Thread-Index: AQHPNI1tEowWO7aquk+9TKx8sJ49q5rKtt/w
+Date: Fri, 28 Feb 2014 14:21:58 +0000
+Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B57545378@COSNADEXC13.usr.ingenico.loc>
+References: <1393592670-3088-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<1393594900-16092-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<20140228140004.GI26981@jama>
+In-Reply-To: <20140228140004.GI26981@jama>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.31.16.119]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3] fbida 2.09: cleanups and use PACKAGECONFIG
+Subject: Re: [meta-oe][PATCH v2] fbida 2.09: cleanups and use PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,119 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2014 14:18:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Feb 2014 14:22:00 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-There are now 3 packageconfig variables: gif, png, tiff.
+Thanks Martin for your great help!
 
-Changes:
-- rename recipe to _git (match SRCREV)
-- fix missing $ for STAGING_INCDIR (jpeg version detection)
-- add DESCRIPTION
-- no more QA warnings
-Use this to reveal:
-sed -i -e '/^verbose/s/no/yes/' ${S}/mk/Autoconf.mk
+Concerning shell function & tabs, maybe a line may be added in wiki:
+http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-graphics/fbida/fbida_2.09.bb | 27 ---------------
- meta-oe/recipes-graphics/fbida/fbida_git.bb  | 52 ++++++++++++++++++++++++++++
- 2 files changed, 52 insertions(+), 27 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/fbida/fbida_2.09.bb
- create mode 100644 meta-oe/recipes-graphics/fbida/fbida_git.bb
+Regards,
+Matt
 
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb b/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
-deleted file mode 100644
-index 32f376f..0000000
---- a/meta-oe/recipes-graphics/fbida/fbida_2.09.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--HOMEPAGE = "http://linux.bytesex.org/fbida/"
--SUMMARY = "frame buffer image and doc viewer tools"
--AUTHOR = "Gerd Hoffmann"
--SECTION = "utils"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
--
--DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif curl libungif tiff"
--
--SRC_URI = "git://git.kraxel.org/fbida"
--SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
--S = "${WORKDIR}/git"
--
--EXTRA_OEMAKE = "STRIP="
--
--do_compile() {
--    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I{STAGING_INCDIR}:g' GNUmakefile
--    oe_runmake
--}
--
--do_install() {
--    oe_runmake 'DESTDIR=${D}' install
--}
--
--RDEPENDS_${PN} = "ttf-dejavu-sans-mono"
--
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_git.bb b/meta-oe/recipes-graphics/fbida/fbida_git.bb
-new file mode 100644
-index 0000000..9eea664
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fbida/fbida_git.bb
-@@ -0,0 +1,52 @@
-+SUMMARY = "Framebuffer image and doc viewer tools"
-+DESCRIPTION = "The fbida project contains a few applications for viewing and editing images, \
-+               with the main focus being photos."
-+HOMEPAGE = "http://linux.bytesex.org/fbida/"
-+AUTHOR = "Gerd Hoffmann"
-+SECTION = "utils"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-+
-+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif curl"
-+
-+SRC_URI = "git://git.kraxel.org/fbida"
-+SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
-+PV = "2.09+git${SRCPV}"
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "STRIP="
-+
-+PACKAGECONFIG ??= "gif png"
-+PACKAGECONFIG[gif] = ",,libungif"
-+PACKAGECONFIG[png] = ",,libpng"
-+PACKAGECONFIG[tiff] = ",,tiff"
-+
-+do_compile() {
-+    sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
-+    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
-+
-+    if [ -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ]; then
-+        sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+    fi
-+
-+    # Be sure to respect preferences (force to "no")
-+    # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
-+    if [ -z "${@base_contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
-+        sed -i -e '/^HAVE_LIBUNGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+    fi
-+    if [ -z "${@base_contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
-+        sed -i -e '/^HAVE_LIBPNG/s/:=.*$/:= no/' ${S}/GNUmakefile
-+    fi
-+    if [ -z "${@base_contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
-+        sed -i -e '/^HAVE_LIBTIFF/s/:=.*$/:= no/' ${S}/GNUmakefile
-+    fi
-+
-+    oe_runmake
-+}
-+
-+do_install() {
-+    oe_runmake 'DESTDIR=${D}' install
-+}
-+
-+RDEPENDS_${PN} = "ttf-dejavu-sans-mono"
--- 
-1.8.5.4
 
+-----Message d'origine-----
+De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] De la part de Martin Jansa
+Envoy=E9=A0: vendredi 28 f=E9vrier 2014 15:00
+=C0=A0: openembedded-devel@lists.openembedded.org
+Objet=A0: Re: [oe] [meta-oe][PATCH v2] fbida 2.09: cleanups and use PACKAGE=
+CONFIG
+
+[...]
 
