@@ -1,39 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A52A6EEF5
+Return-Path: <Xufeng.Zhang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A9FD96F391
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2014 01:13:00 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id d49so1826951eek.19
+	Fri, 28 Feb 2014 07:30:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s1S7UNax013538
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2014 17:13:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=BJ3URCHKhTuZrXd+NkY5lXbvGKDWTUl4Okh+pi0/sQ0=;
-	b=BIIbSVqwsKiTkkExXAiUu+Nel0f3mLH9+gvlbSJtkaL5phWmaqOR13QOuuHLd7lwLc
-	fYWwt3kVQw5KNyE3/S8Qph/tthWx4DYqLVMMXjTuD/EXrM71F7c9W7geOSj1pxLVSOpR
-	jpLRP6zZVyIfEx8OAXyfSPoqdUBdtAHVdY+LDzApRIJX/417suUUA+eOcjObSNCNfT+o
-	NRP9D1Vjp0KXhvC22kbE4OmUxKmUWJx62dn+2+7VApQVtJ4QMLfxbdXFe9fj4dZOtj+d
-	lT1hNJ72vCDSQ6FZkqopUhaWXgrZ8+MltAwfxDwvEljNUxq0JTBwBceqGK2vJFW9JZq/
-	8WBg==
-X-Received: by 10.15.35.66 with SMTP id f42mr516981eev.93.1393549981039;
-	Thu, 27 Feb 2014 17:13:01 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	f45sm4069125eeg.5.2014.02.27.17.12.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Feb 2014 17:12:59 -0800 (PST)
-Date: Fri, 28 Feb 2014 02:13:01 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140228011301.GG26981@jama>
-References: <1393446351-9280-1-git-send-email-obi@opendreambox.org>
-	<20140226210522.GT26981@jama> <530FDF58.8040505@opendreambox.org>
+	Thu, 27 Feb 2014 23:30:24 -0800 (PST)
+Received: from [128.224.163.210] (128.224.163.210) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.2.347.0;
+	Thu, 27 Feb 2014 23:30:23 -0800
+Message-ID: <53103D8E.4070105@windriver.com>
+Date: Fri, 28 Feb 2014 15:41:02 +0800
+From: Xufeng Zhang <xufeng.zhang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5 ThunderBrowse/3.82
 MIME-Version: 1.0
-In-Reply-To: <530FDF58.8040505@opendreambox.org>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-qt5][PATCH] qtwebkit: accept gstreamer 0.10 as an option
+To: Joe MacDonald <Joe.MacDonald@windriver.com>
+References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
+	<20130610152954.GF9561@windriver.com>
+In-Reply-To: <20130610152954.GF9561@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,106 +37,193 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2014 01:13:03 -0000
-X-Groupsio-MsgNum: 48439
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lBUySHvE0PL2msxU"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 Feb 2014 07:30:23 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---lBUySHvE0PL2msxU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 06/10/2013 11:29 PM, Joe MacDonald wrote:
+> Hey Xufeng,
+>
+> [[oe] [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors] On 13.05.31 (Fri 14:18) Xufeng Zhang wrote:
+>
+>    
+>> The main changes include:
+>> 1). Add ntp:ntp(user:group) to system.
+>> 2). Running ntpd dameon as ntp:ntp.
+>> 3). Move relevant files from /usr/bin to /usr/sbin.
+>> 4). Add crypto support.
+>>      
+> This one seems to have trailed off.  Sorry if you guys were waiting on
+> my input as well.
+>    
 
-On Fri, Feb 28, 2014 at 01:59:04AM +0100, Andreas Oberritter wrote:
-> On 26.02.2014 22:05, Martin Jansa wrote:
-> > On Wed, Feb 26, 2014 at 09:25:51PM +0100, Andreas Oberritter wrote:
-> >> There's no configuration knob, though. QtWebKit will prefer
-> >> gstreamer 1.0 if available.
-> >=20
-> > Can you please add configuration knob first?
-> >=20
-> > The problem is that without the knob it will be undeterministic, with
-> > gstreamer010 in PACKAGECONFIG you can run 2nd build with gstreamer10
-> > already staged for some other component and the resulting qtwebkit will
-> > be different than in 1st build.
->=20
-> I'll see what I can do. I'm not a big fan of (Qt)WebKit's build system,
-> so this might take a while.
+Sorry for late response, I have missed this email.
 
-You can use the same hack as I've used in qtmultimedia, it's not nice,
-but works.
+> First, I agree with Paul on both #3 and #4.
 
-> FWIW, I noticed that qtlocation and qtsensors are optional build
-> dependencies which need packageconfigs, too.
+Now I also agree that I should drop #4.
 
-True, we're even disabling qtlocation in some our builds (because of
-qt3d dependency), so having PACKAGECONFIG would be very appreciated.
+> I would rather see a patch
+> that updates NTP to use sbindir instead of bindir in the options
+
+I'm not quite understand what's the meaning of "in the options".
+
+I'll explain how "--with-binsubdir" works for ntp:
+"--with-binsubdir" controls whether we use bin_PROGRAMS or sbin_PROGRAMS
+for built binaries in Makefile, in others words, it controls where we 
+install the
+binaries. If "--with-binsubdir" is not set or if "--with-binsubdir=bin", 
+then we use
+bindir, otherwise, if "--with-binsubdir=sbin", we use sbindir, so if we 
+want to
+install the binaries into sbindir, we must specify "--with-binsubdir=sbin".
 
 
-> >> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> >> ---
-> >>  recipes-qt/qt5/qtwebkit.inc | 6 +++++-
-> >>  1 file changed, 5 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
-> >> index aea9dad..5e96f39 100644
-> >> --- a/recipes-qt/qt5/qtwebkit.inc
-> >> +++ b/recipes-qt/qt5/qtwebkit.inc
-> >> @@ -5,7 +5,11 @@ LIC_FILES_CHKSUM =3D "file://Source/WebCore/rendering=
-/RenderApplet.h;endline=3D22;md
-> >>                      file://Source/WebKit/gtk/webkit/webkit.h;endline=
-=3D21;md5=3Db4fbe9f4a944f1d071dba1d2c76b3351 \
-> >>                      file://Source/JavaScriptCore/parser/Parser.h;endl=
-ine=3D21;md5=3Dbd69f72183a7af673863f057576e21ee"
-> >> =20
-> >> -DEPENDS +=3D "qtdeclarative qtlocation qtsensors ${ICU} ruby-native s=
-qlite3 glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base libxslt"
-> >> +DEPENDS +=3D "qtdeclarative qtlocation qtsensors ${ICU} ruby-native s=
-qlite3 glib-2.0 libxslt"
-> >> +
-> >> +PACKAGECONFIG ??=3D "gstreamer10"
-> >> +PACKAGECONFIG[gstreamer010] =3D ",,gstreamer gst-plugins-base"
-> >> +PACKAGECONFIG[gstreamer10] =3D ",,gstreamer1.0 gstreamer1.0-plugins-b=
-ase"
-> >> =20
-> >>  # qtwebkit gets terribly big when linking with all debug info, disabl=
-e by default
-> >>  QTWEBKIT_DEBUG =3D "QMAKE_CFLAGS+=3D-g0 QMAKE_CXXFLAGS+=3D-g0"
-> >> --=20
-> >> 1.8.3.2
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> (or at
+> least a follow-up indicating that it's infeasible for some reason, I
+> also don't know what NTP's build system looks like, so maybe that's not
+> an option).  I also agree that my preferred scenario is for the system
+> to be as secure as possible by default, but crypto support is available
+> and not everyone wants or needs it.  We (relatively) recently when
+> through an extended discussion about ntp versus ntp-ssl and the current
+> situation seems to be the best compromise for everyone.
+>
+> As a more general comment, you have four bullet-points below.  That's
+> normally an indication (to me, at least) that four patches are
+> appropriate.  Looking a bit closer, it looks like two related changes
+> and two unrelated ones, so I'd want to see three patches for this unless
+> there's a good reason why all of them are tied together.
+>
+> #1 and #2 aren't likely to be contentious, so feel free to send out a
+> single patch doing both of those any time and we can revisit #3 and #4
+> at your convenience.
+>    
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Thank you very much for the detail suggestions and explanations!
+I'll send V2 patch until we come to a agreement on #3.
 
---lBUySHvE0PL2msxU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Xufeng
 
-iEYEARECAAYFAlMP4p0ACgkQN1Ujt2V2gBwv3wCgjQ4gVcMwSTjWDh4HSK3067xH
-FZUAn2q0nuhLl3TjCDPcUAyIzQHfacql
-=+rHI
------END PGP SIGNATURE-----
+> Thanks,
+> -J.
+>
+>    
+>> [YOCTO #4567]
+>> [ CQID: WIND00417282 ]
+>>
+>> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+>> ---
+>>   meta-networking/recipes-support/ntp/files/ntpd    |    8 ++++----
+>>   meta-networking/recipes-support/ntp/files/ntpdate |    6 +++---
+>>   meta-networking/recipes-support/ntp/ntp.inc       |   20 ++++++++++++--------
+>>   3 files changed, 19 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/files/ntpd
+>> index ae50f13..285f5c0 100755
+>> --- a/meta-networking/recipes-support/ntp/files/ntpd
+>> +++ b/meta-networking/recipes-support/ntp/files/ntpd
+>> @@ -1,7 +1,7 @@
+>>   #! /bin/sh
+>>   #
+>>   # ntpd	init.d script for ntpdc from ntp.isc.org
+>> -test -x /usr/bin/ntpd -a -r /etc/ntp.conf || exit 0
+>> +test -x /usr/sbin/ntpd -a -r /etc/ntp.conf || exit 0
+>>   # rcS contains TICKADJ
+>>   test -r /etc/default/rcS&&  . /etc/default/rcS
+>>
+>> @@ -9,9 +9,9 @@ test -r /etc/default/rcS&&  . /etc/default/rcS
+>>   settick(){
+>>     	# If TICKADJ is set we *must* adjust it before we start, because the
+>>   	# driftfile relies on the correct setting
+>> -	test -n "$TICKADJ" -a -x /usr/bin/tickadj&&  {
+>> +	test -n "$TICKADJ" -a -x /usr/sbin/tickadj&&  {
+>>   		echo -n "Setting tick to $TICKADJ: "
+>> -		/usr/bin/tickadj "$TICKADJ"
+>> +		/usr/sbin/tickadj "$TICKADJ"
+>>   		echo "done"
+>>   	}
+>>   }
+>> @@ -21,7 +21,7 @@ startdaemon(){
+>>   	# this.  If ntpd seems to disappear after a while assume TICKADJ
+>>   	# above is set to a totally incorrect value.
+>>   	echo -n "Starting ntpd: "
+>> -	start-stop-daemon --start -x /usr/bin/ntpd -- -p /var/run/ntp.pid "$@"
+>> +	start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
+>>   	echo "done"
+>>   }
+>>   stopdaemon(){
+>> diff --git a/meta-networking/recipes-support/ntp/files/ntpdate b/meta-networking/recipes-support/ntp/files/ntpdate
+>> index ab0551c..17b64d1 100755
+>> --- a/meta-networking/recipes-support/ntp/files/ntpdate
+>> +++ b/meta-networking/recipes-support/ntp/files/ntpdate
+>> @@ -1,8 +1,8 @@
+>>   #!/bin/sh
+>>
+>> -PATH=/sbin:/bin:/usr/bin
+>> +PATH=/sbin:/bin:/usr/bin:/usr/sbin
+>>
+>> -test -x /usr/bin/ntpdate || exit 0
+>> +test -x /usr/sbin/ntpdate || exit 0
+>>
+>>   if test -f /etc/default/ntpdate ; then
+>>   . /etc/default/ntpdate
+>> @@ -40,7 +40,7 @@ if [ -x /usr/bin/lockfile-create ]; then
+>>   	LOCKTOUCHPID="$!"
+>>   fi
+>>
+>> -if /usr/bin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
+>> +if /usr/sbin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
+>>   	if [ "$UPDATE_HWCLOCK" = "yes" ]; then
+>>   		hwclock --systohc || :
+>>   	fi
+>> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+>> index 79e7401..b52a7d6 100644
+>> --- a/meta-networking/recipes-support/ntp/ntp.inc
+>> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+>> @@ -24,14 +24,19 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+>>              file://sntp \
+>>   "
+>>
+>> -inherit autotools update-rc.d systemd
+>> +inherit autotools update-rc.d systemd useradd
+>>
+>>   # The ac_cv_header_readline_history is to stop ntpdc depending on either
+>>   # readline or curses
+>> -EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no"
+>> +EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
+>>   CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
+>>
+>> -PACKAGECONFIG ??= ""
+>> +USERADD_PACKAGES = "${PN}"
+>> +USERADD_PARAM_${PN} = "--system --home /etc/ntp \
+>> +		       --no-create-home --shell /bin/false \
+>> +		       --user-group ntp"
+>> +
+>> +PACKAGECONFIG ??= "openssl"
+>>   PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
+>>                             --with-openssl-incdir=${STAGING_INCDIR} \
+>>                             --with-crypto, \
+>> @@ -91,10 +96,10 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
+>>
+>>   RSUGGESTS_${PN} = "iana-etc"
+>>
+>> -FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
+>> -FILES_${PN}-tickadj = "${bindir}/tickadj"
+>> -FILES_${PN}-utils = "${bindir}"
+>> -FILES_ntpdate = "${bindir}/ntpdate \
+>> +FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir}"
+>> +FILES_${PN}-tickadj = "${sbindir}/tickadj"
+>> +FILES_${PN}-utils = "${sbindir}"
+>> +FILES_ntpdate = "${sbindir}/ntpdate \
+>>       ${sysconfdir}/network/if-up.d/ntpdate-sync \
+>>       ${bindir}/ntpdate-sync \
+>>       ${sysconfdir}/default/ntpdate \
+>> @@ -122,4 +127,3 @@ else
+>>       fi
+>>   fi
+>>   }
+>> -
+>>      
 
---lBUySHvE0PL2msxU--
+
