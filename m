@@ -1,22 +1,38 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp08.online.nl (smtp08.online.nl [194.134.42.53])
-	by mail.openembedded.org (Postfix) with ESMTP id F38E96ED65
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f44.google.com (mail-qa0-f44.google.com
+	[209.85.216.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 49F536F477
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Mar 2014 17:54:50 +0000 (UTC)
-Received: from smtp08.online.nl (localhost [127.0.0.1])
-	by smtp08.online.nl (Postfix) with ESMTP id 3F512663ED;
-	Sat,  1 Mar 2014 18:54:50 +0100 (CET)
-Received: from localhost.localdomain (s55969068.adsl.online.nl
-	[85.150.144.104]) by smtp08.online.nl (Postfix) with ESMTP;
-	Sat,  1 Mar 2014 18:54:50 +0100 (CET)
-From: mike.looijmans@topic.nl
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Mar 2014 18:54:47 +0100
-Message-Id: <1393696487-30736-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.7.9.5
-X-Online-Scanned: by Cloudmark authority (on smtp08.online.nl)
-Cc: Mike Looijmans <milo-software@users.sourceforge.net>
-Subject: [PATCH] musicbrainz: Build with B=S
+	Sat,  1 Mar 2014 20:19:04 +0000 (UTC)
+Received: by mail-qa0-f44.google.com with SMTP id f11so2071182qae.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 01 Mar 2014 12:19:05 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=6TGMf9szKbNLNMuW96HmEXsQJgLRk3YDG0QcNUDXGlY=;
+	b=Gy7zg9TkXaldVdJDiDk8073+w4iqcYy4PRE7GPBl19YyTHdjs03fAvadCUR0fVR3zA
+	P8VbiQqz21KJFb6iLxQWC/hE4slAcM4cInacbKjD81J4u7jwSiQjlUE+AKJAbfsWWZVe
+	9DJtmttagI8h/y2AQYtStCf8GuWynAuVGbKQErwIXUeY9zCqGxIATz+NyA8cFAB0HAhy
+	5Ol9eyaX6oB8bIxOsE91jDeaI2+CyNUy8okkd6kuaD6KK3JijuGUJ5Dh4XgxcMDwf/8j
+	75Y2/Sou7XUV4B4hqHKMqwL5VW2qzgdmvehUk9OLAry3zt3Dt22hJwSYIKf6abUaBuer
+	1IBA==
+X-Gm-Message-State: ALoCoQmFY62+UmtJPkfVZpgyledrZ4IF7kK7Pd+omL+U57rEiPOIRJtITMuUdOxvzxe2jJJkNX2w
+X-Received: by 10.140.106.225 with SMTP id e88mr12439211qgf.66.1393705145081; 
+	Sat, 01 Mar 2014 12:19:05 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.48.79 with HTTP; Sat, 1 Mar 2014 12:18:44 -0800 (PST)
+In-Reply-To: <5362182.lGPryEyDJx@peggleto-mobl5.ger.corp.intel.com>
+References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
+	<53103D8E.4070105@windriver.com>
+	<CAOLEWZWHfoUz0c+GW+MFqx-u=9NM9VJnANAB6YP9Wh56grtEaA@mail.gmail.com>
+	<5362182.lGPryEyDJx@peggleto-mobl5.ger.corp.intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Sat, 1 Mar 2014 20:18:44 +0000
+Message-ID: <CAJTo0LbSeFKkk0JrEYQAS3Lb2NVAJYuraaBAkNCgT_-LUW+Gdw@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,29 +46,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Mar 2014 17:54:51 -0000
+X-List-Received-Date: Sat, 01 Mar 2014 20:19:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Mike Looijmans <milo-software@users.sourceforge.net>
+On 1 March 2014 09:59, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> That would be nice, but since you can't actually distribute a product that
+> connects to the main pool.ntp.org server (you need to register your own NTP
+> pool [1]) we've elected not to set any default so that you are encouraged to
+> do the right thing and explicitly set your own.
 
-This recipe doesn't work when B!=S, so force B=$S to fix the failure.
+We should probably put this in the documentation.  I'll file a bug.
 
-Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
----
- .../musicbrainz/libmusicbrainz_git.bb              |    3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-index f6a8f53..4cc04b8 100644
---- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-@@ -37,3 +37,6 @@ do_configure_prepend() {
- 
- EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:PATH=${libdir} \
-                  -DIMPORT_EXECUTABLES=build-native/ImportExecutables.cmake"
-+
-+# out-of-tree building doesn't appear to work for this package.
-+B = "${S}"
--- 
-1.7.9.5
-
+Ross
 
