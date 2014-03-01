@@ -1,36 +1,37 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 344876E9A3
+Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 74B8A6F45F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Mar 2014 20:31:33 +0000 (UTC)
-Received: by mail-yh0-f43.google.com with SMTP id b6so1793728yha.30
+	Sat,  1 Mar 2014 20:34:21 +0000 (UTC)
+Received: by mail-yk0-f175.google.com with SMTP id 131so4719735ykp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Mar 2014 12:31:34 -0800 (PST)
+	Sat, 01 Mar 2014 12:34:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=qQDBqcW5MdCV4haHv0vx5W03HnEq0jfvzzXKBvS2wxc=;
-	b=r8j/+/M9LGilrBbvpxkE1UFaampb/yWarjVEFuir/iIPI6Lpf2LNU/+p4JtmbfH5EU
-	JyuNI9CTbHCGuzcnS7QSyA/wf7zvK1Xtb5NYfPThcVecxoWQVku8tSGcJ4wavqtWRExg
-	xhvv10yutV9Ei+9i7dnbsjs/6tNt3D7oZuU8O6Xoxd2SMJnPrcen7ufXfe6JZztmN+Bj
-	r3OKI6uFdEyxweHPhNb3zBWCM49nrHB9WsjkKgmemqJbX8pnxkdxlI2VNK4rgt7g91Pd
-	JAH6Vub2H4iMTylyHknuXruEnNVYb5NXqswUf1J2sGfB4JgPEOGb1Zdu1nYeSMVr1AmK
-	MmRg==
+	bh=MceakyLow5Oq2yxWW4fIf8B3+LOzT8ATOkO8lzRBUK0=;
+	b=t0OYs3ls0fIPQzYGHTi1aHRKXgW9uNj35zsc7KyZtNfNzGdWXq6pTNrkXLmQH8Qz3V
+	cXyLjzm2lsF1t+tOgGFqGaZRuK3oppM1nyIBOOP92Dy/+QDW90t/6sc2oe4ZMGY3yMbx
+	jvGSWro+BmKVup23emQE6pKRgpR0f5GlOdIHpYt3FBgc2BLA4ioyvNPgJcD/BiYq1uwH
+	WakTBqSGgwhPGwI3EryGr6Ul9iUlr/5WKegFTY98bw3ZVL8/lfA062jcvslde3urWKUC
+	XFJpqKsLxXJ8XytbWTE8OPmlUkVLlbF6MIJQbMLTQaKVBbSiTIfHpsDzKgFm1ZFhXTnU
+	iMKg==
 MIME-Version: 1.0
-X-Received: by 10.236.60.68 with SMTP id t44mr10381028yhc.47.1393705894191;
-	Sat, 01 Mar 2014 12:31:34 -0800 (PST)
+X-Received: by 10.236.124.104 with SMTP id w68mr11849482yhh.2.1393706062149;
+	Sat, 01 Mar 2014 12:34:22 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.217.136 with HTTP; Sat, 1 Mar 2014 12:31:33 -0800 (PST)
-In-Reply-To: <1393640395-9737-1-git-send-email-net147@gmail.com>
+Received: by 10.170.217.136 with HTTP; Sat, 1 Mar 2014 12:34:22 -0800 (PST)
+In-Reply-To: <1393640395-9737-2-git-send-email-net147@gmail.com>
 References: <1393640395-9737-1-git-send-email-net147@gmail.com>
-Date: Sat, 1 Mar 2014 17:31:33 -0300
-X-Google-Sender-Auth: mo4RUgZN54qdqLJ0se3C0U7fjuY
-Message-ID: <CAP9ODKqEVL3g6+70CtbtaRia3XRrzYSX+vZfg2b+udw9AGZZBw@mail.gmail.com>
+	<1393640395-9737-2-git-send-email-net147@gmail.com>
+Date: Sat, 1 Mar 2014 17:34:22 -0300
+X-Google-Sender-Auth: urvIqFYq8QcYdMVcTwuFOcAY_IM
+Message-ID: <CAP9ODKoiySoue8v5eQ4=MtV9gWXaGkmXndH3MxAXOfjPu7DbVg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH 1/2] qtimageformats: allow empty qtimageformats package
+Subject: Re: [meta-qt5][PATCH 2/2] packagegroup-qt5-toolchain-target: include all modules for development
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,18 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Mar 2014 20:31:36 -0000
+X-List-Received-Date: Sat, 01 Mar 2014 20:34:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 On Fri, Feb 28, 2014 at 11:19 PM, Jonathan Liu <net147@gmail.com> wrote:
 
-> This fixes installing qtimageformats-dev with opkg as it depends on the
-> qtimageformats package which wasn't created.
+> This adds the necessary target packages for development with all of the
+> Qt 5 modules.
 >
 > Signed-off-by: Jonathan Liu <net147@gmail.com>
 >
 
-Could you extend the commit log to make it clear why it is not created?
+I like it :)
 
 -- 
 Otavio Salvador                             O.S. Systems
