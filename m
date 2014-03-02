@@ -1,41 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E8476F273
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A90060D9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Mar 2014 22:57:16 +0000 (UTC)
-Received: by mail-pd0-f169.google.com with SMTP id fp1so2230241pdb.28
+	Sun,  2 Mar 2014 02:55:19 +0000 (UTC)
+Received: by mail-pd0-f182.google.com with SMTP id g10so2362911pdj.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Mar 2014 14:57:17 -0800 (PST)
+	Sat, 01 Mar 2014 18:55:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=d3hVyQ5hzGRAR03zeH9I0O5ph2rwxEgORdw13WWFA8U=;
-	b=dl/IZ5JxZdfr1D9WRKEUrj9M92tZX+Lndw5Xd+oewz8YJmzVAqvSZ3NF1dHsh8OkCX
-	hdbH+i74REluT4o+DsXSYFyplIikQingz3G6sYISzAIA3kQKYQkiDoRgtfG7fu6jis56
-	RgD/DeeQ0r4vyf85Ny5BmkpcdrrjgcojuCXbqFDagRqEF/3g2saWZQa9sTEPkUa2rs0c
-	AbTWDgZO3osVglTpSDTIQE4QthbE+2iT2WLi/n7LFZXsLMRZhOomCVKM3Z3phqOhEFTB
-	Gtj/PTZLe/btk357mpCDDAh7IHX+M+uHFqs4yS4xOGkyPSQEtxc4+FANh4Ue2EIwSJGk
-	kiOg==
-X-Received: by 10.66.122.201 with SMTP id lu9mr11307601pab.40.1393714637780;
-	Sat, 01 Mar 2014 14:57:17 -0800 (PST)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	ce15sm47479126pac.0.2014.03.01.14.57.16 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 01 Mar 2014 14:57:16 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 7.2 \(1874\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <5621583.lHbqxaxFpZ@peggleto-mobl5.ger.corp.intel.com>
-Date: Sat, 1 Mar 2014 14:57:14 -0800
-Message-Id: <6B3DF93B-C645-42A0-A36E-4EE3923E3905@gmail.com>
-References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
-	<5362182.lGPryEyDJx@peggleto-mobl5.ger.corp.intel.com>
-	<CAJTo0LbSeFKkk0JrEYQAS3Lb2NVAJYuraaBAkNCgT_-LUW+Gdw@mail.gmail.com>
-	<5621583.lHbqxaxFpZ@peggleto-mobl5.ger.corp.intel.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=0yd7I/SHDa9LM5UxCkLGa+s8RDm1qNl52J8WLQoqYcw=;
+	b=doYTzVMTbIeC4BQoGiJEm0yc0vIE859wRNgsC7fGMbZTh82HgsEEz89qV5wH3QXW4c
+	EoIBYujD214g/QCpWq7waXBLUhbDVxGShbn5kkcvlP6eHDh82ftU6es8ffqzhX3HXHpp
+	qGve3DmOnjH2h0OP5b+WCVgDXL6baK9U/5sPALF2HdZyABddAoO/a2uoRp4hL2WIXi8y
+	A+jMfpbRXwyGsX0B9KystkzxnvWSPUokjLIjfXIA90nw960j9y1H/a5oxrfjW97sBf1h
+	UoVDCYA5Z71kp87Rym12TbdFkd211dWGudeeGfANAtuZSkMq/OpYzGHWLvHiSvY9rlaS
+	Etyw==
+X-Received: by 10.66.142.170 with SMTP id rx10mr393669pab.117.1393728920997;
+	Sat, 01 Mar 2014 18:55:20 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	yo9sm50897989pab.16.2014.03.01.18.55.18 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 01 Mar 2014 18:55:20 -0800 (PST)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1874)
-Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
+Date: Sun,  2 Mar 2014 13:59:47 +1100
+Message-Id: <1393729188-12904-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-qt5][PATCH v2 1/2] qtimageformats: allow empty qtimageformats package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,69 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Mar 2014 22:57:20 -0000
-X-Groupsio-MsgNum: 48475
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_15207A19-6501-4969-BA4A-EF62B78B7F33";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sun, 02 Mar 2014 02:55:19 -0000
 
---Apple-Mail=_15207A19-6501-4969-BA4A-EF62B78B7F33
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+This fixes installing qtimageformats-dev with opkg as it depends on the
+qtimageformats package which wasn't created.
 
+The qtimageformats package was not created as it is empty and BitBake
+avoids producing empty packages by default. The installed files consist
+of source files split into qtimageformats-dbg, CMake files split into
+qtimageformats-dev, plugins split into qtimageformats-plugins and
+debug build of plugins split into qtimageformats-plugins-dbg.
 
-On Mar 1, 2014, at 2:48 PM, Paul Eggleton =
-<paul.eggleton@linux.intel.com> wrote:
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qtimageformats.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-> On Saturday 01 March 2014 20:18:44 Burton, Ross wrote:
->> On 1 March 2014 09:59, Paul Eggleton <paul.eggleton@linux.intel.com> =
-wrote:
->>> That would be nice, but since you can't actually distribute a =
-product that
->>> connects to the main pool.ntp.org server (you need to register your =
-own
->>> NTP
->>> pool [1]) we've elected not to set any default so that you are =
-encouraged
->>> to do the right thing and explicitly set your own.
->>=20
->> We should probably put this in the documentation.  I'll file a bug.
->=20
-> Whose documentation though? ntp is part of meta-networking rather than =
-OE-
-> Core.
->=20
-
-README for meta-networking is best place.=20
-
-> Cheers,
-> Paul
->=20
-> --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/qtimageformats.inc b/recipes-qt/qt5/qtimageformats.inc
+index 1b4bb4f..f90e58a 100644
+--- a/recipes-qt/qt5/qtimageformats.inc
++++ b/recipes-qt/qt5/qtimageformats.inc
+@@ -1,3 +1,4 @@
+ require qt5.inc
+ 
+ DEPENDS += "qtbase tiff"
++ALLOW_EMPTY_${PN} = "1"
+-- 
+1.9.0
 
 
---Apple-Mail=_15207A19-6501-4969-BA4A-EF62B78B7F33
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlMSZcoACgkQuwUzVZGdMxSVMQCfZB01JTWCAF8pADS9Ixi51RxK
-9HAAnRg/V0OmViSMg8wa4wGsHHiEqBuP
-=fVL2
------END PGP SIGNATURE-----
-
---Apple-Mail=_15207A19-6501-4969-BA4A-EF62B78B7F33--
