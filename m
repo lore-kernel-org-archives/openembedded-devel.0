@@ -1,41 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 35A0D6E85E
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 531266E85E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Mar 2014 03:27:19 +0000 (UTC)
-Received: by mail-pa0-f54.google.com with SMTP id fa1so2397507pad.41
+	Sun,  2 Mar 2014 03:51:13 +0000 (UTC)
+Received: by mail-pd0-f172.google.com with SMTP id p10so2374728pdj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Mar 2014 19:27:20 -0800 (PST)
+	Sat, 01 Mar 2014 19:51:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=VIsAZxYkKXik6L+GWUalW+YzVX7plLhfFMYKgr2uamI=;
-	b=zOp/918ifW7kBuHY8rkj2q/m0rqa/Ya1cKv2XNSvyppNH+KP6/6zDDiDMZaqrPNm5A
-	Hb+IheZ9Rfk+VsDubLhCoQly089ZwRWcf80papK2XRa+FKm7HbZeB0BctMucuFCAjwu2
-	vQ6mkUOalBZL/EN6SppWwQAKwlDwclLVTB0T/SlDSVf/yC4ykG3B01Rq5VMdZk+cpfZA
-	QjUrrbt1DIUuPKIP3zlIFKyH1gmtLXWeXwgL6cTQwVPN2IvTUDNwo/SplvxzmI3ORT8K
-	S6QVgjgZ0vcEiM76kNuJzbla89TFFsnImiSSmVXZ03WhrxyXBwgeqZbkAR2ftmIhgCfR
-	G4Bw==
-X-Received: by 10.67.1.202 with SMTP id bi10mr12340324pad.68.1393730840882;
-	Sat, 01 Mar 2014 19:27:20 -0800 (PST)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244])
-	by mx.google.com with ESMTPSA id n6sm21211102pbj.22.2014.03.01.19.27.18
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 01 Mar 2014 19:27:20 -0800 (PST)
-Message-ID: <5312A511.6040001@gmail.com>
-Date: Sun, 02 Mar 2014 14:27:13 +1100
+	h=from:to:cc:subject:date:message-id;
+	bh=0yd7I/SHDa9LM5UxCkLGa+s8RDm1qNl52J8WLQoqYcw=;
+	b=HS6i5wuXXgNHj3V1X6WgeVlwWzbqB+2hdaG94g/h5fMrodwVt8bDUa9hviu9uHRcNn
+	TEb2+G1Xj3eFMlt0nfry/3OwpNoxnFoakkff3YvQLEqDTPl2Z73prLA/zDJeFndL+R+3
+	J3wY1hObksppJBGHw4RffQ5DTiZFgsE9xrSm8vQ1KUDl5V5ARgMHUTYa6Ce4+QfFU84Q
+	2GzcWhn7N7etPJulSRGIxWoVar//hTmiMIDA7xX0EhEH0hx2n/F9+EJeMdhGdaZQ17n/
+	y662dQ6snJ1qAwgrfAGyzH+Bx2Nwh5ztZxWf+rLAR+JQoTFDZlUx0ppFd+In5kTkvIMB
+	OI2A==
+X-Received: by 10.66.190.161 with SMTP id gr1mr12071208pac.79.1393732275018;
+	Sat, 01 Mar 2014 19:51:15 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id cz3sm21372320pbc.9.2014.03.01.19.51.13
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 01 Mar 2014 19:51:14 -0800 (PST)
 From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1393729188-12904-1-git-send-email-net147@gmail.com>
-	<1393729188-12904-2-git-send-email-net147@gmail.com>
-In-Reply-To: <1393729188-12904-2-git-send-email-net147@gmail.com>
-Subject: Re: [meta-qt5][PATCH v2 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+Date: Sun,  2 Mar 2014 14:55:59 +1100
+Message-Id: <1393732560-14368-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-qt5][PATCH v3 1/2] qtimageformats: allow empty qtimageformats package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,20 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Mar 2014 03:27:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 02 Mar 2014 03:51:16 -0000
 
-On 2/03/2014 1:59 PM, Jonathan Liu wrote:
-> This adds the necessary target packages for development with all of the
-> Qt 5 modules.
->
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->   .../packagegroup-qt5-toolchain-target.bb           | 60 +++++++++++++++++-----
->   1 file changed, 46 insertions(+), 14 deletions(-)
-Looks like I forgot to include qttools. I will follow up with v3 patch.
+This fixes installing qtimageformats-dev with opkg as it depends on the
+qtimageformats package which wasn't created.
 
-Regards,
-Jonathan
+The qtimageformats package was not created as it is empty and BitBake
+avoids producing empty packages by default. The installed files consist
+of source files split into qtimageformats-dbg, CMake files split into
+qtimageformats-dev, plugins split into qtimageformats-plugins and
+debug build of plugins split into qtimageformats-plugins-dbg.
+
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qtimageformats.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/recipes-qt/qt5/qtimageformats.inc b/recipes-qt/qt5/qtimageformats.inc
+index 1b4bb4f..f90e58a 100644
+--- a/recipes-qt/qt5/qtimageformats.inc
++++ b/recipes-qt/qt5/qtimageformats.inc
+@@ -1,3 +1,4 @@
+ require qt5.inc
+ 
+ DEPENDS += "qtbase tiff"
++ALLOW_EMPTY_${PN} = "1"
+-- 
+1.9.0
+
 
