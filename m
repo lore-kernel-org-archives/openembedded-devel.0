@@ -1,36 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 525AF6F564
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D7E36EEDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Mar 2014 19:53:26 +0000 (UTC)
-Received: by mail-yk0-f175.google.com with SMTP id 131so10264635ykp.6
+	Mon,  3 Mar 2014 20:23:57 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id e51so3299255eek.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Mar 2014 11:53:27 -0800 (PST)
+	Mon, 03 Mar 2014 12:23:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=58WZ/5ORg3hDdtuMm/IA/4tQ1WQKSakOZJaeer9I298=;
-	b=D1G4bZVzhfJ2iKmLbp3JE3+mRtsD6RDXm/xqAGsreDX6MinIzptqxXaaHJ7eGn6m0m
-	Q/0SZL6TB4Qq4NJEMbQG82UQ/VZ+VyyX86lzTm7QW5KHfF6i7fy4Y72tGHwwazLUpgdN
-	pAwf8zz5fDwMIPyKrJL81OIfL8dDxnMqEmK+Kr6MtGwg93amrqufCKwrexe1y2CJCeWN
-	lpqtkS+lFVn83Vwq43qSPDQ3ss+gdu9aZw1h9bP1dANu8fPAn9BF9NTxjx2n32XgT13t
-	uJ/lhlOpy0TBXddmeBRoMhewxUOmSHhA/tusMfPGknQ1Uqrxyk+Z/5OCBpjnW3ZNjwYw
-	4mhQ==
-MIME-Version: 1.0
-X-Received: by 10.236.21.202 with SMTP id r50mr1305760yhr.140.1393876407064;
-	Mon, 03 Mar 2014 11:53:27 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Mon, 3 Mar 2014 11:53:27 -0800 (PST)
-In-Reply-To: <1393734165-15082-2-git-send-email-net147@gmail.com>
-References: <1393734165-15082-1-git-send-email-net147@gmail.com>
-	<1393734165-15082-2-git-send-email-net147@gmail.com>
-Date: Mon, 3 Mar 2014 16:53:27 -0300
-X-Google-Sender-Auth: OkZGM_Gt7SiQjQWnq1Rr2HrPr3c
-Message-ID: <CAP9ODKry1B06oojCA15G26hxBNdt5JPbqEcUqZP4BSaEFL+rsg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v4 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=/pOcLSYSzpeXdGI838pkpadyMIKFqE/v2FtVsh91BHU=;
+	b=lwfhNbGCI8mysF2Y3RGiGNtyAvBMWDc7J5wwQV4rXmXaVEhwpBiMDvkqgP8FBS4mKT
+	89uinZNLmHVhQ4sJYfl+d1yUqwVVBhotSLQmh1qwYzdPSaH3zN/5F+mgPN9N9rPlZwv4
+	81lHvi2abzrJ3zC8bhx3FSCU4G2LeQ2m+gR20PNdwSxOPS1C2/IbsjzLVBADl4Cyt0dV
+	r1Xx5jFig02XxTPkhmjSy7vGFjjMYeu/BqKhFWb7PeqTt8pB8DobJNGRy63LiQupCzvL
+	gfkv3B87Pr2mM59o6/zT79jNk+v9OnO0+4bnKKJw1XCf8X+62qEVkRysVShJvhxhECFV
+	LkvA==
+X-Received: by 10.14.203.197 with SMTP id f45mr13332606eeo.90.1393878237853;
+	Mon, 03 Mar 2014 12:23:57 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	j41sm54189089eeg.10.2014.03.03.12.23.55 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 03 Mar 2014 12:23:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Mar 2014 21:23:57 +0100
+Message-Id: <1393878238-28046-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.0
+In-Reply-To: <1393875775-29375-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1393875775-29375-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-systemd][PATCHv2 1/2] openssh: Rename .bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2014 19:53:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 03 Mar 2014 20:23:59 -0000
 
-On Sun, Mar 2, 2014 at 1:22 AM, Jonathan Liu <net147@gmail.com> wrote:
-> This adds the necessary target packages for development with all of the
-> Qt 5 modules.
->
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend   | 3 +++
+ .../oe-core/recipes-connectivity/openssh/openssh_6.4p1.bbappend        | 3 ---
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ create mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.4p1.bbappend
 
-Why are you adding qttools here? this is not need for toolchain use,
-is it? It is need for host.
-
+diff --git a/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend b/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend
+new file mode 100644
+index 0000000..dadbc14
+--- /dev/null
++++ b/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend
+@@ -0,0 +1,3 @@
++RPROVIDES_${PN}-sshd += "${PN}-sshd-systemd"
++RREPLACES_${PN}-sshd += "${PN}-sshd-systemd"
++RCONFLICTS_${PN}-sshd += "${PN}-sshd-systemd"
+diff --git a/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.4p1.bbappend b/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.4p1.bbappend
+deleted file mode 100644
+index dadbc14..0000000
+--- a/meta-systemd/oe-core/recipes-connectivity/openssh/openssh_6.4p1.bbappend
++++ /dev/null
+@@ -1,3 +0,0 @@
+-RPROVIDES_${PN}-sshd += "${PN}-sshd-systemd"
+-RREPLACES_${PN}-sshd += "${PN}-sshd-systemd"
+-RCONFLICTS_${PN}-sshd += "${PN}-sshd-systemd"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.0
+
 
