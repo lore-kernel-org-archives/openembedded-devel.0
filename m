@@ -1,34 +1,35 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 26BB06B5B3
+Return-Path: <net147@gmail.com>
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 259876B8D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Mar 2014 03:40:30 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s233eRuS015460
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 2 Mar 2014 19:40:28 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.128]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
-	Sun, 2 Mar 2014 19:40:27 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Joe MacDonald <joe@deserted.net>
-Thread-Topic: [oe] [meta-networking][PATCH] strongswan: update verion to 5.1.1
-Thread-Index: Ac8yI8lB2aVJdUjhQwmShOJ6uXIf2gAvImEAAOx0uUA=
-Date: Mon, 3 Mar 2014 03:40:27 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AAA3441571@ALA-MBA.corp.ad.wrs.com>
-References: <1B858668EC6A94408DCA5225FDFA85AAA33E98A1@ALA-MBA.corp.ad.wrs.com>
-	<20140226024843.GB7489@deserted.net>
-In-Reply-To: <20140226024843.GB7489@deserted.net>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.212]
-MIME-Version: 1.0
-Cc: "paul.eggleton@linux.intel.com" <paul.eggleton@linux.intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] strongswan: update verion to 5.1.1
+	Mon,  3 Mar 2014 06:55:19 +0000 (UTC)
+Received: by mail-pd0-f179.google.com with SMTP id w10so3349405pde.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Mar 2014 22:55:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZKAbCCMgR8hGnQlr8AV0kPylhBWedIAEgJn13UB6eac=;
+	b=F39+wos9Wtv7YsZ5DGEjszZLH/iSCqYAoCV0mUaWYGHq4KBdxBWFO28OovkjKTucSP
+	VDASxZghympHAyOMvr3FiUT7rNL1hYHIHhwt8g/JWYTBoG/oArGhvA+upypdBM7OsmPI
+	3TrkliVxN2xRYoDIi1PfR/+rtIjnO/Dfe+/eopy4XoUuTVKeqfq5lrb/VJSkRxwGj9ln
+	ToPS05NFaZxSS8a8+VAULovFwZefdDQezWroDANTYSxpyS0AwqLVuXBn5hG6lTwOGO/+
+	74XvYvjIu5z2hSM2VVV68gBRqANWZTL9Swy5pzufws/0NsDEa/5BsaF0lFpT5hvKRwAS
+	fFiQ==
+X-Received: by 10.66.65.204 with SMTP id z12mr17818230pas.60.1393829719094;
+	Sun, 02 Mar 2014 22:55:19 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id f5sm78205767pat.11.2014.03.02.22.55.17
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 02 Mar 2014 22:55:18 -0800 (PST)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Mar 2014 18:00:03 +1100
+Message-Id: <1393830003-16768-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-qt5][PATCH] qttools: add missing DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,118 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2014 03:40:33 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 03 Mar 2014 06:55:20 -0000
 
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qttools.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/recipes-qt/qt5/qttools.inc b/recipes-qt/qt5/qttools.inc
+index 8412db4..0192f22 100644
+--- a/recipes-qt/qt5/qttools.inc
++++ b/recipes-qt/qt5/qttools.inc
+@@ -1,6 +1,6 @@
+ require qt5.inc
+ 
+-DEPENDS += "qtbase"
++DEPENDS += "qtbase qtdeclarative qtwebkit qtxmlpatterns"
+ 
+ SRC_URI += " \
+     file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
+-- 
+1.9.0
 
-> -----Original Message-----
-> From: Joe MacDonald [mailto:joe@deserted.net]
-> Sent: Wednesday, February 26, 2014 10:49 AM
-> To: Huang, Jie (Jackie)
-> Cc: openembedded-devel@lists.openembedded.org; paul.eggleton@linux.intel.=
-com
-> Subject: Re: [oe] [meta-networking][PATCH] strongswan: update verion to 5=
-.1.1
->=20
-> [Re: [oe] [meta-networking][PATCH] strongswan: update verion to 5.1.1] On=
- 14.02.25 (Tue 12:19)
-> Huang, Jie (Jackie) wrote:
->=20
-> >
-> >
-> > >
-> > >
-> > > -------- Original Message --------
-> > > Subject: 	Re: [oe] [meta-networking][PATCH] strongswan: update verion=
- to 5.1.1
-> > > Date: 	Wed, 12 Feb 2014 20:02:22 -0500
-> > > From: 	Joe MacDonald <joe@deserted.net>
-> > > Reply-To: 	<openembedded-devel@lists.openembedded.org>
-> > > To: 	<jackie.huang@windriver.com>
-> > > CC: 	Paul Eggleton <paul.eggleton@linux.intel.com>, <openembedded-
-> > > devel@lists.openembedded.org>
-> > >
-> > >
-> > > [Re: [oe] [meta-networking][PATCH] strongswan: update verion to
-> > > 5.1.1] On 14.01.22 (Wed 12:29) Otavio Salvador wrote:
-> > >
-> > > > On Tue, Jan 21, 2014 at 12:50 AM, jhuang0 <jackie.huang@windriver.c=
-om> wrote:
-> > > > >
-> > > > >
-> > > > > On 1/20/2014 10:56 PM, Paul Eggleton wrote:
-> > > > >>
-> > > > >> On Friday 17 January 2014 14:40:48 jackie.huang@windriver.com wr=
-ote:
-> > > > >>>
-> > > > >>> * Add rdepends on strongswan-plugins.
-> > > > >>
-> > > > >>
-> > > > >> Is this really correct? Does strongswan not work without the plu=
-gins?
-> > > > >
-> > > > >
-> > > > > Yes, without the plugins, the ipsec_starter fails to start:
-> > > > >
-> > > > > root@qemu0:~# ipsec start
-> > > > > Starting strongSwan 5.1.1 IPsec [starter]...
-> > > > > root@qemu0:~# tail /var/log/auth.log -n 4
-> > > > > 2014-01-21T02:46:57.175940+00:00 qemu0 ipsec_starter[926]:
-> > > > > Starting strongSwan 5.1.1 IPsec [starter]...
-> > > > > 2014-01-21T02:46:57.653396+00:00 qemu0 ipsec_starter[935]: charon=
- has quit:
-> > > > > initialization failed
-> > > > > 2014-01-21T02:46:57.656916+00:00 qemu0 ipsec_starter[935]:
-> > > > > charon refused to be started
-> > > > > 2014-01-21T02:46:57.661374+00:00 qemu0 ipsec_starter[935]: ipsec
-> > > > > starter stopped
-> > > >
-> > > > So why to split it?
-> >
-> > Sorry for late response since I lost lots of Emails in my broken hard d=
-isk.
-> >
-> > Actually I didn't know why it was split to plugins, the original
-> > version 5.0.0 in meta-networking did that, I just kept what it was and =
-did some necessary changes in
-> the uprev.
->=20
-> so, a bit of digging turns up that  it looks like this was done as part o=
-f addressing a QA issue.  That's
-> when FILES_${PN}-plugins appears to have been introduced.  That almost ce=
-rtainly seemed like the
-> cleanest approach at the time (in the absence of any other information, i=
-t's certainly what I would've
-> done) but knowing that strongswan is non-functional without the plugins, =
-I think the right thing to do
-> is remove the split rather than introduce an RDEPENDs.
-
-I agree, I will remove the split.
-
-Thanks,
-Jackie
-
->=20
-> -J.
->=20
-> >
-> > Thanks,
-> > Jackie
-> >
-> > >
-> > > ping
-> > >
-> > > --
-> > > -Joe MacDonald.
-> > > :wq
-> > >
-> > >
-> >
->=20
-> --
-> -Joe MacDonald.
-> :wq
 
