@@ -1,37 +1,35 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-ie0-f180.google.com (mail-ie0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D618F6F55B;
-	Mon,  3 Mar 2014 22:16:45 +0000 (UTC)
-Received: by mail-ie0-f180.google.com with SMTP id as1so2267477iec.39
-	for <multiple recipients>; Mon, 03 Mar 2014 14:16:46 -0800 (PST)
+Return-Path: <net147@gmail.com>
+Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D7C36F572
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  4 Mar 2014 03:30:53 +0000 (UTC)
+Received: by mail-pb0-f47.google.com with SMTP id up15so4590527pbc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Mar 2014 19:30:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:from:to:subject:content-type
-	:content-transfer-encoding;
-	bh=QUDTC0EhHiChLGpKFEQrXiSNsMCbW8qB/CvTM/hleMU=;
-	b=q87XeI/zucQFDvmwObgLKnszFrgIHYdFAjymadQmqBfvxrcPgr8Tjb8f0xS94N2Wpj
-	0zWf6Nw7TKHZ577rtjTGrPlS37T/OdeiQYuGVsbw4tMpOtcvgEhMjiX/E4sD/0Vk3Iok
-	11GkFUbhfSNN/iyN9Ud1H4tzhFyZd9q6004Y4bnjZgGOivjzX+IWZ1qLA3DupCizdHlD
-	1JhF7f/UALbYTm6Jy2xAR2GidnHOOQEzekpj/EveewNBhUHXGLxpOx/4D0e9AvBK765H
-	keCaVxZFx8XXFBwwqaSLM4f6vazHI8BQkyj5SufVMc7kB0fSsTdZDhfaRLHE4+0eunjy
-	o3DQ==
-X-Received: by 10.42.228.131 with SMTP id je3mr4438742icb.59.1393885006251;
-	Mon, 03 Mar 2014 14:16:46 -0800 (PST)
-Received: from happy.bec-systems.com (cable-pool6-cs-200.doycomm.com.
-	[66.219.185.200])
-	by mx.google.com with ESMTPSA id y9sm43297492igl.7.2014.03.03.14.16.44
+	h=from:to:cc:subject:date:message-id;
+	bh=yu0BlYc/eBf86b323mDEHTvK0wbsj5y807AalJK4dT0=;
+	b=KziqVpboI7LgAO2A4SnSXl2wRJYCSaYKeQ53MoWBtxKPHdK4PIb9jBHUx6mZixcO8B
+	GJclzxGYBOcdRQZOpwsGCamY801uFl5qP/3CZ8oolROyP60cEfa1tViXjgrD2qA0053R
+	cZx3DiAAfDygQHmYiua9uLBPBmwfJFJjJPYAOaPkN4ymAeWvGfiKWW9ISoV2Ey5e7MzS
+	sSrj9THcjuGmPlDpZmley9gjq+X2repTG+B8z2SoW1DCRejlxcLftE5ZRqUrnNaZspHw
+	Cgr9m3Bf4xEoXpirILvjAmryVIkZZt6xJT6zhXEQb9iia6xaHSjW0nGQHtlOGo3xhw9/
+	Hp0A==
+X-Received: by 10.66.142.233 with SMTP id rz9mr3289978pab.71.1393903853437;
+	Mon, 03 Mar 2014 19:30:53 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id q7sm41872022pbc.20.2014.03.03.19.30.48
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Mar 2014 14:16:45 -0800 (PST)
-MIME-Version: 1.0
-X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
-Date: Mon, 03 Mar 2014 14:16:45 -0800 (PST)
-Message-Id: <1393885004039.23815e7f@Nodemailer>
-From: cliff.brake@gmail.com
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
-Subject: OE Changelog since 2014-02-23 until 2014-03-02
+	Mon, 03 Mar 2014 19:30:52 -0800 (PST)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Mar 2014 14:35:14 +1100
+Message-Id: <1393904114-10583-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-qt5][PATCH] qtbase: fix mmsize argument parsing for linuxfb plugin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,529 +43,272 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Mar 2014 22:16:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Changelog since 2014-02-23 until 2014-03-02.  Projects included in this =
-report:
-
-bitbake: git://git.openembedded.org/bitbake
-openembedded-core: git://git.openembedded.org/openembedded-core
-meta-openembedded: git://git.openembedded.org/meta-openembedded
-meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
-meta-arago: git://arago-project.org/git/meta-arago.git
-meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
-meta-browser: git://github.com/OSSystems/meta-browser.git
-meta-bug: git://github.com/buglabs/meta-bug.git
-meta-chicken: git://github.com/OSSystems/meta-chicken
-meta-efikamx: git://github.com/kraj/meta-efikamx.git
-meta-ettus: http://github.com/koenkooi/meta-ettus.git
-meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
-meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
-meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
-meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
-meta-gumstix: git://github.com/gumstix/meta-gumstix.git
-meta-gumstix-community: =
-git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
-meta-handheld: git://git.openembedded.org/meta-handheld
-meta-igep: http://github.com/ebutera/meta-igep.git
-meta-intel: git://git.yoctoproject.org/meta-intel
-meta-ivi: git://git.yoctoproject.org/meta-ivi
-meta-java: git://github.com/woglinde/meta-java
-meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
-meta-micro: git://git.openembedded.org/meta-micro
-meta-mono: git://git.yoctoproject.org/meta-mono.git
-meta-netbookpro: git://github.com/tworaz/meta-netbookpro
-meta-nslu2: git://github.com/kraj/meta-nslu2
-meta-opie: git://git.openembedded.org/meta-opie
-meta-qt3: git://git.yoctoproject.org/meta-qt3
-meta-qt5: git://github.com/meta-qt5/meta-qt5.git
-meta-slugos: git://github.com/kraj/meta-slugos
-meta-systemd: git://git.yoctoproject.org/meta-systemd
-meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
-meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
-meta-ti: git://git.yoctoproject.org/meta-ti
-meta-webos: git://github.com/openwebos/meta-webos.git
-meta-xilinx: git://git.yoctoproject.org/meta-xilinx
-meta-yocto: git://git.yoctoproject.org/meta-yocto
-openembedded: git://git.openembedded.org/openembedded
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for bitbake:
-
-Cristiana Voicu (4):
-=20=20hob: replace the use of hob-toolchain with populate_sdk task
-=20=20hob: create a base hob image used to create custom images
-=20=20hob: remove the code that adds hob layer to bblayers
-=20=20hob: append bbfiles to bblayers.conf instead of local.conf
-
-Jacob Kroon (1):
-=20=20ast: Fix support for anonymous methods in wildcard .bbappend files
-
-Martin Jansa (1):
-=20=20runqueue: Catch ValueError from pickle.loads
-
-Paul Eggleton (4):
-=20=20fetch2: fix fetching git submodules with git 1.7.9.x or older
-=20=20bitbake-selftest: enable specifying tests to run on command line
-=20=20tests: add missing import
-=20=20tests: add test for gitsm fetcher
-
-Richard Purdie (9):
-=20=20fetch2: Fix mirror repo tarball creation
-=20=20fetch/git: Separate out an ls-remote function
-=20=20fetch/perforce: Drop usage of old style *COMMAND variable and =
-MKTEMPDIRCMD
-=20=20fetch/svk: Drop usage of old style *COMMAND variable and MKTEMPDIRCMD
-=20=20wget: Drop usage of old style *COMMAND variables
-=20=20fetch/wget: Start to clean up command construction
-=20=20fetch/wget: Separate out download and checkstatus functions
-=20=20codeparser: Fix var_execs to append to execs, not references
-=20=20fetch2: Drop svk fetcher
-
-Stefan Stanacar (1):
-=20=20build: filter out expanded empty strings for lockfiles flag
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded-core:
-
-Alexandru Palalau (1):
-=20=20libnotify: don't use gnome.bbclass
-
-Alexandru-Cezar Sardan (1):
-=20=20gcc: Enable SPE & AltiVec generation on powepc*linux target.
-
-Bruce Ashfield (5):
-=20=20kernel-yocto: always checkout machine branch when existing =
-validate_branches
-=20=20linux-yocto/3.10: update to v3.10.32
-=20=20linux-yocto/3.4: update to v3.4.82 and latest LTSI
-=20=20linux-yocto/3.10: integrate latest LTSI changes
-=20=20linux-yocto-dev: bump to v3.14-rc4
-
-Corneliu Stoicescu (2):
-=20=20oe-selftest: Fix for test_rm_old_image
-=20=20oe-selftest: Fix test_sstate_cache_management_script*
-
-Cristian Iorga (4):
-=20=20bluez5: upgrade to 5.15
-=20=20telepathy-glib: upgrade to 0.23.2
-=20=20telepathy-mission-control: upgrade to 5.16.1
-=20=20wpa-supplicant: upgrade to 2.1
-
-Cristiana Voicu (3):
-=20=20curl: upgrade to 7.35.0
-=20=20pango: upgrade to 1.36.2
-=20=20meta-hob: remove hob-toolchain since this is not needed anymore
-
-Donn Seeley (1):
-=20=20dpkg: fix a link problem for dpkg-native on CentOS 5.8
-
-Hongxu Jia (2):
-=20=20qt-mobility: fix metaobjectbuilder build errors
-=20=20python-native: remove unused and duplicated sitecustomize.py
-
-Jackie Huang (1):
-=20=20mailx: fix the path to sendmail interface
-
-Jonathan Liu (1):
-=20=20package_manager.py: correctly handle empty opkg-query-helper.py output
-
-Khem Raj (1):
-=20=20python3: Fix race condition at high parallelism factor
-
-Laurentiu Palcu (2):
-=20=20package_manager.py: create index files for all backends in =
-PACKAGE_CLASSES
-=20=20adt_installer: fix issue with x86_64
-
-Maxin B. John (1):
-=20=20python: Backport CVE-2013-1752 fix from upstream
-
-Otavio Salvador (1):
-=20=20uboot-config.bbclass: Skip the package if no valid configuration is =
-found
-
-Paul Eggleton (10):
-=20=20classes/sstate: fix taints being undone on execution of sstate tasks
-=20=20classes/package_tar: fix conflicts with package_deb / package_ipk
-=20=20classes/utility-tasks: make do_listtasks a little more friendly
-=20=20documentation.conf: add a few missing task descriptions
-=20=20openssh: upgrade to 6.5p1
-=20=20ethtool: upgrade to 3.13
-=20=20cmake: upgrade to 2.8.12.2
-=20=20augeas: upgrade to 1.2.0
-=20=20chrpath: upgrade to 0.16
-=20=20dropbear: upgrade to 2014.63
-
-Richard Purdie (18):
-=20=20lib/oe/rootfs: Fix LDCONFIGDEPEND check
-=20=20package: Drop do_package_write task
-=20=20sstate: Drop 'SafeDep' code from setscene validation function
-=20=20distro/defaultsetup: Add seperatebuildddir.inc
-=20=20security-flags: Deal with powerpc build issues
-=20=20security-flags: Avoid lttng-tools issue on arm
-=20=20base: Remove pointless createCopy/update_data calls
-=20=20libnotify: Fix separate build dir support
-=20=20webkit-gtk: Fix separate builddir support
-=20=20dpkg: Fix dpkg-native dependency on target xz
-=20=20python3: Fix QA warning
-=20=20python3: Fix make race
-=20=20autotools-brokensep: Mark recipes with broken separate build dir =
-support
-=20=20hob-image: Drop as no longer needed by bitbake
-=20=20meta-hob: Drop as no longer needed
-=20=20dpkg: Use bzip2-replacement-native
-=20=20oeqa/runtime/dmesg: Ignore DMA timeout errors
-=20=20ltp: Work around parallel make race
-
-Robert Yang (4):
-=20=20lz4: fix CC
-=20=20grub: exclude .pc from POTFILES.in (fix build on CentOS 5.8)
-=20=20dpkg-compiler.m4: remove -Wvla (fix build on CentOS 5.8)
-=20=20weston: fix build without wayland in distro_features
-
-Ross Burton (1):
-=20=20ncurses: use ln -r to generate relative symlink
-
-Roy Li (1):
-=20=20dbus: proper error handler should be given after =
-send_negotiate_unix_fd fail
-
-Saul Wold (10):
-=20=20sqlite3: Update to 3080301
-=20=20sqlite: rename to match upstream versioning
-=20=20runqemu: Use readlink instead of realpath
-=20=20security_flags: disable PIE flags for cups builds
-=20=20initrdscripts: Add rootimage option
-=20=20base-files: sed installed file instead of original
-=20=20base-passwd: sed installed file instead of original
-=20=20systemd: sed installed file instead of original
-=20=20core-image-minimal-initramfs: Use PACKAGE_INSTALL instead of =
-IMAGE_INSTALL
-=20=20man-pages: Update to 3.60
-
-Stefan Stanacar (2):
-=20=20oeqa/targetcontrol: properly get the host ip
-=20=20oeqa/targetcontrol: make BaseTarget an abstract class
-
-S=C3=A9bastien Mennetrier (1):
-=20=20libomxil: Fix link issue for gst-omx
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-openembedded:
-
-Andrea Adami (1):
-=20=20klcc-cross: force rebuild for each MACHINE of the same arch
-
-Diego Sueiro (1):
-=20=20libao: Add PACKAGECONFIG for esound support
-
-Khem Raj (2):
-=20=20python-cloudeebus: DEPEND on python-distribute instead of =
-python-setuptools
-=20=20ltp-ddt: Fix build with newer kernels
-
-Koen Kooi (1):
-=20=20mariadb: move linker fix to .inc
-
-Martin Jansa (24):
-=20=20efl: upgrade from separate recipes to shared efl-1.8.5
-=20=20efl: Adjust packaging to match more with old 1.7 separate recipes
-=20=20python-efl: upgrade from separate recipes to shared python-efl-1.8.1
-=20=20python-efl: update packaging to match old packages
-=20=20elementary: upgrade to 1.8.4
-=20=20elementary: Add PACKAGECONFIG for ewebkit and disable it by default
-=20=20terminology: upgrade to 0.4.0
-=20=20evas-generic-loaders: upgrade to 1.8.1
-=20=20emotion-generic-players: add recipe for 1.8.1
-=20=20e-wm: Drop evas-.*-loader.* from RDEPENDS
-=20=20e-wm: Add recipe for 0.18.2
-=20=20enjoy: switch from svn to newer git and update dependency from edbus2 =
-to eld
-=20=20edbus: remove old edbus(1) svn recipe
-=20=20webkit-efl: Add recipe with snapshot from r159807
-=20=20eve: bump SRCREV and update dependency from edbus2 to eldbus
-=20=20libeflvala: Fix build of tests
-=20=20elfe: Replace svn with git version
-=20=20packagegroup-efl-sdk: Update SDK-EFL for shared source tree efl
-=20=20expedite: Replace old svn recipe with git version
-=20=20e-tasks: Fix building against old e_dbus
-=20=20rage, emprint, news: Move to nonworking
-=20=20screenshot: Move to nonworking because depends on emprint
-=20=20vlc: Add PACKAGECONFIG for jack
-=20=20vlc: Fix build with flac-1.3.0
-
-Matthieu CRAPET (2):
-=20=20xmlstarlet: add new recipe for version 1.5.0
-=20=20recipes: convert remaining SUMMARY/DESCRIPTION cosmetic issues
-
-Roy Li (1):
-=20=20quagga: close the stdout/stderr as in other daemons
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-angstrom:
-
-Koen Kooi (9):
-=20=20angstrom-version: add -is and -ds to lsb_release
-=20=20images: fix IMAGE_PREPROCESS_CMD
-=20=20development-xfce-image: XFCE based image with development tools inside
-=20=20development-xfce-image: add bash
-=20=20efl-nodm-image: include formfactor
-=20=20efl-nodm-image: add xterm
-=20=20xfce-nm-image: fix gdm install
-=20=20Angstrom: switch armv7a to thumb2 mode
-=20=20contrib: feed sorter: sync with v2013.12
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-arago:
-
-Denys Dmytriyenko (2):
-=20=20packagegroup-*-tisdk-addons: mmc-utils requires >=3D3.8 kernel
-=20=20arago-source-ipk, packagegroup-*-crypto-sdk-host: enable cryptodev =
-sources
-
-Franklin S. Cooper Jr (3):
-=20=20busybox: Add TFTP Blocksize option
-=20=20matrix-gui-apps-git.inc: Update commitid to pull in multimedia demo =
-fix
-=20=20dual-camera-demo: Update dual camera demo with bug fixes
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-beagleboard:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-browser:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-bug:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-chicken:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-efikamx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ettus:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm:
-
-Alexandre Belloni (1):
-=20=20image_types_fsl.bbclass: fix barebox bootstream generation
-
-Andy Voltz (2):
-=20=20libmcc: bump to version 1.04
-=20=20kernel-module-mcc: bump to version 1.04
-
-Anthony Felice (2):
-=20=20twr-vf65gs10: update kernel to latest ts-2.13 release
-=20=20twr-vf65gs10: Add myself as a maintainer
-
-Otavio Salvador (6):
-=20=20mesa: Update to follow OE-Core changes
-=20=20xserver-xorg: Backport 1.14.4 version
-=20=20mqxboot: Add minor changes to get recipe in better shape
-=20=20libmcc: Add minor changes to get recipe in better shape
-=20=20kernel-module-mcc: Add minor changes to get recipe in better shape
-=20=20image_types_fsl.bbclass: Fix imx-bootlets build with new image code
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-arm-extra:
-
-Christopher Larson (1):
-=20=20layer.conf: define LAYERDEPENDS to match actual deps
-
-John Weber (2):
-=20=20linux-wandboard (3.10.17): Bump SRCREV to 95f32b7
-=20=20linux-wandboard (3.10.17): defconfig changes
-
-Otavio Salvador (4):
-=20=20cfa10036.inc: Use dummy version of imx-test
-=20=20m28evk: Use dummy version of imx-test
-=20=20m53evk: Use dummy version of imx-test
-=20=20m53evk: Force override of XSERVER setting
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-fsl-ppc:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-guacamayo:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-gumstix-community:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-handheld:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-igep:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-intel:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ivi:
-
-Florin Sarbu (5):
-=20=20itzam/C: Added package as a dependency     of =
-persistence-client-library
-=20=20Add new P2 AC package called     persistence-client-library
-=20=20node-state-manager: Upgrade to version 2.0.0     and move from P2 AC =
-to P1 A
-=20=20itzamc: Correct LICENSE field
-=20=20node-startup-controller: Removed the conditional addition of     =
-node-startu
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-java:
-
-Henning Heinold (1):
-=20=20Merge pull request #55 from koenkooi/hotspot
-
-Khem Raj (2):
-=20=20openjdk-7-25b30: Forward port ppc patches
-=20=20libmatthew: Remove the dummy jar symlink
-
-Koen Kooi (2):
-=20=20openjdk-7-release-25b30.inc: move nio patch to main section.
-=20=20openjdk-7-release-25b30.inc: add patch to fix hotstop build
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-kde:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-micro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-mono:
-
-Alex J Lennon (9):
-=20=20libgdiplus: Fix build error relating to missing freetype/tttables.h, =
-and upd
-=20=20mono: Update Mono to 3.2.8
-=20=20mono-xsp: Removed extraneous occurrence of mono-xsp in PACKAGES
-=20=20gtk-sharp: Updated to GTK# 2.12.21
-=20=20monotools-server: Fixed build
-=20=20mono-helloworld: Simple console and windows forms applications to =
-provide an
-=20=20gtk-sharp, libgdiplus mono-helloworld, mono: Removed extraneous PR =
-variables
-=20=20mono-xsp: Updated to 2.10
-=20=20mono-basic: Add VisualBasic.NET support with mono-basic v2.10
-
-Khem Raj (1):
-=20=20mono-xsp: Fix parse warnings
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-netbookpro:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-nslu2:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-opie:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt3:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-qt5:
-
-Giulian Gon=C3=A7alves Vivan (1):
-=20=20qsiv: add the qsiv 1.1 example app
-
-Jacob Kroon (1):
-=20=20nativesdk-qtbase-tools: disable Debian-style package renaming
-
-Otavio Salvador (6):
-=20=20qmake5_paths.bbclass: Use Qt version path for headers
-=20=20mallit-framework-qt5: Don't set OE_QMAKE_PATH_HEADERS
-=20=20mallit-plugins-qt5: Don't set OE_QMAKE_PATH_HEADERS
-=20=20populate_sdk_qt5.bbclass: Fix symlink location for QtCreator use
-=20=20packagegroup-qt5-qtcreator-debug: Add package group
-=20=20populate_sdk_qt5.bbclass: Add support for qtcreator-debug
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-slugos:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-systemd:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-raspberrypi:
-
-Andrei Gherzan (4):
-=20=20omxplayer: Update to current remote HEAD
-=20=20Merge changes =
-I1eecd332,I635b2f2b,Iad457c26,Iace03974,I4358434c,Ib15942c4,I7
-=20=20mesa: Replace ugly fix for gles/egl
-=20=20sdcard_image-rpi: Make rpi-sdimg image dependent on ext3
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-smartphone:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-ti:
-
-Denys Dmytriyenko (3):
-=20=20linux-ti-staging: ARM_SCU patch got merged, add PREEMPT_VOLUNTARY =
-patch, res
-=20=20linux-ti-staging: latest performance, connectivity, audio and PM fixes
-=20=20linux-ti-staging: rebase patch to disable SMP to apply cleanly
-
-Sam Nelson (1):
-=20=20linux-keystone: Update latest tag
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-webos:
-
-Anatolii Sakhnik (1):
-=20=20webos-image: filecache=3D63
-
-Gayathri Srinivasan (1):
-=20=20webos-image: pmlogdaemon=3D118 pmklogd=3D17
-
-Igor (2):
-=20=20webos-image: db8=3D126
-=20=20webos-image: db8=3D128
-
-Maksym Sditanov (1):
-=20=20webos-image: db8=3D127
-
-Martin Jansa (2):
-=20=20webos-repositories.inc: Add WEBOS_GIT_TAG variable
-=20=20webos.inc: Always include webos-enh-sub-autorev-error in ERROR_QA
-
-Nikolay Orliuk (1):
-=20=20webos-image: luna-sysservice=3D37
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-xilinx:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for meta-yocto:
-
-Bruce Ashfield (2):
-=20=20bsps: update to 3.10.28
-=20=20bsps: update H/W reference boards to v3.10.32
-
-Paul Eggleton (1):
-=20=20poky.conf: add CentOS 6.5 to SANITY_TESTED_DISTROS
-
-Richard Purdie (1):
-=20=20poky: Drop seperatebuilddir.inc, its included in the core now
-
-Stefan Stanacar (1):
-=20=20poky-lsb.conf: fix the include path for security_flags
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Changelog for openembedded:
-
+X-List-Received-Date: Tue, 04 Mar 2014 03:30:53 -0000
+
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ recipes-qt/qt5/qtbase.inc                          |  1 +
+ .../qt5/qtbase/0001-Add-linux-oe-g-platform.patch  |  2 +-
+ ...o-allow-to-set-qt.conf-from-the-outside-u.patch |  2 +-
+ .../0003-Add-external-hostbindir-option.patch      |  2 +-
+ ...p-Prefix-default-LIBDIRS-and-INCDIRS-with.patch |  2 +-
+ .../0005-qt_module-Fix-pkgconfig-replacement.patch |  2 +-
+ ...on-t-export-SYSTEM_VARIABLES-to-.qmake.va.patch |  2 +-
+ ....prf-Allow-to-add-extra-arguments-to-make.patch |  2 +-
+ ...ake-pulseaudio-alsa-freetype-a-configurab.patch |  2 +-
+ ...E_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determ.patch |  2 +-
+ ...0-qmake-is-already-built-in-qtbase-native.patch |  2 +-
+ ...-building-a-separate-qmake-for-the-target.patch |  2 +-
+ .../0012-qtbase-allow-build-of-examples.patch      |  2 +-
+ .../0013-QOpenGLPaintDevice-sub-area-support.patch |  2 +-
+ ...gl-error-for-platforms-only-supporting-on.patch |  2 +-
+ .../0015-Fix-linuxfb-argument-mmsize-parsing.patch | 42 ++++++++++++++++++++++
+ 16 files changed, 57 insertions(+), 14 deletions(-)
+ create mode 100644 recipes-qt/qt5/qtbase/0015-Fix-linuxfb-argument-mmsize-parsing.patch
+
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 378f229..f1a10bb 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -19,6 +19,7 @@ SRC_URI += "\
+     file://0012-qtbase-allow-build-of-examples.patch \
+     file://0013-QOpenGLPaintDevice-sub-area-support.patch \
+     file://0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch \
++    file://0015-Fix-linuxfb-argument-mmsize-parsing.patch \
+ "
+ 
+ DEPENDS += "qtbase-native"
+diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+index 5ce4cdd..030a091 100644
+--- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
++++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+@@ -1,7 +1,7 @@
+ From f883ec8652ee603d9bb9def7eb669ed82c493961 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Mon, 15 Apr 2013 04:29:32 +0200
+-Subject: [PATCH 01/14] Add linux-oe-g++ platform
++Subject: [PATCH 01/15] Add linux-oe-g++ platform
+ 
+ * This qmake.conf unlike other platforms reads most variables from
+   shell environment, because it's easier for qt recipes to export
+diff --git a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
+index 2f72dca..525260a 100644
+--- a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
++++ b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
+@@ -1,7 +1,7 @@
+ From 841d1f06f3fd2f59f6b18067b02d5fcfc93aaa7a Mon Sep 17 00:00:00 2001
+ From: Holger Freyther <zecke@selfish.org>
+ Date: Wed, 26 Sep 2012 17:22:30 +0200
+-Subject: [PATCH 02/14] qlibraryinfo: allow to set qt.conf from the outside
++Subject: [PATCH 02/15] qlibraryinfo: allow to set qt.conf from the outside
+  using the environment
+ 
+ Allow to set a qt.conf from the outside using the environment. This allows
+diff --git a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+index 7e03f74..91b0a6c 100644
+--- a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
++++ b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+@@ -1,7 +1,7 @@
+ From 3648eeddaed0cf31fba226ec713d2321f398974f Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 6 Apr 2013 13:15:07 +0200
+-Subject: [PATCH 03/14] Add -external-hostbindir option
++Subject: [PATCH 03/15] Add -external-hostbindir option
+ 
+ * when cross-compiling it's sometimes useful to use existing tools from machine
+   (or in OpenEmbedded built with separate native recipe) when building for target
+diff --git a/recipes-qt/qt5/qtbase/0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch b/recipes-qt/qt5/qtbase/0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch
+index 16317ac..b1cdfa4 100644
+--- a/recipes-qt/qt5/qtbase/0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch
++++ b/recipes-qt/qt5/qtbase/0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch
+@@ -1,7 +1,7 @@
+ From 698f073fb8cc6dc1ced277b6ae2056cb9d02f2d5 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 27 Apr 2013 22:33:33 +0200
+-Subject: [PATCH 04/14] configureapp: Prefix default LIBDIRS and INCDIRS with
++Subject: [PATCH 04/15] configureapp: Prefix default LIBDIRS and INCDIRS with
+  SYSROOT
+ 
+ Upstream-Status: Pending
+diff --git a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+index b8768c8..9ac5f6a 100644
+--- a/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
++++ b/recipes-qt/qt5/qtbase/0005-qt_module-Fix-pkgconfig-replacement.patch
+@@ -1,7 +1,7 @@
+ From 7999eeb3f2ab1150aa301ec26ae9bf0788d09c9e Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 27 Apr 2013 23:15:37 +0200
+-Subject: [PATCH 05/14] qt_module: Fix pkgconfig replacement
++Subject: [PATCH 05/15] qt_module: Fix pkgconfig replacement
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+diff --git a/recipes-qt/qt5/qtbase/0006-configure-don-t-export-SYSTEM_VARIABLES-to-.qmake.va.patch b/recipes-qt/qt5/qtbase/0006-configure-don-t-export-SYSTEM_VARIABLES-to-.qmake.va.patch
+index 726bfe0..d514da3 100644
+--- a/recipes-qt/qt5/qtbase/0006-configure-don-t-export-SYSTEM_VARIABLES-to-.qmake.va.patch
++++ b/recipes-qt/qt5/qtbase/0006-configure-don-t-export-SYSTEM_VARIABLES-to-.qmake.va.patch
+@@ -1,7 +1,7 @@
+ From ebd38fc708cf7190e47a75754235f56fa5d86300 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Wed, 8 May 2013 23:54:35 +0200
+-Subject: [PATCH 06/14] configure: don't export SYSTEM_VARIABLES to .qmake.vars
++Subject: [PATCH 06/15] configure: don't export SYSTEM_VARIABLES to .qmake.vars
+ 
+ * linux-oe-g++ should handle this correctly and exporting LD as QMAKE_LINK is
+   causing issues as we need g++ to be used as linker
+diff --git a/recipes-qt/qt5/qtbase/0007-configure.prf-Allow-to-add-extra-arguments-to-make.patch b/recipes-qt/qt5/qtbase/0007-configure.prf-Allow-to-add-extra-arguments-to-make.patch
+index e8a7784..821e5b8 100644
+--- a/recipes-qt/qt5/qtbase/0007-configure.prf-Allow-to-add-extra-arguments-to-make.patch
++++ b/recipes-qt/qt5/qtbase/0007-configure.prf-Allow-to-add-extra-arguments-to-make.patch
+@@ -1,7 +1,7 @@
+ From 828eecd8f361cb965bd40f535435efa91665c8e5 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Thu, 9 May 2013 10:06:50 +0200
+-Subject: [PATCH 07/14] configure.prf: Allow to add extra arguments to make
++Subject: [PATCH 07/15] configure.prf: Allow to add extra arguments to make
+ 
+ * sometimes we would like to add -e or define some variable and respect it from both
+   Makefiles used in configure tests and also Makefiles to build the application
+diff --git a/recipes-qt/qt5/qtbase/0008-configure-make-pulseaudio-alsa-freetype-a-configurab.patch b/recipes-qt/qt5/qtbase/0008-configure-make-pulseaudio-alsa-freetype-a-configurab.patch
+index cccf7fb..4abc465 100644
+--- a/recipes-qt/qt5/qtbase/0008-configure-make-pulseaudio-alsa-freetype-a-configurab.patch
++++ b/recipes-qt/qt5/qtbase/0008-configure-make-pulseaudio-alsa-freetype-a-configurab.patch
+@@ -1,7 +1,7 @@
+ From 3923edc900d1b3dd23e0a6af3a32255707cd497c Mon Sep 17 00:00:00 2001
+ From: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Date: Tue, 28 Feb 2012 15:10:24 +0000
+-Subject: [PATCH 08/14] configure: make pulseaudio, alsa, freetype a
++Subject: [PATCH 08/15] configure: make pulseaudio, alsa, freetype a
+  configurable option
+ 
+ Allows disabling pulseaudio, alsa, freetype support at configure time
+diff --git a/recipes-qt/qt5/qtbase/0009-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determ.patch b/recipes-qt/qt5/qtbase/0009-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determ.patch
+index 23e22a8..b52d02d 100644
+--- a/recipes-qt/qt5/qtbase/0009-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determ.patch
++++ b/recipes-qt/qt5/qtbase/0009-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS-to-determ.patch
+@@ -1,7 +1,7 @@
+ From acbd622d1b91c1aa9ec8c48d10d91354d175345c Mon Sep 17 00:00:00 2001
+ From: Simon Busch <morphis@gravedo.de>
+ Date: Mon, 22 Jul 2013 21:09:41 +0000
+-Subject: [PATCH 09/14] cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS to
++Subject: [PATCH 09/15] cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS to
+  determine path to host binaries
+ 
+ Upstream-Status: Inappropiate (configuration)
+diff --git a/recipes-qt/qt5/qtbase/0010-qmake-is-already-built-in-qtbase-native.patch b/recipes-qt/qt5/qtbase/0010-qmake-is-already-built-in-qtbase-native.patch
+index 64ba88e..eb2da1e 100644
+--- a/recipes-qt/qt5/qtbase/0010-qmake-is-already-built-in-qtbase-native.patch
++++ b/recipes-qt/qt5/qtbase/0010-qmake-is-already-built-in-qtbase-native.patch
+@@ -1,7 +1,7 @@
+ From 77a18a9fe2d0e4a1dcd95e2d78c85eb37452bc73 Mon Sep 17 00:00:00 2001
+ From: Michael Krelin <hacker@klever.net>
+ Date: Mon, 29 Oct 2012 20:07:49 -0700
+-Subject: [PATCH 10/14] qmake is already built in qtbase-native
++Subject: [PATCH 10/15] qmake is already built in qtbase-native
+ 
+ Ported from OE by: Yu Ke <ke.yu@intel.com>
+ Upstream-Status: Inappropriate [configuration]
+diff --git a/recipes-qt/qt5/qtbase/0011-Allow-building-a-separate-qmake-for-the-target.patch b/recipes-qt/qt5/qtbase/0011-Allow-building-a-separate-qmake-for-the-target.patch
+index f80edbd..e028f35 100644
+--- a/recipes-qt/qt5/qtbase/0011-Allow-building-a-separate-qmake-for-the-target.patch
++++ b/recipes-qt/qt5/qtbase/0011-Allow-building-a-separate-qmake-for-the-target.patch
+@@ -1,7 +1,7 @@
+ From dd14f3eda61669c66c95dbcbca3afbd61f9aa746 Mon Sep 17 00:00:00 2001
+ From: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Date: Mon, 29 Oct 2012 20:26:36 -0700
+-Subject: [PATCH 11/14] Allow building a separate qmake for the target
++Subject: [PATCH 11/15] Allow building a separate qmake for the target
+ 
+ Upstream-Status: Inappropriate [config]
+ 
+diff --git a/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch b/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
+index 9d46d2f..3e8f1e2 100644
+--- a/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
++++ b/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
+@@ -1,7 +1,7 @@
+ From 6e5e22110b4731b4324d309bc579393f422ba99d Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+ Date: Sat, 25 May 2013 17:34:32 +0200
+-Subject: [PATCH 12/14] qtbase: allow build of examples
++Subject: [PATCH 12/15] qtbase: allow build of examples
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+diff --git a/recipes-qt/qt5/qtbase/0013-QOpenGLPaintDevice-sub-area-support.patch b/recipes-qt/qt5/qtbase/0013-QOpenGLPaintDevice-sub-area-support.patch
+index c6ec67c..8366364 100644
+--- a/recipes-qt/qt5/qtbase/0013-QOpenGLPaintDevice-sub-area-support.patch
++++ b/recipes-qt/qt5/qtbase/0013-QOpenGLPaintDevice-sub-area-support.patch
+@@ -1,7 +1,7 @@
+ From 2fad0a6fa3c06577995ac44ed0a2a12eaef819c2 Mon Sep 17 00:00:00 2001
+ From: Jani Hautakangas <jani.hautakangas@ixonos.com>
+ Date: Thu, 16 May 2013 09:52:07 +0300
+-Subject: [PATCH 13/14] QOpenGLPaintDevice sub-area support
++Subject: [PATCH 13/15] QOpenGLPaintDevice sub-area support
+ 
+ Allows creating QOpenGLPaintDevice targetting sub-area
+ of binded framebuffer.
+diff --git a/recipes-qt/qt5/qtbase/0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch b/recipes-qt/qt5/qtbase/0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch
+index 6fd2938..9c366b6 100644
+--- a/recipes-qt/qt5/qtbase/0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch
++++ b/recipes-qt/qt5/qtbase/0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch
+@@ -1,7 +1,7 @@
+ From c8995c6eb6cf4bfa8daf1e3e96bd4885a096f405 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+ Date: Wed, 5 Feb 2014 18:35:08 +0100
+-Subject: [PATCH 14/14] eglfs: fix egl error for platforms only supporting one
++Subject: [PATCH 14/15] eglfs: fix egl error for platforms only supporting one
+  window/surface
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+diff --git a/recipes-qt/qt5/qtbase/0015-Fix-linuxfb-argument-mmsize-parsing.patch b/recipes-qt/qt5/qtbase/0015-Fix-linuxfb-argument-mmsize-parsing.patch
+new file mode 100644
+index 0000000..c9836c8
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0015-Fix-linuxfb-argument-mmsize-parsing.patch
+@@ -0,0 +1,42 @@
++From 99979159a404df09495c8ddd6a052837f66b8739 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Peter=20K=C3=BCmmel?= <syntheticpp@gmx.net>
++Date: Fri, 7 Feb 2014 13:12:37 +0100
++Subject: [PATCH 15/15] Fix linuxfb argument 'mmsize' parsing
++
++Parse first for 'mmsize' because the regex for 'size' also fits to 'mmsize'.
++
++Upstream-Status: Backport
++
++Task-number: QTBUG-29133
++Change-Id: Idc4950270818e496d5d94a97a172b7c780f069b1
++Reviewed-by: Laszlo Agocs <laszlo.agocs@digia.com>
++Signed-off-by: Jonathan Liu <net147@gmail.com>
++---
++ src/plugins/platforms/linuxfb/qlinuxfbscreen.cpp |    4 ++--
++ 1 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/plugins/platforms/linuxfb/qlinuxfbscreen.cpp b/src/plugins/platforms/linuxfb/qlinuxfbscreen.cpp
++index 735a43d..33a9523 100644
++--- a/src/plugins/platforms/linuxfb/qlinuxfbscreen.cpp
+++++ b/src/plugins/platforms/linuxfb/qlinuxfbscreen.cpp
++@@ -333,6 +333,8 @@ bool QLinuxFbScreen::initialize()
++     foreach (const QString &arg, mArgs) {
++         if (arg == QLatin1String("nographicsmodeswitch"))
++             doSwitchToGraphicsMode = false;
+++        else if (mmSizeRx.indexIn(arg) != -1)
+++            userMmSize = QSize(mmSizeRx.cap(1).toInt(), mmSizeRx.cap(2).toInt());
++         else if (sizeRx.indexIn(arg) != -1)
++             userGeometry.setSize(QSize(sizeRx.cap(1).toInt(), sizeRx.cap(2).toInt()));
++         else if (offsetRx.indexIn(arg) != -1)
++@@ -341,8 +343,6 @@ bool QLinuxFbScreen::initialize()
++             ttyDevice = ttyRx.cap(1);
++         else if (fbRx.indexIn(arg) != -1)
++             fbDevice = fbRx.cap(1);
++-        else if (mmSizeRx.indexIn(arg) != -1)
++-            userMmSize = QSize(mmSizeRx.cap(1).toInt(), mmSizeRx.cap(2).toInt());
++     }
++ 
++     if (fbDevice.isEmpty()) {
++-- 
++1.7.1
++
+-- 
+1.9.0
 
 
