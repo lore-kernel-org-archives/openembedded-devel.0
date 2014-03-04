@@ -1,34 +1,35 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-qc0-f169.google.com (mail-qc0-f169.google.com
-	[209.85.216.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 059896F47E
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 587D06F532
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Mar 2014 03:43:00 +0000 (UTC)
-Received: by mail-qc0-f169.google.com with SMTP id i17so1897223qcy.0
+	Tue,  4 Mar 2014 04:30:57 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id bj1so4644742pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Mar 2014 19:43:01 -0800 (PST)
+	Mon, 03 Mar 2014 20:30:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=5DGiegPir0wuyc5fZIsJ8vZ4NeFwcgbBIkzfsGonYAQ=;
-	b=FKIJPdyMH8ULyD05yFmlFq5n3BummaJJPhc/sXg2B565ER+vYRA4P1Uuiu2MDyqaTS
-	RzWD0Ti3Uh/Pv7GY+XlVc1bPThfKEodZ9GLAfj5yaUerr1nXJYned4eYOZj9sKwX43NS
-	pFZYBBA2h0sbM1mwz2rPl5sc/4u49HAsQYGgY4usYvoygKUJq3yKOtfbaLnJUIaiAnzU
-	81J0+m1stl+KFymJcpL35KDQHVMvRsuZ5irr6+6mrlfJmhJvOO4onJHBGE7z3MUbLETY
-	7chDyXp4hXpjMvyQY+1JfpVFbMV/8fqvaGqtw5RMpkzSL3FSgWozmUqzIR3sel9X546l
-	oldg==
-MIME-Version: 1.0
-X-Received: by 10.140.19.212 with SMTP id 78mr27111281qgh.84.1393904581207;
-	Mon, 03 Mar 2014 19:43:01 -0800 (PST)
-Received: by 10.96.33.35 with HTTP; Mon, 3 Mar 2014 19:43:01 -0800 (PST)
-In-Reply-To: <CAP9ODKry1B06oojCA15G26hxBNdt5JPbqEcUqZP4BSaEFL+rsg@mail.gmail.com>
-References: <1393734165-15082-1-git-send-email-net147@gmail.com>
-	<1393734165-15082-2-git-send-email-net147@gmail.com>
-	<CAP9ODKry1B06oojCA15G26hxBNdt5JPbqEcUqZP4BSaEFL+rsg@mail.gmail.com>
-Date: Tue, 4 Mar 2014 14:43:01 +1100
-Message-ID: <CANwerB1mFM6ipZW0mS=4OpD0PbdxBTtLgidMLo2R8Pi_XdrS+Q@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=h5ojLQeB5p8TBK7kaJ020Yh4gEcSb7IpDoNvOQTLYM8=;
+	b=WjAQbfoYxcVyu2adNAKGHcHjtD6roQO8hVxJz1Nvv8zS7bVB9z9WZb39YTGX88lPZG
+	xfobBtwJkXZwUmKIamdPZgN0EcG5vqkSpj4RGrCY6TxQDZQKNO5PaGpZrOUEcj+stq45
+	g+FcoYSRTUIuYeNZXWFEjHVFaV7eAJ8dBTdlRUpvimIG288BVe1x1CCUkPC4ocGSV86Q
+	i1nUSuKfrlzshPx2Nbgx1cZRI7UXjiFTq6sJo86ACXBIIe25yFI0bFqHslM6OBvi5+iy
+	r/8RJ7Ogr20JgBFD/IzwJEE0ATmlecJ+BRKU548WU9YTnLS9XU9pHRdSqn7Qbv5OM0ac
+	E5RQ==
+X-Received: by 10.68.76.68 with SMTP id i4mr23401483pbw.73.1393907458073;
+	Mon, 03 Mar 2014 20:30:58 -0800 (PST)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	om6sm42382949pbc.43.2014.03.03.20.30.56 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 03 Mar 2014 20:30:57 -0800 (PST)
 From: Jonathan Liu <net147@gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v4 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Mar 2014 15:35:54 +1100
+Message-Id: <1393907754-12236-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-oe][PATCH] fbgrab: fix installed but not shipped warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,22 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2014 03:43:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Mar 2014 04:30:59 -0000
 
-On 4 March 2014 06:53, Otavio Salvador <otavio@ossystems.com.br> wrote:
-> On Sun, Mar 2, 2014 at 1:22 AM, Jonathan Liu <net147@gmail.com> wrote:
->> This adds the necessary target packages for development with all of the
->> Qt 5 modules.
->>
->> Signed-off-by: Jonathan Liu <net147@gmail.com>
->
-> Why are you adding qttools here? this is not need for toolchain use,
-> is it? It is need for host.
+WARNING: QA Issue: fbgrab: Files/directories were installed but not shipped
+  /usr/man
+  /usr/man/man1
+  /usr/man/man1/fbgrab.1.gz
 
-The QtTools module includes components that may be used by
-applications - http://qt-project.org/doc/qt-5/qtmodules.html#qt-tools
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Regards,
-Jonathan
+diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
+index 2b04c74..48edc2c 100644
+--- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
++++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
+@@ -12,3 +12,7 @@ S = "${WORKDIR}/${PN}"
+ 
+ SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
+ SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
++
++do_configure_prepend() {
++    sed -i 's|$(DESTDIR)/usr/man/|$(DESTDIR)${mandir}/|g' ${S}/Makefile
++}
+-- 
+1.9.0
+
 
