@@ -1,38 +1,25 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id D5F776BF88
+Return-Path: <Florin.Sarbu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D1206E713
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Mar 2014 14:34:38 +0000 (UTC)
-Received: by mail-yh0-f51.google.com with SMTP id f10so4503229yha.24
+	Tue,  4 Mar 2014 15:54:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s24Fsb7m006362
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Mar 2014 06:34:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=h2pXzOgq/VbOWGkSPC5d8lNmN73cef1Ln5jUiHZ8ncw=;
-	b=CyDjaYOUhFTimICv5YqQqQswJ6xUciizUHcHTHokrdUx8ls6kD6n6k+mHAgi0yeTNa
-	Gduo8cO3qpcKDNkrrMD1BVUjtQN4HSL133+6+5lgMrusNvyNEB8dPRFcTru1Jd8bHn3B
-	K64vR74W2EaaEsQq1K/XxIOCjRhGa3dJAca6SsYdhUQXhdfBirGhamfMQAfFl57WrFDO
-	M1l2tQU/4qf27FFO1o5m4xya3wYqyLvoHtGi3Hbnl12HyxSlpng2C5z/p+xha8mLwReg
-	xA9Aec/o9R2zlQIElrmtFcf7bZDuoQbiEZUQmSgJTM7jOkOxbN32Tyad15WyUGXXFk5F
-	CSKg==
+	Tue, 4 Mar 2014 07:54:37 -0800 (PST)
+Received: from localhost.wrs.com (128.224.170.197) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
+	Tue, 4 Mar 2014 07:54:36 -0800
+From: Florin Sarbu <florin.sarbu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Mar 2014 17:54:28 +0200
+Message-ID: <1393948468-19612-1-git-send-email-florin.sarbu@windriver.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Received: by 10.236.147.107 with SMTP id s71mr28128592yhj.45.1393943670407; 
-	Tue, 04 Mar 2014 06:34:30 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Tue, 4 Mar 2014 06:34:30 -0800 (PST)
-In-Reply-To: <CANwerB1mFM6ipZW0mS=4OpD0PbdxBTtLgidMLo2R8Pi_XdrS+Q@mail.gmail.com>
-References: <1393734165-15082-1-git-send-email-net147@gmail.com>
-	<1393734165-15082-2-git-send-email-net147@gmail.com>
-	<CAP9ODKry1B06oojCA15G26hxBNdt5JPbqEcUqZP4BSaEFL+rsg@mail.gmail.com>
-	<CANwerB1mFM6ipZW0mS=4OpD0PbdxBTtLgidMLo2R8Pi_XdrS+Q@mail.gmail.com>
-Date: Tue, 4 Mar 2014 11:34:30 -0300
-X-Google-Sender-Auth: v6wo9PC5ajbCBccqrbQ6sH2o4sg
-Message-ID: <CAP9ODKpaS0r9ZC7k3wN=oQ_4=j90DxR-LEwdBMCKrHDKmaWMHw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v4 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+X-Originating-IP: [128.224.170.197]
+Subject: [meta-qt5][dora][PATCH] Fix Project ERROR: Module v8 has no public API. make[1]:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2014 14:34:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 Mar 2014 15:54:39 -0000
+Content-Type: text/plain
 
-On Tue, Mar 4, 2014 at 12:43 AM, Jonathan Liu <net147@gmail.com> wrote:
-> On 4 March 2014 06:53, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> On Sun, Mar 2, 2014 at 1:22 AM, Jonathan Liu <net147@gmail.com> wrote:
->>> This adds the necessary target packages for development with all of the
->>> Qt 5 modules.
->>>
->>> Signed-off-by: Jonathan Liu <net147@gmail.com>
->>
->> Why are you adding qttools here? this is not need for toolchain use,
->> is it? It is need for host.
->
-> The QtTools module includes components that may be used by
-> applications - http://qt-project.org/doc/qt-5/qtmodules.html#qt-tools
+From: "florin.sarbu" <florin.sarbu@windriver.com>
 
-From the doc it is not clear to me how it will be used in the target,
-it seems something used in host.
+Cherry-picked from:
+https://github.com/kvahlman/qtwayland/commit/b455f5acaec811b70ae3eb896c08a634909cb9d1
 
-Could you help me to understand your reasoning for it?
+Signed-off-by: Florin Sarbu <florin.sarbu@windriver.com>
+---
+ .../fix.missing.v8.public.api.patch                | 30 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwayland.inc                       |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
 
+diff --git a/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch b/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
+new file mode 100644
+index 0000000..6bbbaa1
+--- /dev/null
++++ b/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
+@@ -0,0 +1,30 @@
++From b455f5acaec811b70ae3eb896c08a634909cb9d1 Mon Sep 17 00:00:00 2001
++From: Carsten Munk <carsten.munk@jollamobile.com>
++Date: Wed, 17 Jul 2013 07:28:04 +0000
++Subject: [PATCH] Fix Project ERROR: Module v8 has no public API. make[1]: ***
++ [sub-qml-compositor-make_first] Error 3
++
++Cherry-picked from:
++https://github.com/kvahlman/qtwayland/commit/b455f5acaec811b70ae3eb896c08a634909cb9d1
++
++Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
++---
++ qtwayland/examples/qml-compositor/qml-compositor.pro | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/examples/qml-compositor/qml-compositor.pro b/examples/qml-compositor/qml-compositor.pro
++index 0bc0b02..e397002 100644
++--- a/examples/qml-compositor/qml-compositor.pro
+++++ b/examples/qml-compositor/qml-compositor.pro
++@@ -2,7 +2,7 @@ DEFINES += QT_COMPOSITOR_QUICK
++ 
++ LIBS += -L ../../lib
++ 
++-QT += quick qml v8
+++QT += quick qml
++ QT += quick-private
++ 
++ QT += compositor
++-- 
++1.8.4
++
+diff --git a/recipes-qt/qt5/qtwayland.inc b/recipes-qt/qt5/qtwayland.inc
+index 40dd803..2d5d6af 100644
+--- a/recipes-qt/qt5/qtwayland.inc
++++ b/recipes-qt/qt5/qtwayland.inc
+@@ -17,6 +17,7 @@ SRC_URI += " \
+     file://0001-xcbcommon-should-not-be-a-mandatory-dependency.patch \
+     file://0002-Temporarily-patching-this-out-as-Qt5.0.0-does-not-ha.patch \
+     file://0003-eglCreateImageKHR-requires-the-context-to-be-NULL.patch \
++    file://fix.missing.v8.public.api.patch \
+ "
+ 
+ QT_WAYLAND_CONFIG ?= "wayland-compositor"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.8.3.1
+
 
