@@ -1,36 +1,29 @@
-Return-Path: <ajlennon@dynamicdevices.co.uk>
-Received: from www.dynamicdevices.co.uk (www.dynamicdevices.co.uk
-	[89.200.136.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 03C9B6F387
+Return-Path: <Florin.Sarbu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1644E6028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Mar 2014 18:25:44 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by www.dynamicdevices.co.uk (Postfix) with ESMTP id 51C0F27E002;
-	Wed,  5 Mar 2014 18:25:45 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at lennoab2.miniserver.com
-Received: from www.dynamicdevices.co.uk ([127.0.0.1])
-	by localhost (www.dynamicdevices.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id BELn8_LNMx9t; Wed,  5 Mar 2014 18:25:44 +0000 (UTC)
-Received: from [127.0.0.1] (cpc32-live22-2-0-cust59.17-2.cable.virginm.net
-	[82.36.253.60])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by www.dynamicdevices.co.uk (Postfix) with ESMTPSA id ACB8F27E001;
-	Wed,  5 Mar 2014 18:25:44 +0000 (UTC)
-Message-ID: <53176C23.6020100@dynamicdevices.co.uk>
-Date: Wed, 05 Mar 2014 18:25:39 +0000
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+	Wed,  5 Mar 2014 18:36:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s25Ia8Dn005960
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 5 Mar 2014 10:36:08 -0800 (PST)
+Received: from localhost.localdomain (128.224.170.197) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 5 Mar 2014 10:36:07 -0800
+Message-ID: <53176E96.8050806@windriver.com>
+Date: Wed, 5 Mar 2014 20:36:06 +0200
+From: Florin Sarbu <florin.sarbu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-To: martin.jansa@gmail.com
-References: <cover.1394010806.git.ajlennon@dynamicdevices.co.uk>	<ce88733ef0143e96e323aff0ac34909d43eda4bf.1394010806.git.ajlennon@dynamicdevices.co.uk>	<20140305172026.GX26981@jama>
-	<53176169.9060501@dynamicdevices.co.uk>
-In-Reply-To: <53176169.9060501@dynamicdevices.co.uk>
-X-Enigmail-Version: 1.6
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] [PATCH 1/1] daq: Update from 2.0.1 to 2.0.2
+To: <openembedded-devel@lists.openembedded.org>
+References: <1393948468-19612-1-git-send-email-florin.sarbu@windriver.com>
+	<20140305182334.GB26981@jama>
+In-Reply-To: <20140305182334.GB26981@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5][dora][PATCH] Fix Project ERROR: Module v8 has no public API. make[1]:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,47 +37,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2014 18:25:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Mar 2014 18:36:08 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Sorry, I'm not following what you want me to do now. Send another commit 
+up for review, this time with
 
-On 05/03/2014 17:39, Alex J Lennon wrote:
-> On 05/03/2014 17:20, Martin Jansa wrote:
->> On Wed, Mar 05, 2014 at 03:49:13PM +0000, Alex J Lennon wrote:
->>> daq-2.0.1.tar.gz is missing from SRC_URI location. Presumably replaced with 2.02.
->> Sorry I haven't noticed it when replying on oe-core version, but can you
->> please remove 2.0.1 version in the same patch and sent with -M?
+7327781083aea593b4911b6da7105e4984e28c68
+
+cherry-pick'ed?
+
+
+
+On 03/05/2014 08:23 PM, Martin Jansa wrote:
+> On Tue, Mar 04, 2014 at 05:54:28PM +0200, Florin Sarbu wrote:
+>> From: "florin.sarbu" <florin.sarbu@windriver.com>
+> Cherry-pick 7327781083aea593b4911b6da7105e4984e28c68 from meta-qt5/master
+>
+> Your version is breaking recipes-qt/qt5/qtwayland_git.bb recipe I guess.
+>
+>> Cherry-picked from:
+>> https://github.com/kvahlman/qtwayland/commit/b455f5acaec811b70ae3eb896c08a634909cb9d1
 >>
->> Do you know if it fixes do_install issue when building on host with
->> dash? It's reported regularly in:
->> http://www.openembedded.org/wiki/Bitbake_World_Status
+>> Signed-off-by: Florin Sarbu <florin.sarbu@windriver.com>
+>> ---
+>>   .../fix.missing.v8.public.api.patch                | 30 ++++++++++++++++++++++
+>>   recipes-qt/qt5/qtwayland.inc                       |  1 +
+>>   2 files changed, 31 insertions(+)
+>>   create mode 100644 recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
 >>
->> Thanks!
-
-I had a look at building daq with dash enabled, I believe, and strangely
-enough daq_2.0.1 builds fine here for me  (?)
- 
-BB_VERSION        = "1.21.1"
-BUILD_SYS         = "i686-linux"
-NATIVELSBSTRING   = "Ubuntu-12.04"
-TARGET_SYS        = "i586-poky-linux"
-MACHINE           = "qemux86"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.5+snapshot-20140305"
-TUNE_FEATURES     = "m32 i586"
-TARGET_FPU        = ""
-meta
-meta-yocto        = "master:d6596f5e0446b6aa3ae845389965bb2852f17b65"
-meta-oe
-meta-networking   = "master:279ebafb9dfcc3bd5095f4880e16a2e9401e38f7"
-meta-fsl-arm      = "master:855918bbf2cad9d0f46304bbdaea7da71e9b2222"
-meta-fsl-arm-extra = "master:91b4ec6044e37246eeaf0dfb410bc8a542a949c7"
-meta-fsl-demos    = "master:e15e440305ba048cb2887ef89641534dedcf40f5"
-meta-mono         = "master:c1b1c95943b77003d0198d421e4dda970fa29069"
-meta-condeco      = "master:af571d367810f80e53f2aa1d74ad6e6a1d5ea6d1"
-meta-erlang       = "master:986fda4a4cd3ac521897206ba39fe4d9f42e50b9"
-
-BR, Alex
+>> diff --git a/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch b/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
+>> new file mode 100644
+>> index 0000000..6bbbaa1
+>> --- /dev/null
+>> +++ b/recipes-qt/qt5/qtwayland-5.1.0+git/fix.missing.v8.public.api.patch
+>> @@ -0,0 +1,30 @@
+>> +From b455f5acaec811b70ae3eb896c08a634909cb9d1 Mon Sep 17 00:00:00 2001
+>> +From: Carsten Munk <carsten.munk@jollamobile.com>
+>> +Date: Wed, 17 Jul 2013 07:28:04 +0000
+>> +Subject: [PATCH] Fix Project ERROR: Module v8 has no public API. make[1]: ***
+>> + [sub-qml-compositor-make_first] Error 3
+>> +
+>> +Cherry-picked from:
+>> +https://github.com/kvahlman/qtwayland/commit/b455f5acaec811b70ae3eb896c08a634909cb9d1
+>> +
+>> +Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
+>> +---
+>> + qtwayland/examples/qml-compositor/qml-compositor.pro | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/examples/qml-compositor/qml-compositor.pro b/examples/qml-compositor/qml-compositor.pro
+>> +index 0bc0b02..e397002 100644
+>> +--- a/examples/qml-compositor/qml-compositor.pro
+>> ++++ b/examples/qml-compositor/qml-compositor.pro
+>> +@@ -2,7 +2,7 @@ DEFINES += QT_COMPOSITOR_QUICK
+>> +
+>> + LIBS += -L ../../lib
+>> +
+>> +-QT += quick qml v8
+>> ++QT += quick qml
+>> + QT += quick-private
+>> +
+>> + QT += compositor
+>> +--
+>> +1.8.4
+>> +
+>> diff --git a/recipes-qt/qt5/qtwayland.inc b/recipes-qt/qt5/qtwayland.inc
+>> index 40dd803..2d5d6af 100644
+>> --- a/recipes-qt/qt5/qtwayland.inc
+>> +++ b/recipes-qt/qt5/qtwayland.inc
+>> @@ -17,6 +17,7 @@ SRC_URI += " \
+>>       file://0001-xcbcommon-should-not-be-a-mandatory-dependency.patch \
+>>       file://0002-Temporarily-patching-this-out-as-Qt5.0.0-does-not-ha.patch \
+>>       file://0003-eglCreateImageKHR-requires-the-context-to-be-NULL.patch \
+>> +    file://fix.missing.v8.public.api.patch \
+>>   "
+>>   
+>>   QT_WAYLAND_CONFIG ?= "wayland-compositor"
+>> -- 
+>> 1.8.3.1
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
