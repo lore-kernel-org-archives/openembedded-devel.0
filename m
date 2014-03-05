@@ -1,38 +1,38 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 461266028A
+Return-Path: <ajlennon@gmail.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EA7536ADA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Mar 2014 11:48:28 +0000 (UTC)
-Received: by mail-yh0-f42.google.com with SMTP id a41so810947yho.15
+	Wed,  5 Mar 2014 15:49:21 +0000 (UTC)
+Received: by mail-we0-f176.google.com with SMTP id x48so1405423wes.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Mar 2014 03:48:29 -0800 (PST)
+	Wed, 05 Mar 2014 07:49:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=oxp5eAHcBIZTpHYJYL5DF7L78y295jI5leMU8PrKCNY=;
-	b=xcW9IitS0bW6xB8vAjZMo/5hqTRM9SeWzRGZI15kc/n3SA2v9fvDmDbB9hofPU8NnS
-	4Xyt8Acd4W9p32zsEb7byoy7h9pAaA2ZIDCX8XSzDlJyWlp6aN6uGOzC/crCMAe1LCqh
-	MjQumuWsHYMqia3tcjv0c2chIHt5tZE0RYnGNDdG4+MwPdOzbxuuCe2qDmLAOB8VL/AB
-	slQddqzoogcMSG+qzoVBiNL+cTMUaX/B1D/exJeA6BDKSFREi/0OYrRGms6IKwweqoCO
-	ZzcjqqGku5NYUsoVmQAFiBcPA5AVjlorlzdLt80B1MEhlWD6RGdfErNBDVdMfzsfEVnI
-	n3hQ==
-MIME-Version: 1.0
-X-Received: by 10.236.128.111 with SMTP id e75mr6239752yhi.70.1394020109297;
-	Wed, 05 Mar 2014 03:48:29 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Wed, 5 Mar 2014 03:48:29 -0800 (PST)
-In-Reply-To: <20140304195147.GC22890@denix.org>
-References: <1393640395-9737-1-git-send-email-net147@gmail.com>
-	<1393640395-9737-2-git-send-email-net147@gmail.com>
-	<CAP9ODKoiySoue8v5eQ4=MtV9gWXaGkmXndH3MxAXOfjPu7DbVg@mail.gmail.com>
-	<20140304195147.GC22890@denix.org>
-Date: Wed, 5 Mar 2014 08:48:29 -0300
-X-Google-Sender-Auth: 6ohCauY8GI0QRajoDmBNv9oNE1Q
-Message-ID: <CAP9ODKqDUC=uecx+Zpi4h3OXscKy9hcAV69s6-0w=__Jy0fzKA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=7TUz6foJzg3XYkg61PGUosjThHznsw65vQiIHTz9tVs=;
+	b=Psp3ogdA8vVkBg9sBva9eAaQOrkvjy0zYlriYhRDdybpkJt45ISQ5SdKy5tSSLYvm+
+	dZ2hjN2iYUNOQm5F3X2hl3v8ziY/5g/HKFsSNu3js1IL1Eb22KpHG35H3dZ104YEeVnU
+	ZzR3Kle0fzlzEQfAvPkIvz2LomHVX4MaapvGLXMCe7giU5fcuiDXqWje3blThS1pUNvX
+	NggNsai8SBJetn7ntqQfjmGPex310wsYo+Hxoyir3VKi4MEbGc8Ywn1XMAIYDXiNAm4D
+	qp5OREEMECOt+C+FWwKsySUo1GOj/Mkj+oED+IXOct0nBU175S3kZWHU56I/cEyjX3Qb
+	31uA==
+X-Received: by 10.194.119.168 with SMTP id kv8mr1961434wjb.41.1394034561880;
+	Wed, 05 Mar 2014 07:49:21 -0800 (PST)
+Received: from localhost.localdomain
+	(cpc32-live22-2-0-cust59.17-2.cable.virginm.net. [82.36.253.60])
+	by mx.google.com with ESMTPSA id dd3sm1950002wjb.9.2014.03.05.07.49.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 05 Mar 2014 07:49:19 -0800 (PST)
+Sender: Alex Lennon <ajlennon@gmail.com>
+From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Mar 2014 15:49:13 +0000
+Message-Id: <ce88733ef0143e96e323aff0ac34909d43eda4bf.1394010806.git.ajlennon@dynamicdevices.co.uk>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1394010806.git.ajlennon@dynamicdevices.co.uk>
+References: <cover.1394010806.git.ajlennon@dynamicdevices.co.uk>
+Subject: [meta-oe] [PATCH 1/1] daq: Update from 2.0.1 to 2.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2014 11:48:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 Mar 2014 15:49:22 -0000
 
-On Tue, Mar 4, 2014 at 4:51 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Sat, Mar 01, 2014 at 05:34:22PM -0300, Otavio Salvador wrote:
->> On Fri, Feb 28, 2014 at 11:19 PM, Jonathan Liu <net147@gmail.com> wrote:
->>
->> > This adds the necessary target packages for development with all of the
->> > Qt 5 modules.
->> >
->> > Signed-off-by: Jonathan Liu <net147@gmail.com>
->> >
->>
->> I like it :)
->
-> I like the X11 conditional, but what about the rest? We need some way to
-> conditionally include things in the SDK...
+daq-2.0.1.tar.gz is missing from SRC_URI location. Presumably replaced with 2.02.
 
-I don't see a reasonable way for doing that, for now.
+Signed-off-by: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
+---
+ meta-oe/recipes-connectivity/daq/daq_2.0.2.bb |   16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
 
-My goal is to make the SDK more flexible and allow it to be dynamic,
-you can see a message I sent to OE-Core mailing list[1].
-
-1. http://article.gmane.org/gmane.comp.handhelds.openembedded.core/48084
-
-But I didn't get much feedback from this message.
-
+diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
+new file mode 100644
+index 0000000..2675e2a
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "The dump DAQ test the various inline mode features "
++HOMEPAGE = "http://www.snort.org"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
++
++PARALLEL_MAKE = ""
++
++DEPENDS = "libpcap libpcre "
++
++SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
++            file://disable-run-test-program-while-cross-compiling.patch "
++
++SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
++SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
++
++inherit autotools
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.7.9.5
+
 
