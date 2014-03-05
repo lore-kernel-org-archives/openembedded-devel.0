@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F3336BC9C
+Received: from mail-ea0-f171.google.com (mail-ea0-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B4CE6BFA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Mar 2014 18:06:08 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id t10so631943eei.33
+	Wed,  5 Mar 2014 18:08:09 +0000 (UTC)
+Received: by mail-ea0-f171.google.com with SMTP id n15so1213992ead.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Mar 2014 10:06:09 -0800 (PST)
+	Wed, 05 Mar 2014 10:08:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=XHWiqSJXQ9bleTPPj4S0k2MhWNS5WcKisUJhNtkMbh8=;
-	b=eaG2592OXY0bI/2CuFdmRe8OiiepdsElvIgZfX0X8qo06nXLCVB0ccMM+V4srQ9Two
-	9fJQpCAWs9n5EHIQCylCaRbbTdWCmWmowj1u7m+swdELO5+ULFgSO1a1c10P8F//Eyim
-	Gg5fMlwkkyxajfVpGqzcEzdXDMvDHwsGGm8MYhXz0JL7VImZ4prTPHaoXSR4QHo1pNOe
-	W4jKrlEnoOKUYfGshmsY7fH+CrropzyB9JHKuwvtXslF2wyalpQLXxCXj0G+n9XNyhN0
-	rdkaLdbMSm6Qo15j9LLC81KN74Mf/Yp9IXPrQU4i3ORK7syuRPIDm7n9FwNo1aTDEcrE
-	Ek1A==
-X-Received: by 10.14.47.133 with SMTP id t5mr4254098eeb.96.1394042769145;
-	Wed, 05 Mar 2014 10:06:09 -0800 (PST)
+	bh=kuJYCijpmDjeWoZhiau2f7D6eWQbsVqKfZ1wI4N4tAY=;
+	b=g1AWlsK1xeliVQZYrPRaFN+rNSacrP7RjgsNc+iscNGMh5oJ4uP62ky6d1ip4bSJUu
+	kp2AGq2No2a7O4dOmGc9OePpAPmzJVJ4gHJpjMnVLc6LmQoAWOJAwNaFcc0A736awzLH
+	BwF4FDrTlkOlwPEMMc0WYavGRkEVFQvgGxSnOu8DkodEAQyjxbUvO+Ti/yJUXTqgbip/
+	TBnO1bLfE9h0sF/LUNSm6pGB2R0DDH3WacK/ADA8YW4V8ziNbqnK3OmYEzbpzOQgfQlu
+	iiKfHDQ3+evl2I7cLLF3Fxiv4uiLlCh97psMYpct0k43evuVg9cuAcBfXbKMl9Ex3QRg
+	sJoQ==
+X-Received: by 10.14.176.195 with SMTP id b43mr4163951eem.99.1394042890529;
+	Wed, 05 Mar 2014 10:08:10 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	f45sm11833473eeg.5.2014.03.05.10.06.06
-	for <openembedded-devel@lists.openembedded.org>
+	46sm11833908ees.4.2014.03.05.10.08.08 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Mar 2014 10:06:07 -0800 (PST)
-Date: Wed, 5 Mar 2014 19:06:14 +0100
+	Wed, 05 Mar 2014 10:08:09 -0800 (PST)
+Date: Wed, 5 Mar 2014 19:08:16 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140305180614.GZ26981@jama>
-References: <1393471102-14702-1-git-send-email-net147@gmail.com>
+Message-ID: <20140305180816.GA26981@jama>
+References: <1393696487-30736-1-git-send-email-mike.looijmans@topic.nl>
 MIME-Version: 1.0
-In-Reply-To: <1393471102-14702-1-git-send-email-net147@gmail.com>
+In-Reply-To: <1393696487-30736-1-git-send-email-mike.looijmans@topic.nl>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH v2] xterm: split out resize into a separate package
+Cc: Mike Looijmans <milo-software@users.sourceforge.net>
+Subject: Re: [PATCH] musicbrainz: Build with B=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,52 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Mar 2014 18:06:09 -0000
-X-Groupsio-MsgNum: 48526
+X-List-Received-Date: Wed, 05 Mar 2014 18:08:10 -0000
+X-Groupsio-MsgNum: 48527
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="g2cxGlaq+3AsTAfB"
+	protocol="application/pgp-signature"; boundary="0R7t4+nAS57LSdzv"
 Content-Disposition: inline
 
---g2cxGlaq+3AsTAfB
+--0R7t4+nAS57LSdzv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 27, 2014 at 02:18:22PM +1100, Jonathan Liu wrote:
-> The resize program is useful on its own without xterm. For example, it
-> may be used to resize a serial console.
+On Sat, Mar 01, 2014 at 06:54:47PM +0100, mike.looijmans@topic.nl wrote:
+> From: Mike Looijmans <milo-software@users.sourceforge.net>
 >=20
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
+> This recipe doesn't work when B!=3DS, so force B=3D$S to fix the failure.
+>=20
+> Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
+
+What's the relation of this change to
+http://patchwork.openembedded.org/patch/67597/
+?
+
 > ---
->  meta-oe/recipes-graphics/xorg-app/xterm_293.bb | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+>  .../musicbrainz/libmusicbrainz_git.bb              |    3 +++
+>  1 file changed, 3 insertions(+)
 >=20
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_293.bb b/meta-oe/rec=
-ipes-graphics/xorg-app/xterm_293.bb
-> index 67853b9..61bf71e 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_293.bb
-> @@ -20,4 +20,13 @@ do_configure() {
->      oe_runconf
->  }
+> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
+z_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_gi=
+t.bb
+> index f6a8f53..4cc04b8 100644
+> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> @@ -37,3 +37,6 @@ do_configure_prepend() {
 > =20
-> -FILES_${PN} +=3D " /usr/lib/X11"
-> +PACKAGES =3D+ "${PN}-resize ${PN}-resize-dbg ${PN}-resize-doc"
-
-I don't remember the reason now, but IIRC there should be just one -dbg
-package per recipe (not sure about -doc), please check oe-core ML.
-
+>  EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR:PATH=3D${libdir} \
+>                   -DIMPORT_EXECUTABLES=3Dbuild-native/ImportExecutables.c=
+make"
 > +
-> +FILES_${PN} +=3D "${libdir}/X11"
-> +FILES_${PN}-resize +=3D "${bindir}/resize"
-> +FILES_${PN}-resize-dbg +=3D "${bindir}/.debug/resize"
-> +FILES_${PN}-resize-doc +=3D "${mandir}/man1/resize.1"
-> +
-> +RRECOMMENDS_${PN} +=3D "${PN}-resize"
-> +RRECOMMENDS_${PN}-dbg +=3D "${PN}-resize-dbg"
-> +RRECOMMENDS_${PN}-doc +=3D "${PN}-resize-doc"
+> +# out-of-tree building doesn't appear to work for this package.
+> +B =3D "${S}"
 > --=20
-> 1.9.0
+> 1.7.9.5
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -101,16 +98,16 @@ package per recipe (not sure about -doc), please check oe-core ML.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---g2cxGlaq+3AsTAfB
+--0R7t4+nAS57LSdzv
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMXZ5YACgkQN1Ujt2V2gBw8kgCgsfG7RJpxFYJOk9XB0MNG8LYv
-4Y0An1LJUMu+OiqBmj25Lf8/aXD3u4E8
-=aDbN
+iEYEARECAAYFAlMXaBAACgkQN1Ujt2V2gBxd1QCeKGibITToqt7sNLx54Kusd2re
+WCIAoJmwlro21Cz/BOrbYK12zZLii4wn
+=IMx5
 -----END PGP SIGNATURE-----
 
---g2cxGlaq+3AsTAfB--
+--0R7t4+nAS57LSdzv--
