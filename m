@@ -1,35 +1,21 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CC1F6F09E
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A1DF6EF83
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Mar 2014 22:04:35 +0000 (UTC)
-Received: by mail-pa0-f44.google.com with SMTP id bj1so149729pad.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Mar 2014 14:04:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=sl72E+wBB9Da+e/dXdGgPdcdXXumB3uf11N7AMOYZKc=;
-	b=S4VGcJ458/wyCWkk2Q0KrtXAWcvbKFqEkXHS+ZSORYkSpF/6LZ/OOWCglwnsYevG2a
-	JA5iPgWuSG3BDo+k9z33AK2xqbEYle1CXF3TA3VgQHV51NrNgZTKvaDLMjoghgR1rYqI
-	uOtknzMlw8FP9BGqMweg8n7YaBG95/HqRqBl094s9dIurhEC8vX4rG4MEVSMBMW4WFsT
-	7QBnUXOykoSVeUAeQWwaLSq4TPRJS+fUznFNLTYTwun3/Y4EQXBwyof700lmiJfev3Or
-	qshV/BeEXkPAUK3GRXSqKYtLqCs7xmYaK0KNMIbEMXMM7cj7uS+f+Sy4TvflTYioosv/
-	C0Bw==
-X-Received: by 10.68.134.198 with SMTP id pm6mr2287185pbb.9.1393970676188;
-	Tue, 04 Mar 2014 14:04:36 -0800 (PST)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id j3sm551256pbh.38.2014.03.04.14.04.33
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 04 Mar 2014 14:04:34 -0800 (PST)
-From: Jonathan Liu <net147@gmail.com>
+	Wed,  5 Mar 2014 00:04:05 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 04 Mar 2014 15:59:40 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,589,1389772800"; d="scan'208";a="494146798"
+Received: from garethcl-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.79])
+	by orsmga002.jf.intel.com with ESMTP; 04 Mar 2014 16:03:50 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Mar 2014 09:09:39 +1100
-Message-Id: <1393970979-2785-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 1.9.0
-Subject: [meta-qt5][PATCH v3] qtbase: prevent artifacts on raster windows using eglfs plugin
+Date: Wed,  5 Mar 2014 00:03:40 +0000
+Message-Id: <1393977821-27278-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-handheld][PATCH 1/2] zaurusd: sync recipe with OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,73 +29,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Mar 2014 22:04:35 -0000
+X-List-Received-Date: Wed, 05 Mar 2014 00:04:08 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+* Update to latest master for out-of-tree build fix
+* Drop new-make.patch (merged upstream)
+* Set SUMMARY instead of DESCRIPTION for one-line description
+* Properly indent SRC_URI
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- recipes-qt/qt5/qtbase.inc                          |  1 +
- .../qtbase/0016-eglfs-Fix-quad-coordinates.patch   | 39 ++++++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 recipes-qt/qt5/qtbase/0016-eglfs-Fix-quad-coordinates.patch
+ recipes-bsp/zaurusd/zaurusd/new-make.patch | 11 ---------
+ recipes-bsp/zaurusd/zaurusd_git.bb         | 36 ++++++++++++++----------------
+ 2 files changed, 17 insertions(+), 30 deletions(-)
+ delete mode 100644 recipes-bsp/zaurusd/zaurusd/new-make.patch
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index f1a10bb..e5d98df 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -20,6 +20,7 @@ SRC_URI += "\
-     file://0013-QOpenGLPaintDevice-sub-area-support.patch \
-     file://0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch \
-     file://0015-Fix-linuxfb-argument-mmsize-parsing.patch \
-+    file://0016-eglfs-Fix-quad-coordinates.patch \
- "
+diff --git a/recipes-bsp/zaurusd/zaurusd/new-make.patch b/recipes-bsp/zaurusd/zaurusd/new-make.patch
+deleted file mode 100644
+index dcc83fe..0000000
+--- a/recipes-bsp/zaurusd/zaurusd/new-make.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+-Index: zaurusd/Makefile.am
+-===================================================================
+---- zaurusd.orig/Makefile.am
+-+++ zaurusd/Makefile.am
+-@@ -4,5 +4,4 @@ SUBDIRS = apps config scripts
+- MAINTAINERCLEANFILES = aclocal.m4 compile config.guess config.sub configure depcomp install-sh ltmain.sh Makefile.in missing
+- 
+- snapshot:
+--        $(MAKE) dist distdir=$(PACKAGE)-snap`date +"%Y%m%d"`
+--
+-+	$(MAKE) dist distdir=$(PACKAGE)-snap`date +"%Y%m%d"`
+diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
+index 821dbec..468b8f2 100644
+--- a/recipes-bsp/zaurusd/zaurusd_git.bb
++++ b/recipes-bsp/zaurusd/zaurusd_git.bb
+@@ -1,30 +1,28 @@
+-DESCRIPTION = "Daemon to handle device specific features."
++SUMMARY = "Daemon to handle device-specific features"
+ SECTION = "base"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "tslib"
  
- DEPENDS += "qtbase-native"
-diff --git a/recipes-qt/qt5/qtbase/0016-eglfs-Fix-quad-coordinates.patch b/recipes-qt/qt5/qtbase/0016-eglfs-Fix-quad-coordinates.patch
-new file mode 100644
-index 0000000..92785e4
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0016-eglfs-Fix-quad-coordinates.patch
-@@ -0,0 +1,39 @@
-+From 84756d94c73885803ad8044099ab47c0c49b5076 Mon Sep 17 00:00:00 2001
-+From: Laszlo Agocs <laszlo.agocs@digia.com>
-+Date: Thu, 23 Jan 2014 11:45:22 +0100
-+Subject: [PATCH] eglfs: Fix quad coordinates
-+
-+Prevent artifacts on raster windows by properly mapping
-+the coordinates to [-1,1].
-+
-+Upstream-Status: Backport
-+
-+Task-number: QTBUG-36370
-+Change-Id: I95d0d03952f597ef4ce6a950c6533a3af2df964a
-+Reviewed-by: Andy Nichols <andy.nichols@digia.com>
-+Signed-off-by: Jonathan Liu <net147@gmail.com>
-+---
-+ src/plugins/platforms/eglfs/qeglfscompositor.cpp | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/plugins/platforms/eglfs/qeglfscompositor.cpp b/src/plugins/platforms/eglfs/qeglfscompositor.cpp
-+index 845bb5b..1efc4f7 100644
-+--- a/src/plugins/platforms/eglfs/qeglfscompositor.cpp
-++++ b/src/plugins/platforms/eglfs/qeglfscompositor.cpp
-+@@ -153,10 +153,11 @@ void QEglFSCompositor::render(QEglFSWindow *window, uint texture, bool raster)
-+     QPoint tl = r.topLeft();
-+     QPoint br = r.bottomRight();
-+ 
-++    // Map to [-1,1]
-+     GLfloat x1 = (tl.x() / sr.width()) * 2 - 1;
-+-    GLfloat x2 = (br.x() / sr.width()) * 2 - 1;
-+     GLfloat y1 = ((sr.height() - tl.y()) / sr.height()) * 2 - 1;
-+-    GLfloat y2 = ((sr.height() - br.y()) / sr.height()) * 2 - 1;
-++    GLfloat x2 = ((br.x() + 1) / sr.width()) * 2 - 1;
-++    GLfloat y2 = ((sr.height() - (br.y() + 1)) / sr.height()) * 2 - 1;
-+ 
-+     if (!raster)
-+         qSwap(y1, y2);
-+-- 
-+1.7.1
-+
+ PE = "1"
+-PV = "0.0+gitr${SRCPV}"
+-PR = "r26"
++PV = "0.1+git${SRCPV}"
+ 
+-SRCREV = "82b30c7865f007fff81372c3cdc71b2ff6843ccc"
+-SRC_URI = "git://git.yoctoproject.org/zaurusd;protocol=git \
++SRCREV = "85d941d87f0c41b196766a173feaafffa6de2dc2"
++SRC_URI = "git://git.yoctoproject.org/${BPN} \
+            file://zaurus-hinge.in \
+-	   file://add-poodle.patch \
+-	   file://alsa-cxx00-default.state.patch \
+-	   file://alsa-6000x-default.state.patch \
+-	   file://disable-alsa-handling.patch \
+-	   file://avoid-rotated-server.patch \
+-	   file://new-make.patch \
+-	   file://scripts_pidof.patch \
+-	   file://zaurus-hinge.matchbox-portrait \
+-	   file://zaurus-hinge.matchbox-landscape \
+-	   file://zaurus-hinge.bl-on \
+-	   file://zaurus-hinge.bl-off \
+-	   file://01-check-toggle-landscape \
+-	   file://01-check-toggle-portait \
+-       file://use-ts-symlink-instead-of-hardcoding.diff "
++           file://add-poodle.patch \
++           file://alsa-cxx00-default.state.patch \
++           file://alsa-6000x-default.state.patch \
++           file://disable-alsa-handling.patch \
++           file://avoid-rotated-server.patch \
++           file://scripts_pidof.patch \
++           file://zaurus-hinge.matchbox-portrait \
++           file://zaurus-hinge.matchbox-landscape \
++           file://zaurus-hinge.bl-on \
++           file://zaurus-hinge.bl-off \
++           file://01-check-toggle-landscape \
++           file://01-check-toggle-portait \
++           file://use-ts-symlink-instead-of-hardcoding.diff "
+ 
+ 
+ S = "${WORKDIR}/git"
 -- 
-1.9.0
+1.8.5.3
 
 
