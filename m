@@ -1,38 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 00B156F5C8
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E32996F4EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Mar 2014 16:48:21 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id e53so1228024eek.30
+	Thu,  6 Mar 2014 17:04:45 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so1252812eei.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Mar 2014 08:48:22 -0800 (PST)
+	Thu, 06 Mar 2014 09:04:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=MmuX+7WdQeewPLqQlO4mXTDryB+fsgpvfi2N7IGZWoY=;
-	b=zq2ves3HTcHTseIba32XTGL/s6CFZF0K9gYYcC3obrqfTUpT1wuhpSinxdKTOl6qso
-	NtYQiwKNOvbop/8lsyogcJhFOWF/ggAO758L2Peng/WwvfaGHNno3lLTbJu64Mq71paC
-	klsOMyGX6tZbdWjVbqhGNZJ6S05wWvb0foTd74CfqeN1nqeGKzV2VhGRyGdTlVhioxM9
-	PHKqfX4WojIXG/l8QQS2N4zld60UpcwHrlQenIb+BghFFpFJddJmad5H0Hseh5BUq8YY
-	qf3chBR+LQ4yppnQdi7xuDf5OVzN9eRLmeAm86Lwj6BtF/Lkqtix+dK/jK+w6mShGU9E
-	Jyjg==
-X-Received: by 10.14.111.201 with SMTP id w49mr10869328eeg.92.1394124502271;
-	Thu, 06 Mar 2014 08:48:22 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=gHWWy2wW6tksKsEnWEHYrf0rp3gNaNHYXLe98iJ3QSg=;
+	b=NaI8xtj/BrFHwAOKpORvHv8nzs57A4uXJClWyNQqC2cClP34Itw/HDFrhkzXx12TqH
+	YumH9R5hhzPv1cd+VScxE/H1Z3prcewajtZ5FT7cN6wayfdbzGkBXt1qVNTg6lEm5n1f
+	2caMhGtcQLfQFpsyEAjTMU91OVArQCdKOVoWXwQ95F3hYagwGdM1jIvW/znFHwByWhw4
+	Ipdor46gWpxJHeYZsfESMsn6oMVnUYy9659OHdHOWgEdfA/5ko/MxNDDhUS/j9PTXYta
+	1BNhGiuz0oNORPsrnFiE374JMf/URMApkLbkVbwdWUuO7x59xZHkpwU/6sjdy+hc8ROb
+	gvbw==
+X-Received: by 10.14.179.73 with SMTP id g49mr1593519eem.116.1394125484906;
+	Thu, 06 Mar 2014 09:04:44 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	q44sm23634394eez.1.2014.03.06.08.48.21
-	for <openembedded-devel@lists.openembedded.org>
+	f45sm23808347eeg.5.2014.03.06.09.04.43 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Mar 2014 08:48:21 -0800 (PST)
+	Thu, 06 Mar 2014 09:04:44 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Mar 2014 17:48:16 +0100
-Message-Id: <6e1be9dcba413946941867875d66b69f48a6a13d.1394124356.git.Martin.Jansa@gmail.com>
+Date: Thu,  6 Mar 2014 18:04:50 +0100
+Message-Id: <1394125490-2945-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <cover.1394124356.git.Martin.Jansa@gmail.com>
-References: <cover.1394124356.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1394124356.git.Martin.Jansa@gmail.com>
-References: <cover.1394124356.git.Martin.Jansa@gmail.com>
-Subject: [meta-efl][WIP][PATCH 6/6] eve: restrict for armv7a, because upstream dropped support in webkit-efl
+Subject: [meta-oe][PATCH] bash-completion: remove allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2014 16:48:22 -0000
+X-List-Received-Date: Thu, 06 Mar 2014 17:04:47 -0000
+
+* it has runtime dependency on TUNE_PKGARCH bash, so it cannot be allarch
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/e17/eve_svn.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/e17/eve_svn.bb b/meta-efl/recipes-efl/e17/eve_svn.bb
-index 3cc68cb..5845c2d 100644
---- a/meta-efl/recipes-efl/e17/eve_svn.bb
-+++ b/meta-efl/recipes-efl/e17/eve_svn.bb
-@@ -5,6 +5,12 @@ DEPENDS = "evas ecore edje elementary webkit-efl eldbus"
- PV = "0.3.0.0+svnr${SRCPV}"
- SRCREV = "84579"
+diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+index ad7fd28..155fe90 100644
+--- a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
++++ b/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "e5a490a4301dfb228361bdca2ffca597958e47dd6056005ef9393a5852
  
-+# webkit-efl isn't available for < armv7a
-+COMPATIBLE_MACHINE = "(-)"
-+COMPATIBLE_MACHINE_i586 = "(.*)"
-+COMPATIBLE_MACHINE_x86-64 = "(.*)"
-+COMPATIBLE_MACHINE_armv7a = "(.*)"
-+
- inherit e gettext
- SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
- S = "${WORKDIR}/${SRCNAME}"
+ PARALLEL_MAKE = ""
+ 
+-inherit allarch autotools
++inherit autotools
+ 
+ do_install_append() {
+ 	install -d ${D}${sysconfdir}/bash_completion.d/
 -- 
 1.9.0
 
