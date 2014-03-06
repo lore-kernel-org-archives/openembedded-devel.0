@@ -1,36 +1,38 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id C8B4C6EEEE
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BBC16F588
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Mar 2014 12:06:53 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 34D5F2232069
+	Thu,  6 Mar 2014 14:00:02 +0000 (UTC)
+Received: by mail-vc0-f180.google.com with SMTP id ks9so2632413vcb.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Mar 2014 13:06:52 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7310C2232068
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Mar 2014 13:06:51 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Mar 2014 13:06:51 +0100 (CET)
-Date: Thu, 6 Mar 2014 13:06:45 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140306120645.GB4680@mail.itconsulting-heinold.de>
-References: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
+	Thu, 06 Mar 2014 06:00:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=2XimYAFMJXChEJNgDTF5skI4iQ4iV299cTqonciJKhQ=;
+	b=diXolB8vX2n5b7OAwY5TZo9C6qSyOGRBRVl2V18CzRJQQ4lpxRpS1jNBRbkfBvl4l/
+	xIfhWXdVWslnNt3fSD/8hybDK7kun6agexgsKZ1eVvTmDcEHBBmxTSay9uFwX08hskrI
+	Hggull6sZ/vBFcvh31GMBsag8S3nR9ZVGn3F/qAeue9LcQ3c8sDvMIVKGbovbDcxwUXm
+	Xgrx6AUXQ1CPnjX6crwTFNF8z1eHgx1BWmWlo+jtJTxWfpxXlX9WVa7pi7v/zdO/U89T
+	mOZowOkCgZ3d6rail3znR+Hy2mbbUoCGgVCeb1/pKkekjhUQizLEukzZvQ9VKyNTdApN
+	ArlA==
 MIME-Version: 1.0
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Meta java under poky-dora-10.0.1
+X-Received: by 10.58.95.161 with SMTP id dl1mr5409384veb.21.1394114403578;
+	Thu, 06 Mar 2014 06:00:03 -0800 (PST)
+Received: by 10.52.35.170 with HTTP; Thu, 6 Mar 2014 06:00:03 -0800 (PST)
+In-Reply-To: <CALbNGRSk-Cbv8nyEhUANsJ+ib2U7xfTDqTYogVoohFb=17WB5Q@mail.gmail.com>
+References: <1393348614-15618-1-git-send-email-schnitzeltony@googlemail.com>
+	<1393348614-15618-2-git-send-email-schnitzeltony@googlemail.com>
+	<20140225172747.GR26981@jama>
+	<CALbNGRSk-Cbv8nyEhUANsJ+ib2U7xfTDqTYogVoohFb=17WB5Q@mail.gmail.com>
+Date: Thu, 6 Mar 2014 15:00:03 +0100
+Message-ID: <CALbNGRQWbBfSLrCHespVnOvywa+ah+dBhy2A3Mz9XCKvj6WY_w@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-qt5][jansa/qt5-5.2.1] qtbase.inc: set virtual/mesa and virtual/egl as dependency in PACKAGECONFIG[kms]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,29 +46,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Mar 2014 12:06:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 Mar 2014 14:00:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 06, 2014 at 11:00:56AM +0000, MONDON Daniel wrote:
-> Hi,
-> 
-> I take poky-dora-10.0.1 and bitbake -k core-image-sato (for beagleboard).
-> 
-> I want to have openjdk7 : I take git meta-java.
-> 
-> But I have the bitbake error : 
-> ERROR: Nothing PROVIDES 'giflib' (but /home/toto/poky-dora-10.0.1/meta-java/recipes-core/openjdk/openjdk-7_25b30-2.3.12.bb DEPENDS on or otherwise requires it)
-> ERROR: Required build target 'openjdk-7-jre' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['openjdk-7-jre', 'giflib']
-> 
-> Did I make an error (ie : don't take the right meta-java)?
-> Or is it missing something ?
-> 
-> Thanks
-> Daniel.
+On Tue, Feb 25, 2014 at 8:06 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Tue, Feb 25, 2014 at 6:27 PM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+>> On Tue, Feb 25, 2014 at 06:16:54PM +0100, Andreas M=C3=BCller wrote:
+>>> * there is no kms around
+>>> * mesa is the default implementation for (lib)gbm (see config.tests/qpa=
+/kms)
+>>> * in configure we find:
+>>>   | if [ "$CFG_KMS" =3D "yes" ]; then
+>>>   |     if [ "$CFG_EGL" =3D "no" ]; then
+>>>   |         echo "The KMS plugin requires EGL support and cannot be bui=
+lt"
+>>>   |         exit 101
+>>>   |     fi
+>>>   | fi
+>>>
+>>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>>> ---
+>>>  recipes-qt/qt5/qtbase.inc | 2 +-
+>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+>>> index 116c86f..6c6ec5a 100644
+>>> --- a/recipes-qt/qt5/qtbase.inc
+>>> +++ b/recipes-qt/qt5/qtbase.inc
+>>> @@ -108,7 +108,7 @@ PACKAGECONFIG[gtkstyle] =3D "-gtkstyle,-no-gtkstyle=
+,gtk+"
+>>>  PACKAGECONFIG[directfb] =3D "-directfb,-no-directfb,directfb"
+>>>  PACKAGECONFIG[linuxfb] =3D "-linuxfb,-no-linuxfb"
+>>>  PACKAGECONFIG[mitshm] =3D "-mitshm,-no-mitshm,mitshm"
+>>> -PACKAGECONFIG[kms] =3D "-kms,-no-kms,kms"
+>>> +PACKAGECONFIG[kms] =3D "-kms,-no-kms,virtual/mesa virtual/egl"
+>>
+>> Maybe we should introduce some virtual/gbm later, but I'm ok with
+>> virtual/mesa until we have it.
+> virtual/mesa has different meanings gbm / wayland-egl - it took me a
+> while to get mesa-free...
+>>
+>> Also there is no virtual/mesa in oe-core/dylan, but I guess that there
+>> is minimum user with dylan who also want kms.
+>>
+ping for master?
 
-The README for meta-java clearly states which layers are needed, giflib is only on meta-openembedded.
-
-Bye Henning
+Andreas
 
