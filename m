@@ -1,49 +1,38 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 52FD26F766
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id AB7A06E8A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 15:08:06 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id 4AA6B358F8CA
+	Fri,  7 Mar 2014 17:10:05 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2AD702232069
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 10:10:41 -0500 (EST)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 4VzhckXz7He4
+	Fri,  7 Mar 2014 18:10:04 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E07B52232068
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 10:10:40 -0500 (EST)
-Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
-	[209.85.220.172])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id CAB91358F8BF
+	Fri,  7 Mar 2014 18:10:02 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 10:10:40 -0500 (EST)
-Received: by mail-vc0-f172.google.com with SMTP id la4so837044vcb.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Mar 2014 07:08:05 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	bh=HF6TJGbgGyvsN/uwxDge5is1IMGm0d3PCb/JYY//jYw=;
-	b=XaGBJDpo+AjoNfWg4kbX5MCh8DhaGHZmqiT32q4Qhovb9bQ3e1fL2dcxLj4nMlWmi2
-	wx+9GXy9anzhhV0QEu4t043D3FzpELvBh5RW06nGPDs6HMyeenx6U4f62JXAop0Xsb6+
-	lPKEwwNtFxD0dYmyZfdPmyYZkErECBxZtD5ha4xrNVeY54IlmdqpxWxsWQOB/ksbHZgr
-	4x/3L8ENfEfbu8NFzuN8tqafHul1KB4+iSavOyJHdwzk++0osG5TllnhG/UH2/vsKioY
-	G2Z4dZ2qqeSqHiAyIkyeJYWjMTt4D2cOQJp2+oybHbyn/SP+FrpAmGcRIimQMT4HtxIw
-	laVQ==
-MIME-Version: 1.0
-X-Received: by 10.220.192.71 with SMTP id dp7mr64928vcb.45.1394204885703; Fri,
-	07 Mar 2014 07:08:05 -0800 (PST)
-Received: by 10.58.95.36 with HTTP; Fri, 7 Mar 2014 07:08:05 -0800 (PST)
-In-Reply-To: <CAOd_LFyAkzdc4T-FjWh20-iNd7omPEwdhvJecKapUUo3pC0XaA@mail.gmail.com>
-References: <CAP71WjxZnBfp3agkiw+yGbLWE2p2gzgXGSQ+SBZi9zu+7-cpEQ@mail.gmail.com>
-	<CAOd_LFyAkzdc4T-FjWh20-iNd7omPEwdhvJecKapUUo3pC0XaA@mail.gmail.com>
-Date: Fri, 7 Mar 2014 10:08:05 -0500
-Message-ID: <CACgAsMdwRRbraDhMCQ17JMDq_dC2AN7q=oXqvCWR96VDidziZA@mail.gmail.com>
-From: =?ISO-8859-1?Q?Kevyn=2DAlexandre_Par=E9?= <kapare@rogue-research.com>
+	Fri,  7 Mar 2014 18:10:02 +0100 (CET)
+Date: Fri, 7 Mar 2014 18:09:56 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: using OE efficiently for development
+Message-ID: <20140307170947.GB25806@mail.itconsulting-heinold.de>
+References: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
+	<20140306120645.GB4680@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AD4C2@SEXCHANGE0100.lpg.priv>
+MIME-Version: 1.0
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA060AD4C2@SEXCHANGE0100.lpg.priv>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Meta java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 15:08:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 Mar 2014 17:10:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Nicolas,
+On Fri, Mar 07, 2014 at 02:28:15PM +0000, MONDON Daniel wrote:
+> The README for meta-java clearly states which layers are needed, giflib is only on meta-openembedded.
+> 
+> Bye Henning
+> -----------------------------------------------------------------
+> Hi,
+> 
+> Then ... I do
+> 
+> I am under virtualized Ubuntu 12.04 server.
+> I compile for MACHINE = "qemuarm".
+> 
+> WARNING: /home/lpg/Test/oe-core/build/tmp-eglibc/sstate-control/manifest-qemuarm-cacao-initial.populate_sysroot not found
+> WARNING: /home/lpg/Test/oe-core/build/tmp-eglibc/sstate-control/manifest-qemuarm-libecj-bootstrap.populate_sysroot not found
+> WARNING: /home/lpg/Test/oe-core/build/tmp-eglibc/sstate-control/manifest-qemuarm-ecj-initial.populate_sysroot not found
+> WARNING: /home/lpg/Test/oe-core/build/tmp-eglibc/sstate-control/manifest-qemuarm-classpath-initial.populate_sysroot not found
+> WARNING: /home/lpg/Test/oe-core/build/tmp-eglibc/sstate-control/manifest-qemuarm-jikes-initial.populate_sysroot not found
+> 
+> 
+> I've got this error:
+> ERROR: Task 637 (virtual:native:/home/lpg/Test/oe-core/meta-java/recipes-core/jamvm/jamvm_git.bb, do_configure) failed with exit code '1'
+> 
+> 
+> The log is attached ...
+> 
+> 
+> Thanks
+> Daniel.
+> 
 
-On Thu, Mar 6, 2014 at 1:32 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
+Hi,
 
-<snip>
+okay seems I have to add libffi native to the depends of jamvm and "inherit pkgconfig".
+For now try to bitbake libffi-navtive before your bitbake command.
 
->
-> Here is another example using repo: https://github.com/kraj/angstrom-manifest
->
-> The OE build system is complex, but is very flexible and works very
-> well.  The flexibility of fetching sources in different ways is nice,
-> as different parts of the system really need different tools (are they
-> under heavy development, etc) vs forcing everything to be in git, etc.
->
-
-Have seen kind of the same pattern as angstrom:
-https://github.com/gumstix/Gumstix-YoctoProject-Repo
-
--KA
+Bye Henning
 
