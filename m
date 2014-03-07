@@ -1,40 +1,28 @@
-Return-Path: <ajlennon@dynamicdevices.co.uk>
-Received: from www.dynamicdevices.co.uk (www.dynamicdevices.co.uk
-	[89.200.136.37])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D0496F572
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 10:08:32 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by www.dynamicdevices.co.uk (Postfix) with ESMTP id 816AC862DB;
-	Fri,  7 Mar 2014 10:08:32 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at lennoab2.miniserver.com
-Received: from www.dynamicdevices.co.uk ([127.0.0.1])
-	by localhost (www.dynamicdevices.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id Tjy1a6xNvPGs; Fri,  7 Mar 2014 10:08:29 +0000 (UTC)
-Received: from [127.0.0.1] (cpc32-live22-2-0-cust59.17-2.cable.virginm.net
-	[82.36.253.60])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by www.dynamicdevices.co.uk (Postfix) with ESMTPSA id ACC4C8610D;
-	Fri,  7 Mar 2014 10:08:29 +0000 (UTC)
-Message-ID: <53199A96.80901@dynamicdevices.co.uk>
-Date: Fri, 07 Mar 2014 10:08:22 +0000
-From: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-MIME-Version: 1.0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C5366F667;
+	Fri,  7 Mar 2014 10:09:02 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by azsmga101.ch.intel.com with ESMTP; 07 Mar 2014 02:09:03 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,606,1389772800"; d="scan'208";a="487828681"
+Received: from lbhoopat-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.98])
+	by fmsmga001.fm.intel.com with ESMTP; 07 Mar 2014 02:09:01 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-References: <cover.1394010806.git.ajlennon@dynamicdevices.co.uk>
-	<ce88733ef0143e96e323aff0ac34909d43eda4bf.1394010806.git.ajlennon@dynamicdevices.co.uk>
-	<20140305172026.GX26981@jama>
-	<53176169.9060501@dynamicdevices.co.uk>
-	<20140305193027.GD26981@jama> <20140306183804.GI26981@jama>
-In-Reply-To: <20140306183804.GI26981@jama>
-X-Enigmail-Version: 1.6
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] [PATCH 1/1] daq: Update from 2.0.1 to 2.0.2
+Date: Fri, 07 Mar 2014 10:09 +0000
+Message-ID: <3158053.US3HkBfSAc@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.3 (Linux/3.13.5-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
+In-Reply-To: <20140306192122.GJ26981@jama>
+References: <1394125490-2945-1-git-send-email-Martin.Jansa@gmail.com>
+	<2403049.xWs40izQYL@peggleto-mobl5.ger.corp.intel.com>
+	<20140306192122.GJ26981@jama>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] bash-completion: remove allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,119 +36,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 10:08:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Mar 2014 10:09:04 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+On Thursday 06 March 2014 20:21:22 Martin Jansa wrote:
+> On Thu, Mar 06, 2014 at 05:59:29PM +0000, Paul Eggleton wrote:
+> > On Thursday 06 March 2014 18:04:50 Martin Jansa wrote:
+> > > * it has runtime dependency on TUNE_PKGARCH bash, so it cannot be
+> > > allarch
+> > 
+> > As we've already discussed this is not universally true. There are other
+> > ways to solve this.
+> 
+> Like making it special case like packagegroups? That is still making me
+> headaches when some library (for some reason) included in packagegroup
+> is renamed thanks to debian.bbclass and packagegroup isn't rebuilt, so
+> it breaks do_rootfs..
 
-On 06/03/2014 18:38, Martin Jansa wrote:
-> On Wed, Mar 05, 2014 at 08:30:27PM +0100, Martin Jansa wrote:
->> On Wed, Mar 05, 2014 at 05:39:53PM +0000, Alex J Lennon wrote:
->>> On 05/03/2014 17:20, Martin Jansa wrote:
->>>> On Wed, Mar 05, 2014 at 03:49:13PM +0000, Alex J Lennon wrote:
->>>>> daq-2.0.1.tar.gz is missing from SRC_URI location. Presumably replaced with 2.02.
->>>> Sorry I haven't noticed it when replying on oe-core version, but can you
->>>> please remove 2.0.1 version in the same patch and sent with -M?
->>>>
->>>> Do you know if it fixes do_install issue when building on host with
->>>> dash? It's reported regularly in:
->>>> http://www.openembedded.org/wiki/Bitbake_World_Status
->>>>
->>>> Thanks!
->>> Apologies. I thought I had the removal of 2.0.1 in there. Clearly I
->>> shouldn't be doing this
->>> type of thing before the first coffee of the day!
->> :)
->>
->> I've added 2.0.1 removal when cherry-picking this to master-next.
->>
->>> I'll take a look at the issue you mention before I resubmit
->> Thanks, I've started new world build, please watch status e-mails to see
->> if it happens there as well again, it's possible that dash isn't the
->> (only) reason for the failure..
-> Yes, it does fail with 2.0.2, you can see whole log here:
-> http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20140306_000713.log/bitbake.log
+Did you report this? FWIW it's the first I recall hearing of the problem; 
+perhaps I just missed it.
 
-I wonder why it fails on your build system and not for me. The only
-difference that jumps out at me is that you are running an x64 host
+> I would rather build bash-completion only once per architecture than
+> rebuilding it as "allarch" every time I'm building for MACHINE with
+> different TUNE_PKGARCH.
 
-I don't suppose you fancy sending over an archive of your complete
-daq/2.0.2-r0/* build folder including the temp dir, and I'll try to do
-some comparisons here with mine.
+As I said last time, I'm not arguing that rebuilding allarch recipes on 
+machine change is preferable - obviously it isn't. On the other hand, what 
+you're doing with this kind of change is telling the build system that the 
+recipe needs to be built differently depending on what the target architecture 
+is, which is *not* true; this is only being done to work around the build 
+system making an assumption that the rebuild needs to happen. Fix the 
+assumption and the problem is fixed, properly. 
 
-Cheers, Alex
+If we need to make changes to the core or BitBake to make it easier to handle 
+this properly, by all means let's do that; but if we go down the road of 
+applying the workaround to every recipe where we hit this issue (and as we 
+have seen it's not just one or two recipes) we will never get around to fixing 
+the underlying problem.
 
->>> Cheers, Alex
->>>
->>>>> Signed-off-by: Alex J Lennon <ajlennon@dynamicdevices.co.uk>
->>>>> ---
->>>>>  meta-oe/recipes-connectivity/daq/daq_2.0.2.bb |   16 ++++++++++++++++
->>>>>  1 file changed, 16 insertions(+)
->>>>>  create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
->>>>>
->>>>> diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
->>>>> new file mode 100644
->>>>> index 0000000..2675e2a
->>>>> --- /dev/null
->>>>> +++ b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
->>>>> @@ -0,0 +1,16 @@
->>>>> +SUMMARY = "The dump DAQ test the various inline mode features "
->>>>> +HOMEPAGE = "http://www.snort.org"
->>>>> +LICENSE = "GPLv2"
->>>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
->>>>> +
->>>>> +PARALLEL_MAKE = ""
->>>>> +
->>>>> +DEPENDS = "libpcap libpcre "
->>>>> +
->>>>> +SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
->>>>> +            file://disable-run-test-program-while-cross-compiling.patch "
->>>>> +
->>>>> +SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
->>>>> +SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
->>>>> +
->>>>> +inherit autotools
->>>>> -- 
->>>>> 1.7.9.5
->>>>>
->>>>> _______________________________________________
->>>>> Openembedded-devel mailing list
->>>>> Openembedded-devel@lists.openembedded.org
->>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>    
->> -- 
->> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
->
+Cheers,
+Paul
 
 -- 
 
-Dynamic Devices Ltd <http://www.dynamicdevices.co.uk/>
-
-Alex J Lennon / Director
-1 Queensway, Liverpool L22 4RA
-
-mobile: +44 (0)7956 668178
-
-Linkedin <http://www.linkedin.com/in/alexjlennon> Skype
-<skype:alexjlennon?add>
-
-This e-mail message may contain confidential or legally privileged
-information and is intended only for the use of the intended
-recipient(s). Any unauthorized disclosure, dissemination, distribution,
-copying or the taking of any action in reliance on the information
-herein is prohibited. E-mails are not secure and cannot be guaranteed to
-be error free as they can be intercepted, amended, or contain viruses.
-Anyone who communicates with us by e-mail is deemed to have accepted
-these risks. Company Name is not responsible for errors or omissions in
-this message and denies any responsibility for any damage arising from
-the use of e-mail. Any opinion and other statement contained in this
-message and any attachment are solely those of the author and do not
-necessarily represent those of the company.
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
