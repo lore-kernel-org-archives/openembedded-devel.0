@@ -1,37 +1,33 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 510C66F59F
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id D30B36F60E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Mar 2014 01:03:21 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id u57so4030429wes.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Mar 2014 17:03:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=R/K76NIvv1D/XJtOI1SK4Nfc/HQkf9JYK88JZu6c7rY=;
-	b=Wyr2meMCnYll3itcdbsSXM9hU1K4iI+N2suE7axDMBtKkPEsllXqhxWMP9SsOlwuXA
-	XBlY30rGejXXkJ9czS5qJwajFp8PdRGGKLOj+/RG792aons7HgFyEpm1o44FbVNa3PL1
-	qKR+jKyqU443NIM9F4RPqk6YGl8+yQrofz2faXwcCacoXFx8sP0oZeYtUtoath+3zGfT
-	uAwVoLviup1FZvFedD+dVRIZ/nyI2JsYmPRcwV7BhjxObEyrIx3kr2d33UrLKLfP8bLw
-	t8ddL5KokuuKRBk0oqgI9KNRKLnl3j/AxjNEbfQ2AlRa8bIYMloxwtsNnDCyoUva+y8E
-	Hfkw==
-X-Received: by 10.194.24.35 with SMTP id r3mr14664296wjf.68.1394154202391;
-	Thu, 06 Mar 2014 17:03:22 -0800 (PST)
-Received: from desktop.betafive.co.uk
-	(cpc66027-shep11-2-0-cust140.8-3.cable.virginmedia.com.
-	[81.110.75.141])
-	by mx.google.com with ESMTPSA id h9sm1002019wjz.16.2014.03.06.17.03.20
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 06 Mar 2014 17:03:21 -0800 (PST)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Mar 2014 01:02:42 +0000
-Message-Id: <1394154162-4510-1-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 1.9.0
-Subject: [meta-networking][PATCH] ipsec-tools: Don't link against libfl
+	Fri,  7 Mar 2014 08:38:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,606,1389740400"; d="scan'208";a="42293342"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 07 Mar 2014 09:38:48 +0100
+Received: from COSNADEXC11.usr.ingenico.loc (10.31.4.211) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Fri, 7 Mar 2014 09:38:48 +0100
+Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.243]) by
+	COSNADEXC11.usr.ingenico.loc ([10.31.4.211]) with mapi id
+	14.02.0328.009; Fri, 7 Mar 2014 09:38:48 +0100
+From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] using OE efficiently for development
+Thread-Index: AQHPOWp5zWucTPx/g0K05vC0t3p1lZrVTYaw
+Date: Fri, 7 Mar 2014 08:38:46 +0000
+Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B57548141@COSNADEXC13.usr.ingenico.loc>
+References: <CAP71WjxZnBfp3agkiw+yGbLWE2p2gzgXGSQ+SBZi9zu+7-cpEQ@mail.gmail.com>
+	<CAOd_LFyAkzdc4T-FjWh20-iNd7omPEwdhvJecKapUUo3pC0XaA@mail.gmail.com>
+In-Reply-To: <CAOd_LFyAkzdc4T-FjWh20-iNd7omPEwdhvJecKapUUo3pC0XaA@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.31.16.119]
+MIME-Version: 1.0
+Subject: Re: using OE efficiently for development
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,133 +41,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 01:03:25 -0000
+X-List-Received-Date: Fri, 07 Mar 2014 08:38:51 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-We can remove all references to yywrap by adding "%option noyywrap" statements
-to each flex source file which doesn't override yywrap. After this, we no longer
-need to link against libfl and so no longer get errors about undefined
-references to yylex.
+Hi there,
 
-Also change the dependency on flex to flex-native as we no longer need libfl
-compiled for the target - the lexer is now self-contained.
+I like it! I have just a small remark:
+conf/bblayers.conf should be patched according to .gitmodules file.
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
----
- .../0002-Don-t-link-against-libfl.patch            | 86 ++++++++++++++++++++++
- .../ipsec-tools/ipsec-tools_0.8.1.bb               |  3 +-
- 2 files changed, 88 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
+Regards,
+Matt
 
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
-new file mode 100644
-index 0000000..674331d
---- /dev/null
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0002-Don-t-link-against-libfl.patch
-@@ -0,0 +1,86 @@
-+From e48b9097dce7bc2bfbb9e9c542124d3b5cebab39 Mon Sep 17 00:00:00 2001
-+From: Paul Barker <paul@paulbarker.me.uk>
-+Date: Wed, 5 Mar 2014 13:39:14 +0000
-+Subject: [PATCH] Don't link against libfl
-+
-+We can remove all references to yywrap by adding "%option noyywrap" statements
-+to each flex source file that doesn't override yywrap. After this, we no longer
-+need to link against libfl and so no longer get errors about undefined
-+references to yylex.
-+
-+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-+Upstream-status: Pending
-+---
-+ src/libipsec/Makefile.am | 1 -
-+ src/racoon/Makefile.am   | 2 +-
-+ src/racoon/cftoken.l     | 2 ++
-+ src/setkey/Makefile.am   | 1 -
-+ src/setkey/token.l       | 2 ++
-+ 5 files changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/libipsec/Makefile.am b/src/libipsec/Makefile.am
-+index 6a4e3b3..df1e106 100644
-+--- a/src/libipsec/Makefile.am
-++++ b/src/libipsec/Makefile.am
-+@@ -26,7 +26,6 @@ libipsec_la_SOURCES = \
-+ # version is current:revision:age.
-+ # See: http://www.gnu.org/manual/libtool-1.4.2/html_chapter/libtool_6.html#SEC32
-+ libipsec_la_LDFLAGS = -version-info 0:1:0
-+-libipsec_la_LIBADD = $(LEXLIB)
-+ 
-+ noinst_HEADERS = ipsec_strerror.h
-+ 
-+diff --git a/src/racoon/Makefile.am b/src/racoon/Makefile.am
-+index dbaded9..0662957 100644
-+--- a/src/racoon/Makefile.am
-++++ b/src/racoon/Makefile.am
-+@@ -38,7 +38,7 @@ racoon_SOURCES = \
-+ 	cftoken.l cfparse.y prsa_tok.l prsa_par.y 
-+ EXTRA_racoon_SOURCES = isakmp_xauth.c isakmp_cfg.c isakmp_unity.c throttle.c \
-+ 	isakmp_frag.c nattraversal.c security.c $(MISSING_ALGOS)
-+-racoon_LDADD = $(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(LEXLIB) \
-++racoon_LDADD = $(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) \
-+ 	 $(SECCTX_OBJS) vmbuf.o sockmisc.o misc.o ../libipsec/libipsec.la
-+ racoon_DEPENDENCIES = \
-+ 	$(CRYPTOBJS) $(HYBRID_OBJS) $(NATT_OBJS) $(FRAG_OBJS) $(SECCTX_OBJS) \
-+diff --git a/src/racoon/cftoken.l b/src/racoon/cftoken.l
-+index 490242c..1701922 100644
-+--- a/src/racoon/cftoken.l
-++++ b/src/racoon/cftoken.l
-+@@ -106,6 +106,8 @@ static int incstackp = 0;
-+ static int yy_first_time = 1;
-+ %}
-+ 
-++%option noyywrap
-++
-+ /* common seciton */
-+ nl		\n
-+ ws		[ \t]+
-+diff --git a/src/setkey/Makefile.am b/src/setkey/Makefile.am
-+index 746c1f1..389e6cf 100644
-+--- a/src/setkey/Makefile.am
-++++ b/src/setkey/Makefile.am
-+@@ -13,7 +13,6 @@ setkey_SOURCES = \
-+ 
-+ setkey_LDFLAGS = ../libipsec/libipsec.la
-+ setkey_DEPENDENCIES = ../libipsec/libipsec.la
-+-setkey_LDADD = $(LEXLIB)
-+ 
-+ noinst_HEADERS = vchar.h extern.h
-+ man8_MANS = setkey.8
-+diff --git a/src/setkey/token.l b/src/setkey/token.l
-+index ad3d843..eb23b76 100644
-+--- a/src/setkey/token.l
-++++ b/src/setkey/token.l
-+@@ -88,6 +88,8 @@
-+ #endif
-+ %}
-+ 
-++%option noyywrap
-++
-+ /* common section */
-+ nl		\n
-+ ws		[ \t]+
-+-- 
-+1.9.0
-+
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-index e931745..fcf329c 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-@@ -5,10 +5,11 @@ SECTION = "console/network"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
- 
--DEPENDS = "virtual/kernel openssl readline flex bison-native"
-+DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
- 
- SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
-            file://0001-Fix-warning-with-gcc-4.8.patch \
-+           file://0002-Don-t-link-against-libfl.patch \
-           "
- SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
- SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
--- 
-1.9.0
 
+-----Message d'origine-----
+De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] De la part de Cliff Brake
+Envoy=E9=A0: jeudi 6 mars 2014 19:32
+=C0=A0: openembedded-devel
+Objet=A0: Re: [oe] using OE efficiently for development
+
+Hi Nicolas,
+
+This is the template I use for most projects:
+
+https://github.com/cbrake/oe-build
+
+Custom parts of the system that are under heavy development (kernel, u-boot=
+, apps) go in an externalsrc directory.
+
+I use git submodules to manage everything, but repo would work as well.
+
+One of my goals was to have everything in separate directories for easy gre=
+pping:
+
+sources
+downloads
+build/tmp
+externalsrc
+...
+
+Here is another example using repo: https://github.com/kraj/angstrom-manife=
+st
+
+The OE build system is complex, but is very flexible and works very well.  =
+The flexibility of fetching sources in different ways is nice, as different=
+ parts of the system really need different tools (are they under heavy deve=
+lopment, etc) vs forcing everything to be in git, etc.
+
+Note sure if this helps, but may generate ideas.
+
+Cliff
+
+On Thu, Jan 16, 2014 at 6:25 PM, Nicolas Dechesne <nicolas.dechesne@linaro.=
+org> wrote:
+> hi there,
+>
+> i understand the subject is a bit weird.. i am seeking for advice or=20
+> best practices. how would you recommend to deploy OE in a large team=20
+> of devs where it is the main 'build' engine for the entire Linux=20
+> system which is *being developed*. e.g. the developers are the=20
+> 'upstream' developer, but the product/system can only be built with=20
+> OE.
+>
+> e.g. an OE build does the right thing from an 'integration'
+> perspective (fetch from SCM, apply patches, cleanup workspace, ...)=20
+> but are there any recommendations or good practices to use OE in a=20
+> 'development' workflow?
+>
+> I am familiar with externalsrc of course, but for a very large system=20
+> with 100+ recipes this isn't very practical. for the project I am=20
+> referring the current/legacy workflow is:
+>
+> 1- checkout all source code required to build the entire system (repo,=20
+> gclient, ...)
+> 2- for any development item hack anywhere in any component
+> 3- use a top level 'build script'
+> 4- iterate until code ready, and push to SCM
+>
+> Basically, that looks like Android development workflow to illustrate eve=
+n more.
+>
+> Now, how do we plug OE in such a workflow? any experience with=20
+> concrete product development would be very much appreciated.
+>
+> My initial idea (not implemented, just an idea) was to create a conf=20
+> file (or a layer) that has the externalsrc definition for all the=20
+> recipes in the layers under development (typically all the proprietary=20
+> system bits). the idea is to create a workspace such as:
+>
+> myproduct
+> |- oe
+> |- upstream
+>
+> and in 'oe' folder put all the recipes, and in 'upstream' all the=20
+> source code under development (git clone, svn checkout, ...). the=20
+> entire workspace can be checkout with repo/gclient or anything else.
+>
+> the externsrc variables can point to project in 'upstream' folder such=20
+> that switching from 'integration' mode to 'developer' mode would=20
+> require to include the conf file.
+>
+> i am thinking that such a 'developer' pattern must be so common, that=20
+> they should be a good solution for it already. of course i am assuming=20
+> that doing (large) development in WORKDIR is not very practical, and=20
+> that would 'force' a large team of developers to become very familiar=20
+> with the inner working of OE (task, clean, rebuild, ..).
+>
+> any good story to share about how OE is used in such 'developer'
+> workflow? if we compare to the Android workflow (no troll please!) an=20
+> OE workflow is more 'difficult' to grasp, i hope you see what i mean.
+>
+> More generally, i also curious to discuss other typical developer use=20
+> case, such as developing upstream using 'feature branches', ...
+>
+> thanks
+>
+> nicolas
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
