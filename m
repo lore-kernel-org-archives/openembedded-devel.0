@@ -1,41 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f169.google.com (mail-ea0-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D43AD6F57A;
-	Fri,  7 Mar 2014 18:28:49 +0000 (UTC)
-Received: by mail-ea0-f169.google.com with SMTP id h14so2531014eaj.28
-	for <multiple recipients>; Fri, 07 Mar 2014 10:28:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=h6No4Vnowd8hMjVfGYRZGpbUOkHYDilP5RbyXkUxIJU=;
-	b=jb532QrEtPdEh0B17pz60GEpgAK+D9baWqGpyASyR8WR5uF2tA7JhbyN2nRgUsNtEz
-	OnzuEdG4IH9bwT2FNRLky+v6xVeU19Xtt8wkjzHLf3XV2v7nrq/UzCRXL3bjS3571VLs
-	bgo8g8922dlb7lCWlydY6A3NrGvpKycmiUUW+8ESHIE95Nf8ALU4YY78iMHKdTV495tt
-	CiD977B3OXt4HCpvT0Y5gB2UualEnygTFL5ZNtJDUNlYO1jYoEWU0xYdC83b/qoregMq
-	2AnRJpoWSwpjON4ROgeANwwu1SaLxl1adytR+fReQF52PBg0mWmAgd61Qwft9HY0kqeB
-	m9mg==
-X-Received: by 10.14.216.3 with SMTP id f3mr20696845eep.66.1394216930096;
-	Fri, 07 Mar 2014 10:28:50 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	i1sm9605809eeo.16.2014.03.07.10.28.48 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Mar 2014 10:28:48 -0800 (PST)
-Date: Fri, 7 Mar 2014 19:28:58 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20140307182858.GL26981@jama>
-References: <1394125490-2945-1-git-send-email-Martin.Jansa@gmail.com>
-	<2403049.xWs40izQYL@peggleto-mobl5.ger.corp.intel.com>
-	<20140306192122.GJ26981@jama>
-	<3158053.US3HkBfSAc@peggleto-mobl5.ger.corp.intel.com>
+Return-Path: <Lauren.Post@freescale.com>
+Received: from ch1outboundpool.messaging.microsoft.com
+	(ch1ehsobe001.messaging.microsoft.com [216.32.181.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 04A4C6F62C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Mar 2014 21:37:57 +0000 (UTC)
+Received: from mail23-ch1-R.bigfish.com (10.43.68.242) by
+	CH1EHSOBE020.bigfish.com (10.43.70.77) with Microsoft SMTP Server id
+	14.1.225.22; Fri, 7 Mar 2014 21:37:58 +0000
+Received: from mail23-ch1 (localhost [127.0.0.1])	by mail23-ch1-R.bigfish.com
+	(Postfix) with ESMTP id 322103E03B1	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Mar 2014 21:37:58 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zze0eahzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch1fc6hzz8275ch1de098h8275bh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h1155h)
+Received: from mail23-ch1 (localhost.localdomain [127.0.0.1]) by mail23-ch1
+	(MessageSwitch) id 1394228275879119_27409;
+	Fri,  7 Mar 2014 21:37:55 +0000 (UTC)
+Received: from CH1EHSMHS003.bigfish.com (snatpool1.int.messaging.microsoft.com
+	[10.43.68.240])	by mail23-ch1.bigfish.com (Postfix) with ESMTP id
+	C6D8120009B;	Fri,  7 Mar 2014 21:37:55 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CH1EHSMHS003.bigfish.com
+	(10.43.70.3) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Fri, 7 Mar 2014 21:37:55 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Fri, 7 Mar 2014 21:37:54 +0000
+Received: from neo.am.freescale.net (neo.am.freescale.net [10.81.16.89])	by
+	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s27LbrwH002056;
+	Fri, 7 Mar 2014 14:37:54 -0700
+From: Lauren Post <lauren.post@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 7 Mar 2014 15:26:12 -0600
+Message-ID: <1394227575-27897-4-git-send-email-lauren.post@freescale.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1394227575-27897-1-git-send-email-lauren.post@freescale.com>
+References: <lauren.post@freescale.com>
+	<1394227575-27897-1-git-send-email-lauren.post@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <3158053.US3HkBfSAc@peggleto-mobl5.ger.corp.intel.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] bash-completion: remove allarch
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
+Subject: [meta-oe][PATCH 4/7] glcompbench: Create 2012.08 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,88 +56,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Mar 2014 18:28:51 -0000
-X-Groupsio-MsgNum: 48561
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TvNyW/zmhQDwPqM/"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 Mar 2014 21:37:58 -0000
+Content-Type: text/plain
 
---TvNyW/zmhQDwPqM/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+glcompbench is a benchmark tool for GL(ES)2 based
+compositing operations
 
-On Fri, Mar 07, 2014 at 10:09:00AM +0000, Paul Eggleton wrote:
-> On Thursday 06 March 2014 20:21:22 Martin Jansa wrote:
-> > On Thu, Mar 06, 2014 at 05:59:29PM +0000, Paul Eggleton wrote:
-> > > On Thursday 06 March 2014 18:04:50 Martin Jansa wrote:
-> > > > * it has runtime dependency on TUNE_PKGARCH bash, so it cannot be
-> > > > allarch
-> > >=20
-> > > As we've already discussed this is not universally true. There are ot=
-her
-> > > ways to solve this.
-> >=20
-> > Like making it special case like packagegroups? That is still making me
-> > headaches when some library (for some reason) included in packagegroup
-> > is renamed thanks to debian.bbclass and packagegroup isn't rebuilt, so
-> > it breaks do_rootfs..
->=20
-> Did you report this? FWIW it's the first I recall hearing of the problem;=
-=20
-> perhaps I just missed it.
+Signed-off-by: Lauren Post <lauren.post@freescale.com>
+---
+ .../glcompbench/glbench-compile-fix.patch          |   35 ++++++++++++++++++++
+ .../glcompbench/glcompbench_2012.08.bb             |   14 ++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
 
-I've discussed this with RP on IRC, but haven't filled the bugzilla
-ticket, my fault, will do that later.
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+new file mode 100644
+index 0000000..374a6cf
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+@@ -0,0 +1,35 @@
++From c4bc44c3abf69f26e4c2b7684f4da4670a51f993 Mon Sep 17 00:00:00 2001
++From: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++Date: Tue, 5 Nov 2013 11:03:04 -0600
++Subject: [PATCH] to make compilable
++
++Upstream Status: Inappropriate [workaround]
++
++Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++---
++ src/composite-test-simple-blur.cc | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/composite-test-simple-blur.cc b/src/composite-test-simple-blur.cc
++index 170ad64..d7f77cf 100644
++--- a/src/composite-test-simple-blur.cc
+++++ b/src/composite-test-simple-blur.cc
++@@ -347,6 +347,7 @@ CompositeTestSimpleBlur::CompositeTestSimpleBlur() :
++ 
++ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++ {
+++#if 0
++     for (BlurWindowMapType::iterator winIt = priv_->windowMap.begin();
++          winIt != priv_->windowMap.end();
++          winIt++)
++@@ -354,6 +355,7 @@ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++         RenderWindowBlur* ro = winIt->second;
++         delete ro;
++     }
+++#endif
++     delete priv_;
++ }
++ 
++-- 
++1.8.1.2
++
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+new file mode 100644
+index 0000000..1adcc02
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "GL Compositing Benchmark"
++DESCRIPTION = "A benchmark for GL(ES)2 based compositing operations"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++
++DEPENDS += "virtual/egl virtual/libgl virtual/libgal-x11 virtual/egl virtual/libgles1 virtual/libgles2 "
++
++inherit pkgconfig waf
++
++SRC_URI = "https://launchpad.net/glcompbench/trunk/2012.08/+download/glcompbench-2012.08.tar.gz \
++           file://glbench-compile-fix.patch"
++
++SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
++SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
+-- 
+1.7.9.5
 
-> > I would rather build bash-completion only once per architecture than
-> > rebuilding it as "allarch" every time I'm building for MACHINE with
-> > different TUNE_PKGARCH.
->=20
-> As I said last time, I'm not arguing that rebuilding allarch recipes on=
-=20
-> machine change is preferable - obviously it isn't. On the other hand, wha=
-t=20
-> you're doing with this kind of change is telling the build system that th=
-e=20
-> recipe needs to be built differently depending on what the target archite=
-cture=20
-> is, which is *not* true; this is only being done to work around the build=
-=20
-> system making an assumption that the rebuild needs to happen. Fix the=20
-> assumption and the problem is fixed, properly.=20
->=20
-> If we need to make changes to the core or BitBake to make it easier to ha=
-ndle=20
-> this properly, by all means let's do that; but if we go down the road of=
-=20
-> applying the workaround to every recipe where we hit this issue (and as w=
-e=20
-> have seen it's not just one or two recipes) we will never get around to f=
-ixing=20
-> the underlying problem.
 
-What I'm trying to do is to prevent rebuilding them until the
-underlaying problem is fixed (which can be tracked in bugzilla with 2
-very simple recipes as reproducer).
 
-I don't want this to show in every build and as "known-possitive" in
-every sstate-diff-machine.sh call. It's less pain to just rebuild them
-once per TUNE_PKGARCH even when they could be allarch.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---TvNyW/zmhQDwPqM/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlMaD+oACgkQN1Ujt2V2gByTOQCfbzY8CHQyCI8deYKq8alDc5Nu
-JSAAnis4VsachSckxXwfrzToUBrrIFr5
-=GDbh
------END PGP SIGNATURE-----
-
---TvNyW/zmhQDwPqM/--
