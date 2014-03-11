@@ -1,35 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BEE66F7B2
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 222CE6F790
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 15:52:24 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id x10so8662273pdj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 08:52:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=RFjZWfCDh+dFvaZnlNAzxIgK9MiVloLmp2s4dcO932Q=;
-	b=i8G4MYxFDVNRCUb+yCz8KPP+N0ET/ZNjzyz9l5iUM1HgXvD+3o5JLL1KvuSheChYFR
-	E4Jg71vbkcZFJCGKqCMTwVx7juM4yJMJJp3Ol3uMo6an5Xbrpn4UbZ8dwUJXNgJrELCX
-	iGHhVR+/ZtRuBEBtyvXBBv+JoMvwBMIgdkLCxIwqLglH+76UC0/sksJSjuugtX7eOk31
-	Sp8zJ9PVGoH85FsMWyGw+bKV5rJGFILNTmtICezmgEOF8seJ3yRSmRjstqvoTNtDnxW2
-	7Qsf7QHta4On9biDIClYKI/sEk0zBBLlbwkDUBXQi1INrZzfq9pPvqvnsg6Pkh30fa/O
-	NXQQ==
-X-Received: by 10.66.136.131 with SMTP id qa3mr47769142pab.77.1394553143596;
-	Tue, 11 Mar 2014 08:52:23 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id
-	ac5sm76191423pbc.37.2014.03.11.08.52.22 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Mar 2014 08:52:22 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Mar 2014 08:53:52 -0700
-Message-Id: <1394553232-5922-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [dora][meta-qt5][PATCH] qtlocation, qtsystems: Fix QT_MODULE_BRANCH
+	Tue, 11 Mar 2014 16:18:07 +0000 (UTC)
+Received: from [216.82.254.211:35806] by server-4.bemta-7.messagelabs.com id
+	AD/91-05395-F373F135; Tue, 11 Mar 2014 16:18:07 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-12.tower-201.messagelabs.com!1394554651!8855832!4
+X-Originating-IP: [66.77.174.13]
+X-StarScan-Received: 
+X-StarScan-Version: 6.9.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 24902 invoked from network); 11 Mar 2014 16:18:06 -0000
+Received: from mail.mx3.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
+	by server-12.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
+	11 Mar 2014 16:18:06 -0000
+Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx1.digi.com
+	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 11 Mar 2014 11:17:38 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by
+	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
+	8.3.342.0; Tue, 11 Mar 2014 11:17:49 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 11 Mar 2014 17:17:48 +0100
+Message-ID: <531F372B.8010907@digi.com>
+Date: Tue, 11 Mar 2014 17:17:47 +0100
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1386874857-8596-1-git-send-email-joe@deserted.net>
+In-Reply-To: <1386874857-8596-1-git-send-email-joe@deserted.net>
+Subject: Re: [meta-networking][PATCH] vsftpd: install volatiles file based on init system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 15:52:26 -0000
+X-List-Received-Date: Tue, 11 Mar 2014 16:18:10 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+Hi all,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes-qt/qt5/qtlocation_git.bb |    2 --
- recipes-qt/qt5/qtsystems_git.bb  |    2 +-
- 2 files changed, 1 insertion(+), 3 deletions(-)
+Was this patch finally merged?
 
-diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
-index ddf3bcb..66032b6 100644
---- a/recipes-qt/qt5/qtlocation_git.bb
-+++ b/recipes-qt/qt5/qtlocation_git.bb
-@@ -7,6 +7,4 @@ PV = "4.999+5.0.0-beta1+git${SRCPV}"
- # drop when bumping SRCREV
- PR = "r1"
- 
--QT_MODULE_BRANCH = "master"
+At the moment building *vsftpd* in a sysvinit-based system is *broken*. 
+The failure is:
+
+ERROR: QA Issue: vsftpd: Files/directories were installed but not shipped
+   /run
+   /run/vsftpd
+   /run/vsftpd/empty
+ERROR: QA run found fatal errors. Please consider fixing them.
+
+In such sysvinit systems, '/run' usually is a TMPFS and 
+'/run/vsftpd/empty' is created at *runtime* via volatiles bootscript.
+
+Creating the directory in the recipe at build time leads to the above 
+mentioned error.
+
 -
- SRCREV = "f28408346243cf090326f4738fd838219c21e00f"
-diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index b1126f5..5456dfb 100644
---- a/recipes-qt/qt5/qtsystems_git.bb
-+++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -7,6 +7,6 @@ PV = "4.999+5.0.0-beta1+git${SRCPV}"
- # drop when bumping SRCREV
- PR = "r1"
- 
--QT_MODULE_BRANCH = "master"
-+QT_MODULE_BRANCH = "dev"
- 
- SRCREV = "701442ad6358b9f27978aafae82074124468f88c"
--- 
-1.7.10.4
-
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
 
