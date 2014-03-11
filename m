@@ -1,25 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 07E7D6F7C6
+Return-Path: <Xudong.Zhu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A8E96E85F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 09:48:48 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 11 Mar 2014 02:44:20 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,629,1389772800"; d="scan'208";a="470091081"
-Received: from sleopold-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.85])
-	by orsmga001.jf.intel.com with ESMTP; 11 Mar 2014 02:48:48 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Mar 2014 09:48:37 +0000
-Message-Id: <f1bd0f2a59ee40750581ad95488394e4c653596b.1394531274.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.8.5.3
-In-Reply-To: <cover.1394531274.git.paul.eggleton@linux.intel.com>
-References: <cover.1394531274.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1394531274.git.paul.eggleton@linux.intel.com>
-References: <cover.1394531274.git.paul.eggleton@linux.intel.com>
-Subject: [meta-webserver][PATCH 2/2] phpmyadmin: update to 4.1.9
+	Tue, 11 Mar 2014 09:58:17 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s2B9wIAf014774
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Mar 2014 02:58:18 -0700 (PDT)
+Received: from localhost.localdomain (128.224.162.236) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.169.1; Tue, 11 Mar 2014 02:58:17 -0700
+From: "Xudong.zhu" <xudong.zhu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 11 Mar 2014 17:58:10 +0800
+Message-ID: <1394531890-8816-1-git-send-email-xudong.zhu@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH] ndisc6: allow the package can be empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 09:48:48 -0000
+X-List-Received-Date: Tue, 11 Mar 2014 09:58:20 -0000
+Content-Type: text/plain
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+FILES_${PN} is set to null in original .bb file, this would cause
+ndisc6 main package is missing in fullpkglist.query, then one build
+error will happen.
+
+"
+Error: ndisc6 not found in the base feeds(ti_am335x armv7at2-vfp-neon
+| armv7a-vfp-neon armv7at2-vfp armv7a-vfp armv7a armv6t-vfp armv6-vfp
+| armv5te-vfp armv5e-vfp armv5te armv5e armv5t-vfp armv5- vfp armv5t
+| armv5 armv4t armv4 arm noarch any all).
+"
+
+To fix this, need to set ALLOW_EMPTY_${PN} = "1".
+
+Signed-off-by: Xudong.zhu <xudong.zhu@windriver.com>
 ---
- .../phpmyadmin/{phpmyadmin_4.1.8.bb => phpmyadmin_4.1.9.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.1.8.bb => phpmyadmin_4.1.9.bb} (87%)
+ .../recipes-support/ndisc6/ndisc6_1.0.2.bb         |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.8.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.9.bb
-similarity index 87%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.8.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.9.bb
-index 388f188..cd15889 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.8.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.1.9.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
- SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-            file://apache.conf"
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
+index a958e37..8cf5d37 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
+@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "6acec8a0cb9efa3ac98456f46c3016aeec0598b0c7557c95242b5228ad
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
--SRC_URI[md5sum] = "14fd2f6d2f92a8dfb3954513da1c1687"
--SRC_URI[sha256sum] = "857f133911eddcec16824f3ecc7a68f93288ab2a2f1943bfce3b06b58b625cd6"
-+SRC_URI[md5sum] = "420c836228ceab8df5557c92e56021d7"
-+SRC_URI[sha256sum] = "efc5bd669324cd094cc1912afee9c91fd052fe9f226f767f7ec7b31a1796ce2c"
- 
- S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
- 
+ inherit autotools gettext
+-
++ALLOW_EMPTY_${PN} = "1"
+ # Split into seperate packages since we normal don't want them all
+ # The main package is left empty and therefore not created.
+ PACKAGES += "${PN}-ndisc6 ${PN}-tcpspray6 ${PN}-rdisc6 \
 -- 
-1.8.5.3
+1.7.4.1
 
 
