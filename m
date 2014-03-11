@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ea0-f179.google.com (mail-ea0-f179.google.com
 	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id D3CA76F783
+	by mail.openembedded.org (Postfix) with ESMTP id A9BE26F7BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 14:22:18 +0000 (UTC)
-Received: by mail-ea0-f179.google.com with SMTP id q10so4379487ead.38
+	Tue, 11 Mar 2014 14:26:26 +0000 (UTC)
+Received: by mail-ea0-f179.google.com with SMTP id q10so4381904ead.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 07:22:18 -0700 (PDT)
+	Tue, 11 Mar 2014 07:26:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=YhwihOoRGJEvptO1ytMeDhDD1a6InAfQno3r4eqWe+k=;
-	b=CFuRZKoUvjVzeHTbQjDu7SqCrghaHzANjjr6YMNCrAfO/6R9rEw5pWaYO40gAaQDf4
-	PSyd9Ue4CoLq1OFEJq+7NE1gSULMPv2suHnYsuJduiQ036v7XMhgIHWxhNSGSSKuqw+f
-	3OnN9pSzHy98mP+Q07Ohc/vTCav3dfA447X6kUqYW5VqDbMG1DJOEuQbo8poJywDCAmU
-	COl2noHFXNKjukCwtQteVFGJ1Oj+myjpYS8NaAFVkrW11jhb0wbuD2eaX7Kx8EVfuJRt
-	wonky+oxmdIEL1paTY86hjAQcCrTuGltZ/0NASEtI8QBKzzeHTL6du0et6lH792c4e9h
-	ummg==
-X-Received: by 10.14.216.3 with SMTP id f3mr4029912eep.66.1394547738684;
-	Tue, 11 Mar 2014 07:22:18 -0700 (PDT)
+	bh=rzxDME+UrWdbKkHh7oHHW7ghXnLoo7GHJEpDvbNwbHo=;
+	b=B6cePuwAKoMJvqk48nvS0Asc8PXUsHfmpMQw8bv4Sg++WJ6R53keDUpC6hZnZR9TYs
+	ZfdaDKB020kftJm67siIeeTDx1KeagJEIej74rD/omut3kijSu4AX9CYm5tMclisxBKE
+	enn1/SqU4lyiZhT0b/o6HNq/i8qw23gGoy8IJzZm0A6z+pXdx7Wn8MEhTmwWiGUxdz7U
+	XL9GyGgZoX893ZXUq46UhkzKc9b4UPBEj65yMhvfTXqUR63mqH1xpr5a1NsoJOgKjFwO
+	REscgglBUDcj9uWNf67A7WdVBB43Exam2jhBLmkfp4zb6FOXIIvbY4EcVobfZQA8ELx5
+	rqKA==
+X-Received: by 10.15.75.200 with SMTP id l48mr630312eey.113.1394547987684;
+	Tue, 11 Mar 2014 07:26:27 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	w6sm58039293eex.9.2014.03.11.07.22.17
+	43sm58065531eeh.13.2014.03.11.07.26.25
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Mar 2014 07:22:17 -0700 (PDT)
-Date: Tue, 11 Mar 2014 15:22:30 +0100
+	Tue, 11 Mar 2014 07:26:26 -0700 (PDT)
+Date: Tue, 11 Mar 2014 15:26:39 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140311142230.GD2137@jama>
-References: <1393548691-24359-1-git-send-email-obi@opendreambox.org>
+Message-ID: <20140311142639.GE2137@jama>
+References: <1393516986-25391-1-git-send-email-ticotimo@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1393548691-24359-1-git-send-email-obi@opendreambox.org>
+In-Reply-To: <1393516986-25391-1-git-send-email-ticotimo@gmail.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] libconnman-qt: update to 1.0.50+git80ac184
+Subject: Re: [meta-multimedia][PATCH v2] libmusicbrainz: workaround for build-native/do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,110 +47,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 14:22:21 -0000
-X-Groupsio-MsgNum: 48594
+X-List-Received-Date: Tue, 11 Mar 2014 14:26:28 -0000
+X-Groupsio-MsgNum: 48595
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="76DTJ5CE0DCVQemd"
+	protocol="application/pgp-signature"; boundary="KlAEzMkarCnErv5Q"
 Content-Disposition: inline
 
---76DTJ5CE0DCVQemd
+--KlAEzMkarCnErv5Q
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 28, 2014 at 01:51:31AM +0100, Andreas Oberritter wrote:
-> Allows to install versions for Qt4/X11 and Qt4/Embedded into
-> the same filesystem by overriding the target name.
+On Thu, Feb 27, 2014 at 08:03:06AM -0800, Tim Orling wrote:
+> From: Tim Orling <TicoTimo@gmail.com>
 >=20
-> This version also removes a superflous .pc file from ${libdir}.
+> Changes in v2:
+>     bump PR to r2 rather than drop (doh!)
 >=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 > ---
->  meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
+>  .../musicbrainz/libmusicbrainz_git.bb              | 50 ++++++++++++++++=
++++++-
+>  1 file changed, 48 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc b/meta-oe=
-/recipes-qt/libconnman-qt/libconnman-qt.inc
-> index 77e70e8..3f91be2 100644
-> --- a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
-> @@ -3,8 +3,8 @@ HOMEPAGE =3D "https://github.com/nemomobile/libconnman-qt"
->  SECTION =3D "qt/lib"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://libconnman-qt/clockmodel.h;endline=3D8;md5=
-=3Dea9f724050803f15d2d900ce3c5dac88"
-> -SRCREV =3D "ddbeaf72b4d3c49285b0513b28948edacfc40b51"
-> -PV =3D "1.0.46+git${SRCPV}"
-> +SRCREV =3D "80ac184d859ea90c026403f5a520644945a5081a"
-> +PV =3D "1.0.50+git${SRCPV}"
+> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
+z_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_gi=
+t.bb
+> index f6a8f53..2928587 100644
+> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING.txt;md5=3Dfbc0939018=
+57fcd118f065f900982c24"
+>  DEPENDS =3D "expat neon"
 > =20
->  SRC_URI =3D "git://github.com/nemomobile/libconnman-qt.git;branch=3Dmast=
-er"
+>  PV =3D "5.0.1+git${SRCPV}"
+> -PR =3D "r1"
+> +PR =3D "r2"
 > =20
-> @@ -12,7 +12,7 @@ S =3D "${WORKDIR}/git"
-> =20
->  inherit pkgconfig
-> =20
-> -EXTRA_QMAKEVARS_PRE +=3D "CONFIG+=3Dnotests"
-> +EXTRA_QMAKEVARS_PRE +=3D "CONFIG+=3Dnotests TARGET_SUFFIX=3D${QT_DIR_NAM=
-E}"
-> =20
->  do_configure_prepend() {
->      # Hack *.pro variables
-> @@ -37,7 +37,6 @@ FILES_${PN}-dev =3D " \
->      ${libdir}/libconnman-qt*${SOLIBSDEV} \
->      ${libdir}/libconnman-qt*.prl \
->      ${libdir}/pkgconfig/connman-qt*.pc \
-> -    ${libdir}/connman-qt*.pc \
->  "
->  FILES_${PN}-plugin =3D " \
->      ${PLUGINS_TARGET}/qmldir \
-> --=20
-> 1.8.3.2
+>  SRCREV =3D "0749dd0a35b4a54316da064475863a4ac6e28e7e"
+>  SRC_URI =3D "git://github.com/metabrainz/libmusicbrainz.git \
+> @@ -30,9 +30,55 @@ do_configure_prepend() {
+>            -DCMAKE_C_COMPILER=3D${BUILD_CC} \
+>            -DCMAKE_CXX_FLAGS=3D${BUILD_CXXFLAGS} \
+>            -DCMAKE_CXX_COMPILER=3D${BUILD_CXX} \
+> -          ..
+> +          ${S}=20
+>      make make-c-interface
+>      cd ..
+> +
+> +    # the first thing cmake_do_configure does is delete ${B}
+> +    # stash it first
+> +    cp -r build-native ..
+> +}
+> +
+> +# recreate default here, with work around for build-native
+> +cmake_do_configure() {
+> +	if [ "${OECMAKE_BUILDPATH}" -o "${OECMAKE_SOURCEPATH}" ]; then
+> +		bbnote "cmake.bbclass no longer uses OECMAKE_SOURCEPATH and OECMAKE_BU=
+ILDPATH.  The default behaviour is now out-of-tree builds with B=3DWORKDIR/=
+build."
+> +	fi
+> +
+> +	if [ "${S}" !=3D "${B}" ]; then
+> +		rm -rf ${B}
+> +		mkdir -p ${B}
+> +		cd ${B}
+> +	fi
+> +
+> +	# bring build-native back into build/
+> +	mv ../build-native .
+> +
+> +	# Just like autotools cmake can use a site file to cache result that ne=
+ed generated binaries to run
+> +	if [ -e ${WORKDIR}/site-file.cmake ] ; then
+> +		OECMAKE_SITEFILE=3D" -C ${WORKDIR}/site-file.cmake"
+> +	else
+> +		OECMAKE_SITEFILE=3D""
+> +	fi
+> +
+> +	cmake \
+> +	  ${OECMAKE_SITEFILE} \
+> +	  ${S} \
+> +	  -DCMAKE_INSTALL_PREFIX:PATH=3D${prefix} \
+> +	  -DCMAKE_INSTALL_BINDIR:PATH=3D${bindir} \
+> +	  -DCMAKE_INSTALL_SBINDIR:PATH=3D${sbindir} \
+> +	  -DCMAKE_INSTALL_LIBEXECDIR:PATH=3D${libexecdir} \
+> +	  -DCMAKE_INSTALL_SYSCONFDIR:PATH=3D${sysconfdir} \
+> +	  -DCMAKE_INSTALL_SHAREDSTATEDIR:PATH=3D${sharedstatedir} \
+> +	  -DCMAKE_INSTALL_LOCALSTATEDIR:PATH=3D${localstatedir} \
+> +	  -DCMAKE_INSTALL_LIBDIR:PATH=3D${libdir} \
+> +	  -DCMAKE_INSTALL_INCLUDEDIR:PATH=3D${includedir} \
+> +	  -DCMAKE_INSTALL_DATAROOTDIR:PATH=3D${datadir} \
+> +	  -DCMAKE_INSTALL_SO_NO_EXE=3D0 \
+> +	  -DCMAKE_TOOLCHAIN_FILE=3D${WORKDIR}/toolchain.cmake \
+> +	  -DCMAKE_VERBOSE_MAKEFILE=3D1 \
+> +	  ${EXTRA_OECMAKE} \
+> +	  -Wno-dev
+>  }
 
-last world build reports failure to build libconnman-qte with this, can
-you please look into it?
+There is still some issue with this patch applied:
 
-| x86_64-oe-linux-g++  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=
-=3Dsse --sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/s=
-ysroots/qemux86-64 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-rpat=
-h-link,/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemu=
-x86-64/usr/lib -shared -o libConnmanQtDeclarative.so components.o networkin=
-gmodel.o technologymodel.o savedservicemodel.o moc_components.o moc_network=
-ingmodel.o moc_technologymodel.o moc_savedservicemodel.o   -L/home/jenkins/=
-oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib -L../l=
-ibconnman-qt -lconnman-qt4 -lQtDeclarativeE -lQtScriptE -lQtSvgE -lQtSqlE -=
-lQtXmlPatternsE -lQtGuiE -lQtNetworkE -lQtDBusE -lQtXmlE -lQtCoreE -lpthread
-| /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-li=
-nux/usr/libexec/core2-64-oe-linux/gcc/x86_64-oe-linux/4.8.2/ld: error: cann=
-ot find -lconnman-qt4
-| collect2: error: ld returned 1 exit status
-| make[1]: *** [libConnmanQtDeclarative.so] Error 1
-| make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/t=
-mp-eglibc/work/core2-64-oe-linux/libconnman-qte/1.0.50+gitAUTOINC+80ac184d8=
-5-r0/git/plugin'
-| make: *** [sub-plugin-make_default-ordered] Error 2
-| ERROR: oe_runmake failed
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
-oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libconnman-=
-qte/1.0.50+gitAUTOINC+80ac184d85-r0/temp/log.do_compile.15974)
+ERROR: Function failed: do_configure (log file is located at /home/jenkins/=
+oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libmusicbra=
+inz/5.0.1+gitAUTOINC+0749dd0a35-r2/temp/log.do_configure.20744)
+ERROR: Logfile of failure stored in: /home/jenkins/oe/shr-core-branches/shr=
+-core/tmp-eglibc/work/core2-64-oe-linux/libmusicbrainz/5.0.1+gitAUTOINC+074=
+9dd0a35-r2/temp/log.do_configure.20744
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-=
+64', 'x86_64-linux', 'common']
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_copy_aclocals
+| DEBUG: Python function autotools_copy_aclocals finished
+| DEBUG: Executing shell function do_configure
+| fatal: Not a git repository (or any parent up to mount parent /home/jenki=
+ns/oe/shr-core-branches/shr-core)
+| Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+| WARNING: exit code 128 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
+s/oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libmusicb=
+rainz/5.0.1+gitAUTOINC+0749dd0a35-r2/temp/log.do_configure.20744)
+NOTE: recipe libmusicbrainz-5.0.1+gitAUTOINC+0749dd0a35-r2: task do_configu=
+re: Failed
+ERROR: Task 1242 (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembe=
+dded/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb, =
+do_configure) failed with exit code '1'
 
 (link to full log in last State of bitbake world, Failed tasks 2014-03-11 e=
 -mail)
+
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---76DTJ5CE0DCVQemd
+--KlAEzMkarCnErv5Q
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMfHCYACgkQN1Ujt2V2gByzEACgmmd24e/iLY+DVU5FWdJtFtmf
-sjgAn3KcVxyA87zQ9tMF4NZCd4z3fO0/
-=bhnx
+iEYEARECAAYFAlMfHR8ACgkQN1Ujt2V2gBzE5ACghYTeF0VaO/Szxedx6h20LKj/
+EOcAnA/MW8+Kggm9TxzmE+zQEGh/iIHL
+=k0CV
 -----END PGP SIGNATURE-----
 
---76DTJ5CE0DCVQemd--
+--KlAEzMkarCnErv5Q--
