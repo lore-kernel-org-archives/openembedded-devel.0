@@ -1,38 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F3B76F7BD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ea0-f170.google.com (mail-ea0-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D7FD6D157
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 14:26:49 +0000 (UTC)
-Received: by mail-yh0-f51.google.com with SMTP id f10so8621220yha.24
+	Tue, 11 Mar 2014 14:31:22 +0000 (UTC)
+Received: by mail-ea0-f170.google.com with SMTP id g15so4337569eak.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 07:26:50 -0700 (PDT)
+	Tue, 11 Mar 2014 07:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=cDhqC3CfGH2Y9f6xaTv94TveZRzvM1++7eXgsNF771g=;
-	b=qVRjxG3cBaEng4InhZLoGefZ0/tKm2dS7s5bQbcJqKCurN+SiDlxW70wxXFTlOzS1l
-	sipBL3non795Wn7Z0GVOUAFtG+bnNvEF2ViNDlNSG8q6tRBg4neXDGUJcxLh43Kni2cJ
-	gpU4lh+21v/AixgoZqigTg2Sh/rFLFSI8vuzAqIvMyAMoZtf+BAq9EtjQMkhjwrKdEb0
-	gRgO6vEQb2qYBe5cFaGAICKK9q4uqyDhxMUQjTGuqJ6NSfJJIl/Tkse1nBgF7Zzx0NM6
-	d67Jme79K66n5ytFkFOkfoxg2W8NO1PRDAndcc54mhhKZAPmL2S/70hmsPH4ESHD1WjH
-	xjcg==
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XPYAtsCixZtiXgO7h2YnNu24HoAYTekdVZ3FBBYUP+s=;
+	b=oc0Y8c7VY+OYPn08Z8Z8keF2hFhFOyQ9gQsCAq4t2luHdzynjhX78+q9KUt4JSu/sj
+	CJUslMGEya0tJCGkpl1bUgeLF3lGJvsMSzK5wvAWc+ZL/yeKVKyeqlSCs+/t12H3oyvt
+	21+MF77JVDqB/GiV+YpeOp0jp45r/VQcGe2zrBnCg60wiBoY6zKm8ldUakSiDXM6vhhj
+	cxP3vqUItNeOaOOoHnGDo+fsqJE1BLeHgm2rhgyoO7brDfiziypbIKoh9nAkBGJhrRgN
+	aavpB2zr6mghzpffrT9Vm88BQmIYLmXTA/JPbMHT21qymCn8OKbzrHhKCn6S/xRxYLzI
+	SE8g==
+X-Received: by 10.14.95.2 with SMTP id o2mr4087443eef.69.1394548282877;
+	Tue, 11 Mar 2014 07:31:22 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	y51sm58133505eeu.0.2014.03.11.07.31.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Mar 2014 07:31:21 -0700 (PDT)
+Date: Tue, 11 Mar 2014 15:31:34 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140311143134.GF2137@jama>
+References: <1394125490-2945-1-git-send-email-Martin.Jansa@gmail.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050B57548165@COSNADEXC13.usr.ingenico.loc>
 MIME-Version: 1.0
-X-Received: by 10.236.118.212 with SMTP id l60mr53742917yhh.78.1394548010379; 
-	Tue, 11 Mar 2014 07:26:50 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Tue, 11 Mar 2014 07:26:50 -0700 (PDT)
-In-Reply-To: <20140311140858.GA2137@jama>
-References: <lauren.post@freescale.com>
-	<1394227575-27897-1-git-send-email-lauren.post@freescale.com>
-	<1394227575-27897-3-git-send-email-lauren.post@freescale.com>
-	<20140311140858.GA2137@jama>
-Date: Tue, 11 Mar 2014 11:26:50 -0300
-X-Google-Sender-Auth: dL54sKH8qYRudKflUiniIFjncQ0
-Message-ID: <CAP9ODKrs4hJsAGJ4E4TWtZiKy+seaJLFWq9wcW72DkX_qnDtkA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/7] can-utils: Create git version
+In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050B57548165@COSNADEXC13.usr.ingenico.loc>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-oe][PATCH] bash-completion: remove allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,101 +48,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 14:26:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 Mar 2014 14:31:23 -0000
+X-Groupsio-MsgNum: 48597
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="udcq9yAoWb9A4FsZ"
+Content-Disposition: inline
 
-Hello Lauren and Martin,
+--udcq9yAoWb9A4FsZ
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 11, 2014 at 11:08 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Mar 07, 2014 at 03:26:11PM -0600, Lauren Post wrote:
->> Linux CAN network development utilities - newer version than canutils
->>
->> Signed-off-by: Lauren Post <lauren.post@freescale.com>
->> ---
->>  .../recipes-extended/socketcan/can-utils_git.bb    |   14 ++++++++++++++
->>  1 file changed, 14 insertions(+)
->>  create mode 100644 meta-oe/recipes-extended/socketcan/can-utils_git.bb
->>
->> diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
->> new file mode 100644
->> index 0000000..53632c8
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
->> @@ -0,0 +1,14 @@
->> +SUMMARY = "Linux CAN network development utilities"
->> +DESCRIPTION = "Linux CAN network development"
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
->
-> Please use something from source tree, not COREBASE.
+On Fri, Mar 07, 2014 at 08:41:21AM +0000, Matthieu CRAPET wrote:
+> Hi,
+>=20
+> Does it mean that " allarch " is incompatible with "autotools" ? Is this =
+true for all recipes?
 
-I did a check in the contents and it seems to be a mix of licenses:
+No, autotools (the -native tools used by this bbclass) are OK, only
+problem is when it tries to use CC (which is TUNE_PKGARCH specific).
 
-$: licensecheck -r *
-asc2log.c: BSD (3 clause)
-autogen.sh: *No copyright* UNKNOWN
-bcmserver.c: *No copyright* UNKNOWN
-canbusload.c: BSD (3 clause)
-can-calc-bit-timing.c: GPL
-candump.c: BSD (3 clause)
-canfdtest.c: GPL
-canframelen.c: BSD (3 clause)
-canframelen.h: BSD (3 clause)
-cangen.c: BSD (3 clause)
-cangw.c: BSD (3 clause)
-canlogserver.c: BSD (3 clause)
-canplayer.c: BSD (3 clause)
-cansend.c: BSD (3 clause)
-cansniffer.c: BSD (3 clause)
-include/linux/can.h: BSD (3 clause)
-include/linux/can/bcm.h: BSD (3 clause)
-include/linux/can/error.h: BSD (3 clause)
-include/linux/can/gw.h: BSD (3 clause)
-include/linux/can/isotp.h: BSD (3 clause)
-include/linux/can/netlink.h: UNKNOWN
-include/linux/can/raw.h: BSD (3 clause)
-isotpdump.c: BSD (3 clause)
-isotprecv.c: BSD (3 clause)
-isotpsend.c: BSD (3 clause)
-isotpserver.c: BSD (3 clause)
-isotpsniffer.c: BSD (3 clause)
-isotptun.c: BSD (3 clause)
-lib.c: BSD (3 clause)
-lib.h: BSD (3 clause)
-log2asc.c: BSD (3 clause)
-log2long.c: BSD (3 clause)
-slcan_attach.c: BSD (3 clause)
-slcand.c: GPL (v2 or later) (with incorrect FSF address)
-slcanpty.c: GPL (v2 or later) (with incorrect FSF address)
-terminal.h: BSD (3 clause)
+There are even some recipes which are using autotools and were detecting
+CC in configure.ac without any good reason, so they were patched to stop
+doing this and to allow using allarch.
 
->> +DEPENDS = "libsocketcan"
->> +
->> +SRC_URI = "git://git.gitorious.org/linux-can/can-utils.git;protocol=git;branch=master"
+allarch.bbclass now resets couple variables to make sure that configure
+will at fail if it tries to detect CC.
 
-I'd use:
+> -----Message d'origine-----
+> De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembe=
+dded-devel-bounces@lists.openembedded.org] De la part de Martin Jansa
+> Envoy=E9=A0: jeudi 6 mars 2014 18:05
+> =C0=A0: openembedded-devel@lists.openembedded.org
+> Objet=A0: [oe] [meta-oe][PATCH] bash-completion: remove allarch
+>=20
+> * it has runtime dependency on TUNE_PKGARCH bash, so it cannot be allarch
+>=20
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.=
+bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+> index ad7fd28..155fe90 100644
+> --- a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+> +++ b/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+> @@ -16,7 +16,7 @@ SRC_URI[sha256sum] =3D "e5a490a4301dfb228361bdca2ffca59=
+7958e47dd6056005ef9393a5852
+> =20
+>  PARALLEL_MAKE =3D ""
+> =20
+> -inherit allarch autotools
+> +inherit autotools
+> =20
+>  do_install_append() {
+>  	install -d ${D}${sysconfdir}/bash_completion.d/
+> --=20
+> 1.9.0
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-SRC_URI = "git://gitorious.org/linux-can/can-utils.git;protocol=git;branch=master"
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-As this is the common form used in the current recipes.
+--udcq9yAoWb9A4FsZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
->> +SRCREV = "67a2bdcd336e6becfa5784742e18c88dbeddc973"
->
-> Please set PV.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-As it has not been tagged in the repository I'd use:
+iEYEARECAAYFAlMfHkYACgkQN1Ujt2V2gBx+ewCgqybR9/fx7gD5qf7NKLPuqM/s
+aQAAn29DG4yxLze7U1ctidgGkDEDwCYO
+=48zL
+-----END PGP SIGNATURE-----
 
-PV = "0.0+git${SRCPV}"
-
-here.
-
->> +S = "${WORKDIR}/git"
->> +
->> +inherit autotools pkgconfig
-...
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-
+--udcq9yAoWb9A4FsZ--
