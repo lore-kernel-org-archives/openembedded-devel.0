@@ -1,26 +1,21 @@
-Return-Path: <Xufeng.Zhang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 218426F7D4
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id BC63D6F7AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 05:43:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s2B5hiTY017630
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Mar 2014 22:43:44 -0700 (PDT)
-Received: from localhost.localdomain (128.224.163.210) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Mon, 10 Mar 2014 22:43:44 -0700
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 11 Mar 2014 13:54:09 +0800
-Message-ID: <1394517250-15467-2-git-send-email-xufeng.zhang@windriver.com>
-X-Mailer: git-send-email 1.7.0.2
-In-Reply-To: <1394517250-15467-1-git-send-email-xufeng.zhang@windriver.com>
-References: <1394517250-15467-1-git-send-email-xufeng.zhang@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 1/2] ntp: Running ntpd daemon as ntp:ntp
+	Tue, 11 Mar 2014 09:48:45 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 11 Mar 2014 02:44:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,629,1389772800"; d="scan'208";a="470091058"
+Received: from sleopold-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.85])
+	by orsmga001.jf.intel.com with ESMTP; 11 Mar 2014 02:48:45 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Mar 2014 09:48:35 +0000
+Message-Id: <cover.1394531274.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-webserver][PATCH 0/2] PHP/phpMyAdmin upgrades again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,55 +29,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 05:43:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 11 Mar 2014 09:48:46 -0000
 
-Adding ntp:ntp(user:group) to system and running
-ntpd dameon as ntp:ntp.
+Of course, no sooner than we have the previous upgrades merged, a new 
+release happens upstream. In the PHP case the upgrade contains several
+CVE fixes so it's definitely worth applying.
 
-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
----
- meta-networking/recipes-support/ntp/files/ntpd |    2 +-
- meta-networking/recipes-support/ntp/ntp.inc    |    6 +++++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/files/ntpd
-index 53fa2d1..f1e78aa 100755
---- a/meta-networking/recipes-support/ntp/files/ntpd
-+++ b/meta-networking/recipes-support/ntp/files/ntpd
-@@ -23,7 +23,7 @@ startdaemon(){
- 	# this.  If ntpd seems to disappear after a while assume TICKADJ
- 	# above is set to a totally incorrect value.
- 	echo -n "Starting ntpd: "
--	start-stop-daemon --start -x /usr/bin/ntpd -- -p /var/run/ntp.pid "$@"
-+	start-stop-daemon --start -x /usr/bin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
- 	echo "done"
- }
- stopdaemon(){
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index 8381b9e..7876c0b 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -25,13 +25,17 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--inherit autotools update-rc.d systemd
-+inherit autotools update-rc.d useradd systemd
- 
- # The ac_cv_header_readline_history is to stop ntpdc depending on either
- # readline or curses
- EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no"
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
-+                       --shell /bin/false --user-group ntp"
-+
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-                           --with-openssl-incdir=${STAGING_INCDIR} \
+The following changes since commit 54b9d0199e55027bd4b54fc5c6ee488d117a46da:
+
+  phpmyadmin: update to 4.1.8 (2014-03-06 12:12:15 +0000)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/webserver-upgrades2
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/webserver-upgrades2
+
+Paul Eggleton (2):
+  modphp: update to 5.5.10
+  phpmyadmin: update to 4.1.9
+
+ meta-webserver/recipes-php/modphp/modphp_5.5.10.bb                 | 7 +++++++
+ meta-webserver/recipes-php/modphp/modphp_5.5.9.bb                  | 7 -------
+ .../phpmyadmin/{phpmyadmin_4.1.8.bb => phpmyadmin_4.1.9.bb}        | 4 ++--
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+ create mode 100644 meta-webserver/recipes-php/modphp/modphp_5.5.10.bb
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp_5.5.9.bb
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.1.8.bb => phpmyadmin_4.1.9.bb} (87%)
+
 -- 
-1.7.0.2
+1.8.5.3
 
 
