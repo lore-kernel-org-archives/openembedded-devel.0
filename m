@@ -1,40 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f54.google.com (mail-yh0-f54.google.com
-	[209.85.213.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1503E610D8
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F9A26BFF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 13:22:28 +0000 (UTC)
-Received: by mail-yh0-f54.google.com with SMTP id f73so4485669yha.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 06:22:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=JvF92Dhw9IUtbBLRilVJry9ZG+K3K+JfDMML9jRX1Cg=;
-	b=zxBA+CfQprlKsknn0XdUg10bsBCUqXLetJYeoAlnors0Wso7C4XGhGYupv3nJonB4+
-	E+j7wcDKunjQup+lXui9hm09HRt/8cBfHcna+WbbPWvuxmAGlE+DrJj6IH904L7EEXOp
-	oV5uDhpq10Vw0EpfBGV3zvJw4hL0EME4okUavS09z66bKCM6V0Jtq1EkQL+Nw3wE08Tq
-	c2Uf0k6VQ8exsP+m5/7ox89R3Sp5ECyFAw3Pzfh3CC1WLdOf19HVMdGq1Khq7YFwbCmW
-	N6ksYJqzoAZrvHcuE2F4y8ldn0oLfqxgTpuY93N2Q+csY9SZlRHGx3ftA2lCg1+T+d0B
-	bWVg==
-X-Received: by 10.236.131.19 with SMTP id l19mr61778812yhi.0.1394630549066;
-	Wed, 12 Mar 2014 06:22:29 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id
-	d32sm74573983yhq.27.2014.03.12.06.22.27 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Mar 2014 06:22:28 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 757CC19415FB9; Wed, 12 Mar 2014 10:22:24 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Mar 2014 10:22:23 -0300
-Message-Id: <1394630543-14620-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.9.0
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] libmicrohttpd: Update to 0.9.34
+	Wed, 12 Mar 2014 13:32:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,638,1389740400"; d="scan'208";a="42563053"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 12 Mar 2014 14:33:00 +0100
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Wed, 12 Mar 2014 14:33:00 +0100
+Received: from u85.usr.ingenico.loc (10.23.7.85) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Wed, 12 Mar 2014 14:32:59 +0100
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 12 Mar 2014 14:25:46 +0100
+Message-ID: <1394630746-10597-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.8.5.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] bash-completion: update to version 2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,44 +32,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2014 13:22:33 -0000
+X-List-Received-Date: Wed, 12 Mar 2014 13:33:05 -0000
+Content-Type: text/plain
 
-This update fixes the following build error:
+Notes:
+- PARALLEL_MAKE is still required
+- inherit allarch is not present because of runtime dependency with bash (TUNE_PKGARCH)
 
-,----[ Build error ]
-| ...
-| .../libmicrospdy.so: undefined reference to `SSL_get_error'
-| .../libmicrospdy.so: undefined reference to `SSL_write'
-| .../libmicrospdy.so: undefined reference to `SSL_free'
-| ...
-`----
-
-Reported-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 ---
- .../{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb} (85%)
+ .../bash-completion/bash-completion_2.0.bb         | 37 ----------------------
+ .../bash-completion/bash-completion_2.1.bb         | 36 +++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+ create mode 100644 meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
 
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-similarity index 85%
-rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-index 523b8dd..5de9390 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-@@ -6,8 +6,8 @@ SECTION = "net"
- DEPENDS = "libgcrypt gnutls"
- 
- SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "013b10f9de1cda5448b29c81305354a3"
--SRC_URI[sha256sum] = "d9587e8497548f820650cd607daf3615ea3272435779378983032c570f1cd559"
-+SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
-+SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
- 
- inherit autotools lib_package
- 
+diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
+deleted file mode 100644
+index ad7fd28..0000000
+--- a/meta-oe/recipes-support/bash-completion/bash-completion_2.0.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-SUMMARY = "Programmable Completion for Bash 4"
+-HOMEPAGE = "http://bash-completion.alioth.debian.org/"
+-BUGTRACKER = "https://alioth.debian.org/projects/bash-completion/"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-
+-PR = "r1"
+-
+-SECTION = "console/utils"
+-
+-SRC_URI="http://bash-completion.alioth.debian.org/files/${BPN}-${PV}.tar.bz2"
+-
+-SRC_URI[md5sum] = "0d903f398be8c8f24bc5ffa6f86127f8"
+-SRC_URI[sha256sum] = "e5a490a4301dfb228361bdca2ffca597958e47dd6056005ef9393a5852af5804"
+-
+-PARALLEL_MAKE = ""
+-
+-inherit allarch autotools
+-
+-do_install_append() {
+-	install -d ${D}${sysconfdir}/bash_completion.d/
+-	echo '. ${datadir}/${BPN}/bash_completion' >${D}${sysconfdir}/bash_completion
+-
+-	# Delete files already provided by util-linux
+-	local i
+-	for i in cal dmesg hwclock ionice look renice rtcwake; do
+-		rm ${D}${datadir}/${BPN}/completions/$i
+-	done
+-}
+-
+-RDEPENDS_${PN} = "bash"
+-
+-# Some recipes are providing ${PN}-bash-completion packages
+-PACKAGES =+ "${PN}-extra"
+-FILES_${PN}-extra = "${datadir}/${BPN}/completions/ \
+-    ${datadir}/${BPN}/helpers/"
+diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
+new file mode 100644
+index 0000000..9a0ff35
+--- /dev/null
++++ b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Programmable Completion for Bash 4"
++HOMEPAGE = "http://bash-completion.alioth.debian.org/"
++BUGTRACKER = "https://alioth.debian.org/projects/bash-completion/"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++SECTION = "console/utils"
++
++SRC_URI="http://bash-completion.alioth.debian.org/files/${BPN}-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "4e2a9f11a4042a38ee79ddcd048e8b9e"
++SRC_URI[sha256sum] = "2b606804a7d5f823380a882e0f7b6c8a37b0e768e72c3d4107c51fbe8a46ae4f"
++
++PARALLEL_MAKE = ""
++
++inherit autotools
++
++do_install_append() {
++	# compatdir
++	install -d ${D}${sysconfdir}/bash_completion.d/
++	echo '. ${datadir}/${BPN}/bash_completion' >${D}${sysconfdir}/bash_completion
++
++	# Delete files already provided by util-linux
++	local i
++	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake; do
++		rm ${D}${datadir}/${BPN}/completions/$i
++	done
++}
++
++RDEPENDS_${PN} = "bash"
++
++# Some recipes are providing ${PN}-bash-completion packages
++PACKAGES =+ "${PN}-extra"
++FILES_${PN}-extra = "${datadir}/${BPN}/completions/ \
++    ${datadir}/${BPN}/helpers/"
 -- 
-1.9.0
+1.8.5.4
 
 
