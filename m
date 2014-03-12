@@ -1,40 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 846136F7C2
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E52360D71
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 11:48:12 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id e51so4226533eek.21
+	Wed, 12 Mar 2014 11:48:10 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so4268774eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 04:48:13 -0700 (PDT)
+	Wed, 12 Mar 2014 04:48:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=WtGGcFP9+cWpmrQJsuZx9+kx1lnKQEG+7wMi0QXISG0=;
-	b=E97P3WdyTl35NV3ORY6MRlt89rjFNKjA5qMoLYbntCsYWeZAC+46kb+oC5VIRQjLQe
-	Z5gujqXD3jARh34UciJy6ArODOGYPipkdd6yjf45qq2wZpM5xYvnMdjWXd0xJUL3lEp9
-	Q4SMEnz2vwl6FNI6VQlJbJ5rTbtY2ZcWP8MrHIFpdbGL2HVu6iaRPDIYPl/cadlCF5F7
-	M3lvPSQKjnKjb4KcyqvIX+e6AUWx0WKxShP9NgQnjMk+oOXXYjCNQbpWDbXz/Wva5zlp
-	+gaejuoWoK7/V0bcq9WZaB9CqgEXWiOSSU5jW9CYwbjQju6C7BoNUDR/F2FmkWwzjwjN
-	bPZw==
-X-Received: by 10.15.54.5 with SMTP id s5mr15569887eew.36.1394624893363;
-	Wed, 12 Mar 2014 04:48:13 -0700 (PDT)
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=2tMvj/S6Ca7XOpGkdUhJJhaqMgGm5VlXw9EDuU4F1a8=;
+	b=vYT3IriKZaXzWZDUEwMS8Ebz8AT4w+dRP2CGn0TUiky6OTp6Tk9fmJvDYxn5CKL2qO
+	w5ZVp4JGLg4A/lmU6jrr/H5/GHUc+UM8eHhXya9t5xH+LhgjAO52nDKA3JiAaDhz7x/8
+	BzGtPZK3Vutl1UN45iT9uC3g5Huj+0aperQCximVrUzuQv/34fLEPCzdQ6tFLXEcDAo9
+	Ant+qDS6ZVq8NGKXyu18CcOMA7IUyWLgJwqjnLLigbqAgOQMsYSilBdeO0pazNUaR999
+	ZPf6ud0N70UMcu5GBihg+kOG1qdqzqPRNPbaRJfy4tm7hf8SpMVntcV3wY/y2YKfcBpC
+	p0UA==
+X-Received: by 10.15.33.129 with SMTP id c1mr2735733eev.85.1394624891273;
+	Wed, 12 Mar 2014 04:48:11 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	46sm69061380ees.4.2014.03.12.04.48.12
+	j41sm69053994eeg.10.2014.03.12.04.48.09
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Mar 2014 04:48:12 -0700 (PDT)
+	Wed, 12 Mar 2014 04:48:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Mar 2014 12:48:19 +0100
-Message-Id: <a036792a6270f18c971baeb72f92abbb91c4d73e.1394624790.git.Martin.Jansa@gmail.com>
+Date: Wed, 12 Mar 2014 12:48:18 +0100
+Message-Id: <cover.1394624790.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <cover.1394624790.git.Martin.Jansa@gmail.com>
-References: <cover.1394624790.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1394624790.git.Martin.Jansa@gmail.com>
-References: <cover.1394624790.git.Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 1/4] qtbase: Replace 0012-qtbase-allow-build-of-examples.patch with -compile-examples option
+Subject: [meta-qt5][PATCH 0/4] Small update of git recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,98 +44,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2014 11:48:13 -0000
+X-List-Received-Date: Wed, 12 Mar 2014 11:48:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* -compile-examples option was added in upstream commit:
-  commit 8ea19caacf281240411541b5af37c2f9a103a7d1
-  Author: Oswald Buddenhagen <oswald.buddenhagen@digia.com>
-  Date:   Tue May 7 17:10:22 2013 +0200
-  Subject: add -compile-examples configure option
+Before rebasing git recipes for latest origin/stable (in preparation for 5.3.0 release)
+here is small update for at least newer origin/release revs.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtbase.inc                          |  3 +-
+The following changes since commit fc06fb8ceb8eec4fe64463234ce6aaadd5f8a852:
+
+  qtbase.inc: set virtual/mesa and virtual/egl as dependency in PACKAGECONFIG[kms] (2014-03-05 19:28:46 +0100)
+
+are available in the git repository at:
+
+  git://github.com/meta-qt5/meta-qt5 tags/5.2.1+origin/release
+  https://github.com/meta-qt5/meta-qt5/tree/jansa/test
+
+Martin Jansa (4):
+  qtbase: Replace 0012-qtbase-allow-build-of-examples.patch with
+    -compile-examples option
+  qt5-git: bump SRCREVs to latest in 'release' branch
+  qtdeclarative_git: drop
+    0003-Fix-wrong-calculation-of-viewPort-for-transitions.patch
+  qtbase: move 0015-Fix-linuxfb-argument-mmsize-parsing.patch to 5.2.1
+    recipe
+
+ recipes-qt/qt5/qtbase-native_git.bb                |  4 +-
+ recipes-qt/qt5/qtbase.inc                          |  4 +-
  .../0012-qtbase-allow-build-of-examples.patch      | 48 ----------------------
- 2 files changed, 1 insertion(+), 50 deletions(-)
+ recipes-qt/qt5/qtbase_5.2.1.bb                     |  2 +
+ recipes-qt/qt5/qtbase_git.bb                       |  4 +-
+ recipes-qt/qt5/qtconnectivity_git.bb               |  4 +-
+ recipes-qt/qt5/qtdeclarative.inc                   |  1 -
+ recipes-qt/qt5/qtdeclarative_5.2.1.bb              |  4 ++
+ recipes-qt/qt5/qtdeclarative_git.bb                |  3 +-
+ recipes-qt/qt5/qtgraphicaleffects_git.bb           |  4 +-
+ recipes-qt/qt5/qtimageformats_git.bb               |  4 +-
+ recipes-qt/qt5/qtlocation_git.bb                   |  4 +-
+ recipes-qt/qt5/qtmultimedia_git.bb                 |  4 +-
+ recipes-qt/qt5/qtquick1_git.bb                     |  4 +-
+ recipes-qt/qt5/qtquickcontrols_git.bb              |  4 +-
+ recipes-qt/qt5/qtscript_git.bb                     |  4 +-
+ recipes-qt/qt5/qtsensors_git.bb                    |  4 +-
+ recipes-qt/qt5/qtserialport_git.bb                 |  3 +-
+ recipes-qt/qt5/qtsvg_git.bb                        |  4 +-
+ recipes-qt/qt5/qtsystems_git.bb                    |  2 -
+ recipes-qt/qt5/qttools-native_git.bb               |  4 +-
+ recipes-qt/qt5/qttools_git.bb                      |  4 +-
+ recipes-qt/qt5/qtwebkit-examples_git.bb            |  4 +-
+ recipes-qt/qt5/qtwebkit_git.bb                     |  4 +-
+ recipes-qt/qt5/qtx11extras_git.bb                  |  4 +-
+ recipes-qt/qt5/qtxmlpatterns_git.bb                |  4 +-
+ 26 files changed, 65 insertions(+), 74 deletions(-)
  delete mode 100644 recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 2430035..a6fb3b2 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -16,7 +16,6 @@ SRC_URI += "\
- SRC_URI += "\
-     file://0010-qmake-is-already-built-in-qtbase-native.patch \
-     file://0011-Allow-building-a-separate-qmake-for-the-target.patch \
--    file://0012-qtbase-allow-build-of-examples.patch \
-     file://0013-QOpenGLPaintDevice-sub-area-support.patch \
-     file://0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch \
-     file://0015-Fix-linuxfb-argument-mmsize-parsing.patch \
-@@ -65,7 +64,7 @@ PACKAGECONFIG[release] = "-release,-debug"
- PACKAGECONFIG[developer] = "-developer-build"
- PACKAGECONFIG[sm] = "-sm,-no-sm"
- PACKAGECONFIG[tests] = "-make tests,-nomake tests"
--PACKAGECONFIG[examples] = "-make examples,-nomake examples"
-+PACKAGECONFIG[examples] = "-make examples -compile-examples,-nomake examples"
- PACKAGECONFIG[tools] = "-make tools,-nomake tools"
- # only for completeness, configure will add libs even if you try to explicitly remove it
- PACKAGECONFIG[libs] = "-make libs,-nomake libs"
-diff --git a/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch b/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
-deleted file mode 100644
-index 9d46d2f..0000000
---- a/recipes-qt/qt5/qtbase/0012-qtbase-allow-build-of-examples.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From 6e5e22110b4731b4324d309bc579393f422ba99d Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
--Date: Sat, 25 May 2013 17:34:32 +0200
--Subject: [PATCH 12/14] qtbase: allow build of examples
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--this revert the following commit :
--
--commit 2b397f985e4ef6ae5c0571a928bb1320fb048c61
--Author: Oswald Buddenhagen <oswald.buddenhagen@digia.com>
--Date:   Fri Dec 21 19:36:12 2012 +0100
--
--    do not actually build examples in production builds
--
--    -developer-build enables an actual build of examples, based on the
--    assumption that developers want to test it (it can be still disabled
--    with -nomake examples). regular users otoh want only the examples
--    sources installed.
--
--    Change-Id: Ifc6a108099929175a3960480802b271a758fdd38
--    Reviewed-by: Joerg Bornemann <joerg.bornemann@digia.com>
--
--Signed-off-by: Eric Bénard <eric@eukrea.com>
-----
-- mkspecs/features/qt_example_installs.prf | 7 -------
-- 1 file changed, 7 deletions(-)
--
--diff --git a/mkspecs/features/qt_example_installs.prf b/mkspecs/features/qt_example_installs.prf
--index 2db752c..ca1b0c7 100644
----- a/mkspecs/features/qt_example_installs.prf
--+++ b/mkspecs/features/qt_example_installs.prf
--@@ -92,11 +92,4 @@ probase = $$relative_path($$_PRO_FILE_PWD_, $$dirname(_QMAKE_CONF_)/examples)
--         allfiles -= doc
--         !isEmpty(allfiles): warning("remaining files in $$_PRO_FILE_PWD_: $$allfiles")
--     }
---
---    !equals(TEMPLATE, subdirs):!compile_examples {
---        TEMPLATE = aux
---        CONFIG -= have_target qt staticlib dll
---        SOURCES =
---        INSTALLS -= target
---    }
-- }
---- 
--1.8.5.3
--
 -- 
 1.9.0
 
