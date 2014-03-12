@@ -1,36 +1,35 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 27C406F8E1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B06A6F85B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 21:28:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 63745314A215
+	Wed, 12 Mar 2014 03:18:31 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id bj1so466511pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 22:28:47 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hSTWfJB336fV
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 22:28:43 +0100 (CET)
-Received: from [172.22.22.61] (unknown [212.255.254.192])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 78E72314A214
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Mar 2014 22:28:43 +0100 (CET)
-Message-ID: <531F800B.6020100@opendreambox.org>
-Date: Tue, 11 Mar 2014 22:28:43 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-MIME-Version: 1.0
+	Tue, 11 Mar 2014 20:18:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=kcQX4vdnsF9RymM5o7bcQWb3st5U+1emnBb131Ka9fo=;
+	b=rRRa0UlQjFAmI75mXBZr1beXXmzuN3+Shh5yASRqcAcHXzr2Usk8cxG5u1Z2iaCauI
+	5/6I3BB+ltVnZOkpE5mU3Xc9Ru95CxjynnLXkFT/Zo87qQ9fClzK/Sr2XhWx5mhdvVZL
+	Vs8inHmW8q7ctC/z+LTW6MXLVcYBxCZy6X0d2GaEGhe9+P6Mh7dZ2DG32YFpnZXyMrJS
+	jVkOzzpPXL1YnH98nHn6G3ZhR7fioRFevNEo+EB2y9+8g269sx8j12YMqe9SPisceLLl
+	Y7s9HsDnxpNWcNVk0oMPFp6eWDYDatr0eAbxJqei3INSDT8cNgkwh6yfDSy+g+snrF2E
+	SLbQ==
+X-Received: by 10.67.2.106 with SMTP id bn10mr1973600pad.38.1394594312829;
+	Tue, 11 Mar 2014 20:18:32 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
+	by mx.google.com with ESMTPSA id zc6sm7031369pab.18.2014.03.11.20.18.31
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Mar 2014 20:18:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1393548691-24359-1-git-send-email-obi@opendreambox.org>
-	<20140311142230.GD2137@jama>
-In-Reply-To: <20140311142230.GD2137@jama>
-Subject: Re: [meta-oe][PATCH] libconnman-qt: update to 1.0.50+git80ac184
+Date: Tue, 11 Mar 2014 20:20:07 -0700
+Message-Id: <1394594407-11968-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] luajit: Upgrade to 2.0.1 -> 2.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,76 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Mar 2014 21:28:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Mar 2014 03:18:34 -0000
 
-On 11.03.2014 15:22, Martin Jansa wrote:
-> On Fri, Feb 28, 2014 at 01:51:31AM +0100, Andreas Oberritter wrote:
->> Allows to install versions for Qt4/X11 and Qt4/Embedded into
->> the same filesystem by overriding the target name.
->>
->> This version also removes a superflous .pc file from ${libdir}.
->>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc | 7 +++----
->>  1 file changed, 3 insertions(+), 4 deletions(-)
->>
->> diff --git a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
->> index 77e70e8..3f91be2 100644
->> --- a/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
->> +++ b/meta-oe/recipes-qt/libconnman-qt/libconnman-qt.inc
->> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
->>  SECTION = "qt/lib"
->>  LICENSE = "Apache-2.0"
->>  LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
->> -SRCREV = "ddbeaf72b4d3c49285b0513b28948edacfc40b51"
->> -PV = "1.0.46+git${SRCPV}"
->> +SRCREV = "80ac184d859ea90c026403f5a520644945a5081a"
->> +PV = "1.0.50+git${SRCPV}"
->>  
->>  SRC_URI = "git://github.com/nemomobile/libconnman-qt.git;branch=master"
->>  
->> @@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
->>  
->>  inherit pkgconfig
->>  
->> -EXTRA_QMAKEVARS_PRE += "CONFIG+=notests"
->> +EXTRA_QMAKEVARS_PRE += "CONFIG+=notests TARGET_SUFFIX=${QT_DIR_NAME}"
->>  
->>  do_configure_prepend() {
->>      # Hack *.pro variables
->> @@ -37,7 +37,6 @@ FILES_${PN}-dev = " \
->>      ${libdir}/libconnman-qt*${SOLIBSDEV} \
->>      ${libdir}/libconnman-qt*.prl \
->>      ${libdir}/pkgconfig/connman-qt*.pc \
->> -    ${libdir}/connman-qt*.pc \
->>  "
->>  FILES_${PN}-plugin = " \
->>      ${PLUGINS_TARGET}/qmldir \
->> -- 
->> 1.8.3.2
-> 
-> last world build reports failure to build libconnman-qte with this, can
-> you please look into it?
-> 
-> | x86_64-oe-linux-g++  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemux86-64 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-rpath-link,/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib -shared -o libConnmanQtDeclarative.so components.o networkingmodel.o technologymodel.o savedservicemodel.o moc_components.o moc_networkingmodel.o moc_technologymodel.o moc_savedservicemodel.o   -L/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib -L../libconnman-qt -lconnman-qt4 -lQtDeclarativeE -lQtScriptE -lQtSvgE -lQtSqlE -lQtXmlPatternsE -lQtGuiE -lQtNetworkE -lQtDBusE -lQtXmlE -lQtCoreE -lpthread
-> | /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/core2-64-oe-linux/gcc/x86_64-oe-linux/4.8.2/ld: error: cannot find -lconnman-qt4
-> | collect2: error: ld returned 1 exit status
-> | make[1]: *** [libConnmanQtDeclarative.so] Error 1
-> | make[1]: Leaving directory `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libconnman-qte/1.0.50+gitAUTOINC+80ac184d85-r0/git/plugin'
-> | make: *** [sub-plugin-make_default-ordered] Error 2
-> | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_compile (log file is located at /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libconnman-qte/1.0.50+gitAUTOINC+80ac184d85-r0/temp/log.do_compile.15974)
-> 
-> (link to full log in last State of bitbake world, Failed tasks 2014-03-11 e-mail)
+Drop the backported hotfixes
 
-I've just submitted a pull-request fixing this upstream. Last time
-upstream responded quickly, so I think we can just wait a little and
-then bump SRCREV once it's merged.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../luajit/{luajit_2.0.1.bb => luajit_2.0.2.bb}              |   10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-devtools/luajit/{luajit_2.0.1.bb => luajit_2.0.2.bb} (80%)
 
-Regards,
-Andreas
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb
+rename to meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb
+index 6ca5f34..e60d20f 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.1.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb
+@@ -6,15 +6,11 @@ HOMEPAGE = "http://luajit.org"
+ DEPENDS += "lua5.1"
+ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz;name=tarball \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+-           http://luajit.org/download/v2.0.1_hotfix1.patch;name=hotfix1 \
+           "
+-SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
+-
+-SRC_URI[tarball.md5sum] = "85e406e8829602988eb1233a82e29f1f"
+-SRC_URI[tarball.sha256sum] = "2371cceb53453d8a7b36451e6a0ccdb66236924545d6042ddd4c34e9668990c0"
++SRC_URI[tarball.md5sum] = "112dfb82548b03377fbefbba2e0e3a5b"
++SRC_URI[tarball.sha256sum] = "c05202974a5890e777b181908ac237625b499aece026654d7cc33607e3f46c38"
+ 
+-SRC_URI[hotfix1.md5sum] = "5186c5901e37679a3c835d7b7cdac88e"
+-SRC_URI[hotfix1.sha256sum] = "143898de3fe84455684fddb92947d36c1a51c6a6e3884813fe5e025bd4652368"
++SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
+ 
+ S = "${WORKDIR}/LuaJIT-${PV}"
+ 
+-- 
+1.7.10.4
+
 
