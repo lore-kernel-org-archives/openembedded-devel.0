@@ -1,39 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ea0-f182.google.com (mail-ea0-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C1E46F7C6
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f54.google.com (mail-yh0-f54.google.com
+	[209.85.213.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 1503E610D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 11:48:19 +0000 (UTC)
-Received: by mail-ea0-f182.google.com with SMTP id b10so4932953eae.13
+	Wed, 12 Mar 2014 13:22:28 +0000 (UTC)
+Received: by mail-yh0-f54.google.com with SMTP id f73so4485669yha.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Mar 2014 04:48:19 -0700 (PDT)
+	Wed, 12 Mar 2014 06:22:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=L4o7JScduWUkjbQHJlN9A3qEpamT01d0CueyB22Mu6A=;
-	b=BuaOoDrzuuvEU0Y0rRdkNUw2l/deVFSPVzjd8gBKvwmpcz+Vp6QOiRd00QnzGIRNsC
-	L5PGw4csVhS2qbcU3ARvln1r2L3i0rS2IEx1w7pcdVXkkHdKQhIK1q8MiETXng4dDZA+
-	prJ71WjTxkS95RSrpHZXAqBMTgE57el73aC7dZSfeArJd4kZycc8uE70aN6XrT8617ep
-	bugXRMmCnKYs5rQrq4Oyrc/GfpUeXVfVyWTHh9joBfeUc3hUlUNET9HuDg89XNhqCzwX
-	g+ErIwKXYdL1bV4Ro9sEQJ5dcMoLQ3Z1TSe+TFyy4k62iWlRF5rWGEebype9LE7etJ5h
-	FmEw==
-X-Received: by 10.14.211.66 with SMTP id v42mr46405625eeo.31.1394624899870;
-	Wed, 12 Mar 2014 04:48:19 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=JvF92Dhw9IUtbBLRilVJry9ZG+K3K+JfDMML9jRX1Cg=;
+	b=zxBA+CfQprlKsknn0XdUg10bsBCUqXLetJYeoAlnors0Wso7C4XGhGYupv3nJonB4+
+	E+j7wcDKunjQup+lXui9hm09HRt/8cBfHcna+WbbPWvuxmAGlE+DrJj6IH904L7EEXOp
+	oV5uDhpq10Vw0EpfBGV3zvJw4hL0EME4okUavS09z66bKCM6V0Jtq1EkQL+Nw3wE08Tq
+	c2Uf0k6VQ8exsP+m5/7ox89R3Sp5ECyFAw3Pzfh3CC1WLdOf19HVMdGq1Khq7YFwbCmW
+	N6ksYJqzoAZrvHcuE2F4y8ldn0oLfqxgTpuY93N2Q+csY9SZlRHGx3ftA2lCg1+T+d0B
+	bWVg==
+X-Received: by 10.236.131.19 with SMTP id l19mr61778812yhi.0.1394630549066;
+	Wed, 12 Mar 2014 06:22:29 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.208.225])
 	by mx.google.com with ESMTPSA id
-	cb5sm69048050eeb.18.2014.03.12.04.48.18
-	for <openembedded-devel@lists.openembedded.org>
+	d32sm74573983yhq.27.2014.03.12.06.22.27 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Mar 2014 04:48:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Mar 2014 12:48:22 +0100
-Message-Id: <818cc2d11b02ceb02ac27401fedcaf1e1db91d36.1394624790.git.Martin.Jansa@gmail.com>
+	Wed, 12 Mar 2014 06:22:28 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 757CC19415FB9; Wed, 12 Mar 2014 10:22:24 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 12 Mar 2014 10:22:23 -0300
+Message-Id: <1394630543-14620-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <cover.1394624790.git.Martin.Jansa@gmail.com>
-References: <cover.1394624790.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1394624790.git.Martin.Jansa@gmail.com>
-References: <cover.1394624790.git.Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCH 4/4] qtbase: move 0015-Fix-linuxfb-argument-mmsize-parsing.patch to 5.2.1 recipe
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH] libmicrohttpd: Update to 0.9.34
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,51 +48,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Mar 2014 11:48:19 -0000
+X-List-Received-Date: Wed, 12 Mar 2014 13:22:33 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+This update fixes the following build error:
+
+,----[ Build error ]
+| ...
+| .../libmicrospdy.so: undefined reference to `SSL_get_error'
+| .../libmicrospdy.so: undefined reference to `SSL_write'
+| .../libmicrospdy.so: undefined reference to `SSL_free'
+| ...
+`----
+
+Reported-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes-qt/qt5/qtbase.inc      | 1 -
- recipes-qt/qt5/qtbase_5.2.1.bb | 2 ++
- recipes-qt/qt5/qtbase_git.bb   | 4 ++--
- 3 files changed, 4 insertions(+), 3 deletions(-)
+ .../{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb} (85%)
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index a6fb3b2..89736be 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -18,7 +18,6 @@ SRC_URI += "\
-     file://0011-Allow-building-a-separate-qmake-for-the-target.patch \
-     file://0013-QOpenGLPaintDevice-sub-area-support.patch \
-     file://0014-eglfs-fix-egl-error-for-platforms-only-supporting-on.patch \
--    file://0015-Fix-linuxfb-argument-mmsize-parsing.patch \
-     file://0016-eglfs-Fix-quad-coordinates.patch \
- "
+diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+similarity index 85%
+rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
+rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+index 523b8dd..5de9390 100644
+--- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
++++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+@@ -6,8 +6,8 @@ SECTION = "net"
+ DEPENDS = "libgcrypt gnutls"
  
-diff --git a/recipes-qt/qt5/qtbase_5.2.1.bb b/recipes-qt/qt5/qtbase_5.2.1.bb
-index c106d22..4257367 100644
---- a/recipes-qt/qt5/qtbase_5.2.1.bb
-+++ b/recipes-qt/qt5/qtbase_5.2.1.bb
-@@ -1,5 +1,7 @@
- require qt5-${PV}.inc
- require ${PN}.inc
+ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "013b10f9de1cda5448b29c81305354a3"
+-SRC_URI[sha256sum] = "d9587e8497548f820650cd607daf3615ea3272435779378983032c570f1cd559"
++SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
++SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
  
-+SRC_URI += "file://0015-Fix-linuxfb-argument-mmsize-parsing.patch"
-+
- SRC_URI[md5sum] = "fa005301a2000b92b61b63edc042567b"
- SRC_URI[sha256sum] = "acdfd1aa2548ebea1d922e8e24e5c59f5fc3b2beae7c8003ba47d773bfcc94c0"
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 1083983..07dd936 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -2,5 +2,5 @@ require qt5-git.inc
- require ${PN}.inc
+ inherit autotools lib_package
  
- QT_MODULE_BRANCH = "release"
--# v5.2.1 + 168 commits
--SRCREV = "08cbbde61778276ccdda73d89fd64d02c623779f"
-+# v5.2.1 + 172 commits
-+SRCREV = "bf0336a02502b3ed4d399c1cf5b4a56b1e858d42"
 -- 
 1.9.0
 
