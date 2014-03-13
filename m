@@ -1,28 +1,33 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A9006E8AF
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qc0-f169.google.com (mail-qc0-f169.google.com
+	[209.85.216.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 28B826F7CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Mar 2014 11:54:28 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 13 Mar 2014 04:54:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,646,1389772800"; d="scan'208";a="471577143"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.120.214])
-	by orsmga001.jf.intel.com with ESMTP; 13 Mar 2014 04:54:23 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 13 Mar 2014 11:54:22 +0000
-Message-ID: <2224360.gaE7z3Uyox@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
-In-Reply-To: <20585E58-8061-4AC9-99B7-330584CA48DD@dominion.thruhere.net>
-References: <20140313100833.1910da0b@pcnovotny-t.fit.vutbr.cz>
-	<4829465.mJ9OgDPCCk@peggleto-mobl5.ger.corp.intel.com>
-	<20585E58-8061-4AC9-99B7-330584CA48DD@dominion.thruhere.net>
+	Thu, 13 Mar 2014 11:57:06 +0000 (UTC)
+Received: by mail-qc0-f169.google.com with SMTP id i17so937684qcy.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Mar 2014 04:57:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=I4Xb9ZQy6gqRjW4AwBK+KEMdOo4y7uJWAJVCRd3E35Q=;
+	b=jHgytqeK1BLEf8zpbDz0e4uUg5kAxD5f0Rrwr7oRYn6yGvwaN0IcAlqvsMkhrbkwHx
+	8RsKA036XDxTgFulicKf1/11/AghDMH0b6Q5bkMnODZQo5/tOqUYmaVtNEcP7c5MoS++
+	3UINd0gLZhc64g1ioKOvWtXrkWUZ07TaEhVIbe9PBk7tO/YtKnCFuvYuzfQgJaZGBNeI
+	0xskPnsWixiNUQBDlC19dya6VJ+TMnwEm+AyxfPFIY4QQlHFfHmwihfykZJKDoxrvT8s
+	seR7g5rwbJbiPkd3B3yhBedzLbW+2DDLq5S8yCJTOWpik+RTsPK1tZqgVI+/vQiAV11Z
+	Y0oQ==
+X-Received: by 10.229.183.200 with SMTP id ch8mr1715306qcb.17.1394711827345;
+	Thu, 13 Mar 2014 04:57:07 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Correct versioning of unversioned source in git
+Received: by 10.140.48.48 with HTTP; Thu, 13 Mar 2014 04:56:47 -0700 (PDT)
+In-Reply-To: <532065C9.30300@pseudoterminal.org>
+References: <532065C9.30300@pseudoterminal.org>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Thu, 13 Mar 2014 08:56:47 -0300
+Message-ID: <CAMCfZKHx9PnjzqfJSXUj-ZOvG2b_PPWnAWdD6jqS+Npx3xsX8A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Using openembedded with externally built kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,66 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Mar 2014 11:54:32 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 13 Mar 2014 11:57:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 13 March 2014 12:17:40 Koen Kooi wrote:
-> Op 13 mrt. 2014, om 12:14 heeft Paul Eggleton 
-<paul.eggleton@linux.intel.com> het volgende geschreven:
-> > On Thursday 13 March 2014 12:09:21 Koen Kooi wrote:
-> >> Op 13 mrt. 2014, om 11:45 heeft Paul Eggleton
-> > 
-> > <paul.eggleton@linux.intel.com> het volgende geschreven:
-> >>> On Thursday 13 March 2014 10:59:38 Koen Kooi wrote:
-> >>>> Tomas Novotny schreef op 13-03-14 10:08:
-> >>>>> there is a recipe sunxi-board-fex in meta-sunxi layer. That recipe
-> >>>>> fetches sources from unversioned git which contains definitions of
-> >>>>> some
-> >>>>> boards (in fact it is something like a store). I'm not sure with
-> >>>>> correct
-> >>>>> versioning in OE. Is that: PV = "1.0+git${SRCPV}" SRCREV =
-> >>>>> "<some_gitrev_I_want>" correct? Will be change of SRCREV (only)
-> >>>>> catched
-> >>>>> by build system (I'm curious how OE handles age of the rev in git)? Or
-> >>>>> do
-> >>>>> I need to raise PV to 1.1 and so on with every change to SRCREV?
-> >>>> 
-> >>>> The answer changes if you have more than one buildhost. If you have
-> >>>> only
-> >>>> one buildhost and don't care about other people rebuilding the exact
-> >>>> same versions, 1.0+git${SRCPV} will work.
-> >>>> 
-> >>>> If you have more than one buildhost and/or care about other people
-> >>>> rebuilding the exact same, you'll need to increase PR (or PV) everytime
-> >>>> SRCREV changes. That will still cause some discrepancies if someone
-> >>>> rebuilds after >1 SRCREV change, but upgrade paths should work when
-> >>>> increasing PV (not with PR!).
-> >>> 
-> >>> Why not with PR?
-> >> 
-> >> because SRCPV in in PV, not PR
-> > 
-> > Right, but if you're using the PR server, that also stores the
-> > incrementing
-> > number at the start of SRCPV; PR may also increment when SRCREV changes as
-> > well (not sure on the latter). The PR server ought to be used if you care
-> > about this sort of thing.
-> 
-> Only if your PR server is publicly available *and* you have network access
-> during the build. There is currently no workable way to get versioning info
-> to users trying to rebuild something. The closest I've been to a solution
-> is to ship prserv-tool exports in git.
+On Wed, Mar 12, 2014 at 10:48 AM, Carlos Rafael Giani <dv@pseudoterminal.or=
+g
+> wrote:
 
-If you're saying you want something that doesn't require network access, gets 
-the right answer for all users *and* automatically increments when something 
-changes - those are conflicting requirements...
+> I have a platform with a very barebones BSP that builds and patches a 2.6
+> kernel using a whole lot of shell scripts and patch files.
+> Integrating this build process into a .bb file is too complicated at the
+> moment.
+>
+> Since cross compiling all packages I need is a nightmare to do manually, =
+I
+> wonder if I can get OE to use the prebuilt kernel along with
+> its kernel modules and headers instead of trying to build a new kernel.
+> Ideally, I would just tell it where the kernel headers are, where
+> the uImage is, and where the modules are. I imagine this as some kind of
+> kernel .bb file setting things up to not actually build anything.
+>
+> My question is: is this possible? All I could find was about external
+> toolchains and external kernel modules.
+>
 
-Cheers,
-Paul
+I believe that you have to wright your own recipe with custom do_compile,
+do_install etc functions.
 
--- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+
+Abra=E7os,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br<http://www.embarcados.com.br/?utm_source=3Dassinatura=
+_diego&utm_medium=3De-mail&utm_campaign=3DAssinatura%20Email%20Diego>
+
+/*long live rock 'n roll*/
 
