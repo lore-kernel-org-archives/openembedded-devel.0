@@ -1,35 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 855276F86A
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 52BFA6E8D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 19:07:55 +0000 (UTC)
-Received: by mail-ee0-f51.google.com with SMTP id c13so1752893eek.10
+	Fri, 14 Mar 2014 20:52:27 +0000 (UTC)
+Received: by mail-yh0-f51.google.com with SMTP id f10so3138512yha.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 12:07:56 -0700 (PDT)
+	Fri, 14 Mar 2014 13:52:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9Koxp1656QnUrjAQ2bP0ZwuQw3wsYNH3QGKiwqy0OOg=;
-	b=tLZZVxp6saXfYPlHq7K6hF5WwEv5jccrM0w8w+dXyzL/gIAB43nspFFC4TJ3N/EIvo
-	ufYeB5KxeFs9ftmjJxGlXRdkbVz7ABBExQr9kUQKcYxgm6NvAETGZoG9j0X2vcnVXk0i
-	lzUR17ym1yxfo8kv5SAkOzvBXCK7ue95yyunoPOVVjsmZ34P3p6iGImc9pS8N3v5P9PG
-	mGzIjOzxJsTFXnqgMXf12nvZo4Th8sGUjg/F+MWrB18TNamM5UvqZGHAFNIYYi1mgQ8T
-	sd2INxjnpsqSLb0GKHNwBZqiP1iFxF5x6mbKiz+9bz4aclf1W8yXCGFTcz/+L0NRKpAq
-	8fhw==
-X-Received: by 10.14.94.3 with SMTP id m3mr9940073eef.54.1394824076757;
-	Fri, 14 Mar 2014 12:07:56 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	p8sm6760609eef.26.2014.03.14.12.07.55 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 14 Mar 2014 12:07:56 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Mar 2014 20:08:08 +0100
-Message-Id: <1394824088-20009-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1394824088-20009-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1394824088-20009-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-systemd][PATCH 2/2] util-linux: Rename .bbappend to match any version from oe-core and remove uuidd.socket
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=lJp0nPeURnfy1ppx/tNfE+T/w4GSRCoq15+l/iwFS8Q=;
+	b=XHt7vswRhsqPA/SFrXaT2G7lK7R6buIQvBQRv9uwWHjZpemRprWr/D20aFtDwkBVc3
+	rqZKtjL7mFnJjvaffwW2b+NCrVymSEQt0ptK9L1SGCLMZzhrlEsAzrm6YIXAem6Xn8If
+	SlpZGXZq+EFmyvTZqYE3gvE6tFYu0ziq2Jl5BFsMY/ptOdZKn/Qzzi9viTc7/86IfuAD
+	A8k/St/9UlQMmV2OeqS9gF/V6xuHzzLQHjlZwXAX1rxcSVRM1pi+JRL6x/lZxJ9JJ3I3
+	rXRRN5b911lgIc97JaHsgpo+PsB5TPOnEViioznxHYtG5DlvfixICUzfKqeFdXYRqszw
+	IlLw==
+MIME-Version: 1.0
+X-Received: by 10.236.124.104 with SMTP id w68mr14036505yhh.2.1394830348381;
+	Fri, 14 Mar 2014 13:52:28 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.124.72 with HTTP; Fri, 14 Mar 2014 13:52:28 -0700 (PDT)
+In-Reply-To: <532334EB.7010002@mlbassoc.com>
+References: <1394599581-26844-1-git-send-email-raj.khem@gmail.com>
+	<53219295.9010302@mlbassoc.com> <532334EB.7010002@mlbassoc.com>
+Date: Fri, 14 Mar 2014 17:52:28 -0300
+X-Google-Sender-Auth: OjSAEFnEUb7TmBM3_p0h3DHz_9o
+Message-ID: <CAP9ODKpwYWLOt66cCdsmNwLAw0YgJN7sxVzS_L5W37e7sR9WMA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][RFT][PATCH] chromium: Upgrade 29 -> 35
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,46 +44,198 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2014 19:07:56 -0000
+X-List-Received-Date: Fri, 14 Mar 2014 20:52:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* oe-core recipe has uuidd.service in ${PN}-uuidd
-  SYSTEMD_PACKAGES = "${PN}-uuidd"
-  SYSTEMD_SERVICE_${PN}-uuidd = "uuidd.service"
+On Fri, Mar 14, 2014 at 1:57 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2014-03-13 05:12, Gary Thomas wrote:
+>> On 2014-03-11 22:46, Khem Raj wrote:
+>>> Removed already applied patches
+>>>
+>>> License year changed thats why there is change in checksum
+>>>
+>>> -// Copyright 2014 The Chromium Authors. All rights reserved.
+>>> +// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+>>>
+>>> we see
+>>>
+>>> rpm/bin/debugedit: canonicalization unexpectedly shrank by one character
+>>>
+>>> so we add PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+>>>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ---
+>>>  ..._focus_tracker_notify_deprecated_since_ATK_2_9_4.patch |  0
+>>>  .../{chromium-29.0.1518.2 => chromium}/armv6/include.gypi |  0
+>>>  .../armv6/oe-defaults.gypi                                |  0
+>>>  .../armv7a/include.gypi                                   |  0
+>>>  .../armv7a/oe-defaults.gypi                               |  0
+>>>  .../{chromium-29.0.1518.2 => chromium}/google-chrome      |  0
+>>>  .../google-chrome.desktop                                 |  0
+>>>  .../{chromium-29.0.1518.2 => chromium}/i586/include.gypi  |  0
+>>>  .../i586/oe-defaults.gypi                                 |  0
+>>>  .../secitem_array.patch                                   |  0
+>>>  .../uninitialised-warning.patch                           |  6 +++---
+>>>  .../{chromium-29.0.1518.2 => chromium}/unistd-2.patch     |  0
+>>>  .../x86-64/include.gypi                                   |  0
+>>>  .../x86-64/oe-defaults.gypi                               |  0
+>>>  .../{chromium_29.0.1518.2.bb => chromium_35.0.1883.0.bb}  | 15 ++++++++-------
+>>>  15 files changed, 11 insertions(+), 10 deletions(-)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/armv6/include.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/armv6/oe-defaults.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/armv7a/include.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/armv7a/oe-defaults.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/google-chrome (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/google-chrome.desktop (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/i586/include.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/i586/oe-defaults.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/secitem_array.patch (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/uninitialised-warning.patch (96%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/unistd-2.patch (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/x86-64/include.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium-29.0.1518.2 => chromium}/x86-64/oe-defaults.gypi (100%)
+>>>  rename recipes-browser/chromium/{chromium_29.0.1518.2.bb => chromium_35.0.1883.0.bb} (84%)
+>>>
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch b/recipes-browser/chromium/chromium/001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch
+>>> rename to recipes-browser/chromium/chromium/001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/armv6/include.gypi b/recipes-browser/chromium/chromium/armv6/include.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/armv6/include.gypi
+>>> rename to recipes-browser/chromium/chromium/armv6/include.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/armv6/oe-defaults.gypi b/recipes-browser/chromium/chromium/armv6/oe-defaults.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/armv6/oe-defaults.gypi
+>>> rename to recipes-browser/chromium/chromium/armv6/oe-defaults.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/armv7a/include.gypi b/recipes-browser/chromium/chromium/armv7a/include.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/armv7a/include.gypi
+>>> rename to recipes-browser/chromium/chromium/armv7a/include.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/armv7a/oe-defaults.gypi b/recipes-browser/chromium/chromium/armv7a/oe-defaults.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/armv7a/oe-defaults.gypi
+>>> rename to recipes-browser/chromium/chromium/armv7a/oe-defaults.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/google-chrome b/recipes-browser/chromium/chromium/google-chrome
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/google-chrome
+>>> rename to recipes-browser/chromium/chromium/google-chrome
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/google-chrome.desktop b/recipes-browser/chromium/chromium/google-chrome.desktop
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/google-chrome.desktop
+>>> rename to recipes-browser/chromium/chromium/google-chrome.desktop
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/i586/include.gypi b/recipes-browser/chromium/chromium/i586/include.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/i586/include.gypi
+>>> rename to recipes-browser/chromium/chromium/i586/include.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/i586/oe-defaults.gypi b/recipes-browser/chromium/chromium/i586/oe-defaults.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/i586/oe-defaults.gypi
+>>> rename to recipes-browser/chromium/chromium/i586/oe-defaults.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/secitem_array.patch b/recipes-browser/chromium/chromium/secitem_array.patch
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/secitem_array.patch
+>>> rename to recipes-browser/chromium/chromium/secitem_array.patch
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/uninitialised-warning.patch b/recipes-browser/chromium/chromium/uninitialised-warning.patch
+>>> similarity index 96%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/uninitialised-warning.patch
+>>> rename to recipes-browser/chromium/chromium/uninitialised-warning.patch
+>>> index fac12bb..afdd784 100644
+>>> --- a/recipes-browser/chromium/chromium-29.0.1518.2/uninitialised-warning.patch
+>>> +++ b/recipes-browser/chromium/chromium/uninitialised-warning.patch
+>>> @@ -30,10 +30,10 @@ Make gcc 4.8 happy. It complains about uninitialized symbols
+>>>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>
+>>>  Upstream-Status: Unknown
+>>> -Index: chromium-29.0.1518.2/webkit/glue/webclipboard_impl.cc
+>>> +Index: chromium-29.0.1518.2/content/renderer/webclipboard_impl.cc
+>>>  ===================================================================
+>>> ---- chromium-29.0.1518.2.orig/webkit/glue/webclipboard_impl.cc
+>>> -+++ chromium-29.0.1518.2/webkit/glue/webclipboard_impl.cc
+>>> +--- chromium-29.0.1518.2.orig/content/renderer/webclipboard_impl.cc
+>>> ++++ chromium-29.0.1518.2/content/renderer/webclipboard_impl.cc
+>>>  @@ -73,7 +73,7 @@ uint64 WebClipboardImpl::getSequenceNumb
+>>>   }
+>>>
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/unistd-2.patch b/recipes-browser/chromium/chromium/unistd-2.patch
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/unistd-2.patch
+>>> rename to recipes-browser/chromium/chromium/unistd-2.patch
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/x86-64/include.gypi b/recipes-browser/chromium/chromium/x86-64/include.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/x86-64/include.gypi
+>>> rename to recipes-browser/chromium/chromium/x86-64/include.gypi
+>>> diff --git a/recipes-browser/chromium/chromium-29.0.1518.2/x86-64/oe-defaults.gypi b/recipes-browser/chromium/chromium/x86-64/oe-defaults.gypi
+>>> similarity index 100%
+>>> rename from recipes-browser/chromium/chromium-29.0.1518.2/x86-64/oe-defaults.gypi
+>>> rename to recipes-browser/chromium/chromium/x86-64/oe-defaults.gypi
+>>> diff --git a/recipes-browser/chromium/chromium_29.0.1518.2.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+>>> similarity index 84%
+>>> rename from recipes-browser/chromium/chromium_29.0.1518.2.bb
+>>> rename to recipes-browser/chromium/chromium_35.0.1883.0.bb
+>>> index 1c62f1e..6a03d6b 100644
+>>> --- a/recipes-browser/chromium/chromium_29.0.1518.2.bb
+>>> +++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+>>> @@ -1,6 +1,6 @@
+>>>  DESCRIPTION = "Chromium browser"
+>>>  LICENSE = "BSD"
+>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d2d164565cc10f298390174d9cb6d18d"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
+>>>  DEPENDS = "xz-native pciutils pulseaudio xextproto cairo nss gtk+ zlib-native libav libxi libgnome-keyring libxss cups ninja-native gconf"
+>>>  SRC_URI = "\
+>>>          http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
+>>> @@ -9,12 +9,9 @@ SRC_URI = "\
+>>>          file://unistd-2.patch \
+>>>          file://google-chrome \
+>>>          file://google-chrome.desktop \
+>>> -        file://uninitialised-warning.patch \
+>>> -    file://001-atk_focus_tracker_notify_deprecated_since_ATK_2_9_4.patch \
+>>> -    file://secitem_array.patch;striplevel=2 \
+>>>  "
+>>> -SRC_URI[md5sum] = "2480c3fd109ef000575629acb8a906ca"
+>>> -SRC_URI[sha256sum] = "7f08624f7d9bd120de0043da7ee09985ae6b6990d22d8c1b1f7c66fd4ed681a1"
+>>> +SRC_URI[md5sum] = "c0659bc3c6b540e106e043fd27f54358"
+>>> +SRC_URI[sha256sum] = "666d5948c6508072f9f5d6acff82290fa5939e1da1b94b042a1e05daf3357b61"
+>>>
+>>>  # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
+>>>  COMPATIBLE_MACHINE = "(-)"
+>>> @@ -60,8 +57,9 @@ do_install() {
+>>>
+>>>      install -d ${D}${bindir}/chrome/
+>>>      install -m 0755 ${S}/out/Release/chrome ${D}${bindir}/chrome/chrome
+>>> -    install -m 0644 ${S}/out/Release/chrome.pak ${D}${bindir}/chrome/
+>>>      install -m 0644 ${S}/out/Release/resources.pak ${D}${bindir}/chrome/
+>>> +    install -m 0644 ${S}/out/Release/content_resources.pak ${D}${bindir}/chrome/
+>>> +    install -m 0644 ${S}/out/Release/keyboard_resources.pak ${D}${bindir}/chrome/
+>>>      install -m 0644 ${S}/out/Release/chrome_100_percent.pak ${D}${bindir}/chrome/
+>>>      install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
+>>>      install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
+>>> @@ -72,3 +70,6 @@ do_install() {
+>>>
+>>>  FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications"
+>>>  FILES_${PN}-dbg = "${bindir}/chrome/.debug/"
+>>> +
+>>> +PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+>>> +
+>>>
+>>
+>> I finally got this to build on my beefy machine, but it fails
+>> when launched:
+>>   [0313/110152:FATAL:content_main_runner.cc(734)] Check failed: base::i18n::InitializeICU().
+>>
+>> I've built this same system and used the previous version of chrome successfully.
+>>
+>> What could be missing/broken?  My package manifest is attached.
+>
+> I got this to go, but I had to apply the attached patches.
+>
+> Can you squash these into your changes and send a V2?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../oe-core/recipes-core/util-linux/util-linux_%.bbappend      |  3 +++
- .../oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend | 10 ----------
- 2 files changed, 3 insertions(+), 10 deletions(-)
- create mode 100644 meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
- delete mode 100644 meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
+Which machine did you use for test?
 
-diff --git a/meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend b/meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
-new file mode 100644
-index 0000000..f006b3f
---- /dev/null
-+++ b/meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
-@@ -0,0 +1,3 @@
-+RPROVIDES_${PN} += "${PN}-systemd"
-+RREPLACES_${PN} += "${PN}-systemd"
-+RCONFLICTS_${PN} += "${PN}-systemd"
-diff --git a/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend b/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
-deleted file mode 100644
-index c6a97ca..0000000
---- a/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
-+++ /dev/null
-@@ -1,10 +0,0 @@
--inherit systemd
--
--SYSTEMD_UNITDIR = "${systemd_unitdir}/system"
--EXTRA_OECONF += "--enable-socket-activation --with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
--
--RPROVIDES_${PN} += "${PN}-systemd"
--RREPLACES_${PN} += "${PN}-systemd"
--RCONFLICTS_${PN} += "${PN}-systemd"
--
--SYSTEMD_SERVICE_${PN} = "uuidd.socket"
 -- 
-1.9.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
