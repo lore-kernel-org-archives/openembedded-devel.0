@@ -1,34 +1,25 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
-	[209.85.213.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 602786F564
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 41E0D6EFA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 13:18:42 +0000 (UTC)
-Received: by mail-yh0-f52.google.com with SMTP id c41so2476084yho.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=MwVmLWJVARmUmU6hi9QNaLlJrhBa/uruCrg2ssfG+lk=;
-	b=b3/o8fHMLDRuOy+QrBeoWjZSn7QHL6Tox4tq8NPL5aBjdGQ6ZOqpc91RDkZo+aLQmm
-	EJW8/+/hMoc3qUA6KOXLl9VeNmlh9R4okcWvWmF+GcKV6C0GpFJZmdYnJh3QczEll3NQ
-	c3vFJeHgumvFEN9RRZnsPQQ+r+n8ts1Q3gFBzf8088ms6D7DyghdUfV8DIXX1PR3P37J
-	QUCFTP+WvkD/FAbmyfsWgaCf/ZGLIjXfSHIY08hopgmiHDMmOdihm5Y6GOliEosMjkeW
-	YQVInFGCt8S2U9EjK5FQQMFcGSYONLvlecYqURd4RcYNiiUExWIzo4QpYLNnADyUKnkq
-	nklg==
-MIME-Version: 1.0
-X-Received: by 10.236.60.68 with SMTP id t44mr10678089yhc.47.1394803123509;
-	Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
+	Fri, 14 Mar 2014 14:10:38 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 14 Mar 2014 07:05:37 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,655,1389772800"; d="scan'208";a="472359030"
+Received: from ssaevars-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.62])
+	by orsmga001.jf.intel.com with ESMTP; 14 Mar 2014 07:10:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Mar 2014 14:10:04 +0000
+Message-ID: <1577232.dQug1huf51@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
 In-Reply-To: <1394792627-7361-1-git-send-email-raj.khem@gmail.com>
 References: <1394792627-7361-1-git-send-email-raj.khem@gmail.com>
-Date: Fri, 14 Mar 2014 10:18:43 -0300
-X-Google-Sender-Auth: RC-Zm5m8tM5RcP6bE2kc5PIDRN4
-Message-ID: <CAP9ODKqQ4_pzHEJsQgo-8hLLqskUGWmGv11jkzqUYjMgzRw6ZQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-qt5][PATCH] licenses: Fix WARNING: qt3d: No generic license file exists for: PREVIEW.COMMERCIAL in any provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,20 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2014 13:18:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 Mar 2014 14:10:40 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Fri, Mar 14, 2014 at 7:23 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Provide the license text and instructions on how to include
-> it when using meta-qt5 layer
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On Friday 14 March 2014 03:23:47 Khem Raj wrote:
+> PREVIEW.COMMERCIAL
 
-This could be added to the layer.conf so user does not need to do it manually.
+Surely the license name should be something a bit more obviously related to 
+Nokia / Digia / Qt ?
 
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
