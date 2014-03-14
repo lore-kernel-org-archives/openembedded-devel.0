@@ -1,48 +1,49 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from smtp103.mer-nm.internl.net (smtp103.mer-nm.internl.net
-	[217.149.192.139])
-	by mail.openembedded.org (Postfix) with ESMTP id D42CA6F4E7
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B8756E717
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 11:54:01 +0000 (UTC)
-Received: from amavisd-new (mailscanner03.wrt-nm.internl.net [217.149.192.96])
-	by smtp103.mer-nm.internl.net (Postfix) with ESMTP id D41D73F88D
+	Fri, 14 Mar 2014 12:37:12 +0000 (UTC)
+Received: by mail-ie0-f182.google.com with SMTP id y20so2463042ier.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 12:54:00 +0100 (CET)
-X-Spam-scanned: scanned by InterNLnet Mail Scan System
-X-Spam-Flag: NO
-X-Spam-Score: -4.4
-X-Spam-Level: 
-X-Spam-Status: No, score=-4.4 tagged_above=-999 required=4.5
-	tests=[BAYES_00=-2.9, KHOP_THREADED=-1.5] autolearn=no
-X-Spam-Languages: en
-Received: from smtp103.mer-nm.internl.net ([217.149.192.139])
-	by amavisd-new (mailscanner03.wrt-nm.internl.net [217.149.192.160])
-	(amavisd-new, port 10024)
-	with ESMTP for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 12:54:00 +0100 (CET)
-Received: from TOP-EX01.TOPIC.LOCAL (mail.topic.nl [82.204.13.182])
-	(using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by smtp103.mer-nm.internl.net (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 12:54:00 +0100 (CET)
-Received: from [192.168.80.45] (192.168.80.45) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.181.6;
-	Fri, 14 Mar 2014 12:54:01 +0100
-Message-ID: <5322EDD7.1050206@topic.nl>
-Date: Fri, 14 Mar 2014 12:53:59 +0100
-From: Mike Looijmans <mike.looijmans@topic.nl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Fri, 14 Mar 2014 05:37:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=HBiqyfeSqQy4EfclWJjPce4q1qoU6AziYS1JWYsaKCs=;
+	b=TIi6rovYdTqBrbzsaesM9DWiGkyUid+2Rw6rzSXMqglcQYDJ3X2PJnzlidg4VSaqZF
+	QWEoHFdtLYcbDBD2rdqE5yEihWuKhcquU+GoU+G0+dHAJqA61oEN8GWKvL2F1erfTS17
+	jKI5ePdiU8q2ZsC92LW8TKZQen2W3wvTWZjXM51D2WZLB9+vicwVtSupqyUUEJUylN5Q
+	zRlNkplMIDrDAlhcfIndWpzGNO90q0Cchwrj6H2Tn/17zzUtkGiXwDripmNJsd2waxpD
+	MsLzhqcOq2wnxiQa6vpjJ8njDAgeV3Hm/gZQS1Iy6u4nTLmkt7lpc+DBJJ0pgnUsc9Rr
+	dT+g==
+X-Gm-Message-State: ALoCoQl/nBs65tu0KtS32Xpp+HvQCyYy87dEO4nfLH9QphLWssQY3Jrf3JA7x/i2s6nCoesdkaof
+X-Received: by 10.50.40.105 with SMTP id w9mr7415739igk.3.1394800633451;
+	Fri, 14 Mar 2014 05:37:13 -0700 (PDT)
+Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
+	by mx.google.com with ESMTPSA id
+	bf7sm78876127igb.9.2014.03.14.05.37.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 14 Mar 2014 05:37:12 -0700 (PDT)
+Date: Fri, 14 Mar 2014 08:37:09 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140314123706.GA3469@deserted.net>
+References: <1369981125-9597-1-git-send-email-xufeng.zhang@windriver.com>
+	<5362182.lGPryEyDJx@peggleto-mobl5.ger.corp.intel.com>
+	<CAJTo0LbSeFKkk0JrEYQAS3Lb2NVAJYuraaBAkNCgT_-LUW+Gdw@mail.gmail.com>
+	<5621583.lHbqxaxFpZ@peggleto-mobl5.ger.corp.intel.com>
+	<6B3DF93B-C645-42A0-A36E-4EE3923E3905@gmail.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <20140313100833.1910da0b@pcnovotny-t.fit.vutbr.cz>	<4829465.mJ9OgDPCCk@peggleto-mobl5.ger.corp.intel.com>	<20585E58-8061-4AC9-99B7-330584CA48DD@dominion.thruhere.net>
-	<2224360.gaE7z3Uyox@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <2224360.gaE7z3Uyox@peggleto-mobl5.ger.corp.intel.com>
-X-Originating-IP: [192.168.80.45]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-Subject: Re: Correct versioning of unversioned source in git
+In-Reply-To: <6B3DF93B-C645-42A0-A36E-4EE3923E3905@gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,98 +57,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2014 11:54:02 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 14 Mar 2014 12:37:17 -0000
+X-Groupsio-MsgNum: 48663
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Q68bSM7Ycu6FN28Q"
+Content-Disposition: inline
+
+--Q68bSM7Ycu6FN28Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFOn 03/13/2014 12:54 PM, Paul Eggleton wrote:
-> On Thursday 13 March 2014 12:17:40 Koen Kooi wrote:
->> Op 13 mrt. 2014, om 12:14 heeft Paul Eggleton
-> <paul.eggleton@linux.intel.com> het volgende geschreven:
->>> On Thursday 13 March 2014 12:09:21 Koen Kooi wrote:
->>>> Op 13 mrt. 2014, om 11:45 heeft Paul Eggleton
->>>
->>> <paul.eggleton@linux.intel.com> het volgende geschreven:
->>>>> On Thursday 13 March 2014 10:59:38 Koen Kooi wrote:
->>>>>> Tomas Novotny schreef op 13-03-14 10:08:
->>>>>>> there is a recipe sunxi-board-fex in meta-sunxi layer. That recipe
->>>>>>> fetches sources from unversioned git which contains definitions of
->>>>>>> some
->>>>>>> boards (in fact it is something like a store). I'm not sure with
->>>>>>> correct
->>>>>>> versioning in OE. Is that: PV =3D "1.0+git${SRCPV}" SRCREV =3D
->>>>>>> "<some_gitrev_I_want>" correct? Will be change of SRCREV (only)
->>>>>>> catched
->>>>>>> by build system (I'm curious how OE handles age of the rev in git)?=
- Or
->>>>>>> do
->>>>>>> I need to raise PV to 1.1 and so on with every change to SRCREV?
->>>>>>
->>>>>> The answer changes if you have more than one buildhost. If you have
->>>>>> only
->>>>>> one buildhost and don't care about other people rebuilding the exact
->>>>>> same versions, 1.0+git${SRCPV} will work.
->>>>>>
->>>>>> If you have more than one buildhost and/or care about other people
->>>>>> rebuilding the exact same, you'll need to increase PR (or PV) everyt=
-ime
->>>>>> SRCREV changes. That will still cause some discrepancies if someone
->>>>>> rebuilds after >1 SRCREV change, but upgrade paths should work when
->>>>>> increasing PV (not with PR!).
->>>>>
->>>>> Why not with PR?
->>>>
->>>> because SRCPV in in PV, not PR
->>>
->>> Right, but if you're using the PR server, that also stores the
->>> incrementing
->>> number at the start of SRCPV; PR may also increment when SRCREV changes=
- as
->>> well (not sure on the latter). The PR server ought to be used if you ca=
-re
->>> about this sort of thing.
->>
->> Only if your PR server is publicly available *and* you have network acce=
-ss
->> during the build. There is currently no workable way to get versioning i=
-nfo
->> to users trying to rebuild something. The closest I've been to a solutio=
-n
->> is to ship prserv-tool exports in git.
->
-> If you're saying you want something that doesn't require network access, =
-gets
-> the right answer for all users *and* automatically increments when someth=
-ing
-> changes - those are conflicting requirements...
+[Re: [oe] [OE-devel] [PATCH] ntp: Resolve some abnormal behaviors] On 14.03=
+=2E01 (Sat 14:57) Khem Raj wrote:
 
-"gitpkgv" from mete-openembedded has been doing a good job at that for me i=
-n=20
-several projects. It just counts the number of git commits and uses that as=
-=20
-counter. Everybody thus sees the same number, versions are incremental, and=
- no=20
-server access needed during build.
+>=20
+> On Mar 1, 2014, at 2:48 PM, Paul Eggleton <paul.eggleton@linux.intel.com>=
+ wrote:
+>=20
+> > On Saturday 01 March 2014 20:18:44 Burton, Ross wrote:
+> >> On 1 March 2014 09:59, Paul Eggleton <paul.eggleton@linux.intel.com> w=
+rote:
+> >>> That would be nice, but since you can't actually distribute a product=
+ that
+> >>> connects to the main pool.ntp.org server (you need to register your o=
+wn
+> >>> NTP
+> >>> pool [1]) we've elected not to set any default so that you are encour=
+aged
+> >>> to do the right thing and explicitly set your own.
+> >>=20
+> >> We should probably put this in the documentation.  I'll file a bug.
+> >=20
+> > Whose documentation though? ntp is part of meta-networking rather than =
+OE-
+> > Core.
+> >=20
+>=20
+> README for meta-networking is best place.=20
 
+I agree.  I'm working through my backlog of merges right now but I've
+not seen a readme patch.  If I missed it, please let me know, otherwise
+when I get a chance I'll propose a readme documenting this myself.
 
-My only wish would be that this were in oe-core.
+-J.
+
+>=20
+> > Cheers,
+> > Paul
+> >=20
+> > --=20
+> >=20
+> > Paul Eggleton
+> > Intel Open Source Technology Centre
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
 
 
 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
-Met vriendelijke groet / kind regards,
+--=20
+-Joe MacDonald.
+:wq
 
-Mike Looijmans
+--Q68bSM7Ycu6FN28Q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-TOPIC Embedded Systems
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: (+31) (0) 499 33 69 79
-Telefax:  (+31) (0) 499 33 69 70
-E-mail: mike.looijmans@topic.nl
-Website: www.topic.nl
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-Please consider the environment before printing this e-mail
+iEYEARECAAYFAlMi9+kACgkQwFvcllog0XzPmwCfaQrbTQuhl7dU3IuecSyF/M4c
+Gj4An326RRMrzqEuQPaoN5S4+R2DmTz1
+=9+Gv
+-----END PGP SIGNATURE-----
 
-
+--Q68bSM7Ycu6FN28Q--
