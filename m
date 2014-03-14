@@ -1,47 +1,35 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E2B6D6E717
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 602786F564
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 12:47:20 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id to1so2450985ieb.20
+	Fri, 14 Mar 2014 13:18:42 +0000 (UTC)
+Received: by mail-yh0-f52.google.com with SMTP id c41so2476084yho.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 05:47:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=GZu9ylEXhfWmtHpXBCRL8BL9YOXwtsBh8r9rJzLARpc=;
-	b=FdOJp31HlqdT2bN4DhVAkc2DFEzNuKW40f0BCRFlgkECZV5baPT5mSVeqbTYsyNzQB
-	fxaabiVGjweyaffDzCbJFXRZQGEUVQKaUTaHMxb88PaETdlZRHmauFK1/F5e9xhraHQK
-	MaPAc/TXOwy84gtp37tx9rp761KWhVcpWdhXqph/OIoSO7WSr1NYd4WPmH+mZqvBgWaZ
-	FtAq33Pay1Kvzf/XppfHig4bYwVldG+lmJGwHJl/2HAhWk8y8Z/PoAeITM6PKPikaxi9
-	cnJqjzGDan0gSrDImVHyKkf2Vyru1yMIdkcDvme6W0WI8c1VqgsgmgPXLl/EXD3yHtU1
-	aaFw==
-X-Gm-Message-State: ALoCoQmVzdRx5v/dYfIFriDPpLy9QI5cnAnHt0kCpWoDKzQNW8l6xFyI5h7BqSBgdXY2DsIwgEDP
-X-Received: by 10.50.141.199 with SMTP id rq7mr7447412igb.11.1394801241313;
-	Fri, 14 Mar 2014 05:47:21 -0700 (PDT)
-Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id
-	v2sm18986036igk.7.2014.03.14.05.47.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Fri, 14 Mar 2014 05:47:20 -0700 (PDT)
-Date: Fri, 14 Mar 2014 08:47:17 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140314124715.GB3469@deserted.net>
-References: <1386874857-8596-1-git-send-email-joe@deserted.net>
-	<531F372B.8010907@digi.com> <20140311170540.GA13065@deserted.net>
-	<531F4A8C.2060205@digi.com>
+	Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=MwVmLWJVARmUmU6hi9QNaLlJrhBa/uruCrg2ssfG+lk=;
+	b=b3/o8fHMLDRuOy+QrBeoWjZSn7QHL6Tox4tq8NPL5aBjdGQ6ZOqpc91RDkZo+aLQmm
+	EJW8/+/hMoc3qUA6KOXLl9VeNmlh9R4okcWvWmF+GcKV6C0GpFJZmdYnJh3QczEll3NQ
+	c3vFJeHgumvFEN9RRZnsPQQ+r+n8ts1Q3gFBzf8088ms6D7DyghdUfV8DIXX1PR3P37J
+	QUCFTP+WvkD/FAbmyfsWgaCf/ZGLIjXfSHIY08hopgmiHDMmOdihm5Y6GOliEosMjkeW
+	YQVInFGCt8S2U9EjK5FQQMFcGSYONLvlecYqURd4RcYNiiUExWIzo4QpYLNnADyUKnkq
+	nklg==
 MIME-Version: 1.0
-In-Reply-To: <531F4A8C.2060205@digi.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-networking][PATCH] vsftpd: install volatiles file based on init system
+X-Received: by 10.236.60.68 with SMTP id t44mr10678089yhc.47.1394803123509;
+	Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.124.72 with HTTP; Fri, 14 Mar 2014 06:18:43 -0700 (PDT)
+In-Reply-To: <1394792627-7361-1-git-send-email-raj.khem@gmail.com>
+References: <1394792627-7361-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 14 Mar 2014 10:18:43 -0300
+X-Google-Sender-Auth: RC-Zm5m8tM5RcP6bE2kc5PIDRN4
+Message-ID: <CAP9ODKqQ4_pzHEJsQgo-8hLLqskUGWmGv11jkzqUYjMgzRw6ZQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] licenses: Fix WARNING: qt3d: No generic license file exists for: PREVIEW.COMMERCIAL in any provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,58 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2014 12:47:23 -0000
-X-Groupsio-MsgNum: 48664
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="l76fUT7nc3MelDdI"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 14 Mar 2014 13:18:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---l76fUT7nc3MelDdI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Mar 14, 2014 at 7:23 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Provide the license text and instructions on how to include
+> it when using meta-qt5 layer
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-[Re: [oe] [meta-networking][PATCH] vsftpd: install volatiles file based on =
-init system] On 14.03.11 (Tue 18:40) Javier Viguera wrote:
+This could be added to the layer.conf so user does not need to do it manually.
 
-> Hi Joe,
->=20
-> On 11/03/14 18:05, Joe MacDonald wrote:
-> >Sorry, no, not yet.  At the end of the thread I think I had a workable
-> >solution but I've not merged the result.  If you have an updated patch
-> >that addresses all of the systemd/sysvinit/systemd+sysvinit
-> >combinations, I'll be happy to merge it instead of my work.
->=20
-> Unfortunately I have never played with *systemd*, so i don't have a patch
-> handy.
->=20
-> At the moment in my custom BSP layer i have workarounded it creating a
-> bbappend with just:
->=20
-> INSANE_SKIP_${PN} =3D "installed-vs-shipped"
->=20
-> I know this is not the proper fix but at least it allows me to complete t=
-he
-> build. Otherwise it fails.
 
-Understood.  I'll finish up my version that is intended to address the
-other combinations as soon as I can and I'll follow up so you know the
-status.
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---=20
--Joe MacDonald.
-:wq
-
---l76fUT7nc3MelDdI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlMi+lMACgkQwFvcllog0XxLaQCbBwm03Hp3hU3aIqjEfleiDTwq
-DqkAoKZKjkBmlNPusljCy6u1DQjoD0IO
-=lT1x
------END PGP SIGNATURE-----
-
---l76fUT7nc3MelDdI--
