@@ -1,29 +1,40 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AB756BF88
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D0AC6F6AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Mar 2014 22:55:32 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id BB733F81201; Fri, 14 Mar 2014 16:55:33 -0600 (MDT)
+	Sat, 15 Mar 2014 11:52:17 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 1CAEC2232071
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Mar 2014 12:52:16 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3378D2232070
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Mar 2014 12:52:14 +0100 (CET)
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
+	h873313.serverkompetenz.net
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
 	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 19CE1F811EB;
-	Fri, 14 Mar 2014 16:55:33 -0600 (MDT)
-Message-ID: <532388EC.3040403@mlbassoc.com>
-Date: Fri, 14 Mar 2014 16:55:40 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-MIME-Version: 1.0
+Received: from mail.itconsulting-heinold.de (g225145087.adsl.alicedsl.de
+	[92.225.145.87]) by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Mar 2014 12:52:13 +0100 (CET)
+Date: Sat, 15 Mar 2014 12:52:07 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1394820299-22792-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1394820299-22792-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.5.2
-Subject: Re: [meta-browser][PATCH V2] chromium: Upgrade 29 -> 35
+Message-ID: <20140315115207.GA31191@mail.itconsulting-heinold.de>
+References: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
+	<20140306120645.GB4680@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AD4C2@SEXCHANGE0100.lpg.priv>
+	<20140307170947.GB25806@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AD8AC@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA060AE963@SEXCHANGE0100.lpg.priv>
+MIME-Version: 1.0
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA060AE963@SEXCHANGE0100.lpg.priv>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Meta java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Mar 2014 22:55:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 15 Mar 2014 11:52:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 2014-03-14 12:04, Khem Raj wrote:
-> Removed already applied patches
+On Fri, Mar 14, 2014 at 04:17:18PM +0000, MONDON Daniel wrote:
+> Hi,
 > 
-> License year changed thats why there is change in checksum
+> Is there any git repository (or configuration) to add ?
+> I've just do:
+>   git clone git://git.openembedded.org/openembedded-core oe-core
+>   cd oe-core
+>   git clone git://git.openembedded.org/bitbake bitbake
+>   git clone git://git.openembedded.org/meta-openembedded
+>   git clone https://github.com/woglinde/meta-java.git
 > 
-> -// Copyright 2014 The Chromium Authors. All rights reserved.
-> +// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+> Following meta-java ReadMe Instructions:
+> conf/local.conf:
+>   PREFERRED_PROVIDER_virtual/java-initial = "cacao-initial"
+>   PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+>   PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+>   PREFERRED_VERSION_openjdk-7-jre = "25b30-2.3.12"
+>   PREFERRED_VERSION_icedtea7-native = "2.1.3"
+> # option PREFERRED_PROVIDER_openjdk-7-jre = "openjdk-7-jre"
 > 
-> we see
+> conf/bblayers.conf:
+> BBLAYERS ?= " \
+>   path_to_source /oe-core/meta \
+>   path_to_source /oe-core/meta-openembedded/meta-oe \
+>   path_to_source /oe-core/meta-java \
+>   "
 > 
-> rpm/bin/debugedit: canonicalization unexpectedly shrank by one character
+> Thanks,
+> Good weekend
 > 
-> so we add PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
-> 
-> Enable SUID sandbox
-> 
-> Install ICU configuration file which is required
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+> Daniel.
 
-Build and run tested.  Seems to work fine.
+The configuration looks good so far. Do you still have the libffi error?
+What is your hostbuildsystem?
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Bye Henning
 
