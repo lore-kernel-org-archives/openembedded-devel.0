@@ -1,32 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id B0CCF6C735
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pb0-f44.google.com (mail-pb0-f44.google.com
+	[209.85.160.44])
+	by mail.openembedded.org (Postfix) with ESMTP id BD2986F590
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Mar 2014 22:18:09 +0000 (UTC)
-Received: by mail-yk0-f173.google.com with SMTP id 10so10894020ykt.4
+	Sat, 15 Mar 2014 22:22:40 +0000 (UTC)
+Received: by mail-pb0-f44.google.com with SMTP id rp16so4109273pbb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Mar 2014 15:18:10 -0700 (PDT)
+	Sat, 15 Mar 2014 15:22:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=nJwm26aeZoQ6zlQPheVFm5bvpNrlq9dHtfjx4Y84nTo=;
-	b=IT6ZJGtW4LastabGcoiNg77S1DKLzTyqaPvY9Ec1Csdn+SgyDjN9wSwPNsgv980gV9
-	c4wv8AcD7oetyqod7fIZoT56tBGbfAKI5mvxeZw9oi18WdOAM+nLQV0/+u4Fc5DQ2lQ/
-	br6/UPMm471dzfiHoVoaesoeb1epjCuSGcfVV3BdPchazR6/FkwLHN0VpAs2G7OAGM/T
-	h3F+nc6pCfkMhYRgeQaubjE0dZJe03M9Csfslbs0q62HAk0nvSsmCoN/y8rNmlGKtloj
-	kPCNFh8e+TauXUx2CgC2PRLwK+xa+KnftOHtuVAizWp/yGEGVSaDPESh3++0YdHo16ag
-	kj7A==
-MIME-Version: 1.0
-X-Received: by 10.236.42.43 with SMTP id i31mr11203417yhb.31.1394921889992;
-	Sat, 15 Mar 2014 15:18:09 -0700 (PDT)
-Received: by 10.170.159.197 with HTTP; Sat, 15 Mar 2014 15:18:09 -0700 (PDT)
-In-Reply-To: <1394919160-28076-1-git-send-email-raj.khem@gmail.com>
+	h=from:content-type:message-id:mime-version:subject:date:references
+	:to:in-reply-to;
+	bh=bsLUJpTj9c5NSizrMPTiPm5XMdPhoZgPVtiuu6O28Lw=;
+	b=wu7XsD6fx4xupfs2dRQV8SvzdAa9UZzY4wydfalhkkdnIZa3knYlwdV5A0TIMk/e2d
+	XZlyetZfJo9jcHBvEbrf/TiJga5PSfs50NScQIhwO/RkEWVtoJR0/AHpD0wEZbl69zf6
+	XUCyiGW7iLF8KTu5eLrSRvlVoLr3G3w1J62NywWpfe3b1vJN6C/ZOv4SIItX4RQQZFVJ
+	jbhgnh6QEeP0vetC5T+4a/EUEmseFda52YKOVgoBdCeOgH0iRaK42QIKluPqn0zYcdKG
+	jnm7+AmuoXsIrbe/eI5eqCZ40MDgBk8lxJxsb5upfaVJaHyWDuhU8joV4CaDL3jirFtx
+	00zg==
+X-Received: by 10.68.185.1 with SMTP id ey1mr17105594pbc.33.1394922161932;
+	Sat, 15 Mar 2014 15:22:41 -0700 (PDT)
+Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
+	[99.57.140.30])
+	by mx.google.com with ESMTPSA id ha2sm29141022pbb.8.2014.03.15.15.22.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 15 Mar 2014 15:22:41 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Message-Id: <4435B502-2EA5-46A3-90C5-5C16E73E659F@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 7.2 \(1874\))
+Date: Sat, 15 Mar 2014 15:22:37 -0700
 References: <1394919160-28076-1-git-send-email-raj.khem@gmail.com>
-Date: Sat, 15 Mar 2014 23:18:09 +0100
-Message-ID: <CA+chaQdaNjbJn=a_VWgv-3MXbETzb=JhXbo+9uDw4vxRt-MQ8Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CA+chaQdaNjbJn=a_VWgv-3MXbETzb=JhXbo+9uDw4vxRt-MQ8Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <CA+chaQdaNjbJn=a_VWgv-3MXbETzb=JhXbo+9uDw4vxRt-MQ8Q@mail.gmail.com>
+X-Mailer: Apple Mail (2.1874)
 Subject: Re: [meta-systemd][PATCH] dhcp, util-linux: User wildcard in bbappend names
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,55 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Mar 2014 22:18:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 15 Mar 2014 22:22:45 -0000
+X-Groupsio-MsgNum: 48704
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_DCA9A57A-084A-4435-980F-AC4A23EB3FE6";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-see already merged commits:
+--Apple-Mail=_DCA9A57A-084A-4435-980F-AC4A23EB3FE6
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-http://git.openembedded.org/meta-openembedded/commit/?id=5b8498b53dcdf2ed797cbd2049dd3856ef17e2ff
-http://git.openembedded.org/meta-openembedded/commit/?id=c78731c0859d79b115d47e2bfcd977086d25fc64
+
+On Mar 15, 2014, at 3:18 PM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+
+> see already merged commits:
+>=20
+> =
+http://git.openembedded.org/meta-openembedded/commit/?id=3D5b8498b53dcdf2e=
+d797cbd2049dd3856ef17e2ff
+> =
+http://git.openembedded.org/meta-openembedded/commit/?id=3Dc78731c0859d79b=
+115d47e2bfcd977086d25fc64
+>=20
+
+ah thanks
 
 
-On Sat, Mar 15, 2014 at 10:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
+--Apple-Mail=_DCA9A57A-084A-4435-980F-AC4A23EB3FE6
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-> These are simple bbappends for systemd compatibility
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../recipes-connectivity/dhcp/{dhcp_4.2.5-P1.bbappend => dhcp_%.bbappend}
-> | 0
->  .../util-linux/{util-linux_2.23.2.bbappend => util-linux_%.bbappend}
->  | 0
->  2 files changed, 0 insertions(+), 0 deletions(-)
->  rename
-> meta-systemd/oe-core/recipes-connectivity/dhcp/{dhcp_4.2.5-P1.bbappend =>
-> dhcp_%.bbappend} (100%)
->  rename
-> meta-systemd/oe-core/recipes-core/util-linux/{util-linux_2.23.2.bbappend =>
-> util-linux_%.bbappend} (100%)
->
-> diff --git
-> a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5-P1.bbappend
-> b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-> similarity index 100%
-> rename from
-> meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_4.2.5-P1.bbappend
-> rename to meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-> diff --git
-> a/meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
-> b/meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
-> similarity index 100%
-> rename from
-> meta-systemd/oe-core/recipes-core/util-linux/util-linux_2.23.2.bbappend
-> rename to
-> meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
-> --
-> 1.9.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
+iEYEARECAAYFAlMk0q4ACgkQuwUzVZGdMxTgIgCfVD1DlunBxjlUyn6j+8ys7SYT
+AeEAn36pQwCkdFeDb7DvYoVTGlUnhTF1
+=PVGc
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_DCA9A57A-084A-4435-980F-AC4A23EB3FE6--
