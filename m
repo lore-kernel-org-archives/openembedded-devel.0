@@ -1,35 +1,35 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A99B86E79A
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-pb0-f44.google.com (mail-pb0-f44.google.com
+	[209.85.160.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F0766E7D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Mar 2014 03:49:25 +0000 (UTC)
-Received: by mail-pd0-f169.google.com with SMTP id fp1so4205460pdb.28
+	Sun, 16 Mar 2014 22:49:55 +0000 (UTC)
+Received: by mail-pb0-f44.google.com with SMTP id rp16so4925862pbb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Mar 2014 20:49:26 -0700 (PDT)
+	Sun, 16 Mar 2014 15:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=C8GQIJ+ModygHBvtsGRNPJnRojVmURca45ApPiV8R+Q=;
-	b=KmAmUNmLbxd1eL59EBViJMayMdYbkBuG9rIQw1QcryrijRpES3/vY4086Dx1gok4+L
-	y2bJ5tqC0hcC/7boIB+SfaX6Q3hTsAZCfudp6pNm0Iod9QT6J73TZesOs1R8bqo5q+Ep
-	TJvnMI4/YLE63tErgJim4W9qdhS3ugbBI2hFwYEXbkKkVfgIsMAxUysiNQIufeW/s6Rq
-	K4OKDoed88yOeqoggoP7EUbNE7Ztury4xfd5LMgNkVJd2os+jFRDewwl6CFyvvDh9M5W
-	R15IRwWeWdQ3L7GNp6lewdocVZ5RvA8JJjjar/90xFso0LU20QDhFzYkLL152/sr4OT+
-	Z9NA==
-X-Received: by 10.68.178.1 with SMTP id cu1mr18034648pbc.34.1394941766893;
-	Sat, 15 Mar 2014 20:49:26 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150])
-	by mx.google.com with ESMTPSA id kt8sm3378077pab.7.2014.03.15.20.49.19
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Sat, 15 Mar 2014 20:49:25 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+	bh=rVnQIRsmHAocSliV+7msPSujpFG8a3O4h3AOCXxg13o=;
+	b=lTo1ZqN2xmJkuV9e72aWNV+dQmguCTrY1JnCUteqqTJbZi8nmFVDrzJnMDenOSmpnh
+	Fj05docQ3sbPugGV8q+zFQWpoSbvuZZV9qPb17Hc6SvVN3bs0pOGENw7N9cRAQGPQEgf
+	Tphb4c163/4oe/cm9qyBVNVjJRN7hN7PlxndeYstFlCq4SI7UQvv5BMyCivR1UKU4kJK
+	51lNchKZPagaMDsO23iHijZPmCosZrpyBXu2ui1h79ifu8uPgnFz6rroZQEiqilNuaoA
+	FVnLiJw45DSs9EDsWDQQLMcw76c4LebpYjbyUXyaYx0PXWR6VvgC9S3G0gyZnz7sS1FI
+	lPJQ==
+X-Received: by 10.67.11.12 with SMTP id ee12mr131708pad.132.1395010196262;
+	Sun, 16 Mar 2014 15:49:56 -0700 (PDT)
+Received: from archimedes.arnolds.bogus
+	(dsl-66-59-252-223.static.linkline.com. [66.59.252.223])
+	by mx.google.com with ESMTPSA id
+	fg12sm62211826pac.28.2014.03.16.15.49.54 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 16 Mar 2014 15:49:55 -0700 (PDT)
+From: "stephen.arnold42" <stephen.arnold42@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Mar 2014 20:51:16 -0700
-Message-Id: <1394941876-9995-1-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-multimedia][PATCH] vlc: bump to v2.1.4
+Date: Sun, 16 Mar 2014 15:48:58 -0700
+Message-Id: <1395010139-15359-1-git-send-email-stephen.arnold42@gmail.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-multimedia][PATCH] updated mpd to current upstream stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +43,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Mar 2014 03:49:29 -0000
+X-List-Received-Date: Sun, 16 Mar 2014 22:49:59 -0000
 
-From: Tim Orling <TicoTimo@gmail.com>
-
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/{vlc_2.1.2.bb => vlc_2.1.4.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/vlc/{vlc_2.1.2.bb => vlc_2.1.4.bb} (59%)
+ .../recipes-multimedia/musicpd/mpd_0.18.8.bb       | 59 ++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-similarity index 59%
-rename from meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
-rename to meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-index 9dc2b10..46a2712 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.2.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-@@ -7,5 +7,5 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
-             file://0002-glibc-does-not-provide-strlcpy.patch \
- "
- 
--SRC_URI[md5sum] = "fb6787ad749aadcfaeab3471939b3426"
--SRC_URI[sha256sum] = "219b812be1bc2eba40faa86419d0aa2c479a7380af8af216e8bfa22eb6fc8ec4"
-+SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
-+SRC_URI[sha256sum] = "3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+new file mode 100644
+index 0000000..b6882af
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+@@ -0,0 +1,59 @@
++SUMMARY = "Music Player Daemon"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++HOMEPAGE ="http://www.musicpd.org"
++
++DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
++
++SRC_URI = " \
++    http://www.musicpd.org/download/${PN}/stable/${P}.tar.xz \
++    file://mpd.conf.in \
++"
++
++SRC_URI[md5sum] = "7bbe1caf5abe404dc985ca4f44984b1f"
++SRC_URI[sha256sum] = "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616bd593aecdc26450"
++
++inherit autotools useradd systemd
++
++EXTRA_OECONF = "enable_bzip2=yes"
++EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
++
++PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
++PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
++PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
++
++do_install_append() {
++    install -d ${D}/${localstatedir}/lib/mpd/music
++    chmod 775 ${D}/${localstatedir}/lib/mpd/music
++    install -d ${D}/${localstatedir}/lib/mpd/playlists
++    chown -R mpd ${D}/${localstatedir}/lib/mpd
++    chown mpd:mpd ${D}/${localstatedir}/lib/mpd/music
++
++    install -d ${D}/${sysconfdir}
++    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
++    sed -i \
++        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
++        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
++        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
++        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
++        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
++        ${D}/${sysconfdir}/mpd.conf
++
++    if [ -e ${D}/${systemd_unitdir}/system/mpd.service ] ; then
++        sed -i \
++            's|^ExecStart=.*|ExecStart=${bindir}/mpd --no-daemon|' \
++            ${D}/${systemd_unitdir}/system/mpd.service
++    fi
++}
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++SYSTEMD_SERVICE_${PN} = "mpd.service"
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = " \
++    --system --no-create-home \
++    --home ${localstatedir}/lib/mpd \
++    --groups audio \
++    --user-group mpd"
 -- 
-1.8.3.2
+1.8.5.3
 
 
