@@ -1,41 +1,38 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B7CD96F6EB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1C96F573
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Mar 2014 23:19:01 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id t60so3977643wes.33
+	Mon, 17 Mar 2014 00:01:59 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id e49so3512730eek.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Mar 2014 16:19:01 -0700 (PDT)
+	Sun, 16 Mar 2014 17:02:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=/End5WwL/BjANUOoQZrCkVy1DDHPeAIdXwhnIOgjp7o=;
-	b=TX5CJEM75EuQrJNs+F2QUwIeYCNM/DfUqXsmhxYNkM4Ccw/+LvIjk7ENYU+r2nIi0X
-	p5UQMFH1DH1aPDpP0IoqApKHewNjdhku67BqcoGjeqS6XNDozqq+Rqnglx1BgT+8qWux
-	y4riBQHI/Iw6Dtbk6Vq1jR+8RKu/nXfbxZhehwReQGsGhd93HrCyXojUq7/5ccoqY+tQ
-	93DNkKTG3V7asKBJLbI1BjMJ6sHfOMxtCpoKwmWDUh4ckzkG/9y6f6943AD/envH98Z4
-	jE7gXX8A8ZW6TYcvdvxmXUaxvupcnRwkSx8opbadcTi85nVKCPhFKAFkleEfOXe/j+aJ
-	5JMw==
-MIME-Version: 1.0
-X-Received: by 10.180.20.71 with SMTP id l7mr6800478wie.35.1395011941700; Sun,
-	16 Mar 2014 16:19:01 -0700 (PDT)
-Received: by 10.194.59.228 with HTTP; Sun, 16 Mar 2014 16:19:01 -0700 (PDT)
-In-Reply-To: <CAFeBWL4eJctcjtoDQ=t3JikGJTBdod-_s15g0srzTH-BZo0_WA@mail.gmail.com>
-References: <CAFeBWL6zsCSF2Op72zvnaZ=XmHQkXUcH8we=vFDrVo--wb6bdw@mail.gmail.com>
-	<CALbNGRS6kRODsVKPVunWQzVSBwkKn8cXdSWwpmWTXhJ_chfeSA@mail.gmail.com>
-	<CAFeBWL78jHPU1XUvo6PC4=Qy2RFKCphNbq4mH6Y_R0bbTyGMyg@mail.gmail.com>
-	<CALbNGRTPPhRdLmyJAD2d3-Lmt=K-EQo-dSKwzt0a=Vcaq7rpMA@mail.gmail.com>
-	<CAFeBWL7u1yEHLFoe_=TYH17-e+jJ-Jrq-S63h-UsvdniNw6U=g@mail.gmail.com>
-	<CAOLEWZXkxbWSqWvJwHP4V+iMLOJ9OeHrht_S9eQj1qBc05xH3w@mail.gmail.com>
-	<CAFeBWL45oks2uq5RLaPrCCbfMaBrA9-yb0DYOLd9jTuey+qC9w@mail.gmail.com>
-	<CAOLEWZVWNDNTTggnOEinOYtKZDuse5T_v=JOhRvyi-L9z5oUZQ@mail.gmail.com>
-	<CAFeBWL4eJctcjtoDQ=t3JikGJTBdod-_s15g0srzTH-BZo0_WA@mail.gmail.com>
-Date: Sun, 16 Mar 2014 16:19:01 -0700
-Message-ID: <CAOLEWZU+xFDg4a8D2uFwCbj2yoW7Tx9GFvCXZPPKX-=EbRWVqA@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=rLTdVXRTIMHtZlh/31SVRAxwLJJzmjsV0VMXzrjVr5A=;
+	b=aA8nLROujTUbbPE5GbDRkfB08gZujH1N46HGsgSkNU3pNHVdn9rN2Mgm1nFjKjgGvJ
+	DdvEqiLYCZsirp8TGAH3nCmWPkaqJXUpDqbehyoC22JO91iLsb0dDMKT3g1D/zFTP0dC
+	ReyKF07lRU4VHFEaVOr9XxjwZPEzzMG6szVHHs64h8t7Ied/kvO5YPAomqP/6ryqz1n/
+	ZIcyi0y2bqgWcMP+Gfd5dANXX1HGh6ANuPc6AeiP67HhIxQSI5I3u/U+VZUV/8mq1TS6
+	FUc262AMeBjevXUzUTlKn4dncgsAL5F9cFsJ+5yUISlwiTcc8O+hWaY8Jdba06fDlA8q
+	giGg==
+X-Received: by 10.14.211.66 with SMTP id v42mr20267832eeo.31.1395014520632;
+	Sun, 16 Mar 2014 17:02:00 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	a4sm33727964eep.12.2014.03.16.17.01.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 16 Mar 2014 17:01:59 -0700 (PDT)
+Date: Mon, 17 Mar 2014 01:02:17 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: GDM alternative?
+Message-ID: <20140317000217.GD3725@jama>
+References: <1395010139-15359-1-git-send-email-stephen.arnold42@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1395010139-15359-1-git-send-email-stephen.arnold42@gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-multimedia][PATCH] updated mpd to current upstream stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,141 +46,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Mar 2014 23:19:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 Mar 2014 00:02:04 -0000
+X-Groupsio-MsgNum: 48711
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="G6nVm6DDWH/FONJq"
+Content-Disposition: inline
+
+--G6nVm6DDWH/FONJq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Haven't gotten to slim yet (other things intervened) but I did add lxdm to
-my xorg image.  Got it working with a bbappend for an init script package,
-upstream automake broke it, so I had to fix it again (along with some other
-stuff).  Anyway, the latter patches are in the ML queue; works fine so far,
-although the session menu isn't populated since it only uses the mini_x
-session for openbox.
+On Sun, Mar 16, 2014 at 03:48:58PM -0700, stephen.arnold42 wrote:
+> ---
+>  .../recipes-multimedia/musicpd/mpd_0.18.8.bb       | 59 ++++++++++++++++=
+++++++
 
+Can you please remove 0.18.4 in the same commit and resend with -M?
 
-On Fri, Feb 28, 2014 at 9:35 AM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+Thanks
 
-> Thanks Stephen for your response :)
-> I think I will give slim a spin this weekend on my desktop. Ultimately a
-> lighter DM will be appreciated on my embedded boards.
->
-> Adam
->
->
-> On Thu, Feb 27, 2014 at 2:29 PM, Stephen Arnold
-> <stephen.arnold42@gmail.com>wrote:
->
-> > It's a bit more subtle than just "obvious advantage" since the deps are
-> > different, config options are different, etc.  Slim is probably "lighte=
-r"
-> > than lxdm, in both features and dependency bloat.  The former pretty
-> > depends only on X11 libs and png (with optional pam and dbus/consolekit
-> > integration).  OTOH, lxdm has about the same pam/consolekit features, b=
-ut
-> > depends on gtk[2|3].  So, a bit fancier and a little more bloat.  Which
-> one
-> > do you think is easier to theme?  ;)
-> >
-> >
-> > On Wed, Feb 26, 2014 at 3:28 PM, Adam Lee <adam@gumstix.com> wrote:
-> >
-> > > Are there any obvious advantages over one another between LXDM and
-> Slim?
-> > > I love how LXDM doesn't require complicated authentication framework
-> like
-> > > GDM.
-> > >
-> > > Adam
-> > >
-> > >
-> > > On Tue, Feb 25, 2014 at 7:49 PM, Stephen Arnold
-> > > <stephen.arnold42@gmail.com>wrote:
-> > >
-> > > > Is there any interest in reviving slim?  I'm using it on gentoo-arm
-> on
-> > > > several devices; works just like x86.  Since I haven't tried it or
-> > > > otherwise looked at it in oe yet, I have no idea why it's in a
-> > > non-working
-> > > > state.  That said, it was on my todo list until I noticed lxdm, so
-> I'll
-> > > > probably check it out at some point; never a bad idea to have anoth=
-er
-> > > > lightweight alternative...
-> > > >
-> > > > Steve
-> > > >
-> > > >
-> > > > On Thu, Feb 20, 2014 at 1:36 PM, Adam Lee <adam.yh.lee@gmail.com>
-> > wrote:
-> > > >
-> > > > > Andreas, LXDM from meta-oe works well with minimal configuration =
-on
-> > my
-> > > > part
-> > > > > :)
-> > > > > I didn't have to add another layer to satisfy dependencies. Thank=
-s
-> :)
-> > > > >
-> > > > > Adam
-> > > > >
-> > > > >
-> > > > > On Wed, Feb 19, 2014 at 11:36 PM, Andreas M=FCller <
-> > > > > schnitzeltony@googlemail.com> wrote:
-> > > > >
-> > > > > > On Wed, Feb 19, 2014 at 5:15 PM, Adam Lee <adam.yh.lee@gmail.co=
-m
-> >
-> > > > wrote:
-> > > > > > > Thank you Koen and Andreas. That has been really helped in
-> > clearing
-> > > > up
-> > > > > my
-> > > > > > > confusion and setting the path forward.
-> > > > > > >
-> > > > > > > I think I will try LXDM in meta-misc in meta-oe. Is there any
-> > > special
-> > > > > > > configuration that I should be aware of (other then setting i=
-t
-> as
-> > > the
-> > > > > > > graphical init manager)?
-> > > > > >
-> > > > > > meta-misc is my personal playground - it might have dependencie=
-s
-> to
-> > > > > > other layers and some things might not work as expected...
-> > > > > >
-> > > > > > Andreas
-> > > > > > _______________________________________________
-> > > > > > Openembedded-devel mailing list
-> > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > >
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > > > >
-> > > > > _______________________________________________
-> > > > > Openembedded-devel mailing list
-> > > > > Openembedded-devel@lists.openembedded.org
-> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > > >
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+>  1 file changed, 59 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8=
+=2Ebb
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb b/m=
+eta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+> new file mode 100644
+> index 0000000..b6882af
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+> @@ -0,0 +1,59 @@
+> +SUMMARY =3D "Music Player Daemon"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
+bbe"
+> +HOMEPAGE =3D"http://www.musicpd.org"
+> +
+> +DEPENDS =3D "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 =
+ffmpeg curl sqlite bzip2 pulseaudio"
+> +
+> +SRC_URI =3D " \
+> +    http://www.musicpd.org/download/${PN}/stable/${P}.tar.xz \
+> +    file://mpd.conf.in \
+> +"
+> +
+> +SRC_URI[md5sum] =3D "7bbe1caf5abe404dc985ca4f44984b1f"
+> +SRC_URI[sha256sum] =3D "5366378e548fb77996cc33b0e15165ddd84f1e496bdd0461=
+6bd593aecdc26450"
+> +
+> +inherit autotools useradd systemd
+> +
+> +EXTRA_OECONF =3D "enable_bzip2=3Dyes"
+> +EXTRA_OECONF +=3D "${@base_contains('DISTRO_FEATURES', 'systemd', '--wit=
+h-systemdsystemunitdir=3D${systemd_unitdir}/system/', '--without-systemdsys=
+temunitdir', d)}"
+> +
+> +PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
+> +PACKAGECONFIG[id3tag] =3D "--enable-id3,--disable-id3,libid3tag"
+> +PACKAGECONFIG[lame] =3D "--enable-lame-encoder,--disable-lame-encoder,la=
+me"
+> +
+> +do_install_append() {
+> +    install -d ${D}/${localstatedir}/lib/mpd/music
+> +    chmod 775 ${D}/${localstatedir}/lib/mpd/music
+> +    install -d ${D}/${localstatedir}/lib/mpd/playlists
+> +    chown -R mpd ${D}/${localstatedir}/lib/mpd
+> +    chown mpd:mpd ${D}/${localstatedir}/lib/mpd/music
+> +
+> +    install -d ${D}/${sysconfdir}
+> +    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
+> +    sed -i \
+> +        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
+> +        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlists|' \
+> +        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
+> +        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
+> +        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
+> +        ${D}/${sysconfdir}/mpd.conf
+> +
+> +    if [ -e ${D}/${systemd_unitdir}/system/mpd.service ] ; then
+> +        sed -i \
+> +            's|^ExecStart=3D.*|ExecStart=3D${bindir}/mpd --no-daemon|' \
+> +            ${D}/${systemd_unitdir}/system/mpd.service
+> +    fi
+> +}
+> +
+> +RPROVIDES_${PN} +=3D "${PN}-systemd"
+> +RREPLACES_${PN} +=3D "${PN}-systemd"
+> +RCONFLICTS_${PN} +=3D "${PN}-systemd"
+> +SYSTEMD_SERVICE_${PN} =3D "mpd.service"
+> +
+> +USERADD_PACKAGES =3D "${PN}"
+> +USERADD_PARAM_${PN} =3D " \
+> +    --system --no-create-home \
+> +    --home ${localstatedir}/lib/mpd \
+> +    --groups audio \
+> +    --user-group mpd"
+> --=20
+> 1.8.5.3
+>=20
+> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--G6nVm6DDWH/FONJq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMmO4kACgkQN1Ujt2V2gBy3HwCfX/doSmmsS/tBcSivXllX0hxp
+JfQAoJIe9NgLLOvWraSr41IfvQFnu6RZ
+=1y9J
+-----END PGP SIGNATURE-----
+
+--G6nVm6DDWH/FONJq--
