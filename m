@@ -1,34 +1,20 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 0056A6EE3B
+Return-Path: <cristian.iorga@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id D2EA96EE40
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 08:59:33 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WPTOO-00005l-LR for openembedded-devel@lists.openembedded.org;
-	Mon, 17 Mar 2014 09:59:32 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 09:59:32 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 09:59:32 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 17 Mar 2014 09:02:25 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 17 Mar 2014 02:02:25 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,668,1389772800"; d="scan'208";a="501406208"
+Received: from sentry.rb.intel.com ([10.237.105.54])
+	by orsmga002.jf.intel.com with ESMTP; 17 Mar 2014 02:02:05 -0700
+From: Cristian Iorga <cristian.iorga@intel.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 17 Mar 2014 10:01:26 +0100
-Message-ID: <lg6dgr$5h8$1@ger.gmane.org>
-References: <1395014647-18396-1-git-send-email-stephen.arnold42@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
-In-Reply-To: <1395014647-18396-1-git-send-email-stephen.arnold42@gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH v2 1/1] recipes-graphics/lxdm: add missing automake file, update build config
+Date: Mon, 17 Mar 2014 11:05:17 +0200
+Message-Id: <1395047117-19754-1-git-send-email-cristian.iorga@intel.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-multimedia][PATCH] musicpd: upgrade to 0.18.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,69 +28,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 08:59:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 Mar 2014 09:02:26 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+- Upgrade fixes a crash with libvorbis 1.3.4;
+- Simplified SRC_URI;
+- Reference for S no longer necessary.
 
-Stephen Arnold schreef op 17-03-14 01:04:
-> From: "Stephen Arnold" <stephen.arnold42@gmail.com>
-> 
-> PATCH recipes-graphics/lxdm:
-> 
-> - add missing depends and inherit pkgconfig for autogen/configure -
-> silence confgure warnings and update configure options - provide missing
-> input file for automake
-> 
-> Built and tested on master branches using meta-raspberrypi and
-> meta-alt-destop-extras.
-> 
-> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
-> 
-> --- meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 13 +++++++++++-- 1 file
-> changed, 11 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-> b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb index c12eddf..6ef014f
-> 100644 --- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb +++
-> b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb @@ -16,18 +16,27 @@ SRCREV =
-> "07fb151a99ef99318b71f3de0afbba977b1e6267" PV = "0.5.0+git${SRCPV}" PE =
-> "1"
-> 
-> -DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb
-> pango" +DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf
-> glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes" DEPENDS +=
-> "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
-> 
-> # combine oe-core way with angstrom DISTRO_TYPE DISTRO_TYPE ?=
-> "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
-> 
-> -inherit autotools gettext systemd +inherit autotools pkgconfig gettext
-> systemd
-> 
-> S = "${WORKDIR}/git"
-> 
-> +CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset
-> -fno-builtin-strstr "
+Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
+---
+ .../recipes-multimedia/musicpd/{mpd_0.18.4.bb => mpd_0.18.9.bb}  | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+ rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.18.4.bb => mpd_0.18.9.bb} (89%)
 
-Why is this needed?
-
-> + +EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x
-> -with-xconn=xcb" EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES',
-> 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/
-> --disable-consolekit', '--without-systemdsystemunitdir', d)}"
-
-Please merge those 2 into a single EXTRA_OECONF
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFTJrnmMkyGM64RGpERAjj6AKCjLjwuMeDHNZEY22fPsNKnf9ZijQCgl0Gj
-RVZBFHTR0QsI2gXGzLy8+lg=
-=rUX5
------END PGP SIGNATURE-----
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+similarity index 89%
+rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
+rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+index 77ccc1f..349ccbb 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+@@ -6,14 +6,11 @@ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
+ DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
+ 
+ SRC_URI = " \
+-    http://www.musicpd.org/download/${PN}/stable/${PN}-0.18.tar.xz \
++    http://www.musicpd.org/download/${PN}/stable/${BP}.tar.xz \
+     file://mpd.conf.in \
+ "
+-
+-SRC_URI[md5sum] = "0d881fb32f9d31afcdb0bb13cb78b9ab"
+-SRC_URI[sha256sum] = "6b171985f192603150c879d105dc4d05d701ac60a2db41630a4dce823e068388"
+-
+-S = "${WORKDIR}/${PN}-0.18"
++SRC_URI[md5sum] = "0e5156a831d4302d2032998bcfd5c36f"
++SRC_URI[sha256sum] = "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be5346f19de5f699a68de"
+ 
+ inherit autotools useradd systemd
+ 
+-- 
+1.8.3.2
 
 
