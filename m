@@ -1,28 +1,43 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id D259D6EC7F
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D31D6EC83
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 11:06:15 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 17 Mar 2014 04:06:08 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,669,1389772800"; d="scan'208";a="474049254"
-Received: from mcorkery-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.96])
-	by orsmga001.jf.intel.com with ESMTP; 17 Mar 2014 04:06:07 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Mon, 17 Mar 2014 11:06:06 +0000
-Message-ID: <2630836.aG3BnBskVV@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
-In-Reply-To: <4129044.axao0DyIby@peggleto-mobl5.ger.corp.intel.com>
-References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
-	<7534099.nuqRK6Rzn4@peggleto-mobl5.ger.corp.intel.com>
-	<4129044.axao0DyIby@peggleto-mobl5.ger.corp.intel.com>
+	Mon, 17 Mar 2014 11:48:46 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 650122232071
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Mar 2014 12:48:45 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7B6242232070
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Mar 2014 12:48:44 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Mar 2014 12:48:44 +0100 (CET)
+Date: Mon, 17 Mar 2014 12:48:38 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140317114838.GA6946@mail.itconsulting-heinold.de>
+References: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
+	<20140306120645.GB4680@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AD4C2@SEXCHANGE0100.lpg.priv>
+	<20140307170947.GB25806@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AD8AC@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA060AE963@SEXCHANGE0100.lpg.priv>
+	<20140315115207.GA31191@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA060AEE84@SEXCHANGE0100.lpg.priv>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl][PATCH v2 00/10]
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA060AEE84@SEXCHANGE0100.lpg.priv>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: Meta java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,50 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 11:06:15 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 17 Mar 2014 11:48:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sunday 09 March 2014 11:49:49 Paul Eggleton wrote:
-> On Wednesday 26 February 2014 10:03:46 Paul Eggleton wrote:
-> > On Sunday 02 February 2014 22:51:05 Tim Orling wrote:
-> > > This series of recipes is the first step towards the ultimate
-> > > goal of getting Slic3r to build in OE.
-> > > 
-> > > Original submission was missing Algorithm::Diff which Text::Diff depends
-> > > on.
-> > > 
-> > > Resubmitted to follow Debian Perl Policy.
-> > > See 4.2 Module Package Names
-> > > [http://www.debian.org/doc/packaging-manuals/perl-policy/ch-module_packa
-> > > ge
-> > > s
-> > > .html]
-> > > 
-> > > Tim Orling (10):
-> > >   libmodule-metadata-perl: add 1.000019
-> > >   libtext-diff-perl: add 1.41
-> > >   libcapture-tiny-perl: add 0.23
-> > >   libmodule-runtime-perl: add 0.013
-> > >   libextutils-config-perl: add 0.007
-> > >   libextutils-helpers-perl: add 0.021
-> > >   libextutils-installpaths-perl: add 0.010
-> > >   libmodule-build-tiny-perl: add 0.030
-> > >   libextutils-cppguess-perl: add 0.07
-> > >   libalgorithm-diff-perl: add 1.15
-> > 
-> > Hongxu, do these look OK? If so do you need me to apply them, or do you
-> > have access to do that now?
+On Mon, Mar 17, 2014 at 08:54:18AM +0000, MONDON Daniel wrote:
+> >The configuration looks good so far. Do you still have the libffi error?
+> >What is your hostbuildsystem?
+> >
+> >Bye Henning
 > 
-> Hongxu - ping
+> Waiting for 0 running tasks to finish:
+> 
+> Summary: 1 task failed:
+>   virtual:native:/home/Test/Test2/oe-core/meta-java/recipes-core/jamvm/jamvm_git.bb, do_configure
+> Summary: There were 5 WARNING messages shown.
+> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+> 
+> 
+> 
+> 
+> 
+> LogFile 28410 joined.
+> I have a look and i see 1.6 configuration ... am i right ?
+> 
+> Thanks
+> Bye
+> Daniel.
+> 
 
-ping...
+I maybe could help you, when you anwser my second question about your buildhost system(ubuntu fedora homebrew).
 
-Cheers,
-Paul
+All I now see is, that your host gcc is version 4.6 with linaro patches and that this gcc tries to use his own version
+of pkgconf, instead of the oe-build one and than fails to find the libffi.pc installed by the libffi-native recipe.
 
--- 
+Bye Henning
 
-Paul Eggleton
-Intel Open Source Technology Centre
+
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
