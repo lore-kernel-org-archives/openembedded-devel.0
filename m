@@ -1,20 +1,20 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id D2EA96EE40
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 132DC6EEEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 09:02:25 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 17 Mar 2014 02:02:25 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,668,1389772800"; d="scan'208";a="501406208"
-Received: from sentry.rb.intel.com ([10.237.105.54])
-	by orsmga002.jf.intel.com with ESMTP; 17 Mar 2014 02:02:05 -0700
-From: Cristian Iorga <cristian.iorga@intel.com>
+	Mon, 17 Mar 2014 09:02:36 +0000 (UTC)
+Received: from [192.168.178.14] (chello080108088242.14.11.vie.surfer.at
+	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 8C74922956
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Mar 2014 10:02:36 +0100 (CET)
+Message-ID: <5326BAC9.40201@pseudoterminal.org>
+Date: Mon, 17 Mar 2014 10:05:13 +0100
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Mar 2014 11:05:17 +0200
-Message-Id: <1395047117-19754-1-git-send-email-cristian.iorga@intel.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-multimedia][PATCH] musicpd: upgrade to 0.18.9
+Subject: Avoiding registration as shlib provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,44 +28,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 09:02:26 -0000
+X-List-Received-Date: Mon, 17 Mar 2014 09:02:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-- Upgrade fixes a crash with libvorbis 1.3.4;
-- Simplified SRC_URI;
-- Reference for S no longer necessary.
+Hello,
 
-Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
----
- .../recipes-multimedia/musicpd/{mpd_0.18.4.bb => mpd_0.18.9.bb}  | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
- rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.18.4.bb => mpd_0.18.9.bb} (89%)
+I have noticed the problem with GStreamer in current master: the many 
+"xyz was registered as shlib provider" warnings.
+Actually, it makes no sense to register the plugins, since they are, 
+well, plugins. No other package must have a hard dependency on any of 
+them. So, it would make sense to disable registration for the plugins. 
+Is this possible?
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-similarity index 89%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-index 77ccc1f..349ccbb 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-@@ -6,14 +6,11 @@ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
- DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
- 
- SRC_URI = " \
--    http://www.musicpd.org/download/${PN}/stable/${PN}-0.18.tar.xz \
-+    http://www.musicpd.org/download/${PN}/stable/${BP}.tar.xz \
-     file://mpd.conf.in \
- "
--
--SRC_URI[md5sum] = "0d881fb32f9d31afcdb0bb13cb78b9ab"
--SRC_URI[sha256sum] = "6b171985f192603150c879d105dc4d05d701ac60a2db41630a4dce823e068388"
--
--S = "${WORKDIR}/${PN}-0.18"
-+SRC_URI[md5sum] = "0e5156a831d4302d2032998bcfd5c36f"
-+SRC_URI[sha256sum] = "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be5346f19de5f699a68de"
- 
- inherit autotools useradd systemd
- 
--- 
-1.8.3.2
-
+cheers
 
