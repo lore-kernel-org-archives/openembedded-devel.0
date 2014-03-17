@@ -1,43 +1,24 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D31D6EC83
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id F1D916EEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 11:48:46 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 650122232071
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 12:48:45 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7B6242232070
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 12:48:44 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 12:48:44 +0100 (CET)
-Date: Mon, 17 Mar 2014 12:48:38 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140317114838.GA6946@mail.itconsulting-heinold.de>
-References: <F48900D76F0D8349918584FEEFEB4BCA060AD0D0@SEXCHANGE0100.lpg.priv>
-	<20140306120645.GB4680@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA060AD4C2@SEXCHANGE0100.lpg.priv>
-	<20140307170947.GB25806@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA060AD8AC@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA060AE963@SEXCHANGE0100.lpg.priv>
-	<20140315115207.GA31191@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA060AEE84@SEXCHANGE0100.lpg.priv>
+	Mon, 17 Mar 2014 12:11:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,669,1389740400"; d="scan'208";a="42797583"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 17 Mar 2014 13:11:26 +0100
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Mon, 17 Mar 2014 13:11:25 +0100
+Received: from u85.usr.ingenico.loc (10.23.7.85) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Mon, 17 Mar 2014 13:11:25 +0100
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 17 Mar 2014 13:04:11 +0100
+Message-ID: <1395057851-21823-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.8.5.4
 MIME-Version: 1.0
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA060AEE84@SEXCHANGE0100.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Meta java
+Subject: [meta-oe][PATCH] ttf-dejavu: fix license warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,46 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 11:48:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Mar 2014 12:11:29 -0000
+Content-Type: text/plain
 
-On Mon, Mar 17, 2014 at 08:54:18AM +0000, MONDON Daniel wrote:
-> >The configuration looks good so far. Do you still have the libffi error?
-> >What is your hostbuildsystem?
-> >
-> >Bye Henning
-> 
-> Waiting for 0 running tasks to finish:
-> 
-> Summary: 1 task failed:
->   virtual:native:/home/Test/Test2/oe-core/meta-java/recipes-core/jamvm/jamvm_git.bb, do_configure
-> Summary: There were 5 WARNING messages shown.
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-> 
-> 
-> 
-> 
-> 
-> LogFile 28410 joined.
-> I have a look and i see 1.6 configuration ... am i right ?
-> 
-> Thanks
-> Bye
-> Daniel.
-> 
+Fix LICENSE value to drop warning messages:
+WARNING: ttf-dejavu: No generic license file exists for: Bitstream in any provider
+WARNING: ttf-dejavu: No generic license file exists for: Vera in any provider
 
-I maybe could help you, when you anwser my second question about your buildhost system(ubuntu fedora homebrew).
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-All I now see is, that your host gcc is version 4.6 with linaro patches and that this gcc tries to use his own version
-of pkgconf, instead of the oe-build one and than fails to find the libffi.pc installed by the libffi-native recipe.
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+index e4363e2..2b73b1e 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.23.bb
+@@ -2,7 +2,7 @@ require ttf.inc
+ 
+ SUMMARY = "DejaVu font - TTF Edition"
+ HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
+-LICENSE = "Bitstream Vera"
++LICENSE = "BitstreamVera"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=9f867da7a73fad2715291348e80d0763"
+ 
+ # all subpackages except ${PN}-common itself rdepends on ${PN}-common
+@@ -19,7 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
+ 
+ S = "${WORKDIR}/dejavu-fonts-ttf-${PV}/ttf"
+ 
+-do_install_append () { 
++do_install_append () {
+     install -d ${D}${sysconfdir}/fonts/conf.d/
+     install -m 0644 ${WORKDIR}/30-dejavu-aliases.conf ${D}${sysconfdir}/fonts/conf.d/
+ }
+-- 
+1.8.5.4
 
-Bye Henning
-
-
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
