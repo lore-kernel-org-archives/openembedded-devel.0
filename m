@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id C01DD6F630
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-pb0-f48.google.com (mail-pb0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id EB31B6E752
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 00:40:06 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id d17so3560684eek.1
+	Mon, 17 Mar 2014 00:43:26 +0000 (UTC)
+Received: by mail-pb0-f48.google.com with SMTP id md12so4954803pbc.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Mar 2014 17:40:06 -0700 (PDT)
+	Sun, 16 Mar 2014 17:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yKDN49VXK/SS7zGR89h7Aro8Sbhx+Qg9PjU5vemCKuo=;
-	b=niY/lCjoXxFQdo4w1UtTRgRSBwVa4F4pIryzNQgozVcoVV4JupBQuOug970JMuUyZ2
-	lzp4g6+1qnEMlwxPkOAGoJfXH6MpBVToHj41OQtGPp8Sau/RZUdQ4SCNnW0/zzwRzZcE
-	oFe7jDvi0z3SEFyOfCp4rkRw3fvoanmWlJqb1LWJxWE3I6gvFj8YBKIKZCoYldhf94OX
-	Je41EPoRKhu/omzlwJSRkbgvFRGZVlnCXYhZbk071mQ2+CvYjvHwouXCUqEVF7yHUU3z
-	BfZszyiTelAKkVQKLu5kPk7LyXRUhbuirABI8eJ6jiSqNWd6jtTQbclg08NbHhqLdxFL
-	2V6A==
-X-Received: by 10.14.6.1 with SMTP id 1mr5100011eem.71.1395016806390;
-	Sun, 16 Mar 2014 17:40:06 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	i47sm35814713eeg.6.2014.03.16.17.40.04
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=fou04Kc/2z3w+/6r0456HpyGzEbU7cCy7MyqD9RvzNc=;
+	b=dy9hCRz4Gqt9KlnhJYAsxOOsMZy6jaLUl//6IDLDQaU30gOZVtOHaguOVuH7Klsv1T
+	gziJrmkRyZfMzgx6tEjeSHpc+oh/Hvu3TvZaNlYCYhf8KRzWAC3g9U4zoakD54tyYvGz
+	uQBkNBtDxunJtnyCGVL8Q6g4uHF+OlAkMp+hbkTIi6WtX7p8uexx8eNXdqMaQfcnLKUl
+	D9H0Y3bQSL+ud5p74gBe1EgezcWVXce/TcYR50//+MuTrPPWQfPuHX5ycoeNcMcXV9aj
+	eHjIFgFVgpIXKSnTHKqzYd7vid3W0eno8nwS3jHQh12ranpeq7h4hD6U5r9W0MWf8YJF
+	EmRw==
+X-Received: by 10.68.194.65 with SMTP id hu1mr111349pbc.158.1395017007363;
+	Sun, 16 Mar 2014 17:43:27 -0700 (PDT)
+Received: from archimedes.arnolds.bogus
+	(dsl-66-59-252-223.static.linkline.com. [66.59.252.223])
+	by mx.google.com with ESMTPSA id x9sm37948338pbu.1.2014.03.16.17.43.25
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 16 Mar 2014 17:40:05 -0700 (PDT)
-Date: Mon, 17 Mar 2014 01:40:23 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sun, 16 Mar 2014 17:43:26 -0700 (PDT)
+From: Stephen Arnold <stephen.arnold42@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140317004023.GE3725@jama>
-References: <1395010139-15359-1-git-send-email-stephen.arnold42@gmail.com>
-	<20140317000217.GD3725@jama>
-	<CAOLEWZVyVyLOt9H6U0ZXEyUidpAYcL6m=O2omDnXreCuhQjBMw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAOLEWZVyVyLOt9H6U0ZXEyUidpAYcL6m=O2omDnXreCuhQjBMw@mail.gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-multimedia][PATCH] updated mpd to current upstream stable
+Date: Sun, 16 Mar 2014 17:43:15 -0700
+Message-Id: <1395016995-19191-1-git-send-email-stephen.arnold42@gmail.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-xfce][PATCH v2 1/1] recipes-xfce/libxfce4ui: build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,162 +43,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 00:40:12 -0000
-X-Groupsio-MsgNum: 48715
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JSkcQAAxhB1h8DcT"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Mar 2014 00:43:29 -0000
 
---JSkcQAAxhB1h8DcT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: "Stephen Arnold" <stephen.arnold42@gmail.com>
 
-On Sun, Mar 16, 2014 at 05:24:20PM -0700, Stephen Arnold wrote:
-> Not sure I understand; there should be only a new 0.18.8 recipe file in t=
-he
-> commit.  I have an updated one with a more standard message body,
-> signed-off-by, etc.  I'll resend a v2 in a minute, so please be specific =
-if
-> something looks funky.  Thanks, Steve
+libxfce4ui build fixes:
+ - updated depends
+ - set SRCREV to 4.10.0 tag
+ - added missing inherit 
+ - added pre-config task
 
-git rm meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.4.bb
+Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
 
-git commit --amend
+---
+ .../recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb   | 23 ++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
->=20
->=20
-> On Sun, Mar 16, 2014 at 5:02 PM, Martin Jansa <martin.jansa@gmail.com>wro=
-te:
->=20
-> > On Sun, Mar 16, 2014 at 03:48:58PM -0700, stephen.arnold42 wrote:
-> > > ---
-> > >  .../recipes-multimedia/musicpd/mpd_0.18.8.bb       | 59
-> > ++++++++++++++++++++++
-> >
-> > Can you please remove 0.18.4 in the same commit and resend with -M?
-> >
-> > Thanks
-> >
-> > >  1 file changed, 59 insertions(+)
-> > >  create mode 100644 meta-multimedia/recipes-multimedia/musicpd/
-> > mpd_0.18.8.bb
-> > >
-> > > diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb=
-b/meta-multimedia/recipes-multimedia/musicpd/
-> > mpd_0.18.8.bb
-> > > new file mode 100644
-> > > index 0000000..b6882af
-> > > --- /dev/null
-> > > +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-> > > @@ -0,0 +1,59 @@
-> > > +SUMMARY =3D "Music Player Daemon"
-> > > +LICENSE =3D "GPLv2"
-> > > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaaba=
-a882bbe"
-> > > +HOMEPAGE =3D"http://www.musicpd.org"
-> > > +
-> > > +DEPENDS =3D "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg fa=
-ad2
-> > ffmpeg curl sqlite bzip2 pulseaudio"
-> > > +
-> > > +SRC_URI =3D " \
-> > > +    http://www.musicpd.org/download/${PN}/stable/${P}.tar.xz \
-> > > +    file://mpd.conf.in \
-> > > +"
-> > > +
-> > > +SRC_URI[md5sum] =3D "7bbe1caf5abe404dc985ca4f44984b1f"
-> > > +SRC_URI[sha256sum] =3D
-> > "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616bd593aecdc26450"
-> > > +
-> > > +inherit autotools useradd systemd
-> > > +
-> > > +EXTRA_OECONF =3D "enable_bzip2=3Dyes"
-> > > +EXTRA_OECONF +=3D "${@base_contains('DISTRO_FEATURES', 'systemd',
-> > '--with-systemdsystemunitdir=3D${systemd_unitdir}/system/',
-> > '--without-systemdsystemunitdir', d)}"
-> > > +
-> > > +PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
-> > > +PACKAGECONFIG[id3tag] =3D "--enable-id3,--disable-id3,libid3tag"
-> > > +PACKAGECONFIG[lame] =3D
-> > "--enable-lame-encoder,--disable-lame-encoder,lame"
-> > > +
-> > > +do_install_append() {
-> > > +    install -d ${D}/${localstatedir}/lib/mpd/music
-> > > +    chmod 775 ${D}/${localstatedir}/lib/mpd/music
-> > > +    install -d ${D}/${localstatedir}/lib/mpd/playlists
-> > > +    chown -R mpd ${D}/${localstatedir}/lib/mpd
-> > > +    chown mpd:mpd ${D}/${localstatedir}/lib/mpd/music
-> > > +
-> > > +    install -d ${D}/${sysconfdir}
-> > > +    install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
-> > > +    sed -i \
-> > > +        -e 's|%music_directory%|${localstatedir}/lib/mpd/music|' \
-> > > +        -e 's|%playlist_directory%|${localstatedir}/lib/mpd/playlist=
-s|'
-> > \
-> > > +        -e 's|%db_file%|${localstatedir}/lib/mpd/mpd.db|' \
-> > > +        -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
-> > > +        -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
-> > > +        ${D}/${sysconfdir}/mpd.conf
-> > > +
-> > > +    if [ -e ${D}/${systemd_unitdir}/system/mpd.service ] ; then
-> > > +        sed -i \
-> > > +            's|^ExecStart=3D.*|ExecStart=3D${bindir}/mpd --no-daemon=
-|' \
-> > > +            ${D}/${systemd_unitdir}/system/mpd.service
-> > > +    fi
-> > > +}
-> > > +
-> > > +RPROVIDES_${PN} +=3D "${PN}-systemd"
-> > > +RREPLACES_${PN} +=3D "${PN}-systemd"
-> > > +RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> > > +SYSTEMD_SERVICE_${PN} =3D "mpd.service"
-> > > +
-> > > +USERADD_PACKAGES =3D "${PN}"
-> > > +USERADD_PARAM_${PN} =3D " \
-> > > +    --system --no-create-home \
-> > > +    --home ${localstatedir}/lib/mpd \
-> > > +    --groups audio \
-> > > +    --user-group mpd"
-> > > --
-> > > 1.8.5.3
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+index cc63a9f..b17ebc1 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
++++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+@@ -2,23 +2,28 @@ SUMMARY = "Xfce4 Widget library and X Window System interaction"
+ SECTION = "x11/libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
+-DEPENDS = "gtk+ intltool libxfce4util startup-notification xfconf glade3"
++DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
+ 
+-inherit xfce
++inherit autotools gettext xfce
+ 
+ SRC_URI = " \
+     git://git.xfce.org/xfce/libxfce4ui;protocol=git \
+     file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
+-    file://0002-configure.ac.in-remove-optional-gtk3-support.patch \
+ "
+-SRCREV = "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
+-PV = "4.10.0+git${SRCPV}"
++
++SRCREV = "cf85eac7804e09b24f3e8fb4165f60b1c9f8cf49"
++PV = "4.10.0"
+ S = "${WORKDIR}/git"
+ 
+-EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gladeui] = "--enable-gladeui,--disable-gladeui,glade3"
++PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
++
++EXTRA_OECONF += "--enable-maintainer-mode --disable-debug --with-vendor-info=${DISTRO}"
+ 
+-do_configure_prepend() {
+-       NOCONFIGURE=yes ./autogen.sh
++do_patch_extra() {
++    sed -i /GTK3/d ${S}/configure.ac.in
++    NOCONFIGURE=yes ./autogen.sh
+ }
+ 
+ FILES_${PN}-dbg += "${libdir}/glade3/modules/.debug"
+@@ -27,3 +32,5 @@ FILES_${PN}-dev += "${libdir}/glade3/modules/*.la \
+ PACKAGES += "${PN}-glade"
+ FILES_${PN}-glade = "${libdir}/glade3 \
+                      ${datadir}/glade3"
++
++addtask do_patch_extra before do_configure after do_patch
+-- 
+1.8.5.3
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---JSkcQAAxhB1h8DcT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlMmRHcACgkQN1Ujt2V2gBxWQACdEY0hT6k/5rcbnm+vxyIRW8LN
-MnwAn0VY5W5UzX46+KsYDuMcsfk4hPXd
-=kW7W
------END PGP SIGNATURE-----
-
---JSkcQAAxhB1h8DcT--
