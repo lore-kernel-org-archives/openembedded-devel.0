@@ -1,34 +1,21 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ve0-f172.google.com (mail-ve0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8590E6EBA2
+Return-Path: <cristian.iorga@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 317256F8F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 09:32:07 +0000 (UTC)
-Received: by mail-ve0-f172.google.com with SMTP id jx11so6728220veb.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 02:32:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=XqkDS2JkQBnHw6sLiPB3an82z2OVNWRCCMnpFDW+HUQ=;
-	b=itFQfR62U5ePSbDt8MDogJZ9IRFkzlpDiQ/XEw3wbC17fCU8zDMSbn6RhrrKzdkw8f
-	U6mVcI4LrpbQxiklF5yjCJBC6VLUI3ob7qVv4McrEPOLbMRkd9xhLDci7/I9MzJ/4MtU
-	vrpFn3CjckEuLRb+FMrH7Nbhoou1h6uFkvxAVuU3BTqiVmllUIZZye6IgXUx+nTBA5R4
-	p18+kdJeliALSVXvFqIXZv4kKc6KNIbssBldrDDHzO8jkHox64/r93ymqaiFjVTkJWmW
-	mlATCpKK2yCKFFWVKtjX+SV7mhzuIakmUuur+g732uxEG4l0b7b+Vi/dIGbWU4NEBqJ+
-	A0rQ==
-MIME-Version: 1.0
-X-Received: by 10.221.61.210 with SMTP id wx18mr5018267vcb.27.1395135128538;
-	Tue, 18 Mar 2014 02:32:08 -0700 (PDT)
-Received: by 10.52.120.4 with HTTP; Tue, 18 Mar 2014 02:32:08 -0700 (PDT)
-In-Reply-To: <1395133748-1211-1-git-send-email-stephen.arnold42@gmail.com>
-References: <1395133748-1211-1-git-send-email-stephen.arnold42@gmail.com>
-Date: Tue, 18 Mar 2014 10:32:08 +0100
-Message-ID: <CALbNGRSynkvxFUPNDCoQhPMnK7HHgNuM1sBOh8gPnJZXaW4r+Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-graphics][PATCH v3] recipes-graphics/lxdm: autotools and config updates
+	Tue, 18 Mar 2014 12:51:10 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 18 Mar 2014 05:51:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,678,1389772800"; d="scan'208";a="501143879"
+Received: from sentry.rb.intel.com ([10.237.105.54])
+	by fmsmga002.fm.intel.com with ESMTP; 18 Mar 2014 05:50:47 -0700
+From: Cristian Iorga <cristian.iorga@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Mar 2014 14:53:54 +0200
+Message-Id: <1395147234-12610-1-git-send-email-cristian.iorga@intel.com>
+X-Mailer: git-send-email 1.8.3.2
+Cc: Cristian Iorga <ubik3000@gmail.com>
+Subject: [meta-multimedia][PATCH] mpg123: upgrade to 1.19.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,62 +29,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 09:32:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Mar 2014 12:51:15 -0000
 
-On Tue, Mar 18, 2014 at 10:09 AM, Stephen Arnold
-<stephen.arnold42@gmail.com> wrote:
-> lxdm_git.bb: Upstream changes required autotools and gettext (intl) updates;
-> the package autogen script doesn't create the makefile in po, but autotools
-> by itself is missing the input file (thus, the configure_prepend). There
-> were also missing depends (from upstream docs and configure checks) and
-> some configure options were added to ensure the desired X/gtk2 config and
-> enable (optional) auto-login.
-For my interest since I have autologin working as expected (with
-oe-core updated last in january -> autotools not updated). What is
-this --enable-password for?
->
-> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
->
-> ---
->  meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 13 ++++++++++---
->  1 file changed, 10 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-> index c12eddf..c602ad3 100644
-> --- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-> +++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-> @@ -16,17 +16,24 @@ SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
->  PV = "0.5.0+git${SRCPV}"
->  PE = "1"
->
-> -DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
-> +DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
->  DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
->
->  # combine oe-core way with angstrom DISTRO_TYPE
->  DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
->
-> -inherit autotools gettext systemd
-> +inherit autotools pkgconfig gettext systemd
->
->  S = "${WORKDIR}/git"
->
-> -EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
-> +CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
-Why these extra flags - I found no hint in commit message.
-> +
-> +EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x -with-xconn=xcb \
-> +    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
-> +
-> +do_configure_prepend() {
-> +    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/po/
-> +}
->
->  do_compile_append() {
->      # default background configured not available / no password field available / no default screensaver
-> --
-regards
+From: Cristian Iorga <ubik3000@gmail.com>
 
-Andreas
+- switched to ${BP} variable;
+- ${S} redundant, removed;
+- option with-module-suffix=.so: load modules with .so extension;
+- .la files are kept only for dev packages;
+- clearer COPYING file, about contribution and licenses;
+  no changes to licenses.
+
+Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
+Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
+---
+ .../mpg123/{mpg123_1.15.3.bb => mpg123_1.19.0.bb}            | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
+ rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.15.3.bb => mpg123_1.19.0.bb} (79%)
+
+diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
+similarity index 79%
+rename from meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+rename to meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
+index 0075427..dd5c3a4 100644
+--- a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
++++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
+@@ -16,19 +16,17 @@ PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
+ 
+ LICENSE = "LGPLv2.1"
+ LICENSE_FLAGS = "commercial"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
+-
+-SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
+-SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
+-
+-S = "${WORKDIR}/mpg123-${PV}"
++SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
++SRC_URI[md5sum] = "87731f1437cfd8c50537a606d81130e4"
++SRC_URI[sha256sum] = "869024e01d7cb4dae1aea2f2a10420d4be7e1ac02a9c434d06d727599169b01b"
+ 
+ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF = " \
+     --enable-shared \
++    --with-module-suffix=.so \
+     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
+     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
+ "
+-- 
+1.8.3.2
+
 
