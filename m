@@ -1,39 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id A17216E8DC
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A7142605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 19:14:13 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so5078406eek.35
+	Tue, 18 Mar 2014 19:17:08 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so5727526eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 12:14:13 -0700 (PDT)
+	Tue, 18 Mar 2014 12:17:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=MfR1eyutAQA089/30WWdzOLfoAXIzM18zwAbNVpvzdA=;
-	b=YBoHzdHjQ30WwOHs6a4Uc+hLJ4MOZerQFrk++ZHSU3DU1/MqgqU34cb9f/ZEhBt8xu
-	QAPZbWe9xT4hBQ9X8ZbyTBeD2iZ/9C/jdcvFTzNQpvMMwZpTgS9copPZWRAVmxg15wg6
-	QmCbrPhrr8Qvs+2sxfyINzI6fP5XiS2Mla8fFkXUHt4X+IadyhN0ZgbcE3PH3ibRhdGg
-	f233PdMY6MKrDi7SEpm36dlcY23JcaHjWd2bObU5NoNlb5gIHaxTmjgwwYhILF0SowjZ
-	uPQUaKTvJ3Kr5uidM0vBXRWAGPzIMUKXEdAGiBbYqmOeHslqoROf+XgJg++XFNwox2me
-	Ab5g==
-X-Received: by 10.14.172.69 with SMTP id s45mr31797005eel.26.1395170053913;
-	Tue, 18 Mar 2014 12:14:13 -0700 (PDT)
+	bh=it1gkNvep59lR6GmA5mKjVclx9MuhVeeTzftREzsh88=;
+	b=ixgLIeFPUAawQHWcS9LjSf3JhkOYrf4teOnRK2fffl1wrJQXLVNJpWDJjd8CrHEch8
+	QeFChzXIog5UpF4PRdpcSQYf704IBMbZkJYiByNo+2BcgkpWTP3oDUjkkNXu2YgzEVsp
+	1Et41qUWxT2eHKvV+i+SOa1k02KIpOTq7++WIo+nr2HS8lw5f1e8rQa+Im4fO970ftJR
+	b35DzuZk05WEpqBnBOTsAvyS7T81vrh8eqjaJQ6g6sDZEymRT250IsmqMF4glffYk9iB
+	Ae3VmpO8x/Hh+6vyOim50Jj0dvHY1ekCQRfWD8cJC632/IiEEfNY0W8eINJjGIF6SNxa
+	P7gQ==
+X-Received: by 10.14.6.195 with SMTP id 43mr4475832een.101.1395170229629;
+	Tue, 18 Mar 2014 12:17:09 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	44sm36992189eek.30.2014.03.18.12.14.12
-	for <openembedded-devel@lists.openembedded.org>
+	cb5sm49281566eeb.18.2014.03.18.12.17.08 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Mar 2014 12:14:12 -0700 (PDT)
-Date: Tue, 18 Mar 2014 20:14:12 +0100
+	Tue, 18 Mar 2014 12:17:08 -0700 (PDT)
+Date: Tue, 18 Mar 2014 20:17:08 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140318191412.GC3725@jama>
-References: <cover.1395133995.git.Chong.Lu@windriver.com>
-	<133cccb358d29dfca2dc65f9194b0d1274854ce6.1395133995.git.Chong.Lu@windriver.com>
+Message-ID: <20140318191708.GD3725@jama>
+References: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
+	<1395160103-15730-2-git-send-email-otavio@ossystems.com.br>
+	<20140318190602.GB3725@jama>
 MIME-Version: 1.0
-In-Reply-To: <133cccb358d29dfca2dc65f9194b0d1274854ce6.1395133995.git.Chong.Lu@windriver.com>
+In-Reply-To: <20140318190602.GB3725@jama>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH 1/1] openldap: add a dependency to make do_compile pass
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH 2/2] libmicrohttpd: Update to 0.9.34
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,66 +48,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 19:14:17 -0000
-X-Groupsio-MsgNum: 48749
+X-List-Received-Date: Tue, 18 Mar 2014 19:17:11 -0000
+X-Groupsio-MsgNum: 48750
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qjNfmADvan18RZcF"
+	protocol="application/pgp-signature"; boundary="Km1U/tdNT/EmXiR1"
 Content-Disposition: inline
 
---qjNfmADvan18RZcF
-Content-Type: text/plain; charset=utf-8
+--Km1U/tdNT/EmXiR1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 18, 2014 at 05:15:58PM +0800, Chong Lu wrote:
-> During compiling=EF=BC=8C we need soelim command provided by groff-native.
-> So add DEPENDS to fix this issue, else we will get following error:
+On Tue, Mar 18, 2014 at 08:06:02PM +0100, Martin Jansa wrote:
+> On Tue, Mar 18, 2014 at 01:28:23PM -0300, Otavio Salvador wrote:
+> > This update fixes the following build error:
+> >=20
+> > ,----[ Build error ]
+> > | ...
+> > | .../libmicrospdy.so: undefined reference to `SSL_get_error'
+> > | .../libmicrospdy.so: undefined reference to `SSL_write'
+> > | .../libmicrospdy.so: undefined reference to `SSL_free'
+> > | ...
+> > `----
 >=20
-> 	/bin/sh: 15: soelim: not found
->=20
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-> ---
->  meta-oe/recipes-support/openldap/openldap_2.4.23.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-o=
-e/recipes-support/openldap/openldap_2.4.23.bb
-> index a565e89..cfb8e7b 100644
-> --- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-> +++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-> @@ -21,6 +21,7 @@ SRC_URI[md5sum] =3D "90150b8c0d0192e10b30157e68844ddf"
->  SRC_URI[sha256sum] =3D "5a5ede91d5e8ab3c7f637620aa29a3b96eb34318a8b26c8e=
-ef2d2c789fc055e3"
-> =20
->  DEPENDS =3D "util-linux"
-> +DEPENDS +=3D "groff-native"
+> Is this v2 or the same as previous update?
 
-I'll merge these 2 lines to one when cherry-picking to master-next.
+Hmm it's identical, please don't resend identical changes and if you do
+it by accident, then please update status on patchwork.
 
->  PR =3D "r1"
->  # The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
-> --=20
-> 1.8.1.2
+> > Reported-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
+> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> > ---
+> >  .../{libmicrohttpd_0.9.33.bb =3D> libmicrohttpd_0.9.34.bb}            =
+  | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >  rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.33.bb =
+=3D> libmicrohttpd_0.9.34.bb} (85%)
+> >=20
+> > diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33=
+=2Ebb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> > similarity index 85%
+> > rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.=
+bb
+> > rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> > index 523b8dd..5de9390 100644
+> > --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
+> > +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+> > @@ -6,8 +6,8 @@ SECTION =3D "net"
+> >  DEPENDS =3D "libgcrypt gnutls"
+> > =20
+> >  SRC_URI =3D "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+> > -SRC_URI[md5sum] =3D "013b10f9de1cda5448b29c81305354a3"
+> > -SRC_URI[sha256sum] =3D "d9587e8497548f820650cd607daf3615ea327243577937=
+8983032c570f1cd559"
+> > +SRC_URI[md5sum] =3D "2947eee13c2c8affb95023a0cb6fda0c"
+> > +SRC_URI[sha256sum] =3D "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843=
+be421a040be1b25a88"
+> > =20
+> >  inherit autotools lib_package
+> > =20
+> > --=20
+> > 1.9.0
+> >=20
+> > --=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >=20
 > --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---qjNfmADvan18RZcF
+--Km1U/tdNT/EmXiR1
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMomwQACgkQN1Ujt2V2gBz84QCguaSO6t+kb/RExnOU10AKarZd
-E2cAoK4kyQT4PXQfVQY8TuwxZx2E24YX
-=Kjz8
+iEYEARECAAYFAlMom7QACgkQN1Ujt2V2gByw1wCgmYD5NpRDBRn9QGRAry+TGd7x
+Tn8AmwVitN74eEZhowWjh5r5HITnMdQ6
+=kLp2
 -----END PGP SIGNATURE-----
 
---qjNfmADvan18RZcF--
+--Km1U/tdNT/EmXiR1--
