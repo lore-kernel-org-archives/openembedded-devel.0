@@ -1,25 +1,34 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 05CFD6F8D5
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E8226F8CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 08:21:11 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s2I8LB1M007792
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 18 Mar 2014 01:21:11 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 18 Mar 2014 01:21:11 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Mar 2014 16:21:06 +0800
-Message-ID: <316bd69dad824f3241ca471b85a35acab15149a2.1395130693.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1395130693.git.hongxu.jia@windriver.com>
-References: <cover.1395130693.git.hongxu.jia@windriver.com>
+	Tue, 18 Mar 2014 08:46:20 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id lh14so6795579vcb.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=3cMpBqcfpwqatxeHhciSKLmo+I4jxsjX+eXmaJC2iZY=;
+	b=rv77DYcPuyObQWswOW9/MyjA6IBE0AmYv8rcmT90/R+o0II2LbsoFEqVa2YvUVvTD2
+	oqdtNoY8IEv8p8oVOnBCkVOj52yPsjyTV2Zo/cbMuGPOdr5NyB03tHe0VU9EewBHiOdf
+	QNY8esiA155QW5vHqubgD2I+lYzHONZ3EIizOHZee8PQPUp73m1aDlMzAdFx7j9tYahb
+	MaKUNikzPLnSWAU0xVdAB0Xg48ZrNMBmxMWrzzqGuYiFu7W3MD6ZAiAjaX19ITtqE2y8
+	iWhMALDB8sP5xPdS6SVgPSueCf5y3kCgZrTQL7wH3IuaORgJZBNdb4QjhxVWee+YYVl0
+	ouLg==
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] netcf: fix gnulib not found in sysroots while using a shared sstate cache
+X-Received: by 10.220.106.84 with SMTP id w20mr23920714vco.18.1395132381332;
+	Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
+Received: by 10.52.120.4 with HTTP; Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
+In-Reply-To: <1395117284-22655-1-git-send-email-stephen.arnold42@gmail.com>
+References: <1395117284-22655-1-git-send-email-stephen.arnold42@gmail.com>
+Date: Tue, 18 Mar 2014 09:46:21 +0100
+Message-ID: <CALbNGRTeZrrDcSLQ8fQ7YOp4kK=e0dp1oAQBRR7D-6MYRQDXYg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH v3] recipes-xfce/libxfce4ui: depends and autotools fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,57 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 08:21:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Mar 2014 08:46:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-...
-./bootstrap: Bootstrapping from checked-out netcf sources...
-./bootstrap: consider installing git-merge-changelog from gnulib
-./bootstrap: line 641:
-tmp/sysroots/qemux86/usr/share/gnulib/gnulib-tool: No such file or
-directory
-...
+On Tue, Mar 18, 2014 at 5:34 AM, Stephen Arnold
+<stephen.arnold42@gmail.com> wrote:
+> Note: this patch (v3) obseletes previous versions
+>
+> libxfce4ui_4.10.0.bb: Upstream changes required autotools and gettext (intl)
+> fixes, as well as moving the autogen stuff to a separate task.  Full depends
+> were also added (2 were converted to PACKAGECONFIG options) along with a
+> vendor config option.
+>
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+>
+> ---
+>  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb | 14 ++++++++++----
+>  1 file changed, 10 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> index cc63a9f..1e141c4 100644
+> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> @@ -2,9 +2,9 @@ SUMMARY = "Xfce4 Widget library and X Window System interaction"
+>  SECTION = "x11/libs"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
+> -DEPENDS = "gtk+ intltool libxfce4util startup-notification xfconf glade3"
+> +DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
+>
+> -inherit xfce
+> +inherit autotools gettext xfce
+>
+>  SRC_URI = " \
+>      git://git.xfce.org/xfce/libxfce4ui;protocol=git \
+> @@ -15,9 +15,13 @@ SRCREV = "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
+>  PV = "4.10.0+git${SRCPV}"
+>  S = "${WORKDIR}/git"
+>
+> -EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
+> +EXTRA_OECONF += "--enable-maintainer-mode --disable-debug  --with-vendor-info=${DISTRO}"
+>
+> -do_configure_prepend() {
+> +PACKAGECONFIG ??= ""
+> +PACKAGECONFIG[gladeui] = "--enable-gladeui,--disable-gladeui,glade3"
+> +PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+> +
+> +do_src_prepare() {
+>         NOCONFIGURE=yes ./autogen.sh
+>  }
+>
+> @@ -27,3 +31,5 @@ FILES_${PN}-dev += "${libdir}/glade3/modules/*.la \
+>  PACKAGES += "${PN}-glade"
+>  FILES_${PN}-glade = "${libdir}/glade3 \
+>                       ${datadir}/glade3"
+> +
+> +addtask do_src_prepare before do_configure after do_patch
+> --
+I asked that for lxdm already - maybe I missed something: Why do you
+create an extra task and do not use do_configure_prepend() ?
 
-The gnulib source was incorrectly populated to ${STAGING_DATADIR}.
-While the build shared an existed sstate cache, the gnulib's
-${SYSROOT_DESTDIR} was empty, the gnulib source code was not
-found in sysroots.
-
-We should use do_install task to install them to ${D}, and the
-default do_populate_sysroot task will populate them to
-${STAGING_DATADIR}.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-networking/recipes-support/netcf/gnulib_git.bb | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
-
-diff --git a/meta-networking/recipes-support/netcf/gnulib_git.bb b/meta-networking/recipes-support/netcf/gnulib_git.bb
-index 730f5cd..1da6c83 100644
---- a/meta-networking/recipes-support/netcf/gnulib_git.bb
-+++ b/meta-networking/recipes-support/netcf/gnulib_git.bb
-@@ -16,18 +16,15 @@ SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
- "
- S = "${WORKDIR}/git"
- 
--# Git clone a copy of gnulib source to the staging data dir
--sysroot_stage_all () {
--    [ -d ${STAGING_DATADIR}/gnulib/ ] && rm -rf ${STAGING_DATADIR}/gnulib/
-+do_install () {
-     cd ${S}
-     git checkout master
--    git clone ${S} ${STAGING_DATADIR}/gnulib
-+    git clone ${S} ${D}/${datadir}/gnulib
- }
- 
- do_patch[noexec] = "1"
- do_configure[noexec] = "1"
- do_compile[noexec] = "1"
--do_install[noexec] = "1"
- do_package[noexec] = "1"
- do_packagedata[noexec] = "1"
- do_package_write_ipk[noexec] = "1"
--- 
-1.8.1.2
-
+Andreas
 
