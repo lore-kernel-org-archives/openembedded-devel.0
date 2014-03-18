@@ -1,42 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A0646F769
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A98C6E78E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 17:24:23 +0000 (UTC)
-Received: by mail-ee0-f54.google.com with SMTP id d49so4362537eek.41
+	Tue, 18 Mar 2014 03:46:43 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id f8so3099104wiw.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Mar 2014 10:24:24 -0700 (PDT)
+	Mon, 17 Mar 2014 20:46:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=CyvwhEZLsqgnsW1BbHoevLOrZ3EnqFn+mvus4l/wyEw=;
-	b=BBUnCqZG1QuaDsjqO/lHhxZGEUp2Rv+siJZuUsMc57COfXfMeTXdOOoVsDz7SVfSWi
-	Xc4ejp5pJJIoPljPeObIwRRK9SUjMIaF7lQTav8YBngWQt1rkb71NY57OTnpUnXayDz9
-	XZv9k8h6kIIIBMAigKJvQJ5rGKDQEyzldi757eh3J1d/TBjmhDP4gsTxYXcxZzWIKHnk
-	F1Bd5Eh7auRWHMfVKL5eaNBe+ThoNbGgZPDYugDY/2hbRUhxGFMlq31zDC/9jLJZVcNB
-	vadKMnI4I4jLyfnPxppiu5sxMB4sC2kY0lI497wUbmIx0pkHBiniAtnlQmOL/Qvnu1RF
-	4/eQ==
-X-Received: by 10.14.22.69 with SMTP id s45mr24783492ees.56.1395077064353;
-	Mon, 17 Mar 2014 10:24:24 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o5sm40800601eeg.8.2014.03.17.10.24.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Mar 2014 10:24:23 -0700 (PDT)
-Date: Mon, 17 Mar 2014 18:24:34 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140317172434.GI3725@jama>
-References: <lauren.post@freescale.com>
-	<1394227575-27897-1-git-send-email-lauren.post@freescale.com>
-	<1394227575-27897-6-git-send-email-lauren.post@freescale.com>
-	<20140311141735.GC2137@jama>
-	<CAP9ODKqg25BUOXFgB5Dh3O7pJ2T359+aABy-WE-ioMnx1r9BSw@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=KBR4bU+pO0A+8Wdyr/o3fnxxxze50hEb0DO7q5cZyrk=;
+	b=mkIZ8Cm2fj+N9g4zVPoyIhTVDz9Nvt1j7JWm6Yv3oCEa2Ed00NM/tbr4KjH8iBuflM
+	z/GZYh2A6zWjcf65S/xqlod7kSWB+/ORTkAFZA129nqH+SYVZlUR6n6WPnmzkiu9P3qv
+	q5/A3/Ac+S1yzr9UT+e3bFMDiUzKi7+lHLFkDkn/6E992qE2ReVNF5WW4H6WHL+lu115
+	wlTGhG8wktNEpyRuNboY80coPYEnQfuJODwytf7zPR1ZJa5dwSryWU2BqiE2Q833QSH/
+	7OXd4ISF0K3zEU9Cdrj8kfffthphIUv/grLc35oiwh4UTNWKtAYU9Cm8O/YExzMEYbxX
+	3lgw==
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKqg25BUOXFgB5Dh3O7pJ2T359+aABy-WE-ioMnx1r9BSw@mail.gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH 6/7] vlan: Create 1.9 version
+X-Received: by 10.180.164.229 with SMTP id yt5mr12536819wib.49.1395114403977; 
+	Mon, 17 Mar 2014 20:46:43 -0700 (PDT)
+Received: by 10.194.59.228 with HTTP; Mon, 17 Mar 2014 20:46:43 -0700 (PDT)
+In-Reply-To: <CALbNGRQHS16u634VZgjk4nHy=LiRowK2pc1J1xW6eXNDds_7Xg@mail.gmail.com>
+References: <1395016995-19191-1-git-send-email-stephen.arnold42@gmail.com>
+	<CALbNGRQHS16u634VZgjk4nHy=LiRowK2pc1J1xW6eXNDds_7Xg@mail.gmail.com>
+Date: Mon, 17 Mar 2014 20:46:43 -0700
+Message-ID: <CAOLEWZX-s-Cu5vG6+1EF7XuW4_+=2zuFmB5Y7svG0=gCZCD-zQ@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-xfce][PATCH v2 1/1] recipes-xfce/libxfce4ui: build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,105 +42,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Mar 2014 17:24:25 -0000
-X-Groupsio-MsgNum: 48732
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="QnBU6tTI9sljzm9u"
-Content-Disposition: inline
-
---QnBU6tTI9sljzm9u
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Mar 2014 03:46:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 17, 2014 at 01:26:21PM -0300, Otavio Salvador wrote:
-> Hello Martin,
->=20
-> On Tue, Mar 11, 2014 at 11:17 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Fri, Mar 07, 2014 at 03:26:14PM -0600, Lauren Post wrote:
-> >> VLAN provides vconfig utility
-> >>
-> >> Signed-off-by: Lauren Post <lauren.post@freescale.com>
-> >> ---
-> >>  .../recipes-connectivity/vlan/vlan_1.9.bb          |   25 +++++++++++=
-+++++++++
-> >>  1 file changed, 25 insertions(+)
-> >>  create mode 100644 meta-networking/recipes-connectivity/vlan/vlan_1.9=
-=2Ebb
-> >>
-> >> diff --git a/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb b/m=
-eta-networking/recipes-connectivity/vlan/vlan_1.9.bb
-> >> new file mode 100644
-> >> index 0000000..a9711ed
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
-> >> @@ -0,0 +1,25 @@
-> >> +DESCRIPTION =3D "VLAN provides vconfig utility"
-> >
-> > DESCRIPTION -> SUMMARY
-> >
-> >> +LICENSE =3D "GPLv2"
-> >> +LIC_FILES_CHKSUM =3D "file://vconfig.c;md5=3D293ef69c4e88434d37a5ee57=
-7a5288cb"
-> >> +
-> >> +SRC_URI =3D "http://vlan.sourcearchive.com/downloads/1.9-3ubuntu9/vla=
-n_1.9.orig.tar.gz"
-> >
-> > vlan -> ${BPN}
-> > 1.9 -> ${PV}
-> >
-> >> +
-> >> +SRC_URI[md5sum] =3D "5f0c6060b33956fb16e11a15467dd394"
-> >> +SRC_URI[sha256sum] =3D "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a773=
-92d9aeb4868842b4cca"
-> >> +
-> >> +S =3D "${WORKDIR}/vlan"
-> >
-> > vlan -> ${BPN}
-> >
-> >> +
-> >> +# comment out MakeInclude in Makefile which sets build environment
-> >> +do_configure_append () {
-> >> +    sed -i 's/^ include/#^include/' ${S}/Makefile
-> >> +}
-> >> +
-> >> +# ignore strip to avoid yocto errors in stripping
-> >> +do_compile () {
-> >> +    oe_runmake PLATFORM=3DARM 'STRIP=3Decho' all
-> >> +}
-> >> +
-> >> +do_install () {
-> >> +     install -d ${D}/${exec_prefix}/bin
-> >> +     cp ${S}/vconfig ${D}/${exec_prefix}/bin
-> >
-> > 5 spaces -> 4 spaces
-> >
-> > I'll modify above comments when cherry-picking to master-next.
->=20
-> So I assume this one does not need a v2. Am I right?
+Somehow doing it in configure_prepend makes it blow up like this:
 
-Yes, it's already modified in:
-http://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=3D=
-095fbd60d7b0b59558e49b97a20814d34626084e
-so it doesn't need v2.
+| NOTE: Executing ACLOCAL=3D"aclocal
+--system-acdir=3D/home/sarnold/poky/build-rpihf/tmp/work/arm1176jzfshf-vfp-=
+poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-c=
+opy/"
+autoreconf --verbose --install --force --exclude=3Dautopoint
+| autoreconf: Entering directory `.'
+| autoreconf: configure.ac: not using Gettext
+| autoreconf: running: aclocal
+--system-acdir=3D/home/sarnold/poky/build-rpihf/tmp/work/arm1176jzfshf-vfp-=
+poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-c=
+opy/
+--force
+| aclocal: error: couldn't open directory
+'/home/sarnold/poky/build-rpihf/tmp/work/arm1176jzfshf-vfp-poky-linux-gnuea=
+bi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-copy/':
+No such file or directory
+| autoreconf: aclocal failed with exit status: 1
+| ERROR: autoreconf execution failed.
 
-Other patches where I didn't say that I'll do the changes when
-cherry-picking need v2.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---QnBU6tTI9sljzm9u
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+On Mon, Mar 17, 2014 at 1:39 AM, Andreas M=FCller <
+schnitzeltony@googlemail.com> wrote:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+> On Mon, Mar 17, 2014 at 1:43 AM, Stephen Arnold
+> <stephen.arnold42@gmail.com> wrote:
+> > From: "Stephen Arnold" <stephen.arnold42@gmail.com>
+> >
+> > libxfce4ui build fixes:
+> >  - updated depends
+> >  - set SRCREV to 4.10.0 tag
+> AFAICR this will break xfce4-settings see commit
+> b3a2a01b40affbedc2b0951f7180c1212d24d532.
+> >  - added missing inherit
+> >  - added pre-config task
+> >
+> > Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> >
+> > ---
+> >  .../recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb   | 23
+> ++++++++++++++--------
+> >  1 file changed, 15 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bbb/me=
+ta-xfce/recipes-xfce/libxfce4ui/
+> libxfce4ui_4.10.0.bb
+> > index cc63a9f..b17ebc1 100644
+> > --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> > +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> > @@ -2,23 +2,28 @@ SUMMARY =3D "Xfce4 Widget library and X Window System
+> interaction"
+> >  SECTION =3D "x11/libs"
+> >  LICENSE =3D "GPLv2"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D252890d9eee26aab7b432e8b8a6=
+16475"
+> > -DEPENDS =3D "gtk+ intltool libxfce4util startup-notification xfconf
+> glade3"
+> > +DEPENDS =3D "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf
+> xfce4-dev-tools virtual/libx11 libsm libice"
+> >
+> > -inherit xfce
+> > +inherit autotools gettext xfce
+> >
+> >  SRC_URI =3D " \
+> >      git://git.xfce.org/xfce/libxfce4ui;protocol=3Dgit \
+> >
+>  file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
+> > -    file://0002-configure.ac.in-remove-optional-gtk3-support.patch \
+> >  "
+> > -SRCREV =3D "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
+> > -PV =3D "4.10.0+git${SRCPV}"
+> > +
+> > +SRCREV =3D "cf85eac7804e09b24f3e8fb4165f60b1c9f8cf49"
+> > +PV =3D "4.10.0"
+> >  S =3D "${WORKDIR}/git"
+> >
+> > -EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
+> > +PACKAGECONFIG ??=3D ""
+> > +PACKAGECONFIG[gladeui] =3D "--enable-gladeui,--disable-gladeui,glade3"
+> > +PACKAGECONFIG[startup-notification] =3D
+> "--enable-startup-notification,--disable-startup-notification,startup-not=
+ification"
+> > +
+> > +EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug
+> --with-vendor-info=3D${DISTRO}"
+> >
+> > -do_configure_prepend() {
+> > -       NOCONFIGURE=3Dyes ./autogen.sh
+> > +do_patch_extra() {
+> > +    sed -i /GTK3/d ${S}/configure.ac.in
+> > +    NOCONFIGURE=3Dyes ./autogen.sh
+> >  }
+> >
+> >  FILES_${PN}-dbg +=3D "${libdir}/glade3/modules/.debug"
+> > @@ -27,3 +32,5 @@ FILES_${PN}-dev +=3D "${libdir}/glade3/modules/*.la \
+> >  PACKAGES +=3D "${PN}-glade"
+> >  FILES_${PN}-glade =3D "${libdir}/glade3 \
+> >                       ${datadir}/glade3"
+> > +
+> > +addtask do_patch_extra before do_configure after do_patch
+> why not do_configure_prepend?
+>
+> You say 'build fixes'. Could you append a log showing why these
+> changes are necessary?
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-iEYEARECAAYFAlMnL9IACgkQN1Ujt2V2gBxTEQCdEjy4xCzAY5Dac6kkmmfrT7Dq
-XRYAoLpmUcecbS6z44WfDkMUTcpWXQyP
-=wZhO
------END PGP SIGNATURE-----
-
---QnBU6tTI9sljzm9u--
