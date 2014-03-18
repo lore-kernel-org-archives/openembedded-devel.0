@@ -1,26 +1,34 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EF0E06F8D2
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C10E6F8D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 09:16:05 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s2I9G3q0008394
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 18 Mar 2014 09:19:05 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id d1so3350415wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 02:16:03 -0700 (PDT)
-Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 18 Mar 2014 02:16:02 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Mar 2014 17:15:58 +0800
-Message-ID: <133cccb358d29dfca2dc65f9194b0d1274854ce6.1395133995.git.Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1395133995.git.Chong.Lu@windriver.com>
-References: <cover.1395133995.git.Chong.Lu@windriver.com>
+	Tue, 18 Mar 2014 02:19:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=KXzFrVyDIcaIQUmJXGs4Z1GuQLa3tQey6lFLyHlR42A=;
+	b=vHsuqbLRCYSBJFwQCwBgik/XB4Ip/bEoa3U6ppVBPh2IaeyKLdboWePFn/cGsuyUq6
+	sEQiw5BX31hua06gUTeT3KTiH5Zwt/pUGDcN7N3IIIoa7aoh48loA54Yt3zE2QDl9LUh
+	GcqfESWGEtEB13xFYBglCgkAueMpR9yXChOkroQ2NWZlYqXv8j0j2SsvC01eQG8tlGNo
+	crr2FjwpkxnGF2wnuj0QbyNkicbtADu8eD88HB2qvWH+sjmKFQMTkiYf53q2NMcw2VhZ
+	cbzJWAY6z65C7pRxZCNRkQcfDoUHLpfHFxz2thfKZUJPgIR2zYJU/fOJ9gRdN7WJ13UN
+	Y0YQ==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] openldap: add a dependency to make do_compile pass
+X-Received: by 10.180.164.229 with SMTP id yt5mr13621061wib.49.1395134345907; 
+	Tue, 18 Mar 2014 02:19:05 -0700 (PDT)
+Received: by 10.194.59.228 with HTTP; Tue, 18 Mar 2014 02:19:05 -0700 (PDT)
+In-Reply-To: <CALbNGRTeZrrDcSLQ8fQ7YOp4kK=e0dp1oAQBRR7D-6MYRQDXYg@mail.gmail.com>
+References: <1395117284-22655-1-git-send-email-stephen.arnold42@gmail.com>
+	<CALbNGRTeZrrDcSLQ8fQ7YOp4kK=e0dp1oAQBRR7D-6MYRQDXYg@mail.gmail.com>
+Date: Tue, 18 Mar 2014 02:19:05 -0700
+Message-ID: <CAOLEWZVbSV6bLKTXih01cfmyec4uvmO1PUc6OM02=Fub68OsRg@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-xfce][PATCH v3] recipes-xfce/libxfce4ui: depends and autotools fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 09:16:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 18 Mar 2014 09:19:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-During compiling， we need soelim command provided by groff-native.
-So add DEPENDS to fix this issue, else we will get following error:
+Because it only works in a separate task (see previous email).
 
-	/bin/sh: 15: soelim: not found
 
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
----
- meta-oe/recipes-support/openldap/openldap_2.4.23.bb | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-index a565e89..cfb8e7b 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-@@ -21,6 +21,7 @@ SRC_URI[md5sum] = "90150b8c0d0192e10b30157e68844ddf"
- SRC_URI[sha256sum] = "5a5ede91d5e8ab3c7f637620aa29a3b96eb34318a8b26c8eef2d2c789fc055e3"
- 
- DEPENDS = "util-linux"
-+DEPENDS += "groff-native"
- 
- PR = "r1"
- # The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
--- 
-1.8.1.2
+On Tue, Mar 18, 2014 at 1:46 AM, Andreas M=FCller <
+schnitzeltony@googlemail.com> wrote:
 
+> On Tue, Mar 18, 2014 at 5:34 AM, Stephen Arnold
+> <stephen.arnold42@gmail.com> wrote:
+> > Note: this patch (v3) obseletes previous versions
+> >
+> > libxfce4ui_4.10.0.bb: Upstream changes required autotools and gettext
+> (intl)
+> > fixes, as well as moving the autogen stuff to a separate task.  Full
+> depends
+> > were also added (2 were converted to PACKAGECONFIG options) along with =
+a
+> > vendor config option.
+> >
+> > Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> >
+> > ---
+> >  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb | 14
+> ++++++++++----
+> >  1 file changed, 10 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bbb/me=
+ta-xfce/recipes-xfce/libxfce4ui/
+> libxfce4ui_4.10.0.bb
+> > index cc63a9f..1e141c4 100644
+> > --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> > +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+> > @@ -2,9 +2,9 @@ SUMMARY =3D "Xfce4 Widget library and X Window System
+> interaction"
+> >  SECTION =3D "x11/libs"
+> >  LICENSE =3D "GPLv2"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D252890d9eee26aab7b432e8b8a6=
+16475"
+> > -DEPENDS =3D "gtk+ intltool libxfce4util startup-notification xfconf
+> glade3"
+> > +DEPENDS =3D "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf
+> xfce4-dev-tools virtual/libx11 libsm libice"
+> >
+> > -inherit xfce
+> > +inherit autotools gettext xfce
+> >
+> >  SRC_URI =3D " \
+> >      git://git.xfce.org/xfce/libxfce4ui;protocol=3Dgit \
+> > @@ -15,9 +15,13 @@ SRCREV =3D "530b72f50fcbd8cb4b970fcc97be0321bf78183e=
+"
+> >  PV =3D "4.10.0+git${SRCPV}"
+> >  S =3D "${WORKDIR}/git"
+> >
+> > -EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug"
+> > +EXTRA_OECONF +=3D "--enable-maintainer-mode --disable-debug
+>  --with-vendor-info=3D${DISTRO}"
+> >
+> > -do_configure_prepend() {
+> > +PACKAGECONFIG ??=3D ""
+> > +PACKAGECONFIG[gladeui] =3D "--enable-gladeui,--disable-gladeui,glade3"
+> > +PACKAGECONFIG[startup-notification] =3D
+> "--enable-startup-notification,--disable-startup-notification,startup-not=
+ification"
+> > +
+> > +do_src_prepare() {
+> >         NOCONFIGURE=3Dyes ./autogen.sh
+> >  }
+> >
+> > @@ -27,3 +31,5 @@ FILES_${PN}-dev +=3D "${libdir}/glade3/modules/*.la \
+> >  PACKAGES +=3D "${PN}-glade"
+> >  FILES_${PN}-glade =3D "${libdir}/glade3 \
+> >                       ${datadir}/glade3"
+> > +
+> > +addtask do_src_prepare before do_configure after do_patch
+> > --
+> I asked that for lxdm already - maybe I missed something: Why do you
+> create an extra task and do not use do_configure_prepend() ?
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
