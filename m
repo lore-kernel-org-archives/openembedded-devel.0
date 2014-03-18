@@ -1,34 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E8226F8CC
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A85386F09E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 08:46:20 +0000 (UTC)
-Received: by mail-vc0-f175.google.com with SMTP id lh14so6795579vcb.20
+	Tue, 18 Mar 2014 09:09:23 +0000 (UTC)
+Received: by mail-pd0-f178.google.com with SMTP id x10so6799057pdj.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=3cMpBqcfpwqatxeHhciSKLmo+I4jxsjX+eXmaJC2iZY=;
-	b=rv77DYcPuyObQWswOW9/MyjA6IBE0AmYv8rcmT90/R+o0II2LbsoFEqVa2YvUVvTD2
-	oqdtNoY8IEv8p8oVOnBCkVOj52yPsjyTV2Zo/cbMuGPOdr5NyB03tHe0VU9EewBHiOdf
-	QNY8esiA155QW5vHqubgD2I+lYzHONZ3EIizOHZee8PQPUp73m1aDlMzAdFx7j9tYahb
-	MaKUNikzPLnSWAU0xVdAB0Xg48ZrNMBmxMWrzzqGuYiFu7W3MD6ZAiAjaX19ITtqE2y8
-	iWhMALDB8sP5xPdS6SVgPSueCf5y3kCgZrTQL7wH3IuaORgJZBNdb4QjhxVWee+YYVl0
-	ouLg==
-MIME-Version: 1.0
-X-Received: by 10.220.106.84 with SMTP id w20mr23920714vco.18.1395132381332;
-	Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
-Received: by 10.52.120.4 with HTTP; Tue, 18 Mar 2014 01:46:21 -0700 (PDT)
-In-Reply-To: <1395117284-22655-1-git-send-email-stephen.arnold42@gmail.com>
-References: <1395117284-22655-1-git-send-email-stephen.arnold42@gmail.com>
-Date: Tue, 18 Mar 2014 09:46:21 +0100
-Message-ID: <CALbNGRTeZrrDcSLQ8fQ7YOp4kK=e0dp1oAQBRR7D-6MYRQDXYg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH v3] recipes-xfce/libxfce4ui: depends and autotools fixes
+	Tue, 18 Mar 2014 02:09:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rclZ/bxa/Ef6H5/bNbT/IqZx09Px6oi9lKuerkWxFyE=;
+	b=YcsTAr2++a8e3kSfRp7UAyNgZeqP3YQAmXf4nCSPIy1+Y1PZTJ4Vnz4whLqIQVAE+U
+	k4c3VAK/hjCBMDclE+ayrX0p9iL+tTnlAMz87xhakJ0quWPy+02bcgJESjM074hponC3
+	Zmg3W75hazy4jhqWsOqdWCpHz7NnPmxdbz3g6Hqtx/c4O/HkXhfk53MRWSFT58HvD14u
+	eFHEnmxG1WSl3KcpdgW3j2Qrg6cn2lOoWSfCeRxo529LDY5HtdyR9kPVWZWfPjzkA3vZ
+	U/MHgDVlDIQk4joU4QACJAfEelRk/qXZgoHv7jiBrZhBJ5UMsQnIc3W2IbdIhq8gvF0r
+	ei4w==
+X-Received: by 10.66.25.203 with SMTP id e11mr31858829pag.76.1395133764469;
+	Tue, 18 Mar 2014 02:09:24 -0700 (PDT)
+Received: from archimedes.arnolds.bogus
+	(dsl-66-59-252-223.static.linkline.com. [66.59.252.223])
+	by mx.google.com with ESMTPSA id
+	db3sm50619773pbb.10.2014.03.18.02.09.22 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Mar 2014 02:09:23 -0700 (PDT)
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Mar 2014 02:09:08 -0700
+Message-Id: <1395133748-1211-1-git-send-email-stephen.arnold42@gmail.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-graphics][PATCH v3] recipes-graphics/lxdm: autotools and config updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,65 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 08:46:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Mar 2014 09:09:23 -0000
 
-On Tue, Mar 18, 2014 at 5:34 AM, Stephen Arnold
-<stephen.arnold42@gmail.com> wrote:
-> Note: this patch (v3) obseletes previous versions
->
-> libxfce4ui_4.10.0.bb: Upstream changes required autotools and gettext (intl)
-> fixes, as well as moving the autogen stuff to a separate task.  Full depends
-> were also added (2 were converted to PACKAGECONFIG options) along with a
-> vendor config option.
->
-> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
->
-> ---
->  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb | 14 ++++++++++----
->  1 file changed, 10 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-> index cc63a9f..1e141c4 100644
-> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-> @@ -2,9 +2,9 @@ SUMMARY = "Xfce4 Widget library and X Window System interaction"
->  SECTION = "x11/libs"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
-> -DEPENDS = "gtk+ intltool libxfce4util startup-notification xfconf glade3"
-> +DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
->
-> -inherit xfce
-> +inherit autotools gettext xfce
->
->  SRC_URI = " \
->      git://git.xfce.org/xfce/libxfce4ui;protocol=git \
-> @@ -15,9 +15,13 @@ SRCREV = "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
->  PV = "4.10.0+git${SRCPV}"
->  S = "${WORKDIR}/git"
->
-> -EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
-> +EXTRA_OECONF += "--enable-maintainer-mode --disable-debug  --with-vendor-info=${DISTRO}"
->
-> -do_configure_prepend() {
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[gladeui] = "--enable-gladeui,--disable-gladeui,glade3"
-> +PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
-> +
-> +do_src_prepare() {
->         NOCONFIGURE=yes ./autogen.sh
->  }
->
-> @@ -27,3 +31,5 @@ FILES_${PN}-dev += "${libdir}/glade3/modules/*.la \
->  PACKAGES += "${PN}-glade"
->  FILES_${PN}-glade = "${libdir}/glade3 \
->                       ${datadir}/glade3"
-> +
-> +addtask do_src_prepare before do_configure after do_patch
-> --
-I asked that for lxdm already - maybe I missed something: Why do you
-create an extra task and do not use do_configure_prepend() ?
+lxdm_git.bb: Upstream changes required autotools and gettext (intl) updates; 
+the package autogen script doesn't create the makefile in po, but autotools 
+by itself is missing the input file (thus, the configure_prepend). There 
+were also missing depends (from upstream docs and configure checks) and 
+some configure options were added to ensure the desired X/gtk2 config and 
+enable (optional) auto-login.
 
-Andreas
+Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+
+---
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+index c12eddf..c602ad3 100644
+--- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
++++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+@@ -16,17 +16,24 @@ SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
+ PV = "0.5.0+git${SRCPV}"
+ PE = "1"
+ 
+-DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
++DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
+ DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
+ 
+ # combine oe-core way with angstrom DISTRO_TYPE
+ DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
+ 
+-inherit autotools gettext systemd
++inherit autotools pkgconfig gettext systemd
+ 
+ S = "${WORKDIR}/git"
+ 
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
++CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
++
++EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x -with-xconn=xcb \
++    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
++
++do_configure_prepend() {
++    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/po/
++}
+ 
+ do_compile_append() {
+     # default background configured not available / no password field available / no default screensaver
+-- 
+1.8.5.3
+
 
