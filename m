@@ -1,42 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
-	[209.85.160.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 84BE86E717
+Received: from mail-yh0-f54.google.com (mail-yh0-f54.google.com
+	[209.85.213.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 40DB06E7CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 16:28:30 +0000 (UTC)
-Received: by mail-yk0-f169.google.com with SMTP id 142so19676075ykq.0
+	Tue, 18 Mar 2014 16:28:29 +0000 (UTC)
+Received: by mail-yh0-f54.google.com with SMTP id f73so7160546yha.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 09:28:31 -0700 (PDT)
+	Tue, 18 Mar 2014 09:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=JvF92Dhw9IUtbBLRilVJry9ZG+K3K+JfDMML9jRX1Cg=;
-	b=Z6kcwLD2wyvve7A5nNFaQXssC0TJQIg1KC9POz+IRRhyNmz/qMtD0J0GkQf5uNFvFE
-	KkVdSf/s6HDg+LMXRgj1AUYuqBBfddtr07oQNuW9tICohpZGkjVn+eskZHGlHLPuStwP
-	Un+xGr+W32ipH7lTcnXY0fibU1oQjsRdjuaV3mB3wpXLksMWwps1xYGK1Rypsg5HqwQ8
-	btHPzrQl+tO3VDOpAezJanNbJrD/eo5yaG8xECTWFwVbfIosvaUMsCMnYVwPnkPR8OSW
-	eEp0VWC/Y9EbtdWl/uuLMaHNRR6BfGqyZ39p0OMCcYnnsktGd0NBngLWt9nMI56sYO9F
-	mNBw==
-X-Received: by 10.236.46.5 with SMTP id q5mr18987561yhb.21.1395160111204;
-	Tue, 18 Mar 2014 09:28:31 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=ymAqIXhxPxr/LM5BUbBnfdKxfIbRnBLAScn+bNAz7Ro=;
+	b=Y6zlGbRSxsE0bY686aZynsvxevCxe4nQAmOcYIzajlIehKIC2fPYHZUst4ehA29xPV
+	fJ5fW1O0Xd8J7Jky0W3WV4C/zeAGzP3BIKHSRvGJ2m0NSP4K0cGcD+s3Pid0IjA3WUFB
+	q3Epk/lv3WEXG1S0VrvXHqfRiODkD59x0FG8oF3JQPLOHFiE++Cg9FzhvYOZ8jNC2du6
+	Wqf8k/N1vL2U4vx4XQ1YdwpFtpBK9NPxoqRhANzOk0xPWSVz/kL2jPKgeWWkCJP848Lw
+	R7mOwP/V1TmKZrV/7I0I9Uc2Md85u9KwzBgH98IbES8jN+zJmdKOQV/C48AklCsUlhKV
+	tW4g==
+X-Received: by 10.236.86.113 with SMTP id v77mr2840409yhe.125.1395160110656;
+	Tue, 18 Mar 2014 09:28:30 -0700 (PDT)
 Received: from nano.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id
-	u63sm17479771yhf.31.2014.03.18.09.28.29 for <multiple recipients>
+	by mx.google.com with ESMTPSA id n4sm38991236yhc.13.2014.03.18.09.28.29
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Tue, 18 Mar 2014 09:28:30 -0700 (PDT)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 905D9197CAE2D; Tue, 18 Mar 2014 13:28:26 -0300 (BRT)
+	id 8C108197CAE2B; Tue, 18 Mar 2014 13:28:26 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Mar 2014 13:28:23 -0300
-Message-Id: <1395160103-15730-2-git-send-email-otavio@ossystems.com.br>
+Date: Tue, 18 Mar 2014 13:28:22 -0300
+Message-Id: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
-References: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] libmicrohttpd: Update to 0.9.34
+Subject: [meta-oe][PATCH 1/2] glmark2: Rework recipe to use the 'waf' class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,43 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 16:28:30 -0000
+X-List-Received-Date: Tue, 18 Mar 2014 16:28:31 -0000
 
-This update fixes the following build error:
+This removes the duplicated code and uses the OE-Core waf class.
 
-,----[ Build error ]
-| ...
-| .../libmicrospdy.so: undefined reference to `SSL_get_error'
-| .../libmicrospdy.so: undefined reference to `SSL_write'
-| .../libmicrospdy.so: undefined reference to `SSL_free'
-| ...
-`----
-
-Reported-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb} (85%)
+ meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-similarity index 85%
-rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-index 523b8dd..5de9390 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-@@ -6,8 +6,8 @@ SECTION = "net"
- DEPENDS = "libgcrypt gnutls"
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+index 9edee14..031e3b3 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+@@ -15,21 +15,9 @@ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
+ SRC_URI[md5sum] = "4f306664aa3886fa0cf93853603603f8"
+ SRC_URI[sha256sum] = "bea6f9de2cdce376195bd91e4a2fdfdf80bf3e480abff8e05b90a6458c1deb47"
  
- SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "013b10f9de1cda5448b29c81305354a3"
--SRC_URI[sha256sum] = "d9587e8497548f820650cd607daf3615ea3272435779378983032c570f1cd559"
-+SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
-+SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
+-inherit pkgconfig
++inherit waf pkgconfig
  
- inherit autotools lib_package
+ PACKAGECONFIG ?= "gl gles2"
  
+ PACKAGECONFIG[gl] = "--enable-gl,,virtual/libgl"
+ PACKAGECONFIG[gles2] = "--enable-glesv2,,virtual/libgles2"
+-
+-do_configure() {
+-	./waf configure --prefix=${prefix} ${EXTRA_OECONF}
+-}
+-
+-do_compile() {
+-	./waf build ${PARALLEL_MAKE}
+-}
+-
+-do_install() {
+-	./waf install --destdir=${D}
+-}
 -- 
 1.9.0
 
