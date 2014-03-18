@@ -1,21 +1,42 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 317256F8F0
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 84BE86E717
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Mar 2014 12:51:10 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 18 Mar 2014 05:51:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,678,1389772800"; d="scan'208";a="501143879"
-Received: from sentry.rb.intel.com ([10.237.105.54])
-	by fmsmga002.fm.intel.com with ESMTP; 18 Mar 2014 05:50:47 -0700
-From: Cristian Iorga <cristian.iorga@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Mar 2014 14:53:54 +0200
-Message-Id: <1395147234-12610-1-git-send-email-cristian.iorga@intel.com>
-X-Mailer: git-send-email 1.8.3.2
-Cc: Cristian Iorga <ubik3000@gmail.com>
-Subject: [meta-multimedia][PATCH] mpg123: upgrade to 1.19.0
+	Tue, 18 Mar 2014 16:28:30 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 142so19676075ykq.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Mar 2014 09:28:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization; bh=JvF92Dhw9IUtbBLRilVJry9ZG+K3K+JfDMML9jRX1Cg=;
+	b=Z6kcwLD2wyvve7A5nNFaQXssC0TJQIg1KC9POz+IRRhyNmz/qMtD0J0GkQf5uNFvFE
+	KkVdSf/s6HDg+LMXRgj1AUYuqBBfddtr07oQNuW9tICohpZGkjVn+eskZHGlHLPuStwP
+	Un+xGr+W32ipH7lTcnXY0fibU1oQjsRdjuaV3mB3wpXLksMWwps1xYGK1Rypsg5HqwQ8
+	btHPzrQl+tO3VDOpAezJanNbJrD/eo5yaG8xECTWFwVbfIosvaUMsCMnYVwPnkPR8OSW
+	eEp0VWC/Y9EbtdWl/uuLMaHNRR6BfGqyZ39p0OMCcYnnsktGd0NBngLWt9nMI56sYO9F
+	mNBw==
+X-Received: by 10.236.46.5 with SMTP id q5mr18987561yhb.21.1395160111204;
+	Tue, 18 Mar 2014 09:28:31 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id
+	u63sm17479771yhf.31.2014.03.18.09.28.29 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Mar 2014 09:28:30 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 905D9197CAE2D; Tue, 18 Mar 2014 13:28:26 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Mar 2014 13:28:23 -0300
+Message-Id: <1395160103-15730-2-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.9.0
+In-Reply-To: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
+References: <1395160103-15730-1-git-send-email-otavio@ossystems.com.br>
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 2/2] libmicrohttpd: Update to 0.9.34
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,57 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Mar 2014 12:51:15 -0000
+X-List-Received-Date: Tue, 18 Mar 2014 16:28:30 -0000
 
-From: Cristian Iorga <ubik3000@gmail.com>
+This update fixes the following build error:
 
-- switched to ${BP} variable;
-- ${S} redundant, removed;
-- option with-module-suffix=.so: load modules with .so extension;
-- .la files are kept only for dev packages;
-- clearer COPYING file, about contribution and licenses;
-  no changes to licenses.
+,----[ Build error ]
+| ...
+| .../libmicrospdy.so: undefined reference to `SSL_get_error'
+| .../libmicrospdy.so: undefined reference to `SSL_write'
+| .../libmicrospdy.so: undefined reference to `SSL_free'
+| ...
+`----
 
-Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
-Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
+Reported-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../mpg123/{mpg123_1.15.3.bb => mpg123_1.19.0.bb}            | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
- rename meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.15.3.bb => mpg123_1.19.0.bb} (79%)
+ .../{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.33.bb => libmicrohttpd_0.9.34.bb} (85%)
 
-diff --git a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
-similarity index 79%
-rename from meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
-rename to meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
-index 0075427..dd5c3a4 100644
---- a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
-+++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
-@@ -16,19 +16,17 @@ PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
+diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+similarity index 85%
+rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
+rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+index 523b8dd..5de9390 100644
+--- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.33.bb
++++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+@@ -6,8 +6,8 @@ SECTION = "net"
+ DEPENDS = "libgcrypt gnutls"
  
- LICENSE = "LGPLv2.1"
- LICENSE_FLAGS = "commercial"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
+ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "013b10f9de1cda5448b29c81305354a3"
+-SRC_URI[sha256sum] = "d9587e8497548f820650cd607daf3615ea3272435779378983032c570f1cd559"
++SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
++SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1b25a88"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
--
--SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
--SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
--
--S = "${WORKDIR}/mpg123-${PV}"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "87731f1437cfd8c50537a606d81130e4"
-+SRC_URI[sha256sum] = "869024e01d7cb4dae1aea2f2a10420d4be7e1ac02a9c434d06d727599169b01b"
+ inherit autotools lib_package
  
- inherit autotools pkgconfig
- 
- EXTRA_OECONF = " \
-     --enable-shared \
-+    --with-module-suffix=.so \
-     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
-     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
- "
 -- 
-1.8.3.2
+1.9.0
 
 
