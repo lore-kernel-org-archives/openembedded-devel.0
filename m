@@ -1,36 +1,24 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id D88FE6D899
+Return-Path: <sgh@sgh.dk>
+Received: from mx-aarh-1.stofanet.dk (mx-aarh-1.stofanet.dk [212.10.10.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 080206E716
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2014 11:52:16 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E9516223202F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2014 12:52:14 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 5662E223202E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2014 12:52:14 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Mar 2014 12:52:14 +0100 (CET)
-Date: Wed, 19 Mar 2014 12:52:09 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140319115209.GF12765@mail.itconsulting-heinold.de>
-References: <4F8CA425FC34A24C8608E3D85A89B1BD3B8C8144@EPBYMINSA0032.epam.com>
+	Wed, 19 Mar 2014 13:43:20 +0000 (UTC)
+Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
+	by mx-aarh-1.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1WQGm9-00058C-1B; Wed, 19 Mar 2014 14:43:21 +0100
+Received: from koontz.localnet (localhost [127.0.0.1])
+	by asrock (Postfix) with ESMTPS id 02D947F197;
+	Wed, 19 Mar 2014 14:43:21 +0100 (CET)
+From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
+To: =?ISO-8859-1?Q?S=F8ren?= Holm <sh@mikrofyn.com>
+Date: Wed, 19 Mar 2014 14:43:20 +0100
+Message-ID: <4044826.ixo5hsdc8x@koontz>
+User-Agent: KMail/4.12.3 (Linux/3.13.0-18-lowlatency; KDE/4.12.3; i686; ; )
+In-Reply-To: <1395236570-27411-1-git-send-email-sh@mikrofyn.com>
+References: <1395236570-27411-1-git-send-email-sh@mikrofyn.com>
 MIME-Version: 1.0
-In-Reply-To: <4F8CA425FC34A24C8608E3D85A89B1BD3B8C8144@EPBYMINSA0032.epam.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: meta-java: using maven build tool
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH] qtbase: Add libxi to depends.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,25 +32,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Mar 2014 11:52:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Mar 2014 13:43:21 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-On Wed, Mar 19, 2014 at 10:09:56AM +0000, Vladimir Redzhepov wrote:
-> Hello,
-> 
-> I'd like to create a BSP for my device using meta-java layer. The main application is written in Java and uses Apache Maven
-> project management tool. I looked fixedly at meta-java and didn't find this tool. Can you tell me how to make a right build
-> of my application based on Apache Maven within meta-java? Is it good just to download binary package for maven and
-> unpack it into the staging directory?
-> 
-> Best Regards,
-> Vladimir Redzhepov
+I'd like this to go into dora if possible
 
-Hi,
-
-that is your only chance for now. I did not find time to integrate maven, graddle or ivy yet, because it is time consuming.
-
-
-Bye Henning
+--=20
+S=F8ren Holm
 
