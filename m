@@ -1,45 +1,24 @@
-Return-Path: <B40290@freescale.com>
-Received: from va3outboundpool.messaging.microsoft.com
-	(va3ehsobe002.messaging.microsoft.com [216.32.180.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 207BF6BB2F
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 7927760E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 07:44:27 +0000 (UTC)
-Received: from mail59-va3-R.bigfish.com (10.7.14.228) by
-	VA3EHSOBE014.bigfish.com (10.7.40.64) with Microsoft SMTP Server id
-	14.1.225.22; Thu, 20 Mar 2014 07:44:26 +0000
-Received: from mail59-va3 (localhost [127.0.0.1])	by mail59-va3-R.bigfish.com
-	(Postfix) with ESMTP id E15CB4C0261	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 07:44:26 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zze0eahzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch21a7h1fc6hzz1de098h8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h2668h1155h)
-Received: from mail59-va3 (localhost.localdomain [127.0.0.1]) by mail59-va3
-	(MessageSwitch) id 1395301464985645_29840;
-	Thu, 20 Mar 2014 07:44:24 +0000 (UTC)
-Received: from VA3EHSMHS039.bigfish.com (unknown [10.7.14.237])	by
-	mail59-va3.bigfish.com (Postfix) with ESMTP id E97E92E006D;
-	Thu, 20 Mar 2014 07:44:24 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS039.bigfish.com
-	(10.7.99.49) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Thu, 20 Mar 2014 07:44:24 +0000
-Received: from az84smr01.freescale.net (10.64.34.197) by
-	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Thu, 20 Mar 2014 07:44:23 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.136])	by
-	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s2K7iLnY002164;
-	Thu, 20 Mar 2014 00:44:22 -0700
-From: <b40290@freescale.com>
+	Thu, 20 Mar 2014 09:03:08 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,693,1389740400"; d="scan'208";a="42997528"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 20 Mar 2014 10:03:09 +0100
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.2.318.1; Thu, 20 Mar 2014 10:03:08 +0100
+Received: from u85.usr.ingenico.loc (10.23.7.85) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Thu, 20 Mar 2014 10:03:08 +0100
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Mar 2014 15:44:17 +0800
-Message-ID: <1395301457-20665-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.8.3.2
+Date: Thu, 20 Mar 2014 09:55:53 +0100
+Message-ID: <1395305753-2195-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.8.5.4
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-networking][PATCH ] sethdlc : add recipe
+Subject: [meta-oe][PATCH] fim 0.4-rc1: add "hf" PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +32,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2014 07:44:28 -0000
+X-List-Received-Date: Thu, 20 Mar 2014 09:03:10 -0000
 Content-Type: text/plain
 
-From: Chunrong Guo <B40290@freescale.com>
+This embedds a console font in fim executable.
 
-   * sethdlc: get/set Linux HDLC packet radio modem driver port information
-   * sethdlc is  a  program designed to set and/or report the configuration
-     information associated with a soundcard radio modem port. This information
-     includes  the  modem type, what I/O port, IRQ and DMA channel a particular
-     modem port is using, and where to output a transmitter  keying (PTT) signal.
+To use it, don't forget to define FBFONT with the special value:
+export FBFONT='fim://'
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
+Option is enabled by default because kdb-consolefonts package
+only provides PSF version 2 files (fim only support version 1 and creates an error).
+
+Benchmarked fim executable size: +6Kb (x86_64) and +7Kb (armv7).
+
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 ---
- .../recipes-connectivity/sethdlc/sethdlc.bb        | 30 ++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+ meta-oe/recipes-graphics/fim/files/cross_cc.patch | 29 +++++++++++++++++++++++
+ meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb       |  6 +++--
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/fim/files/cross_cc.patch
 
-diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+diff --git a/meta-oe/recipes-graphics/fim/files/cross_cc.patch b/meta-oe/recipes-graphics/fim/files/cross_cc.patch
 new file mode 100644
-index 0000000..3a9692f
+index 0000000..85ab1ef
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
-+HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
-+LICENSE = "GPLv2 & GPLv2+ "
-+LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
++++ b/meta-oe/recipes-graphics/fim/files/cross_cc.patch
+@@ -0,0 +1,29 @@
++From 9b0b322d86c7b2d2cddaa62f7dab4aa669739a48 Mon Sep 17 00:00:00 2001
++From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
++Date: Wed, 19 Mar 2014 13:18:21 +0100
++Subject: [PATCH] Upstream-Status: Pending
 +
++b2ba should be built by BUILD_CC in cross environment
++This is only used when configured with --enable-hardcoded-font
 +
-+SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
-+"
-+SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
-+SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
++Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
++---
++ src/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
++diff --git a/src/Makefile.am b/src/Makefile.am
++index a1d4330..a8150b9 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -63,7 +63,7 @@ help-acm.cpp: fim.h
++ 	$(ECHO) '//#endif' >> $@
++ 
++ b2ba:
++-	$(CC) -o b2ba b2ba.c
+++	$(BUILD_CC) -o b2ba b2ba.c
++ 
++ if FIM_WANT_CUSTOM_HARDCODED_CONSOLEFONT
++ default_font_byte_array.h: $(FIM_CUSTOM_HARDCODED_CONSOLEFONT) b2ba
++-- 
++1.8.5.4
 +
-+S = "${WORKDIR}/${BPN}-1.18"
-+
-+DEPENDS="virtual/kernel"
-+
-+EXTRA_OEMAKE="CROSS_COMPILE=${TARGET_PREFIX} CC='${CC} ${LDFLAGS}' \
-+              KERNEL_DIR=${STAGING_KERNEL_DIR} "
-+
-+do_compile_prepend () {
-+    oe_runmake clean
-+}
-+
-+
-+do_install() {
-+    install -d ${D}/${bindir}
-+    install sethdlc ${D}/${bindir}/
-+}
-+
-+FILES_${PN} += "${bindir}/sethdlc"
+diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+index 01aa87c..b291a5a 100644
+--- a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
++++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+@@ -11,7 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
+ # flex with provide /usr/include/FlexLexer.h
+ DEPENDS = "flex-native bison-native flex"
+ 
+-SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz"
++SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
++           file://cross_cc.patch"
+ SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
+ SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
+ 
+@@ -37,7 +38,7 @@ EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
+ "
+ 
+ # Note: imlib2 is located in meta-efl layer.
+-PACKAGECONFIG ??= "jpeg rl"
++PACKAGECONFIG ??= "jpeg rl hf"
+ PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
+ PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
+ PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
+@@ -46,3 +47,4 @@ PACKAGECONFIG[pdf] = "--enable-poppler,--disable-poppler,poppler"
+ PACKAGECONFIG[magick] = "--enable-graphicsmagick,--disable-graphicsmagick,imagemagick"
+ PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
+ PACKAGECONFIG[rl] = "--enable-readline,--disable-readline,readline"
++PACKAGECONFIG[hf] = "--enable-hardcoded-font,--disable-hardcoded-font"
 -- 
-1.8.3.2
-
+1.8.5.4
 
 
