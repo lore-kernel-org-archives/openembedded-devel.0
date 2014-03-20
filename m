@@ -1,36 +1,45 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 259A36CD4B;
-	Thu, 20 Mar 2014 06:59:16 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 19 Mar 2014 23:54:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,692,1389772800"; d="scan'208";a="495630829"
-Received: from irsmsx104.ger.corp.intel.com ([163.33.3.159])
-	by fmsmga001.fm.intel.com with ESMTP; 19 Mar 2014 23:59:16 -0700
-Received: from irsmsx151.ger.corp.intel.com (163.33.192.59) by
-	IRSMSX104.ger.corp.intel.com (163.33.3.159) with Microsoft SMTP Server
-	(TLS) id 14.3.123.3; Thu, 20 Mar 2014 06:59:14 +0000
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.87]) by
-	IRSMSX151.ger.corp.intel.com ([163.33.192.59]) with mapi id
-	14.03.0123.003; Thu, 20 Mar 2014 06:59:14 +0000
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Thread-Topic: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
-Thread-Index: AQHPQt+8kmvwkEqcok24EBb8nrMl7prpi1+Q
-Date: Thu, 20 Mar 2014 06:59:13 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB16D65A80@IRSMSX105.ger.corp.intel.com>
-References: <20140318191639.8B05350385@opal>
-In-Reply-To: <20140318191639.8B05350385@opal>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.180]
+Return-Path: <B40290@freescale.com>
+Received: from va3outboundpool.messaging.microsoft.com
+	(va3ehsobe002.messaging.microsoft.com [216.32.180.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 207BF6BB2F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Mar 2014 07:44:27 +0000 (UTC)
+Received: from mail59-va3-R.bigfish.com (10.7.14.228) by
+	VA3EHSOBE014.bigfish.com (10.7.40.64) with Microsoft SMTP Server id
+	14.1.225.22; Thu, 20 Mar 2014 07:44:26 +0000
+Received: from mail59-va3 (localhost [127.0.0.1])	by mail59-va3-R.bigfish.com
+	(Postfix) with ESMTP id E15CB4C0261	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Mar 2014 07:44:26 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zze0eahzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch21a7h1fc6hzz1de098h8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h2668h1155h)
+Received: from mail59-va3 (localhost.localdomain [127.0.0.1]) by mail59-va3
+	(MessageSwitch) id 1395301464985645_29840;
+	Thu, 20 Mar 2014 07:44:24 +0000 (UTC)
+Received: from VA3EHSMHS039.bigfish.com (unknown [10.7.14.237])	by
+	mail59-va3.bigfish.com (Postfix) with ESMTP id E97E92E006D;
+	Thu, 20 Mar 2014 07:44:24 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS039.bigfish.com
+	(10.7.99.49) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Thu, 20 Mar 2014 07:44:24 +0000
+Received: from az84smr01.freescale.net (10.64.34.197) by
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Thu, 20 Mar 2014 07:44:23 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.136])	by
+	az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s2K7iLnY002164;
+	Thu, 20 Mar 2014 00:44:22 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 20 Mar 2014 15:44:17 +0800
+Message-ID: <1395301457-20665-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.8.3.2
 MIME-Version: 1.0
-Subject: Re: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
+Subject: [meta-networking][PATCH ] sethdlc : add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,110 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2014 06:59:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 Mar 2014 07:44:28 -0000
+Content-Type: text/plain
 
-Hi Martin,
+From: Chunrong Guo <B40290@freescale.com>
 
-Errr, what exactly is going on here?
-I have submitted this patch in a different form, with more content and more=
- comments.
-That's one thing.
-Another thing would be that even if you signed my patch in a modified form,=
- 5 minutes later, you signed another musicpd patch, going backwards from my=
- version.
-Quote:
-" Module: meta-openembedded.git
-Branch: master-next
-Commit: dde222cef9bb8ef20d139ab58760b27c4d45c93a
-URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=
-=3Ddde222cef9bb8ef20d139ab58760b27c4d45c93a
+   * sethdlc: get/set Linux HDLC packet radio modem driver port information
+   * sethdlc is  a  program designed to set and/or report the configuration
+     information associated with a soundcard radio modem port. This information
+     includes  the  modem type, what I/O port, IRQ and DMA channel a particular
+     modem port is using, and where to output a transmitter  keying (PTT) signal.
 
-Author: Stephen Arnold <stephen.arnold42@gmail.com>
-Date:   Sun Mar 16 17:52:47 2014 -0700
-
-musicpd/mpd: bump to current upstream stable
-
-Bump music player daemon to the latest upstream stable release.
-Same as previous 0.18.4 recipe with trivial updates.
-
-Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>"
-
-The only thing, let's say improved, from my patch to Stephen's patch  would=
- be the site URL.
-
-So which one is it?
-Still, yet, no patch got into the master, while I am stuck with a bug that =
-I have not caused and, still, seems that I am responsible for it.
-
-Also, mpd v0.18.8 will still not fix the crash with libvorbis upgrade..
-
-I must say that from my point of view this is getting counterproductive...
-
-Regards,
-Cristian Iorga
-YP
-Intel Corporation
-
-
------Original Message-----
-From: openembedded-commits-bounces@lists.openembedded.org [mailto:openembed=
-ded-commits-bounces@lists.openembedded.org] On Behalf Of git@git.openembedd=
-ed.org
-Sent: Tuesday, March 18, 2014 9:17 PM
-To: openembedded-commits@lists.openembedded.org
-Subject: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
-
-Module: meta-openembedded.git
-Branch: master-next
-Commit: 2e1305783023e6b0869e8ea12db25c53b803f545
-URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit;h=
-=3D2e1305783023e6b0869e8ea12db25c53b803f545
-
-Author: Cristian Iorga <cristian.iorga@intel.com>
-Date:   Mon Mar 17 11:05:17 2014 +0200
-
-musicpd: upgrade to 0.18.9
-
-* Upgrade fixes a crash with libvorbis 1.3.4;
-
-Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
+ .../recipes-connectivity/sethdlc/sethdlc.bb        | 30 ++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
 
- .../recipes-multimedia/musicpd/{mpd_0.18.8.bb =3D> mpd_0.18.9.bb}       | =
-4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+new file mode 100644
+index 0000000..3a9692f
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
++HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
++LICENSE = "GPLv2 & GPLv2+ "
++LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
++
++
++SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
++"
++SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
++SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
++
++
++S = "${WORKDIR}/${BPN}-1.18"
++
++DEPENDS="virtual/kernel"
++
++EXTRA_OEMAKE="CROSS_COMPILE=${TARGET_PREFIX} CC='${CC} ${LDFLAGS}' \
++              KERNEL_DIR=${STAGING_KERNEL_DIR} "
++
++do_compile_prepend () {
++    oe_runmake clean
++}
++
++
++do_install() {
++    install -d ${D}/${bindir}
++    install sethdlc ${D}/${bindir}/
++}
++
++FILES_${PN} += "${bindir}/sethdlc"
+-- 
+1.8.3.2
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb b/met=
-a-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-similarity index 93%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-index b6882af..c3bb581 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-@@ -10,8 +10,8 @@ SRC_URI =3D " \
-     file://mpd.conf.in \
- "
-=20
--SRC_URI[md5sum] =3D "7bbe1caf5abe404dc985ca4f44984b1f"
--SRC_URI[sha256sum] =3D "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616b=
-d593aecdc26450"
-+SRC_URI[md5sum] =3D "0e5156a831d4302d2032998bcfd5c36f"
-+SRC_URI[sha256sum] =3D "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be5346f=
-19de5f699a68de"
-=20
- inherit autotools useradd systemd
-=20
 
---=20
-_______________________________________________
-Openembedded-commits mailing list
-Openembedded-commits@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
