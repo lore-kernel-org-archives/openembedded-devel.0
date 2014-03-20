@@ -1,24 +1,34 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 01F2D6E8C1
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 77D7860D0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 21:17:21 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s2KLHLiH023285
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 20 Mar 2014 21:31:03 +0000 (UTC)
+Received: by mail-vc0-f182.google.com with SMTP id ks9so1684514vcb.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 14:17:21 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 20 Mar 2014 14:17:21 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe.macdonald@windriver.com>
-Date: Thu, 20 Mar 2014 14:17:20 -0700
-Message-ID: <1395350240-29372-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu, 20 Mar 2014 14:31:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=YOKUW7UOHigY/bEdrbeXq+UdS1Bh1W3mOyj9HsOildk=;
+	b=uiQAdkjK0RDHO/0a/gJDq+4DF9mVcbIIJ1NPvPe+76ldnatyz+kSrndpBn1jU/SVtd
+	Go2EPQjN79oVn9yYZ6ynikv7sZNwyVj9S2oJdRl0A23OBItnSEQ6uROIoCVXhoOSb9gu
+	mdHL5u6e/+JyhwRpqcYgczfDKtvN2nzDrNGue36mvxZVkM3dK/ul0stmS+iqBq/dhMer
+	RYqZdasPOPQuK3yUp2Bvt/YD4HNoZEU3rgTNgXiljbCrMlBHIqcLLme7Xpa9yur2m3o1
+	JwGAa/LPGBuUkOnAdpa+FyBHmwLeCdvKVm6HEz7EqhWTp9PwI0L3CXp9PdGOOL92SrNt
+	X4CA==
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] traceroute: fix alternate name
+X-Received: by 10.52.90.37 with SMTP id bt5mr2466456vdb.7.1395351064378; Thu,
+	20 Mar 2014 14:31:04 -0700 (PDT)
+Received: by 10.52.85.67 with HTTP; Thu, 20 Mar 2014 14:31:04 -0700 (PDT)
+In-Reply-To: <CAFeBWL4=C3dWdGNX2UgGUJGu1EGdpodocwJ5hbJLDWowa-OePw@mail.gmail.com>
+References: <CAFeBWL4=C3dWdGNX2UgGUJGu1EGdpodocwJ5hbJLDWowa-OePw@mail.gmail.com>
+Date: Thu, 20 Mar 2014 14:31:04 -0700
+Message-ID: <CAFeBWL6UtD8ZYtVmLLKe05qtkzn_OgDKsKAgk1jX262E5GH9Hg@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: libxfce4ui build fail on master branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2014 21:17:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 20 Mar 2014 21:31:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-traceroute6 for the name is misleading and will interfere
-with traceroute6 in iputils making an alternate link to
-the traceroute6 binary, so we change the name to traceroute.
+Weird, when I bitbaked the package individually, it built ok. Now my xfce
+image is also happily building.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- recipes-support/traceroute/traceroute_2.0.18.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-support/traceroute/traceroute_2.0.18.bb b/recipes-support/traceroute/traceroute_2.0.18.bb
-index e6718db..83ac5a7 100644
---- a/recipes-support/traceroute/traceroute_2.0.18.bb
-+++ b/recipes-support/traceroute/traceroute_2.0.18.bb
-@@ -39,5 +39,5 @@ do_install() {
- 
- }
- 
--ALTERNATIVE_${PN} = "traceroute6"
--ALTERNATIVE_LINK_NAME[traceroute6] = "${bindir}/traceroute"
-+ALTERNATIVE_${PN} = "traceroute"
-+ALTERNATIVE_LINK_NAME[traceroute] = "${bindir}/traceroute"
--- 
-1.7.3.4
+On Thu, Mar 20, 2014 at 2:11 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
 
+> Hello everyone, I am building my dora bsp layers with OE/poky master to
+> prepare for 1.6 release.
+> My console image built just fine, but I am getting this error while
+> building xfce image.
+>
+> NOTE: Executing intltoolize --copy --force --automake
+>
+> NOTE: Executing ACLOCAL="aclocal --system-acdir=/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-copy/" autoreconf --verbose --install --force --exclude=autopoint
+>
+> autoreconf: Entering directory `.'
+>
+> autoreconf: configure.ac: not using Gettext
+>
+> autoreconf: running: aclocal --system-acdir=/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-copy/ --force
+>
+> aclocal: error: couldn't open directory '/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-copy/': No such file or directory
+>
+> autoreconf: aclocal failed with exit status: 1
+>
+> ERROR: autoreconf execution failed.
+>
+> WARNING: exit code 1 from a shell command.
+>
+> ERROR: Function failed: do_configure (log file is located at /media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/temp/log.do_configure.2388)
+>
+>
+> This
+> <https://github.com/gumstix/Gumstix-YoctoProject-Repo/blob/dev/default.xml>is
+> my manifest just in case.
+>
+> Thank you for your help!
+>
+> Adam
+>
 
