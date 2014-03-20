@@ -1,37 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E5E56F8B7
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 268DB6E8A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 22:19:04 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id b15so1168115eek.20
+	Thu, 20 Mar 2014 22:36:21 +0000 (UTC)
+Received: by mail-vc0-f174.google.com with SMTP id ld13so1741596vcb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 15:19:04 -0700 (PDT)
+	Thu, 20 Mar 2014 15:36:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=nmBmXZNYTSCGJZIVg7ISM6Qd4ubRNN+q/glSI6Tt7I0=;
-	b=zNUeIusvRf9FDTeZB5UMsD4gVpLGDWV7XM52caOp6g/cn0ONXLHILpp1vSe3oKpuya
-	fgT5IO93tQZkrqVX2q/DNP59xjHnmHCHQP2tl8vy/JyTE8sWncuMo3OXC4w3RNoTKq+X
-	czssIsEIsub6LHgZ+FH9vIg42V6vV5faQ0TsEIA1CRp9FIUxquJF8UMxicLI+rP9LDpu
-	rkXrug6SVHtpk7wH0s6KSX3m/98mBexQ5TdPqcbe3Fjsv58qU/aA0p2tj4zbIu1gkHPn
-	JIOux/KIBFNXYmLbWsSQn14pHGPwO1PHPTWdW5DeCj/7LEABFwW6vF7YLwndw9RJ3xV2
-	bUFA==
-X-Received: by 10.15.34.136 with SMTP id e8mr111401eev.109.1395353944734;
-	Thu, 20 Mar 2014 15:19:04 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id w6sm7228297eex.9.2014.03.20.15.19.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Mar 2014 15:19:03 -0700 (PDT)
-Date: Thu, 20 Mar 2014 23:19:06 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140320221906.GH3726@jama>
-References: <CAFeBWL4=C3dWdGNX2UgGUJGu1EGdpodocwJ5hbJLDWowa-OePw@mail.gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=6rU+ynt8yH3D8VLjtEuGvDfy43KZg/BKT1dnZyypRDA=;
+	b=0eVO64E1sDMRr+FqRsE3Ewj8ruhfqs0EfBTnTuEUZVybpZS9cnIzRVSLrJvwVGFiZN
+	YFRN8AsZgTQmi/gAbqkZ3/bzGCjEiUtEZi+9pCi4inqzjLAHTkt8JS6ZNUdOKraNdq8H
+	8iqDXcZ7AeF8GeLnlPgV7eYsIDvGAG6w4arRElx7vedrz8hfOu7mQGMSDBYp14sWMnVV
+	N5/EPxpMc8kWgCyRgLIXUhPHJkR/x7bDL3yyw5VqW6G0jWBPudOpFflLbB4xX+JCpaZj
+	3TFamQ+gE+DjLdBXnTwKYVWahJyVqGU81AHEuZYIZOOkucfQWkR7hZkbh5ibpeE+Xxsp
+	yemQ==
 MIME-Version: 1.0
-In-Reply-To: <CAFeBWL4=C3dWdGNX2UgGUJGu1EGdpodocwJ5hbJLDWowa-OePw@mail.gmail.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: libxfce4ui build fail on master branch
+X-Received: by 10.59.9.38 with SMTP id dp6mr15072804ved.24.1395354982875; Thu,
+	20 Mar 2014 15:36:22 -0700 (PDT)
+Received: by 10.52.85.67 with HTTP; Thu, 20 Mar 2014 15:36:22 -0700 (PDT)
+Date: Thu, 20 Mar 2014 15:36:22 -0700
+Message-ID: <CAFeBWL6_yWV7uDHT2ncMhDm0GCsa_cp0EJqzc0+XSX8Y8MrQng@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: exo build fail - undefined macro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,79 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2014 22:19:06 -0000
-X-Groupsio-MsgNum: 48783
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fmEUq8M7S0s+Fl0V"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Mar 2014 22:36:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---fmEUq8M7S0s+Fl0V
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Good afternoon!
+On OE/Poky master branch, I am getting this error while building an XFCE
+image. My layers have built ok on Dora.
 
-On Thu, Mar 20, 2014 at 02:11:04PM -0700, Adam Lee wrote:
-> Hello everyone, I am building my dora bsp layers with OE/poky master to
-> prepare for 1.6 release.
-> My console image built just fine, but I am getting this error while
-> building xfce image.
->=20
-> NOTE: Executing intltoolize --copy --force --automake
->=20
-> NOTE: Executing ACLOCAL=3D"aclocal
-> --system-acdir=3D/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-po=
-ky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-cop=
-y/"
-> autoreconf --verbose --install --force --exclude=3Dautopoint
->=20
-> autoreconf: Entering directory `.'
->=20
-> autoreconf: configure.ac: not using Gettext
->=20
-> autoreconf: running: aclocal
-> --system-acdir=3D/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-po=
-ky-linux-gnueabi/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-cop=
-y/
-> --force
->=20
-> aclocal: error: couldn't open directory
-> '/media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi=
-/libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/git/aclocal-copy/':
-> No such file or directory
->=20
-> autoreconf: aclocal failed with exit status: 1
->=20
-> ERROR: autoreconf execution failed.
->=20
-> WARNING: exit code 1 from a shell command.
->=20
-> ERROR: Function failed: do_configure (log file is located at
-> /media/Build/Post-Dora/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/=
-libxfce4ui/4.10.0+gitAUTOINC+530b72f50f-r0/temp/log.do_configure.2388)
->=20
->=20
-> This
-> <https://github.com/gumstix/Gumstix-YoctoProject-Repo/blob/dev/default.xm=
-l>is
-> my manifest just in case.
->=20
-> Thank you for your help!
+My manifest<https://github.com/gumstix/Gumstix-YoctoProject-Repo/blob/dev/default.xml>
+Full error <http://paste.ubuntu.com/7127725/>
 
-See patches on ML from last week
+Interesting thing is that I can build exo package individually. I only get
+this error while building my xfce image.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Thank you,
 
---fmEUq8M7S0s+Fl0V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Adam
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+configure.ac:112: error: possibly undefined macro: AC_PROG_INTLTOOL
 
-iEYEARECAAYFAlMraVoACgkQN1Ujt2V2gBzqrQCgkW20XnJc+QZFunwm6BDRPXdd
-wYoAni+coq8T5LLm3/fnzB78uvz2pkMF
-=ynbp
------END PGP SIGNATURE-----
+      If this token and others are legitimate, please use m4_pattern_allow.
 
---fmEUq8M7S0s+Fl0V--
+      See the Autoconf documentation.
+
+autoreconf: /media/Build/Post-Dora/build/tmp/sysroots/x86_64-linux/usr/bin/autoconf
+failed with exit status: 1
+
+ERROR: autoreconf execution failed.
+
