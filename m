@@ -1,24 +1,38 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 7927760E79
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Mar 2014 09:03:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,693,1389740400"; d="scan'208";a="42997528"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 20 Mar 2014 10:03:09 +0100
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Thu, 20 Mar 2014 10:03:08 +0100
-Received: from u85.usr.ingenico.loc (10.23.7.85) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Thu, 20 Mar 2014 10:03:08 +0100
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Mar 2014 09:55:53 +0100
-Message-ID: <1395305753-2195-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.8.5.4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 11AD76EFFF;
+	Thu, 20 Mar 2014 10:55:09 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id e49so504433eek.11
+	for <multiple recipients>; Thu, 20 Mar 2014 03:55:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=DLySand2y3V/0FBecDuT8ka2Z5ChRbwUx4Z70BiZfzU=;
+	b=NDbODi4kkaRE6vvObZ+r19+ceIsCWAgQSXk4GL/FPdQNOMdhpLVmKWtwHkeUiZeLtz
+	40re03di6mRXljMUSN1uuf9AdnDeEMDNwOPykq6XDj4T6SNjEKFTrOF8UFmoMT6P2Pfy
+	35Q+uowttqu+/PXp52VQx9tlMcofvZOh5cI/sJe06IhbXi2Ga4Zm2Izh8XwCzM2mhKGr
+	EHPuhrMvEn/kuYuUmjPNz5bl3uIzjXXMaAb1gdigJmGQPlHUiPAsQq4tAdl47SyWeDIX
+	VItqPp1JU9+q40m7EZJTCXMJyXG1eU/H3wIsCETtbGhli2ftmxo4eZf7S7CRtSzRVCaO
+	I1NA==
+X-Received: by 10.14.219.137 with SMTP id m9mr26065590eep.77.1395312910305;
+	Thu, 20 Mar 2014 03:55:10 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	z47sm3412370een.16.2014.03.20.03.55.08 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 20 Mar 2014 03:55:09 -0700 (PDT)
+Date: Thu, 20 Mar 2014 11:55:10 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140320105510.GC3726@jama>
+References: <20140318191639.8B05350385@opal>
+	<969F26A8BAB325438E7EB80D3C3134FB16D65A80@IRSMSX105.ger.corp.intel.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fim 0.4-rc1: add "hf" PACKAGECONFIG option
+In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB16D65A80@IRSMSX105.ger.corp.intel.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,90 +46,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Mar 2014 09:03:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 20 Mar 2014 10:55:10 -0000
+X-Groupsio-MsgNum: 48770
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="raC6veAxrt5nqIoY"
+Content-Disposition: inline
 
-This embedds a console font in fim executable.
+--raC6veAxrt5nqIoY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-To use it, don't forget to define FBFONT with the special value:
-export FBFONT='fim://'
+On Thu, Mar 20, 2014 at 06:59:13AM +0000, Iorga, Cristian wrote:
+> Hi Martin,
+>=20
+> Errr, what exactly is going on here?
+> I have submitted this patch in a different form, with more content and mo=
+re comments.
 
-Option is enabled by default because kdb-consolefonts package
-only provides PSF version 2 files (fim only support version 1 and creates an error).
+Stephen submitted upgrade from 0.18.4 to 0.18.8 before you and it was appli=
+ed first.
 
-Benchmarked fim executable size: +6Kb (x86_64) and +7Kb (armv7).
+So what was left from your patch after rebase was upgrade from 0.18.8 to
+0.18.9.
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-graphics/fim/files/cross_cc.patch | 29 +++++++++++++++++++++++
- meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb       |  6 +++--
- 2 files changed, 33 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/fim/files/cross_cc.patch
+If you don't agree I will merge just Stephen's patch and you can send
+new one after rebasing it yourself.
 
-diff --git a/meta-oe/recipes-graphics/fim/files/cross_cc.patch b/meta-oe/recipes-graphics/fim/files/cross_cc.patch
-new file mode 100644
-index 0000000..85ab1ef
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fim/files/cross_cc.patch
-@@ -0,0 +1,29 @@
-+From 9b0b322d86c7b2d2cddaa62f7dab4aa669739a48 Mon Sep 17 00:00:00 2001
-+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-+Date: Wed, 19 Mar 2014 13:18:21 +0100
-+Subject: [PATCH] Upstream-Status: Pending
-+
-+b2ba should be built by BUILD_CC in cross environment
-+This is only used when configured with --enable-hardcoded-font
-+
-+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-+---
-+ src/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index a1d4330..a8150b9 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -63,7 +63,7 @@ help-acm.cpp: fim.h
-+ 	$(ECHO) '//#endif' >> $@
-+ 
-+ b2ba:
-+-	$(CC) -o b2ba b2ba.c
-++	$(BUILD_CC) -o b2ba b2ba.c
-+ 
-+ if FIM_WANT_CUSTOM_HARDCODED_CONSOLEFONT
-+ default_font_byte_array.h: $(FIM_CUSTOM_HARDCODED_CONSOLEFONT) b2ba
-+-- 
-+1.8.5.4
-+
-diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-index 01aa87c..b291a5a 100644
---- a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-+++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-@@ -11,7 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
- # flex with provide /usr/include/FlexLexer.h
- DEPENDS = "flex-native bison-native flex"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz"
-+SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
-+           file://cross_cc.patch"
- SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
- SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
- 
-@@ -37,7 +38,7 @@ EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
- "
- 
- # Note: imlib2 is located in meta-efl layer.
--PACKAGECONFIG ??= "jpeg rl"
-+PACKAGECONFIG ??= "jpeg rl hf"
- PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
- PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
- PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
-@@ -46,3 +47,4 @@ PACKAGECONFIG[pdf] = "--enable-poppler,--disable-poppler,poppler"
- PACKAGECONFIG[magick] = "--enable-graphicsmagick,--disable-graphicsmagick,imagemagick"
- PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
- PACKAGECONFIG[rl] = "--enable-readline,--disable-readline,readline"
-+PACKAGECONFIG[hf] = "--enable-hardcoded-font,--disable-hardcoded-font"
--- 
-1.8.5.4
+Thanks
 
+> That's one thing.
+> Another thing would be that even if you signed my patch in a modified for=
+m, 5 minutes later, you signed another musicpd patch, going backwards from =
+my version.
+> Quote:
+> " Module: meta-openembedded.git
+> Branch: master-next
+> Commit: dde222cef9bb8ef20d139ab58760b27c4d45c93a
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3Ddde222cef9bb8ef20d139ab58760b27c4d45c93a
+>=20
+> Author: Stephen Arnold <stephen.arnold42@gmail.com>
+> Date:   Sun Mar 16 17:52:47 2014 -0700
+>=20
+> musicpd/mpd: bump to current upstream stable
+>=20
+> Bump music player daemon to the latest upstream stable release.
+> Same as previous 0.18.4 recipe with trivial updates.
+>=20
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>"
+>=20
+> The only thing, let's say improved, from my patch to Stephen's patch  wou=
+ld be the site URL.
+>=20
+> So which one is it?
+> Still, yet, no patch got into the master, while I am stuck with a bug tha=
+t I have not caused and, still, seems that I am responsible for it.
+>=20
+> Also, mpd v0.18.8 will still not fix the crash with libvorbis upgrade..
+>=20
+> I must say that from my point of view this is getting counterproductive...
+>=20
+> Regards,
+> Cristian Iorga
+> YP
+> Intel Corporation
+>=20
+>=20
+> -----Original Message-----
+> From: openembedded-commits-bounces@lists.openembedded.org [mailto:openemb=
+edded-commits-bounces@lists.openembedded.org] On Behalf Of git@git.openembe=
+dded.org
+> Sent: Tuesday, March 18, 2014 9:17 PM
+> To: openembedded-commits@lists.openembedded.org
+> Subject: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
+>=20
+> Module: meta-openembedded.git
+> Branch: master-next
+> Commit: 2e1305783023e6b0869e8ea12db25c53b803f545
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D2e1305783023e6b0869e8ea12db25c53b803f545
+>=20
+> Author: Cristian Iorga <cristian.iorga@intel.com>
+> Date:   Mon Mar 17 11:05:17 2014 +0200
+>=20
+> musicpd: upgrade to 0.18.9
+>=20
+> * Upgrade fixes a crash with libvorbis 1.3.4;
+>=20
+> Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>=20
+> ---
+>=20
+>  .../recipes-multimedia/musicpd/{mpd_0.18.8.bb =3D> mpd_0.18.9.bb}       =
+| 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb b/m=
+eta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+> similarity index 93%
+> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+> index b6882af..c3bb581 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
+> @@ -10,8 +10,8 @@ SRC_URI =3D " \
+>      file://mpd.conf.in \
+>  "
+> =20
+> -SRC_URI[md5sum] =3D "7bbe1caf5abe404dc985ca4f44984b1f"
+> -SRC_URI[sha256sum] =3D "5366378e548fb77996cc33b0e15165ddd84f1e496bdd0461=
+6bd593aecdc26450"
+> +SRC_URI[md5sum] =3D "0e5156a831d4302d2032998bcfd5c36f"
+> +SRC_URI[sha256sum] =3D "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be534=
+6f19de5f699a68de"
+> =20
+>  inherit autotools useradd systemd
+> =20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--raC6veAxrt5nqIoY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMqyQ4ACgkQN1Ujt2V2gBzAMgCdHVcinHWdWdqrYPNJAmHzhZAq
+LVAAniXq2m4bIB66vuZMkZKhJPck3ZWG
+=rHP/
+-----END PGP SIGNATURE-----
+
+--raC6veAxrt5nqIoY--
