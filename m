@@ -1,24 +1,32 @@
-Return-Path: <george.nita@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 239256F9BB
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-ve0-f173.google.com (mail-ve0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F8CB6F9D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 16:49:19 +0000 (UTC)
-Received: from [192.168.14.121] (192.168.14.121) by smtp.enea.com
-	(172.21.1.208) with Microsoft SMTP Server id 14.3.158.1;
-	Fri, 21 Mar 2014 17:49:13 +0100
-Message-ID: <532C6D7E.4070504@enea.com>
-Date: Fri, 21 Mar 2014 18:49:02 +0200
-From: George Nita <george.nita@enea.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+	Fri, 21 Mar 2014 21:08:58 +0000 (UTC)
+Received: by mail-ve0-f173.google.com with SMTP id oy12so3203557veb.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Mar 2014 14:08:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=34BjDg1gtGQZKDocD1kdE4FqeScAeQTj2nkmEW9odzk=;
+	b=vC1Ur52uX7J+KcOUubjwjZlBtI0AXhCr3GIPmqdOaa6B/jBtEyeZTZp0S/sSQKpAbv
+	TieMujRck9rY66zzNO2BMsXdST5q9jJeSA1hDNIdau3ASqIVUzV5dcfds0oMiwG4c2yQ
+	SheP0621r3nQiIzhko5Eo52sQ6q44hj18F9nM5bFd72gqEGYsdJEbjYtiryjjg7EotJw
+	er3SpTX8ocid4/gP2sgQdJP3KF/ThO4N7C6IQzrgu18zAKkqEq4FTFsntkjhPrMHI3yD
+	wnVYF7hJcYFHNIaMM6gmLBmkfsnNm77qXeby51UfF5Q1kWTlF8njfxxskyhTVIDDEDuX
+	CQYQ==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Koen Kooi
-	<koen@dominion.thruhere.net>
-References: <1395386596-56931-1-git-send-email-george.nita@enea.com>	<532C016C.2060309@dominion.thruhere.net>	<532C088F.8090102@enea.com>
-	<lgh6ub$tbs$1@ger.gmane.org>
-In-Reply-To: <lgh6ub$tbs$1@ger.gmane.org>
-X-Originating-IP: [192.168.14.121]
-Subject: Re: [meta-filesystems] [PATCH] Add fusermount to fuse by default
+X-Received: by 10.58.23.6 with SMTP id i6mr3968994vef.12.1395436139464; Fri,
+	21 Mar 2014 14:08:59 -0700 (PDT)
+Received: by 10.52.85.67 with HTTP; Fri, 21 Mar 2014 14:08:59 -0700 (PDT)
+Date: Fri, 21 Mar 2014 14:08:59 -0700
+Message-ID: <CAFeBWL6KbMhysVEaXL8aNYdX6pn8BEGOT4hdg9Mnmx1zc4dzSQ@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: exo build fail on master and master-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,50 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 16:49:20 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 Mar 2014 21:09:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 03/21/2014 01:15 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> George Nita schreef op 21-03-14 10:38:
->> On 03/21/2014 11:07 AM, Koen Kooi wrote: George Nita schreef op 21-03-14
->> 08:23:
->>>>> Without fusermount the '/etc/init.d/fuse status' command exits
->>>>> with error. Added fusermount to PACKAGES list and ensured it gets
->>>>> installed.
->>
->> How are you ensuring it gets installed? You only added a new packages,
->> you haven't updated any R* variable to take the new package into
->> account.
->>
->>> By installing fusermount into ${base_bindir}
->
-> So what you're saying is that /bin/fusermount ends up in 'fuse-utils' and
-> you're just adding 'fusermount' to PACKAGES because it looks cool? I get
-> that you want to have /bin/fusermount installed on your system, but I don't
-> get what your patch is doing.
-You're right, no need to add 'fusermount' to PACKAGES.
-However, in order to get fusermount in the image root file system:
-- add installation lines in code as in my patch or similar
-- delete the 2 lines that assign to FILES_fuse-utils and 
-FILES_fuse-utils-dbg
-- something else (what ?)
+Good day everyone,
+On both master and master-next, I get build fail on exo like below:
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFTLB9GMkyGM64RGpERAn6/AJ4oqRW3F4Y+bXvOuAg9sUQEZGIGJgCcCeSj
-> BDhkv5mcw4UZjB56C5zJmso=
-> =a1Ip
-> -----END PGP SIGNATURE-----
->
+configure.ac:112: error: possibly undefined macro: AC_PROG_INTLTOOL
 
+      If this token and others are legitimate, please use m4_pattern_allow.
 
--- 
-Best regards,
-George Nita
+      See the Autoconf documentation.
+
+autoreconf: /media/Build/master-next/build/tmp/sysroots/x86_64-linux/usr/bin/autoconf
+failed with exit status: 1
+
+Full log is here <http://paste.ubuntu.com/7132707/>
+
+Thank you for your help,
+
+Adam
 
