@@ -1,35 +1,29 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E2E46FA23
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by mail.openembedded.org (Postfix) with ESMTP id D02D96FA0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 13:50:53 +0000 (UTC)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2LDor48020730;
-	Fri, 21 Mar 2014 08:50:53 -0500
-Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2LDorsV009677;
-	Fri, 21 Mar 2014 08:50:53 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
-	14.03.0174.001; Fri, 21 Mar 2014 08:50:53 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Fathi Boudra <fathi.boudra@linaro.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] pm-qa-utils: Add power management test utils
-Thread-Index: AQHPRFu6bFD53IzT8kiCJ/XxPOyzM5rrkDNA
-Date: Fri, 21 Mar 2014 13:50:52 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015CF493E6@DLEE11.ent.ti.com>
-References: <1395326848-4434-1-git-send-email-Chase.Maupin@ti.com>
-	<CAGNsrLA0Y_MK7hT5_NLzkBz0vvq4cy7cGJq=59X8SnO99bV6SQ@mail.gmail.com>
-In-Reply-To: <CAGNsrLA0Y_MK7hT5_NLzkBz0vvq4cy7cGJq=59X8SnO99bV6SQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	Fri, 21 Mar 2014 14:06:58 +0000 (UTC)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2LE6wka024733
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Mar 2014 09:06:58 -0500
+Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2LE6weC020370
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Mar 2014 09:06:58 -0500
+Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
+	(128.247.5.110) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 21 Mar 2014 09:06:58 -0500
+Received: from sdit-build04.dal.design.ti.com (dbdp20.itg.ti.com
+	[172.24.170.38])	by dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
+	s2LE6tI1006477;	Fri, 21 Mar 2014 09:06:57 -0500
+From: Chase Maupin <Chase.Maupin@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Mar 2014 09:06:53 -0500
+Message-ID: <1395410813-10461-1-git-send-email-Chase.Maupin@ti.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] pm-qa-utils: Add power management test utils
+Subject: [PATCHv2] pm-qa: Add power management test utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,143 +37,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 13:50:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Mar 2014 14:07:00 -0000
+Content-Type: text/plain
 
-
-From: Fathi Boudra [mailto:fathi.boudra@linaro.org]
-Sent: Thursday, March 20, 2014 11:45 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Maupin, Chase
-Subject: Re: [oe] [PATCH] pm-qa-utils: Add power management test utils
-
-
-On 20 March 2014 16:47, Chase Maupin <Chase.Maupin@ti.com<mailto:Chase.Maup=
-in@ti.com>> wrote:
 * The power management test utilities from Linaro can be used
   to test multiple PM features such as cpufreq, cpuidle, thermal
   control and suspend operations.
 * These utilities are not platform specific and can be used by
   a broader base of users.
 
-Signed-off-by: Chase Maupin <Chase.Maupin@ti.com<mailto:Chase.Maupin@ti.com=
->>
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
 ---
- .../pm-qa-utils/pm-qa-utils_git.bb<http://pm-qa-utils_git.bb>             =
-    |   63 ++++++++++++++++++++
- 1 file changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb=
-<http://pm-qa-utils_git.bb>
+* Updated in version 2
+    * Updated version to 0.4.8 to address feedback from Fathi Boudra
+    * Removed reference to Linaro in DESCRIPTION field to address
+      feedback from Fathi Boudra
+    * Changed installation directory for helper scripts to
+      ${libdir}/${PN} instead of ${bindir}/linaro-pm-qa-include
+      as per feedback from Koen Kooi
+    * Changed name of the package to pm-qa instead of pm-qa-utils
+      to bring the name in line with the name at he SRC_URI, etc.
+      This addresses feedback from Koen Kooi
+    * Updated comments to reflect the above changes
+---
+ meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb |   65 +++++++++++++++++++++++++++
+ 1 file changed, 65 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
 
-diff --git a/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb<http:/=
-/pm-qa-utils_git.bb> b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git=
-.bb<http://pm-qa-utils_git.bb>
+diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
 new file mode 100644
-index 0000000..610f3a7
+index 0000000..4d33975
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb<http://pm-qa-=
-utils_git.bb>
-@@ -0,0 +1,63 @@
-+DESCRIPTION =3D "Utilities from Linaro for testing Power Management"
-
-nitpick, I'll remove "from Linaro" :)
-
-[CEM] I have another version I need to send so I=92ll take care of this.
-
-
-+HOMEPAGE =3D "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resour=
-ces/TestSuite/PmQa"
++++ b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+@@ -0,0 +1,65 @@
++DESCRIPTION = "Utilities for testing Power Management"
++HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/TestSuite/PmQa"
 +
-+LICENSE =3D "GPLv2"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
-3<file:///\\COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263>"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+PV =3D "0.4.4"
-
-we released 0.4.8 today.
-
-[CEM] I=92ll go ahead and bump this
-
-
-+BRANCH ?=3D "master"
-+SRCREV =3D "fbc2762359b863dfbf4fd0bab1e8abd2a6125ed4"
++PV = "0.4.8"
 +
-+SRC_URI =3D "git://git.linaro.org/tools/pm-qa.git;protocol=3Dgit;branch=3D=
-${BRANCH}<http://git.linaro.org/tools/pm-qa.git;protocol=3Dgit;branch=3D$%7=
-BBRANCH%7D>"
++BRANCH ?= "master"
 +
-+S =3D "${WORKDIR}/git"
++# Corresponds to tag pm-qa-v0.4.8
++SRCREV = "6a8c2ae8a6035b15a7fbe61b6ca56841e056fa37"
 +
-+CFLAGS +=3D "-pthread"
++SRC_URI = "git://git.linaro.org/tools/pm-qa.git;protocol=git;branch=${BRANCH}"
++
++S = "${WORKDIR}/git"
++
++CFLAGS += "-pthread"
 +
 +do_compile () {
 +    # Find all the .c files in this project and build them.
 +    for x in `find . -name "*.c"`
 +    do
-+        util=3D`echo ${x} | sed s/.c$//`
++        util=`echo ${x} | sed s/.c$//`
 +        oe_runmake ${util}
 +    done
 +}
 +
 +do_install () {
 +    install -d ${D}${bindir}
-+    install -d ${D}${bindir}/linaro-pm-qa-include
++    install -d ${D}${libdir}/${PN}
 +
-+    # Install the compiled binaries the were built in the previous step
++    # Install the compiled binaries that were built in the previous step
 +    for x in `find . -name "*.c"`
 +    do
-+        util=3D`echo ${x} | sed s/.c$//`
-+        util_basename=3D`basename ${util}`
++        util=`echo ${x} | sed s/.c$//`
++        util_basename=`basename ${util}`
 +        install -m 0755 ${util} ${D}${bindir}/${util_basename}
 +    done
 +
-+    # Install the helper scripts in the include directory
++    # Install the helper scripts in a subdirectory of $libdir
 +    for script in `find . -name "*.sh" | grep include`
 +    do
 +        # Remove hardcoded relative paths
 +        sed -i -e 's#..\/utils\/##' ${script}
 +
-+        script_basename=3D`basename ${script}`
-+        install -m 0755 $script ${D}${bindir}/linaro-pm-qa-include/${scrip=
-t_basename}
++        script_basename=`basename ${script}`
++        install -m 0755 $script ${D}${libdir}/${PN}/${script_basename}
 +    done
 +
-+    # Install the shell scripts NOT in the include directory since those
++    # Install the shell scripts NOT in the $libdir directory since those
 +    # will be installed elsewhere
 +    for script in `find . -name "*.sh" | grep -v include`
 +    do
-+        # if the script includes any helper scripts from the include
-+        # directory then change the include path to the absolute path
++        # if the script includes any helper scripts from the $libdir
++        # directory then change the source path to the absolute path
 +        # to reflect the install location of the helper scripts.
-+        sed -i -e "s#source ../include#source ${bindir}/linaro-pm-qa-inclu=
-de#g" ${script}
++        sed -i -e "s#source ../include#source ${libdir}/${PN}#g" ${script}
 +        # Remove hardcoded relative paths
 +        sed -i -e 's#..\/utils\/##' ${script}
 +
-+        script_basename=3D`basename ${script}`
++        script_basename=`basename ${script}`
 +        install -m 0755 $script ${D}${bindir}/${script_basename}
 +    done
-
-we probably need to fix that properly and avoid the LTP style mess (softwar=
-e not meant to be installable).
-
 +}
---
+-- 
 1.7.9.5
-
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.o=
-penembedded.org>
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-FWIW, my comments aren't a blocker/nack. That's something we can address la=
-ter on.
-
-Cheers,
-Fathi
 
 
