@@ -1,36 +1,48 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id E955E6F9F2
+Return-Path: <Lauren.Post@freescale.com>
+Received: from co9outboundpool.messaging.microsoft.com
+	(co9ehsobe005.messaging.microsoft.com [207.46.163.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 23AB36FA4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 14:42:45 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id hn9so577822wib.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 07:42:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=PyUejoLdzPXZneLfyWbpMqin2XlZoYzwjw5+ifyEk1M=;
-	b=D1i++2x+MBbUeKOU64HuK6PUgQ3pHf8U538CIOaoccX5PPiSid2Bgh3tILNW65V5Kg
-	onvvmyt+M1gqtqzjvU1zR8HTAGyCgOMTRkB+KX2rDr1SHPX35ZWRFfF2z/wzjlv9oydY
-	A/j7zCh+GpG9CW9/fXtFyeg9bewhXZI7j+W8+2CzjrG8ZyMAK1lm3Y+VfxP0Shczwb9C
-	tJNA6AActOlWFdonm/5N35HtfnLG6ZmVHUBk7zYFpKEYOANn9jgtcmNQ1e2TfU4wKAl3
-	qUWnCzhJuWo/Ad5gT+ElbIaVeYoGyKo8uu1L34Su5OfpUnmPss0TCXwdhtu7LwW/+PWJ
-	SWUw==
+	Fri, 21 Mar 2014 16:47:10 +0000 (UTC)
+Received: from mail138-co9-R.bigfish.com (10.236.132.231) by
+	CO9EHSOBE032.bigfish.com (10.236.130.95) with Microsoft SMTP Server id
+	14.1.225.22; Fri, 21 Mar 2014 16:47:10 +0000
+Received: from mail138-co9 (localhost [127.0.0.1])	by
+	mail138-co9-R.bigfish.com (Postfix) with ESMTP id 8D7986011A;
+	Fri, 21 Mar 2014 16:47:10 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: 0
+X-BigFish: VS0(zze0eahzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch1fc6hzz8275ch1de098h8275bh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h268bh1155h)
+Received: from mail138-co9 (localhost.localdomain [127.0.0.1]) by mail138-co9
+	(MessageSwitch) id 1395420428843225_26460;
+	Fri, 21 Mar 2014 16:47:08 +0000 (UTC)
+Received: from CO9EHSMHS012.bigfish.com (unknown [10.236.132.246])	by
+	mail138-co9.bigfish.com (Postfix) with ESMTP id B9E91380051;
+	Fri, 21 Mar 2014 16:47:08 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS012.bigfish.com
+	(10.236.130.22) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Fri, 21 Mar 2014 16:47:08 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-002.039d.mgd.msft.net (10.84.1.15) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Fri, 21 Mar 2014 16:47:07 +0000
+Received: from neo.am.freescale.net (neo.am.freescale.net [10.81.16.89])	by
+	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id s2LGl5s6013424;
+	Fri, 21 Mar 2014 09:47:07 -0700
+From: Lauren Post <lauren.post@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Mar 2014 11:35:17 -0500
+Message-ID: <1395419717-32210-2-git-send-email-lauren.post@freescale.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1395419717-32210-1-git-send-email-lauren.post@freescale.com>
+References: <lauren.post@freescale.com>
+	<1395419717-32210-1-git-send-email-lauren.post@freescale.com>
 MIME-Version: 1.0
-X-Received: by 10.180.189.43 with SMTP id gf11mr2489328wic.32.1395412966561;
-	Fri, 21 Mar 2014 07:42:46 -0700 (PDT)
-Received: by 10.216.117.6 with HTTP; Fri, 21 Mar 2014 07:42:46 -0700 (PDT)
-In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB16D66FE6@IRSMSX105.ger.corp.intel.com>
-References: <20140318191639.8B05350385@opal>
-	<969F26A8BAB325438E7EB80D3C3134FB16D65A80@IRSMSX105.ger.corp.intel.com>
-	<20140320105510.GC3726@jama>
-	<969F26A8BAB325438E7EB80D3C3134FB16D66FE6@IRSMSX105.ger.corp.intel.com>
-Date: Fri, 21 Mar 2014 07:42:46 -0700
-Message-ID: <CAOLEWZXq-PumcSVjNdAAHfgsN4vupJ11G3=o1WbOA8EVL7xY3A@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH 2/2] glcompbench: Create 2012.08 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,156 +56,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 14:42:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 Mar 2014 16:47:11 -0000
+Content-Type: text/plain
 
-I had that patch in my local tree for a few weeks and didn't check (again)
-upstream for another release.  Just good timing on my part, I guess...
+glcompbench is a benchmark tool for GL(ES)2 based
+compositing operations
 
-Steve
+Signed-off-by: Lauren Post <lauren.post@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+---
+ .../glcompbench/glbench-compile-fix.patch          |   35 ++++++++++++++++++++
+ .../glcompbench/glcompbench_2012.08.bb             |   14 ++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+new file mode 100644
+index 0000000..374a6cf
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+@@ -0,0 +1,35 @@
++From c4bc44c3abf69f26e4c2b7684f4da4670a51f993 Mon Sep 17 00:00:00 2001
++From: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++Date: Tue, 5 Nov 2013 11:03:04 -0600
++Subject: [PATCH] to make compilable
++
++Upstream Status: Inappropriate [workaround]
++
++Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++---
++ src/composite-test-simple-blur.cc | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/composite-test-simple-blur.cc b/src/composite-test-simple-blur.cc
++index 170ad64..d7f77cf 100644
++--- a/src/composite-test-simple-blur.cc
+++++ b/src/composite-test-simple-blur.cc
++@@ -347,6 +347,7 @@ CompositeTestSimpleBlur::CompositeTestSimpleBlur() :
++ 
++ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++ {
+++#if 0
++     for (BlurWindowMapType::iterator winIt = priv_->windowMap.begin();
++          winIt != priv_->windowMap.end();
++          winIt++)
++@@ -354,6 +355,7 @@ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++         RenderWindowBlur* ro = winIt->second;
++         delete ro;
++     }
+++#endif
++     delete priv_;
++ }
++ 
++-- 
++1.8.1.2
++
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+new file mode 100644
+index 0000000..fe12f03
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "GL Compositing Benchmark"
++DESCRIPTION = "A benchmark for GL(ES)2 based compositing operations"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++
++DEPENDS += "virtual/egl virtual/libgl virtual/egl virtual/libgles1 virtual/libgles2 virtual/libx11 "
++
++inherit pkgconfig waf
++
++SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
++           file://glbench-compile-fix.patch"
++
++SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
++SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
+-- 
+1.7.9.5
 
 
-On Thu, Mar 20, 2014 at 4:27 AM, Iorga, Cristian
-<cristian.iorga@intel.com>wrote:
-
-> It's ok in that case.
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:
-> openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Martin
-> Jansa
-> Sent: Thursday, March 20, 2014 12:55 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: openembedded-commits@lists.openembedded.org
-> Subject: Re: [oe] [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
->
-> On Thu, Mar 20, 2014 at 06:59:13AM +0000, Iorga, Cristian wrote:
-> > Hi Martin,
-> >
-> > Errr, what exactly is going on here?
-> > I have submitted this patch in a different form, with more content and
-> more comments.
->
-> Stephen submitted upgrade from 0.18.4 to 0.18.8 before you and it was
-> applied first.
->
-> So what was left from your patch after rebase was upgrade from 0.18.8 to
-> 0.18.9.
->
-> If you don't agree I will merge just Stephen's patch and you can send new
-> one after rebasing it yourself.
->
-> Thanks
->
-> > That's one thing.
-> > Another thing would be that even if you signed my patch in a modified
-> form, 5 minutes later, you signed another musicpd patch, going backwards
-> from my version.
-> > Quote:
-> > " Module: meta-openembedded.git
-> > Branch: master-next
-> > Commit: dde222cef9bb8ef20d139ab58760b27c4d45c93a
-> > URL:
-> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=dde222cef9bb8ef20d139ab58760b27c4d45c93a
-> >
-> > Author: Stephen Arnold <stephen.arnold42@gmail.com>
-> > Date:   Sun Mar 16 17:52:47 2014 -0700
-> >
-> > musicpd/mpd: bump to current upstream stable
-> >
-> > Bump music player daemon to the latest upstream stable release.
-> > Same as previous 0.18.4 recipe with trivial updates.
-> >
-> > Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>"
-> >
-> > The only thing, let's say improved, from my patch to Stephen's patch
->  would be the site URL.
-> >
-> > So which one is it?
-> > Still, yet, no patch got into the master, while I am stuck with a bug
-> that I have not caused and, still, seems that I am responsible for it.
-> >
-> > Also, mpd v0.18.8 will still not fix the crash with libvorbis upgrade..
-> >
-> > I must say that from my point of view this is getting
-> counterproductive...
-> >
-> > Regards,
-> > Cristian Iorga
-> > YP
-> > Intel Corporation
-> >
-> >
-> > -----Original Message-----
-> > From: openembedded-commits-bounces@lists.openembedded.org
-> > [mailto:openembedded-commits-bounces@lists.openembedded.org] On Behalf
-> > Of git@git.openembedded.org
-> > Sent: Tuesday, March 18, 2014 9:17 PM
-> > To: openembedded-commits@lists.openembedded.org
-> > Subject: [oe-commits] Cristian Iorga : musicpd: upgrade to 0.18.9
-> >
-> > Module: meta-openembedded.git
-> > Branch: master-next
-> > Commit: 2e1305783023e6b0869e8ea12db25c53b803f545
-> > URL:
-> http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=2e1305783023e6b0869e8ea12db25c53b803f545
-> >
-> > Author: Cristian Iorga <cristian.iorga@intel.com>
-> > Date:   Mon Mar 17 11:05:17 2014 +0200
-> >
-> > musicpd: upgrade to 0.18.9
-> >
-> > * Upgrade fixes a crash with libvorbis 1.3.4;
-> >
-> > Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >
-> > ---
-> >
-> >  .../recipes-multimedia/musicpd/{mpd_0.18.8.bb => mpd_0.18.9.bb}
-> | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-> > b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-> > similarity index 93%
-> > rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-> > rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-> > index b6882af..c3bb581 100644
-> > --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.8.bb
-> > +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-> > @@ -10,8 +10,8 @@ SRC_URI = " \
-> >      file://mpd.conf.in \
-> >  "
-> >
-> > -SRC_URI[md5sum] = "7bbe1caf5abe404dc985ca4f44984b1f"
-> > -SRC_URI[sha256sum] =
-> "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616bd593aecdc26450"
-> > +SRC_URI[md5sum] = "0e5156a831d4302d2032998bcfd5c36f"
-> > +SRC_URI[sha256sum] =
-> "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be5346f19de5f699a68de"
-> >
-> >  inherit autotools useradd systemd
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-commits mailing list
-> > Openembedded-commits@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
