@@ -1,36 +1,34 @@
 Return-Path: <chase.maupin@ti.com>
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by mail.openembedded.org (Postfix) with ESMTP id B1B106FA29
+Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E2E46FA23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 13:46:12 +0000 (UTC)
+	Fri, 21 Mar 2014 13:50:53 +0000 (UTC)
 Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2LDkDgM012570
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 08:46:13 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2LDkCqu006911
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 08:46:13 -0500
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id s2LDor48020730;
+	Fri, 21 Mar 2014 08:50:53 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id s2LDorsV009677;
+	Fri, 21 Mar 2014 08:50:53 -0500
 Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DFLE73.ent.ti.com ([fe80::c9be:a3a9:7cd8:c8b3%28]) with mapi id
-	14.03.0174.001; Fri, 21 Mar 2014 08:46:12 -0500
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.03.0174.001; Fri, 21 Mar 2014 08:50:53 -0500
 From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
+To: Fathi Boudra <fathi.boudra@linaro.org>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: [oe] [PATCH] pm-qa-utils: Add power management test utils
-Thread-Index: AQHPROVFbFD53IzT8kiCJ/XxPOyzM5rrbylggABYFwD//8ZfMA==
-Date: Fri, 21 Mar 2014 13:46:11 +0000
-Message-ID: <7D46E86EC0A8354091174257B2FED1015CF493A8@DLEE11.ent.ti.com>
+Thread-Index: AQHPRFu6bFD53IzT8kiCJ/XxPOyzM5rrkDNA
+Date: Fri, 21 Mar 2014 13:50:52 +0000
+Message-ID: <7D46E86EC0A8354091174257B2FED1015CF493E6@DLEE11.ent.ti.com>
 References: <1395326848-4434-1-git-send-email-Chase.Maupin@ti.com>
-	<lggvj4$7g6$1@ger.gmane.org>
-	<7D46E86EC0A8354091174257B2FED1015CF48FAA@DLEE11.ent.ti.com>
-	<lgha81$67v$1@ger.gmane.org>
-In-Reply-To: <lgha81$67v$1@ger.gmane.org>
+	<CAGNsrLA0Y_MK7hT5_NLzkBz0vvq4cy7cGJq=59X8SnO99bV6SQ@mail.gmail.com>
+In-Reply-To: <CAGNsrLA0Y_MK7hT5_NLzkBz0vvq4cy7cGJq=59X8SnO99bV6SQ@mail.gmail.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [PATCH] pm-qa-utils: Add power management test utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -45,141 +43,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 13:46:13 -0000
+X-List-Received-Date: Fri, 21 Mar 2014 13:50:54 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
->-----Original Message-----
->From: openembedded-devel-bounces@lists.openembedded.org
->[mailto:openembedded-devel-bounces@lists.openembedded.org] On
->Behalf Of Koen Kooi
->Sent: Friday, March 21, 2014 7:11 AM
->To: openembedded-devel@lists.openembedded.org
->Subject: Re: [oe] [PATCH] pm-qa-utils: Add power management test
->utils
->
->-----BEGIN PGP SIGNED MESSAGE-----
->Hash: SHA1
->
->Maupin, Chase schreef op 21-03-14 13:07:
->
->>> -----Original Message----- From:
->>> openembedded-devel-bounces@lists.openembedded.org
->>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
->Behalf Of
->>> Koen Kooi Sent: Friday, March 21, 2014 4:10 AM To:
->>> openembedded-devel@lists.openembedded.org Subject: Re: [oe]
->[PATCH]
->>> pm-qa-utils: Add power management test utils
->>>
->> Chase Maupin schreef op 20-03-14 15:47:
->>>>> * The power management test utilities from Linaro can be used
->to
->> test
->>>>> multiple PM features such as cpufreq, cpuidle, thermal
->control
->> and
->>>>> suspend operations. * These utilities are not platform
->specific
->> and can
->>>>> be used by a broader base of users.
->>>>>
->>>>> Signed-off-by: Chase Maupin <Chase.Maupin@ti.com>
->>
->> Everything refers to this as 'pm-qa', not 'pm-qa-utils'
->>
->>> I assume you are saying you would rather see this recipe as pm-
->qa
->>> instead of pm-qa-utils?
->
->Exactly!
->
->>
->>
->>>>> --- .../pm-qa-utils/pm-qa-utils_git.bb                 |   63
->>>>> ++++++++++++++++++++ 1 file changed, 63 insertions(+) create
->> mode 100644
->>>>> meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb
->>>>>
->>>>> diff --git a/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-
->> utils_git.bb
->>>>> b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb new
->> file mode
->>>>> 100644 index 0000000..610f3a7 --- /dev/null +++
->>>>> b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb @@
->-
->> 0,0 +1,63
->>>>> @@ +DESCRIPTION =3D "Utilities from Linaro for testing Power
->> Management"
->>>>> +HOMEPAGE =3D
->>>>>
->>
->"https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/T
->> estSuite/PmQa"
->>>>>
->>>>>
->> +
->>>>> +LICENSE =3D "GPLv2" +LIC_FILES_CHKSUM =3D
->>>>> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263" + +PV =3D
->> "0.4.4" +
->>>>> +BRANCH ?=3D "master" +SRCREV =3D
->> "fbc2762359b863dfbf4fd0bab1e8abd2a6125ed4"
->>>>> + +SRC_URI =3D "git://git.linaro.org/tools/pm-
->> qa.git;protocol=3Dgit;branch=3D${BRANCH}" + +S
->>>>> =3D "${WORKDIR}/git" + +CFLAGS +=3D "-pthread" + +do_compile () {
->+
->> # Find
->>>>> all the .c files in this project and build them. +    for x
->in
->> `find .
->>>>> -name "*.c"` +    do +        util=3D`echo ${x} | sed s/.c$//`
->+
->>>>> oe_runmake ${util} +    done +} + +do_install () { +
->install
->> -d
->>>>> ${D}${bindir} +    install -d ${D}${bindir}/linaro-pm-qa-
->include
->>
->> Please don't use subdirs in $bindir, that's what $libdir and
->$libexecdir
->> are for.
->>
->>> Good point.  I did this because the script going into that
->directory
->>> was named "functions.sh" in the original sources.  I thought
->this was a
->>> bit generic and could possibly conflict.
->>
->>> What are your thoughts on a subdirectory under $libdir or
->$libexecdir?
->>> Any preference?
->
->Right it will amount to the basically the same due to the
->misguided
->libexecdir change oe-core did last year. If it's only used
->'internally'
->$libdir/PN would be OK, otherwise use libexecdir (which currently
->is
->libdir/PN, but might change again)
 
-One last dense question.  What do you mean by 'internally'?
+From: Fathi Boudra [mailto:fathi.boudra@linaro.org]
+Sent: Thursday, March 20, 2014 11:45 AM
+To: openembedded-devel@lists.openembedded.org
+Cc: Maupin, Chase
+Subject: Re: [oe] [PATCH] pm-qa-utils: Add power management test utils
 
-Internally to just this package as in you don't expect any sharing between =
-this and another package?
 
->-----BEGIN PGP SIGNATURE-----
->Version: GnuPG v1.4.5 (Darwin)
->Comment: GPGTools - http://gpgtools.org
->
->iD8DBQFTLCxQMkyGM64RGpERAi53AJ9bjuFeJfliwQV9hzHnqd+28zkH0ACeLS9r
->VXYU8eXR2dQcBS74EnzVBd4=3D
->=3DDHAP
->-----END PGP SIGNATURE-----
->
->--
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 20 March 2014 16:47, Chase Maupin <Chase.Maupin@ti.com<mailto:Chase.Maup=
+in@ti.com>> wrote:
+* The power management test utilities from Linaro can be used
+  to test multiple PM features such as cpufreq, cpuidle, thermal
+  control and suspend operations.
+* These utilities are not platform specific and can be used by
+  a broader base of users.
+
+Signed-off-by: Chase Maupin <Chase.Maupin@ti.com<mailto:Chase.Maupin@ti.com=
+>>
+---
+ .../pm-qa-utils/pm-qa-utils_git.bb<http://pm-qa-utils_git.bb>             =
+    |   63 ++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb=
+<http://pm-qa-utils_git.bb>
+
+diff --git a/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb<http:/=
+/pm-qa-utils_git.bb> b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git=
+.bb<http://pm-qa-utils_git.bb>
+new file mode 100644
+index 0000000..610f3a7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pm-qa-utils/pm-qa-utils_git.bb<http://pm-qa-=
+utils_git.bb>
+@@ -0,0 +1,63 @@
++DESCRIPTION =3D "Utilities from Linaro for testing Power Management"
+
+nitpick, I'll remove "from Linaro" :)
+
+[CEM] I have another version I need to send so I=92ll take care of this.
+
+
++HOMEPAGE =3D "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resour=
+ces/TestSuite/PmQa"
++
++LICENSE =3D "GPLv2"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
+3<file:///\\COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263>"
++
++PV =3D "0.4.4"
+
+we released 0.4.8 today.
+
+[CEM] I=92ll go ahead and bump this
+
+
++BRANCH ?=3D "master"
++SRCREV =3D "fbc2762359b863dfbf4fd0bab1e8abd2a6125ed4"
++
++SRC_URI =3D "git://git.linaro.org/tools/pm-qa.git;protocol=3Dgit;branch=3D=
+${BRANCH}<http://git.linaro.org/tools/pm-qa.git;protocol=3Dgit;branch=3D$%7=
+BBRANCH%7D>"
++
++S =3D "${WORKDIR}/git"
++
++CFLAGS +=3D "-pthread"
++
++do_compile () {
++    # Find all the .c files in this project and build them.
++    for x in `find . -name "*.c"`
++    do
++        util=3D`echo ${x} | sed s/.c$//`
++        oe_runmake ${util}
++    done
++}
++
++do_install () {
++    install -d ${D}${bindir}
++    install -d ${D}${bindir}/linaro-pm-qa-include
++
++    # Install the compiled binaries the were built in the previous step
++    for x in `find . -name "*.c"`
++    do
++        util=3D`echo ${x} | sed s/.c$//`
++        util_basename=3D`basename ${util}`
++        install -m 0755 ${util} ${D}${bindir}/${util_basename}
++    done
++
++    # Install the helper scripts in the include directory
++    for script in `find . -name "*.sh" | grep include`
++    do
++        # Remove hardcoded relative paths
++        sed -i -e 's#..\/utils\/##' ${script}
++
++        script_basename=3D`basename ${script}`
++        install -m 0755 $script ${D}${bindir}/linaro-pm-qa-include/${scrip=
+t_basename}
++    done
++
++    # Install the shell scripts NOT in the include directory since those
++    # will be installed elsewhere
++    for script in `find . -name "*.sh" | grep -v include`
++    do
++        # if the script includes any helper scripts from the include
++        # directory then change the include path to the absolute path
++        # to reflect the install location of the helper scripts.
++        sed -i -e "s#source ../include#source ${bindir}/linaro-pm-qa-inclu=
+de#g" ${script}
++        # Remove hardcoded relative paths
++        sed -i -e 's#..\/utils\/##' ${script}
++
++        script_basename=3D`basename ${script}`
++        install -m 0755 $script ${D}${bindir}/${script_basename}
++    done
+
+we probably need to fix that properly and avoid the LTP style mess (softwar=
+e not meant to be installable).
+
++}
+--
+1.7.9.5
+
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.o=
+penembedded.org>
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+FWIW, my comments aren't a blocker/nack. That's something we can address la=
+ter on.
+
+Cheers,
+Fathi
+
 
