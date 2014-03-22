@@ -1,34 +1,34 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 63C706F9FA
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 68DE56FA42
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Mar 2014 17:08:50 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id b15so2884673eek.34
+	Sat, 22 Mar 2014 17:12:29 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id c41so2868526eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Mar 2014 10:08:51 -0700 (PDT)
+	Sat, 22 Mar 2014 10:12:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
 	bh=7i48cxVbjqyV2HTvAauSq04jf9SErZlZnzrdaZQo+oQ=;
-	b=y+3UAii8FTlP0iQZDJT9opf/d9rPTakGlDIHHbNarDdbdiTFaqZJqaVn7YqdoO6eM4
-	oUXy43NZrMBAsC9DB5CfkAjFCRw0Hg2TCTn7qjWzJzUHR65mBdyd/8PI38xS2dCm9kiB
-	5j31ynu2rJYJzRo3nPnvN/caS8BVsxoUP7D+KFsxetxbR4tBEbq5XoYX2YFdIHUyJXcG
-	yUnBj30ZiPosQhDa/Pvjy6zzLqv811tA08SSR7Fd/Tb+HrVMMWfkOqUUEGPfTwinmHye
-	18hz1Ja/oIkb5YBMf2Wj7hgW3KBkiKlVlUD2FqyXHgyG7dmcsuCZt521k+LNrDniPjgK
-	OuSg==
-X-Received: by 10.15.68.136 with SMTP id w8mr2221607eex.5.1395508130773;
-	Sat, 22 Mar 2014 10:08:50 -0700 (PDT)
+	b=qDINfemCgqDne/QrviMXJwAObRdB7ZpVFUy1o78/KYwGutSn2mgkF5Kdrd8mgIBSIY
+	UfFD0XnjITBdBCnm+j94GsgN0gZZNE6xo6W/DxF2NkvVzCIwn9R1T5pFcTpmXT6qUO+a
+	eIfmzfpq0m0PJIrF/eMSBqCQAmZHO6MQXnejNkhzl1iB6TPProvBRVDSLwUNPuhm/MC9
+	UiG53z63iEFkGf3waLRPLOHQd17JlKF5S9tV4kTpgxw51gm6ELTAY8APD/XahwgpEdL5
+	nmfX1eRL9eAFtpwb44V71EvE3ad+sG6veaUohh2drBAKOSsw2bnZp6HywB3f7Ui59Lay
+	6Bnw==
+X-Received: by 10.15.22.201 with SMTP id f49mr54629171eeu.18.1395508350660;
+	Sat, 22 Mar 2014 10:12:30 -0700 (PDT)
 Received: from mizar.localdomain
 	(host42-251-dynamic.54-79-r.retail.telecomitalia.it. [79.54.251.42])
-	by mx.google.com with ESMTPSA id
-	w12sm20141351eez.36.2014.03.22.10.08.49 for <multiple recipients>
+	by mx.google.com with ESMTPSA id y7sm1786069eev.5.2014.03.22.10.12.29
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 22 Mar 2014 10:08:50 -0700 (PDT)
+	Sat, 22 Mar 2014 10:12:30 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Mar 2014 18:08:43 +0100
-Message-Id: <1395508123-24358-1-git-send-email-andrea.adami@gmail.com>
+Date: Sat, 22 Mar 2014 18:12:21 +0100
+Message-Id: <1395508341-24472-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [PATCH v3] klibc: restylize a bit the recipes
+Subject: [meta-initramfs][PATCH v3] klibc: restylize a bit the recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Mar 2014 17:08:53 -0000
+X-List-Received-Date: Sat, 22 Mar 2014 17:12:30 -0000
 
 No runtime changes.
 Reorder and fix some typos in the comments.
