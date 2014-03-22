@@ -1,34 +1,34 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 66F326FA30
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 63C706F9FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 22:59:39 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id t10so2347731eei.28
+	Sat, 22 Mar 2014 17:08:50 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so2884673eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Mar 2014 15:59:39 -0700 (PDT)
+	Sat, 22 Mar 2014 10:08:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=bmqg2bjztqTU7qViX6sZ3u22YaV3iIW/runLZ6aEXjA=;
-	b=hb14Ka0MSUO39gVVv6SyteSR69SZ21NujNkLzR76+bspP/DJtuopJjG1vC7fcwwT1F
-	YkjNU0ciZEP2aJoC0SGuLCUKn4iA+jW1ywaivDuhQ3O/FgdG9DKYB28PM3aKarSrJ2oH
-	9p+WJBWM+IOE4lkEb9EBZwYt+gpd6mP+e948vrBWRSwLRaR3bi0VjOrx+xYObvGaUCF8
-	ofkkN21LXTCIKGceipzTUuOldwZju9MqkPRfuoYoLs17AJ/UjlEavxFZjducZ18G4yjr
-	k+yaPCtdlJ1RoMGirG50nfX8GeLAVNQclb74jU0BNRVXKdwh+R/gLqKqlS0on6XjFf/U
-	eTKg==
-X-Received: by 10.14.211.66 with SMTP id v42mr49746127eeo.31.1395442779804;
-	Fri, 21 Mar 2014 15:59:39 -0700 (PDT)
+	bh=7i48cxVbjqyV2HTvAauSq04jf9SErZlZnzrdaZQo+oQ=;
+	b=y+3UAii8FTlP0iQZDJT9opf/d9rPTakGlDIHHbNarDdbdiTFaqZJqaVn7YqdoO6eM4
+	oUXy43NZrMBAsC9DB5CfkAjFCRw0Hg2TCTn7qjWzJzUHR65mBdyd/8PI38xS2dCm9kiB
+	5j31ynu2rJYJzRo3nPnvN/caS8BVsxoUP7D+KFsxetxbR4tBEbq5XoYX2YFdIHUyJXcG
+	yUnBj30ZiPosQhDa/Pvjy6zzLqv811tA08SSR7Fd/Tb+HrVMMWfkOqUUEGPfTwinmHye
+	18hz1Ja/oIkb5YBMf2Wj7hgW3KBkiKlVlUD2FqyXHgyG7dmcsuCZt521k+LNrDniPjgK
+	OuSg==
+X-Received: by 10.15.68.136 with SMTP id w8mr2221607eex.5.1395508130773;
+	Sat, 22 Mar 2014 10:08:50 -0700 (PDT)
 Received: from mizar.localdomain
 	(host42-251-dynamic.54-79-r.retail.telecomitalia.it. [79.54.251.42])
-	by mx.google.com with ESMTPSA id o7sm14725067eew.25.2014.03.21.15.59.38
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	w12sm20141351eez.36.2014.03.22.10.08.49 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Mar 2014 15:59:39 -0700 (PDT)
+	Sat, 22 Mar 2014 10:08:50 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Mar 2014 23:59:26 +0100
-Message-Id: <1395442766-4319-1-git-send-email-andrea.adami@gmail.com>
+Date: Sat, 22 Mar 2014 18:08:43 +0100
+Message-Id: <1395508123-24358-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH v2] klibc: restylize a bit the recipes
+Subject: [PATCH v3] klibc: restylize a bit the recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,7 +42,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Mar 2014 22:59:40 -0000
+X-List-Received-Date: Sat, 22 Mar 2014 17:08:53 -0000
 
 No runtime changes.
 Reorder and fix some typos in the comments.
@@ -51,28 +51,27 @@ Fix bogus PACKAGES_${PN} = "${PN}".
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-devtools/klibc/klcc-cross_2.0.3.bb     | 24 +++++-----
+ .../recipes-devtools/klibc/klcc-cross_2.0.3.bb     | 22 +++++----
  .../klibc/klibc-static-utils_2.0.3.bb              | 13 +++---
  .../recipes-devtools/klibc/klibc-utils.inc         | 14 ++----
  .../recipes-devtools/klibc/klibc-utils_2.0.3.bb    | 13 +++---
  meta-initramfs/recipes-devtools/klibc/klibc.inc    | 52 ++++++++++------------
  .../recipes-devtools/klibc/klibc_2.0.3.bb          |  9 ++--
- 6 files changed, 52 insertions(+), 73 deletions(-)
+ 6 files changed, 51 insertions(+), 72 deletions(-)
 
 diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
-index 068b3d5..7187ba4 100644
+index 068b3d5..7ff9c2e 100644
 --- a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
 +++ b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
 @@ -1,25 +1,29 @@
 -require klibc.inc
  SUMMARY = "The klcc crosscompiler for klibc"
--
+ 
 -SRC_URI += "file://use-env-for-perl.patch"
 -
++require klibc.inc
  DEPENDS = "klibc"
  
-+require klibc.inc
-+
  FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
  
 +SRC_URI += "file://use-env-for-perl.patch"
