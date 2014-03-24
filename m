@@ -1,39 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B8076F9F8
+Return-Path: <stefanx.stanacar@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 08F376FAEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Mar 2014 15:08:41 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id t10so4561145eei.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Mar 2014 08:08:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jtfhCze1Y2PSS/fRiM4J2UC7LPbcEvuVmrB9Jf8rbPQ=;
-	b=PsAlSqRjtg8EuB+NCNb7n2hJOalUTOqsLws5HPrc72p6D40RrNJk+L8OYXIA6VoZff
-	1kHSYLUMz/QIP7K5cbrhtOH+9jccqhyylXPIyVW6V58QJ29ELEBM8ROmYuqp1RQLdpjs
-	wbujoICCxHHGC7ony20dM+XeIKzszSBPkrTuzIJ8shKpZhC9GvefjmglzXhSgKDT7DaZ
-	v1pqOllc98FDKVcrpLWjFnxaX+wuA4+D6Sny2ueChhbaai0s8euo1vdTwE504O4VugPr
-	HnMYsJpz94E5QjLJvORJWGtxBqwTmsU7LhsCtpqzVyr/PHwI9c7IXKABedyAiTIScyVw
-	6AFQ==
-X-Received: by 10.14.194.133 with SMTP id m5mr64324924een.38.1395673721901;
-	Mon, 24 Mar 2014 08:08:41 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	m8sm33747361eeg.11.2014.03.24.08.08.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Mar 2014 08:08:40 -0700 (PDT)
-Date: Mon, 24 Mar 2014 16:08:48 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 24 Mar 2014 17:07:57 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 24 Mar 2014 10:07:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,721,1389772800"; d="scan'208";a="498444645"
+Received: from linux.jf.intel.com (HELO linux.intel.com) ([10.23.219.25])
+	by fmsmga001.fm.intel.com with ESMTP; 24 Mar 2014 10:07:04 -0700
+Received: from firebird.rb.intel.com (firebird.rb.intel.com [10.237.105.160])
+	by linux.intel.com (Postfix) with ESMTP id AF9E76A4083;
+	Mon, 24 Mar 2014 10:06:49 -0700 (PDT)
+From: Stefan Stanacar <stefanx.stanacar@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140324150848.GA29998@jama>
-References: <1377858084-31009-1-git-send-email-b40290@freescale.com>
-	<20130904124920.GE11500@jama>
-MIME-Version: 1.0
-In-Reply-To: <20130904124920.GE11500@jama>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH V4 ] daq: add recipe
+Date: Mon, 24 Mar 2014 19:06:55 +0200
+Message-Id: <1395680815-22420-1-git-send-email-stefanx.stanacar@intel.com>
+X-Mailer: git-send-email 1.8.5.3
+Subject: [meta-oe][PATCH] recipes-extended: add recipe for efivar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,106 +31,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Mar 2014 15:08:44 -0000
-X-Groupsio-MsgNum: 48810
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dDRMvlgZJXvWKvBx"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Mar 2014 17:08:01 -0000
 
---dDRMvlgZJXvWKvBx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+efivar is is a tool to manipulate UEFI variables.
+This is obviously useful only for EFI machines that have
+the efivarfs interface enabled in the kernel config (CONFIG_EFIVAR_FS),
+and mounted (mount -t efivarfs efivarfs /sys/firmware/efi/efivars).
 
-On Wed, Sep 04, 2013 at 02:49:20PM +0200, Martin Jansa wrote:
-> On Fri, Aug 30, 2013 at 06:21:24PM +0800, b40290@freescale.com wrote:
-> > From: Chunrong Guo <B40290@freescale.com>
-> >=20
-> >    *The dump DAQ test the various inline mode features
-> >    *snort depends daq
-> >=20
-> > Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> > ---
-> >  meta-oe/recipes-connectivity/daq/daq_2.0.1.bb      |   16 +++++++++++
-> >  ...le-run-test-program-while-cross-compiling.patch |   29 ++++++++++++=
-++++++++
-> >  2 files changed, 45 insertions(+), 0 deletions(-)
-> >  create mode 100644 meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-> >  create mode 100644 meta-oe/recipes-connectivity/daq/files/disable-run-=
-test-program-while-cross-compiling.patch
-> >=20
-> > diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb b/meta-oe/re=
-cipes-connectivity/daq/daq_2.0.1.bb
-> > new file mode 100644
-> > index 0000000..4c1be44
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-> > @@ -0,0 +1,16 @@
-> > +DESCRIPTION =3D "The dump DAQ test the various inline mode features "
-> > +HOMEPAGE =3D "http://www.snort.org"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9ce51a65dd738dc1ae631d8b21=
-c40e0"
-> > +
-> > +PARALLEL_MAKE =3D ""
-> > +
-> > +DEPENDS =3D "libpcap libpcre "
-> > +
-> > +SRC_URI =3D "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
-> > +            file://disable-run-test-program-while-cross-compiling.patc=
-h "
-> > +
-> > +SRC_URI[md5sum] =3D "044aa3663d44580d005293eeb8ccf175"
-> > +SRC_URI[sha256sum] =3D "ebba87c2ec76ac65d2980934423b0597909caead3a86ce=
-5d1ba1ea6ce518ec6d"
-> > +
-> > +inherit autotools
->=20
-> I don't have more than build log because workspace is already gone, but
-> qemuarm build fails:
->=20
-> ERROR: Function failed: do_install (log file is located at
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
-nux-gnueabi/daq/2.0.1-r0/temp/log.do_install.4742)
-> ERROR: Logfile of failure stored in:
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
-nux-gnueabi/daq/2.0.1-r0/temp/log.do_install.4742
-> Log data follows:
-> | DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common',
-> 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi',
-> 'common']
-> | DEBUG: Executing shell function do_install
-> | NOTE: make
-> DESTDIR=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/arm=
-v5te-oe-linux-gnueabi/daq/2.0.1-r0/image
-> install
-> | make: *** No rule to make target `install'.  Stop.
-> | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_install (log file is located at
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-li=
-nux-gnueabi/daq/2.0.1-r0/temp/log.do_install.4742)
-> NOTE: recipe daq-2.0.1-r0: task do_install: Failed
-> ERROR: Task 19484
-> (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedded/meta-oe/re=
-cipes-connectivity/daq/daq_2.0.1.bb,
-> do_install) failed with exit code '1'
+Sample usage:
+GUID: 4a67b082-0a4c-41cf-b6c7-440b29bb8c4f
+Name: "LoaderEntrySelected"
+Attributes:
+    Boot Service Access
+    Runtime Service Access
+Value:
+00000000  62 00 6f 00 6f 00 74 00  00 00                    |b.o.o.t...      |
 
-Can we fix this please?
+Signed-off-by: Stefan Stanacar <stefanx.stanacar@intel.com>
+---
+ meta-oe/recipes-extended/efivar/efivar_git.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/efivar/efivar_git.bb
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-extended/efivar/efivar_git.bb b/meta-oe/recipes-extended/efivar/efivar_git.bb
+new file mode 100644
+index 0000000..2581a49
+--- /dev/null
++++ b/meta-oe/recipes-extended/efivar/efivar_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Tools to manipulate UEFI variables"
++DESCRIPTION = "efivar provides a simple command line interface to the UEFI variable facility"
++HOMEPAGE = "https://github.com/vathpela/efivar"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++
++DEPENDS = "popt"
++
++SRCREV = "c9e1f24a81b5374408bca5616402276e47171cf7"
++PV = "0.7+git${SRCPV}"
++SRC_URI = "git://github.com/vathpela/efivar.git"
++
++S = "${WORKDIR}/git"
++
++do_install() {
++        oe_runmake install DESTDIR=${D}
++}
+-- 
+1.8.5.3
 
---dDRMvlgZJXvWKvBx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlMwSoAACgkQN1Ujt2V2gBwcawCfb8N/yQ+Y0/LmKyHaYhocrCp3
-GXIAn2vbDYri5fsUc6EJ0DEUqqTnrRlm
-=LS/l
------END PGP SIGNATURE-----
-
---dDRMvlgZJXvWKvBx--
