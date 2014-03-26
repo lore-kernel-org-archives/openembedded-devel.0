@@ -1,35 +1,25 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 768846E835
+Return-Path: <diego.ml@zoho.com>
+Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
+	by mail.openembedded.org (Postfix) with ESMTP id 45D146F6F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 14:14:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id BD155314AC89
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:14:58 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id YZRd9QwA1Liv
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:14:56 +0100 (CET)
-Received: from [172.22.22.61] (55d449bf.access.ecotel.net [85.212.73.191])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id BBF69314AC88
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:14:56 +0100 (CET)
-Message-ID: <5332E0E0.1070206@opendreambox.org>
-Date: Wed, 26 Mar 2014 15:14:56 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
+	Wed, 26 Mar 2014 15:15:42 +0000 (UTC)
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
+	h=from:to:subject:date:message-id; 
+	b=ef/5WDIQXgHlkGQ5xlktdMd6SgmlhrTOw7YSIumAvNxT75CdztWk21F/1RIDBeLKZi4m8JpuKzie
+	vW5TTX8tZc1x3qTRMbno+kXAuBvEsf8bAIY7HFVtNd86DQrwiWg4  
+Received: from localhost.localdomain
+	(host65-246-static.10-188-b.business.telecomitalia.it
+	[188.10.246.65]) by mx.zohomail.com
+	with SMTPS id 1395846941002493.89102521391374;
+	Wed, 26 Mar 2014 08:15:41 -0700 (PDT)
+From: Diego Rondini <diego.ml@zoho.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1395841995-26907-1-git-send-email-net147@gmail.com>
-In-Reply-To: <1395841995-26907-1-git-send-email-net147@gmail.com>
-Subject: Re: [meta-qt5][PATCH] qtwebkit: add missing qtmultimedia DEPENDS
+Date: Wed, 26 Mar 2014 16:14:55 +0100
+Message-Id: <cover.1395846628.git.diego.ml@zoho.com>
+X-Mailer: git-send-email 1.7.9.5
+X-ZohoMailClient: External
+X-Zoho-Virus-Status: 2
+Subject: [meta-oe][PATCH 0/3] Update some python modules to latest upstream versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 14:14:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Mar 2014 15:15:43 -0000
 
-Hi Jonathan,
+This patch-set updates python-zopeinterface, python-twisted and python-autobahn to their latest upstream versions.
 
-On 26.03.2014 14:53, Jonathan Liu wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
-> ---
->  recipes-qt/qt5/qtwebkit.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
-> index 90bd981..536fade 100644
-> --- a/recipes-qt/qt5/qtwebkit.inc
-> +++ b/recipes-qt/qt5/qtwebkit.inc
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://Source/WebCore/rendering/RenderApplet.h;endline=22;md
->                      file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
->                      file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee"
->  
-> -DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
-> +DEPENDS += "qtbase qtdeclarative qtmultimedia icu ruby-native sqlite3 glib-2.0 libxslt"
->  
->  PACKAGECONFIG ??= "gstreamer qtlocation qtsensors"
->  PACKAGECONFIG[gstreamer] = ",,gstreamer1.0 gstreamer1.0-plugins-base"
+The following changes since commit 7dfa6be8c5d9b093ae79c403c685c6b8ed6216dd:
 
-qtwebkit builds fine without qtmultimedia. If it gets autodetected,
-please make it optional.
+  recipes-graphics/lxdm: autotools and config updates (2014-03-23 21:53:58 +0100)
 
-Regards,
-Andreas
+are available in the git repository at:
+
+  git://github.com/diegorondini/meta-oe master
+  https://github.com/diegorondini/meta-oe/tree/master
+
+Diego Rondini (3):
+  python-zopeinterface: upgrade to version 4.1.1
+  python-twisted: upgrade to version 13.2.0
+  python-autobahn: upgrade to version 0.8.6
+
+ ...autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} |    4 ++--
+ ...-twisted_10.2.0.bb => python-twisted_13.2.0.bb} |   16 +++++-----------
+ ...face_3.5.1.bb => python-zopeinterface_4.1.1.bb} |    4 ++--
+ 3 files changed, 9 insertions(+), 15 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} (87%)
+ rename meta-oe/recipes-devtools/python/{python-twisted_10.2.0.bb => python-twisted_13.2.0.bb} (94%)
+ rename meta-oe/recipes-devtools/python/{python-zopeinterface_3.5.1.bb => python-zopeinterface_4.1.1.bb} (84%)
+
+-- 
+1.7.9.5
+
+
 
