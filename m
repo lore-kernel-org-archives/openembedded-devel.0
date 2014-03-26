@@ -1,32 +1,38 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-ve0-f176.google.com (mail-ve0-f176.google.com
-	[209.85.128.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B7BB620B7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id CD7096B819
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 18:12:39 +0000 (UTC)
-Received: by mail-ve0-f176.google.com with SMTP id cz12so2733909veb.21
+	Wed, 26 Mar 2014 18:28:23 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id e53so1989704eek.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 11:12:40 -0700 (PDT)
+	Wed, 26 Mar 2014 11:28:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=q1ngj05UPw5aIBpfgDYui8V5NQ19ICF9sf2U211Nfns=;
-	b=gHGkwuK5BLms0wpooDUPS04ZKppUSPDqtJMkvx+aUqxUn6dPHjD3xnTvhE6tFbvJTB
-	g4ApFDsFWO+2G3Vi5Hy9EBTADvdO4NzltqIshPGXpiwBeBgDLkPo0hDy5otvjVv4yiWm
-	cA6jmXgF6iokb4WPLdMok2lLqG5ZI+UDLL+gQqVAot/JiK9AVMrAs7EEcSibKXM2yj1E
-	zNYvU9LlRzLFsT3brteSeIyir8RcZdwcT/1Hfe1F/2y1pPuMBNtXd5h8oAtikWAJZo7u
-	YWGU1mbIHsfAqA4zq0Io9gxwM76GVSYwSVxTaDwKg7vID6HQT71iUKAa/1MzyI+uZ6xV
-	Tdjw==
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=OvHp4lw+2w8eFQ/OPsDcaK/Iln6xhxXD5brHPa68Pss=;
+	b=WocXu8wPvOvEDf5F4CQOTUPihMyDB4NVTDU/nYk55ewMYkohXFpwQtOyooxeR6lDhX
+	SseNF4cTcasEMQuv6xcQ3U56h2/8sjLyKy0SSkFyATjFqatpdhW6t2LWEQUM+jl5daB3
+	6dOuXeK8f03T3OU6CALLK/8QgCVjkwI0uFekOcocwkYiHJ1eIx7BW6vH7Chf/T8anY6q
+	4slQZbWuUBWQYV3XsNMENusdqR7LUETy1u1sEWVJlBKVgbFo8bWrZFHq+iZ4skZyKc4M
+	eGuksxsUFt7zzy9hIn0jxHuShZ2QXhnsM2zkh0+5weDin6ifMvDIxV+odcQb2lmHQt14
+	ezVA==
+X-Received: by 10.14.179.193 with SMTP id h41mr1272131eem.27.1395858503728;
+	Wed, 26 Mar 2014 11:28:23 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	m42sm48751468eex.21.2014.03.26.11.28.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 26 Mar 2014 11:28:22 -0700 (PDT)
+Date: Wed, 26 Mar 2014 19:28:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140326182821.GG3709@jama>
+References: <CAFeBWL73bvbfgZdNxHJshfLcGrQ647diP24Oy-vHjkCFX6XG+w@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.221.3.195 with SMTP id nz3mr979858vcb.35.1395857548378; Wed,
-	26 Mar 2014 11:12:28 -0700 (PDT)
-Received: by 10.52.85.67 with HTTP; Wed, 26 Mar 2014 11:12:28 -0700 (PDT)
-Date: Wed, 26 Mar 2014 11:12:28 -0700
-Message-ID: <CAFeBWL73bvbfgZdNxHJshfLcGrQ647diP24Oy-vHjkCFX6XG+w@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Warnings during build
+In-Reply-To: <CAFeBWL73bvbfgZdNxHJshfLcGrQ647diP24Oy-vHjkCFX6XG+w@mail.gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: Warnings during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,22 +46,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 18:12:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 Mar 2014 18:28:26 -0000
+X-Groupsio-MsgNum: 48839
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L1c6L/cjZjI9d0Eq"
+Content-Disposition: inline
 
-Hope I am not spamming the list with pesky questions.
-I am getting build warnings similar to below:
+--L1c6L/cjZjI9d0Eq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-WARNING: gtk-immodule-ipa-2.24.22 was registered as shlib provider for
-im-ipa.so, changing it to gtk3-immodule-ipa-3.10.7 because it was built
-later
+On Wed, Mar 26, 2014 at 11:12:28AM -0700, Adam Lee wrote:
+> Hope I am not spamming the list with pesky questions.
+> I am getting build warnings similar to below:
+>=20
+> WARNING: gtk-immodule-ipa-2.24.22 was registered as shlib provider for
+> im-ipa.so, changing it to gtk3-immodule-ipa-3.10.7 because it was built
+> later
+>=20
+>=20
+> The full list of warnings can be found at - http://pastebin.com/quqwCPEq.
+>=20
+> I am not sure what these warnings are. They are definitely new in 1.6. I =
+am
+> trying to figure out if there is something I can do, or if this will be
+> sorted out as we get closer to the 1.6 release date.
 
+See
+http://comments.gmane.org/gmane.comp.handhelds.openembedded/62213
 
-The full list of warnings can be found at - http://pastebin.com/quqwCPEq.
+as long as nothing tries to link against im-ipa.so it's safe and you
+should just list them in PRIVATE_LIBS.
 
-I am not sure what these warnings are. They are definitely new in 1.6. I am
-trying to figure out if there is something I can do, or if this will be
-sorted out as we get closer to the 1.6 release date.
+The warning means that if something links with im-ipa.so then it's not
+known if it will get runtime dependency on gtk-immodule-ipa-2.24.22 or
+gtk3-immodule-ipa-3.10.7 (it will always be the one built later in the
+same sysroot).
 
-Adam
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--L1c6L/cjZjI9d0Eq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMzHEUACgkQN1Ujt2V2gBy9HwCdFIMWe28uD/JtLJIMzQC+0R1Z
+GKUAn3FQWezVc56jQ3IptxA1T4mbFdmv
+=NXKT
+-----END PGP SIGNATURE-----
+
+--L1c6L/cjZjI9d0Eq--
