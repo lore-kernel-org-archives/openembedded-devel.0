@@ -1,36 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 31A3C6E713
+	by mail.openembedded.org (Postfix) with ESMTP id 68E226C735
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 20:43:57 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id e49so2106731eek.11
+	Wed, 26 Mar 2014 20:46:55 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id e49so2099180eek.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 13:43:58 -0700 (PDT)
+	Wed, 26 Mar 2014 13:46:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=4WQW/xDCCMs6euJmVaqeya2q2kG3rvuqSzlAeP0VHJQ=;
-	b=CyPkN/5gRnDAm197r66b7IgRuJqp+LJ8JTiEl2RjRqg5Kk+ZalsUWN3GpqX+l5cyf6
-	zbcFDyDCmmdCXEMbfF6GVMzlvrbc98YZPKRXCR34bfX5W0lveUfMkcYIX8YwUHfoK06H
-	ZdosdXr2Y2/x8olepUNRLw+e/MDOPji8EA4m817tZKDQ89naewyGRPSAAz2gX8uLDlXn
-	Ul/zW59okS/4pai/7kejfTUvlrATSFI6HbTsyGc7eimzn4wmhI5j3+J0h6SFh/wtSlkN
-	xS8RCt6nPj9dGumFxySGxXlRHmc5LatK+/kCLIzNPEkkOOUSLqHiigeczfjOrOksbgc8
-	h7mA==
-X-Received: by 10.15.10.3 with SMTP id f3mr76852020eet.1.1395866638154;
-	Wed, 26 Mar 2014 13:43:58 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=RpVr1Yi1oZ+9xHS4IcmgMxJ4TaVVEdJHyiVv0Sdl1uE=;
+	b=EBDH2jld+XLQ6N3Rl/GtMKanSVxSQW3ann559w5WzPMH5G85e7amUuLBPt5zGCwXVV
+	lndsbS1/509BB+Hldxga/bSfdIBHqs+y3xA8h+TAJdMGHIl48zdwDrxpVzz8TIqLmIfh
+	ucexek7Dd59f4RJjw7MIOE1kY5FW6Eg2WCdWmzo7hYedTNJieLW3c+KSIC2av2tssMwA
+	A2woCWtrsFgyGIpu95X7MjOLoNK4Z8JlkH5XqnE42JRMl5k49/AgH1SfJYCSI2KKBaVW
+	TB9MSEL/XPCuxz/uQ6jW/Fr5i4tRxYITyPla9my2OyvQG23s5sZwRkg3H0Eu2mdT9+wp
+	Zaxw==
+X-Received: by 10.14.182.68 with SMTP id n44mr19725381eem.6.1395866816765;
+	Wed, 26 Mar 2014 13:46:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	l42sm49490574eew.19.2014.03.26.13.43.56 for <multiple recipients>
+	48sm49491517eee.2.2014.03.26.13.46.55
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Mar 2014 13:43:56 -0700 (PDT)
-Date: Wed, 26 Mar 2014 21:43:56 +0100
+	Wed, 26 Mar 2014 13:46:55 -0700 (PDT)
+Date: Wed, 26 Mar 2014 21:46:55 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Lauren Post <lauren.post@freescale.com>
-Message-ID: <20140326204356.GJ3709@jama>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140326204655.GK3709@jama>
+References: <1395326878-6726-1-git-send-email-Matthieu.Crapet@ingenico.com>
 MIME-Version: 1.0
+In-Reply-To: <1395326878-6726-1-git-send-email-Matthieu.Crapet@ingenico.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: glcompbench: Create 2012.08 version
+Subject: Re: [meta-oe][PATCH] open-vcdiff: add new recipe for version 0.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,74 +46,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 20:44:00 -0000
-X-Groupsio-MsgNum: 48842
+X-List-Received-Date: Wed, 26 Mar 2014 20:46:59 -0000
+X-Groupsio-MsgNum: 48843
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SBT+cnFS/G3NVgv4"
+	protocol="application/pgp-signature"; boundary="C7Ke/meiCZutM6I/"
 Content-Disposition: inline
 
---SBT+cnFS/G3NVgv4
+--C7Ke/meiCZutM6I/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Fails to build for qemuarm (looks like missing dependency)
+On Thu, Mar 20, 2014 at 03:47:58PM +0100, Matthieu Crapet wrote:
+> This is Google's implementation of VCDIFF (RFC 3284) delta compression.
+> It's more flexible than Xdelta3 (as a developer point of view).
+
+Fails to build in world:
 
 ERROR: Function failed: do_configure (log file is located at /home/jenkins/=
-oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/glco=
-mpbench/2012.08-r0/temp/log.do_configure.19183)
+oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open=
+-vcdiff/0.8.3-r0/temp/log.do_configure.21351)
 ERROR: Logfile of failure stored in: /home/jenkins/oe/shr-core-branches/shr=
--core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/glcompbench/2012.08-r0/temp/=
-log.do_configure.19183
+-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/temp/lo=
+g.do_configure.21351
 Log data follows:
 | DEBUG: Executing python function sysroot_cleansstate
 | DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux=
+', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_copy_aclocals
+| DEBUG: Python function autotools_copy_aclocals finished
 | DEBUG: Executing shell function do_configure
-| Setting top to                           : /home/jenkins/oe/shr-core-bran=
-ches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/glcompbench/2012.08-=
-r0/glcompbench-2012.08
-| Setting out to                           : /home/jenkins/oe/shr-core-bran=
-ches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/glcompbench/2012.08-=
-r0/glcompbench-2012.08/build
-| Checking for 'g++' (c++ compiler)        : ok
-| Checking for header inttypes.h           : yes
-| Checking for header stdint.h             : yes
-| Checking for header sys/time.h           : yes
-| Checking for library m                   : yes
-| Checking for function gettimeofday       : yes
-| Checking for function sqrt               : yes
-| Checking for function strtol             : yes
-| Checking for function strtoul            : yes
-| Checking for program pkg-config          : /home/jenkins/oe/shr-core-bran=
-ches/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/pkg-config
-| Checking for 'x11'                       : yes
-| Checking for 'xdamage'                   : yes
-| Checking for 'xcomposite'                : not found
-| The configuration failed
-| (complete log in /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/w=
-ork/armv5te-oe-linux-gnueabi/glcompbench/2012.08-r0/glcompbench-2012.08/bui=
-ld/config.log)
+| automake (GNU automake) 1.14
+| Copyright (C) 2013 Free Software Foundation, Inc.
+| License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl-2=
+=2E0.html>
+| This is free software: you are free to change and redistribute it.
+| There is NO WARRANTY, to the extent permitted by law.
+|=20
+| Written by Tom Tromey <tromey@redhat.com>
+|        and Alexandre Duret-Lutz <adl@gnu.org>.
+| AUTOV is 1
+| NOTE: Executing ACLOCAL=3D"aclocal --system-acdir=3D/home/jenkins/oe/shr-=
+core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff=
+/0.8.3-r0/open-vcdiff-0.8.3/aclocal-copy/" autoreconf --verbose --install -=
+-force --exclude=3Dautopoint -I /home/jenkins/oe/shr-core-branches/shr-core=
+/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-=
+0.8.3/gflags/m4 -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/w=
+ork/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/m4/
+| autoreconf: Entering directory `.'
+| autoreconf: configure.ac: not using Gettext
+| autoreconf: running: aclocal --system-acdir=3D/home/jenkins/oe/shr-core-b=
+ranches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3=
+-r0/open-vcdiff-0.8.3/aclocal-copy/ -I /home/jenkins/oe/shr-core-branches/s=
+hr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-=
+vcdiff-0.8.3/gflags/m4 -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-e=
+glibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/=
+m4/ -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-=
+oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/gflags/m4 -I /home/=
+jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnue=
+abi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/m4/ --force -I m4 \
+| aclocal: error: non-option arguments are not accepted: '\'.
+| aclocal: Try '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysr=
+oots/x86_64-linux/usr/bin/aclocal --help' for more information.
+| autoreconf: aclocal failed with exit status: 1
+| ERROR: autoreconf execution failed.
 | WARNING: exit code 1 from a shell command.
 | ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gl=
-compbench/2012.08-r0/temp/log.do_configure.19183)
+s/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/op=
+en-vcdiff/0.8.3-r0/temp/log.do_configure.21351)
 ERROR: Task 5 (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedde=
-d/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb, do_configure=
-) failed with exit code '1'
+d/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb, do_configure) f=
+ailed with exit code '1'
+NOTE: Tasks Summary: Attempted 519 tasks of which 514 didn't need to be rer=
+un and 1 failed.
+
+
+>=20
+> Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+> ---
+>  .../recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb | 20 ++++++++++++++=
+++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3=
+=2Ebb
+>=20
+> diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb b/m=
+eta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
+> new file mode 100644
+> index 0000000..ee08102
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY =3D "An encoder/decoder for the VCDIFF (RFC3284) format"
+> +DESCRIPTION =3D "A library with a simple API is included, as well as a \
+> +               command-line executable that can apply the encoder and \
+> +               decoder to source, target, and delta files. \
+> +               A slight variation from the draft standard is defined \
+> +               to allow chunk-by-chunk decoding when only a partial \
+> +               delta file window is available."
+> +HOMEPAGE =3D "http://code.google.com/p/open-vcdiff/"
+> +SECTION =3D "console/utils"
+> +
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db2c8309843bc5297cfb4dc84f43f3=
+ccc"
+> +
+> +SRC_URI =3D "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "5f848e4916b407879f55e0ca74c3f6af"
+> +SRC_URI[sha256sum] =3D "b7e47db78866082e9e8b5782f5491092c8414f0acc0440ae=
+a03b14c7d1d3c371"
+> +
+> +inherit autotools
+> +
+> +EXTRA_AUTORECONF +=3D " -I ${S}/gflags/m4"
+> --=20
+> 1.8.5.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---SBT+cnFS/G3NVgv4
+--C7Ke/meiCZutM6I/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMzPAwACgkQN1Ujt2V2gBwVjgCeN5JBm7xBo1DlnsY32uBMUf23
-WlYAoJRvED5NViDRiKTsszFCMuLCbC5e
-=Srwh
+iEYEARECAAYFAlMzPL8ACgkQN1Ujt2V2gBw9VACdFhEjBhIEyHd8BRzNPS5eNdv+
+CQQAni0j59GBkfVw/ixRkMebjMdbtklV
+=QE//
 -----END PGP SIGNATURE-----
 
---SBT+cnFS/G3NVgv4--
+--C7Ke/meiCZutM6I/--
