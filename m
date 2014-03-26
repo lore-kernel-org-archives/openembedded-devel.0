@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 68E226C735
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 076AD6EC83
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 20:46:55 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id e49so2099180eek.39
+	Wed, 26 Mar 2014 20:53:25 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id e49so2130842eek.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 13:46:56 -0700 (PDT)
+	Wed, 26 Mar 2014 13:53:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RpVr1Yi1oZ+9xHS4IcmgMxJ4TaVVEdJHyiVv0Sdl1uE=;
-	b=EBDH2jld+XLQ6N3Rl/GtMKanSVxSQW3ann559w5WzPMH5G85e7amUuLBPt5zGCwXVV
-	lndsbS1/509BB+Hldxga/bSfdIBHqs+y3xA8h+TAJdMGHIl48zdwDrxpVzz8TIqLmIfh
-	ucexek7Dd59f4RJjw7MIOE1kY5FW6Eg2WCdWmzo7hYedTNJieLW3c+KSIC2av2tssMwA
-	A2woCWtrsFgyGIpu95X7MjOLoNK4Z8JlkH5XqnE42JRMl5k49/AgH1SfJYCSI2KKBaVW
-	TB9MSEL/XPCuxz/uQ6jW/Fr5i4tRxYITyPla9my2OyvQG23s5sZwRkg3H0Eu2mdT9+wp
-	Zaxw==
-X-Received: by 10.14.182.68 with SMTP id n44mr19725381eem.6.1395866816765;
-	Wed, 26 Mar 2014 13:46:56 -0700 (PDT)
+	bh=Etc5497tgU2km621P6kgQfLLKKF38WRFmBstie4Feww=;
+	b=ifwwmuN/yIQy0GXqJ9XRTN8r7Ll6JOC5caPctozqe89NSHyOW4I5Y+nD6zGU9xHeP+
+	3y0tySYUhoudn02R9ShZbDPk4SNoBX25JpXE+hKLLA0Ta7jMyfHltm4LExgNjilSURRs
+	RuW2ggq0WEyf5rTa7fm8MnXCfWqk2K7BOkHWdxV60gym7KDz1bhfp+CRwa4KpJI/0Tui
+	NXyWkwGeP+MQA3xkaGB6aeD+aVCvayxD3JfLjQ+/TWxkJB+GiooNP/OndTdm3XepOckD
+	1f/6RirRSIJfXeS0dOYkVeE0OouHO/FQ/oZ4/surSX8smJAjKylflghkHvDGx7o+oc3K
+	FbXQ==
+X-Received: by 10.14.225.132 with SMTP id z4mr4094676eep.92.1395867205936;
+	Wed, 26 Mar 2014 13:53:25 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	48sm49491517eee.2.2014.03.26.13.46.55
+	m44sm19141996eep.14.2014.03.26.13.53.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Mar 2014 13:46:55 -0700 (PDT)
-Date: Wed, 26 Mar 2014 21:46:55 +0100
+	Wed, 26 Mar 2014 13:53:23 -0700 (PDT)
+Date: Wed, 26 Mar 2014 21:53:23 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140326204655.GK3709@jama>
-References: <1395326878-6726-1-git-send-email-Matthieu.Crapet@ingenico.com>
+Message-ID: <20140326205323.GL3709@jama>
+References: <cover.1395847615.git.diego.ml@zoho.com>
+	<a3add80fda66a3b3ed601cdf1143297886f9e679.1395847615.git.diego.ml@zoho.com>
 MIME-Version: 1.0
-In-Reply-To: <1395326878-6726-1-git-send-email-Matthieu.Crapet@ingenico.com>
+In-Reply-To: <a3add80fda66a3b3ed601cdf1143297886f9e679.1395847615.git.diego.ml@zoho.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] open-vcdiff: add new recipe for version 0.8.3
+Subject: Re: [meta-oe][PATCHv2 2/3] python-twisted: upgrade to version 13.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,124 +47,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 20:46:59 -0000
-X-Groupsio-MsgNum: 48843
+X-List-Received-Date: Wed, 26 Mar 2014 20:53:29 -0000
+X-Groupsio-MsgNum: 48844
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C7Ke/meiCZutM6I/"
+	protocol="application/pgp-signature"; boundary="O8/n5iBOhiUtMkxf"
 Content-Disposition: inline
 
---C7Ke/meiCZutM6I/
+--O8/n5iBOhiUtMkxf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 20, 2014 at 03:47:58PM +0100, Matthieu Crapet wrote:
-> This is Google's implementation of VCDIFF (RFC 3284) delta compression.
-> It's more flexible than Xdelta3 (as a developer point of view).
+On Wed, Mar 26, 2014 at 04:31:23PM +0100, Diego Rondini wrote:
+> Signed-off-by: Diego Rondini <diego.ml@zoho.com>
 
-Fails to build in world:
+I'm going to add it to master-next, but please send v2 with commit
+message which will say what was changed in license and why PN-bin was
+removed (without upgrade path).
 
-ERROR: Function failed: do_configure (log file is located at /home/jenkins/=
-oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open=
--vcdiff/0.8.3-r0/temp/log.do_configure.21351)
-ERROR: Logfile of failure stored in: /home/jenkins/oe/shr-core-branches/shr=
--core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/temp/lo=
-g.do_configure.21351
-Log data follows:
-| DEBUG: Executing python function sysroot_cleansstate
-| DEBUG: Python function sysroot_cleansstate finished
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux=
-', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing python function autotools_copy_aclocals
-| DEBUG: Python function autotools_copy_aclocals finished
-| DEBUG: Executing shell function do_configure
-| automake (GNU automake) 1.14
-| Copyright (C) 2013 Free Software Foundation, Inc.
-| License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl-2=
-=2E0.html>
-| This is free software: you are free to change and redistribute it.
-| There is NO WARRANTY, to the extent permitted by law.
-|=20
-| Written by Tom Tromey <tromey@redhat.com>
-|        and Alexandre Duret-Lutz <adl@gnu.org>.
-| AUTOV is 1
-| NOTE: Executing ACLOCAL=3D"aclocal --system-acdir=3D/home/jenkins/oe/shr-=
-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff=
-/0.8.3-r0/open-vcdiff-0.8.3/aclocal-copy/" autoreconf --verbose --install -=
--force --exclude=3Dautopoint -I /home/jenkins/oe/shr-core-branches/shr-core=
-/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-=
-0.8.3/gflags/m4 -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/w=
-ork/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/m4/
-| autoreconf: Entering directory `.'
-| autoreconf: configure.ac: not using Gettext
-| autoreconf: running: aclocal --system-acdir=3D/home/jenkins/oe/shr-core-b=
-ranches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3=
--r0/open-vcdiff-0.8.3/aclocal-copy/ -I /home/jenkins/oe/shr-core-branches/s=
-hr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-=
-vcdiff-0.8.3/gflags/m4 -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-e=
-glibc/work/armv5te-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/=
-m4/ -I /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-=
-oe-linux-gnueabi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/gflags/m4 -I /home/=
-jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnue=
-abi/open-vcdiff/0.8.3-r0/open-vcdiff-0.8.3/m4/ --force -I m4 \
-| aclocal: error: non-option arguments are not accepted: '\'.
-| aclocal: Try '/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysr=
-oots/x86_64-linux/usr/bin/aclocal --help' for more information.
-| autoreconf: aclocal failed with exit status: 1
-| ERROR: autoreconf execution failed.
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/op=
-en-vcdiff/0.8.3-r0/temp/log.do_configure.21351)
-ERROR: Task 5 (/home/jenkins/oe/shr-core-branches/shr-core/meta-openembedde=
-d/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb, do_configure) f=
-ailed with exit code '1'
-NOTE: Tasks Summary: Attempted 519 tasks of which 514 didn't need to be rer=
-un and 1 failed.
-
-
->=20
-> Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 > ---
->  .../recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb | 20 ++++++++++++++=
-++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3=
-=2Ebb
+>  ...-twisted_10.2.0.bb =3D> python-twisted_13.2.0.bb} |   16 +++++-------=
+----
+>  1 file changed, 5 insertions(+), 11 deletions(-)
+>  rename meta-oe/recipes-devtools/python/{python-twisted_10.2.0.bb =3D> py=
+thon-twisted_13.2.0.bb} (94%)
 >=20
-> diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb b/m=
-eta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
-> new file mode 100644
-> index 0000000..ee08102
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY =3D "An encoder/decoder for the VCDIFF (RFC3284) format"
-> +DESCRIPTION =3D "A library with a simple API is included, as well as a \
-> +               command-line executable that can apply the encoder and \
-> +               decoder to source, target, and delta files. \
-> +               A slight variation from the draft standard is defined \
-> +               to allow chunk-by-chunk decoding when only a partial \
-> +               delta file window is available."
-> +HOMEPAGE =3D "http://code.google.com/p/open-vcdiff/"
-> +SECTION =3D "console/utils"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db2c8309843bc5297cfb4dc84f43f3=
-ccc"
-> +
-> +SRC_URI =3D "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "5f848e4916b407879f55e0ca74c3f6af"
-> +SRC_URI[sha256sum] =3D "b7e47db78866082e9e8b5782f5491092c8414f0acc0440ae=
-a03b14c7d1d3c371"
-> +
-> +inherit autotools
-> +
-> +EXTRA_AUTORECONF +=3D " -I ${S}/gflags/m4"
+> diff --git a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb b/m=
+eta-oe/recipes-devtools/python/python-twisted_13.2.0.bb
+> similarity index 94%
+> rename from meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+> rename to meta-oe/recipes-devtools/python/python-twisted_13.2.0.bb
+> index d585bfa..00be867 100644
+> --- a/meta-oe/recipes-devtools/python/python-twisted_10.2.0.bb
+> +++ b/meta-oe/recipes-devtools/python/python-twisted_13.2.0.bb
+> @@ -6,12 +6,12 @@ SECTION =3D "console/network"
+> =20
+>  #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rat=
+her than LGPL.
+>  LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc3159ad36d96a939fcd8f2c2c9b9d=
+08a"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5602d7228daf59a16f0f1b2640c46=
+bca"
+>  PR =3D "r3"
+> =20
+> -SRC_URI =3D "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${P=
+V}.tar.bz2 "
+> -SRC_URI[md5sum] =3D "73da62c793269eade8121da336b01ba5"
+> -SRC_URI[sha256sum] =3D "562ed61c18aa72da99c23fb19c2c101d178995eb3a78ab3c=
+09560a613e180c84"
+> +SRC_URI =3D "https://pypi.python.org/packages/source/T/Twisted/Twisted-$=
+{PV}.tar.bz2"
+> +SRC_URI[md5sum] =3D "83fe6c0c911cc1602dbffb036be0ba79"
+> +SRC_URI[sha256sum] =3D "095175638c019ac7c0604f4c291724a16ff1acd062e181b0=
+1293bf4dcbc62cf3"
+> =20
+>  S =3D "${WORKDIR}/Twisted-${PV}"
+> =20
+> @@ -26,7 +26,6 @@ PACKAGES +=3D "\
+>      ${PN}-zsh \
+>      ${PN}-test \
+>      ${PN}-protocols \
+> -    ${PN}-bin \
+>      ${PN}-conch \
+>      ${PN}-lore \
+>      ${PN}-mail \
+> @@ -42,7 +41,6 @@ PACKAGES +=3D "\
+> =20
+>  RDEPENDS_${PN} =3D "python-core python-zopeinterface"
+>  RDEPENDS_${PN} +=3D "\
+> -    ${PN}-bin \
+>      ${PN}-conch \
+>      ${PN}-lore \
+>      ${PN}-mail \
+> @@ -70,11 +68,7 @@ FILES_${PN}-protocols =3D " \
+>  FILES_${PN}-zsh =3D " \
+>      ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
+>      ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
+> -"
+> -
+> -FILES_${PN}-bin =3D " \
+> -    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/_c_urlarg.so=
+ \
+> -    ${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/cBanana.so \
+> +    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/twisted-complet=
+ion.zsh \
+>  "
+> =20
+>  FILES_${PN}-conch =3D " \
 > --=20
-> 1.8.5.4
+> 1.7.9.5
+>=20
 >=20
 > --=20
 > _______________________________________________
@@ -174,16 +148,16 @@ a03b14c7d1d3c371"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---C7Ke/meiCZutM6I/
+--O8/n5iBOhiUtMkxf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlMzPL8ACgkQN1Ujt2V2gBw9VACdFhEjBhIEyHd8BRzNPS5eNdv+
-CQQAni0j59GBkfVw/ixRkMebjMdbtklV
-=QE//
+iEYEARECAAYFAlMzPkMACgkQN1Ujt2V2gBwPIgCfclRY+jdVVLqLsVVBhCIoXBmV
+HmYAn0c2wwk/DxAzoxEFruMfi9nzTcvS
+=AR3R
 -----END PGP SIGNATURE-----
 
---C7Ke/meiCZutM6I/--
+--O8/n5iBOhiUtMkxf--
