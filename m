@@ -1,35 +1,34 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 827126B8BF
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C9766E8A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 21:09:17 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s2QL9CAO005885; Wed, 26 Mar 2014 21:09:12 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 9Q1N15z6QeXe; Wed, 26 Mar 2014 21:09:12 +0000 (GMT)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s2QL96tS005843
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Wed, 26 Mar 2014 21:09:07 GMT
-Message-ID: <1395868139.24890.110.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Adam Lee <adam.yh.lee@gmail.com>
-Date: Wed, 26 Mar 2014 21:08:59 +0000
-In-Reply-To: <CAFeBWL6621Uh34_s8soK39mNM56zRE1-+rKJ0ehRDTDSVdrHfw@mail.gmail.com>
-References: <CAFeBWL6KbMhysVEaXL8aNYdX6pn8BEGOT4hdg9Mnmx1zc4dzSQ@mail.gmail.com>
-	<CAFeBWL6R8N1B5CjKaZawmMUjV7i=ei2BwpMg+v_1is4oFzbGJw@mail.gmail.com>
-	<CAFeBWL7xAbqbsAZhJGaPBrL9DCdctfdau828WzE-Bojynodnsw@mail.gmail.com>
-	<1395821266.24890.80.camel@ted>
-	<CAFeBWL6621Uh34_s8soK39mNM56zRE1-+rKJ0ehRDTDSVdrHfw@mail.gmail.com>
-X-Mailer: Evolution 3.8.4-0ubuntu1 
-Mime-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: exo build fail on master and master-next
+	Wed, 26 Mar 2014 21:27:46 +0000 (UTC)
+Received: by mail-pd0-f179.google.com with SMTP id w10so2412061pde.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Mar 2014 14:27:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=jU+32RRcQPxZkaZLzpKLo7uHAk0GYOpzbc/2YyiIXwE=;
+	b=utaVFmpNONH1PCjGVgg/L8hOKOv9UjxxWML50zqd+9fRVrm8UAPm3MwmhxU3BL+ASb
+	ODCk9rwfb+zqJtYxuYtOR6g2Yp+M7KPYq70ZZB6Lc1oAEuRlqc+ikf4qyUCd662fcYI+
+	nBnFGKbCgGjc/egsKqM8XRPNSN3nxvd58X22wRLPXnXcJ/qBjpnpasxGKLmKoJ4DxCUu
+	mlGeYjGVo+0G9E5ASftGj10mAaEiiq0B4zRlmgucDaFp2eO+fbhE54kPclZIYlQQXYIp
+	KHhwl4FGmWc21YLW4ba9YE+zgBjeUmgJB92xPg7fHxxS+enj5LNVc9UEAh9ScYrRvVrf
+	6Kjg==
+X-Received: by 10.68.196.137 with SMTP id im9mr87382084pbc.105.1395869267979; 
+	Wed, 26 Mar 2014 14:27:47 -0700 (PDT)
+Received: from pine.bchsia.telus.net ([206.116.3.18])
+	by mx.google.com with ESMTPSA id
+	hw8sm62029872pbc.62.2014.03.26.14.27.46 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 26 Mar 2014 14:27:47 -0700 (PDT)
+From: Adam YH Lee <adam.yh.lee@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Mar 2014 14:27:34 -0700
+Message-Id: <1395869254-7092-1-git-send-email-adam.yh.lee@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] exo: Add intltool-native as native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 21:09:21 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Mar 2014 21:27:48 -0000
 
-On Wed, 2014-03-26 at 14:00 -0700, Adam Lee wrote:
-> Hi Richard, thanks for the explanation. It helped me in understanding
-> about the commit. 
-> 
-> 
-> intltool-native builds fine. This suggests me that I have the
-> dependencies requirement for intltool-native. Also I apt-get installed
-> intltool on my build server just in case. However, I still get
-> exo-native build error. Just letting you know, the recipes involved
-> are all under the OE layer (meta-xfce). I am building for Gumstix
-> Overo, which is not the default build target, but this error is not
-> platform dependent. I still get the same result on qemuarm. 
-> 
-> 
-> At any rate, I now know it's a dependency issue, so that's where I
-> will start digging and report back.
+exo-native fails to build due to more strict dependency checking
+introduced in autotools.bbclass. intltool-native should be explicitly
+defined as a dependency.
 
-Right, to be more specific, try adding DEPENDS += "intltool-native" to
-the recipe.
+Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
+---
+ meta-xfce/recipes-xfce/exo/exo_0.10.2.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Cheers,
-
-Richard
-
-
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+index 09aacc3..3eb03bc 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+@@ -3,8 +3,8 @@ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
+-DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native"
+-PR = "r4"
++DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
++PR = "r5"
+ 
+ inherit xfce pythonnative perlnative
+ 
+-- 
+1.7.9.5
 
 
