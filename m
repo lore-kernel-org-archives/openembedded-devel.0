@@ -1,25 +1,29 @@
 Return-Path: <diego.ml@zoho.com>
 Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
-	by mail.openembedded.org (Postfix) with ESMTP id E43CA6DF25
+	by mail.openembedded.org (Postfix) with ESMTP id 8F1BC6FA29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:31:53 +0000 (UTC)
+	Wed, 26 Mar 2014 15:31:56 +0000 (UTC)
 DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:subject:date:message-id; 
-	b=Mbf2qD6ioK1Z+tn1Pn0kK01a3YcTAZPLm+4RlwhX4xf6goktFrSpGcPo1CKM6lAJujjWhBwAB76Z
-	ZN/Nnkof8CFlllNcK94xVrwgfN+MhkbPm84/CHdKVFYZixu5gvTA  
+	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to:references;
+	b=g3gFLmTkQbL834EXufoiMBWD0jEX72lmbdjyfGuu97vzwj5NJkDH9dNPqyGdQsNNvCSS/yFNq1zu
+	vyKpRAL2jvOUJneCGNHexLSPbS2Omt3vCpyqEkUVpdjCgH48ft4m  
 Received: from localhost.localdomain
 	(host65-246-static.10-188-b.business.telecomitalia.it
 	[188.10.246.65]) by mx.zohomail.com
-	with SMTPS id 1395847909337276.2065128903737;
-	Wed, 26 Mar 2014 08:31:49 -0700 (PDT)
+	with SMTPS id 1395847914821921.9607270386933;
+	Wed, 26 Mar 2014 08:31:54 -0700 (PDT)
 From: Diego Rondini <diego.ml@zoho.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Mar 2014 16:31:21 +0100
-Message-Id: <cover.1395847615.git.diego.ml@zoho.com>
+Date: Wed, 26 Mar 2014 16:31:22 +0100
+Message-Id: <ea33b3230c46cae5e5996788dfd8600fdb56609c.1395847615.git.diego.ml@zoho.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1395847615.git.diego.ml@zoho.com>
+References: <cover.1395847615.git.diego.ml@zoho.com>
+In-Reply-To: <cover.1395847615.git.diego.ml@zoho.com>
+References: <cover.1395847615.git.diego.ml@zoho.com>
 X-ZohoMailClient: External
 X-Zoho-Virus-Status: 2
-Subject: [meta-oe][PATCHv2 0/3] Update some python modules to latest upstream versions
+Subject: [meta-oe][PATCHv2 1/3] python-zopeinterface: upgrade to version 4.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,35 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 15:31:56 -0000
+X-List-Received-Date: Wed, 26 Mar 2014 15:31:58 -0000
 
-This patch-set updates python-zopeinterface, python-twisted and python-autobahn to their latest upstream versions.
-
-Changes in v2:
-  - fixed missing Signed off-by
-
-The following changes since commit 7dfa6be8c5d9b093ae79c403c685c6b8ed6216dd:
-
-  recipes-graphics/lxdm: autotools and config updates (2014-03-23 21:53:58 +0100)
-
-are available in the git repository at:
-
-  git://github.com/diegorondini/meta-oe master
-  https://github.com/diegorondini/meta-oe/tree/master
-
-Diego Rondini (3):
-  python-zopeinterface: upgrade to version 4.1.1
-  python-twisted: upgrade to version 13.2.0
-  python-autobahn: upgrade to version 0.8.6
-
- ...autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} |    4 ++--
- ...-twisted_10.2.0.bb => python-twisted_13.2.0.bb} |   16 +++++-----------
+Signed-off-by: Diego Rondini <diego.ml@zoho.com>
+---
  ...face_3.5.1.bb => python-zopeinterface_4.1.1.bb} |    4 ++--
- 3 files changed, 9 insertions(+), 15 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} (87%)
- rename meta-oe/recipes-devtools/python/{python-twisted_10.2.0.bb => python-twisted_13.2.0.bb} (94%)
+ 1 file changed, 2 insertions(+), 2 deletions(-)
  rename meta-oe/recipes-devtools/python/{python-zopeinterface_3.5.1.bb => python-zopeinterface_4.1.1.bb} (84%)
 
+diff --git a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb b/meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb
+similarity index 84%
+rename from meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
+rename to meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb
+index d73a5be..4982ed7 100644
+--- a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
++++ b/meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423
+ PR = "r1"
+ 
+ SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
+-SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
+-SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
++SRC_URI[md5sum] = "edcd5f719c5eb2e18894c4d06e29b6c6"
++SRC_URI[sha256sum] = "91cba7b7cd7cb82f6f4e023fe77f94dc3df4ae5287fd55def2148dc232d0c7da"
+ 
+ S = "${WORKDIR}/zope.interface-${PV}"
+ 
 -- 
 1.7.9.5
 
