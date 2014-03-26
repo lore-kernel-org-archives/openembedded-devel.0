@@ -1,29 +1,34 @@
-Return-Path: <diego.ml@zoho.com>
-Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
-	by mail.openembedded.org (Postfix) with ESMTP id D03FC6FA2F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:32:05 +0000 (UTC)
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to:references;
-	b=LWeLSluZN/zZuKwUtNrQQuxCGolW6uZbv291/+gYz4M+idlkk0vg2uOE/pv9tHkLNotjC1jL6Q9Q
-	1p0dd8L7Hr0PVUhx83FKS0vrHiyE8V9ToGMUT+Z8KZXV60KoUBjX  
-Received: from localhost.localdomain
-	(host65-246-static.10-188-b.business.telecomitalia.it
-	[188.10.246.65]) by mx.zohomail.com
-	with SMTPS id 1395847923480612.6305065302931;
-	Wed, 26 Mar 2014 08:32:03 -0700 (PDT)
-From: Diego Rondini <diego.ml@zoho.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Mar 2014 16:31:24 +0100
-Message-Id: <1dad75368ed6fe55aab3ce0343e0a44f2fc10cb2.1395847615.git.diego.ml@zoho.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1395847615.git.diego.ml@zoho.com>
-References: <cover.1395847615.git.diego.ml@zoho.com>
-In-Reply-To: <cover.1395847615.git.diego.ml@zoho.com>
-References: <cover.1395847615.git.diego.ml@zoho.com>
-X-ZohoMailClient: External
-X-Zoho-Virus-Status: 2
-Subject: [meta-oe][PATCHv2 3/3] python-autobahn: upgrade to version 0.8.6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D6C576EE45;
+	Wed, 26 Mar 2014 17:11:36 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c13so1918949eek.10
+	for <multiple recipients>; Wed, 26 Mar 2014 10:11:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=0YB6i7TlPLSvBcDzG0C+120r8meZiU56EG2PZvTnu+Y=;
+	b=HiuxWelMKy0gQvQAK+lrmQP3eJU3T8yZJYtzQYyL60QTeF9O9SjpQedil/ikVmLwgg
+	A4cHCwPTK7u1P5NzOriR4r9sZF1IH+ngfxHmkTVv865x1hkSA79McpjIb8DYtRCbYYB8
+	ExoDnUYIR+Q3+ygCAymbjf4h8tAU+fgphXAc56YCfPJxOSPkYLsDIwt/ks4utYQy/cjZ
+	MjoH4g4ubwaLyuUGwR5cExKxqcKjBS9P20ySuJ9Mf6JLb/TKUrnMURqDe4KuJ7jV/qSW
+	jHzZiRcBJ8kQL8G3c8xyTvYwsQEG8SVK+JA7XyaM6C4qwRNK3qWPWyjaM5nHWRE2qGZ9
+	oEDA==
+X-Received: by 10.15.63.66 with SMTP id l42mr9495006eex.63.1395853897499;
+	Wed, 26 Mar 2014 10:11:37 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	a42sm30133195ees.10.2014.03.26.10.11.35 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 26 Mar 2014 10:11:36 -0700 (PDT)
+Date: Wed, 26 Mar 2014 18:11:36 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140326171136.GF3709@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: State of bitbake world, Failed tasks 2014-03-26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +42,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 15:32:05 -0000
+X-List-Received-Date: Wed, 26 Mar 2014 17:11:38 -0000
+X-Groupsio-MsgNum: 48837
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Ls2Gy6y7jbHLe9Od"
+Content-Disposition: inline
 
-Signed-off-by: Diego Rondini <diego.ml@zoho.com>
----
- ...autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-autobahn_0.5.14.bb => python-autobahn_0.8.6.bb} (87%)
+--Ls2Gy6y7jbHLe9Od
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb b/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-similarity index 87%
-rename from meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb
-rename to meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-index 0208c8b..a1e8c5f 100644
---- a/meta-oe/recipes-devtools/python/python-autobahn_0.5.14.bb
-+++ b/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-@@ -5,10 +5,10 @@ HOMEPAGE = "http://autobahn.ws/python"
- SECTION = "console/network"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=81964ceb3ab93bfb5e8cfbcd26f3af9c"
-+LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fdeccf6e5b70cda64cc1345597c18e3"
- 
- SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
--SRC_URI[md5sum] = "e2c80ba3e46428b32837537609d4d582"
-+SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
- 
- S = "${WORKDIR}/autobahn-${PV}"
- 
--- 
-1.7.9.5
+On Sun, Mar 23, 2014 at 09:43:24PM +0100, Martin Jansa wrote:
+> On Tue, Mar 18, 2014 at 07:50:08PM +0100, Martin Jansa wrote:
+> > On Sat, Mar 15, 2014 at 03:10:46PM +0100, Martin Jansa wrote:
+> > > On Tue, Mar 11, 2014 at 02:50:14PM +0100, Martin Jansa wrote:
+> > > > On Tue, Mar 11, 2014 at 02:45:04PM +0100, Martin Jansa wrote:
+> > > > > Biggest difference from last e-mail is aclocal changes which can possibly explain
+> > > > > increased number of do_configure failures, I've asked Richard to delay merging B!=S
+> > > > > change until we resolve or at least analyze these new failures, so any help with
+> > > > > would be highly appreciated.
+
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+== Failed tasks 2014-03-26 ==
+
+=== common (16) ===
+    * meta-openembedded/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb, do_configure
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb, do_configure
+    * meta-openembedded/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb, do_compile
+    * meta-openembedded/meta-networking/recipes-support/traceroute/traceroute_2.0.18.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/gnuplot/gnuplot_4.4.4.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/asio/asio_1.4.1.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/inih/libinih_git.bb, do_install
+    * meta-openembedded/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb, do_compile
+    * meta-openembedded/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb, do_configure
+
+=== common-x86 (6) ===
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-efl/recipes-efl/e17/eve_svn.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb, do_configure
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+=== qemuarm (4) ===
+    * meta-openembedded/meta-efl/recipes-efl/e17/e-wm_0.18.4.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_compile
+    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+
+=== qemux86 (3) ===
+    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb, do_compile
+    * meta-openembedded/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_install
+
+=== qemux86_64 (1) ===
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb, do_configure
+
+=== Number of failed tasks ===
+{| class=wikitable
+|-
+||qemuarm       ||20    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140323_205755.log/
+|-
+||qemux86       ||25    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140324_032725.log/
+|-
+||qemux86_64    ||23    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140324_231909.log/
+|}
 
 
+--Ls2Gy6y7jbHLe9Od
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlMzCkgACgkQN1Ujt2V2gBwHPwCfZBvMyc4Dow1gqRTw261GBMU7
+YFgAoLE1X2LapYNzAczIRdzXH50kgoxF
+=rLV5
+-----END PGP SIGNATURE-----
+
+--Ls2Gy6y7jbHLe9Od--
