@@ -1,33 +1,46 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id D93EB60DFA
+Return-Path: <zhenhua.luo@freescale.com>
+Received: from co9outboundpool.messaging.microsoft.com
+	(co9ehsobe004.messaging.microsoft.com [207.46.163.27])
+	by mail.openembedded.org (Postfix) with ESMTP id D1BF16D305
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 08:08:02 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s2Q87u90003209; Wed, 26 Mar 2014 08:07:56 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 6mAe-Glde8h6; Wed, 26 Mar 2014 08:07:56 +0000 (GMT)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s2Q87rJW003205
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Wed, 26 Mar 2014 08:07:54 GMT
-Message-ID: <1395821266.24890.80.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Adam Lee <adam.yh.lee@gmail.com>
-Date: Wed, 26 Mar 2014 08:07:46 +0000
-In-Reply-To: <CAFeBWL7xAbqbsAZhJGaPBrL9DCdctfdau828WzE-Bojynodnsw@mail.gmail.com>
-References: <CAFeBWL6KbMhysVEaXL8aNYdX6pn8BEGOT4hdg9Mnmx1zc4dzSQ@mail.gmail.com>
-	<CAFeBWL6R8N1B5CjKaZawmMUjV7i=ei2BwpMg+v_1is4oFzbGJw@mail.gmail.com>
-	<CAFeBWL7xAbqbsAZhJGaPBrL9DCdctfdau828WzE-Bojynodnsw@mail.gmail.com>
-X-Mailer: Evolution 3.8.4-0ubuntu1 
-Mime-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: exo build fail on master and master-next
+	Wed, 26 Mar 2014 12:22:41 +0000 (UTC)
+Received: from mail214-co9-R.bigfish.com (10.236.132.243) by
+	CO9EHSOBE008.bigfish.com (10.236.130.71) with Microsoft SMTP Server id
+	14.1.225.22; Wed, 26 Mar 2014 12:22:42 +0000
+Received: from mail214-co9 (localhost [127.0.0.1])	by
+	mail214-co9-R.bigfish.com (Postfix) with ESMTP id D814A12022B	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Mar 2014 12:22:41 +0000 (UTC)
+X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
+	H:mail.freescale.net; RD:none; EFVD:NLI
+X-SpamScore: -5
+X-BigFish: VS-5(zz444fMzz1f42h2148h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch1fc6hzz1de098h8275bh1de097hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h268bh1155h)
+Received: from mail214-co9 (localhost.localdomain [127.0.0.1]) by mail214-co9
+	(MessageSwitch) id 1395836560722912_25327;
+	Wed, 26 Mar 2014 12:22:40 +0000 (UTC)
+Received: from CO9EHSMHS022.bigfish.com (unknown [10.236.132.251])	by
+	mail214-co9.bigfish.com (Postfix) with ESMTP id A06702006C;
+	Wed, 26 Mar 2014 12:22:40 +0000 (UTC)
+Received: from mail.freescale.net (70.37.183.190) by CO9EHSMHS022.bigfish.com
+	(10.236.130.32) with Microsoft SMTP Server (TLS) id 14.16.227.3;
+	Wed, 26 Mar 2014 12:22:40 +0000
+Received: from tx30smr01.am.freescale.net (10.81.153.31) by
+	039-SN1MMR1-004.039d.mgd.msft.net (10.84.1.14) with Microsoft SMTP
+	Server (TLS) id 14.3.158.2; Wed, 26 Mar 2014 12:22:39 +0000
+Received: from fly.ap.freescale.net (fly.ap.freescale.net [10.193.20.113])	by
+	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	s2QCMaW1032055; Wed, 26 Mar 2014 05:22:37 -0700
+From: Zhenhua Luo <zhenhua.luo@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Mar 2014 20:22:36 +0800
+Message-ID: <1395836556-24961-1-git-send-email-zhenhua.luo@freescale.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-OriginatorOrg: freescale.com
+X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
+X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
+Cc: b40527@freescale.com
+Subject: [meta-oe v2] lvm2: replace CPPFunction with rl_completion_func_t to fix build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,50 +54,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 08:08:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Mar 2014 12:22:42 -0000
+Content-Type: text/plain
 
-On Tue, 2014-03-25 at 17:46 -0700, Adam Lee wrote:
-> exo-native (one of xfce4-taskmanager deps) was the point of failure.
-> More specifically, exo-native was failing during configuration time. I
-> discovered that, on master-next, exo-native build finishes by
-> reverting this commit in autoconf.bbclass. This commit was new this
-> year in Yocto Project 1.6. I have no idea how this commit breaks
-> exo-native build. So I can't discern if the commit has errors. This
-> still could very be a configuration issue in my build machine. 
->
-> Can anyone take a look at the commit one more time?
->
->On Mon, Mar 24, 2014 at 2:29 PM, Adam Lee <adam.yh.lee@gmail.com>
-wrote:
->         The error is occurring on master-next (and master I presume)
->         when building xfce4-taskmanager (as part of XFCE4 Extended
->         package group). I confirmed it on both qemuarm and on Gumstix
->         Overo as build targets. This tells me it's a bug, but there
->         still might be something unique about my setup. 
->
->         Can anyone verify if xfce4-taskmanager can be built
->         successfully?
->
->         On Fri, Mar 21, 2014 at 2:08 PM, Adam Lee
->         <adam.yh.lee@gmail.com> wrote:
->                 Good day everyone, 
->                 On both master and master-next, I get build fail on
->                 exo like below: 
->                         configure.ac:112: error: possibly undefined macro: AC_PROG_INTLTOOL
->                               If this token and others are legitimate, please use m4_pattern_allow.
->                               See the Autoconf documentation.
+lvm2 depends on readline, CPPFunction has been replaced by rl_completion_func_t
+in recent readline,
 
+Error log:
+| lvm.c: In function 'lvm_shell':
+| lvm.c:189:38: error: 'CPPFunction' undeclared (first use in this function)
+|   rl_attempted_completion_function = (CPPFunction *) _completion;
+|                                       ^
 
-That commit makes the system more strict about dependencies and they're
-probably incorrect in your recipe. The above error suggests you're
-missing a dependency on intltool-native.
+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2.inc              |  1 +
+ ...ace-CPPFunction-with-rl_completion_func_t.patch | 33 ++++++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
 
-Cheers,
-
-Richard
-
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index c2e1007..4b43328 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -9,6 +9,7 @@ INC_PR = "r4"
+ 
+ S = "${WORKDIR}/LVM2.${PV}"
+ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
++           file://0001-Replace-CPPFunction-with-rl_completion_func_t.patch \
+            file://lvm.conf"
+ 
+ PACKAGECONFIG ??= "readline"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
+new file mode 100644
+index 0000000..98c21fd
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
+@@ -0,0 +1,33 @@
++From e2484e179c389b98366c8b66b451d9d2ba8f35e8 Mon Sep 17 00:00:00 2001
++From: Zhenhua Luo <zhenhua.luo@freescale.com>
++Date: Tue, 25 Mar 2014 17:39:43 +0800
++Subject: [PATCH] Replace CPPFunction with rl_completion_func_t
++
++lvm2 depends on readline, CPPFunction has been replaced by rl_completion_func_t
++in recent readline,
++
++Upstream-Status: Inappropriate [configuration]
++The change depends on the build environment, it is required by OpenEmbedded env 
++due to readline upgrade. 
++
++Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
++---
++ tools/lvm.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/tools/lvm.c b/tools/lvm.c
++index e002a76..5fa35d2 100644
++--- a/tools/lvm.c
+++++ b/tools/lvm.c
++@@ -186,7 +186,7 @@ int lvm_shell(struct cmd_context *cmd, struct cmdline_context *cmdline)
++ 	char *input = NULL, *args[MAX_ARGS], **argv;
++ 
++ 	rl_readline_name = "lvm";
++-	rl_attempted_completion_function = (CPPFunction *) _completion;
+++	rl_attempted_completion_function = (rl_completion_func_t *) _completion;
++ 
++ 	_read_history(cmd);
++ 
++-- 
++1.9.1
++
+-- 
+1.9.1
 
 
 
