@@ -1,24 +1,38 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 813306F8E8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 2484D6EA13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Mar 2014 09:46:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s2R9krtR017797
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 27 Mar 2014 11:33:40 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id d49so2786309eek.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Mar 2014 02:46:53 -0700 (PDT)
-Received: from pek-blade16.wrs.com (128.224.153.44) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 27 Mar 2014 02:46:53 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Mar 2014 17:52:55 +0800
-Message-ID: <1395913975-24059-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 27 Mar 2014 04:33:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=gHgXCWvotjqC9ewNqQTHzqZotA2JfcwyWhy27NELamE=;
+	b=ODUHRt/Y3G9T3IDiVB7S6CtMtLqytv39QPSTXqFCfMA0PhN8idY7qWHjfHy58kOfN+
+	eVirhqv6tfU4zCTp791Svx6uvjLuN3v6yMQYh4z1fI+AwmRT5eKSF7Tm7r7D+aNzTMvc
+	GTcHgyoOsAOdUefs6LzAhzT4PepSwtyTWJ5zZ//a2MVoCvSFEyY7CwdJzSTFVKgA+jOo
+	st06IG7pqrMch+0f/Ct2HCY6Cy/oNfYoQ8QxXUC3Xl/SLNwMiIN2T8kJ86s8Srbcrj/r
+	pxt0PQZnNviEMfaUJwLxalaO9FXkDqCMbSRtPnLtG8OcRtQwjatCt3tTimQd1AHSHAVm
+	hU/w==
+X-Received: by 10.14.94.5 with SMTP id m5mr1280976eef.23.1395920020839;
+	Thu, 27 Mar 2014 04:33:40 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q49sm3751174eem.34.2014.03.27.04.33.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Mar 2014 04:33:38 -0700 (PDT)
+Date: Thu, 27 Mar 2014 12:33:39 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140327113339.GO3709@jama>
+References: <5333F1AC.4060807@nedap.com>
 MIME-Version: 1.0
-Subject: [meta-networking] [PATCH] quagga: work with new readline
+In-Reply-To: <5333F1AC.4060807@nedap.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: transitional packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,72 +46,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2014 09:46:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Mar 2014 11:33:43 -0000
+X-Groupsio-MsgNum: 48859
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="96dIhm/ZjrNld+BP"
+Content-Disposition: inline
 
-The Function and CPPFunction had been removed by in readline 6.3, use
-the new functions to replace them.
+--96dIhm/ZjrNld+BP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../quagga/files/work-with-new-readline.patch      | 34 ++++++++++++++++++++++
- .../recipes-protocols/quagga/quagga_0.99.21.bb     |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/quagga/files/work-with-new-readline.patch
+On Thu, Mar 27, 2014 at 10:38:52AM +0100, Jaap de Jong wrote:
+> Hi All,
+>=20
+> for one project I'm still using oe-classic.
+> Would like to upgrade that!
+> I know a simple update will not work because (among others?) package=20
+> names are changed.
+> Is there any effort made to create transitional packages?
 
-diff --git a/meta-networking/recipes-protocols/quagga/files/work-with-new-readline.patch b/meta-networking/recipes-protocols/quagga/files/work-with-new-readline.patch
-new file mode 100644
-index 0000000..2bd333a
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/work-with-new-readline.patch
-@@ -0,0 +1,34 @@
-+From 66df315d2a270a254c613a4d2e72c0ea47f15a71 Mon Sep 17 00:00:00 2001
-+From: Robert Yang <liezhi.yang@windriver.com>
-+Date: Thu, 27 Mar 2014 09:35:29 +0000
-+Subject: [PATCH] vtysh/vtysh.c: works with new readline
-+
-+The Function and CPPFunction had been removed by in readline 6.3, use
-+the new functions to replace them.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-+---
-+ vtysh/vtysh.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/vtysh/vtysh.c b/vtysh/vtysh.c
-+index 431c08e..fdd82fb 100644
-+--- a/vtysh/vtysh.c
-++++ b/vtysh/vtysh.c
-+@@ -2212,9 +2212,9 @@ void
-+ vtysh_readline_init (void)
-+ {
-+   /* readline related settings. */
-+-  rl_bind_key ('?', (Function *) vtysh_rl_describe);
-++  rl_bind_key ('?', (rl_command_func_t *) vtysh_rl_describe);
-+   rl_completion_entry_function = vtysh_completion_entry_function;
-+-  rl_attempted_completion_function = (CPPFunction *)new_completion;
-++  rl_attempted_completion_function = (rl_completion_func_t *)new_completion;
-+   /* do not append space after completion. It will be appended
-+    * in new_completion() function explicitly. */
-+   rl_completion_append_character = '\0';
-+-- 
-+1.8.3.4
-+
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-index db2a67b..0988b70 100644
---- a/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-+++ b/meta-networking/recipes-protocols/quagga/quagga_0.99.21.bb
-@@ -6,6 +6,7 @@ SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
-             file://lingering-IP-address-after-deletion-BZ-486.patch \
-             file://build-fix-extract.pl-for-cross-compilation.patch \
-             file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
-+            file://work-with-new-readline.patch \
- "
- 
- SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
--- 
-1.8.3.1
+I don't know about any.
 
+> If not, would it be a tough job?
 
+Yes, maybe not so bad if you have exactly one starting point and one
+final, but to provide upgrade path from "some" state of binary feeds in
+oe-core to "some" state of binary feeds built with oe-core is very close
+to impossible (as you cannot test every combination).
+
+Some versions went backwards, you need to migrate LOCALCOUNTs to PRSERV
+db a lot of packages were renamed or removed without replacement (so
+they will be stuck in your target image unless you explicitly RCONFLICT
+RREPLACE them from your transitional package), there are upgrade path
+issues even between oe-core revisions.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--96dIhm/ZjrNld+BP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlM0DJMACgkQN1Ujt2V2gBwnKQCgrtoiCKAJUfnjOgVCDLan30Cz
++icAn36e4imG3lGRT4msjO3n05s8rb8p
+=F4yi
+-----END PGP SIGNATURE-----
+
+--96dIhm/ZjrNld+BP--
