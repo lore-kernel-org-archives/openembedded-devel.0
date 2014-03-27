@@ -1,38 +1,36 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-ve0-f172.google.com (mail-ve0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 25A7F6EFCD;
-	Thu, 27 Mar 2014 12:53:47 +0000 (UTC)
-Received: by mail-ve0-f172.google.com with SMTP id jx11so3963502veb.17
-	for <multiple recipients>; Thu, 27 Mar 2014 05:53:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=EdZew7xhYxf9u8K+2bsO5IlwDqX3zePXDDs8+1N51vc=;
-	b=O92RBCHpmKuRYHV1EDaXqVM5sg0F6q0/qktiWWTOB/EyITxwK+hLGnr8k9z3bDmc2j
-	cwmJari6YClc1Sy17x0YAM8nYuFmdRb6smddS21G8sgfu/So+yAu8ZZuWzVTUrJwOkyJ
-	sTXFVMiyIf6hJw7iWiG/T9Z5rulqlOilTnPgQfeUVr4H1MpTRDGSxBjGGoEslyuclN3R
-	WIvqjKaFngWC6+zdcGOLJS3bE6BpnKlDiahNE61LS4rKO+OXJ/2PMbmMEj4MPZ/676wd
-	dPYgq7LsWv+3GJkkyfECBBWp7DxRLWmISTuucRlJh8vY2Yy+ZT3wuQ8a3TqBqaac0x6X
-	oM+w==
-X-Received: by 10.221.22.71 with SMTP id qv7mr223636vcb.34.1395924828175; Thu,
-	27 Mar 2014 05:53:48 -0700 (PDT)
-MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.239.135 with HTTP; Thu, 27 Mar 2014 05:53:08 -0700 (PDT)
-In-Reply-To: <CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
-References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
-	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Thu, 27 Mar 2014 12:53:08 +0000
-X-Google-Sender-Auth: aiKzMXh5yfx2nyT6AUIfG6buXUo
-Message-ID: <CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OE-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] initial support for musl libc with OE/Yocto Project
+Return-Path: <thomas.senyk@pelagicore.com>
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 06F206F69F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2014 14:33:11 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so2991437eei.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2014 07:33:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZnaJaUJQJNWMeubBvroeozKt5j/4mEt0l+4pxGURJYw=;
+	b=ipVyIbLdjPzjxRc7Wj1J0uHDAp3uaz5h+fRCxhylwifRQKxb/bw56n0O801T6t6G2q
+	KLhwPNs1yY+6a4poncRguzj6ncGU8ReRgJC2UPjgsMh2CYSlH80be1ETKTX253ERDus+
+	lz7bZg3eEagm/TsHi6Su4vDduyLfuJqPt8+7NS06NqFOmlXmeEZSzTKHaab31PwwxyJh
+	6Dx/ubKcQ70edkIL+8yV10gxfzz2v5cxsbo7xmeXgEeLZkuEwwYerO6WDuDPfhguiiFz
+	bew4VVc2ypKmGjvtPSk7pNVuTIj+1Otqz6DQtjTrciFMroSDG491sbIt3dJdcwXhBSKt
+	FwXA==
+X-Gm-Message-State: ALoCoQmb6XHG1QUW8e3wL9U7/9amNu7niJUfYD6kHBTE28Zhrg5HYvC4zxUtALVCqh6cr3QmceV9
+X-Received: by 10.15.64.75 with SMTP id n51mr2011163eex.33.1395930792737;
+	Thu, 27 Mar 2014 07:33:12 -0700 (PDT)
+Received: from rudolf.pelagicore.de (ppp-83-171-184-33.dynamic.mnet-online.de.
+	[83.171.184.33])
+	by mx.google.com with ESMTPSA id s46sm4762043ees.3.2014.03.27.07.33.12
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 27 Mar 2014 07:33:12 -0700 (PDT)
+From: Thomas Senyk <thomas.senyk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Mar 2014 15:33:07 +0100
+Message-Id: <1395930787-25372-1-git-send-email-thomas.senyk@pelagicore.com>
+X-Mailer: git-send-email 1.8.5.4
+Subject: [PATCH] qtbase.inc: add -no-xkbcommon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Mar 2014 12:53:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 Mar 2014 14:33:14 -0000
 
-On 26 March 2014 22:12, Burton, Ross <ross.burton@intel.com> wrote:
-> On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
->> There were interest in other threads in having musl as an alternative
->> to eglibc/uclibc that we already have in OE, in that direction I have
->> poured in my on and off work and put it into a contrib tree
->
-> Blimey Khem that was quick. :)
->
+If one builds with xkb, both -no-xkb and
+-no-xkbcommon should be set.
+Without -no-xkbcommon you'll get link-errors
+for libcomposeplatforminputcontextplugin.so
+---
+ recipes-qt/qt5/qtbase.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Agreed!
-
-I wonder if it's worth splitting this out into its own layer though
-(with fixes done via bbappends) so that it's easy for multiple people
-to contribute to. It would also mean it doesn't need rebasing onto
-master all the time.
-
-I'd definitely like to get involved with this. In particular I can
-ensure opkg (both current release and development branch) work with
-musl and see if some of my preferred software from meta-oe will build
-(vim, htop, etc).
-
-Many thanks,
-
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 89736be..8aefb5c 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -105,7 +105,7 @@ PACKAGECONFIG[xsync] = "-xsync,-no-xsync"
+ PACKAGECONFIG[xvideo] = "-xvideo,-no-xvideo"
+ PACKAGECONFIG[openvg] = "-openvg,-no-openvg"
+ PACKAGECONFIG[iconv] = "-iconv,-no-iconv,virtual/libiconv"
+-PACKAGECONFIG[xkb] = "-xkb,-no-xkb,libxkbcommon"
++PACKAGECONFIG[xkb] = "-xkb,-no-xkb -no-xkbcommon,libxkbcommon"
+ PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
+ PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
+ # depends on glib
 -- 
-Paul Barker
+1.8.5.4
 
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
 
