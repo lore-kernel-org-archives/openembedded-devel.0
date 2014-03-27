@@ -1,38 +1,35 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qc0-f177.google.com (mail-qc0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id CCFC16F9B5
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id E8F016F7C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 22:12:28 +0000 (UTC)
-Received: by mail-qc0-f177.google.com with SMTP id w7so3372849qcr.8
+	Thu, 27 Mar 2014 07:50:17 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1WT54p-0008N3-Se for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Mar 2014 08:50:15 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2014 08:50:15 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Mar 2014 15:12:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=50nmTL5dLz6NmmXUFvDffEg7SXoyLOC1CWNUXKv2ff0=;
-	b=UDpc+1PFyRFGF9BAjIeG3v9EeGDTvbTEVrFAmxJ0u+9BW8HQMXGBDWCa1OW0UkQjaY
-	+5KZkqgwzJZqczPrXZ4pfDKP9pLjgj8ydKpFNkWutulbmLaIvAiW2Gt4rwdGZRicX++G
-	XcPSaUWz7Fq9iUvUVHhEWLED+EHzMaP9HtIozFdKQ4IFT9Ylahu9y8DlU3UwFHXAbXsG
-	MgVsTQnFO11zvwnObDIP/8pYlgUGmqkO7bUryvo3z/FuGd04qjj7jN7JEVlLRx4AZqVS
-	6qPrVPK4gseyRv9KsDfWsmCBWMODotmZatEDsCo9g96GDElOBeck4dxw77r1V3SZb5Pg
-	gPHw==
-X-Gm-Message-State: ALoCoQmnxBo75wXZXdV5X9z61x2CD2gci6Qu5x45UMXevtmzUqMFwq7OshpJB43uG4bEOYKR3E7X
-X-Received: by 10.140.106.195 with SMTP id e61mr87427838qgf.66.1395871948717; 
-	Wed, 26 Mar 2014 15:12:28 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.27.167 with HTTP; Wed, 26 Mar 2014 15:12:08 -0700 (PDT)
-In-Reply-To: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
-References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 26 Mar 2014 22:12:08 +0000
-Message-ID: <CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: initial support for musl libc with OE/Yocto Project
+	Thu, 27 Mar 2014 08:50:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 27 Mar 2014 08:50:07 +0100
+Message-ID: <lh0l6v$thv$1@ger.gmane.org>
+References: <cover.1395846628.git.diego.ml@zoho.com>
+	<156960c12dbc26909b9d200cd312e71cd53dbd99.1395846628.git.diego.ml@zoho.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+In-Reply-To: <156960c12dbc26909b9d200cd312e71cd53dbd99.1395846628.git.diego.ml@zoho.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe][PATCH 1/3] python-zopeinterface: upgrade to version 4.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,15 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Mar 2014 22:12:31 -0000
+X-List-Received-Date: Thu, 27 Mar 2014 07:50:20 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
-> There were interest in other threads in having musl as an alternative
-> to eglibc/uclibc that we already have in OE, in that direction I have
-> poured in my on and off work and put it into a contrib tree
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Blimey Khem that was quick. :)
+Diego Rondini schreef op 26-03-14 16:14:
+> --- ...face_3.5.1.bb => python-zopeinterface_4.1.1.bb} |    4 ++-- 1 file
+> changed, 2 insertions(+), 2 deletions(-) rename
+> meta-oe/recipes-devtools/python/{python-zopeinterface_3.5.1.bb =>
+> python-zopeinterface_4.1.1.bb} (84%)
+> 
+> diff --git
+> a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb
+> b/meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb 
+> similarity index 84% rename from
+> meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb rename to
+> meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb index
+> d73a5be..4982ed7 100644 ---
+> a/meta-oe/recipes-devtools/python/python-zopeinterface_3.5.1.bb +++
+> b/meta-oe/recipes-devtools/python/python-zopeinterface_4.1.1.bb @@ -6,8
+> +6,8 @@ LIC_FILES_CHKSUM =
+> "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423 PR = "r1"
 
-Ross
+please drop PR when updating to a new PV
+
+> 
+> SRC_URI =
+> "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
+>
+> 
+- -SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
+> -SRC_URI[sha256sum] =
+> "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0" 
+> +SRC_URI[md5sum] = "edcd5f719c5eb2e18894c4d06e29b6c6" +SRC_URI[sha256sum]
+> = "91cba7b7cd7cb82f6f4e023fe77f94dc3df4ae5287fd55def2148dc232d0c7da"
+> 
+> S = "${WORKDIR}/zope.interface-${PV}"
+> 
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFTM9gvMkyGM64RGpERArdEAJ9b+y+3k8nltoYgoRQ6hN2C5IYr9ACgkRm7
+jTOtCuXbEYyGBii66dKBlXQ=
+=buLP
+-----END PGP SIGNATURE-----
+
 
