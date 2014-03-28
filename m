@@ -1,26 +1,33 @@
-Return-Path: <diego.ml@zoho.com>
-Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
-	by mail.openembedded.org (Postfix) with ESMTP id 32C0A610CD
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id D919C6C735
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 13:40:28 +0000 (UTC)
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:subject:date:message-id:user-agent:mime-version:content-type; 
-	b=QOTUMDLeAEHC+cbQf9e8wZzCMvtYJH1mg+nvUHIG6YeSi4Yzov3PdQ+C2rc7jEdb0Wu+R+RRqCVE
-	1RHP6J9ovZJyhSW5fvzA98bSI3/J/QJHrxJig4rkdZLtifYrt88j  
-Received: from localhost.localdomain
-	(host65-246-static.10-188-b.business.telecomitalia.it
-	[188.10.246.65]) by mx.zohomail.com
-	with SMTPS id 1396014012915278.75034990517383;
-	Fri, 28 Mar 2014 06:40:12 -0700 (PDT)
-From: Diego <diego.ml@zoho.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Mar 2014 14:40:08 +0100
-Message-ID: <45034856.Fj98ikVczS@localhost.localdomain>
-User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
+	Fri, 28 Mar 2014 17:43:26 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id BC2133300C2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Mar 2014 18:43:24 +0100 (CET)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0174.001; Fri, 28 Mar 2014 18:43:22 +0100
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: USB wifi configuration
+Thread-Index: AQHPSq02nxZ52wcuh0uJO2yPO3D9ew==
+Date: Fri, 28 Mar 2014 17:43:22 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA060CB696@SEXCHANGE0100.lpg.priv>
+References: <45034856.Fj98ikVczS@localhost.localdomain>
+In-Reply-To: <45034856.Fj98ikVczS@localhost.localdomain>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.36]
 MIME-Version: 1.0
-X-ZohoMailClient: External
-X-Zoho-Virus-Status: 2
-Subject: ntpd fails to start if libcap not installed
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejuddrgeeiucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
+Subject: USB wifi configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2014 13:40:32 -0000
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Fri, 28 Mar 2014 17:43:29 -0000
+Content-Language: fr-FR
 Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi openembedders!
+Hi,
 
-I've noticed that if ntp is built without libcap, ntpd fails to start from the 
-initscript:
-/etc/init.d/ntpd
+I have a 3.2.30 kernel.
+With DISTRO =3D "angstrom" and DISTRO_VERSION =3D "v2012.05"
 
-giving the error:
-Starting ntpd: /usr/sbin/ntpd: The ``user'' option has been disabled -- built 
-without --enable-clockctl or --enable-linuxcaps
-ntpd - NTP daemon program - Ver. 4.2.6p5
-USAGE:  ntpd [ -<flag> [<val>] | --<name>[{=| }<val>] ]...
+I want to use USB wifi dongle.
 
-That is caused by the line:
-start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid 
-"$@"
+I do "bitbake -c menuconfig virtual/kernel" modifications and put the outpu=
+t file .config in the required directory (renamed in defconfig).
+/networking support / Wireless / ...
+And /Device Drivers/Network device support/Wireless LAN/...
+(I've got RTL8287L (and a netgear WG111v2) waiting for Belkin surf N150 rec=
+eption).
 
-and in particular by the option "-u ntp:ntp" which is not supported which is 
-not supported if ntp is build without --enable-clockctl.
+But I have the error to "iw list" --> "nl80211 not found."
 
-Is anybody else experiencing this problem?
+What am I forgetting.
 
-Bests,
-Diego
+Thanks
+Daniel.
 
 
