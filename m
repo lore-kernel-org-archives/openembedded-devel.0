@@ -1,45 +1,33 @@
-Return-Path: <B40290@freescale.com>
-Received: from va3outboundpool.messaging.microsoft.com
-	(va3ehsobe010.messaging.microsoft.com [216.32.180.30])
-	by mail.openembedded.org (Postfix) with ESMTP id 63ECF6E951
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 439986E951
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 06:03:24 +0000 (UTC)
-Received: from mail146-va3-R.bigfish.com (10.7.14.238) by
-	VA3EHSOBE002.bigfish.com (10.7.40.22) with Microsoft SMTP Server id
-	14.1.225.22; Fri, 28 Mar 2014 06:03:23 +0000
-Received: from mail146-va3 (localhost [127.0.0.1])	by
-	mail146-va3-R.bigfish.com (Postfix) with ESMTP id B27ADE0178	for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 06:03:23 +0000 (UTC)
-X-Forefront-Antispam-Report: CIP:70.37.183.190; KIP:(null); UIP:(null); IPV:NLI;
-	H:mail.freescale.net; RD:none; EFVD:NLI
-X-SpamScore: 0
-X-BigFish: VS0(zze0eahzz1f42h208ch1ee6h1de0h1fdah2073h2146h1202h1e76h2189h1d1ah1d2ah21bch21a7h1fc6hzz1de098h177df4h17326ah8275bh8275dh1de097h186068hz2dh2a8h839hd24he5bhf0ah1288h12a5h12a9h12bdh12e5h137ah139eh13b6h1441h1504h1537h162dh1631h1758h1898h18e1h1946h19b5h1ad9h1b0ah1b2fh2222h224fh1fb3h1d0ch1d2eh1d3fh1dc1h1dfeh1dffh1e23h1fe8h1ff5h2218h2216h226dh22d0h24afh2327h2336h2438h2461h2487h24d7h2516h2545h255eh25cch25f6h2605h268bh1155h)
-Received: from mail146-va3 (localhost.localdomain [127.0.0.1]) by mail146-va3
-	(MessageSwitch) id 1395986601398700_10145;
-	Fri, 28 Mar 2014 06:03:21 +0000 (UTC)
-Received: from VA3EHSMHS018.bigfish.com (unknown [10.7.14.248])	by
-	mail146-va3.bigfish.com (Postfix) with ESMTP id 5ABA740239;
-	Fri, 28 Mar 2014 06:03:21 +0000 (UTC)
-Received: from mail.freescale.net (70.37.183.190) by VA3EHSMHS018.bigfish.com
-	(10.7.99.28) with Microsoft SMTP Server (TLS) id 14.16.227.3;
-	Fri, 28 Mar 2014 06:03:21 +0000
-Received: from tx30smr01.am.freescale.net (10.81.153.31) by
-	039-SN1MMR1-005.039d.mgd.msft.net (10.84.1.17) with Microsoft SMTP
-	Server (TLS) id 14.3.158.2; Fri, 28 Mar 2014 06:03:19 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.136])	by
-	tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	s2S63FsP019572; Thu, 27 Mar 2014 23:03:17 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Mar 2014 14:03:05 +0800
-Message-ID: <1395986585-15248-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.8.3.2
+	Fri, 28 Mar 2014 06:15:59 +0000 (UTC)
+Received: by mail-ie0-f179.google.com with SMTP id lx4so4584028iec.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Mar 2014 23:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=BU+Yw1pf/L7V8E4xFvEzBQDvWQghwmzCXc0HI82yyVs=;
+	b=HursEeEhMvc6czk9b1Pcysbk9gTe8n/MPHw/YQ5dK9ktIHdYh6dzjMzQJ7jiCw0nS4
+	/ZEjeTd66INyI7nd0g6OrETAWBc6uYMq88qMFZMnyn6szV+C1vU0Quw0Bvf1fhpDV4Z3
+	uPi8DaRu36L+yIu9hFF1yqNPveSH8DUxYHX+Nle10pwWs1kIHuRiOVFA0fHvb87n7sXX
+	8M6yq4+Nsi+AIDnVDTFzhJc+1Sr5aNG+rqTGJZqft0XdZvk7Cpt2mt/nQDK64F6arsX4
+	BiPAvgOuplNZVqjFK4MmiM9q6EBN/llfqmjz4Nxk4hqhVaa2NiU8eeNqC4F2KvLrIpv6
+	Kzfw==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-FOPE-CONNECTOR: Id%0$Dn%*$RO%0$TLS%0$FQDN%$TlsDn%
-X-FOPE-CONNECTOR: Id%0$Dn%FREESCALE.MAIL.ONMICROSOFT.COM$RO%1$TLS%0$FQDN%$TlsDn%
-Subject: [meta-oe][PATCH] daq: update to 2.0.2
+X-Received: by 10.42.82.148 with SMTP id d20mr106488icl.50.1395987360175; Thu,
+	27 Mar 2014 23:16:00 -0700 (PDT)
+Received: by 10.65.15.73 with HTTP; Thu, 27 Mar 2014 23:16:00 -0700 (PDT)
+In-Reply-To: <1393618507-29414-3-git-send-email-obi@opendreambox.org>
+References: <1393618507-29414-1-git-send-email-obi@opendreambox.org>
+	<1393618507-29414-3-git-send-email-obi@opendreambox.org>
+Date: Thu, 27 Mar 2014 23:16:00 -0700
+Message-ID: <CAJ86T=VCOWmE-eyYvpKLjfYhgyFSn0URjo_9yu7V9OGoUUD8aA@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH 3/3] qtwebkit: add packageconfig for gstreamer, qtlocation and qtsensors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,36 +41,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2014 06:03:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 28 Mar 2014 06:16:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Chunrong Guo <B40290@freescale.com>
+On Fri, Feb 28, 2014 at 12:15 PM, Andreas Oberritter
+<obi@opendreambox.org> wrote:
+> Use gstreamer for 1.x, gstreamer010 for 0.10.x.
+>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  recipes-qt/qt5/qtwebkit.inc | 24 +++++++++++++++++++++++-
+>  1 file changed, 23 insertions(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+> index c35504e..90bd981 100644
+> --- a/recipes-qt/qt5/qtwebkit.inc
+> +++ b/recipes-qt/qt5/qtwebkit.inc
+> @@ -5,7 +5,29 @@ LIC_FILES_CHKSUM = "file://Source/WebCore/rendering/RenderApplet.h;endline=22;md
+>                      file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
+>                      file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee"
+>
+> -DEPENDS += "qtdeclarative qtlocation qtsensors icu ruby-native sqlite3 glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base libxslt"
+> +DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
+> +
+> +PACKAGECONFIG ??= "gstreamer qtlocation qtsensors"
+> +PACKAGECONFIG[gstreamer] = ",,gstreamer1.0 gstreamer1.0-plugins-base"
+> +PACKAGECONFIG[gstreamer010] = ",,gstreamer gst-plugins-base"
+> +PACKAGECONFIG[qtlocation] = ",,qtlocation"
+> +PACKAGECONFIG[qtsensors] = ",,qtsensors"
+> +
+> +do_configure_prepend() {
+> +    # disable gstreamer-1.0 test if it isn't enabled by PACKAGECONFIG
+> +    sed -e 's/\s\(packagesExist(".*\<gstreamer-1.0\>.*")\)/ OE_GSTREAMER_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+> +    # disable gstreamer-0.10 test if it isn't enabled by PACKAGECONFIG
+> +    sed -e 's/\s\(packagesExist(".*\<gstreamer-0.10\>.*")\)/ OE_GSTREAMER010_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+> +    # disable qtlocation test if it isn't enabled by PACKAGECONFIG
+> +    sed -e 's/\s\(qtHaveModule(positioning)\)/ OE_QTLOCATION_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+> +    # disable qtsensors test if it isn't enabled by PACKAGECONFIG
+> +    sed -e 's/\s\(qtHaveModule(sensors)\)/ OE_QTSENSORS_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+> +}
+> +
+> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gstreamer', 'CONFIG+=OE_GSTREAMER_ENABLED', '', d)}"
+> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gstreamer010', 'CONFIG+=OE_GSTREAMER010_ENABLED', '', d)}"
+> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtlocation', 'CONFIG+=OE_QTLOCATION_ENABLED', '', d)}"
+> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtsensors', 'CONFIG+=OE_QTSENSORS_ENABLED', '', d)}"
+>
+>  # qtwebkit gets terribly big when linking with all debug info, disable by default
+>  QTWEBKIT_DEBUG = "QMAKE_CFLAGS+=-g0 QMAKE_CXXFLAGS+=-g0"
+> --
+> 1.8.3.2
+>
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- meta-oe/recipes-connectivity/daq/{daq_2.0.1.bb => daq_2.0.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/daq/{daq_2.0.1.bb => daq_2.0.2.bb} (73%)
+Hi,
 
-diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
-similarity index 73%
-rename from meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-rename to meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
-index c12ccde..2675e2a 100644
---- a/meta-oe/recipes-connectivity/daq/daq_2.0.1.bb
-+++ b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
-@@ -10,7 +10,7 @@ DEPENDS = "libpcap libpcre "
- SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
-             file://disable-run-test-program-while-cross-compiling.patch "
- 
--SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
--SRC_URI[sha256sum] = "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
-+SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
-+SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
- 
- inherit autotools
--- 
-1.8.3.2
+With this change I'm seeing that the CONFIG+= options from the qmake
+command line are being added to CONFIG after features.prf has already
+been evaluated. Therefore OE_GSTREAMER_ENABLED etc evaluates as false
+and qtwebkit is always configured without video support.
 
+From the configure log:
 
+> ! Missing GStreamer or QtMultimedia, disabling HTML5 media element support
+
+From the qmake debug log:
+
+> DEBUG 1: ... features.prf:106: condition "OE_GSTREAMER_ENABLED" is false (around line 5480 of the log)
+> ...
+> DEBUG 1: (command line):65535: CONFIG := ... OE_GSTREAMER_ENABLED (around line 5802 of the log, just prior to starting on WebKit.pro).
+
+I'm testing with dora + master branch of meta-qt5.
+
+Andre
+--
 
