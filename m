@@ -1,30 +1,34 @@
-Return-Path: <diego.ml@zoho.com>
-Received: from sender1.zohomail.com (sender1.zohomail.com [72.5.230.95])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D1A96B593
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id E60836C735
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 18:04:56 +0000 (UTC)
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:cc:subject:date:message-id:user-agent:in-reply-to:references:mime-version:content-type;
-	b=Wc332j9rMOveGNizA8bSUR/JI8aopmaFKqGq5XPkn5b/gN/kHtAwz1KjKsbqz1dRMlix1Q9+eLqt
-	qCjEzHk69vSfHLT+uH85dpzxzBTQdfbYnl4Kt7vB3MdJXPvQ7yIa  
-Received: from localhost.localdomain
-	(host65-246-static.10-188-b.business.telecomitalia.it
-	[188.10.246.65]) by mx.zohomail.com
-	with SMTPS id 1396029894291338.47695786418547;
-	Fri, 28 Mar 2014 11:04:54 -0700 (PDT)
-From: Diego <diego.ml@zoho.com>
-To: Philip Balister <philip@balister.org>
-Date: Fri, 28 Mar 2014 19:04:50 +0100
-Message-ID: <1487041.bBRm1EH4qA@localhost.localdomain>
-User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
-In-Reply-To: <5335B790.1010107@balister.org>
-References: <45034856.Fj98ikVczS@localhost.localdomain>
-	<5335B790.1010107@balister.org>
-MIME-Version: 1.0
-X-ZohoMailClient: External
-X-Zoho-Virus-Status: 2
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: ntpd fails to start if libcap not installed
+	Fri, 28 Mar 2014 18:23:48 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id lj1so5346407pab.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Mar 2014 11:23:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=aEtYgH9fEgrWJhrafmLCsKZwTM5gz3faN1coKpEyUTI=;
+	b=ttwsdZD2F9TP1QWeD3pnkKws4qHSMoUeBTVafRqwT9e1P3kvnXjKF6TBqU1PylEbN+
+	q1HTbECpYQ4aOZIQsesqzXSHyvgP9TgL/VDYmHpdNWRRJiQHFSBQUxHxRnNbVV7WJCAT
+	/gqrP2WomiLbzMlgs5chbAi7Nhuvry1lfKIAFz4E1Fkes3lyX7RwMqaZu7DQO99MGl/j
+	sE+hfuRD7wqs+794hLKQa6OEmRXhj2RFuUIqcvfQsCQ3y3/5Hh/ZaV3oDz1BLRxNpVM2
+	rYHk606RCopcj3lSp1rVIh17SJ5kfmACYy0ZZb2YrTPJ+3x7uWTfkCWRmU+KX9QQquS5
+	njVw==
+X-Received: by 10.66.240.103 with SMTP id vz7mr10183635pac.37.1396031029423;
+	Fri, 28 Mar 2014 11:23:49 -0700 (PDT)
+Received: from pine.bchsia.telus.net ([206.116.3.18])
+	by mx.google.com with ESMTPSA id j3sm26106526pbh.38.2014.03.28.11.23.48
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 28 Mar 2014 11:23:48 -0700 (PDT)
+From: Adam YH Lee <adam.yh.lee@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 28 Mar 2014 11:23:29 -0700
+Message-Id: <1396031009-15874-1-git-send-email-adam.yh.lee@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-gnome][PATCH] gvfs-gdu-volume-monitor: Define build dependency on libgnome-keyring
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,63 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2014 18:04:58 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 28 Mar 2014 18:23:51 -0000
 
-In data venerd=EC 28 marzo 2014 10:55:28, Philip Balister ha scritto:
-> On 03/28/2014 06:40 AM, Diego wrote:
-> > Hi openembedders!
-> >=20
-> > I've noticed that if ntp is built without libcap, ntpd fails to sta=
-rt from
-> > the initscript:
-> > /etc/init.d/ntpd
-> >=20
-> > giving the error:
-> > Starting ntpd: /usr/sbin/ntpd: The ``user'' option has been disable=
-d --
-> > built without --enable-clockctl or --enable-linuxcaps
-> > ntpd - NTP daemon program - Ver. 4.2.6p5
-> > USAGE:  ntpd [ -<flag> [<val>] | --<name>[{=3D| }<val>] ]...
-> >=20
-> > That is caused by the line:
-> > start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p
-> > /var/run/ntp.pid "$@"
-> >=20
-> > and in particular by the option "-u ntp:ntp" which is not supported=
- which
-> > is not supported if ntp is build without --enable-clockctl.
-> >=20
-> > Is anybody else experiencing this problem?
->=20
-> Oddly enough, I was about to report the symptom today also :)
->=20
-> Any ntp experts know what the proper solution is? I'd be glad to prop=
-ose
-> a patch.
->=20
+Build fails due to missing libgnome-keyring static library
+(libgnome-keyring.la). libgnome-keyring has to be
+explicitly listed as one of the dependencies.
 
-Hi Philip,
+Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
+---
+ .../gvfs/gvfs-gdu-volume-monitor_1.10.1.bb         |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-I'd like to rephrase better my statement, as I put two errors in it:
-The problem is caused by the option "-u ntp:ntp" which is not supported=
- if ntp=20
-is build without "--enable-linuxcaps".
-
-As far as the manual goes, the "--enable-clockctl" is a build option fo=
-r=20
-NetBSD:
-http://www.eecis.udel.edu/~mills/ntp/html/ntpd.html
-
-Removing the "-u ntp:ntp" makes the initscript work, but I don't know i=
-f=20
-shipping different ntpd initscripts based on pkgconfig is the correct t=
-hing to=20
-do. Any expert opinion?
-
-Bests,
-Diego
-
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
+index bd6d9de..cf0ab0c 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
+@@ -2,8 +2,7 @@ require gvfs.inc
+ 
+ BPN = "gvfs"
+ 
+-DEPENDS = "gvfs gnome-disk-utility"
+-
++DEPENDS = "gvfs gnome-disk-utility libgnome-keyring"
+ PR = "${INC_PR}.0"
+ 
+ # we need gdu files only: reduce files to delete in libexecdir
+-- 
+1.7.9.5
 
 
