@@ -1,29 +1,34 @@
-Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D7A560B9B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Mar 2014 21:08:15 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N3700AIWUPG47C0@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	29 Mar 2014 16:08:04 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3A3302011D; Sat,
-	29 Mar 2014 17:08:03 -0400 (EDT)
-Date: Sat, 29 Mar 2014 17:08:03 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20140329210803.GR3370@denix.org>
-References: <lauren.post@freescale.com>
-	<1394227575-27897-1-git-send-email-lauren.post@freescale.com>
-	<20140328180000.GM3370@denix.org>
-	<CAP9ODKoM+pLGvXT6EkboDjSwcPhWqERCq86eznqZP5yvf1k7qg@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAP9ODKoM+pLGvXT6EkboDjSwcPhWqERCq86eznqZP5yvf1k7qg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][PATCH 1/7] linuxptp: Create 1.4 version
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 38F2F60C02;
+	Sat, 29 Mar 2014 22:54:30 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id c41so5233717eek.22
+	for <multiple recipients>; Sat, 29 Mar 2014 15:54:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=aMShy379O/U1MddT1/3rr68iWFZUctuKdbH+GnYIBWk=;
+	b=pczfOeeKrbG5+a6N7ftrL+IaHAZg3QzDEYlfY/2M1JgeIrsIFrWPKyLBgPgfWNR7jD
+	zOGtSeitXjf5wVBFC0rqBomsG6Ah1Znez1t9XGAk9fpoBkBhWoPQ1lwc4ZtjOAnvac1Z
+	gW2YvCLaZbXwvZ9FqOauhtFqglyDgDoDbX9N6O2gv8pJVqpo8x1Y76Qbb+79twbD/U2q
+	CWytBKPrzs+qzEgVpBEEc0T2zgSauVaFO1blvrJ2AUPoDMbe3bs6MQNvhRo7GVQOCsL/
+	P5sI9qtn+11M99h0H1IVGfmeX/XI/pAqsvTBhxXzEl1rn+N4gsGOUpgF2uK3KT3psV7d
+	sUSA==
+X-Received: by 10.15.54.137 with SMTP id t9mr19864631eew.39.1396133669655;
+	Sat, 29 Mar 2014 15:54:29 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	x45sm21651323eef.15.2014.03.29.15.54.28 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 29 Mar 2014 15:54:28 -0700 (PDT)
+Date: Sat, 29 Mar 2014 23:54:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140329225432.GA2428@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: State of bitbake world, Failed tasks 2014-03-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,98 +42,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Mar 2014 21:08:18 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 29 Mar 2014 22:54:34 -0000
+X-Groupsio-MsgNum: 48892
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="r5Pyd7+fXNt84Ff3"
+Content-Disposition: inline
 
-On Sat, Mar 29, 2014 at 03:40:30PM -0300, Otavio Salvador wrote:
-> Hello Denys,
-> 
-> On Fri, Mar 28, 2014 at 3:00 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > On Fri, Mar 07, 2014 at 03:26:09PM -0600, Lauren Post wrote:
-> >> Precision Time Protocol (PTP) according to IEEE standard 1588
-> >
-> > Heh, another instance of "duplication" - I also have a similar recipe in my
-> > layer... Well, I do understand that "the early bird gets the worm" or the
-> > first submitter gets his change merged, but let me point out few issues:
-> 
-> This is the price of 'late upstreaming' :-(
+--r5Pyd7+fXNt84Ff3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Understood, see above :) There are many other factors involved, but we are 
-trying to improve in this regard...
+On Wed, Mar 26, 2014 at 06:11:36PM +0100, Martin Jansa wrote:
+> On Sun, Mar 23, 2014 at 09:43:24PM +0100, Martin Jansa wrote:
+> > On Tue, Mar 18, 2014 at 07:50:08PM +0100, Martin Jansa wrote:
+> > > On Sat, Mar 15, 2014 at 03:10:46PM +0100, Martin Jansa wrote:
+> > > > On Tue, Mar 11, 2014 at 02:50:14PM +0100, Martin Jansa wrote:
+> > > > > On Tue, Mar 11, 2014 at 02:45:04PM +0100, Martin Jansa wrote:
+> > > > > > Biggest difference from last e-mail is aclocal changes which ca=
+n possibly explain
+> > > > > > increased number of do_configure failures, I've asked Richard t=
+o delay merging B!=3DS
+> > > > > > change until we resolve or at least analyze these new failures,=
+ so any help with
+> > > > > > would be highly appreciated.
 
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-> >> Signed-off-by: Lauren Post <lauren.post@freescale.com>
-> >> ---
-> >>  .../recipes-connectivity/linuxptp/linuxptp_1.4.bb  |   26 ++++++++++++++++++++
-> >>  1 file changed, 26 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> >>
-> >> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> >> new file mode 100644
-> >> index 0000000..c708b13
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> >> @@ -0,0 +1,26 @@
-> >> +DESCRIPTION = "Precision Time Protocol (PTP) according to IEEE standard 1588 for Linux"
-> >> +LICENSE = "GPLv2"
-> >> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> >> +
-> >> +DEPENDS = "virtual/kernel"
-> >> +
-> >> +SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz"
-> >> +
-> >> +SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
-> >> +SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
-> >> +
-> >> +inherit autotools pkgconfig
-> >
-> > It's easy to see that linuxptp build doesn't really use autotools or pkgconfig
-> 
-> What you suggest here?
+=3D=3D Failed tasks 2014-03-29 =3D=3D
 
-Obviously, drop that line altogether :) There's nothing to inherit here.
+=3D=3D=3D common (23) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
+bb, do_compile
+    * meta-openembedded/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.=
+30.3.bb, do_configure
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/libdc1394/libdc1=
+394_git.bb, do_configure
+    * meta-openembedded/meta-networking/recipes-protocols/quagga/quagga_0.9=
+9.21.bb, do_compile
+    * meta-openembedded/meta-networking/recipes-support/traceroute/tracerou=
+te_2.0.18.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_i=
+nstall
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-extended/gnuplot/gnuplot_4.4.4.bb, =
+do_compile
+    * meta-openembedded/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8=
+=2E0.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb,=
+ do_configure
+    * meta-openembedded/meta-oe/recipes-multimedia/sound-themes/sound-theme=
+-freedesktop_0.8.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-navigation/monav/monav_0.3.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-support/asio/asio_1.4.1.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-support/inih/libinih_git.bb, do_ins=
+tall
+    * meta-openembedded/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8=
+=2E3.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb, =
+do_configure
+    * meta-openembedded/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb, =
+do_configure
+    * meta-openembedded/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-task=
+manager_git.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-panel-plugins/closebutton/xfce4-c=
+losebutton-plugin_git.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-setting=
+s_git.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-xfce/xfwm4/xfwm4_git.bb, do_confi=
+gure
 
+=3D=3D=3D common-x86 (3) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
 
-> >> +EXTRA_OEMAKE = 'KBUILD_OUTPUT="${STAGING_KERNEL_DIR}" CROSS_COMPILE="${TARGET_PREFIX}"'
-> >> +
-> >> +do_configure_append () {
-> >> +    find ${S} -name makefile | xargs sed -i 's,^\(CC\|CFLAGS\|prefix\|AR\)=,\1 ?=,g'
-> >
-> > Why do you need to mangle the makefile? Passing CROSS_COMPILE and maybe ARCH
-> > should be enough, isn't it?
-> 
-> In fact I guess we do. Otherwise the build system won't use the build
-> flags we expect, will it?
+=3D=3D=3D qemuarm (3) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_=
+compile
+    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+    * openembedded-core/meta/recipes-support/libunistring/libunistring_0.9.=
+3.bb, do_compile
 
-What about "prefix" then?
+=3D=3D=3D qemux86 (1) =3D=3D=3D
+    * meta-openembedded/meta-initramfs/recipes-kernel/linux/linux-yocto-tin=
+y-kexecboot_3.10.bb, do_compile
 
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
 
-> >> +}
-> >> +
-> >> +do_install () {
-> >> +    install -d ${D}/${bindir}
-> >> +    install -p ${S}/ptp4l  ${D}/${bindir}
-> >> +    install -p ${S}/pmc  ${D}/${bindir}
-> >> +    install -p ${S}/phc2sys  ${D}/${bindir}
-> >> +    install -p ${S}/hwstamp_ctl  ${D}/${bindir}
-> >> +}
-> >
-> > And the last bit about dependency on virtual/kernel above and passing
-> > KBUILD_OUTPUT=STAGING_KERNEL_DIR to the build - I have looked into what that
-> > does and it tries to locate the correct /usr/include/linux/net_tstamp.h just
-> > to see if it contains definition for HWTSTAMP_TX_ONESTEP_SYNC. But that header
-> > file hasn't changed in at least 5 years. Anyway, the result of the check is to
-> > pass some defines to their build. I ended up just short-cutting the check and
-> > avoid unnecessary dependency on virtual/kernel:
-> 
-> Oh good hint here. This is indeed a nice boost in build and avoids
-> rebuild when kernel changes.
-> 
-> Could you share this change?
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||26    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140327_005335.log/
+|-
+||qemux86       ||27    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140327_235230.log/
+|-
+||qemux86_64    ||27    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140329_001343.log/
+|}
 
-Sure, I can send a patch to address the above.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
--- 
-Denys
+--r5Pyd7+fXNt84Ff3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlM3TygACgkQN1Ujt2V2gBwHsACfZyboX8tZWAq5jbI7rbbt10jE
+rHgAn2dNZKgTSvn3TeY0u0rM1/vDzwUz
+=OrTr
+-----END PGP SIGNATURE-----
+
+--r5Pyd7+fXNt84Ff3--
