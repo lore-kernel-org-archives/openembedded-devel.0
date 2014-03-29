@@ -1,34 +1,29 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E60836C735
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 952C660577
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 18:23:48 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id lj1so5346407pab.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Mar 2014 11:23:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=aEtYgH9fEgrWJhrafmLCsKZwTM5gz3faN1coKpEyUTI=;
-	b=ttwsdZD2F9TP1QWeD3pnkKws4qHSMoUeBTVafRqwT9e1P3kvnXjKF6TBqU1PylEbN+
-	q1HTbECpYQ4aOZIQsesqzXSHyvgP9TgL/VDYmHpdNWRRJiQHFSBQUxHxRnNbVV7WJCAT
-	/gqrP2WomiLbzMlgs5chbAi7Nhuvry1lfKIAFz4E1Fkes3lyX7RwMqaZu7DQO99MGl/j
-	sE+hfuRD7wqs+794hLKQa6OEmRXhj2RFuUIqcvfQsCQ3y3/5Hh/ZaV3oDz1BLRxNpVM2
-	rYHk606RCopcj3lSp1rVIh17SJ5kfmACYy0ZZb2YrTPJ+3x7uWTfkCWRmU+KX9QQquS5
-	njVw==
-X-Received: by 10.66.240.103 with SMTP id vz7mr10183635pac.37.1396031029423;
-	Fri, 28 Mar 2014 11:23:49 -0700 (PDT)
-Received: from pine.bchsia.telus.net ([206.116.3.18])
-	by mx.google.com with ESMTPSA id j3sm26106526pbh.38.2014.03.28.11.23.48
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 28 Mar 2014 11:23:48 -0700 (PDT)
-From: Adam YH Lee <adam.yh.lee@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Mar 2014 11:23:29 -0700
-Message-Id: <1396031009-15874-1-git-send-email-adam.yh.lee@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-gnome][PATCH] gvfs-gdu-volume-monitor: Define build dependency on libgnome-keyring
+	Sat, 29 Mar 2014 06:24:30 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s2T6OSCm014985
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 28 Mar 2014 23:24:28 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
+	Fri, 28 Mar 2014 23:24:27 -0700
+Message-ID: <5336670E.4050808@windriver.com>
+Date: Sat, 29 Mar 2014 14:24:14 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+MIME-Version: 1.0
+To: Tim Orling <ticotimo@gmail.com>, Paul Eggleton
+	<paul.eggleton@linux.intel.com>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
+	<1391410275-31251-9-git-send-email-ticotimo@gmail.com>
+In-Reply-To: <1391410275-31251-9-git-send-email-ticotimo@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-perl][PATCH v2 08/10] libmodule-build-tiny-perl: add 0.030
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,32 +37,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Mar 2014 18:23:51 -0000
+X-List-Received-Date: Sat, 29 Mar 2014 06:24:35 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Build fails due to missing libgnome-keyring static library
-(libgnome-keyring.la). libgnome-keyring has to be
-explicitly listed as one of the dependencies.
+On 02/03/2014 02:51 PM, Tim Orling wrote:
+> [Description from CPAN]
+> Many Perl distributions use a Build.PL file instead of a
+> Makefile.PL file to drive distribution configuration, build, test and
+> installation. Traditionally, Build.PL uses Module::Build as the underlying
+> build system. This module provides a simple, lightweight, drop-in replacement.
+>
+> Signed-off-by: Tim Orling <ticotimo@gmail.com>
+> ---
+>   .../libmodule/libmodule-build-tiny-perl_0.030.bb   |   54 ++++++++++++++++++++
+>   1 file changed, 54 insertions(+)
+>   create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+>
+> diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+> new file mode 100644
+> index 0000000..fadd9c7
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+> @@ -0,0 +1,54 @@
+> +SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
+> +DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
+> +Makefile.PL file to drive distribution configuration, build, test and \
+> +installation. Traditionally, Build.PL uses Module::Build as the underlying \
+> +build system. This module provides a simple, lightweight, drop-in replacement. \
+> +Whereas Module::Build has over 6,700 lines of code; this module has less than \
+> +120, yet supports the features needed by most distributions."
+> +SECTION = "libs"
+> +
+> +HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
+> +
+> +LICENSE = "Artistic-1.0 | GPL-1.0+"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=aaca61412962cf972aec0cdad99d0a84"
+> +
+> +DEPENDS = "libextutils-config-native libextutils-helpers-native libextutils-installpaths-native"
+> +
+Hi Tim,
 
-Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
----
- .../gvfs/gvfs-gdu-volume-monitor_1.10.1.bb         |    3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Not found '"libextutils-config-native libextutils-helpers-native 
+libextutils-installpaths-native"',
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
-index bd6d9de..cf0ab0c 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs-gdu-volume-monitor_1.10.1.bb
-@@ -2,8 +2,7 @@ require gvfs.inc
- 
- BPN = "gvfs"
- 
--DEPENDS = "gvfs gnome-disk-utility"
--
-+DEPENDS = "gvfs gnome-disk-utility libgnome-keyring"
- PR = "${INC_PR}.0"
- 
- # we need gdu files only: reduce files to delete in libexecdir
--- 
-1.7.9.5
+Is '*-perl-*' missing ?
+
+$ bitbake libmodule-build-tiny-perl
+Loading cache: 100% 
+|#########################################################################################################| 
+ETA:  00:00:00
+Loaded 1243 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing PROVIDES 'libextutils-config-native' (but 
+/home/jiahongxu/yocto/meta-openembedded/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb 
+DEPENDS on or otherwise requires it). Close matches:
+   libextutils-config-perl-native
+   libextutils-config-perl
+   libextutils-cppguess-perl-native
+ERROR: Required build target 'libmodule-build-tiny-perl' has no 
+buildable providers.
+Missing or unbuildable dependency chain was: 
+['libmodule-build-tiny-perl', 'libextutils-config-native']
+
+Hi Paul & Tim,
+
+Sorry for the late reply, the inaccurate email fillter
+rules caused me missing the meta-perl mail, I have fixed it,
+and put them as prior.
+
+//Hongxu
+
+> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "1c54bf4c602eec87f98950314699402e"
+> +SRC_URI[sha256sum] = "dfd418ad0e8290cf645ab11be209a1bf6865e5a562c5a1592da99d5fd24718a8"
+> +
+> +S = "${WORKDIR}/Module-Build-Tiny-${PV}"
+> +
+> +inherit cpan_build
+> +
+> +do_install () {
+> +        cpan_build_do_install
+> +}
+> +
+> +RDEPENDS_${PN} = " libextutils-config-perl \
+> +                   libextutils-helpers-perl \
+> +                   libextutils-installpaths-perl \
+> +                   perl-module-xsloader \
+> +                   perl-module-file-spec \
+> +                   perl-module-io-handle \
+> +                   perl-module-tap-harness-env \
+> +                   perl-module-ipc-open3 \
+> +                   perl-module-file-path \
+> +                   perl-module-cpan-meta \
+> +                   perl-module-extutils-cbuilder \
+> +                   perl-module-getopt-long \
+> +                   perl-module-extutils-makemaker \
+> +                   perl-module-exporter \
+> +                   perl-module-carp \
+> +                   perl-module-test-more \
+> +                   perl-module-text-parsewords \
+> +                   perl-module-module-load \
+> +                   perl-module-file-temp \
+> +                   perl-module-data-dumper \
+> +                   perl-module-extutils-parsexs \
+> +                   perl-module-pod-man \
+> +                   perl-module-json-pp \
+> +"
+> +
+> +BBCLASSEXTEND = "native"
 
 
