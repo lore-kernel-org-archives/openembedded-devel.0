@@ -1,37 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F7DC60B9B;
-	Sun, 30 Mar 2014 04:17:51 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id rl12so6495087iec.36
-	for <multiple recipients>; Sat, 29 Mar 2014 21:17:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=LSzDWOR1aZKndf+wo2l1XB+HOzk49oTtbjGB2zx0czw=;
-	b=HSPnYFSAEXwu7kPMWsuGH6ag5u0QSvf2RmBbGeihBMiRzOmMzvmHk512iANSfDd6Ji
-	ivarna/XuYo+Jc1siTueb3cbQepRGTZtSNWmsw/zKzieAqj9/ou5rFEMqydSiInnbZbf
-	yI5UJM1uaU8UmqUdi4JvyIU0CrLZH9osB+aHkFLZP9BNwwMjhviIbmvggqXsRvUSB72t
-	TsGvck0TqDFJn15mKX/gF3LPB7qgBRQwLyCN5t1yOBU6s9sHfAGRhUtRbPEnOhzzLD9Q
-	rcR2inDRjPQB2MFpTASPzDoyq3P9PYhs2w9kkpyYkFsCFtpp2gqBnMZR73mzzYiMmWcF
-	StNA==
-X-Received: by 10.43.50.65 with SMTP id vd1mr457582icb.79.1396153072097; Sat,
-	29 Mar 2014 21:17:52 -0700 (PDT)
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id C1842621BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Mar 2014 05:33:48 +0000 (UTC)
+Received: by mail-ob0-f179.google.com with SMTP id va2so7819111obc.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Mar 2014 22:33:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=enf4AM8rgiPph3vk/JLkAKkP2994eV1t6ZKA1BQ7tUQ=;
+	b=FEdOdeoHqWxFmutrFXUFrz3mQWcdrrO9MYa86YORZRnUpNBYYBhr5SNTXZ5ibBocPk
+	19jrL1ZxCIkkevBIZfapLM6YczwbkXIVHQpMlKSH6MELUXs1VaZkGvonoBpZiSygOFZf
+	WJWD5itPxN2VyY1P0vt+g2Yq/s2OcUffWsVPH9cQufvqcusx3cKKFRb3PwEdydF5uuj8
+	IL1V7zf2FXvxbDw2SGxrZkzCOobxgoKtQvZlDH5pCHX7wEjV6FBoiAJW73WW5iPmdpF2
+	vEWybSV91XXXlrplbjhLPd9CJKZFAjsJl62WDkBxDYKYskmr4Kf+Q0kUEG3cxaE+jWEF
+	PBFA==
+X-Gm-Message-State: ALoCoQnsF8xToWEXXH3fSXhcJ7NgKfeedPqATNyjkwDPjiZnqLQ/wW050rIq4f+fbiOEdaKH08hP
+X-Received: by 10.182.24.8 with SMTP id q8mr417066obf.38.1396157629148;
+	Sat, 29 Mar 2014 22:33:49 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158]) by mx.google.com with ESMTPSA id
+	oz15sm43998858oeb.13.2014.03.29.22.33.48 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 29 Mar 2014 22:33:48 -0700 (PDT)
+Message-ID: <5337ACBB.4040804@linaro.org>
+Date: Sun, 30 Mar 2014 01:33:47 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
 MIME-Version: 1.0
-Received: by 10.50.224.136 with HTTP; Sat, 29 Mar 2014 21:17:22 -0700 (PDT)
-In-Reply-To: <CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
-References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
-	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
-	<CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 29 Mar 2014 21:17:22 -0700
-Message-ID: <CAMKF1sqPB+QCvPHHcxsU+ExBmNWg9jPXajkAR_FdKpJ76-x9dg@mail.gmail.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] initial support for musl libc with OE/Yocto Project
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+References: <20140330013103.GD2428@jama>
+In-Reply-To: <20140330013103.GD2428@jama>
+Subject: Re: [OE-core] Quality of meta-oe metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,51 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Mar 2014 04:17:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 30 Mar 2014 05:33:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Mar 27, 2014 at 5:53 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
-> On 26 March 2014 22:12, Burton, Ross <ross.burton@intel.com> wrote:
->> On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
->>> There were interest in other threads in having musl as an alternative
->>> to eglibc/uclibc that we already have in OE, in that direction I have
->>> poured in my on and off work and put it into a contrib tree
->>
->> Blimey Khem that was quick. :)
->>
->
-> Agreed!
->
-> I wonder if it's worth splitting this out into its own layer though
+Hello Martin,
 
-I thought about it and since class/conf changes that need to go in into OE-core
-first I kept it as it is (lazyness too). I think once the core support
-is available in OE-core
-we can spin the recipes into a layer of its own.
+Excellent, excellent post!
 
-> (with fixes done via bbappends) so that it's easy for multiple people
-> to contribute to. It would also mean it doesn't need rebasing onto
-> master all the time.
->
-> I'd definitely like to get involved with this. In particular I can
-> ensure opkg (both current release and development branch) work with
-> musl and see if some of my preferred software from meta-oe will build
-> (vim, htop, etc).
+On 03/29/14 21:31, Martin Jansa wrote:
+> 2) There are a lot of changes and component upgrades in oe-core which
+>    sometimes aren't very straight-forward to adapt to and issues stay in
+>    meta-oe for months.
 
-start with what we have. Once master opens up I would propose the needed
-changes to OE-core and spin a layer
+Critical bugfixes aside, I think the current system of unrestrained,
+perpetual package bumps is an issue. If dylan uses version 1 of package
+XYZ and dora uses version 5, is there any need for the 3 intervening
+package bumps which occurred between the release of dylan and dora?
 
->
-> Many thanks,
->
-> --
-> Paul Barker
->
-> Email: paul@paulbarker.me.uk
-> http://www.paulbarker.me.uk
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+If nothing else, these "irrelevant updates" increase the chance of
+causing problems ;-)
+
+> 3) OE releases work great and don't invalidate sstate signatures so often, so my
+>    feeling is that most developers and projects are just using releases and
+>    less and less people do CI.
+
+Would users prefer a better-tested more-likely-to-work release
+containing package versions which were several months old, or is staying
+on the bleeding edge more important? There is always exponentially more
+work/cost required to be an early adopter.
 
