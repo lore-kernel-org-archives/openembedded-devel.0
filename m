@@ -1,35 +1,35 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C2DC46B8D1
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CC4F660DFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Mar 2014 00:08:00 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id y20so6393604ier.41
+	Sun, 30 Mar 2014 00:17:27 +0000 (UTC)
+Received: by mail-ie0-f172.google.com with SMTP id as1so6463424iec.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Mar 2014 17:08:01 -0700 (PDT)
+	Sat, 29 Mar 2014 17:17:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=4r/WpYeEryw/QNyBB5G9SQ9s/gVnRDuKVewcsBtJT4g=;
-	b=vOI1BwrR+6Z/PpqUSHLiZ2gfkzURP3iIzZ3Ib8cDzW7TRNDqRwbJRgMAQU5pWk04BD
-	ftSXUs04ZWsCg4k6CTEF23c16iBw9HhUUYZ1Y0UWAQiyWBWmnr4fiBPTsM0+EkdTqOnD
-	uiaHcodRr5c8xSY7baDc8+vogOh9fOpU0QSfttq+wWcRhq7LBsnOMbGym6wMBUslH2IU
-	YnxDkSA0vtMcc/KcV4qMlOOXeZPGerq2DfFTvp+uG1TagQJveIP8QXNaC86vZWuODiMc
-	P7yPV2FKYVRQr2BaLJ9/bnX4/iNYwJ7aaEVAnPTKF6qG3i88WfXseRjfEG6RQRDt3A7X
-	FbOg==
-X-Received: by 10.43.150.80 with SMTP id kn16mr474686icc.63.1396138080911;
-	Sat, 29 Mar 2014 17:08:00 -0700 (PDT)
+	:cc:content-type;
+	bh=vNHZZPUk33il5FJXZ74G68O8jmn8tUCg/TKIaQVAQnk=;
+	b=yCOSfT/1k9DXuVcGAdTFi4IdCrycHdgMaNtm34r/hXhPw2om9HZsSZ96YX6MRPIIGm
+	akxCcwfoY3OrxiX9MTy3Xwhdn9lkQwM5JBrcXaxsdmIK8QNKq6I24fbAg4r0vOVRnzmG
+	0FOOwb4hg59SAB7EKkO/9xIl/Dh7CKul5T0+YINWP0Fe3wlx0GmcBRQzcAlSN+fEFCdj
+	6oD2Qr2HtTLx0VPmHjnBV96vnh2zm72dbzUXCeqvcIM0ukSqOm+fU+iitO0h2j5QYEK1
+	jl/2YEO/6MMNFHJhW/a9XS+uAXR6+Tx8HD9z6ZdrgZEbbrlFVMf1xmxejEFxjRariOaM
+	bsSA==
+X-Received: by 10.42.197.129 with SMTP id ek1mr19146452icb.9.1396138648341;
+	Sat, 29 Mar 2014 17:17:28 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.224.136 with HTTP; Sat, 29 Mar 2014 17:07:30 -0700 (PDT)
-In-Reply-To: <1487041.bBRm1EH4qA@localhost.localdomain>
-References: <45034856.Fj98ikVczS@localhost.localdomain>
-	<5335B790.1010107@balister.org>
-	<1487041.bBRm1EH4qA@localhost.localdomain>
+Received: by 10.50.224.136 with HTTP; Sat, 29 Mar 2014 17:16:58 -0700 (PDT)
+In-Reply-To: <5316DE87.7090906@linaro.org>
+References: <1391518370-19990-1-git-send-email-koen.kooi@linaro.org>
+	<20140305041901.GU26981@jama> <5316AB64.3080501@linaro.org>
+	<20140305055717.GV26981@jama> <5316DE87.7090906@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 29 Mar 2014 17:07:30 -0700
-Message-ID: <CAMKF1sqgL7ZH+c8JLdw6MjQCj0CiRVV3hNqOxx4of5Jota4Lgg@mail.gmail.com>
+Date: Sat, 29 Mar 2014 17:16:58 -0700
+Message-ID: <CAMKF1soo+m6dBiHr9FrHxowjJokE8HMoGEOq+EoEaB3XwRLY-A@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: ntpd fails to start if libcap not installed
+Subject: Re: [meta-oe][PATCH] mongodb: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,68 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Mar 2014 00:08:00 -0000
+X-List-Received-Date: Sun, 30 Mar 2014 00:17:28 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 28, 2014 at 11:04 AM, Diego <diego.ml@zoho.com> wrote:
-> In data venerd=C3=AC 28 marzo 2014 10:55:28, Philip Balister ha scritto:
->> On 03/28/2014 06:40 AM, Diego wrote:
->> > Hi openembedders!
->> >
->> > I've noticed that if ntp is built without libcap, ntpd fails to start =
-from
->> > the initscript:
->> > /etc/init.d/ntpd
->> >
->> > giving the error:
->> > Starting ntpd: /usr/sbin/ntpd: The ``user'' option has been disabled -=
--
->> > built without --enable-clockctl or --enable-linuxcaps
->> > ntpd - NTP daemon program - Ver. 4.2.6p5
->> > USAGE:  ntpd [ -<flag> [<val>] | --<name>[{=3D| }<val>] ]...
->> >
->> > That is caused by the line:
->> > start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p
->> > /var/run/ntp.pid "$@"
->> >
->> > and in particular by the option "-u ntp:ntp" which is not supported wh=
-ich
->> > is not supported if ntp is build without --enable-clockctl.
->> >
->> > Is anybody else experiencing this problem?
->>
->> Oddly enough, I was about to report the symptom today also :)
->>
->> Any ntp experts know what the proper solution is? I'd be glad to propose
->> a patch.
->>
+>> Yup, 4.8 from oe-core.
 >
-> Hi Philip,
 >
-> I'd like to rephrase better my statement, as I put two errors in it:
-> The problem is caused by the option "-u ntp:ntp" which is not supported i=
-f ntp
-> is build without "--enable-linuxcaps".
+> These atomic ops *are* available for gcc 4.8, but it doesn't advertise them
+> for armv5te. There are 2 solutions:
 >
-> As far as the manual goes, the "--enable-clockctl" is a build option for
-> NetBSD:
-> http://www.eecis.udel.edu/~mills/ntp/html/ntpd.html
->
-> Removing the "-u ntp:ntp" makes the initscript work, but I don't know if
-> shipping different ntpd initscripts based on pkgconfig is the correct thi=
-ng to
-> do. Any expert opinion?
->
+> 1) CFLAGS += -D__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4=1
 
-remove the cap PKGCONFIG its redundant and everything in recipe wants
-it enabled, it was  added just for having consistent builds otherwise
-it was autodetected by autotools and if you had libpcap staged then it
-was enabled automatically otherwisie not.
+this is a quick solution but make it CFLAGS_append_arm instead, it
+really should be fixed in
+mongodb package itself if its just using sync_compare_and_swap only
+atomic then it will work on
+armv4+ platforms
 
-so you can either change PACKAGECONFIG ??=3D "" to PACKAGECONFIG_append =3D=
- " cap"
-
-or remove this completely and add the dependencies on libcap unconditionall=
-y.
+> 2) Add a block to that files that tests for gcc > 4.7.0 (that's what fedora
+> does)
+>
+> I'll see if I can find time to fix this next week.
+>
+>
+> --
+> Koen Kooi
+> Builds and Baselines | Release Manager
+> Linaro.org | Open source software for ARM SoCs
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
