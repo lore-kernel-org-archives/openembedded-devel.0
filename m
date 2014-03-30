@@ -1,39 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EA1360577;
-	Sun, 30 Mar 2014 16:49:22 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id uq10so2563223igb.1
-	for <multiple recipients>; Sun, 30 Mar 2014 09:49:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=5Al5/FZ2kxxiUfdyrWsgveSCpkHrhs0vDjL0xOwcolc=;
-	b=QinPuqVV2P8BAkJpjDiq99EoNvTLSP3NEfJ9jK5xPIHEyGXkjut9R+CLvX8GsoO2Ev
-	4JRqBI1eS7XQmHnS2B+MHlDYKX3hsE+wH42bNzoIUU3dgYOw30RSfmiGfIUgpe1Zlird
-	jiqIjg/+O11TPrOfGYs+iXoibsg3nkpBLbbZFhR4FfrlOKpGwR3sUZEW1TC9WjfdhlAR
-	PDTTJN/NYqBcN9qcWZe8d2HmJRuqJaszocjbSTvI7DKJLnNHwfQkQWuf4D/JoWdb5ez0
-	D+91vuzqY/ZNE8PLHe7vughIs80z6kuVFqjFTVVa2t4O6YtbDYgEaHzz1B8NLQeaUNJX
-	BsXQ==
-X-Received: by 10.42.40.83 with SMTP id k19mr24411244ice.3.1396198163685; Sun,
-	30 Mar 2014 09:49:23 -0700 (PDT)
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F1FF6E7CC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Mar 2014 20:51:16 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id uz6so8266638obc.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Mar 2014 13:51:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=mPQEQ+3UvJ8naSoDTolIeJOO+APzMLv4v32RaLrmf3I=;
+	b=cBqzhGaXQeR3+YEYMNyT3tlyZhd6B+C8NRc8PsXjGMs/k0lqidCGMqesd9vBSpFvV6
+	FkNP9uWdc1le/NuQhv31atlT9HsD+eceJGTkqcvgu27hs8E/7/fiMEJJ6fP1xYIhT6h/
+	6COTUkkHxApb97b1Mo6Sc4FJ5Gawgb1YuB+IZGMC1BM+R/8OlMMArtM4PPkXCSnSGWq4
+	JZIq8dzT3763+baKXqGVJ3kOjJZD4LS9KiotkMXEQC9Z3/2ib+G0dB6qIApfCs8Pr+hl
+	SOnECT/y4MmDTboRuRh0VLmKVYEeEk6sBdCdVdUlmNiNikDjMHHJXZTyYmVrrdYp1139
+	YzRg==
+X-Gm-Message-State: ALoCoQnlW/BX3wlfKrofOfYEn2XbJX1txXfGfEP7JVSo23jQims/aaH4txoEwMSQScw6ezFYLsWx
+X-Received: by 10.60.155.180 with SMTP id vx20mr18455891oeb.28.1396212677577; 
+	Sun, 30 Mar 2014 13:51:17 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id j1sm4228462obw.7.2014.03.30.13.51.16
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 30 Mar 2014 13:51:16 -0700 (PDT)
+Message-ID: <533883C0.3000508@linaro.org>
+Date: Sun, 30 Mar 2014 16:51:12 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
 MIME-Version: 1.0
-Received: by 10.50.229.14 with HTTP; Sun, 30 Mar 2014 09:48:53 -0700 (PDT)
-In-Reply-To: <CANyK_8er+2sjvU1csLOEpZ06qCL4h+bP2ecUYYGzyiEw0kXzQw@mail.gmail.com>
-References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
-	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
-	<CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
-	<CAMKF1sqPB+QCvPHHcxsU+ExBmNWg9jPXajkAR_FdKpJ76-x9dg@mail.gmail.com>
-	<CANyK_8er+2sjvU1csLOEpZ06qCL4h+bP2ecUYYGzyiEw0kXzQw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 30 Mar 2014 09:48:53 -0700
-Message-ID: <CAMKF1spno7Np8FXr3JXw3_W72+vRkchzZ8J5X+3e4RCFY+6nLg@mail.gmail.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] initial support for musl libc with OE/Yocto Project
+To: openembedded-devel@lists.openembedded.org
+References: <1386455381-40913-1-git-send-email-ulf@emagii.com>
+In-Reply-To: <1386455381-40913-1-git-send-email-ulf@emagii.com>
+Cc: Ulf Samuelsson <ulf@emagii.com>
+Subject: Re: [PATCH] xfconfig: use sysroot and target perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,73 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Mar 2014 16:49:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 30 Mar 2014 20:51:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Mar 30, 2014 at 8:43 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
-> On 30 March 2014 05:17, Khem Raj <raj.khem@gmail.com> wrote:
->> On Thu, Mar 27, 2014 at 5:53 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
->>> On 26 March 2014 22:12, Burton, Ross <ross.burton@intel.com> wrote:
->>>> On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
->>>>> There were interest in other threads in having musl as an alternative
->>>>> to eglibc/uclibc that we already have in OE, in that direction I have
->>>>> poured in my on and off work and put it into a contrib tree
->>>>
->>>> Blimey Khem that was quick. :)
->>>>
->>>
->>> Agreed!
->>>
->>> I wonder if it's worth splitting this out into its own layer though
->>
->> I thought about it and since class/conf changes that need to go in into OE-core
->> first I kept it as it is (lazyness too). I think once the core support
->> is available in OE-core
->> we can spin the recipes into a layer of its own.
->>
->>> (with fixes done via bbappends) so that it's easy for multiple people
->>> to contribute to. It would also mean it doesn't need rebasing onto
->>> master all the time.
->>>
->>> I'd definitely like to get involved with this. In particular I can
->>> ensure opkg (both current release and development branch) work with
->>> musl and see if some of my preferred software from meta-oe will build
->>> (vim, htop, etc).
->>
->> start with what we have. Once master opens up I would propose the needed
->> changes to OE-core and spin a layer
->>
+On 12/07/13 17:29, Ulf Samuelsson wrote:
+> xfconf-4.10.0 does not use OE sysroot as is.
+> --with-sysroot=yes 
+> will make configure run CC --print-sysroot
+> and use that.
 >
-> I did a quick 'bitbake -k core-image-minimal' to see what's currently
-> failing. Full logs and config at
-> http://www.paulbarker.me.uk/musl-build/
+> Signed-off-by: Ulf Samuelsson <ulf@emagii.com>
+> ---
+>  meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb |    6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >
-> Build Configuration:
-> BB_VERSION        = "1.21.1"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "Ubuntu-12.04"
-> TARGET_SYS        = "arm-oe-linux-musleabi"
-> MACHINE           = "qemuarm"
-> DISTRO            = "nodistro"
-> DISTRO_VERSION    = "nodistro.0"
-> TUNE_FEATURES     = "armv5 thumb dsp"
-> TARGET_FPU        = "soft"
-> meta              = "kraj/musl:faafa7022ed057d55c131c456d1bdd5dfa3d2517"
->
-> Summary: 6 tasks failed:
->   openembedded-core/meta/recipes-support/attr/attr_2.4.47.bb, do_compile
->   openembedded-core/meta/recipes-devtools/python/python_2.7.3.bb, do_compile
->   openembedded-core/meta/recipes-core/util-linux/util-linux_2.24.1.bb,
-> do_compile
->   openembedded-core/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb, do_compile
->   openembedded-core/meta/recipes-core/busybox/busybox_1.22.1.bb, do_compile
->   openembedded-core/meta/recipes-core/glib-2.0/glib-2.0_2.38.2.bb, do_compile
->
-> I can see for util-linux that we need to implement qsort_r().
->
-> Busybox probably just needs config changes:
-> http://wiki.musl-libc.org/wiki/Building_Busybox
+> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
+> index 4ea2b88..6d5bf57 100644
+> --- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
+> +++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
+> @@ -2,10 +2,14 @@ DESCRIPTION = "Xfce configuration daemon and utilities"
+>  SECTION = "x11/wm"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+> -DEPENDS = "dbus-glib libxfce4util perl-native"
+> +DEPENDS = "dbus-glib libxfce4util perl"
+> +PR="r1"
+>  
+>  inherit xfce
+>  
+> +EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+> +EXTRA_OECONF += "--with-sysroot=yes"
+> +
+>  SRC_URI += "file://0001-Simplify-checks.patch"
+>  SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
+>  SRC_URI[sha256sum] = "175219a441cc7d0f210bbd1a3b0abba41598627cd9db27235811400c3e100576"
+
+This patch is causing the build to emit a QA warning:
+
+xfconf-4.10.0: xfconf: configure was passed unrecognised options: --with-sysroot
+
+Is this really the right option to supply for what you're trying to do?
+
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.20140329_001343.log/qa.log
 
 
-I already have local fix for busy box.
+On my machine this package builds with this option (--with-sysroot)
+removed, but I realize that testing on one machine is probably not
+sufficient.
 
