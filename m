@@ -1,39 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 799FD6EE4D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 12:53:44 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id hm4so3243009wib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 05:53:45 -0700 (PDT)
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6254B60C14;
+	Mon, 31 Mar 2014 15:21:40 +0000 (UTC)
+Received: by mail-vc0-f174.google.com with SMTP id ld13so8173627vcb.5
+	for <multiple recipients>; Mon, 31 Mar 2014 08:21:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qMmKv3+jXNXKI2o8Eq4AEgDMsqiZW+tBYe4pltmFEPE=;
-	b=DD5DcreftG80pUcX9uU+FP5GT3fZDZ/CFTuID4OTS54c5sveDiCZsFZ1t1W6zt29ah
-	iNIFnTVY/kDZihuawDA8IPeWXiDIjFMefYUaw5ep3Dm/s9uhtYMT1UD9tR/wa+R5A+y7
-	miiXRn0g2YOyYNQ4ulgFZRmJQOgbN0qJE7TK8AzavEv/7UaHiIr9Ues1fqWuFO8CuSni
-	z0gwhCEUIcB0HgCwJBn4HI6ZqKLtfG8AZjJjXzQ4/dpKTFzQMgIkiR3ZK8fLApehvEuv
-	iwL49mx69sQszykYe9XHyGrGlFhsHo2sJsQmFQ/U9dzkPRKPT4TBHXYiqjpaImWiVK50
-	yWUA==
-X-Received: by 10.194.63.236 with SMTP id j12mr14393324wjs.5.1396270425304;
-	Mon, 31 Mar 2014 05:53:45 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	x3sm32884193eep.17.2014.03.31.05.53.43 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Mar 2014 05:53:43 -0700 (PDT)
-Date: Mon, 31 Mar 2014 14:53:43 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>
-Message-ID: <20140331125343.GF2425@jama>
-References: <1396269770-12357-1-git-send-email-bevenson@melinkcorp.com>
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=cfrxX1+TTfzXr9DmIXqnUKcTmeN/z0RXo4kZbEX+xAk=;
+	b=YfoVzQPXcZzTD9eXUwMThRoUXzL5XR5WsYj6Qjv6yxdx/l1/UsHDmHvdSDjGs5swW7
+	wlP+qc6I+epwlL2K0TO+3bZ8nHa+y50E+2glTIk8glvhSPk9Knb6L/oHhxoJtBXJjp6R
+	qYYyt1P+dxpQ1GEeiNIK8b7mpq+uemKU9e8qas92ScWJeiorBvdYJ5Vz8SRcKTNW+BQz
+	iiJRpK6LX0vAoPssNRkMC7bDgi3OQR01x4rO5vhgFOIFOpud6VLMOu8XoKgGvZrX7sh5
+	BgbTMNxBabBdDRoKqjswvAV2pE0PVvH3lAVS+Xz0azfmqZ2kMoAQ4s9deXB2pzT89uDU
+	j3DQ==
+X-Received: by 10.220.162.6 with SMTP id t6mr24356894vcx.12.1396279301473;
+	Mon, 31 Mar 2014 08:21:41 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1396269770-12357-1-git-send-email-bevenson@melinkcorp.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][dylan][PATCH] php: update SRC_URI for new download location
+Sender: paul.betafive@gmail.com
+Received: by 10.220.239.135 with HTTP; Mon, 31 Mar 2014 08:21:01 -0700 (PDT)
+In-Reply-To: <CAMKF1spno7Np8FXr3JXw3_W72+vRkchzZ8J5X+3e4RCFY+6nLg@mail.gmail.com>
+References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
+	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
+	<CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
+	<CAMKF1sqPB+QCvPHHcxsU+ExBmNWg9jPXajkAR_FdKpJ76-x9dg@mail.gmail.com>
+	<CANyK_8er+2sjvU1csLOEpZ06qCL4h+bP2ecUYYGzyiEw0kXzQw@mail.gmail.com>
+	<CAMKF1spno7Np8FXr3JXw3_W72+vRkchzZ8J5X+3e4RCFY+6nLg@mail.gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Mon, 31 Mar 2014 16:21:01 +0100
+X-Google-Sender-Auth: e-zW64N3Nh9YUOgfnMcr1CuHIHo
+Message-ID: <CANyK_8f_V247P1UWaeG-7YwBq4MrHQ=+69NOgW8LUZ4_Xgx2qA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] initial support for musl libc with OE/Yocto Project
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,52 +50,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2014 12:53:47 -0000
-X-Groupsio-MsgNum: 48921
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="sClP8c1IaQxyux9v"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 31 Mar 2014 15:21:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---sClP8c1IaQxyux9v
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 30 March 2014 17:48, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sun, Mar 30, 2014 at 8:43 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+>> On 30 March 2014 05:17, Khem Raj <raj.khem@gmail.com> wrote:
+>>> On Thu, Mar 27, 2014 at 5:53 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+>>>> On 26 March 2014 22:12, Burton, Ross <ross.burton@intel.com> wrote:
+>>>>> On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>> There were interest in other threads in having musl as an alternative
+>>>>>> to eglibc/uclibc that we already have in OE, in that direction I have
+>>>>>> poured in my on and off work and put it into a contrib tree
+>>>>>
+>>>>> Blimey Khem that was quick. :)
+>>>>>
+>>>>
+>>>> Agreed!
+>>>>
+>>>> I wonder if it's worth splitting this out into its own layer though
+>>>
+>>> I thought about it and since class/conf changes that need to go in into OE-core
+>>> first I kept it as it is (lazyness too). I think once the core support
+>>> is available in OE-core
+>>> we can spin the recipes into a layer of its own.
+>>>
+>>>> (with fixes done via bbappends) so that it's easy for multiple people
+>>>> to contribute to. It would also mean it doesn't need rebasing onto
+>>>> master all the time.
+>>>>
+>>>> I'd definitely like to get involved with this. In particular I can
+>>>> ensure opkg (both current release and development branch) work with
+>>>> musl and see if some of my preferred software from meta-oe will build
+>>>> (vim, htop, etc).
+>>>
+>>> start with what we have. Once master opens up I would propose the needed
+>>> changes to OE-core and spin a layer
+>>>
+>>
+>> I did a quick 'bitbake -k core-image-minimal' to see what's currently
+>> failing. Full logs and config at
+>> http://www.paulbarker.me.uk/musl-build/
+>>
+>> Build Configuration:
+>> BB_VERSION        = "1.21.1"
+>> BUILD_SYS         = "x86_64-linux"
+>> NATIVELSBSTRING   = "Ubuntu-12.04"
+>> TARGET_SYS        = "arm-oe-linux-musleabi"
+>> MACHINE           = "qemuarm"
+>> DISTRO            = "nodistro"
+>> DISTRO_VERSION    = "nodistro.0"
+>> TUNE_FEATURES     = "armv5 thumb dsp"
+>> TARGET_FPU        = "soft"
+>> meta              = "kraj/musl:faafa7022ed057d55c131c456d1bdd5dfa3d2517"
+>>
+>> Summary: 6 tasks failed:
+>>   openembedded-core/meta/recipes-support/attr/attr_2.4.47.bb, do_compile
+>>   openembedded-core/meta/recipes-devtools/python/python_2.7.3.bb, do_compile
+>>   openembedded-core/meta/recipes-core/util-linux/util-linux_2.24.1.bb,
+>> do_compile
+>>   openembedded-core/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb, do_compile
+>>   openembedded-core/meta/recipes-core/busybox/busybox_1.22.1.bb, do_compile
+>>   openembedded-core/meta/recipes-core/glib-2.0/glib-2.0_2.38.2.bb, do_compile
+>>
+>> I can see for util-linux that we need to implement qsort_r().
+>>
+>> Busybox probably just needs config changes:
+>> http://wiki.musl-libc.org/wiki/Building_Busybox
+>
+>
+> I already have local fix for busy box.
 
-On Mon, Mar 31, 2014 at 08:42:50AM -0400, Bryan Evenson wrote:
-> From: chase maupin <chase.maupin@ti.com>
->=20
-> * The old downloads location of http://www.php.net/distributions
->   now points to a listing of all distributions and the mirrors or
->   download locations where the sources can be downloaded.
-> * The new download location is http://museum.php.net/..... where
->   the rest of the URL is based on the major version on PHP being
->   downloaded.  This is a change from the previous download server
->   which had a flattened directory structure so that all versions
->   were available in a single location.
-> * To account for this change in the directory structure a variable
->   called PHP_MAJVER is used based off of the PV to point the
->   SRC_URI to the proper subdirectory.
-> * This issue wsa first noted by Joshua Vanderpool at
->   Joshua.Vanderpool@raymondcorp.com and there was discussion at
->   http://lists.openembedded.org/pipermail/openembedded-devel/2014-January=
-/093757.html
-> * This patch has been commited to that master branch
->=20
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Excellent! I'm currently looking at util-linux.
 
-+ Eric B=E9nard
+I think we should ask for a new repo to be setup on
+git.yoctoproject.org for meta-musl. I'm happy to be one of the
+maintainers for that, I hope that you are as well and maybe a couple
+of the others who were interested could also help. I think having a
+few people as maintainers is important as we're all already fairly
+busy on other projects.
 
---sClP8c1IaQxyux9v
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Once the layer is setup we can move the recipes off your branch of
+oe-core and into the layer as time permits. That would just leave the
+changes which need to go into oe-core on your branch.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Does that sound like a sensible plan?
 
-iEYEARECAAYFAlM5ZVcACgkQN1Ujt2V2gBxEjwCdFZNHiHbjbjUTq9vN2PLdgbaW
-Fv0AoIe2Bee4Hf2osJsLRkL/MO79iQxT
-=dLRC
------END PGP SIGNATURE-----
+-- 
+Paul Barker
 
---sClP8c1IaQxyux9v--
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
+
