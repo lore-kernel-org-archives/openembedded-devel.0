@@ -1,35 +1,36 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id CFE176AB50
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-pb0-f51.google.com (mail-pb0-f51.google.com
+	[209.85.160.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 53FB96B7B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 22:03:14 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id cc10so4132982wib.14
+	Mon, 31 Mar 2014 23:05:39 +0000 (UTC)
+Received: by mail-pb0-f51.google.com with SMTP id uo5so8903505pbc.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 15:03:15 -0700 (PDT)
+	Mon, 31 Mar 2014 16:05:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=q3L0WtdU6sQ72ano8OekVdFUfyIZitAwHS9F1YdxdVU=;
-	b=DZF2r6JO589LxkimdvIDIyjAJboH89mtz+/DjEnJ+FkSZArw6UUJSDRQTvhE0pwc67
-	jZPW5g0sutTJk0nEeS7NdcD+ZGzPVAHUqO+GbaljfD09ADuaIDSsvsfK8AmKh4Oji8tk
-	A9wqCu7FR9qQffnyub1SqEro5QHMnc5BF/BRu7TBZ5xOBUy+L3nZmslWgOrwCcJhVJnB
-	KB5mI4AldSUH6rECLH8D0iA0MkG/Ed4Mx+2BR2e4pB02njbDNCaCkm3shbteANdZpYYf
-	cd07G9NQIpREMPuKREbsnNpx+FGc3qQoDT3Cf+NmAx9r5pfHQOOX83kSc4vHV0VjWY8O
-	NVbw==
-X-Received: by 10.194.82.69 with SMTP id g5mr6910102wjy.85.1396303394918;
-	Mon, 31 Mar 2014 15:03:14 -0700 (PDT)
-Received: from mizar.localdomain
-	(host89-230-dynamic.20-79-r.retail.telecomitalia.it. [79.20.230.89])
-	by mx.google.com with ESMTPSA id o4sm35960069eef.20.2014.03.31.15.03.13
-	for <multiple recipients>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=7dTExiUlemyrEfMNoFiO/KMMKEaa22DzssthkP8GbKo=;
+	b=YOq1GZLSfKnq/NW+rRUFYVoPG+wWuZtYoSf6yR4tYvS00OVP33h+gnx+29XP37Ok6M
+	Zof1m2u/ADeWWzwInjEKnySQ2x+Q9TycaiSqRDoZOt2oBAPjNRmuhBV1gxxShplwQ9F7
+	B/D/ygx5LcoJaG3CT6eYGNbo1kX3x4Lr5R92G6w8GfYdkHFKtQkkf8Db47f/30hIhK8P
+	L3OygkoIawqOeIrqAUSatG34bFMtM2uuUUbRVlQ2rDblRtTz6Bg88jHFkExoh+PqmrHD
+	OYtAdWQ99xYKX8aNImqGHClHYrIINWK5lexR5EeuZpElN54sDmqiJWLeOCLfollvC30C
+	HOGA==
+X-Received: by 10.68.211.73 with SMTP id na9mr876102pbc.13.1396307140153;
+	Mon, 31 Mar 2014 16:05:40 -0700 (PDT)
+Received: from mattsbaby.amer.corp.natinst.com
+	(64-186-172-226.static-ip.telepacific.net. [64.186.172.226])
+	by mx.google.com with ESMTPSA id
+	i10sm46549547pat.36.2014.03.31.16.05.39 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Mar 2014 15:03:14 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 31 Mar 2014 16:05:39 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 00:03:10 +0200
-Message-Id: <1396303390-17134-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: remove ${PR} remnant
+Date: Mon, 31 Mar 2014 16:05:29 -0700
+Message-Id: <1396307129-13329-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-oe][PATCH] swig : Update to version 2.0.12 and fix cmake find swig issue.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +44,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2014 22:03:15 -0000
+X-List-Received-Date: Mon, 31 Mar 2014 23:05:49 -0000
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ * Dropped PR and PR_INC due to PV change.
+ * The cmake rule looks for swig2.0. For the sdk case, the host distro
+may have a swig2.0 installed. If so the sdk would find the host swig. This
+updates the sdk so it also has a swig2.0 soft linked to the swig binary in
+the sdk.
+
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/swig/swig.inc       | 5 ++++-
+ meta-oe/recipes-devtools/swig/swig_2.0.10.bb | 9 ---------
+ meta-oe/recipes-devtools/swig/swig_2.0.12.bb | 7 +++++++
+ 3 files changed, 11 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.10.bb
+ create mode 100644 meta-oe/recipes-devtools/swig/swig_2.0.12.bb
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-index 20a9791..8c7f717 100644
---- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-+++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-@@ -4,7 +4,7 @@ SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
- PACKAGES = ""
- PROVIDES = ""
+diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
+index 8e83526..52ef9a6 100644
+--- a/meta-oe/recipes-devtools/swig/swig.inc
++++ b/meta-oe/recipes-devtools/swig/swig.inc
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e7807a6282784a7dde4c846626b08fc6 \
+                     file://LICENSE-UNIVERSITIES;md5=8ce9dcc8f7c994de4a408b205c72ba08"
  
--KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${PR}-${MACHINE}"
-+KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}"
- KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
+ SECTION = "devel"
+-INC_PR = "r3"
  
- INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
+ DEPENDS = "libpcre python"
+ 
+@@ -50,3 +49,7 @@ do_configure() {
+     oe_runconf
+ }
+ 
++do_install_append_class-nativesdk() {
++    cd ${D}${bindir}
++    ln -s swig swig2.0
++}
+diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.10.bb b/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
+deleted file mode 100644
+index 312ce11..0000000
+--- a/meta-oe/recipes-devtools/swig/swig_2.0.10.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require ${BPN}.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
+-
+-SRC_URI[md5sum] = "6d5e7ad05b4a404e5e85db9befb70c9a"
+-SRC_URI[sha256sum] = "d1eef329e867124ce60838b5ad07c763146b6c8f250dd22a861ead7406f78e63"
+-
+diff --git a/meta-oe/recipes-devtools/swig/swig_2.0.12.bb b/meta-oe/recipes-devtools/swig/swig_2.0.12.bb
+new file mode 100644
+index 0000000..0fbcfa1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/swig/swig_2.0.12.bb
+@@ -0,0 +1,7 @@
++require ${BPN}.inc
++
++SRC_URI += "file://0001-Use-proc-self-exe-for-swig-swiglib-on-non-Win32-plat.patch"
++
++SRC_URI[md5sum] = "c3fb0b2d710cc82ed0154b91e43085a4"
++SRC_URI[sha256sum] = "65e13f22a60cecd7279c59882ff8ebe1ffe34078e85c602821a541817a4317f7"
++
 -- 
-1.8.1.5
+1.9.0
 
 
