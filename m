@@ -1,31 +1,38 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B1406B181
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 12:02:37 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s2VC2WhQ005260 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 13:02:33 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id cJltlwff3zih
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 13:02:32 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s2VC2UNQ005248
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 13:02:32 +0100
-Message-ID: <1396267345.14790.70.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Mon, 31 Mar 2014 13:02:25 +0100
-X-Mailer: Evolution 3.8.4-0ubuntu1 
-Mime-Version: 1.0
-Subject: [meta-qt5] Antisocial layer behaviour
+Return-Path: <bevenson@melinkcorp.com>
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1lp0139.outbound.protection.outlook.com [207.46.163.139])
+	by mail.openembedded.org (Postfix) with ESMTP id E347D6F7D3
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Mar 2014 12:02:51 +0000 (UTC)
+Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
+	BLUPR05MB040.namprd05.prod.outlook.com (10.255.210.156) with Microsoft
+	SMTP Server (TLS) id 15.0.898.11; Mon, 31 Mar 2014 12:02:50 +0000
+Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.15.8]) by
+	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.15.238]) with mapi id
+	15.00.0908.008; Mon, 31 Mar 2014 12:02:50 +0000
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "Openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+Thread-Topic: php: Backport PHP SRC_URI update patch to dylan?
+Thread-Index: Ac9M2PX28ljXLfj5SD2MEpXtt97ymw==
+Date: Mon, 31 Mar 2014 12:02:48 +0000
+Message-ID: <14e2a65afdb24b6f96f3b87a5cb04881@BLUPR05MB037.namprd05.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 000CD864006CE8000CD9B1
+x-originating-ip: [98.100.91.242]
+x-forefront-prvs: 0167DB5752
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009001)(6009001)(428001)(199002)(189002)(74316001)(97336001)(4396001)(92566001)(83322001)(69226001)(81686001)(90146001)(97186001)(81342001)(74366001)(76176001)(81816001)(99286001)(77982001)(47976001)(49866001)(80976001)(50986001)(59766001)(98676001)(15975445006)(79102001)(76786001)(51856001)(81542001)(85852003)(94946001)(74706001)(87266001)(54356001)(63696002)(76482001)(76576001)(20776003)(54316002)(2656002)(74662001)(95666003)(74502001)(87936001)(33646001)(47446002)(46102001)(66066001)(86362001)(74876001)(56816005)(77096001)(19580395003)(83072002)(53806001)(85306002)(93516002)(93136001)(76796001)(94316002)(47736001)(65816001)(95416001)(15202345003)(31966008)(80022001)(24736002)(15302535010);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BLUPR05MB040;
+	H:BLUPR05MB037.namprd05.prod.outlook.com;
+	FPR:3FD3C30B.29226DCA.8EE196E1.ACB71E82.200F3; MLV:sfv;
+	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+received-spf: None (: melinkcorp.com does not designate permitted sender hosts)
+MIME-Version: 1.0
+X-OriginatorOrg: melinkcorp.com
+Subject: php: Backport PHP SRC_URI update patch to dylan?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,35 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Mar 2014 12:02:38 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Mar 2014 12:02:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-I noticed some rebuilds happening when my cache should have been good.
-"bitbake xxxx -S printdiff" showed:
+I'm on the dylan branch, I recently had to do a complete rebuild of my imag=
+e to recover from a mistake I'd made.  During the rebuild, it failed to fet=
+ch php until I applied this patch: http://git.openembedded.org/meta-openemb=
+edded/patch/?id=3D2c63ef6da286e528a23509a87d55c79098e1c2b7.   I see this pa=
+tch has been applied to dora and master, but it is not present in dylan.  C=
+ould this patch get backported to dylan?  Without it, anyone on the dylan b=
+ranch can't fetch php.
 
-Task cmake-native:do_configure couldn't be used from the cache because:
-  We need hash f8a8910df42f4330ddaf9e40105baa7d, closest matching task was 93ac4b3cc3e9b5dd0868377cf287ca3d
-  basehash changed from 6b93d63cb19070822b91834c3ec58922 to a805733675f04ac021199aa92ed54cb5
-  Variable do_configure value changed from '    sed -i 's/^find_package(Qt5Core QUIET)$/#find_package(Qt5Core QUIET)/g' ${S}/Tests/RunCMake/CMakeLists.txt
-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/RunCMake/IncompatibleQt/IncompatibleQt.cmake
-    sed -i 's/^  find_package(Qt5Widgets REQUIRED)/#  find_package(Qt5Widgets REQUIRED)/g' ${S}/Tests/QtAutomoc/CMakeLists.txt
-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/Qt4And5Automoc/CMakeLists.txt
-    sed -i 's/^  find_package(Qt5Widgets QUIET NO_MODULE)/#  find_package(Qt5Widgets QUIET NO_MODULE)/g' ${S}/Tests/CMakeLists.txt
-    sed -i 's/^find_package(Qt5Widgets QUIET)/#find_package(Qt5Widgets QUIET)/g' ${S}/Source/QtDialog/CMakeLists.txt
-	./configure --prefix=${prefix}
-' to '	./configure --prefix=${prefix}
-'
-
-so basically the bbappend in meta-qt5 means that everything using
-cmake-native will get rebuilt unless you either include or exclude the
-layer everywhere :(
-
-Can we try and find a better way to work around whatever that bbappend
-is trying to fix please?
-
-Cheers,
-
-Richard
-
+Regards,
+Bryan Evenson
 
