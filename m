@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id AF5346F92A
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 4753C6F92A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 17:14:26 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id x13so7847634wgg.14
+	Tue,  1 Apr 2014 17:14:28 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id n12so7942340wgh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 10:14:27 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=somCJsZFn5fWEvO/8F6YRRsVc0Hz5bEz8dRPnDcFYYU=;
-	b=X097otCB+W87DVr7vPNGpb5idPuCU7mQyf60zyCdKieUJ/jPWPqy/2emgujuiVagnn
-	ToDdCvPKlrqBfaqx9ZMuOk4z0mFNdGGTcabxiloo1WuBEHkiDm0JzTe/FKS/hxxNLlVr
-	50VwzRKYZZI+ZU4IQenNoGwwAYZ6/F89spk7uUD3bL11bn973M1eT9QjQ6jkXPv7TuwL
-	uSUwmUmdlXfIninBdIp+sjUCgUWQBUetuwOGMvd5MUMlPZvyPySyMecmONvCVQ/VWOSM
-	STpwChJ5fIWScHDQ1cQ300S7Ibp2rFOwTr9LfiO3/hhBPFFzqJzs+QNoWslsj64p3JZm
-	aUaA==
-X-Received: by 10.194.174.42 with SMTP id bp10mr15506471wjc.57.1396372467022; 
-	Tue, 01 Apr 2014 10:14:27 -0700 (PDT)
+	bh=9eX5X8A5EkQGnT/NO/2P/k+1LWN+r/J5iNk/kSwdvRI=;
+	b=HaMizsTeEgPNsCRGUPanRn5oAnirWZqPTUTYWE8t0eWtTft1+J9yascqTH+abK4zDd
+	PLlFmr73T8duqV8DxGTqA3e6HwXM4cZ0MV0BourqZz9pEi9JqBICzOeL6C+bWw92H7Sd
+	Hza5dz4UzoL9tza9u1pCZfKMG4pRiKVAIRra8Bshnko9jxqGuY8cIGqDRYOAn8XTgFBa
+	q6WyVm+ZScUchzKoQ4Y9izNJpJaGyJGHoV28n/7FmNLboNlDFErd002teotf6sLOFGCW
+	dOowuo5sgRwLg9Q0bGoxoZjANu5LO1QL+KHUAYuCgTX+LfEwurhOOMwVw82lwD/4Gj4/
+	TgXQ==
+X-Received: by 10.180.79.73 with SMTP id h9mr21762552wix.3.1396372468956;
+	Tue, 01 Apr 2014 10:14:28 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	z48sm41850916eel.27.2014.04.01.10.14.25 for <multiple recipients>
+	n41sm41873351eeg.4.2014.04.01.10.14.27 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 10:14:26 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 19:13:22 +0200
-Message-Id: <1396372434-10710-14-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  1 Apr 2014 19:13:23 +0200
+Message-Id: <1396372434-10710-15-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 14/46] tracker: inherit only gnomebase, fix QA warn
+Subject: [meta-oe][PATCH 15/46] libwnck*: inherit only gnomebase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,39 +45,36 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 01 Apr 2014 17:14:28 -0000
 
-* fixes configure was passed unrecognised options: --disable-schemas-install
-* fixes QA warning:
-  tracker-0.14.2: tracker: Files/directories were installed but not shipped
-    /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.so
-    /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.la
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/tracker/tracker_0.14.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb | 2 +-
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
-index fc6db4b..7c989c6 100644
---- a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
-+++ b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://projects.gnome.org/tracker/"
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
+index 1edd2ba..fd0ecd9 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb
+@@ -12,6 +12,6 @@ PR = "r1"
+ PACKAGECONFIG ??= "startup-notification"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
  
- PR = "r7"
+-inherit gnome
++inherit gnomebase
+ SRC_URI[archive.md5sum] = "e4ea87320dd0600a81c50186e3804aae"
+ SRC_URI[archive.sha256sum] = "4946b612c22d53238810d431f1b05c21f073f201edfd247ff74e2fa228618083"
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
+index 6f4722d..61836d2 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.30.5.bb
+@@ -10,6 +10,6 @@ DEPENDS = "gobject-introspection-stub gtk+ gdk-pixbuf-native libxres"
+ PACKAGECONFIG ??= "startup-notification"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
  
--inherit autotools pkgconfig gnome gettext gsettings systemd
-+inherit autotools pkgconfig gnomebase gettext gsettings systemd
- 
- VER_DIR = "${@gnome_verdir("${PV}")}"
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
-@@ -60,6 +60,8 @@ FILES_${PN} += "${datadir}/dbus-1/ \
- 
- FILES_${PN}-dev += "${libdir}/tracker-${VER_DIR}/*.la \
-                     ${libdir}/tracker-${VER_DIR}/*.so \
-+                    ${libdir}/tracker-${VER_DIR}/*/*.so \
-+                    ${libdir}/tracker-${VER_DIR}/*/*.la \
-                     ${libdir}/tracker-${VER_DIR}/extract-modules/*.la"
- 
- FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
+-inherit gnome
++inherit gnomebase
+ SRC_URI[archive.md5sum] = "4162d5b96151e6d24ec02ae3a822203c"
+ SRC_URI[archive.sha256sum] = "56b6681e89cd45491bb640165d62276d81369a08974042b26645dc1e0e954cc1"
 -- 
 1.9.1
 
