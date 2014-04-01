@@ -1,39 +1,43 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pb0-f49.google.com (mail-pb0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 029686B8D1
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id D1223605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 06:18:46 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id jt11so9301833pbb.22
+	Tue,  1 Apr 2014 06:50:15 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id l18so6793162wgh.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 23:18:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:content-type:message-id:mime-version:subject:date:references
-	:to:in-reply-to;
-	bh=bTqbld/TxPzD1T+yIyqEwYu9suJC8vZIuMGHS6f5SUw=;
-	b=UhaGrrfnLy6AJ4kfx7g2NcD0GKp/NFI15Y4aIcMwl8BhssRulIZKqrbJYX5cd7HDdE
-	vYmqeQDz8HSbZdeHMSxhaoE/2PCiT2uWn3xhlNIpFfFHtxDYDffF8WQb+qIr4cuucHOq
-	pZn+JbMgCV+N4kV8S14D3V4t8BX3Z+lFz9/Vx55pDNs2aGpRfzUsJMBAZCtDi5rLXvBt
-	Nm3IvoPA+c2ym8ikFlod2Rr7xvGE8B+DMKvFAvhJ5iMU2431StzflToQbPq7m+71ewSz
-	pM2lFMQSue3m4S59i2e2gftn5aG5xUyVhT/f0kPp07R6lA9As93DIGPItowFl/q7V6Xu
-	vs5Q==
-X-Received: by 10.66.249.233 with SMTP id yx9mr29313986pac.3.1396333127360;
-	Mon, 31 Mar 2014 23:18:47 -0700 (PDT)
-Received: from [192.168.0.33] (99-57-140-30.lightspeed.sntcca.sbcglobal.net.
-	[99.57.140.30]) by mx.google.com with ESMTPSA id
-	vd8sm51024615pac.12.2014.03.31.23.18.46
-	for <openembedded-devel@lists.openembedded.org>
+	Mon, 31 Mar 2014 23:50:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=s0gknhLuv/YjfI9bgFA9l3tnLq8R7aNbNBBWfv9xMYA=;
+	b=c1akPgSaEKv4IX9mBkiS3wnrsYXETmoRiTmKArfrV27TJogsALOm1ic3eZQaci5YCo
+	LNhAlTqRqS+aKm6tJMwBmO8VREmpbza+zj275KTij/e5pkuLwga/88ApX57NT5PBhh0t
+	oVOsiUZf3LwVvjjVvTxFes0Z6Z4s4Yj0yLr9hJOdrxpardz5BHQdrp36XOMsUjKIyd/R
+	4gDYT1lZNyYRuP1Uq2vKm6KEYN37GrRkgEfdZY3ZP7QGybLSZWoa1kVggETqVtxsFZmx
+	zn+GcM01AX+iiY1yXyps0oFC+WaWEGmE5VC1pctMpI6qQJz2ZaCWpTqyik9LLmWvBZNJ
+	fD3Q==
+X-Gm-Message-State: ALoCoQleTtuhugOij9eydJQANXEU8lKN+N1fE2JxfiFiTM0IMcF2/SjkRyi2G+Wu2xj5/CReGJOD
+X-Received: by 10.194.173.193 with SMTP id bm1mr11429446wjc.55.1396335015864; 
+	Mon, 31 Mar 2014 23:50:15 -0700 (PDT)
+Received: from [172.20.0.102] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id
+	e42sm38323249eev.32.2014.03.31.23.50.15 for <multiple recipients>
 	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 31 Mar 2014 23:18:46 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Message-Id: <3F0D5A70-AC82-4FBA-A613-48DBB4DC3227@gmail.com>
+	Mon, 31 Mar 2014 23:50:15 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 7.2 \(1874\))
-Date: Mon, 31 Mar 2014 23:18:45 -0700
-References: <CALYKT1hK8DF=kt9k_0bMjn4_nZGTMb=hakdTpUVObgdBJ1NhWQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CALYKT1hK8DF=kt9k_0bMjn4_nZGTMb=hakdTpUVObgdBJ1NhWQ@mail.gmail.com>
+From: Koen Kooi <koen.kooi@linaro.org>
+In-Reply-To: <20140329232154.GB2428@jama>
+Date: Tue, 1 Apr 2014 08:50:15 +0200
+Message-Id: <2C0383B9-CB95-4B36-B106-B4538D93FF38@linaro.org>
+References: <1391518370-19990-1-git-send-email-koen.kooi@linaro.org>
+	<20140305041901.GU26981@jama> <5316AB64.3080501@linaro.org>
+	<20140305055717.GV26981@jama> <5316DE87.7090906@linaro.org>
+	<20140329232154.GB2428@jama>
+To: Martin Jansa <martin.jansa@gmail.com>
 X-Mailer: Apple Mail (2.1874)
-Subject: Re: How can I make my own program start up when my system boots up?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] mongodb: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,44 +51,292 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 06:18:49 -0000
-X-Groupsio-MsgNum: 48941
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_C583D784-A992-4793-9441-CE7E5D49CE44";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_C583D784-A992-4793-9441-CE7E5D49CE44
+X-List-Received-Date: Tue, 01 Apr 2014 06:50:18 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
 
+Op 30 mrt. 2014, om 00:21 heeft Martin Jansa <martin.jansa@gmail.com> =
+het volgende geschreven:
 
-On Mar 31, 2014, at 11:07 PM, Journeyer J. Joh =
-<oosaprogrammer@gmail.com> wrote:
+> On Wed, Mar 05, 2014 at 04:21:27PM +0800, Koen Kooi wrote:
+>> On 03/05/2014 01:57 PM, Martin Jansa wrote:
+>>> On Wed, Mar 05, 2014 at 12:43:16PM +0800, Koen Kooi wrote:
+>>>> On 03/05/2014 12:19 PM, Martin Jansa wrote:
+>>>>> On Tue, Feb 04, 2014 at 01:52:50PM +0100, Koen Kooi wrote:
+>>>>>> This builds the server and the sharding helper, but not the CLI. =
+The CLI will need a libv8 recipe since fixing the built-in copy to cross =
+build is too much work.
+>>>>>>=20
+>>>>>> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+>>>>>> ---
+>>>>>>   ...Make-it-possible-to-disable-the-use-of-v8.patch | 49 =
++++++++++++++++++
+>>>>>>   ...place-os.uname-with-os.getenv-TARGET_ARCH.patch | 50 =
++++++++++++++++++
+>>>>>>   ...02-Fix-linking-when-scripting-is-disabled.patch | 25 =
++++++++++
+>>>>>>   ...d-mongo-binary-when-scripting-is-disabled.patch | 64 =
+++++++++++++++++++++++
+>>>>>>   meta-oe/recipes-support/mongodb/mongodb_git.bb     | 38 =
++++++++++++++
+>>>>>>   5 files changed, 226 insertions(+)
+>>>>>>   create mode 100644 =
+meta-oe/recipes-support/mongodb/mongodb/0001-Make-it-possible-to-disable-t=
+he-use-of-v8.patch
+>>>>>>   create mode 100644 =
+meta-oe/recipes-support/mongodb/mongodb/0001-replace-os.uname-with-os.gete=
+nv-TARGET_ARCH.patch
+>>>>>>   create mode 100644 =
+meta-oe/recipes-support/mongodb/mongodb/0002-Fix-linking-when-scripting-is=
+-disabled.patch
+>>>>>>   create mode 100644 =
+meta-oe/recipes-support/mongodb/mongodb/0003-Do-not-build-mongo-binary-whe=
+n-scripting-is-disabled.patch
+>>>>>>   create mode 100644 =
+meta-oe/recipes-support/mongodb/mongodb_git.bb
+>>>>>=20
+>>>>> It's already merged, but can you please check this error when =
+building
+>>>>> it for qemuarm?
+>>>>>=20
+>>>>> | arm-oe-linux-gnueabi-g++ -march=3Darmv5te -marm =
+-mthumb-interwork =
+--sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroot=
+s/qemuarm -o =
+build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-=
+boost/use-system-pcre/use-system-tcmalloc/mongo/db/commands/find_and_modif=
+y_common.o -c -Wnon-virtual-dtor -Woverloaded-virtual -fPIC =
+-fno-strict-aliasing -ggdb -pthread -Wall -Wsign-compare =
+-Wno-unknown-pragmas -Winvalid-pch -Werror -pipe -O3 =
+-Wno-unused-local-typedefs -Wno-unused-function =
+-Wno-deprecated-declarations -fno-builtin-memcmp -D_SCONS =
+-DMONGO_EXPOSE_MACROS -DSUPPORT_UTF8 -DMONGO_OPTIMIZED_BUILD =
+-D_FILE_OFFSET_BITS=3D64 -DMONGO_SSL -DMONGO_HAVE___THREAD =
+-DBOOST_THREAD_VERSION=3D2 -DMONGO_HAVE_HEADER_UNISTD_H =
+-DMONGO_HAVE_EXECINFO_BACKTRACE =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/snappy =
+-Isrc/third_party/snappy =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnuea
+>> bi
+>>>> =
+-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/third_party/=
+libstemmer_c/include -Isrc/third_party/libstemmer_c/include =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/s2 =
+-Isrc/third_party/s2 =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc -Isrc =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/mongo -Isrc/mongo =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/s2 =
+-Isrc/third_party/s2 =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/snappy =
+-Isrc/third_party/snappy =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/ya
+>> ml-
+>>>> cpp-0.5.1/include -Isrc/third_party/yaml-cpp-0.5.1/include =
+src/mongo/db/commands/find_and_modify_common.cpp
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/pipeline/value_internal.h:32,
+>>>>> |                  from src/mongo/db/pipeline/value.h:31,
+>>>>> |                  from src/mongo/db/pipeline/pipeline.h:33,
+>>>>> |                  from src/mongo/db/pipeline/pipeline.cpp:32:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/auth/privilege_parser.h:35,
+>>>>> |                  from src/mongo/db/auth/privilege.h:22,
+>>>>> |                  from src/mongo/db/auth/privilege.cpp:16:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/auth/privilege_parser.h:35,
+>>>>> |                  from src/mongo/db/auth/privilege.h:22,
+>>>>> |                  from src/mongo/db/commands/mr.h:37,
+>>>>> |                  from src/mongo/db/commands/mr_common.cpp:29:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/bson/mutable/element.h:20,
+>>>>> |                  from =
+src/mongo/db/auth/authorization_manager.h:40,
+>>>>> |                  from =
+src/mongo/db/auth/authorization_session.h:38,
+>>>>> |                  from =
+src/mongo/db/auth/authorization_session.cpp:29:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | arm-oe-linux-gnueabi-g++ -march=3Darmv5te -marm =
+-mthumb-interwork =
+--sysroot=3D/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroot=
+s/qemuarm -o =
+build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-=
+boost/use-system-pcre/use-system-tcmalloc/mongo/db/commands/user_managemen=
+t_commands.o -c -Wnon-virtual-dtor -Woverloaded-virtual -fPIC =
+-fno-strict-aliasing -ggdb -pthread -Wall -Wsign-compare =
+-Wno-unknown-pragmas -Winvalid-pch -Werror -pipe -O3 =
+-Wno-unused-local-typedefs -Wno-unused-function =
+-Wno-deprecated-declarations -fno-builtin-memcmp -D_SCONS =
+-DMONGO_EXPOSE_MACROS -DSUPPORT_UTF8 -DMONGO_OPTIMIZED_BUILD =
+-D_FILE_OFFSET_BITS=3D64 -DMONGO_SSL -DMONGO_HAVE___THREAD =
+-DBOOST_THREAD_VERSION=3D2 -DMONGO_HAVE_HEADER_UNISTD_H =
+-DMONGO_HAVE_EXECINFO_BACKTRACE =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/snappy =
+-Isrc/third_party/snappy =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnu
+>> ea
+>>>> =
+bi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/third_part=
+y/libstemmer_c/include -Isrc/third_party/libstemmer_c/include =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/s2 =
+-Isrc/third_party/s2 =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc -Isrc =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/mongo -Isrc/mongo =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/s2 =
+-Isrc/third_party/s2 =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/snappy =
+-Isrc/third_party/snappy =
+-Ibuild/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-syste=
+m-boost/use-system-pcre/use-system-tcmalloc/third_party/
+>> yam
+>>>> l-cpp-0.5.1/include -Isrc/third_party/yaml-cpp-0.5.1/include =
+src/mongo/db/commands/user_management_commands.cpp
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/diskloc.h:37,
+>>>>> |                  from src/mongo/db/clientcursor.h:33,
+>>>>> |                  from src/mongo/db/query/new_find.h:33,
+>>>>> |                  from src/mongo/db/query/new_find.cpp:29:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/auth/privilege_parser.h:35,
+>>>>> |                  from src/mongo/db/auth/privilege.h:22,
+>>>>> |                  from =
+src/mongo/db/commands/find_and_modify.h:34,
+>>>>> |                  from =
+src/mongo/db/commands/find_and_modify_common.cpp:31:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/auth/privilege_parser.h:35,
+>>>>> |                  from src/mongo/db/auth/privilege.h:22,
+>>>>> |                  from src/mongo/db/commands/hashcmd.cpp:42:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | In file included from src/mongo/bson/bsonobj.h:29:0,
+>>>>> |                  from src/mongo/db/jsobj.h:38,
+>>>>> |                  from src/mongo/db/auth/privilege_parser.h:35,
+>>>>> |                  from src/mongo/db/auth/privilege.h:22,
+>>>>> |                  from src/mongo/db/commands.h:24,
+>>>>> |                  from =
+src/mongo/db/commands/user_management_commands.h:31,
+>>>>> |                  from =
+src/mongo/db/commands/user_management_commands.cpp:31:
+>>>>> | src/mongo/bson/util/atomic_int.h:128:4: error: #error =
+"unsupported compiler or platform"
+>>>>> |  #  error "unsupported compiler or platform"
+>>>>> |     ^
+>>>>> | src/mongo/bson/util/atomic_int.h:41:21: error: inline function =
+'void mongo::AtomicUInt::set(unsigned int)' used but never defined =
+[-Werror]
+>>>>> |          inline void set(unsigned newX);
+>>>>> |                      ^
+>>>>> | src/mongo/bson/util/atomic_int.h:44:27: error: inline function =
+'mongo::AtomicUInt mongo::AtomicUInt::operator++(int)' used but never =
+defined [-Werror]
+>>>>> |          inline AtomicUInt operator++(int);// postfix++
+>>>>> |                            ^
+>>>>> | src/mongo/bson/util/atomic_int.h:45:27: error: inline function =
+'mongo::AtomicUInt mongo::AtomicUInt::operator--()' used but never =
+defined [-Werror]
+>>>>> |          inline AtomicUInt operator--(); // --prefix
+>>>>> |                            ^
+>>>>> | cc1plus: all warnings being treated as errors
+>>>>> | scons: *** =
+[build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system=
+-boost/use-system-pcre/use-system-tcmalloc/mongo/db/auth/privilege.o] =
+Error 1
+>>>>> | src/mongo/bson/util/atomic_int.h:41:21: error: inline function =
+'void mongo::AtomicUInt::set(unsigned int)' used but never defined =
+[-Werror]
+>>>>> |          inline void set(unsigned newX);
+>>>>> |                      ^
+>>>>> | src/mongo/bson/util/atomic_int.h:44:27: error: inline function =
+'mongo::AtomicUInt mongo::AtomicUInt::operator++(int)' used but never =
+defined [-Werror]
+>>>>> |          inline AtomicUInt operator++(int);// postfix++
+>>>>> |                            ^
+>>>>> | src/mongo/bson/util/atomic_int.h:45:27: error: inline function =
+'mongo::AtomicUInt mongo::AtomicUInt::operator--()' used but never =
+defined [-Werror]
+>>>>> |          inline AtomicUInt operator--(); // --prefix
+>>>>> |                            ^
+>>>>> | cc1plus: all warnings being treated as errors
+>>>>> | scons: *** =
+[build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system=
+-boost/use-system-pcre/use-system-tcmalloc/mongo/db/commands/find_and_modi=
+fy_common.o] Error 1
+>>>>> | src/mongo/bson/util/atomic_int.h:41:21: error: inline function =
+'void mongo::AtomicUInt::set(unsigned int)' used but never defined =
+[-Werror]
+>>>>> |          inline void set(unsigned newX);
+>>>>> |                      ^
+>>>>> ......
+>>>>=20
+>>>> It looks like gcc for qemuarm lacks support for some atomic ops, =
+the
+>>>> above seems to get triggered by __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 =
+not
+>>>> being there.
+>>>>=20
+>>>> Which gcc are you using, 4.8?
+>>>=20
+>>> Yup, 4.8 from oe-core.
+>>=20
+>> These atomic ops *are* available for gcc 4.8, but it doesn't =
+advertise=20
+>> them for armv5te. There are 2 solutions:
+>>=20
+>> 1) CFLAGS +=3D -D__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4=3D1
+>> 2) Add a block to that files that tests for gcc > 4.7.0 (that's what=20=
 
-> I tried to add the execution command in /etc/init.d/data-init - at the =
-very
-> bottom. And it worked!
+>> fedora does)
+>>=20
+>> I'll see if I can find time to fix this next week.
 >=20
-> But I am not sure if this method is correct or not.
+> ping :)
 
-I think you are using standard sysvinit here so as long as you define an =
-init script
-for your binary and enable it in rc scripts you should be ok.
+Haven't had time, let me see if I can fix it this week. Note that you'll =
+need >8GB to build this, we had to upgrade out autobuilders to avoid gcc =
+from ICEing due to OOM.=
 
---Apple-Mail=_C583D784-A992-4793-9441-CE7E5D49CE44
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlM6WkUACgkQuwUzVZGdMxQZ0QCfSxbJoPsHZ+xcp8DMn7ghWrTq
-zh0AnAyyZUFb6pX4T4IRte7vfBMI0pkt
-=Y94I
------END PGP SIGNATURE-----
-
---Apple-Mail=_C583D784-A992-4793-9441-CE7E5D49CE44--
