@@ -1,40 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BF526B7D2
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 5661C6B5AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 11:39:34 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w61so6194425wes.29
+	Tue,  1 Apr 2014 11:51:21 +0000 (UTC)
+Received: by mail-vc0-f170.google.com with SMTP id hu19so9653722vcb.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 04:39:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2DPnostRju/jnE/5mTo2SjdY1fKzwulrbStyUEzSrN0=;
-	b=sj3HuTGW30DfTufHhznzwwNQcdDLSZMsHG1AERsG1SxlH9z7Wjl43OHcnRZ4BVosmD
-	4sNRyE4FKfgjQtIhlLY1T8vxr8ovEXg0l7XKmt2wNkeJJJywQjo5Dk/K9wUV/7hH4CJ4
-	+lwyTEE15aPgJqnybBwyh2stUMwqsj0iK/I/8x7JHRbqzzxkDr/emC+93XpKGpFnKhKc
-	Jn0vJZLhqiJ++woRS7x+2s0/i9D7DPGumEJx3Ng5Y3UgNYxHNAXFdjv38EjhjSomHiTE
-	aVbfEJfSy35QpQVNmL8c9DemwiYQeuyJajcEDKI14GmHaSP8sJVUEZJQw53x6rJ9A0Zh
-	JrjA==
-X-Received: by 10.194.109.227 with SMTP id hv3mr22108380wjb.10.1396352375451; 
-	Tue, 01 Apr 2014 04:39:35 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	x45sm39988904eef.15.2014.04.01.04.39.33 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 04:39:33 -0700 (PDT)
-Date: Tue, 1 Apr 2014 13:39:33 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Message-ID: <20140401113933.GL2425@jama>
-References: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
-	<1396323568-18135-5-git-send-email-trevor.woerner@linaro.org>
+	Tue, 01 Apr 2014 04:51:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Q7T4XS3ZJ+gyI08Sf1vungJM5QbE3ucOmGoD6w8WKBE=;
+	b=E2RPf7u1nFLUJBW3V4o7++wj6y7w3nC9S75Lw6kaS08Kt8arR6/DB/AWPUKbxW5MKq
+	Qpm3hyqpAUU82snptUHu+vkEek9QR+GSAYGxQ5JU+IriuNcmMJFrmaXPiQ9wgBg/Sa+M
+	1JG9M5k7Ugu2P6gyxfj49CvUNj4T5HoCL9uk+2wvomUMo24AAcseas6xN4s/LzF2CRcK
+	b0mVZhntLqo5Gn0UZKK51Vb6cC81cY/Q3T17ZK3829pGKl27ZTbv47zIlb5bUmL3JEoh
+	XwauCm7i1eAaHM0w8rFCTCrA71b1mm4zGWmKGxe7k3jCLfuDRg2d8WSiEtFm5zlDVM/I
+	DBkQ==
 MIME-Version: 1.0
-In-Reply-To: <1396323568-18135-5-git-send-email-trevor.woerner@linaro.org>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: openembedded-devel@lists.openembedded.org, patches@linaro.org
-Subject: Re: [meta-oe][PATCH 4/4] gtkmathview: run through oe-stylize.py
+X-Received: by 10.52.33.176 with SMTP id s16mr64287vdi.49.1396353082706; Tue,
+	01 Apr 2014 04:51:22 -0700 (PDT)
+Received: by 10.52.120.4 with HTTP; Tue, 1 Apr 2014 04:51:22 -0700 (PDT)
+In-Reply-To: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
+References: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
+Date: Tue, 1 Apr 2014 13:51:22 +0200
+Message-ID: <CALbNGRQKaXtHAgiHwTBVxYEPywWBdxD+DG1e-siuVeXHGu6TDA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: patches@linaro.org
+Subject: Re: [meta-oe][PATCH 0/4] 'gtkmathview' fix for SOBBW (2014-03-29)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,66 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 11:39:40 -0000
-X-Groupsio-MsgNum: 48947
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+2GlJm56SCtLHYlr"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Apr 2014 11:51:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
---+2GlJm56SCtLHYlr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Mar 31, 2014 at 11:39:28PM -0400, Trevor Woerner wrote:
-> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
-> ---
->  meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/m=
-eta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-> index bc4b4cb..e743f87 100644
-> --- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-> +++ b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-> @@ -2,11 +2,9 @@ SUMMARY =3D "GtkMathView is a C++ rendering engine for M=
-athML documents"
->  DESCRIPTION =3D "GtkMathView reads MathML documents by means of a fronte=
-nd and \
->          renders MathML documents through a backend"
-
-This last one doesn't apply (there is no DESCRIPTION in recipe we
-currently have) did you forget to include one patch in series or did
-I/patchwork missed it?
-
->  HOMEPAGE =3D "http://helm.cs.unibo.it/mml-widget/"
-> -DEPENDS =3D "t1lib gtk+ popt libxslt libxml2"
-> -
->  LICENSE =3D "LGPLv3"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6a6a8e020838b23406c81b19c1d46=
-df6"
-> -
-> +DEPENDS =3D "t1lib gtk+ popt libxslt libxml2"
->  PR =3D "r3"
-> =20
->  SRC_URI =3D "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
-> --=20
+On Tue, Apr 1, 2014 at 5:39 AM, Trevor Woerner
+<trevor.woerner@linaro.org> wrote:
+> Hi Martin,
+>
+> Here is a fix for your "State of bitbake world, Failed tasks 2014-03-29". This
+> patch set provides fixes and some clean-up for the gtkmathview package.
+>
+> Best regards,
+>     Trevor
+>
+> Trevor Woerner (4):
+>   gtkmathview: fix B!=S
+>   gtkmathview: fix qa issue
+>   gtkmathview: fix build error
+>   gtkmathview: run through oe-stylize.py
+>
+>  .../mml-widget/gtkmathview/qualify-lookup.diff              | 13 +++++++++++++
+>  meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb    |  9 +++------
+>  2 files changed, 16 insertions(+), 6 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/qualify-lookup.diff
+>
+> --
 > 1.9.0
->=20
+>
+> --
+Tested 1-3 - thanks
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas
 
---+2GlJm56SCtLHYlr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlM6pXUACgkQN1Ujt2V2gBwydwCfehaaQV1F9qdnW+r27bqbzu3m
-1dQAoKYXHsG8/s0S/4CPOVyyMX97YowA
-=amAe
------END PGP SIGNATURE-----
-
---+2GlJm56SCtLHYlr--
