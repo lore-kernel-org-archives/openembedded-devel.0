@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D1F4A6F9F4
+Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id AF5346F92A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 17:14:24 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id n12so7635400wgh.0
+	Tue,  1 Apr 2014 17:14:26 +0000 (UTC)
+Received: by mail-wg0-f43.google.com with SMTP id x13so7847634wgg.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 10:14:25 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6R4HGzPworh4yXPknHhoQ/cYvIYTVKbC8Lba6pSF5g0=;
-	b=CDbBvQ5uCl82GwD5v/NNpYQcGAiTwsE7SKhafoiUwCLszjxVF4yRa4z6wL0f2UVLN6
-	OAaCNxgKZdvBekybvrWceS2P5EsBN/EsaG7DCOl/FswTtP30vkBQC0YsNGfpaa2hh2OZ
-	CMtP8gvNd3QNYqmrrWwbauckNpgxZJpnwbhGYYudlN1NYY4vwXUMU+MezaWroPYLg9jK
-	7Bt2E7WNqcQDXlRR5ueyhZlq21xQyaTj7cDPtje+pZe1MLyJSYOzT8Gru0MMuvWA9vfy
-	fvCDkE4WHJqPqh+GzcrxyJ95UghxNeniS7L0IWCNSyfhLFrAptglpTEQ/5AuBc+FSpj9
-	xICg==
-X-Received: by 10.194.174.135 with SMTP id bs7mr4713501wjc.94.1396372465053;
-	Tue, 01 Apr 2014 10:14:25 -0700 (PDT)
+	bh=somCJsZFn5fWEvO/8F6YRRsVc0Hz5bEz8dRPnDcFYYU=;
+	b=X097otCB+W87DVr7vPNGpb5idPuCU7mQyf60zyCdKieUJ/jPWPqy/2emgujuiVagnn
+	ToDdCvPKlrqBfaqx9ZMuOk4z0mFNdGGTcabxiloo1WuBEHkiDm0JzTe/FKS/hxxNLlVr
+	50VwzRKYZZI+ZU4IQenNoGwwAYZ6/F89spk7uUD3bL11bn973M1eT9QjQ6jkXPv7TuwL
+	uSUwmUmdlXfIninBdIp+sjUCgUWQBUetuwOGMvd5MUMlPZvyPySyMecmONvCVQ/VWOSM
+	STpwChJ5fIWScHDQ1cQ300S7Ibp2rFOwTr9LfiO3/hhBPFFzqJzs+QNoWslsj64p3JZm
+	aUaA==
+X-Received: by 10.194.174.42 with SMTP id bp10mr15506471wjc.57.1396372467022; 
+	Tue, 01 Apr 2014 10:14:27 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	u46sm41877758eel.1.2014.04.01.10.14.23 for <multiple recipients>
+	z48sm41850916eel.27.2014.04.01.10.14.25 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 10:14:24 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:26 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 19:13:21 +0200
-Message-Id: <1396372434-10710-13-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  1 Apr 2014 19:13:22 +0200
+Message-Id: <1396372434-10710-14-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 13/46] gnome-control-center: include datadir/mime in PN
+Subject: [meta-oe][PATCH 14/46] tracker: inherit only gnomebase, fix QA warn
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 17:14:25 -0000
+X-List-Received-Date: Tue, 01 Apr 2014 17:14:28 -0000
 
-* Fixes this QA warning:
-  gnome-control-center-2.32.1: gnome-control-center: Files/directories were installed but not shipped
-  /usr/share/mime/globs
-  /usr/share/mime/globs2
-  /usr/share/mime/magic
-  /usr/share/mime/XMLnamespaces
-  /usr/share/mime/subclasses
-  /usr/share/mime/aliases
-  /usr/share/mime/types
-  /usr/share/mime/generic-icons
-  /usr/share/mime/icons
-  /usr/share/mime/treemagic
-  /usr/share/mime/mime.cache
-  /usr/share/mime/version
+* fixes configure was passed unrecognised options: --disable-schemas-install
+* fixes QA warning:
+  tracker-0.14.2: tracker: Files/directories were installed but not shipped
+    /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.so
+    /usr/lib/tracker-0.14/writeback-modules/libwriteback-taglib.la
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb    | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/tracker/tracker_0.14.2.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-index beecfa7..ee25c1e 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
-@@ -22,6 +22,7 @@ FILES_${PN} += "${datadir}/icon* \
-                 ${libdir}/window-manager-settings/*.so \
-                 ${datadir}/gnome \
-                 ${datadir}/desktop-directories \
-+                ${datadir}/mime \
- "
- FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
- FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
+diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+index fc6db4b..7c989c6 100644
+--- a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://projects.gnome.org/tracker/"
+ 
+ PR = "r7"
+ 
+-inherit autotools pkgconfig gnome gettext gsettings systemd
++inherit autotools pkgconfig gnomebase gettext gsettings systemd
+ 
+ VER_DIR = "${@gnome_verdir("${PV}")}"
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
+@@ -60,6 +60,8 @@ FILES_${PN} += "${datadir}/dbus-1/ \
+ 
+ FILES_${PN}-dev += "${libdir}/tracker-${VER_DIR}/*.la \
+                     ${libdir}/tracker-${VER_DIR}/*.so \
++                    ${libdir}/tracker-${VER_DIR}/*/*.so \
++                    ${libdir}/tracker-${VER_DIR}/*/*.la \
+                     ${libdir}/tracker-${VER_DIR}/extract-modules/*.la"
+ 
+ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
 -- 
 1.9.1
 
