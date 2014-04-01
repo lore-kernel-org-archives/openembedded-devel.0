@@ -1,41 +1,25 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 041236F90E
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 669EF6E9F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 03:40:29 +0000 (UTC)
-Received: by mail-ie0-f169.google.com with SMTP id to1so8700383ieb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 20:40:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=FdJwR2fnx+xwlOvuhbO339xR0sCwPk2Z/SGeURT0zGg=;
-	b=UgSjmOzgiNRhWxafYL3BFtvV2B8Oll14o73fd/G7p52wjLAB56zZ/ZDQdBObDPu7Ll
-	5dxBQTu+Il0kE+sgihv6MsS0vh0NwFVAVxb8EI2pstZpLdVmnmuT2IU2IsHdonz4CAEk
-	iCi1ui27PJKRemG7V9GVAsQQr2X28s4SbUM8qHc4F6x6W2QCyUjzprGN/N9HzGXbJWmt
-	qttg+IiBK5cVlr28w/zwcrhrNC6ysCGtkNWv0Q+m4e9nQQxRsWWnMFfqW+BimFtiG5Jc
-	9vl5/rFvrrrwE9CJyEJFez31kG0n6jgsaVYgqwb3wkHZ2JGU1vhjCn9OpQ6c6QbGrd5G
-	S2lw==
-X-Gm-Message-State: ALoCoQm8ejvWa8uS4qIRd7Q1+5UlpMhttcAVcAcm9dLMAFZ5SQucBNexEshDvmTAVaw0oi7w2YVI
-X-Received: by 10.43.51.65 with SMTP id vh1mr39636188icb.24.1396323630874;
-	Mon, 31 Mar 2014 20:40:30 -0700 (PDT)
-Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158])
-	by mx.google.com with ESMTPSA id gd5sm29556295igd.5.2014.03.31.20.40.29
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Mar 2014 20:40:30 -0700 (PDT)
-From: Trevor Woerner <trevor.woerner@linaro.org>
+	Tue,  1 Apr 2014 04:46:20 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N3C008R0598DS10@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	31 Mar 2014 23:46:21 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 90846200BA; Tue,
+	01 Apr 2014 00:46:20 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Mar 2014 23:39:28 -0400
-Message-Id: <1396323568-18135-5-git-send-email-trevor.woerner@linaro.org>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
-References: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
-Cc: patches@linaro.org
-Subject: [meta-oe][PATCH 4/4] gtkmathview: run through oe-stylize.py
+Date: Tue, 01 Apr 2014 00:46:18 -0400
+Message-id: <1396327578-21862-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.9.1
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] linuxptp: fix and simplify recipe, drop dependency on kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,31 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 03:40:31 -0000
+X-List-Received-Date: Tue, 01 Apr 2014 04:46:21 -0000
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+From: Denys Dmytriyenko <denys@ti.com>
+
+* Build script tries to locate the correct /usr/include/linux/net_tstamp.h just
+to see if it contains definition for HWTSTAMP_TX_ONESTEP_SYNC. But that header
+file hasn't changed in at least 5 years. The result of the check is to pass
+additional defines to the build, which can be passed via EXTRA_OEMAKE.
+
+* The sed command on makefile wasn't even working, plus there's no AR, prefix
+is not used and better way is to use EXTRA_CFLAGS and EXTRA_LDFLAGS anyway.
+
+* Neither autotools nor pkgconfig are use during the build, don't inherit them.
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-index bc4b4cb..e743f87 100644
---- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-+++ b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
-@@ -2,11 +2,9 @@ SUMMARY = "GtkMathView is a C++ rendering engine for MathML documents"
- DESCRIPTION = "GtkMathView reads MathML documents by means of a frontend and \
-         renders MathML documents through a backend"
- HOMEPAGE = "http://helm.cs.unibo.it/mml-widget/"
--DEPENDS = "t1lib gtk+ popt libxslt libxml2"
--
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
--
-+DEPENDS = "t1lib gtk+ popt libxslt libxml2"
- PR = "r3"
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
+index c708b13..10d6744 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
+@@ -2,20 +2,13 @@ DESCRIPTION = "Precision Time Protocol (PTP) according to IEEE standard 1588 for
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
+-DEPENDS = "virtual/kernel"
+-
+ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz"
+ 
+ SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
+ SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
+ 
+-inherit autotools pkgconfig
+-
+-EXTRA_OEMAKE = 'KBUILD_OUTPUT="${STAGING_KERNEL_DIR}" CROSS_COMPILE="${TARGET_PREFIX}"'
+-
+-do_configure_append () {
+-    find ${S} -name makefile | xargs sed -i 's,^\(CC\|CFLAGS\|prefix\|AR\)=,\1 ?=,g'
+-}
++EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} ARCH=${TARGET_ARCH} \
++		EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC'"
+ 
+ do_install () {
+     install -d ${D}/${bindir}
 -- 
-1.9.0
+1.9.1
 
 
