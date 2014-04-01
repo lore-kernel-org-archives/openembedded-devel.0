@@ -1,35 +1,35 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-pb0-f53.google.com (mail-pb0-f53.google.com
-	[209.85.160.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 647AD6FA1C
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 6ECFC6E3DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 22:36:43 +0000 (UTC)
-Received: by mail-pb0-f53.google.com with SMTP id rp16so10490607pbb.40
+	Tue,  1 Apr 2014 23:14:43 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id lh14so10529844vcb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 15:36:44 -0700 (PDT)
+	Tue, 01 Apr 2014 16:14:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=zYDGeVIOqeAszeAmeQEq3rr6XE6AecnJxsZkXMUWvoY=;
-	b=igo+7pMSeamEzzPyizVIf3TY+0eJcjHUUdWCmOr4lxbFVoJO/1wD3h3gMDr9YmWQHa
-	ENAUd+evwsh3sFk/bVNljeXoSvxZWc7Vjimt0zrV55TS5GmHAbPGqawq3an1/uhVvc+c
-	B66ySTVX35NZWHMRvd8zuzOx3mLTcdJLVoDJHu/pLzTbfKs2HF2+AGq+QUqZdKFq9V7F
-	JvUehWoZMJK+/2x0qcRKYhGqFwfgAi2ZJQzCRZQMyPA5CQ+O+jPpQRqkxn1UDdQqW4j0
-	Qh59rPr10OUDpofKEFOkSQzua9E415JuQXf0xBHJ4s30e9yHUV7tH97C9rxlgnGHjat+
-	JFfQ==
-X-Received: by 10.68.178.66 with SMTP id cw2mr33976667pbc.89.1396391803854;
-	Tue, 01 Apr 2014 15:36:43 -0700 (PDT)
-Received: from archimedes.arnolds.bogus
-	(dsl-66-59-252-223.static.linkline.com. [66.59.252.223])
-	by mx.google.com with ESMTPSA id qw8sm29251pbb.27.2014.04.01.15.36.42
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 01 Apr 2014 15:36:43 -0700 (PDT)
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 15:36:32 -0700
-Message-Id: <1396391792-12610-1-git-send-email-stephen.arnold42@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] changed gnuplot recipe license to gnuplot
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=xesSOCrEw58gKzN7xhR5LW+wBouuAJfSTglEwpwMgDA=;
+	b=A9r+vNRFacLtvVbzEENZdsFHu+mrZjH0wZXi8nBD1t0UWWSFViuXL0rmxwFlsxFQ7a
+	qxCiWYE5mw2Rvi7XO38giMyY+7EwgPI0yAegy1W+8IZqOv/dW5tOH3vOfPtfoUybI53R
+	27k8UXcsQhsYDjNcPfPbPAEFYS3kqXDrRBZzQW9zyrojsRxe6QW7/BXx4DY3LMh7pESJ
+	MlO11sWPqCgB/VDOjiBjyXoel3ITQ5alyzweCP5Vpv4hTp6yPE3xwkR6AuvepoVH0bbm
+	lTW6M+hpx8bs7AISofZqGdbzr+54AfJ/oRr5z7KmqOy+01vmFgACurNvwf7okk+hwUx/
+	fmaw==
+X-Received: by 10.52.173.165 with SMTP id bl5mr26332310vdc.13.1396394084580;
+	Tue, 01 Apr 2014 16:14:44 -0700 (PDT)
+MIME-Version: 1.0
+Sender: paul.betafive@gmail.com
+Received: by 10.220.239.135 with HTTP; Tue, 1 Apr 2014 16:14:04 -0700 (PDT)
+In-Reply-To: <1396391792-12610-1-git-send-email-stephen.arnold42@gmail.com>
+References: <1396391792-12610-1-git-send-email-stephen.arnold42@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Wed, 2 Apr 2014 00:14:04 +0100
+X-Google-Sender-Auth: 1Pwm0nq_RujvAlSd6IRIHBG7BiM
+Message-ID: <CANyK_8e1SoC6wtWws+mJ6022_8kTtVYG+V0jvE0mnTjGKHWn_A@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] changed gnuplot recipe license to gnuplot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 22:36:46 -0000
+X-List-Received-Date: Tue, 01 Apr 2014 23:14:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Also sent license file patch for oe-core.  This supercedes previous gnuplot 
-patch that incorrectly included the original gnuplot patch changes as well.
+On 1 April 2014 23:36, Stephen Arnold <stephen.arnold42@gmail.com> wrote:
+> Also sent license file patch for oe-core.  This supercedes previous gnuplot
+> patch that incorrectly included the original gnuplot patch changes as well.
 
-Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+Just got a few bits of general advice on submitting patches to OpenEmbedded:
 
----
- meta-oe/recipes-extended/gnuplot/gnuplot.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Each patch subject should be of the form "thing: change", where thing
+is usually the recipe name. So this would be "gnuplot: Use gnuplot
+license" or something similar.
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot.inc b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-index ab3ec3f..6c27e6d 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Gnuplot is a portable command-line driven interactive datafile \
- (text or binary) and function plotting utility."
- HOMEPAGE = "http://www.gnuplot.info/"
- SECTION = "console/scientific"
--LICENSE = "BSD-4"
-+LICENSE = "gnuplot"
- LIC_FILES_CHKSUM = "file://Copyright;md5=243a186fc2fd3b992125d60d5b1bab8f"
- DEPENDS = "virtual/libx11 gd readline"
- 
+The "[PATCH]" tag should be "[PATCH v2]" if you're superseding a
+previously sent but not yet merged patch. In this case, it's unclear
+which patch your mean. Please email in reply to the patch you want to
+cancel so that the maintainers know not to merge it.
+
+There's a lot of further detailed advice and guidelines at
+http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+Thanks,
+
 -- 
-1.9.1
+Paul Barker
 
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
