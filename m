@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 061A26F92A
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CAEEE6FA2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 17:14:32 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id r20so5603088wiv.15
+	Tue,  1 Apr 2014 17:14:34 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id u56so6675553wes.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 10:14:33 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cjDiKEaKo1TkX0xIk6hj5FHpBkS1q9rmjRcE+Cq7BDo=;
-	b=Bf7FDqOFDucMHm+raPfc8weP3y92p7OBUP4LnMDrJYJkRsb52mxQMeTEGdbr+Ra2Nx
-	zy/KD8iZhrg7kJjQIFQzMYphxHQf6RNfBlT16enAI48YgszdWLQIRRMhZmEuZmBgSk7e
-	7Y0JmgvNlQo8VUfWzkBVp/1B5Qvly8PsD2cV3c0ribgBvXEED3MPwyw06ZKVtgtFk3aM
-	G1hmo6HCkHg8fcDi9f7Am2et4NjBZ9psFJTZoylAHTRjbZzD1zQMs2RfbcSbAOkJgIhc
-	fsJnsbgVqikxGIEVM10hyUtZyYmtFlPGXfQgCQw9YgWPJeE1SrBi9jCx4ppzAoeH5N/0
-	n9TQ==
-X-Received: by 10.180.106.168 with SMTP id gv8mr21686334wib.19.1396372473323; 
-	Tue, 01 Apr 2014 10:14:33 -0700 (PDT)
+	bh=DletEmG0Mty+FW29LKlUZzHKGaS4IhtNTH70tRPBXYg=;
+	b=Ldz38cUjBv43+h9KPGZAHy9vhTWYzm3eyo1K5hjOkCUIZjf8U67RfOI8pueUTnlf7i
+	QG6XF82rdXqYAn+yoxgWADx1axvxmWuXLaEVZf2ghSniq4uZ1TbDdIxDWJ/mugS5NtMA
+	vxZ+EyTD7fwiVZwXySGlXUigAxqREdr1aIJs8oXvIdP8wOGsL1H9JEc2z1F+W6rjDLXd
+	jJiWfmKab0/ny+8Ef2U/31AcbEqX/wFPa2Dyx0jX9RP0Tqe7DEVyfSPHu7mh12H5ztwJ
+	yURpca7emPrCrJQiraDtdAZRprtlxK1h1Lkc6/fHRnUO9jdpBaqtXN1Yzy1nNyxaU2b2
+	rEWA==
+X-Received: by 10.194.21.193 with SMTP id x1mr24121405wje.33.1396372475263;
+	Tue, 01 Apr 2014 10:14:35 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	48sm41854132eei.24.2014.04.01.10.14.32 for <multiple recipients>
+	a42sm41867185ees.10.2014.04.01.10.14.34 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 10:14:32 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 19:13:25 +0200
-Message-Id: <1396372434-10710-17-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  1 Apr 2014 19:13:26 +0200
+Message-Id: <1396372434-10710-18-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 17/46] wvstreams: fix QA warning
+Subject: [meta-oe][PATCH 18/46] gnome-menus: inherit only gnomebase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 17:14:33 -0000
-
-* fixes
-  wvstreams-4.6.1: wvstreams: Files/directories were installed but not shipped
-  /usr/lib/valgrind
-  /usr/lib/valgrind/wvstreams.supp
-
-* the valgrind support is disabled in EXTRA_OECONF, so just move unpackaged file to package
+X-List-Received-Date: Tue, 01 Apr 2014 17:14:35 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index 90d64a8..00df2b8 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -28,6 +28,7 @@ PACKAGES_prepend = "libuniconf libuniconf-dbg "
- PACKAGES_prepend = "uniconfd uniconfd-dbg "
- PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
- PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
-+PACKAGES_prepend = "${PN}-valgrind "
+diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
+index 5d223d7..d9328b8 100644
+--- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
++++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
+@@ -7,7 +7,7 @@ PR = "r1"
  
- FILES_libuniconf     = "${libdir}/libuniconf.so.*"
- FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
-@@ -40,3 +41,5 @@ FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
+ DEPENDS = "python libxml2 gconf popt gtk+"
  
- FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
- FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
-+
-+FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
+-inherit gnome pkgconfig python-dir pythonnative
++inherit gnomebase pkgconfig python-dir pythonnative
+ 
+ SRC_URI[archive.md5sum] = "caa6772e63ed5870cf43dc3d354e0624"
+ SRC_URI[archive.sha256sum] = "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61c804c0dc9bf5ea50629c4caa"
 -- 
 1.9.1
 
