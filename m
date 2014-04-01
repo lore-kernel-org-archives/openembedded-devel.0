@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A90916F897
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id C31A66F8A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 15:21:57 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id cc10so5389421wib.8
+	Tue,  1 Apr 2014 15:21:59 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id l18so7477796wgh.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 08:21:58 -0700 (PDT)
+	Tue, 01 Apr 2014 08:21:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=P0XcE68AH7K+jzBL18AuvUlKrTm5Wc/35sG7IVT9fHA=;
-	b=nftrA5Lrg3KV4KhBOrgOgO9+n8/29ho/zirC5Q6WO7qufh6M4u8hVo79ZexnA7711e
-	/W/Sa1xQaVTBtYg8WmkoQDpmGe5javCbtyV/uWxSlsfeCvUGeeYDtncOXKAQx6vLmHwf
-	oRFXUubFCuGr1mVb0YKBmRfi8omRC5qaAKMdqrLQW5wrC1MJIVZAcev8YjSmT29OPY97
-	hRyPBo1qse/dX5podlRxytAoPG7Nc3sXpf1xoLgJLJqCsmXBMGEwVs5P5c2pE9NE/22u
-	HCEU4KFxA1lesR0A9gLSMQrdFw2umqrDvrDc0tEBfEJ4ycKtoO7lgF0Vt6n1BAEPQJbA
-	dXEw==
-X-Received: by 10.194.242.4 with SMTP id wm4mr4546335wjc.88.1396365718378;
-	Tue, 01 Apr 2014 08:21:58 -0700 (PDT)
+	bh=ZdCkMGNh2E0SKY4Pjm2h0Of52A/b5dt2Xxc2jRxFa2I=;
+	b=ytUwPHm0D4QDiVcRoHV2h68wMdKBplvd9jaygNe96j2KPiJtTEqT/BxFS+xlT8wpeT
+	dGJNcRJLNQG0N/66lYvUpcehCbYYtjwzXIgcf7js7QSMvBbNg8Kk3lRJqtZ+88Yj1N0y
+	8ada7C7tZYi2CDgxvMYUEfPI45DlAI5qIR8JwqtrCaEVDTPZ0pUYfXmkkYTkcUe4QTKC
+	60sIlPMGnzhG3NwzINcI/9iLLpviRsIq1xNlS1twBvGrJRHhK7TXIF61/IgM63Oha1vf
+	sT9SZXp+/gwUfWOmJ50pvNIcegPY4QlgKR59RuA7Tq7pduZ0A1xccbqhTaFlDBCO5XuP
+	YKdw==
+X-Received: by 10.194.48.80 with SMTP id j16mr21689057wjn.44.1396365719828;
+	Tue, 01 Apr 2014 08:21:59 -0700 (PDT)
 Received: from localhost.localdomain (ip-176-198-252-199.unitymediagroup.de.
 	[176.198.252.199])
-	by mx.google.com with ESMTPSA id 48sm41246865eee.2.2014.04.01.08.21.57
+	by mx.google.com with ESMTPSA id 48sm41246865eee.2.2014.04.01.08.21.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 08:21:57 -0700 (PDT)
+	Tue, 01 Apr 2014 08:21:58 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 17:21:37 +0200
-Message-Id: <1396365706-14220-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  1 Apr 2014 17:21:38 +0200
+Message-Id: <1396365706-14220-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1396365706-14220-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1396365706-14220-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce/meta-gnome 01/10] xfce-git.bbclass initial add
+Subject: [PATCH][meta-xfce/meta-gnome 02/10] xarchiver: fix configue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,39 +51,46 @@ X-List-Received-Date: Tue, 01 Apr 2014 15:22:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-common preparations for xfce-git-repos
-
-* implement autogen.sh call in do_configure_prepend
-* AUTOTOOLS_COPYACLOCAL = "1": In oe-core commit
-  79ea036de331bde65a88fb777647dc099ef05acf copying aclocals was moved to
-  do_configure[prefuncs]. These are called before do_configure_prepend which
-  causes configure.ac not yet being created and autotools_copy_aclocals
-  returning undone.
-
-By using this class tons of errors like
-
-| aclocal: error: couldn't open directory '/home/a.mueller/tmp/oe-core-eglibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/xfce4-settings/4.11.0+gitAUTOINC+b7a0e1fd77-r0/git/aclocal-copy/': No such file or directory
-| autoreconf: aclocal failed with exit status: 1
-
-are fixed.
+* use xfce-git to fix aclocal-copy error
+* add intltool-native in DEPENDS to fix
+  | configure.in:57: error: possibly undefined macro: AC_PROG_INTLTOOL
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/classes/xfce-git.bbclass | 5 +++++
- 1 file changed, 5 insertions(+)
- create mode 100644 meta-xfce/classes/xfce-git.bbclass
+ meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/meta-xfce/classes/xfce-git.bbclass b/meta-xfce/classes/xfce-git.bbclass
-new file mode 100644
-index 0000000..c4be554
---- /dev/null
-+++ b/meta-xfce/classes/xfce-git.bbclass
-@@ -0,0 +1,5 @@
-+do_configure_prepend() {
-+       NOCONFIGURE=yes ./autogen.sh
-+}
-+
-+AUTOTOOLS_COPYACLOCAL = "1"
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
+index ba538e6..9e4b696 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
+@@ -5,24 +5,20 @@ SECTION = "x11"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native"
++DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native intltool-native"
+ 
+ SRC_URI = "git://gitorious.org/xfce/xarchiver.git;branch=master"
+ SRCREV = "e80e90528c9aab2fe36d9078b945b44c05cc20d3"
+ PV = "0.5.3"
+ S = "${WORKDIR}/git"
+ 
+-inherit gettext pkgconfig autotools gtk-icon-cache
++inherit xfce-git gettext pkgconfig autotools gtk-icon-cache
+ 
+ # install tap files for thunar-archive-plugin in ${libdir}/thunar-archive-plugin
+ EXTRA_OECONF += "--libexecdir=${libdir}"
+ 
+ EXTRA_OECONF += "--enable-maintainer-mode"
+ 
+-do_configure_prepend() {
+-       NOCONFIGURE=yes ./autogen.sh
+-}
+-
+ FILES_${PN} += "${libdir}/thunar-archive-plugin"
+ 
+ RRECOMMENDS_${PN} = "lzop zip tar bzip2 unzip xz"
 -- 
 1.8.3.1
 
