@@ -1,41 +1,38 @@
 Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D4376F8CE
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id A70226F157
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 02:10:41 +0000 (UTC)
-Received: by mail-ig0-f172.google.com with SMTP id hn18so4243545igb.11
+	Tue,  1 Apr 2014 03:40:16 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id rl12so8638962iec.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Mar 2014 19:10:43 -0700 (PDT)
+	Mon, 31 Mar 2014 20:40:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=LFt1O+WSePPO2UZjh6p5+5sZW7Yh+zFZ4TTgWwPSTmk=;
-	b=KV7nEF2BR1LPEXzXFWZhW1bXlKwrya+TMJN3JWdUaiLLGEzUa5aR5TgUYGnKxbeCmY
-	P/t/6mo5rf+DORHqfp7kHchV2hM3fTmwe2rinJig1eTjrwMbIBXh5dSZgKXZBLguMCZG
-	WOG8Gkngzo27frB2zoKz6YZq3w7gKL24kIHCTkyGngTIK3x7VyK9QMQw7x4/RqZ8iMuA
-	tUFYWHgMZl3VdDMdShEv4+NlPd6BitmyzvcWea01VhR2qLiOCOAv3Cfg1fSav2uPvtEC
-	OMA+lILWh7tMgvnyMSRLjhmYJ1iaMVQiHx8qHOTp1eqWxvz+JnVvl/hvqIpX6jhbLfce
-	UukA==
-X-Gm-Message-State: ALoCoQnL4tCIbLcmX/mHnR62JxbnBPoezdpoYP1fL5jTNj7fiGA6mGojsT4z12PjKGTizYlRD0I0
-X-Received: by 10.42.50.3 with SMTP id y3mr38411112icf.12.1396318242903;
-	Mon, 31 Mar 2014 19:10:42 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=BUwCkRqvE+HkYCUqEz4wceXK1KI4+y0JI+B9qXx00AQ=;
+	b=k3vsOztR0HwbQyjfs8aN3yDR4be4MbtREd6RO1ViBZ3M6dU/pvHSuBauToUFsCTlSM
+	a6hJs3lfVVBL5abDq3+IyxrhXBncuKbl4mdRL9DfUTNjB9GI7S29zWXRZdlb/7KNrN/O
+	mUpSDT71xKe8GGRznjR578eceVV+b3RSGL9P9EK1pcrObNaYGgjFsRZcjwMvZqGza+F4
+	DiotiQ8leGK20Gy2r2Ncbzsglj7NkS2tFfinl8hYiRDZOye4PUZQ+8cccuhXoJht3mki
+	20EYaB4b1c/DDG9m1Eiae+GS18C9jV9QgGZYXg2ILShM0miFU1Q9u2Tu2z1XPxRiun4C
+	Zy2Q==
+X-Gm-Message-State: ALoCoQnpIif09qU57e3PRrKQhAtwiRlt8NyLS3/kzof2i9tw6p+rtXzjYwHKzqYPNxTC5/nnVfLa
+X-Received: by 10.43.170.4 with SMTP id no4mr38227346icc.15.1396323617531;
+	Mon, 31 Mar 2014 20:40:17 -0700 (PDT)
 Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
 	[69.165.220.158])
-	by mx.google.com with ESMTPSA id j2sm29054148igx.13.2014.03.31.19.10.42
+	by mx.google.com with ESMTPSA id gd5sm29556295igd.5.2014.03.31.20.40.16
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Mar 2014 19:10:42 -0700 (PDT)
+	Mon, 31 Mar 2014 20:40:16 -0700 (PDT)
 From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Mar 2014 22:10:29 -0400
-Message-Id: <1396318229-13509-2-git-send-email-trevor.woerner@linaro.org>
+Date: Mon, 31 Mar 2014 23:39:24 -0400
+Message-Id: <1396323568-18135-1-git-send-email-trevor.woerner@linaro.org>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1396318229-13509-1-git-send-email-trevor.woerner@linaro.org>
-References: <1396318229-13509-1-git-send-email-trevor.woerner@linaro.org>
 Cc: patches@linaro.org
-Subject: [meta-oe][PATCH] asio: package bump
+Subject: [meta-oe][PATCH 0/4] 'gtkmathview' fix for SOBBW (2014-03-29)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,66 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 02:10:42 -0000
+X-List-Received-Date: Tue, 01 Apr 2014 03:40:20 -0000
 
-This recipe had been failing to build, bumping to the latest stable release
-resolves all build issues.
+Hi Martin,
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
----
- meta-oe/recipes-support/asio/asio.inc       | 11 ++++++-----
- meta-oe/recipes-support/asio/asio_1.10.1.bb |  6 ++++++
- meta-oe/recipes-support/asio/asio_1.4.1.bb  |  8 --------
- 3 files changed, 12 insertions(+), 13 deletions(-)
- create mode 100644 meta-oe/recipes-support/asio/asio_1.10.1.bb
- delete mode 100644 meta-oe/recipes-support/asio/asio_1.4.1.bb
+Here is a fix for your "State of bitbake world, Failed tasks 2014-03-29". This
+patch set provides fixes and some clean-up for the gtkmathview package.
 
-diff --git a/meta-oe/recipes-support/asio/asio.inc b/meta-oe/recipes-support/asio/asio.inc
-index 49c236f..c2a6b1b 100644
---- a/meta-oe/recipes-support/asio/asio.inc
-+++ b/meta-oe/recipes-support/asio/asio.inc
-@@ -1,9 +1,10 @@
--DESCRIPTION = "Asio"
--HOMEPAGE = "http://asio.sf.net/"
-+DESCRIPTION = "Asio is a cross-platform C++ library for network and low-level \
-+        I/O programming that provides developers with a consistent asynchronous \
-+        model using a modern C++ approach."
-+AUTHOR = "Christopher M. Kohlhoff (chris at kohlhoff dot com)"
-+HOMEPAGE = "http://think-async.com/Asio"
- SECTION = "libs"
--LICENSE = "Boost Software License"
--
--INC_PR = "r0"
-+LICENSE = "BSL-1.0"
- 
- DEPENDS = "boost"
- 
-diff --git a/meta-oe/recipes-support/asio/asio_1.10.1.bb b/meta-oe/recipes-support/asio/asio_1.10.1.bb
-new file mode 100644
-index 0000000..fdfaaf6
---- /dev/null
-+++ b/meta-oe/recipes-support/asio/asio_1.10.1.bb
-@@ -0,0 +1,6 @@
-+require asio.inc
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=113f800aa522d9e38c3309c98ec53ade"
-+
-+SRC_URI[md5sum] = "4d508c9947404fee40945375b8a5fd32"
-+SRC_URI[sha256sum] = "820a5dad3c56a4f3e937f2b9ae059ab2696c6058345d71b7a8b072a0f2fcbd99"
-diff --git a/meta-oe/recipes-support/asio/asio_1.4.1.bb b/meta-oe/recipes-support/asio/asio_1.4.1.bb
-deleted file mode 100644
-index 396a553..0000000
---- a/meta-oe/recipes-support/asio/asio_1.4.1.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require asio.inc
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=b99840878263c0bfaa70ca7143624413"
--
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "1879b246f9217d64bd3126aa16488bc2"
--SRC_URI[sha256sum] = "aeb5c997940e6afd399c62316f03f480557f2b721354adff065d230183ff2782"
+Best regards,
+    Trevor
+
+Trevor Woerner (4):
+  gtkmathview: fix B!=S
+  gtkmathview: fix qa issue
+  gtkmathview: fix build error
+  gtkmathview: run through oe-stylize.py
+
+ .../mml-widget/gtkmathview/qualify-lookup.diff              | 13 +++++++++++++
+ meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb    |  9 +++------
+ 2 files changed, 16 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/mml-widget/gtkmathview/qualify-lookup.diff
+
 -- 
 1.9.0
 
