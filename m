@@ -1,23 +1,30 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 67C8D6E6FA;
-	Tue,  1 Apr 2014 10:48:08 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 01 Apr 2014 03:48:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,771,1389772800"; d="scan'208";a="511757529"
-Received: from mmckenna-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.155])
-	by fmsmga002.fm.intel.com with ESMTP; 01 Apr 2014 03:45:39 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 01 Apr 2014 11:45:38 +0100
-Message-ID: <1870874.WO3KGWfQsR@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
-MIME-Version: 1.0
-Subject: Public TSC / OE Workgroup meeting today
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (dan.rpsys.net [93.97.175.187])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F0596EF89;
+	Tue,  1 Apr 2014 11:21:34 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s31BLQ91017296; Tue, 1 Apr 2014 12:21:26 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Gdj7CR13myjm; Tue,  1 Apr 2014 12:21:26 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s31BLNq9017270
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
+	Tue, 1 Apr 2014 12:21:25 +0100
+Message-ID: <1396351278.2910.5.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+Date: Tue, 01 Apr 2014 12:21:18 +0100
+In-Reply-To: <5337ACBB.4040804@linaro.org>
+References: <20140330013103.GD2428@jama> <5337ACBB.4040804@linaro.org>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] Quality of meta-oe metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,30 +38,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 10:48:09 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 01 Apr 2014 11:21:36 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On Sun, 2014-03-30 at 02:33 -0400, Trevor Woerner wrote:
+> Hello Martin,
+> 
+> Excellent, excellent post!
+> 
+> On 03/29/14 21:31, Martin Jansa wrote:
+> > 2) There are a lot of changes and component upgrades in oe-core which
+> >    sometimes aren't very straight-forward to adapt to and issues stay in
+> >    meta-oe for months.
+> 
+> Critical bugfixes aside, I think the current system of unrestrained,
+> perpetual package bumps is an issue. If dylan uses version 1 of package
+> XYZ and dora uses version 5, is there any need for the 3 intervening
+> package bumps which occurred between the release of dylan and dora?
 
-There will be a public OpenEmbedded TSC/workgroup IRC meeting today. If you're 
-interested in discussing long-term technical efforts around the OpenEmbedded 
-project please join us on irc.freenode.net in channel #oe at 16:00 GMT (9am 
-PDT, 11am CDT, 12 EDT, 18:00 CEST, 17:00 BST).
+To put the other side of the argument to this, if you leave things and
+just update once, you bring in more change and it usually ends up being
+progressively harder to debug any issues since more things changed and
+you don't know which change caused which problem.
 
-Possible topics for discussion (based on the last meeting and recent mailing 
-list topics):
-- Upcoming release
-- World build status
-- Website and other infrastructure issues
+OE-Core has there fore gone for the "update regularly" philospohy where
+we can. This means we get to know about issues earlier and have more
+time to fix them, they're also less likely to get confused with other
+bugs.
 
-New topics for discussion are welcome.
+> If nothing else, these "irrelevant updates" increase the chance of
+> causing problems ;-)
+
+I'd disagree :)
+
+> > 3) OE releases work great and don't invalidate sstate signatures so often, so my
+> >    feeling is that most developers and projects are just using releases and
+> >    less and less people do CI.
+> 
+> Would users prefer a better-tested more-likely-to-work release
+> containing package versions which were several months old, or is staying
+> on the bleeding edge more important? There is always exponentially more
+> work/cost required to be an early adopter.
+
+At least for OE-Core, there is a strong pressure to try and keep up to
+date. The stability is found in the release branches one a set of
+versions are locked in.
+
+If we run into problems and talk to upstreams, the invariable question
+was "does this reproduce with the last release (or head of SCM)?". If
+we're up to date, it makes it easier for us to talk to upstreams in that
+regard too.
 
 Cheers,
-Paul
 
--- 
+Richard
 
-Paul Eggleton
-Intel Open Source Technology Centre
+
+
+
+
 
