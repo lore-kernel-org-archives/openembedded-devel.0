@@ -1,36 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id BA3146F897
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D01B6F92A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 17:14:13 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w61so6671676wes.1
+	Tue,  1 Apr 2014 17:14:15 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id l18so7627306wgh.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 10:14:14 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=o71/Iahq41Y6pOwDNIHcGcj4mRRf7DVQa0Mz3B65jso=;
-	b=swo5fOJVxyBuBZCmfUrnp2CZyUYlq24Nlci4XK0CX/EptNZhjH81exodPQUHktYbff
-	C7sJjK59a+YDE9gwpUpjlFaCBYKiriqhTLoPPlHs7NUPpAkgk84uzbSWOFScw6qgkwtS
-	QDbf6+p44LKLyvFf9FA1JXjamN1sOGC7eqImtzHFtVRoBeEezidjICMiLVjClw0IofhV
-	fjQ5rMqV9Jgc/c9K7vlwH16rue2lRE0I3j9I3bTbjUtVMJZ5c/+cFNfPTXG31foTMgxL
-	yJfW3idIXyo/f/VF9hW3EuDRmZ+d/xV3Edf74gqXbjUxnp6gN2IfdUlxHUmlRlZs3+i8
-	E28w==
-X-Received: by 10.195.13.76 with SMTP id ew12mr5828877wjd.80.1396372454145;
-	Tue, 01 Apr 2014 10:14:14 -0700 (PDT)
+	bh=souNk1AHqoDaqTodjBjWn/sMfwPbrobapIATzOr3zTs=;
+	b=BzVFYpG5FpCVv4XGWnm60kplN+QGqIEAyaZewwZTCeMiuOfAUSPWiNiHwaS1txEaVC
+	yNKKTmSYNGLZ54OkyTP/FmZss/rqxyY1feXj5YuzwaLgCsQc+/9AtToHy/QL8619AAjt
+	7qACvZZwxZPy1mNK6ieIuYxQhH2sfUVNqR1jitYEjXi5soO/qbcp6asBc+HFNDagjPPI
+	bdpb9rTv7gYip2uHeqJye8LlwOUs7HzZwoKDrW5WU4g2zOW7VRRXsGTr5eTDYrbMjRIB
+	LpJhkicLKdWdyMIa0RMbFSLqzFvraIATaw8Ehyt0wdjJXvU2b/trOwvABJGNWtga9IyN
+	EoqQ==
+X-Received: by 10.194.81.164 with SMTP id b4mr24308914wjy.2.1396372456189;
+	Tue, 01 Apr 2014 10:14:16 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	t44sm41871493eeo.6.2014.04.01.10.14.12 for <multiple recipients>
+	t50sm41847053eev.28.2014.04.01.10.14.14 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Apr 2014 10:14:13 -0700 (PDT)
+	Tue, 01 Apr 2014 10:14:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Apr 2014 19:13:16 +0200
-Message-Id: <1396372434-10710-8-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  1 Apr 2014 19:13:17 +0200
+Message-Id: <1396372434-10710-9-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1396372434-10710-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/46] eve: adapt to webkit-efl changes
+Subject: [meta-oe][PATCH 09/46] mplayer2: bump SRCREV to fix build issues with newer live555
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,128 +45,190 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 01 Apr 2014 17:14:16 -0000
 
+* live555 support was removed in:
+  http://git.mplayer2.org/mplayer2/commit/?id=e77b823b341fca0b931228d3e623dab50aa11723
+* remove now unsupported options
+* needs libav-9.10 which is in oe-core but with negative D_P otherwise
+  configure fails:
+  Requested 'libavcodec >= 54.25.0' but version of libavcodec is 53.35.0
+* disable man installation, because we don't have rst2man
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../e17/eve/adapt-to-webkit-efl-changes.patch      | 94 ++++++++++++++++++++++
- meta-efl/recipes-efl/e17/eve_svn.bb                |  4 +-
- 2 files changed, 97 insertions(+), 1 deletion(-)
- create mode 100644 meta-efl/recipes-efl/e17/eve/adapt-to-webkit-efl-changes.patch
+ ...on-t-disable-ASS-support-when-explicitly-.patch | 26 ++++++++++++++
+ .../mplayer/mplayer2/cross.compile.codec-cfg.patch | 16 ---------
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 41 +++++-----------------
+ 3 files changed, 35 insertions(+), 48 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/0001-configure-don-t-disable-ASS-support-when-explicitly-.patch
+ delete mode 100644 meta-oe/recipes-multimedia/mplayer/mplayer2/cross.compile.codec-cfg.patch
 
-diff --git a/meta-efl/recipes-efl/e17/eve/adapt-to-webkit-efl-changes.patch b/meta-efl/recipes-efl/e17/eve/adapt-to-webkit-efl-changes.patch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-configure-don-t-disable-ASS-support-when-explicitly-.patch b/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-configure-don-t-disable-ASS-support-when-explicitly-.patch
 new file mode 100644
-index 0000000..5e03f85
+index 0000000..e232595
 --- /dev/null
-+++ b/meta-efl/recipes-efl/e17/eve/adapt-to-webkit-efl-changes.patch
-@@ -0,0 +1,94 @@
-+WIP: just fixes the build, probably doesn't render correctly
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer2/0001-configure-don-t-disable-ASS-support-when-explicitly-.patch
+@@ -0,0 +1,26 @@
++From 3541649b711a773aa2e42ac80d9b4c1b36fce23f Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Thu, 27 Mar 2014 00:08:54 +0100
++Subject: [PATCH] configure: don't disable ASS support when explicitly enabled
 +
-+https://trac.webkit.org/changeset/164168
-+removed cairo.h from public headers and ewk_view_paint_contents
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ configure | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+https://trac.webkit.org/changeset/162581
-+removed ewk_view_pre_render methods (with whole tiled support)
++diff --git a/configure b/configure
++index 60fd308..2f7df3b 100755
++--- a/configure
+++++ b/configure
++@@ -4346,7 +4346,7 @@ fi
++ 
++ 
++ echocheck "SSA/ASS support"
++-if test "$_ass" = auto ; then
+++if test "$_ass" = auto -o "$_ass" = yes ; then
++     if pkg_config_add libass ; then
++         _ass=yes
++         def_ass='#define CONFIG_ASS 1'
++-- 
++1.9.1
 +
-+https://git.enlightenment.org/core/elementary.git/commit/?id=0e465290be2016f12adcbc8c8d74645b3e6a1d9a
-+ewk_view_tiled_smart_set is gone and ewk_view_single_smart_set is ewk_view_smart_set
-+
-+Index: src/bin/chrome.c
-+===================================================================
-+--- a/src/bin/chrome.c	(revision 84579)
-++++ b/src/bin/chrome.c	(working copy)
-+@@ -5,6 +5,8 @@
-+ #include <stdio.h>
-+ #include <string.h>
-+ 
-++#include <cairo.h>
-++
-+ #include <Eina.h>
-+ #include <Elementary.h>
-+ 
-+@@ -1997,7 +1999,7 @@
-+    if (cairo_status(cairo) != CAIRO_STATUS_SUCCESS)
-+       goto error_cairo_create;
-+ 
-+-   if (!ewk_view_paint_contents(priv, cairo, &rect))
-++   if (!ewk_view_screenshot_contents_get(priv, &rect, 1))
-+      {
-+         evas_object_del(img);
-+         img = NULL;
-+Index: src/bin/view.c
-+===================================================================
-+--- a/src/bin/view.c	(revision 84579)
-++++ b/src/bin/view.c	(working copy)
-+@@ -335,7 +335,7 @@
-+    h *= 2;
-+ 
-+    INF("load finished, pre-render %d,%d+%dx%d at %0.2f", x, y, w, h, zoom);
-+-   ewk_view_pre_render_region(view, x, y, w, h, zoom);
-++   //ewk_view_pre_render_region(view, x, y, w, h, zoom);
-+ }
-+ 
-+ /* stop animators, we changed page */
-+@@ -435,7 +435,7 @@
-+ 
-+    INF("pre-render region %d,%d+%dx%d at %0.2f (viewport=%d,%d+%dx%d)",
-+        px, py, pw, ph, zoom, x, y, w, h);
-+-   ewk_view_pre_render_region(sd->base.self, px, py, pw, ph, zoom);
-++   //ewk_view_pre_render_region(sd->base.self, px, py, pw, ph, zoom);
-+ }
-+ 
-+ static unsigned int
-+@@ -611,7 +611,7 @@
-+ 
-+    sd->pan.last_move = *p;
-+ 
-+-   ewk_view_pre_render_cancel(sd->base.self);
-++   //ewk_view_pre_render_cancel(sd->base.self);
-+ 
-+    /* register function to collect samples and apply scrolls at fixed interval*/
-+    if (!sd->animator.pan)
-+@@ -816,7 +816,7 @@
-+    Evas_Coord cw, ch, vw, vh;
-+    float z, zx, zy;
-+ 
-+-   ewk_view_pre_render_cancel(sd->base.self);
-++   //ewk_view_pre_render_cancel(sd->base.self);
-+ 
-+    /* remember starting point so we have a reference */
-+    sd->zoom.start.zoom = ewk_frame_page_zoom_get(frame);
-+@@ -1512,17 +1512,9 @@
-+         /* create ewk_view_single subclass, this is done only once! */
-+         static Ewk_View_Smart_Class api = EWK_VIEW_SMART_CLASS_INIT_NAME_VERSION("EWK_View_Demo");
-+ 
-+-        /* set current and parent apis to vanilla ewk_view_single methods */
-+-        if (bs == BACKING_STORE_TILED)
-+-          {
-+-             ewk_view_tiled_smart_set(&api);
-+-             ewk_view_tiled_smart_set(&_parent_sc);
-+-          }
-+-        else
-+-          {
-+-             ewk_view_single_smart_set(&api);
-+-             ewk_view_single_smart_set(&_parent_sc);
-+-          }
-++        /* set current and parent apis to vanilla ewk_view methods */
-++        ewk_view_smart_set(&api);
-++        ewk_view_smart_set(&_parent_sc);
-+ 
-+         /* override methods we want custom behavior */
-+         api.sc.add = _view_smart_add;
-diff --git a/meta-efl/recipes-efl/e17/eve_svn.bb b/meta-efl/recipes-efl/e17/eve_svn.bb
-index 5845c2d..869f8bf 100644
---- a/meta-efl/recipes-efl/e17/eve_svn.bb
-+++ b/meta-efl/recipes-efl/e17/eve_svn.bb
-@@ -12,7 +12,9 @@ COMPATIBLE_MACHINE_x86-64 = "(.*)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2/cross.compile.codec-cfg.patch b/meta-oe/recipes-multimedia/mplayer/mplayer2/cross.compile.codec-cfg.patch
+deleted file mode 100644
+index 7b290b5..0000000
+--- a/meta-oe/recipes-multimedia/mplayer/mplayer2/cross.compile.codec-cfg.patch
++++ /dev/null
+@@ -1,16 +0,0 @@
+-Upstream-Status: Pending
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-
+-diff --git a/Makefile b/Makefile
+-index 6013ca3..28c6383 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -600,7 +602,7 @@ mplayer$(EXESUF):
+- 	$(CC) -o $@ $^ $(EXTRALIBS)
+- 
+- codec-cfg$(EXESUF): codec-cfg.c codec-cfg.h
+--	$(HOST_CC) -O -DCODECS2HTML -I. -o $@ $<
+-+	$(BUILD_CC) -O -DCODECS2HTML -I. -Iffmpeg -o $@ $<
+- 
+- codecs.conf.h: codec-cfg$(EXESUF) etc/codecs.conf
+- 	./$^ > $@
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+index 63ee55e..2437884 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Open Source multimedia player"
+ SECTION = "multimedia"
+ HOMEPAGE = "http://www.mplayerhq.hu/"
+-DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
++DEPENDS = "libvpx libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
+            libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
+            libxv virtual/libx11 libass speex faad2"
  
- inherit e gettext
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
-+    file://adapt-to-webkit-efl-changes.patch \
-+"
- S = "${WORKDIR}/${SRCNAME}"
+@@ -13,11 +13,11 @@ RCONFLICTS_${PN} = "mplayer"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
  
- do_configure_prepend() {
+-SRC_URI = "git://repo.or.cz/mplayer.git;branch=master \
+-           file://cross.compile.codec-cfg.patch \
++SRC_URI = "git://repo.or.cz/mplayer.git \
++    file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
+ "
+ 
+-SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
++SRCREV = "2c378c71a4d9b1df382db9aa787b646628b4e3f9"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -47,21 +47,15 @@ EXTRA_OECONF = " \
+     --disable-vm \
+     --disable-xf86keysym \
+     --enable-tv \
+-    --disable-tv-v4l1 \     
+     --enable-tv-v4l2 \
+     --disable-tv-bsdbt848 \
+     --enable-rtc \
+     --enable-networking \
+     --disable-smb \
+-    --enable-live \
+     --disable-dvdnav \
+     --enable-dvdread \
+     --disable-dvdread-internal \
+     --disable-libdvdcss-internal \
+-    --disable-cdparanoia \
+-    --enable-freetype \
+-    --enable-sortsub \
+-    --disable-fribidi \
+     --disable-enca \
+     --disable-ftp \
+     --disable-vstream \
+@@ -84,49 +78,31 @@ EXTRA_OECONF = " \
+     --disable-musepack \
+     \
+     --disable-gl \
+-    --disable-vesa \
+-    --disable-svga \
+     --enable-sdl \
+-    --disable-aa \
+     --disable-caca \
+-    --disable-ggi \
+-    --disable-ggiwmh \
+     --disable-directx \
+-    --disable-dxr3 \
+     --disable-dvb \
+-    --disable-mga \
+-    --disable-xmga \
+     --enable-xv \
+     --disable-vm \
+     --disable-xinerama \
+     --enable-x11 \
+-    --enable-fbdev \
+-    --disable-3dfx \
+-    --disable-tdfxfb \
+-    --disable-s3fb \
+     --disable-directfb \
+-    --disable-bl \
+-    --disable-tdfxvid \
+     --disable-tga \
+     --disable-pnm \
+     --disable-md5sum \
+     \
+     --enable-alsa \
+     --enable-ossaudio \
+-    --disable-arts \
+-    --disable-esd \
+     --disable-pulse \
+     --disable-jack \
+     --disable-openal \
+-    --disable-nas \
+-    --disable-sgiaudio \
+-    --disable-sunaudio \
+-    --disable-win32waveout \
+     --enable-select \
+     --enable-libass \
+     \
+-    --extra-libs=' -lXext -lX11 -lBasicUsageEnvironment -lUsageEnvironment -lgroupsock -lliveMedia -lstdc++ -lvorbis ' \
++    --extra-libs=' -lXext -lX11 -lvorbis -ltheoradec -lasound ' \
+ "
++# -ltheoradec is missing in:
++# libmpcodecs/vd_theora.o: undefined reference to symbol 'theora_decode_init@@libtheora.so.1.0'
+ 
+ EXTRA_OECONF_append_armv6 = " --enable-armv6"
+ EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
+@@ -157,7 +133,8 @@ do_compile () {
+     oe_runmake
+ }
+ 
+-do_install_append() {
++do_install() {
++    oe_runmake 'DESTDIR=${D}' install-no-man
+     install -d ${D}/usr/etc/mplayer
+     install ${S}/etc/input.conf ${D}/usr/etc/mplayer/
+     install ${S}/etc/example.conf ${D}/usr/etc/mplayer/
 -- 
 1.9.1
 
