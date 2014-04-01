@@ -1,25 +1,25 @@
 Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 669EF6E9F2
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D0AD6F8CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 04:46:20 +0000 (UTC)
+	Tue,  1 Apr 2014 04:48:15 +0000 (UTC)
 Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
+	by vms173019.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N3C008R0598DS10@vms173017.mailsrvcs.net> for
+	2009)) with ESMTPA id <0N3C00KNA5BSIH30@vms173019.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	31 Mar 2014 23:46:21 -0500 (CDT)
+	31 Mar 2014 23:47:52 -0500 (CDT)
 Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 90846200BA; Tue,
-	01 Apr 2014 00:46:20 -0400 (EDT)
+	by gandalf.denix.org (Postfix) with ESMTP id 5F0F6200BA; Tue,
+	01 Apr 2014 00:47:52 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 01 Apr 2014 00:46:18 -0400
-Message-id: <1396327578-21862-1-git-send-email-denis@denix.org>
+Date: Tue, 01 Apr 2014 00:47:51 -0400
+Message-id: <1396327671-22282-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 1.9.1
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] linuxptp: fix and simplify recipe, drop dependency on kernel
+Subject: [meta-oe][PATCH] linuxptp: fix and simplify recipe, drop dependency on kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 04:46:21 -0000
+X-List-Received-Date: Tue, 01 Apr 2014 04:48:17 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
