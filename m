@@ -1,34 +1,23 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A9866E4CC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Apr 2014 09:07:29 +0000 (UTC)
-Received: by mail-yk0-f178.google.com with SMTP id 79so7280948ykr.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Apr 2014 02:07:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ZZZuJTDMzs26C7uDfWs42KxbHhlQXujmezTBu79tdSo=;
-	b=BlFkm8CTnWly4OVR4svjGe6GIF4fc/VLnXGcFRf5oK9Z970+6mNs8TvHsJwrgkyBtC
-	XXxPnV0woEmFYR62sCdWRopTdf7V81Pvshr0Cn9zWHkliCZsPbz/8MgwvYiil3hLiRiS
-	ae3KrLyPxBtICUkflwLku9X0fRX7mvqDFE8Om44YGFgnT9PYxCB+yV1MSBDsMOtpQIDZ
-	+TtDNXjdKNdO+Wl5PcecukX0ndMNJBjMoeDLBSdqywo/uZmIKp8fTOALweG67HEn+X+K
-	rbKkhOmQf/tZQiFlJmIC9sYEtdT+v2tN+tWAji6CKjwCkEY6dhkjHUhtdvejXNMdWsbu
-	V5ZQ==
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 67C8D6E6FA;
+	Tue,  1 Apr 2014 10:48:08 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Apr 2014 03:48:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,771,1389772800"; d="scan'208";a="511757529"
+Received: from mmckenna-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.155])
+	by fmsmga002.fm.intel.com with ESMTP; 01 Apr 2014 03:45:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 01 Apr 2014 11:45:38 +0100
+Message-ID: <1870874.WO3KGWfQsR@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.3 (Linux/3.13.6-200.fc20.x86_64; KDE/4.12.3; x86_64; ; )
 MIME-Version: 1.0
-X-Received: by 10.236.137.8 with SMTP id x8mr42488632yhi.4.1396343250198; Tue,
-	01 Apr 2014 02:07:30 -0700 (PDT)
-Received: by 10.64.230.100 with HTTP; Tue, 1 Apr 2014 02:07:30 -0700 (PDT)
-In-Reply-To: <3F0D5A70-AC82-4FBA-A613-48DBB4DC3227@gmail.com>
-References: <CALYKT1hK8DF=kt9k_0bMjn4_nZGTMb=hakdTpUVObgdBJ1NhWQ@mail.gmail.com>
-	<3F0D5A70-AC82-4FBA-A613-48DBB4DC3227@gmail.com>
-Date: Tue, 1 Apr 2014 18:07:30 +0900
-Message-ID: <CALYKT1iX6Bx12qmaOs_trYCrxuExuvdcicqcfwKwTcKRh=SzCA@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I make my own program start up when my system boots up?
+Subject: Public TSC / OE Workgroup meeting today
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,46 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Apr 2014 09:07:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Apr 2014 10:48:09 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi Khem Raj,
+Hi all,
 
-Thank you very much!
-I understood!
+There will be a public OpenEmbedded TSC/workgroup IRC meeting today. If you're 
+interested in discussing long-term technical efforts around the OpenEmbedded 
+project please join us on irc.freenode.net in channel #oe at 16:00 GMT (9am 
+PDT, 11am CDT, 12 EDT, 18:00 CEST, 17:00 BST).
 
-Sincerely
-Journeyer
+Possible topics for discussion (based on the last meeting and recent mailing 
+list topics):
+- Upcoming release
+- World build status
+- Website and other infrastructure issues
 
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
+New topics for discussion are welcome.
 
+Cheers,
+Paul
 
-2014-04-01 15:18 GMT+09:00 Khem Raj <raj.khem@gmail.com>:
+-- 
 
->
-> On Mar 31, 2014, at 11:07 PM, Journeyer J. Joh <oosaprogrammer@gmail.com>
-> wrote:
->
-> > I tried to add the execution command in /etc/init.d/data-init - at the
-> very
-> > bottom. And it worked!
-> >
-> > But I am not sure if this method is correct or not.
->
-> I think you are using standard sysvinit here so as long as you define an
-> init script
-> for your binary and enable it in rc scripts you should be ok.
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Paul Eggleton
+Intel Open Source Technology Centre
 
