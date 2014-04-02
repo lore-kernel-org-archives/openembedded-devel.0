@@ -1,36 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A6B386F622
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 336D16E81B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Apr 2014 12:43:43 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id hm4so807880wib.2
+	Thu,  3 Apr 2014 12:53:30 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1WVgTx-0000To-Ph for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Apr 2014 14:10:57 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Apr 2014 14:10:57 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Apr 2014 05:43:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=zB0WORaZLYr47ObQ/Kp2R3otuB8oXJP4vibAm5RdsfU=;
-	b=sbGEgtWb2IRviY6LB204xyszTntv3dy9aFZMgFwo22DTAcC6CYEDAntsIeY5QaliVJ
-	xnmxa7Cb1EgBb2TNffn++4PSjyGpOZnRN7HmSeLDECy865DztQiagpQi6BiOp4O7kDTp
-	XiVLGTm8Zvn6ia8PMghEMjU2AEsmKewT/fKCMdvDtMA46gZm27bjZFmHQ0bBphdirdlk
-	F80a1fDuUNbeWpsAaVI81moz1Aw8Q8oa7qiwNblEQWvtF83V9j08udnpsc4qhXU47AXk
-	jvLbCPwj0oy4oQLwwr/omlWIkN0meggI3kZAvG22Esd25Pf/5sKYUorHqQIwhO+iVYto
-	tgJg==
-X-Received: by 10.194.205.35 with SMTP id ld3mr10050254wjc.82.1396529024649;
-	Thu, 03 Apr 2014 05:43:44 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	y7sm11836092eev.5.2014.04.03.05.43.42 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Apr 2014 05:43:43 -0700 (PDT)
-Date: Thu, 3 Apr 2014 14:43:44 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 03 Apr 2014 14:10:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140403124344.GE2132@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: qtbase.inc: add -no-xkbcommon
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 02 Apr 2014 13:41:48 +0200
+Message-ID: <lhgt1t$sfb$1@ger.gmane.org>
+References: <1396388953-25506-1-git-send-email-stephen.arnold42@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+In-Reply-To: <1396388953-25506-1-git-send-email-stephen.arnold42@gmail.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [oe-core][PATCH] added upstream license files for gd and gnuplot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,37 +42,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Apr 2014 12:43:45 -0000
-X-Groupsio-MsgNum: 49043
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xA/XKXTdy9G3iaIz"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 Apr 2014 12:53:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---xA/XKXTdy9G3iaIz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-How was this patch tested, here it fails with:
+Stephen Arnold schreef op 01-04-14 23:49:
 
-| Error: -no-xkbcommon is not supported on XCB platform plugin.
+> Subject: [PATCH] added upstream license files for gd and gnuplot
 
-maybe it needs to be exclusive with xcb PACKAGECONFIG, please test and
-document it in qtbase.inc
+The general rule is that the first line says what the patch does, not what
+you did, so:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+[PATCH] Add upstream license files for gd and gnuplot
 
---xA/XKXTdy9G3iaIz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+would be better, but another rule is to prefix the area of interest:
+
+[PATCH] Common-licenses: add upstream license files for gd and gnuplot
+
+
+
+> Fixes QA warnings about missing license files and supports gnuplot recipe
+>  change in license classification.
+> 
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> 
+> --- meta/files/common-licenses/GD      | 53
+> ++++++++++++++++++++++++++++++++++++++ meta/files/common-licenses/gnuplot
+> | 29 +++++++++++++++++++++ 2 files changed, 82 insertions(+) create mode
+> 100644 meta/files/common-licenses/GD create mode 100644
+> meta/files/common-licenses/gnuplot
+> 
+> diff --git a/meta/files/common-licenses/GD
+> b/meta/files/common-licenses/GD new file mode 100644 index
+> 0000000..5e17d03 --- /dev/null +++ b/meta/files/common-licenses/GD @@
+> -0,0 +1,53 @@ + +     Portions copyright 1994, 1995, 1996, 1997, 1998,
+> 1999, 2000, 2001, +     2002 by Cold Spring Harbor Laboratory. Funded
+> under Grant +     P41-RR02188 by the National Institutes of Health. + +
+> Portions copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002 by +
+> Boutell.Com, Inc. + +     Portions relating to GD2 format copyright 1999,
+> 2000, 2001, 2002 +     Philip Warner. + +     Portions relating to PNG
+> copyright 1999, 2000, 2001, 2002 Greg +     Roelofs. + +     Portions
+> relating to gdttf.c copyright 1999, 2000, 2001, 2002 John +     Ellson
+> (ellson@lucent.com). + +     Portions relating to gdft.c copyright 2001,
+> 2002 John Ellson +     (ellson@lucent.com). + +     Portions copyright
+> 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007 +		 Pierre-Alain Joye
+> (pierre@libgd.org). + +     Portions relating to JPEG and to color
+> quantization copyright 2000, +     2001, 2002, Doug Becker and copyright
+> (C) 1994, 1995, 1996, 1997, +     1998, 1999, 2000, 2001, 2002, Thomas G.
+> Lane. This software is +     based in part on the work of the Independent
+> JPEG Group. See the +     file README-JPEG.TXT for more information. + +
+> Portions relating to WBMP copyright 2000, 2001, 2002 Maurice +
+> Szmurlo and Johan Van den Brande. + +     Permission has been granted to
+> copy, distribute and modify gd in +     any context without fee,
+> including a commercial application, +     provided that this notice is
+> present in user-accessible supporting +     documentation. + +     This
+> does not affect your ownership of the derived work itself, and +     the
+> intent is to assure proper credit for the authors of gd, not to +
+> interfere with your productive use of gd. If you have questions, +
+> ask. "Derived works" includes all programs that utilize the +
+> library. Credit must be given in user-accessible documentation. + +
+> This software is provided "AS IS." The copyright holders disclaim +
+> all warranties, either express or implied, including but not +
+> limited to implied warranties of merchantability and fitness for a +
+> particular purpose, with respect to this code and accompanying +
+> documentation. + +     Although their code does not appear in gd, the
+> authors wish to thank +     David Koblas, David Rowley, and Hutchison
+> Avenue Software Corporation +     for their prior contributions. + diff
+> --git a/meta/files/common-licenses/gnuplot
+> b/meta/files/common-licenses/gnuplot new file mode 100644 index
+> 0000000..ff6fe23 --- /dev/null +++ b/meta/files/common-licenses/gnuplot 
+> @@ -0,0 +1,29 @@ +/*[ + * Copyright 1986 - 1993, 1998, 2004   Thomas
+> Williams, Colin Kelley + * + * Permission to use, copy, and distribute
+> this software and its + * documentation for any purpose with or without
+> fee is hereby granted, + * provided that the above copyright notice
+> appear in all copies and + * that both that copyright notice and this
+> permission notice appear + * in supporting documentation. + * + *
+> Permission to modify the software is granted, but not the right to + *
+> distribute the complete modified source code.  Modifications are to + *
+> be distributed as patches to the released version.  Permission to + *
+> distribute binaries produced by compiling modified sources is granted, +
+> * provided you + *   1. distribute the corresponding source modifications
+> from the + *    released version in the form of a patch file along with
+> the binaries, + *   2. add special version identification to distinguish
+> your version + *    in addition to the base release version number, + *
+> 3. provide your name and address as the primary contact for the + *
+> support of your modified version, and + *   4. retain our contact
+> information in regard to use of the base + *    software. + * Permission
+> to distribute the released version of the source code along + * with
+> corresponding source modifications in the form of a patch file is + *
+> granted with same provisions 2 through 4 for binary distributions. + * +
+> * This software is provided "as is" without express or implied warranty +
+> * to the extent permitted by applicable law. +]*/
+> 
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEUEARECAAYFAlM9V4AACgkQN1Ujt2V2gBwRJgCY62KGJVYlwS3bIKCmou4aYBl0
-igCgtNL/cZm+iBZR7Zsx3wHfFN9hGgs=
-=w9en
+iD8DBQFTO/d8MkyGM64RGpERAtZ9AJ4l4antJVdWXUhF7WmVRHcCdQcWLQCbBiOz
+HKOfboYT/6mclZX90mCIQ70=
+=iz3/
 -----END PGP SIGNATURE-----
 
---xA/XKXTdy9G3iaIz--
+
