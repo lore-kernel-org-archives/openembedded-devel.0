@@ -1,39 +1,44 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3242A6FA90
+Return-Path: <joe@deserted.net>
+Received: from mail-qc0-f176.google.com (mail-qc0-f176.google.com
+	[209.85.216.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 759986FA9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Apr 2014 13:26:29 +0000 (UTC)
-Received: from [216.82.249.131:52132] by server-13.bemta-12.messagelabs.com id
-	38/CD-28941-6001C335; Wed, 02 Apr 2014 13:26:30 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-14.tower-28.messagelabs.com!1396445189!26775209!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 31179 invoked from network); 2 Apr 2014 13:26:29 -0000
-Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-14.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
-	2 Apr 2014 13:26:29 -0000
-Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 2 Apr 2014 08:26:01 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH03.digi.com
-	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Wed, 2 Apr 2014 08:26:28 -0500
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
-	8.3.342.0; Wed, 2 Apr 2014 15:26:26 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Apr 2014 15:26:26 +0200
-Message-ID: <1396445186-64883-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 1.9.1
+	Wed,  2 Apr 2014 15:23:29 +0000 (UTC)
+Received: by mail-qc0-f176.google.com with SMTP id m20so373592qcx.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Apr 2014 08:23:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=YMZue6jZoNT18ig7oaJObSrC0cdkPApHbkzeYl94pMs=;
+	b=JOss7h3AoC1YXSvtVIYUTE6+M7FxB44aBxv6bXYlz67tA2+GwAv37jtbQ8V04jqoe2
+	TsLNoXbWeUcNbgaw6ClkiCb75vVgY/XIYXLS/KiIOaZcvEXCcJAufw1kd70gRqKl/Krm
+	H60gfQHN2C72/tTQ8MfSc7ILx4nep298O6hvqemwjuadOYqDKs483i9Rt940A6ZgQg9C
+	TxwAUrWjRVGqVbzcIAnRt12UBXxNgz0K5Q5c/CuW9N3Z/6UsdsoJYOlNhn/cGw+JTDKc
+	8NRGjROeyvYxMXO9SuNdH/NMS0h74KmjHwF53uVIXf0gUc6unHGv+M2Tf5sHx8d438N0
+	YZhw==
+X-Gm-Message-State: ALoCoQks0bSGK51ATfEY0AlkuefkJZRkllJIYh5V9/O8pJ2L9FfT/Ml3QorFtBHHGgyY8SktnnGp
+X-Received: by 10.140.33.136 with SMTP id j8mr1171943qgj.97.1396452210417;
+	Wed, 02 Apr 2014 08:23:30 -0700 (PDT)
+Received: from deserted.net ([128.224.252.2])
+	by mx.google.com with ESMTPSA id z8sm4392665qaw.17.2014.04.02.08.23.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 02 Apr 2014 08:23:29 -0700 (PDT)
+Date: Wed, 2 Apr 2014 11:23:27 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140402152325.GB4392@deserted.net>
+References: <1396423645-26893-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: [meta-networking][PATCH] stunnel: fix SRC_URI
+In-Reply-To: <1396423645-26893-1-git-send-email-jackie.huang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-networking][PATCH] inetutils: add -dbg packages for tftpd, telnetd and rshd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,32 +52,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2014 13:26:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 02 Apr 2014 15:23:32 -0000
+X-Groupsio-MsgNum: 49036
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ZoaI/ZTpAVc4A5k6"
+Content-Disposition: inline
 
-Trying to build stunnel fails with:
+--ZoaI/ZTpAVc4A5k6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  ERROR 404: Not Found.
+Merged, thanks.
+-J.
 
-Seems that after the new release (5.x) they have moved the old tarball
-under a 'archive/4.x' subdirectory.
+[[oe] [meta-networking][PATCH] inetutils: add -dbg packages for tftpd, teln=
+etd and rshd] On 14.04.02 (Wed 15:27) jackie.huang@windriver.com wrote:
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
----
- meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> The packages tftpd, telnetd and rshd conflict with the ones
+> provided by netkit, so add the corresponding -dbg packages
+> for them to avoid the following confliction between the dbg
+> package of inetutils and netkit:
+>=20
+> error: file /usr/sbin/.debug/in.rexecd conflicts between attempted instal=
+ls of inetutils-dbg-1.9.1-r1.0.armv7a_vfp_neon and netkit-rsh-dbg-0.17-r0.0=
+=2Earmv7a_vfp_neon
+> error: file /usr/sbin/.debug/in.telnetd conflicts between attempted insta=
+lls of inetutils-dbg-1.9.1-r1.0.armv7a_vfp_neon and netkit-telnet-dbg-0.17-=
+r0.0.armv7a_vfp_neon
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../inetutils/inetutils_1.9.1.bb                   |   10 ++++++++++
+>  1 file changed, 10 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
+=2E1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> index e7f1987..0e47015 100644
+> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+> @@ -80,6 +80,12 @@ ${PN}-tftp ${PN}-logger ${PN}-traceroute ${PN}-syslogd=
+ \
+>  ${PN}-ftp ${PN}-ftpd ${PN}-tftpd ${PN}-telnet ${PN}-telnetd ${PN}-inetd \
+>  ${PN}-rsh ${PN}-rshd"
+> =20
+> +# The packages tftpd, telnetd and rshd conflict with the ones
+> +# provided by netkit, so add the corresponding -dbg packages
+> +# for them to avoid the confliction between the dbg package
+> +# of inetutils and netkit.
+> +PACKAGES +=3D "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
+> +
+>  ALTERNATIVE_PRIORITY =3D "80"
+>  ALTERNATIVE_${PN} =3D "talk whois"
+>  ALTERNATIVE_LINK_NAME[talkd]  =3D "${sbindir}/in.talkd"
+> @@ -141,18 +147,22 @@ FILES_${PN}-rsh =3D "${bindir}/rsh.${BPN} ${bindir}=
+/rlogin.${BPN} ${bindir}/rexec.
+> =20
+>  FILES_${PN}-rshd =3D "${sbindir}/in.rshd ${sbindir}/in.rlogind ${sbindir=
+}/in.rexecd \
+>                      ${sysconfdir}/xinetd.d/rsh ${sysconfdir}/xinetd.d/rl=
+ogin ${sysconfdir}/xinetd.d/rexec"
+> +FILES_${PN}-rshd-dbg =3D "${sbindir}/.debug/in.rshd ${sbindir}/.debug/in=
+=2Erlogind ${sbindir}/.debug/in.rexecd"
+>  RDEPENDS_${PN}-rshd +=3D "xinetd tcp-wrappers"
+>  RCONFLICTS_${PN}-rshd +=3D "netkit-rshd"
+>  RPROVIDES_${PN}-rshd =3D "rshd"
+> =20
+>  FILES_${PN}-ftpd =3D "${bindir}/ftpd.${BPN}"
+> +FILES_${PN}-ftpd-dbg =3D "${bindir}/.debug/ftpd.${BPN}"
+>  RDEPENDS_${PN}-ftpd +=3D "xinetd"
+> =20
+>  FILES_${PN}-tftpd =3D "${sbindir}/in.tftpd ${sysconfdir}/xinetd.d/tftpd"
+> +FILES_${PN}-tftpd-dbg =3D "${sbindir}/.debug/in.tftpd"
+>  RCONFLICTS_${PN}-tftpd +=3D "netkit-tftpd"
+>  RDEPENDS_${PN}-tftpd +=3D "xinetd"
+> =20
+>  FILES_${PN}-telnetd =3D "${sbindir}/in.telnetd ${sysconfdir}/xinetd.d/te=
+lnet"
+> +FILES_${PN}-telnetd-dbg =3D "${sbindir}/.debug/in.telnetd"
+>  RCONFLICTS_${PN}-telnetd +=3D "netkit-telnetd"
+>  RPROVIDES_${PN}-telnetd =3D "telnetd"
+>  RDEPENDS_${PN}-telnetd +=3D "xinetd"
+> --=20
+> 1.7.9.5
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-index 7ac2e23afa96..086d0b7aafea 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
- DEPENDS = "openssl"
- 
--SRC_URI = "https://www.stunnel.org/downloads/${BP}.tar.gz"
-+SRC_URI = "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
- 
- SRC_URI[md5sum] = "ac4c4a30bd7a55b6687cbd62d864054c"
- SRC_URI[sha256sum] = "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c871293"
+--ZoaI/ZTpAVc4A5k6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlM8K20ACgkQwFvcllog0XysdQCgqZKKHliCHfTQS51P2Mru8Ffj
+7NAAnRLJj0uML4Jb1msj3/djQxJpkc1R
+=iw4e
+-----END PGP SIGNATURE-----
+
+--ZoaI/ZTpAVc4A5k6--
