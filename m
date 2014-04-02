@@ -1,29 +1,39 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 88F6F6F9FC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FCB86B269
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Apr 2014 12:29:13 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,780,1389740400"; d="scan'208";a="43723630"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 02 Apr 2014 14:29:13 +0200
-Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.243]) by
-	COSNADEXC21.usr.ingenico.loc ([10.31.4.221]) with mapi id
-	14.02.0328.009; Wed, 2 Apr 2014 14:29:13 +0200
-From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] zsh: upgrade to 5.0.5
-Thread-Index: AQHPTm526XnBKQC950+lfFqrnTXxJZr+QS0Q
-Date: Wed, 2 Apr 2014 12:29:12 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B575517A5@COSNADEXC13.usr.ingenico.loc>
-References: <1396441282-19534-1-git-send-email-Matthieu.Crapet@ingenico.com>
-In-Reply-To: <1396441282-19534-1-git-send-email-Matthieu.Crapet@ingenico.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.31.16.119]
+	Wed,  2 Apr 2014 12:50:03 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id u56so162055wes.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Apr 2014 05:50:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=09kDXR3almd3SMdGpl2frLioxLsiGWT8KBvrbUpGsBE=;
+	b=jIoDiQtpu+MltJvbGGkx1VhgN4Q+SH48EbIGO35DZ6O2dkz+f5NXePfsrGfDVV70T5
+	ikdZvmpBJPWhhS8lAQ+yVm4K6Lx35Xxr3VsS3aD4QkPle0CdCK1yDZb02lSmjrSAcjZm
+	r6Gok25NBWSTBKKwBngEX/0ZOcJMytzXKiBOmU/m85le4Tt5fwlPEB+FI1uI4Exbs3hH
+	4x8nHvgm4xNYSZn25QNZZw5h87v249c6Af97AdzQGbOXKqwoGH78XUvtyuOmpezRmHer
+	jcfmWhUOxinXm2Z8tJQRw1q71pEyxN0STrPNE8c3bhAT468e4RK8O7ICy8OWxzI3OiFw
+	Qcnw==
+X-Received: by 10.180.20.71 with SMTP id l7mr1717694wie.35.1396443004375;
+	Wed, 02 Apr 2014 05:50:04 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	o7sm4332502eew.25.2014.04.02.05.50.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 02 Apr 2014 05:50:03 -0700 (PDT)
+Date: Wed, 2 Apr 2014 14:50:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140402125004.GB2132@jama>
+References: <1396410465-13709-1-git-send-email-stephen.arnold42@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] zsh: upgrade to 5.0.5
+In-Reply-To: <1396410465-13709-1-git-send-email-stephen.arnold42@gmail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [meta-oe][PATCH v2 1/2] gd: added upstream license file and fixed configure warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,149 +47,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2014 12:29:16 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 02 Apr 2014 12:50:09 -0000
+X-Groupsio-MsgNum: 49033
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="LyciRD1jyfeSSjG0"
+Content-Disposition: inline
+
+--LyciRD1jyfeSSjG0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Forget this one, I screwed with content-type.
+On Tue, Apr 01, 2014 at 08:47:44PM -0700, Stephen Arnold wrote:
+> This fixes QA warnings about missing license file and stale configure opt=
+ions,
+> (includes updates for freetype libpath and disables hardcoded rpaths).
 
-Content-Type: text/plain; charset=3Dy
-Instead of
-Content-Type: text/plain; charset=3DUTF-8
+It shows couple of trailing whitespaces in license text, but if they are
+also in the original source of it, then we should probably keep them.
 
-Matt
+Please confirm.
 
-
------Message d'origine-----
-De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de Matthieu Crapet
-Envoy=E9=A0: mercredi 2 avril 2014 14:21
-=C0=A0: openembedded-devel@lists.openembedded.org
-Objet=A0: [oe] [meta-oe][PATCH] zsh: upgrade to 5.0.5
-
-Recipe cleanup:
-- Add missing license in meta-oe/licenses
-- Add DESCRIPTION
-- Use ${BP} and ${SOURCEFORGE_MIRROR}
-
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/licenses/zsh                      | 37 +++++++++++++++++++++++++++=
-++++
- meta-oe/recipes-extended/zsh/zsh.inc      | 14 +++++++-----
- meta-oe/recipes-extended/zsh/zsh_5.0.0.bb |  5 -----  meta-oe/recipes-exte=
-nded/zsh/zsh_5.0.5.bb |  5 +++++
- 4 files changed, 50 insertions(+), 11 deletions(-)  create mode 100644 met=
-a-oe/licenses/zsh  delete mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.=
-0.bb
- create mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-
-diff --git a/meta-oe/licenses/zsh b/meta-oe/licenses/zsh new file mode 1006=
-44 index 0000000..1fb1fc4
---- /dev/null
-+++ b/meta-oe/licenses/zsh
-@@ -0,0 +1,37 @@
-+Unless otherwise noted in the header of specific files, files in this=20
-+distribution have the licence shown below.
-+
-+However, note that certain shell functions are licensed under versions=20
-+of the GNU General Public Licence.  Anyone distributing the shell as a=20
-+binary including those files needs to take account of this.  Search=20
-+shell functions for "Copyright" for specific copyright information.
-+None of the core functions are affected by this, so those files may=20
-+simply be omitted.
-+
-+--
-+
-+The Z Shell is copyright (c) 1992-2009 Paul Falstad, Richard Coleman,=20
-+Zolt=C3=A1n Hidv=C3=A9gi, Andrew Main, Peter Stephenson, Sven Wischnowsky,=
- and=20
-+others.  All rights reserved.  Individual authors, whether or not=20
-+specifically named, retain copyright in all changes; in what follows,=20
-+they are referred to as `the Zsh Development Group'.  This is for=20
-+convenience only and this body has no legal status.  The Z shell is=20
-+distributed under the following licence; any provisions made in=20
-+individual files take precedence.
-+
-+Permission is hereby granted, without written agreement and without=20
-+licence or royalty fees, to use, copy, modify, and distribute this=20
-+software and to distribute modified versions of this software for any=20
-+purpose, provided that the above copyright notice and the following two=20
-+paragraphs appear in all copies of this software.
-+
-+In no event shall the Zsh Development Group be liable to any party for=20
-+direct, indirect, special, incidental, or consequential damages arising=20
-+out of the use of this software and its documentation, even if the Zsh=20
-+Development Group have been advised of the possibility of such damage.
-+
-+The Zsh Development Group specifically disclaim any warranties,=20
-+including, but not limited to, the implied warranties of=20
-+merchantability and fitness for a particular purpose.  The software provid=
-ed hereunder is on an "as is"
-+basis, and the Zsh Development Group have no obligation to provide=20
-+maintenance, support, updates, enhancements, or modifications.
-diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-extende=
-d/zsh/zsh.inc
-index 03201d6..db51f39 100644
---- a/meta-oe/recipes-extended/zsh/zsh.inc
-+++ b/meta-oe/recipes-extended/zsh/zsh.inc
-@@ -1,14 +1,16 @@
--DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
--HOMEPAGE=3D"http://www.zsh.org"
-+SUMMARY =3D "UNIX Shell similar to the Korn shell"
-+DESCRIPTION =3D "Zsh is a shell designed for interactive use, although it =
-is also a \
-+               powerful scripting language. Many of the useful features of=
- bash, \
-+               ksh, and tcsh were incorporated into zsh; many original fea=
-tures were added."
-+HOMEPAGE =3D "http://www.zsh.org"
- SECTION =3D "base/shell"
+> Upstream-Status: Inappropriate (distribution/packaging fix)
+>=20
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> ---
+>  meta-oe/licenses/GD                               | 53 +++++++++++++++++=
+++++++
+>  meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb |  4 +-
+>  2 files changed, 55 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/licenses/GD
+>=20
+> diff --git a/meta-oe/licenses/GD b/meta-oe/licenses/GD
+> new file mode 100644
+> index 0000000..5e17d03
+> --- /dev/null
+> +++ b/meta-oe/licenses/GD
+> @@ -0,0 +1,53 @@
+> +=20
+> +     Portions copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
+> +     2002 by Cold Spring Harbor Laboratory. Funded under Grant
+> +     P41-RR02188 by the National Institutes of Health.=20
+> +
+> +     Portions copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002 by
+> +     Boutell.Com, Inc.=20
+> +
+> +     Portions relating to GD2 format copyright 1999, 2000, 2001, 2002
+> +     Philip Warner.
+> +    =20
+> +     Portions relating to PNG copyright 1999, 2000, 2001, 2002 Greg
+> +     Roelofs.=20
+> +
+> +     Portions relating to gdttf.c copyright 1999, 2000, 2001, 2002 John =
 =20
--
--LICENSE =3D "ZSH"
--LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb34=
-1"
-+LICENSE =3D "zsh"
-+LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Db7bc853894664be455a922db9805288=
-e"
+> +     Ellson (ellson@lucent.com).
+> +  =20
+> +     Portions relating to gdft.c copyright 2001, 2002 John Ellson =20
+> +     (ellson@lucent.com). =20
+> +
+> +     Portions copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007
+> +		 Pierre-Alain Joye (pierre@libgd.org). =20
+> +
+> +     Portions relating to JPEG and to color quantization copyright 2000,
+> +     2001, 2002, Doug Becker and copyright (C) 1994, 1995, 1996, 1997,
+> +     1998, 1999, 2000, 2001, 2002, Thomas G. Lane. This software is
+> +     based in part on the work of the Independent JPEG Group. See the
+> +     file README-JPEG.TXT for more information.
+> +
+> +     Portions relating to WBMP copyright 2000, 2001, 2002 Maurice
+> +     Szmurlo and Johan Van den Brande.
+> +
+> +     Permission has been granted to copy, distribute and modify gd in
+> +     any context without fee, including a commercial application,
+> +     provided that this notice is present in user-accessible supporting
+> +     documentation.
+> +
+> +     This does not affect your ownership of the derived work itself, and=
 =20
- DEPENDS =3D "ncurses bison-native"
+> +     the intent is to assure proper credit for the authors of gd, not to
+> +     interfere with your productive use of gd. If you have questions,
+> +     ask. "Derived works" includes all programs that utilize the  =20
+> +     library. Credit must be given in user-accessible documentation.
+> +
+> +     This software is provided "AS IS." The copyright holders disclaim =
 =20
--SRC_URI =3D "http://downloads.sourceforge.net/project/${BPN}/${BPN}/${PV}/=
-${BPN}-${PV}.tar.gz"
-+SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-=20
- inherit autotools gettext update-alternatives
-=20
-diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb b/meta-oe/recipes-ex=
-tended/zsh/zsh_5.0.0.bb
-deleted file mode 100644
-index 3421d95..0000000
---- a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require zsh.inc
--DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
--
--SRC_URI[md5sum] =3D "01df38e4aa34aa227462fdf2f6d4c5cd"
--SRC_URI[sha256sum] =3D "835194ea83abd812b5fdb1d2bfa6427c4c4e95e771c4a75e90=
-06037af8efd264"
-diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-ex=
-tended/zsh/zsh_5.0.5.bb
-new file mode 100644
-index 0000000..a7170dc
---- /dev/null
-+++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-@@ -0,0 +1,5 @@
-+require zsh.inc
-+DEPENDS +=3D "libcap libpcre gdbm groff-native"
-+
-+SRC_URI[md5sum] =3D "6fb0e3e52a0f8de5ca63138391b81ce0"
-+SRC_URI[sha256sum] =3D "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d150=
-23ff291c2894b4"
---
-1.8.5.4
+> +     all warranties, either express or implied, including but not
+> +     limited to implied warranties of merchantability and fitness for a
+> +     particular purpose, with respect to this code and accompanying =20
+> +     documentation.
+> +
+> +     Although their code does not appear in gd, the authors wish to thank
+> +     David Koblas, David Rowley, and Hutchison Avenue Software Corporati=
+on
+> +     for their prior contributions.
+> +
+> diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb b/meta-oe/=
+recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+> index 957c4eb..5fb5857 100644
+> --- a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+> +++ b/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+> @@ -15,10 +15,10 @@ S =3D "${WORKDIR}/gd-2.0.36RC1"
+> =20
+>  inherit autotools binconfig gettext
+> =20
+> -EXTRA_OECONF +=3D " --with-zlib=3D${STAGING_LIBDIR}/.. \
+> +EXTRA_OECONF +=3D " --disable-rpath \
+>                    --with-png=3D${STAGING_LIBDIR}/.. \
+>                    --with-jpeg=3D${STAGING_LIBDIR}/.. \
+> -                  --with-freetype \
+> +                  --with-freetype=3D${STAGING_LIBDIR}/.. \
+>                    --without-fontconfig \
+>                    --without-xpm \
+>                    --without-x"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--LyciRD1jyfeSSjG0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlM8B3wACgkQN1Ujt2V2gBwqrgCgiJFAjf5bT/Df6r7hQzyBvIgM
++jUAoJgVRSF70b22M7VXgrUwvv1/13Nr
+=x8wS
+-----END PGP SIGNATURE-----
+
+--LyciRD1jyfeSSjG0--
