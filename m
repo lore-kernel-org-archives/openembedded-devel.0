@@ -1,34 +1,42 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B00066FA5C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Apr 2014 16:32:19 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id cc10so888068wib.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Apr 2014 09:32:19 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F4496F9FC;
+	Wed,  2 Apr 2014 16:35:58 +0000 (UTC)
+Received: by mail-ig0-f178.google.com with SMTP id hn18so558616igb.11
+	for <multiple recipients>; Wed, 02 Apr 2014 09:35:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=s982SfzFJhJq+7p7YDaQYRLA5B7PucHcmk6eAc1Nat0=;
-	b=wWkWRLqBUOPx+0IfBSQb5nIvvob2T6jAfUosut96OJ/dTY+CGC8BkOBPR5KCc1PuA0
-	cII3xvf7YEl0wNFMA+PsYhf4+3z1iZ4kwu4ZQN/DLXusecq/yhCYRwi7opw3SfVexGVo
-	npPlaGqaCtAwQu3mWFyGYyf8jcGU31QwO/jOnDdW7KXrqSZMRSD2fSEs4Vi3qrYctAZR
-	+dJ99zj24WTt9Z+CFzlJuPLzUHBpmq8YxshL3P7+y5PG9U4KhNKHM+lpRylyZQDymNKC
-	Zr8j5XhyppXFLDv27sJ9qzK1h3LNGHY2PdUBbAZsfqomZKJEHAignYVe3MA0l14/BcEI
-	qBdg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=x2L6mYBNTeo9RkGv6W4xuchvfZU3jlNHBVkvSfXXy1Q=;
+	b=GLnlglv7/RMl+hZEGVUhd7geLIKmccXDu96J8kbTrYuYeSvZm7QFOmed2tEwPyFLoc
+	uwcQAAcp2xbkgtn1FcyjqPYU088IaPgfPiYkVgTDzofZkQ9ACn45G5/wmBOxrpO/8CGm
+	Ei6EYNMXkhjsYXoI9FutuGJYgt5E/QieAr7cABBABdiPmvpTC5kImwTVYM3WWYx5+8CM
+	xipEDPwjH/BqX8mnreIWzBSSth2PVo9iJVXBC2uDp5WTqdoafKMlppphHPYQD0ejjRaK
+	wK10wfo/efDGQ4c8ZgZCEeRPt36hwsB+brcYaUThgQI7LLCe4Tbq2uQFYcVFNBClj3u1
+	/VYw==
+X-Received: by 10.42.20.193 with SMTP id h1mr1494714icb.70.1396456558944; Wed,
+	02 Apr 2014 09:35:58 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.180.189.43 with SMTP id gf11mr3524462wic.32.1396456338291;
-	Wed, 02 Apr 2014 09:32:18 -0700 (PDT)
-Received: by 10.216.117.6 with HTTP; Wed, 2 Apr 2014 09:32:18 -0700 (PDT)
-In-Reply-To: <20140402125004.GB2132@jama>
-References: <1396410465-13709-1-git-send-email-stephen.arnold42@gmail.com>
-	<20140402125004.GB2132@jama>
-Date: Wed, 2 Apr 2014 09:32:18 -0700
-Message-ID: <CAOLEWZVCE19+jeLdPT8Cb2GKQPDV7q9BNniJck6B57+QJjqYDQ@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2 1/2] gd: added upstream license file and fixed configure warnings
+Received: by 10.50.229.14 with HTTP; Wed, 2 Apr 2014 09:35:28 -0700 (PDT)
+In-Reply-To: <CAP9ODKp-+31rJmK6uY1QA6nvG4hDuNT79JVeeivY5XeOCu2etw@mail.gmail.com>
+References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
+	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
+	<CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
+	<CAMKF1sqPB+QCvPHHcxsU+ExBmNWg9jPXajkAR_FdKpJ76-x9dg@mail.gmail.com>
+	<CANyK_8er+2sjvU1csLOEpZ06qCL4h+bP2ecUYYGzyiEw0kXzQw@mail.gmail.com>
+	<CAMKF1spno7Np8FXr3JXw3_W72+vRkchzZ8J5X+3e4RCFY+6nLg@mail.gmail.com>
+	<CANyK_8f_V247P1UWaeG-7YwBq4MrHQ=+69NOgW8LUZ4_Xgx2qA@mail.gmail.com>
+	<CAP9ODKp-+31rJmK6uY1QA6nvG4hDuNT79JVeeivY5XeOCu2etw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Apr 2014 09:35:28 -0700
+Message-ID: <CAMKF1sqOCs_OYkZU2ng9FmViPyJx1AjdViSquZWzbgFT=XZdoA@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	OE-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] initial support for musl libc with OE/Yocto Project
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,133 +50,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2014 16:32:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Apr 2014 16:35:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Both license files are "as-is" from their respective source trees.  md5sums
-match the LIC_FILES_CHKSUM in each of the recipes.
+On Mon, Mar 31, 2014 at 12:01 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Mon, Mar 31, 2014 at 12:21 PM, Paul Barker <paul@paulbarker.me.uk> wrote:
+>> On 30 March 2014 17:48, Khem Raj <raj.khem@gmail.com> wrote:
+>>> On Sun, Mar 30, 2014 at 8:43 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+>>>> On 30 March 2014 05:17, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>> On Thu, Mar 27, 2014 at 5:53 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+>>>>>> On 26 March 2014 22:12, Burton, Ross <ross.burton@intel.com> wrote:
+>>>>>>> On 26 March 2014 22:04, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>>>> There were interest in other threads in having musl as an alternative
+>>>>>>>> to eglibc/uclibc that we already have in OE, in that direction I have
+>>>>>>>> poured in my on and off work and put it into a contrib tree
+>>>>>>>
+>>>>>>> Blimey Khem that was quick. :)
+>>>>>>>
+>>>>>>
+>>>>>> Agreed!
+>>>>>>
+>>>>>> I wonder if it's worth splitting this out into its own layer though
+>>>>>
+>>>>> I thought about it and since class/conf changes that need to go in into OE-core
+>>>>> first I kept it as it is (lazyness too). I think once the core support
+>>>>> is available in OE-core
+>>>>> we can spin the recipes into a layer of its own.
+>>>>>
+>>>>>> (with fixes done via bbappends) so that it's easy for multiple people
+>>>>>> to contribute to. It would also mean it doesn't need rebasing onto
+>>>>>> master all the time.
+>>>>>>
+>>>>>> I'd definitely like to get involved with this. In particular I can
+>>>>>> ensure opkg (both current release and development branch) work with
+>>>>>> musl and see if some of my preferred software from meta-oe will build
+>>>>>> (vim, htop, etc).
+>>>>>
+>>>>> start with what we have. Once master opens up I would propose the needed
+>>>>> changes to OE-core and spin a layer
+>>>>>
+>>>>
+>>>> I did a quick 'bitbake -k core-image-minimal' to see what's currently
+>>>> failing. Full logs and config at
+>>>> http://www.paulbarker.me.uk/musl-build/
+>>>>
+>>>> Build Configuration:
+>>>> BB_VERSION        = "1.21.1"
+>>>> BUILD_SYS         = "x86_64-linux"
+>>>> NATIVELSBSTRING   = "Ubuntu-12.04"
+>>>> TARGET_SYS        = "arm-oe-linux-musleabi"
+>>>> MACHINE           = "qemuarm"
+>>>> DISTRO            = "nodistro"
+>>>> DISTRO_VERSION    = "nodistro.0"
+>>>> TUNE_FEATURES     = "armv5 thumb dsp"
+>>>> TARGET_FPU        = "soft"
+>>>> meta              = "kraj/musl:faafa7022ed057d55c131c456d1bdd5dfa3d2517"
+>>>>
+>>>> Summary: 6 tasks failed:
+>>>>   openembedded-core/meta/recipes-support/attr/attr_2.4.47.bb, do_compile
+>>>>   openembedded-core/meta/recipes-devtools/python/python_2.7.3.bb, do_compile
+>>>>   openembedded-core/meta/recipes-core/util-linux/util-linux_2.24.1.bb,
+>>>> do_compile
+>>>>   openembedded-core/meta/recipes-core/sysvinit/sysvinit_2.88dsf.bb, do_compile
+>>>>   openembedded-core/meta/recipes-core/busybox/busybox_1.22.1.bb, do_compile
+>>>>   openembedded-core/meta/recipes-core/glib-2.0/glib-2.0_2.38.2.bb, do_compile
+>>>>
+>>>> I can see for util-linux that we need to implement qsort_r().
+>>>>
+>>>> Busybox probably just needs config changes:
+>>>> http://wiki.musl-libc.org/wiki/Building_Busybox
+>>>
+>>>
+>>> I already have local fix for busy box.
+>>
+>> Excellent! I'm currently looking at util-linux.
 
-Steve
+I have got core-image-minimal building for arm now. All changes are
+pushed to contrib tree this includes util-linux fixes too.
 
+>>
+>> I think we should ask for a new repo to be setup on
+>> git.yoctoproject.org for meta-musl. I'm happy to be one of the
+>> maintainers for that, I hope that you are as well and maybe a couple
+>> of the others who were interested could also help. I think having a
+>> few people as maintainers is important as we're all already fairly
+>> busy on other projects.
+>>
+>> Once the layer is setup we can move the recipes off your branch of
+>> oe-core and into the layer as time permits. That would just leave the
+>> changes which need to go into oe-core on your branch.
 
-On Wed, Apr 2, 2014 at 5:50 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+The changes are not very intrusive, I think it is of value to include recipe
+fixes in the layers they belong too and most of changes to packages are worthy
+of upstreaming. The patches for compilers aren't final yet and they
+will be rebased
+as I add other architectures one after another. I am not convinced yet
+if we would need a layer of its own.
+A layer is premature at this point of
+time. if you fix something thats not on there you can share by pushing
+into another contrib tree and inform me
+I can include the fixes into this tree.
 
-> On Tue, Apr 01, 2014 at 08:47:44PM -0700, Stephen Arnold wrote:
-> > This fixes QA warnings about missing license file and stale configure
-> options,
-> > (includes updates for freetype libpath and disables hardcoded rpaths).
+>>
+>> Does that sound like a sensible plan?
 >
-> It shows couple of trailing whitespaces in license text, but if they are
-> also in the original source of it, then we should probably keep them.
+> I think it does; this allow for easy sharing of work and do increase
+> its visibility. So I agree with the plan and goal.
 >
-> Please confirm.
->
-> > Upstream-Status: Inappropriate (distribution/packaging fix)
-> >
-> > Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
-> > ---
-> >  meta-oe/licenses/GD                               | 53
-> +++++++++++++++++++++++
-> >  meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb |  4 +-
-> >  2 files changed, 55 insertions(+), 2 deletions(-)
-> >  create mode 100644 meta-oe/licenses/GD
-> >
-> > diff --git a/meta-oe/licenses/GD b/meta-oe/licenses/GD
-> > new file mode 100644
-> > index 0000000..5e17d03
-> > --- /dev/null
-> > +++ b/meta-oe/licenses/GD
-> > @@ -0,0 +1,53 @@
-> > +
-> > +     Portions copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
-> > +     2002 by Cold Spring Harbor Laboratory. Funded under Grant
-> > +     P41-RR02188 by the National Institutes of Health.
-> > +
-> > +     Portions copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002 by
-> > +     Boutell.Com, Inc.
-> > +
-> > +     Portions relating to GD2 format copyright 1999, 2000, 2001, 2002
-> > +     Philip Warner.
-> > +
-> > +     Portions relating to PNG copyright 1999, 2000, 2001, 2002 Greg
-> > +     Roelofs.
-> > +
-> > +     Portions relating to gdttf.c copyright 1999, 2000, 2001, 2002 John
-> > +     Ellson (ellson@lucent.com).
-> > +
-> > +     Portions relating to gdft.c copyright 2001, 2002 John Ellson
-> > +     (ellson@lucent.com).
-> > +
-> > +     Portions copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007
-> > +              Pierre-Alain Joye (pierre@libgd.org).
-> > +
-> > +     Portions relating to JPEG and to color quantization copyright 2000,
-> > +     2001, 2002, Doug Becker and copyright (C) 1994, 1995, 1996, 1997,
-> > +     1998, 1999, 2000, 2001, 2002, Thomas G. Lane. This software is
-> > +     based in part on the work of the Independent JPEG Group. See the
-> > +     file README-JPEG.TXT for more information.
-> > +
-> > +     Portions relating to WBMP copyright 2000, 2001, 2002 Maurice
-> > +     Szmurlo and Johan Van den Brande.
-> > +
-> > +     Permission has been granted to copy, distribute and modify gd in
-> > +     any context without fee, including a commercial application,
-> > +     provided that this notice is present in user-accessible supporting
-> > +     documentation.
-> > +
-> > +     This does not affect your ownership of the derived work itself, and
-> > +     the intent is to assure proper credit for the authors of gd, not to
-> > +     interfere with your productive use of gd. If you have questions,
-> > +     ask. "Derived works" includes all programs that utilize the
-> > +     library. Credit must be given in user-accessible documentation.
-> > +
-> > +     This software is provided "AS IS." The copyright holders disclaim
-> > +     all warranties, either express or implied, including but not
-> > +     limited to implied warranties of merchantability and fitness for a
-> > +     particular purpose, with respect to this code and accompanying
-> > +     documentation.
-> > +
-> > +     Although their code does not appear in gd, the authors wish to
-> thank
-> > +     David Koblas, David Rowley, and Hutchison Avenue Software
-> Corporation
-> > +     for their prior contributions.
-> > +
-> > diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bbb/meta-oe/recipes-support/gd/gd_2.0.35+
-> 2.0.36rc1.bb
-> > index 957c4eb..5fb5857 100644
-> > --- a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> > +++ b/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> > @@ -15,10 +15,10 @@ S = "${WORKDIR}/gd-2.0.36RC1"
-> >
-> >  inherit autotools binconfig gettext
-> >
-> > -EXTRA_OECONF += " --with-zlib=${STAGING_LIBDIR}/.. \
-> > +EXTRA_OECONF += " --disable-rpath \
-> >                    --with-png=${STAGING_LIBDIR}/.. \
-> >                    --with-jpeg=${STAGING_LIBDIR}/.. \
-> > -                  --with-freetype \
-> > +                  --with-freetype=${STAGING_LIBDIR}/.. \
-> >                    --without-fontconfig \
-> >                    --without-xpm \
-> >                    --without-x"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> I will try to help on this as well.
 >
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
