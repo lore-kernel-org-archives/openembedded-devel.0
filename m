@@ -1,26 +1,25 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F68A6F23F;
-	Wed,  2 Apr 2014 17:03:40 +0000 (UTC)
-Received: by mail-vc0-f178.google.com with SMTP id im17so714990vcb.23
-	for <multiple recipients>; Wed, 02 Apr 2014 10:03:41 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B9CD16FADF;
+	Wed,  2 Apr 2014 17:13:48 +0000 (UTC)
+Received: by mail-ie0-f177.google.com with SMTP id rl12so550853iec.36
+	for <multiple recipients>; Wed, 02 Apr 2014 10:13:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=LFK9SzDEXz5H+VpsaLf+9CNhTokv5la6iN7wq37Eh74=;
-	b=WfOxR3Q5vN3ANpRFu/tXF8cSD0n5WfIv55PmT9q3hYfiBa8H1u/+tteTjQS6pfZ6DX
-	nPmHmMvtguQaidq47BQU/E+xYGdt7ZpGm4CQ4z72hLF+XZFYNQmsJsv8CivzvGz1+iH+
-	HS2KEJ2xqJTnICuN2CC/VrTyAcLrW0xZrHp3N5z8vcE8QLd2m1eUp+mtsdVzmMVBgvGH
-	H+HzLJIi3T8jrZ8hatLlKSFxzH8quoi7PdKpcMhZ+PQ25cn2Pep1gPincC2ylWAiPfj8
-	3P3bW1wAS41Rbta6wb5yR5f2cDte3xR9iaZ4fxEteTv8rs8gfMTXomnX0LNMzzUnimqI
-	YYQA==
-X-Received: by 10.52.120.6 with SMTP id ky6mr1781391vdb.38.1396458221166; Wed,
-	02 Apr 2014 10:03:41 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=f58g0FaIwl1tQtQ2hGc8TfhPJNICDg/XUfgsiHDsr9g=;
+	b=ku0xwbvgRjHury2PGTAe61RRBH2ZJ0Q2O6M1KCd1x9JxqmrXRLdKl+noiC330OhA1R
+	GC2sG0lPzCsWKCYndrHV4zySp2B+85a8ZdWrWnE/0T4k7Kka4SsofHH/7NwwG6ffbOmn
+	QVPNglg5FzpYbdyQHUa5ukWMB7ni7TXqTR6sYL8rgHZNNXE1d26Z9vTYgNSKj2lWon+Z
+	g91rmh5Pnz6bexK7BGJcZN1RYrbkzN/febJgmUPLOUaqmENxXkzL43WVokhOL7pBDLWm
+	ZbqshruC7TzAyJkIacLgGBChiYXxBSq9WOlKctlUkFXzQJumFwGZ9+H9D2ygCPShnKDY
+	4pSA==
+X-Received: by 10.50.49.109 with SMTP id t13mr2994703ign.2.1396458829868; Wed,
+	02 Apr 2014 10:13:49 -0700 (PDT)
 MIME-Version: 1.0
-Sender: paul.betafive@gmail.com
-Received: by 10.220.239.135 with HTTP; Wed, 2 Apr 2014 10:03:01 -0700 (PDT)
-In-Reply-To: <CAMKF1sqOCs_OYkZU2ng9FmViPyJx1AjdViSquZWzbgFT=XZdoA@mail.gmail.com>
+Received: by 10.50.229.14 with HTTP; Wed, 2 Apr 2014 10:13:18 -0700 (PDT)
+In-Reply-To: <CANyK_8fC4kkDgqovwuTx5kN0Y2hcyDT7HStii4hxz_CN3D=atA@mail.gmail.com>
 References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
 	<CAJTo0LYF0VNwy7=rhmr7U_=tXwJtPOax3AKttn66q3qD_QXd2w@mail.gmail.com>
 	<CANyK_8deVKbC6xOUQHubvphfwQCQefHGWCt7Mp1QM4DUVXja5g@mail.gmail.com>
@@ -30,11 +29,11 @@ References: <CAMKF1soKZqqmQUVCQnUqS1GV1FO5KictTO+=up=d7Jw3+QhXMw@mail.gmail.com>
 	<CANyK_8f_V247P1UWaeG-7YwBq4MrHQ=+69NOgW8LUZ4_Xgx2qA@mail.gmail.com>
 	<CAP9ODKp-+31rJmK6uY1QA6nvG4hDuNT79JVeeivY5XeOCu2etw@mail.gmail.com>
 	<CAMKF1sqOCs_OYkZU2ng9FmViPyJx1AjdViSquZWzbgFT=XZdoA@mail.gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-Date: Wed, 2 Apr 2014 18:03:01 +0100
-X-Google-Sender-Auth: jYngYwt8EFyoIxm8uLwFV3VCDug
-Message-ID: <CANyK_8fC4kkDgqovwuTx5kN0Y2hcyDT7HStii4hxz_CN3D=atA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CANyK_8fC4kkDgqovwuTx5kN0Y2hcyDT7HStii4hxz_CN3D=atA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Apr 2014 10:13:18 -0700
+Message-ID: <CAMKF1sorF5M0oxq9gaZEDeV5Td2pydEE0zZjqJdM8n0hyGbuyQ@mail.gmail.com>
+To: Paul Barker <paul@paulbarker.me.uk>
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
 	OE-devel <openembedded-devel@lists.openembedded.org>,
 	Otavio Salvador <otavio@ossystems.com.br>,
@@ -54,67 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2014 17:03:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Apr 2014 17:13:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2 April 2014 17:35, Khem Raj <raj.khem@gmail.com> wrote:
+On Wed, Apr 2, 2014 at 10:03 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
+> You've fixed util-linux in a different way to me, I added qsort_r to
+> musl
+
+this won't fly in musl community.
+
+whereas you've removed it's use from util-linux. I'm not bothered
+> which one we use if both work. We do now have 4 people looking at
+> util-linux fixes: Me, you and Robert Yang (as util-linux-native
+> doesn't build on Centos 5.10 due to the same qsort_r usage) here in
+> oe-core and Karel Zak from upstream (as they want to fix it for their
+> next release). I think we need to pick one fix (probably yours if it's
+> tested and working in another distro) and get it applied to oe-core
+> master.
+
+yes, I think not using qsort_r is common solution for all these issues.
+
 >
-> I have got core-image-minimal building for arm now. All changes are
-> pushed to contrib tree this includes util-linux fixes too.
->
+> Your latest commit "glibc-2.0: Fix build issues that arise on musl"
+> should say glib not glibc. Other than that, your glib fix is better
+> than mine (I did add <string.h> but didn't add the
+> '--with-libiconv=gnu' option, instead I set musl as the provider of
+> virtual/libiconv).
 
-You've fixed util-linux in a different way to me, I added qsort_r to
-musl whereas you've removed it's use from util-linux. I'm not bothered
-which one we use if both work. We do now have 4 people looking at
-util-linux fixes: Me, you and Robert Yang (as util-linux-native
-doesn't build on Centos 5.10 due to the same qsort_r usage) here in
-oe-core and Karel Zak from upstream (as they want to fix it for their
-next release). I think we need to pick one fix (probably yours if it's
-tested and working in another distro) and get it applied to oe-core
-master.
-
-Your latest commit "glibc-2.0: Fix build issues that arise on musl"
-should say glib not glibc. Other than that, your glib fix is better
-than mine (I did add <string.h> but didn't add the
-'--with-libiconv=gnu' option, instead I set musl as the provider of
-virtual/libiconv).
-
->>>
->>> I think we should ask for a new repo to be setup on
->>> git.yoctoproject.org for meta-musl. I'm happy to be one of the
->>> maintainers for that, I hope that you are as well and maybe a couple
->>> of the others who were interested could also help. I think having a
->>> few people as maintainers is important as we're all already fairly
->>> busy on other projects.
->>>
->>> Once the layer is setup we can move the recipes off your branch of
->>> oe-core and into the layer as time permits. That would just leave the
->>> changes which need to go into oe-core on your branch.
->
-> The changes are not very intrusive, I think it is of value to include recipe
-> fixes in the layers they belong too and most of changes to packages are worthy
-> of upstreaming. The patches for compilers aren't final yet and they
-> will be rebased
-> as I add other architectures one after another. I am not convinced yet
-> if we would need a layer of its own.
-> A layer is premature at this point of
-> time. if you fix something thats not on there you can share by pushing
-> into another contrib tree and inform me
-> I can include the fixes into this tree.
-
-I don't currently have access to -contrib as I haven't previously needed it.
-
-I also think it's pretty low visibility and difficult to comment on
-particular patches compared to having a layer with patches being sent
-to the yocto@yoctoproject.org list for review.
-
-Do you think all of this will eventually be accepted into oe-core? I
-didn't think musl would be while our support for it is fairly
-experimental.
-
--- 
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
+in order to build a lot of software we would need some sort of iconv
+implementation
+letting musl to provide it is probably ok too but I wanted  to take
+the tested path to get
+to an image to build and then we have a known baseline and we could
+experiment more.
 
