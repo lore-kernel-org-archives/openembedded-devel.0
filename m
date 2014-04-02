@@ -1,21 +1,21 @@
 Return-Path: <Matthieu.CRAPET@ingenico.com>
 Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 03E6460E07
+	by mail.openembedded.org (Postfix) with ESMTP id 9E3716FA8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Apr 2014 12:23:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,780,1389740400"; d="scan'208";a="43723216"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 02 Apr 2014 14:23:06 +0200
+	Wed,  2 Apr 2014 12:26:07 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,780,1389740400"; d="scan'208";a="43723400"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 02 Apr 2014 14:26:09 +0200
 Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.2.328.9; Wed, 2 Apr 2014 14:23:05 +0200
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.2.318.1; Wed, 2 Apr 2014 14:26:08 +0200
 Received: from u75.usr.ingenico.loc (10.23.7.75) by
 	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Wed, 2 Apr 2014 14:23:04 +0200
+	id 14.2.328.9; Wed, 2 Apr 2014 14:26:07 +0200
 From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Apr 2014 14:21:22 +0200
-Message-ID: <1396441282-19534-1-git-send-email-Matthieu.Crapet@ingenico.com>
+Date: Wed, 2 Apr 2014 14:24:26 +0200
+Message-ID: <1396441466-14563-1-git-send-email-Matthieu.Crapet@ingenico.com>
 X-Mailer: git-send-email 1.8.1.2
 MIME-Version: 1.0
 Subject: [meta-oe][PATCH] zsh: upgrade to 5.0.5
@@ -32,8 +32,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Apr 2014 12:23:10 -0000
-Content-Type: text/plain; charset="y"
+X-List-Received-Date: Wed, 02 Apr 2014 12:26:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
 Recipe cleanup:
