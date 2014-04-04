@@ -1,35 +1,36 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id D58166B89F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Apr 2014 03:34:37 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id uq10so1455310igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Apr 2014 20:34:38 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 071146E2D8;
+	Fri,  4 Apr 2014 12:07:05 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id y10so3278900wgg.1
+	for <multiple recipients>; Fri, 04 Apr 2014 05:07:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=YqUZwQIW2TllRtwmel8bEvUYqd8mX5frthScV7hB9DE=;
-	b=CyG68IqHI/8A5SpHyv4E9PtAydXPulJXvL2GLAoqmBF57bma9zT7YyOYgU9EPVhBax
-	5+qM5ez6QPUeh1B7pUKOrM+1tllYb4xcMMAdkCN5th/khU5HSKkwMHKO3Y41j/dHpxZ4
-	f7n5dE4Kz3MOlOzxs2KZi8aRPdLzbylUC4LaHA0vJKn8/AThXO0cM+Id9CTw6pgWG/PW
-	FNaKI8jKJpvYwmDjqX5EpsspCajtIcLa/iZrE7TJnf2mW0u1uXTMpa4CZzWot4UhNfFe
-	VBxxoCqpqmmIH/BMxq1Y3YAS8mcb+/o39u6w5bGEeXrAc3uoIrwfWdCLbAYg6BjC0/oF
-	lQdA==
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=KzRBAbRZ1JPqOCHvPkYPaLi+n35EuTKcFSCRpKaqVNM=;
+	b=be2kWfF5lJOSEfZx/X+Bt9TyX5OpEFMOTf/6Ctuwk2zVa/31jCCDJ3aC2V/TsvuNPG
+	QSlsJ0FzpcMsjIrMNgrYCjMyr3P+Kc97UP9FPOFJ496fSZ/1DUWLbGY3NhSFFQeV4rdD
+	4K1Y6o2WDi60qDvejJy36X/gEBYokB/jv5dljtaJkr5tEwZOPTxSvxRSnyWf9fbtc7SQ
+	MRTfAsrUl0csALQO79jVarcx2N06rTwol8rXwawgIU/ZTHmX+TTqqYHWkW8jC5mLEHbR
+	7uk9ht2AuzWrizUecWq/vfcg3/0WGlgwRkwz/KqgH2XZGqpiAFDgSK1pdEqBTONst/kZ
+	L2fA==
+X-Received: by 10.194.63.236 with SMTP id j12mr19469947wjs.5.1396613225836;
+	Fri, 04 Apr 2014 05:07:05 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q41sm19156780eez.7.2014.04.04.05.07.03 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 04 Apr 2014 05:07:04 -0700 (PDT)
+Date: Fri, 4 Apr 2014 14:07:06 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140404120706.GJ2132@jama>
+References: <20140403130609.GF2132@jama>
 MIME-Version: 1.0
-X-Received: by 10.50.25.67 with SMTP id a3mr633211igg.28.1396582478354; Thu,
-	03 Apr 2014 20:34:38 -0700 (PDT)
-Received: by 10.65.15.73 with HTTP; Thu, 3 Apr 2014 20:34:38 -0700 (PDT)
-In-Reply-To: <CAJ86T=VCOWmE-eyYvpKLjfYhgyFSn0URjo_9yu7V9OGoUUD8aA@mail.gmail.com>
-References: <1393618507-29414-1-git-send-email-obi@opendreambox.org>
-	<1393618507-29414-3-git-send-email-obi@opendreambox.org>
-	<CAJ86T=VCOWmE-eyYvpKLjfYhgyFSn0URjo_9yu7V9OGoUUD8aA@mail.gmail.com>
-Date: Thu, 3 Apr 2014 20:34:38 -0700
-Message-ID: <CAJ86T=XJ4XN5bDs4yKgUS7DFSkp9jSti7cKrDCYrcHRDyOtA6g@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Andreas Oberritter <obi@opendreambox.org>
-Subject: Re: [meta-qt5][PATCH 3/3] qtwebkit: add packageconfig for gstreamer, qtlocation and qtsensors
+In-Reply-To: <20140403130609.GF2132@jama>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: State of bitbake world, Failed tasks 2014-04-03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,87 +44,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Apr 2014 03:34:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Apr 2014 12:07:08 -0000
+X-Groupsio-MsgNum: 49056
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cN519qCC4CN1mUcX"
+Content-Disposition: inline
 
-> On Fri, Feb 28, 2014 at 12:15 PM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
->> Use gstreamer for 1.x, gstreamer010 for 0.10.x.
->>
->> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
->> ---
->>  recipes-qt/qt5/qtwebkit.inc | 24 +++++++++++++++++++++++-
->>  1 file changed, 23 insertions(+), 1 deletion(-)
->>
->> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
->> index c35504e..90bd981 100644
->> --- a/recipes-qt/qt5/qtwebkit.inc
->> +++ b/recipes-qt/qt5/qtwebkit.inc
->> @@ -5,7 +5,29 @@ LIC_FILES_CHKSUM = "file://Source/WebCore/rendering/RenderApplet.h;endline=22;md
->>                      file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
->>                      file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee"
->>
->> -DEPENDS += "qtdeclarative qtlocation qtsensors icu ruby-native sqlite3 glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base libxslt"
->> +DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
->> +
->> +PACKAGECONFIG ??= "gstreamer qtlocation qtsensors"
->> +PACKAGECONFIG[gstreamer] = ",,gstreamer1.0 gstreamer1.0-plugins-base"
->> +PACKAGECONFIG[gstreamer010] = ",,gstreamer gst-plugins-base"
->> +PACKAGECONFIG[qtlocation] = ",,qtlocation"
->> +PACKAGECONFIG[qtsensors] = ",,qtsensors"
->> +
->> +do_configure_prepend() {
->> +    # disable gstreamer-1.0 test if it isn't enabled by PACKAGECONFIG
->> +    sed -e 's/\s\(packagesExist(".*\<gstreamer-1.0\>.*")\)/ OE_GSTREAMER_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
->> +    # disable gstreamer-0.10 test if it isn't enabled by PACKAGECONFIG
->> +    sed -e 's/\s\(packagesExist(".*\<gstreamer-0.10\>.*")\)/ OE_GSTREAMER010_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
->> +    # disable qtlocation test if it isn't enabled by PACKAGECONFIG
->> +    sed -e 's/\s\(qtHaveModule(positioning)\)/ OE_QTLOCATION_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
->> +    # disable qtsensors test if it isn't enabled by PACKAGECONFIG
->> +    sed -e 's/\s\(qtHaveModule(sensors)\)/ OE_QTSENSORS_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
->> +}
->> +
->> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gstreamer', 'CONFIG+=OE_GSTREAMER_ENABLED', '', d)}"
->> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gstreamer010', 'CONFIG+=OE_GSTREAMER010_ENABLED', '', d)}"
->> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtlocation', 'CONFIG+=OE_QTLOCATION_ENABLED', '', d)}"
->> +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtsensors', 'CONFIG+=OE_QTSENSORS_ENABLED', '', d)}"
->>
->>  # qtwebkit gets terribly big when linking with all debug info, disable by default
->>  QTWEBKIT_DEBUG = "QMAKE_CFLAGS+=-g0 QMAKE_CXXFLAGS+=-g0"
->> --
->
-> With this change I'm seeing that the CONFIG+= options from the qmake
-> command line are being added to CONFIG after features.prf has already
-> been evaluated. Therefore OE_GSTREAMER_ENABLED etc evaluates as false
-> and qtwebkit is always configured without video support.
->
-> From the configure log:
->
->> ! Missing GStreamer or QtMultimedia, disabling HTML5 media element support
->
-> From the qmake debug log:
->
->> DEBUG 1: ... features.prf:106: condition "OE_GSTREAMER_ENABLED" is false (around line 5480 of the log)
->> ...
->> DEBUG 1: (command line):65535: CONFIG := ... OE_GSTREAMER_ENABLED (around line 5802 of the log, just prior to starting on WebKit.pro).
->
-> I'm testing with dora + master branch of meta-qt5.
->
+--cN519qCC4CN1mUcX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+On Thu, Apr 03, 2014 at 03:06:09PM +0200, Martin Jansa wrote:
+> On Sun, Mar 30, 2014 at 01:28:00AM +0100, Martin Jansa wrote:
+> > Be aware that I plan to run test-dependencies script for next few days,
+> > so changes to meta-oe will be delayed until it's finished and I can use
+> > jenkins again to test incoming changes.
+>=20
+> I've just started this long test-dependencies build so jenkins will be bu=
+sy
+> for next 14 days or so, but I'll send complete qa.log in advance as soon =
+as
+> it finishes building world from scratch.
 
-I'm still seeing problems since this commit. Even when these new
-options are enabled via PACKAGECONFIG, qtwebkit is being configured as
-if they were all disabled.
+Here is newer qemuarm log with metadata matching what was used in
+last qemux86-64 build (except removed qtbase review)
 
-The issue seems to be that the "CONFIG+=OE_xxx_ENABLED" options on the
-qmake command line don't work as intended. The options are added to
-CONFIG _after_ features.prf is parsed, so testing them in features.prf
-always evaluates to false.
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+40403_143715.log/test-dependencies.log
 
-Symptoms are "disabling HTML5 media element support" showing up in the
-qtwebkit configure log and libQt5WebKit.so.5.2.1 not having any
-runtime dependency on libgstreamer, etc.
+Summary: 13 tasks failed:
+  meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_insta=
+ll
+  meta-openembedded/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb, do_c=
+ompile
+  openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, do_co=
+mpile
+  meta-openembedded/meta-multimedia/recipes-multimedia/openal/openal-soft_1=
+=2E15.1.bb, do_compile
+  meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_comp=
+ile
+  meta-openembedded/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgr=
+ounds_2.32.0.bb, do_configure
+  meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
+  openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+  meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb, =
+do_compile
+  openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.bb=
+, do_configure
+  meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb, d=
+o_configure
+  meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_compi=
+le
+  meta-openembedded/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb, do_c=
+onfigure
+Summary: There were 245 WARNING messages shown.
 
-Is anyone else seeing the same thing ?
+and more importantly new qa.log with all entries (because it was building f=
+rom
+scratch without sstate-cache, surprisingly not so many now:
 
+http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches/log.world.201=
+40403_143715.log/qa.log
+
+> The report looks a lot better, thanks to everybody who sent patches! Be a=
+ware
+> that qemuarm still shows a lot more failures, that's because only last qe=
+mux86-64
+> build contained all fixes from ML.
+>=20
+> Here is just qemux86-64 build:
+>   meta-qt5/recipes-qt/qt5/qtbase_5.2.1.bb, do_configure
+>   meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+>   openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+>   meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_ins=
+tall
+>   meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimob=
+iledevice_1.1.4.bb, do_configure
+>   meta-openembedded/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb, do=
+_compile
+>   meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compi=
+le
+>   meta-openembedded/meta-multimedia/recipes-multimedia/openal/openal-soft=
+_1.15.1.bb, do_compile
+>   meta-openembedded/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-back=
+grounds_2.32.0.bb, do_configure
+>   meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_compile
+>   meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb=
+, do_compile
+>   openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.=
+bb, do_configure
+>   meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb,=
+ do_configure
+>   meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_com=
+pile
+>   meta-openembedded/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb, do=
+_configure
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--cN519qCC4CN1mUcX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlM+oGoACgkQN1Ujt2V2gBxpOwCgoyUo15uNgFEn3zT9ekRmPwKQ
+wJwAoLb+3GSxb8y0SlWjsFNQp8fUyZH0
+=eM+a
+-----END PGP SIGNATURE-----
+
+--cN519qCC4CN1mUcX--
