@@ -1,35 +1,45 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-pb0-f47.google.com (mail-pb0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 36D6E6AFB5
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 48D98605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Apr 2014 22:48:12 +0000 (UTC)
-Received: by mail-pb0-f47.google.com with SMTP id up15so4050180pbc.6
+	Sat,  5 Apr 2014 08:47:01 +0000 (UTC)
+Received: by mail-ob0-f175.google.com with SMTP id uy5so4597655obc.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Apr 2014 15:48:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=oq9gxgEG7kBUUrbvMD2mCOiikyHBAYHhyljpVnTg2QU=;
-	b=GGiVu1a2GDv8/IcF3m//55z5VvHpz1CdYnjbBTlwgDgpf5mianGzZzSwxB46Rd2taf
-	lBmhbwAPRqyHasFJeFCIkC07SFk3Os/tja/Wat4EWP0S+6U5uOQNNiZwinGxAw1Qwn8O
-	M5LcijvRKc4w1ZeniwlgUl4aZBLEBxdEj1V9KtHKRNuWsmOnLw4fWNSoo9jPn52kDeAU
-	4E3/IL4NLsTqUJsUUM475p1sCYR0CqIJFSWJ5pxUlUkrF78q8hTtO3kAKSp59WVMHpMa
-	nm3ma3bRbbeP46doiGC9hV+szl8625M/sL4qKT1fuAYG9ghSFSuOnQDQwbFoNGZbuD1K
-	JT7g==
-X-Received: by 10.67.14.69 with SMTP id fe5mr17792768pad.120.1396651693502;
-	Fri, 04 Apr 2014 15:48:13 -0700 (PDT)
-Received: from archimedes.arnolds.bogus
-	(dsl-66-59-252-223.static.linkline.com. [66.59.252.223])
-	by mx.google.com with ESMTPSA id
-	aj7sm46410312pad.29.2014.04.04.15.48.08 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 04 Apr 2014 15:48:09 -0700 (PDT)
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Apr 2014 15:47:55 -0700
-Message-Id: <1396651675-32469-1-git-send-email-stephen.arnold42@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] gpm: sets D equal to DESTDIR instead of ROOT in do_install
+	Sat, 05 Apr 2014 01:47:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=dORGx03dFZC1z2RelNb79oJQ4kGg9P1iZhzzkRv0eoQ=;
+	b=OIj3pClqaT3V+Wi52OdtfAVDQmRcGIPeDJ/avKMSmzVOqhxJOszz6XHVu5rQgjGCDE
+	woGyCl/Zvzd1w2B9dGxtVtgVrcYBj+3um0tP3y8Mz9tmMEdJxABP26CjILhDEvhLE08H
+	VeX7U0/F3BmoxhTwNNYjSCCsm6FxP6N+2jqe/2euWko4ZUV9+9raw/tl5BV71+TBRK0/
+	8zstvNa/QhiFJRlnkU9R+9QWrxNnx2/tS2djgkjkfgWK7uw4xkgKTuXfuyQrVYN8MakV
+	HeP+sd7PJUe6o+lAz1X3Q7P29YFiwOZW3IPL50fGFBBNf5Yo+4AIXu4/irntZ/4RU2d7
+	v4Fg==
+X-Gm-Message-State: ALoCoQlMhIZJBrkm5xdTvLqY90dFFIoVCiVQayqSCVMbdFuTytAi9fJoOj2njlg97wRRcwS1jDAo
+X-Received: by 10.182.196.3 with SMTP id ii3mr6184382obc.11.1396687622493;
+	Sat, 05 Apr 2014 01:47:02 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id h3sm1354621obh.8.2014.04.05.01.47.01
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 05 Apr 2014 01:47:01 -0700 (PDT)
+Message-ID: <533FC305.7050101@linaro.org>
+Date: Sat, 05 Apr 2014 04:47:01 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+MIME-Version: 1.0
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+References: <20140403130609.GF2132@jama>
+In-Reply-To: <20140403130609.GF2132@jama>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-04-03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Apr 2014 22:48:18 -0000
+X-List-Received-Date: Sat, 05 Apr 2014 08:47:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-This corrects a gpm install failure due to ROOT being used instead of
-DESTDIR, resulting in DESTDIR being undefined.
+On 04/03/14 09:06, Martin Jansa wrote:
+> Other recipes are still "free" for fixing, please fix them and send reply to this thread
+> when you start looking into it, so that nobody duplicates work.
 
-Upstream-Status: Inappropriate (distribution/packaging fix)
-
-Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
----
- meta-oe/recipes-support/gpm/gpm_1.99.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-index e35e50e..a30a891 100644
---- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-+++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-@@ -40,7 +40,7 @@ CFLAGS += "-Wno-extra -Wno-error=unused-but-set-parameter -Wno-error=unused-but-
- CFLAGS += "-Wno-error=int-to-pointer-cast -Wno-error"
- 
- do_install () {
--    oe_runmake 'ROOT=${D}' install
-+    oe_runmake 'DESTDIR=${D}' install
-     install -m 0644 src/headers/gpm.h ${D}${includedir}
-     install -d ${D}/${sysconfdir}/init.d
-     install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/gpm
--- 
-1.9.1
-
+I'm going to be looking at some of the qa.log warnings over the weekend.
 
