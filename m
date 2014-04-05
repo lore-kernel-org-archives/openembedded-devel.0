@@ -1,38 +1,38 @@
 Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id EF01E6084B
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FC4F6A9C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Apr 2014 09:03:46 +0000 (UTC)
-Received: by mail-ig0-f174.google.com with SMTP id h18so1874193igc.1
+	Sat,  5 Apr 2014 12:39:55 +0000 (UTC)
+Received: by mail-ie0-f174.google.com with SMTP id rp18so4464880iec.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Apr 2014 02:03:47 -0700 (PDT)
+	Sat, 05 Apr 2014 05:39:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZO/052j54ekNKSzubIkFnmOiWRgr/q1CQR6YOXMUoVU=;
-	b=FEJGoQ9+XBAOt9mT8C+4s3I6ZH5qOcW318sAEHKNeq4TRZcL6gdYL2fq+cos5TzlpS
-	9DhF3sMQvK8v/CURoIYwPvxPdD5ABVXSVZbfLbfUjAEy9MQ8r1XF1MnhmEk/M0S5FjWE
-	nIRPIOm7bQiToC650l/f5PFFyD9UkmYtWRFpMtzuF/334xY7Xl/BoU+7o5sh4GjYgIQI
-	pyKewBkaZSAkBn8u5Jm5hG6Eh2UDmku6PxySS4GLlxDivo1sy6256YsV0jr6Df/5qzwe
-	lQXPm7w20LFWNRglBH+jro2zyQrKwSr9M30mucFOCgeMy9PviTq/hsAUH0BppqmEA05Z
-	I55g==
-X-Gm-Message-State: ALoCoQlWSaTUELVwtG23qvDb9Hf3ysQxXmMXqnjuHvvJ7NTVcanpNWBjIULYtusAVh86wkYMzWL7
-X-Received: by 10.50.43.165 with SMTP id x5mr8542829igl.40.1396688627040;
-	Sat, 05 Apr 2014 02:03:47 -0700 (PDT)
+	bh=xYs22ME9rDIVhG9n6h5QYNnLhcugqFZiKn4YtE4arEs=;
+	b=csmsVGhm8WlKcGATZiKkZmLqHUPQQsD8jjBswoPrciFRduD+IMm3rtWqQD9kEbNa1W
+	ko0LF28P0q/KoquKoAud1XhJBdB2VzNCFBSZNz/NBJnZQno4cWjchwyDoWPsfV1c4jsY
+	SkTXa4uj1crP1tEDDGJHynKzjJNWdODZKhKPSYjypSaFtJJDLO2KHseUj6YQDvXlLjNK
+	y0nk2j6IqvHuONNVA0PgG1umC5SuJ+uLMvMp4McEnDMgcn+lJNpRSL7SA22zZq1uBd14
+	nai+uXj3+IxUbAQFD6kML7L6gakbm+Oc48EEDF0Bs5s21/9Qt7er3b3ArGXOUltikB9X
+	AsPw==
+X-Gm-Message-State: ALoCoQlsx2a0aNJGDDWcHPg3EPPKE3y2mbqbN1wiIPND7d916fjAcRwXW20n7yBBQyeI4RFEY74y
+X-Received: by 10.42.113.137 with SMTP id c9mr136102icq.90.1396701596838;
+	Sat, 05 Apr 2014 05:39:56 -0700 (PDT)
 Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
 	[69.165.220.158])
-	by mx.google.com with ESMTPSA id vu3sm12604446igc.6.2014.04.05.02.03.45
+	by mx.google.com with ESMTPSA id b8sm13735966igx.3.2014.04.05.05.39.55
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 05 Apr 2014 02:03:46 -0700 (PDT)
+	Sat, 05 Apr 2014 05:39:56 -0700 (PDT)
 From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  5 Apr 2014 05:03:07 -0400
-Message-Id: <1396688588-5440-1-git-send-email-trevor.woerner@linaro.org>
+Date: Sat,  5 Apr 2014 08:39:39 -0400
+Message-Id: <1396701582-15906-1-git-send-email-trevor.woerner@linaro.org>
 X-Mailer: git-send-email 1.9.0
-Cc: Ulf Samuelsson <ulf@emagii.com>, patches@linaro.org
-Subject: [meta-xfce][PATCH] xfconf: remove unrecognized configure option
+Cc: patches@linaro.org
+Subject: [meta-oe][PATCH 0/3] liblockfile updates for SOBBW
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,29 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Apr 2014 09:03:48 -0000
+X-List-Received-Date: Sat, 05 Apr 2014 12:40:00 -0000
 
-This option was causing a QA warning:
+This series implements a bunch of fixups to remove QA configure warnings. The
+first patch gets rid of a warning which is logged, the remaining patches get
+rid of warnings which are suppressed.
 
-    NOTE: QA Issue: xfconf: configure was passed unrecognised options: --with-sysroot
+Trevor Woerner (3):
+  liblockfile: remove configure warning
+  liblockfile: remove dependency tracking option
+  liblockfile: remove silent rules option
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
----
- meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../liblockfile/liblockfile-1.09/configure.patch       | 18 ++++++++++++++----
+ .../recipes-extended/liblockfile/liblockfile_1.09.bb   |  6 ++++++
+ 2 files changed, 20 insertions(+), 4 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-index aa6ad2c..bb8c337 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-@@ -7,7 +7,6 @@ DEPENDS = "dbus-glib libxfce4util perl"
- inherit xfce
- 
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
--EXTRA_OECONF += "--with-sysroot=yes"
- 
- SRC_URI += "file://0001-Simplify-checks.patch"
- SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
 -- 
 1.9.0
 
