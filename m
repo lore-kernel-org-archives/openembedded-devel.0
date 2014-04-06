@@ -1,35 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 945586EBA5
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id D315D610D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Apr 2014 20:52:13 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id bs8so5225657wib.3
+	Sun,  6 Apr 2014 21:49:24 +0000 (UTC)
+Received: by mail-we0-f176.google.com with SMTP id x48so5736153wes.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Apr 2014 13:52:13 -0700 (PDT)
+	Sun, 06 Apr 2014 14:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=MsiNqtAvhokBNnxpPhJolibacmP/WJ3uFT2JdFltFiY=;
-	b=joY2OkBWC3+HBSaOxSIOKpVYS1t+wEwPf6425UXyK1pkZ69x3+cXtsDVKbx8F451CR
-	NF2XwUOH+E+335zakiLMgH1BI4YMQZ06+1XoausfZRSS5bV7ROFClFakzoELepj4m/aa
-	WAg3pEgjwlZbqtd9hREb3oM7sRS89Jp7jTguNYYoADy4zDkqy2SfaVmFYzssD/gOL6O4
-	2jJA03xaaEtz7ifUt9RwjaJG100MMvm1olbkROAG2aOhgcjvkoIRISaUcr/sLJN6ILpn
-	Q9UMSQ51ousasigwHOzr5NwmaBViXGL0WqeR/b+k125riH61AqgE96FWtxNt4c9ebaeW
-	aJ3w==
-X-Received: by 10.180.90.140 with SMTP id bw12mr20955989wib.18.1396817533541; 
-	Sun, 06 Apr 2014 13:52:13 -0700 (PDT)
+	bh=Wp/ow6FKEZjrXsgSB2VsX8c0mspL6QlmsHAX7Hn1r+o=;
+	b=VFLTOH788KpGWY8db/54R9yAhdSQkP6IDxQfmmeeUbrhCqa0snfttr6Ptu3mbi+xmb
+	J915qbsJfKQlZs4BH0yP4aTNJ4DGF5U0N1PxGNFF/XahbmDxR+EEMNRIhkRDLR9ACqqP
+	YSnZJEqsS1U3QEN4gpZ3PZ709vRklN8JklRjx6AsmyVKdEXpBHI9I58EpclGPesr8AFS
+	75xo3ay41QRfTq8tADwNHY//k+pCeWJg2vxIuJHXg2RlRehfVUhP2dGpWwm4KZf7j0PJ
+	EvZNCLCZRq6AyZqqeXF036wQlbqENEWK1pZfnHBZYopXf94snBUSuYqJYbsqvTQ0ngre
+	PoNQ==
+X-Received: by 10.194.94.39 with SMTP id cz7mr6318580wjb.78.1396820965328;
+	Sun, 06 Apr 2014 14:49:25 -0700 (PDT)
 Received: from mizar.localdomain
 	(host89-230-dynamic.20-79-r.retail.telecomitalia.it. [79.20.230.89])
-	by mx.google.com with ESMTPSA id w1sm37040749eel.16.2014.04.06.13.52.12
+	by mx.google.com with ESMTPSA id 48sm37342149eee.2.2014.04.06.14.49.21
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 06 Apr 2014 13:52:12 -0700 (PDT)
+	Sun, 06 Apr 2014 14:49:24 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Apr 2014 22:52:08 +0200
-Message-Id: <1396817528-1289-1-git-send-email-andrea.adami@gmail.com>
+Date: Sun,  6 Apr 2014 23:49:18 +0200
+Message-Id: <1396820958-6979-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] linux-yocto*: collie: refactor LH28F640BF patch
+Subject: [meta-handheld][PATCH] linux-yocto-dev: remove machines already using 3.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,493 +43,4878 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Apr 2014 20:52:18 -0000
+X-List-Received-Date: Sun, 06 Apr 2014 21:49:31 -0000
 
-Add more fixups for the chip latencies and enable
-again Suspend Erase on write.
+h1940 is the single one left, needs backports
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../patches/patches-mtd/collie-LH28F640BF.patch    | 92 ++++++++++++----------
- .../collie/collie-LH28F640BF.patch                 | 90 +++++++++++----------
- .../patches/patches-mtd/collie-LH28F640BF.patch    | 92 ++++++++++++----------
- 3 files changed, 146 insertions(+), 128 deletions(-)
+ recipes-kernel/linux/linux-yocto-dev.bbappend      |  59 +-
+ .../linux/linux-yocto-dev/akita/akita-standard.scc |   7 -
+ .../linux/linux-yocto-dev/akita/akita.cfg          |   4 -
+ .../linux/linux-yocto-dev/akita/akita.scc          |   6 -
+ .../linux/linux-yocto-dev/c7x0/c7x0-standard.scc   |   7 -
+ recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.cfg |  52 --
+ recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.scc |   4 -
+ .../linux-yocto-dev/collie/collie-standard.scc     |   7 -
+ .../linux/linux-yocto-dev/collie/collie.cfg        | 118 ----
+ .../linux/linux-yocto-dev/collie/collie.scc        |  16 -
+ .../linux/linux-yocto-dev/feature-top.scc          |   1 -
+ ...r-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch | 712 ---------------------
+ ...ARM-sa1100-add-Micro-ASIC-platform-device.patch |  73 ---
+ ...r-for-microcontroller-keys-on-the-iPaq-h3.patch | 208 ------
+ ...light-add-driver-for-iPAQ-micro-backlight.patch | 147 -----
+ ...nput-driver-for-touchscreen-on-iPaq-h3xxx.patch | 198 ------
+ .../0006-leds-add-driver-for-the-iPAQ-micro.patch  | 193 ------
+ ...-driver-for-battery-reading-on-iPaq-h3xxx.patch | 350 ----------
+ .../linux/linux-yocto-dev/h3600/defconfig          |  94 ---
+ .../patches-locomo/locomo-fix-SCL-SDA.patch        |  28 -
+ .../patches-locomo/locomolcd-suspend-resume.patch  |  92 ---
+ .../patches-locomokbd/locomo_kbd_tweak-r2.patch    |  84 ---
+ .../patches/patches-mtd/collie-LH28F640BF.patch    | 137 ----
+ .../patches-mtd/collie-cfi-probe-again.patch       |  29 -
+ .../patches/patches-mtd/collie-match-cfi-qry.patch |  47 --
+ .../patches/patches-mtd/collie-mtd-resize.patch    |  41 --
+ .../patches/patches-pxa/tosa-keys-mapping.patch    | 136 ----
+ .../patches-sa1100/arm-sa1100-add-cpu-clock.patch  |  95 ---
+ .../patches-sa1100/collie-add-bootblock.patch      |  29 -
+ .../patches/patches-sa1100/collie-irda.patch       |  88 ---
+ .../fbdev-sa1100fb-make-use-of-device-clock.patch  | 112 ----
+ .../pcmcia-sa1100-device-clock.patch               | 100 ---
+ .../linux-yocto-dev/poodle/poodle-standard.scc     |   7 -
+ .../linux/linux-yocto-dev/poodle/poodle.cfg        |  57 --
+ .../linux/linux-yocto-dev/poodle/poodle.scc        |   6 -
+ .../linux/linux-yocto-dev/shrink_kernel.cfg        |  28 -
+ .../linux/linux-yocto-dev/spitz/spitz-standard.scc |   7 -
+ .../linux/linux-yocto-dev/spitz/spitz.cfg          |  61 --
+ .../linux/linux-yocto-dev/spitz/spitz.scc          |   5 -
+ .../linux/linux-yocto-dev/tosa/tosa-standard.scc   |   7 -
+ recipes-kernel/linux/linux-yocto-dev/tosa/tosa.cfg |  65 --
+ recipes-kernel/linux/linux-yocto-dev/tosa/tosa.scc |   7 -
+ .../linux/linux-yocto-dev/zaurus-common.scc        |  14 -
+ .../linux/linux-yocto-dev/zaurus-hardware.cfg      | 277 --------
+ .../linux/linux-yocto-dev/zaurus-non-hardware.cfg  | 396 ------------
+ .../linux-yocto-dev/zaurus-pxa-common-non-hw.cfg   |   9 -
+ .../linux/linux-yocto-dev/zaurus-pxa-common.cfg    | 103 ---
+ .../linux/linux-yocto-dev/zaurus-pxa-only.scc      |   2 -
+ .../linux/linux-yocto-dev/zaurus-usb-host.scc      |   6 -
+ .../linux-yocto-dev/zaurus-usb-ohci-non-hw.cfg     |   4 -
+ .../linux/linux-yocto-dev/zaurus-usb-ohci.cfg      | 105 ---
+ 51 files changed, 1 insertion(+), 4439 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/akita/akita-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/akita/akita.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/akita/akita.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/collie/collie-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/collie/collie.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/collie/collie.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/feature-top.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0004-fb-backlight-add-driver-for-iPAQ-micro-backlight.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0005-input-driver-for-touchscreen-on-iPaq-h3xxx.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0006-leds-add-driver-for-the-iPAQ-micro.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/0007-power-add-driver-for-battery-reading-on-iPaq-h3xxx.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h3600/defconfig
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomo-fix-SCL-SDA.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomolcd-suspend-resume.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-probe-again.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-mtd-resize.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-pxa/tosa-keys-mapping.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/arm-sa1100-add-cpu-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-add-bootblock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-irda.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/fbdev-sa1100fb-make-use-of-device-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/pcmcia-sa1100-device-clock.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/poodle/poodle-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/poodle/poodle.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/poodle/poodle.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/spitz/spitz-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/spitz/spitz.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/spitz/spitz.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/tosa/tosa-standard.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/tosa/tosa.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/tosa/tosa.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-hardware.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-non-hardware.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common-non-hw.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-only.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-usb-host.scc
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci-non-hw.cfg
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci.cfg
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-LH28F640BF.patch b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-LH28F640BF.patch
-index 182e782..fca51d5 100644
---- a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-LH28F640BF.patch
-+++ b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-LH28F640BF.patch
-@@ -1,7 +1,7 @@
--From 7485f38ec10b7474932edebc4f3db60a8e32097c Mon Sep 17 00:00:00 2001
-+From 12402bf48cf2494a65aac0cf1e55cdc6296691bc Mon Sep 17 00:00:00 2001
- From: Andrea Adami <andrea.adami@gmail.com>
--Date: Tue, 21 Jan 2014 00:51:26 +0100
--Subject: mtd: add support for Sharp LH28F640BF NOR chips
-+Date: Sun, 6 Apr 2014 21:21:22 +0200
-+Subject: [PATCH] mtd: add support for Sharp LH28F640BF NOR chips
+diff --git a/recipes-kernel/linux/linux-yocto-dev.bbappend b/recipes-kernel/linux/linux-yocto-dev.bbappend
+index c4e85f9..a3571c8 100644
+--- a/recipes-kernel/linux/linux-yocto-dev.bbappend
++++ b/recipes-kernel/linux/linux-yocto-dev.bbappend
+@@ -1,42 +1,12 @@
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-dev:${THISDIR}/${PN}:${THISDIR}/files:"
  
- Tested on Zaurus SL-5500 (Collie) 2x16 on 32 bit bus
+-COMPATIBLE_MACHINE .= "|akita|c7x0|collie|h1940|h3600|poodle|spitz|tosa"
++COMPATIBLE_MACHINE .= "|h1940"
  
-@@ -9,13 +9,16 @@ Buffer write fixes as seen in 2007 patch c/o
- Anti Sullin <anti.sullin <at> artecdesign.ee>
- http://comments.gmane.org/gmane.linux.ports.arm.kernel/36733
+ # Override kernel features
+ #KERNEL_EXTRA_FEATURES ?= "features/netfilter/netfilter.scc"
  
-+Other fixes as seen in
-+Micron: TN-12-06: Adapting the Linux Kernel for P30, P33, and J3 Flash
-+
- Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
- ---
-- drivers/mtd/chips/cfi_cmdset_0001.c | 66 +++++++++++++++++++++++++++++++++++++
-- 1 file changed, 66 insertions(+)
-+ drivers/mtd/chips/cfi_cmdset_0001.c | 60 ++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 59 insertions(+), 1 deletion(-)
+-KERNEL_EXTRA_FEATURES_akita ?= ""
+-KERNEL_EXTRA_FEATURES_c7x0 ?= ""
+-KERNEL_EXTRA_FEATURES_collie ?= ""
+ KERNEL_EXTRA_FEATURES_h1940 ?= ""
+-KERNEL_EXTRA_FEATURES_h3600 ?= ""
+-KERNEL_EXTRA_FEATURES_poodle ?= ""
+-KERNEL_EXTRA_FEATURES_spitz ?= ""
+-KERNEL_EXTRA_FEATURES_tosa ?= ""
+-
+-KMACHINE_akita = "akita"
+-KMACHINE_c7x0 = "c7x0"
+-KMACHINE_collie = "collie"
+ KMACHINE_h1940 = "h1940"
+-KMACHINE_h3600 = "h3600"
+-KMACHINE_poodle = "poodle"
+-KMACHINE_spitz = "spitz"
+-KMACHINE_tosa = "tosa"
+-
+-SRC_URI_append_akita = " \
+-           file://feature-top.scc \
+-           file://vga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_c7x0 = " \
+-           file://feature-top.scc \
+-           file://vga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_collie = " \
+-           file://feature-top.scc \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+-           "
  
- diff --git a/drivers/mtd/chips/cfi_cmdset_0001.c b/drivers/mtd/chips/cfi_cmdset_0001.c
--index 7751443..c3c0b41 100644
-+index 7751443..d83b603 100644
- --- a/drivers/mtd/chips/cfi_cmdset_0001.c
- +++ b/drivers/mtd/chips/cfi_cmdset_0001.c
- @@ -53,6 +53,11 @@
-@@ -30,13 +33,13 @@ index 7751443..c3c0b41 100644
-  
-  static int cfi_intelext_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
-  static int cfi_intelext_write_words(struct mtd_info *, loff_t, size_t, size_t *, const u_char *);
--@@ -259,6 +264,47 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-+@@ -259,6 +264,40 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-  		(cfi->cfiq->EraseRegionInfo[1] & 0xffff0000) | 0x3e;
-  };
-  
- +static int is_LH28F640BF(struct cfi_private *cfi)
- +{
--+	/* Sharp LH28F640BF Series */
-++	/* Sharp LH28F640BF Family */
- +	if (cfi->mfr == CFI_MFR_SHARP && (
- +	    cfi->id == LH28F640BFHE_PTTL90 || cfi->id == LH28F640BFHE_PBTL90 ||
- +	    cfi->id == LH28F640BFHE_PTTL70A || cfi->id == LH28F640BFHE_PBTL70A))
-@@ -50,35 +53,28 @@ index 7751443..c3c0b41 100644
- +	struct cfi_private *cfi = map->fldrv_priv;
- +	struct cfi_pri_intelext *extp = cfi->cmdset_priv;
- +
-++	/* NOTE: Sharp Extended Query reports the nr of hardware partitions
-++	 * with an offset of +3. Change of the PCR are not reflected.
-++	 * Keep the wrong reading (0) and let the code convert it to 1 */
-++
- +	/* Reset the Partition Configuration Register on LH28F640BF
- +	 * to a single partition (PCRC = 0x000): PCRC is embedded into A0-A15. */
- +	if (is_LH28F640BF(cfi)) {
- +		printk(KERN_INFO "Reset Partition Config. Register: 1 Partition of 4 planes\n" );
- +		map_write(map, CMD(0x60), 0);
- +		map_write(map, CMD(0x04), 0);
--+		/* NOTE: Sharp Extended Query reports the nr of hardware partitions
--+		 * with an offset of +3. Change of the PCR are not reflected.
--+		 * Keep the wrong reading (0) and let the code convert it to 1 */
- +
--+		/* Sharp LH28F640BF Series has been set to one partition
--+		 * so Simultaneous Operations are disabled */
-++		/* We have set one single partition thus
-++		 * Simultaneous Operations are not allowed */
- +		printk(KERN_WARNING "cfi_cmdset_0001: Simultaneous Operations disabled\n");
- +		extp->FeatureSupport &= ~512;
--+
--+		/* To avoid issues with ubifs with concurrent erase-suspend
--+		 * we have to disable SuspendCmdSupport.
--+		 * The fixes described in "Micron TN-12-06: Adapting the
--+		 * Linux Kernel for P30, P33, and J3 Flash" do not help. */
--+		printk(KERN_WARNING "cfi_cmdset_0001: Suspend "
--+		                    "erase on write disabled.\n");
--+		extp->SuspendCmdSupport &= ~1;
- +	}
- +}
- +
-  static void fixup_use_point(struct mtd_info *mtd)
-  {
-  	struct map_info *map = mtd->priv;
--@@ -310,6 +356,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-+@@ -310,6 +349,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-  	{ CFI_MFR_ST, 0x00ba, /* M28W320CT */ fixup_st_m28w320ct },
-  	{ CFI_MFR_ST, 0x00bb, /* M28W320CB */ fixup_st_m28w320cb },
-  	{ CFI_MFR_INTEL, CFI_ID_ANY, fixup_unlock_powerup_lock },
-@@ -87,33 +83,43 @@ index 7751443..c3c0b41 100644
-  	{ 0, 0, NULL }
-  };
-  
--@@ -387,6 +435,12 @@ read_pri_intelext(struct map_info *map, __u16 adr)
-- 	if (extp->MinorVersion >= '3') {
-- 		int nb_parts, i;
-+@@ -655,7 +696,6 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) extra_size += 3; */
--+
-- 		/* Number of hardware-partitions */
-- 		extra_size += 1;
-- 		if (extp_size < sizeof(*extp) + extra_size)
--@@ -656,6 +710,12 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  		/* Burst Read info */
-  		offs += extp->extra[offs+1]+2;
+ SRC_URI_append_h1940 = " \
+            file://defconfig \
+@@ -55,33 +25,6 @@ SRC_URI_append_h1940 = " \
+            file://qvga/logo_linux_clut224.ppm.bz2 \
+            "
+ 
+-SRC_URI_append_h3600 = " \
+-           file://defconfig \
+-           file://0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch \
+-           file://0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch \
+-           file://0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch \
+-           file://0004-fb-backlight-add-driver-for-iPAQ-micro-backlight.patch \
+-           file://0005-input-driver-for-touchscreen-on-iPaq-h3xxx.patch \
+-           file://0006-leds-add-driver-for-the-iPAQ-micro.patch \
+-           file://0007-power-add-driver-for-battery-reading-on-iPaq-h3xxx.patch \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_poodle = " \
+-           file://feature-top.scc \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_spitz = " \
+-           file://feature-top.scc \
+-           file://vga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-SRC_URI_append_tosa = " \
+-           file://feature-top.scc \
+-           file://vga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+ do_configure_prepend() {
+ 
+     if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
+diff --git a/recipes-kernel/linux/linux-yocto-dev/akita/akita-standard.scc b/recipes-kernel/linux/linux-yocto-dev/akita/akita-standard.scc
+deleted file mode 100644
+index 21096d0..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/akita/akita-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE akita
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include akita.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/akita/akita.cfg b/recipes-kernel/linux/linux-yocto-dev/akita/akita.cfg
+deleted file mode 100644
+index f6eb8f2..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/akita/akita.cfg
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#
+-# System Type
+-#
+-CONFIG_GPIO_PCA953X=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/akita/akita.scc b/recipes-kernel/linux/linux-yocto-dev/akita/akita.scc
+deleted file mode 100644
+index a7f542a..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/akita/akita.scc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-kconf hardware ../spitz/spitz.cfg
+-kconf hardware akita.cfg
+-
+-include ../zaurus-pxa-only.scc
+-include ../zaurus-common.scc
+-include ../zaurus-usb-host.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0-standard.scc b/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0-standard.scc
+deleted file mode 100644
+index 325c7c7..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE c7x0
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include c7x0.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.cfg b/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.cfg
+deleted file mode 100644
+index 7da7c19..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.cfg
++++ /dev/null
+@@ -1,52 +0,0 @@
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_MACH_CORGI=y
+-CONFIG_MACH_SHEPHERD=y
+-CONFIG_MACH_HUSKY=y
+-CONFIG_PXA25x=y
+-CONFIG_PXA_SHARP_C7xx=y
+-CONFIG_SHARPSL_PM=y
+-CONFIG_SHARPSL_PM_MAX1111=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 loglevel=3"
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-CONFIG_MTD_NAND_SHARPSL=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_KEYBOARD_MATRIX=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_W100=y
+-CONFIG_LCD_CORGI=y
+-CONFIG_BACKLIGHT_GENERIC=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_FONT_8x16=y
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_PXA25X=m
+-CONFIG_SND_PXA2XX_SOC_I2S=m
+-CONFIG_SND_PXA2XX_SOC_CORGI=m
+-CONFIG_SND_SOC_WM8731=m
+diff --git a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.scc b/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.scc
+deleted file mode 100644
+index 662a7b7..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/c7x0/c7x0.scc
++++ /dev/null
+@@ -1,4 +0,0 @@
+-kconf hardware c7x0.cfg
+-
+-include ../zaurus-pxa-only.scc
+-include ../zaurus-common.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/collie/collie-standard.scc b/recipes-kernel/linux/linux-yocto-dev/collie/collie-standard.scc
+deleted file mode 100644
+index 7283ad9..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/collie/collie-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE collie
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include collie.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-dev/collie/collie.cfg
+deleted file mode 100644
+index c334774..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/collie/collie.cfg
++++ /dev/null
+@@ -1,118 +0,0 @@
+-#
+-# System Type
+-#
+-CONFIG_ARCH_SA1100=y
+-
+-#
+-# SA11x0 Implementations
+-#
+-CONFIG_SA1100_COLLIE=y
+-
+-#
+-# Processor Type
+-#
+-CONFIG_CPU_SA1100=y
+-CONFIG_CPU_32v4=y
+-CONFIG_CPU_ABRT_EV4=y
+-CONFIG_CPU_PABRT_LEGACY=y
+-CONFIG_CPU_CACHE_V4WB=y
+-CONFIG_CPU_CACHE_VIVT=y
+-CONFIG_CPU_TLB_V4WB=y
+-CONFIG_CPU_CP15=y
+-CONFIG_CPU_CP15_MMU=y
+-CONFIG_CPU_USE_DOMAINS=y
+-
+-#
+-# Processor Features
+-#
+-CONFIG_SHARP_LOCOMO=y
+-
+-#
+-# PC-card bridges
+-#
+-CONFIG_PCMCIA_SA11XX_BASE=y
+-CONFIG_PCMCIA_SA1100=y
+-
+-#
+-# Kernel Features
+-#
+-CONFIG_ARCH_SPARSEMEM_ENABLE=y
+-CONFIG_ARCH_SPARSEMEM_DEFAULT=y
+-CONFIG_ARCH_SELECT_MEMORY_MODEL=y
+-CONFIG_SPARSEMEM_MANUAL=y
+-CONFIG_SPARSEMEM=y
+-CONFIG_HAVE_MEMORY_PRESENT=y
+-CONFIG_SPARSEMEM_EXTREME=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_CFI=y
+-CONFIG_MTD_JEDECPROBE=y
+-CONFIG_MTD_GEN_PROBE=y
+-CONFIG_MTD_CFI_ADV_OPTIONS=y
+-CONFIG_MTD_CFI_NOSWAP=y
+-CONFIG_MTD_CFI_GEOMETRY=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-CONFIG_MTD_CFI_I2=y
+-CONFIG_MTD_CFI_INTELEXT=y
+-CONFIG_MTD_CFI_UTIL=y
+-
+-#
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_SA1100=y
+-
+-#
+-# Non-8250 serial port support
+-# 
+-CONFIG_SERIAL_SA1100=y
+-CONFIG_SERIAL_SA1100_CONSOLE=y
+-CONFIG_SERIAL_CORE=y
+-CONFIG_SERIAL_CORE_CONSOLE=y
+-
+-#
+-# Multimedia Capabilities Port drivers
+-#
+-CONFIG_MCP=y
+-CONFIG_MCP_SA11X0=y
+-CONFIG_MCP_UCB1200=y
+-CONFIG_MCP_UCB1200_TS=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_KEYBOARD_LOCOMO=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_SA1100=y
+-CONFIG_BACKLIGHT_LOCOMO=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONT_8x8=y
+-
+-#
+-# LED drivers
+-#
+-CONFIG_LEDS_LOCOMO=y
+-
+-#
+-# MODULbus GPIO expanders:
+-#
+-CONFIG_BATTERY_COLLIE=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/collie/collie.scc b/recipes-kernel/linux/linux-yocto-dev/collie/collie.scc
+deleted file mode 100644
+index f165102..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/collie/collie.scc
++++ /dev/null
+@@ -1,16 +0,0 @@
+-kconf hardware collie.cfg
+-
+-include ../zaurus-common.scc
+-
+-patch ../patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
+-patch ../patches/patches-mtd/collie-cfi-probe-again.patch
+-patch ../patches/patches-mtd/collie-mtd-resize.patch
+-patch ../patches/patches-mtd/collie-match-cfi-qry.patch
+-patch ../patches/patches-mtd/collie-LH28F640BF.patch
+-patch ../patches/patches-sa1100/collie-irda.patch
+-patch ../patches/patches-sa1100/collie-add-bootblock.patch
+-patch ../patches/patches-sa1100/arm-sa1100-add-cpu-clock.patch
+-patch ../patches/patches-sa1100/fbdev-sa1100fb-make-use-of-device-clock.patch
+-patch ../patches/patches-sa1100/pcmcia-sa1100-device-clock.patch
+-patch ../patches/patches-locomo/locomo-fix-SCL-SDA.patch
+-patch ../patches/patches-locomo/locomolcd-suspend-resume.patch
+diff --git a/recipes-kernel/linux/linux-yocto-dev/feature-top.scc b/recipes-kernel/linux/linux-yocto-dev/feature-top.scc
+deleted file mode 100644
+index fdffa2a..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/feature-top.scc
++++ /dev/null
+@@ -1 +0,0 @@
+-# placeholder
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch
+deleted file mode 100644
+index 2470cdf..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch
++++ /dev/null
+@@ -1,712 +0,0 @@
+-From a2073bd47b86b1ad3ba0600e772cd0f14ba73838 Mon Sep 17 00:00:00 2001
+-From: Linus Walleij <linus.walleij@linaro.org>
+-Date: Fri, 31 Jan 2014 14:34:35 +0100
+-Subject: [PATCH 1/7] MFD: driver for Atmel Microcontroller on iPaq h3xxx
+-
+-This adds a driver for the Atmel Microcontroller found on the
+-iPAQ h3xxx series. This device handles some keys, the
+-touchscreen, and the battery monitoring.
+-
+-This is a port of a driver from handhelds.org 2.6.21 kernel,
+-written by Alessandro Gardich based on Andrew Christians
+-original HAL-driver. It has been heavily cleaned and
+-converted to mfd-core by Dmitry Artamonow and rewritten
+-again for the v3.x series kernels by Linus Walleij,
+-bringing back some of the functionality lost from Andrew's
+-original driver.
+-
+-Cc: Russell King <linux@arm.linux.org.uk>
+-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+-Signed-off-by: Alessandro Gardich <gremlin@gremlin.it>
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/mfd/Kconfig            |  10 +
+- drivers/mfd/Makefile           |   1 +
+- drivers/mfd/ipaq-micro.c       | 487 +++++++++++++++++++++++++++++++++++++++++
+- include/linux/mfd/ipaq-micro.h | 148 +++++++++++++
+- 4 files changed, 646 insertions(+)
+- create mode 100644 drivers/mfd/ipaq-micro.c
+- create mode 100644 include/linux/mfd/ipaq-micro.h
+-
+-diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+-index 49bb445d846a..255807afc582 100644
+---- a/drivers/mfd/Kconfig
+-+++ b/drivers/mfd/Kconfig
+-@@ -242,6 +242,16 @@ config MFD_INTEL_MSIC
+- 	  Passage) chip. This chip embeds audio, battery, GPIO, etc.
+- 	  devices used in Intel Medfield platforms.
 - 
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) offs += 3; */
+-+config MFD_IPAQ_MICRO
+-+	bool "Atmel Micro ASIC (iPAQ h3100/h3600/h3700) Support"
+-+	depends on SA1100_H3100 || SA1100_H3600
+-+	select MFD_CORE
+-+	help
+-+	  Select this to get support for the Microcontroller found in
+-+	  the Compaq iPAQ handheld computers. This is an Atmel
+-+	  AT90LS8535 microcontroller flashed with a special iPAQ
+-+	  firmware using the custom protocol implemented in this driver.
 -+
-+-
-  		/* Number of partition regions */
-  		numregions = extp->extra[offs];
-  		offs += 1;
--@@ -1654,6 +1714,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-+@@ -1003,8 +1043,16 @@ static void put_chip(struct map_info *map, struct flchip *chip, unsigned long ad
-+ 		   sending the 0x70 (Read Status) command to an erasing
-+ 		   chip and expecting it to be ignored, that's what we
-+ 		   do. */
-++
-++		 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++		if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 		map_write(map, CMD(0xd0), adr);
-+ 		map_write(map, CMD(0x70), adr);
-++
-++		 /* Fix Erase-Suspend following Erase-Resume: add latency */
-++		if (is_LH28F640BF(cfi)) cfi_udelay(1200);
-++
-+ 		chip->oldstate = FL_READY;
-+ 		chip->state = FL_ERASING;
-+ 		break;
-+@@ -1162,6 +1210,10 @@ static int __xipram xip_wait_for_operation(
-+ 			local_irq_disable();
-+ 
-+ 			/* Resume the write or erase operation */
-++
-++			 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++			if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 			map_write(map, CMD(0xd0), adr);
-+ 			map_write(map, CMD(0x70), adr);
-+ 			chip->state = oldstate;
-+@@ -1654,6 +1706,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-  	initial_adr = adr;
-  	cmd_adr = adr & ~(wbufsize-1);
-  
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/collie/collie-LH28F640BF.patch b/recipes-kernel/linux/linux-yocto-3.14/collie/collie-LH28F640BF.patch
-index 963b7ca..fca51d5 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/collie/collie-LH28F640BF.patch
-+++ b/recipes-kernel/linux/linux-yocto-3.14/collie/collie-LH28F640BF.patch
-@@ -1,6 +1,6 @@
--From 7485f38ec10b7474932edebc4f3db60a8e32097c Mon Sep 17 00:00:00 2001
-+From 12402bf48cf2494a65aac0cf1e55cdc6296691bc Mon Sep 17 00:00:00 2001
- From: Andrea Adami <andrea.adami@gmail.com>
--Date: Tue, 21 Jan 2014 00:51:26 +0100
-+Date: Sun, 6 Apr 2014 21:21:22 +0200
- Subject: [PATCH] mtd: add support for Sharp LH28F640BF NOR chips
- 
- Tested on Zaurus SL-5500 (Collie) 2x16 on 32 bit bus
-@@ -9,13 +9,16 @@ Buffer write fixes as seen in 2007 patch c/o
- Anti Sullin <anti.sullin <at> artecdesign.ee>
- http://comments.gmane.org/gmane.linux.ports.arm.kernel/36733
- 
-+Other fixes as seen in
-+Micron: TN-12-06: Adapting the Linux Kernel for P30, P33, and J3 Flash
-+
- Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
- ---
-- drivers/mtd/chips/cfi_cmdset_0001.c | 66 +++++++++++++++++++++++++++++++++++++
-- 1 file changed, 66 insertions(+)
-+ drivers/mtd/chips/cfi_cmdset_0001.c | 60 ++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 59 insertions(+), 1 deletion(-)
- 
- diff --git a/drivers/mtd/chips/cfi_cmdset_0001.c b/drivers/mtd/chips/cfi_cmdset_0001.c
--index 7751443..c3c0b41 100644
-+index 7751443..d83b603 100644
- --- a/drivers/mtd/chips/cfi_cmdset_0001.c
- +++ b/drivers/mtd/chips/cfi_cmdset_0001.c
- @@ -53,6 +53,11 @@
-@@ -30,13 +33,13 @@ index 7751443..c3c0b41 100644
-  
-  static int cfi_intelext_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
-  static int cfi_intelext_write_words(struct mtd_info *, loff_t, size_t, size_t *, const u_char *);
--@@ -259,6 +264,47 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-+@@ -259,6 +264,40 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-  		(cfi->cfiq->EraseRegionInfo[1] & 0xffff0000) | 0x3e;
-  };
-  
- +static int is_LH28F640BF(struct cfi_private *cfi)
- +{
--+	/* Sharp LH28F640BF Series */
-++	/* Sharp LH28F640BF Family */
- +	if (cfi->mfr == CFI_MFR_SHARP && (
- +	    cfi->id == LH28F640BFHE_PTTL90 || cfi->id == LH28F640BFHE_PBTL90 ||
- +	    cfi->id == LH28F640BFHE_PTTL70A || cfi->id == LH28F640BFHE_PBTL70A))
-@@ -50,35 +53,28 @@ index 7751443..c3c0b41 100644
- +	struct cfi_private *cfi = map->fldrv_priv;
- +	struct cfi_pri_intelext *extp = cfi->cmdset_priv;
- +
-++	/* NOTE: Sharp Extended Query reports the nr of hardware partitions
-++	 * with an offset of +3. Change of the PCR are not reflected.
-++	 * Keep the wrong reading (0) and let the code convert it to 1 */
-++
- +	/* Reset the Partition Configuration Register on LH28F640BF
- +	 * to a single partition (PCRC = 0x000): PCRC is embedded into A0-A15. */
- +	if (is_LH28F640BF(cfi)) {
- +		printk(KERN_INFO "Reset Partition Config. Register: 1 Partition of 4 planes\n" );
- +		map_write(map, CMD(0x60), 0);
- +		map_write(map, CMD(0x04), 0);
--+		/* NOTE: Sharp Extended Query reports the nr of hardware partitions
--+		 * with an offset of +3. Change of the PCR are not reflected.
--+		 * Keep the wrong reading (0) and let the code convert it to 1 */
- +
--+		/* Sharp LH28F640BF Series has been set to one partition
--+		 * so Simultaneous Operations are disabled */
-++		/* We have set one single partition thus
-++		 * Simultaneous Operations are not allowed */
- +		printk(KERN_WARNING "cfi_cmdset_0001: Simultaneous Operations disabled\n");
- +		extp->FeatureSupport &= ~512;
+- config MFD_JANZ_CMODIO
+- 	tristate "Janz CMOD-IO PCI MODULbus Carrier Board"
+- 	select MFD_CORE
+-diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+-index 5aea5ef0a62f..cf8081fcb3ac 100644
+---- a/drivers/mfd/Makefile
+-+++ b/drivers/mfd/Makefile
+-@@ -166,3 +166,4 @@ obj-$(CONFIG_MFD_RETU)		+= retu-mfd.o
+- obj-$(CONFIG_MFD_AS3711)	+= as3711.o
+- obj-$(CONFIG_MFD_AS3722)	+= as3722.o
+- obj-$(CONFIG_MFD_STW481X)	+= stw481x.o
+-+obj-$(CONFIG_MFD_IPAQ_MICRO)	+= ipaq-micro.o
+-diff --git a/drivers/mfd/ipaq-micro.c b/drivers/mfd/ipaq-micro.c
+-new file mode 100644
+-index 000000000000..f71dffdd3f0f
+---- /dev/null
+-+++ b/drivers/mfd/ipaq-micro.c
+-@@ -0,0 +1,487 @@
+-+/*
+-+ * Compaq iPAQ h3xxx Atmel microcontroller companion support
+-+ *
+-+ * This is an Atmel AT90LS8535 with a special flashed-in firmware that
+-+ * implements the special protocol used by this driver.
+-+ *
+-+ * based on previous kernel 2.4 version by Andrew Christian
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ * Author : Dmitry Artamonow <mad_soft@inbox.ru>
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ *
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ */
 -+
--+		/* To avoid issues with ubifs with concurrent erase-suspend
--+		 * we have to disable SuspendCmdSupport.
--+		 * The fixes described in "Micron TN-12-06: Adapting the
--+		 * Linux Kernel for P30, P33, and J3 Flash" do not help. */
--+		printk(KERN_WARNING "cfi_cmdset_0001: Suspend "
--+		                    "erase on write disabled.\n");
--+		extp->SuspendCmdSupport &= ~1;
- +	}
- +}
- +
-  static void fixup_use_point(struct mtd_info *mtd)
-  {
-  	struct map_info *map = mtd->priv;
--@@ -310,6 +356,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-+@@ -310,6 +349,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-  	{ CFI_MFR_ST, 0x00ba, /* M28W320CT */ fixup_st_m28w320ct },
-  	{ CFI_MFR_ST, 0x00bb, /* M28W320CB */ fixup_st_m28w320cb },
-  	{ CFI_MFR_INTEL, CFI_ID_ANY, fixup_unlock_powerup_lock },
-@@ -87,33 +83,43 @@ index 7751443..c3c0b41 100644
-  	{ 0, 0, NULL }
-  };
-  
--@@ -387,6 +435,12 @@ read_pri_intelext(struct map_info *map, __u16 adr)
-- 	if (extp->MinorVersion >= '3') {
-- 		int nb_parts, i;
-+@@ -655,7 +696,6 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) extra_size += 3; */
+-+#include <linux/module.h>
+-+#include <linux/init.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/pm.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/io.h>
+-+#include <linux/mfd/core.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+#include <linux/string.h>
+-+#include <linux/random.h>
+-+#include <linux/slab.h>
+-+#include <linux/list.h>
 -+
-- 		/* Number of hardware-partitions */
-- 		extra_size += 1;
-- 		if (extp_size < sizeof(*extp) + extra_size)
--@@ -656,6 +710,12 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  		/* Burst Read info */
-  		offs += extp->extra[offs+1]+2;
+-+#include <mach/hardware.h>
+-+
+-+static void ipaq_micro_trigger_tx(struct ipaq_micro *micro)
+-+{
+-+	struct ipaq_micro_txdev *tx = &micro->tx;
+-+	struct ipaq_micro_msg *msg = micro->msg;
+-+	int i, bp;
+-+	u8 checksum;
+-+	u32 val;
+-+
+-+	bp = 0;
+-+	tx->buf[bp++] = CHAR_SOF;
+-+
+-+	checksum = ((msg->id & 0x0f) << 4) | (msg->tx_len & 0x0f);
+-+	tx->buf[bp++] = checksum;
+-+
+-+	for (i = 0; i < msg->tx_len; i++) {
+-+		tx->buf[bp++] = msg->tx_data[i];
+-+		checksum += msg->tx_data[i];
+-+	}
+-+
+-+	tx->buf[bp++] = checksum;
+-+	tx->len = bp;
+-+	tx->index = 0;
+-+	print_hex_dump(KERN_DEBUG, "data: ", DUMP_PREFIX_OFFSET, 16, 1,
+-+		       tx->buf, tx->len, true);
+-+
+-+	/* Enable interrupt */
+-+	val = readl(micro->base + UTCR3);
+-+	val |= UTCR3_TIE;
+-+	writel(val, micro->base + UTCR3);
+-+}
+-+
+-+int ipaq_micro_tx_msg(struct ipaq_micro *micro, struct ipaq_micro_msg *msg)
+-+{
+-+	unsigned long flags;
+-+
+-+	dev_dbg(micro->dev, "TX msg: %02x, %d bytes\n", msg->id, msg->tx_len);
+-+
+-+	spin_lock_irqsave(&micro->lock, flags);
+-+	if (micro->msg) {
+-+		list_add_tail(&msg->node, &micro->queue);
+-+		spin_unlock_irqrestore(&micro->lock, flags);
+-+		return 0;
+-+	}
+-+	micro->msg = msg;
+-+	ipaq_micro_trigger_tx(micro);
+-+	spin_unlock_irqrestore(&micro->lock, flags);
+-+	return 0;
+-+}
+-+EXPORT_SYMBOL(ipaq_micro_tx_msg);
+-+
+-+static void micro_rx_msg(struct ipaq_micro *micro, u8 id, int len, u8 *data)
+-+{
+-+	int i;
+-+
+-+	dev_dbg(micro->dev, "RX msg: %02x, %d bytes\n", id, len);
+-+
+-+	spin_lock(&micro->lock);
+-+	switch (id) {
+-+	case MSG_VERSION:
+-+	case MSG_EEPROM_READ:
+-+	case MSG_EEPROM_WRITE:
+-+	case MSG_BACKLIGHT:
+-+	case MSG_NOTIFY_LED:
+-+	case MSG_THERMAL_SENSOR:
+-+	case MSG_BATTERY:
+-+		/* Handle synchronous messages */
+-+		if (micro->msg && micro->msg->id == id) {
+-+			struct ipaq_micro_msg *msg = micro->msg;
+-+
+-+			memcpy(msg->rx_data, data, len);
+-+			msg->rx_len = len;
+-+			complete(&micro->msg->ack);
+-+			if (!list_empty(&micro->queue)) {
+-+				micro->msg = list_entry(micro->queue.next,
+-+							struct ipaq_micro_msg,
+-+							node);
+-+				list_del_init(&micro->msg->node);
+-+				ipaq_micro_trigger_tx(micro);
+-+			} else
+-+				micro->msg = NULL;
+-+			dev_dbg(micro->dev, "OK RX message 0x%02x\n", id);
+-+		} else {
+-+			dev_err(micro->dev,
+-+				"out of band RX message 0x%02x\n", id);
+-+			if(!micro->msg)
+-+				dev_info(micro->dev, "no message queued\n");
+-+			else
+-+				dev_info(micro->dev, "expected message %02x\n",
+-+					 micro->msg->id);
+-+		}
+-+		break;
+-+	case MSG_KEYBOARD:
+-+		if (micro->key)
+-+			micro->key(micro->key_data, len, data);
+-+		else
+-+			dev_dbg(micro->dev, "key message ignored, no handle \n");
+-+		break;
+-+	case MSG_TOUCHSCREEN:
+-+		if (micro->ts)
+-+			micro->ts(micro->ts_data, len, data);
+-+		else
+-+			dev_dbg(micro->dev, "touchscreen message ignored, no handle \n");
+-+		break;
+-+	default:
+-+		dev_err(micro->dev,
+-+			"unknown msg %d [%d] ", id, len);
+-+		for (i = 0; i < len; ++i)
+-+			pr_cont("0x%02x ", data[i]);
+-+		pr_cont("\n");
+-+	}
+-+	spin_unlock(&micro->lock);
+-+}
+-+
+-+static void micro_process_char(struct ipaq_micro *micro, u8 ch)
+-+{
+-+	struct ipaq_micro_rxdev *rx = &micro->rx;
+-+
+-+	switch (rx->state) {
+-+	case STATE_SOF:	/* Looking for SOF */
+-+		if (ch == CHAR_SOF)
+-+			rx->state = STATE_ID; /* Next byte is the id and len */
+-+		break;
+-+	case STATE_ID: /* Looking for id and len byte */
+-+		rx->id = (ch & 0xf0) >> 4 ;
+-+		rx->len = (ch & 0x0f);
+-+		rx->index = 0;
+-+		rx->chksum = ch;
+-+		rx->state = (rx->len > 0) ? STATE_DATA : STATE_CHKSUM;
+-+		break;
+-+	case STATE_DATA: /* Looking for 'len' data bytes */
+-+		rx->chksum += ch;
+-+		rx->buf[rx->index] = ch;
+-+		if (++rx->index == rx->len)
+-+			rx->state = STATE_CHKSUM;
+-+		break;
+-+	case STATE_CHKSUM: /* Looking for the checksum */
+-+		if (ch == rx->chksum)
+-+			micro_rx_msg(micro, rx->id, rx->len, rx->buf);
+-+		rx->state = STATE_SOF;
+-+		break;
+-+	}
+-+}
+-+
+-+static void micro_rx_chars(struct ipaq_micro *micro)
+-+{
+-+	u32 status, ch;
+-+
+-+	while ((status = readl(micro->base + UTSR1)) & UTSR1_RNE) {
+-+		ch = readl(micro->base + UTDR);
+-+		if (status & UTSR1_PRE)
+-+			dev_err(micro->dev, "rx: parity error\n");
+-+		else if (status & UTSR1_FRE)
+-+			dev_err(micro->dev, "rx: framing error\n");
+-+		else if (status & UTSR1_ROR)
+-+			dev_err(micro->dev, "rx: overrun error\n");
+-+		micro_process_char(micro, ch);
+-+	}
+-+}
+-+
+-+static void ipaq_micro_get_version(struct ipaq_micro *micro)
+-+{
+-+	struct ipaq_micro_msg msg = {
+-+		.id = MSG_VERSION,
+-+	};
+-+
+-+	ipaq_micro_tx_msg_sync(micro, &msg);
+-+	if (msg.rx_len == 4) {
+-+		memcpy(micro->version, msg.rx_data, 4);
+-+		micro->version[4] = '\0';
+-+	} else if (msg.rx_len == 9) {
+-+		memcpy(micro->version, msg.rx_data, 4);
+-+		micro->version[4] = '\0';
+-+		/* Bytes 4-7 are "pack", byte 8 is "boot type" */
+-+	} else {
+-+		dev_err(micro->dev,
+-+			"illegal version message %d bytes\n", msg.rx_len);
+-+	}
+-+}
+-+
+-+static void ipaq_micro_eeprom_read(struct ipaq_micro *micro,
+-+				   u8 address, u8 len, u8 *data)
+-+{
+-+	struct ipaq_micro_msg msg = {
+-+		.id = MSG_EEPROM_READ,
+-+	};
+-+	u8 i;
+-+
+-+	for (i = 0; i < len; i++) {
+-+		msg.tx_data[0] = address + i;
+-+		msg.tx_data[1] = 1;
+-+		msg.tx_len = 2;
+-+		ipaq_micro_tx_msg_sync(micro, &msg);
+-+		memcpy(data + (i * 2), msg.rx_data, 2);
+-+	}
+-+}
+-+
+-+static char *ipaq_micro_str(u8 *wchar, u8 len)
+-+{
+-+	char retstr[256];
+-+	u8 i;
+-+
+-+	for (i = 0; i < len / 2; i++)
+-+		retstr[i] = wchar[i * 2];
+-+	return kstrdup(retstr, GFP_KERNEL);
+-+}
+-+
+-+static u16 ipaq_micro_to_u16(u8 *data)
+-+{
+-+	return data[1] << 8 | data[0];
+-+}
+-+
+-+static void ipaq_micro_eeprom_dump(struct ipaq_micro *micro)
+-+{
+-+	u8 dump[256];
+-+	char *str;
+-+
+-+	ipaq_micro_eeprom_read(micro, 0, 128, dump);
+-+	str = ipaq_micro_str(dump, 10);
+-+	if (str) {
+-+		dev_info(micro->dev, "HM version %s\n", str);
+-+		kfree(str);
+-+	}
+-+	str = ipaq_micro_str(dump+10, 40);
+-+	if (str) {
+-+		dev_info(micro->dev, "serial number: %s\n", str);
+-+		/* Feed the random pool with this */
+-+		add_device_randomness(str, strlen(str));
+-+		kfree(str);
+-+	}
+-+	str = ipaq_micro_str(dump+50, 20);
+-+	if (str) {
+-+		dev_info(micro->dev, "module ID: %s\n", str);
+-+		kfree(str);
+-+	}
+-+	str = ipaq_micro_str(dump+70, 10);
+-+	if (str) {
+-+		dev_info(micro->dev, "product revision: %s\n", str);
+-+		kfree(str);
+-+	}
+-+	dev_info(micro->dev, "product ID: %u\n", ipaq_micro_to_u16(dump+80));
+-+	dev_info(micro->dev, "frame rate: %u fps\n",
+-+		 ipaq_micro_to_u16(dump+82));
+-+	dev_info(micro->dev, "page mode: %u\n", ipaq_micro_to_u16(dump+84));
+-+	dev_info(micro->dev, "country ID: %u\n", ipaq_micro_to_u16(dump+86));
+-+	dev_info(micro->dev, "color display: %s\n",
+-+		 ipaq_micro_to_u16(dump+88) ? "yes" : "no");
+-+	dev_info(micro->dev, "ROM size: %u MiB\n", ipaq_micro_to_u16(dump+90));
+-+	dev_info(micro->dev, "RAM size: %u KiB\n", ipaq_micro_to_u16(dump+92));
+-+	dev_info(micro->dev, "screen: %u x %u\n",
+-+		 ipaq_micro_to_u16(dump+94), ipaq_micro_to_u16(dump+96));
+-+	print_hex_dump(KERN_DEBUG, "eeprom: ", DUMP_PREFIX_OFFSET, 16, 1,
+-+		       dump, 256, true);
+-+
+-+}
+-+
+-+static void micro_tx_chars(struct ipaq_micro *micro)
+-+{
+-+	struct ipaq_micro_txdev *tx = &micro->tx;
+-+	u32 val;
+-+
+-+	while ((tx->index < tx->len) &&
+-+	       (readl(micro->base + UTSR1) & UTSR1_TNF)) {
+-+		writel(tx->buf[tx->index], micro->base + UTDR);
+-+		tx->index++;
+-+	}
+-+
+-+	/* Stop interrupts */
+-+	val = readl(micro->base + UTCR3);
+-+	val &= ~UTCR3_TIE;
+-+	writel(val, micro->base + UTCR3);
+-+}
+-+
+-+static void micro_reset_comm(struct ipaq_micro *micro)
+-+{
+-+	struct ipaq_micro_rxdev *rx = &micro->rx;
+-+	u32 val;
+-+
+-+	if (micro->msg)
+-+		complete(&micro->msg->ack);
+-+
+-+	/* Initialize Serial channel protocol frame */
+-+	rx->state = STATE_SOF;  /* Reset the state machine */
+-+
+-+	/* Set up interrupts */
+-+	writel(0x01, micro->sdlc + 0x0); /* Select UART mode */
+-+
+-+	/* Clean up CR3 */
+-+	writel(0x0, micro->base + UTCR3);
+-+
+-+	/* Format: 8N1 */
+-+	writel(UTCR0_8BitData | UTCR0_1StpBit, micro->base + UTCR0);
+-+
+-+	/* Baud rate: 115200 */
+-+	writel(0x0, micro->base + UTCR1);
+-+	writel(0x1, micro->base + UTCR2);
+-+
+-+	/* Clear SR0 */
+-+	writel(0xff, micro->base + UTSR0);
+-+
+-+	/* Enable RX int, disable TX int */
+-+	writel(UTCR3_TXE | UTCR3_RXE | UTCR3_RIE, micro->base + UTCR3);
+-+	val = readl(micro->base + UTCR3);
+-+	val &= ~UTCR3_TIE;
+-+	writel(val, micro->base + UTCR3);
+-+}
+-+
+-+static irqreturn_t micro_serial_isr(int irq, void *dev_id)
+-+{
+-+	struct ipaq_micro *micro = dev_id;
+-+	struct ipaq_micro_txdev *tx = &micro->tx;
+-+	u32 status;
+-+
+-+	status = readl(micro->base + UTSR0);
+-+	do {
+-+		if (status & (UTSR0_RID | UTSR0_RFS)) {
+-+			if (status & UTSR0_RID)
+-+				/* Clear the Receiver IDLE bit */
+-+				writel(UTSR0_RID, micro->base + UTSR0);
+-+			micro_rx_chars(micro);
+-+		}
+-+
+-+		/* Clear break bits */
+-+		if (status & (UTSR0_RBB | UTSR0_REB))
+-+			writel(status & (UTSR0_RBB | UTSR0_REB),
+-+			       micro->base + UTSR0);
+-+
+-+		if (status & UTSR0_TFS)
+-+			micro_tx_chars(micro);
+-+
+-+		status = readl(micro->base + UTSR0);
+-+
+-+	} while (((tx->index < tx->len) && (status & UTSR0_TFS)) ||
+-+		 (status & (UTSR0_RFS | UTSR0_RID)));
+-+
+-+	return IRQ_HANDLED;
+-+}
+-+
+-+static struct mfd_cell micro_cells[] = {
+-+	{ .name = "ipaq-micro-backlight", },
+-+	{ .name = "ipaq-micro-battery", },
+-+	{ .name = "ipaq-micro-keys", },
+-+	{ .name = "ipaq-micro-ts", },
+-+	{ .name = "ipaq-micro-leds", },
+-+};
+-+
+-+static int micro_suspend(struct device *dev)
+-+{
+-+	return 0;
+-+}
+-+
+-+static int micro_resume(struct device *dev)
+-+{
+-+	struct ipaq_micro *micro = dev_get_drvdata(dev);
+-+
+-+	micro_reset_comm(micro);
+-+	mdelay(10);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_probe(struct platform_device *pdev)
+-+{
+-+	struct ipaq_micro *micro;
+-+	struct resource *res;
+-+	int ret;
+-+	int irq;
+-+
+-+	micro = devm_kzalloc(&pdev->dev, sizeof(*micro), GFP_KERNEL);
+-+	if (!micro)
+-+		return -ENOMEM;
+-+
+-+	micro->dev = &pdev->dev;
+-+
+-+	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+-+	if (!res)
+-+		return -EINVAL;
+-+
+-+	micro->base = devm_request_and_ioremap(&pdev->dev, res);
+-+	if (!micro->base)
+-+		return -ENOMEM;
+-+
+-+	res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
+-+	if (!res)
+-+		return -EINVAL;
+-+
+-+	micro->sdlc = devm_request_and_ioremap(&pdev->dev, res);
+-+	if (!micro->sdlc)
+-+		return -ENOMEM;
+-+
+-+	micro_reset_comm(micro);
+-+
+-+	irq = platform_get_irq(pdev, 0);
+-+	if (!irq)
+-+		return -EINVAL;
+-+	ret = devm_request_irq(&pdev->dev, irq, micro_serial_isr,
+-+			       IRQF_SHARED, "ipaq-micro",
+-+			       micro);
+-+	if (ret) {
+-+		dev_err(&pdev->dev, "unable to grab serial port IRQ\n");
+-+		return ret;
+-+	} else
+-+		dev_info(&pdev->dev, "grabbed serial port IRQ\n");
+-+
+-+	spin_lock_init(&micro->lock);
+-+	INIT_LIST_HEAD(&micro->queue);
+-+	platform_set_drvdata(pdev, micro);
+-+
+-+	ret = mfd_add_devices(&pdev->dev, pdev->id, micro_cells,
+-+			      ARRAY_SIZE(micro_cells), NULL, 0, NULL);
+-+	if (ret) {
+-+		dev_err(&pdev->dev, "error adding MFD cells");
+-+		return ret;
+-+	}
+-+
+-+	/* Check version */
+-+	ipaq_micro_get_version(micro);
+-+	dev_info(&pdev->dev, "Atmel micro ASIC version %s\n", micro->version);
+-+	ipaq_micro_eeprom_dump(micro);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_remove(struct platform_device *pdev)
+-+{
+-+	struct ipaq_micro *micro = platform_get_drvdata(pdev);
+-+	u32 val;
+-+
+-+	mfd_remove_devices(&pdev->dev);
+-+
+-+	val = readl(micro->base + UTCR3);
+-+	val &= ~(UTCR3_RXE | UTCR3_RIE); /* disable receive interrupt */
+-+	val &= ~(UTCR3_TXE | UTCR3_TIE); /* disable transmit interrupt */
+-+	writel(val, micro->base + UTCR3);
+-+
+-+	return 0;
+-+}
+-+
+-+static const struct dev_pm_ops micro_dev_pm_ops = {
+-+	SET_SYSTEM_SLEEP_PM_OPS(micro_suspend, micro_resume)
+-+};
+-+
+-+static struct platform_driver micro_device_driver = {
+-+	.driver   = {
+-+		.name	= "ipaq-h3xxx-micro",
+-+		.pm	= &micro_dev_pm_ops,
+-+	},
+-+	.probe    = micro_probe,
+-+	.remove   = micro_remove,
+-+	/* .shutdown = micro_suspend, // FIXME */
+-+};
+-+module_platform_driver(micro_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro core and backlight");
+-diff --git a/include/linux/mfd/ipaq-micro.h b/include/linux/mfd/ipaq-micro.h
+-new file mode 100644
+-index 000000000000..5c4d29f6674f
+---- /dev/null
+-+++ b/include/linux/mfd/ipaq-micro.h
+-@@ -0,0 +1,148 @@
+-+/*
+-+ * Header file for the compaq Micro MFD
+-+ */
+-+
+-+#ifndef _MFD_IPAQ_MICRO_H_
+-+#define _MFD_IPAQ_MICRO_H_
+-+
+-+#include <linux/spinlock.h>
+-+#include <linux/completion.h>
+-+#include <linux/list.h>
+-+
+-+#define TX_BUF_SIZE	32
+-+#define RX_BUF_SIZE	16
+-+#define CHAR_SOF	0x02
+-+
+-+/*
+-+ * These are the different messages that can be sent to the microcontroller
+-+ * to control various aspects.
+-+ */
+-+#define MSG_VERSION		0x0
+-+#define MSG_KEYBOARD		0x2
+-+#define MSG_TOUCHSCREEN		0x3
+-+#define MSG_EEPROM_READ		0x4
+-+#define MSG_EEPROM_WRITE	0x5
+-+#define MSG_THERMAL_SENSOR	0x6
+-+#define MSG_NOTIFY_LED		0x8
+-+#define MSG_BATTERY		0x9
+-+#define MSG_SPI_READ		0xb
+-+#define MSG_SPI_WRITE		0xc
+-+#define MSG_BACKLIGHT		0xd /* H3600 only */
+-+#define MSG_CODEC_CTRL		0xe /* H3100 only */
+-+#define MSG_DISPLAY_CTRL	0xf /* H3100 only */
+-+
+-+/* state of receiver parser */
+-+enum rx_state {
+-+	STATE_SOF = 0,     /* Next byte should be start of frame */
+-+	STATE_ID,          /* Next byte is ID & message length   */
+-+	STATE_DATA,        /* Next byte is a data byte           */
+-+	STATE_CHKSUM       /* Next byte should be checksum       */
+-+};
+-+
+-+/**
+-+ * struct ipaq_micro_txdev - TX state
+-+ * @len: length of message in TX buffer
+-+ * @index: current index into TX buffer
+-+ * @buf: TX buffer
+-+ */
+-+struct ipaq_micro_txdev {
+-+	u8 len;
+-+	u8 index;
+-+	u8 buf[TX_BUF_SIZE];
+-+};
+-+
+-+/**
+-+ * struct ipaq_micro_rxdev - RX state
+-+ * @state: context of RX state machine
+-+ * @chksum: calculated checksum
+-+ * @id: message ID from packet
+-+ * @len: RX buffer length
+-+ * @index: RX buffer index
+-+ * @buf: RX buffer
+-+ */
+-+struct ipaq_micro_rxdev {
+-+	enum rx_state state;
+-+	unsigned char chksum;
+-+	u8            id;
+-+	unsigned int  len;
+-+	unsigned int  index;
+-+	u8            buf[RX_BUF_SIZE];
+-+};
+-+
+-+/**
+-+ * struct ipaq_micro_msg - message to the iPAQ microcontroller
+-+ * @id: 4-bit ID of the message
+-+ * @tx_len: length of TX data
+-+ * @tx_data: TX data to send
+-+ * @rx_len: length of receieved RX data
+-+ * @rx_data: RX data to recieve
+-+ * @ack: a completion that will be completed when RX is complete
+-+ * @node: list node if message gets queued
+-+ */
+-+struct ipaq_micro_msg {
+-+	u8 id;
+-+	u8 tx_len;
+-+	u8 tx_data[TX_BUF_SIZE];
+-+	u8 rx_len;
+-+	u8 rx_data[RX_BUF_SIZE];
+-+	struct completion ack;
+-+	struct list_head node;
+-+};
+-+
+-+/**
+-+ * struct ipaq_micro - iPAQ microcontroller state
+-+ * @dev: corresponding platform device
+-+ * @base: virtual memory base for underlying serial device
+-+ * @sdlc: virtual memory base for Synchronous Data Link Controller
+-+ * @version: version string
+-+ * @tx: TX state
+-+ * @rx: RX state
+-+ * @lock: lock for this state container
+-+ * @msg: current message
+-+ * @queue: message queue
+-+ * @key: callback for asynchronous key events
+-+ * @key_data: data to pass along with key events
+-+ * @ts: callback for asynchronous touchscreen events
+-+ * @ts_data: data to pass along with key events
+-+ */
+-+struct ipaq_micro {
+-+	struct device *dev;
+-+	void __iomem *base;
+-+	void __iomem *sdlc;
+-+	char version[5];
+-+	struct ipaq_micro_txdev tx;	/* transmit ISR state */
+-+	struct ipaq_micro_rxdev rx;	/* receive ISR state */
+-+	spinlock_t lock;
+-+	struct ipaq_micro_msg *msg;
+-+	struct list_head queue;
+-+	void (*key) (void *data, int len, unsigned char *rxdata);
+-+	void *key_data;
+-+	void (*ts) (void *data, int len, unsigned char *rxdata);
+-+	void *ts_data;
+-+};
+-+
+-+extern int
+-+ipaq_micro_tx_msg(struct ipaq_micro *micro, struct ipaq_micro_msg *msg);
+-+
+-+static inline int
+-+ipaq_micro_tx_msg_sync(struct ipaq_micro *micro,
+-+		       struct ipaq_micro_msg *msg)
+-+{
+-+	int ret;
+-+
+-+	init_completion(&msg->ack);
+-+	ret = ipaq_micro_tx_msg(micro, msg);
+-+	wait_for_completion(&msg->ack);
+-+
+-+	return ret;
+-+}
+-+
+-+static inline int
+-+ipaq_micro_tx_msg_async(struct ipaq_micro *micro,
+-+			struct ipaq_micro_msg *msg)
+-+{
+-+	init_completion(&msg->ack);
+-+	return ipaq_micro_tx_msg(micro, msg);
+-+}
+-+
+-+#endif /* _MFD_IPAQ_MICRO_H_ */
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch
+deleted file mode 100644
+index 8bb2439..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch
++++ /dev/null
+@@ -1,73 +0,0 @@
+-From b8d45042ceaae1b0a5a86c8a0a9c1da7aae5c248 Mon Sep 17 00:00:00 2001
+-From: Linus Walleij <linus.walleij@linaro.org>
+-Date: Thu, 17 Oct 2013 15:03:17 +0200
+-Subject: [PATCH 2/7] ARM: sa1100: add Micro ASIC platform device
+-
+-This adds the Atmel Micro ASIC platform device and selects it
+-by default for h3100 and h3600.
+-
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- arch/arm/mach-sa1100/Kconfig |  2 ++
+- arch/arm/mach-sa1100/h3xxx.c | 15 +++++++++++++++
+- 2 files changed, 17 insertions(+)
+-
+-diff --git a/arch/arm/mach-sa1100/Kconfig b/arch/arm/mach-sa1100/Kconfig
+-index 04f9784ff0ed..c6f6ed1cbed0 100644
+---- a/arch/arm/mach-sa1100/Kconfig
+-+++ b/arch/arm/mach-sa1100/Kconfig
+-@@ -58,6 +58,7 @@ config SA1100_H3100
+- 	bool "Compaq iPAQ H3100"
+- 	select ARM_SA1110_CPUFREQ
+- 	select HTC_EGPIO
+-+	select MFD_IPAQ_MICRO
+- 	help
+- 	  Say Y here if you intend to run this kernel on the Compaq iPAQ
+- 	  H3100 handheld computer.  Information about this machine and the
+-@@ -69,6 +70,7 @@ config SA1100_H3600
+- 	bool "Compaq iPAQ H3600/H3700"
+- 	select ARM_SA1110_CPUFREQ
+- 	select HTC_EGPIO
+-+	select MFD_IPAQ_MICRO
+- 	help
+- 	  Say Y here if you intend to run this kernel on the Compaq iPAQ
+- 	  H3600 handheld computer.  Information about this machine and the
+-diff --git a/arch/arm/mach-sa1100/h3xxx.c b/arch/arm/mach-sa1100/h3xxx.c
+-index f17e7382242a..814dcecf00c4 100644
+---- a/arch/arm/mach-sa1100/h3xxx.c
+-+++ b/arch/arm/mach-sa1100/h3xxx.c
+-@@ -25,6 +25,7 @@
+- #include <asm/mach/map.h>
 - 
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) offs += 3; */
+- #include <mach/h3xxx.h>
+-+#include <mach/irqs.h>
+- 
+- #include "generic.h"
+- 
+-@@ -248,9 +249,23 @@ static struct platform_device h3xxx_keys = {
+- 	},
+- };
+- 
+-+static struct resource h3xxx_micro_resources[] = {
+-+	DEFINE_RES_MEM(0x80010000, SZ_4K),
+-+	DEFINE_RES_MEM(0x80020000, SZ_4K),
+-+	DEFINE_RES_IRQ(IRQ_Ser1UART),
+-+};
 -+
-+-
-  		/* Number of partition regions */
-  		numregions = extp->extra[offs];
-  		offs += 1;
--@@ -1654,6 +1714,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-+@@ -1003,8 +1043,16 @@ static void put_chip(struct map_info *map, struct flchip *chip, unsigned long ad
-+ 		   sending the 0x70 (Read Status) command to an erasing
-+ 		   chip and expecting it to be ignored, that's what we
-+ 		   do. */
-++
-++		 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++		if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 		map_write(map, CMD(0xd0), adr);
-+ 		map_write(map, CMD(0x70), adr);
-++
-++		 /* Fix Erase-Suspend following Erase-Resume: add latency */
-++		if (is_LH28F640BF(cfi)) cfi_udelay(1200);
-++
-+ 		chip->oldstate = FL_READY;
-+ 		chip->state = FL_ERASING;
-+ 		break;
-+@@ -1162,6 +1210,10 @@ static int __xipram xip_wait_for_operation(
-+ 			local_irq_disable();
-+ 
-+ 			/* Resume the write or erase operation */
-++
-++			 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++			if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 			map_write(map, CMD(0xd0), adr);
-+ 			map_write(map, CMD(0x70), adr);
-+ 			chip->state = oldstate;
-+@@ -1654,6 +1706,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-  	initial_adr = adr;
-  	cmd_adr = adr & ~(wbufsize-1);
-  
+-+struct platform_device h3xxx_micro_asic = {
+-+	.name = "ipaq-h3xxx-micro",
+-+	.id = -1,
+-+	.resource = h3xxx_micro_resources,
+-+	.num_resources = ARRAY_SIZE(h3xxx_micro_resources),
+-+};
+-+
+- static struct platform_device *h3xxx_devices[] = {
+- 	&h3xxx_egpio,
+- 	&h3xxx_keys,
+-+	&h3xxx_micro_asic,
+- };
+- 
+- void __init h3xxx_mach_init(void)
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch
+deleted file mode 100644
+index cb080e8..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch
++++ /dev/null
+@@ -1,208 +0,0 @@
+-From 96394b690b27fd3b4175b290a179e5e4e9138085 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:22:16 +0300
+-Subject: [PATCH 3/7] input: driver for microcontroller keys on the iPaq h3xxx
+-
+-This adds a key input driver for the keys found on the h3xxx
+-iPAQ series.
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Signed-off-by: Alessandro GARDICH <gremlin@gremlin.it>
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/input/keyboard/Kconfig           |   7 ++
+- drivers/input/keyboard/Makefile          |   1 +
+- drivers/input/keyboard/ipaq-micro-keys.c | 148 +++++++++++++++++++++++++++++++
+- 3 files changed, 156 insertions(+)
+- create mode 100644 drivers/input/keyboard/ipaq-micro-keys.c
+-
+-diff --git a/drivers/input/keyboard/Kconfig b/drivers/input/keyboard/Kconfig
+-index a673c9f3a0b9..8d4892dfa6e2 100644
+---- a/drivers/input/keyboard/Kconfig
+-+++ b/drivers/input/keyboard/Kconfig
+-@@ -554,6 +554,13 @@ config KEYBOARD_DAVINCI
+- 	  To compile this driver as a module, choose M here: the
+- 	  module will be called davinci_keyscan.
+- 
+-+config KEYBOARD_IPAQ_MICRO
+-+	tristate "Buttons on Micro SoC (iPaq h3100,h3600,h3700)"
+-+	depends on MFD_IPAQ_MICRO
+-+	help
+-+	  This enables support for the buttons attached to
+-+	  Micro peripheral controller on iPAQ h3100/h3600/h3700
+-+
+- config KEYBOARD_OMAP
+- 	tristate "TI OMAP keypad support"
+- 	depends on ARCH_OMAP1
+-diff --git a/drivers/input/keyboard/Makefile b/drivers/input/keyboard/Makefile
+-index a699b6172303..e776af737804 100644
+---- a/drivers/input/keyboard/Makefile
+-+++ b/drivers/input/keyboard/Makefile
+-@@ -21,6 +21,7 @@ obj-$(CONFIG_KEYBOARD_TCA6416)		+= tca6416-keypad.o
+- obj-$(CONFIG_KEYBOARD_TCA8418)		+= tca8418_keypad.o
+- obj-$(CONFIG_KEYBOARD_HIL)		+= hil_kbd.o
+- obj-$(CONFIG_KEYBOARD_HIL_OLD)		+= hilkbd.o
+-+obj-$(CONFIG_KEYBOARD_IPAQ_MICRO)	+= ipaq-micro-keys.o
+- obj-$(CONFIG_KEYBOARD_IMX)		+= imx_keypad.o
+- obj-$(CONFIG_KEYBOARD_HP6XX)		+= jornada680_kbd.o
+- obj-$(CONFIG_KEYBOARD_HP7XX)		+= jornada720_kbd.o
+-diff --git a/drivers/input/keyboard/ipaq-micro-keys.c b/drivers/input/keyboard/ipaq-micro-keys.c
+-new file mode 100644
+-index 000000000000..7ca8b738cc73
+---- /dev/null
+-+++ b/drivers/input/keyboard/ipaq-micro-keys.c
+-@@ -0,0 +1,148 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support, key subdevice
+-+ * based on previous kernel 2.4 version
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ *
+-+ */
+-+
+-+
+-+#include <linux/module.h>
+-+#include <linux/version.h>
+-+
+-+#include <linux/init.h>
+-+#include <linux/fs.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/sched.h>
+-+#include <linux/pm.h>
+-+#include <linux/sysctl.h>
+-+#include <linux/proc_fs.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+
+-+struct ipaq_micro_keys {
+-+	struct ipaq_micro *micro;
+-+	struct input_dev *input;
+-+};
+-+
+-+static int keycodes[] = {
+-+	KEY_RECORD,		/* 1:  Record button			*/
+-+	KEY_CALENDAR,		/* 2:  Calendar				*/
+-+	KEY_ADDRESSBOOK,	/* 3:  Contacts (looks like Outlook)	*/
+-+	KEY_MAIL,		/* 4:  Envelope (Q on older iPAQs)	*/
+-+	KEY_HOMEPAGE,		/* 5:  Start (looks like swoopy arrow)	*/
+-+	KEY_UP,			/* 6:  Up				*/
+-+	KEY_RIGHT,		/* 7:  Right				*/
+-+	KEY_LEFT,		/* 8:  Left				*/
+-+	KEY_DOWN,		/* 9:  Down				*/
+-+};
+-+
+-+static void micro_key_receive(void *data, int len, unsigned char *msg)
+-+{
+-+	struct ipaq_micro_keys *keys = data;
+-+	int key, down;
+-+
+-+	down = (0x80 & msg[0]) ? 1 : 0;
+-+	key  = 0x7f & msg[0];
+-+
+-+	if (key < ARRAY_SIZE(keycodes)) {
+-+		input_report_key(keys->input, keycodes[key], down);
+-+		input_sync(keys->input);
+-+	}
+-+}
+-+
+-+static int micro_key_probe(struct platform_device *pdev)
+-+{
+-+	struct ipaq_micro_keys *keys;
+-+	int ret;
+-+	int i;
+-+
+-+	keys = devm_kzalloc(&pdev->dev, sizeof(*keys), GFP_KERNEL);
+-+	if (!keys)
+-+		return -ENOMEM;
+-+	keys->input = input_allocate_device();
+-+	if (!keys->input)
+-+		return -ENOMEM;
+-+	keys->micro = dev_get_drvdata(pdev->dev.parent);
+-+	keys->input->evbit[0] = BIT(EV_KEY);
+-+	set_bit(EV_KEY, keys->input->evbit);
+-+	for (i = 0; i < ARRAY_SIZE(keycodes); i++)
+-+		set_bit(keycodes[i], keys->input->keybit);
+-+
+-+	keys->input->name = "h3600 micro keys";
+-+
+-+	ret = input_register_device(keys->input);
+-+	if (ret)
+-+		return ret;
+-+
+-+	platform_set_drvdata(pdev, keys);
+-+	spin_lock(&keys->micro->lock);
+-+	keys->micro->key = micro_key_receive;
+-+	keys->micro->key_data = keys;
+-+	spin_unlock(&keys->micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_remove(struct platform_device *pdev)
+-+{
+-+	struct ipaq_micro_keys *keys = platform_get_drvdata(pdev);
+-+
+-+	input_unregister_device(keys->input);
+-+
+-+	spin_lock(&keys->micro->lock);
+-+	keys->micro->key = NULL;
+-+	keys->micro->key_data = NULL;
+-+	spin_unlock(&keys->micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_suspend(struct device *dev)
+-+{
+-+	struct ipaq_micro_keys *keys = dev_get_drvdata(dev);
+-+
+-+	spin_lock(&keys->micro->lock);
+-+	keys->micro->key = NULL;
+-+	keys->micro->key_data = NULL;
+-+	spin_unlock(&keys->micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_key_resume(struct device *dev)
+-+{
+-+	struct ipaq_micro_keys *keys = dev_get_drvdata(dev);
+-+
+-+	spin_lock(&keys->micro->lock);
+-+	keys->micro->key = micro_key_receive;
+-+	keys->micro->key_data = keys;
+-+	spin_unlock(&keys->micro->lock);
+-+
+-+	return 0;
+-+}
+-+
+-+static const struct dev_pm_ops micro_key_dev_pm_ops = {
+-+	SET_SYSTEM_SLEEP_PM_OPS(micro_key_suspend, micro_key_resume)
+-+};
+-+
+-+struct platform_driver micro_key_device_driver = {
+-+	.driver = {
+-+		.name    = "ipaq-micro-keys",
+-+		.pm	= &micro_key_dev_pm_ops,
+-+	},
+-+	.probe   = micro_key_probe,
+-+	.remove  = micro_key_remove,
+-+};
+-+module_platform_driver(micro_key_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro keys");
+-+MODULE_ALIAS("platform:ipaq-micro-keys");
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0004-fb-backlight-add-driver-for-iPAQ-micro-backlight.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0004-fb-backlight-add-driver-for-iPAQ-micro-backlight.patch
+deleted file mode 100644
+index 2c81a9b..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0004-fb-backlight-add-driver-for-iPAQ-micro-backlight.patch
++++ /dev/null
+@@ -1,147 +0,0 @@
+-From 2444e6fcd6c313e3cfdee58d692fe88a4bbc8fb8 Mon Sep 17 00:00:00 2001
+-From: Linus Walleij <linus.walleij@linaro.org>
+-Date: Fri, 8 Nov 2013 10:09:13 +0100
+-Subject: [PATCH 4/7] fb: backlight: add driver for iPAQ micro backlight
+-
+-This adds a driver for the backlight controlled by the microcontroller
+-on the Compaq iPAQ series of handheld computers: h3100, h3600
+-and h3700.
+-
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/video/backlight/Kconfig         |  9 ++++
+- drivers/video/backlight/Makefile        |  1 +
+- drivers/video/backlight/ipaq_micro_bl.c | 89 +++++++++++++++++++++++++++++++++
+- 3 files changed, 99 insertions(+)
+- create mode 100644 drivers/video/backlight/ipaq_micro_bl.c
+-
+-diff --git a/drivers/video/backlight/Kconfig b/drivers/video/backlight/Kconfig
+-index 5a3eb2ecb525..ed2d61062907 100644
+---- a/drivers/video/backlight/Kconfig
+-+++ b/drivers/video/backlight/Kconfig
+-@@ -207,6 +207,15 @@ config BACKLIGHT_GENERIC
+- 	  known as the Corgi backlight driver. If you have a Sharp Zaurus
+- 	  SL-C7xx, SL-Cxx00 or SL-6000x say y.
+- 
+-+config BACKLIGHT_IPAQ_MICRO
+-+	tristate "iPAQ microcontroller backlight driver"
+-+	depends on MFD_IPAQ_MICRO
+-+	default y
+-+	help
+-+	  Say y to enable the backlight driver for Compaq iPAQ handheld
+-+	  computers. Say yes if you have one of the h3100/h3600/h3700
+-+	  machines.
+-+
+- config BACKLIGHT_LM3533
+- 	tristate "Backlight Driver for LM3533"
+- 	depends on BACKLIGHT_CLASS_DEVICE
+-diff --git a/drivers/video/backlight/Makefile b/drivers/video/backlight/Makefile
+-index bb820024f346..a9ea34a39cad 100644
+---- a/drivers/video/backlight/Makefile
+-+++ b/drivers/video/backlight/Makefile
+-@@ -36,6 +36,7 @@ obj-$(CONFIG_BACKLIGHT_GENERIC)		+= generic_bl.o
+- obj-$(CONFIG_BACKLIGHT_GPIO)		+= gpio_backlight.o
+- obj-$(CONFIG_BACKLIGHT_HP680)		+= hp680_bl.o
+- obj-$(CONFIG_BACKLIGHT_HP700)		+= jornada720_bl.o
+-+obj-$(CONFIG_BACKLIGHT_IPAQ_MICRO)	+= ipaq_micro_bl.o
+- obj-$(CONFIG_BACKLIGHT_LM3533)		+= lm3533_bl.o
+- obj-$(CONFIG_BACKLIGHT_LM3630A)		+= lm3630a_bl.o
+- obj-$(CONFIG_BACKLIGHT_LM3639)		+= lm3639_bl.o
+-diff --git a/drivers/video/backlight/ipaq_micro_bl.c b/drivers/video/backlight/ipaq_micro_bl.c
+-new file mode 100644
+-index 000000000000..b7ec8c453b61
+---- /dev/null
+-+++ b/drivers/video/backlight/ipaq_micro_bl.c
+-@@ -0,0 +1,89 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * iPAQ microcontroller backlight support
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ */
+-+
+-+#include <linux/module.h>
+-+#include <linux/init.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/backlight.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+#include <linux/fb.h>
+-+#include <linux/err.h>
+-+
+-+static int micro_bl_update_status(struct backlight_device *bd)
+-+{
+-+	struct ipaq_micro *micro = dev_get_drvdata(&bd->dev);
+-+	int intensity = bd->props.brightness;
+-+	struct ipaq_micro_msg msg = {
+-+		.id = MSG_BACKLIGHT,
+-+		.tx_len = 3,
+-+	};
+-+
+-+	if (bd->props.power != FB_BLANK_UNBLANK)
+-+		intensity = 0;
+-+	if (bd->props.state & BL_CORE_FBBLANK)
+-+		intensity = 0;
+-+	if (bd->props.state & BL_CORE_SUSPENDED)
+-+		intensity = 0;
+-+
+-+	msg.tx_data[0] = 0x01;
+-+	msg.tx_data[1] = intensity > 0 ? 1 : 0;
+-+	msg.tx_data[2] = intensity;
+-+	return ipaq_micro_tx_msg_sync(micro, &msg);
+-+}
+-+
+-+static const struct backlight_ops micro_bl_ops = {
+-+	.options = BL_CORE_SUSPENDRESUME,
+-+	.update_status  = micro_bl_update_status,
+-+};
+-+
+-+static struct backlight_properties micro_bl_props = {
+-+	.type = BACKLIGHT_RAW,
+-+	.max_brightness = 255,
+-+	.power = FB_BLANK_UNBLANK,
+-+	.brightness = 64,
+-+};
+-+
+-+static int micro_backlight_probe(struct platform_device *pdev)
+-+{
+-+	struct backlight_device *bd;
+-+	struct ipaq_micro *micro = dev_get_drvdata(pdev->dev.parent);
+-+
+-+	bd = devm_backlight_device_register(
+-+		&pdev->dev,
+-+		"ipaq-micro-backlight",
+-+		&pdev->dev,
+-+		micro,
+-+		&micro_bl_ops,
+-+		&micro_bl_props);
+-+	if (IS_ERR(bd))
+-+		return PTR_ERR(bd);
+-+	platform_set_drvdata(pdev, bd);
+-+	backlight_update_status(bd);
+-+	dev_info(&pdev->dev, "iPAQ micro backlight driver\n");
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_backlight_remove(struct platform_device *pdev)
+-+{
+-+	return 0;
+-+}
+-+
+-+struct platform_driver micro_backlight_device_driver = {
+-+	.driver = {
+-+		.name    = "ipaq-micro-backlight",
+-+	},
+-+	.probe   = micro_backlight_probe,
+-+	.remove  = micro_backlight_remove,
+-+};
+-+module_platform_driver(micro_backlight_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro backlight");
+-+MODULE_ALIAS("platform:ipaq-micro-backlight");
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0005-input-driver-for-touchscreen-on-iPaq-h3xxx.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0005-input-driver-for-touchscreen-on-iPaq-h3xxx.patch
+deleted file mode 100644
+index 96f640d..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0005-input-driver-for-touchscreen-on-iPaq-h3xxx.patch
++++ /dev/null
+@@ -1,198 +0,0 @@
+-From 4f2952cd1fa1fcfd49de628dcba97a758f81ac3a Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:27:19 +0300
+-Subject: [PATCH 5/7] input: driver for touchscreen on iPaq h3xxx
+-
+-This adds a driver for the touchscreen connected to the
+-Atmel microcontroller on the iPAQ h3xxx series.
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Signed-off-by: Alessandro GARDICH <gremlin@gremlin.it>
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/input/touchscreen/Kconfig         |   8 ++
+- drivers/input/touchscreen/Makefile        |   1 +
+- drivers/input/touchscreen/ipaq-micro-ts.c | 137 ++++++++++++++++++++++++++++++
+- 3 files changed, 146 insertions(+)
+- create mode 100644 drivers/input/touchscreen/ipaq-micro-ts.c
+-
+-diff --git a/drivers/input/touchscreen/Kconfig b/drivers/input/touchscreen/Kconfig
+-index 07e9e82029d1..118d71b39861 100644
+---- a/drivers/input/touchscreen/Kconfig
+-+++ b/drivers/input/touchscreen/Kconfig
+-@@ -466,6 +466,14 @@ config TOUCHSCREEN_HP7XX
+- 	  To compile this driver as a module, choose M here: the
+- 	  module will be called jornada720_ts.
+- 
+-+config TOUCHSCREEN_IPAQ_MICRO
+-+	tristate "HP iPAQ Atmel Micro ASIC touchscreen"
+-+	depends on MFD_IPAQ_MICRO
+-+	help
+-+	  This enables support for the touchscreen attached to
+-+	  the Atmel Micro peripheral controller on iPAQ h3100/h3600/h3700
+-+
+-+
+- config TOUCHSCREEN_HTCPEN
+- 	tristate "HTC Shift X9500 touchscreen"
+- 	depends on ISA
+-diff --git a/drivers/input/touchscreen/Makefile b/drivers/input/touchscreen/Makefile
+-index 62801f213346..5f754c4f87bb 100644
+---- a/drivers/input/touchscreen/Makefile
+-+++ b/drivers/input/touchscreen/Makefile
+-@@ -46,6 +46,7 @@ obj-$(CONFIG_TOUCHSCREEN_MTOUCH)	+= mtouch.o
+- obj-$(CONFIG_TOUCHSCREEN_MK712)		+= mk712.o
+- obj-$(CONFIG_TOUCHSCREEN_HP600)		+= hp680_ts_input.o
+- obj-$(CONFIG_TOUCHSCREEN_HP7XX)		+= jornada720_ts.o
+-+obj-$(CONFIG_TOUCHSCREEN_IPAQ_MICRO)	+= ipaq-micro-ts.o
+- obj-$(CONFIG_TOUCHSCREEN_HTCPEN)	+= htcpen.o
+- obj-$(CONFIG_TOUCHSCREEN_USB_COMPOSITE)	+= usbtouchscreen.o
+- obj-$(CONFIG_TOUCHSCREEN_PCAP)		+= pcap_ts.o
+-diff --git a/drivers/input/touchscreen/ipaq-micro-ts.c b/drivers/input/touchscreen/ipaq-micro-ts.c
+-new file mode 100644
+-index 000000000000..9c5e1b62d192
+---- /dev/null
+-+++ b/drivers/input/touchscreen/ipaq-micro-ts.c
+-@@ -0,0 +1,137 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3600 atmel micro companion support, touchscreen subdevice
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ *
+-+ */
+-+
+-+#include <linux/module.h>
+-+#include <linux/init.h>
+-+#include <linux/interrupt.h>
+-+#include <linux/pm.h>
+-+#include <linux/delay.h>
+-+#include <linux/device.h>
+-+#include <linux/input.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/slab.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+
+-+struct touchscreen_data {
+-+	struct input_dev *input;
+-+	struct ipaq_micro *micro;
+-+};
+-+
+-+static void micro_ts_receive(void *data, int len, unsigned char *msg)
+-+{
+-+	struct touchscreen_data *ts = data;
+-+
+-+	if (len == 4) {
+-+		input_report_abs(ts->input, ABS_X, (msg[2]<<8)+msg[3]);
+-+		input_report_abs(ts->input, ABS_Y, (msg[0]<<8)+msg[1]);
+-+		input_report_abs(ts->input, ABS_PRESSURE, 1);
+-+		input_report_key(ts->input, BTN_TOUCH, 0);
+-+	}
+-+	if (len == 0) {
+-+		input_report_abs(ts->input, ABS_X, 0);
+-+		input_report_abs(ts->input, ABS_Y, 0);
+-+		input_report_abs(ts->input, ABS_PRESSURE, 0);
+-+		input_report_key(ts->input, BTN_TOUCH, 1);
+-+	}
+-+	input_sync(ts->input);
+-+}
+-+
+-+
+-+static int micro_ts_probe(struct platform_device *pdev)
+-+{
+-+	struct touchscreen_data *ts;
+-+	int ret;
+-+
+-+	ts = devm_kzalloc(&pdev->dev, sizeof(*ts), GFP_KERNEL);
+-+	if (!ts)
+-+		return -ENOMEM;
+-+	ts->micro = dev_get_drvdata(pdev->dev.parent);
+-+
+-+	platform_set_drvdata(pdev, ts);
+-+
+-+	ts->input = input_allocate_device();
+-+
+-+	ts->input->evbit[0] = BIT(EV_ABS);
+-+	ts->input->absbit[0] = BIT(ABS_X) | BIT(ABS_Y) | BIT(ABS_PRESSURE);
+-+	input_set_abs_params(ts->input, ABS_X, 0, 1023, 0, 0);
+-+	input_set_abs_params(ts->input, ABS_Y, 0, 1023, 0, 0);
+-+	input_set_abs_params(ts->input, ABS_PRESSURE, 0x0, 0x1, 0, 0);
+-+
+-+	ts->input->name = "ipaq micro ts";
+-+	/* ts->input->private = ts; */
+-+
+-+	ret = input_register_device(ts->input);
+-+	if (ret) {
+-+		dev_err(&pdev->dev, "error registering touch input\n");
+-+		return ret;
+-+	}
+-+
+-+	spin_lock(&ts->micro->lock);
+-+	ts->micro->ts = micro_ts_receive;
+-+	ts->micro->ts_data = ts;
+-+	spin_unlock(&ts->micro->lock);
+-+
+-+	dev_info(&pdev->dev, "iPAQ micro touchscreen\n");
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_remove(struct platform_device *pdev)
+-+{
+-+	struct touchscreen_data *ts = platform_get_drvdata(pdev);
+-+
+-+	spin_lock(&ts->micro->lock);
+-+	ts->micro->ts = NULL;
+-+	ts->micro->ts_data = NULL;
+-+	spin_unlock(&ts->micro->lock);
+-+	input_unregister_device(ts->input);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_suspend(struct device *dev)
+-+{
+-+	struct touchscreen_data *ts = dev_get_drvdata(dev);
+-+
+-+	spin_lock(&ts->micro->lock);
+-+	ts->micro->ts = NULL;
+-+	ts->micro->ts_data = NULL;
+-+	spin_unlock(&ts->micro->lock);
+-+	return 0;
+-+}
+-+
+-+static int micro_ts_resume(struct device *dev)
+-+{
+-+	struct touchscreen_data *ts = dev_get_drvdata(dev);
+-+
+-+	spin_lock(&ts->micro->lock);
+-+	ts->micro->ts = micro_ts_receive;
+-+	ts->micro->ts_data = ts;
+-+	spin_unlock(&ts->micro->lock);
+-+	return 0;
+-+}
+-+
+-+static const struct dev_pm_ops micro_ts_dev_pm_ops = {
+-+	SET_SYSTEM_SLEEP_PM_OPS(micro_ts_suspend, micro_ts_resume)
+-+};
+-+
+-+struct platform_driver micro_ts_device_driver = {
+-+	.driver  = {
+-+		.name    = "ipaq-micro-ts",
+-+		.pm	= &micro_ts_dev_pm_ops,
+-+	},
+-+	.probe   = micro_ts_probe,
+-+	.remove  = micro_ts_remove,
+-+};
+-+module_platform_driver(micro_ts_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro touchscreen");
+-+MODULE_ALIAS("platform:ipaq-micro-ts");
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0006-leds-add-driver-for-the-iPAQ-micro.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0006-leds-add-driver-for-the-iPAQ-micro.patch
+deleted file mode 100644
+index 212d366..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0006-leds-add-driver-for-the-iPAQ-micro.patch
++++ /dev/null
+@@ -1,193 +0,0 @@
+-From b4c8a1cdfbbaf615a6d9da3e46f1b788fc0f1568 Mon Sep 17 00:00:00 2001
+-From: Linus Walleij <linus.walleij@linaro.org>
+-Date: Thu, 31 Oct 2013 10:53:06 -0700
+-Subject: [PATCH 6/7] leds: add driver for the iPAQ micro
+-
+-This adds a driver for the iPAQ microcontroller LED.
+-
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/leds/Kconfig           |   7 +++
+- drivers/leds/Makefile          |   1 +
+- drivers/leds/leds-ipaq-micro.c | 139 +++++++++++++++++++++++++++++++++++++++++
+- 3 files changed, 147 insertions(+)
+- create mode 100644 drivers/leds/leds-ipaq-micro.c
+-
+-diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
+-index 72156c123033..39dae8a15297 100644
+---- a/drivers/leds/Kconfig
+-+++ b/drivers/leds/Kconfig
+-@@ -143,6 +143,13 @@ config LEDS_SUNFIRE
+- 	  This option enables support for the Left, Middle, and Right
+- 	  LEDs on the I/O and CPU boards of SunFire UltraSPARC servers.
+- 
+-+config LEDS_IPAQ_MICRO
+-+	tristate "LED Support for the Compaq iPAQ h3xxx"
+-+	depends on MFD_IPAQ_MICRO
+-+	help
+-+	  Choose this option if you want to use the notification LED on
+-+	  Compaq/HP iPAQ h3100 and h3600.
+-+
+- config LEDS_HP6XX
+- 	tristate "LED Support for the HP Jornada 6xx"
+- 	depends on LEDS_CLASS
+-diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
+-index 3cd76dbd9be2..db0e6e856ca9 100644
+---- a/drivers/leds/Makefile
+-+++ b/drivers/leds/Makefile
+-@@ -31,6 +31,7 @@ obj-$(CONFIG_LEDS_LP8501)		+= leds-lp8501.o
+- obj-$(CONFIG_LEDS_LP8788)		+= leds-lp8788.o
+- obj-$(CONFIG_LEDS_TCA6507)		+= leds-tca6507.o
+- obj-$(CONFIG_LEDS_CLEVO_MAIL)		+= leds-clevo-mail.o
+-+obj-$(CONFIG_LEDS_IPAQ_MICRO)		+= leds-ipaq-micro.o
+- obj-$(CONFIG_LEDS_HP6XX)		+= leds-hp6xx.o
+- obj-$(CONFIG_LEDS_OT200)		+= leds-ot200.o
+- obj-$(CONFIG_LEDS_FSG)			+= leds-fsg.o
+-diff --git a/drivers/leds/leds-ipaq-micro.c b/drivers/leds/leds-ipaq-micro.c
+-new file mode 100644
+-index 000000000000..a716ec27f066
+---- /dev/null
+-+++ b/drivers/leds/leds-ipaq-micro.c
+-@@ -0,0 +1,139 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3xxx atmel micro companion support, notification LED subdevice
+-+ *
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ */
+-+
+-+#include <linux/module.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+#include <linux/leds.h>
+-+
+-+#define LED_YELLOW	0x00
+-+#define LED_GREEN	0x01
+-+
+-+#define LED_EN          (1 << 4)        /* LED ON/OFF 0:off, 1:on                       */
+-+#define LED_AUTOSTOP    (1 << 5)        /* LED ON/OFF auto stop set 0:disable, 1:enable */
+-+#define LED_ALWAYS      (1 << 6)        /* LED Interrupt Mask 0:No mask, 1:mask         */
+-+
+-+static void micro_leds_brightness_set(struct led_classdev *led_cdev,
+-+				      enum led_brightness value)
+-+{
+-+	struct ipaq_micro *micro = dev_get_drvdata(led_cdev->dev->parent->parent);
+-+	/*
+-+	 * In this message:
+-+	 * Byte 0 = LED color: 0 = yellow, 1 = green
+-+	 *          yellow LED is always ~30 blinks per minute
+-+	 * Byte 1 = duration (flags?) appears to be ignored
+-+	 * Byte 2 = green ontime in 1/10 sec (deciseconds)
+-+	 *          1 = 1/10 second
+-+	 *          0 = 256/10 second
+-+	 * Byte 3 = green offtime in 1/10 sec (deciseconds)
+-+	 *          1 = 1/10 second
+-+	 *          0 = 256/10 seconds
+-+	 */
+-+	struct ipaq_micro_msg msg = {
+-+		.id = MSG_NOTIFY_LED,
+-+		.tx_len = 4,
+-+	};
+-+
+-+	msg.tx_data[0] = LED_GREEN;
+-+	msg.tx_data[1] = 0;
+-+	if (value) {
+-+		msg.tx_data[2] = 0; /* Duty cycle 256 */
+-+		msg.tx_data[3] = 1;
+-+	} else {
+-+		msg.tx_data[2] = 1;
+-+		msg.tx_data[3] = 0; /* Duty cycle 256 */
+-+	}
+-+	ipaq_micro_tx_msg_sync(micro, &msg);
+-+}
+-+
+-+/* Maximum duty cycle in ms 256/10 sec = 25600 ms */
+-+#define IPAQ_LED_MAX_DUTY 25600
+-+
+-+static int micro_leds_blink_set(struct led_classdev *led_cdev,
+-+				unsigned long *delay_on,
+-+				unsigned long *delay_off)
+-+{
+-+	struct ipaq_micro *micro = dev_get_drvdata(led_cdev->dev->parent->parent);
+-+	/*
+-+	 * In this message:
+-+	 * Byte 0 = LED color: 0 = yellow, 1 = green
+-+	 *          yellow LED is always ~30 blinks per minute
+-+	 * Byte 1 = duration (flags?) appears to be ignored
+-+	 * Byte 2 = green ontime in 1/10 sec (deciseconds)
+-+	 *          1 = 1/10 second
+-+	 *          0 = 256/10 second
+-+	 * Byte 3 = green offtime in 1/10 sec (deciseconds)
+-+	 *          1 = 1/10 second
+-+	 *          0 = 256/10 seconds
+-+	 */
+-+	struct ipaq_micro_msg msg = {
+-+		.id = MSG_NOTIFY_LED,
+-+		.tx_len = 4,
+-+	};
+-+
+-+	msg.tx_data[0] = LED_GREEN;
+-+        if (*delay_on > IPAQ_LED_MAX_DUTY ||
+-+	    *delay_off > IPAQ_LED_MAX_DUTY)
+-+                return -EINVAL;
+-+
+-+        if (*delay_on == 0 && *delay_off == 0) {
+-+                *delay_on = 100;
+-+                *delay_off = 100;
+-+        }
+-+
+-+	msg.tx_data[1] = 0;
+-+	if (*delay_on >= IPAQ_LED_MAX_DUTY)
+-+		msg.tx_data[2] = 0;
+-+	else
+-+		msg.tx_data[2] = (u8) DIV_ROUND_CLOSEST(*delay_on, 100);
+-+	if (*delay_off >= IPAQ_LED_MAX_DUTY)
+-+		msg.tx_data[3] = 0;
+-+	else
+-+		msg.tx_data[3] = (u8) DIV_ROUND_CLOSEST(*delay_off, 100);
+-+	return ipaq_micro_tx_msg_sync(micro, &msg);
+-+}
+-+
+-+static struct led_classdev micro_led = {
+-+	.name			= "notify",
+-+	.brightness_set		= micro_leds_brightness_set,
+-+	.blink_set		= micro_leds_blink_set,
+-+	.flags			= LED_CORE_SUSPENDRESUME,
+-+};
+-+
+-+static int micro_leds_probe(struct platform_device *pdev)
+-+{
+-+	int ret;
+-+
+-+	ret = led_classdev_register(&pdev->dev, &micro_led);
+-+	if (ret)
+-+		dev_err(&pdev->dev, "registering led failed: %d\n", ret);
+-+	dev_info(&pdev->dev, "iPAQ micro notification LED driver\n");
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_leds_remove(struct platform_device *pdev)
+-+{
+-+	led_classdev_unregister(&micro_led);
+-+	return 0;
+-+}
+-+
+-+struct platform_driver micro_leds_device_driver = {
+-+	.driver = {
+-+		.name    = "ipaq-micro-leds",
+-+	},
+-+	.probe   = micro_leds_probe,
+-+	.remove  = micro_leds_remove,
+-+};
+-+module_platform_driver(micro_leds_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro leds");
+-+MODULE_ALIAS("platform:ipaq-micro-leds");
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/0007-power-add-driver-for-battery-reading-on-iPaq-h3xxx.patch b/recipes-kernel/linux/linux-yocto-dev/h3600/0007-power-add-driver-for-battery-reading-on-iPaq-h3xxx.patch
+deleted file mode 100644
+index fb34e62..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/0007-power-add-driver-for-battery-reading-on-iPaq-h3xxx.patch
++++ /dev/null
+@@ -1,350 +0,0 @@
+-From e6d787e84661a0bc3992fcf1d0c77075ca9b3b90 Mon Sep 17 00:00:00 2001
+-From: Dmitry Artamonow <mad_soft@inbox.ru>
+-Date: Sat, 21 Mar 2009 16:28:50 +0300
+-Subject: [PATCH 7/7] power: add driver for battery reading on iPaq h3xxx
+-
+-This adds a driver for reading the battery status of the
+-battery connected to the Atmel microcontroller on the
+-iPAQ h3xxx series.
+-
+-Based on a driver from handhelds.org 2.6.21 kernel, written
+-by Alessandro GARDICH.
+-
+-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+----
+- drivers/power/Kconfig              |   7 +
+- drivers/power/Makefile             |   1 +
+- drivers/power/ipaq_micro_battery.c | 290 +++++++++++++++++++++++++++++++++++++
+- 3 files changed, 298 insertions(+)
+- create mode 100644 drivers/power/ipaq_micro_battery.c
+-
+-diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+-index ba6975123071..73cfcdf28a36 100644
+---- a/drivers/power/Kconfig
+-+++ b/drivers/power/Kconfig
+-@@ -137,6 +137,13 @@ config BATTERY_COLLIE
+- 	  Say Y to enable support for the battery on the Sharp Zaurus
+- 	  SL-5500 (collie) models.
+- 
+-+config BATTERY_IPAQ_MICRO
+-+	tristate "iPAQ Atmel Micro ASIC battery driver"
+-+	depends on MFD_IPAQ_MICRO
+-+	help
+-+	  Choose this option if you want to monitor battery status on
+-+	  Compaq/HP iPAQ h3100 and h3600.
+-+
+- config BATTERY_WM97XX
+- 	bool "WM97xx generic battery driver"
+- 	depends on TOUCHSCREEN_WM97XX=y
+-diff --git a/drivers/power/Makefile b/drivers/power/Makefile
+-index ee54a3e4c90a..dfa894273926 100644
+---- a/drivers/power/Makefile
+-+++ b/drivers/power/Makefile
+-@@ -25,6 +25,7 @@ obj-$(CONFIG_BATTERY_PMU)	+= pmu_battery.o
+- obj-$(CONFIG_BATTERY_OLPC)	+= olpc_battery.o
+- obj-$(CONFIG_BATTERY_TOSA)	+= tosa_battery.o
+- obj-$(CONFIG_BATTERY_COLLIE)	+= collie_battery.o
+-+obj-$(CONFIG_BATTERY_IPAQ_MICRO) += ipaq_micro_battery.o
+- obj-$(CONFIG_BATTERY_WM97XX)	+= wm97xx_battery.o
+- obj-$(CONFIG_BATTERY_SBS)	+= sbs-battery.o
+- obj-$(CONFIG_BATTERY_BQ27x00)	+= bq27x00_battery.o
+-diff --git a/drivers/power/ipaq_micro_battery.c b/drivers/power/ipaq_micro_battery.c
+-new file mode 100644
+-index 000000000000..f875137e4d9c
+---- /dev/null
+-+++ b/drivers/power/ipaq_micro_battery.c
+-@@ -0,0 +1,290 @@
+-+/*
+-+ * This program is free software; you can redistribute it and/or modify
+-+ * it under the terms of the GNU General Public License version 2 as
+-+ * published by the Free Software Foundation.
+-+ *
+-+ * h3xxx atmel micro companion support, battery subdevice
+-+ * based on previous kernel 2.4 version
+-+ * Author : Alessandro Gardich <gremlin@gremlin.it>
+-+ * Author : Linus Walleij <linus.walleij@linaro.org>
+-+ *
+-+ */
+-+
+-+#include <linux/module.h>
+-+#include <linux/init.h>
+-+#include <linux/platform_device.h>
+-+#include <linux/mfd/ipaq-micro.h>
+-+#include <linux/power_supply.h>
+-+#include <linux/workqueue.h>
+-+
+-+#define BATT_PERIOD 100000 /* 10 seconds in milliseconds */
+-+
+-+#define MICRO_BATT_CHEM_ALKALINE	0x01
+-+#define MICRO_BATT_CHEM_NICD		0x02
+-+#define MICRO_BATT_CHEM_NIMH		0x03
+-+#define MICRO_BATT_CHEM_LION		0x04
+-+#define MICRO_BATT_CHEM_LIPOLY		0x05
+-+#define MICRO_BATT_CHEM_NOT_INSTALLED	0x06
+-+#define MICRO_BATT_CHEM_UNKNOWN		0xff
+-+
+-+#define MICRO_BATT_STATUS_HIGH		0x01
+-+#define MICRO_BATT_STATUS_LOW		0x02
+-+#define MICRO_BATT_STATUS_CRITICAL	0x04
+-+#define MICRO_BATT_STATUS_CHARGING	0x08
+-+#define MICRO_BATT_STATUS_CHARGEMAIN	0x10
+-+#define MICRO_BATT_STATUS_DEAD		0x20 /* Battery will not charge */
+-+#define MICRO_BATT_STATUS_NOTINSTALLED	0x20 /* For expansion pack batteries */
+-+#define MICRO_BATT_STATUS_FULL		0x40 /* Battery fully charged */
+-+#define MICRO_BATT_STATUS_NOBATTERY	0x80
+-+#define MICRO_BATT_STATUS_UNKNOWN	0xff
+-+
+-+struct micro_battery {
+-+	struct ipaq_micro *micro;
+-+	struct workqueue_struct *wq;
+-+	struct delayed_work update;
+-+	u8 ac;
+-+	u8 chemistry;
+-+	unsigned int voltage;
+-+	u16 temperature;
+-+	u8 flag;
+-+};
+-+
+-+static void micro_battery_work(struct work_struct *work)
+-+{
+-+	struct micro_battery *mb = container_of(work,
+-+				struct micro_battery, update.work);
+-+	struct ipaq_micro_msg msg_battery = {
+-+		.id = MSG_BATTERY,
+-+	};
+-+	struct ipaq_micro_msg msg_sensor = {
+-+		.id = MSG_THERMAL_SENSOR,
+-+	};
+-+
+-+	/* First send battery message */
+-+	ipaq_micro_tx_msg_sync(mb->micro, &msg_battery);
+-+	if (msg_battery.rx_len < 4)
+-+		pr_info("ERROR");
+-+
+-+	/*
+-+	 * Returned message format:
+-+	 * byte 0:   0x00 = Not plugged in
+-+	 *           0x01 = AC adapter plugged in
+-+	 * byte 1:   chemistry
+-+	 * byte 2:   voltage LSB
+-+	 * byte 3:   voltage MSB
+-+	 * byte 4:   flags
+-+	 * byte 5-9: same for battery 2
+-+	 */
+-+	mb->ac = msg_battery.rx_data[0];
+-+	mb->chemistry = msg_battery.rx_data[1];
+-+	mb->voltage = ((((unsigned short)msg_battery.rx_data[3] << 8) +
+-+			msg_battery.rx_data[2]) * 5000L) * 1000 / 1024;
+-+	mb->flag = msg_battery.rx_data[4];
+-+
+-+	if (msg_battery.rx_len == 9)
+-+		pr_debug("second battery ignored\n");
+-+
+-+	/* Then read the sensor */
+-+	ipaq_micro_tx_msg_sync(mb->micro, &msg_sensor);
+-+	mb->temperature = msg_sensor.rx_data[1] << 8 | msg_sensor.rx_data[0];
+-+
+-+	queue_delayed_work(mb->wq, &mb->update, msecs_to_jiffies(BATT_PERIOD));
+-+}
+-+
+-+static int get_capacity(struct power_supply *b)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(b->dev->parent);
+-+
+-+	switch (mb->flag & 0x07) {
+-+	case MICRO_BATT_STATUS_HIGH:
+-+		return 100;
+-+		break;
+-+	case MICRO_BATT_STATUS_LOW:
+-+		return 50;
+-+		break;
+-+	case MICRO_BATT_STATUS_CRITICAL:
+-+		return 5;
+-+		break;
+-+	default:
+-+		break;
+-+	}
+-+	return 0;
+-+}
+-+
+-+static int get_status(struct power_supply *b)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(b->dev->parent);
+-+
+-+	if (mb->flag == MICRO_BATT_STATUS_UNKNOWN)
+-+		return POWER_SUPPLY_STATUS_UNKNOWN;
+-+
+-+	if (mb->flag & MICRO_BATT_STATUS_FULL)
+-+		return POWER_SUPPLY_STATUS_FULL;
+-+
+-+	if ((mb->flag & MICRO_BATT_STATUS_CHARGING) ||
+-+		(mb->flag & MICRO_BATT_STATUS_CHARGEMAIN))
+-+		return POWER_SUPPLY_STATUS_CHARGING;
+-+
+-+	return POWER_SUPPLY_STATUS_DISCHARGING;
+-+}
+-+
+-+static int micro_batt_get_property(struct power_supply *b,
+-+					enum power_supply_property psp,
+-+					union power_supply_propval *val)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(b->dev->parent);
+-+
+-+	switch (psp) {
+-+	case POWER_SUPPLY_PROP_TECHNOLOGY:
+-+		switch (mb->chemistry) {
+-+		case MICRO_BATT_CHEM_NICD:
+-+			val->intval = POWER_SUPPLY_TECHNOLOGY_NiCd;
+-+			break;
+-+		case MICRO_BATT_CHEM_NIMH:
+-+			val->intval = POWER_SUPPLY_TECHNOLOGY_NiMH;
+-+			break;
+-+		case MICRO_BATT_CHEM_LION:
+-+			val->intval = POWER_SUPPLY_TECHNOLOGY_LION;
+-+			break;
+-+		case MICRO_BATT_CHEM_LIPOLY:
+-+			val->intval = POWER_SUPPLY_TECHNOLOGY_LIPO;
+-+			break;
+-+		default:
+-+			val->intval = POWER_SUPPLY_TECHNOLOGY_UNKNOWN;
+-+			break;
+-+		};
+-+		break;
+-+	case POWER_SUPPLY_PROP_STATUS:
+-+		val->intval = get_status(b);
+-+		break;
+-+	case POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN:
+-+		val->intval = 4700000;
+-+		break;
+-+	case POWER_SUPPLY_PROP_CAPACITY:
+-+		val->intval = get_capacity(b);
+-+		break;
+-+	case POWER_SUPPLY_PROP_TEMP:
+-+		val->intval = mb->temperature;
+-+		break;
+-+	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
+-+		val->intval = mb->voltage;
+-+		break;
+-+	default:
+-+		return -EINVAL;
+-+	};
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_ac_get_property(struct power_supply *b,
+-+				 enum power_supply_property psp,
+-+				 union power_supply_propval *val)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(b->dev->parent);
+-+
+-+	switch (psp) {
+-+	case POWER_SUPPLY_PROP_ONLINE:
+-+		val->intval = mb->ac;
+-+		break;
+-+	default:
+-+		return -EINVAL;
+-+	};
+-+
+-+	return 0;
+-+}
+-+
+-+static enum power_supply_property micro_batt_props[] = {
+-+	POWER_SUPPLY_PROP_TECHNOLOGY,
+-+	POWER_SUPPLY_PROP_STATUS,
+-+	POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN,
+-+	POWER_SUPPLY_PROP_CAPACITY,
+-+	POWER_SUPPLY_PROP_TEMP,
+-+	POWER_SUPPLY_PROP_VOLTAGE_NOW,
+-+};
+-+
+-+static struct power_supply micro_battery = {
+-+	.name			= "main-battery",
+-+	.type			= POWER_SUPPLY_TYPE_BATTERY,
+-+	.properties		= micro_batt_props,
+-+	.num_properties		= ARRAY_SIZE(micro_batt_props),
+-+	.get_property		= micro_batt_get_property,
+-+	.use_for_apm		= 1,
+-+};
+-+
+-+static enum power_supply_property micro_ac_props[] = {
+-+	POWER_SUPPLY_PROP_ONLINE,
+-+};
+-+
+-+static struct power_supply micro_ac = {
+-+	.name			= "ac",
+-+	.type			= POWER_SUPPLY_TYPE_MAINS,
+-+	.properties		= micro_ac_props,
+-+	.num_properties		= ARRAY_SIZE(micro_ac_props),
+-+	.get_property		= micro_ac_get_property,
+-+};
+-+
+-+static int micro_batt_probe(struct platform_device *pdev)
+-+{
+-+	struct micro_battery *mb;
+-+
+-+	mb = devm_kzalloc(&pdev->dev, sizeof(*mb), GFP_KERNEL);
+-+	if (!mb)
+-+		return -ENOMEM;
+-+
+-+	mb->micro = dev_get_drvdata(pdev->dev.parent);
+-+	mb->wq = create_singlethread_workqueue("ipaq-battery-wq");
+-+	INIT_DELAYED_WORK(&mb->update, micro_battery_work);
+-+	platform_set_drvdata(pdev, mb);
+-+	queue_delayed_work(mb->wq, &mb->update, 1);
+-+	power_supply_register(&pdev->dev, &micro_battery);
+-+	power_supply_register(&pdev->dev, &micro_ac);
+-+
+-+	dev_info(&pdev->dev, "iPAQ micro battery driver\n");
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_remove(struct platform_device *pdev)
+-+
+-+{
+-+	struct micro_battery *mb = platform_get_drvdata(pdev);
+-+
+-+	power_supply_unregister(&micro_ac);
+-+	power_supply_unregister(&micro_battery);
+-+	cancel_delayed_work_sync(&mb->update);
+-+
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_suspend(struct device *dev)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(dev);
+-+
+-+	cancel_delayed_work_sync(&mb->update);
+-+	return 0;
+-+}
+-+
+-+static int micro_batt_resume(struct device *dev)
+-+{
+-+	struct micro_battery *mb = dev_get_drvdata(dev);
+-+
+-+	queue_delayed_work(mb->wq, &mb->update, msecs_to_jiffies(BATT_PERIOD));
+-+	return 0;
+-+}
+-+
+-+static const struct dev_pm_ops micro_batt_dev_pm_ops = {
+-+	SET_SYSTEM_SLEEP_PM_OPS(micro_batt_suspend, micro_batt_resume)
+-+};
+-+
+-+struct platform_driver micro_batt_device_driver = {
+-+	.driver		= {
+-+		.name	= "ipaq-micro-battery",
+-+		.pm	= &micro_batt_dev_pm_ops,
+-+	},
+-+	.probe		= micro_batt_probe,
+-+	.remove		= micro_batt_remove,
+-+};
+-+module_platform_driver(micro_batt_device_driver);
+-+
+-+MODULE_LICENSE("GPL");
+-+MODULE_DESCRIPTION("driver for iPAQ Atmel micro battery");
+-+MODULE_ALIAS("platform:battery-ipaq-micro");
+--- 
+-1.9.0
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h3600/defconfig b/recipes-kernel/linux/linux-yocto-dev/h3600/defconfig
+deleted file mode 100644
+index 0796878..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h3600/defconfig
++++ /dev/null
+@@ -1,94 +0,0 @@
+-CONFIG_SYSVIPC=y
+-CONFIG_NO_HZ_IDLE=y
+-CONFIG_HIGH_RES_TIMERS=y
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_MODULES=y
+-# CONFIG_LBDAF is not set
+-# CONFIG_BLK_DEV_BSG is not set
+-# CONFIG_IOSCHED_DEADLINE is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_SA1100=y
+-CONFIG_SA1100_H3600=y
+-CONFIG_PCCARD=y
+-CONFIG_PCMCIA_SA1100=y
+-CONFIG_PREEMPT=y
+-CONFIG_AEABI=y
+-CONFIG_OABI_COMPAT=y
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-# CONFIG_CPU_FREQ_STAT is not set
+-CONFIG_FPE_NWFPE=y
+-CONFIG_NET=y
+-CONFIG_UNIX=y
+-CONFIG_INET=y
+-# CONFIG_IPV6 is not set
+-CONFIG_IRDA=y
+-CONFIG_IRLAN=m
+-CONFIG_IRNET=m
+-CONFIG_IRCOMM=m
+-# CONFIG_WIRELESS is not set
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-CONFIG_DEVTMPFS=y
+-CONFIG_MTD=y
+-CONFIG_MTD_REDBOOT_PARTS=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_CFI=y
+-CONFIG_MTD_CFI_ADV_OPTIONS=y
+-CONFIG_MTD_CFI_GEOMETRY=y
+-# CONFIG_MTD_CFI_I1 is not set
+-CONFIG_MTD_CFI_INTELEXT=y
+-CONFIG_MTD_SA1100=y
+-CONFIG_BLK_DEV_LOOP=m
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_SIZE=8192
+-CONFIG_IDE=y
+-CONFIG_BLK_DEV_IDECS=y
+-CONFIG_NETDEVICES=y
+-CONFIG_PCMCIA_PCNET=y
+-CONFIG_PPP=m
+-CONFIG_PPP_BSDCOMP=m
+-CONFIG_PPP_DEFLATE=m
+-CONFIG_PPP_ASYNC=m
+-# CONFIG_WLAN is not set
+-CONFIG_INPUT_EVDEV=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_KEYBOARD_IPAQ_MICRO=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_IPAQ_MICRO=y
+-# CONFIG_SERIO is not set
+-CONFIG_SERIAL_SA1100=y
+-CONFIG_SERIAL_SA1100_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_BATTERY_IPAQ_MICRO=y
+-# CONFIG_HWMON is not set
+-CONFIG_FB=y
+-CONFIG_FB_SA1100=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_BACKLIGHT_CLASS_DEVICE=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_LOGO=y
+-# CONFIG_USB_SUPPORT is not set
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_IPAQ_MICRO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-CONFIG_DMADEVICES=y
+-CONFIG_DMA_SA11X0=y
+-CONFIG_DMATEST=y
+-CONFIG_EXT2_FS=y
+-CONFIG_MSDOS_FS=m
+-CONFIG_VFAT_FS=m
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_CRAMFS=m
+-CONFIG_NFS_FS=y
+-CONFIG_NFSD=m
+-CONFIG_NLS=y
+-CONFIG_DEBUG_FS=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomo-fix-SCL-SDA.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomo-fix-SCL-SDA.patch
+deleted file mode 100644
+index fbf3edd..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomo-fix-SCL-SDA.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From acc2f94781ab11bead994bb3faaad149f9187bd4 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Tue, 12 Nov 2013 22:21:20 +0100
+-Subject: [PATCH] linux-yocto: collie: locomo.c: fix SCL line instead
+- of SDA
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- arch/arm/common/locomo.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/arch/arm/common/locomo.c b/arch/arm/common/locomo.c
+-index b55c362..d827bcb 100644
+---- a/arch/arm/common/locomo.c
+-+++ b/arch/arm/common/locomo.c
+-@@ -629,7 +629,7 @@ static void locomo_m62332_sendbit(void *mapbase, int bit)
+- 	unsigned int r;
+- 
+- 	r = locomo_readl(mapbase + LOCOMO_DAC);
+--	r &=  ~(LOCOMO_DAC_SCLOEB);
+-+	r &=  ~(LOCOMO_DAC_SDAOEB);
+- 	locomo_writel(r, mapbase + LOCOMO_DAC);
+- 	udelay(DAC_LOW_SETUP_TIME);	/* 300 nsec */
+- 	udelay(DAC_DATA_HOLD_TIME);	/* 300 nsec */
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomolcd-suspend-resume.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomolcd-suspend-resume.patch
+deleted file mode 100644
+index a3d63e0..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomo/locomolcd-suspend-resume.patch
++++ /dev/null
+@@ -1,92 +0,0 @@
+-From ec4ff55857d5f48d2bf08e46f12eb4670ec6aa1a Mon Sep 17 00:00:00 2001
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Date: Thu, 14 Nov 2013 17:18:26 +0400
+-Subject: [PATCH] backlight: locomolcd: fix suspend/resume
+-
+-Replace cooked suspend/resume with support from core backlight layer.
+-This allows us to remove suspend/resume callbacks from locomolcd
+-completely. They were not working anyway, as locomo does not support
+-pm_ops handling.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+----
+- drivers/video/backlight/locomolcd.c | 26 +++-----------------------
+- 1 file changed, 3 insertions(+), 23 deletions(-)
+-
+-diff --git a/drivers/video/backlight/locomolcd.c b/drivers/video/backlight/locomolcd.c
+-index 6c3ec42..54d2da9 100644
+---- a/drivers/video/backlight/locomolcd.c
+-+++ b/drivers/video/backlight/locomolcd.c
+-@@ -28,8 +28,6 @@
+- 
+- static struct backlight_device *locomolcd_bl_device;
+- static struct locomo_dev *locomolcd_dev;
+--static unsigned long locomolcd_flags;
+--#define LOCOMOLCD_SUSPENDED     0x01
+- 
+- static void locomolcd_on(int comadj)
+- {
+-@@ -117,7 +115,7 @@ static int locomolcd_set_intensity(struct backlight_device *bd)
+- 		intensity = 0;
+- 	if (bd->props.fb_blank != FB_BLANK_UNBLANK)
+- 		intensity = 0;
+--	if (locomolcd_flags & LOCOMOLCD_SUSPENDED)
+-+	if (bd->props.state & BL_CORE_SUSPENDED)
+- 		intensity = 0;
+- 
+- 	switch (intensity) {
+-@@ -155,26 +153,9 @@ static int locomolcd_get_intensity(struct backlight_device *bd)
+- static const struct backlight_ops locomobl_data = {
+- 	.get_brightness = locomolcd_get_intensity,
+- 	.update_status  = locomolcd_set_intensity,
+-+	.options	= BL_CORE_SUSPENDRESUME,
+- };
+- 
+--#ifdef CONFIG_PM_SLEEP
+--static int locomolcd_suspend(struct device *dev)
+--{
+--	locomolcd_flags |= LOCOMOLCD_SUSPENDED;
+--	locomolcd_set_intensity(locomolcd_bl_device);
+--	return 0;
+--}
+--
+--static int locomolcd_resume(struct device *dev)
+--{
+--	locomolcd_flags &= ~LOCOMOLCD_SUSPENDED;
+--	locomolcd_set_intensity(locomolcd_bl_device);
+--	return 0;
+--}
+--#endif
+--
+--static SIMPLE_DEV_PM_OPS(locomolcd_pm_ops, locomolcd_suspend, locomolcd_resume);
+--
+- static int locomolcd_probe(struct locomo_dev *ldev)
+- {
+- 	struct backlight_properties props;
+-@@ -198,6 +179,7 @@ static int locomolcd_probe(struct locomo_dev *ldev)
+- 	memset(&props, 0, sizeof(struct backlight_properties));
+- 	props.type = BACKLIGHT_RAW;
+- 	props.max_brightness = 4;
+-+	props.brightness = 2;
+- 	locomolcd_bl_device = backlight_device_register("locomo-bl",
+- 							&ldev->dev, NULL,
+- 							&locomobl_data, &props);
+-@@ -206,7 +188,6 @@ static int locomolcd_probe(struct locomo_dev *ldev)
+- 		return PTR_ERR(locomolcd_bl_device);
+- 
+- 	/* Set up frontlight so that screen is readable */
+--	locomolcd_bl_device->props.brightness = 2;
+- 	locomolcd_set_intensity(locomolcd_bl_device);
+- 
+- 	return 0;
+-@@ -230,7 +211,6 @@ static int locomolcd_remove(struct locomo_dev *dev)
+- static struct locomo_driver poodle_lcd_driver = {
+- 	.drv = {
+- 		.name	= "locomo-backlight",
+--		.pm	= &locomolcd_pm_ops,
+- 	},
+- 	.devid	= LOCOMO_DEVID_BACKLIGHT,
+- 	.probe	= locomolcd_probe,
+--- 
+-1.8.4.2
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomokbd/locomo_kbd_tweak-r2.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
+deleted file mode 100644
+index 441e3dc..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
++++ /dev/null
+@@ -1,84 +0,0 @@
+-From c9a909cedb442a1a3d020f0c10683298dcc2246c Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 21 Apr 2012 23:48:57 +0200
+-Subject: [PATCH] locomokbd: apply tweaks for Zaurus
+-
+-from http://www.rpsys.net/openzaurus/patches/
+-
+-Signed-off-by: Richard Purdie <rpurdie@rpsys.net>
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-[Patch needed for initramfs w/out keymaps like kexecboot]
+----
+- drivers/input/keyboard/locomokbd.c | 44 ++++++++++++++++++++++----------------
+- 1 file changed, 25 insertions(+), 19 deletions(-)
+-
+-diff --git a/drivers/input/keyboard/locomokbd.c b/drivers/input/keyboard/locomokbd.c
+-index c94d610..2b978c8 100644
+---- a/drivers/input/keyboard/locomokbd.c
+-+++ b/drivers/input/keyboard/locomokbd.c
+-@@ -39,27 +39,33 @@ MODULE_AUTHOR("John Lenz <lenz@cs.wisc.edu>");
+- MODULE_DESCRIPTION("LoCoMo keyboard driver");
+- MODULE_LICENSE("GPL");
+- 
+--#define LOCOMOKBD_NUMKEYS	128
+--
+--#define KEY_ACTIVITY		KEY_F16
+--#define KEY_CONTACT		KEY_F18
+--#define KEY_CENTER		KEY_F15
+-+#define LOCOMOKBD_NUMKEYS		128
+-+
+-+#define LOCOMO_KEY_CALENDER	KEY_LEFTCTRL
+-+#define LOCOMO_KEY_ADDRESS	KEY_LEFTALT	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_HOME		KEY_SYSRQ	/* Needed for SysRQ */
+-+#define LOCOMO_KEY_MENU		KEY_F12
+-+#define LOCOMO_KEY_MAIL		KEY_F10
+-+#define LOCOMO_KEY_OK		KEY_F11		/* Don't hardwire to KEY_RETURN */
+-+#define LOCOMO_KEY_CANCEL	KEY_POWER
+-+#define LOCOMO_KEY_CENTER	KEY_F5		/* Don't hardwire to KEY_RETURN */
+-+#define LOCOMO_KEY_FN		KEY_F9
+- 
+- static const unsigned char
+- locomokbd_keycode[LOCOMOKBD_NUMKEYS] = {
+--	0, KEY_ESC, KEY_ACTIVITY, 0, 0, 0, 0, 0, 0, 0,				/* 0 - 9 */
+--	0, 0, 0, 0, 0, 0, 0, KEY_MENU, KEY_HOME, KEY_CONTACT,			/* 10 - 19 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,						/* 20 - 29 */
+--	0, 0, 0, KEY_CENTER, 0, KEY_MAIL, 0, 0, 0, 0,				/* 30 - 39 */
+--	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,					/* 40 - 49 */
+--	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,		/* 50 - 59 */
+--	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, KEY_ENTER, 0, 0,			/* 60 - 69 */
+--	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,	/* 70 - 79 */
+--	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,		/* 80 - 89 */
+--	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,				/* 90 - 99 */
+--	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,		/* 100 - 109 */
+--	KEY_LEFTSHIFT, KEY_TAB, KEY_LEFTCTRL, 0, 0, 0, 0, 0, 0, 0,		/* 110 - 119 */
+--	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0		/* 120 - 128 */
+-+	0, LOCOMO_KEY_CANCEL, LOCOMO_KEY_CALENDER, LOCOMO_KEY_HOME, 0, 0, 0, 0, 0, 0,	/* 0 - 9 */
+-+	0, 0, 0, 0, 0, 0, 0, LOCOMO_KEY_MENU, 0, LOCOMO_KEY_ADDRESS,			/* 10 - 19 */
+-+	0, 0, 0, 0, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,					/* 20 - 29 */
+-+	0, 0, 0, LOCOMO_KEY_CENTER, 0, LOCOMO_KEY_MAIL, 0, 0, 0, 0,			/* 30 - 39 */
+-+	0, 0, 0, 0, 0, 0, 0, 0, 0, KEY_RIGHT,						/* 40 - 49 */
+-+	KEY_UP, KEY_LEFT, 0, 0, KEY_P, 0, KEY_O, KEY_I, KEY_Y, KEY_T,			/* 50 - 59 */
+-+	KEY_E, KEY_W, 0, 0, 0, 0, KEY_DOWN, LOCOMO_KEY_OK, 0, 0,			/* 60 - 69 */
+-+	KEY_BACKSPACE, 0, KEY_L, KEY_U, KEY_H, KEY_R, KEY_D, KEY_Q, 0, 0,		/* 70 - 79 */
+-+	0, 0, 0, 0, 0, 0, KEY_ENTER, KEY_RIGHTSHIFT, KEY_K, KEY_J,			/* 80 - 89 */
+-+	KEY_G, KEY_F, KEY_X, KEY_S, 0, 0, 0, 0, 0, 0,					/* 90 - 99 */
+-+	0, 0, KEY_DOT, 0, KEY_COMMA, KEY_N, KEY_B, KEY_C, KEY_Z, KEY_A,			/* 100 - 109 */
+-+	KEY_LEFTSHIFT, KEY_TAB, LOCOMO_KEY_FN, 0, 0, 0, 0, 0, 0, 0,			/* 110 - 119 */
+-+	KEY_M, KEY_SPACE, KEY_V, KEY_APOSTROPHE, KEY_SLASH, 0, 0, 0			/* 120 - 128 */
+- };
+- 
+- #define KB_ROWS			16
+-@@ -68,7 +74,7 @@ locomokbd_keycode[LOCOMOKBD_NUMKEYS] = {
+- #define SCANCODE(c,r)		( ((c)<<4) + (r) + 1 )
+- 
+- #define KB_DELAY		8
+--#define SCAN_INTERVAL		(HZ/10)
+-+#define SCAN_INTERVAL		(HZ/20)
+- 
+- struct locomokbd {
+- 	unsigned char keycode[LOCOMOKBD_NUMKEYS];
+--- 
+-1.8.1.5
+-
 diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch
-index 182e782..fca51d5 100644
+deleted file mode 100644
+index fca51d5..0000000
 --- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch
-+++ b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-LH28F640BF.patch
-@@ -1,7 +1,7 @@
--From 7485f38ec10b7474932edebc4f3db60a8e32097c Mon Sep 17 00:00:00 2001
-+From 12402bf48cf2494a65aac0cf1e55cdc6296691bc Mon Sep 17 00:00:00 2001
- From: Andrea Adami <andrea.adami@gmail.com>
--Date: Tue, 21 Jan 2014 00:51:26 +0100
--Subject: mtd: add support for Sharp LH28F640BF NOR chips
-+Date: Sun, 6 Apr 2014 21:21:22 +0200
-+Subject: [PATCH] mtd: add support for Sharp LH28F640BF NOR chips
- 
- Tested on Zaurus SL-5500 (Collie) 2x16 on 32 bit bus
- 
-@@ -9,13 +9,16 @@ Buffer write fixes as seen in 2007 patch c/o
- Anti Sullin <anti.sullin <at> artecdesign.ee>
- http://comments.gmane.org/gmane.linux.ports.arm.kernel/36733
- 
-+Other fixes as seen in
-+Micron: TN-12-06: Adapting the Linux Kernel for P30, P33, and J3 Flash
-+
- Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
- ---
-- drivers/mtd/chips/cfi_cmdset_0001.c | 66 +++++++++++++++++++++++++++++++++++++
-- 1 file changed, 66 insertions(+)
-+ drivers/mtd/chips/cfi_cmdset_0001.c | 60 ++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 59 insertions(+), 1 deletion(-)
- 
- diff --git a/drivers/mtd/chips/cfi_cmdset_0001.c b/drivers/mtd/chips/cfi_cmdset_0001.c
--index 7751443..c3c0b41 100644
-+index 7751443..d83b603 100644
- --- a/drivers/mtd/chips/cfi_cmdset_0001.c
- +++ b/drivers/mtd/chips/cfi_cmdset_0001.c
- @@ -53,6 +53,11 @@
-@@ -30,13 +33,13 @@ index 7751443..c3c0b41 100644
-  
-  static int cfi_intelext_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
-  static int cfi_intelext_write_words(struct mtd_info *, loff_t, size_t, size_t *, const u_char *);
--@@ -259,6 +264,47 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-+@@ -259,6 +264,40 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
-  		(cfi->cfiq->EraseRegionInfo[1] & 0xffff0000) | 0x3e;
-  };
-  
- +static int is_LH28F640BF(struct cfi_private *cfi)
- +{
--+	/* Sharp LH28F640BF Series */
-++	/* Sharp LH28F640BF Family */
- +	if (cfi->mfr == CFI_MFR_SHARP && (
- +	    cfi->id == LH28F640BFHE_PTTL90 || cfi->id == LH28F640BFHE_PBTL90 ||
- +	    cfi->id == LH28F640BFHE_PTTL70A || cfi->id == LH28F640BFHE_PBTL70A))
-@@ -50,35 +53,28 @@ index 7751443..c3c0b41 100644
- +	struct cfi_private *cfi = map->fldrv_priv;
- +	struct cfi_pri_intelext *extp = cfi->cmdset_priv;
- +
-++	/* NOTE: Sharp Extended Query reports the nr of hardware partitions
-++	 * with an offset of +3. Change of the PCR are not reflected.
-++	 * Keep the wrong reading (0) and let the code convert it to 1 */
-++
- +	/* Reset the Partition Configuration Register on LH28F640BF
- +	 * to a single partition (PCRC = 0x000): PCRC is embedded into A0-A15. */
- +	if (is_LH28F640BF(cfi)) {
- +		printk(KERN_INFO "Reset Partition Config. Register: 1 Partition of 4 planes\n" );
- +		map_write(map, CMD(0x60), 0);
- +		map_write(map, CMD(0x04), 0);
--+		/* NOTE: Sharp Extended Query reports the nr of hardware partitions
--+		 * with an offset of +3. Change of the PCR are not reflected.
--+		 * Keep the wrong reading (0) and let the code convert it to 1 */
- +
--+		/* Sharp LH28F640BF Series has been set to one partition
--+		 * so Simultaneous Operations are disabled */
-++		/* We have set one single partition thus
-++		 * Simultaneous Operations are not allowed */
- +		printk(KERN_WARNING "cfi_cmdset_0001: Simultaneous Operations disabled\n");
- +		extp->FeatureSupport &= ~512;
--+
--+		/* To avoid issues with ubifs with concurrent erase-suspend
--+		 * we have to disable SuspendCmdSupport.
--+		 * The fixes described in "Micron TN-12-06: Adapting the
--+		 * Linux Kernel for P30, P33, and J3 Flash" do not help. */
--+		printk(KERN_WARNING "cfi_cmdset_0001: Suspend "
--+		                    "erase on write disabled.\n");
--+		extp->SuspendCmdSupport &= ~1;
- +	}
- +}
- +
-  static void fixup_use_point(struct mtd_info *mtd)
-  {
-  	struct map_info *map = mtd->priv;
--@@ -310,6 +356,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-+@@ -310,6 +349,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
-  	{ CFI_MFR_ST, 0x00ba, /* M28W320CT */ fixup_st_m28w320ct },
-  	{ CFI_MFR_ST, 0x00bb, /* M28W320CB */ fixup_st_m28w320cb },
-  	{ CFI_MFR_INTEL, CFI_ID_ANY, fixup_unlock_powerup_lock },
-@@ -87,33 +83,43 @@ index 7751443..c3c0b41 100644
-  	{ 0, 0, NULL }
-  };
-  
--@@ -387,6 +435,12 @@ read_pri_intelext(struct map_info *map, __u16 adr)
-- 	if (extp->MinorVersion >= '3') {
-- 		int nb_parts, i;
-+@@ -655,7 +696,6 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) extra_size += 3; */
--+
-- 		/* Number of hardware-partitions */
-- 		extra_size += 1;
-- 		if (extp_size < sizeof(*extp) + extra_size)
--@@ -656,6 +710,12 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
-  		/* Burst Read info */
-  		offs += extp->extra[offs+1]+2;
++++ /dev/null
+@@ -1,137 +0,0 @@
+-From 12402bf48cf2494a65aac0cf1e55cdc6296691bc Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sun, 6 Apr 2014 21:21:22 +0200
+-Subject: [PATCH] mtd: add support for Sharp LH28F640BF NOR chips
+-
+-Tested on Zaurus SL-5500 (Collie) 2x16 on 32 bit bus
+-
+-Buffer write fixes as seen in 2007 patch c/o
+-Anti Sullin <anti.sullin <at> artecdesign.ee>
+-http://comments.gmane.org/gmane.linux.ports.arm.kernel/36733
+-
+-Other fixes as seen in
+-Micron: TN-12-06: Adapting the Linux Kernel for P30, P33, and J3 Flash
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- drivers/mtd/chips/cfi_cmdset_0001.c | 60 ++++++++++++++++++++++++++++++++++++-
+- 1 file changed, 59 insertions(+), 1 deletion(-)
+-
+-diff --git a/drivers/mtd/chips/cfi_cmdset_0001.c b/drivers/mtd/chips/cfi_cmdset_0001.c
+-index 7751443..d83b603 100644
+---- a/drivers/mtd/chips/cfi_cmdset_0001.c
+-+++ b/drivers/mtd/chips/cfi_cmdset_0001.c
+-@@ -53,6 +53,11 @@
+- /* Atmel chips */
+- #define AT49BV640D	0x02de
+- #define AT49BV640DT	0x02db
+-+/* Sharp chips */
+-+#define LH28F640BFHE_PTTL90	0x00b0
+-+#define LH28F640BFHE_PBTL90	0x00b1
+-+#define LH28F640BFHE_PTTL70A	0x00b2
+-+#define LH28F640BFHE_PBTL70A	0x00b3
 - 
--+		/* Sharp LH28F640BF query does not respect the nr of synch
--+		 * modes/fields. The value of "Synchronous mode read capability
--+		 * configuration" is 0 but 3 fields are reserved so the
--+		 * number of partitions is at offsets +3. Ignore, we have set PCR to 1. */
--+		/* if (is_LH28F640BF(cfi)) offs += 3; */
+- static int cfi_intelext_read (struct mtd_info *, loff_t, size_t, size_t *, u_char *);
+- static int cfi_intelext_write_words(struct mtd_info *, loff_t, size_t, size_t *, const u_char *);
+-@@ -259,6 +264,40 @@ static void fixup_st_m28w320cb(struct mtd_info *mtd)
+- 		(cfi->cfiq->EraseRegionInfo[1] & 0xffff0000) | 0x3e;
+- };
+- 
+-+static int is_LH28F640BF(struct cfi_private *cfi)
+-+{
+-+	/* Sharp LH28F640BF Family */
+-+	if (cfi->mfr == CFI_MFR_SHARP && (
+-+	    cfi->id == LH28F640BFHE_PTTL90 || cfi->id == LH28F640BFHE_PBTL90 ||
+-+	    cfi->id == LH28F640BFHE_PTTL70A || cfi->id == LH28F640BFHE_PBTL70A))
+-+		return 1;
+-+	return 0;
+-+}
 -+
-+-
-  		/* Number of partition regions */
-  		numregions = extp->extra[offs];
-  		offs += 1;
--@@ -1654,6 +1714,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-+@@ -1003,8 +1043,16 @@ static void put_chip(struct map_info *map, struct flchip *chip, unsigned long ad
-+ 		   sending the 0x70 (Read Status) command to an erasing
-+ 		   chip and expecting it to be ignored, that's what we
-+ 		   do. */
-++
-++		 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++		if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 		map_write(map, CMD(0xd0), adr);
-+ 		map_write(map, CMD(0x70), adr);
-++
-++		 /* Fix Erase-Suspend following Erase-Resume: add latency */
-++		if (is_LH28F640BF(cfi)) cfi_udelay(1200);
-++
-+ 		chip->oldstate = FL_READY;
-+ 		chip->state = FL_ERASING;
-+ 		break;
-+@@ -1162,6 +1210,10 @@ static int __xipram xip_wait_for_operation(
-+ 			local_irq_disable();
-+ 
-+ 			/* Resume the write or erase operation */
-++
-++			 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
-++			if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
-++
-+ 			map_write(map, CMD(0xd0), adr);
-+ 			map_write(map, CMD(0x70), adr);
-+ 			chip->state = oldstate;
-+@@ -1654,6 +1706,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
-  	initial_adr = adr;
-  	cmd_adr = adr & ~(wbufsize-1);
-  
+-+static void fixup_LH28F640BF(struct mtd_info *mtd)
+-+{
+-+	struct map_info *map = mtd->priv;
+-+	struct cfi_private *cfi = map->fldrv_priv;
+-+	struct cfi_pri_intelext *extp = cfi->cmdset_priv;
+-+
+-+	/* NOTE: Sharp Extended Query reports the nr of hardware partitions
+-+	 * with an offset of +3. Change of the PCR are not reflected.
+-+	 * Keep the wrong reading (0) and let the code convert it to 1 */
+-+
+-+	/* Reset the Partition Configuration Register on LH28F640BF
+-+	 * to a single partition (PCRC = 0x000): PCRC is embedded into A0-A15. */
+-+	if (is_LH28F640BF(cfi)) {
+-+		printk(KERN_INFO "Reset Partition Config. Register: 1 Partition of 4 planes\n" );
+-+		map_write(map, CMD(0x60), 0);
+-+		map_write(map, CMD(0x04), 0);
+-+
+-+		/* We have set one single partition thus
+-+		 * Simultaneous Operations are not allowed */
+-+		printk(KERN_WARNING "cfi_cmdset_0001: Simultaneous Operations disabled\n");
+-+		extp->FeatureSupport &= ~512;
+-+	}
+-+}
+-+
+- static void fixup_use_point(struct mtd_info *mtd)
+- {
+- 	struct map_info *map = mtd->priv;
+-@@ -310,6 +349,8 @@ static struct cfi_fixup cfi_fixup_table[] = {
+- 	{ CFI_MFR_ST, 0x00ba, /* M28W320CT */ fixup_st_m28w320ct },
+- 	{ CFI_MFR_ST, 0x00bb, /* M28W320CB */ fixup_st_m28w320cb },
+- 	{ CFI_MFR_INTEL, CFI_ID_ANY, fixup_unlock_powerup_lock },
+-+	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_unlock_powerup_lock },
+-+	{ CFI_MFR_SHARP, CFI_ID_ANY, fixup_LH28F640BF },
+- 	{ 0, 0, NULL }
+- };
+- 
+-@@ -655,7 +696,6 @@ static int cfi_intelext_partition_fixup(struct mtd_info *mtd,
+- 
+- 		/* Burst Read info */
+- 		offs += extp->extra[offs+1]+2;
+--
+- 		/* Number of partition regions */
+- 		numregions = extp->extra[offs];
+- 		offs += 1;
+-@@ -1003,8 +1043,16 @@ static void put_chip(struct map_info *map, struct flchip *chip, unsigned long ad
+- 		   sending the 0x70 (Read Status) command to an erasing
+- 		   chip and expecting it to be ignored, that's what we
+- 		   do. */
+-+
+-+		 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
+-+		if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
+-+
+- 		map_write(map, CMD(0xd0), adr);
+- 		map_write(map, CMD(0x70), adr);
+-+
+-+		 /* Fix Erase-Suspend following Erase-Resume: add latency */
+-+		if (is_LH28F640BF(cfi)) cfi_udelay(1200);
+-+
+- 		chip->oldstate = FL_READY;
+- 		chip->state = FL_ERASING;
+- 		break;
+-@@ -1162,6 +1210,10 @@ static int __xipram xip_wait_for_operation(
+- 			local_irq_disable();
+- 
+- 			/* Resume the write or erase operation */
+-+
+-+			 /* Fix Erase-Suspend hangups: dummy 0xFF cycle before Resume */
+-+			if (is_LH28F640BF(cfi)) map_write(map, CMD(0xFF), adr);
+-+
+- 			map_write(map, CMD(0xd0), adr);
+- 			map_write(map, CMD(0x70), adr);
+- 			chip->state = oldstate;
+-@@ -1654,6 +1706,12 @@ static int __xipram do_write_buffer(struct map_info *map, struct flchip *chip,
+- 	initial_adr = adr;
+- 	cmd_adr = adr & ~(wbufsize-1);
+- 
+-+	/* Sharp LH28F640BF chips need the first address for the
+-+	 * Page Buffer Program command. See Table 5 of
+-+	 * LH28F320BF, LH28F640BF, LH28F128BF Series (Appendix FUM00701)
+-+	 * Apparently some Intel Strataflash can be programmed this way as well */
+-+	if (is_LH28F640BF(cfi)) cmd_adr = adr;
+-+
+- 	/* Let's determine this according to the interleave only once */
+- 	write_cmd = (cfi->cfiq->P_ID != P_ID_INTEL_PERFORMANCE) ? CMD(0xe8) : CMD(0xe9);
+- 
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-probe-again.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-probe-again.patch
+deleted file mode 100644
+index 3054106..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-cfi-probe-again.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 35957eda21bdd2f22c84fa269c1b856f5039c308 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Tue, 12 Nov 2013 22:32:26 +0100
+-Subject: [PATCH] sa1100: collie: detect NOR again with cfi_probe
+-
+-Ehile the detection is still forced we switch away from jedec:
+-the CFI code allows us to set the necessary fixups.
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- arch/arm/mach-sa1100/collie.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
+-index 799902d..8c088cc 100644
+---- a/arch/arm/mach-sa1100/collie.c
+-+++ b/arch/arm/mach-sa1100/collie.c
+-@@ -326,7 +326,7 @@ static void collie_flash_exit(void)
+- }
+- 
+- static struct flash_platform_data collie_flash_data = {
+--	.map_name	= "jedec_probe",
+-+	.map_name	= "cfi_probe",
+- 	.init		= collie_flash_init,
+- 	.set_vpp	= collie_set_vpp,
+- 	.exit		= collie_flash_exit,
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
+deleted file mode 100644
+index a315d93..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-match-cfi-qry.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 66ec11df6561d5ba7cdf41977af828a53ba6b99f Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 1 Feb 2014 13:17:24 +0100
+-Subject: [PATCH] mtd: cfi_util.c: force CFI detection of 2x LH28F640BF
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- drivers/mtd/chips/cfi_util.c | 16 ++++++++++++++++
+- 1 file changed, 16 insertions(+)
+-
+-diff --git a/drivers/mtd/chips/cfi_util.c b/drivers/mtd/chips/cfi_util.c
+-index f992418..2c7a13d 100644
+---- a/drivers/mtd/chips/cfi_util.c
+-+++ b/drivers/mtd/chips/cfi_util.c
+-@@ -29,6 +29,7 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+- 	int osf = cfi->interleave * cfi->device_type;	/* scale factor */
+- 	map_word val[3];
+- 	map_word qry[3];
+-+	unsigned long mask = (1 << (cfi->device_type * 8)) - 1;
+- 
+- 	qry[0] = cfi_build_cmd('Q', map, cfi);
+- 	qry[1] = cfi_build_cmd('R', map, cfi);
+-@@ -38,6 +39,21 @@ int __xipram cfi_qry_present(struct map_info *map, __u32 base,
+- 	val[1] = map_read(map, base + osf*0x11);
+- 	val[2] = map_read(map, base + osf*0x12);
+- 
+-+	/* Apparently only one of the 2 interleaved LH28F640BF 16 bit chips on
+-+	 * a 32 bit wide bus is answering to the CFI Query.
+-+	 * Using the expected map bankwidth=4 and chip interleave=2 we get wrong
+-+	 * readings like 0xffff0051 instead of 0x00510051 etc.
+-+	 * We take the valid bytes and recreate the expected answer as workaround.
+-+	 */
+-+	if (((val[0].x[0] >> (cfi->device_type * 8)) == mask) &&
+-+	    ((val[1].x[0] >> (cfi->device_type * 8)) == mask) &&
+-+	    ((val[2].x[0] >> (cfi->device_type * 8)) == mask))
+-+	{
+-+	val[0].x[0] = (val[0].x[0] & mask) + ((val[0].x[0] & mask) << (cfi->device_type * 8));
+-+	val[1].x[0] = (val[1].x[0] & mask) + ((val[1].x[0] & mask) << (cfi->device_type * 8));
+-+	val[2].x[0] = (val[2].x[0] & mask) + ((val[2].x[0] & mask) << (cfi->device_type * 8));
+-+	}
+-+
+- 	if (!map_word_equal(map, qry[0], val[0]))
+- 		return 0;
+- 
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-mtd-resize.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-mtd-resize.patch
+deleted file mode 100644
+index ba52d2f..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-mtd/collie-mtd-resize.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 85f5a57b9bdd94fa7a20280c31f4f8b148368215 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Thu, 7 Nov 2013 23:00:31 +0100
+-Subject: ARM: SA1100: resize collie mtd to SZ_16M
+-
+-The end-user models have all 2x8 = 16 Megabytes of NOR.
+-It seems that only some dev models/prototype had 32M.
+-With current code, giving size of 32M can confuse the detection.
+-
+-JEDEC:
+-sa1100-0: Found 2 x16 devices at 0x0 in 32-bit bank
+-sa1100-0: Found different chip or no chip at all (mfr 0x4, id 0x3001) at 0x1000000
+-SA1100 flash: CFI device at 0x00000000, 16MiB, 32-bit
+-
+-CFI:
+-sa1100-0: Found 2 x16 devices at 0x0 in 32-bit bank. Manufacturer ID 0x0000b0 Chip ID 0x0000b0
+-sa1100-0: Found 2 x16 devices at 0x1000000 in 32-bit bank
+-Intel/Sharp Extended Query Table at 0x0039
+-...
+-sa1100-0: 2 set(s) of 2 interleaved chips --> 2 partitions of 16384 KiB
+-SA1100 flash: CFI device at 0x00000000, 32MiB, 32-bit
+-
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- arch/arm/mach-sa1100/collie.c             |      2 +-
+- 2 files changed, 230404 insertions(+), 1604 deletions(-)
+-
+-diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
+-index 7fb96eb..c1005ef 100644
+---- a/arch/arm/mach-sa1100/collie.c
+-+++ b/arch/arm/mach-sa1100/collie.c
+-@@ -298,7 +298,7 @@ static struct flash_platform_data collie_flash_data = {
+- };
+- 
+- static struct resource collie_flash_resources[] = {
+--	DEFINE_RES_MEM(SA1100_CS0_PHYS, SZ_32M),
+-+	DEFINE_RES_MEM(SA1100_CS0_PHYS, SZ_16M),
+- };
+- 
+- static struct sa1100fb_mach_info collie_lcd_info = {
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-pxa/tosa-keys-mapping.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-pxa/tosa-keys-mapping.patch
+deleted file mode 100644
+index b63754a..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-pxa/tosa-keys-mapping.patch
++++ /dev/null
+@@ -1,136 +0,0 @@
+-From patchwork Sat Nov 16 12:47:50 2013
+-Content-Type: text/plain; charset="utf-8"
+-MIME-Version: 1.0
+-Content-Transfer-Encoding: 7bit
+-Subject: [RESEND] arm: pxa: tosa: fix keys mapping
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-X-Patchwork-Id: 3192431
+-Message-Id: <20131116124750.GA26318@anuminas.rup.mentorg.com>
+-To: linux-arm-kernel@lists.infradead.org
+-Cc: Russell King <linux@arm.linux.org.uk>, Eric Miao <eric.y.miao@gmail.com>, 
+-	Haojian Zhuang <haojian.zhuang@gmail.com>
+-Date: Sat, 16 Nov 2013 16:47:50 +0400
+-
+-When converting from tosa-keyboard driver to matrix keyboard, tosa keys
+-received extra 1 column shift. Replace that with correct values to make
+-keyboard work again.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-
+----
+-arch/arm/mach-pxa/tosa.c | 102 +++++++++++++++++++++++------------------------
+- 1 file changed, 51 insertions(+), 51 deletions(-)
+-
+-diff --git a/arch/arm/mach-pxa/tosa.c b/arch/arm/mach-pxa/tosa.c
+-index 0206b91..ef5557b 100644
+---- a/arch/arm/mach-pxa/tosa.c
+-+++ b/arch/arm/mach-pxa/tosa.c
+-@@ -425,57 +425,57 @@ static struct platform_device tosa_power_device = {
+-  * Tosa Keyboard
+-  */
+- static const uint32_t tosakbd_keymap[] = {
+--	KEY(0, 2, KEY_W),
+--	KEY(0, 6, KEY_K),
+--	KEY(0, 7, KEY_BACKSPACE),
+--	KEY(0, 8, KEY_P),
+--	KEY(1, 1, KEY_Q),
+--	KEY(1, 2, KEY_E),
+--	KEY(1, 3, KEY_T),
+--	KEY(1, 4, KEY_Y),
+--	KEY(1, 6, KEY_O),
+--	KEY(1, 7, KEY_I),
+--	KEY(1, 8, KEY_COMMA),
+--	KEY(2, 1, KEY_A),
+--	KEY(2, 2, KEY_D),
+--	KEY(2, 3, KEY_G),
+--	KEY(2, 4, KEY_U),
+--	KEY(2, 6, KEY_L),
+--	KEY(2, 7, KEY_ENTER),
+--	KEY(2, 8, KEY_DOT),
+--	KEY(3, 1, KEY_Z),
+--	KEY(3, 2, KEY_C),
+--	KEY(3, 3, KEY_V),
+--	KEY(3, 4, KEY_J),
+--	KEY(3, 5, TOSA_KEY_ADDRESSBOOK),
+--	KEY(3, 6, TOSA_KEY_CANCEL),
+--	KEY(3, 7, TOSA_KEY_CENTER),
+--	KEY(3, 8, TOSA_KEY_OK),
+--	KEY(3, 9, KEY_LEFTSHIFT),
+--	KEY(4, 1, KEY_S),
+--	KEY(4, 2, KEY_R),
+--	KEY(4, 3, KEY_B),
+--	KEY(4, 4, KEY_N),
+--	KEY(4, 5, TOSA_KEY_CALENDAR),
+--	KEY(4, 6, TOSA_KEY_HOMEPAGE),
+--	KEY(4, 7, KEY_LEFTCTRL),
+--	KEY(4, 8, TOSA_KEY_LIGHT),
+--	KEY(4, 10, KEY_RIGHTSHIFT),
+--	KEY(5, 1, KEY_TAB),
+--	KEY(5, 2, KEY_SLASH),
+--	KEY(5, 3, KEY_H),
+--	KEY(5, 4, KEY_M),
+--	KEY(5, 5, TOSA_KEY_MENU),
+--	KEY(5, 7, KEY_UP),
+--	KEY(5, 11, TOSA_KEY_FN),
+--	KEY(6, 1, KEY_X),
+--	KEY(6, 2, KEY_F),
+--	KEY(6, 3, KEY_SPACE),
+--	KEY(6, 4, KEY_APOSTROPHE),
+--	KEY(6, 5, TOSA_KEY_MAIL),
+--	KEY(6, 6, KEY_LEFT),
+--	KEY(6, 7, KEY_DOWN),
+--	KEY(6, 8, KEY_RIGHT),
+-+	KEY(0, 1, KEY_W),
+-+	KEY(0, 5, KEY_K),
+-+	KEY(0, 6, KEY_BACKSPACE),
+-+	KEY(0, 7, KEY_P),
+-+	KEY(1, 0, KEY_Q),
+-+	KEY(1, 1, KEY_E),
+-+	KEY(1, 2, KEY_T),
+-+	KEY(1, 3, KEY_Y),
+-+	KEY(1, 5, KEY_O),
+-+	KEY(1, 6, KEY_I),
+-+	KEY(1, 7, KEY_COMMA),
+-+	KEY(2, 0, KEY_A),
+-+	KEY(2, 1, KEY_D),
+-+	KEY(2, 2, KEY_G),
+-+	KEY(2, 3, KEY_U),
+-+	KEY(2, 5, KEY_L),
+-+	KEY(2, 6, KEY_ENTER),
+-+	KEY(2, 7, KEY_DOT),
+-+	KEY(3, 0, KEY_Z),
+-+	KEY(3, 1, KEY_C),
+-+	KEY(3, 2, KEY_V),
+-+	KEY(3, 3, KEY_J),
+-+	KEY(3, 4, TOSA_KEY_ADDRESSBOOK),
+-+	KEY(3, 5, TOSA_KEY_CANCEL),
+-+	KEY(3, 6, TOSA_KEY_CENTER),
+-+	KEY(3, 7, TOSA_KEY_OK),
+-+	KEY(3, 8, KEY_LEFTSHIFT),
+-+	KEY(4, 0, KEY_S),
+-+	KEY(4, 1, KEY_R),
+-+	KEY(4, 2, KEY_B),
+-+	KEY(4, 3, KEY_N),
+-+	KEY(4, 4, TOSA_KEY_CALENDAR),
+-+	KEY(4, 5, TOSA_KEY_HOMEPAGE),
+-+	KEY(4, 6, KEY_LEFTCTRL),
+-+	KEY(4, 7, TOSA_KEY_LIGHT),
+-+	KEY(4, 9, KEY_RIGHTSHIFT),
+-+	KEY(5, 0, KEY_TAB),
+-+	KEY(5, 1, KEY_SLASH),
+-+	KEY(5, 2, KEY_H),
+-+	KEY(5, 3, KEY_M),
+-+	KEY(5, 4, TOSA_KEY_MENU),
+-+	KEY(5, 6, KEY_UP),
+-+	KEY(5, 10, TOSA_KEY_FN),
+-+	KEY(6, 0, KEY_X),
+-+	KEY(6, 1, KEY_F),
+-+	KEY(6, 2, KEY_SPACE),
+-+	KEY(6, 3, KEY_APOSTROPHE),
+-+	KEY(6, 4, TOSA_KEY_MAIL),
+-+	KEY(6, 5, KEY_LEFT),
+-+	KEY(6, 6, KEY_DOWN),
+-+	KEY(6, 7, KEY_RIGHT),
+- };
+- 
+- static struct matrix_keymap_data tosakbd_keymap_data = {
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/arm-sa1100-add-cpu-clock.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/arm-sa1100-add-cpu-clock.patch
+deleted file mode 100644
+index cf3e23b..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/arm-sa1100-add-cpu-clock.patch
++++ /dev/null
+@@ -1,95 +0,0 @@
+-From 6abd8c6c642b7f5da4a8065fa6b29c4c90df308d Mon Sep 17 00:00:00 2001
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Date: Mon, 11 Nov 2013 22:53:36 +0400
+-Subject: [PATCH 1/2] arm: sa1100: add cpu clock
+-
+-Both SA1100 framebuffer and PCMCIA drivers require knowledge of cpu
+-frequency to correctly program timings.  Currently they receive timing
+-information by calling cpufreq_get(0).  However if cpu frequency driver
+-is not enabled (e.g. due to unsupported DRAM chip/board on sa1110)
+-cpufreq_get(0) returns 0, causing incorrect timings to be programmed.
+-
+-Add cpu clock returning cpu frequency, to be used by sa11x0 fb and
+-pcmcia drivers.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+----
+- arch/arm/mach-sa1100/clock.c | 34 ++++++++++++++++++++++++++++++++++
+- 1 file changed, 34 insertions(+)
+-
+-diff --git a/arch/arm/mach-sa1100/clock.c b/arch/arm/mach-sa1100/clock.c
+-index 172ebd0..abf1dc1 100644
+---- a/arch/arm/mach-sa1100/clock.c
+-+++ b/arch/arm/mach-sa1100/clock.c
+-@@ -15,10 +15,12 @@
+- #include <linux/clkdev.h>
+- 
+- #include <mach/hardware.h>
+-+#include <mach/generic.h>
+- 
+- struct clkops {
+- 	void			(*enable)(struct clk *);
+- 	void			(*disable)(struct clk *);
+-+	unsigned long		(*get_rate)(struct clk *);
+- };
+- 
+- struct clk {
+-@@ -51,6 +53,19 @@ static void clk_gpio27_disable(struct clk *clk)
+- 	GAFR &= ~GPIO_32_768kHz;
+- }
+- 
+-+static void clk_cpu_enable(struct clk *clk)
+-+{
+-+}
+-+
+-+static void clk_cpu_disable(struct clk *clk)
+-+{
+-+}
+-+
+-+static unsigned long clk_cpu_get_rate(struct clk *clk)
+-+{
+-+	return sa11x0_getspeed(0) * 1000;
+-+}
+-+
+- int clk_enable(struct clk *clk)
+- {
+- 	unsigned long flags;
+-@@ -80,16 +95,35 @@ void clk_disable(struct clk *clk)
+- }
+- EXPORT_SYMBOL(clk_disable);
+- 
+-+unsigned long clk_get_rate(struct clk *clk)
+-+{
+-+	if (clk && clk->ops && clk->ops->get_rate)
+-+		return clk->ops->get_rate(clk);
+-+	else
+-+		return 0;
+-+}
+-+EXPORT_SYMBOL(clk_get_rate);
+-+
+- const struct clkops clk_gpio27_ops = {
+- 	.enable		= clk_gpio27_enable,
+- 	.disable	= clk_gpio27_disable,
+- };
+- 
+-+const struct clkops clk_cpu_ops = {
+-+	.enable		= clk_cpu_enable,
+-+	.disable	= clk_cpu_disable,
+-+	.get_rate	= clk_cpu_get_rate,
+-+};
+-+
+- static DEFINE_CLK(gpio27, &clk_gpio27_ops);
+- 
+-+static DEFINE_CLK(cpu, &clk_cpu_ops);
+-+
+- static struct clk_lookup sa11xx_clkregs[] = {
+- 	CLKDEV_INIT("sa1111.0", NULL, &clk_gpio27),
+- 	CLKDEV_INIT("sa1100-rtc", NULL, NULL),
+-+	CLKDEV_INIT("sa11x0-fb", NULL, &clk_cpu),
+-+	CLKDEV_INIT("sa11x0-pcmcia", NULL, &clk_cpu),
+- };
+- 
+- static int __init sa11xx_clk_init(void)
+--- 
+-1.8.4.2
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-add-bootblock.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-add-bootblock.patch
+deleted file mode 100644
+index 9f5aaa7..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-add-bootblock.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 0b6559d7a3e28c89c3093fd193076a5d7d7c699b Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 9 Nov 2013 16:30:01 +0100
+-Subject: [PATCH] linux-yocto: collie: add top boot partition
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- arch/arm/mach-sa1100/collie.c | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
+-index 946fa71..2785e6e 100644
+---- a/arch/arm/mach-sa1100/collie.c
+-+++ b/arch/arm/mach-sa1100/collie.c
+-@@ -294,6 +294,11 @@ static struct mtd_partition collie_partitions[] = {
+- 		.name		= "rootfs",
+- 		.offset 	= MTDPART_OFS_APPEND,
+- 		.size		= 0x00e20000,
+-+	}, {
+-+		.name		= "bootblock",
+-+		.offset 	= MTDPART_OFS_APPEND,
+-+		.size		= 0x00020000,
+-+		.mask_flags	= MTD_WRITEABLE
+- 	}
+- };
+- 
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-irda.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-irda.patch
+deleted file mode 100644
+index 46ad808..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/collie-irda.patch
++++ /dev/null
+@@ -1,88 +0,0 @@
+-From c6fb61edf283f255c3763a57366bb89bb36ad79c Mon Sep 17 00:00:00 2001
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Date: Fri, 8 Nov 2013 17:57:32 +0400
+-Subject: [PATCH] collie: add support for IrDA transceiver
+-
+-Collie has onboard IrDA transceiver controlled via active-low gpio. Add
+-corresponding platform data.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+----
+- arch/arm/mach-sa1100/collie.c              | 33 ++++++++++++++++++++++++++++++
+- arch/arm/mach-sa1100/include/mach/collie.h |  2 +-
+- 2 files changed, 34 insertions(+), 1 deletion(-)
+-
+-diff --git a/arch/arm/mach-sa1100/collie.c b/arch/arm/mach-sa1100/collie.c
+-index 2349dee..1b9473d 100644
+---- a/arch/arm/mach-sa1100/collie.c
+-+++ b/arch/arm/mach-sa1100/collie.c
+-@@ -41,6 +41,7 @@
+- #include <asm/mach/arch.h>
+- #include <asm/mach/flash.h>
+- #include <asm/mach/map.h>
+-+#include <asm/mach/irda.h>
+- 
+- #include <asm/hardware/scoop.h>
+- #include <asm/mach/sharpsl_param.h>
+-@@ -94,6 +95,37 @@ static struct mcp_plat_data collie_mcp_data = {
+- 	.codec_pdata	= &collie_ucb1x00_data,
+- };
+- 
+-+int collie_ir_startup(struct device *dev)
+-+{
+-+	int rc = gpio_request(COLLIE_GPIO_IR_ON, "IrDA");
+-+	if (rc)
+-+		return rc;
+-+	rc = gpio_direction_output(COLLIE_GPIO_IR_ON, 1);
+-+
+-+	if (!rc)
+-+		return 0;
+-+
+-+	gpio_free(COLLIE_GPIO_IR_ON);
+-+	return rc;
+-+}
+-+
+-+void collie_ir_shutdown(struct device *dev)
+-+{
+-+	gpio_free(COLLIE_GPIO_IR_ON);
+-+}
+-+
+-+static int collie_ir_set_power(struct device *dev, unsigned int state)
+-+{
+-+	gpio_set_value(COLLIE_GPIO_IR_ON, !state);
+-+	return 0;
+-+}
+-+
+-+static struct irda_platform_data collie_ir_data = {
+-+	.startup = collie_ir_startup,
+-+	.shutdown = collie_ir_shutdown,
+-+	.set_power = collie_ir_set_power,
+-+};
+-+
+- /*
+-  * Collie AC IN
+-  */
+-@@ -323,6 +355,7 @@ static void __init collie_init(void)
+- 	sa11x0_register_mtd(&collie_flash_data, collie_flash_resources,
+- 			    ARRAY_SIZE(collie_flash_resources));
+- 	sa11x0_register_mcp(&collie_mcp_data);
+-+	sa11x0_register_irda(&collie_ir_data);
+- 
+- 	sharpsl_save_param();
+- }
+-diff --git a/arch/arm/mach-sa1100/include/mach/collie.h b/arch/arm/mach-sa1100/include/mach/collie.h
+-index f33679d..0ef22f9 100644
+---- a/arch/arm/mach-sa1100/include/mach/collie.h
+-+++ b/arch/arm/mach-sa1100/include/mach/collie.h
+-@@ -78,7 +78,7 @@ extern void locomolcd_power(int on);
+- #define COLLIE_TC35143_GPIO_VERSION0    UCB_IO_0
+- #define COLLIE_TC35143_GPIO_TBL_CHK     UCB_IO_1
+- #define COLLIE_TC35143_GPIO_VPEN_ON     UCB_IO_2
+--#define COLLIE_TC35143_GPIO_IR_ON       UCB_IO_3
+-+#define COLLIE_GPIO_IR_ON		(COLLIE_TC35143_GPIO_BASE + 3)
+- #define COLLIE_TC35143_GPIO_AMP_ON      UCB_IO_4
+- #define COLLIE_TC35143_GPIO_VERSION1    UCB_IO_5
+- #define COLLIE_TC35143_GPIO_FS8KLPF     UCB_IO_5
+--- 
+-1.8.4.rc3
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/fbdev-sa1100fb-make-use-of-device-clock.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/fbdev-sa1100fb-make-use-of-device-clock.patch
+deleted file mode 100644
+index c510ef1..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/fbdev-sa1100fb-make-use-of-device-clock.patch
++++ /dev/null
+@@ -1,112 +0,0 @@
+-From 14edf9123f62bbfbfbffe38e2837b51b3a6065b5 Mon Sep 17 00:00:00 2001
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-Date: Mon, 11 Nov 2013 22:58:02 +0400
+-Subject: [PATCH 2/2] fbdev: sa1100fb: make use of device clock
+-
+-Use per-device clock (instead of calling cpufreq_get(0), which can
+-return 0 if no cpu frequency driver is selected) to program timings.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+----
+-drivers/video/sa1100fb.c | 24 +++++++++++++++++-------
+- drivers/video/sa1100fb.h |  1 +
+- 2 files changed, 18 insertions(+), 7 deletions(-)
+-
+-diff --git a/drivers/video/sa1100fb.c b/drivers/video/sa1100fb.c
+-index de76da0..05d1b37 100644
+---- a/drivers/video/sa1100fb.c
+-+++ b/drivers/video/sa1100fb.c
+-@@ -178,6 +178,7 @@
+- #include <linux/dma-mapping.h>
+- #include <linux/mutex.h>
+- #include <linux/io.h>
+-+#include <linux/clk.h>
+- 
+- #include <video/sa1100fb.h>
+- 
+-@@ -413,9 +414,9 @@ sa1100fb_check_var(struct fb_var_screeninfo *var, struct fb_info *info)
+- 		var->transp.offset);
+- 
+- #ifdef CONFIG_CPU_FREQ
+--	dev_dbg(fbi->dev, "dma period = %d ps, clock = %d kHz\n",
+-+	dev_dbg(fbi->dev, "dma period = %d ps, clock = %ld kHz\n",
+- 		sa1100fb_display_dma_period(var),
+--		cpufreq_get(smp_processor_id()));
+-+		clk_get_rate(fbi->clk) / 1000);
+- #endif
+- 
+- 	return 0;
+-@@ -586,9 +587,10 @@ static struct fb_ops sa1100fb_ops = {
+-  * Calculate the PCD value from the clock rate (in picoseconds).
+-  * We take account of the PPCR clock setting.
+-  */
+--static inline unsigned int get_pcd(unsigned int pixclock, unsigned int cpuclock)
+-+static inline unsigned int get_pcd(struct sa1100fb_info *fbi,
+-+		unsigned int pixclock)
+- {
+--	unsigned int pcd = cpuclock / 100;
+-+	unsigned int pcd = clk_get_rate(fbi->clk) / 100 / 1000;
+- 
+- 	pcd *= pixclock;
+- 	pcd /= 10000000;
+-@@ -667,7 +669,7 @@ static int sa1100fb_activate_var(struct fb_var_screeninfo *var, struct sa1100fb_
+- 		LCCR2_BegFrmDel(var->upper_margin) +
+- 		LCCR2_EndFrmDel(var->lower_margin);
+- 
+--	pcd = get_pcd(var->pixclock, cpufreq_get(0));
+-+	pcd = get_pcd(fbi, var->pixclock);
+- 	new_regs.lccr3 = LCCR3_PixClkDiv(pcd) | fbi->inf->lccr3 |
+- 		(var->sync & FB_SYNC_HOR_HIGH_ACT ? LCCR3_HorSnchH : LCCR3_HorSnchL) |
+- 		(var->sync & FB_SYNC_VERT_HIGH_ACT ? LCCR3_VrtSnchH : LCCR3_VrtSnchL);
+-@@ -1003,7 +1005,6 @@ sa1100fb_freq_transition(struct notifier_block *nb, unsigned long val,
+- 			 void *data)
+- {
+- 	struct sa1100fb_info *fbi = TO_INF(nb, freq_transition);
+--	struct cpufreq_freqs *f = data;
+- 	u_int pcd;
+- 
+- 	switch (val) {
+-@@ -1012,7 +1013,7 @@ sa1100fb_freq_transition(struct notifier_block *nb, unsigned long val,
+- 		break;
+- 
+- 	case CPUFREQ_POSTCHANGE:
+--		pcd = get_pcd(fbi->fb.var.pixclock, f->new);
+-+		pcd = get_pcd(fbi, fbi->fb.var.pixclock);
+- 		fbi->reg_lccr3 = (fbi->reg_lccr3 & ~0xff) | LCCR3_PixClkDiv(pcd);
+- 		set_ctrlr_state(fbi, C_ENABLE_CLKCHANGE);
+- 		break;
+-@@ -1219,6 +1220,13 @@ static int sa1100fb_probe(struct platform_device *pdev)
+- 	if (!fbi)
+- 		goto failed;
+- 
+-+	fbi->clk = clk_get(&pdev->dev, NULL);
+-+	if (IS_ERR(fbi->clk)) {
+-+		ret = PTR_ERR(fbi->clk);
+-+		fbi->clk = NULL;
+-+		goto failed;
+-+	}
+-+
+- 	fbi->base = ioremap(res->start, resource_size(res));
+- 	if (!fbi->base)
+- 		goto failed;
+-@@ -1271,6 +1279,8 @@ static int sa1100fb_probe(struct platform_device *pdev)
+-  failed:
+- 	if (fbi)
+- 		iounmap(fbi->base);
+-+	if (fbi->clk)
+-+		clk_put(fbi->clk);
+- 	kfree(fbi);
+- 	release_mem_region(res->start, resource_size(res));
+- 	return ret;
+-diff --git a/drivers/video/sa1100fb.h b/drivers/video/sa1100fb.h
+-index fc5d429..0139d13 100644
+---- a/drivers/video/sa1100fb.h
+-+++ b/drivers/video/sa1100fb.h
+-@@ -68,6 +68,7 @@ struct sa1100fb_info {
+- #endif
+- 
+- 	const struct sa1100fb_mach_info *inf;
+-+	struct clk *clk;
+- };
+- 
+- #define TO_INF(ptr,member)	container_of(ptr,struct sa1100fb_info,member)
+diff --git a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/pcmcia-sa1100-device-clock.patch b/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/pcmcia-sa1100-device-clock.patch
+deleted file mode 100644
+index 1d12fc8..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/patches/patches-sa1100/pcmcia-sa1100-device-clock.patch
++++ /dev/null
+@@ -1,100 +0,0 @@
+-From patchwork Tue Nov 12 03:32:10 2013
+-Content-Type: text/plain; charset="utf-8"
+-MIME-Version: 1.0
+-Content-Transfer-Encoding: 7bit
+-Subject: [3/5] pcmcia: sa1100: make use of device clock
+-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-X-Patchwork-Id: 3170611
+-Message-Id: <1384227132-10501-3-git-send-email-dbaryshkov@gmail.com>
+-To: linux-arm-kernel@lists.infradead.org
+-Cc: linux-fbdev@vger.kernel.org, linux-pcmcia@lists.infradead.org,
+-	Russell King <linux@arm.linux.org.uk>
+-Date: Tue, 12 Nov 2013 07:32:10 +0400
+-
+-Use per-device clock (instead of calling cpufreq_get(0), which can
+-return 0 if no cpu frequency driver is selected) to program timings.
+-
+-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+-
+----
+-drivers/pcmcia/sa1100_generic.c |  1 +
+- drivers/pcmcia/sa11xx_base.c    | 14 ++++++++++++--
+- 2 files changed, 13 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/pcmcia/sa1100_generic.c b/drivers/pcmcia/sa1100_generic.c
+-index ff8a027..d2ab060 100644
+---- a/drivers/pcmcia/sa1100_generic.c
+-+++ b/drivers/pcmcia/sa1100_generic.c
+-@@ -93,6 +93,7 @@ static int sa11x0_drv_pcmcia_remove(struct platform_device *dev)
+- 	for (i = 0; i < sinfo->nskt; i++)
+- 		soc_pcmcia_remove_one(&sinfo->skt[i]);
+- 
+-+	clk_put(sinfo->clk);
+- 	kfree(sinfo);
+- 	return 0;
+- }
+-diff --git a/drivers/pcmcia/sa11xx_base.c b/drivers/pcmcia/sa11xx_base.c
+-index 6eecd7c..aef0e69 100644
+---- a/drivers/pcmcia/sa11xx_base.c
+-+++ b/drivers/pcmcia/sa11xx_base.c
+-@@ -38,6 +38,7 @@
+- #include <linux/spinlock.h>
+- #include <linux/io.h>
+- #include <linux/slab.h>
+-+#include <linux/clk.h>
+- 
+- #include <mach/hardware.h>
+- #include <asm/irq.h>
+-@@ -138,14 +139,15 @@ sa1100_pcmcia_frequency_change(struct soc_pcmcia_socket *skt,
+- static int
+- sa1100_pcmcia_set_timing(struct soc_pcmcia_socket *skt)
+- {
+--	return sa1100_pcmcia_set_mecr(skt, cpufreq_get(0));
+-+	unsigned long clk = clk_get_rate(skt->clk);
+-+	return sa1100_pcmcia_set_mecr(skt, clk / 1000);
+- }
+- 
+- static int
+- sa1100_pcmcia_show_timing(struct soc_pcmcia_socket *skt, char *buf)
+- {
+- 	struct soc_pcmcia_timing timing;
+--	unsigned int clock = cpufreq_get(0);
+-+	unsigned int clock = clk_get_rate(skt->clk);
+- 	unsigned long mecr = MECR;
+- 	char *p = buf;
+- 
+-@@ -221,6 +223,11 @@ int sa11xx_drv_pcmcia_probe(struct device *dev, struct pcmcia_low_level *ops,
+- 	struct skt_dev_info *sinfo;
+- 	struct soc_pcmcia_socket *skt;
+- 	int i, ret = 0;
+-+	struct clk *clk;
+-+
+-+	clk = clk_get(dev, NULL);
+-+	if (IS_ERR(clk))
+-+		return -ENODEV;
+- 
+- 	sa11xx_drv_pcmcia_ops(ops);
+- 
+-@@ -229,12 +236,14 @@ int sa11xx_drv_pcmcia_probe(struct device *dev, struct pcmcia_low_level *ops,
+- 		return -ENOMEM;
+- 
+- 	sinfo->nskt = nr;
+-+	sinfo->clk = clk;
+- 
+- 	/* Initialize processor specific parameters */
+- 	for (i = 0; i < nr; i++) {
+- 		skt = &sinfo->skt[i];
+- 
+- 		skt->nr = first + i;
+-+		skt->clk = clk;
+- 		soc_pcmcia_init_one(skt, ops, dev);
+- 
+- 		ret = sa11xx_drv_pcmcia_add_one(skt);
+-@@ -245,6 +254,7 @@ int sa11xx_drv_pcmcia_probe(struct device *dev, struct pcmcia_low_level *ops,
+- 	if (ret) {
+- 		while (--i >= 0)
+- 			soc_pcmcia_remove_one(&sinfo->skt[i]);
+-+		clk_put(clk);
+- 		kfree(sinfo);
+- 	} else {
+- 		dev_set_drvdata(dev, sinfo);
+diff --git a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle-standard.scc b/recipes-kernel/linux/linux-yocto-dev/poodle/poodle-standard.scc
+deleted file mode 100644
+index 31ad9df..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE poodle
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include poodle.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.cfg b/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.cfg
+deleted file mode 100644
+index 8ae5c8e..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.cfg
++++ /dev/null
+@@ -1,57 +0,0 @@
+-#
+-# Processor Features
+-#
+-CONFIG_SHARP_LOCOMO=y
+-
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_MACH_POODLE=y
+-CONFIG_PXA25x=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-CONFIG_MTD_NAND_SHARPSL=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_KEYBOARD_LOCOMO=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_PXA=y
+-CONFIG_BACKLIGHT_LOCOMO=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONT_8x8=y
+-
+-#
+-# LED drivers
+-#
+-CONFIG_LEDS_LOCOMO=y
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_PXA25X=m
+-CONFIG_SND_PXA2XX_SOC_I2S=m
+-CONFIG_SND_PXA2XX_SOC_POODLE=m
+-CONFIG_SND_SOC_WM8731=m
+diff --git a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.scc b/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.scc
+deleted file mode 100644
+index e6bd6ac..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/poodle/poodle.scc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-kconf hardware poodle.cfg
+-
+-include ../zaurus-pxa-only.scc
+-include ../zaurus-common.scc
+-
+-patch ../patches/patches-locomokbd/locomo_kbd_tweak-r2.patch
+diff --git a/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg b/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
+deleted file mode 100644
+index e784c03..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/shrink_kernel.cfg
++++ /dev/null
+@@ -1,28 +0,0 @@
+-# CONFIG_MD is not set
+-
+-# CONFIG_NET_VENDOR_3COM is not set
+-# CONFIG_NET_VENDOR_AMD is not set
+-# CONFIG_NET_CADENCE is not set
+-# CONFIG_NET_VENDOR_BROADCOM is not set
+-# CONFIG_NET_VENDOR_CIRRUS is not set
+-# CONFIG_NET_VENDOR_FARADAY is not set
+-# CONFIG_NET_VENDOR_FUJITSU is not set
+-# CONFIG_NET_VENDOR_HP is not set
+-# CONFIG_NET_VENDOR_INTEL is not set
+-# CONFIG_NET_VENDOR_MARVELL is not set
+-# CONFIG_NET_VENDOR_MICREL is not set
+-# CONFIG_NET_VENDOR_MICROCHIP is not set
+-# CONFIG_NET_VENDOR_SEEQ is not set
+-# CONFIG_NET_VENDOR_SMSC is not set
+-# CONFIG_NET_VENDOR_STMICRO is not set
+-# CONFIG_NET_VENDOR_WIZNET is not set
+-# CONFIG_NET_VENDOR_XIRCOM is not set
+-
+-# CONFIG_FTRACE is not set
+-# CONFIG_BRANCH_PROFILE_NONE is not set
+-# CONFIG_BINARY_PRINTF is not set
+-
+-# CONFIG_KPROBES is not set
+-# CONFIG_DEBUG_BUGVERBOSE is not set
+-# CONFIG_DEBUG_INFO is not set
+-# CONFIG_KGDB is not set
+diff --git a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz-standard.scc b/recipes-kernel/linux/linux-yocto-dev/spitz/spitz-standard.scc
+deleted file mode 100644
+index 5b8e2c3..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE spitz
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include spitz.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.cfg b/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.cfg
+deleted file mode 100644
+index 85d5f0f..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.cfg
++++ /dev/null
+@@ -1,61 +0,0 @@
+-#
+-# Processor Features
+-#
+-CONFIG_IWMMXT=y
+-
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_MACH_AKITA=y
+-CONFIG_MACH_SPITZ=y
+-CONFIG_MACH_BORZOI=y
+-CONFIG_PXA27x=y
+-CONFIG_PXA_SHARP_Cxx00=y
+-CONFIG_SHARPSL_PM=y
+-CONFIG_SHARPSL_PM_MAX1111=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-CONFIG_MTD_NAND_SHARPSL=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_KEYBOARD_MATRIX=y
+-CONFIG_TOUCHSCREEN_ADS7846=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_PXA=y
+-CONFIG_FB_PXA_OVERLAY=y
+-CONFIG_FB_PXA_SMARTPANEL=y
+-CONFIG_FB_PXA_PARAMETERS=y
+-CONFIG_LCD_CORGI=y
+-CONFIG_BACKLIGHT_GENERIC=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+-CONFIG_FONT_8x16=y
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_PXA27X=m
+-CONFIG_SND_PXA2XX_SOC_I2S=m
+-CONFIG_SND_PXA2XX_SOC_SPITZ=m
+-CONFIG_SND_SOC_WM8750=m
+diff --git a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.scc b/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.scc
+deleted file mode 100644
+index 4508a3c..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/spitz/spitz.scc
++++ /dev/null
+@@ -1,5 +0,0 @@
+-kconf hardware spitz.cfg
+-
+-include ../zaurus-pxa-only.scc
+-include ../zaurus-common.scc
+-include ../zaurus-usb-host.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa-standard.scc b/recipes-kernel/linux/linux-yocto-dev/tosa/tosa-standard.scc
+deleted file mode 100644
+index b2e1324..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa-standard.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-define KMACHINE tosa
+-define KTYPE standard
+-define KARCH arm
+-
+-include ktypes/standard/standard.scc
+-
+-include tosa.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.cfg b/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.cfg
+deleted file mode 100644
+index 77aedfe..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.cfg
++++ /dev/null
+@@ -1,65 +0,0 @@
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_MACH_TOSA=y
+-CONFIG_TOSA_BT=m
+-CONFIG_PXA25x=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_CMDLINE="console=ttyS0,115200n8 console=tty1 loglevel=3"
+-
+-#
+-# Multifunction device drivers
+-#
+-CONFIG_MFD_CORE=y
+-CONFIG_MFD_TMIO=y
+-CONFIG_MFD_TC6393XB=y
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-CONFIG_MTD_NAND_TMIO=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_KEYBOARD_MATRIX=y
+-CONFIG_TOUCHSCREEN_WM97XX=m
+-CONFIG_TOUCHSCREEN_WM9705=y
+-CONFIG_TOUCHSCREEN_WM9712=y
+-CONFIG_TOUCHSCREEN_WM9713=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=640
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=480
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_FB_TMIO=y
+-CONFIG_FB_TMIO_ACCELL=y
+-CONFIG_LCD_TOSA=y
+-CONFIG_BACKLIGHT_GENERIC=y
+-CONFIG_BACKLIGHT_TOSA=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_FONT_8x16=y
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_PXA25X=m
+-CONFIG_SND_PXA2XX_SOC_AC97=m
+-CONFIG_SND_PXA2XX_SOC_TOSA=m
+-CONFIG_SND_SOC_WM9712=m
+-CONFIG_SND_SOC_AC97_BUS=y
+-
+-# USB GPIO expanders:
+-#
+-CONFIG_BATTERY_TOSA=m
+diff --git a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.scc b/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.scc
+deleted file mode 100644
+index b55a878..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/tosa/tosa.scc
++++ /dev/null
+@@ -1,7 +0,0 @@
+-kconf hardware tosa.cfg
+-
+-include ../zaurus-pxa-only.scc
+-include ../zaurus-common.scc
+-include ../zaurus-usb-host.scc
+-
+-patch ../patches/patches-pxa/tosa-keys-mapping.patch
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc b/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
+deleted file mode 100644
+index 975446d..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-common.scc
++++ /dev/null
+@@ -1,14 +0,0 @@
+-kconf hardware zaurus-hardware.cfg
+-kconf non-hardware zaurus-non-hardware.cfg
+-
+-include cfg/fs/flash_fs.scc
+-include cfg/fs/vfat.scc
+-include cfg/8250.scc
+-include cfg/sound.scc
+-
+-include features/vfat/vfat.scc
+-include features/scsi/disk.scc
+-include features/hostapd/hostapd.scc
+-include features/mac80211/mac80211.scc
+-
+-kconf hardware shrink_kernel.cfg
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-hardware.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-hardware.cfg
+deleted file mode 100644
+index 9973944..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-hardware.cfg
++++ /dev/null
+@@ -1,277 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+-CONFIG_HAVE_PROC_CPU=y
+-CONFIG_STACKTRACE_SUPPORT=y
+-CONFIG_HAVE_LATENCYTOP_SUPPORT=y
+-CONFIG_LOCKDEP_SUPPORT=y
+-CONFIG_TRACE_IRQFLAGS_SUPPORT=y
+-CONFIG_RWSEM_GENERIC_SPINLOCK=y
+-CONFIG_ARCH_HAS_CPUFREQ=y
+-CONFIG_GENERIC_HWEIGHT=y
+-CONFIG_GENERIC_CALIBRATE_DELAY=y
+-CONFIG_NEED_DMA_MAP_STATE=y
+-CONFIG_ARCH_MTD_XIP=y
+-CONFIG_VECTORS_BASE=0xffff0000
+-CONFIG_ARM_PATCH_PHYS_VIRT=y
+-CONFIG_GENERIC_BUG=y
+-
+-#
+-# Kernel Performance Events And Counters
+-#
+-CONFIG_HAVE_OPROFILE=y
+-CONFIG_HAVE_KPROBES=y
+-CONFIG_HAVE_KRETPROBES=y
+-CONFIG_HAVE_REGS_AND_STACK_ACCESS_API=y
+-CONFIG_HAVE_CLK=y
+-CONFIG_HAVE_DMA_API_DEBUG=y
+-
+-#
+-# System Type
+-#
+-CONFIG_MMU=y
+-
+-
+-#
+-# Processor Features
+-#
+-CONFIG_ARM_L1_CACHE_SHIFT=5
+-CONFIG_ARM_NR_BANKS=8
+-CONFIG_SHARP_PARAM=y
+-CONFIG_SHARP_SCOOP=y
+-
+-#
+-# Power management options
+-#
+-CONFIG_SUSPEND=y
+-CONFIG_SUSPEND_FREEZER=y
+-CONFIG_PM_SLEEP=y
+-CONFIG_PM_RUNTIME=y
+-CONFIG_PM=y
+-CONFIG_APM_EMULATION=y
+-CONFIG_PM_CLK=y
+-CONFIG_CPU_PM=y
+-CONFIG_ARCH_SUSPEND_POSSIBLE=y
+-CONFIG_ARM_CPU_SUSPEND=y
+-
+-#
+-# Generic Driver Options
+-#
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-
+-#
+-# User Modules And Translation Layers
+-#
+-CONFIG_MTD_BLKDEVS=y
+-CONFIG_MTD_BLOCK=y
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_ROM=y
+-
+-#
+-# Mapping drivers for chip access
+-#
+-CONFIG_MTD_COMPLEX_MAPPINGS=y
+-CONFIG_MTD_PHYSMAP=y
+-
+-#
+-# Disk-On-Chip Device Drivers
+-#
+-CONFIG_MTD_NAND_ECC=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_IDS=y
+-
+-#
+-# Input device support
+-#
+-CONFIG_INPUT=y
+-
+-#
+-# Userland interfaces
+-#
+-CONFIG_INPUT_MOUSEDEV=y
+-CONFIG_INPUT_EVDEV=y
+-CONFIG_INPUT_APMPOWER=y
+-
+-#
+-# Input Device Drivers
+-#
+-CONFIG_INPUT_KEYBOARD=y
+-CONFIG_KEYBOARD_GPIO=y
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_INPUT_MISC=y
+-CONFIG_INPUT_UINPUT=m
+-
+-#
+-# Character devices
+-#
+-CONFIG_VT=y
+-CONFIG_VT_CONSOLE=y
+-CONFIG_HW_CONSOLE=y
+-CONFIG_DEVKMEM=y
+-
+-#
+-# Serial drivers
+-#
+-CONFIG_SERIAL_8250=m
+-CONFIG_SERIAL_8250_CS=m
+-
+-#
+-# Non-8250 serial port support
+-#
+-CONFIG_HW_RANDOM=m
+-
+-#
+-# PCMCIA character devices
+-#
+-CONFIG_I2C=y
+-CONFIG_I2C_BOARDINFO=y
+-CONFIG_I2C_COMPAT=y
+-CONFIG_I2C_HELPER_AUTO=y
+-
+-#
+-# Other I2C/SMBus bus drivers
+-#
+-CONFIG_SPI=y
+-CONFIG_SPI_MASTER=y
+-
+-#
+-# Enable Device Drivers -> PPS to see the PTP clock options.
+-#
+-CONFIG_ARCH_REQUIRE_GPIOLIB=y
+-CONFIG_GPIOLIB=y
+-CONFIG_GPIO_SYSFS=y
+-
+-#
+-# MODULbus GPIO expanders:
+-#
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_POWER_SUPPLY_DEBUG=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-CONFIG_HWMON=y
+-
+-#
+-# Native drivers
+-#
+-CONFIG_SENSORS_MAX1111=y
+-
+-#
+-# USB-based Watchdog Cards
+-#
+-CONFIG_SSB_POSSIBLE=y
+-
+-#
+-# Graphics support
+-#
+-CONFIG_FB=y
+-CONFIG_FB_CFB_FILLRECT=y
+-CONFIG_FB_CFB_COPYAREA=y
+-CONFIG_FB_CFB_IMAGEBLIT=y
+-
+-#
+-# Frame buffer hardware drivers
+-#
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CLASS_DEVICE=y
+-CONFIG_BACKLIGHT_CLASS_DEVICE=y
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_DUMMY_CONSOLE=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_FONTS=y
+-CONFIG_LOGO=y
+-CONFIG_LOGO_LINUX_CLUT224=y
+-CONFIG_SOUND=m
+-CONFIG_SOUND_OSS_CORE=y
+-CONFIG_SOUND_OSS_CORE_PRECLAIM=y
+-CONFIG_SND=m
+-CONFIG_SND_TIMER=m
+-CONFIG_SND_PCM=m
+-CONFIG_SND_JACK=y
+-CONFIG_SND_SUPPORT_OLD_API=y
+-CONFIG_SND_VERBOSE_PROCFS=y
+-CONFIG_SND_DRIVERS=y
+-CONFIG_SND_ARM=y
+-CONFIG_SND_SPI=y
+-CONFIG_SND_PCMCIA=y
+-CONFIG_SND_SOC=m
+-CONFIG_SND_SOC_I2C_AND_SPI=m
+-CONFIG_HID=m
+-
+-#
+-# Special HID drivers
+-#
+-CONFIG_USB_ARCH_HAS_HCD=y
+-
+-#
+-# Miscellaneous USB options
+-#
+-CONFIG_USB_OTG_WHITELIST=y
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_GADGET=m
+-CONFIG_USB_GADGET_DEBUG_FILES=y
+-CONFIG_USB_GADGET_DEBUG_FS=y
+-CONFIG_USB_GADGET_VBUS_DRAW=2
+-CONFIG_USB_GADGET_STORAGE_NUM_BUFFERS=2
+-CONFIG_USB_ZERO=m
+-CONFIG_USB_ETH=m
+-CONFIG_USB_ETH_RNDIS=y
+-CONFIG_USB_ETH_EEM=y
+-CONFIG_USB_GADGETFS=m
+-CONFIG_USB_MASS_STORAGE=m
+-CONFIG_USB_G_SERIAL=m
+-CONFIG_USB_CDC_COMPOSITE=m
+-CONFIG_USB_G_MULTI=m
+-CONFIG_USB_G_MULTI_RNDIS=y
+-CONFIG_USB_G_MULTI_CDC=y
+-
+-#
+-# MMC/SD/SDIO Host Controller Drivers
+-#
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-
+-#
+-# LED drivers
+-#
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-
+-#
+-# LED Triggers
+-#
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+-
+-#
+-# iptables trigger is under Netfilter config (LED target)
+-#
+-CONFIG_RTC_LIB=y
+-CONFIG_RTC_CLASS=y
+-CONFIG_RTC_HCTOSYS=y
+-CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
+-
+-#
+-# RTC interfaces
+-#
+-CONFIG_RTC_INTF_SYSFS=y
+-CONFIG_RTC_INTF_PROC=y
+-CONFIG_RTC_INTF_DEV=y
+-
+-#
+-# on-CPU RTC drivers
+-#
+-CONFIG_RTC_DRV_SA1100=y
+-
+-#
+-# Kernel hacking
+-#
+-CONFIG_ARM_UNWIND=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-non-hardware.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-non-hardware.cfg
+deleted file mode 100644
+index 0dd4da9..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-non-hardware.cfg
++++ /dev/null
+@@ -1,396 +0,0 @@
+-#CONFIG_NETFILTER is not set
+-
+-CONFIG_HARDIRQS_SW_RESEND=y
+-CONFIG_GENERIC_IRQ_PROBE=y
+-#
+-# General setup
+-#
+-CONFIG_KTIME_SCALAR=y
+-
+-CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
+-CONFIG_IRQ_WORK=y
+-
+-#
+-# General setup
+-#
+-CONFIG_BROKEN_ON_SMP=y
+-CONFIG_INIT_ENV_ARG_LIMIT=32
+-CONFIG_CROSS_COMPILE=""
+-CONFIG_HAVE_KERNEL_GZIP=y
+-CONFIG_HAVE_KERNEL_LZMA=y
+-CONFIG_HAVE_KERNEL_LZO=y
+-CONFIG_KERNEL_LZMA=y
+-CONFIG_DEFAULT_HOSTNAME="(none)"
+-CONFIG_SYSVIPC_SYSCTL=y
+-CONFIG_HAVE_GENERIC_HARDIRQS=y
+-
+-#
+-# IRQ subsystem
+-#
+-CONFIG_GENERIC_HARDIRQS=y
+-CONFIG_GENERIC_IRQ_SHOW=y
+-CONFIG_SPARSE_IRQ=y
+-
+-#
+-# RCU Subsystem
+-#
+-CONFIG_TINY_RCU=y
+-CONFIG_LOG_BUF_SHIFT=14
+-CONFIG_RD_GZIP=y
+-CONFIG_RD_BZIP2=y
+-CONFIG_RD_LZMA=y
+-CONFIG_RD_XZ=y
+-CONFIG_RD_LZO=y
+-CONFIG_ANON_INODES=y
+-CONFIG_EXPERT=y
+-CONFIG_UID16=y
+-CONFIG_PRINTK=y
+-CONFIG_BUG=y
+-CONFIG_ELF_CORE=y
+-CONFIG_BASE_FULL=y
+-CONFIG_SIGNALFD=y
+-CONFIG_TIMERFD=y
+-CONFIG_EVENTFD=y
+-CONFIG_AIO=y
+-CONFIG_HAVE_PERF_EVENTS=y
+-CONFIG_PERF_USE_VMALLOC=y
+-
+-#
+-# Kernel Performance Events And Counters
+-#
+-CONFIG_PERF_EVENTS=y
+-CONFIG_VM_EVENT_COUNTERS=y
+-CONFIG_COMPAT_BRK=y
+-CONFIG_SLAB=y
+-
+-#
+-# GCOV-based kernel profiling
+-#
+-CONFIG_HAVE_GENERIC_DMA_COHERENT=y
+-CONFIG_SLABINFO=y
+-CONFIG_RT_MUTEXES=y
+-CONFIG_BASE_SMALL=0
+-CONFIG_MODULE_FORCE_UNLOAD=y
+-CONFIG_BLK_DEV_BSG=y
+-
+-#
+-# Partition Types
+-#
+-CONFIG_PARTITION_ADVANCED=y
+-
+-#
+-# IO Schedulers
+-#
+-CONFIG_INLINE_SPIN_UNLOCK_IRQ=y
+-CONFIG_INLINE_READ_UNLOCK=y
+-CONFIG_INLINE_READ_UNLOCK_IRQ=y
+-CONFIG_INLINE_WRITE_UNLOCK=y
+-CONFIG_INLINE_WRITE_UNLOCK_IRQ=y
+-
+-#
+-# Bus support
+-#
+-CONFIG_PCCARD=y
+-CONFIG_PCMCIA=y
+-CONFIG_PCMCIA_LOAD_CIS=y
+-
+-#
+-# PC-card bridges
+-#
+-CONFIG_PCMCIA_SOC_COMMON=y
+-
+-#
+-# Kernel Features
+-#
+-CONFIG_TICK_ONESHOT=y
+-CONFIG_NO_HZ=y
+-CONFIG_GENERIC_CLOCKEVENTS_BUILD=y
+-CONFIG_VMSPLIT_3G=y
+-CONFIG_PAGE_OFFSET=0xC0000000
+-CONFIG_HZ=100
+-CONFIG_SELECT_MEMORY_MODEL=y
+-CONFIG_HAVE_MEMBLOCK=y
+-CONFIG_SPLIT_PTLOCK_CPUS=999999
+-CONFIG_ZONE_DMA_FLAG=0
+-CONFIG_VIRT_TO_BUS=y
+-CONFIG_DEFAULT_MMAP_MIN_ADDR=4096
+-CONFIG_NEED_PER_CPU_KM=y
+-CONFIG_FORCE_MAX_ZONEORDER=11
+-CONFIG_ALIGNMENT_TRAP=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CMDLINE_FROM_BOOTLOADER=y
+-CONFIG_KEXEC=y
+-CONFIG_ATAGS_PROC=y
+-
+-#
+-# Network testing
+-#
+-CONFIG_IRDA=m
+-
+-#
+-# IrDA protocols
+-#
+-CONFIG_IRLAN=m
+-CONFIG_IRNET=m
+-CONFIG_IRCOMM=m
+-
+-#
+-# FIR device drivers
+-#
+-CONFIG_BT=m
+-CONFIG_BT_RFCOMM=m
+-CONFIG_BT_RFCOMM_TTY=y
+-CONFIG_BT_BNEP=m
+-CONFIG_BT_BNEP_MC_FILTER=y
+-CONFIG_BT_BNEP_PROTO_FILTER=y
+-CONFIG_BT_HIDP=m
+-
+-#
+-# Bluetooth device drivers
+-#
+-CONFIG_BT_HCIBTSDIO=m
+-CONFIG_BT_HCIUART=m
+-CONFIG_BT_HCIUART_H4=y
+-CONFIG_BT_HCIUART_BCSP=y
+-CONFIG_BT_HCIUART_ATH3K=y
+-CONFIG_BT_HCIUART_LL=y
+-CONFIG_BT_HCIDTL1=m
+-CONFIG_BT_HCIBT3C=m
+-CONFIG_BT_HCIBLUECARD=m
+-CONFIG_BT_HCIBTUART=m
+-CONFIG_BT_HCIVHCI=m
+-CONFIG_BT_MRVL=m
+-CONFIG_BT_MRVL_SDIO=m
+-CONFIG_WIRELESS=y
+-CONFIG_WEXT_CORE=y
+-CONFIG_WEXT_PROC=y
+-CONFIG_WEXT_SPY=y
+-CONFIG_WEXT_PRIV=y
+-CONFIG_LIB80211_CRYPT_WEP=m
+-CONFIG_LIB80211_CRYPT_CCMP=m
+-CONFIG_LIB80211_CRYPT_TKIP=m
+-
+-#
+-# Generic Driver Options
+-#
+-CONFIG_UEVENT_HELPER_PATH=""
+-CONFIG_FW_LOADER=y
+-CONFIG_FIRMWARE_IN_KERNEL=y
+-CONFIG_EXTRA_FIRMWARE=""
+-CONFIG_REGMAP=y
+-CONFIG_REGMAP_I2C=m
+-CONFIG_REGMAP_SPI=m
+-
+-#
+-# LPDDR flash memory drivers
+-#
+-CONFIG_BLK_DEV=y
+-
+-#
+-# Altera FPGA firmware download module
+-#
+-CONFIG_HAVE_IDE=y
+-
+-#
+-# SCSI device support
+-#
+-CONFIG_SCSI_MOD=y
+-CONFIG_SCSI_DMA=y
+-
+-#
+-# SCSI Transports
+-#
+-CONFIG_SCSI_LOWLEVEL=y
+-CONFIG_ATA=y
+-CONFIG_ATA_VERBOSE_ERROR=y
+-CONFIG_SATA_PMP=y
+-
+-#
+-# Controllers with non-SFF native interface
+-#
+-CONFIG_ATA_SFF=y
+-
+-#
+-# SFF controllers with custom DMA interface
+-#
+-CONFIG_ATA_BMDMA=y
+-
+-#
+-# PIO-only SFF controllers
+-#
+-CONFIG_PATA_PCMCIA=y
+-
+-#
+-# CAIF transport drivers
+-#
+-CONFIG_ETHERNET=y
+-CONFIG_NET_VENDOR_3COM=y
+-CONFIG_NET_VENDOR_AMD=y
+-CONFIG_NET_VENDOR_BROADCOM=y
+-CONFIG_NET_VENDOR_CHELSIO=y
+-CONFIG_NET_VENDOR_CIRRUS=y
+-CONFIG_NET_VENDOR_FARADAY=y
+-CONFIG_NET_VENDOR_FUJITSU=y
+-CONFIG_NET_VENDOR_INTEL=y
+-CONFIG_NET_VENDOR_I825XX=y
+-CONFIG_NET_VENDOR_MARVELL=y
+-CONFIG_NET_VENDOR_MICREL=y
+-CONFIG_NET_VENDOR_MICROCHIP=y
+-CONFIG_NET_VENDOR_NATSEMI=y
+-CONFIG_NET_VENDOR_8390=y
+-CONFIG_PCMCIA_PCNET=m
+-CONFIG_NET_VENDOR_SEEQ=y
+-CONFIG_NET_VENDOR_SMSC=y
+-CONFIG_NET_VENDOR_STMICRO=y
+-CONFIG_NET_VENDOR_XIRCOM=y
+-CONFIG_SLHC=m
+-
+-#
+-# USB Network Adapters
+-#
+-CONFIG_AIRO_CS=m
+-CONFIG_HOSTAP=m
+-CONFIG_HOSTAP_FIRMWARE=y
+-CONFIG_HOSTAP_CS=m
+-
+-#
+-# Character devices
+-#
+-CONFIG_CONSOLE_TRANSLATIONS=y
+-CONFIG_VT_CONSOLE_SLEEP=y
+-
+-#
+-# Sonics Silicon Backplane
+-#
+-CONFIG_BCMA_POSSIBLE=y
+-
+-#
+-# OTG and related infrastructure
+-#
+-CONFIG_USB_GPIO_VBUS=m
+-CONFIG_USB_ULPI=y
+-CONFIG_NOP_USB_XCEIV=m
+-#
+-CONFIG_MMC=y
+-CONFIG_MMC_UNSAFE_RESUME=y
+-
+-#
+-# MMC/SD/SDIO Card Drivers
+-#
+-CONFIG_MMC_BLOCK=y
+-CONFIG_MMC_BLOCK_MINORS=8
+-CONFIG_MMC_BLOCK_BOUNCE=y
+-
+-#
+-# MMC/SD/SDIO Host Controller Drivers
+-#
+-CONFIG_MMC_SPI=y
+-
+-#
+-# Hardware Spinlock drivers
+-#
+-CONFIG_CLKSRC_MMIO=y
+-CONFIG_IOMMU_SUPPORT=y
+-
+-#
+-# File systems
+-#
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=y
+-CONFIG_EXT4_FS=y
+-CONFIG_JBD=y
+-CONFIG_JBD2=y
+-CONFIG_EXPORTFS=m
+-CONFIG_FILE_LOCKING=y
+-CONFIG_FSNOTIFY=y
+-CONFIG_INOTIFY_USER=y
+-CONFIG_GENERIC_ACL=y
+-
+-#
+-# DOS/FAT/NT Filesystems
+-#
+-CONFIG_FAT_DEFAULT_CODEPAGE=437
+-CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"
+-
+-#
+-# Pseudo filesystems
+-#
+-CONFIG_PROC_SYSCTL=y
+-CONFIG_PROC_PAGE_MONITOR=y
+-CONFIG_TMPFS_POSIX_ACL=y
+-CONFIG_TMPFS_XATTR=y
+-CONFIG_MISC_FILESYSTEMS=y
+-CONFIG_JFFS2_FS=y
+-CONFIG_JFFS2_COMPRESSION_OPTIONS=y
+-CONFIG_JFFS2_FS_DEBUG=0
+-CONFIG_JFFS2_FS_WRITEBUFFER=y
+-CONFIG_JFFS2_SUMMARY=y
+-CONFIG_JFFS2_ZLIB=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_RTIME=y
+-CONFIG_JFFS2_CMODE_PRIORITY=y
+-CONFIG_UBIFS_FS=y
+-CONFIG_UBIFS_FS_ADVANCED_COMPR=y
+-CONFIG_UBIFS_FS_LZO=y
+-CONFIG_UBIFS_FS_ZLIB=y
+-CONFIG_NETWORK_FILESYSTEMS=y
+-CONFIG_NFS_DEF_FILE_IO_SIZE=4096
+-CONFIG_NFS_USE_KERNEL_DNS=y
+-CONFIG_NFSD=m
+-CONFIG_NFSD_V4=y
+-CONFIG_NFS_COMMON=y
+-CONFIG_NLS=y
+-
+-#
+-# Kernel hacking
+-#
+-CONFIG_DEFAULT_MESSAGE_LOGLEVEL=4
+-CONFIG_ENABLE_WARN_DEPRECATED=y
+-CONFIG_ENABLE_MUST_CHECK=y
+-CONFIG_FRAME_WARN=1024
+-
+-CONFIG_HAVE_FUNCTION_TRACER=y
+-CONFIG_HAVE_FUNCTION_GRAPH_TRACER=y
+-CONFIG_HAVE_DYNAMIC_FTRACE=y
+-CONFIG_HAVE_FTRACE_MCOUNT_RECORD=y
+-CONFIG_HAVE_C_RECORDMCOUNT=y
+-CONFIG_RING_BUFFER=y
+-CONFIG_RING_BUFFER_ALLOW_SWAP=y
+-CONFIG_TRACING_SUPPORT=y
+-CONFIG_FTRACE=y
+-CONFIG_BRANCH_PROFILE_NONE=y
+-CONFIG_HAVE_ARCH_KGDB=y
+-
+-#
+-# Security options
+-#
+-CONFIG_DEFAULT_SECURITY_DAC=y
+-CONFIG_DEFAULT_SECURITY=""
+-
+-#
+-# Library routines
+-#
+-CONFIG_BITREVERSE=y
+-CONFIG_CRC_CCITT=y
+-CONFIG_CRC16=y
+-CONFIG_CRC_ITU_T=y
+-CONFIG_CRC32=y
+-CONFIG_CRC7=y
+-CONFIG_ZLIB_INFLATE=y
+-CONFIG_LZO_COMPRESS=y
+-CONFIG_LZO_DECOMPRESS=y
+-CONFIG_DECOMPRESS_GZIP=y
+-CONFIG_DECOMPRESS_BZIP2=y
+-CONFIG_DECOMPRESS_LZMA=y
+-CONFIG_DECOMPRESS_LZO=y
+-CONFIG_HAS_IOMEM=y
+-CONFIG_HAS_IOPORT=y
+-CONFIG_HAS_DMA=y
+-CONFIG_NLATTR=y
+-CONFIG_GENERIC_ATOMIC64=y
+-CONFIG_AVERAGE=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common-non-hw.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common-non-hw.cfg
+deleted file mode 100644
+index 75c3626..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common-non-hw.cfg
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#
+-# Microsoft Hyper-V guest support
+-#
+-CONFIG_CLKDEV_LOOKUP=y
+-
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_PXA_SSP=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common.cfg
+deleted file mode 100644
+index 538e19c..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-common.cfg
++++ /dev/null
+@@ -1,103 +0,0 @@
+-#
+-# System Type
+-#
+-CONFIG_ARCH_PXA=y
+-
+-#
+-# End-user Products (sorted by vendor name)
+-#
+-CONFIG_PXA_SHARPSL=y
+-
+-#
+-# System MMU
+-#
+-CONFIG_PLAT_PXA=y
+-
+-#
+-# Processor Type
+-#
+-CONFIG_CPU_XSCALE=y
+-CONFIG_CPU_32v5=y
+-CONFIG_CPU_ABRT_EV5T=y
+-CONFIG_CPU_PABRT_LEGACY=y
+-CONFIG_CPU_CACHE_VIVT=y
+-CONFIG_CPU_TLB_V4WBI=y
+-CONFIG_CPU_CP15=y
+-CONFIG_CPU_CP15_MMU=y
+-CONFIG_CPU_USE_DOMAINS=y
+-
+-#
+-# Processor Features
+-#
+-CONFIG_XSCALE_PMU=y
+-CONFIG_MULTI_IRQ_HANDLER=y
+-
+-#
+-# PC-card bridges
+-#
+-CONFIG_PCMCIA_PXA2XX=y
+-
+-#
+-# Kernel Features
+-#
+-CONFIG_HAVE_ARCH_PFN_VALID=y
+-CONFIG_HW_PERF_EVENTS=y
+-CONFIG_FLATMEM=y
+-CONFIG_FLAT_NODE_MEM_MAP=y
+-CONFIG_PAGEFLAGS_EXTENDED=y
+-
+-#
+-# Boot options
+-#
+-CONFIG_AUTO_ZRELADDR=y
+-
+-#
+-# FIR device drivers
+-#
+-CONFIG_PXA_FICP=m
+-
+-#
+-# RAM/ROM/Flash chip drivers
+-#
+-CONFIG_MTD_MAP_BANK_WIDTH_1=y
+-CONFIG_MTD_MAP_BANK_WIDTH_2=y
+-CONFIG_MTD_MAP_BANK_WIDTH_4=y
+-CONFIG_MTD_CFI_I1=y
+-CONFIG_MTD_CFI_I2=y
+-
+-#
+-# PATA SFF controllers with BMDMA
+-#
+-CONFIG_PATA_PXA=y
+-
+-#
+-# Non-8250 serial port support
+-#
+-CONFIG_SERIAL_PXA=y
+-CONFIG_SERIAL_PXA_CONSOLE=y
+-
+-#
+-# I2C system bus drivers (mostly embedded / system-on-chip)
+-#
+-CONFIG_I2C_PXA=y
+-
+-#
+-# SPI Master Controller Drivers
+-#
+-CONFIG_SPI_PXA2XX=y
+-
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_SND_VMASTER=y
+-CONFIG_SND_PXA2XX_PCM=m
+-CONFIG_SND_PXA2XX_LIB=m
+-CONFIG_SND_PXA2XX_LIB_AC97=y
+-CONFIG_SND_PXA2XX_AC97=m
+-CONFIG_SND_PXA2XX_SOC=m
+-
+-#
+-# MMC/SD/SDIO Host Controller Drivers
+-#
+-CONFIG_MMC_PXA=y
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-only.scc b/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-only.scc
+deleted file mode 100644
+index 037a2e4..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-pxa-only.scc
++++ /dev/null
+@@ -1,2 +0,0 @@
+-kconf hardware zaurus-pxa-common.cfg
+-kconf non-hardware zaurus-pxa-common-non-hw.cfg
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-host.scc b/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-host.scc
+deleted file mode 100644
+index 19f7523..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-host.scc
++++ /dev/null
+@@ -1,6 +0,0 @@
+-kconf hardware zaurus-usb-ohci.cfg
+-kconf non-hardware zaurus-usb-ohci-non-hw.cfg
+-
+-include features/usb/ohci-hcd.scc
+-include features/usb-net/usb-net.scc
+-#include cfg/usb-mass-storage.scc
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci-non-hw.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci-non-hw.cfg
+deleted file mode 100644
+index f20d7e6..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci-non-hw.cfg
++++ /dev/null
+@@ -1,4 +0,0 @@
+-#
+-# Console display driver support
+-#
+-CONFIG_SND_RAWMIDI_SEQ=m
+diff --git a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci.cfg b/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci.cfg
+deleted file mode 100644
+index 5cf2099..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/zaurus-usb-ohci.cfg
++++ /dev/null
+@@ -1,105 +0,0 @@
+-#
+-# Bluetooth device drivers
+-#
+-CONFIG_BT_HCIBTUSB=m
+-CONFIG_BT_HCIBCM203X=m
+-CONFIG_BT_HCIBPA10X=m
+-CONFIG_BT_HCIBFUSB=m
+-CONFIG_BT_ATH3K=m
+-
+-#
+-# USB Network Adapters
+-#
+-CONFIG_USB_CATC=m
+-CONFIG_USB_SIERRA_NET=m
+-
+-#
+-# Console display driver support
+-#
+-CONFIG_SND_HWDEP=m
+-CONFIG_SND_RAWMIDI=m
+-CONFIG_SND_USB=y
+-CONFIG_SND_USB_AUDIO=m
+-
+-#
+-# USB Input Devices
+-#
+-CONFIG_USB_HID=m
+-
+-#
+-# USB HID Boot Protocol drivers
+-#
+-CONFIG_USB_KBD=m
+-CONFIG_USB_MOUSE=m
+-
+-#
+-# Special HID drivers
+-#
+-CONFIG_USB_ARCH_HAS_OHCI=y
+-CONFIG_USB_DEBUG=y
+-CONFIG_USB_ANNOUNCE_NEW_DEVICES=y
+-
+-#
+-# Miscellaneous USB options
+-#
+-CONFIG_USB_MON=m
+-
+-#
+-# USB Host Controller Drivers
+-#
+-CONFIG_USB_SL811_HCD=m
+-CONFIG_USB_SL811_CS=m
+-
+-#
+-# USB Device Class drivers
+-#
+-CONFIG_USB_ACM=m
+-CONFIG_USB_PRINTER=m
+-
+-#
+-# USB Imaging devices
+-#
+-CONFIG_USB_MDC800=m
+-CONFIG_USB_MICROTEK=m
+-
+-#
+-# USB port drivers
+-#
+-CONFIG_USB_SERIAL=m
+-CONFIG_USB_SERIAL_GENERIC=y
+-CONFIG_USB_SERIAL_BELKIN=m
+-CONFIG_USB_SERIAL_DIGI_ACCELEPORT=m
+-CONFIG_USB_SERIAL_CYPRESS_M8=m
+-CONFIG_USB_SERIAL_EMPEG=m
+-CONFIG_USB_SERIAL_FTDI_SIO=m
+-CONFIG_USB_SERIAL_VISOR=m
+-CONFIG_USB_SERIAL_IPAQ=m
+-CONFIG_USB_SERIAL_IR=m
+-CONFIG_USB_SERIAL_EDGEPORT=m
+-CONFIG_USB_SERIAL_EDGEPORT_TI=m
+-CONFIG_USB_SERIAL_GARMIN=m
+-CONFIG_USB_SERIAL_IPW=m
+-CONFIG_USB_SERIAL_KEYSPAN_PDA=m
+-CONFIG_USB_SERIAL_KEYSPAN=m
+-CONFIG_USB_SERIAL_KLSI=m
+-CONFIG_USB_SERIAL_KOBIL_SCT=m
+-CONFIG_USB_SERIAL_MCT_U232=m
+-CONFIG_USB_SERIAL_PL2303=m
+-CONFIG_USB_SERIAL_SAFE=m
+-CONFIG_USB_SERIAL_TI=m
+-CONFIG_USB_SERIAL_CYBERJACK=m
+-CONFIG_USB_SERIAL_XIRCOM=m
+-CONFIG_USB_SERIAL_WWAN=m
+-CONFIG_USB_SERIAL_OMNINET=m
+-
+-#
+-# USB Miscellaneous drivers
+-#
+-CONFIG_USB_EMI62=m
+-CONFIG_USB_EMI26=m
+-CONFIG_USB_RIO500=m
+-CONFIG_USB_LEGOTOWER=m
+-CONFIG_USB_LCD=m
+-CONFIG_USB_LED=m
+-CONFIG_USB_CYTHERM=m
+-CONFIG_USB_IDMOUSE=m
 -- 
 1.8.1.5
 
