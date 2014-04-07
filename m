@@ -1,35 +1,45 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id EAA536F4D5
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 29C5B6F8E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Apr 2014 19:03:20 +0000 (UTC)
-Received: by mail-qc0-f175.google.com with SMTP id e16so6794048qcx.6
+	Mon,  7 Apr 2014 20:03:59 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id uy17so4154919igb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Apr 2014 12:03:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=vt7quagf8g8NmG4SRTGBeFfGGAsQwVbt8Kg4up+3unI=;
-	b=P5+Prr5Fy0dW67FNbKKNVPU/VtiX9pzCOPjrdyEJCm7ug6KiwTfImLbFYXLAFjMRut
-	m2F4QOIxzSoffmpILQNaOkKs9tBDX+Fe79RHAUfS3fKQMbPQVcB5Sygo3NOqt4JHQpC6
-	5GyUKxDNzJEvSEJaVGMRTE9wFkXGcu+pROaF4WSPrwvWQuuGW4O5ZGPArD6aGVlLrSaA
-	2W0ZwcISoDbQrtGUBy777NnQF6gNTSKEWx3Ze0qCRQ3MFWgQGzYVHeLOHt2z9d92cOLQ
-	7/o704VeU+RVtydcZ2yasJtN8N5IOjL3dKMjHTCIwZ+AIKpTOP+iJ/cCyDt+fTDPPF2C
-	+Xdw==
-X-Received: by 10.140.34.168 with SMTP id l37mr11155446qgl.85.1396897400924;
-	Mon, 07 Apr 2014 12:03:20 -0700 (PDT)
+	Mon, 07 Apr 2014 13:04:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=dbff8bz/23p9aW9W75UAl+xRoQPLdCytI7daOE1d4KA=;
+	b=TUN0VHLME6iU4J4lPMPGlWVGP4niXExdUgfvGr2Ihh0/2uSahjBMFOUjOxQt2H+RrA
+	Y9yK0lDLKDPAsqv4BXso1HpqfW9B0/0C+c+FWFKZh9jJ26Zo6BhkMxi8CBNhmvhZZ3mH
+	KgBf+FmEIpLIoFVm0zjDWE7f4yxGCofoWdlGyzq9ec2ocqE3gEN0AbVgb7ljD9Wk/1qF
+	YRuinpvb70lMJL462Mxc9R2IEpBn0neKuyUwI1iBoK3gwZV1KcjDHwo1qzqBwOSJtTsG
+	KVXOT3f3WJTdVOlykP1IuVPT9zgQ3SJhBlTO0+AAhFUp5ZdjCi7sj3ebtFpkbvALWE2z
+	bAtg==
+X-Gm-Message-State: ALoCoQl3Afo+bg9M7cnbs9VNuK2SVmoldVJm8/4TxdEefADR3JJT4it9alYdIGDNbj1uT7iJv2AP
+X-Received: by 10.50.176.199 with SMTP id ck7mr300379igc.44.1396901040354;
+	Mon, 07 Apr 2014 13:04:00 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id kb5sm432303igb.1.2014.04.07.13.03.59
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 07 Apr 2014 13:03:59 -0700 (PDT)
+Message-ID: <534304AE.9000108@linaro.org>
+Date: Mon, 07 Apr 2014 16:03:58 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
 MIME-Version: 1.0
-Received: by 10.140.106.225 with HTTP; Mon, 7 Apr 2014 12:02:50 -0700 (PDT)
-In-Reply-To: <1396688588-5440-1-git-send-email-trevor.woerner@linaro.org>
-References: <1396688588-5440-1-git-send-email-trevor.woerner@linaro.org>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Mon, 7 Apr 2014 12:02:50 -0700
-Message-ID: <CAK8F28=5nJUHW1J0QM6tWQ5tMOWjGWy6v9pZq2e81fKcgw5ktA@mail.gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Cc: Ulf Samuelsson <ulf@emagii.com>, openembedded-devel@lists.openembedded.org,
-	Patch Tracking <patches@linaro.org>
-Subject: Re: [meta-xfce][PATCH] xfconf: remove unrecognized configure option
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+References: <20140403130609.GF2132@jama>
+In-Reply-To: <20140403130609.GF2132@jama>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-04-03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +53,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Apr 2014 19:03:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 Apr 2014 20:04:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Tested-by: Ash Charles <ashcharles@gmail.com>
-
-On Sat, Apr 5, 2014 at 2:03 AM, Trevor Woerner
-<trevor.woerner@linaro.org> wrote:
-> This option was causing a QA warning:
->
->     NOTE: QA Issue: xfconf: configure was passed unrecognised options: --with-sysroot
->
-> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
-> ---
->  meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-> index aa6ad2c..bb8c337 100644
-> --- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-> +++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.10.0.bb
-> @@ -7,7 +7,6 @@ DEPENDS = "dbus-glib libxfce4util perl"
->  inherit xfce
->
->  EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
-> -EXTRA_OECONF += "--with-sysroot=yes"
->
->  SRC_URI += "file://0001-Simplify-checks.patch"
->  SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
-> --
-> 1.9.0
->
+Is anyone seeing any build failures with proj-4.8.0? Or does anyone have
+any local fixes? This one has been failing for me for a while, and yet
+doesn't show up on the SOBBW lists.
 
