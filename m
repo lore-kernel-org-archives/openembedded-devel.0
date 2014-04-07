@@ -1,35 +1,27 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id AF8336F83E
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 9C93E6F923
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Apr 2014 21:30:20 +0000 (UTC)
-Received: by mail-pa0-f46.google.com with SMTP id kx10so32910pab.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Apr 2014 14:30:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=TPtKzv+PvSc76srfEAJDYiPnzK9GEowHetckuMoMT/Y=;
-	b=JRMlHzPIhX35b72arrbU7GvqLkzlmoTD7W1aoreeRukzHMrTeCs88CZWdsF7qTbtkz
-	RzMmEp9dMtmqvMPiZsv+cXPXR/m5odVAjwgv4TPkLhQtDOF9+VjemToD9UqExg0IHhkk
-	ayFKA/EIBYJvJjBoYMuSppQTANrnabXh7Ld5M9KfjW6A+6yaBIj/r4r9ZopwQRWbZkfR
-	b/Wo8s9IpKWnXwzHK7TTiQ8GTB+kfQkLWuPWPVad8LclMrDOMUSebigX/EQnv87aF9Dz
-	+P0HxWzLKuF1DAo/ifUV3Uk7GCY4KnROQpKi5+Mufx9L6e62q1lYqTqvA/0ZdI2AOpxh
-	Qmqg==
-X-Received: by 10.68.178.66 with SMTP id cw2mr33503372pbc.89.1396906221031;
-	Mon, 07 Apr 2014 14:30:21 -0700 (PDT)
-Received: from pine.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18])
-	by mx.google.com with ESMTPSA id om6sm22pbc.43.2014.04.07.14.30.19
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 07 Apr 2014 14:30:20 -0700 (PDT)
-From: Adam YH Lee <adam.yh.lee@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Apr 2014 14:30:03 -0700
-Message-Id: <1396906203-25158-1-git-send-email-adam.yh.lee@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-xfce][PATCH] xfce4-session: Take the precedence over mini-x-session
+	Mon,  7 Apr 2014 23:01:58 +0000 (UTC)
+Received: (qmail 26674 invoked by uid 1003); 7 Apr 2014 23:01:58 -0000
+Received: from unknown (HELO ?10.16.32.157?)
+	(philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	7 Apr 2014 23:01:58 -0000
+Message-ID: <53432E65.6040107@balister.org>
+Date: Mon, 07 Apr 2014 16:01:57 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+X-Enigmail-Version: 1.6
+Subject: OEDAM updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +35,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Apr 2014 21:30:23 -0000
+X-List-Received-Date: Mon, 07 Apr 2014 23:02:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-If x11-base is included in the image, XFCE4 session does not correctly
-start because mini-x-session has higher priority at 50.
----
- .../xfce4-session/xfce4-session_4.10.1.bb          |    1 +
- 1 file changed, 1 insertion(+)
+Once again, please add yourself (or email Jefro or myself) if you plan
+to attend OEDAM. We have room for about 5-10 more people.
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-index f7aec5e..74289fb 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-@@ -15,6 +15,7 @@ SRC_URI += " \
- 
- ALTERNATIVE_${PN} = "x-session-manager"
- ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
-+ALTERNATIVE_PRIORITY_${PN} = "100"
- 
- # protect from frightening message that xfce might not work correctly
- pkg_postinst_${PN} () {
--- 
-1.7.9.5
+http://www.openembedded.org/wiki/OEDAM
 
+We should also get serious about creating an agenda. Even if you are not
+able to attend please take a look at the agenda and add topics you think
+should be discussed. We'll likely have to review the agenda when we
+start, but now is a good time to air your grievances.
+
+Philip
 
