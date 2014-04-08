@@ -1,29 +1,34 @@
-Return-Path: <denis@denix.org>
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 3753F6F769;
-	Mon,  7 Apr 2014 23:17:48 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173023.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009))
-	with ESMTPA id <0N3O00C3GOP0Y9E0@vms173023.mailsrvcs.net>; Mon,
-	07 Apr 2014 18:17:39 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D9629200AC; Mon,
-	07 Apr 2014 19:17:23 -0400 (EDT)
-Date: Mon, 07 Apr 2014 19:17:23 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org
-Message-id: <20140407231723.GJ3370@denix.org>
-References: <53432E65.6040107@balister.org>
-MIME-version: 1.0
-In-reply-to: <53432E65.6040107@balister.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: OEDAM updates
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 751FA6B523
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Apr 2014 01:50:44 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id t60so257167wes.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Apr 2014 18:50:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=sS8ct3n5EyMJRsvk9hLJmTc//T04/stHsUG5vvrMx5Y=;
+	b=o0zD1/YMyeyY82SGA+r+d1ESQ7MVtKmukWi9X3xZs+MmOR/vjbLxQbGh7IdfuTkvrx
+	rWyJUsjtUZfPcKWEWhLZ/thgeKyiffNcHnogrCVGAIOC1QRbgVUgFaMZ23KLOwiShRGE
+	VVdQIHOn4cq2wpV6ckyOgQQ9mU/350t9cXPpsUUNDB8bUxHBNLKGO21/lxwnUg6Lfyj5
+	UGMlE6Qh6TN5H41bpE9kScbQsjOdW+z+vVJuw8x4TphA58Ql8lZhKfpx6MRAx92EH+Ni
+	H8/YRYm/7e7F/1zfm3vtzJgurZBVGcMlWNMK7jfS6A00TjjoWB89AJYhyjgUliyaBfSe
+	+VNw==
+MIME-Version: 1.0
+X-Received: by 10.194.192.132 with SMTP id hg4mr1014059wjc.28.1396921843727;
+	Mon, 07 Apr 2014 18:50:43 -0700 (PDT)
+Received: by 10.194.135.76 with HTTP; Mon, 7 Apr 2014 18:50:43 -0700 (PDT)
+In-Reply-To: <1396410465-13709-2-git-send-email-stephen.arnold42@gmail.com>
+References: <1396410465-13709-1-git-send-email-stephen.arnold42@gmail.com>
+	<1396410465-13709-2-git-send-email-stephen.arnold42@gmail.com>
+Date: Mon, 7 Apr 2014 18:50:43 -0700
+Message-ID: <CAOLEWZXXS7LpYmmGk_Gfa6in+NuXC_6o5yctCLyAATPbAqHgSw@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v2 2/2] gnuplot: added upstream license file and updated recipe to match
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,25 +42,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Apr 2014 23:17:51 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 08 Apr 2014 01:50:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Apr 07, 2014 at 04:01:57PM -0700, Philip Balister wrote:
-> Once again, please add yourself (or email Jefro or myself) if you plan
-> to attend OEDAM. We have room for about 5-10 more people.
-> 
-> http://www.openembedded.org/wiki/OEDAM
-> 
-> We should also get serious about creating an agenda. Even if you are not
-> able to attend please take a look at the agenda and add topics you think
-> should be discussed. We'll likely have to review the agenda when we
-> start, but now is a good time to air your grievances.
+This is 2/2 as requested by Martin, et al.  Is there pending feedback, or
+did I miss an email?
 
-I'm not sure how many will be staying all day Saturday, but can we try to 
-group agenda topics so most pressing matters fall on Friday and maybe Saturday 
-morning?
+Thanks, Steve
 
--- 
-Denys
+
+On Tue, Apr 1, 2014 at 8:47 PM, Stephen Arnold
+<stephen.arnold42@gmail.com>wrote:
+
+> This fixes QA warnings about missing license file and updates the license
+> type to match custom license file.
+>
+> Upstream-Status: Inappropriate (distribution/packaging fix)
+>
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
+> ---
+>  meta-oe/licenses/gnuplot                     | 29
+> ++++++++++++++++++++++++++++
+>  meta-oe/recipes-extended/gnuplot/gnuplot.inc |  2 +-
+>  2 files changed, 30 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/licenses/gnuplot
+>
+> diff --git a/meta-oe/licenses/gnuplot b/meta-oe/licenses/gnuplot
+> new file mode 100644
+> index 0000000..ff6fe23
+> --- /dev/null
+> +++ b/meta-oe/licenses/gnuplot
+> @@ -0,0 +1,29 @@
+> +/*[
+> + * Copyright 1986 - 1993, 1998, 2004   Thomas Williams, Colin Kelley
+> + *
+> + * Permission to use, copy, and distribute this software and its
+> + * documentation for any purpose with or without fee is hereby granted,
+> + * provided that the above copyright notice appear in all copies and
+> + * that both that copyright notice and this permission notice appear
+> + * in supporting documentation.
+> + *
+> + * Permission to modify the software is granted, but not the right to
+> + * distribute the complete modified source code.  Modifications are to
+> + * be distributed as patches to the released version.  Permission to
+> + * distribute binaries produced by compiling modified sources is granted,
+> + * provided you
+> + *   1. distribute the corresponding source modifications from the
+> + *    released version in the form of a patch file along with the
+> binaries,
+> + *   2. add special version identification to distinguish your version
+> + *    in addition to the base release version number,
+> + *   3. provide your name and address as the primary contact for the
+> + *    support of your modified version, and
+> + *   4. retain our contact information in regard to use of the base
+> + *    software.
+> + * Permission to distribute the released version of the source code along
+> + * with corresponding source modifications in the form of a patch file is
+> + * granted with same provisions 2 through 4 for binary distributions.
+> + *
+> + * This software is provided "as is" without express or implied warranty
+> + * to the extent permitted by applicable law.
+> +]*/
+> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+> b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+> index ab3ec3f..6c27e6d 100644
+> --- a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+> @@ -2,7 +2,7 @@ DESCRIPTION = "Gnuplot is a portable command-line driven
+> interactive datafile \
+>  (text or binary) and function plotting utility."
+>  HOMEPAGE = "http://www.gnuplot.info/"
+>  SECTION = "console/scientific"
+> -LICENSE = "BSD-4"
+> +LICENSE = "gnuplot"
+>  LIC_FILES_CHKSUM = "file://Copyright;md5=243a186fc2fd3b992125d60d5b1bab8f"
+>  DEPENDS = "virtual/libx11 gd readline"
+>
+> --
+> 1.9.1
+>
+>
 
