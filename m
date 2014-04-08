@@ -1,31 +1,31 @@
-Return-Path: <kmsywula@ecsmtp.ir.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F7C565D7C
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id A7B0A65DC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Apr 2014 13:51:11 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 08 Apr 2014 06:47:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,818,1389772800"; d="scan'208";a="516681680"
-Received: from irvmail001.ir.intel.com ([163.33.26.43])
-	by fmsmga002.fm.intel.com with ESMTP; 08 Apr 2014 06:47:32 -0700
-Received: from irsectmgbld0302.ir.intel.com (irsectmgbld0302.ir.intel.com
-	[163.33.26.92])
-	by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id
-	s38DlW0E032431; Tue, 8 Apr 2014 14:47:32 +0100
-Received: from irsectmgbld0302.ir.intel.com (localhost [127.0.0.1])
-	by irsectmgbld0302.ir.intel.com with ESMTP id s38DlWCf006627;
-	Tue, 8 Apr 2014 14:47:32 +0100
-Received: (from kmsywula@localhost)
-	by irsectmgbld0302.ir.intel.com with œ id s38DlVG7006623;
-	Tue, 8 Apr 2014 14:47:31 +0100
-From: krzysztof.m.sywula@intel.com
+	Tue,  8 Apr 2014 14:20:23 +0000 (UTC)
+Received: by mail-ig0-f181.google.com with SMTP id h18so1094136igc.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Apr 2014 07:20:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=1oiwH/pSSTtpJgkb4SQSJ7WlB3MswZ95itTt6EHbl9g=;
+	b=pZn2Ds4TyVYXlSTJMcYf4dO02hgZtVIODzvU1cb6IfUQGJ6eZj/Is5mDCCWSiYBV6h
+	ii+H1d9vf/d4brtgvlVpIJULwZxikdsIeyKycQ1QDKWxzDjlbqQrBY+TKA4v6aGjw4fU
+	plg2d/9jG2Os5ngDB5JJEhikdNJ7rTdrGlhqKutuyT1dkwXGztSMjJKfGlnCz+VPG5TB
+	mOBacQxF8IiIGDntH23oD4g3UwKdEGr3OvxB3PDVRyrRqxWwaa1yZ+PQO501YgTP0RfQ
+	cJTtoeanGTkMRVId7+E8a5FrFX81CzYLxql+UoWVKWwk5eaxxAqe+F3q1NWZ/7rRfwhn
+	ZMDg==
+MIME-Version: 1.0
+X-Received: by 10.50.62.105 with SMTP id x9mr26038596igr.10.1396966824248;
+	Tue, 08 Apr 2014 07:20:24 -0700 (PDT)
+Received: by 10.64.230.100 with HTTP; Tue, 8 Apr 2014 07:20:24 -0700 (PDT)
+Date: Tue, 8 Apr 2014 23:20:24 +0900
+Message-ID: <CALYKT1gcCmYKqy55T3Xv7qevR2g-EWv-y9dabjzz-D8psdYF2w@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Apr 2014 14:47:09 +0100
-Message-Id: <1396964829-6563-1-git-send-email-krzysztof.m.sywula@intel.com>
-X-Mailer: git-send-email 1.8.2
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] dejagnu: recipe taken from openembedded
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How can I use gdb in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,51 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2014 13:51:15 -0000
+X-List-Received-Date: Tue, 08 Apr 2014 14:20:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
+Hello,
 
-Signed-off-by: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
----
- meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb |  6 ++++++
- meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb        | 14 ++++++++++++++
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
- create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+I use open-embedded in my company.
+It is used in Qualcomm's communication module - specifically on AP
+(Qualcomm's chipset is composed of MDM + AP).
 
-diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
-new file mode 100644
-index 0000000..07c4cff
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
-@@ -0,0 +1,6 @@
-+PR = "r1"
-+
-+require dejagnu_${PV}.bb
-+S = "${WORKDIR}/dejagnu-${PV}"
-+inherit native
-+
-diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
-new file mode 100644
-index 0000000..723003c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "GNU unit testing framework, written in Expect and Tcl"
-+LICENSE = "GPLv2"
-+SECTION = "devel"
-+PR = "r1"
-+
-+SRC_URI = "ftp://ftp.gnu.org/gnu/dejagnu/dejagnu-${PV}.tar.gz"
-+
-+inherit autotools
-+
-+
-+SRC_URI[md5sum] = "053f18fd5d00873de365413cab17a666"
-+SRC_URI[sha256sum] = "d0fbedef20fb0843318d60551023631176b27ceb1e11de7468a971770d0e048d"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
--- 
-1.8.2
+And when I compile oe linux, I use bitbake.
 
+In this environment I'd like to use gdb to debug applications for this oe
+linux.
+
+How can I use gdb in this?
+I have experience in using gdb in just PC environment. Not in embedded env..
+
+Thank you very much in advance!
+
+Sincerely
+Journeyer
+
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
 
