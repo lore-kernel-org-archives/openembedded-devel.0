@@ -1,26 +1,22 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 94FE765D6A
+Return-Path: <Christian.Ziethen@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id E71D865D59
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Apr 2014 09:07:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s38974Fb029617
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Apr 2014 02:07:04 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 8 Apr 2014 02:07:04 -0700
-From: <jackie.huang@windriver.com>
+	Tue,  8 Apr 2014 11:50:09 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1; Tue, 8 Apr 2014
+	13:50:08 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4442)	id 1DA0B288415;
+	Tue,  8 Apr 2014 13:50:09 +0200 (CEST)
+From: =?UTF-8?q?Christian=20Zieth=C3=A9n?= <Christian.Ziethen@enea.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Apr 2014 17:07:49 +0800
-Message-ID: <142cb3ea9de9dde15abb3e9a8a7ccd8ba5f07e6b.1396947706.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1396947706.git.jackie.huang@windriver.com>
-References: <cover.1396947706.git.jackie.huang@windriver.com>
+Date: Tue, 8 Apr 2014 13:50:06 +0200
+Message-ID: <1396957806-7835-1-git-send-email-Christian.Ziethen@enea.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 2/3] collectd: fix init status
+Received-SPF: None (SESTOEX03.enea.se: Christian.Ziethen@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-networking][PATCH] Incrementing dnsmasq version to address a bug with libvirt and DHCP.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,51 +30,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2014 09:07:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 08 Apr 2014 11:50:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Fix init status to get it works with 'service --status-all'.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Christian Zieth=C3=A9n <Christian.Ziethen@enea.com>
 ---
- .../collectd/collectd/collectd.init                |   13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd.init b/meta-oe/recipes-extended/collectd/collectd/collectd.init
-index abdb194..95f5f73 100644
---- a/meta-oe/recipes-extended/collectd/collectd/collectd.init
-+++ b/meta-oe/recipes-extended/collectd/collectd/collectd.init
-@@ -146,6 +146,17 @@ d_stop() {
- 	return "$rc"
- }
- 
-+# return:
-+#   0 if the daemon is running
-+#   3 if the daemon is stopped
-+d_status(){
-+	if test "$USE_COLLECTDMON" == 1; then
-+		status $COLLECTDMON_DAEMON
-+	else
-+		status $DAEMON
-+	fi
-+}
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+deleted file mode 100644
+index 2df3713..0000000
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-require dnsmasq.inc
+-
+-SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
+-SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbbfc=
+7b43845cae85ca8ffd024467710"
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+new file mode 100644
+index 0000000..651c304
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+@@ -0,0 +1,4 @@
++require dnsmasq.inc
 +
- case "$1" in
- 	start)
- 		echo -n "Starting $NAME"
-@@ -164,7 +175,7 @@ case "$1" in
- 		esac
- 		;;
- 	status)
--		status_of_proc -p "$_PIDFILE" "$DAEMON" "$NAME" && exit 0 || exit $?
-+		d_status
- 		;;
- 	restart|force-reload)
- 		echo -n "Restarting $NAME"
--- 
-1.7.9.5
++SRC_URI[dnsmasq-2.63.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
++SRC_URI[dnsmasq-2.63.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158ea=
+3fca9a83ab55471f981a2097c2f"
+--=20
+1.7.10.4
 
 
