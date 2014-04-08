@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BFC9D65D5D
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 196CE65D65
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Apr 2014 09:07:00 +0000 (UTC)
+	Tue,  8 Apr 2014 09:07:02 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s38971gv029614
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s38973K6003307
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Apr 2014 02:07:01 -0700 (PDT)
+	Tue, 8 Apr 2014 02:07:03 -0700 (PDT)
 Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 8 Apr 2014 02:07:00 -0700
+	14.3.169.1; Tue, 8 Apr 2014 02:07:02 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Apr 2014 17:07:47 +0800
-Message-ID: <cover.1396947706.git.jackie.huang@windriver.com>
+Date: Tue, 8 Apr 2014 17:07:48 +0800
+Message-ID: <50282b60ac02b6ac13d5d6ffdcdb22c7422a9555.1396947706.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1396947706.git.jackie.huang@windriver.com>
+References: <cover.1396947706.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 0/3] collectd: three fixes
+Subject: [meta-oe][PATCH v2 1/3] collectd: enable/disable libpq explicitly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +34,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2014 09:07:02 -0000
+X-List-Received-Date: Tue, 08 Apr 2014 09:07:05 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-v2 comment:
-"collectd: explicitly enable/disable libsensors support":
-changed the config option to be a PACKAGECONFIG option
+If '--with-libpq' is not included in configure options, the configure
+script will assume 'with-libpq=yes' and try to figure below variables
+out with 'pg_config':
 
+    with_libpq_includedir, with_libpq_libdir
+
+This causes configure QA errors on some hosts that have 'pg_config'
+installed (which from postgresql-devel):
+
+* ERROR: This autoconf log indicates errors, it looked at host include
+  and/or library paths while determining system capabilities.
+
+Anyways the target package should not depend on any host headers/libs,
+we should enable/disable the libpq support explicitly according to if
+the postgresql feature was enabled.
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
-The following changes since commit bc969d3705c45928de8525ef3d2d9d2867311864:
+ .../recipes-extended/collectd/collectd_5.2.2.bb    |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-  inetutils: add -dbg packages for tftpd, telnetd and rshd (2014-04-02 11:18:54 -0400)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib jhuang0/r_collectd_1
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=jhuang0/r_collectd_1
-
-Ming Liu (1):
-  collectd: explicitly enable/disable libsensors support
-
-Wenzong Fan (2):
-  collectd: enable/disable libpq explicitly
-  collectd: fix init status
-
- .../collectd/collectd/collectd.init                |   13 ++++++++++++-
- .../recipes-extended/collectd/collectd_5.2.2.bb    |    6 ++++--
- 2 files changed, 16 insertions(+), 3 deletions(-)
-
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+index 25be1c4..4eed2b6 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+@@ -23,7 +23,8 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp --with-libnetsnmp=no,net-snmp"
+ PACKAGECONFIG[libmemcached] = "--with-libmemcached,--without-libmemcached,libmemcached"
+ PACKAGECONFIG[iptables] = "--enable-iptables,--disable-iptables,iptables"
+-PACKAGECONFIG[postgresql] = "--enable-postgresql,--disable-postgresql,postgresql"
++PACKAGECONFIG[postgresql] = "--enable-postgresql --with-libpq=yes, \
++        --disable-postgresql --with-libpq=no,postgresql"
+ PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
+ PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
+ PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
 -- 
 1.7.9.5
 
