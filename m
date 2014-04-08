@@ -1,29 +1,31 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-bk0-f49.google.com (mail-bk0-f49.google.com
-	[209.85.214.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BB5665D7D;
-	Tue,  8 Apr 2014 13:37:00 +0000 (UTC)
-Received: by mail-bk0-f49.google.com with SMTP id my13so250729bkb.22
-	for <multiple recipients>; Tue, 08 Apr 2014 06:37:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=gB426z99xBYsHaWHLA8xInJ3LqFVpQWz4qCUYKdjQRE=;
-	b=tb/0LAX7PF+qTHZq8SdK6XNOfbsMTOzLZsHiSocfaT0/piUkAK/8zh82wyIGU/4bca
-	q4GhGmpjila3kWaGQwz4K5knfapWzEJ4n/P17hSwPFdbWFoEcQSOHbXJ51MpI9YnI7ik
-	ntuzdVKu6fleWkObSUEZ4F0JM58PUUue+sEeS9ddDEcxUE0Zl476npSQroAM6Oydm5zm
-	Sqlmvzac1VhPa2ddBaE44xjRXnBYhYzSYM10d3I4ojPjAHsz0fvilNqpC9gV+ncKPQ5S
-	Pqf7X3m89B7iLK7EeiFlzUcZINCa7x87xMmJio3s7BEkYSc/IHESxn7be4UjEqipxhAq
-	crMg==
-MIME-Version: 1.0
-X-Received: by 10.112.56.148 with SMTP id a20mr1048468lbq.44.1396950136911;
-	Tue, 08 Apr 2014 02:42:16 -0700 (PDT)
-Received: by 10.112.35.234 with HTTP; Tue, 8 Apr 2014 02:42:16 -0700 (PDT)
-Date: Tue, 8 Apr 2014 11:42:16 +0200
-Message-ID: <CAAQYJAstr1sACgL+sTFuBaPb2vtnGrEJYcAE_nPAYsaknsErzw@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <Openembedded-core@lists.openembedded.org>
-Subject: RFC: Removal of meta-initramfs layer
+Return-Path: <kmsywula@ecsmtp.ir.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F7C565D7C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Apr 2014 13:51:11 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 08 Apr 2014 06:47:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,818,1389772800"; d="scan'208";a="516681680"
+Received: from irvmail001.ir.intel.com ([163.33.26.43])
+	by fmsmga002.fm.intel.com with ESMTP; 08 Apr 2014 06:47:32 -0700
+Received: from irsectmgbld0302.ir.intel.com (irsectmgbld0302.ir.intel.com
+	[163.33.26.92])
+	by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id
+	s38DlW0E032431; Tue, 8 Apr 2014 14:47:32 +0100
+Received: from irsectmgbld0302.ir.intel.com (localhost [127.0.0.1])
+	by irsectmgbld0302.ir.intel.com with ESMTP id s38DlWCf006627;
+	Tue, 8 Apr 2014 14:47:32 +0100
+Received: (from kmsywula@localhost)
+	by irsectmgbld0302.ir.intel.com with œ id s38DlVG7006623;
+	Tue, 8 Apr 2014 14:47:31 +0100
+From: krzysztof.m.sywula@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Apr 2014 14:47:09 +0100
+Message-Id: <1396964829-6563-1-git-send-email-krzysztof.m.sywula@intel.com>
+X-Mailer: git-send-email 1.8.2
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] dejagnu: recipe taken from openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,31 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2014 13:37:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 08 Apr 2014 13:51:15 -0000
 
-Hi,
+From: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
 
-as maintainer of the meta-openembedded/meta-initramfs layer since its
-creation I'm now thinking to merge it back in meta-handheld and remove
-it from meta-openembedded.
+Signed-off-by: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
+---
+ meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb |  6 ++++++
+ meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb        | 14 ++++++++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+ create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
 
-The layer is atm a sort of middleware, providing klibc, kexecboot and
-specific initramfs tools for the creation of small images: recently
-dracut was added as well.
+diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+new file mode 100644
+index 0000000..07c4cff
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+@@ -0,0 +1,6 @@
++PR = "r1"
++
++require dejagnu_${PV}.bb
++S = "${WORKDIR}/dejagnu-${PV}"
++inherit native
++
+diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+new file mode 100644
+index 0000000..723003c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "GNU unit testing framework, written in Expect and Tcl"
++LICENSE = "GPLv2"
++SECTION = "devel"
++PR = "r1"
++
++SRC_URI = "ftp://ftp.gnu.org/gnu/dejagnu/dejagnu-${PV}.tar.gz"
++
++inherit autotools
++
++
++SRC_URI[md5sum] = "053f18fd5d00873de365413cab17a666"
++SRC_URI[sha256sum] = "d0fbedef20fb0843318d60551023631176b27ceb1e11de7468a971770d0e048d"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
+-- 
+1.8.2
 
-The intention was to allow other BSP layers to extend it and customize
-the specific recipes but apparently only the meta-handheld layer is
-using it so I'd be inclined to simplify the setup and remove the
-intermediate layer.
-
-Dracut should have a wider audience so it could be possibly moved to oe-core.
-
-Please send your objections, if any: removal is planned after YP 1.6 release.
-
-Thanks to all contributors.
-
-Regards
-
-Andrea
 
