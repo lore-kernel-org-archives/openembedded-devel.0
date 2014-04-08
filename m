@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A4F465D6A
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 94FE765D6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Apr 2014 09:07:04 +0000 (UTC)
+	Tue,  8 Apr 2014 09:07:03 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s38976Os003315
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s38974Fb029617
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Apr 2014 02:07:06 -0700 (PDT)
+	Tue, 8 Apr 2014 02:07:04 -0700 (PDT)
 Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 8 Apr 2014 02:07:05 -0700
+	14.3.169.1; Tue, 8 Apr 2014 02:07:04 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Apr 2014 17:07:50 +0800
-Message-ID: <cba43680242c7e0c33a70b3d9c1422f789635d53.1396947706.git.jackie.huang@windriver.com>
+Date: Tue, 8 Apr 2014 17:07:49 +0800
+Message-ID: <142cb3ea9de9dde15abb3e9a8a7ccd8ba5f07e6b.1396947706.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1396947706.git.jackie.huang@windriver.com>
 References: <cover.1396947706.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 3/3] collectd: explicitly enable/disable libsensors support
+Subject: [meta-oe][PATCH v2 2/3] collectd: fix init status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,30 +37,47 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 08 Apr 2014 09:07:05 -0000
 Content-Type: text/plain
 
-From: Ming Liu <ming.liu@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-To avoid an implicit build result.
+Fix init status to get it works with 'service --status-all'.
 
-Signed-off-by: Ming Liu <ming.liu@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-extended/collectd/collectd_5.2.2.bb    |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../collectd/collectd/collectd.init                |   13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-index 4eed2b6..7cb41b9 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-@@ -28,7 +28,8 @@ PACKAGECONFIG[postgresql] = "--enable-postgresql --with-libpq=yes, \
- PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
- PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
- PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
--PACKAGECONFIG[sensors] = "--enable-sensors,--disable-sensors,lmsensors"
-+PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
-+        --disable-sensors --with-libsensors=no,lmsensors"
+diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd.init b/meta-oe/recipes-extended/collectd/collectd/collectd.init
+index abdb194..95f5f73 100644
+--- a/meta-oe/recipes-extended/collectd/collectd/collectd.init
++++ b/meta-oe/recipes-extended/collectd/collectd/collectd.init
+@@ -146,6 +146,17 @@ d_stop() {
+ 	return "$rc"
+ }
  
- EXTRA_OECONF = " \
-                 ${FPLAYOUT} \
++# return:
++#   0 if the daemon is running
++#   3 if the daemon is stopped
++d_status(){
++	if test "$USE_COLLECTDMON" == 1; then
++		status $COLLECTDMON_DAEMON
++	else
++		status $DAEMON
++	fi
++}
++
+ case "$1" in
+ 	start)
+ 		echo -n "Starting $NAME"
+@@ -164,7 +175,7 @@ case "$1" in
+ 		esac
+ 		;;
+ 	status)
+-		status_of_proc -p "$_PIDFILE" "$DAEMON" "$NAME" && exit 0 || exit $?
++		d_status
+ 		;;
+ 	restart|force-reload)
+ 		echo -n "Restarting $NAME"
 -- 
 1.7.9.5
 
