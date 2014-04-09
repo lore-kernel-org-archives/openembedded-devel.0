@@ -1,22 +1,38 @@
-Return-Path: <Christian.Ziethen@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id B7EF465E00
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id A3F6665D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 09:14:46 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1; Wed, 9 Apr 2014
-	11:14:46 +0200
-Received: by sestofb10.enea.se (Postfix, from userid 4442)	id BF01C288415;
-	Wed,  9 Apr 2014 11:14:46 +0200 (CEST)
-From: =?UTF-8?q?Christian=20Zieth=C3=A9n?= <Christian.Ziethen@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Apr 2014 11:14:44 +0200
-Message-ID: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: Christian.Ziethen@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-networking][PATCH v4] dnsmasq: update to 2.68
+	Wed,  9 Apr 2014 09:15:56 +0000 (UTC)
+Received: by mail-ie0-f171.google.com with SMTP id ar20so2186140iec.30
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Apr 2014 02:15:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qLDdl5y/4EQGAye/HQ0JgkOQel5ESQeGrzRsUxHhP8Y=;
+	b=bxLoxAcQrS4FBlJ01Up4fLs/thW/1TAq4ePy/gpHrbnP3LlVjtolAVo9AGuk3u6m51
+	X3+svKyludW5WqlXiGsJTPzKSun1oJasts8km2UmjzjHVW/HchqNfzDJicOvQ4zG762Y
+	HGiXRytltk+ZseQNynFlzyl/3shdJAAHISAaB7+d3EcxUK+skmc+msjgMd50OHl9WyOd
+	fZ2KOSzjNSKHCmSnoeTMnmeTZveBaatx/JNAyetigj9H1ywijW0b1SzHtJrAxUxxIe+Z
+	MQz0lDFLikTZdRSMIwywAZq7d+b1b2YQKa02OvB9KR6qpPj7p1iuaSxurKZAsq3zFnt4
+	wfIA==
+X-Gm-Message-State: ALoCoQl/w/cHJNKBvO2Hy95CsqQIm2ezFekLlqyUeCzOAUIJwLjBAhEWdZ7YOt3kxAK5q5mWXzBL
+X-Received: by 10.50.80.11 with SMTP id n11mr3603661igx.36.1397034957049;
+	Wed, 09 Apr 2014 02:15:57 -0700 (PDT)
+Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id r4sm10080984igh.1.2014.04.09.02.15.55
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 09 Apr 2014 02:15:56 -0700 (PDT)
+From: Trevor Woerner <trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Apr 2014 05:15:40 -0400
+Message-Id: <1397034941-6268-1-git-send-email-trevor.woerner@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen.kooi@linaro.org>, patches@linaro.org
+Subject: [meta-oe][PATCH] acpitests: add individual checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,50 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 09:14:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Apr 2014 09:15:56 -0000
 
-Fixes a bug with libvirt and DHCP, which is fixed in 2.66.
+This recipe includes two source tarballs, add a second set of checksums so
+both have checksum definitions.
 
-"Handle the situation where libc headers define
-SO_REUSEPORT, but the kernel in use doesn't, to cope with
-the introduction of this option to Linux. Thanks to Rich
-Felker for the bug report."
-
-Signed-off-by: Christian Zieth=C3=A9n <Christian.Ziethen@enea.com>
+Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
 ---
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
- meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
- 2 files changed, 4 insertions(+), 4 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+ meta-oe/recipes-extended/acpica/acpitests_20140114.bb | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/meta=
--networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
-deleted file mode 100644
-index 2df3713..0000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require dnsmasq.inc
--
--SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
--SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbbfc=
-7b43845cae85ca8ffd024467710"
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/meta=
--networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-new file mode 100644
-index 0000000..b1bef7a
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-@@ -0,0 +1,4 @@
-+require dnsmasq.inc
-+
-+SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
-+SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158ea=
-3fca9a83ab55471f981a2097c2f"
---=20
-1.7.10.4
+diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140114.bb b/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
+index 4afe3a9..d8a3b9f 100644
+--- a/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
++++ b/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
+@@ -6,12 +6,14 @@ LIC_FILES_CHKSUM = "file://tests/aapits/atexec.c;beginline=1;endline=115;md5=e92
+ 
+ DEPENDS = "bison flex"
+ 
+-SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz \
+-           https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
++SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;name=acpitests \
++           https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
+            file://0001-Fixup-aapits-build.patch \
+     "
+-SRC_URI[md5sum] = "c72b61e092d2b25726dfff6e455116c9"
+-SRC_URI[sha256sum] = "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba782f8ecf03971a3a2c"
++SRC_URI[acpitests.md5sum] = "c72b61e092d2b25726dfff6e455116c9"
++SRC_URI[acpitests.sha256sum] = "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba782f8ecf03971a3a2c"
++SRC_URI[acpica.md5sum] = "fcd4b7304f1bfabc7d4b9cfdecc6b0c6"
++SRC_URI[acpica.sha256sum] = "0d5bd32690ab77e21ab143ef25361c314a4ed13c33a5fb3ddd6f5559ab24ebc3"
+ 
+ S = "${WORKDIR}/acpitests-unix-${PV}"
+ 
+-- 
+1.9.0
 
 
