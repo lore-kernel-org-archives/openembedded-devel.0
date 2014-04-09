@@ -1,34 +1,27 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F24965D24
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A70065DEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Apr 2014 21:36:45 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id c13so1195663eek.9
+	Wed,  9 Apr 2014 06:01:24 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3961JSh025482
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Apr 2014 14:36:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=a2gf6PfSCc/W3aUlriiDdwbceMKdPLf5bnWrYd5pT2I=;
-	b=il7oXi4j98F8aCpRT2IDAFdE4i2wB0JjmSAz2nRB6wF4AFt3o0Nzxk5DxqN8mD3VMu
-	In+6fURWpfGTXyyKdj5pXZohPOijh4AYyl26vbsDI6idFzgggh7v8jnrxZjWiZFnUXQI
-	VqGXX1Ua9mhCfD5aN7+Kqdr0haDhgGBfbYsLQOqnMGGnXyAAuLLBwx+9GDVJiPQN1GVL
-	cblrV7XG4o0Ho4piqqQyrrxpWgNaKrrPCBdCsr3q09pN838HjHfSS4tOi/Alv6WxTw85
-	la5UkCgxYcqiFq+YUU1vs/aPaiMKZT5EOI8/dH4f6EoTov1fTUgCONQExIPVeW6o0yrm
-	jMuQ==
-X-Received: by 10.15.10.3 with SMTP id f3mr6973934eet.1.1396993005865;
-	Tue, 08 Apr 2014 14:36:45 -0700 (PDT)
-Received: from mizar.localdomain
-	(host89-230-dynamic.20-79-r.retail.telecomitalia.it. [79.20.230.89])
-	by mx.google.com with ESMTPSA id a42sm7145370ees.10.2014.04.08.14.36.44
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Apr 2014 14:36:45 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Apr 2014 23:36:37 +0200
-Message-Id: <1396992997-1493-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] linux-yocto_3.14: tosa: really switch to simpler gpio-charger module
+	Tue, 8 Apr 2014 23:01:25 -0700 (PDT)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.169.1; Tue, 8 Apr 2014 23:00:25 -0700
+From: Kai Kang <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Apr 2014 13:58:33 +0800
+Message-ID: <1397023113-29936-4-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <1397023113-29936-1-git-send-email-kai.kang@windriver.com>
+References: <1397023113-29936-1-git-send-email-kai.kang@windriver.com>
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.231]
+Subject: [PATCH 3/3] yajl: update to 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,31 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Apr 2014 21:36:48 -0000
+X-List-Received-Date: Wed, 09 Apr 2014 06:01:28 -0000
+Content-Type: text/plain
 
-Adjust defconfig to match the gpio-charger patch.
+Update yajl to version 2.1.0:
+* Correct license
+* Update SRCREV
+* Drop PR
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../yajl/{yajl_2.0.4.bb => yajl_2.1.0.bb}               | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-devtools/yajl/{yajl_2.0.4.bb => yajl_2.1.0.bb} (24%)
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-index c38bbff..bf7e376 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-@@ -285,9 +285,9 @@ CONFIG_SPI=y
- CONFIG_SPI_PXA2XX=y
- CONFIG_GPIO_SYSFS=y
- CONFIG_POWER_SUPPLY=y
--CONFIG_PDA_POWER=y
- CONFIG_APM_POWER=y
- CONFIG_BATTERY_TOSA=m
-+CONFIG_CHARGER_GPIO=y
- CONFIG_SENSORS_MAX1111=y
- CONFIG_WATCHDOG=y
- CONFIG_SOFT_WATCHDOG=m
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+similarity index 24%
+rename from meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
+rename to meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+index 9d67e2d..1bf5389 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_2.0.4.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+@@ -1,10 +1,15 @@
+-DESCRIPTION = "Yet Another JSON Library - A Portable JSON parsing and serialization library in ANSI C"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=74f541bd9a2b6c8e5d0714bcdc327f32"
+-PR = "r1"
++SUMMARY = "Yet Another JSON Library."
+ 
+-SRCREV = "fee1ebef9fa7dc0e9f5a23f37123b19b68c796ff"
+-SRC_URI = "git://github.com/lloyd/yajl.git"
++DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
++written in ANSI C, and a small validating JSON generator."
++
++HOMEPAGE = "http://lloyd.github.com/yajl/"
++
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://COPYING;md5=39af6eb42999852bdd3ea00ad120a36d"
++
++SRC_URI = "git://github.com/lloyd/yajl"
++SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-1.8.1.5
+1.8.4
 
 
