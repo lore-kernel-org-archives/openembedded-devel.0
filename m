@@ -1,34 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B03C365DF5
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 12CE965E04
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 08:13:25 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id rl12so2014854iec.8
+	Wed,  9 Apr 2014 08:35:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s398ZRA0014251
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 01:13:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hNFNWX7OMbhLUCYMHGIBbKKLltKHJcPbtlvNLMdbajs=;
-	b=gnIafSQVphzzsv0WsykPbmp/SANaLU5i8VDiCtTexWXG0QWyO5XKG6tsT46qy8ZhfD
-	Lm5rmFzrPoGpJ7SP3qqUcoR9T3IcgEmxyt7DRVqp593BHcSO5msTQPGsqVKBMYbIkUCA
-	kl6Rx98HQCsYx2m9FbaOT6LDPY3lX9a8YtzJzJpesRtjS43c9hCb112a42GQjjzOna/B
-	OF/5Lg78gyKz/nRKP2tnoNkXbS/FMOa7c1tEVChcBYTxO/AELwVKuNJGgXAjUaTDj2io
-	2oQMEVTPM4TGIJfPi9H98MhZPfAbcy0muDyvtcYh3wLsg8TwYcG0sQcCgNtBWufFXlgs
-	N4zw==
-MIME-Version: 1.0
-X-Received: by 10.42.90.11 with SMTP id i11mr6916833icm.26.1397031206417; Wed,
-	09 Apr 2014 01:13:26 -0700 (PDT)
-Received: by 10.50.229.14 with HTTP; Wed, 9 Apr 2014 01:13:26 -0700 (PDT)
-Received: by 10.50.229.14 with HTTP; Wed, 9 Apr 2014 01:13:26 -0700 (PDT)
-In-Reply-To: <d548095ff29cf093d3e6df22594476873a34a67c.1397024315.git.jackie.huang@windriver.com>
+	Wed, 9 Apr 2014 01:35:28 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0169.001;
+	Wed, 9 Apr 2014 01:35:27 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 2/2] eject: Fix wrong return value
+Thread-Index: AQHPU8uhWCQEawWPEkWqGO3IelVYrZsI9KBw
+Date: Wed, 9 Apr 2014 08:35:26 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BDF86B@ALA-MBA.corp.ad.wrs.com>
 References: <cover.1397024315.git.jackie.huang@windriver.com>
 	<d548095ff29cf093d3e6df22594476873a34a67c.1397024315.git.jackie.huang@windriver.com>
-Date: Wed, 9 Apr 2014 01:13:26 -0700
-Message-ID: <CAMKF1srp7jUDqxShC9TWzocrpytAeG1uTamOcZ+n3KXsOJ33ig@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAMKF1srp7jUDqxShC9TWzocrpytAeG1uTamOcZ+n3KXsOJ33ig@mail.gmail.com>
+In-Reply-To: <CAMKF1srp7jUDqxShC9TWzocrpytAeG1uTamOcZ+n3KXsOJ33ig@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
+MIME-Version: 1.0
 Subject: Re: [meta-oe][PATCH 2/2] eject: Fix wrong return value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,66 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 08:13:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 09 Apr 2014 08:35:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Apr 8, 2014 8:27 PM, <jackie.huang@windriver.com> wrote:
->
-> From: Jackie Huang <jackie.huang@windriver.com>
->
-> Remove the unnecessary return(1) from function usage(), so that eject -h
-> can return the right value.
 
-this is an API change i wonder if other programs rely on the value being >0
->
-> Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../eject/eject/eject-2.1.5-error-return.patch     |   10 ++++++++++
->  meta-oe/recipes-support/eject/eject_2.1.5.bb       |    4 +++-
->  2 files changed, 13 insertions(+), 1 deletion(-)
->  create mode 100644
-meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
->
-> diff --git
-a/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-> new file mode 100644
-> index 0000000..2cce3c3
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-> @@ -0,0 +1,10 @@
-> +Upstream-Status: Pending
-> +
-> +--- eject/eject.c.orig 2013-09-11 18:08:36.000000000 +0800
-> ++++ eject/eject.c      2013-09-11 18:09:05.000000000 +0800
-> +@@ -207,7 +207,6 @@
-> + "If omitted, name defaults to `%s'.\n"
-> + "By default tries -r, -s, -f, and -q in order until success.\n"),
-> +                       DEFAULTDEVICE);
-> +-  exit(1);
-> + }
-> diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bbb/meta-oe/recipes-support/eject/
-eject_2.1.5.bb
-> index 98319a3..c47c653 100644
-> --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> @@ -5,7 +5,9 @@ LIC_FILES_CHKSUM =
-"file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->
->  inherit autotools gettext update-alternatives
->
-> -SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz"
-> +SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz \
-> +           file://eject-2.1.5-error-return.patch \
-> +"
->
->  SRC_URI[md5sum] = "b96a6d4263122f1711db12701d79f738"
->  SRC_URI[sha256sum] =
-"ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
-> --
-> 1.7.9.5
->
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Khem Raj
+> Sent: Wednesday, April 09, 2014 4:13 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 2/2] eject: Fix wrong return value
+>=20
+> On Apr 8, 2014 8:27 PM, <jackie.huang@windriver.com> wrote:
+> >
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > Remove the unnecessary return(1) from function usage(), so that eject
+> > -h can return the right value.
+>=20
+> this is an API change i wonder if other programs rely on the value being =
+>0
+
+I think the answer should be no, I don't see any reason to return 1 for the=
+ "-h" or=20
+"--help", almost all programs return 0 for that, right?
+
+Thanks,
+Jackie
+
+> >
+> > Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  .../eject/eject/eject-2.1.5-error-return.patch     |   10 ++++++++++
+> >  meta-oe/recipes-support/eject/eject_2.1.5.bb       |    4 +++-
+> >  2 files changed, 13 insertions(+), 1 deletion(-)  create mode 100644
+> meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
+> >
+> > diff --git
+> a/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
+> b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
+> > new file mode 100644
+> > index 0000000..2cce3c3
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patc=
+h
+> > @@ -0,0 +1,10 @@
+> > +Upstream-Status: Pending
+> > +
+> > +--- eject/eject.c.orig 2013-09-11 18:08:36.000000000 +0800
+> > ++++ eject/eject.c      2013-09-11 18:09:05.000000000 +0800
+> > +@@ -207,7 +207,6 @@
+> > + "If omitted, name defaults to `%s'.\n"
+> > + "By default tries -r, -s, -f, and -q in order until success.\n"),
+> > +                       DEFAULTDEVICE);
+> > +-  exit(1);
+> > + }
+> > diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bbb/meta-oe/reci=
+pes-support/eject/
+> eject_2.1.5.bb
+> > index 98319a3..c47c653 100644
+> > --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> > +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> > @@ -5,7 +5,9 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c28b"
+> >
+> >  inherit autotools gettext update-alternatives
+> >
+> > -SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.gz"
+> > +SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.gz \
+> > +           file://eject-2.1.5-error-return.patch \
+> > +"
+> >
+> >  SRC_URI[md5sum] =3D "b96a6d4263122f1711db12701d79f738"
+> >  SRC_URI[sha256sum] =3D
+> "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
