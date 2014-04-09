@@ -1,34 +1,41 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 12CE965E04
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 0835F65E03
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 08:35:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s398ZRA0014251
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  9 Apr 2014 08:51:50 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id uy17so6163859igb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Apr 2014 01:35:28 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0169.001;
-	Wed, 9 Apr 2014 01:35:27 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 2/2] eject: Fix wrong return value
-Thread-Index: AQHPU8uhWCQEawWPEkWqGO3IelVYrZsI9KBw
-Date: Wed, 9 Apr 2014 08:35:26 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BDF86B@ALA-MBA.corp.ad.wrs.com>
-References: <cover.1397024315.git.jackie.huang@windriver.com>
-	<d548095ff29cf093d3e6df22594476873a34a67c.1397024315.git.jackie.huang@windriver.com>
-	<CAMKF1srp7jUDqxShC9TWzocrpytAeG1uTamOcZ+n3KXsOJ33ig@mail.gmail.com>
-In-Reply-To: <CAMKF1srp7jUDqxShC9TWzocrpytAeG1uTamOcZ+n3KXsOJ33ig@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.135]
+	Wed, 09 Apr 2014 01:51:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:content-type:content-transfer-encoding;
+	bh=2P2pmrb6TQhFmeOho7/4TrjTeX+IUtHv5HLMCfaNEEE=;
+	b=OwQ3ve3obbWWIaZbh+h1xEYYHxfmdPQz6wlnPTYCzcri3K+l8zPZANBzJ/z1HIrmdT
+	cesxSd2tVkD0WFXAI6L+XsvkFiSGXpZDwZq9YSi2NDFNv39WuMAIVJAh1I1C52gFIO96
+	677Aql6BSFB+u0BtjBtIDFE66o+mqKQXX+Zx2dPdvdBPLMeZzEbPBhi4/io/l7TlyeJw
+	Y+cqYGShxwtIh6VTcYNyvq8r2Hgo/2BBktyD+bg91VLLY/XvBfZwGngJrgc6A38TWTNn
+	ydCOj06gfUoz7a7ecgnApjjf7iXFVFhbIjB/Bf7qd85j9JrEXsNAt9dML39sUOfv8bX7
+	4PWw==
+X-Gm-Message-State: ALoCoQkeqjpT/ZTEI+q1ZrJv6PyGy4FCReSicaB/jPhdxy4uKm3s/RPdXLMOj5bWYpu1NlvPcMyn
+X-Received: by 10.42.88.204 with SMTP id d12mr7248280icm.24.1397033511246;
+	Wed, 09 Apr 2014 01:51:51 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id z5sm3620499igl.13.2014.04.09.01.51.49
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 09 Apr 2014 01:51:50 -0700 (PDT)
+Message-ID: <53450A23.3060107@linaro.org>
+Date: Wed, 09 Apr 2014 04:51:47 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 2/2] eject: Fix wrong return value
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	koen.kooi@linaro.org, Martin Jansa <martin.jansa@gmail.com>
+Subject: checksums for multiple sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,96 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 08:35:28 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Apr 2014 08:51:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+Is there any way to specify for which source tarball a particular
+checksum is referring?
+
+meta-openembedded/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
+has 2 source tarballs (and a patch):
+
+    SRC_URI =
+    "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz \
+              
+    https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
+               file://0001-Fixup-aapits-build.patch \
+        "
+
+but only one set of checksums:
+
+    SRC_URI[md5sum] = "c72b61e092d2b25726dfff6e455116c9"
+    SRC_URI[sha256sum] =
+    "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba782f8ecf03971a3a2c"
 
 
+My build fails because it tries to verify the one checksum against both
+source tarballs, which fails:
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Wednesday, April 09, 2014 4:13 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 2/2] eject: Fix wrong return value
->=20
-> On Apr 8, 2014 8:27 PM, <jackie.huang@windriver.com> wrote:
-> >
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Remove the unnecessary return(1) from function usage(), so that eject
-> > -h can return the right value.
->=20
-> this is an API change i wonder if other programs rely on the value being =
->0
+    File: '/home/trevor/devel/Downloads/acpica-unix2-20140114.tar.gz'
+    has md5 checksum fcd4b7304f1bfabc7d4b9cfdecc6b0c6 when
+    c72b61e092d2b25726dfff6e455116c9 was expected
 
-I think the answer should be no, I don't see any reason to return 1 for the=
- "-h" or=20
-"--help", almost all programs return 0 for that, right?
-
-Thanks,
-Jackie
-
-> >
-> > Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  .../eject/eject/eject-2.1.5-error-return.patch     |   10 ++++++++++
-> >  meta-oe/recipes-support/eject/eject_2.1.5.bb       |    4 +++-
-> >  2 files changed, 13 insertions(+), 1 deletion(-)  create mode 100644
-> meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-> >
-> > diff --git
-> a/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-> b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-> > new file mode 100644
-> > index 0000000..2cce3c3
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patc=
-h
-> > @@ -0,0 +1,10 @@
-> > +Upstream-Status: Pending
-> > +
-> > +--- eject/eject.c.orig 2013-09-11 18:08:36.000000000 +0800
-> > ++++ eject/eject.c      2013-09-11 18:09:05.000000000 +0800
-> > +@@ -207,7 +207,6 @@
-> > + "If omitted, name defaults to `%s'.\n"
-> > + "By default tries -r, -s, -f, and -q in order until success.\n"),
-> > +                       DEFAULTDEVICE);
-> > +-  exit(1);
-> > + }
-> > diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bbb/meta-oe/reci=
-pes-support/eject/
-> eject_2.1.5.bb
-> > index 98319a3..c47c653 100644
-> > --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> > +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> > @@ -5,7 +5,9 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c28b"
-> >
-> >  inherit autotools gettext update-alternatives
-> >
-> > -SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.gz"
-> > +SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.gz \
-> > +           file://eject-2.1.5-error-return.patch \
-> > +"
-> >
-> >  SRC_URI[md5sum] =3D "b96a6d4263122f1711db12701d79f738"
-> >  SRC_URI[sha256sum] =3D
-> "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
-> > --
-> > 1.7.9.5
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+NOTE: this checksum is correct for the first tarball
+(acpitests-unix-${PV}.tar.gz), but not the second
+(acpica-unix2-${PV}.tar.gz).
 
