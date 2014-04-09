@@ -1,35 +1,38 @@
 Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id B0F8D65E37
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id A426865E4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 23:44:05 +0000 (UTC)
-Received: by mail-ie0-f179.google.com with SMTP id lx4so3093481iec.24
+	Wed,  9 Apr 2014 23:44:10 +0000 (UTC)
+Received: by mail-ie0-f169.google.com with SMTP id to1so3242857ieb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 16:44:06 -0700 (PDT)
+	Wed, 09 Apr 2014 16:44:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QquUK6M54kKxO1tX9tycrh0qipeX55LGRbVaav37K6w=;
-	b=KL2z/JkVWvyKhc+cOpZyFVqXRQIM6D72N9hy/MYw64ohK5ZG6qvt7+8a8NmQ7qndkL
-	7sZLyM6375qSU5EdCUoSFtA7frQEUSHKmseMl1zI5K5JVcUrLSgavuxhcltzEEaVYZJO
-	8gCVQepeGyG6edRoBToZVkG/Gm3mEpS9Et7z3WNvmKsZffQDbLBbb4c8HOfjELk1pneu
-	wNPzVBT1rbX0hrmadoJue3XkhJOm/dK8p/idnc1WhGNkXTct96+BLjDVXvuAVHc4VWgG
-	guuZ8BRP6o0si8cKZNdzjh7S+h8x/rNxl6lXGfkg08AMnvrtLJyl/oLlFlSOquyd+pfu
-	m8PA==
-X-Gm-Message-State: ALoCoQl7B/JXWaCRP0UAi0jJ6TJfQZYZvGU4v9LJxViR6SNqmXs5QALrqgWnt68VXF6RVJozi0yN
-X-Received: by 10.42.20.6 with SMTP id e6mr9846861icb.29.1397087046155;
-	Wed, 09 Apr 2014 16:44:06 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=4uyxoaWF8ZmXa1RbA8fqyMH0F3EfmW5BG5mjpxT3hJ0=;
+	b=SjV+cOfSUr1JIxLy00Nxgbhd3i6ctSDY1BGN5D4noiq/T7oHopyxP8XF290DK9GhZd
+	w+FT6jQuDG5C45CS8uA0yKSoS5N/BCZ8aU4kikHyz9Diwn7YqjONMQmynjCqxQiBy4/v
+	Z5rdWgupPoIoeOLPuvxV4ISrA7riAkFimWtjRamAl2fvSrI++GfZYW0SDOh9eqV0bAen
+	hYJBrDTZr4kzs//qJNI6Ghgnpqdns7fs1puMs1NNO5hVQ0AVRMD41HQENVOTm/oR0IHR
+	McU4G9Uuy0BejaEx+PfmksyQwSHd2XxTQVc1xxRDbWreiIIJroFgZhz30DOItNS826Wy
+	Hv4w==
+X-Gm-Message-State: ALoCoQkDeh8qOO/Gy9IbHYpjJm9q0RqqyCCC71dAuu30iF2TpOSn2tXzIZSlcsIEx17PFhKfDHjj
+X-Received: by 10.50.47.12 with SMTP id z12mr7288434igm.37.1397087050982;
+	Wed, 09 Apr 2014 16:44:10 -0700 (PDT)
 Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
 	[69.165.220.158]) by mx.google.com with ESMTPSA id
-	nh12sm8733105igb.12.2014.04.09.16.44.05 for <multiple recipients>
+	nh12sm8733105igb.12.2014.04.09.16.44.10 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Apr 2014 16:44:05 -0700 (PDT)
+	Wed, 09 Apr 2014 16:44:10 -0700 (PDT)
 From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Apr 2014 19:43:58 -0400
-Message-Id: <1397087039-21114-1-git-send-email-trevor.woerner@linaro.org>
+Date: Wed,  9 Apr 2014 19:43:59 -0400
+Message-Id: <1397087039-21114-2-git-send-email-trevor.woerner@linaro.org>
 X-Mailer: git-send-email 1.9.0
+In-Reply-To: <1397087039-21114-1-git-send-email-trevor.woerner@linaro.org>
+References: <1397087039-21114-1-git-send-email-trevor.woerner@linaro.org>
 Cc: Joe MacDonald <joe.macdonald@windriver.com>, patches@linaro.org
 Subject: [meta-networking][PATCH] sethdlc: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -45,30 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 23:44:08 -0000
+X-List-Received-Date: Wed, 09 Apr 2014 23:44:10 -0000
 
-This recipe doesn't compile for a number of reasons:
-- it expects to be built against a 2.6.x kernel
-- its build is contaminated by the host
-
-Given that these sources are over 9 years old, I recommend this recipe be
-removed rather than spending the time trying to get it to compile today.
-
-	gcc -O2 -Wall -W -Wno-long-long -pipe -I/usr/src/linux/include -I/usr/src/linux-2.6/include -o sethdlc sethdlc.c
-	In file included from /usr/src/linux/include/linux/kernel.h:6:0,
-			 from /usr/src/linux/include/linux/skbuff.h:17,
-			 from /usr/src/linux/include/linux/hdlc.h:14,
-			 from sethdlc.c:19:
-	/usr/src/linux/include/linux/linkage.h:7:25: fatal error: asm/linkage.h: No such file or directory
-	 #include <asm/linkage.h>
-
-Trevor Woerner (1):
-  sethdlc: remove
-
+Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+---
  .../recipes-connectivity/sethdlc/sethdlc.bb        | 30 ----------------------
  1 file changed, 30 deletions(-)
  delete mode 100644 meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
 
+diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+deleted file mode 100644
+index 3a9692f..0000000
+--- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
+-HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
+-LICENSE = "GPLv2 & GPLv2+ "
+-LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
+-
+-
+-SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
+-"
+-SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
+-SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
+-
+-
+-S = "${WORKDIR}/${BPN}-1.18"
+-
+-DEPENDS="virtual/kernel"
+-
+-EXTRA_OEMAKE="CROSS_COMPILE=${TARGET_PREFIX} CC='${CC} ${LDFLAGS}' \
+-              KERNEL_DIR=${STAGING_KERNEL_DIR} "
+-
+-do_compile_prepend () {
+-    oe_runmake clean
+-}
+-
+-
+-do_install() {
+-    install -d ${D}/${bindir}
+-    install sethdlc ${D}/${bindir}/
+-}
+-
+-FILES_${PN} += "${bindir}/sethdlc"
 -- 
 1.9.0
 
