@@ -1,31 +1,37 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f174.google.com (mail-ob0-f174.google.com
-	[209.85.214.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 040F065DB5
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 20:52:59 +0000 (UTC)
-Received: by mail-ob0-f174.google.com with SMTP id wo20so3359290obc.33
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 13:53:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=FCX8SIooZi9IJTvp8a7wsIaVlgG90Sv6jQB2DUixIC0=;
-	b=we+0rTfFYhhOV0vxfR50O9UthSIAAtVVp9BFfdfUXh05KqHpmHSTM41NFJsxjQBuTN
-	qRl+wbBZNibkioEiu7EbzkDBlLcs+ymfUzNJN+8WxpU0aslplQcFKSGKM/yjuM5vnNVD
-	5OjeJvwAXs3nfE0Krm7D7JILsLd8mW+JyXlrFb3pO1XyIsztO6yJoT0jla+3NS5sdjGr
-	cj2bxgVy4d+hMJzRSLMUSpAj3g2QeR4w2ETkiGAg7TmRp8QivBth5mTc6j/YDKr/5dzM
-	dppfsM25jMP2VmTkQSxUqQ44eH4botbufojuTB60WjybYDpHai83vGaX3o+RrbXRVLJK
-	uD3w==
-MIME-Version: 1.0
-X-Received: by 10.182.181.105 with SMTP id dv9mr3425626obc.59.1397076780384;
-	Wed, 09 Apr 2014 13:53:00 -0700 (PDT)
-Received: by 10.60.73.165 with HTTP; Wed, 9 Apr 2014 13:53:00 -0700 (PDT)
-Date: Wed, 9 Apr 2014 16:53:00 -0400
-Message-ID: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: udev auto-mount not doing fsck
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B0F8D65E37
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Apr 2014 23:44:05 +0000 (UTC)
+Received: by mail-ie0-f179.google.com with SMTP id lx4so3093481iec.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Apr 2014 16:44:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=QquUK6M54kKxO1tX9tycrh0qipeX55LGRbVaav37K6w=;
+	b=KL2z/JkVWvyKhc+cOpZyFVqXRQIM6D72N9hy/MYw64ohK5ZG6qvt7+8a8NmQ7qndkL
+	7sZLyM6375qSU5EdCUoSFtA7frQEUSHKmseMl1zI5K5JVcUrLSgavuxhcltzEEaVYZJO
+	8gCVQepeGyG6edRoBToZVkG/Gm3mEpS9Et7z3WNvmKsZffQDbLBbb4c8HOfjELk1pneu
+	wNPzVBT1rbX0hrmadoJue3XkhJOm/dK8p/idnc1WhGNkXTct96+BLjDVXvuAVHc4VWgG
+	guuZ8BRP6o0si8cKZNdzjh7S+h8x/rNxl6lXGfkg08AMnvrtLJyl/oLlFlSOquyd+pfu
+	m8PA==
+X-Gm-Message-State: ALoCoQl7B/JXWaCRP0UAi0jJ6TJfQZYZvGU4v9LJxViR6SNqmXs5QALrqgWnt68VXF6RVJozi0yN
+X-Received: by 10.42.20.6 with SMTP id e6mr9846861icb.29.1397087046155;
+	Wed, 09 Apr 2014 16:44:06 -0700 (PDT)
+Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158]) by mx.google.com with ESMTPSA id
+	nh12sm8733105igb.12.2014.04.09.16.44.05 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 09 Apr 2014 16:44:05 -0700 (PDT)
+From: Trevor Woerner <trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Apr 2014 19:43:58 -0400
+Message-Id: <1397087039-21114-1-git-send-email-trevor.woerner@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Joe MacDonald <joe.macdonald@windriver.com>, patches@linaro.org
+Subject: [meta-networking][PATCH] sethdlc: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,29 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 20:53:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Apr 2014 23:44:08 -0000
 
-Hi,
+This recipe doesn't compile for a number of reasons:
+- it expects to be built against a 2.6.x kernel
+- its build is contaminated by the host
 
-I have a custom board that has a eUSB NAND attached (its a little circuit
-board with a header Micron e230).
+Given that these sources are over 9 years old, I recommend this recipe be
+removed rather than spending the time trying to get it to compile today.
 
-With the udev-extraconf package installed, udev looks like it automatically
-mounts my device via the automount.rules (calling mount.sh) on boot.
+	gcc -O2 -Wall -W -Wno-long-long -pipe -I/usr/src/linux/include -I/usr/src/linux-2.6/include -o sethdlc sethdlc.c
+	In file included from /usr/src/linux/include/linux/kernel.h:6:0,
+			 from /usr/src/linux/include/linux/skbuff.h:17,
+			 from /usr/src/linux/include/linux/hdlc.h:14,
+			 from sethdlc.c:19:
+	/usr/src/linux/include/linux/linkage.h:7:25: fatal error: asm/linkage.h: No such file or directory
+	 #include <asm/linkage.h>
 
-I'd like udev to fsck this device before it auto mounts it.  Should I just
-make or modify a udev rule to get this behavior or is there already another
-package out there I'm missing that already has rules to do this that I can
-use?  Don't want to reinvent the wheel if I'm just missing something.
+Trevor Woerner (1):
+  sethdlc: remove
 
-The eUSB NAND has an ext4 filesystem on it but I'm starting to see some
-corruption ... possibly from the journal getting messed up from too many
-improper shutdowns etc.
+ .../recipes-connectivity/sethdlc/sethdlc.bb        | 30 ----------------------
+ 1 file changed, 30 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
 
-Regards,
+-- 
+1.9.0
 
-Brian
-
-<http://layers.openembedded.org/layerindex/recipe/629/>
 
