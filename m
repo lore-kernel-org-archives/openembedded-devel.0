@@ -1,40 +1,22 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.14])
-	by mail.openembedded.org (Postfix) with ESMTP id B29F765DF6
+Return-Path: <Christian.Ziethen@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id DE3B865DC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 09:01:05 +0000 (UTC)
-Received: from [216.82.249.131:31195] by server-14.bemta-12.messagelabs.com id
-	35/51-12296-15C05435; Wed, 09 Apr 2014 09:01:05 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-4.tower-28.messagelabs.com!1397034038!27810195!3
-X-Originating-IP: [66.77.174.13]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 30972 invoked from network); 9 Apr 2014 09:01:05 -0000
-Received: from mail.mx1.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
-	by server-4.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
-	9 Apr 2014 09:01:05 -0000
-Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx1.digi.com
-	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 9 Apr 2014 04:00:54 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by
-	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
-	8.3.342.0; Wed, 9 Apr 2014 04:00:38 -0500
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
-	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 9 Apr 2014 11:00:26 +0200
-Message-ID: <53450C29.5060202@digi.com>
-Date: Wed, 9 Apr 2014 11:00:25 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
+	Wed,  9 Apr 2014 09:06:31 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.158.1; Wed, 9 Apr 2014
+	11:06:30 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4442)	id 580E9288415;
+	Wed,  9 Apr 2014 11:06:30 +0200 (CEST)
+From: =?UTF-8?q?Christian=20Zieth=C3=A9n?= <Christian.Ziethen@enea.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <53450A23.3060107@linaro.org>
-In-Reply-To: <53450A23.3060107@linaro.org>
-Subject: Re: checksums for multiple sources
+Date: Wed, 9 Apr 2014 11:06:29 +0200
+Message-ID: <1397034389-52817-1-git-send-email-Christian.Ziethen@enea.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Received-SPF: None (SESTOEX08.enea.se: Christian.Ziethen@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-networking][PATCH v3--signoff] dnsmasq: update to 2.68
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,65 +30,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 09:01:05 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 09 Apr 2014 09:06:38 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Trevor,
+Fixes a bug with libvirt and DHCP, which is fixed in 2.66.
 
-You can put names to the different tarballs and then set the checksums 
-for each one of them with following syntax:
+"Handle the situation where libc headers define
+SO_REUSEPORT, but the kernel in use doesn't, to cope with
+the introduction of this option to Linux. Thanks to Rich
+Felker for the bug report."
 
-SRC_URI = " \
-     http://...;name=tarball1 \
-     http://...;name=tarball2 \
-"
+Signed-off-by: Christian Zieth=C3=A9n <Christian.Ziethen@enea.com>
+---
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
 
-SRC_URI[tarball1.md5sum] = "..."
-SRC_URI[tarball1.sha256sum] = "..."
-
-SRC_URI[tarball2.md5sum] = "..."
-SRC_URI[tarball2.sha256sum] = "..."
-
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+deleted file mode 100644
+index 2df3713..0000000
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-require dnsmasq.inc
 -
-Javier Viguera
-Software Engineer
-Digi International® Spain S.A.U.
-
-
-
-On 09/04/14 10:51, Trevor Woerner wrote:
-> Is there any way to specify for which source tarball a particular
-> checksum is referring?
->
-> meta-openembedded/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
-> has 2 source tarballs (and a patch):
->
->      SRC_URI =
->      "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz \
->
->      https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
->                 file://0001-Fixup-aapits-build.patch \
->          "
->
-> but only one set of checksums:
->
->      SRC_URI[md5sum] = "c72b61e092d2b25726dfff6e455116c9"
->      SRC_URI[sha256sum] =
->      "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba782f8ecf03971a3a2c"
->
->
-> My build fails because it tries to verify the one checksum against both
-> source tarballs, which fails:
->
->      File: '/home/trevor/devel/Downloads/acpica-unix2-20140114.tar.gz'
->      has md5 checksum fcd4b7304f1bfabc7d4b9cfdecc6b0c6 when
->      c72b61e092d2b25726dfff6e455116c9 was expected
->
-> NOTE: this checksum is correct for the first tarball
-> (acpitests-unix-${PV}.tar.gz), but not the second
-> (acpica-unix2-${PV}.tar.gz).
->
-
+-SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
+-SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbbfc=
+7b43845cae85ca8ffd024467710"
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+new file mode 100644
+index 0000000..b1bef7a
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+@@ -0,0 +1,4 @@
++require dnsmasq.inc
++
++SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
++SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158ea=
+3fca9a83ab55471f981a2097c2f"
+--=20
+1.7.10.4
 
 
