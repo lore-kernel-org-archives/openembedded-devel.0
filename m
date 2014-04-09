@@ -1,43 +1,22 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A84965E00
+Return-Path: <Christian.Ziethen@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id B7EF465E00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 09:11:12 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id c1so6178616igq.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 02:11:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=cIedbxDC+fx/sD0DAr1C1chfiUJZ8LaTUWNaC18Z+vU=;
-	b=aX49N2tuAF5DvLpaJwDP/6vkKLRx+g8RYa/rXjarcw+TCjBeOqtgpWWj7ueolF69C+
-	iBsY1/MJ/CzJABpqilSLGhKYPDVLaBYmR+As3It/fkvBag1QXdCwyeW0PvvDvRFAoWk3
-	RBzEmZEcYcvqBEQAR+OO4PDrFYsrMsl+M6q+tK0qhdLpMCNERPlWu7jMCdag6rDT/U5U
-	3AMadEX3f1/Qtm2mJU4iZ8E4OWmKrSyIc8zgASS7pVNv/mqpL0nnyybwKJroX8wFQiDS
-	Hnpi5xoAGRCt64uxGHIanum7NYoM896Wc1zL4bhHtvjsjcUamYEtS2Nk0ZWEDGK+sZcu
-	dvlA==
-X-Gm-Message-State: ALoCoQmtd9wzLEtiKLDUjT6ekshQfY6IIB/Ij3NA4B7O8NEzqrqfwJMmYoWwquk0InQoolJkhe0T
-X-Received: by 10.50.62.104 with SMTP id x8mr9102833igr.37.1397034673569;
-	Wed, 09 Apr 2014 02:11:13 -0700 (PDT)
-Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158])
-	by mx.google.com with ESMTPSA id l7sm10042045igv.4.2014.04.09.02.11.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 09 Apr 2014 02:11:13 -0700 (PDT)
-Message-ID: <53450EB0.6070205@linaro.org>
-Date: Wed, 09 Apr 2014 05:11:12 -0400
-From: Trevor Woerner <trevor.woerner@linaro.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
+	Wed,  9 Apr 2014 09:14:46 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1; Wed, 9 Apr 2014
+	11:14:46 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4442)	id BF01C288415;
+	Wed,  9 Apr 2014 11:14:46 +0200 (CEST)
+From: =?UTF-8?q?Christian=20Zieth=C3=A9n?= <Christian.Ziethen@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Apr 2014 11:14:44 +0200
+Message-ID: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <53450A23.3060107@linaro.org> <53450C29.5060202@digi.com>
-In-Reply-To: <53450C29.5060202@digi.com>
-Subject: Re: checksums for multiple sources
+Received-SPF: None (SESTOEX03.enea.se: Christian.Ziethen@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-networking][PATCH v4] dnsmasq: update to 2.68
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,13 +30,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 09:11:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 09 Apr 2014 09:14:47 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 04/09/14 04:59, Mats Kärrman wrote:
-On 04/09/14 05:00, Javier Viguera wrote:
+Fixes a bug with libvirt and DHCP, which is fixed in 2.66.
 
+"Handle the situation where libc headers define
+SO_REUSEPORT, but the kernel in use doesn't, to cope with
+the introduction of this option to Linux. Thanks to Rich
+Felker for the bug report."
 
-Great! Thanks to both of you :-)
+Signed-off-by: Christian Zieth=C3=A9n <Christian.Ziethen@enea.com>
+---
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
+ meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+deleted file mode 100644
+index 2df3713..0000000
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-require dnsmasq.inc
+-
+-SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
+-SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbbfc=
+7b43845cae85ca8ffd024467710"
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/meta=
+-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+new file mode 100644
+index 0000000..b1bef7a
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+@@ -0,0 +1,4 @@
++require dnsmasq.inc
++
++SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
++SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158ea=
+3fca9a83ab55471f981a2097c2f"
+--=20
+1.7.10.4
+
 
