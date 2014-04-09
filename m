@@ -1,37 +1,24 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 807B065DEE
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E69665DEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Apr 2014 07:49:25 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id bs8so2683710wib.11
+	Wed,  9 Apr 2014 07:49:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s397nbaA013382
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 00:49:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=34ovrU61hnIed6x9tTu0OvOTkq9Zha2h4xQtjlYzw44=;
-	b=fjVTrEJRd3z44TeoqkZ7UggY7pdoZHHaIsblWHCisORtkdc2cnwZGW7zi9p/dxYkh/
-	CbxO58jHq9hyn0M5u6BfwH6KQFmU2TZr9j2xJ3jel4WBPG4LV0rcifwxNNObSV7Bw0aD
-	10o+iby0W3dLUVT20X/3deq/OcIqsxnBOruJLQAZl/WA6OcyoRBcPv2YFFXInlYhTIDG
-	XVWY8fMGfCWzo/SVe2SHJB2lbJkfGenGbopZkk1PtQHg01e2bpJsg2DZwttzowCM1OX3
-	S8uY+XQdc5WUn8cmggJqBS4x7eR9ajWjL95c5kQldg0qcntiZuE90WsQW7ET+NvU7RUP
-	4qDA==
-X-Gm-Message-State: ALoCoQk9BxbiBHMH4m6BzDY22mXqJGPJOhv9dm9afAPXyAdvut6G7B9FhglWM+kSkoDj04d+Xkuj
-X-Received: by 10.180.105.132 with SMTP id gm4mr10859706wib.39.1397029766320; 
-	Wed, 09 Apr 2014 00:49:26 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by mx.google.com with ESMTPSA id ff9sm8264094wib.11.2014.04.09.00.49.25
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Apr 2014 00:49:25 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Apr 2014 09:49:18 +0200
-Message-Id: <1397029758-23231-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-filesystems][PATCH] sshfs-fuse: update to 2.5
+	Wed, 9 Apr 2014 00:49:37 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 9 Apr 2014 00:49:36 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Apr 2014 15:50:26 +0800
+Message-ID: <1397029826-16492-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] fbset: fix parallel build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Apr 2014 07:49:26 -0000
+X-List-Received-Date: Wed, 09 Apr 2014 07:49:38 -0000
+Content-Type: text/plain
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+From: Jackie Huang <jackie.huang@windriver.com>
+
+Fix an incorrect dependency in makefile so that we can build
+in parallel.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../sshfs-fuse/{sshfs-fuse_2.4.bb => sshfs-fuse_2.5.bb}              | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-filesystems/recipes-filesystems/sshfs-fuse/{sshfs-fuse_2.4.bb => sshfs-fuse_2.5.bb} (76%)
+ .../fbset-2.1/fbset-2.1-fix-makefile-dep.patch     |   31 ++++++++++++++++++++
+ meta-oe/recipes-support/fbset/fbset_2.1.bb         |    6 ++--
+ 2 files changed, 34 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefile-dep.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.4.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
-similarity index 76%
-rename from meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.4.bb
-rename to meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
-index 2a5546e..722d0ed 100644
---- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.4.bb
-+++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
-@@ -13,6 +13,5 @@ inherit autotools
+diff --git a/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefile-dep.patch b/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefile-dep.patch
+new file mode 100644
+index 0000000..41ab8af
+--- /dev/null
++++ b/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefile-dep.patch
+@@ -0,0 +1,31 @@
++From 3db6782de1de7ca4f1bb9ee7652c4f2808e57539 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Thu, 10 Jan 2013 12:24:33 +0800
++Subject: [PATCH] fbset 2.1 fix makefile dep modes.tab.c
++
++Upstream-Status: Inappropriate [no upstream]
++
++fix the error in parallel build:
++make: *** No rule to make target `modes.tab.h', needed by `lex.yy.o'.  Stop. 
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ Makefile |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 61536c1..09183e5 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -15,7 +15,7 @@ fbset:		fbset.o modes.tab.o lex.yy.o
++ 
++ fbset.o:	fbset.c fbset.h fb.h
++ modes.tab.o:	modes.tab.c fbset.h fb.h
++-lex.yy.o:	lex.yy.c fbset.h modes.tab.h
+++lex.yy.o:	lex.yy.c fbset.h modes.tab.c
++ 
++ lex.yy.c:	modes.l
++ 		$(FLEX) modes.l
++-- 
++1.7.4.1
++
+diff --git a/meta-oe/recipes-support/fbset/fbset_2.1.bb b/meta-oe/recipes-support/fbset/fbset_2.1.bb
+index aa78008..84f35ff 100644
+--- a/meta-oe/recipes-support/fbset/fbset_2.1.bb
++++ b/meta-oe/recipes-support/fbset/fbset_2.1.bb
+@@ -14,12 +14,12 @@ DEPENDS = "bison-native"
+ PR = "r4"
  
- FILES_${PN} += "${libdir}/sshnodelay.so"
+ SRC_URI = "http://ftp.debian.org/debian/pool/main/f/fbset/fbset_2.1.orig.tar.gz \
+-           file://makefile.patch"
++           file://makefile.patch \
++           file://fbset-2.1-fix-makefile-dep.patch \
++"
  
--SRC_URI[md5sum] = "3c7c3647c52ce84d09486f1da3a3ce24"
--SRC_URI[sha256sum] = "3c93ba8522568093c94ff9c5a3763929380dd229365d905769ff82475d774dd1"
+ inherit autotools update-alternatives
+ 
+-PARALLEL_MAKE = ""
 -
-+SRC_URI[md5sum] = "17494910db8383a366b1301e5f5148a9"
-+SRC_URI[sha256sum] = "e9171452e5d0150b9c6a2158fd2e2dcefb5d5d03ba4d208949e00a3a46c6e63e"
+ do_install() {
+     install -d ${D}${sbindir} ${D}${datadir}/man/man8 ${D}${datadir}/man/man5
+     install -m 0755 ${WORKDIR}/${P}/fbset ${D}${sbindir}/fbset.real
 -- 
-1.9.0
+1.7.9.5
 
 
