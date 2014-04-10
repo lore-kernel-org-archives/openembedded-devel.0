@@ -1,34 +1,38 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 44295601A9
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 520B4601A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 02:08:28 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id h18so3206968igc.14
+	Thu, 10 Apr 2014 02:13:11 +0000 (UTC)
+Received: by mail-ie0-f169.google.com with SMTP id to1so3336621ieb.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 19:08:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=CA2EituaHhYrzXarCSVTBVkgkUP9Ir7VRTG0z7g+480=;
-	b=Li9X7xjD4Ww3RZhrsM3YzIjHbc362PbBjIlaMW1courmz7Sodp/D+LTeZvZxz9EwBs
-	U0p85lmfWrMt4/0ZXOoswvReFAhum/rqMUy6SNeugj/1108lG4X2VgjK5Xdj386YmYpY
-	v1wCgn9MDaZ6WwS0xy8slmQB6lTD/6IOxKNvzstfmYTYcSTUz2njinJPMlYHCCkwqLxH
-	4H9T1Kt+T8tl6ktdf3D0w/LGyHUz8nlfTJWvOuNJ1ChIUu0zEPWKgruoOvCGTsEqJyyy
-	7/99K7GAuw+/AFZ8quM2XehA6XTUHerijj0ErHopnHR6m94sEk0fx+MrGSBN8o4FnOsi
-	XGDw==
-MIME-Version: 1.0
-X-Received: by 10.43.145.137 with SMTP id ju9mr10841864icc.36.1397095709875;
-	Wed, 09 Apr 2014 19:08:29 -0700 (PDT)
-Received: by 10.64.230.100 with HTTP; Wed, 9 Apr 2014 19:08:29 -0700 (PDT)
-In-Reply-To: <ED3E0BCACD909541BA94A34C4A164D4C5B3B0981@post.tritech.se>
-References: <CALYKT1gcCmYKqy55T3Xv7qevR2g-EWv-y9dabjzz-D8psdYF2w@mail.gmail.com>
-	<ED3E0BCACD909541BA94A34C4A164D4C5B3B0981@post.tritech.se>
-Date: Thu, 10 Apr 2014 11:08:29 +0900
-Message-ID: <CALYKT1i_qEM=W26LG3My9Xv8rSsou2LgUn_NgHiChMjFFheXxw@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
+	Wed, 09 Apr 2014 19:13:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3/KfcmzDZItcS/OJMcl5X3YztNkMWIeDK9ev4PlywrE=;
+	b=IVSPwU56CrOtYJZhnU9B4K/OgpX45NhjM9gffamqdjRA+x7a64lrMVKzLYO+FiZfSB
+	SBJ7fxV5CImmqyHwD4tM0TaduURyxGHT3fJDsKu69yW9gd0193EsG4qeO8G/ntPeIfwC
+	2arbEETMDyKhpJQEx25xyDg8IlJweoenvn3TkRrUjIVO3VVcwgJYuK+mC//39xMJNCjR
+	Zp0JNB125Z+d0rP4iJpdIxxnoGj0zR9x8PiFpbXtadj2sK+q/NGrq7q5sseO6b7FpBbR
+	6mVqLHnySbbTid7o0ROlVmaMbDRTCVbEjRUBY8xx8TEXD98a1zIzowAei+ScAYbgWfAd
+	DQ1w==
+X-Gm-Message-State: ALoCoQnG2hyfvMB20YHBx7luajtb3uDh/8YeDlN8e0+FdJVKvcJWpRtMpLUR5njzPngDJgLBGD2F
+X-Received: by 10.42.235.197 with SMTP id kh5mr10820604icb.25.1397095992353;
+	Wed, 09 Apr 2014 19:13:12 -0700 (PDT)
+Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id s8sm9664674ige.4.2014.04.09.19.13.11
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 09 Apr 2014 19:13:11 -0700 (PDT)
+From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I use gdb in oe?
+Date: Wed,  9 Apr 2014 22:12:50 -0400
+Message-Id: <1397095971-17039-1-git-send-email-trevor.woerner@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: patches@linaro.org
+Subject: [meta-gnome][PATCH] abiword: force build order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,105 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 02:08:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Apr 2014 02:13:14 -0000
 
-Hi Mats K=E4rrman,
+Every time I try to build abiword my build fails:
 
-Thank you for kind concern!
-I will try your method.
-Thank you very much!
+	make[3]: *** No rule to make target `../goffice-bits2/libgoffice.la', needed by `libabiword-3.0.la'.  Stop.
+	make[3]: Leaving directory
+	`/SSD/build/distroless/tmp/qemuarm-eglibc/work/armv5te-oe-linux-gnueabi/abiword/3.0.0-r0/abiword-3.0.0/src'
 
-Sincerely
-Journeyer
-Seoul
+I've tried a couple things, and this is what works for me.
 
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
+I tried setting PARALLEL_MAKE to "" and it still fails. The odd thing is, the
+Makefiles do show ../goffice-bits2/libgoffice.la as being a dependency of
+libabiword-3.0.la (opt_libs), but it still doesn't guarantee the dependency is
+built ahead of time (in fact, never on my system). Maybe this dependency is
+buried too deep in variables?
 
+Then I thought that maybe it was an autotools-brokensep problem and gave that
+a try too, but it still failed. I even created a patch to change the
+${top_builddir} to ${top_srcdir}, but it still failed.
 
-2014-04-09 16:28 GMT+09:00 Mats K=E4rrman <Mats.Karrman@tritech.se>:
+Trevor Woerner (1):
+  abiword: force build order
 
-> Hi,
->
-> Assuming that you mean to debug programs on your target...
->
-> Prerequisites:
-> - a network connection between your target and your development host (it'=
-s
-> possible to use a tty too).
-> - OE built SDK installed on your host.
-> - gdbserver package installed on your target.
-> - your binary (my-program) on target
-> - an unstripped version of your binary in the working directory on host.
->
-> The exact commands below will vary with the install path of your SDK
-> (/usr/local/oecore-x86_64 in my case)
-> and target specifics (e.g. powerpc, ppce300c3... in my case).
->
-> On target:
-> # gdbserver :2345 my-program
->
-> On host:
-> $ source /usr/local/oecore-x86_64/environment-setup-ppce300c3-oe-linux
-> $ powerpc-oe-linux-gdb my-program
-> (gdb) set sysroot /usr/local/oecore-x86_64/sysroots/ppce300c3-oe-linux
-> (gdb) target remote <target-ip>:2345
-> (gdb) br main
-> (gdb) cont
-> ...
->
-> Good Luck!
-> // Mats
->
-> ________________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org [
-> openembedded-devel-bounces@lists.openembedded.org] on behalf of Journeyer
-> J. Joh [oosaprogrammer@gmail.com]
-> Sent: Tuesday, April 08, 2014 4:20 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] How can I use gdb in oe?
->
-> Hello,
->
-> I use open-embedded in my company.
-> It is used in Qualcomm's communication module - specifically on AP
-> (Qualcomm's chipset is composed of MDM + AP).
->
-> And when I compile oe linux, I use bitbake.
->
-> In this environment I'd like to use gdb to debug applications for this oe
-> linux.
->
-> How can I use gdb in this?
-> I have experience in using gdb in just PC environment. Not in embedded
-> env..
->
-> Thank you very much in advance!
->
-> Sincerely
-> Journeyer
->
-> ----------------------------------------
-> Journeyer J. Joh
-> o o s a p r o g r a m m e r
-> a t
-> g m a i l  d o t  c o m
-> ----------------------------------------
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+-- 
+1.9.0
+
 
