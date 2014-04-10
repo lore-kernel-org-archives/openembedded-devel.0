@@ -1,22 +1,29 @@
-Return-Path: <sgh@sgh.dk>
-Received: from mx-aarh-2.stofanet.dk (mx-aarh-2.stofanet.dk [212.10.10.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 62C7360809
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 93FAB65D85
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 09:13:22 +0000 (UTC)
-Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
-	by mx-aarh-2.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1WYB2w-0003Bf-0K; Thu, 10 Apr 2014 11:13:22 +0200
-Received: from koontz.localnet (localhost [127.0.0.1])
-	by asrock (Postfix) with ESMTPS id D1D327EC32;
-	Thu, 10 Apr 2014 11:13:21 +0200 (CEST)
-From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Apr 2014 11:13:21 +0200
-Message-ID: <8276133.bJdqlryXOd@koontz>
-User-Agent: KMail/4.13 rc (Linux/3.13.0-23-lowlatency; KDE/4.12.97; i686; ; )
+	Thu, 10 Apr 2014 09:37:58 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3A9bwWG027621
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 10 Apr 2014 02:37:58 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
+	Thu, 10 Apr 2014 02:37:57 -0700
+Message-ID: <53466672.5060206@windriver.com>
+Date: Thu, 10 Apr 2014 17:37:54 +0800
+From: Kang Kai <Kai.Kang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-Cc: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.d>
-Subject: [PATCH] wvstreams: Set optimization to -O0 to avoid breaking stack protection.
+To: <openembedded-devel@lists.openembedded.org>
+References: <1397028897-4991-1-git-send-email-kai.kang@windriver.com>
+	<20140410083953.GP2132@jama>
+In-Reply-To: <20140410083953.GP2132@jama>
+X-Originating-IP: [128.224.162.231]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] swig: add native wrapper for SWIGLIB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,31 +37,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 09:13:23 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 10 Apr 2014 09:38:03 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-A description of the bug is here :
-See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=674006
----
- meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On 2014?04?10? 16:39, Martin Jansa wrote:
+> On Wed, Apr 09, 2014 at 03:34:57PM +0800, Kai Kang wrote:
+>> Native swig will read data from hard-coded SWIGLIB or the same
+>> environment variable.
+>>
+>> While using sstate, the hard-coded SWIGLIB will point to the project
+>> that create original sstates. This would cause build issues, so add
+>> a wrapper to set the environment variable SWIGLIB to a relative path
+>> on current sysroot.
+>>
+>> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
+>> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-oe/recipes-devtools/swig/swig.inc | 7 +++++++
+>>   1 file changed, 7 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
+>> index 8e83526..96cd02a 100644
+>> --- a/meta-oe/recipes-devtools/swig/swig.inc
+>> +++ b/meta-oe/recipes-devtools/swig/swig.inc
+>> @@ -50,3 +50,10 @@ do_configure() {
+>>       oe_runconf
+>>   }
+>>   
+>> +def swiglib_relpath(d):
+>> +    swiglib = d.getVar('datadir', True) + "/" + d.getVar('BPN', True) + "/" + d.getVar('PV', True)
+>> +    return os.path.relpath(swiglib, d.getVar('bindir', True))
+>> +
+>> +do_install_append_class-native() {
+>> +       create_wrapper ${D}${bindir}/swig SWIG_LIB='`dirname $''realpath`'/${@swiglib_relpath(d)}
+> This should use 4 spaces for indentation, but I'll fix it while
+> cherry-picking => no need to resend.
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-
-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index ce2b337..869402b 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -19,6 +19,8 @@ SRC_URI[sha256sum] = 
-"8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8eb
- inherit autotools pkgconfig
- 
- PARALLEL_MAKE = ""
-+TARGET_CFLAGS_append = " -O0"
-+TARGET_CXXFLAGS_append = " -O0"
- 
- LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
- 
+Thanks.
+
+--Kai
+
+>
+>> +}
+>> -- 
+>> 1.8.4
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+
+
 -- 
-1.9.1
+Regards,
+Neil | Kai Kang
+
 
