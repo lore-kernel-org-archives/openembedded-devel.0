@@ -1,29 +1,37 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 93FAB65D85
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id DD14965E65
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 09:37:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3A9bwWG027621
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 10 Apr 2014 02:37:58 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
-	Thu, 10 Apr 2014 02:37:57 -0700
-Message-ID: <53466672.5060206@windriver.com>
-Date: Thu, 10 Apr 2014 17:37:54 +0800
-From: Kang Kai <Kai.Kang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Thu, 10 Apr 2014 09:59:56 +0000 (UTC)
+Received: by mail-vc0-f170.google.com with SMTP id hu19so3226773vcb.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 02:59:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=sR/OzfE0cwEIOiBoyQ0kjYzTSux5RFuh2foVQrkDdJM=;
+	b=EIaaLfeJmrFIXQWV9+8cWv2JKCGJtn9cCNP95k2mDd08w59ISFXxnFRhlBnueY9FcG
+	Lm2npI8Ah2tPRcHfqMriDUosBCQE6qALlu1qMd1F2QqSN8i5Sn8w8f42qiV1M6doS8Et
+	y0clNASNyGF9zXf/FJXT/A2W4/mHk96MaesUCXb/I6gYW1zfGK0dgsIEV55xiwE6P/Py
+	mYFy4c5vB0jDkH3ICB9tZhKzdfA5h0OrLgjyYJNwRuqU/emNDRBYrY9n4Z9wiwx32NC5
+	G8ZR5RTkC2ILiSRtK7v0Ez+E+WIpyjnGTcB4BBAOEMY/1YkS57I2PBDw4ImVs5ccyoZQ
+	h40A==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1397028897-4991-1-git-send-email-kai.kang@windriver.com>
-	<20140410083953.GP2132@jama>
-In-Reply-To: <20140410083953.GP2132@jama>
-X-Originating-IP: [128.224.162.231]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] swig: add native wrapper for SWIGLIB
+X-Received: by 10.52.90.37 with SMTP id bt5mr11577650vdb.7.1397123996862; Thu,
+	10 Apr 2014 02:59:56 -0700 (PDT)
+Received: by 10.52.120.4 with HTTP; Thu, 10 Apr 2014 02:59:56 -0700 (PDT)
+In-Reply-To: <20140410082533.GL2132@jama>
+References: <1396860746-17944-1-git-send-email-schnitzeltony@googlemail.com>
+	<1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
+	<20140410082533.GL2132@jama>
+Date: Thu, 10 Apr 2014 11:59:56 +0200
+Message-ID: <CALbNGRSfO06FY6z1VguW1e5VSqhyFn3ssvzxnUY1=e40z4E+HA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-gnome] abiword: workaround compile races by disabling parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,64 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 09:38:03 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Apr 2014 10:00:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 2014?04?10? 16:39, Martin Jansa wrote:
-> On Wed, Apr 09, 2014 at 03:34:57PM +0800, Kai Kang wrote:
->> Native swig will read data from hard-coded SWIGLIB or the same
->> environment variable.
->>
->> While using sstate, the hard-coded SWIGLIB will point to the project
->> that create original sstates. This would cause build issues, so add
->> a wrapper to set the environment variable SWIGLIB to a relative path
->> on current sysroot.
->>
->> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
->> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+On Thu, Apr 10, 2014 at 10:25 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Mon, Apr 07, 2014 at 10:52:26AM +0200, Andreas M=C3=BCller wrote:
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 >> ---
->>   meta-oe/recipes-devtools/swig/swig.inc | 7 +++++++
->>   1 file changed, 7 insertions(+)
+>>  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 5 +++++
+>>  1 file changed, 5 insertions(+)
 >>
->> diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-devtools/swig/swig.inc
->> index 8e83526..96cd02a 100644
->> --- a/meta-oe/recipes-devtools/swig/swig.inc
->> +++ b/meta-oe/recipes-devtools/swig/swig.inc
->> @@ -50,3 +50,10 @@ do_configure() {
->>       oe_runconf
->>   }
->>   
->> +def swiglib_relpath(d):
->> +    swiglib = d.getVar('datadir', True) + "/" + d.getVar('BPN', True) + "/" + d.getVar('PV', True)
->> +    return os.path.relpath(swiglib, d.getVar('bindir', True))
->> +
->> +do_install_append_class-native() {
->> +       create_wrapper ${D}${bindir}/swig SWIG_LIB='`dirname $''realpath`'/${@swiglib_relpath(d)}
-> This should use 4 spaces for indentation, but I'll fix it while
-> cherry-picking => no need to resend.
-
-Thanks.
-
---Kai
-
->
->> +}
->> -- 
->> 1.8.4
+>> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gn=
+ome/recipes-gnome/abiword/abiword_3.0.0.bb
+>> index 69d62ef..875cfd6 100644
+>> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+>> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+>> @@ -24,6 +24,11 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d=
+.getVar('PV',1).split('.')[1]
 >>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>  inherit autotools pkgconfig
+>>
+>> +# TBD: fix Makefile
+>> +# | make[3]: *** No rule to make target `../goffice-bits2/libgoffice.la=
+', needed by `libabiword-3.0.la'.  Stop.
+>> +# | make[3]: *** Waiting for unfinished jobs....
+>> +PARALLEL_MAKE =3D ""
 >
+> BTW: this seems to happen only when something is detected in sysroot
+> (abiword fails in test-dependencies when building in fully-populated
+> sysroot and builds ok with minimal).
 >
+> But maybe it's coincidence..
+>
+Whatever causes this I think you should better take Trevor's patch [1]
+instead of mine. It seems (have not tested) to address the problem
+more specific and reduces build time.
 
+Andreas
 
--- 
-Regards,
-Neil | Kai Kang
-
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/0=
+95138.html
 
