@@ -1,38 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 7128F65D19
+Return-Path: <sgh@sgh.dk>
+Received: from mx-aarh-2.stofanet.dk (mx-aarh-2.stofanet.dk [212.10.10.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 62C7360809
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 08:39:45 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id c13so2776730eek.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 01:39:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Sdq6FcP/yTFP1j3P9/Xqwesc0JDGd7x2RzpgHdvHpnY=;
-	b=FuQ9BJ0a/WhbSwn89A0eqPG/PsZ27+eSXa2Av/HA0B4EF0RvNPYhbIwyamOPObnI1x
-	IMjF3j6AGvli56B0BiUU133UvmKMVW+MUzW6JTufBfa3U0ZyhfyxMpqLqbKb79gDVlp6
-	oCSRGsF1ISPWEIdsSRAZXbI+kfu5y7n1UV2m1IRw2cn5aa9TuZg7Hx56mEfl2V8qxrQb
-	UrMLt1+RDaZ0Makd1eaaGna3xIh86seyUOPiPvqHudUzjXGMJj6GRZojTHUund+QC2D8
-	QchldHEknkuVG59VaXyGPMDHQmzz2c6/EloUs8psb61kcLk83ocvVvhzSGOhdxZRtefG
-	NmjA==
-X-Received: by 10.15.51.141 with SMTP id n13mr19427826eew.17.1397119186847;
-	Thu, 10 Apr 2014 01:39:46 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	x45sm8256236eeu.23.2014.04.10.01.39.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Apr 2014 01:39:45 -0700 (PDT)
-Date: Thu, 10 Apr 2014 10:39:53 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 10 Apr 2014 09:13:22 +0000 (UTC)
+Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
+	by mx-aarh-2.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1WYB2w-0003Bf-0K; Thu, 10 Apr 2014 11:13:22 +0200
+Received: from koontz.localnet (localhost [127.0.0.1])
+	by asrock (Postfix) with ESMTPS id D1D327EC32;
+	Thu, 10 Apr 2014 11:13:21 +0200 (CEST)
+From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140410083953.GP2132@jama>
-References: <1397028897-4991-1-git-send-email-kai.kang@windriver.com>
+Date: Thu, 10 Apr 2014 11:13:21 +0200
+Message-ID: <8276133.bJdqlryXOd@koontz>
+User-Agent: KMail/4.13 rc (Linux/3.13.0-23-lowlatency; KDE/4.12.97; i686; ; )
 MIME-Version: 1.0
-In-Reply-To: <1397028897-4991-1-git-send-email-kai.kang@windriver.com>
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] swig: add native wrapper for SWIGLIB
+Cc: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.d>
+Subject: [PATCH] wvstreams: Set optimization to -O0 to avoid breaking stack protection.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,77 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 08:39:50 -0000
-X-Groupsio-MsgNum: 49156
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="A7FgPGrDEcSmmdo/"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Apr 2014 09:13:23 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---A7FgPGrDEcSmmdo/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+A description of the bug is here :
+See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=674006
+---
+ meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Wed, Apr 09, 2014 at 03:34:57PM +0800, Kai Kang wrote:
-> Native swig will read data from hard-coded SWIGLIB or the same
-> environment variable.
->=20
-> While using sstate, the hard-coded SWIGLIB will point to the project
-> that create original sstates. This would cause build issues, so add
-> a wrapper to set the environment variable SWIGLIB to a relative path
-> on current sysroot.
->=20
-> Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
-> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-oe/recipes-devtools/swig/swig.inc | 7 +++++++
->  1 file changed, 7 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-devtools/swig/swig.inc b/meta-oe/recipes-dev=
-tools/swig/swig.inc
-> index 8e83526..96cd02a 100644
-> --- a/meta-oe/recipes-devtools/swig/swig.inc
-> +++ b/meta-oe/recipes-devtools/swig/swig.inc
-> @@ -50,3 +50,10 @@ do_configure() {
->      oe_runconf
->  }
-> =20
-> +def swiglib_relpath(d):
-> +    swiglib =3D d.getVar('datadir', True) + "/" + d.getVar('BPN', True) =
-+ "/" + d.getVar('PV', True)
-> +    return os.path.relpath(swiglib, d.getVar('bindir', True))
-> +
-> +do_install_append_class-native() {
-> +       create_wrapper ${D}${bindir}/swig SWIG_LIB=3D'`dirname $''realpat=
-h`'/${@swiglib_relpath(d)}
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-
+oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index ce2b337..869402b 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -19,6 +19,8 @@ SRC_URI[sha256sum] = 
+"8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8eb
+ inherit autotools pkgconfig
+ 
+ PARALLEL_MAKE = ""
++TARGET_CFLAGS_append = " -O0"
++TARGET_CXXFLAGS_append = " -O0"
+ 
+ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
+ 
+-- 
+1.9.1
 
-This should use 4 spaces for indentation, but I'll fix it while
-cherry-picking =3D> no need to resend.
-
-> +}
-> --=20
-> 1.8.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---A7FgPGrDEcSmmdo/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNGWNkACgkQN1Ujt2V2gBzCNACgpimmQgcXcfG08AWgXaYFbOzK
-eakAn2gv/S4hrH5DQYi83nPmrJrKwGJS
-=BD8d
------END PGP SIGNATURE-----
-
---A7FgPGrDEcSmmdo/--
