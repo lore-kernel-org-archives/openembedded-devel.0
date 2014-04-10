@@ -1,26 +1,39 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B550A65E6F
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 08:06:00 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3A861DO026919
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 01:06:01 -0700 (PDT)
-Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 10 Apr 2014 01:06:01 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Apr 2014 16:05:56 +0800
-Message-ID: <671510a94c564ebff683cb256f7c75eed4bb2085.1397117000.git.Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1397117000.git.Chong.Lu@windriver.com>
-References: <cover.1397117000.git.Chong.Lu@windriver.com>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D183265E7C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 08:25:26 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c13so2709110eek.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 01:25:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=t4R0/LHnUgKeg5fEosF86Uv5Vu4hpU0IqQ380dURLfs=;
+	b=oEh5TOYfdp7yPhrAXYammcXzmByxqbLq7n6WVIqVXvjpUtO9v19Tvw6E2zSjp+/iqy
+	P+ikkYWV71A9Ce86W4d26UJwf8xL52pDku7HiCG6TAfWJAturgG+Kp4iA+UklVH3hR0z
+	6cIgBcX8Julq+B63Lsq4UQR2Vc0fjBvzn+oz10NpNwQ86NZakMrZdYYS/2tK+hSpx8nc
+	ReQbmP91dmLgjG3ESrh3WjlnLvzPZ629QZeBdApmmMt7c26CLxgQ8qnCpFhjN3xkyQKV
+	FDOCGyTadB8QTVY7vPBER0t4mGjsyngNDC94+K0vVidop2ClB1MsRa06a+yDOtQlTJs3
+	xhBw==
+X-Received: by 10.14.109.201 with SMTP id s49mr565660eeg.88.1397118327122;
+	Thu, 10 Apr 2014 01:25:27 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	u1sm8163954eex.31.2014.04.10.01.25.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Apr 2014 01:25:26 -0700 (PDT)
+Date: Thu, 10 Apr 2014 10:25:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140410082533.GL2132@jama>
+References: <1396860746-17944-1-git-send-email-schnitzeltony@googlemail.com>
+	<1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] lvm2: add explicit selinux support control
+In-Reply-To: <1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Subject: Re: [PATCH][meta-gnome] abiword: workaround compile races by disabling parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +47,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 08:06:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Apr 2014 08:25:27 -0000
+X-Groupsio-MsgNum: 49152
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="HVCoas+krw6dou6l"
+Content-Disposition: inline
 
-package has configure options controlling selinux support,
-so we want to explicitly use them via PACKAGECONFIG.
+--HVCoas+krw6dou6l
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+On Mon, Apr 07, 2014 at 10:52:26AM +0200, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gno=
+me/recipes-gnome/abiword/abiword_3.0.0.bb
+> index 69d62ef..875cfd6 100644
+> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> @@ -24,6 +24,11 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.=
+getVar('PV',1).split('.')[1]
+> =20
+>  inherit autotools pkgconfig
+> =20
+> +# TBD: fix Makefile
+> +# | make[3]: *** No rule to make target `../goffice-bits2/libgoffice.la'=
+, needed by `libabiword-3.0.la'.  Stop.
+> +# | make[3]: *** Waiting for unfinished jobs....
+> +PARALLEL_MAKE =3D ""
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 63d2cdb..c6a9ec0 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -30,6 +30,10 @@ EXTRA_OECONF = "--with-user= \
-                 --with-udev-prefix= \
- "
- 
-+PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-+
-+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
-+
- inherit autotools
- 
- do_install_append() {
--- 
-1.8.1.2
+BTW: this seems to happen only when something is detected in sysroot
+(abiword fails in test-dependencies when building in fully-populated
+sysroot and builds ok with minimal).
 
+But maybe it's coincidence..=20
 
+> +
+>  PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp collab-backe=
+nd-service"
+>  PACKAGECONFIG[spell] =3D "--enable-spell,--disable-spell,enchant"
+>  PACKAGECONFIG[collab-backend-xmpp] =3D "--enable-collab-backend-xmpp,--d=
+isable-collab-backend-xmpp,libgsf libxml2 loudmouth"
+> --=20
+> 1.8.3.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--HVCoas+krw6dou6l
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNGVX0ACgkQN1Ujt2V2gBwdiQCgsPCHyCPMEMsOOmKmRGx+fToR
+oGoAoIb65z3bcBHwfWu9XjktQIt4xxn4
+=0Drr
+-----END PGP SIGNATURE-----
+
+--HVCoas+krw6dou6l--
