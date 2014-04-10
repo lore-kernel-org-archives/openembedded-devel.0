@@ -1,33 +1,31 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
-	[209.85.219.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 280FF65D78
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 13:10:15 +0000 (UTC)
-Received: by mail-oa0-f52.google.com with SMTP id l6so4432072oag.11
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 06:10:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=UXfL5M18F8YPsne/Ih+6PEUDck+Sjqw8/FtMIHjvhnk=;
-	b=Y3ct73eMts4l0pv9ZNdooq727jdBMD4+B0YH3+BBMKNV0ZaW5awg86Dk91JOFXhCXR
-	Oo6NfKgUYF5ZrOSajjTitraXDMgUDsy7ZTABalxL3AgTCxxs5xq8dHfgMqoZsDGphs4v
-	Js4DsfwNF3g/6FK+ObVioX75Ds6QlP3Q5FyOSBSbhlUTO/CeQ1STrCCdWZB1BZOPzuWz
-	uykdDQQLz3J8rJiAvbxRxHumt4o/H7sSPlEXcKj0svXG61DcaeY3bLkEUCAkNCVHeVkE
-	TtP+Y0a6OdLJxU2OZ6U6Z8M5wQQFQ497K3Q/JqPZ4dZcMbriEwsZzyCNmpoDomBR4SOv
-	gvcg==
-MIME-Version: 1.0
-X-Received: by 10.60.65.1 with SMTP id t1mr13046974oes.7.1397135414730; Thu,
-	10 Apr 2014 06:10:14 -0700 (PDT)
-Received: by 10.60.73.165 with HTTP; Thu, 10 Apr 2014 06:10:14 -0700 (PDT)
-In-Reply-To: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
-References: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
-Date: Thu, 10 Apr 2014 09:10:14 -0400
-Message-ID: <CAFZh4h9SFyWK76jsumww+5JPbUzovK+wzcjYbGbAsaCxbmkCGw@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: udev auto-mount not doing fsck
+Return-Path: <kmsywula@ecsmtp.ir.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E80165D21
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 13:19:52 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 10 Apr 2014 06:19:52 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,834,1389772800"; d="scan'208";a="518321949"
+Received: from irvmail001.ir.intel.com ([163.33.26.43])
+	by fmsmga002.fm.intel.com with ESMTP; 10 Apr 2014 06:19:51 -0700
+Received: from irsectmgbld0302.ir.intel.com (irsectmgbld0302.ir.intel.com
+	[163.33.26.92])
+	by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id
+	s3ADJp0R012819; Thu, 10 Apr 2014 14:19:51 +0100
+Received: from irsectmgbld0302.ir.intel.com (localhost [127.0.0.1])
+	by irsectmgbld0302.ir.intel.com with ESMTP id s3ADJpFZ042965;
+	Thu, 10 Apr 2014 14:19:51 +0100
+Received: (from kmsywula@localhost)
+	by irsectmgbld0302.ir.intel.com with œ id s3ADJoqp042957;
+	Thu, 10 Apr 2014 14:19:50 +0100
+From: krzysztof.m.sywula@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Apr 2014 14:19:28 +0100
+Message-Id: <1397135968-42902-1-git-send-email-krzysztof.m.sywula@intel.com>
+X-Mailer: git-send-email 1.8.2
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH v3] dejagnu: recipe taken from openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,58 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 13:10:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Apr 2014 13:19:53 -0000
 
-OK an update.  I decided to stub the automount.rules for the moment to try
-and get things working the old way and I'm seeing some curious behavior.
-The target is running Yocto 1.5 so it is a fairly recent distro.
+From: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
 
-I made an entry in /etc/fstab for my eUSB with the sixth column set to 2.
-On reboot fsck doesn't run.  Hmmm, curious.  I still see the:
+Signed-off-by: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
+---
+ meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
 
-EXT4-fs (sda1): warning: maximal mount count reached, running e2fsck is
-recommended
-EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+new file mode 100644
+index 0000000..f5fe9b9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "GNU unit testing framework, written in Expect and Tcl"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
++SECTION = "devel"
++
++inherit autotools
++
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
++
++SRC_URI[md5sum] = "053f18fd5d00873de365413cab17a666"
++SRC_URI[sha256sum] = "d0fbedef20fb0843318d60551023631176b27ceb1e11de7468a971770d0e048d"
++
++BBCLASSEXTEND = "native"
+-- 
+1.8.2
 
-... messages at boot.
-
-So I do touch /forcefsck and reboot.   Same result.
-shutdown -rF ... same result.
-
-I can't figure out why none of these methods is checking my eUSB drive.
-
-Regards,
-
-Brian
-
-
-
-On Wed, Apr 9, 2014 at 4:53 PM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
-
-> Hi,
->
-> I have a custom board that has a eUSB NAND attached (its a little circuit
-> board with a header Micron e230).
->
-> With the udev-extraconf package installed, udev looks like it
-> automatically mounts my device via the automount.rules (calling mount.sh)
-> on boot.
->
-> I'd like udev to fsck this device before it auto mounts it.  Should I
-> just make or modify a udev rule to get this behavior or is there already
-> another package out there I'm missing that already has rules to do this
-> that I can use?  Don't want to reinvent the wheel if I'm just missing
-> something.
->
-> The eUSB NAND has an ext4 filesystem on it but I'm starting to see some
-> corruption ... possibly from the journal getting messed up from too many
-> improper shutdowns etc.
->
-> Regards,
->
-> Brian
->
-> <http://layers.openembedded.org/layerindex/recipe/629/>
->
 
