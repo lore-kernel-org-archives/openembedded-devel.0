@@ -1,27 +1,36 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A99365E54
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 02:54:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3A2skW4025102
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Apr 2014 19:54:46 -0700 (PDT)
-Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.169.1; Wed, 9 Apr 2014 19:54:46 -0700
-From: Kai Kang <kai.kang@windriver.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Apr 2014 10:54:35 +0800
-Message-ID: <1397098475-17901-4-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1397098475-17901-1-git-send-email-kai.kang@windriver.com>
-References: <1397098475-17901-1-git-send-email-kai.kang@windriver.com>
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 54BDF60702
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 07:57:12 +0000 (UTC)
+Received: by mail-ie0-f174.google.com with SMTP id rp18so3590158iec.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 00:57:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=dG0zFgLvK86QhVN18Ku+kYlXgU+I3fLQDnpHzTi/foI=;
+	b=OcCiY0HTFwVa8agblgjHFXkEZkPMCuuaMOvX7i9LxQ0GktH2VZhC4QoglY5bAiM7OA
+	Qy+GydLmH8TrlnM5/JStdbGb1T52CUf/c8yRLuD6OIFNIerMIp09BPVZgW5oAnpSq6iR
+	d4NpE7o2vIrJsdMjGlWLPhhUeNKx+3fX7rjjq9dxaRTl1qMykjpre/d5TgEYsrXlj3yz
+	5Px+LN+g9UOKh66GuMu9TXax7OpHkGsHxu/YWVQzmOWK5oHvf/ognJakZUO1TaLnrH4E
+	OdWehRxBplV1x7iwyzIcGVm3QmL7vzIhs82o+SrlHxiJUXcMdN9tFqkVtrllbSha4WS3
+	GwdA==
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.231]
-Subject: [PATCH 3/3] smartmontools: add PACKAGECONFIG and runtime dependency
+X-Received: by 10.50.67.3 with SMTP id j3mr896639igt.10.1397116633586; Thu, 10
+	Apr 2014 00:57:13 -0700 (PDT)
+Received: by 10.64.230.100 with HTTP; Thu, 10 Apr 2014 00:57:13 -0700 (PDT)
+In-Reply-To: <CAFZh4h88iMpR0qEpTDvGj9GD0cgwidjP=nb=17AX6mcOMSw4wg@mail.gmail.com>
+References: <CALYKT1gcCmYKqy55T3Xv7qevR2g-EWv-y9dabjzz-D8psdYF2w@mail.gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C5B3B0981@post.tritech.se>
+	<CALYKT1i_qEM=W26LG3My9Xv8rSsou2LgUn_NgHiChMjFFheXxw@mail.gmail.com>
+	<CAFZh4h88iMpR0qEpTDvGj9GD0cgwidjP=nb=17AX6mcOMSw4wg@mail.gmail.com>
+Date: Thu, 10 Apr 2014 16:57:13 +0900
+Message-ID: <CALYKT1j+KdORN4D4vkRbpTJxj-3mtQbgUftVrO3wBCCJ1hMgCQ@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: How can I use gdb in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +44,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 02:54:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Apr 2014 07:57:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Add PACKAGECONFIGs libcap-ng and selinux for smartmontools. And add
-runtime dependency.
+Hi Brian Hutchinson,
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I cannot try now since I am a little busy now though, Thank you very much!
 
-diff --git a/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb b/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-index 66fdb4d..9b9454c 100644
---- a/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-+++ b/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-@@ -16,6 +16,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
-            file://initd.smartd \
-           "
- 
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
-+                   ${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
-+                  "
-+PACKAGECONFIG[libcap-ng] = "--with-libcap-ng=yes,--with-libcap-ng=no,libcap-ng"
-+PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
-+
- SRC_URI[md5sum] = "d44f84081a12cef79cd17f78044351fc"
- SRC_URI[sha256sum] = "486f660579bb0fb4f6b927ded7531cb1f99685c666397377761c5b04dd96065b"
- 
-@@ -29,3 +35,5 @@ do_install_append () {
- 
- INITSCRIPT_NAME = "smartd"
- INITSCRIPT_PARAMS = "start 60 . stop 60 0 1 2 3 4 5 6 ."
-+
-+RDEPENDS_${PN} += "mailx"
--- 
-1.8.4
+I will carefully read your message soon and try using gdb.
 
+Now I must only say thank you!
+
+Sincerely
+Journeyer
+Seoul
+
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
+
+
+2014-04-10 11:25 GMT+09:00 Brian Hutchinson <b.hutchman@gmail.com>:
+
+> Hi Journeyer,
+>
+> I assume you know how to add gdbserver to your root filesystem image or
+> install the gdbserver package on your target.
+>
+> Mats instructions were spot on for connecting to the target.
+>
+> There are a bunch of examples/tutorials that explain attaching to process=
+es
+> etc. like this one:
+> http://sourceware.org/gdb/onlinedocs/gdb/Server.html
+>
+> Regards,
+>
+> Brian
+>
+>
+>
+> On Wed, Apr 9, 2014 at 10:08 PM, Journeyer J. Joh
+> <oosaprogrammer@gmail.com>wrote:
+>
+> > Hi Mats K=E4rrman,
+> >
+> > Thank you for kind concern!
+> > I will try your method.
+> > Thank you very much!
+> >
+> > Sincerely
+> > Journeyer
+> > Seoul
+> >
+> > ----------------------------------------
+> > Journeyer J. Joh
+> > o o s a p r o g r a m m e r
+> > a t
+> > g m a i l  d o t  c o m
+> > ----------------------------------------
+> >
+> >
+> > 2014-04-09 16:28 GMT+09:00 Mats K=E4rrman <Mats.Karrman@tritech.se>:
+> >
+> > > Hi,
+> > >
+> > > Assuming that you mean to debug programs on your target...
+> > >
+> > > Prerequisites:
+> > > - a network connection between your target and your development host
+> > (it's
+> > > possible to use a tty too).
+> > > - OE built SDK installed on your host.
+> > > - gdbserver package installed on your target.
+> > > - your binary (my-program) on target
+> > > - an unstripped version of your binary in the working directory on
+> host.
+> > >
+> > > The exact commands below will vary with the install path of your SDK
+> > > (/usr/local/oecore-x86_64 in my case)
+> > > and target specifics (e.g. powerpc, ppce300c3... in my case).
+> > >
+> > > On target:
+> > > # gdbserver :2345 my-program
+> > >
+> > > On host:
+> > > $ source /usr/local/oecore-x86_64/environment-setup-ppce300c3-oe-linu=
+x
+> > > $ powerpc-oe-linux-gdb my-program
+> > > (gdb) set sysroot /usr/local/oecore-x86_64/sysroots/ppce300c3-oe-linu=
+x
+> > > (gdb) target remote <target-ip>:2345
+> > > (gdb) br main
+> > > (gdb) cont
+> > > ...
+> > >
+> > > Good Luck!
+> > > // Mats
+> > >
+> > > ________________________________________
+> > > From: openembedded-devel-bounces@lists.openembedded.org [
+> > > openembedded-devel-bounces@lists.openembedded.org] on behalf of
+> > Journeyer
+> > > J. Joh [oosaprogrammer@gmail.com]
+> > > Sent: Tuesday, April 08, 2014 4:20 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: [oe] How can I use gdb in oe?
+> > >
+> > > Hello,
+> > >
+> > > I use open-embedded in my company.
+> > > It is used in Qualcomm's communication module - specifically on AP
+> > > (Qualcomm's chipset is composed of MDM + AP).
+> > >
+> > > And when I compile oe linux, I use bitbake.
+> > >
+> > > In this environment I'd like to use gdb to debug applications for thi=
+s
+> oe
+> > > linux.
+> > >
+> > > How can I use gdb in this?
+> > > I have experience in using gdb in just PC environment. Not in embedde=
+d
+> > > env..
+> > >
+> > > Thank you very much in advance!
+> > >
+> > > Sincerely
+> > > Journeyer
+> > >
+> > > ----------------------------------------
+> > > Journeyer J. Joh
+> > > o o s a p r o g r a m m e r
+> > > a t
+> > > g m a i l  d o t  c o m
+> > > ----------------------------------------
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
