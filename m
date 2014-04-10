@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id D183265E7C
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 2220965DF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 08:25:26 +0000 (UTC)
-Received: by mail-ee0-f51.google.com with SMTP id c13so2709110eek.38
+	Thu, 10 Apr 2014 08:28:18 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id b57so2679420eek.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 01:25:27 -0700 (PDT)
+	Thu, 10 Apr 2014 01:28:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=t4R0/LHnUgKeg5fEosF86Uv5Vu4hpU0IqQ380dURLfs=;
-	b=oEh5TOYfdp7yPhrAXYammcXzmByxqbLq7n6WVIqVXvjpUtO9v19Tvw6E2zSjp+/iqy
-	P+ikkYWV71A9Ce86W4d26UJwf8xL52pDku7HiCG6TAfWJAturgG+Kp4iA+UklVH3hR0z
-	6cIgBcX8Julq+B63Lsq4UQR2Vc0fjBvzn+oz10NpNwQ86NZakMrZdYYS/2tK+hSpx8nc
-	ReQbmP91dmLgjG3ESrh3WjlnLvzPZ629QZeBdApmmMt7c26CLxgQ8qnCpFhjN3xkyQKV
-	FDOCGyTadB8QTVY7vPBER0t4mGjsyngNDC94+K0vVidop2ClB1MsRa06a+yDOtQlTJs3
-	xhBw==
-X-Received: by 10.14.109.201 with SMTP id s49mr565660eeg.88.1397118327122;
-	Thu, 10 Apr 2014 01:25:27 -0700 (PDT)
+	bh=Ygf0wCdraLMypWthasWq87tHD+KEglIJqDjNKfcnsRU=;
+	b=Bo04go7Ig4vTyvEf8bntcnhGeixlO1svgdFvgRAdzGcfAhwDhL0MTF3PcPqLY5mK13
+	HQ708c3YU+hKXPuzQ3FhFKXmBtKm0Q/vGe5VM2+RhE8kGmzEo0F2D52NWnrz3xT5nlA4
+	4ux8Yem8cvI/ahP8TJbBJO9MkMZgWRqhZlFzq2KEtUKBXYUMluXuD/P4R92MGBkw/Oau
+	XB5UQolmQkYlVVwXXpuJF4yOYV6M4i49cipIfTSrbHFc7GbQJkUy97Uf9cxIiC7EvAew
+	sbTCMYc2IxNkdKcmrnxKZ288PEQ8qo6zWHl0TJqr3n8vBuWm8PQ6xGY3lxCdcY69fqi1
+	iG2A==
+X-Received: by 10.14.214.68 with SMTP id b44mr19403385eep.0.1397118499412;
+	Thu, 10 Apr 2014 01:28:19 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	u1sm8163954eex.31.2014.04.10.01.25.25
+	o4sm8199029eef.20.2014.04.10.01.28.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Apr 2014 01:25:26 -0700 (PDT)
-Date: Thu, 10 Apr 2014 10:25:33 +0200
+	Thu, 10 Apr 2014 01:28:18 -0700 (PDT)
+Date: Thu, 10 Apr 2014 10:28:26 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140410082533.GL2132@jama>
-References: <1396860746-17944-1-git-send-email-schnitzeltony@googlemail.com>
-	<1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20140410082826.GM2132@jama>
+References: <1396938662-31887-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
+In-Reply-To: <1396938662-31887-1-git-send-email-jackie.huang@windriver.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [PATCH][meta-gnome] abiword: workaround compile races by disabling parallel make
+Subject: Re: [meta-oe][PATCH] bonnie++: update to version 1.03e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,53 +46,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 08:25:27 -0000
-X-Groupsio-MsgNum: 49152
+X-List-Received-Date: Thu, 10 Apr 2014 08:28:21 -0000
+X-Groupsio-MsgNum: 49153
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="HVCoas+krw6dou6l"
+	protocol="application/pgp-signature"; boundary="/TUrtqMIkCP4YtJm"
 Content-Disposition: inline
 
---HVCoas+krw6dou6l
-Content-Type: text/plain; charset=iso-8859-1
+--/TUrtqMIkCP4YtJm
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 07, 2014 at 10:52:26AM +0200, Andreas M=FCller wrote:
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 5 +++++
->  1 file changed, 5 insertions(+)
+On Tue, Apr 08, 2014 at 02:31:02PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
 >=20
-> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gno=
-me/recipes-gnome/abiword/abiword_3.0.0.bb
-> index 69d62ef..875cfd6 100644
-> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-> @@ -24,6 +24,11 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.=
-getVar('PV',1).split('.')[1]
-> =20
->  inherit autotools pkgconfig
-> =20
-> +# TBD: fix Makefile
-> +# | make[3]: *** No rule to make target `../goffice-bits2/libgoffice.la'=
-, needed by `libabiword-3.0.la'.  Stop.
-> +# | make[3]: *** Waiting for unfinished jobs....
-> +PARALLEL_MAKE =3D ""
+> Changes:
+> * use BPN in the file name in SRC_URI.
+> * install binaries in bindir and sbindir instead of base_bindir and base_=
+sbindir.
 
-BTW: this seems to happen only when something is detected in sysroot
-(abiword fails in test-dependencies when building in fully-populated
-sysroot and builds ok with minimal).
+Please use -M when sending renames.
 
-But maybe it's coincidence..=20
-
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   32 --------------=
+------
+>  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb |   30 ++++++++++++++=
+++++
+>  2 files changed, 30 insertions(+), 32 deletions(-)
+>  delete mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+>  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+>=20
+> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb b/meta-oe=
+/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> deleted file mode 100644
+> index bff0d72..0000000
+> --- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> +++ /dev/null
+> @@ -1,32 +0,0 @@
+> -SUMMARY =3D "Tests large file IO and creation/deletion of small files"
+> -HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150=
+ae9cc3ee0"
+> -
+> -SRC_URI =3D "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \
+> -           file://gcc-4.3-fixes.patch \
+> -"
+> -SRC_URI[md5sum] =3D "77a1ba78f37bdd7f024b67e1e36ad151"
+> -SRC_URI[sha256sum] =3D "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac8=
+9396043b49612a26"
+> -
+> -inherit autotools
+> -
+> -SCRIPTS =3D "bon_csv2html bon_csv2txt"
+> -EXES =3D "bonnie++ zcav"
+> -
+> -TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> -
+> -do_install () {
+> -    install -d ${D}/bin
+> -    install -d ${D}/sbin
+> -    install -m 0755 ${EXES} ${D}/sbin
+> -    install -m 0755 ${SCRIPTS} ${D}/bin
+> -}
+> -
+> -PACKAGES =3D+ "bonnie-scripts"
+> -
+> -FILES_${PN} =3D "${base_sbindir}"
+> -FILES_bonnie-scripts =3D "${base_bindir}"
+> -
+> -
+> -
+> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb b/meta-oe=
+/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> new file mode 100644
+> index 0000000..b986823
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY =3D "Tests large file IO and creation/deletion of small files"
+> +HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
+> +SECTION =3D "benchmark/tests"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150=
+ae9cc3ee0"
 > +
->  PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp collab-backe=
-nd-service"
->  PACKAGECONFIG[spell] =3D "--enable-spell,--disable-spell,enchant"
->  PACKAGECONFIG[collab-backend-xmpp] =3D "--enable-collab-backend-xmpp,--d=
-isable-collab-backend-xmpp,libgsf libxml2 loudmouth"
+> +SRC_URI =3D "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
+> +           file://gcc-4.3-fixes.patch \
+> +"
+> +SRC_URI[md5sum] =3D "750aa5b5051263a99c6c195888c74968"
+> +SRC_URI[sha256sum] =3D "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876=
+df8721f01ba2e2cb"
+> +
+> +inherit autotools
+> +
+> +SCRIPTS =3D "bon_csv2html bon_csv2txt"
+> +EXES =3D "bonnie++ zcav"
+> +
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> +
+> +do_install () {
+> +	install -d ${D}/${bindir}
+> +	install -d ${D}/${sbindir}
+> +	install -m 0755 ${EXES} ${D}/${sbindir}
+> +	install -m 0755 ${SCRIPTS} ${D}/${bindir}
+> +}
+> +
+> +PACKAGES =3D+ "bonnie-scripts"
+> +
+> +FILES_${PN} =3D "${sbindir}"
+> +FILES_bonnie-scripts =3D "${bindir}"
 > --=20
-> 1.8.3.1
+> 1.7.9.5
 >=20
 > --=20
 > _______________________________________________
@@ -104,16 +170,16 @@ isable-collab-backend-xmpp,libgsf libxml2 loudmouth"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---HVCoas+krw6dou6l
+--/TUrtqMIkCP4YtJm
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNGVX0ACgkQN1Ujt2V2gBwdiQCgsPCHyCPMEMsOOmKmRGx+fToR
-oGoAoIb65z3bcBHwfWu9XjktQIt4xxn4
-=0Drr
+iEYEARECAAYFAlNGVioACgkQN1Ujt2V2gBzl2ACfYB/DPRUOfMJuTCtWgkWFYZsd
+fvEAoKF2qevW6YF1FGNBjDo+o2TInS8f
+=sPL4
 -----END PGP SIGNATURE-----
 
---HVCoas+krw6dou6l--
+--/TUrtqMIkCP4YtJm--
