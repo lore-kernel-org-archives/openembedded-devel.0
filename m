@@ -1,37 +1,31 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
-	[209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id DD14965E65
+Return-Path: <kmsywula@ecsmtp.ir.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C31B65D6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 09:59:56 +0000 (UTC)
-Received: by mail-vc0-f170.google.com with SMTP id hu19so3226773vcb.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 02:59:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=sR/OzfE0cwEIOiBoyQ0kjYzTSux5RFuh2foVQrkDdJM=;
-	b=EIaaLfeJmrFIXQWV9+8cWv2JKCGJtn9cCNP95k2mDd08w59ISFXxnFRhlBnueY9FcG
-	Lm2npI8Ah2tPRcHfqMriDUosBCQE6qALlu1qMd1F2QqSN8i5Sn8w8f42qiV1M6doS8Et
-	y0clNASNyGF9zXf/FJXT/A2W4/mHk96MaesUCXb/I6gYW1zfGK0dgsIEV55xiwE6P/Py
-	mYFy4c5vB0jDkH3ICB9tZhKzdfA5h0OrLgjyYJNwRuqU/emNDRBYrY9n4Z9wiwx32NC5
-	G8ZR5RTkC2ILiSRtK7v0Ez+E+WIpyjnGTcB4BBAOEMY/1YkS57I2PBDw4ImVs5ccyoZQ
-	h40A==
-MIME-Version: 1.0
-X-Received: by 10.52.90.37 with SMTP id bt5mr11577650vdb.7.1397123996862; Thu,
-	10 Apr 2014 02:59:56 -0700 (PDT)
-Received: by 10.52.120.4 with HTTP; Thu, 10 Apr 2014 02:59:56 -0700 (PDT)
-In-Reply-To: <20140410082533.GL2132@jama>
-References: <1396860746-17944-1-git-send-email-schnitzeltony@googlemail.com>
-	<1396860746-17944-2-git-send-email-schnitzeltony@googlemail.com>
-	<20140410082533.GL2132@jama>
-Date: Thu, 10 Apr 2014 11:59:56 +0200
-Message-ID: <CALbNGRSfO06FY6z1VguW1e5VSqhyFn3ssvzxnUY1=e40z4E+HA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-gnome] abiword: workaround compile races by disabling parallel make
+	Thu, 10 Apr 2014 10:07:05 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 10 Apr 2014 03:06:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,833,1389772800"; d="scan'208";a="510807868"
+Received: from irvmail001.ir.intel.com ([163.33.26.43])
+	by fmsmga001.fm.intel.com with ESMTP; 10 Apr 2014 03:06:31 -0700
+Received: from irsectmgbld0302.ir.intel.com (irsectmgbld0302.ir.intel.com
+	[163.33.26.92])
+	by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id
+	s3AA6VUD024293; Thu, 10 Apr 2014 11:06:31 +0100
+Received: from irsectmgbld0302.ir.intel.com (localhost [127.0.0.1])
+	by irsectmgbld0302.ir.intel.com with ESMTP id s3AA6UFP037507;
+	Thu, 10 Apr 2014 11:06:30 +0100
+Received: (from kmsywula@localhost)
+	by irsectmgbld0302.ir.intel.com with œ id s3AA6Uav037502;
+	Thu, 10 Apr 2014 11:06:30 +0100
+From: krzysztof.m.sywula@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Apr 2014 11:05:14 +0100
+Message-Id: <1397124314-37150-1-git-send-email-krzysztof.m.sywula@intel.com>
+X-Mailer: git-send-email 1.8.2
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] dejagnu: recipe taken from openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,46 +39,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 10:00:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Apr 2014 10:07:08 -0000
 
-On Thu, Apr 10, 2014 at 10:25 AM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Mon, Apr 07, 2014 at 10:52:26AM +0200, Andreas M=C3=BCller wrote:
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 5 +++++
->>  1 file changed, 5 insertions(+)
->>
->> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gn=
-ome/recipes-gnome/abiword/abiword_3.0.0.bb
->> index 69d62ef..875cfd6 100644
->> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
->> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
->> @@ -24,6 +24,11 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d=
-.getVar('PV',1).split('.')[1]
->>
->>  inherit autotools pkgconfig
->>
->> +# TBD: fix Makefile
->> +# | make[3]: *** No rule to make target `../goffice-bits2/libgoffice.la=
-', needed by `libabiword-3.0.la'.  Stop.
->> +# | make[3]: *** Waiting for unfinished jobs....
->> +PARALLEL_MAKE =3D ""
->
-> BTW: this seems to happen only when something is detected in sysroot
-> (abiword fails in test-dependencies when building in fully-populated
-> sysroot and builds ok with minimal).
->
-> But maybe it's coincidence..
->
-Whatever causes this I think you should better take Trevor's patch [1]
-instead of mine. It seems (have not tested) to address the problem
-more specific and reduces build time.
+From: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
 
-Andreas
+Signed-off-by: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
+---
+ meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb |  3 +++
+ meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb        | 12 ++++++++++++
+ 2 files changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+ create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
 
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/0=
-95138.html
+diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+new file mode 100644
+index 0000000..23cc10e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dejagnu/dejagnu-native_1.4.4.bb
+@@ -0,0 +1,3 @@
++require dejagnu_${PV}.bb
++S = "${WORKDIR}/dejagnu-${PV}"
++inherit native
+diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+new file mode 100644
+index 0000000..b202ae4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "GNU unit testing framework, written in Expect and Tcl"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
++SECTION = "devel"
++PR = "r1"
++
++inherit autotools
++
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "053f18fd5d00873de365413cab17a666"
++SRC_URI[sha256sum] = "d0fbedef20fb0843318d60551023631176b27ceb1e11de7468a971770d0e048d"
+-- 
+1.8.2
+
 
