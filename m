@@ -1,37 +1,33 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f50.google.com (mail-oa0-f50.google.com
-	[209.85.219.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 87A7465D65
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 55D7B65E8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 18:00:19 +0000 (UTC)
-Received: by mail-oa0-f50.google.com with SMTP id i7so4848599oag.37
+	Thu, 10 Apr 2014 18:25:41 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id ur14so8138726igb.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
+	Thu, 10 Apr 2014 11:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=evQT4VThYYP0JHgMfsxS2plSzTsL2fxFjzai2M1DwF0=;
-	b=C7NYYqy/kk+CDFfCb+Nu1oaOZMIaqizWTTghFVXS+jkYt/XzT9YAfAQw68yqsMPS6s
-	0731oI2skmy+UBzzPcGtILlPx2Qu7vtTIZkjsTv+2YTg4+Z1PEbIV1CLkPdi8zl8ry9Y
-	TiQiIoXgd1Ni8j+EU9MURtNsUN87/erBjb9KeINjtYLIulqmrDg8AW8DcIiM4jTZyHZL
-	AsvPL4EdH+yAK1SPEeK1ojMDO4bViJEBFEE4DsUUpWOEsTUChIet82POxN73SKax7Q2K
-	4UZcNCJmzoSR4I5ZumiIvfK9k2+bDQtSNC3Stfze8jBLUJ+0UvfF91RLDHo8e8MAvJVs
-	2Y1A==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=atVEqEXosjFipz2rAkeUKPbrXryZZk+/bZNGeiUoaCE=;
+	b=XnPXsQ1yZWxIadH+lQlyHOD9BGa6xI8qZKyUUKTvAf+pZ0CYjXEGj1ZdDGSbPBZiOm
+	JiM3Kxk7gFfE7j10yNOEzzZ7urhrWf6l8goR7I/ofCEr3PfhZJussON+UXFEeuU0abda
+	n9gCnFzBdMjtsqOS8IkvfALlznNwJPUmRXehLK4LqRhUUVxlfS/bAF0bqynrbS5s7DPo
+	YMek0h7/OongSFLXQfvjr5ATtl53JZrXYdC2y/OSwZv/4q4wzRrBl/jMp8LOMnHhxL3C
+	nIC4vqjuNplW/l1kh5qooXQh5r/zPmw4VGR1jB83Ac+5i/ueVxTusONSSTjXnT9s9Jb7
+	ztDQ==
+X-Received: by 10.50.78.201 with SMTP id d9mr12467481igx.17.1397154342547;
+	Thu, 10 Apr 2014 11:25:42 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.60.135.226 with SMTP id pv2mr2753584oeb.62.1397152819304;
-	Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
-Received: by 10.60.73.165 with HTTP; Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
-In-Reply-To: <20140410165626.GQ3370@denix.org>
-References: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
-	<CAFZh4h9SFyWK76jsumww+5JPbUzovK+wzcjYbGbAsaCxbmkCGw@mail.gmail.com>
-	<li6b0g$9m6$1@ger.gmane.org>
-	<CAFZh4h8oAnNZfswMF+6tf5Byxxc+B0weLLNMQeudLpcdRtmyUg@mail.gmail.com>
-	<20140410165626.GQ3370@denix.org>
-Date: Thu, 10 Apr 2014 14:00:19 -0400
-Message-ID: <CAFZh4h_HaC=rRfgZ_8ibN2XrQdah2y1VWwpj6nqaGVd-_mfuCg@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: udev auto-mount not doing fsck
+Received: by 10.50.229.14 with HTTP; Thu, 10 Apr 2014 11:25:12 -0700 (PDT)
+In-Reply-To: <8276133.bJdqlryXOd@koontz>
+References: <8276133.bJdqlryXOd@koontz>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Apr 2014 11:25:12 -0700
+Message-ID: <CAMKF1soK2LzuAwC9ZetkDRruuSn7nc3SWz_WsTBTeaiJzRWXPw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] wvstreams: Set optimization to -O0 to avoid breaking stack protection.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +41,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 18:00:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 10 Apr 2014 18:25:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 10, 2014 at 12:56 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+On Thu, Apr 10, 2014 at 2:13 AM, S=C3=B8ren Holm <sgh@sgh.dk> wrote:
+> A description of the bug is here :
+> See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D674006
+> ---
+>  meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/met=
+a-
+> oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+> index ce2b337..869402b 100644
+> --- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+> +++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+> @@ -19,6 +19,8 @@ SRC_URI[sha256sum] =3D
+> "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8eb
+>  inherit autotools pkgconfig
+>
+>  PARALLEL_MAKE =3D ""
+> +TARGET_CFLAGS_append =3D " -O0"
+> +TARGET_CXXFLAGS_append =3D " -O0"
+>
 
-> Brian,
->
-> Be careful, with your eUSB storage device cold-plugged (available on boot)
-> you may run into a race condition, if you initially mount your rootfs in
-> read-only mode and then re-mount in read-write mode during boot. One of the
-> proposed solutions:
->
-> http://thread.gmane.org/gmane.comp.handhelds.openembedded.core/50124
+Disabling optimizations all the way is probably a bad idea. As
+suggested in the bugs can you just disable
+few of optimizations like
+
+TARGET_CFLAGS +=3D "-fno-tree-dce -fno-optimize-sibling-calls"
+TARGET_CXXFLAGS +=3D "-fno-tree-dce -fno-optimize-sibling-calls"
+
+>  LDFLAGS_append =3D " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
 >
 > --
-> Denys
+> 1.9.1
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
-At the moment the rootfs is rw in NOR.  In the future I plan for it to be
-squashfs (ro) with a union overlay that is rw ubifs for persistent stuff.
-This is to help protect the rootfs from getting corrupted or accidentally
-hosed up during an update etc.
-
-So I could see where the race condition you mentioned could happen maybe in
-that case but I'm not quite following (yet) how it could happen currently
-in rw mode.  I guess you're saying there is a point where the rootfs could
-be ro and so the udev rule has no mount point to hang the eUSB on ... If
-I'm picking up what you're laying down ('if' being the key word :) )
-
-This eUSB is intended to stay on the board at all times and not be hot
-plugged ... but it is socketed (but board is buried in an enclosure) so it
-could be replaced if needed by a technician.
-
-I'll study that patch you mentioned more when I get some time (in SCRUM
-meeting at the time ... joy).
-
-Regards,
-
-Brian
 
