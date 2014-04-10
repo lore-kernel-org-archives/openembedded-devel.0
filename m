@@ -1,41 +1,35 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 52C9465E61
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
+	[209.85.219.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A1BF6059B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 02:13:19 +0000 (UTC)
-Received: by mail-ig0-f176.google.com with SMTP id uy17so7224473igb.3
+	Thu, 10 Apr 2014 02:25:14 +0000 (UTC)
+Received: by mail-oa0-f44.google.com with SMTP id n16so3754427oag.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Apr 2014 19:13:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=LYTS2hbQDFEns5D6qP8XFHB42/GT7MAfC5ANBYnHnco=;
-	b=lVWnIbOZqazrE2FdYoTvei0MkDy6ugGNSfseJG/6RIbtL7asdtoIULsMnqDolMLnbT
-	n4LPWjh9iW2wPfN2PUfq7u43fGX0ua8QIeckWgXLyfUwzCDAVIK0v3IL8UV6xDMO6NI8
-	pcvAcZVuNsyPunoeaC4d6hVxv+iPJYgpuTmZOVn8GkweXBk3+2rY/Q1zJIf/zRqQXERo
-	q5WQGQ9T3KjCOqiijtQNJSEQ3z61W2zAMBsbuFrcXuR83uIz8YBYZnmnflvabPqlzHCJ
-	o+n+5WENLdYGlE3L3c13MAy4jhe4qE+x8PzrXa3wAh60gAm6mGeBOPoqD9yxfPfj/6qT
-	rFMQ==
-X-Gm-Message-State: ALoCoQmq3DtYcS3Zl6OG1uneQSis1bTCADgHXbUG5jhvxONu0tA22Z0uqxQk5ai0cmexwAE0Gxp1
-X-Received: by 10.50.32.70 with SMTP id g6mr13717180igi.0.1397096000526;
-	Wed, 09 Apr 2014 19:13:20 -0700 (PDT)
-Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158])
-	by mx.google.com with ESMTPSA id s8sm9664674ige.4.2014.04.09.19.13.19
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Apr 2014 19:13:20 -0700 (PDT)
-From: Trevor Woerner <trevor.woerner@linaro.org>
+	Wed, 09 Apr 2014 19:25:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=oY8iBYMsN6eK74cdIDXe0s9bUR5azcSDjycGwu18MsI=;
+	b=KweuTGiimX8n/aCnk6VIjQGJmygph8PqLQWPSHDil5HEK+C4jKjuWqwl+p0GmHrKHj
+	aGT1n1luNxL5U2HKYgTLORBi1657piSQ0ubrkcbKAFmzvmqWXwGQI7JGZqOuzVDiPZga
+	RTP4WCxEo9BNF4uD1sYGpuiqAesjfxH3lEOHgiLfNrSzjK3Ck+UY0wBg9N2SU+pDobuw
+	cb4ATJraqhlhFB1yp7mRtpoDBX1f95WWi9N587ZZXd8OVryVVb1UKlT6wVwYgNqhotVV
+	TPPb7qeW1GEebqpBul9kTkqipu0KkG7uCN3+NZvL9+gXyepZUgbPtpkMfmVI5CgAfU6w
+	WjuQ==
+MIME-Version: 1.0
+X-Received: by 10.60.76.194 with SMTP id m2mr11646656oew.47.1397096715159;
+	Wed, 09 Apr 2014 19:25:15 -0700 (PDT)
+Received: by 10.60.73.165 with HTTP; Wed, 9 Apr 2014 19:25:15 -0700 (PDT)
+In-Reply-To: <CALYKT1i_qEM=W26LG3My9Xv8rSsou2LgUn_NgHiChMjFFheXxw@mail.gmail.com>
+References: <CALYKT1gcCmYKqy55T3Xv7qevR2g-EWv-y9dabjzz-D8psdYF2w@mail.gmail.com>
+	<ED3E0BCACD909541BA94A34C4A164D4C5B3B0981@post.tritech.se>
+	<CALYKT1i_qEM=W26LG3My9Xv8rSsou2LgUn_NgHiChMjFFheXxw@mail.gmail.com>
+Date: Wed, 9 Apr 2014 22:25:15 -0400
+Message-ID: <CAFZh4h88iMpR0qEpTDvGj9GD0cgwidjP=nb=17AX6mcOMSw4wg@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Apr 2014 22:12:51 -0400
-Message-Id: <1397095971-17039-2-git-send-email-trevor.woerner@linaro.org>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1397095971-17039-1-git-send-email-trevor.woerner@linaro.org>
-References: <1397095971-17039-1-git-send-email-trevor.woerner@linaro.org>
-Cc: patches@linaro.org
-Subject: [meta-gnome][PATCH] abiword: force build order
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: How can I use gdb in oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,36 +43,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 02:13:20 -0000
+X-List-Received-Date: Thu, 10 Apr 2014 02:25:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-There is a race condition whereby "libgoffice.la" must be built (and exist)
-before the rest of the code in "src" is built.
+Hi Journeyer,
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
----
- meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+I assume you know how to add gdbserver to your root filesystem image or
+install the gdbserver package on your target.
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-index 69d62ef..073622a 100644
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-+++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-@@ -50,6 +50,14 @@ do_configure() {
-     autotools_do_configure
- }
- 
-+do_compile() {
-+    cd ${S}/goffice-bits2
-+    make goffice-paths.h
-+    make libgoffice.la
-+    cd ${S}
-+    oe_runmake
-+}
-+
- PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
- 
- FILES_${PN} += " \
--- 
-1.9.0
+Mats instructions were spot on for connecting to the target.
 
+There are a bunch of examples/tutorials that explain attaching to processes
+etc. like this one:
+http://sourceware.org/gdb/onlinedocs/gdb/Server.html
+
+Regards,
+
+Brian
+
+
+
+On Wed, Apr 9, 2014 at 10:08 PM, Journeyer J. Joh
+<oosaprogrammer@gmail.com>wrote:
+
+> Hi Mats K=E4rrman,
+>
+> Thank you for kind concern!
+> I will try your method.
+> Thank you very much!
+>
+> Sincerely
+> Journeyer
+> Seoul
+>
+> ----------------------------------------
+> Journeyer J. Joh
+> o o s a p r o g r a m m e r
+> a t
+> g m a i l  d o t  c o m
+> ----------------------------------------
+>
+>
+> 2014-04-09 16:28 GMT+09:00 Mats K=E4rrman <Mats.Karrman@tritech.se>:
+>
+> > Hi,
+> >
+> > Assuming that you mean to debug programs on your target...
+> >
+> > Prerequisites:
+> > - a network connection between your target and your development host
+> (it's
+> > possible to use a tty too).
+> > - OE built SDK installed on your host.
+> > - gdbserver package installed on your target.
+> > - your binary (my-program) on target
+> > - an unstripped version of your binary in the working directory on host=
+.
+> >
+> > The exact commands below will vary with the install path of your SDK
+> > (/usr/local/oecore-x86_64 in my case)
+> > and target specifics (e.g. powerpc, ppce300c3... in my case).
+> >
+> > On target:
+> > # gdbserver :2345 my-program
+> >
+> > On host:
+> > $ source /usr/local/oecore-x86_64/environment-setup-ppce300c3-oe-linux
+> > $ powerpc-oe-linux-gdb my-program
+> > (gdb) set sysroot /usr/local/oecore-x86_64/sysroots/ppce300c3-oe-linux
+> > (gdb) target remote <target-ip>:2345
+> > (gdb) br main
+> > (gdb) cont
+> > ...
+> >
+> > Good Luck!
+> > // Mats
+> >
+> > ________________________________________
+> > From: openembedded-devel-bounces@lists.openembedded.org [
+> > openembedded-devel-bounces@lists.openembedded.org] on behalf of
+> Journeyer
+> > J. Joh [oosaprogrammer@gmail.com]
+> > Sent: Tuesday, April 08, 2014 4:20 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] How can I use gdb in oe?
+> >
+> > Hello,
+> >
+> > I use open-embedded in my company.
+> > It is used in Qualcomm's communication module - specifically on AP
+> > (Qualcomm's chipset is composed of MDM + AP).
+> >
+> > And when I compile oe linux, I use bitbake.
+> >
+> > In this environment I'd like to use gdb to debug applications for this =
+oe
+> > linux.
+> >
+> > How can I use gdb in this?
+> > I have experience in using gdb in just PC environment. Not in embedded
+> > env..
+> >
+> > Thank you very much in advance!
+> >
+> > Sincerely
+> > Journeyer
+> >
+> > ----------------------------------------
+> > Journeyer J. Joh
+> > o o s a p r o g r a m m e r
+> > a t
+> > g m a i l  d o t  c o m
+> > ----------------------------------------
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
