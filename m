@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 2220965DF1
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 4468A65E53
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 08:28:18 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2679420eek.7
+	Thu, 10 Apr 2014 08:30:17 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so2730175eei.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 01:28:19 -0700 (PDT)
+	Thu, 10 Apr 2014 01:30:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ygf0wCdraLMypWthasWq87tHD+KEglIJqDjNKfcnsRU=;
-	b=Bo04go7Ig4vTyvEf8bntcnhGeixlO1svgdFvgRAdzGcfAhwDhL0MTF3PcPqLY5mK13
-	HQ708c3YU+hKXPuzQ3FhFKXmBtKm0Q/vGe5VM2+RhE8kGmzEo0F2D52NWnrz3xT5nlA4
-	4ux8Yem8cvI/ahP8TJbBJO9MkMZgWRqhZlFzq2KEtUKBXYUMluXuD/P4R92MGBkw/Oau
-	XB5UQolmQkYlVVwXXpuJF4yOYV6M4i49cipIfTSrbHFc7GbQJkUy97Uf9cxIiC7EvAew
-	sbTCMYc2IxNkdKcmrnxKZ288PEQ8qo6zWHl0TJqr3n8vBuWm8PQ6xGY3lxCdcY69fqi1
-	iG2A==
-X-Received: by 10.14.214.68 with SMTP id b44mr19403385eep.0.1397118499412;
-	Thu, 10 Apr 2014 01:28:19 -0700 (PDT)
+	bh=DqIzcI9FBoy1uRbIaPPwWliNZ/rwwq+2rAEeHtn4ih4=;
+	b=z7xM2b6b1JwT0WU+hqeczox5yI+NJf/g7WoN6dTAjH2GBOp9Tmx6/8xr8liDSMFd/j
+	2Ko0EXLh3/x1aa2CUhBbVYUWD/Pr+oiQp0gFwN9MWe8u9EyYS899B/XIfASAB26HsjR+
+	NEtjEcsq8fIYSHXHptPdDcqwBRobelqEdABH5uKqoDlxNV07JpuiQeA7zeZiHi+j24BC
+	PKJbER8flYQDbxQx1c61fmeATZ0e1lPPnaQGgSCIHySWJSnIvG8iKtpBSbIJWdcWB8E9
+	y6R2j1y/RltV8bVybNaBC2rnfm6PZFHJ4wZ/cB+xkrIOjVziuU0fAjQQjetc8ZZ4xmpa
+	4c/w==
+X-Received: by 10.15.73.134 with SMTP id h6mr19155911eey.3.1397118617770;
+	Thu, 10 Apr 2014 01:30:17 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o4sm8199029eef.20.2014.04.10.01.28.18
+	m8sm8224263eeg.11.2014.04.10.01.30.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Apr 2014 01:28:18 -0700 (PDT)
-Date: Thu, 10 Apr 2014 10:28:26 +0200
+	Thu, 10 Apr 2014 01:30:11 -0700 (PDT)
+Date: Thu, 10 Apr 2014 10:30:20 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140410082826.GM2132@jama>
-References: <1396938662-31887-1-git-send-email-jackie.huang@windriver.com>
+Message-ID: <20140410083020.GN2132@jama>
+References: <1396945948-5006-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1396938662-31887-1-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1396945948-5006-1-git-send-email-jackie.huang@windriver.com>
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-oe][PATCH] bonnie++: update to version 1.03e
+Subject: Re: [meta-oe][PATCH] dialog: update to version 1.1-20120706
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,118 +46,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 08:28:21 -0000
-X-Groupsio-MsgNum: 49153
+X-List-Received-Date: Thu, 10 Apr 2014 08:30:20 -0000
+X-Groupsio-MsgNum: 49154
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/TUrtqMIkCP4YtJm"
+	protocol="application/pgp-signature"; boundary="nljfjKcp9HDtPSOP"
 Content-Disposition: inline
 
---/TUrtqMIkCP4YtJm
+--nljfjKcp9HDtPSOP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 08, 2014 at 02:31:02PM +0800, jackie.huang@windriver.com wrote:
+On Tue, Apr 08, 2014 at 04:32:28PM +0800, jackie.huang@windriver.com wrote:
 > From: Jackie Huang <jackie.huang@windriver.com>
 >=20
 > Changes:
-> * use BPN in the file name in SRC_URI.
-> * install binaries in bindir and sbindir instead of base_bindir and base_=
-sbindir.
+> - add SUMMARY and HOMEPAGE
+> - remove the use of PRINC
 
-Please use -M when sending renames.
+There is no PRINC, did you mean INC_PR?
 
->=20
 > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   32 --------------=
-------
->  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb |   30 ++++++++++++++=
-++++
->  2 files changed, 30 insertions(+), 32 deletions(-)
->  delete mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
->  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+>  .../dialog/dialog-static_1.1-20111020.bb           |    7 -------
+>  .../dialog/dialog-static_1.1-20120706.bb           |    6 ++++++
+>  meta-oe/recipes-extended/dialog/dialog.inc         |    4 ++--
+>  .../recipes-extended/dialog/dialog_1.1-20111020.bb |    5 -----
+>  .../recipes-extended/dialog/dialog_1.1-20120706.bb |    4 ++++
+>  5 files changed, 12 insertions(+), 14 deletions(-)
+>  delete mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-201=
+11020.bb
+>  create mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-201=
+20706.bb
+>  delete mode 100644 meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+>  create mode 100644 meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
 >=20
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb b/meta-oe=
-/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.b=
+b b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
 > deleted file mode 100644
-> index bff0d72..0000000
-> --- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> index e21a914..0000000
+> --- a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
 > +++ /dev/null
-> @@ -1,32 +0,0 @@
-> -SUMMARY =3D "Tests large file IO and creation/deletion of small files"
-> -HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150=
-ae9cc3ee0"
+> @@ -1,7 +0,0 @@
+> -require dialog.inc
+> -PR =3D "${INC_PR}.0"
 > -
-> -SRC_URI =3D "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \
-> -           file://gcc-4.3-fixes.patch \
-> -"
-> -SRC_URI[md5sum] =3D "77a1ba78f37bdd7f024b67e1e36ad151"
-> -SRC_URI[sha256sum] =3D "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac8=
-9396043b49612a26"
+> -LDFLAGS +=3D "-static"
 > -
-> -inherit autotools
-> -
-> -SCRIPTS =3D "bon_csv2html bon_csv2txt"
-> -EXES =3D "bonnie++ zcav"
-> -
-> -TARGET_CC_ARCH +=3D "${LDFLAGS}"
-> -
-> -do_install () {
-> -    install -d ${D}/bin
-> -    install -d ${D}/sbin
-> -    install -m 0755 ${EXES} ${D}/sbin
-> -    install -m 0755 ${SCRIPTS} ${D}/bin
-> -}
-> -
-> -PACKAGES =3D+ "bonnie-scripts"
-> -
-> -FILES_${PN} =3D "${base_sbindir}"
-> -FILES_bonnie-scripts =3D "${base_bindir}"
-> -
-> -
-> -
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb b/meta-oe=
-/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> -SRC_URI[md5sum] =3D "15dd2ce9f537c0400f600d1a383aa0a3"
+> -SRC_URI[sha256sum] =3D "746bf18b8414985864835b61536cee826ac916e6827fbcad=
+9faffb496cae8a7a"
+> diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.b=
+b b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
 > new file mode 100644
-> index 0000000..b986823
+> index 0000000..595f323
 > --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY =3D "Tests large file IO and creation/deletion of small files"
-> +HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
-> +SECTION =3D "benchmark/tests"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150=
-ae9cc3ee0"
+> +++ b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+> @@ -0,0 +1,6 @@
+> +require dialog.inc
 > +
-> +SRC_URI =3D "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
-> +           file://gcc-4.3-fixes.patch \
-> +"
-> +SRC_URI[md5sum] =3D "750aa5b5051263a99c6c195888c74968"
-> +SRC_URI[sha256sum] =3D "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876=
-df8721f01ba2e2cb"
+> +LDFLAGS +=3D "-static"
 > +
-> +inherit autotools
+> +SRC_URI[md5sum] =3D "2e538305977178eb085a9859511c299d"
+> +SRC_URI[sha256sum] =3D "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44=
+d079cb87cf0ce2f5"
+> diff --git a/meta-oe/recipes-extended/dialog/dialog.inc b/meta-oe/recipes=
+-extended/dialog/dialog.inc
+> index 27e4e60..c1c28fd 100644
+> --- a/meta-oe/recipes-extended/dialog/dialog.inc
+> +++ b/meta-oe/recipes-extended/dialog/dialog.inc
+> @@ -1,13 +1,13 @@
+> +SUMMARY =3D "display dialog boxes from shell scripts"
+>  DESCRIPTION =3D "Dialog lets you to present a variety of questions \
+>  or display messages using dialog boxes from a shell \
+>  script (or any scripting language)."
+> +HOMEPAGE =3D "http://invisible-island.net/dialog/"
+>  SECTION =3D "console/utils"
+>  DEPENDS =3D "ncurses"
+>  LICENSE =3D "LGPL-2.1"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e37=
+343"
+> =20
+> -INC_PR =3D "r0"
+> -
+>  SRC_URI =3D "ftp://invisible-island.net/dialog/dialog-${PV}.tgz"
+> =20
+>  # hardcoded here for use in dialog-static recipe
+> diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb b/met=
+a-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> deleted file mode 100644
+> index 73079a1..0000000
+> --- a/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> +++ /dev/null
+> @@ -1,5 +0,0 @@
+> -require dialog.inc
+> -PR =3D "${INC_PR}.0"
+> -
+> -SRC_URI[md5sum] =3D "15dd2ce9f537c0400f600d1a383aa0a3"
+> -SRC_URI[sha256sum] =3D "746bf18b8414985864835b61536cee826ac916e6827fbcad=
+9faffb496cae8a7a"
+> diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb b/met=
+a-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> new file mode 100644
+> index 0000000..c87fb61
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> @@ -0,0 +1,4 @@
+> +require dialog.inc
 > +
-> +SCRIPTS =3D "bon_csv2html bon_csv2txt"
-> +EXES =3D "bonnie++ zcav"
-> +
-> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
-> +
-> +do_install () {
-> +	install -d ${D}/${bindir}
-> +	install -d ${D}/${sbindir}
-> +	install -m 0755 ${EXES} ${D}/${sbindir}
-> +	install -m 0755 ${SCRIPTS} ${D}/${bindir}
-> +}
-> +
-> +PACKAGES =3D+ "bonnie-scripts"
-> +
-> +FILES_${PN} =3D "${sbindir}"
-> +FILES_bonnie-scripts =3D "${bindir}"
+> +SRC_URI[md5sum] =3D "2e538305977178eb085a9859511c299d"
+> +SRC_URI[sha256sum] =3D "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44=
+d079cb87cf0ce2f5"
 > --=20
 > 1.7.9.5
 >=20
@@ -170,16 +169,16 @@ df8721f01ba2e2cb"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---/TUrtqMIkCP4YtJm
+--nljfjKcp9HDtPSOP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNGVioACgkQN1Ujt2V2gBzl2ACfYB/DPRUOfMJuTCtWgkWFYZsd
-fvEAoKF2qevW6YF1FGNBjDo+o2TInS8f
-=sPL4
+iEYEARECAAYFAlNGVpwACgkQN1Ujt2V2gBzhNACfWW7kM5yCQg6snw4M5zmTaZGl
+A0gAnRGEqg801ow/G+UAAFJkTqS5jurs
+=pqk5
 -----END PGP SIGNATURE-----
 
---/TUrtqMIkCP4YtJm--
+--nljfjKcp9HDtPSOP--
