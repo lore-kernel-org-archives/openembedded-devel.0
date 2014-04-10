@@ -1,27 +1,37 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D93465E7D
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-oa0-f50.google.com (mail-oa0-f50.google.com
+	[209.85.219.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 87A7465D65
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 17:00:11 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N3T005OCR7MLH40@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	10 Apr 2014 11:59:46 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5E1692016D; Thu,
-	10 Apr 2014 12:59:46 -0400 (EDT)
-Date: Thu, 10 Apr 2014 12:59:46 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 10 Apr 2014 18:00:19 +0000 (UTC)
+Received: by mail-oa0-f50.google.com with SMTP id i7so4848599oag.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=evQT4VThYYP0JHgMfsxS2plSzTsL2fxFjzai2M1DwF0=;
+	b=C7NYYqy/kk+CDFfCb+Nu1oaOZMIaqizWTTghFVXS+jkYt/XzT9YAfAQw68yqsMPS6s
+	0731oI2skmy+UBzzPcGtILlPx2Qu7vtTIZkjsTv+2YTg4+Z1PEbIV1CLkPdi8zl8ry9Y
+	TiQiIoXgd1Ni8j+EU9MURtNsUN87/erBjb9KeINjtYLIulqmrDg8AW8DcIiM4jTZyHZL
+	AsvPL4EdH+yAK1SPEeK1ojMDO4bViJEBFEE4DsUUpWOEsTUChIet82POxN73SKax7Q2K
+	4UZcNCJmzoSR4I5ZumiIvfK9k2+bDQtSNC3Stfze8jBLUJ+0UvfF91RLDHo8e8MAvJVs
+	2Y1A==
+MIME-Version: 1.0
+X-Received: by 10.60.135.226 with SMTP id pv2mr2753584oeb.62.1397152819304;
+	Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
+Received: by 10.60.73.165 with HTTP; Thu, 10 Apr 2014 11:00:19 -0700 (PDT)
+In-Reply-To: <20140410165626.GQ3370@denix.org>
+References: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
+	<CAFZh4h9SFyWK76jsumww+5JPbUzovK+wzcjYbGbAsaCxbmkCGw@mail.gmail.com>
+	<li6b0g$9m6$1@ger.gmane.org>
+	<CAFZh4h8oAnNZfswMF+6tf5Byxxc+B0weLLNMQeudLpcdRtmyUg@mail.gmail.com>
+	<20140410165626.GQ3370@denix.org>
+Date: Thu, 10 Apr 2014 14:00:19 -0400
+Message-ID: <CAFZh4h_HaC=rRfgZ_8ibN2XrQdah2y1VWwpj6nqaGVd-_mfuCg@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20140410165946.GR3370@denix.org>
-References: <1396327671-22282-1-git-send-email-denis@denix.org>
-	<20140406224739.GE3370@denix.org>
-MIME-version: 1.0
-In-reply-to: <20140406224739.GE3370@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][PATCH] linuxptp: fix and simplify recipe, drop dependency on kernel
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: udev auto-mount not doing fsck
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,71 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 17:00:12 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 10 Apr 2014 18:00:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-ping^2...
+On Thu, Apr 10, 2014 at 12:56 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-On Sun, Apr 06, 2014 at 06:47:39PM -0400, Denys Dmytriyenko wrote:
-> ping
-> 
-> On Tue, Apr 01, 2014 at 12:47:51AM -0400, Denys Dmytriyenko wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> > 
-> > * Build script tries to locate the correct /usr/include/linux/net_tstamp.h just
-> > to see if it contains definition for HWTSTAMP_TX_ONESTEP_SYNC. But that header
-> > file hasn't changed in at least 5 years. The result of the check is to pass
-> > additional defines to the build, which can be passed via EXTRA_OEMAKE.
-> > 
-> > * The sed command on makefile wasn't even working, plus there's no AR, prefix
-> > is not used and better way is to use EXTRA_CFLAGS and EXTRA_LDFLAGS anyway.
-> > 
-> > * Neither autotools nor pkgconfig are use during the build, don't inherit them.
-> > 
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb | 11 ++---------
-> >  1 file changed, 2 insertions(+), 9 deletions(-)
-> > 
-> > diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> > index c708b13..10d6744 100644
-> > --- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> > +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.4.bb
-> > @@ -2,20 +2,13 @@ DESCRIPTION = "Precision Time Protocol (PTP) according to IEEE standard 1588 for
-> >  LICENSE = "GPLv2"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> >  
-> > -DEPENDS = "virtual/kernel"
-> > -
-> >  SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz"
-> >  
-> >  SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
-> >  SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
-> >  
-> > -inherit autotools pkgconfig
-> > -
-> > -EXTRA_OEMAKE = 'KBUILD_OUTPUT="${STAGING_KERNEL_DIR}" CROSS_COMPILE="${TARGET_PREFIX}"'
-> > -
-> > -do_configure_append () {
-> > -    find ${S} -name makefile | xargs sed -i 's,^\(CC\|CFLAGS\|prefix\|AR\)=,\1 ?=,g'
-> > -}
-> > +EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX} ARCH=${TARGET_ARCH} \
-> > +		EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC'"
-> >  
-> >  do_install () {
-> >      install -d ${D}/${bindir}
-> > -- 
-> > 1.9.1
-> > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
+> Brian,
+>
+> Be careful, with your eUSB storage device cold-plugged (available on boot)
+> you may run into a race condition, if you initially mount your rootfs in
+> read-only mode and then re-mount in read-write mode during boot. One of the
+> proposed solutions:
+>
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded.core/50124
+>
+> --
+> Denys
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+At the moment the rootfs is rw in NOR.  In the future I plan for it to be
+squashfs (ro) with a union overlay that is rw ubifs for persistent stuff.
+This is to help protect the rootfs from getting corrupted or accidentally
+hosed up during an update etc.
+
+So I could see where the race condition you mentioned could happen maybe in
+that case but I'm not quite following (yet) how it could happen currently
+in rw mode.  I guess you're saying there is a point where the rootfs could
+be ro and so the udev rule has no mount point to hang the eUSB on ... If
+I'm picking up what you're laying down ('if' being the key word :) )
+
+This eUSB is intended to stay on the board at all times and not be hot
+plugged ... but it is socketed (but board is buried in an enclosure) so it
+could be replaced if needed by a technician.
+
+I'll study that patch you mentioned more when I get some time (in SCRUM
+meeting at the time ... joy).
+
+Regards,
+
+Brian
 
