@@ -1,24 +1,33 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 12F8965D2C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9021565EA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Apr 2014 01:49:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3B1nNcW008894
+	Fri, 11 Apr 2014 02:22:44 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3B2MkuB016758
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 18:49:23 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 10 Apr 2014 18:49:22 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 11 Apr 2014 09:50:13 +0800
-Message-ID: <1397181013-2452-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Thu, 10 Apr 2014 19:22:46 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
+	Thu, 10 Apr 2014 19:22:45 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] dialog: update to version 1.1-20120706
+Thread-Index: AQHPVJdCfEh5QzDFNUGABSQllLYDrpsLsFzg
+Date: Fri, 11 Apr 2014 02:22:44 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BE372D@ALA-MBA.corp.ad.wrs.com>
+References: <1396945948-5006-1-git-send-email-jackie.huang@windriver.com>
+	<20140410083020.GN2132@jama>
+In-Reply-To: <20140410083020.GN2132@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-Subject: [PATCH v2] bonnie++: update to version 1.03e
+Subject: Re: [meta-oe][PATCH] dialog: update to version 1.1-20120706
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,70 +41,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Apr 2014 01:49:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Apr 2014 02:22:45 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Jackie Huang <jackie.huang@windriver.com>
 
-Changes:
-* use BPN in the file name in SRC_URI.
-* install binaries in bindir and sbindir instead of base_bindir and base_sbindir.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../{bonnie++_1.03c.bb => bonnie++_1.03e.bb}       |   22 +++++++++-----------
- 1 file changed, 10 insertions(+), 12 deletions(-)
- rename meta-oe/recipes-benchmark/bonnie/{bonnie++_1.03c.bb => bonnie++_1.03e.bb} (48%)
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Thursday, April 10, 2014 4:30 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] dialog: update to version 1.1-20120706
+>=20
+> On Tue, Apr 08, 2014 at 04:32:28PM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > Changes:
+> > - add SUMMARY and HOMEPAGE
+> > - remove the use of PRINC
+>=20
+> There is no PRINC, did you mean INC_PR?
 
-diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-similarity index 48%
-rename from meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
-rename to meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-index bff0d72..828d762 100644
---- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
-+++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-@@ -1,13 +1,14 @@
- SUMMARY = "Tests large file IO and creation/deletion of small files"
- HOMEPAGE = "http://www.coker.com.au/bonnie++/"
-+SECTION = "benchmark/tests"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://copyright.txt;md5=cd4dde95a6b9d122f0a9150ae9cc3ee0"
- 
--SRC_URI = "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \
-+SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
-            file://gcc-4.3-fixes.patch \
- "
--SRC_URI[md5sum] = "77a1ba78f37bdd7f024b67e1e36ad151"
--SRC_URI[sha256sum] = "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbbac89396043b49612a26"
-+SRC_URI[md5sum] = "750aa5b5051263a99c6c195888c74968"
-+SRC_URI[sha256sum] = "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876df8721f01ba2e2cb"
- 
- inherit autotools
- 
-@@ -17,16 +18,13 @@ EXES = "bonnie++ zcav"
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_install () {
--    install -d ${D}/bin
--    install -d ${D}/sbin
--    install -m 0755 ${EXES} ${D}/sbin
--    install -m 0755 ${SCRIPTS} ${D}/bin
-+    install -d ${D}/${bindir}
-+    install -d ${D}/${sbindir}
-+    install -m 0755 ${EXES} ${D}/${sbindir}
-+    install -m 0755 ${SCRIPTS} ${D}/${bindir}
- }
- 
- PACKAGES =+ "bonnie-scripts"
- 
--FILES_${PN} = "${base_sbindir}"
--FILES_bonnie-scripts = "${base_bindir}"
--
--
--
-+FILES_${PN} = "${sbindir}"
-+FILES_bonnie-scripts = "${bindir}"
--- 
-1.7.9.5
+Yes, that's what I meant, I will fix it and also use -M to resend.
 
+Thanks,
+Jackie
+
+>=20
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  .../dialog/dialog-static_1.1-20111020.bb           |    7 -------
+> >  .../dialog/dialog-static_1.1-20120706.bb           |    6 ++++++
+> >  meta-oe/recipes-extended/dialog/dialog.inc         |    4 ++--
+> >  .../recipes-extended/dialog/dialog_1.1-20111020.bb |    5 -----
+> >  .../recipes-extended/dialog/dialog_1.1-20120706.bb |    4 ++++
+> >  5 files changed, 12 insertions(+), 14 deletions(-)  delete mode
+> > 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
+> >  create mode 100644
+> > meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+> >  delete mode 100644
+> > meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> >  create mode 100644
+> > meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> >
+> > diff --git
+> > a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
+> > b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
+> > deleted file mode 100644
+> > index e21a914..0000000
+> > --- a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20111020.bb
+> > +++ /dev/null
+> > @@ -1,7 +0,0 @@
+> > -require dialog.inc
+> > -PR =3D "${INC_PR}.0"
+> > -
+> > -LDFLAGS +=3D "-static"
+> > -
+> > -SRC_URI[md5sum] =3D "15dd2ce9f537c0400f600d1a383aa0a3"
+> > -SRC_URI[sha256sum] =3D "746bf18b8414985864835b61536cee826ac916e6827fbc=
+ad9faffb496cae8a7a"
+> > diff --git
+> > a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+> > b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+> > new file mode 100644
+> > index 0000000..595f323
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+> > @@ -0,0 +1,6 @@
+> > +require dialog.inc
+> > +
+> > +LDFLAGS +=3D "-static"
+> > +
+> > +SRC_URI[md5sum] =3D "2e538305977178eb085a9859511c299d"
+> > +SRC_URI[sha256sum] =3D "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b=
+44d079cb87cf0ce2f5"
+> > diff --git a/meta-oe/recipes-extended/dialog/dialog.inc
+> > b/meta-oe/recipes-extended/dialog/dialog.inc
+> > index 27e4e60..c1c28fd 100644
+> > --- a/meta-oe/recipes-extended/dialog/dialog.inc
+> > +++ b/meta-oe/recipes-extended/dialog/dialog.inc
+> > @@ -1,13 +1,13 @@
+> > +SUMMARY =3D "display dialog boxes from shell scripts"
+> >  DESCRIPTION =3D "Dialog lets you to present a variety of questions \
+> > or display messages using dialog boxes from a shell \  script (or any
+> > scripting language)."
+> > +HOMEPAGE =3D "http://invisible-island.net/dialog/"
+> >  SECTION =3D "console/utils"
+> >  DEPENDS =3D "ncurses"
+> >  LICENSE =3D "LGPL-2.1"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da6f89e2100d9b6cdffcea4f398e=
+37343"
+> >
+> > -INC_PR =3D "r0"
+> > -
+> >  SRC_URI =3D "ftp://invisible-island.net/dialog/dialog-${PV}.tgz"
+> >
+> >  # hardcoded here for use in dialog-static recipe diff --git
+> > a/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> > b/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> > deleted file mode 100644
+> > index 73079a1..0000000
+> > --- a/meta-oe/recipes-extended/dialog/dialog_1.1-20111020.bb
+> > +++ /dev/null
+> > @@ -1,5 +0,0 @@
+> > -require dialog.inc
+> > -PR =3D "${INC_PR}.0"
+> > -
+> > -SRC_URI[md5sum] =3D "15dd2ce9f537c0400f600d1a383aa0a3"
+> > -SRC_URI[sha256sum] =3D "746bf18b8414985864835b61536cee826ac916e6827fbc=
+ad9faffb496cae8a7a"
+> > diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> > b/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> > new file mode 100644
+> > index 0000000..c87fb61
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
+> > @@ -0,0 +1,4 @@
+> > +require dialog.inc
+> > +
+> > +SRC_URI[md5sum] =3D "2e538305977178eb085a9859511c299d"
+> > +SRC_URI[sha256sum] =3D "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b=
+44d079cb87cf0ce2f5"
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
