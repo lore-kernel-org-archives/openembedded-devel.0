@@ -1,24 +1,37 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BF93B65D64
+Return-Path: <pirobk@gmail.com>
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A374765DFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Apr 2014 09:56:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3B9u2ej011813
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 11 Apr 2014 16:25:15 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so4307101eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Apr 2014 02:56:02 -0700 (PDT)
-Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Fri, 11 Apr 2014 02:56:01 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 11 Apr 2014 17:56:52 +0800
-Message-ID: <1397210212-26263-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Fri, 11 Apr 2014 09:25:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=ZXUiiYqth9d97Qvs1WIeR2qlVhYTElWyG2PIVM0EbKE=;
+	b=fIOzac+8XqqDjOagDcgB+DZoepJzf7uTGEgPCPnKGWul8IECK1yn9SFlCgGUVqOmQ7
+	7IoomjFuM4qN8h7Gw5f3djniANaqul8+yoyNCItqRAmwACybKZisYKM8sB1gJRXda/Eh
+	UbaeHz/hZO/InSM7dKTnLjzHD0dVXNIQAx0F/QfeWlpUn5fAal6RdGez858U9MEGTy1F
+	+6+khIUkYSamSwlIDWRCK5LCoWV2OAv8CO7tVINz/yI+gVmE1fuhK+nInWsou065yN4g
+	mIGzU4s9gbopL92oxEqHLnZVTB9ym+0pWQZVUWAcrNxeEdTlc5HhHKbG3vLDGgiBJUBJ
+	9N0g==
+X-Received: by 10.14.211.66 with SMTP id v42mr29896000eeo.31.1397233516639;
+	Fri, 11 Apr 2014 09:25:16 -0700 (PDT)
+Received: from lx.fritz.box (p5DCFD2E5.dip0.t-ipconnect.de. [93.207.210.229])
+	by mx.google.com with ESMTPSA id
+	4sm18685066eeq.33.2014.04.11.09.25.15 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 11 Apr 2014 09:25:16 -0700 (PDT)
+From: =?UTF-8?q?Bj=C3=B6rn=20Krombholz?= <b.krombholz@pironex.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Apr 2014 18:23:43 +0200
+Message-Id: <1397233423-26218-1-git-send-email-b.krombholz@pironex.de>
+X-Mailer: git-send-email 1.9.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] iozone: update version to 414
+Cc: =?UTF-8?q?Bj=C3=B6rn=20Krombholz?= <b.krombholz@pironex.de>
+Subject: [meta-oe][PATCH 1/1] qwt-e: qwt 6.1.0 FTBFS fix for qt-embedded targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,144 +45,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Apr 2014 09:56:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Apr 2014 16:25:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+- qwt 6.1.0 changed the handling of the QT_INFIX variable. Builds with any
+  QT_INFIX defined will fail as the generated qmake TARGET is always
+  libqwt.* ignoring the INFIX, but sub-projects like designer respect the
+  INFIX variable.
+- add PR/INC_PR to force recompile.
 
-Changes:
-- use BPN to fix multilib builds
-- drop the fileop-arm.patch since the issue is already
-  fixed in the new version.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Björn Krombholz <b.krombholz@pironex.de>
 ---
- .../iozone3/iozone3/fileop-arm.patch               |   32 ------------
- .../iozone3/{iozone3_263.bb => iozone3_414.bb}     |   51 +++++++++++---------
- 2 files changed, 27 insertions(+), 56 deletions(-)
- delete mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
- rename meta-oe/recipes-benchmark/iozone3/{iozone3_263.bb => iozone3_414.bb} (63%)
+for yocto-1.4 branch, 1.5 is still on qwt 6.0.1
+ meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch | 13 +++++++++++++
+ meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb             |  2 ++
+ meta-oe/recipes-qt/qwt/qwt.inc                    |  5 ++++-
+ meta-oe/recipes-qt/qwt/qwt_6.1.0.bb               |  2 ++
+ 4 files changed, 21 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
 
-diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch b/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-deleted file mode 100644
-index c71bfee..0000000
---- a/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Modify makefile to compile fileop.c file for ARM architecture.
--
--Upstream-Status: Inappropriate [not author]
--Index: current/makefile
--===================================================================
----- current.orig/makefile	2006-10-14 21:42:36.000000000 +0200
--+++ current/makefile	2006-10-14 21:40:02.000000000 +0200
--@@ -190,9 +190,10 @@
-- #
-- # GNU 'C' compiler Linux build with threads, largefiles, async I/O
-- #
---linux-arm:	iozone_linux-arm.o  libbif.o libasync.o
--+linux-arm:	iozone_linux-arm.o  libbif.o libasync.o fileop_linux-arm.o
-- 	$(CC) -O3 $(LDFLAGS) iozone_linux-arm.o libbif.o libasync.o \
-- 		-lrt -lpthread -o iozone
--+	$(CC)  -O3 -Dlinux fileop_linux-arm.o -o fileop
-- 
-- #
-- # GNU 'C' compiler Linux build with threads, largefiles, async I/O 
--@@ -725,6 +726,12 @@
-- 	@echo ""
-- 	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-AMD64.o
-- 
--+fileop_linux-arm.o:	fileop.c
--+	@echo ""
--+	@echo "Building fileop for Linux-arm"
--+	@echo ""
--+	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-arm.o
--+
-- fileop_windows.o: fileop.c
-- 	@echo ""
-- 	@echo "Building fileop for Windows"
-diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_263.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-similarity index 63%
-rename from meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
-rename to meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-index 9de0ac7..572d766 100644
---- a/meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
-+++ b/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-@@ -3,46 +3,49 @@ HOMEPAGE = "http://www.iozone.org/"
- AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.oracle.com>"
- SECTION = "console/tests"
- LICENSE = "iozone3"
--LIC_FILES_CHKSUM = "file://iozone.c;beginline=237;endline=241;md5=ab42a6185fd0443978871f11a007ac0b"
-+LIC_FILES_CHKSUM = "file://iozone.c;beginline=266;endline=270;md5=ab42a6185fd0443978871f11a007ac0b"
+diff --git a/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch b/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
+new file mode 100644
+index 0000000..3a6fb64
+--- /dev/null
++++ b/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
+@@ -0,0 +1,13 @@
++Index: qwt-6.1.0/qwtfunctions.pri
++===================================================================
++--- qwt-6.1.0.orig/qwtfunctions.pri	2014-04-11 16:25:59.291152505 +0200
+++++ qwt-6.1.0/qwtfunctions.pri	2014-04-11 16:26:25.749892402 +0200
++@@ -12,7 +12,7 @@
++ defineReplace(qwtLibraryTarget) {
++ 
++     unset(LIBRARY_NAME)
++-    LIBRARY_NAME = $$1
+++    LIBRARY_NAME = $$1$${QT_LIBINFIX}
++ 
++     mac:contains(QWT_CONFIG, QwtFramework) {
++ 
+diff --git a/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb b/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
+index 7694514..3d46a7a 100644
+--- a/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
++++ b/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
+@@ -2,6 +2,8 @@ inherit qt4e
  
--
--SRC_URI = "http://www.iozone.org/src/current/iozone3_263.tar \
-+SRC_URI = "http://fossies.org/unix/privat/${BPN}_${PV}.tar.gz \
-     file://copyright.txt \
--    file://fileop-arm.patch \
- "
--SRC_URI[md5sum] = "44fd88df361ec4508e10c8d6615245fa"
--SRC_URI[sha256sum] = "920fde1a3843539570e2df4aa611e74df102e52d363c5973d5a9d15bdf976461"
-+SRC_URI[md5sum] = "85a3e292f84580a36e6c99762a459dd6"
-+SRC_URI[sha256sum] = "f6c2fde4bfaef1ff8aaf99a315737a846886aa54751a6d9309e14fbec0cbe7a9"
+ require qwt.inc
  
--S = "${WORKDIR}/${PN}_${PV}/src/current/"
-+S = "${WORKDIR}/${BPN}_${PV}/src/current/"
++PR = "${INC_PR}.0"
++
+ SRC_URI[qwt.md5sum] = "aef0437b37f191067a6a9dc01c30ba64"
+ SRC_URI[qwt.sha256sum] = "a7e3d9f1db917d186a973c5f04a316bc9607c7c35794d7a16de323aba5e17402"
  
--EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}'"
--EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}'"
--EXTRA_OEMAKE_arm = "linux-arm CC='${CC}'"
--EXTRA_OEMAKE = "linux CC='${CC}'"
-+#
-+# All other arches can use the default OEMAKE except those
-+# explicitly listed below. Another, the iozone3 Makefile
-+# needs to be told about the cross-compiler explicitly here.
-+#
-+EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}' GCC='${CC}'"
-+EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
-+EXTRA_OEMAKE_arm = "linux-arm CC='${CC}' GCC='${CC}'"
-+EXTRA_OEMAKE = "linux CC='${CC}' GCC='${CC}'"
+diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.inc
+index 0ac71bf..bc65db6 100644
+--- a/meta-oe/recipes-qt/qwt/qwt.inc
++++ b/meta-oe/recipes-qt/qwt/qwt.inc
+@@ -5,8 +5,11 @@ SECTION = "libs"
+ LICENSE = "QWTv1.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
  
- TARGET_CC_ARCH += "${LDFLAGS}"
++INC_PR = "r1"
++
+ SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt/6.1.0/qwt-${PV}.tar.bz2;name=qwt \
+-           file://qwt6-fix-linking-with-ld-gold.patch"
++           file://qwt6-fix-linking-with-ld-gold.patch \
++           file://qwt-e_qt_infix.patch "
  
- do_install() {
-     install -d ${D}${bindir} \
--        ${D}${mandir}/man1 \
--    ${D}${datadir}/doc/${PN}/examples
-+               ${D}${mandir}/man1 \
-+               ${D}${datadir}/doc/${BPN}/examples
+ S = "${WORKDIR}/qwt-${PV}"
  
-     install -m 0755 ${S}/iozone ${D}${bindir}
-     install -m 0755 ${S}/fileop ${D}${bindir}
--    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
--    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${PN}/
-+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
-+    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${BPN}/
+diff --git a/meta-oe/recipes-qt/qwt/qwt_6.1.0.bb b/meta-oe/recipes-qt/qwt/qwt_6.1.0.bb
+index 97a53a8..eb12c1a 100644
+--- a/meta-oe/recipes-qt/qwt/qwt_6.1.0.bb
++++ b/meta-oe/recipes-qt/qwt/qwt_6.1.0.bb
+@@ -2,6 +2,8 @@ inherit qt4x11
  
--    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${PN}/examples
--    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${PN}/examples
--    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${PN}/examples
-+    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${BPN}/examples
-+    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${BPN}/examples
-+    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${BPN}/examples
+ require qwt.inc
  
--    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${PN}/examples
--    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${PN}/examples
--    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${PN}/examples
-+    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${BPN}/examples
-+    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${BPN}/examples
-+    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${BPN}/examples
++PR = "${INC_PR}.0"
++
+ SRC_URI[qwt.md5sum] = "aef0437b37f191067a6a9dc01c30ba64"
+ SRC_URI[qwt.sha256sum] = "a7e3d9f1db917d186a973c5f04a316bc9607c7c35794d7a16de323aba5e17402"
  
--    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${PN}/
--    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${PN}/
--    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${PN}/
-+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${BPN}/
-+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${BPN}/
-+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${BPN}/
- }
- 
- FILES_${PN} += "${datadir}/doc/${PN}/copyright.txt"
 -- 
-1.7.9.5
+1.9.2
 
 
