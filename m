@@ -1,32 +1,33 @@
-Return-Path: <denis@denix.org>
-Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
-	[206.46.173.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 3424B65E8F
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E18365D8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Apr 2014 22:23:04 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N3U00E8H667HZG0@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	10 Apr 2014 17:23:06 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6EAC32016D; Thu,
-	10 Apr 2014 18:22:55 -0400 (EDT)
-Date: Thu, 10 Apr 2014 18:22:55 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20140410222255.GW3370@denix.org>
-References: <CAFZh4h8F5gbopRfU01t1U4LPW2g-amsnFJe0HkUptD9Xac60jA@mail.gmail.com>
-	<CAFZh4h9SFyWK76jsumww+5JPbUzovK+wzcjYbGbAsaCxbmkCGw@mail.gmail.com>
-	<li6b0g$9m6$1@ger.gmane.org>
-	<CAFZh4h8oAnNZfswMF+6tf5Byxxc+B0weLLNMQeudLpcdRtmyUg@mail.gmail.com>
-	<20140410165626.GQ3370@denix.org>
-	<CAFZh4h_HaC=rRfgZ_8ibN2XrQdah2y1VWwpj6nqaGVd-_mfuCg@mail.gmail.com>
-	<CAFZh4h-B=DZmVrh83EVanO7Xmub07=8NqGSek3xhhwwuLx8Jug@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAFZh4h-B=DZmVrh83EVanO7Xmub07=8NqGSek3xhhwwuLx8Jug@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: udev auto-mount not doing fsck
+	Fri, 11 Apr 2014 01:49:08 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3B1n99j014130
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Apr 2014 18:49:09 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
+	Thu, 10 Apr 2014 18:49:08 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] bonnie++: update to version 1.03e
+Thread-Index: AQHPVJbdV/hxr8d9YUCZkm4yhXVuEZsLpw3A
+Date: Fri, 11 Apr 2014 01:49:08 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BE36AE@ALA-MBA.corp.ad.wrs.com>
+References: <1396938662-31887-1-git-send-email-jackie.huang@windriver.com>
+	<20140410082826.GM2132@jama>
+In-Reply-To: <20140410082826.GM2132@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] bonnie++: update to version 1.03e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,96 +41,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Apr 2014 22:23:15 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-
-On Thu, Apr 10, 2014 at 05:47:02PM -0400, Brian Hutchinson wrote:
-> On Thu, Apr 10, 2014 at 2:00 PM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
-> 
-> > On Thu, Apr 10, 2014 at 12:56 PM, Denys Dmytriyenko <denis@denix.org>wrote:
-> >
-> >> Brian,
-> >>
-> >> Be careful, with your eUSB storage device cold-plugged (available on boot)
-> >> you may run into a race condition, if you initially mount your rootfs in
-> >> read-only mode and then re-mount in read-write mode during boot. One of
-> >> the
-> >> proposed solutions:
-> >>
-> >> http://thread.gmane.org/gmane.comp.handhelds.openembedded.core/50124
-> >>
-> >> --
-> >> Denys
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >
-> > At the moment the rootfs is rw in NOR.  In the future I plan for it to be
-> > squashfs (ro) with a union overlay that is rw ubifs for persistent stuff.
-> > This is to help protect the rootfs from getting corrupted or accidentally
-> > hosed up during an update etc.
-> >
-> > So I could see where the race condition you mentioned could happen maybe
-> > in that case but I'm not quite following (yet) how it could happen
-> > currently in rw mode.  I guess you're saying there is a point where the
-> > rootfs could be ro and so the udev rule has no mount point to hang the eUSB
-> > on ... If I'm picking up what you're laying down ('if' being the key word
-> > :) )
-> >
-> > This eUSB is intended to stay on the board at all times and not be hot
-> > plugged ... but it is socketed (but board is buried in an enclosure) so it
-> > could be replaced if needed by a technician.
-> >
-> > I'll study that patch you mentioned more when I get some time (in SCRUM
-> > meeting at the time ... joy).
-> >
-> > Regards,
-> >
-> > Brian
-> >
-> >
-> Hi Denys,
-> 
-> OK, I see what you are talking about now.  In my /etc/fstab I do have sixth
-> column of root set to 1 so if I'm understanding things right
-> /etc/rcS.d/S10checkroot.sh could be off checking root mounted ro while udev
-> sees my eUSB and is in the process of doing RUN mount.sh and trying to
-> mount /media/sda1 (in my case) before rootfs is remounted back rw.
-
-Even w/o checking the rootfs, it's common to boot off of read-only FS and then 
-remount it r/w slightly later - that's what checkroot.sh initscript is doing.
-
-Unfortunately, udev starts slightly earlier than that and starts enumerating 
-peripherals and firing its rules, including the auto-mount one, which can fail 
-to create the necessary mount point. We had that happening intermittently, 
-hence the proposed solution...
+X-List-Received-Date: Fri, 11 Apr 2014 01:49:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
-> Ah, I also see that /forcefsck only checks root ... for some reason I was
-> thinking it would cause fsck to look at fstab and scan all filesystems in
-> order of sixth column but that doesn't appear to be the case ... so that
-> answers one of my questions.
-> 
-> I still don't know why my eUSB wasn't checked when I stubbed out udev
-> automount script and instead added it to fstab with a 2 in the sixth column
-> ... I thought that should of worked but it didn't.  It did in fact mount my
-> eUSB but it did not check it.  The answer to that too is probably in one of
-> these rcS scripts that I just haven't seen yet.
-> 
-> So the patch you mentioned is making more sense now.
-> 
-> Let me know if I'm tracking now or still off in the weeds.
-> 
-> Regards,
-> 
-> Brian
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Thursday, April 10, 2014 4:28 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] bonnie++: update to version 1.03e
+>=20
+> On Tue, Apr 08, 2014 at 02:31:02PM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > Changes:
+> > * use BPN in the file name in SRC_URI.
+> > * install binaries in bindir and sbindir instead of base_bindir and bas=
+e_sbindir.
+>=20
+> Please use -M when sending renames.
+
+Ok, I will send v2 with -M option.
+
+Thanks,
+Jackie
+
+>=20
+> >
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb |   32 ------------=
+--------
+> >  meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb |   30 ++++++++++++=
+++++++
+> >  2 files changed, 30 insertions(+), 32 deletions(-)  delete mode
+> > 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> >  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> >
+> > diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> > b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> > deleted file mode 100644
+> > index bff0d72..0000000
+> > --- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03c.bb
+> > +++ /dev/null
+> > @@ -1,32 +0,0 @@
+> > -SUMMARY =3D "Tests large file IO and creation/deletion of small files"
+> > -HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
+> > -LICENSE =3D "GPLv2"
+> > -LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a91=
+50ae9cc3ee0"
+> > -
+> > -SRC_URI =3D "http://www.coker.com.au/bonnie++/bonnie++-${PV}.tgz \
+> > -           file://gcc-4.3-fixes.patch \
+> > -"
+> > -SRC_URI[md5sum] =3D "77a1ba78f37bdd7f024b67e1e36ad151"
+> > -SRC_URI[sha256sum] =3D "c674f1182f4c20f1e6d038feceb0a6617fc3e7658dfbba=
+c89396043b49612a26"
+> > -
+> > -inherit autotools
+> > -
+> > -SCRIPTS =3D "bon_csv2html bon_csv2txt"
+> > -EXES =3D "bonnie++ zcav"
+> > -
+> > -TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> > -
+> > -do_install () {
+> > -    install -d ${D}/bin
+> > -    install -d ${D}/sbin
+> > -    install -m 0755 ${EXES} ${D}/sbin
+> > -    install -m 0755 ${SCRIPTS} ${D}/bin
+> > -}
+> > -
+> > -PACKAGES =3D+ "bonnie-scripts"
+> > -
+> > -FILES_${PN} =3D "${base_sbindir}"
+> > -FILES_bonnie-scripts =3D "${base_bindir}"
+> > -
+> > -
+> > -
+> > diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> > b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> > new file mode 100644
+> > index 0000000..b986823
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+> > @@ -0,0 +1,30 @@
+> > +SUMMARY =3D "Tests large file IO and creation/deletion of small files"
+> > +HOMEPAGE =3D "http://www.coker.com.au/bonnie++/"
+> > +SECTION =3D "benchmark/tests"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a91=
+50ae9cc3ee0"
+> > +
+> > +SRC_URI =3D "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
+> > +           file://gcc-4.3-fixes.patch \ "
+> > +SRC_URI[md5sum] =3D "750aa5b5051263a99c6c195888c74968"
+> > +SRC_URI[sha256sum] =3D "cb3866116634bf65760b6806be4afa7e24a1cad6f145c8=
+76df8721f01ba2e2cb"
+> > +
+> > +inherit autotools
+> > +
+> > +SCRIPTS =3D "bon_csv2html bon_csv2txt"
+> > +EXES =3D "bonnie++ zcav"
+> > +
+> > +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> > +
+> > +do_install () {
+> > +	install -d ${D}/${bindir}
+> > +	install -d ${D}/${sbindir}
+> > +	install -m 0755 ${EXES} ${D}/${sbindir}
+> > +	install -m 0755 ${SCRIPTS} ${D}/${bindir} }
+> > +
+> > +PACKAGES =3D+ "bonnie-scripts"
+> > +
+> > +FILES_${PN} =3D "${sbindir}"
+> > +FILES_bonnie-scripts =3D "${bindir}"
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
