@@ -1,33 +1,39 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 87F1865EE7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f52.google.com (mail-ee0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B7F365D16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Apr 2014 19:47:01 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id e53so4464460eek.16
+	Sat, 12 Apr 2014 10:44:03 +0000 (UTC)
+Received: by mail-ee0-f52.google.com with SMTP id e49so4788268eek.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Apr 2014 12:47:02 -0700 (PDT)
+	Sat, 12 Apr 2014 03:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=QWglSQoFunFN3smc6dGQLgQwTIWiKsTkX2WXeN3JY6A=;
-	b=W3MrsRysCXlBeClyndPPaOvJFR6XX/HShX3F/qvhsno3P19AsbNIe5vxk8YjWy0IL0
-	GYtO+mtgQk1pLT0dOFCKU1oZvl9tWrk2wUskoNZaHpWUCSBf6VRpyjAa9O/YaMbfSS1H
-	3O/v5iqy9PvryPMdZ7yPkoZXzY0vkRlMB7z/ww1iZPyhjiQA+ErvJP5AjH3ZhkvDZ1tj
-	8R6R00mAnFIIPdDYsKaaX+Rt2G07VvsBOLBZfDR9VtSFgCw4tl4KNYhkxwS/Wofe+ha3
-	vhoKlD0AAnla85JxzfiJSw3Qqi5WE2lkwxLVA79k61lLYLUr5kTZvZ42TPhoENxNPqDu
-	ItwQ==
-X-Received: by 10.15.81.135 with SMTP id x7mr6404566eey.61.1397245622524;
-	Fri, 11 Apr 2014 12:47:02 -0700 (PDT)
-Received: from mizar.localdomain ([95.232.251.85])
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=cojKQx6nviaw4LIwXe66lwZQuP0naoEtcvgu5+B852c=;
+	b=q7y4qvCGKy5rfb+9KMmHcjN2jA0DIabKWp3L8WkVP/Bj2XHVq5XRdZO/G3da0IFyyc
+	04yGER0/ff8BY8p8pQv6MZzqzT/geUprirHw6S84RR3DMg+StVBWoo4+JOqKhmL9Hhr0
+	9F2iVKZRyqOuPRMPAIOebiiuwUaYuNK2eZDroNZFQwcK4Q4a1hdbKnVbuwVqTAay/vZv
+	UBC1fDT9crKAjsegVVgnTJYoScbWRBEsAMmeNyNtkd5jj9hAYOkD4+0IylKb1Ft5PKZf
+	cTEqGePIbVw31DrX85AgBkLKnyTzBcgQNkQ983tPEivfkB1agfB6sYBAwrlkGKZHXXO1
+	eI+g==
+X-Received: by 10.14.87.201 with SMTP id y49mr2373201eee.62.1397299443955;
+	Sat, 12 Apr 2014 03:44:03 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	l42sm19893596eew.19.2014.04.11.12.47.01 for <multiple recipients>
+	o7sm24425663eew.25.2014.04.12.03.44.02 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 11 Apr 2014 12:47:01 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 12 Apr 2014 03:44:02 -0700 (PDT)
+Date: Sat, 12 Apr 2014 12:44:12 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Apr 2014 21:46:56 +0200
-Message-Id: <1397245616-9769-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.8.1.5
-Subject: [meta-handheld][PATCH] linux-yocto_3.14: fix: do not pollute variables of the main recipe
+Message-ID: <20140412104412.GW2132@jama>
+References: <1396701582-15906-1-git-send-email-trevor.woerner@linaro.org>
+	<1396701582-15906-2-git-send-email-trevor.woerner@linaro.org>
+MIME-Version: 1.0
+In-Reply-To: <1396701582-15906-2-git-send-email-trevor.woerner@linaro.org>
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: patches@linaro.org
+Subject: Re: [meta-oe][PATCH 1/3] liblockfile: remove configure warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,113 +47,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Apr 2014 19:47:03 -0000
+X-List-Received-Date: Sat, 12 Apr 2014 10:44:05 -0000
+X-Groupsio-MsgNum: 49196
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mlvFMpb4NrD3AMcD"
+Content-Disposition: inline
 
-The restyling of the .bbappend was seemingly a good simplification but
-building for qemux86 fails if the meta-handheld layer is included.
+--mlvFMpb4NrD3AMcD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* ERROR: Function failed: Fetcher failure for URL: 'file://defconfig'.
-* Unable to fetch URL from any source.
+On Sat, Apr 05, 2014 at 08:39:40AM -0400, Trevor Woerner wrote:
+> This fix gets rid of the following warning:
+>=20
+>     configure: WARNING: unrecognized options: ... --with-libtool-sysroot
+>=20
+> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+> ---
+>  .../liblockfile/liblockfile-1.09/configure.patch       | 18 ++++++++++++=
+++----
+>  .../recipes-extended/liblockfile/liblockfile_1.09.bb   |  4 ++++
+>  2 files changed, 18 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile-1.09/config=
+ure.patch b/meta-oe/recipes-extended/liblockfile/liblockfile-1.09/configure=
+=2Epatch
+> index ea13e11..12413cf 100644
+> --- a/meta-oe/recipes-extended/liblockfile/liblockfile-1.09/configure.pat=
+ch
+> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile-1.09/configure.pat=
+ch
+> @@ -3,16 +3,26 @@
+>  # Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
+>  #
+> =20
+> ---- liblockfile-1.05/./configure.in~configure
+> -+++ liblockfile-1.05/./configure.in
+> -@@ -1,4 +1,5 @@
+> +Index: liblockfile-1.09/configure.in
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- liblockfile-1.09.orig/configure.in
+> ++++ liblockfile-1.09/configure.in
+> +@@ -1,10 +1,13 @@
+>  -AC_INIT(lockfile.c)
+>  +AC_INIT
+>  +AC_CONFIG_SRCDIR([lockfile.c])
+>   AC_CONFIG_HEADER(autoconf.h)
+>   AC_REVISION($Revision: 1.0 $)dnl
+>  =20
+> -@@ -111,7 +112,8 @@
+> + dnl Check for GNU cc
+> + AC_PROG_CC
+> +=20
+> ++AC_PROG_LIBTOOL
+> ++
+> + dnl Set Default CFLAGS
+> + if test "$GCC" =3D "yes"; then
+> +     CFLAGS=3D"$CFLAGS -Wall -D_GNU_SOURCE"
+> +@@ -111,7 +114,8 @@ AC_SUBST(TARGETS)
+>   AC_SUBST(INSTALL_TARGETS)
+>   AC_SUBST(nfslockdir)
+>  =20
+> diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb b/m=
+eta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
+> index 88ebfd8..67d2221 100644
+> --- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
+> +++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
+> @@ -16,6 +16,10 @@ inherit autotools
+> =20
+>  EXTRA_OECONF =3D "--enable-shared"
 
-Go back to the previous syntax used for the older kernel versions and
-fix the contamination of the variables for foreign machines once for all.
+Can you please rebase on current master (maybe you have one more patch
+which you haven't sent), because in master there is:
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-yocto_3.14.bbappend | 44 +++++++++++++++++++++++---
- 1 file changed, 39 insertions(+), 5 deletions(-)
+EXTRA_OECONF =3D "--enable-shared --enable-static"
 
-diff --git a/recipes-kernel/linux/linux-yocto_3.14.bbappend b/recipes-kernel/linux/linux-yocto_3.14.bbappend
-index e80bbbe..95d0a0e 100644
---- a/recipes-kernel/linux/linux-yocto_3.14.bbappend
-+++ b/recipes-kernel/linux/linux-yocto_3.14.bbappend
-@@ -1,21 +1,42 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.14:${THISDIR}/${PN}:"
- 
-+# Declare more compatible machines
- COMPATIBLE_MACHINE .= "|akita|c7x0|collie|h3600|hx4700|poodle|spitz|tosa"
- 
--KMACHINE_${MACHINE} = "${MACHINE}"
--KERNEL_EXTRA_FEATURES_${MACHINE} ?= ""
-+KERNEL_EXTRA_FEATURES_akita ?= ""
-+KERNEL_EXTRA_FEATURES_c7x0 ?= ""
-+KERNEL_EXTRA_FEATURES_collie ?= ""
-+KERNEL_EXTRA_FEATURES_h3600 ?= ""
-+KERNEL_EXTRA_FEATURES_hx4700 ?= ""
-+KERNEL_EXTRA_FEATURES_poodle ?= ""
-+KERNEL_EXTRA_FEATURES_spitz ?= ""
-+KERNEL_EXTRA_FEATURES_tosa ?= ""
- 
--OELOGO_PATCH = '${@base_contains("MACHINE_FEATURES", "qvga", "OE-qvga-logo.patch", "OE-vga-logo.patch", d)}'
--SRC_URI += "file://${OELOGO_PATCH}"
-+KMACHINE_akita = "akita"
-+KMACHINE_c7x0 = "c7x0"
-+KMACHINE_collie = "collie"
-+KMACHINE_h3600 = "h3600"
-+KMACHINE_hx4700 = "hx4700"
-+KMACHINE_poodle = "poodle"
-+KMACHINE_spitz = "spitz"
-+KMACHINE_tosa = "tosa"
- 
- # Note: Providing "defconfig" we bypass the linux-yocto processing
--SRC_URI += "file://defconfig"
-+
-+SRC_URI_append_akita = " \
-+           file://defconfig \
-+           file://OE-vga-logo.patch \
-+           "
- 
- SRC_URI_append_c7x0 = " \
-+           file://defconfig \
-+           file://OE-vga-logo.patch \
-            file://corgi-gpio_keys.patch \
-            "
- 
- SRC_URI_append_collie = " \
-+           file://defconfig \
-+           file://OE-qvga-logo.patch \
-            file://locomo_kbd_tweak-r2.patch \
-            \
-            file://collie-irda.patch \
-@@ -40,6 +61,8 @@ SRC_URI_append_collie = " \
-            "
- 
- SRC_URI_append_h3600 = " \
-+           file://defconfig \
-+           file://OE-qvga-logo.patch \
-            file://0001-MFD-driver-for-Atmel-Microcontroller-on-iPaq-h3xxx.patch \
-            file://0002-ARM-sa1100-add-Micro-ASIC-platform-device.patch \
-            file://0003-input-driver-for-microcontroller-keys-on-the-iPaq-h3.patch \
-@@ -50,17 +73,28 @@ SRC_URI_append_h3600 = " \
-            "
- 
- SRC_URI_append_hx4700 = " \
-+           file://defconfig \
-+           file://OE-vga-logo.patch \
-            file://hx4700-change-led-trigger-assignments.patch \
-            file://hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch \
-            "
- 
- SRC_URI_append_poodle = " \
-+           file://defconfig \
-+           file://OE-qvga-logo.patch \
-            file://locomo_kbd_tweak-r2.patch \
-            file://locomo-fix-SCL-SDA.patch \
-            file://locomolcd-suspend-resume.patch \
-            "
- 
-+SRC_URI_append_spitz = " \
-+           file://defconfig \
-+           file://OE-vga-logo.patch \
-+           "
-+
- SRC_URI_append_tosa = " \
-+           file://defconfig \
-+           file://OE-vga-logo.patch \
-            file://0001-HACK-video-move-backlight-to-the-end-of-Makefile.patch \
-            file://0002-tosa-bl-correct-backlight-calculations.patch \
-            file://0003-tmio-call-tmiofb_set_par-in-tmiofb_probe.patch \
--- 
-1.8.1.5
+so this doesn't apply.
 
+> =20
+> +do_configure_prepend () {
+> +    touch install-sh
+> +}
+> +
+>  do_install () {
+>      oe_runmake 'ROOT=3D${D}' INSTGRP=3D'' install
+>  }
+> --=20
+> 1.9.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--mlvFMpb4NrD3AMcD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNJGPwACgkQN1Ujt2V2gByeLQCeOUE31lL3kYlSLPn1NLBnOyJO
+bt4An15kgi9SCO7np2AxjYTpu8XDbeuQ
+=IU6Q
+-----END PGP SIGNATURE-----
+
+--mlvFMpb4NrD3AMcD--
