@@ -1,38 +1,31 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BBF165ED4
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 81AA465D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Apr 2014 19:14:17 +0000 (UTC)
-Received: by mail-we0-f172.google.com with SMTP id t61so6712609wes.17
+	Sun, 13 Apr 2014 08:21:50 +0000 (UTC)
+Received: by mail-ig0-f171.google.com with SMTP id c1so2333986igq.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Apr 2014 12:14:18 -0700 (PDT)
+	Sun, 13 Apr 2014 01:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=esCsjsZERR+lhHfMzGgg64ru/k3YPxVIxnGO+vvXRXE=;
-	b=DrxkUNoObO3J3WICWNyk5g78fC6MjS2MUIeu39cnlMYwldzxzCboJ1Uk15CFbKinyd
-	aej1+gE7cW75mEEgxd+9yzPWVlVn08lErPZZR/7NKBAa2UZ3AczabZ+FrhcvIz1IcDNW
-	nGrFVVnjKhIVLzy+Llt/zNF1U+C7yv3dMZeBKBD2vXERAWHH2FzFs5Oso++WZdsA/TCz
-	rbIaEC4JJB0yopJjFi4rOQj4ZcBmMpBe4xDxnWRecBjr9DmYjN2zZXb1tPUrjWgQCjXm
-	2Bxh50/rgdV5DqJO8tuQlWvgd3NkmP/8Zoebeviu0p3szYsrPdtqndy+OutcVlDUh7Vq
-	e62g==
-X-Received: by 10.180.14.199 with SMTP id r7mr3389511wic.0.1397330058051;
-	Sat, 12 Apr 2014 12:14:18 -0700 (PDT)
-Received: from desktop.betafive.co.uk
-	(cpc66027-shep11-2-0-cust140.8-3.cable.virginm.net. [81.110.75.141])
-	by mx.google.com with ESMTPSA id r4sm16930245wjz.28.2014.04.12.12.14.16
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 12 Apr 2014 12:14:16 -0700 (PDT)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=pjcaWFQuRPH1w8CXEsait0rD/Jbt1dO3ia85tS+wk1Q=;
+	b=zeFeWTvqUrg4Y3wYY6JKIgZHBqZfYW9R+2RFjkyqFDU7UZ4CROe4W35G5mbNmJPGFV
+	tXQmcf//mqNvGccYGYVyvybERXi6Nn+UiCqr4DojHLvbfNFUDyFN3whrLPS7YZkxISK9
+	BaAvamRYsvzbBEc9tIMjMG7kcKILirJcIG2wxmds8/JEVYB//bYAc5dfnWj7e9vWL6qC
+	PIh4CafjLka46AGzIKLQy4X4FUp42aUhxUPKgchVsZIxeGW/5az5v6v19j7yGAnbUpI3
+	BTZedxATdCQTqTVRDnR3P1/hP3pEvfB1mwm705+wk206Fxb60NW7XH4ZJRTYpkVJIx9d
+	sn0Q==
+MIME-Version: 1.0
+X-Received: by 10.50.66.203 with SMTP id h11mr8214183igt.49.1397377311970;
+	Sun, 13 Apr 2014 01:21:51 -0700 (PDT)
+Received: by 10.64.230.100 with HTTP; Sun, 13 Apr 2014 01:21:51 -0700 (PDT)
+Date: Sun, 13 Apr 2014 17:21:51 +0900
+Message-ID: <CALYKT1ja5AtU45KxEXqZSvFiwfUDZpT5539zzoWs1=wh7c89Tw@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Apr 2014 20:14:09 +0100
-Message-Id: <1397330049-20282-2-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 1.9.2
-In-Reply-To: <1397330049-20282-1-git-send-email-paul@paulbarker.me.uk>
-References: <1397330049-20282-1-git-send-email-paul@paulbarker.me.uk>
-Subject: [PATCH] vim: Upgrade to v7.4.258
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How can I place gdbserver in my target system?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,62 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Apr 2014 19:14:18 -0000
+X-List-Received-Date: Sun, 13 Apr 2014 08:21:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The patch against configure.in was resubmitted to the vim mailing list and was
-merged into the upstream sources so is no longer needed.
+Hi,
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
----
- .../vim/files/configure.in_remove_CC_quotes.patch       | 17 -----------------
- .../vim/{vim_7.4.155.bb => vim_7.4.258.bb}              |  5 ++---
- 2 files changed, 2 insertions(+), 20 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes.patch
- rename meta-oe/recipes-support/vim/{vim_7.4.155.bb => vim_7.4.258.bb} (96%)
+I want to debug my application on target embedded system using cross gdb.
+To do this I learned that I need to place a proper gdbserver in my target
+system.
 
-diff --git a/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes.patch b/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes.patch
-deleted file mode 100644
-index c8cfe8e..0000000
---- a/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes.patch
-+++ /dev/null
-@@ -1,17 +0,0 @@
--upstream: http://groups.google.com/group/vim_dev/browse_thread/thread/5685c3b859e3c793# 
--status: reported upstream
----- vim72-orig/src/configure.in	2010-09-29 19:13:33.000000000 +0200
--+++ vim72/src/configure.in	2010-09-29 19:17:07.000000000 +0200
--@@ -35,10 +35,10 @@
-- fi
-- if test "$GCC" = yes; then
--   dnl method that should work for nearly all versions
---  gccversion=`"$CC" -dumpversion`
--+  gccversion=`$CC -dumpversion`
--   if test "x$gccversion" = "x"; then
--     dnl old method; fall-back for when -dumpversion doesn't work
---    gccversion=`"$CC" --version | sed -e '2,$d' -e 's/darwin.//' -e 's/^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
--+    gccversion=`$CC --version | sed -e '2,$d' -e 's/darwin.//' -e 's/^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
--   fi
--   dnl version 4.0.1 was reported to cause trouble on Macintosh by Marcin Dalecki
--   if test "$gccversion" = "3.0.1" -o "$gccversion" = "3.0.2" -o "$gccversion" = "4.0.1"; then
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.155.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-similarity index 96%
-rename from meta-oe/recipes-support/vim/vim_7.4.155.bb
-rename to meta-oe/recipes-support/vim/vim_7.4.258.bb
-index 0d98e7a..878c79e 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.155.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-@@ -6,9 +6,8 @@ RSUGGESTS_${PN} = "diffutils"
- LICENSE = "vim"
- LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
- 
--SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
--	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
--SRCREV = "v7-4-155"
-+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
-+SRCREV = "v7-4-258"
- 
- S = "${WORKDIR}/${PN}/src"
- 
--- 
-1.9.2
+My target system runs by oe-core.
+Then how can I prepare gdbserver for my target?
 
+And also I'd like to know how can I get a proper cross toolchain for using
+cross gdb for oe-core system.
+
+Now what I have is only general arm cross toolchain. And I believe this
+toolchain is not proper for oe-core system.
+oe-core uses not a cross build system - It's built under some kind of
+sandbox environment. This makes some difficulties for me.
+
+Previously I've asked a question - how can I use gdb in oe?. I raised new
+question because this time I need to know about how to install gdbserver.
+
+Thank you Brian Hutchinson, Mats K=E4rrman for the previous answers.
+Thank you for someone who might answer me in advance.
+
+Sincerely
+Journeyer
+
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
 
