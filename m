@@ -1,33 +1,44 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id D8CD365E73
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 35E4065E74
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Apr 2014 08:26:00 +0000 (UTC)
-Received: by mail-ie0-f171.google.com with SMTP id ar20so7071095iec.16
+	Sun, 13 Apr 2014 15:54:12 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id c1so2536318igq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Apr 2014 01:26:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=6fLm8dMCSaAqg6a+HzUySaCRzxXN3wO8u1N/0lD06p8=;
-	b=vENyP0Dt45RX5ppWSm7f0M5Xlyf/mn2bR+S5RKjvqJzHgYRAsRJRaVN255t6bfSjMw
-	8LoiJJ0LpJZAL0q5e1ODC7BrErnhOVvfbYaXJAMh2C6UwCbwZ45Z0CubYNPGHXxHNwHe
-	B+Qxt6Yv/XPw7Jbb9zLfDeBNjtcZz18LLBKXOfDUNaGOVqvGgfMNYDZaCy5YByKEh8N7
-	dHV613yszKSznFVabgxZKs0eLi81aRtwK3hcBM3U+7lbNrmU2ODi73Ym3H5PIZjWjWHL
-	4IX07nmLdKM1MaCZKGOj0H3f1ownGAMWDBRgmEqXjQ9g3pysqbO9HVxzDwr5grphcSR6
-	dY9Q==
+	Sun, 13 Apr 2014 08:54:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=x3NmmN9QsT+haAIJuxXXE3AW2LIEP7QwWJ6pxycGfVk=;
+	b=fQBB90nY618hWmbNF9iaFb/1ZP07oHKBWi1cmo07ppBogbAptS9daVNTFVYFmvQ052
+	Z9s5pluxWc/z8j0JbBtbF0yP9Z0MekJe5q1Scb3FFJ8AE6tSwsawDbtcb3D7a05r/6Rl
+	EHpJoSLkkX9r4/xcofEmrjOlC100OgQJeAr1GRMfUX/MinRDCPgdoGF54UF/K6NWmZHc
+	IMIcH1xDigwzySQJgmsMScNfsowfD9c2FqLcBFyAxVvzwFUUZCHOpPabcJAqfFNp2tAm
+	iQGa3CI+c+/j9s4e9AZerUISpXtm06AMAu2rUDwZ6Qj7YBLn6JtwIsIPth7TH7zVaLlA
+	D1eA==
+X-Gm-Message-State: ALoCoQmsmyQwi91ZvHmAMLkkOtERIpYT+lDJeeGoS6lRX8k5qZOHoCAoS0S3p6u+4C2WZ3SQdyC1
+X-Received: by 10.42.247.132 with SMTP id mc4mr29266227icb.44.1397404453362;
+	Sun, 13 Apr 2014 08:54:13 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158])
+	by mx.google.com with ESMTPSA id z4sm22434779igl.13.2014.04.13.08.54.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sun, 13 Apr 2014 08:54:12 -0700 (PDT)
+Message-ID: <534AB323.7050509@linaro.org>
+Date: Sun, 13 Apr 2014 11:54:11 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.3.0
 MIME-Version: 1.0
-X-Received: by 10.42.82.148 with SMTP id d20mr5916085icl.50.1397377561738;
-	Sun, 13 Apr 2014 01:26:01 -0700 (PDT)
-Received: by 10.64.230.100 with HTTP; Sun, 13 Apr 2014 01:26:01 -0700 (PDT)
-In-Reply-To: <CALYKT1ja5AtU45KxEXqZSvFiwfUDZpT5539zzoWs1=wh7c89Tw@mail.gmail.com>
-References: <CALYKT1ja5AtU45KxEXqZSvFiwfUDZpT5539zzoWs1=wh7c89Tw@mail.gmail.com>
-Date: Sun, 13 Apr 2014 17:26:01 +0900
-Message-ID: <CALYKT1hh2+XUNyOkAs8wfwtPavsKYwniu--FrcRuRzjMZNMr_Q@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I place gdbserver in my target system?
+References: <1396701582-15906-1-git-send-email-trevor.woerner@linaro.org>	<1396701582-15906-2-git-send-email-trevor.woerner@linaro.org>
+	<20140412104412.GW2132@jama>
+In-Reply-To: <20140412104412.GW2132@jama>
+Subject: Re: [meta-oe][PATCH 1/3] liblockfile: remove configure warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,67 +52,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Apr 2014 08:26:03 -0000
+X-List-Received-Date: Sun, 13 Apr 2014 15:54:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 04/12/14 06:44, Martin Jansa wrote:
+> Can you please rebase on current master (maybe you have one more patch
+> which you haven't sent), because in master there is:
+>
+> EXTRA_OECONF = "--enable-shared --enable-static"
+>
+> so this doesn't apply.
 
-If I just grep gebserver source code and place it into my oe sourcecode and
-build an image, I believe I can place gdbserver into my target system.
-
-After I did this, if I use general purpose gcc crosstoolcahin(cross gdb).
-can I cross debug?
-
-I'd rather first just do this ... and I will update my question.
-
-Thank you!
-Sincerely
-Journeyer
-
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
-
-
-2014-04-13 17:21 GMT+09:00 Journeyer J. Joh <oosaprogrammer@gmail.com>:
-
-> Hi,
->
-> I want to debug my application on target embedded system using cross gdb.
-> To do this I learned that I need to place a proper gdbserver in my target
-> system.
->
-> My target system runs by oe-core.
-> Then how can I prepare gdbserver for my target?
->
-> And also I'd like to know how can I get a proper cross toolchain for usin=
-g
-> cross gdb for oe-core system.
->
-> Now what I have is only general arm cross toolchain. And I believe this
-> toolchain is not proper for oe-core system.
-> oe-core uses not a cross build system - It's built under some kind of
-> sandbox environment. This makes some difficulties for me.
->
-> Previously I've asked a question - how can I use gdb in oe?. I raised new
-> question because this time I need to know about how to install gdbserver.
->
-> Thank you Brian Hutchinson, Mats K=E4rrman for the previous answers.
-> Thank you for someone who might answer me in advance.
->
-> Sincerely
-> Journeyer
->
-> ----------------------------------------
-> Journeyer J. Joh
-> o o s a p r o g r a m m e r
-> a t
-> g m a i l  d o t  c o m
-> ----------------------------------------
->
->
+Okay, I'll send a v2.
 
