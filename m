@@ -1,26 +1,35 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CBD965E99
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id D6B2565DCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 07:16:44 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3E7Gg1B005346
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Apr 2014 07:43:37 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1WZbYG-0000PW-EM for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Apr 2014 09:43:36 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Apr 2014 09:43:36 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 00:16:42 -0700 (PDT)
-Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Mon, 14 Apr 2014 00:16:41 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Apr 2014 15:16:38 +0800
-Message-ID: <bbac515278f9507ebb997506af418a1b8fe02753.1397459226.git.Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1397459226.git.Chong.Lu@windriver.com>
+	Mon, 14 Apr 2014 09:43:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 14 Apr 2014 09:43:24 +0200
+Message-ID: <lig3ir$ibp$1@ger.gmane.org>
 References: <cover.1397459226.git.Chong.Lu@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 1/2] mariadb: use /bin/false as the login shell
+	<2201d43b35ff3c7007ccbd3805b2d4ec0d0b9193.1397459226.git.Chong.Lu@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+In-Reply-To: <2201d43b35ff3c7007ccbd3805b2d4ec0d0b9193.1397459226.git.Chong.Lu@windriver.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [PATCH 2/2] mariadb: add perl to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2014 07:16:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Apr 2014 07:43:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Use /bin/false as the login shell, just like what Ubuntu does,
-otherwise there might be secure issue.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
----
- meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Chong Lu schreef op 14-04-14 09:16:
+> Perl doesn't be installed in small image, but mariadb-server,
+> mariadb-client and mariadb-leftovers need it in runtime, so we add perl
+> to RDEPENDS.
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-index 100b3a7..37a0f0c 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-@@ -35,7 +35,7 @@ INITSCRIPT_NAME = "mysqld"
- INITSCRIPT_PARAMS = "start 45 5 . stop 45 0 6 1 ."
- 
- USERADD_PACKAGES = "${PN}-server"
--USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g nogroup mysql"
-+USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g nogroup --shell /bin/false mysql"
- 
- 
- export ac_cv_path_PS="/bin/ps"
--- 
-1.8.1.2
+It doesn't need any perl modules to work?
+
+> 
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> Signed-off-by: Chong
+> Lu <Chong.Lu@windriver.com> --- 
+> meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 4 ++++ 1 file changed,
+> 4 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+> b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc index 37a0f0c..e474b3c
+> 100644 --- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc +++
+> b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc @@ -116,6 +116,10 @@
+> FILES_${PN} = " " RDEPENDS_${PN} = "${PN}-client ${PN}-server" 
+> ALLOW_EMPTY_${PN} = "1"
+> 
+> +RDEPENDS_${PN}-client = "perl" +RDEPENDS_${PN}-server = "perl" 
+> +RDEPENDS_${PN}-leftovers = "perl" + FILES_libmysqlclient = "\ 
+> ${libdir}/libmysqlclient.so.* \ ${libdir}/plugin/*.so.*"
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFTS5GcMkyGM64RGpERAoYVAJ4+8cnpKMHIC7YqhO/N4QZPMAX3DACfaheN
+oB0KZz+3h0heDx7RJ5gdiT8=
+=ttpI
+-----END PGP SIGNATURE-----
 
 
