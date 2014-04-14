@@ -1,38 +1,41 @@
-Return-Path: <marc.ferland@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 99DA56121F
+Return-Path: <pirobk@gmail.com>
+Received: from mail-bk0-f53.google.com (mail-bk0-f53.google.com
+	[209.85.214.53])
+	by mail.openembedded.org (Postfix) with ESMTP id A62CA65E80
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 14:14:29 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id q107so8322477qgd.15
+	Mon, 14 Apr 2014 15:07:28 +0000 (UTC)
+Received: by mail-bk0-f53.google.com with SMTP id r7so3085096bkg.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 07:14:30 -0700 (PDT)
+	Mon, 14 Apr 2014 08:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id;
-	bh=ikRNdwKSudWFqdJR0JQv/v53VdtSj55Upgencd8MBSc=;
-	b=XnTVbrCa25fNqCrtePO9FGlcMsv8/iUoy3K9O7xpmVuu7P66nabNjJF32Kd7L+8Dlj
-	HJBURxMsVnSYzwO1eRyNd1PKQSqqSMj1CfFmMM6BCaCiJ0Agafl3N6zld4blMcMV4fQr
-	HUVgW/3b1ekU5kt0rx76nrY6IFX5y8r9n3hdemqIdcvtf+cgBNIxDLDcVbhRSvLfyzU5
-	MnW09RdmfUfT20mIX1YIYw8p6QTqOQj2mUWg28/jsumI1GpTUyo35ljRC8nnqFY36J6F
-	kZvVkbDt91QsqEVUJn+bN6r+Z5a0YagO6dk1cwzOaRwrPcVy22xD1X9G/La1D552eWDA
-	bJwg==
-X-Received: by 10.224.30.70 with SMTP id t6mr20040713qac.30.1397484870431;
-	Mon, 14 Apr 2014 07:14:30 -0700 (PDT)
-Received: from ferlandm@sonatest.com
-	(modemcable066.15-37-24.static.videotron.ca. [24.37.15.66])
-	by mx.google.com with ESMTPSA id t5sm20639283qge.0.2014.04.14.07.14.28
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=M9xgU2sSiKwsVm1bw4dIpk3RwSn3sbU3AMpxRzeRAHI=;
+	b=f8lAYVDshBApjCp0AEfMR3DMZfCdQzP1oUh0c3jM7r1nx6Uwv5Uy2eL5TdmU5qgoAd
+	qkpOgjs5P/LqHy3YHwp0/GC8QpFDmayveK3REn7ehHJ0JliiY7/flqPjHmlnfmoimXfk
+	1DpuMMlETOzNsGCs9mWTG0sfyGBz/oaZKE3LNyddHd4e6vPVbnmtkMWMdp219QUA5WRO
+	VRr9kwyu5UkdX4Kur09n5hymSjJvuo7olTQrztYWeGGJnvp+5myj+YLnvJupJKp/ghIX
+	GwlZBUqNYnq3+Ze3Uboz6V7D+XSreMFc+rXR+ZwcmGMNG6+enD7aMlrdeK5caVlgrETo
+	uIQg==
+X-Received: by 10.205.73.200 with SMTP id yt8mr293036bkb.54.1397488048366;
+	Mon, 14 Apr 2014 08:07:28 -0700 (PDT)
+Received: from [192.168.1.149] (p5DCFD29F.dip0.t-ipconnect.de.
+	[93.207.210.159])
+	by mx.google.com with ESMTPSA id ez1sm17394612bkb.2.2014.04.14.08.07.27
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 14 Apr 2014 07:14:29 -0700 (PDT)
-Sender: Marc Ferland <marc.ferland@gmail.com>
-Received: by ferlandm@sonatest.com (sSMTP sendmail emulation);
-	Mon, 14 Apr 2014 10:14:27 -0400
-From: Marc Ferland <ferlandm@sonatest.com>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 14 Apr 2014 08:07:27 -0700 (PDT)
+Message-ID: <534BF9AE.10104@gmail.com>
+Date: Mon, 14 Apr 2014 17:07:26 +0200
+From: =?ISO-8859-1?Q?Bj=F6rn_Krombholz?= <pirobk@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Icedove/24.4.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Apr 2014 10:14:27 -0400
-Message-Id: <1397484867-4582-1-git-send-email-ferlandm@sonatest.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCHv2] autobahn: fix 'Missing sha256 SRC_URI checksum'
+References: <1397233423-26218-1-git-send-email-b.krombholz@pironex.de>	<20140411182042.GU2132@jama>
+	<20140414132858.GB2132@jama>
+In-Reply-To: <20140414132858.GB2132@jama>
+Subject: Re: [meta-oe][PATCH 1/1] qwt-e: qwt 6.1.0 FTBFS fix for qt-embedded targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2014 14:14:30 -0000
+X-List-Received-Date: Mon, 14 Apr 2014 15:07:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Marc Ferland <ferlandm@sonatest.com>
----
- meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb | 1 +
- 1 file changed, 1 insertion(+)
+On 04/14/2014 03:28 PM, Martin Jansa wrote:
+> On Fri, Apr 11, 2014 at 08:20:42PM +0200, Martin Jansa wrote:
+>> On Fri, Apr 11, 2014 at 06:23:43PM +0200, Björn Krombholz wrote:
+>>> ---
+>>> for yocto-1.4 branch, 1.5 is still on qwt 6.0.1
+>
+> meta-oe/master also has qwt 6.0.1, where is patch for 6.1.0?
 
-diff --git a/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb b/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-index a1e8c5f..ac775c4 100644
---- a/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-+++ b/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fde
- 
- SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
- SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
-+SRC_URI[sha256sum] = "94ae5c6f37f9fe7c9d3f12c170fcc273afed4104a1c5508b26d6014bb9e6373e"
- 
- S = "${WORKDIR}/autobahn-${PV}"
- 
+Args, sorry - mixed up OE's meta-oe with Angstrom's variant.
+
+So the 6.1 commit is:
+
+7703a14b39a4d599df057c0a3d587238d26f00c4
+
+in branch: angstrom-staging-yocto1.4
+
+
 -- 
-1.8.3.2
-
+Björn Krombholz
+pironex GmbH -- http://www.pironex.de
 
