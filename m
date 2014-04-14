@@ -1,35 +1,37 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 52D6A605B3
+Return-Path: <pirobk@gmail.com>
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 9201165DE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 09:06:56 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WZcqu-0006Fg-Hq for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Apr 2014 11:06:56 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 11:06:56 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 14 Apr 2014 09:54:56 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id d49so6346303eek.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Apr 2014 11:06:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 14 Apr 2014 02:54:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Ckbh/30GpNYBEBKeiAIO6E+jAc6hE+240WDIA2Qqpp0=;
+	b=HiywiJR9WhimeCG5MDSjzcOx7LmBDlK+EqH/sDQkmTdQEh4k9gnW2OSVwIsdJQH2hB
+	mFG7kuQYfi8wf7rBiVTgOi7STnAYQgEum6BTUDomZc8K8MDLOsIPql2mJ5qo9gl4VUHc
+	2sZY0FFz5OCeMtumdj90nL/4yBlzCiT0bNbgTBq6ROsaPJffeO8QieyQRu6H9oq1XI/E
+	vN2gfYzREb267LaNdNiVnC+vMMYw3CI2mly5Lw7kGxpcbMhrfDmf/+Wc3IZv/8t/+6Sm
+	saGJpnKVqD7S0KefdHBYlQJzlgiPo09qAEAmuRHTSj1lX+mWqzOhBcnZ2fozLmV6nhVC
+	fPFA==
+X-Received: by 10.15.43.77 with SMTP id w53mr50446385eev.10.1397469296873;
+	Mon, 14 Apr 2014 02:54:56 -0700 (PDT)
+Received: from lx.fritz.box (p5DCFD29F.dip0.t-ipconnect.de. [93.207.210.159])
+	by mx.google.com with ESMTPSA id
+	l42sm39747685eew.19.2014.04.14.02.54.56 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 14 Apr 2014 02:54:56 -0700 (PDT)
+From: =?UTF-8?q?Bj=C3=B6rn=20Krombholz?= <b.krombholz@pironex.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 14 Apr 2014 11:06:40 +0200
-Message-ID: <lig8f0$nkv$1@ger.gmane.org>
-References: <cover.1397459226.git.Chong.Lu@windriver.com>	<2201d43b35ff3c7007ccbd3805b2d4ec0d0b9193.1397459226.git.Chong.Lu@windriver.com>	<lig3ir$ibp$1@ger.gmane.org>	<534B971C.2070401@windriver.com>	<lig6kb$t82$1@ger.gmane.org>
-	<534BA2C6.3050308@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-In-Reply-To: <534BA2C6.3050308@windriver.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH 2/2] mariadb: add perl to RDEPENDS
+Date: Mon, 14 Apr 2014 11:54:36 +0200
+Message-Id: <1397469276-26939-1-git-send-email-b.krombholz@pironex.de>
+X-Mailer: git-send-email 1.9.2
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Bj=C3=B6rn=20Krombholz?= <b.krombholz@pironex.de>
+Subject: [meta-oe][PATCH v2] qwt-e: qwt 6.1.0 FTBFS fix for qt-embedded targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,49 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Apr 2014 09:06:57 -0000
+X-List-Received-Date: Mon, 14 Apr 2014 09:54:58 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+QWT 6.1.0 changed the handling of the QT_INFIX variable.
+Builds with any QT_INFIX defined will fail as the generated qmake TARGET
+is always libqwt.* ignoring the INFIX. Sub-projects like designer respect
+the INFIX variable however and won't find the libqwtE*.so.
 
-Chong Lu schreef op 14-04-14 10:56:
-> 
-> On 04/14/2014 04:35 PM, Koen Kooi wrote: Chong Lu schreef op 14-04-14
-> 10:06:
->>>> On 04/14/2014 03:43 PM, Koen Kooi wrote: Chong Lu schreef op
->>>> 14-04-14 09:16:
->>>>>>> Perl doesn't be installed in small image, but
->>>>>>> mariadb-server, mariadb-client and mariadb-leftovers need it
->>>>>>> in runtime, so we add perl to RDEPENDS.
->>>> It doesn't need any perl modules to work?
->>>> 
->>>>> mariadb-server, mariadb-client and mariadb-leftovers need 
->>>>> /usr/bin/perl rpm -qp -R mariadb-server-5.1.67-r0.core2_64.rpm
->>>>> warning: mariadb-server-5.1.67-r0.core2_64.rpm: Header V4
->>>>> DSA/SHA1 Signature, key ID f6cf289c: NOKEY /usr/bin/perl ...
-> I get that it needs /usr/bin/perl, but you didn't answer my question:
-> 
-> It doesn't need any perl modules to work?
-> 
-> Does it actually work with only 'perl' installed and not any of the 
-> 'perl-module-' packages?
-> 
-> 
->> I don't find more dependencies about perl module. I make a image and
->> start mariadb. It works well.
+Signed-off-by: Björn Krombholz <b.krombholz@pironex.de>
+---
+For yocto-1.4 branch, no QWT 6.1.0 in 1.5+ yet.
 
-Can you describe the difference before and after this patch for the runtime
-behaviour? I get the impression that you only silenced output from RPM and
-didn't do any real testing or try to understand the problem
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+v2: removed PR/INC_PR, moved the SRC_URI modification to the .bb file 
+as it is only useful for qwt-e and the particular version 6.1.0.
 
-iD8DBQFTS6UgMkyGM64RGpERApbOAJ4teUaJa3Owih3cPogWpBuyrJ8V6QCfePw8
-G+rAP5C6+rkmP8Nw+loS+CM=
-=gMxa
------END PGP SIGNATURE-----
+ meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch | 13 +++++++++++++
+ meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb             |  3 +++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
+
+diff --git a/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch b/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
+new file mode 100644
+index 0000000..3a6fb64
+--- /dev/null
++++ b/meta-oe/recipes-qt/qwt/files/qwt-e_qt_infix.patch
+@@ -0,0 +1,13 @@
++Index: qwt-6.1.0/qwtfunctions.pri
++===================================================================
++--- qwt-6.1.0.orig/qwtfunctions.pri	2014-04-11 16:25:59.291152505 +0200
+++++ qwt-6.1.0/qwtfunctions.pri	2014-04-11 16:26:25.749892402 +0200
++@@ -12,7 +12,7 @@
++ defineReplace(qwtLibraryTarget) {
++ 
++     unset(LIBRARY_NAME)
++-    LIBRARY_NAME = $$1
+++    LIBRARY_NAME = $$1$${QT_LIBINFIX}
++ 
++     mac:contains(QWT_CONFIG, QwtFramework) {
++ 
+diff --git a/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb b/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
+index 7694514..4d23bc0 100644
+--- a/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
++++ b/meta-oe/recipes-qt/qwt/qwt-e_6.1.0.bb
+@@ -2,6 +2,9 @@ inherit qt4e
+ 
+ require qwt.inc
+ 
++SRC_URI += "file://qwt-e_qt_infix.patch \
++"
++
+ SRC_URI[qwt.md5sum] = "aef0437b37f191067a6a9dc01c30ba64"
+ SRC_URI[qwt.sha256sum] = "a7e3d9f1db917d186a973c5f04a316bc9607c7c35794d7a16de323aba5e17402"
+ 
+-- 
+1.9.2
 
 
