@@ -1,34 +1,32 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-oa0-f48.google.com (mail-oa0-f48.google.com
-	[209.85.219.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 2505465E77
+Return-Path: <b.hutchman@gmail.com>
+Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 53016605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2014 12:57:24 +0000 (UTC)
-Received: by mail-oa0-f48.google.com with SMTP id m1so10631972oag.21
+	Tue, 15 Apr 2014 13:06:51 +0000 (UTC)
+Received: by mail-ob0-f181.google.com with SMTP id gq1so783160obb.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2014 05:57:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=UCdkGD5gEwJTw8lo3pIWCfFv294kWtifbghp4pvUGcQ=;
-	b=P3wRnqnk3fr5FYQoJnbszZm3bw9Dtpr5xqM0KHl7PcwSjQWs1lrboRQGjTyB83fCql
-	iGaRQz2qYnh6HJgkhXeoCQ6vxApeBv8skYTcFaPiik/NdXbkPZcZ41lJIczZgSGNlxcv
-	PwrA/0rs9BqxPrmm1dok8dKwuoezyiTjnOJTu320HlXxAY21v0g74CT/JZA+ZjvinUpT
-	yJCqCmv0lqPGj8ZBXNqVC79ahAlm/s/PmccnKfhfvX+PdaV9sIT+vLjEskTDtmPcjdcm
-	cAINbC07thgzB4Ii9OB25XcgbPQgZtbbsT8IQc2NEC2oEiMFoZyBiF1809ze0em1kbHe
-	B3CQ==
-X-Gm-Message-State: ALoCoQkwDFKGEHryIoPYA+nT1cst02ucb9zoYbFTu+V8g5UVU4+v9qeRoJOtzSStBS1qylgd/oOQ
-X-Received: by 10.182.75.161 with SMTP id d1mr1306522obw.7.1397566644481; Tue,
-	15 Apr 2014 05:57:24 -0700 (PDT)
+	Tue, 15 Apr 2014 06:06:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=7LPJRD+mnC2TvtfyIx+oHDFa/FT2MWpZ6LcveC4A6AI=;
+	b=1AmDzEjhVV19WOFXE9vD90mJAHrSXHi+9lAYoHewjMYqYwZy4oD5di4G/byQ7SsF2Y
+	Jp+Sd5BhUObG0sRkZP4CE62EdZWQVimDIJfD0z5SXL7N40iqwaeQ4CTJufbX63dtjz9L
+	eq46X2ac9e5kSLGcZz8JS4/IPAIQZqN4bcX8ekkA93edamznYqrBjqjai9Ep3F5kAb6Z
+	FySPJF+sJbbZBhyTTqX6zrbvhn7lC7m75km3JMBJiQDCC8i+5+xXCvDKYKU42c7ThkZl
+	6PdrXefVAU8Cx7dXeBDXHyI8XuARUNuOb7mWl9Vwz35OVVYHv22sd2Edj6opwYFz18+U
+	plsg==
 MIME-Version: 1.0
-Received: by 10.76.110.9 with HTTP; Tue, 15 Apr 2014 05:57:03 -0700 (PDT)
+X-Received: by 10.60.37.99 with SMTP id x3mr1462024oej.2.1397567212164; Tue,
+	15 Apr 2014 06:06:52 -0700 (PDT)
+Received: by 10.60.73.165 with HTTP; Tue, 15 Apr 2014 06:06:51 -0700 (PDT)
 In-Reply-To: <CALYKT1ifSP62Tduyb3mvg-1C0_DqZJfYxKq0poZHZgwYthL_yQ@mail.gmail.com>
 References: <CALYKT1ifSP62Tduyb3mvg-1C0_DqZJfYxKq0poZHZgwYthL_yQ@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Tue, 15 Apr 2014 14:57:03 +0200
-Message-ID: <CAP71WjykwNA6uu=kCKyq-T1r3-_X+DifQROuCv1SyPUNE-2ybg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 15 Apr 2014 09:06:51 -0400
+Message-ID: <CAFZh4h_Uq+9j1U4g5RJHT+R2xf2amFD6aN++JGMAnDqa6LbBCw@mail.gmail.com>
+From: Brian Hutchinson <b.hutchman@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: Where can I get a arm cross toolchain for oe-core?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,11 +41,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2014 12:57:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Apr 2014 13:06:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Apr 15, 2014 at 1:42 PM, Journeyer J. Joh
-<oosaprogrammer@gmail.com> wrote:
+Hi again Journeyer,
+
+As always, there are more than one way to do things.  I generate various
+platform toolchains for our application engineers by using bitbake to build
+the filesystem image and then the sdk for it as in:
+
+bitbake core-image-minimal -c populate-sdk (some of the early versions of
+OE don't support the populate-sdk command but if you are using a fairly
+recent one it should work).
+
+This will make a shell script that will install the toolchain onto your
+host machine.  It is located in your build/tmp/deploy directory (I don't
+have access to my build machine at the moment so I can't get too specific).
+
+When you copy over the sdk install script to your host, it will install to
+/usr/local/oecore-i686 (name depends on your host) and if you are using
+Yocto it will be in /opt/poky/1.x
+
+If your apps are makefile based, all you have to do is source the
+environment setup script (source
+environment-setup-armv7a-vfp-neon-oe-linux-gnueabi for example) which will
+set up the path and environment variables etc., then you should be able to
+build your apps against the same libs etc., that are in the target sysroot
+because the sdk you just installed on the host has the same sysroot.
+
+So in a nut shell, that's how we do it.  It keeps the apps guys from having
+to learn the bitbake/OE/Angstrom/Arago/Yocto world.
+
+If you look at the Yocto Documentation, they have this ADT system for
+building apps that is pretty well documented.
+
+If you just google search "-c populate-sdk" I'm sure you will find a bunch
+of examples and topics.
+
+Regards,
+
+Brian
+
+
+
+On Tue, Apr 15, 2014 at 7:42 AM, Journeyer J. Joh
+<oosaprogrammer@gmail.com>wrote:
+
+> Hello,
+>
 > I use OE for qualcomm's MDM + AP soc system.
 > OE is used on AP side.
 >
@@ -75,17 +116,20 @@ On Tue, Apr 15, 2014 at 1:42 PM, Journeyer J. Joh
 > applications.
 >
 > How am I supposed to go forward?
-
-you have (at least) 2 options:
- 1- create 'native' OE/bitbake recipes for your own
-applications/libraries, that way your s/w will be integrated during
-the image creation.
- 2- use the OE SDK, which produces a toolchain and sysroot compatible
-with the image you've built. You can cross compile any application
-using this SDK and you're guaranteed that the SDK will match (libc,
-...) the content of the target image. For for information about this,
-you can look at [1] and [2].
-
-[1] http://www.yoctoproject.org/docs/1.5.1/ref-manual/ref-manual.html#cross-development-toolchain-generation
-[2] http://www.yoctoproject.org/docs/1.5.1/adt-manual/adt-manual.html
+>
+> Sincerely
+> Journeyer
+>
+> ----------------------------------------
+> Journeyer J. Joh
+> o o s a p r o g r a m m e r
+> a t
+> g m a i l  d o t  c o m
+> ----------------------------------------
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
