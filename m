@@ -1,33 +1,36 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 53016605F4
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B61DA609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2014 13:06:51 +0000 (UTC)
-Received: by mail-ob0-f181.google.com with SMTP id gq1so783160obb.26
+	Tue, 15 Apr 2014 17:14:51 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id b8so7061719lan.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2014 06:06:52 -0700 (PDT)
+	Tue, 15 Apr 2014 10:14:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=7LPJRD+mnC2TvtfyIx+oHDFa/FT2MWpZ6LcveC4A6AI=;
-	b=1AmDzEjhVV19WOFXE9vD90mJAHrSXHi+9lAYoHewjMYqYwZy4oD5di4G/byQ7SsF2Y
-	Jp+Sd5BhUObG0sRkZP4CE62EdZWQVimDIJfD0z5SXL7N40iqwaeQ4CTJufbX63dtjz9L
-	eq46X2ac9e5kSLGcZz8JS4/IPAIQZqN4bcX8ekkA93edamznYqrBjqjai9Ep3F5kAb6Z
-	FySPJF+sJbbZBhyTTqX6zrbvhn7lC7m75km3JMBJiQDCC8i+5+xXCvDKYKU42c7ThkZl
-	6PdrXefVAU8Cx7dXeBDXHyI8XuARUNuOb7mWl9Vwz35OVVYHv22sd2Edj6opwYFz18+U
-	plsg==
-MIME-Version: 1.0
-X-Received: by 10.60.37.99 with SMTP id x3mr1462024oej.2.1397567212164; Tue,
-	15 Apr 2014 06:06:52 -0700 (PDT)
-Received: by 10.60.73.165 with HTTP; Tue, 15 Apr 2014 06:06:51 -0700 (PDT)
-In-Reply-To: <CALYKT1ifSP62Tduyb3mvg-1C0_DqZJfYxKq0poZHZgwYthL_yQ@mail.gmail.com>
-References: <CALYKT1ifSP62Tduyb3mvg-1C0_DqZJfYxKq0poZHZgwYthL_yQ@mail.gmail.com>
-Date: Tue, 15 Apr 2014 09:06:51 -0400
-Message-ID: <CAFZh4h_Uq+9j1U4g5RJHT+R2xf2amFD6aN++JGMAnDqa6LbBCw@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
+	h=sender:from:to:subject:date:message-id;
+	bh=FPP0nC0r8E5Z/BdH+vVnpqzMVcy3jJq98xU+ASFHFYg=;
+	b=Zu/RMy9q0IzTdYDN3s9mmdxrlxmt2yhPcEfM5spngWs02ifIMWgsM4Zc5lpCW6+iDf
+	H6LN7n42hRw752HQRJkOjzhg9qgCCI+NyHf9+w89XFPQKhsYB8CIR1DrmAGvTv5bB/7E
+	Qrj/LK73iOUazkn7MBn8/uPocDhqf8U/wdNgLa2QAA2UVLNq8Dkz5fnKgQ1zM2eSAJ4h
+	sUtLDP9qitg5aUjgzRanJ0jUD6gLz6FkWeMqKFlkuVF71ki5/k2N1vub3OvwR9JCCNMu
+	asis68K37g5WjoPzNqXNGiYM49LbC+2e0gMIqro3sxQG18dYN2r6HRDSD+EbIEcZRXBb
+	3MxA==
+X-Received: by 10.152.28.41 with SMTP id y9mr1975693lag.57.1397582091211;
+	Tue, 15 Apr 2014 10:14:51 -0700 (PDT)
+Received: from localhost.localdomain (89-253-118-72.customers.ownit.se.
+	[89.253.118.72]) by mx.google.com with ESMTPSA id
+	jp6sm17806326lbc.15.2014.04.15.10.14.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 15 Apr 2014 10:14:50 -0700 (PDT)
+Sender: Jacob Kroon <jacob.kroon@gmail.com>
+From: Jacob Kroon <jacob.kroon@mikrodidakt.se>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Where can I get a arm cross toolchain for oe-core?
+Date: Tue, 15 Apr 2014 19:12:45 +0200
+Message-Id: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: Fix PACKAGE_GROUP deprecation warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,95 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Apr 2014 13:06:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 15 Apr 2014 17:14:55 -0000
 
-Hi again Journeyer,
+Fixes the following warning:
 
-As always, there are more than one way to do things.  I generate various
-platform toolchains for our application engineers by using bitbake to build
-the filesystem image and then the sdk for it as in:
+WARNING: PACKAGE_GROUP is deprecated, please use FEATURE_PACKAGES instead
 
-bitbake core-image-minimal -c populate-sdk (some of the early versions of
-OE don't support the populate-sdk command but if you are using a fairly
-recent one it should work).
+Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+---
+ classes/populate_sdk_qt5.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This will make a shell script that will install the toolchain onto your
-host machine.  It is located in your build/tmp/deploy directory (I don't
-have access to my build machine at the moment so I can't get too specific).
+diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+index c921983..7b31bbb 100644
+--- a/classes/populate_sdk_qt5.bbclass
++++ b/classes/populate_sdk_qt5.bbclass
+@@ -53,4 +53,4 @@ toolchain_create_sdk_env_script_append () {
+     echo 'HostBinaries = ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >> $qtconf
+ }
+ 
+-PACKAGE_GROUP_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
++FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
+-- 
+1.9.0
 
-When you copy over the sdk install script to your host, it will install to
-/usr/local/oecore-i686 (name depends on your host) and if you are using
-Yocto it will be in /opt/poky/1.x
-
-If your apps are makefile based, all you have to do is source the
-environment setup script (source
-environment-setup-armv7a-vfp-neon-oe-linux-gnueabi for example) which will
-set up the path and environment variables etc., then you should be able to
-build your apps against the same libs etc., that are in the target sysroot
-because the sdk you just installed on the host has the same sysroot.
-
-So in a nut shell, that's how we do it.  It keeps the apps guys from having
-to learn the bitbake/OE/Angstrom/Arago/Yocto world.
-
-If you look at the Yocto Documentation, they have this ADT system for
-building apps that is pretty well documented.
-
-If you just google search "-c populate-sdk" I'm sure you will find a bunch
-of examples and topics.
-
-Regards,
-
-Brian
-
-
-
-On Tue, Apr 15, 2014 at 7:42 AM, Journeyer J. Joh
-<oosaprogrammer@gmail.com>wrote:
-
-> Hello,
->
-> I use OE for qualcomm's MDM + AP soc system.
-> OE is used on AP side.
->
-> The build environment is bitbake based and I felt it like a sandbox system.
-> I am sorry I don't know about OE, bitbake very well.. almost I know
-> nothing..
->
-> I can build the target image. Yes.
-> But I wonder how I compile any 3rd party applications for my target.
-> I did build one by adding the application source code into the whole image
-> source tree.
-> This way builds the application as a part of the target image. I can find
-> it in /usr/bin with other default applications together.
->
-> And I did build another by using a general arm cross toolchain like
-> arm-none-linux-gnueabi-gcc.
-> Using this toolchain is simple and easy. But there is no gurantee that this
-> toolchain has identical libc that is used in the target image. It's not
-> only the libc, runtime library, and hardware floating point operation
-> configurations are not certain, not guranteed.
->
-> I believe there should exist one that 100% syncs with OE bitbake compile
-> environment.
-> I doubt if I can try to use just OE bitbake environment for those 3rd party
-> applications.
->
-> How am I supposed to go forward?
->
-> Sincerely
-> Journeyer
->
-> ----------------------------------------
-> Journeyer J. Joh
-> o o s a p r o g r a m m e r
-> a t
-> g m a i l  d o t  c o m
-> ----------------------------------------
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
