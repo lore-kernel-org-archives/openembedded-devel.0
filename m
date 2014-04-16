@@ -1,40 +1,31 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
-	[209.85.217.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F88765E16
+Return-Path: <kmsywula@ecsmtp.ir.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 3366765E4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 14:54:28 +0000 (UTC)
-Received: by mail-lb0-f175.google.com with SMTP id w7so8117880lbi.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 07:54:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=wucv1q22ib4PfjqeWzXwhwmsWegzUohB6nQ52pxPGv0=;
-	b=HqKWiityA4Nl8NqbWweKNoC3+Ow9DrRxig9PlBxDqEdtZJT3jEjMem7s8Wa4Kzlzd7
-	wIqlbCjlNg1l1hKhtI8dpwmX0ExQQdwjZSn43ILJSQ3zcQ2epvdQP2HeugAOXjxrk4vx
-	Uhd6AsJJ6kjiaYPGPTpDyExOgYIJ/iAIFMUcv2u6u9OYZYHbmlC/hWRbXUJX00DamRHB
-	nAotPT8iXw4+L3c21D/FqwzeYemCgHj/G1ZB+wJQVx6lwjGbAakUw5PBChrECIOiOb8a
-	Tb3M+FS+V0nK/7tzvP7ndCfTL882p4e+pXR49BM33euFlMz1xCxXalovYomp6s6f18Mj
-	w5MQ==
-X-Received: by 10.112.147.36 with SMTP id th4mr3094517lbb.32.1397660068546;
-	Wed, 16 Apr 2014 07:54:28 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.35.194 with HTTP; Wed, 16 Apr 2014 07:54:08 -0700 (PDT)
-In-Reply-To: <FFAD474B-E640-4B12-9ABE-F6FBAF8ADFA4@dominion.thruhere.net>
-References: <1397631065-13521-1-git-send-email-Chong.Lu@windriver.com>
-	<lilan2$1cs$1@ger.gmane.org>
-	<2550139.OruyIUflk8@peggleto-mobl5.ger.corp.intel.com>
-	<FFAD474B-E640-4B12-9ABE-F6FBAF8ADFA4@dominion.thruhere.net>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Wed, 16 Apr 2014 07:54:08 -0700
-X-Google-Sender-Auth: SRMDE7pwj79ZNzqsSMO2GC6Ej5A
-Message-ID: <CABcZANn7doiigEU5UUHRpuUg+dpV9VXbhhRkZzs65OYWrKc4mA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: [PATCH] rrdtool: enable libwrap, perl and python bindings
+	Wed, 16 Apr 2014 18:12:55 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 16 Apr 2014 11:12:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,873,1389772800"; d="scan'208";a="521790383"
+Received: from irvmail001.ir.intel.com ([163.33.26.43])
+	by fmsmga002.fm.intel.com with ESMTP; 16 Apr 2014 11:12:48 -0700
+Received: from irsectmgbld0302.ir.intel.com (irsectmgbld0302.ir.intel.com
+	[163.33.26.92])
+	by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id
+	s3GICl8S019469; Wed, 16 Apr 2014 19:12:47 +0100
+Received: from irsectmgbld0302.ir.intel.com (localhost [127.0.0.1])
+	by irsectmgbld0302.ir.intel.com with ESMTP id s3GIClFp058123;
+	Wed, 16 Apr 2014 19:12:47 +0100
+Received: (from kmsywula@localhost)
+	by irsectmgbld0302.ir.intel.com with œ id s3GICl92058119;
+	Wed, 16 Apr 2014 19:12:47 +0100
+From: krzysztof.m.sywula@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Apr 2014 19:11:12 +0100
+Message-Id: <1397671872-57992-1-git-send-email-krzysztof.m.sywula@intel.com>
+X-Mailer: git-send-email 1.8.2
+Cc: martin.jansa@gmail.comexit, koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,31 +39,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2014 14:54:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Apr 2014 18:12:56 -0000
 
-On Wed, Apr 16, 2014 at 3:40 AM, Koen Kooi <koen@dominion.thruhere.net>wrote:
+From: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
 
-> Op 16 apr. 2014, om 12:02 heeft Paul Eggleton <
-> paul.eggleton@linux.intel.com> het volgende geschreven:
->
-> > On Wednesday 16 April 2014 09:15:47 Koen Kooi wrote:
-> >> Chong Lu schreef op 16-04-14 08:51:
-> >>> 1. default enable libwrap, perl and python bindings
-> >>
-> >> A number of big distros are moving away from tcpwrappers, Arch has
-> removed
-> >> it years ago and fedora looked into it a while ago. Since tcpwrappershasn't
-> >> seen a release (or development) in years I think we should default it to
-> >> off.
-> >
-> > Chris added a tcp-wrappers PACKAGECONFIG to a number of recipes about a
-> year
-> > ago; I wonder if we ought to promote it to a DISTRO_FEATURES item and if
-> > appropriate just not enable that by default.
->
-> I think that makes the most sense in this situation.
->
+Signed-off-by: Krzysztof Sywula <krzysztof.m.sywula@intel.com>
+---
+ .../recipes-connectivity/bitlbee/bitlbee_3.2.1.bb  | 61 ++++++++++++++++++++++
+ .../recipes-connectivity/bitlbee/files/init-script | 31 +++++++++++
+ 2 files changed, 92 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/bitlbee/bitlbee_3.2.1.bb
+ create mode 100644 meta-oe/recipes-connectivity/bitlbee/files/init-script
 
-Agreed, I'd be all for that.
+diff --git a/meta-oe/recipes-connectivity/bitlbee/bitlbee_3.2.1.bb b/meta-oe/recipes-connectivity/bitlbee/bitlbee_3.2.1.bb
+new file mode 100644
+index 0000000..449e6a0
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bitlbee/bitlbee_3.2.1.bb
+@@ -0,0 +1,61 @@
++SUMMARY = "Bitlbee is an IRC to IM gateway that support multiple IM protocols."
++HOMEPAGE = "http://www.bitlbee.org/"
++SECTION = "console/network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++DEPENDS = "glib-2.0 openssl"
++
++SRC_URI = "http://get.bitlbee.org/src/${P}.tar.gz \
++           file://init-script"
++
++SRC_URI[md5sum] = "6ee7c7a99eb59dfcf0307fcf44c14105"
++SRC_URI[sha256sum] = "00f411dd7d6d28f30f0e73e46c9cbe88b4006e7f03adfe07b90a97280a290f59"
++
++S = "${WORKDIR}/bitlbee-${PV}"
++
++EXTRA_OECONF = "--prefix=/usr \
++                --datadir=/usr/share/bitlbee \
++                --etcdir=/etc/bitlbee \
++                --oscar=0 \
++                --ssl=openssl"
++
++do_configure () {
++    # NOTE: bitlbee's configure script is not an autotool creation, 
++    # so we do not use the default autotools_do_configure.
++    ./configure ${EXTRA_OECONF} || die "./configure failed"
++}
++
++do_compile () {
++    make CC="${CC}" LD="${LD}" || die "make failed"
++    
++    # make bitlbeed forking server
++    cd ${S}/utils
++    ${CC} bitlbeed.c -o bitlbeed || die "bitlbeed failed to compile"
++}
++
++do_install () {
++    # install bitlbee
++    install -d ${D}${localstatedir}/lib/bitlbee
++    make install DESTDIR=${D} || die "install failed"
++    make install-etc DESTDIR=${D} || die "install failed"
++
++    # copy bitlbee forking server
++    install ${S}/utils/bitlbeed ${D}${sbindir}/bitlbeed
++
++    # copy init script
++    install -d ${D}${sysconfdir}/init.d
++    install ${WORKDIR}/init-script ${D}${sysconfdir}/init.d/bitlbee
++    sed -i -e "s:BITLBEED_EXEC:${sbindir}/bitlbeed:" ${D}${sysconfdir}/init.d/bitlbee
++    sed -i -e "s:BITLBEED_OPTS::" ${D}${sysconfdir}/init.d/bitlbee
++
++    # copy bitlbee utils
++    install -d ${D}${datadir}/bitlbee
++    cp ${S}/utils/* ${D}${datadir}/bitlbee/
++    rm ${D}${datadir}/bitlbee/bitlbeed*
++}
++
++pkg_postinst_${PN} () {
++    chown nobody:nogroup ${localstatedir}/lib/bitlbee
++    chmod 700 ${localstatedir}/lib/bitlbee
++}
+diff --git a/meta-oe/recipes-connectivity/bitlbee/files/init-script b/meta-oe/recipes-connectivity/bitlbee/files/init-script
+new file mode 100644
+index 0000000..3ec3fdf
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bitlbee/files/init-script
+@@ -0,0 +1,31 @@
++#!/bin/sh
++
++case "$1" in
++    start)
++    	echo "Starting bitlbee daemon"
++	start-stop-daemon --start --startas BITLBEED_EXEC \
++		-c nobody:nogroup  --exec BITLBEED_EXEC -- \
++		BITLBEED_OPTS /usr/sbin/bitlbee
++	[ $? -eq 0 ] || echo $? "Failed to start bitlbee daemon"
++    ;;
++
++    stop)
++        echo "Stopping bitlbee daemon"
++	start-stop-daemon --stop --signal 9 \
++	                 --exec BITLBEED_EXEC
++	[ $? -eq 0 ] || echo $? "Failed to stop bitlbee daemon"
++    ;;
++
++    restart)
++    	$0 stop
++    	sleep 1
++    	$0 start
++    ;;
++
++    *)
++        echo "usage: $0 { start | stop }"
++    	exit 1
++    ;;
++esac
++
++exit 0
+-- 
+1.8.2
+
 
