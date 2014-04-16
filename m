@@ -1,18 +1,28 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 13ADA65E7B
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 67F3360B9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 09:46:14 +0000 (UTC)
-Message-ID: <534E515D.5090702@communistcode.co.uk>
-Date: Wed, 16 Apr 2014 10:46:05 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+	Wed, 16 Apr 2014 10:02:30 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga102.jf.intel.com with ESMTP; 16 Apr 2014 02:57:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,871,1389772800"; d="scan'208";a="514085333"
+Received: from dmilliga-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.64])
+	by fmsmga001.fm.intel.com with ESMTP; 16 Apr 2014 03:02:30 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>,
+	Chris Larson <chris_larson@mentor.com>
+Date: Wed, 16 Apr 2014 11:02:29 +0100
+Message-ID: <2550139.OruyIUflk8@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.4 (Linux/3.13.9-200.fc20.x86_64; KDE/4.12.4; x86_64; ; )
+In-Reply-To: <lilan2$1cs$1@ger.gmane.org>
+References: <1397631065-13521-1-git-send-email-Chong.Lu@windriver.com>
+	<lilan2$1cs$1@ger.gmane.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1397640676-27955-1-git-send-email-jackie.huang@windriver.com>
-In-Reply-To: <1397640676-27955-1-git-send-email-jackie.huang@windriver.com>
-Subject: Re: [meta-oe][PATCH] rsyslog: add status command and minor fixes for initscript
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] rrdtool: enable libwrap, perl and python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,106 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2014 09:46:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Apr 2014 10:02:33 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 16/04/14 10:31, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+On Wednesday 16 April 2014 09:15:47 Koen Kooi wrote:
+> Chong Lu schreef op 16-04-14 08:51:
+> > 1. default enable libwrap, perl and python bindings
 > 
-> - add status command
-> - remove the unsupported option:
->   rsyslogd: error: option -c is no longer supported - ignored
-> - add --oknodo for do_start
-> 
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../recipes-extended/rsyslog/rsyslog/initscript    |   35 ++++++++++++++++++--
->  1 file changed, 32 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
-> index 8dee684..4121434 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
-> @@ -9,7 +9,8 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
->  NAME=rsyslog
->  RSYSLOGD=rsyslogd
->  RSYSLOGD_BIN=/usr/sbin/rsyslogd
-> -RSYSLOGD_OPTIONS="-c5"
-> +# with rsyslog 7, -c is no longer supported
-> +RSYSLOGD_OPTIONS=""
->  RSYSLOGD_PIDFILE=/var/run/rsyslogd.pid
->  SCRIPTNAME=/etc/init.d/$NAME
->  # Exit if the package is not installed
-> @@ -27,7 +28,10 @@ do_start()
->          # Return
->          #   0 if daemon has been started
->          #   1 if daemon could not be started
-> -        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS || return 1
-> +        #   if daemon had already been started, start-stop-daemon will return 1
-> +        #   so add -o/--oknodo(if nothing is done, exit 0)
-> +        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON \
-> +                             --oknodo -- $DAEMON_ARGS || return 1
->  }
->  #
->  # Function that stops the daemon/service
-> @@ -56,6 +60,20 @@ do_reload() {
->          start-stop-daemon -K --signal HUP --quiet --pidfile $PIDFILE --name $NAME
->          return 0
->  }
-> +
-> +do_status() {
-> +        NAME=$1
-> +        PIDFILE=$2
-> +        # -t: test only but not stop
-> +        start-stop-daemon -K -t --quiet --pidfile $PIDFILE --name $NAME
-> +        # exit with status 0 if process is found
-> +        if [ "$?" = "0" ]; then
-> +                return 0
-> +        else
-> +                return 1
-> +        fi
-> +}
-> +
->  case "$1" in
->    start)
->          echo -n "starting $RSYSLOGD ... "
-> @@ -82,8 +100,19 @@ case "$1" in
->          $0 stop
->          $0 start
->          ;;
-> +  status)
-> +        echo -n "status $RSYSLOGD ... "
-> +        do_status "$RSYSLOGD" "$RSYSLOGD_PIDFILE"
-> +        if [ "$?" = "0" ]; then
-> +                echo "running"
-> +                exit 0        
-> +        else
-> +                echo "stopped"
-> +                exit 1        
-> +        fi
-> +        ;;
->    *)
-> -        echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
-> +        echo "Usage: $SCRIPTNAME {start|stop|status|restart|reload|force-reload}" >&2
->          exit 3
->          ;;
->  esac
-> 
+> A number of big distros are moving away from tcpwrappers, Arch has removed
+> it years ago and fedora looked into it a while ago. Since tcpwrappers hasn't
+> seen a release (or development) in years I think we should default it to
+> off.
 
-
-Hi Jackie,
-
-I have a patch pending that fixes the rsyslog unsupported option. I
-don't know if you want to take that and re-spin a v2 otherwise the patch
-will probably fail to apply.
+Chris added a tcp-wrappers PACKAGECONFIG to a number of recipes about a year 
+ago; I wonder if we ought to promote it to a DISTRO_FEATURES item and if 
+appropriate just not enable that by default.
 
 Cheers,
+Paul
 
 -- 
-  Jack Mitchell (jack@embed.me.uk)
-  Embedded Systems Engineer
-  Cambridgeshire, UK
-  http://www.embed.me.uk
--- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
