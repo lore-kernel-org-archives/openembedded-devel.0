@@ -1,34 +1,34 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A82F3601AA
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FED665D2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 00:46:55 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id ur14so458954igb.8
+	Wed, 16 Apr 2014 02:29:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3G2TmiP006932
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Apr 2014 17:46:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Y0UXo/7+3NxLPF3SSt8EmB5G63s5HYo4O/93zpMsf7E=;
-	b=unAlyqz6i3PNQ56/Ckc5P3jVFE5GBBQUD9BcNpvMnB/I6kZBhLAfpk2Es4NttlP2BE
-	kCbfkeO/Sw58deMUjDsT+FNhEyvYnbXRaPAcYnBkkreCZdQfyorLiyFUEp3PmSPUe4P0
-	AmGKB+yabgFc5Pj0yRnM2OD3JWtMWK93Q2EIBo0M0HR0Q0iEzzKcwxYLIcN9rTWY2qsb
-	qf+zYR2Vn+719+GL2yPw/oP3QyLolTtz7VwEPR3YZZiCEj48WMvZb06xoYa/Gnz2+nfT
-	dv82WwHVgbJJWvPdqYCOv7TNlF+E7KgQ957Ck/WSpxFrm5LZoGoswro3uf/aV7t5W4gX
-	+sHQ==
+	Tue, 15 Apr 2014 19:29:48 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0169.001;
+	Tue, 15 Apr 2014 19:29:48 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 2/3] gd: add perl to RDEPENDS
+Thread-Index: AQHPWIQqwwpWrFh4yECRNu68xrLRPpsTfVBg
+Date: Wed, 16 Apr 2014 02:29:47 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BE7C80@ALA-MBA.corp.ad.wrs.com>
+References: <cover.1397545082.git.jackie.huang@windriver.com>
+	<98585e4f0a807976da5b7fae817d2ed1bf5b012c.1397545082.git.jackie.huang@windriver.com>
+	<liiqa4$7f4$1@ger.gmane.org>
+In-Reply-To: <liiqa4$7f4$1@ger.gmane.org>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-X-Received: by 10.43.170.4 with SMTP id no4mr1258352icc.15.1397609216263; Tue,
-	15 Apr 2014 17:46:56 -0700 (PDT)
-Received: by 10.64.230.100 with HTTP; Tue, 15 Apr 2014 17:46:56 -0700 (PDT)
-In-Reply-To: <CAFZh4h_Uq+9j1U4g5RJHT+R2xf2amFD6aN++JGMAnDqa6LbBCw@mail.gmail.com>
-References: <CALYKT1ifSP62Tduyb3mvg-1C0_DqZJfYxKq0poZHZgwYthL_yQ@mail.gmail.com>
-	<CAFZh4h_Uq+9j1U4g5RJHT+R2xf2amFD6aN++JGMAnDqa6LbBCw@mail.gmail.com>
-Date: Wed, 16 Apr 2014 09:46:56 +0900
-Message-ID: <CALYKT1jpGx_ek0xv1WknXhSQeFB6BzHztYO4gBQXHMBx9iQYzg@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Where can I get a arm cross toolchain for oe-core?
+Subject: Re: [meta-oe][PATCH 2/3] gd: add perl to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,126 +42,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2014 00:46:57 -0000
-Content-Type: text/plain; charset=UTF-8
-
-Hi Nicolas Dechesne and Brian Hutchinson,
-
-Thank you for the kind reply!
-
-I will try to move to the way you instructed.
-
-Thank you!
-
-Sincerely
-Journeyer
-
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
+X-List-Received-Date: Wed, 16 Apr 2014 02:29:48 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
 
-2014-04-15 22:06 GMT+09:00 Brian Hutchinson <b.hutchman@gmail.com>:
 
-> Hi again Journeyer,
->
-> As always, there are more than one way to do things.  I generate various
-> platform toolchains for our application engineers by using bitbake to build
-> the filesystem image and then the sdk for it as in:
->
-> bitbake core-image-minimal -c populate-sdk (some of the early versions of
-> OE don't support the populate-sdk command but if you are using a fairly
-> recent one it should work).
->
-> This will make a shell script that will install the toolchain onto your
-> host machine.  It is located in your build/tmp/deploy directory (I don't
-> have access to my build machine at the moment so I can't get too specific).
->
-> When you copy over the sdk install script to your host, it will install to
-> /usr/local/oecore-i686 (name depends on your host) and if you are using
-> Yocto it will be in /opt/poky/1.x
->
-> If your apps are makefile based, all you have to do is source the
-> environment setup script (source
-> environment-setup-armv7a-vfp-neon-oe-linux-gnueabi for example) which will
-> set up the path and environment variables etc., then you should be able to
-> build your apps against the same libs etc., that are in the target sysroot
-> because the sdk you just installed on the host has the same sysroot.
->
-> So in a nut shell, that's how we do it.  It keeps the apps guys from having
-> to learn the bitbake/OE/Angstrom/Arago/Yocto world.
->
-> If you look at the Yocto Documentation, they have this ADT system for
-> building apps that is pretty well documented.
->
-> If you just google search "-c populate-sdk" I'm sure you will find a bunch
-> of examples and topics.
->
-> Regards,
->
-> Brian
->
->
->
-> On Tue, Apr 15, 2014 at 7:42 AM, Journeyer J. Joh
-> <oosaprogrammer@gmail.com>wrote:
->
-> > Hello,
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Koen Kooi
+> Sent: Tuesday, April 15, 2014 4:24 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 2/3] gd: add perl to RDEPENDS
+>=20
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> jackie.huang@windriver.com schreef op 15-04-14 09:01:
+> > From: Hongxu Jia <hongxu.jia@windriver.com>
 > >
-> > I use OE for qualcomm's MDM + AP soc system.
-> > OE is used on AP side.
+> > | Note: adding Smart RPM DB channel | | Note: to be installed:
+> > | gd@x86_64
+> > run-postinsts@x86_64 kernel-modules@qemux86_64
+> > packagegroup-core-boot@qemux86_64 | Loading cache... | Updating cache..=
+.
+> > ######################################## [100%] | | Computing
+> > transaction...error: Can't install gd-2.1.0-r0.0@x86_64: no package
+> > provides /usr/bin/perl
+>=20
+> That's nice and all, but you don't seem to runtime test this. I'm pretty =
+sure gd needs additional perl
+> modules installed for its perl sections.
+
+The tools provided by gd that needs perl is the "fstobdf" which is a simple=
+ convertor from bdf to
+gd font format, yes, it's using the 'strict' perl module, and I checked tha=
+t ' perl-module-strict' is rprovided
+by 'perl', so it would be fine to rdepends  on 'perl' only, and I did the r=
+untime test and it works fine.
+
+>=20
+> And FWIW, the bits that need perl should be split out in gd-perl
+
+En.., I didn't realize that. Currently the gd package is providing the the =
+gd graphics library
+and a bunch of converts between gd and other graphics formats, one of which=
+ is perl script, and I see
+that some Linux distribution (e.g. Ubuntu) usually split them into two pack=
+age: 'libgd' for the library,
+libgd-tools for the convert binaries/scripts, rather than splitting the per=
+l script into gd-perl, I prefer
+to split all the converts into gd-tools (or libgd-tools), what do you think=
+?
+
+>=20
+> > | | Saving cache... | | WARNING: exit code 1 from a shell command. |
+> > ERROR: Function failed: do_rootfs (log file is located at
+> > tmp/work/qemux86_64-wrs-linux/wrlinux-image-glibc-small/1.0-r1/temp/do
+> > _rootfs/log.do_rootfs.26487)
 > >
-> > The build environment is bitbake based and I felt it like a sandbox
-> system.
-> > I am sorry I don't know about OE, bitbake very well.. almost I know
-> > nothing..
+> >  Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> Signed-off-by:
+> > Jackie Huang <jackie.huang@windriver.com> ---
+> > meta-oe/recipes-support/gd/gd_2.1.0.bb |    1 + 1 file changed, 1
+> > insertion(+)
 > >
-> > I can build the target image. Yes.
-> > But I wonder how I compile any 3rd party applications for my target.
-> > I did build one by adding the application source code into the whole
-> image
-> > source tree.
-> > This way builds the application as a part of the target image. I can find
-> > it in /usr/bin with other default applications together.
-> >
-> > And I did build another by using a general arm cross toolchain like
-> > arm-none-linux-gnueabi-gcc.
-> > Using this toolchain is simple and easy. But there is no gurantee that
-> this
-> > toolchain has identical libc that is used in the target image. It's not
-> > only the libc, runtime library, and hardware floating point operation
-> > configurations are not certain, not guranteed.
-> >
-> > I believe there should exist one that 100% syncs with OE bitbake compile
-> > environment.
-> > I doubt if I can try to use just OE bitbake environment for those 3rd
-> party
-> > applications.
-> >
-> > How am I supposed to go forward?
-> >
-> > Sincerely
-> > Journeyer
-> >
-> > ----------------------------------------
-> > Journeyer J. Joh
-> > o o s a p r o g r a m m e r
-> > a t
-> > g m a i l  d o t  c o m
-> > ----------------------------------------
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+> > diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb
+> > b/meta-oe/recipes-support/gd/gd_2.1.0.bb index 1b78b9b..3d41eec 100644
+> > --- a/meta-oe/recipes-support/gd/gd_2.1.0.bb +++
+> > b/meta-oe/recipes-support/gd/gd_2.1.0.bb @@ -11,6 +11,7 @@ SECTION =3D
+> > "libs" LICENSE =3D "GD" LIC_FILES_CHKSUM =3D
+> > "file://COPYING;md5=3Dc97638cafd3581eb87abd37332137669" DEPENDS =3D
+> > "freetype libpng jpeg zlib" +RDEPENDS_${PN} =3D "perl"
+>=20
+> R* variables go below do_install
+
+Yeah, thanks, I will re-send for the changes.
+
+Thanks,
+Jackie
+
+>=20
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>=20
+> iD8DBQFTTOyEMkyGM64RGpERAu1dAJ4xqraqlz5pEmf+uZnOcxSt0gc9HgCghTpX
+> SWCuUnlnxjLDTnJSvlHHGqQ=3D
+> =3DIivC
+> -----END PGP SIGNATURE-----
+>=20
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
