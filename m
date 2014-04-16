@@ -1,34 +1,28 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BCCE65DF1
+Return-Path: <denis@denix.org>
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 564C065E4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 12:56:57 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id rl12so10453053iec.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 05:56:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=l5H++yJWl00R6HJHfKYeZsrMj+YsjESdOcs3wKZrY3c=;
-	b=lgLLMgUbhZKY9czjiJB9fVgoInCQzN8bcFYONyRdapYVsmo4y/B7ZRHvvxFbHdD3Zm
-	JZ+8Zu5S5cF0vdXiXmFbgi4ZpOjUGr4MCTb2/mc7ahSsAD80Y9FrNjD3MuYCytpii/cp
-	XBstFO9ULaXve11Mcw9ha+Es8g9yjpp68Olct/5/VGQfNE9jHFp2E4uu1mhn500cfgpR
-	eA7ZLh87hdOae/v9vs7IUsmYa9nnawwWTR9Lpr8ilXF6t9+gHMeoS+nNG1MLr/DJpFFK
-	6hgpqUkdA5MsiwNTdBkU/yXMnlhgUj828xbg3HF1DH93hAlDxXPlunjrkU0BYQ2UAiVF
-	EMgw==
-MIME-Version: 1.0
-X-Received: by 10.50.138.72 with SMTP id qo8mr9904732igb.26.1397653017995;
-	Wed, 16 Apr 2014 05:56:57 -0700 (PDT)
-Received: by 10.64.230.100 with HTTP; Wed, 16 Apr 2014 05:56:57 -0700 (PDT)
-In-Reply-To: <CAMKF1srO8NBNuYbMhbwUO3df8+Q3aDoUmzHUinDy9V_WKuBsRA@mail.gmail.com>
-References: <00d101cf5942$91feeb30$b5fcc190$@lge.com>
-	<CAMKF1srO8NBNuYbMhbwUO3df8+Q3aDoUmzHUinDy9V_WKuBsRA@mail.gmail.com>
-Date: Wed, 16 Apr 2014 21:56:57 +0900
-Message-ID: <CALYKT1hwGK7c9QcXMRXpMPLbP69zoa_49QBhZXpOaYec7geVRQ@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
+	Wed, 16 Apr 2014 14:27:46 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173023.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N44001BXO5N0R50@vms173023.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	16 Apr 2014 09:27:24 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9E8BB201C0; Wed,
+	16 Apr 2014 10:27:23 -0400 (EDT)
+Date: Wed, 16 Apr 2014 10:27:22 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I get the toolchain?
+Message-id: <20140416142722.GJ11339@denix.org>
+References: <CALYKT1hsAOf+qKTPO_fNpBf1u0CJoXm0L2Nz6VCafbqckYY2oA@mail.gmail.com>
+	<534E7151.5030504@balister.org>
+	<CALYKT1gmOJES7rY0OZjEcUNM6zr0E8YtgHRxDOmNF1u3WWYK7g@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CALYKT1gmOJES7rY0OZjEcUNM6zr0E8YtgHRxDOmNF1u3WWYK7g@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: What is the relationship between Open Embedded for MSM and Yocto Project?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +36,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2014 12:57:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Apr 2014 14:27:48 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi Changhyeok Bae,
+I don't know what "OE for MSM" is, that you keep referring, probably your 
+company's product based on OE. OE stands for OpenEmbedded and is the 
+underlying technology for the Yocto Project and other things around it...
 
-I raised similar questions and received good pointers and explanations:
+I would recommend you to talk to someone from your company who's more familiar 
+with the code base that you are trying to look at and how it is derived and/or 
+relates to OpenEmbedded and the Yocto Project.
 
-http://thread.gmane.org/gmane.comp.handhelds.openembedded
-
-Find the QnA titled with:
-
-[oe] Where can I get a arm cross toolchain for oe-core?
-
-I only able to give you pointers to answers I received.
-
-Good luck!
-
-Sincerely
-Journeyer
-
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
+-- 
+Denys
 
 
-2014-04-16 17:02 GMT+09:00 Khem Raj <raj.khem@gmail.com>:
-
-> On Wed, Apr 16, 2014 at 12:07 AM, Changhyeok Bae <changhyeok.bae@lge.com>
-> wrote:
-> > Hi,
+On Wed, Apr 16, 2014 at 09:37:49PM +0900, Journeyer J. Joh wrote:
+> Hi, Samuel Stirtzel, Khem Raj and Philip Balister,
+> 
+> Thank you for the kind answers!!
+> 
+> I understood what are those.
+> 
+> > - What is the relationship between those two? Any differences? Commons?
+> OE for MSM is one instance of Yocto Project - OE-core. And It's like Poky -
+> An reference instance of Yocto Project.
+> 
+> > - Can I refer to the documents about poky for my openembedded-core?
+> I think I can refer to the poky's documentations but must make sure that
+> poky and OE for MSM are siblings from the same framework - Yocto Prooject -
+> OE-core
+> 
+> Thank you very much for the kindness!!
+> 
+> Sincerely
+> Journeyer
+> 
+> ----------------------------------------
+> Journeyer J. Joh
+> o o s a p r o g r a m m e r
+> a t
+> g m a i l  d o t  c o m
+> ----------------------------------------
+> 
+> 
+> 2014-04-16 21:02 GMT+09:00 Philip Balister <philip@balister.org>:
+> 
+> > On 04/16/2014 02:49 AM, Journeyer J. Joh wrote:
+> > > Hello,
+> > >
+> > > First of all I thank Nicolas Dechesne and Brian Hutchinson, for the
+> > > previous kind replies.
+> > >
+> > > While I was reading documents from Yocto Project, I found my source code
+> > in
+> > > use in my company is of Open Embedded for MSM.
+> > >
+> > > I found this from the git remote url of my surce code. It is
+> > >   git://codeaurora.org/quic/le/openembedded/openembedded-core
+> > >
+> > > And the one of Yocto project is
+> > >   git://git.yoctoproject.org/poky
+> > >
+> > >>From the git log prints poky is actively developped now but
+> > > openembedded-core is not.
+> > >
+> > > In a nutshell(I learned this expression today^^),
+> > > - What is the relationship between those two? Any differences? Commons?
+> > > - Can I refer to the documents about poky for my openembedded-core?
 > >
-> > How can I extract the toolchain in my oe build result?
+> > OpenEmbedded is the build system and has been actively developed since
+> > 2004 or so (give or take a few years)
 > >
->
-> bitbake -cpopulate_sdk <yourimage>
-> should generate a self-installer .sh script which then you can run and
-> install it
->
-> > Regards,
-> > Changhyeok
+> > Poky is the reference distribution from the Yocto Project.
 > >
+> > The Yocto Project is working to make embedded development easier.
+> >
+> > You should check the OpenEmbedded git server for activity;
+> >
+> > http://cgit.openembedded.org/openembedded-core/
+> >
+> > I'm guessing (without looking) the codeaurora git is based of a release
+> > bench.
+> >
+> > Philip
+> >
+> > >
+> > > Thank you very much in advance.
+> > >
+> > > Sincerely
+> > > Journeyer
+> > >
+> > > ----------------------------------------
+> > > Journeyer J. Joh
+> > > o o s a p r o g r a m m e r
+> > > a t
+> > > g m a i l  d o t  c o m
+> > > ----------------------------------------
+> > >
 > > --
 > > _______________________________________________
 > > Openembedded-devel mailing list
 > > Openembedded-devel@lists.openembedded.org
 > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
+> >
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
