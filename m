@@ -1,32 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D4FB62252
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EC61765D6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 08:02:55 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id h18so750013igc.14
+	Wed, 16 Apr 2014 09:30:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3G9UOiN020269
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 01:02:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=RrOUQkwZvjrQ5qmB4tT+p7INRaU9oS2x/NAi+LFnM74=;
-	b=PhdwjArdEb7j3KQofPoTAoJQafbYyBMJx3TbmaVh+fraA4QZBoq4nhugUeRZRRTiP4
-	bAmgALD6gWV38Dy4ZPoOSK4thpkWdMJ7NBc+yr7tJSTzhFl/nRUTfreBeTFJfXJUI+6+
-	xCmw5ZuuDxG7G76aVtE0MuXOJIH6lmF7D2K9koiRBePNte9SfufE6bS2AMLYZXPh9JCj
-	kwwGxIjEonFGNnswracxF/bhfOA14gcH3NJgULO1XGg2Sw1zzvU1tP6zqp/y4jw8cO1N
-	kIezn7JL/UIdA7oRAAShJPVp6kxqXwF1KzbMpB+o6ntp5jqNHEmkeoh+DSfjErI409+u
-	Ybvg==
-X-Received: by 10.50.143.76 with SMTP id sc12mr3143352igb.2.1397635376541;
-	Wed, 16 Apr 2014 01:02:56 -0700 (PDT)
+	Wed, 16 Apr 2014 02:30:24 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 16 Apr 2014 02:30:23 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Apr 2014 17:31:16 +0800
+Message-ID: <1397640676-27955-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Received: by 10.50.229.14 with HTTP; Wed, 16 Apr 2014 01:02:26 -0700 (PDT)
-In-Reply-To: <00d101cf5942$91feeb30$b5fcc190$@lge.com>
-References: <00d101cf5942$91feeb30$b5fcc190$@lge.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Apr 2014 01:02:26 -0700
-Message-ID: <CAMKF1srO8NBNuYbMhbwUO3df8+Q3aDoUmzHUinDy9V_WKuBsRA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: How can I get the toolchain?
+Subject: [meta-oe][PATCH] rsyslog: add status command and minor fixes for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,25 +32,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Apr 2014 08:02:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Apr 2014 09:30:27 -0000
+Content-Type: text/plain
 
-On Wed, Apr 16, 2014 at 12:07 AM, Changhyeok Bae <changhyeok.bae@lge.com> wrote:
-> Hi,
->
-> How can I extract the toolchain in my oe build result?
->
+From: Jackie Huang <jackie.huang@windriver.com>
 
-bitbake -cpopulate_sdk <yourimage>
-should generate a self-installer .sh script which then you can run and
-install it
+- add status command
+- remove the unsupported option:
+  rsyslogd: error: option -c is no longer supported - ignored
+- add --oknodo for do_start
 
-> Regards,
-> Changhyeok
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../recipes-extended/rsyslog/rsyslog/initscript    |   35 ++++++++++++++++++--
+ 1 file changed, 32 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+index 8dee684..4121434 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+@@ -9,7 +9,8 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
+ NAME=rsyslog
+ RSYSLOGD=rsyslogd
+ RSYSLOGD_BIN=/usr/sbin/rsyslogd
+-RSYSLOGD_OPTIONS="-c5"
++# with rsyslog 7, -c is no longer supported
++RSYSLOGD_OPTIONS=""
+ RSYSLOGD_PIDFILE=/var/run/rsyslogd.pid
+ SCRIPTNAME=/etc/init.d/$NAME
+ # Exit if the package is not installed
+@@ -27,7 +28,10 @@ do_start()
+         # Return
+         #   0 if daemon has been started
+         #   1 if daemon could not be started
+-        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS || return 1
++        #   if daemon had already been started, start-stop-daemon will return 1
++        #   so add -o/--oknodo(if nothing is done, exit 0)
++        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON \
++                             --oknodo -- $DAEMON_ARGS || return 1
+ }
+ #
+ # Function that stops the daemon/service
+@@ -56,6 +60,20 @@ do_reload() {
+         start-stop-daemon -K --signal HUP --quiet --pidfile $PIDFILE --name $NAME
+         return 0
+ }
++
++do_status() {
++        NAME=$1
++        PIDFILE=$2
++        # -t: test only but not stop
++        start-stop-daemon -K -t --quiet --pidfile $PIDFILE --name $NAME
++        # exit with status 0 if process is found
++        if [ "$?" = "0" ]; then
++                return 0
++        else
++                return 1
++        fi
++}
++
+ case "$1" in
+   start)
+         echo -n "starting $RSYSLOGD ... "
+@@ -82,8 +100,19 @@ case "$1" in
+         $0 stop
+         $0 start
+         ;;
++  status)
++        echo -n "status $RSYSLOGD ... "
++        do_status "$RSYSLOGD" "$RSYSLOGD_PIDFILE"
++        if [ "$?" = "0" ]; then
++                echo "running"
++                exit 0        
++        else
++                echo "stopped"
++                exit 1        
++        fi
++        ;;
+   *)
+-        echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
++        echo "Usage: $SCRIPTNAME {start|stop|status|restart|reload|force-reload}" >&2
+         exit 3
+         ;;
+ esac
+-- 
+1.7.9.5
+
 
