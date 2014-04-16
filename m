@@ -1,37 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E43BA65E52
+Received: from mail-ee0-f51.google.com (mail-ee0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 314F365E61
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 07:32:46 +0000 (UTC)
-Received: by mail-ee0-f46.google.com with SMTP id t10so8294510eei.5
+	Wed, 16 Apr 2014 07:32:48 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id c13so8484425eek.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 00:32:46 -0700 (PDT)
+	Wed, 16 Apr 2014 00:32:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=1f6oH9HTVZzuJBXFULmELZd2ksuF7rYwmO1Dw2RnXzw=;
-	b=mlurnOIFo2MsLx3CjtovgkFD8ao15rI/v+lx8Gj3q9tkMU2w3tMXhAmnoTS6HAMMTF
-	i3Whgb3WZilGLov9z6wRKg3PRY5BZ9f9rhXUhy6NYb8kpEzqXKoA3AJ2wj1rzedYPvC6
-	PSY2FNhLpq86NmqeouVXfGkDHtotqWu+720BU+BFJJ/a+FY/wbxohHbhfExl3F/BbXcs
-	VQMboVT5WFA5mIx45jl+aho/1pW3VPjUZShFl345cIOALYxD6EYWKB8+4VryjGYkU4F0
-	05aeONWVSI318kIYR/XX4zEpQ6OFL7Q7gEhh5TQnygWbAm39ZOy/qDAnJHUPQyUhHu+W
-	Bq5A==
-X-Received: by 10.14.98.69 with SMTP id u45mr2943825eef.81.1397633566766;
-	Wed, 16 Apr 2014 00:32:46 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=9VeR9KGuem7zsCXCUDd6Y+FoplPuFSfJyK0emT1pp9A=;
+	b=z811i2Y8SxXbIF0dKGc1qphm+h9keIhOstYlvf3KZexkbqK1aQg8IvjNbnC4f92LZE
+	iOcVww/9Z+ZTA1rSotUtoM2o6WmUZrAtL8ipw8nhSlBD8tMnmIIe25s79kMcwKzyJa0r
+	58PoeJpaFtcnLqBazGP0hQTkqOWI7pGntmHZmxEaVrMmYV+dGmVFMVaIZw16m234zT91
+	lr8mBQ2fnjaTW01qYwj1kOjCEiGFkJnVPQ+R6zowR0CgRqioOZj4+6Iaqovjoiw3w6eF
+	zMkhYoV5lG64FGVgo5GjMFw2tGEHwpaGSFy9Y+wrLKNZrDSkLGMbtaslFMu5tBFA7zaP
+	f45g==
+X-Received: by 10.15.54.6 with SMTP id s6mr2987884eew.4.1397633569649;
+	Wed, 16 Apr 2014 00:32:49 -0700 (PDT)
 Received: from localhost.localdomain (ip-178-200-247-162.unitymediagroup.de.
 	[178.200.247.162]) by mx.google.com with ESMTPSA id
-	a42sm55485161ees.10.2014.04.16.00.32.45
+	a42sm55485161ees.10.2014.04.16.00.32.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Apr 2014 00:32:46 -0700 (PDT)
+	Wed, 16 Apr 2014 00:32:49 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Apr 2014 09:32:28 +0200
-Message-Id: <1397633550-19323-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 16 Apr 2014 09:32:30 +0200
+Message-Id: <1397633550-19323-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1397633550-19323-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1397633550-19323-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/2] avoid nautilus build by default
+Subject: [PATCH 2/2] gnome-disk-utility: change PACKAGECONFIG default: remove nautilus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,17 +51,35 @@ X-List-Received-Date: Wed, 16 Apr 2014 07:32:49 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-There is no reason why we need to build nautilus when using evince and/or
-gnome-disk-utility.
+gnome-doc-utils had to be added when not depending on nautilus
 
-Andreas Müller (2):
-  evince: make nautilus extension a PACKAGECONFIG and disable by default
-  gnome-disk-utility: change PACKAGECONFIG default: remove nautilus
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- meta-gnome/recipes-gnome/evince/evince_2.32.0.bb                    | 6 ++++--
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb   | 4 ++--
- 2 files changed, 6 insertions(+), 4 deletions(-)
-
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index 6bfbfaf..bf836cc 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -3,7 +3,7 @@ SUMMARY = "GNOME disk utility"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
+ 
+-DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart"
++DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart gnome-doc-utils"
+ 
+ PR = "r4"
+ 
+@@ -20,7 +20,7 @@ SRC_URI += "\
+ 
+ EXTRA_OECONF += "--disable-scrollkeeper"
+ 
+-PACKAGECONFIG ??= "nautilus"
++PACKAGECONFIG ??= ""
+ PACKAGECONFIG[nautilus] = "--enable-nautilus-extension,--disable-nautilus-extension,nautilus"
+ 
+ do_configure_prepend() {
 -- 
 1.8.3.1
 
