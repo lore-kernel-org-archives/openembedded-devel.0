@@ -1,37 +1,34 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
-	[209.85.219.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A87A61639
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B801865E6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2014 01:47:58 +0000 (UTC)
-Received: by mail-oa0-f47.google.com with SMTP id i11so13249793oag.20
+	Thu, 17 Apr 2014 01:51:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3H1pxte020825
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Apr 2014 18:47:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=FtNpBDsevNGdrMSdUTDgHN0a10oihMn43Dl+5B5rppQ=;
-	b=R8w4BboWJ9KwJvYAby2HAvNwxKgX01sQgAl9mpw8Jqyjn7Pafs611w1cY9wS5mWzc2
-	cREDtcwJ+pIbGWtmCbdW3C1d8bd0cRJH9t4CbhAmqGA/xVLpG7DBRSsFvOibvwI3gA4I
-	eW/gjoSEC9oQ00Evjp8OXFd2eZq4RCxeLPvHo7OrqHrylnMlKhYMFmLiAwxEcX/4oXyK
-	iywErycJrrjNteAacIUOPxUbKk2/jE4No+fEwkOzmeNcO1a95q7sxhGPaWn+gsYzQYxT
-	EBy4DsmKvdzw0jj64IJAyprwyq72ErgwVL5m2J11zuc/GJcaiPDD3gKvQjBAQU75Arbr
-	ZirA==
+	Wed, 16 Apr 2014 18:51:59 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.109]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0169.001;
+	Wed, 16 Apr 2014 18:51:59 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] rsyslog: add status command and minor
+	fixes for initscript
+Thread-Index: AQHPWVjAoXqHErkgX0CU43wIbxwDwpsVC70w
+Date: Thu, 17 Apr 2014 01:51:58 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BE8B48@ALA-MBA.corp.ad.wrs.com>
+References: <1397640676-27955-1-git-send-email-jackie.huang@windriver.com>
+	<534E515D.5090702@communistcode.co.uk>
+In-Reply-To: <534E515D.5090702@communistcode.co.uk>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-X-Received: by 10.60.125.195 with SMTP id ms3mr9391012oeb.3.1397699279508;
-	Wed, 16 Apr 2014 18:47:59 -0700 (PDT)
-Received: by 10.60.73.165 with HTTP; Wed, 16 Apr 2014 18:47:59 -0700 (PDT)
-In-Reply-To: <CAFZh4h8FbND2paS5wjPZ_mYmYhnqk1ng1biUYHnEOsh6tYQG6w@mail.gmail.com>
-References: <00d101cf5942$91feeb30$b5fcc190$@lge.com>
-	<CAMKF1srO8NBNuYbMhbwUO3df8+Q3aDoUmzHUinDy9V_WKuBsRA@mail.gmail.com>
-	<CALYKT1hwGK7c9QcXMRXpMPLbP69zoa_49QBhZXpOaYec7geVRQ@mail.gmail.com>
-	<016b01cf59dd$003f8100$00be8300$@lge.com>
-	<CAFZh4h8FbND2paS5wjPZ_mYmYhnqk1ng1biUYHnEOsh6tYQG6w@mail.gmail.com>
-Date: Wed, 16 Apr 2014 21:47:59 -0400
-Message-ID: <CAFZh4h87C_zjPzPSRD5YjLOthAK9SSAMiUHMmnqHM9HKM73jTw@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I get the toolchain?
+Subject: Re: [meta-oe][PATCH] rsyslog: add status command and minor fixes for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +42,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2014 01:48:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Apr 2014 01:51:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 16, 2014 at 9:42 PM, Brian Hutchinson <b.hutchman@gmail.com>wrote:
 
-> On Wed, Apr 16, 2014 at 9:33 PM, Changhyeok Bae <changhyeok.bae@lge.com>wrote:
->
->> Thanks for your help.
->>
->> In summary,
->> 1) bitbake meta-toolchain
->> 2) bitbake [target] -c populate_sdk ...
->>
->> However, those were building ...nativesdk ...
->> I only would like to get the cross(arm) toolchain without building SDK
->> toolchain.
->>
->> Regards,
->> Changhyeok
->>
->>
-> ... those do build the cross sdk/toolchain.  You take the huge script that
-> is generated and install it on your PC, source the environment setup script
-> and now you are setup to cross compile on your host for the target.
->
-> Regards,
->
-> Brian
->
->
 
-... in your local.conf, you do have to set SDKMACHINE to something.  I have
-to build toolchains that work on both 32 bit & 64 bit hosts so usually do a
-build with:
-SDKMACHINE ?= "x86_64" ... then do another build of sdk with:
-SDKMACHINE ?= "i686"
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Jack Mitchell
+> Sent: Wednesday, April 16, 2014 5:46 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] rsyslog: add status command and minor =
+fixes for initscript
+>=20
+> On 16/04/14 10:31, jackie.huang@windriver.com wrote:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > - add status command
+> > - remove the unsupported option:
+> >   rsyslogd: error: option -c is no longer supported - ignored
+> > - add --oknodo for do_start
+> >
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  .../recipes-extended/rsyslog/rsyslog/initscript    |   35 ++++++++++++=
+++++++--
+> >  1 file changed, 32 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+> > b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+> > index 8dee684..4121434 100644
+> > --- a/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+> > +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/initscript
+> > @@ -9,7 +9,8 @@ PATH=3D/sbin:/usr/sbin:/bin:/usr/bin
+> >  NAME=3Drsyslog
+> >  RSYSLOGD=3Drsyslogd
+> >  RSYSLOGD_BIN=3D/usr/sbin/rsyslogd
+> > -RSYSLOGD_OPTIONS=3D"-c5"
+> > +# with rsyslog 7, -c is no longer supported RSYSLOGD_OPTIONS=3D""
+> >  RSYSLOGD_PIDFILE=3D/var/run/rsyslogd.pid
+> >  SCRIPTNAME=3D/etc/init.d/$NAME
+> >  # Exit if the package is not installed @@ -27,7 +28,10 @@ do_start()
+> >          # Return
+> >          #   0 if daemon has been started
+> >          #   1 if daemon could not be started
+> > -        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON=
+ -- $DAEMON_ARGS || return
+> 1
+> > +        #   if daemon had already been started, start-stop-daemon will=
+ return 1
+> > +        #   so add -o/--oknodo(if nothing is done, exit 0)
+> > +        start-stop-daemon -S --quiet --pidfile $PIDFILE --exec $DAEMON=
+ \
+> > +                             --oknodo -- $DAEMON_ARGS || return 1
+> >  }
+> >  #
+> >  # Function that stops the daemon/service @@ -56,6 +60,20 @@
+> > do_reload() {
+> >          start-stop-daemon -K --signal HUP --quiet --pidfile $PIDFILE -=
+-name $NAME
+> >          return 0
+> >  }
+> > +
+> > +do_status() {
+> > +        NAME=3D$1
+> > +        PIDFILE=3D$2
+> > +        # -t: test only but not stop
+> > +        start-stop-daemon -K -t --quiet --pidfile $PIDFILE --name $NAM=
+E
+> > +        # exit with status 0 if process is found
+> > +        if [ "$?" =3D "0" ]; then
+> > +                return 0
+> > +        else
+> > +                return 1
+> > +        fi
+> > +}
+> > +
+> >  case "$1" in
+> >    start)
+> >          echo -n "starting $RSYSLOGD ... "
+> > @@ -82,8 +100,19 @@ case "$1" in
+> >          $0 stop
+> >          $0 start
+> >          ;;
+> > +  status)
+> > +        echo -n "status $RSYSLOGD ... "
+> > +        do_status "$RSYSLOGD" "$RSYSLOGD_PIDFILE"
+> > +        if [ "$?" =3D "0" ]; then
+> > +                echo "running"
+> > +                exit 0
+> > +        else
+> > +                echo "stopped"
+> > +                exit 1
+> > +        fi
+> > +        ;;
+> >    *)
+> > -        echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-relo=
+ad}" >&2
+> > +        echo "Usage: $SCRIPTNAME
+> > + {start|stop|status|restart|reload|force-reload}" >&2
+> >          exit 3
+> >          ;;
+> >  esac
+> >
+>=20
+>=20
+> Hi Jackie,
+>=20
+> I have a patch pending that fixes the rsyslog unsupported option. I don't=
+ know if you want to take that
+> and re-spin a v2 otherwise the patch will probably fail to apply.
+
+Sorry I didn't notice that, I will take that and re-spin a v2.
+
+Thanks,
+Jackie
+
+>=20
+> Cheers,
+>=20
+> --
+>   Jack Mitchell (jack@embed.me.uk)
+>   Embedded Systems Engineer
+>   Cambridgeshire, UK
+>   http://www.embed.me.uk
+> --
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
