@@ -1,36 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F7BB65D0F
+Return-Path: <krzysztof.m.sywula@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 201CE65E3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2014 08:59:56 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id e53so380142eek.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2014 01:59:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=y6zJ8Vpx9kaTpcsCWcDFoAo7v59ZT+Jwrcf9xt7l1l4=;
-	b=A1Cb9d2f1kU3thLOZXE/iW8g0959fgDLqF4miTVCwKkfNZJRW+8M2d5AfTw02bI7wm
-	5g00crjg5htX+GYFmi+ylowMG8cw7eKIak4XiGGkFR2UpE9KyULRebNWs6T9t6ec/XAo
-	IaUUV9m1oXpcBtAtOfCvxfXAu6Rw4NfBb4vNRpCxjrtt6hjE8bCyTEgvdorpfu4tlr+5
-	4uytDxwll9klkhmBuGU+HSu7b1Nr7F6JVZH/8fT2sTOp/s6aeLjy+pJFHAGrudZZShk5
-	tVPmgkETCldunIwfcczhNzXUQCi3d/g7MzUE6b/sOMh9MP49tj0x/zlZaGqZwDHd1/k1
-	cxew==
-X-Gm-Message-State: ALoCoQmIjtclfQe+CIgG2MWmtNwXuFH1sA0kmCdMJdA/sAkaHXr+hbe7HqgVhL/LUypwDcDJY6zJ
-X-Received: by 10.14.179.193 with SMTP id h41mr12388742eem.27.1397725196709;
-	Thu, 17 Apr 2014 01:59:56 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id 48sm65460626eei.24.2014.04.17.01.59.55
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 17 Apr 2014 01:59:55 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Apr 2014 10:59:47 +0200
-Message-Id: <1397725187-28708-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.9.0
+	Thu, 17 Apr 2014 10:07:01 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 17 Apr 2014 03:07:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,878,1389772800"; d="scan'208";a="494676087"
+Received: from irsmsx103.ger.corp.intel.com ([163.33.3.157])
+	by orsmga001.jf.intel.com with ESMTP; 17 Apr 2014 03:07:00 -0700
+Received: from irsmsx101.ger.corp.intel.com (163.33.3.153) by
+	IRSMSX103.ger.corp.intel.com (163.33.3.157) with Microsoft SMTP Server
+	(TLS) id 14.3.123.3; Thu, 17 Apr 2014 11:06:58 +0100
+Received: from irsmsx102.ger.corp.intel.com ([169.254.2.45]) by
+	IRSMSX101.ger.corp.intel.com ([169.254.1.190]) with mapi id
+	14.03.0123.003; Thu, 17 Apr 2014 11:06:57 +0100
+From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
+Thread-Index: AQHPWZ+BGuI8eK3mi02Lj/qUJiBjNZsUy8KAgADH46A=
+Date: Thu, 17 Apr 2014 10:06:57 +0000
+Message-ID: <6741EAAB26B57F4995668065CB62D86B3603D664@IRSMSX102.ger.corp.intel.com>
+References: <1397671872-57992-1-git-send-email-krzysztof.m.sywula@intel.com>
+	<CAMKF1sqxTiKZ5EiOL21Eojgefa8boiBc53E5VVOdkZQmgrT2JA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqxTiKZ5EiOL21Eojgefa8boiBc53E5VVOdkZQmgrT2JA@mail.gmail.com>
+Accept-Language: pl-PL, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.182]
+MIME-Version: 1.0
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] gimp, gegl, babl: change SRC_URI to http
+Subject: Re: [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,58 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2014 08:59:57 -0000
+X-List-Received-Date: Thu, 17 Apr 2014 10:07:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-The FTP server on ftp.gimp.org hasn't been working for a few weeks now,
-so switch to http which does work.
+> +EXTRA_OECONF =3D "--prefix=3D/usr \
+> +                --datadir=3D/usr/share/bitlbee \
+> +                --etcdir=3D/etc/bitlbee \
+> +                --oscar=3D0 \
+These I took from initial recipe in openembedded. =
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-graphics/babl/babl_0.1.10.bb | 2 +-
- meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb  | 2 +-
- meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.10.bb b/meta-oe/recipes-graphics/babl/babl_0.1.10.bb
-index 1ef4956..dbff746 100644
---- a/meta-oe/recipes-graphics/babl/babl_0.1.10.bb
-+++ b/meta-oe/recipes-graphics/babl/babl_0.1.10.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- 
- inherit gnome
- 
--SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
-+SRC_URI = "http://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "9e1542ab5c0b12ea3af076a9a2f02d79"
- SRC_URI[sha256sum] = "943fc36ceac7dd25bc928256bc7b535a42989c6b971578146869eee5fe5955f4"
- 
-diff --git a/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb b/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb
-index 9d8d190..bd40946 100644
---- a/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb
-+++ b/meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb
-@@ -11,7 +11,7 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[jasper] = "--with-jasper,--without-jasper,jasper"
- PACKAGECONFIG[avformat] = "--with-libavformat,--without-libavformat,libav"
- 
--SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.2/${PN}-${PV}.tar.bz2"
-+SRC_URI = "http://ftp.gimp.org/pub/${PN}/0.2/${PN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "32b00002f1f1e316115c4ed922e1dec8"
- SRC_URI[sha256sum] = "df2e6a0d9499afcbc4f9029c18d9d1e0dd5e8710a75e17c9b1d9a6480dd8d426"
- 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-index b70148e..68a669c 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-@@ -8,7 +8,7 @@ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webk
- 
- inherit gnome
- 
--SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-+SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-            file://freetype.patch \
-           "
- SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
--- 
-1.9.0
+> +                --ssl=3Dopenssl"
+That is added by myself. Tried with auto (=3Dgnutls) on  x86 Galileo board =
+and bitlbee was failing in a very obfuscated way.
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+Sent: Thursday, April 17, 2014 12:02 AM
+To: openembeded-devel
+Cc: martin.jansa@gmail.comexit; Koen Kooi
+Subject: Re: [oe] [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
+
+On Wed, Apr 16, 2014 at 11:11 AM,  <krzysztof.m.sywula@intel.com> wrote:
+> +EXTRA_OECONF =3D "--prefix=3D/usr \
+> +                --datadir=3D/usr/share/bitlbee \
+> +                --etcdir=3D/etc/bitlbee \
+> +                --oscar=3D0 \
+> +                --ssl=3Dopenssl"
+
+should these be hardcoded ?
+-- =
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-------------------------------------------------------------
+Intel Ireland Limited (Branch)
+Collinstown Industrial Park, Leixlip, County Kildare, Ireland
+Registered Number: E902934
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
