@@ -1,26 +1,26 @@
 Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 57A4565E00
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B1E565E04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Apr 2014 10:16:39 +0000 (UTC)
+	Fri, 18 Apr 2014 10:16:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3IAGeZb005431
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3IAGg5f016835
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Apr 2014 03:16:40 -0700 (PDT)
+	Fri, 18 Apr 2014 03:16:42 -0700 (PDT)
 Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Fri, 18 Apr 2014 03:16:38 -0700
+	14.3.169.1; Fri, 18 Apr 2014 03:16:41 -0700
 From: Chong Lu <Chong.Lu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Apr 2014 18:16:31 +0800
-Message-ID: <236ce9a35ef7ce2ee919d2867c60269e9577e96d.1397816030.git.Chong.Lu@windriver.com>
+Date: Fri, 18 Apr 2014 18:16:32 +0800
+Message-ID: <fcf0027b255a0441d42df0e9f2584067c3ec3d74.1397816030.git.Chong.Lu@windriver.com>
 X-Mailer: git-send-email 1.8.1.2
 In-Reply-To: <cover.1397816030.git.Chong.Lu@windriver.com>
 References: <cover.1397816030.git.Chong.Lu@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] vim: don't check acl header if acl support disabled
+Subject: [PATCH 3/3] vim: add knob whether elf.h are checked
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,79 +34,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Apr 2014 10:16:41 -0000
+X-List-Received-Date: Fri, 18 Apr 2014 10:16:42 -0000
 Content-Type: text/plain
 
-Vim/vim-tiny always check 'sys/acl.h' existence even acl support
-has been disabled from configure line. This works in mostly time
-but except for acl works in an odd mode - while acl was mirrored
-from sstate_cache, it will install 'sys/acl.h' to sysroot dir and
-and then clean the header file with sysroot_cleansstate().
+Previously, it still was checked when there was no elf library in sysroots directory.
+Add knob to decide whether elf.h are checked or not.
 
-If build vim/vim-tiny and acl in parallel, below errors will occur:
+Fixed by using PACKAGECONFIG to check elf, with default disabled set.
 
-* os_unix.c:2668:23: fatal error: sys/acl.h: No such file or directory
-
-This change only workaround the failure and get build running, we
-still need to fix it from acl side.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 ---
- .../vim/files/disable_acl_header_check.patch       | 27 ++++++++++++++++++++++
- meta-oe/recipes-support/vim/vim_7.4.258.bb         |  4 +++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
+ .../vim-add-knob-whether-elf.h-are-checked.patch   | 38 ++++++++++++++++++++++
+ meta-oe/recipes-support/vim/vim_7.4.258.bb         |  2 ++
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
 
-diff --git a/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch b/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
+diff --git a/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch b/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
 new file mode 100644
-index 0000000..8f824e7
+index 0000000..693d130
 --- /dev/null
-+++ b/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-@@ -0,0 +1,27 @@
-+Upstream-Status: pending
++++ b/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
+@@ -0,0 +1,38 @@
++vim: add knob whether elf.h are checked
 +
-+Don't check 'sys/acl.h' if acl support disabled for vim/vim-tiny.
++Previously, it still was checked when there was no elf library in sysroots directory.
++Add knob to decide whether elf.h are checked or not.
 +
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-+================================================
++Upstream-status: Pending
++
++Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
++---
++ src/configure.in |    7 +++++++
++ 1 file changed, 7 insertions(+)
++
 +diff --git a/src/configure.in b/src/configure.in
-+index fb965e5..d734064 100644
++index d734064..f504fa6 100644
 +--- a/src/configure.in
 ++++ b/src/configure.in
-+@@ -2511,7 +2511,7 @@ AC_CHECK_HEADERS(stdarg.h stdint.h stdlib.h string.h \
-+ 	sys/systeminfo.h locale.h sys/stream.h termios.h \
-+ 	libc.h sys/statfs.h poll.h sys/poll.h pwd.h \
-+ 	utime.h sys/param.h libintl.h libgen.h \
-+-	util/debug.h util/msg18n.h frame.h sys/acl.h \
-++	util/debug.h util/msg18n.h frame.h \
-+ 	sys/access.h sys/sysinfo.h wchar.h wctype.h)
++@@ -2483,11 +2483,18 @@ AC_TRY_COMPILE([#include <stdio.h>], [int x __attribute__((unused));],
++ 	AC_MSG_RESULT(no))
 + 
-+ dnl sys/ptem.h depends on sys/stream.h on Solaris
-+@@ -3112,6 +3112,7 @@ AC_ARG_ENABLE(acl,
-+ 	, [enable_acl="yes"])
-+ if test "$enable_acl" = "yes"; then
-+ AC_MSG_RESULT(no)
-++AC_CHECK_HEADERS(sys/acl.h)
-+ AC_CHECK_LIB(posix1e, acl_get_file, [LIBS="$LIBS -lposix1e"],
-+ 	AC_CHECK_LIB(acl, acl_get_file, [LIBS="$LIBS -lacl"
-+ 		  AC_CHECK_LIB(attr, fgetxattr, LIBS="$LIBS -lattr",,)],,),)
++ dnl Checks for header files.
+++AC_MSG_CHECKING(whether or not to look for elf.h)
+++AC_ARG_ENABLE(elf-check,
+++        [  --enable-elf-check      If elfutils, check for elf.h [default=no]],
+++        , enable_elf_check="no")
+++AC_MSG_RESULT($enable_elf_check)
+++if test "x$enable_elf_check" != "xno"; then
++ AC_CHECK_HEADER(elf.h, HAS_ELF=1)
++ dnl AC_CHECK_HEADER(dwarf.h, SVR4=1)
++ if test "$HAS_ELF" = 1; then
++   AC_CHECK_LIB(elf, main)
++ fi
+++fi
++ 
++ AC_HEADER_DIRENT
++ 
++-- 
++1.7.9.5
++
 diff --git a/meta-oe/recipes-support/vim/vim_7.4.258.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-index 023e8fc..9c6e231 100644
+index 9c6e231..19c8abc 100644
 --- a/meta-oe/recipes-support/vim/vim_7.4.258.bb
 +++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-@@ -6,7 +6,9 @@ RSUGGESTS_${PN} = "diffutils"
- LICENSE = "vim"
- LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc77069
  
--SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
-+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-+           file://disable_acl_header_check.patch;patchdir=.. \
-+"
+ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+            file://disable_acl_header_check.patch;patchdir=.. \
++           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+ "
  SRCREV = "v7-4-258"
  
- S = "${WORKDIR}/${PN}/src"
+@@ -38,6 +39,7 @@ PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+ PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
+ PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
++PACKAGECONFIG[elfutils] = "--enable-elf-check,,elfutils,"
+ 
+ EXTRA_OECONF = " \
+     --disable-gpm \
 -- 
 1.8.1.2
 
