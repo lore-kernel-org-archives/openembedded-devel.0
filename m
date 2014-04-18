@@ -1,37 +1,37 @@
-Return-Path: <krzysztof.m.sywula@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 201CE65E3B
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id D0C9365D17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Apr 2014 10:07:01 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 17 Apr 2014 03:07:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,878,1389772800"; d="scan'208";a="494676087"
-Received: from irsmsx103.ger.corp.intel.com ([163.33.3.157])
-	by orsmga001.jf.intel.com with ESMTP; 17 Apr 2014 03:07:00 -0700
-Received: from irsmsx101.ger.corp.intel.com (163.33.3.153) by
-	IRSMSX103.ger.corp.intel.com (163.33.3.157) with Microsoft SMTP Server
-	(TLS) id 14.3.123.3; Thu, 17 Apr 2014 11:06:58 +0100
-Received: from irsmsx102.ger.corp.intel.com ([169.254.2.45]) by
-	IRSMSX101.ger.corp.intel.com ([169.254.1.190]) with mapi id
-	14.03.0123.003; Thu, 17 Apr 2014 11:06:57 +0100
-From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
-Thread-Index: AQHPWZ+BGuI8eK3mi02Lj/qUJiBjNZsUy8KAgADH46A=
-Date: Thu, 17 Apr 2014 10:06:57 +0000
-Message-ID: <6741EAAB26B57F4995668065CB62D86B3603D664@IRSMSX102.ger.corp.intel.com>
-References: <1397671872-57992-1-git-send-email-krzysztof.m.sywula@intel.com>
-	<CAMKF1sqxTiKZ5EiOL21Eojgefa8boiBc53E5VVOdkZQmgrT2JA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqxTiKZ5EiOL21Eojgefa8boiBc53E5VVOdkZQmgrT2JA@mail.gmail.com>
-Accept-Language: pl-PL, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
+	Fri, 18 Apr 2014 00:34:20 +0000 (UTC)
+Received: by mail-ig0-f177.google.com with SMTP id ur14so193084igb.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Apr 2014 17:34:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=3jyDi96kkaZt92WaEyk7XthCMgHx3TbrpsLpX18KL64=;
+	b=AY915fOSFaVzG2KL4iyogpavb44msEEa8u3DF27X8C0f2aY29t8SL/tEJxFzFQWbyj
+	d3R2C2xNkxeFjjDLKT2OaGjZVe93k2aTGsCpEhi0H0jmFYimh84aA0yXYeNql8CTKfvq
+	aDtDK4Yx2y7SKfbMMOYx8pYvJkvboU9G8GafByqqujNkemFAnLwcmlpmNwso4QKPs1so
+	VBFaPb/+XAcNSSfH+DQ14TOf5Qu/ccmkkF22EiCcCi3VcGpPYekQpkFFVRKhfZ5qJCF/
+	O7Om1RM6FUAuZM3i9o7ayKIFA1Qve0hUHzfHjJKlVdw/K9Hv00xonvxwUFY1IpBGwV2H
+	NiPQ==
 MIME-Version: 1.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
+X-Received: by 10.42.171.69 with SMTP id i5mr12479078icz.45.1397781260872;
+	Thu, 17 Apr 2014 17:34:20 -0700 (PDT)
+Received: by 10.64.230.100 with HTTP; Thu, 17 Apr 2014 17:34:20 -0700 (PDT)
+In-Reply-To: <CAFZh4h9LwJkSjS-M8687ALRFdwAWYS2_DytOx3v3MGxj=Gte+A@mail.gmail.com>
+References: <CALYKT1hsAOf+qKTPO_fNpBf1u0CJoXm0L2Nz6VCafbqckYY2oA@mail.gmail.com>
+	<534E7151.5030504@balister.org>
+	<CAP71WjzyBZ6ZhbaeOvYiqbuvbux8jYRXDMeg_K27LCrVHcUyJg@mail.gmail.com>
+	<CALYKT1jWHnv+Ja2kAj-UpHWngCNO3s5i88R6r5-ScNpmDDSnOg@mail.gmail.com>
+	<CAFZh4h9LwJkSjS-M8687ALRFdwAWYS2_DytOx3v3MGxj=Gte+A@mail.gmail.com>
+Date: Fri, 18 Apr 2014 09:34:20 +0900
+Message-ID: <CALYKT1hgd9yNY4-CR+KDE9Usjb9nHtYprqj3PRrhSqJznifccw@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: What is the relationship between Open Embedded for MSM and Yocto Project?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,52 +45,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Apr 2014 10:07:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Apr 2014 00:34:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-> +EXTRA_OECONF =3D "--prefix=3D/usr \
-> +                --datadir=3D/usr/share/bitlbee \
-> +                --etcdir=3D/etc/bitlbee \
-> +                --oscar=3D0 \
-These I took from initial recipe in openembedded. =
+Hi Brian Hutchinson,
+
+ So if you are like me and have a product that needs new kernels and
+> filesystem images to keep up with security threats etc., ... you're going
+> to have a hard life for a while (ask me how I know).
 
 
-> +                --ssl=3Dopenssl"
-That is added by myself. Tried with auto (=3Dgnutls) on  x86 Galileo board =
-and bitlbee was failing in a very obfuscated way.
+Thank you for saying like this ^^;
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-Sent: Thursday, April 17, 2014 12:02 AM
-To: openembeded-devel
-Cc: martin.jansa@gmail.comexit; Koen Kooi
-Subject: Re: [oe] [meta-oe][PATCH] bitlbee: add bitlbee-3.2.1
+My situation is that maybe none of my company is interested in those
+toolchain issue. People are just don't care for toolchains. They only think
+general arm tool chain is always enough.
 
-On Wed, Apr 16, 2014 at 11:11 AM,  <krzysztof.m.sywula@intel.com> wrote:
-> +EXTRA_OECONF =3D "--prefix=3D/usr \
-> +                --datadir=3D/usr/share/bitlbee \
-> +                --etcdir=3D/etc/bitlbee \
-> +                --oscar=3D0 \
-> +                --ssl=3Dopenssl"
+You have done professional works with kernel and toolchains,.. with limited
+env. given to you.
+I will try my best but it will be only very much limited because of I don't
+know about kernel and toolchains..
 
-should these be hardcoded ?
--- =
+Thank you again^^;
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
--------------------------------------------------------------
-Intel Ireland Limited (Branch)
-Collinstown Industrial Park, Leixlip, County Kildare, Ireland
-Registered Number: E902934
+Sincerely
+Journeyer
+Seoul
 
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
 
+
+2014-04-17 10:28 GMT+09:00 Brian Hutchinson <b.hutchman@gmail.com>:
+
+> On Wed, Apr 16, 2014 at 7:51 PM, Journeyer J. Joh
+> <oosaprogrammer@gmail.com>wrote:
+>
+> > Hi Denys Dmytriyenko,
+> >
+> > I would recommend you to talk to someone from your company who's more
+> > > familiar
+> > > with the code base that you are trying to look at and how it is derived
+> > > and/or
+> > > relates to OpenEmbedded and the Yocto Project.
+> >
+> >
+> > This is what exactly I am sorry for..
+> > I, in my team, the only one who works with linux.
+> > There are people who works with linux but, until now, I cannot meet them
+> > easily. I feel mail-list more kindly than them..
+> > And I am new to this company...
+> > Telling this story doesn't look fit to the purpose of this maillist but,
+> > this is just my story..
+> >
+> > And this is the reason why I thank you for your kindness..
+> > But I agree I should try to talk with people in my company.
+> >
+> > I don't know what "OE for MSM" is, that you keep referring, probably
+> > your company's
+> > > product based on OE.
+> >
+> >
+> > I think this might be the OE for MSM:
+> >
+> > https://www.codeaurora.org/xwiki/bin/QLBEP/WebHome
+> >
+> > Thank you ...
+> > Sincerely
+> > Journeyer
+> >
+> >
+> >
+> > Hi Journeyer,
+>
+> After paying more attention to the platform you are using ... I'm doubtful
+> that the sdk instructions we mentioned to you before will actually work for
+> you especially seeing that the snapshot of OE at the links you provided are
+> 2011/2012 vintage.  You may want to investigate the older bitbake
+> meta-toolchain recipes (meta-toolchain-sdk too).
+>
+> So if the sdk instructions don't work, but you need to work with the latest
+> OE/Yocto releases ... you may have to do things like I've had to do in the
+> past for some platforms that aren't directly supported by OE, Yocto etc.
+>  I've had to use the kernel/u-boot that came from the silicon vendor (never
+> mainlined and probably never will and are frozen in time) and I build
+> u-boot and kernel source from vendor outside of bitbake (standalone). You
+> can use the toolchain that is probably provided with the MDM and setup OE
+> or Yocto to use that toolchain as an external toolchain to build current
+> released filesystem images and packages.  This way you have new
+> applications in the rootfs but may be stuck (if it isn't mainlined) with
+> old kernel.
+>
+> Your mileage will vary if you decide to go down this road as there can be
+> land mines ... It is always best to keep toolchain, kernel, and root
+> filesystem moving forward (not necessarily using the latest but not lagging
+> too far behind it) and not let one of them get pinned being static but some
+> times you don't have much of a choice (I've been there).  Sometimes when
+> you try to build new filesystem images with old toolchains you run into
+> problems.  Building old kernels with new toolchains also causes problems.
+>  So if you are like me and have a product that needs new kernels and
+> filesystem images to keep up with security threats etc., ... you're going
+> to have a hard life for a while (ask me how I know).
+>
+> You can also study the platform specific differences between what
+> codeaurora (the working example that supports your platform) provided and
+> what the latest releases of OE/yocto provide and make new recipies and
+> bsp's in the latest releases of OE or Yocto to support your platform which
+> is the right thing to do ... but requires the most knowledge of the build
+> system to do.
+>
+> I hope I'm not confusing you ... just trying to give you ideas of what
+> options you have so you can best pick a solution that fits with what you
+> are trying to do.  You may have to pick a less than ideal solution to start
+> with and as you learn more move toward adding platform/BSP support for your
+> hardware to the latest version of OE, Yocto etc.
+>
+> Regards,
+>
+> Brian
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
