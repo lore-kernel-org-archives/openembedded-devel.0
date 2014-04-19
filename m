@@ -1,40 +1,44 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
-	[209.85.213.50])
-	by mail.openembedded.org (Postfix) with ESMTP id D976A65D68
+Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id DA45C65CFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 13:38:24 +0000 (UTC)
-Received: by mail-yh0-f50.google.com with SMTP id t59so333147yho.9
+	Sat, 19 Apr 2014 15:05:57 +0000 (UTC)
+Received: by mail-yk0-f180.google.com with SMTP id 19so2205067ykq.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
+	Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=GY/N4y71ieBrMeex1SGK3qNhbGmBswVqdMO8mBwwSA8=;
-	b=PhdTT6meFk2YFEnOSKx4XN6OFk4DroS0CdddQBhePaNdrhNS21RwYfhIO68tegm4YQ
-	DbbwjyB30UPTvXZLeRS8JEIACwTdRO9bLjJkakc/Ptx2vWq0Ia3g+9F9+enpy/dq+VCS
-	4zgmrnj9Dg4s6FewGRtAKpmg3b+UCnRcHZfclAhWLciJvzyg6uaoF4DMy68r9KMk0E3y
-	HNCvGgMWMxQK1mOV5ZA5m5cDJbblM5J8m4dwsNDVgHKg8yjUDK2nglLSfcY6LA0Bq9Rp
-	6ex0HovkFbc25xRHAnwpI2oIpTAT+yt3SW681XLF/fwrIVh7VzJhlTd5A89dHPXjWZiY
-	7kkw==
-X-Received: by 10.236.97.102 with SMTP id s66mr37315595yhf.45.1397914704870;
-	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.194.208.225])
-	by mx.google.com with ESMTPSA id
-	d68sm59005115yhc.37.2014.04.19.06.38.23 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id B80921A52A486; Sat, 19 Apr 2014 10:38:20 -0300 (BRT)
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=LLYPm2shNU32KCNJZ9xcUbVADOtynAtUjZ+XKsUDPmU=;
+	b=IjNnh2K3968QT4yVVPn2uOnVcbvNPARYQhxF8D0sXsmasygl2wSYgDnBAbePl9eKAT
+	L5eUatOlfgyfittBEs4cKxH0T6G7GLLa4azoz1qyNwsgmAexIcUM9z+VERt/x7ZyihqW
+	vZqGwKmI2M22SsHszkZYJdwMnfVqhaMnowuq8l70Ub+1QCtYtryz/KdFFYyWpCu8lLmX
+	esR2Cgu/NdcJGFCxFH+v3Tsy9FE3SgphatjetojmkWV3Za5j/paiAMD78laaQfA894F/
+	8tUlo57MdTfaYwklKHa6jbE7NVvQZE8aTnVJVKMfsw3bdLYrY1amcuCoLS9DTq+jO332
+	zeIA==
+MIME-Version: 1.0
+X-Received: by 10.236.90.225 with SMTP id e61mr36919332yhf.15.1397919958249;
+	Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.124.72 with HTTP; Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
+In-Reply-To: <CAP9ODKr=UuQ3K5kZhEg8oj2RvO-+txN39Yzx_Cj6BkGnj1RGmA@mail.gmail.com>
+References: <1394664760-8615-1-git-send-email-net147@gmail.com>
+	<1394664760-8615-2-git-send-email-net147@gmail.com>
+	<CAP9ODKpSGubOE6p7=Z=RprvWEkgj=GPsEyU68rbNVQTXHhRyhA@mail.gmail.com>
+	<53389231.2020209@gmail.com>
+	<CAP9ODKqnv0urkjLSwC9k-WhWwwnX0zqCg=nOUhMEqtMPMaEceA@mail.gmail.com>
+	<5351EAC7.9040503@gmail.com>
+	<CAP9ODKrKNoMkMWZDA+XYzvLnyxQykRZ1HJ+ShXAhvhtWG0zB5A@mail.gmail.com>
+	<5351F3FB.5090205@gmail.com>
+	<CAP9ODKr=UuQ3K5kZhEg8oj2RvO-+txN39Yzx_Cj6BkGnj1RGmA@mail.gmail.com>
+Date: Sat, 19 Apr 2014 12:05:58 -0300
+X-Google-Sender-Auth: PeZbNH7SaECB_Uv3Hv4tMaMsgCg
+Message-ID: <CAP9ODKobT4Z-bS6cD30AqKknzLvWkudxgoYAznRnVai7aN9W=A@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 19 Apr 2014 10:38:16 -0300
-Message-Id: <1397914696-12292-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.9.2
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH v3] glcompbench: Create 2012.08 version
+To: Jonathan Liu <net147@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v5 2/2] packagegroup-qt5-toolchain-target: include all modules for development
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,87 +52,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 13:38:25 -0000
+X-List-Received-Date: Sat, 19 Apr 2014 15:06:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Lauren Post <lauren.post@freescale.com>
+On Sat, Apr 19, 2014 at 1:03 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Sat, Apr 19, 2014 at 12:56 AM, Jonathan Liu <net147@gmail.com> wrote:
+>> On 19/04/2014 1:29 PM, Otavio Salvador wrote:
+>>>
+>>> On Sat, Apr 19, 2014 at 12:17 AM, Jonathan Liu <net147@gmail.com> wrote:
+>>>>
+>>>> On 19/04/2014 12:27 PM, Otavio Salvador wrote:
+>>>>>
+>>>>> Hello Jonathan,
+>>>>>
+>>>>> On Sun, Mar 30, 2014 at 6:52 PM, Jonathan Liu <net147@gmail.com> wrote:
+>>>>>>
+>>>>>> On 13/03/2014 1:01 PM, Otavio Salvador wrote:
+>>>>>>>
+>>>>>>> On Wed, Mar 12, 2014 at 7:52 PM, Jonathan Liu <net147@gmail.com>
+>>>>>>> wrote:
+>>>>>>>>
+>>>>>>>> This adds the necessary target packages for development with all of
+>>>>>>>> the
+>>>>>>>> Qt 5 modules.
+>>>>>>>>
+>>>>>>>> Signed-off-by: Jonathan Liu <net147@gmail.com>
+>>>>>>>
+>>>>>>> | Computing transaction...error: Can't install
+>>>>>>> qtwayland-dev-5.2.1+git0+573d0ee5ba-r0.0@cortexa9hf_vfp_neon: no
+>>>>>>> package provides qtwayland = 5.2.1+git0+573d0ee5ba-r0.0
+>>>>>>> |
+>>>>>>> | Saving cache...
+>>>>>>> |
+>>>>>>> | WARNING:
+>>>>>>>
+>>>>>>>
+>>>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/run.populate_sdk_image.29400:1
+>>>>>>> exit 1 from
+>>>>>>> |   smart --data-dir=${target_rootfs}/var/lib/smart install -y
+>>>>>>> ${pkgs_to_install}
+>>>>>>> | DEBUG: Python function do_populate_sdk finished
+>>>>>>> | ERROR: Function failed: populate_sdk_image (log file is located at
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/lo
+>>>>>>>
+>>>>>>> Please fix this and test the combinations of enable/disable features.
+>>>>>>> They seem not well tested.
+>>>>>>>
+>>>>>> It looks like qtwayland is not being built properly in your
+>>>>>> configration.
+>>>>>>
+>>>>>> Can you provide configuration and steps to reproduce this failure?
+>>>>>> I have not had any luck in reproducing it.
+>>>>>
+>>>>> The wayland packages cannot be installed if wayland distro feature is
+>>>>> not available.
+>>>>>
+>>>> By default, DISTRO_FEATURES does not contain wayland so I wonder if it
+>>>> makes
+>>>> sense for to add wayland to DISTRO_FEATURES if it is not available.
+>>>> Is there a better method than checking if DISTRO_FEATURES has wayland for
+>>>> qtwayland?
+>>>
+>>> You can check for x11 or wayland in this case. But I think qtwayland
+>>> is useless without wayland in distro features, isn't it?
+>>>
+>> I already do check for wayland in DISTRO_FEATURES before including qtwayland
+>> packages:
+>>
+>> ${@base_contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)}
+>>
+>> Is this not enough?
+>>
+>> I could perhaps change USE_RUBY, USE_WAYLAND, and USE_X11 to assign with ?=
+>> instead of = so that the packages depending on those can be excluded from
+>> the SDK if desired by setting them to "" in local.conf.
+>
+> It is. I am rebuilding here and will debug it ...
 
-glcompbench is a benchmark tool for GL(ES)2 based
-compositing operations
+Alright. It was my fault here.
 
-Signed-off-by: Lauren Post <lauren.post@freescale.com>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
-Changes for v3:
-- Drop duplicated depends (Khem)
+I merged it :-) Sorry for taking so long in checking it. I was out and
+couldn't get it done before.
 
- .../glcompbench/glbench-compile-fix.patch          | 35 ++++++++++++++++++++++
- .../glcompbench/glcompbench_2012.08.bb             | 14 +++++++++
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
- create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
-
-diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
-new file mode 100644
-index 0000000..374a6cf
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
-@@ -0,0 +1,35 @@
-+From c4bc44c3abf69f26e4c2b7684f4da4670a51f993 Mon Sep 17 00:00:00 2001
-+From: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
-+Date: Tue, 5 Nov 2013 11:03:04 -0600
-+Subject: [PATCH] to make compilable
-+
-+Upstream Status: Inappropriate [workaround]
-+
-+Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
-+---
-+ src/composite-test-simple-blur.cc | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/composite-test-simple-blur.cc b/src/composite-test-simple-blur.cc
-+index 170ad64..d7f77cf 100644
-+--- a/src/composite-test-simple-blur.cc
-++++ b/src/composite-test-simple-blur.cc
-+@@ -347,6 +347,7 @@ CompositeTestSimpleBlur::CompositeTestSimpleBlur() :
-+ 
-+ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
-+ {
-++#if 0
-+     for (BlurWindowMapType::iterator winIt = priv_->windowMap.begin();
-+          winIt != priv_->windowMap.end();
-+          winIt++)
-+@@ -354,6 +355,7 @@ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
-+         RenderWindowBlur* ro = winIt->second;
-+         delete ro;
-+     }
-++#endif
-+     delete priv_;
-+ }
-+ 
-+-- 
-+1.8.1.2
-+
-diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
-new file mode 100644
-index 0000000..51f57b9
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "A benchmark for GL(ES)2 based compositing operations"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
-+
-+DEPENDS = "virtual/libgl virtual/egl virtual/libgles1 virtual/libgles2 \
-+           virtual/libx11 libxcomposite pixman libxrender libpng12"
-+
-+SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
-+           file://glbench-compile-fix.patch"
-+
-+SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
-+SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
-+
-+inherit pkgconfig waf
 -- 
-1.9.2
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
