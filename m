@@ -1,34 +1,40 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 46C95609A7;
-	Sat, 19 Apr 2014 11:03:14 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id s7so2041513lbd.9
-	for <multiple recipients>; Sat, 19 Apr 2014 04:03:15 -0700 (PDT)
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id D976A65D68
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Apr 2014 13:38:24 +0000 (UTC)
+Received: by mail-yh0-f50.google.com with SMTP id t59so333147yho.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=g2INWideO1fm9h6hO5411lGIs6YZEOUT59nBcPGMVrI=;
-	b=HtG54c5bGPRq1zDo/m1uLcMk00wqrNT8ptbuk+jcOuPKLKINAngq6culoeNA1VhTSy
-	fzshJSMPMGTp/1RE70mkytsI3VtXCpc/Dc+XlVl9n1AnAn+Gg38QJQsjlSacQZz0MLfA
-	mCwvVHTfdWETEEMMWjSTO0zb0uNKrjb7G9c92osxVQqBAL2H7SxfdxsTdyi9LhzoWM6S
-	G0fl471a/3QKgSZkI5pptdK1nf4ycHo+6Gw12hgFXXrtyqxT/GaSrQm+a35nBhLWLse9
-	v6AVhxLl225tYD9X+eYI+8BJXSTw79MKArqGUMh5sIUF8J596Y5mWuJFM2LAvtCdvS9g
-	n7vg==
-MIME-Version: 1.0
-X-Received: by 10.112.131.34 with SMTP id oj2mr930361lbb.43.1397905394957;
-	Sat, 19 Apr 2014 04:03:14 -0700 (PDT)
-Received: by 10.112.53.73 with HTTP; Sat, 19 Apr 2014 04:03:14 -0700 (PDT)
-In-Reply-To: <20140418183632.GG2486@jama>
-References: <20140418183632.GG2486@jama>
-Date: Sat, 19 Apr 2014 13:03:14 +0200
-Message-ID: <CAPbeDCnP_Qr1fUS9MAFZ4mLCRcoNJ=M1n8Umx-8m6m0b8Sxm0w@mail.gmail.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, test-dependencies 2014-04-18
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=GY/N4y71ieBrMeex1SGK3qNhbGmBswVqdMO8mBwwSA8=;
+	b=PhdTT6meFk2YFEnOSKx4XN6OFk4DroS0CdddQBhePaNdrhNS21RwYfhIO68tegm4YQ
+	DbbwjyB30UPTvXZLeRS8JEIACwTdRO9bLjJkakc/Ptx2vWq0Ia3g+9F9+enpy/dq+VCS
+	4zgmrnj9Dg4s6FewGRtAKpmg3b+UCnRcHZfclAhWLciJvzyg6uaoF4DMy68r9KMk0E3y
+	HNCvGgMWMxQK1mOV5ZA5m5cDJbblM5J8m4dwsNDVgHKg8yjUDK2nglLSfcY6LA0Bq9Rp
+	6ex0HovkFbc25xRHAnwpI2oIpTAT+yt3SW681XLF/fwrIVh7VzJhlTd5A89dHPXjWZiY
+	7kkw==
+X-Received: by 10.236.97.102 with SMTP id s66mr37315595yhf.45.1397914704870;
+	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id
+	d68sm59005115yhc.37.2014.04.19.06.38.23 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Apr 2014 06:38:24 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id B80921A52A486; Sat, 19 Apr 2014 10:38:20 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 19 Apr 2014 10:38:16 -0300
+Message-Id: <1397914696-12292-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.9.2
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v3] glcompbench: Create 2012.08 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,133 +48,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 11:03:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 19 Apr 2014 13:38:25 -0000
 
-On Fri, Apr 18, 2014 at 8:36 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
+From: Lauren Post <lauren.post@freescale.com>
 
-> And more importantly floating dependencies, reply here
-> when you start working on some of these.
->
-> Found differences:
-> ccid/ccid/latest lost dependency on  flex
-> console-tools/console-tools/latest lost dependency on  flex
->
+glcompbench is a benchmark tool for GL(ES)2 based
+compositing operations
 
-I'll have a go at resolving the console-tools/flex floating dep.
+Signed-off-by: Lauren Post <lauren.post@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+Changes for v3:
+- Drop duplicated depends (Khem)
 
+ .../glcompbench/glbench-compile-fix.patch          | 35 ++++++++++++++++++++++
+ .../glcompbench/glcompbench_2012.08.bb             | 14 +++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
 
-> consolekit/consolekit/latest lost dependency on  polkit
-> daq/daq/latest lost dependency on  libdnet libmnl libnetfilter-queue
-> libnfnetlink
-> directfb/directfb/latest lost dependency on  libdrm libdrm-kms liblzma tiff
-> dovecot/dovecot/latest lost dependency on  libcap
-> engrave/engrave/latest lost dependency on  flex
-> epiphany/epiphany/latest lost dependency on  libavahi-client
-> libavahi-common libavahi-gobject libnotify
-> expedite/expedite/latest lost dependency on  libsdl
-> fbida/fbida/latest lost dependency on  libx11 libxext libxpm libxt
-> openmotif
-> flashrom/flashrom/latest lost dependency on  libftdi
-> gammu/gammu/latest lost dependency on  glib-2.0 libgudev-1.0
-> gammu/libgammu/latest lost dependency on  glib-2.0
-> gimp/gimp/latest lost dependency on  jasper libxmu libxpm
-> glade3/glade3/latest lost dependency on  dbus-glib dbus-lib gconf
-> gnome-vfs libart-lgpl libavahi-client libavahi-common libavahi-glib
-> libbonobo libbonoboui libcanberra libcap libgcrypt libgnome
-> libgnome-keyring libgnomecanvas libgnomeui libgpg-error libice libltdl
-> libogg libsm libvorbis libxcomposite libxcursor libxdamage libxfixes
-> libxrandr orbit2 popt util-linux-libuuid
-> gmtk/gmtk/latest lost dependency on  cairo-gobject dbus-lib gtk+3 json-c
-> libcap libice libpulse libpulse-mainloop-glib libpulsecommon libsm
-> libsndfile1 libx11-xcb libxi libxtst util-linux-libuuid
-> gnokii/libgnokii/latest lost dependency on  bluez4 libical libusb-compat
-> libusb1 pcsc-lite-lib
-> gnome-mplayer/gnome-mplayer/latest lost dependency on  cairo gtk+3
-> gnome-mplayer/gnome-mplayer-nautilus-extension/latest lost dependency on
->  eglibc glib-2.0 gtk+
-> gnome-panel/gnome-panel/latest lost dependency on  dbus-lib
-> gst-plugins-bad/gst-plugins-bad-meta/latest lost dependency on
->  gst-plugins-bad-dc1394 gst-plugins-bad-faac gst-plugins-bad-schro
-> gst-plugins-good/gst-plugins-good-ximagesrc/latest lost dependency on
->  libxdamage
-> gstreamer1.0-plugins-good/gstreamer1.0-plugins-good-ximagesrc/latest lost
-> dependency on  libxdamage
-> guile/guile/latest lost dependency on  libgc ncurses-libncurses readline
-> libarchive/libarchive/latest lost dependency on  lzo
-> libarchive/libarchive-bin/latest lost dependency on  lzo
-> libdc1394/libdc1394/latest lost dependency on  libx11 libxv
-> libmicrohttpd/libmicrohttpd-bin/latest lost dependency on  file
-> libungif/libungif/latest lost dependency on  libice libsm libx11 libxau
-> libxcb libxdmcp util-linux-libuuid
-> libungif/libungif-utils/latest lost dependency on  libx11
-> mesa-demos/mesa-demos/latest lost dependency on  libhybris
-> midori/midori/latest lost dependency on  libxscrnsaver
-> mpd/mpd/latest lost dependency on  fluidsynth libao libcdio libcdio-cdda
-> libcdio-paranoia libjack libmms libmodplug libopus mpg123 wavpack yajl
-> mpeg2dec/mpeg2dec/latest lost dependency on  libx11 libxext libxv
-> mpg123/mpg123/latest lost dependency on  audiofile esound libjack libsdl
-> portaudio-v19 tslib
-> mplayer2/mplayer2/latest lost dependency on  libpostproc libxscrnsaver
-> mpg123
-> mx-1.0/mx-1.0/latest lost dependency on  libhybris
-> navit/navit/latest lost dependency on  fribidi
-> navit/navit-graphics-gtk/latest lost dependency on  imlib2
-> navit/navit-graphics-sdl/latest lost dependency on  eglibc freetype
-> libjpeg-turbo liblzma libpng libsdl libsdl-image tiff tslib zlib
-> opencv/libopencv-highgui/latest lost dependency on  jasper libdc1394
-> oscam/oscam/latest lost dependency on  pcsc-lite-lib
-> piglit/piglit/latest lost dependency on  libhybris libxrender
-> protobuf/protobuf/latest lost dependency on  zlib
-> python-efl/python-elementary/latest lost dependency on  eglibc eina
-> elementary evas libpython2
-> qtbase/qtbase-plugins/latest lost dependency on  libxcb-render
-> libxkbcommon xcb-util-renderutil
-> qtlocation/qtlocation-plugins/latest lost dependency on  gconf glib-2.0
-> libgypsy
-> qtwayland/qtwayland-plugins/latest lost dependency on  libhybris
-> qtwebkit/qtwebkit/latest lost dependency on  qtmultimedia
-> sox/sox/latest lost dependency on  libao
-> stunnel/stunnel/latest lost dependency on  libwrap zlib
-> synergy/synergy/latest lost dependency on  libxinerama
-> tracker/tracker/latest lost dependency on  dbus-glib enca gnutls gtk+3
-> libgee libgsf libgudev-1.0 libnmglib libnmutil libtasn1 libudev
-> libunistring upower
-> tracker/tracker-dev/latest lost dependency on  cairo enca expat fontconfig
-> freetype giflib gstreamer lcms libbz2 libgsf libgstpbutils-0.10
-> libgsttag-0.10 liblzma libpoppler libpoppler-glib libunistring libx11
-> libxau libxcb libxcb-render libxcb-shm libxdmcp libxext libxrender pixman
-> taglib taglib-c tiff
-> tracker/tracker-nautilus-extension/latest lost dependency on  libunistring
-> tumbler/tumbler/latest lost dependency on  gstreamer1.0 libbz2 libgsf
-> libgsttag-1.0 libxml2
-> vagalume/vagalume/latest lost dependency on  libproxy
-> vlc/libvlc/latest lost dependency on  libidn
-> vlc/vlc/latest lost dependency on  atk dbus-glib enca gconf gnome-vfs gtk+
-> libass libavahi-glib libdc1394 libebml libidn libjpeg-turbo liblzma
-> libmatroska libmodplug libmpeg2 libmtp libnotify libopencv-calib3d
-> libopencv-contrib libopencv-core libopencv-features2d libopencv-flann
-> libopencv-gpu libopencv-highgui libopencv-imgproc libopencv-legacy
-> libopencv-ml libopencv-nonfree libopencv-objdetect libopencv-ocl
-> libopencv-photo libopencv-stitching libopencv-superres libopencv-video
-> libopencv-videostab libopus liborc-0.4 libpostproc libraw1394 libsdl-image
-> libusb1 libxinerama libxpm schroedinger taglib tiff xcb-util-keysyms
-> weston/weston/latest lost dependency on  libhybris
-> weston/weston-examples/latest lost dependency on  libhybris libpoppler-glib
-> wv/wv/latest lost dependency on  libpng
-> wvstreams/wvstreams/latest lost dependency on  dbus-lib libwvstreams-base
-> readline
-> xdelta3/xdelta3/latest lost dependency on  liblzma
-> xfce4-settings/xfce4-settings/latest lost dependency on  upower
-> xfce4-weather-plugin/xfce4-weather-plugin/latest lost dependency on
->  dbus-glib dbus-lib upower
-> xserver-xorg/xserver-xorg/latest lost dependency on  libunwind
-> xserver-xorg/xserver-xorg-xvfb/latest lost dependency on  libunwind
-> xterm/xterm/latest lost dependency on  fontconfig libxft
-> zenity/zenity/latest lost dependency on  libnotify
-> zile/zile/latest lost dependency on  bdwgc
-> perf/perf/latest lost dependency on  libunwind
->
->
-/Jacob
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+new file mode 100644
+index 0000000..374a6cf
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+@@ -0,0 +1,35 @@
++From c4bc44c3abf69f26e4c2b7684f4da4670a51f993 Mon Sep 17 00:00:00 2001
++From: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++Date: Tue, 5 Nov 2013 11:03:04 -0600
++Subject: [PATCH] to make compilable
++
++Upstream Status: Inappropriate [workaround]
++
++Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++---
++ src/composite-test-simple-blur.cc | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/composite-test-simple-blur.cc b/src/composite-test-simple-blur.cc
++index 170ad64..d7f77cf 100644
++--- a/src/composite-test-simple-blur.cc
+++++ b/src/composite-test-simple-blur.cc
++@@ -347,6 +347,7 @@ CompositeTestSimpleBlur::CompositeTestSimpleBlur() :
++ 
++ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++ {
+++#if 0
++     for (BlurWindowMapType::iterator winIt = priv_->windowMap.begin();
++          winIt != priv_->windowMap.end();
++          winIt++)
++@@ -354,6 +355,7 @@ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++         RenderWindowBlur* ro = winIt->second;
++         delete ro;
++     }
+++#endif
++     delete priv_;
++ }
++ 
++-- 
++1.8.1.2
++
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+new file mode 100644
+index 0000000..51f57b9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "A benchmark for GL(ES)2 based compositing operations"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++
++DEPENDS = "virtual/libgl virtual/egl virtual/libgles1 virtual/libgles2 \
++           virtual/libx11 libxcomposite pixman libxrender libpng12"
++
++SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
++           file://glbench-compile-fix.patch"
++
++SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
++SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
++
++inherit pkgconfig waf
+-- 
+1.9.2
+
 
