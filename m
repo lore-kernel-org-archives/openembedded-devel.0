@@ -1,44 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id DA45C65CFE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id BA09265D4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 15:05:57 +0000 (UTC)
-Received: by mail-yk0-f180.google.com with SMTP id 19so2205067ykq.11
+	Sat, 19 Apr 2014 16:47:51 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id c41so2483420eek.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
+	Sat, 19 Apr 2014 09:47:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=LLYPm2shNU32KCNJZ9xcUbVADOtynAtUjZ+XKsUDPmU=;
-	b=IjNnh2K3968QT4yVVPn2uOnVcbvNPARYQhxF8D0sXsmasygl2wSYgDnBAbePl9eKAT
-	L5eUatOlfgyfittBEs4cKxH0T6G7GLLa4azoz1qyNwsgmAexIcUM9z+VERt/x7ZyihqW
-	vZqGwKmI2M22SsHszkZYJdwMnfVqhaMnowuq8l70Ub+1QCtYtryz/KdFFYyWpCu8lLmX
-	esR2Cgu/NdcJGFCxFH+v3Tsy9FE3SgphatjetojmkWV3Za5j/paiAMD78laaQfA894F/
-	8tUlo57MdTfaYwklKHa6jbE7NVvQZE8aTnVJVKMfsw3bdLYrY1amcuCoLS9DTq+jO332
-	zeIA==
-MIME-Version: 1.0
-X-Received: by 10.236.90.225 with SMTP id e61mr36919332yhf.15.1397919958249;
-	Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Sat, 19 Apr 2014 08:05:58 -0700 (PDT)
-In-Reply-To: <CAP9ODKr=UuQ3K5kZhEg8oj2RvO-+txN39Yzx_Cj6BkGnj1RGmA@mail.gmail.com>
-References: <1394664760-8615-1-git-send-email-net147@gmail.com>
-	<1394664760-8615-2-git-send-email-net147@gmail.com>
-	<CAP9ODKpSGubOE6p7=Z=RprvWEkgj=GPsEyU68rbNVQTXHhRyhA@mail.gmail.com>
-	<53389231.2020209@gmail.com>
-	<CAP9ODKqnv0urkjLSwC9k-WhWwwnX0zqCg=nOUhMEqtMPMaEceA@mail.gmail.com>
-	<5351EAC7.9040503@gmail.com>
-	<CAP9ODKrKNoMkMWZDA+XYzvLnyxQykRZ1HJ+ShXAhvhtWG0zB5A@mail.gmail.com>
-	<5351F3FB.5090205@gmail.com>
-	<CAP9ODKr=UuQ3K5kZhEg8oj2RvO-+txN39Yzx_Cj6BkGnj1RGmA@mail.gmail.com>
-Date: Sat, 19 Apr 2014 12:05:58 -0300
-X-Google-Sender-Auth: PeZbNH7SaECB_Uv3Hv4tMaMsgCg
-Message-ID: <CAP9ODKobT4Z-bS6cD30AqKknzLvWkudxgoYAznRnVai7aN9W=A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Jonathan Liu <net147@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v5 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+	h=from:to:cc:subject:date:message-id;
+	bh=g7WlKk0ese9KkqYrvNhGlnI9JKgwwEAW7fwWQg0ygSQ=;
+	b=DmamBoK941TOQdjl9C8vzB9tjOCIh9lGjP3DH4HE/kKVv4K54BgiVPKqMSJIoweJqA
+	J2VwCV1kuPfdX77/LfIu8LUMsBeW+lsnT2Wg88tKTpnEcAz0dasRWjMZxSi/+GYR4la+
+	1mmk9DwWyxgX+Rd2pNEluhyGXBgIiIIgwXlKLHFV+vD1Z6Mwjf1tLT8fzY/uT+I49wJ9
+	+czAtNXs8p+38LsD7yrawBPBi2o4wEgTzmB1j+wtteEzzhGscHFsLjf2Jp5QqOMThoMw
+	FICFTHuBERqJ9EOFnu1eCmyn6csBVG33PtjMmonaV8sw5FQpFJLA/a1YttPM6wmSXzV+
+	wzIA==
+X-Received: by 10.14.225.132 with SMTP id z4mr1180044eep.92.1397926072015;
+	Sat, 19 Apr 2014 09:47:52 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	w1sm87031854eel.16.2014.04.19.09.47.50 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Apr 2014 09:47:50 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 19 Apr 2014 18:47:46 +0200
+Message-Id: <1397926070-7453-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH 1/5] efl, elementary, e-wm: Upgrade to 1.9.3/0.18.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,94 +41,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 15:06:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 19 Apr 2014 16:47:54 -0000
 
-On Sat, Apr 19, 2014 at 1:03 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Sat, Apr 19, 2014 at 12:56 AM, Jonathan Liu <net147@gmail.com> wrote:
->> On 19/04/2014 1:29 PM, Otavio Salvador wrote:
->>>
->>> On Sat, Apr 19, 2014 at 12:17 AM, Jonathan Liu <net147@gmail.com> wrote:
->>>>
->>>> On 19/04/2014 12:27 PM, Otavio Salvador wrote:
->>>>>
->>>>> Hello Jonathan,
->>>>>
->>>>> On Sun, Mar 30, 2014 at 6:52 PM, Jonathan Liu <net147@gmail.com> wrote:
->>>>>>
->>>>>> On 13/03/2014 1:01 PM, Otavio Salvador wrote:
->>>>>>>
->>>>>>> On Wed, Mar 12, 2014 at 7:52 PM, Jonathan Liu <net147@gmail.com>
->>>>>>> wrote:
->>>>>>>>
->>>>>>>> This adds the necessary target packages for development with all of
->>>>>>>> the
->>>>>>>> Qt 5 modules.
->>>>>>>>
->>>>>>>> Signed-off-by: Jonathan Liu <net147@gmail.com>
->>>>>>>
->>>>>>> | Computing transaction...error: Can't install
->>>>>>> qtwayland-dev-5.2.1+git0+573d0ee5ba-r0.0@cortexa9hf_vfp_neon: no
->>>>>>> package provides qtwayland = 5.2.1+git0+573d0ee5ba-r0.0
->>>>>>> |
->>>>>>> | Saving cache...
->>>>>>> |
->>>>>>> | WARNING:
->>>>>>>
->>>>>>>
->>>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/run.populate_sdk_image.29400:1
->>>>>>> exit 1 from
->>>>>>> |   smart --data-dir=${target_rootfs}/var/lib/smart install -y
->>>>>>> ${pkgs_to_install}
->>>>>>> | DEBUG: Python function do_populate_sdk finished
->>>>>>> | ERROR: Function failed: populate_sdk_image (log file is located at
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/lo
->>>>>>>
->>>>>>> Please fix this and test the combinations of enable/disable features.
->>>>>>> They seem not well tested.
->>>>>>>
->>>>>> It looks like qtwayland is not being built properly in your
->>>>>> configration.
->>>>>>
->>>>>> Can you provide configuration and steps to reproduce this failure?
->>>>>> I have not had any luck in reproducing it.
->>>>>
->>>>> The wayland packages cannot be installed if wayland distro feature is
->>>>> not available.
->>>>>
->>>> By default, DISTRO_FEATURES does not contain wayland so I wonder if it
->>>> makes
->>>> sense for to add wayland to DISTRO_FEATURES if it is not available.
->>>> Is there a better method than checking if DISTRO_FEATURES has wayland for
->>>> qtwayland?
->>>
->>> You can check for x11 or wayland in this case. But I think qtwayland
->>> is useless without wayland in distro features, isn't it?
->>>
->> I already do check for wayland in DISTRO_FEATURES before including qtwayland
->> packages:
->>
->> ${@base_contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)}
->>
->> Is this not enough?
->>
->> I could perhaps change USE_RUBY, USE_WAYLAND, and USE_X11 to assign with ?=
->> instead of = so that the packages depending on those can be excluded from
->> the SDK if desired by setting them to "" in local.conf.
->
-> It is. I am rebuilding here and will debug it ...
+* announcement:
+  https://phab.enlightenment.org/phame/post/view/50/
 
-Alright. It was my fault here.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/e17/{e-wm_0.18.6.bb => e-wm_0.18.7.bb}           | 4 ++--
+ meta-efl/recipes-efl/efl/{efl_1.9.2.bb => efl_1.9.3.bb}               | 4 ++--
+ meta-efl/recipes-efl/efl/{elementary_1.9.2.bb => elementary_1.9.3.bb} | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+ rename meta-efl/recipes-efl/e17/{e-wm_0.18.6.bb => e-wm_0.18.7.bb} (75%)
+ rename meta-efl/recipes-efl/efl/{efl_1.9.2.bb => efl_1.9.3.bb} (81%)
+ rename meta-efl/recipes-efl/efl/{elementary_1.9.2.bb => elementary_1.9.3.bb} (69%)
 
-I merged it :-) Sorry for taking so long in checking it. I was out and
-couldn't get it done before.
-
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.18.6.bb b/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
+similarity index 75%
+rename from meta-efl/recipes-efl/e17/e-wm_0.18.6.bb
+rename to meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
+index 852046c..0e39727 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.18.6.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
+@@ -10,8 +10,8 @@ SRC_URI = "\
+     file://applications.menu \
+ "
+ 
+-SRC_URI[md5sum] = "a3a707e32fd72547e0911e3765d112f1"
+-SRC_URI[sha256sum] = "a75f85e65038672a0413c74bffc7f4869c3c41090afe6b66876241780e478c2b"
++SRC_URI[md5sum] = "499b92ef38347881c72729f1e066eb20"
++SRC_URI[sha256sum] = "1b05a1d986643a6603b1c20ac87b6864325d0aea22a3d1d096f4063b4fba2f4d"
+ 
+ do_configure_prepend() {
+     sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
+diff --git a/meta-efl/recipes-efl/efl/efl_1.9.2.bb b/meta-efl/recipes-efl/efl/efl_1.9.3.bb
+similarity index 81%
+rename from meta-efl/recipes-efl/efl/efl_1.9.2.bb
+rename to meta-efl/recipes-efl/efl/efl_1.9.3.bb
+index 0670359..61e6a9e 100644
+--- a/meta-efl/recipes-efl/efl/efl_1.9.2.bb
++++ b/meta-efl/recipes-efl/efl/efl_1.9.3.bb
+@@ -4,8 +4,8 @@ SRC_URI = "\
+     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "5520ed809cdccd8b2a3e376f56f9ae61"
+-SRC_URI[sha256sum] = "530cec25c7f41c188599a1e239bef72142850f6a5f67c1dd4184354f756181ad"
++SRC_URI[md5sum] = "102acebaf453346d745b0974f736a5e6"
++SRC_URI[sha256sum] = "46da18ce5ec6ded559dbf461ff58113f82937efb6e26a098a82b2f360e8faf88"
+ 
+ # Temporary disable until error like the one following are fixed
+ # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.9.2.bb b/meta-efl/recipes-efl/efl/elementary_1.9.3.bb
+similarity index 69%
+rename from meta-efl/recipes-efl/efl/elementary_1.9.2.bb
+rename to meta-efl/recipes-efl/efl/elementary_1.9.3.bb
+index 110f07b..32ae663 100644
+--- a/meta-efl/recipes-efl/efl/elementary_1.9.2.bb
++++ b/meta-efl/recipes-efl/efl/elementary_1.9.3.bb
+@@ -8,5 +8,5 @@ SRC_URI = "\
+ # these paths aren't passed in -native build
+ SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
+ 
+-SRC_URI[md5sum] = "48a4b155ced187db87c503d4f376aa7a"
+-SRC_URI[sha256sum] = "c31644109cd29675bc65b220d19c633c8d089feb955c439988b2e19f026b3376"
++SRC_URI[md5sum] = "cc75bb1c7c4c49de120ec33e413130ce"
++SRC_URI[sha256sum] = "49f896066b72ba51eefd8e92f0b7e7b8e190b0dd26323b12cbd4f26216f578fb"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
