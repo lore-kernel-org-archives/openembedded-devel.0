@@ -1,24 +1,38 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EFA065D18
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 08:58:01 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3J8w1lo017791
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 01:58:02 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Sat, 19 Apr 2014 01:58:01 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 19 Apr 2014 04:57:59 -0400
-Message-ID: <1397897879-31925-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 86023609A7;
+	Sat, 19 Apr 2014 10:51:43 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id c13so2258631eek.23
+	for <multiple recipients>; Sat, 19 Apr 2014 03:51:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ocxS+n3ROFgxMOqzh0hdX1/0u5vCtLLgq8JRpR1X9bA=;
+	b=Li7SzbU+9vNgxFJKVoVnbb6n861gL06grOBWWXX6OD5xkBkFgng01gfFusUDuxf5i3
+	1dnZAr+mVAOP/f5nBXR/T7OybTIqch8RzaTNk0y5DPIwZ3v1LJQdbWqLTfjChP34XObq
+	4VNpkoMdLmFmM9ZM/rcYaRimmGSgaig91P0JSk/MMmILXOqs0j44Em74McSS30v+qNHd
+	n+K2bzpjWALbKEPgze7XDdqJ0LOw7Vv9eleezQfubQ7CKre/bCnvGNbNehUoP3tRBSbh
+	r2YsD8adVegdVfLEAOZj4RfbH6zB4YsJKqG/0qmzpUtFqTBtQT8c1/12oa7UqDm6vK9X
+	W1Qw==
+X-Received: by 10.14.218.193 with SMTP id k41mr29871769eep.16.1397904704242;
+	Sat, 19 Apr 2014 03:51:44 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	4sm84675427eeq.33.2014.04.19.03.51.42 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Apr 2014 03:51:42 -0700 (PDT)
+Date: Sat, 19 Apr 2014 12:51:46 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+Message-ID: <20140419105146.GH2486@jama>
+References: <20140418183632.GG2486@jama>
+ <5351D1E5.2020302@linaro.org>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gnome-themes: enables the path to the icon-name-mapping to be specified
+In-Reply-To: <5351D1E5.2020302@linaro.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world, test-dependencies 2014-04-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,111 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 08:58:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 19 Apr 2014 10:51:47 -0000
+X-Groupsio-MsgNum: 49283
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="svZFHVx8/dhPCe52"
+Content-Disposition: inline
 
-From: Jackie Huang <jackie.huang@windriver.com>
+--svZFHVx8/dhPCe52
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ported a patch from sato-icon-theme which enables the path to the
-icon-name-mapping tool to be specified to fix the build failure:
-configure: error: icon-naming-utils >= 0.8.7 is required to build and install gnome-themes
+On Fri, Apr 18, 2014 at 09:31:17PM -0400, Trevor Woerner wrote:
+> Hi Martin,
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../themes/gnome-themes/iconpath-option.patch      |   52 ++++++++++++++++++++
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |   10 ++--
- 2 files changed, 56 insertions(+), 6 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/themes/gnome-themes/iconpath-option.patch
+Hi,
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes/iconpath-option.patch b/meta-gnome/recipes-gnome/themes/gnome-themes/iconpath-option.patch
-new file mode 100644
-index 0000000..1b4096d
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes/iconpath-option.patch
-@@ -0,0 +1,52 @@
-+
-+The patch is ported from sato-icon-theme.
-+
-+pkg-config will only search the target sysroot and we want the native script. This 
-+patch adds an option to allow the path to the tool to be specified.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+---
-+ configure.in |   26 ++++++++++++++++----------
-+ 1 file changed, 16 insertions(+), 10 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 5f7a18c..e8fc31e 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -74,16 +74,22 @@ AC_ARG_ENABLE([icon-mapping],
-+ ICONMAP="true"
-+ if test "x$enable_mapping" != "xno"; then
-+    UTILS_REQUIRED=0.8.7
-+-
-+-   AC_MSG_CHECKING([icon-naming-utils >= $UTILS_REQUIRED])
-+-   PKG_CHECK_EXISTS(icon-naming-utils >= $UTILS_REQUIRED, have_utils=yes, have_utils=no)
-+-   if test "x$have_utils" = "xyes"; then
-+-      UTILS_PATH="`$PKG_CONFIG --variable=program_path icon-naming-utils`"
-+-      ICONMAP="$UTILS_PATH/icon-name-mapping"
-+-      AC_MSG_RESULT([yes])
-+-   else
-+-	AC_MSG_RESULT([no])
-+-   	AC_MSG_ERROR([icon-naming-utils >= $UTILS_REQUIRED is required to build and install gnome-themes])
-++   PKG_PROG_PKG_CONFIG()
-++   AC_ARG_WITH(iconmap,
-++   	    AC_HELP_STRING([--with-iconmap=<dir>], [The location of the icon-name-mapping script to use]),
-++   	    ICONMAP=$withval, ICONMAP="")
-++   if test "x$ICONMAP" = "x"; then
-++      AC_MSG_CHECKING([icon-naming-utils >= $UTILS_REQUIRED])
-++      PKG_CHECK_EXISTS(icon-naming-utils >= $UTILS_REQUIRED, have_utils=yes, have_utils=no)
-++      if test "x$have_utils" = "xyes"; then
-++         UTILS_PATH="`$PKG_CONFIG --variable=program_path icon-naming-utils`"
-++         ICONMAP="$UTILS_PATH/icon-name-mapping"
-++
-++         AC_MSG_RESULT([yes])
-++      else
-++         AC_MSG_RESULT([no])
-++         AC_MSG_ERROR([icon-naming-utils >= $UTILS_REQUIRED is required to build and install gnome-themes"])
-++      fi
-+    fi
-+ fi
-+ AC_SUBST(ICONMAP)
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index 864c953..6226e7c 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -8,14 +8,12 @@ SECTION = "x11/gnome"
- DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
- RDEPENDS_${PN} = "gnome-icon-theme"
- 
--EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
-+EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check \
-+    --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
-+"
- 
- inherit gnome perlnative
- 
--do_configure_prepend() {
--    sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
--}
--
- PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
- FILES_gnome-theme-crux = "${datadir}/themes/Crux ${datadir}/icons/Crux"
- FILES_gnome-theme-highcontrast = "${datadir}/themes/HighContrast ${datadir}/icons/HighContrast"
-@@ -27,6 +25,6 @@ FILES_gnome-theme-mist = "${datadir}/themes/Mist ${datadir}/icons/Mist"
- 
- FILES_${PN} += "${datadir}/themes ${datadir}/icons"
- 
-+SRC_URI += "file://iconpath-option.patch" 
- SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
- SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
--
--- 
-1.7.9.5
+> Just to confirm... when we work on this, we should be working against
+> master-next?
 
+In most cases it shouldn't matter, but otherwise yes it would be better,
+I plan to merge most of master-next in next few days (as soon as jenkins
+builds are finished).
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--svZFHVx8/dhPCe52
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEUEARECAAYFAlNSVUIACgkQN1Ujt2V2gBw0jwCXYU5HWatZcSD0w94zTIN1Oz5/
+8QCgjI2w53OgILbeZzrFgTJnvLU+lcw=
+=krGl
+-----END PGP SIGNATURE-----
+
+--svZFHVx8/dhPCe52--
