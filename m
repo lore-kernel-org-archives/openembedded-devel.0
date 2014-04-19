@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EB2765D58
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A97465D93
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 16:47:57 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id d17so2509359eek.29
+	Sat, 19 Apr 2014 16:47:59 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d17so2496937eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 09:47:58 -0700 (PDT)
+	Sat, 19 Apr 2014 09:48:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eZZaNqZ4xj6UZ/SOrhWu7ZnGkPoKbbn6ZujdPcO9SV8=;
-	b=zay5SbJf1/Qtd0f/AdhqvzzqXBJTkZAUQqlipyIzt6f4VkYFhTEHMjlQTAWP/3CGWv
-	3en91//jQVtwXN1+OO53WlmwtJBN4+vujQHRf2oxoi9FszXsgqCgbJvnn1BcVJDxb1XL
-	wJuuQC/qxvCbTGHcZsttW5D7L/5GxiL6aFGvtfH+eCHwNfpi7U83V8ujheD7DQMfoXLB
-	EG9QOJc6zcuJSEev+9dMv4+ohzvRjvC1Da44Y6Am34o10rNH/UPrEWZ78eBIhvl5rV2S
-	r7oSW3tTjga4NY88F1LCACFMPer9Eys6CuP8dLMC3RB6i7tNOHGxTEX1MgHOHVY6AiUb
-	lSVQ==
-X-Received: by 10.14.176.193 with SMTP id b41mr31670015eem.55.1397926078478;
-	Sat, 19 Apr 2014 09:47:58 -0700 (PDT)
+	bh=u+H9KDdvYPkR1s/X248HUPPSMmBdMzIfK09a+/ymFgo=;
+	b=R23OBSrETlf6nNmQmFZZna1tYKz1KrDlF9qTrawxtH0z1ggF5IyqtxvJhg4yZVejC1
+	9bCs1QrUPHJOKdosB29ISWirL1QNuT2qBiRLFtd38WQUuxTJucOrrp2dmWY7yV+jUypA
+	lmsrT1c4mlYKVHgdXNhzVgEbHy/KyHYHq/138dSLO4fVETkIFRaRoQ92tI76evR5WAGw
+	m7T6jmvDx+aguLvVWkVrn9HAWkYkG0796wrnrnI8aARQZI10QS2jkcqICXdj7Y0ICDXa
+	f4F4JWqL60B1xm/z81EJ79wHbBtMer96ehckKbfnQhiorxnnTJusTRHd8lID1k5lm6CZ
+	kYHQ==
+X-Received: by 10.15.10.135 with SMTP id g7mr3098577eet.72.1397926080737;
+	Sat, 19 Apr 2014 09:48:00 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	y51sm87030923eeu.0.2014.04.19.09.47.57 for <multiple recipients>
+	m44sm87029435eep.14.2014.04.19.09.47.59 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 19 Apr 2014 09:47:57 -0700 (PDT)
+	Sat, 19 Apr 2014 09:47:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Apr 2014 18:47:49 +0200
-Message-Id: <1397926070-7453-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 19 Apr 2014 18:47:50 +0200
+Message-Id: <1397926070-7453-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1397926070-7453-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1397926070-7453-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/5] libbonobo: add dependency on dbus, dbus-glib
+Subject: [meta-oe][PATCH 5/5] mousepad: Add xfce4-dev-tools-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +45,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 19 Apr 2014 16:48:00 -0000
 
-* | configure:14835: error: Package requirements (	gmodule-2.0 >=
-  2.0.1 	ORBit-2.0 >= 2.4.0 	ORBit-CosNaming-2.0 >= 2.4.0 	dbus-1
-  >= 1.0.0 dbus-glib-1 >= 0.74 	libxml-2.0 >= 2.4.20) were not met:
-  |
-  | No package 'dbus-1' found
-  | No package 'dbus-glib-1' found
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-index db1db5d..43e034b 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
- SECTION = "x11/gnome/libs"
--DEPENDS = "glib-2.0 orbit2 intltool-native libxml2"
-+DEPENDS = "glib-2.0 orbit2 intltool-native libxml2 dbus dbus-glib"
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
+index 8e9ce59..4947531 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
+@@ -3,9 +3,10 @@ SECTION = "x11/application"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- inherit gnomebase
+-# dbus to fix mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
+ # intltool to provide intltool.m4 with AC_PROG_INTLTOOL
+-DEPENDS = "gtk+ dbus-glib gtksourceview2 dbus intltool-native"
++# xfce4-dev-tools-native for XDT_I18N macro and more importantly XDT_CHECK_OPTIONAL_PACKAGE
++# which fixes mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
++DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-native"
+ 
+ inherit xfce-app
  
 -- 
 1.9.1
