@@ -1,43 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A18365D7A
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 1ED3E65D2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 04:03:18 +0000 (UTC)
-Received: by mail-yk0-f180.google.com with SMTP id 19so1895854ykq.25
+	Sat, 19 Apr 2014 04:48:42 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id q200so1916640ykb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Apr 2014 21:03:19 -0700 (PDT)
+	Fri, 18 Apr 2014 21:48:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=75l5wo8dyhZw30wsqLUTD/g56MnA/4EAj0mFCNX7OdI=;
-	b=MvQOkD1QLdtMAzrenu87eQLKHp2fyA36+DruuQ0GLnZCph3IPy4/I42956hMIU1PPM
-	bK+BX2OhUJJ5tGnZdSeaaGya1JVNGOg1fNtcXTLT4+FCor7CsHmo9Fl45hIgXzEV3/6V
-	CwsVRYJi9ZwIRfREN8LXhPadulz7O/3heaqy/dc6fTydbOOQNIYMPBYRiN/mxlGsxEVF
-	+OsZF5oqQgBf1lpHwGbVtnkRaUGHO2WwP/hmRdEcTlvMWxIsT3mx6fQ/3mvCpykTGn19
-	yCmdSHyg3J9MzxooCMJ94nPsorrrKN/SzJ2MKAjNXhVCdHeB7fsrzJdp96K6DS862Yvr
-	x93w==
-MIME-Version: 1.0
-X-Received: by 10.236.125.12 with SMTP id y12mr34863692yhh.42.1397880199104;
-	Fri, 18 Apr 2014 21:03:19 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Fri, 18 Apr 2014 21:03:19 -0700 (PDT)
-In-Reply-To: <5351F3FB.5090205@gmail.com>
-References: <1394664760-8615-1-git-send-email-net147@gmail.com>
-	<1394664760-8615-2-git-send-email-net147@gmail.com>
-	<CAP9ODKpSGubOE6p7=Z=RprvWEkgj=GPsEyU68rbNVQTXHhRyhA@mail.gmail.com>
-	<53389231.2020209@gmail.com>
-	<CAP9ODKqnv0urkjLSwC9k-WhWwwnX0zqCg=nOUhMEqtMPMaEceA@mail.gmail.com>
-	<5351EAC7.9040503@gmail.com>
-	<CAP9ODKrKNoMkMWZDA+XYzvLnyxQykRZ1HJ+ShXAhvhtWG0zB5A@mail.gmail.com>
-	<5351F3FB.5090205@gmail.com>
-Date: Sat, 19 Apr 2014 01:03:19 -0300
-X-Google-Sender-Auth: pAR3pLqUdCqh0Drj4RAmkVVI0yo
-Message-ID: <CAP9ODKr=UuQ3K5kZhEg8oj2RvO-+txN39Yzx_Cj6BkGnj1RGmA@mail.gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=bcF9V0qgN/bPoEfhne07nMUqeSkvI3GqvM/v3SKnZTg=;
+	b=hn7pXPLJ0f/4j/j0etGwsGLMt8aH4kgTqTLotsOeYmLV0yPh/iv3ENwycF4w5AvMDU
+	F/M9sf2MuKhgpHcKeH0zb1ME7cydBBHEXV6vu4AjYKRxU85q9U0NGakR245qI9HmCr/c
+	54PZNYaauEkyHL/LKDWXRU5LFtQpSUcn3oMFwj0K7h30KDPO3aO2sfF3p3EXT17iAvQ7
+	WpEjGVCZbiF4NBRL+sPuWPJxLJ+c8+RS6QQ1fRoxhfh1DduxgUHy35bCdpBpVzfbPozp
+	NGyAxB8vZPxeGZpp7IzvM92i5+RTo/rWpQ9efN/R0i51KXt46TB2/bgbd2917xlMtB5f
+	UY2g==
+X-Received: by 10.236.230.41 with SMTP id i39mr35050073yhq.14.1397882923651;
+	Fri, 18 Apr 2014 21:48:43 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id
+	l32sm57247770yhq.42.2014.04.18.21.48.41 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Apr 2014 21:48:42 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 1637D1A529002; Sat, 19 Apr 2014 01:48:39 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Jonathan Liu <net147@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v5 2/2] packagegroup-qt5-toolchain-target: include all modules for development
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 19 Apr 2014 01:48:36 -0300
+Message-Id: <1397882916-8348-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.9.2
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v2] glcompbench: Create 2012.08 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,87 +48,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 04:03:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 19 Apr 2014 04:48:50 -0000
 
-On Sat, Apr 19, 2014 at 12:56 AM, Jonathan Liu <net147@gmail.com> wrote:
-> On 19/04/2014 1:29 PM, Otavio Salvador wrote:
->>
->> On Sat, Apr 19, 2014 at 12:17 AM, Jonathan Liu <net147@gmail.com> wrote:
->>>
->>> On 19/04/2014 12:27 PM, Otavio Salvador wrote:
->>>>
->>>> Hello Jonathan,
->>>>
->>>> On Sun, Mar 30, 2014 at 6:52 PM, Jonathan Liu <net147@gmail.com> wrote:
->>>>>
->>>>> On 13/03/2014 1:01 PM, Otavio Salvador wrote:
->>>>>>
->>>>>> On Wed, Mar 12, 2014 at 7:52 PM, Jonathan Liu <net147@gmail.com>
->>>>>> wrote:
->>>>>>>
->>>>>>> This adds the necessary target packages for development with all of
->>>>>>> the
->>>>>>> Qt 5 modules.
->>>>>>>
->>>>>>> Signed-off-by: Jonathan Liu <net147@gmail.com>
->>>>>>
->>>>>> | Computing transaction...error: Can't install
->>>>>> qtwayland-dev-5.2.1+git0+573d0ee5ba-r0.0@cortexa9hf_vfp_neon: no
->>>>>> package provides qtwayland = 5.2.1+git0+573d0ee5ba-r0.0
->>>>>> |
->>>>>> | Saving cache...
->>>>>> |
->>>>>> | WARNING:
->>>>>>
->>>>>>
->>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/run.populate_sdk_image.29400:1
->>>>>> exit 1 from
->>>>>> |   smart --data-dir=${target_rootfs}/var/lib/smart install -y
->>>>>> ${pkgs_to_install}
->>>>>> | DEBUG: Python function do_populate_sdk finished
->>>>>> | ERROR: Function failed: populate_sdk_image (log file is located at
->>>>>>
->>>>>>
->>>>>>
->>>>>> /home/otavio/hacking/customer/companytec/yocto/build/tmp/work/wandboard_solo-oel-linux-gnueabi/qsiv-demo-image/1.0-r0/temp/lo
->>>>>>
->>>>>> Please fix this and test the combinations of enable/disable features.
->>>>>> They seem not well tested.
->>>>>>
->>>>> It looks like qtwayland is not being built properly in your
->>>>> configration.
->>>>>
->>>>> Can you provide configuration and steps to reproduce this failure?
->>>>> I have not had any luck in reproducing it.
->>>>
->>>> The wayland packages cannot be installed if wayland distro feature is
->>>> not available.
->>>>
->>> By default, DISTRO_FEATURES does not contain wayland so I wonder if it
->>> makes
->>> sense for to add wayland to DISTRO_FEATURES if it is not available.
->>> Is there a better method than checking if DISTRO_FEATURES has wayland for
->>> qtwayland?
->>
->> You can check for x11 or wayland in this case. But I think qtwayland
->> is useless without wayland in distro features, isn't it?
->>
-> I already do check for wayland in DISTRO_FEATURES before including qtwayland
-> packages:
->
-> ${@base_contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)}
->
-> Is this not enough?
->
-> I could perhaps change USE_RUBY, USE_WAYLAND, and USE_X11 to assign with ?=
-> instead of = so that the packages depending on those can be excluded from
-> the SDK if desired by setting them to "" in local.conf.
+From: Lauren Post <lauren.post@freescale.com>
 
-It is. I am rebuilding here and will debug it ...
+glcompbench is a benchmark tool for GL(ES)2 based
+compositing operations
 
+Signed-off-by: Lauren Post <lauren.post@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+Changes for v2 (all done by Otavio Salvador):
+- Use summary only as description was short
+- Fixed dependencies 
+
+ .../glcompbench/glbench-compile-fix.patch          | 35 ++++++++++++++++++++++
+ .../glcompbench/glcompbench_2012.08.bb             | 14 +++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+new file mode 100644
+index 0000000..374a6cf
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/glbench-compile-fix.patch
+@@ -0,0 +1,35 @@
++From c4bc44c3abf69f26e4c2b7684f4da4670a51f993 Mon Sep 17 00:00:00 2001
++From: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++Date: Tue, 5 Nov 2013 11:03:04 -0600
++Subject: [PATCH] to make compilable
++
++Upstream Status: Inappropriate [workaround]
++
++Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
++---
++ src/composite-test-simple-blur.cc | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/composite-test-simple-blur.cc b/src/composite-test-simple-blur.cc
++index 170ad64..d7f77cf 100644
++--- a/src/composite-test-simple-blur.cc
+++++ b/src/composite-test-simple-blur.cc
++@@ -347,6 +347,7 @@ CompositeTestSimpleBlur::CompositeTestSimpleBlur() :
++ 
++ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++ {
+++#if 0
++     for (BlurWindowMapType::iterator winIt = priv_->windowMap.begin();
++          winIt != priv_->windowMap.end();
++          winIt++)
++@@ -354,6 +355,7 @@ CompositeTestSimpleBlur::~CompositeTestSimpleBlur()
++         RenderWindowBlur* ro = winIt->second;
++         delete ro;
++     }
+++#endif
++     delete priv_;
++ }
++ 
++-- 
++1.8.1.2
++
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+new file mode 100644
+index 0000000..7b91272
+--- /dev/null
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "A benchmark for GL(ES)2 based compositing operations"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++
++DEPENDS = "virtual/egl virtual/libgl virtual/egl virtual/libgles1 virtual/libgles2 \
++           virtual/libx11 libxcomposite pixman libxrender libpng12"
++
++SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
++           file://glbench-compile-fix.patch"
++
++SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
++SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
++
++inherit pkgconfig waf
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.2
+
 
