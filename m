@@ -1,38 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id E8D2B601A9
+Received: from mail-ee0-f54.google.com (mail-ee0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F93F6098B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 12:53:41 +0000 (UTC)
-Received: by mail-ee0-f44.google.com with SMTP id e49so3023264eek.3
+	Sun, 20 Apr 2014 12:54:05 +0000 (UTC)
+Received: by mail-ee0-f54.google.com with SMTP id d49so3026036eek.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 05:53:42 -0700 (PDT)
+	Sun, 20 Apr 2014 05:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=leb/LgX1jZlhHQv4P+WPvXI5ZL70rHir9ZbGUdoCha8=;
-	b=ZS/LknNCalCO5b6CP2PqEE08V/h9HqkDzPsvAUi1QqMRUSTjNMoYWTY0mYH7snX8bW
-	/H6aAPp3uKl8kSV8ZsgN+qiP2heCEQ31IWIZwDR0VRC89p0yYus/L53gGmbl0gmEfVwz
-	z9SfsrHnlZz7mJxqEabkBDGXDC8cE7mzvxzF3LfLE2NjJtvZh/+EJ/7NyQ+nbclibZTp
-	HzkL/T57JH+bXPRhm8T9ND/rhxzv+tKvhnpC4FF0JgKx7iYZKt8B9+nijH8MHuZI0k31
-	GTpp4UxuFI6r3DYUEiEH9zGoO6c5lQ9qaFvn7DIcT0JOTu3TJx6yBu0Dhl0SCEnmTkbF
-	swAA==
-X-Received: by 10.14.115.1 with SMTP id d1mr38594863eeh.30.1397998422611;
-	Sun, 20 Apr 2014 05:53:42 -0700 (PDT)
+	bh=c4b5GzVecXFHln+R/YCVZGvjgtAdHiWyNnufCAfme5E=;
+	b=vvodtb1ebMiGzVu9XShKpGKfiv/7kzYwyzykkC6yfwxISquD8zuz6MV2yvKhRXtSsE
+	vxxP7lWbAE4XqezQzGfOq9l7TLHYkWwdCfBzZF2Uaa28HUAWDOgWhGkS8aAz2LGWoktR
+	36VFb0/AR1jv8qJryRH5J9bQ9HSo+72rCEouajwp79T3uu/Zbc2La9hUEQpOeIdVvrD3
+	Dnx8xLN0ywIj02gXfkFkZBTwV564JJrQXWoZHTlsMGdKLshTCD5VStA4flukw/bJ/v9I
+	L7RWBCeV+sQ3rjV2n6sO82g3G+fIeEK+peVLI7SepCjiXgrwSQmEkakP0qDkvS87oIlf
+	e+fw==
+X-Received: by 10.14.95.136 with SMTP id p8mr156039eef.103.1397998446870;
+	Sun, 20 Apr 2014 05:54:06 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	w12sm94405752eez.36.2014.04.20.05.53.40
+	o7sm94403093eew.25.2014.04.20.05.54.05
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 05:53:41 -0700 (PDT)
-Date: Sun, 20 Apr 2014 14:53:46 +0200
+	Sun, 20 Apr 2014 05:54:05 -0700 (PDT)
+Date: Sun, 20 Apr 2014 14:54:11 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420125346.GK2486@jama>
-References: <1396441466-14563-1-git-send-email-Matthieu.Crapet@ingenico.com>
+Message-ID: <20140420125411.GL2486@jama>
+References: <1395326878-6726-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<1396358092-9738-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050B57550F94@COSNADEXC13.usr.ingenico.loc>
 MIME-Version: 1.0
-In-Reply-To: <1396441466-14563-1-git-send-email-Matthieu.Crapet@ingenico.com>
+In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050B57550F94@COSNADEXC13.usr.ingenico.loc>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] zsh: upgrade to 5.0.5
+Subject: Re: [OE-core][PATCH v2] open-vcdiff: add new recipe for version 0.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,146 +48,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 12:53:45 -0000
-X-Groupsio-MsgNum: 49344
+X-List-Received-Date: Sun, 20 Apr 2014 12:54:06 -0000
+X-Groupsio-MsgNum: 49345
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uff7bI5xB/HT0T5d"
+	protocol="application/pgp-signature"; boundary="W/k2pzXB1sdSS/P9"
 Content-Disposition: inline
 
---uff7bI5xB/HT0T5d
+--W/k2pzXB1sdSS/P9
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 02, 2014 at 02:24:26PM +0200, Matthieu Crapet wrote:
-> Recipe cleanup:
-> - Add missing license in meta-oe/licenses
-> - Add DESCRIPTION
-> - Use ${BP} and ${SOURCEFORGE_MIRROR}
+On Tue, Apr 01, 2014 at 01:27:49PM +0000, Matthieu CRAPET wrote:
+> Hi,
 
 Merged, thanks!
 
 >=20
+> This discards and replaces the patch already in master-next:
+> http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
+=3D7720023d0e69215746753cb3dea2ec9e61408a15
+>=20
+> Regards,
+> Matthieu
+>=20
+>=20
+> -----Message d'origine-----
+> De=A0: Matthieu CRAPET=20
+> Envoy=E9=A0: mardi 1 avril 2014 15:15
+> =C0=A0: openembedded-devel@lists.openembedded.org
+> Cc=A0: Matthieu CRAPET
+> Objet=A0: [OE-core][PATCH v2] open-vcdiff: add new recipe for version 0.8=
+=2E3
+>=20
+> From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
+>=20
+> This is Google's implementation of VCDIFF (RFC 3284) delta compression.
+> It's more flexible than Xdelta3 (as a developer point of view).
+>=20
+> v2 patch:
+> State of bitbake world, Failed tasks 2014-03-29 reported a do_configure e=
+rror:
+>=20
+> | aclocal: error: non-option arguments are not accepted: '\'.
+>=20
+> configure.ac file is quite out of date. Submitted patch upstream:
+> http://code.google.com/p/open-vcdiff/issues/detail?id=3D43
+> Note: autoupdate could be considered later...
+>=20
 > Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 > ---
->  meta-oe/licenses/zsh                      | 37 +++++++++++++++++++++++++=
+>  .../open-vcdiff/files/aclocal-amflags-fix.patch    | 33 ++++++++++++++++=
 ++++++
->  meta-oe/recipes-extended/zsh/zsh.inc      | 14 +++++++-----
->  meta-oe/recipes-extended/zsh/zsh_5.0.0.bb |  5 -----
->  meta-oe/recipes-extended/zsh/zsh_5.0.5.bb |  5 +++++
->  4 files changed, 50 insertions(+), 11 deletions(-)
->  create mode 100644 meta-oe/licenses/zsh
->  delete mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
->  create mode 100644 meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+>  .../open-vcdiff/open-vcdiff_0.8.3.bb               | 19 +++++++++++++
+>  2 files changed, 52 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/open-vcdiff/files/aclocal-amf=
+lags-fix.patch
+>  create mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3=
+=2Ebb
 >=20
-> diff --git a/meta-oe/licenses/zsh b/meta-oe/licenses/zsh
+> diff --git a/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fi=
+x.patch b/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.pat=
+ch
 > new file mode 100644
-> index 0000000..1fb1fc4
+> index 0000000..cd1efd7
 > --- /dev/null
-> +++ b/meta-oe/licenses/zsh
-> @@ -0,0 +1,37 @@
-> +Unless otherwise noted in the header of specific files, files in this
-> +distribution have the licence shown below.
+> +++ b/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patc
+> +++ h
+> @@ -0,0 +1,33 @@
+> +Fix this error:
 > +
-> +However, note that certain shell functions are licensed under versions
-> +of the GNU General Public Licence.  Anyone distributing the shell as a
-> +binary including those files needs to take account of this.  Search
-> +shell functions for "Copyright" for specific copyright information.
-> +None of the core functions are affected by this, so those files may
-> +simply be omitted.
+> +| aclocal: error: non-option arguments are not accepted: '\'.
 > +
+> +Starting from commit v1.11-662-g52246cc, when given non-option arguments=
+, aclocal rejects them, instead of silently ignoring them.
+> +
+> +Declare ACLOCAL_AMFLAGS as a single line because autoreconf can't handle=
+ multiline.
+> +
+> +Notice that ACLOCAL_AMFLAGS is deprecated.
+> +In configure.ac, AC_CONFIG_MACRO_DIRS should be used (instead of AC_CONF=
+IG_MACRO_DIR) but requires automake 1.13+.
+> +
+> +Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+> +---
+> + Makefile.am | 3 +--
+> + 1 file changed, 1 insertion(+), 2 deletions(-)
+> +
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 5c765c7..f4295a6 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -1,8 +1,7 @@
+> + ## Process this file with automake to produce Makefile.in
+> +=20
+> + # Make sure that when we re-make ./configure, we get the macros we=20
+> +need -ACLOCAL_AMFLAGS =3D -I m4 \
+> +-                  -I gflags/m4
+> ++ACLOCAL_AMFLAGS =3D -I m4 -I gflags/m4
+> +=20
+> + # This is so we can #include <google/vcencoder.h> or <gtest/gtest.h> =
+=20
+> +AM_CPPFLAGS =3D -I$(top_srcdir)/src \
 > +--
+> +1.8.5.4
 > +
-> +The Z Shell is copyright (c) 1992-2009 Paul Falstad, Richard Coleman,
-> +Zolt=E1n Hidv=E9gi, Andrew Main, Peter Stephenson, Sven Wischnowsky, and
-> +others.  All rights reserved.  Individual authors, whether or not
-> +specifically named, retain copyright in all changes; in what follows, th=
-ey
-> +are referred to as `the Zsh Development Group'.  This is for convenience
-> +only and this body has no legal status.  The Z shell is distributed under
-> +the following licence; any provisions made in individual files take
-> +precedence.
-> +
-> +Permission is hereby granted, without written agreement and without
-> +licence or royalty fees, to use, copy, modify, and distribute this
-> +software and to distribute modified versions of this software for any
-> +purpose, provided that the above copyright notice and the following
-> +two paragraphs appear in all copies of this software.
-> +
-> +In no event shall the Zsh Development Group be liable to any party for
-> +direct, indirect, special, incidental, or consequential damages arising =
-out
-> +of the use of this software and its documentation, even if the Zsh
-> +Development Group have been advised of the possibility of such damage.
-> +
-> +The Zsh Development Group specifically disclaim any warranties, includin=
-g,
-> +but not limited to, the implied warranties of merchantability and fitness
-> +for a particular purpose.  The software provided hereunder is on an "as =
-is"
-> +basis, and the Zsh Development Group have no obligation to provide
-> +maintenance, support, updates, enhancements, or modifications.
-> diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-exten=
-ded/zsh/zsh.inc
-> index 03201d6..db51f39 100644
-> --- a/meta-oe/recipes-extended/zsh/zsh.inc
-> +++ b/meta-oe/recipes-extended/zsh/zsh.inc
-> @@ -1,14 +1,16 @@
-> -DESCRIPTION =3D "UNIX Shell similar to the Korn shell"
-> -HOMEPAGE=3D"http://www.zsh.org"
-> +SUMMARY =3D "UNIX Shell similar to the Korn shell"
-> +DESCRIPTION =3D "Zsh is a shell designed for interactive use, although i=
-t is also a \
-> +               powerful scripting language. Many of the useful features =
-of bash, \
-> +               ksh, and tcsh were incorporated into zsh; many original f=
-eatures were added."
-> +HOMEPAGE =3D "http://www.zsh.org"
->  SECTION =3D "base/shell"
-> =20
-> -
-> -LICENSE =3D "ZSH"
-> -LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Dad234d4b46db63491c4a9789da4fb=
-341"
-> +LICENSE =3D "zsh"
-> +LIC_FILES_CHKSUM =3D "file://LICENCE;md5=3Db7bc853894664be455a922db98052=
-88e"
-> =20
->  DEPENDS =3D "ncurses bison-native"
-> =20
-> -SRC_URI =3D "http://downloads.sourceforge.net/project/${BPN}/${BPN}/${PV=
-}/${BPN}-${PV}.tar.gz"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-> =20
->  inherit autotools gettext update-alternatives
-> =20
-> diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb b/meta-oe/recipes-=
-extended/zsh/zsh_5.0.0.bb
-> deleted file mode 100644
-> index 3421d95..0000000
-> --- a/meta-oe/recipes-extended/zsh/zsh_5.0.0.bb
-> +++ /dev/null
-> @@ -1,5 +0,0 @@
-> -require zsh.inc
-> -DEPENDS =3D "ncurses libcap libpcre gdbm groff-native"
-> -
-> -SRC_URI[md5sum] =3D "01df38e4aa34aa227462fdf2f6d4c5cd"
-> -SRC_URI[sha256sum] =3D "835194ea83abd812b5fdb1d2bfa6427c4c4e95e771c4a75e=
-9006037af8efd264"
-> diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-=
-extended/zsh/zsh_5.0.5.bb
+> diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb b/m=
+eta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
 > new file mode 100644
-> index 0000000..a7170dc
+> index 0000000..c6af25d
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-> @@ -0,0 +1,5 @@
-> +require zsh.inc
-> +DEPENDS +=3D "libcap libpcre gdbm groff-native"
+> +++ b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY =3D "An encoder/decoder for the VCDIFF (RFC3284) format"
+> +DESCRIPTION =3D "A library with a simple API is included, as well as a \
+> +               command-line executable that can apply the encoder and \
+> +               decoder to source, target, and delta files. \
+> +               A slight variation from the draft standard is defined \
+> +               to allow chunk-by-chunk decoding when only a partial \
+> +               delta file window is available."
+> +HOMEPAGE =3D "http://code.google.com/p/open-vcdiff/"
+> +SECTION =3D "console/utils"
 > +
-> +SRC_URI[md5sum] =3D "6fb0e3e52a0f8de5ca63138391b81ce0"
-> +SRC_URI[sha256sum] =3D "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d1=
-5023ff291c2894b4"
-> --=20
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db2c8309843bc5297cfb4dc84f43f3=
+ccc"
+> +
+> +SRC_URI =3D "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz=
+ \
+> +           file://aclocal-amflags-fix.patch"
+> +SRC_URI[md5sum] =3D "5f848e4916b407879f55e0ca74c3f6af"
+> +SRC_URI[sha256sum] =3D "b7e47db78866082e9e8b5782f5491092c8414f0acc0440ae=
+a03b14c7d1d3c371"
+> +
+> +inherit autotools
+> --
 > 1.8.5.4
 >=20
 > --=20
@@ -197,16 +194,16 @@ extended/zsh/zsh_5.0.5.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---uff7bI5xB/HT0T5d
+--W/k2pzXB1sdSS/P9
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTw1oACgkQN1Ujt2V2gByYBACeI31w1eQswS2YCA4rsaf9MP63
-FOwAoKWlJ8W0pSj1FqWleWAuhs53xrQE
-=JMgU
+iEYEARECAAYFAlNTw3MACgkQN1Ujt2V2gBxuYwCfcMgX98/Euiz6rZevWXlYrMwr
+rPUAoIhEk6yC1Q9Zk7m7qSrqsDHN9RC3
+=WMdU
 -----END PGP SIGNATURE-----
 
---uff7bI5xB/HT0T5d--
+--W/k2pzXB1sdSS/P9--
