@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 20725602DA
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id DC17F65DAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 08:23:58 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2814502eek.21
+	Sun, 20 Apr 2014 08:53:24 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d17so2865227eek.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 01:23:59 -0700 (PDT)
+	Sun, 20 Apr 2014 01:53:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=sYpyeuNRkf6NY+msuGSOROCYsP/Xm5orXrJTFTzQW3I=;
-	b=XZT+oLRgl3zrFXXuGIsPJdW2OSt+D9jBTWA2dtj+499zLjn/PNM8RDMxrF9laYnEBB
-	/FTqCu3CgBw66GrXIQfRICIVL8E5PVb/jN66Z0jIFzql8uEJTLWXiPYVrbTjzRIsBpWg
-	+GV0h6s39M+dq4DJ4HJZa3hKKHVYfEPUrYB9+s+HykHIPR+ppLveJg1LcofJa1r7yJBb
-	mQJhnVcoV7ShTOjIZ5yQaFcOGNFzwMkKCZy/MfqakPAmD0bh2ftKF5D4KKnaIpembs3C
-	CLKpVbrN1O/iwOuTrgkQmff0LOqbNCaqs4d1TNbInQ3X6LFkoYG9fKU1Y1qS1OVCQI1w
-	K65Q==
-X-Received: by 10.14.47.133 with SMTP id t5mr552197eeb.67.1397982238910;
-	Sun, 20 Apr 2014 01:23:58 -0700 (PDT)
+	bh=9CLYBOeA/P5zFU2Y4pV8O8GiiTeui9YLf4vcKWNO4vE=;
+	b=ARmKORHHToGVpSoFk8yS4To+LyxyQRYVvZoNcf+stoZjWqjcjB8ZjXGPjzubwT96lq
+	7H+NHNo5Xf2X+89n9gI8cZOulvgIL/rEFwDIWpjVJYbjw5ufdj683lvefvjnC20AzEzd
+	lV0R0cZAd22+V5kWb2PqHLWDO1YBt+zQzAYucqgPpgtLReUBioGzC5Zs7X6NLHjZxYEQ
+	vT+OJSAuM7fhnlMeB4C54KhJO/T/vfLxxGZYw1HNmF4c1FKZxvLcef3TzgfJPEBdOkar
+	n3EyqZTp+G92LCLxqwJKUJElxXoGN8JFh5Adxv4KkqaYpqfGoE00tH54mk/89ynUTDg1
+	kISg==
+X-Received: by 10.14.225.73 with SMTP id y49mr36994398eep.43.1397984005747;
+	Sun, 20 Apr 2014 01:53:25 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	m42sm92574265eex.21.2014.04.20.01.23.57
+	m8sm92767456eeg.11.2014.04.20.01.53.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 01:23:57 -0700 (PDT)
-Date: Sun, 20 Apr 2014 10:24:02 +0200
+	Sun, 20 Apr 2014 01:53:24 -0700 (PDT)
+Date: Sun, 20 Apr 2014 10:53:29 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420082402.GK2486@jama>
-References: <cover.1397545082.git.jackie.huang@windriver.com>
-	<00038b50f96f259beae9e06813ec54085dd9fa17.1397545082.git.jackie.huang@windriver.com>
+Message-ID: <20140420085329.GL2486@jama>
+References: <1396365706-14220-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <00038b50f96f259beae9e06813ec54085dd9fa17.1397545082.git.jackie.huang@windriver.com>
+In-Reply-To: <1396365706-14220-1-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 1/3] gd: update to version 2.1.0
+Subject: Re: [PATCH][meta-xfce/meta-gnome 00/10] world-fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,101 +46,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 08:24:01 -0000
-X-Groupsio-MsgNum: 49292
+X-List-Received-Date: Sun, 20 Apr 2014 08:53:26 -0000
+X-Groupsio-MsgNum: 49293
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AYsPlKobQGgtCvjI"
+	protocol="application/pgp-signature"; boundary="t5C3/nrmPumNj5sH"
 Content-Disposition: inline
 
---AYsPlKobQGgtCvjI
-Content-Type: text/plain; charset=us-ascii
+--t5C3/nrmPumNj5sH
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 15, 2014 at 03:01:24PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+On Tue, Apr 01, 2014 at 05:21:36PM +0200, Andreas M=FCller wrote:
+> mousepad seems already fixed in secret shr repo
 >=20
-> Changes:
-> - Add DESCRIPTION and HOMEPAGE
-> - libgd.org is down, use bitbucket.org instead and also
->   remove the MIRROR for it.
-> - Remove the unnecessary specified dir for --with-png.
+> The following changes since commit c04626475be6f0e52400552d5aed044062aac4=
+dd:
 >=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.bb}     |   22 ++++++++++++=
---------
->  1 file changed, 13 insertions(+), 9 deletions(-)
->  rename meta-oe/recipes-support/gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.=
-bb} (43%)
+>   exo: Add intltool-native as native dependency (2014-03-29 22:51:36 +010=
+0)
 >=20
-> diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb b/meta-oe/=
-recipes-support/gd/gd_2.1.0.bb
-> similarity index 43%
-> rename from meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> rename to meta-oe/recipes-support/gd/gd_2.1.0.bb
-> index 957c4eb..1b78b9b 100644
-> --- a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> +++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
-> @@ -1,22 +1,26 @@
-> +SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
-> +DESCRIPTION =3D "The gd graphics library allows your code to quickly dra=
-w images \
-> +complete with lines, arcs, text, multiple colors, cut and paste from oth=
-er \
-> +images, and flood fills, and to write out the result as a PNG or JPEG fi=
-le. \
-> +This is particularly useful in Web applications, where PNG and JPEG are =
-two \
-> +of the formats accepted for inline images by most browsers. Note that gd=
- is not \
-> +a paint program."
-> +HOMEPAGE =3D "http://libgd.bitbucket.org/"
->  SECTION =3D "libs"
-> +
->  LICENSE =3D "GD"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc97638cafd3581eb87abd37332137=
-669"
-> -SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
->  DEPENDS =3D "freetype libpng jpeg zlib"
-> -PR =3D "r5"
-> -
-> -SRC_URI =3D "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz"
-> -SRC_URI[md5sum] =3D "39ac48e6d5e0012a3bd2248a0102f209"
-> -SRC_URI[sha256sum] =3D "dd7c1795271221b9237769b96b8cec7fbdc5db7b8954d864=
-ead51fc1296a6ac8"
-> =20
-> -MIRRORS +=3D "http://www.libgd.org/releases/ http://fossies.org/unix/www=
-/ \n"
-> +SRC_URI =3D "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.=
-tar.bz2"
-> +SRC_URI[md5sum] =3D "5a1d5bab3a4a41d9f111bcceee4ad25b"
-> +SRC_URI[sha256sum] =3D "f3e1bc472bd81ee976a739436659fe752a14727a964c6453=
-0fde68531ddeee91"
-> =20
-> -S =3D "${WORKDIR}/gd-2.0.36RC1"
-> +S =3D "${WORKDIR}/libgd-${PV}"
-> =20
->  inherit autotools binconfig gettext
-> =20
->  EXTRA_OECONF +=3D " --with-zlib=3D${STAGING_LIBDIR}/.. \
-> -                  --with-png=3D${STAGING_LIBDIR}/.. \
->                    --with-jpeg=3D${STAGING_LIBDIR}/.. \
->                    --with-freetype \
+> are available in the git repository at:
+>=20
+>   git://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches=
+-for-world
+>=20
+> for you to fetch changes up to 4972401d7133f07f732a06d47bc9bce664465493:
+>=20
+>   abiword: update to 3.0.0 to fix build (2014-04-01 17:12:30 +0200)
 
-http://patchwork.openembedded.org/patch/69991/ adds
---with-freetype=3D${STAGING_LIBDIR}/.. \
+All merged, thanks!
 
-and together with this it fails with:
-| configure:13838: error: freetype support requested, but not found:
-/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr=
-/lib/../bin/freetype-config
-
-can you please check it?
-
->                    --without-fontconfig \
+>=20
+> ----------------------------------------------------------------
+> Andreas M=FCller (10):
+>       xfce-git.bbclass initial add
+>       xarchiver: fix configue
+>       xfwm4: fix configue by inheriting xfce-git.bbclass
+>       libxfce4ui: fix configue by inheriting xfce-git.bbclass
+>       xfce4-taskmanager: fix configue by inheriting xfce-git.bbclass
+>       xfce4-closebutton-plugin: fix configue by inheriting xfce-git.bbcla=
+ss
+>       xfce4-settings: fix configue by inheriting xfce-git.bbclass
+>       xfce4-dev-tools: update to 4.11.0
+>       sound-theme-freedesktop: fix configure
+>       abiword: update to 3.0.0 to fix build
+>=20
+>  meta-gnome/recipes-gnome/abiword/abiword/abiword-cxx-for-ld-fix.patch   =
+                        |  12 ---------
+>  meta-gnome/recipes-gnome/abiword/abiword/abiword.fix.glib-2.32.patch    =
+                        |  21 ----------------
+>  meta-gnome/recipes-gnome/abiword/abiword/cdump.pl                       =
+                        |  32 ------------------------
+>  meta-gnome/recipes-gnome/abiword/abiword/debian_patches_boost54.patch   =
+                        |  32 ++++++++++++++++++++++++
+>  meta-gnome/recipes-gnome/abiword/abiword/fix.no.undefined.param.patch   =
+                        | 104 ---------------------------------------------=
+-------------------------------
+>  meta-gnome/recipes-gnome/abiword/abiword/libpng15.patch                 =
+                        | 102 ---------------------------------------------=
+-----------------------------
+>  meta-gnome/recipes-gnome/abiword/abiword/nodolt.patch                   =
+                        |  12 ---------
+>  meta-gnome/recipes-gnome/abiword/{abiword_2.8.6.bb =3D> abiword_3.0.0.bb=
+}                         |  39 +++++++++++------------------
+>  meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb  =
+                        |   2 ++
+>  meta-xfce/classes/xfce-git.bbclass                                      =
+                        |   5 ++++
+>  meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb                       =
+                        |   8 ++----
+>  meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_git.bb       =
+                        |   6 +----
+>  meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git=
+=2Ebb                     |   6 +----
+>  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb                  =
+                        |   8 +-----
+>  meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.10.0.bb =3D> x=
+fce4-dev-tools_4.11.0.bb} |   4 +--
+>  meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb             =
+                        |   6 +----
+>  meta-xfce/recipes-xfce/xfwm4/xfwm4_git.bb                               =
+                        |   6 +----
+>  17 files changed, 63 insertions(+), 342 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/abiword-cxx-=
+for-ld-fix.patch
+>  delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/abiword.fix.=
+glib-2.32.patch
+>  delete mode 100755 meta-gnome/recipes-gnome/abiword/abiword/cdump.pl
+>  create mode 100644 meta-gnome/recipes-gnome/abiword/abiword/debian_patch=
+es_boost54.patch
+>  delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/fix.no.undef=
+ined.param.patch
+>  delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/libpng15.pat=
+ch
+>  delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/nodolt.patch
+>  rename meta-gnome/recipes-gnome/abiword/{abiword_2.8.6.bb =3D> abiword_3=
+=2E0.0.bb} (83%)
+>  create mode 100644 meta-xfce/classes/xfce-git.bbclass
+>  rename meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.10.0.bb=
+ =3D> xfce4-dev-tools_4.11.0.bb} (78%)
+>=20
 > --=20
-> 1.7.9.5
+> 1.8.3.1
 >=20
 > --=20
 > _______________________________________________
@@ -152,16 +159,16 @@ can you please check it?
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---AYsPlKobQGgtCvjI
+--t5C3/nrmPumNj5sH
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNThCIACgkQN1Ujt2V2gBxc4ACff2EuaGZpVD/YbOeVAc6KSSf+
-Lk4AoI+dSzTF99lDJGxlcjqnaLUNf3Hc
-=z+5M
+iEYEARECAAYFAlNTiwkACgkQN1Ujt2V2gBzOHgCeJV05/Hf0AFj3uVrz4K2fvnDA
+oVIAoK9hO+5Is0jxcSX4HQow9Lr5QSlF
+=6UlV
 -----END PGP SIGNATURE-----
 
---AYsPlKobQGgtCvjI--
+--t5C3/nrmPumNj5sH--
