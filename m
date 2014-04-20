@@ -1,37 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id C8D9265DC4;
-	Sun, 20 Apr 2014 14:27:10 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id c41so2999392eek.8
-	for <multiple recipients>; Sun, 20 Apr 2014 07:27:11 -0700 (PDT)
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2894065D8A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Apr 2014 14:51:51 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id b57so2998452eek.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Apr 2014 07:51:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1UlSN5JDbOZfCxcQ4hLzkd6RSC5jm3FimHFOwo2ZPaM=;
-	b=xczCGh5xWXvGGj//t64vkzOnz00Tb9oxOCH+gYNV12+UfgiV7WGL4xQWo2Y80Leg9n
-	Z5ArmG4FIlIv2qMCO1B3+XdmzL4IB0+qilT8cID2GvdVHcfSwMWxjZNNQqQjX2/WcGnz
-	GtFruQercBoo8kYQTqgp3r+AWvhkWZk0oWw/S8ZulrwUHehVEroGF/6Q8GYpO76Swbt8
-	LhPaQuEzcU04trvgqdH13NydV09tx3yRC9/eiP8y25ZHj8ZnXIOnLhdbAIssg0acbEmB
-	X2capoXVgno2KjPN3t7YUEe0FecyLSXJc/b2bvqzAra844i7T1iDSSEhXvdSYOq1tH78
-	TwkA==
-X-Received: by 10.15.24.201 with SMTP id j49mr131124eeu.99.1398004031853;
-	Sun, 20 Apr 2014 07:27:11 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=y1zhNECctLqaskvStE9iZHAhI7F9ln7tIqHvXmaebj4=;
+	b=tCeZGds2IhUYUGf5pBjlov1qdPKRD5qrB1/CAP6PK/BD/zDt5GRosBp09QUWyiIdEH
+	JEz+hZ1ZLpFtmM8w8uylt0q6PJFKeAPYG3N3yp/1f77+zbxga3Rckzytq2Hknr5Tggpm
+	iQ+hlL2qEwYXe3hgKsiILXmWekXtAXbetzNGskZJIx3xz6weZlcBSZomWGrv62kjlWVq
+	/Pol7ikkQsyEftcbhhFVvg74Z6noNPhuXaAvJRxY+dlZgXWYY6NbkwBZ6/T49rkXSUTB
+	h5cwJEMoAaVTaavDNc5whf6EqQqFAuQcGcqV9OoWJ7/6q7jIlwqrDuBXMwiit8NXbIwU
+	Ao2Q==
+X-Received: by 10.14.176.1 with SMTP id a1mr39388917eem.52.1398005512146;
+	Sun, 20 Apr 2014 07:51:52 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	n41sm95023448eeg.4.2014.04.20.07.27.10 for <multiple recipients>
+	x45sm95195383eef.15.2014.04.20.07.51.50 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 07:27:10 -0700 (PDT)
-Date: Sun, 20 Apr 2014 16:27:16 +0200
+	Sun, 20 Apr 2014 07:51:51 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140420142716.GT2486@jama>
-References: <20140420115016.8BCB5504AA@opal.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <20140420115016.8BCB5504AA@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: =?UTF-8?B?UmU6IFtvZS1jb21taXRzXSBBbmRyZWFzIE3DvGxsZXIgOiBnbm9tZS1kaXNrLXV0aWxpdHk6IGNoYW5nZSBQQUNLQUdFQ09ORklHIGRlZmF1bHQ6IHJlbW92ZSBuYXV0aWx1cw==?=
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 20 Apr 2014 16:51:55 +0200
+Message-Id: <1398005515-3350-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][PATCH] cmake: remove .bbappends, resolved in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,97 +41,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 14:27:14 -0000
-X-Groupsio-MsgNum: 49357
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mW/Yq1p9Hn2AHmV6"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Apr 2014 14:51:54 -0000
 
---mW/Yq1p9Hn2AHmV6
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* it's included in daisy and master branches
+  http://git.openembedded.org/openembedded-core/commit/?h=daisy&id=4f2dee0d8c2c3f60cb8f8021343e973cae31fc50
 
-On Sun, Apr 20, 2014 at 11:50:16AM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: c6e9d85d948ed4676572a34241376a2156b837a2
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3Dc6e9d85d948ed4676572a34241376a2156b837a2
->=20
-> Author: Andreas M=FCller <schnitzeltony@googlemail.com>
-> Date:   Wed Apr 16 09:32:30 2014 +0200
->=20
-> gnome-disk-utility: change PACKAGECONFIG default: remove nautilus
->=20
-> gnome-doc-utils had to be added when not depending on nautilus
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> ---
->=20
->  .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb     | =
-4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utili=
-ty_2.32.0.bb
-> index 6b6e931..37c5046 100644
-> --- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32=
-=2E0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32=
-=2E0.bb
-> @@ -3,7 +3,7 @@ SUMMARY =3D "GNOME disk utility"
->  LICENSE =3D "GPLv2+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De9115d11797a5e6b746b4e9b90194=
-564"
-> =20
-> -DEPENDS =3D "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/l=
-ibx11 libatasmart"
-> +DEPENDS =3D "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/l=
-ibx11 libatasmart gnome-doc-utils"
-> =20
->  PR =3D "r4"
-> =20
-> @@ -20,7 +20,7 @@ SRC_URI +=3D "\
-> =20
->  EXTRA_OECONF +=3D "--disable-scrollkeeper"
-> =20
-> -PACKAGECONFIG ??=3D "nautilus"
-> +PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[nautilus] =3D "--enable-nautilus-extension,--disable-nauti=
-lus-extension,nautilus"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../cmake/cmake-native_2.8.12.2.bbappend             | 20 --------------------
+ recipes-devtools/cmake/cmake_2.8.12.2.bbappend       | 20 --------------------
+ 2 files changed, 40 deletions(-)
+ delete mode 100644 recipes-devtools/cmake/cmake-native_2.8.12.2.bbappend
+ delete mode 100644 recipes-devtools/cmake/cmake_2.8.12.2.bbappend
 
-Too late I've noticed this:
-gnome-disk-utility-2.32.0: gnome-disk-utility: configure was passed
-unrecognised options: --disable-nautilus-extension
+diff --git a/recipes-devtools/cmake/cmake-native_2.8.12.2.bbappend b/recipes-devtools/cmake/cmake-native_2.8.12.2.bbappend
+deleted file mode 100644
+index ebacf72..0000000
+--- a/recipes-devtools/cmake/cmake-native_2.8.12.2.bbappend
++++ /dev/null
+@@ -1,20 +0,0 @@
+-# Ugly hack to work around undefined OE_QMAKE_PATH_EXTERNAL_HOST_BINS variable
+-# and possibly missing qmake binary (qtbase-native can be removed from sysroot
+-# e.g. in order to upgrade it, even when there is target qtbase)
+-
+-#| -- Performing Test run_pic_test - Success
+-#| CMake Error at tmp-eglibc/sysroots/qemuarm/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:27 (message):
+-#|   The imported target "Qt5::Core" references the file
+-#|
+-#|      "/qmake"
+-#|
+-#|   but this file does not exist.  Possible reasons include:
+-
+-do_configure_prepend() {
+-    sed -i 's/^find_package(Qt5Core QUIET)$/#find_package(Qt5Core QUIET)/g' ${S}/Tests/RunCMake/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/RunCMake/IncompatibleQt/IncompatibleQt.cmake
+-    sed -i 's/^  find_package(Qt5Widgets REQUIRED)/#  find_package(Qt5Widgets REQUIRED)/g' ${S}/Tests/QtAutomoc/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/Qt4And5Automoc/CMakeLists.txt
+-    sed -i 's/^  find_package(Qt5Widgets QUIET NO_MODULE)/#  find_package(Qt5Widgets QUIET NO_MODULE)/g' ${S}/Tests/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Widgets QUIET)/#find_package(Qt5Widgets QUIET)/g' ${S}/Source/QtDialog/CMakeLists.txt
+-}
+diff --git a/recipes-devtools/cmake/cmake_2.8.12.2.bbappend b/recipes-devtools/cmake/cmake_2.8.12.2.bbappend
+deleted file mode 100644
+index ebacf72..0000000
+--- a/recipes-devtools/cmake/cmake_2.8.12.2.bbappend
++++ /dev/null
+@@ -1,20 +0,0 @@
+-# Ugly hack to work around undefined OE_QMAKE_PATH_EXTERNAL_HOST_BINS variable
+-# and possibly missing qmake binary (qtbase-native can be removed from sysroot
+-# e.g. in order to upgrade it, even when there is target qtbase)
+-
+-#| -- Performing Test run_pic_test - Success
+-#| CMake Error at tmp-eglibc/sysroots/qemuarm/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:27 (message):
+-#|   The imported target "Qt5::Core" references the file
+-#|
+-#|      "/qmake"
+-#|
+-#|   but this file does not exist.  Possible reasons include:
+-
+-do_configure_prepend() {
+-    sed -i 's/^find_package(Qt5Core QUIET)$/#find_package(Qt5Core QUIET)/g' ${S}/Tests/RunCMake/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/RunCMake/IncompatibleQt/IncompatibleQt.cmake
+-    sed -i 's/^  find_package(Qt5Widgets REQUIRED)/#  find_package(Qt5Widgets REQUIRED)/g' ${S}/Tests/QtAutomoc/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Core REQUIRED)/#find_package(Qt5Core REQUIRED)/g' ${S}/Tests/Qt4And5Automoc/CMakeLists.txt
+-    sed -i 's/^  find_package(Qt5Widgets QUIET NO_MODULE)/#  find_package(Qt5Widgets QUIET NO_MODULE)/g' ${S}/Tests/CMakeLists.txt
+-    sed -i 's/^find_package(Qt5Widgets QUIET)/#find_package(Qt5Widgets QUIET)/g' ${S}/Source/QtDialog/CMakeLists.txt
+-}
+-- 
+1.9.1
 
-can you please send follow-up to resolve this?
 
-> =20
->  do_configure_prepend() {
->=20
-> --=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---mW/Yq1p9Hn2AHmV6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNT2UQACgkQN1Ujt2V2gBz5NgCfeichSqzwumNO99+dEqzMk+un
-P4EAoJGPF3wI10MM6uHqyw5YqNmGFf0q
-=l3se
------END PGP SIGNATURE-----
-
---mW/Yq1p9Hn2AHmV6--
