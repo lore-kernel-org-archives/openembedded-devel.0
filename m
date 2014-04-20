@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7266565D8D
+Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D00265D22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 11:19:00 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id e53so2931061eek.2
+	Sun, 20 Apr 2014 11:21:16 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so2968205eei.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 04:19:01 -0700 (PDT)
+	Sun, 20 Apr 2014 04:21:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wZQnaQYqLhkd9QnXY3zpy9IL28PRhJcJz22RzeLX5cU=;
-	b=ipZ7vBEFxLTuLliQso93jRTWQ1B/AjKIixUyJl0LFCqnx8Oa7cN/Z6xIC3wxRe7Gge
-	Q2rABDc28aovjotxwkjyieMrJpJBB+A0klG71d87uAGsJSFCbbHL019JuLm3rTdHPAsz
-	I/LBPo1IWoZ/FZ5dotiaaW5xKjbn2aYeXNDgMxqNePP1TUyYkNHaDvZjSzUkQ+EMZgPb
-	RmmiiDlERewPK3CdAlteiFnzNDx8Uj1hm4+yy3ObeMaPrnkyz6ff6yE7DPUatWMnZ1c2
-	QTqmIOoBKxy9oe2fqJ+IB9Ga/+5Z1ZP62cK4SjurMpzWoXP0HervvZt9P+0qVIYEYiXg
-	SoVg==
-X-Received: by 10.15.45.130 with SMTP id b2mr37912900eew.28.1397992741243;
-	Sun, 20 Apr 2014 04:19:01 -0700 (PDT)
+	bh=EfAJYYW7ZL2x0D1mwcGww9+gsA7YotTysAWPCUoDqNk=;
+	b=km0s1CyskctjQCFkHmIznp8MY0AHVHnR+d7psAqtpobv1dRekBeP4sESvReByp0tvT
+	64bV+4m3z5/gGEweB/RM5IzjwRieSRxZPBb9RJOKItTCVKPC7YiwVzjq886tVixx4ZXJ
+	ELvdrjOjE5uaEOfS3lXav6IRsKlm5QOoiSvmQrEBJKSXM0uAyalm/1zFNdKMBGTxAvwO
+	YF5/1/Rx9yTGpqQAwwFHgKF8WJnZeoTLa9dsnMgk4cC/u4zFEWyWIDViCY2X2Dk9foYJ
+	8S5MVNYf8I+KsQxmocrIUgMELyMkcyPh2MTVS6Qs5xHZJyNpELOmIH4QpAUitctyVnKg
+	VYRg==
+X-Received: by 10.14.241.139 with SMTP id g11mr38394198eer.49.1397992877788;
+	Sun, 20 Apr 2014 04:21:17 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o7sm93759674eew.25.2014.04.20.04.18.59
+	s46sm93770417ees.3.2014.04.20.04.21.16
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 04:19:00 -0700 (PDT)
-Date: Sun, 20 Apr 2014 13:19:05 +0200
+	Sun, 20 Apr 2014 04:21:16 -0700 (PDT)
+Date: Sun, 20 Apr 2014 13:21:22 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420111905.GQ2486@jama>
-References: <1397330049-20282-1-git-send-email-paul@paulbarker.me.uk>
-	<1397330049-20282-2-git-send-email-paul@paulbarker.me.uk>
+Message-ID: <20140420112122.GR2486@jama>
+References: <cover.1397024315.git.jackie.huang@windriver.com>
+	<e45df12394beb4be7872eae57f0beab8734d9447.1397024315.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1397330049-20282-2-git-send-email-paul@paulbarker.me.uk>
+In-Reply-To: <e45df12394beb4be7872eae57f0beab8734d9447.1397024315.git.jackie.huang@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] vim: Upgrade to v7.4.258
+Subject: Re: [meta-oe][PATCH 1/2] eject: fix multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,90 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 11:19:00 -0000
-X-Groupsio-MsgNum: 49324
+X-List-Received-Date: Sun, 20 Apr 2014 11:21:17 -0000
+X-Groupsio-MsgNum: 49325
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dwlrTrmaMopxYcLA"
+	protocol="application/pgp-signature"; boundary="7JtmyEQckRKrnqj+"
 Content-Disposition: inline
 
---dwlrTrmaMopxYcLA
+--7JtmyEQckRKrnqj+
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 12, 2014 at 08:14:09PM +0100, Paul Barker wrote:
-> The patch against configure.in was resubmitted to the vim mailing list an=
-d was
-> merged into the upstream sources so is no longer needed.
+On Wed, Apr 09, 2014 at 02:27:08PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Use BPN instead of PN, BP instead of P to fix the multilib builds.
 
 Merged, thanks!
 
 >=20
-> Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  .../vim/files/configure.in_remove_CC_quotes.patch       | 17 -----------=
-------
->  .../vim/{vim_7.4.155.bb =3D> vim_7.4.258.bb}              |  5 ++---
->  2 files changed, 2 insertions(+), 20 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/vim/files/configure.in_remove=
-_CC_quotes.patch
->  rename meta-oe/recipes-support/vim/{vim_7.4.155.bb =3D> vim_7.4.258.bb} =
-(96%)
+>  meta-oe/recipes-support/eject/eject_2.1.5.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quo=
-tes.patch b/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes=
-=2Epatch
-> deleted file mode 100644
-> index c8cfe8e..0000000
-> --- a/meta-oe/recipes-support/vim/files/configure.in_remove_CC_quotes.pat=
-ch
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -upstream: http://groups.google.com/group/vim_dev/browse_thread/thread/56=
-85c3b859e3c793#=20
-> -status: reported upstream
-> ---- vim72-orig/src/configure.in	2010-09-29 19:13:33.000000000 +0200
-> -+++ vim72/src/configure.in	2010-09-29 19:17:07.000000000 +0200
-> -@@ -35,10 +35,10 @@
-> - fi
-> - if test "$GCC" =3D yes; then
-> -   dnl method that should work for nearly all versions
-> --  gccversion=3D`"$CC" -dumpversion`
-> -+  gccversion=3D`$CC -dumpversion`
-> -   if test "x$gccversion" =3D "x"; then
-> -     dnl old method; fall-back for when -dumpversion doesn't work
-> --    gccversion=3D`"$CC" --version | sed -e '2,$d' -e 's/darwin.//' -e '=
-s/^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
-> -+    gccversion=3D`$CC --version | sed -e '2,$d' -e 's/darwin.//' -e 's/=
-^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
-> -   fi
-> -   dnl version 4.0.1 was reported to cause trouble on Macintosh by Marci=
-n Dalecki
-> -   if test "$gccversion" =3D "3.0.1" -o "$gccversion" =3D "3.0.2" -o "$g=
-ccversion" =3D "4.0.1"; then
-> diff --git a/meta-oe/recipes-support/vim/vim_7.4.155.bb b/meta-oe/recipes=
--support/vim/vim_7.4.258.bb
-> similarity index 96%
-> rename from meta-oe/recipes-support/vim/vim_7.4.155.bb
-> rename to meta-oe/recipes-support/vim/vim_7.4.258.bb
-> index 0d98e7a..878c79e 100644
-> --- a/meta-oe/recipes-support/vim/vim_7.4.155.bb
-> +++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-> @@ -6,9 +6,8 @@ RSUGGESTS_${PN} =3D "diffutils"
->  LICENSE =3D "vim"
->  LIC_FILES_CHKSUM =3D "file://../runtime/doc/uganda.txt;md5=3Db779e18be6e=
-d77facc770691c967b8f8"
+> diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recip=
+es-support/eject/eject_2.1.5.bb
+> index 3f2c90d..98319a3 100644
+> --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> @@ -5,12 +5,12 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8ca43cbc842c=
+2336e835926c2166c28b"
 > =20
-> -SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhttps;module=3Dvim \
-> -	   file://configure.in_remove_CC_quotes.patch;patchdir=3D.."
-> -SRCREV =3D "v7-4-155"
-> +SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhttps;module=3Dvim"
-> +SRCREV =3D "v7-4-258"
+>  inherit autotools gettext update-alternatives
 > =20
->  S =3D "${WORKDIR}/${PN}/src"
+> -SRC_URI =3D "http://sources.openembedded.org/${P}.tar.gz"
+> +SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.gz"
+> =20
+>  SRC_URI[md5sum] =3D "b96a6d4263122f1711db12701d79f738"
+>  SRC_URI[sha256sum] =3D "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7=
+a34a67402e2ffe55"
+> =20
+> -S =3D "${WORKDIR}/${PN}"
+> +S =3D "${WORKDIR}/${BPN}"
+> =20
+>  PR =3D "r1"
 > =20
 > --=20
-> 1.9.2
+> 1.7.9.5
 >=20
 > --=20
 > _______________________________________________
@@ -141,16 +106,16 @@ d77facc770691c967b8f8"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---dwlrTrmaMopxYcLA
+--7JtmyEQckRKrnqj+
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTrSkACgkQN1Ujt2V2gBxIXgCcD/pRg2hT1cj4syk0nUYmxrXN
-EQoAnAvx1wm/nEpNsjwrALekQu/W2ddp
-=ayY8
+iEYEARECAAYFAlNTrbIACgkQN1Ujt2V2gBz3NwCfXuS17aAbkCn+tkJB50cHI1CL
+rk8An2H5AJzZbbewgQGKEhXFi8RS3eCt
+=2x8g
 -----END PGP SIGNATURE-----
 
---dwlrTrmaMopxYcLA--
+--7JtmyEQckRKrnqj+--
