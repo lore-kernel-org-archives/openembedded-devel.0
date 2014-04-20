@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A9D065D52
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id CF76865D71
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 11:58:13 +0000 (UTC)
-Received: by mail-ee0-f50.google.com with SMTP id c13so2930023eek.37
+	Sun, 20 Apr 2014 12:01:25 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id c41so2930297eek.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 04:58:14 -0700 (PDT)
+	Sun, 20 Apr 2014 05:01:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tTRYO2b4wJRXKB9QVM8H5ChVhhfCzhxcZWvGauHdmUQ=;
-	b=c4RCQ7j6Z9BBheSl8sE8UQTyplMxGYuFLZ9zg3BJ50obvcW5z9Vwn99W8SxYzqDP+y
-	UJKCqbeC2/AwL9bIbeBQg8Lxs+sjIywgXfbwwdQsyc6PRHSwRfvRt7j510AsiVoTphXX
-	F/9z1nwT9wg5rOu9uZMcohHBNQ/urjHgRod2SBliuFjIetqqdRSM8LiWHz6dujXJdM1l
-	QMpvJanP+ZZqvU6cagBMu1SJPrzu3kqIdgnl/RaVX7BMcDeF7L1aeF2GiGQsNxF0q1go
-	8hBjEfQmREXIxiYST/dAoVQdhBH0pc1y6ClDb7NsX3mp1nYSAl/ZgOMeHez2Q5bSVoeN
-	cdGw==
-X-Received: by 10.14.193.201 with SMTP id k49mr38205901een.50.1397995094377;
-	Sun, 20 Apr 2014 04:58:14 -0700 (PDT)
+	bh=GKgYbJ455bhWmKCl0x8/m4iide/GMqSKj7mqEFJi0jA=;
+	b=SImvPcLO1lucawnzEjdl1E680pDdIURkPktFGW1hSnVGkbdeOew2VJsl8A+BHSnc31
+	1SVeT0/AOBO0TV0y4duZX+aIYplGzuYIdTOxti6r1ZRFHt8b2ucIawHA13MBTJX22Z4p
+	CWDni1m5mRpVk1bfZ/0c10mYH7JyqzzNKRwaDBuFKa+2hw3RcvUe8ZR7od/OJkQG+F+4
+	bi6OsjtorQDgTcfLnaqxIBkOGKRZ3HgjkA5f3ozVDpR70h3rJ3dZXQVb/3LYk/niQUUU
+	yPBJJ96b73FGaVjqN3qvaUMArjPj6WtoxMIFuc/nUy2quECIKZZpnzWl/0EgEzSSHODD
+	kmzg==
+X-Received: by 10.15.67.142 with SMTP id u14mr38270540eex.19.1397995286112;
+	Sun, 20 Apr 2014 05:01:26 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	m44sm94022097eep.14.2014.04.20.04.58.12 for <multiple recipients>
+	m42sm94043899eex.21.2014.04.20.05.01.24
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 04:58:13 -0700 (PDT)
-Date: Sun, 20 Apr 2014 13:58:18 +0200
+	Sun, 20 Apr 2014 05:01:24 -0700 (PDT)
+Date: Sun, 20 Apr 2014 14:01:30 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420115818.GH2486@jama>
-References: <20140409173022.GA2661@windriver.com>
+Message-ID: <20140420120130.GI2486@jama>
+References: <1397631065-13521-1-git-send-email-Chong.Lu@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20140409173022.GA2661@windriver.com>
+In-Reply-To: <1397631065-13521-1-git-send-email-Chong.Lu@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Joe MacDonald <joe.macdonald@windriver.com>
-Subject: Re: [meta-networking] Uprev memcached from upstream
+Subject: Re: [PATCH] rrdtool: enable libwrap, perl and python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,107 +46,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 11:58:15 -0000
-X-Groupsio-MsgNum: 49341
+X-List-Received-Date: Sun, 20 Apr 2014 12:01:28 -0000
+X-Groupsio-MsgNum: 49342
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="R0KYKl6i9Fj1nV1E"
+	protocol="application/pgp-signature"; boundary="iuNVq+MSMwU9tqfB"
 Content-Disposition: inline
 
---R0KYKl6i9Fj1nV1E
+--iuNVq+MSMwU9tqfB
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 09, 2014 at 01:30:22PM -0400, Amy Fong wrote:
-> commit 3d0b80c5667a2c1d8634173948048567d0bc9c36
-> Author: Amy Fong <amy.fong@windriver.com>
-> Date:   Tue Apr 8 14:29:19 2014 -0400
+On Wed, Apr 16, 2014 at 02:51:05PM +0800, Chong Lu wrote:
+> 1. default enable libwrap, perl and python bindings
+> 2. rrdtool uses perl.real, perl.real doesn't know where the PERL5LIB shou=
+ld be
+> when prebuilts are used. Use the wrapper perl instead, perl sets PERL5LIB=
+ and
+> invokes perl.real
+> 3. While using dash as /bin/sh, subsequent commands in functions will not=
+ use
+> the environment variables passed to the function call line unless explici=
+tly
+> run "export ENV_VAR".
+> 4. delete unrecognized options: "--enable-local-libpng" and "--enable-loc=
+al-zlib"
 >=20
->     Uprev memcached from upstream
+> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ---
+>  meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |  127 +++++++++++++++=
+++++--
+>  1 file changed, 120 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb b/meta-oe/=
+recipes-extended/rrdtool/rrdtool_1.4.7.bb
+> index 533451f..422e22f 100644
+> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+> @@ -5,6 +5,7 @@ LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D44fee82a1d2ed0676cf35478283e0=
+aa0"
+> =20
+>  DEPENDS =3D "libpng zlib cairo pango glib-2.0 libxml2"
+> +DEPENDS_${PN}-perl =3D "perl-module-lib perl-module-dynaloader"
 
-Please remove 1.4.15 in the same commit and send with -M.
->    =20
->     memcached 1.4.15 has some configuration errors:
->     configure:5798: error: cannot run test program while cross compiling
->    =20
->     Uprev has the needed fix for the configuration error and some other f=
-ixes.
->    =20
->     Signed-off-by: Amy Fong <amy.fong@windriver.com>
+This looks like misspelled RDEPENDS_${PN}-perl
+
+> =20
+>  PR =3D "r2"
+> =20
+> @@ -15,25 +16,137 @@ SRC_URI =3D "http://oss.oetiker.ch/rrdtool/pub/rrdto=
+ol-${PV}.tar.gz \
+>  SRC_URI[md5sum] =3D "ffe369d8921b4dfdeaaf43812100c38f"
+>  SRC_URI[sha256sum] =3D "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431=
+377950a813a7af11"
+> =20
+> -inherit autotools gettext
+> +inherit autotools gettext pythonnative perlnative python-dir
+> =20
+>  EXTRA_AUTORECONF =3D "-I m4"
+> =20
+> -PACKAGECONFIG ??=3D ""
+> +PACKAGECONFIG ??=3D "python libwrap perl"
+> +
+> +PACKAGECONFIG[python] =3D "--enable-python=3Dyes \
+> +am_cv_python_pythondir=3D${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/s=
+ite-packages \
+> +am_cv_python_pyexecdir=3D${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/s=
+ite-packages,\
+> +--disable-python,python,"
+> +
+> +PACKAGECONFIG[perl] =3D \
+> +"--enable-perl=3Dyes --with-perl-options=3D'INSTALLDIRS=3D"vendor"' \
+> +ac_cv_path_PERL_CC=3D'${CC}',  \
+> +--disable-perl,perl,"
+> +
+> +PACKAGECONFIG[libwrap] =3D ",--disable-libwrap,tcp-wrappers,libwrap"
+>  PACKAGECONFIG[dbi] =3D "--enable-libdbi,--disable-libdbi,libdbi"
+> =20
+>  EXTRA_OECONF =3D " \
+>      --enable-shared \
+> -    --enable-local-libpng \
+> -    --enable-local-zlib \
+> -    --disable-libwrap \
+>      --program-prefix=3D'' \
+>      rd_cv_ieee_works=3Dyes \
+> -    --disable-perl \
+> -    --disable-python \
+>      --disable-ruby \
+>      --disable-lua \
+>      --disable-rpath \
+>  "
+> =20
+> +# don't use perl.real, this results in break issues with prebuilts since=
+ perl.real doesn't
+> +# know where the PERL5LIB is...
+> +# use wrapper perl instead
+> +EXTRA_OEMAKE =3D "PERL=3D${STAGING_BINDIR_NATIVE}/perl-native/perl FULLP=
+ERL=3D${STAGING_BINDIR_NATIVE}/perl-native/perl"
+> +
+> +export BUILD_SYS
+> +export HOST_SYS
+> +export STAGING_LIBDIR
+> +export STAGING_INCDIR
+> +
+> +do_configure() {
+> +	#fix the pkglib problem with newer automake
+> +	#perl
+> +	sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
+> +	    ${S}/bindings/perl-shared/Makefile.PL
+> +
+> +	#python
+> +	sed -i -e '/PYTHON_INCLUDES=3D"-I${/c \
+> +	PYTHON_INCLUDES=3D"-I=3D/usr/include/python${PYTHON_BASEVERSION}"' \
+> +	    ${S}/m4/acinclude.m4
+> +	#remove the hardcoded $(libdir) rpath
+> +	sed -i -e 's|--rpath=3D$(libdir)||g' ${S}/bindings/Makefile.am
+> +
+> +	autotools_do_configure
+> +
+> +	perl_version=3D`perl -v 2>/dev/null | \
+> +	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
+> +
+> +	#modify python sitepkg
+> +	#remove the dependency of perl-shared:Makefile
+> +	#or perl-shared/Makefile will be regenerated
+> +	#if any code touch bindings/Makefile after below perl bindings code
+> +	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
+> +	    --install-lib=3D${D}${PYTHON_SITEPACKAGES_DIR}:" \
+> +	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
+> +	    ${S}/bindings/Makefile
+> +
+> +	#redo the perl bindings
+> +	(
+> +	cd bindings/perl-shared;
+> +	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS=3D"=
+vendor"
+> +	    INSTALLPRIVLIB=3D"abc";
+> +	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
+> +
+> +	cd ../../bindings/perl-piped;
+> +	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS=3D"=
+vendor";
+> +	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
+> +	)
+> +
+> +	#change the interpreter in file
+> +	sed -i -e "s|^PERL =3D ${STAGING_BINDIR_NATIVE}/.*|PERL =3D /usr/bin/pe=
+rl|g" \
+> +	    ${S}/examples/Makefile
+> +	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g"=
+ \
+> +	    ${S}/examples/*.pl
+> +}
+> +
+> +python populate_packages_prepend() {
+> +    def fill_more(name, dbg=3DTrue, rdep=3DNone):
+> +        if name is None or name.strip() =3D=3D "":
+> +            return
+> +
+> +        fpack=3Dd.getVar('PACKAGES') or ""
+> +        fpack=3D"${PN}-" + name + " " + fpack
+> +        if dbg:
+> +            fpack=3D"${PN}-" + name + "-dbg" + " " + fpack
+> +        d.setVar('PACKAGES', fpack)
+> +        if rdep is not None:
+> +            prdep=3Dd.getVar('RDEPENDS_${PN}-' + name) or ""
+> +            prdep=3Drdep + " " + prdep
+> +            d.setVar('RDEPENDS_${PN}-' + name, prdep)
+> +
+> +            prdep=3Dd.getVar('RDEPENDS_${PN}-' + name) or ""
+> +            bb.debug(1, "RDEPENDS_${PN}-" + name + "=3D" + prdep)
+> +
+> +    conf=3D(d.getVar('PACKAGECONFIG', True) or "").split()
+> +    pack=3Dd.getVar('PACKAGES') or ""
+> +    bb.debug(1, "PACKAGECONFIG=3D%s" % conf)
+> +    bb.debug(1, "PACKAGES1=3D%s" % pack )
+> +
+> +    if "perl" in conf :
+> +        fill_more("perl")
+> +
+> +    if "python" in conf:
+> +        fill_more("python")
+> +
+> +    pack=3Dd.getVar('PACKAGES', True) or ""
+> +    bb.debug(1, "PACKAGES after=3D%s" % pack)
+> +
+> +    #debug code
+> +    #prdep=3Dd.getVar('RDEPENDS_${PN}') or ""
+> +    #bb.debug(1, "RDEPENDS_${PN}" + "=3D" + prdep)
+> +    #prdep=3Dd.getVar('RDEPENDS') or ""
+> +    #bb.debug(1, "RDEPENDS" + "=3D" + prdep)
+> +}
+> +
+> +FILES_${PN}-doc +=3D "${datadir}/examples"
+> +
+> +DESCRIPTION_${PN}-perl =3D \
+> +"The ${PN}-perl package includes RRDtool bindings for perl."
+> +FILES_${PN}-perl =3D "${libdir}/perl/vendor_perl/* ${datadir}/${PN}/exam=
+ples"
+> +FILES_${PN}-perl-dbg =3D "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug"
+> =20
+> +DESCRIPTION_${PN}-python =3D \
+> +"The ${PN}-python package includes RRDtool bindings for python."
+> +FILES_${PN}-python =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packa=
+ges/*"
+> +FILES_${PN}-python-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-p=
+ackages/.debug"
+
+I think there should be just one -dbg package.
+
+> --=20
+> 1.7.9.5
 >=20
-> diff --git a/recipes-support/memcached/memcached_1.4.17.bb b/recipes-supp=
-ort/memcached/memcached_1.4.17.bb
-> new file mode 100644
-> index 0000000..906896c
-> --- /dev/null
-> +++ b/recipes-support/memcached/memcached_1.4.17.bb
-> @@ -0,0 +1,50 @@
-> +SUMMARY =3D "A high-performance memory object caching system"
-> +DESCRIPTION =3D "\
-> + Danga Interactive developed memcached to enhance the speed of LiveJourn=
-al.com, \
-> + a site which was already doing 20 million+ dynamic page views per day f=
-or 1 \
-> + million users with a bunch of webservers and a bunch of database server=
-s. \
-> + memcached dropped the database load to almost nothing, yielding faster =
-page \
-> + load times for users, better resource utilization, and faster access to=
- the \
-> + databases on a memcache miss. \
-> + . \
-> + memcached optimizes specific high-load serving applications that are de=
-signed \
-> + to take advantage of its versatile no-locking memory access system. Cli=
-ents \
-> + are available in several different programming languages, to suit the n=
-eeds \
-> + of the specific application. Traditionally this has been used in mod_pe=
-rl \
-> + apps to avoid storing large chunks of data in Apache memory, and to sha=
-re \
-> + this burden across several machines."
-> +
-> +HOMEPAGE =3D "http://www.danga.com/memcached/"
-> +LICENSE =3D "BSD"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7e5ded7363d335e1bb18013ca0804=
-6ff"
-> +
-> +inherit autotools
-> +
-> +DEPENDS +=3D "libevent"
-> +RDEPENDS +=3D "perl perl-module-posix perl-module-autoloader perl-module=
--tie-hash"
-> +
-> +SRC_URI =3D "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] =3D "46402dfbd7faadf6182283dbbd18b1a6"
-> +SRC_URI[sha256sum] =3D "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf992=
-6a89999d8cdc0458"
-> +
-> +python __anonymous () {
-> +    endianness =3D d.getVar('SITEINFO_ENDIANNESS', True)
-> +    if endianness =3D=3D 'le':
-> +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dlittle")
-> +    else:
-> +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dbig")
-> +}
-> +
-> +inherit update-rc.d
-> +
-> +INITSCRIPT_NAME =3D "memcached"
-> +INITSCRIPT_PARAMS =3D "defaults"
-> +
-> +do_install_append() {
-> +	install -D -m 755 ${S}/scripts/memcached-init ${D}${sysconfdir}/init.d/=
-memcached=20
-> +	mkdir -p ${D}/usr/share/memcached/scripts
-> +	install -m 755 ${S}/scripts/memcached-tool ${D}/usr/share/memcached/scr=
-ipts
-> +	install -m 755 ${S}/scripts/start-memcached ${D}/usr/share/memcached/sc=
-ripts
-> +}
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -156,16 +268,16 @@ ripts
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---R0KYKl6i9Fj1nV1E
+--iuNVq+MSMwU9tqfB
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTtloACgkQN1Ujt2V2gBzwjQCeNVsmft63jMYT7WqBHFdzL2LY
-VWYAnAqUQqJBAMdPdsWP0xLQn5yb90+d
-=Gz9p
+iEUEARECAAYFAlNTtxoACgkQN1Ujt2V2gBw5mACWPzegRp3EcZGsAuBAL72wsh+k
+qQCgjnBD+fXzExiTYlUE6tshfukWK6U=
+=oFSQ
 -----END PGP SIGNATURE-----
 
---R0KYKl6i9Fj1nV1E--
+--iuNVq+MSMwU9tqfB--
