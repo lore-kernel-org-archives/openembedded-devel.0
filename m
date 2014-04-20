@@ -1,38 +1,36 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B154606D4
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id AEB8665D50
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 20:19:38 +0000 (UTC)
-Received: by mail-la0-f54.google.com with SMTP id mc6so2663280lab.41
+	Sun, 20 Apr 2014 20:21:55 +0000 (UTC)
+Received: by mail-yk0-f171.google.com with SMTP id q9so2834822ykb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 13:19:38 -0700 (PDT)
+	Sun, 20 Apr 2014 13:21:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=cMPID/vixoO1bHlHuZYxLmmiB1wggHaMafKc8ZGslP8=;
-	b=iXHW1olXQYyoqLj1Y0LDEGovEYQUjD1ONrlRoWemHlYaEEl/1kbGX+PsonGPOD73a2
-	3jmJcBqvmHW2ih2EbMm2sP92PCQNUw5a/As0Opo6M2UP73aJr5/Fw38ii3XQLSSZWSfG
-	EEbHGvrXbBc654IDYTcxtaV4svOn7LA9ZYehOHaE1dRTQBgEREzYuMKSH7zpQlUbC9X3
-	pCYORfZolyU+C69Z7WK+zaWFebMlJPoUkJMmMY6Bz8b42GAT5mEYNRV1KIGllG3R2YTZ
-	+NLNDbhBQLkJ0Q/J+OodyV9Nwn1rL80Ga1lS+pbOgHIdDiQjuvPyw3SL32KZXVFp+qyj
-	5gag==
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=kGGIvhfhkgOmyFjCvk4+TZoVMJY9v/CD2uzXNJVCAq4=;
+	b=b2KXZzgj+rURbv99QPOjA8IRutLPjUpRDQy4Yub0SRprP5KjShgnONZaJ9SaQbVmYD
+	Uk4hqBpvAy/k/82G0ZYqP8VkrwK402IWeFwC+5872q/0E4ZvPc9BhHnzccJKtXZGDDx7
+	pWkyDXikOs5zp/quP2UHigBJHDG9l+xWuIwKnkogqrU2+CL5upIoEESb00eNjlwMsXCn
+	h0cY6pjt2cc5Qb86F/MSOo3OTLNyI7ykbhdXbh7bqlSmkcKJf+TXsx8oUA7mR31rLbdm
+	FWZY5mLcAxQ/Eg0itbbzUn7fMgbIRlQwwMYjgoNyRXo5Cvu+u1cXe9sxdKRldPDULiOA
+	/UyQ==
 MIME-Version: 1.0
-X-Received: by 10.152.115.178 with SMTP id jp18mr23809097lab.23.1398025178498; 
-	Sun, 20 Apr 2014 13:19:38 -0700 (PDT)
-Received: by 10.114.191.202 with HTTP; Sun, 20 Apr 2014 13:19:38 -0700 (PDT)
-In-Reply-To: <1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
-References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
-	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
-	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
-	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
-Date: Sun, 20 Apr 2014 13:19:38 -0700
-Message-ID: <CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
+X-Received: by 10.236.87.139 with SMTP id y11mr47609125yhe.27.1398025316444;
+	Sun, 20 Apr 2014 13:21:56 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.124.72 with HTTP; Sun, 20 Apr 2014 13:21:56 -0700 (PDT)
+In-Reply-To: <20140420103441.GL2486@jama>
+References: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
+	<20140420103441.GL2486@jama>
+Date: Sun, 20 Apr 2014 17:21:56 -0300
+X-Google-Sender-Auth: 6sIS7TvJb20iI4onj62XUDJWHd4
+Message-ID: <CAP9ODKoAOAOz0QmXDeZdGU4B4Z69wRUJZ66y3BD33WhWD3Txrw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: Fix PACKAGE_GROUP deprecation warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 20:19:39 -0000
+X-List-Received-Date: Sun, 20 Apr 2014 20:22:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Mar 31, 2014 at 1:54 AM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
+Hello Martin,
 
-> Hi Tim,
+On Sun, Apr 20, 2014 at 7:34 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Tue, Apr 15, 2014 at 07:12:45PM +0200, Jacob Kroon wrote:
+>> Fixes the following warning:
+>>
+>> WARNING: PACKAGE_GROUP is deprecated, please use FEATURE_PACKAGES instead
 >
-> On Sunday 30 March 2014 20:30:28 Tim Orling wrote:
-> > Yes. It updates the version built into perl. I will submit a patch with
-> > insane skip.
+> It's correct patch, but I'm a bit tempted to take this patch after
+> branching daisy, because some people are using latest meta-qt5 with
+> older oe-core releases and this undoing this change is easy to miss
+> (unlike e.g. cmake .bbappends which fail when not updated for correct
+> oe-core releases).
 >
-> INSANE_SKIP isn't the right fix for this - if this recipe is staging
-> duplicate
-> files, it should be prevented from doing that by simply deleting the files
-> within a do_install_append.
+> What do you think?
 >
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
+> Alternatively we can add wiki page about using latest meta-qt5 with
+> older oe-core and just document this there.
 
-(1) I am thinking about dropping this patch. perl-native provides
-Module::Metadata 1.00004, so if subsequent packages are being
-cross-compiled I have not yet proven there is a need for the updated
-v1.000019 provided here.
+I am one of those guys using it with older releases. However I think
+we ought to have it clean so I am in favor of merging as this is
+really a nice fix.
 
-(2) The question is, if one wanted to build subsequent packages in-situ,
-how to provide Module::Metadata 1.00004 on a target system, since it is
-only provided by perl-native?
-
---Tim
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
