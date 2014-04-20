@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id BE6DC65D10
+	by mail.openembedded.org (Postfix) with ESMTP id 01F5965D10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 11:16:54 +0000 (UTC)
-Received: by mail-ee0-f44.google.com with SMTP id e49so2936522eek.31
+	Sun, 20 Apr 2014 11:17:03 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id e49so2976169eek.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 04:16:55 -0700 (PDT)
+	Sun, 20 Apr 2014 04:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=o+Z5hkvVfNE+cKuN4ZGnpomfU+75MXMsqSRpJMF9vE0=;
-	b=0S1/DQ61NauFqKu3WOoXVenFpaitX4pYlrSpVI2S9gmCNPrlxcBzr9H42JaxZoqz7M
-	GA71RWlBr98Yxqp5R8iChq+/OpEZ+FLD3adOjaIASOf1BsJlfXjChcYTftjq5om5L37a
-	oufBisVAdsqH+ZuypcDDVoKbAkJlo8ZTzw+3ymXKfQNpMR44Ddsk1gfnCja2HngU9IIV
-	ylMydHmXLH4Miea8oq16CP9iAWKHqUSHcLfozc4mUny5Sk+NpWw+wcxqrBHHzhZaSIuX
-	kugWFkD1tkzPSY4vAVGCmMeygDDTmiCpYxPWIKV+RTnKTewsBuOSWpZAjp8BTpbPyOan
-	x+bw==
-X-Received: by 10.15.42.138 with SMTP id u10mr37948625eev.7.1397992615418;
-	Sun, 20 Apr 2014 04:16:55 -0700 (PDT)
+	bh=4Xl/yBWEmhIcO3jqRB9qO/+dOuiedb1A3xJvc1xX+hE=;
+	b=a3U1lZ9gY/LL4nw+zx2wQ9HCjV1CqXoH4dx1KB8T12m6ha1Qq9emDza8N73FWKcjE5
+	n1jgMf6R0uKE7rRY+mmnj9YQDswKXL6CXzy2d3hPWn2I2roMNafEVZ1O/SMxV6JyD44X
+	FYb6VmhFGi1By2EkJ4jgEJbIJ0cwu75Q4VWG5Xe7EGSLzK0FU97aYKhUpaKdG9bJXW91
+	qG1KFXF5yg4SmEhllKpTdEHSyAAUiAszOmFubashNdjKaGKKqZHbQFFy1vAD+3gz0AeB
+	rDtaQys4l2BnWJGu3t/RbyQW3Q46endSQCKyosvDY66jhv3xEYDGOheDniyTz0rwMK2+
+	3Spw==
+X-Received: by 10.14.126.73 with SMTP id a49mr37998799eei.46.1397992624754;
+	Sun, 20 Apr 2014 04:17:04 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	y7sm93743607eev.5.2014.04.20.04.16.53
+	x45sm93745057eeu.23.2014.04.20.04.17.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 04:16:54 -0700 (PDT)
-Date: Sun, 20 Apr 2014 13:16:59 +0200
+	Sun, 20 Apr 2014 04:17:03 -0700 (PDT)
+Date: Sun, 20 Apr 2014 13:17:09 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420111659.GN2486@jama>
+Message-ID: <20140420111709.GO2486@jama>
 References: <1397023113-29936-1-git-send-email-kai.kang@windriver.com>
-	<1397023113-29936-2-git-send-email-kai.kang@windriver.com>
+	<1397023113-29936-3-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1397023113-29936-2-git-send-email-kai.kang@windriver.com>
+In-Reply-To: <1397023113-29936-3-git-send-email-kai.kang@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 1/3] libyaml: update to 0.1.5
+Subject: Re: [PATCH 2/3] sg3-utils: update to 1.38
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,64 +47,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 11:16:56 -0000
-X-Groupsio-MsgNum: 49321
+X-List-Received-Date: Sun, 20 Apr 2014 11:17:04 -0000
+X-Groupsio-MsgNum: 49322
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="V/YKEhZ4Pe4jxeTU"
+	protocol="application/pgp-signature"; boundary="h/VGaWN5ITqlMCVM"
 Content-Disposition: inline
 
---V/YKEhZ4Pe4jxeTU
+--h/VGaWN5ITqlMCVM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 09, 2014 at 01:58:31PM +0800, Kai Kang wrote:
-> Update libyaml from 0.1.4 to latest version 0.1.5.
+On Wed, Apr 09, 2014 at 01:58:32PM +0800, Kai Kang wrote:
+> Update sg3-utils to version 1.38.
 
 Merged, thanks!
 
 >=20
 > Signed-off-by: Kai Kang <kai.kang@windriver.com>
 > ---
->  .../libyaml/{libyaml_0.1.4.bb =3D> libyaml_0.1.5.bb}           | 12 ++++=
-++++----
->  1 file changed, 8 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-support/libyaml/{libyaml_0.1.4.bb =3D> libyaml_0.=
-1.5.bb} (36%)
+>  .../sg3-utils/{sg3-utils_1.31.bb =3D> sg3-utils_1.38.bb}        | 11 +++=
++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.31.bb =3D> sg3-uti=
+ls_1.38.bb} (46%)
 >=20
-> diff --git a/meta-oe/recipes-support/libyaml/libyaml_0.1.4.bb b/meta-oe/r=
-ecipes-support/libyaml/libyaml_0.1.5.bb
-> similarity index 36%
-> rename from meta-oe/recipes-support/libyaml/libyaml_0.1.4.bb
-> rename to meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-> index af8d63f..c44eda4 100644
-> --- a/meta-oe/recipes-support/libyaml/libyaml_0.1.4.bb
-> +++ b/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-> @@ -1,12 +1,16 @@
-> -SUMMARY =3D "LibYAML is a YAML parser and emitter written in C"
-> +SUMMARY =3D "LibYAML is a YAML 1.1 parser and emitter written in C."
-> +DESCRIPTION =3D "LibYAML is a C library for parsing and emitting data in=
- YAML 1.1, \
-> +a human-readable data serialization format. "
->  HOMEPAGE =3D "http://pyyaml.org/wiki/LibYAML"
->  SECTION =3D "libs/devel"
+> diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb b/meta-o=
+e/recipes-support/sg3-utils/sg3-utils_1.38.bb
+> similarity index 46%
+> rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+> rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
+> index 29fe132..beee36c 100644
+> --- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.31.bb
+> +++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
+> @@ -1,15 +1,16 @@
+>  SUMMARY =3D "Utilities for working with generic SCSI devices"
 > +
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6015f088759b10e0bc2bf64898d4a=
-e17"
-> =20
-> -SRC_URI =3D "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz;name=
-=3Dlibyaml"
-> -SRC_URI[libyaml.md5sum] =3D "36c852831d02cf90508c29852361d01b"
-> -SRC_URI[libyaml.sha256sum] =3D "7bf81554ae5ab2d9b6977da398ea789722e0db75=
-b86bffdaeb4e66d961de6a37"
-> +SRC_URI =3D "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz"
+> +DESCRIPTION =3D "This package contains low level utilities for devices t=
+hat use the SCSI command set"
 > +
-> +SRC_URI[md5sum] =3D "24f6093c1e840ca5df2eb09291a1dbf1"
-> +SRC_URI[sha256sum] =3D "fa87ee8fb7b936ec04457bc044cd561155e1000a4d250298=
-67752e543c2d3bef"
+>  HOMEPAGE =3D "http://sg.danny.cz/sg/sg3_utils.html"
+>  SECTION =3D "console/admin"
 > =20
->  S =3D "${WORKDIR}/yaml-${PV}"
+>  LICENSE =3D "GPLv2+ & BSD"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1cc481c050dc92e12db9c8145043d=
+5dc"
+> -
+> -PR =3D "r1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df90da7fc52172599dbf082d7620f1=
+8ca"
+> =20
+>  SRC_URI =3D "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+> -SRC_URI[md5sum] =3D "9431e1944cde829a24dedf027e1364b5"
+> -SRC_URI[sha256sum] =3D "d84b38b61f0ca3941eb1c48a5858f93d1d1b70a623e579f5=
+ecce2440e18410a4"
+> +SRC_URI[md5sum] =3D "e532a3d6648c422347f6d84cac469263"
+> +SRC_URI[sha256sum] =3D "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5=
+d7c12ce652ba38f1"
+> =20
+>  inherit autotools
 > =20
 > --=20
 > 1.8.4
@@ -118,16 +119,16 @@ b86bffdaeb4e66d961de6a37"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---V/YKEhZ4Pe4jxeTU
+--h/VGaWN5ITqlMCVM
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTrKsACgkQN1Ujt2V2gBwTnwCfW6+92x8lZ2EMmMiWBvB0yrwh
-qRwAmQEt03Ewl9fEKYi2inegSJmhDc+8
-=cOgN
+iEYEARECAAYFAlNTrLUACgkQN1Ujt2V2gBzA+QCfUBRVJlL8VsHu2/0sa88CK3DB
++wwAoK1gAMFFz1truVkiS5Vm6kyFlCKS
+=gX28
 -----END PGP SIGNATURE-----
 
---V/YKEhZ4Pe4jxeTU--
+--h/VGaWN5ITqlMCVM--
