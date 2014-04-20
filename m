@@ -1,38 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 48AF965D46
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D014609AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 13:45:37 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b57so3010634eek.12
+	Sun, 20 Apr 2014 13:54:21 +0000 (UTC)
+Received: by mail-la0-f42.google.com with SMTP id ec20so2598548lab.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 06:45:38 -0700 (PDT)
+	Sun, 20 Apr 2014 06:54:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3nEV+OOUJ1cYtmD8NVfxHLbQ0sSA3IUrMT26pATud3s=;
-	b=sQx+zFO23+1jh98qHpe+McjMphHuBbAIoS/+u4FXldnJXrt4GFddv4SFwJDqEnNFWr
-	lh59fblzfWT4xd958mTlzl4D/PL2FFbUwA0cu9aSMIq5V/t/47xrgq5GWgx+bWyl+eho
-	zyzlK4y5FJvPRktQ2YVbHFcdEEx2Nf/tvQjPPak/W2j/HmgMAM1DsF/VAD1+3617wCXb
-	6m43cmcekaNx9R58wnFo2bcPNRbWFChrYohFexykOga24MwDcdHV+8OA70wsyZi9JPgo
-	ouB8gnrMXJiAgQBrKVB3l1vDvj0g0cxyuiUyqBMtN459trZmIIjDO4syWyA5xTMDM2Uz
-	VIPg==
-X-Received: by 10.14.22.69 with SMTP id s45mr38635574ees.56.1398001538732;
-	Sun, 20 Apr 2014 06:45:38 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	x46sm94161090een.17.2014.04.20.06.45.36 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 06:45:37 -0700 (PDT)
-Date: Sun, 20 Apr 2014 15:45:42 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420134542.GM2486@jama>
-References: <1396216372-6712-1-git-send-email-trevor.woerner@linaro.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=zR8Rp9UPxUpaYaYnrUvdRdCbducQxTvvt6FnMitgddw=;
+	b=MVpx2DtRpej+a+bqXEwdAhwl699QBJKpGt9ejXhKBwfXgVseHA4Ai7/59VQuIWNFU+
+	dIohGiVcuz9oy6O6pExF94XhaxW8ALMzN4M5ytwGFPzorQlowmy/Fszr5TLldJk43zGe
+	PuwPX9AMK2ly1B9CCN481RnZ/AS9MtrPJoPGXlj7EobZ1ccakkYNffbTvV1iVIPO69pb
+	cSlaz84NpbXa2zHBD2jlr8Y3VUqXIRBykBi6BhYFvZ25A1jI3lMyYOMOisN5Zzv4BBGY
+	lmqOzTgmCGzR+BDkeocJRg5W5I83vxH4L1XVqdSuhkjzPVXFa6flYv6YnFXRqVyZ1ioI
+	5T0Q==
 MIME-Version: 1.0
-In-Reply-To: <1396216372-6712-1-git-send-email-trevor.woerner@linaro.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: patches@linaro.org
-Subject: Re: [meta-gnome][PATCH] libgnomecanvas: add 'intltool-native' DEPENDS
+X-Received: by 10.152.30.41 with SMTP id p9mr22611277lah.26.1398002061340;
+	Sun, 20 Apr 2014 06:54:21 -0700 (PDT)
+Received: by 10.112.53.73 with HTTP; Sun, 20 Apr 2014 06:54:21 -0700 (PDT)
+In-Reply-To: <20140420103441.GL2486@jama>
+References: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
+	<20140420103441.GL2486@jama>
+Date: Sun, 20 Apr 2014 15:54:21 +0200
+Message-ID: <CAPbeDCn+wU_rCnmenVegyK_A4heeVRWOG_qU9j78z32TQ8by6w@mail.gmail.com>
+From: Jacob Kroon <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: Fix PACKAGE_GROUP deprecation warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,65 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 13:45:41 -0000
-X-Groupsio-MsgNum: 49347
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="T2TLPR1GNug0LD4g"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Apr 2014 13:54:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
---T2TLPR1GNug0LD4g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Martin,
 
-On Sun, Mar 30, 2014 at 05:52:52PM -0400, Trevor Woerner wrote:
-> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+On Sun, Apr 20, 2014 at 12:34 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-Resolved by identical patch I had in queue.
+> On Tue, Apr 15, 2014 at 07:12:45PM +0200, Jacob Kroon wrote:
+> > Fixes the following warning:
+> >
+> > WARNING: PACKAGE_GROUP is deprecated, please use FEATURE_PACKAGES instead
+>
+> It's correct patch, but I'm a bit tempted to take this patch after
+> branching daisy, because some people are using latest meta-qt5 with
+> older oe-core releases and this undoing this change is easy to miss
+> (unlike e.g. cmake .bbappends which fail when not updated for correct
+> oe-core releases).
+>
+> What do you think?
+>
+>
+I think I follow you. So the deprecation happened in commit
+d703e07ea5056624101e1bc48f10d25b602635e9, 2014-03-07, so I guess only
+daisy/master will give the warning. For older oe-core releases with
+meta-qt5 master, this patch could silently break stuff I can imagine. So
+like you propose, keeping this one for master only, after branching daisy,
+seems like a good idea to me.
 
-Thanks
+/Jacob
 
-> ---
->  meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb b=
-/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-> index 4a210a4..0f41bb6 100644
-> --- a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-> @@ -5,7 +5,7 @@ SECTION =3D "x11/gnome/libs"
-> =20
->  inherit gnome
-> =20
-> -DEPENDS =3D "gtk+ libglade libart-lgpl xineramaproto"
-> +DEPENDS =3D "gtk+ libglade libart-lgpl xineramaproto intltool-native"
-> =20
->  SRC_URI[archive.md5sum] =3D "ffcbb719c671ff5cd86e59aeba8d0b92"
->  SRC_URI[archive.sha256sum] =3D "859b78e08489fce4d5c15c676fec1cd79782f115=
-f516e8ad8bed6abcb8dedd40"
-> --=20
-> 1.9.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---T2TLPR1GNug0LD4g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNTz4YACgkQN1Ujt2V2gBxlBwCdF+mBWdCDesysxCyP1y69yggE
-IDcAn1GmdtPB4hvWjOI1NINzkW4exIRA
-=DxpS
------END PGP SIGNATURE-----
-
---T2TLPR1GNug0LD4g--
