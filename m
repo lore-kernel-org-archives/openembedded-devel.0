@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 30FF065CFE
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B35865D2C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 09:28:24 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id c41so2868725eek.36
+	Sun, 20 Apr 2014 09:29:16 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id e49so2880806eek.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 02:28:25 -0700 (PDT)
+	Sun, 20 Apr 2014 02:29:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qObW1gK86UDEm+pbe/0QDMR1iXBHa7IZrev6MvQH0HA=;
-	b=MJIPxNRmMc55DJP82Cc9A63SRj9U/fI9Wu4ZFmcBWtf5y/ec5WQCM/V+a0AaFzgzOu
-	YeiHhaAkhtzykdrdoh7OZiBo8WyZjz6wi9a1yDVJodHAlP845CDXzgInNRTvQU+/PdOO
-	mMVucdF/r1X46aiyH78Xikwtn5FK0lSQzPK3cOma6GAFl69GSgYr8mRccavCVbuPdQ3j
-	vm5vDC7eOZWtzwxsIpqyS1gAn4NucNeBGJS6Gm9FoOsb9rqcxydUKDvyp3xroPk2LNjc
-	icwcyxA1z5qQtsey6LEdYRjhXVNcIQXyPcHwi2fK1ebREGNHuwEBPG13AXIFZOJq6hrA
-	pAfQ==
-X-Received: by 10.15.31.70 with SMTP id x46mr37261247eeu.26.1397986105447;
-	Sun, 20 Apr 2014 02:28:25 -0700 (PDT)
+	bh=OdjxsBGtqvDO6qO5wqeDphdvUCz1QDvxfwuJmY3sxKk=;
+	b=vkRg6ux2z5YQowplcNBUomEJRM5DadqxBMJ3uOcnSmqWdFKLXB293OmIQZwTJ3rzdf
+	zvz1yK7DjhiKpRtWmg0DfqRKZ+mZf0HbDR7XB3AiqmRBiXND6dK6Bm7Z+Bb54vM6hIwC
+	Lg0po/kpjo3ZlUshRt5u6oRHL93hZegBxnsPH7d+IZgm2N7i9c+WeJbLbkOEh+okut+O
+	bkCKCGOK+puR8ckjWpJ1aEikuPiZY9mHpc1Yy7Y2/7O+TN38WIOtusd7AY5LdjM6Ox7w
+	59DbbCEfHtzo/RT1mdFtx98KcRiIEoyAsO5rMSvu5awYQDzXd2JnLtoisxbtRlCb7YRo
+	BCEQ==
+X-Received: by 10.15.53.69 with SMTP id q45mr37262212eew.22.1397986157492;
+	Sun, 20 Apr 2014 02:29:17 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	y7sm93003567eev.5.2014.04.20.02.28.24
-	for <openembedded-devel@lists.openembedded.org>
+	m8sm93008103eeg.11.2014.04.20.02.29.16 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 02:28:24 -0700 (PDT)
-Date: Sun, 20 Apr 2014 11:28:29 +0200
+	Sun, 20 Apr 2014 02:29:16 -0700 (PDT)
+Date: Sun, 20 Apr 2014 11:29:21 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420092829.GF2486@jama>
-References: <cover.1397459226.git.Chong.Lu@windriver.com>
-	<bbac515278f9507ebb997506af418a1b8fe02753.1397459226.git.Chong.Lu@windriver.com>
+Message-ID: <20140420092921.GG2486@jama>
+References: <1397095971-17039-1-git-send-email-trevor.woerner@linaro.org>
+	<1397095971-17039-2-git-send-email-trevor.woerner@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <bbac515278f9507ebb997506af418a1b8fe02753.1397459226.git.Chong.Lu@windriver.com>
+In-Reply-To: <1397095971-17039-2-git-send-email-trevor.woerner@linaro.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 1/2] mariadb: use /bin/false as the login shell
+Cc: patches@linaro.org
+Subject: Re: [meta-gnome][PATCH] abiword: force build order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,50 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 09:28:26 -0000
-X-Groupsio-MsgNum: 49313
+X-List-Received-Date: Sun, 20 Apr 2014 09:29:19 -0000
+X-Groupsio-MsgNum: 49314
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PqX6tBBuHl4HmZHK"
+	protocol="application/pgp-signature"; boundary="LYDt+Tnt2WQ/hIRe"
 Content-Disposition: inline
 
---PqX6tBBuHl4HmZHK
+--LYDt+Tnt2WQ/hIRe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 14, 2014 at 03:16:38PM +0800, Chong Lu wrote:
-> Use /bin/false as the login shell, just like what Ubuntu does,
-> otherwise there might be secure issue.
+On Wed, Apr 09, 2014 at 10:12:51PM -0400, Trevor Woerner wrote:
+> There is a race condition whereby "libgoffice.la" must be built (and exis=
+t)
+> before the rest of the code in "src" is built.
 
-1/2 Merged, thanks
-
-2/2 has question from koen, which needs to be resolved first
+Merged, thanks
 
 >=20
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
 > ---
->  meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >=20
-> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/r=
-ecipes-support/mysql/mariadb_5.1.67.inc
-> index 100b3a7..37a0f0c 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-> +++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-> @@ -35,7 +35,7 @@ INITSCRIPT_NAME =3D "mysqld"
->  INITSCRIPT_PARAMS =3D "start 45 5 . stop 45 0 6 1 ."
+> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gno=
+me/recipes-gnome/abiword/abiword_3.0.0.bb
+> index 69d62ef..073622a 100644
+> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> @@ -50,6 +50,14 @@ do_configure() {
+>      autotools_do_configure
+>  }
 > =20
->  USERADD_PACKAGES =3D "${PN}-server"
-> -USERADD_PARAM_${PN}-server =3D "--system --home-dir /var/mysql -g nogrou=
-p mysql"
-> +USERADD_PARAM_${PN}-server =3D "--system --home-dir /var/mysql -g nogrou=
-p --shell /bin/false mysql"
+> +do_compile() {
+> +    cd ${S}/goffice-bits2
+> +    make goffice-paths.h
+> +    make libgoffice.la
+> +    cd ${S}
+> +    oe_runmake
+> +}
+> +
+>  PACKAGES +=3D " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-t=
+emplates "
 > =20
-> =20
->  export ac_cv_path_PS=3D"/bin/ps"
+>  FILES_${PN} +=3D " \
 > --=20
-> 1.8.1.2
+> 1.9.0
 >=20
 > --=20
 > _______________________________________________
@@ -101,16 +104,16 @@ p --shell /bin/false mysql"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PqX6tBBuHl4HmZHK
+--LYDt+Tnt2WQ/hIRe
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTkz0ACgkQN1Ujt2V2gBwxpwCgt4gao8HtVGcPB/t3bvScrG3v
-KaUAoJgLFCOxoPJOXqF7B6KjXVToDgqh
-=JI4+
+iEYEARECAAYFAlNTk3EACgkQN1Ujt2V2gBxFvACfYeoWGFCmCzFfChLo+RhQmofX
+XaEAnRkID5aCh4nTt+mII2qDYrYtIAN1
+=EMel
 -----END PGP SIGNATURE-----
 
---PqX6tBBuHl4HmZHK--
+--LYDt+Tnt2WQ/hIRe--
