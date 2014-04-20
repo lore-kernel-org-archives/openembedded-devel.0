@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F39C65DA2
+Received: from mail-ee0-f46.google.com (mail-ee0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 08842607FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 09:18:25 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id b15so2850751eek.6
+	Sun, 20 Apr 2014 09:19:33 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id t10so2820789eei.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 02:18:26 -0700 (PDT)
+	Sun, 20 Apr 2014 02:19:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1KYR+o5Jtbpqp3WBS8uJGrbDubJ1OVgxcdMhH96kzkE=;
-	b=YVWo9enb7MgLrbujujV+kAe8XpHjzZQxr1wkBaJdeb4TKD1Gc1n2HH4oYynAIzGXcm
-	0IinfsuuuKjG/SRT9swG+WhTurGlt/AyNKCOSJGg4j9vWIREJcvlobAtr8eZMBZmolSm
-	OFlAnVZaVdpAEnU224EUJUBKjpe0ng9ZiPsqnYKzxeHelwxtzV0wMfMx1Gjr/2RwzNq6
-	DRiB8mBaUIuARlLdI7subR4NzR26DVrZqwXpH9iPnxeGSoj19jcXRRkKuClkoJB+3l4b
-	obFzDmC9VN2LY24m7zmxxjhwnNezdgVcIGOpH/hmeZbFHX9cIFGJFfeZFG4o06HiWB7k
-	z1TQ==
-X-Received: by 10.15.10.3 with SMTP id f3mr37114128eet.1.1397985506674;
-	Sun, 20 Apr 2014 02:18:26 -0700 (PDT)
+	bh=oDI2EMRbRuJCXV2I9yJeZUrvSKYkuVObXwXt3HxVJoI=;
+	b=WXN5Bb0kzye/Lr76J5AJblUKr6p50nhSsGKMnenV1x7L/TXrnh7DQQRPxHqIslwWKk
+	+3ZgoyXC1mjmQVnqaXl2CFu/1DI9IfykjRsXDAMB8uN9gfQko0VUZoTxR++N26TGx4fs
+	avDinTstYdO1RpiLN6Yd66pY8ipIoEcIztb5ysc3BsW/Wad+xBv7Alr5ZaUNrmRwcXtx
+	ZBrP8JA76rVYZwK68wvpMTGqSZiaJA89YIlRZCIqInzdISJO7Getapj+Ryf25EpvhFHr
+	w5Li9gV+71oB4T4c1vHEzedIOXxQSWSFSIEDgu5FuSN1ctausRMTAaGNnrLqWdoiDUeh
+	XLLg==
+X-Received: by 10.14.198.197 with SMTP id v45mr37573788een.9.1397985574535;
+	Sun, 20 Apr 2014 02:19:34 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	e42sm92941448eev.32.2014.04.20.02.18.25
+	4sm92949237eeq.33.2014.04.20.02.19.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 02:18:25 -0700 (PDT)
-Date: Sun, 20 Apr 2014 11:18:30 +0200
+	Sun, 20 Apr 2014 02:19:33 -0700 (PDT)
+Date: Sun, 20 Apr 2014 11:19:38 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420091830.GA2486@jama>
-References: <1397206982-13117-1-git-send-email-jackie.huang@windriver.com>
+Message-ID: <20140420091938.GB2486@jama>
+References: <1397484867-4582-1-git-send-email-ferlandm@sonatest.com>
 MIME-Version: 1.0
-In-Reply-To: <1397206982-13117-1-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1397484867-4582-1-git-send-email-ferlandm@sonatest.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] iw: use BP instead of P to fix multilib builds
+Subject: Re: [meta-oe][PATCHv2] autobahn: fix 'Missing sha256 SRC_URI checksum'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,47 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 09:18:26 -0000
-X-Groupsio-MsgNum: 49308
+X-List-Received-Date: Sun, 20 Apr 2014 09:19:34 -0000
+X-Groupsio-MsgNum: 49309
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="KjcUHqqCp23GY06r"
+	protocol="application/pgp-signature"; boundary="vgqGEEhIUeLzQgKp"
 Content-Disposition: inline
 
---KjcUHqqCp23GY06r
+--vgqGEEhIUeLzQgKp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 11, 2014 at 05:03:02PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+On Mon, Apr 14, 2014 at 10:14:27AM -0400, Marc Ferland wrote:
+> Signed-off-by: Marc Ferland <ferlandm@sonatest.com>
 
-Merged, thanks.
+Merged thanks
 
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  meta-oe/recipes-connectivity/iw/iw_3.11.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb | 1 +
+>  1 file changed, 1 insertion(+)
 >=20
-> diff --git a/meta-oe/recipes-connectivity/iw/iw_3.11.bb b/meta-oe/recipes=
--connectivity/iw/iw_3.11.bb
-> index 42477e7..d72a140 100644
-> --- a/meta-oe/recipes-connectivity/iw/iw_3.11.bb
-> +++ b/meta-oe/recipes-connectivity/iw/iw_3.11.bb
-> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D878618a5c4af25=
-e9b93ef0be1a93f774"
+> diff --git a/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb b/m=
+eta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
+> index a1e8c5f..ac775c4 100644
+> --- a/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
+> +++ b/meta-oe/recipes-devtools/python/python-autobahn_0.8.6.bb
+> @@ -9,6 +9,7 @@ LIC_FILES_CHKSUM =3D " file://autobahn/__init__.py;beginl=
+ine=3D1;endline=3D17;md5=3D1fde
 > =20
->  DEPENDS =3D "libnl pkgconfig"
+>  SRC_URI =3D "https://pypi.python.org/packages/source/a/autobahn/autobahn=
+-${PV}.zip"
+>  SRC_URI[md5sum] =3D "160429e7fb043940e79aa7f4ebbab57a"
+> +SRC_URI[sha256sum] =3D "94ae5c6f37f9fe7c9d3f12c170fcc273afed4104a1c5508b=
+26d6014bb9e6373e"
 > =20
-> -SRC_URI =3D "http://www.kernel.org/pub/software/network/iw/${P}.tar.bz2 \
-> +SRC_URI =3D "http://www.kernel.org/pub/software/network/iw/${BP}.tar.bz2=
- \
->             file://0001-iw-version.sh-don-t-use-git-describe-for-versioni=
-ng.patch \
->  "
+>  S =3D "${WORKDIR}/autobahn-${PV}"
 > =20
 > --=20
-> 1.7.9.5
+> 1.8.3.2
 >=20
 > --=20
 > _______________________________________________
@@ -97,16 +94,16 @@ ng.patch \
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---KjcUHqqCp23GY06r
+--vgqGEEhIUeLzQgKp
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTkOYACgkQN1Ujt2V2gBxzsACdHQVV8R9mjh68h2BnwopINYE7
-MR8AnReJevNDU7i3L0WscHc5DIFTmSer
-=Aaug
+iEYEARECAAYFAlNTkSoACgkQN1Ujt2V2gBz/UgCeI8YBhD1kr5fCTqqaWuROGBq7
+8IsAnijW8ZXkRkrjKNCiSZ/EqIMo1CZi
+=f/9J
 -----END PGP SIGNATURE-----
 
---KjcUHqqCp23GY06r--
+--vgqGEEhIUeLzQgKp--
