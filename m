@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 93C7565DED
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 389A165DED
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 11:46:28 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2915819eek.21
+	Sun, 20 Apr 2014 11:46:59 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so2939910eek.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 04:46:29 -0700 (PDT)
+	Sun, 20 Apr 2014 04:47:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=AvX3BkLsYjp3DTmlDXg/lJv6jkCGkfmDmwVuUPtcHKs=;
-	b=aSbeKc3G8GW4XfnPlsW3HYkDnY8wYPIq8USIghzvBSCcG8P82J8K1A+h0DL3C6FViK
-	Pbh4slw5iyym0OERL21WLlGZDZ1a5DRoC6sj6laGJsIhldQE3+sacRoKj6022elC3WMv
-	PI6RgsjO8obzDrtROsxezIEtC6DbmuFqpkW8KSRGWi2FVGcswNTOF6NJXB/uPPzyizvh
-	uf+40QKRLAWp2cZ6A796gFeeP0r5AMkb4FHm2xbUKlvUinGFQLCWIiuklLRBlc2qBewd
-	rACOIzAIF7rXaqgDVLXJvD9kVMtZt2aeFTBClb3cgCYHG0dCs2OsCHjCw47CfY9kIBxt
-	2HEw==
-X-Received: by 10.14.115.1 with SMTP id d1mr38256074eeh.30.1397994389221;
-	Sun, 20 Apr 2014 04:46:29 -0700 (PDT)
+	bh=xx4iUGKXn3O4o2B+9tL5FV3A0zTklIOHOzUzDqHHzUI=;
+	b=ZTUOSgs2lOo11FziLhGTbVbUQVGJRzDAwLt4siV+GMHXrZmcsWnXYpUK1LyuxzZxjH
+	mFRM2gZ9MBdOIC4ilCjKK3e70doKSS1qeahP4CgEMQ8fgoeG1HU2aFM/1SLKpNdjWvBA
+	8jVosXWj9agNkCrbG4UBey6+Ofwsew7nSHa1ZyP1BUN9k53B9SE7LmJG3FJ7A/Ev1ALu
+	vvA8lvORbvunKVUS5uZGhe436UUjWUemb2yESF13p5/54SCR7l8qFmroj6lrJhVXieQR
+	2Gcg1rtcnQxfzVl3hdPxgZqjD9x2qYNbk6gf80FIu8nulErkaEXp5P5dLYWMmRlMj9sn
+	c8Jw==
+X-Received: by 10.14.3.69 with SMTP id 45mr61632eeg.68.1397994420525;
+	Sun, 20 Apr 2014 04:47:00 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	x45sm93944320eeu.23.2014.04.20.04.46.27 for <multiple recipients>
+	u1sm93952536eex.31.2014.04.20.04.46.59
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 04:46:28 -0700 (PDT)
-Date: Sun, 20 Apr 2014 13:46:33 +0200
+	Sun, 20 Apr 2014 04:46:59 -0700 (PDT)
+Date: Sun, 20 Apr 2014 13:47:04 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Message-ID: <20140420114633.GC2486@jama>
-References: <1397034941-6268-1-git-send-email-trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140420114704.GD2486@jama>
+References: <1397029826-16492-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1397034941-6268-1-git-send-email-trevor.woerner@linaro.org>
+In-Reply-To: <1397029826-16492-1-git-send-email-jackie.huang@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Koen Kooi <koen.kooi@linaro.org>, openembedded-devel@lists.openembedded.org,
-	patches@linaro.org
-Subject: Re: [meta-oe][PATCH] acpitests: add individual checksums
+Subject: Re: [meta-oe][PATCH] fbset: fix parallel build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,78 +46,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 11:46:28 -0000
-X-Groupsio-MsgNum: 49336
+X-List-Received-Date: Sun, 20 Apr 2014 11:47:00 -0000
+X-Groupsio-MsgNum: 49337
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MXXylufPoVaQ01lt"
+	protocol="application/pgp-signature"; boundary="4p/IC6kBmCKpHx3O"
 Content-Disposition: inline
 
---MXXylufPoVaQ01lt
+--4p/IC6kBmCKpHx3O
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 09, 2014 at 05:15:40AM -0400, Trevor Woerner wrote:
-> This recipe includes two source tarballs, add a second set of checksums so
-> both have checksum definitions.
+On Wed, Apr 09, 2014 at 03:50:26PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Fix an incorrect dependency in makefile so that we can build
+> in parallel.
 
 Merged, thanks!
 
 >=20
-> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  meta-oe/recipes-extended/acpica/acpitests_20140114.bb | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
+>  .../fbset-2.1/fbset-2.1-fix-makefile-dep.patch     |   31 ++++++++++++++=
+++++++
+>  meta-oe/recipes-support/fbset/fbset_2.1.bb         |    6 ++--
+>  2 files changed, 34 insertions(+), 3 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix=
+-makefile-dep.patch
 >=20
-> diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140114.bb b/meta=
--oe/recipes-extended/acpica/acpitests_20140114.bb
-> index 4afe3a9..d8a3b9f 100644
-> --- a/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
-> +++ b/meta-oe/recipes-extended/acpica/acpitests_20140114.bb
-> @@ -6,12 +6,14 @@ LIC_FILES_CHKSUM =3D "file://tests/aapits/atexec.c;begi=
-nline=3D1;endline=3D115;md5=3De92
+> diff --git a/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefi=
+le-dep.patch b/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefi=
+le-dep.patch
+> new file mode 100644
+> index 0000000..41ab8af
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/fbset/fbset-2.1/fbset-2.1-fix-makefile-dep.=
+patch
+> @@ -0,0 +1,31 @@
+> +From 3db6782de1de7ca4f1bb9ee7652c4f2808e57539 Mon Sep 17 00:00:00 2001
+> +From: Jackie Huang <jackie.huang@windriver.com>
+> +Date: Thu, 10 Jan 2013 12:24:33 +0800
+> +Subject: [PATCH] fbset 2.1 fix makefile dep modes.tab.c
+> +
+> +Upstream-Status: Inappropriate [no upstream]
+> +
+> +fix the error in parallel build:
+> +make: *** No rule to make target `modes.tab.h', needed by `lex.yy.o'.  S=
+top.=20
+> +
+> +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> +---
+> + Makefile |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 61536c1..09183e5 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -15,7 +15,7 @@ fbset:		fbset.o modes.tab.o lex.yy.o
+> +=20
+> + fbset.o:	fbset.c fbset.h fb.h
+> + modes.tab.o:	modes.tab.c fbset.h fb.h
+> +-lex.yy.o:	lex.yy.c fbset.h modes.tab.h
+> ++lex.yy.o:	lex.yy.c fbset.h modes.tab.c
+> +=20
+> + lex.yy.c:	modes.l
+> + 		$(FLEX) modes.l
+> +--=20
+> +1.7.4.1
+> +
+> diff --git a/meta-oe/recipes-support/fbset/fbset_2.1.bb b/meta-oe/recipes=
+-support/fbset/fbset_2.1.bb
+> index aa78008..84f35ff 100644
+> --- a/meta-oe/recipes-support/fbset/fbset_2.1.bb
+> +++ b/meta-oe/recipes-support/fbset/fbset_2.1.bb
+> @@ -14,12 +14,12 @@ DEPENDS =3D "bison-native"
+>  PR =3D "r4"
 > =20
->  DEPENDS =3D "bison flex"
+>  SRC_URI =3D "http://ftp.debian.org/debian/pool/main/f/fbset/fbset_2.1.or=
+ig.tar.gz \
+> -           file://makefile.patch"
+> +           file://makefile.patch \
+> +           file://fbset-2.1-fix-makefile-dep.patch \
+> +"
 > =20
-> -SRC_URI =3D "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.=
-tar.gz \
-> -           https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.=
-gz \
-> +SRC_URI =3D "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.=
-tar.gz;name=3Dacpitests \
-> +           https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.=
-gz;name=3Dacpica \
->             file://0001-Fixup-aapits-build.patch \
->      "
-> -SRC_URI[md5sum] =3D "c72b61e092d2b25726dfff6e455116c9"
-> -SRC_URI[sha256sum] =3D "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba78=
-2f8ecf03971a3a2c"
-> +SRC_URI[acpitests.md5sum] =3D "c72b61e092d2b25726dfff6e455116c9"
-> +SRC_URI[acpitests.sha256sum] =3D "368f69296edef5138fd33affa2d50bdcdd1dfd=
-2f6919ba782f8ecf03971a3a2c"
-> +SRC_URI[acpica.md5sum] =3D "fcd4b7304f1bfabc7d4b9cfdecc6b0c6"
-> +SRC_URI[acpica.sha256sum] =3D "0d5bd32690ab77e21ab143ef25361c314a4ed13c3=
-3a5fb3ddd6f5559ab24ebc3"
+>  inherit autotools update-alternatives
 > =20
->  S =3D "${WORKDIR}/acpitests-unix-${PV}"
-> =20
+> -PARALLEL_MAKE =3D ""
+> -
+>  do_install() {
+>      install -d ${D}${sbindir} ${D}${datadir}/man/man8 ${D}${datadir}/man=
+/man5
+>      install -m 0755 ${WORKDIR}/${P}/fbset ${D}${sbindir}/fbset.real
 > --=20
-> 1.9.0
+> 1.7.9.5
 >=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MXXylufPoVaQ01lt
+--4p/IC6kBmCKpHx3O
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTs5kACgkQN1Ujt2V2gByE3ACcCaaEIKkRmW3lSgeruTEBNAdj
-GDIAoLVwSIp/hexO+2/KLF/V5qKaDqOM
-=eYfL
+iEYEARECAAYFAlNTs7gACgkQN1Ujt2V2gBz4owCgiXvpRPE+XoJMpn3MPAPRXc2p
+vD8AnRuJCxMKghm8zx7uj+53w4O5GsI6
+=AjRJ
 -----END PGP SIGNATURE-----
 
---MXXylufPoVaQ01lt--
+--4p/IC6kBmCKpHx3O--
