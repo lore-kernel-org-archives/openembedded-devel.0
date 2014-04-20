@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 7063D65DDC
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C65365DDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 11:45:00 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2915128eek.21
+	Sun, 20 Apr 2014 11:45:31 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id c13so2995862eek.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 04:45:01 -0700 (PDT)
+	Sun, 20 Apr 2014 04:45:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PUeRlt8f+qZdjulrPYy6FYOVpwt0iyaLENDUjWCjxeg=;
-	b=DNNA2Ws3mGysdAYQiNiPrZaoUqVaeFlLJ/WbNnULhzxcUYJoxGB5V0NOEntDw64Zj0
-	e1lWh38rzR6ktsZ9asn320SpMq/jIsz5NxdvZX2Owod3qad2PNF6BloiHhjcbjsZon+0
-	H8GeC9fs1X6Pxq8Y3MGQfTXy6YLmecgzQ3861TOSVf92i2/15WMb3ztlW6qbtKItG7LA
-	y6ir1XD1J9enDJBUdxOp2lg/+JH6F5CHpJCNXIvA27eRarb4B1SCpp99nwo1YUdkAMyJ
-	PRckagYFJ+c1pyIJ0MGcvMLsb+hZ59iw2nuAM4nE09tZKWE1nTE54Sbl6wQAflqr7ZhU
-	qiMA==
-X-Received: by 10.14.176.193 with SMTP id b41mr37979984eem.55.1397994301667;
-	Sun, 20 Apr 2014 04:45:01 -0700 (PDT)
+	bh=2v8ljgcP8tFlk3jxppUF7f89tOG/r2sYvrZFPSs7ZvU=;
+	b=hCezh0NnKDRCApQYfLobLb45PBWwWJtTmz5Jo75oxwo9GQZaeCnbXKi3brf7pJQenc
+	f5Y7sKxaHcDY0fzip8MvtWbw4/98FhK8Ud5Dm2WoiNCOJP4O/pYhGWNOs8O3rxcgAc1Q
+	Q4zPRrkHuD9ZatT1hoxlCp7BPDlDbnFJND6Zp57/r32nY3QJqxsZxqI50WY5kh6jpQcf
+	j/T/PtIviMunqpwztq3nTdiz/vV1edgVGK1EegstIB866/JkF6Bg047bTS7nMm6WFaL6
+	R67aGB8d7MgesnNkbruZCOYCnNRAmIOxf9Ap2wczoW/j0XnOeGIfZcuMFhMxlb3jhKwj
+	iedw==
+X-Received: by 10.14.179.193 with SMTP id h41mr38084815eem.27.1397994331975;
+	Sun, 20 Apr 2014 04:45:31 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	cb5sm93933250eeb.18.2014.04.20.04.45.00 for <multiple recipients>
+	t50sm93939191eev.28.2014.04.20.04.45.30
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 04:45:00 -0700 (PDT)
-Date: Sun, 20 Apr 2014 13:45:05 +0200
+	Sun, 20 Apr 2014 04:45:30 -0700 (PDT)
+Date: Sun, 20 Apr 2014 13:45:35 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Message-ID: <20140420114505.GY2486@jama>
-References: <1396244397-4124-1-git-send-email-trevor.woerner@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140420114535.GZ2486@jama>
+References: <1396651675-32469-1-git-send-email-stephen.arnold42@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1396244397-4124-1-git-send-email-trevor.woerner@linaro.org>
+In-Reply-To: <1396651675-32469-1-git-send-email-stephen.arnold42@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org, patches@linaro.org
-Subject: Re: [meta-oe][PATCH] utouch-evemu: force serial build
+Subject: Re: [meta-oe][PATCH] gpm: sets D equal to DESTDIR instead of ROOT in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,59 +46,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 11:45:03 -0000
-X-Groupsio-MsgNum: 49332
+X-List-Received-Date: Sun, 20 Apr 2014 11:45:35 -0000
+X-Groupsio-MsgNum: 49333
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DHs1QIiRxKbdokJu"
+	protocol="application/pgp-signature"; boundary="t+hlxQ2APDzOSz17"
 Content-Disposition: inline
 
---DHs1QIiRxKbdokJu
+--t+hlxQ2APDzOSz17
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 31, 2014 at 01:39:57AM -0400, Trevor Woerner wrote:
-> My build always fails if allowed to build in parallel:
+On Fri, Apr 04, 2014 at 03:47:55PM -0700, Stephen Arnold wrote:
+> This corrects a gpm install failure due to ROOT being used instead of
+> DESTDIR, resulting in DESTDIR being undefined.
+
+Merged, thanks!
+
 >=20
->     | make[2]: *** No rule to make target `evemu-record.1', needed by `al=
-l-am'.  Stop.
-
-I'll take this as temporary solution, but please try to fix the Makefile
-and remove PARALLEL_MAKE.
-
-> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+> Upstream-Status: Inappropriate (distribution/packaging fix)
+>=20
+> Signed-off-by: Stephen Arnold <stephen.arnold42@gmail.com>
 > ---
->  meta-oe/recipes-support/utouch/utouch-evemu_git.bb | 2 ++
->  1 file changed, 2 insertions(+)
+>  meta-oe/recipes-support/gpm/gpm_1.99.7.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb b/meta-oe=
-/recipes-support/utouch/utouch-evemu_git.bb
-> index 0efe79e..1dd5a86 100644
-> --- a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
-> +++ b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
-> @@ -13,3 +13,5 @@ SRCREV =3D "9752b50e922572e4cd214ac45ed95e4ee410fe24"
->  PV =3D "1.0.5+git${SRCPV}"
+> diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-=
+support/gpm/gpm_1.99.7.bb
+> index e35e50e..a30a891 100644
+> --- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+> +++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+> @@ -40,7 +40,7 @@ CFLAGS +=3D "-Wno-extra -Wno-error=3Dunused-but-set-par=
+ameter -Wno-error=3Dunused-but-
+>  CFLAGS +=3D "-Wno-error=3Dint-to-pointer-cast -Wno-error"
 > =20
->  S =3D "${WORKDIR}/git/"
-> +
-> +PARALLEL_MAKE =3D ""
+>  do_install () {
+> -    oe_runmake 'ROOT=3D${D}' install
+> +    oe_runmake 'DESTDIR=3D${D}' install
+>      install -m 0644 src/headers/gpm.h ${D}${includedir}
+>      install -d ${D}/${sysconfdir}/init.d
+>      install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/gpm
 > --=20
-> 1.9.0
+> 1.9.1
 >=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---DHs1QIiRxKbdokJu
+--t+hlxQ2APDzOSz17
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTs0EACgkQN1Ujt2V2gBzaTACePTTfjM7AX/3lA5xxr9AUjacg
-H1MAn0QxMbLp0TToNuKApYrfLAbJKWmV
-=bPnL
+iEYEARECAAYFAlNTs18ACgkQN1Ujt2V2gByXzACfdQPT8Sc9tRAa4Oe+zy37cLSc
+gOIAoIIE/zA1uSqYDJ3BkqKsvOqFSOVr
+=F8KW
 -----END PGP SIGNATURE-----
 
---DHs1QIiRxKbdokJu--
+--t+hlxQ2APDzOSz17--
