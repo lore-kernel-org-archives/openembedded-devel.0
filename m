@@ -1,35 +1,35 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 08EA165D92
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F7DA60438
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 13:54:42 +0000 (UTC)
-Received: by mail-pd0-f172.google.com with SMTP id p10so2880904pdj.3
+	Sun, 20 Apr 2014 14:04:06 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id e53so3008820eek.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 06:54:43 -0700 (PDT)
+	Sun, 20 Apr 2014 07:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ZbcOlKNLS2v/e09uulp5kGOE+P8BHW9ZjyucgUvsf5o=;
-	b=SJfFfKevjFuq37Dnve+OoBMsGJGb+PyayUh1x1DTUXEmpIL3F6CImq3uPElL7E/8vB
-	p9wS711H0cMLMQBi0O2kSDDh2keWErjOJ+diNPkURfBzroxolB5btlwWSAbT4z4oNpG5
-	VMKkdp/QNtV/lnESYwHw4JtO4+CMR9W1aEsnL8RtK/VvWlBQJRKGtqC95W8nrVv30Bnj
-	0zq1LX4NGgXACDeunW7s4Qt9FCf1sYtjeMyesE0djokTmTZA0ef5vvMDmgO6adcVmw2M
-	oqUkULtdpFhvAdWcDBJO4tWzSoAe2sdRDqN/vFdcmIJ2JzLLu0pOHLg1NKEZoeTyBdJ5
-	ZhZQ==
-X-Received: by 10.68.130.229 with SMTP id oh5mr2676599pbb.121.1398002083915;
-	Sun, 20 Apr 2014 06:54:43 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=K4FYNn42u17bmPc2dMBeakwM7YbM2Gu4gjY9nk+zDio=;
+	b=XsGfhyMHakiQhFFR+VXTyUBrm8GC5iF4b7eeZg3ZEJdVWpBRggw6Y1ANZHxPVbiNV/
+	INzZ5X5/kTGTxGz1AnCZWMwq4wVX+XnC4XVZLNGkUSwpjt5RdwZsA0aYlhhUCRpMPfdE
+	AZ78mR/HNpqJ+xwd8aW8HJGsxKIEYoDlPolwKsFqzS1oRIr8MYZR/lyKGLVlO4tgueta
+	PJwF/VwY0NbSLqY+IJ8/xLsjNagq22gQqzuBuIclWtEwoxyUJonz4PdXMwxba4nN7Ava
+	oqYLZp8L+VVh0HQcqMPEa9K++3evbp0Tvg2R0qNAjcL+wK6EW8FbKIjPA4B48JpVFxdL
+	WzvA==
+X-Received: by 10.14.215.9 with SMTP id d9mr3692348eep.64.1398002647003;
+	Sun, 20 Apr 2014 07:04:07 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	vm3sm43182247pbc.45.2014.04.20.06.54.42 for <multiple recipients>
+	y7sm94872770eev.5.2014.04.20.07.04.05 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 06:54:43 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Sun, 20 Apr 2014 07:04:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Apr 2014 00:01:23 +1000
-Message-Id: <1398002483-26092-1-git-send-email-net147@gmail.com>
+Date: Sun, 20 Apr 2014 16:04:09 +0200
+Message-Id: <1398002649-16844-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][PATCH v2] qtlocation: add packageconfig for geoclue and gypsy
+In-Reply-To: <20140420082402.GK2486@jama>
+References: <20140420082402.GK2486@jama>
+Subject: [meta-oe][PATCH] gd: fix --with-freetype option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 13:54:45 -0000
+X-List-Received-Date: Sun, 20 Apr 2014 14:04:15 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+* 'yes' value means using pkg-config to find freetype, other values are using
+  FREETYPE_CONFIG=/bin/freetype-config and freetype-config isn't
+  in STAGING_LIBDIR but in STAGING_BINDIR/crossscripts/freetype-config
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtlocation.inc | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ meta-oe/recipes-support/gd/gd_2.1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtlocation.inc b/recipes-qt/qt5/qtlocation.inc
-index 70a4375..41f2d19 100644
---- a/recipes-qt/qt5/qtlocation.inc
-+++ b/recipes-qt/qt5/qtlocation.inc
-@@ -2,3 +2,19 @@ require qt5.inc
+diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+index 24f6f34..0f14130 100644
+--- a/meta-oe/recipes-support/gd/gd_2.1.0.bb
++++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+@@ -25,7 +25,7 @@ inherit autotools binconfig gettext
  
- DEPENDS += "qtbase qt3d"
- # qtsystems qtmultimedia
-+
-+PACKAGECONFIG ??= ""
-+# older geoclue 0.x is needed
-+PACKAGECONFIG[geoclue] = "OE_GEOCLUE_ENABLED,,gconf geoclue"
-+PACKAGECONFIG[gypsy] = "OE_GYPSY_ENABLED,,gconf gypsy"
-+
-+do_configure_prepend() {
-+    # disable geoclue tests if it isn't enabled by PACKAGECONFIG
-+    sed -i -e 's/^\(qtCompileTest(geoclue)\)/OE_GEOCLUE_ENABLED:\1/' ${S}/qtlocation.pro
-+    sed -i -e 's/^\(qtCompileTest(geoclue-satellite)\)/OE_GEOCLUE_ENABLED:\1/' ${S}/qtlocation.pro
-+    # disable gypsy test if it isn't enabled by PACKAGECONFIG
-+    sed -i -e 's/^\(qtCompileTest(gypsy)\)/OE_GYPSY_ENABLED:\1/' ${S}/qtlocation.pro
-+}
-+
-+EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'geoclue', 'CONFIG+=OE_GEOCLUE_ENABLED', '', d)}"
-+EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gypsy', 'CONFIG+=OE_GYPSY_ENABLED', '', d)}"
+ EXTRA_OECONF += " --disable-rpath \
+                   --with-jpeg=${STAGING_LIBDIR}/.. \
+-                  --with-freetype=${STAGING_LIBDIR}/.. \
++                  --with-freetype=yes \
+                   --without-fontconfig \
+                   --without-xpm \
+                   --without-x"
 -- 
 1.9.1
 
