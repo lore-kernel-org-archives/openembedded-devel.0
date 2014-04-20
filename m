@@ -1,35 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A97465D93
+Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 20725602DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 16:47:59 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id d17so2496937eek.4
+	Sun, 20 Apr 2014 08:23:58 +0000 (UTC)
+Received: by mail-ee0-f48.google.com with SMTP id b57so2814502eek.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Apr 2014 09:48:00 -0700 (PDT)
+	Sun, 20 Apr 2014 01:23:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=u+H9KDdvYPkR1s/X248HUPPSMmBdMzIfK09a+/ymFgo=;
-	b=R23OBSrETlf6nNmQmFZZna1tYKz1KrDlF9qTrawxtH0z1ggF5IyqtxvJhg4yZVejC1
-	9bCs1QrUPHJOKdosB29ISWirL1QNuT2qBiRLFtd38WQUuxTJucOrrp2dmWY7yV+jUypA
-	lmsrT1c4mlYKVHgdXNhzVgEbHy/KyHYHq/138dSLO4fVETkIFRaRoQ92tI76evR5WAGw
-	m7T6jmvDx+aguLvVWkVrn9HAWkYkG0796wrnrnI8aARQZI10QS2jkcqICXdj7Y0ICDXa
-	f4F4JWqL60B1xm/z81EJ79wHbBtMer96ehckKbfnQhiorxnnTJusTRHd8lID1k5lm6CZ
-	kYHQ==
-X-Received: by 10.15.10.135 with SMTP id g7mr3098577eet.72.1397926080737;
-	Sat, 19 Apr 2014 09:48:00 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=sYpyeuNRkf6NY+msuGSOROCYsP/Xm5orXrJTFTzQW3I=;
+	b=XZT+oLRgl3zrFXXuGIsPJdW2OSt+D9jBTWA2dtj+499zLjn/PNM8RDMxrF9laYnEBB
+	/FTqCu3CgBw66GrXIQfRICIVL8E5PVb/jN66Z0jIFzql8uEJTLWXiPYVrbTjzRIsBpWg
+	+GV0h6s39M+dq4DJ4HJZa3hKKHVYfEPUrYB9+s+HykHIPR+ppLveJg1LcofJa1r7yJBb
+	mQJhnVcoV7ShTOjIZ5yQaFcOGNFzwMkKCZy/MfqakPAmD0bh2ftKF5D4KKnaIpembs3C
+	CLKpVbrN1O/iwOuTrgkQmff0LOqbNCaqs4d1TNbInQ3X6LFkoYG9fKU1Y1qS1OVCQI1w
+	K65Q==
+X-Received: by 10.14.47.133 with SMTP id t5mr552197eeb.67.1397982238910;
+	Sun, 20 Apr 2014 01:23:58 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	m44sm87029435eep.14.2014.04.19.09.47.59 for <multiple recipients>
+	m42sm92574265eex.21.2014.04.20.01.23.57
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 19 Apr 2014 09:47:59 -0700 (PDT)
+	Sun, 20 Apr 2014 01:23:57 -0700 (PDT)
+Date: Sun, 20 Apr 2014 10:24:02 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Apr 2014 18:47:50 +0200
-Message-Id: <1397926070-7453-5-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1397926070-7453-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1397926070-7453-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] mousepad: Add xfce4-dev-tools-native dependency
+Message-ID: <20140420082402.GK2486@jama>
+References: <cover.1397545082.git.jackie.huang@windriver.com>
+	<00038b50f96f259beae9e06813ec54085dd9fa17.1397545082.git.jackie.huang@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <00038b50f96f259beae9e06813ec54085dd9fa17.1397545082.git.jackie.huang@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH 1/3] gd: update to version 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +47,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Apr 2014 16:48:00 -0000
+X-List-Received-Date: Sun, 20 Apr 2014 08:24:01 -0000
+X-Groupsio-MsgNum: 49292
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="AYsPlKobQGgtCvjI"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+--AYsPlKobQGgtCvjI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
-index 8e9ce59..4947531 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb
-@@ -3,9 +3,10 @@ SECTION = "x11/application"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--# dbus to fix mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
- # intltool to provide intltool.m4 with AC_PROG_INTLTOOL
--DEPENDS = "gtk+ dbus-glib gtksourceview2 dbus intltool-native"
-+# xfce4-dev-tools-native for XDT_I18N macro and more importantly XDT_CHECK_OPTIONAL_PACKAGE
-+# which fixes mousepad/Makefile.am:72: error: HAVE_DBUS does not appear in AM_CONDITIONAL
-+DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-native"
- 
- inherit xfce-app
- 
--- 
-1.9.1
+On Tue, Apr 15, 2014 at 03:01:24PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Changes:
+> - Add DESCRIPTION and HOMEPAGE
+> - libgd.org is down, use bitbucket.org instead and also
+>   remove the MIRROR for it.
+> - Remove the unnecessary specified dir for --with-png.
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.bb}     |   22 ++++++++++++=
+--------
+>  1 file changed, 13 insertions(+), 9 deletions(-)
+>  rename meta-oe/recipes-support/gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.=
+bb} (43%)
+>=20
+> diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb b/meta-oe/=
+recipes-support/gd/gd_2.1.0.bb
+> similarity index 43%
+> rename from meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+> rename to meta-oe/recipes-support/gd/gd_2.1.0.bb
+> index 957c4eb..1b78b9b 100644
+> --- a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
+> +++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+> @@ -1,22 +1,26 @@
+> +SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
+> +DESCRIPTION =3D "The gd graphics library allows your code to quickly dra=
+w images \
+> +complete with lines, arcs, text, multiple colors, cut and paste from oth=
+er \
+> +images, and flood fills, and to write out the result as a PNG or JPEG fi=
+le. \
+> +This is particularly useful in Web applications, where PNG and JPEG are =
+two \
+> +of the formats accepted for inline images by most browsers. Note that gd=
+ is not \
+> +a paint program."
+> +HOMEPAGE =3D "http://libgd.bitbucket.org/"
+>  SECTION =3D "libs"
+> +
+>  LICENSE =3D "GD"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc97638cafd3581eb87abd37332137=
+669"
+> -SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
+>  DEPENDS =3D "freetype libpng jpeg zlib"
+> -PR =3D "r5"
+> -
+> -SRC_URI =3D "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz"
+> -SRC_URI[md5sum] =3D "39ac48e6d5e0012a3bd2248a0102f209"
+> -SRC_URI[sha256sum] =3D "dd7c1795271221b9237769b96b8cec7fbdc5db7b8954d864=
+ead51fc1296a6ac8"
+> =20
+> -MIRRORS +=3D "http://www.libgd.org/releases/ http://fossies.org/unix/www=
+/ \n"
+> +SRC_URI =3D "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.=
+tar.bz2"
+> +SRC_URI[md5sum] =3D "5a1d5bab3a4a41d9f111bcceee4ad25b"
+> +SRC_URI[sha256sum] =3D "f3e1bc472bd81ee976a739436659fe752a14727a964c6453=
+0fde68531ddeee91"
+> =20
+> -S =3D "${WORKDIR}/gd-2.0.36RC1"
+> +S =3D "${WORKDIR}/libgd-${PV}"
+> =20
+>  inherit autotools binconfig gettext
+> =20
+>  EXTRA_OECONF +=3D " --with-zlib=3D${STAGING_LIBDIR}/.. \
+> -                  --with-png=3D${STAGING_LIBDIR}/.. \
+>                    --with-jpeg=3D${STAGING_LIBDIR}/.. \
+>                    --with-freetype \
 
+http://patchwork.openembedded.org/patch/69991/ adds
+--with-freetype=3D${STAGING_LIBDIR}/.. \
 
+and together with this it fails with:
+| configure:13838: error: freetype support requested, but not found:
+/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/sysroots/qemuarm/usr=
+/lib/../bin/freetype-config
+
+can you please check it?
+
+>                    --without-fontconfig \
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--AYsPlKobQGgtCvjI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNThCIACgkQN1Ujt2V2gBxc4ACff2EuaGZpVD/YbOeVAc6KSSf+
+Lk4AoI+dSzTF99lDJGxlcjqnaLUNf3Hc
+=z+5M
+-----END PGP SIGNATURE-----
+
+--AYsPlKobQGgtCvjI--
