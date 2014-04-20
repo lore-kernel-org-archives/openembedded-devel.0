@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id AB15E65D96
+Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F4CB65D10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 10:34:37 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2881416eek.21
+	Sun, 20 Apr 2014 11:16:31 +0000 (UTC)
+Received: by mail-ee0-f43.google.com with SMTP id e53so2929877eek.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 03:34:38 -0700 (PDT)
+	Sun, 20 Apr 2014 04:16:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=F6rzcWybA5mrIbk/SEuweqtlNs1pLeJR3ggK/1Efzec=;
-	b=adz6rpz2xe0aohIUMnojDqG9GoeduneCVH8eSawwoNUIxM9fO55GOAVmn3W4XX+ZTw
-	dHUZmlG9KFn10/n4d8ppjFBV7owgKEw9DiJ55bS4JKc4yOlc8hcAW8e5MOj806mrWIa8
-	qKtUA425qqYXpyu3mIwGFtoYPMLWHjY/2LUZEzQa3OR0tZCxgBr7cbGQwAVgZNIJ6N6C
-	CS5A7DzQuF4t0QKFTCg3fEsfC64OF6t85OPAPrKQRfy1dnwih3LFo/y1d9u2iChca4pt
-	jdLWXVS2oxuxMLdZJMesErUi4hqdCxpqOe6lRC/4tawY7bAbqkCOSNFf56DOV0JIbjHW
-	ychQ==
-X-Received: by 10.15.111.206 with SMTP id cj54mr37691352eeb.8.1397990078270;
-	Sun, 20 Apr 2014 03:34:38 -0700 (PDT)
+	bh=ptUaRIWNJiKfnzuhBDCldDzgN9aPmutlHNe9MMMahiw=;
+	b=Lj+uhc5UKudnF0xpSe1N/bgBNp89IIjEc13NWCWMMW51Ag2FuEPMxD5By52xA4E28W
+	P3X1ag68c0NT9o1CiMQkMG/FWzOo+qAk6LdWjNKqxhbcsPGYE521C9o85u2xuHEPU3GE
+	ZIpL1b06aLP0OfYxmDQjrXpTUutAO6ZdYR8VkhovBauueOuuKHkiLw4Q4AxCLaunjcH/
+	m2aYLIBOYxA0gyltqrtTJKKelduXid8vX2PPSjGtdWKwEtkgb7qaqqgd+5qMDYmSifwz
+	7h5CWX8yrgkwp9vJi281nrK2FJmTlKWTSquqn6W/z2TUi0wp6MJ+q/ydXWjermzgOriM
+	05Xw==
+X-Received: by 10.14.218.193 with SMTP id k41mr37936622eep.16.1397992592009;
+	Sun, 20 Apr 2014 04:16:32 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	n41sm93450479eeg.4.2014.04.20.03.34.36
-	for <openembedded-devel@lists.openembedded.org>
+	q41sm93739833eez.7.2014.04.20.04.16.30 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Apr 2014 03:34:37 -0700 (PDT)
-Date: Sun, 20 Apr 2014 12:34:41 +0200
+	Sun, 20 Apr 2014 04:16:30 -0700 (PDT)
+Date: Sun, 20 Apr 2014 13:16:35 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140420103441.GL2486@jama>
-References: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
+Message-ID: <20140420111635.GM2486@jama>
+References: <1397066253-13843-1-git-send-email-trevor.woerner@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
+In-Reply-To: <1397066253-13843-1-git-send-email-trevor.woerner@linaro.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: Fix PACKAGE_GROUP deprecation warning
+Cc: patches@linaro.org
+Subject: Re: [meta-oe][PATCH v2] licenses: add The Open Group Public License
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,50 +46,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 10:34:41 -0000
-X-Groupsio-MsgNum: 49319
+X-List-Received-Date: Sun, 20 Apr 2014 11:16:34 -0000
+X-Groupsio-MsgNum: 49320
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BXhH8iG0/4JcYZU2"
+	protocol="application/pgp-signature"; boundary="CoKeqzoheR24UlpS"
 Content-Disposition: inline
 
---BXhH8iG0/4JcYZU2
+--CoKeqzoheR24UlpS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 15, 2014 at 07:12:45PM +0200, Jacob Kroon wrote:
-> Fixes the following warning:
+On Wed, Apr 09, 2014 at 01:57:33PM -0400, Trevor Woerner wrote:
+> This is the license used for the openmotif library.
+
+Merged, thanks!
+
 >=20
-> WARNING: PACKAGE_GROUP is deprecated, please use FEATURE_PACKAGES instead
-
-It's correct patch, but I'm a bit tempted to take this patch after
-branching daisy, because some people are using latest meta-qt5 with
-older oe-core releases and this undoing this change is easy to miss
-(unlike e.g. cmake .bbappends which fail when not updated for correct
-oe-core releases).
-
-What do you think?
-
-Alternatively we can add wiki page about using latest meta-qt5 with
-older oe-core and just document this there.
-
-> Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
 > ---
->  classes/populate_sdk_qt5.bbclass | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-oe/licenses/OGPL | 104 ++++++++++++++++++++++++++++++++++++++++++++=
+++++++
+>  1 file changed, 104 insertions(+)
+>  create mode 100644 meta-oe/licenses/OGPL
 >=20
-> diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.=
-bbclass
-> index c921983..7b31bbb 100644
-> --- a/classes/populate_sdk_qt5.bbclass
-> +++ b/classes/populate_sdk_qt5.bbclass
-> @@ -53,4 +53,4 @@ toolchain_create_sdk_env_script_append () {
->      echo 'HostBinaries =3D ${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}' >=
-> $qtconf
->  }
-> =20
-> -PACKAGE_GROUP_qtcreator-debug =3D "packagegroup-qt5-qtcreator-debug"
-> +FEATURE_PACKAGES_qtcreator-debug =3D "packagegroup-qt5-qtcreator-debug"
+> diff --git a/meta-oe/licenses/OGPL b/meta-oe/licenses/OGPL
+> new file mode 100644
+> index 0000000..bce3b71
+> --- /dev/null
+> +++ b/meta-oe/licenses/OGPL
+> @@ -0,0 +1,104 @@
+> +$TOG: COPYRIGHT.MOTIF /main/5 2000/04/10 12:00:00 $
+> +
+> +                            MOTIF 2.1.30
+> +                             Source Code
+> +                        MASTER COPYRIGHT NOTICE
+> +
+> +(c) Copyright 1989 - 1994, 1996 - 1999 The Open Group
+> +(c) Copyright 1987 - 1999 Hewlett-Packard Company
+> +(c) Copyright 1987 - 1999 Digital Equipment Corporation, Maynard, Mass.
+> +(c) Copyright 1988 Massachusetts Institute of Technology
+> +(c) Copyright 1988 Microsoft Corporation
+> +(c) Copyright 1990 Motorola Inc.
+> +(c) Copyright 1989 - 1994 Groupe Bull
+> +(c) Copyright 1991 Joseph Friedman
+> +(c) Copyright 1995 - 1999 International Business Machines Corp.
+> +(c) Copyright 1995 - 1999 Sun Microsystems, Inc.
+> +(c) Copyright 1995 - 1999 Santa Cruz Organization, Inc.
+> +(c) Copyright 1995, 1996 Fujitsu Limited
+> +(c) Copyright 1995, 1996 Hitachi, Ltd.
+> +
+> +
+> +ALL RIGHTS RESERVED
+> +
+> +This software is furnished under a license and may be used
+> +and copied only in accordance with the terms of such license and
+> +with the inclusion of this copyright notice. No title to and ownership
+> +of the software is hereby transferred.
+> +
+> +This software is subject to an open license. It may only be
+> +used on, with or for operating systems which are themselves open
+> +source systems. You must contact The Open Group for a license allowing
+> +distribution and sublicensing of this software on, with, or for
+> +operating systems which are not Open Source programs.
+> +
+> +See http://www.opengroup.org/openmotif/license for full
+> +details of the license agreement. Any use, reproduction, or
+> +distribution of the program constitutes recipient's acceptance of
+> +this agreement.
+> +
+> +THE OPEN GROUP AND ITS THIRD PARTY SUPPLIERS, ASSUME NO RESPONSIBILITY
+> +FOR THE USE OR INABILITY TO USE ANY OF ITS SOFTWARE.
+> +
+> +EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE PROGRAM IS
+> +PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+> +KIND, EITHER EXPRESS OR IMPLIED INCLUDING, WITHOUT LIMITATION, ANY
+> +WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY
+> +OR FITNESS FOR A PARTICULAR PURPOSE.
+> +
+> +EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, NEITHER RECIPIENT
+> +NOR ANY CONTRIBUTORS SHALL HAVE ANY LIABILITY FOR ANY DIRECT,
+> +INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> +DAMAGES (INCLUDING WITHOUT LIMITATION LOST PROFITS), HOWEVER CAUSED
+> +AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+> +LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+> +ANY WAY OUT OF THE USE OR DISTRIBUTION OF THE PROGRAM OR THE
+> +EXERCISE OF ANY RIGHTS GRANTED HEREUNDER, EVEN IF ADVISED OF THE
+> +POSSIBILITY OF SUCH DAMAGES.
+> +
+> +The information in this software is subject to change without
+> +notice and should not be construed as a commitment by The Open Group
+> +or its third party suppliers.
+> +
+> +Notice: Notwithstanding any other lease or license that may pertain to,
+> +or accompany the delivery of, this computer software, the rights of the
+> +Government regarding its use, reproduction and disclosure are as set
+> +forth in Section 52.227-19 of the FARS Computer Software-Restricted
+> +Rights clause.
+> +
+> +(c) Copyright 1990, 1991, 1992, 1993, 1994, 1996 Open Software
+> +Foundation, Inc.
+> +(c) Copyright 1996, 1997, 1998, 1999, 2000 The Open Group.
+> +Unpublished - all rights reserved under the Copyright laws of the United
+> +States.
+> +
+> +RESTRICTED RIGHTS NOTICE: Use, duplication, or disclosure by the
+> +Government is subject to the restrictions as set forth in subparagraph
+> +(c)(1)(ii) of the Rights in Technical Data and Computer Software clause
+> +at DFARS 52.227-7013.
+> +
+> +The Open Group LLC
+> +Apex Plaza, Forbury Road
+> +Reading, Berkshire,
+> +RG1 1AX, UK.
+> +
+> +RESTRICTED RIGHTS LEGEND: This computer software is submitted with
+> +"restricted rights." Use, duplication or disclosure is subject to the
+> +restrictions as set forth in NASA FAR SUP 18-52.227-79 (April 1985)
+> +"Commercial Computer Software- Restricted Rights (April 1985)." The
+> +Open Group, Apex Plaza, Forbury Road, Reading, Berkshire, RG1 1AX, UK.
+> +If the contract contains the Clause at 18-52.227-74 "Rights in Data
+> +General" then the "Alternate III" clause applies.
+> +
+> +(c) Copyright 1990, 1991, 1992, 1993, 1994, 1996 Open Software
+> +Foundation,Inc. ALL RIGHTS RESERVED
+> +(c) Copyright 1996, 1997, 1998, 1999, 2000 The Open Group. ALL RIGHTS
+> +RESERVED
+> +
+> +The Open Group, Open Software Foundation, OSF, OSF/Motif, and Motif are
+> +Trademarks of The Open Group
+> +DEC and DIGITAL are registered trademarks of Digital Equipment
+> +Corporation
+> +HP is a trademark of Hewlett-Packard Company
+> +X Window System is a trademark of the Massachusetts Institute of
+> +Technology
 > --=20
 > 1.9.0
 >=20
@@ -102,16 +192,16 @@ bbclass
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---BXhH8iG0/4JcYZU2
+--CoKeqzoheR24UlpS
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNTosEACgkQN1Ujt2V2gBx22ACeL9gIs8LyqytskUEt8vqrsV0V
-uo4AnApMLc/CyPHHT4YuFrpLX/9g38Ql
-=IA1U
+iEYEARECAAYFAlNTrJMACgkQN1Ujt2V2gBxdmwCfZqRm2It2VLFRqSKQ8t95A+Di
+jocAn1arVIcgpinGNOy3YxIKAmWnx/IC
+=Vxuh
 -----END PGP SIGNATURE-----
 
---BXhH8iG0/4JcYZU2--
+--CoKeqzoheR24UlpS--
