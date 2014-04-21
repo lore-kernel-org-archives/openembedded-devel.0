@@ -1,28 +1,37 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F5A565D25
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 03:13:36 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L3DY44024136
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 20 Apr 2014 20:13:35 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
-	Sun, 20 Apr 2014 20:13:33 -0700
-Message-ID: <53548CDA.4000804@windriver.com>
-Date: Mon, 21 Apr 2014 11:13:30 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id DF8A165D2F;
+	Mon, 21 Apr 2014 03:14:05 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id rd18so3506864iec.1
+	for <multiple recipients>; Sun, 20 Apr 2014 20:14:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=z8jU8Lsp7g2QSQTShy25c6v0Zbj2j4S4eRD22DDfn5o=;
+	b=C8tpLZjKlTJOwjEt+Rs4y2vIcyBi1sX4cv3RCorAUuBk5JdK2/jhajps7c9Mr8JfFI
+	HxA5FDvUy/bZ3y0cFTO29dZJMEvmxNqI1PqVcllbdurXv5rAcO9SIe4uPMUk0SCr3fAT
+	/ycgswApKYqeEnp3AgUiztOs/t8rKqcCc5wyONW4Mvw4ETSl1JvmKIrScHIY6pl2Q53t
+	7b38HP+TgvQ6vSmq7XVx0pOsjI1qK+copKxraxdUYcBufjZJ7D/n3zBfG8I3AEBwR+yz
+	u6KMAe1mdb+z9SJtjZvnmuvLR70q3KB1QGyYVt329KYigqWDfnxNxFBbkWlCLN9Q28RJ
+	Mcdw==
 MIME-Version: 1.0
-To: Tim Orling <ticotimo@gmail.com>
-References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>	<53547FB6.5040609@windriver.com>	<CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
-	<53548B00.5000700@windriver.com>
-In-Reply-To: <53548B00.5000700@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
+X-Received: by 10.50.30.167 with SMTP id t7mr19359386igh.17.1398050046626;
+	Sun, 20 Apr 2014 20:14:06 -0700 (PDT)
+Received: by 10.50.229.14 with HTTP; Sun, 20 Apr 2014 20:14:06 -0700 (PDT)
+Received: by 10.50.229.14 with HTTP; Sun, 20 Apr 2014 20:14:06 -0700 (PDT)
+In-Reply-To: <CAPbeDCkwiD0ZKAYS=AAkUEQnZvVNvFjNAgqtmJ8mcW_HXSV_DA@mail.gmail.com>
+References: <20140418183632.GG2486@jama>
+	<CAPbeDCnP_Qr1fUS9MAFZ4mLCRcoNJ=M1n8Umx-8m6m0b8Sxm0w@mail.gmail.com>
+	<CAPbeDCkwiD0ZKAYS=AAkUEQnZvVNvFjNAgqtmJ8mcW_HXSV_DA@mail.gmail.com>
+Date: Sun, 20 Apr 2014 20:14:06 -0700
+Message-ID: <CAMKF1soHe6Yt1yzdWJC-hfy+o5dLPMeKmLHVj6nTXPadXF2Ntg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, test-dependencies 2014-04-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,77 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 03:13:39 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Apr 2014 03:14:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 04/21/2014 11:05 AM, Hongxu Jia wrote:
-> On 04/21/2014 11:01 AM, Tim Orling wrote:
->> On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia 
->> <hongxu.jia@windriver.com>wrote:
->>
->>> On 04/21/2014 04:19 AM, Tim Orling wrote:
->>>
->>>> (1) I am thinking about dropping this patch. perl-native provides
->>>> Module::Metadata 1.00004, so if subsequent packages are being
->>>> cross-compiled I have not yet proven there is a need for the updated
->>>> v1.000019 provided here.
->>>>
->>>> (2) The question is, if one wanted to build subsequent packages 
->>>> in-situ,
->>>> how to provide Module::Metadata 1.00004 on a target system, since 
->>>> it is
->>>> only provided by perl-native?
->>>>
->>> It is also provided by perl, for target.
->>>
->>> //Hongxu
->>>
->>>
->> I am not seeing it. Am I missing something?
+On Apr 20, 2014 10:16 AM, "Jacob Kroon" <jacob.kroon@gmail.com> wrote:
 >
+> On Sat, Apr 19, 2014 at 1:03 PM, Jacob Kroon <jacob.kroon@gmail.com>
+wrote:
 >
-> Hi Tim,
+> > On Fri, Apr 18, 2014 at 8:36 PM, Martin Jansa <martin.jansa@gmail.com
+>wrote:
+> >
+> >> And more importantly floating dependencies, reply here
+> >> when you start working on some of these.
+> >>
+> >> Found differences:
+> >> ccid/ccid/latest lost dependency on  flex
+> >> console-tools/console-tools/latest lost dependency on  flex
+> >>
+> >
+> > I'll have a go at resolving the console-tools/flex floating dep.
+> >
 >
-> I am afraid Module::Metadataj is not in perl by default, you need
-> to tweak poky/meta/recipes-devtools/perl/perl_5.14.3.bb, to create
-> a new package for Module::Metadata, you could reference what
-> 'perl-module-cpan' did, such as:
-> ...
-> PACKAGES += "perl-module-metadata"
-> FILES_perl-module-metadata += ">>the files you need<<"
-> ...
+> If I understand things correctly: libfl.so from flex provides default
+> implementations for yylex() and yywrap(). console-tools/loadkeys provides
+> its own implementations for these, so linking with libfl.so is not
+> necessary.
+>
+> In order to remove the floating dependency I can patch to either remove
+> @LEXLIB@ from LDADD, or I can pass "-Wl,--as-needed" in LDFLAGS, both ways
+> seems to get rid of the dependency on libfl.
+>
+> Any preferred way of handling this ?
 
-You also need tweak do_install, to install Metadata.pm from ${S}
-to ${D}, the default do_install did not do that.
-
-//Hongxu
-
+remove LEXLIB from LDFLAGS
 >
-> And add 'perl-module-metadata' to your recipes's RDEPENDS.
->
-> //Hongxu
->
->>
->> root@beaglebone:~# perl -mModule::Metadata
->>
->> Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
->> /usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
->> /usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
->> /usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
->> /usr/lib/perl/5.14.3 .).
->>
->> BEGIN failed--compilation aborted.
->>
->>>> --Tim
->>>> -- 
->>>>
->>> -- 
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->
-
+> /Jacob
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
