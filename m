@@ -1,38 +1,26 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
-	[209.85.217.170])
-	by mail.openembedded.org (Postfix) with ESMTP id E8CDB65D23
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9ACCB65D1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 03:01:42 +0000 (UTC)
-Received: by mail-lb0-f170.google.com with SMTP id s7so2871331lbd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 20:01:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=kakJJbmV14/wrhZosUVyVsMsDvJ+mEJA7hgKg3jKNOM=;
-	b=PxVl5/VYSpcFOJk5xhw3XFzK2NgsdcfuFTEFr0F2mf3tjVPAI/KAbBoK+of9bGzZBL
-	jAMYIksZ2nd7LYqiZDroy5Zrg2tufRyi+P1tQP8h/5+6yt2rs0mdSP0+lnj+vHdHd2RM
-	H+dGyor8b/jvL2C12wBhlS/CvHu3XSmvvMmfd9Ghrm7UbLqsg0rSvqK5RUIHyGLTmNya
-	m0vDnqPJORVCmCX/04DfUg1FXeETsn2n1rP7zsNmeP6jJ5VXaT0PULq0O2MwXYB9IRJo
-	b0IK8QTyaD2EhkjYwP6bTJpDOJLSFn/c3JQj6HK2vMVJs8+uTuVFfmEQXGc4eqNMlEgR
-	jzZA==
+	Mon, 21 Apr 2014 03:05:41 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3L35eQi003372
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 20 Apr 2014 20:05:40 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
+	Sun, 20 Apr 2014 20:05:40 -0700
+Message-ID: <53548B00.5000700@windriver.com>
+Date: Mon, 21 Apr 2014 11:05:36 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.112.22.130 with SMTP id d2mr639818lbf.33.1398049303385; Sun,
-	20 Apr 2014 20:01:43 -0700 (PDT)
-Received: by 10.114.191.202 with HTTP; Sun, 20 Apr 2014 20:01:43 -0700 (PDT)
-In-Reply-To: <53547FB6.5040609@windriver.com>
-References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
-	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
-	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
-	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
-	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
-	<53547FB6.5040609@windriver.com>
-Date: Sun, 20 Apr 2014 20:01:43 -0700
-Message-ID: <CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+To: <openembedded-devel@lists.openembedded.org>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>	<53547FB6.5040609@windriver.com>
+	<CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
+In-Reply-To: <CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
 Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
 Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -48,49 +36,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 03:01:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Apr 2014 03:05:44 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
-
-> On 04/21/2014 04:19 AM, Tim Orling wrote:
+On 04/21/2014 11:01 AM, Tim Orling wrote:
+> On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
 >
->> (1) I am thinking about dropping this patch. perl-native provides
->> Module::Metadata 1.00004, so if subsequent packages are being
->> cross-compiled I have not yet proven there is a need for the updated
->> v1.000019 provided here.
+>> On 04/21/2014 04:19 AM, Tim Orling wrote:
 >>
->> (2) The question is, if one wanted to build subsequent packages in-situ,
->> how to provide Module::Metadata 1.00004 on a target system, since it is
->> only provided by perl-native?
+>>> (1) I am thinking about dropping this patch. perl-native provides
+>>> Module::Metadata 1.00004, so if subsequent packages are being
+>>> cross-compiled I have not yet proven there is a need for the updated
+>>> v1.000019 provided here.
+>>>
+>>> (2) The question is, if one wanted to build subsequent packages in-situ,
+>>> how to provide Module::Metadata 1.00004 on a target system, since it is
+>>> only provided by perl-native?
+>>>
+>> It is also provided by perl, for target.
 >>
->
-> It is also provided by perl, for target.
->
-> //Hongxu
->
->
-I am not seeing it. Am I missing something?
+>> //Hongxu
+>>
+>>
+> I am not seeing it. Am I missing something?
 
-root@beaglebone:~# perl -mModule::Metadata
 
-Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
-/usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
-/usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
-/usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
-/usr/lib/perl/5.14.3 .).
+Hi Tim,
 
-BEGIN failed--compilation aborted.
+I am afraid Module::Metadataj is not in perl by default, you need
+to tweak poky/meta/recipes-devtools/perl/perl_5.14.3.bb, to create
+a new package for Module::Metadata, you could reference what
+'perl-module-cpan' did, such as:
+...
+PACKAGES += "perl-module-metadata"
+FILES_perl-module-metadata += ">>the files you need<<"
+...
+
+And add 'perl-module-metadata' to your recipes's RDEPENDS.
+
+//Hongxu
 
 >
->> --Tim
+> root@beaglebone:~# perl -mModule::Metadata
+>
+> Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
+> /usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
+> /usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
+> /usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
+> /usr/lib/perl/5.14.3 .).
+>
+> BEGIN failed--compilation aborted.
+>
+>>> --Tim
+>>> --
+>>>
 >> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >>
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 
