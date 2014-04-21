@@ -1,24 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 744D265D1B
+	by mail.openembedded.org (Postfix) with ESMTP id 752CE65D21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 05:53:28 +0000 (UTC)
+	Mon, 21 Apr 2014 05:53:31 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3L5rUYo013999
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3L5rWlq014011
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 22:53:30 -0700 (PDT)
+	Sun, 20 Apr 2014 22:53:32 -0700 (PDT)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Sun, 20 Apr 2014 22:53:29 -0700
+	14.3.169.1; Sun, 20 Apr 2014 22:53:32 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 Apr 2014 01:53:26 -0400
-Message-ID: <cover.1398058983.git.wenzong.fan@windriver.com>
+Date: Mon, 21 Apr 2014 01:53:28 -0400
+Message-ID: <ae7e61e82cf2c9f9f35eff905aa79e941d86a8ee.1398058983.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1398058983.git.wenzong.fan@windriver.com>
+References: <cover.1398058983.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 0/2] some fixes for vsftpd and ntp scripts
+Subject: [meta-networking][PATCH 2/2] ntp: fix hardcode to /usr/bin/perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,26 +39,30 @@ Content-Type: text/plain
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
-* Fix QA warnings to vsftpd that some files installed but not shipped;
-* Fix hardcode path to perl for ntp scripts: ntptrace, ntp-wait
+This patch properly uses the path variables and fixes ntptrace and
+ntp-wait, just in case perl is not installed with the hardcode path.
 
-The following changes since commit 5ccedeb028c46a6b98335fedb16029c6f7f87022:
+Signed-off-by: Rahat Mahbub <rahat.mahbub@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ meta-networking/recipes-support/ntp/ntp.inc |    4 ++++
+ 1 file changed, 4 insertions(+)
 
-  sshfs-fuse: update to 2.5 (2014-04-20 16:10:21 +0200)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib wenzong/networking
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/networking
-
-Wenzong Fan (2):
-  vsftpd: fix install warning
-  ntp: fix hardcode to /usr/bin/perl
-
- .../recipes-daemons/vsftpd/vsftpd_3.0.0.bb         |    9 ++++++++-
- meta-networking/recipes-support/ntp/ntp.inc        |    4 ++++
- 2 files changed, 12 insertions(+), 1 deletion(-)
-
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index 9c3e0d1..d4adfd8 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -58,6 +58,10 @@ do_install_append() {
+     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
++    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntptrace
++    sed -i '/use/i use warnings;' ${D}${sbindir}/ntptrace
++    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntp-wait
++    sed -i '/use/i use warnings;' ${D}${sbindir}/ntp-wait
+ 
+     install -d ${D}/${sysconfdir}/default
+     install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
 -- 
 1.7.9.5
 
