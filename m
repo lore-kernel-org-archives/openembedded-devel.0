@@ -1,40 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BB7B65D10
+Received: from mail-ee0-f44.google.com (mail-ee0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C9FCD65D10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 11:46:06 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so3541685eek.21
+	Mon, 21 Apr 2014 11:47:12 +0000 (UTC)
+Received: by mail-ee0-f44.google.com with SMTP id e49so3564522eek.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 04:46:07 -0700 (PDT)
+	Mon, 21 Apr 2014 04:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=e/dVdi0E7IiSbwo4V0rsM5pl66ZPExe6ZUEvj1voyTo=;
-	b=v6kf4TiLbBP7L1Tj/U9R2fwOo43EGw7UaupTHPdJtw6Je/XXONoznymRIVWS/qFmHJ
-	aNO2kCgHPU0UvBPLn4A4vXU2DbyKZ5QgvlT0T055YX1AdPAAuH9EzARwl4rSqZRagMCk
-	j4YysjNdNzibBkPUk5fQCPp3dPUvH5wgsKzlBbgQvs2euxdMklVGlaXhBuqcIUSbIz90
-	KOws2HRdGNw2lfv0qChv71t8+wqoZ7xD4IwfsJh2RD/htbX0Bibls+YRSh60HMXtGdMk
-	k9Pvls3Q6NeHkIuPYA9Ew0TY5OYwdW0o+PDrDBIhe1V0Lh6UjUuVRQBDrSeXbDxj4ThF
-	Z3tw==
-X-Received: by 10.15.64.75 with SMTP id n51mr47544809eex.33.1398080767625;
-	Mon, 21 Apr 2014 04:46:07 -0700 (PDT)
+	bh=pTG2hqPFz7h1viteT431u9xd2MvwqRhDxsQ9jiDJ/YI=;
+	b=B6IrbZtZlciNUvFHBm7wJryDX4UHvmxU2aIhem4EoGyULsyvEfDxO75BloN572QLxK
+	YifcwrCPjMbEqYfI0zvoJmBgOcZZFConmtFoVdK/2i7wOBrrAS7iYL/Mb2A6rlEQLwiA
+	h4NWkr/ef//w3LmCE8JJ0dPlpGylilx5g12692DmT/E690U9yLXMzJvVp/C7rX76/2zK
+	S5XWtCh22B+0Yb/+s3Ok65q0hV0DWvsh2IplwXihTNvsUryTDVr4WPIOfPs1twDvezdk
+	6rsxB5zXA/dJyfGGBWHo2TqZobg8NGKAHM8ITxXFETeiWKFVODODCK7AY5wIfY9etysN
+	N+Qw==
+X-Received: by 10.14.37.8 with SMTP id x8mr46823933eea.32.1398080832986;
+	Mon, 21 Apr 2014 04:47:12 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o4sm102920097eef.20.2014.04.21.04.46.05
+	y7sm102926220eev.5.2014.04.21.04.47.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Apr 2014 04:46:06 -0700 (PDT)
-Date: Mon, 21 Apr 2014 13:46:12 +0200
+	Mon, 21 Apr 2014 04:47:11 -0700 (PDT)
+Date: Mon, 21 Apr 2014 13:47:18 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140421114612.GD2486@jama>
-References: <1397210212-26263-1-git-send-email-jackie.huang@windriver.com>
-	<20140420094111.GJ2486@jama>
-	<1B858668EC6A94408DCA5225FDFA85AAB5BF56BC@ALA-MBB.corp.ad.wrs.com>
+Message-ID: <20140421114718.GE2486@jama>
+References: <1396185772-20185-1-git-send-email-net147@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AAB5BF56BC@ALA-MBB.corp.ad.wrs.com>
+In-Reply-To: <1396185772-20185-1-git-send-email-net147@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] iozone: update version to 414
+Subject: Re: [meta-qt5][PATCH] qtwebkit: add packageconfig for qtmultimedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,234 +46,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 11:46:09 -0000
-X-Groupsio-MsgNum: 49396
+X-List-Received-Date: Mon, 21 Apr 2014 11:47:13 -0000
+X-Groupsio-MsgNum: 49397
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SpmsQTCLe2l6R7Sg"
+	protocol="application/pgp-signature"; boundary="tZPt2X9wWvZFnOOr"
 Content-Disposition: inline
 
---SpmsQTCLe2l6R7Sg
+--tZPt2X9wWvZFnOOr
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 21, 2014 at 05:38:08AM +0000, Huang, Jie (Jackie) wrote:
->=20
->=20
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org [mailto:openemb=
-edded-devel-
-> > bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> > Sent: Sunday, April 20, 2014 5:41 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH] iozone: update version to 414
-> >=20
-> > On Fri, Apr 11, 2014 at 05:56:52PM +0800, jackie.huang@windriver.com wr=
-ote:
-> > > From: Jackie Huang <jackie.huang@windriver.com>
-> > >
-> > > Changes:
-> > > - use BPN to fix multilib builds
-> > > - drop the fileop-arm.patch since the issue is already
-> > >   fixed in the new version.
-> > >
-> > > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > > ---
-> > >  .../iozone3/iozone3/fileop-arm.patch               |   32 ----------=
---
-> > >  .../iozone3/{iozone3_263.bb =3D> iozone3_414.bb}     |   51 ++++++++=
-+++---------
-> > >  2 files changed, 27 insertions(+), 56 deletions(-)  delete mode
-> > > 100644 meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-> > >  rename meta-oe/recipes-benchmark/iozone3/{iozone3_263.bb =3D>
-> > > iozone3_414.bb} (63%)
-> > >
-> > > diff --git
-> > > a/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-> > > b/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-> > > deleted file mode 100644
-> > > index c71bfee..0000000
-> > > --- a/meta-oe/recipes-benchmark/iozone3/iozone3/fileop-arm.patch
-> > > +++ /dev/null
-> > > @@ -1,32 +0,0 @@
-> > > -Modify makefile to compile fileop.c file for ARM architecture.
-> > > -
-> > > -Upstream-Status: Inappropriate [not author]
-> > > -Index: current/makefile
-> > > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > ---- current.orig/makefile	2006-10-14 21:42:36.000000000 +0200
-> > > -+++ current/makefile	2006-10-14 21:40:02.000000000 +0200
-> > > -@@ -190,9 +190,10 @@
-> > > - #
-> > > - # GNU 'C' compiler Linux build with threads, largefiles, async I/O
-> > > - #
-> > > --linux-arm:	iozone_linux-arm.o  libbif.o libasync.o
-> > > -+linux-arm:	iozone_linux-arm.o  libbif.o libasync.o fileop_linux-arm=
-=2Eo
-> > > - 	$(CC) -O3 $(LDFLAGS) iozone_linux-arm.o libbif.o libasync.o \
-> > > - 		-lrt -lpthread -o iozone
-> > > -+	$(CC)  -O3 -Dlinux fileop_linux-arm.o -o fileop
-> > > -
-> > > - #
-> > > - # GNU 'C' compiler Linux build with threads, largefiles, async I/O
-> > > -@@ -725,6 +726,12 @@
-> > > - 	@echo ""
-> > > - 	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-AMD64.o
-> > > -
-> > > -+fileop_linux-arm.o:	fileop.c
-> > > -+	@echo ""
-> > > -+	@echo "Building fileop for Linux-arm"
-> > > -+	@echo ""
-> > > -+	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-arm.o
-> > > -+
-> > > - fileop_windows.o: fileop.c
-> > > - 	@echo ""
-> > > - 	@echo "Building fileop for Windows"
-> > > diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
-> > > b/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-> > > similarity index 63%
-> > > rename from meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
-> > > rename to meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-> > > index 9de0ac7..572d766 100644
-> > > --- a/meta-oe/recipes-benchmark/iozone3/iozone3_263.bb
-> > > +++ b/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb
-> > > @@ -3,46 +3,49 @@ HOMEPAGE =3D "http://www.iozone.org/"
-> > >  AUTHOR =3D "Don Capps <don.capps2@verizon.net>, William D. Norcott <=
-wnorcott@us.oracle.com>"
-> > >  SECTION =3D "console/tests"
-> > >  LICENSE =3D "iozone3"
-> > > -LIC_FILES_CHKSUM =3D
-> > "file://iozone.c;beginline=3D237;endline=3D241;md5=3Dab42a6185fd0443978=
-871f11a007ac0b"
-> > > +LIC_FILES_CHKSUM =3D
-> > "file://iozone.c;beginline=3D266;endline=3D270;md5=3Dab42a6185fd0443978=
-871f11a007ac0b"
-> > >
-> > > -
-> > > -SRC_URI =3D "http://www.iozone.org/src/current/iozone3_263.tar \
-> > > +SRC_URI =3D "http://fossies.org/unix/privat/${BPN}_${PV}.tar.gz \
-> >=20
-> > $ wget http://fossies.org/unix/privat/iozone3_414.tar.gz
-> > --2014-04-20 09:40:22--
-> > http://fossies.org/unix/privat/iozone3_414.tar.gz
-> > Resolving fossies.org (fossies.org)... 78.46.58.28 Connecting to fossie=
-s.org
-> > (fossies.org)|78.46.58.28|:80... connected.
-> > HTTP request sent, awaiting response... 404 Not Found
-> > 2014-04-20 09:40:23 ERROR 404: Not Found.
->=20
-> Sorry I didn't test the fetch since we had a local copy, fix it to:
-> http://www.iozone.org/src/current/${BPN}_${PV}.tar
+On Mon, Mar 31, 2014 at 12:22:52AM +1100, Jonathan Liu wrote:
+> Signed-off-by: Jonathan Liu <net147@gmail.com>
+> ---
+>  recipes-qt/qt5/qtwebkit.inc | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 
-Strange that new version also has different checksums than what you were
-using before, but I've updated the patch in master-next, thanks for v2.
+Merged, thanks!
 
 >=20
-> and I will send v2 for this.
+> diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+> index 90bd981..a6322cb 100644
+> --- a/recipes-qt/qt5/qtwebkit.inc
+> +++ b/recipes-qt/qt5/qtwebkit.inc
+> @@ -7,10 +7,11 @@ LIC_FILES_CHKSUM =3D "file://Source/WebCore/rendering/R=
+enderApplet.h;endline=3D22;md
+> =20
+>  DEPENDS +=3D "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libx=
+slt"
+> =20
+> -PACKAGECONFIG ??=3D "gstreamer qtlocation qtsensors"
+> +PACKAGECONFIG ??=3D "gstreamer qtlocation qtmultimedia qtsensors"
+>  PACKAGECONFIG[gstreamer] =3D ",,gstreamer1.0 gstreamer1.0-plugins-base"
+>  PACKAGECONFIG[gstreamer010] =3D ",,gstreamer gst-plugins-base"
+>  PACKAGECONFIG[qtlocation] =3D ",,qtlocation"
+> +PACKAGECONFIG[qtmultimedia] =3D ",,qtmultimedia"
+>  PACKAGECONFIG[qtsensors] =3D ",,qtsensors"
+> =20
+>  do_configure_prepend() {
+> @@ -20,6 +21,8 @@ do_configure_prepend() {
+>      sed -e 's/\s\(packagesExist(".*\<gstreamer-0.10\>.*")\)/ OE_GSTREAME=
+R010_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+>      # disable qtlocation test if it isn't enabled by PACKAGECONFIG
+>      sed -e 's/\s\(qtHaveModule(positioning)\)/ OE_QTLOCATION_ENABLED:\1/=
+' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+> +    # disable qtmultimedia test if it isn't enabled by PACKAGECONFIG
+> +    sed -e 's/(video):\(qtHaveModule(multimediawidgets)\)/(video):OE_QTM=
+ULTIMEDIA_ENABLED:\1/' -i ${S}/Tools/qmake/mkspecs/features/features.prf
+>      # disable qtsensors test if it isn't enabled by PACKAGECONFIG
+>      sed -e 's/\s\(qtHaveModule(sensors)\)/ OE_QTSENSORS_ENABLED:\1/' -i =
+${S}/Tools/qmake/mkspecs/features/features.prf
+>  }
+> @@ -27,6 +30,7 @@ do_configure_prepend() {
+>  EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'gstreamer',=
+ 'CONFIG+=3DOE_GSTREAMER_ENABLED', '', d)}"
+>  EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'gstreamer01=
+0', 'CONFIG+=3DOE_GSTREAMER010_ENABLED', '', d)}"
+>  EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'qtlocation'=
+, 'CONFIG+=3DOE_QTLOCATION_ENABLED', '', d)}"
+> +EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'qtmultimedi=
+a', 'CONFIG+=3DOE_QTMULTIMEDIA_ENABLED', '', d)}"
+>  EXTRA_QMAKEVARS_PRE +=3D "${@base_contains('PACKAGECONFIG', 'qtsensors',=
+ 'CONFIG+=3DOE_QTSENSORS_ENABLED', '', d)}"
+> =20
+>  # qtwebkit gets terribly big when linking with all debug info, disable b=
+y default
+> --=20
+> 1.9.0
 >=20
-> Thanks,
-> Jackie
->=20
-> >=20
-> >=20
-> > >      file://copyright.txt \
-> > > -    file://fileop-arm.patch \
-> > >  "
-> > > -SRC_URI[md5sum] =3D "44fd88df361ec4508e10c8d6615245fa"
-> > > -SRC_URI[sha256sum] =3D
-> > "920fde1a3843539570e2df4aa611e74df102e52d363c5973d5a9d15bdf976461"
-> > > +SRC_URI[md5sum] =3D "85a3e292f84580a36e6c99762a459dd6"
-> > > +SRC_URI[sha256sum] =3D "f6c2fde4bfaef1ff8aaf99a315737a846886aa54751a=
-6d9309e14fbec0cbe7a9"
-> > >
-> > > -S =3D "${WORKDIR}/${PN}_${PV}/src/current/"
-> > > +S =3D "${WORKDIR}/${BPN}_${PV}/src/current/"
-> > >
-> > > -EXTRA_OEMAKE_powerpc =3D "linux-powerpc CC=3D'${CC}'"
-> > > -EXTRA_OEMAKE_powerpc64 =3D "linux-powerpc64 CC=3D'${CC}'"
-> > > -EXTRA_OEMAKE_arm =3D "linux-arm CC=3D'${CC}'"
-> > > -EXTRA_OEMAKE =3D "linux CC=3D'${CC}'"
-> > > +#
-> > > +# All other arches can use the default OEMAKE except those #
-> > > +explicitly listed below. Another, the iozone3 Makefile # needs to be
-> > > +told about the cross-compiler explicitly here.
-> > > +#
-> > > +EXTRA_OEMAKE_powerpc =3D "linux-powerpc CC=3D'${CC}' GCC=3D'${CC}'"
-> > > +EXTRA_OEMAKE_powerpc64 =3D "linux-powerpc64 CC=3D'${CC}' GCC=3D'${CC=
-}'"
-> > > +EXTRA_OEMAKE_arm =3D "linux-arm CC=3D'${CC}' GCC=3D'${CC}'"
-> > > +EXTRA_OEMAKE =3D "linux CC=3D'${CC}' GCC=3D'${CC}'"
-> > >
-> > >  TARGET_CC_ARCH +=3D "${LDFLAGS}"
-> > >
-> > >  do_install() {
-> > >      install -d ${D}${bindir} \
-> > > -        ${D}${mandir}/man1 \
-> > > -    ${D}${datadir}/doc/${PN}/examples
-> > > +               ${D}${mandir}/man1 \
-> > > +               ${D}${datadir}/doc/${BPN}/examples
-> > >
-> > >      install -m 0755 ${S}/iozone ${D}${bindir}
-> > >      install -m 0755 ${S}/fileop ${D}${bindir}
-> > > -    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/iozone.1 ${D}${mandi=
-r}/man1/
-> > > -    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${PN=
-}/
-> > > +    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/iozone.1 ${D}${mand=
-ir}/man1/
-> > > +    install -m 0644 ${WORKDIR}/copyright.txt
-> > > + ${D}${datadir}/doc/${BPN}/
-> > >
-> > > -    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${PN}/examples
-> > > -    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${PN}/exampl=
-es
-> > > -    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${PN}/exampl=
-es
-> > > +    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${BPN}/examples
-> > > +    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${BPN}/examp=
-les
-> > > +    install -m 0644 ${S}/Gnuplot.txt
-> > > + ${D}${datadir}/doc/${BPN}/examples
-> > >
-> > > -    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${PN}/ex=
-amples
-> > > -    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${PN}/exam=
-ples
-> > > -    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${PN}/examples
-> > > +    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${BPN}/e=
-xamples
-> > > +    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${BPN}/exa=
-mples
-> > > +    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${BPN}/examples
-> > >
-> > > -    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Iozone_ps.gz ${D}${d=
-atadir}/doc/${PN}/
-> > > -    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/IOzone_msword_98.pdf
-> > ${D}${datadir}/doc/${PN}/
-> > > -    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Run_rules.doc ${D}${=
-datadir}/doc/${PN}/
-> > > +    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Iozone_ps.gz ${D}${=
-datadir}/doc/${BPN}/
-> > > +    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/IOzone_msword_98.pdf
-> > ${D}${datadir}/doc/${BPN}/
-> > > +    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Run_rules.doc
-> > > + ${D}${datadir}/doc/${BPN}/
-> > >  }
-> > >
-> > >  FILES_${PN} +=3D "${datadir}/doc/${PN}/copyright.txt"
-> > > --
-> > > 1.7.9.5
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -285,16 +124,16 @@ datadir}/doc/${BPN}/
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---SpmsQTCLe2l6R7Sg
+--tZPt2X9wWvZFnOOr
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNVBQQACgkQN1Ujt2V2gBxE8QCePSNFdebX3SVaXcdIe5Q/OWmN
-P1EAoLfGI0JkhswSYhOTdEOhD1UDM6ir
-=UJkC
+iEYEARECAAYFAlNVBUYACgkQN1Ujt2V2gBzi/gCePZG5825cv+12alb45R05fbnF
+8AEAn1X0ogsc4dc6C5QdFXL6ox93lWKM
+=pfbi
 -----END PGP SIGNATURE-----
 
---SpmsQTCLe2l6R7Sg--
+--tZPt2X9wWvZFnOOr--
