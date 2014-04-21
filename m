@@ -1,26 +1,27 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B8C4865D41
+	by mail.openembedded.org (Postfix) with ESMTP id 90D6C65D3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 06:21:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L6LEOK024853
+	Mon, 21 Apr 2014 06:25:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L6P3od024877
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 23:21:15 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Sun, 20 Apr 2014 23:21:14 -0700
-From: <jackie.huang@windriver.com>
+	Sun, 20 Apr 2014 23:25:03 -0700 (PDT)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.169.1; Sun, 20 Apr 2014 23:25:03 -0700
+From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 Apr 2014 02:21:07 -0400
-Message-ID: <7301ec72237f21b517180c98d0e1d05b7e35fe37.1398061002.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1398061002.git.jackie.huang@windriver.com>
-References: <cover.1398061002.git.jackie.huang@windriver.com>
+Date: Mon, 21 Apr 2014 14:24:49 +0800
+Message-ID: <1398061492-31615-2-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+In-Reply-To: <1398061492-31615-1-git-send-email-kai.kang@windriver.com>
+References: <1398061492-31615-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/4] rsyslog: add DEPENDS on bison-native and flex-native
+X-Originating-IP: [128.224.162.231]
+Subject: [PATCH 1/4] radvd.init: fix path to radvd.conf sample
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,30 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 06:21:13 -0000
+X-List-Received-Date: Mon, 21 Apr 2014 06:25:04 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Correct the information that printed by radvd initscript.
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb |    2 +-
+ meta-networking/recipes-daemons/radvd/files/radvd.init | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-index 31d2935..344a131 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
-  encryption protected syslog relay chains while at the same time being\
-  very easy to setup for the novice user."
- 
--DEPENDS = "zlib libestr json-c"
-+DEPENDS = "zlib libestr json-c bison-native flex-native"
- HOMEPAGE = "http://www.rsyslog.com/"
- LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
+diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.init b/meta-networking/recipes-daemons/radvd/files/radvd.init
+index 5295292..8b26317 100755
+--- a/meta-networking/recipes-daemons/radvd/files/radvd.init
++++ b/meta-networking/recipes-daemons/radvd/files/radvd.init
+@@ -64,7 +64,7 @@ chkconfig() {
+     if [ ! -e $CONFIG -o ! -s $CONFIG ]; then
+         echo ""
+ 	echo "* $CONFIG does not exist or is empty." 
+-	echo "* See /usr/share/doc/radvd/examples/simple-radvd.conf for a simple"
++	echo "* See /usr/share/doc/radvd/radvd.conf.example for a simple"
+ 	echo "* configuration suitable for most systems, and radvd.conf(5)"
+ 	echo "* for configuration file syntax. radvd will *not* be started."
+ 	exit 0
 -- 
-1.7.9.5
+1.8.4
 
 
