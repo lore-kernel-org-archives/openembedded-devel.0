@@ -1,34 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id DEA3860C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 14:52:41 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id hl10so1849034igb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 07:52:42 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E577265D13;
+	Mon, 21 Apr 2014 15:34:30 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d17so3673054eek.18
+	for <multiple recipients>; Mon, 21 Apr 2014 08:34:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=9idfM2cbg/HOlrU3/mERJj39OGo8brzK+sSuLm1WXAk=;
-	b=iImKoUe5PmHGAP94B2PlDaepJYTePfcNuboSwWr2HcvfP18GyaMRx8naps/3DDTL7H
-	I0w067dXGjmw77GoFr5QPmQ4BuVu1mxv93y2zSbXhlXXdqFG/m2q8AfZpxvJ22p102fO
-	bbIkI5n2xzViooEFambXJmT9AdAMNxLrGEcdZssawbZTBUq4AJCX0o7GyMNMyTePCW6P
-	4gfD59LvjsIIckUhbcUijMWUSiSzPnXnhYjx8Gbtn6KsBZNDns2hrlVVYoCdfpBFyeXX
-	m2ACULsyxjZZDjSA1qDhl84Um/oR8qDSRXFxanldkTZEAx5MMrN1gJn/6NC0iJUyS0+Z
-	uAUw==
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=ze2vSliKaz91y8wDgcKztofs4FGxa8+7SXbJE8FoHVY=;
+	b=KRBuVWYZLH+UjCTId9AgZikhalMBlCty20J1pSMfz/8arL6+/CZm7l/G2lHqXzDsyg
+	I2VTOxKsOMXwDAs2vnUEhpoUl3TZXFHtuwsMFUeKuax56Si89uBD9yH7CooWwjqqdODm
+	d+XvJL9JAtZ7+kTfyeoMJddieAckyUBrl17JXyxYx4odHkrgtI3P0plUBtdzACChH5BW
+	2DmA+K8mp6qpkVZbk1YXYs87EbOmg15SXQRHOJW40ASNLLXMn5kXbTdzaBIOGN37Pifj
+	4KIy6wHyy9e4QBaE5nJayX72G9MHE3jHf39ZGz447tEX+vWb7QxvyRqVDZ3beHVMvMmT
+	2oiQ==
+X-Received: by 10.14.109.201 with SMTP id s49mr2134316eeg.88.1398094470697;
+	Mon, 21 Apr 2014 08:34:30 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	w46sm1153744eeo.35.2014.04.21.08.34.27 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 Apr 2014 08:34:28 -0700 (PDT)
+Date: Mon, 21 Apr 2014 17:34:32 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140421153432.GF2486@jama>
 MIME-Version: 1.0
-X-Received: by 10.42.136.130 with SMTP id u2mr28793911ict.51.1398091962118;
-	Mon, 21 Apr 2014 07:52:42 -0700 (PDT)
-Received: by 10.50.229.14 with HTTP; Mon, 21 Apr 2014 07:52:42 -0700 (PDT)
-In-Reply-To: <CALYKT1jF=ZHeU=cYgA55O5_SjJeCVLWMdR=Gwr9B0U_UVjYuZQ@mail.gmail.com>
-References: <CALYKT1jF=ZHeU=cYgA55O5_SjJeCVLWMdR=Gwr9B0U_UVjYuZQ@mail.gmail.com>
-Date: Mon, 21 Apr 2014 07:52:42 -0700
-Message-ID: <CAMKF1spaSE0TF=XpYtQMKevKKODbv_C6cFxECeYTA2bfstXx3g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How can I use / enable strace of the image of oe-core?
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-04-03
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,56 +42,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 14:52:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Apr 2014 15:34:33 -0000
+X-Groupsio-MsgNum: 49402
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="e400VJpV0WKd7yPD"
+Content-Disposition: inline
 
-On Monday, April 21, 2014, Journeyer J. Joh <oosaprogrammer@gmail.com>
-wrote:
+--e400VJpV0WKd7yPD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hello,
->
-> I am the guy who uses oe-core for MSM.
->
-> oe-core for MSM is just a clone of oe-core.
-> And mine is open via codeaurora :
->     git://codeaurora.org/quic/le/openembedded/openembedded-core
->     https://www.codeaurora.org/xwiki/bin/QLBEP/WebHome
->
->
-> I want to use strace to debug my application on the image of oe-core (for
-> MSM).
-> I mean I want to use it on target embedded system.
->
-> And I found strace from my oe-core source tree:
->     oe-core/meta/recipes-devtools/strace
->
-> And there are:
->     strace-4.6/  strace_4.6.bb
->
-> This gives me impression that I can use strace from my target system.
-> But there is no source code for strace... in it!
->
-> Then how can I use strace?
+gnome-backgrounds fix is on ML
+mousepad, gd are fixed now, but fix wasn't included in qemuarm build
+iozone3 should be fixed by v2 on ML
 
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Add it to IMAGE_INSTALL
+=3D=3D Failed tasks 2014-04-21 =3D=3D
 
->
-> Thank you very much in advance!
->
-> Sincerely
-> Journeyer
->
-> ----------------------------------------
-> Journeyer J. Joh
-> o o s a p r o g r a m m e r
-> a t
-> g m a i l  d o t  c o m
-> ----------------------------------------
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org <javascript:;>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+=3D=3D=3D common (7) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
+bb, do_compile
+    * meta-openembedded/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-ba=
+ckgrounds_2.32.0.bb, do_configure
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_configure
+    * meta-openembedded/meta-multimedia/recipes-multimedia/openal/openal-so=
+ft_1.15.1.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb, d=
+o_fetch
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.1=
+3.bb, do_configure
 
+=3D=3D=3D common-x86 (4) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_i=
+nstall
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+=3D=3D=3D qemuarm (5) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-support/gd/gd_2.1.0.bb, do_configure
+    * meta-openembedded/meta-xfce/recipes-apps/mousepad/mousepad_0.3.0.bb, =
+do_configure
+    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
+o_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
+onfigure
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||12    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140418_190059.log/
+|-
+||qemux86       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140419_163001.log/
+|-
+||qemux86_64    ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140420_141804.log/
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--e400VJpV0WKd7yPD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNVOogACgkQN1Ujt2V2gBzL9ACfXeh5voqOSSmhI08vQrID5hva
+2uQAoJuJ8pybgPkBxL5dWCmc8VXZzSFh
+=MLRS
+-----END PGP SIGNATURE-----
+
+--e400VJpV0WKd7yPD--
