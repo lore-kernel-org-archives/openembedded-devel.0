@@ -1,34 +1,40 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 099A465D1D
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
+	[209.85.217.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E8CDB65D23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 02:58:10 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3L2wAsX002724
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 21 Apr 2014 03:01:42 +0000 (UTC)
+Received: by mail-lb0-f170.google.com with SMTP id s7so2871331lbd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 19:58:10 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.80]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
-	Sun, 20 Apr 2014 19:58:10 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 1/3] gd: update to version 2.1.0
-Thread-Index: AQHPXHIDrpIxxXwpCUmtuJa0gQFTZpsbYWZQ
-Date: Mon, 21 Apr 2014 02:58:09 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BF554E@ALA-MBB.corp.ad.wrs.com>
-References: <cover.1397545082.git.jackie.huang@windriver.com>
-	<00038b50f96f259beae9e06813ec54085dd9fa17.1397545082.git.jackie.huang@windriver.com>
-	<20140420082402.GK2486@jama>
-In-Reply-To: <20140420082402.GK2486@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.135]
+	Sun, 20 Apr 2014 20:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=kakJJbmV14/wrhZosUVyVsMsDvJ+mEJA7hgKg3jKNOM=;
+	b=PxVl5/VYSpcFOJk5xhw3XFzK2NgsdcfuFTEFr0F2mf3tjVPAI/KAbBoK+of9bGzZBL
+	jAMYIksZ2nd7LYqiZDroy5Zrg2tufRyi+P1tQP8h/5+6yt2rs0mdSP0+lnj+vHdHd2RM
+	H+dGyor8b/jvL2C12wBhlS/CvHu3XSmvvMmfd9Ghrm7UbLqsg0rSvqK5RUIHyGLTmNya
+	m0vDnqPJORVCmCX/04DfUg1FXeETsn2n1rP7zsNmeP6jJ5VXaT0PULq0O2MwXYB9IRJo
+	b0IK8QTyaD2EhkjYwP6bTJpDOJLSFn/c3JQj6HK2vMVJs8+uTuVFfmEQXGc4eqNMlEgR
+	jzZA==
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 1/3] gd: update to version 2.1.0
+X-Received: by 10.112.22.130 with SMTP id d2mr639818lbf.33.1398049303385; Sun,
+	20 Apr 2014 20:01:43 -0700 (PDT)
+Received: by 10.114.191.202 with HTTP; Sun, 20 Apr 2014 20:01:43 -0700 (PDT)
+In-Reply-To: <53547FB6.5040609@windriver.com>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
+	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
+	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
+	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
+	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
+	<53547FB6.5040609@windriver.com>
+Date: Sun, 20 Apr 2014 20:01:43 -0700
+Message-ID: <CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,117 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 02:58:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Apr 2014 03:01:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
 
+> On 04/21/2014 04:19 AM, Tim Orling wrote:
+>
+>> (1) I am thinking about dropping this patch. perl-native provides
+>> Module::Metadata 1.00004, so if subsequent packages are being
+>> cross-compiled I have not yet proven there is a need for the updated
+>> v1.000019 provided here.
+>>
+>> (2) The question is, if one wanted to build subsequent packages in-situ,
+>> how to provide Module::Metadata 1.00004 on a target system, since it is
+>> only provided by perl-native?
+>>
+>
+> It is also provided by perl, for target.
+>
+> //Hongxu
+>
+>
+I am not seeing it. Am I missing something?
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Sunday, April 20, 2014 4:24 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 1/3] gd: update to version 2.1.0
->=20
-> On Tue, Apr 15, 2014 at 03:01:24PM +0800, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Changes:
-> > - Add DESCRIPTION and HOMEPAGE
-> > - libgd.org is down, use bitbucket.org instead and also
-> >   remove the MIRROR for it.
-> > - Remove the unnecessary specified dir for --with-png.
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  .../gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.bb}     |   22 ++++++++++=
-++--------
-> >  1 file changed, 13 insertions(+), 9 deletions(-)  rename
-> > meta-oe/recipes-support/gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.bb}
-> > (43%)
-> >
-> > diff --git a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> > b/meta-oe/recipes-support/gd/gd_2.1.0.bb
-> > similarity index 43%
-> > rename from meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> > rename to meta-oe/recipes-support/gd/gd_2.1.0.bb
-> > index 957c4eb..1b78b9b 100644
-> > --- a/meta-oe/recipes-support/gd/gd_2.0.35+2.0.36rc1.bb
-> > +++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
-> > @@ -1,22 +1,26 @@
-> > +SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
-> > +DESCRIPTION =3D "The gd graphics library allows your code to quickly
-> > +draw images \ complete with lines, arcs, text, multiple colors, cut
-> > +and paste from other \ images, and flood fills, and to write out the
-> > +result as a PNG or JPEG file. \ This is particularly useful in Web
-> > +applications, where PNG and JPEG are two \ of the formats accepted
-> > +for inline images by most browsers. Note that gd is not \ a paint prog=
-ram."
-> > +HOMEPAGE =3D "http://libgd.bitbucket.org/"
-> >  SECTION =3D "libs"
-> > +
-> >  LICENSE =3D "GD"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc97638cafd3581eb87abd373321=
-37669"
-> > -SUMMARY =3D "gd is a library used to create PNG, JPEG, or WBMP images"
-> >  DEPENDS =3D "freetype libpng jpeg zlib"
-> > -PR =3D "r5"
-> > -
-> > -SRC_URI =3D "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz"
-> > -SRC_URI[md5sum] =3D "39ac48e6d5e0012a3bd2248a0102f209"
-> > -SRC_URI[sha256sum] =3D
-> "dd7c1795271221b9237769b96b8cec7fbdc5db7b8954d864ead51fc1296a6ac8"
-> >
-> > -MIRRORS +=3D "http://www.libgd.org/releases/ http://fossies.org/unix/w=
-ww/ \n"
-> > +SRC_URI =3D "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV=
-}.tar.bz2"
-> > +SRC_URI[md5sum] =3D "5a1d5bab3a4a41d9f111bcceee4ad25b"
-> > +SRC_URI[sha256sum] =3D
-> "f3e1bc472bd81ee976a739436659fe752a14727a964c64530fde68531ddeee91"
-> >
-> > -S =3D "${WORKDIR}/gd-2.0.36RC1"
-> > +S =3D "${WORKDIR}/libgd-${PV}"
-> >
-> >  inherit autotools binconfig gettext
-> >
-> >  EXTRA_OECONF +=3D " --with-zlib=3D${STAGING_LIBDIR}/.. \
-> > -                  --with-png=3D${STAGING_LIBDIR}/.. \
-> >                    --with-jpeg=3D${STAGING_LIBDIR}/.. \
-> >                    --with-freetype \
->=20
-> http://patchwork.openembedded.org/patch/69991/ adds --with-freetype=3D${S=
-TAGING_LIBDIR}/.. \
->=20
-> and together with this it fails with:
-> | configure:13838: error: freetype support requested, but not found:
-> /home/jenkins/oe/shr-core-branches/shr-core/tmp-
-> eglibc/sysroots/qemuarm/usr/lib/../bin/freetype-config
->=20
-> can you please check it?
+root@beaglebone:~# perl -mModule::Metadata
 
-I saw that you have fixed it "[oe] [meta-oe][PATCH] gd: fix --with-freetype=
- option",=20
-I checked that it work fine with your patch, thanks!
+Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
+/usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
+/usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
+/usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
+/usr/lib/perl/5.14.3 .).
 
-Thanks,
-Jackie
+BEGIN failed--compilation aborted.
 
->=20
-> >                    --without-fontconfig \
-> > --
-> > 1.7.9.5
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
+>
+>> --Tim
+>> --
+>>
+>
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
