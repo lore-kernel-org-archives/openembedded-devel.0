@@ -1,37 +1,28 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id DBC56606D4
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A3E465D21
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 20:23:22 +0000 (UTC)
-Received: by mail-yk0-f172.google.com with SMTP id 200so2867454ykr.17
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 13:23:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=PENkTWpZuXYWuoLjTtxFUlQE0UjQp/8vr53DLuK0BiI=;
-	b=aLKvGeoguGNXogSt1hxC3DCjGZiGL8XdhLWoc886+bllUNT993qEpTeJDdIs1Z0lI/
-	8anloDIvSORMefJYNmNDlVDUpsz7mb2aiECFD/vmseOwFvCRexASOFff6Rw5lqfYoRCg
-	PEyVNoaV+4SP0damKtSSM/Nl+nL8uMlSoZdbGwR4lRtWs2QhuNA8reZYr7/bYVLHvFUI
-	4K4fBziUl50tZgSMEzo0OQLrq4EBVo/c2h20RnEisquxApaT/zSj508KVtrONOGvu1yh
-	kFHmT2U+KrIXPGvfiECM3BpaPA8XRWBAhCy2exiHNEUke5qkq+3T7Lgk5EXM6IcEDXKt
-	Wa+g==
+	Mon, 21 Apr 2014 02:17:40 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L2HUqi023887
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 20 Apr 2014 19:17:30 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
+	Sun, 20 Apr 2014 19:17:30 -0700
+Message-ID: <53547FB6.5040609@windriver.com>
+Date: Mon, 21 Apr 2014 10:17:26 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.236.199.212 with SMTP id x60mr135388yhn.90.1398025402925;
-	Sun, 20 Apr 2014 13:23:22 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.124.72 with HTTP; Sun, 20 Apr 2014 13:23:22 -0700 (PDT)
-In-Reply-To: <CAPbeDCn+wU_rCnmenVegyK_A4heeVRWOG_qU9j78z32TQ8by6w@mail.gmail.com>
-References: <1397581965-24301-1-git-send-email-jacob.kroon@mikrodidakt.se>
-	<20140420103441.GL2486@jama>
-	<CAPbeDCn+wU_rCnmenVegyK_A4heeVRWOG_qU9j78z32TQ8by6w@mail.gmail.com>
-Date: Sun, 20 Apr 2014 17:23:22 -0300
-X-Google-Sender-Auth: SWoXrILv9kmJNyz_x17PzWCRDTM
-Message-ID: <CAP9ODKoYBArpTXtnr3dEP7O=pKKERM0in_kBYDQ=RNV7R0p6mg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] populate_sdk_qt5.bbclass: Fix PACKAGE_GROUP deprecation warning
+To: <openembedded-devel@lists.openembedded.org>, Paul Eggleton
+	<paul.eggleton@linux.intel.com>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
+	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
+In-Reply-To: <CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
+Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,42 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Apr 2014 20:23:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Apr 2014 02:17:44 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Apr 20, 2014 at 10:54 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
-> Hi Martin,
+On 04/21/2014 04:19 AM, Tim Orling wrote:
+> (1) I am thinking about dropping this patch. perl-native provides
+> Module::Metadata 1.00004, so if subsequent packages are being
+> cross-compiled I have not yet proven there is a need for the updated
+> v1.000019 provided here.
 >
-> On Sun, Apr 20, 2014 at 12:34 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
+> (2) The question is, if one wanted to build subsequent packages in-situ,
+> how to provide Module::Metadata 1.00004 on a target system, since it is
+> only provided by perl-native?
+
+It is also provided by perl, for target.
+
+//Hongxu
+
 >
->> On Tue, Apr 15, 2014 at 07:12:45PM +0200, Jacob Kroon wrote:
->> > Fixes the following warning:
->> >
->> > WARNING: PACKAGE_GROUP is deprecated, please use FEATURE_PACKAGES instead
->>
->> It's correct patch, but I'm a bit tempted to take this patch after
->> branching daisy, because some people are using latest meta-qt5 with
->> older oe-core releases and this undoing this change is easy to miss
->> (unlike e.g. cmake .bbappends which fail when not updated for correct
->> oe-core releases).
->>
->> What do you think?
->>
->>
-> I think I follow you. So the deprecation happened in commit
-> d703e07ea5056624101e1bc48f10d25b602635e9, 2014-03-07, so I guess only
-> daisy/master will give the warning. For older oe-core releases with
-> meta-qt5 master, this patch could silently break stuff I can imagine. So
-> like you propose, keeping this one for master only, after branching daisy,
-> seems like a good idea to me.
+> --Tim
+> -- 
 
-I prefer to drop the warning in daisy. It is always bad to have
-warnings during the build and we ought to have it clean. As I said,
-this will indeed break people but not many people are using this class
-as this is quite new.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
