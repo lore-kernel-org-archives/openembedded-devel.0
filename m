@@ -1,26 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7199165D2B
+	by mail.openembedded.org (Postfix) with ESMTP id 92B3A65D2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 05:53:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L5rVud024718
+	Mon, 21 Apr 2014 06:21:07 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3L6L9wW024847
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Apr 2014 22:53:31 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Sun, 20 Apr 2014 22:53:30 -0700
-From: <wenzong.fan@windriver.com>
+	Sun, 20 Apr 2014 23:21:09 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.169.1; Sun, 20 Apr 2014 23:21:08 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 Apr 2014 01:53:27 -0400
-Message-ID: <751e6bee2f8bcfd9c78ad2b03a9f8b007abe028a.1398058983.git.wenzong.fan@windriver.com>
+Date: Mon, 21 Apr 2014 02:21:03 -0400
+Message-ID: <cover.1398061002.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1398058983.git.wenzong.fan@windriver.com>
-References: <cover.1398058983.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] vsftpd: fix install warning
+Subject: [meta-oe][PATCH 0/4] rsyslog: use update-alternatives and PACKAGECONFIG and two fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 05:53:34 -0000
+X-List-Received-Date: Mon, 21 Apr 2014 06:21:08 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-WARNING: QA Issue: vsftpd: Files/directories were installed but not shipped
-  /run
-  /run/vsftpd
-  /run/vsftpd/empty
-
-Signed-off-by: Li Wang <li.wang@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../recipes-daemons/vsftpd/vsftpd_3.0.0.bb         |    9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+The following changes since commit 5ccedeb028c46a6b98335fedb16029c6f7f87022:
 
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-index 0698a63..2cf9ac3 100644
---- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-@@ -70,7 +70,6 @@ do_install() {
-         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
-         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
-     fi
--    install -d ${D}${localstatedir}/run/vsftpd/empty
- }
- 
- INITSCRIPT_PACKAGES = "${PN}"
-@@ -82,3 +81,11 @@ USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp
-                        --shell /bin/false ftp "
- GROUPADD_PARAM_${PN} = "-r ftp"
- 
-+pkg_postinst_${PN}() {
-+	if [ -n "$D" ]; then
-+		exit 0
-+	fi
-+	if [ -e /etc/init.d/populate-volatile.sh ]; then
-+		/etc/init.d/populate-volatile.sh update
-+	fi
-+}
+  sshfs-fuse: update to 2.5 (2014-04-20 16:10:21 +0200)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib jhuang0/r_rsyslog_noptest-2
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=jhuang0/r_rsyslog_noptest-2
+
+Jackie Huang (4):
+  rsyslog: use BPN to fix multilib and add all licenses
+  rsyslog: add PACKAGECONFIG for optional features
+  rsyslog: Add config files and use update-alternatives for rsyslog,
+  rsyslog: add DEPENDS on bison-native and flex-native
+
+ .../recipes-extended/rsyslog/rsyslog/rsyslog.conf  |   84 +++++++++++++++++++
+ .../rsyslog/rsyslog/rsyslog.logrotate              |   39 +++++++++
+ meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb  |   88 ++++++++++++++++++--
+ 3 files changed, 202 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.conf
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+
 -- 
 1.7.9.5
 
