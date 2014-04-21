@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id C3825609B1
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E19D65D15
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 07:58:27 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id d17so3431487eek.15
+	Mon, 21 Apr 2014 08:56:03 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d17so3487294eek.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 00:58:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=QlHXX9Vosik395vFW0WvIYLZjP8n5ILLZNt2x949r9g=;
-	b=Sp3QWDtVUIbk1CYyCHMNbpUaMEFpzpygXh63nGv4wIKOu3+C5seXA6kyBc/ldLoHPF
-	ZndyiBB7JCt5SNzssAliJebfK2PcvnYhgvblUgAPbFPP/cBgFYnZZZbcqEgOCHH5asJ+
-	fqYtuQSAcEwdYs3co6s0ZNnkk0QJzn1k/6zgXgYY1uVlApuTjGyvFzUrs+SYEgRB2K9L
-	jtM9jWvTNPCxGX78kVaMA7i5PQdkTxA4d3/+DlVX5RCXAEW5/RDRSLkR+/IssDXArIBH
-	lKylRkH9j1j4lSDevbRxNP5JSvQtHda9TJHu4Zx96AW1Bb7s5Ed4EAxdC30HjU4iazYD
-	z7Bg==
-X-Received: by 10.15.22.201 with SMTP id f49mr45932796eeu.18.1398067107875;
-	Mon, 21 Apr 2014 00:58:27 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	Mon, 21 Apr 2014 01:56:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=oS5uEkgN4PEabh88pz+FkgccYg3suI9P4twwuDxhsPE=;
+	b=FKqFRtf1FmstzJAwJwBn4B5RnPGP4fkvzIrRQDZWDcF9FpU1ctkltL60i3uk+EnSpM
+	7kB1C2ez3GsjLVncO2m2xa9Q+IRaIeyHYpsz4Br8iMWNeCJC77EAPfjwhVsnenPd3A4T
+	gYl2LVzXGLf47tMKb/D8NsPT7gO5R6OM2h+2pxXy2banKxK82stXWjVoD4z2lBUA2UG3
+	Eu63muXnYG8/KS64HZjyIltL8VskiovonjIwOm8S1bGXrHmsxS+/qR2rgOZqL2kmkuLt
+	gCXN+7A/KG1KjdywnLVeeINYIPMUCFPw/mpwm39HbXTxwMW3aKkMNB2ltYLVv/Kj9Uzk
+	MsKw==
+X-Gm-Message-State: ALoCoQkTIzIQRclIguNgWnQCerXJhjw0mXLlOUOvysO13Ppu32HJzGyvrzwytdwMnunwEk+VLPmx
+X-Received: by 10.14.115.195 with SMTP id e43mr751110eeh.76.1398070563851;
+	Mon, 21 Apr 2014 01:56:03 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
 	by mx.google.com with ESMTPSA id
-	t44sm101327944eeo.6.2014.04.21.00.58.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Apr 2014 00:58:26 -0700 (PDT)
-Date: Mon, 21 Apr 2014 09:58:32 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	44sm101728923eek.30.2014.04.21.01.56.02 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 21 Apr 2014 01:56:03 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140421075832.GV2486@jama>
-References: <cover.1398058983.git.wenzong.fan@windriver.com>
-	<751e6bee2f8bcfd9c78ad2b03a9f8b007abe028a.1398058983.git.wenzong.fan@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <751e6bee2f8bcfd9c78ad2b03a9f8b007abe028a.1398058983.git.wenzong.fan@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH 1/2] vsftpd: fix install warning
+Date: Mon, 21 Apr 2014 10:55:58 +0200
+Message-Id: <1398070558-30504-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] fbida: update to latest git and make motif a PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,85 +44,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 07:58:35 -0000
-X-Groupsio-MsgNum: 49385
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="iQGPoUMhvSZ8XQaB"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 21 Apr 2014 08:56:06 -0000
 
---iQGPoUMhvSZ8XQaB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The x11 dependencies are now deterministic instead of enabling based on
+DISTRO_FEATURES without changing DEPENDS.
 
-On Mon, Apr 21, 2014 at 01:53:27AM -0400, wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->=20
-> WARNING: QA Issue: vsftpd: Files/directories were installed but not shipp=
-ed
->   /run
->   /run/vsftpd
->   /run/vsftpd/empty
+Disable motif by default as well, since *fb*ida is supposed to be
+framebuffer only by default.
 
-I'm glad to see fix for QA, but I don't think that everybody is using
-populate-volatile.sh for volatiles (e.g. images with systemd).
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-graphics/fbida/fbida_git.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-> Signed-off-by: Li Wang <li.wang@windriver.com>
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> ---
->  .../recipes-daemons/vsftpd/vsftpd_3.0.0.bb         |    9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/met=
-a-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> index 0698a63..2cf9ac3 100644
-> --- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> +++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-> @@ -70,7 +70,6 @@ do_install() {
->          sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfd=
-ir}/pam.d/vsftpd
->          sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsf=
-tpd
->      fi
-> -    install -d ${D}${localstatedir}/run/vsftpd/empty
->  }
-> =20
->  INITSCRIPT_PACKAGES =3D "${PN}"
-> @@ -82,3 +81,11 @@ USERADD_PARAM_${PN} =3D "--system --home-dir /var/lib/=
-ftp --no-create-home -g ftp
->                         --shell /bin/false ftp "
->  GROUPADD_PARAM_${PN} =3D "-r ftp"
-> =20
-> +pkg_postinst_${PN}() {
-> +	if [ -n "$D" ]; then
-> +		exit 0
-> +	fi
-> +	if [ -e /etc/init.d/populate-volatile.sh ]; then
-> +		/etc/init.d/populate-volatile.sh update
-> +	fi
-> +}
-> --=20
-> 1.7.9.5
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_git.bb b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+index 9eea664..f4dd01d 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_git.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif curl"
+ 
+ SRC_URI = "git://git.kraxel.org/fbida"
+-SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
++SRCREV = "6aa5563cb3c8864ad15cf83eb6fca3b773da1099"
+ PV = "2.09+git${SRCPV}"
+ S = "${WORKDIR}/git"
+ 
+@@ -21,15 +21,12 @@ PACKAGECONFIG ??= "gif png"
+ PACKAGECONFIG[gif] = ",,libungif"
+ PACKAGECONFIG[png] = ",,libpng"
+ PACKAGECONFIG[tiff] = ",,tiff"
++PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
+ 
+ do_compile() {
+     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
+     sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
+ 
+-    if [ -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ]; then
+-        sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
+-    fi
+-
+     # Be sure to respect preferences (force to "no")
+     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
+     if [ -z "${@base_contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
+@@ -41,6 +38,9 @@ do_compile() {
+     if [ -z "${@base_contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
+         sed -i -e '/^HAVE_LIBTIFF/s/:=.*$/:= no/' ${S}/GNUmakefile
+     fi
++    if [ -z "${@base_contains('PACKAGECONFIG', 'motif', 'motif', '', d)}" ]; then
++        sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
++    fi
+ 
+     oe_runmake
+ }
+-- 
+1.9.0
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---iQGPoUMhvSZ8XQaB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNUz6gACgkQN1Ujt2V2gBzOkQCeM09Wsubtqb4WpWZjeqMR6zfA
-GZoAn0nC8n2C3qE+c2/UH7VToIJlTaNY
-=VMSr
------END PGP SIGNATURE-----
-
---iQGPoUMhvSZ8XQaB--
