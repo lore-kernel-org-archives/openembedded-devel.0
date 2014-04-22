@@ -1,37 +1,34 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ee0-f41.google.com (mail-ee0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B09A65D06
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F240609C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 20:39:07 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id t10so3952941eei.0
+	Tue, 22 Apr 2014 01:41:24 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M1fPMB012727
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Apr 2014 13:39:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=myDWNq55e4qNBmzoafZgkf7mkkr+rVGDUaeSi/MWC08=;
-	b=Mw/DU9mZNNdmw6Z90yH0Lhg7u21yWImqVNGbJ2fEf1dYWk+dGW3Ukmn4r8wX4Z9a9U
-	3+XzALMfx+DddmajFTZ0BAQkSJ02HujfC+EACJxvgX1T8xc+YTERBqaq3iP2wB0cpY3M
-	NhoOq43WlFugyT2GtipuiprfdgvnACvX0xfJ9DOmWpo7lgv4KqwOTp+/l/f6RVgfTdBV
-	OgkUzMo9wZeLxjYQjLO49VdsvrLbn0maRdj3iz80ZGrBfmAStp0JnuiQkvAWloauI3jV
-	MWZ8zO5JfD0Mj83D2322zlMtOJZBHrSWRSOoXKRw6V8kxLVzVKuXZ6sTb1dednP9+ttp
-	w+Uw==
-X-Received: by 10.15.102.74 with SMTP id bq50mr50502077eeb.21.1398112748212;
-	Mon, 21 Apr 2014 13:39:08 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF19CD.dip0.t-ipconnect.de.
-	[79.223.25.205]) by mx.google.com with ESMTPSA id
-	a4sm106613146eep.12.2014.04.21.13.39.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Apr 2014 13:39:07 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Apr 2014 22:38:56 +0200
-Message-Id: <1398112736-7015-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 21 Apr 2014 18:41:25 -0700 (PDT)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.80]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
+	Mon, 21 Apr 2014 18:41:25 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 0/3] gd: update to version 2.1.0 and two
+	fixes
+Thread-Index: AQHPXVWXNvJa8q8oyEecEbKMHz+YSZsc3Q3g
+Date: Tue, 22 Apr 2014 01:41:24 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BF733B@ALA-MBB.corp.ad.wrs.com>
+References: <cover.1397545082.git.jackie.huang@windriver.com>
+	<20140421113331.GZ2486@jama>
+In-Reply-To: <20140421113331.GZ2486@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-Subject: [PATCH][meta-gnome] devilspie2: update to 0.33
+Subject: Re: [meta-oe][PATCH 0/3] gd: update to version 2.1.0 and two fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,55 +42,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Apr 2014 20:39:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 22 Apr 2014 01:41:26 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Note: 0.24 failed if lua >= 5.2 was build before devilspie (e.g world build) with
 
-| src/script.c: In function 'init_script':
-| src/script.c:65:2: warning: implicit declaration of function 'lua_open' [-Wimplicit-function-declaration]
-|   lua_State *lua=lua_open();
-|   ^
-| src/script.c:65:17: warning: initialization makes pointer from integer without a cast [enabled by default]
-|   lua_State *lua=lua_open();
-|                  ^
-| arm-angstrom-linux-gnueabi-gcc  -march=armv7-a -mthumb -mthumb-interwork -mfloat-abi=hard -mfpu=neon --sysroot=/home/superandy/tmp/oe-core-eglibc/sysroots/overo -ldl -lm -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  obj/devilspie2.o obj/xutils.o obj/script.o obj/script_functions.o -o bin/devilspie2 -lX11 `pkg-config --libs gtk+-2.0 libwnck-1.0 lua5.1`
-| src/script.c:65: error: undefined reference to 'lua_open'
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Monday, April 21, 2014 7:34 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 0/3] gd: update to version 2.1.0 and tw=
+o fixes
+>=20
+> On Tue, Apr 15, 2014 at 03:01:23PM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Merged 2 from 3 and 1 mine, thanks
+>=20
+> "add perl" one has some feedback
+
+I'm working for v2 for this one, thanks!
+
+Thanks,
+Jackie
+
+>=20
+> >
+> > --
+> > The following changes since commit 477ccd867cc71f8277f2670b7be34b3b1530=
+0052:
+> >
+> >   klibc: restylize a bit the recipes (2014-04-06 13:36:20 +0100)
+> >
+> > are available in the git repository at:
+> >
+> >   git://git.pokylinux.org/poky-contrib jhuang0/t_gd_140415-1
+> >
+> > http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=3Djhuang0/t_gd_14=
+0
+> > 415-1
+> >
+> > Hongxu Jia (1):
+> >   gd: add perl to RDEPENDS
+> >
+> > Jackie Huang (1):
+> >   gd: update to version 2.1.0
+> >
+> > Robert Yang (1):
+> >   gd: fix the subdir-objects error
+> >
+> >  .../gd/gd-2.1.0/fix-the-subdir-objects-error.patch |   39 ++++++++++++=
+++++++++
+> >  .../gd/{gd_2.0.35+2.0.36rc1.bb =3D> gd_2.1.0.bb}     |   25 ++++++++--=
 ---
- .../devilspie/{devilspie2_0.24.bb => devilspie2_0.33.bb}            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/devilspie/{devilspie2_0.24.bb => devilspie2_0.33.bb} (82%)
-
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-similarity index 82%
-rename from meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb
-rename to meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-index 9e6ba90..b00a449 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-@@ -4,15 +4,15 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
-                     file://GPL3.txt;md5=d32239bcb673463ab874e80d47fae504"
- 
--DEPENDS = "gtk+ glib-2.0 libwnck lua5.1 virtual/libx11"
-+DEPENDS = "gtk+ glib-2.0 libwnck lua virtual/libx11"
- 
- SRC_URI = " \
-     http://www.gusnan.se/devilspie2/download/devilspie2_${PV}-src.tar.gz \
-     file://default.lua \
-     file://devilspie2.desktop \
- "
--SRC_URI[md5sum] = "90b354662659e2922bd051fdde3b0971"
--SRC_URI[sha256sum] = "9c94fa13ed8c0bf6914fdda513e21a4bd527821b97a53d8004168a8d465a646a"
-+SRC_URI[md5sum] = "99c88f702e134d2b2f2f8caad4b1ef03"
-+SRC_URI[sha256sum] = "01a2ebcece14065c9a2e47decd81341e2a6f63e3bf43ff446103686718748356"
- 
- inherit pkgconfig
- 
--- 
-1.8.3.1
-
+> >  2 files changed, 55 insertions(+), 9 deletions(-)  create mode 100644
+> > meta-oe/recipes-support/gd/gd-2.1.0/fix-the-subdir-objects-error.patch
+> >  rename meta-oe/recipes-support/gd/{gd_2.0.35+2.0.36rc1.bb =3D>
+> > gd_2.1.0.bb} (40%)
+> >
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
