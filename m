@@ -1,25 +1,23 @@
 Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4423B60DD7
+	by mail.openembedded.org (Postfix) with ESMTP id 4333E60C14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 06:49:00 +0000 (UTC)
+	Tue, 22 Apr 2014 06:48:59 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M6n1sT005513
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M6mxRR005507
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 21 Apr 2014 23:49:01 -0700 (PDT)
+	Mon, 21 Apr 2014 23:48:59 -0700 (PDT)
 Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Mon, 21 Apr 2014 23:49:00 -0700
+	14.3.169.1; Mon, 21 Apr 2014 23:48:58 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Apr 2014 14:48:55 +0800
-Message-ID: <999dfca62f8060ab79736cf85a2e892da346c3b3.1398149249.git.hongxu.jia@windriver.com>
+Date: Tue, 22 Apr 2014 14:48:54 +0800
+Message-ID: <cover.1398149249.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <cover.1398149249.git.hongxu.jia@windriver.com>
-References: <cover.1398149249.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1] lib32-libcanberra: fix QA Warning Files/directories were installed but not shipped
+Subject: [PATCH 0/1] lib32-libcanberra: fix QA Warning Files/directories were installed but not shipped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,50 +34,22 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 22 Apr 2014 06:49:04 -0000
 Content-Type: text/plain
 
-...
-WARNING: QA Issue: lib32-libcanberra: Files/directories were installed but not shipped
-  /usr/lib/libcanberra-0.29/libcanberra-gstreamer.so
-  /usr/lib/libcanberra-0.29/libcanberra-multi.so
-  /usr/lib/libcanberra-0.29/libcanberra-pulse.so
-  /usr/lib/libcanberra-0.29/libcanberra-null.so
-  /usr/lib/libcanberra-0.29/libcanberra-alsa.so
-  /usr/lib/libcanberra-0.29/.debug
-  /usr/lib/libcanberra-0.29/.debug/libcanberra-gstreamer.so
-  /usr/lib/libcanberra-0.29/.debug/libcanberra-multi.so
-  /usr/lib/libcanberra-0.29/.debug/libcanberra-pulse.so
-  /usr/lib/libcanberra-0.29/.debug/libcanberra-null.so
-  /usr/lib/libcanberra-0.29/.debug/libcanberra-alsa.so
-...
+The following changes since commit 0f56bc4e2818a051a511ceb48596cbfa2f51ff3d:
 
-The dynamic libraries were installed into '${BPN}-${PV}' rather than '${P}'.
+  dejagnu: recipe taken from openembedded (2014-04-21 13:31:48 +0200)
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib hongxu/fix-libcanberra
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-libcanberra
+
+Hongxu Jia (1):
+  lib32-libcanberra: fix QA Warning Files/directories were installed but
+    not shipped
+
  meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb b/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
-index 332b62b..b10c3fd 100644
---- a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
-+++ b/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
-@@ -32,7 +32,7 @@ PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
- PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"
- 
- python populate_packages_prepend() {
--    plugindir = d.expand('${libdir}/${P}/')
-+    plugindir = d.expand('${libdir}/${BPN}-${PV}/')
-     do_split_packages(d, plugindir, '^libcanberra-(.*)\.so$', 'libcanberra-%s', '%s support library', extra_depends='' )
-     do_split_packages(d, plugindir, '^libcanberra-(.*)\.la$', 'libcanberra-%s', '%s support library', extra_depends='' )
- }
-@@ -44,7 +44,7 @@ FILES_${PN} = "${bindir}/ ${libdir}/${BPN}.so.*"
- 
- FILES_${PN}-dev += "${datadir}/vala/vapi ${libdir}/*/modules/*.la ${libdir}/*/*.la"
- 
--FILES_${PN}-dbg += "${libdir}/${P}/.debug ${libdir}/gtk-*/modules/.debug"
-+FILES_${PN}-dbg += "${libdir}/${BPN}-${PV}/.debug ${libdir}/gtk-*/modules/.debug"
- 
- FILES_${PN}-gtk2 = "${libdir}/${BPN}-gtk.so.* \
-                     ${libdir}/gtk-2.0/modules/*.so \
 -- 
 1.8.1.2
 
