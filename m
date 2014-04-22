@@ -1,25 +1,34 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D261F609AA
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-ve0-f178.google.com (mail-ve0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EF41E6084B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 15:12:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3MFCnHw028977
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 22 Apr 2014 22:59:51 +0000 (UTC)
+Received: by mail-ve0-f178.google.com with SMTP id jw12so179629veb.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 08:12:49 -0700 (PDT)
-Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.169.1; Tue, 22 Apr 2014 08:12:49 -0700
-From: Kai Kang <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Apr 2014 23:12:31 +0800
-Message-ID: <1398179551-12572-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.8.3.2
+	Tue, 22 Apr 2014 15:59:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=e4vl7WBWjydI90wZCT7cIf/XHSxGxGOgeZYHYLKwdTk=;
+	b=C/f5mAGRNoTlZJJ16Lr7N0TZfXBWjK76JtwUNjz7iYW520xmmeqm0F5mzYhDQS/sdv
+	ifjlWJ7yzn0Burz73x75x8Hug59voHx28ZpKVQlFp9ChIwOTjTxwPpgf2axLv89bXbN/
+	2nTon1qMRxb/TGbdBCWOkAcb+xz1E1PyaHSQGYPxd3ejm6gBPEWBuUnfJnVUH07003ab
+	T6ud994lqnwUyGDWDF6xTJ4/UGNLd7zicMSM0T+ozpyUsDzjT9mLgRAN+/6VkQbhAJtQ
+	lKSGVfRIFb1uu/NKc50NE28XhQv1/XiP89SsMbkQCTiTJ47q6R14C729COzPitOUHMOR
+	3iUw==
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.231]
-Subject: [meta-webserver][PATCH] apache: upgrade to 2.4.9
+X-Received: by 10.58.49.10 with SMTP id q10mr41530045ven.5.1398207592574; Tue,
+	22 Apr 2014 15:59:52 -0700 (PDT)
+Received: by 10.52.85.67 with HTTP; Tue, 22 Apr 2014 15:59:52 -0700 (PDT)
+In-Reply-To: <CAFeBWL69KhpCShJsMnd+Vu0nd5wp5u9KZ_+3Sjd9z0Kyhx96Xw@mail.gmail.com>
+References: <CAFeBWL69KhpCShJsMnd+Vu0nd5wp5u9KZ_+3Sjd9z0Kyhx96Xw@mail.gmail.com>
+Date: Tue, 22 Apr 2014 15:59:52 -0700
+Message-ID: <CAFeBWL6bneKQgZ2XX3mZjqJXuDbG0y7rLNOWskLAerUsXDV57w@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: xfce4-dev-tools fails to build on master-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,56 +42,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Apr 2014 15:12:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 Apr 2014 22:59:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Upgrade apache from 2.4.7 to 2.4.9.
+It looks like autotools bbclass began doing out of tree build. Switching to
+Poky's 'daisy' branch, which contains a couple of autotools related
+commits, fixed this issue.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../apache2/{apache2-native_2.4.7.bb => apache2-native_2.4.9.bb}      | 4 ++--
- .../recipes-httpd/apache2/{apache2_2.4.7.bb => apache2_2.4.9.bb}      | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.7.bb => apache2-native_2.4.9.bb} (89%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.7.bb => apache2_2.4.9.bb} (97%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-similarity index 89%
-rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-index bd935eb..aaa7e60 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-@@ -13,8 +13,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
- S = "${WORKDIR}/httpd-${PV}"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
--SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
-+SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
-+SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
- 
- do_configure () {
-     ./configure --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-similarity index 97%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-index 3c038a9..33e197a 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-@@ -20,8 +20,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://apache2-volatile.conf"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
--SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
-+SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
-+SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--- 
-1.8.4
+On Mon, Apr 21, 2014 at 10:56 AM, Adam Lee <adam.yh.lee@gmail.com> wrote:
 
+> I noticed my XFCE image is blocked due to the following:
+>
+> DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+>
+> DEBUG: Executing shell function do_compile
+>
+> NOTE: make -j 4
+>
+> Making all in m4macros
+>
+> make[1]: Entering directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/m4macros'
+>
+> make[1]: Nothing to be done for `all'.
+>
+> make[1]: Leaving directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/m4macros'
+>
+> Making all in scripts
+>
+> make[1]: Entering directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/scripts'
+>
+> make[1]: *** No rule to make target `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/xfce4-dev-tools-4.11.0/scripts/xdt-autogen.in', needed by `xdt-autogen'.  Stop.
+>
+> make[1]: Leaving directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/scripts'
+>
+> make: *** [all-recursive] Error 1
+>
+> ERROR: oe_runmake failed
+>
+> WARNING: exit code 1 from a shell command.
+>
+> ERROR: Function failed: do_compile (log file is located at /media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/temp/log.do_compile.22389)
+>
+> I can only see xdt-autogen.in.in (not xdt-autogen.in) in the scripts
+> directory. This is the same with the previous version however.
+>
+> Has anyone else seen this? Thanks!
+>
+> Adam
+>
 
