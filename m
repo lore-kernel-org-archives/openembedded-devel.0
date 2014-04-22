@@ -1,33 +1,25 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F5EE606D4
+	by mail.openembedded.org (Postfix) with ESMTP id D261F609AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 09:43:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M9hol9001619
+	Tue, 22 Apr 2014 15:12:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3MFCnHw028977
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 02:43:50 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.80]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
-	Tue, 22 Apr 2014 02:43:50 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v2 0/3] collectd: three fixes
-Thread-Index: AQHPXHg65Exk6hTvIUKfS4DeYUun7JsdZaVQ
-Date: Tue, 22 Apr 2014 09:43:49 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BF7A94@ALA-MBB.corp.ad.wrs.com>
-References: <cover.1396947706.git.jackie.huang@windriver.com>
-	<20140420090913.GS2486@jama>
-In-Reply-To: <20140420090913.GS2486@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.135]
+	Tue, 22 Apr 2014 08:12:49 -0700 (PDT)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.169.1; Tue, 22 Apr 2014 08:12:49 -0700
+From: Kai Kang <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Apr 2014 23:12:31 +0800
+Message-ID: <1398179551-12572-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.8.3.2
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2 0/3] collectd: three fixes
+X-Originating-IP: [128.224.162.231]
+Subject: [meta-webserver][PATCH] apache: upgrade to 2.4.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,88 +33,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Apr 2014 09:43:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Apr 2014 15:12:53 -0000
+Content-Type: text/plain
 
+Upgrade apache from 2.4.7 to 2.4.9.
 
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../apache2/{apache2-native_2.4.7.bb => apache2-native_2.4.9.bb}      | 4 ++--
+ .../recipes-httpd/apache2/{apache2_2.4.7.bb => apache2_2.4.9.bb}      | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.7.bb => apache2-native_2.4.9.bb} (89%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.7.bb => apache2_2.4.9.bb} (97%)
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Sunday, April 20, 2014 5:09 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH v2 0/3] collectd: three fixes
->=20
-> On Tue, Apr 08, 2014 at 05:07:47PM +0800, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > v2 comment:
-> > "collectd: explicitly enable/disable libsensors support":
-> > changed the config option to be a PACKAGECONFIG option
->=20
-> I'm going to merge all 3, but can you add load.so, disk.so, threshold.so =
-to PRIVATE_LIBS to hide
-> following warnings?
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
+similarity index 89%
+rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
+index bd935eb..aaa7e60 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.7.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
+@@ -13,8 +13,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
+-SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
++SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
++SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
+ 
+ do_configure () {
+     ./configure --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
+index 3c038a9..33e197a 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.7.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
+@@ -20,8 +20,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://apache2-volatile.conf"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
+-SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
++SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
++SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-- 
+1.8.4
 
-Sure, I will do that.
-
-Thanks,
-Jackie
-
->=20
-> log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registe=
-red as shlib provider for
-> load.so, changing it to collectd-5.2.2 because it was built later
-> log.world.20140418_190059.log/bitbake.log:WARNING:
-> libgphoto2-camlibs-2.4.11 was registered as shlib provider for disk.so, c=
-hanging it to collectd-5.2.2
-> because it was built later
-> log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registe=
-red as shlib provider for
-> threshold.so, changing it to
-> collectd-5.2.2 because it was built later
->=20
-> >
-> > ---
-> > The following changes since commit bc969d3705c45928de8525ef3d2d9d286731=
-1864:
-> >
-> >   inetutils: add -dbg packages for tftpd, telnetd and rshd (2014-04-02
-> > 11:18:54 -0400)
-> >
-> > are available in the git repository at:
-> >
-> >   git://git.pokylinux.org/poky-contrib jhuang0/r_collectd_1
-> >
-> > http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=3Djhuang0/r_colle=
-c
-> > td_1
-> >
-> > Ming Liu (1):
-> >   collectd: explicitly enable/disable libsensors support
-> >
-> > Wenzong Fan (2):
-> >   collectd: enable/disable libpq explicitly
-> >   collectd: fix init status
-> >
-> >  .../collectd/collectd/collectd.init                |   13 ++++++++++++=
--
-> >  .../recipes-extended/collectd/collectd_5.2.2.bb    |    6 ++++--
-> >  2 files changed, 16 insertions(+), 3 deletions(-)
-> >
-> > --
-> > 1.7.9.5
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
