@@ -1,24 +1,33 @@
 Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 06A9A609C0
+	by mail.openembedded.org (Postfix) with ESMTP id 4F5EE606D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 08:24:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M8Oisi019735
+	Tue, 22 Apr 2014 09:43:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3M9hol9001619
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Apr 2014 01:24:44 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 22 Apr 2014 01:24:43 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Apr 2014 04:24:41 -0400
-Message-ID: <1398155081-15948-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Tue, 22 Apr 2014 02:43:50 -0700 (PDT)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.80]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0169.001;
+	Tue, 22 Apr 2014 02:43:50 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2 0/3] collectd: three fixes
+Thread-Index: AQHPXHg65Exk6hTvIUKfS4DeYUun7JsdZaVQ
+Date: Tue, 22 Apr 2014 09:43:49 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAB5BF7A94@ALA-MBB.corp.ad.wrs.com>
+References: <cover.1396947706.git.jackie.huang@windriver.com>
+	<20140420090913.GS2486@jama>
+In-Reply-To: <20140420090913.GS2486@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] eject: Fix wrong return value
+Subject: Re: [meta-oe][PATCH v2 0/3] collectd: three fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,56 +41,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Apr 2014 08:24:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 Apr 2014 09:43:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Jackie Huang <jackie.huang@windriver.com>
 
-Remove the unnecessary return(1) from function usage(), so that eject -h
-can return the right value.
 
-Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../eject/eject/eject-2.1.5-error-return.patch     |   12 ++++++++++++
- meta-oe/recipes-support/eject/eject_2.1.5.bb       |    4 +++-
- 2 files changed, 15 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Sunday, April 20, 2014 5:09 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH v2 0/3] collectd: three fixes
+>=20
+> On Tue, Apr 08, 2014 at 05:07:47PM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > v2 comment:
+> > "collectd: explicitly enable/disable libsensors support":
+> > changed the config option to be a PACKAGECONFIG option
+>=20
+> I'm going to merge all 3, but can you add load.so, disk.so, threshold.so =
+to PRIVATE_LIBS to hide
+> following warnings?
 
-diff --git a/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-new file mode 100644
-index 0000000..5e13036
---- /dev/null
-+++ b/meta-oe/recipes-support/eject/eject/eject-2.1.5-error-return.patch
-@@ -0,0 +1,12 @@
-+Upstream-Status: Inappropriate [the upstream is no longer active]
-+
-+--- eject/eject.c.orig	2013-09-11 18:08:36.000000000 +0800
-++++ eject/eject.c	2013-09-11 18:09:05.000000000 +0800
-+@@ -207,7 +207,6 @@
-+ "If omitted, name defaults to `%s'.\n"
-+ "By default tries -r, -s, -f, and -q in order until success.\n"),
-+ 			DEFAULTDEVICE);
-+-  exit(1);
-+ }
-+ 
-+ 
-diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index 98319a3..c47c653 100644
---- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-+++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
- inherit autotools gettext update-alternatives
- 
--SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz"
-+SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz \
-+           file://eject-2.1.5-error-return.patch \
-+"
- 
- SRC_URI[md5sum] = "b96a6d4263122f1711db12701d79f738"
- SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e2ffe55"
--- 
-1.7.9.5
+Sure, I will do that.
 
+Thanks,
+Jackie
+
+>=20
+> log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registe=
+red as shlib provider for
+> load.so, changing it to collectd-5.2.2 because it was built later
+> log.world.20140418_190059.log/bitbake.log:WARNING:
+> libgphoto2-camlibs-2.4.11 was registered as shlib provider for disk.so, c=
+hanging it to collectd-5.2.2
+> because it was built later
+> log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registe=
+red as shlib provider for
+> threshold.so, changing it to
+> collectd-5.2.2 because it was built later
+>=20
+> >
+> > ---
+> > The following changes since commit bc969d3705c45928de8525ef3d2d9d286731=
+1864:
+> >
+> >   inetutils: add -dbg packages for tftpd, telnetd and rshd (2014-04-02
+> > 11:18:54 -0400)
+> >
+> > are available in the git repository at:
+> >
+> >   git://git.pokylinux.org/poky-contrib jhuang0/r_collectd_1
+> >
+> > http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=3Djhuang0/r_colle=
+c
+> > td_1
+> >
+> > Ming Liu (1):
+> >   collectd: explicitly enable/disable libsensors support
+> >
+> > Wenzong Fan (2):
+> >   collectd: enable/disable libpq explicitly
+> >   collectd: fix init status
+> >
+> >  .../collectd/collectd/collectd.init                |   13 ++++++++++++=
+-
+> >  .../recipes-extended/collectd/collectd_5.2.2.bb    |    6 ++++--
+> >  2 files changed, 16 insertions(+), 3 deletions(-)
+> >
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
