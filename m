@@ -1,34 +1,28 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CDA465D3C
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB01.domain01.net (STOEXHUB01.domain01.net
+	[83.145.59.142])
+	by mail.openembedded.org (Postfix) with ESMTP id A214060782
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 08:11:36 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WcsHH-0000zM-8x for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Apr 2014 10:11:35 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 10:11:35 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 10:11:35 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 23 Apr 2014 10:11:20 +0200
-Message-ID: <lj7sj8$46s$1@ger.gmane.org>
-References: <1398240000-22960-1-git-send-email-Chong.Lu@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-In-Reply-To: <1398240000-22960-1-git-send-email-Chong.Lu@windriver.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [PATCH] rrdtool: enable perl and python bindings
+	Wed, 23 Apr 2014 08:22:25 +0000 (UTC)
+Received: from ad.chargestorm.se (2.71.147.210) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Wed, 23 Apr 2014 10:22:24 +0200
+Date: Wed, 23 Apr 2014 10:22:22 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20140423082222.GD7075@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <CAFeBWL69KhpCShJsMnd+Vu0nd5wp5u9KZ_+3Sjd9z0Kyhx96Xw@mail.gmail.com>
+	<CAFeBWL6bneKQgZ2XX3mZjqJXuDbG0y7rLNOWskLAerUsXDV57w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAFeBWL6bneKQgZ2XX3mZjqJXuDbG0y7rLNOWskLAerUsXDV57w@mail.gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: xfce4-dev-tools fails to build on master-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,47 +36,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 08:11:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Apr 2014 08:22:29 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Adam Lee <adam.yh.lee@gmail.com> [140423 01:01]:
 
-Chong Lu schreef op 23-04-14 10:00:
-> 1. default enable perl and python bindings 2. rrdtool uses perl.real, 
-> perl.real doesn't know where the PERL5LIB should be when prebuilts are 
-> used. Use the wrapper perl instead, perl sets PERL5LIB and invokes 
-> perl.real 3. While using dash as /bin/sh, subsequent commands in 
-> functions will not use the environment variables passed to the function 
-> call line unless explicitly run "export ENV_VAR". 4. delete unrecognized 
-> options: "--enable-local-libpng" and "--enable-local-zlib"
-> 
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com> --- 
-> meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |  125 
-> ++++++++++++++++++++- 1 file changed, 119 insertions(+), 6 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb 
-> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb index 
-> 533451f..1fe0302 100644 --- 
-> a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb +++ 
-> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb @@ -5,6 +5,7 @@ 
-> LICENSE = "GPLv2" LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
-> 
-> DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
-> +RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long
-> perl-module-time-hires perl-module-io-file"
+> It looks like autotools bbclass began doing out of tree build. Switching to
+> Poky's 'daisy' branch, which contains a couple of autotools related
+> commits, fixed this issue.
 
-Variables are ordered by task order, so R* vars go next to FILES* vars. And
-I suspect PN-python will need python-core.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Yes, the autotools bbclass has been switched to doing out of tree builds
+as the default. (For several good reasons).
 
-iD8DBQFTV3WoMkyGM64RGpERAvDkAKCZwY6DfiM8YYyc0ZUXbwz2SjdQUgCgoGbK
-+TpF5uCZRHGAPlipvP/UxqU=
-=kATN
------END PGP SIGNATURE-----
+The best thing would of course be to adapt the receipt in question. The
+intermediate solution is to switch the recipe from 
+inherit autotools
+to 
+inherit autotools-brokensep
 
+This will restore the old, build in tree, behaviour.
+
+Cheers,
+
+Anders
+
+> On Mon, Apr 21, 2014 at 10:56 AM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+
+> > I noticed my XFCE image is blocked due to the following:
+
+> > DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+
+> > DEBUG: Executing shell function do_compile
+
+> > NOTE: make -j 4
+
+> > Making all in m4macros
+
+> > make[1]: Entering directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/m4macros'
+
+> > make[1]: Nothing to be done for `all'.
+
+> > make[1]: Leaving directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/m4macros'
+
+> > Making all in scripts
+
+> > make[1]: Entering directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/scripts'
+
+> > make[1]: *** No rule to make target `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/xfce4-dev-tools-4.11.0/scripts/xdt-autogen.in', needed by `xdt-autogen'.  Stop.
+
+> > make[1]: Leaving directory `/media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/build/scripts'
+
+> > make: *** [all-recursive] Error 1
+
+> > ERROR: oe_runmake failed
+
+> > WARNING: exit code 1 from a shell command.
+
+> > ERROR: Function failed: do_compile (log file is located at /media/Build/next/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/xfce4-dev-tools/4.11.0-r0/temp/log.do_compile.22389)
+
+> > I can only see xdt-autogen.in.in (not xdt-autogen.in) in the scripts
+> > directory. This is the same with the previous version however.
+
+> > Has anyone else seen this? Thanks!
+
+> > Adam
+-- 
+Anders Darander
+ChargeStorm AB / eStorm AB
 
