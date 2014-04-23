@@ -1,32 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C800609B1;
-	Wed, 23 Apr 2014 04:21:11 +0000 (UTC)
-Received: by mail-ie0-f176.google.com with SMTP id rd18so420361iec.35
-	for <multiple recipients>; Tue, 22 Apr 2014 21:21:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=xiXD8a4M0QWZeFXR6lxWdElv6p+2/0Aqkf+ccqeRMxg=;
-	b=yr8BdAG+8dD2+Fw7wiUkv6BUoHf1FKiAIz/9gXwcBbUDESy4ls4hvnjyBgKqrv7qEG
-	4/dou5Fx0TXRX3ep0CQj2d5Jn0sqC06BaA+X+qIkOXBXyGXOrMke4/e7tpAm+YSy+XiZ
-	s5NYrsRlQ5kn6QT89b6LJ6/rJhWajW92mraqbq9VYEPxhMSDF0HEh/TVaGjDBHvMA70q
-	gWrjYKkCoVzk5DmbMonGRtdDDcR3WauT1vOfCnOldxwEXiNIVR5gSc//SdYREfX9fKDz
-	mFQRHePjNAsK4+XedqQwlujh8z6liNCNjsteYi503lrvDxlPYOpOhyhH6AbSNkUesfYI
-	P0Kg==
-X-Received: by 10.43.140.144 with SMTP id ja16mr42074131icc.46.1398226872113; 
-	Tue, 22 Apr 2014 21:21:12 -0700 (PDT)
+Return-Path: <sgh@sgh.dk>
+Received: from mx-aarh-3.stofanet.dk (mx-aarh-3.stofanet.dk [212.10.10.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8691A609A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Apr 2014 07:01:54 +0000 (UTC)
+Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
+	by mx-aarh-3.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1WcrBp-0004eP-2v; Wed, 23 Apr 2014 09:01:53 +0200
+Received: from koontz.localnet (localhost [127.0.0.1])
+	by asrock (Postfix) with ESMTPS id 75AE97ECB5;
+	Wed, 23 Apr 2014 09:01:53 +0200 (CEST)
+From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 23 Apr 2014 09:00:09 +0200
+Message-ID: <6764532.83vtKHNMPE@koontz>
+User-Agent: KMail/4.13 (Linux/3.13.0-24-lowlatency; KDE/4.13.0; i686; ; )
+In-Reply-To: <20140319174024.GB3726@jama>
+References: <1395236677-28379-1-git-send-email-sgh@sgh.dk>
+	<1647989.PEsjAC07VF@koontz> <20140319174024.GB3726@jama>
 MIME-Version: 1.0
-Received: by 10.50.229.14 with HTTP; Tue, 22 Apr 2014 21:20:42 -0700 (PDT)
-In-Reply-To: <E7466334-BD13-4847-948A-0885F4B4F987@gmail.com>
-References: <E7466334-BD13-4847-948A-0885F4B4F987@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 22 Apr 2014 21:20:42 -0700
-Message-ID: <CAMKF1spn=3YxzzJcYQs5RXya=eKJkMa=dPyU92awEPtmdRTvMQ@mail.gmail.com>
-To: openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Subject: Re: [RFT] gcc 4.9
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH] qtbase: Add libxi to depends.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,46 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 04:21:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Apr 2014 07:02:00 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-On Sun, Mar 23, 2014 at 1:35 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
->
-> gcc 4.9 release is coming in summer therefore I have put together the recipes here
->
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-4.9
->
-> So far my testing has been booting angstrom/systemd-image on all supported
-> qemu machines (except qemumips64 where there is a know kernel issue) both eglibc/uclibc
-> images
->
-> we would like to target them for 1.7 release so if you have cycles to test out
-> your image/machine combos please do so I would be interested in feedback and would accumulate fixes in this branch
->
-> If you run into some issues with some packages then its recommended to go through
->
-> http://gcc.gnu.org/gcc-4.9/changes.html
->
-> and especially http://gcc.gnu.org/gcc-4.9/porting_to.html
->
-> Which could help in cooking patches
->
+Hi MArtin
 
-Hi All
+This fix is not in master yet. Is it lost between two chairs ?
 
-As you might have noticed gcc 4.9.0 was released today
+Onsdag den 19. marts 2014 18:40:24 skrev Martin Jansa:
+> On Wed, Mar 19, 2014 at 06:02:57PM +0100, S=F8ren Holm wrote:
+> > yes problably. I did not investigate the whole structure that thoro=
+ugh
+> > apparently.
+> >=20
+> > Could that change get into dora?
+>=20
+> Yes, but first it needs to go to master.
+>=20
+> > Onsdag den 19. marts 2014 15:15:01 skrev Martin Jansa:
+> > > On Wed, Mar 19, 2014 at 02:56:18PM +0100, Jacob Kroon wrote:
+> > > > Maybe do something this instead ? This is only necessary for X1=
+1 right
+> > > > ?
+> > > >=20
+> > > > -DEPENDS +=3D "qtbase-native"
+> > > > +DEPENDS +=3D " \
+> > > > +    qtbase-native \
+> > > > +    ${@base_contains('DISTRO_FEATURES', 'x11', 'libxi', '', d)=
+} \
+> > > > +"
+> > > >=20
+> > > > /Jacob
+> > >=20
+> > > I think it belongs to
+> > > PACKAGECONFIG[xinput2] =3D "-xinput2,-no-xinput2,libxi"
 
-changed are here http://gcc.gnu.org/gcc-4.9/changes.html
-
-I have updated my contrib tree to use the release tar balls. Please
-test the branch out. If you are using OE-Core
-standalone you don't need to do anything once you apply the patches
-from contrib branch it should select 4.9
-I have left 4.8 still there since we want to phase it out only when we
-are sure that complete ecosystem is working
-fine with 4.9
-
-Thanks
--Khem
+--=20
+S=F8ren Holm
 
