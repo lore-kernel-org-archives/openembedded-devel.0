@@ -1,25 +1,24 @@
-Return-Path: <sgh@sgh.dk>
-Received: from mx-aarh-3.stofanet.dk (mx-aarh-3.stofanet.dk [212.10.10.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8691A609A7
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1989865CFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 07:01:54 +0000 (UTC)
-Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
-	by mx-aarh-3.stofanet.dk (envelope-from <sgh@sgh.dk>)
-	with esmtp id 1WcrBp-0004eP-2v; Wed, 23 Apr 2014 09:01:53 +0200
-Received: from koontz.localnet (localhost [127.0.0.1])
-	by asrock (Postfix) with ESMTPS id 75AE97ECB5;
-	Wed, 23 Apr 2014 09:01:53 +0200 (CEST)
-From: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 23 Apr 2014 09:00:09 +0200
-Message-ID: <6764532.83vtKHNMPE@koontz>
-User-Agent: KMail/4.13 (Linux/3.13.0-24-lowlatency; KDE/4.13.0; i686; ; )
-In-Reply-To: <20140319174024.GB3726@jama>
-References: <1395236677-28379-1-git-send-email-sgh@sgh.dk>
-	<1647989.PEsjAC07VF@koontz> <20140319174024.GB3726@jama>
+	Wed, 23 Apr 2014 07:26:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3N7QTRv010475
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Apr 2014 00:26:30 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 23 Apr 2014 00:26:29 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Apr 2014 03:26:27 -0400
+Message-ID: <1398237987-23458-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qtbase: Add libxi to depends.
+Subject: [meta-oe][PATCH v2] gd: split the binaries to package gd-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,42 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 07:02:00 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 23 Apr 2014 07:26:32 -0000
+Content-Type: text/plain
 
-Hi MArtin
+From: Jackie Huang <jackie.huang@windriver.com>
 
-This fix is not in master yet. Is it lost between two chairs ?
+As most linux distribution do, gd only includes the library,
+and split all the command line tools into gd-tools, and add
+the perl dependcy since one of the tools is a perl script.
 
-Onsdag den 19. marts 2014 18:40:24 skrev Martin Jansa:
-> On Wed, Mar 19, 2014 at 06:02:57PM +0100, S=F8ren Holm wrote:
-> > yes problably. I did not investigate the whole structure that thoro=
-ugh
-> > apparently.
-> >=20
-> > Could that change get into dora?
->=20
-> Yes, but first it needs to go to master.
->=20
-> > Onsdag den 19. marts 2014 15:15:01 skrev Martin Jansa:
-> > > On Wed, Mar 19, 2014 at 02:56:18PM +0100, Jacob Kroon wrote:
-> > > > Maybe do something this instead ? This is only necessary for X1=
-1 right
-> > > > ?
-> > > >=20
-> > > > -DEPENDS +=3D "qtbase-native"
-> > > > +DEPENDS +=3D " \
-> > > > +    qtbase-native \
-> > > > +    ${@base_contains('DISTRO_FEATURES', 'x11', 'libxi', '', d)=
-} \
-> > > > +"
-> > > >=20
-> > > > /Jacob
-> > >=20
-> > > I think it belongs to
-> > > PACKAGECONFIG[xinput2] =3D "-xinput2,-no-xinput2,libxi"
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-support/gd/gd_2.1.0.bb |    9 +++++++++
+ 1 file changed, 9 insertions(+)
 
---=20
-S=F8ren Holm
+diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+index a260cd6..d92e639 100644
+--- a/meta-oe/recipes-support/gd/gd_2.1.0.bb
++++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+@@ -30,3 +30,12 @@ EXTRA_OECONF += " --disable-rpath \
+                   --without-x"
+ 
+ EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
++
++PACKAGES += "${PN}-tools"
++
++FILES_${PN} = "${libdir}/lib*${SOLIBS}"
++FILES_${PN}-tools = "${bindir}/*"
++
++PROVIDES += "${PN}-tools"
++RPROVIDES_${PN}-tools = "${PN}-tools"
++RDEPENDS_${PN}-tools = "perl perl-module-strict"
+-- 
+1.7.9.5
+
 
