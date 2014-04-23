@@ -1,36 +1,24 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 21E9E65D3C
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D89F65D07
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 07:28:33 +0000 (UTC)
-Received: by mail-lb0-f172.google.com with SMTP id c11so436594lbj.31
+	Wed, 23 Apr 2014 08:00:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3N803Zs015857
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 00:28:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=gIg3ALtkmeHfdvRzRVR2/mMAfIfXCNFTQP7F6TzF2/w=;
-	b=wjBIBUr14OtolPITdNolQurdA+CmzbuhQ+EDlQOT0PBpaKMt2OqTnuD0fBoz52CzYq
-	kHd7mPCgHdoudmiT4ZgtNfYx5o4WWy96WkjBUO2y/c3RsQPmwwGavI8xuxv/o+ph1/9+
-	XvoRGDuiuD6+AQtuhy+kPVZFuT8XWeUmvQlZN9ML7Obo9HR/HJMdKZ9lYq1eDfOjKxaP
-	njd0+lDpS8Mf5Ex1co70LI7CQTqZGjQUN7echMHiulEAhY/SMzwrLTUCqmhXPOymb4aF
-	zCFF7oqxtM014WLI0OtM/rqvJmSQfuE4rjJAEJQek6ErccXwjSzHsQH/t9EJKMKV29Q9
-	8qzA==
+	Wed, 23 Apr 2014 01:00:03 -0700 (PDT)
+Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 23 Apr 2014 01:00:02 -0700
+From: Chong Lu <Chong.Lu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Apr 2014 16:00:00 +0800
+Message-ID: <1398240000-22960-1-git-send-email-Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.152.4.41 with SMTP id h9mr497842lah.43.1398238113862; Wed,
-	23 Apr 2014 00:28:33 -0700 (PDT)
-Received: by 10.112.53.73 with HTTP; Wed, 23 Apr 2014 00:28:33 -0700 (PDT)
-In-Reply-To: <6764532.83vtKHNMPE@koontz>
-References: <1395236677-28379-1-git-send-email-sgh@sgh.dk>
-	<1647989.PEsjAC07VF@koontz> <20140319174024.GB3726@jama>
-	<6764532.83vtKHNMPE@koontz>
-Date: Wed, 23 Apr 2014 09:28:33 +0200
-Message-ID: <CAPbeDCngUZaHTZARjxQ+ChMzHDphfVTMMSeJ2TyP3o08iOctgg@mail.gmail.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] qtbase: Add libxi to depends.
+Subject: [PATCH] rrdtool: enable perl and python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,50 +32,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 07:28:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Apr 2014 08:00:08 -0000
+Content-Type: text/plain
 
-Hi S=C3=B8ren,
+1. default enable perl and python bindings
+2. rrdtool uses perl.real, perl.real doesn't know where the PERL5LIB should be
+when prebuilts are used. Use the wrapper perl instead, perl sets PERL5LIB and
+invokes perl.real
+3. While using dash as /bin/sh, subsequent commands in functions will not use
+the environment variables passed to the function call line unless explicitly
+run "export ENV_VAR".
+4. delete unrecognized options: "--enable-local-libpng" and "--enable-local-zlib"
 
-On Wed, Apr 23, 2014 at 9:00 AM, S=C3=B8ren Holm <sgh@sgh.dk> wrote:
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+---
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |  125 ++++++++++++++++++++-
+ 1 file changed, 119 insertions(+), 6 deletions(-)
 
-> Hi MArtin
->
-> This fix is not in master yet. Is it lost between two chairs ?
->
-> Onsdag den 19. marts 2014 18:40:24 skrev Martin Jansa:
-> > On Wed, Mar 19, 2014 at 06:02:57PM +0100, S=C3=B8ren Holm wrote:
-> > > yes problably. I did not investigate the whole structure that thoroug=
-h
-> > > apparently.
-> > >
-> > > Could that change get into dora?
-> >
-> > Yes, but first it needs to go to master.
-> >
-> > > Onsdag den 19. marts 2014 15:15:01 skrev Martin Jansa:
-> > > > On Wed, Mar 19, 2014 at 02:56:18PM +0100, Jacob Kroon wrote:
-> > > > > Maybe do something this instead ? This is only necessary for X11
-> right
-> > > > > ?
-> > > > >
-> > > > > -DEPENDS +=3D "qtbase-native"
-> > > > > +DEPENDS +=3D " \
-> > > > > +    qtbase-native \
-> > > > > +    ${@base_contains('DISTRO_FEATURES', 'x11', 'libxi', '', d)} =
-\
-> > > > > +"
-> > > > >
-> > > > > /Jacob
-> > > >
-> > > > I think it belongs to
-> > > > PACKAGECONFIG[xinput2] =3D "-xinput2,-no-xinput2,libxi"
->
->
-Please test the solution that Martin proposed, and if everything looks
-good, submit a patch using the instructions found in meta-qt5/README
-and http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded.
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+index 533451f..1fe0302 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+@@ -5,6 +5,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
+ 
+ DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
++RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-time-hires perl-module-io-file"
+ 
+ PR = "r2"
+ 
+@@ -15,25 +16,137 @@ SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
+ SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
+ SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
+ 
+-inherit autotools gettext
++inherit autotools gettext pythonnative perlnative python-dir
+ 
+ EXTRA_AUTORECONF = "-I m4"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "python perl"
++
++PACKAGECONFIG[python] = "--enable-python=yes \
++am_cv_python_pythondir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages \
++am_cv_python_pyexecdir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages,\
++--disable-python,python,"
++
++PACKAGECONFIG[perl] = \
++"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor"' \
++ac_cv_path_PERL_CC='${CC}',  \
++--disable-perl,perl,"
++
+ PACKAGECONFIG[dbi] = "--enable-libdbi,--disable-libdbi,libdbi"
+ 
+ EXTRA_OECONF = " \
+     --enable-shared \
+-    --enable-local-libpng \
+-    --enable-local-zlib \
+     --disable-libwrap \
+     --program-prefix='' \
+     rd_cv_ieee_works=yes \
+-    --disable-perl \
+-    --disable-python \
+     --disable-ruby \
+     --disable-lua \
+     --disable-rpath \
+ "
+ 
++# don't use perl.real, this results in break issues with prebuilts since perl.real doesn't
++# know where the PERL5LIB is...
++# use wrapper perl instead
++EXTRA_OEMAKE = "PERL=${STAGING_BINDIR_NATIVE}/perl-native/perl FULLPERL=${STAGING_BINDIR_NATIVE}/perl-native/perl"
++
++export BUILD_SYS
++export HOST_SYS
++export STAGING_LIBDIR
++export STAGING_INCDIR
++
++do_configure() {
++	#fix the pkglib problem with newer automake
++	#perl
++	sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
++	    ${S}/bindings/perl-shared/Makefile.PL
++
++	#python
++	sed -i -e '/PYTHON_INCLUDES="-I${/c \
++	PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
++	    ${S}/m4/acinclude.m4
++	#remove the hardcoded $(libdir) rpath
++	sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
++
++	autotools_do_configure
++
++	perl_version=`perl -v 2>/dev/null | \
++	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
++
++	#modify python sitepkg
++	#remove the dependency of perl-shared:Makefile
++	#or perl-shared/Makefile will be regenerated
++	#if any code touch bindings/Makefile after below perl bindings code
++	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
++	    --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
++	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
++	    ${S}/bindings/Makefile
++
++	#redo the perl bindings
++	(
++	cd bindings/perl-shared;
++	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
++	    INSTALLPRIVLIB="abc";
++	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++
++	cd ../../bindings/perl-piped;
++	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor";
++	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++	)
++
++	#change the interpreter in file
++	sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
++	    ${S}/examples/Makefile
++	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
++	    ${S}/examples/*.pl
++}
++
++python populate_packages_prepend() {
++    def fill_more(name, rdep=None):
++        if name is None or name.strip() == "":
++            return
++
++        fpack=d.getVar('PACKAGES') or ""
++        fpack="${PN}-" + name + " " + fpack
++        d.setVar('PACKAGES', fpack)
++        if rdep is not None:
++            prdep=d.getVar('RDEPENDS_${PN}-' + name) or ""
++            prdep=rdep + " " + prdep
++            d.setVar('RDEPENDS_${PN}-' + name, prdep)
++
++            prdep=d.getVar('RDEPENDS_${PN}-' + name) or ""
++            bb.debug(1, "RDEPENDS_${PN}-" + name + "=" + prdep)
++
++    conf=(d.getVar('PACKAGECONFIG', True) or "").split()
++    pack=d.getVar('PACKAGES') or ""
++    bb.debug(1, "PACKAGECONFIG=%s" % conf)
++    bb.debug(1, "PACKAGES1=%s" % pack )
++
++    if "perl" in conf :
++        fill_more("perl")
++
++    if "python" in conf:
++        fill_more("python")
++
++    pack=d.getVar('PACKAGES', True) or ""
++    bb.debug(1, "PACKAGES after=%s" % pack)
++
++    #debug code
++    #prdep=d.getVar('RDEPENDS_${PN}') or ""
++    #bb.debug(1, "RDEPENDS_${PN}" + "=" + prdep)
++    #prdep=d.getVar('RDEPENDS') or ""
++    #bb.debug(1, "RDEPENDS" + "=" + prdep)
++}
++
++FILES_${PN}-doc += "${datadir}/examples"
++
++DESCRIPTION_${PN}-perl = \
++"The ${PN}-perl package includes RRDtool bindings for perl."
++FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \
++    ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*"
++
++DESCRIPTION_${PN}-python = \
++"The ${PN}-python package includes RRDtool bindings for python."
++FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+ 
++FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
++    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
+-- 
+1.7.9.5
 
-/Jacob
 
