@@ -1,37 +1,24 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.12])
-	by mail.openembedded.org (Postfix) with ESMTP id 151A060782
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F42560781
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 08:34:55 +0000 (UTC)
-Received: from [216.82.249.131:56775] by server-12.bemta-12.messagelabs.com id
-	E6/80-29721-03B77535; Wed, 23 Apr 2014 08:34:56 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-15.tower-28.messagelabs.com!1398242095!29939591!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.1; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 4128 invoked from network); 23 Apr 2014 08:34:55 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-15.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
-	23 Apr 2014 08:34:55 -0000
-Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 23 Apr 2014 03:34:44 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by
-	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
-	8.3.342.0; Wed, 23 Apr 2014 03:34:54 -0500
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-exch01.digi.com (10.49.8.100) with Microsoft SMTP Server id
-	8.3.342.0; Wed, 23 Apr 2014 10:34:52 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Apr 2014 10:34:52 +0200
-Message-ID: <1398242092-43050-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 1.9.2
+	Wed, 23 Apr 2014 09:26:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3N9QU5S026552
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Apr 2014 02:26:30 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 23 Apr 2014 02:26:30 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Apr 2014 05:26:26 -0400
+Message-ID: <1398245186-27365-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] stunnel: fix configure ssl parameter
+Subject: [meta-oe][PATCH] collectd: add threshold.so, load.so and disk.so in PRIVATE_LIBS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,39 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 08:34:56 -0000
+X-List-Received-Date: Wed, 23 Apr 2014 09:26:33 -0000
 Content-Type: text/plain
 
-'--with-ssl=DIR' configure parameter expects the location of the
-libraries and include files in the sysroot. This means the directory
-containing the 'lib' and 'include' subdirectories, not the include
-directory itself.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-This fixes an error at configure time:
+to avoid the folloing warnings:
+log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registered as shlib provider for load.so, changing it to collectd-5.2.2 because it was built later
+log.world.20140418_190059.log/bitbake.log:WARNING:
+libgphoto2-camlibs-2.4.11 was registered as shlib provider for disk.so, changing it to collectd-5.2.2 because it was built later
+log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registered as shlib provider for threshold.so, changing it to
+collectd-5.2.2 because it was built later
 
-checking
-<local-path>/tmp/sysroots/ccimx6adpt/usr/include/include/openssl/engine.h
-usability... no
-
-(notice duplicated include entry in above line)
-
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
+ .../recipes-extended/collectd/collectd_5.2.2.bb    |    3 +++
+ 1 file changed, 3 insertions(+)
 
-Notes:
-    To backport to Dora as well.
-
- meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-index 086d0b7aafea..938f043a9d97 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+index 7cb41b9..8585ff3 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+@@ -56,3 +56,6 @@ do_install_append() {
+ INITSCRIPT_NAME = "collectd"
+ INITSCRIPT_PARAMS = "defaults"
  
- inherit autotools
- 
--EXTRA_OECONF += "--with-ssl='${STAGING_INCDIR}' --disable-fips"
-+EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
++# threshold.so load.so are also provided by gegl
++# disk.so is also provided by libgphoto2-camlibs
++PRIVATE_LIBS = "threshold.so load.so disk.so"
+-- 
+1.7.9.5
+
 
