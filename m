@@ -1,39 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f45.google.com (mail-ee0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 6385E60EFA
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 93D4F60EFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 14:58:11 +0000 (UTC)
-Received: by mail-ee0-f45.google.com with SMTP id d17so893679eek.4
+	Wed, 23 Apr 2014 16:10:51 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id 10so952428lbg.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 07:58:12 -0700 (PDT)
+	Wed, 23 Apr 2014 09:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qKF+adHfmS6KcHZpMlF/B6C73llVxUZcIzRH205uNuk=;
-	b=IgP1RYBLonEPQ1uGr0n0z7vkXmRo8lC4GoAMtc008vjdgB59amX5jFMNRTiJPWSaWO
-	b1HGL/IzfOlqDlhJSTSdhhbkzhmyPcgEUnqx51f+dVW+MrIMrHWiNo3W+TbJg3AH9o+a
-	n01X6C/H4cXV5ya5ks8ApGWx1RcZjdirDKRq4ujmfestCW8+Acb1GZ4pd7k/XZcaOtY/
-	o1huF/K/rBqMWs+LXtCmV3Z/dOJ1DvYLsvk2DRKir5AakrzxuHn3uetOGskaxLcV0IXA
-	0g22NGnnSYoxz+NOJCRjO1OQ7X03RPJAiIoM0eakPe64h0t2BIni26xiDHJ8oMRnZDMV
-	EQbg==
-X-Received: by 10.15.52.195 with SMTP id p43mr18949332eew.72.1398265092173;
-	Wed, 23 Apr 2014 07:58:12 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	m44sm6973278eep.14.2014.04.23.07.58.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Apr 2014 07:58:11 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Apr 2014 16:58:19 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140423145819.GJ2486@jama>
-References: <1398258576-21567-1-git-send-email-philip@balister.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=T2gwIG7+xW2jnlIaIyqjO7gDYaR+Fd360ZY8+3wFItc=;
+	b=EERQ2YT7SaxNsCPQOX5cDsygmB0laco3bt7FzSPnCGyyM7O2MAfb85V9ok6J5wylDA
+	pS2OshkK1nNnVMgL0VycjlWdfxFFPmTbju3uls/GMQj148AwpoB4pN+j+fk4fN914u5d
+	OtG1cd75zqVqG75oSDiAfe2o2h2YpnQFlMAvWkxi74H9jsdNaZk+lVKbnFKRX0OU3rRB
+	aPkPOKxZLhdn9ECya7K8WiQ6SnUd7gzOWSe9ImGEBzbpQuS7wIWj7dwYsZUk9SST8fxE
+	SAfLDwJ6bNlkVdp/+s4QHHern2l4akP+rVaTPiOGI34h2aXBIvHYDXjyUCRTrN1oBXZH
+	PJcQ==
 MIME-Version: 1.0
-In-Reply-To: <1398258576-21567-1-git-send-email-philip@balister.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] ntp : Convert libcap use from PACKAGECONFIG to hard DEPEND.
+X-Received: by 10.152.23.169 with SMTP id n9mr2165293laf.45.1398269452369;
+	Wed, 23 Apr 2014 09:10:52 -0700 (PDT)
+Received: by 10.114.191.202 with HTTP; Wed, 23 Apr 2014 09:10:52 -0700 (PDT)
+In-Reply-To: <53548CDA.4000804@windriver.com>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
+	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
+	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
+	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
+	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
+	<53547FB6.5040609@windriver.com>
+	<CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
+	<53548B00.5000700@windriver.com> <53548CDA.4000804@windriver.com>
+Date: Wed, 23 Apr 2014 09:10:52 -0700
+Message-ID: <CANx9H-C2Yar=x3FT+RassRP8siEzwwWf9ULD_X56rhS3ZHHDtw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,90 +50,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 14:58:15 -0000
-X-Groupsio-MsgNum: 49453
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rRbIS5PUI9wLpAeF"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Apr 2014 16:10:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
---rRbIS5PUI9wLpAeF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--Turns out to not be quite so simple. Module::Metadata is not ever being
+created by perl_*.bb. This is somewhat surprising because Module::Build
+needs Module::Metadata and this has been missed in
+Cross/configure.sh-arm-linux since perl v5.13.9.
+--You can verify this by running "perl -mModule::Build" on qemuarm/arm
+target.
+--I am working on a patch for oe-core.
 
-On Wed, Apr 23, 2014 at 06:09:36AM -0700, Philip Balister wrote:
-> If ntp is built without libcap, it refuses to start with the following
-> message:
->=20
 
-Why don't you just add cap to default PACKAGECONFIG? someone can add
-PACKAGECONFIG for clockctl later and use that instead of linuxcaps.
+On Sun, Apr 20, 2014 at 8:13 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
 
-> Starting ntpd: /usr/sbin/ntpd: The ``user'' option has been disabled -- b=
-uilt
-> without --enable-clockctl or --enable-linuxcaps
-> ntpd - NTP daemon program - Ver. 4.2.6p5
-> USAGE:  ntpd [ -<flag> [<val>] | --<name>[{=3D| }<val>] ]...
->=20
-> Signed-off-by: Philip Balister <philip@balister.org>
-> ---
->  meta-networking/recipes-support/ntp/ntp.inc | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networkin=
-g/recipes-support/ntp/ntp.inc
-> index 9c3e0d1..b8e9853 100644
-> --- a/meta-networking/recipes-support/ntp/ntp.inc
-> +++ b/meta-networking/recipes-support/ntp/ntp.inc
-> @@ -29,20 +29,21 @@ inherit autotools update-rc.d useradd systemd
-> =20
->  # The ac_cv_header_readline_history is to stop ntpdc depending on either
->  # readline or curses
-> -EXTRA_OECONF +=3D "--with-net-snmp-config=3Dno --without-ntpsnmpd ac_cv_=
-header_readline_history_h=3Dno --with-binsubdir=3Dsbin"
-> +EXTRA_OECONF +=3D "--with-net-snmp-config=3Dno --without-ntpsnmpd ac_cv_=
-header_readline_history_h=3Dno --with-binsubdir=3Dsbin --enable-linuxcaps"
->  CFLAGS_append =3D " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
-> =20
->  USERADD_PACKAGES =3D "${PN}"
->  USERADD_PARAM_${PN} =3D "--system --home-dir /var/lib/ntp \
->                         --shell /bin/false --user-group ntp"
-> =20
-> +DEPEND =3D "libcap"
-> +
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[openssl] =3D "--with-openssl-libdir=3D${STAGING_LIBDIR} \
->                            --with-openssl-incdir=3D${STAGING_INCDIR} \
->                            --with-crypto, \
->                            --without-openssl --without-crypto, \
->                            openssl"
-> -PACKAGECONFIG[cap] =3D "--enable-linuxcaps,--disable-linuxcaps,libcap"
->  PACKAGECONFIG[readline] =3D "--with-lineeditlibs,--without-lineeditlibs,=
-readline"
-> =20
->  do_install_append() {
-> --=20
-> 1.9.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> On 04/21/2014 11:05 AM, Hongxu Jia wrote:
+>
+>> On 04/21/2014 11:01 AM, Tim Orling wrote:
+>>
+>>> On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>
+>>> wrote:
+>>>
+>>>  On 04/21/2014 04:19 AM, Tim Orling wrote:
+>>>>
+>>>>  (1) I am thinking about dropping this patch. perl-native provides
+>>>>> Module::Metadata 1.00004, so if subsequent packages are being
+>>>>> cross-compiled I have not yet proven there is a need for the updated
+>>>>> v1.000019 provided here.
+>>>>>
+>>>>> (2) The question is, if one wanted to build subsequent packages
+>>>>> in-situ,
+>>>>> how to provide Module::Metadata 1.00004 on a target system, since it is
+>>>>> only provided by perl-native?
+>>>>>
+>>>>>  It is also provided by perl, for target.
+>>>>
+>>>> //Hongxu
+>>>>
+>>>>
+>>>>  I am not seeing it. Am I missing something?
+>>>
+>>
+>>
+>> Hi Tim,
+>>
+>> I am afraid Module::Metadataj is not in perl by default, you need
+>> to tweak poky/meta/recipes-devtools/perl/perl_5.14.3.bb, to create
+>> a new package for Module::Metadata, you could reference what
+>> 'perl-module-cpan' did, such as:
+>> ...
+>> PACKAGES += "perl-module-metadata"
+>> FILES_perl-module-metadata += ">>the files you need<<"
+>> ...
+>>
+>
+> You also need tweak do_install, to install Metadata.pm from ${S}
+> to ${D}, the default do_install did not do that.
+>
+> //Hongxu
+>
+>
+>
+>> And add 'perl-module-metadata' to your recipes's RDEPENDS.
+>>
+>> //Hongxu
+>>
+>>
+>>> root@beaglebone:~# perl -mModule::Metadata
+>>>
+>>> Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
+>>> /usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
+>>> /usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
+>>> /usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
+>>> /usr/lib/perl/5.14.3 .).
+>>>
+>>> BEGIN failed--compilation aborted.
+>>>
+>>>  --Tim
+>>>>> --
+>>>>>
+>>>>>  --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>
+>>>>
+>>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---rRbIS5PUI9wLpAeF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNX1QsACgkQN1Ujt2V2gByA1wCdHADbDIFxfEFanEThEJPcZoXf
-my4An0EvRyf5TOUbEp2+xJPBK1e1GkNF
-=DUNQ
------END PGP SIGNATURE-----
-
---rRbIS5PUI9wLpAeF--
