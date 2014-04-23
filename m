@@ -1,41 +1,32 @@
-Return-Path: <B40290@freescale.com>
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2lp0203.outbound.protection.outlook.com [207.46.163.203])
-	by mail.openembedded.org (Postfix) with ESMTP id 74177607FE
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 03:21:19 +0000 (UTC)
-Received: from BY2PR03MB254.namprd03.prod.outlook.com (10.242.37.17) by
-	BY2PR03MB394.namprd03.prod.outlook.com (10.141.141.13) with Microsoft
-	SMTP Server (TLS) id 15.0.921.12; Wed, 23 Apr 2014 03:21:13 +0000
-Received: from BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.59]) by
-	BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.59]) with mapi id
-	15.00.0921.000; Wed, 23 Apr 2014 03:21:12 +0000
-From: "B40290@freescale.com" <B40290@freescale.com>
-To: "B40290@freescale.com" <B40290@freescale.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking][PATCH ] sethdlc: don't search host
-	directories for header files
-Thread-Index: AQHPWe7z2BZn4he5e02U7PjPd4/Xb5sekicQ
-Date: Wed, 23 Apr 2014 03:21:11 +0000
-Message-ID: <e3335e4355fc4394b8f955272edc19f0@BY2PR03MB254.namprd03.prod.outlook.com>
-References: <1397706091-8116-1-git-send-email-b40290@freescale.com>
-In-Reply-To: <1397706091-8116-1-git-send-email-b40290@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [123.151.195.49]
-x-forefront-prvs: 01901B3451
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009001)(6009001)(428001)(377454003)(199002)(13464003)(189002)(164054003)(33646001)(19580395003)(79102001)(74662001)(20776003)(74502001)(76576001)(4396001)(83322001)(19580405001)(81342001)(66066001)(80022001)(74316001)(81542001)(86362001)(575784001)(87936001)(76176999)(99286001)(77982001)(85852003)(99396002)(83072002)(54356999)(2656002)(80976001)(92566001)(31966008)(76482001)(15975445006)(50986999)(46102001)(24736002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BY2PR03MB394;
-	H:BY2PR03MB254.namprd03.prod.outlook.com;
-	FPR:B1CF7DF5.C8E0B459.71D397A0.4CCB47C2.203B3; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
-received-spf: None (: freescale.com does not designate permitted sender hosts)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C800609B1;
+	Wed, 23 Apr 2014 04:21:11 +0000 (UTC)
+Received: by mail-ie0-f176.google.com with SMTP id rd18so420361iec.35
+	for <multiple recipients>; Tue, 22 Apr 2014 21:21:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=xiXD8a4M0QWZeFXR6lxWdElv6p+2/0Aqkf+ccqeRMxg=;
+	b=yr8BdAG+8dD2+Fw7wiUkv6BUoHf1FKiAIz/9gXwcBbUDESy4ls4hvnjyBgKqrv7qEG
+	4/dou5Fx0TXRX3ep0CQj2d5Jn0sqC06BaA+X+qIkOXBXyGXOrMke4/e7tpAm+YSy+XiZ
+	s5NYrsRlQ5kn6QT89b6LJ6/rJhWajW92mraqbq9VYEPxhMSDF0HEh/TVaGjDBHvMA70q
+	gWrjYKkCoVzk5DmbMonGRtdDDcR3WauT1vOfCnOldxwEXiNIVR5gSc//SdYREfX9fKDz
+	mFQRHePjNAsK4+XedqQwlujh8z6liNCNjsteYi503lrvDxlPYOpOhyhH6AbSNkUesfYI
+	P0Kg==
+X-Received: by 10.43.140.144 with SMTP id ja16mr42074131icc.46.1398226872113; 
+	Tue, 22 Apr 2014 21:21:12 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-networking][PATCH ] sethdlc: don't search host directories for header files
+Received: by 10.50.229.14 with HTTP; Tue, 22 Apr 2014 21:20:42 -0700 (PDT)
+In-Reply-To: <E7466334-BD13-4847-948A-0885F4B4F987@gmail.com>
+References: <E7466334-BD13-4847-948A-0885F4B4F987@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 Apr 2014 21:20:42 -0700
+Message-ID: <CAMKF1spn=3YxzzJcYQs5RXya=eKJkMa=dPyU92awEPtmdRTvMQ@mail.gmail.com>
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+Subject: Re: [RFT] gcc 4.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,106 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 03:21:23 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Apr 2014 04:21:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Pings
+On Sun, Mar 23, 2014 at 1:35 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> gcc 4.9 release is coming in summer therefore I have put together the recipes here
+>
+> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-4.9
+>
+> So far my testing has been booting angstrom/systemd-image on all supported
+> qemu machines (except qemumips64 where there is a know kernel issue) both eglibc/uclibc
+> images
+>
+> we would like to target them for 1.7 release so if you have cycles to test out
+> your image/machine combos please do so I would be interested in feedback and would accumulate fixes in this branch
+>
+> If you run into some issues with some packages then its recommended to go through
+>
+> http://gcc.gnu.org/gcc-4.9/changes.html
+>
+> and especially http://gcc.gnu.org/gcc-4.9/porting_to.html
+>
+> Which could help in cooking patches
+>
 
-Thanks,
-chunrong
+Hi All
 
------Original Message-----
-From: b40290@freescale.com [mailto:b40290@freescale.com]=20
-Sent: Thursday, April 17, 2014 11:42 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Liu Ting-B28495; Luo Zhenhua-B19537; Guo Chunrong-B40290
-Subject: [meta-networking][PATCH ] sethdlc: don't search host directories f=
-or header files
+As you might have noticed gcc 4.9.0 was released today
 
-From: Chunrong Guo <B40290@freescale.com>
+changed are here http://gcc.gnu.org/gcc-4.9/changes.html
 
-    *The build process hard-codes searches of various directories
-     in /usr/src/linux/include when looking for header files,
-     delete this to avoid host contamination
+I have updated my contrib tree to use the release tar balls. Please
+test the branch out. If you are using OE-Core
+standalone you don't need to do anything once you apply the patches
+from contrib branch it should select 4.9
+I have left 4.8 still there since we want to phase it out only when we
+are sure that complete ecosystem is working
+fine with 4.9
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- .../sethdlc/files/fix-includedir.patch                    | 15 +++++++++++=
-++++
- meta-networking/recipes-connectivity/sethdlc/sethdlc.bb   | 11 +++--------
- 2 files changed, 18 insertions(+), 8 deletions(-)  create mode 100644 meta=
--networking/recipes-connectivity/sethdlc/files/fix-includedir.patch
-
-diff --git a/meta-networking/recipes-connectivity/sethdlc/files/fix-include=
-dir.patch b/meta-networking/recipes-connectivity/sethdlc/files/fix-included=
-ir.patch
-new file mode 100644
-index 0000000..49d6d42
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/sethdlc/files/fix-includedir.
-+++ patch
-@@ -0,0 +1,15 @@
-+--- a/Makefileold	2014-04-16 22:05:58.070199084 -0500
-++++ b/Makefile	2014-04-16 22:06:27.153074058 -0500
-+@@ -1,11 +1,10 @@
-+ CC =3D gcc
-+ CFLAGS =3D -O2 -Wall -W -Wno-long-long -pipe -INCLUDES =3D=20
-+-I/usr/src/linux/include -I/usr/src/linux-2.6/include
-+=20
-+ all:		sethdlc
-+=20
-+ sethdlc:	sethdlc.c
-+-		$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
-++		$(CC) $(CFLAGS)  -o $@ $<
-+=20
-+ install:
-+ 		install -C -p -s sethdlc /usr/local/sbin/
-diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta=
--networking/recipes-connectivity/sethdlc/sethdlc.bb
-index 3a9692f..3459a36 100644
---- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-+++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-@@ -1,27 +1,22 @@
- DESCRIPTION =3D "set Linux HDLC packet radio modem driver port information=
-"
- HOMEPAGE =3D "https://www.kernel.org/pub/linux/utils/net/hdlc"
- LICENSE =3D "GPLv2 & GPLv2+ "
--LIC_FILES_CHKSUM =3D "file://Makefile;md5=3D19aada31930b2be84bf7138420d772=
-63"
--
-+LIC_FILES_CHKSUM =3D "file://sethdlc.c;beginline=3D1;endline=3D10;md5=3D90=
-f936879e9f8b755a138aeb348782eb"
-=20
- SRC_URI =3D "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.t=
-ar.gz \
-+           file://fix-includedir.patch \
- "
- SRC_URI[md5sum] =3D "9016878156a5eadb06c0bae71cc5c9ab"
- SRC_URI[sha256sum] =3D "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd=
-5b3d4f6ab6b04e"
-=20
--
- S =3D "${WORKDIR}/${BPN}-1.18"
-=20
--DEPENDS=3D"virtual/kernel"
--
--EXTRA_OEMAKE=3D"CROSS_COMPILE=3D${TARGET_PREFIX} CC=3D'${CC} ${LDFLAGS}' \
--              KERNEL_DIR=3D${STAGING_KERNEL_DIR} "
-+EXTRA_OEMAKE=3D"CROSS_COMPILE=3D${TARGET_PREFIX} CC=3D'${CC} ${LDFLAGS}'"=
-=20
-=20
- do_compile_prepend () {
-     oe_runmake clean
- }
-=20
--
- do_install() {
-     install -d ${D}/${bindir}
-     install sethdlc ${D}/${bindir}/
---
-1.8.3.2
-
-
+Thanks
+-Khem
 
