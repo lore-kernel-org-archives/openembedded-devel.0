@@ -1,21 +1,22 @@
 Return-Path: <anders@chargestorm.se>
-Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
-	[83.145.59.144])
-	by mail.openembedded.org (Postfix) with ESMTP id A8E7665D8E
+Received: from STOEXHUB01.domain01.net (STOEXHUB01.domain01.net
+	[83.145.59.142])
+	by mail.openembedded.org (Postfix) with ESMTP id C49CF65D91
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Apr 2014 11:24:38 +0000 (UTC)
-Received: from localhost (2.71.147.210) by stoexhub03.domain01.net
-	(10.12.10.3) with Microsoft SMTP Server id 8.3.279.1; Wed, 23 Apr 2014
-	13:24:34 +0200
+Received: from localhost (2.71.147.210) by STOEXHUB01.domain01.net
+	(10.12.10.1) with Microsoft SMTP Server id 8.3.279.1; Wed, 23 Apr 2014
+	13:24:38 +0200
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Apr 2014 13:24:28 +0200
-Message-ID: <cover.1398252166.git.anders@chargestorm.se>
+Date: Wed, 23 Apr 2014 13:24:33 +0200
+Message-ID: <01a958aab060f2a674e5c382b0ae8272c9c9bb4d.1398252166.git.anders@chargestorm.se>
 X-Mailer: git-send-email 2.0.0.rc0
+In-Reply-To: <cover.1398252166.git.anders@chargestorm.se>
+References: <cover.1398252166.git.anders@chargestorm.se>
 MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
 Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH 0/2] Breakpad fix and upgrade
+Subject: [meta-oe][PATCH 1/2] breakpad.bbclass: set includedir in CXXFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +33,28 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 23 Apr 2014 11:24:46 -0000
 Content-Type: text/plain
 
-Fixing a build issue with an internal Qt based application.
+Previously this was only set in CFLAGS.
+An build issue was discovered while convering in internal application
+from Qt4 to Qt5. As a result of this, the required header files were
+no longer found, until we also set CXXFLAGS.
 
-Using qt4e, CFLAGS were used and thus the include files were
-found. However, when porting to Qt5, CFLAGS seems to no longer 
-be used, and thus we need to also set CXXFLAGS.
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+---
+ meta-oe/classes/breakpad.bbclass | 1 +
+ 1 file changed, 1 insertion(+)
 
-While looking at the recipe in question, I thought it was just 
-as good to update it to the latest svn.
-
-The following changes since commit 0f56bc4e2818a051a511ceb48596cbfa2f51ff3d:
-
-  dejagnu: recipe taken from openembedded (2014-04-21 13:31:48 +0200)
-
-are available in the git repository at:
-
-  git://github.com/darander/meta-oe HEAD
-  https://github.com/darander/meta-oe/tree/breakpad-cflags
-
-Anders Darander (2):
-  breakpad.bbclass: set includedir in CXXFLAGS
-  breakpad: update to latest svn
-
- meta-oe/classes/breakpad.bbclass                  | 1 +
- meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 5 +++--
- 2 files changed, 4 insertions(+), 2 deletions(-)
-
+diff --git a/meta-oe/classes/breakpad.bbclass b/meta-oe/classes/breakpad.bbclass
+index 8c49ca7..e4d6808 100644
+--- a/meta-oe/classes/breakpad.bbclass
++++ b/meta-oe/classes/breakpad.bbclass
+@@ -5,6 +5,7 @@
+ DEPENDS += "breakpad breakpad-native"
+ 
+ CFLAGS += "-I${STAGING_DIR_TARGET}${includedir}/breakpad "
++CXXFLAGS += "-I${STAGING_DIR_TARGET}${includedir}/breakpad "
+ 
+ BREAKPAD_BIN ?= ""
+ 
 -- 
 2.0.0.rc0
 
