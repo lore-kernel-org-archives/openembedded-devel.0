@@ -1,24 +1,18 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F42560781
+Return-Path: <changhyeok.bae@lge.com>
+Received: from lgeamrelo02.lge.com (lgeamrelo02.lge.com [156.147.1.126])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B276605BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 09:26:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3N9QU5S026552
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 02:26:30 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Wed, 23 Apr 2014 02:26:30 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Apr 2014 05:26:26 -0400
-Message-ID: <1398245186-27365-1-git-send-email-jackie.huang@windriver.com>
+	Wed, 23 Apr 2014 11:14:36 +0000 (UTC)
+Received: from unknown (HELO changhyeok.bae) (10.177.232.191)
+	by 156.147.1.126 with ESMTP; 23 Apr 2014 20:14:35 +0900
+X-Original-SENDERIP: 10.177.232.191
+X-Original-MAILFROM: changhyeok.bae@lge.com
+From: Changhyeok Bae <changhyeok.bae@lge.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Apr 2014 20:14:38 +0900
+Message-Id: <1398251678-6735-1-git-send-email-changhyeok.bae@lge.com>
 X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] collectd: add threshold.so, load.so and disk.so in PRIVATE_LIBS
+Subject: [meta-networking][PATCH] quagga: Add mirror site
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +26,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Apr 2014 09:26:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 23 Apr 2014 11:14:39 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+* The SRC_URI is not accessible.
+  So need to add mirror site referred by the original site.
+* The problem is that
+  http://download.savannah.nongnu.org/releases redirects to closest mirror
+  and few mirrors (e.g. .jp) weren't working correctly while
+  http://download-mirror.savannah.gnu.org/releases/ seems to be reliable.
 
-to avoid the folloing warnings:
-log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registered as shlib provider for load.so, changing it to collectd-5.2.2 because it was built later
-log.world.20140418_190059.log/bitbake.log:WARNING:
-libgphoto2-camlibs-2.4.11 was registered as shlib provider for disk.so, changing it to collectd-5.2.2 because it was built later
-log.world.20140418_190059.log/bitbake.log:WARNING: gegl-0.2.0 was registered as shlib provider for threshold.so, changing it to
-collectd-5.2.2 because it was built later
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Changhyeok Bae <changhyeok.bae@lge.com>
 ---
- .../recipes-extended/collectd/collectd_5.2.2.bb    |    3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-protocols/quagga/quagga.inc            |    2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-index 7cb41b9..8585ff3 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-@@ -56,3 +56,6 @@ do_install_append() {
- INITSCRIPT_NAME = "collectd"
- INITSCRIPT_PARAMS = "defaults"
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 65ff040..6127205 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -37,6 +37,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
+            file://quagga-Avoid-duplicate-connected-address.patch \
+ "
  
-+# threshold.so load.so are also provided by gegl
-+# disk.so is also provided by libgphoto2-camlibs
-+PRIVATE_LIBS = "threshold.so load.so disk.so"
++MIRRORS += "http://download.savannah.gnu.org/releases/ http://download-mirror.savannah.gnu.org/releases/ \n"
++
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+ PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+ PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
 -- 
 1.7.9.5
 
