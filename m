@@ -1,23 +1,21 @@
 Return-Path: <anders@chargestorm.se>
-Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
-	[83.145.59.143])
-	by mail.openembedded.org (Postfix) with ESMTP id AA68265D90
+Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
+	[83.145.59.144])
+	by mail.openembedded.org (Postfix) with ESMTP id A8E7665D8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Apr 2014 11:24:40 +0000 (UTC)
-Received: from localhost (2.71.147.210) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server id 8.3.279.1; Wed, 23 Apr 2014
-	13:24:40 +0200
+	Wed, 23 Apr 2014 11:24:38 +0000 (UTC)
+Received: from localhost (2.71.147.210) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server id 8.3.279.1; Wed, 23 Apr 2014
+	13:24:34 +0200
 From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Apr 2014 13:24:34 +0200
-Message-ID: <8e20d75ce8b415b25ce0fffb196831096caf9ade.1398252166.git.anders@chargestorm.se>
+Date: Wed, 23 Apr 2014 13:24:28 +0200
+Message-ID: <cover.1398252166.git.anders@chargestorm.se>
 X-Mailer: git-send-email 2.0.0.rc0
-In-Reply-To: <cover.1398252166.git.anders@chargestorm.se>
-References: <cover.1398252166.git.anders@chargestorm.se>
 MIME-Version: 1.0
 X-GFI-SMTP-Submission: 1
 Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-oe][PATCH 2/2] breakpad: update to latest svn
+Subject: [meta-oe][PATCH 0/2] Breakpad fix and upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,43 +32,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 23 Apr 2014 11:24:46 -0000
 Content-Type: text/plain
 
-The old license file, COPYING has been renamed to LICENSE. It has also been
-appended with the the disclaimer from src/common/convert_UTF.h (see r1285).
+Fixing a build issue with an internal Qt based application.
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
+Using qt4e, CFLAGS were used and thus the include files were
+found. However, when porting to Qt5, CFLAGS seems to no longer 
+be used, and thus we need to also set CXXFLAGS.
+
+While looking at the recipe in question, I thought it was just 
+as good to update it to the latest svn.
+
+The following changes since commit 0f56bc4e2818a051a511ceb48596cbfa2f51ff3d:
+
+  dejagnu: recipe taken from openembedded (2014-04-21 13:31:48 +0200)
+
+are available in the git repository at:
+
+  git://github.com/darander/meta-oe HEAD
+  https://github.com/darander/meta-oe/tree/breakpad-cflags
+
+Anders Darander (2):
+  breakpad.bbclass: set includedir in CXXFLAGS
+  breakpad: update to latest svn
+
+ meta-oe/classes/breakpad.bbclass                  | 1 +
  meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-index 7c7024a..2c5941d 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-@@ -6,14 +6,14 @@ SUMMARY = "An open-source multi-platform crash reporting system"
- DESCRIPTION = "Breakpad is a library and tool suite that allows you to distribute an application to users with compiler-provided debugging information removed, record crashes in compact \"minidump\" files, send them back to your server, and produce C and C++ stack traces from these minidumps. "
- HOMEPAGE = "https://code.google.com/p/google-breakpad/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c80d1a3b623f72bb85a4c75b556551df"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=56c24a43c81c3af6fcf590851931489e"
- SECTION = "libs"
- 
- inherit autotools
- 
- BBCLASSEXTEND = "native"
- 
--SRCREV = "r1218"
-+SRCREV = "r1318"
- SRC_URI = "svn://google-breakpad.googlecode.com/svn;module=trunk;protocol=http"
- S = "${WORKDIR}/trunk"
- 
-@@ -42,6 +42,7 @@ do_install_append() {
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_format.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_format.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_amd64.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_amd64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_arm.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_arm.h
-+        install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_arm.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_arm64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_mips.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_mips.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_ppc64.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_ppc64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_ppc.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_ppc.h
 -- 
 2.0.0.rc0
 
