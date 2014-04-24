@@ -1,24 +1,34 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id A159665D68
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 21AF265D0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 14:42:58 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,919,1389740400"; d="scan'208";a="50221285"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 24 Apr 2014 16:42:57 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.2.328.9; Thu, 24 Apr 2014 16:42:57 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Thu, 24 Apr 2014 16:42:57 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Apr 2014 16:42:58 +0200
-Message-ID: <1398350578-633-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	Thu, 24 Apr 2014 22:24:57 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id c13so2323072eek.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Apr 2014 15:24:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=bdk6ahZ8sBOlVFC301k/bQQcPdQBmKW1IQbWxTHB/N8=;
+	b=efxFRuE642k6phW8hCOBpLRZ4yQ6K2OTa1qIh7GUZ5NjHeipua5bHkvATXgykLiLOl
+	l4eUsUO7juUHhpPROruyM2NH1769J5TPGMpCbX+N5hrovDaE1zka/0WT6Pj78xV/zGk3
+	4W/qDuQH2BYtZ62HhOh4Imdugy/y+pBbq3y8mIFuA1iQz05B06LjAv4v6fxwIJeStw9e
+	m7dSK6HPAcKRqy1Thht2A7LWhwJW661SGo1of0h+tOBVYlRzDaAViB0mnxd4tMAa1lrl
+	57Ar9CEIdVdaxi20atL8L82yNsRaftH5Sk568kmF3Jc/hmgbCBtVbDuOy2ei6XZBdKle
+	+xuA==
+X-Received: by 10.15.10.3 with SMTP id f3mr5042144eet.1.1398378297840;
+	Thu, 24 Apr 2014 15:24:57 -0700 (PDT)
+Received: from localhost.localdomain (ygg.betafive.co.uk. [5.9.90.21])
+	by mx.google.com with ESMTPSA id
+	l42sm19565094eew.19.2014.04.24.15.24.56 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 24 Apr 2014 15:24:57 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 Apr 2014 22:24:55 +0000
+Message-Id: <1398378295-24423-1-git-send-email-paul@paulbarker.me.uk>
 X-Mailer: git-send-email 1.9.2
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] cloud9: fix compilation error with o3 module
+Subject: [meta-oe][PATCH] vim: Don't build out-of-tree
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Apr 2014 14:43:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Apr 2014 22:25:02 -0000
 
-Take a more recent revision.
-See related issue:
-https://github.com/ajaxorg/o3/commit/0bfd58559fee135d96788ba35115d5de68703609
+Out-of-tree builds don't seem to work for vim, probably as it doesn't use
+automake.
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/vim/vim_7.4.258.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-index 757c954..b5dbaa8 100644
---- a/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-+++ b/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb
-@@ -40,7 +40,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
- "
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.258.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+index 19c8abc..2d3b0c2 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.258.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+@@ -17,6 +17,7 @@ S = "${WORKDIR}/${PN}/src"
+ VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
  
- SRCREV_cloud9ide = "c4e2574896a22bb749f0500b25f41c888d346bed"
--SRCREV_o3 = "302cd3a6d5039f53a9fa3932bed88b53281c1e1e"
-+SRCREV_o3 = "d66d4e3252e505f44ada6804c8cab39915ce8afd"
- SRCREV_ace = "0fc5392cbe46fb134052c3065a238ad8e3b31cfd"
- SRCREV_acewiki = "d2a65d0addc2e5ab922bbff9cb6022a4652b4f13"
- SRCREV_apf = "2560b762b2b0e5a8b46f8a4062f927a9a9d239f4"
+ inherit autotools update-alternatives
++inherit autotools-brokensep
+ 
+ # vim configure.in contains functions which got 'dropped' by autotools.bbclass
+ do_configure () {
 -- 
-1.8.5.4
+1.9.2
 
 
