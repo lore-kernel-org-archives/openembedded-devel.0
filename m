@@ -1,45 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id CE19F65D37
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D6B465D31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 01:01:25 +0000 (UTC)
-Received: by mail-ie0-f178.google.com with SMTP id lx4so3069927iec.23
+	Fri, 25 Apr 2014 01:01:51 +0000 (UTC)
+Received: by mail-ie0-f172.google.com with SMTP id as1so3215774iec.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 18:01:26 -0700 (PDT)
+	Thu, 24 Apr 2014 18:01:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=yEY6ELkELnh53gFj2id9EqJBa3f2dfjp4tNDVE5TopA=;
-	b=TlLLVaJ0r3t6VWSCnr11G4CEFf8LhQlNe6im9LgVw8D0D2pP+AZQfvFWgj9nceL/n7
-	M9Rywtj8c46d5gXzeta3b2wFdwr/MUiyRUkMSFWmclm+Pf3mCkn028viNMP1cQwXd6tV
-	r+QcXo91vLBiRjYi76LoiHXcn1B3ccXjypS9WOCk7nDLzi8RF7WomL2/muwF+4tqlx/c
-	fgxTKRgkbPc6xiIr/UGxZVt6NFH6XlCxzVxD0JKkRiAU4cfW5Ot1GeoVYhtaBm4R0KL1
-	wC9Fh6iYN807eyuSWpZEkCS/pkVBoTn1bZFTw3B1Z/J6N/LHTUDG3DjobrmclgFqbqbS
-	Vkbw==
-X-Gm-Message-State: ALoCoQn5UZHapzG2cHQU9A9RMHk9tOWe0gVoXQwYBk4RC9nrfsD2k6mEAx8FvCh8XK7A083Ktm69
-X-Received: by 10.42.16.199 with SMTP id q7mr4627720ica.16.1398387686577;
-	Thu, 24 Apr 2014 18:01:26 -0700 (PDT)
+	bh=rzhR4qf5lm5AerR6FORL2I0UNuAOEc02CJHR19CVtdc=;
+	b=h0XmmpqHy9d5MsOJGuo5g3nH1Mn3qw5i7SpvQGEUNCZ2LuALgX9pbo0aQ+dZ/7nO+6
+	J17rCutOfqKzaurai2HlS4CacbpfdCLiTa98KRvU0ZW2B7I/IUGMuf0sjFLmlvuWKLJC
+	J+eFzUBtqjscc25sR5dEBFsRmohTzwee+Arl7LcGpl4/d3Eu5wxFsLN+gf0gf43o/CUq
+	O4aYRbLuSQwVCIm5/zWayxHZbEHR8BlbthZKGxr8bEEtBJCjNGFAgAwzK/dj6kzGI0gR
+	OQ3nilB+NLTA6XSffLLPbfLtYxly+VnBeE5Jqr1aTIsR7pE8TWSu8qLQc/YbeNz8Dws+
+	0qiA==
+X-Gm-Message-State: ALoCoQm73MJb65rn4ADuaa4vgV34JR29hcGjWAY2OgPr8kHQLRRMQ9fYR5uzpn+Q/XitE9kRMVa2
+X-Received: by 10.50.253.130 with SMTP id aa2mr1948469igd.39.1398387712547;
+	Thu, 24 Apr 2014 18:01:52 -0700 (PDT)
 Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
 	by mx.google.com with ESMTPSA id
-	kw1sm3661793igb.4.2014.04.24.18.01.25
+	sc2sm3666588igb.5.2014.04.24.18.01.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 24 Apr 2014 18:01:25 -0700 (PDT)
-Date: Thu, 24 Apr 2014 21:01:23 -0400
+	Thu, 24 Apr 2014 18:01:51 -0700 (PDT)
+Date: Thu, 24 Apr 2014 21:01:48 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425010121.GF10115@deserted.net>
-References: <1398251678-6735-1-git-send-email-changhyeok.bae@lge.com>
+Message-ID: <20140425010147.GG10115@deserted.net>
+References: <1398242092-43050-1-git-send-email-javier.viguera@digi.com>
 MIME-Version: 1.0
-In-Reply-To: <1398251678-6735-1-git-send-email-changhyeok.bae@lge.com>
+In-Reply-To: <1398242092-43050-1-git-send-email-javier.viguera@digi.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-networking][PATCH] quagga: Add mirror site
+Subject: Re: [meta-networking][PATCH] stunnel: fix configure ssl parameter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,13 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 01:01:26 -0000
-X-Groupsio-MsgNum: 49470
+X-List-Received-Date: Fri, 25 Apr 2014 01:01:52 -0000
+X-Groupsio-MsgNum: 49471
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xaMk4Io5JJdpkLEb"
+	protocol="application/pgp-signature"; boundary="xjyYRNSh/RebjC6o"
 Content-Disposition: inline
 
---xaMk4Io5JJdpkLEb
+--xjyYRNSh/RebjC6o
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -67,56 +67,58 @@ Content-Transfer-Encoding: quoted-printable
 Merged, thanks.
 -J.
 
-[[oe] [meta-networking][PATCH] quagga: Add mirror site] On 14.04.23 (Wed 20=
-:14) Changhyeok Bae wrote:
+[[oe] [meta-networking][PATCH] stunnel: fix configure ssl parameter] On 14.=
+04.23 (Wed 10:34) Javier Viguera wrote:
 
-> * The SRC_URI is not accessible.
->   So need to add mirror site referred by the original site.
-> * The problem is that
->   http://download.savannah.nongnu.org/releases redirects to closest mirror
->   and few mirrors (e.g. .jp) weren't working correctly while
->   http://download-mirror.savannah.gnu.org/releases/ seems to be reliable.
+> '--with-ssl=3DDIR' configure parameter expects the location of the
+> libraries and include files in the sysroot. This means the directory
+> containing the 'lib' and 'include' subdirectories, not the include
+> directory itself.
 >=20
-> Signed-off-by: Changhyeok Bae <changhyeok.bae@lge.com>
+> This fixes an error at configure time:
+>=20
+> checking
+> <local-path>/tmp/sysroots/ccimx6adpt/usr/include/include/openssl/engine.h
+> usability... no
+>=20
+> (notice duplicated include entry in above line)
+>=20
+> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
 > ---
->  .../recipes-protocols/quagga/quagga.inc            |    2 ++
->  1 file changed, 2 insertions(+)
 >=20
-> diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-n=
-etworking/recipes-protocols/quagga/quagga.inc
-> index 65ff040..6127205 100644
-> --- a/meta-networking/recipes-protocols/quagga/quagga.inc
-> +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-> @@ -37,6 +37,8 @@ SRC_URI =3D "http://download.savannah.gnu.org/releases/=
-quagga${QUAGGASUBDIR}/quagg
->             file://quagga-Avoid-duplicate-connected-address.patch \
->  "
+> Notes:
+>     To backport to Dora as well.
+>=20
+>  meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/me=
+ta-networking/recipes-support/stunnel/stunnel_4.56.bb
+> index 086d0b7aafea..938f043a9d97 100644
+> --- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
+> +++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
+> @@ -12,4 +12,4 @@ SRC_URI[sha256sum] =3D "9cae2cfbe26d87443398ce50d7d5db5=
+4e5ea363889d5d2ec8d2778a01c
 > =20
-> +MIRRORS +=3D "http://download.savannah.gnu.org/releases/ http://download=
--mirror.savannah.gnu.org/releases/ \n"
-> +
->  PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '=
-', d)}"
->  PACKAGECONFIG[cap] =3D "--enable-capabilities,--disable-capabilities,lib=
-cap"
->  PACKAGECONFIG[pam] =3D "--with-libpam, --without-libpam, libpam"
-> --=20
-> 1.7.9.5
->=20
+>  inherit autotools
+> =20
+> -EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_INCDIR}' --disable-fips"
+> +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fip=
+s"
 --=20
 -Joe MacDonald.
 :wq
 
---xaMk4Io5JJdpkLEb
+--xjyYRNSh/RebjC6o
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlNZs+EACgkQwFvcllog0XyCAgCgj2RMg5vhuUepK8V8G1Qn4gLH
-ZzUAn1oMeABgxQVAfIaHS1PXrt1DS2pJ
-=bVJJ
+iEYEARECAAYFAlNZs/sACgkQwFvcllog0XyxzwCeNxgOAxe6936djPpX6aEKnC56
+q+EAnRqlARg5pjmu1a/wJCS4iqV0cIxO
+=BZio
 -----END PGP SIGNATURE-----
 
---xaMk4Io5JJdpkLEb--
+--xjyYRNSh/RebjC6o--
