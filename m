@@ -1,43 +1,34 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 91CF265D1B
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BFD665DAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 07:44:49 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id z2so2254969wiv.0
+	Fri, 25 Apr 2014 07:46:13 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Wdapo-0003Oa-MS for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Apr 2014 09:46:12 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Apr 2014 09:46:12 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 00:44:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=xTsja0f9pTFEkcRCupxhh+xrbPQ+BRLYa6c/nZuNUww=;
-	b=a7cDgI7QnTB91GEYlrc88GxmJmTzHx4cxeCsVMm9wAPz5S5apFTw9v+JD1yB7YYB3u
-	z/UmEi/ex38omksUQ7j29n4P97udYtJm1/yPrZsXl76UEXup2wFN8ZGAPK9K3ASjWx8w
-	1S3q7pOvuR8/o1FIeqrQB/KRUaxtS8HGi29VxV04uX3DeEpV7lPRh56/YuSGAD34g0FE
-	Kegr84+cAvUMQSd5q1os6k7ZA+1vlkPuaIO0p6p9KaHaRHY9ufBiOLxSQHLd6Nk5EQtj
-	bn9x/4GvYIfYogp7Z9Xxvdu0D6oqM6PrDuMQPL/bISbONKVFN6ArYswcZINosgBzXo2b
-	icLA==
-X-Gm-Message-State: ALoCoQl/uuDpDbNXBHpbtI5AABngDNSmhcbjpbaa+i2JrptEI5MsXCZiMf+j+mY3RR23/LEN/cqB
-X-Received: by 10.180.21.180 with SMTP id w20mr2502821wie.34.1398411890298;
-	Fri, 25 Apr 2014 00:44:50 -0700 (PDT)
-Received: from iMac.local ([2001:610:612:0:a1a4:84fc:3c62:77b2])
-	by mx.google.com with ESMTPSA id ft8sm4166518wib.13.2014.04.25.00.44.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 25 Apr 2014 00:44:49 -0700 (PDT)
-Message-ID: <535A126F.1010300@dominion.thruhere.net>
-Date: Fri, 25 Apr 2014 09:44:47 +0200
+	Fri, 25 Apr 2014 09:46:12 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 25 Apr 2014 09:46:03 +0200
+Message-ID: <ljd3rq$nu3$1@ger.gmane.org>
+References: <5359FFDC.1000206@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
 	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1398392569-1412-1-git-send-email-Chong.Lu@windriver.com>
-In-Reply-To: <1398392569-1412-1-git-send-email-Chong.Lu@windriver.com>
+In-Reply-To: <5359FFDC.1000206@windriver.com>
 X-Enigmail-Version: 1.6
-Subject: Re: [PATCH V5] rrdtool: enable perl and python bindings
+Subject: Re: How to deal with complex patch including creating new patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,72 +42,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 07:44:58 -0000
+X-List-Received-Date: Fri, 25 Apr 2014 07:46:18 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Chong Lu schreef op 25-04-14 04:22:
-> 1. default enable perl and python bindings 2. rrdtool uses perl.real,
-> perl.real doesn't know where the PERL5LIB should be when prebuilts are
-> used. Use the wrapper perl instead, perl sets PERL5LIB and invokes
-> perl.real 3. While using dash as /bin/sh, subsequent commands in
-> functions will not use the environment variables passed to the function
-> call line unless explicitly run "export ENV_VAR". 4. delete unrecognized
-> options: "--enable-local-libpng" and "--enable-local-zlib"
+zhangxiao schreef op 25-04-14 08:25:
+> Hi Experts,
 > 
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com> --- 
-> meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |  129
-> ++++++++++++++++++++- 1 file changed, 123 insertions(+), 6 deletions(-)
+> As we know, usually we have to add patches on source tree and in most
+> cases what we need to do is just add the source of the patch into SRC_URI
+> list and bitbake will install it automatically in "patch" task.
 > 
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
-> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb index
-> 533451f..36785cd 100644 ---
-> a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb +++
-> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb @@ -15,25 +15,142 @@
-> SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \ 
-> SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f" SRC_URI[sha256sum] =
-> "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
+> While for some complex cases, for example the netcat as below:
 > 
-> -inherit autotools gettext +inherit autotools gettext pythonnative
-> perlnative python-dir
+> http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb?h=master
+>
 > 
-> EXTRA_AUTORECONF = "-I m4"
 > 
-> -PACKAGECONFIG ??= "" +PACKAGECONFIG ??= "python perl" + 
-> +PACKAGES_DYNAMIC += "^${PN}-perl ^${PN}-python"
+> ... 8        SRC_URI = 
+> "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat
+>
+> 
+\
+> 9 
+> ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7.debian.tar.gz;name=netcat-patch"
+>
+>  ...
+> 
+> It has two sources: one source tree as
+> "netcat-openbsd_${PV}.orig.tar.gz"and the other is a patch called
+> "netcat-openbsd_${PV}-7.debian.tar.gz".
+> 
+> While the patch is not simple as usual that beside common modifications
+> on source tree, it also creates several patches that also need to be
+> installed. To deal with it, this bb file make it in do_compile in line 22
+> as below: ... 20        do_compile() { 21            cd ${S} 22
+> while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done <
+> ${WORKDIR}/debian/patches/series 23            pkgrel=4 24
+> oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\"" 25
+> } ...
+> 
+> Of course it is not good and will cause error when we force re-compile
+> it since those patches had already been installed in the previous compile
+> task.
+> 
+> The how to fix it?
+> 
+> Currently I can find two methods as below:
+> 
+> First, for line 21, 22 of do_compile that install new created patches,
+> remove them. Then:
+> 
+> A) Add a do_patch_append and install those new created patches to this
+> function;
+> 
+> B) Convert the netcat-openbsd_${PV}-7.debian.tar.gz to a pure patch. Let
+> it contains all modifications and no need to create more patches any
+> more. Then place this new created patch locally and modify the SRC_URI to
+> point to it.
 
-No, just no. Martin said 'Add it to PACKAGES'.
+c) add all the patches from there to SRC_URI.
 
+squashing patches is not a good idea, especially when updating the recipe
+later on.
 
-> +python populate_packages_prepend() { +    def fill_more(name,
-> rdep=None): +        if name is None or name.strip() == "": +
-> return + +        fpack=d.getVar('PACKAGES') or "" +
-> fpack="${PN}-" + name + " " + fpack +        d.setVar('PACKAGES', fpack) 
-> +        if rdep is not None: +
-> prdep=d.getVar('RDEPENDS_${PN}-' + name) or "" +            prdep=rdep +
-> " " + prdep +            d.setVar('RDEPENDS_${PN}-' + name, prdep) + +
-> prdep=d.getVar('RDEPENDS_${PN}-' + name) or "" +            bb.debug(1,
-> "RDEPENDS_${PN}-" + name + "=" + prdep) + +
-> conf=(d.getVar('PACKAGECONFIG', True) or "").split() +
-> pack=d.getVar('PACKAGES') or "" +    bb.debug(1, "PACKAGECONFIG=%s" %
-> conf) +    bb.debug(1, "PACKAGES1=%s" % pack ) + +    if "perl" in conf
-> : +        fill_more("perl") + +    if "python" in conf: +
-> fill_more("python") + +    pack=d.getVar('PACKAGES', True) or "" +
-> bb.debug(1, "PACKAGES after=%s" % pack) + +    #debug code +
-> #prdep=d.getVar('RDEPENDS_${PN}') or "" +    #bb.debug(1,
-> "RDEPENDS_${PN}" + "=" + prdep) +    #prdep=d.getVar('RDEPENDS') or "" +
-> #bb.debug(1, "RDEPENDS" + "=" + prdep) +}
-
-What is this?
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFTWhJvMkyGM64RGpERArXTAJ4u1918rurp4h7aTEX6wW2/J0C+IgCeLLQc
-ALaeAdoJhjuntnDEx23edT0=
-=0QxD
+iD8DBQFTWhK7MkyGM64RGpERAndgAJ9Lc8id//55Uk4OfsKD/zvH4W4s/ACcD0RQ
+DvoFZmyIodLqi+AhxAWHkdM=
+=71Zw
 -----END PGP SIGNATURE-----
+
 
