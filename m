@@ -1,35 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 00E9265E1B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 762B865E14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 22:52:50 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id y10so3628506pdj.13
+	Fri, 25 Apr 2014 23:56:17 +0000 (UTC)
+Received: by mail-ee0-f49.google.com with SMTP id c41so3163828eek.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 15:52:51 -0700 (PDT)
+	Fri, 25 Apr 2014 16:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=+SN+K+WLOFsELtG3GIn7egOpsV5VMwapQFl4pCTMEtI=;
-	b=xq5nmR7eK9+TRV/dEY2f1p6/LRIwZN6jgtFUexuDvfjioKl/mSuzzwQTS2J+IX1Yhp
-	m+JLxt4C5YK7LSAxK2bmtcdLa/l00dDrSsOCZ8Gh34aC2pv03gI176WCqHgfpxMR7lnu
-	Yuc2f4iUJphwkSwEi67BRbj67n+JrrIO0jiZTiLO1iYZmAMOKDkD92/OM0C99NnRX9uH
-	wP+iWkdA9GU1uVBfeyD7eO7hOhCcenicsey/SlmatLwcLJvSgnvjIaYAcHxY4E/aVJrs
-	xPcKk95sL0XAsARR3wDQJqJOapROEWQCUXGJ6UPfs2cX/5aTH1F2HzHCBfQW5aPig5Jw
-	3P3w==
-X-Received: by 10.66.137.109 with SMTP id qh13mr10972516pab.39.1398466371741; 
-	Fri, 25 Apr 2014 15:52:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Jgz2vOQELRPqTw9h8rGDr2FDGcLvU/FV40bzHt/nCy8=;
+	b=JbgwBnDOxLeuBAuxT7fMbwqllmdyKDDx9M1TDmeHCQjguesyiOZaOylKlpxA/NMXMt
+	TM0Ol/bPim9+MvQohmSBIsjNa8cCNyJb7VaWE1hhI3EJcweyQUJmcMZ+rG4VYIwWY/Sq
+	oH8/7kvRBBYZC5+c0UrHvscBZswHWQPdWSvJbnBuQveXKTpNwJ1pLwFNTWxMG6kkgHnC
+	lC5BvfsN7iHxWZnujRJRk/VBlvF13O3iL10imAAc6riJo6yLqIlI73rNuU9WNBVQiCTQ
+	9a4EXcABoOfKYwj6DaPmFwmVhrKB/2O2Rg9fuGrNvXbVBOq1Dy+OwVrNtYu5UGk/Efqo
+	Dqdg==
+X-Received: by 10.14.246.196 with SMTP id q44mr13464306eer.45.1398470178441;
+	Fri, 25 Apr 2014 16:56:18 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	it4sm18334713pbd.48.2014.04.25.15.52.50 for <multiple recipients>
+	o5sm28678116eeg.8.2014.04.25.16.56.16
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Apr 2014 15:52:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 25 Apr 2014 16:56:16 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 26 Apr 2014 01:56:27 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Apr 2014 15:55:00 -0700
-Message-Id: <1398466500-28117-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-gnome][PATCH] libbonobo: Update to latest versions and fix build when S != B
+Message-ID: <20140425235627.GA2486@jama>
+References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: v4l-utils won't build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,111 +47,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 22:52:51 -0000
+X-List-Received-Date: Fri, 25 Apr 2014 23:56:21 -0000
+X-Groupsio-MsgNum: 49513
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="bmO0DhbO8B5xO2aX"
+Content-Disposition: inline
 
-Do not install idl files which are already installed
+--bmO0DhbO8B5xO2aX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-gnome/recipes-gnome/bonobo/libbonobo.inc            |    2 --
- .../bonobo/libbonobo/do-not-use-srcdir-variable.patch    |   14 +++++++-------
- meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb      |    8 --------
- meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb      |    8 ++++++++
- .../{libbonoboui_2.24.3.bb => libbonoboui_2.24.5.bb}     |    7 ++-----
- 5 files changed, 17 insertions(+), 22 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
- create mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
- rename meta-gnome/recipes-gnome/bonobo/{libbonoboui_2.24.3.bb => libbonoboui_2.24.5.bb} (79%)
+On Fri, Apr 25, 2014 at 12:56:26PM -0700, Richard Cagley wrote:
+> After running bitbake core-image-minimal I'm trying to run bitbake opencv
+> and I get the below. I've looking through the log files and the v4l-utils
+> recipe. All I can see is that it's unhappy about something to do with the
+> autotools configuration for the project. Any ideas?
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-index 43e034b..b876db4 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-@@ -35,6 +35,4 @@ do_compile() {
- 
- do_install() {
-     oe_runmake ORBIT_IDL="${ORBIT_IDL_SRC}" DESTDIR="${D}" install
--    install -d ${D}${datadir}/idl/bonobo-activation-2.0/
--    install idl/*.idl ${D}${datadir}/idl/bonobo-activation-2.0/
- }
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
-index 46f8137..a20edda 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo/do-not-use-srcdir-variable.patch
-@@ -9,16 +9,16 @@ st-properties.sh'
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Upstream-Status: Not Submitted
- 
--Index: libbonobo-2.24.3/tests/Makefile.am
-+Index: libbonobo-2.32.1/tests/Makefile.am
- ===================================================================
----- libbonobo-2.24.3.orig/tests/Makefile.am	2009-04-18 05:27:41.000000000 -0700
--+++ libbonobo-2.24.3/tests/Makefile.am	2013-10-17 16:59:45.612989079 -0700
--@@ -53,7 +53,7 @@
-+--- libbonobo-2.32.1.orig/tests/Makefile.am	2010-08-29 04:56:00.000000000 -0700
-++++ libbonobo-2.32.1/tests/Makefile.am	2014-04-25 15:38:22.024744384 -0700
-+@@ -55,7 +55,7 @@
-  	MODELS_DIR="$(srcdir)/models"
-  
-  TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \
- -	test-stream-mem$(EXEEXT) $(srcdir)/test-properties.sh test-storage-mem$(EXEEXT) \
- +	test-stream-mem$(EXEEXT) test-properties.sh test-storage-mem$(EXEEXT) \
-- 	test-generic-factory.sh test-main-loop$(EXEEXT)
-- check_SCRIPTS = test-properties.sh test-generic-factory.sh
-- EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server
-+ 	test-main-loop$(EXEEXT)
-+ 
-+ # TESTS += test-generic-factory.sh
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
-deleted file mode 100644
-index b837802..0000000
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.24.3.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require libbonobo.inc
--PR = "r2"
--
--SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
--            file://do-not-use-srcdir-variable.patch \
--           "
--SRC_URI[archive.md5sum] = "b217cef6a187505290c66c5bf8225d38"
--SRC_URI[archive.sha256sum] = "5310957fa90691689c0557218b8833f681666cae160bd84e1f2c2705189a4ebe"
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
-new file mode 100644
-index 0000000..a83a0f1
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
-@@ -0,0 +1,8 @@
-+require libbonobo.inc
-+
-+SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
-+            file://do-not-use-srcdir-variable.patch \
-+           "
-+SRC_URI[archive.md5sum] = "27fa902d4fdf6762ee010e7053aaf77b"
-+SRC_URI[archive.sha256sum] = "9160d4f277646400d3bb6b4fa73636cc6d1a865a32b9d0760e1e9e6ee624976b"
-+
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-similarity index 79%
-rename from meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb
-rename to meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-index 5db8a3f..74dd908 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.3.bb
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-@@ -4,11 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
- 
- inherit gnomebase pkgconfig gtk-doc
--
--PR = "r2"
--
--SRC_URI[archive.md5sum] = "3a754b1df0a4d5fd4836a05020a0bb4a"
--SRC_URI[archive.sha256sum] = "0be51ee3069a2ef21d98561ee28036dd263ac08b401776fe9164e084825ffd84"
-+SRC_URI[archive.md5sum] = "853be8e28aaa4ce48ba60be7d9046bf4"
-+SRC_URI[archive.sha256sum] = "fab5f2ac6c842d949861c07cb520afe5bee3dce55805151ce9cd01be0ec46fcd"
- 
- DEPENDS = "libgnomecanvas libbonobo libgnome glib-2.0 gconf libxml2 libglade"
- 
--- 
-1.7.10.4
+See
+http://git.openembedded.org/openembedded-core/commit/?id=3Dbaf5b230af919b6b=
+0fd14ac5fc3e734bf7c464d5
+and related discussion on ML
 
+>=20
+> NOTE: Preparing runqueue
+> NOTE: Executing SetScene Tasks
+> NOTE: Executing RunQueue Tasks
+> ERROR: Function failed: do_configure (log file is located at
+> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
+0.8.8-r2/temp/log.do_configure.3977)
+> ERROR: Logfile of failure stored in:
+> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
+0.8.8-r2/temp/log.do_configure.3977
+> Log data follows:
+> | DEBUG: Executing python function sysroot_cleansstate
+> | DEBUG: Python function sysroot_cleansstate finished
+> | DEBUG: SITE files ['endian-little', 'bit-32', 'ix86-common',
+> 'common-linux', 'common-glibc', 'i586-linux', 'common']
+> | DEBUG: Executing shell function autotools_preconfigure
+> | DEBUG: Shell function autotools_preconfigure finished
+> | DEBUG: Executing python function autotools_copy_aclocals
+> | DEBUG: Python function autotools_copy_aclocals finished
+> | DEBUG: Executing shell function do_configure
+> | autoreconf: 'configure.ac' or 'configure.in' is required
+> | WARNING:
+> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
+0.8.8-r2/temp/run.do_configure.3977:1
+> exit 1 from
+> |   autoreconf -vfi
+> | ERROR: Function failed: do_configure (log file is located at
+> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
+0.8.8-r2/temp/log.do_configure.3977)
+> ERROR: Task 385
+> (/home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
+> v4l-utils_0.8.8.bb, do_configure) failed with exit code '1'
+> NOTE: Tasks Summary: Attempted 1698 tasks of which 879 didn't need to be
+> rerun and 1 failed.
+> Waiting for 0 running tasks to finish:
+>=20
+> Summary: 1 task failed:
+>   /home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
+> v4l-utils_0.8.8.bb, do_configure
+> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--bmO0DhbO8B5xO2aX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNa9isACgkQN1Ujt2V2gBxwAQCdE3E7j0epu7ZXCvriJHjCV8Ok
+E3sAoJ2kAosvbKPlf40fhhw+2fmBPTjx
+=hQ86
+-----END PGP SIGNATURE-----
+
+--bmO0DhbO8B5xO2aX--
