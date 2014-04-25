@@ -1,45 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D6B465D31
+Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EF2AC65D05
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 01:01:51 +0000 (UTC)
-Received: by mail-ie0-f172.google.com with SMTP id as1so3215774iec.31
+	Fri, 25 Apr 2014 01:02:34 +0000 (UTC)
+Received: by mail-ie0-f178.google.com with SMTP id lx4so3070907iec.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 18:01:52 -0700 (PDT)
+	Thu, 24 Apr 2014 18:02:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=rzhR4qf5lm5AerR6FORL2I0UNuAOEc02CJHR19CVtdc=;
-	b=h0XmmpqHy9d5MsOJGuo5g3nH1Mn3qw5i7SpvQGEUNCZ2LuALgX9pbo0aQ+dZ/7nO+6
-	J17rCutOfqKzaurai2HlS4CacbpfdCLiTa98KRvU0ZW2B7I/IUGMuf0sjFLmlvuWKLJC
-	J+eFzUBtqjscc25sR5dEBFsRmohTzwee+Arl7LcGpl4/d3Eu5wxFsLN+gf0gf43o/CUq
-	O4aYRbLuSQwVCIm5/zWayxHZbEHR8BlbthZKGxr8bEEtBJCjNGFAgAwzK/dj6kzGI0gR
-	OQ3nilB+NLTA6XSffLLPbfLtYxly+VnBeE5Jqr1aTIsR7pE8TWSu8qLQc/YbeNz8Dws+
-	0qiA==
-X-Gm-Message-State: ALoCoQm73MJb65rn4ADuaa4vgV34JR29hcGjWAY2OgPr8kHQLRRMQ9fYR5uzpn+Q/XitE9kRMVa2
-X-Received: by 10.50.253.130 with SMTP id aa2mr1948469igd.39.1398387712547;
-	Thu, 24 Apr 2014 18:01:52 -0700 (PDT)
+	bh=8Kl46L0BotnLquHaCTS2IjDZAfm/H3bya5FNdCbpRi8=;
+	b=bf8zJeZZbWuFBtqvdj6O0r8e/XnPRCE5DEXL4J1/jztfird2Ogu2GsTv3zSI0tXPUs
+	b26SRiMwNREk6eIRGcgOAOjTUREjOrMiQbMl9yiCdp9HJFLpdgPe4FHtjZ2cTrU+YxJ1
+	XAPtbkmh0Qv5R/2iaBwGm1tGRQ/ZSc5JpTCF4XxYPT1oSikLUBc5Fd/gUtTjHxNQOx9E
+	PCb3poWnsLPSUKaB9Tas3+YDdxPkUhBLBiFQ/kHFvpwUDgImlUicA8+GeXx5dTAD4pc9
+	IG9ozvw5z4+oUMdGjnGIIwHwNrMM/TERxWSKU8GqBktGAf9zRlbgc4msPSTeqpikfgp+
+	Bx0A==
+X-Gm-Message-State: ALoCoQkIiA1SMS822pSU/vyzn/LqW/yIzUASgPCFqNA7y7x5dhwPGatzoMl0+4edXMv0ajoLKyqa
+X-Received: by 10.50.12.100 with SMTP id x4mr1971185igb.15.1398387756132;
+	Thu, 24 Apr 2014 18:02:36 -0700 (PDT)
 Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id
-	sc2sm3666588igb.5.2014.04.24.18.01.51
-	for <openembedded-devel@lists.openembedded.org>
+	by mx.google.com with ESMTPSA id s8sm3677117ige.4.2014.04.24.18.02.34
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 24 Apr 2014 18:01:51 -0700 (PDT)
-Date: Thu, 24 Apr 2014 21:01:48 -0400
+	Thu, 24 Apr 2014 18:02:35 -0700 (PDT)
+Date: Thu, 24 Apr 2014 21:02:32 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425010147.GG10115@deserted.net>
-References: <1398242092-43050-1-git-send-email-javier.viguera@digi.com>
+Message-ID: <20140425010230.GH10115@deserted.net>
+References: <1398065845-2064-1-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <1398242092-43050-1-git-send-email-javier.viguera@digi.com>
+In-Reply-To: <1398065845-2064-1-git-send-email-koen@dominion.thruhere.net>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-networking][PATCH] stunnel: fix configure ssl parameter
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-networking][PATCH] dovecot: add libcap dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,13 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 01:01:52 -0000
-X-Groupsio-MsgNum: 49471
+X-List-Received-Date: Fri, 25 Apr 2014 01:02:35 -0000
+X-Groupsio-MsgNum: 49472
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xjyYRNSh/RebjC6o"
+	protocol="application/pgp-signature"; boundary="zhtSGe8h3+lMyY1M"
 Content-Disposition: inline
 
---xjyYRNSh/RebjC6o
+--zhtSGe8h3+lMyY1M
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -67,58 +67,50 @@ Content-Transfer-Encoding: quoted-printable
 Merged, thanks.
 -J.
 
-[[oe] [meta-networking][PATCH] stunnel: fix configure ssl parameter] On 14.=
-04.23 (Wed 10:34) Javier Viguera wrote:
+[[oe] [meta-networking][PATCH] dovecot: add libcap dependency] On 14.04.21 =
+(Mon 09:37) Koen Kooi wrote:
 
-> '--with-ssl=3DDIR' configure parameter expects the location of the
-> libraries and include files in the sysroot. This means the directory
-> containing the 'lib' and 'include' subdirectories, not the include
-> directory itself.
+> This fixes:
+> 	dovecot/dovecot/latest lost dependency on  libcap
 >=20
-> This fixes an error at configure time:
->=20
-> checking
-> <local-path>/tmp/sysroots/ccimx6adpt/usr/include/include/openssl/engine.h
-> usability... no
->=20
-> (notice duplicated include entry in above line)
->=20
-> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 > ---
->=20
-> Notes:
->     To backport to Dora as well.
->=20
->  meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 2 +-
+>  meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/me=
-ta-networking/recipes-support/stunnel/stunnel_4.56.bb
-> index 086d0b7aafea..938f043a9d97 100644
-> --- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-> +++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-> @@ -12,4 +12,4 @@ SRC_URI[sha256sum] =3D "9cae2cfbe26d87443398ce50d7d5db5=
-4e5ea363889d5d2ec8d2778a01c
+> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb b/=
+meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
+> index 426e1c5..8528536 100644
+> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
+> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
+> @@ -10,7 +10,7 @@ SRC_URI =3D "http://dovecot.org/releases/2.2/dovecot-${=
+PV}.tar.gz \
+>  SRC_URI[md5sum] =3D "037e9c9e07d9dbff54dcff09f280fc8c"
+>  SRC_URI[sha256sum] =3D "75592483d40dc4f76cc3b41af40caa4be80478946a699d46=
+846d5d03e4d2e09b"
+> =20
+> -DEPENDS =3D "openssl xz zlib bzip2"
+> +DEPENDS =3D "openssl xz zlib bzip2 libcap"
 > =20
 >  inherit autotools
 > =20
-> -EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_INCDIR}' --disable-fips"
-> +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fip=
-s"
+> --=20
+> 1.9.0
+>=20
 --=20
 -Joe MacDonald.
 :wq
 
---xjyYRNSh/RebjC6o
+--zhtSGe8h3+lMyY1M
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlNZs/sACgkQwFvcllog0XyxzwCeNxgOAxe6936djPpX6aEKnC56
-q+EAnRqlARg5pjmu1a/wJCS4iqV0cIxO
-=BZio
+iEYEARECAAYFAlNZtCYACgkQwFvcllog0XwYywCggdbRk38qO3bIQs7/KgBRuNm7
+2TEAn1huOkxADYjM8KsjfA97jOedERwh
+=m8D6
 -----END PGP SIGNATURE-----
 
---xjyYRNSh/RebjC6o--
+--zhtSGe8h3+lMyY1M--
