@@ -1,27 +1,18 @@
-Return-Path: <xiao.zhang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6080A65D1B
+Return-Path: <changhyeok.bae@lge.com>
+Received: from lgemrelse7q.lge.com (LGEMRELSE7Q.lge.com [156.147.1.151])
+	by mail.openembedded.org (Postfix) with ESMTP id 8230A65D2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 06:25:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3P6PaUq020216
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 23:25:36 -0700 (PDT)
-Received: from [128.224.162.189] (128.224.162.189) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
-	Thu, 24 Apr 2014 23:25:35 -0700
-Message-ID: <5359FFDC.1000206@windriver.com>
-Date: Fri, 25 Apr 2014 14:25:32 +0800
-From: zhangxiao <xiao.zhang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130330 Thunderbird/17.0.5
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-X-Originating-IP: [128.224.162.189]
-Cc: "Bruce.Ashfield" <bruce.ashfield@windriver.com>
-Subject: How to deal with complex patch including creating new patches?
+	Fri, 25 Apr 2014 06:57:44 +0000 (UTC)
+Received: from unknown (HELO changhyeok.bae) (10.177.232.191)
+	by 156.147.1.151 with ESMTP; 25 Apr 2014 15:57:43 +0900
+X-Original-SENDERIP: 10.177.232.191
+X-Original-MAILFROM: changhyeok.bae@lge.com
+From: Changhyeok Bae <changhyeok.bae@lge.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 25 Apr 2014 15:57:46 +0900
+Message-Id: <1398409067-31641-1-git-send-email-changhyeok.bae@lge.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [PATCH 1/2] Change the url to variable for savannah in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,72 +26,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 06:25:36 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Apr 2014 06:57:49 -0000
 
-Hi Experts,
+* The variables (SAVANNAH_GNU_MIRROR & SAVANNAH_NONGNU_MIRROR)
+  are defined in oe-core/meta/conf/bitbake.conf.
+* MIRRORS in quagga and libunwind is removed.
+  because the MIRRORS of savannah is globally defined
+  in oe-core/meta/classes/mirrors.bbclass
 
-As we know, usually we have to add patches on source tree and in most cases
-what we need to do is just add the source of the patch into SRC_URI list
-and bitbake will install it automatically in "patch" task.
+Signed-off-by: Changhyeok Bae <changhyeok.bae@lge.com>
+---
+ .../fluidsynth/fluidsynth_1.1.1.bb                 |    2 +-
+ .../recipes-protocols/quagga/quagga.inc            |    4 +---
+ meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb        |    2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb        |    2 +-
+ .../recipes-support/hddtemp/hddtemp_0.3-beta15.bb  |    2 +-
+ meta-oe/recipes-support/libunwind/libunwind.inc    |    4 +---
+ meta-oe/recipes-support/lzip/lzip_1.14.bb          |    2 +-
+ 7 files changed, 7 insertions(+), 11 deletions(-)
 
-While for some complex cases, for example the netcat as below:
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
+index c497d98..b1256d0 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
+ 
+ DEPENDS = "alsa-lib ncurses glib-2.0"
+ 
+-SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
++SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fluid/${P}.tar.gz"
+ SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
+ SRC_URI[sha256sum] = "55638cb04f39f4df76c081e22ca7feeea58ddd20ebf779a7db2d38b1ff374cd6"
+ 
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 60baab8..5eeb18b 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -23,7 +23,7 @@ RDEPENDS_${PN} += "iproute2"
+ QUAGGASUBDIR = ""
+ # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
+ # versions and leave it empty for recent versions.
+-SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name=quagga-${PV} \
++SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name=quagga-${PV} \
+            file://fix-for-lib-inpath.patch \
+            file://quagga-0.99.17-libcap.patch \
+            file://quagga-fix-CVE-2013-6051.patch \
+@@ -38,8 +38,6 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
+            file://quagga-Avoid-duplicate-connected-address.patch \
+ "
+ 
+-MIRRORS += "http://download.savannah.gnu.org/releases/ http://download-mirror.savannah.gnu.org/releases/ \n"
+-
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+ PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+ PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
+diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+index 6e5000b..3433bd2 100644
+--- a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
++++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
+ # flex with provide /usr/include/FlexLexer.h
+ DEPENDS = "flex-native bison-native flex"
+ 
+-SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
++SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz \
+            file://cross_cc.patch"
+ SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
+ SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
+index 97f3354..c82aadc 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
+@@ -9,7 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
+ 
+ PR = "r14"
+ 
+-SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
++SRC_URI = "${SAVANNAH_GNU_MIRROR}/${PN}/${P}.tar.gz \
+     file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+     file://0004-SConstruct-remove-rpath.patch \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+index 9da2ee0..601b7b1 100644
+--- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
++++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2+"
+ 
+ PR = "r1"
+ 
+-SRC_URI = "http://download.savannah.nongnu.org/releases/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
++SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
+            file://hddtemp-no-nls-support.patch \
+            file://hddtemp_0.3-beta15-52.diff \
+            file://hddtemp-0.3-beta15-autodetect-717479.patch \
+diff --git a/meta-oe/recipes-support/libunwind/libunwind.inc b/meta-oe/recipes-support/libunwind/libunwind.inc
+index a70ec2e..b27b9e5 100644
+--- a/meta-oe/recipes-support/libunwind/libunwind.inc
++++ b/meta-oe/recipes-support/libunwind/libunwind.inc
+@@ -3,9 +3,7 @@ HOMEPAGE = "http://www.nongnu.org/libunwind"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3fced11d6df719b47505837a51c16ae5"
+ 
+-SRC_URI = "http://download.savannah.nongnu.org/releases/${BPN}/${BPN}-${PV}.tar.gz"
+-
+-MIRRORS += "http://download.savannah.nongnu.org/releases/ http://download-mirror.savannah.gnu.org/releases/ \n"
++SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-support/lzip/lzip_1.14.bb b/meta-oe/recipes-support/lzip/lzip_1.14.bb
+index 3d8c090..5a7f3fc 100644
+--- a/meta-oe/recipes-support/lzip/lzip_1.14.bb
++++ b/meta-oe/recipes-support/lzip/lzip_1.14.bb
+@@ -4,7 +4,7 @@ SECTION = "console/utils"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+ 
+-SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
++SRC_URI = "${SAVANNAH_GNU_MIRROR}/lzip/lzip-${PV}.tar.gz"
+ 
+ # Only the latest version is available in .tar.gz format from savannah.gnu.org,
+ # FreeBSD distfiles is known to have version 1.13.
+-- 
+1.7.9.5
 
-http://cgit.openembedded.org/cgit.cgi/meta-openembedded/tree/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb?h=master
-
-...
-  8        SRC_URI = 
-"${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat 
-\
-  9 
-${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7.debian.tar.gz;name=netcat-patch"
-...
-
-It has two sources: one source tree as 
-"netcat-openbsd_${PV}.orig.tar.gz"and the other is a patch
-called "netcat-openbsd_${PV}-7.debian.tar.gz".
-
-While the patch is not simple as usual that beside common modifications 
-on source tree,
-it also creates several patches that also need to be installed. To deal 
-with it, this
-bb file make it in do_compile in line 22 as below:
-...
-20        do_compile() {
-21            cd ${S}
-22            while read line; do patch -p1 < 
-${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
-23            pkgrel=4
-24            oe_runmake CFLAGS="$CFLAGS 
--DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
-25        }
-...
-
-Of course it is not good and will cause error when we force re-compile it
-since those patches had already been installed in the previous compile task.
-
-The how to fix it?
-
-Currently I can find two methods as below:
-
-First, for line 21, 22 of do_compile that install new created patches, 
-remove them.
-Then:
-
-A) Add a do_patch_append and install those new created patches to this 
-function;
-
-B) Convert the netcat-openbsd_${PV}-7.debian.tar.gz to a pure patch. Let it
-contains all modifications and no need to create more patches any more. Then
-place this new created patch locally and modify the SRC_URI to point to it.
-
-Compare with A and B, which one is advised here? Why? Any suggestions 
-and comments is helpful!
-
-Of course, we can also leave the patch installation in do_compile but just
-add a flag to make it. But that is really not a good method. :-)
-
-Thanks
-Xiao
 
