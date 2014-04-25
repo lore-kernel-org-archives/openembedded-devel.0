@@ -1,45 +1,29 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A37B65D05
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A0A965D08
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 01:03:32 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id to1so3179611ieb.20
+	Fri, 25 Apr 2014 01:21:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3P1LmY9017887
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 18:03:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=++xEVgGAT1mv5KuGXonaKH8kJaddQzzOcaaRMypptPk=;
-	b=hMIu152it9qKYVcn4qAJ3Rdha+cUwW41aWBSi1myODiRsecUd9flQ1sCB8VlbLI0Th
-	P0bv/XzRrv3cvUcN9JPxdZUdvualAFIZ9LjjNC/RTRV+AY9QgrNOMl7wahO+0JVbckED
-	DXCum7IhiX1HmPx++CchY3v+7xGqfEWI5xzHUTVvO4MoK3fJEuHCYjPObJF95L0I+bpr
-	KYLzY0wpmIM5B0GzLVL9tzOZdTX6lW0Jft8lcPctegVXIRUbRVMk0s1zauwgkSP4KuEj
-	Gyb2u4CBIXeXvE9JfsUzgTgy4eVSGQUR73XNSpbYqEbkaP1XkXCESSqfvxKO5fxV/sk3
-	qJOQ==
-X-Gm-Message-State: ALoCoQmbSYaFblis8lZ2yfprxAmlaYWnHZ+7Ls70ODQhXWzLUnemhdRTQick7/P14r0MvUzgIC86
-X-Received: by 10.50.112.167 with SMTP id ir7mr2003493igb.27.1398387814119;
-	Thu, 24 Apr 2014 18:03:34 -0700 (PDT)
-Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id
-	lp5sm3699811igb.1.2014.04.24.18.03.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 24 Apr 2014 18:03:32 -0700 (PDT)
-Date: Thu, 24 Apr 2014 21:03:30 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425010328.GI10115@deserted.net>
-References: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
+	Thu, 24 Apr 2014 18:21:48 -0700 (PDT)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
+	Thu, 24 Apr 2014 18:21:47 -0700
+Message-ID: <5359B8A8.7010801@windriver.com>
+Date: Fri, 25 Apr 2014 09:21:44 +0800
+From: Chong Lu <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-In-Reply-To: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.22 (2013-10-16)
-Subject: Re: [meta-networking][PATCH v4] dnsmasq: update to 2.68
+To: <openembedded-devel@lists.openembedded.org>
+References: <1398323681-19373-1-git-send-email-Chong.Lu@windriver.com>
+	<5358DE99.40604@dominion.thruhere.net>
+In-Reply-To: <5358DE99.40604@dominion.thruhere.net>
+X-Originating-IP: [128.224.162.204]
+Subject: Re: [PATCH V4] rrdtool: enable perl and python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,81 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 01:03:39 -0000
-X-Groupsio-MsgNum: 49473
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="e5GLnnZ8mDMEwH4V"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 25 Apr 2014 01:21:48 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---e5GLnnZ8mDMEwH4V
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
--J.
+On 04/24/2014 05:51 PM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Chong Lu schreef op 24-04-14 09:14:
+>> 1. default enable perl and python bindings 2. rrdtool uses perl.real,
+>> perl.real doesn't know where the PERL5LIB should be when prebuilts are
+>> used. Use the wrapper perl instead, perl sets PERL5LIB and invokes
+>> perl.real 3. While using dash as /bin/sh, subsequent commands in
+>> functions will not use the environment variables passed to the function
+>> call line unless explicitly run "export ENV_VAR". 4. delete unrecognized
+>> options: "--enable-local-libpng" and "--enable-local-zlib"
+>>
+>> Signed-off-by: Chong Lu <Chong.Lu@windriver.com> ---
+>> +DESCRIPTION_${PN}-perl = \ +"The ${PN}-perl package includes RRDtool
+>> bindings for perl." +FILES_${PN}-perl =
+>> "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \ +
+>> ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*" +RDEPENDS_${PN}-perl =
+>> "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \ +
+>> perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
+>> +RPROVIDES_${PN} += "${PN}-perl"
+> Why do you need RPROVIDES?
+>
+>
+>> + +DESCRIPTION_${PN}-python = \ +"The ${PN}-python package includes
+>> RRDtool bindings for python." +FILES_${PN}-python =
+>> "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+>> +RDEPENDS_${PN}-python = "python" +RPROVIDES_${PN} += "${PN}-python"
+> Why do you need RPROVIDES?
+If I put rrdtool-python into image.
+I got following errors when I built image.
+     Nothing RPROVIDES 'rrdtool-python'
+So, I added RPROVIDES.
 
-[[oe] [meta-networking][PATCH v4] dnsmasq: update to 2.68] On 14.04.09 (Wed=
- 11:14) Christian Zieth=E9n wrote:
+Best Regards
+Chong
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFTWN6ZMkyGM64RGpERAiAuAKCSrfa70haQRDE5fE8JNW4ggq280gCeP1Va
+> ZhT7mk+HdHXQQXu7MKk17jw=
+> =QukM
+> -----END PGP SIGNATURE-----
 
-> Fixes a bug with libvirt and DHCP, which is fixed in 2.66.
->=20
-> "Handle the situation where libc headers define
-> SO_REUSEPORT, but the kernel in use doesn't, to cope with
-> the introduction of this option to Linux. Thanks to Rich
-> Felker for the bug report."
->=20
-> Signed-off-by: Christian Zieth=E9n <Christian.Ziethen@enea.com>
-> ---
->  meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
->  meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
->  2 files changed, 4 insertions(+), 4 deletions(-)
->  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.=
-bb
->  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.=
-bb
->=20
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
-> deleted file mode 100644
-> index 2df3713..0000000
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -require dnsmasq.inc
-> -
-> -SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
-> -SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbb=
-fc7b43845cae85ca8ffd024467710"
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-> new file mode 100644
-> index 0000000..b1bef7a
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-> @@ -0,0 +1,4 @@
-> +require dnsmasq.inc
-> +
-> +SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
-> +SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158=
-ea3fca9a83ab55471f981a2097c2f"
-> --=20
-> 1.7.10.4
->=20
---=20
--Joe MacDonald.
-:wq
 
---e5GLnnZ8mDMEwH4V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlNZtGAACgkQwFvcllog0XxsHgCgjnoTESGeG+cuObsYm9c6MLb4
-p18An2cf+WjdyOvhgS8SGQh9aFfZNgAi
-=IJ/k
------END PGP SIGNATURE-----
-
---e5GLnnZ8mDMEwH4V--
