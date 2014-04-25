@@ -1,19 +1,35 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2962D65DAB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id A1EA165D99
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 20:22:50 +0000 (UTC)
-Message-ID: <535AC418.6070607@communistcode.co.uk>
-Date: Fri, 25 Apr 2014 21:22:48 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
+	Fri, 25 Apr 2014 22:08:39 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id lj1so3617790pab.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Apr 2014 15:08:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=53ugAtcfsl3/87B9ou6yXaeWeqH1wy29L2sbkFJVI6g=;
+	b=NhSyfePRJL93rmvLBTsXjaDkI0wLCvW8k6fjjgZxVmVAJInTQ0SZMFk+ZB0Ie4WmdL
+	EK2Yaw7+iLRFj2r2ozbn4BqFPdyFba9rt8XTK+BQ1cZ6WoqxQM1zrQphcN6YwfOacP7N
+	IoBF9HL3t+jr2TcN6FrTe/jkQM4zxgUW7ZNsjO6hcCPEoXPvmMM+Qk6K9+SLElCAjkUs
+	3W3Ya414klDu2qcRxle7phRDRaqdCkA5Gc7UKWNhnhRB9opqmtDicUoqVFlAvIqzMZlc
+	oY+oyb0I1wRvJYSzTfE8TOOZ8X6p51FlONYU7WDnu63gz5F/by1IA9UGLLPc8ZqDTGlg
+	kajA==
+X-Received: by 10.68.197.39 with SMTP id ir7mr8002794pbc.78.1398463720007;
+	Fri, 25 Apr 2014 15:08:40 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
+	by mx.google.com with ESMTPSA id bc4sm18245080pbb.2.2014.04.25.15.08.38
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 25 Apr 2014 15:08:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1398450265-27979-1-git-send-email-raj.khem@gmail.com>	<20140425182652.GZ2486@jama>
-	<CAMKF1soef650vnpY3ca8JAXTAiP4KqWk-ksMP=Afncdg5KsDwA@mail.gmail.com>
-In-Reply-To: <CAMKF1soef650vnpY3ca8JAXTAiP4KqWk-ksMP=Afncdg5KsDwA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] htop: Update 1.0.2 -> 1.0.3
+Date: Fri, 25 Apr 2014 15:10:42 -0700
+Message-Id: <1398463842-15794-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] mozjs: Fix build when B != S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,24 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 20:22:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Apr 2014 22:08:40 -0000
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index 891ae9d..1af1fa6 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -28,7 +28,7 @@ EXTRA_OECONF = " \
+ 
+ # mozjs requires autoreconf 2.13
+ do_configure() {
+-    ./configure ${EXTRA_OECONF}
++    ${S}/configure ${EXTRA_OECONF}
+ }
+ 
+ PACKAGES =+ "lib${PN}"
+-- 
+1.7.10.4
 
-On 25/04/2014 19:56, Khem Raj wrote:
-> On Fri, Apr 25, 2014 at 11:26 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> "[oe] [meta-oe][PATCH 1/4] htop: upgrade to 1.0.3 and apply brokensep"
->
-> inheriting autotools-brokensep is a workaround until we have fixed the
->   package proper intention should be to not use autotools-brokensep and
-> fix the packages and use autotools-brokensep as last resort.
->
-
-I agree, my fixes were just quick ones today which got me building. I 
-would take Khems patch over mine as it seems to actually address the 
-problem.
-
-Cheers,
 
