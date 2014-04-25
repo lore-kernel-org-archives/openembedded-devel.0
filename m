@@ -1,45 +1,45 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id EF2AC65D05
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A37B65D05
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 01:02:34 +0000 (UTC)
-Received: by mail-ie0-f178.google.com with SMTP id lx4so3070907iec.23
+	Fri, 25 Apr 2014 01:03:32 +0000 (UTC)
+Received: by mail-ie0-f175.google.com with SMTP id to1so3179611ieb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 18:02:36 -0700 (PDT)
+	Thu, 24 Apr 2014 18:03:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=8Kl46L0BotnLquHaCTS2IjDZAfm/H3bya5FNdCbpRi8=;
-	b=bf8zJeZZbWuFBtqvdj6O0r8e/XnPRCE5DEXL4J1/jztfird2Ogu2GsTv3zSI0tXPUs
-	b26SRiMwNREk6eIRGcgOAOjTUREjOrMiQbMl9yiCdp9HJFLpdgPe4FHtjZ2cTrU+YxJ1
-	XAPtbkmh0Qv5R/2iaBwGm1tGRQ/ZSc5JpTCF4XxYPT1oSikLUBc5Fd/gUtTjHxNQOx9E
-	PCb3poWnsLPSUKaB9Tas3+YDdxPkUhBLBiFQ/kHFvpwUDgImlUicA8+GeXx5dTAD4pc9
-	IG9ozvw5z4+oUMdGjnGIIwHwNrMM/TERxWSKU8GqBktGAf9zRlbgc4msPSTeqpikfgp+
-	Bx0A==
-X-Gm-Message-State: ALoCoQkIiA1SMS822pSU/vyzn/LqW/yIzUASgPCFqNA7y7x5dhwPGatzoMl0+4edXMv0ajoLKyqa
-X-Received: by 10.50.12.100 with SMTP id x4mr1971185igb.15.1398387756132;
-	Thu, 24 Apr 2014 18:02:36 -0700 (PDT)
+	bh=++xEVgGAT1mv5KuGXonaKH8kJaddQzzOcaaRMypptPk=;
+	b=hMIu152it9qKYVcn4qAJ3Rdha+cUwW41aWBSi1myODiRsecUd9flQ1sCB8VlbLI0Th
+	P0bv/XzRrv3cvUcN9JPxdZUdvualAFIZ9LjjNC/RTRV+AY9QgrNOMl7wahO+0JVbckED
+	DXCum7IhiX1HmPx++CchY3v+7xGqfEWI5xzHUTVvO4MoK3fJEuHCYjPObJF95L0I+bpr
+	KYLzY0wpmIM5B0GzLVL9tzOZdTX6lW0Jft8lcPctegVXIRUbRVMk0s1zauwgkSP4KuEj
+	Gyb2u4CBIXeXvE9JfsUzgTgy4eVSGQUR73XNSpbYqEbkaP1XkXCESSqfvxKO5fxV/sk3
+	qJOQ==
+X-Gm-Message-State: ALoCoQmbSYaFblis8lZ2yfprxAmlaYWnHZ+7Ls70ODQhXWzLUnemhdRTQick7/P14r0MvUzgIC86
+X-Received: by 10.50.112.167 with SMTP id ir7mr2003493igb.27.1398387814119;
+	Thu, 24 Apr 2014 18:03:34 -0700 (PDT)
 Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id s8sm3677117ige.4.2014.04.24.18.02.34
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	lp5sm3699811igb.1.2014.04.24.18.03.32
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 24 Apr 2014 18:02:35 -0700 (PDT)
-Date: Thu, 24 Apr 2014 21:02:32 -0400
+	Thu, 24 Apr 2014 18:03:32 -0700 (PDT)
+Date: Thu, 24 Apr 2014 21:03:30 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425010230.GH10115@deserted.net>
-References: <1398065845-2064-1-git-send-email-koen@dominion.thruhere.net>
+Message-ID: <20140425010328.GI10115@deserted.net>
+References: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
 MIME-Version: 1.0
-In-Reply-To: <1398065845-2064-1-git-send-email-koen@dominion.thruhere.net>
+In-Reply-To: <1397034884-36008-1-git-send-email-Christian.Ziethen@enea.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.22 (2013-10-16)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-networking][PATCH] dovecot: add libcap dependency
+Subject: Re: [meta-networking][PATCH v4] dnsmasq: update to 2.68
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,64 +53,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 01:02:35 -0000
-X-Groupsio-MsgNum: 49472
+X-List-Received-Date: Fri, 25 Apr 2014 01:03:39 -0000
+X-Groupsio-MsgNum: 49473
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zhtSGe8h3+lMyY1M"
+	protocol="application/pgp-signature"; boundary="e5GLnnZ8mDMEwH4V"
 Content-Disposition: inline
 
---zhtSGe8h3+lMyY1M
-Content-Type: text/plain; charset=us-ascii
+--e5GLnnZ8mDMEwH4V
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Merged, thanks.
 -J.
 
-[[oe] [meta-networking][PATCH] dovecot: add libcap dependency] On 14.04.21 =
-(Mon 09:37) Koen Kooi wrote:
+[[oe] [meta-networking][PATCH v4] dnsmasq: update to 2.68] On 14.04.09 (Wed=
+ 11:14) Christian Zieth=E9n wrote:
 
-> This fixes:
-> 	dovecot/dovecot/latest lost dependency on  libcap
+> Fixes a bug with libvirt and DHCP, which is fixed in 2.66.
 >=20
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> "Handle the situation where libc headers define
+> SO_REUSEPORT, but the kernel in use doesn't, to cope with
+> the introduction of this option to Linux. Thanks to Rich
+> Felker for the bug report."
+>=20
+> Signed-off-by: Christian Zieth=E9n <Christian.Ziethen@enea.com>
 > ---
->  meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb |    4 ----
+>  meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb |    4 ++++
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.=
+bb
+>  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.=
+bb
 >=20
-> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb b/=
-meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-> index 426e1c5..8528536 100644
-> --- a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-> @@ -10,7 +10,7 @@ SRC_URI =3D "http://dovecot.org/releases/2.2/dovecot-${=
-PV}.tar.gz \
->  SRC_URI[md5sum] =3D "037e9c9e07d9dbff54dcff09f280fc8c"
->  SRC_URI[sha256sum] =3D "75592483d40dc4f76cc3b41af40caa4be80478946a699d46=
-846d5d03e4d2e09b"
-> =20
-> -DEPENDS =3D "openssl xz zlib bzip2"
-> +DEPENDS =3D "openssl xz zlib bzip2 libcap"
-> =20
->  inherit autotools
-> =20
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb b/me=
+ta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+> deleted file mode 100644
+> index 2df3713..0000000
+> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.63.bb
+> +++ /dev/null
+> @@ -1,4 +0,0 @@
+> -require dnsmasq.inc
+> -
+> -SRC_URI[dnsmasq-2.63.md5sum] =3D "43e771997615ebcd8f6c6ffa60c3e40b"
+> -SRC_URI[dnsmasq-2.63.sha256sum] =3D "fd86e3bcc6a63c76e35e4a20baa790e7bbb=
+fc7b43845cae85ca8ffd024467710"
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/me=
+ta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+> new file mode 100644
+> index 0000000..b1bef7a
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
+> @@ -0,0 +1,4 @@
+> +require dnsmasq.inc
+> +
+> +SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
+> +SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158=
+ea3fca9a83ab55471f981a2097c2f"
 > --=20
-> 1.9.0
+> 1.7.10.4
 >=20
 --=20
 -Joe MacDonald.
 :wq
 
---zhtSGe8h3+lMyY1M
+--e5GLnnZ8mDMEwH4V
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlNZtCYACgkQwFvcllog0XwYywCggdbRk38qO3bIQs7/KgBRuNm7
-2TEAn1huOkxADYjM8KsjfA97jOedERwh
-=m8D6
+iEYEARECAAYFAlNZtGAACgkQwFvcllog0XxsHgCgjnoTESGeG+cuObsYm9c6MLb4
+p18An2cf+WjdyOvhgS8SGQh9aFfZNgAi
+=IJ/k
 -----END PGP SIGNATURE-----
 
---zhtSGe8h3+lMyY1M--
+--e5GLnnZ8mDMEwH4V--
