@@ -1,32 +1,31 @@
-Return-Path: <ben.shelton@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id C049865D92
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id C5C9165DFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 19:55:13 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
-	s3PJtEFL008815 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 14:55:14 -0500
-Received: from bshelton-desktop.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP5)
-	with ESMTP id 2014042514551468-264746 ;
-	Fri, 25 Apr 2014 14:55:14 -0500 
-From: Ben Shelton <ben.shelton@ni.com>
+	Fri, 25 Apr 2014 19:56:25 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id q200so3733047ykb.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=FJf8nNznuZjq4M476Fvxv035YFxzmoBtCofMX1l70D4=;
+	b=TO1CNtN8SN0iWtBtSF4Y8Dw/e+dc/KSVcbA5UO9GaGgs2kObZYkF/X1HKeO239u8rV
+	7n/R5o9rL1IiiMKlt9vbRtX2YxQ9sjrOMA4zF09r0vbtdWUUPRm9FRFvCT5IRGDwYTiu
+	5jtjKYQeUvRrolgf/saeVTBCREcyJx11tCW6G0A0khwBEMtv5BKfR9rWvg8t+haTdujy
+	uaQOe6CcbDTta1bpAwS9M+5qe2vMWraZTue/aYQtDHznkAREiLBf2NZovtDyvhSvt605
+	wN5apqsAgkvMKK71PlmQwksrjxxyWzAokaWsRe7f7QlniCMj4Ef5gqClD4y1k+JRsL95
+	RSqQ==
+MIME-Version: 1.0
+X-Received: by 10.236.181.4 with SMTP id k4mr5615932yhm.129.1398455786317;
+	Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
+Received: by 10.170.143.196 with HTTP; Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
+Date: Fri, 25 Apr 2014 12:56:26 -0700
+Message-ID: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Apr 2014 14:53:33 -0500
-Message-Id: <1398455613-27167-1-git-send-email-ben.shelton@ni.com>
-X-Mailer: git-send-email 1.9.2
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP5|July 31, 2013) at 04/25/2014 02:55:14 PM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP5|July
-	31, 2013) at 04/25/2014 02:55:14 PM,
-	Serialize complete at 04/25/2014 02:55:14 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
-	0.0.0000
-	definitions=2014-04-25_05:2014-04-25, 2014-04-25,
-	1970-01-01 signatures=0
-Subject: [meta-oe][PATCH] xwd: add recipe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: v4l-utils won't build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 19:55:16 -0000
+X-List-Received-Date: Fri, 25 Apr 2014 19:56:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Adding a recipe for the X Window Dump tool, a lightweight tool that is
-useful for taking screenshots on embedded targets.
+After running bitbake core-image-minimal I'm trying to run bitbake opencv
+and I get the below. I've looking through the log files and the v4l-utils
+recipe. All I can see is that it's unhappy about something to do with the
+autotools configuration for the project. Any ideas?
 
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
----
- meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: Function failed: do_configure (log file is located at
+/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977)
+ERROR: Logfile of failure stored in:
+/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: SITE files ['endian-little', 'bit-32', 'ix86-common',
+'common-linux', 'common-glibc', 'i586-linux', 'common']
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_copy_aclocals
+| DEBUG: Python function autotools_copy_aclocals finished
+| DEBUG: Executing shell function do_configure
+| autoreconf: 'configure.ac' or 'configure.in' is required
+| WARNING:
+/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/run.do_configure.3977:1
+exit 1 from
+|   autoreconf -vfi
+| ERROR: Function failed: do_configure (log file is located at
+/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977)
+ERROR: Task 385
+(/home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
+v4l-utils_0.8.8.bb, do_configure) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1698 tasks of which 879 didn't need to be
+rerun and 1 failed.
+Waiting for 0 running tasks to finish:
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-new file mode 100644
-index 0000000..b73afe1
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "xwd is a tool to capture an X window or screen to file"
-+HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/xwd/"
-+SECTION = "x11/app"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c0cdb783e9a0198237371fdaa26a18bf"
-+DEPENDS = "libxmu"
-+
-+SRC_URI[md5sum] = "6b5d48464c5f366e91efd08b62b12d94"
-+SRC_URI[sha256sum] = "3bb396a2268d78de4b1c3e5237a85f7849d3434e87b3cd1f4d57eef614227d79"
-+
-+require recipes-graphics/xorg-app/xorg-app-common.inc
--- 
-1.9.2
-
+Summary: 1 task failed:
+  /home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
+v4l-utils_0.8.8.bb, do_configure
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
 
