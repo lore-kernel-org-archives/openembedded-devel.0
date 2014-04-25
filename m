@@ -1,41 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f43.google.com (mail-ee0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B1FBD65D12
+Return-Path: <joe@deserted.net>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B410E65D12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 01:33:16 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id e53so2321458eek.16
+	Fri, 25 Apr 2014 01:34:23 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id hn18so1636326igb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Apr 2014 18:33:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tHSOkL9faSDEzwWgwCD7lkkwRK7CbADq/ISzqokOBcc=;
-	b=uOXYmdoIc/u14q3M01Pc4IXqoCAkM3n144SRkQvnXUN9GomP+/FZVZBV4ezPX3dcix
-	4aSxPnLnGAa2lX16IwDyJVPMetpfmqz6OW/iTvpYAWCywDU57lpyw1zOH1wSdLWPLLnu
-	Tgac+Z/YLsMQtFxc8BbbcWhHDcSnznoCHvzODExMo0FjQObzA6LwSMK7BxjDMZZcfL3V
-	yWI6LnZS4JLjH+DQhnG+xkll94HpASPNS32YfeYu+8jwR7Vq7gOzSF0WV/QOuxlLXdCY
-	V4pDtQQElMN2AUGpNUNPh1p+QsiQM+iXT/uMCly/fFAaKfQNjCy3NXWaIpGgexa2AtlP
-	TAUw==
-X-Received: by 10.14.115.1 with SMTP id d1mr6246289eeh.30.1398389597543;
-	Thu, 24 Apr 2014 18:33:17 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	Thu, 24 Apr 2014 18:34:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=kGSUoZvzo5xHmAFwRI7kN1JBrmQG5Fud81qUMRz51qw=;
+	b=Ddx79sZlhrzaUXA8ZCppienrvihi1tS6QDL0svV10VBj+cH94j7U0NytwropmO9f4h
+	sBp+1yWGBvWbCAY3rDeAOVC+HngBtjWVx5SzuzyNAkuYTcmP9UbdNsI+cuC4egSBucBv
+	iFHVJL9xX/7S7bq9tFORs4CIXCeBUA8G+IT7h0Q/pstAryFEbVWCX4fDsi0dTC+Ey/Af
+	okLrfk9H7J3hY4BTeOUFAcRtoWuOMRvskf1m8bFAfxdBkO7wzjVePut9CdBzpLm/ptYq
+	2+BkfEpsYXFhD8/+BqDrX4R7Us+JSUVmXuttd1Es49Jg15LKPIgrkH5u+kKO2nXrulo9
+	EEtw==
+X-Gm-Message-State: ALoCoQlpE0cGqtpeJoBV1c9dQRy7jRz+ZNkET+gdftk/paJG0l5c7g2SP5vTGFc00Qh8hgX753D6
+X-Received: by 10.42.249.8 with SMTP id mi8mr4847947icb.4.1398389664514;
+	Thu, 24 Apr 2014 18:34:24 -0700 (PDT)
+Received: from deserted.net (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
 	by mx.google.com with ESMTPSA id
-	q49sm20557590eem.34.2014.04.24.18.33.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Apr 2014 18:33:16 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Apr 2014 03:33:26 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425013326.GR2486@jama>
-References: <1398323681-19373-1-git-send-email-Chong.Lu@windriver.com>
-	<5358DE99.40604@dominion.thruhere.net>
-	<5359B8A8.7010801@windriver.com>
+	rt10sm2111623igb.15.2014.04.24.18.34.23 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Thu, 24 Apr 2014 18:34:23 -0700 (PDT)
+Date: Thu, 24 Apr 2014 21:34:21 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: Amy Fong <amy.fong@windriver.com>
+Message-ID: <20140425013419.GM10115@deserted.net>
+References: <20140409173022.GA2661@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <5359B8A8.7010801@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH V4] rrdtool: enable perl and python bindings
+In-Reply-To: <20140409173022.GA2661@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.22 (2013-10-16)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking] Uprev memcached from upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,75 +53,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 01:33:24 -0000
-X-Groupsio-MsgNum: 49478
+X-List-Received-Date: Fri, 25 Apr 2014 01:34:23 -0000
+X-Groupsio-MsgNum: 49479
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DbLwIXqnMNXxdFHq"
+	protocol="application/pgp-signature"; boundary="DXTueXWT3Da08pik"
 Content-Disposition: inline
 
---DbLwIXqnMNXxdFHq
+--DXTueXWT3Da08pik
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 25, 2014 at 09:21:44AM +0800, Chong Lu wrote:
+Hi Amy,
+
+Should I expect a v2 based on Martin and Khem's comments?  Also, if
+you're doing the uprev, it's probably worth removing the old one at the
+same time.
+
+-J.
+
+[[oe] [meta-networking] Uprev memcached from upstream] On 14.04.09 (Wed 13:=
+30) Amy Fong wrote:
+
+> commit 3d0b80c5667a2c1d8634173948048567d0bc9c36
+> Author: Amy Fong <amy.fong@windriver.com>
+> Date:   Tue Apr 8 14:29:19 2014 -0400
 >=20
-> On 04/24/2014 05:51 PM, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > Chong Lu schreef op 24-04-14 09:14:
-> >> 1. default enable perl and python bindings 2. rrdtool uses perl.real,
-> >> perl.real doesn't know where the PERL5LIB should be when prebuilts are
-> >> used. Use the wrapper perl instead, perl sets PERL5LIB and invokes
-> >> perl.real 3. While using dash as /bin/sh, subsequent commands in
-> >> functions will not use the environment variables passed to the function
-> >> call line unless explicitly run "export ENV_VAR". 4. delete unrecogniz=
-ed
-> >> options: "--enable-local-libpng" and "--enable-local-zlib"
-> >>
-> >> Signed-off-by: Chong Lu <Chong.Lu@windriver.com> ---
-> >> +DESCRIPTION_${PN}-perl =3D \ +"The ${PN}-perl package includes RRDtool
-> >> bindings for perl." +FILES_${PN}-perl =3D
-> >> "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \ +
-> >> ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*" +RDEPENDS_${PN}-perl =3D
-> >> "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \=
- +
-> >> perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
-> >> +RPROVIDES_${PN} +=3D "${PN}-perl"
-> > Why do you need RPROVIDES?
-> >
-> >
-> >> + +DESCRIPTION_${PN}-python =3D \ +"The ${PN}-python package includes
-> >> RRDtool bindings for python." +FILES_${PN}-python =3D
-> >> "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-> >> +RDEPENDS_${PN}-python =3D "python" +RPROVIDES_${PN} +=3D "${PN}-pytho=
-n"
-> > Why do you need RPROVIDES?
-> If I put rrdtool-python into image.
-> I got following errors when I built image.
->      Nothing RPROVIDES 'rrdtool-python'
-> So, I added RPROVIDES.
-
-Doesn't it make things even worse? It can happily install "rrdtool"
-package as "rrdtool-python" provider which is not what one would expect
-after adding rrdtool-python to image.
-
-You need to add rrdtool-python rrdtool-perl to PACKAGES.
-
+>     Uprev memcached from upstream
+>    =20
+>     memcached 1.4.15 has some configuration errors:
+>     configure:5798: error: cannot run test program while cross compiling
+>    =20
+>     Uprev has the needed fix for the configuration error and some other f=
+ixes.
+>    =20
+>     Signed-off-by: Amy Fong <amy.fong@windriver.com>
+>=20
+> diff --git a/recipes-support/memcached/memcached_1.4.17.bb b/recipes-supp=
+ort/memcached/memcached_1.4.17.bb
+> new file mode 100644
+> index 0000000..906896c
+> --- /dev/null
+> +++ b/recipes-support/memcached/memcached_1.4.17.bb
+> @@ -0,0 +1,50 @@
+> +SUMMARY =3D "A high-performance memory object caching system"
+> +DESCRIPTION =3D "\
+> + Danga Interactive developed memcached to enhance the speed of LiveJourn=
+al.com, \
+> + a site which was already doing 20 million+ dynamic page views per day f=
+or 1 \
+> + million users with a bunch of webservers and a bunch of database server=
+s. \
+> + memcached dropped the database load to almost nothing, yielding faster =
+page \
+> + load times for users, better resource utilization, and faster access to=
+ the \
+> + databases on a memcache miss. \
+> + . \
+> + memcached optimizes specific high-load serving applications that are de=
+signed \
+> + to take advantage of its versatile no-locking memory access system. Cli=
+ents \
+> + are available in several different programming languages, to suit the n=
+eeds \
+> + of the specific application. Traditionally this has been used in mod_pe=
+rl \
+> + apps to avoid storing large chunks of data in Apache memory, and to sha=
+re \
+> + this burden across several machines."
+> +
+> +HOMEPAGE =3D "http://www.danga.com/memcached/"
+> +LICENSE =3D "BSD"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7e5ded7363d335e1bb18013ca0804=
+6ff"
+> +
+> +inherit autotools
+> +
+> +DEPENDS +=3D "libevent"
+> +RDEPENDS +=3D "perl perl-module-posix perl-module-autoloader perl-module=
+-tie-hash"
+> +
+> +SRC_URI =3D "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] =3D "46402dfbd7faadf6182283dbbd18b1a6"
+> +SRC_URI[sha256sum] =3D "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf992=
+6a89999d8cdc0458"
+> +
+> +python __anonymous () {
+> +    endianness =3D d.getVar('SITEINFO_ENDIANNESS', True)
+> +    if endianness =3D=3D 'le':
+> +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dlittle")
+> +    else:
+> +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dbig")
+> +}
+> +
+> +inherit update-rc.d
+> +
+> +INITSCRIPT_NAME =3D "memcached"
+> +INITSCRIPT_PARAMS =3D "defaults"
+> +
+> +do_install_append() {
+> +	install -D -m 755 ${S}/scripts/memcached-init ${D}${sysconfdir}/init.d/=
+memcached=20
+> +	mkdir -p ${D}/usr/share/memcached/scripts
+> +	install -m 755 ${S}/scripts/memcached-tool ${D}/usr/share/memcached/scr=
+ipts
+> +	install -m 755 ${S}/scripts/start-memcached ${D}/usr/share/memcached/sc=
+ripts
+> +}
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Joe MacDonald.
+:wq
 
---DbLwIXqnMNXxdFHq
+--DXTueXWT3Da08pik
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlNZu2YACgkQN1Ujt2V2gBwTAwCeNhEsviZ/bPQ0a0N+ImHhiMsI
-S7oAoIpsUHfyGDX7LXQrxZrxIWTof5Lx
-=RvYO
+iEYEARECAAYFAlNZu5sACgkQwFvcllog0Xzc6gCdFoTiKrni5n/m4KAN9lZeRWGa
+JxUAoJewwub+VJIFLWQjuFMKfFlIr8Jd
+=KP/S
 -----END PGP SIGNATURE-----
 
---DbLwIXqnMNXxdFHq--
+--DXTueXWT3Da08pik--
