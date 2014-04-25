@@ -1,31 +1,19 @@
-Return-Path: <rcagley@gmail.com>
-Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C5C9165DFE
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2962D65DAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 19:56:25 +0000 (UTC)
-Received: by mail-yk0-f177.google.com with SMTP id q200so3733047ykb.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=FJf8nNznuZjq4M476Fvxv035YFxzmoBtCofMX1l70D4=;
-	b=TO1CNtN8SN0iWtBtSF4Y8Dw/e+dc/KSVcbA5UO9GaGgs2kObZYkF/X1HKeO239u8rV
-	7n/R5o9rL1IiiMKlt9vbRtX2YxQ9sjrOMA4zF09r0vbtdWUUPRm9FRFvCT5IRGDwYTiu
-	5jtjKYQeUvRrolgf/saeVTBCREcyJx11tCW6G0A0khwBEMtv5BKfR9rWvg8t+haTdujy
-	uaQOe6CcbDTta1bpAwS9M+5qe2vMWraZTue/aYQtDHznkAREiLBf2NZovtDyvhSvt605
-	wN5apqsAgkvMKK71PlmQwksrjxxyWzAokaWsRe7f7QlniCMj4Ef5gqClD4y1k+JRsL95
-	RSqQ==
+	Fri, 25 Apr 2014 20:22:50 +0000 (UTC)
+Message-ID: <535AC418.6070607@communistcode.co.uk>
+Date: Fri, 25 Apr 2014 21:22:48 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-X-Received: by 10.236.181.4 with SMTP id k4mr5615932yhm.129.1398455786317;
-	Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
-Received: by 10.170.143.196 with HTTP; Fri, 25 Apr 2014 12:56:26 -0700 (PDT)
-Date: Fri, 25 Apr 2014 12:56:26 -0700
-Message-ID: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
-From: Richard Cagley <rcagley@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: v4l-utils won't build
+References: <1398450265-27979-1-git-send-email-raj.khem@gmail.com>	<20140425182652.GZ2486@jama>
+	<CAMKF1soef650vnpY3ca8JAXTAiP4KqWk-ksMP=Afncdg5KsDwA@mail.gmail.com>
+In-Reply-To: <CAMKF1soef650vnpY3ca8JAXTAiP4KqWk-ksMP=Afncdg5KsDwA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] htop: Update 1.0.2 -> 1.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,47 +27,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 19:56:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 25 Apr 2014 20:22:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-After running bitbake core-image-minimal I'm trying to run bitbake opencv
-and I get the below. I've looking through the log files and the v4l-utils
-recipe. All I can see is that it's unhappy about something to do with the
-autotools configuration for the project. Any ideas?
 
-NOTE: Preparing runqueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-ERROR: Function failed: do_configure (log file is located at
-/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977)
-ERROR: Logfile of failure stored in:
-/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977
-Log data follows:
-| DEBUG: Executing python function sysroot_cleansstate
-| DEBUG: Python function sysroot_cleansstate finished
-| DEBUG: SITE files ['endian-little', 'bit-32', 'ix86-common',
-'common-linux', 'common-glibc', 'i586-linux', 'common']
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing python function autotools_copy_aclocals
-| DEBUG: Python function autotools_copy_aclocals finished
-| DEBUG: Executing shell function do_configure
-| autoreconf: 'configure.ac' or 'configure.in' is required
-| WARNING:
-/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/run.do_configure.3977:1
-exit 1 from
-|   autoreconf -vfi
-| ERROR: Function failed: do_configure (log file is located at
-/home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/0.8.8-r2/temp/log.do_configure.3977)
-ERROR: Task 385
-(/home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
-v4l-utils_0.8.8.bb, do_configure) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 1698 tasks of which 879 didn't need to be
-rerun and 1 failed.
-Waiting for 0 running tasks to finish:
 
-Summary: 1 task failed:
-  /home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
-v4l-utils_0.8.8.bb, do_configure
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+On 25/04/2014 19:56, Khem Raj wrote:
+> On Fri, Apr 25, 2014 at 11:26 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> "[oe] [meta-oe][PATCH 1/4] htop: upgrade to 1.0.3 and apply brokensep"
+>
+> inheriting autotools-brokensep is a workaround until we have fixed the
+>   package proper intention should be to not use autotools-brokensep and
+> fix the packages and use autotools-brokensep as last resort.
+>
+
+I agree, my fixes were just quick ones today which got me building. I 
+would take Khems patch over mine as it seems to actually address the 
+problem.
+
+Cheers,
 
