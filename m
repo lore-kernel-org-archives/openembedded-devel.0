@@ -1,40 +1,15 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f48.google.com (mail-ee0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D27365D67
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id C15CA65D31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 13:45:42 +0000 (UTC)
-Received: by mail-ee0-f48.google.com with SMTP id b57so2807976eek.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 06:45:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Zvyy/H1oDq6b05QsdDe6mR5qQOJbGm0xmAfV2vh/NB8=;
-	b=xohmOI0ui0RHGBfUMwgiez8qPS6LmhfcYsEMDFPXl5JdD4xK1B8ISPlZEYKDduBmPv
-	2+mo18yFhXMMxvCSF/T4qtHN+ZfEZJY1he7R94/nubj8HSiGpqJXp6s//HYRUrQvJ+7d
-	jtCCq7txdvZVuomTJBan5UoCTfMaqpWT3KfxIxuPyQsO38Y6v41Psu1yFg46Fxcq/A4y
-	Ncxsc1gQtEcmm70fqWK1l6fIfgPXBxopnz2DJDXJakRpom9OyARcKvaO5QBW7OJz3FgD
-	zWY6gVqzry+6Cz8Y5Q7+gnDb5Hdv2/1yoJiEoOH/fI+rvRW0v1htuVOVjaIkBWfgUGjw
-	MlqQ==
-X-Received: by 10.14.202.201 with SMTP id d49mr3116793eeo.69.1398433542474;
-	Fri, 25 Apr 2014 06:45:42 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	y51sm24992569eeu.0.2014.04.25.06.45.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Apr 2014 06:45:41 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Apr 2014 15:45:51 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 25 Apr 2014 16:15:54 +0000 (UTC)
+From: Jack Mitchell <ml@communistcode.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425134551.GY2486@jama>
-References: <ljcuj9$fuc$1@ger.gmane.org>
-	<CAPbeDCmCodtS+O8tBJwjGyhr0FsiWCd9Sffv9JGsU+p6J1EE2w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAPbeDCmCodtS+O8tBJwjGyhr0FsiWCd9Sffv9JGsU+p6J1EE2w@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5]remove -reduce-relocations on arm platform
+Date: Fri, 25 Apr 2014 17:15:50 +0100
+Message-Id: <1398442553-18995-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.9.2
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: [meta-oe][PATCH 1/4] htop: upgrade to 1.0.3 and apply brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,49 +23,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 13:45:46 -0000
-X-Groupsio-MsgNum: 49497
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="f1Ot4QhJn5dlG2/n"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 25 Apr 2014 16:15:57 -0000
 
---f1Ot4QhJn5dlG2/n
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Jack Mitchell <jmitchell@cbnl.com>
 
-On Fri, Apr 25, 2014 at 03:02:17PM +0200, Jacob Kroon wrote:
-> On Fri, Apr 25, 2014 at 8:16 AM, Neuer User <auslands-kv@gmx.de> wrote:
->=20
-> > On arm platform the compiler does not implement "-reduce-relocations",
-> > see here: https://bugreports.qt-project.org/browse/QTBUG-36129
-> >
-> > The meta-qt5 layer, however, uses this option, so configure will fail
-> > for qtbase.
-> >
-> >
-> I'm building for Wandboard, ARM Cortex-A9, but I haven't had any problems
-> building qtbase.
-> Is this more of a runtime bug ?
+- Upgrade to 1.0.3
+- Fix broken configure by applying brokensep
+- Update location of tarballs as latest is not available
+  on sourceforge
 
-It's catched in configure in 5.3.* version - not sure if it influences
-older versions as well - we were seeing runtime issues with older gcc
-and 5.2.1 (but we've upgraded gcc and haven't tried to remove
--reduce-relocations).
+Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
+---
+ meta-oe/recipes-support/htop/htop_1.0.2.bb | 19 -------------------
+ meta-oe/recipes-support/htop/htop_1.0.3.bb | 18 ++++++++++++++++++
+ 2 files changed, 18 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/htop/htop_1.0.2.bb
+ create mode 100644 meta-oe/recipes-support/htop/htop_1.0.3.bb
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-support/htop/htop_1.0.2.bb b/meta-oe/recipes-support/htop/htop_1.0.2.bb
+deleted file mode 100644
+index 234978b..0000000
+--- a/meta-oe/recipes-support/htop/htop_1.0.2.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "htop process monitor"
+-HOMEPAGE = "http://htop.sf.net"
+-SECTION = "console/utils"
+-LICENSE = "GPLv2"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+-
+-DEPENDS = "ncurses"
+-RDEPENDS_${PN} = "ncurses-terminfo"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz"
+-
+-LDFLAGS_append_libc-uclibc = " -lubacktrace"
+-
+-inherit autotools
+-
+-SRC_URI[md5sum] = "0d01cca8df3349c74569cefebbd9919e"
+-SRC_URI[sha256sum] = "ee60657b044ece0df096c053060df7abf3cce3a568ab34d260049e6a37ccd8a1"
+-
+diff --git a/meta-oe/recipes-support/htop/htop_1.0.3.bb b/meta-oe/recipes-support/htop/htop_1.0.3.bb
+new file mode 100644
+index 0000000..85b0923
+--- /dev/null
++++ b/meta-oe/recipes-support/htop/htop_1.0.3.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "htop process monitor"
++HOMEPAGE = "http://hisham.hm/htop"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
++
++DEPENDS = "ncurses"
++RDEPENDS_${PN} = "ncurses-terminfo"
++
++SRC_URI = "http://hisham.hm/${BPN}/releases/${PV}/${BP}.tar.gz"
++
++LDFLAGS_append_libc-uclibc = " -lubacktrace"
++
++inherit autotools-brokensep
++
++SRC_URI[md5sum] = "e768b9b55c033d9c1dffda72db3a6ac7"
++SRC_URI[sha256sum] = "055c57927f75847fdc222b5258b079a9542811a9dcf5421c615c7e17f55d1829"
+-- 
+1.9.2
 
---f1Ot4QhJn5dlG2/n
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNaZw8ACgkQN1Ujt2V2gBwxzwCgmcALPBPsfCOvgK/6RfhDnPvJ
-HHkAn39w55E5GZIxYzWccTSwb9u75Chq
-=PiG3
------END PGP SIGNATURE-----
-
---f1Ot4QhJn5dlG2/n--
