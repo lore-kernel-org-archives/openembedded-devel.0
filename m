@@ -1,34 +1,34 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-ve0-f176.google.com (mail-ve0-f176.google.com
-	[209.85.128.176])
-	by mail.openembedded.org (Postfix) with ESMTP id BDACC65E22
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
+	[209.85.160.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 348D765DAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2014 00:40:31 +0000 (UTC)
-Received: by mail-ve0-f176.google.com with SMTP id db11so5455251veb.21
+	Sat, 26 Apr 2014 02:06:27 +0000 (UTC)
+Received: by mail-yk0-f178.google.com with SMTP id 200so2563052ykr.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 17:40:32 -0700 (PDT)
+	Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=h6VXM3nTpOux6za9OtQFbi4LVXEre3WzjTq1KBr7Ais=;
-	b=QsBT65oNy+2FCK91ZroQ2sYOnwHlBl3bcgqyNrZjbGqZmqlcDERaiofG3Wn57jXW7a
-	+MH+q4HIZWL504yXyA7N+8PRFCLupv3cNE+gTfrOu/5SiG3CeZqr105zRiPPfvyzs2Im
-	lUgfHMR8IIQtxo1CxQ0YaHC3vLZLliFiKkLm+jxOdAAMdBR+bP/0ZIlvf3/sbEKDWq0J
-	5bobJ6Ww/yjuhNY4FYD2dTr6RNYlqIJknZNAfWKNbc0IYgVNDNddPCu2i7Pz6ySp4L8m
-	feo5yxG7mAHgINImyThNbIEMClYlM5N5DO7fvwATp/Cdky7mXMfZLhLBT/OIniZbV3EG
-	VKiw==
+	:content-type; bh=4ykR/Ed2tKSpecOXLpg2COsRvQKV8aw79D7lsy8leEE=;
+	b=S7aDZUEaHjDLu4b9TcBA6QuE1uyx9WjQz6dQMAny5tkDXi3ohgIXQJOJbyS4jEAqaB
+	jswq+fsis71e6wTZSvYB81FsBEPzGr2kRcp0S4vxV+A71Q0HOtx6vxPxNQk8bZr0/qi4
+	RXtijrUco8Yob6lFGEx8HwR1vyV0I7eMS0jyjihlw7e9O1pJCEVan6ClrERXMSlc7GTd
+	sCdaCO27bepnY2t3gVg/ILFxZQnyAk/uyEiC7nFqRe96+JqjX3CyWtOCeQJl/2uIiU3U
+	HHVrdRFXneZ1x8A+PzaTylJteDnZKM1OB+sC5prAewtrPwbrqzHiDBeXA6fGOP8zr0yy
+	dYUA==
 MIME-Version: 1.0
-X-Received: by 10.52.90.37 with SMTP id bt5mr7939929vdb.7.1398472832875; Fri,
-	25 Apr 2014 17:40:32 -0700 (PDT)
-Received: by 10.52.85.67 with HTTP; Fri, 25 Apr 2014 17:40:32 -0700 (PDT)
-In-Reply-To: <CAN-NoH3eEb1x-XYt8aNDJm_s5DmLq_C_YyvkiskR8jp2n0uqRQ@mail.gmail.com>
+X-Received: by 10.236.66.135 with SMTP id h7mr16546538yhd.60.1398477988271;
+	Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
+Received: by 10.170.143.196 with HTTP; Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
+In-Reply-To: <CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
 References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
 	<20140425235627.GA2486@jama>
 	<CAN-NoH3eEb1x-XYt8aNDJm_s5DmLq_C_YyvkiskR8jp2n0uqRQ@mail.gmail.com>
-Date: Fri, 25 Apr 2014 17:40:32 -0700
-Message-ID: <CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
+Date: Fri, 25 Apr 2014 19:06:28 -0700
+Message-ID: <CAN-NoH2zv8HtC8O3G-7KXJk1odd-agcye9h89SPGcYy6r1XHEw@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: v4l-utils won't build
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,44 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2014 00:40:35 -0000
+X-List-Received-Date: Sat, 26 Apr 2014 02:06:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
-which branch are you on? I am on master-next for OE and on Daisy on Poky.
-Both opencv and v4l-utils build ok.
+On Fri, Apr 25, 2014 at 5:40 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
 
-Adam
-
-
-On Fri, Apr 25, 2014 at 5:30 PM, Richard Cagley <rcagley@gmail.com> wrote:
-
-> On Fri, Apr 25, 2014 at 4:56 PM, Martin Jansa <martin.jansa@gmail.com
-> >wrote:
+> which branch are you on? I am on master-next for OE and on Daisy on Poky.
+> Both opencv and v4l-utils build ok.
 >
-> > On Fri, Apr 25, 2014 at 12:56:26PM -0700, Richard Cagley wrote:
-> > > After running bitbake core-image-minimal I'm trying to run bitbake
-> opencv
-> > > and I get the below. I've looking through the log files and the
-> v4l-utils
-> > > recipe. All I can see is that it's unhappy about something to do with
-> the
-> > > autotools configuration for the project. Any ideas?
-> >
-> > See
-> >
-> >
-> http://git.openembedded.org/openembedded-core/commit/?id=baf5b230af919b6b0fd14ac5fc3e734bf7c464d5
-> > and related discussion on ML
-> >
-> >
-> sorry, i'm too new at this stuff to extract the needed information. Any
-> chance you can give me a bit more guidance? I'm not even sure what to
-> search for in the mailing lists. What's a good procedure to debug this sort
-> of thing?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Adam
 >
+> I don't know is probably a bad answer. Here's what I do:
+
+git clone git://git.openembedded.org/bitbake
+git clone git://github.com/openembedded/oe-core.git
+git clone git://github.com/openembedded/meta-oe
+cd oe-core
+. ./oe-init-build-env ../build ../bitbake
+
+add in the meta-oe layer to bblayers
+
+bitbake core-image-minimal
+bitbake opencv
+
+then it fails
 
