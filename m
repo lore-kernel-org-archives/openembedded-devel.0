@@ -1,39 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f49.google.com (mail-ee0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 762B865E14
+Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
+	[209.85.192.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 23A9665E01
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 23:56:17 +0000 (UTC)
-Received: by mail-ee0-f49.google.com with SMTP id c41so3163828eek.8
+	Sat, 26 Apr 2014 00:19:50 +0000 (UTC)
+Received: by mail-qg0-f46.google.com with SMTP id q107so4595642qgd.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 16:56:18 -0700 (PDT)
+	Fri, 25 Apr 2014 17:19:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Jgz2vOQELRPqTw9h8rGDr2FDGcLvU/FV40bzHt/nCy8=;
-	b=JbgwBnDOxLeuBAuxT7fMbwqllmdyKDDx9M1TDmeHCQjguesyiOZaOylKlpxA/NMXMt
-	TM0Ol/bPim9+MvQohmSBIsjNa8cCNyJb7VaWE1hhI3EJcweyQUJmcMZ+rG4VYIwWY/Sq
-	oH8/7kvRBBYZC5+c0UrHvscBZswHWQPdWSvJbnBuQveXKTpNwJ1pLwFNTWxMG6kkgHnC
-	lC5BvfsN7iHxWZnujRJRk/VBlvF13O3iL10imAAc6riJo6yLqIlI73rNuU9WNBVQiCTQ
-	9a4EXcABoOfKYwj6DaPmFwmVhrKB/2O2Rg9fuGrNvXbVBOq1Dy+OwVrNtYu5UGk/Efqo
-	Dqdg==
-X-Received: by 10.14.246.196 with SMTP id q44mr13464306eer.45.1398470178441;
-	Fri, 25 Apr 2014 16:56:18 -0700 (PDT)
+	bh=s9BN9UbVGIlrCGUkWsmsAjpARbznf1UoZ2TsLv2ogXA=;
+	b=yqhdtqYXKs7zaPBfbqg2CdfeljB9HA0Hce+kl7bJ9xbSwNx+XWKxSYxFgyxp8G1wXN
+	sZRCnSEi82ZG50bs8chOHReHS2MvUBSGuDx6hLq/d13rTJ3lFK0ctLMfjsOBBa+rXRnB
+	2dIAZD3jBaEGpPiS7c7kfGO6QbRTPvS44ZmQsSqBNey3fnST2V8RGKkGUqZroPhytnSB
+	szI2AvpzQ+4JbonA63X1hDqOMJiSuyrPaF5Vv1vVywHSzYXrcfRGbYRKqfj6yb/UuzTz
+	3Y4HoRRS0ga+btlBU3R8ndBVqQWXx6FOxgOhag+V82EfDX2wckBi3VXOffc71a8UXssn
+	lgpg==
+X-Received: by 10.140.98.116 with SMTP id n107mr15038190qge.93.1398471590218; 
+	Fri, 25 Apr 2014 17:19:50 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o5sm28678116eeg.8.2014.04.25.16.56.16
+	o16sm17262116qax.30.2014.04.25.17.19.48
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Apr 2014 16:56:16 -0700 (PDT)
+	Fri, 25 Apr 2014 17:19:49 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 26 Apr 2014 01:56:27 +0200
+Date: Sat, 26 Apr 2014 02:19:59 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140425235627.GA2486@jama>
-References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+Message-ID: <20140426001959.GB2486@jama>
+References: <1398466300-8008-1-git-send-email-obi@opendreambox.org>
 MIME-Version: 1.0
-In-Reply-To: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+In-Reply-To: <1398466300-8008-1-git-send-email-obi@opendreambox.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: v4l-utils won't build
+Subject: Re: [meta-qt5][PATCH 1/2] qtbase: enable xkb by default if x11 is in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Apr 2014 23:56:21 -0000
-X-Groupsio-MsgNum: 49513
+X-List-Received-Date: Sat, 26 Apr 2014 00:19:51 -0000
+X-Groupsio-MsgNum: 49514
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bmO0DhbO8B5xO2aX"
+	protocol="application/pgp-signature"; boundary="P4O8mEax7ExP9NSJ"
 Content-Disposition: inline
 
---bmO0DhbO8B5xO2aX
+--P4O8mEax7ExP9NSJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 25, 2014 at 12:56:26PM -0700, Richard Cagley wrote:
-> After running bitbake core-image-minimal I'm trying to run bitbake opencv
-> and I get the below. I've looking through the log files and the v4l-utils
-> recipe. All I can see is that it's unhappy about something to do with the
-> autotools configuration for the project. Any ideas?
-
-See
-http://git.openembedded.org/openembedded-core/commit/?id=3Dbaf5b230af919b6b=
-0fd14ac5fc3e734bf7c464d5
-and related discussion on ML
-
+On Sat, Apr 26, 2014 at 12:51:39AM +0200, Andreas Oberritter wrote:
+> Fixes "Error: -no-xkbcommon is not supported on XCB platform plugin."
 >=20
-> NOTE: Preparing runqueue
-> NOTE: Executing SetScene Tasks
-> NOTE: Executing RunQueue Tasks
-> ERROR: Function failed: do_configure (log file is located at
-> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
-0.8.8-r2/temp/log.do_configure.3977)
-> ERROR: Logfile of failure stored in:
-> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
-0.8.8-r2/temp/log.do_configure.3977
-> Log data follows:
-> | DEBUG: Executing python function sysroot_cleansstate
-> | DEBUG: Python function sysroot_cleansstate finished
-> | DEBUG: SITE files ['endian-little', 'bit-32', 'ix86-common',
-> 'common-linux', 'common-glibc', 'i586-linux', 'common']
-> | DEBUG: Executing shell function autotools_preconfigure
-> | DEBUG: Shell function autotools_preconfigure finished
-> | DEBUG: Executing python function autotools_copy_aclocals
-> | DEBUG: Python function autotools_copy_aclocals finished
-> | DEBUG: Executing shell function do_configure
-> | autoreconf: 'configure.ac' or 'configure.in' is required
-> | WARNING:
-> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
-0.8.8-r2/temp/run.do_configure.3977:1
-> exit 1 from
-> |   autoreconf -vfi
-> | ERROR: Function failed: do_configure (log file is located at
-> /home/rcagley/oe-zed-track/build/tmp-eglibc/work/i586-oe-linux/v4l-utils/=
-0.8.8-r2/temp/log.do_configure.3977)
-> ERROR: Task 385
-> (/home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
-> v4l-utils_0.8.8.bb, do_configure) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 1698 tasks of which 879 didn't need to be
-> rerun and 1 failed.
-> Waiting for 0 running tasks to finish:
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  recipes-qt/qt5/qtbase.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> Summary: 1 task failed:
->   /home/rcagley/oe-zed-track/meta-oe/meta-oe/recipes-multimedia/v4l2apps/
-> v4l-utils_0.8.8.bb, do_configure
-> Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index 8aefb5c..6ba4bd5 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -35,7 +35,7 @@ RDEPENDS_${PN}-tools +=3D "perl"
+>  # http://qt.gitorious.org/qt/qtdeclarative/commit/e988998a08b1420ed10bd0=
+2d9d4b3b8ed2289df9
+>  PACKAGECONFIG_GL ?=3D "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl=
+', '', d)}"
+>  PACKAGECONFIG_FB ?=3D "${@base_contains('DISTRO_FEATURES', 'directfb', '=
+directfb', '', d)}"
+> -PACKAGECONFIG_X11 ?=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb =
+xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor g=
+tkstyle', '', d)}"
+> +PACKAGECONFIG_X11 ?=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb =
+xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor g=
+tkstyle xkb', '', d)}"
+
+As you're already looking into this, can you please check this issue
+reported by last 2 test-dependencies builds?
+
+qtbase/qtbase-plugins/latest lost dependency on  libxcb-render libxkbcommon=
+ xcb-util-renderutil
+
+Thanks
+
+>  PACKAGECONFIG_FONTS ?=3D ""
+>  PACKAGECONFIG_SYSTEM ?=3D "jpeg libpng zlib"
+>  PACKAGECONFIG_MULTIMEDIA ?=3D "${@base_contains('DISTRO_FEATURES', 'puls=
+eaudio', 'pulseaudio', '', d)}"
+> --=20
+> 1.8.3.2
+>=20
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -118,16 +109,16 @@ and related discussion on ML
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---bmO0DhbO8B5xO2aX
+--P4O8mEax7ExP9NSJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNa9isACgkQN1Ujt2V2gBxwAQCdE3E7j0epu7ZXCvriJHjCV8Ok
-E3sAoJ2kAosvbKPlf40fhhw+2fmBPTjx
-=hQ86
+iEYEARECAAYFAlNa+68ACgkQN1Ujt2V2gBze1QCgmsq4HvaLo/aKRMRi5KpsyDlA
+hY4Anj6GfyLOPmlF24UNAAg/IZr5xRIY
+=NYwD
 -----END PGP SIGNATURE-----
 
---bmO0DhbO8B5xO2aX--
+--P4O8mEax7ExP9NSJ--
