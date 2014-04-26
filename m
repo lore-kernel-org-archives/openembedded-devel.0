@@ -1,36 +1,32 @@
-Return-Path: <rcagley@gmail.com>
-Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 348D765DAF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 2782F65D80
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2014 02:06:27 +0000 (UTC)
-Received: by mail-yk0-f178.google.com with SMTP id 200so2563052ykr.23
+	Sat, 26 Apr 2014 19:44:55 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id hn18so3389090igb.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
+	Sat, 26 Apr 2014 12:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=4ykR/Ed2tKSpecOXLpg2COsRvQKV8aw79D7lsy8leEE=;
-	b=S7aDZUEaHjDLu4b9TcBA6QuE1uyx9WjQz6dQMAny5tkDXi3ohgIXQJOJbyS4jEAqaB
-	jswq+fsis71e6wTZSvYB81FsBEPzGr2kRcp0S4vxV+A71Q0HOtx6vxPxNQk8bZr0/qi4
-	RXtijrUco8Yob6lFGEx8HwR1vyV0I7eMS0jyjihlw7e9O1pJCEVan6ClrERXMSlc7GTd
-	sCdaCO27bepnY2t3gVg/ILFxZQnyAk/uyEiC7nFqRe96+JqjX3CyWtOCeQJl/2uIiU3U
-	HHVrdRFXneZ1x8A+PzaTylJteDnZKM1OB+sC5prAewtrPwbrqzHiDBeXA6fGOP8zr0yy
-	dYUA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=BVDsP7LX3FNl0/tM7AhbCK2wE6sl9cb7HXi0V//D7t4=;
+	b=KTRQojWyGLE5/fB2BZ85a5e4sQk15erHVgsUhEbd6jivrLaR3Jh6ud+YExopDCuKgA
+	fYLbb794yFETVVOpqyKlo2oN7i920mYJy0RCiNK8gwkTl0ucZ6B3V9DTA7N9Gep0SHEH
+	0Mm557jR4gVd263ZBXrDHPPwN8grqxHJNcsNGidhHLA5Z8Lu4FXXT1wvkB08e7EeRJUs
+	pzCbqARLD2mqEQAMcAb2Kka1VqUhYtfojZrSJHBCzA10iMN76ez7l7PbOZm6MOYk7ETs
+	El2hDYlEioZ9+lcJMnyOQN6NCsWE+pzgnkhHShw3fd2iKjxODHjDrUG97sbQ3hIdkFne
+	Pv+A==
+X-Received: by 10.50.30.167 with SMTP id t7mr13401615igh.17.1398541496591;
+	Sat, 26 Apr 2014 12:44:56 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.236.66.135 with SMTP id h7mr16546538yhd.60.1398477988271;
-	Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
-Received: by 10.170.143.196 with HTTP; Fri, 25 Apr 2014 19:06:28 -0700 (PDT)
-In-Reply-To: <CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
-References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
-	<20140425235627.GA2486@jama>
-	<CAN-NoH3eEb1x-XYt8aNDJm_s5DmLq_C_YyvkiskR8jp2n0uqRQ@mail.gmail.com>
-	<CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
-Date: Fri, 25 Apr 2014 19:06:28 -0700
-Message-ID: <CAN-NoH2zv8HtC8O3G-7KXJk1odd-agcye9h89SPGcYy6r1XHEw@mail.gmail.com>
-From: Richard Cagley <rcagley@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: v4l-utils won't build
+Received: by 10.50.229.14 with HTTP; Sat, 26 Apr 2014 12:44:26 -0700 (PDT)
+In-Reply-To: <ljcuj9$fuc$1@ger.gmane.org>
+References: <ljcuj9$fuc$1@ger.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 26 Apr 2014 12:44:26 -0700
+Message-ID: <CAMKF1spDyZsRWsQJBiJzRiP9m9Zwo6+KT1_aRonPpASJPjDgNg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5]remove -reduce-relocations on arm platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,28 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2014 02:06:31 -0000
+X-List-Received-Date: Sat, 26 Apr 2014 19:44:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Apr 25, 2014 at 5:40 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
-
-> which branch are you on? I am on master-next for OE and on Daisy on Poky.
-> Both opencv and v4l-utils build ok.
+On Thu, Apr 24, 2014 at 11:16 PM, Neuer User <auslands-kv@gmx.de> wrote:
+> On arm platform the compiler does not implement "-reduce-relocations",
+> see here: https://bugreports.qt-project.org/browse/QTBUG-36129
 >
-> Adam
+> The meta-qt5 layer, however, uses this option, so configure will fail
+> for qtbase.
 >
-> I don't know is probably a bad answer. Here's what I do:
+> This patch fixes the problem for me, but it should better test on the
+> platform and only apply it, when it is an arm platform:
+>
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index 89736be..f23236a 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -126,7 +126,6 @@ PACKAGECONFIG[nis] = "-nis,-no-nis"
+>  PACKAGECONFIG[widgets] = "-widgets,-no-widgets"
+>
+>  QT_CONFIG_FLAGS += " \
+> -    -reduce-relocations \
+>      -shared \
+>      -silent \
+>      -no-pch \
 
-git clone git://git.openembedded.org/bitbake
-git clone git://github.com/openembedded/oe-core.git
-git clone git://github.com/openembedded/meta-oe
-cd oe-core
-. ./oe-init-build-env ../build ../bitbake
+i would rather prefer
+https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;h=97323ad11305610185a0265392cabcd37510f50e
 
-add in the meta-oe layer to bblayers
-
-bitbake core-image-minimal
-bitbake opencv
-
-then it fails
+to be back ported to OE-Core master/daisy binutils instead
 
