@@ -1,40 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
-	[209.85.192.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 23A9665E01
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 64F4265E3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2014 00:19:50 +0000 (UTC)
-Received: by mail-qg0-f46.google.com with SMTP id q107so4595642qgd.19
+	Sat, 26 Apr 2014 00:30:03 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id c41so3020266yho.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Apr 2014 17:19:50 -0700 (PDT)
+	Fri, 25 Apr 2014 17:30:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=s9BN9UbVGIlrCGUkWsmsAjpARbznf1UoZ2TsLv2ogXA=;
-	b=yqhdtqYXKs7zaPBfbqg2CdfeljB9HA0Hce+kl7bJ9xbSwNx+XWKxSYxFgyxp8G1wXN
-	sZRCnSEi82ZG50bs8chOHReHS2MvUBSGuDx6hLq/d13rTJ3lFK0ctLMfjsOBBa+rXRnB
-	2dIAZD3jBaEGpPiS7c7kfGO6QbRTPvS44ZmQsSqBNey3fnST2V8RGKkGUqZroPhytnSB
-	szI2AvpzQ+4JbonA63X1hDqOMJiSuyrPaF5Vv1vVywHSzYXrcfRGbYRKqfj6yb/UuzTz
-	3Y4HoRRS0ga+btlBU3R8ndBVqQWXx6FOxgOhag+V82EfDX2wckBi3VXOffc71a8UXssn
-	lgpg==
-X-Received: by 10.140.98.116 with SMTP id n107mr15038190qge.93.1398471590218; 
-	Fri, 25 Apr 2014 17:19:50 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o16sm17262116qax.30.2014.04.25.17.19.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Apr 2014 17:19:49 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 26 Apr 2014 02:19:59 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140426001959.GB2486@jama>
-References: <1398466300-8008-1-git-send-email-obi@opendreambox.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=TpNO/QqAEHiljz76mr7WW0T5WIleqksrJ7DOZT1Wh2E=;
+	b=ew/m9p4+hnCyXkSJgyYxxuXT9hzQTYVlFSr+la+yHQsMj++WAVUWDSxqfawL8x3uL3
+	eFcdJlev8gqNY1fwNi3n9S2A7f64sS4BvT6S5aNNqMr8OTzXj594/8DbtBhW6F2r5qSd
+	9Ro3oWB2CfWmK1pl/pITyhUW9o+bj4s0wz8QzcT8RTmnY1u1g1t3GVz3dVdLveAeH80Z
+	pRUWV1kNbRHp9ZXm0Kkb0Fudj6Vw+f1YtUTQ55BLkBOKEzDinHQ63xDXTrEfLuNL3VQ2
+	1O2V7NERszh090NuO35x48bmfJToKRZUY/k6UaZNqq1NOoSa6V1QP22zcPvxb50EWj5N
+	AR/g==
 MIME-Version: 1.0
-In-Reply-To: <1398466300-8008-1-git-send-email-obi@opendreambox.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH 1/2] qtbase: enable xkb by default if x11 is in DISTRO_FEATURES
+X-Received: by 10.236.143.229 with SMTP id l65mr15160955yhj.95.1398472204549; 
+	Fri, 25 Apr 2014 17:30:04 -0700 (PDT)
+Received: by 10.170.143.196 with HTTP; Fri, 25 Apr 2014 17:30:04 -0700 (PDT)
+In-Reply-To: <20140425235627.GA2486@jama>
+References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+	<20140425235627.GA2486@jama>
+Date: Fri, 25 Apr 2014 17:30:04 -0700
+Message-ID: <CAN-NoH3eEb1x-XYt8aNDJm_s5DmLq_C_YyvkiskR8jp2n0uqRQ@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: v4l-utils won't build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,77 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2014 00:19:51 -0000
-X-Groupsio-MsgNum: 49514
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="P4O8mEax7ExP9NSJ"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 26 Apr 2014 00:30:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
---P4O8mEax7ExP9NSJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Apr 25, 2014 at 4:56 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-On Sat, Apr 26, 2014 at 12:51:39AM +0200, Andreas Oberritter wrote:
-> Fixes "Error: -no-xkbcommon is not supported on XCB platform plugin."
->=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  recipes-qt/qt5/qtbase.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-> index 8aefb5c..6ba4bd5 100644
-> --- a/recipes-qt/qt5/qtbase.inc
-> +++ b/recipes-qt/qt5/qtbase.inc
-> @@ -35,7 +35,7 @@ RDEPENDS_${PN}-tools +=3D "perl"
->  # http://qt.gitorious.org/qt/qtdeclarative/commit/e988998a08b1420ed10bd0=
-2d9d4b3b8ed2289df9
->  PACKAGECONFIG_GL ?=3D "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl=
-', '', d)}"
->  PACKAGECONFIG_FB ?=3D "${@base_contains('DISTRO_FEATURES', 'directfb', '=
-directfb', '', d)}"
-> -PACKAGECONFIG_X11 ?=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb =
-xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor g=
-tkstyle', '', d)}"
-> +PACKAGECONFIG_X11 ?=3D "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb =
-xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor g=
-tkstyle xkb', '', d)}"
+> On Fri, Apr 25, 2014 at 12:56:26PM -0700, Richard Cagley wrote:
+> > After running bitbake core-image-minimal I'm trying to run bitbake opencv
+> > and I get the below. I've looking through the log files and the v4l-utils
+> > recipe. All I can see is that it's unhappy about something to do with the
+> > autotools configuration for the project. Any ideas?
+>
+> See
+>
+> http://git.openembedded.org/openembedded-core/commit/?id=baf5b230af919b6b0fd14ac5fc3e734bf7c464d5
+> and related discussion on ML
+>
+>
+sorry, i'm too new at this stuff to extract the needed information. Any
+chance you can give me a bit more guidance? I'm not even sure what to
+search for in the mailing lists. What's a good procedure to debug this sort
+of thing?
 
-As you're already looking into this, can you please check this issue
-reported by last 2 test-dependencies builds?
-
-qtbase/qtbase-plugins/latest lost dependency on  libxcb-render libxkbcommon=
- xcb-util-renderutil
-
-Thanks
-
->  PACKAGECONFIG_FONTS ?=3D ""
->  PACKAGECONFIG_SYSTEM ?=3D "jpeg libpng zlib"
->  PACKAGECONFIG_MULTIMEDIA ?=3D "${@base_contains('DISTRO_FEATURES', 'puls=
-eaudio', 'pulseaudio', '', d)}"
-> --=20
-> 1.8.3.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---P4O8mEax7ExP9NSJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNa+68ACgkQN1Ujt2V2gBze1QCgmsq4HvaLo/aKRMRi5KpsyDlA
-hY4Anj6GfyLOPmlF24UNAAg/IZr5xRIY
-=NYwD
------END PGP SIGNATURE-----
-
---P4O8mEax7ExP9NSJ--
