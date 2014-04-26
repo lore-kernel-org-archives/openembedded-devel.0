@@ -1,37 +1,37 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 58BDA65D15
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 08ACD65DC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2014 20:32:44 +0000 (UTC)
-Received: by mail-pd0-f176.google.com with SMTP id r10so4307007pdi.21
+	Sat, 26 Apr 2014 20:32:45 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id v10so26199pde.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Apr 2014 13:32:45 -0700 (PDT)
+	Sat, 26 Apr 2014 13:32:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=504zLkkWw+R7m8PLwnSe0bz4umvc0eNyeLnETBboJsE=;
-	b=TUyhzgNTAsqhhKSCXbpJUssX4VIieAzCTdbFmGciKicfGOBtmlBwu+Y9kuyVo9e/AN
-	O3UeGpkHtD5p6VztiLpeIfWuFCeTif2fs+C/4mKDP3zQ5acz1kdeSeBC9GXB+xDHB4eE
-	kVABcHqVaV1CquJT7JKcecG0waVunU80PPAuVVr/FyYisnXXrAMAFu+x4JwNjysM7Z7x
-	EvuBnKGGkHfjf9wVJAf3Hn4CFXHxag6MJGUv8NJ8LwsXPALEx1s8r/wzR+eliwkFhT7W
-	aIzkWPyGUidqDyO4e9JeE113xtHoyYjSAQ+DOXpWncngtXcdU7Ntfvk98nIN8oKIm2GF
-	xWLw==
-X-Received: by 10.68.134.101 with SMTP id pj5mr19795171pbb.62.1398544365684;
-	Sat, 26 Apr 2014 13:32:45 -0700 (PDT)
+	bh=OSqdl/rk6sabvesWVBe00RLHPkedekrA8hL0+hv+6HY=;
+	b=r4CsMluXKmPA4A9woyPGLKio3g7ZWEgkbF117OHkemyKTCyelTR08nN9e1muhrzor4
+	iS8AMfI1Cp57TYNb7BiMWIUF6tuRVHGSxDEMZkYjqQ/uFM2JVohmCedOlhbDu9GCjDJt
+	NpdVx0d8JUP4dP64BmJZ9fqDZtCTfcxYevrYCsuIM0qxKrOVzkUPkDEyM2KqTgJGeOhQ
+	ZNI57khHN5dHniQ8WtOScZ6G42u9rjtXzY8fHSO/Arl3yPOkkQaIIJcdkFALoWihjm4A
+	+SjTlvFwYm7LrSZv+ql4JRObt7+yhrvaXZaqCzSywYHkULqlVMspgKEXArEprR8cN+st
+	qBsg==
+X-Received: by 10.68.239.137 with SMTP id vs9mr19638766pbc.84.1398544366703;
+	Sat, 26 Apr 2014 13:32:46 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
 	by mx.google.com with ESMTPSA id
-	ci4sm24455471pbb.50.2014.04.26.13.32.44 for <multiple recipients>
+	ci4sm24455471pbb.50.2014.04.26.13.32.45 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 26 Apr 2014 13:32:45 -0700 (PDT)
+	Sat, 26 Apr 2014 13:32:46 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Apr 2014 13:34:30 -0700
-Message-Id: <1398544484-27299-7-git-send-email-raj.khem@gmail.com>
+Date: Sat, 26 Apr 2014 13:34:31 -0700
+Message-Id: <1398544484-27299-8-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1398544484-27299-1-git-send-email-raj.khem@gmail.com>
 References: <1398544484-27299-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 07/21] bonnie++, lmbench, obex-data-server, samba, sg3-utils: Do not do out-of-tree builds
+Subject: [meta-gnome][PATCH 08/21] epiphany: Fix build when S != B
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,89 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Apr 2014 20:32:44 -0000
-
-These recipes are not ready yet
+X-List-Received-Date: Sat, 26 Apr 2014 20:32:46 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb          |    2 +-
- meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb         |    2 +-
- meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb |    2 +-
- meta-oe/recipes-connectivity/samba/samba.inc                |    2 +-
- meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb         |    5 +++--
- 5 files changed, 7 insertions(+), 6 deletions(-)
+ meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-index 828d762..f8a23d7 100644
---- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-+++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-@@ -10,7 +10,7 @@ SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
- SRC_URI[md5sum] = "750aa5b5051263a99c6c195888c74968"
- SRC_URI[sha256sum] = "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876df8721f01ba2e2cb"
+diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
+index df22e36..3d7fc18 100644
+--- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
++++ b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
+@@ -12,7 +12,7 @@ EXTRA_OECONF += " --disable-nss --with-distributor-name=${DISTRO} --without-ca-f
  
--inherit autotools
-+inherit autotools-brokensep
+ do_configure_prepend() {
+     touch ${S}/gnome-doc-utils.make
+-    sed -i -e s:help::g Makefile.am
++    sed -i -e s:help::g ${S}/Makefile.am
+ }
  
- SCRIPTS = "bon_csv2html bon_csv2txt"
- EXES = "bonnie++ zcav"
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 267f75e..41db150 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-                     file://COPYING-2;md5=8e9aee2ccc75d61d107e43794a25cdf9"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
- PR = "r2"
- 
-diff --git a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-index e781985..f12941e 100644
---- a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-+++ b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-@@ -8,7 +8,7 @@ SRC_URI = "http://tadas.dailyda.com/software/obex-data-server-${PV}.tar.gz"
- SRC_URI[md5sum] = "961ca5db6fe9c97024e133cc6203cc4d"
- SRC_URI[sha256sum] = "b399465ddbd6d0217abedd9411d9d74a820effa0a6a142adc448268d3920094f"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
- FILES_${PN} += "${datadir}/dbus-1/"
- 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index 59c6712..39fc814 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -12,7 +12,7 @@ SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
- 
- S = "${WORKDIR}/samba-${PV}/source"
- 
--inherit autotools update-rc.d
-+inherit autotools-brokensep update-rc.d
- 
- SAMBAMMAP = "no"
- SAMBAMMAP_libc-glibc = "yes"
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
-index beee36c..fd11ce8 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
-@@ -8,10 +8,11 @@ SECTION = "console/admin"
- LICENSE = "GPLv2+ & BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
- 
--SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
-+SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
-+          "
- SRC_URI[md5sum] = "e532a3d6648c422347f6d84cac469263"
- SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652ba38f1"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
- S = "${WORKDIR}/sg3_utils-${PV}"
+ FILES_${PN} += "${datadir}/icons ${datadir}/dbus-1"
 -- 
 1.7.10.4
 
