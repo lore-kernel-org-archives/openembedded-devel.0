@@ -1,18 +1,37 @@
-Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C05C65DCC
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 431F665D37
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Apr 2014 14:47:08 +0000 (UTC)
-Received: from unknown (HELO changhyeok.bae) (10.177.232.191)
-	by 156.147.1.125 with ESMTP; 27 Apr 2014 23:47:09 +0900
-X-Original-SENDERIP: 10.177.232.191
-X-Original-MAILFROM: changhyeok.bae@lge.com
-From: Changhyeok Bae <changhyeok.bae@lge.com>
+	Sun, 27 Apr 2014 19:46:34 +0000 (UTC)
+Received: by mail-yh0-f42.google.com with SMTP id f73so2098303yha.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Apr 2014 12:46:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=s1eRl43gfWqqiZ5XNxDnWoLaaOMXbYJKFisfNFTlMbs=;
+	b=YVpvi6EcZXH3SGoMIT8vNQxZJcDdUSFfSDCxmnmw9ZU80N+zdNhIEhmEvkcp01qXJK
+	meSxyfEkSnRzRK/99xbd35SO/aZOrPLU2dYRgRxBFPU/O/olwFqSYpCuS/ipjOkS4VX7
+	zIQohDI107h8eGstWMOiyaO6pgpYY3SZXjMRlmKLjT1zSyEWX1uJr1kmIeLf77HJ0dy8
+	Gs2ptj/FdaWq2GS5DUJ9BBZ3o/M+zq6FvBExzRLbZRHTXK53X+OEilcye7DXSY8oGkVK
+	QKmIOi4rM0jVb6B7jPf2L2FYC5Fbr5WGQhZdesKSzDJEQDZpYnIx2Jn1dgKPjTRXv6Kt
+	h/8g==
+MIME-Version: 1.0
+X-Received: by 10.236.97.102 with SMTP id s66mr32433400yhf.45.1398627994996;
+	Sun, 27 Apr 2014 12:46:34 -0700 (PDT)
+Received: by 10.170.143.196 with HTTP; Sun, 27 Apr 2014 12:46:34 -0700 (PDT)
+In-Reply-To: <CAN-NoH2zv8HtC8O3G-7KXJk1odd-agcye9h89SPGcYy6r1XHEw@mail.gmail.com>
+References: <CAN-NoH3n=jjiSUou_drXk1xSD8rrKymWXiERgoHEeyus2LCz+A@mail.gmail.com>
+	<20140425235627.GA2486@jama>
+	<CAN-NoH3eEb1x-XYt8aNDJm_s5DmLq_C_YyvkiskR8jp2n0uqRQ@mail.gmail.com>
+	<CAFeBWL7qqCRw2rdJT41KvmOc9wHneaCrYE0oP=Go-o_FoXJ8GQ@mail.gmail.com>
+	<CAN-NoH2zv8HtC8O3G-7KXJk1odd-agcye9h89SPGcYy6r1XHEw@mail.gmail.com>
+Date: Sun, 27 Apr 2014 12:46:34 -0700
+Message-ID: <CAN-NoH2PsEqtvUg+hDf6XqAEzogxneXXb2Pdc73VEAsgu+sFkQ@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Apr 2014 23:47:14 +0900
-Message-Id: <1398610034-20211-1-git-send-email-changhyeok.bae@lge.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [PATCH v3] Change the url to variable for savannah in SRC_URI
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: v4l-utils won't build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,128 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Apr 2014 14:47:12 -0000
+X-List-Received-Date: Sun, 27 Apr 2014 19:46:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* The variables (SAVANNAH_MIRROR)
-  are defined in oe-core/meta/conf/bitbake.conf.
-* MIRRORS in quagga and libunwind is removed.
-  because the MIRRORS of savannah is globally defined
-  in oe-core/meta/classes/mirrors.bbclass
+On Fri, Apr 25, 2014 at 7:06 PM, Richard Cagley <rcagley@gmail.com> wrote:
 
-Signed-off-by: Changhyeok Bae <changhyeok.bae@lge.com>
----
- .../fluidsynth/fluidsynth_1.1.1.bb                 |    2 +-
- .../recipes-protocols/quagga/quagga.inc            |    4 +---
- meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb        |    2 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb        |    2 +-
- .../recipes-support/hddtemp/hddtemp_0.3-beta15.bb  |    2 +-
- meta-oe/recipes-support/libunwind/libunwind.inc    |    4 +---
- meta-oe/recipes-support/lzip/lzip_1.14.bb          |    2 +-
- 7 files changed, 7 insertions(+), 11 deletions(-)
+> On Fri, Apr 25, 2014 at 5:40 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
+>
+>> which branch are you on? I am on master-next for OE and on Daisy on Poky.
+>> Both opencv and v4l-utils build ok.
+>>
+>> Adam
+>>
+>> I don't know is probably a bad answer. Here's what I do:
+>
+> git clone git://git.openembedded.org/bitbake
+> git clone git://github.com/openembedded/oe-core.git
+> git clone git://github.com/openembedded/meta-oe
+> cd oe-core
+> . ./oe-init-build-env ../build ../bitbake
+>
+> add in the meta-oe layer to bblayers
+>
+> bitbake core-image-minimal
+> bitbake opencv
+>
+> then it fails
+>
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
-index c497d98..4388ebe 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
- 
- DEPENDS = "alsa-lib ncurses glib-2.0"
- 
--SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
-+SRC_URI = "${SAVANNAH_MIRROR}/fluid/${P}.tar.gz"
- SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
- SRC_URI[sha256sum] = "55638cb04f39f4df76c081e22ca7feeea58ddd20ebf779a7db2d38b1ff374cd6"
- 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 60baab8..adb68a9 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -23,7 +23,7 @@ RDEPENDS_${PN} += "iproute2"
- QUAGGASUBDIR = ""
- # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
- # versions and leave it empty for recent versions.
--SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name=quagga-${PV} \
-+SRC_URI = "${SAVANNAH_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name=quagga-${PV} \
-            file://fix-for-lib-inpath.patch \
-            file://quagga-0.99.17-libcap.patch \
-            file://quagga-fix-CVE-2013-6051.patch \
-@@ -38,8 +38,6 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
-            file://quagga-Avoid-duplicate-connected-address.patch \
- "
- 
--MIRRORS += "http://download.savannah.gnu.org/releases/ http://download-mirror.savannah.gnu.org/releases/ \n"
--
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
- PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
-diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-index 6e5000b..26e0838 100644
---- a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-+++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
- # flex with provide /usr/include/FlexLexer.h
- DEPENDS = "flex-native bison-native flex"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
-+SRC_URI = "${SAVANNAH_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz \
-            file://cross_cc.patch"
- SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
- SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
-index 97f3354..07dfde8 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb
-@@ -9,7 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
- 
- PR = "r14"
- 
--SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-+SRC_URI = "${SAVANNAH_MIRROR}/${PN}/${P}.tar.gz \
-     file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-     file://0004-SConstruct-remove-rpath.patch \
-     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-index 9da2ee0..b40044d 100644
---- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-+++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2+"
- 
- PR = "r1"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
-+SRC_URI = "${SAVANNAH_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
-            file://hddtemp-no-nls-support.patch \
-            file://hddtemp_0.3-beta15-52.diff \
-            file://hddtemp-0.3-beta15-autodetect-717479.patch \
-diff --git a/meta-oe/recipes-support/libunwind/libunwind.inc b/meta-oe/recipes-support/libunwind/libunwind.inc
-index a70ec2e..7d049ae 100644
---- a/meta-oe/recipes-support/libunwind/libunwind.inc
-+++ b/meta-oe/recipes-support/libunwind/libunwind.inc
-@@ -3,9 +3,7 @@ HOMEPAGE = "http://www.nongnu.org/libunwind"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3fced11d6df719b47505837a51c16ae5"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/${BPN}/${BPN}-${PV}.tar.gz"
--
--MIRRORS += "http://download.savannah.nongnu.org/releases/ http://download-mirror.savannah.gnu.org/releases/ \n"
-+SRC_URI = "${SAVANNAH_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
- 
- inherit autotools
- 
-diff --git a/meta-oe/recipes-support/lzip/lzip_1.14.bb b/meta-oe/recipes-support/lzip/lzip_1.14.bb
-index 3d8c090..473faa5 100644
---- a/meta-oe/recipes-support/lzip/lzip_1.14.bb
-+++ b/meta-oe/recipes-support/lzip/lzip_1.14.bb
-@@ -4,7 +4,7 @@ SECTION = "console/utils"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
- 
--SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
-+SRC_URI = "${SAVANNAH_MIRROR}/lzip/lzip-${PV}.tar.gz"
- 
- # Only the latest version is available in .tar.gz format from savannah.gnu.org,
- # FreeBSD distfiles is known to have version 1.13.
--- 
-1.7.9.5
-
+you're right. if I use the daisy branch of oe-core and master-next of
+meta-oe does seem to build fine.
 
