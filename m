@@ -1,28 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AD9765EDA;
-	Mon, 28 Apr 2014 11:08:25 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 28 Apr 2014 04:08:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,943,1389772800"; d="scan'208";a="424822880"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.122.52])
-	by azsmga001.ch.intel.com with ESMTP; 28 Apr 2014 04:08:21 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Date: Mon, 28 Apr 2014 12:08:17 +0100
-Message-ID: <3327056.Df3VZKvVg7@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.4 (Linux/3.13.10-200.fc20.x86_64; KDE/4.12.4; x86_64; ;
-	)
-In-Reply-To: <0D39BCEC-9039-4A3F-9E65-85965061E698@dominion.thruhere.net>
-References: <1874660.NNkBdmWv1O@peggleto-mobl5.ger.corp.intel.com>
-	<0D39BCEC-9039-4A3F-9E65-85965061E698@dominion.thruhere.net>
-MIME-Version: 1.0
-Subject: Re: [OE-core] OE Github repositories
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 243BF65E98
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Apr 2014 13:15:00 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id x12so834255wgg.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IiONX2vuSJwN17rSUydBNOSyQWUMoivr5SX0Y23RjG0=;
+	b=SNHieI9b1P+EPzzo9Tqmdb9KqhBcDmZKNdFIV8ah7N2f1xJ4sXMed0P75eJIL6nFZu
+	wuTu1+ghKzd/gpImrOmiNY9xm0kpN4PbkuL7MN9qG8qob6UDxTLoulFshiMqgMhSyVlW
+	vz3VcocMWB+wDoDhUkm3QpFvW2ahA42/Qyuxg+Tp6gPA8nRT/U2HZTfrgX4UfMtEPcID
+	YhN3jDCDuxd9rfpYjjhLcDyrwFPUUGz9KPvVkzNm4M+5N8fsahglSrIS+OzkmYbVjazx
+	0NztlUHNO5rGOURQNjE2dF5biu0Y8QK9r3qzm7lS3ks9tD5UIn5qu5xuhQAKuxeAB+jv
+	dpjg==
+X-Gm-Message-State: ALoCoQmaQP2mae03r1VYvJw35rGk3HveS74HBo4fJ22XIGN6KmNROzE47OM68qRN/O1zeOaqraG+
+X-Received: by 10.180.78.5 with SMTP id x5mr15550754wiw.12.1398690900651;
+	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id b2sm17721606wiz.15.2014.04.28.06.14.59
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Apr 2014 15:14:55 +0200
+Message-Id: <1398690895-16245-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] mariadb: handle seperate builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,48 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2014 11:08:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 28 Apr 2014 13:15:06 -0000
 
-On Monday 28 April 2014 12:43:58 Koen Kooi wrote:
-> Op 28 apr. 2014, om 12:10 heeft Paul Eggleton 
-<paul.eggleton@linux.intel.com> het volgende geschreven:
-> > Hi folks,
-> > 
-> > Could whoever has admin access for the OpenEmbedded repositories on github
-> > please do two things:
-> > 
-> > 1) Stop having both "oe-core" and "openembedded-core" repositories - the
-> > latter is four months out-of-date. I'd suggest if we want to be consistent
-> > with our openembedded.org repos we should keep the "openembedded-core"
-> > repository and make it so it is kept up-to-date.
-> > 
-> > 2) Rename the "meta-oe" repository to "meta-openembedded", since meta-oe
-> > the layer is distinct from meta-openembedded the repository, and again
-> > this would be consistent with the primary repository naming.
-> 
-> Keep in mind that renaming/removing 'oe-core' and 'meta-oe' will breaks
-> things which use those repos to pull from by default. Which the oe.org git
-> server has improved a lot, it still can't beat githubs CDN.
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-OK then, how about this instead:
-
-1) Ensure the "openembedded-core" repository is kept up-to-date
-
-2) Add a "meta-openembedded" repository and ensure it is kept up-to-date
-
-3) Add a warning to the description for the contracted name repositories that 
-the fully-named repositories should be used instead, so we can eventually drop 
-them
-
-4) Change documentation / scripts to match #3
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+index 37a0f0c..2b0825a 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+@@ -59,7 +59,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
+                 "
+ 
+ do_configure_append() {
+-    sed -i /comp_err/d ${S}/sql/share/Makefile
++    sed -i /comp_err/d ${B}/sql/share/Makefile
+ 
+     # handle distros with different values of ${libexecdir}
+     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
 -- 
+1.9.0
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
