@@ -1,39 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f42.google.com (mail-ee0-f42.google.com [74.125.83.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0633565D7D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D1AAD65E7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2014 04:05:06 +0000 (UTC)
-Received: by mail-ee0-f42.google.com with SMTP id d17so4387770eek.15
+	Mon, 28 Apr 2014 07:29:21 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id fb1so4847180pad.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Apr 2014 21:05:07 -0700 (PDT)
+	Mon, 28 Apr 2014 00:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1eSE0cKSoZ0PdiDC3DQiOy6ikRv7OVvl8hBc6xzn0gs=;
-	b=hBwXLA8N7/i/BZQal4l95ZBD9wxL2BqSWW2hSt/jHfenJPaMkfxUuZBySd5dTz5ZYy
-	JoaIj/A77fTORaPH5PmSJPTw/RUfg1e45clxoDP7cWBgj3rFYpHkc8lVzssV0wL7bQRN
-	BWf7TeU9E0XEE3DtrgsdmfnZao6/uolhU9n5L998x/IegSWPrgqr4NpL5o43TNHb5Ipc
-	eY5xEio6jEpffwF7wNAedxvF8OS7K6HQziof4YQpiy9A406lP6GUGi3PEgcVqLPkHFQw
-	id/YR4o/IrVQh2aW61Bv5PO4PzmMoA+JsLFHIgRJle7zLNrcQf/add2yWU3ltvamknsV
-	E1lQ==
-X-Received: by 10.14.4.201 with SMTP id 49mr29771227eej.13.1398657906999;
-	Sun, 27 Apr 2014 21:05:06 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=from:to:cc:subject:date:message-id;
+	bh=h8ECvxtEMSW2kwyc6q0yXsee/U8feh9e9LR97WszFq8=;
+	b=w4Kg9F6HlkgogD5mlu7mYc3hDIC0SmHSzf6wubb6JDawmTWT7daHEQVpziwCW5Bt9D
+	av0QnzrbKp27ExjzxrSk5m+oerVzSGClUK7O7KYTo3C/NGkN0mBhwLkLuXBy6JDt8L5Y
+	BxIbYht/1R5YjHRSwgz5XPEb9zjJzLaX+MnME3h9XlWpEqOQSFhGV61mmtBszk1ngKt1
+	W7E4hZ7o+cGSH89V7LUMpeHdZemkPrLjqt9mE8xYXID+kw3nY9b1CXtYisLmB84IoBQU
+	aey46LKsVfRyuhdEIGOHuoYPOtECAsMAS7z179dEZ8d2etUa3d0MYP2n2Q0jIdkOFnbb
+	k03w==
+X-Received: by 10.69.20.107 with SMTP id hb11mr23095283pbd.99.1398670162481;
+	Mon, 28 Apr 2014 00:29:22 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
 	by mx.google.com with ESMTPSA id
-	t4sm46765923eeb.29.2014.04.27.21.05.05
-	for <openembedded-devel@lists.openembedded.org>
+	xk3sm32881627pbb.65.2014.04.28.00.29.21 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 27 Apr 2014 21:05:05 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 28 Apr 2014 06:05:18 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 28 Apr 2014 00:29:21 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140428040518.GI2486@jama>
-References: <1398597711-17825-1-git-send-email-dv@pseudoterminal.org>
-MIME-Version: 1.0
-In-Reply-To: <1398597711-17825-1-git-send-email-dv@pseudoterminal.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-browser][PATCH 0/4] Introduce EGL/GLES and component build patches for Chromium
+Date: Mon, 28 Apr 2014 00:31:25 -0700
+Message-Id: <1398670285-14395-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-gnome][PATCH V3] libgdata: Fix build when S != B
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,137 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2014 04:05:09 -0000
-X-Groupsio-MsgNum: 49559
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JTJq4mKM0qXghaEa"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Apr 2014 07:29:24 -0000
 
---JTJq4mKM0qXghaEa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Sun, Apr 27, 2014 at 01:21:47PM +0200, Carlos Rafael Giani wrote:
-> This set of patches extends the chromium recipe to allow for EGL&GLESv2 b=
-ased 2D rendering,
-> considerably improving performance. This also adds hardware-accelerated W=
-ebGL support.
->=20
-> Three new PACKAGECONFIG for chromium are introduced:
+diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb
+index 8f6675d..2affacc 100644
+--- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb
++++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
+ 
+ DEPENDS = "libxml2 glib-2.0 libsoup-2.4"
+ 
+-inherit gnomebase pkgconfig autotools gettext
++inherit gnomebase pkgconfig autotools-brokensep gettext
+ 
+ SRC_URI[archive.md5sum] = "ec5262cbcb07b63b58d45aa3ac636096"
+ SRC_URI[archive.sha256sum] = "fb244138276a5ce98510b0e2408bbf6f9ce0fd8cdcf86f07cd4be38afbb7c2bc"
+-- 
+1.7.10.4
 
-Also fails when PACKAGECONFIG is empty:
 
-+ tee -a log.world.20140428_030644.log/bitbake.world.log
-NOTE: Started PRServer with DBfile: /home/jenkins/oe/shr-core-branches/shr-=
-core/cache/prserv.sqlite3, IP: 127.0.0.1, PORT: 52990, PID: 32499
-Parsing recipes...ERROR: Error executing a python function in <code>:
-
-The stack trace of python calls that resulted in this exception/failure was:
-File: '<code>', lineno: 9, function: <module>
-     0005:__anon_247__home_jenkins_oe_shr_core_branches_shr_core_openembedd=
-ed_core_meta_classes_package_ipk_bbclass(d)
-     0006:__anon_20__home_jenkins_oe_shr_core_branches_shr_core_openembedde=
-d_core_meta_classes_debian_bbclass(d)
-     0007:__anon_33__home_jenkins_oe_shr_core_branches_shr_core_openembedde=
-d_core_meta_classes_devshell_bbclass(d)
-     0008:__anon_80__home_jenkins_oe_shr_core_branches_shr_core_openembedde=
-d_core_meta_classes_sstate_bbclass(d)
- *** 0009:__anon_46__home_jenkins_oe_shr_core_branches_shr_core_meta_browse=
-r_recipes_browser_chromium_chromium_35_0_1883_0_bb(d)
-File: '__anon_46__home_jenkins_oe_shr_core_branches_shr_core_meta_browser_r=
-ecipes_browser_chromium_chromium_35_0_1883_0_bb', lineno: 3, function: __an=
-on_46__home_jenkins_oe_shr_core_branches_shr_core_meta_browser_recipes_brow=
-ser_chromium_chromium_35_0_1883_0_bb
-     0001:def __anon_46__home_jenkins_oe_shr_core_branches_shr_core_meta_br=
-owser_recipes_browser_chromium_chromium_35_0_1883_0_bb(d):
-     0002:    pkgconfig =3D d.getVar('PACKAGECONFIG', True)
- *** 0003:    if 'use-egl' in pkgconfig.split():
-     0004:        d.appendVar("DEPENDS", " virtual/egl virtual/libgles2")
-     0005:
-Exception: AttributeError: 'NoneType' object has no attribute 'split'
-
-> * "component-build" : If set, Chromium is built in component mode. Each s=
-ubsystem of Chromium
->   ends up in a separate shared object. The alternative is the regular mod=
-e, which links everything
->   into one big binary. Component builds are useful for development and te=
-sting, and consumes
->   significantly less RAM during building. It is essential when building C=
-hromium on a 32-bit OS.
->=20
-> * "use-egl" : Ordinarily, Chromium will try to use GLX and regular (=3D D=
-esktop) OpenGL for 2D
->   acceleration. If that fails, software rendering is used. If use-egl is =
-set, it will use EGL
->   instead of GLX and OpenGL ES 2.0 instead of regular OpenGL. This is ver=
-y useful if the
->   target platform provides hardware acceleration for this API. Chromium w=
-ill then render all 2D
->   components as well as WebGL contents with hardware acceleration, Canvas=
- being an exception
->   (see below).
->=20
-> * "ignore-lost-context" : Without this flag, HTML Canvas will not be acce=
-lerated, even with the
->   "use-egl" flag set. The reason for this is a conceptual problem: HTML C=
-anvas expects the
->   backing store of the canvas to persist until the web page goes away. Bu=
-t if the backing store
->   is a GLES texture, then in theory the associated EGL context could get =
-lost (for example, during
->   a power management cycle), and the texture along with it. This violates=
- requirements for canvas.
->   So, one has to choose: either remain fully standards compliant, and hav=
-e no acceleration, or
->   have acceleration, and risk losing the Canvas content. Note that contex=
-t losses do not happen on
->   all platforms (they haven't been observed with Vivante GPUs for example=
-, and internals of its
->   galcore module do not show anything that could cause a lost context). B=
-ut since these recipes
->   do not depend on a specific platform, this option must be explicitely e=
-nabled.
->=20
-> Carlos Rafael Giani (4):
->   Add component-build PACKAGECONFIG option
->   Add variable to contain extra command-line arguments
->   Add use-egl PACKAGECONFIG to let chromium use EGL automatically
->   Add ignore-lost-context PACKAGECONFIG to ignore lost EGL contexts
->=20
->  .../chromium/chromium/component-build.gypi         |  5 ++++
->  recipes-browser/chromium/chromium/google-chrome    | 11 +++++---
->  .../remove-linux-accel-canvas-from-blacklist.patch | 32 ++++++++++++++++=
-++++++
->  recipes-browser/chromium/chromium_35.0.1883.0.bb   | 27 ++++++++++++++++=
---
->  4 files changed, 69 insertions(+), 6 deletions(-)
->  create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
->  create mode 100644 recipes-browser/chromium/chromium/remove-linux-accel-=
-canvas-from-blacklist.patch
->=20
-> --=20
-> 1.8.3.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---JTJq4mKM0qXghaEa
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNd034ACgkQN1Ujt2V2gBxy8QCgplR1Tl3aEXgrm2yQ/amijtla
-OPsAn1f9Bgf4KLZ+rcgti3kmiOZvwcfB
-=1hfX
------END PGP SIGNATURE-----
-
---JTJq4mKM0qXghaEa--
