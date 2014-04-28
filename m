@@ -1,35 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E0CF65D31;
-	Mon, 28 Apr 2014 02:50:17 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id b15so4360990eek.20
-	for <multiple recipients>; Sun, 27 Apr 2014 19:50:18 -0700 (PDT)
+Received: from mail-ee0-f50.google.com (mail-ee0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 79D7065E47
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Apr 2014 03:01:24 +0000 (UTC)
+Received: by mail-ee0-f50.google.com with SMTP id c13so4338331eek.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Apr 2014 20:01:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=8+6Q0SGQBiWiyO5D27IjfEP8RnATx32K2otKRt19XUY=;
-	b=xOaKnVAU+hVnlJGuqo86gwO/mFSa8S/88cw77EsnGba+n4NBrWqUWVc3OMAi1gLqdt
-	eWC0tLEoXyAHSfdo0gX/UHQsPVfP4bsNFznu240GrZyZhHSvQuKciawId3SlNr8d4WmW
-	5amiVUvXATqubSGh4Uj84zVMIdNGv9oSR8qE1CcLPKsSIHselt3/EKkLNLjfCBqvQ1wv
-	t/iK6Yxp4SvMoJht0sGW4NTbG+88hxq3vB4K4vFEsHzo76zRTMfR9hhTQUdo5iqVK81T
-	Z78qeJz4jCxpAQlTUxsSukKf6nss5NhPxvUSchXpCqKYlERFdjXMDyq1JjN8cdJe533E
-	c3Cw==
-X-Received: by 10.14.104.135 with SMTP id i7mr29141583eeg.34.1398653418028;
-	Sun, 27 Apr 2014 19:50:18 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=2yIvWfHMUkkPdxONOdp0HCYrm8OrZm86WsGsGG2wpWk=;
+	b=Sk7edQHJzz+GdIMqqA8xNilDIOBfK4q0Hf68ru5e6ZOk283MzxRWQZ2mkGCUgRu/Y+
+	ELrYRaZEI7xQWPgoUUswocLi2fkz05/1c7sAMgZ1InzF91gbK8pbLsqG0I2AHhaTjHoQ
+	TZe0g2QkUyWYgwcFOeO4UtU8NR4iMFOLumvdfuF40DuuBlROIrXWaQTMDocgB5lzoaEk
+	eWtyGZpDIMMfC90jnjYOGIYToX1mf1Q5+BVh4y8YNG5l3egaxATD2wMrIEyF9QEXkTKg
+	sS/4evjeX0hpq/LW3BDb7hksFaDCSJdC1xR5Nun7pI27axp7q0uHSDJJZ6+QI12o6p7R
+	8rnA==
+X-Received: by 10.15.60.199 with SMTP id g47mr29232021eex.37.1398654084735;
+	Sun, 27 Apr 2014 20:01:24 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	m42sm46377435eex.21.2014.04.27.19.50.16 for <multiple recipients>
+	q49sm46433296eem.34.2014.04.27.20.01.23
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 27 Apr 2014 19:50:17 -0700 (PDT)
+	Sun, 27 Apr 2014 20:01:23 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 28 Apr 2014 04:50:29 +0200
+Date: Mon, 28 Apr 2014 05:01:36 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140428025029.GG2486@jama>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140428030136.GH2486@jama>
+References: <1398597711-17825-1-git-send-email-dv@pseudoterminal.org>
 MIME-Version: 1.0
+In-Reply-To: <1398597711-17825-1-git-send-email-dv@pseudoterminal.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, Failed tasks 2014-04-28
+Subject: Re: [meta-browser][PATCH 0/4] Introduce EGL/GLES and component build patches for Chromium
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,334 +47,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2014 02:50:23 -0000
-X-Groupsio-MsgNum: 49557
+X-List-Received-Date: Mon, 28 Apr 2014 03:01:30 -0000
+X-Groupsio-MsgNum: 49558
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qRu+kOci6Aaql5G6"
+	protocol="application/pgp-signature"; boundary="9HwyI31Aj78PLmNd"
 Content-Disposition: inline
 
---qRu+kOci6Aaql5G6
+--9HwyI31Aj78PLmNd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Be aware that qemux86-64 log is there, but it wasn't complete so it
-isn't included in this report.
+On Sun, Apr 27, 2014 at 01:21:47PM +0200, Carlos Rafael Giani wrote:
+> This set of patches extends the chromium recipe to allow for EGL&GLESv2 b=
+ased 2D rendering,
+> considerably improving performance. This also adds hardware-accelerated W=
+ebGL support.
 
-It isn't complete, because with this number of failed recipes rm_work
-wasn't able to keep tmpdir small enough for my 55G tmpfs, biggest chunk
-was eaten by chromium and mongodb:
-593M    tmp-eglibc/work/qemux86_64-oe-linux/linux-yocto-tiny-kexecboot
-6.8G    tmp-eglibc/work/core2-64-oe-linux/mongodb
-20G     tmp-eglibc/work/core2-64-oe-linux/chromium
+All 4 commit messages should start with chromium:
 
-Khem sent couple of patches for B!=3DS issues, bit thanks to him!
-
-I have local patch to set B=3DS/autotools-brokensep for remaining failing
-recipes, but I'll wait a bit more for people to send fixes.
-
-http://www.openembedded.org/wiki/Bitbake_World_Status
-
-=3D=3D Failed tasks 2014-04-28 =3D=3D
-
-=3D=3D=3D common (3) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_i=
-nstall
-    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
-onfigure
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-
-=3D=3D=3D common-x86 (2) =3D=3D=3D
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-
-=3D=3D=3D qemuarm (119) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/e17/exquisite_svn.bb, do_confi=
-gure
-    * meta-openembedded/meta-efl/recipes-efl/efl/expedite_1.7.9.bb, do_conf=
-igure
-    * meta-openembedded/meta-efl/recipes-multimedia/lightmediascanner/light=
-mediascanner_0.4.4.bb, do_install
-    * meta-openembedded/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p=
-1.bb, do_compile
-    * meta-openembedded/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.=
-1.11.bb, do_configure
-    * meta-openembedded/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb,=
- do_compile
-    * meta-openembedded/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.b=
-b, do_configure
-    * meta-openembedded/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.=
-32.1.bb, do_configure
-    * meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-=
-power-manager_2.32.0.bb, do_configure
-    * meta-openembedded/meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.b=
-b, do_install
-    * meta-openembedded/meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb=
-, do_compile
-    * meta-openembedded/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.=
-0.bb, do_configure
-    * meta-openembedded/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb, d=
-o_configure
-    * meta-openembedded/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.=
-bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_5=
-=2E9.0.bb, do_configure
-    * meta-openembedded/meta-multimedia/recipes-multimedia/dleyna/renderer-=
-service-upnp_0.3.0.bb, do_install
-    * meta-openembedded/meta-multimedia/recipes-multimedia/faac/faac_1.28.b=
-b, do_compile
-    * meta-openembedded/meta-multimedia/recipes-multimedia/libdc1394/libdc1=
-394_git.bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-multimedia/schroedinger/sch=
-roedinger_1.0.11.bb, do_compile
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb=
-, do_configure
-    * meta-openembedded/meta-networking/recipes-connectivity/barnyard2/barn=
-yard2_1.8.bb, do_compile
-    * meta-openembedded/meta-networking/recipes-daemons/autofs/autofs_5.0.7=
-=2Ebb, do_configure
-    * meta-openembedded/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sa=
-sl_2.1.26.bb, do_configure
-    * meta-openembedded/meta-networking/recipes-daemons/proftpd/proftpd_1.3=
-=2E4b.bb, do_compile
-    * meta-openembedded/meta-networking/recipes-daemons/radvd/radvd_1.9.8.b=
-b, do_install
-    * meta-openembedded/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5=
-=2E2.bb, do_install
-    * meta-openembedded/meta-networking/recipes-daemons/vblade/vblade_20.bb=
-, do_install
-    * meta-openembedded/meta-networking/recipes-filter/conntrack-tools/conn=
-track-tools_1.4.0.bb, do_install
-    * meta-openembedded/meta-networking/recipes-irc/znc/znc_git.bb, do_conf=
-igure
-    * meta-openembedded/meta-networking/recipes-protocols/openflow/openflow=
-_git.bb, do_configure
-    * meta-openembedded/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe=
-_3.8.bb, do_compile
-    * meta-openembedded/meta-networking/recipes-support/curlpp/curlpp_0.7.3=
-=2Ebb, do_compile
-    * meta-openembedded/meta-networking/recipes-support/iftop/iftop_1.0pre2=
-=2Ebb, do_configure
-    * meta-openembedded/meta-networking/recipes-support/netcf/netcf_git.bb,=
- do_install
-    * meta-openembedded/meta-networking/recipes-support/tcpreplay/tcpreplay=
-_3.4.4.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb,=
- do_compile
-    * meta-openembedded/meta-oe/recipes-benchmark/dbench/dbench_4.0.bb, do_=
-install
-    * meta-openembedded/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb=
-, do_compile
-    * meta-openembedded/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb, d=
-o_configure
-    * meta-openembedded/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb=
-, do_unpack
-    * meta-openembedded/meta-oe/recipes-connectivity/networkmanager/network=
-manager_0.9.8.0.bb, do_install
-    * meta-openembedded/meta-oe/recipes-connectivity/phonet-utils/phonet-ut=
-ils_git.bb, do_install
-    * meta-openembedded/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb, =
-do_configure
-    * meta-openembedded/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1=
-=2Ebb, do_install
-    * meta-openembedded/meta-oe/recipes-core/llvm/llvm3.3_3.3.bb, do_config=
-ure
-    * meta-openembedded/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.=
-bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/ltrace/ltrace_git.bb, do_c=
-onfigure
-    * meta-openembedded/meta-oe/recipes-extended/dialog/dialog-static_1.1-2=
-0120706.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-extended/dialog/dialog_1.1-20120706=
-=2Ebb, do_configure
-    * meta-openembedded/meta-oe/recipes-extended/fwts/fwts_git.bb, do_compi=
-le
-    * meta-openembedded/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb,=
- do_compile
-    * meta-openembedded/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb, =
-do_install
-    * meta-openembedded/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.=
-bb, do_compile
-    * meta-openembedded/meta-oe/recipes-extended/liblockfile/liblockfile_1.=
-09.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb, =
-do_configure
-    * meta-openembedded/meta-oe/recipes-extended/socketcan/libsocketcan_0.0=
-=2E9.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-extended/t1lib/t1lib_5.1.2.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.=
-bb, do_install
-    * meta-openembedded/meta-oe/recipes-extended/tmux/tmux_1.6.bb, do_confi=
-gure
-    * meta-openembedded/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb, do_confi=
-gure
-    * meta-openembedded/meta-oe/recipes-graphics/clutter/clutter-box2d_git.=
-bb, do_compile
-    * meta-openembedded/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb, do_i=
-nstall
-    * meta-openembedded/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb, do_com=
-pile
-    * meta-openembedded/meta-oe/recipes-graphics/lxdm/lxdm_git.bb, do_compi=
-le
-    * meta-openembedded/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb, d=
-o_install
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-input-mte=
-v_git.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-multimedia/libsdl-image/libsdl-imag=
-e_1.2.12.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixe=
-r_1.2.12.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_0.8.8=
-=2Ebb, do_configure
-    * meta-openembedded/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb, do=
-_install
-    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
-install
-    * meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-navigation/orrery/orrery_2.7.bb, do=
-_compile
-    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman-e_git.bb, do_c=
-onfigure
-    * meta-openembedded/meta-oe/recipes-qt/qconnman/qconnman_git.bb, do_con=
-figure
-    * meta-openembedded/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb, =
-do_install
-    * meta-openembedded/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb,=
- do_configure
-    * meta-openembedded/meta-oe/recipes-support/daemonize/daemonize_git.bb,=
- do_install
-    * meta-openembedded/meta-oe/recipes-support/debianutils/debianutils_2.3=
-0.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/eject/eject_2.1.5.bb, do_co=
-mpile
-    * meta-openembedded/meta-oe/recipes-support/enca/enca_1.9.bb, do_config=
-ure
-    * meta-openembedded/meta-oe/recipes-support/fbset/fbset_2.1.bb, do_inst=
-all
-    * meta-openembedded/meta-oe/recipes-support/flite/flite-alsa_1.3.bb, do=
-_install
-    * meta-openembedded/meta-oe/recipes-support/fltk/fltk_1.1.10.bb, do_ins=
-tall
-    * meta-openembedded/meta-oe/recipes-support/gpm/gpm_1.99.7.bb, do_compi=
-le
-    * meta-openembedded/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.b=
-b, do_compile
-    * meta-openembedded/meta-oe/recipes-support/lcms/lcms_1.17.bb, do_compi=
-le
-    * meta-openembedded/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.b=
-b, do_configure
-    * meta-openembedded/meta-oe/recipes-support/libol/libol_0.3.18.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.1=
-0.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/libusbg/libusbg_git.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-support/lockdev/lockdev_git.bb, do_=
-configure
-    * meta-openembedded/meta-oe/recipes-support/maliit/maliit-framework_git=
-=2Ebb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/mbuffer/mbuffer_20091227.bb=
-, do_configure
-    * meta-openembedded/meta-oe/recipes-support/mysql/mariadb-native_5.1.67=
-=2Ebb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/openldap/openldap_2.4.23.bb=
-, do_configure
-    * meta-openembedded/meta-oe/recipes-support/openmotif/openmotif_2.3.3.b=
-b, do_compile
-    * meta-openembedded/meta-oe/recipes-support/pidgin/libotr_4.0.0.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-support/postgresql/postgresql_9.2.4=
-=2Ebb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/pv/pv_1.4.6.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb=
-, do_compile
-    * meta-openembedded/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb, do=
-_compile
-    * meta-openembedded/meta-oe/recipes-support/talloc/talloc_2.0.1.bb, do_=
-configure
-    * meta-openembedded/meta-oe/recipes-support/usb-modeswitch/usb-modeswit=
-ch_2.0.1.bb, do_install
-    * meta-openembedded/meta-oe/recipes-support/vala-terminal/vala-terminal=
-_git.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-support/xchat/xchat_2.8.8.bb, do_co=
-mpile
-    * meta-openembedded/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0=
-=2Ebb, do_compile
-    * meta-openembedded/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-to=
-ols_4.11.0.bb, do_compile
-    * meta-smartphone/meta-android/recipes-android/rpc/android-rpc_git.bb, =
-do_compile
-    * meta-smartphone/meta-fso/recipes-freesmartphone/freesmartphone/fso-sp=
-ecs_2012.07.27.2.bb, do_compile
-    * meta-smartphone/meta-osmocombb/recipes-osmocombb/osmoconbb/osmocon_gi=
-t.bb, do_compile
-    * meta-smartphone/meta-shr/recipes-shr/3rdparty/libsensmon_git.bb, do_c=
-ompile
-    * meta-smartphone/meta-shr/recipes-shr/3rdparty/omext_0.2.bb, do_config=
-ure
-    * meta-smartphone/meta-shr/recipes-shr/3rdparty/vagalume_0.8.5.bb, do_c=
-ompile
-    * meta-smartphone/meta-shr/recipes-shr/shr/e-wm-config-illume2-shr_git.=
-bb, do_configure
-    * meta-smartphone/meta-shr/recipes-shr/shr/libphone-utils_git.bb, do_co=
-mpile
-    * meta-smartphone/meta-shr/recipes-shr/shr/shr-specs_git.bb, do_compile
-    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
-o_compile
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-devtools/concurrencykit/concurrency=
-kit_git.bb, do_compile
-
-=3D=3D=3D qemux86_64 (8) =3D=3D=3D
-    * meta-openembedded/meta-gnome/recipes-gnome/devilspie/devilspie2_0.24.=
-bb, do_compile
-    * meta-openembedded/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-ba=
-ckgrounds_2.32.0.bb, do_configure
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
-b, do_configure
-    * meta-openembedded/meta-multimedia/recipes-multimedia/openal/openal-so=
-ft_1.15.1.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-benchmark/iozone3/iozone3_414.bb, d=
-o_fetch
-    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
-obiledevice_1.1.4.bb, do_configure
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.1=
-3.bb, do_configure
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||122   ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140426_020111.log/
-|-
-||qemux86       ||124   ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140426_174926.log/
-|-
-||qemux86_64    ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140420_141804.log/
-|}
+> Three new PACKAGECONFIG for chromium are introduced:
+>=20
+> * "component-build" : If set, Chromium is built in component mode. Each s=
+ubsystem of Chromium
+>   ends up in a separate shared object. The alternative is the regular mod=
+e, which links everything
+>   into one big binary. Component builds are useful for development and te=
+sting, and consumes
+>   significantly less RAM during building. It is essential when building C=
+hromium on a 32-bit OS.
+>=20
+> * "use-egl" : Ordinarily, Chromium will try to use GLX and regular (=3D D=
+esktop) OpenGL for 2D
+>   acceleration. If that fails, software rendering is used. If use-egl is =
+set, it will use EGL
+>   instead of GLX and OpenGL ES 2.0 instead of regular OpenGL. This is ver=
+y useful if the
+>   target platform provides hardware acceleration for this API. Chromium w=
+ill then render all 2D
+>   components as well as WebGL contents with hardware acceleration, Canvas=
+ being an exception
+>   (see below).
+>=20
+> * "ignore-lost-context" : Without this flag, HTML Canvas will not be acce=
+lerated, even with the
+>   "use-egl" flag set. The reason for this is a conceptual problem: HTML C=
+anvas expects the
+>   backing store of the canvas to persist until the web page goes away. Bu=
+t if the backing store
+>   is a GLES texture, then in theory the associated EGL context could get =
+lost (for example, during
+>   a power management cycle), and the texture along with it. This violates=
+ requirements for canvas.
+>   So, one has to choose: either remain fully standards compliant, and hav=
+e no acceleration, or
+>   have acceleration, and risk losing the Canvas content. Note that contex=
+t losses do not happen on
+>   all platforms (they haven't been observed with Vivante GPUs for example=
+, and internals of its
+>   galcore module do not show anything that could cause a lost context). B=
+ut since these recipes
+>   do not depend on a specific platform, this option must be explicitely e=
+nabled.
+>=20
+> Carlos Rafael Giani (4):
+>   Add component-build PACKAGECONFIG option
+>   Add variable to contain extra command-line arguments
+>   Add use-egl PACKAGECONFIG to let chromium use EGL automatically
+>   Add ignore-lost-context PACKAGECONFIG to ignore lost EGL contexts
+>=20
+>  .../chromium/chromium/component-build.gypi         |  5 ++++
+>  recipes-browser/chromium/chromium/google-chrome    | 11 +++++---
+>  .../remove-linux-accel-canvas-from-blacklist.patch | 32 ++++++++++++++++=
+++++++
+>  recipes-browser/chromium/chromium_35.0.1883.0.bb   | 27 ++++++++++++++++=
+--
+>  4 files changed, 69 insertions(+), 6 deletions(-)
+>  create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
+>  create mode 100644 recipes-browser/chromium/chromium/remove-linux-accel-=
+canvas-from-blacklist.patch
+>=20
+> --=20
+> 1.8.3.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---qRu+kOci6Aaql5G6
+--9HwyI31Aj78PLmNd
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNdwfUACgkQN1Ujt2V2gBxiOACgmBw3kE1TyeYMru7U+OLD56QF
-mHUAoIqAp4L8sSPOH8nW1ivSxlUJCHVQ
-=j4iF
+iEYEARECAAYFAlNdxJAACgkQN1Ujt2V2gBzcjACcCinSV9xlYoSUJ534xDVE8uN1
+POUAnioMFDUmd7tYAoQZ3+sfBLviNTYo
+=X9e4
 -----END PGP SIGNATURE-----
 
---qRu+kOci6Aaql5G6--
+--9HwyI31Aj78PLmNd--
