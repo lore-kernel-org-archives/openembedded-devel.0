@@ -1,36 +1,36 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 243BF65E98
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f176.google.com (mail-yk0-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 30D3D65E93
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2014 13:15:00 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id x12so834255wgg.11
+	Mon, 28 Apr 2014 15:14:15 +0000 (UTC)
+Received: by mail-yk0-f176.google.com with SMTP id 19so5777365ykq.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IiONX2vuSJwN17rSUydBNOSyQWUMoivr5SX0Y23RjG0=;
-	b=SNHieI9b1P+EPzzo9Tqmdb9KqhBcDmZKNdFIV8ah7N2f1xJ4sXMed0P75eJIL6nFZu
-	wuTu1+ghKzd/gpImrOmiNY9xm0kpN4PbkuL7MN9qG8qob6UDxTLoulFshiMqgMhSyVlW
-	vz3VcocMWB+wDoDhUkm3QpFvW2ahA42/Qyuxg+Tp6gPA8nRT/U2HZTfrgX4UfMtEPcID
-	YhN3jDCDuxd9rfpYjjhLcDyrwFPUUGz9KPvVkzNm4M+5N8fsahglSrIS+OzkmYbVjazx
-	0NztlUHNO5rGOURQNjE2dF5biu0Y8QK9r3qzm7lS3ks9tD5UIn5qu5xuhQAKuxeAB+jv
-	dpjg==
-X-Gm-Message-State: ALoCoQmaQP2mae03r1VYvJw35rGk3HveS74HBo4fJ22XIGN6KmNROzE47OM68qRN/O1zeOaqraG+
-X-Received: by 10.180.78.5 with SMTP id x5mr15550754wiw.12.1398690900651;
-	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id b2sm17721606wiz.15.2014.04.28.06.14.59
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 28 Apr 2014 06:15:00 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Apr 2014 15:14:55 +0200
-Message-Id: <1398690895-16245-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] mariadb: handle seperate builddir
+	Mon, 28 Apr 2014 08:14:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=YmILacrTx6dfKq3Wkv+DZhEPqLQ6S4iIYffU6rRa0Uk=;
+	b=ZNIv9i0E4Wde6t0Z0VTr00MG6CwbudpbNgxxmoK3lXvOJ5ywlgkcTV8H+fi6WI62vD
+	mq6Y+caZShcgfBS3q2PrwSWyjvtOU8rK15zO3M2AlAlj7W8lz8jqd5Zvy/nL/DkpUQWM
+	5BZI8nek/XvlC+CF9mnkjKlkOwatKGKJKP/X8j2mfmAnNtVRQpDT6Isw0f6jN1tK6bXQ
+	uWmr4fpvh5sJSuBMrRrMyJO9aqvQNFZZKkMY3VSLDpdD5N9UnLJuRhtForgoFEXbkxUU
+	gU/zsX4g2dskgP4y+SwYp0GNvMd/0mwH0ToKL9DTtYI3ZyzVJ8P2U4B8yxNcd59Nqvmt
+	qJpQ==
+MIME-Version: 1.0
+X-Received: by 10.236.43.98 with SMTP id k62mr38200527yhb.33.1398698056124;
+	Mon, 28 Apr 2014 08:14:16 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.124.72 with HTTP; Mon, 28 Apr 2014 08:14:16 -0700 (PDT)
+In-Reply-To: <1398597711-17825-4-git-send-email-dv@pseudoterminal.org>
+References: <1398597711-17825-1-git-send-email-dv@pseudoterminal.org>
+	<1398597711-17825-4-git-send-email-dv@pseudoterminal.org>
+Date: Mon, 28 Apr 2014 12:14:16 -0300
+X-Google-Sender-Auth: deOoYVXFGbacYPKgFz0TBpwnJoQ
+Message-ID: <CAP9ODKr2W4gi=uytRghv6rQYtSMjqbKcy9+yqAEt=OWoiWJzCg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 3/4] Add use-egl PACKAGECONFIG to let chromium use EGL automatically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Apr 2014 13:15:06 -0000
+X-List-Received-Date: Mon, 28 Apr 2014 15:14:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hello Carlos,
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-index 37a0f0c..2b0825a 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-@@ -59,7 +59,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
-                 "
- 
- do_configure_append() {
--    sed -i /comp_err/d ${S}/sql/share/Makefile
-+    sed -i /comp_err/d ${B}/sql/share/Makefile
- 
-     # handle distros with different values of ${libexecdir}
-     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
+On Sun, Apr 27, 2014 at 8:21 AM, Carlos Rafael Giani
+<dv@pseudoterminal.org> wrote:
+> By default, Chromium will try to use GLX and regular OpenGL. On embedded
+> platforms, these are often not present, or unaccelerated, and using EGL
+> and OpenGL ES instead makes more sense. To produce builds that use EGL and
+> OpenGL ES by default instead, this PACKAGECONFIG option can be used.
+>
+> An EGL/OpenGLES-enabled build produces a chromium version that renders
+> 2D and WebGL with GPU acceleration (if present).
+>
+> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+> ---
+>  recipes-browser/chromium/chromium_35.0.1883.0.bb | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+> index 080282b..d0495d8 100644
+> --- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
+> +++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+...
+> +python __anonymous() {
+> +    pkgconfig = d.getVar('PACKAGECONFIG', True)
+> +    if 'use-egl' in pkgconfig.split():
+> +        d.appendVar("DEPENDS", " virtual/egl virtual/libgles2")
+> +}
+
+This is not need. You can add it in the PACKAGECONFIG third param so
+it includes this dependencies for build.
+
+
+
 -- 
-1.9.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
