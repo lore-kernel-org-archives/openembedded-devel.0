@@ -1,20 +1,24 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D65C61116
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 844D6617AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 06:40:04 +0000 (UTC)
-Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 58BB42A4B1
+	Tue, 29 Apr 2014 07:22:02 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s3T7M3n1024872
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 08:40:05 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2014 08:39:53 +0200
-Message-Id: <1398753593-4447-5-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1398753593-4447-1-git-send-email-dv@pseudoterminal.org>
-References: <1398753593-4447-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH v2 4/4] chromium: Add ignore-lost-context PACKAGECONFIG option
+	Tue, 29 Apr 2014 00:22:03 -0700 (PDT)
+Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.169.1; Tue, 29 Apr 2014 00:22:02 -0700
+From: Chong Lu <Chong.Lu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 29 Apr 2014 15:22:00 +0800
+Message-ID: <1398756121-13263-1-git-send-email-Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [PATCH V6] rrdtool: enable perl and python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,86 +32,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 06:40:05 -0000
+X-List-Received-Date: Tue, 29 Apr 2014 07:22:05 -0000
+Content-Type: text/plain
 
-Accelerating the HTML5 canvas element rendering with OpenGL ES is tricky,
-because an EGL context can get lost with some drivers. Since pages using
-canvas assume they can paint into the canvas and the pixels inside will
-never vanish, this is a problem. Workarounds like periodic snapshots are
-being considered. The WHATWG discussion about this problem can be found at:
-http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
+1. default enable perl and python bindings
+2. rrdtool uses perl.real, perl.real doesn't know where the PERL5LIB should be
+when prebuilts are used. Use the wrapper perl instead, perl sets PERL5LIB and
+invokes perl.real
+3. While using dash as /bin/sh, subsequent commands in functions will not use
+the environment variables passed to the function call line unless explicitly
+run "export ENV_VAR".
+4. delete unrecognized options: "--enable-local-libpng" and "--enable-local-zlib"
 
-Until then, one has to choose: either no acceleration and full standards
-compliance, or acceleration and potentially lost pixels.
-
-Using this PACKAGECONFIG chooses the second option.
-
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 ---
- .../remove-linux-accel-canvas-from-blacklist.patch | 32 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_35.0.1883.0.bb   |  2 ++
- 2 files changed, 34 insertions(+)
- create mode 100644 recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |   92 +++++++++++++++++++--
+ 1 file changed, 86 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
-new file mode 100644
-index 0000000..635e563
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
-@@ -0,0 +1,32 @@
-+Together with the --gpu-no-context-lost command line switch, this patch is
-+necessary to enable hardware accelerated 2D canvas rendering when using
-+EGL.
-+
-+Note the implications on the behavior of Canvas, in particular with lost
-+contexts, as discussed here:
-+
-+http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
-+
-+Upstream-Status: Inappropiate [see link above]
-+
-+diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
-+index 35060a9..4bd6ef5 100644
-+--- a/gpu/config/software_rendering_list_json.cc
-++++ b/gpu/config/software_rendering_list_json.cc
-+@@ -232,16 +232,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
-+       ]
-+     },
-+     {
-+-      "id": 24,
-+-      "description": "Accelerated 2d canvas is unstable in Linux at the moment",
-+-      "os": {
-+-        "type": "linux"
-+-      },
-+-      "features": [
-+-        "accelerated_2d_canvas"
-+-      ]
-+-    },
-+-    {
-+       "id": 27,
-+       "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
-+       "cr_bugs": [95934, 94973, 136240],
-diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-index 1fb050f..e895223 100644
---- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
-+++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-@@ -7,6 +7,7 @@ SRC_URI = "\
-         file://include.gypi \
-         file://oe-defaults.gypi \
-         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://remove-linux-accel-canvas-from-blacklist.patch', '', d)} \
-         file://unistd-2.patch \
-         file://google-chrome \
-         file://google-chrome.desktop \
-@@ -39,6 +40,7 @@ ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard',
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+index 533451f..e337529 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
+@@ -15,25 +15,105 @@ SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
+ SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
+ SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
  
- CHROMIUM_EXTRA_ARGS ?= " \
- 	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
-+	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
+-inherit autotools gettext
++inherit autotools gettext pythonnative perlnative python-dir
+ 
+ EXTRA_AUTORECONF = "-I m4"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "python perl"
++
++PACKAGES += "${PN}-perl ${PN}-python"
++
++PACKAGECONFIG[python] = "--enable-python=yes \
++am_cv_python_pythondir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages \
++am_cv_python_pyexecdir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages,\
++--disable-python,python,"
++
++PACKAGECONFIG[perl] = \
++"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor"' \
++ac_cv_path_PERL_CC='${CC}',  \
++--disable-perl,perl,"
++
+ PACKAGECONFIG[dbi] = "--enable-libdbi,--disable-libdbi,libdbi"
+ 
+ EXTRA_OECONF = " \
+     --enable-shared \
+-    --enable-local-libpng \
+-    --enable-local-zlib \
+     --disable-libwrap \
+     --program-prefix='' \
+     rd_cv_ieee_works=yes \
+-    --disable-perl \
+-    --disable-python \
+     --disable-ruby \
+     --disable-lua \
+     --disable-rpath \
  "
  
- export GYP_DEFINES="${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
++# don't use perl.real, this results in break issues with prebuilts since perl.real doesn't
++# know where the PERL5LIB is...
++# use wrapper perl instead
++EXTRA_OEMAKE = "PERL=${STAGING_BINDIR_NATIVE}/perl-native/perl FULLPERL=${STAGING_BINDIR_NATIVE}/perl-native/perl"
++
++export BUILD_SYS
++export HOST_SYS
++export STAGING_LIBDIR
++export STAGING_INCDIR
++
++do_configure() {
++	#fix the pkglib problem with newer automake
++	#perl
++	sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
++	    ${S}/bindings/perl-shared/Makefile.PL
++
++	#python
++	sed -i -e '/PYTHON_INCLUDES="-I${/c \
++	PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
++	    ${S}/m4/acinclude.m4
++	#remove the hardcoded $(libdir) rpath
++	sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
++
++	autotools_do_configure
++
++	perl_version=`perl -v 2>/dev/null | \
++	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
++
++	#modify python sitepkg
++	#remove the dependency of perl-shared:Makefile
++	#or perl-shared/Makefile will be regenerated
++	#if any code touch bindings/Makefile after below perl bindings code
++	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
++	    --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
++	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
++	    ${S}/bindings/Makefile
++
++	#redo the perl bindings
++	(
++	cd bindings/perl-shared;
++	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
++	    INSTALLPRIVLIB="abc";
++	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++
++	cd ../../bindings/perl-piped;
++	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor";
++	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++	)
++
++	#change the interpreter in file
++	sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
++	    ${S}/examples/Makefile
++	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
++	    ${S}/examples/*.pl
++}
++
++FILES_${PN}-doc += "${datadir}/examples"
++
++DESCRIPTION_${PN}-perl = \
++"The ${PN}-perl package includes RRDtool bindings for perl."
++FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \
++    ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*"
++RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \
++    perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
++
++DESCRIPTION_${PN}-python = \
++"The ${PN}-python package includes RRDtool bindings for python."
++FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++RDEPENDS_${PN}-python = "python"
+ 
++FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
++    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
 -- 
-1.8.3.2
+1.7.9.5
 
 
