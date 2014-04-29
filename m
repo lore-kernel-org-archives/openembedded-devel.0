@@ -1,37 +1,38 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 738DE60E24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 13:32:40 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id d1so430962wiv.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 06:32:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=N+iiKnuhJgY7/vwuzbwsfDTh1vjkx1Wi/+AgHQ9JPDI=;
-	b=f6fIWu+pDktWND+IIpqpX6VU838cgP3xPaVOiSs2nRcp5EcJvpFU6YZ5M3RQfDPGPo
-	jWKjQNCla/JqqqLdmMkq4sd8QENOVNWiFPSbfZiARYNDI4mmIjm5u39uFG9PHxK3YKrK
-	tW55kqTmmywDS96xqG7EABvyJ+lYqzdhSbb4bwN3i8ko2MbGn9XFAghLEb5+NhfZ0wFz
-	nmjDcscBN5ADI7cA7shci2HaljFpYTQ2sC5qzLaTlnX/ZjBWD5s0GkInJxMZBlClIfQv
-	5/F/Aj7Wh67itMc22g0pXTbFJ8FCXG2GWcbozB5/G8N3W632JzRjxfhIAVJ/rLREs3UI
-	HJXA==
-X-Gm-Message-State: ALoCoQkHb6PAqYQq1FcLAiLpKupLLcNWwbQfE57Yt9Hm4YwZjZtLY4E5lqSWM+PkOJ4w7wSATv3n
-X-Received: by 10.180.76.116 with SMTP id j20mr20355734wiw.21.1398778361767;
-	Tue, 29 Apr 2014 06:32:41 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id b1sm31121789wjb.37.2014.04.29.06.32.40
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C5AD8609B1;
+	Tue, 29 Apr 2014 17:59:59 +0000 (UTC)
+Received: by mail-la0-f54.google.com with SMTP id e16so421789lan.41
+	for <multiple recipients>; Tue, 29 Apr 2014 10:59:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ia8V2qZJmW1VqHbSemhSxpo13pX5ygoBnXaSLNxcEgk=;
+	b=tdJY3XZqutZgE8VBk1Mtjyezn7NGETL/mB2dOhEbO5sWNxyVloeL/qmKOoq4ZQFoZB
+	+K1c0n/j01W80ms/CDqOOzPYVtuD8pNNpNH2LqnXiy/mh7Xl712VCM4OHoLUh1B/Lhwe
+	AsadKg1Kx5gl9jNWvJCEam5wa/y8PBQtx3vqtqnlocxlqYWTLWH/8UQhW2xEQel9DdKE
+	zgYUkgGYmlG4gfl0jpO/Jc/z1wJw/f49j3bORxjKH4lXc0MoLx6M+TGv9kbBqPJbFi0o
+	EWhEMo9v14vpdjkS90OiD5upBULd9nincv87CFeulnAWICDzEjVrHHgJ+LTEWreC4FlK
+	A0Eg==
+X-Received: by 10.112.41.227 with SMTP id i3mr323629lbl.41.1398794399592;
+	Tue, 29 Apr 2014 10:59:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id q2sm8610205laj.9.2014.04.29.10.59.57
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 Apr 2014 06:32:40 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2014 15:32:36 +0200
-Message-Id: <1398778356-14565-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCHv2] mariadb: handle seperate builddir
+	Tue, 29 Apr 2014 10:59:58 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 29 Apr 2014 20:00:12 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140429180012.GK2486@jama>
+References: <20140428025029.GG2486@jama>
+MIME-Version: 1.0
+In-Reply-To: <20140428025029.GG2486@jama>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: State of bitbake world, Failed tasks 2014-04-28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 13:32:44 -0000
+X-List-Received-Date: Tue, 29 Apr 2014 18:00:02 -0000
+X-Groupsio-MsgNum: 49586
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IjNnXkPTMbDH1qvK"
+Content-Disposition: inline
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
----
- meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--IjNnXkPTMbDH1qvK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-index 37a0f0c..df0b1b5 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
-@@ -28,7 +28,7 @@ S = "${WORKDIR}/mariadb-${PV}"
- 
- BINCONFIG_GLOB = "mysql_config"
- 
--inherit autotools binconfig update-rc.d useradd
-+inherit autotools-brokensep binconfig update-rc.d useradd
- 
- INITSCRIPT_PACKAGES = "${PN}-server"
- INITSCRIPT_NAME = "mysqld"
-@@ -59,7 +59,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
-                 "
- 
- do_configure_append() {
--    sed -i /comp_err/d ${S}/sql/share/Makefile
-+    sed -i /comp_err/d ${B}/sql/share/Makefile
- 
-     # handle distros with different values of ${libexecdir}
-     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
--- 
-1.9.0
+On Mon, Apr 28, 2014 at 04:50:29AM +0200, Martin Jansa wrote:
+> Be aware that qemux86-64 log is there, but it wasn't complete so it
+> isn't included in this report.
+>=20
+> It isn't complete, because with this number of failed recipes rm_work
+> wasn't able to keep tmpdir small enough for my 55G tmpfs, biggest chunk
+> was eaten by chromium and mongodb:
+> 593M    tmp-eglibc/work/qemux86_64-oe-linux/linux-yocto-tiny-kexecboot
+> 6.8G    tmp-eglibc/work/core2-64-oe-linux/mongodb
+> 20G     tmp-eglibc/work/core2-64-oe-linux/chromium
+>=20
+> Khem sent couple of patches for B!=3DS issues, bit thanks to him!
+>=20
+> I have local patch to set B=3DS/autotools-brokensep for remaining failing
+> recipes, but I'll wait a bit more for people to send fixes.
 
+Be aware that failures in this report are just small part of whole B!=3DS
+issues. After setting B=3DS in them more issues were found in recipes
+which were "hidden" before because of failing dependency in first run.
 
+Now I'm in 3rd round of adding B=3DS and with ~180 recipes having this it
+still fails in couple newly revealed ones - I'll send the list when it's
+complete (and list of failing recipes is the same as last report before
+B!=3DS or better)
+
+It sounds terrible, but changing the default to B!=3DS was good thing, we
+can easily work-around it by B=3DS/autotools-brokensep and we'll get the
+advantages of it at least in recipes which aren't broken.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IjNnXkPTMbDH1qvK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNf6KwACgkQN1Ujt2V2gBz59ACeNATwefZi/HJomDt9jHwhAWsw
+X9QAoIRTeXcPgcJ4cOaLi3ej5uQbtUwE
+=kbys
+-----END PGP SIGNATURE-----
+
+--IjNnXkPTMbDH1qvK--
