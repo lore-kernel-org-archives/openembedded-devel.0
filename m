@@ -1,23 +1,33 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id BE331609B2
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C07A65DBA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 19:53:41 +0000 (UTC)
-Received: from [192.168.178.14] (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id DDF8E29672
+	Tue, 29 Apr 2014 22:38:50 +0000 (UTC)
+Received: by mail-ee0-f53.google.com with SMTP id b57so765392eek.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 21:53:40 +0200 (CEST)
-Message-ID: <53600344.4030801@pseudoterminal.org>
-Date: Tue, 29 Apr 2014 21:53:40 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
+	Tue, 29 Apr 2014 15:38:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=YGN1w7umjxHCbk1RkR7BXXrtcu0wX8f+56AupPNCk2g=;
+	b=lQQcGPoETiaRyPEnfETseL52lLsc8Qp06GutaTrdEYhMf8cVIcWLrBzl15eCKp8CUd
+	wgS5efp4FD9XTUxIQq8k/qCwOVzTSDG6iZD3CuiIPJH3mLgv8fMYKDBBh1J3rhzS7aWV
+	dUAG22eeE4iz0kYCpgQVJU0NkCDbnOwHcy56s69zwGlcPVEzQbxlgZiU6QnppmwxFfGB
+	iQhtwh21DfNfu9ke/Si/EKyPq9IWoBqpGbMx7CTCYlxSHqGct4vJxP+HPsAZuGcOIZgA
+	+QxjMncfgse7k6Ag27bRRJCu0Et6aCxTaQv8I1P2NFXI49dRPgfxqaya8LzB2s+9XJ4Q
+	NZSQ==
+X-Received: by 10.15.22.201 with SMTP id f49mr515149eeu.18.1398811130561;
+	Tue, 29 Apr 2014 15:38:50 -0700 (PDT)
+Received: from mizar.208.67.220.220 ([87.13.50.57])
+	by mx.google.com with ESMTPSA id u46sm62706797eel.1.2014.04.29.15.38.49
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 29 Apr 2014 15:38:49 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1398753593-4447-1-git-send-email-dv@pseudoterminal.org>	<1398753593-4447-4-git-send-email-dv@pseudoterminal.org>
-	<CAP9ODKq3Es6T2weEZXZnUtYHs3J6FKVG1e6VA-6k8j_425wuvA@mail.gmail.com>
-In-Reply-To: <CAP9ODKq3Es6T2weEZXZnUtYHs3J6FKVG1e6VA-6k8j_425wuvA@mail.gmail.com>
-Subject: Re: [meta-browser][PATCH v2 3/4] chromium: Add use-egl PACKAGECONFIG option
+Date: Wed, 30 Apr 2014 00:38:42 +0200
+Message-Id: <1398811123-18572-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld][PATCH] zaurus.inc: add xinput-calibrator to XSERVER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,51 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 19:53:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Apr 2014 22:38:52 -0000
 
-On 2014-04-29 20:30, Otavio Salvador wrote:
-> On Tue, Apr 29, 2014 at 3:39 AM, Carlos Rafael Giani
-> <dv@pseudoterminal.org> wrote:
->> By default, Chromium will try to use GLX and regular OpenGL. On embedded
->> platforms, these are often not present, or unaccelerated, and using EGL
->> and OpenGL ES instead makes more sense. To produce builds that use EGL and
->> OpenGL ES by default instead, this PACKAGECONFIG option can be used.
->>
->> An EGL/OpenGLES-enabled build produces a chromium version that renders
->> 2D and WebGL with GPU acceleration (if present).
->>
->> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
->> ---
->>   recipes-browser/chromium/chromium_35.0.1883.0.bb | 8 +++++++-
->>   1 file changed, 7 insertions(+), 1 deletion(-)
->>
->> diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
->> index 1923b4e..1fb050f 100644
->> --- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
->> +++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
->> @@ -23,6 +23,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
->>
->>   inherit gettext
->>
->> +# this makes sure the dependencies for the EGL mode are present; otherwise, the configure scripts
->> +# automatically and silently fall back to GLX
->> +PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
-> There is any way to 'force' build to use egl here and fail if
-> something here is missing?
->
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ conf/machine/include/zaurus.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-That is actually tough. Chromium does not simply link to the EGL and 
-GLESv2 libraries; it opens them with dlopen() and gets the GL function 
-pointers with dlsym() , as part of the sandboxing strategy. Furthermore, 
-cairo requires virtual/egl too (not virtual/libgles2 though). As for 
-compilation errors, I haven't found a way to provoke them. I am not 
-entirely sure if Chromium is using system EGL/GLES headers, or if it is 
-always using its internal copy of the Khronos headers instead. I got 
-conflicting responses. So, to be sure (and also to emphasize the 
-dependency in the recipe), I added it.
+diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
+index 38464d6..719d28f 100644
+--- a/conf/machine/include/zaurus.inc
++++ b/conf/machine/include/zaurus.inc
+@@ -14,7 +14,7 @@ IMAGE_DEVICE_TABLES = ""
+ 
+ # Zaurus gets preferred providers settings
+ # from distro/include/default-providers.inc
+-XSERVER = "xserver-xorg xf86-video-fbdev xf86-input-keyboard xf86-input-mouse xf86-input-evdev"
++XSERVER = "xserver-xorg xf86-video-fbdev xf86-input-keyboard xf86-input-mouse xf86-input-evdev xinput-calibrator"
+ 
+ ########
+ # kernel
+-- 
+1.9.1
 
-What is certain is that without the --use-gl=egl switch, Chromium will 
-always use GLX.
 
