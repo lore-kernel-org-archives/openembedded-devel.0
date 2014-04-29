@@ -1,36 +1,23 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C6DC609AC
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id A336C60D71
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 19:03:47 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id b57so635206eek.40
+	Tue, 29 Apr 2014 19:07:51 +0000 (UTC)
+Received: from [192.168.178.14] (chello080108088242.14.11.vie.surfer.at
+	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 8ED8029672
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 12:03:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rG2Wfh3lCCcEnqKEHjS2QeWlQRONbj9POfYxsI3p4bk=;
-	b=HE6qMwAkfYBEUOHnbm08YmHjY+5DgG/k18G+uT2VAbTgggzJJawWIK+z7lvJ72czf4
-	YY+FmYNybpAUaR8PQT+sgMwN9eystB2o+klpY+nU4aqf9iVTIwEfFf8UA/8U6czqnwlu
-	TnqSfbh73Am7/KY7PonYSRFdQXrw4j5IvflnPpflMKwZQd2yzXvh5FI6HPoo0fyUhdZQ
-	UE+ZMvmbcvYZ+if7Y3YyQNWyrDD7Oi+XO1yxm6c2tjCRwkj61LW01fIB5ajIE7WHnTCN
-	Yunpmvjal+k2W0BVVhMHAd/rKOqAZvE+zFvkEjHWZzXuEOYg6gI3Qr28POKK+3uEX3Je
-	KcZw==
-X-Gm-Message-State: ALoCoQkNuez6QEQAP8TBNx2EYchNakyyWyYfWCF8oOyHAeNwwTrha+Haj2LJlI49uBbOLw7BhBir
-X-Received: by 10.14.183.7 with SMTP id p7mr850407eem.107.1398798228416;
-	Tue, 29 Apr 2014 12:03:48 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id y7sm61435888eev.5.2014.04.29.12.03.46
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Tue, 29 Apr 2014 12:03:47 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Tue, 29 Apr 2014 21:07:52 +0200 (CEST)
+Message-ID: <535FF887.3040708@pseudoterminal.org>
+Date: Tue, 29 Apr 2014 21:07:51 +0200
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2014 21:03:43 +0200
-Message-Id: <1398798223-28617-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] espeak: install header in proper location
+References: <1398753593-4447-1-git-send-email-dv@pseudoterminal.org>	<1398753593-4447-2-git-send-email-dv@pseudoterminal.org>
+	<CAP9ODKpUHaxxyy8MQ2-f8XwD-tJWd6E+xW-Dr2B+Z-UB3s=n2A@mail.gmail.com>
+In-Reply-To: <CAP9ODKpUHaxxyy8MQ2-f8XwD-tJWd6E+xW-Dr2B+Z-UB3s=n2A@mail.gmail.com>
+Subject: Re: [meta-browser][PATCH v2 1/4] chromium: Add component-build PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +31,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 19:03:53 -0000
+X-List-Received-Date: Tue, 29 Apr 2014 19:07:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This matches debian, also provide symlink for backwards compatibility.
+On 2014-04-29 20:25, Otavio Salvador wrote:
+> On Tue, Apr 29, 2014 at 3:39 AM, Carlos Rafael Giani
+> <dv@pseudoterminal.org> wrote:
+>> In a component build, the individual Chromium components are contained in
+>> separate shared objects. This is useful when building on a system with
+>> 8 GB RAM or less (since the linker needs at least that much for link
+>> time optimization otherwise if a non-component build is done), and during
+>> development and testing of Chromium internals.
+>>
+>> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+>> ---
+>>   recipes-browser/chromium/chromium/component-build.gypi |  5 +++++
+>>   recipes-browser/chromium/chromium/google-chrome        |  2 ++
+>>   recipes-browser/chromium/chromium_35.0.1883.0.bb       | 11 +++++++++--
+>>   3 files changed, 16 insertions(+), 2 deletions(-)
+>>   create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
+>>
+>> diff --git a/recipes-browser/chromium/chromium/component-build.gypi b/recipes-browser/chromium/chromium/component-build.gypi
+>> new file mode 100644
+>> index 0000000..e58b4ca
+>> --- /dev/null
+>> +++ b/recipes-browser/chromium/chromium/component-build.gypi
+>> @@ -0,0 +1,5 @@
+>> +{
+>> +  'variables': {
+>> +     'component' : 'shared_library'
+>> +  },
+>> +}
+>> diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
+>> index 2f6ad2e..8ce400b 100644
+>> --- a/recipes-browser/chromium/chromium/google-chrome
+>> +++ b/recipes-browser/chromium/chromium/google-chrome
+>> @@ -1,6 +1,8 @@
+>>   #!/bin/sh
+>>
+>>   export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
+>> +export LD_LIBRARY_PATH=/usr/lib/chrome
+>> +
+>>   if [ "${USER}" = "root" ] ; then
+>>          /usr/bin/chrome/chrome --user-data-dir=${HOME}/.chromium/ $@
+>>   else
+>> diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+>> index 2497f10..203474d 100644
+>> --- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
+>> +++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+>> @@ -6,6 +6,7 @@ SRC_URI = "\
+>>           http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
+>>           file://include.gypi \
+>>           file://oe-defaults.gypi \
+>> +        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
+>>           file://unistd-2.patch \
+>>           file://google-chrome \
+>>           file://google-chrome.desktop \
+>> @@ -27,6 +28,7 @@ EXTRA_OEGYP = " \
+>>          ${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
+>>          -I ${WORKDIR}/oe-defaults.gypi \
+>>          -I ${WORKDIR}/include.gypi \
+>> +       ${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
+>>          -f ninja \
+>>   "
+>>   ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+>> @@ -65,6 +67,11 @@ do_install() {
+>>          install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
+>>          install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
+>>
+>> +       install -d ${D}${libdir}/chrome/
+> This ought to b done inside of the 'if' block.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- meta-oe/recipes-support/espeak/espeak_1.37.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/espeak/espeak_1.37.bb b/meta-oe/recipes-support/espeak/espeak_1.37.bb
-index c7f4b52..86f2c7a 100644
---- a/meta-oe/recipes-support/espeak/espeak_1.37.bb
-+++ b/meta-oe/recipes-support/espeak/espeak_1.37.bb
-@@ -25,12 +25,13 @@ do_compile() {
- do_install() {
-     install -d ${D}${bindir}
-     install -d ${D}${libdir}
--    install -d ${D}${includedir}
-+    install -d ${D}${includedir}/espeak
-     install -d ${D}${datadir}/espeak-data
- 
-     # we do not ship "speak" binary though.
-     install -m 0755 ${S}/src/espeak ${D}${bindir}
--    install -m 0644 ${S}/src/speak_lib.h ${D}${includedir}
-+    install -m 0644 ${S}/src/speak_lib.h ${D}${includedir}/espeak/
-+    ln -sf espeak/espeak.h ${D}${includedir}/
-     oe_libinstall -so -C src libespeak ${D}${libdir}
- 
-     if [ "${SITEINFO_ENDIANNESS}" = "be" ] ; then
--- 
-1.9.0
+I am not sure about this, because the export 
+LD_LIBRARY_PATH=/usr/lib/chrome line is also introduced. What would be 
+preferred? Set LD_LIBRARY_PATH to a potentially nonexisting path or 
+always create /usr/lib/chrome ?
+I could also do a trick similar to the one for the chromium args, but I 
+doubt more library paths will ever be added.
+
+>
+>> +       if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
+>> +               install -m 0755 ${S}/out/Release/lib/*.so ${D}${libdir}/chrome/
+>> +       fi
+>> +
+>>          install -d ${D}${sbindir}
+>>          install -m 4755 ${S}/out/Release/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+>>
+>> @@ -72,8 +79,8 @@ do_install() {
+>>          install -m 0644 ${S}/out/Release/locales/en-US.pak ${D}${bindir}/chrome/locales
+>>   }
+>>
+>> -FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/"
+>> -FILES_${PN}-dbg += "${bindir}/chrome/.debug/"
+>> +FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
+>> +FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
+>>
+>>   PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+>>
+>> --
+>> 1.8.3.2
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
 
