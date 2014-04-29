@@ -1,39 +1,37 @@
-Return-Path: <mburtin@connected-labs.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 53A47610CD
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 738DE60E24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 10:06:28 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id q59so2022741wes.37
+	Tue, 29 Apr 2014 13:32:40 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id d1so430962wiv.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 03:06:29 -0700 (PDT)
+	Tue, 29 Apr 2014 06:32:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=lYi28H2xUwaMr44xfoECxfmvBh0yv8gn8enlU1OcjVE=;
-	b=S/KcwlBj4YhLAa2WdhvHfOLAn1H7lpq99zLT2Oe9PsZ/dvHlLwVKzKP2epTMzU5448
-	ihm1d4raZNmG87mEJ0w9Rpee8RPb3zWQ46Wam9HrlAVATtJH+u3W/gO6RDnBhe7cYsCD
-	8vsO/UMF/5JicOYJkoZXXSuBCEEW/LbutFeOiGhZK5jDbTZkb05gRWZ8qWfgqVWa0hgU
-	wd+77BC0PGuVcu1KxFONuV+fUEeKMgsuxbANtHTP0ZpfOpEWtKFs2f7mjxZUNMafCGEU
-	Vnv9PcY7T0fpoI8mJbfYW+sY6avVb9R56wIjnWm7FSZAuL+PHyuH4j+jpzhKunH+bCcP
-	HvzQ==
-X-Gm-Message-State: ALoCoQnSDwGr7Bb0OsAZMxGq6yvK35EZHKtrJrOrsC7QQ0D7pWA9qcwZc3U7l3KtXccvBfik4j5F
-X-Received: by 10.180.7.227 with SMTP id m3mr19365555wia.59.1398765989013;
-	Tue, 29 Apr 2014 03:06:29 -0700 (PDT)
-Received: from mburtin-desktop.mpl.mstarsemi.fr
-	(connected-labs-gw1.ter2.neodc.mpl.cust.as8218.eu. [94.103.137.126])
-	by mx.google.com with ESMTPSA id q2sm4029633wix.5.2014.04.29.03.06.28
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=N+iiKnuhJgY7/vwuzbwsfDTh1vjkx1Wi/+AgHQ9JPDI=;
+	b=f6fIWu+pDktWND+IIpqpX6VU838cgP3xPaVOiSs2nRcp5EcJvpFU6YZ5M3RQfDPGPo
+	jWKjQNCla/JqqqLdmMkq4sd8QENOVNWiFPSbfZiARYNDI4mmIjm5u39uFG9PHxK3YKrK
+	tW55kqTmmywDS96xqG7EABvyJ+lYqzdhSbb4bwN3i8ko2MbGn9XFAghLEb5+NhfZ0wFz
+	nmjDcscBN5ADI7cA7shci2HaljFpYTQ2sC5qzLaTlnX/ZjBWD5s0GkInJxMZBlClIfQv
+	5/F/Aj7Wh67itMc22g0pXTbFJ8FCXG2GWcbozB5/G8N3W632JzRjxfhIAVJ/rLREs3UI
+	HJXA==
+X-Gm-Message-State: ALoCoQkHb6PAqYQq1FcLAiLpKupLLcNWwbQfE57Yt9Hm4YwZjZtLY4E5lqSWM+PkOJ4w7wSATv3n
+X-Received: by 10.180.76.116 with SMTP id j20mr20355734wiw.21.1398778361767;
+	Tue, 29 Apr 2014 06:32:41 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id b1sm31121789wjb.37.2014.04.29.06.32.40
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 29 Apr 2014 03:06:28 -0700 (PDT)
-From: =?UTF-8?q?Micha=C3=ABl=20Burtin?= <mburtin@connected-labs.com>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 29 Apr 2014 06:32:40 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2014 12:06:22 +0200
-Message-Id: <1398765982-22532-1-git-send-email-mburtin@connected-labs.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-ruby][PATCH] ruby: remove obsolete extmk_run.patch
+Date: Tue, 29 Apr 2014 15:32:36 +0200
+Message-Id: <1398778356-14565-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCHv2] mariadb: handle seperate builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,54 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 10:06:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 29 Apr 2014 13:32:44 -0000
 
-This patch does nothing except causing failures from the second build in
-the same working directory.
-
-Signed-off-by: Michaël Burtin <mburtin@connected-labs.com>
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-ruby/recipes-devtools/ruby/ruby.inc             |  1 -
- meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch | 15 ---------------
- 2 files changed, 16 deletions(-)
- delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
+ meta-oe/recipes-support/mysql/mariadb_5.1.67.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc b/meta-ruby/recipes-devtools/ruby/ruby.inc
-index 837e52b..e679f27 100644
---- a/meta-ruby/recipes-devtools/ruby/ruby.inc
-+++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
-@@ -21,7 +21,6 @@ INC_PR = "r1"
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+index 37a0f0c..df0b1b5 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.1.67.inc
+@@ -28,7 +28,7 @@ S = "${WORKDIR}/mariadb-${PV}"
  
- SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
- SRC_URI = "http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
--           file://extmk_run.patch \
-            file://extmk.patch \
- "
+ BINCONFIG_GLOB = "mysql_config"
  
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch b/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
-deleted file mode 100644
-index 57926f5..0000000
---- a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
-+++ /dev/null
-@@ -1,15 +0,0 @@
--============================================================
----- packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
--+++ packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
--@@ -0,0 +1,11 @@
--+--- ruby-1.8.5/common.mk.orig	2006-12-30 13:07:32.000000000 +1100
--++++ ruby-1.8.5/common.mk	2006-12-30 13:08:32.000000000 +1100
--+@@ -56,7 +56,7 @@
--+ 		--make="$(MAKE)" \
--+ 		--mflags="$(MFLAGS)" \
--+ 		--make-flags="$(MAKEFLAGS)"
--+-EXTMK_ARGS    =	$(SCRIPT_ARGS) --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
--++EXTMK_ARGS    =	$(SCRIPT_ARGS) --with-ldflags="%%TARGET_LDFLAGS%%" --with-cflags="%%TARGET_CFLAGS%%" --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
--+ 
--+ all: $(MKFILES) $(PREP) $(RBCONFIG) $(LIBRUBY)
--+ 	@$(MINIRUBY) $(srcdir)/ext/extmk.rb $(EXTMK_ARGS)
+-inherit autotools binconfig update-rc.d useradd
++inherit autotools-brokensep binconfig update-rc.d useradd
+ 
+ INITSCRIPT_PACKAGES = "${PN}-server"
+ INITSCRIPT_NAME = "mysqld"
+@@ -59,7 +59,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
+                 "
+ 
+ do_configure_append() {
+-    sed -i /comp_err/d ${S}/sql/share/Makefile
++    sed -i /comp_err/d ${B}/sql/share/Makefile
+ 
+     # handle distros with different values of ${libexecdir}
+     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
 -- 
-1.9.1
+1.9.0
 
 
