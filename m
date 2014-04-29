@@ -1,24 +1,39 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BC16A60DFA
+Return-Path: <mburtin@connected-labs.com>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A47610CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 08:11:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s3T8BRfh002963
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 29 Apr 2014 10:06:28 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id q59so2022741wes.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 01:11:28 -0700 (PDT)
-Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Tue, 29 Apr 2014 01:11:27 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Apr 2014 16:11:26 +0800
-Message-ID: <1398759086-18053-1-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Tue, 29 Apr 2014 03:06:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=lYi28H2xUwaMr44xfoECxfmvBh0yv8gn8enlU1OcjVE=;
+	b=S/KcwlBj4YhLAa2WdhvHfOLAn1H7lpq99zLT2Oe9PsZ/dvHlLwVKzKP2epTMzU5448
+	ihm1d4raZNmG87mEJ0w9Rpee8RPb3zWQ46Wam9HrlAVATtJH+u3W/gO6RDnBhe7cYsCD
+	8vsO/UMF/5JicOYJkoZXXSuBCEEW/LbutFeOiGhZK5jDbTZkb05gRWZ8qWfgqVWa0hgU
+	wd+77BC0PGuVcu1KxFONuV+fUEeKMgsuxbANtHTP0ZpfOpEWtKFs2f7mjxZUNMafCGEU
+	Vnv9PcY7T0fpoI8mJbfYW+sY6avVb9R56wIjnWm7FSZAuL+PHyuH4j+jpzhKunH+bCcP
+	HvzQ==
+X-Gm-Message-State: ALoCoQnSDwGr7Bb0OsAZMxGq6yvK35EZHKtrJrOrsC7QQ0D7pWA9qcwZc3U7l3KtXccvBfik4j5F
+X-Received: by 10.180.7.227 with SMTP id m3mr19365555wia.59.1398765989013;
+	Tue, 29 Apr 2014 03:06:29 -0700 (PDT)
+Received: from mburtin-desktop.mpl.mstarsemi.fr
+	(connected-labs-gw1.ter2.neodc.mpl.cust.as8218.eu. [94.103.137.126])
+	by mx.google.com with ESMTPSA id q2sm4029633wix.5.2014.04.29.03.06.28
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 29 Apr 2014 03:06:28 -0700 (PDT)
+From: =?UTF-8?q?Micha=C3=ABl=20Burtin?= <mburtin@connected-labs.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Apr 2014 12:06:22 +0200
+Message-Id: <1398765982-22532-1-git-send-email-mburtin@connected-labs.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH V7] rrdtool: enable perl and python bindings
+Subject: [meta-ruby][PATCH] ruby: remove obsolete extmk_run.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,140 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 08:11:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 Apr 2014 10:06:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-1. default enable perl and python bindings
-2. rrdtool uses perl.real, perl.real doesn't know where the PERL5LIB should be
-when prebuilts are used. Use the wrapper perl instead, perl sets PERL5LIB and
-invokes perl.real
-3. While using dash as /bin/sh, subsequent commands in functions will not use
-the environment variables passed to the function call line unless explicitly
-run "export ENV_VAR".
-4. delete unrecognized options: "--enable-local-libpng" and "--enable-local-zlib"
+This patch does nothing except causing failures from the second build in
+the same working directory.
 
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Signed-off-by: Michaël Burtin <mburtin@connected-labs.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb |   92 +++++++++++++++++++--
- 1 file changed, 86 insertions(+), 6 deletions(-)
+ meta-ruby/recipes-devtools/ruby/ruby.inc             |  1 -
+ meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch | 15 ---------------
+ 2 files changed, 16 deletions(-)
+ delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
-index 533451f..2994df2 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.7.bb
-@@ -15,25 +15,105 @@ SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
- SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
- SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
+diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc b/meta-ruby/recipes-devtools/ruby/ruby.inc
+index 837e52b..e679f27 100644
+--- a/meta-ruby/recipes-devtools/ruby/ruby.inc
++++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
+@@ -21,7 +21,6 @@ INC_PR = "r1"
  
--inherit autotools gettext
-+inherit autotools gettext pythonnative perlnative python-dir
- 
- EXTRA_AUTORECONF = "-I m4"
- 
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= "python perl"
-+
-+PACKAGECONFIG[python] = "--enable-python=yes \
-+am_cv_python_pythondir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages \
-+am_cv_python_pyexecdir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages,\
-+--disable-python,python,"
-+
-+PACKAGECONFIG[perl] = \
-+"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor"' \
-+ac_cv_path_PERL_CC='${CC}',  \
-+--disable-perl,perl,"
-+
- PACKAGECONFIG[dbi] = "--enable-libdbi,--disable-libdbi,libdbi"
- 
- EXTRA_OECONF = " \
-     --enable-shared \
--    --enable-local-libpng \
--    --enable-local-zlib \
-     --disable-libwrap \
-     --program-prefix='' \
-     rd_cv_ieee_works=yes \
--    --disable-perl \
--    --disable-python \
-     --disable-ruby \
-     --disable-lua \
-     --disable-rpath \
+ SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+ SRC_URI = "http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
+-           file://extmk_run.patch \
+            file://extmk.patch \
  "
  
-+# don't use perl.real, this results in break issues with prebuilts since perl.real doesn't
-+# know where the PERL5LIB is...
-+# use wrapper perl instead
-+EXTRA_OEMAKE = "PERL=${STAGING_BINDIR_NATIVE}/perl-native/perl FULLPERL=${STAGING_BINDIR_NATIVE}/perl-native/perl"
-+
-+export BUILD_SYS
-+export HOST_SYS
-+export STAGING_LIBDIR
-+export STAGING_INCDIR
-+
-+do_configure() {
-+	#fix the pkglib problem with newer automake
-+	#perl
-+	sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
-+	    ${S}/bindings/perl-shared/Makefile.PL
-+
-+	#python
-+	sed -i -e '/PYTHON_INCLUDES="-I${/c \
-+	PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
-+	    ${S}/m4/acinclude.m4
-+	#remove the hardcoded $(libdir) rpath
-+	sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
-+
-+	autotools_do_configure
-+
-+	perl_version=`perl -v 2>/dev/null | \
-+	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
-+
-+	#modify python sitepkg
-+	#remove the dependency of perl-shared:Makefile
-+	#or perl-shared/Makefile will be regenerated
-+	#if any code touch bindings/Makefile after below perl bindings code
-+	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
-+	    --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
-+	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
-+	    ${S}/bindings/Makefile
-+
-+	#redo the perl bindings
-+	(
-+	cd bindings/perl-shared;
-+	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
-+	    INSTALLPRIVLIB="abc";
-+	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
-+
-+	cd ../../bindings/perl-piped;
-+	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor";
-+	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
-+	)
-+
-+	#change the interpreter in file
-+	sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
-+	    ${S}/examples/Makefile
-+	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
-+	    ${S}/examples/*.pl
-+}
-+
-+PACKAGES =+ "${PN}-perl ${PN}-python"
-+
-+FILES_${PN}-doc += "${datadir}/examples"
-+
-+DESCRIPTION_${PN}-perl = \
-+"The ${PN}-perl package includes RRDtool bindings for perl."
-+FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \
-+    ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*"
-+RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \
-+    perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
-+
-+DESCRIPTION_${PN}-python = \
-+"The ${PN}-python package includes RRDtool bindings for python."
-+FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-+RDEPENDS_${PN}-python = "python"
- 
-+FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
-+    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
+diff --git a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch b/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
+deleted file mode 100644
+index 57926f5..0000000
+--- a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-============================================================
+---- packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
+-+++ packages/ruby/ruby-1.8.5/extmk_run.patch	d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
+-@@ -0,0 +1,11 @@
+-+--- ruby-1.8.5/common.mk.orig	2006-12-30 13:07:32.000000000 +1100
+-++++ ruby-1.8.5/common.mk	2006-12-30 13:08:32.000000000 +1100
+-+@@ -56,7 +56,7 @@
+-+ 		--make="$(MAKE)" \
+-+ 		--mflags="$(MFLAGS)" \
+-+ 		--make-flags="$(MAKEFLAGS)"
+-+-EXTMK_ARGS    =	$(SCRIPT_ARGS) --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
+-++EXTMK_ARGS    =	$(SCRIPT_ARGS) --with-ldflags="%%TARGET_LDFLAGS%%" --with-cflags="%%TARGET_CFLAGS%%" --extout="$(EXTOUT)" --extension $(EXTS) --extstatic $(EXTSTATIC) --
+-+ 
+-+ all: $(MKFILES) $(PREP) $(RBCONFIG) $(LIBRUBY)
+-+ 	@$(MINIRUBY) $(srcdir)/ext/extmk.rb $(EXTMK_ARGS)
 -- 
-1.7.9.5
+1.9.1
 
 
