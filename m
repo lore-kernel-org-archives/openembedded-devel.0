@@ -1,35 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
-	[209.85.217.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 5630865DBB
+Return-Path: <paul.eggleton@linux.intel.com>
+X-Greylist: delayed 600 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 30 Apr 2014 17:38:56 UTC
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 13C4C65D52
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 16:44:43 +0000 (UTC)
-Received: by mail-lb0-f182.google.com with SMTP id l4so1402877lbv.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 09:44:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=gUpxZyN7+rYWyoWWVGpufmQXKMl7KsjMNxHK/B3CxQs=;
-	b=kcC/yowDgxEHDKeROsQLBnMch2hZZLhcAvDEMubN42S/l4zl1Cxkvch6u7tZDNKCID
-	DTekeuZejx9sNGK2M76maRVsO1SUCHLafjLnbAv/Txj28zBg+rCgGpf+uPanU+CuJiQd
-	J63QVN2RNFMwAx254erAYj4NfMyRbtEY64wKHduzY3lfnYeYdvmv7xLiaZj6bJX+w3XO
-	5EXATWIUQ5NI+41e7QjegaXYE0anAZRgZb/vuWrBFdjxvdDcWSdUtN08msSA2JH2PZsP
-	UpMqk01C9/HgYaO49gNZ1HP6szhjnSly2XxZHPxVNv2/W/tPwPHIymSGp5o026u7Um/M
-	n6+Q==
-X-Received: by 10.152.28.194 with SMTP id d2mr3673158lah.25.1398876282782;
-	Wed, 30 Apr 2014 09:44:42 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	f9sm17032164laa.8.2014.04.30.09.44.40 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Apr 2014 09:44:41 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Apr 2014 18:44:55 +0200
-Message-Id: <1398876295-19178-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-systemd][PATCH] lighttpd: rename .bbappend to match with any version
+	Wed, 30 Apr 2014 17:38:56 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 30 Apr 2014 10:28:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,959,1389772800"; d="scan'208";a="426019337"
+Received: from cgwithan-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.50])
+	by azsmga001.ch.intel.com with ESMTP; 30 Apr 2014 10:28:55 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Javier Viguera <javier.viguera@digi.com>
+Date: Wed, 30 Apr 2014 18:28:54 +0100
+Message-ID: <1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.13.10-200.fc20.x86_64; KDE/4.12.4; x86_64; ;
+	)
+In-Reply-To: <53612125.8030702@digi.com>
+References: <53612125.8030702@digi.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver] cherokee webserver SRC_URI broken again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,19 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 16:44:47 -0000
+X-List-Received-Date: Wed, 30 Apr 2014 17:38:57 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend}       | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend} (100%)
+Hi Javier,
 
-diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
-similarity index 100%
-rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
-rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
+On Wednesday 30 April 2014 18:13:25 Javier Viguera wrote:
+> Seems that cherokee webserver is missing again. The mirror that was set
+> last time to download the package from is not accessible anymore [1].
+> 
+> On the mirrors page [2] there are some more; most of them are also down
+> but there is still some of them that contain the package.
+> 
+> So at this point I think it's better to just put the package in one of
+> the yoctoproject mirrors. If you think that we should use one of the
+> still-working-mirrors let me know and I'll cook a patch for it.
+
+I can't remember from our last discussion, did anyone talk to upstream about 
+the pain they are inflicting on some of their users with the lack of proper 
+source archives?
+
+Cheers,
+Paul
+
 -- 
-1.9.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
