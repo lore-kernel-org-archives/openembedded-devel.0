@@ -1,41 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C12E265D7B
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 413 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 30 Apr 2014 18:09:10 UTC
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.12])
+	by mail.openembedded.org (Postfix) with ESMTP id A14CA60782
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 17:49:41 +0000 (UTC)
-Received: by mail-vc0-f174.google.com with SMTP id ib6so2640541vcb.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 10:49:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PPMVSZADhq/d0PlcG9ENi9Wx310aiHuTK4oBQkFLU50=;
-	b=0NDiee0/7h6xIH/Y572h66OG15rsAxMBsC3u6eUFdP9nbuk2DUxUM3R5bnzzPg23S9
-	AywSvPZ7jr9t/AVsp6rn/lsvsA0UIVQjf91iqJnfnu2sQngC2/yK3WQEYVc1a3lNtuKg
-	fenvpcaRfqfnx05e/NLVM4az4aHgBFwmS/e+sRsnrDgDDcdz8Ei6QgOcnjDI10n6kZqU
-	5ln9myRFAglCBxquwUNAEAM/kkTktrP86hbirxdxraRyVOUYVoMv+nw/ayOZP8a16r5g
-	0YDkR/vTgyKQ/QofCwLp0WpNG5xAXl7ch5yQvWA8yzOxTsVUwdWHP6B0s1t0LH0qGSQ+
-	OP9Q==
-X-Received: by 10.220.179.197 with SMTP id br5mr44885vcb.80.1398880182226;
-	Wed, 30 Apr 2014 10:49:42 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	q3sm32946541veh.8.2014.04.30.10.49.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Apr 2014 10:49:41 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Apr 2014 19:49:56 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140430174956.GO2486@jama>
-References: <1398876295-19178-1-git-send-email-Martin.Jansa@gmail.com>
-	<5361347D.1040001@opendreambox.org>
+	Wed, 30 Apr 2014 18:09:10 +0000 (UTC)
+Received: from [216.82.249.131:54706] by server-12.bemta-12.messagelabs.com id
+	83/2B-29721-AAA31635; Wed, 30 Apr 2014 18:02:18 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-3.tower-28.messagelabs.com!1398880937!18938098!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 16911 invoked from network); 30 Apr 2014 18:02:17 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-3.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
+	30 Apr 2014 18:02:17 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Wed, 30 Apr 2014 13:02:13 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Wed, 30 Apr 2014 13:02:16 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Wed, 30 Apr 2014 20:02:14 +0200
+Message-ID: <53613AA5.7040903@digi.com>
+Date: Wed, 30 Apr 2014 20:02:13 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-In-Reply-To: <5361347D.1040001@opendreambox.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-systemd][PATCH] lighttpd: rename .bbappend to match with any version
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <53612125.8030702@digi.com>
+	<1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver] cherokee webserver SRC_URI broken again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,66 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 17:49:42 -0000
-X-Groupsio-MsgNum: 49617
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="69hkJlzLli1+5obl"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Apr 2014 18:09:10 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
---69hkJlzLli1+5obl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Paul,
 
-On Wed, Apr 30, 2014 at 07:35:57PM +0200, Andreas Oberritter wrote:
-> Hi Martin,
->=20
-> On 30.04.2014 18:44, Martin Jansa wrote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../lighttpd/{lighttpd_1.4.33.bbappend =3D> lighttpd_1.4.35.bbappend} =
-      | 0
->=20
-> this contradicts the subject.
+On 30/04/14 19:28, Paul Eggleton wrote:
+> I can't remember from our last discussion, did anyone talk to upstream about
+> the pain they are inflicting on some of their users with the lack of proper
+> source archives?
 
-Ah right sorry, forgot to finish amend before send-email.
+I don't think anybody talked to upstream about the problem. The mailing 
+list seems almost dead (looking at gmane[1] last email was on May/2013):
 
-> Regards,
-> Andreas
->=20
-> >  1 file changed, 0 insertions(+), 0 deletions(-)
-> >  rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.33=
-=2Ebbappend =3D> lighttpd_1.4.35.bbappend} (100%)
-> >=20
-> > diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.=
-4.33.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4=
-=2E35.bbappend
-> > similarity index 100%
-> > rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4=
-=2E33.bbappend
-> > rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.3=
-5.bbappend
-> >=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+<http://news.gmane.org/gmane.comp.web.cherokee.general>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+There seems to exist also other channels to contact (Google+, Facebook):
 
---69hkJlzLli1+5obl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+<http://cherokee-project.com/doc/other_community.html>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
+but I don't use neither of them (G+, FB) so I'm not sure how active the 
+project is.
 
-iEYEARECAAYFAlNhN8QACgkQN1Ujt2V2gBx5qwCfZIN0r7TlWKX5AbAHC8wqBCFK
-ggwAoKc6qcovl8lN2WS7B01v+uda5FOW
-=fYIC
------END PGP SIGNATURE-----
+Anyway I am leaving the office now for a short (4 days) break until 
+Monday so in case we finally need to patch the recipe I can do that next 
+week.
 
---69hkJlzLli1+5obl--
+-- 
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
+
