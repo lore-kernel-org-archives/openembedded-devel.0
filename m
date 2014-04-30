@@ -1,41 +1,35 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 383 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 30 Apr 2014 16:19:55 UTC
-Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
-	[216.82.243.206])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C3DD65D0D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 5630865DBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 16:19:54 +0000 (UTC)
-Received: from [216.82.241.132:26001] by server-14.bemta-8.messagelabs.com id
-	53/9F-17171-B2121635; Wed, 30 Apr 2014 16:13:31 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-2.tower-45.messagelabs.com!1398874408!28825309!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 22057 invoked from network); 30 Apr 2014 16:13:31 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-2.tower-45.messagelabs.com with RC4-SHA encrypted SMTP;
-	30 Apr 2014 16:13:31 -0000
-Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 30 Apr 2014 11:13:25 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by
-	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
-	8.3.342.0; Wed, 30 Apr 2014 11:13:28 -0500
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
-	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 30 Apr 2014 18:13:26 +0200
-Message-ID: <53612125.8030702@digi.com>
-Date: Wed, 30 Apr 2014 18:13:25 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-webserver] cherokee webserver SRC_URI broken again
+	Wed, 30 Apr 2014 16:44:43 +0000 (UTC)
+Received: by mail-lb0-f182.google.com with SMTP id l4so1402877lbv.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 09:44:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=gUpxZyN7+rYWyoWWVGpufmQXKMl7KsjMNxHK/B3CxQs=;
+	b=kcC/yowDgxEHDKeROsQLBnMch2hZZLhcAvDEMubN42S/l4zl1Cxkvch6u7tZDNKCID
+	DTekeuZejx9sNGK2M76maRVsO1SUCHLafjLnbAv/Txj28zBg+rCgGpf+uPanU+CuJiQd
+	J63QVN2RNFMwAx254erAYj4NfMyRbtEY64wKHduzY3lfnYeYdvmv7xLiaZj6bJX+w3XO
+	5EXATWIUQ5NI+41e7QjegaXYE0anAZRgZb/vuWrBFdjxvdDcWSdUtN08msSA2JH2PZsP
+	UpMqk01C9/HgYaO49gNZ1HP6szhjnSly2XxZHPxVNv2/W/tPwPHIymSGp5o026u7Um/M
+	n6+Q==
+X-Received: by 10.152.28.194 with SMTP id d2mr3673158lah.25.1398876282782;
+	Wed, 30 Apr 2014 09:44:42 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	f9sm17032164laa.8.2014.04.30.09.44.40 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Apr 2014 09:44:41 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Apr 2014 18:44:55 +0200
+Message-Id: <1398876295-19178-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-systemd][PATCH] lighttpd: rename .bbappend to match with any version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,29 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 16:19:55 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 30 Apr 2014 16:44:47 -0000
 
-Hi all,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend}       | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend} (100%)
 
-Seems that cherokee webserver is missing again. The mirror that was set 
-last time to download the package from is not accessible anymore [1].
+diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
+similarity index 100%
+rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
+rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
+-- 
+1.9.1
 
-On the mirrors page [2] there are some more; most of them are also down 
-but there is still some of them that contain the package.
-
-So at this point I think it's better to just put the package in one of 
-the yoctoproject mirrors. If you think that we should use one of the 
-still-working-mirrors let me know and I'll cook a patch for it.
-
--
-Javier Viguera
-Software Engineer
-Digi International® Spain S.A.U.
-
-
-[1] 
-http://www.cherokee-project.de/mirrors/cherokee/1.2/1.2.98/cherokee-1.2.98.tar.gz
-[2] http://cherokee-project.com/downloads.html
 
