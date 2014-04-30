@@ -1,31 +1,30 @@
 Return-Path: <donny3000@gmail.com>
-Received: from mail-oa0-f46.google.com (mail-oa0-f46.google.com
-	[209.85.219.46])
-	by mail.openembedded.org (Postfix) with ESMTP id DEE4C60DDF
+Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
+	[209.85.219.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 67CCE61FE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 18:16:55 +0000 (UTC)
-Received: by mail-oa0-f46.google.com with SMTP id i4so1690033oah.5
+	Wed, 30 Apr 2014 18:18:14 +0000 (UTC)
+Received: by mail-oa0-f44.google.com with SMTP id n16so2422207oag.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 11:16:56 -0700 (PDT)
+	Wed, 30 Apr 2014 11:18:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=NLrsRQqRsd6TredQNTcU4Qx/lS0lGIjSboOtrnmopCI=;
-	b=nGbQy0JaoEs0k7mhD8vKk/wS3XSIj4uRN9o+C6/ck7tNWdduglPyN2y3QsrfM0yDbS
-	JeuyFVArZT7CSY0z2AgbXL4oVzarweWjtRzRL6Co6ITkarxxNiXastkC1rGjTe4574pr
-	DVpCAnKx/+hjG0Me5c6eK94BBQDC6J70Fpy1VeKjNil9ex2el5IsvJOsQNZurtu/YJ4m
-	tkGN8+fv/OwNn3GEKEjNU0k1lfxDEXDwCOet5qGsNs60NO5N1FpvkM6GIZf0Rd1jlvGN
-	5Ua+iUFs9YAqHi/8XVsQlPkJA8Rb5gSF3GSSwBJZacq8HOv1DP5NHkzIuk9VL1Q/xbXz
-	Nv8g==
+	:content-type; bh=xs8c/MtE39uk2XJ7nv1vu8DL8sjcu5vthQyxaQKYVVo=;
+	b=j9rLSbYg5gBDCP/Sn/LW0tWNJ6ca0ThgeOG3uKO/dqdx54ybIoCtUgrc9nWrsYdDs7
+	G3Uyt/0AWehs0+TC+0YiUQuuFdfFkSfODhSwU45LzB+t+dWc42w+nKLjj/OvyOQjy+09
+	LBRcJrlVEPjhHb4afLQsfHnVC0yHkQg36hgfIl4vuUcJk7lRK0tVtOnRyGR4yElxV2bE
+	FPlPDuvG0Ry2LI1LtgBEUpTvtodbG/NVv16vVv4M8aVRjUts7cIpq4Ab2hCMIRrST1Lh
+	dDIwIA+NbvU8KODtjiggMSjR7TnJJ8GK3zaZakrz1f5ohfPkyGLUEOUJ4MsUgt4XtzHh
+	jSeA==
 MIME-Version: 1.0
-X-Received: by 10.60.60.132 with SMTP id h4mr2701628oer.77.1398881816641; Wed,
-	30 Apr 2014 11:16:56 -0700 (PDT)
-Received: by 10.182.50.98 with HTTP; Wed, 30 Apr 2014 11:16:56 -0700 (PDT)
-Received: by 10.182.50.98 with HTTP; Wed, 30 Apr 2014 11:16:56 -0700 (PDT)
+X-Received: by 10.60.42.194 with SMTP id q2mr3237930oel.66.1398881895051; Wed,
+	30 Apr 2014 11:18:15 -0700 (PDT)
+Received: by 10.182.50.98 with HTTP; Wed, 30 Apr 2014 11:18:15 -0700 (PDT)
 In-Reply-To: <CAP9ODKpYUFvH5EVcPVWmPqTi=yJxSNaW4OqU=Y2B5fdmOYwx8A@mail.gmail.com>
 References: <1398881370-12284-1-git-send-email-donny3000@gmail.com>
 	<CAP9ODKpYUFvH5EVcPVWmPqTi=yJxSNaW4OqU=Y2B5fdmOYwx8A@mail.gmail.com>
-Date: Wed, 30 Apr 2014 13:16:56 -0500
-Message-ID: <CAMe6wuSU2CrtiMUJY3RZBW_FFoAYQaW5=8Ceb23ct4aymVqynA@mail.gmail.com>
+Date: Wed, 30 Apr 2014 13:18:15 -0500
+Message-ID: <CAMe6wuThdau=KYDLa3SaqKXpLuiAmtOMfMbNwcVDe6Et5Y7cKg@mail.gmail.com>
 From: Donald Poole <donny3000@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
@@ -43,11 +42,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 18:16:59 -0000
+X-List-Received-Date: Wed, 30 Apr 2014 18:18:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Sorry, I meant to say Qt5 to match the code.
-On Apr 30, 2014 1:13 PM, "Otavio Salvador" <otavio@ossystems.com.br> wrote:
+And yes, I did send this with git send-email.
+
+
+On Wed, Apr 30, 2014 at 1:13 PM, Otavio Salvador <otavio@ossystems.com.br>wrote:
 
 > On Wed, Apr 30, 2014 at 3:09 PM, Donald R. Poole, Jr.
 > <donny3000@gmail.com> wrote:
