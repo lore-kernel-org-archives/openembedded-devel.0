@@ -1,24 +1,38 @@
-Return-Path: <misn@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 21ADD65CD5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 5548F60C22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 12:18:29 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.3.158.1;
-	Wed, 30 Apr 2014 14:12:53 +0200
-Received: by sestofb10.enea.se (Postfix, from userid 4351)	id DFFAA28C881;
-	Wed, 30 Apr 2014 14:12:53 +0200 (CEST)
-From: Mihaela Sendrea <mihaela.sendrea@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Apr 2014 14:12:51 +0200
-Message-ID: <1398859971-26916-2-git-send-email-mihaela.sendrea@enea.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1398859971-26916-1-git-send-email-mihaela.sendrea@enea.com>
-References: <1398859971-26916-1-git-send-email-mihaela.sendrea@enea.com>
+	Wed, 30 Apr 2014 14:37:29 +0000 (UTC)
+Received: by mail-lb0-f179.google.com with SMTP id q8so1313241lbi.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 07:37:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=fX7bWzj8+dn4yPQuKa40ZJMAq/x8HbHLsYMFVdMxOM0=;
+	b=CzeXGA+TNdzOiotnAcs72p5Gnmd/Jxmd3PPc89e97zp4sV+l1gX5zx9k/QPxXV0mGG
+	vfWSgN7NAHBDxOx0fdGml8Rb9sS5UaQXs4XOEpiW9cXFNUKvGLQ9lk4gjl0reE1jr8s+
+	j0nrgu8wptDL8P+Puon4TyKkJaUSnkYegMDJh4ru3gC3nlRPDk1OmNykVWwBldrbwmNc
+	rO1Is3bkVd/tWGmcTKk4F4LAEWd/oxMaGI3O8/Jpikhowl5yA1Rj6lEVg3OhxdehQ39P
+	lsTE7WaE91rKV3XcJnGUFHqanGhabYAm0yT4xTN/NDaM/yhPsShoGS08ADoTT74enBwv
+	CH4A==
+X-Received: by 10.112.85.6 with SMTP id d6mr3078240lbz.8.1398868649485;
+	Wed, 30 Apr 2014 07:37:29 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q4sm26503402lbl.14.2014.04.30.07.37.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Apr 2014 07:37:26 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Apr 2014 16:37:41 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140430143741.GL2486@jama>
 MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: mihaela.sendrea@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-networking][PATCH 2/2] netperf: enable SCTP support
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +46,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 12:18:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Apr 2014 14:37:36 -0000
+X-Groupsio-MsgNum: 49605
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="oQt9EtFvfmoPRfH8"
+Content-Disposition: inline
 
-Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com>
----
- meta-networking/recipes-support/netperf/netperf_2.6.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+--oQt9EtFvfmoPRfH8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-index 45760ad..73a819c 100644
---- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-+++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-@@ -27,6 +27,11 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
- CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
-     ' -D_FILE_OFFSET_BITS=64', '', d)}"
- 
-+PACKAGECONFIG += "sctp"
-+PACKAGECONFIG[sctp] = "--enable-sctp"
-+DEPENDS += "lksctp-tools"
-+RDEPENDS_${PN} += "kernel-module-sctp"
-+
- # autotools.bbclass attends to include m4 files with path depth <= 2 by
- # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
- do_configure_prepend() {
--- 
-1.8.5.3
+Hi,
 
+few people asked me when there will be daisy branch in meta-openembedded
+repository.
 
+My current plan is at the end of next week.
+
+There are some pending fixes I need to finish testing (please review,
+test and reply on them).
+
+I was hoping for few more fixes for
+http://lists.openembedded.org/pipermail/openembedded-devel/2014-March/09489=
+3.html
+
+and especially for incorrect dependencies:
+http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/09526=
+8.html
+http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/09546=
+4.html
+
+There is only one change on ML which really cannot go to daisy branch
+(http://patchwork.openembedded.org/patch/71107/), the B!=3DS fixes are on
+edge, but they shouldn't harm to be in daisy.
+
+I hope to get few more fixes from OEDAM and then I'll run final build
+test on jenkins (3days, possibly needed twice).
+
+If you want to maintain daisy release in meta-oe, reply in this thread
+and send patch to update README files.
+
+Regards,
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--oQt9EtFvfmoPRfH8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNhCrUACgkQN1Ujt2V2gBw2QQCdHPF21eE6wS+inQUj+wwQSbs5
+NlUAoI3fJ7+rByGd+WX09wDfl9wJF7H/
+=ybz+
+-----END PGP SIGNATURE-----
+
+--oQt9EtFvfmoPRfH8--
