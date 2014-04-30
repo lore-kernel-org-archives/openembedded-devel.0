@@ -1,29 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-X-Greylist: delayed 685 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 30 Apr 2014 17:39:05 UTC
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 963A165D6A
+Return-Path: <obi@opendreambox.org>
+X-Greylist: delayed 330 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 30 Apr 2014 17:41:36 UTC
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E6540605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 17:39:04 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 30 Apr 2014 10:27:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,959,1389772800"; d="scan'208";a="523911209"
-Received: from cgwithan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.50])
-	by fmsmga001.fm.intel.com with ESMTP; 30 Apr 2014 10:27:33 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 30 Apr 2014 18:27:32 +0100
-Message-ID: <2436764.vQCnP2Aayr@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.13.10-200.fc20.x86_64; KDE/4.12.4; x86_64; ;
-	)
-In-Reply-To: <20140430160626.GN2486@jama>
-References: <20140430160626.GN2486@jama>
+	Wed, 30 Apr 2014 17:41:36 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 3F2AF314BCDF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 19:36:06 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id dKGR3QZ_R2Ys
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 19:35:57 +0200 (CEST)
+Received: from [172.22.22.61] (55d465ee.access.ecotel.net [85.212.101.238])
+	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 533ED314BCA0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 19:35:57 +0200 (CEST)
+Message-ID: <5361347D.1040001@opendreambox.org>
+Date: Wed, 30 Apr 2014 19:35:57 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-04-30
+To: openembedded-devel@lists.openembedded.org
+References: <1398876295-19178-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1398876295-19178-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [meta-systemd][PATCH] lighttpd: rename .bbappend to match with any version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,29 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 17:39:06 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 30 Apr 2014 17:41:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wednesday 30 April 2014 18:06:26 Martin Jansa wrote:
-> > Khem sent couple of patches for B!=S issues, bit thanks to him!
-> > 
-> > I have local patch to set B=S/autotools-brokensep for remaining failing
-> > recipes, but I'll wait a bit more for people to send fixes.
+Hi Martin,
+
+On 30.04.2014 18:44, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend}       | 0
+
+this contradicts the subject.
+
+Regards,
+Andreas
+
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-systemd/oe-core/recipes-extended/lighttpd/{lighttpd_1.4.33.bbappend => lighttpd_1.4.35.bbappend} (100%)
 > 
-> This patch was included in this build, that's why there is only few
-> issues, next build will include oe-core/daisy to help with meta-oe/daisy
-> stabilization.
+> diff --git a/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend b/meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
+> similarity index 100%
+> rename from meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.33.bbappend
+> rename to meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_1.4.35.bbappend
+> 
 
-I have a fix for modphp coming, I just need to test it to make sure I didn't 
-break anything. Should have it sent out early tomorrow. I might be able to 
-take a look at xdebug as well.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
