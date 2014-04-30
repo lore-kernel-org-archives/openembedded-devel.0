@@ -1,36 +1,37 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id C631E60703
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id DCC526084B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 05:43:37 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id y10so1169634wgg.0
+	Wed, 30 Apr 2014 08:09:54 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id d1so8678790wiv.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 22:43:37 -0700 (PDT)
+	Wed, 30 Apr 2014 01:09:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=N0H94x1Ek95/FdalBu/jYgsBbTLRTv3JKMoodn0yBbw=;
-	b=J20sgtJMjddZhYdLO0/T73IdENa1d9uk6P9SGh4t9sGIgp5vUlN4VjBmf5Ql3jyPQT
-	OtDAAfIYbL30RNtMyOEaxFeGxEQf4W1so6MSaeFoFPWR2oR/8/kDjZTdThVxuX8GdGIw
-	NHsdDonYkRy9rU6ftmR2ok3wpJYpKrCDeOLeTl2r0bZzp+ixYUQa5DsErHBeaJLFAN0M
-	t68wTS1h6vVlal20tJdky6PF2vrI2PltmD7Kq9hnkzvH4QL3FaeS1+ajaDCdBg2UbC+U
-	iSOnAcZ6ROvHh8bgttu+eqcLt08Nb9D7MNKLrHmUgGxk/IGBZNorr1DDjtN56DCMMSAY
-	GHFg==
-X-Gm-Message-State: ALoCoQkBl3BseaDVBP6KqJvpbsflfWYtjfOssCSFr/xQGGo4gxsbKpNVzSk7qf1TiSmmmsamPslp
-X-Received: by 10.180.77.165 with SMTP id t5mr1853603wiw.38.1398836616142;
-	Tue, 29 Apr 2014 22:43:36 -0700 (PDT)
+	bh=8fggzLjvd3Posu2Ae5/t7YAJYMMLyH6j1r2zj1/OHhA=;
+	b=gHI641G5BZ7bNhyVjjiG2w2hKXGZSYC8mg6KmVNn8XfzncaGWnZP+gBqSXpqClix+i
+	3SEOSla6Sx8vTfOHXaCDM/C5Y8w3cPZoKC8IvwAvBbnBsSsJ122K7nXjEjJJ88NOmXeb
+	hQtJSx1BReCMMQSeTVG31diFEsESoo4WCUh2E+ZNjWxfki5tYSjxBCEB9CsIXWS7/stH
+	eoiKvsMzwlr6Tj8LZdcQS775PJlOcEY6mtWVMxWCcdU14kU2mTUbb6xVF2QA6XqJwG6M
+	9HW1cyWyLCuIXlyqTHFtV7x4n4bqJg+JNtzSyhjTbeUWj+n/EQT4SeZrmH3jlkLZXLRK
+	KIqw==
+X-Gm-Message-State: ALoCoQnWcZzZwnsK/DnIUXzYQ5n4eki6ecef/x2rWM0etC3qt1ZwX7eeO7/jdPfuhm4On8kiB6wP
+X-Received: by 10.194.88.230 with SMTP id bj6mr11591wjb.85.1398845394863;
+	Wed, 30 Apr 2014 01:09:54 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id
-	cv4sm34451893wjc.34.2014.04.29.22.43.35 for <multiple recipients>
+	by mx.google.com with ESMTPSA id bq12sm738752wib.0.2014.04.30.01.09.53
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 Apr 2014 22:43:35 -0700 (PDT)
+	Wed, 30 Apr 2014 01:09:54 -0700 (PDT)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Apr 2014 07:43:32 +0200
-Message-Id: <1398836612-24774-1-git-send-email-koen.kooi@linaro.org>
+Date: Wed, 30 Apr 2014 10:09:52 +0200
+Message-Id: <1398845392-22825-1-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.0
 Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] libmcrypt: inherit autotools-brokensep
+Subject: [meta-networking][PATCH] netperf: fix S!=B issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,25 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 05:43:40 -0000
-
-do_configure fails without it.
+X-List-Received-Date: Wed, 30 Apr 2014 08:09:58 -0000
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/netperf/netperf_2.6.0.bb | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-index 2e5f07f..2a133c6 100644
---- a/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-+++ b/meta-oe/recipes-support/libmcrypt/libmcrypt_2.5.8.bb
-@@ -9,4 +9,4 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/mcrypt/Libmcrypt/${PV}/libmcrypt-${PV}.
- SRC_URI[md5sum] = "0821830d930a86a5c69110837c55b7da"
- SRC_URI[sha256sum] = "e4eb6c074bbab168ac47b947c195ff8cef9d51a211cdd18ca9c9ef34d27a373e"
+diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+index 45760ad..7124b02 100644
+--- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
++++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+@@ -30,7 +30,7 @@ CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
+ # autotools.bbclass attends to include m4 files with path depth <= 2 by
+ # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
+ do_configure_prepend() {
+-    test -d m4/m4 && mv -f m4/m4 m4-files
++    test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
+ }
  
--inherit autotools gettext binconfig
-+inherit autotools-brokensep gettext binconfig
+ do_install() {
+@@ -43,18 +43,18 @@ do_install() {
+ 
+     # man
+     install -d ${D}${mandir}/man1/
+-    install -m 0644 doc/netserver.man ${D}${mandir}/man1/netserver.1
+-    install -m 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1
++    install -m 0644 ${S}/doc/netserver.man ${D}${mandir}/man1/netserver.1
++    install -m 0644 ${S}/doc/netperf.man ${D}${mandir}/man1/netperf.1
+ 
+     # move scripts to examples directory
+     install -d ${D}${docdir}/netperf/examples
+-    install -m 0644 doc/examples/*_script ${D}${docdir}/netperf/examples/
++    install -m 0644 ${S}/doc/examples/*_script ${D}${docdir}/netperf/examples/
+ 
+     # docs ..
+-    install -m 0644 COPYING ${D}${docdir}/netperf
+-    install -m 0644 Release_Notes ${D}${docdir}/netperf
+-    install -m 0644 README ${D}${docdir}/netperf
+-    install -m 0644 doc/netperf_old.ps ${D}${docdir}/netperf
++    install -m 0644 ${S}/COPYING ${D}${docdir}/netperf
++    install -m 0644 ${S}/Release_Notes ${D}${docdir}/netperf
++    install -m 0644 ${S}/README ${D}${docdir}/netperf
++    install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
+ }
+ 
+ INITSCRIPT_NAME="netperf"
 -- 
 1.9.0
 
