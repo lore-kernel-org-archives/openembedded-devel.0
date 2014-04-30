@@ -1,35 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id B485960808
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 3855E6121F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 23:10:18 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id kq14so953771pab.8
+	Wed, 30 Apr 2014 04:49:59 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id hi5so1484889wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Apr 2014 16:10:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=cjDBjOHuv++4qo1qpwt7f+6Q1Zo7r6XRQBukHRXWJJw=;
-	b=jtKnDNk+WesNUMAOfc1zx51ER23Sxjv66JOp8ZIeMXPuHfrEsbA5jPF7aAsA3icqQY
-	ULT4ATkxrk88sh3HheW0zs8cRpbh8rMgHPvTpJM22vmIbnBNL9Al21SJx7ajsQZlVGpw
-	XqCVVPrvLgI/INcIFB+a4fLi8jh86/TLeCrq7x+pxiJP+yu6hAwR8VosYV5pGQKWrwTJ
-	xuQq/0VhT/IUDv5WBqr8laTqErIwGlA9PZYXHUgPCBV/jis5f3xNNchK7IYKbM45HMAw
-	ZBvSEIWcF3acHwW5B/NKJnwYLPhxTb6iqyL3ohgrCORPnhpyNbyLwm2cN0Nzq0XatpS4
-	fB/A==
-X-Received: by 10.66.161.231 with SMTP id xv7mr417754pab.7.1398806071796;
-	Tue, 29 Apr 2014 14:14:31 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-140-30.lightspeed.sntcca.sbcglobal.net. [99.57.140.30])
-	by mx.google.com with ESMTPSA id
-	kt8sm118692323pab.7.2014.04.29.14.14.30 for <multiple recipients>
+	Tue, 29 Apr 2014 21:50:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=pN/6jdK3RmGe0Ti7rV+Q965unUBJFaZqM8mp4Fwcvzc=;
+	b=meENvGIVl1PZt9bYqTIzqgaycrFplRTh94i4YyTWFzIo6P1MIMu/w1yAmdxW5nA62o
+	q079IZTgxdOv5cXjM/PwrJW94uAMzlihEMu7uugFuAltam3ZXIov1O2fN87pWrfVJnbD
+	BYNCAS/kauHL9dCHlQsOPjJk6RNdJhR8KkppYggZTTHGuuiY2iXupS4hsNOiwTOm9LDz
+	8uHCacehaELxc8cvKGutiq8j/1ZUS6X0KzJONwxqCrjKXXvYHGlaCuMn8WXe5jDL7ygv
+	Db1oMzP8PKjDnUtxMsJkk/pLm9gfiz68G6R2vF7RDOgnhHE5RwBvmCoGgJxKTDgoWnYs
+	ge6A==
+X-Gm-Message-State: ALoCoQnDS8Swuux71f+0FAVHA4RoVcNb9Oq+RICyXlRCNIccfHl5Q3KyMCEUK4LpjfFgaAv64eRR
+X-Received: by 10.194.188.68 with SMTP id fy4mr1768707wjc.30.1398833400211;
+	Tue, 29 Apr 2014 21:50:00 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id gz1sm1034164wib.14.2014.04.29.21.49.58
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 Apr 2014 14:14:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 29 Apr 2014 21:49:59 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Apr 2014 14:16:33 -0700
-Message-Id: <1398806193-17743-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-oe][PATCH] llvm3: Fix build when S != B
+Date: Wed, 30 Apr 2014 06:49:56 +0200
+Message-Id: <1398833396-17027-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-networking][PATCH] bridge-utils: inherit autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Apr 2014 23:10:18 -0000
+X-List-Received-Date: Wed, 30 Apr 2014 04:50:04 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+| NOTE: make DESTDIR=/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/image install
+| for x in libbridge brctl doc; do make  -C $x install; done
+| make[1]: Entering directory `/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/build/libbridge'
+| make[1]: Nothing to be done for `install'.
+| make[1]: Leaving directory `/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/build/libbridge'
+| make[1]: Entering directory `/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/build/brctl'
+| make[1]: *** No rule to make target `brctl.o', needed by `brctl'.  Stop.
+| make[1]: Leaving directory `/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/build/brctl'
+| make[1]: Entering directory `/build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/build/doc'
+| mkdir -p /build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/image/usr/share/man/man8
+| /usr/bin/install -c -m 644 brctl.8 /build/linaro/build/build/tmp-eglibc/work/aarch64-oe-linux/bridge-utils/1.5-r0/image/usr/share/man/man8
+| /usr/bin/install: cannot stat 'brctl.8': No such file or directory
+| make[1]: *** [install] Error 1
+
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-oe/recipes-core/llvm/llvm3.inc |    8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-networking/recipes-support/bridge-utils/bridge-utils.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/llvm/llvm3.inc b/meta-oe/recipes-core/llvm/llvm3.inc
-index 798d4a2..a5bd896 100644
---- a/meta-oe/recipes-core/llvm/llvm3.inc
-+++ b/meta-oe/recipes-core/llvm/llvm3.inc
-@@ -21,14 +21,14 @@ EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
+diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+index e06c32e..feeba74 100644
+--- a/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
++++ b/meta-networking/recipes-support/bridge-utils/bridge-utils.inc
+@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz \
+           file://bridge-utils-1.5-fix-incorrect-command-in-manual.patch \
+ "
  
- do_configure_prepend() {
-     # Remove RPATHs
--    sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' Makefile.rules
-+    sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' ${S}/Makefile.rules
+-inherit autotools update-alternatives
++inherit autotools-brokensep update-alternatives
  
-     # Drop "svn" suffix from version string
--    sed -i 's/${PV}svn/${PV}/g' configure
-+    sed -i 's/${PV}svn/${PV}/g' ${S}/configure
- 
-     # Fix paths in llvm-config
--    sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" tools/llvm-config/llvm-config.cpp
--    sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" tools/llvm-config/llvm-config.cpp
-+    sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
-+    sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
- 
-     # Fails to build unless using separate directory from source
-     mkdir -p ${LLVM_BUILD_DIR}
+ ALTERNATIVE_${PN} = "brctl"
+ ALTERNATIVE_PRIORITY[brctl] = "100"
 -- 
-1.7.10.4
+1.9.0
 
 
