@@ -1,30 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-X-Greylist: delayed 766 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 30 Apr 2014 15:52:06 UTC
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id E44FF65DDD
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Apr 2014 15:52:06 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 30 Apr 2014 08:39:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,959,1389772800"; d="scan'208";a="503776773"
-Received: from cgwithan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.50])
-	by orsmga001.jf.intel.com with ESMTP; 30 Apr 2014 08:38:59 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Mihaela Sendrea <mihaela.sendrea@enea.com>
-Date: Wed, 30 Apr 2014 16:38:58 +0100
-Message-ID: <41147236.pkX3ds0scg@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.13.10-200.fc20.x86_64; KDE/4.12.4; x86_64; ;
-	)
-In-Reply-To: <1398870272-18014-2-git-send-email-mihaela.sendrea@enea.com>
-References: <1398870272-18014-1-git-send-email-mihaela.sendrea@enea.com>
-	<1398870272-18014-2-git-send-email-mihaela.sendrea@enea.com>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-la0-f50.google.com (mail-la0-f50.google.com
+	[209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 03EF465D67;
+	Wed, 30 Apr 2014 16:06:12 +0000 (UTC)
+Received: by mail-la0-f50.google.com with SMTP id gl10so1386307lab.37
+	for <multiple recipients>; Wed, 30 Apr 2014 09:06:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=RPvw4XJYtz9odt1cZL+2rpUToEO8cbKzpv+GznKRl8o=;
+	b=C+6yHkxOsa2rgblJGuSFhDG4KB3gCaCGOjVBop4saZKh+9SBU6mqSAJIeYgURBiEWs
+	uubLD7+1keYWXgyAxYDhFPTpCqbX/Td8C4vICAqdcREoE82xKRYv/uRvcckaYmV5Jp3t
+	txYfHnawQryOiFPrVqg9CprWAXPa4Y6b/SaGWG2ILEnhHS7BMEIfnQQasJq3MrVr9iAl
+	k5vIALs3vYfZlls6V8wiTiZMDvgB2Ub7dqDwQurSmBb2yLoeagz4GQe5aF0QWFrqjzIN
+	dIeK4rBYEDj7xq1qvr0M5w8IIzllwQJq3Tf1lenP06JOVAQQvlmec6eUfnm++PSjhRR1
+	RttA==
+X-Received: by 10.152.19.65 with SMTP id c1mr2185761lae.35.1398873972883;
+	Wed, 30 Apr 2014 09:06:12 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	fa8sm26732889lbc.18.2014.04.30.09.06.10 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Apr 2014 09:06:11 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Apr 2014 18:06:26 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140430160626.GN2486@jama>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2 2/2] netperf: enable SCTP support
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-04-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,39 +44,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 15:52:12 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 30 Apr 2014 16:06:16 -0000
+X-Groupsio-MsgNum: 49610
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="roczexVbllXyERLp"
+Content-Disposition: inline
 
-Hi Mihaela,
+--roczexVbllXyERLp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 30 April 2014 17:04:32 Mihaela Sendrea wrote:
-> Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com>
-> ---
->  meta-networking/recipes-support/netperf/netperf_2.6.0.bb |    5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb index
-> 45760ad..73a819c 100644
-> --- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> +++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> @@ -27,6 +27,11 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
->  CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
->      ' -D_FILE_OFFSET_BITS=64', '', d)}"
-> 
-> +PACKAGECONFIG += "sctp"
+> Khem sent couple of patches for B!=3DS issues, bit thanks to him!
+>=20
+> I have local patch to set B=3DS/autotools-brokensep for remaining failing
+> recipes, but I'll wait a bit more for people to send fixes.
 
-Can you explain why we should now enable this by default?
+This patch was included in this build, that's why there is only few
+issues, next build will include oe-core/daisy to help with meta-oe/daisy
+stabilization.
 
-Also, even assuming we do, the default value of PACKAGECONFIG should be set 
-using ?=, so that it can be easily overridden.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Cheers,
-Paul
+=3D=3D Failed tasks 2014-04-30 =3D=3D
 
--- 
+=3D=3D=3D common (6) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_compile
+    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
+onfigure
+    * meta-openembedded/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.=
+bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb,=
+ do_configure
+    * meta-openembedded/meta-webserver/recipes-php/xdebug/xdebug_2.2.3.bb, =
+do_configure
 
-Paul Eggleton
-Intel Open Source Technology Centre
+=3D=3D=3D common-x86 (3) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
 
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
+o_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||7     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140429_174836.log/
+|-
+||qemux86       ||9     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140429_192931.log//
+|-
+||qemux86_64    ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140429_215135.log//
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--roczexVbllXyERLp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNhH4IACgkQN1Ujt2V2gBw9mwCeKiIy4tCOOtw9NbVDJ0D4GmAH
+OHcAoI2IP0kp7x2VPkR6LAIh/WsaS0IW
+=cARX
+-----END PGP SIGNATURE-----
+
+--roczexVbllXyERLp--
