@@ -1,36 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f50.google.com (mail-la0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 03EF465D67;
-	Wed, 30 Apr 2014 16:06:12 +0000 (UTC)
-Received: by mail-la0-f50.google.com with SMTP id gl10so1386307lab.37
-	for <multiple recipients>; Wed, 30 Apr 2014 09:06:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=RPvw4XJYtz9odt1cZL+2rpUToEO8cbKzpv+GznKRl8o=;
-	b=C+6yHkxOsa2rgblJGuSFhDG4KB3gCaCGOjVBop4saZKh+9SBU6mqSAJIeYgURBiEWs
-	uubLD7+1keYWXgyAxYDhFPTpCqbX/Td8C4vICAqdcREoE82xKRYv/uRvcckaYmV5Jp3t
-	txYfHnawQryOiFPrVqg9CprWAXPa4Y6b/SaGWG2ILEnhHS7BMEIfnQQasJq3MrVr9iAl
-	k5vIALs3vYfZlls6V8wiTiZMDvgB2Ub7dqDwQurSmBb2yLoeagz4GQe5aF0QWFrqjzIN
-	dIeK4rBYEDj7xq1qvr0M5w8IIzllwQJq3Tf1lenP06JOVAQQvlmec6eUfnm++PSjhRR1
-	RttA==
-X-Received: by 10.152.19.65 with SMTP id c1mr2185761lae.35.1398873972883;
-	Wed, 30 Apr 2014 09:06:12 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fa8sm26732889lbc.18.2014.04.30.09.06.10 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Apr 2014 09:06:11 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Apr 2014 18:06:26 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140430160626.GN2486@jama>
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 383 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 30 Apr 2014 16:19:55 UTC
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.206])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C3DD65D0D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Apr 2014 16:19:54 +0000 (UTC)
+Received: from [216.82.241.132:26001] by server-14.bemta-8.messagelabs.com id
+	53/9F-17171-B2121635; Wed, 30 Apr 2014 16:13:31 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-2.tower-45.messagelabs.com!1398874408!28825309!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 22057 invoked from network); 30 Apr 2014 16:13:31 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-2.tower-45.messagelabs.com with RC4-SHA encrypted SMTP;
+	30 Apr 2014 16:13:31 -0000
+Received: from mcl-sms-exch01.digi.com (10.5.8.50) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Wed, 30 Apr 2014 11:13:25 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by
+	mcl-sms-exch01.digi.com (10.5.8.50) with Microsoft SMTP Server (TLS) id
+	8.3.342.0; Wed, 30 Apr 2014 11:13:28 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Wed, 30 Apr 2014 18:13:26 +0200
+Message-ID: <53612125.8030702@digi.com>
+Date: Wed, 30 Apr 2014 18:13:25 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, Failed tasks 2014-04-30
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-webserver] cherokee webserver SRC_URI broken again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,86 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Apr 2014 16:06:16 -0000
-X-Groupsio-MsgNum: 49610
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="roczexVbllXyERLp"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Apr 2014 16:19:55 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
---roczexVbllXyERLp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi all,
 
-> Khem sent couple of patches for B!=3DS issues, bit thanks to him!
->=20
-> I have local patch to set B=3DS/autotools-brokensep for remaining failing
-> recipes, but I'll wait a bit more for people to send fixes.
+Seems that cherokee webserver is missing again. The mirror that was set 
+last time to download the package from is not accessible anymore [1].
 
-This patch was included in this build, that's why there is only few
-issues, next build will include oe-core/daisy to help with meta-oe/daisy
-stabilization.
+On the mirrors page [2] there are some more; most of them are also down 
+but there is still some of them that contain the package.
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+So at this point I think it's better to just put the package in one of 
+the yoctoproject mirrors. If you think that we should use one of the 
+still-working-mirrors let me know and I'll cook a patch for it.
 
-=3D=3D Failed tasks 2014-04-30 =3D=3D
+-
+Javier Viguera
+Software Engineer
+Digi International® Spain S.A.U.
 
-=3D=3D=3D common (6) =3D=3D=3D
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
-b, do_compile
-    * meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_c=
-onfigure
-    * meta-openembedded/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.=
-bb, do_configure
-    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
-ile
-    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb,=
- do_configure
-    * meta-openembedded/meta-webserver/recipes-php/xdebug/xdebug_2.2.3.bb, =
-do_configure
 
-=3D=3D=3D common-x86 (3) =3D=3D=3D
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
-pile
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+[1] 
+http://www.cherokee-project.de/mirrors/cherokee/1.2/1.2.98/cherokee-1.2.98.tar.gz
+[2] http://cherokee-project.com/downloads.html
 
-=3D=3D=3D qemuarm (1) =3D=3D=3D
-    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
-o_compile
-
-=3D=3D=3D qemux86 (0) =3D=3D=3D
-
-=3D=3D=3D qemux86_64 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
-obiledevice_1.1.4.bb, do_configure
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||7     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140429_174836.log/
-|-
-||qemux86       ||9     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140429_192931.log//
-|-
-||qemux86_64    ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140429_215135.log//
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---roczexVbllXyERLp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNhH4IACgkQN1Ujt2V2gBw9mwCeKiIy4tCOOtw9NbVDJ0D4GmAH
-OHcAoI2IP0kp7x2VPkR6LAIh/WsaS0IW
-=cARX
------END PGP SIGNATURE-----
-
---roczexVbllXyERLp--
