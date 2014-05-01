@@ -1,18 +1,22 @@
 Return-Path: <dv@pseudoterminal.org>
+X-Greylist: delayed 517 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 01 May 2014 20:44:54 UTC
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 41B6665E47
+	by mail.openembedded.org (Postfix) with ESMTP id 3F18F65E10
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  1 May 2014 20:44:54 +0000 (UTC)
 Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 065442EADC
+	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 908642EAE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 May 2014 22:36:17 +0200 (CEST)
+	Thu,  1 May 2014 22:36:21 +0200 (CEST)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 May 2014 22:36:06 +0200
-Message-Id: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
+Date: Thu,  1 May 2014 22:36:10 +0200
+Message-Id: <1398976570-3026-5-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-browser][PATCH v3 0/4] Introduce EGL/GLES and component build patches for Chromium
+In-Reply-To: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
+References: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
+Subject: [meta-browser][PATCH v3 4/4] chromium: Add ignore-lost-context PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,48 +32,83 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 01 May 2014 20:44:55 -0000
 
-This set of patches extends the chromium recipe to allow for EGL&GLESv2 based 2D rendering,
-considerably improving performance. This also adds hardware-accelerated WebGL support.
+Accelerating the HTML5 canvas element rendering with OpenGL ES is tricky,
+because an EGL context can get lost with some drivers. Since pages using
+canvas assume they can paint into the canvas and the pixels inside will
+never vanish, this is a problem. Workarounds like periodic snapshots are
+being considered. The WHATWG discussion about this problem can be found at:
+http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
 
-Three new PACKAGECONFIG for chromium are introduced:
+Until then, one has to choose: either no acceleration and full standards
+compliance, or acceleration and potentially lost pixels.
 
-* "component-build" : If set, Chromium is built in component mode. Each subsystem of Chromium
-  ends up in a separate shared object. The alternative is the regular mode, which links everything
-  into one big binary. Component builds are useful for development and testing, and consumes
-  significantly less RAM during building. It is essential when building Chromium on a 32-bit OS.
+Using this PACKAGECONFIG chooses the second option.
 
-* "use-egl" : Ordinarily, Chromium will try to use GLX and regular (= Desktop) OpenGL for 2D
-  acceleration. If that fails, software rendering is used. If use-egl is set, it will use EGL
-  instead of GLX and OpenGL ES 2.0 instead of regular OpenGL. This is very useful if the
-  target platform provides hardware acceleration for this API. Chromium will then render all 2D
-  components as well as WebGL contents with hardware acceleration, Canvas being an exception
-  (see below).
-
-* "ignore-lost-context" : Without this flag, HTML Canvas will not be accelerated, even with the
-  "use-egl" flag set. The reason for this is a conceptual problem: HTML Canvas expects the
-  backing store of the canvas to persist until the web page goes away. But if the backing store
-  is a GLES texture, then in theory the associated EGL context could get lost (for example, during
-  a power management cycle), and the texture along with it. This violates requirements for canvas.
-  So, one has to choose: either remain fully standards compliant, and have no acceleration, or
-  have acceleration, and risk losing the Canvas content. Note that context losses do not happen on
-  all platforms (they haven't been observed with Vivante GPUs for example, and internals of its
-  galcore module do not show anything that could cause a lost context). But since these recipes
-  do not depend on a specific platform, this option must be explicitely enabled.
-
-Carlos Rafael Giani (4):
-  chromium: Add component-build PACKAGECONFIG option
-  chromium: Add variable to contain extra command-line arguments
-  chromium: Add use-egl PACKAGECONFIG option
-  chromium: Add ignore-lost-context PACKAGECONFIG option
-
- .../chromium/chromium/component-build.gypi         |  5 ++++
- recipes-browser/chromium/chromium/google-chrome    | 11 +++++---
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
  .../remove-linux-accel-canvas-from-blacklist.patch | 32 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_35.0.1883.0.bb   | 27 ++++++++++++++++--
- 4 files changed, 69 insertions(+), 6 deletions(-)
- create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
+ recipes-browser/chromium/chromium_35.0.1883.0.bb   |  2 ++
+ 2 files changed, 34 insertions(+)
  create mode 100644 recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
 
+diff --git a/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
+new file mode 100644
+index 0000000..635e563
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
+@@ -0,0 +1,32 @@
++Together with the --gpu-no-context-lost command line switch, this patch is
++necessary to enable hardware accelerated 2D canvas rendering when using
++EGL.
++
++Note the implications on the behavior of Canvas, in particular with lost
++contexts, as discussed here:
++
++http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
++
++Upstream-Status: Inappropiate [see link above]
++
++diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
++index 35060a9..4bd6ef5 100644
++--- a/gpu/config/software_rendering_list_json.cc
+++++ b/gpu/config/software_rendering_list_json.cc
++@@ -232,16 +232,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
++       ]
++     },
++     {
++-      "id": 24,
++-      "description": "Accelerated 2d canvas is unstable in Linux at the moment",
++-      "os": {
++-        "type": "linux"
++-      },
++-      "features": [
++-        "accelerated_2d_canvas"
++-      ]
++-    },
++-    {
++       "id": 27,
++       "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
++       "cr_bugs": [95934, 94973, 136240],
+diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+index dcc990f..a9071e7 100644
+--- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
++++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
+@@ -7,6 +7,7 @@ SRC_URI = "\
+         file://include.gypi \
+         file://oe-defaults.gypi \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
++        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://remove-linux-accel-canvas-from-blacklist.patch', '', d)} \
+         file://unistd-2.patch \
+         file://google-chrome \
+         file://google-chrome.desktop \
+@@ -39,6 +40,7 @@ ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard',
+ 
+ CHROMIUM_EXTRA_ARGS ?= " \
+ 	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
++	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
+ "
+ 
+ export GYP_DEFINES="${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
 -- 
 1.8.3.2
 
