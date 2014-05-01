@@ -1,22 +1,20 @@
 Return-Path: <dv@pseudoterminal.org>
-X-Greylist: delayed 517 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 01 May 2014 20:44:54 UTC
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F18F65E10
+	by mail.openembedded.org (Postfix) with ESMTP id 3FFC265E3B
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  1 May 2014 20:44:54 +0000 (UTC)
 Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 908642EAE4
+	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 2CA572EAE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 May 2014 22:36:21 +0200 (CEST)
+	Thu,  1 May 2014 22:36:19 +0200 (CEST)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 May 2014 22:36:10 +0200
-Message-Id: <1398976570-3026-5-git-send-email-dv@pseudoterminal.org>
+Date: Thu,  1 May 2014 22:36:07 +0200
+Message-Id: <1398976570-3026-2-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
 References: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH v3 4/4] chromium: Add ignore-lost-context PACKAGECONFIG option
+Subject: [meta-browser][PATCH v3 1/4] chromium: Add component-build PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,85 +28,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2014 20:44:55 -0000
+X-List-Received-Date: Thu, 01 May 2014 20:44:56 -0000
 
-Accelerating the HTML5 canvas element rendering with OpenGL ES is tricky,
-because an EGL context can get lost with some drivers. Since pages using
-canvas assume they can paint into the canvas and the pixels inside will
-never vanish, this is a problem. Workarounds like periodic snapshots are
-being considered. The WHATWG discussion about this problem can be found at:
-http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
-
-Until then, one has to choose: either no acceleration and full standards
-compliance, or acceleration and potentially lost pixels.
-
-Using this PACKAGECONFIG chooses the second option.
+In a component build, the individual Chromium components are contained in
+separate shared objects. This is useful when building on a system with
+8 GB RAM or less (since the linker needs at least that much for link
+time optimization otherwise if a non-component build is done), and during
+development and testing of Chromium internals.
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../remove-linux-accel-canvas-from-blacklist.patch | 32 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_35.0.1883.0.bb   |  2 ++
- 2 files changed, 34 insertions(+)
- create mode 100644 recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
+ recipes-browser/chromium/chromium/component-build.gypi |  5 +++++
+ recipes-browser/chromium/chromium/google-chrome        |  2 ++
+ recipes-browser/chromium/chromium_35.0.1883.0.bb       | 13 +++++++++++--
+ 3 files changed, 18 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
 
-diff --git a/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
+diff --git a/recipes-browser/chromium/chromium/component-build.gypi b/recipes-browser/chromium/chromium/component-build.gypi
 new file mode 100644
-index 0000000..635e563
+index 0000000..e58b4ca
 --- /dev/null
-+++ b/recipes-browser/chromium/chromium/remove-linux-accel-canvas-from-blacklist.patch
-@@ -0,0 +1,32 @@
-+Together with the --gpu-no-context-lost command line switch, this patch is
-+necessary to enable hardware accelerated 2D canvas rendering when using
-+EGL.
++++ b/recipes-browser/chromium/chromium/component-build.gypi
+@@ -0,0 +1,5 @@
++{
++  'variables': {
++     'component' : 'shared_library'
++  },
++}
+diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
+index 2f6ad2e..8ce400b 100644
+--- a/recipes-browser/chromium/chromium/google-chrome
++++ b/recipes-browser/chromium/chromium/google-chrome
+@@ -1,6 +1,8 @@
+ #!/bin/sh
+ 
+ export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
++export LD_LIBRARY_PATH=/usr/lib/chrome
 +
-+Note the implications on the behavior of Canvas, in particular with lost
-+contexts, as discussed here:
-+
-+http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
-+
-+Upstream-Status: Inappropiate [see link above]
-+
-+diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
-+index 35060a9..4bd6ef5 100644
-+--- a/gpu/config/software_rendering_list_json.cc
-++++ b/gpu/config/software_rendering_list_json.cc
-+@@ -232,16 +232,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
-+       ]
-+     },
-+     {
-+-      "id": 24,
-+-      "description": "Accelerated 2d canvas is unstable in Linux at the moment",
-+-      "os": {
-+-        "type": "linux"
-+-      },
-+-      "features": [
-+-        "accelerated_2d_canvas"
-+-      ]
-+-    },
-+-    {
-+       "id": 27,
-+       "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
-+       "cr_bugs": [95934, 94973, 136240],
+ if [ "${USER}" = "root" ] ; then 
+ 	/usr/bin/chrome/chrome --user-data-dir=${HOME}/.chromium/ $@
+ else
 diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-index dcc990f..a9071e7 100644
+index 2497f10..96d3344 100644
 --- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
 +++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-@@ -7,6 +7,7 @@ SRC_URI = "\
+@@ -6,6 +6,7 @@ SRC_URI = "\
+         http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
          file://include.gypi \
          file://oe-defaults.gypi \
-         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://remove-linux-accel-canvas-from-blacklist.patch', '', d)} \
++        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
          file://unistd-2.patch \
          file://google-chrome \
          file://google-chrome.desktop \
-@@ -39,6 +40,7 @@ ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard',
- 
- CHROMIUM_EXTRA_ARGS ?= " \
- 	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
-+	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
+@@ -27,6 +28,7 @@ EXTRA_OEGYP =	" \
+ 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
+ 	-I ${WORKDIR}/oe-defaults.gypi \
+ 	-I ${WORKDIR}/include.gypi \
++	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
+ 	-f ninja \
  "
+ ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+@@ -65,6 +67,13 @@ do_install() {
+ 	install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
+ 	install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
  
- export GYP_DEFINES="${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
++	# Always adding this libdir (not just with component builds), because the
++	# LD_LIBRARY_PATH line in the google-chromium script refers to it
++	install -d ${D}${libdir}/chrome/
++	if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
++		install -m 0755 ${S}/out/Release/lib/*.so ${D}${libdir}/chrome/
++	fi
++
+ 	install -d ${D}${sbindir}
+ 	install -m 4755 ${S}/out/Release/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+ 
+@@ -72,8 +81,8 @@ do_install() {
+ 	install -m 0644 ${S}/out/Release/locales/en-US.pak ${D}${bindir}/chrome/locales
+ }
+ 
+-FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/"
+-FILES_${PN}-dbg += "${bindir}/chrome/.debug/"
++FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
++FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
+ 
+ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+ 
 -- 
 1.8.3.2
 
