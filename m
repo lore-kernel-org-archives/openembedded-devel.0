@@ -1,20 +1,39 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FFC265E3B
+Return-Path: <donald.poole@swri.org>
+X-Greylist: delayed 2725 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 01 May 2014 20:48:45 UTC
+Received: from esg260-1.itc.swri.edu (esg260-1.itc.swri.edu [129.162.252.40])
+	by mail.openembedded.org (Postfix) with ESMTP id 898D965DC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 May 2014 20:44:54 +0000 (UTC)
-Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 2CA572EAE0
+	Thu,  1 May 2014 20:48:45 +0000 (UTC)
+Received: from victory-embedded-dev.dyn.datasys.swri.edu
+	(victory-embedded-dev.dyn.datasys.swri.edu [129.162.107.136])
+	(authenticated bits=0)
+	by esg260-1.itc.swri.edu (8.14.5/8.14.5) with ESMTP id s41K3C3u001509
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 May 2014 22:36:19 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+	Thu, 1 May 2014 15:03:20 -0500
+From: "Donald R. Poole, Jr." <donald.poole@swri.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 May 2014 22:36:07 +0200
-Message-Id: <1398976570-3026-2-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
-References: <1398976570-3026-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH v3 1/4] chromium: Add component-build PACKAGECONFIG option
+Date: Thu,  1 May 2014 15:01:01 -0500
+Message-Id: <1398974461-3044-1-git-send-email-donald.poole@swri.org>
+X-Mailer: git-send-email 1.7.9.5
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
+	0.0.0000
+	definitions=2014-05-01_06:2014-05-01, 2014-05-01,
+	1970-01-01 signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
+	score=0
+	kscore.is_bulkscore=7.02226055082633e-11 kscore.compositescore=1
+	circleOfTrustscore=0 compositescore=0.997781753771917
+	urlsuspect_oldscore=0.997781753771917 suspectscore=1
+	recipient_domain_to_sender_totalscore=0 phishscore=0 bulkscore=0
+	kscore.is_spamscore=0 recipient_to_sender_totalscore=0
+	recipient_domain_to_sender_domain_totalscore=0
+	rbsscore=0.997781753771917
+	spamscore=0 recipient_to_sender_domain_totalscore=0 urlsuspectscore=0.9
+	adultscore=0 classifier=spam adjust=-40 reason=mlx scancount=1
+	engine=7.0.1-1402240000 definitions=main-1405010296
+Subject: [meta-qt5][PATCH] qmake5_base.bbclass: Add install support for native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,92 +47,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 May 2014 20:44:56 -0000
+X-List-Received-Date: Thu, 01 May 2014 20:48:46 -0000
 
-In a component build, the individual Chromium components are contained in
-separate shared objects. This is useful when building on a system with
-8 GB RAM or less (since the linker needs at least that much for link
-time optimization otherwise if a non-component build is done), and during
-development and testing of Chromium internals.
+From: "Donald R. Poole, Jr" <donald (dot) poole (at) swri (dot) org>
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+Currently, if you are building native applications with Qt5, the current qmake5_base_do_install() method assumes an install into the image folder for the target. Since the native builds handle this a little differently, this patch should account for the native install scenario.
 ---
- recipes-browser/chromium/chromium/component-build.gypi |  5 +++++
- recipes-browser/chromium/chromium/google-chrome        |  2 ++
- recipes-browser/chromium/chromium_35.0.1883.0.bb       | 13 +++++++++++--
- 3 files changed, 18 insertions(+), 2 deletions(-)
- create mode 100644 recipes-browser/chromium/chromium/component-build.gypi
+ classes/qmake5_base.bbclass |   37 ++++++++++++++++++++++---------------
+ 1 file changed, 22 insertions(+), 15 deletions(-)
 
-diff --git a/recipes-browser/chromium/chromium/component-build.gypi b/recipes-browser/chromium/chromium/component-build.gypi
-new file mode 100644
-index 0000000..e58b4ca
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/component-build.gypi
-@@ -0,0 +1,5 @@
-+{
-+  'variables': {
-+     'component' : 'shared_library'
-+  },
-+}
-diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
-index 2f6ad2e..8ce400b 100644
---- a/recipes-browser/chromium/chromium/google-chrome
-+++ b/recipes-browser/chromium/chromium/google-chrome
-@@ -1,6 +1,8 @@
- #!/bin/sh
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 18fdb2a..df8a59a 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -163,23 +163,30 @@ qmake5_base_do_configure () {
  
- export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
-+export LD_LIBRARY_PATH=/usr/lib/chrome
-+
- if [ "${USER}" = "root" ] ; then 
- 	/usr/bin/chrome/chrome --user-data-dir=${HOME}/.chromium/ $@
- else
-diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-index 2497f10..96d3344 100644
---- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
-+++ b/recipes-browser/chromium/chromium_35.0.1883.0.bb
-@@ -6,6 +6,7 @@ SRC_URI = "\
-         http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
-         file://include.gypi \
-         file://oe-defaults.gypi \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-         file://unistd-2.patch \
-         file://google-chrome \
-         file://google-chrome.desktop \
-@@ -27,6 +28,7 @@ EXTRA_OEGYP =	" \
- 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
- 	-I ${WORKDIR}/oe-defaults.gypi \
- 	-I ${WORKDIR}/include.gypi \
-+	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
- 	-f ninja \
- "
- ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
-@@ -65,6 +67,13 @@ do_install() {
- 	install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
- 	install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
+ qmake5_base_do_install() {
+     # Fix install paths for all
+-    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
++    if [ "${BUILD_SYS}" = "${HOST_SYS}" ] ; then
++        find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT),(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
++    else
++        find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_TARGET},(INSTALL_ROOT),g"
++    fi
  
-+	# Always adding this libdir (not just with component builds), because the
-+	# LD_LIBRARY_PATH line in the google-chromium script refers to it
-+	install -d ${D}${libdir}/chrome/
-+	if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
-+		install -m 0755 ${S}/out/Release/lib/*.so ${D}${libdir}/chrome/
-+	fi
-+
- 	install -d ${D}${sbindir}
- 	install -m 4755 ${S}/out/Release/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+     oe_runmake install INSTALL_ROOT=${D}
  
-@@ -72,8 +81,8 @@ do_install() {
- 	install -m 0644 ${S}/out/Release/locales/en-US.pak ${D}${bindir}/chrome/locales
+-    # everything except HostData and HostBinaries is prefixed with sysroot value,
+-    # but we cannot remove sysroot override, because that's useful for pkg-config etc
+-    # In some cases like QtQmlDevTools in qtdeclarative, the sed above does not work,
+-    # fix them manually
+-    if [ -d ${D}${STAGING_DIR_TARGET} ] && [ -n "${STAGING_DIR_TARGET}" ] ; then
+-        echo "Some files are installed in wrong directory ${D}${STAGING_DIR_TARGET}"
+-        cp -ra ${D}${STAGING_DIR_TARGET}/* ${D}
+-        rm -rf ${D}${STAGING_DIR_TARGET}
+-        # remove empty dirs
+-        TMP=`dirname ${D}/${STAGING_DIR_TARGET}`
+-        while test ${TMP} != ${D}; do
+-            rmdir ${TMP}
+-            TMP=`dirname ${TMP}`;
+-        done
++    # Only do this for target builds. Native install work a little differently
++    if [ "${BUILD_SYS}" != "${HOST_SYS}" ] ; then
++        # everything except HostData and HostBinaries is prefixed with sysroot value,
++        # but we cannot remove sysroot override, because that's useful for pkg-config etc
++        # In some cases like QtQmlDevTools in qtdeclarative, the sed above does not work,
++        # fix them manually
++        if [ -d ${D}${STAGING_DIR_TARGET} ] && [ -n "${STAGING_DIR_TARGET}" ] ; then
++            echo "Some files are installed in wrong directory ${D}${STAGING_DIR_TARGET}"
++            cp -ra ${D}${STAGING_DIR_TARGET}/* ${D}
++            rm -rf ${D}${STAGING_DIR_TARGET}
++            # remove empty dirs
++            TMP=`dirname ${D}/${STAGING_DIR_TARGET}`
++            while test ${TMP} != ${D}; do
++                rmdir ${TMP}
++                TMP=`dirname ${TMP}`;
++            done
++        fi
+     fi
  }
- 
--FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/"
--FILES_${PN}-dbg += "${bindir}/chrome/.debug/"
-+FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
-+FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
- 
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
 -- 
-1.8.3.2
+1.7.9.5
 
 
