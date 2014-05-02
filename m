@@ -1,34 +1,32 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 4583D606E1
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E7CB606E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 May 2014 08:38:06 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Wg8yr-00029g-AT for openembedded-devel@lists.openembedded.org;
-	Fri, 02 May 2014 10:38:05 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 May 2014 10:38:05 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 May 2014 10:38:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 02 May 2014 10:37:54 +0200
-Message-ID: <ljvlh1$abb$1@ger.gmane.org>
-References: <1399019186-19483-1-git-send-email-koen.kooi@linaro.org>
+	Fri,  2 May 2014 08:38:25 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s428cJQa027552; Fri, 2 May 2014 09:38:19 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id G3lwtGlQZWV5; Fri,  2 May 2014 09:38:19 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s428cG7F027530
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
+	Fri, 2 May 2014 09:38:17 +0100
+Message-ID: <1399019890.12731.28.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Andrea Adami <andrea.adami@gmail.com>
+Date: Fri, 02 May 2014 09:38:10 +0100
+In-Reply-To: <CAAQYJAtY33YvGL7RVYpBiKtOkt3OxV7h=XV0EyY8yovZwDFdtg@mail.gmail.com>
+References: <1398986009-20163-1-git-send-email-andrea.adami@gmail.com>
+	<1399018873.12731.21.camel@ted>
+	<CAAQYJAtY33YvGL7RVYpBiKtOkt3OxV7h=XV0EyY8yovZwDFdtg@mail.gmail.com>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-In-Reply-To: <1399019186-19483-1-git-send-email-koen.kooi@linaro.org>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCHv4] git: fix perl binding installation
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH] klcc_cross: move in target sysroot as crosscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,54 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2014 08:38:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 May 2014 08:38:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, 2014-05-02 at 10:34 +0200, Andrea Adami wrote:
+> I probably misunderstand that part.
+> 
+> I could not see any difference in the produced klcc.cross scripts with
+> or without the mangling.
+> Tested runtime on 3 machines.
+> What I did not yet try is a rebuild from sstate but I expect it to be rebuilt.
 
-Wrong mailinglist, sorry. This is what happens when you run out of regular
-coffee and have a decaf in the morning!
+The easy way to reproduce a problem is to build for MACHINE=A and then
+build for MACHINE=B where the two machines have the same architecture.
+You will find that whilst it will switch the commented line at the top
+to refer to the new machine, the encoded lines do not get changed.
 
-Koen Kooi schreef op 02-05-14 10:26:
-> Git.pm wasn't ending up in the package because do_install removed it with
-> a misleading comment about multilib. Workaround the problem so that
-> Git.pm ends up in the correct dir *and* doesn't get deleted.
-> 
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org> --- 
-> meta/recipes-devtools/git/git.inc | 7 ++++++- 1 file changed, 6
-> insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta/recipes-devtools/git/git.inc
-> b/meta/recipes-devtools/git/git.inc index 73e11eb..178b768 100644 ---
-> a/meta/recipes-devtools/git/git.inc +++
-> b/meta/recipes-devtools/git/git.inc @@ -28,10 +28,14 @@ do_install () { 
-> template_dir=${datadir}/git-core/templates \ 
-> GIT_PYTHON_DIR=${D}${datadir}/git-core/python
-> 
-> +	cd ${B}/perl && oe_runmake install DESTDIR="${D}" bindir=${bindir} + #
-> ${libdir} is not applicable here, perl-native files are always #
-> installed to /usr/lib on both 32/64 bits targets. +	# Fix up build paths
-> and point to target locations. +	mv
-> ${D}${exec_prefix}/lib/perl-native/perl ${D}${exec_prefix}/lib/perl +	sed
-> -i -e s:${D}::g ${D}${exec_prefix}/lib/perl/*/auto/Git/.packlist rm -rf
-> ${D}${exec_prefix}/lib/perl-native -	rmdir ${D}${exec_prefix}/lib ||
-> true }
-> 
-> PERLSEDFIXUP = " \ @@ -75,6 +79,7 @@ PERLTOOLS = " \ PACKAGES =+
-> "${PN}-perltools" FILES_${PN}-perltools += " \ ${PERLTOOLS} \ +
-> ${prefix}/lib/perl \ ${datadir}/perl \ " RDEPENDS_${PN}-perltools =
-> "${PN} perl perl-module-file-path liberror-perl findutils"
-> 
+You would also find that if you run a build in dirA, then a build in
+dirB using the sstate cache from dirA, the paths would reference dirA,
+not dirB. After this change they will reference dirB.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Cheers,
 
-iD8DBQFTY1liMkyGM64RGpERAhjOAJ92r2TtyxOFLDc7sj8VVmpUiJzhOgCgthGJ
-EItT7lT4ZV5WAdjSxyO8Ttk=
-=oLc+
------END PGP SIGNATURE-----
+Richard
 
 
