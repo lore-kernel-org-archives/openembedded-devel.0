@@ -1,53 +1,36 @@
-Return-Path: <donald.poole@swri.org>
-X-Greylist: delayed 1878 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 02 May 2014 21:21:02 UTC
-Received: from esg256-2.itc.swri.edu (esg256-2.itc.swri.edu [129.162.243.101])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C436602DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 May 2014 21:21:02 +0000 (UTC)
-Received: from exchmail.swri.org (casht256-1.adm.swri.edu [129.162.243.120])
-	by esg256-2.itc.swri.edu (8.14.5/8.14.5) with ESMTP id s42KpexN030118
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 May 2014 15:51:40 -0500
-Received: from MBX256-1.adm.swri.edu ([169.254.1.62]) by
-	CASHT256-1.adm.swri.edu ([129.162.243.120]) with mapi id 14.03.0181.006;
-	Fri, 2 May 2014 15:49:42 -0500
-From: "Poole Jr, Donald R." <donald.poole@swri.org>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-qt5][PATCH] qmake5_base.bbclass: Add install
-	support for native builds
-Thread-Index: AQHPZYC8FzFD0TH0GEOtwtPcZg6Yrpstoh0AgAB11wD//60dAA==
-Date: Fri, 2 May 2014 20:49:42 +0000
-Message-ID: <CF896EB1.2FA4%donald.poole@swri.org>
-References: <1398974461-3044-1-git-send-email-donald.poole@swri.org>
-	<20140501210300.GU2486@jama> <CF89516F.2F68%donald.poole@swri.org>
-	<CAP9ODKoGRW+jKyYAgiALURUpbwArhEEX7813fuHwuXkbkxOf7w@mail.gmail.com>
-In-Reply-To: <CAP9ODKoGRW+jKyYAgiALURUpbwArhEEX7813fuHwuXkbkxOf7w@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/14.4.1.140326
-x-originating-ip: [129.162.230.100]
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 639936059B;
+	Fri,  2 May 2014 22:53:59 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id ey11so784327pad.32
+	for <multiple recipients>; Fri, 02 May 2014 15:54:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=2o2OVlXEmJvJWHanRtICNAbsg+S1+rSSS12STxWiv3Q=;
+	b=e4w+fq5JYbLfaAXdpkE3Qf3ZpZDvZaadIpNgmRjwhSaCb6CqryZEyTy9PaptpI97sr
+	i/zzGvJsXzH5DjMkoicksZioN+k3k4zXDKqYJaD60KEldS/w9QnxjUKutiLgtor30cvf
+	jUfIKbK7UqoQdRhAp+GW3EoB7UePidcwj5VvXG1XshcgnJzsKRWNE7X5iLocGzvizhMQ
+	V2gwS8NFrB17MYKab3QvAUrGfo+/5iJGLaNLZ3ieVRx95smrtEitGNIrPuSIC6Zfgtm4
+	AK7riFjbYULIAErzNGmrOeRhfJ2tO5ljax6JG9z18180Ux1Ao0t6+bsREN20qe/jzoZi
+	NWIw==
+X-Received: by 10.66.240.4 with SMTP id vw4mr39943424pac.26.1399071239969;
+	Fri, 02 May 2014 15:53:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	z3sm2507683pas.15.2014.05.02.15.53.57 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 02 May 2014 15:53:59 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 3 May 2014 00:54:14 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140502225414.GY2486@jama>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
-	0.0.0000
-	definitions=2014-05-02_07:2014-05-02, 2014-05-02,
-	1970-01-01 signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
-	score=0
-	kscore.is_bulkscore=6.49480469405717e-14 kscore.compositescore=1
-	circleOfTrustscore=0 compositescore=0.997781753771917
-	urlsuspect_oldscore=0.997781753771917 suspectscore=0
-	recipient_domain_to_sender_totalscore=0 phishscore=0 bulkscore=0
-	kscore.is_spamscore=0 recipient_to_sender_totalscore=0
-	recipient_domain_to_sender_domain_totalscore=0
-	rbsscore=0.997781753771917
-	spamscore=0 recipient_to_sender_domain_totalscore=0 urlsuspectscore=0.9
-	adultscore=0 classifier=spam adjust=-40 reason=mlx scancount=1
-	engine=7.0.1-1402240000 definitions=main-1405020303
-Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: Add install support for native builds
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-05-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,32 +44,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2014 21:21:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="euc-kr"
-Content-ID: <1FA924C0437F8E4795E6D8F0C6C72D8A@sw.pvt>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 02 May 2014 22:54:04 -0000
+X-Groupsio-MsgNum: 49669
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="L7gbXl6dnBG3y424"
+Content-Disposition: inline
 
-T24gNS8yLzE0LCAzOjQ2IFBNLCAiT3RhdmlvIFNhbHZhZG9yIiA8b3RhdmlvQG9zc3lzdGVtcy5j
-b20uYnI+IHdyb3RlOg0KDQoNCj5PbiBGcmksIE1heSAyLCAyMDE0IGF0IDM6NDQgUE0sIFBvb2xl
-IEpyLCBEb25hbGQgUi4NCj48ZG9uYWxkLnBvb2xlQHN3cmkub3JnPiB3cm90ZToNCj4+IE1hcnRp
-biwgZXQuIGFsLA0KPj4NCj4+IFdoYXQgaXMgdGhlIHByb2Nlc3NlcyBmb3IgcGF0Y2ggc3VibWlz
-c2lvbiByZXZpZXc/IERvZXMgdGhlIHJldmlldyB0ZWFtDQo+PiByZXZpZXcgYW5kIHRlc3QgdGhl
-IHBhdGNoIGFuZCB0aGVuIHJlcG9ydCBpdKn2cyBhY2NlcHRhbmNlPw0KPg0KPldlIGFsbCBjYW4g
-cmV2aWV3OyB3ZSB0ZXN0IGl0IGFuZCB0cnkgdG8gZGlzY3VzcyBpZiB3ZSBmaW5kIGFueXRoaW5n
-DQo+d2hpY2ggbWlnaHQgYmUgcHJvYmxlbWF0aWMuDQo+DQo+VXN1YWxseSBwZW9wbGUgaGFzIGEg
-a25vd2xlZGdlIGluIGEgc3BlY2lmaWMgYXJlYSBhbmQgdGhvc2UgcGVvcGxlDQo+dXN1YWxseSBh
-cmUgYXdhaXRlZCBmb3IgdGhlaXIgZmVlZGJhY2sgYmVmb3JlIG1lcmdpbmcgYW55dGhpbmcuDQo+
-DQo+LS0gDQo+T3RhdmlvIFNhbHZhZG9yICAgICAgICAgICAgICAgICAgICAgICAgICAgICBPLlMu
-IFN5c3RlbXMNCj5odHRwOi8vd3d3Lm9zc3lzdGVtcy5jb20uYnIgICAgICAgIGh0dHA6Ly9jb2Rl
-Lm9zc3lzdGVtcy5jb20uYnINCj5Nb2JpbGU6ICs1NSAoNTMpIDk5ODEtNzg1NCAgICAgICAgICAg
-IE1vYmlsZTogKzEgKDM0NykgOTAzLTk3NTANCj4tLSANCj5fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXw0KPk9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxp
-c3QNCj5PcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPmh0dHA6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVs
-DQoNClRoYW5rcyBPdGF2aW8uIEkganVzdCB3YW50IHRvIGJlIHN1cmUgdGhhdCBJoa9tIGNvbXBs
-eWluZyB3aXRoIHByb3RvY29sLg0KDQpEb25hbGQgUi4gUG9vbGUsIEpyLg0KUmVzZWFyY2ggRW5n
-aW5lZXINClZvaWNlOiAyMTAuNTIyLjMxMzEgfCBGYXg6IDIxMC41MjIuNDkzMQ0KVGFjdGljYWwg
-TmV0d29ya3MgJiBDb21tdW5pY2F0aW9ucyAodGFjdGljYWxuZXR3b3Jrcy5zd3JpLm9yZykNClNv
-dXRod2VzdCBSZXNlYXJjaCBJbnN0aXR1dGUgKFN3UkkpDQoNCg==
+--L7gbXl6dnBG3y424
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Thanks to 2 fixes from Paul were down to only couple recipes.
+
+As discussed on OEDAM today, I'll be more aggressive with removing, blackli=
+sting
+so today I'll send patch adding few PNBLACKLIST entries and inheriting blac=
+klist
+bbclass by default.
+
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+=3D=3D Failed tasks 2014-05-02 =3D=3D
+
+=3D=3D=3D common (4) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.b=
+b, do_compile
+    * meta-openembedded/meta-networking/recipes-support/lksctp-tools/lksctp=
+-tools_1.0.16.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb,=
+ do_configure
+
+=3D=3D=3D common-x86 (3) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_com=
+pile
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+=3D=3D=3D qemuarm (2) =3D=3D=3D
+    * openembedded-core/meta/recipes-bsp/grub/grub_git.bb, do_package
+    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
+o_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb, do_i=
+nstall
+    * meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libim=
+obiledevice_1.1.4.bb, do_configure
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||6     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140501_232147.log/
+|-
+||qemux86       ||7     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140502_003255.log/
+|-
+||qemux86_64    ||9     ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140502_031644.log/
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+--L7gbXl6dnBG3y424
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNkIhYACgkQN1Ujt2V2gBx0uQCfbVE3uGm2VceYImY8J7kOtkOa
+r/4AnRgY1EtLMe/oXluNgltrbYO8jacx
+=I4vJ
+-----END PGP SIGNATURE-----
+
+--L7gbXl6dnBG3y424--
