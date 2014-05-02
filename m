@@ -1,37 +1,36 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
-	[209.85.217.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 052B3606D5
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f47.google.com (mail-ee0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A74460173
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 May 2014 08:45:06 +0000 (UTC)
-Received: by mail-lb0-f173.google.com with SMTP id u14so360744lbd.4
+	Fri,  2 May 2014 13:17:07 +0000 (UTC)
+Received: by mail-ee0-f47.google.com with SMTP id b15so3154937eek.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 May 2014 01:45:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=6Yuge8n+ILRxx1I+11UA2mJR7hf4I4a77u2I83rz6So=;
-	b=cabfLj/562x0FpLS+GTxhJcEyu+KnAbHbJAzaRiPDrwB4rlv0By0PIS777PzegIauS
-	YSBjSD8kvSH4Nin7J+AiNDpYid6NNZSTS/mh5DTrD73NhO+vz8+K96Ge+3UaEnbT/NBp
-	lrBwj1YqAWn46o1g6tL6BsWrZKf9a+gROmD+Ljw37kxvGWjwT7FBQoWSlcowyXhXHIKH
-	PjLbw4rHgx52NxQBycL34n9WY+hAbMZZxo5+lVOaGB3NSXxz07a9qBJFOd7WmC2ND446
-	I2lYw+/+v89sxMoFdcG+xPRKjebNiD0hMu7bi3GRABkhNN3mQseAVV3tCeFl92YzDs4j
-	vuWQ==
-MIME-Version: 1.0
-X-Received: by 10.112.146.234 with SMTP id tf10mr10736515lbb.1.1399020307177; 
-	Fri, 02 May 2014 01:45:07 -0700 (PDT)
-Received: by 10.112.35.234 with HTTP; Fri, 2 May 2014 01:45:07 -0700 (PDT)
-In-Reply-To: <1399019890.12731.28.camel@ted>
-References: <1398986009-20163-1-git-send-email-andrea.adami@gmail.com>
-	<1399018873.12731.21.camel@ted>
-	<CAAQYJAtY33YvGL7RVYpBiKtOkt3OxV7h=XV0EyY8yovZwDFdtg@mail.gmail.com>
-	<1399019890.12731.28.camel@ted>
-Date: Fri, 2 May 2014 10:45:07 +0200
-Message-ID: <CAAQYJAuE69=Bg-F_=05FasU3EX0RD3n2bpDvU6vhsBYEBKh03w@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH] klcc_cross: move in target sysroot as crosscript
+	Fri, 02 May 2014 06:17:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1AoHejynEWzlKL6XSeGotbVbG+vxdsm3LtfM68nUkio=;
+	b=UFw7fVIeCiuTwmyBxDzvGkYHJE6VrEb8ATygNqBvpx6qgB4gO+coPCzLfV2MBHyx6u
+	zwaEMgM1+0d+5dDYOpyfae4BAfWqAL2izA/ez2VQJbzJYxFgf77iUDb8OOEYAbb7aUkA
+	Wnp8rp+vrf6cb6AP6FBIvcXkf5eHMPG/fsdfZRSJFA4UAyiG/G7Q16mV4IAL3Rxol4ik
+	0W2YQXIBzuHzds+Q0/eO/5pAeVyUgbv1tL42ix6ZyQhitmIJTDIqwJx92PoTvAcmWPrN
+	5FtgtZa2cjdOTCbHRadWn/1crmu92XPVx/2Xkn+OmStLVLbW4eoaxOnRRXRil6sIj6EF
+	XMjQ==
+X-Gm-Message-State: ALoCoQmuYeTS0/dp9Zjk8E69Z8wqzQBfbd0jj1WyCwgJqhE//gawglXJd7gdLkU55ywSOnIjiNhZ
+X-Received: by 10.14.115.195 with SMTP id e43mr15166790eeh.76.1399036628078;
+	Fri, 02 May 2014 06:17:08 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id z48sm4560623eel.27.2014.05.02.06.17.06
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 02 May 2014 06:17:07 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 May 2014 15:14:23 +0200
+Message-Id: <1399036463-13336-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-gnome][PATCH] gnome-control-center: let mime.bbclass handle /usr/share/mime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,42 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 May 2014 08:45:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 May 2014 13:17:12 -0000
 
-On Fri, May 2, 2014 at 10:38 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> On Fri, 2014-05-02 at 10:34 +0200, Andrea Adami wrote:
->> I probably misunderstand that part.
->>
->> I could not see any difference in the produced klcc.cross scripts with
->> or without the mangling.
->> Tested runtime on 3 machines.
->> What I did not yet try is a rebuild from sstate but I expect it to be rebuilt.
->
-> The easy way to reproduce a problem is to build for MACHINE=A and then
-> build for MACHINE=B where the two machines have the same architecture.
-> You will find that whilst it will switch the commented line at the top
-> to refer to the new machine, the encoded lines do not get changed.
->
+Delete generated files.
 
-I did exactly build for c7x0 and poodle, two armv5te, and armv4 collie.
-The 2nd line *and* the furter references to prefix et.al. were
-apparently correct.
-I'll retest.
+This fixes:
 
-> You would also find that if you run a build in dirA, then a build in
-> dirB using the sstate cache from dirA, the paths would reference dirA,
-> not dirB. After this change they will reference dirB.
->
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/version
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/mime.cache
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/treemagic
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/icons
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/generic-icons
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/types
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/aliases
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/subclasses
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/XMLnamespaces
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/magic
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/globs2
+        But that file is already provided by package  * shared-mime-info
+ * check_data_file_clashes: Package gnome-control-center wants to install file /build/v2014.06/build/tmp-angstrom_v2014_06-eglibc/work/beagleboard-angstrom-linux-gnueabi/development-gnome-image/1.0-r0/rootfs/usr/share/mime/globs
+        But that file is already provided by package  * shared-mime-info
 
-Ah, I was fully unaware of that ! I'm not reusing the sstate cache.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../gnome-control-center/gnome-control-center_2.32.1.bb            | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-> Cheers,
->
-> Richard
->
-Thanks
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
+index ee25c1e..aa24dc6 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.bb
+@@ -17,12 +17,17 @@ do_configure_prepend() {
+     sed -i s:help::g Makefile.am
+ }
+ 
++do_install_append() {
++    for generatedfile in XMLnamespaces aliases generic-icons globs globs2 icons magic mime.cache subclasses treemagic types version ; do
++        rm ${D}${datadir}/mime/$generatedfile
++    done
++}
++
+ FILES_${PN} += "${datadir}/icon* \
+                 ${datadir}/xsession* \
+                 ${libdir}/window-manager-settings/*.so \
+                 ${datadir}/gnome \
+                 ${datadir}/desktop-directories \
+-                ${datadir}/mime \
+ "
+ FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
+ FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
+-- 
+1.9.0
 
-Andrea
 
