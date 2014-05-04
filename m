@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id B5856601A8
+Received: from mail-vc0-f171.google.com (mail-vc0-f171.google.com
+	[209.85.220.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B7F66028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 May 2014 21:27:56 +0000 (UTC)
-Received: by mail-lb0-f171.google.com with SMTP id u14so4758225lbd.16
+	Sun,  4 May 2014 21:46:53 +0000 (UTC)
+Received: by mail-vc0-f171.google.com with SMTP id lc6so3030854vcb.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 May 2014 14:27:56 -0700 (PDT)
+	Sun, 04 May 2014 14:46:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fWS+LhpTmh2NDxQbh0QrrsVrktAh9OVPGA8THEbgCME=;
-	b=0hGamM2TlHmmWqWKnPvg/3R8cToOnTJwYmmv/k/B929Ea6s5vqnyrQks2atfhdTdW9
-	b8hK7T9Os4qfMCk9p66a4s+X37/Ema/JImzHuHaK5G0L2EBoE9eOH8sqjWCA5Ws/4hsD
-	WVq5b69bD/9PHNdXGK24lig8VbZTu+SL5WbqcHGlOhPFMYm7u9mnyUqk0LYtA3xq/+8k
-	+uL65KOmrwIEN2tk0TvBM6ZBJRZyzBXQAtraCD3h9qLRnpPpe1KrhznbVmQKoSNtrpk0
-	t4p+vEbuvt06BwmpJHxkK97Pl/sRZgX1TPzVFXIkCnis/uDGPN3JdKZXu+VsXeYiEcBc
-	jNZQ==
-X-Received: by 10.112.26.199 with SMTP id n7mr22571268lbg.27.1399238876707;
-	Sun, 04 May 2014 14:27:56 -0700 (PDT)
+	bh=gpazH6Xia/LfzyS0HAt9jng7gVgj7F3mK/JMIjS8qb0=;
+	b=H27a8SuXvzkwFydldLp05sXdJtSw5ki/opTijyjfR9njxm4Er0G2lCDC+mMpri/bHR
+	z5cGxtmJcmZeNob3QcqM6Lndu15J9H2sm9m+75+5BJ1P6pPK++suhpWL4T/a0xVRE04G
+	qFaGZ4N3WA3cv611+eD5kxzotu7X/+ZUCUKz5fK7AOiIQaWpSMwYe2bgBM6yABFNK5fq
+	GiK25IYxnr8Hx2MapFx7Om0BPvIYo41CeWKxY0km+H50PVqAkXJQu4zItBJEQZ+AnBiN
+	nzsdT00RvU6Z4y9sl6wR7eGqVoFH3PlaJW6CCoZ9b/ImftUUmOGGA/a2xzLHbocKHGnk
+	HEfw==
+X-Received: by 10.220.250.203 with SMTP id mp11mr24374690vcb.2.1399240014350; 
+	Sun, 04 May 2014 14:46:54 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	lc3sm6198476lab.7.2014.05.04.14.27.55
-	for <openembedded-devel@lists.openembedded.org>
+	un13sm13938578vdb.10.2014.05.04.14.46.52 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 04 May 2014 14:27:55 -0700 (PDT)
+	Sun, 04 May 2014 14:46:53 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 4 May 2014 23:28:14 +0200
+Date: Sun, 4 May 2014 23:47:12 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140504212814.GF2486@jama>
-References: <1398974461-3044-1-git-send-email-donald.poole@swri.org>
+Message-ID: <20140504214712.GG2486@jama>
+References: <1398698859-15011-1-git-send-email-otavio@ossystems.com.br>
 MIME-Version: 1.0
-In-Reply-To: <1398974461-3044-1-git-send-email-donald.poole@swri.org>
+In-Reply-To: <1398698859-15011-1-git-send-email-otavio@ossystems.com.br>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: Add install support for native builds
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH] qtbase.inc: Enable accessibility by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,104 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 May 2014 21:28:00 -0000
-X-Groupsio-MsgNum: 49686
+X-List-Received-Date: Sun, 04 May 2014 21:46:54 -0000
+X-Groupsio-MsgNum: 49687
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ko/wM9QIu/xrLSxa"
+	protocol="application/pgp-signature"; boundary="Vqhh7KwsSol0ht3S"
 Content-Disposition: inline
 
---ko/wM9QIu/xrLSxa
+--Vqhh7KwsSol0ht3S
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 01, 2014 at 03:01:01PM -0500, Donald R. Poole, Jr. wrote:
-> From: "Donald R. Poole, Jr" <donald (dot) poole (at) swri (dot) org>
+On Mon, Apr 28, 2014 at 12:27:39PM -0300, Otavio Salvador wrote:
+> qtdeclarative requires accessibility to be enabled and it is added by
+> default to the toolchain so we ought to have it enabled to ensure the
+> default toolchain generation works.
 >=20
-> Currently, if you are building native applications with Qt5, the current =
-qmake5_base_do_install() method assumes an install into the image folder fo=
-r the target. Since the native builds handle this a little differently, thi=
-s patch should account for the native install scenario.
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 > ---
->  classes/qmake5_base.bbclass |   37 ++++++++++++++++++++++---------------
->  1 file changed, 22 insertions(+), 15 deletions(-)
+>  recipes-qt/qt5/qtbase.inc |    2 ++
+>  1 file changed, 2 insertions(+)
 >=20
-> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-> index 18fdb2a..df8a59a 100644
-> --- a/classes/qmake5_base.bbclass
-> +++ b/classes/qmake5_base.bbclass
-> @@ -163,23 +163,30 @@ qmake5_base_do_configure () {
-> =20
->  qmake5_base_do_install() {
+> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+> index 89736be..91cadef 100644
+> --- a/recipes-qt/qt5/qtbase.inc
+> +++ b/recipes-qt/qt5/qtbase.inc
+> @@ -39,6 +39,7 @@ PACKAGECONFIG_X11 ?=3D "${@base_contains('DISTRO_FEATUR=
+ES', 'x11', 'xcb xvideo xsy
+>  PACKAGECONFIG_FONTS ?=3D ""
+>  PACKAGECONFIG_SYSTEM ?=3D "jpeg libpng zlib"
+>  PACKAGECONFIG_MULTIMEDIA ?=3D "${@base_contains('DISTRO_FEATURES', 'puls=
+eaudio', 'pulseaudio', '', d)}"
+> +PACKAGECONFIG_ACCESSIBILITY ?=3D "accessibility"
+>  PACKAGECONFIG_DISTRO ?=3D ""
+>  # Either release or debug, can be overridden in bbappends
+>  PACKAGECONFIG_RELEASE ?=3D "release"
+> @@ -56,6 +57,7 @@ PACKAGECONFIG ?=3D " \
+>      ${PACKAGECONFIG_FONTS} \
+>      ${PACKAGECONFIG_SYSTEM} \
+>      ${PACKAGECONFIG_MULTIMEDIA} \
+> +    ${PACKAGECONFIG_ACCESSIBILITY} \
+>      ${PACKAGECONFIG_DISTRO} \
+>  "
 
-I think it would be more readable if we use
-qmake5_base_do_install_class-target
-qmake5_base_do_install_class-native
-qmake5_base_do_install_class-nativesdk
+As I told you on gtalk, I would prefer default to stay as minimal as
+posible, why don't you change packagegroup-qt5-toolchain-target.bb to
+use RRECOMMENDS instead of RDEPENDS so that missing
+qtquickcontrols-qmlplugins package doesn't break it when it's not
+available (because it's empty)?
 
-instead of "${BUILD_SYS}" =3D "${HOST_SYS}" inline, can you please update
-patch that way and test it on your use-case? thanks
-
-
->      # Fix install paths for all
-> -    find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR=
-_TARGET},(INSTALL_ROOT),g"
-> +    if [ "${BUILD_SYS}" =3D "${HOST_SYS}" ] ; then
-> +        find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT),(INSTALL=
-_ROOT)${STAGING_DIR_NATIVE},g"
-> +    else
-> +        find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING=
-_DIR_TARGET},(INSTALL_ROOT),g"
-> +    fi
-> =20
->      oe_runmake install INSTALL_ROOT=3D${D}
-> =20
-> -    # everything except HostData and HostBinaries is prefixed with sysro=
-ot value,
-> -    # but we cannot remove sysroot override, because that's useful for p=
-kg-config etc
-> -    # In some cases like QtQmlDevTools in qtdeclarative, the sed above d=
-oes not work,
-> -    # fix them manually
-> -    if [ -d ${D}${STAGING_DIR_TARGET} ] && [ -n "${STAGING_DIR_TARGET}" =
-] ; then
-> -        echo "Some files are installed in wrong directory ${D}${STAGING_=
-DIR_TARGET}"
-> -        cp -ra ${D}${STAGING_DIR_TARGET}/* ${D}
-> -        rm -rf ${D}${STAGING_DIR_TARGET}
-> -        # remove empty dirs
-> -        TMP=3D`dirname ${D}/${STAGING_DIR_TARGET}`
-> -        while test ${TMP} !=3D ${D}; do
-> -            rmdir ${TMP}
-> -            TMP=3D`dirname ${TMP}`;
-> -        done
-> +    # Only do this for target builds. Native install work a little diffe=
-rently
-> +    if [ "${BUILD_SYS}" !=3D "${HOST_SYS}" ] ; then
-> +        # everything except HostData and HostBinaries is prefixed with s=
-ysroot value,
-> +        # but we cannot remove sysroot override, because that's useful f=
-or pkg-config etc
-> +        # In some cases like QtQmlDevTools in qtdeclarative, the sed abo=
-ve does not work,
-> +        # fix them manually
-> +        if [ -d ${D}${STAGING_DIR_TARGET} ] && [ -n "${STAGING_DIR_TARGE=
-T}" ] ; then
-> +            echo "Some files are installed in wrong directory ${D}${STAG=
-ING_DIR_TARGET}"
-> +            cp -ra ${D}${STAGING_DIR_TARGET}/* ${D}
-> +            rm -rf ${D}${STAGING_DIR_TARGET}
-> +            # remove empty dirs
-> +            TMP=3D`dirname ${D}/${STAGING_DIR_TARGET}`
-> +            while test ${TMP} !=3D ${D}; do
-> +                rmdir ${TMP}
-> +                TMP=3D`dirname ${TMP}`;
-> +            done
-> +        fi
->      fi
->  }
 > --=20
-> 1.7.9.5
+> 1.7.10.4
 >=20
 > --=20
 > _______________________________________________
@@ -156,16 +109,16 @@ ING_DIR_TARGET}"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ko/wM9QIu/xrLSxa
+--Vqhh7KwsSol0ht3S
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iEYEARECAAYFAlNmsO4ACgkQN1Ujt2V2gBwGjgCgrRqz9hNAKejcHpY+mQguWbup
-quUAoJzi1CTQ9WTil3S30mEqsc6+uzqJ
-=euXl
+iEYEARECAAYFAlNmtWAACgkQN1Ujt2V2gBwi1QCfeSimIueUgcEe/5/J9BPus4+i
+AR8An3SJb2fhxtW+rxK6UzSSvaq5lYag
+=LVLM
 -----END PGP SIGNATURE-----
 
---ko/wM9QIu/xrLSxa--
+--Vqhh7KwsSol0ht3S--
