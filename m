@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 32D4160D8D
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8837465F59
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 May 2014 21:48:46 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id w7so1234191lbi.37
+	Mon,  5 May 2014 22:02:24 +0000 (UTC)
+Received: by mail-lb0-f182.google.com with SMTP id q8so3208078lbi.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 14:48:47 -0700 (PDT)
+	Mon, 05 May 2014 15:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=lAqHJSOesQGlflYkcRNOKVrjdo+19nwKNAN88N4OLDI=;
-	b=wo14kbbIebQ20EvcBRyI5zg6Urq3RCDG52CBAKxxM3TRLuH0acMYbWOmQMqU0GthJ3
-	49ANmlYTHBNogMZkBTnP0Zfmnet1O5K9EP3giYbf4m/dvXz9Sl4wYBS5cS9S5ALFor8W
-	G6veJZvO6AbMOUz99hLXqPxLDpVoDwjbahyMTZA67AZq6nYzIsPHE28q3g/tE154uhzX
-	//O+ykqPNmioTBCcXMxR07AdxHjwIId+l+GmDOc2acIM6ut8a+HfOlRi6IZqYDX3bM+8
-	AkX/eNxmOui83doOumpF7nnn4JRTmKRyDwTIW3u9EqiDdyBMYYImheYd4FWG5fgUgKa2
-	Yk8g==
-X-Received: by 10.152.2.2 with SMTP id 2mr7583803laq.26.1399326527407;
-	Mon, 05 May 2014 14:48:47 -0700 (PDT)
+	bh=//kOmlFa0gN6n0aGWnPkB0GqTatyI/+XTK+MxjjrmeQ=;
+	b=Wtz4G99vvRDFHVrWvLYqDmoaxCtOKgxqGDg0o3yBF3CFE0lz6bG+vkk3pa+pHbhn/6
+	XsYx4WzN7Psq7VN8NyPQlkR8i9FVI9uKX1lt9Eb/jN3QW3xZzqC4RYlfw9rwOEXs81YQ
+	g3GFxtZFPJsee7DyJIOD/VYhVD9Nn5lr/ZvFrKB+nxT7N0785AxH+Uc4F9ffNIRCa91q
+	AK8NA+oWZE/VxLUiIuxjjIgmGIhRCn9NFkaVsM45j6pzJKDxq/fKkNT4XgCTZx/aXJ0G
+	Hxos3evHdQdH4VvGHI9R/PxrfnrRh6wWGq+ftK8j/rk8P2/oTomXoraO/DWvWzWMnN2W
+	z1tw==
+X-Received: by 10.112.171.67 with SMTP id as3mr27523610lbc.10.1399327344974;
+	Mon, 05 May 2014 15:02:24 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	jh4sm10884868lbb.26.2014.05.05.14.48.45 for <multiple recipients>
+	by mx.google.com with ESMTPSA id q2sm9444377laj.9.2014.05.05.15.02.23
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 May 2014 14:48:46 -0700 (PDT)
+	Mon, 05 May 2014 15:02:24 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 May 2014 23:49:04 +0200
-Message-Id: <1399326544-14297-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  6 May 2014 00:02:42 +0200
+Message-Id: <1399327362-17766-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.2
-Subject: [meta-oe][WIP][PATCH] libmusicbrainz: add dependency on neon-native
+Subject: [meta-oe][WIP][PATCH] daq: explicitly disable nfq and ipq modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,62 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 21:48:48 -0000
-
-* we're building separate native binary make-c-interface which is also checking
-  for neon with pkg-config, when it fails it's not fatal and configure continues
-  to configure target version (which finds neon correctly) but failed native
-  make-c-interface build resultsin this error:
-
-  -- Found PkgConfig: /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/pkg-config (found version "0.28")
-  -- checking for module 'neon'
-  --   found neon, version 0.30.0
-  CMake Error at /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake:108 (message):
-    Could NOT find Neon (missing: NEON_LIBRARIES)
-  Call Stack (most recent call first):
-    /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/cmake-2.8/Modules/FindPackageHandleStandardArgs.cmake:315 (_FPHSA_FAILURE_MESSAGE)
-    cmake/modules/FindNeon.cmake:19 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-    CMakeLists.txt:22 (FIND_PACKAGE)
-
-  -- Configuring incomplete, errors occurred!
-  See also "/OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/libmusicbrainz/5.0.1+gitAUTOINC+0749dd0a35-r1/git/build-native/CMakeFiles/CMakeOutput.log".
-  make: *** No rule to make target 'make-c-interface'.  Stop.
-  ...
-  -- Found PkgConfig: /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/pkg-config (found version "0.28")
-  -- checking for module 'neon'
-  --   found neon, version 0.30.0
-  -- Found Neon: /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/lib/libneon.so
-  CMake Error at src/CMakeLists.txt:19 (INCLUDE):
-    include could not find load file:
-    /OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/libmusicbrainz/5.0.1+gitAUTOINC+0749dd0a35-r1/git/build-native/ImportExecutables.cmake
-  -- Configuring incomplete, errors occurred!
+X-List-Received-Date: Mon, 05 May 2014 22:02:26 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/daq/daq_2.0.2.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-index 4cc04b8..a6a4f6a 100644
---- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "The MusicBrainz client is a library which can be built into other
- HOMEPAGE = "http://musicbrainz.org"
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
--DEPENDS = "expat neon"
-+DEPENDS = "expat neon neon-native"
+diff --git a/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
+index 0a25cd7..afed8cd 100644
+--- a/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
++++ b/meta-oe/recipes-connectivity/daq/daq_2.0.2.bb
+@@ -5,11 +5,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
  
- PV = "5.0.1+git${SRCPV}"
- PR = "r1"
-@@ -16,7 +16,6 @@ S = "${WORKDIR}/git"
+ PARALLEL_MAKE = ""
  
- LDFLAGS_prepend_libc-uclibc = " -lpthread "
+-DEPENDS = "libpcap libpcre "
++DEPENDS = "libpcap libpcre"
  
--
- inherit cmake pkgconfig
+ SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
+             file://disable-run-test-program-while-cross-compiling.patch "
  
- do_configure_prepend() {
++# these 2 create undeclared dependency on libdnet and libnetfilter-queue from meta-networking
++# this error from test-dependencies script:
++# daq/daq/latest lost dependency on  libdnet libmnl libnetfilter-queue libnfnetlink
++EXTRA_OECONF += "--disable-nfq-module --disable-ipq-module"
++
+ SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
+ SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
+ 
 -- 
 1.9.2
 
