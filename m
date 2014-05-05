@@ -1,37 +1,19 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 12468609BF
+Return-Path: <gizero-desktop@teamware.it>
+X-Greylist: delayed 1447 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 05 May 2014 08:09:38 UTC
+Received: from gizero-desktop.tw.it
+	(host168-65-static.12-87-b.business.telecomitalia.it [87.12.65.168])
+	by mail.openembedded.org (Postfix) with ESMTP id B04D265DDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 May 2014 08:02:37 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id f8so1284117wiw.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 01:02:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=DXro/Mux0RXNV8ZB2N0s0P/WwEMerbmpf8UyC711PjY=;
-	b=f9QGgL+3twd6c0cXL81r8+FA6vSVFnvKLYxdIugPN2y4v8VgBdh8TQfjzAYiIJcY0L
-	q1qDpKiD5yo9TNVcfaIoqyr3p+xsjDVDcGM44rQZItCy0xHHlYcS9ix1abLu6TOoyhHY
-	Kx39NfqMFZWTUYBYky7EQUu2IQ4jTuqVrC2fE8bwuM5+Hpuk/AswU2fjtUs67Ti3kSZy
-	iRMScZek4MXrNt3EHrITuZ2YH51Q430O+n7mzYBoP6bZ4+V2PTXFNbDR+PNK53OB0FK8
-	skE/DjKkB6Wxd1weJKiqL7d3r1h1uBNhur1UePIStQR09iEgeJ+YoA7hZlhNKE3Utf3s
-	oiOg==
-X-Gm-Message-State: ALoCoQlIP5fXeEJ/pAVelHVB9qBLUvs2N/bloM6owa6N20xopIQkpHW1/zf76sg72OfbDMp+aHeM
-X-Received: by 10.194.203.170 with SMTP id kr10mr26390950wjc.19.1399276958057; 
-	Mon, 05 May 2014 01:02:38 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id l4sm16125344wiy.0.2014.05.05.01.02.36
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 May 2014 01:02:37 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
+	Mon,  5 May 2014 08:09:38 +0000 (UTC)
+Received: by gizero-desktop.tw.it (Postfix, from userid 1000)
+	id 43F7AE0A26; Mon,  5 May 2014 09:45:29 +0200 (CEST)
+From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 May 2014 10:02:24 +0200
-Message-Id: <1399276944-918-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] php: fix do_installing when S!=B
+Date: Mon,  5 May 2014 09:45:23 +0200
+Message-Id: <1399275923-19242-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Subject: [meta-oe][PATCH] libconfig: inherit from autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +27,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 08:02:38 -0000
+X-List-Received-Date: Mon, 05 May 2014 08:09:39 -0000
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+do_compile fails otherwise
+
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
 ---
- meta-oe/recipes-devtools/php/php.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ .../recipes-extended/libconfig/libconfig_1.4.9.bb  |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index d5e53c0..b1bf79c 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -85,10 +85,10 @@ do_install_append_pn-php() {
-     install -d ${D}/${sysconfdir}/apache2/conf.d
-     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
-     install -d ${D}${sysconfdir}/init.d
--    sed -i 's:=/usr/sbin:=${sbindir}:g' ${S}/sapi/fpm/init.d.php-fpm
--    sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
--    sed -i 's:=/var:=${localstatedir}:g' ${S}/sapi/fpm/init.d.php-fpm
--    install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-+    sed -i 's:=/usr/sbin:=${sbindir}:g' ${B}/sapi/fpm/init.d.php-fpm
-+    sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
-+    sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
-+    install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-     TMP=`dirname ${D}/${TMPDIR}`
-     while test ${TMP} != ${D}; do
-         rmdir ${TMP}
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
+index c7d3cf7..22eecf8 100644
+--- a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
+ 
+ SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
+ 
+-inherit autotools pkgconfig
++inherit autotools-brokensep pkgconfig
+ 
+ SRC_URI[md5sum] = "b6ee0ce2b3ef844bad7cac2803a90634"
+ SRC_URI[sha256sum] = "09c8979252e60193e2969e9b0e1cd597f7820087867989b2f0939ad164473041"
 -- 
-1.9.0
+1.7.9.5
 
 
