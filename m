@@ -1,37 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
-	[209.85.213.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 41C7D6098C
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 943E365F38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 May 2014 12:20:59 +0000 (UTC)
-Received: by mail-yh0-f52.google.com with SMTP id a41so6286828yho.25
+	Mon,  5 May 2014 15:26:21 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id 19so5311155ykq.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 05:21:00 -0700 (PDT)
+	Mon, 05 May 2014 08:26:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=zu1z62Q6riSXtx1CWmJ5FTfXvaTjtxWXwHgo06UXf8Q=;
-	b=vczvIf38AVHOLlfwsH7DF/zpeSNfhc1Mdfsh/DdbRG+G2ORrOxQ/+AtUQamcpiizN+
-	iYeMwehxG413ZDL+d55PxPU/XqzmUxtsXg/t0leEM+KzCx7y3WN9eBlFb+gtMXiBWev2
-	l4KucqtLSFkRXkXzUffQGnbKQkkygmE89COQpa89bqRj239v2xwM5Qa4BacQB9uXSp47
-	b+g3lG6QJDw8G0e5qGBgVC709jBJOIv2A2mGqJv1eegI6uDgnYlJ7BQeK8y3r6lCCtw6
-	BpdXQSaDgA1y78wBq6b7efaBmJz0NpmAA1jE6zadgUn41wvDNAI2kNBYkX6fN9PfytB8
-	vdJQ==
-MIME-Version: 1.0
-X-Received: by 10.236.189.198 with SMTP id c46mr47724423yhn.47.1399292460718; 
-	Mon, 05 May 2014 05:21:00 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.132 with HTTP; Mon, 5 May 2014 05:21:00 -0700 (PDT)
-In-Reply-To: <20140504214712.GG2486@jama>
-References: <1398698859-15011-1-git-send-email-otavio@ossystems.com.br>
-	<20140504214712.GG2486@jama>
-Date: Mon, 5 May 2014 09:21:00 -0300
-X-Google-Sender-Auth: 3eGa-fL4VdEz-IKT7cN5i55AE1Y
-Message-ID: <CAP9ODKpL+SMvus2o_kY_-gYgxu95E3ahiBsKwFQxQGn93f69ug@mail.gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=h3YbK/kPHqeZzqZNI8wz2dgf5caGQ9E1PYbbDFJ3tp8=;
+	b=1IdqkXOEAqbBbUt3IZfrX7OGtgjff/9Plx3PmN/ZwVWCfPqd6svmqrjt2xh9pvjPRx
+	b72OyiI6QjdwovZ3bNL2/hvhUCYC5VGSn0bAdSzshS6NsPV5U93KNpFkOa86nifCKuOn
+	kRLQtG7ylv5zIkcRnj+NVrZOSjW1hjnYcCa6c8iYD/vWucJUFTlOGd7oQzZ7IL0U6woe
+	6fiLxEqZZW7H7CSyXFGkj9ZKltIB84jx5r3TaO86zXNmBBAdbfRl0o/Nl0YjXTeaabC5
+	b90oCgeU/KZCfvMPcsMmZEm+fBP8P8J5jQCOh/ti+68KzPy5V93BaJNmfO3r3r+9Kktd
+	iH6w==
+X-Received: by 10.236.84.98 with SMTP id r62mr49295392yhe.9.1399303582694;
+	Mon, 05 May 2014 08:26:22 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.194.208.225])
+	by mx.google.com with ESMTPSA id f62sm16142567yhq.6.2014.05.05.08.26.21
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 05 May 2014 08:26:22 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id D8A161AA20AB6; Mon,  5 May 2014 12:26:18 -0300 (BRT)
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtbase.inc: Enable accessibility by default
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon,  5 May 2014 12:26:18 -0300
+Message-Id: <1399303578-20354-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.0.0.rc0
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH] dbench: Fix out of tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 12:21:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 05 May 2014 15:26:25 -0000
 
-On Sun, May 4, 2014 at 6:47 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Mon, Apr 28, 2014 at 12:27:39PM -0300, Otavio Salvador wrote:
->> qtdeclarative requires accessibility to be enabled and it is added by
->> default to the toolchain so we ought to have it enabled to ensure the
->> default toolchain generation works.
->>
->> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-...
-> As I told you on gtalk, I would prefer default to stay as minimal as
-> posible, why don't you change packagegroup-qt5-toolchain-target.bb to
-> use RRECOMMENDS instead of RDEPENDS so that missing
-> qtquickcontrols-qmlplugins package doesn't break it when it's not
-> available (because it's empty)?
+This fixes the Makefile so the client.txt file is copied from the
+original source tree. This fixes the out of tree build error.
 
-I don't have a strong opinion for either case however I think we ought
-to know what other meta-qt5 users think about it.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-benchmark/dbench/files/destdir.patch  | 4 ++--
+ meta-oe/recipes-benchmark/dbench/files/makefile.patch | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-In support to this patch addition I think we ought to provide the most
-used features of Qt5 working out of box to users have a good first
-use. Special cases can customize it per need basis. I think QML is
-common enough for us to provide full support for it by default.
-
+diff --git a/meta-oe/recipes-benchmark/dbench/files/destdir.patch b/meta-oe/recipes-benchmark/dbench/files/destdir.patch
+index ca9a8ee..4cd2a35 100644
+--- a/meta-oe/recipes-benchmark/dbench/files/destdir.patch
++++ b/meta-oe/recipes-benchmark/dbench/files/destdir.patch
+@@ -19,8 +19,8 @@ Index: dbench-3.04/Makefile.in
+ -	ln -sf dbench.1 $(mandir)/tbench_srv.1
+ +	${INSTALLCMD} -d $(DESTDIR)$(bindir) $(DESTDIR)$(datadir) $(DESTDIR)$(mandir)
+ +	${INSTALLCMD} dbench tbench tbench_srv $(DESTDIR)$(bindir)
+-+	${INSTALLCMD} client.txt $(DESTDIR)$(datadir)
+-+	${INSTALLCMD} -m644 dbench.1 $(DESTDIR)$(mandir)
+++	${INSTALLCMD} @top_srcdir@/client.txt $(DESTDIR)$(datadir)
+++	${INSTALLCMD} -m644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
+ +	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench.1
+ +	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench_srv.1
+  
+diff --git a/meta-oe/recipes-benchmark/dbench/files/makefile.patch b/meta-oe/recipes-benchmark/dbench/files/makefile.patch
+index 09d619a..11fb4ff 100644
+--- a/meta-oe/recipes-benchmark/dbench/files/makefile.patch
++++ b/meta-oe/recipes-benchmark/dbench/files/makefile.patch
+@@ -10,9 +10,9 @@ Index: dbench-4.0/Makefile.in
+ @@ -35,7 +35,7 @@ install: all
+  	${INSTALLCMD} -d $(DESTDIR)$(bindir) $(DESTDIR)$(datadir) $(DESTDIR)$(mandir)
+  	${INSTALLCMD} dbench tbench tbench_srv $(DESTDIR)$(bindir)
+- 	${INSTALLCMD} client.txt $(DESTDIR)$(datadir)
+--	${INSTALLCMD} -m644 dbench.1 $(DESTDIR)$(mandir)
+-+	${INSTALLCMD} -m 644 dbench.1 $(DESTDIR)$(mandir)
++ 	${INSTALLCMD} @top_srcdir@/client.txt $(DESTDIR)$(datadir)
++-	${INSTALLCMD} -m644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
+++	${INSTALLCMD} -m 644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
+  	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench.1
+  	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench_srv.1
+  
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.0.0.rc0
+
 
