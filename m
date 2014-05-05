@@ -1,37 +1,37 @@
-Return-Path: <smennetrier@connected-labs.com>
-Received: from mail-oa0-f52.google.com (mail-oa0-f52.google.com
-	[209.85.219.52])
-	by mail.openembedded.org (Postfix) with ESMTP id BA25165DDE
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 41C7D6098C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 May 2014 09:30:51 +0000 (UTC)
-Received: by mail-oa0-f52.google.com with SMTP id o6so1158470oag.39
+	Mon,  5 May 2014 12:20:59 +0000 (UTC)
+Received: by mail-yh0-f52.google.com with SMTP id a41so6286828yho.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 02:30:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=i3SiXum7omATbsnAyJnBff8QNxElxDGSNRHgb3nuI0c=;
-	b=K086VG6xDH4j5UDiJwhGBQsNFMe9Jq9YTJ+hA/o+2WwhKGAAmpfUjLStU7A2A+MgXx
-	RwwSFW4DJqh06v5/4suILm7QNw9KUQfQDeh3woZMtauEXjumjqsMblhYO2J1JUm5mg1g
-	gLXmoJ9bj1EqQkHVPlm8TQ343OJOmjoGbBrdonR8sVtEwgDndEuLy9ubnVfAGSpf7tu5
-	a+LuC0z+YuEMS8R+PAKHMavxUD6Y3vqc155S2iy6vg9cGr17rKoHFKt4rcIlAsjjEyWP
-	AI27ayRZFmxOw/OZwHqyrFnYOzLBB30N0RXjs3DjFt6/enHVMM4j2jgPPZijHFKoss6a
-	rnJQ==
-X-Gm-Message-State: ALoCoQmqhCVO5Ua9T32O+1KGE/KwwQJ7p/EFOuT6b8xo2feU1/UuOUmixFuEe+eZ50ImuQaGxkTd
+	Mon, 05 May 2014 05:21:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=zu1z62Q6riSXtx1CWmJ5FTfXvaTjtxWXwHgo06UXf8Q=;
+	b=vczvIf38AVHOLlfwsH7DF/zpeSNfhc1Mdfsh/DdbRG+G2ORrOxQ/+AtUQamcpiizN+
+	iYeMwehxG413ZDL+d55PxPU/XqzmUxtsXg/t0leEM+KzCx7y3WN9eBlFb+gtMXiBWev2
+	l4KucqtLSFkRXkXzUffQGnbKQkkygmE89COQpa89bqRj239v2xwM5Qa4BacQB9uXSp47
+	b+g3lG6QJDw8G0e5qGBgVC709jBJOIv2A2mGqJv1eegI6uDgnYlJ7BQeK8y3r6lCCtw6
+	BpdXQSaDgA1y78wBq6b7efaBmJz0NpmAA1jE6zadgUn41wvDNAI2kNBYkX6fN9PfytB8
+	vdJQ==
 MIME-Version: 1.0
-X-Received: by 10.182.120.5 with SMTP id ky5mr30068601obb.11.1399282252240;
-	Mon, 05 May 2014 02:30:52 -0700 (PDT)
-Received: by 10.182.4.166 with HTTP; Mon, 5 May 2014 02:30:52 -0700 (PDT)
-X-Originating-IP: [94.103.137.126]
-In-Reply-To: <1398765982-22532-1-git-send-email-mburtin@connected-labs.com>
-References: <1398765982-22532-1-git-send-email-mburtin@connected-labs.com>
-Date: Mon, 5 May 2014 11:30:52 +0200
-Message-ID: <CAKCtLPyY4Mm9pORtYTJ6Exrt956W9O13r0SserUbvkHeG98MWA@mail.gmail.com>
-From: =?UTF-8?Q?S=C3=A9bastien_Mennetrier?= <smennetrier@connected-labs.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-ruby][PATCH] ruby: remove obsolete extmk_run.patch
+X-Received: by 10.236.189.198 with SMTP id c46mr47724423yhn.47.1399292460718; 
+	Mon, 05 May 2014 05:21:00 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.166.132 with HTTP; Mon, 5 May 2014 05:21:00 -0700 (PDT)
+In-Reply-To: <20140504214712.GG2486@jama>
+References: <1398698859-15011-1-git-send-email-otavio@ossystems.com.br>
+	<20140504214712.GG2486@jama>
+Date: Mon, 5 May 2014 09:21:00 -0300
+X-Google-Sender-Auth: 3eGa-fL4VdEz-IKT7cN5i55AE1Y
+Message-ID: <CAP9ODKpL+SMvus2o_kY_-gYgxu95E3ahiBsKwFQxQGn93f69ug@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtbase.inc: Enable accessibility by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,90 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 09:30:53 -0000
+X-List-Received-Date: Mon, 05 May 2014 12:21:02 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Sun, May 4, 2014 at 6:47 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Apr 28, 2014 at 12:27:39PM -0300, Otavio Salvador wrote:
+>> qtdeclarative requires accessibility to be enabled and it is added by
+>> default to the toolchain so we ought to have it enabled to ensure the
+>> default toolchain generation works.
+>>
+>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+...
+> As I told you on gtalk, I would prefer default to stay as minimal as
+> posible, why don't you change packagegroup-qt5-toolchain-target.bb to
+> use RRECOMMENDS instead of RDEPENDS so that missing
+> qtquickcontrols-qmlplugins package doesn't break it when it's not
+> available (because it's empty)?
 
-There are the same failure on dora branch. Is it possible to apply this
-patch on dora branch ?
+I don't have a strong opinion for either case however I think we ought
+to know what other meta-qt5 users think about it.
 
-Thanks
+In support to this patch addition I think we ought to provide the most
+used features of Qt5 working out of box to users have a good first
+use. Special cases can customize it per need basis. I think QML is
+common enough for us to provide full support for it by default.
 
-Regards,
-S=C3=A9bastien
-
-
-2014-04-29 12:06 GMT+02:00 Micha=C3=ABl Burtin <mburtin@connected-labs.com>=
-:
-
-> This patch does nothing except causing failures from the second build in
-> the same working directory.
->
-> Signed-off-by: Micha=C3=ABl Burtin <mburtin@connected-labs.com>
-> ---
->  meta-ruby/recipes-devtools/ruby/ruby.inc             |  1 -
->  meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch | 15 --------------=
--
->  2 files changed, 16 deletions(-)
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
->
-> diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc
-> b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> index 837e52b..e679f27 100644
-> --- a/meta-ruby/recipes-devtools/ruby/ruby.inc
-> +++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> @@ -21,7 +21,6 @@ INC_PR =3D "r1"
->
->  SHRT_VER =3D
-> "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).s=
-plit('.')[1]}"
->  SRC_URI =3D "
-> http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
-> -           file://extmk_run.patch \
->             file://extmk.patch \
->  "
->
-> diff --git a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
-> b/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
-> deleted file mode 100644
-> index 57926f5..0000000
-> --- a/meta-ruby/recipes-devtools/ruby/ruby/extmk_run.patch
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> ---- packages/ruby/ruby-1.8.5/extmk_run.patch
-> d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
-> -+++ packages/ruby/ruby-1.8.5/extmk_run.patch
-> d9738b5a71e2f9a98d009af9fd0ef1ceaff9ef48
-> -@@ -0,0 +1,11 @@
-> -+--- ruby-1.8.5/common.mk.orig 2006-12-30 13:07:32.000000000 +1100
-> -++++ ruby-1.8.5/common.mk      2006-12-30 13:08:32.000000000 +1100
-> -+@@ -56,7 +56,7 @@
-> -+              --make=3D"$(MAKE)" \
-> -+              --mflags=3D"$(MFLAGS)" \
-> -+              --make-flags=3D"$(MAKEFLAGS)"
-> -+-EXTMK_ARGS    =3D      $(SCRIPT_ARGS) --extout=3D"$(EXTOUT)" --extensi=
-on
-> $(EXTS) --extstatic $(EXTSTATIC) --
-> -++EXTMK_ARGS    =3D      $(SCRIPT_ARGS) --with-ldflags=3D"%%TARGET_LDFLA=
-GS%%"
-> --with-cflags=3D"%%TARGET_CFLAGS%%" --extout=3D"$(EXTOUT)" --extension $(=
-EXTS)
-> --extstatic $(EXTSTATIC) --
-> -+
-> -+ all: $(MKFILES) $(PREP) $(RBCONFIG) $(LIBRUBY)
-> -+      @$(MINIRUBY) $(srcdir)/ext/extmk.rb $(EXTMK_ARGS)
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
