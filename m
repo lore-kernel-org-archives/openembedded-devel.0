@@ -1,19 +1,33 @@
-Return-Path: <gizero-desktop@teamware.it>
-X-Greylist: delayed 1447 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 05 May 2014 08:09:38 UTC
-Received: from gizero-desktop.tw.it
-	(host168-65-static.12-87-b.business.telecomitalia.it [87.12.65.168])
-	by mail.openembedded.org (Postfix) with ESMTP id B04D265DDB
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-oa0-f47.google.com (mail-oa0-f47.google.com
+	[209.85.219.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2242960650
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 May 2014 08:09:38 +0000 (UTC)
-Received: by gizero-desktop.tw.it (Postfix, from userid 1000)
-	id 43F7AE0A26; Mon,  5 May 2014 09:45:29 +0200 (CEST)
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 May 2014 09:45:23 +0200
-Message-Id: <1399275923-19242-1-git-send-email-gizero@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] libconfig: inherit from autotools-brokensep
+	Mon,  5 May 2014 08:46:21 +0000 (UTC)
+Received: by mail-oa0-f47.google.com with SMTP id i7so2016153oag.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 May 2014 01:46:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=ziCwCh258h2lTabsZr0/ThFgiTOengTD0pJkshTUGT4=;
+	b=iCTEidAvEiLK2p4HFxP5egWjaGa3UOIMa2jlGXFCMBQy8RS6gwO76V2k2CxNmegm9l
+	KIHwc+swG+GC7Dz6dA67I0VldKMG3fyiVTjY5EX5xGt26R6uuvmykJxNLpceqh18J5zQ
+	7ToaxfAEu3tEsw8UOXqKBbpy5tdC1iFZee35caPdyjOJNODID7g90mRUvkvX0rRVj3VG
+	pkk7iZRS/fzbGhnjtf4xGiEFnyC6ljOe3DMWK8rlYKAeyEl5J/uzwFVZn1RbQbRr/k5p
+	zv2UgfL8x2cqhXSX1ruepsiFMYce+kJZ9XYM58yrv/tsNaw2vsiFxiezU1Eqn7V6INj9
+	OWtQ==
+X-Received: by 10.182.225.163 with SMTP id rl3mr395751obc.79.1399279582440;
+	Mon, 05 May 2014 01:46:22 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.60.12.73 with HTTP; Mon, 5 May 2014 01:46:02 -0700 (PDT)
+In-Reply-To: <5364B398.5000802@embed.me.uk>
+References: <5364B398.5000802@embed.me.uk>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Mon, 5 May 2014 10:46:02 +0200
+Message-ID: <CAGiJk9dtWLypbYXsAANn01x5kmmX2=HXGoX7+G66jGp4eaLKxg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Website Text
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,29 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 May 2014 08:09:39 -0000
+X-List-Received-Date: Mon, 05 May 2014 08:46:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-do_compile fails otherwise
+2014-05-03 11:15 GMT+02:00 Jack Mitchell <martin.jansa@gmail.com>:
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
----
- .../recipes-extended/libconfig/libconfig_1.4.9.bb  |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> * Support/Advantages/Available Recipes
+>
+>         - General input; can you think of any better subheadings or things
+> we should be advertising?
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-index c7d3cf7..22eecf8 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
- SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
- 
--inherit autotools pkgconfig
-+inherit autotools-brokensep pkgconfig
- 
- SRC_URI[md5sum] = "b6ee0ce2b3ef844bad7cac2803a90634"
- SRC_URI[sha256sum] = "09c8979252e60193e2969e9b0e1cd597f7820087867989b2f0939ad164473041"
+Hi,
+
+KDE desktop is not really "supported", it is at a stale tech preview stage.
+Since my priorities have been shifted, there is no time to look into a
+KDE Frameworks 5 port.
+(Patches are welcome, but it may be easier to just fork the layer).
+
+
 -- 
-1.7.9.5
-
+Regards
+Samuel
 
