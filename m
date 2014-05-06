@@ -1,41 +1,41 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-X-Greylist: delayed 423 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 06 May 2014 13:14:56 UTC
-Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
-	[193.109.254.107])
-	by mail.openembedded.org (Postfix) with ESMTP id ED69165FDC
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
+	[209.85.217.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 74D1465F94
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 13:14:56 +0000 (UTC)
-Received: from [85.158.140.195:30419] by server-3.bemta-14.messagelabs.com id
-	94/72-22179-9AED8635; Tue, 06 May 2014 13:07:53 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-13.tower-193.messagelabs.com!1399381638!11876832!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 17178 invoked from network); 6 May 2014 13:07:18 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-13.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
-	6 May 2014 13:07:18 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Tue, 6 May 2014
-	14:07:17 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 May 2014 14:07:16 +0100
-Thread-Topic: Fix for libxml++_ptest.patch with out-of-source build
-Thread-Index: Ac9pK4mbW4sFdOQsQFSIp5+yt9wqjg==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0@GBTWK10E001.Technology.local>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue,  6 May 2014 13:52:42 +0000 (UTC)
+Received: by mail-lb0-f172.google.com with SMTP id l4so3060167lbv.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 May 2014 06:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=cT+aBMJAfIUaKiA8xpI8qNq/kzD9yzw0IGYsOomY7ZM=;
+	b=vVKoDytfW8TnyWQm8mYdhPrG7LmmkRrmA1MWc4H5fmGkUqtI7xYIsjlXeKHc7X7MPf
+	etW6s/jCdS9jGfdiAxm8rn9uFxDbNuP6xiYej2o66yKKft+HkYM3zz7BD8tnX9hpptwk
+	Rl32R2Ta5DkZE+7d/eRyCrrNCKl7txyySMvLZPNv75HpFAfk/WfyMIhlr7n/mh69HWXK
+	hX9Op/+7GQJYN61i79YQjC1fvjRbAiUXAziRPKH+b50kglqbxE3NxF85S7IrzBrmuCcX
+	Lqla/54FwM9aQQmChiYmMPVfhALXiIDuix8sySKHP28uKSGUz9PJvK1TDG07BlNeGv4m
+	x0Zw==
 MIME-Version: 1.0
+X-Received: by 10.112.135.39 with SMTP id pp7mr5298496lbb.29.1399384363065;
+	Tue, 06 May 2014 06:52:43 -0700 (PDT)
+Received: by 10.114.216.4 with HTTP; Tue, 6 May 2014 06:52:42 -0700 (PDT)
+In-Reply-To: <CANx9H-C2Yar=x3FT+RassRP8siEzwwWf9ULD_X56rhS3ZHHDtw@mail.gmail.com>
+References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
+	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
+	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
+	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
+	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
+	<53547FB6.5040609@windriver.com>
+	<CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
+	<53548B00.5000700@windriver.com> <53548CDA.4000804@windriver.com>
+	<CANx9H-C2Yar=x3FT+RassRP8siEzwwWf9ULD_X56rhS3ZHHDtw@mail.gmail.com>
+Date: Tue, 6 May 2014 06:52:42 -0700
+Message-ID: <CANx9H-D_mGE+=bXxFE8RbtncCLe37AkYMsyXU4ZH+bSC+_T4aw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Fix for libxml++_ptest.patch with out-of-source build
+Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,86 +49,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 13:14:58 -0000
-X-Groupsio-MsgNum: 49716
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0GBTWK10E001Te_"
+X-List-Received-Date: Tue, 06 May 2014 13:52:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
---_004_AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0GBTWK10E001Te_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Apr 23, 2014 at 9:10 AM, Tim Orling <ticotimo@gmail.com> wrote:
 
-The libxml++_ptest.patch currently supplied with the libxml++ recipe does n=
-ot produce a Makefile that works for out-of-source builds. Please find atta=
-ched a patch that resolves this problem
+> --Turns out to not be quite so simple. Module::Metadata is not ever being
+> created by perl_*.bb. This is somewhat surprising because Module::Build
+> needs Module::Metadata and this has been missed in
+> Cross/configure.sh-arm-linux since perl v5.13.9.
+> --You can verify this by running "perl -mModule::Build" on qemuarm/arm
+> target.
+> --I am working on a patch for oe-core.
+>
 
-Apologies
-Nick
+Fixed in (and this patch superseded by)
+http://patches.openembedded.org/patch/71565/
 
-Nick Lewis
-nick.lewis@usa.g4s.com<mailto:nick.lewis@usa.g4s.com>
-+44 1684 277137<tel:+441684277137>
-www.g4stechnology.com<http://www.g4stechnology.com/>
-New Challenge House, International Drive, Tewkesbury, Gloucestershire, GL20=
- 8UQ, UK
+>
+> On Sun, Apr 20, 2014 at 8:13 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
+>
+>> On 04/21/2014 11:05 AM, Hongxu Jia wrote:
+>>
+>>> On 04/21/2014 11:01 AM, Tim Orling wrote:
+>>>
+>>>> On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>
+>>>> wrote:
+>>>>
+>>>>  On 04/21/2014 04:19 AM, Tim Orling wrote:
+>>>>>
+>>>>>  (1) I am thinking about dropping this patch. perl-native provides
+>>>>>> Module::Metadata 1.00004, so if subsequent packages are being
+>>>>>> cross-compiled I have not yet proven there is a need for the updated
+>>>>>> v1.000019 provided here.
+>>>>>>
+>>>>>> (2) The question is, if one wanted to build subsequent packages
+>>>>>> in-situ,
+>>>>>> how to provide Module::Metadata 1.00004 on a target system, since it
+>>>>>> is
+>>>>>> only provided by perl-native?
+>>>>>>
+>>>>>>  It is also provided by perl, for target.
+>>>>>
+>>>>> //Hongxu
+>>>>>
+>>>>>
+>>>>>  I am not seeing it. Am I missing something?
+>>>>
+>>>
+>>>
+>>> Hi Tim,
+>>>
+>>> I am afraid Module::Metadataj is not in perl by default, you need
+>>> to tweak poky/meta/recipes-devtools/perl/perl_5.14.3.bb, to create
+>>> a new package for Module::Metadata, you could reference what
+>>> 'perl-module-cpan' did, such as:
+>>> ...
+>>> PACKAGES += "perl-module-metadata"
+>>> FILES_perl-module-metadata += ">>the files you need<<"
+>>> ...
+>>>
+>>
+>> You also need tweak do_install, to install Metadata.pm from ${S}
+>> to ${D}, the default do_install did not do that.
+>>
+>> //Hongxu
+>>
+>>
+>>
+>>> And add 'perl-module-metadata' to your recipes's RDEPENDS.
+>>>
+>>> //Hongxu
+>>>
+>>>
+>>>> root@beaglebone:~# perl -mModule::Metadata
+>>>>
+>>>> Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
+>>>> /usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
+>>>> /usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
+>>>> /usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
+>>>> /usr/lib/perl/5.14.3 .).
+>>>>
+>>>> BEGIN failed--compilation aborted.
+>>>>
+>>>>  --Tim
+>>>>>> --
+>>>>>>
+>>>>>>  --
+>>>>> _______________________________________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>
+>>>>>
+>>>
+>>
+>
 
-P Please consider the environment before printing this email
-
-
-________________________________
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
-
---_004_AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0GBTWK10E001Te_
-Content-Type: application/octet-stream;
-	name="0001-Fix-libxml-_ptest.patch-with-out-of-source-build.patch"
-Content-Description: 0001-Fix-libxml-_ptest.patch-with-out-of-source-build.patch
-Content-Disposition: attachment;
-	filename="0001-Fix-libxml-_ptest.patch-with-out-of-source-build.patch";
-	size=1247; creation-date="Tue, 06 May 2014 14:01:32 GMT";
-	modification-date="Tue, 06 May 2014 13:57:48 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSA2NmI1NzI2MDE2NGU2Y2Y0ODZiZDdmN2YyNmM0MTExMmU2MDNkZmQ4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBOaWNrIExld2lzIDxuaWNrLmxld2lzQHVzYS5nNHMuY29tPgpE
-YXRlOiBUdWUsIDYgTWF5IDIwMTQgMTM6Mzg6MDQgKzAxMDAKU3ViamVjdDogW1BBVENIXSBGaXgg
-bGlieG1sKytfcHRlc3QucGF0Y2ggd2l0aCBvdXQtb2Ytc291cmNlIGJ1aWxkCgotLS0KIG1ldGEt
-b2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRlc3QucGF0
-Y2ggfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25z
-KC0pCgpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIu
-MzcuMS9saWJ4bWwrK19wdGVzdC5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9s
-aWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRlc3QucGF0Y2gKaW5kZXggYTE4ODIyZi4uMWU4NDdi
-ZSAxMDA2NDQKLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcu
-MS9saWJ4bWwrK19wdGVzdC5wYXRjaAorKysgYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwv
-bGlieG1sKystMi4zNy4xL2xpYnhtbCsrX3B0ZXN0LnBhdGNoCkBAIC02NSw5ICs2NSw5IEBAIGlu
-ZGV4IGQ5NTQxY2EuLmMyOGI0OWMgMTAwNjQ0CiArCSQoTUtESVJfUCkgJChERVNURElSKS9leGFt
-cGxlcwogKwljcCAtLXBhcmVudHMgJChjaGVja19ET1RMSUJTKSAkKERFU1RESVIpL2V4YW1wbGVz
-CiArCWNwIC0tcGFyZW50cyAkKGNoZWNrX1NDUklQVFMpICQoREVTVERJUikvZXhhbXBsZXMKLSsJ
-Y3AgLS1wYXJlbnRzICQoZGlzdF9ub2luc3RfREFUQSkgJChERVNURElSKS9leGFtcGxlcworKwkk
-KGZvcmVhY2ggaSwgJChkaXN0X25vaW5zdF9EQVRBKSwgY3AgLS1wYXJlbnRzICQoc3JjZGlyKS8k
-KGkpICQoREVTVERJUikvZXhhbXBsZXM7KQogKwljcCBNYWtlZmlsZSAkKERFU1RESVIpL2V4YW1w
-bGVzCiArCSQoTUtESVJfUCkgJChERVNURElSKS9tYWNyb3MKLSsJY3AgLi4vbWFjcm9zL3Rlc3Qt
-ZHJpdmVyICQoREVTVERJUikvbWFjcm9zCisrCWNwICQoc3JjZGlyKS8uLi9tYWNyb3MvdGVzdC1k
-cml2ZXIgJChERVNURElSKS9tYWNyb3MKICsJc2VkIC1pIC1lICdzfF5NYWtlZmlsZTp8X01ha2Vm
-aWxlOnwnICQoREVTVERJUikvZXhhbXBsZXMvTWFrZWZpbGUKICsKLS0gCjEuOS4xCgo=
-
---_004_AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0GBTWK10E001Te_--
