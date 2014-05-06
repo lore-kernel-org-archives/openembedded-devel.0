@@ -1,41 +1,40 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 74D1465F94
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
+	[209.85.217.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 2049D65FD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 13:52:42 +0000 (UTC)
-Received: by mail-lb0-f172.google.com with SMTP id l4so3060167lbv.3
+	Tue,  6 May 2014 15:21:36 +0000 (UTC)
+Received: by mail-lb0-f176.google.com with SMTP id p9so2610176lbv.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 May 2014 06:52:43 -0700 (PDT)
+	Tue, 06 May 2014 08:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=cT+aBMJAfIUaKiA8xpI8qNq/kzD9yzw0IGYsOomY7ZM=;
-	b=vVKoDytfW8TnyWQm8mYdhPrG7LmmkRrmA1MWc4H5fmGkUqtI7xYIsjlXeKHc7X7MPf
-	etW6s/jCdS9jGfdiAxm8rn9uFxDbNuP6xiYej2o66yKKft+HkYM3zz7BD8tnX9hpptwk
-	Rl32R2Ta5DkZE+7d/eRyCrrNCKl7txyySMvLZPNv75HpFAfk/WfyMIhlr7n/mh69HWXK
-	hX9Op/+7GQJYN61i79YQjC1fvjRbAiUXAziRPKH+b50kglqbxE3NxF85S7IrzBrmuCcX
-	Lqla/54FwM9aQQmChiYmMPVfhALXiIDuix8sySKHP28uKSGUz9PJvK1TDG07BlNeGv4m
-	x0Zw==
-MIME-Version: 1.0
-X-Received: by 10.112.135.39 with SMTP id pp7mr5298496lbb.29.1399384363065;
-	Tue, 06 May 2014 06:52:43 -0700 (PDT)
-Received: by 10.114.216.4 with HTTP; Tue, 6 May 2014 06:52:42 -0700 (PDT)
-In-Reply-To: <CANx9H-C2Yar=x3FT+RassRP8siEzwwWf9ULD_X56rhS3ZHHDtw@mail.gmail.com>
-References: <1391410275-31251-1-git-send-email-ticotimo@gmail.com>
-	<1391410275-31251-2-git-send-email-ticotimo@gmail.com>
-	<CANx9H-CJwYaWGe7y1kt7zLzgFTOumB=dy7BZMEf-5U=5L4=d1g@mail.gmail.com>
-	<1791318.0sP5eWebrA@peggleto-mobl5.ger.corp.intel.com>
-	<CANx9H-DrUWLKp95ouOZZThCTqdgmdFHdD5aoXA4E3ZHsK9Wdyg@mail.gmail.com>
-	<53547FB6.5040609@windriver.com>
-	<CANx9H-CNfFvLaedkKvBug+YO1uKrcuvEOPfTGLfhfe5wBCidLA@mail.gmail.com>
-	<53548B00.5000700@windriver.com> <53548CDA.4000804@windriver.com>
-	<CANx9H-C2Yar=x3FT+RassRP8siEzwwWf9ULD_X56rhS3ZHHDtw@mail.gmail.com>
-Date: Tue, 6 May 2014 06:52:42 -0700
-Message-ID: <CANx9H-D_mGE+=bXxFE8RbtncCLe37AkYMsyXU4ZH+bSC+_T4aw@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=fofAPs4JNYFj/sMNBz8KJPHn9pBtzODuUgmpzndn3Ow=;
+	b=fsbzzrUU6SyB2lpH7Zc2oKwbKvmSYm5tlo7tle7LqFEfCdz6HYckAxCj2ZlnuoFeIP
+	gs0q4XmJxsbtf7qpIXZu9BxTCwkcymc1MTM6TWW1CerLxiDVQD3Qrno9ZUBDrrclAPln
+	MhKPOe9ZpXKys6qH8LzAkPQX2yQKDF2b3GbV/Gc6RpE4W4YR9jaqPxhZSD6PX+UaqJUU
+	dOcjMvR0aG48D8rwcoYw8jcH1JfihKKmNMJrCdqE/92tNvtmVAfBs96fJKZVyziDG8Hc
+	BDTxcLBptn3QfuY1tQ3bsy+bP7OS29yAsUDeHzO2Kk0/tTlyK4PSJYZtoTV9vh+OAnK/
+	4gIg==
+X-Received: by 10.112.147.136 with SMTP id tk8mr1003877lbb.95.1399389696969;
+	Tue, 06 May 2014 08:21:36 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	k2sm13846682lbm.23.2014.05.06.08.21.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 06 May 2014 08:21:35 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 6 May 2014 17:21:56 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-perl][PATCH v2 01/10] libmodule-metadata-perl: add 1.000019
+Message-ID: <20140506152156.GA30955@jama>
+References: <1399376593-8768-1-git-send-email-nickdademo@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1399376593-8768-1-git-send-email-nickdademo@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] opencv: Bump SRCREV to 2.4.9 release tag, PV is now 2.4.9+git. Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,100 +48,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 13:52:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 06 May 2014 15:21:42 -0000
+X-Groupsio-MsgNum: 49718
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3V7upXqbjpZ4EhLz"
+Content-Disposition: inline
 
-On Wed, Apr 23, 2014 at 9:10 AM, Tim Orling <ticotimo@gmail.com> wrote:
+--3V7upXqbjpZ4EhLz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> --Turns out to not be quite so simple. Module::Metadata is not ever being
-> created by perl_*.bb. This is somewhat surprising because Module::Build
-> needs Module::Metadata and this has been missed in
-> Cross/configure.sh-arm-linux since perl v5.13.9.
-> --You can verify this by running "perl -mModule::Build" on qemuarm/arm
-> target.
-> --I am working on a patch for oe-core.
->
+On Tue, May 06, 2014 at 09:43:13PM +1000, Nick D'Ademo wrote:
+> ---
 
-Fixed in (and this patch superseded by)
-http://patches.openembedded.org/patch/71565/
+You need blank line between subject and SOB line otherwise it's all
+considered to be subject.
 
->
-> On Sun, Apr 20, 2014 at 8:13 PM, Hongxu Jia <hongxu.jia@windriver.com>wrote:
->
->> On 04/21/2014 11:05 AM, Hongxu Jia wrote:
->>
->>> On 04/21/2014 11:01 AM, Tim Orling wrote:
->>>
->>>> On Sun, Apr 20, 2014 at 7:17 PM, Hongxu Jia <hongxu.jia@windriver.com>
->>>> wrote:
->>>>
->>>>  On 04/21/2014 04:19 AM, Tim Orling wrote:
->>>>>
->>>>>  (1) I am thinking about dropping this patch. perl-native provides
->>>>>> Module::Metadata 1.00004, so if subsequent packages are being
->>>>>> cross-compiled I have not yet proven there is a need for the updated
->>>>>> v1.000019 provided here.
->>>>>>
->>>>>> (2) The question is, if one wanted to build subsequent packages
->>>>>> in-situ,
->>>>>> how to provide Module::Metadata 1.00004 on a target system, since it
->>>>>> is
->>>>>> only provided by perl-native?
->>>>>>
->>>>>>  It is also provided by perl, for target.
->>>>>
->>>>> //Hongxu
->>>>>
->>>>>
->>>>>  I am not seeing it. Am I missing something?
->>>>
->>>
->>>
->>> Hi Tim,
->>>
->>> I am afraid Module::Metadataj is not in perl by default, you need
->>> to tweak poky/meta/recipes-devtools/perl/perl_5.14.3.bb, to create
->>> a new package for Module::Metadata, you could reference what
->>> 'perl-module-cpan' did, such as:
->>> ...
->>> PACKAGES += "perl-module-metadata"
->>> FILES_perl-module-metadata += ">>the files you need<<"
->>> ...
->>>
->>
->> You also need tweak do_install, to install Metadata.pm from ${S}
->> to ${D}, the default do_install did not do that.
->>
->> //Hongxu
->>
->>
->>
->>> And add 'perl-module-metadata' to your recipes's RDEPENDS.
->>>
->>> //Hongxu
->>>
->>>
->>>> root@beaglebone:~# perl -mModule::Metadata
->>>>
->>>> Can't locate Module/Metadata.pm in @INC (@INC contains: /etc/perl
->>>> /usr/lib/perl/site_perl/5.14.3/ /usr/lib/perl/site_perl/5.14.3
->>>> /usr/lib/perl/vendor_perl/5.14.3/ /usr/lib/perl/vendor_perl/5.14.3
->>>> /usr/lib/perl/5.14.3/ /usr/lib/perl/5.14.3 /usr/local/lib/site_perl
->>>> /usr/lib/perl/5.14.3 .).
->>>>
->>>> BEGIN failed--compilation aborted.
->>>>
->>>>  --Tim
->>>>>> --
->>>>>>
->>>>>>  --
->>>>> _______________________________________________
->>>>> Openembedded-devel mailing list
->>>>> Openembedded-devel@lists.openembedded.org
->>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>
->>>>>
->>>
->>
->
+>  meta-oe/recipes-support/opencv/opencv_2.4.bb |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recip=
+es-support/opencv/opencv_2.4.bb
+> index df512f6..43e6a2b 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> @@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET =3D "arm"
+> =20
+>  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gli=
+b-2.0"
+> =20
+> -SRCREV =3D "a4b34e7ae10351fc4d30dc55995679340efc488e"
+> +SRCREV =3D "df8e28283f09825cca0c2902160b7abebcfe1b64"
+>  SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
+>             file://opencv-fix-pkgconfig-generation.patch \
+>  "
+> =20
+> -PV =3D "2.4.8+git${SRCPV}"
+> +PV =3D "2.4.9+git${SRCPV}"
+> =20
+>  S =3D "${WORKDIR}/git"
+> =20
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--3V7upXqbjpZ4EhLz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNo/hQACgkQN1Ujt2V2gBwpNgCfWBIb/9txFk7DwO3Bbkv6Hfir
+BksAn3oWaXXbqzLL22o2xEkGuelwTTT+
+=OnGh
+-----END PGP SIGNATURE-----
+
+--3V7upXqbjpZ4EhLz--
