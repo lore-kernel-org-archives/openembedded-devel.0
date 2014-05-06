@@ -1,30 +1,31 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 01CBF65F62
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E5EA65FBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 06:49:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,995,1389740400"; d="scan'208";a="50744338"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 06 May 2014 08:49:51 +0200
-Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.236]) by
-	COSNADEXC22.usr.ingenico.loc ([10.31.4.222]) with mapi id
-	14.02.0318.001; Tue, 6 May 2014 08:49:51 +0200
-From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] tk: cleanup
-Thread-Index: AQHPaH84n1I5g4ZIO0yL47tzeoPgZJszGb1w
-Date: Tue, 6 May 2014 06:49:50 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B8D34349D@COSNADEXC13.usr.ingenico.loc>
-References: <1399305083-21507-1-git-send-email-Matthieu.Crapet@ingenico.com>
-	<20140505162916.GL2486@jama>
-In-Reply-To: <20140505162916.GL2486@jama>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.31.16.119]
+	Tue,  6 May 2014 07:00:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s462tQgR010642
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 5 May 2014 19:55:26 -0700 (PDT)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
+	Mon, 5 May 2014 19:55:25 -0700
+Message-ID: <53684F1A.7000100@windriver.com>
+Date: Tue, 6 May 2014 10:55:22 +0800
+From: Chong Lu <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] tk: cleanup
+To: Paul Barker <paul@paulbarker.me.uk>,
+	<openembedded-devel@lists.openembedded.org>
+References: <cover.1397816030.git.Chong.Lu@windriver.com>
+	<deccbaa80823665caeaa2763f587303595cc6115.1397816030.git.Chong.Lu@windriver.com>
+	<20140505214541.GB12987@gmail.com>
+In-Reply-To: <20140505214541.GB12987@gmail.com>
+X-Originating-IP: [128.224.162.204]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 1/3] vim: add dependency and selinux and acl support control
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,21 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 06:49:52 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 May 2014 07:00:09 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
 
-> Does it also fix the tk issues which were shown in all world build report=
-s?
+On 05/06/2014 05:45 AM, Paul Barker wrote:
+> On Fri, Apr 18, 2014 at 06:16:30PM +0800, Chong Lu wrote:
+>>   FILES_${PN}-data = "${datadir}/${PN}"
+>> +FILES_${PN}-common = " \
+>> +    ${datadir}/${PN}/${VIMDIR}/*.vim \
+>> +    ${datadir}/${PN}/${VIMDIR}/autoload \
+>> +    ${datadir}/${PN}/${VIMDIR}/colors \
+>> +    ${datadir}/${PN}/${VIMDIR}/compiler \
+>> +    ${datadir}/${PN}/${VIMDIR}/ftplugin \
+>> +    ${datadir}/${PN}/${VIMDIR}/indent \
+>> +    ${datadir}/${PN}/${VIMDIR}/keymap \
+>> +    ${datadir}/${PN}/${VIMDIR}/lang \
+>> +    ${datadir}/${PN}/${VIMDIR}/macros \
+>> +    ${datadir}/${PN}/${VIMDIR}/plugin \
+>> +    ${datadir}/${PN}/${VIMDIR}/print \
+>> +    ${datadir}/${PN}/${VIMDIR}/spell \
+>> +    ${datadir}/${PN}/${VIMDIR}/tools \
+>> +"
+>>   
+>>   # Recommend that runtime data is installed along with vim
+>>   RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
+> Sorry to reply to an old commit but this has broke things for me. Installing vim
+> after this commit gives:
+>
+>      vim: unsatisfied recommendation for vim-data
+>
+> As everything that was in vim-data is now in vim-common. Your commit message
+> says "Split binary file into vim package and put others in vim-common.", but
+> this split was already in effect with everything in vim-data. It then got
+> installed by default as vim-data is in RRECOMMENDS_vim, but could be disabled by
+> adding things to BAD_RECOMMENDS.
+>
+> What is the benefit of moving things to vim-common? I'm probably just
+> misunderstanding what this change is aiming to solve.
+I just refer to Ubuntu splitting package policy.***
+<https://bbs.archlinux.org/viewtopic.php?id=173515>*
+>
+> As vim-data is now left empty, can we remove it from PACKAGES and
+> RRECOMMENDS_vim and instead add vim-common to RRECOMMENDS_vim? Just want to make
+> sure that won't break anything for you before I send a patch.
+Sorry for my mistake. we should remove vim-data from PACKAGES and 
+RRECOMMENDS_vim and
+add vim-common to RRECOMMENDS_vim.
+> Thanks,
+>
 
-I'm afraid not. That was my primary objective, but I was unable to reproduc=
-e the issue (even with insane PARALLEL_MAKE parameter).
-It's quite cosmetics, but the BINCONFIG_GLOB/SSTATE_SCAN_FILES fix is worth=
- it.
-
-Regards,
-M
 
