@@ -1,31 +1,36 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
-	[209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 49D9B65ED6
+Return-Path: <kergoth@gmail.com>
+Received: from mail-la0-f49.google.com (mail-la0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 25F22609C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 00:31:50 +0000 (UTC)
-Received: by mail-vc0-f170.google.com with SMTP id lf12so100647vcb.1
+	Tue,  6 May 2014 00:37:21 +0000 (UTC)
+Received: by mail-la0-f49.google.com with SMTP id hr17so5191575lab.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 17:31:51 -0700 (PDT)
+	Mon, 05 May 2014 17:37:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=isLXA1fbIEbplZ7W2s27ddDtPu9i3e02+qVjaoqSOtY=;
-	b=h3iiWeOq/ST3oMOTKNWVGk9Ienj/lmxRlwuYHxRVjSZVsA7WtyUsb4s7h82NMHluWu
-	IMupfJ2KM2ARUiYQ+SbO5vHBN+1Ja6kIm2epl+Od46ZcIpdhG1DVH2u/2ZczfvggTsgD
-	Oo9Cbp3AqQY7TnoymZf4JRGCCafqkrRiDCqqjbd4sF+DGO4iyZV2I0kDviLRupitzH6E
-	bdDNNWwPMKgqazmshiJ/4vZiNAkBvPHso4RsWtvKzvPg+YbhOQcK4T8FqogBZTRLwgR8
-	tfS21fAVu396yEApJ/3n97CBUHEeGVnF10t0b/ugtvP4KYgixccq9nWXgILI/7VYfq4z
-	FKkQ==
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=u2i4KcQFzX4+TOd2SjkjQGtvZGlpOIWWcLeomFnuTWc=;
+	b=ZpPR1FzSl+NAVVnZ/ypSlE06kApYyECZXE1Za5h9ZFIxYRMUGxoti5XT9dUXCvTNYU
+	lDKP0zD70BFZc/l62tVfonN/qHS3aOR7SU4piu3mXU8Z6HNdn0S6d6OPVr9zTiXptZ0o
+	z8QymV/02PptznDU9wPqIvdRH1RzfF3tGEdKy9kd1vBh9aeXaKMebM7QrbEoXWw5+cI5
+	479Ug0XsXLuB+MLutCxGR3E/IxtEYBUh1L6Wy64Uz0nr0/cEJmz8VvayH7jYGNlO+DBG
+	sAYHX7f9cG/oedlGGqSyOp17JbvNIpG7P+4cZOECnQB+TN36CDwVaJmRMcCtTvXARbI3
+	yijg==
+X-Received: by 10.112.132.2 with SMTP id oq2mr4157970lbb.33.1399336641956;
+	Mon, 05 May 2014 17:37:21 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.58.104.229 with SMTP id gh5mr2395223veb.8.1399336311430;
-	Mon, 05 May 2014 17:31:51 -0700 (PDT)
-Received: by 10.52.85.67 with HTTP; Mon, 5 May 2014 17:31:51 -0700 (PDT)
-Date: Mon, 5 May 2014 17:31:51 -0700
-Message-ID: <CAFeBWL52YdcY9KaLW3BuUQBKrSkbkAN4+h=PcxFM9nfXn5Znhg@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: systemd networking.service masked?
+Sender: kergoth@gmail.com
+Received: by 10.112.148.170 with HTTP; Mon, 5 May 2014 17:37:01 -0700 (PDT)
+In-Reply-To: <CAFeBWL52YdcY9KaLW3BuUQBKrSkbkAN4+h=PcxFM9nfXn5Znhg@mail.gmail.com>
+References: <CAFeBWL52YdcY9KaLW3BuUQBKrSkbkAN4+h=PcxFM9nfXn5Znhg@mail.gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 5 May 2014 17:37:01 -0700
+X-Google-Sender-Auth: IaBRPJszoshxlx-4sjdbkXJHreQ
+Message-ID: <CABcZANmF+fmDwEU3zMHCRqsF+Mxkysk8Ks62xKhv9EKSHK=ohg@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: systemd networking.service masked?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,20 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 00:31:54 -0000
+X-List-Received-Date: Tue, 06 May 2014 00:37:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello everybody!
+On Mon, May 5, 2014 at 5:31 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
 
-I noticed networking.service is masked by default -
-http://cgit.openembedded.org/cgit.cgi/openembedded-core/tree/meta/recipes-core/systemd/systemd-compat-units.bb?h=master.
+> I noticed networking.service is masked by default -
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded-core/tree/meta/recipes-core/systemd/systemd-compat-units.bb?h=master
+> .
+>
+> I guess I can use the Network Manager to bring up eth0 on boot, but I
+> rather not.
+>
+> What's the harm in networking.service?
+>
 
-I guess I can use the Network Manager to bring up eth0 on boot, but I
-rather not.
-
-What's the harm in networking.service?
-
-Thank you,
-
-Adam
+Is it really needed? Does systemctl enable dhcpcd@eth0 not do the job, or
+am I missing something?
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
