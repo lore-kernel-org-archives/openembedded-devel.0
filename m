@@ -1,34 +1,30 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-ee0-f53.google.com (mail-ee0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 5869665FB2
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 01CBF65F62
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 06:32:58 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id c13so292324eek.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 May 2014 23:32:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=6nZF4pMjRHSJKIBkV4uAG6uoHMvgd5PMpia3OqmSiVg=;
-	b=TF/Vu4cdVdzpJBBM4OtQprL9Sdyfia9zIL7O3oCdqJLOAKobOloLqLkI/gZ2h5802T
-	2JzsOkztaCWXW5YIi7Cs6nqYMyufRW8g3lnBxmn0vFGO8Q5rnOq2cjEkQvG+Ejg1Fj88
-	R9/tc+fVSZh1MRUaOOPwuYhXkfjNOPrRM6Q1IqfZqnfJvOcjvqvK5zoKhZYXkdRG6Ppi
-	sesaEKvQMyHaWrg2Xw336mYpgTn0HwmlEpTR06zHxJZTyvo5KGUJVvFf8xcBzYBAfqGG
-	rptyxAO4b8VUUuh4Nh6CY5eLb7f5XdkJSNtNqJZip1ukoVlORsSPCJET1+moqOrM5gS0
-	6pIQ==
-X-Received: by 10.14.37.134 with SMTP id y6mr4502361eea.32.1399357979335;
-	Mon, 05 May 2014 23:32:59 -0700 (PDT)
-Received: from gizero-desktop.tw.it
-	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
-	by mx.google.com with ESMTPSA id w1sm35738713eel.16.2014.05.05.23.32.57
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 05 May 2014 23:32:58 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 May 2014 08:32:44 +0200
-Message-Id: <1399357964-15638-1-git-send-email-gizero@gmail.com>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH] libconfig: inherit from autotools-brokensep
+	Tue,  6 May 2014 06:49:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,995,1389740400"; d="scan'208";a="50744338"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 06 May 2014 08:49:51 +0200
+Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.236]) by
+	COSNADEXC22.usr.ingenico.loc ([10.31.4.222]) with mapi id
+	14.02.0318.001; Tue, 6 May 2014 08:49:51 +0200
+From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] tk: cleanup
+Thread-Index: AQHPaH84n1I5g4ZIO0yL47tzeoPgZJszGb1w
+Date: Tue, 6 May 2014 06:49:50 +0000
+Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B8D34349D@COSNADEXC13.usr.ingenico.loc>
+References: <1399305083-21507-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<20140505162916.GL2486@jama>
+In-Reply-To: <20140505162916.GL2486@jama>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.31.16.119]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH] tk: cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,29 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 06:33:02 -0000
+X-List-Received-Date: Tue, 06 May 2014 06:49:52 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-do_compile fails otherwise
+Hi,
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
----
- .../recipes-extended/libconfig/libconfig_1.4.9.bb  |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Does it also fix the tk issues which were shown in all world build report=
+s?
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-index c7d3cf7..22eecf8 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.4.9.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
- SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
- 
--inherit autotools pkgconfig
-+inherit autotools-brokensep pkgconfig
- 
- SRC_URI[md5sum] = "b6ee0ce2b3ef844bad7cac2803a90634"
- SRC_URI[sha256sum] = "09c8979252e60193e2969e9b0e1cd597f7820087867989b2f0939ad164473041"
--- 
-1.7.9.5
+I'm afraid not. That was my primary objective, but I was unable to reproduc=
+e the issue (even with insane PARALLEL_MAKE parameter).
+It's quite cosmetics, but the BINCONFIG_GLOB/SSTATE_SCAN_FILES fix is worth=
+ it.
 
+Regards,
+M
 
