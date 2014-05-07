@@ -1,24 +1,41 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id E100260897
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
+	[193.109.254.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 070BF60559
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 11:43:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,1002,1389740400"; d="scan'208";a="50836921"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 07 May 2014 13:43:19 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.2.328.9; Wed, 7 May 2014 13:43:19 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Wed, 7 May 2014 13:43:19 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 May 2014 13:43:27 +0200
-Message-ID: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
+	Wed,  7 May 2014 12:07:23 +0000 (UTC)
+Received: from [85.158.140.195:32459] by server-1.bemta-14.messagelabs.com id
+	00/85-00839-BF12A635; Wed, 07 May 2014 12:07:23 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-6.tower-193.messagelabs.com!1399464443!11122000!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5570 invoked from network); 7 May 2014 12:07:23 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
+	(89.206.228.155)
+	by server-6.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 May 2014 12:07:23 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 7 May 2014
+	13:07:23 +0100
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 May 2014 13:07:22 +0100
+Thread-Topic: [oe] Fix for libxml++_ptest.patch with out-of-source build
+Thread-Index: Ac9pK4mbW4sFdOQsQFSIp5+yt9wqjgAI8dsAACW+3fA=
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC6@GBTWK10E001.Technology.local>
+References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0@GBTWK10E001.Technology.local>
+	<2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
+In-Reply-To: <2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] xdelta3: add optional lzma support
+Subject: Re: Fix for libxml++_ptest.patch with out-of-source build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,29 +49,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 11:43:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 May 2014 12:07:27 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Using PACKAGECONFIG. Disabled by default.
+>thanks for the note. However I would encourage you to submit a patch for m=
+eta-oe if you can guidelines are here
+>
+>http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+>
+>Thanks
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Khem
 
-diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-index 16a72ee..f3b4754 100644
---- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-+++ b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-@@ -13,3 +13,7 @@ SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3"
- SRC_URI[sha256sum] = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
- 
- inherit autotools
-+
-+# Optional secondary compression
-+PACKAGECONFIG ?= ""
-+PACKAGECONFIG[lzma] = ",,xz"
--- 
-1.8.5.4
+I cannot use git send-email as only MAPI email is supported here . However =
+I have redone the patch using git format-patch -s and pasted it into an ema=
+il under the title "libxml plus plus ptest with B noteq S". I hope this can=
+ be applied in a similar way
 
+Please let me know if there are any problems with it
+
+Nick
+
+
+
+The details of this company are as follows:
+G4S Technology Limited, Registered Office: Challenge House, International D=
+rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
+38.
+
+This communication may contain information which is confidential, personal =
+and/or privileged.
+
+It is for the exclusive use of the intended recipient(s).
+If you are not the intended recipient(s), please note that any distribution=
+, forwarding, copying or use of this communication or the information in it=
+ is strictly prohibited.
+
+Any personal views expressed in this e-mail are those of the individual sen=
+der and the company does not endorse or accept responsibility for them.
+
+Prior to taking any action based upon this e-mail message, you should seek =
+appropriate confirmation of its authenticity.
+
+This e-mail has been scanned for all viruses by MessageLabs.
 
