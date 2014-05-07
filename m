@@ -1,41 +1,43 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E19D605B3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 4338A605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 16:47:14 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id ey11so1434444pad.32
+	Wed,  7 May 2014 16:48:23 +0000 (UTC)
+Received: by mail-vc0-f176.google.com with SMTP id lg15so1654639vcb.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 09:47:15 -0700 (PDT)
+	Wed, 07 May 2014 09:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=references:mime-version:in-reply-to:content-type
-	:content-transfer-encoding:message-id:cc:from:subject:date:to;
-	bh=1pFP+1iwqx8kGNjoOSUeDFuwRLRUkrRLB2qIcV+swQA=;
-	b=R8tCtDSjJbFOJ/BXFYGUk0wW4BVOW7FV2Oh/GszCWgErFVS0cjHoa/RyUr9X6sYc1x
-	GbmAdVEv2k+u/gEofDLZSOLPlImauuVoQ2OK6F4fjQnolj90XjMGLT0f9ZPVzXEczaiL
-	ohPwsMWtt3q/KY99KX72O0U+UINq0DBqtt/XTbagqxd5ZwgmixuZfLT9ZtLLrIlvgPD/
-	qcgdCuP/zP+xGz0hcFZcBr693gXYpfgoXvc56E9WszfMIQLg1q1O3ij8Tnl7OeJo3Wc0
-	mnMBIs0udHyRDc/1sgepW7eJv3lZnVYOekHosoB6mmMDFg4g92CPHZWLKbNTU6/x04F0
-	pyrQ==
-X-Received: by 10.66.251.233 with SMTP id zn9mr21064340pac.67.1399481235707;
-	Wed, 07 May 2014 09:47:15 -0700 (PDT)
-Received: from [192.168.55.197] ([72.29.171.20])
-	by mx.google.com with ESMTPSA id gn3sm4095136pbc.32.2014.05.07.09.47.13
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 07 May 2014 09:47:13 -0700 (PDT)
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-References: <1399475791-30061-1-git-send-email-ticotimo@gmail.com>
-Mime-Version: 1.0 (1.0)
-In-Reply-To: <1399475791-30061-1-git-send-email-ticotimo@gmail.com>
-Message-Id: <98B8D45A-B417-4FB8-A96D-3E8105B44840@gmail.com>
-X-Mailer: iPad Mail (11D201)
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 7 May 2014 09:47:14 -0700
-To: Tim Orling <ticotimo@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-perl][WIP] vlc: add dependencies, drop unrecognized options
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=x5/oXRC/zf3hOdQrvm8tLgqt/gTb0GFRlzAfQpo0vuE=;
+	b=FRpAwGklfNb843TWgW8cDyixmX8uhWPjZUnvHsDxTKVGSNk1jxOVriMKHieQX1/U49
+	uF+zM+KfFdZGV/0nMQ9CD3uZZku26f88M8vyf1i/KzFfHrv210Zd81JJXOAyHgDHV/Sx
+	4NQWMHAT1ZhymOX+dJ7FL9AQDXb/nY7fyPoM7afa/GftGdaBw8DTF2UCAgzfWci0rXrM
+	iQvkwthnncNn/rMkumBQFmdEnrdpIg3hmWy7pHpbLfoOv5nviqo1J4IRH6hcG91cI3TB
+	TIj1gT/9IL0cWB+SY3O91TRpxbNrgFJQtr2+qt1yy4VFjCr5Tg9J0z6Wl1AdYg0ePxdk
+	txrg==
+X-Received: by 10.58.107.65 with SMTP id ha1mr40324599veb.1.1399481304726;
+	Wed, 07 May 2014 09:48:24 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q6sm2334355vew.15.2014.05.07.09.48.22 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 May 2014 09:48:22 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 7 May 2014 18:48:44 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140507164844.GF30955@jama>
+References: <1399445635-29373-1-git-send-email-koen.kooi@linaro.org>
+	<CAMKF1so17ynGToCMO_i8mw+UpUdnZC3NL_797JJbbrbMOd=_-w@mail.gmail.com>
+	<lkcqt0$j26$1@ger.gmane.org>
+	<6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] openldap: fix build against gnutls3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,90 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 16:47:19 -0000
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Wed, 07 May 2014 16:48:26 -0000
+X-Groupsio-MsgNum: 49772
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Wb5NtZlyOqqy58h0"
+Content-Disposition: inline
+
+--Wb5NtZlyOqqy58h0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Submitted to wrong layer, cut and paste error. Should have been [meta-multim=
-edia]
---Tim
+On Wed, May 07, 2014 at 09:57:52AM +0100, Paul Eggleton wrote:
+> On Wednesday 07 May 2014 10:29:21 Koen Kooi wrote:
+> > Khem Raj schreef op 07-05-14 09:47:
+> > > On Tue, May 6, 2014 at 11:53 PM, Koen Kooi <koen.kooi@linaro.org> wro=
+te:
+> > >> ++                              TLS_LIBS=3D"-lgnutls -lgcrypt"
+> > >=20
+> > > Does this mean we need something more in DEPENDS or DEPENDS part of
+> > > PACKAGECONFIG too ?
+> >=20
+> > Should be automatic since gnutls depends on it. It's not a new dependen=
+cy.
+>=20
+> BitBake does not automatically ensure dependencies-of-dependencies are in=
+ the=20
+> sysroot. They almost always will be, but I have seen failures in these ki=
+nds=20
 
-> On May 7, 2014, at 8:16 AM, Tim Orling <ticotimo@gmail.com> wrote:
->=20
-> From: Tim Orling <TicoTimo@gmail.com>
->=20
->  * add PKGCONFIG for libass, mkv
->  * drop PKGCONFIG for id3tag, mpeg2dec
->  * drop unrecognized options:
->      --enable-v4l,
->      --disable-opengl,-id3tag,-mpeg2dec
->  * add dependencies from JaMa builds / configure.ac
->=20
->  NOTE: requires fluidsynth >=3D 1.1.2 (will work on that next)
->=20
-> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> ---
-> meta-multimedia/recipes-multimedia/vlc/vlc.inc | 18 +++++++++++-------
-> 1 file changed, 11 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multime=
-dia/recipes-multimedia/vlc/vlc.inc
-> index 1b2490b..58f5648 100644
-> --- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> +++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-> @@ -5,9 +5,13 @@ SECTION =3D "multimedia"
-> LICENSE =3D "GPL-2.0"
-> LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
-3"
->=20
-> -DEPENDS =3D "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl q=
-t4-x11-free \
-> -   dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-li=
-b \
-> -   libdvdcss libdvdread lua-native lua"
-> +DEPENDS =3D "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl \=
+Are you sure it doesn't?
 
-> +   libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls tremor \
-> +   faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib libdvdcss \
-> +   libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs libdc1394 \
-> +   libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-> +   libmtp opencv libopus orc libusb1 schroedinger taglib \
-> +   tiff xcb-util-keysyms samba"
->=20
-> SRC_URI =3D "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.=
-tar.xz"
->=20
-> @@ -26,11 +30,11 @@ EXTRA_OECONF =3D "\
->     --enable-sdl \=20
->     --enable-png \
->     --enable-live555 --enable-tremor \
-> -    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
-> +    --enable-v4l2 --disable-aa --disable-faad \
->     --enable-dbus \
->     --without-contrib \
->     --without-kde-solid \
-> -    --disable-opengl --disable-glx \
-> +    --disable-glx \
->     --enable-realrtsp \
->     ac_cv_path_MOC=3D${STAGING_BINDIR_NATIVE}/moc4 \
->     ac_cv_path_RCC=3D${STAGING_BINDIR_NATIVE}/rcc4 \
-> @@ -38,11 +42,11 @@ EXTRA_OECONF =3D "\
-> "
->=20
-> PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
-> -PACKAGECONFIG[id3tag] =3D "--enable-id3tag,--disable-id3tag,libid3tag"
-> PACKAGECONFIG[a52] =3D "--enable-a52,--disable-a52,liba52"
-> -PACKAGECONFIG[mpeg2dec] =3D "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2de=
-c"
-> PACKAGECONFIG[jack] =3D "--enable-jack,--disable-jack,jack"
-> PACKAGECONFIG[live555] =3D "--enable-live555,--disable-live555,live555"
-> +PACKAGECONFIG[libass] =3D "--enable-libass,--disable-libass,libass"
-> +PACKAGECONFIG[mkv] =3D "--enable-mkv,--disable-mkv,libmatroska libebml"
->=20
-> do_configure() {
->     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/=20
-> --=20
-> 1.8.3.2
->=20
+But I'm also in favor of specifying dependencies-of-dependencies in
+cases where the recipe configure task explicitly check for them (so that
+when the required dependency is no longer included in "parent"
+dependency, e.g. after moving it to PACKAGECONFIG).
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Wb5NtZlyOqqy58h0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlNqY+wACgkQN1Ujt2V2gBx4zgCeNh+hNrD7r1fc0ehh2Yx+bBXV
+3KsAoLPb+DEdBDpTBpC3Q4lry6r+idoW
+=0zMD
+-----END PGP SIGNATURE-----
+
+--Wb5NtZlyOqqy58h0--
