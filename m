@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f175.google.com (mail-lb0-f175.google.com
-	[209.85.217.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 754B060048
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id F11D760167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 May 2014 22:28:24 +0000 (UTC)
-Received: by mail-lb0-f175.google.com with SMTP id l4so186909lbv.20
+	Wed,  7 May 2014 02:07:57 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id ey11so374729pad.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 May 2014 15:28:25 -0700 (PDT)
+	Tue, 06 May 2014 19:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ru6iGAZGZYaQlSj/oG7QXQQZALiVZWiI3L3RceBvqRc=;
-	b=MWR2ignWv3PR5wEP2yWJQ7e01/d4tTDROVWtQJVDSlJ75hJ9qdvLR01ZiC9Qxyd5NJ
-	4wEYJEZZ/yu24fKdR5cXl0W0GsB0YTXjPbA9apgoBKlMhgkdpL7cqyURT2in72uOGX7k
-	cZePZgQiVaKn0Ejq5f1KSB/vIN7EsXi5zZ6tuqvrc35WWUgchh2sO9GEUYQfn6utoprg
-	alUAV08C6O4lezZ4Ai8m4+hMPYsFbMk06h/xXVEdAzw513bkJ1lKz4VYsZsiZPbyz/nL
-	hN+LJ7Wyeds5T3aSXQ2iGt2U8XuHHR87Kfpyp9YLty8o22pd1v9SZhIq1OpS1iBu0+Cf
-	F1UA==
-X-Received: by 10.112.137.39 with SMTP id qf7mr34547926lbb.18.1399415304920;
-	Tue, 06 May 2014 15:28:24 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bm3sm15099056lbb.12.2014.05.06.15.28.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 May 2014 15:28:23 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 7 May 2014 00:28:45 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=8f/Onaovq+sGmDu4uFDgQTp/qFcc95j3qBPDrPkcmAg=;
+	b=q5Wurmp+mGtxFgQCjcFAGcNEZs9/50PDw6uLDYHA0YOaI8Dgn3XS8NnrtStWbBwhlI
+	92QESg8MnraXkQKLDkvQHgZXR2sZLtTvwhwNm8vviXK5F+QfVELE2wVGa7NQN7M/F+1H
+	HwiLaGWnBCPNUXgzBsijpOVfuDyo3B//g6ilI7SM/Q1EZBmqCcCEMazfMH+fJhVjR3Q9
+	pTHOQeAH817S+iJlypwlxCnn+I90syR202P0emj/1uKYJlYvYLKby7/2krdmIpH7Mpsh
+	+a462vLl2PyriW4JwbC0RurLeIy8UQ56h3So9XGE5O7zT+9HezaXriVTahLm6CnyImAG
+	g2iA==
+X-Received: by 10.66.65.204 with SMTP id z12mr13038470pas.60.1399428478724;
+	Tue, 06 May 2014 19:07:58 -0700 (PDT)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.07.56
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Tue, 06 May 2014 19:07:57 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140506222845.GE30955@jama>
-References: <1399414836-16702-1-git-send-email-nickdademo@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1399414836-16702-1-git-send-email-nickdademo@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] opencv: Bump SRCREV to 2.4.9 release tag, PV is now 2.4.9+git.
+Date: Tue,  6 May 2014 19:09:16 -0700
+Message-Id: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-perl][PATCH v3 0/9] perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,71 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 May 2014 22:28:29 -0000
-X-Groupsio-MsgNum: 49736
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TD8GDToEDw0WLGOL"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 May 2014 02:08:03 -0000
 
---TD8GDToEDw0WLGOL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Tim Orling <TicoTimo@gmail.com>
 
-On Wed, May 07, 2014 at 08:20:36AM +1000, Nick D'Ademo wrote:
-> Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+This series of recipes is the first step towards the
+ultimate goal of getting Slic3r to build in OE.
 
-Does it fix this issue reported in test-dependencies report?
+Changes since v2:
+  * dropped libmodule-metadata as a patch for oe-core/meta/perl provides
+      ** http://patches.openembedded.org/patch/71565/
+  * correct DEPENDS for libmodule-build-tiny-perl ('*-perl-*' missing)
 
-opencv/libopencv-highgui/latest lost dependency on  jasper libdc1394
+Tim Orling (9):
+  libtext-diff-perl: add 1.41
+  libcapture-tiny-perl: add 0.23
+  libmodule-runtime-perl: add 0.013
+  libextutils-config-perl: add 0.007
+  libextutils-helpers-perl: add 0.021
+  libextutils-installpaths-perl: add 0.010
+  libmodule-build-tiny-perl: add 0.030
+  libextutils-cppguess-perl: add 0.07
+  libalgorithm-diff-perl: add 1.15
 
-> ---
->  meta-oe/recipes-support/opencv/opencv_2.4.bb |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recip=
-es-support/opencv/opencv_2.4.bb
-> index df512f6..43e6a2b 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> @@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET =3D "arm"
-> =20
->  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gli=
-b-2.0"
-> =20
-> -SRCREV =3D "a4b34e7ae10351fc4d30dc55995679340efc488e"
-> +SRCREV =3D "df8e28283f09825cca0c2902160b7abebcfe1b64"
->  SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
->             file://opencv-fix-pkgconfig-generation.patch \
->  "
-> =20
-> -PV =3D "2.4.8+git${SRCPV}"
-> +PV =3D "2.4.9+git${SRCPV}"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
-> --=20
-> 1.7.9.5
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+ .../libalgorithm/libalgorithm-diff-perl_1.15.bb    | 23 +++++++++
+ .../libcapture/libcapture-tiny-perl_0.23.bb        | 36 +++++++++++++++
+ .../libextutils/libextutils-config-perl_0.007.bb   | 24 ++++++++++
+ .../libextutils/libextutils-cppguess-perl_0.07.bb  | 38 +++++++++++++++
+ .../libextutils/libextutils-helpers-perl_0.021.bb  | 29 ++++++++++++
+ .../libextutils-installpaths-perl_0.010.bb         | 25 ++++++++++
+ .../libmodule/libmodule-build-tiny-perl_0.030.bb   | 54 ++++++++++++++++++++++
+ .../libmodule/libmodule-runtime-perl_0.013.bb      | 35 ++++++++++++++
+ .../recipes-perl/libtext/libtext-diff-perl_1.41.bb | 27 +++++++++++
+ 9 files changed, 291 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+ create mode 100644 meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.23.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.013.bb
+ create mode 100644 meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+1.8.3.2
 
---TD8GDToEDw0WLGOL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNpYh0ACgkQN1Ujt2V2gByK0ACgt71ICbzUTp5aEJ4StT4kVXy3
-Gl0AmwfgUl3JDLyTLu2GhHtBcHCQjg2V
-=Tman
------END PGP SIGNATURE-----
-
---TD8GDToEDw0WLGOL--
