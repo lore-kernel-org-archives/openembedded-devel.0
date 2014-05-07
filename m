@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id A1EB960DD7
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E7D360DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 02:08:09 +0000 (UTC)
-Received: by mail-pd0-f179.google.com with SMTP id g10so341658pdj.24
+	Wed,  7 May 2014 02:08:11 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id p10so337306pdj.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 May 2014 19:08:10 -0700 (PDT)
+	Tue, 06 May 2014 19:08:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=gGdWaXYEhxp5Hyhn1goPHcHVqqt7YEcD4TQ62Ao7AM8=;
-	b=n/bfaD0vFNJzDY2K+vKcx47YpjNXKIdg3YPGDJ6D7i6TeVuWsaC/k0zMjtxANo43Hi
-	i+1EUuHxv75EUhHGsePVhHohyFVspVN4kbGWA/NsSVUtG1GchuyUKGPWpueUVVtvIE4t
-	QjqlI8onu/qGac+LPhY7Ni8xDR7AIbsZGnf6CPc17Asq5P/bBHEuq/SZHF8j4qk6oKwf
-	7DDLva9NO8huAT0bQP1rbKV1iO95l9OWSf0XSrUoLuZeuFltw/bNoJdVf7gSMck3RmIG
-	DB/7WlEyB35wsly0rpHly6clVquyKVP7CGqSDuZ33ZlpgNAM7+ny/NeCU8O2w55Z6Q1e
-	B8Gw==
-X-Received: by 10.66.120.201 with SMTP id le9mr12588555pab.98.1399428490621;
-	Tue, 06 May 2014 19:08:10 -0700 (PDT)
+	bh=1t+3cAW+DIU2500tcaMCpRiYT96naqBkpvIgAXhXbk0=;
+	b=fnaz/Hl7FJForRhs5qPOnsnVdroUGPakCEASkmsizGHq7IoO1iPdczkP6hli3W581r
+	OM6vzPJm5kQDvZPMZxJMTo+7V/D47doXueCB86aUBXK0Wsoq+Irsb3YU/QWp1HYnpiTg
+	TfnZhGjNPufr0qfJw/sXaQAkBlp0elLx72W9B2BwEv0qEobVf5qmt5EXMVzR703NRHne
+	DwS5uoqfajfjfJx8J7LfZ43UHvwkHejLYEvVrD6e358IzILgw69tZxU5RyX9b0Hzetk3
+	MzXbBzeoVKIw2pP0VsDhSQOqAwP9krOLtz9drKLo4VR7ejGMbMaZdfs3NQrlc6xKMTE8
+	yIPg==
+X-Received: by 10.66.121.131 with SMTP id lk3mr13070471pab.61.1399428492413;
+	Tue, 06 May 2014 19:08:12 -0700 (PDT)
 Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.08.08
+	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.08.10
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 May 2014 19:08:09 -0700 (PDT)
+	Tue, 06 May 2014 19:08:11 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 May 2014 19:09:22 -0700
-Message-Id: <1399428565-30499-7-git-send-email-ticotimo@gmail.com>
+Date: Tue,  6 May 2014 19:09:23 -0700
+Message-Id: <1399428565-30499-8-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
 References: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH v3 6/9] libextutils-installpaths-perl: add 0.010
+Subject: [meta-perl][PATCH v3 7/9] libmodule-build-tiny-perl: add 0.030
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 02:08:09 -0000
+X-List-Received-Date: Wed, 07 May 2014 02:08:11 -0000
 
 From: Tim Orling <TicoTimo@gmail.com>
 
 [Description from CPAN]
-This module tries to make install path resolution as easy
-as possible.
+Many Perl distributions use a Build.PL file instead of a
+Makefile.PL file to drive distribution configuration, build, test and
+installation. Traditionally, Build.PL uses Module::Build as the
+underlying
+build system. This module provides a simple, lightweight, drop-in
+replacement.
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../libextutils-installpaths-perl_0.010.bb         | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+ .../libmodule/libmodule-build-tiny-perl_0.030.bb   | 54 ++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
 
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
 new file mode 100644
-index 0000000..4cfdfc4
+index 0000000..687fb8a
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "ExtUtils::InstallPaths - Build.PL install path logic made easy"
-+DESCRIPTION = "This module tries to make install path resolution as easy \
-+as possible."
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+@@ -0,0 +1,54 @@
++SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
++DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
++Makefile.PL file to drive distribution configuration, build, test and \
++installation. Traditionally, Build.PL uses Module::Build as the underlying \
++build system. This module provides a simple, lightweight, drop-in replacement. \
++Whereas Module::Build has over 6,700 lines of code; this module has less than \
++120, yet supports the features needed by most distributions."
 +SECTION = "libs"
 +
-+HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-InstallPaths/"
++HOMEPAGE = "http://search.cpan.org/~leont/Module-Build-Tiny/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=15bbcc2806d297df9e944b8955b38d82"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=aaca61412962cf972aec0cdad99d0a84"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-${PV}.tar.gz"
-+SRC_URI[md5sum] = "f0b00cc6c04653588a6298fa1f16c07f"
-+SRC_URI[sha256sum] = "d14cbff118e467900c2c488b55b83ef697d6eb1b8f592c0521f1d82848bf2156"
++DEPENDS = "libextutils-config-perl-native libextutils-helpers-perl-native libextutils-installpaths-perl-native"
 +
-+S = "${WORKDIR}/ExtUtils-InstallPaths-${PV}"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-${PV}.tar.gz"
++SRC_URI[md5sum] = "1c54bf4c602eec87f98950314699402e"
++SRC_URI[sha256sum] = "dfd418ad0e8290cf645ab11be209a1bf6865e5a562c5a1592da99d5fd24718a8"
 +
-+inherit cpan
++S = "${WORKDIR}/Module-Build-Tiny-${PV}"
 +
-+RDEPENDS_${PN} = " perl-module-extutils-makemaker \
-+                   perl-module-data-dumper \
++inherit cpan_build
++
++do_install () {
++        cpan_build_do_install
++}
++
++RDEPENDS_${PN} = " libextutils-config-perl \
++                   libextutils-helpers-perl \
++                   libextutils-installpaths-perl \
++                   perl-module-xsloader \
++                   perl-module-file-spec \
++                   perl-module-io-handle \
++                   perl-module-tap-harness-env \
++                   perl-module-ipc-open3 \
++                   perl-module-file-path \
++                   perl-module-cpan-meta \
++                   perl-module-extutils-cbuilder \
++                   perl-module-getopt-long \
++                   perl-module-extutils-makemaker \
++                   perl-module-exporter \
++                   perl-module-carp \
 +                   perl-module-test-more \
++                   perl-module-text-parsewords \
++                   perl-module-module-load \
 +                   perl-module-file-temp \
++                   perl-module-data-dumper \
++                   perl-module-extutils-parsexs \
++                   perl-module-pod-man \
++                   perl-module-json-pp \
 +"
 +
 +BBCLASSEXTEND = "native"
