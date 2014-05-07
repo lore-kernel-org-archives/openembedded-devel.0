@@ -1,28 +1,28 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id D1EF460167
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F46D60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 08:49:06 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 07 May 2014 01:49:07 -0700
+	Wed,  7 May 2014 08:57:55 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 07 May 2014 01:57:56 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,1001,1389772800"; d="scan'208";a="428757693"
+X-IronPort-AV: E=Sophos;i="4.97,1001,1389772800"; d="scan'208";a="507519253"
 Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
 	([10.252.122.213])
-	by azsmga001.ch.intel.com with ESMTP; 07 May 2014 01:49:05 -0700
+	by orsmga001.jf.intel.com with ESMTP; 07 May 2014 01:57:54 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-Date: Wed, 07 May 2014 09:49:04 +0100
-Message-ID: <3120944.8W8OHk0NM6@peggleto-mobl5.ger.corp.intel.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 07 May 2014 09:57:52 +0100
+Message-ID: <6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.12.5 (Linux/3.14.2-200.fc20.x86_64; KDE/4.12.4; x86_64; ; )
-In-Reply-To: <5369A9ED.4060506@linaro.org>
-References: <5364B398.5000802@embed.me.uk>
-	<1950582.OeVgyhOmPz@peggleto-mobl5.ger.corp.intel.com>
-	<5369A9ED.4060506@linaro.org>
+In-Reply-To: <lkcqt0$j26$1@ger.gmane.org>
+References: <1399445635-29373-1-git-send-email-koen.kooi@linaro.org>
+	<CAMKF1so17ynGToCMO_i8mw+UpUdnZC3NL_797JJbbrbMOd=_-w@mail.gmail.com>
+	<lkcqt0$j26$1@ger.gmane.org>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Website Text
+Subject: Re: [meta-oe][PATCH] openldap: fix build against gnutls3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,40 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 08:49:09 -0000
+X-List-Received-Date: Wed, 07 May 2014 08:57:58 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday 06 May 2014 23:35:09 Trevor Woerner wrote:
-> On 05/06/14 12:12, Paul Eggleton wrote:
-> > So I'd hope that the machine listing in the layer index could be made
-> > to help with that.
+On Wednesday 07 May 2014 10:29:21 Koen Kooi wrote:
+> Khem Raj schreef op 07-05-14 09:47:
+> > On Tue, May 6, 2014 at 11:53 PM, Koen Kooi <koen.kooi@linaro.org> wrote:
+> >> ++                              TLS_LIBS="-lgnutls -lgcrypt"
+> > 
+> > Does this mean we need something more in DEPENDS or DEPENDS part of
+> > PACKAGECONFIG too ?
 > 
-> Absolutely, for raw recipe information or information on which MACHINEs
-> are supported the layer index would be a good choice.
-> 
-> But there's a fair amount of difference between "MACHINE, layer, and
-> recipe definitions" versus "here's the FSL community information, they
-> use repo, here's where they keep their manifests, here are the manifests
-> they have available, these are the boards they support, and here is how
-> you run their setup script".
+> Should be automatic since gnutls depends on it. It's not a new dependency.
 
-Excuse my ignorance, but what do you mean by "manifests"?
-
-> Unless you're suggesting the layer index could also inform users of
-> manifests and setup script conventions?
-
-On a per layer basis that is the intention of providing the "Setup 
-information" URL field - it's a link to further information about how to use 
-the layer. For example, OE-Core has one:
-
-http://layers.openembedded.org/layerindex/layer/openembedded-core/
-
-This can be either an external URL or a pointer to a file within the repository 
-(if it doesn't have the http:// prefix).
-
-That might not be fine-grained enough to handle what we're talking about but it 
-is something along the right lines I think.
+BitBake does not automatically ensure dependencies-of-dependencies are in the 
+sysroot. They almost always will be, but I have seen failures in these kinds 
+of situations before. Since it explicitly wants to link against libgcrypt, 
+libgcrypt should be in its DEPENDS.
 
 Cheers,
 Paul
