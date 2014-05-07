@@ -1,45 +1,26 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id F2B90609A7
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 4152960144
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 09:41:38 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id bs8so984862wib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 02:41:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=jo8K//C4NfbXiKG9GA4vBrBNKHhqxK5ZWDExQh89PWE=;
-	b=CfT8+u/I5eomlRxVT/IlqIx/oQBe55z4dXG/Ux3BIbiT/Hn2mjhCGV2P837QN1MP7a
-	Kn4Bl/jbuWwzbWBoEUdED3hG4c+AYsEVyxLpHDnd/uWrTno7SS//WtQJg45r/yBWr7bT
-	gEZJsSNjO8onfC6YZGMt4bzNjHkcNDJMC7B/6Z6mv7bSML10eWdok21ALxlOm87xxgKC
-	pc/jxuHNIbtxC6BfODDxGDqbs7tr5TrC2JSXw2R2hr9oSIokiLj0Vw46e9OwNar37TY+
-	Yueg3R77+I+dg6MWJdiVLAQTkifSBOlIk+Oa4q5hAA39YO6pMJBdLxZpW8HQ/A6JHkM1
-	Wlyg==
-X-Gm-Message-State: ALoCoQkxSxneAF9YHxf28LaTzeuftcC2JNhbK+FOLL/TT5eIcnlu01Qef+Pss4NFKJ12MlSE/cWk
-X-Received: by 10.180.212.48 with SMTP id nh16mr6776183wic.49.1399455698835;
-	Wed, 07 May 2014 02:41:38 -0700 (PDT)
-Received: from ?IPv6:2001:610:612::8cf4:da4b:7630:5689?
-	([2001:610:612:0:8cf4:da4b:7630:5689])
-	by mx.google.com with ESMTPSA id ez5sm25909103wjd.9.2014.05.07.02.41.37
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 07 May 2014 02:41:37 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 7.2 \(1874\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
-Date: Wed, 7 May 2014 11:41:36 +0200
-Message-Id: <931BC885-E1EF-45C0-8C61-680ADD60D9B3@dominion.thruhere.net>
-References: <1399445635-29373-1-git-send-email-koen.kooi@linaro.org>
-	<CAMKF1so17ynGToCMO_i8mw+UpUdnZC3NL_797JJbbrbMOd=_-w@mail.gmail.com>
-	<lkcqt0$j26$1@ger.gmane.org>
-	<6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1874)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] openldap: fix build against gnutls3
+	Wed,  7 May 2014 10:34:25 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 07 May 2014 03:34:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,1002,1389772800"; d="scan'208";a="507566043"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.122.213])
+	by orsmga001.jf.intel.com with ESMTP; 07 May 2014 03:34:24 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: =?ISO-8859-1?Q?S=F8ren?= Holm <sgh@sgh.dk>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 07 May 2014 11:34:23 +0100
+Message-ID: <2543976.qS9USN9dCY@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.2-200.fc20.x86_64; KDE/4.12.4; x86_64; ; )
+In-Reply-To: <1399454777-2868-1-git-send-email-sgh@sgh.dk>
+References: <1399454777-2868-1-git-send-email-sgh@sgh.dk>
+MIME-Version: 1.0
+Subject: Re: [meta-networking][PATCH] ifplugd: Added ifplugd recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,38 +34,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 09:41:40 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 07 May 2014 10:34:33 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
+Hi S=F8ren,
 
-Op 7 mei 2014, om 10:57 heeft Paul Eggleton =
-<paul.eggleton@linux.intel.com> het volgende geschreven:
+So leaving aside that ifplugd is completely dead upstream, a few small =
+pieces=20
+of feedback on the recipe:
 
-> On Wednesday 07 May 2014 10:29:21 Koen Kooi wrote:
->> Khem Raj schreef op 07-05-14 09:47:
->>> On Tue, May 6, 2014 at 11:53 PM, Koen Kooi <koen.kooi@linaro.org> =
-wrote:
->>>> ++                              TLS_LIBS=3D"-lgnutls -lgcrypt"
->>>=20
->>> Does this mean we need something more in DEPENDS or DEPENDS part of
->>> PACKAGECONFIG too ?
->>=20
->> Should be automatic since gnutls depends on it. It's not a new =
-dependency.
+On Wednesday 07 May 2014 11:26:17 S=F8ren Holm wrote:
+> Signed-off-by: S=F8ren Holm <sgh@sgh.dk>
+> ---
+>  .../ifplugd/files/ifplugd.conf                     | 42
+> ++++++++++++++++++++++ .../recipes-connectivity/ifplugd/ifplugd_0.28.=
+bb   |
+> 23 ++++++++++++ 2 files changed, 65 insertions(+)
+>  create mode 100644
+> meta-networking/recipes-connectivity/ifplugd/files/ifplugd.conf creat=
+e mode
+> 100644 meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb
 >=20
-> BitBake does not automatically ensure dependencies-of-dependencies are =
-in the=20
-> sysroot. They almost always will be, but I have seen failures in these =
-kinds=20
-> of situations before. Since it explicitly wants to link against =
-libgcrypt,=20
-> libgcrypt should be in its DEPENDS.
+> diff --git a/meta-networking/recipes-connectivity/ifplugd/files/ifplu=
+gd.conf
+> b/meta-networking/recipes-connectivity/ifplugd/files/ifplugd.conf new=
+ file
+> mode 100644
+> index 0000000..1e0f83a
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/ifplugd/files/ifplugd.conf=
 
-You are completely right! And my original explanation was bogus since =
-the patch was needed since gnutls *stopped* needing gcrypt.
+> @@ -0,0 +1,42 @@
+> +# -*-sh-*-
+> +# $Id: ifplugd.conf 43 2003-09-13 11:25:11Z lennart $
+> +
+> +# This file is part of ifplugd.
+> +#
+> +# ifplugd is free software; you can redistribute it and/or modify it=
+ under
+> +# the terms of the GNU General Public License as published by the Fr=
+ee
+> +# Software Foundation; either version 2 of the License, or (at your
+> +# option) any later version.
+> +#
+> +# ifplugd is distributed in the hope that it will be useful, but WIT=
+HOUT
+> +# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY=
+ or
+> +# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public Licen=
+se
+> +# for more details.
+> +#
+> +# You should have received a copy of the GNU General Public License
+> +# along with ifplugd; if not, write to the Free Software Foundation,=
 
-regards,
+> +# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+> +
+> +# ifplugd configuration file
+> +
+> +# Please note that this is a bourne shell fragment sourced by the
+> +# init script of ifplugd.
+> +
+> +# Specify the interfaces to control here, separated by spaces.
+> +# Ifplugd processes will be started for each of these interfaces whe=
+n
+> +# the ifplugd init script is called with the "start" argument. You m=
+ay
+> +# use the magic string "auto" to make the init script start or stop
+> +# ifplugd processes for ALL eth and wlan interfaces that are availab=
+le
+> +# according to /proc/net/dev. Note that the list of interfaces
+> +# appearing in /proc/net/dev may depend on which kernel modules you
+> +# have loaded.
+> +INTERFACES=3D"eth0"
+> +
+> +# Additional parameters for ifplugd.
+> +# (Run "ifplugd -h" for further information.)
+> +ARGS=3D"-fwI -u0 -d10"
+> +
+> +# Additional parameters for ifplugd for the specified interface.  No=
+te
+> +# that $ARGS is ignored, when a variable like this is set for an
+> +# interface
+> +#ARGS_wlan0=3D"-MwI -u5 -d5"
+> diff --git a/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.2=
+8.bb
+> b/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb new fi=
+le
+> mode 100644
+> index 0000000..340d5f4
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION =3D "Daemon for monitoring ethernet device link state"
 
-Koen=
+Please use SUMMARY instead of DESCRIPTION of a
+
+> +SRC_URI     =3D
+> "http://0pointer.de/lennart/projects/ifplugd/ifplugd-0.28.tar.gz \ + =
+     =20
+>        file://ifplugd.conf"
+> +DEPENDS     =3D "libdaemon"
+> +LICENSE     =3D "GPLv2"
+
+Please don't indent the values here. Also SRC_URI should be after DEPEN=
+DS and=20
+the license fields (before the SRC_URI checksums).
+
+BTW, looking at the ifplugd recipe we have in OE-Classic, do we need th=
+e=20
+patches we had there?
+
+http://cgit.openembedded.org/openembedded/tree/recipes/ifplugd
+
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D94d55d512a9ba36caa9b7df07=
+9bae19f"
+> +
+> +SRC_URI[md5sum] =3D "df6f4bab52f46ffd6eb1f5912d4ccee3"
+> +SRC_URI[sha256sum] =3D
+> "474754ac4ab32d738cbf2a4a3e87ee0a2c71b9048a38bdcd7df1e4f9fd6541f0" +
+> +EXTRA_OECONF_append =3D "--disable-lynx"
+> +
+> +
+> +INITSCRIPT_PACKAGES =3D "${PN}"
+> +INITSCRIPT_NAME_${PN} =3D "${PN}"
+> +INITSCRIPT_PARAMS_${PN} =3D "defaults 90"
+> +
+> +do_install_append() {
+> +=09install -m 644 ${WORKDIR}/ifplugd.conf ${D}${sysconfdir}/ifplugd/=
+
+> +}
+
+Again, referring to the ifplugd recipe from OE-Classic we probably need=
+ a=20
+CONFFILES line to point to the conf file you're installing.
+
+> +inherit autotools update-rc.d
+
+Typically the inherit line should be higher than this.
+
+Cheers,
+Paul
+
+--=20
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
