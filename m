@@ -1,37 +1,24 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B04BD60559
+Return-Path: <sgh@sgh.dk>
+X-Greylist: delayed 633 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 07 May 2014 09:36:53 UTC
+Received: from mx-aarh-1.stofanet.dk (mx-aarh-1.stofanet.dk [212.10.10.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EEA8609A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 09:06:24 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id n15so5963930wiw.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 02:06:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WQXRRHgjFsxJdoFyG1FGarLWgWQbXLmnz7PlvRFdfrQ=;
-	b=hLqrwAIvqaurUZw0e2D2wfx5fMA1yMRqpgjPTCeky9G/Y8hWb3c85yHn9Cv/nNUbzF
-	Cwum/oE1+VjPgZF4Mw6TwOZLpkUG9C9yCQSLLHU37YMqtzjEn9+cHdBJiYWNK6C7y3Ob
-	V3xqK/aAjNAzmNDIqF+WU9BwHzbgeR3sceUwJXb3QYfCYTbznxq1iGowvPAydD1YuXwm
-	eBk9kavYUZpOMrtPiUv4mUH2sf26b1T3Iv9VNWzsnJtO/rSvIAuitRorXAtuMPtEcpwJ
-	IML1WU4rqs0eCOaeZYFxFYWOupBcJ3I3I1JCy6RmVjURT8joqpbSK17UjstyR6hJ145n
-	MtlQ==
-X-Gm-Message-State: ALoCoQkGk6xIdsbUJ7aeOaL0xvahPQdfWfF9aRt4nXkZMf8JuXRTl/OpM2oFvc/JcQkNd8nTVa05
-X-Received: by 10.194.62.210 with SMTP id a18mr10616789wjs.4.1399453585470;
-	Wed, 07 May 2014 02:06:25 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id
-	gp15sm25801597wjc.10.2014.05.07.02.06.24 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 May 2014 02:06:24 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
+	Wed,  7 May 2014 09:36:53 +0000 (UTC)
+Received: from 5634f347.rev.stofanet.dk ([86.52.243.71] helo=asrock)
+	by mx-aarh-2.stofanet.dk (envelope-from <sgh@sgh.dk>)
+	with esmtp id 1Why7H-0008Kr-19; Wed, 07 May 2014 11:26:19 +0200
+Received: from koontz.lgs-net.com (localhost [127.0.0.1])
+	by asrock (Postfix) with ESMTP id 1C7A87EC22;
+	Wed,  7 May 2014 11:26:19 +0200 (CEST)
+From: =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 May 2014 11:06:22 +0200
-Message-Id: <1399453582-13107-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCHv2] openldap: fix build against gnutls3
+Date: Wed,  7 May 2014 11:26:17 +0200
+Message-Id: <1399454777-2868-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Cc: yocto@yoctoproject.org, =?UTF-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
+Subject: [meta-networking][PATCH] ifplugd: Added ifplugd recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,115 +32,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 09:06:27 -0000
+X-List-Received-Date: Wed, 07 May 2014 09:36:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-OE-core update from gnutls2 to gnutls3, openldap needs patches to cope with that. Also add libgcrypt to DEPENDS since openldap links against it directly now instead of through gnutls.
-
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+Signed-off-by: S=C3=B8ren Holm <sgh@sgh.dk>
 ---
- .../0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch | 44 ++++++++++++++++++++++
- .../openldap-2.4.28-gnutls-gcrypt.patch            | 17 +++++++++
- .../recipes-support/openldap/openldap_2.4.23.bb    |  4 +-
- 3 files changed, 64 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/openldap/openldap-2.4.23/0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch
- create mode 100644 meta-oe/recipes-support/openldap/openldap-2.4.23/openldap-2.4.28-gnutls-gcrypt.patch
+ .../ifplugd/files/ifplugd.conf                     | 42 ++++++++++++++++=
+++++++
+ .../recipes-connectivity/ifplugd/ifplugd_0.28.bb   | 23 ++++++++++++
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/ifplugd/files/if=
+plugd.conf
+ create mode 100644 meta-networking/recipes-connectivity/ifplugd/ifplugd_=
+0.28.bb
 
-diff --git a/meta-oe/recipes-support/openldap/openldap-2.4.23/0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch b/meta-oe/recipes-support/openldap/openldap-2.4.23/0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch
+diff --git a/meta-networking/recipes-connectivity/ifplugd/files/ifplugd.c=
+onf b/meta-networking/recipes-connectivity/ifplugd/files/ifplugd.conf
 new file mode 100644
-index 0000000..dffd3ca
+index 0000000..1e0f83a
 --- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap-2.4.23/0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch
-@@ -0,0 +1,44 @@
-+From 0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0 Mon Sep 17 00:00:00 2001
-+From: Howard Chu <hyc@openldap.org>
-+Date: Sat, 7 Sep 2013 09:39:24 -0700
-+Subject: [PATCH] ITS#7430 GnuTLS: Avoid use of deprecated function
++++ b/meta-networking/recipes-connectivity/ifplugd/files/ifplugd.conf
+@@ -0,0 +1,42 @@
++# -*-sh-*-
++# $Id: ifplugd.conf 43 2003-09-13 11:25:11Z lennart $
 +
-+Upstream-status: Backport
++# This file is part of ifplugd.
++#
++# ifplugd is free software; you can redistribute it and/or modify it und=
+er
++# the terms of the GNU General Public License as published by the Free
++# Software Foundation; either version 2 of the License, or (at your
++# option) any later version.
++#
++# ifplugd is distributed in the hope that it will be useful, but WITHOUT
++# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
++# for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with ifplugd; if not, write to the Free Software Foundation,
++# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
 +
-+---
-+ libraries/libldap/tls_g.c |   12 ++++++++++++
-+ 1 files changed, 12 insertions(+), 0 deletions(-)
++# ifplugd configuration file
 +
-+diff --git a/libraries/libldap/tls_g.c b/libraries/libldap/tls_g.c
-+index 9acffaf..c793828 100644
-+--- a/libraries/libldap/tls_g.c
-++++ b/libraries/libldap/tls_g.c
-+@@ -368,6 +368,17 @@ tlsg_ctx_init( struct ldapoptions *lo, struct ldaptls *lt, int is_server )
-+ 		 * then we have to build the cert chain.
-+ 		 */
-+ 		if ( max == 1 && !gnutls_x509_crt_check_issuer( certs[0], certs[0] )) {
-++#if GNUTLS_VERSION_NUMBER >= 0x020c00
-++			unsigned int i;
-++			for ( i = 1; i<VERIFY_DEPTH; i++ ) {
-++				if ( gnutls_certificate_get_issuer( ctx->cred, certs[i-1], &certs[i], 0 ))
-++					break;
-++				max++;
-++				/* If this CA is self-signed, we're done */
-++				if ( gnutls_x509_crt_check_issuer( certs[i], certs[i] ))
-++					break;
-++			}
-++#else
-+ 			gnutls_x509_crt_t *cas;
-+ 			unsigned int i, j, ncas;
-+ 
-+@@ -387,6 +398,7 @@ tlsg_ctx_init( struct ldapoptions *lo, struct ldaptls *lt, int is_server )
-+ 				if ( j == ncas )
-+ 					break;
-+ 			}
-++#endif
-+ 		}
-+ 		rc = gnutls_certificate_set_x509_key( ctx->cred, certs, max, key );
-+ 		if ( rc ) return -1;
-+-- 
-+1.7.4.2
++# Please note that this is a bourne shell fragment sourced by the
++# init script of ifplugd.
 +
-diff --git a/meta-oe/recipes-support/openldap/openldap-2.4.23/openldap-2.4.28-gnutls-gcrypt.patch b/meta-oe/recipes-support/openldap/openldap-2.4.23/openldap-2.4.28-gnutls-gcrypt.patch
++# Specify the interfaces to control here, separated by spaces.
++# Ifplugd processes will be started for each of these interfaces when
++# the ifplugd init script is called with the "start" argument. You may
++# use the magic string "auto" to make the init script start or stop
++# ifplugd processes for ALL eth and wlan interfaces that are available
++# according to /proc/net/dev. Note that the list of interfaces
++# appearing in /proc/net/dev may depend on which kernel modules you
++# have loaded.
++INTERFACES=3D"eth0"
++
++# Additional parameters for ifplugd.
++# (Run "ifplugd -h" for further information.)
++ARGS=3D"-fwI -u0 -d10"
++
++# Additional parameters for ifplugd for the specified interface.  Note
++# that $ARGS is ignored, when a variable like this is set for an
++# interface
++#ARGS_wlan0=3D"-MwI -u5 -d5"
+diff --git a/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb=
+ b/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb
 new file mode 100644
-index 0000000..c7b1552
+index 0000000..340d5f4
 --- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap-2.4.23/openldap-2.4.28-gnutls-gcrypt.patch
-@@ -0,0 +1,17 @@
-+From http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/net-nds/openldap/files/
++++ b/meta-networking/recipes-connectivity/ifplugd/ifplugd_0.28.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION =3D "Daemon for monitoring ethernet device link state"
++SRC_URI     =3D "http://0pointer.de/lennart/projects/ifplugd/ifplugd-0.2=
+8.tar.gz \
++               file://ifplugd.conf"
++DEPENDS     =3D "libdaemon"
++LICENSE     =3D "GPLv2"
 +
-+Upstream-status: Unknown
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
 +
-+--
++SRC_URI[md5sum] =3D "df6f4bab52f46ffd6eb1f5912d4ccee3"
++SRC_URI[sha256sum] =3D "474754ac4ab32d738cbf2a4a3e87ee0a2c71b9048a38bdcd=
+7df1e4f9fd6541f0"
 +
-+--- openldap-2.4.28/configure.in.orig	2012-02-11 22:40:36.004360795 +0000
-++++ openldap-2.4.28/configure.in	2012-02-11 22:40:13.410986851 +0000
-+@@ -1214,7 +1214,7 @@
-+ 				ol_with_tls=gnutls
-+ 				ol_link_tls=yes
-+ 
-+-				TLS_LIBS="-lgnutls"
-++				TLS_LIBS="-lgnutls -lgcrypt"
-+ 
-+ 				AC_DEFINE(HAVE_GNUTLS, 1, 
-+ 					[define if you have GNUtls])
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-index 5c6f9ea..306a786 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-@@ -16,6 +16,8 @@ LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
- SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz \
-     file://openldap-m4-pthread.patch \
-     file://kill-icu.patch \
-+    file://0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch \
-+    file://openldap-2.4.28-gnutls-gcrypt.patch \
-     file://initscript \
- "
- SRC_URI[md5sum] = "90150b8c0d0192e10b30157e68844ddf"
-@@ -48,7 +50,7 @@ PACKAGECONFIG ??= "gnutls modules \
-                    ldap meta monitor null passwd shell proxycache dnssrv \
- "
- #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
--PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls"
-+PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls libgcrypt"
- PACKAGECONFIG[openssl] = "--with-tls=openssl,,openssl"
- 
- PACKAGECONFIG[sasl] = "--with-cyrus-sasl,--without-cyrus-sasl,cyrus-sasl"
--- 
-1.9.0
++EXTRA_OECONF_append =3D "--disable-lynx"
++
++
++INITSCRIPT_PACKAGES =3D "${PN}"
++INITSCRIPT_NAME_${PN} =3D "${PN}"
++INITSCRIPT_PARAMS_${PN} =3D "defaults 90"
++
++do_install_append() {
++	install -m 644 ${WORKDIR}/ifplugd.conf ${D}${sysconfdir}/ifplugd/
++}
++
++inherit autotools update-rc.d
+\ No newline at end of file
+--=20
+1.9.1
 
 
