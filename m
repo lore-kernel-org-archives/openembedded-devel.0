@@ -1,35 +1,31 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BC92605B3
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 38DD3605F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 08:29:31 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WhxEI-0006sj-HP for openembedded-devel@lists.openembedded.org;
-	Wed, 07 May 2014 10:29:30 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 10:29:30 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed,  7 May 2014 08:40:38 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id w7so876080lbi.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 10:29:30 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 07 May 2014 01:40:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=ar5rsRt04vxERDi4mcCpyBxmCbSj3XHcRUaMEzi53KU=;
+	b=A7YEFUr5xtdZ3J5ZRTy2jl8ikvS7EBUyBsQWtwIacMnL5N1Jk9yG11eCOdFyB81TL/
+	I55dIKc/JNoT61mfIMjgAXgcHARI14BKacr1thYsyTIjKrGILlO9cCpH5jAwwBwqoFQv
+	d3rmuWVbDY3VpLiVgZ9yGdB28g0b/r1odLcg4HefXMgb9iWj1b+7A0jx61rOrmD42gOl
+	8RXyKjq+vw/jp8Y9zUp+4Si9lH9JhC/wbx7yAG1VcYtQ9k8tl0f0J/IJzXI+igLgPiZR
+	NEtwtCZ468opHqq8k74mEl+Mlez2WleouxvM90sThdZwiv+B9MyRwDpx3z53p6nNL3UH
+	dV9w==
+MIME-Version: 1.0
+X-Received: by 10.112.199.234 with SMTP id jn10mr14567619lbc.8.1399452038929; 
+	Wed, 07 May 2014 01:40:38 -0700 (PDT)
+Received: by 10.112.36.164 with HTTP; Wed, 7 May 2014 01:40:38 -0700 (PDT)
+Date: Wed, 7 May 2014 10:40:38 +0200
+Message-ID: <CAPbeDCnwm8U-NTnmZB8Y5GSCc+WtORstG4JoFi1czfvTHpLEVw@mail.gmail.com>
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 07 May 2014 10:29:21 +0200
-Message-ID: <lkcqt0$j26$1@ger.gmane.org>
-References: <1399445635-29373-1-git-send-email-koen.kooi@linaro.org>
-	<CAMKF1so17ynGToCMO_i8mw+UpUdnZC3NL_797JJbbrbMOd=_-w@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-In-Reply-To: <CAMKF1so17ynGToCMO_i8mw+UpUdnZC3NL_797JJbbrbMOd=_-w@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH] openldap: fix build against gnutls3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] Error during incremental builds, qtserialport
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 08:29:34 -0000
+X-List-Received-Date: Wed, 07 May 2014 08:40:47 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Khem Raj schreef op 07-05-14 09:47:
-> On Tue, May 6, 2014 at 11:53 PM, Koen Kooi <koen.kooi@linaro.org> wrote:
->> ++                              TLS_LIBS="-lgnutls -lgcrypt"
-> 
-> Does this mean we need something more in DEPENDS or DEPENDS part of 
-> PACKAGECONFIG too ?
+I've ran into this one a couple of times. I've never seen this problem when
+I do a build from scratch, only during incremental builds.
 
-Should be automatic since gnutls depends on it. It's not a new dependency.
+When I create the SDK for my image, I see errors like this:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Collected errors:
+ * satisfy_dependencies_for: Cannot satisfy the following dependencies for
+packagegroup-qt5-toolchain-target:
+ *     libqt5serialport-dev *     libqt5serialport-mkspecs *
+ * opkg_install_cmd: Cannot install package
+packagegroup-qt5-toolchain-target.
 
-iD8DBQFTae7hMkyGM64RGpERAlsXAJ46k4UMzSXDOuDVC5j4o/5gCpXN4ACaAjif
-2fplxwMdF1anRHDfNJDNt2I=
-=bGia
------END PGP SIGNATURE-----
+Sometimes it's not only qtserialport, but other qt-packages.
+If I check log.do_package for qtserialport I see:
 
+WARNING: QA Issue: qtserialport: Files/directories were installed but not
+shipped
+/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-dual/usr/include/qt5/QtSerialPort/qserialport.h
+
+... and a whole bunch of other files. These files actually don't exist in
+my system when I check for them.
+
+It's strange because I'm not building the SDK for "wandboard-dual", but for
+the "wandboard-solo" MACHINE.
+
+Am I confusing the build-system since I am jumping back and forth between
+building for wandboard-dual/wandboard-solo ?
+
+/Jacob
 
