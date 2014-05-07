@@ -1,39 +1,47 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
-	[195.245.231.147])
-	by mail.openembedded.org (Postfix) with ESMTP id 35AB060196
+Return-Path: <zhenhua.luo@freescale.com>
+X-Greylist: delayed 957 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 07 May 2014 13:53:49 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1blp0183.outbound.protection.outlook.com [207.46.163.183])
+	by mail.openembedded.org (Postfix) with ESMTP id 16FBD60702
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 13:16:06 +0000 (UTC)
-Received: from [85.158.139.51:52489] by server-11.bemta-5.messagelabs.com id
-	EC/52-30804-7123A635; Wed, 07 May 2014 13:16:07 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-6.tower-180.messagelabs.com!1399468564!26653837!3
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 5918 invoked from network); 7 May 2014 13:16:06 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s037.Technology.local)
-	(89.206.228.155)
-	by server-6.tower-180.messagelabs.com with RC4-SHA encrypted SMTP;
-	7 May 2014 13:16:06 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s037.Technology.local ([10.234.1.39]) with mapi; Wed, 7 May 2014
-	14:16:05 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 May 2014 14:16:04 +0100
-Thread-Topic: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files
-	when they are read only
-Thread-Index: Ac9p9nGZGUdZPmPGR62aJxJGoOxFpQ==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Wed,  7 May 2014 13:53:49 +0000 (UTC)
+Received: from CH1PR03CA005.namprd03.prod.outlook.com (10.255.156.150) by
+	BL2PR03MB387.namprd03.prod.outlook.com (10.141.91.152) with Microsoft
+	SMTP Server (TLS) id 15.0.934.12; Wed, 7 May 2014 13:37:52 +0000
+Received: from BL2FFO11FD021.protection.gbl (10.255.156.132) by
+	CH1PR03CA005.outlook.office365.com (10.255.156.150) with Microsoft SMTP
+	Server (TLS) id 15.0.939.12 via Frontend Transport;
+	Wed, 7 May 2014 13:37:42 +0000
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BL2FFO11FD021.mail.protection.outlook.com (10.173.161.100) with
+	Microsoft
+	SMTP Server (TLS) id 15.0.929.8 via Frontend Transport; Wed, 7 May 2014
+	13:37:42 +0000
+Received: from fly.ap.freescale.net (fly.ap.freescale.net [10.193.20.113])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	s47Dbde8023734; Wed, 7 May 2014 06:37:40 -0700
+From: Zhenhua Luo <zhenhua.luo@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 May 2014 21:39:41 +0800
+Message-ID: <1399469981-23875-1-git-send-email-zhenhua.luo@freescale.com>
+X-Mailer: git-send-email 1.9.1
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10009001)(6009001)(189002)(199002)(2009001)(33646001)(76482001)(50466002)(50986999)(77982001)(93916002)(81542001)(81342001)(88136002)(62966002)(84676001)(86362001)(92726001)(92566001)(50226001)(46102001)(36756003)(97736001)(4396001)(99396002)(74662001)(77096999)(87936001)(87286001)(20776003)(575784001)(47776003)(74502001)(64706001)(80022001)(6806004)(44976005)(83322001)(31966008)(19580405001)(19580395003)(21056001)(68736004)(79102001)(48376002)(83072002)(77156001)(89996001)(85852003);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BL2PR03MB387;
+	H:tx30smr01.am.freescale.net; FPR:; MLV:sfv;
+	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
 MIME-Version: 1.0
-Subject: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files when they are read only
+X-Forefront-PRVS: 0204F0BDE2
+Received-SPF: Fail (: domain of freescale.com does not designate
+	192.88.168.50 as permitted sender) receiver=; client-ip=192.88.168.50; 
+	helo=tx30smr01.am.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.168.50)
+	smtp.mailfrom=zhenhua.luo@freescale.com; 
+X-OriginatorOrg: freescale.com
+Subject: [meta-java][PAYCH] openjdk-6: Fix cross compilation for e6500 machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,57 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 13:16:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 07 May 2014 13:53:50 -0000
+Content-Type: text/plain
 
-RnJvbSAyODBmZjI0ZjU5N2U1Y2Y2NjNjNzZmYTkwMjUwY2NlMjI5YzZhYWM5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogTmljayBMZXdpcyA8bmljay5sZXdpc0B1c2EuZzRzLmNvbT4N
-CkRhdGU6IFdlZCwgNyBNYXkgMjAxNCAxNDowMjoyNSArMDEwMA0KU3ViamVjdDogW1BBVENIXSBG
-aXggcmVmZXRjaCBvZiBsb2NhbCBmaWxlcyB3aGVuIHRoZXkgYXJlIHJlYWQgb25seQ0KDQpTaWdu
-ZWQtb2ZmLWJ5OiBOaWNrIExld2lzIDxuaWNrLmxld2lzQHVzYS5nNHMuY29tPg0KLS0tDQogYml0
-YmFrZS9saWIvYmIvZmV0Y2gyL19faW5pdF9fLnB5IHwgNCArKy0tDQogMSBmaWxlIGNoYW5nZWQs
-IDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2JpdGJha2Uv
-bGliL2JiL2ZldGNoMi9fX2luaXRfXy5weSBiL2JpdGJha2UvbGliL2JiL2ZldGNoMi9fX2luaXRf
-Xy5weQ0KaW5kZXggNWE5YzcyZi4uZjU3MWZjNCAxMDA2NDQNCi0tLSBhL2JpdGJha2UvbGliL2Ji
-L2ZldGNoMi9fX2luaXRfXy5weQ0KKysrIGIvYml0YmFrZS9saWIvYmIvZmV0Y2gyL19faW5pdF9f
-LnB5DQpAQCAtMTI1MSw3ICsxMjUxLDcgQEAgY2xhc3MgRmV0Y2hNZXRob2Qob2JqZWN0KToNCiAg
-ICAgICAgICAgICAgICAgICAgICAgICBkZXN0ZGlyID0gZGVzdGRpci5zdHJpcCgnLycpDQogICAg
-ICAgICAgICAgICAgICAgICBpZiBkZXN0ZGlyICE9ICIuIiBhbmQgbm90IG9zLmFjY2VzcygiJXMv
-JXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpLCBvcy5GX09LKToNCiAgICAgICAgICAgICAgICAgICAg
-ICAgICBvcy5tYWtlZGlycygiJXMvJXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpKQ0KLSAgICAgICAg
-ICAgICAgICAgICAgY21kID0gJ2NwIC1wUFIgJXMgJXMvJXMvJyAlIChmaWxlLCByb290ZGlyLCBk
-ZXN0ZGlyKQ0KKyAgICAgICAgICAgICAgICAgICAgY21kID0gJ2NwIC1mcFBSICVzICVzLyVzLycg
-JSAoZmlsZSwgcm9vdGRpciwgZGVzdGRpcikNCiAgICAgICAgICAgICAgICAgICAgICNjbWQgPSAn
-dGFyIC1jZiAtIC1DICIlZCIgLXBzIC4gfCB0YXIgLXhmIC0gLUMgIiVzLyVzLyInICUgKGZpbGUs
-IHJvb3RkaXIsIGRlc3RkaXIpDQogICAgICAgICAgICAgICAgIGVsc2U6DQogICAgICAgICAgICAg
-ICAgICAgICAjIFRoZSAiZGVzdGRpciIgaGFuZGxpbmcgd2FzIHNwZWNpZmljYWxseSBkb25lIGZv
-ciBGSUxFU1BBVEgNCkBAIC0xMjYxLDcgKzEyNjEsNyBAQCBjbGFzcyBGZXRjaE1ldGhvZChvYmpl
-Y3QpOg0KICAgICAgICAgICAgICAgICAgICAgZWxzZToNCiAgICAgICAgICAgICAgICAgICAgICAg
-IGRlc3RkaXIgPSAiLiINCiAgICAgICAgICAgICAgICAgICAgIGJiLnV0aWxzLm1rZGlyaGllcigi
-JXMvJXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpKQ0KLSAgICAgICAgICAgICAgICAgICAgY21kID0g
-J2NwICVzICVzLyVzLycgJSAoZmlsZSwgcm9vdGRpciwgZGVzdGRpcikNCisgICAgICAgICAgICAg
-ICAgICAgIGNtZCA9ICdjcCAtZiAlcyAlcy8lcy8nICUgKGZpbGUsIHJvb3RkaXIsIGRlc3RkaXIp
-DQoNCiAgICAgICAgIGlmIG5vdCBjbWQ6DQogICAgICAgICAgICAgcmV0dXJuDQotLQ0KMS45LjEN
-Cg0KDQpOaWNrIExld2lzDQpuaWNrLmxld2lzQHVzYS5nNHMuY29tDQorNDQgMTY4NCAyNzcxMzcN
-Cnd3dy5nNHN0ZWNobm9sb2d5LmNvbQ0KTmV3IENoYWxsZW5nZSBIb3VzZSwgSW50ZXJuYXRpb25h
-bCBEcml2ZSwgVGV3a2VzYnVyeSwgR2xvdWNlc3RlcnNoaXJlLCBHTDIwIDhVUSwgVUsNCg0K74GQ
-IFBsZWFzZSBjb25zaWRlciB0aGUgZW52aXJvbm1lbnQgYmVmb3JlIHByaW50aW5nIHRoaXMgZW1h
-aWwNCg0KDQpUaGUgZGV0YWlscyBvZiB0aGlzIGNvbXBhbnkgYXJlIGFzIGZvbGxvd3M6DQpHNFMg
-VGVjaG5vbG9neSBMaW1pdGVkLCBSZWdpc3RlcmVkIE9mZmljZTogQ2hhbGxlbmdlIEhvdXNlLCBJ
-bnRlcm5hdGlvbmFsIERyaXZlLCBUZXdrZXNidXJ5LCBHbG91Y2VzdGVyc2hpcmUgR0wyMCA4VVEs
-IFJlZ2lzdGVyZWQgaW4gRW5nbGFuZCBOby4gMjM4MjMzOC4NCg0KVGhpcyBjb21tdW5pY2F0aW9u
-IG1heSBjb250YWluIGluZm9ybWF0aW9uIHdoaWNoIGlzIGNvbmZpZGVudGlhbCwgcGVyc29uYWwg
-YW5kL29yIHByaXZpbGVnZWQuDQoNCkl0IGlzIGZvciB0aGUgZXhjbHVzaXZlIHVzZSBvZiB0aGUg
-aW50ZW5kZWQgcmVjaXBpZW50KHMpLg0KSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVkIHJlY2lw
-aWVudChzKSwgcGxlYXNlIG5vdGUgdGhhdCBhbnkgZGlzdHJpYnV0aW9uLCBmb3J3YXJkaW5nLCBj
-b3B5aW5nIG9yIHVzZSBvZiB0aGlzIGNvbW11bmljYXRpb24gb3IgdGhlIGluZm9ybWF0aW9uIGlu
-IGl0IGlzIHN0cmljdGx5IHByb2hpYml0ZWQuDQoNCkFueSBwZXJzb25hbCB2aWV3cyBleHByZXNz
-ZWQgaW4gdGhpcyBlLW1haWwgYXJlIHRob3NlIG9mIHRoZSBpbmRpdmlkdWFsIHNlbmRlciBhbmQg
-dGhlIGNvbXBhbnkgZG9lcyBub3QgZW5kb3JzZSBvciBhY2NlcHQgcmVzcG9uc2liaWxpdHkgZm9y
-IHRoZW0uDQoNClByaW9yIHRvIHRha2luZyBhbnkgYWN0aW9uIGJhc2VkIHVwb24gdGhpcyBlLW1h
-aWwgbWVzc2FnZSwgeW91IHNob3VsZCBzZWVrIGFwcHJvcHJpYXRlIGNvbmZpcm1hdGlvbiBvZiBp
-dHMgYXV0aGVudGljaXR5Lg0KDQpUaGlzIGUtbWFpbCBoYXMgYmVlbiBzY2FubmVkIGZvciBhbGwg
-dmlydXNlcyBieSBNZXNzYWdlTGFicy4NCg==
+    This is only way for compile for now since qemu can not
+    run the sizers binary for e6500 machines. It segfaults
+    so we disable generating sizes and also xawt and jawt
+    which depends on sizers, this lets jre to cross compile
+    for ppc/e6500
+
+The fix is ported according to da0b3a20a67496dc8d4282d19a60672001b7f825
+
+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
+---
+ recipes-core/openjdk/openjdk-6-release-6b24.inc | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/recipes-core/openjdk/openjdk-6-release-6b24.inc b/recipes-core/openjdk/openjdk-6-release-6b24.inc
+index d0da379..da5299f 100644
+--- a/recipes-core/openjdk/openjdk-6-release-6b24.inc
++++ b/recipes-core/openjdk/openjdk-6-release-6b24.inc
+@@ -90,6 +90,13 @@ ICEDTEAPATCHES_append_e5500-64b = " \
+ ICEDTEAPATCHES_append_e5500 = " \
+         file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
+ 	"
++ICEDTEAPATCHES_append_e6500-64b = " \
++        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
++        "
++ICEDTEAPATCHES_append_e6500 = " \
++        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
++        "
++
+ ICEDTEAPATCHES_append_libc-uclibc = " \
+         file://icedtea-hotspot-isfinte.patch;apply=no \
+         file://icedtea-hotspot-glibc-version.patch;apply=no \
+@@ -132,4 +139,11 @@ DISTRIBUTION_PATCHES_append_e5500-64b = " \
+ DISTRIBUTION_PATCHES_append_e5500 = " \
+        patches/icedtea-jdk-sizers-crosscompile-hack.patch \
+        "
++DISTRIBUTION_PATCHES_append_e6500-64b = " \
++       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
++       "
++
++DISTRIBUTION_PATCHES_append_e6500 = " \
++       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
++       "
+ export DISTRIBUTION_PATCHES
+-- 
+1.9.1
+
 
