@@ -1,26 +1,39 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A86A60196
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
+	[195.245.231.147])
+	by mail.openembedded.org (Postfix) with ESMTP id 35AB060196
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 13:11:48 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,1003,1389740400"; d="scan'208";a="50843787"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 07 May 2014 15:11:48 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Wed, 7 May 2014 15:11:48 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Wed, 7 May 2014 15:11:47 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 May 2014 15:11:56 +0200
-Message-ID: <1399468316-20964-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
-In-Reply-To: <20140506214124.GD30955@jama>
-References: <20140506214124.GD30955@jama>
+	Wed,  7 May 2014 13:16:06 +0000 (UTC)
+Received: from [85.158.139.51:52489] by server-11.bemta-5.messagelabs.com id
+	EC/52-30804-7123A635; Wed, 07 May 2014 13:16:07 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-6.tower-180.messagelabs.com!1399468564!26653837!3
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5918 invoked from network); 7 May 2014 13:16:06 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s037.Technology.local)
+	(89.206.228.155)
+	by server-6.tower-180.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 May 2014 13:16:06 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s037.Technology.local ([10.234.1.39]) with mapi; Wed, 7 May 2014
+	14:16:05 +0100
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 May 2014 14:16:04 +0100
+Thread-Topic: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files
+	when they are read only
+Thread-Index: Ac9p9nGZGUdZPmPGR62aJxJGoOxFpQ==
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] tk: cleanup & add PACKAGECONFIG
+Subject: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files when they are read only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,113 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 13:11:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 May 2014 13:16:12 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Changes:
-- add PACKAGECONFIG "xft" enables XFontConfig features
-- add PACKAGECONFIG "xss" enables XScreenSaver extension
-- use ${BPN} and ${PV}
-- use ${VER} intermediate variable for readability
-- fulfill LIC_FILES_CHKSUM
-- remove BINCONFIG_GLOB: inherit binconfig is not present, lib/tkConfig.sh paths are valid
-- add SSTATE_SCAN_FILES, like it is done in tcl recipe (OE-Core)
-
-Note: tcl and tk are sharing the same licence, tcl licence file in commited in OE-Core.
-
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb | 44 ++++++++++++++++++++++--------
- 1 file changed, 33 insertions(+), 11 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
-index d12973c..36a1729 100644
---- a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
-+++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
-@@ -1,12 +1,24 @@
- SUMMARY = "Tool Command Language ToolKit Extension"
- HOMEPAGE = "http://tcl.sourceforge.net"
- SECTION = "devel/tcltk"
-+
-+# http://www.tcl.tk/software/tcltk/license.html
- LICENSE = "tcl"
--LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe"
-+LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+    file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-+"
-+
- DEPENDS = "tcl virtual/libx11 libxt"
- 
- SRC_URI = "\
--    ${SOURCEFORGE_MIRROR}/tcl/tk${PV}-src.tar.gz \
-+    ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
-     file://confsearch.diff;striplevel=2 \
-     file://non-linux.diff;striplevel=2 \
-     file://tklibrary.diff;striplevel=2 \
-@@ -16,8 +28,12 @@ SRC_URI = "\
- SRC_URI[md5sum] = "b883a1a3c489c17413fb602a94bf54e8"
- SRC_URI[sha256sum] = "5c708b2b6f658916df59190b27750fa1ea2bc10992108e10f961c0700f058de6"
- 
--S = "${WORKDIR}/tk${PV}/unix"
--LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/8.6.0/lib"
-+S = "${WORKDIR}/${BPN}${PV}/unix"
-+
-+# Short version format: "8.6"
-+VER = "${@os.path.splitext(d.getVar('PV', True))[0]}"
-+
-+LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
- inherit autotools
- 
- EXTRA_OECONF = "\
-@@ -28,27 +44,33 @@ EXTRA_OECONF = "\
- "
- 
- do_install_append() {
--    ln -sf libtk8.6.so ${D}${libdir}/libtk8.6.so.0
--    oe_libinstall -so libtk8.6 ${D}${libdir}
--    ln -sf wish8.6 ${D}${bindir}/wish
--	
-+    ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
-+    oe_libinstall -so libtk${VER} ${D}${libdir}
-+    ln -sf wish${VER} ${D}${bindir}/wish
-+
-     # Even after passing libdir=${libdir} at config, some incorrect dirs are still generated for the multilib build
-     if [ "$libdir" != "/usr/lib" ]; then
-         # Move files to correct library directory
--        mv ${D}/usr/lib/tk8.6/* ${D}/${libdir}/tk8.6/
-+        mv ${D}/usr/lib/tk${VER}/* ${D}/${libdir}/tk${VER}/
-         # Remove unneeded/incorrect dir ('usr/lib/')
-         rm -rf ${D}/usr/lib
-     fi
- }
- 
-+PACKAGECONFIG ??= "xft"
-+PACKAGECONFIG[xft] = "--enable-xft,--disable-xft,xft"
-+PACKAGECONFIG[xss] = "--enable-xss,--disable-xss,libxscrnsaver libxext"
-+
- PACKAGES =+ "${PN}-lib"
- 
--FILES_${PN}-lib = "${libdir}/libtk8.6.so*"
-+FILES_${PN}-lib = "${libdir}/libtk${VER}.so*"
- FILES_${PN} += "${libdir}/tk*"
- 
- # isn't getting picked up by shlibs code
- RDEPENDS_${PN} += "tk-lib"
- RDEPENDS_${PN}_class-native = ""
- 
--BINCONFIG_GLOB = "*Config.sh"
- BBCLASSEXTEND = "native"
-+
-+# Fix the path in sstate
-+SSTATE_SCAN_FILES += "*Config.sh"
--- 
-1.8.5.4
-
+RnJvbSAyODBmZjI0ZjU5N2U1Y2Y2NjNjNzZmYTkwMjUwY2NlMjI5YzZhYWM5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQ0KRnJvbTogTmljayBMZXdpcyA8bmljay5sZXdpc0B1c2EuZzRzLmNvbT4N
+CkRhdGU6IFdlZCwgNyBNYXkgMjAxNCAxNDowMjoyNSArMDEwMA0KU3ViamVjdDogW1BBVENIXSBG
+aXggcmVmZXRjaCBvZiBsb2NhbCBmaWxlcyB3aGVuIHRoZXkgYXJlIHJlYWQgb25seQ0KDQpTaWdu
+ZWQtb2ZmLWJ5OiBOaWNrIExld2lzIDxuaWNrLmxld2lzQHVzYS5nNHMuY29tPg0KLS0tDQogYml0
+YmFrZS9saWIvYmIvZmV0Y2gyL19faW5pdF9fLnB5IHwgNCArKy0tDQogMSBmaWxlIGNoYW5nZWQs
+IDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2JpdGJha2Uv
+bGliL2JiL2ZldGNoMi9fX2luaXRfXy5weSBiL2JpdGJha2UvbGliL2JiL2ZldGNoMi9fX2luaXRf
+Xy5weQ0KaW5kZXggNWE5YzcyZi4uZjU3MWZjNCAxMDA2NDQNCi0tLSBhL2JpdGJha2UvbGliL2Ji
+L2ZldGNoMi9fX2luaXRfXy5weQ0KKysrIGIvYml0YmFrZS9saWIvYmIvZmV0Y2gyL19faW5pdF9f
+LnB5DQpAQCAtMTI1MSw3ICsxMjUxLDcgQEAgY2xhc3MgRmV0Y2hNZXRob2Qob2JqZWN0KToNCiAg
+ICAgICAgICAgICAgICAgICAgICAgICBkZXN0ZGlyID0gZGVzdGRpci5zdHJpcCgnLycpDQogICAg
+ICAgICAgICAgICAgICAgICBpZiBkZXN0ZGlyICE9ICIuIiBhbmQgbm90IG9zLmFjY2VzcygiJXMv
+JXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpLCBvcy5GX09LKToNCiAgICAgICAgICAgICAgICAgICAg
+ICAgICBvcy5tYWtlZGlycygiJXMvJXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpKQ0KLSAgICAgICAg
+ICAgICAgICAgICAgY21kID0gJ2NwIC1wUFIgJXMgJXMvJXMvJyAlIChmaWxlLCByb290ZGlyLCBk
+ZXN0ZGlyKQ0KKyAgICAgICAgICAgICAgICAgICAgY21kID0gJ2NwIC1mcFBSICVzICVzLyVzLycg
+JSAoZmlsZSwgcm9vdGRpciwgZGVzdGRpcikNCiAgICAgICAgICAgICAgICAgICAgICNjbWQgPSAn
+dGFyIC1jZiAtIC1DICIlZCIgLXBzIC4gfCB0YXIgLXhmIC0gLUMgIiVzLyVzLyInICUgKGZpbGUs
+IHJvb3RkaXIsIGRlc3RkaXIpDQogICAgICAgICAgICAgICAgIGVsc2U6DQogICAgICAgICAgICAg
+ICAgICAgICAjIFRoZSAiZGVzdGRpciIgaGFuZGxpbmcgd2FzIHNwZWNpZmljYWxseSBkb25lIGZv
+ciBGSUxFU1BBVEgNCkBAIC0xMjYxLDcgKzEyNjEsNyBAQCBjbGFzcyBGZXRjaE1ldGhvZChvYmpl
+Y3QpOg0KICAgICAgICAgICAgICAgICAgICAgZWxzZToNCiAgICAgICAgICAgICAgICAgICAgICAg
+IGRlc3RkaXIgPSAiLiINCiAgICAgICAgICAgICAgICAgICAgIGJiLnV0aWxzLm1rZGlyaGllcigi
+JXMvJXMiICUgKHJvb3RkaXIsIGRlc3RkaXIpKQ0KLSAgICAgICAgICAgICAgICAgICAgY21kID0g
+J2NwICVzICVzLyVzLycgJSAoZmlsZSwgcm9vdGRpciwgZGVzdGRpcikNCisgICAgICAgICAgICAg
+ICAgICAgIGNtZCA9ICdjcCAtZiAlcyAlcy8lcy8nICUgKGZpbGUsIHJvb3RkaXIsIGRlc3RkaXIp
+DQoNCiAgICAgICAgIGlmIG5vdCBjbWQ6DQogICAgICAgICAgICAgcmV0dXJuDQotLQ0KMS45LjEN
+Cg0KDQpOaWNrIExld2lzDQpuaWNrLmxld2lzQHVzYS5nNHMuY29tDQorNDQgMTY4NCAyNzcxMzcN
+Cnd3dy5nNHN0ZWNobm9sb2d5LmNvbQ0KTmV3IENoYWxsZW5nZSBIb3VzZSwgSW50ZXJuYXRpb25h
+bCBEcml2ZSwgVGV3a2VzYnVyeSwgR2xvdWNlc3RlcnNoaXJlLCBHTDIwIDhVUSwgVUsNCg0K74GQ
+IFBsZWFzZSBjb25zaWRlciB0aGUgZW52aXJvbm1lbnQgYmVmb3JlIHByaW50aW5nIHRoaXMgZW1h
+aWwNCg0KDQpUaGUgZGV0YWlscyBvZiB0aGlzIGNvbXBhbnkgYXJlIGFzIGZvbGxvd3M6DQpHNFMg
+VGVjaG5vbG9neSBMaW1pdGVkLCBSZWdpc3RlcmVkIE9mZmljZTogQ2hhbGxlbmdlIEhvdXNlLCBJ
+bnRlcm5hdGlvbmFsIERyaXZlLCBUZXdrZXNidXJ5LCBHbG91Y2VzdGVyc2hpcmUgR0wyMCA4VVEs
+IFJlZ2lzdGVyZWQgaW4gRW5nbGFuZCBOby4gMjM4MjMzOC4NCg0KVGhpcyBjb21tdW5pY2F0aW9u
+IG1heSBjb250YWluIGluZm9ybWF0aW9uIHdoaWNoIGlzIGNvbmZpZGVudGlhbCwgcGVyc29uYWwg
+YW5kL29yIHByaXZpbGVnZWQuDQoNCkl0IGlzIGZvciB0aGUgZXhjbHVzaXZlIHVzZSBvZiB0aGUg
+aW50ZW5kZWQgcmVjaXBpZW50KHMpLg0KSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVkIHJlY2lw
+aWVudChzKSwgcGxlYXNlIG5vdGUgdGhhdCBhbnkgZGlzdHJpYnV0aW9uLCBmb3J3YXJkaW5nLCBj
+b3B5aW5nIG9yIHVzZSBvZiB0aGlzIGNvbW11bmljYXRpb24gb3IgdGhlIGluZm9ybWF0aW9uIGlu
+IGl0IGlzIHN0cmljdGx5IHByb2hpYml0ZWQuDQoNCkFueSBwZXJzb25hbCB2aWV3cyBleHByZXNz
+ZWQgaW4gdGhpcyBlLW1haWwgYXJlIHRob3NlIG9mIHRoZSBpbmRpdmlkdWFsIHNlbmRlciBhbmQg
+dGhlIGNvbXBhbnkgZG9lcyBub3QgZW5kb3JzZSBvciBhY2NlcHQgcmVzcG9uc2liaWxpdHkgZm9y
+IHRoZW0uDQoNClByaW9yIHRvIHRha2luZyBhbnkgYWN0aW9uIGJhc2VkIHVwb24gdGhpcyBlLW1h
+aWwgbWVzc2FnZSwgeW91IHNob3VsZCBzZWVrIGFwcHJvcHJpYXRlIGNvbmZpcm1hdGlvbiBvZiBp
+dHMgYXV0aGVudGljaXR5Lg0KDQpUaGlzIGUtbWFpbCBoYXMgYmVlbiBzY2FubmVkIGZvciBhbGwg
+dmlydXNlcyBieSBNZXNzYWdlTGFicy4NCg==
 
