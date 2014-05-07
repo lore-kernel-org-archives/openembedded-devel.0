@@ -1,41 +1,34 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
-	[193.109.254.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 070BF60559
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id D6722606E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 12:07:23 +0000 (UTC)
-Received: from [85.158.140.195:32459] by server-1.bemta-14.messagelabs.com id
-	00/85-00839-BF12A635; Wed, 07 May 2014 12:07:23 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-6.tower-193.messagelabs.com!1399464443!11122000!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 5570 invoked from network); 7 May 2014 12:07:23 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-6.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
-	7 May 2014 12:07:23 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 7 May 2014
-	13:07:23 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 May 2014 13:07:22 +0100
-Thread-Topic: [oe] Fix for libxml++_ptest.patch with out-of-source build
-Thread-Index: Ac9pK4mbW4sFdOQsQFSIp5+yt9wqjgAI8dsAACW+3fA=
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC6@GBTWK10E001.Technology.local>
-References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0@GBTWK10E001.Technology.local>
-	<2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
-In-Reply-To: <2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: Fix for libxml++_ptest.patch with out-of-source build
+	Wed,  7 May 2014 12:19:36 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Wi0ow-00051l-Qj for openembedded-devel@lists.openembedded.org;
+	Wed, 07 May 2014 14:19:34 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 May 2014 14:19:34 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 May 2014 14:19:34 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 07 May 2014 14:19:23 +0200
+Message-ID: <lkd8cb$5n2$1@ger.gmane.org>
+References: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+In-Reply-To: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe][PATCH] xdelta3: add optional lzma support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,49 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 12:07:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 May 2014 12:19:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
->thanks for the note. However I would encourage you to submit a patch for m=
-eta-oe if you can guidelines are here
->
->http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
->
->Thanks
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Khem
+Matthieu Crapet schreef op 07-05-14 13:43:
+> Using PACKAGECONFIG. Disabled by default.
+> 
+> Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com> --- 
+> meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb | 4 ++++ 1 file changed, 
+> 4 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb 
+> b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb index 16a72ee..f3b4754 
+> 100644 --- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb +++ 
+> b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb @@ -13,3 +13,7 @@ 
+> SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3" SRC_URI[sha256sum]
+> = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
+> 
+> inherit autotools + +# Optional secondary compression +PACKAGECONFIG ?= 
+> "" +PACKAGECONFIG[lzma] = ",,xz"
 
-I cannot use git send-email as only MAPI email is supported here . However =
-I have redone the patch using git format-patch -s and pasted it into an ema=
-il under the title "libxml plus plus ptest with B noteq S". I hope this can=
- be applied in a similar way
+If there's not configure switch for it, add it to DEPENDS to avoid suprises.
 
-Please let me know if there are any problems with it
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-Nick
+iD8DBQFTaiTLMkyGM64RGpERAglxAKCBVh+CyLipm+C+VJeQFQ3UZc1LSQCfdeVH
+3sFkaMpsdr6M977BEM4EVDQ=
+=Gnvt
+-----END PGP SIGNATURE-----
 
-
-
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
 
