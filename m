@@ -1,46 +1,29 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-qc0-f176.google.com (mail-qc0-f176.google.com
-	[209.85.216.176])
-	by mail.openembedded.org (Postfix) with ESMTP id A5E076059B
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 07 May 2014 18:39:20 UTC
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id E8638601A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 18:23:37 +0000 (UTC)
-Received: by mail-qc0-f176.google.com with SMTP id r5so1590568qcx.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 11:23:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=nEYo1JIXwV4zCgLeidsfKYEENSVCLdmLiFB3aF2vFfU=;
-	b=YSCNd//WtB+EajOJm0jFJJNHj2qzsqok3WMr4bdJwKGedeqU8Y5Fzpg56T/QaW+ODp
-	zvpgU3+w4zrwjxmiWaOgMkhAs+rlujx1x4grlHW+uCHyRQiDzGpVJ/bmXiUItucFjya8
-	AJX40ULy4JGPiu4Jpp2L5338C50IgFLWaZJQKyxamxrTulns9pFJe0ADfEulniyIZX+Y
-	WBaCUdMMFoGFhFPJKvMMkiaiDZVHkFlbW8IWzqtrXX1RzrjviNq605QTYsfcuqfQXbhd
-	UPmOuTLzm2IlhcfJwy61Eu8MTuY00gvZ8nvGkB0kE8dGoDgQBegw+pNb+wpFVpLugj8I
-	W0Yg==
-X-Gm-Message-State: ALoCoQlAR9jED2xk698wDQMZbg/TQITJeRsvny8PlHLC93gHFsA8HAtqsaV8SASEJI/KkWGXonQj
-X-Received: by 10.140.27.245 with SMTP id 108mr26293464qgx.18.1399487017738;
-	Wed, 07 May 2014 11:23:37 -0700 (PDT)
-Received: from deserted.net ([128.224.252.2])
-	by mx.google.com with ESMTPSA id t5sm30320938qaj.34.2014.05.07.11.23.36
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 07 May 2014 11:23:36 -0700 (PDT)
-Date: Wed, 7 May 2014 14:23:34 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: Amy Fong <amy.fong@windriver.com>
-Message-ID: <20140507182329.GC8085@deserted.net>
-References: <20140409173022.GA2661@windriver.com>
-	<20140425013419.GM10115@deserted.net>
+	Wed,  7 May 2014 18:39:20 +0000 (UTC)
+Received: (qmail 848 invoked by uid 1003); 7 May 2014 18:32:41 -0000
+Received: from unknown (HELO ?10.16.32.157?)
+	(philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	7 May 2014 18:32:40 -0000
+Message-ID: <536A7C42.6030502@balister.org>
+Date: Wed, 07 May 2014 11:32:34 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-In-Reply-To: <20140425013419.GM10115@deserted.net>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.22 (2013-10-16)
+To: Adam Lee <adam.yh.lee@gmail.com>
+References: <20140430143741.GL2486@jama>	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
+	<20140505164514.GM2486@jama>
+In-Reply-To: <20140505164514.GM2486@jama>
+X-Enigmail-Version: 1.6
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking] Uprev memcached from upstream
+Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,137 +37,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 18:23:40 -0000
-X-Groupsio-MsgNum: 49783
+X-List-Received-Date: Wed, 07 May 2014 18:39:24 -0000
+X-Groupsio-MsgNum: 49784
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NklN7DEeGtkPCoo3"
-Content-Disposition: inline
+	protocol="application/pgp-signature";
+	boundary="1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj"
 
---NklN7DEeGtkPCoo3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking] Uprev memcached from upstream] On 14.04.24 (Thu=
- 21:34) Joe MacDonald wrote:
-
-> Hi Amy,
+On 05/05/2014 09:45 AM, Martin Jansa wrote:
+> On Mon, May 05, 2014 at 09:32:04AM -0700, Adam Lee wrote:
+>> Hi JaMa, what does it take to be a maintainer?
+>>
+>> Do I need to build check all the packages everyday?
 >=20
-> Should I expect a v2 based on Martin and Khem's comments?  Also, if
-> you're doing the uprev, it's probably worth removing the old one at the
-> same time.
+> Definitely no everyday, there are more patches coming in just after the=
 
-Finally coming up for air again, so ping?
+> release, but later it's something like 1-5 patches in month.
+>=20
+> So it doesn't need much time, but it's always good when it's done by
+> someone else then master maintainer (to setup separate builds etc).
+>=20
+> Possibly more time is spent on watching the ML, because many people
+> don't read README file and instead of following the proper procedure fo=
+r
+> backports to relase branches they just say somewhere in ML "BTW: also
+> merge this to dora".
+>=20
+> You can also have some co-maintainer if you find way to split the work
+> without duplicating it.
 
--J.
+Adam,
+
+I'd be glad to help scan the list for backport requests.
+
+Philip
 
 >=20
-> -J.
+> I'm fine with scheme where maintainer sends me consolidated pull-reques=
+t
+> and I'll merge it for him to actual branch (so that he doesn't even nee=
+d
+> R/W to main repo).
 >=20
-> [[oe] [meta-networking] Uprev memcached from upstream] On 14.04.09 (Wed 1=
-3:30) Amy Fong wrote:
+> BTW: If you don't mind, then I'll forward this to oe-devel as well for
+> other possible volunteers.
 >=20
-> > commit 3d0b80c5667a2c1d8634173948048567d0bc9c36
-> > Author: Amy Fong <amy.fong@windriver.com>
-> > Date:   Tue Apr 8 14:29:19 2014 -0400
-> >=20
-> >     Uprev memcached from upstream
-> >    =20
-> >     memcached 1.4.15 has some configuration errors:
-> >     configure:5798: error: cannot run test program while cross compiling
-> >    =20
-> >     Uprev has the needed fix for the configuration error and some other=
- fixes.
-> >    =20
-> >     Signed-off-by: Amy Fong <amy.fong@windriver.com>
-> >=20
-> > diff --git a/recipes-support/memcached/memcached_1.4.17.bb b/recipes-su=
-pport/memcached/memcached_1.4.17.bb
-> > new file mode 100644
-> > index 0000000..906896c
-> > --- /dev/null
-> > +++ b/recipes-support/memcached/memcached_1.4.17.bb
-> > @@ -0,0 +1,50 @@
-> > +SUMMARY =3D "A high-performance memory object caching system"
-> > +DESCRIPTION =3D "\
-> > + Danga Interactive developed memcached to enhance the speed of LiveJou=
-rnal.com, \
-> > + a site which was already doing 20 million+ dynamic page views per day=
- for 1 \
-> > + million users with a bunch of webservers and a bunch of database serv=
-ers. \
-> > + memcached dropped the database load to almost nothing, yielding faste=
-r page \
-> > + load times for users, better resource utilization, and faster access =
-to the \
-> > + databases on a memcache miss. \
-> > + . \
-> > + memcached optimizes specific high-load serving applications that are =
-designed \
-> > + to take advantage of its versatile no-locking memory access system. C=
-lients \
-> > + are available in several different programming languages, to suit the=
- needs \
-> > + of the specific application. Traditionally this has been used in mod_=
-perl \
-> > + apps to avoid storing large chunks of data in Apache memory, and to s=
-hare \
-> > + this burden across several machines."
-> > +
-> > +HOMEPAGE =3D "http://www.danga.com/memcached/"
-> > +LICENSE =3D "BSD"
-> > +
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7e5ded7363d335e1bb18013ca08=
-046ff"
-> > +
-> > +inherit autotools
-> > +
-> > +DEPENDS +=3D "libevent"
-> > +RDEPENDS +=3D "perl perl-module-posix perl-module-autoloader perl-modu=
-le-tie-hash"
-> > +
-> > +SRC_URI =3D "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
-> > +
-> > +SRC_URI[md5sum] =3D "46402dfbd7faadf6182283dbbd18b1a6"
-> > +SRC_URI[sha256sum] =3D "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9=
-926a89999d8cdc0458"
-> > +
-> > +python __anonymous () {
-> > +    endianness =3D d.getVar('SITEINFO_ENDIANNESS', True)
-> > +    if endianness =3D=3D 'le':
-> > +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dlittle")
-> > +    else:
-> > +        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=3Dbig")
-> > +}
-> > +
-> > +inherit update-rc.d
-> > +
-> > +INITSCRIPT_NAME =3D "memcached"
-> > +INITSCRIPT_PARAMS =3D "defaults"
-> > +
-> > +do_install_append() {
-> > +	install -D -m 755 ${S}/scripts/memcached-init ${D}${sysconfdir}/init.=
-d/memcached=20
-> > +	mkdir -p ${D}/usr/share/memcached/scripts
-> > +	install -m 755 ${S}/scripts/memcached-tool ${D}/usr/share/memcached/s=
-cripts
-> > +	install -m 755 ${S}/scripts/start-memcached ${D}/usr/share/memcached/=
-scripts
-> > +}
---=20
--Joe MacDonald.
-:wq
+> Cheers,
+>=20
+>> Please let me know!
+>>
+>> Adam
+>>
+>> On Wed, Apr 30, 2014 at 7:37 AM, Martin Jansa <martin.jansa@gmail.com>=
+ wrote:
+>>> Hi,
+>>>
+>>> few people asked me when there will be daisy branch in meta-openembed=
+ded
+>>> repository.
+>>>
+>>> My current plan is at the end of next week.
+>>>
+>>> There are some pending fixes I need to finish testing (please review,=
 
---NklN7DEeGtkPCoo3
+>>> test and reply on them).
+>>>
+>>> I was hoping for few more fixes for
+>>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-March=
+/094893.html
+>>>
+>>> and especially for incorrect dependencies:
+>>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
+/095268.html
+>>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
+/095464.html
+>>>
+>>> There is only one change on ML which really cannot go to daisy branch=
+
+>>> (http://patchwork.openembedded.org/patch/71107/), the B!=3DS fixes ar=
+e on
+>>> edge, but they shouldn't harm to be in daisy.
+>>>
+>>> I hope to get few more fixes from OEDAM and then I'll run final build=
+
+>>> test on jenkins (3days, possibly needed twice).
+>>>
+>>> If you want to maintain daisy release in meta-oe, reply in this threa=
+d
+>>> and send patch to update README files.
+>>>
+>>> Regards,
+>>> --
+>>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>=20
+>=20
+>=20
+
+
+--1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v1
+Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
 
-iEYEARECAAYFAlNqeiEACgkQwFvcllog0XzdKgCcDAoKZPrrjJI9vnqSFXWbCYDw
-VRkAoLba9IOGGw0KvWqFpzklxvuGy5Ip
-=ug7j
+iQEcBAEBAgAGBQJTanxGAAoJEMDJd4rr0mer34cIAMI7ExhD3uKZvM72Qq8xDOYe
+S9hXRoBDGV2hTpbOEtcnVtLwg7Vy9QsbDR6XuSPndj5duTYIXrlHwUu4IgjnothZ
+jsetdQXoWdGzCTQfDyEVZfz3jmC5kBwKg2qSz4qgiJfuXouGFlvUQkCnq/nmdRqA
+Qu5N2jPJfwSsc5MVeVJA2I2G/e1NMhdK8YcYqw5Xb0PXAI64oBZkvp8OwuqhnqH8
+LixbVhKLOnILpVJj2Pgud1sipj/weVhEYadu/plaX3IaJAbinJENTObO0L7ifLOF
+ij/3ylPUgzb80ls4w8K7KQfQP4icOxNRtb1jICQaMeTJ5Xq2/6B5jevDCURDqlU=
+=Bszb
 -----END PGP SIGNATURE-----
 
---NklN7DEeGtkPCoo3--
+--1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj--
