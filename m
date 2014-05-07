@@ -1,35 +1,35 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id C227A60703
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 51000601A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 15:16:17 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id fa1so1299048pad.20
+	Wed,  7 May 2014 15:59:55 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id x10so1212778pdj.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 08:16:18 -0700 (PDT)
+	Wed, 07 May 2014 08:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=wjIXMb0KzoA47qy4hzfQ7vwLJbz/whhb0es9dUvwREY=;
-	b=NMmMfOWCiNSLrqyJ+ZO8lRSNMsg23+9rAyg/OA0sJVLhrOhZy1ArHTTHq/3VvJuxo5
-	Opv6Jrprxv4qHLPIAGgKniG4vtPcPydWLIZXOeOPlZOtGqWoGNvR+rRzCpff5qI5TlHd
-	P1diChWzVk8gu8ZQnRC9FrnC5BxgLV5gYxo5XhrRruBEOGlN8RD/0lFy3XkGAXWYI1Vm
-	OELQ9c2T2FvBYYYIxHApRG/rix5f9gZEJ31RRfKnKMBLRgPynns9tzJx0mYNjIJWSbGB
-	lGO6pDIP9YhDFb1c4xEp8kHBmeZ6BTctzH8QMdoCNbzRY83fR6QKpk192t5iTsqnyrQG
-	lFng==
-X-Received: by 10.66.249.233 with SMTP id yx9mr20144713pac.3.1399475778128;
-	Wed, 07 May 2014 08:16:18 -0700 (PDT)
+	bh=+8XyUvgg1fUatuIWTjkYzWnTCZOTDi8nMDoz8LPMwvw=;
+	b=T5xG4F/1qKJKM8smpSzpAoZBjIOcLbWjiSb2+phWM6QnX9SuG5VFkEtnP6HfpUVmOP
+	QqvIiYbC6Y9A2bspJep+YIxNjbRMiBIsnC8hp0w3X8QoPy/dIO4/p7Ijis0SoUHjXH1o
+	c27yD2P0CgNL51SRUDt7KnfS07Db6/EgOQX4V36NJhrjAUzGWNngysk8nIzaAD8pmI2B
+	H+dYXwPBlkQFNcb2/YezcyGHLqXUs8gOUz8w2+990e31PvI65NTPIgdWK3TzJnzUIXCV
+	21SHOPyaVNpQ4O7yKuVoiGMNofAHcx37rIpodMlD870s7zzQ8lmBLEX+4utRAp2ASah/
+	ow0A==
+X-Received: by 10.66.190.4 with SMTP id gm4mr20365084pac.116.1399478396540;
+	Wed, 07 May 2014 08:59:56 -0700 (PDT)
 Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id dd5sm3723771pbc.85.2014.05.07.08.16.15
+	by mx.google.com with ESMTPSA id nf5sm3894546pbc.77.2014.05.07.08.59.54
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 May 2014 08:16:16 -0700 (PDT)
+	Wed, 07 May 2014 08:59:55 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 May 2014 08:16:31 -0700
-Message-Id: <1399475791-30061-1-git-send-email-ticotimo@gmail.com>
+Date: Wed,  7 May 2014 09:00:18 -0700
+Message-Id: <1399478418-22180-1-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-perl][WIP] vlc: add dependencies, drop unrecognized options
+Subject: [meta-multimedia][WIP] fluidsynth: upgrade to 1.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,73 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 15:16:22 -0000
+X-List-Received-Date: Wed, 07 May 2014 15:59:59 -0000
 
 From: Tim Orling <TicoTimo@gmail.com>
 
-  * add PKGCONFIG for libass, mkv
-  * drop PKGCONFIG for id3tag, mpeg2dec
-  * drop unrecognized options:
-  	--enable-v4l,
-  	--disable-opengl,-id3tag,-mpeg2dec
-  * add dependencies from JaMa builds / configure.ac
+  * now hosted at sourceforge
+  * drop unrecognized option for readline
 
-  NOTE: requires fluidsynth >= 1.1.2 (will work on that next)
+  NOTE: autotools is deprecated
+  TODO: investigate cmake build
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+ .../fluidsynth/{fluidsynth_1.1.1.bb => fluidsynth_1.1.6.bb}   | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+ rename meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_1.1.1.bb => fluidsynth_1.1.6.bb} (60%)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 1b2490b..58f5648 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -5,9 +5,13 @@ SECTION = "multimedia"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
+similarity index 60%
+rename from meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
+rename to meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
+index c497d98..f928ed0 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.1.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
+@@ -2,19 +2,18 @@ SUMMARY = "Fluidsynth is a software synthesizer"
+ HOMEPAGE = "http://www.fluidsynth.org/"
+ SECTION = "libs/multimedia"
+ LICENSE = "LGPL-2.0+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
  
--DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free \
--   dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib \
--   libdvdcss libdvdread lua-native lua"
-+DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl \
-+   libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls tremor \
-+   faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib libdvdcss \
-+   libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs libdc1394 \
-+   libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-+   libmtp opencv libopus orc libusb1 schroedinger taglib \
-+   tiff xcb-util-keysyms samba"
+ DEPENDS = "alsa-lib ncurses glib-2.0"
  
- SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+-SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
+-SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
+-SRC_URI[sha256sum] = "55638cb04f39f4df76c081e22ca7feeea58ddd20ebf779a7db2d38b1ff374cd6"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/${PN}-${PV}/${PN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "ae5aca6de824b4173667cbd3a310b263"
++SRC_URI[sha256sum] = "50853391d9ebeda9b4db787efb23f98b1e26b7296dd2bb5d0d96b5bccee2171c"
  
-@@ -26,11 +30,11 @@ EXTRA_OECONF = "\
-     --enable-sdl \ 
-     --enable-png \
-     --enable-live555 --enable-tremor \
--    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
-+    --enable-v4l2 --disable-aa --disable-faad \
-     --enable-dbus \
-     --without-contrib \
-     --without-kde-solid \
--    --disable-opengl --disable-glx \
-+    --disable-glx \
-     --enable-realrtsp \
-     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
-     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
-@@ -38,11 +42,11 @@ EXTRA_OECONF = "\
- "
+-inherit autotools pkgconfig lib_package
++inherit autotools pkgconfig lib_package gettext
  
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
--PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
- PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
--PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
- PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
- PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
-+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
-+PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
- 
- do_configure() {
-     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
+ PACKAGECONFIG[sndfile] = "--enable-libsndfile-support,--disable-libsndfile-support,libsndfile1"
+ PACKAGECONFIG[jack] = "--enable-jack-support,--disable-jack-support,jack"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulse-support,--disable-pulse-support,pulseaudio"
+ PACKAGECONFIG[portaudio] = "--enable-portaudio-support,--disable-portaudio-support,portaudio"
+-PACKAGECONFIG[readline] = "--with-readline,--without-readline-support,readline"
 -- 
 1.8.3.2
 
