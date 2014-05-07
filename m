@@ -1,29 +1,32 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 07 May 2014 18:39:20 UTC
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id E8638601A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 18:39:20 +0000 (UTC)
-Received: (qmail 848 invoked by uid 1003); 7 May 2014 18:32:41 -0000
-Received: from unknown (HELO ?10.16.32.157?)
-	(philip@opensdr.com@64.186.172.226)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	7 May 2014 18:32:40 -0000
-Message-ID: <536A7C42.6030502@balister.org>
-Date: Wed, 07 May 2014 11:32:34 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
+	[209.85.217.173])
+	by mail.openembedded.org (Postfix) with ESMTP id AA778601A2;
+	Wed,  7 May 2014 18:43:25 +0000 (UTC)
+Received: by mail-lb0-f173.google.com with SMTP id 10so2001944lbg.32
+	for <multiple recipients>; Wed, 07 May 2014 11:43:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:from:date:message-id:subject:to:content-type;
+	bh=TA5x/e+5CMe/AH1clNKtGkUS98tpKfIZTTdkqQKPf4c=;
+	b=i8jb1mXqMFRaVg82jZT5+Apl59H+g9Xc88dlE63j5CgJ9/FWl+kFNXe+OCH3hDjF4n
+	Az9T1W59E2Vyg7kGN6AEmq1sMXe4XW9Yx5DKmMbNFKPYhMQ/+LSrCaLyRoH30zYvRWkF
+	dTOd9qGzCeqBh6VL6f0EPAV8xOUZp9O3evzIxAbvXl9/OK/Br5421Yi/6bUfTfW+ZITf
+	A92IZOoiHNNbC44E/h0HBZF+Tds57+wG6NlP844fS3m8dO8lpeedai9UOR8Br/6DFICT
+	/44Mte0mr6faaYTiDyOAqK0mF0ssOwbNW3t3clCHnWAWJfTKGXp4RmXxjgHA2WHlhGTI
+	uRBg==
+X-Received: by 10.112.135.198 with SMTP id pu6mr3986455lbb.58.1399488206134;
+	Wed, 07 May 2014 11:43:26 -0700 (PDT)
 MIME-Version: 1.0
-To: Adam Lee <adam.yh.lee@gmail.com>
-References: <20140430143741.GL2486@jama>	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
-	<20140505164514.GM2486@jama>
-In-Reply-To: <20140505164514.GM2486@jama>
-X-Enigmail-Version: 1.6
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
+Sender: jefro.net@gmail.com
+Received: by 10.112.173.197 with HTTP; Wed, 7 May 2014 11:43:05 -0700 (PDT)
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Wed, 7 May 2014 11:43:05 -0700
+X-Google-Sender-Auth: 3yxTwkdn5qpUIj1ionYxCUXumDY
+Message-ID: <CA+YB3ra_3PswPOi=3O9uU0XRw766G5BeOBACPHVkJUWnV6sspA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: OE TSC public meeting 13 May 2014
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,129 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 18:39:24 -0000
-X-Groupsio-MsgNum: 49784
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj"
+X-List-Received-Date: Wed, 07 May 2014 18:43:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
---1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+There will be a public OpenEmbedded TSC/workgroup IRC meeting on
+Tuesday, 13 May 2014, at 18:00 GMT (11am PDT, 12pm CDT, 2pm EDT, 20:00
+CEST, 19:00 BST).
 
-On 05/05/2014 09:45 AM, Martin Jansa wrote:
-> On Mon, May 05, 2014 at 09:32:04AM -0700, Adam Lee wrote:
->> Hi JaMa, what does it take to be a maintainer?
->>
->> Do I need to build check all the packages everyday?
->=20
-> Definitely no everyday, there are more patches coming in just after the=
+If you're interested in discussing long-term technical efforts around
+the OpenEmbedded project please join us on irc.freenode.net in channel
+#oe at the time listed.
 
-> release, but later it's something like 1-5 patches in month.
->=20
-> So it doesn't need much time, but it's always good when it's done by
-> someone else then master maintainer (to setup separate builds etc).
->=20
-> Possibly more time is spent on watching the ML, because many people
-> don't read README file and instead of following the proper procedure fo=
-r
-> backports to relase branches they just say somewhere in ML "BTW: also
-> merge this to dora".
->=20
-> You can also have some co-maintainer if you find way to split the work
-> without duplicating it.
+Possible topics for discussion (based on the last meeting and recent
+mailing list topics):
 
-Adam,
+Issues and solutions discussed at the OEDAM last week, including:
 
-I'd be glad to help scan the list for backport requests.
+- Lava
+- ongoing role of the TSC
+- Why is embedded still hard? & RP's email
+- Lune as potential Sato replacement
+- increasing layer quality
+- next+1 release
+- online voting
+- best practices - image deployment, default config
+- wiki/website organization
+- meta-oe quality
+- developer community outreach
+- bug scrub
+- toaster feedback
+- infrastructure
 
-Philip
+Minutes from OEDAM will be posted before this public meeting.
 
->=20
-> I'm fine with scheme where maintainer sends me consolidated pull-reques=
-t
-> and I'll merge it for him to actual branch (so that he doesn't even nee=
-d
-> R/W to main repo).
->=20
-> BTW: If you don't mind, then I'll forward this to oe-devel as well for
-> other possible volunteers.
->=20
-> Cheers,
->=20
->> Please let me know!
->>
->> Adam
->>
->> On Wed, Apr 30, 2014 at 7:37 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->>> Hi,
->>>
->>> few people asked me when there will be daisy branch in meta-openembed=
-ded
->>> repository.
->>>
->>> My current plan is at the end of next week.
->>>
->>> There are some pending fixes I need to finish testing (please review,=
+New topics for discussion are welcome.
 
->>> test and reply on them).
->>>
->>> I was hoping for few more fixes for
->>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-March=
-/094893.html
->>>
->>> and especially for incorrect dependencies:
->>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
-/095268.html
->>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
-/095464.html
->>>
->>> There is only one change on ML which really cannot go to daisy branch=
+-- 
+Jeff Osier-Mixon @Intel
+Yocto Project Community Manager http://yoctoproject.org
 
->>> (http://patchwork.openembedded.org/patch/71107/), the B!=3DS fixes ar=
-e on
->>> edge, but they shouldn't harm to be in daisy.
->>>
->>> I hope to get few more fixes from OEDAM and then I'll run final build=
-
->>> test on jenkins (3days, possibly needed twice).
->>>
->>> If you want to maintain daisy release in meta-oe, reply in this threa=
-d
->>> and send patch to update README files.
->>>
->>> Regards,
->>> --
->>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->=20
->=20
->=20
-
-
---1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
-
-iQEcBAEBAgAGBQJTanxGAAoJEMDJd4rr0mer34cIAMI7ExhD3uKZvM72Qq8xDOYe
-S9hXRoBDGV2hTpbOEtcnVtLwg7Vy9QsbDR6XuSPndj5duTYIXrlHwUu4IgjnothZ
-jsetdQXoWdGzCTQfDyEVZfz3jmC5kBwKg2qSz4qgiJfuXouGFlvUQkCnq/nmdRqA
-Qu5N2jPJfwSsc5MVeVJA2I2G/e1NMhdK8YcYqw5Xb0PXAI64oBZkvp8OwuqhnqH8
-LixbVhKLOnILpVJj2Pgud1sipj/weVhEYadu/plaX3IaJAbinJENTObO0L7ifLOF
-ij/3ylPUgzb80ls4w8K7KQfQP4icOxNRtb1jICQaMeTJ5Xq2/6B5jevDCURDqlU=
-=Bszb
------END PGP SIGNATURE-----
-
---1Aj9JUNSlr1Cf26XbqOFGoBqaRkNdcjvj--
