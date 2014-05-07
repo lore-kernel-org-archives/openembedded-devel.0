@@ -1,47 +1,34 @@
-Return-Path: <zhenhua.luo@freescale.com>
-X-Greylist: delayed 957 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 07 May 2014 13:53:49 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1blp0183.outbound.protection.outlook.com [207.46.163.183])
-	by mail.openembedded.org (Postfix) with ESMTP id 16FBD60702
+Return-Path: <nickdademo@gmail.com>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EB05D60196
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 13:53:49 +0000 (UTC)
-Received: from CH1PR03CA005.namprd03.prod.outlook.com (10.255.156.150) by
-	BL2PR03MB387.namprd03.prod.outlook.com (10.141.91.152) with Microsoft
-	SMTP Server (TLS) id 15.0.934.12; Wed, 7 May 2014 13:37:52 +0000
-Received: from BL2FFO11FD021.protection.gbl (10.255.156.132) by
-	CH1PR03CA005.outlook.office365.com (10.255.156.150) with Microsoft SMTP
-	Server (TLS) id 15.0.939.12 via Frontend Transport;
-	Wed, 7 May 2014 13:37:42 +0000
-Received: from tx30smr01.am.freescale.net (192.88.168.50) by
-	BL2FFO11FD021.mail.protection.outlook.com (10.173.161.100) with
-	Microsoft
-	SMTP Server (TLS) id 15.0.929.8 via Frontend Transport; Wed, 7 May 2014
-	13:37:42 +0000
-Received: from fly.ap.freescale.net (fly.ap.freescale.net [10.193.20.113])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	s47Dbde8023734; Wed, 7 May 2014 06:37:40 -0700
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 May 2014 21:39:41 +0800
-Message-ID: <1399469981-23875-1-git-send-email-zhenhua.luo@freescale.com>
-X-Mailer: git-send-email 1.9.1
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009001)(6009001)(189002)(199002)(2009001)(33646001)(76482001)(50466002)(50986999)(77982001)(93916002)(81542001)(81342001)(88136002)(62966002)(84676001)(86362001)(92726001)(92566001)(50226001)(46102001)(36756003)(97736001)(4396001)(99396002)(74662001)(77096999)(87936001)(87286001)(20776003)(575784001)(47776003)(74502001)(64706001)(80022001)(6806004)(44976005)(83322001)(31966008)(19580405001)(19580395003)(21056001)(68736004)(79102001)(48376002)(83072002)(77156001)(89996001)(85852003);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BL2PR03MB387;
-	H:tx30smr01.am.freescale.net; FPR:; MLV:sfv;
-	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
+	Wed,  7 May 2014 13:57:28 +0000 (UTC)
+Received: by mail-ob0-f170.google.com with SMTP id uy5so1217899obc.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 May 2014 06:57:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=A8zQh6iOHAzkxoUb0SkdR50syF/Qzt6MT7IJ10jcE/I=;
+	b=VPiUWbWdqK9DM6fR6ApqJAeY0hvidLxqmsktmYbL82zIn6XKvRWsWBVmWFSpA9vp8O
+	YQI8TEdUDsPHx0Q73bLjIHjuyCQVKEJNlc8T7IqWogC7jKRaxxM7HfCvhQFZtbjcnjrD
+	Tld6i72Y/FvGPf8DukRs8Zn65iGMmyXPEef/fpGB9oR0dmc4ujdeWV5plE0/q8NiMzr7
+	kZ7C0w9Nexre0dah406QMrDf9UbgWucKdWzy/jhzyOQhvsg35HM1V2yRQ8sn3XlhIK+X
+	+bnNnaxf5y5FnDUZtOafXbUP5SoKcIhxIxsRA9+pGfI1t3EAr+Rx7IXTxItvw5DKLW1g
+	VmeQ==
+X-Received: by 10.60.142.229 with SMTP id rz5mr46111541oeb.1.1399471049389;
+	Wed, 07 May 2014 06:57:29 -0700 (PDT)
 MIME-Version: 1.0
-X-Forefront-PRVS: 0204F0BDE2
-Received-SPF: Fail (: domain of freescale.com does not designate
-	192.88.168.50 as permitted sender) receiver=; client-ip=192.88.168.50; 
-	helo=tx30smr01.am.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.168.50)
-	smtp.mailfrom=zhenhua.luo@freescale.com; 
-X-OriginatorOrg: freescale.com
-Subject: [meta-java][PAYCH] openjdk-6: Fix cross compilation for e6500 machines
+Received: by 10.76.85.33 with HTTP; Wed, 7 May 2014 06:57:09 -0700 (PDT)
+In-Reply-To: <20140506222845.GE30955@jama>
+References: <1399414836-16702-1-git-send-email-nickdademo@gmail.com>
+	<20140506222845.GE30955@jama>
+From: "Nick D'Ademo" <nickdademo@gmail.com>
+Date: Wed, 7 May 2014 23:57:09 +1000
+Message-ID: <CANR6C555Le4jbMW=h3wrSedJgHKWZDnW6WZoz48GJo2dDwd_4A@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] opencv: Bump SRCREV to 2.4.9 release tag, PV is now 2.4.9+git.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 13:53:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 May 2014 13:57:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-    This is only way for compile for now since qemu can not
-    run the sizers binary for e6500 machines. It segfaults
-    so we disable generating sizes and also xawt and jawt
-    which depends on sizers, this lets jre to cross compile
-    for ppc/e6500
+The recipe successfully builds without errors (multilib build) - however, I
+also had no dependencies issues with the previous version of the recipe
+either (2.4.8+git).
 
-The fix is ported according to da0b3a20a67496dc8d4282d19a60672001b7f825
 
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
----
- recipes-core/openjdk/openjdk-6-release-6b24.inc | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+On Wed, May 7, 2014 at 8:28 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-diff --git a/recipes-core/openjdk/openjdk-6-release-6b24.inc b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-index d0da379..da5299f 100644
---- a/recipes-core/openjdk/openjdk-6-release-6b24.inc
-+++ b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-@@ -90,6 +90,13 @@ ICEDTEAPATCHES_append_e5500-64b = " \
- ICEDTEAPATCHES_append_e5500 = " \
-         file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
- 	"
-+ICEDTEAPATCHES_append_e6500-64b = " \
-+        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-+        "
-+ICEDTEAPATCHES_append_e6500 = " \
-+        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-+        "
-+
- ICEDTEAPATCHES_append_libc-uclibc = " \
-         file://icedtea-hotspot-isfinte.patch;apply=no \
-         file://icedtea-hotspot-glibc-version.patch;apply=no \
-@@ -132,4 +139,11 @@ DISTRIBUTION_PATCHES_append_e5500-64b = " \
- DISTRIBUTION_PATCHES_append_e5500 = " \
-        patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-        "
-+DISTRIBUTION_PATCHES_append_e6500-64b = " \
-+       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-+       "
-+
-+DISTRIBUTION_PATCHES_append_e6500 = " \
-+       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-+       "
- export DISTRIBUTION_PATCHES
--- 
-1.9.1
-
+> On Wed, May 07, 2014 at 08:20:36AM +1000, Nick D'Ademo wrote:
+> > Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+>
+> Does it fix this issue reported in test-dependencies report?
+>
+> opencv/libopencv-highgui/latest lost dependency on  jasper libdc1394
+>
+> > ---
+> >  meta-oe/recipes-support/opencv/opencv_2.4.bb |    4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bbb/meta-oe/recipes-support/opencv/
+> opencv_2.4.bb
+> > index df512f6..43e6a2b 100644
+> > --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> > +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+> > @@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET = "arm"
+> >
+> >  DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib
+> glib-2.0"
+> >
+> > -SRCREV = "a4b34e7ae10351fc4d30dc55995679340efc488e"
+> > +SRCREV = "df8e28283f09825cca0c2902160b7abebcfe1b64"
+> >  SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
+> >             file://opencv-fix-pkgconfig-generation.patch \
+> >  "
+> >
+> > -PV = "2.4.8+git${SRCPV}"
+> > +PV = "2.4.9+git${SRCPV}"
+> >
+> >  S = "${WORKDIR}/git"
+> >
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
