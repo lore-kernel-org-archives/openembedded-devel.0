@@ -1,31 +1,28 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 38DD3605F4
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id D1EF460167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 08:40:38 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id w7so876080lbi.37
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 01:40:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=ar5rsRt04vxERDi4mcCpyBxmCbSj3XHcRUaMEzi53KU=;
-	b=A7YEFUr5xtdZ3J5ZRTy2jl8ikvS7EBUyBsQWtwIacMnL5N1Jk9yG11eCOdFyB81TL/
-	I55dIKc/JNoT61mfIMjgAXgcHARI14BKacr1thYsyTIjKrGILlO9cCpH5jAwwBwqoFQv
-	d3rmuWVbDY3VpLiVgZ9yGdB28g0b/r1odLcg4HefXMgb9iWj1b+7A0jx61rOrmD42gOl
-	8RXyKjq+vw/jp8Y9zUp+4Si9lH9JhC/wbx7yAG1VcYtQ9k8tl0f0J/IJzXI+igLgPiZR
-	NEtwtCZ468opHqq8k74mEl+Mlez2WleouxvM90sThdZwiv+B9MyRwDpx3z53p6nNL3UH
-	dV9w==
+	Wed,  7 May 2014 08:49:06 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 07 May 2014 01:49:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,1001,1389772800"; d="scan'208";a="428757693"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.122.213])
+	by azsmga001.ch.intel.com with ESMTP; 07 May 2014 01:49:05 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+Date: Wed, 07 May 2014 09:49:04 +0100
+Message-ID: <3120944.8W8OHk0NM6@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.2-200.fc20.x86_64; KDE/4.12.4; x86_64; ; )
+In-Reply-To: <5369A9ED.4060506@linaro.org>
+References: <5364B398.5000802@embed.me.uk>
+	<1950582.OeVgyhOmPz@peggleto-mobl5.ger.corp.intel.com>
+	<5369A9ED.4060506@linaro.org>
 MIME-Version: 1.0
-X-Received: by 10.112.199.234 with SMTP id jn10mr14567619lbc.8.1399452038929; 
-	Wed, 07 May 2014 01:40:38 -0700 (PDT)
-Received: by 10.112.36.164 with HTTP; Wed, 7 May 2014 01:40:38 -0700 (PDT)
-Date: Wed, 7 May 2014 10:40:38 +0200
-Message-ID: <CAPbeDCnwm8U-NTnmZB8Y5GSCc+WtORstG4JoFi1czfvTHpLEVw@mail.gmail.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Error during incremental builds, qtserialport
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Website Text
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,38 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 08:40:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 May 2014 08:49:09 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi,
+On Tuesday 06 May 2014 23:35:09 Trevor Woerner wrote:
+> On 05/06/14 12:12, Paul Eggleton wrote:
+> > So I'd hope that the machine listing in the layer index could be made
+> > to help with that.
+> 
+> Absolutely, for raw recipe information or information on which MACHINEs
+> are supported the layer index would be a good choice.
+> 
+> But there's a fair amount of difference between "MACHINE, layer, and
+> recipe definitions" versus "here's the FSL community information, they
+> use repo, here's where they keep their manifests, here are the manifests
+> they have available, these are the boards they support, and here is how
+> you run their setup script".
 
-I've ran into this one a couple of times. I've never seen this problem when
-I do a build from scratch, only during incremental builds.
+Excuse my ignorance, but what do you mean by "manifests"?
 
-When I create the SDK for my image, I see errors like this:
+> Unless you're suggesting the layer index could also inform users of
+> manifests and setup script conventions?
 
-Collected errors:
- * satisfy_dependencies_for: Cannot satisfy the following dependencies for
-packagegroup-qt5-toolchain-target:
- *     libqt5serialport-dev *     libqt5serialport-mkspecs *
- * opkg_install_cmd: Cannot install package
-packagegroup-qt5-toolchain-target.
+On a per layer basis that is the intention of providing the "Setup 
+information" URL field - it's a link to further information about how to use 
+the layer. For example, OE-Core has one:
 
-Sometimes it's not only qtserialport, but other qt-packages.
-If I check log.do_package for qtserialport I see:
+http://layers.openembedded.org/layerindex/layer/openembedded-core/
 
-WARNING: QA Issue: qtserialport: Files/directories were installed but not
-shipped
-/home/jkroon/Projects/oe-devel/build/tmp-eglibc/sysroots/wandboard-dual/usr/include/qt5/QtSerialPort/qserialport.h
+This can be either an external URL or a pointer to a file within the repository 
+(if it doesn't have the http:// prefix).
 
-... and a whole bunch of other files. These files actually don't exist in
-my system when I check for them.
+That might not be fine-grained enough to handle what we're talking about but it 
+is something along the right lines I think.
 
-It's strange because I'm not building the SDK for "wandboard-dual", but for
-the "wandboard-solo" MACHINE.
+Cheers,
+Paul
 
-Am I confusing the build-system since I am jumping back and forth between
-building for wandboard-dual/wandboard-solo ?
+-- 
 
-/Jacob
+Paul Eggleton
+Intel Open Source Technology Centre
 
