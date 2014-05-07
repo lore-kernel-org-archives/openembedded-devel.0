@@ -1,41 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f177.google.com (mail-lb0-f177.google.com
-	[209.85.217.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0313E605B3
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id EED8D65EC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 16:55:49 +0000 (UTC)
-Received: by mail-lb0-f177.google.com with SMTP id s7so1738397lbd.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 09:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8ID5Rq/baW8mYLC3qlCZe0+i3lpxBY7PKMdSwy2wLJk=;
-	b=kpU8hvKkaKdRd69PTD3wLpv6CrEmp0mAM8GIKAAu6wtPfkmpMKO2oQ/yw5tpQTFH1V
-	trUx9lL5myClATeYdbbUHtIQt563kXkhXGnWGI8o231WD0BBQwX4XDyPaBP5vjPxnqZ4
-	BhtjrUcSHsWRM6VlQL97DwHXsMgbeKIZMFtS/s5DLDQKIKyztkaXuU0xrP1kvtuwUhtp
-	AluIPw3knRgLE86JDbGDEky+LK+mp8qYE6eXVEt4u11THBh9/8tGbTqTGjmcU+7YXKFW
-	ebvsRVaqJEZgYPjiQYFOCwMXg6l1DUnbECwzKxh4MpmTxRGvrucwUdA7wANcO2qZKl10
-	yAEQ==
-X-Received: by 10.112.180.225 with SMTP id dr1mr4133352lbc.51.1399481749863;
-	Wed, 07 May 2014 09:55:49 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	to10sm12691502lbb.11.2014.05.07.09.55.47 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 May 2014 09:55:48 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 7 May 2014 18:56:10 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-Message-ID: <20140507165610.GH30955@jama>
-References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
+	Wed,  7 May 2014 16:56:13 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 07 May 2014 09:56:14 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,1004,1389772800"; d="scan'208";a="535331830"
+Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
+	([10.252.122.213])
+	by fmsmga002.fm.intel.com with ESMTP; 07 May 2014 09:56:09 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 07 May 2014 17:56:08 +0100
+Message-ID: <2938048.PgBWojNThS@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.2-200.fc20.x86_64; KDE/4.12.4; x86_64; ; )
+In-Reply-To: <20140507164844.GF30955@jama>
+References: <1399445635-29373-1-git-send-email-koen.kooi@linaro.org>
+	<6062362.lpz6Qfmmsr@peggleto-mobl5.ger.corp.intel.com>
+	<20140507164844.GF30955@jama>
 MIME-Version: 1.0
-In-Reply-To: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files when they are read only
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] openldap: fix build against gnutls3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,112 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 16:55:53 -0000
-X-Groupsio-MsgNum: 49774
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Yia77v5a8fyVHJSl"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 May 2014 16:56:15 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---Yia77v5a8fyVHJSl
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 07 May 2014 18:48:44 Martin Jansa wrote:
+> On Wed, May 07, 2014 at 09:57:52AM +0100, Paul Eggleton wrote:
+> > On Wednesday 07 May 2014 10:29:21 Koen Kooi wrote:
+> > > Khem Raj schreef op 07-05-14 09:47:
+> > > > On Tue, May 6, 2014 at 11:53 PM, Koen Kooi <koen.kooi@linaro.org> 
+wrote:
+> > > >> ++                              TLS_LIBS="-lgnutls -lgcrypt"
+> > > > 
+> > > > Does this mean we need something more in DEPENDS or DEPENDS part of
+> > > > PACKAGECONFIG too ?
+> > > 
+> > > Should be automatic since gnutls depends on it. It's not a new
+> > > dependency.
+> > 
+> > BitBake does not automatically ensure dependencies-of-dependencies are in
+> > the sysroot. They almost always will be, but I have seen failures in
+> > these kinds
+>
+> Are you sure it doesn't?
 
-On Wed, May 07, 2014 at 02:16:04PM +0100, Lewis, Nick wrote:
-> From 280ff24f597e5cf663c76fa90250cce229c6aac9 Mon Sep 17 00:00:00 2001
-> From: Nick Lewis <nick.lewis@usa.g4s.com>
-> Date: Wed, 7 May 2014 14:02:25 +0100
-> Subject: [PATCH] Fix refetch of local files when they are read only
+Pretty sure, yes.
+ 
+> But I'm also in favor of specifying dependencies-of-dependencies in
+> cases where the recipe configure task explicitly check for them (so that
+> when the required dependency is no longer included in "parent"
+> dependency, e.g. after moving it to PACKAGECONFIG).
 
-This belong to bitbake-devel ML
+If the recipe's configure task explicitly checks for them then to my mind they 
+cease to be dependencies of dependencies and become just dependencies.
 
->=20
-> Signed-off-by: Nick Lewis <nick.lewis@usa.g4s.com>
-> ---
->  bitbake/lib/bb/fetch2/__init__.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/bitbake/lib/bb/fetch2/__init__.py b/bitbake/lib/bb/fetch2/__=
-init__.py
-> index 5a9c72f..f571fc4 100644
-> --- a/bitbake/lib/bb/fetch2/__init__.py
-> +++ b/bitbake/lib/bb/fetch2/__init__.py
-> @@ -1251,7 +1251,7 @@ class FetchMethod(object):
->                          destdir =3D destdir.strip('/')
->                      if destdir !=3D "." and not os.access("%s/%s" % (roo=
-tdir, destdir), os.F_OK):
->                          os.makedirs("%s/%s" % (rootdir, destdir))
-> -                    cmd =3D 'cp -pPR %s %s/%s/' % (file, rootdir, destdi=
-r)
-> +                    cmd =3D 'cp -fpPR %s %s/%s/' % (file, rootdir, destd=
-ir)
->                      #cmd =3D 'tar -cf - -C "%d" -ps . | tar -xf - -C "%s=
-/%s/"' % (file, rootdir, destdir)
->                  else:
->                      # The "destdir" handling was specifically done for F=
-ILESPATH
-> @@ -1261,7 +1261,7 @@ class FetchMethod(object):
->                      else:
->                         destdir =3D "."
->                      bb.utils.mkdirhier("%s/%s" % (rootdir, destdir))
-> -                    cmd =3D 'cp %s %s/%s/' % (file, rootdir, destdir)
-> +                    cmd =3D 'cp -f %s %s/%s/' % (file, rootdir, destdir)
->=20
->          if not cmd:
->              return
-> --
-> 1.9.1
->=20
->=20
-> Nick Lewis
-> nick.lewis@usa.g4s.com
-> +44 1684 277137
-> www.g4stechnology.com
-> New Challenge House, International Drive, Tewkesbury, Gloucestershire, GL=
-20 8UQ, UK
->=20
-> =EF=81=90 Please consider the environment before printing this email
->=20
->=20
-> The details of this company are as follows:
-> G4S Technology Limited, Registered Office: Challenge House, International=
- Drive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 238=
-2338.
->=20
-> This communication may contain information which is confidential, persona=
-l and/or privileged.
->=20
-> It is for the exclusive use of the intended recipient(s).
-> If you are not the intended recipient(s), please note that any distributi=
-on, forwarding, copying or use of this communication or the information in =
-it is strictly prohibited.
->=20
-> Any personal views expressed in this e-mail are those of the individual s=
-ender and the company does not endorse or accept responsibility for them.
->=20
-> Prior to taking any action based upon this e-mail message, you should see=
-k appropriate confirmation of its authenticity.
->=20
-> This e-mail has been scanned for all viruses by MessageLabs.
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Cheers,
+Paul
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
 
---Yia77v5a8fyVHJSl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Paul Eggleton
+Intel Open Source Technology Centre
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNqZaoACgkQN1Ujt2V2gByh8wCgpgg10Ndf9Xkle2Ig5DlX4n+c
-hkkAoLV7samyfYMYIewc3LoS0U1nH3xP
-=aRI2
------END PGP SIGNATURE-----
-
---Yia77v5a8fyVHJSl--
