@@ -1,39 +1,35 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E95F160650
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C227A60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 14:39:00 +0000 (UTC)
-Received: by mail-lb0-f171.google.com with SMTP id 10so1497566lbg.2
+	Wed,  7 May 2014 15:16:17 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id fa1so1299048pad.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 07:39:00 -0700 (PDT)
+	Wed, 07 May 2014 08:16:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=BwUX1N+JQnzmTdCMQ64v8yFmlXlg0BClYixgSouwbng=;
-	b=t3GEveNZmAd7ycwt55u7Ja3lVTZ7EkQuFA6RC+3tSmHnY4a7ztyHlZT7orRHd9DFBn
-	b9+6v24Gey+5PGu/bBa3lV12YlQyCLSweTV0eGWnxFnRc/4I7JcH8eNezm/k/Tt1ClPl
-	xGUYTQNxGMZjenPvI19fV66+Nb9FXr6WF+DBy85yUq/LvYf8hoJuxXvLjgin6t0OESnI
-	UddcI0Z4MHk8BPlHJ3Nk74MX1qMxJ/UhTFHJgvJ7Bk5w2i55RUlCu0JybiPMtEoYuT/t
-	ixP8tx8VRMtj82iOZD/FYlhbBjZ9nm3J2Fxx78I8TczEwyYmc8MrnwzCRDU3MFy4ovnJ
-	nvhQ==
-X-Received: by 10.112.139.166 with SMTP id qz6mr40862016lbb.13.1399473540546; 
-	Wed, 07 May 2014 07:39:00 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.148.170 with HTTP; Wed, 7 May 2014 07:38:40 -0700 (PDT)
-In-Reply-To: <3120944.8W8OHk0NM6@peggleto-mobl5.ger.corp.intel.com>
-References: <5364B398.5000802@embed.me.uk>
-	<1950582.OeVgyhOmPz@peggleto-mobl5.ger.corp.intel.com>
-	<5369A9ED.4060506@linaro.org>
-	<3120944.8W8OHk0NM6@peggleto-mobl5.ger.corp.intel.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 7 May 2014 07:38:40 -0700
-X-Google-Sender-Auth: Fx4a06xuZuCVGSaM8v7EnlsHAh0
-Message-ID: <CABcZANkn6rQQzaMEqSTB1q_PcB9fv29uj=rrGqFAnCmUSFF=Ow@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Website Text
+	h=from:to:cc:subject:date:message-id;
+	bh=wjIXMb0KzoA47qy4hzfQ7vwLJbz/whhb0es9dUvwREY=;
+	b=NMmMfOWCiNSLrqyJ+ZO8lRSNMsg23+9rAyg/OA0sJVLhrOhZy1ArHTTHq/3VvJuxo5
+	Opv6Jrprxv4qHLPIAGgKniG4vtPcPydWLIZXOeOPlZOtGqWoGNvR+rRzCpff5qI5TlHd
+	P1diChWzVk8gu8ZQnRC9FrnC5BxgLV5gYxo5XhrRruBEOGlN8RD/0lFy3XkGAXWYI1Vm
+	OELQ9c2T2FvBYYYIxHApRG/rix5f9gZEJ31RRfKnKMBLRgPynns9tzJx0mYNjIJWSbGB
+	lGO6pDIP9YhDFb1c4xEp8kHBmeZ6BTctzH8QMdoCNbzRY83fR6QKpk192t5iTsqnyrQG
+	lFng==
+X-Received: by 10.66.249.233 with SMTP id yx9mr20144713pac.3.1399475778128;
+	Wed, 07 May 2014 08:16:18 -0700 (PDT)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id dd5sm3723771pbc.85.2014.05.07.08.16.15
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 May 2014 08:16:16 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 May 2014 08:16:31 -0700
+Message-Id: <1399475791-30061-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-perl][WIP] vlc: add dependencies, drop unrecognized options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,37 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 14:39:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 May 2014 15:16:22 -0000
 
-On Wed, May 7, 2014 at 1:49 AM, Paul Eggleton <paul.eggleton@linux.intel.com
-> wrote:
+From: Tim Orling <TicoTimo@gmail.com>
 
-> On Tuesday 06 May 2014 23:35:09 Trevor Woerner wrote:
-> > On 05/06/14 12:12, Paul Eggleton wrote:
-> > > So I'd hope that the machine listing in the layer index could be made
-> > > to help with that.
-> >
-> > Absolutely, for raw recipe information or information on which MACHINEs
-> > are supported the layer index would be a good choice.
-> >
-> > But there's a fair amount of difference between "MACHINE, layer, and
-> > recipe definitions" versus "here's the FSL community information, they
-> > use repo, here's where they keep their manifests, here are the manifests
-> > they have available, these are the boards they support, and here is how
-> > you run their setup script".
->
-> Excuse my ignorance, but what do you mean by "manifests"?
+  * add PKGCONFIG for libass, mkv
+  * drop PKGCONFIG for id3tag, mpeg2dec
+  * drop unrecognized options:
+  	--enable-v4l,
+  	--disable-opengl,-id3tag,-mpeg2dec
+  * add dependencies from JaMa builds / configure.ac
 
+  NOTE: requires fluidsynth >= 1.1.2 (will work on that next)
 
-A repo manifest is rather like a .gitmodules file, but out of band, in its
-own repository. The manifest controls what repositories of what
-branches/revisions get pulled down. A git url to the manifest is passed to
-'repo init' to initialize the setup.
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+index 1b2490b..58f5648 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
+@@ -5,9 +5,13 @@ SECTION = "multimedia"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free \
+-   dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib \
+-   libdvdcss libdvdread lua-native lua"
++DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl \
++   libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls tremor \
++   faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib libdvdcss \
++   libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs libdc1394 \
++   libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
++   libmtp opencv libopus orc libusb1 schroedinger taglib \
++   tiff xcb-util-keysyms samba"
+ 
+ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
+ 
+@@ -26,11 +30,11 @@ EXTRA_OECONF = "\
+     --enable-sdl \ 
+     --enable-png \
+     --enable-live555 --enable-tremor \
+-    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
++    --enable-v4l2 --disable-aa --disable-faad \
+     --enable-dbus \
+     --without-contrib \
+     --without-kde-solid \
+-    --disable-opengl --disable-glx \
++    --disable-glx \
+     --enable-realrtsp \
+     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
+     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
+@@ -38,11 +42,11 @@ EXTRA_OECONF = "\
+ "
+ 
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+-PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
+ PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
+-PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
+ PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+ PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
++PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
++PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
+ 
+ do_configure() {
+     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.8.3.2
+
 
