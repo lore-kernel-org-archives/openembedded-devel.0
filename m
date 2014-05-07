@@ -1,37 +1,45 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E415F60DD7
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id AA289601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 02:08:15 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id lj1so369847pab.14
+	Wed,  7 May 2014 03:35:12 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id rd18so441662iec.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 May 2014 19:08:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SxHNg8enp7LpVxw/u2miX36gBvVt1QSwk8v7VXTWLak=;
-	b=cw3rrT6R6orhjlDNdE0lznivX0PQLEq8kgZ+4XyCErzgqsWL+d5990J8RSm7flDs93
-	n51An9nhZCLFXUXuShKMqUEp5bqFlJ8Md1CLV4LoyC0gni+oL4AdSu5RgVD5RyiCMUh6
-	I4RpbgxLSZt59Jl+fE1iSHPYNu8s0Gjz+bY3UdKTJqVxP0m3l5Knt74iE5ClaVUXFJfh
-	SCrcdvw71YEZ52dSNjdk7wjB3iW4sgM74bmUx1gmSsrtrV3BNdhxt/7W9faB7HIW1uMD
-	Gzagw4kS+kwUKWjTYhN2247Lbfhp5fQCcQpTsnDGFrdT4201HbCJj5u6UtHxJzsuidAM
-	Gt8w==
-X-Received: by 10.66.233.9 with SMTP id ts9mr13051821pac.37.1399428497169;
-	Tue, 06 May 2014 19:08:17 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150])
-	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.08.14
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 May 2014 19:08:15 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 May 2014 19:09:25 -0700
-Message-Id: <1399428565-30499-10-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
-References: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH v3 9/9] libalgorithm-diff-perl: add 1.15
+	Tue, 06 May 2014 20:35:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=h3jdeWrdyvpWQp+f4TwYVUEUZdklxSfk+gEMEsGgHBE=;
+	b=LbRYG2P4/Fnp4csiGRjd29fpHMZMBBc3+i7xBXu9J3hpbshRPbikLH6rrdP9uZeya2
+	UNexLxqS+WK93/HRDEgRpEdQp7iBr2VX8mo91a3JjNJJgfUprfi2vK6wOQgnoR4pkySm
+	tPV0GQrJEKkQWD4IxuPIe0rXwfwvebKpMJhYMsA1fARHRVhiRD6UHgYDB98Xfk48vlfo
+	fWrYdehrp9M4Nr/8wQ1GQfvENYMySrXwvaKNVz46NevAkjD2KZLMP4HfHaG6sfryOqGS
+	Po6Dqd/xEuIrC8Oe9elXx8kV877lBl8zV/p4ELkgFogEGSnfK05pEC5mEZsG9Y3g5zjF
+	j1Vg==
+X-Gm-Message-State: ALoCoQkWveQfGnN/VtZbVsx4b3uRj/QRJzfir53qfVtwwkDdsVba0DsfOCgNwQ/Z6icEpgsZRwr1
+X-Received: by 10.50.114.41 with SMTP id jd9mr37837665igb.33.1399433713577;
+	Tue, 06 May 2014 20:35:13 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158]) by mx.google.com with ESMTPSA id
+	nj14sm1680947igb.18.2014.05.06.20.35.11 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 06 May 2014 20:35:12 -0700 (PDT)
+Message-ID: <5369A9ED.4060506@linaro.org>
+Date: Tue, 06 May 2014 23:35:09 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <5364B398.5000802@embed.me.uk>
+	<CALmOhg=xAZehYF48AMcwX4Ugcpm4YE1yEdWH1+w9W0Y=TfDuew@mail.gmail.com>
+	<1950582.OeVgyhOmPz@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <1950582.OeVgyhOmPz@peggleto-mobl5.ger.corp.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Website Text
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,53 +53,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 02:08:16 -0000
+X-List-Received-Date: Wed, 07 May 2014 03:35:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Tim Orling <TicoTimo@gmail.com>
+On 05/06/14 12:12, Paul Eggleton wrote:
+> So I'd hope that the machine listing in the layer index could be made
+> to help with that.
 
-[from README]
-This is a module for computing the difference between two files, two
-strings, or any other two lists of things.  It uses an  intelligent
-algorithm similar to (or identical to) the one used by the Unix `diff'
-program.   It is guaranteed to find the *smallest possible* set of
-differences.
+Absolutely, for raw recipe information or information on which MACHINEs
+are supported the layer index would be a good choice.
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
----
- .../libalgorithm/libalgorithm-diff-perl_1.15.bb    | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+But there's a fair amount of difference between "MACHINE, layer, and
+recipe definitions" versus "here's the FSL community information, they
+use repo, here's where they keep their manifests, here are the manifests
+they have available, these are the boards they support, and here is how
+you run their setup script".
 
-diff --git a/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-new file mode 100644
-index 0000000..554a6b0
---- /dev/null
-+++ b/meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Algorithm::Diff - Compute 'intelligent' differences between two \
-+files/lists"
-+DESCRIPTION = "This is a module for computing the difference between two files, \
-+two strings, or any other two lists of things.  It uses an  intelligent \
-+algorithm similar to (or identical to) the one used by the Unix `diff' \
-+program.   It is guaranteed to find the *smallest possible* set of \
-+differences. \
-+"
-+SECTION = "libs"
-+HOMEPAGE = "http://search.cpan.org/~nedkonz/Algorithm-Diff/"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://lib/Algorithm/Diff.pm;beginline=406;endline=409;md5=d393b8ad3b8994b9d0ae9299b8a8a1ee"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NE/NEDKONZ/Algorithm-Diff-${PV}.tar.gz"
-+SRC_URI[md5sum] = "457cd497a0411a88b47d3741eb176071"
-+SRC_URI[sha256sum] = "aa848b75ad3ecc32d31e8651909551e851cceef74a32822c7a3cb35c259f5190"
-+
-+S = "${WORKDIR}/Algorithm-Diff-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
--- 
-1.8.3.2
-
+Unless you're suggesting the layer index could also inform users of
+manifests and setup script conventions?
 
