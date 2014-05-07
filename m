@@ -1,36 +1,35 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D44B8605F4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C13060E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 17:15:55 +0000 (UTC)
-Received: by mail-lb0-f176.google.com with SMTP id p9so1845326lbv.35
+	Wed,  7 May 2014 17:25:44 +0000 (UTC)
+Received: by mail-vc0-f179.google.com with SMTP id im17so1724115vcb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 May 2014 10:15:56 -0700 (PDT)
+	Wed, 07 May 2014 10:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=w1B/dwEIo66zLwDfNsuuBLz99LpSouxNHBc0twGHPAg=;
-	b=eFPd8EVhSSSaeV8EaBXfDguVlEe0XfiEZD7ltaVyk828IGyDwOdHAQS6O4WT+PJSwU
-	64GOpYAd6I+22nI4XT6ll5XjOGHS/WhJ6Xbh06DkjX32XjGroZF5QSBv2XZLGZFB5utj
-	3xTIhAz7ElVn9pT+a+Y37Th7jgpx3rNZ6UpANvD1y7/OftZpyhfamM7TOXFsJTgpFltq
-	d6TA0UBsnDmeDGWTPQ51al+C14GWU0UYocaNqy4SAwxcWoUF16XZDke/aiXn144AVHvB
-	KXWwvM7q/NGo6Ne55r7AUqXQge3ar87iLpWPkjfnIpEWFv10vgc5KAfUJ89GTQnrsdvH
-	ajwQ==
-X-Received: by 10.112.137.5 with SMTP id qe5mr42060579lbb.16.1399482956333;
-	Wed, 07 May 2014 10:15:56 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.148.170 with HTTP; Wed, 7 May 2014 10:15:36 -0700 (PDT)
-In-Reply-To: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
-References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC7@GBTWK10E001.Technology.local>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 7 May 2014 10:15:36 -0700
-X-Google-Sender-Auth: LFzAgG2B0BWE1sp55aw1uc6l_DQ
-Message-ID: <CABcZANmxTrixYwKJ78c0wE7Nh0mH2RtcveVx2+JhF0FUuVLQrA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Subject: [PATCH] bitbake/fetch2: Fix refetch of local files when they are read only
+	h=from:to:cc:subject:date:message-id;
+	bh=XwHLFehl9aYgKzK5f6DcE44rbM9eliyUy6gIkKKqWZs=;
+	b=PTNq0ZP8fcO4Y4ILX6s60/H2gXj4+tLPTAFnXVLWhOleRXFvZJhxI4PTSUPpuk2UC1
+	j8bQpQfYIDZo1j1Ij8PbyBaNZNPgBlLiKqIaHSHxF9mEb9slQjn/xkh9sOIF3BXSAD0h
+	/U1xqqe+YyQRNgPxWe99xWJuOVdUf0rHZhPoYb/ZDLaeLlsHX1RVTPyHwr/ibPLRjp7l
+	4vxVkgmsuryvz6IoA+elKGizsBY/o8T8ri8ltYV1ZCKZtmuUyaZDykz9RPKNIkMAKDi8
+	56BOpRMdhDzW5s8GrU6hn8u47SzHi1ymzHIbVi/nNPP/EzmXQibqS9GjVk6hWtcMSPsw
+	AKsQ==
+X-Received: by 10.58.104.229 with SMTP id gh5mr11952405veb.8.1399483545819;
+	Wed, 07 May 2014 10:25:45 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q6sm2430666vew.15.2014.05.07.10.25.44 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 May 2014 10:25:45 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 May 2014 19:26:04 +0200
+Message-Id: <1399483564-18525-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.2
+Subject: [meta-oe][WIP][PATCH] qtbase: add xcb-util-renderutil to xcb PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 17:16:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 May 2014 17:25:45 -0000
 
-On Wed, May 7, 2014 at 6:16 AM, Lewis, Nick <nick.lewis@usa.g4s.com> wrote:
+* also force xcb-xlib and system-xcb just for consistency (configure script
+  will disable xcb-xlib when compile-test fails)
+* fixes test-dependencies issue:
+  qtbase/qtbase-plugins/latest lost dependency on  libxcb-render xcb-util-renderutil
 
-> The details of this company are as follows:
-> G4S Technology Limited, Registered Office: Challenge House, International
-> Drive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No.
-> 2382338.
->
-> This communication may contain information which is confidential, personal
-> and/or privileged.
->
-> It is for the exclusive use of the intended recipient(s).
-> If you are not the intended recipient(s), please note that any
-> distribution, forwarding, copying or use of this communication or the
-> information in it is strictly prohibited.
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtbase.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This sort of foolishness really doesn't belong on open source mailing lists
-:)
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index d6b45b7..1a25aa4 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -83,7 +83,7 @@ PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
+ PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
+ PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
+ PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
+-PACKAGECONFIG[xcb] = "-xcb,-no-xcb,xcb-util-wm xcb-util-image xcb-util-keysyms"
++PACKAGECONFIG[xcb] = "-xcb -xcb-xlib -system-xcb,-no-xcb,libxcb xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil"
+ PACKAGECONFIG[sql-ibase] = "-sql-ibase,-no-sql-ibase"
+ PACKAGECONFIG[sql-mysql] = "-sql-mysql,-no-sql-mysql,mysql"
+ PACKAGECONFIG[sql-psql] = "-sql-psql,-no-sql-psql,postgresql"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.9.2
+
 
