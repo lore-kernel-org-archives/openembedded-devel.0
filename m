@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id D51CB65DDE
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C93C60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 02:08:05 +0000 (UTC)
-Received: by mail-pd0-f170.google.com with SMTP id v10so346754pde.29
+	Wed,  7 May 2014 02:08:07 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id lj1so369672pab.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 May 2014 19:08:06 -0700 (PDT)
+	Tue, 06 May 2014 19:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dN2TOegbunkVcpDjS3zkgBeCL8SZkhWjh2JQM6iYiyc=;
-	b=GPeYClWcK2pvcHh1DOl9FeWxDmFDuKHBAi2Kh6Ny5w8whQYHEbv4DPpDSqePbh46Jn
-	CeHUA9WxkuUBHOOuuMhCbxm270SjYHKhmcAf4u7FGCFUjdetpSEp72KDe+4Zo7tSzIpA
-	JpJHjAWoCePhaQsAPr+hEHkW/71wISbInIeVfRjK4rdz19CXdMdy55Tpf1tVk9TKQcgs
-	QCCcSxi66y6IkInboFfBZ5aoRDXo5auVXWZEWrypNK5nj09ZmabJiCtK7YGpXdxM/wqh
-	UNEq4aS+HTp0EVN323zHu7nzxYMeASLnHl38gzbsN9i2wgovhREhI01wozWMZLQdGsHe
-	isAw==
-X-Received: by 10.66.65.204 with SMTP id z12mr13039631pas.60.1399428486549;
-	Tue, 06 May 2014 19:08:06 -0700 (PDT)
+	bh=QhHtxi3rxFKwn8QiQEWs0L6744ME1Ty77nkkf3x19FA=;
+	b=BeV/zs4Ky7aiWpqEomPwPSZPbOsDnGg+QOnRE2afmUrbJOYZU1ghS8IYQHdkHuDu0E
+	y+L7TLRt+AvvkpIoRlbMYDNIeoBwVgjyFBZYBWsc9MU2aVGhFvU/kn4g3pZJpxTV7HWt
+	4DJig5XsQRGv8MmXfgLRnYFmTpuv0+YORgkh7RJOx9jsBgaJWD5kHJbXxWeiQ8xunjtw
+	BZZ3OOty0go1hLjPhjh15LohveKVvjgE4k8fRSxKuz70RmVGUQB4XUEqaLrEKa3xvvsA
+	oMD91e6SwSof/oDWsCrE1GlvIsMaiFrSrKZ1/gU+1hRMhqCoUHYRbxqgh9CnXKhJPStq
+	hM8A==
+X-Received: by 10.66.180.34 with SMTP id dl2mr13111632pac.124.1399428488536;
+	Tue, 06 May 2014 19:08:08 -0700 (PDT)
 Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.08.04
+	by mx.google.com with ESMTPSA id ec2sm142236pbc.63.2014.05.06.19.08.06
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 May 2014 19:08:05 -0700 (PDT)
+	Tue, 06 May 2014 19:08:07 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 May 2014 19:09:20 -0700
-Message-Id: <1399428565-30499-5-git-send-email-ticotimo@gmail.com>
+Date: Tue,  6 May 2014 19:09:21 -0700
+Message-Id: <1399428565-30499-6-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
 References: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH v3 4/9] libextutils-config-perl: add 0.007
+Subject: [meta-perl][PATCH v3 5/9] libextutils-helpers-perl: add 0.021
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,46 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 02:08:06 -0000
+X-List-Received-Date: Wed, 07 May 2014 02:08:08 -0000
 
 From: Tim Orling <TicoTimo@gmail.com>
 
 [Description from CPAN]
-ExtUtils::Config is an abstraction around the %Config hash.
+This module provides various portable helper function for
+module building modules.
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../libextutils/libextutils-config-perl_0.007.bb   | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+ .../libextutils/libextutils-helpers-perl_0.021.bb  | 29 ++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
 
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
 new file mode 100644
-index 0000000..8276d28
+index 0000000..20f3283
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "ExtUtils::Config - A wrapper for perl's configuration"
-+DESCRIPTION = "ExtUtils::Config is an abstraction around the %Config hash."
++++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "ExtUtils::Helpers - Various portability utilities for module builders"
++DESCRIPTION = "This module provides various portable helper function for module building modules."
 +SECTION = "libs"
 +
-+HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Config/"
++HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b1b813683bd988732e7fd6a796bf7f47"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=307057ce232899f5caa8858560c7274b"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
-+SRC_URI[md5sum] = "2829c0dfa8a7e51b3f582efbee4bb128"
-+SRC_URI[sha256sum] = "2c1465078b876fd16a90507092805265528c2532d4937b03547a6dbdb8ac0eef"
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
++SRC_URI[md5sum] = "94aa8eaf92def26d9af0cb25fcb1570f"
++SRC_URI[sha256sum] = "26b85077f4197b30e62ffec87d3f78111522619d62858d2ab45a64687351892a"
 +
-+S = "${WORKDIR}/ExtUtils-Config-${PV}"
++S = "${WORKDIR}/ExtUtils-Helpers-${PV}"
 +
 +inherit cpan
 +
-+RDEPENDS_${PN} = " perl-module-extutils-makemaker \
-+                   perl-module-data-dumper \
++RDEPENDS_${PN} = " perl-module-file-copy \
++                   perl-module-extutils-makemaker \
++                   perl-module-exporter \
++                   perl-module-carp \
 +                   perl-module-test-more \
++                   perl-module-text-parsewords \
++                   perl-module-module-load \
 +                   perl-module-file-temp \
++                   perl-module-file-spec-functions \
 +"
 +
 +BBCLASSEXTEND = "native"
