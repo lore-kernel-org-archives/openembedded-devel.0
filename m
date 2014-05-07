@@ -1,33 +1,26 @@
 Return-Path: <Matthieu.CRAPET@ingenico.com>
 Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id B634A605B2
+	by mail.openembedded.org (Postfix) with ESMTP id 5A86A60196
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 May 2014 12:33:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,1003,1389740400"; d="scan'208";a="50840725"
+	Wed,  7 May 2014 13:11:48 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,1003,1389740400"; d="scan'208";a="50843787"
 Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 07 May 2014 14:33:25 +0200
+	by antispam1.usr.ingenico.loc with ESMTP; 07 May 2014 15:11:48 +0200
 Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
 	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Wed, 7 May 2014 14:33:24 +0200
-Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.44]) by
-	COSNADEXC12.usr.ingenico.loc ([10.31.4.212]) with mapi id
-	14.02.0328.009; Wed, 7 May 2014 14:33:24 +0200
-From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] xdelta3: add optional lzma support
-Thread-Index: AQHPae6nhKe4y7CyvkyHj5+hZg0hdps1DJLQ
-Date: Wed, 7 May 2014 12:33:23 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050B9DBFEF05@COSNADEXC13.usr.ingenico.loc>
-References: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
-	<lkd8cb$5n2$1@ger.gmane.org>
-In-Reply-To: <lkd8cb$5n2$1@ger.gmane.org>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.31.2.97]
+	(TLS) id 14.2.318.1; Wed, 7 May 2014 15:11:48 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Wed, 7 May 2014 15:11:47 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 7 May 2014 15:11:56 +0200
+Message-ID: <1399468316-20964-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
+In-Reply-To: <20140506214124.GD30955@jama>
+References: <20140506214124.GD30955@jama>
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] xdelta3: add optional lzma support
+Subject: [meta-oe][PATCH v2] tk: cleanup & add PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,71 +34,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 May 2014 12:33:27 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 May 2014 13:11:51 -0000
+Content-Type: text/plain
 
-Hi,
+Changes:
+- add PACKAGECONFIG "xft" enables XFontConfig features
+- add PACKAGECONFIG "xss" enables XScreenSaver extension
+- use ${BPN} and ${PV}
+- use ${VER} intermediate variable for readability
+- fulfill LIC_FILES_CHKSUM
+- remove BINCONFIG_GLOB: inherit binconfig is not present, lib/tkConfig.sh paths are valid
+- add SSTATE_SCAN_FILES, like it is done in tcl recipe (OE-Core)
 
-I understand that depending if lzma.h is previously installed or not, the r=
-esult binary is different.
-So you recommend to enable lzma ?
+Note: tcl and tk are sharing the same licence, tcl licence file in commited in OE-Core.
 
-By the way, could you reexplain if I should write:
-PACKAGECONFIG ?=3D "lzma"
-Or
-PACKAGECONFIG ??=3D "lzma"
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb | 44 ++++++++++++++++++++++--------
+ 1 file changed, 33 insertions(+), 11 deletions(-)
 
-Regards,
-Matt
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+index d12973c..36a1729 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+@@ -1,12 +1,24 @@
+ SUMMARY = "Tool Command Language ToolKit Extension"
+ HOMEPAGE = "http://tcl.sourceforge.net"
+ SECTION = "devel/tcltk"
++
++# http://www.tcl.tk/software/tcltk/license.html
+ LICENSE = "tcl"
+-LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe"
++LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++    file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
++"
++
+ DEPENDS = "tcl virtual/libx11 libxt"
+ 
+ SRC_URI = "\
+-    ${SOURCEFORGE_MIRROR}/tcl/tk${PV}-src.tar.gz \
++    ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
+     file://confsearch.diff;striplevel=2 \
+     file://non-linux.diff;striplevel=2 \
+     file://tklibrary.diff;striplevel=2 \
+@@ -16,8 +28,12 @@ SRC_URI = "\
+ SRC_URI[md5sum] = "b883a1a3c489c17413fb602a94bf54e8"
+ SRC_URI[sha256sum] = "5c708b2b6f658916df59190b27750fa1ea2bc10992108e10f961c0700f058de6"
+ 
+-S = "${WORKDIR}/tk${PV}/unix"
+-LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/8.6.0/lib"
++S = "${WORKDIR}/${BPN}${PV}/unix"
++
++# Short version format: "8.6"
++VER = "${@os.path.splitext(d.getVar('PV', True))[0]}"
++
++LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
+ inherit autotools
+ 
+ EXTRA_OECONF = "\
+@@ -28,27 +44,33 @@ EXTRA_OECONF = "\
+ "
+ 
+ do_install_append() {
+-    ln -sf libtk8.6.so ${D}${libdir}/libtk8.6.so.0
+-    oe_libinstall -so libtk8.6 ${D}${libdir}
+-    ln -sf wish8.6 ${D}${bindir}/wish
+-	
++    ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
++    oe_libinstall -so libtk${VER} ${D}${libdir}
++    ln -sf wish${VER} ${D}${bindir}/wish
++
+     # Even after passing libdir=${libdir} at config, some incorrect dirs are still generated for the multilib build
+     if [ "$libdir" != "/usr/lib" ]; then
+         # Move files to correct library directory
+-        mv ${D}/usr/lib/tk8.6/* ${D}/${libdir}/tk8.6/
++        mv ${D}/usr/lib/tk${VER}/* ${D}/${libdir}/tk${VER}/
+         # Remove unneeded/incorrect dir ('usr/lib/')
+         rm -rf ${D}/usr/lib
+     fi
+ }
+ 
++PACKAGECONFIG ??= "xft"
++PACKAGECONFIG[xft] = "--enable-xft,--disable-xft,xft"
++PACKAGECONFIG[xss] = "--enable-xss,--disable-xss,libxscrnsaver libxext"
++
+ PACKAGES =+ "${PN}-lib"
+ 
+-FILES_${PN}-lib = "${libdir}/libtk8.6.so*"
++FILES_${PN}-lib = "${libdir}/libtk${VER}.so*"
+ FILES_${PN} += "${libdir}/tk*"
+ 
+ # isn't getting picked up by shlibs code
+ RDEPENDS_${PN} += "tk-lib"
+ RDEPENDS_${PN}_class-native = ""
+ 
+-BINCONFIG_GLOB = "*Config.sh"
+ BBCLASSEXTEND = "native"
++
++# Fix the path in sstate
++SSTATE_SCAN_FILES += "*Config.sh"
+-- 
+1.8.5.4
 
-
------Message d'origine-----
-De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de Koen Kooi
-Envoy=E9=A0: mercredi 7 mai 2014 14:19
-=C0=A0: openembedded-devel@lists.openembedded.org
-Objet=A0: Re: [oe] [meta-oe][PATCH] xdelta3: add optional lzma support
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Matthieu Crapet schreef op 07-05-14 13:43:
-> Using PACKAGECONFIG. Disabled by default.
->=20
-> Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com> ---=20
-> meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb | 4 ++++ 1 file=20
-> changed,
-> 4 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
-> b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb index=20
-> 16a72ee..f3b4754
-> 100644 --- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb +++=20
-> b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb @@ -13,3 +13,7 @@=20
-> SRC_URI[md5sum] =3D "c3ae3286ce4193de8e03d5bcaccf3bc3"=20
-> SRC_URI[sha256sum] =3D "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff7593=
-1a7fa78ed3d2e55"
->=20
-> inherit autotools + +# Optional secondary compression +PACKAGECONFIG=20
-> ?=3D "" +PACKAGECONFIG[lzma] =3D ",,xz"
-
-If there's not configure switch for it, add it to DEPENDS to avoid suprises=
-.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFTaiTLMkyGM64RGpERAglxAKCBVh+CyLipm+C+VJeQFQ3UZc1LSQCfdeVH
-3sFkaMpsdr6M977BEM4EVDQ=3D
-=3DGnvt
------END PGP SIGNATURE-----
-
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
