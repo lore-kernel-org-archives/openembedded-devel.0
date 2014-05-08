@@ -1,32 +1,36 @@
-Return-Path: <diego.ml@zoho.com>
-X-Greylist: delayed 1304 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 08 May 2014 15:51:55 UTC
-Received: from sender1.zohomail.com (unknown [72.5.230.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E0AE60196
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f41.google.com (unknown [209.85.216.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AFDA60196
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 May 2014 15:51:55 +0000 (UTC)
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=zapps768; d=zoho.com; 
-	h=from:to:cc:subject:date:message-id; 
-	b=mS7XCS8ppvVKbTkIMgJGK0hECl197D0RfMS1sMxOccP3s83sYNs0oDoH0Eu0FuJ+5W7QPlrQnVKv
-	FbE3jxQsdvl84vXjWaa0OWuax+v72V9YNCanZDiuO8htPt0OmbM5  
-Received: from localhost.localdomain
-	(host65-246-static.10-188-b.business.telecomitalia.it
-	[188.10.246.65]) by mx.zohomail.com
-	with SMTPS id 1399563011168441.4114897728168;
-	Thu, 8 May 2014 08:30:11 -0700 (PDT)
-From: Diego Rondini <diego.ml@zoho.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 May 2014 17:28:45 +0200
-Message-Id: <1399562925-8628-1-git-send-email-diego.ml@zoho.com>
-X-Mailer: git-send-email 1.7.9.5
-X-ZohoMail: Ss SS_10 UW UB ZCF-710TPL UW UB ZSF-HLOLL_2 SF_TD_EXT
-	SGR3_1_03044_283
-X-ZohoMail-Owner: <1399562925-8628-1-git-send-email-diego.ml@zoho.com>+zmo_0_<diego.ml@zoho.com>
-X-ZohoMail-Sender: 188.10.246.65
-X-Zoho-Virus-Status: 2
-X-ZohoMailClient: External
-Cc: Diego Rondini <diego.ml@zoho.com>
-Subject: [meta-oe][PATCH] glmark2: update to version 2014.03
+	Thu,  8 May 2014 15:55:17 +0000 (UTC)
+Received: by mail-qa0-f41.google.com with SMTP id dc16so2745492qab.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 May 2014 08:55:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=XKvzXWadHq0n4/Ahidxcd3aTzNyY5GnDYWUAicC9g8I=;
+	b=iqemZp6s6bHhf1KPCioYhv0nsuMbt48TfP5wqy4saXfQr7/YuF2eqdFUHNLIMH+LWB
+	Br9z0Bi1CjD0P14yANsnMN2BeGCOs6Oap1jJYDq+Hw72cjuP3TxirDfQ71uoTUOEDBKc
+	DDJdZ2vN4t1eobZC6wnWh3aGAL0qHNsNGqCpOglt1x0LuqmgSCAMPGzGuneLV6rFiWhu
+	GVY1zUs0k4BC3qCw4Nf+zPNZZJrnWGflSiIrLB/yc+y5WTE2FXOweUXgpI/JIB0eAosk
+	eun8icUYz8BvlwRNcGnLQrYHbejeJcThun45qcyMdvheQoaw9EJE2FaEZi2ZlUbp+m4h
+	hTVA==
+X-Gm-Message-State: ALoCoQkyIZ/PAcUqyO1Fyy5vV36NF9s8g1Ttyfn3qeEzfDxIO2bdCPiqIgsLtKeg57dYNXUYFBMI
+X-Received: by 10.140.104.78 with SMTP id z72mr5988944qge.60.1399564518767;
+	Thu, 08 May 2014 08:55:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.101.77 with HTTP; Thu, 8 May 2014 08:54:57 -0700 (PDT)
+In-Reply-To: <CAJTo0LZbPXzXyvKXGZZYDT1BDWg3XYrRO_NXsXmuHLMmmW_S3Q@mail.gmail.com>
+References: <CAJTo0LZbPXzXyvKXGZZYDT1BDWg3XYrRO_NXsXmuHLMmmW_S3Q@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 8 May 2014 16:54:57 +0100
+Message-ID: <CAJTo0LZ_S=mNgM6gtPSfYf=AVRxdLcJ_CO31c+emmQrib80hjw@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: Re: GStreamer 0.10's future
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,57 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 May 2014 15:51:58 -0000
+X-List-Received-Date: Thu, 08 May 2014 15:55:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Update glmark2 receipe to upstream version 2014.03.
+On 8 May 2014 15:48, Burton, Ross <ross.burton@intel.com> wrote:
+> For the 1.7 release I want to move GStreamer 0.10 from oe-core into
+> meta-multimedia, and ensure everything in oe-core has ported to
+> GStreamer 1.x.  GStreamer 0.10 is considered dead upstream and is
+> unmaintained so we don't need to be shipping both versions anymore.
 
-The configure step has changed and instead of using "--enable-stuff" syntax, now the syntax is "--with-flavors=flavor1,flavor2".
-Thanks to Paul Eggleton for the help on how to deal with that:
-https://lists.yoctoproject.org/pipermail/yocto/2014-April/019328.html
+So the catch here is that Qt4 currently depends on GStreamer 0.10.
 
-Signed-off-by: Diego Rondini <diego.ml@zoho.com>
----
- .../{glmark2_2012.12.bb => glmark2_2014.03.bb}     |   19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-benchmark/glmark2/{glmark2_2012.12.bb => glmark2_2014.03.bb} (52%)
+Can someone who doesn't come out in a rash when looking at C++ code
+spend two minutes to tell if me Qt4 supports GStreamer 1.0 (unlikely)
+and whether we can make GStreamer 0.10 support a build-time
+configuration and simply disable it in oe-core.
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-similarity index 52%
-rename from meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
-rename to meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-index 031e3b3..3ff0449 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-@@ -12,12 +12,23 @@ DEPENDS = "libpng12 jpeg"
- 
- SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
- 
--SRC_URI[md5sum] = "4f306664aa3886fa0cf93853603603f8"
--SRC_URI[sha256sum] = "bea6f9de2cdce376195bd91e4a2fdfdf80bf3e480abff8e05b90a6458c1deb47"
-+SRC_URI[md5sum] = "739859cf57d4c8a23452c43e84f66e56"
-+SRC_URI[sha256sum] = "bded41aaf918ce062d9b81e42cc5be943e6a80bc4ff9d046983b96102c3df6b5"
- 
- inherit waf pkgconfig
- 
- PACKAGECONFIG ?= "gl gles2"
- 
--PACKAGECONFIG[gl] = "--enable-gl,,virtual/libgl"
--PACKAGECONFIG[gles2] = "--enable-glesv2,,virtual/libgles2"
-+PACKAGECONFIG[gl] = ",,virtual/libgl"
-+PACKAGECONFIG[gles2] = ",,virtual/libgles2"
-+
-+python __anonymous() {
-+    packageconfig = (d.getVar("PACKAGECONFIG", True) or "").split()
-+    flavors = []
-+    if "gles2" in packageconfig:
-+        flavors.append("x11-glesv2")
-+    if "gl" in packageconfig:
-+        flavors.append("x11-gl")
-+    if flavors:
-+        d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
-+}
--- 
-1.7.9.5
-
-
+Ross
 
