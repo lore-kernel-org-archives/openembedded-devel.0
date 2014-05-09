@@ -1,26 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (unknown [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9201A6098B
+Received: from mail.windriver.com (unknown [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 48F8760167
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 May 2014 08:40:40 +0000 (UTC)
+	Fri,  9 May 2014 09:05:49 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s498efE5024659
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s4995o71010701
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 May 2014 01:40:41 -0700 (PDT)
+	Fri, 9 May 2014 02:05:50 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.149) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.169.1; Fri, 9 May 2014 01:40:40 -0700
+	14.3.169.1; Fri, 9 May 2014 02:05:49 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 May 2014 16:40:37 +0800
-Message-ID: <1399624837-21018-3-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 9 May 2014 17:05:50 +0800
+Message-ID: <1399626350-21897-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1399624837-21018-1-git-send-email-rongqing.li@windriver.com>
-References: <1399624837-21018-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/3] net-snmp-5.7.2: fix CVE-2014-2285
+Subject: [meta-networking][PATCH] strongswan: Security Advisory - strongswan - CVE-2014-2338
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,70 +32,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 May 2014 08:40:42 -0000
+X-List-Received-Date: Fri, 09 May 2014 09:05:52 -0000
 Content-Type: text/plain
 
-From: yzhu1 <yanjun.zhu@windriver.com>
+From: Yue Tao <Yue.Tao@windriver.com>
 
-The perl_trapd_handler function in perl/TrapReceiver/TrapReceiver.xs
-in Net-SNMP 5.7.3.pre3 and earlier, when using certain Perl versions,
-allows remote attackers to cause a denial of service (snmptrapd
-crash) via an empty community string in an SNMP trap, which triggers
-a NULL pointer dereference within the newSVpv function in Perl.
+IKEv2 in strongSwan 4.0.7 before 5.1.3 allows remote attackers to bypass
+authentication by rekeying an IKE_SA during (1) initiation or (2)
+re-authentication, which triggers the IKE_SA state to be set to
+established.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-2285
-Signed-off-by: yzhu1 <yanjun.zhu@windriver.com>
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-2338
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../files/net-snmp-5.7.2-fix-CVE-2014-2285.patch   |   26 ++++++++++++++++++++
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb   |    3 ++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/files/net-snmp-5.7.2-fix-CVE-2014-2285.patch
+ .../strongswan-5.0.0-5.1.2_reject_child_sa.patch   |   36 ++++++++++++++++++++
+ .../recipes-support/strongswan/strongswan_5.1.1.bb |    1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/files/net-snmp-5.7.2-fix-CVE-2014-2285.patch b/meta-networking/recipes-protocols/net-snmp/files/net-snmp-5.7.2-fix-CVE-2014-2285.patch
+diff --git a/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch b/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
 new file mode 100644
-index 0000000..a031d3a
+index 0000000..ab95992
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/files/net-snmp-5.7.2-fix-CVE-2014-2285.patch
-@@ -0,0 +1,26 @@
-+--- a/perl/TrapReceiver/TrapReceiver.xs
-++++ b/perl/TrapReceiver/TrapReceiver.xs
-+@@ -81,18 +81,18 @@ int   perl_trapd_handler( netsnmp_pdu   
-+         STOREPDUi("securitymodel", pdu->securityModel);
-+         STOREPDUi("securitylevel", pdu->securityLevel);
-+         STOREPDU("contextName",
-+-                 newSVpv(pdu->contextName, pdu->contextNameLen));
-++                 newSVpv(pdu->contextName ? pdu->contextName : "", pdu->contextNameLen));
-+         STOREPDU("contextEngineID",
-+-                 newSVpv((char *) pdu->contextEngineID,
-++                 newSVpv(pdu->contextEngineID ? (char *) pdu->contextEngineID : "",
-+                                     pdu->contextEngineIDLen));
-+         STOREPDU("securityEngineID",
-+-                 newSVpv((char *) pdu->securityEngineID,
-++                 newSVpv(pdu->securityEngineID ? (char *) pdu->securityEngineID : "",
-+                                     pdu->securityEngineIDLen));
-+         STOREPDU("securityName",
-+-                 newSVpv((char *) pdu->securityName, pdu->securityNameLen));
-++                 newSVpv(pdu->securityName ? (char *) pdu->securityName : "", pdu->securityNameLen));
-+     } else {
-+         STOREPDU("community",
-+-                 newSVpv((char *) pdu->community, pdu->community_len));
-++                 newSVpv(pdu->community ? (char *) pdu->community : "", pdu->community_len));
-+     }
-+ 
-+     if (transport && transport->f_fmtaddr) {
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-index 8f20ce9..7ab564a 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-         file://snmptrapd.service \
-         file://ifmib.patch \
-         file://net-snmp-5.7.2-fix-CVE-2014-2284.patch \
-+        file://net-snmp-5.7.2-fix-CVE-2014-2285.patch \
++++ b/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
+@@ -0,0 +1,36 @@
++From b980ba7757dcfedd756aa055b3271ea58cf85aa6 Mon Sep 17 00:00:00 2001
++From: Martin Willi <martin@revosec.ch>
++Date: Thu, 20 Feb 2014 16:08:43 +0100
++Subject: [PATCH] ikev2: Reject CREATE_CHILD_SA exchange on unestablished
++ IKE_SAs
++
++Prevents a responder peer to trick us into established state by starting
++IKE_SA rekeying before the IKE_SA has been authenticated during IKE_AUTH.
++
++Fixes CVE-2014-2338 for 5.x versions of strongSwan.
++---
++ src/libcharon/sa/ikev2/task_manager_v2.c | 9 +++++++++
++ 1 file changed, 9 insertions(+)
++
++diff --git a/src/libcharon/sa/ikev2/task_manager_v2.c b/src/libcharon/sa/ikev2/task_manager_v2.c
++index ac3be90..a5252ab 100644
++--- a/src/libcharon/sa/ikev2/task_manager_v2.c
+++++ b/src/libcharon/sa/ikev2/task_manager_v2.c
++@@ -780,6 +780,15 @@ static status_t process_request(private_
++ 			case CREATE_CHILD_SA:
++ 			{	/* FIXME: we should prevent this on mediation connections */
++ 				bool notify_found = FALSE, ts_found = FALSE;
+++
+++				if (this->ike_sa->get_state(this->ike_sa) == IKE_CREATED ||
+++					this->ike_sa->get_state(this->ike_sa) == IKE_CONNECTING)
+++				{
+++					DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
+++						 "unestablished IKE_SA, rejected");
+++					return FAILED;
+++				}
+++
++ 				enumerator = message->create_payload_enumerator(message);
++ 				while (enumerator->enumerate(enumerator, &payload))
++ 				{
++--
++1.8.1.2
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb
+index a2a2333..f8116e3 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb
+@@ -9,6 +9,7 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
+ 
+ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+         file://fix-funtion-parameter.patch \
++        file://strongswan-5.0.0-5.1.2_reject_child_sa.patch \
  "
  
- SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
+ SRC_URI[md5sum] = "e3af3d493d22286be3cd794533a8966a"
 -- 
 1.7.10.4
 
