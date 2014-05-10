@@ -1,32 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-X-Greylist: delayed 3305 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 10 May 2014 17:15:36 UTC
-Received: from mail-ig0-f171.google.com (unknown [209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E57DD60173
+Return-Path: <ticotimo@gmail.com>
+X-Greylist: delayed 365 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 10 May 2014 17:39:27 UTC
+Received: from mail-la0-f50.google.com (unknown [209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 49D2E60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 17:15:36 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id c1so2312670igq.4
+	Sat, 10 May 2014 17:39:27 +0000 (UTC)
+Received: by mail-la0-f50.google.com with SMTP id b8so776188lan.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 10:15:37 -0700 (PDT)
+	Sat, 10 May 2014 10:39:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=wBtxOwxVZ7CWAoszhJm3cU3sMkS9BB3ibIWvdiluchk=;
-	b=pZiJKX/5p9tLNltfb1FsFe55RG7TnsmJmwo3uIWQxv5QCqOdCgxcbKO68wGh/76vns
-	Y9Nzn3X6jwtDvAePsWm5QsrsSCokvPxS1dK2N/fkihzv39dh7oqMJPwoqwYJFnJA6jJo
-	97k99iDdXV9l/5o/h1s7Oa/h3Ec7KAgsfMhlie3Pc39N+2BNTshBAUDi9bOyC4kRVilM
-	Wlqf/36+Iw7OWRGe89o4DSfs0vRadOksinwKZkRb1Ylc1xAcDOfJ6hoHE3Y1K09fIOaA
-	rG1Sxk02iCYAR/6XWD5H0w/GK+m/tNSDrwcjrufgf0zSnC2u98gPPa5LnBAxTsqyR+96
-	qq9Q==
-X-Received: by 10.50.83.6 with SMTP id m6mr23629995igy.30.1399742137474; Sat,
-	10 May 2014 10:15:37 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=Y8heeVllC8jDpiBxUT3LXZyiZ+ztsr+7B5rINyEdjYw=;
+	b=HloyAz6XPWbO6thmjiwwbC2VHvQofqvhbyYjSxn5b2t2UoBrAHqz/Dx4j2cyuq9i7G
+	pleHWavoDDF5+ZLe3CQPjmQ/salmQeshsLwzmyGOBCM3dN+cTW3GSjOLED8izf3G+Nbr
+	/bD//LeaXHErm1DgI7ZBSiUnGVM34Prt6Y1ExuKXifqeSAXKKFLwvxta2cmvdIk1C4Yl
+	ykTM1N1p4qlGicHz2Zutk115rvWaYuwSXhXfoElaPLGoVpV1bdOpHUqx57NZF8RfNEab
+	c9bUM2/PFhCJET2MzKxNTdb21jcyfFzpfEvO6Qif05r14mU9OIUQBfk51WyefS3xMmeu
+	FByg==
 MIME-Version: 1.0
-Received: by 10.50.79.133 with HTTP; Sat, 10 May 2014 10:15:07 -0700 (PDT)
-In-Reply-To: <1399484702-22433-1-git-send-email-ticotimo@gmail.com>
+X-Received: by 10.152.8.7 with SMTP id n7mr4880578laa.22.1399743203191; Sat,
+	10 May 2014 10:33:23 -0700 (PDT)
+Received: by 10.114.216.4 with HTTP; Sat, 10 May 2014 10:33:23 -0700 (PDT)
+In-Reply-To: <CAMKF1so8ws==4eFv5C7n_OR_WeSYcWSK86nXuYj5yrKu+-bfXg@mail.gmail.com>
 References: <1399484702-22433-1-git-send-email-ticotimo@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 10 May 2014 10:15:07 -0700
-Message-ID: <CAMKF1so8ws==4eFv5C7n_OR_WeSYcWSK86nXuYj5yrKu+-bfXg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1so8ws==4eFv5C7n_OR_WeSYcWSK86nXuYj5yrKu+-bfXg@mail.gmail.com>
+Date: Sat, 10 May 2014 10:33:23 -0700
+Message-ID: <CANx9H-Dx_s7A7pWNcVU3e+vHrV5pLWCgBC3Xc_tZpi-k-WMG9w@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-multimedia][WIP][PATCH v2] fluidsynth: upgrade to 1.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,12 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2014 17:15:37 -0000
+X-List-Received-Date: Sat, 10 May 2014 17:39:30 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, May 7, 2014 at 10:45 AM, Tim Orling <ticotimo@gmail.com> wrote:
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
+On Sat, May 10, 2014 at 10:15 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-what changed here ?
+> On Wed, May 7, 2014 at 10:45 AM, Tim Orling <ticotimo@gmail.com> wrote:
+> > -LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
+>
+> what changed here ?
+> --
+
+
+Just the address for FSF:
+
+diff 1.1.1-r0/fluidsynth-1.1.1/COPYING 1.1.6-r0/fluidsynth-1.1.6/COPYING
+
+6c6
+
+<                     59 Temple Place, Suite 330, Boston, MA  02111-1307
+USA
+
+---
+
+>  51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+
+467,468c467,468
+
+<     License along with this library; if not, write to the Free
+
+<     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+USA
+
+---
+
+>     License along with this library; if not, write to the Free Software
+>     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+USA
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
