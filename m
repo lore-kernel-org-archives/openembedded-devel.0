@@ -1,20 +1,22 @@
 Return-Path: <changhyeok.bae@lge.com>
 Received: from lgeamrelo01.lge.com (unknown [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AEC660144
+	by mail.openembedded.org (Postfix) with ESMTP id D02F66059B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 05:16:39 +0000 (UTC)
+	Sat, 10 May 2014 06:11:30 +0000 (UTC)
 Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.125 with ESMTP; 10 May 2014 14:16:39 +0900
+	by 156.147.1.125 with ESMTP; 10 May 2014 15:11:31 +0900
 X-Original-SENDERIP: 10.177.232.191
 X-Original-MAILFROM: changhyeok.bae@lge.com
 From: "Changhyeok Bae" <changhyeok.bae@lge.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 10 May 2014 14:17:01 +0900
-Message-ID: <011e01cf6c0f$12e26590$38a730b0$@lge.com>
+References: 
+In-Reply-To: 
+Date: Sat, 10 May 2014 15:11:52 +0900
+Message-ID: <012501cf6c16$bcae17c0$360a4740$@lge.com>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Ac9sDtbwKH0auyDTRvqRKA8/2e9wJg==
-Subject: lttng-module error
+Thread-Index: Ac9sDtbwKH0auyDTRvqRKA8/2e9wJgAB6WOA
+Subject: Re: lttng-module error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,11 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2014 05:16:40 -0000
+X-List-Received-Date: Sat, 10 May 2014 06:11:34 -0000
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Language: ko
+
+Sorry for this.
+
+I resolved the problem that's my  mistake.
+The cause is that we forcibly set the PACKAGES = "${PN}" in kernel-image.bb.
+So kernel-3.4.0+ is not coming.
+
+Thanks
+
+-----Original Message-----
+From: Changhyeok Bae [mailto:changhyeok.bae@lge.com] 
+Sent: Saturday, May 10, 2014 2:17 PM
+To: 'openembedded-devel@lists.openembedded.org'
+Subject: lttng-module error
 
 Hi
 
