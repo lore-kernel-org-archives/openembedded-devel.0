@@ -1,22 +1,39 @@
-Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo01.lge.com (unknown [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id D02F66059B
+Return-Path: <fathi.boudra@linaro.org>
+X-Greylist: delayed 414 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 10 May 2014 11:39:36 UTC
+Received: from mail-la0-f47.google.com (unknown [209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 86A0C60702
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 06:11:30 +0000 (UTC)
-Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.125 with ESMTP; 10 May 2014 15:11:31 +0900
-X-Original-SENDERIP: 10.177.232.191
-X-Original-MAILFROM: changhyeok.bae@lge.com
-From: "Changhyeok Bae" <changhyeok.bae@lge.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: 
-In-Reply-To: 
-Date: Sat, 10 May 2014 15:11:52 +0900
-Message-ID: <012501cf6c16$bcae17c0$360a4740$@lge.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: Ac9sDtbwKH0auyDTRvqRKA8/2e9wJgAB6WOA
-Subject: Re: lttng-module error
+	Sat, 10 May 2014 11:39:36 +0000 (UTC)
+Received: by mail-la0-f47.google.com with SMTP id pn19so629462lab.34
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 10 May 2014 04:39:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1xLsKW2vguYzjNc471yTHm5Y5qSAwPfr2tQBkB5edNo=;
+	b=Q0jKSN2VneGl/AxPHCnt5sWahJd6rOdUI4LWJQNtizUGZ2budZ8fjG58TS2BfmvKuM
+	Co0PKlVWeXjmqbVFoN6NQ2jBWHycTm4CPUu0U5Qw/E3D7WL6evIhBLhMvMZAh4GF2XkH
+	pCfclW11pKhHFtU3CHyPeSGxGCYkYmXOplVrwWVjxVM2N1fMYuYIDieXDr7Da6WcTiJv
+	RVqn1z1fz1894bYHlxw2rlxyh0Ant7+n7m8R1OERPnFugySf+yjnGZB2GIfK6epJ5nwV
+	TsvVf7yijbw8OA/AjVA7cnhI6e1OcTZGLDz7iWSkJg3Ewyn9FcWAGF1IJHIj2izBnGDb
+	2F9w==
+X-Gm-Message-State: ALoCoQmWSQctdOg/0btmEZ21pS1agwqt8RCTaDry3w30TQ45VfFrnezQ/tv8BJtB3OPcrJdxNXM9
+X-Received: by 10.152.170.169 with SMTP id an9mr3707725lac.14.1399721977030;
+	Sat, 10 May 2014 04:39:37 -0700 (PDT)
+Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
+	[91.152.78.194])
+	by mx.google.com with ESMTPSA id g6sm4267751laa.10.2014.05.10.04.39.35
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 10 May 2014 04:39:36 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 10 May 2014 14:39:24 +0300
+Message-Id: <1399721964-17473-1-git-send-email-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 1.9.3
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] fwts: update to 14.05.00 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,52 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2014 06:11:34 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: ko
+X-List-Received-Date: Sat, 10 May 2014 11:39:42 -0000
 
-Sorry for this.
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ meta-oe/recipes-extended/fwts/fwts_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I resolved the problem that's my  mistake.
-The cause is that we forcibly set the PACKAGES = "${PN}" in kernel-image.bb.
-So kernel-3.4.0+ is not coming.
-
-Thanks
-
------Original Message-----
-From: Changhyeok Bae [mailto:changhyeok.bae@lge.com] 
-Sent: Saturday, May 10, 2014 2:17 PM
-To: 'openembedded-devel@lists.openembedded.org'
-Subject: lttng-module error
-
-Hi
-
-I'm building lttng-module with dylan.
-However I got the error on creating rootfs.
-
-Collected errors:
-|  * satisfy_dependencies_for: Cannot satisfy the following dependencies for
-packagegroup-kernel-image:
-|  * 	kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ * 	kernel-3.4.0+ * 	kernel-3.4.0+ *
-kernel-3.4.0+ *
-|  * opkg_install_cmd: Cannot install package packagegroup-kernel-image.
-| ERROR: Function failed: do_rootfs (see /....
--linux-gnueabi/....-image/1.0-r4/temp/log.do_rootfs.24420 for further
-information)
-NOTE: recipe ....-image-1.0-r4: task do_rootfs: Failed
+diff --git a/meta-oe/recipes-extended/fwts/fwts_git.bb b/meta-oe/recipes-extended/fwts/fwts_git.bb
+index d704d84..4fa1d6b 100644
+--- a/meta-oe/recipes-extended/fwts/fwts_git.bb
++++ b/meta-oe/recipes-extended/fwts/fwts_git.bb
+@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
+ 
+-PV = "14.03.01"
++PV = "14.05.00"
+ 
+-SRCREV = "8ec44dc1e55ecf334f4afa8eed8795ed5776c396"
++SRCREV = "fb5385fec1f3468b479e87c0bba38ab76f60915b"
+ SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.9.3
 
 
