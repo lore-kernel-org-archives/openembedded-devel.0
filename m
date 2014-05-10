@@ -1,37 +1,31 @@
 Return-Path: <raj.khem@gmail.com>
-X-Greylist: delayed 1528 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 10 May 2014 16:40:04 UTC
-Received: from mail-ie0-f177.google.com (unknown [209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id A67AC60167
+Received: from mail-ie0-f176.google.com (unknown [209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 88DFA60173
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 16:40:03 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id rp18so5297417iec.22
+	Sat, 10 May 2014 17:06:51 +0000 (UTC)
+Received: by mail-ie0-f176.google.com with SMTP id ar20so1988977iec.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 09:40:04 -0700 (PDT)
+	Sat, 10 May 2014 10:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=j7KAs5Sn8GFDbq4s9n/ywDPclbIzZ9qY5Uxu8YviyzU=;
-	b=HOzS9pnj6B2XzUoZPos1GBZXHFfWH3maRgyEKE+v3SLhQ7PmXA53gGv2WyYOWuwpkC
-	s1vCMLngu6cDtBH4ll5HJsM+Co8w7bp4hlqj+CBF0cGXmHq2KcD71VD9S/FMW9VfYHrV
-	Pan5cr7hcpsIiaBjKKc9URtX25qOTaKEfVzpVaWCTnaVeEHGvWBjdA68vyAqBcoKHiCF
-	2aLIdrCNEG2OC6YHIFZLCIyyezH82HgXA/rrkKpJf8RAVLk7NoxfVhIdsySDvRDOX7j+
-	H/wwkmf/LsIUgQrG7qZFNtIq8IbENGnTwbHcAwyPDqIr3aYgeoqnaESC2mK6wVevGVz6
-	bVqQ==
-X-Received: by 10.50.109.130 with SMTP id hs2mr22554399igb.29.1399738477515;
-	Sat, 10 May 2014 09:14:37 -0700 (PDT)
+	:content-type; bh=fT9XUJUI8SZbsyau//2/Sc5DgJXXNB0+ZlLSn3B98hw=;
+	b=e/lMaDh+UqhomQXufHJX+1gdZZpGktVM5RSkINJi7k/1e2FjpvIcaFq7kkFiB5N7ja
+	LYhKd1asCAqmfqjV+SXiSksdzAjUldLox/awIx8bmBUQhI57l0KGm/1//XiqqfI6cOzD
+	g5zA0gZarvjfkCvPhoml2FGyL6uZ84Sx/wndGsAuUw+cw6AkxxpH5TMb+LZnYbbaN6v8
+	UGSLIpG5miPNoJT4syJ8AVZg9qViGbWRxUDB0Tk5saj7JsZt8PGhc2M7ppp55gTXesNO
+	seUFrVUa5HjwbgJb4djesnlLBzF+fwnnwJeeR0QEPsoRe0EApjDvXSl50gN1G8H7QQFY
+	VBnA==
+X-Received: by 10.50.43.225 with SMTP id z1mr23565474igl.29.1399741612028;
+	Sat, 10 May 2014 10:06:52 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.79.133 with HTTP; Sat, 10 May 2014 09:14:07 -0700 (PDT)
-In-Reply-To: <CAJTo0LZbPXzXyvKXGZZYDT1BDWg3XYrRO_NXsXmuHLMmmW_S3Q@mail.gmail.com>
-References: <CAJTo0LZbPXzXyvKXGZZYDT1BDWg3XYrRO_NXsXmuHLMmmW_S3Q@mail.gmail.com>
+Received: by 10.50.79.133 with HTTP; Sat, 10 May 2014 10:06:21 -0700 (PDT)
+In-Reply-To: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
+References: <1399463007-14787-1-git-send-email-Matthieu.Crapet@ingenico.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 10 May 2014 09:14:07 -0700
-Message-ID: <CAMKF1sqETNuu4EVasrJfdumQvvOYmhC3g6ez9px5EDhsMTTLUg@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OE-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] GStreamer 0.10's future
+Date: Sat, 10 May 2014 10:06:21 -0700
+Message-ID: <CAMKF1srcr7c8ExfZkmo3b-VUMMPsZKT77N3ygqKVK_HwxXkC+w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] xdelta3: add optional lzma support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,18 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2014 16:40:05 -0000
+X-List-Received-Date: Sat, 10 May 2014 17:06:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, May 8, 2014 at 7:48 AM, Burton, Ross <ross.burton@intel.com> wrote:
-> For the 1.7 release I want to move GStreamer 0.10 from oe-core into
-> meta-multimedia, and ensure everything in oe-core has ported to
-> GStreamer 1.x.  GStreamer 0.10 is considered dead upstream and is
-> unmaintained so we don't need to be shipping both versions anymore.
->
-> Everyone in agreement?  Should I expect any hate mail over this?
+On Wed, May 7, 2014 at 4:43 AM, Matthieu Crapet
+<Matthieu.Crapet@ingenico.com> wrote:
+> +
+> +# Optional secondary compression
+> +PACKAGECONFIG ?= ""
+> +PACKAGECONFIG[lzma] = ",,xz"
 
-I think we still have QT versions which has not yet removed the
-support. but as long as its in
-some layer I am good with it.
+consider when xz comes as indirect dependency via some other package
+then this packageconfig will become useless
+IMO you have to also fix the package itself to explicitly
+enable/disable the lzma support and then adding packageconfig
+will be effective.
 
