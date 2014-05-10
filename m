@@ -1,37 +1,39 @@
 Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-la0-f53.google.com (unknown [209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id ACED060E49
+X-Greylist: delayed 329 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 10 May 2014 12:10:35 UTC
+Received: from mail-lb0-f169.google.com (unknown [209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E3B460167
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 11:40:06 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id ec20so623547lab.26
+	Sat, 10 May 2014 12:10:35 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id s7so6341572lbd.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 04:40:06 -0700 (PDT)
+	Sat, 10 May 2014 05:10:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WZWDZBCjMSznpmLBFQPVBSbQ978o8adlyLVM9ALSxM0=;
-	b=W3CvOpzZycKyBGg6D5Gu1+1U8cTQhq/IkFqin7i6O5wZgBWW8V7cd33VvVEPpSM/8F
-	GOJ74ifql/1NIIiqm1hmHM0UAOKRv++tLYZQnfNL1O7fbQ8UHhJcEvReoAsQ3sjPzGJU
-	bJFDEGhK8ruFKH3xDGYdo6k5a/oKdqcFSavjEoz0MOGkuafge0MsxxoIIPK+Ur/78hjV
-	yJ4HYddkkWrcZFDng0fas8KIFuqsUB6Kktv+MwTmwdAsUop7cGVbAt39Rna52A5RyJeF
-	bvJOK8Ok2uxHXX0+EsIzpRIdwi7stS7nh4O/KtkzsRCcjcTyuW+N6tUtdpZtnzHzG4rG
-	EsxA==
-X-Gm-Message-State: ALoCoQmjtXfaQq7ydgbHdkuvhKdfmtN54kJAzX281/0kU3hL2KpYzZHEDEpO5PwHQyaMpIBRVGDi
-X-Received: by 10.152.88.10 with SMTP id bc10mr3567622lab.23.1399721563414;
-	Sat, 10 May 2014 04:32:43 -0700 (PDT)
+	bh=JS8+HVwD6bo66BE7RdPXsJBLThNP8YC85fI9Dzz/DDk=;
+	b=DefZ5cezbMjmhoARAYBZJQ1+zZxRymwChfkA/G1qtv/RjNzcNfLjc/XUBs2O9pHdq+
+	lsmmJl1VCxbOQjEzqXfeR+6OiRySZX2Bxun5ZxLudq1s6OVksVw6YclbyjWujuSA2v0W
+	jYs4bNJl51gYBKFWYBkoHvLRBBGfUfjRjciq32F9IRhJVko5dDo2cIZQIOQ0kiZ6T+B8
+	dF7zjAeavfZ9xbCnFa54dojQzKxSnkJAh9RoSqtLc1ZAuL1ybYkgj+DoNCGwkSgD9PO2
+	LJ3Fa+cxbG/C5puRqHxMlR4CVF2Ym9weJhLLFOuAJyilPSKlU2/ZRvsLpnAbsd3It1Nl
+	ibMQ==
+X-Gm-Message-State: ALoCoQl8tVFg9UBYja2ao9qtNTa7Ce29qROqrm8IvOFMugWtCwinoE8nzMRiqPDxd7o1AWrhJUzt
+X-Received: by 10.112.199.234 with SMTP id jn10mr15257472lbc.8.1399723506638; 
+	Sat, 10 May 2014 05:05:06 -0700 (PDT)
 Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
 	[91.152.78.194])
-	by mx.google.com with ESMTPSA id r9sm4253389lal.0.2014.05.10.04.32.42
+	by mx.google.com with ESMTPSA id r2sm4324728laa.5.2014.05.10.05.05.05
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 10 May 2014 04:32:42 -0700 (PDT)
+	Sat, 10 May 2014 05:05:06 -0700 (PDT)
 From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 May 2014 14:32:33 +0300
-Message-Id: <1399721553-2020-1-git-send-email-fathi.boudra@linaro.org>
+Date: Sat, 10 May 2014 15:04:58 +0300
+Message-Id: <1399723498-1326-1-git-send-email-fathi.boudra@linaro.org>
 X-Mailer: git-send-email 1.9.3
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] pm-qa: update to 0.4.9 release
+Subject: [meta-oe][PATCH] acpica: update to 20140424 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 May 2014 11:40:08 -0000
+X-List-Received-Date: Sat, 10 May 2014 12:10:37 -0000
 
 Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 ---
- meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../acpica/{acpica_20140325.bb => acpica_20140424.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/acpica/{acpica_20140325.bb => acpica_20140424.bb} (91%)
 
-diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-index 4d33975..f6ffcb6 100644
---- a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-+++ b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-@@ -4,12 +4,12 @@ HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-oe/recipes-extended/acpica/acpica_20140325.bb b/meta-oe/recipes-extended/acpica/acpica_20140424.bb
+similarity index 91%
+rename from meta-oe/recipes-extended/acpica/acpica_20140325.bb
+rename to meta-oe/recipes-extended/acpica/acpica_20140424.bb
+index 0210b04..c302d27 100644
+--- a/meta-oe/recipes-extended/acpica/acpica_20140325.bb
++++ b/meta-oe/recipes-extended/acpica/acpica_20140424.bb
+@@ -14,8 +14,8 @@ DEPENDS = "bison flex"
+ SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
+     file://no-werror.patch \
+     "
+-SRC_URI[md5sum] = "08efe232bca06a7c54462695bbc2f87c"
+-SRC_URI[sha256sum] = "12a7a3c9f2d81e46b0c7095bb7c268ec4bf231178fcbe54ff0c30cd83d2ac38c"
++SRC_URI[md5sum] = "733532f005fba5d1c5344440651b13d1"
++SRC_URI[sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf751bbc"
  
--PV = "0.4.8"
-+PV = "0.4.9"
- 
- BRANCH ?= "master"
- 
--# Corresponds to tag pm-qa-v0.4.8
--SRCREV = "6a8c2ae8a6035b15a7fbe61b6ca56841e056fa37"
-+# Corresponds to tag pm-qa-v0.4.9
-+SRCREV = "c54941a9bbaac33e44e6d0c7f5344e21102642cf"
- 
- SRC_URI = "git://git.linaro.org/tools/pm-qa.git;protocol=git;branch=${BRANCH}"
+ S = "${WORKDIR}/acpica-unix2-${PV}"
  
 -- 
 1.9.3
