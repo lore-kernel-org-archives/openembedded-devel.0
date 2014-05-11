@@ -1,40 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f42.google.com (unknown [209.85.215.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D9116059B
+Received: from mail-lb0-f179.google.com (unknown [209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id F3C666059B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 14:53:11 +0000 (UTC)
-Received: by mail-la0-f42.google.com with SMTP id el20so1184032lab.1
+	Sun, 11 May 2014 14:54:52 +0000 (UTC)
+Received: by mail-lb0-f179.google.com with SMTP id c11so6831908lbj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 07:53:12 -0700 (PDT)
+	Sun, 11 May 2014 07:54:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=CIAqAcHM2xWnsjEslSUJ0uoauuBmsqUyg39Y366RmYo=;
-	b=NtdF3n3p1+NAE385bJgt14e90gmaFrBniO5PhNJeFSoEPeqVhGZL+BBOUjEY1Ezh2k
-	QzOpE/pJT1cI0zIJbmxJpNpf4LR9FOFjJ1kHOa1iW5YW3CnrfKPTl9xpODuaY/tWIU/+
-	2QjEPOZTWXU8CePqXtii7XgnOITQI4xZOZ+htNuxK6zFdZh9ZI+HZN6XkSnxKIAVldPx
-	lT+HRtmv5z/zejKxm+i6hs+mlTCtphwbFyjqSGYfUTzAmCbaB3r+ZEXH96kopzukjqeg
-	ZwwTg+lPF35n7uIhMVcOVj73rjEdST6XXAEpDXyKEIA+Nb9lRf7lL4CM+yteQnSbcZmh
-	Z8ug==
-X-Received: by 10.152.29.8 with SMTP id f8mr8951166lah.11.1399819992652;
-	Sun, 11 May 2014 07:53:12 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=Mm00iVHReoyJJwZv3b4Dug50d6bSudV39yA0SbZidgw=;
+	b=zh7tfdApbuDPmOu99uYgi/4V7iubROIdr11vMFTq5sdlDYeIvtXMMshYhfeb/327Ha
+	ktzVYabu8cLebd3LFsYqWilmDmTJoiAcsaTBy1KcSgvZ04m+sM7sbzqSvHnEj5gzoBfz
+	x7U0KGD03IDs2MLzQRyZPppaORvQmvf/S9U0JEP6vmti3YxL+YlFMyV0BrhAu3Hts8Gt
+	b4h55FYfBY50JZUmdL27ToZNRZDvW6vRfe23t3CfSfPxR9qpKpSTj37lG2lF9hrdEz9J
+	cuLAqs5pxPAt0alggABO9b5DdAbzix0M5mq2dD59iO3595ABMmthXaGipzrg4LHXezOw
+	3yXw==
+X-Received: by 10.112.27.133 with SMTP id t5mr20226653lbg.21.1399820092645;
+	Sun, 11 May 2014 07:54:52 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	go4sm10723823lbc.35.2014.05.11.07.53.10 for <multiple recipients>
+	by mx.google.com with ESMTPSA id k1sm9169728lbb.9.2014.05.11.07.54.51
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 11 May 2014 07:53:11 -0700 (PDT)
+	Sun, 11 May 2014 07:54:51 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 11 May 2014 16:53:37 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140511145337.GE22774@jama>
-References: <20140430143741.GL2486@jama>
-	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
-	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
-MIME-Version: 1.0
-In-Reply-To: <536A7C42.6030502@balister.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
+Date: Sun, 11 May 2014 16:55:16 +0200
+Message-Id: <1399820116-3174-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.2
+Subject: [meta-oe][WIP][PATCH] mongodb: update LICENSE AGPLv3 -> AGPL-3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,130 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 May 2014 14:53:13 -0000
-X-Groupsio-MsgNum: 49843
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qFgkTsE6LiHkLPZw"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 11 May 2014 14:55:04 -0000
 
---qFgkTsE6LiHkLPZw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* to fix:
+  WARNING: mongodb: No generic license file exists for: AGPLv3 in any provider
 
-On Wed, May 07, 2014 at 11:32:34AM -0700, Philip Balister wrote:
-> On 05/05/2014 09:45 AM, Martin Jansa wrote:
-> > On Mon, May 05, 2014 at 09:32:04AM -0700, Adam Lee wrote:
-> >> Hi JaMa, what does it take to be a maintainer?
-> >>
-> >> Do I need to build check all the packages everyday?
-> >=20
-> > Definitely no everyday, there are more patches coming in just after the
-> > release, but later it's something like 1-5 patches in month.
-> >=20
-> > So it doesn't need much time, but it's always good when it's done by
-> > someone else then master maintainer (to setup separate builds etc).
-> >=20
-> > Possibly more time is spent on watching the ML, because many people
-> > don't read README file and instead of following the proper procedure for
-> > backports to relase branches they just say somewhere in ML "BTW: also
-> > merge this to dora".
-> >=20
-> > You can also have some co-maintainer if you find way to split the work
-> > without duplicating it.
->=20
-> Adam,
->=20
-> I'd be glad to help scan the list for backport requests.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/mongodb/mongodb_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Can one of you send README update patch?
-
-Thanks!
-
-> > I'm fine with scheme where maintainer sends me consolidated pull-request
-> > and I'll merge it for him to actual branch (so that he doesn't even need
-> > R/W to main repo).
-> >=20
-> > BTW: If you don't mind, then I'll forward this to oe-devel as well for
-> > other possible volunteers.
-> >=20
-> > Cheers,
-> >=20
-> >> Please let me know!
-> >>
-> >> Adam
-> >>
-> >> On Wed, Apr 30, 2014 at 7:37 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
-> >>> Hi,
-> >>>
-> >>> few people asked me when there will be daisy branch in meta-openembed=
-ded
-> >>> repository.
-> >>>
-> >>> My current plan is at the end of next week.
-> >>>
-> >>> There are some pending fixes I need to finish testing (please review,
-> >>> test and reply on them).
-> >>>
-> >>> I was hoping for few more fixes for
-> >>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-March=
-/094893.html
-> >>>
-> >>> and especially for incorrect dependencies:
-> >>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
-/095268.html
-> >>> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April=
-/095464.html
-> >>>
-> >>> There is only one change on ML which really cannot go to daisy branch
-> >>> (http://patchwork.openembedded.org/patch/71107/), the B!=3DS fixes ar=
-e on
-> >>> edge, but they shouldn't harm to be in daisy.
-> >>>
-> >>> I hope to get few more fixes from OEDAM and then I'll run final build
-> >>> test on jenkins (3days, possibly needed twice).
-> >>>
-> >>> If you want to maintain daisy release in meta-oe, reply in this thread
-> >>> and send patch to update README files.
-> >>>
-> >>> Regards,
-> >>> --
-> >>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >>>
-> >>> --
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>
-> >=20
-> >=20
-> >=20
->=20
+diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+index 149f582..2701c4c 100644
+--- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "mongodb"
+-LICENSE = "AGPLv3 & Apache-2.0"
++LICENSE = "AGPL-3.0 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788 \
+                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-- 
+1.9.2
 
 
-
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---qFgkTsE6LiHkLPZw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlNvjvEACgkQN1Ujt2V2gBxcEgCggxWsM41BYqeFwJrJ5/WJubfe
-rekAoIb3rWP6PZIrwdv1qCefYUSSCaRe
-=gKM9
------END PGP SIGNATURE-----
-
---qFgkTsE6LiHkLPZw--
