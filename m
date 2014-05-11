@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f48.google.com (unknown [209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 90DAF6600A
+Received: from mail-lb0-f169.google.com (unknown [209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F35266004
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 06:49:50 +0000 (UTC)
-Received: by mail-la0-f48.google.com with SMTP id mc6so1012619lab.21
+	Sun, 11 May 2014 06:49:52 +0000 (UTC)
+Received: by mail-lb0-f169.google.com with SMTP id s7so6565331lbd.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 May 2014 23:49:51 -0700 (PDT)
+	Sat, 10 May 2014 23:49:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=/OiaOkillzgQbFaYv5zaq0WV1EYa9yyMpqjVVOJqM5U=;
-	b=FdAW0mew098S9kSSek3axApH614zIHBY9zhFpvs8loiDw1kE6HKRld/agW4iPeRxWv
-	jipYsLP5lUMiqAYmE6Ugcnq8MQmtWyIoTzQFkfd8CJ5iV42mrBsylPDU9wuTV7+fidDc
-	y0h5hTjYrm2hL1+2l3Rh3d1vtwaMt5Qqq8H/ITt3mYM9uRV7dIseTZ34oKlNyVguyU+L
-	TJtO6SI8z6msbWrVwspZKiaC/i2AxotvXrtYKw7SGyr2c4UFzP8/rnhhNcF+JNbmmu5M
-	A2qYfaUkD+8Z7FauPJvZiqkcsJXNbN3tU0NVR20xMlRqz/LoGLF2UwgIlE+FZ5zoGegm
-	qVTQ==
-X-Received: by 10.152.121.39 with SMTP id lh7mr7126407lab.7.1399790991089;
-	Sat, 10 May 2014 23:49:51 -0700 (PDT)
+	bh=kAAT2IzsiK7uvxDTY6CgWHpoppTqXgyq1J4t3UUNsM4=;
+	b=Hf/F/UuMzqcClIm1cP7JDuGnvG5wBoSU8lp1Y+W+YYiPZgAwvcFjS/B2N09cGji+sT
+	oIkjpdRstySki1Cs/dt0joweFZ2Y/U20yLlgLxQsYLguT9bNEvYsTjUrDhy9Z0KluYUU
+	Q1xH6MCvvlnPr3+CzAii3JeiFiW1arJMpSHVOzzD7fFAYJCvLpJlkK0+hMlSMhAIaAGi
+	vvnRML9dYdFPErPHUKb2WF0v4vtyoU4pHQgdHt48irC/CIXBQ1ciqjzHD0GKCdf10/Kn
+	ND7fJp7LutCoOvVfrK0R7Fyl11FSokrjrrA24ZVJot7ezZnoCsvunSU/SXs6MDjNWGUK
+	McpA==
+X-Received: by 10.112.254.163 with SMTP id aj3mr18681677lbd.20.1399790992955; 
+	Sat, 10 May 2014 23:49:52 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id r2sm6970007laa.5.2014.05.10.23.49.50
+	by mx.google.com with ESMTPSA id u4sm6972009lal.8.2014.05.10.23.49.51
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 10 May 2014 23:49:50 -0700 (PDT)
+	Sat, 10 May 2014 23:49:52 -0700 (PDT)
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 May 2014 08:50:07 +0200
-Message-Id: <1399791009-2718-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 11 May 2014 08:50:08 +0200
+Message-Id: <1399791009-2718-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.9.2
 In-Reply-To: <1399791009-2718-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1399791009-2718-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/6] sox: add PACKAGECONFIG for ao
+Subject: [meta-oe][PATCH 5/6] tk: Fix build with xft
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +46,56 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 11 May 2014 06:49:53 -0000
 
-* fixes following issue from test-dependencies report:
-  sox/sox/latest lost dependency on  libao
+* xft requires fontconfig, but pkg-config --libs xft doesn't return it
+  add it manually
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../tcltk/tk-8.6.0/configure.use.fontconfig.with.xft.patch  | 13 +++++++++++++
+ meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb                  |  3 +--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/tcltk/tk-8.6.0/configure.use.fontconfig.with.xft.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-index cfc61d4..18d77bb 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-@@ -19,6 +19,7 @@ PACKAGECONFIG[magic] = "--with-magic,--without-magic,file,"
- PACKAGECONFIG[mad] = "--with-mad,--without-mad,libmad,"
- PACKAGECONFIG[id3tag] = "--with-id3tag,--without-id3tag,libid3tag,"
- PACKAGECONFIG[lame] = "--with-lame,--without-lame,lame,"
-+PACKAGECONFIG[ao] = "--with-ao,--without-ao,libao,"
+diff --git a/meta-oe/recipes-devtools/tcltk/tk-8.6.0/configure.use.fontconfig.with.xft.patch b/meta-oe/recipes-devtools/tcltk/tk-8.6.0/configure.use.fontconfig.with.xft.patch
+new file mode 100644
+index 0000000..a0c157f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/tcltk/tk-8.6.0/configure.use.fontconfig.with.xft.patch
+@@ -0,0 +1,13 @@
++--- a/configure.in.orig	2014-05-10 14:35:39.859147385 +0000
+++++ b/configure.in	2014-05-10 14:36:20.282925184 +0000
++@@ -554,8 +554,8 @@
++ 	dnl make sure package configurator (xft-config or pkg-config
++ 	dnl says that xft is present.
++ 	    found_xft=yes
++-	    XFT_CFLAGS=`pkg-config --cflags xft 2>/dev/null` || found_xft="no"
++-	    XFT_LIBS=`pkg-config --libs xft 2>/dev/null` || found_xft="no"
+++	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
+++	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
++ 	AC_MSG_RESULT([$found_xft])
++ 	dnl make sure that compiling against Xft header file doesn't bomb
++ 	if test "$found_xft" = "yes" ; then
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+index a5e76e9..1177d03 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.0.bb
+@@ -15,8 +15,6 @@ LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe
+     file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+ "
  
- LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
+-PNBLACKLIST[tk] = "tk8.6.0/unix/libtk8.6.so: error: undefined reference to 'FcCharSetHasChar'"
+-
+ DEPENDS = "tcl virtual/libx11 libxt"
+ 
+ SRC_URI = "\
+@@ -26,6 +24,7 @@ SRC_URI = "\
+     file://tklibrary.diff;striplevel=2 \
+     file://tkprivate.diff;striplevel=2 \
+     file://fix-xft.diff \
++    file://configure.use.fontconfig.with.xft.patch \
+ "
+ SRC_URI[md5sum] = "b883a1a3c489c17413fb602a94bf54e8"
+ SRC_URI[sha256sum] = "5c708b2b6f658916df59190b27750fa1ea2bc10992108e10f961c0700f058de6"
 -- 
 1.9.2
 
