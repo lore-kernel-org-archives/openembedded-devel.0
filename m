@@ -1,30 +1,31 @@
-Return-Path: <gary@mlbassoc.com>
-X-Greylist: delayed 515 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 12 May 2014 19:24:09 UTC
-Received: from mail.chez-thomas.org (unknown [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C0B760167
+Return-Path: <alexandre.fournier@kiplink.fr>
+Received: from webmail.wisp-e.com (unknown [212.83.147.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 963C960167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 19:24:09 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 8F785F811DC; Mon, 12 May 2014 13:15:35 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 8C543F811DA;
-	Mon, 12 May 2014 13:15:33 -0600 (MDT)
-Message-ID: <53711DD9.6070506@mlbassoc.com>
-Date: Mon, 12 May 2014 13:15:37 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-MIME-Version: 1.0
+	Mon, 12 May 2014 20:02:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by webmail.wisp-e.com (Postfix) with ESMTP id 66A3F1A1627
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2014 22:03:00 +0200 (CEST)
+Received: from webmail.wisp-e.com ([127.0.0.1])
+	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10032)
+	with ESMTP id 4EdQ5LnlUqSU; Mon, 12 May 2014 22:02:59 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by webmail.wisp-e.com (Postfix) with ESMTP id D949A1A1626;
+	Mon, 12 May 2014 22:02:59 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at wisp-e.com
+Received: from webmail.wisp-e.com ([127.0.0.1])
+	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id 5oKl-9hmU5zJ; Mon, 12 May 2014 22:02:59 +0200 (CEST)
+Received: from borma.wisp-e.com (borma.wisp-e.com [192.168.200.62])
+	by webmail.wisp-e.com (Postfix) with ESMTPSA id AD2581A15A5;
+	Mon, 12 May 2014 22:02:59 +0200 (CEST)
+From: Alexandre Fournier <alexandre.fournier@kiplink.fr>
 To: openembedded-devel@lists.openembedded.org
-References: <CAN-NoH3xAYL_GdgvtYzNChD0VneKjT4EoJzPLigAeCZXegcBCA@mail.gmail.com>
-In-Reply-To: <CAN-NoH3xAYL_GdgvtYzNChD0VneKjT4EoJzPLigAeCZXegcBCA@mail.gmail.com>
-Subject: Re: kernel config/rebuilding
+Date: Mon, 12 May 2014 22:04:31 +0200
+Message-Id: <1399925071-12155-1-git-send-email-alexandre.fournier@kiplink.fr>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-networking][PATCH v2] net-snmp: install net-snmp-config script to STAGING_BINDIR_CROSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,31 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 19:24:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 May 2014 20:02:53 -0000
 
-On 2014-05-12 12:43, Richard Cagley wrote:
-> This is likely an incredibly dumb question.
->
-> After I do this
-> bitbake -c menuconfig linux-xlnx
-> Then go through the menu options and select the kernel changes I want.
->
-> How do I get the kernel to rebuild?
->
-> bitbake linux-xlnx
+This recipe was installing net-snmp-config script to STAGING_BINDIR
+instead of STAGING_BINDIR_CROSS, during the do_install. It is not
+recommended and must be done after staging.
 
-Try 'bitbake linux-xlnx -C compile'
+Changes:
+* Remove STAGING_BINDIR manipulations from do_install_append
+* Add net_snmp_sysroot_preprocess function instead
+* Append net_snmp_sysroot_preprocess to SYSROOT_PREPROCESS_FUNCS
 
-> and
-> bitbake core-image-minimal-dev
-> don't seem to generate new uImages.
->
+Signed-off-by: Alexandre Fournier <alexandre.fournier@kiplink.fr>
+---
+ .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb            | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+index eb50d0f..f1e3a5d 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+@@ -49,19 +49,26 @@ do_install_append() {
+     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
+     install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
+     install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
+-    install -d ${STAGING_BINDIR}
+-    install -m 0755 ${D}${bindir}/net-snmp-config ${STAGING_BINDIR}/
+     sed -e "s@-I/usr/include@@g" \
+         -e "s@^prefix=.*@prefix=${STAGING_DIR_HOST}@g" \
+         -e "s@^exec_prefix=.*@exec_prefix=${STAGING_DIR_HOST}@g" \
+         -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
+         -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
+-        -i ${STAGING_BINDIR}/net-snmp-config
++        -i ${D}${bindir}/net-snmp-config
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
+ }
+ 
++SYSROOT_PREPROCESS_FUNCS += "net_snmp_sysroot_preprocess"
++
++net_snmp_sysroot_preprocess () {
++    if [ -e ${D}${bindir}/net-snmp-config ]; then
++        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++        install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++    fi
++}
++
+ PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
+             ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
+ 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.8.3.2
+
 
