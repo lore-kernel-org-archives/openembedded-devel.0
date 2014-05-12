@@ -1,34 +1,32 @@
-Return-Path: <ben.shelton@ni.com>
-Received: from ni.com (unknown [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id D4A3965FE5
+Return-Path: <rcagley@gmail.com>
+X-Greylist: delayed 332 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 12 May 2014 18:48:51 UTC
+Received: from mail-yh0-f43.google.com (unknown [209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 3017265EE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 18:20:37 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
-	s4CHW7Um010118 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 12:32:07 -0500
-Received: from bshelton-desktop.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP5)
-	with ESMTP id 2014051212320777-1004973 ;
-	Mon, 12 May 2014 12:32:07 -0500 
-From: Ben Shelton <ben.shelton@ni.com>
+	Mon, 12 May 2014 18:48:51 +0000 (UTC)
+Received: by mail-yh0-f43.google.com with SMTP id v1so2075921yhn.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2014 11:48:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=zNdEOgK6J/XaBeiJxpn3Ukxa/rI8xNp04XS/r8RiyOk=;
+	b=t0c0DoQSr/M7/QKUu0jv9YOrq+st3t6lwMaDSdP79uEOXiQMAk6cEgWqcOmJyAYxFo
+	aR89m2y/tv3hkEAQLVQ+MQulYSxnvxFDGsn5J21dwGntAGTQBwr9EV5Z+2CoIviRLeri
+	RA7vzNG8SjkNw6XBSNJfGXUHEDoc+7ue7dErVcmFJCj3aqHn6HVqoPUPfsBDCecw8H+J
+	xs54Lcd+qecQxw4/peyOKijQ8+4BenSZnrd8/PNC9ZWlXs0YbQCEsRjma7NDjvuenaV1
+	tbWm9Mb6Ogj89wEp79wQK7ePA9nDByohPjcXVnQxSxVbHzwRyLHs5SO/tWk/+p1DhNiv
+	qtTA==
+MIME-Version: 1.0
+X-Received: by 10.236.26.193 with SMTP id c41mr43439225yha.151.1399920200649; 
+	Mon, 12 May 2014 11:43:20 -0700 (PDT)
+Received: by 10.170.110.8 with HTTP; Mon, 12 May 2014 11:43:20 -0700 (PDT)
+Date: Mon, 12 May 2014 11:43:20 -0700
+Message-ID: <CAN-NoH3xAYL_GdgvtYzNChD0VneKjT4EoJzPLigAeCZXegcBCA@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 May 2014 12:31:48 -0500
-Message-Id: <139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1399914295.git.ben.shelton@ni.com>
-References: <cover.1399914295.git.ben.shelton@ni.com>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP5|July 31, 2013) at 05/12/2014 12:32:07 PM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP5|July
-	31, 2013) at 05/12/2014 12:32:07 PM,
-	Serialize complete at 05/12/2014 12:32:07 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
-	0.0.0000
-	definitions=2014-05-12_03:2014-05-12, 2014-05-12,
-	1970-01-01 signatures=0
-Subject: [meta-oe][PATCH 1/7] bdftopcf: add recipe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: kernel config/rebuilding
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,38 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 18:20:48 -0000
+X-List-Received-Date: Mon, 12 May 2014 18:48:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The bdftopcf tool is necessary to build the core X fonts, which ship in
-BDF format.  Adapted from a recipe in OE-Classic and from an earlier
-mailing list post by Trevor Woerner.
+This is likely an incredibly dumb question.
 
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
----
- meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+After I do this
+bitbake -c menuconfig linux-xlnx
+Then go through the menu options and select the kernel changes I want.
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
-new file mode 100644
-index 0000000..5009d54
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
-@@ -0,0 +1,13 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
-+
-+SUMMARY = "bdftopcf is a tool to convert BDF fonts to PCF fonts"
-+HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/bdftopcf/"
-+SECTION = "x11/app"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f9a35333adf75edd1eaef84bca65a490"
-+DEPENDS = "libxfont"
-+
-+SRC_URI[md5sum] = "96a648a332160a7482885800f7a506fa"
-+SRC_URI[sha256sum] = "eaf59057ba3d7cffe29526562ce50868da7da823487a4cfb3e16946e5ffd2798"
-+
-+BBCLASSEXTEND = "native"
--- 
-1.9.3
+How do I get the kernel to rebuild?
 
+bitbake linux-xlnx
+and
+bitbake core-image-minimal-dev
+don't seem to generate new uImages.
 
