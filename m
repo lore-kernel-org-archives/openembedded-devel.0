@@ -1,45 +1,35 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 12 May 2014 10:38:08 UTC
-Received: from mail1.bemta7.messagelabs.com (unknown [216.82.254.104])
-	by mail.openembedded.org (Postfix) with ESMTP id CE04466014
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f178.google.com (unknown [209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id AFDF060E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 10:38:08 +0000 (UTC)
-Received: from [216.82.254.211:30154] by server-8.bemta-7.messagelabs.com id
-	60/26-07332-103A0735; Mon, 12 May 2014 10:31:29 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-4.tower-201.messagelabs.com!1399890688!8011468!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 20144 invoked from network); 12 May 2014 10:31:29 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-4.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
-	12 May 2014 10:31:29 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Mon, 12 May 2014 05:31:33 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Mon, 12 May 2014 05:31:26 -0500
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
-	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Mon, 12 May 2014 12:31:25 +0200
-Message-ID: <5370A2F8.50802@digi.com>
-Date: Mon, 12 May 2014 12:31:20 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+	Mon, 12 May 2014 10:49:14 +0000 (UTC)
+Received: by mail-qc0-f178.google.com with SMTP id l6so7636212qcy.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2014 03:49:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=k4cMpunJk6qMJjTvNgkyFtBV/kZ4JAO+kvwpgPlojZc=;
+	b=ilX0aOArn/0rhIbkHypFwLgEKo0Y2vpSpE28cug1w1glU4Ly2eZE65sm0BesrmF9HJ
+	yIFA0owyNOijghgBv+WLNLvevo+nIPa3iOJPm7X9jcDE9aNut6+8htMCtvfTothQEJky
+	MyhIUTwdvmCWHUkyBAUAsfFAPIzq6z7LNxhz/Wif74vmeMJ/Nqv3vltSiP0lbgvnStqR
+	Iwrs1OJzYK+yg57US9eQ79+40IgloNrL3Nwj+F7iG5y7rdWohSj2cxRwvu9+BBh65bot
+	tNvhZa7XmiXMbGUf8ZzquaycNgklE4IbJOIXAv9I/Jq+7KpZTRNUeitj6zU6HC7l8JLd
+	0UuQ==
+X-Gm-Message-State: ALoCoQmAl7GIvDn7Iv7XKfZphVfTRwJACCgXcmnLGRpSLntz74yZUhsXzr+u4TuK9S1nDfqs3Ibo
+X-Received: by 10.140.28.3 with SMTP id 3mr35419387qgy.71.1399891755522; Mon,
+	12 May 2014 03:49:15 -0700 (PDT)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Tom King <ka6sox@gmail.com>, 
-	Martin Jansa <martin.jansa@gmail.com>
-References: <53612125.8030702@digi.com>	<1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>	<53613AA5.7040903@digi.com>
-	<20140430182049.GP2486@jama>
-In-Reply-To: <20140430182049.GP2486@jama>
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: Re: [meta-webserver] cherokee webserver SRC_URI broken again
+Received: by 10.140.101.77 with HTTP; Mon, 12 May 2014 03:48:55 -0700 (PDT)
+In-Reply-To: <75b920fb6189f84ff81fcfe0b89747f18079ed07.1399888012.git.Chong.Lu@windriver.com>
+References: <cover.1399888012.git.Chong.Lu@windriver.com>
+	<75b920fb6189f84ff81fcfe0b89747f18079ed07.1399888012.git.Chong.Lu@windriver.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 12 May 2014 11:48:55 +0100
+Message-ID: <CAJTo0LaeVp=h34O9=RFU2mR54NhBsEH1fMyq=kgJHt21EPm1jA@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH V3 1/1] dbus: Update to 1.8.2 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,39 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 10:38:09 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 12 May 2014 10:49:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Martin,
+On 12 May 2014 10:50, Chong Lu <Chong.Lu@windriver.com> wrote:
+> Upgrade dbus to 1.8.2.
+> Change install-ptest rules.
+> Remove unneeded patches since it's included in new version.
+> Remove unrecognized option: "--with-xml"
 
-On 30/04/14 20:20, Martin Jansa wrote:
-> Tom, can you please put it on sources.oe.org?
->
-> You can find the archive on aruba.
+This should go to the oe-core list instead of oe-devel.
 
-Thanks for looking into this, but did this ever happen?
+What testing has been done with 1.8.2?  Have you tested that the
+system and user buses are operation both with sysvinit and systemd?
 
-I'm still having problems with cherokee download. In the fetch log it 
-shows trying to get it from 
-'http://sources.openembedded.org/cherokee-1.2.98.tar.gz', but still no luck:
-
-$ wget http://sources.openembedded.org/cherokee-1.2.98.tar.gz
---2014-05-12 12:29:11-- 
-http://sources.openembedded.org/cherokee-1.2.98.tar.gz
-Resolving sources.openembedded.org (sources.openembedded.org)... 
-140.211.169.152
-Connecting to sources.openembedded.org 
-(sources.openembedded.org)|140.211.169.152|:80... connected.
-HTTP request sent, awaiting response... 404 Not Found
-2014-05-12 12:29:11 ERROR 404: Not Found.
-
--
-Javier Viguera
-Software Engineer
-Digi International® Spain S.A.U.
--- 
-Regards,
-
-Javier Viguera
+Ross
 
