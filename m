@@ -1,24 +1,26 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (unknown [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 598AF605B2
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (unknown [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 19BCB601A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 09:50:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s4C9op28000024
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 02:50:51 -0700 (PDT)
-Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Mon, 12 May 2014 02:50:50 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
+	Mon, 12 May 2014 10:00:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,1034,1389740400"; d="scan'208";a="51049462"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 12 May 2014 12:00:51 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Mon, 12 May 2014 12:00:51 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Mon, 12 May 2014 12:00:51 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 May 2014 17:50:48 +0800
-Message-ID: <cover.1399888012.git.Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
+Date: Mon, 12 May 2014 12:00:59 +0200
+Message-ID: <1399888859-13112-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
+In-Reply-To: <CAMKF1srcr7c8ExfZkmo3b-VUMMPsZKT77N3ygqKVK_HwxXkC+w@mail.gmail.com>
+References: <CAMKF1srcr7c8ExfZkmo3b-VUMMPsZKT77N3ygqKVK_HwxXkC+w@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH V3 0/1] dbus: Update to 1.8.2 version
+Subject: [meta-oe][PATCH v2] xdelta3: add optional lzma support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,39 +34,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 09:50:53 -0000
+X-List-Received-Date: Mon, 12 May 2014 10:00:59 -0000
 Content-Type: text/plain
 
-Change since v2:
-delete incorrect patch name.
+Using PACKAGECONFIG. Disabled by default.
 
-The following changes since commit 50067e069c8cbc0d339819494f22ae7623d47aa6:
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ .../files/with-liblzma-configure-option.patch      | 55 ++++++++++++++++++++++
+ meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb    |  8 +++-
+ 2 files changed, 62 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/xdelta/files/with-liblzma-configure-option.patch
 
-  bitbake: fetch2/perforce: Ensure command has a default (2014-05-11 15:26:25 +0100)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib chonglu/dbus
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=chonglu/dbus
-
-Chong Lu (1):
-  dbus: Update to 1.8.2 version
-
- .../{dbus-test_1.6.18.bb => dbus-test_1.8.2.bb}    |   1 -
- meta/recipes-core/dbus/dbus.inc                    |   4 +-
- ...orrect-address-when-using-address-systemd.patch | 193 ---------------------
- ...y-freeing-if-error-during-listing-service.patch |  45 -----
- meta/recipes-core/dbus/dbus/ptest.patch            | 125 +++++++------
- meta/recipes-core/dbus/dbus_1.6.18.bb              |   4 -
- meta/recipes-core/dbus/dbus_1.8.2.bb               |   4 +
- 7 files changed, 76 insertions(+), 300 deletions(-)
- rename meta/recipes-core/dbus/{dbus-test_1.6.18.bb => dbus-test_1.8.2.bb} (98%)
- delete mode 100644 meta/recipes-core/dbus/dbus/Set-correct-address-when-using-address-systemd.patch
- delete mode 100644 meta/recipes-core/dbus/dbus/fixed-memory-freeing-if-error-during-listing-service.patch
- delete mode 100644 meta/recipes-core/dbus/dbus_1.6.18.bb
- create mode 100644 meta/recipes-core/dbus/dbus_1.8.2.bb
-
+diff --git a/meta-oe/recipes-support/xdelta/files/with-liblzma-configure-option.patch b/meta-oe/recipes-support/xdelta/files/with-liblzma-configure-option.patch
+new file mode 100644
+index 0000000..4b99290
+--- /dev/null
++++ b/meta-oe/recipes-support/xdelta/files/with-liblzma-configure-option.patch
+@@ -0,0 +1,55 @@
++Upstream-Status: Pending, Submitted
++http://code.google.com/p/xdelta/issues/detail?id=178
++
++xdelta3: add --with-liblzma configure option
++
++As xdelta3 can be compiled with or without liblzma external library, make it configurable.
++Default is autodetect (unchanged behavior).
++
++Signed-off-by: Matthieu Crapet <mcrapet@gmail.com>
++---
++ configure.ac | 21 +++++++++++++++++++--
++ 1 file changed, 19 insertions(+), 2 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 3b430d7..8c53ba8 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -8,8 +8,6 @@ AM_INIT_AUTOMAKE([1.9 no-define foreign tar-ustar])
++ AX_CHECK_ALIGNED_ACCESS_REQUIRED
++ AC_PROG_CC
++ AC_PROG_CXX
++-AC_CHECK_HEADERS([lzma.h])
++-AC_CHECK_LIB(lzma, lzma_easy_buffer_encode)
++ AC_CHECK_SIZEOF(size_t)
++ #AM_PATH_PYTHON(,, [:])
++ #AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
++@@ -22,6 +20,25 @@ AC_ARG_ENABLE(debug-symbols,
++    AS_HELP_STRING(--enable-debug-symbols,[Build with debug symbols (default is NO)]),,enableval=no)
++ AM_CONDITIONAL([DEBUG_SYMBOLS], [test ${enableval} = "yes"])
++ 
+++AC_ARG_WITH(
+++    [liblzma],
+++    [AC_HELP_STRING(
+++        [--with-liblzma],
+++        [build with liblzma support @<:@default=autodetect@:>@])],
+++    [USE_LIBLZMA=$withval],
+++    [USE_LIBLZMA=auto])
+++
+++if test "x$USE_LIBLZMA" != xno ; then
+++    AC_CHECK_HEADERS([lzma.h],,[
+++        if test "x$with_liblzma" = xyes ; then
+++            AC_MSG_FAILURE([liblzma includes was not found])
+++        fi])
+++    AC_CHECK_LIB([lzma], [lzma_easy_buffer_encode],,[
+++        if test "x$with_liblzma" = xyes ; then
+++            AC_MSG_FAILURE([liblzma library was not found])
+++        fi])
+++fi
+++
++ AC_CONFIG_HEADERS([config.h])
++ AC_CONFIG_FILES([Makefile])
++ AC_OUTPUT
++-- 
++1.8.5.4
++
+diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
+index 16a72ee..6160c81 100644
+--- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
++++ b/meta-oe/recipes-support/xdelta/xdelta3_3.0.8.bb
+@@ -8,8 +8,14 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+ SRC_URI = "http://xdelta.googlecode.com/files/${BPN}-${PV}.tar.xz \
+-           file://compilation-fix.patch"
++           file://compilation-fix.patch \
++           file://with-liblzma-configure-option.patch \
++"
+ SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3"
+ SRC_URI[sha256sum] = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
+ 
+ inherit autotools
++
++# Optional secondary compression
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[lzma] = "--with-liblzma,--without-liblzma,xz"
 -- 
-1.8.1.2
+1.8.5.4
 
 
