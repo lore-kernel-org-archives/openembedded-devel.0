@@ -1,34 +1,24 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (unknown [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 05E3A60167
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (unknown [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DBFC6605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 08:18:52 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WjlRl-000285-28 for openembedded-devel@lists.openembedded.org;
-	Mon, 12 May 2014 10:18:53 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 10:18:53 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 12 May 2014 09:09:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s4C99KZp007758
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 10:18:53 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 12 May 2014 10:18:43 +0200
-Message-ID: <lkq053$l1i$1@ger.gmane.org>
-References: <1399820116-3174-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-In-Reply-To: <1399820116-3174-1-git-send-email-Martin.Jansa@gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][WIP][PATCH] mongodb: update LICENSE AGPLv3 -> AGPL-3.0
+	Mon, 12 May 2014 02:09:20 -0700 (PDT)
+Received: from pek-hostel-vm06.wrs.com (128.224.153.176) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Mon, 12 May 2014 02:09:20 -0700
+From: Chong Lu <Chong.Lu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 12 May 2014 17:09:17 +0800
+Message-ID: <cover.1399885657.git.Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
+MIME-Version: 1.0
+Subject: [PATCH V2 0/1] dbus: Update to 1.8.2 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,27 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 08:18:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 May 2014 09:09:22 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Change since V1:
+Add defect ID [YOCTO #6092] in commit log.
 
-Martin Jansa schreef op 11-05-14 16:55:
-> * to fix: WARNING: mongodb: No generic license file exists for: AGPLv3 in
-> any provider
+The following changes since commit 50067e069c8cbc0d339819494f22ae7623d47aa6:
 
-Thanks for doing this, I haven't had time to work on this due to the OE-core
-merge window fallout :(
+  bitbake: fetch2/perforce: Ensure command has a default (2014-05-11 15:26:25 +0100)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+are available in the git repository at:
 
-iD8DBQFTcIPjMkyGM64RGpERAkOkAKCWTSpoZ6bcUaO7Ir9YolYsYumIgQCff5mm
-RzPamI/mKXAkePYf1pULLNc=
-=UksX
------END PGP SIGNATURE-----
+  git://git.pokylinux.org/poky-contrib chonglu/dbus
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=chonglu/dbus
+
+Chong Lu (1):
+  dbus: Update to 1.8.2 version
+
+ .../{dbus-test_1.6.18.bb => dbus-test_1.8.2.bb}    |   3 +-
+ meta/recipes-core/dbus/dbus.inc                    |   4 +-
+ ...orrect-address-when-using-address-systemd.patch | 193 ---------------------
+ ...y-freeing-if-error-during-listing-service.patch |  45 -----
+ meta/recipes-core/dbus/dbus/ptest.patch            | 125 +++++++------
+ meta/recipes-core/dbus/dbus_1.6.18.bb              |   4 -
+ meta/recipes-core/dbus/dbus_1.8.2.bb               |   4 +
+ 7 files changed, 77 insertions(+), 301 deletions(-)
+ rename meta/recipes-core/dbus/{dbus-test_1.6.18.bb => dbus-test_1.8.2.bb} (96%)
+ delete mode 100644 meta/recipes-core/dbus/dbus/Set-correct-address-when-using-address-systemd.patch
+ delete mode 100644 meta/recipes-core/dbus/dbus/fixed-memory-freeing-if-error-during-listing-service.patch
+ delete mode 100644 meta/recipes-core/dbus/dbus_1.6.18.bb
+ create mode 100644 meta/recipes-core/dbus/dbus_1.8.2.bb
+
+-- 
+1.8.1.2
 
 
