@@ -1,31 +1,40 @@
-Return-Path: <alexandre.fournier@kiplink.fr>
-Received: from webmail.wisp-e.com (unknown [212.83.147.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 963C960167
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 20:02:51 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by webmail.wisp-e.com (Postfix) with ESMTP id 66A3F1A1627
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 22:03:00 +0200 (CEST)
-Received: from webmail.wisp-e.com ([127.0.0.1])
-	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10032)
-	with ESMTP id 4EdQ5LnlUqSU; Mon, 12 May 2014 22:02:59 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by webmail.wisp-e.com (Postfix) with ESMTP id D949A1A1626;
-	Mon, 12 May 2014 22:02:59 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at wisp-e.com
-Received: from webmail.wisp-e.com ([127.0.0.1])
-	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id 5oKl-9hmU5zJ; Mon, 12 May 2014 22:02:59 +0200 (CEST)
-Received: from borma.wisp-e.com (borma.wisp-e.com [192.168.200.62])
-	by webmail.wisp-e.com (Postfix) with ESMTPSA id AD2581A15A5;
-	Mon, 12 May 2014 22:02:59 +0200 (CEST)
-From: Alexandre Fournier <alexandre.fournier@kiplink.fr>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 May 2014 22:04:31 +0200
-Message-Id: <1399925071-12155-1-git-send-email-alexandre.fournier@kiplink.fr>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-networking][PATCH v2] net-snmp: install net-snmp-config script to STAGING_BINDIR_CROSS
+Return-Path: <jefro.net@gmail.com>
+X-Greylist: delayed 1149 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 12 May 2014 23:47:35 UTC
+Received: from mail-lb0-f178.google.com (unknown [209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A466560702;
+	Mon, 12 May 2014 23:47:34 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id w7so8001396lbi.37
+	for <multiple recipients>; Mon, 12 May 2014 16:47:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=q6makARq8awrCPq/PLaWqqWMSEoO3MFJTy+/iTtO534=;
+	b=sInSZZwWMU8JA0eAD71NS8QHHUPqbUi2YD7nCtbIj730dbtNnHtTVyW7jPqqIYb2KY
+	kHkZvH0dSqhwm9izrNejz8YzigYrbjB10YUwHCoSqH9pcDVY21/Z2+iihFAwfdDz7Eg9
+	sJwCzcu9QUQ4p9r5wYAwo76D42oUlR0MCdJfZIWUSq0uJrowVjQ+HrNmnnf0/ZgMC04Q
+	PKBuBVx22j3ECjjkJishwHsjQdn6g4H0tV8ajgX8mGAgPXNRofkiRO+Jmf3uBQ3/Xjbj
+	Am7eOhquja6TACt2hhEgxTlFgHFh6XTdQ70smuySq6PXVjg6Q7znODoOYxv6nxvrY3yS
+	ai+g==
+X-Received: by 10.152.121.72 with SMTP id li8mr23060lab.45.1399936819672; Mon,
+	12 May 2014 16:20:19 -0700 (PDT)
+MIME-Version: 1.0
+Sender: jefro.net@gmail.com
+Received: by 10.112.173.197 with HTTP; Mon, 12 May 2014 16:19:59 -0700 (PDT)
+In-Reply-To: <20140507231808.GM11339@denix.org>
+References: <530697CC.5050402@balister.org> <20140507231808.GM11339@denix.org>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Mon, 12 May 2014 16:19:59 -0700
+X-Google-Sender-Auth: YW0di-1wcvsWbjzhIFrBcR1U3Rk
+Message-ID: <CA+YB3raM8kDp_K259c-ao=nSgfvgXTmi5vpju5wAnA0WwGHH3A@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OEDAM: OpenEmbedded Developers (Americas) Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,57 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 20:02:53 -0000
+X-List-Received-Date: Mon, 12 May 2014 23:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This recipe was installing net-snmp-config script to STAGING_BINDIR
-instead of STAGING_BINDIR_CROSS, during the do_install. It is not
-recommended and must be done after staging.
+Meeting notes have been published on the OEDAM page:
 
-Changes:
-* Remove STAGING_BINDIR manipulations from do_install_append
-* Add net_snmp_sysroot_preprocess function instead
-* Append net_snmp_sysroot_preprocess to SYSROOT_PREPROCESS_FUNCS
+http://openembedded.org/wiki/OEDAM#Minutes
 
-Signed-off-by: Alexandre Fournier <alexandre.fournier@kiplink.fr>
----
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb            | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+Jefro takes the blame for typos and other reporting errors.
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-index eb50d0f..f1e3a5d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
-@@ -49,19 +49,26 @@ do_install_append() {
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
-     install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
-     install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
--    install -d ${STAGING_BINDIR}
--    install -m 0755 ${D}${bindir}/net-snmp-config ${STAGING_BINDIR}/
-     sed -e "s@-I/usr/include@@g" \
-         -e "s@^prefix=.*@prefix=${STAGING_DIR_HOST}@g" \
-         -e "s@^exec_prefix=.*@exec_prefix=${STAGING_DIR_HOST}@g" \
-         -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
-         -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
--        -i ${STAGING_BINDIR}/net-snmp-config
-+        -i ${D}${bindir}/net-snmp-config
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
- }
- 
-+SYSROOT_PREPROCESS_FUNCS += "net_snmp_sysroot_preprocess"
-+
-+net_snmp_sysroot_preprocess () {
-+    if [ -e ${D}${bindir}/net-snmp-config ]; then
-+        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-+        install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-+    fi
-+}
-+
- PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
-             ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
- 
+On Wed, May 7, 2014 at 4:18 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> The OpenEmbedded Board of Directors would like to thank everyone who was able
+> to participate (either in person in Santa Clara or online) in our first OEDAM
+> OpenEmbedded Developers (Americas) Meeting on May 2nd and 3rd! The meeting was
+> a huge success and a lot of fun!
+>
+> We would also like to thank Ettus Research/NI for providing the premises, as
+> well as Jefro and the Yocto Project for sponsoring the event and providing
+> food!
+>
+> The meeting minutes should be published shortly.
+>
+> --
+> Denys
+>
+>
+> On Thu, Feb 20, 2014 at 07:03:24PM -0500, Philip Balister wrote:
+>> The OpenEmbedded Project is holding a developers meeting May 2-3,
+>> 2014, in Santa Clara, CA. This meeting is immediately after the Embedded
+>> Linux Conference North America. All active OpenEmbedded and Yocto
+>> Project developers are invited to attend.
+>>
+>> NOTE: this is a development meeting for the project itself, not a
+>> training session.
+>>
+>> May 2-3, 2014
+>> time TBD
+>>
+>> Ettus Research/National Instruments
+>> 4600 Patrick Henry Drive
+>> Santa Clara, CA 95054 USA
+>>
+>> Lunch will be provided on both days.
+>>
+>> For more information and to add yourself to the list of attendees, see
+>> the wiki page at
+>> http://openembedded.org/wiki/OEDAM
+>>
+>> Here are a couple of photos from 2009:
+>>
+>> http://www.flickr.com/photos/32615155@N00/sets/72157622653686647/
+>>
+>> I'd like to thank Jefro for help with this announcement. Any errors are
+>> mine though.
+>>
+>> Philip, OpenEmbedded eV Chair.
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+
+
+
 -- 
-1.8.3.2
-
+Jeff Osier-Mixon @Intel
+Yocto Project Community Manager http://yoctoproject.org
 
