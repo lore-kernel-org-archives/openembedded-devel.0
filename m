@@ -1,35 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f169.google.com (unknown [209.85.160.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CC92E65EE2
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (unknown [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A65960167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 03:15:39 +0000 (UTC)
-Received: by mail-yk0-f169.google.com with SMTP id 200so5428260ykr.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 20:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=mw4UOJhblWUnZ6citlujG6ADvQBuyYgaWX1RmkiiuCM=;
-	b=T4WpVZxsMOGOtivGA6Ht43N/2d+z+8sCPf842g1W56/CG+fhdR05q3YpPFBOiVN6VL
-	QwtrZcT2fnLPToHQtVBH2aCFcGDVPMYCO9KRjJdPQFvDmeT8/3Q8HX1S7DZ7h3liPEde
-	/JcI/8Myad7ujHM3r2ijkdZjDb/NTBUg32/z5hnF+90wJp79B9dkdXHKgZz+q3NVEIps
-	MZKBWDG6JlfkgmdY+deDP4d+hHRQpTOTZbkAo5dSL12ZlEXTGPHoGnpH74gGr2PqllMD
-	h7V500yF7ePbJhC408ZQ+2AMyP+3uESKNvZeMhVnHSdnwrJZCP+JC45Q7UxbVevsfZjJ
-	xbSQ==
+	Mon, 12 May 2014 04:32:21 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s4C4WGtu026967
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 11 May 2014 21:32:16 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
+	Sun, 11 May 2014 21:32:16 -0700
+Message-ID: <53704ECE.6070403@windriver.com>
+Date: Mon, 12 May 2014 12:32:14 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.236.198.243 with SMTP id v79mr37128657yhn.87.1399864540513; 
-	Sun, 11 May 2014 20:15:40 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Sun, 11 May 2014 20:15:40 -0700 (PDT)
-In-Reply-To: <1399721553-2020-1-git-send-email-fathi.boudra@linaro.org>
-References: <1399721553-2020-1-git-send-email-fathi.boudra@linaro.org>
-Date: Mon, 12 May 2014 00:15:40 -0300
-X-Google-Sender-Auth: Ecziz7KBGXiIQTMrbcHt4YrYQE0
-Message-ID: <CAP9ODKqZE8aY+EVq+Db6x0FLjjB=jvAxvmfHOv0vE_T35hC-iw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] pm-qa: update to 0.4.9 release
+To: <openembedded-devel@lists.openembedded.org>, Paul Eggleton
+	<paul.eggleton@linux.intel.com>
+References: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
+In-Reply-To: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>
+Subject: Re: [meta-perl][PATCH v3 0/9] perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 03:15:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 12 May 2014 04:32:28 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, May 10, 2014 at 8:32 AM, Fathi Boudra <fathi.boudra@linaro.org> wrote:
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-> ---
->  meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+It seems the URL 
+http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+could not access in China, I use 
+http://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+instead, and the build is successed. The others is fine to me.
+
+//Hongxu
+
+
+On 05/07/2014 10:09 AM, Tim Orling wrote:
+> From: Tim Orling <TicoTimo@gmail.com>
 >
-> diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-> index 4d33975..f6ffcb6 100644
-> --- a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-> +++ b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
-> @@ -4,12 +4,12 @@ HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test
+> This series of recipes is the first step towards the
+> ultimate goal of getting Slic3r to build in OE.
+>
+> Changes since v2:
+>    * dropped libmodule-metadata as a patch for oe-core/meta/perl provides
+>        ** http://patches.openembedded.org/patch/71565/
+>    * correct DEPENDS for libmodule-build-tiny-perl ('*-perl-*' missing)
+>
+> Tim Orling (9):
+>    libtext-diff-perl: add 1.41
+>    libcapture-tiny-perl: add 0.23
+>    libmodule-runtime-perl: add 0.013
+>    libextutils-config-perl: add 0.007
+>    libextutils-helpers-perl: add 0.021
+>    libextutils-installpaths-perl: add 0.010
+>    libmodule-build-tiny-perl: add 0.030
+>    libextutils-cppguess-perl: add 0.07
+>    libalgorithm-diff-perl: add 1.15
+>
+>   .../libalgorithm/libalgorithm-diff-perl_1.15.bb    | 23 +++++++++
+>   .../libcapture/libcapture-tiny-perl_0.23.bb        | 36 +++++++++++++++
+>   .../libextutils/libextutils-config-perl_0.007.bb   | 24 ++++++++++
+>   .../libextutils/libextutils-cppguess-perl_0.07.bb  | 38 +++++++++++++++
+>   .../libextutils/libextutils-helpers-perl_0.021.bb  | 29 ++++++++++++
+>   .../libextutils-installpaths-perl_0.010.bb         | 25 ++++++++++
+>   .../libmodule/libmodule-build-tiny-perl_0.030.bb   | 54 ++++++++++++++++++++++
+>   .../libmodule/libmodule-runtime-perl_0.013.bb      | 35 ++++++++++++++
+>   .../recipes-perl/libtext/libtext-diff-perl_1.41.bb | 27 +++++++++++
+>   9 files changed, 291 insertions(+)
+>   create mode 100644 meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+>   create mode 100644 meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.23.bb
+>   create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+>   create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
+>   create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
+>   create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+>   create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+>   create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.013.bb
+>   create mode 100644 meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+>
 
-https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/TestSuite
-
-The URI is wrong.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
