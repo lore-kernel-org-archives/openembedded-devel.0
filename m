@@ -1,31 +1,34 @@
-Return-Path: <danismostlikely@gmail.com>
-X-Greylist: delayed 1258 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 12 May 2014 16:59:25 UTC
-Received: from mail-qa0-f45.google.com (unknown [209.85.216.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CDFA61F16
+Return-Path: <ben.shelton@ni.com>
+X-Greylist: delayed 726 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 12 May 2014 17:44:12 UTC
+Received: from ni.com (unknown [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id B84FA60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 16:59:25 +0000 (UTC)
-Received: by mail-qa0-f45.google.com with SMTP id hw13so7389897qab.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 May 2014 09:59:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=9XbvIP4KJnFpm536TKcPaBxQF/l13C2yJiqyYnkSnE0=;
-	b=TdlTPEwd+UOsZdnSgV+wrdfYDJArKycwlO7RSlhZBLXBIxa3q7x4opw9k2TKTccs2l
-	o0s/Zhch0zV/dmqYneB1JQlEUrhvbJ0tVUUQeFX9Be6GpEkrQoZ8wirFchzmqJx7nKXi
-	1AF1cwIKAa/8cqahCT1vosgHDZrRA9rZ/be4XHKTr5dtQhRigUUV8qW6NslEV5klkDDj
-	PYrrApaX8/JOkiyZRiRZ2Pxsd1p+GJSu8maXrZKjPFxIyRDWyW7HRW4fXXImiTvxsp4b
-	tqaQaCweEoYY/Bqzjf09wgcTJ8w4H2xBjY2Yiv6lXZA4MDVXxqH6eCF30qmQ6pXvFDyJ
-	5sGQ==
-MIME-Version: 1.0
-X-Received: by 10.229.239.4 with SMTP id ku4mr39805298qcb.17.1399912246726;
-	Mon, 12 May 2014 09:30:46 -0700 (PDT)
-Received: by 10.96.148.2 with HTTP; Mon, 12 May 2014 09:30:46 -0700 (PDT)
-Date: Mon, 12 May 2014 10:30:46 -0600
-Message-ID: <CACS+7ZQ1i2nTKLcD+toOBN2BPA9PE=zzdD05oDLmPkCKco-NUA@mail.gmail.com>
-From: Dan McGregor <danismostlikely@gmail.com>
+	Mon, 12 May 2014 17:44:12 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
+	s4CHW7IE017594 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2014 12:32:07 -0500
+Received: from bshelton-desktop.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP5)
+	with ESMTP id 2014051212320777-1004972 ;
+	Mon, 12 May 2014 12:32:07 -0500 
+From: Ben Shelton <ben.shelton@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] netcat-openbsd: fixup patching
+Date: Mon, 12 May 2014 12:31:47 -0500
+Message-Id: <cover.1399914295.git.ben.shelton@ni.com>
+X-Mailer: git-send-email 1.9.3
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP5|July 31, 2013) at 05/12/2014 12:32:07 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP5|July
+	31, 2013) at 05/12/2014 12:32:07 PM,
+	Serialize complete at 05/12/2014 12:32:07 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
+	0.0.0000
+	definitions=2014-05-12_03:2014-05-12, 2014-05-12,
+	1970-01-01 signatures=0
+Subject: [meta-oe][PATCH 0/7] Add core 100 DPI X.org fonts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,50 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 16:59:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 12 May 2014 17:44:17 -0000
 
-From: Dan McGregor <dan.mcgregor@usask.ca>
+Adding back a fixed-up version of the bdftopcf tool, and adding recipes for the 
+core X.org 100 DPI fonts, along with a packagegroup recipe to build them all.
 
-Do the patching in the do_patch phase instead of the compile
-phase. That way if the compile phase needs to be rerun
-patching isn't attempted a second time.
+The following changes since commit 55b09e522ca88c0c0b2dd7a36e4861a1cf6ca9c6:
 
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- .../recipes-support/netcat/netcat-openbsd_1.105.bb            | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+  klcc_cross: move in target sysroot as crossscript (2014-05-04 11:41:12 +0100)
 
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-index 4474e1d..4489656 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-@@ -15,11 +15,20 @@ SRC_URI[netcat-patch.sha256sum] =
-"eee759327ffea293e81d0dde67921b7fcfcad279ffd7a
+are available in the git repository at:
 
- S = "${WORKDIR}/${BPN}-${PV}"
+  git://github.com/ni/meta-oe dev/bshelton/fonts
+  https://github.com/ni/meta-oe/tree/dev/bshelton/fonts
 
-+netcat_do_patch() {
-+    cd ${S}
-+    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line;
-done < ${WORKDIR}/debian/patches/series
-+}
-+
-+python do_patch() {
-+    bb.build.exec_func('netcat_do_patch', d)
-+    bb.build.exec_func('patch_do_patch', d)
-+}
-+
- do_configure[noexec] = "1"
+Ben Shelton (7):
+  bdftopcf: add recipe
+  font-adobe-100dpi: add recipe
+  font-adobe-utopia: add recipe
+  font-bh-100dpi: add recipe
+  font-bh-lucidatypewriter: add recipe
+  font-bitstream-100dpi: add recipe
+  xorg-fonts-100dpi: add recipe
 
- do_compile() {
-     cd ${S}
--    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line;
-done < ${WORKDIR}/debian/patches/series
-     pkgrel=4
-     oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
- }
+ meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb       | 13 +++++++++++++
+ .../recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb | 14 ++++++++++++++
+ .../xorg-font/font-adobe-utopia-100dpi_1.0.4.bb           | 15 +++++++++++++++
+ .../recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb    | 14 ++++++++++++++
+ .../xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb    | 14 ++++++++++++++
+ .../xorg-font/font-bitstream-100dpi_1.0.3.bb              | 14 ++++++++++++++
+ meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb   | 14 ++++++++++++++
+ 7 files changed, 98 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/font-bitstream-100dpi_1.0.3.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
+
 -- 
-1.9.0
+1.9.3
+
 
