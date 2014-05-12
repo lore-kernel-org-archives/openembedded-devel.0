@@ -1,38 +1,35 @@
 Return-Path: <otavio.salvador@gmail.com>
-X-Greylist: delayed 300 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 11 May 2014 23:08:10 UTC
-Received: from mail-yk0-f174.google.com (unknown [209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4491765FE3
+Received: from mail-yk0-f169.google.com (unknown [209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id CC92E65EE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 23:08:10 +0000 (UTC)
-Received: by mail-yk0-f174.google.com with SMTP id 9so5313043ykp.5
+	Mon, 12 May 2014 03:15:39 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 200so5428260ykr.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 May 2014 16:08:11 -0700 (PDT)
+	Sun, 11 May 2014 20:15:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:cc:content-type;
-	bh=+suOfI64qui9oJN/EcKeoavlHSesBbG1vGemE5UGAbI=;
-	b=tvyRAMQXGqCgsVj/PMMabiJSkIOw5Sxh7E6fjaS6MOf9P/Pz1eyE2W1LgCzqg12kiZ
-	ZSkRlHnMboSWg6KZ0F3O3SwK1wloST5npV3sQEFGHIOVJODh8nAI+TvO5LAHGwu5KNpc
-	6e3taWIgn1TSGUHp09jLY+v1TLOjRVGHPk1rFK8tUNidk2KrilRZjY3ICvDJ4c7+vUaI
-	Gp+MJfaILp0ImUCRgNuor/1x7NdbfjQJCtqoEcBqOsLtWOY2d+IBcq1gYv9h669YxmoL
-	oKlLiPhiZLZHKQcTTTyqtNtYe/6boswmxQTtbW3phxl8jqt5IzJk03GwVIY5fam9d5ee
-	9PVQ==
+	bh=mw4UOJhblWUnZ6citlujG6ADvQBuyYgaWX1RmkiiuCM=;
+	b=T4WpVZxsMOGOtivGA6Ht43N/2d+z+8sCPf842g1W56/CG+fhdR05q3YpPFBOiVN6VL
+	QwtrZcT2fnLPToHQtVBH2aCFcGDVPMYCO9KRjJdPQFvDmeT8/3Q8HX1S7DZ7h3liPEde
+	/JcI/8Myad7ujHM3r2ijkdZjDb/NTBUg32/z5hnF+90wJp79B9dkdXHKgZz+q3NVEIps
+	MZKBWDG6JlfkgmdY+deDP4d+hHRQpTOTZbkAo5dSL12ZlEXTGPHoGnpH74gGr2PqllMD
+	h7V500yF7ePbJhC408ZQ+2AMyP+3uESKNvZeMhVnHSdnwrJZCP+JC45Q7UxbVevsfZjJ
+	xbSQ==
 MIME-Version: 1.0
-X-Received: by 10.236.198.243 with SMTP id v79mr35909230yhn.87.1399849391130; 
-	Sun, 11 May 2014 16:03:11 -0700 (PDT)
+X-Received: by 10.236.198.243 with SMTP id v79mr37128657yhn.87.1399864540513; 
+	Sun, 11 May 2014 20:15:40 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Sun, 11 May 2014 16:03:10 -0700 (PDT)
-In-Reply-To: <536A7C42.6030502@balister.org>
-References: <20140430143741.GL2486@jama>
-	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
-	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
-Date: Sun, 11 May 2014 20:03:10 -0300
-X-Google-Sender-Auth: bmrJdC-zLwDNg5N1cIGh6-hk2M8
-Message-ID: <CAP9ODKp==v+uOyjYbEFuBx0k16+BnmiNZGr2+HAXqAu_CZ+Jtw@mail.gmail.com>
+Received: by 10.170.166.213 with HTTP; Sun, 11 May 2014 20:15:40 -0700 (PDT)
+In-Reply-To: <1399721553-2020-1-git-send-email-fathi.boudra@linaro.org>
+References: <1399721553-2020-1-git-send-email-fathi.boudra@linaro.org>
+Date: Mon, 12 May 2014 00:15:40 -0300
+X-Google-Sender-Auth: Ecziz7KBGXiIQTMrbcHt4YrYQE0
+Message-ID: <CAP9ODKqZE8aY+EVq+Db6x0FLjjB=jvAxvmfHOv0vE_T35hC-iw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-oe][PATCH] pm-qa: update to 0.4.9 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 May 2014 23:08:16 -0000
+X-List-Received-Date: Mon, 12 May 2014 03:15:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, May 7, 2014 at 3:32 PM, Philip Balister <philip@balister.org> wrote:
-> On 05/05/2014 09:45 AM, Martin Jansa wrote:
->> On Mon, May 05, 2014 at 09:32:04AM -0700, Adam Lee wrote:
->>> Hi JaMa, what does it take to be a maintainer?
->>>
->>> Do I need to build check all the packages everyday?
->>
->> Definitely no everyday, there are more patches coming in just after the
->> release, but later it's something like 1-5 patches in month.
->>
->> So it doesn't need much time, but it's always good when it's done by
->> someone else then master maintainer (to setup separate builds etc).
->>
->> Possibly more time is spent on watching the ML, because many people
->> don't read README file and instead of following the proper procedure for
->> backports to relase branches they just say somewhere in ML "BTW: also
->> merge this to dora".
->>
->> You can also have some co-maintainer if you find way to split the work
->> without duplicating it.
+On Sat, May 10, 2014 at 8:32 AM, Fathi Boudra <fathi.boudra@linaro.org> wrote:
+> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+> ---
+>  meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> Adam,
->
-> I'd be glad to help scan the list for backport requests.
+> diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+> index 4d33975..f6ffcb6 100644
+> --- a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+> +++ b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+> @@ -4,12 +4,12 @@ HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test
 
-Me too.
+https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/TestSuite
+
+The URI is wrong.
 
 -- 
 Otavio Salvador                             O.S. Systems
