@@ -1,35 +1,22 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (unknown [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id E6D126098B
+Return-Path: <misn@enea.com>
+Received: from mx-3.enea.com (unknown [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id BE76460167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 13:47:12 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WkD32-0001jK-1t for openembedded-devel@lists.openembedded.org;
-	Tue, 13 May 2014 15:47:12 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 15:47:12 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 15:47:12 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 13 May 2014 15:47:01 +0200
-Message-ID: <lkt7ok$rh5$1@ger.gmane.org>
-References: <1399986439-6925-1-git-send-email-mihaela.sendrea@enea.com>
-	<1399986439-6925-3-git-send-email-mihaela.sendrea@enea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-In-Reply-To: <1399986439-6925-3-git-send-email-mihaela.sendrea@enea.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-networking][PATCH v4 2/2] netperf: enable SCTP support
+	Tue, 13 May 2014 14:00:27 +0000 (UTC)
+Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.158.1;
+	Tue, 13 May 2014 16:00:28 +0200
+Received: by sestofb10.enea.se (Postfix, from userid 4351)	id 3FBDB2800C6;
+	Tue, 13 May 2014 16:00:28 +0200 (CEST)
+From: Mihaela Sendrea <mihaela.sendrea@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 May 2014 16:00:26 +0200
+Message-ID: <1399989626-45455-1-git-send-email-mihaela.sendrea@enea.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Received-SPF: None (SESTOEX08.enea.se: mihaela.sendrea@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-networking][PATCH v5 2/2] netperf: enable SCTP support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 13:47:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 May 2014 14:00:32 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com>
+---
+ meta-networking/recipes-support/netperf/netperf_2.6.0.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Mihaela Sendrea schreef op 13-05-14 15:07:
-> Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com> --- 
-> meta-networking/recipes-support/netperf/netperf_2.6.0.bb | 5 +++++ 1 file
-> changed, 5 insertions(+)
-> 
-> diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-> b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb index
-> 7124b02..07bd0cf 100644 ---
-> a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb +++
-> b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb @@ -27,6
-> +27,11 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE" 
-> CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \ '
-> -D_FILE_OFFSET_BITS=64', '', d)}"
-> 
-> +PACKAGECONFIG ??= "" +PACKAGECONFIG[sctp] =
-> "--enable-sctp,--disable-sctp,lksctp-tools," + +RRECOMMENDS_${PN} +=
-> "${@base_contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '',
-> d)}"
-
-R* variables are for packaging so go below do_install.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFTciJVMkyGM64RGpERAiIdAKCtomOboF/4B0JYDfTYIzPZVphz/ACfVdP5
-Htmoo8XSpGUAfn7AgoU6iwI=
-=bJG/
------END PGP SIGNATURE-----
+diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+index 7124b02..ffa77d7 100644
+--- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
++++ b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+@@ -27,6 +27,9 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+ CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
+     ' -D_FILE_OFFSET_BITS=64', '', d)}"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
++
+ # autotools.bbclass attends to include m4 files with path depth <= 2 by
+ # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
+ do_configure_prepend() {
+@@ -57,5 +60,7 @@ do_install() {
+     install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
+ }
+ 
++RRECOMMENDS_${PN} += "${@base_contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
++
+ INITSCRIPT_NAME="netperf"
+ INITSCRIPT_PARAMS="defaults"
+-- 
+1.8.5.3
 
 
