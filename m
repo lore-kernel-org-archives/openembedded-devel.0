@@ -1,24 +1,28 @@
 Return-Path: <Matthieu.CRAPET@ingenico.com>
 Received: from smtp1.ingenico.com (unknown [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id F28AC60196
+	by mail.openembedded.org (Postfix) with ESMTP id B3D3760196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 08:08:22 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,1042,1389740400"; d="scan'208";a="51109523"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 13 May 2014 10:08:19 +0200
+	Tue, 13 May 2014 08:10:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,1042,1389740400"; d="scan'208";a="51109743"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 13 May 2014 10:10:30 +0200
+Received: from COSNADEXC11.usr.ingenico.loc (10.31.4.211) by
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.2.318.1; Tue, 13 May 2014 10:10:30 +0200
 Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.100]) by
-	COSNADEXC21.usr.ingenico.loc ([10.31.4.221]) with mapi id
-	14.02.0328.009; Tue, 13 May 2014 10:08:19 +0200
+	COSNADEXC11.usr.ingenico.loc ([10.31.4.211]) with mapi id
+	14.02.0328.009; Tue, 13 May 2014 10:10:30 +0200
 From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
-Thread-Index: AQHPbg77cYufVzidO0y3w87b7Cagsps+KG5A
-Date: Tue, 13 May 2014 08:08:18 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
+Thread-Index: AQHPbg77cYufVzidO0y3w87b7Cagsps+KG5AgAAAz/A=
+Date: Tue, 13 May 2014 08:10:29 +0000
+Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050BA112D7F7@COSNADEXC13.usr.ingenico.loc>
 References: <cover.1399914295.git.ben.shelton@ni.com>
 	<139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
-In-Reply-To: <139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
+In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
 Accept-Language: fr-FR, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -38,10 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 08:08:24 -0000
+X-List-Received-Date: Tue, 13 May 2014 08:10:30 -0000
 Content-Language: fr-FR
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+
+This was done already, sorry! Forget my previous mail.
+M
+
+-----Message d'origine-----
+De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] De la part de Matthieu CRAPET
+Envoy=E9=A0: mardi 13 mai 2014 10:08
+=C0=A0: openembedded-devel@lists.openembedded.org
+Objet=A0: Re: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
 
 Hi,
 
@@ -55,9 +69,9 @@ M
 
 -----Message d'origine-----
 De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de Ben Shelton
-Envoy=E9=A0: lundi 12 mai 2014 19:32
-=C0=A0: openembedded-devel@lists.openembedded.org
+ed-devel-bounces@lists.openembedded.org] De la part de Ben Shelton Envoy=E9=
+=A0: lundi 12 mai 2014 19:32 =C0=A0: openembedded-devel@lists.openembedded.=
+org
 Objet=A0: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
 
 The bdftopcf tool is necessary to build the core X fonts, which ship in BDF=
@@ -95,6 +109,11 @@ index 0000000..5009d54
 --
 1.9.3
 
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 --
 _______________________________________________
 Openembedded-devel mailing list
