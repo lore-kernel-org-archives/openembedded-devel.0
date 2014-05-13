@@ -1,37 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ee0-f43.google.com (unknown [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C4E065DBF
+Received: from mail-ee0-f46.google.com (unknown [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E055865FE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 14:48:56 +0000 (UTC)
-Received: by mail-ee0-f43.google.com with SMTP id d17so507778eek.30
+	Tue, 13 May 2014 14:48:58 +0000 (UTC)
+Received: by mail-ee0-f46.google.com with SMTP id t10so499579eei.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 07:48:57 -0700 (PDT)
+	Tue, 13 May 2014 07:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=gCBiKfCbc65TiM+++vXne2ndw0M4Pi7XPef+gDXLkRk=;
-	b=BCbe5n9486z0iX4Bz51aHSklU0Qn+oRBAmCu8yuRRieGqdqtuMGiq1fqv6mraoJtAe
-	ICPi9x0W2m0ZtiH3RAsqek3kEjxYo4CYkklvsaCTwNgyyx4YsKUt3Vuxp3QiCCpFM2BA
-	oA3CaninawFN3pzzf1E4OPDwNwz4WtYw9sdRGp4Nv8PRiWUfcSD1E9Wivr4DJRxSw1jT
-	HPkJvYNASuLAzUqQuRrGxAjeqjz0AfNAKpfMpbwI0j0ix+TQFV0mA6rhK344PBn4ppIA
-	2UuGavvgEnhQuP6uQyceRfxJNIHafKnBMYdEy7OZn1k1+nCxvQgvw/IGXzhf2u2I1mOZ
-	oZSQ==
-X-Received: by 10.14.202.134 with SMTP id d6mr3846360eeo.92.1399992537642;
-	Tue, 13 May 2014 07:48:57 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=d2j4Mct9oe51+ucfV1SEbL1JL0fcV0FpTtNkVhRCI8s=;
+	b=Bwyi5V+r98+9Khb4gVjQMYVdebef8ocjCTi74O2K13o3/9sL0BsbnsRbMovz7n8IWC
+	gtCtAYovcWM5Kr8i1mJ6thQr0b1Zk2w/EjAjENYoAO1gbf86oZ/Wgj4MC0zij7LysaOi
+	DRFxTqCX8deduR0aM8ovZn/2I8glpEIeHp0DxV5Nlw2PIdF+v2DpBb4TAvH1ITXE7vLY
+	c6G361g7IuTGwf+xi/sdOjM61d37DP6mHKY1KSaByZNmlZvpgUDoP5tuJ/w8ZAsNHDi6
+	5VPoYsMatksWHaFxKzivGEBD5o+v0677E6BRjltDHDTeDHevdMHHKRZfflLXda4/Qz8B
+	PXpw==
+X-Received: by 10.14.127.9 with SMTP id c9mr3780150eei.93.1399992539233;
+	Tue, 13 May 2014 07:48:59 -0700 (PDT)
 Received: from localhost.localdomain (ip-95-222-161-153.unitymediagroup.de.
 	[95.222.161.153]) by mx.google.com with ESMTPSA id
-	m44sm40701315eeh.14.2014.05.13.07.48.55
+	m44sm40701315eeh.14.2014.05.13.07.48.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 May 2014 07:48:55 -0700 (PDT)
+	Tue, 13 May 2014 07:48:58 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 May 2014 16:48:45 +0200
-Message-Id: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 13 May 2014 16:48:46 +0200
+Message-Id: <1399992528-10108-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH,V2][meta-qt5 0/3] qtwayland updates for hawaii
+Subject: [PATCH,V2][meta-qt5 1/3] qtwayland: move to latest revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +47,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 14:49:01 -0000
+X-List-Received-Date: Tue, 13 May 2014 14:49:02 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-V1->V2:
+latest hawaii has moved to frame-sync
 
-* replace tabs by spaces in do_install
-* fix wrong version location in do_install
-
-Andreas Müller (3):
-  qtwayland: move to latest revision
-  qtwayland-native: make qtwayland find qtwaylandscanner
-  qtwayland: install created private headers
-
- recipes-qt/qt5/qtwayland-native_git.bb             |  5 ++
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
  ...0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch | 91 ----------------------
- recipes-qt/qt5/qtwayland_git.bb                    |  8 +-
- 3 files changed, 11 insertions(+), 93 deletions(-)
+ recipes-qt/qt5/qtwayland_git.bb                    |  3 +-
+ 2 files changed, 1 insertion(+), 93 deletions(-)
  delete mode 100644 recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch
 
+diff --git a/recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch b/recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch
+deleted file mode 100644
+index 2266f4c..0000000
+--- a/recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch
++++ /dev/null
+@@ -1,91 +0,0 @@
+-From c5c23a37b230b426ed1eeea66544af438f48d05d Mon Sep 17 00:00:00 2001
+-From: Taeyeon Mori <orochimarufan.x3@gmail.com>
+-Date: Sun, 9 Feb 2014 23:43:06 +0100
+-Subject: [PATCH] xcomposite-glx: Fix build on Qt 5.2.1
+-
+-* it was made private in
+-  commit b6713ec4262c05f7d103bc3b75ab81aedc690853
+-  Author: Jorgen Lind <jorgen.lind@digia.com>
+-  Date:   Wed Dec 18 07:59:53 2013 +0100
+-
+-  Make classes in client private
+-
+-  and qwayland-xcomposite-glx wasn't adapted to it
+-
+-* found in
+-  http;//oro.sodimm.me/~hinata/devel/.../0001-Fix-build-on-Qt-5.2.1.patch.htm
+-  but because it was already gone, here is the cache:
+-  http://webcache.googleusercontent.com/search?q=cache:5L0rSgqrKMoJ:oro.sodimm.me/~hinata/devel/qt5-wayland-git/0001-Fix-build-on-Qt-5.2.1.patch.htm&hl=en&gl=cz&strip=1
+-
+-Change-Id: I8eed3645ccacc43e2c9febba2bc6544c7068207a
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- .../compositor/xcomposite-glx/xcompositeglxintegration.cpp |  2 +-
+- src/plugins/platforms/qwayland-xcomposite-glx/main.cpp     |  2 +-
+- .../qwaylandxcompositeglxplatformintegration.h             | 14 ++++++++------
+- 3 files changed, 10 insertions(+), 8 deletions(-)
+-
+-diff --git a/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp b/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
+-index dce1fdc..8403c78 100644
+---- a/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
+-+++ b/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
+-@@ -112,7 +112,7 @@ void XCompositeGLXClientBufferIntegration::initializeHardware(QtWayland::Display
+-     delete glContext;
+- }
+- 
+--void XCompositeGLXClientBufferIntegration::updateTextureFromBuffer(struct ::wl_resource *buffer)
+-+void XCompositeGLXClientBufferIntegration::bindTextureToBuffer(struct ::wl_resource *buffer)
+- {
+-     XCompositeBuffer *compositorBuffer = XCompositeBuffer::fromResource(buffer);
+-     Pixmap pixmap = XCompositeNameWindowPixmap(mDisplay, compositorBuffer->window());
+-diff --git a/src/plugins/platforms/qwayland-xcomposite-glx/main.cpp b/src/plugins/platforms/qwayland-xcomposite-glx/main.cpp
+-index 17b20f9..c9450a5 100644
+---- a/src/plugins/platforms/qwayland-xcomposite-glx/main.cpp
+-+++ b/src/plugins/platforms/qwayland-xcomposite-glx/main.cpp
+-@@ -40,7 +40,7 @@
+- ****************************************************************************/
+- 
+- #include <qpa/qplatformintegrationplugin.h>
+--#include "qwaylandintegration.h"
+-+#include "qwaylandxcompositeglxplatformintegration.h"
+- 
+- QT_BEGIN_NAMESPACE
+- 
+-diff --git a/src/plugins/platforms/qwayland-xcomposite-glx/qwaylandxcompositeglxplatformintegration.h b/src/plugins/platforms/qwayland-xcomposite-glx/qwaylandxcompositeglxplatformintegration.h
+-index fe8c5b7..fb63fea 100644
+---- a/src/plugins/platforms/qwayland-xcomposite-glx/qwaylandxcompositeglxplatformintegration.h
+-+++ b/src/plugins/platforms/qwayland-xcomposite-glx/qwaylandxcompositeglxplatformintegration.h
+-@@ -42,7 +42,7 @@
+- #ifndef QWAYLANDXCOMPOSITEGLXPLATFORMINTEGRATION_H
+- #define QWAYLANDXCOMPOSITEGLXPLATFORMINTEGRATION_H
+- 
+--#include <QtWaylandClient/qwaylandintegration.h>
+-+#include <QtWaylandClient/private/qwaylandintegration_p.h>
+- 
+- #include "qwaylandxcompositeglxintegration.h"
+- 
+-@@ -51,14 +51,16 @@ class QWaylandXCompositeGlxPlatformIntegration : public QWaylandIntegration
+- public:
+-     QWaylandXCompositeGlxPlatformIntegration()
+-         : QWaylandIntegration()
+--        , m_gl_integration(new QWaylandXCompositeGLXIntegration(display()))
+--    { }
+-+        , m_client_buffer_integration(new QWaylandXCompositeGLXIntegration())
+-+    {
+-+        m_client_buffer_integration->initialize(display());
+-+    }
+- 
+--    QWaylandGLIntegration *glIntegration() const Q_DECL_OVERRIDE
+--    { return m_gl_integration; }
+-+    QWaylandClientBufferIntegration *clientBufferIntegration() const Q_DECL_OVERRIDE
+-+    { return m_client_buffer_integration; }
+- 
+- private:
+--    QWaylandGLIntegration *m_gl_integration;
+-+    QWaylandClientBufferIntegration *m_client_buffer_integration;
+- };
+- 
+- #endif
+--- 
+-1.8.5.3
+-
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index 789a882..ebdda82 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -4,9 +4,8 @@ require ${PN}.inc
+ # qtwayland wasn't released yet, last tag before this SRCREV is 5.0.0-beta1
+ # qt5-git PV is only to indicate that this recipe is compatible with qt5 5.2.1
+ 
+-SRCREV = "573d0ee5ba86d99095f217ea9e19172bfc5e75fd"
++SRCREV = "f9ebbd6c618488f9b671f5504528ced3350754fb"
+ 
+ SRC_URI += " \
+-    file://0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch \
+     file://0001-examples.pro-include-server-buffer-only-when-buildin.patch \
+ "
 -- 
 1.8.3.1
 
