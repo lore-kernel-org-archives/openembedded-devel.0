@@ -1,34 +1,41 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (unknown [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 93FEE605B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f177.google.com (unknown [209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C87260196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 08:22:41 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Wk7yx-0004pW-L3 for openembedded-devel@lists.openembedded.org;
-	Tue, 13 May 2014 10:22:39 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 10:22:39 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 13 May 2014 08:29:03 +0000 (UTC)
+Received: by mail-lb0-f177.google.com with SMTP id s7so4214lbd.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 10:22:39 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 13 May 2014 01:29:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=3MOpZCZ6To4RQVK/sfZTRuc04phE4QgcR2aQBNlzdPE=;
+	b=ZsSX8H1DF2MTfxysf29A5mraYzoqc+JbxHFf4JwYRpRjOF0hBAhSQM9VMopWg7c9zp
+	FgX8yGAkeelPSlqjCsj0+WhqxYRJO28BVLDLR/Z60Dbp5tVXEDwTAFryr+UD9h4nbunl
+	qc180VImrlltzQK/RNXu7OlL4PFvD0pvcbCUx28k+E/JP0m6/UhbsDyWaO5JTWmRUkwv
+	UAN/uKzlqKy0CunahlwRXG6/BYqZuB478cO4HFLlM8sdnv4h+uxIQuXdUxSrGTOvOzBl
+	D7grw7OQyNXASxU9VtoDQzr2Y0nMQ7hkJgPmrbE/fXIVJ3Txj6Gbi4AdTE/1gATWKRgm
+	uFhw==
+X-Received: by 10.112.135.39 with SMTP id pp7mr27927989lbb.29.1399969744353;
+	Tue, 13 May 2014 01:29:04 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	u4sm14474023lal.8.2014.05.13.01.29.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 May 2014 01:29:03 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 13 May 2014 10:29:31 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 13 May 2014 10:22:29 +0200
-Message-ID: <lksko5$2ij$1@ger.gmane.org>
-References: <1399897298-15929-1-git-send-email-philip@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-In-Reply-To: <1399897298-15929-1-git-send-email-philip@balister.org>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH] zeroc-ice : Add recipe.
+Message-ID: <20140513082931.GK22774@jama>
+References: <cover.1399914295.git.ben.shelton@ni.com>
+	<139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
+MIME-Version: 1.0
+In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH 1/7] bdftopcf: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,248 +49,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 08:22:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 May 2014 08:29:05 -0000
+X-Groupsio-MsgNum: 49892
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Aaj1jBvBEV7KRjLi"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Aaj1jBvBEV7KRjLi
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Philip Balister schreef op 12-05-14 14:21:
-> Oh the pain.
-> 
-> Tested for ARM. Can build GNU Radio and an sdk that builds GNU Radio.
+On Tue, May 13, 2014 at 08:08:18AM +0000, Matthieu CRAPET wrote:
+> Hi,
+>=20
+> Did you reused this recipe:
+> https://www.mail-archive.com/openembedded-devel%40lists.openembedded.org/=
+msg35721.html
+> If so, you could give some credits to the original author.
 
-MIssing Upstream-status in patches
+But it doesn't seem to address the review comments in original patch.
 
-> 
-> Signed-off-by: Philip Balister <philip@balister.org> --- 
-> .../0002-Modify-Makefile-for-cross-compile.patch   | 287
-> +++++++++++++++++++++ .../zeroc-ice/zeroc-ice_3.5.1.bb
-> |  75 ++++++ 2 files changed, 362 insertions(+) create mode 100644
-> meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
->
-> 
-create mode 100644 meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-> 
-> diff --git
-> a/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
-> b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
->
-> 
-new file mode 100644
-> index 0000000..93fb5bf --- /dev/null +++
-> b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
->
-> 
-@@ -0,0 +1,287 @@
-> +From bc622ce74fa03a935278d21736a5a251466e1798 Mon Sep 17 00:00:00 2001 
-> +From: Tom Rondeau <tom@trondeau.com> +Date: Wed, 16 Apr 2014 14:34:51
-> -0400 +Subject: [PATCH] Modify Makefiles for cross compile + +--- +
-> config/Make.common.rules           |   20 +++++++------ + cpp/Makefile
-> |    9 +++--- + cpp/config/Make.rules              |   32
-> ++++++++++++-------- + cpp/config/Make.rules.Linux        |   18
-> ++--------- + cpp/src/IceStorm/FreezeDB/Makefile |    2 +- +
-> py/config/Make.rules               |   58
-> +++++++++++++++++++----------------- + 6 files changed, 70 insertions(+),
-> 69 deletions(-) + +diff --git a/config/Make.common.rules
-> b/config/Make.common.rules +index d7b1d59..a3fb17e 100644 +---
-> a/config/Make.common.rules ++++ b/config/Make.common.rules +@@ -65,9
-> +65,9 @@ ifeq ($(UNAME),Linux) +       # +       # Some Linux
-> distributions like Debian/Ubuntu don't use /usr/lib64. +       # +-
-> ifeq ($(shell test -d /usr/lib64 && echo 0),0) +-          lp64suffix	=
-> 64 +-      endif ++      #ifeq ($(shell test -d /usr/lib64 && echo 0),0) 
-> ++      #    lp64suffix	= 64 ++      #endif +       ifeq ($(LP64),) +
-> LP64      	= yes +       endif +@@ -244,12 +244,13 @@ else +     slicedir
-> = $(ice_dir)/slice + endif + +-ifeq ($(prefix), /usr) +-
-> install_slicedir = /usr/share/Ice-$(VERSION)/slice +-else +-
-> install_slicedir = $(prefix)/slice +-endif ++#ifeq ($(prefix), /usr) ++#
-> install_slicedir = /usr/share/Ice-$(VERSION)/slice ++#else ++#
-> install_slicedir = $(prefix)/slice ++#endif + ++install_slicedir =
-> $(prefix)/slice + # + # Set environment variables for the Slice
-> translator. + # +@@ -265,7 +266,8 @@ ifneq ($(ice_dir), /usr) +
-> endif + +     ifeq ($(UNAME),Linux) +-        export LD_LIBRARY_PATH :=
-> $(ice_lib_dir):$(LD_LIBRARY_PATH) ++        #export LD_LIBRARY_PATH :=
-> $(ice_lib_dir):$(LD_LIBRARY_PATH) ++        export LD_LIBRARY_PATH :=
-> $(ICE_HOME)/lib:$(LD_LIBRARY_PATH) +     endif + +     ifeq
-> ($(UNAME),SunOS) +diff --git a/cpp/Makefile b/cpp/Makefile +index
-> a68f113..1f44f57 100644 +--- a/cpp/Makefile ++++ b/cpp/Makefile +@@
-> -11,11 +11,12 @@ top_srcdir	= . + + include
-> $(top_srcdir)/config/Make.rules + +-SUBDIRS		= config src include test 
-> ++#SUBDIRS		= config src include test ++SUBDIRS		= config src include + 
-> +-ifeq ($(shell uname | grep MINGW),) +-SUBDIRS		:= $(SUBDIRS) demo 
-> +-endif ++#ifeq ($(shell uname | grep MINGW),) ++#SUBDIRS		:= $(SUBDIRS)
-> demo ++#endif + + INSTALL_SUBDIRS	= $(install_bindir) $(install_libdir)
-> $(install_includedir) \ + 	$(install_configdir) $(install_mandir) +diff
-> --git a/cpp/config/Make.rules b/cpp/config/Make.rules +index
-> 37461ae..197c5e8 100644 +--- a/cpp/config/Make.rules ++++
-> b/cpp/config/Make.rules +@@ -175,11 +175,12 @@ headerdir		=
-> $(top_srcdir)/include + # includedir is not handled the same as bindir
-> and libdir + # because it is used in the .depend files + # +-ifdef
-> ice_src_dist +-    includedir		= $(top_srcdir)/include +-else +-
-> includedir		= $(ice_dir)/include +-endif ++#ifdef ice_src_dist ++#
-> includedir		= $(top_srcdir)/include ++#else ++#    includedir		=
-> $(ice_dir)/include ++#endif ++includedir		= $(top_srcdir)/include + + # +
-> # Platform specific definitions +@@ -277,14 +278,17 @@ ICECPPFLAGS		=
-> -I$(slicedir) + SLICE2CPPFLAGS		= $(ICECPPFLAGS) + + ifeq ($(ice_dir),
-> /usr) +-    LDFLAGS		= $(LDPLATFORMFLAGS) $(CXXFLAGS) ++    LDFLAGS		+=
-> $(LDPLATFORMFLAGS) $(CXXFLAGS) + else +     CPPFLAGS	+= -I$(includedir) 
-> +-    ifdef ice_src_dist +-	LDFLAGS	= $(LDPLATFORMFLAGS) $(CXXFLAGS)
-> -L$(libdir) +-    else +-	LDFLAGS	= $(LDPLATFORMFLAGS) $(CXXFLAGS)
-> -L$(ice_dir)/$(libsubdir)$(cpp11suffix) +-    endif ++# We must always
-> build using the libraries in the source tree, the host's are obviously 
-> ++# not what we want for the target ++    LDFLAGS	+= $(LDPLATFORMFLAGS)
-> $(CXXFLAGS) -L$(libdir) $(call rpathlink,$(libdir)) ++#    ifdef
-> ice_src_dist ++#        LDFLAGS	= $(LDPLATFORMFLAGS) $(CXXFLAGS)
-> -L$(libdir) ++#    else ++#	LDFLAGS	= $(LDPLATFORMFLAGS) $(CXXFLAGS)
-> -L$(ice_dir)/$(libsubdir)$(cpp11suffix) ++#    endif + endif + + ifeq
-> ($(FLEX_NOLINE),yes) +@@ -313,8 +317,10 @@ endif + + ifdef ice_src_dist +
-> SLICEPARSERLIB	= $(libdir)/$(call mklibfilename,Slice,$(VERSION)) +-
-> SLICE2CPP		= $(bindir)/slice2cpp +-    SLICE2FREEZE	=
-> $(bindir)/slice2freeze ++#    SLICE2CPP		= $(bindir)/slice2cpp ++#
-> SLICE2FREEZE	= $(bindir)/slice2freeze ++    SLICE2CPP		=
-> $(ICE_HOME)/bin/slice2cpp ++    SLICE2FREEZE	=
-> $(ICE_HOME)/bin/slice2freeze + else +     SLICEPARSERLIB	=
-> $(ice_dir)/$(libsubdir)$(cpp11suffix)/$(call
-> mklibfilename,Slice,$(VERSION)) +     SLICE2CPP		=
-> $(ice_dir)/$(binsubdir)$(cpp11suffix)/slice2cpp +diff --git
-> a/cpp/config/Make.rules.Linux b/cpp/config/Make.rules.Linux +index
-> 5d5717c..8363c6e 100644 +--- a/cpp/config/Make.rules.Linux ++++
-> b/cpp/config/Make.rules.Linux +@@ -31,7 +31,7 @@ ifeq ($(CXX),c++) +
-> CXX			= g++ + endif + +-ifeq ($(CXX),g++) ++#ifeq ($(CXX),g++) + +
-> ifneq ($(SUSE_i586),) +         CXXARCHFLAGS	+= -march=i586 +@@ -71,14
-> +71,6 @@ ifeq ($(CXX),g++) +       CXXARCHFLAGS	+= -mtune=v8 -pipe
-> -Wno-deprecated -DICE_USE_MUTEX_SHARED +    endif + +-   ifeq
-> ($(MACHINE),x86_64) +-      ifeq ($(LP64),yes) +-         CXXARCHFLAGS	+=
-> -m64 +-      else +-         CXXARCHFLAGS	+= -m32 +-      endif +-
-> endif +- +    CXXFLAGS		= $(CXXARCHFLAGS) -Wall -Werror -pthread + +
-> ifneq ($(GENPIC),no) +@@ -102,15 +94,11 @@ ifeq ($(CXX),g++) + +
-> rpathlink            = -Wl,-rpath-link,$(1) + +-   ifneq
-> ($(embedded_runpath_prefix),) +-      LDPLATFORMFLAGS      =
-> -Wl,--enable-new-dtags -Wl,-rpath,$(runpath_libdir) +-   else +-
-> LDPLATFORMFLAGS      = -Wl,--enable-new-dtags +-   endif ++
-> LDPLATFORMFLAGS      = -Wl,--enable-new-dtags -Wl,-rpath,../../../lib + +
-> LDPLATFORMFLAGS	+= -rdynamic + +-endif ++#endif + + ifeq ($(CXX),icpc) +
-> $(warning
-> ===================================================================) 
-> +diff --git a/cpp/src/IceStorm/FreezeDB/Makefile
-> b/cpp/src/IceStorm/FreezeDB/Makefile +index 7c844b7..cf15cb1 100644 +---
-> a/cpp/src/IceStorm/FreezeDB/Makefile ++++
-> b/cpp/src/IceStorm/FreezeDB/Makefile +@@ -66,7 +66,7 @@
-> $(libdir)/$(LIBNAME): $(libdir)/$(SONAME) + + $(MIGRATE): $(MOBJS) + 	rm
-> -f $@ +-	$(CXX) $(LDFLAGS) -o $@ $(MOBJS) $(DB_RPATH_LINK)
-> -lIceStormService -lIceStorm -lFreeze $(LIBS) ++	$(CXX) $(LDFLAGS) -o $@
-> $(MOBJS) $(DB_RPATH_LINK) -lIceStormService -lIceStorm -lFreeze $(LIBS)
-> -ldb_cxx + + # The slice2freeze rules are structured like this to avoid
-> issues with + # parallel make. +diff --git a/py/config/Make.rules
-> b/py/config/Make.rules +index 43ce01b..1349342 100644 +---
-> a/py/config/Make.rules ++++ b/py/config/Make.rules +@@ -92,21 +92,23 @@
-> ifeq ($(shell test -f $(top_srcdir)/config/Make.rules.$(UNAME) && echo
-> 0),0) +     include $(top_srcdir)/config/Make.rules.$(UNAME) + else +
-> include $(top_srcdir)/../cpp/config/Make.rules.$(UNAME) +-endif ++endif +
->  + libdir                  = $(top_srcdir)/python +-ifneq ($(prefix),
-> /usr) +-install_pythondir       = $(prefix)/python +-install_libdir
-> = $(prefix)/python +-else +-    ifeq ($(shell test -d
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages && echo 0),0) +-
-> install_pythondir       =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages +-
-> install_libdir          =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages +-    else +-
-> install_pythondir       =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages +-
-> install_libdir          =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages +-    endif 
-> +-endif ++#ifneq ($(prefix), /usr) ++#install_pythondir       =
-> $(prefix)/python ++#install_libdir          = $(prefix)/python ++#else 
-> ++#    ifeq ($(shell test -d
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages && echo 0),0) ++#
-> install_pythondir       =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages ++#
-> install_libdir          =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/dist-packages ++#    else ++#
-> install_pythondir       =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages ++#
-> install_libdir          =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages ++#    endif 
-> ++#endif ++install_pythondir       =
-> $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages ++install_libdir
-> = $(prefix)/$(libsubdir)/$(PYTHON_VERSION)/site-packages + + ifeq
-> ($(UNAME),SunOS) +    ifeq ($(LP64),yes) +@@ -115,19 +117,21 @@ ifeq
-> ($(UNAME),SunOS) +    endif + endif + +-ifdef ice_src_dist +-    ifeq
-> ($(ice_cpp_dir), $(ice_dir)/cpp) +-        ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/lib +-    else +-        ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/$(libsubdir) +-    endif +-    ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/lib +-    ICE_FLAGS 	= -I$(ice_cpp_dir)/include +-endif 
-> +-ifdef ice_bin_dist +-    ICE_LIB_DIR = -L$(ice_dir)/$(libsubdir) +-
-> ICE_FLAGS	= -I$(ice_dir)/include +-endif ++#ifdef ice_src_dist ++#
-> ifeq ($(ice_cpp_dir), $(ice_dir)/cpp) ++#        ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/lib ++#    else ++#        ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/$(libsubdir) ++#    endif ++#    ICE_LIB_DIR =
-> -L$(ice_cpp_dir)/lib ++#    ICE_FLAGS 	= -I$(ice_cpp_dir)/include 
-> ++#endif ++#ifdef ice_bin_dist ++#    ICE_LIB_DIR =
-> -L$(ice_dir)/$(libsubdir) ++#    ICE_FLAGS	= -I$(ice_dir)/include 
-> ++#endif ++ICE_LIB_DIR = -L$(top_srcdir)/../cpp/lib ++ICE_FLAGS =
-> -I$(ice_cpp_dir)/include + ICE_LIBS = $(ICE_LIB_DIR) -lIce -lSlice
-> -lIceUtil + + ifneq ($(embedded_runpath_prefix),) +@@ -137,7 +141,7 @@
-> endif + CPPFLAGS		= + ICECPPFLAGS		= -I$(slicedir) + SLICE2PYFLAGS		=
-> $(ICECPPFLAGS) +-LDFLAGS			= $(LDPLATFORMFLAGS) $(CXXFLAGS) -L$(libdir) 
-> ++LDFLAGS			+= $(LDPLATFORMFLAGS) $(CXXFLAGS) -L$(libdir) + + ifdef
-> ice_src_dist +     ifeq ($(ice_cpp_dir), $(ice_dir)/cpp) +-- +1.7.9.5 + 
-> diff --git a/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-> b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb new file mode
-> 100644 index 0000000..445e2f1 --- /dev/null +++
-> b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb @@ -0,0 +1,75
-> @@ +DESCRIPTION = "The Internet Communications Engine" +LICENSE =
-> "GPLv2" +LIC_FILES_CHKSUM =
-> "file://ICE_LICENSE;md5=3dc3037023cc2ae6b2c5b995da529515" +DEPENDS =
-> "bzip2 expat openssl python db mcpp" +DEPENDS_prepend_class-target =
-> "zeroc-ice-native " + +SRC_URI =
-> "http://www.zeroc.com/download/Ice/3.5/Ice-${PV}.tar.gz \ +
-> file://0002-Modify-Makefile-for-cross-compile.patch \ +          " 
-> +SRC_URI[md5sum] = "f00c59983cc904bca977133c0a9b3e80" +SRC_URI[sha256sum]
-> = "989e51194c6adadbd156da3288e37bad847b93b3b876502e83033b70493af392" + +S
-> = "${WORKDIR}/Ice-${PV}" + +inherit python-dir pkgconfig + +export
-> PYTHON_VERSION = "python2.7" + +do_configure() { +    : +} + 
-> +do_compile_prepend_class-target () { +    export
-> PYTHON_INCLUDE_DIR="${STAGING_INCDIR}/${PYTHON_DIR}" +    export
-> PYTHON_LIB_DIR="${STAGING_LIBDIR}/${PYTHON_DIR}" +    export
-> ICE_HOME="${STAGING_DIR_NATIVE}/usr" +} + 
-> +do_compile_prepend_class-nativesdk () { +    export
-> PYTHON_INCLUDE_DIR="${STAGING_INCDIR}/${PYTHON_DIR}" +    export
-> PYTHON_LIB_DIR="${STAGING_LIBDIR}/${PYTHON_DIR}" +    export
-> ICE_HOME="${STAGING_DIR_NATIVE}/usr" +} + 
-> +do_compile_prepend_class-native () { +    export ICE_HOME="${S}/cpp" +} 
-> + +do_compile() { +    oe_runmake -C ${S} cpp +    oe_runmake -C ${S} py 
-> +} + +do_install_prepend_class-target () { +    export
-> PYTHON_INCLUDE_DIR="${STAGING_INCDIR}/${PYTHON_DIR}" +    export
-> PYTHON_LIB_DIR="${STAGING_LIBDIR}/${PYTHON_DIR}" +    export
-> ICE_HOME="${STAGING_DIR_NATIVE}/usr" +} + 
-> +do_install_prepend_class-nativesdk () { +    export
-> PYTHON_INCLUDE_DIR="${STAGING_INCDIR}/${PYTHON_DIR}" +    export
-> PYTHON_LIB_DIR="${STAGING_LIBDIR}/${PYTHON_DIR}" +    export
-> ICE_HOME="${STAGING_DIR_NATIVE}/usr" +} + 
-> +do_install_prepend_class-native () { +    export ICE_HOME="${S}/cpp" +} 
-> + +do_install() { +    oe_runmake -C ${S}/cpp prefix=${D}${prefix}
-> install install-common +    oe_runmake -C ${S}/py prefix=${D}${prefix}
-> install +} + +PACKAGES += "${PN}-python ${PN}-python-dev
-> ${PN}-python-dbg" + +FILES_${PN}-doc += "${prefix}/man/man1" +FILES_${PN}
-> += "${prefix}/*LICENSE ${libdir}/ImportKey.class ${prefix}/RELEASE_NOTES
-> ${prefix}/CHANGES" +FILES_${PN}-dev += "${includedir} ${prefix}/slice
-> ${prefix}/config" +FILES_${PN}-python-dev =
-> "${PYTHON_SITEPACKAGES_DIR}/IcePy.so" +FILES_${PN}-python =
-> "${PYTHON_SITEPACKAGES_DIR}/*.py ${PYTHON_SITEPACKAGES_DIR}/IcePy.so.*
-> ${PYTHON_SITEPACKAGES_DIR}/Ice*/*.py" +FILES_${PN}-python-dbg =
-> "${PYTHON_SITEPACKAGES_DIR}/.debug" +FILES_${PN}-dev += "${bindir}/slice*
-> ${datadir}/Ice-${PV}/slice/*" + +BBCLASSEXTEND = "native nativesdk"
-> 
+> -----Message d'origine-----
+> De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembe=
+dded-devel-bounces@lists.openembedded.org] De la part de Ben Shelton
+> Envoy=E9=A0: lundi 12 mai 2014 19:32
+> =C0=A0: openembedded-devel@lists.openembedded.org
+> Objet=A0: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
+>=20
+> The bdftopcf tool is necessary to build the core X fonts, which ship in B=
+DF format.  Adapted from a recipe in OE-Classic and from an earlier mailing=
+ list post by Trevor Woerner.
+>=20
+> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+> ---
+>  meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+>=20
+> diff --git a/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb b/meta-o=
+e/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+> new file mode 100644
+> index 0000000..5009d54
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+> @@ -0,0 +1,13 @@
+> +require recipes-graphics/xorg-app/xorg-app-common.inc
+> +
+> +SUMMARY =3D "bdftopcf is a tool to convert BDF fonts to PCF fonts"
+> +HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/bdftopcf/"
+> +SECTION =3D "x11/app"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9a35333adf75edd1eaef84bca65a=
+490"
+> +DEPENDS =3D "libxfont"
+> +
+> +SRC_URI[md5sum] =3D "96a648a332160a7482885800f7a506fa"
+> +SRC_URI[sha256sum] =3D "eaf59057ba3d7cffe29526562ce50868da7da823487a4cfb=
+3e16946e5ffd2798"
+> +
+> +BBCLASSEXTEND =3D "native"
+> --
+> 1.9.3
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Aaj1jBvBEV7KRjLi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-iD8DBQFTcdZFMkyGM64RGpERAjpGAKCYowY+VHsoqBftUbUIp2UWMzi6tgCfYP3O
-j8t9yo1pEfXyqtoxvWp/wiU=
-=WrTZ
+iEYEARECAAYFAlNx1+sACgkQN1Ujt2V2gBxOigCfR/BplCs6wNlKwxQi+l3kI6fV
+OIEAn1Vd0mLt69sO6ugkql3TWn41bDdW
+=REUn
 -----END PGP SIGNATURE-----
 
-
+--Aaj1jBvBEV7KRjLi--
