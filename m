@@ -1,29 +1,38 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (unknown [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DE8B6098B
+Return-Path: <koen.kooi@linaro.org>
+X-Greylist: delayed 418 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 13 May 2014 12:29:56 UTC
+Received: from mail-wg0-f41.google.com (unknown [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B180E6098B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 12:16:55 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 2774AF811E2; Tue, 13 May 2014 06:16:56 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 74A5FF811E1;
-	Tue, 13 May 2014 06:16:54 -0600 (MDT)
-Message-ID: <53720D3C.5060607@mlbassoc.com>
-Date: Tue, 13 May 2014 06:17:00 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-MIME-Version: 1.0
+	Tue, 13 May 2014 12:29:55 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id z12so299608wgg.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 May 2014 05:29:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=W+f+U5Yk5b7LsMLaozq7y7vyVGCi/POZeEu02BESOag=;
+	b=EgY0AguOSoANcqRVvE3zz2m8vyLSlqtJowlHeKH7c/aqkynmmzNG11KkYch+PNeyYr
+	/AT/Q4T0Qh8Zg+Wfu72mzmK7RHLA9up2/9OrFjreVJwwCkBK6TxgobtlWXqTBlaJpATI
+	4hSWgSvExr2sKBHonmpe5iqe6jHKQyIHqBVj8toBXQY+MLxqSbY6lK4gleO7TVF30GBt
+	rN3iO7lCPBsQxiEZo0exKFizWu9OeGJTX2ZAd1Wgo/pMflUM4wlRf8VVH72p8/dL8exw
+	ErdSGQOSSCb4jv6a8Z4ZafWsksyJ9FhIURTXAZxftQStx+WUsbalArtlE0JDPW/6bx1z
+	D1nw==
+X-Gm-Message-State: ALoCoQm4cikCsmR2TozuUnZz0+opHU2Ciy3u5x+rG8V9lBT+k6ZOPq4KsId8OeEUAd5pzjupOgM/
+X-Received: by 10.180.93.41 with SMTP id cr9mr20675562wib.7.1399983779117;
+	Tue, 13 May 2014 05:22:59 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
+	by mx.google.com with ESMTPSA id
+	ej2sm22034530wjd.21.2014.05.13.05.22.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 May 2014 05:22:58 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-References: <CAN-NoH3xAYL_GdgvtYzNChD0VneKjT4EoJzPLigAeCZXegcBCA@mail.gmail.com>	<53711DD9.6070506@mlbassoc.com>
-	<CAN-NoH0DsTa+DYTNz8oDwWQCVPTUzBMeEQEi37sO2w9cSHByDQ@mail.gmail.com>
-In-Reply-To: <CAN-NoH0DsTa+DYTNz8oDwWQCVPTUzBMeEQEi37sO2w9cSHByDQ@mail.gmail.com>
-Subject: Re: kernel config/rebuilding
+Date: Tue, 13 May 2014 14:22:56 +0200
+Message-Id: <1399983776-26237-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] gpm: fix S!=B failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,34 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 12:16:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 May 2014 12:30:02 -0000
 
-On 2014-05-12 18:18, Richard Cagley wrote:
-> On Mon, May 12, 2014 at 12:15 PM, Gary Thomas <gary@mlbassoc.com> wrote:
->
->> bitbake linux-xlnx -C compile
->
->
-> That definitely caused the kernel to get rebuilt. Thanks.
->
-> While I was waiting for a reply I stumbled on this
-> https://community.freescale.com/docs/DOC-95045
->
-> Do I need to move the new .config into a defconfig file somewhere? Similar
-> to this step?
-> $ cp
-> tmp/work/imx6qsabresd-poky-linux-gnueabi/linux-imx/3.0.35-r33.10/git/.config
-> ../sources/meta-fsl-arm/recipes-kernel/linux/linux-imx-3.0.35/mx6/defconfig
->
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ meta-oe/recipes-support/gpm/gpm_1.99.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-You can do this, but only if you are interested in saving
-the new/changed configuration.
-
+diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+index a30a891..7022057 100644
+--- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
++++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+@@ -15,7 +15,7 @@ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
+            file://eglibc-2.17.patch \
+            file://init"
+ 
+-inherit autotools update-rc.d
++inherit autotools-brokensep update-rc.d
+ 
+ INITSCRIPT_NAME = "gpm"
+ INITSCRIPT_PARAMS = "defaults"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.0
+
 
