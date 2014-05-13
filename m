@@ -1,34 +1,24 @@
 Return-Path: <Matthieu.CRAPET@ingenico.com>
 Received: from smtp1.ingenico.com (unknown [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id B3D3760196
+	by mail.openembedded.org (Postfix) with ESMTP id 867F465EB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 08:10:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.97,1042,1389740400"; d="scan'208";a="51109743"
+	Tue, 13 May 2014 08:12:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.97,1042,1389740400"; d="scan'208";a="51109909"
 Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 13 May 2014 10:10:30 +0200
-Received: from COSNADEXC11.usr.ingenico.loc (10.31.4.211) by
+	by antispam1.usr.ingenico.loc with ESMTP; 13 May 2014 10:12:27 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
 	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Tue, 13 May 2014 10:10:30 +0200
-Received: from COSNADEXC13.usr.ingenico.loc ([169.254.1.100]) by
-	COSNADEXC11.usr.ingenico.loc ([10.31.4.211]) with mapi id
-	14.02.0328.009; Tue, 13 May 2014 10:10:30 +0200
-From: Matthieu CRAPET <Matthieu.CRAPET@ingenico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
-Thread-Index: AQHPbg77cYufVzidO0y3w87b7Cagsps+KG5AgAAAz/A=
-Date: Tue, 13 May 2014 08:10:29 +0000
-Message-ID: <8672BB614B4CCA40A6B3BDD6FD82050BA112D7F7@COSNADEXC13.usr.ingenico.loc>
-References: <cover.1399914295.git.ben.shelton@ni.com>
-	<139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
-	<8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
-In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.31.16.119]
+	(TLS) id 14.2.318.1; Tue, 13 May 2014 10:12:27 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Tue, 13 May 2014 10:12:26 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 May 2014 10:12:34 +0200
+Message-ID: <1399968754-14711-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 1/7] bdftopcf: add recipe
+Subject: [meta-oe][PATCH] jq: add new recipe for version 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,81 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 08:10:30 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 May 2014 08:12:28 -0000
+Content-Type: text/plain
 
-This was done already, sorry! Forget my previous mail.
-M
+jq is like sed but for JSON data. It's a very useful tool with no dependency.
 
------Message d'origine-----
-De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de Matthieu CRAPET
-Envoy=E9=A0: mardi 13 mai 2014 10:08
-=C0=A0: openembedded-devel@lists.openembedded.org
-Objet=A0: Re: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
-
-Hi,
-
-Did you reused this recipe:
-https://www.mail-archive.com/openembedded-devel%40lists.openembedded.org/ms=
-g35721.html
-If so, you could give some credits to the original author.
-
-Regards,
-M
-
------Message d'origine-----
-De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de Ben Shelton Envoy=E9=
-=A0: lundi 12 mai 2014 19:32 =C0=A0: openembedded-devel@lists.openembedded.=
-org
-Objet=A0: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
-
-The bdftopcf tool is necessary to build the core X fonts, which ship in BDF=
- format.  Adapted from a recipe in OE-Classic and from an earlier mailing l=
-ist post by Trevor Woerner.
-
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 ---
- meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+ .../jq/files/automake-once-fix.patch               | 29 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.3.bb              | 23 +++++++++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
+ create mode 100644 meta-oe/recipes-devtools/jq/jq_1.3.bb
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb b/meta-oe/=
-recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
+diff --git a/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch b/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
 new file mode 100644
-index 0000000..5009d54
+index 0000000..0a1d1a2
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/bdftopcf_1.0.4.bb
-@@ -0,0 +1,13 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
++++ b/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
+@@ -0,0 +1,29 @@
++Upstream-Status: Applied
++https://github.com/stedolan/jq/commit/f0d1c39b5bbb4ccc517773eb635ba7f38ec7da1a
 +
-+SUMMARY =3D "bdftopcf is a tool to convert BDF fonts to PCF fonts"
-+HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/bdftopcf/"
-+SECTION =3D "x11/app"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9a35333adf75edd1eaef84bca65a49=
-0"
-+DEPENDS =3D "libxfont"
++Fixes build with automake-1.14
 +
-+SRC_URI[md5sum] =3D "96a648a332160a7482885800f7a506fa"
-+SRC_URI[sha256sum] =3D "eaf59057ba3d7cffe29526562ce50868da7da823487a4cfb3e=
-16946e5ffd2798"
++diff --git a/configure.ac b/configure.ac
++index 76a49a9..d6d2d38 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -4,7 +4,7 @@ AC_INIT([jq], [1.3], [mu@netsoc.tcd.ie],
++ dnl Created autoconf implementation thompson@dtosolutions, 26NOV12
++ AC_PREREQ([2.61])
++ AC_CONFIG_AUX_DIR([config])
++-AM_INIT_AUTOMAKE([parallel-tests foreign])
+++AM_INIT_AUTOMAKE([parallel-tests foreign -Wall])
++ AM_SILENT_RULES([yes])
++ AC_PROG_CC
++ AC_PROG_CC_STDC
++@@ -66,7 +66,6 @@ AC_SUBST([BUNDLER], ["$bundle_cmd"])
++ 
++ dnl AC_CONFIG_MACRO_DIR([m4])
++ AC_CONFIG_HEADERS(config.h)
++-AM_INIT_AUTOMAKE([-Wall])
++ AC_CONFIG_FILES([Makefile])
++ AC_OUTPUT
++ 
++-- 
++1.8.5.4
 +
-+BBCLASSEXTEND =3D "native"
---
-1.9.3
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.3.bb b/meta-oe/recipes-devtools/jq/jq_1.3.bb
+new file mode 100644
+index 0000000..c58b472
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq_1.3.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Lightweight and flexible command-line JSON processor"
++DESCRIPTION = "jq is like sed for JSON data, you can use it to slice and \
++               filter and map and transform structured data with the same \
++               ease that sed, awk, grep and friends let you play with text."
++HOMEPAGE = "http://stedolan.github.io/jq/"
++BUGTRACKER = "https://github.com/stedolan/jq/issues"
++SECTION = "utils"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=244a1fb9cf472474a062d67069dec653"
++
++DEPENDS = "flex-native bison-native"
++
++SRC_URI = "http://stedolan.github.io/${BPN}/download/source/${BP}.tar.gz \
++           file://automake-once-fix.patch \
++"
++SRC_URI[md5sum] = "26081b05d22525eca5cbdd8f9f4db17d"
++SRC_URI[sha256sum] = "623f23c36abfc1d96d85020cf421b56f90a229d566f26a4a0d3e8536244bfed7"
++
++inherit autotools
++
++# Don't build documentation (generation requires ruby)
++EXTRA_OECONF = "--disable-docs"
+-- 
+1.8.5.4
 
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
