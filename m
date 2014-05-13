@@ -1,27 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (unknown [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 71C4660196
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ee0-f45.google.com (unknown [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B42660167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 14:27:54 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 13 May 2014 07:27:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,1044,1389772800"; d="scan'208";a="538288088"
-Received: from hpatters-mobl.amr.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.37])
-	by fmsmga002.fm.intel.com with ESMTP; 13 May 2014 07:27:53 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Mihaela Sendrea <mihaela.sendrea@enea.com>
-Date: Tue, 13 May 2014 15:27:52 +0100
-Message-ID: <2001321.dggOjr5Niu@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.3-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <1399986439-6925-2-git-send-email-mihaela.sendrea@enea.com>
-References: <1399986439-6925-1-git-send-email-mihaela.sendrea@enea.com>
-	<1399986439-6925-2-git-send-email-mihaela.sendrea@enea.com>
+	Tue, 13 May 2014 14:48:59 +0000 (UTC)
+Received: by mail-ee0-f45.google.com with SMTP id d49so504411eek.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 May 2014 07:49:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=VbU8GN8CNT3GzcAsjFHWY+rLCyr+0Gi5518dveN3UQ4=;
+	b=H82dLscqK+wKoerIQTDLSQXNalsssyd/Zvp5nPrXE1X9VsvDClQqc4AXVMHPxXcgT/
+	SHog8qOhB41X3oPT0Ku8uZgEe1DlDyo0TffBH9PWT9VckoZy+CuRxh7tGNmsaEUGyle+
+	qtQPoZeo3A7y4HjRIM8cGHaDSVrwvINvM6k5g9Z0xJM0HOxe9JelaeutGlXHF1q+24Ok
+	Co27cM+NJMbkCH9jo4w3oxbTMzIz2b86jjgW2OIT5otOe7iXfK5R7uUSMuiAtvrvJf8K
+	1ZtKDXAO+jCRhvKKE4Z6IiBcg6XbwLvyHXOrao+H23hpaT1biJaJdZFWX4XEm+OPlhcE
+	3rIA==
+X-Received: by 10.14.10.5 with SMTP id 5mr4406915eeu.78.1399992540461;
+	Tue, 13 May 2014 07:49:00 -0700 (PDT)
+Received: from localhost.localdomain (ip-95-222-161-153.unitymediagroup.de.
+	[95.222.161.153]) by mx.google.com with ESMTPSA id
+	m44sm40701315eeh.14.2014.05.13.07.48.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 May 2014 07:48:59 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 13 May 2014 16:48:47 +0200
+Message-Id: <1399992528-10108-3-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v4 1/2] lksctp-tools: add recipe (version 1.0.16)
+Subject: [PATCH, V2][meta-qt5 2/3] qtwayland-native: make qtwayland find qtwaylandscanner
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,105 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 14:28:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 13 May 2014 14:49:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Mihaela,
+bindir/qt5 causes not building QtWaylandClient files.
+See [1] for further explanation. This error was discoverd by building
+hawaii-shell failing with:
 
-On Tuesday 13 May 2014 15:07:18 Mihaela Sendrea wrote:
-> This recipe comes from arago-oe-dev:
-> https://github.com/mrchapp/arago-oe-dev/tree/master/recipes/lksctp-tools
-> 
-> Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com>
-> ---
->  .../lksctp-tools/lksctp-tools_1.0.16.bb            | 57
-> ++++++++++++++++++++++ 1 file changed, 57 insertions(+)
->  create mode 100644
-> meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> 
-> diff --git
-> a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb new
-> file mode 100644
-> index 0000000..2c229c3
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> @@ -0,0 +1,57 @@
-> +DESCRIPTION = "The Linux Kernel Stream Control Transmission Protocol
-> (lksctp) project" 
+| /home/superandy/tmp/oe-core-eglibc/sysroots/overo/usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qwlinputdevice_p.h:56:58: fatal error: QtCompositor/private/qwayland
+|  #include <QtCompositor/private/qwayland-server-wayland.h>
+|                                                           ^
+| compilation terminated.
 
-Could you make this SUMMARY since it's short?
+[1] https://qt.gitorious.org/qt/qtbase/commit/0e1ce36ae67de940b2d499ec7f23e520dce0f112
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qtwayland-native_git.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-> +SECTION = "libs"
-> +LICENSE = "LGPLv2"
-> +
-> +LIC_FILES_CHKSUM = " \
-> +    file://COPYING.lib;md5=0a1b79af951c42a9c8573533fbba9a92 \
-> +    file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
-> +"
-> +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
-> +SRC_URI[sha256sum] =
-> "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26" +
-> +S = "${WORKDIR}/${BP}"
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +inherit autotools pkgconfig binconfig
-> +
-> +SOLIBVERSION="${PV}"
-> +SOLIBMAJORVERSION="1"
-> +
-> +PACKAGES =+ "${PN}-withsctp ${PN}-utils"
-> +
-> +FILES_${PN} = " \
-> +    ${libdir}/libsctp.so.${SOLIBVERSION} \
-> +"
-> +
-> +FILES_${PN}-withsctp = " \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
-> +"
-> +
-> +FILES_${PN}-dev += " \
-> +    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/libsctp.so \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/lksctp-tools/libwithsctp.so \
-> +    ${datadir}/lksctp-tools/checksctp.c \
-> +    ${datadir}/lksctp-tools/sctp_socket.c \
-> +    ${datadir}/lksctp-tools/sctp_status.c \
-> +    ${datadir}/lksctp-tools/sctp_bind.c \
-> +    ${datadir}/lksctp-tools/sctp_darn.c \
-> +    ${datadir}/lksctp-tools/sctp_load_libs.c \
-> +    ${datadir}/lksctp-tools/sctp_sockopt.c \
-> +    ${datadir}/lksctp-tools/sctp_socket.h \
-> +    ${datadir}/lksctp-tools/sctp_test.c \
-> +    ${datadir}/lksctp-tools/sctp_darn.h \
-> +"
-> +
-> +FILES_${PN}-utils = " \
-> +    ${bindir}/sctp_test \
-> +    ${bindir}/sctp_darn \
-> +    ${bindir}/checksctp \
-> +    ${bindir}/withsctp  \
-> +    ${bindir}/sctp_status \
-> +"
-
-These FILES_ settings seem a little verbose and possibly unnecessary to me - 
-are these all needed?
-
-(I realise you've probably borrowed this mostly verbatim from arago-oe-dev but 
-we probably ought to ensure it's as tidy as we can make it)
-
-Cheers,
-Paul
-
+diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
+index 988aa98..b820665 100644
+--- a/recipes-qt/qt5/qtwayland-native_git.bb
++++ b/recipes-qt/qt5/qtwayland-native_git.bb
+@@ -5,3 +5,8 @@ require ${PN}.inc
+ # qt5-git PV is only to indicate that this recipe is compatible with qt5 5.2.1
+ 
+ SRCREV = "a237778666666ab77c4e8e6b501cf0fbe7c9223e"
++
++# wayland-scanner and qtwaylandscanner must be in same path to work properly
++do_install_append() {
++    ln -sf ${D}${OE_QMAKE_PATH_QT_BINS}/qtwaylandscanner ${D}${bindir}/qtwaylandscanner
++}
 -- 
+1.8.3.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
