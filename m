@@ -1,39 +1,37 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ee0-f47.google.com (unknown [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 96FCF65F99
+Return-Path: <ben.shelton@ni.com>
+Received: from ni.com (unknown [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 83D9060167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 14:49:00 +0000 (UTC)
-Received: by mail-ee0-f47.google.com with SMTP id c13so500904eek.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 07:49:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=frcvPBNEe6lMc2SPSNck8JOIihS9TgRr5usmI38GlgU=;
-	b=yFRnfKQSj98r033gsCYZui/KrsgLm0BUMEQZxjjNvgWuHgC0OqQ4ggaGPMH1ymrPYe
-	Ez9KjvjS87xgm2CQV4TkwO1t5BqcRyCIGBtr18XGt/Ce8+Eh4O6FptQ3rr/H8+xZUM97
-	Ze7NSvYMb+Ip9/Jck7GiaYGHgNJX9jYhH4DI5bZ4GEdRrW8G0V8ALaDKkUZI+LW7Tyqd
-	oL2pg5IsNzHSTVz8vgiHdRr867UVIw+ugWlssJs5QMw0FemiVPXiSYztt4wDIYr2d0NU
-	iKHyShAUcY2JVAtAhmKqRvhmTsQkCRxZDucal3ZDursSvAZ2qr8TDFTKADK6fNjslziQ
-	ey2w==
-X-Received: by 10.14.208.195 with SMTP id q43mr3286208eeo.42.1399992541627;
-	Tue, 13 May 2014 07:49:01 -0700 (PDT)
-Received: from localhost.localdomain (ip-95-222-161-153.unitymediagroup.de.
-	[95.222.161.153]) by mx.google.com with ESMTPSA id
-	m44sm40701315eeh.14.2014.05.13.07.49.00
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 May 2014 07:49:00 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Tue, 13 May 2014 14:52:07 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
+	s4DEq8h0030830 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 May 2014 09:52:08 -0500
+Received: from localhost ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP5)
+	with ESMTP id 2014051309520897-1049779 ;
+	Tue, 13 May 2014 09:52:08 -0500 
+Date: Tue, 13 May 2014 09:52:03 -0500
+From: Ben Shelton <ben.shelton@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 May 2014 16:48:48 +0200
-Message-Id: <1399992528-10108-4-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <20140513145203.GA31462@bshelton-desktop>
+References: <cover.1399914295.git.ben.shelton@ni.com>
+	<139978ea7125a5ffb15a583faef889b1409e3987.1399914295.git.ben.shelton@ni.com>
+	<8672BB614B4CCA40A6B3BDD6FD82050BA112C7DD@COSNADEXC13.usr.ingenico.loc>
+	<20140513082931.GK22774@jama>
 MIME-Version: 1.0
-Subject: [PATCH, V2][meta-qt5 3/3] qtwayland: install created private headers
+In-Reply-To: <20140513082931.GK22774@jama>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP5|July 31, 2013) at 05/13/2014 09:52:08 AM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP5|July
+	31, 2013) at 05/13/2014 09:52:09 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.11.96, 1.0.14,
+	0.0.0000
+	definitions=2014-05-13_03:2014-05-13, 2014-05-13,
+	1970-01-01 signatures=0
+Subject: Re: [meta-oe][PATCH 1/7] bdftopcf: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,42 +45,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 14:49:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 May 2014 14:52:14 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-buildhistory diff:
---- a/packages/armv7at2hf-vfp-neon-angstrom_wl-linux-gnueabi/qtwayland/qtwayland-dev/latest
-+++ b/packages/armv7at2hf-vfp-neon-angstrom_wl-linux-gnueabi/qtwayland/qtwayland-dev/latest
-@@ -4,6 +4,6 @@ PKGV = 5.2.1+git0+f9ebbd6c61
- RPROVIDES =
- RDEPENDS = qtwayland
- RRECOMMENDS = eglibc-dev libgcc-dev libstdc++-dev libxkbcommon-dev qtbase-dev qtdeclarative-dev wayland-dev xproto-dev zlib-dev
--PKGSIZE = 295533
-+PKGSIZE = 537651
- FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal /lib/*.o /usr/lib/qtwayland/*.la /lib/*.la
--FILELIST = /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qwlclientbufferintegration_p.h /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qwlclientbufferintegrat
-+FILELIST = /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qwayland-server-hardware-integration.h /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qwayland-server
+On 05/13, Martin Jansa wrote:
+> On Tue, May 13, 2014 at 08:08:18AM +0000, Matthieu CRAPET wrote:
+> > Hi,
+> >=20
+> > Did you reused this recipe:
+> > https://www.mail-archive.com/openembedded-devel%40lists.openembedded.or=
+g/msg35721.html
+> > If so, you could give some credits to the original author.
+>=20
+> But it doesn't seem to address the review comments in original patch.
+>=20
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-qt/qt5/qtwayland_git.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+I thought the issue with the original patch was that the "require
+recipes-graphics/xorg-app/xorg-app-common.inc" line needed to be moved
+to the top of the recipe to fix the build.  Are there other changes that
+need to be made?
 
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index ebdda82..df7a562 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -9,3 +9,8 @@ SRCREV = "f9ebbd6c618488f9b671f5504528ced3350754fb"
- SRC_URI += " \
-     file://0001-examples.pro-include-server-buffer-only-when-buildin.patch \
- "
-+
-+do_install_append() {
-+    # do install files created by qtwaylandscanner
-+    install ${B}/include/QtCompositor/5.3.0/QtCompositor/private/{qwayland-server-*,*protocol*}.h ${D}${includedir}/${QT_DIR_NAME}/QtCompositor/5.3.0/QtCompositor/private
-+}
--- 
-1.8.3.1
+Thanks,
+Ben
+
+> > -----Message d'origine-----
+> > De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openem=
+bedded-devel-bounces@lists.openembedded.org] De la part de Ben Shelton
+> > Envoy=E9=A0: lundi 12 mai 2014 19:32
+> > =C0=A0: openembedded-devel@lists.openembedded.org
+> > Objet=A0: [oe] [meta-oe][PATCH 1/7] bdftopcf: add recipe
+> >=20
+> > The bdftopcf tool is necessary to build the core X fonts, which ship in=
+ BDF format.  Adapted from a recipe in OE-Classic and from an earlier maili=
+ng list post by Trevor Woerner.
+> >=20
+> > Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+> > ---
+> >  meta-oe/recipes-graphics/xorg-app/bdftopcf=5F1.0.4.bb | 13 +++++++++++=
+++
+> >  1 file changed, 13 insertions(+)
+> >  create mode 100644 meta-oe/recipes-graphics/xorg-app/bdftopcf=5F1.0.4.=
+bb
+> >=20
+> > diff --git a/meta-oe/recipes-graphics/xorg-app/bdftopcf=5F1.0.4.bb b/me=
+ta-oe/recipes-graphics/xorg-app/bdftopcf=5F1.0.4.bb
+> > new file mode 100644
+> > index 0000000..5009d54
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-graphics/xorg-app/bdftopcf=5F1.0.4.bb
+> > @@ -0,0 +1,13 @@
+> > +require recipes-graphics/xorg-app/xorg-app-common.inc
+> > +
+> > +SUMMARY =3D "bdftopcf is a tool to convert BDF fonts to PCF fonts"
+> > +HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/bdftopcf/"
+> > +SECTION =3D "x11/app"
+> > +LICENSE =3D "MIT"
+> > +LIC=5FFILES=5FCHKSUM =3D "file://COPYING;md5=3Df9a35333adf75edd1eaef84=
+bca65a490"
+> > +DEPENDS =3D "libxfont"
+> > +
+> > +SRC=5FURI[md5sum] =3D "96a648a332160a7482885800f7a506fa"
+> > +SRC=5FURI[sha256sum] =3D "eaf59057ba3d7cffe29526562ce50868da7da823487a=
+4cfb3e16946e5ffd2798"
+> > +
+> > +BBCLASSEXTEND =3D "native"
+> > --
+> > 1.9.3
+> >=20
+> > --
+> > =5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=
+=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --=20
+> > =5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=
+=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> --=20
+> =5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=
+=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
