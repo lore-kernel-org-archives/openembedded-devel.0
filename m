@@ -1,40 +1,37 @@
-Return-Path: <jefro.net@gmail.com>
-X-Greylist: delayed 1149 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 12 May 2014 23:47:35 UTC
-Received: from mail-lb0-f178.google.com (unknown [209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id A466560702;
-	Mon, 12 May 2014 23:47:34 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id w7so8001396lbi.37
-	for <multiple recipients>; Mon, 12 May 2014 16:47:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=q6makARq8awrCPq/PLaWqqWMSEoO3MFJTy+/iTtO534=;
-	b=sInSZZwWMU8JA0eAD71NS8QHHUPqbUi2YD7nCtbIj730dbtNnHtTVyW7jPqqIYb2KY
-	kHkZvH0dSqhwm9izrNejz8YzigYrbjB10YUwHCoSqH9pcDVY21/Z2+iihFAwfdDz7Eg9
-	sJwCzcu9QUQ4p9r5wYAwo76D42oUlR0MCdJfZIWUSq0uJrowVjQ+HrNmnnf0/ZgMC04Q
-	PKBuBVx22j3ECjjkJishwHsjQdn6g4H0tV8ajgX8mGAgPXNRofkiRO+Jmf3uBQ3/Xjbj
-	Am7eOhquja6TACt2hhEgxTlFgHFh6XTdQ70smuySq6PXVjg6Q7znODoOYxv6nxvrY3yS
-	ai+g==
-X-Received: by 10.152.121.72 with SMTP id li8mr23060lab.45.1399936819672; Mon,
-	12 May 2014 16:20:19 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+X-Greylist: delayed 412 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 13 May 2014 00:23:58 UTC
+Received: from mail-ve0-f179.google.com (unknown [209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 211B860173
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 May 2014 00:23:58 +0000 (UTC)
+Received: by mail-ve0-f179.google.com with SMTP id oy12so9911683veb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 May 2014 17:24:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=jS+8Vh3HBcQZ8oZdO9a8RBQAVYWsAUObt2Updpcftl8=;
+	b=sMjKfEouMPwVqEeFJuuYUm4to/p3KFaBbL7ns72p1XH2UWdZggU7vo08PXczbYVuBt
+	IAoHEvTkdz+JnPBv4TG8Y769Vah7J1bhY4LuI9MFExfkFxN5mEhlHIXBOb8xLDS//tSr
+	0kAH/GI53t+4vNMCQ0+6RB2nNIkaIPhHpQFMrwtNSwM6KqYJocfXiKcKTUuCVN2nIJmO
+	RaoxU633FhOWzVc6vLUSgj8v0Esl9qG+QCRZH1NQT2989AMbcvYmyDnDQFQqlhq7TzDk
+	EwNtDohue9lc5VX6WGmu842nHSXFo7La3D7uI88UNLNCr+wnorGKo+CSHnk2lf0+bBqU
+	F+2Q==
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.112.173.197 with HTTP; Mon, 12 May 2014 16:19:59 -0700 (PDT)
-In-Reply-To: <20140507231808.GM11339@denix.org>
-References: <530697CC.5050402@balister.org> <20140507231808.GM11339@denix.org>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Mon, 12 May 2014 16:19:59 -0700
-X-Google-Sender-Auth: YW0di-1wcvsWbjzhIFrBcR1U3Rk
-Message-ID: <CA+YB3raM8kDp_K259c-ao=nSgfvgXTmi5vpju5wAnA0WwGHH3A@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OEDAM: OpenEmbedded Developers (Americas) Meeting
+X-Received: by 10.52.227.138 with SMTP id sa10mr21720382vdc.25.1399940227115; 
+	Mon, 12 May 2014 17:17:07 -0700 (PDT)
+Received: by 10.52.80.226 with HTTP; Mon, 12 May 2014 17:17:07 -0700 (PDT)
+In-Reply-To: <1399887698-19336-4-git-send-email-schnitzeltony@googlemail.com>
+References: <1399887698-19336-1-git-send-email-schnitzeltony@googlemail.com>
+	<1399887698-19336-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 13 May 2014 02:17:07 +0200
+Message-ID: <CALbNGRTX4xmQL_-xgQutMkZJsw2Npq9gWaQoFNVSBDy0RFYaOg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [RFC][meta-qt5 3/3] qtwayland: install created private headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,74 +45,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 May 2014 23:47:36 -0000
+X-List-Received-Date: Tue, 13 May 2014 00:24:06 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Meeting notes have been published on the OEDAM page:
-
-http://openembedded.org/wiki/OEDAM#Minutes
-
-Jefro takes the blame for typos and other reporting errors.
-
-On Wed, May 7, 2014 at 4:18 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> The OpenEmbedded Board of Directors would like to thank everyone who was able
-> to participate (either in person in Santa Clara or online) in our first OEDAM
-> OpenEmbedded Developers (Americas) Meeting on May 2nd and 3rd! The meeting was
-> a huge success and a lot of fun!
+On Mon, May 12, 2014 at 11:41 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> buildhistory diff:
+> --- a/packages/armv7at2hf-vfp-neon-angstrom_wl-linux-gnueabi/qtwayland/qt=
+wayland-dev/latest
+> +++ b/packages/armv7at2hf-vfp-neon-angstrom_wl-linux-gnueabi/qtwayland/qt=
+wayland-dev/latest
+> @@ -4,6 +4,6 @@ PKGV =3D 5.2.1+git0+f9ebbd6c61
+>  RPROVIDES =3D
+>  RDEPENDS =3D qtwayland
+>  RRECOMMENDS =3D eglibc-dev libgcc-dev libstdc++-dev libxkbcommon-dev qtb=
+ase-dev qtdeclarative-dev wayland-dev xproto-dev zlib-dev
+> -PKGSIZE =3D 295533
+> +PKGSIZE =3D 537651
+>  FILES =3D /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la /usr/=
+lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal /lib/*.o=
+ /usr/lib/qtwayland/*.la /lib/*.la
+> -FILELIST =3D /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qw=
+lclientbufferintegration_p.h /usr/include/qt5/QtCompositor/5.3.0/QtComposit=
+or/private/qwlclientbufferintegrat
+> +FILELIST =3D /usr/include/qt5/QtCompositor/5.3.0/QtCompositor/private/qw=
+ayland-server-hardware-integration.h /usr/include/qt5/QtCompositor/5.3.0/Qt=
+Compositor/private/qwayland-server
 >
-> We would also like to thank Ettus Research/NI for providing the premises, as
-> well as Jefro and the Yocto Project for sponsoring the event and providing
-> food!
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  recipes-qt/qt5/qtwayland_git.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
-> The meeting minutes should be published shortly.
->
-> --
-> Denys
->
->
-> On Thu, Feb 20, 2014 at 07:03:24PM -0500, Philip Balister wrote:
->> The OpenEmbedded Project is holding a developers meeting May 2-3,
->> 2014, in Santa Clara, CA. This meeting is immediately after the Embedded
->> Linux Conference North America. All active OpenEmbedded and Yocto
->> Project developers are invited to attend.
->>
->> NOTE: this is a development meeting for the project itself, not a
->> training session.
->>
->> May 2-3, 2014
->> time TBD
->>
->> Ettus Research/National Instruments
->> 4600 Patrick Henry Drive
->> Santa Clara, CA 95054 USA
->>
->> Lunch will be provided on both days.
->>
->> For more information and to add yourself to the list of attendees, see
->> the wiki page at
->> http://openembedded.org/wiki/OEDAM
->>
->> Here are a couple of photos from 2009:
->>
->> http://www.flickr.com/photos/32615155@N00/sets/72157622653686647/
->>
->> I'd like to thank Jefro for help with this announcement. Any errors are
->> mine though.
->>
->> Philip, OpenEmbedded eV Chair.
->> _______________________________________________
->> Openembedded-core mailing list
->> Openembedded-core@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_g=
+it.bb
+> index ebdda82..8da8249 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -9,3 +9,8 @@ SRCREV =3D "f9ebbd6c618488f9b671f5504528ced3350754fb"
+>  SRC_URI +=3D " \
+>      file://0001-examples.pro-include-server-buffer-only-when-buildin.pat=
+ch \
+>  "
+> +
+> +do_install_append() {
+> +       # do install files created by qtwaylandscanner
+> +       install ${B}/include/QtCompositor/5.2.1/QtCompositor/private/{qwa=
+yland-server-*,*protocol*}.h ${D}${includedir}/${QT_DIR_NAME}/QtCompositor/=
+5.2.1/QtCompositor/private
+Aargh: Wrong directory did test with /usr/include and expected
+includedir =3D /usr/include -> V2 will follow
 
-
-
--- 
-Jeff Osier-Mixon @Intel
-Yocto Project Community Manager http://yoctoproject.org
+Andreas
 
