@@ -1,25 +1,29 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (unknown [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id A780A605B2
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (unknown [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DE8B6098B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 May 2014 11:06:38 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 13 May 2014 04:06:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,1043,1389772800"; d="scan'208";a="431437198"
-Received: from hpatters-mobl.amr.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.37])
-	by azsmga001.ch.intel.com with ESMTP; 13 May 2014 04:06:06 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Tue, 13 May 2014 12:16:55 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 2774AF811E2; Tue, 13 May 2014 06:16:56 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 74A5FF811E1;
+	Tue, 13 May 2014 06:16:54 -0600 (MDT)
+Message-ID: <53720D3C.5060607@mlbassoc.com>
+Date: Tue, 13 May 2014 06:17:00 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 May 2014 12:05:57 +0100
-Message-Id: <24131e6d92f18eb86bc165e226a9e1882ac83789.1399979085.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <cover.1399979085.git.paul.eggleton@linux.intel.com>
-References: <cover.1399979085.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1399979085.git.paul.eggleton@linux.intel.com>
-References: <cover.1399979085.git.paul.eggleton@linux.intel.com>
-Subject: [meta-webserver][PATCH 4/4] xdebug: add license file
+References: <CAN-NoH3xAYL_GdgvtYzNChD0VneKjT4EoJzPLigAeCZXegcBCA@mail.gmail.com>	<53711DD9.6070506@mlbassoc.com>
+	<CAN-NoH0DsTa+DYTNz8oDwWQCVPTUzBMeEQEi37sO2w9cSHByDQ@mail.gmail.com>
+In-Reply-To: <CAN-NoH0DsTa+DYTNz8oDwWQCVPTUzBMeEQEi37sO2w9cSHByDQ@mail.gmail.com>
+Subject: Re: kernel config/rebuilding
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,95 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 May 2014 11:06:39 -0000
+X-List-Received-Date: Tue, 13 May 2014 12:16:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add the Xdebug license file to avoid a missing generic license file
-warning during building.
+On 2014-05-12 18:18, Richard Cagley wrote:
+> On Mon, May 12, 2014 at 12:15 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+>
+>> bitbake linux-xlnx -C compile
+>
+>
+> That definitely caused the kernel to get rebuilt. Thanks.
+>
+> While I was waiting for a reply I stumbled on this
+> https://community.freescale.com/docs/DOC-95045
+>
+> Do I need to move the new .config into a defconfig file somewhere? Similar
+> to this step?
+> $ cp
+> tmp/work/imx6qsabresd-poky-linux-gnueabi/linux-imx/3.0.35-r33.10/git/.config
+> ../sources/meta-fsl-arm/recipes-kernel/linux/linux-imx-3.0.35/mx6/defconfig
+>
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-webserver/conf/layer.conf |  2 ++
- meta-webserver/licenses/Xdebug | 60 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-webserver/licenses/Xdebug
+You can do this, but only if you are interested in saving
+the new/changed configuration.
 
-diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
-index d887b67..a4d6a27 100644
---- a/meta-webserver/conf/layer.conf
-+++ b/meta-webserver/conf/layer.conf
-@@ -16,3 +16,5 @@ BBFILE_PRIORITY_webserver = "6"
- LAYERVERSION_webserver = "1"
- 
- LAYERDEPENDS_webserver = "core"
-+
-+LICENSE_PATH += "${LAYERDIR}/licenses"
-diff --git a/meta-webserver/licenses/Xdebug b/meta-webserver/licenses/Xdebug
-new file mode 100644
-index 0000000..3cdbf05
---- /dev/null
-+++ b/meta-webserver/licenses/Xdebug
-@@ -0,0 +1,60 @@
-+-------------------------------------------------------------------- 
-+                 The Xdebug License, version 1.01
-+             (Based on "The PHP License", version 3.0)
-+   Copyright (c) 2003-2012 Derick Rethans. All rights reserved.
-+-------------------------------------------------------------------- 
-+
-+Redistribution and use in source and binary forms, with or without
-+modification, is permitted provided that the following conditions
-+are met:
-+
-+  1. Redistributions of source code must retain the above copyright
-+     notice, this list of conditions and the following disclaimer.
-+ 
-+  2. Redistributions in binary form must reproduce the above copyright
-+     notice, this list of conditions and the following disclaimer in
-+     the documentation and/or other materials provided with the
-+     distribution.
-+ 
-+  3. The name "Xdebug" must not be used to endorse or promote products
-+     derived from this software without prior written permission. For
-+     written permission, please contact derick@xdebug.org.
-+  
-+  4. Products derived from this software may not be called "Xdebug", nor
-+     may "Xdebug" appear in their name, without prior written permission
-+     from derick@xdebug.org.
-+ 
-+  5. Derick Rethans may publish revised and/or new versions of the
-+     license from time to time. Each version will be given a
-+     distinguishing version number.  Once covered code has been
-+     published under a particular version of the license, you may
-+     always continue to use it under the terms of that version. You
-+     may also choose to use such covered code under the terms of any
-+     subsequent version of the license published by Derick Rethans. No
-+     one other than Derick Rethans has the right to modify the terms
-+     applicable to covered code created under this License.
-+
-+  6. Redistributions of any form whatsoever must retain the following
-+     acknowledgment: "This product includes Xdebug, freely available
-+     from <http://xdebug.org/>".
-+
-+THIS SOFTWARE IS PROVIDED BY DERICK RETHANS ``AS IS'' AND ANY
-+EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE PHP DEVELOPMENT TEAM OR
-+ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+
-+--------------------------------------------------------------------
-+
-+This software consists of voluntary contributions made by some
-+individuals on behalf of Derick Rethans.
-+
-+Derick Rethans can be contacted via e-mail at derick@xdebug.org.
-+
-+For more information Xdebug, please see <http://xdebug.org>.
 -- 
-1.9.0
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
