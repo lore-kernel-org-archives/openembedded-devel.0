@@ -1,34 +1,34 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qc0-f172.google.com (unknown [209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id A691C605B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vc0-f181.google.com (unknown [209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E04A60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 May 2014 08:51:00 +0000 (UTC)
-Received: by mail-qc0-f172.google.com with SMTP id l6so2284144qcy.31
+	Wed, 14 May 2014 09:03:25 +0000 (UTC)
+Received: by mail-vc0-f181.google.com with SMTP id ld13so2005316vcb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 May 2014 01:51:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=GvoO0ZGayy+7tx+uHDGpAi7YFwjCitKsg3Ms2HLmweo=;
-	b=OS0o6yp+1LqI0nAzj8Sq4w+bqApwYLRfU3CcBK6QtCqH4LwZDC8lU9tgcmdLrqMLKm
-	FfUhz1lzQuEgmBV8H9Sy50HOPHCUAaIi1eWTgZEtDUAbHyt7oZH8CYE3dsy3iPus9mto
-	hLyuvDRrV1akpsfpT/27fclJVJCrbdTTG6fdyc6crW5y4gqgHLwqG5xTJTpeDT8JM4qT
-	l58nJ7f1kNlQJ1ODoS5EP3/3/dInn4sNerTzJQSp/+iTy+yI3JYDBJXFZ8OBhjNgnlyn
-	QvdOE2z7xvwhl5Jq6uEBFPfOMeqKqvJ7MML7lZW6vwnuA1WoHqwZLIjDTzhmUpdd5Tyq
-	5Iqw==
-X-Gm-Message-State: ALoCoQkdYLDop36FqrwBvzHROBiL0kWCIFrs1hAY93QMxaWE4OAfnGpkcVNvPH159JiV6/ZWFI0v
-X-Received: by 10.224.160.142 with SMTP id n14mr1344622qax.17.1400057461425;
-	Wed, 14 May 2014 01:51:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.101.77 with HTTP; Wed, 14 May 2014 01:50:41 -0700 (PDT)
-In-Reply-To: <CAGw0TDP6FDCfCyWjj2Akm+BfNButm5q93kGC=G8-MKCNxTuG+A@mail.gmail.com>
-References: <CAGw0TDP6FDCfCyWjj2Akm+BfNButm5q93kGC=G8-MKCNxTuG+A@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 14 May 2014 09:50:41 +0100
-Message-ID: <CAJTo0LasCMwBLQVqgVVwdpLb4ScpKXW0dAPOLKKLcYjxrZeSoA@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: freetype build error 'libfreetype.la: No such file or directory'
+	Wed, 14 May 2014 02:03:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rarxu+5R0ugpgefvPH4PCrdXKSgwQ2RNPydhN1AWVHQ=;
+	b=ZoPWRoWegmuaR1coWzqi66TPa6h+vzFwGtE1ysYFDPKGdq2p0XWbeEiCbHQorMKlnd
+	RozvdaKuTQK6MsP2Wz7lsLMOVNpSpbvsrYWwzZfSKhSJ2b7XxENGrSFt5QVOw73C1q8n
+	raHj9tnRLPYsFHBIViPbdy2wnxqIPaP9CoWUOKvlhnQKtt69tUJTw76sNIhZzGiHQXSu
+	jnwWVdJGw0abyCFngdN6H7/bNC2/A+hZah4G22jKZ8BrF75VUhOiscNe+zAQ7jTz56FH
+	euRUsjwyQ5iNo1qXAKzLv46g2tVNqykb0OOsL7U5EQW6r/1+ZGw/i9hlfEBDGxpzNH0Z
+	PGBw==
+X-Received: by 10.58.85.3 with SMTP id d3mr634612vez.34.1400058207007;
+	Wed, 14 May 2014 02:03:27 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	tf10sm2248664vdc.0.2014.05.14.02.03.24 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 14 May 2014 02:03:25 -0700 (PDT)
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 May 2014 11:03:44 +0200
+Message-Id: <1400058231-23201-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe][WIP][PATCH 1/8] azy: fix build for B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,17 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2014 08:51:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 14 May 2014 09:03:34 -0000
 
-On 14 May 2014 05:57, Charles Oram <charles@oram.co.nz> wrote:
-> |/bin/grep:
-> /home/charles/fsl-community-bsp/build/tmp/sysroots/cubox-i/usr/lib/
-> libfreetype.la: No such file or directory
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/azy_svn.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Saul saw this once but I never managed to replicate it.  Doing a clean
-and rebuild will probably fix it, although that is a work around and
-not a solution...
+diff --git a/meta-efl/recipes-efl/efl/azy_svn.bb b/meta-efl/recipes-efl/efl/azy_svn.bb
+index 97c509b..cb180fb 100644
+--- a/meta-efl/recipes-efl/efl/azy_svn.bb
++++ b/meta-efl/recipes-efl/efl/azy_svn.bb
+@@ -22,7 +22,7 @@ do_configure_prepend_class-target() {
+ 
+ do_install_append_class-native() {
+     install -d ${D}/${bindir}
+-    install -m 0755 ${S}/src/bin/lemon ${D}/${bindir}/azy_lemon
++    install -m 0755 ${B}/src/bin/lemon ${D}/${bindir}/azy_lemon
+ }
+ 
+ inherit efl
+-- 
+1.9.3
 
-Ross
 
