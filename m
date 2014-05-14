@@ -1,34 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vc0-f170.google.com (unknown [209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id DD11565F49
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f42.google.com (unknown [209.85.192.42])
+	by mail.openembedded.org (Postfix) with ESMTP id C43A86611E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 May 2014 09:17:12 +0000 (UTC)
-Received: by mail-vc0-f170.google.com with SMTP id lf12so2094140vcb.1
+	Wed, 14 May 2014 10:14:01 +0000 (UTC)
+Received: by mail-qg0-f42.google.com with SMTP id q107so2461954qgd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 May 2014 02:17:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=/VGEl2twr1i1aYwzULfaTRcXVT2Qsw9yPtN1I6fJyDc=;
-	b=ftvVGe/VdZooJiaIDL8jNqHzHhdBBzpEuIM+pwzFt3seCbUDvS9wJWicvkGf2h113L
-	MXsyQDVrEM4dQ///ap/SjcgsczyGa9NgjWrXTyoS+RWqz8sKIM7zlnKMjtDuc6QPtBA6
-	JuTskYhM7wfekqcC5zh0p3tILQkFrNWHj2EXwJK7hIwo2yVcaTfHU750FFcwZ70ZFXGD
-	DqYQ0lyxUJLvVOEv3yrGTOt/wdTRxHAc9imig51xZepsRrpa8WZjPDjG/W40f+VMEJDH
-	G4zpEZ4KejQDAYZmt3oG8srsxs10Kh8m72RLUit9jzC3CMlvnGairoLvqkFx6okD9epd
-	hzUA==
-X-Received: by 10.220.167.2 with SMTP id o2mr2187008vcy.8.1400059033439;
-	Wed, 14 May 2014 02:17:13 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ix8sm2269347vdb.18.2014.05.14.02.17.11 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 May 2014 02:17:12 -0700 (PDT)
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 May 2014 11:17:38 +0200
-Message-Id: <1400059058-7158-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.9.3
-Subject: [meta-oe][WIP][PATCH] log4cplus: use better file for LIC_FILES_CHKSUM
+	Wed, 14 May 2014 03:14:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=Ffgsm/GbgbFy0cJ1lu+6F5LgTwGtjoe6Tm+itegjXo4=;
+	b=GirxasXyewl/qH6MPeJIgroA47EiTS89s65/yZXdRSirf1+JoGbBXhHiX4tjmYB/OD
+	6CQFAPYeJ0isj9lS4zr+eYnH1+2Bq361EicEBTyGwbj/A3N5nzAmVwbYlntERJqHhEo1
+	8ftFtfhjuQtf+LOET4lTYBKDtSr8k0C0FD1y/SqDc1opBwq2G+hTH8XHko+p0Zi5q3se
+	o72KMYFbwUGegSVUWClBbEDQ6tIkmAo0JMhhz5/JprufpbSccaQ2D42cnP1ZbIlk+P0c
+	P78FGiMiXBMOZcW6Tmz+o2BQFJ/CiaMgz6MqPxcJog6nWXL3r2BHzqJAgBKhF/JqgkWT
+	qPkg==
+X-Gm-Message-State: ALoCoQkEiekRUbBnGwdXTqHGCPcZy+zSlBrgWpwkurfZhmlXeNVRilvPRo3fisAIJXpV6kGWLgfb
+X-Received: by 10.140.28.3 with SMTP id 3mr3910973qgy.71.1400062442975; Wed,
+	14 May 2014 03:14:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.101.77 with HTTP; Wed, 14 May 2014 03:13:42 -0700 (PDT)
+In-Reply-To: <CAJTo0LasCMwBLQVqgVVwdpLb4ScpKXW0dAPOLKKLcYjxrZeSoA@mail.gmail.com>
+References: <CAGw0TDP6FDCfCyWjj2Akm+BfNButm5q93kGC=G8-MKCNxTuG+A@mail.gmail.com>
+	<CAJTo0LasCMwBLQVqgVVwdpLb4ScpKXW0dAPOLKKLcYjxrZeSoA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 14 May 2014 11:13:42 +0100
+Message-ID: <CAJTo0LZzTESabuYOF8fakqV2JazLuKt4DtGFAMJ+YDFOAP0eJQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: freetype build error 'libfreetype.la: No such file or directory'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2014 09:17:15 -0000
+X-List-Received-Date: Wed, 14 May 2014 10:14:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* simplify SRC_URI
-* INSTALL file is changing checksum
+I've just sent a patch to the oe-core list to fix this.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+Ross
 
-diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-index a5a827a..20b58fc 100644
---- a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-+++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-@@ -3,11 +3,10 @@ SECTION = "libs"
- HOMEPAGE = "http://sourceforge.net/projects/log4cplus/"
- BUGTRACKER = "http://sourceforge.net/p/log4cplus/bugs/"
- 
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://INSTALL;md5=0278479fa183a2ff8ab216669424b764"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/log4cplus/log4cplus-stable/${PV}/log4cplus-${PV}.tar.gz"
-+LICENSE = "Apache-2.0 BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=65053a46f707ee2b93f09ad22f692170"
- 
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz"
- SRC_URI[md5sum] = "104bd6dd07ee71bc52ee9adca4d4d5fc"
- SRC_URI[sha256sum] = "96905e763fc6f1e3a854c3d1964c21e877de909bdddd0aed99806c62a68be838"
- 
--- 
-1.9.3
-
+On 14 May 2014 09:50, Burton, Ross <ross.burton@intel.com> wrote:
+> On 14 May 2014 05:57, Charles Oram <charles@oram.co.nz> wrote:
+>> |/bin/grep:
+>> /home/charles/fsl-community-bsp/build/tmp/sysroots/cubox-i/usr/lib/
+>> libfreetype.la: No such file or directory
+>
+> Saul saw this once but I never managed to replicate it.  Doing a clean
+> and rebuild will probably fix it, although that is a work around and
+> not a solution...
+>
+> Ross
 
