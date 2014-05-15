@@ -1,36 +1,31 @@
-Return-Path: <otavio.salvador@gmail.com>
-X-Greylist: delayed 5417 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 14 May 2014 20:34:40 UTC
-Received: from mail-yh0-f47.google.com (unknown [209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 5761365DBF;
-	Wed, 14 May 2014 20:34:40 +0000 (UTC)
-Received: by mail-yh0-f47.google.com with SMTP id z6so2198291yhz.20
-	for <multiple recipients>; Wed, 14 May 2014 13:34:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=rqS1v/2e2dBLF5CnUU2gBWLGzZ1v/V2mhm2aM8gKeP4=;
-	b=PYatQhyUy2q7aeTnmAFw3GzHm5/2tTDsODt0sk2/HFk1WWdBSNYnPjcLrRXhI08HFa
-	ENQEeO1XERQ0tlGrcDs2pF4ZS/wX+450PNzGrIXPHenrF5BKw9aFlBwR6lAVklpHQqjY
-	wzUglvfI9bhWy1nIIPjh+gyf5ZTfSfiBNLZooeVZAqLONRlTHgqYPq6mHrS51MZ/TD6x
-	vJJLiULBbgF9Glj6pGEejLUfNC1VXPggfJC9bMEZR3FaJ2Fg+ah8Zqi2ExB8t1TJ/wsf
-	Uvpx5CzRCIVF3o5lvjPBMqVO3yGmLyy5YqXNjpvOilCh6Zz7VqBmYKBlSGEpkxKH9g0P
-	lCxg==
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (unknown [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 33D0365F99
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 May 2014 01:28:45 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s4F1Sijf024513
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 14 May 2014 18:28:44 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.169.1;
+	Wed, 14 May 2014 18:28:44 -0700
+Message-ID: <53741849.8070402@windriver.com>
+Date: Thu, 15 May 2014 09:28:41 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.236.180.169 with SMTP id j29mr8489363yhm.47.1400099681893;
-	Wed, 14 May 2014 13:34:41 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Wed, 14 May 2014 13:34:41 -0700 (PDT)
-In-Reply-To: <CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
-References: <cover.1399993010.git.valentin.popa@intel.com>
-	<CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
-Date: Wed, 14 May 2014 17:34:41 -0300
-X-Google-Sender-Auth: 3JsqTQq2LowglJhQfH72n4cSwZs
-Message-ID: <CAP9ODKrXJJ4O_WKqS1osA1_KBKCcsBknLEiRvNc6GXBC-+F4Qg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH 0/3] mesa upgrade
+To: Tim Orling <ticotimo@gmail.com>
+References: <1399428565-30499-1-git-send-email-ticotimo@gmail.com>	<53704ECE.6070403@windriver.com>
+	<CANx9H-A9_R=vqTmXS2T_tq16wfUewG85UO9QvifDiEqgo0qxZQ@mail.gmail.com>
+In-Reply-To: <CANx9H-A9_R=vqTmXS2T_tq16wfUewG85UO9QvifDiEqgo0qxZQ@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH v3 0/9] perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +39,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 May 2014 20:34:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 May 2014 01:28:46 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 13, 2014 at 12:28 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> As this is a major release of Mesa I'm expecting breakage somewhere...
->  Can BSP maintainers please test these patches if their machines build
-> Mesa?  I'm expecting machines that use mesa-gl to break if they don't
-> just use the pure software drivers (so that's at least EMGD and if I
-> recall correctly some ARM drivers).
+On 05/14/2014 10:13 PM, Tim Orling wrote:
+>
+> On Sun, May 11, 2014 at 9:32 PM, Hongxu Jia <hongxu.jia@windriver.com 
+> <mailto:hongxu.jia@windriver.com>> wrote:
+>
+>     It seems the URL
+>     http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+>     could not access in China, I use
+>     http://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz
+>     instead, and the build is successed. The others is fine to me.
+>
+> Would you prefer I add a "MIRRORS +=" or do you think it is because 
+> the latest release of this package is 0.036?
 
-Yes; we'll give it a try in meta-fsl-arm.
+It is better to update to the latest version, BTW the URL 
+http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Module-Build-Tiny-0.030.tar.gz 
+could be accessed, no need to add the "MIRRORS +=".
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+//Hongxu
+
+>     //Hongxu
+>
+>
+>
+>     On 05/07/2014 10:09 AM, Tim Orling wrote:
+>
+>         From: Tim Orling <TicoTimo@gmail.com <mailto:TicoTimo@gmail.com>>
+>
+>         This series of recipes is the first step towards the
+>         ultimate goal of getting Slic3r to build in OE.
+>
+>         Changes since v2:
+>            * dropped libmodule-metadata as a patch for
+>         oe-core/meta/perl provides
+>                ** http://patches.openembedded.org/patch/71565/
+>            * correct DEPENDS for libmodule-build-tiny-perl ('*-perl-*'
+>         missing)
+>
+>         Tim Orling (9):
+>            libtext-diff-perl: add 1.41
+>            libcapture-tiny-perl: add 0.23
+>            libmodule-runtime-perl: add 0.013
+>            libextutils-config-perl: add 0.007
+>            libextutils-helpers-perl: add 0.021
+>            libextutils-installpaths-perl: add 0.010
+>            libmodule-build-tiny-perl: add 0.030
+>            libextutils-cppguess-perl: add 0.07
+>            libalgorithm-diff-perl: add 1.15
+>
+>           .../libalgorithm/libalgorithm-diff-perl_1.15.bb
+>         <http://libalgorithm-diff-perl_1.15.bb>    | 23 +++++++++
+>           .../libcapture/libcapture-tiny-perl_0.23.bb
+>         <http://libcapture-tiny-perl_0.23.bb>      | 36 +++++++++++++++
+>           .../libextutils/libextutils-config-perl_0.007.bb
+>         <http://libextutils-config-perl_0.007.bb>   | 24 ++++++++++
+>           .../libextutils/libextutils-cppguess-perl_0.07.bb
+>         <http://libextutils-cppguess-perl_0.07.bb>  | 38 +++++++++++++++
+>           .../libextutils/libextutils-helpers-perl_0.021.bb
+>         <http://libextutils-helpers-perl_0.021.bb>  | 29 ++++++++++++
+>           .../libextutils-installpaths-perl_0.010.bb
+>         <http://libextutils-installpaths-perl_0.010.bb>         | 25
+>         ++++++++++
+>           .../libmodule/libmodule-build-tiny-perl_0.030.bb
+>         <http://libmodule-build-tiny-perl_0.030.bb>   | 54
+>         ++++++++++++++++++++++
+>           .../libmodule/libmodule-runtime-perl_0.013.bb
+>         <http://libmodule-runtime-perl_0.013.bb>      | 35 ++++++++++++++
+>           .../recipes-perl/libtext/libtext-diff-perl_1.41.bb
+>         <http://libtext-diff-perl_1.41.bb> | 27 +++++++++++
+>           9 files changed, 291 insertions(+)
+>           create mode 100644
+>         meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
+>         <http://libalgorithm-diff-perl_1.15.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.23.bb
+>         <http://libcapture-tiny-perl_0.23.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+>         <http://libextutils-config-perl_0.007.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
+>         <http://libextutils-cppguess-perl_0.07.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.021.bb
+>         <http://libextutils-helpers-perl_0.021.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+>         <http://libextutils-installpaths-perl_0.010.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.030.bb
+>         <http://libmodule-build-tiny-perl_0.030.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.013.bb
+>         <http://libmodule-runtime-perl_0.013.bb>
+>           create mode 100644
+>         meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
+>         <http://libtext-diff-perl_1.41.bb>
+>
+>
+>
+
 
