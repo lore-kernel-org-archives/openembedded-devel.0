@@ -1,32 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f169.google.com (unknown [209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D88C605B3
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (unknown [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FCC066078
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 May 2014 05:41:29 +0000 (UTC)
-Received: by mail-ig0-f169.google.com with SMTP id hl10so1269447igb.2
+	Fri, 16 May 2014 08:26:54 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s4G8Qt6X011713
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 May 2014 22:41:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=tGQbwNRiiOacoYhHkEzaRdyo088hKy0HXbFDzvL5rjc=;
-	b=P/N19mhs+6AtVePEeJSdqR3wY/nJu2AHtzSIvbNeBjJj5L7gv6gR2oCPbIB3PAYyHj
-	dD/uepkKzPhszaHgWSlCz2cRYcjH1r4lZ23XRz6IfYMWA7d1Mj/VgQhlp4XXHgEW8OPs
-	ynyG8wu7vQp/Fv/NSF/tykoIa54iIfIGyt3r6+T/mkVhcZylAIgX4T/hu0Ficc1obIF2
-	2jpdmEyOmrm+PYPCKDdNlohbO7cBQ63kFhBr1PT+ZI0xBTZ6hKyLIn/WQA8GDzoqwy5F
-	TDiQb8xZPLU9QaZTLo8wYC/m2pA42stKY4RroAu9LzIXfTUmUbWmIXOhL88nNhbALXhC
-	n5Wg==
-X-Received: by 10.42.68.18 with SMTP id v18mr13538896ici.1.1400218890132; Thu,
-	15 May 2014 22:41:30 -0700 (PDT)
+	Fri, 16 May 2014 01:26:55 -0700 (PDT)
+Received: from pek-hostel-vm07.wrs.com (128.224.153.177) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.169.1; Fri, 16 May 2014 01:26:54 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 16 May 2014 04:26:52 -0400
+Message-ID: <1400228812-30966-2-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1400228812-30966-1-git-send-email-Qi.Chen@windriver.com>
+References: <1400228812-30966-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.79.133 with HTTP; Thu, 15 May 2014 22:41:00 -0700 (PDT)
-In-Reply-To: <CAP71Wjz70nHPpYu-kYF_rHAardHZr-bVj+La3fJaH9R9Tf9pDA@mail.gmail.com>
-References: <CAFeBWL4O6Uv6d+KoKQcHdzKZpog0OYnNA794jYRcJEovw88X9g@mail.gmail.com>
-	<CAP71Wjz70nHPpYu-kYF_rHAardHZr-bVj+La3fJaH9R9Tf9pDA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 15 May 2014 22:41:00 -0700
-Message-ID: <CAMKF1sqQ6qEWUGOdrfaLNcmFacaGTWTiLtMtJ7YaNJyLMkENtA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: initramfs only supported in x86?
+Subject: [meta-oe][PATCH 2/2] liblockfile: remove unrecognized configure option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,39 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 May 2014 05:41:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 May 2014 08:26:58 -0000
+Content-Type: text/plain
 
-On Thu, May 15, 2014 at 1:33 PM, Nicolas Dechesne
-<nicolas.dechesne@linaro.org> wrote:
-> On Thu, May 15, 2014 at 7:13 PM, Adam Lee <adam.yh.lee@gmail.com> wrote:
->> Hello everyone, I thought I'd compare the performance of booting
->> rootfs from MMC vs ramdisk (the way Android is doing it). Some says it
->> may possibly take longer in ramdisk because the rootfs has to be first
->> loaded into memory. I'd like to test it out myself.
->>
->> So I discovered core-image-minimal-initramfs, and thought it was
->> exactly what I needed. However the build doesn't go far, because its
->> dependency initramfs-live-install [1] only seems to support x86:
+From: Chen Qi <Qi.Chen@windriver.com>
 
-live images are for x86 only because it uses syslinux and friends.
-However you can choose any other image to become initramfs image and
-bunsle it into kernel
+The '--enable-static' is an unrecognized configure option, thus removing
+it.
 
-you have to use
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../liblockfile/liblockfile_1.09.bb                |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-INITRAMFS_IMAGE = "your-initramfs-image"
-INITRAMFS_IMAGE_BUNDLE = "1"
+diff --git a/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb b/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
+index 0b9fdaf..38e1915 100644
+--- a/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
++++ b/meta-oe/recipes-extended/liblockfile/liblockfile_1.09.bb
+@@ -17,7 +17,7 @@ inherit autotools-brokensep
+ 
+ # set default mailgroup to mail
+ # --with-libnfslock specify where to install nfslock.so.NVER
+-EXTRA_OECONF = "--enable-shared --enable-static \
++EXTRA_OECONF = "--enable-shared \
+                 --with-mailgroup=mail \
+                 --with-libnfslock=${libdir} \
+ "
+-- 
+1.7.9.5
 
-
->>
->> COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
->>
->> Is this the limitation of current OE? or am I just looking at the wrong corner?
->
-> i recently had to build an initrd too, and notice that as well... so i
-> am not sure exactly what that means. I am glad you asked... however if
-> you want to test an initrd, you can simply build *any* image and make
-> sure to build the 'cpio' from IMAGE_FSTYPES. you can then use the
-> generated cpio archive as an inited.
 
