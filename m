@@ -1,43 +1,36 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (unknown [216.82.251.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 24C6665E05
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-ee0-f41.google.com (unknown [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B581C66003
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 May 2014 12:47:51 +0000 (UTC)
-Received: from [216.82.249.131:2321] by server-14.bemta-12.messagelabs.com id
-	6D/89-04933-87DF9735; Mon, 19 May 2014 12:47:52 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-11.tower-28.messagelabs.com!1400503671!26974135!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 17250 invoked from network); 19 May 2014 12:47:52 -0000
-Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-11.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
-	19 May 2014 12:47:52 -0000
-Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Mon, 19 May 2014 07:47:56 -0500
-Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH02.digi.com
-	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Mon, 19 May 2014 07:47:50 -0500
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
-	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Mon, 19 May 2014 14:47:49 +0200
-Message-ID: <5379FD72.10407@digi.com>
-Date: Mon, 19 May 2014 14:47:46 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Tom King <ka6sox@gmail.com>, 
-	Martin Jansa <martin.jansa@gmail.com>
-References: <53612125.8030702@digi.com>	<1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>	<53613AA5.7040903@digi.com>	<20140430182049.GP2486@jama>
-	<5370A2F8.50802@digi.com>
-In-Reply-To: <5370A2F8.50802@digi.com>
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: Re: [meta-webserver] cherokee webserver SRC_URI broken again
+	Mon, 19 May 2014 13:38:30 +0000 (UTC)
+Received: by mail-ee0-f41.google.com with SMTP id t10so3648833eei.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 May 2014 06:38:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=upTkyDXXpmmiIShV/77X5Y/4ZpUTPyHJ9LAieYpJSMU=;
+	b=YO2+8mOBzhlVaeIctskZqt8JVl9M7wQzfE5g1OS0W9dW9CkrzrYC6tTP//L9J+sSyr
+	C9YKg7U07rUuhl0oTYKwtAIUjH2+3YAX9XwJULMhz3g9gt7WT7HVSkd/PzzphZV9JiGb
+	DZDlP4JWBrydTgrFTEBu9f/B0moWEh5St0NVcgxY4L4ctF0gJ1sPsVq1eVmaiV6cMa/3
+	osRET4nb3DsbPrOnQusL0fEV5VzkrqGXExkx+PnljFJwu0aAJB9zTdu4hctLbRMFrIn0
+	V6ZIjNIIxsroAaQHrLm931lLSIBaEA7dqOq9U8uWqR3DAOUiFksQKyEXZtIavaxZCpFW
+	9Qhg==
+X-Gm-Message-State: ALoCoQnPf/lsX7O5uOhxvlUWsQpZni6LS9EMsrbSNiaDQJ+ypucSPze41KbIlasTHTSgYqfEoPC/
+X-Received: by 10.14.199.8 with SMTP id w8mr45953903een.22.1400506710872;
+	Mon, 19 May 2014 06:38:30 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id a41sm535746eef.30.2014.05.19.06.38.29
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Mon, 19 May 2014 06:38:30 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 May 2014 15:38:21 +0200
+Message-Id: <1400506701-28686-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][dora backport][PATCH] qmake5_paths.bbclass: Use Qt version path for headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,39 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 May 2014 12:47:54 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 May 2014 13:38:33 -0000
 
-ping.
+From: Otavio Salvador <otavio@ossystems.com.br>
 
-On 12/05/14 12:31, Javier Viguera wrote:
-> Hi Martin,
->
-> On 30/04/14 20:20, Martin Jansa wrote:
->> Tom, can you please put it on sources.oe.org?
->>
->> You can find the archive on aruba.
->
-> Thanks for looking into this, but did this ever happen?
->
-> I'm still having problems with cherokee download. In the fetch log it
-> shows trying to get it from
-> 'http://sources.openembedded.org/cherokee-1.2.98.tar.gz', but still no
-> luck:
->
-> $ wget http://sources.openembedded.org/cherokee-1.2.98.tar.gz
-> --2014-05-12 12:29:11--
-> http://sources.openembedded.org/cherokee-1.2.98.tar.gz
-> Resolving sources.openembedded.org (sources.openembedded.org)...
-> 140.211.169.152
-> Connecting to sources.openembedded.org
-> (sources.openembedded.org)|140.211.169.152|:80... connected.
-> HTTP request sent, awaiting response... 404 Not Found
-> 2014-05-12 12:29:11 ERROR 404: Not Found.
->
-> -
-> Javier Viguera
-> Software Engineer
-> Digi International® Spain S.A.U.
+When looking for Qt5 headers we ought to use the Qt5 specific path. In
+case the distribution wants to have a flat tree it can set QT_DIR_NAME
+and it will still works as expected.
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ classes/qmake5_paths.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/classes/qmake5_paths.bbclass b/classes/qmake5_paths.bbclass
+index 2b5bf4b..8f91e93 100644
+--- a/classes/qmake5_paths.bbclass
++++ b/classes/qmake5_paths.bbclass
+@@ -5,7 +5,7 @@
+ QT_DIR_NAME ?= "qt5"
+ 
+ OE_QMAKE_PATH_PREFIX = "${prefix}"
+-OE_QMAKE_PATH_HEADERS = "${includedir}"
++OE_QMAKE_PATH_HEADERS = "${includedir}/${QT_DIR_NAME}"
+ OE_QMAKE_PATH_LIBS = "${libdir}"
+ OE_QMAKE_PATH_ARCHDATA = "${libdir}"
+ OE_QMAKE_PATH_DATA = "${datadir}"
+-- 
+1.9.0
+
 
