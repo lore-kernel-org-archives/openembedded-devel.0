@@ -1,24 +1,43 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (unknown [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D51D65FE5
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta12.messagelabs.com (unknown [216.82.251.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 24C6665E05
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 May 2014 11:26:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.98,866,1392159600"; d="scan'208";a="51415658"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 19 May 2014 13:26:59 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Mon, 19 May 2014 13:26:59 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Mon, 19 May 2014 13:26:59 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 May 2014 13:27:05 +0200
-Message-ID: <1400498825-24073-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
+	Mon, 19 May 2014 12:47:51 +0000 (UTC)
+Received: from [216.82.249.131:2321] by server-14.bemta-12.messagelabs.com id
+	6D/89-04933-87DF9735; Mon, 19 May 2014 12:47:52 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-11.tower-28.messagelabs.com!1400503671!26974135!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 17250 invoked from network); 19 May 2014 12:47:52 -0000
+Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-11.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
+	19 May 2014 12:47:52 -0000
+Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Mon, 19 May 2014 07:47:56 -0500
+Received: from dor-sms-exch01.digi.com (10.49.8.100) by MTK-SMS-XCH02.digi.com
+	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Mon, 19 May 2014 07:47:50 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-exch01.digi.com
+	(10.49.8.100) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Mon, 19 May 2014 14:47:49 +0200
+Message-ID: <5379FD72.10407@digi.com>
+Date: Mon, 19 May 2014 14:47:46 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-Subject: [PATCH] open-vcdiff: update to 0.8.4
+To: <openembedded-devel@lists.openembedded.org>, Tom King <ka6sox@gmail.com>, 
+	Martin Jansa <martin.jansa@gmail.com>
+References: <53612125.8030702@digi.com>	<1474887.TWMWxXuYEb@peggleto-mobl5.ger.corp.intel.com>	<53613AA5.7040903@digi.com>	<20140430182049.GP2486@jama>
+	<5370A2F8.50802@digi.com>
+In-Reply-To: <5370A2F8.50802@digi.com>
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: Re: [meta-webserver] cherokee webserver SRC_URI broken again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,113 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 May 2014 11:27:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 19 May 2014 12:47:54 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-wget is ignoring "Content-Disposition" http header, that's why I've added 'downloadfilename' in SRC_URI.
+ping.
 
-Note: Googlecode discarded their download section and moved to Googledrive.
-http://google-opensource.blogspot.fr/2013/05/a-change-to-google-code-download-service.html
-
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- .../open-vcdiff/files/aclocal-amflags-fix.patch    | 33 ----------------------
- .../open-vcdiff/open-vcdiff_0.8.3.bb               | 19 -------------
- .../open-vcdiff/open-vcdiff_0.8.4.bb               | 18 ++++++++++++
- 3 files changed, 18 insertions(+), 52 deletions(-)
- delete mode 100644 meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
- delete mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
- create mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
-
-diff --git a/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch b/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
-deleted file mode 100644
-index cd1efd7..0000000
---- a/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--Fix this error:
--
--| aclocal: error: non-option arguments are not accepted: '\'.
--
--Starting from commit v1.11-662-g52246cc, when given non-option arguments, aclocal rejects them, instead of silently ignoring them.
--
--Declare ACLOCAL_AMFLAGS as a single line because autoreconf can't handle multiline.
--
--Notice that ACLOCAL_AMFLAGS is deprecated.
--In configure.ac, AC_CONFIG_MACRO_DIRS should be used (instead of AC_CONFIG_MACRO_DIR) but requires automake 1.13+.
--
--Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-----
-- Makefile.am | 3 +--
-- 1 file changed, 1 insertion(+), 2 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 5c765c7..f4295a6 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,8 +1,7 @@
-- ## Process this file with automake to produce Makefile.in
-- 
-- # Make sure that when we re-make ./configure, we get the macros we need
---ACLOCAL_AMFLAGS = -I m4 \
---                  -I gflags/m4
--+ACLOCAL_AMFLAGS = -I m4 -I gflags/m4
-- 
-- # This is so we can #include <google/vcencoder.h> or <gtest/gtest.h>
-- AM_CPPFLAGS = -I$(top_srcdir)/src \
---- 
--1.8.5.4
--
-diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
-deleted file mode 100644
-index c6af25d..0000000
---- a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--SUMMARY = "An encoder/decoder for the VCDIFF (RFC3284) format"
--DESCRIPTION = "A library with a simple API is included, as well as a \
--               command-line executable that can apply the encoder and \
--               decoder to source, target, and delta files. \
--               A slight variation from the draft standard is defined \
--               to allow chunk-by-chunk decoding when only a partial \
--               delta file window is available."
--HOMEPAGE = "http://code.google.com/p/open-vcdiff/"
--SECTION = "console/utils"
--
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b2c8309843bc5297cfb4dc84f43f3ccc"
--
--SRC_URI = "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz \
--           file://aclocal-amflags-fix.patch"
--SRC_URI[md5sum] = "5f848e4916b407879f55e0ca74c3f6af"
--SRC_URI[sha256sum] = "b7e47db78866082e9e8b5782f5491092c8414f0acc0440aea03b14c7d1d3c371"
--
--inherit autotools
-diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
-new file mode 100644
-index 0000000..e6942d0
---- /dev/null
-+++ b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "An encoder/decoder for the VCDIFF (RFC3284) format"
-+DESCRIPTION = "A library with a simple API is included, as well as a \
-+               command-line executable that can apply the encoder and \
-+               decoder to source, target, and delta files. \
-+               A slight variation from the draft standard is defined \
-+               to allow chunk-by-chunk decoding when only a partial \
-+               delta file window is available."
-+HOMEPAGE = "http://code.google.com/p/open-vcdiff/"
-+SECTION = "console/utils"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ff820d4ddc1ba05b6fd37b41a21506f9"
-+
-+SRC_URI = "https://drive.google.com/uc?id=0B5WpIi2fQU1aNGJwVE9hUjU5clU&export=download;downloadfilename=${BP}.tar.gz"
-+SRC_URI[md5sum] = "5c0d378d907bebc38b51c3d7e4117011"
-+SRC_URI[sha256sum] = "2b142b1027fb0a62c41347600e01a53fa274dad15445a7da48083c830c3138b3"
-+
-+inherit autotools
--- 
-1.8.1.2
-
+On 12/05/14 12:31, Javier Viguera wrote:
+> Hi Martin,
+>
+> On 30/04/14 20:20, Martin Jansa wrote:
+>> Tom, can you please put it on sources.oe.org?
+>>
+>> You can find the archive on aruba.
+>
+> Thanks for looking into this, but did this ever happen?
+>
+> I'm still having problems with cherokee download. In the fetch log it
+> shows trying to get it from
+> 'http://sources.openembedded.org/cherokee-1.2.98.tar.gz', but still no
+> luck:
+>
+> $ wget http://sources.openembedded.org/cherokee-1.2.98.tar.gz
+> --2014-05-12 12:29:11--
+> http://sources.openembedded.org/cherokee-1.2.98.tar.gz
+> Resolving sources.openembedded.org (sources.openembedded.org)...
+> 140.211.169.152
+> Connecting to sources.openembedded.org
+> (sources.openembedded.org)|140.211.169.152|:80... connected.
+> HTTP request sent, awaiting response... 404 Not Found
+> 2014-05-12 12:29:11 ERROR 404: Not Found.
+>
+> -
+> Javier Viguera
+> Software Engineer
+> Digi International® Spain S.A.U.
 
