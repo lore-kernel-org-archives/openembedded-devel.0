@@ -1,34 +1,24 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f52.google.com (unknown [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id F09996A499
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (unknown [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D51D65FE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 May 2014 23:11:00 +0000 (UTC)
-Received: by mail-ee0-f52.google.com with SMTP id e53so2490917eek.39
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 May 2014 16:11:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=YFbF1l4G3DWox5qney07XymICKP7oQio7nhbVgS1PVQ=;
-	b=XV0V1mizAW6AK32Ag5rKhvCj+5uoytA5qYq4pakAcoHnhJc4Tewb+GZQi2cMKIFAoA
-	jBnxa4vlNknISao0SKN8Uc8c4iq118JCoWVuv5yHPMeQukFnPapAmP22c0EE1c/VhlYr
-	lIV77+pr0gao62V1/TrWBFvk8R9AVQnzFTmTA/xExmMu/kuLkFWdUFzfb42awUdY7xHk
-	hdTwSTcHZ1Qfj1A+wuIX2YHFYjItJRvYKKTlK5GYsqxK6KKBGv2YFxYszhClmVTsbaTI
-	+6IpevWEb3hM2d27ZC4owI/p0ad6h3cm5rrKUeUaJhKeWtS78Bnsw+JoC4CWIa0/ZrZW
-	4GqA==
-X-Received: by 10.14.2.131 with SMTP id 3mr34192470eef.45.1400367764502;
-	Sat, 17 May 2014 16:02:44 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host88-90-dynamic.180-80-r.retail.telecomitalia.it. [80.180.90.88])
-	by mx.google.com with ESMTPSA id
-	o49sm11571687eep.33.2014.05.17.16.02.43 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 17 May 2014 16:02:43 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 May 2014 01:02:30 +0200
-Message-Id: <1400367752-27224-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld][PATCH 1/3] gcw0: initial commit of machine config
+	Mon, 19 May 2014 11:26:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.98,866,1392159600"; d="scan'208";a="51415658"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 19 May 2014 13:26:59 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.2.318.1; Mon, 19 May 2014 13:26:59 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Mon, 19 May 2014 13:26:59 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 19 May 2014 13:27:05 +0200
+Message-ID: <1400498825-24073-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
+MIME-Version: 1.0
+Subject: [PATCH] open-vcdiff: update to 0.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,65 +32,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 May 2014 23:11:05 -0000
+X-List-Received-Date: Mon, 19 May 2014 11:27:02 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+wget is ignoring "Content-Disposition" http header, that's why I've added 'downloadfilename' in SRC_URI.
+
+Note: Googlecode discarded their download section and moved to Googledrive.
+http://google-opensource.blogspot.fr/2013/05/a-change-to-google-code-download-service.html
+
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 ---
- conf/machine/gcw0.conf | 44 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
- create mode 100644 conf/machine/gcw0.conf
+ .../open-vcdiff/files/aclocal-amflags-fix.patch    | 33 ----------------------
+ .../open-vcdiff/open-vcdiff_0.8.3.bb               | 19 -------------
+ .../open-vcdiff/open-vcdiff_0.8.4.bb               | 18 ++++++++++++
+ 3 files changed, 18 insertions(+), 52 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
+ delete mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
+ create mode 100644 meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
 
-diff --git a/conf/machine/gcw0.conf b/conf/machine/gcw0.conf
+diff --git a/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch b/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
+deleted file mode 100644
+index cd1efd7..0000000
+--- a/meta-oe/recipes-support/open-vcdiff/files/aclocal-amflags-fix.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-Fix this error:
+-
+-| aclocal: error: non-option arguments are not accepted: '\'.
+-
+-Starting from commit v1.11-662-g52246cc, when given non-option arguments, aclocal rejects them, instead of silently ignoring them.
+-
+-Declare ACLOCAL_AMFLAGS as a single line because autoreconf can't handle multiline.
+-
+-Notice that ACLOCAL_AMFLAGS is deprecated.
+-In configure.ac, AC_CONFIG_MACRO_DIRS should be used (instead of AC_CONFIG_MACRO_DIR) but requires automake 1.13+.
+-
+-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+----
+- Makefile.am | 3 +--
+- 1 file changed, 1 insertion(+), 2 deletions(-)
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index 5c765c7..f4295a6 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -1,8 +1,7 @@
+- ## Process this file with automake to produce Makefile.in
+- 
+- # Make sure that when we re-make ./configure, we get the macros we need
+--ACLOCAL_AMFLAGS = -I m4 \
+--                  -I gflags/m4
+-+ACLOCAL_AMFLAGS = -I m4 -I gflags/m4
+- 
+- # This is so we can #include <google/vcencoder.h> or <gtest/gtest.h>
+- AM_CPPFLAGS = -I$(top_srcdir)/src \
+--- 
+-1.8.5.4
+-
+diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
+deleted file mode 100644
+index c6af25d..0000000
+--- a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.3.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "An encoder/decoder for the VCDIFF (RFC3284) format"
+-DESCRIPTION = "A library with a simple API is included, as well as a \
+-               command-line executable that can apply the encoder and \
+-               decoder to source, target, and delta files. \
+-               A slight variation from the draft standard is defined \
+-               to allow chunk-by-chunk decoding when only a partial \
+-               delta file window is available."
+-HOMEPAGE = "http://code.google.com/p/open-vcdiff/"
+-SECTION = "console/utils"
+-
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b2c8309843bc5297cfb4dc84f43f3ccc"
+-
+-SRC_URI = "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz \
+-           file://aclocal-amflags-fix.patch"
+-SRC_URI[md5sum] = "5f848e4916b407879f55e0ca74c3f6af"
+-SRC_URI[sha256sum] = "b7e47db78866082e9e8b5782f5491092c8414f0acc0440aea03b14c7d1d3c371"
+-
+-inherit autotools
+diff --git a/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
 new file mode 100644
-index 0000000..801f634
+index 0000000..e6942d0
 --- /dev/null
-+++ b/conf/machine/gcw0.conf
-@@ -0,0 +1,44 @@
-+#@TYPE: Machine
-+#@NAME: GCW Zero
-+#@DESCRIPTION: Machine configuration for the Game Consoles Worldwide (GCW) Zero
++++ b/meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "An encoder/decoder for the VCDIFF (RFC3284) format"
++DESCRIPTION = "A library with a simple API is included, as well as a \
++               command-line executable that can apply the encoder and \
++               decoder to source, target, and delta files. \
++               A slight variation from the draft standard is defined \
++               to allow chunk-by-chunk decoding when only a partial \
++               delta file window is available."
++HOMEPAGE = "http://code.google.com/p/open-vcdiff/"
++SECTION = "console/utils"
 +
-+DEFAULTTUNE = "mips32r2el"
-+require conf/machine/include/tune-mips32r2.inc
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ff820d4ddc1ba05b6fd37b41a21506f9"
 +
-+# Factory default are RO images: add following line to your target image
-+# IMAGE_FEATURES += "read-only-rootfs"
-+IMAGE_FSTYPES ?= "tar.gz squashfs squashfs-xz"
++SRC_URI = "https://drive.google.com/uc?id=0B5WpIi2fQU1aNGJwVE9hUjU5clU&export=download;downloadfilename=${BP}.tar.gz"
++SRC_URI[md5sum] = "5c0d378d907bebc38b51c3d7e4117011"
++SRC_URI[sha256sum] = "2b142b1027fb0a62c41347600e01a53fa274dad15445a7da48083c830c3138b3"
 +
-+PREFERRED_PROVIDER_virtual/kernel = "linux-gcw0"
-+
-+KERNEL_IMAGETYPE = "vmlinuz.bin"
-+KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
-+
-+MACHINE_GUI_CLASS = "smallscreen"
-+MACHINE_DISPLAY_WIDTH_PIXELS = "320"
-+MACHINE_DISPLAY_HEIGHT_PIXELS = "240"
-+MACHINE_FEATURES = "apm alsa usbhost usbgadget wifi screen qvga vfat ext2"
-+
-+# Install kernel and symlink in /boot
-+MACHINE_ESSENTIAL_EXTRA_RDEPENDS_append = " kernel-base kernel-image"
-+MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
-+
-+# Install /boot/boot.cfg in target images and formfactor (psplash checks rotatio
-+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS_append = " kexecboot-cfg formfactor"
-+
-+SERIAL_CONSOLE = "57600 ttyS2"
-+
-+CMDLINE = "console=ttyS2,57600n8 console=tty0 rfkill.default_state=0"
-+
-+# dmesg 3.12
-+# Kernel command line: mem=0x0100M mem=0x0100M@0x30000000   fbcon=bind:0 hwvariant=v20_mddr_512mb panic=5 console=ttyS2,57600 console=tty0 boot=/dev/mmcblk0p1 loop0=/boot/rootfs.squashfs root=/dev/loop0 rfkill.default_state=0
-+
-+# mininit as init
-+#CMDLINE = "panic=5 console=ttyS2,57600 console=tty0 boot=/dev/mmcblk0p1 loop0=/boot/rootfs.squashfs root=/dev/loop0 rfkill.default_state=0"
-+
-+#https://github.com/pcercuei/mininit
-+#This simple program permits to use a romfs/squashfs image as the root filesystem of a linux system.
-+#You will need to specify three parameters on the kernel command line:
-+#- 'boot=X' where X is a comma-separated list of the possible locations for the filesystem on which is stored the image;
-+#- 'loop0=X' where X is the path to the image (e.g. /boot/rootfs.bin);
-+#- 'root=/dev/loop0' which defines the loopback mount as being the root file system.
++inherit autotools
 -- 
-1.9.1
+1.8.1.2
 
 
