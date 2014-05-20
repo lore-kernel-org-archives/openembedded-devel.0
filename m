@@ -1,30 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f176.google.com (unknown [209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7457265DA3
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (unknown [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id C9AE265D5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 19:28:29 +0000 (UTC)
-Received: by mail-ig0-f176.google.com with SMTP id hl10so5280968igb.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 12:28:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=93paK2TqV1m2VxqsuSgeCSiUO5rYp03HO7U3gH0Dpn8=;
-	b=QiOqOBAup+baxVhAGeW6beGaPPIUs84j2PecdQPkw3X44CWLS7wzsCl8y7SaqRsT2F
-	OowJEFxz0teFjfkBjnqsWAErY+3bifbnReRnxAF/EydGWeEqKQ/eRMpsi3ml5Rz8AwZL
-	se8J4iqh7iXDEAJMidSWbJXQoP3ttTZt8avy1UjP4w5NDNvxkY9csozhyiZGXeIYPMVf
-	1a8OW6+jUXH2xt4v0SXWC/LnkxJj3zTUKQj0CtUuGZVHc260v8dkexuE51l0OeZvt7qg
-	2cSEFD2e26W8z0HyLjPyoYJBKL0v4QMqFlDF5DR6gNpEI2aGvqH60Yrr6YOBX1fWinmo
-	cY9w==
-X-Received: by 10.43.62.204 with SMTP id xb12mr42307751icb.51.1400614110484;
-	Tue, 20 May 2014 12:28:30 -0700 (PDT)
+	Tue, 20 May 2014 19:56:36 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 516EFF8119A; Tue, 20 May 2014 13:56:37 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 5D7B2F81199;
+	Tue, 20 May 2014 13:56:35 -0600 (MDT)
+Message-ID: <537BB387.6090507@mlbassoc.com>
+Date: Tue, 20 May 2014 13:56:55 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-Received: by 10.50.117.33 with HTTP; Tue, 20 May 2014 12:28:00 -0700 (PDT)
-In-Reply-To: <20140520190315.GA32657@windriver.com>
+To: openembedded-devel@lists.openembedded.org
 References: <20140520190315.GA32657@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 May 2014 12:28:00 -0700
-Message-ID: <CAMKF1soVNe6OpNDX3C74awa1=vzP=wQpvcGYZ9y3=8FJVbzM3Q@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1soVNe6OpNDX3C74awa1=vzP=wQpvcGYZ9y3=8FJVbzM3Q@mail.gmail.com>
+In-Reply-To: <CAMKF1soVNe6OpNDX3C74awa1=vzP=wQpvcGYZ9y3=8FJVbzM3Q@mail.gmail.com>
 Subject: Re: [meta-oe] [PATCH] nodejs needs python-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -39,32 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 May 2014 19:28:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 May 2014 19:56:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 20, 2014 at 12:03 PM, Amy Fong <amy.fong@windriver.com> wrote:
-> -DEPENDS = "openssl"
-> +DEPENDS = "openssl python-native"
+On 2014-05-20 13:28, Khem Raj wrote:
+> On Tue, May 20, 2014 at 12:03 PM, Amy Fong <amy.fong@windriver.com> wrote:
+>> -DEPENDS = "openssl"
+>> +DEPENDS = "openssl python-native"
+>>
+>
+> may be it should inherit pythonnative
+>
+>>   SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+>>              file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
+>> @@ -28,6 +28,7 @@ do_configure () {
+>>
+>>   do_compile () {
+>>       export LD="${CXX}"
+>> +    export PATH=${STAGING_BINDIR_NATIVE}/python-native:$PATH
+
+If you inherit pythonnative, this 'export PATH...' is also not necessary
+
+>>       make BUILDTYPE=Release
+>>   }
+>>
+>> @@ -40,3 +41,5 @@ RDEPENDS_${PN}_class-native = ""
+>>
+>>   FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace"
+>>   BBCLASSEXTEND = "native"
+>> +
+>> +FILES_${PN} += "/usr/lib/*"
+>
+> make it ${libdir}/* here
 >
 
-may be it should inherit pythonnative
-
->  SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
->             file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
-> @@ -28,6 +28,7 @@ do_configure () {
->
->  do_compile () {
->      export LD="${CXX}"
-> +    export PATH=${STAGING_BINDIR_NATIVE}/python-native:$PATH
->      make BUILDTYPE=Release
->  }
->
-> @@ -40,3 +41,5 @@ RDEPENDS_${PN}_class-native = ""
->
->  FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace"
->  BBCLASSEXTEND = "native"
-> +
-> +FILES_${PN} += "/usr/lib/*"
-
-make it ${libdir}/* here
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
