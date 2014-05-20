@@ -1,31 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f177.google.com (unknown [209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 382CA65FDC
+Return-Path: <amy.fong@windriver.com>
+Received: from mail.windriver.com (unknown [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E9FB65D0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 16:18:12 +0000 (UTC)
-Received: by mail-ig0-f177.google.com with SMTP id l13so940252iga.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 09:18:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=if9zrvfZkAGo2ACBEOFPxOOsGudwnscCTeHF9dcNzaI=;
-	b=x3GtRYvJJZBZvko2u5oH4QUjHRfhpCWVdeFMbq0Txhks/GuzISbxszRSAJlo2mXGhB
-	3UtgQ12HpNgQPtfDX5UkYn27mFdZ5cwz/VMNLyg37h0nc8cJXzijdG/j3hbt5Wlxc/4m
-	4fKfNeaLXRRwgNwkRAYf+FGw26o+ZaXtZtoQnVqWeepc0AX+a0JK0/SO1t1VPkT/jtWP
-	IAKPv6AZ0y2L8fyWVHPS0kWbQh0mm04n9z/iB80c2Xi+tWo2Klt5rf3OPRKoLMHy4t8L
-	K8dN92kRP5cN1IbH2NkqXFandzsZ3RsFdEkurdPcf/S5kHP0m9k4hKwdkXynJS/rE+WU
-	iP8w==
-X-Received: by 10.43.62.204 with SMTP id xb12mr41061852icb.51.1400602693961;
-	Tue, 20 May 2014 09:18:13 -0700 (PDT)
+	Tue, 20 May 2014 19:03:15 +0000 (UTC)
+Received: from yow-dellw-af (yow-dellw-af.wrs.com [128.224.56.22])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s4KJ3GD6028665
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NO);
+	Tue, 20 May 2014 12:03:16 -0700 (PDT)
+Received: from afong by yow-dellw-af with local (Exim 4.82)
+	(envelope-from <amy.fong@windriver.com>)
+	id 1WmpJj-0000KQ-K4; Tue, 20 May 2014 15:03:15 -0400
+Date: Tue, 20 May 2014 15:03:15 -0400
+From: Amy Fong <amy.fong@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140520190315.GA32657@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.117.33 with HTTP; Tue, 20 May 2014 09:17:43 -0700 (PDT)
-In-Reply-To: <1400590576-21418-1-git-send-email-Matthieu.Crapet@ingenico.com>
-References: <1400590576-21418-1-git-send-email-Matthieu.Crapet@ingenico.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 May 2014 09:17:43 -0700
-Message-ID: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] faac: fix S!=B failure
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-oe] [PATCH] nodejs needs python-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,20 +30,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 May 2014 16:18:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 May 2014 19:03:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, May 20, 2014 at 5:56 AM, Matthieu Crapet
-<Matthieu.Crapet@ingenico.com> wrote:
-> -SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
->             file://build-fix.patch"
->
->  SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
->  SRC_URI[sha256sum] = "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"
->
-> -PACKAGES =+ "lib${PN} lib${PN}-dev"
-> +PACKAGES =+ "lib${BPN} lib${BPN}-dev"
+From c13975829fde23138a35d63f2b641fad0fde8c72 Mon Sep 17 00:00:00 2001
+From: Amy Fong <amy.fong@windriver.com>
+Date: Tue, 20 May 2014 14:58:54 -0400
+Subject: [PATCH] nodejs needs python-native
 
-these changes should be mentioned in commit message too.
+nodejs should use python from python-native package. On some hosts, the
+default python is missing bz2 support.
+
+Signed-off-by: Amy Fong <amy.fong@windriver.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+index 996d68e..75a9ca4 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=95a589a3257ab7dfe37d8a8379e3c72d"
+ 
+-DEPENDS = "openssl"
++DEPENDS = "openssl python-native"
+ 
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+            file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
+@@ -28,6 +28,7 @@ do_configure () {
+ 
+ do_compile () {
+     export LD="${CXX}"
++    export PATH=${STAGING_BINDIR_NATIVE}/python-native:$PATH
+     make BUILDTYPE=Release
+ }
+ 
+@@ -40,3 +41,5 @@ RDEPENDS_${PN}_class-native = ""
+ 
+ FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace"
+ BBCLASSEXTEND = "native"
++
++FILES_${PN} += "/usr/lib/*"
+-- 
+2.0.0.rc0
+
 
