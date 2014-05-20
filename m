@@ -1,42 +1,35 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-X-Greylist: delayed 390 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 20 May 2014 10:16:54 UTC
-Received: from mail1.bemta3.messagelabs.com (unknown [195.245.230.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DCC665F1E
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (unknown [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 857A2605B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 10:16:54 +0000 (UTC)
-Received: from [85.158.137.3:38863] by server-16.bemta-3.messagelabs.com id
-	99/09-13481-01A2B735; Tue, 20 May 2014 10:10:24 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-11.tower-38.messagelabs.com!1400580541!4042703!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 4371 invoked from network); 20 May 2014 10:09:01 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-11.tower-38.messagelabs.com with RC4-SHA encrypted SMTP;
-	20 May 2014 10:09:01 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Tue, 20 May 2014
-	11:09:00 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: OpenEmbedded Developer Mailing List
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 May 2014 11:09:00 +0100
-Thread-Topic: [oe] [poky]: libusb1_1.0.18.bb: configure: error: "udev
-	support	requested but libudev not installed"
-Thread-Index: AQHPcZ3Z7EEv54LSrEavlmWAQEXIa5tJQfzQ
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45D6A@GBTWK10E001.Technology.local>
-References: <5d1edcab304d4fbb8e6349d49bb62e98@BL2PR04MB852.namprd04.prod.outlook.com>
-In-Reply-To: <5d1edcab304d4fbb8e6349d49bb62e98@BL2PR04MB852.namprd04.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-Subject: Re: [poky]: libusb1_1.0.18.bb: configure: error: "udev support	requested but libudev not installed"
+	Tue, 20 May 2014 12:31:14 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1WmjCM-0002hZ-SD for openembedded-devel@lists.openembedded.org;
+	Tue, 20 May 2014 14:31:14 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 May 2014 14:31:14 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 May 2014 14:31:14 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 20 May 2014 14:31:04 +0200
+Message-ID: <llfhu8$d1s$1@ger.gmane.org>
+References: <1400568570-23824-1-git-send-email-fathi.boudra@linaro.org>
+	<BFBFE57F-788E-4621-B1F0-25662F02737B@dominion.thruhere.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+In-Reply-To: <BFBFE57F-788E-4621-B1F0-25662F02737B@dominion.thruhere.net>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe][PATCH] pm-qa: update to 0.4.10 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,45 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 May 2014 10:17:00 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 May 2014 12:31:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
->configure: error: "udev support requested but libudev not installed"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-We are seeing the same problem.
-This may be because the patch "libusb1: disable floating dependency on udev=
-" has not been committed.
-May I please request this is done soon as our autobuilder has been broken f=
-or 4 nights now
+Koen Kooi schreef op 20-05-14 09:09:
+> 
+> Op 20 mei 2014, om 08:49 heeft Fathi Boudra <fathi.boudra@linaro.org> het
+> volgende geschreven:
+> 
+>> Update SRC_URI, /tools/ is deprecated.
+>> 
+>> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org> --- 
+>> meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb | 8 ++++---- 1 file
+>> changed, 4 insertions(+), 4 deletions(-)
+>> 
+>> diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+>> b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb index f6ffcb6..9243340
+>> 100644 --- a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb +++
+>> b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb @@ -4,14 +4,14 @@
+>> HOMEPAGE =
+>> "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test 
+>> LICENSE = "GPLv2" LIC_FILES_CHKSUM =
+>> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> 
+>> -PV = "0.4.9" +PV = "0.4.10"
+>> 
+>> BRANCH ?= "master"
+>> 
+>> -# Corresponds to tag pm-qa-v0.4.9 -SRCREV =
+>> "c54941a9bbaac33e44e6d0c7f5344e21102642cf" +# Corresponds to tag
+>> pm-qa-v0.4.10 +SRCREV = "03a22d5ad7deb6021b2ec1d546a960d8a9878255"
+>> 
+>> -SRC_URI =
+>> "git://git.linaro.org/tools/pm-qa.git;protocol=git;branch=${BRANCH}" 
+>> +SRC_URI =
+>> "git://git.linaro.org/power/pm-qa.git;protocol=git;branch=${BRANCH}"
+> 
+> Nitpick: protocol=http might be better, git:// is flaky on
+> git.linaro.org.
 
---
-Nick
+I have no problems with merging this with protocol=git
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
+iD8DBQFTe0sIMkyGM64RGpERAuJqAJ0Q7oEp1P+ryEgYaoqgtmVHls9oNQCeMHl3
+f7YTME2Qtvw2k4yRxhX3HyY=
+=1O0V
+-----END PGP SIGNATURE-----
 
-
-
-
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
 
