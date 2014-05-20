@@ -1,24 +1,31 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (unknown [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 009B365FDC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f177.google.com (unknown [209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 382CA65FDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 May 2014 12:56:09 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.98,874,1392159600"; d="scan'208";a="51488021"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 20 May 2014 14:56:10 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Tue, 20 May 2014 14:56:10 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Tue, 20 May 2014 14:56:10 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 May 2014 14:56:16 +0200
-Message-ID: <1400590576-21418-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
+	Tue, 20 May 2014 16:18:12 +0000 (UTC)
+Received: by mail-ig0-f177.google.com with SMTP id l13so940252iga.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 May 2014 09:18:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=if9zrvfZkAGo2ACBEOFPxOOsGudwnscCTeHF9dcNzaI=;
+	b=x3GtRYvJJZBZvko2u5oH4QUjHRfhpCWVdeFMbq0Txhks/GuzISbxszRSAJlo2mXGhB
+	3UtgQ12HpNgQPtfDX5UkYn27mFdZ5cwz/VMNLyg37h0nc8cJXzijdG/j3hbt5Wlxc/4m
+	4fKfNeaLXRRwgNwkRAYf+FGw26o+ZaXtZtoQnVqWeepc0AX+a0JK0/SO1t1VPkT/jtWP
+	IAKPv6AZ0y2L8fyWVHPS0kWbQh0mm04n9z/iB80c2Xi+tWo2Klt5rf3OPRKoLMHy4t8L
+	K8dN92kRP5cN1IbH2NkqXFandzsZ3RsFdEkurdPcf/S5kHP0m9k4hKwdkXynJS/rE+WU
+	iP8w==
+X-Received: by 10.43.62.204 with SMTP id xb12mr41061852icb.51.1400602693961;
+	Tue, 20 May 2014 09:18:13 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] faac: fix S!=B failure
+Received: by 10.50.117.33 with HTTP; Tue, 20 May 2014 09:17:43 -0700 (PDT)
+In-Reply-To: <1400590576-21418-1-git-send-email-Matthieu.Crapet@ingenico.com>
+References: <1400590576-21418-1-git-send-email-Matthieu.Crapet@ingenico.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 20 May 2014 09:17:43 -0700
+Message-ID: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] faac: fix S!=B failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,38 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 May 2014 12:56:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 May 2014 16:18:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- meta-multimedia/recipes-multimedia/faac/faac_1.28.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Tue, May 20, 2014 at 5:56 AM, Matthieu Crapet
+<Matthieu.Crapet@ingenico.com> wrote:
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
+> +SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
+>             file://build-fix.patch"
+>
+>  SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
+>  SRC_URI[sha256sum] = "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"
+>
+> -PACKAGES =+ "lib${PN} lib${PN}-dev"
+> +PACKAGES =+ "lib${BPN} lib${BPN}-dev"
 
-diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-index c7dcdb9..d96c1a4 100644
---- a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-+++ b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-@@ -4,15 +4,15 @@ LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
-            file://build-fix.patch"
- 
- SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
- SRC_URI[sha256sum] = "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"
- 
--PACKAGES =+ "lib${PN} lib${PN}-dev"
-+PACKAGES =+ "lib${BPN} lib${BPN}-dev"
- 
- FILES_${PN} = " ${bindir}/faac "
- FILES_lib${PN} = " ${libdir}/libfaac.so.*"
--- 
-1.8.1.2
-
+these changes should be mentioned in commit message too.
 
