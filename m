@@ -1,36 +1,36 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f48.google.com (unknown [209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E815660F6
+Received: from mail-pa0-f53.google.com (unknown [209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A2C36610F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 07:41:50 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id rd3so1157262pab.35
+	Wed, 21 May 2014 07:41:58 +0000 (UTC)
+Received: by mail-pa0-f53.google.com with SMTP id kp14so1148394pab.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 00:41:52 -0700 (PDT)
+	Wed, 21 May 2014 00:42:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=g2VXv1M//M+1wkgHj3CVf7AWkfkNRNhDeTSFxp/qGts=;
-	b=G7YiM05DeSqfUGUHmNwsUbS7tRZ2vlkUNiBdm24zEOJwMOWAJ70roYGU9KqOF8VZpj
-	tkfFkZiHEjTCcs2A3w7kC6pTMRCHSMVzZr20PfAzuaELnvwFa+WyvQtmTo1BJlOveAiH
-	zU4zmjqmIGeWe7tc//0YlpZoy/tcrTFuez/9D3NaRP247fLHjzH6n0k1HQCWz/H1FnuM
-	aNZi8j5/NzqSEqq4yTPWSgolb6gRjrALb88Al5WwDOj9aaXu2iDHcAvrsdGyxXX8zIGk
-	erC6M1o0agkorvwIs7UKRKuI6sCoKA0yCsR6lsMSRCsYMFoQv9BM1gqN4YUTNrAxkrcy
-	rpcg==
-X-Received: by 10.68.194.229 with SMTP id hz5mr56065969pbc.91.1400658112083;
-	Wed, 21 May 2014 00:41:52 -0700 (PDT)
+	bh=CyMpg2VpTTCEgrEojDysN25vSuGmjEpkBRBPyema7oQ=;
+	b=bmL8uCXNrxbLn1zGyzUjnwtL1rQ9DHhtA8OrqttRtuvK0c5ryvoDTgEbRv28iChCS1
+	uJ86RXEpBn5EGnxjOI478Gr7xjVeqCd1WWuFjuS3NwcPKQle8aEq2oQ7iqy4/Z0R7gqQ
+	UX3iBGHsI27AZ7FyC65/Gp8BmcUKImg+PUBVO97oaDXowYat9lZpszGTuO8dzysWqt4D
+	LbxEfb4bAFFEWiQKGwgFBAkifkHfejfV1hD/XJ5yaFC6LOMZ8ManoOcDKG9Xc1togRA0
+	4IhzDUXGASVVUokJFgEZkzF2eBvVrkuNGXcxO/zsxcoyA/Hf2OEYTOtXsQQoJP1Wt/tC
+	sJyQ==
+X-Received: by 10.66.122.208 with SMTP id lu16mr55891551pab.129.1400658120103; 
+	Wed, 21 May 2014 00:42:00 -0700 (PDT)
 Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id it4sm6669337pbc.39.2014.05.21.00.41.49
+	by mx.google.com with ESMTPSA id it4sm6669337pbc.39.2014.05.21.00.41.57
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 May 2014 00:41:50 -0700 (PDT)
+	Wed, 21 May 2014 00:41:58 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 May 2014 00:43:38 -0700
-Message-Id: <1400658223-15804-6-git-send-email-ticotimo@gmail.com>
+Date: Wed, 21 May 2014 00:43:41 -0700
+Message-Id: <1400658223-15804-9-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
 In-Reply-To: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
 References: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH v4 05/10] libextutils-helper-perl: add 0.022
+Subject: [meta-perl][PATCH v4 08/10] libextutils-cppguess-perl: add 0.07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,54 +44,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 07:41:51 -0000
+X-List-Received-Date: Wed, 21 May 2014 07:42:00 -0000
 
 From: Tim Orling <TicoTimo@gmail.com>
 
 [Description from CPAN]
-This module provides various portable helper function for
-module building modules.
+ExtUtils::CppGuess attempts to guess the system's C++
+compiler that is compatible with the C compiler that your perl was built
+with.
 
 * Add ${CPAN_MIRROR} option
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../libextutils/libextutils-helpers-perl_0.022.bb  | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
+ .../libextutils/libextutils-cppguess-perl_0.07.bb  | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
 
-diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
 new file mode 100644
-index 0000000..055f571
+index 0000000..47e0904
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "ExtUtils::Helpers - Various portability utilities for module builders"
-+DESCRIPTION = "This module provides various portable helper function for module building modules."
++++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "ExtUtils::CppGuess - guess C++ compiler and flags"
++DESCRIPTION = "ExtUtils::CppGuess attempts to guess the system's C++ \
++compiler that is compatible with the C compiler that your perl was built \
++with. \
++It can generate the necessary options to the Module::Build constructor or \
++to ExtUtils::MakeMaker's WriteMakefile function."
 +SECTION = "libs"
 +
-+HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
++HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
 +
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=307057ce232899f5caa8858560c7274b"
++LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
 +
-+SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
-+SRC_URI[md5sum] = "cf4fd6f8caa6daac33b1111c9e93162b"
-+SRC_URI[sha256sum] = "d3f8cf700fb3414ca1260089755cbf64041455e4b744110677b1ba5bb9a3aa95"
++SRC_URI = "${CPAN_MIRROR}/authors/id/S/SM/SMUELLER/ExtUtils-CppGuess-${PV}.tar.gz"
++SRC_URI[md5sum] = "350dd7c661189ea770d6c9354ebbc6c2"
++SRC_URI[sha256sum] = "1cd83ee8452351219b987c79ddb25cc25ee8c396318ba36c5211a92b5c87e7a8"
 +
-+S = "${WORKDIR}/ExtUtils-Helpers-${PV}"
++S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
 +
-+inherit cpan
++inherit cpan_build
 +
-+RDEPENDS_${PN} = " perl-module-file-copy \
++do_install () {
++        cpan_build_do_install
++}
++
++RDEPENDS_${PN} = " libcapture-tiny-perl \
++                   perl-module-scalar-util \
++                   perl-module-io-file \
 +                   perl-module-extutils-makemaker \
++                   perl-module-file-spec \
 +                   perl-module-exporter \
 +                   perl-module-carp \
-+                   perl-module-test-more \
-+                   perl-module-text-parsewords \
-+                   perl-module-module-load \
 +                   perl-module-file-temp \
-+                   perl-module-file-spec-functions \
++                   perl-module-lib \
++                   perl-module-build \
 +"
 +
 +BBCLASSEXTEND = "native"
