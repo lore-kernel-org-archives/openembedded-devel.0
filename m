@@ -1,37 +1,37 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f41.google.com (unknown [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 0327665F1E
+Received: from mail-ee0-f51.google.com (unknown [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 10DE765DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 21:30:57 +0000 (UTC)
-Received: by mail-ee0-f41.google.com with SMTP id t10so1985936eei.14
+	Wed, 21 May 2014 21:31:01 +0000 (UTC)
+Received: by mail-ee0-f51.google.com with SMTP id e51so1933661eek.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 14:30:58 -0700 (PDT)
+	Wed, 21 May 2014 14:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Wc4+3uqTPUHDECyqhrmDJ+LpQI6W0PcvUNsBUvhKbqg=;
-	b=rlznxjMZim5NvmorcbVoL1jTGbN6GFXPPlQ3EyaVpB6i0FGm9dB6SGSECmdeXFfJ50
-	FleiRfz72j1VhuSCtb03L6M2xxSY13vt/oOEiV4jSb0WBfmP29LYZ4W7GIT4vIxxc/XO
-	6Ebb5KgqTpi64MxiypE7BbHz0Ep22tQ+2djxSFiHgMDsQtgnNo0Ujh2e5yd+PHcswP7A
-	g5dQLVv5cq2WHB1+UlAhHHLV/y/mcBvX+fQsDizZNgriu0wJl61nBjZCdewWxkkQhzCZ
-	bTjkbvIiK4lpAb3Cy0DmD8T2mCAjmzusXLWSuvcidAG4WcMIa1X0M4vYBdH/Z8UNAKI1
-	Y5MA==
-X-Received: by 10.15.51.193 with SMTP id n41mr7391870eew.80.1400707858538;
-	Wed, 21 May 2014 14:30:58 -0700 (PDT)
+	bh=MblLQIFFy4ZVBQH+OPbEdG4d72+n0A8CjqseFWcuMds=;
+	b=ap6VTXgiSNFTF9kLFWVX0KZubl8ToUdTB751gYvjF4FVGqHBH+9Fe93Ee5/teNkCuO
+	wjhhdxaYIHoTN8rD11GxKbAg7RFgQTbYwUXlUhTyOBFZZunim/w+gcfh7Se8QzsDiVGB
+	1U3XYCf19hw2SCwijLWEnS9mg+Gmj4AaibU2SASK38rRBpJzbAL/6SUd69XoNG5hE4ah
+	9Ifzsr1z3fuXEW6NGMK/pB21n3I6wnQBM5X0E4f9U6VbKyVx7+QLtzVamg+Yij5Ixc4A
+	VTYyJCWlY72jvF0AqANAyXa6qlPlPqPkvs/2L6ZaR6HW+XcSunjylUzRsblVIcgjORHU
+	hxlA==
+X-Received: by 10.14.95.129 with SMTP id p1mr7139099eef.102.1400707862272;
+	Wed, 21 May 2014 14:31:02 -0700 (PDT)
 Received: from mizar.208.67.220.220
 	(host253-196-dynamic.45-79-r.retail.telecomitalia.it.
 	[79.45.196.253])
-	by mx.google.com with ESMTPSA id o5sm14784166eeg.8.2014.05.21.14.30.57
+	by mx.google.com with ESMTPSA id o5sm14784166eeg.8.2014.05.21.14.31.00
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 May 2014 14:30:57 -0700 (PDT)
+	Wed, 21 May 2014 14:31:01 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 May 2014 23:26:21 +0200
-Message-Id: <1400707582-7786-2-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 21 May 2014 23:26:22 +0200
+Message-Id: <1400707582-7786-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1400707582-7786-1-git-send-email-andrea.adami@gmail.com>
 References: <1400707582-7786-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/3] h1940: prefer linux-yocto kernel
+Subject: [meta-handheld][PATCH 3/3] linux-yocto-dev: remove development 3.14 kernel recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +45,1793 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 21:30:58 -0000
+X-List-Received-Date: Wed, 21 May 2014 21:31:02 -0000
 
-h1940 was using linux-yocto-dev, waiting for inclusion in linux-yocto_3.14.
-Support is now present so we can switch back to the standard kernel provider.
+The machines using it before are now preferring linux-yocto.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/h1940.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-kernel/linux/linux-yocto-dev.bbappend      |  37 --
+ ...-s3c24xx-DMA-don-t-use-autoreload-feature.patch | 683 ---------------------
+ .../h1940/0002-s3cmci-minor-fixups.patch           |  40 --
+ ...10-drop-RFKILL-driver-for-H1940-bluetooth.patch | 200 ------
+ ...mtd-nand-s3c2410-add-iPAQ-specific-layout.patch |  28 -
+ ...005-ARM-s3c2410-Add-nand-device-for-h1940.patch | 114 ----
+ ...006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch |  41 --
+ ...-ARM-s3c2410-unlock-reset-button-on-H1940.patch |  49 --
+ ...08-ARM-h1940-add-bluetooth-RF-kill-switch.patch |  75 ---
+ .../h1940/0009-rfkill-add-IR-type.patch            |  51 --
+ ...fkill_gpio-add-support-for-inverted-GPIOs.patch |  59 --
+ .../h1940/0011-ARM-h1940-add-IR-switch.patch       |  61 --
+ ...012-ARM-h1940-increase-oversampling-shift.patch |  29 -
+ .../linux/linux-yocto-dev/h1940/defconfig          | 200 ------
+ 14 files changed, 1667 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev.bbappend
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0002-s3cmci-minor-fixups.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0009-rfkill-add-IR-type.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0011-ARM-h1940-add-IR-switch.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
+ delete mode 100644 recipes-kernel/linux/linux-yocto-dev/h1940/defconfig
 
-diff --git a/conf/machine/h1940.conf b/conf/machine/h1940.conf
-index 5945363..7a6b5a2 100644
---- a/conf/machine/h1940.conf
-+++ b/conf/machine/h1940.conf
-@@ -9,7 +9,7 @@
- require conf/machine/include/tune-arm920t.inc
- 
- # Set preferred providers
--PREFERRED_PROVIDER_virtual/kernel = "linux-yocto-dev"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
- 
- KERNEL_IMAGETYPE = "uImage"
- UBOOT_LOADADDRESS = "0x30108000"
+diff --git a/recipes-kernel/linux/linux-yocto-dev.bbappend b/recipes-kernel/linux/linux-yocto-dev.bbappend
+deleted file mode 100644
+index 4594c6d..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev.bbappend
++++ /dev/null
+@@ -1,37 +0,0 @@
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-dev:${THISDIR}/${PN}:${THISDIR}/files:"
+-
+-COMPATIBLE_MACHINE .= "|h1940"
+-
+-# Override kernel features
+-#KERNEL_EXTRA_FEATURES ?= "features/netfilter/netfilter.scc"
+-
+-KERNEL_EXTRA_FEATURES_h1940 ?= ""
+-KMACHINE_h1940 = "h1940"
+-
+-# Note: Providing "defconfig" we bypass the linux-yocto processing
+-# re-expand the defconfig produced by "make_savedefconfig"
+-KCONFIG_MODE_h1940 = "--alldefconfig"
+-
+-SRC_URI_append_h1940 = " \
+-           file://defconfig \
+-           file://0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch \
+-           file://0002-s3cmci-minor-fixups.patch \
+-           file://0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch \
+-           file://0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch \
+-           file://0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch \
+-           file://0005-ARM-s3c2410-Add-nand-device-for-h1940.patch \
+-           file://0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch \
+-           file://0009-rfkill-add-IR-type.patch \
+-           file://0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch \
+-           file://0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch \
+-           file://0011-ARM-h1940-add-IR-switch.patch \
+-           file://0012-ARM-h1940-increase-oversampling-shift.patch \
+-           file://qvga/logo_linux_clut224.ppm.bz2 \
+-           "
+-
+-do_configure_prepend() {
+-
+-    if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
+-        install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm ${WORKDIR}/linux/drivers/video/logo/logo_linux_clut224.ppm
+-    fi
+-}
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
+deleted file mode 100644
+index 4123823..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0001-s3c24xx-DMA-don-t-use-autoreload-feature.patch
++++ /dev/null
+@@ -1,683 +0,0 @@
+-From 9befdde54ce7e5e45303fb68eb941442ff6d7c9e Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:05:05 +0300
+-Subject: [PATCH 01/12] s3c24xx: DMA: don't use autoreload feature
+-
+-Some integrated DMA-capable hardware doesn't like autoreload
+-feature of s3c24xx DMA-engine, that's why s3cmci driver
+-didn't work with DMA transfers enabled.
+-
+-I rewrote DMA driver not to use autoreload feature and removed
+-all pre-loading features. Buffer re-load is fast enought to perform
+-it in IRQ handler, and anyway I don't see any reason to waste CPU
+-cycles on waiting for buffer load. Driver is much simplier now,
+-it was tested with s3cmci and s3c24xx-i2s drivers on s3c2442 and
+-s3c2410 SoCs and works just nice
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/dma.c              | 445 +++++--------------------------
+- arch/arm/mach-s3c24xx/include/mach/dma.h |  15 +-
+- 2 files changed, 71 insertions(+), 389 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c24xx/dma.c b/arch/arm/mach-s3c24xx/dma.c
+-index 4a65cba..adbcb91 100644
+---- a/arch/arm/mach-s3c24xx/dma.c
+-+++ b/arch/arm/mach-s3c24xx/dma.c
+-@@ -131,70 +131,6 @@ dmadbg_showregs(const char *fname, int line, struct s3c2410_dma_chan *chan)
+- #define dbg_showchan(chan) do { } while(0)
+- #endif /* CONFIG_S3C2410_DMA_DEBUG */
+- 
+--/* s3c2410_dma_stats_timeout
+-- *
+-- * Update DMA stats from timeout info
+--*/
+--
+--static void
+--s3c2410_dma_stats_timeout(struct s3c2410_dma_stats *stats, int val)
+--{
+--	if (stats == NULL)
+--		return;
+--
+--	if (val > stats->timeout_longest)
+--		stats->timeout_longest = val;
+--	if (val < stats->timeout_shortest)
+--		stats->timeout_shortest = val;
+--
+--	stats->timeout_avg += val;
+--}
+--
+--/* s3c2410_dma_waitforload
+-- *
+-- * wait for the DMA engine to load a buffer, and update the state accordingly
+--*/
+--
+--static int
+--s3c2410_dma_waitforload(struct s3c2410_dma_chan *chan, int line)
+--{
+--	int timeout = chan->load_timeout;
+--	int took;
+--
+--	if (chan->load_state != S3C2410_DMALOAD_1LOADED) {
+--		printk(KERN_ERR "dma%d: s3c2410_dma_waitforload() called in loadstate %d from line %d\n", chan->number, chan->load_state, line);
+--		return 0;
+--	}
+--
+--	if (chan->stats != NULL)
+--		chan->stats->loads++;
+--
+--	while (--timeout > 0) {
+--		if ((dma_rdreg(chan, S3C2410_DMA_DSTAT) << (32-20)) != 0) {
+--			took = chan->load_timeout - timeout;
+--
+--			s3c2410_dma_stats_timeout(chan->stats, took);
+--
+--			switch (chan->load_state) {
+--			case S3C2410_DMALOAD_1LOADED:
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				break;
+--
+--			default:
+--				printk(KERN_ERR "dma%d: unknown load_state in s3c2410_dma_waitforload() %d\n", chan->number, chan->load_state);
+--			}
+--
+--			return 1;
+--		}
+--	}
+--
+--	if (chan->stats != NULL) {
+--		chan->stats->timeout_failed++;
+--	}
+--
+--	return 0;
+--}
+--
+- /* s3c2410_dma_loadbuffer
+-  *
+-  * load a buffer, and update the channel state
+-@@ -204,66 +140,33 @@ static inline int
+- s3c2410_dma_loadbuffer(struct s3c2410_dma_chan *chan,
+- 		       struct s3c2410_dma_buf *buf)
+- {
+--	unsigned long reload;
+--
+- 	if (buf == NULL) {
+- 		dmawarn("buffer is NULL\n");
+- 		return -EINVAL;
+- 	}
+- 
+--	pr_debug("s3c2410_chan_loadbuffer: loading buff %p (0x%08lx,0x%06x)\n",
+-+	pr_debug("%s: loading buff %p (0x%08lx,0x%06x)\n", __func__,
+- 		 buf, (unsigned long)buf->data, buf->size);
+- 
+- 	/* check the state of the channel before we do anything */
+- 
+--	if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--		dmawarn("load_state is S3C2410_DMALOAD_1LOADED\n");
+--	}
+--
+--	if (chan->load_state == S3C2410_DMALOAD_1LOADED_1RUNNING) {
+--		dmawarn("state is S3C2410_DMALOAD_1LOADED_1RUNNING\n");
+--	}
+-+	if (chan->load_state != S3C2410_DMALOAD_NONE)
+-+		printk(KERN_ERR "dma%d: channel already has buffer loaded\n",
+-+			   chan->number);
+- 
+--	/* it would seem sensible if we are the last buffer to not bother
+--	 * with the auto-reload bit, so that the DMA engine will not try
+--	 * and load another transfer after this one has finished...
+--	 */
+--	if (chan->load_state == S3C2410_DMALOAD_NONE) {
+--		pr_debug("load_state is none, checking for noreload (next=%p)\n",
+--			 buf->next);
+--		reload = (buf->next == NULL) ? S3C2410_DCON_NORELOAD : 0;
+--	} else {
+--		//pr_debug("load_state is %d => autoreload\n", chan->load_state);
+--		reload = S3C2410_DCON_AUTORELOAD;
+--	}
+--
+--	if ((buf->data & 0xf0000000) != 0x30000000) {
+-+	if ((buf->data & 0xf0000000) != 0x30000000)
+- 		dmawarn("dmaload: buffer is %p\n", (void *)buf->data);
+--	}
+- 
+- 	writel(buf->data, chan->addr_reg);
+- 
+- 	dma_wrreg(chan, S3C2410_DMA_DCON,
+--		  chan->dcon | reload | (buf->size/chan->xfer_unit));
+-+		  chan->dcon | S3C2410_DCON_NORELOAD |
+-+		  (buf->size/chan->xfer_unit));
+- 
+--	chan->next = buf->next;
+-+	chan->curr = buf;
+- 
+- 	/* update the state of the channel */
+--
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_NONE:
+--		chan->load_state = S3C2410_DMALOAD_1LOADED;
+--		break;
+--
+--	case S3C2410_DMALOAD_1RUNNING:
+--		chan->load_state = S3C2410_DMALOAD_1LOADED_1RUNNING;
+--		break;
+--
+--	default:
+--		dmawarn("dmaload: unknown state %d in loadbuffer\n",
+--			chan->load_state);
+--		break;
+--	}
+-+	chan->load_state = S3C2410_DMALOAD_1RUNNING;
+- 
+- 	return 0;
+- }
+-@@ -343,7 +246,6 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 	dbg_showchan(chan);
+- 
+- 	/* enable the channel */
+--
+- 	if (!chan->irq_enabled) {
+- 		enable_irq(chan->irq);
+- 		chan->irq_enabled = 1;
+-@@ -358,14 +260,6 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 
+- 	pr_debug("dma%d: %08lx to DMASKTRIG\n", chan->number, tmp);
+- 
+--#if 0
+--	/* the dma buffer loads should take care of clearing the AUTO
+--	 * reloading feature */
+--	tmp = dma_rdreg(chan, S3C2410_DMA_DCON);
+--	tmp &= ~S3C2410_DCON_NORELOAD;
+--	dma_wrreg(chan, S3C2410_DMA_DCON, tmp);
+--#endif
+--
+- 	s3c2410_dma_call_op(chan, S3C2410_DMAOP_START);
+- 
+- 	dbg_showchan(chan);
+-@@ -375,43 +269,11 @@ static int s3c2410_dma_start(struct s3c2410_dma_chan *chan)
+- 	 * the first buffer is finished, the new one will be loaded onto
+- 	 * the channel */
+- 
+--	if (chan->next != NULL) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				pr_debug("%s: buff not yet loaded, no more todo\n",
+--					 __func__);
+--			} else {
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				s3c2410_dma_loadbuffer(chan, chan->next);
+--			}
+--
+--		} else if (chan->load_state == S3C2410_DMALOAD_1RUNNING) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	}
+--
+--
+- 	local_irq_restore(flags);
+- 
+- 	return 0;
+- }
+- 
+--/* s3c2410_dma_canload
+-- *
+-- * work out if we can queue another buffer into the DMA engine
+--*/
+--
+--static int
+--s3c2410_dma_canload(struct s3c2410_dma_chan *chan)
+--{
+--	if (chan->load_state == S3C2410_DMALOAD_NONE ||
+--	    chan->load_state == S3C2410_DMALOAD_1RUNNING)
+--		return 1;
+--
+--	return 0;
+--}
+--
+- /* s3c2410_dma_enqueue
+-  *
+-  * queue an given buffer for dma transfer.
+-@@ -460,48 +322,19 @@ int s3c2410_dma_enqueue(enum dma_ch channel, void *id,
+- 
+- 	local_irq_save(flags);
+- 
+--	if (chan->curr == NULL) {
+--		/* we've got nothing loaded... */
+--		pr_debug("%s: buffer %p queued onto empty channel\n",
+--			 __func__, buf);
+--
+--		chan->curr = buf;
+--		chan->end  = buf;
+--		chan->next = NULL;
+-+	if (chan->end == NULL) {
+-+		pr_debug("dma%d: queued buffer onto empty channel\n",
+-+			chan->number);
+-+		chan->next = buf;
+-+		chan->end = buf;
+- 	} else {
+--		pr_debug("dma%d: %s: buffer %p queued onto non-empty channel\n",
+--			 chan->number, __func__, buf);
+--
+--		if (chan->end == NULL) {
+--			pr_debug("dma%d: %s: %p not empty, and chan->end==NULL?\n",
+--				 chan->number, __func__, chan);
+--		} else {
+--			chan->end->next = buf;
+--			chan->end = buf;
+--		}
+-+		pr_debug("dma%d: queued buffer onto non-empty channel\n",
+-+			chan->number);
+-+		chan->end->next = buf;
+-+		chan->end = buf;
+- 	}
+- 
+--	/* if necessary, update the next buffer field */
+--	if (chan->next == NULL)
+--		chan->next = buf;
+--
+--	/* check to see if we can load a buffer */
+--	if (chan->state == S3C2410_DMA_RUNNING) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED && 1) {
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				printk(KERN_ERR "dma%d: loadbuffer:"
+--				       "timeout loading buffer\n",
+--				       chan->number);
+--				dbg_showchan(chan);
+--				local_irq_restore(flags);
+--				return -EINVAL;
+--			}
+--		}
+--
+--		while (s3c2410_dma_canload(chan) && chan->next != NULL) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	} else if (chan->state == S3C2410_DMA_IDLE) {
+-+	if (chan->state == S3C2410_DMA_IDLE) {
+- 		if (chan->flags & S3C2410_DMAF_AUTOSTART) {
+- 			s3c2410_dma_ctrl(chan->number | DMACH_LOW_LEVEL,
+- 					 S3C2410_DMAOP_START);
+-@@ -528,51 +361,6 @@ s3c2410_dma_freebuf(struct s3c2410_dma_buf *buf)
+- 	}
+- }
+- 
+--/* s3c2410_dma_lastxfer
+-- *
+-- * called when the system is out of buffers, to ensure that the channel
+-- * is prepared for shutdown.
+--*/
+--
+--static inline void
+--s3c2410_dma_lastxfer(struct s3c2410_dma_chan *chan)
+--{
+--#if 0
+--	pr_debug("dma%d: s3c2410_dma_lastxfer: load_state %d\n",
+--		 chan->number, chan->load_state);
+--#endif
+--
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_NONE:
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED:
+--		if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				/* flag error? */
+--			printk(KERN_ERR "dma%d: timeout waiting for load (%s)\n",
+--			       chan->number, __func__);
+--			return;
+--		}
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--		/* I believe in this case we do not have anything to do
+--		 * until the next buffer comes along, and we turn off the
+--		 * reload */
+--		return;
+--
+--	default:
+--		pr_debug("dma%d: lastxfer: unhandled load_state %d with no next\n",
+--			 chan->number, chan->load_state);
+--		return;
+--
+--	}
+--
+--	/* hopefully this'll shut the damned thing up after the transfer... */
+--	dma_wrreg(chan, S3C2410_DMA_DCON, chan->dcon | S3C2410_DCON_NORELOAD);
+--}
+--
+--
+- #define dmadbg2(x...)
+- 
+- static irqreturn_t
+-@@ -581,57 +369,25 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 	struct s3c2410_dma_chan *chan = (struct s3c2410_dma_chan *)devpw;
+- 	struct s3c2410_dma_buf  *buf;
+- 
+-+	/* Check for orphaned irq */
+-+	if (chan->state == S3C2410_DMA_IDLE)
+-+		return IRQ_HANDLED;
+-+
+- 	buf = chan->curr;
+- 
+- 	dbg_showchan(chan);
+- 
+- 	/* modify the channel state */
+- 
+--	switch (chan->load_state) {
+--	case S3C2410_DMALOAD_1RUNNING:
+--		/* TODO - if we are running only one buffer, we probably
+--		 * want to reload here, and then worry about the buffer
+--		 * callback */
+--
+--		chan->load_state = S3C2410_DMALOAD_NONE;
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED:
+--		/* iirc, we should go back to NONE loaded here, we
+--		 * had a buffer, and it was never verified as being
+--		 * loaded.
+--		 */
+--
+-+	if (chan->load_state == S3C2410_DMALOAD_1RUNNING)
+- 		chan->load_state = S3C2410_DMALOAD_NONE;
+--		break;
+--
+--	case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--		/* we'll worry about checking to see if another buffer is
+--		 * ready after we've called back the owner. This should
+--		 * ensure we do not wait around too long for the DMA
+--		 * engine to start the next transfer
+--		 */
+--
+--		chan->load_state = S3C2410_DMALOAD_1LOADED;
+--		break;
+--
+--	case S3C2410_DMALOAD_NONE:
+-+	else
+- 		printk(KERN_ERR "dma%d: IRQ with no loaded buffer?\n",
+--		       chan->number);
+--		break;
+--
+--	default:
+--		printk(KERN_ERR "dma%d: IRQ in invalid load_state %d\n",
+--		       chan->number, chan->load_state);
+--		break;
+--	}
+-+			chan->number);
+- 
+- 	if (buf != NULL) {
+--		/* update the chain to make sure that if we load any more
+--		 * buffers when we call the callback function, things should
+--		 * work properly */
+--
+--		chan->curr = buf->next;
+-+		chan->curr = NULL;
+-+		chan->next = buf->next;
+- 		buf->next  = NULL;
+- 
+- 		if (buf->magic != BUF_MAGIC) {
+-@@ -639,12 +395,10 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 			       chan->number, __func__, buf);
+- 			return IRQ_HANDLED;
+- 		}
+--
+- 		s3c2410_dma_buffdone(chan, buf, S3C2410_RES_OK);
+- 
+- 		/* free resouces */
+- 		s3c2410_dma_freebuf(buf);
+--	} else {
+- 	}
+- 
+- 	/* only reload if the channel is still running... our buffer done
+-@@ -654,53 +408,36 @@ s3c2410_dma_irq(int irq, void *devpw)
+- 	/* todo: check that when the channel is shut-down from inside this
+- 	 * function, we cope with unsetting reload, etc */
+- 
+--	if (chan->next != NULL && chan->state != S3C2410_DMA_IDLE) {
+--		unsigned long flags;
+--
+--		switch (chan->load_state) {
+--		case S3C2410_DMALOAD_1RUNNING:
+--			/* don't need to do anything for this state */
+--			break;
+--
+--		case S3C2410_DMALOAD_NONE:
+--			/* can load buffer immediately */
+--			break;
+--
+--		case S3C2410_DMALOAD_1LOADED:
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				/* flag error? */
+--				printk(KERN_ERR "dma%d: timeout waiting for load (%s)\n",
+--				       chan->number, __func__);
+--				return IRQ_HANDLED;
+--			}
+--
+--			break;
+--
+--		case S3C2410_DMALOAD_1LOADED_1RUNNING:
+--			goto no_load;
+--
+--		default:
+--			printk(KERN_ERR "dma%d: unknown load_state in irq, %d\n",
+--			       chan->number, chan->load_state);
+--			return IRQ_HANDLED;
+--		}
+-+	if (chan->next != NULL) {
+-+		if (chan->state != S3C2410_DMA_IDLE) {
+-+			unsigned long flags;
+-+			unsigned long tmp;
+- 
+--		local_irq_save(flags);
+--		s3c2410_dma_loadbuffer(chan, chan->next);
+--		local_irq_restore(flags);
+-+			pr_debug("%s: dma%d: continuing with next buffer\n",
+-+				__func__, chan->number);
+-+			local_irq_save(flags);
+-+			s3c2410_dma_loadbuffer(chan, chan->next);
+-+			tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+-+			tmp &= ~S3C2410_DMASKTRIG_STOP;
+-+			tmp |= S3C2410_DMASKTRIG_ON;
+-+			dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+			local_irq_restore(flags);
+-+		} else
+-+			pr_debug("dma%d: buffdone callback stopped dma...\n",
+-+				chan->number);
+- 	} else {
+--		s3c2410_dma_lastxfer(chan);
+-+		/* No more buffers? So no queue */
+-+		chan->end = NULL;
+- 
+- 		/* see if we can stop this channel.. */
+--		if (chan->load_state == S3C2410_DMALOAD_NONE) {
+--			pr_debug("dma%d: end of transfer, stopping channel (%ld)\n",
+-+		if (chan->state != S3C2410_DMA_IDLE) {
+-+			pr_debug("dma%d: end of transfer, stopping channel (%lu)\n",
+- 				 chan->number, jiffies);
+- 			s3c2410_dma_ctrl(chan->number | DMACH_LOW_LEVEL,
+- 					 S3C2410_DMAOP_STOP);
+- 		}
+- 	}
+- 
+-- no_load:
+- 	return IRQ_HANDLED;
+- }
+- 
+-@@ -839,9 +576,20 @@ static int s3c2410_dma_dostop(struct s3c2410_dma_chan *chan)
+- 	s3c2410_dma_call_op(chan,  S3C2410_DMAOP_STOP);
+- 
+- 	tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+--	tmp |= S3C2410_DMASKTRIG_STOP;
+--	//tmp &= ~S3C2410_DMASKTRIG_ON;
+--	dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+	if (tmp & S3C2410_DMASKTRIG_ON) {
+-+		int retries = 1000;
+-+		tmp |= S3C2410_DMASKTRIG_STOP;
+-+		dma_wrreg(chan, S3C2410_DMA_DMASKTRIG, tmp);
+-+
+-+		while (--retries) {
+-+			tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+-+			if (!(tmp & S3C2410_DMASKTRIG_ON))
+-+				break;
+-+		}
+-+
+-+		if (!retries)
+-+			pr_debug("dma%d: failed to stop??\n", chan->number);
+-+	}
+- 
+- #if 0
+- 	/* should also clear interrupts, according to WinCE BSP */
+-@@ -859,22 +607,6 @@ static int s3c2410_dma_dostop(struct s3c2410_dma_chan *chan)
+- 	return 0;
+- }
+- 
+--static void s3c2410_dma_waitforstop(struct s3c2410_dma_chan *chan)
+--{
+--	unsigned long tmp;
+--	unsigned int timeout = 0x10000;
+--
+--	while (timeout-- > 0) {
+--		tmp = dma_rdreg(chan, S3C2410_DMA_DMASKTRIG);
+--
+--		if (!(tmp & S3C2410_DMASKTRIG_ON))
+--			return;
+--	}
+--
+--	pr_debug("dma%d: failed to stop?\n", chan->number);
+--}
+--
+--
+- /* s3c2410_dma_flush
+-  *
+-  * stop the channel, and remove all current and pending transfers
+-@@ -916,8 +648,6 @@ static int s3c2410_dma_flush(struct s3c2410_dma_chan *chan)
+- 
+- 	dbg_showregs(chan);
+- 
+--	s3c2410_dma_waitforstop(chan);
+--
+- #if 0
+- 	/* should also clear interrupts, according to WinCE BSP */
+- 	{
+-@@ -938,38 +668,8 @@ static int s3c2410_dma_flush(struct s3c2410_dma_chan *chan)
+- 
+- static int s3c2410_dma_started(struct s3c2410_dma_chan *chan)
+- {
+--	unsigned long flags;
+--
+--	local_irq_save(flags);
+--
+--	dbg_showchan(chan);
+--
+--	/* if we've only loaded one buffer onto the channel, then chec
+--	 * to see if we have another, and if so, try and load it so when
+--	 * the first buffer is finished, the new one will be loaded onto
+--	 * the channel */
+--
+--	if (chan->next != NULL) {
+--		if (chan->load_state == S3C2410_DMALOAD_1LOADED) {
+--
+--			if (s3c2410_dma_waitforload(chan, __LINE__) == 0) {
+--				pr_debug("%s: buff not yet loaded, no more todo\n",
+--					 __func__);
+--			} else {
+--				chan->load_state = S3C2410_DMALOAD_1RUNNING;
+--				s3c2410_dma_loadbuffer(chan, chan->next);
+--			}
+--
+--		} else if (chan->load_state == S3C2410_DMALOAD_1RUNNING) {
+--			s3c2410_dma_loadbuffer(chan, chan->next);
+--		}
+--	}
+--
+--
+--	local_irq_restore(flags);
+--
+-+	/* Do nothing */
+- 	return 0;
+--
+- }
+- 
+- int
+-@@ -1040,16 +740,12 @@ int s3c2410_dma_config(enum dma_ch channel,
+- 	case DMACH_PCM_IN:
+- 	case DMACH_PCM_OUT:
+- 	case DMACH_MIC_IN:
+-+	case DMACH_SDI:
+- 	default:
+- 		dcon |= S3C2410_DCON_HANDSHAKE;
+- 		dcon |= S3C2410_DCON_SYNC_PCLK;
+- 		break;
+- 
+--	case DMACH_SDI:
+--		/* note, ensure if need HANDSHAKE or not */
+--		dcon |= S3C2410_DCON_SYNC_PCLK;
+--		break;
+--
+- 	case DMACH_XD0:
+- 	case DMACH_XD1:
+- 		dcon |= S3C2410_DCON_HANDSHAKE;
+-@@ -1224,20 +920,19 @@ static void s3c2410_dma_resume_chan(struct s3c2410_dma_chan *cp)
+- {
+- 	unsigned int no = cp->number | DMACH_LOW_LEVEL;
+- 
+--	/* restore channel's hardware configuration */
+--
+- 	if (!cp->in_use)
+- 		return;
+- 
+--	printk(KERN_INFO "dma%d: restoring configuration\n", cp->number);
+--
+--	s3c2410_dma_config(no, cp->xfer_unit);
+--	s3c2410_dma_devconfig(no, cp->source, cp->dev_addr);
+--
+- 	/* re-select the dma source for this channel */
+- 
+- 	if (cp->map != NULL)
+- 		dma_sel.select(cp, cp->map);
+-+
+-+	/* restore channel's hardware configuration */
+-+	printk(KERN_INFO "dma%d: restoring configuration\n", cp->number);
+-+	s3c2410_dma_config(no, cp->xfer_unit);
+-+	s3c2410_dma_devconfig(no, cp->source, cp->dev_addr);
+-+
+- }
+- 
+- static void s3c2410_dma_resume(void)
+-diff --git a/arch/arm/mach-s3c24xx/include/mach/dma.h b/arch/arm/mach-s3c24xx/include/mach/dma.h
+-index b55da1d..b207633 100644
+---- a/arch/arm/mach-s3c24xx/include/mach/dma.h
+-+++ b/arch/arm/mach-s3c24xx/include/mach/dma.h
+-@@ -94,28 +94,15 @@ enum s3c2410_dma_state {
+-  *
+-  * There are no buffers loaded (the channel should be inactive)
+-  *
+-- * S3C2410_DMA_1LOADED
+-- *
+-- * There is one buffer loaded, however it has not been confirmed to be
+-- * loaded by the DMA engine. This may be because the channel is not
+-- * yet running, or the DMA driver decided that it was too costly to
+-- * sit and wait for it to happen.
+-- *
+-  * S3C2410_DMA_1RUNNING
+-  *
+-- * The buffer has been confirmed running, and not finisged
+-- *
+-- * S3C2410_DMA_1LOADED_1RUNNING
+-+ * The buffer has been confirmed running, and not finished
+-  *
+-- * There is a buffer waiting to be loaded by the DMA engine, and one
+-- * currently running.
+- */
+- 
+- enum s3c2410_dma_loadst {
+- 	S3C2410_DMALOAD_NONE,
+--	S3C2410_DMALOAD_1LOADED,
+- 	S3C2410_DMALOAD_1RUNNING,
+--	S3C2410_DMALOAD_1LOADED_1RUNNING,
+- };
+- 
+- 
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0002-s3cmci-minor-fixups.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0002-s3cmci-minor-fixups.patch
+deleted file mode 100644
+index 7bf0163..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0002-s3cmci-minor-fixups.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From ecbeff382c24f958c2451694041165779312638d Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Fri, 13 Aug 2010 20:01:53 +0300
+-Subject: [PATCH 02/12] s3cmci: minor fixups
+-
+-- It's not necessary to start DMA op manually, as we have
+-autostart feature enabled
+-- Restore prescaler before DMA operation, otherwise it
+-takes ages to complete DMA op.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- drivers/mmc/host/s3cmci.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/mmc/host/s3cmci.c b/drivers/mmc/host/s3cmci.c
+-index 8d6794c..d9b11d8 100644
+---- a/drivers/mmc/host/s3cmci.c
+-+++ b/drivers/mmc/host/s3cmci.c
+-@@ -1184,6 +1184,8 @@ static int s3cmci_prepare_dma(struct s3cmci_host *host, struct mmc_data *data)
+- 		    sg_dma_address(&data->sg[i]),
+- 		    sg_dma_len(&data->sg[i]));
+- 
+-+		/* Restore prescaler value */
+-+		writel(host->prescaler, host->base + S3C2410_SDIPRE);
+- 		res = s3c2410_dma_enqueue(host->dma, host,
+- 					  sg_dma_address(&data->sg[i]),
+- 					  sg_dma_len(&data->sg[i]));
+-@@ -1194,8 +1196,6 @@ static int s3cmci_prepare_dma(struct s3cmci_host *host, struct mmc_data *data)
+- 		}
+- 	}
+- 
+--	s3c2410_dma_ctrl(host->dma, S3C2410_DMAOP_START);
+--
+- 	return 0;
+- }
+- 
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
+deleted file mode 100644
+index ec81c81..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0003-ARM-s3c2410-drop-RFKILL-driver-for-H1940-bluetooth.patch
++++ /dev/null
+@@ -1,200 +0,0 @@
+-From c79370dca44c6917b1c7eb7561e736eb85e74a37 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:09:19 +0300
+-Subject: [PATCH 03/12] ARM: s3c2410: drop RFKILL driver for H1940 bluetooth
+-
+-rfkill-gpio can do it's job easily.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/Kconfig           |   8 --
+- arch/arm/mach-s3c24xx/Makefile          |   1 -
+- arch/arm/mach-s3c24xx/h1940-bluetooth.c | 145 --------------------------------
+- 3 files changed, 154 deletions(-)
+- delete mode 100644 arch/arm/mach-s3c24xx/h1940-bluetooth.c
+-
+-diff --git a/arch/arm/mach-s3c24xx/Kconfig b/arch/arm/mach-s3c24xx/Kconfig
+-index dba2173..7e125f8 100644
+---- a/arch/arm/mach-s3c24xx/Kconfig
+-+++ b/arch/arm/mach-s3c24xx/Kconfig
+-@@ -307,14 +307,6 @@ config ARCH_H1940
+- 	help
+- 	  Say Y here if you are using the HP IPAQ H1940
+- 
+--config H1940BT
+--	tristate "Control the state of H1940 bluetooth chip"
+--	depends on ARCH_H1940
+--	select RFKILL
+--	help
+--	  This is a simple driver that is able to control
+--	  the state of built in bluetooth chip on h1940.
+--
+- config PM_H1940
+- 	bool
+- 	help
+-diff --git a/arch/arm/mach-s3c24xx/Makefile b/arch/arm/mach-s3c24xx/Makefile
+-index 7f54e5b..d326722 100644
+---- a/arch/arm/mach-s3c24xx/Makefile
+-+++ b/arch/arm/mach-s3c24xx/Makefile
+-@@ -65,7 +65,6 @@ obj-$(CONFIG_MACH_AML_M5900)		+= mach-amlm5900.o
+- obj-$(CONFIG_ARCH_BAST)			+= mach-bast.o
+- obj-$(CONFIG_BAST_PC104_IRQ)		+= bast-irq.o
+- obj-$(CONFIG_ARCH_H1940)		+= mach-h1940.o
+--obj-$(CONFIG_H1940BT)			+= h1940-bluetooth.o
+- obj-$(CONFIG_PM_H1940)			+= pm-h1940.o
+- obj-$(CONFIG_MACH_N30)			+= mach-n30.o
+- obj-$(CONFIG_MACH_OTOM)			+= mach-otom.o
+-diff --git a/arch/arm/mach-s3c24xx/h1940-bluetooth.c b/arch/arm/mach-s3c24xx/h1940-bluetooth.c
+-deleted file mode 100644
+-index 5b98bfd..0000000
+---- a/arch/arm/mach-s3c24xx/h1940-bluetooth.c
+-+++ /dev/null
+-@@ -1,145 +0,0 @@
+--/*
+-- * arch/arm/mach-s3c2410/h1940-bluetooth.c
+-- * Copyright (c) Arnaud Patard <arnaud.patard@rtp-net.org>
+-- *
+-- * This file is subject to the terms and conditions of the GNU General Public
+-- * License.  See the file COPYING in the main directory of this archive for
+-- * more details.
+-- *
+-- *	    S3C2410 bluetooth "driver"
+-- *
+-- */
+--
+--#include <linux/module.h>
+--#include <linux/platform_device.h>
+--#include <linux/delay.h>
+--#include <linux/string.h>
+--#include <linux/ctype.h>
+--#include <linux/leds.h>
+--#include <linux/gpio.h>
+--#include <linux/rfkill.h>
+--
+--#include <mach/hardware.h>
+--#include <mach/regs-gpio.h>
+--
+--#include "h1940.h"
+--
+--#define DRV_NAME "h1940-bt"
+--
+--/* Bluetooth control */
+--static void h1940bt_enable(int on)
+--{
+--	if (on) {
+--		/* Power on the chip */
+--		gpio_set_value(H1940_LATCH_BLUETOOTH_POWER, 1);
+--		/* Reset the chip */
+--		mdelay(10);
+--
+--		gpio_set_value(S3C2410_GPH(1), 1);
+--		mdelay(10);
+--		gpio_set_value(S3C2410_GPH(1), 0);
+--
+--		h1940_led_blink_set(-EINVAL, GPIO_LED_BLINK, NULL, NULL);
+--	}
+--	else {
+--		gpio_set_value(S3C2410_GPH(1), 1);
+--		mdelay(10);
+--		gpio_set_value(S3C2410_GPH(1), 0);
+--		mdelay(10);
+--		gpio_set_value(H1940_LATCH_BLUETOOTH_POWER, 0);
+--
+--		h1940_led_blink_set(-EINVAL, GPIO_LED_NO_BLINK_LOW, NULL, NULL);
+--	}
+--}
+--
+--static int h1940bt_set_block(void *data, bool blocked)
+--{
+--	h1940bt_enable(!blocked);
+--	return 0;
+--}
+--
+--static const struct rfkill_ops h1940bt_rfkill_ops = {
+--	.set_block = h1940bt_set_block,
+--};
+--
+--static int h1940bt_probe(struct platform_device *pdev)
+--{
+--	struct rfkill *rfk;
+--	int ret = 0;
+--
+--	ret = gpio_request(S3C2410_GPH(1), dev_name(&pdev->dev));
+--	if (ret) {
+--		dev_err(&pdev->dev, "could not get GPH1\n");
+--		return ret;
+--	}
+--
+--	ret = gpio_request(H1940_LATCH_BLUETOOTH_POWER, dev_name(&pdev->dev));
+--	if (ret) {
+--		gpio_free(S3C2410_GPH(1));
+--		dev_err(&pdev->dev, "could not get BT_POWER\n");
+--		return ret;
+--	}
+--
+--	/* Configures BT serial port GPIOs */
+--	s3c_gpio_cfgpin(S3C2410_GPH(0), S3C2410_GPH0_nCTS0);
+--	s3c_gpio_setpull(S3C2410_GPH(0), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(1), S3C2410_GPIO_OUTPUT);
+--	s3c_gpio_setpull(S3C2410_GPH(1), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(2), S3C2410_GPH2_TXD0);
+--	s3c_gpio_setpull(S3C2410_GPH(2), S3C_GPIO_PULL_NONE);
+--	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+--	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+--
+--	rfk = rfkill_alloc(DRV_NAME, &pdev->dev, RFKILL_TYPE_BLUETOOTH,
+--			&h1940bt_rfkill_ops, NULL);
+--	if (!rfk) {
+--		ret = -ENOMEM;
+--		goto err_rfk_alloc;
+--	}
+--
+--	ret = rfkill_register(rfk);
+--	if (ret)
+--		goto err_rfkill;
+--
+--	platform_set_drvdata(pdev, rfk);
+--
+--	return 0;
+--
+--err_rfkill:
+--	rfkill_destroy(rfk);
+--err_rfk_alloc:
+--	return ret;
+--}
+--
+--static int h1940bt_remove(struct platform_device *pdev)
+--{
+--	struct rfkill *rfk = platform_get_drvdata(pdev);
+--
+--	platform_set_drvdata(pdev, NULL);
+--	gpio_free(S3C2410_GPH(1));
+--
+--	if (rfk) {
+--		rfkill_unregister(rfk);
+--		rfkill_destroy(rfk);
+--	}
+--	rfk = NULL;
+--
+--	h1940bt_enable(0);
+--
+--	return 0;
+--}
+--
+--
+--static struct platform_driver h1940bt_driver = {
+--	.driver		= {
+--		.name	= DRV_NAME,
+--	},
+--	.probe		= h1940bt_probe,
+--	.remove		= h1940bt_remove,
+--};
+--
+--module_platform_driver(h1940bt_driver);
+--
+--MODULE_AUTHOR("Arnaud Patard <arnaud.patard@rtp-net.org>");
+--MODULE_DESCRIPTION("Driver for the iPAQ H1940 bluetooth chip");
+--MODULE_LICENSE("GPL");
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
+deleted file mode 100644
+index 229baf4..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0004-mtd-nand-s3c2410-add-iPAQ-specific-layout.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From f89a1a53b00b258aeb44a8511fb4adc657108423 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:48:46 +0300
+-Subject: [PATCH 04/12] mtd: nand: s3c2410: add iPAQ specific layout
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- drivers/mtd/nand/s3c2410.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/drivers/mtd/nand/s3c2410.c b/drivers/mtd/nand/s3c2410.c
+-index d65cbe9..0806e46 100644
+---- a/drivers/mtd/nand/s3c2410.c
+-+++ b/drivers/mtd/nand/s3c2410.c
+-@@ -54,8 +54,8 @@
+- 
+- static struct nand_ecclayout nand_hw_eccoob = {
+- 	.eccbytes = 3,
+--	.eccpos = {0, 1, 2},
+--	.oobfree = {{8, 8}}
+-+	.eccpos = {8, 9, 10},
+-+	.oobfree = {{2, 6}, {11, 5}}
+- };
+- 
+- /* controller and mtd information */
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
+deleted file mode 100644
+index f5272be..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0005-ARM-s3c2410-Add-nand-device-for-h1940.patch
++++ /dev/null
+@@ -1,114 +0,0 @@
+-From d284529e4b6f6001031d8f7d513fd12f84c9d5de Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:13:29 +0300
+-Subject: [PATCH 05/12] ARM: s3c2410: Add nand device for h1940
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 62 ++++++++++++++++++++++++++++++++++++++
+- 1 file changed, 62 insertions(+)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 74dd479..6f2e979 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -31,6 +31,9 @@
+- #include <linux/s3c_adc_battery.h>
+- #include <linux/delay.h>
+- 
+-+#include <linux/mtd/mtd.h>
+-+#include <linux/mtd/partitions.h>
+-+
+- #include <video/platform_lcd.h>
+- 
+- #include <linux/mmc/host.h>
+-@@ -46,6 +49,7 @@
+- #include <linux/platform_data/mmc-s3cmci.h>
+- #include <linux/platform_data/touchscreen-s3c2410.h>
+- #include <linux/platform_data/usb-s3c2410_udc.h>
+-+#include <linux/platform_data/mtd-nand-s3c2410.h>
+- 
+- #include <sound/uda1380.h>
+- 
+-@@ -465,6 +469,62 @@ static struct s3c24xx_mci_pdata h1940_mmc_cfg __initdata = {
+- 	.ocr_avail     = MMC_VDD_32_33,
+- };
+- 
+-+static struct mtd_partition h1940_nand_part[] = {
+-+	[0] = {
+-+			.name = "Boot0",
+-+			.offset = 0,
+-+			.size = SZ_16K,
+-+			.mask_flags = MTD_WRITEABLE,
+-+	},
+-+	[1] = {
+-+			.name = "Boot1",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_1K * 240,
+-+			.mask_flags = 0,
+-+	},
+-+	[2] = {
+-+			.name = "Env",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_16K,
+-+			.mask_flags = 0,
+-+	},
+-+	[3] = {
+-+			.name = "Opts",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_32K,
+-+			.mask_flags = 0,
+-+	},
+-+	[4] = {
+-+			.name = "Kernel",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = SZ_1M * 3,
+-+			.mask_flags = 0,
+-+	},
+-+	[5] = {
+-+			.name = "Filesystem",
+-+			.offset = MTDPART_OFS_APPEND,
+-+			.size = MTDPART_SIZ_FULL,
+-+			.mask_flags = 0,
+-+	},
+-+};
+-+
+-+static struct s3c2410_nand_set h1940_nand_sets[] = {
+-+	[0] = {
+-+			.name = "Internal",
+-+			.nr_chips = 1,
+-+			.nr_partitions = ARRAY_SIZE(h1940_nand_part),
+-+			.partitions = h1940_nand_part,
+-+	},
+-+};
+-+
+-+static struct s3c2410_platform_nand h1940_nand_info = {
+-+	.tacls = 14,
+-+	.twrph0 = 44,
+-+	.twrph1 = 20,
+-+	.nr_sets = ARRAY_SIZE(h1940_nand_sets),
+-+	.sets = h1940_nand_sets,
+-+};
+-+
+- static int h1940_backlight_init(struct device *dev)
+- {
+- 	gpio_request(S3C2410_GPB(0), "Backlight");
+-@@ -632,6 +692,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_device_bluetooth,
+- 	&s3c_device_sdi,
+- 	&s3c_device_rtc,
+-+	&s3c_device_nand,
+- 	&samsung_device_pwm,
+- 	&h1940_backlight,
+- 	&h1940_lcd_powerdev,
+-@@ -676,6 +737,7 @@ static void __init h1940_init(void)
+-  	s3c24xx_udc_set_platdata(&h1940_udc_cfg);
+- 	s3c24xx_ts_set_platdata(&h1940_ts_cfg);
+- 	s3c_i2c0_set_platdata(NULL);
+-+	s3c_nand_set_platdata(&h1940_nand_info);
+- 
+- 	/* Turn off suspend on both USB ports, and switch the
+- 	 * selectable USB port to USB device mode. */
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
+deleted file mode 100644
+index c967e9f..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0006-ARM-s3c2410-h1940-don-t-touch-UPLLCON.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 6e1b56f2dbb94a1ff320141819bc8cea2462daec Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:15:16 +0300
+-Subject: [PATCH 06/12] ARM: s3c2410: h1940: don't touch UPLLCON
+-
+-It's a bit late to modify UPLLCON in board init,
+-anyway bootloader already puts correct value in it.
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 7 -------
+- 1 file changed, 7 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 6f2e979..570450d 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -730,8 +730,6 @@ static void __init h1940_reserve(void)
+- 
+- static void __init h1940_init(void)
+- {
+--	u32 tmp;
+--
+- 	s3c24xx_fb_set_platdata(&h1940_fb_info);
+- 	s3c24xx_mci_set_platdata(&h1940_mmc_cfg);
+-  	s3c24xx_udc_set_platdata(&h1940_udc_cfg);
+-@@ -746,11 +744,6 @@ static void __init h1940_init(void)
+- 			      S3C2410_MISCCR_USBSUSPND0 |
+- 			      S3C2410_MISCCR_USBSUSPND1, 0x0);
+- 
+--	tmp =   (0x78 << S3C24XX_PLL_MDIV_SHIFT)
+--	      | (0x02 << S3C24XX_PLL_PDIV_SHIFT)
+--	      | (0x03 << S3C24XX_PLL_SDIV_SHIFT);
+--	writel(tmp, S3C2410_UPLLCON);
+--
+- 	gpio_request(S3C2410_GPC(0), "LCD power");
+- 	gpio_request(S3C2410_GPC(1), "LCD power");
+- 	gpio_request(S3C2410_GPC(4), "LCD power");
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
+deleted file mode 100644
+index 69d7857..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0007-ARM-s3c2410-unlock-reset-button-on-H1940.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From 49f6216e04b0eec38f5f617bcf6ccca625d4e65d Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sat, 3 Dec 2011 12:12:21 +0300
+-Subject: [PATCH 07/12] ARM: s3c2410: unlock reset button on H1940
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 17 +++++++++++++++--
+- 1 file changed, 15 insertions(+), 2 deletions(-)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 570450d..642abaf 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -218,9 +218,9 @@ static struct s3c2410fb_mach_info h1940_fb_info __initdata = {
+- 	.gpcup =	0x0000ffff,
+- 	.gpcup_mask =	0xffffffff,
+- 	.gpdcon =	0xaa84aaa0,
+--	.gpdcon_mask =	0xffffffff,
+-+	.gpdcon_mask =	0xfffffff3,
+- 	.gpdup =	0x0000faff,
+--	.gpdup_mask =	0xffffffff,
+-+	.gpdup_mask =	0xfffffffd,
+- };
+- 
+- static int power_supply_init(struct device *dev)
+-@@ -781,6 +781,19 @@ static void __init h1940_init(void)
+- 	gpio_direction_output(S3C2410_GPA(7), 0);
+- 	gpio_direction_output(H1940_LATCH_LED_FLASH, 0);
+- 
+-+	gpio_request(S3C2410_GPD(1), "Reset sense");
+-+	gpio_request(S3C2410_GPA(14), "Reset reset");
+-+	gpio_request(S3C2410_GPB(6), "Reset lock");
+-+	gpio_direction_input(S3C2410_GPD(1));
+-+	gpio_direction_output(S3C2410_GPA(14), 0);
+-+	if (gpio_get_value(S3C2410_GPD(1)))
+-+		gpio_set_value(S3C2410_GPA(14), 0);
+-+
+-+	gpio_direction_output(S3C2410_GPA(14), 1);
+-+	mdelay(100);
+-+	gpio_direction_output(S3C2410_GPB(6), 1);
+-+	gpio_direction_output(S3C2410_GPB(6), 0);
+-+
+- 	i2c_register_board_info(0, h1940_i2c_devices,
+- 		ARRAY_SIZE(h1940_i2c_devices));
+- }
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
+deleted file mode 100644
+index ae0842e..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0008-ARM-h1940-add-bluetooth-RF-kill-switch.patch
++++ /dev/null
+@@ -1,75 +0,0 @@
+-From 71d5095b75b9c6b148bc9029592914c7d7bb3967 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sat, 17 Dec 2011 13:14:51 +0300
+-Subject: [PATCH 08/12] ARM: h1940: add bluetooth RF kill switch
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 30 ++++++++++++++++++++++++++++++
+- 1 file changed, 30 insertions(+)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 642abaf..96c8c91 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -30,6 +30,7 @@
+- #include <linux/pda_power.h>
+- #include <linux/s3c_adc_battery.h>
+- #include <linux/delay.h>
+-+#include <linux/rfkill-gpio.h>
+- 
+- #include <linux/mtd/mtd.h>
+- #include <linux/mtd/partitions.h>
+-@@ -680,6 +681,21 @@ static struct platform_device h1940_dev_buttons = {
+- 	}
+- };
+- 
+-+static struct rfkill_gpio_platform_data h1940_bt_rfkill_pdata = {
+-+	.name		= "h1940-bt",
+-+	.reset_gpio	= -EINVAL,
+-+	.shutdown_gpio	= H1940_LATCH_BLUETOOTH_POWER,
+-+	.type		= RFKILL_TYPE_BLUETOOTH,
+-+};
+-+
+-+static struct platform_device h1940_bluetooth = {
+-+	.name		= "rfkill_gpio",
+-+	.id		= 0,
+-+	.dev		= {
+-+		.platform_data = &h1940_bt_rfkill_pdata,
+-+	},
+-+};
+-+
+- static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_dev_buttons,
+- 	&s3c_device_ohci,
+-@@ -700,6 +716,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&s3c_device_ts,
+- 	&power_supply,
+- 	&h1940_battery,
+-+	&h1940_bluetooth,
+- };
+- 
+- static void __init h1940_map_io(void)
+-@@ -770,6 +787,19 @@ static void __init h1940_init(void)
+- 	gpio_request(H1940_LATCH_SD_POWER, "SD power");
+- 	gpio_direction_output(H1940_LATCH_SD_POWER, 0);
+- 
+-+	/* Configures BT serial port GPIOs */
+-+	s3c_gpio_cfgpin(S3C2410_GPH(0), S3C2410_GPH0_nCTS0);
+-+	s3c_gpio_setpull(S3C2410_GPH(0), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(1), S3C2410_GPH1_nRTS0);
+-+	s3c_gpio_setpull(S3C2410_GPH(1), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(2), S3C2410_GPH2_TXD0);
+-+	s3c_gpio_setpull(S3C2410_GPH(2), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+-+	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+-+
+-+	gpio_request(S3C2410_GPC(9), "BT reset");
+-+	gpio_direction_output(S3C2410_GPC(9), 1);
+-+
+- 	platform_add_devices(h1940_devices, ARRAY_SIZE(h1940_devices));
+- 
+- 	gpio_request(S3C2410_GPA(1), "Red LED blink");
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0009-rfkill-add-IR-type.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0009-rfkill-add-IR-type.patch
+deleted file mode 100644
+index 96e91f9..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0009-rfkill-add-IR-type.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From c21acad16e8a1fc7840f67c272657f8cf7ad81fc Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:19:47 +0300
+-Subject: [PATCH 09/12] rfkill: add IR type
+-
+-Infrared receivers/transmitters can also be disabled,
+-so add IR type to rfkill subsystem
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- include/uapi/linux/rfkill.h | 1 +
+- net/rfkill/core.c           | 4 +++-
+- 2 files changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/include/uapi/linux/rfkill.h b/include/uapi/linux/rfkill.h
+-index 058757f..164ec17 100644
+---- a/include/uapi/linux/rfkill.h
+-+++ b/include/uapi/linux/rfkill.h
+-@@ -50,6 +50,7 @@ enum rfkill_type {
+- 	RFKILL_TYPE_GPS,
+- 	RFKILL_TYPE_FM,
+- 	RFKILL_TYPE_NFC,
+-+	RFKILL_TYPE_IR,
+- 	NUM_RFKILL_TYPES,
+- };
+- 
+-diff --git a/net/rfkill/core.c b/net/rfkill/core.c
+-index 1bacc10..5b824f9 100644
+---- a/net/rfkill/core.c
+-+++ b/net/rfkill/core.c
+-@@ -587,7 +587,7 @@ static DEVICE_ATTR_RO(name);
+- 
+- static const char *rfkill_get_type_str(enum rfkill_type type)
+- {
+--	BUILD_BUG_ON(NUM_RFKILL_TYPES != RFKILL_TYPE_NFC + 1);
+-+	BUILD_BUG_ON(NUM_RFKILL_TYPES != RFKILL_TYPE_IR + 1);
+- 
+- 	switch (type) {
+- 	case RFKILL_TYPE_WLAN:
+-@@ -606,6 +606,8 @@ static const char *rfkill_get_type_str(enum rfkill_type type)
+- 		return "fm";
+- 	case RFKILL_TYPE_NFC:
+- 		return "nfc";
+-+	case RFKILL_TYPE_IR:
+-+		return "ir";
+- 	default:
+- 		BUG();
+- 	}
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
+deleted file mode 100644
+index 61f171c..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0010-rfkill_gpio-add-support-for-inverted-GPIOs.patch
++++ /dev/null
+@@ -1,59 +0,0 @@
+-From c21cbdcc9bbe7b74a6b28e87f8d3abf4f230d415 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Thu, 17 Oct 2013 12:20:50 +0300
+-Subject: [PATCH 10/12] rfkill_gpio: add support for inverted GPIOs
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- include/linux/rfkill-gpio.h |  2 ++
+- net/rfkill/rfkill-gpio.c    | 12 ++++++++----
+- 2 files changed, 10 insertions(+), 4 deletions(-)
+-
+-diff --git a/include/linux/rfkill-gpio.h b/include/linux/rfkill-gpio.h
+-index 4d09f6e..af54dda 100644
+---- a/include/linux/rfkill-gpio.h
+-+++ b/include/linux/rfkill-gpio.h
+-@@ -37,7 +37,9 @@
+- struct rfkill_gpio_platform_data {
+- 	char			*name;
+- 	int			reset_gpio;
+-+	int			reset_gpio_inverted;
+- 	int			shutdown_gpio;
+-+	int			shutdown_gpio_inverted;
+- 	const char		*power_clk_name;
+- 	enum rfkill_type	type;
+- 	void	(*gpio_runtime_close)(struct platform_device *);
+-diff --git a/net/rfkill/rfkill-gpio.c b/net/rfkill/rfkill-gpio.c
+-index fb076cd..3b4848d 100644
+---- a/net/rfkill/rfkill-gpio.c
+-+++ b/net/rfkill/rfkill-gpio.c
+-@@ -53,18 +53,22 @@ static int rfkill_gpio_set_power(void *data, bool blocked)
+- 
+- 	if (blocked) {
+- 		if (gpio_is_valid(rfkill->pdata->shutdown_gpio))
+--			gpio_direction_output(rfkill->pdata->shutdown_gpio, 0);
+-+			gpio_direction_output(rfkill->pdata->shutdown_gpio,
+-+				rfkill->pdata->shutdown_gpio_inverted);
+- 		if (gpio_is_valid(rfkill->pdata->reset_gpio))
+--			gpio_direction_output(rfkill->pdata->reset_gpio, 0);
+-+			gpio_direction_output(rfkill->pdata->reset_gpio,
+-+				rfkill->pdata->reset_gpio_inverted);
+- 		if (rfkill->pwr_clk && PWR_CLK_ENABLED(rfkill))
+- 			clk_disable(rfkill->pwr_clk);
+- 	} else {
+- 		if (rfkill->pwr_clk && PWR_CLK_DISABLED(rfkill))
+- 			clk_enable(rfkill->pwr_clk);
+- 		if (gpio_is_valid(rfkill->pdata->reset_gpio))
+--			gpio_direction_output(rfkill->pdata->reset_gpio, 1);
+-+			gpio_direction_output(rfkill->pdata->reset_gpio,
+-+				!rfkill->pdata->reset_gpio_inverted);
+- 		if (gpio_is_valid(rfkill->pdata->shutdown_gpio))
+--			gpio_direction_output(rfkill->pdata->shutdown_gpio, 1);
+-+			gpio_direction_output(rfkill->pdata->shutdown_gpio,
+-+				!rfkill->pdata->shutdown_gpio_inverted);
+- 	}
+- 
+- 	if (rfkill->pwr_clk)
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0011-ARM-h1940-add-IR-switch.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0011-ARM-h1940-add-IR-switch.patch
+deleted file mode 100644
+index 4ee12fb..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0011-ARM-h1940-add-IR-switch.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-From f2c0263a125f40197d19e6798a655d2cc71a5f2c Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:29:30 +0300
+-Subject: [PATCH 11/12] ARM: h1940: add IR switch
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 23 +++++++++++++++++++++++
+- 1 file changed, 23 insertions(+)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 96c8c91..6b45688 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -696,6 +696,22 @@ static struct platform_device h1940_bluetooth = {
+- 	},
+- };
+- 
+-+static struct rfkill_gpio_platform_data h1940_ir_rfkill_pdata = {
+-+	.name		= "h1940-ir",
+-+	.reset_gpio	= -EINVAL,
+-+	.shutdown_gpio	= S3C2410_GPB(9),
+-+	.shutdown_gpio_inverted = 1,
+-+	.type		= RFKILL_TYPE_IR,
+-+};
+-+
+-+static struct platform_device h1940_irda = {
+-+	.name		= "rfkill_gpio",
+-+	.id		= 1,
+-+	.dev		= {
+-+		.platform_data = &h1940_ir_rfkill_pdata,
+-+	},
+-+};
+-+
+- static struct platform_device *h1940_devices[] __initdata = {
+- 	&h1940_dev_buttons,
+- 	&s3c_device_ohci,
+-@@ -717,6 +733,7 @@ static struct platform_device *h1940_devices[] __initdata = {
+- 	&power_supply,
+- 	&h1940_battery,
+- 	&h1940_bluetooth,
+-+	&h1940_irda,
+- };
+- 
+- static void __init h1940_map_io(void)
+-@@ -797,6 +814,12 @@ static void __init h1940_init(void)
+- 	s3c_gpio_cfgpin(S3C2410_GPH(3), S3C2410_GPH3_RXD0);
+- 	s3c_gpio_setpull(S3C2410_GPH(3), S3C_GPIO_PULL_NONE);
+- 
+-+	/* Configure IR serial port GPIOs */
+-+	s3c_gpio_cfgpin(S3C2410_GPH(6), S3C2410_GPH6_TXD2);
+-+	s3c_gpio_setpull(S3C2410_GPH(6), S3C_GPIO_PULL_NONE);
+-+	s3c_gpio_cfgpin(S3C2410_GPH(7), S3C2410_GPH7_RXD2);
+-+	s3c_gpio_setpull(S3C2410_GPH(7), S3C_GPIO_PULL_NONE);
+-+
+- 	gpio_request(S3C2410_GPC(9), "BT reset");
+- 	gpio_direction_output(S3C2410_GPC(9), 1);
+- 
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/0012-ARM-h1940-increase-oversampling-shift.patch b/recipes-kernel/linux/linux-yocto-dev/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
+deleted file mode 100644
+index b5f9fc0..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/0012-ARM-h1940-increase-oversampling-shift.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From e54bcd58d416162f8cb1b191c7cff81ecd660137 Mon Sep 17 00:00:00 2001
+-From: Vasily Khoruzhick <anarsoul@gmail.com>
+-Date: Sun, 18 Dec 2011 11:47:03 +0300
+-Subject: [PATCH 12/12] ARM: h1940: increase oversampling shift
+-
+-4 samples seems to be not enough for touchscreen driver
+-to work accurately
+-
+-Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+----
+- arch/arm/mach-s3c24xx/mach-h1940.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
+-index 6b45688..ca54dea 100644
+---- a/arch/arm/mach-s3c24xx/mach-h1940.c
+-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
+-@@ -181,7 +181,7 @@ static struct s3c2410_udc_mach_info h1940_udc_cfg __initdata = {
+- static struct s3c2410_ts_mach_info h1940_ts_cfg __initdata = {
+- 		.delay = 10000,
+- 		.presc = 49,
+--		.oversampling_shift = 2,
+-+		.oversampling_shift = 5,
+- 		.cfg_gpio = s3c24xx_ts_cfg_gpio,
+- };
+- 
+--- 
+-1.8.4
+-
+diff --git a/recipes-kernel/linux/linux-yocto-dev/h1940/defconfig b/recipes-kernel/linux/linux-yocto-dev/h1940/defconfig
+deleted file mode 100644
+index 6565dd5..0000000
+--- a/recipes-kernel/linux/linux-yocto-dev/h1940/defconfig
++++ /dev/null
+@@ -1,200 +0,0 @@
+-# CONFIG_LOCALVERSION_AUTO is not set
+-CONFIG_SYSVIPC=y
+-CONFIG_IKCONFIG=y
+-CONFIG_IKCONFIG_PROC=y
+-CONFIG_LOG_BUF_SHIFT=18
+-CONFIG_CGROUPS=y
+-CONFIG_CGROUP_DEBUG=y
+-CONFIG_CGROUP_FREEZER=y
+-CONFIG_CGROUP_DEVICE=y
+-CONFIG_CPUSETS=y
+-CONFIG_CGROUP_CPUACCT=y
+-CONFIG_RESOURCE_COUNTERS=y
+-CONFIG_MEMCG=y
+-CONFIG_MEMCG_SWAP=y
+-# CONFIG_MEMCG_SWAP_ENABLED is not set
+-CONFIG_MEMCG_KMEM=y
+-CONFIG_CGROUP_SCHED=y
+-CONFIG_BLK_CGROUP=y
+-# CONFIG_UTS_NS is not set
+-# CONFIG_IPC_NS is not set
+-# CONFIG_PID_NS is not set
+-# CONFIG_NET_NS is not set
+-CONFIG_BLK_DEV_INITRD=y
+-CONFIG_CC_OPTIMIZE_FOR_SIZE=y
+-# CONFIG_COMPAT_BRK is not set
+-CONFIG_SLAB=y
+-CONFIG_MODULES=y
+-CONFIG_MODULE_FORCE_LOAD=y
+-CONFIG_MODULE_UNLOAD=y
+-CONFIG_MODULE_FORCE_UNLOAD=y
+-# CONFIG_BLK_DEV_BSG is not set
+-CONFIG_PARTITION_ADVANCED=y
+-CONFIG_BSD_DISKLABEL=y
+-# CONFIG_EFI_PARTITION is not set
+-# CONFIG_IOSCHED_DEADLINE is not set
+-# CONFIG_IOSCHED_CFQ is not set
+-CONFIG_ARCH_S3C24XX=y
+-CONFIG_S3C_LOWLEVEL_UART_PORT=1
+-CONFIG_SAMSUNG_GPIO_EXTRA=16
+-CONFIG_S3C24XX_PWM=y
+-CONFIG_CPU_S3C2442=y
+-CONFIG_S3C24XX_DMA=y
+-CONFIG_ARCH_H1940=y
+-CONFIG_PREEMPT_VOLUNTARY=y
+-CONFIG_AEABI=y
+-# CONFIG_OABI_COMPAT is not set
+-# CONFIG_COMPACTION is not set
+-CONFIG_ZBOOT_ROM_TEXT=0x0
+-CONFIG_ZBOOT_ROM_BSS=0x0
+-CONFIG_CPU_IDLE=y
+-# CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+-CONFIG_APM_EMULATION=y
+-CONFIG_NET=y
+-CONFIG_PACKET=y
+-CONFIG_UNIX=y
+-CONFIG_INET=y
+-CONFIG_IP_MULTICAST=y
+-CONFIG_IP_PNP=y
+-CONFIG_IP_PNP_DHCP=y
+-# CONFIG_INET_XFRM_MODE_TRANSPORT is not set
+-# CONFIG_INET_XFRM_MODE_TUNNEL is not set
+-# CONFIG_INET_XFRM_MODE_BEET is not set
+-# CONFIG_INET_LRO is not set
+-# CONFIG_IPV6 is not set
+-CONFIG_IRDA=m
+-CONFIG_IRCOMM=m
+-CONFIG_IRDA_CACHE_LAST_LSAP=y
+-CONFIG_IRDA_FAST_RR=y
+-CONFIG_IRTTY_SIR=m
+-CONFIG_BT=m
+-CONFIG_BT_RFCOMM=m
+-CONFIG_BT_RFCOMM_TTY=y
+-CONFIG_BT_BNEP=m
+-CONFIG_BT_HCIUART=m
+-CONFIG_BT_HCIUART_H4=y
+-CONFIG_BT_HCIUART_BCSP=y
+-CONFIG_BT_HCIUART_ATH3K=y
+-CONFIG_BT_HCIUART_LL=y
+-CONFIG_CFG80211=m
+-CONFIG_CFG80211_WEXT=y
+-CONFIG_MAC80211=m
+-CONFIG_RFKILL=m
+-CONFIG_RFKILL_GPIO=m
+-CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
+-CONFIG_DEVTMPFS=y
+-CONFIG_DEVTMPFS_MOUNT=y
+-# CONFIG_FIRMWARE_IN_KERNEL is not set
+-CONFIG_MTD=y
+-CONFIG_MTD_CMDLINE_PARTS=y
+-CONFIG_MTD_BLOCK=y
+-CONFIG_MTD_CFI=y
+-CONFIG_MTD_JEDECPROBE=y
+-CONFIG_MTD_CFI_INTELEXT=y
+-CONFIG_MTD_CFI_AMDSTD=y
+-CONFIG_MTD_ROM=y
+-CONFIG_MTD_NAND=y
+-CONFIG_MTD_NAND_S3C2410=y
+-CONFIG_MTD_NAND_S3C2410_HWECC=y
+-CONFIG_BLK_DEV_LOOP=y
+-CONFIG_BLK_DEV_RAM=y
+-CONFIG_BLK_DEV_RAM_COUNT=1
+-CONFIG_BLK_DEV_RAM_SIZE=8192
+-CONFIG_NETDEVICES=y
+-# CONFIG_ETHERNET is not set
+-# CONFIG_INPUT_MOUSEDEV_PSAUX is not set
+-CONFIG_INPUT_MOUSEDEV_SCREEN_X=240
+-CONFIG_INPUT_MOUSEDEV_SCREEN_Y=320
+-CONFIG_INPUT_EVDEV=y
+-# CONFIG_KEYBOARD_ATKBD is not set
+-CONFIG_KEYBOARD_GPIO=y
+-# CONFIG_INPUT_MOUSE is not set
+-CONFIG_INPUT_TOUCHSCREEN=y
+-CONFIG_TOUCHSCREEN_S3C2410=y
+-# CONFIG_LEGACY_PTYS is not set
+-CONFIG_SERIAL_SAMSUNG=y
+-CONFIG_SERIAL_SAMSUNG_CONSOLE=y
+-# CONFIG_HW_RANDOM is not set
+-CONFIG_I2C=y
+-# CONFIG_I2C_COMPAT is not set
+-CONFIG_I2C_CHARDEV=m
+-CONFIG_I2C_S3C2410=m
+-CONFIG_GPIO_SYSFS=y
+-CONFIG_POWER_SUPPLY=y
+-CONFIG_PDA_POWER=y
+-CONFIG_APM_POWER=y
+-CONFIG_BATTERY_S3C_ADC=y
+-# CONFIG_HWMON is not set
+-CONFIG_WATCHDOG=y
+-CONFIG_S3C2410_WATCHDOG=y
+-CONFIG_REGULATOR=y
+-CONFIG_REGULATOR_DUMMY=y
+-CONFIG_FB=y
+-CONFIG_FB_S3C2410=y
+-CONFIG_BACKLIGHT_LCD_SUPPORT=y
+-CONFIG_LCD_CLASS_DEVICE=y
+-CONFIG_LCD_PLATFORM=y
+-CONFIG_BACKLIGHT_CLASS_DEVICE=y
+-# CONFIG_BACKLIGHT_GENERIC is not set
+-CONFIG_BACKLIGHT_PWM=y
+-CONFIG_FRAMEBUFFER_CONSOLE=y
+-CONFIG_SOUND=m
+-CONFIG_SND=m
+-CONFIG_SND_MIXER_OSS=m
+-CONFIG_SND_PCM_OSS=m
+-# CONFIG_SND_DRIVERS is not set
+-# CONFIG_SND_ARM is not set
+-CONFIG_SND_SOC=m
+-CONFIG_SND_SOC_SAMSUNG=m
+-CONFIG_SND_SOC_SAMSUNG_H1940_UDA1380=m
+-CONFIG_USB_GADGET=y
+-CONFIG_USB_GADGET_VBUS_DRAW=250
+-CONFIG_USB_S3C2410=y
+-CONFIG_USB_ETH=y
+-CONFIG_MMC=y
+-CONFIG_MMC_UNSAFE_RESUME=y
+-CONFIG_MMC_S3C=y
+-CONFIG_MMC_S3C_DMA=y
+-CONFIG_NEW_LEDS=y
+-CONFIG_LEDS_CLASS=y
+-CONFIG_LEDS_GPIO=y
+-CONFIG_LEDS_TRIGGERS=y
+-CONFIG_LEDS_TRIGGER_TIMER=y
+-CONFIG_RTC_CLASS=y
+-# CONFIG_RTC_INTF_PROC is not set
+-CONFIG_RTC_DRV_S3C=y
+-CONFIG_STAGING=y
+-# CONFIG_IOMMU_SUPPORT is not set
+-CONFIG_EXT2_FS=y
+-CONFIG_EXT3_FS=m
+-# CONFIG_EXT3_DEFAULTS_TO_ORDERED is not set
+-CONFIG_FUSE_FS=m
+-CONFIG_VFAT_FS=y
+-CONFIG_FAT_DEFAULT_CODEPAGE=866
+-CONFIG_FAT_DEFAULT_IOCHARSET="utf8"
+-CONFIG_TMPFS=y
+-CONFIG_NFS_FS=y
+-CONFIG_NFS_V4=y
+-CONFIG_ROOT_NFS=y
+-CONFIG_NLS_DEFAULT="utf8"
+-CONFIG_NLS_CODEPAGE_866=y
+-CONFIG_NLS_CODEPAGE_1251=y
+-CONFIG_NLS_UTF8=y
+-CONFIG_DEBUG_FS=y
+-CONFIG_MAGIC_SYSRQ=y
+-CONFIG_DEBUG_USER=y
+-CONFIG_CRYPTO_CBC=y
+-CONFIG_CRYPTO_ECB=y
+-CONFIG_CRYPTO_MD5=y
+-CONFIG_CRYPTO_MICHAEL_MIC=y
+-CONFIG_CRYPTO_ARC4=y
+-CONFIG_CRYPTO_DES=y
+-CONFIG_CRYPTO_ANSI_CPRNG=y
+-CONFIG_CRC_CCITT=y
+-CONFIG_CRC16=y
+-CONFIG_XZ_DEC_X86=y
+-CONFIG_XZ_DEC_POWERPC=y
+-CONFIG_XZ_DEC_IA64=y
+-CONFIG_XZ_DEC_SPARC=y
+-CONFIG_FONTS=y
+-CONFIG_FONT_MINI_4x6=y
 -- 
 1.9.1
 
