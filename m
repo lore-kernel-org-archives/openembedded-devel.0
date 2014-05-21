@@ -1,26 +1,36 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (unknown [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 17E43605B2
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pa0-f48.google.com (unknown [209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id B0ECA65D1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 07:30:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.98,878,1392159600"; d="scan'208";a="51534264"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 21 May 2014 09:30:52 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.2.318.1; Wed, 21 May 2014 09:30:52 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.2.328.9; Wed, 21 May 2014 09:30:51 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 May 2014 09:30:58 +0200
-Message-ID: <1400657458-32231-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
-In-Reply-To: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
-References: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] faac: fix S!=B failure
+	Wed, 21 May 2014 07:41:46 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id rd3so1157202pab.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 May 2014 00:41:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=bmXnYJhxFmdf5Qneq8JrfmPMWYUza3c37H/UVYgDmLI=;
+	b=uExSTRfDJI1JLYvkOj9zYBC/Xspb7lysqEQKYWMWNbudXbeA6twdReFpEOfoFOYTck
+	jOfhE2VGf0vZ5diLnFmBPF3xI+fDO3lEmyi1x8he3K1H/xW0Q9P8hfUDIeueG9NRBdHo
+	kuKOaxpkcslX3skUhKO5/ERITOA2fZiCe+3S2gG4bHsEeo2bXyOWemEY8utFb/ieMKB1
+	73AMmvgRxwIM/RlVYkB8mMsUdGt3O00xpFkTD4yE3JZt8Lcdoq4gmW4H1gWagRsp5wAQ
+	4uBwMm0KHRWW1zZH6wSvyoXAqMmwX9iu/BrFybWGL3CvgBf1AdW/ZzYtq9dMOOt8Y9jc
+	IZvA==
+X-Received: by 10.66.66.66 with SMTP id d2mr56878494pat.36.1400658107461;
+	Wed, 21 May 2014 00:41:47 -0700 (PDT)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id it4sm6669337pbc.39.2014.05.21.00.41.45
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 May 2014 00:41:46 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 May 2014 00:43:36 -0700
+Message-Id: <1400658223-15804-4-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+In-Reply-To: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
+References: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
+Subject: [meta-perl][PATCH v4 03/10] libmodule-runtime-perl: add 0.014
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,40 +44,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 07:30:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 May 2014 07:41:48 -0000
 
-Also use ${BP} and ${BPN}.
+From: Tim Orling <TicoTimo@gmail.com>
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+[Description from CPAN]
+The functions exported by this module deal with runtime
+handling of Perl modules, which are normally handled at compile time.
+This
+module avoids using any other modules, so that it can be used in
+low-level
+infrastructure.
+
+* Add ${CPAN_MIRROR} option
+* License line numbers changed from 0.013, same LICENSE.
+
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/faac/faac_1.28.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../libmodule/libmodule-runtime-perl_0.014.bb      | 35 ++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.014.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-index c7dcdb9..d96c1a4 100644
---- a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-+++ b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-@@ -4,15 +4,15 @@ LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
-            file://build-fix.patch"
- 
- SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
- SRC_URI[sha256sum] = "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"
- 
--PACKAGES =+ "lib${PN} lib${PN}-dev"
-+PACKAGES =+ "lib${BPN} lib${BPN}-dev"
- 
- FILES_${PN} = " ${bindir}/faac "
- FILES_lib${PN} = " ${libdir}/libfaac.so.*"
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.014.bb b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.014.bb
+new file mode 100644
+index 0000000..d68ae2a
+--- /dev/null
++++ b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.014.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Module::Runtime - runtime module handling"
++DESCRIPTION = "The functions exported by this module deal with runtime \
++handling of Perl modules, which are normally handled at compile time. This \
++module avoids using any other modules, so that it can be used in low-level \
++infrastructure. \
++The parts of this module that work with module names apply the same syntax \
++that is used for barewords in Perl source. In principle this syntax can vary \
++between versions of Perl, and this module applies the syntax of the Perl on \
++which it is running. In practice the usable syntax hasn't changed yet, but \
++there's a good chance of it changing in Perl 5.18. \
++The functions of this module whose purpose is to load modules include \
++workarounds for three old Perl core bugs regarding require. These workarounds \
++are applied on any Perl version where the bugs exist, except for a case where \
++one of the bugs cannot be adequately worked around in pure Perl."
++SECTION = "libs"
++
++HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
++
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://README;beginline=43;endline=44;md5=62e24a93342fede7221d66335c716f34"
++
++SRC_URI = "${CPAN_MIRROR}/authors/id/Z/ZE/ZEFRAM/Module-Runtime-${PV}.tar.gz"
++SRC_URI[md5sum] = "a6597bc25536a30476f0d75b64d35734"
++SRC_URI[sha256sum] = "4c44fe0ea255a9fd00741ee545063f6692d2a28e7ef2fbaad1b24a92803362a4"
++
++S = "${WORKDIR}/Module-Runtime-${PV}"
++
++inherit cpan_build
++
++RDEPENDS_${PN} = " perl-module-test-more \
++                   perl-module-strict \
++                   perl-module-build \
++"
++
++BBCLASSEXTEND = "native"
 -- 
-1.8.1.2
+1.8.3.2
 
 
