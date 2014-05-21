@@ -1,36 +1,34 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pb0-f51.google.com (unknown [209.85.160.51])
-	by mail.openembedded.org (Postfix) with ESMTP id B976165D1A
+Received: from mail-pa0-f47.google.com (unknown [209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D5CC65D1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 07:49:07 +0000 (UTC)
-Received: by mail-pb0-f51.google.com with SMTP id ma3so1158282pbc.24
+	Wed, 21 May 2014 07:49:08 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id lf10so1154916pab.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 00:49:08 -0700 (PDT)
+	Wed, 21 May 2014 00:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=RZ3MsplcRG19h7JLg6efx1oKTlvw6NfCLOmjsov1jUs=;
-	b=UVxAWRU5eWKDug4GPhLUQCehhPq5LBGuiOVaKsXA6mknzcsf0TgL9IT4hgDETic56G
-	kKTTeBFfnNf0fZKmCzZy1eYDu5gEmBoYsNZJmPSO3lF8/lE3EqGVcgHbop5ypjnHTPYw
-	17hOzDadN2kybnjYDVWIAX+xqt3g1RQHtB/STNR/tMI0K7qu1SOpKh6/LNresKhHS4bX
-	3myLoBhi9kRogSGMFKGccJJfvGp/hlWm49NtPFfw14Mg3IDWc1EKZmLG/aj6sfSX3Ay4
-	EQ7ALy4/jdwrhgyVXoAq30zECrLM3lxbq0u35WeYHtVBC9x2mm+VFKRJ3LDTmT919d75
-	6gSw==
-X-Received: by 10.68.139.137 with SMTP id qy9mr56233883pbb.11.1400658105603;
-	Wed, 21 May 2014 00:41:45 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=pW6TY7WggEFGNohN+gpzglsIvWnPVCWgRuSsb+yX+W4=;
+	b=uOEht44Qz4EYbD1oOwy2EWzUawrg0lvz9zJYfg6fCAAi4e0D8bZESUcoz4PM9FOXDY
+	2K5JX1jtNDhR6UqNKPskfYd/Y13XI+DhLx5zGYWVrBOTZUV3spSJJ8u1X6GqqCiTa9ua
+	Vp6cczn0FhK8/M2KuIh2ye0/myyNfCyjshGuuucl2I1e9xhu8xmIHjCj8EfcXjhoMamw
+	KylIswvRaL3UoxsdVtAPqnVdzGpOhrK41DP6VVSZh40ubUB0vfS9IlXPbzBGqUWueHom
+	zvwbjjX4gv4z+gRkP/AlXNOfiuXqJ77kgBtbrKGz5aEAfDvnY7hXmDC4E9fcpHhayHQp
+	2QOg==
+X-Received: by 10.66.232.138 with SMTP id to10mr5336192pac.7.1400658101625;
+	Wed, 21 May 2014 00:41:41 -0700 (PDT)
 Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id it4sm6669337pbc.39.2014.05.21.00.41.43
+	by mx.google.com with ESMTPSA id it4sm6669337pbc.39.2014.05.21.00.41.39
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 May 2014 00:41:44 -0700 (PDT)
+	Wed, 21 May 2014 00:41:40 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 May 2014 00:43:35 -0700
-Message-Id: <1400658223-15804-3-git-send-email-ticotimo@gmail.com>
+Date: Wed, 21 May 2014 00:43:33 -0700
+Message-Id: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
-References: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
-Subject: [meta-perl][PATCH v4 02/10] libcapture-tiny-perl: add 0.24
+Subject: [meta-perl][PATCH v4 00/10] add perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,73 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 07:49:07 -0000
+X-List-Received-Date: Wed, 21 May 2014 07:49:09 -0000
 
 From: Tim Orling <TicoTimo@gmail.com>
 
-[Description from CPAN]
-Capture::Tiny provies a simple, portable way to capture
-almost anything sent to STDOUT or STDERR, regardless of whether it comes
-from Perl, from XS code or from an external program. Optionally, output
-can
-be teed so that it is captured while being passed through to the
-original
-filehandles. Yes, it even works on Windows (usually). Stop guessing
-which of
-a dozen capturing modules to use in any particular situation and just
-use
-this one.
+Changes since v3:
+  * Use ${CPAN_MIRROR} for all recipes
+      * See patches for oe-core:
+          http://patches.openembedded.org/patch/72457/
+          http://patches.openembedded.org/patch/72459/
+  * Upstream has continued to move forward
+  * Update the following:
+      libcapture-tiny-perl from 0.23 -> 0.24
+      libmodule-runtime-perl from 0.013 -> 0.014
+      libextutils-helpers-perl from 0.021 -> 0.022
+      libmodule-build-tiny-perl from 0.030 -> 0.036
+  * Add libtest-harness-perl which RPROVIDES libtap-harness-env-perl
+    now required by libmodule-build-tiny-perl
 
-* Add ${CPAN_MIRROR} option
+Tim Orling (10):
+  libtext-diff-perl: add 1.41
+  libcapture-tiny-perl: add 0.24
+  libmodule-runtime-perl: add 0.014
+  libextutils-config-perl: add 0.007
+  libextutils-helper-perl: add 0.022
+  libextutils-installpaths-perl: add 0.010
+  libmodule-build-tiny-perl: add 0.036
+  libextutils-cppguess-perl: add 0.07
+  libalgorithm-diff-perl: add 1.15
+  libtest-harness-perl: add 3.30
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
----
- .../libcapture/libcapture-tiny-perl_0.24.bb        | 36 ++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+ .../libalgorithm/libalgorithm-diff-perl_1.15.bb    | 23 +++++++
+ .../libcapture/libcapture-tiny-perl_0.24.bb        | 36 ++++++++++
+ .../libextutils/libextutils-config-perl_0.007.bb   | 24 +++++++
+ .../libextutils/libextutils-cppguess-perl_0.07.bb  | 38 +++++++++++
+ .../libextutils/libextutils-helpers-perl_0.022.bb  | 29 ++++++++
+ .../libextutils-installpaths-perl_0.010.bb         | 25 +++++++
+ .../libmodule/libmodule-build-tiny-perl_0.036.bb   | 55 +++++++++++++++
+ .../libmodule/libmodule-runtime-perl_0.014.bb      | 35 ++++++++++
+ .../libtest/libtest-harness-perl_3.30.bb           | 79 ++++++++++++++++++++++
+ .../recipes-perl/libtext/libtext-diff-perl_1.41.bb | 27 ++++++++
+ 10 files changed, 371 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libalgorithm/libalgorithm-diff-perl_1.15.bb
  create mode 100644 meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.007.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.07.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
+ create mode 100644 meta-perl/recipes-perl/libextutils/libextutils-installpaths-perl_0.010.bb
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.036.bb
+ create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.014.bb
+ create mode 100644 meta-perl/recipes-perl/libtest/libtest-harness-perl_3.30.bb
+ create mode 100644 meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
 
-diff --git a/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb
-new file mode 100644
-index 0000000..0237485
---- /dev/null
-+++ b/meta-perl/recipes-perl/libcapture/libcapture-tiny-perl_0.24.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Capture::Tiny - Capture STDOUT and STDERR from Perl, XS or external programs."
-+DESCRIPTION = "Capture::Tiny provies a simple, portable way to capture \
-+almost anything sent to STDOUT or STDERR, regardless of whether it comes \
-+from Perl, from XS code or from an external program. Optionally, output can \
-+be teed so that it is captured while being passed through to the original \
-+filehandles. Yes, it even works on Windows (usually). Stop guessing which of \
-+a dozen capturing modules to use in any particular situation and just use \
-+this one."
-+SECTION = "libs"
-+
-+HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-${PV}.tar.gz"
-+SRC_URI[md5sum] = "718e9d62c4a27a3207cf8506cb99d846"
-+SRC_URI[sha256sum] = "9bcf6f8472f8ea50401536cb070ac0c7770837d155c4d6abe212759863aae065"
-+
-+S = "${WORKDIR}/Capture-Tiny-${PV}"
-+
-+inherit cpan
-+
-+RDEPENDS_${PN} = " perl-module-scalar-util \
-+                   perl-module-io-file \
-+                   perl-module-extutils-makemaker \
-+                   perl-module-file-spec \
-+                   perl-module-exporter \
-+                   perl-module-carp \
-+                   perl-module-test-more \
-+                   perl-module-file-temp \
-+                   perl-module-lib \
-+                   perl-module-build \
-+"
-+
-+BBCLASSEXTEND = "native"
 -- 
 1.8.3.2
 
