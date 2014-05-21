@@ -1,27 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (unknown [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id A5C0961F16
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (unknown [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 9077961F16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 09:08:46 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 21 May 2014 02:03:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.98,878,1392192000"; d="scan'208";a="515321886"
-Received: from mmckenna-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.156])
-	by orsmga001.jf.intel.com with ESMTP; 21 May 2014 02:08:45 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-Date: Wed, 21 May 2014 10:08:43 +0100
-Message-ID: <46692786.LUQzjOGhxB@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.4-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45D6A@GBTWK10E001.Technology.local>
-References: <5d1edcab304d4fbb8e6349d49bb62e98@BL2PR04MB852.namprd04.prod.outlook.com>
-	<AAE0766F5AF36B46BAB7E0EFB927320633FFF45D6A@GBTWK10E001.Technology.local>
+	Wed, 21 May 2014 09:17:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.98,879,1392159600"; d="scan'208";a="51542558"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 21 May 2014 11:17:40 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.2.328.9; Wed, 21 May 2014 11:17:39 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Wed, 21 May 2014 11:17:39 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 21 May 2014 11:17:44 +0200
+Message-ID: <1400663865-4304-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [poky]: libusb1_1.0.18.bb: configure: error: "udev support	requested but libudev not installed"
+Subject: [meta-oe][PATCH 1/2] mesa-glut: fix S!=B failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 09:08:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 21 May 2014 09:17:49 -0000
+Content-Type: text/plain
 
-Hi Nick,
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Tuesday 20 May 2014 11:09:00 Lewis, Nick wrote:
-> >configure: error: "udev support requested but libudev not installed"
-> 
-> We are seeing the same problem.
-> This may be because the patch "libusb1: disable floating dependency on udev"
-> has not been committed. May I please request this is done soon as our
-> autobuilder has been broken for 4 nights now
-
-FYI the fix for this issue is now merged as of yesterday.
-
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb b/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
+index 7006b41..f23621d 100644
+--- a/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
++++ b/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
+@@ -9,6 +9,6 @@ PV = "8.0.0+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools pkgconfig
++inherit autotools-brokensep pkgconfig
+ 
+ DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu"
 -- 
+1.8.1.2
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
