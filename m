@@ -1,23 +1,33 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (unknown [216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 9CF5F65F1E
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yh0-f53.google.com (unknown [209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id AAF0F65D0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 May 2014 20:31:34 +0000 (UTC)
-Received: (qmail 8942 invoked by uid 1003); 21 May 2014 20:31:35 -0000
-Received: from unknown (HELO ?192.168.1.122?) (philip@opensdr.com@108.44.91.50)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	21 May 2014 20:31:35 -0000
-Message-ID: <537D0D26.8070505@balister.org>
-Date: Wed, 21 May 2014 16:31:34 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+	Wed, 21 May 2014 20:58:06 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id i57so2189259yha.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 May 2014 13:58:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=xUtbZwdh8n1DCxGJ8vLCLCzKXLmLbpo152WKIVQjkNA=;
+	b=p8d6RjU6s7iIQz1EDegYFlOY1TCnorgkf1p5fy0SYAscS+FL+dwWsWB72tUnbuafZ9
+	89QgwkTxT3wcPmEUDy+L+gS9n/lLsiZhf0Vz9GvC5aEhtpwqnOjyNK9ZETISbFDvFQ6q
+	XTH7DcvXUpVSX/HIgDszY5XKaJ0767S6PUHgN14e03Ks7qssJP9S1Ml8/75WcayAc3pg
+	100zHswwsJzrFL4BKQpZuiBIHACf6iIv+0YDBa6bYgV2RdIRHRONSqrCqB35veI0mihN
+	dfrc/ToegFj//WLo3/wvOe1GjBYfyexFjUYwKpcK4xpGcpaYZrTkGBb5uVKJEe040eCY
+	MJ3w==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>	<CFA27259.284985%rcalhoun@shotspotter.com>
+X-Received: by 10.236.147.232 with SMTP id t68mr30343261yhj.127.1400705887864; 
+	Wed, 21 May 2014 13:58:07 -0700 (PDT)
+Received: by 10.170.110.8 with HTTP; Wed, 21 May 2014 13:58:07 -0700 (PDT)
+In-Reply-To: <537D0D26.8070505@balister.org>
+References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
+	<CFA27259.284985%rcalhoun@shotspotter.com>
 	<CAN-NoH3B+3+9QuWOLaMpcjxD0FhkETFqyDr1CKRPO7kXU0UFXg@mail.gmail.com>
-In-Reply-To: <CAN-NoH3B+3+9QuWOLaMpcjxD0FhkETFqyDr1CKRPO7kXU0UFXg@mail.gmail.com>
-X-Enigmail-Version: 1.6
+	<537D0D26.8070505@balister.org>
+Date: Wed, 21 May 2014 13:58:07 -0700
+Message-ID: <CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: how to create a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -32,83 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 May 2014 20:31:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 May 2014 20:58:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 05/21/2014 04:05 PM, Richard Cagley wrote:
-> On Wed, May 21, 2014 at 12:26 PM, Robert Calhoun
-> <rcalhoun@shotspotter.com> wrote:
->>
->>
->> On 5/21/14 2:26 PM, "Richard Cagley" <rcagley@gmail.com> wrote:
->>
->>> I'd like to create a new machine that inherits from an existing
->>> machine. What's the easiest way to do this?
+On Wed, May 21, 2014 at 1:31 PM, Philip Balister <philip@balister.org> wrote:
+> On 05/21/2014 04:05 PM, Richard Cagley wrote:
+>> On Wed, May 21, 2014 at 12:26 PM, Robert Calhoun
+>> <rcalhoun@shotspotter.com> wrote:
 >>>
->>> Looking through the yocto documentation I see "yocot-bsp create" but I
->>> don't seem to have that executable. Do I need to use this or is there
->>> an alternate method?
->>
->> The script is in: poky/scripts/yocto-bsp
->>
->> You don't really need it. The script creates a directory structure for you
->> and generates some files, but there is nothing magical about it; you can
->> create those manually using the meta-yocto-bsp layer as an example.
->> Machine configs are in poky/meta-yocto-bsp/conf/machine.
->>
->> To make bitbake use your new layer:
->> a) add your layer to poky/build/conf/bblayers.conf so that that bitbake
->> knows what directories to search
->> b) set your machine name in poky/build/conf/local.conf
->>
->> I would recommend putting your own layer into git (or scm of choice).
->> Switching branches on poky will make the build fail if your .bbappends no
->> longer match up with recipes in oe-core, so it's helpful to be able to
->> switch between e.g. "a version of my layer that works with branch daisy"
->> and "a version of my layer that works with branch master".
->>
->> Rob Calhoun
->>
-> oh, I don't think I'm using poky so I guess that's the reason I didn't
-> find yocto-bsp
-> 
-> I'm using oe-core/meta-xilinx and for testing I've created a new test
-> layer "meta-me" so my bblayers looks like this
-> 
-> BBLAYERS ?= " \
->   /home/rcagley/oe-zed-gcc-min/openembedded-core/meta \
->   /home/rcagley/oe-zed-gcc-min/meta-xilinx \
->   /home/rcagley/oe-zed-gcc-min/meta-oe/meta-oe \
->   /home/rcagley/oe-zed-gcc-min/meta-me \
->   "
-> 
-> In my local.conf I have
-> MACHINE ??= "zedboard-zynq7"
-> 
-> My current main goal is to make my build consume a .bbappend file I
-> have in meta-me/recipes-kernel/linux.
-> 
-> 1.) What is the minimum set of files I need to do this? I'd guess at
-> least meta-me/conf/local.conf. Anything else?
+>>>
+>>> On 5/21/14 2:26 PM, "Richard Cagley" <rcagley@gmail.com> wrote:
+>>>
+>
+>> 2.) Do I need to change the machine name? If so, how to I inherit
+>> zedboard-zynq7?
+>
+> Make a conf/machine/me.conf.
+>
+> You can use one of the zynq machines as a starting point.
+>
+> You'll need a conf/layer.conf also.
 
-You do not need a per layer local.conf
+1.) copied meta-xilinx/conf/machine/zedboard-zynq7.conf to
+meta-me/conf/machine/me.conf
+2.) changed MACHINE in my build/conf/local.conf to "me"
+3.) copied meta-xilinx/conf/layer.conf to meta-me/conf/layer.conf
 
-> 2.) Do I need to change the machine name? If so, how to I inherit
-> zedboard-zynq7?
+Now:
+1.) in layer.conf should I change "xilinx" to "me"?
+2.) What about the new machine file me.conf? Do I need to edit it or
+by not editing it does it just inherit everything from the other meta
+layer?
 
-Make a conf/machine/me.conf.
-
-You can use one of the zynq machines as a starting point.
-
-You'll need a conf/layer.conf also.
-
-Philip
-
-> 
-> The yocto manuals talk to creating a new layer, but I'm less clear on
-> how to basically inherit everything.
-> 
-> BTW, thanks for the tip about git/matching branches. That's a good idea.
-> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
