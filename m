@@ -1,28 +1,31 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (unknown [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A86D7605B2
+Return-Path: <alexandre.fournier@kiplink.fr>
+Received: from webmail.wisp-e.com (unknown [212.83.147.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BB6B65EDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 08:26:50 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 22 May 2014 01:26:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.98,885,1392192000"; d="scan'208";a="543216733"
-Received: from mcomyns-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.122])
-	by fmsmga002.fm.intel.com with ESMTP; 22 May 2014 01:16:07 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-Date: Thu, 22 May 2014 09:16:05 +0100
-Message-ID: <8008105.uChK18SGlL@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.4-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <537CD60D.7020602@opendreambox.org>
-References: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
-	<1400657458-32231-1-git-send-email-Matthieu.Crapet@ingenico.com>
-	<537CD60D.7020602@opendreambox.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] faac: fix S!=B failure
+	Thu, 22 May 2014 12:34:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by webmail.wisp-e.com (Postfix) with ESMTP id 18F1F1A15A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 May 2014 14:34:21 +0200 (CEST)
+Received: from webmail.wisp-e.com ([127.0.0.1])
+	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10032)
+	with ESMTP id AyzW_DobamHP; Thu, 22 May 2014 14:34:20 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by webmail.wisp-e.com (Postfix) with ESMTP id 8D1CF1A159E;
+	Thu, 22 May 2014 14:34:20 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at wisp-e.com
+Received: from webmail.wisp-e.com ([127.0.0.1])
+	by localhost (webmail.wisp-e.com [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id FVv-hvqT3WA9; Thu, 22 May 2014 14:34:20 +0200 (CEST)
+Received: from borma.wisp-e.com (borma.wisp-e.com [192.168.200.62])
+	by webmail.wisp-e.com (Postfix) with ESMTPA id 6036E1A1529;
+	Thu, 22 May 2014 14:34:20 +0200 (CEST)
+From: Alexandre Fournier <alexandre.fournier@kiplink.fr>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 May 2014 14:36:47 +0200
+Message-Id: <1400762207-13631-1-git-send-email-alexandre.fournier@kiplink.fr>
+X-Mailer: git-send-email 1.8.5.5
+Subject: [meta-networking][PATCH v2] net-snmp: install net-snmp-config script to STAGING_BINDIR_CROSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,63 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 08:26:53 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 22 May 2014 12:34:16 -0000
 
-On Wednesday 21 May 2014 18:36:29 Andreas Oberritter wrote:
-> Hello Matthieu,
-> 
-> On 21.05.2014 09:30, Matthieu Crapet wrote:
-> > Also use ${BP} and ${BPN}.
-> 
-> What problem does this solve?
-> 
-> > Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-> > ---
-> > 
-> >  meta-multimedia/recipes-multimedia/faac/faac_1.28.bb | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-> > b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb index
-> > c7dcdb9..d96c1a4 100644
-> > --- a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-> > +++ b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
-> > @@ -4,15 +4,15 @@ LICENSE = "LGPLv2+"
-> > 
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-> >  
-> >                      file://libfaac/coder.h;beginline=5;endline=17;md5=fa1
-> >                      fd6a5fa8cdc877d63a12530d273e0"> 
-> > -inherit autotools
-> > +inherit autotools-brokensep
-> > 
-> > -SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
-> > +SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
-> > 
-> >             file://build-fix.patch"
-> >  
-> >  SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
-> >  SRC_URI[sha256sum] =
-> >  "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"> 
-> > -PACKAGES =+ "lib${PN} lib${PN}-dev"
-> > +PACKAGES =+ "lib${BPN} lib${BPN}-dev"
-> > 
-> >  FILES_${PN} = " ${bindir}/faac "
-> >  FILES_lib${PN} = " ${libdir}/libfaac.so.*"
-> 
->               ^
-> This differs from PACKAGES now.
+This recipe was installing net-snmp-config script to STAGING_BINDIR
+instead of STAGING_BINDIR_CROSS, during the do_install. It is not
+recommended and must be done after staging.
 
-Also, BPN should not generally be used in PACKAGES, or nativesdk packages will 
-clash with target ones.
+Changes:
+* Remove STAGING_BINDIR manipulations from do_install_append
+* Add net_snmp_sysroot_preprocess function instead
+* Append net_snmp_sysroot_preprocess to SYSROOT_PREPROCESS_FUNCS
 
-Cheers,
-Paul
+Signed-off-by: Alexandre Fournier <alexandre.fournier@kiplink.fr>
+---
+ .../recipes-protocols/net-snmp/net-snmp_5.7.2.bb            | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+index eb50d0f..f1e3a5d 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+@@ -49,19 +49,26 @@ do_install_append() {
+     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/snmpd
+     install -m 644 ${WORKDIR}/snmpd.conf ${D}${sysconfdir}/snmp/
+     install -m 644 ${WORKDIR}/snmptrapd.conf ${D}${sysconfdir}/snmp/
+-    install -d ${STAGING_BINDIR}
+-    install -m 0755 ${D}${bindir}/net-snmp-config ${STAGING_BINDIR}/
+     sed -e "s@-I/usr/include@@g" \
+         -e "s@^prefix=.*@prefix=${STAGING_DIR_HOST}@g" \
+         -e "s@^exec_prefix=.*@exec_prefix=${STAGING_DIR_HOST}@g" \
+         -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
+         -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
+-        -i ${STAGING_BINDIR}/net-snmp-config
++        -i ${D}${bindir}/net-snmp-config
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
+ }
+ 
++SYSROOT_PREPROCESS_FUNCS += "net_snmp_sysroot_preprocess"
++
++net_snmp_sysroot_preprocess () {
++    if [ -e ${D}${bindir}/net-snmp-config ]; then
++        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++        install -m 755 ${D}${bindir}/net-snmp-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
++    fi
++}
++
+ PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
+             ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
+ 
 -- 
+1.8.5.5
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
