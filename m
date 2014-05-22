@@ -1,29 +1,28 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (unknown [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C509605B3
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (unknown [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id E6CA460E23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 05:28:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s4M5Sobw022110
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 21 May 2014 22:28:50 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Wed, 21 May 2014 22:28:48 -0700
-Message-ID: <537D8B0D.3030204@windriver.com>
-Date: Thu, 22 May 2014 13:28:45 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Thu, 22 May 2014 07:10:08 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 22 May 2014 00:10:08 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.98,885,1392192000"; d="scan'208";a="543176830"
+Received: from mcomyns-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.122])
+	by fmsmga002.fm.intel.com with ESMTP; 22 May 2014 00:10:02 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Richard Cagley <rcagley@gmail.com>
+Date: Thu, 22 May 2014 08:10 +0100
+Message-ID: <1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.4-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
+In-Reply-To: <CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
+References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
+	<537D0D26.8070505@balister.org>
+	<CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
 MIME-Version: 1.0
-To: Tim Orling <ticotimo@gmail.com>
-References: <537D5AFA.6000800@windriver.com>
-	<1400729002-27635-1-git-send-email-ticotimo@gmail.com>
-In-Reply-To: <1400729002-27635-1-git-send-email-ticotimo@gmail.com>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl][PATCH v5 10/10] libtest-harness-perl: add 3.30
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: how to create a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,120 +36,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 05:28:57 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 May 2014 07:10:12 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Fine to me
+On Wednesday 21 May 2014 13:58:07 Richard Cagley wrote:
+> On Wed, May 21, 2014 at 1:31 PM, Philip Balister <philip@balister.org>
+> wrote:
+> > On 05/21/2014 04:05 PM, Richard Cagley wrote:
+> >> On Wed, May 21, 2014 at 12:26 PM, Robert Calhoun
+> >> <rcalhoun@shotspotter.com> wrote:
+> >>> On 5/21/14 2:26 PM, "Richard Cagley" <rcagley@gmail.com> wrote:
+> >> 2.) Do I need to change the machine name? If so, how to I inherit
+> >> zedboard-zynq7?
+> > 
+> > Make a conf/machine/me.conf.
+> > 
+> > You can use one of the zynq machines as a starting point.
+> > 
+> > You'll need a conf/layer.conf also.
+> 
+> 1.) copied meta-xilinx/conf/machine/zedboard-zynq7.conf to
+> meta-me/conf/machine/me.conf
+> 2.) changed MACHINE in my build/conf/local.conf to "me"
+> 3.) copied meta-xilinx/conf/layer.conf to meta-me/conf/layer.conf
+> 
+> Now:
+> 1.) in layer.conf should I change "xilinx" to "me"?
 
-//Hongxu
+Yes
 
-On 05/22/2014 11:23 AM, Tim Orling wrote:
-> From: Tim Orling <TicoTimo@gmail.com>
->
-> Test::Harness - Run Perl standard test scripts with statistics
->
-> * Uses ${CPAN_MIRROR} option
-> * RPROVIDES based on v3.28 recipe:
->          Paul Eggleton <paul.eggleton@linux.intel.com>
->          http://github.com/bluelightning/public_bb_recipes
-> * which is forked from
->          Emil Petersen <erp@movis.dk> repo
->          http://github.com/EmilRP/public_bb_recipes/
-> * run through oe-stylize and clean bad white space
-> * correct email address to oe-dev
->
-> Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> ---
->   .../libtest/libtest-harness-perl_3.30.bb           | 80 ++++++++++++++++++++++
->   1 file changed, 80 insertions(+)
->   create mode 100644 meta-perl/recipes-perl/libtest/libtest-harness-perl_3.30.bb
->
-> diff --git a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.30.bb b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.30.bb
-> new file mode 100644
-> index 0000000..c3d9674
-> --- /dev/null
-> +++ b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.30.bb
-> @@ -0,0 +1,80 @@
-> +SUMMARY = "Test::Harness - Run Perl standard test scripts with statistics"
-> +DESCRIPTION = "Although, for historical reasons, the Test::Harness \
-> +distribution takes its name from this module it now exists only to provide \
-> +TAP::Harness with an interface that is somewhat backwards compatible \
-> +with Test::Harness 2.xx. If you're writing new code consider using \
-> +TAP::Harness directly instead. \
-> +\
-> +Emulation is provided for runtests and execute_tests but the \
-> +pluggable 'Straps' interface that previous versions of Test::Harness \
-> +supported is not reproduced here. Straps is now available as a stand \
-> +alone module: Test::Harness::Straps. \
-> +\
-> +See TAP::Parser, TAP::Harness for the main documentation for this \
-> +distribution."
-> +
-> +SECTION = "libs"
-> +
-> +HOMEPAGE = "http://testanything.org"
-> +
-> +LICENSE = "Artistic-1.0 | GPL-1.0+"
-> +LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
-> +
-> +SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "c1ff25da5dfdf77adea13dc3465638dd"
-> +SRC_URI[sha256sum] = "ff1900f3b3e61321d3c4b3283298f3106d43d55446605e9cfcf1dcec036acec1"
-> +
-> +S = "${WORKDIR}/Test-Harness-${PV}"
-> +
-> +inherit cpan
-> +
-> +RPROVIDES_${PN} += "libapp-prove-perl \
-> +                    libapp-prove-state-perl \
-> +                    libapp-prove-state-result-perl \
-> +                    libapp-prove-state-result-test-perl \
-> +                    libtap-base-perl \
-> +                    libtap-formatter-base-perl \
-> +                    libtap-formatter-color-perl \
-> +                    libtap-formatter-console-perl \
-> +                    libtap-formatter-console-parallelsession-perl \
-> +                    libtap-formatter-console-session-perl \
-> +                    libtap-formatter-file-perl \
-> +                    libtap-formatter-file-session-perl \
-> +                    libtap-formatter-session-perl \
-> +                    libtap-harness-perl \
-> +                    libtap-harness-env-perl \
-> +                    libtap-object-perl \
-> +                    libtap-parser-perl \
-> +                    libtap-parser-aggregator-perl \
-> +                    libtap-parser-grammar-perl \
-> +                    libtap-parser-iterator-perl \
-> +                    libtap-parser-iterator-array-perl \
-> +                    libtap-parser-iterator-process-perl \
-> +                    libtap-parser-iterator-stream-perl \
-> +                    libtap-parser-iteratorfactory-perl \
-> +                    libtap-parser-multiplexer-perl \
-> +                    libtap-parser-result-perl \
-> +                    libtap-parsser-result-bailout-perl \
-> +                    libtap-parser-result-comment-perl \
-> +                    libtap-parser-result-plan-perl \
-> +                    libtap-parser-result-pragma-perl \
-> +                    libtap-parser-result-test-perl \
-> +                    libtap-parser-result-unknown-perl \
-> +                    libtap-parser-result-version-perl \
-> +                    libtap-parser-result-yaml-perl \
-> +                    libtap-parser-resultfactory-perl \
-> +                    libtap-parser-scheduler-perl \
-> +                    libtap-parser-scheduler-job-perl \
-> +                    libtap-parser-scheduler-spinner-perl \
-> +                    libtap-parser-source-perl \
-> +                    libtap-parser-sourcehandler-perl \
-> +                    libtap-parser-sourcehandler-executable-perl \
-> +                    libtap-parser-sourcehandler-file-perl \
-> +                    libtap-parser-sourcehandler-handle-perl \
-> +                    libtap-parser-sourcehandler-perl-perl \
-> +                    libtap-parser-sourcehandler-rawtap-perl \
-> +                    libtap-parser-yamlish-reader-perl \
-> +                    libtap-parser-yamlish-writer-perl \
-> +                    "
-> +
-> +BBCLASSEXTEND = "native"
+> 2.) What about the new machine file me.conf? Do I need to edit it or
+> by not editing it does it just inherit everything from the other meta
+> layer?
 
+Since you copied an existing configuration file, all that was in it
+previously will still apply. You can change it if you want some values to
+be different, of course (I would assume that you would want to edit
+it since there wouldn't be much point in going through this exercise if you
+didn't.)
+
+One other thing to note - if there are overrides for the previous machine
+(e.g. in bbappends you may see _zedboard-zynq7) you should change
+these to _me so that they still apply.
+
+You may also find this useful:
+
+http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#understanding-and-creating-layers 
+
+Cheers
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
