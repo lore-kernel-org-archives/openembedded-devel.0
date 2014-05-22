@@ -1,22 +1,36 @@
-Return-Path: <amy.fong@windriver.com>
-Received: from mail.windriver.com (unknown [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C33465EE2
+Return-Path: <rcagley@gmail.com>
+Received: from mail-yk0-f169.google.com (unknown [209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DE3265FC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 20:45:15 +0000 (UTC)
-Received: from yow-dellw-af (yow-dellw-af.wrs.com [128.224.56.22])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s4MKjF64002186
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NO);
-	Thu, 22 May 2014 13:45:16 -0700 (PDT)
-Received: from afong by yow-dellw-af with local (Exim 4.82)
-	(envelope-from <amy.fong@windriver.com>)
-	id 1WnZrX-0007e2-67; Thu, 22 May 2014 16:45:15 -0400
-Date: Thu, 22 May 2014 16:45:14 -0400
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140522204514.GA29369@windriver.com>
+	Thu, 22 May 2014 22:46:00 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 200so3399719ykr.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 May 2014 15:46:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=h4Ium/xbuDTMooZwsolKdIv3A1iwZ/cacKkTwXCix0k=;
+	b=DRcZAwsbnrmp9TjQD2p8ialEvdB+ku0kgaEUIQcZXlOGdufZXTMZrxb1ekB86CDsjo
+	+7uU9EmUa4uy9/XexnDQICtSV5JG7Qa1XQM2TeVjdVjjxLvgKZBarVARO/T7DhFbvZif
+	e7DmSAQ5kaeSeDVKKAlYFanh000cn7PgSYn+svdO/jTa+kAn08x9fIYqNMPc++1pK5do
+	Its2T8X6OIodn/XuGBtXZF4/oAqNOLG+B1rsyyNQDzcwrqtsA3vYkv6he1vfZvfpTcUG
+	s+kDZsS4KDDyYcq+IwrX13R3cQV/aFQbcc3G4XOhv3QEGNb2nykaiZf8L/zB4GwIkD37
+	wgFg==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-ruby] [PATCH] ruby overwrites configuration files in ruby-native
+X-Received: by 10.236.119.99 with SMTP id m63mr1037776yhh.65.1400798761956;
+	Thu, 22 May 2014 15:46:01 -0700 (PDT)
+Received: by 10.170.110.8 with HTTP; Thu, 22 May 2014 15:46:01 -0700 (PDT)
+In-Reply-To: <1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
+References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
+	<537D0D26.8070505@balister.org>
+	<CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
+	<1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
+Date: Thu, 22 May 2014 15:46:01 -0700
+Message-ID: <CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
+From: Richard Cagley <rcagley@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: how to create a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,68 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 20:45:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 May 2014 22:46:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From 11b1e17a6dfdd84b3969c17b1b85b3b9bb934d11 Mon Sep 17 00:00:00 2001
-From: Amy Fong <amy.fong@windriver.com>
-Date: Thu, 22 May 2014 16:43:40 -0400
-Subject: [PATCH] ruby overwrites configuration files in ruby-native
+> One other thing to note - if there are overrides for the previous machine
+> (e.g. in bbappends you may see _zedboard-zynq7) you should change
+> these to _me so that they still apply.
+>
 
-ruby's install rule is calling install-cross, this overwrites files installed
-by ruby-native causing build failures with ruby apps, specifically where gems
-are involved, especially on hosts where there is no host ruby:
+What is the threshold for making a new machine? That is, if I just
+have a .bbappend file I want, that should just involve creating a new
+layer and putting the bbappend file in the correct location. I
+shouldn't have to change anything else correct?
 
-(from sysroot-native's gem)
-gem env
- RubyGems Environment:
-   - RUBYGEMS VERSION: 1.8.23
-   - RUBY VERSION: 1.9.3 (2012-04-20 patchlevel 194) [x86_64-linux]
-   - INSTALLATION DIRECTORY: /usr/lib64/ruby/gems/1.9.1
-   - RUBY EXECUTABLE: /usr/bin/ruby
-   - EXECUTABLE DIRECTORY: /usr/bin
-   - RUBYGEMS PLATFORMS:
-     - ruby
-     - x86_64-linux
-   - GEM PATHS:
-      - /usr/lib64/ruby/gems/1.9.1
-      - /folk/afong/.gem/ruby/1.9.1
-   - GEM CONFIGURATION:
-      - :update_sources => true
-      - :verbose => true
-      - :benchmark => false
-      - :backtrace => false
-      - :bulk_threshold => 1000
-   - REMOTE SOURCES:
-      - http://rubygems.org/
+For instance, if I just want to change the kernel configuration with a
+frag file I can put linux-xlnx_3.8.bbappedn in
+meta-me/recipes-kernel/linux and that's all I need?
 
-Files affected - fake.rb, rbconfig.rb, config.h, win32.h and ruby libraries.
-We should be using the versions from ruby-native.
-
-Signed-off-by: Amy Fong <amy.fong@windriver.com>
----
- meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
-
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb
-index 883bb98..bb4bab8 100644
---- a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb
-+++ b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb
-@@ -28,11 +28,7 @@ EXTRA_OEMAKE = " \
- "
- 
- do_install() {
--    if [ ${PN} = "ruby" ]; then
--        oe_runmake 'DESTDIR=${D}' install install-cross
--    else
--        oe_runmake 'DESTDIR=${D}' install
--    fi
-+    oe_runmake 'DESTDIR=${D}' install
- }
- 
- FILES_${PN} += "${datadir}/rubygems \
--- 
-2.0.0.rc0
-
+I guess I'm just confused at what point I actually need a new machine.
 
