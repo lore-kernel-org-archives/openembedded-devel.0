@@ -1,28 +1,28 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (unknown [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id E6CA460E23
+Received: from mga11.intel.com (unknown [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id A86D7605B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 07:10:08 +0000 (UTC)
+	Thu, 22 May 2014 08:26:50 +0000 (UTC)
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 22 May 2014 00:10:08 -0700
+	by fmsmga102.fm.intel.com with ESMTP; 22 May 2014 01:26:51 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.98,885,1392192000"; d="scan'208";a="543176830"
+X-IronPort-AV: E=Sophos;i="4.98,885,1392192000"; d="scan'208";a="543216733"
 Received: from mcomyns-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.122])
-	by fmsmga002.fm.intel.com with ESMTP; 22 May 2014 00:10:02 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 22 May 2014 01:16:07 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Richard Cagley <rcagley@gmail.com>
-Date: Thu, 22 May 2014 08:10 +0100
-Message-ID: <1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
+To: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+Date: Thu, 22 May 2014 09:16:05 +0100
+Message-ID: <8008105.uChK18SGlL@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.12.5 (Linux/3.14.4-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
-References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
-	<537D0D26.8070505@balister.org>
-	<CAN-NoH1coG9-Go6qqOQU_-vu3QqhdE30znM-PCgMPZtAd5To+Q@mail.gmail.com>
+In-Reply-To: <537CD60D.7020602@opendreambox.org>
+References: <CAMKF1sqfoiANL7jcnVA3Q7sWz8mzjcUfkCNE5FxQFweWd905Rw@mail.gmail.com>
+	<1400657458-32231-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<537CD60D.7020602@opendreambox.org>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: how to create a new layer
+Subject: Re: [meta-oe][PATCH v2] faac: fix S!=B failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,55 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 07:10:12 -0000
+X-List-Received-Date: Thu, 22 May 2014 08:26:53 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Wednesday 21 May 2014 13:58:07 Richard Cagley wrote:
-> On Wed, May 21, 2014 at 1:31 PM, Philip Balister <philip@balister.org>
-> wrote:
-> > On 05/21/2014 04:05 PM, Richard Cagley wrote:
-> >> On Wed, May 21, 2014 at 12:26 PM, Robert Calhoun
-> >> <rcalhoun@shotspotter.com> wrote:
-> >>> On 5/21/14 2:26 PM, "Richard Cagley" <rcagley@gmail.com> wrote:
-> >> 2.) Do I need to change the machine name? If so, how to I inherit
-> >> zedboard-zynq7?
-> > 
-> > Make a conf/machine/me.conf.
-> > 
-> > You can use one of the zynq machines as a starting point.
-> > 
-> > You'll need a conf/layer.conf also.
+On Wednesday 21 May 2014 18:36:29 Andreas Oberritter wrote:
+> Hello Matthieu,
 > 
-> 1.) copied meta-xilinx/conf/machine/zedboard-zynq7.conf to
-> meta-me/conf/machine/me.conf
-> 2.) changed MACHINE in my build/conf/local.conf to "me"
-> 3.) copied meta-xilinx/conf/layer.conf to meta-me/conf/layer.conf
+> On 21.05.2014 09:30, Matthieu Crapet wrote:
+> > Also use ${BP} and ${BPN}.
 > 
-> Now:
-> 1.) in layer.conf should I change "xilinx" to "me"?
+> What problem does this solve?
+> 
+> > Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+> > ---
+> > 
+> >  meta-multimedia/recipes-multimedia/faac/faac_1.28.bb | 6 +++---
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
+> > b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb index
+> > c7dcdb9..d96c1a4 100644
+> > --- a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
+> > +++ b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
+> > @@ -4,15 +4,15 @@ LICENSE = "LGPLv2+"
+> > 
+> >  LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+> >  
+> >                      file://libfaac/coder.h;beginline=5;endline=17;md5=fa1
+> >                      fd6a5fa8cdc877d63a12530d273e0"> 
+> > -inherit autotools
+> > +inherit autotools-brokensep
+> > 
+> > -SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BPN}-${PV}.tar.gz \
+> > +SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
+> > 
+> >             file://build-fix.patch"
+> >  
+> >  SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
+> >  SRC_URI[sha256sum] =
+> >  "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"> 
+> > -PACKAGES =+ "lib${PN} lib${PN}-dev"
+> > +PACKAGES =+ "lib${BPN} lib${BPN}-dev"
+> > 
+> >  FILES_${PN} = " ${bindir}/faac "
+> >  FILES_lib${PN} = " ${libdir}/libfaac.so.*"
+> 
+>               ^
+> This differs from PACKAGES now.
 
-Yes
+Also, BPN should not generally be used in PACKAGES, or nativesdk packages will 
+clash with target ones.
 
-> 2.) What about the new machine file me.conf? Do I need to edit it or
-> by not editing it does it just inherit everything from the other meta
-> layer?
-
-Since you copied an existing configuration file, all that was in it
-previously will still apply. You can change it if you want some values to
-be different, of course (I would assume that you would want to edit
-it since there wouldn't be much point in going through this exercise if you
-didn't.)
-
-One other thing to note - if there are overrides for the previous machine
-(e.g. in bbappends you may see _zedboard-zynq7) you should change
-these to _me so that they still apply.
-
-You may also find this useful:
-
-http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#understanding-and-creating-layers 
-
-Cheers
+Cheers,
+Paul
 
 -- 
 
