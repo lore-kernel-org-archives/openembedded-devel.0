@@ -1,37 +1,28 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-ee0-f53.google.com (unknown [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 76B47660F6
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (unknown [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 3266860E23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 23:24:12 +0000 (UTC)
-Received: by mail-ee0-f53.google.com with SMTP id c13so3128806eek.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 May 2014 16:24:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Y8OZXEXmEFBq6vjIelLCN0x0AS6glxVxp5wGHAVk20U=;
-	b=XWdbsVty3kyuSg7nWpW1vvHNP9bBkj6xir86kn8R+eMC31v3Nd3rynI+1X1YDa96oW
-	p6915GcaN0holqERl5vlZtibIhoUh6dk5esw1VvvHJt3rW53YwhqCJ5QbbE7QAkTLW1W
-	paY58/y5PfKlZgMwwTWfaetjTHc8LJCPEs/V+/aMQp2ntEs+1WHGZ1uhPjakILU4P4H8
-	18r8lYnzrP9hdF4LAQxvAW4VUCRyRdML5NfMnGXAukov43/+rA38vyK8Zc6B3fkvD2Ra
-	1TDUwfEcnX4ERb7WXLnd61K3STM5a9hIuxovM7WMnkEU1Bg7VlZ8mykoME4EQLgbj+4p
-	7TWw==
-X-Received: by 10.14.127.9 with SMTP id c9mr1724049eei.93.1400801053886;
-	Thu, 22 May 2014 16:24:13 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host38-245-dynamic.48-82-r.retail.telecomitalia.it. [82.48.245.38])
-	by mx.google.com with ESMTPSA id h6sm3794049eew.38.2014.05.22.16.24.12
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 22 May 2014 16:24:13 -0700 (PDT)
-From: YourName <andrea.adami@gmail.com>
-X-Google-Original-From: YourName <email@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 May 2014 01:24:05 +0200
-Message-Id: <1400801045-14912-2-git-send-email-email@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1400801045-14912-1-git-send-email-email@gmail.com>
-References: <1400801045-14912-1-git-send-email-email@gmail.com>
-Subject: [meta-handheld][PATCH 2/2] initramfs-mininit-klibc-image: initial commit
+	Fri, 23 May 2014 07:11:52 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 23 May 2014 00:11:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.98,892,1392192000"; d="scan'208";a="545382053"
+Received: from bidesilv-mobl1.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.159])
+	by orsmga002.jf.intel.com with ESMTP; 23 May 2014 00:11:44 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Richard Cagley <rcagley@gmail.com>
+Date: Fri, 23 May 2014 08:11:43 +0100
+Message-ID: <1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.4-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
+In-Reply-To: <CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
+References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
+	<1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
+	<CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: how to create a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 May 2014 23:24:14 -0000
+X-List-Received-Date: Fri, 23 May 2014 07:11:57 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Andrea Adami <andrea.adami@gmail.com>
+On Thursday 22 May 2014 15:46:01 Richard Cagley wrote:
+> > One other thing to note - if there are overrides for the previous machine
+> > (e.g. in bbappends you may see _zedboard-zynq7) you should change
+> > these to _me so that they still apply.
+> 
+> What is the threshold for making a new machine? That is, if I just
+> have a .bbappend file I want, that should just involve creating a new
+> layer and putting the bbappend file in the correct location. I
+> shouldn't have to change anything else correct?
+> 
+> For instance, if I just want to change the kernel configuration with a
+> frag file I can put linux-xlnx_3.8.bbappedn in
+> meta-me/recipes-kernel/linux and that's all I need?
 
-This cpio does the job of finding and loop-mounting the rootfs file.
-See https://github.com/pcercuei/mininit
+Yes, that should be all that is required - no need for your own machine 
+configuration in this case.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- .../images/initramfs-mininit-klibc-image.bb        | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 recipes-bsp/images/initramfs-mininit-klibc-image.bb
+> I guess I'm just confused at what point I actually need a new machine.
 
-diff --git a/recipes-bsp/images/initramfs-mininit-klibc-image.bb b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
-new file mode 100644
-index 0000000..18aad75
---- /dev/null
-+++ b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Initramfs image for mininit kernel"
-+DESCRIPTION = "This image provides mininit (helper for booting loop images)."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-+
-+IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
-+
-+# avoid circular dependencies
-+EXTRA_IMAGEDEPENDS = ""
-+
-+# We really need just kexecboot, kexec and ubiattach
-+IMAGE_INSTALL = "mininit-klibc"
-+
-+# Do not pollute the initrd image with rootfs features
-+IMAGE_FEATURES = ""
-+
-+IMAGE_LINGUAS = ""
-+
-+FEED_DEPLOYDIR_BASE_URI = ""
-+LDCONFIGDEPEND = ""
-+
-+inherit image
+If you want to change the global configuration for the machine substantially 
+from that in the original BSP, you may need to create your own machine 
+configuration; but for the exact same hardware as the original BSP supports I 
+would have thought that in most cases it would not be necessary.
+
+Cheers,
+Paul
+
 -- 
-1.9.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
