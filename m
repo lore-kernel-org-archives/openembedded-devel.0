@@ -1,35 +1,24 @@
-Return-Path: <rcagley@gmail.com>
-Received: from mail-yh0-f41.google.com (unknown [209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E373A65F1E
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (unknown [216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id E9D2F6B6FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 15:25:52 +0000 (UTC)
-Received: by mail-yh0-f41.google.com with SMTP id f73so4394150yha.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 08:25:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=mvLjPpiUByYUav6g6iyF54UHSm8xMCV9qFFeLucxOrs=;
-	b=bNJ4nJnNnap8PM4xqwCcJQecMujQeSmnEMtBTS/yDbWVMDviQD9adEJUH2kXPEptOo
-	+qlwJFQmHYlVI1JnKk1PW7qdt0jMQGUoOJT42z/lzXeQmsn8IB53ckqxUizkbzK+SCj/
-	yTPQR401CyDa6iO+eAD/Z8dQzQjkcfxyoaYMxIxwHgsbEGDNFjiRy7A1w1jl7gf33xQN
-	viUE40yJtnuLhEp2ckk7uSMUzumR4eGYAn+JlnSf3LWuw6bIY+ZL6m//m22RBezKyCxu
-	FA6K6AvTH+ATlZwV8BkxT8CxXIwfUUAmIGbG9FxkcWRQGNirvUDDVcMxQ9ucxTvf7+ps
-	6GHw==
+	Fri, 23 May 2014 15:37:06 +0000 (UTC)
+Received: (qmail 21340 invoked by uid 1003); 23 May 2014 15:37:07 -0000
+Received: from unknown (HELO ?192.168.1.122?) (philip@opensdr.com@108.44.91.50)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	23 May 2014 15:37:07 -0000
+Message-ID: <537F6B22.8070804@balister.org>
+Date: Fri, 23 May 2014 11:37:06 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-X-Received: by 10.236.119.99 with SMTP id m63mr8031154yhh.65.1400858753840;
-	Fri, 23 May 2014 08:25:53 -0700 (PDT)
-Received: by 10.170.110.8 with HTTP; Fri, 23 May 2014 08:25:53 -0700 (PDT)
-In-Reply-To: <1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
-References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>
-	<1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>
-	<CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Richard Cagley <rcagley@gmail.com>
+References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>	<1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>	<CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
 	<1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
-Date: Fri, 23 May 2014 08:25:53 -0700
-Message-ID: <CAN-NoH0dJN5KHecVz3wjLmeshHgOX99GGWXp1mAgik=auJi=Qg@mail.gmail.com>
-From: Richard Cagley <rcagley@gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
+X-Enigmail-Version: 1.6
 Subject: Re: how to create a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,15 +33,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 15:26:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 May 2014 15:37:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 23, 2014 at 12:11 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
+On 05/23/2014 03:11 AM, Paul Eggleton wrote:
 > On Thursday 22 May 2014 15:46:01 Richard Cagley wrote:
->> > One other thing to note - if there are overrides for the previous machine
->> > (e.g. in bbappends you may see _zedboard-zynq7) you should change
->> > these to _me so that they still apply.
+>>> One other thing to note - if there are overrides for the previous machine
+>>> (e.g. in bbappends you may see _zedboard-zynq7) you should change
+>>> these to _me so that they still apply.
 >>
 >> What is the threshold for making a new machine? That is, if I just
 >> have a .bbappend file I want, that should just involve creating a new
@@ -62,24 +51,25 @@ On Fri, May 23, 2014 at 12:11 AM, Paul Eggleton
 >> For instance, if I just want to change the kernel configuration with a
 >> frag file I can put linux-xlnx_3.8.bbappedn in
 >> meta-me/recipes-kernel/linux and that's all I need?
->
-> Yes, that should be all that is required - no need for your own machine
+> 
+> Yes, that should be all that is required - no need for your own machine 
 > configuration in this case.
->
+> 
 >> I guess I'm just confused at what point I actually need a new machine.
->
-> If you want to change the global configuration for the machine substantially
-> from that in the original BSP, you may need to create your own machine
-> configuration; but for the exact same hardware as the original BSP supports I
+> 
+> If you want to change the global configuration for the machine substantially 
+> from that in the original BSP, you may need to create your own machine 
+> configuration; but for the exact same hardware as the original BSP supports I 
 > would have thought that in most cases it would not be necessary.
->
+
+Basically, I make a machine whenever I will have hardware specific
+drivers, kernel configs, and device trees.
+
+Philip
+
+
+> 
 > Cheers,
 > Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
-
-Thanks Paul. I think I got it....or I'm starting to get it.
+> 
 
