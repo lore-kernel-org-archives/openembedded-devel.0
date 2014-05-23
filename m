@@ -1,35 +1,37 @@
-Return-Path: <diego.sueiro@gmail.com>
-X-Greylist: delayed 1359 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 23 May 2014 13:12:59 UTC
-Received: from mail-qg0-f47.google.com (unknown [209.85.192.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D3B7465EDC
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta5.messagelabs.com (unknown [195.245.231.143])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F843605B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 13:12:59 +0000 (UTC)
-Received: by mail-qg0-f47.google.com with SMTP id j107so7939625qga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 06:13:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=EvliT/2Ww9x6SSt9KzYZfkA8fQGwoMJ7rdk39vNpBsc=;
-	b=NszTH4JjPDpkHd6RIKFQtgftuwC76AA0EiIMiLSwXlyiTPjhuYbzInzMdUL//2Y9EB
-	7MZRT0gEJd3lHHjhtT3JcEkj+NJWFzk8/VQBiUsNjQxwzGzmULFqMJ5fsQjRYIFizry6
-	Z/11QkokASQi+jiND9YRPgzaBMaIObkRVMaWale1wJbepNORkELsYBk6/r8t7DntoqZ/
-	hA18D9ESoyt0Wgsz2UHqkZoQQUVYGs4eBO844wlNLh5EUPY0i9STF1Qw7n878DuJueKL
-	tOu0eXikntms+Iu0C3VUBj8+yDSMzx+FXaubAis6VOHJt/75Rhrs4YKq7yjcNsvHQymP
-	j/Jw==
-X-Received: by 10.224.20.72 with SMTP id e8mr6068266qab.86.1400848925667; Fri,
-	23 May 2014 05:42:05 -0700 (PDT)
+	Fri, 23 May 2014 15:09:53 +0000 (UTC)
+Received: from [85.158.139.35:44000] by server-7.bemta-5.messagelabs.com id
+	A1/1C-20531-2C46F735; Fri, 23 May 2014 15:09:54 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-11.tower-179.messagelabs.com!1400857793!27482920!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12141 invoked from network); 23 May 2014 15:09:53 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s037.Technology.local)
+	(89.206.228.155)
+	by server-11.tower-179.messagelabs.com with RC4-SHA encrypted SMTP;
+	23 May 2014 15:09:53 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s037.Technology.local ([10.234.1.39]) with mapi; Fri, 23 May 2014
+	16:09:53 +0100
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 May 2014 16:09:52 +0100
+Thread-Topic: [PATCH] libxml plus plus fails to build
+Thread-Index: Ac92mJaDd9OnTv5lS1quC6/G13oasQ==
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45D75@GBTWK10E001.Technology.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.140.48.112 with HTTP; Fri, 23 May 2014 05:41:45 -0700 (PDT)
-In-Reply-To: <OF06526D97.F40A4898-ONC1257CE1.003879C4-C1257CE1.00388073@retarus.de>
-References: <OFD0867E9E.B7C0E311-ONC1257CD7.0035B985-C1257CD7.003A4198@retarus.de>
-	<OF06526D97.F40A4898-ONC1257CE1.003879C4-C1257CE1.00388073@retarus.de>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Fri, 23 May 2014 09:41:45 -0300
-Message-ID: <CAMCfZKFghRYxxCHEsQ0MJ9_VcK2h7XOocGn0BAfviZ4ECkrHUQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5] Building and running issues on Raspberry Pi
+Subject: Re: [PATCH] libxml plus plus fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,234 +45,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 13:13:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 May 2014 15:09:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Are u running on X11 environment?
-
-Do you have mali module and lib onto your system? I'm not sure if
-meta-raspberrypi provides mali support. If not you fave to use a X11 image.
-
-I had this same problem in another machine and I applied this patch to get
-Cinematics Experience working with eglfs.:
-
-Index:
-qtbase-opensource-src-5.2.1/src/plugins/platforms/eglfs/qeglfshooks_stub.cp=
-p
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
----
-qtbase-opensource-src-5.2.1.orig/src/plugins/platforms/eglfs/qeglfshooks_st=
-ub.cpp
-  2014-02-01 18:37:36.000000000 -0200
-+++
-qtbase-opensource-src-5.2.1/src/plugins/platforms/eglfs/qeglfshooks_stub.cp=
-p
-   2014-05-15 17:04:19.117306579 -0300
-@@ -251,7 +251,12 @@
-     Q_UNUSED(platformWindow);
-     Q_UNUSED(size);
-     Q_UNUSED(format);
--    return 0;
-+//    return 0;
-+   static struct mali_native_window native_window =3D {
-+        .width =3D (short unsigned int)size.width(),
-+        .height =3D (short unsigned int)size.height(),
-+    };
-+    return &native_window;
- }
-
- void QEglFSHooks::destroyNativeWindow(EGLNativeWindowType window)
-
-
-This patch comes from this link:
-http://wickwire2099.blogspot.com.br/2014/02/qt5-on-cubieboard-a10a20.html
-
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br<http://www.embarcados.com.br/?utm_source=3Dassinatura=
-_diego&utm_medium=3De-mail&utm_campaign=3DAssinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
-
-On Fri, May 23, 2014 at 7:17 AM, Felix01 Fischer <felix01.fischer@iav.de>wr=
-ote:
-
-> No suggestions?
->
->
->
->
->
-> openembedded-devel-bounces@lists.openembedded.org schrieb am 13.05.2014
-> 12:36:19:
->
-> > Von: Felix01 Fischer <felix01.fischer@iav.de>
-> > An: openembedded-devel@lists.openembedded.org,
-> > Datum: 13.05.2014 15:11
-> > Betreff: [oe] [meta-qt5] Building and running issues on Raspberry Pi
-> > Gesendet von: openembedded-devel-bounces@lists.openembedded.org
-> >
-> > Hello,
-> > I'm trying to get Qt5 running on a raspberry pi using yocto and I'm
-> facing
-> > two problems:
-> > I'm using up to date layers from poky, meta-raspberrypi and meta-qt5
-> >
-> > First, I have to add the following to local.conf (or a
-> > qtbase_5.X.Y.bbappend file)
-> >
-> > QT_CONFIG_FLAGS +=3D " \
-> >     -device linux-rasp-pi-g++ \
-> >     -device-option
-> > CROSS_COMPILE=3D$PATH_TO_SYSROOT_DIR/x86_64-linux/usr/bin/arm-poky-
-> > linux-gnueabi/arm-poky-linux-gnueabi-
-> > \
-> > -I$PATH_TO_SYSROOT_DIR/raspberrypi/usr/include/interface/vcos/pthreads
-> > \
-> > "
-> >
-> > then I get the following error while "bitbake qtbase":
-> >
-> > "DEBUG: Executing python function sysroot_cleansstate
-> > DEBUG: Python function sysroot_cleansstate finished
-> > DEBUG: Executing shell function qmake5_base_preconfigure
-> > DEBUG: Shell function qmake5_base_preconfigure finished
-> > DEBUG: Executing shell function do_configure
-> >
-> > This is the Qt Open Source Edition.
-> >
-> > You are licensed to use this software under the terms of
-> > the Lesser GNU General Public License (LGPL) versions 2.1.
-> >
-> > You have already accepted the terms of the  license.
-> >
-> > Performing shadow build...
-> > Preparing build tree...
-> > Symbol visibility control disabled.
-> > -o libtest.so -shared -Wl,-Bsymbolic-functions -fPIC
-> bsymbolic_functions.c
-> > /media/yocto_build/qt5-raspb/build/tmp/work/raspberrypi-poky-linux-
-> > gnueabi/qtbase/5.2.1-r0/qtbase-opensource-src-5.2.1/config.tests/
-> > unix/bsymbolic_functions.test:
-> > line 14: -o: command not found
-> > Symbolic function binding disabled.
-> > -reduce-relocations was requested but this compiler does not support it
-> > Re-run configure with -v for more information
-> > WARNING:
-> > /media/yocto_build/qt5-raspb/build/tmp/work/raspberrypi-poky-linux-
-> > gnueabi/qtbase/5.2.1-r0/temp/run.do_configure.5533:1
-> > exit 1 from
-> >
-> > /media/yocto_build/qt5-raspb/build/tmp/work/raspberrypi-poky-linux-
-> > gnueabi/qtbase/5.2.1-r0/qtbase-opensource-src-5.2.1/configure
-> > -v -dont-process -opensource -confirm-license -sysroot
-> > /media/yocto_build/qt5-raspb/build/tmp/sysroots/raspberrypi
-> > -no-gcc-sysroot -prefix /usr -bindir /usr/bin/qt5 -libdir /usr/lib
-> > -datadir /usr/share/qt5 -sysconfdir /etc/qt5 -docdir /usr/share/doc/qt5
-> > -headerdir /usr/include/qt5 -archdatadir /usr/lib/qt5 -libexecdir
-> > /usr/lib/qt5/libexec -plugindir /usr/lib/qt5/plugins -importdir
-> > /usr/lib/qt5/imports -qmldir /usr/lib/qt5/qml -translationdir
-> > /usr/share/qt5/translations -testsdir /usr/share/qt5/tests -examplesdir
-> > /usr/share/qt5/examples -hostbindir /usr/bin/qt5 -hostdatadir
-> > /media/yocto_build/qt5-raspb/build/tmp/sysroots/raspberrypi/usr/lib/qt5
-> > -external-hostbindir
-> > /media/yocto_build/qt5-raspb/build/tmp/sysroots/x86_64-linux/usr/bin/qt=
-5
->
-> > -platform
-> > /media/yocto_build/qt5-raspb/build/tmp/sysroots/x86_64-linux/usr/
-> > lib/qt5/mkspecs/linux-oe-g++
-> > -xplatform linux-oe-g++ -reduce-relocations -shared -silent -no-pch
-> > -no-rpath -pkg-config -no-accessibility -no-alsa -dbus -directfb -evdev
-> > -nomake examples -no-fontconfig -freetype -opengl desktop -no-eglfs
-> > -opengl es2 -eglfs -no-glib -no-gtkstyle -no-iconv -no-icu
-> -system-libjpeg
-> > -no-kms -system-libpng -make libs -linuxfb -no-mitshm -no-mtdev -no-nis
-> > -openssl-linked -no-openvg -qt-pcre -pulseaudio -release -no-sm
-> > -no-sql-db2 -no-sql-ibase -no-sql-mysql -no-sql-oci -no-sql-odbc
-> > -no-sql-psql -no-sql-sqlite -no-sql-sqlite2 -no-sql-tds -nomake tests
-> > -make tools -tslib -libudev -widgets -no-xcb -no-xcursor -no-xfixes
-> > -no-xinerama -no-xinput -no-xinput2 -no-xkb -no-xrandr -no-xrender
-> > -no-xshape -no-xsync -no-xvideo -system-zlib -device linux-rasp-pi-g++
-> > -device-option
-> > CROSS_COMPILE=3D/media/yocto_build/qt5-raspb/build/tmp/sysroots/
-> > x86_64-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-
-> > -I/media/yocto_build/qt5-raspb/build/tmp/sysroots/raspberrypi/usr/
-> > include/interface/vcos/pthreads
-> > ERROR: Function failed: do_configure (log file is located at
-> > /media/yocto_build/qt5-raspb/build/tmp/work/raspberrypi-poky-linux-
-> > gnueabi/qtbase/5.2.1-r0/temp/log.do_configure.5533)"
-> >
-> >
-> >
-> > A look into
-> > build/tmp/work/raspberrypi-poky-linux-gnueabi/qtbase/5.2.1-r0/
-> > qtbase-opensource-src-5.2.1/config.tests/unix/bsymbolic_functions.test
-> >
-> > tells me that the "COMPILER" and "SYSROOT_FLAG" variables are empty. I
-> > don't know what to do here.
-> > My workaround is to remove "-reduce-relocations" from QT_CONFIG_FLAGS i=
-n
->
-> > qtbase.inc
-> >
-> > After that the build succeeds without problems.
-> > But, when I boot up my image and try to run a Qt5 Application from the
-> > console I always get the same error:
-> >
-> > "EGLFS: Unable to query physical screen size, defaulting to 100 dpi.
-> > EGLFS: To override, set QT_QPA_EGLFS_PHYSICAL_WIDTH and
-> > QT_QPA_EGLFS_PHYSICAL_HEIGHT (in millimeters).
-> > libpng warning: iCCP: Not recognizing known sRGB profile that has been
-> > edited
-> > EGL Error : Could not create the egl surface: error =3D 0x300b"
-> >
-> > I'm stuck with this error and don't really know what to do.
-> >
-> > Kind regards,
-> >
-> > Felix Fischer
-> >
-> > Student Employee (VC-I42)
-> > Vehicle Cockpit - HMI Software and Code generation
-> >
-> > IAV GmbH
-> > Carnotstr. 1
-> > 10587 BERLIN
-> > GERMANY
-> >
-> > Phone: +49 30 3997-89540
-> > Fax:       +49 30 3997-89411
-> > E-Mail:  <mailto:felix01.fischer@iav.de>
-> > Internet: http://www.iav.com
-> >
-> > Sitz/Registered Office: Berlin,
-> > Registergericht/Registration Court: Amtsgericht Charlottenburg,
-> > Registernummer/Company Registration Number: HRB 21 280,
-> > Gesch=E4ftsf=FChrer/Managing Directors: Kurt Blumenr=F6der, Michael Sch=
-ubert,
-> > Dr. R=FCdiger Goyk
-> > Vorsitzender des Aufsichtsrates/Chairman of the Supervisory Board: Dr.
-> > Harald Ludanek
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+RG9lcyBhbnlvbmUgaGF2ZSBhbnkgcmVhc29ucyB3aHkgdGhpcyBwYXRjaCBzaG91bGQgbm90IGJl
+IGFwcGxpZWQuDQoNCkl0IGNvcnJlY3RzIGEgZmFpbHVyZSBvZiB0aGUgbGlieG1sKysgcmVjaXBl
+IHRvIGJ1aWxkIG5vdyB0aGF0ICR7Qn0gaXMgbm90IGVxdWFsIHRvICR7U30gaW4gYXV0b3Rvb2xz
+IGNsYXNzDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQt
+ZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVk
+LWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIE5pY2sg
+TGV3aXMNClNlbnQ6IDA2IE1heSAyMDE0IDE2OjQ3DQpUbzogJ29wZW5lbWJlZGRlZC1kZXZlbEBs
+aXN0cy5vcGVuZW1iZWRkZWQub3JnJw0KU3ViamVjdDogW29lXSBbUEFUQ0hdIGxpYnhtbCBwbHVz
+IHBsdXMgcHRlc3Qgd2l0aCBCIG5vdGVxIFMNCg0KRnJvbSA2YzFiYjBjMTI2YzMyMjEyYjM0NjY0
+NzA5ODc0MjE1ZjQzODRjY2M0IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KRnJvbTogTmljayBM
+ZXdpcyA8bmljay5sZXdpc0B1c2EuZzRzLmNvbT4NCkRhdGU6IFR1ZSwgNiBNYXkgMjAxNCAxNjoz
+NjowNSArMDEwMA0KU3ViamVjdDogW1BBVENIXSBsaWJ4bWwgcGx1cyBwbHVzIHB0ZXN0IHdpdGgg
+QiBub3RlcSBTDQoNClNpZ25lZC1vZmYtYnk6IE5pY2sgTGV3aXMgPG5pY2subGV3aXNAdXNhLmc0
+cy5jb20+DQotLS0NCiBtZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4x
+L2xpYnhtbCsrX3B0ZXN0LnBhdGNoIHwgNCArKy0tDQogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0
+aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1j
+b3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRlc3QucGF0Y2ggYi9tZXRhLW9l
+L3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4xL2xpYnhtbCsrX3B0ZXN0LnBhdGNo
+DQppbmRleCBhMTg4MjJmLi4xZTg0N2JlIDEwMDY0NA0KLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNv
+cmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9saWJ4bWwrK19wdGVzdC5wYXRjaA0KKysrIGIvbWV0
+YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9saWJ4bWwrK19wdGVzdC5w
+YXRjaA0KQEAgLTY1LDkgKzY1LDkgQEAgaW5kZXggZDk1NDFjYS4uYzI4YjQ5YyAxMDA2NDQNCiAr
+ICAgICAgJChNS0RJUl9QKSAkKERFU1RESVIpL2V4YW1wbGVzDQogKyAgICAgIGNwIC0tcGFyZW50
+cyAkKGNoZWNrX0RPVExJQlMpICQoREVTVERJUikvZXhhbXBsZXMNCiArICAgICAgY3AgLS1wYXJl
+bnRzICQoY2hlY2tfU0NSSVBUUykgJChERVNURElSKS9leGFtcGxlcw0KLSsgICAgICBjcCAtLXBh
+cmVudHMgJChkaXN0X25vaW5zdF9EQVRBKSAkKERFU1RESVIpL2V4YW1wbGVzDQorKyAgICAgICQo
+Zm9yZWFjaCBpLCAkKGRpc3Rfbm9pbnN0X0RBVEEpLCBjcCAtLXBhcmVudHMgJChzcmNkaXIpLyQo
+aSkgJChERVNURElSKS9leGFtcGxlczspDQogKyAgICAgIGNwIE1ha2VmaWxlICQoREVTVERJUikv
+ZXhhbXBsZXMNCiArICAgICAgJChNS0RJUl9QKSAkKERFU1RESVIpL21hY3Jvcw0KLSsgICAgICBj
+cCAuLi9tYWNyb3MvdGVzdC1kcml2ZXIgJChERVNURElSKS9tYWNyb3MNCisrICAgICAgY3AgJChz
+cmNkaXIpLy4uL21hY3Jvcy90ZXN0LWRyaXZlciAkKERFU1RESVIpL21hY3Jvcw0KICsgICAgICBz
+ZWQgLWkgLWUgJ3N8Xk1ha2VmaWxlOnxfTWFrZWZpbGU6fCcgJChERVNURElSKS9leGFtcGxlcy9N
+YWtlZmlsZQ0KICsNCi0tDQoxLjkuMQ0KDQoNCk5pY2sgTGV3aXMNCm5pY2subGV3aXNAdXNhLmc0
+cy5jb20NCis0NCAxNjg0IDI3NzEzNw0Kd3d3Lmc0c3RlY2hub2xvZ3kuY29tDQpOZXcgQ2hhbGxl
+bmdlIEhvdXNlLCBJbnRlcm5hdGlvbmFsIERyaXZlLCBUZXdrZXNidXJ5LCBHbG91Y2VzdGVyc2hp
+cmUsIEdMMjAgOFVRLCBVSw0KDQrvgZAgUGxlYXNlIGNvbnNpZGVyIHRoZSBlbnZpcm9ubWVudCBi
+ZWZvcmUgcHJpbnRpbmcgdGhpcyBlbWFpbA0KDQoNClRoZSBkZXRhaWxzIG9mIHRoaXMgY29tcGFu
+eSBhcmUgYXMgZm9sbG93czoNCkc0UyBUZWNobm9sb2d5IExpbWl0ZWQsIFJlZ2lzdGVyZWQgT2Zm
+aWNlOiBDaGFsbGVuZ2UgSG91c2UsIEludGVybmF0aW9uYWwgRHJpdmUsIFRld2tlc2J1cnksIEds
+b3VjZXN0ZXJzaGlyZSBHTDIwIDhVUSwgUmVnaXN0ZXJlZCBpbiBFbmdsYW5kIE5vLiAyMzgyMzM4
+Lg0KDQpUaGlzIGNvbW11bmljYXRpb24gbWF5IGNvbnRhaW4gaW5mb3JtYXRpb24gd2hpY2ggaXMg
+Y29uZmlkZW50aWFsLCBwZXJzb25hbCBhbmQvb3IgcHJpdmlsZWdlZC4NCg0KSXQgaXMgZm9yIHRo
+ZSBleGNsdXNpdmUgdXNlIG9mIHRoZSBpbnRlbmRlZCByZWNpcGllbnQocykuDQpJZiB5b3UgYXJl
+IG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLCBwbGVhc2Ugbm90ZSB0aGF0IGFueSBkaXN0
+cmlidXRpb24sIGZvcndhcmRpbmcsIGNvcHlpbmcgb3IgdXNlIG9mIHRoaXMgY29tbXVuaWNhdGlv
+biBvciB0aGUgaW5mb3JtYXRpb24gaW4gaXQgaXMgc3RyaWN0bHkgcHJvaGliaXRlZC4NCg0KQW55
+IHBlcnNvbmFsIHZpZXdzIGV4cHJlc3NlZCBpbiB0aGlzIGUtbWFpbCBhcmUgdGhvc2Ugb2YgdGhl
+IGluZGl2aWR1YWwgc2VuZGVyIGFuZCB0aGUgY29tcGFueSBkb2VzIG5vdCBlbmRvcnNlIG9yIGFj
+Y2VwdCByZXNwb25zaWJpbGl0eSBmb3IgdGhlbS4NCg0KUHJpb3IgdG8gdGFraW5nIGFueSBhY3Rp
+b24gYmFzZWQgdXBvbiB0aGlzIGUtbWFpbCBtZXNzYWdlLCB5b3Ugc2hvdWxkIHNlZWsgYXBwcm9w
+cmlhdGUgY29uZmlybWF0aW9uIG9mIGl0cyBhdXRoZW50aWNpdHkuDQoNClRoaXMgZS1tYWlsIGhh
+cyBiZWVuIHNjYW5uZWQgZm9yIGFsbCB2aXJ1c2VzIGJ5IE1lc3NhZ2VMYWJzLg0KLS0NCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQpPcGVuZW1iZWRkZWQt
+ZGV2ZWwgbWFpbGluZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZw0KaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
+ZW1iZWRkZWQtZGV2ZWwNClRoaXMgY29tcGFueSBpcyBwYXJ0IG9mIHRoZSBHNFMgZ3JvdXAgb2Yg
+Y29tcGFuaWVzLiBUaGlzIGNvbW11bmljYXRpb24gY29udGFpbnMgaW5mb3JtYXRpb24gd2hpY2gg
+bWF5IGJlIGNvbmZpZGVudGlhbCwgcGVyc29uYWwgYW5kL29yIHByaXZpbGVnZWQuIEl0IGlzIGZv
+ciB0aGUgZXhjbHVzaXZlIHVzZSBvZiB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLiBJZiB5b3Ug
+YXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50KHMpLCBwbGVhc2Ugbm90ZSB0aGF0IGFueSBk
+aXN0cmlidXRpb24sIGZvcndhcmRpbmcsIGNvcHlpbmcgb3IgdXNlIG9mIHRoaXMgY29tbXVuaWNh
+dGlvbiBvciB0aGUgaW5mb3JtYXRpb24gaW4gaXQgaXMgc3RyaWN0bHkgcHJvaGliaXRlZC4gQW55
+IHBlcnNvbmFsIHZpZXdzIGV4cHJlc3NlZCBpbiB0aGlzIGUtbWFpbCBhcmUgdGhvc2Ugb2YgdGhl
+IGluZGl2aWR1YWwgc2VuZGVyIGFuZCB0aGUgQ29tcGFueSBkb2VzIG5vdCBlbmRvcnNlIG9yIGFj
+Y2VwdCByZXNwb25zaWJpbGl0eSBmb3IgdGhlbS4gUHJpb3IgdG8gdGFraW5nIGFueSBhY3Rpb24g
+YmFzZWQgdXBvbiB0aGlzIGUtbWFpbCBtZXNzYWdlLCB5b3Ugc2hvdWxkIHNlZWsgYXBwcm9wcmlh
+dGUgY29uZmlybWF0aW9uIG9mIGl0cyBhdXRoZW50aWNpdHkuIFRoaXMgbWVzc2FnZSBoYXMgYmVl
+biBjaGVja2VkIGZvciB2aXJ1c2VzIG9uIGJlaGFsZiBvZiB0aGUgQ29tcGFueS4NCg0KVGhlIGRl
+dGFpbHMgb2YgdGhpcyBjb21wYW55IGFyZSBhcyBmb2xsb3dzOg0KRzRTIFRlY2hub2xvZ3kgTGlt
+aXRlZCwgUmVnaXN0ZXJlZCBPZmZpY2U6IENoYWxsZW5nZSBIb3VzZSwgSW50ZXJuYXRpb25hbCBE
+cml2ZSwgVGV3a2VzYnVyeSwgR2xvdWNlc3RlcnNoaXJlIEdMMjAgOFVRLCBSZWdpc3RlcmVkIGlu
+IEVuZ2xhbmQgTm8uIDIzODIzMzguDQoNClRoaXMgY29tbXVuaWNhdGlvbiBtYXkgY29udGFpbiBp
+bmZvcm1hdGlvbiB3aGljaCBpcyBjb25maWRlbnRpYWwsIHBlcnNvbmFsIGFuZC9vciBwcml2aWxl
+Z2VkLg0KDQpJdCBpcyBmb3IgdGhlIGV4Y2x1c2l2ZSB1c2Ugb2YgdGhlIGludGVuZGVkIHJlY2lw
+aWVudChzKS4NCklmIHlvdSBhcmUgbm90IHRoZSBpbnRlbmRlZCByZWNpcGllbnQocyksIHBsZWFz
+ZSBub3RlIHRoYXQgYW55IGRpc3RyaWJ1dGlvbiwgZm9yd2FyZGluZywgY29weWluZyBvciB1c2Ug
+b2YgdGhpcyBjb21tdW5pY2F0aW9uIG9yIHRoZSBpbmZvcm1hdGlvbiBpbiBpdCBpcyBzdHJpY3Rs
+eSBwcm9oaWJpdGVkLg0KDQpBbnkgcGVyc29uYWwgdmlld3MgZXhwcmVzc2VkIGluIHRoaXMgZS1t
+YWlsIGFyZSB0aG9zZSBvZiB0aGUgaW5kaXZpZHVhbCBzZW5kZXIgYW5kIHRoZSBjb21wYW55IGRv
+ZXMgbm90IGVuZG9yc2Ugb3IgYWNjZXB0IHJlc3BvbnNpYmlsaXR5IGZvciB0aGVtLg0KDQpQcmlv
+ciB0byB0YWtpbmcgYW55IGFjdGlvbiBiYXNlZCB1cG9uIHRoaXMgZS1tYWlsIG1lc3NhZ2UsIHlv
+dSBzaG91bGQgc2VlayBhcHByb3ByaWF0ZSBjb25maXJtYXRpb24gb2YgaXRzIGF1dGhlbnRpY2l0
+eS4NCg0KVGhpcyBlLW1haWwgaGFzIGJlZW4gc2Nhbm5lZCBmb3IgYWxsIHZpcnVzZXMgYnkgTWVz
+c2FnZUxhYnMuDQo=
 
