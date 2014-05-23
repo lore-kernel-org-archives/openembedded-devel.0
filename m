@@ -1,25 +1,39 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (unknown [216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id E9D2F6B6FF
+Return-Path: <>
+X-Greylist: delayed 359 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 23 May 2014 22:38:29 UTC
+Received: from mail-we0-f170.google.com (unknown [74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id A05556B5A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 15:37:06 +0000 (UTC)
-Received: (qmail 21340 invoked by uid 1003); 23 May 2014 15:37:07 -0000
-Received: from unknown (HELO ?192.168.1.122?) (philip@opensdr.com@108.44.91.50)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	23 May 2014 15:37:07 -0000
-Message-ID: <537F6B22.8070804@balister.org>
-Date: Fri, 23 May 2014 11:37:06 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Richard Cagley <rcagley@gmail.com>
-References: <CAN-NoH3tU4wfadSOS4F78DQrqar9sHz_3Ecf49ENEog=P06=MQ@mail.gmail.com>	<1584812.c16lcQ9U8e@peggleto-mobl5.ger.corp.intel.com>	<CAN-NoH0xVXhEAmSx6b8XMqchp4Q_qGe9onC3Gp6wT4HDJNW3xg@mail.gmail.com>
-	<1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <1521334.KE7mPuYoZb@peggleto-mobl5.ger.corp.intel.com>
-X-Enigmail-Version: 1.6
-Subject: Re: how to create a new layer
+	Fri, 23 May 2014 22:38:29 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id u57so5566705wes.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 May 2014 15:38:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=fviA+cA3g3kZmeeyf147PD6xoVfh26z6bT+KJ3Ra54M=;
+	b=ewEp0AfUvLwYtHQ2VAjRG3y2CmR+dMs2PAliBjr60hbMvTmVwrWHhRccBkQdcz9Kwm
+	hoLSQW2gxpBRDWTvpkZZ1STAcSUUCzrUhN8Nk/MQoYhI6ZP2SpmG7SGe35v6ibOQ1KGs
+	blhUx6ylWjAEQso/nWfpqtdQRS7eNvkv6UhD58s0KQLniMxcZz6E2LB7R3x8S02b9JD9
+	TMwlTCdOD4wn60iitSLNPHDU0osh3qVp8FBUy7p6mhuegAomG9R8zZhn+GR9XKxH/wlY
+	MFlyt1CUNigboTP3x83VMha/w65zwcErepjm4ewLYcgzlrTYqSzO93uJ0YESHkqS1qta
+	qRPg==
+X-Received: by 10.194.109.68 with SMTP id hq4mr7240465wjb.21.1400884353002;
+	Fri, 23 May 2014 15:32:33 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host53-12-dynamic.21-79-r.retail.telecomitalia.it. [79.21.12.53])
+	by mx.google.com with ESMTPSA id kr6sm5790072wjb.16.2014.05.23.15.32.32
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 23 May 2014 15:32:32 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+X-Google-Original-From: Andrea Adami <andrea.adami@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 24 May 2014 00:32:16 +0200
+Message-Id: <1400884336-30326-2-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1400884336-30326-1-git-send-email-andrea.adami@gmail.com>
+References: <1400884336-30326-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH 2/2 Resend] initramfs-mininit-klibc-image: initial commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 15:37:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 May 2014 22:38:30 -0000
 
-On 05/23/2014 03:11 AM, Paul Eggleton wrote:
-> On Thursday 22 May 2014 15:46:01 Richard Cagley wrote:
->>> One other thing to note - if there are overrides for the previous machine
->>> (e.g. in bbappends you may see _zedboard-zynq7) you should change
->>> these to _me so that they still apply.
->>
->> What is the threshold for making a new machine? That is, if I just
->> have a .bbappend file I want, that should just involve creating a new
->> layer and putting the bbappend file in the correct location. I
->> shouldn't have to change anything else correct?
->>
->> For instance, if I just want to change the kernel configuration with a
->> frag file I can put linux-xlnx_3.8.bbappedn in
->> meta-me/recipes-kernel/linux and that's all I need?
-> 
-> Yes, that should be all that is required - no need for your own machine 
-> configuration in this case.
-> 
->> I guess I'm just confused at what point I actually need a new machine.
-> 
-> If you want to change the global configuration for the machine substantially 
-> from that in the original BSP, you may need to create your own machine 
-> configuration; but for the exact same hardware as the original BSP supports I 
-> would have thought that in most cases it would not be necessary.
+From: Andrea Adami <andrea.adami@gmail.com>
 
-Basically, I make a machine whenever I will have hardware specific
-drivers, kernel configs, and device trees.
+This cpio does the job of finding and loop-mounting the rootfs file.
+See https://github.com/pcercuei/mininit
 
-Philip
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../images/initramfs-mininit-klibc-image.bb        | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 recipes-bsp/images/initramfs-mininit-klibc-image.bb
 
+diff --git a/recipes-bsp/images/initramfs-mininit-klibc-image.bb b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
+new file mode 100644
+index 0000000..18aad75
+--- /dev/null
++++ b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Initramfs image for mininit kernel"
++DESCRIPTION = "This image provides mininit (helper for booting loop images)."
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
++
++# avoid circular dependencies
++EXTRA_IMAGEDEPENDS = ""
++
++# We only need mininit static
++IMAGE_INSTALL = "mininit-klibc"
++
++# Do not pollute the initrd image with rootfs features
++IMAGE_FEATURES = ""
++
++IMAGE_LINGUAS = ""
++
++FEED_DEPLOYDIR_BASE_URI = ""
++LDCONFIGDEPEND = ""
++
++inherit image
+-- 
+1.9.1
 
-> 
-> Cheers,
-> Paul
-> 
 
