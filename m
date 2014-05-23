@@ -1,39 +1,35 @@
 Return-Path: <>
-X-Greylist: delayed 359 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 23 May 2014 22:38:29 UTC
-Received: from mail-we0-f170.google.com (unknown [74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id A05556B5A3
+Received: from mail-we0-f176.google.com (unknown [74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 01FED6AE84
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 22:38:29 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id u57so5566705wes.29
+	Fri, 23 May 2014 22:58:10 +0000 (UTC)
+Received: by mail-we0-f176.google.com with SMTP id q59so5525516wes.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 May 2014 15:38:30 -0700 (PDT)
+	Fri, 23 May 2014 15:58:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fviA+cA3g3kZmeeyf147PD6xoVfh26z6bT+KJ3Ra54M=;
-	b=ewEp0AfUvLwYtHQ2VAjRG3y2CmR+dMs2PAliBjr60hbMvTmVwrWHhRccBkQdcz9Kwm
-	hoLSQW2gxpBRDWTvpkZZ1STAcSUUCzrUhN8Nk/MQoYhI6ZP2SpmG7SGe35v6ibOQ1KGs
-	blhUx6ylWjAEQso/nWfpqtdQRS7eNvkv6UhD58s0KQLniMxcZz6E2LB7R3x8S02b9JD9
-	TMwlTCdOD4wn60iitSLNPHDU0osh3qVp8FBUy7p6mhuegAomG9R8zZhn+GR9XKxH/wlY
-	MFlyt1CUNigboTP3x83VMha/w65zwcErepjm4ewLYcgzlrTYqSzO93uJ0YESHkqS1qta
-	qRPg==
-X-Received: by 10.194.109.68 with SMTP id hq4mr7240465wjb.21.1400884353002;
-	Fri, 23 May 2014 15:32:33 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=HB5K8yIiOoPf3cMB/yIiVIOZI5ZR2T7PW+bi+1wkcnQ=;
+	b=0IOS2KDZqAeRRSBrrDit+hpkr3J5MMYRJpPXDhOanb6ykyXEro5dKxef8r4wuFUXn4
+	Qs0uhKpTjAL4X4zvYFUIngf6PkTwKMztEcRoJrep8Ma9kIK1fvbFhsLR8WfK8Zz+XAa6
+	s4zhiBNiS5anFFc6RIsD5mGL0h1ytbTCpBy2GmJhAbdbWJXgptYktAqpkI5Jgdqrv4V8
+	fcWWvNfYErgDWpYXFRmH7zrUZjDTPFFkTtNaucod0ydVGPYceF17mkW2qXn+/jVEvlNJ
+	1nOR6weBEEofGGyLNLojXduGhnumV0bcCxYncBZtJ/62HI048xj7bUhxSjuIV+njgJN+
+	fHtA==
+X-Received: by 10.194.61.193 with SMTP id s1mr7283610wjr.36.1400884350844;
+	Fri, 23 May 2014 15:32:30 -0700 (PDT)
 Received: from mizar.208.67.220.220
 	(host53-12-dynamic.21-79-r.retail.telecomitalia.it. [79.21.12.53])
-	by mx.google.com with ESMTPSA id kr6sm5790072wjb.16.2014.05.23.15.32.32
+	by mx.google.com with ESMTPSA id kr6sm5790072wjb.16.2014.05.23.15.32.29
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 May 2014 15:32:32 -0700 (PDT)
+	Fri, 23 May 2014 15:32:30 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 X-Google-Original-From: Andrea Adami <andrea.adami@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 May 2014 00:32:16 +0200
-Message-Id: <1400884336-30326-2-git-send-email-andrea.adami@gmail.com>
+Date: Sat, 24 May 2014 00:32:15 +0200
+Message-Id: <1400884336-30326-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1400884336-30326-1-git-send-email-andrea.adami@gmail.com>
-References: <1400884336-30326-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/2 Resend] initramfs-mininit-klibc-image: initial commit
+Subject: [meta-handheld][PATCH 1/2 Resend] mininit: initial commit of v. 1.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,47 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 May 2014 22:38:30 -0000
+X-List-Received-Date: Fri, 23 May 2014 22:58:14 -0000
 
 From: Andrea Adami <andrea.adami@gmail.com>
 
-This cpio does the job of finding and loop-mounting the rootfs file.
 See https://github.com/pcercuei/mininit
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../images/initramfs-mininit-klibc-image.bb        | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 recipes-bsp/images/initramfs-mininit-klibc-image.bb
+ recipes-bsp/mininit/mininit_git.bb | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 recipes-bsp/mininit/mininit_git.bb
 
-diff --git a/recipes-bsp/images/initramfs-mininit-klibc-image.bb b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
+diff --git a/recipes-bsp/mininit/mininit_git.bb b/recipes-bsp/mininit/mininit_git.bb
 new file mode 100644
-index 0000000..18aad75
+index 0000000..a0439ae
 --- /dev/null
-+++ b/recipes-bsp/images/initramfs-mininit-klibc-image.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Initramfs image for mininit kernel"
-+DESCRIPTION = "This image provides mininit (helper for booting loop images)."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++++ b/recipes-bsp/mininit/mininit_git.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "mininit for romfs/squashfs loop images"
++DESCRIPTION = "mininit is a linux-as-bootloader implementation based on losetup."
++HOMEPAGE = "https://github.com/pcercuei/mininit"
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://init.c;md5=305bd83abb9a5aac95d48b5efbc11d58"
++SRCREV = "51eaefcaea52a5dbc1addd21ba93154aa9c97d66"
++PV = "1.1.0"
 +
-+IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
++SRC_URI = "git://github.com/pcercuei/mininit.git"
++SRC_URI[md5sum] = "62509644735a4e599e3ed0229f283faa"
++SRC_URI[sha256sum] = "4d747b16c33ac64a7923a179947d5581b4e309b73a3c89824056e9c4f0749f18"
 +
-+# avoid circular dependencies
-+EXTRA_IMAGEDEPENDS = ""
++S = "${WORKDIR}/git"
 +
-+# We only need mininit static
-+IMAGE_INSTALL = "mininit-klibc"
++do_compile () {
++        oe_runmake mininit
++}
++do_install () {
++        install -d ${D}${bindir}/
++        install -m 0755 mininit ${D}${bindir}/
++        install -d ${D}/dev
++        install -d ${D}/boot
++        install -d ${D}/root
++        install -d ${D}/proc
++        install -d ${D}/sys
++}
 +
-+# Do not pollute the initrd image with rootfs features
-+IMAGE_FEATURES = ""
++FILES_${PN} += " ${bindir}/mininit /init /dev /boot /root /proc /sys"
 +
-+IMAGE_LINGUAS = ""
++pkg_postinst_${PN} () {
++        ln -sf ${bindir}/mininit $D/init
++}
 +
-+FEED_DEPLOYDIR_BASE_URI = ""
-+LDCONFIGDEPEND = ""
++BBCLASSEXTEND = "klibc"
 +
-+inherit image
++COMPATIBLE_MACHINE = "(akita|c7x0|collie|gcw0|h1940|h3600|hx4700|poodle|spitz|tosa)"
 -- 
 1.9.1
 
