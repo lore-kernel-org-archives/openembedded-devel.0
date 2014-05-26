@@ -1,35 +1,32 @@
-Return-Path: <>
-Received: from mail-wi0-f182.google.com (unknown [209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 328386FA42
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-vc0-f169.google.com (unknown [209.85.220.169])
+	by mail.openembedded.org (Postfix) with ESMTP id ED4486FA50
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 21:59:21 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id r20so622555wiv.3
+	Mon, 26 May 2014 22:09:46 +0000 (UTC)
+Received: by mail-vc0-f169.google.com with SMTP id ij19so9898770vcb.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 14:59:22 -0700 (PDT)
+	Mon, 26 May 2014 15:09:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=c3ipq4J+vzDzWDO7PbCTYzenUcf4ORrPdLTsaLXKAWY=;
-	b=jy7sin2Om3a44tzX5Rpr3d+WZjypeh+TxQi5zi09hyZDBJpMXaH1QrWlG4E8U4H/Cn
-	aF024hsP7YrITKrku5Fl93vi/1tDV6SqKN3zTErsdJ7v2LqnwhEv81vrf/B5CahWZCQF
-	zt0DA0R1w7okF4wz6ilAwc6QCNaObSknV4njyEJw+F88nHEHpDTtOSND2IilS4bTOmme
-	94EHU49PgpbuOLlM7I2DNc8A4u2Slgqn8uDz5NSur/d1uGmDlERSvq2E1jyLTtuwrjj4
-	v3o2ObEBMsb/kqb2T2LTUEStKIU00mF93jBUbAnHOyZ7ySGIA0os5iKCE6llrWzMo6p8
-	06NQ==
-X-Received: by 10.194.63.46 with SMTP id d14mr34532355wjs.24.1401141562643;
-	Mon, 26 May 2014 14:59:22 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host160-222-dynamic.7-79-r.retail.telecomitalia.it. [79.7.222.160])
-	by mx.google.com with ESMTPSA id l2sm3043077wix.13.2014.05.26.14.59.21
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 26 May 2014 14:59:21 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-X-Google-Original-From: Andrea Adami <andrea.adami@gmail.com
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=OD359JnAYWWuNwASdmi2qwKCK+PBdCFiWEMb3w8YAmI=;
+	b=KTlUROt5t9lYt/2+Ql2XVQ/qHlaHjrYKYT+bs7wg+eMFKbdQecT2D1K7rONQxs/DJi
+	MMp6qfqGL/tLw2tAjjlIPqKUFH22ixgZ+GXnScYuUTxez+f3kF5Zl3ijAPa7Y8IulYGQ
+	BG7577B/klBVS1IplJ6KAbcsNfJ1abGRj1N32WjXESmmfgNi4IY9r839v0diAYG0zPrJ
+	ARcuW5sVu6Phoi/oU9E6BLLhvbnAzOF7nPUss17dNOitprEKpXKioyPrxg4XOjb/btEp
+	gDptYbOuuifo35cTUni+KRQuWdp8ri3ajBdJLf8uLpWSK92LbMiBLP0Mm53iHBFmf1YO
+	ePQw==
+X-Received: by 10.221.37.1 with SMTP id tc1mr13692769vcb.32.1401142187351;
+	Mon, 26 May 2014 15:09:47 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.227.67 with HTTP; Mon, 26 May 2014 15:09:17 -0700 (PDT)
+In-Reply-To: <CAP9ODKoyYcRb7jJ9GWWvqLNCJ5Sy5fhYLL8vNG6vSRyBpmeCtw@mail.gmail.com>
+References: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
+	<CAP9ODKoyYcRb7jJ9GWWvqLNCJ5Sy5fhYLL8vNG6vSRyBpmeCtw@mail.gmail.com>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Mon, 26 May 2014 15:09:17 -0700
+Message-ID: <CAK8F28mJTm+xHD8uyzF00xUpz=q7fpn4EC4Ao-tUqX-eQquZBQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 May 2014 23:56:50 +0200
-Message-Id: <1401141410-29057-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld][PATCH] gcw0: improve compatibility with kexecboot
+Subject: Re: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,93 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2014 21:59:24 -0000
+X-List-Received-Date: Mon, 26 May 2014 22:09:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Andrea Adami <andrea.adami@gmail.com>
+Hi Otavio,
+On Mon, May 26, 2014 at 1:31 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> You cannot remove the PR without a new version coming out; if you do,
+> package feeds will get the  revision going backwards.
+Oh duh!  Thanks.
+>
+>> +do_compile_prepend() {
+>> +    ln -s ${S}/po po
+>> +}
+>
+> This is not the right fix. Please fix the po/Makefile to use $(srcdir)
+> and like so you don't need to link it over.
+Okay---that makes sense.  I'll send a v2 with these fixes.
 
-Alternative images to be booted by kexecboot
-require to have an elf vmlinuz in /boot (kexec
-on mips expects elf).
-The bootloader however needs raw data (vmlinuz.bin) so
-we customize KERNEL_IMAGETYPE in the recipe.
-Finally, kexec is added to the main kernel recipe for
-easier testing and the watchdog timer is increased in
-the configuration for the kexecboot kernel.
-
-At the moment linux-kexecboot detects just fine
-partitions on external SD but freezes on kexec.
-Tests done from shell reveal that both kexec
-binaries (2.06 glibc and 2.02 klibc) load the new kernel
-but freeze on kexec -e.
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- conf/machine/gcw0.conf                                        | 7 ++++++-
- recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig           | 1 +
- recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig | 2 +-
- recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb             | 3 +++
- 4 files changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/conf/machine/gcw0.conf b/conf/machine/gcw0.conf
-index 801f634..da54112 100644
---- a/conf/machine/gcw0.conf
-+++ b/conf/machine/gcw0.conf
-@@ -9,9 +9,14 @@ require conf/machine/include/tune-mips32r2.inc
- # IMAGE_FEATURES += "read-only-rootfs"
- IMAGE_FSTYPES ?= "tar.gz squashfs squashfs-xz"
- 
-+INITRAMFS_FSTYPES = "cpio.gz cpio.xz"
-+
- PREFERRED_PROVIDER_virtual/kernel = "linux-gcw0"
- 
--KERNEL_IMAGETYPE = "vmlinuz.bin"
-+# ELF for kexec (kernel to be put in /boot)
-+KERNEL_IMAGETYPE = "vmlinuz"
-+# RAW for ubiboot (only for linux-gcw0-kexecboot)
-+#KERNEL_IMAGETYPE = "vmlinuz.bin"
- KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
- 
- MACHINE_GUI_CLASS = "smallscreen"
-diff --git a/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig b/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
-index a2a0db4..70f6f41 100644
---- a/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
-+++ b/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
-@@ -4,6 +4,7 @@ CONFIG_HIGHMEM=y
- # CONFIG_COMPACTION is not set
- # CONFIG_CROSS_MEMORY_ATTACH is not set
- CONFIG_PREEMPT_VOLUNTARY=y
-+CONFIG_KEXEC=y
- # CONFIG_SECCOMP is not set
- CONFIG_LOCALVERSION="-dingux"
- CONFIG_DEFAULT_HOSTNAME="gcw-zero"
-diff --git a/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig b/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-index ca4b4be..e5c5d7e 100644
---- a/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-+++ b/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-@@ -203,7 +203,7 @@ CONFIG_NLS_UTF8=y
- # CONFIG_SCHED_DEBUG is not set
- # CONFIG_FTRACE is not set
- CONFIG_CMDLINE_BOOL=y
--CONFIG_CMDLINE="panic=5 rdinit=/usr/bin/kexecboot console=ttyS2,57600 console=tty0 rfkill.default_state=0"
-+CONFIG_CMDLINE="panic=55 rdinit=/usr/bin/kexecboot console=ttyS2,57600 console=tty0 rfkill.default_state=0"
- # CONFIG_CRYPTO_ANSI_CPRNG is not set
- # CONFIG_CRYPTO_HW is not set
- CONFIG_FONTS=y
-diff --git a/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb b/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-index 5094035..45a18c0 100644
---- a/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-+++ b/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-@@ -7,6 +7,9 @@ PROVIDES = ""
- KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-gcw0-kexecboot-${PV}-${MACHINE}"
- KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-gcw0-kexecboot-${MACHINE}"
- 
-+# RAW for ubiboot
-+KERNEL_IMAGETYPE = "vmlinuz.bin"
-+
- INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
- INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
- 
--- 
-1.9.1
-
+Thanks for the feedback.
+--Ash
 
