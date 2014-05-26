@@ -1,34 +1,33 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pb0-f54.google.com (unknown [209.85.160.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 878736FA40
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-pb0-f41.google.com (unknown [209.85.160.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 35C406FA43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 19:01:37 +0000 (UTC)
-Received: by mail-pb0-f54.google.com with SMTP id jt11so7995766pbb.41
+	Mon, 26 May 2014 19:27:46 +0000 (UTC)
+Received: by mail-pb0-f41.google.com with SMTP id uo5so8038009pbc.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 12:01:39 -0700 (PDT)
+	Mon, 26 May 2014 12:27:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=IMiRHVHPqScQcWlX8qu1HB3XX0suJ5t0tfn6ZRGX/XM=;
-	b=oPZkUSsjah2fwwWJjkhxl2k5z6XE+v/Gn2XdXZaLY4RGGq0WtYN2w63M8oqavh+1Bm
-	mz71lRWddphgGyfpe1VK654hvwwSxeY5SMSrnAwMo3rA6simCX0txvsF51OjyhwR/3mS
-	lkb5rr5lsSKuF4LI9EhDRtA1QZQr+t8Qh36DuXWhjd1z9dVDIUvWLk9wePGTYEaOHpF2
-	gsxZ8Kj6ZWTBhHFuCQPBRsZQRLPq/NHewTBp/1DSlt97xYBj3S5EnrwDEckO3pu2/9wW
-	HEeFl2Pe8BWk7KqyLgPfodz+uOckTngOtYn6O4rsq3nbqQ+99QKJbaFAI3R7FqP9Cqzr
-	C0Xw==
-X-Received: by 10.66.119.39 with SMTP id kr7mr4391251pab.131.1401130899173;
-	Mon, 26 May 2014 12:01:39 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150])
-	by mx.google.com with ESMTPSA id tu3sm61918905pab.1.2014.05.26.12.01.37
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 May 2014 12:01:38 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+	bh=7YJDLQHtVFQsJ8Sm2GDyymNCwnP5w/gI7ULwI6OIpMg=;
+	b=BGpLx7TsYfoe15XQSFg86IdLmhmNeyRH7c5/d4Gkhk9SyNMv9jQHJ23AvydLMIeUJy
+	wDO2HZ9V2Jp/kN7+/ZIM7b25yvf1UIHa4FYKpVvxKk1dDM4BSZVHb1XXRKS8edk3DlxA
+	MPDuqb4iH3TZZfGlAPMe0KDD9SfVnj/qZQwzEWVhWsaDCAlbuun/vRuTZZepw5glZKst
+	dqJcp7NUizmorhmM1SuuGoQOH48UknlMJc3NGwEiH09uueGiNs1absaVrrbm2Q2kQYsF
+	ddqbiU44iw1qRg8E/lc3rXwgTR1Pon4+ZRMdNkxmgaPJQiJ70N0nxgA0E7YijI8BnQjN
+	1Qeg==
+X-Received: by 10.66.142.201 with SMTP id ry9mr30524647pab.14.1401132467853;
+	Mon, 26 May 2014 12:27:47 -0700 (PDT)
+Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
+	[206.116.3.18]) by mx.google.com with ESMTPSA id
+	eh4sm19514033pbc.79.2014.05.26.12.27.46 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 26 May 2014 12:27:47 -0700 (PDT)
+From: Ash Charles <ashcharles@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 May 2014 12:04:20 -0700
-Message-Id: <1401131060-950-1-git-send-email-ticotimo@gmail.com>
+Date: Mon, 26 May 2014 12:27:39 -0700
+Message-Id: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-multimedia][PATCH] libdc1394: fix S!=B failure
+Subject: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2014 19:01:40 -0000
+X-List-Received-Date: Mon, 26 May 2014 19:27:50 -0000
 
-From: Tim Orling <TicoTimo@gmail.com>
+The po subdirectory is not copied over to the build directory of
+found on the VPATH for an out-of-tree build so we symlink it over.
 
-Fixes:
-fatal error: dc1394/camera.h: No such file or directory
-|  #include <dc1394/camera.h>
-|                            ^
-| compilation terminated.
-
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/eject/eject_2.1.5.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-index 5bc77f2..0ea5cb9 100755
---- a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-+++ b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-@@ -17,6 +17,6 @@ SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
+diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+index c47c653..5c9c749 100644
+--- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
++++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+@@ -14,7 +14,9 @@ SRC_URI[sha256sum] = "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7a34a67402e
  
- S = "${WORKDIR}/git/${PN}"
+ S = "${WORKDIR}/${BPN}"
  
--inherit autotools pkgconfig
-+inherit autotools-brokensep pkgconfig
+-PR = "r1"
++do_compile_prepend() {
++    ln -s ${S}/po po
++}
  
- EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
+ ALTERNATIVE_${PN} = "volname eject"
+ ALTERNATIVE_LINK_NAME[volname] = "${bindir}/volname"
 -- 
 1.8.3.2
 
