@@ -1,33 +1,33 @@
 Return-Path: <ashcharles@gmail.com>
-Received: from mail-pb0-f45.google.com (unknown [209.85.160.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A26E165D6D
+Received: from mail-pa0-f46.google.com (unknown [209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 00D3D6FA2C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 20:34:08 +0000 (UTC)
-Received: by mail-pb0-f45.google.com with SMTP id um1so8119623pbc.18
+	Mon, 26 May 2014 20:42:36 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id kq14so8003083pab.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 13:34:10 -0700 (PDT)
+	Mon, 26 May 2014 13:42:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=LEWVAANvcmIMST3xQ+i0u99E2LewD+2QiUNl9JfgAeo=;
-	b=wBW977ibB1YOM5UXZ+jlpwbb3IPWm0GikqPbtRXwCqVrjl6nv5kluhBqMRZWCBR0vs
-	rBU5HUHyQDscDkcsT+OxlWfwBBDYGXyQ5nlWpFI8TD8BIcJ6P4+LME7ebYIfazG2gMUX
-	llehTPCEt6Bwxyy4saLGIPJXb9XlUr1wiEJCrGQiEZ6PoNWGG9jOTD4e98dfSkwC1+No
-	WyZAC17FTXH0PqlFChRnyJZX+e2lpYgFiPYVx3CxWcNMxWpDmg+GP3o8QcfsAbETz3VJ
-	k/ve06px8hyGPQx0Edr+tLoFrLvKWLTr9Rx/uz6cUpH2Uq5szb6KCuGxvfttpr5UDWAL
-	0/4w==
-X-Received: by 10.66.139.73 with SMTP id qw9mr30583299pab.123.1401136450299;
-	Mon, 26 May 2014 13:34:10 -0700 (PDT)
+	bh=fXAaB22NFt5AIURXHP9BGR2ZmDhjAH5EY88Db/Fuebw=;
+	b=xlVHq+1iFfYLkPtgrOnUswcY6s5nqyHIt61ku6bgftqyO8TbLh88l98hTreMwnKZAr
+	Is/E4/XJQc+pewXRkf1CBfBFkZAcJfeXCkpehZ9rUqnCTpj5TC+cU+SrLTWdbuIu69OJ
+	aQu4uwLDdyEPpC+ed0Sf6pBujpylH0QkECkOhuBnmHwgXa3s5ocpxkcXjSkmbElyD2Wl
+	srDWaR6WEwgrhXeXaYAMW61pcJk5b5zDMB0sVao2Hsgx9uxmAvFd2NlC/ZB18GTZ5wqw
+	9Zq/wnmlx5Af21FlYyKKs3n1l3E+TAVLl7Xg3wUyDXBHW+VQdx361Hv8cWoy2aM4Y2CS
+	0cAQ==
+X-Received: by 10.68.134.69 with SMTP id pi5mr24368454pbb.126.1401136957879;
+	Mon, 26 May 2014 13:42:37 -0700 (PDT)
 Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
 	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	gr10sm19657533pbc.84.2014.05.26.13.34.09 for <multiple recipients>
+	ox3sm19672114pbb.88.2014.05.26.13.42.36 for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 26 May 2014 13:34:09 -0700 (PDT)
+	Mon, 26 May 2014 13:42:37 -0700 (PDT)
 From: Ash Charles <ashcharles@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 May 2014 13:34:00 -0700
-Message-Id: <1401136440-438-1-git-send-email-ashcharles@gmail.com>
+Date: Mon, 26 May 2014 13:42:25 -0700
+Message-Id: <1401136945-6784-1-git-send-email-ashcharles@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] ltrace: Run autogen.sh in source directory
+Subject: [meta-oe][PATCH] lxdm: Use lxdm.conf from build directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,28 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2014 20:34:11 -0000
+X-List-Received-Date: Mon, 26 May 2014 20:42:41 -0000
 
-The autogen.sh script needs to be run in and from the source
-directory.  The configuration step can still be run from
-out-of-tree.
+The lxdm.conf is populated to the build/data directory, not
+the source directory.
+
+Upstream-Status: Inappropriate (configuration)
 
 Signed-off-by: Ash Charles <ashcharles@gmail.com>
 ---
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb | 2 +-
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index 149af52..89f760a 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -21,5 +21,5 @@ S = "${WORKDIR}/git"
- inherit autotools
- 
- do_configure_prepend () {
--	./autogen.sh
-+	( cd ${S}; ./autogen.sh )
+diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+index c602ad3..dc40fb2 100644
+--- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
++++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+@@ -42,7 +42,7 @@ do_compile_append() {
+         -e 's,# arg=.*,arg=${bindir}/X -s 0,g' \
+         ${S}/data/lxdm.conf.in
+     # add default configuration
+-    oe_runmake -C ${S}/data lxdm.conf
++    oe_runmake -C ${B}/data lxdm.conf
  }
+ 
+ do_install_append() {
 -- 
 1.8.3.2
 
