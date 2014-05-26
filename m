@@ -1,33 +1,33 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pb0-f49.google.com (unknown [209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id B925765EB4
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-pa0-f47.google.com (unknown [209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 190A065FC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 18:42:33 +0000 (UTC)
-Received: by mail-pb0-f49.google.com with SMTP id jt11so7919318pbb.8
+	Mon, 26 May 2014 18:52:37 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id lf10so7884591pab.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 11:42:34 -0700 (PDT)
+	Mon, 26 May 2014 11:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=3zEIwAnZO1ykkDs7q2E900R713X/gfd2NSGQwVTTVBg=;
-	b=ZdIQvIOyYnZJuCfXqvH16m/0JwCLkFwBmC9YUFLQeK1mHjITltH+dq0GDVHo0Aq7cy
-	XB/AfTy1926v4VgVd9uTlTlLvpxVIXWMX340mayJ3hwIZg9mNa/I1oM1VuoN+w3pkKKD
-	JmYA8zhfa2giG3YgMxeiGmLE1PBDVsPFGYXiYOjwYULxES2rtGo0/EBecK62Z8J0+gj0
-	q1oz1jqOQHfNwswaqEAucT2O2nH6efbg6LZTSKgHZIdGl2Ub1xfGyGtVaAlaKUYjcTpB
-	AFHWFIqu3QWgcfR9Lp5f/TNw8I9dk5cb1Nf89NPS8fxaL3tRKRZSMlE+T2wmqb1r0R2t
-	+ayQ==
-X-Received: by 10.66.141.165 with SMTP id rp5mr30435255pab.90.1401129754218;
-	Mon, 26 May 2014 11:42:34 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	di3sm19452933pbc.11.2014.05.26.11.42.33 for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 May 2014 11:42:33 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+	bh=q9F12x2dpw2tNDaYtAertp7sW8zDLC+aNLyJ8awlYNA=;
+	b=OIeeVLhCrtUw7HBHdWsC5u+Y4Tm+uMFfERBLBJxHIagOi3+igX1xFr4pU/bgFuzJsg
+	/3LJHEQdVC2ulIyEVdA8fM+Tvz7NaSv6L0j70uKPw9476H8w3eUr/KDRwD0FuYNPRvmI
+	7vAoWBCNqnwEkwIcFUiw4ofQA7CVbEtZ4yWGj/oWy1P4ztWQyrSQNKMGHbRK+gPRrecQ
+	C67XB0sQjWzWvKWoH7+9HmrzLyN0y/FnhgA7bFyGGGWg59s+Byi40WPj1PVO7/48JP4h
+	O6UsyBmBVgPj2kQ3wd/SidxUuz6e1YVT+GQ3KBpBHvdYCp8GSSuFZWrQ8bOFuYeT1M5z
+	RGhQ==
+X-Received: by 10.68.135.42 with SMTP id pp10mr30423690pbb.58.1401130358672;
+	Mon, 26 May 2014 11:52:38 -0700 (PDT)
+Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
+	[206.116.3.18]) by mx.google.com with ESMTPSA id
+	bi15sm31240416pac.31.2014.05.26.11.52.37 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 26 May 2014 11:52:38 -0700 (PDT)
+From: Ash Charles <ashcharles@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 May 2014 11:45:11 -0700
-Message-Id: <1401129911-16082-1-git-send-email-ticotimo@gmail.com>
+Date: Mon, 26 May 2014 11:52:31 -0700
+Message-Id: <1401130351-14909-1-git-send-email-ashcharles@gmail.com>
 X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-multimedia][PATCH] schroedinger: fix S!=B error, rename "files"
+Subject: [meta-oe][PATCH] mbuffer: Update to version 20140310 from 20091227
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,39 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 May 2014 18:42:37 -0000
+X-List-Received-Date: Mon, 26 May 2014 18:52:39 -0000
 
-From: Tim Orling <TicoTimo@gmail.com>
+The previous version of mbuffer could not be built out-of-tree and
+seems rather old [1].
 
-Fixes:
- *** No rule to make target
- `[...]/schroedinger/1.0.11-r0/schroedinger-1.0.11/schroedinger/tmp-orc.c',
- needed by `tmp-orc.o'.  Stop.
+[1] http://www.maier-komor.de/mbuffer.html
 
-Rename "files/" to "schroedinger/"
-
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
 ---
- .../schroedinger/{files => schroedinger}/configure.ac.patch             | 0
- meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb  | 2 +-
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/schroedinger/{files => schroedinger}/configure.ac.patch (100%)
+ .../recipes-support/mbuffer/mbuffer_20091227.bb    | 21 --------------------
+ .../recipes-support/mbuffer/mbuffer_20140310.bb    | 23 ++++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 21 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/mbuffer/mbuffer_20091227.bb
+ create mode 100644 meta-oe/recipes-support/mbuffer/mbuffer_20140310.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/schroedinger/files/configure.ac.patch b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch
-similarity index 100%
-rename from meta-multimedia/recipes-multimedia/schroedinger/files/configure.ac.patch
-rename to meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch
-diff --git a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-index c338903..d38eb94 100644
---- a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-+++ b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-@@ -18,5 +18,5 @@ SRC_URI[sha256sum] = "1e572a0735b92aca5746c4528f9bebd35aa0ccf8619b22fa2756137a8c
- 
- EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
- 
--inherit autotools pkgconfig
-+inherit autotools-brokensep pkgconfig
- 
+diff --git a/meta-oe/recipes-support/mbuffer/mbuffer_20091227.bb b/meta-oe/recipes-support/mbuffer/mbuffer_20091227.bb
+deleted file mode 100644
+index bd80c84..0000000
+--- a/meta-oe/recipes-support/mbuffer/mbuffer_20091227.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-DESCRIPTION = "mbuffer is a tool for buffering data streams with a large set of unique features."
+-HOMEPAGE = "http://www.maier-komor.de/mbuffer.html"
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+-SECTION = "console/network"
+-PR = "r1"
+-
+-SRC_URI = "http://www.maier-komor.de/software/mbuffer/mbuffer-20091227.tgz"
+-SRC_URI[md5sum] = "191663396b4b1752d7104803631b9e54"
+-SRC_URI[sha256sum] = "e708b66f6cec9ba090877e8eb38e5627ac69aea9ebd9bca1360a29c7398a88ce"
+-
+-inherit autotools
+-
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[md5] = "--enable-md5,--disable-md5,openssl"
+-
+-do_configure() {
+-    gnu-configize
+-    oe_runconf
+-}
+-
+diff --git a/meta-oe/recipes-support/mbuffer/mbuffer_20140310.bb b/meta-oe/recipes-support/mbuffer/mbuffer_20140310.bb
+new file mode 100644
+index 0000000..3467d28
+--- /dev/null
++++ b/meta-oe/recipes-support/mbuffer/mbuffer_20140310.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "mbuffer is a tool for buffering data streams with a large set of unique features."
++HOMEPAGE = "http://www.maier-komor.de/mbuffer.html"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
++SECTION = "console/network"
++
++SRC_URI = " \
++    http://www.maier-komor.de/software/mbuffer/mbuffer-20140310.tgz \
++"
++
++SRC_URI[md5sum] = "9937d7f666c19a2e6b2499b04dbecc44"
++SRC_URI[sha256sum] = "ab90b6fdce16db2bf08bcda0bc5d2bfb053a9a163d2a24f95fbf246460549b99"
++
++inherit autotools
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[md5] = "--enable-md5,--disable-md5,openssl"
++
++do_configure() {
++    ( cd ${S}; gnu-configize )
++    oe_runconf
++}
++
 -- 
 1.8.3.2
 
