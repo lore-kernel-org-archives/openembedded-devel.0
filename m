@@ -1,33 +1,35 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-pa0-f45.google.com (unknown [209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id CF3106FAF1
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f46.google.com (unknown [209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B0186FA66
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 16:56:56 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id ey11so9449262pad.4
+	Tue, 27 May 2014 17:41:33 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id 29so7772441yhl.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 09:56:57 -0700 (PDT)
+	Tue, 27 May 2014 10:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=MlOb5bnbgczfrSPK0hWAnWl6EtGIOMRkTaesrE/VrJc=;
-	b=08viKv8+SyanDqWM1bWuDodKx0sY8gRSRcx82URnz/nRqDMieQoxgUWiks5zQzfvU8
-	ZTUshHRdWuxDymO1yw2Gzy2+3Ov/4uWN66cwlNO3gYLQS9gzv44OD3f3i4EIY/3bABIW
-	WgZ9GelIdRz8tjDLaNAVrZsP3FgMApiuWpMqQXV/JnHvKeqZjyqwsvR0JxUj1bjw4wni
-	ylTH1dRbY6KioO93I1IYytx1wQXfIi9JJgUZXsBnoQ9qOLDbJuRg7mBaPS6EK/b23h2s
-	cgK8T2fYNouCR9wNWvbv3PzPbHIb8bkyHiSX85W/QvQirf1kzUeypqWEX6B0LIwnnXEP
-	rZ9g==
-X-Received: by 10.68.113.68 with SMTP id iw4mr37357175pbb.119.1401209817265;
-	Tue, 27 May 2014 09:56:57 -0700 (PDT)
-Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	nw13sm75775203pab.37.2014.05.27.09.56.56 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 27 May 2014 09:56:56 -0700 (PDT)
-From: Ash Charles <ashcharles@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 May 2014 09:56:48 -0700
-Message-Id: <1401209808-10467-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-gnome][PATCH] network-manager-applet: fix S!=B error
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=N9Gy3rfKa3uukTES82Re37QqKeWFm5yct9Ulq+Uqnl0=;
+	b=PoUtpJnXZFuEo30b+N3nIJfwMkXNp114fiYrHL33lp+lYUsxsvTSETnkg1TQzH9U9U
+	fFJgWL+34as/TSVbmI/o3LL3kZuwmv7TXnW2KT1Hkhgt5gzY1v2GbjtglfXgAr3cJgfX
+	RdVswcW7MbjI1ocBatzDNb+/VI51DdKvdcK8WFoXMLz/drSd0LqFUwrHpp38R+rk3Ja4
+	WIbc7Lcjr6jpA9qZQO7V+noPGyqS22opDSafr17WiKDJWoDzujH/F8WySyEa/Rba8+Mu
+	OOcnUYgLvAZtDRpFysHIwesQ+8RokI/kTfJ3rfdsBZACiVLrPx0ScpfnDavmXAa/BO6U
+	vuGg==
+MIME-Version: 1.0
+X-Received: by 10.236.124.7 with SMTP id w7mr48504646yhh.33.1401212494112;
+	Tue, 27 May 2014 10:41:34 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.166.213 with HTTP; Tue, 27 May 2014 10:41:34 -0700 (PDT)
+In-Reply-To: <1401209016-6182-1-git-send-email-ashcharles@gmail.com>
+References: <CAP9ODKrwoKgT377SUfe6e9=VbuwX4s-7tzdTwXgdxqC=fzPAkg@mail.gmail.com>
+	<1401209016-6182-1-git-send-email-ashcharles@gmail.com>
+Date: Tue, 27 May 2014 14:41:34 -0300
+X-Google-Sender-Auth: vCynoZ-R2rMfOItQ_Y0XZIxrNRs
+Message-ID: <CAP9ODKo01g9ZD8m1yQ0g=eAWc0MQk5HC2YC6U7xedRX5LWHnpw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] eject: copy po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,35 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2014 16:56:57 -0000
+X-List-Received-Date: Tue, 27 May 2014 17:41:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The Makefile fixup in do_configure_append is in the build directory,
-not the source directory.
+On Tue, May 27, 2014 at 1:43 PM, Ash Charles <ashcharles@gmail.com> wrote:
+> The po subdirectory found on the VPATH for an out-of-tree build so we
+> copy it over. See [1] for discussion.
+>
+> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/096052.html
+>
+> Signed-off-by: Ash Charles <ashcharles@gmail.com>
 
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- .../network-manager-applet/network-manager-applet_0.9.8.0.bb           | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+After looking at the eject code, I think this is the best alternative we have.
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
-index 6c00283..8dbb3dc 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.0.bb
-@@ -24,7 +24,7 @@ EXTRA_OECONF += " \
- do_configure_append() {
-     rm config.log
-     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
--    for i in $(find ${S} -name "Makefile") ; do
-+    for i in $(find ${B} -name "Makefile") ; do
-         sed -i -e s:-Werror::g $i
-     done
- }
-@@ -45,4 +45,3 @@ FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
- FILES_${PN}-dev += "${libdir}/gnome-bluetooth/plugins/libnma.la"
- FILES_${PN}-staticdev += "${libdir}/gnome-bluetooth/plugins/libnma.a"
- FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
--
+Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+
 -- 
-1.8.3.2
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
