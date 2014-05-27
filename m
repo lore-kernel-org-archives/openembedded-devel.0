@@ -1,35 +1,34 @@
 Return-Path: <ashcharles@gmail.com>
-Received: from mail-pb0-f41.google.com (unknown [209.85.160.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B5706FAC4
+Received: from mail-ve0-f180.google.com (unknown [209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 8540D6FB3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 16:43:44 +0000 (UTC)
-Received: by mail-pb0-f41.google.com with SMTP id uo5so9625161pbc.0
+	Tue, 27 May 2014 16:44:38 +0000 (UTC)
+Received: by mail-ve0-f180.google.com with SMTP id db12so11085699veb.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 09:43:45 -0700 (PDT)
+	Tue, 27 May 2014 09:44:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=tgzNt/fF4vtYJSNDKpMqFRlEUTl//fSPQqJQrxZzbII=;
-	b=WwILlOPvPAA7IvPcpGgUv4C8rOKazJSnNjhlvJMBli8GTKlQz7bIqQda/Ev2pLmuYR
-	5DLY3GFIj5M81YWPlfDLflNQvvkI66Qd/vPMwUIVm3ApoLehxXX7ycHSrjwHUVCG6diQ
-	7GX5h1yNU5/JtNH9Y06VjdXNVnmPVWofLC6EtzNX8kwBYuiT2mmQB/6jnb8C+PORddBA
-	aglAzbFJPUPrL2vIF7h14vc5UqFSaTc6kKRxdU5K3IqstDby1ZhVtamz3SlKRp2vSp9J
-	496OUMUTSnoWNFNWIk7RGRjVWELVO8utNXWM+e90kmxplGzeERjyr/ABmmsPdnox19iU
-	t28A==
-X-Received: by 10.66.164.135 with SMTP id yq7mr38283629pab.126.1401209025533; 
-	Tue, 27 May 2014 09:43:45 -0700 (PDT)
-Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	xc1sm75633553pab.39.2014.05.27.09.43.44 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 27 May 2014 09:43:44 -0700 (PDT)
-From: Ash Charles <ashcharles@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 May 2014 09:43:36 -0700
-Message-Id: <1401209016-6182-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=5U3NR+jxi3D6DUWfHuwEbrbxsMLlF8VQGW6m6rUSAA8=;
+	b=PI75/Pqm/Kg7cwWeLC3FhV8razQNhNutEjNzENugM8pCefmcNqVhN4n9U4GAOgZHzP
+	zmu36tb1lacSizj3QBmIoo05qWEDjMfw2/nHz8P7kyV/sMhHwR63FrknzylYsv/U4e/5
+	FhVxo2kx8FN1+YDGNM8+sDrMlAjCUyd/E404msYaZ7sj6se5JwDxK1tR3KYtZ8VIndn/
+	W2qGrujyqsZipoxBVaa4dRM0+MdTU8f7KBa+AhNyIsn8CeonytIObt4CILZzOND/jj5U
+	yn9DPHQVb0jJuMzPkyJsJaxzREJFs3Ln+G1GGG3AFHhngfA4vXEbH9ZYX3DD/djlhOa1
+	zfNw==
+X-Received: by 10.58.34.72 with SMTP id x8mr2156288vei.61.1401209078997; Tue,
+	27 May 2014 09:44:38 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.227.67 with HTTP; Tue, 27 May 2014 09:44:08 -0700 (PDT)
 In-Reply-To: <CAP9ODKrwoKgT377SUfe6e9=VbuwX4s-7tzdTwXgdxqC=fzPAkg@mail.gmail.com>
-References: <CAP9ODKrwoKgT377SUfe6e9=VbuwX4s-7tzdTwXgdxqC=fzPAkg@mail.gmail.com>
-Subject: [meta-oe][PATCH v2] eject: copy po subdirectory for out-of-tree build
+References: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
+	<20140527091813.GA2426@jama>
+	<CAK8F28=UYXL+YmzrCcWnYppsSNhUA3vJq92awZqvV=ihsL8bTA@mail.gmail.com>
+	<CAP9ODKrwoKgT377SUfe6e9=VbuwX4s-7tzdTwXgdxqC=fzPAkg@mail.gmail.com>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Tue, 27 May 2014 09:44:08 -0700
+Message-ID: <CAK8F28kyQ7rDe_8AcwKqrOE+w6o_V2aLfuxYKy47vz2vLnVuSw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +42,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2014 16:43:45 -0000
+X-List-Received-Date: Tue, 27 May 2014 16:44:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The po subdirectory found on the VPATH for an out-of-tree build so we
-copy it over. See [1] for discussion.
+On Tue, May 27, 2014 at 8:32 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> You need to change the configure.am (or .in) and Makefile.am.
+Shucks---my knowledge of autotools is just too weak to correct this
+properly.  I suspect the AM_PO_SUBDIRS has some special magic.  In any
+case, I've sent a v2 with my (bad) fix in case it is useful to someone
+else.
 
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/096052.html
-
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- meta-oe/recipes-support/eject/eject_2.1.5.bb | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index c47c653..b6e181f 100644
---- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-+++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -16,6 +16,11 @@ S = "${WORKDIR}/${BPN}"
- 
- PR = "r1"
- 
-+do_compile_prepend() {
-+    # PO subdir must be in build directory
-+    cp -r ${S}/po ${B}/po
-+}
-+
- ALTERNATIVE_${PN} = "volname eject"
- ALTERNATIVE_LINK_NAME[volname] = "${bindir}/volname"
- ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
--- 
-1.8.3.2
-
+--Ash
 
