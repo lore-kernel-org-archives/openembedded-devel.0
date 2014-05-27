@@ -1,37 +1,36 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f48.google.com (unknown [209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 14DA96FA5A
+Return-Path: <schnitzeltony@googlemail.com>
+X-Greylist: delayed 330 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 27 May 2014 07:30:11 UTC
+Received: from mail-vc0-f178.google.com (unknown [209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DEAD6FA7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 02:43:42 +0000 (UTC)
-Received: by mail-yh0-f48.google.com with SMTP id a41so6925390yho.21
+	Tue, 27 May 2014 07:30:11 +0000 (UTC)
+Received: by mail-vc0-f178.google.com with SMTP id ij19so6883011vcb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 May 2014 19:43:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=HX2hojzEk17Q1tw8inafcsqFV4vCZiHXAg+vlmWy0Gc=;
-	b=DuZgHF9J/QFdbpIV0PTDmXQ/1Cke3rQvReqFV3mmhJamA7pxALn/D5xjwwmH1dQwDh
-	7WisqRX5unRxEeUVfSieCNPZZ/iN9OxJnxvC+UiD3l61l7NDJFEHeYT90xasT1dR2Dnz
-	lVcy3GeJSeo0Q8KuPOhr5FRlw+99nZHs71ZqPvdOA6v5xGeZqMPpj6oyoOst3a/aNcwJ
-	Ta60neIY8RDV3B1kQ2b10t8HqRUuEpHpBJKGCFjFIgKpPlW0+sDB7Xu0v775XyJU8jDA
-	FgZ4amkGFuWKTpg/+O4ombneNeF/AuBGISAt9Y72iAspLOVzqiij5XzzDpwEdACRzlWh
-	Z5qg==
+	Tue, 27 May 2014 00:30:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=J9629EdKc+MKrrZvmYND6WjryTiAb/WnngjE18ARrq4=;
+	b=nxYKwOHa4B/Cn/hvYCFrvPxdSGWRBywKTVuGn6kEJVriBXlr5uWirf9uEAIOf87HAh
+	9sHM99Fua7cIksQinbzlI6cwUcDftvGI/WH2gEvWxcBb/WaL60SsZEQ+Z607TMEh0Ma4
+	TrlJTOu3QQb1XnYderNAHisaYI4cZYJ57XRLJ38cPkalqUdvlnsKtLE6s5xBkIQ7oINU
+	kiHjtVlgf+rWWpkIZ+ZTbjrzT92UcU0Roqc/YAkhJojK71wHtLnlqNwHzYFzhVcNHoAT
+	oD/QeaKMAFlD6RynumGt2qhbTp3/G4IYHl9/I3+9bY4DztQLThiq1STxafudDp0QIFlO
+	BcBw==
 MIME-Version: 1.0
-X-Received: by 10.236.185.167 with SMTP id u27mr9183973yhm.128.1401158622884; 
-	Mon, 26 May 2014 19:43:42 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Mon, 26 May 2014 19:43:42 -0700 (PDT)
-In-Reply-To: <CAK8F28=V27aeFP9cejf8cty8=_WR-uQscAKiKj4JC8DCFa0=MA@mail.gmail.com>
-References: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
-	<CAP9ODKoyYcRb7jJ9GWWvqLNCJ5Sy5fhYLL8vNG6vSRyBpmeCtw@mail.gmail.com>
-	<CAK8F28mJTm+xHD8uyzF00xUpz=q7fpn4EC4Ao-tUqX-eQquZBQ@mail.gmail.com>
-	<CAK8F28=V27aeFP9cejf8cty8=_WR-uQscAKiKj4JC8DCFa0=MA@mail.gmail.com>
-Date: Mon, 26 May 2014 23:43:42 -0300
-X-Google-Sender-Auth: ldApwneqx5duo1ZKJiLwde7LUSs
-Message-ID: <CAP9ODKpAmSc4fEsRaKrynTf0n4yRiorowKdaEVo28PhFGbv9QA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
+X-Received: by 10.58.23.6 with SMTP id i6mr25498257vef.12.1401175482219; Tue,
+	27 May 2014 00:24:42 -0700 (PDT)
+Received: by 10.52.167.201 with HTTP; Tue, 27 May 2014 00:24:42 -0700 (PDT)
+In-Reply-To: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 27 May 2014 09:24:42 +0200
+Message-ID: <CALbNGRR1s5Koi3+YWZEkZ-HvdQEuW=_OvJyQXkr2Q4Srqe5XXg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH,V2][meta-qt5 0/3] qtwayland updates for hawaii
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,41 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2014 02:43:46 -0000
+X-List-Received-Date: Tue, 27 May 2014 07:30:13 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 26, 2014 at 9:46 PM, Ash Charles <ashcharles@gmail.com> wrote:
-> On Mon, May 26, 2014 at 3:09 PM, Ash Charles <ashcharles@gmail.com> wrote:
->> Okay---that makes sense.  I'll send a v2 with these fixes.
-> I tried the patch below and sent it along to the upstream maintainer
-> as it fixes the problem when I build locally.  When bitbaking though,
-> it looks like the autotools.bbclass dispose of the $(srcdir)
-> change...darn!  Any suggestions? This is readily fixed with
-> autotools-brokensep....
+On Tue, May 13, 2014 at 4:48 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> V1->V2:
 >
-> --- eject/Makefile.in   2006-06-03 18:59:08.000000000 -0700
-> +++ eject/Makefile.in   2014-05-26 15:58:08.031605669 -0700
-> @@ -72,7 +72,7 @@
->  eject_SOURCES = eject.c
->  volname_SOURCES = volname.c
+> * replace tabs by spaces in do_install
+> * fix wrong version location in do_install
 >
-> -@USE_NLS_TRUE@SUBDIRS = po
-> +@USE_NLS_TRUE@SUBDIRS = $(srcdir)/po
-
-@top_srcdir@?
-
->  AM_CPPFLAGS = -DDEFAULTDEVICE=\"$(DEFAULTDEVICE)\" -DGETOPTLONG
->  AM_CFLAGS = -Wall $(RPM_OPT_FLAGS)
+> Andreas M=C3=BCller (3):
+>   qtwayland: move to latest revision
+>   qtwayland-native: make qtwayland find qtwaylandscanner
+>   qtwayland: install created private headers
+>
+>  recipes-qt/qt5/qtwayland-native_git.bb             |  5 ++
+>  ...0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch | 91 ----------------=
+------
+>  recipes-qt/qt5/qtwayland_git.bb                    |  8 +-
+>  3 files changed, 11 insertions(+), 93 deletions(-)
+>  delete mode 100644 recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-buil=
+d-on-Qt-5.2.1.patch
+>
 > --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 1.8.3.1
+>
+ping?
 
-
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Andreas
 
