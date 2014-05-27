@@ -1,36 +1,39 @@
-Return-Path: <schnitzeltony@googlemail.com>
-X-Greylist: delayed 330 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 27 May 2014 07:30:11 UTC
-Received: from mail-vc0-f178.google.com (unknown [209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DEAD6FA7E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-pa0-f53.google.com (unknown [209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 11F456FA53
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 07:30:11 +0000 (UTC)
-Received: by mail-vc0-f178.google.com with SMTP id ij19so6883011vcb.9
+	Tue, 27 May 2014 09:18:08 +0000 (UTC)
+Received: by mail-pa0-f53.google.com with SMTP id kp14so8836124pab.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 00:30:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=J9629EdKc+MKrrZvmYND6WjryTiAb/WnngjE18ARrq4=;
-	b=nxYKwOHa4B/Cn/hvYCFrvPxdSGWRBywKTVuGn6kEJVriBXlr5uWirf9uEAIOf87HAh
-	9sHM99Fua7cIksQinbzlI6cwUcDftvGI/WH2gEvWxcBb/WaL60SsZEQ+Z607TMEh0Ma4
-	TrlJTOu3QQb1XnYderNAHisaYI4cZYJ57XRLJ38cPkalqUdvlnsKtLE6s5xBkIQ7oINU
-	kiHjtVlgf+rWWpkIZ+ZTbjrzT92UcU0Roqc/YAkhJojK71wHtLnlqNwHzYFzhVcNHoAT
-	oD/QeaKMAFlD6RynumGt2qhbTp3/G4IYHl9/I3+9bY4DztQLThiq1STxafudDp0QIFlO
-	BcBw==
+	Tue, 27 May 2014 02:18:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=YLpB/TjUV7Jdw5kE9iAaTEo0cHsIcajjDekGag188uI=;
+	b=xrzmiPID5XJbztPN5bcjtKwgzhzSbamWao4ivgjeYadLbZXUfKeAetdDMSAdUkIcnL
+	W6jYNLao+oiuUGzYdem7BXXQf8kZv6vwcixD9XaW/kR28091DRWKB5CtwNRoYJnkqyOu
+	mInWCOJ09RDNtqTDjK1FR+LERZlU6zg4vMJcZwOGlX9OaKTxi5uWmQwec+kdMfmAQOGb
+	Ff8W2VRIIrJEMqIXchy0/ZDVZtIaKNps0Q2egAbYD60cz+rCXxjlW930iFhY8dhpr8ih
+	s90eecRo7GbbYymf+TN3J/hjhAflntGVehZDzlq/fhX2c+ytfVXyltVmjuQ0SH2d0LuL
+	iiEQ==
+X-Received: by 10.68.110.129 with SMTP id ia1mr35218570pbb.158.1401182289902; 
+	Tue, 27 May 2014 02:18:09 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	yv7sm70659537pac.33.2014.05.27.02.18.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 May 2014 02:18:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 27 May 2014 11:18:13 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140527091813.GA2426@jama>
+References: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.58.23.6 with SMTP id i6mr25498257vef.12.1401175482219; Tue,
-	27 May 2014 00:24:42 -0700 (PDT)
-Received: by 10.52.167.201 with HTTP; Tue, 27 May 2014 00:24:42 -0700 (PDT)
-In-Reply-To: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1399992528-10108-1-git-send-email-schnitzeltony@googlemail.com>
-Date: Tue, 27 May 2014 09:24:42 +0200
-Message-ID: <CALbNGRR1s5Koi3+YWZEkZ-HvdQEuW=_OvJyQXkr2Q4Srqe5XXg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH,V2][meta-qt5 0/3] qtwayland updates for hawaii
+In-Reply-To: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,34 +47,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2014 07:30:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 May 2014 09:18:14 -0000
+X-Groupsio-MsgNum: 50065
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ew6BAiZeqk4r7MaW"
+Content-Disposition: inline
+
+--ew6BAiZeqk4r7MaW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 13, 2014 at 4:48 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> V1->V2:
->
-> * replace tabs by spaces in do_install
-> * fix wrong version location in do_install
->
-> Andreas M=C3=BCller (3):
->   qtwayland: move to latest revision
->   qtwayland-native: make qtwayland find qtwaylandscanner
->   qtwayland: install created private headers
->
->  recipes-qt/qt5/qtwayland-native_git.bb             |  5 ++
->  ...0001-xcomposite-glx-Fix-build-on-Qt-5.2.1.patch | 91 ----------------=
-------
->  recipes-qt/qt5/qtwayland_git.bb                    |  8 +-
->  3 files changed, 11 insertions(+), 93 deletions(-)
->  delete mode 100644 recipes-qt/qt5/qtwayland/0001-xcomposite-glx-Fix-buil=
-d-on-Qt-5.2.1.patch
->
-> --
-> 1.8.3.1
->
-ping?
+On Mon, May 26, 2014 at 12:27:39PM -0700, Ash Charles wrote:
+> The po subdirectory is not copied over to the build directory of
+> found on the VPATH for an out-of-tree build so we symlink it over.
+>=20
+> Signed-off-by: Ash Charles <ashcharles@gmail.com>
+> ---
+>  meta-oe/recipes-support/eject/eject_2.1.5.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recip=
+es-support/eject/eject_2.1.5.bb
+> index c47c653..5c9c749 100644
+> --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+> @@ -14,7 +14,9 @@ SRC_URI[sha256sum] =3D "ef9f7906484cfde4ba223b2682a3705=
+8f9a3c7d3bb1adda7a34a67402e
+> =20
+>  S =3D "${WORKDIR}/${BPN}"
+> =20
+> -PR =3D "r1"
 
-Andreas
+This will make version going backwards and we don't want that, you can
+drop PR only when incrementing PV or PE.
 
+> +do_compile_prepend() {
+> +    ln -s ${S}/po po
+> +}
+> =20
+>  ALTERNATIVE_${PN} =3D "volname eject"
+>  ALTERNATIVE_LINK_NAME[volname] =3D "${bindir}/volname"
+> --=20
+> 1.8.3.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--ew6BAiZeqk4r7MaW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlOEWFUACgkQN1Ujt2V2gBxASwCfcgF9gwIUpOE3v2/9QlJk6ykH
+hm0AnjfqkbSLrK1uHcGYb5mIYshUn2sP
+=tlNt
+-----END PGP SIGNATURE-----
+
+--ew6BAiZeqk4r7MaW--
