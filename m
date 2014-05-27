@@ -1,33 +1,32 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pb0-f46.google.com (unknown [209.85.160.46])
-	by mail.openembedded.org (Postfix) with ESMTP id D12146FA95
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-ve0-f170.google.com (unknown [209.85.128.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 73DD06FAC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 15:09:31 +0000 (UTC)
-Received: by mail-pb0-f46.google.com with SMTP id rq2so9438868pbb.33
+	Tue, 27 May 2014 15:16:28 +0000 (UTC)
+Received: by mail-ve0-f170.google.com with SMTP id db11so10862919veb.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 May 2014 08:09:32 -0700 (PDT)
+	Tue, 27 May 2014 08:16:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=onFqJEGHr2+DNFLJ7FDUjYTHv8H7SwO+91vZrN/V71s=;
-	b=egguq+ae+nV3Apa0tDGNdPj6B5hF8WfmYv+nlzqgJZNYBUmd01bO7ntnVyoosFIjUe
-	rvAJ+UVMsrnvspwh7DR9kQSiQEUOjf3LtSu/xtIpR3PkqJ0hBZvamyudgujt6+SVJSnt
-	PLIM4W49qLt5NuuT5fSAPzFGAhi3MnbLevWW+4KsGYxEk+MmuDMTXyU/7u/e3Vu7T2Vj
-	uxpXemHkk0I+pohnMl6FEz90Y6zPTdG8PU4huR2TuTHGNmQu/ADhqSDN3NL125NfCQz0
-	24X2L2aVaLrxaPBaLuqX6uxHky1G45i5pq5GUor2AQ1t6kBPO/yVvSJqyiiV7pOB2N5j
-	tHFQ==
-X-Received: by 10.66.232.166 with SMTP id tp6mr36955754pac.127.1401203372339; 
-	Tue, 27 May 2014 08:09:32 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	ek2sm23809571pbd.30.2014.05.27.08.09.31 for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 May 2014 08:09:31 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=BGKbvTTSzSzrZ+n/xWNFo9pNMLjS/xhrmAc0GBiWgfI=;
+	b=GIVufssYjHFjcx16YvYXtBg7psOuVJbLhfBg1hSUhPJw6QloJufdRaGB6Q6ltN8lCc
+	oWPvV26JqJY4dGFnEJcbLNHFt8kocIXlHtjz4DASQwcdpopQ5vMEKloNOpLHW/f5my3P
+	Wqwk7IQLG3WK5Qj9OFT2SDa0EnR+XunHB3nV303UdRbb6849adPPAXX6CUxIaWxmY4Sk
+	L5RP+B3MFaty94NuHwE6Dqxhk4XMI5VGTegFh7olZBp5QFkhQhU4tvld2vxVyQ+47O3s
+	x6AWiSFa2eVxhGNiOJ9X/iTPOdyY93P7ahb4hIxW/OkjXQaiCQVaZC9cAzOv+U5xrjJs
+	59Yw==
+X-Received: by 10.53.12.229 with SMTP id et5mr23513643vdd.32.1401203789016;
+	Tue, 27 May 2014 08:16:29 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.227.67 with HTTP; Tue, 27 May 2014 08:15:58 -0700 (PDT)
+In-Reply-To: <20140527091813.GA2426@jama>
+References: <1401132459-26526-1-git-send-email-ashcharles@gmail.com>
+	<20140527091813.GA2426@jama>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Tue, 27 May 2014 08:15:58 -0700
+Message-ID: <CAK8F28=UYXL+YmzrCcWnYppsSNhUA3vJq92awZqvV=ihsL8bTA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 May 2014 08:12:14 -0700
-Message-Id: <1401203534-2598-1-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-oe][PATCH] libmikmod: update to 3.3.6
+Subject: Re: [meta-oe][PATCH] eject: link po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,50 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 May 2014 15:09:33 -0000
+X-List-Received-Date: Tue, 27 May 2014 15:16:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Tim Orling <TicoTimo@gmail.com>
+On Tue, May 27, 2014 at 2:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> This will make version going backwards and we don't want that, you can
+> drop PR only when incrementing PV or PE.
+For sure.  I'l do this for v2.
 
-* URI for 3.3.3 broken
-* COPYING.LESSER License regressed address for FSF:
-5c5
-<      59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
----
->  51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+@Otavio: I tried modifying the variable as you suggested as well as a
+couple other ways in both the Makefile.in and Makefile.am.  Because
+autoreconf gets run in do_configure though, any changes either break
+the configuration step or get wiped out.  The source code explicitly
+mentions that the Makefile in the po subdirectory is not using
+automake, I'm stuck either copying the (100K) po subdir over to the
+build directory or resorting to automake-brokensep.  What is
+preferable for my updated patch?  I'm keen to un-break my build ;-).
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
----
- .../mikmod/{libmikmod_3.3.3.bb => libmikmod_3.3.6.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-multimedia/mikmod/{libmikmod_3.3.3.bb => libmikmod_3.3.6.bb} (69%)
-
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-similarity index 69%
-rename from meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-rename to meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-index 6a3077f..be06efc 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-@@ -1,15 +1,15 @@
- DESCRIPTION = "libmikmod is a module player library supporting many formats, including mod, s3m, it, and xm."
- SECTION = "libs"
- LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = "alsa-lib texinfo"
- 
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
--SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
-+SRC_URI[md5sum] = "9dd9bed30c6f7607a55480234606071b"
-+SRC_URI[sha256sum] = "3f363e03f7b1db75b9b6602841bbd440ed275a548e53545f980df8155de4d330"
- 
- inherit autotools binconfig lib_package
- 
--- 
-1.8.3.2
-
+--Ash
 
