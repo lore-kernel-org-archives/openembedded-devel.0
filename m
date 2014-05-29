@@ -1,36 +1,36 @@
-Return-Path: <paul.betafive@gmail.com>
-X-Greylist: delayed 343 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 28 May 2014 22:16:28 UTC
-Received: from mail-we0-f174.google.com (unknown [74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C384A6098B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pb0-f52.google.com (unknown [209.85.160.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E6A66FC31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 May 2014 22:16:28 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id k48so11909627wev.5
+	Thu, 29 May 2014 03:44:25 +0000 (UTC)
+Received: by mail-pb0-f52.google.com with SMTP id rr13so12347421pbb.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 May 2014 15:16:29 -0700 (PDT)
+	Wed, 28 May 2014 20:44:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=Mrlyh5D+GAcF3V9bSd8b08fjub4vFwP+LaAK93RmYXk=;
-	b=wg3uhQkGR283NmgdDxvUWf8lguaJhZt1pkGWxj+w4NWkgzDzhHtCQMzBPLUapHVvzC
-	x9C+qX+RxR0Gupnn+F1NpOWHCH/r2eUHFistUGVHnHBZz165N23qOHoQRjQH/M103Mtd
-	J3xZi/XKRD2HaEh8GdF8PSWIsqy8A3iD1gC3jAj8Jrr0YWA7lugu1anyc21aMcVrFZvx
-	VZ3C3kU17XWqk486e5FHyTXwxrfe2m3AWukoA2hkAp+9AA4Ib63O2g5x3cqMYwl8m9Vk
-	e1pl3QJN4DaKotmvNR3fuQ5CcFLQpcnBN5Uw9q2hN5pVKsLkzBQRhYPIDkaA4ferl0vM
-	0ZWg==
-X-Received: by 10.180.90.145 with SMTP id bw17mr53432723wib.43.1401315046125; 
-	Wed, 28 May 2014 15:10:46 -0700 (PDT)
-Received: from localhost.localdomain (ygg.betafive.co.uk. [5.9.90.21])
-	by mx.google.com with ESMTPSA id
-	na4sm20209904wic.21.2014.05.28.15.10.44 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 28 May 2014 15:10:45 -0700 (PDT)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=wrpldHLwzGJMAcgVTtZ/DdCR4xCU/cYQSZdK7okO+v8=;
+	b=TFk7AlDRlAfj2U51UnKrUFfv9rcRPwNw64+Yi3DKPfiVzkB3WaW901WyEQTmaws1zm
+	2vOXQUX+vj4313prQyl3MSTfFFY9oEzb7T3DCVeLNz3xuvgBwKqzlnMZDB0GlBO2BToW
+	6F6C2ImYFrI4krdGZymcioyW1K7DhTbTrbUbwQePBLTnnJ4NV1EKnxnrteAdv6n2OqIz
+	851IfZg6yrzT7oci8HR6KSwsGTNgJKG/lr7z+AnwsmvkFBr5x56Zi6sP42klT34qK36K
+	MHVdnXm5gLEiEy2iwabce5x3MzgTugAJBohYkU/evs6POeP2VOPyJfpo7LBetZoGeouG
+	0bAA==
+X-Received: by 10.67.4.138 with SMTP id ce10mr5284251pad.12.1401335066875;
+	Wed, 28 May 2014 20:44:26 -0700 (PDT)
+Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id y2sm97472685pas.45.2014.05.28.20.44.25
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Wed, 28 May 2014 20:44:26 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 May 2014 22:10:40 +0000
-Message-Id: <1401315040-6563-1-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 1.9.3
-Subject: [meta-oe][PATCH] vim: Fix packaging of common data files
+Date: Wed, 28 May 2014 20:47:17 -0700
+Message-Id: <1401335237-19402-1-git-send-email-ticotimo@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+In-Reply-To: <CAMKF1sp_ii_wm6sjCd=ENxPKSkQoOqNhLnnA0bU6PfOyp=gz4g@mail.gmail.com>
+References: <CAMKF1sp_ii_wm6sjCd=ENxPKSkQoOqNhLnnA0bU6PfOyp=gz4g@mail.gmail.com>
+Subject: [meta-oe][PATCH v2] enca: fix S!=B failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,44 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 May 2014 22:16:35 -0000
+X-List-Received-Date: Thu, 29 May 2014 03:44:26 -0000
 
-The majority of the vim runtime files have been moved from the package
-'vim-data' to the package 'vim-common'. However, 'vim-data' was still in
-RRECOMMENDS and 'vim-common' was not, so the runtime files were not being
-installed by default.
+From: Tim Orling <TicoTimo@gmail.com>
 
-To fix this, 'vim-data' is removed from RRECOMMENDS and 'vim-common' is added
-instead. 'vim-data' is also removed from PACKAGES as it should now be empty.
+Point tools to the right paths:
+* ${S}/configure.ac in do_configure_prepare()
+* ${B}/Makefile in do_configure_append()
+* cd ${B} in do_compile()
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-oe/recipes-support/vim/vim_7.4.258.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/enca/enca_1.9.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.258.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-index 2d3b0c2..cfc82b1 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.258.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
-@@ -70,7 +70,7 @@ do_install_append() {
+diff --git a/meta-oe/recipes-support/enca/enca_1.9.bb b/meta-oe/recipes-support/enca/enca_1.9.bb
+index e65a143..ea38946 100644
+--- a/meta-oe/recipes-support/enca/enca_1.9.bb
++++ b/meta-oe/recipes-support/enca/enca_1.9.bb
+@@ -20,17 +20,17 @@ EXTRA_OECONF = "--with-libiconv-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
  
- PARALLEL_MAKEINST = ""
+ do_configure_prepend() {
+     # remove failing test which checks for something that isn't even used
+-    sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' configure.ac
++    sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' ${S}/configure.ac
+ }
  
--PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
-+PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc"
- FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
- FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
- FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
-@@ -93,7 +93,7 @@ FILES_${PN}-common = " \
- "
+ do_configure_append() {
+-    sed -i s:-I/usr/include::g Makefile
+-    sed -i s:-I/usr/include::g */Makefile
++    sed -i s:-I/usr/include::g ${B}/Makefile
++    sed -i s:-I/usr/include::g ${B}/*/Makefile
+ }
  
- # Recommend that runtime data is installed along with vim
--RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
-+RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
+ do_compile() {
+     cd ${S}/tools && ${BUILD_CC} -o make_hash make_hash.c
+-    cd ..
++    cd ${B}
+     oe_runmake
+ }
  
- ALTERNATIVE_${PN} = "vi"
- ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
 -- 
-1.9.3
+1.8.3.2
 
 
