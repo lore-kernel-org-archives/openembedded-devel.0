@@ -1,37 +1,38 @@
 Return-Path: <>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id E0AB86FD56
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id DAC6E6FD68
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 May 2014 22:56:28 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id x12so1120040wgg.6
+	Thu, 29 May 2014 22:56:30 +0000 (UTC)
+Received: by mail-we0-f177.google.com with SMTP id x48so1109672wes.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 May 2014 15:56:29 -0700 (PDT)
+	Thu, 29 May 2014 15:56:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Ht5+87Ycvekgh4TehmYBYBivPVVIKy+8GaQF7zG2/5U=;
-	b=BnUh/Rne7+FIO1TzOS/zM9vULF6KQ/3de8joQTCS9/KLUJy+goQ2gSA8tE58MR6G8m
-	Z8A9FgXZf+cuQnfqloFSvH/0WCCJNgCT7N4l2IGIvwq5tw0+Z7FkXza6cqpyUNHdac5B
-	ws2+wsvdHi0kkOFE0Yb2Ooy+3V2rFB0l9JNX+kEspLVx9LVX2OTRRjkAIVAFgeR+tdXA
-	0XzY7Lmph3SUu5cp7VSiqLuUb5gu06R9ruhEF9qC2lXGSLjLEARBZBtcSyrSR9wdMg4T
-	bkgfq3FVl3wV+Scu84YLQy9BJ5WqeXM4lRFrZLAsH5J/ZMsE9fcoHkEgFpbCViL3Op95
-	tbpA==
-X-Received: by 10.194.22.100 with SMTP id c4mr15291671wjf.89.1401404189103;
-	Thu, 29 May 2014 15:56:29 -0700 (PDT)
+	bh=Fp4wlEAC2FoyCLqMigjGkw7m2SF6tsxeEnzjpMIdYvg=;
+	b=0UoCoSQgmWyOVXaOGOg/zd8y9IcZfJf6WIttOea4nXOWSzsodZ4Sks+XsjLEf9D9T/
+	zhnkmXEXIo3a0nnP6Yq5J7Y7Jz0201TSt8LjuvPtsN5R62Y0EIAxr8rItT7NZNp0p4ih
+	ZkWwcZCNZGz8u7kghDBCpg46iySpGxIR90DKT6FUKBPtfADDDnQg9tC2ndFZJyQLXcKY
+	dtgImJIhSoYfvf3V14HR7EV9r3BdiSPAG+rtMIYOFabNhyFJeszazWgAc5/Nmbi0PXmy
+	W6IfH+S76SUgjtP5CUGnxgySTmfqJxaYPiYuhl9MhTTVkhNV4duNVY7/uq/xghfJmZVZ
+	G2zA==
+X-Received: by 10.180.103.228 with SMTP id fz4mr758727wib.4.1401404190968;
+	Thu, 29 May 2014 15:56:30 -0700 (PDT)
 Received: from mizar.208.67.220.220
 	(host160-222-dynamic.7-79-r.retail.telecomitalia.it. [79.7.222.160])
-	by mx.google.com with ESMTPSA id dk10sm645930wib.1.2014.05.29.15.56.28
+	by mx.google.com with ESMTPSA id dk10sm645930wib.1.2014.05.29.15.56.29
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 May 2014 15:56:28 -0700 (PDT)
+	Thu, 29 May 2014 15:56:30 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 X-Google-Original-From: Andrea Adami <andrea.adami@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 May 2014 00:56:08 +0200
-Message-Id: <1401404169-5953-2-git-send-email-andrea.adami@gmail.com>
+Date: Fri, 30 May 2014 00:56:09 +0200
+Message-Id: <1401404169-5953-3-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1401404169-5953-1-git-send-email-andrea.adami@gmail.com>
 References: <1401404169-5953-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 2/3] linux-yocto_3.14: collie: remove detection hack
+Subject: [meta-handheld][PATCH 3/3] linux-yocto(-tiny-kexecboot)_3.10: collie: remove detection hack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 May 2014 22:56:29 -0000
+X-List-Received-Date: Thu, 29 May 2014 22:56:31 -0000
 
 From: Andrea Adami <andrea.adami@gmail.com>
 
@@ -56,15 +57,28 @@ Further testings on other models are giving normal readings.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../collie/collie-match-cfi-qry.patch              | 47 ----------------------
- recipes-kernel/linux/linux-yocto_3.14.bbappend     |  1 -
- 2 files changed, 48 deletions(-)
- delete mode 100644 recipes-kernel/linux/linux-yocto-3.14/collie/collie-match-cfi-qry.patch
+ .../linux/linux-yocto-3.10/collie/collie.scc       |  1 -
+ .../patches/patches-mtd/collie-match-cfi-qry.patch | 47 ----------------------
+ .../linux/linux-yocto-tiny-kexecboot_3.10.bbappend |  1 -
+ 3 files changed, 49 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/collie/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-3.14/collie/collie-match-cfi-qry.patch
+diff --git a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
+index 9828877..e3f9c54 100644
+--- a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
++++ b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.scc
+@@ -11,7 +11,6 @@ patch ../patches/patches-mtd/collie-eraseinfo.patch
+ // for 3.12
+ patch ../patches/patches-mtd/collie-cfi-probe-again.patch
+ patch ../patches/patches-mtd/collie-mtd-resize.patch
+-patch ../patches/patches-mtd/collie-match-cfi-qry.patch
+ patch ../patches/patches-mtd/collie-LH28F640BF.patch
+ patch ../patches/patches-sa1100/collie-irda.patch
+ patch ../patches/patches-sa1100/collie-add-bootblock.patch
+diff --git a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch b/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
 deleted file mode 100644
 index a315d93..0000000
---- a/recipes-kernel/linux/linux-yocto-3.14/collie/collie-match-cfi-qry.patch
+--- a/recipes-kernel/linux/linux-yocto-3.10/patches/patches-mtd/collie-match-cfi-qry.patch
 +++ /dev/null
 @@ -1,47 +0,0 @@
 -From 66ec11df6561d5ba7cdf41977af828a53ba6b99f Mon Sep 17 00:00:00 2001
@@ -114,18 +128,18 @@ index a315d93..0000000
 --- 
 -1.8.1.5
 -
-diff --git a/recipes-kernel/linux/linux-yocto_3.14.bbappend b/recipes-kernel/linux/linux-yocto_3.14.bbappend
-index 9591f1a..79fff8d 100644
---- a/recipes-kernel/linux/linux-yocto_3.14.bbappend
-+++ b/recipes-kernel/linux/linux-yocto_3.14.bbappend
-@@ -55,7 +55,6 @@ SRC_URI_append_collie = " \
-            \
-            file://collie-cfi-probe-again.patch \
-            file://collie-mtd-resize.patch \
--           file://collie-match-cfi-qry.patch \
-            file://collie-LH28F640BF.patch \
-            file://collie-add-bootblock.patch \
-            \
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
+index a6a7741..70d8a4a 100644
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
+@@ -50,7 +50,6 @@ SRC_URI_append_collie = " \
+            file://patches/patches-mtd/collie-eraseinfo.patch \
+            file://patches/patches-mtd/collie-cfi-probe-again.patch \
+            file://patches/patches-mtd/collie-mtd-resize.patch \
+-           file://patches/patches-mtd/collie-match-cfi-qry.patch \
+            file://patches/patches-mtd/collie-LH28F640BF.patch \
+            file://patches/patches-sa1100/collie-irda.patch \
+            file://patches/patches-sa1100/collie-add-bootblock.patch \
 -- 
 1.9.1
 
