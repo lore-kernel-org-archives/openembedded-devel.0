@@ -1,46 +1,36 @@
-Return-Path: <sipke.vriend@xilinx.com>
-X-Greylist: delayed 943 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 29 May 2014 22:47:09 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1blp0186.outbound.protection.outlook.com [207.46.163.186])
-	by mail.openembedded.org (Postfix) with ESMTP id 813B96FD34
+Return-Path: <>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A0A4E6FD49
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 May 2014 22:47:09 +0000 (UTC)
-Received: from BN1AFFO11FD029.protection.gbl (10.58.52.34) by
-	BN1AFFO11HUB028.protection.gbl (10.58.52.138) with Microsoft SMTP
-	Server (TLS) id 15.0.949.9; Thu, 29 May 2014 22:31:25 +0000
-Received: from xsj-gw1 (149.199.60.83) by
-	BN1AFFO11FD029.mail.protection.outlook.com (10.58.52.184) with
-	Microsoft SMTP Server id 15.0.949.9 via Frontend Transport;
-	Thu, 29 May 2014 22:31:25 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66] helo=xsj-smtp1)
-	by xsj-gw1 with esmtp (Exim 4.63)
-	(envelope-from <sipke.vriend@xilinx.com>) id 1Wq8r6-0002mq-U4
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 May 2014 15:31:24 -0700
-From: Sipke Vriend <sipke.vriend@xilinx.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 May 2014 08:31:21 +1000
-X-Mailer: git-send-email 1.9.0
-X-RCIS-Action: ALLOW
-Message-ID: <7bb55d33-4d2c-447c-8d25-3e395bb6e2c6@BN1AFFO11FD029.protection.gbl>
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:149.199.60.83; CTRY:US; IPV:NLI; IPV:NLI;
-	EFV:NLI; SFV:NSPM;
-	SFS:(6009001)(438001)(199002)(189002)(31696002)(83322001)(89996001)(92566001)(76482001)(85852003)(83072002)(87286001)(93916002)(79102001)(20776003)(70736001)(64706001)(47776003)(87936001)(92726001)(88136002)(77982001)(50986999)(77156001)(81342001)(31966008)(19580405001)(99396002)(74662001)(86362001)(104166001)(80022001)(21056001)(81542001)(74502001)(104016001)(53416003)(102836001)(19580395003)(50466002)(74316001)(33646001)(50226001)(62966002)(44976005)(48376002)(4396001)(46102001)(32563001)(23106003);
-	DIR:OUT; SFP:; SCL:1; SRVR:BN1AFFO11HUB028; H:xsj-gw1; FPR:;
-	MLV:sfv; PTR:unknown-60-83.xilinx.com; A:1; MX:1; LANG:en; 
-MIME-Version: 1.0
-X-OriginatorOrg: xilinx.onmicrosoft.com
-X-Microsoft-Antispam: BL:0; ACTION:Default; RISK:Low; SCL:0; SPMLVL:NotSpam;
-	PCL:0; RULEID:
-X-Forefront-PRVS: 022649CC2C
-Received-SPF: Pass (: domain of xilinx.com designates 149.199.60.83 as
-	permitted sender) receiver=; client-ip=149.199.60.83; helo=xsj-gw1;
-Authentication-Results: spf=pass (sender IP is 149.199.60.83)
-	smtp.mailfrom=sipke.vriend@xilinx.com; 
-Cc: sipkev@xilinx.com
-Subject: [meta-oe][PATCH] mplayer: Inherit python3native
+	Thu, 29 May 2014 22:56:25 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id hi2so153164wib.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 May 2014 15:56:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=jgCsY0Im/4mGNzgVqKWYxWR/Cx+tddpIJ6WVWuHnG8s=;
+	b=kdaDJOqMwfqZz8OF0N6q7RQhwdMElJkVhY/IYU0CyuMGtt9MrbixVy1Ipqk2+HhW9n
+	E9mgYT/gyYjSJ2LyFTH46GlC8sP/yqqfe4XsEHjhbXY0Lf/B+SGcRh8uquy9uHococdA
+	wkn+7f+O6vt4K9Wy19TVbTFL75OK4WlVKaQ+1V8Y38H5g+12Offxno8RgZRyH8+cF3v/
+	IA+wCo9oF+FXoV0SKDWvWRbe006MqZkmtjBS5RLv0OeGkalNwx+yuq+yJbp6/WsTreDP
+	VpvEEmELPnPew02xtYxXwUVD2X75o+bOEVI3yhUbPew+SDB+sRzQdGOh6ILsWcth1Shz
+	ZdVA==
+X-Received: by 10.194.243.104 with SMTP id wx8mr15162020wjc.32.1401404186496; 
+	Thu, 29 May 2014 15:56:26 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host160-222-dynamic.7-79-r.retail.telecomitalia.it. [79.7.222.160])
+	by mx.google.com with ESMTPSA id dk10sm645930wib.1.2014.05.29.15.56.25
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 29 May 2014 15:56:25 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+X-Google-Original-From: Andrea Adami <andrea.adami@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 30 May 2014 00:56:07 +0200
+Message-Id: <1401404169-5953-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld][PATCH 1/3] linux-yocto_3.14: hx4700: v 3.14.4: remove upstreamed patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 May 2014 22:47:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 May 2014 22:56:29 -0000
 
-A host machine without python3 on the PATH fails to build
-mplayer.
+From: Andrea Adami <andrea.adami@gmail.com>
 
-Inherit python3native to avoid host dependency on python3.
+commit id=b98c1e1c1f71ab32e755e2e417e9a682865578b8
 
-Signed-off-by: Sipke Vriend <sipke.vriend@xilinx.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch | 35 ----------------------
+ recipes-kernel/linux/linux-yocto_3.14.bbappend     |  1 -
+ 2 files changed, 36 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-yocto-3.14/hx4700/hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-index 65fab1f..d5e8028 100644
---- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-@@ -5,6 +5,8 @@ DEPENDS = "libvpx libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
-            libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
-            libxv virtual/libx11 libass speex faad2"
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/hx4700/hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch b/recipes-kernel/linux/linux-yocto-3.14/hx4700/hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch
+deleted file mode 100644
+index ee92352..0000000
+--- a/recipes-kernel/linux/linux-yocto-3.14/hx4700/hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 75249379d18d5bde2d38edb77e1723481d470757 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 5 Apr 2014 18:09:07 +0200
+-Subject: [PATCH] ARM: pxa: hx4700.h: include "irqs.h" for
+- PXA_NR_BUILTIN_GPIO
+-
+-hx4700 needs the same fix as in 
+-9705e74671f0e4f994d86b00cecf441917c64a66
+-"ARM: pxa: fix various compilation problems"
+-
+-Fix build errors. Initial one is:
+-/linux/arch/arm/mach-pxa/include/mach/hx4700.h:18:32: error:
+- 'PXA_NR_BUILTIN_GPIO' undeclared here (not in a function)
+-|  #define HX4700_ASIC3_GPIO_BASE PXA_NR_BUILTIN_GPIO
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- arch/arm/mach-pxa/include/mach/hx4700.h | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/arch/arm/mach-pxa/include/mach/hx4700.h b/arch/arm/mach-pxa/include/mach/hx4700.h
+-index 8bc0291..0e1bb46 100644
+---- a/arch/arm/mach-pxa/include/mach/hx4700.h
+-+++ b/arch/arm/mach-pxa/include/mach/hx4700.h
+-@@ -14,6 +14,7 @@
+- 
+- #include <linux/gpio.h>
+- #include <linux/mfd/asic3.h>
+-+#include "irqs.h" /* PXA_NR_BUILTIN_GPIO */
+- 
+- #define HX4700_ASIC3_GPIO_BASE	PXA_NR_BUILTIN_GPIO
+- #define HX4700_EGPIO_BASE	(HX4700_ASIC3_GPIO_BASE + ASIC3_NUM_GPIOS)
+--- 
+-1.8.1.5
+-
+diff --git a/recipes-kernel/linux/linux-yocto_3.14.bbappend b/recipes-kernel/linux/linux-yocto_3.14.bbappend
+index 12f910a..9591f1a 100644
+--- a/recipes-kernel/linux/linux-yocto_3.14.bbappend
++++ b/recipes-kernel/linux/linux-yocto_3.14.bbappend
+@@ -110,7 +110,6 @@ SRC_URI_append_hx4700 = " \
+            file://defconfig \
+            file://OE-vga-logo.patch \
+            file://hx4700-change-led-trigger-assignments.patch \
+-           file://hx4700.h-include-irqs.h-for-PXA_NR_BUILTIN_G.patch \
+            "
  
-+inherit python3native
-+
- RDEPENDS_${PN} = "mplayer-common"
- PROVIDES = "mplayer"
- RPROVIDES_${PN} = "mplayer"
+ SRC_URI_append_poodle = " \
 -- 
-1.9.0
-
+1.9.1
 
 
