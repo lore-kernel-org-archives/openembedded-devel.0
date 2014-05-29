@@ -1,35 +1,32 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pa0-f45.google.com (unknown [209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A969A6FC43
+Return-Path: <dhylands@gmail.com>
+X-Greylist: delayed 1615 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 29 May 2014 14:48:13 UTC
+Received: from mail-yk0-f181.google.com (unknown [209.85.160.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 074F66FCAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 May 2014 04:12:40 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id ey11so12153467pad.32
+	Thu, 29 May 2014 14:48:13 +0000 (UTC)
+Received: by mail-yk0-f181.google.com with SMTP id 131so337759ykp.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 May 2014 21:12:41 -0700 (PDT)
+	Thu, 29 May 2014 07:48:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=v3bben1oDHCPMq3Z8ISU+UVie9Zao2F7ETkSd8iXldw=;
-	b=sANpZiNja1I1gF99t1hw7bAp4u4e0DKJ77aoH5XH/bHuN4K8pXP3r/PV9fozRJQ0me
-	DAsz4rWhXN8OrSn6Srv6T9lIsGsExsKPePwEX3DBeopbL3rcY2SRWt9nTFEkgbNLCpUG
-	wED0Nw12iG8dp9ASYFdLprJG3yTfDmj8fNE+hoLwes3K7RdbCheC49UHa+5aC2zPxtQw
-	xikJ/xRPITfeRbc1BLtfogJzs/A7RMbqBMKTIR+UKsI22L3dsTED1hGP5OKGYWoL0HdE
-	65FGtl+ecdXpaNPY8+/1hTkRrxPC1woQW9aSVlAZM3RfsJ9orgi3w4LevyoF8awUFZYP
-	C1Dg==
-X-Received: by 10.66.65.204 with SMTP id z12mr5273610pas.60.1401336761740;
-	Wed, 28 May 2014 21:12:41 -0700 (PDT)
-Received: from gentoo.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
-	[75.128.22.150]) by mx.google.com with ESMTPSA id
-	ei4sm30954179pbb.42.2014.05.28.21.12.40 for <multiple recipients>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 May 2014 21:12:40 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=dh6KdaeIq2a6vPptM9Guj5keLvWYL2YpS/WdSpPqSks=;
+	b=UzRJr01To09ercRIgA6bGMH9L+E+xn/uCUrFVqeClIX69QboCFY4ABJ3sRpEoeKfEO
+	lMkrFPbpWlOz5W9T8mMvSC7RFZ9ahq6WsXjsw0axHRhXSRBicHLHug2wkD6ld1oFQTwf
+	H1HZ02ApSBPg+ol1u2KhwOiLo067LfesfMhjLo3+AhRKvjsZYlxOx5VLFimtKt9ddkYc
+	YEMuXVRnOf6x/GCwv86c9RzKdDI0t9RRn0XF+nFQJXT758yhe1am9zRuVL6fRahqz5Hb
+	mTnxUj7fJ/J7VfJsUnl0JPXI1um/M+wE+bPCqvQjwP5EeB8fyfw3roclpHJM07J+TnyH
+	4ASA==
+MIME-Version: 1.0
+X-Received: by 10.236.180.169 with SMTP id j29mr10626140yhm.47.1401373279055; 
+	Thu, 29 May 2014 07:21:19 -0700 (PDT)
+Received: by 10.170.110.136 with HTTP; Thu, 29 May 2014 07:21:19 -0700 (PDT)
+Date: Thu, 29 May 2014 07:21:19 -0700
+Message-ID: <CABi1daHuRYWXAy629iwuUJfUwsQxDWaS3B8zdUO+sks4_fL8BQ@mail.gmail.com>
+From: Dave Hylands <dhylands@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 May 2014 21:15:33 -0700
-Message-Id: <1401336933-24140-1-git-send-email-ticotimo@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <CAMKF1sqE4AdE9c-v1Fr+drXcfEdRYxSv_Bm8q7sq=Egx13iaeQ@mail.gmail.com>
-References: <CAMKF1sqE4AdE9c-v1Fr+drXcfEdRYxSv_Bm8q7sq=Egx13iaeQ@mail.gmail.com>
-Subject: [meta-oe][PATCH v2] libpostproc: fix S!=B failure
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Issue with x264_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 May 2014 04:12:45 -0000
+X-List-Received-Date: Thu, 29 May 2014 14:48:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Tim Orling <TicoTimo@gmail.com>
+I've been working with the Intel Galileo, which I think is using the dylan
+branch.
 
-Implement khem's suggestion, ${S}/configure $(EXTRA_OECONF).
+The meta-oe/recipes-multimedia/x264/x264_git.bb file contains:
 
-NOTE: with or without autotools-brokensep, the following:
-| WARNING: QA Issue: ELF binary 'libpostproc.so.52.0.100'
-| has relocations in .text
+SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
----
- meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+which appears to no longer exist in the git.videolan.org repository. I
+found this tree on gitorious:
+https://gitorious.org/gxk-media/x264/commits/1cffe9f406cc54f4759fc9eeb85598fb8cae66c7
+which has the correct hash, and by comparing the description, I was able to
+determine that the corresponding hash in the current git.videolan.org
+repository is c6bfcec47c9d1fff0489a30215501babea29f59c
 
-diff --git a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb b/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-index 148d169..aae1700 100644
---- a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-+++ b/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-@@ -42,5 +42,5 @@ EXTRA_OECONF = " \
- "
- 
- do_configure() {
--    ./configure ${EXTRA_OECONF}
-+    ${S}/configure ${EXTRA_OECONF}
- }
--- 
-1.8.3.2
+I wasn't quite sure what the development procedure for this repo was, so I
+thought I would raise the issue and ask how to proceed.
 
+I'm happy to do a pull request. I noticed that x264 doesn't seem to exist
+in the master branch, and I wasn't sure of the significance of that either.
+
+--
+Dave Hylands
+Shuswap, BC, Canada
+http://www.davehylands.com
 
