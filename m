@@ -1,18 +1,35 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 12FB56FE33
+Return-Path: <chmorgan@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 247F76FE25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 May 2014 20:44:35 +0000 (UTC)
-Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
-	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id 12CF620C65
+	Fri, 30 May 2014 20:45:35 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id to1so1065497ieb.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 May 2014 22:44:35 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+	Fri, 30 May 2014 13:45:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=3BGU4/1hVhfOqgtoAJzkSZVA+zST327PS256uXzRUWc=;
+	b=gRcAI03X+ttLo6G7CUOoMq1XhQrIbHh2d/SthVuY6BroOMVwNOnG6a0YHol1ZWe3YD
+	SrheTpf6i+6AhwlMlLDhEmnk726i06Km6dr8t0yueuzL/xguaRphaZNxBBK/LuYJqNgR
+	XOOWUpBG4zljwND/thuRFKiH/eFDTwXHU+Lr5ZOl20BXnxObmLAaChxs+9IkCWFPJXOR
+	UPiQrTQDBm+bfZ35rVy7LrVwvElSXc2BZrRliygIwdbHn469FhU7JEZyWSienMdkiUCj
+	MZPGj8/Q/RHW15a1dEUnxFfYP2EK+JH80uDs6Ef8tqzf9mLUonc9UPPhXUcv6GOvH9d/
+	sCow==
+X-Received: by 10.50.178.203 with SMTP id da11mr117132igc.0.1401482736694;
+	Fri, 30 May 2014 13:45:36 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.64.228.141 with HTTP; Fri, 30 May 2014 13:45:16 -0700 (PDT)
+In-Reply-To: <CAAPegz09QsB8utLQyStZgVyb7ZttbcvNbfMqMDJvLzjar9Hkwg@mail.gmail.com>
+References: <CAAPegz1HGg34=2kp7DUj8hOR3dmc1QtVe+hFvQPVoNhz5ptTeg@mail.gmail.com>
+	<CAP9ODKppar=6rRFF0Vb+TQL3e+XZgirCfdMWXSN7cviQVBAFSg@mail.gmail.com>
+	<5388EB65.5000305@mlbassoc.com>
+	<CAAPegz09QsB8utLQyStZgVyb7ZttbcvNbfMqMDJvLzjar9Hkwg@mail.gmail.com>
+From: Chris Morgan <chmorgan@gmail.com>
+Date: Fri, 30 May 2014 16:45:16 -0400
+Message-ID: <CAAPegz07cXaLZoGbLP9+HpYO_9CgDUNxxw_a=nKuSCZ+oc6wqQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 May 2014 22:44:23 +0200
-Message-Id: <1401482663-3643-1-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-browser][PATCH] chromium: Upgrade to version 35.0.1916.114
+Subject: Re: [meta-oe][PATCH 0/2] dfu-util cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,80 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 May 2014 20:44:37 -0000
+X-List-Received-Date: Fri, 30 May 2014 20:45:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This fixes several CSS transition problems, and improves performance on
-some pages
+On Fri, May 30, 2014 at 4:44 PM, Chris Morgan <chmorgan@gmail.com> wrote:
+> On Fri, May 30, 2014 at 4:34 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+>> On 2014-05-30 14:29, Otavio Salvador wrote:
+>>>
+>>> On Fri, May 30, 2014 at 2:14 PM, Chris Morgan <chmorgan@gmail.com> wrote:
+>>>>
+>>>> Add a recipe for building 0.7, remove old 0.1 recipe.
+>>>
+>>>
+>>> I'd prefer this in a single commit.
+>>>
+>>
+>> I think he did it this way because of the [slightly confusing]
+>> version 0.4 that is still left in place.
+>>
+>> --
+>> ------------------------------------------------------------
+>> Gary Thomas                 |  Consulting for the
+>> MLB Associates              |    Embedded world
+>> ------------------------------------------------------------
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+> Correct.
+>
+> I'm not introducing 0.7 to replace 0.1, I'm introducing 0.7 so I'm at
+> the same rev as my Fedora box. Just happened to notice that 0.1, which
+> is super old, was still present so thought we might remove that.
+>
+> Chris
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- .../chromium/fix-glib-deprecated-warning.patch     | 32 ++++++++++++++++++++++
- ...um_35.0.1883.0.bb => chromium_35.0.1916.114.bb} |  5 ++--
- 2 files changed, 35 insertions(+), 2 deletions(-)
- create mode 100644 recipes-browser/chromium/chromium/fix-glib-deprecated-warning.patch
- rename recipes-browser/chromium/{chromium_35.0.1883.0.bb => chromium_35.0.1916.114.bb} (95%)
 
-diff --git a/recipes-browser/chromium/chromium/fix-glib-deprecated-warning.patch b/recipes-browser/chromium/chromium/fix-glib-deprecated-warning.patch
-new file mode 100644
-index 0000000..05b3bbe
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/fix-glib-deprecated-warning.patch
-@@ -0,0 +1,32 @@
-+Stolen the applicable part of https://chromium.googlesource.com/chromium/src.git/+/27f62d43929d33f178e89a832fde0b091a452fdd
-+to fix the -Werror problem from a deprecated warning in this file:
-+
-+| In file included from ../../net/proxy/proxy_config_service_linux.cc:41:0:
-+| gen/library_loaders/libgio.h:29:13: error:
-+|   'const gchar* const* g_settings_list_schemas()' is deprecated
-+|   (declared at .../tmp/sysroots/imx6qsabresd/usr/include/glib-2.0/gio/gsettings.h:74):
-+|   Use 'g_settings_schema_source_list_schemas' instead [-Werror=deprecated-declarations]
-+|    typeof(&::g_settings_list_schemas) g_settings_list_schemas;
-+|              ^
-+| cc1plus: all warnings being treated as errors
-+
-+Upstream-Status: Backport [27f62d43929d33f178e89a832fde0b091a452fdd]
-+
-+--- chromium-35.0.1883.0/net/proxy/proxy_config_service_linux.cc.old	2014-05-24 11:21:46.456263672 +0200
-++++ chromium-35.0.1883.0/net/proxy/proxy_config_service_linux.cc	2014-05-24 11:26:52.041519475 +0200
-+@@ -4,6 +4,15 @@
-+ 
-+ #include "net/proxy/proxy_config_service_linux.h"
-+ 
-++// glib >=2.40 deprecate g_settings_list_schemas in favor of
-++// g_settings_schema_source_list_schemas. This function is not available on
-++// earlier versions that we still need to support (specifically, 2.32), so
-++// disable the warning.
-++// TODO(mgiuca): Remove this suppression when we drop support for Ubuntu 13.10
-++// (saucy) and earlier. Update the code to use
-++// g_settings_schema_source_list_schemas instead.
-++#define GLIB_DISABLE_DEPRECATION_WARNINGS
-++
-+ #include <errno.h>
-+ #include <fcntl.h>
-+ #if defined(USE_GCONF)
-diff --git a/recipes-browser/chromium/chromium_35.0.1883.0.bb b/recipes-browser/chromium/chromium_35.0.1916.114.bb
-similarity index 95%
-rename from recipes-browser/chromium/chromium_35.0.1883.0.bb
-rename to recipes-browser/chromium/chromium_35.0.1916.114.bb
-index a9071e7..cab3782 100644
---- a/recipes-browser/chromium/chromium_35.0.1883.0.bb
-+++ b/recipes-browser/chromium/chromium_35.0.1916.114.bb
-@@ -9,11 +9,12 @@ SRC_URI = "\
-         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://remove-linux-accel-canvas-from-blacklist.patch', '', d)} \
-         file://unistd-2.patch \
-+        file://fix-glib-deprecated-warning.patch \
-         file://google-chrome \
-         file://google-chrome.desktop \
- "
--SRC_URI[md5sum] = "c0659bc3c6b540e106e043fd27f54358"
--SRC_URI[sha256sum] = "666d5948c6508072f9f5d6acff82290fa5939e1da1b94b042a1e05daf3357b61"
-+SRC_URI[md5sum] = "52a42d4ae36d0104f414cb7b814526d1"
-+SRC_URI[sha256sum] = "566fcdc05d53c551d142ac9742ef69ba7c6d5a450d8ec41c0efd4fc8249f77af"
- 
- # include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
- COMPATIBLE_MACHINE = "(-)"
--- 
-1.8.3.2
+And I can easily make them a single patch if thats what you want. Just
+thought it was relatively easy to apply both patches.
 
+Chris
 
