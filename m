@@ -1,30 +1,30 @@
 Return-Path: <chmorgan@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 91EC96FDEE
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 95D5A6FE25
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 May 2014 17:14:53 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id x19so2055076ier.13
+	Fri, 30 May 2014 17:15:01 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id uq10so1058226igb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 May 2014 10:14:54 -0700 (PDT)
+	Fri, 30 May 2014 10:15:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=WAQNJ5UH9VBisDvY2/qUW8CPRop/l1dXsQFb+Suf6l0=;
-	b=iRzsTubHTevnRVFoZsTO1eua4wQ7CsV9sn8TcZArHbtt9gwP3G2Tiw+BsH2F4HSU9u
-	mpYMx+aOUxakgHqKFEh+9foOJq9VWSnh01mibVvGcfCLdaxHT4tIkBSxF2+hWy/dhEvB
-	75jtN/CEKmqdk8c9+zqMLrqfsbYbBS8k0/eAtUQ46EPHEOVK2/quXYqj+vEUB/bbKy95
-	yCLppmXDzk0uBGuw+fbSmKYecpOfaPJ+cRulst1d2+9zvxPEWyd0UnNcImrdfxWmpOlz
-	eGqcq1o6LDcv8zDb2+BiYpbUv2BBuqIZPAvyPRQc6GgbSs9dYgIJ6hrsCsJUzl25jH/b
-	rpOg==
-X-Received: by 10.50.120.3 with SMTP id ky3mr7500095igb.24.1401470094240; Fri,
-	30 May 2014 10:14:54 -0700 (PDT)
+	bh=ROA3xWKlfYakYV//3NzDzlvE3WthIIUAZ1Y8+oVuL5A=;
+	b=K88CIRH6I6rpQTXnQKx5NNtEqhks2JlhTjDGuwK8ZSrHZb6je9LHl2CF0LK2LaM0Gs
+	+53kA5HGZI7umRUbNFMw+9AjFlTnPZwAtbsHYM9qx6dFHhMdGRo//rxMXxSKz1xcHX1T
+	T44x6aQqNg4ERb96cR1DIrBE54+xQbBfF+u9VPC4JcoE/0Ld5VZiyatnYkAzMfWoCyyM
+	JVFNkw4Oy5eclsA4JauCygsAq0c8hIpA8T00Qz6vTlxrDnPBrzZEuFqn5GiE/pqyy+4t
+	hU6XLETdUCyQ/eGYxTWCMHEHu1A5Gotdiuwwf8v+/opYVqmfYwbEybglF955N7WszKaC
+	k/zw==
+X-Received: by 10.42.91.73 with SMTP id o9mr16905657icm.69.1401470102149; Fri,
+	30 May 2014 10:15:02 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.64.228.141 with HTTP; Fri, 30 May 2014 10:14:34 -0700 (PDT)
+Received: by 10.64.228.141 with HTTP; Fri, 30 May 2014 10:14:42 -0700 (PDT)
 From: Chris Morgan <chmorgan@gmail.com>
-Date: Fri, 30 May 2014 13:14:34 -0400
-Message-ID: <CAAPegz1HGg34=2kp7DUj8hOR3dmc1QtVe+hFvQPVoNhz5ptTeg@mail.gmail.com>
+Date: Fri, 30 May 2014 13:14:42 -0400
+Message-ID: <CAAPegz0qP3=K30n612M=VR2q12M=PMV9omHDGJ-_4DJLYAJ_hw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 0/2] dfu-util cleanup
+Subject: [meta-oe][PATCH 2/2] Remove old dfu-util 0.1 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,21 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 May 2014 17:14:55 -0000
+X-List-Received-Date: Fri, 30 May 2014 17:15:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Add a recipe for building 0.7, remove old 0.1 recipe.
-
-Chris Morgan (2):
-  dfu-util 0.7 recipe
-  Remove old dfu-util 0.1 recipe
-
+Signed-off-by: Chris Morgan <chmorgan@gmail.com>
+---
  meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb | 10 ----------
- meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb |  6 ++++++
- 2 files changed, 6 insertions(+), 10 deletions(-)
+ 1 file changed, 10 deletions(-)
  delete mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
- create mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
 
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+b/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+deleted file mode 100644
+index b63d74d..0000000
+--- a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require dfu-util.inc
+-
+-PR = "r1"
+-
+-DEPENDS = "virtual/libusb0 usbpath"
+-
+-BBCLASSEXTEND = "native"
+-
+-SRC_URI[md5sum] = "454b931249d29e4a6c2a2ade17858490"
+-SRC_URI[sha256sum] =
+"a27cc667be9b158fecf0ed066698e30eca0c0b3cd7a85aad2058d47ffe16f0e1"
 -- 
 1.9.3
 
