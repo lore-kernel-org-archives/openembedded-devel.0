@@ -1,37 +1,18 @@
-Return-Path: <chmorgan@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FE7D65DCD
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 450AB6FB62
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Jun 2014 10:57:54 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id uq10so2340201igb.2
+	Sun,  1 Jun 2014 13:34:51 +0000 (UTC)
+Received: from localhost.localdomain (chello080108088242.14.11.vie.surfer.at
+	[80.108.88.242]) by ptmx.org (Postfix) with ESMTPSA id C31CD28430
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Jun 2014 03:57:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=iyboyAvtY043BAgefncKlpPguQvxi74jaRnC3Qq1oDQ=;
-	b=wo4VeVrrECLf3+aSR7Xr0ArSUwG4cnCUt1Mmvx0vtNdHrIN7Gh0mg32+h/bsRERPHp
-	UEVZebHyBcnpuuI1QS+/DvTO5ZMXiax1WYDKSFHFkZIm81LCpiMM+G6PnEFCMRxJrbAb
-	WVkKiF8OpawcXzj9tD7CWpLZRMPHGgPqlBVWcSvDdJ1BvPJeAZ7pUnmwblsiqfkWJFUK
-	DUFn+4BB7ymQBPv+qmYxW/Y43cakA3gjz81S8mzZbB+T4KTdw53QTFwXPIdjuFSFz4Rl
-	FDUxxL2y80r4e9IqoD87wFRabR5m+/xGjLKETaaB0zs/KHjPlMqBek9r421JbDNZzhoI
-	WqBg==
-MIME-Version: 1.0
-X-Received: by 10.50.153.11 with SMTP id vc11mr11154357igb.24.1401620275394;
-	Sun, 01 Jun 2014 03:57:55 -0700 (PDT)
-Received: by 10.64.228.141 with HTTP; Sun, 1 Jun 2014 03:57:55 -0700 (PDT)
-Received: by 10.64.228.141 with HTTP; Sun, 1 Jun 2014 03:57:55 -0700 (PDT)
-In-Reply-To: <CAMKF1sq00_iLbSEhsYbGh39VZbJQ7hdHoDN=hcQj7EYGUjTDhQ@mail.gmail.com>
-References: <CAAPegz1HGg34=2kp7DUj8hOR3dmc1QtVe+hFvQPVoNhz5ptTeg@mail.gmail.com>
-	<CAP9ODKppar=6rRFF0Vb+TQL3e+XZgirCfdMWXSN7cviQVBAFSg@mail.gmail.com>
-	<5388EB65.5000305@mlbassoc.com>
-	<CAMKF1sq00_iLbSEhsYbGh39VZbJQ7hdHoDN=hcQj7EYGUjTDhQ@mail.gmail.com>
-Date: Sun, 1 Jun 2014 06:57:55 -0400
-Message-ID: <CAAPegz0Bvz4xiUBfpQ_R5CTrSUMBnpbNjfqW6GAhj_3rQCpJvA@mail.gmail.com>
-From: Chris Morgan <chmorgan@gmail.com>
+	Sun,  1 Jun 2014 15:34:51 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 0/2] dfu-util cleanup
+Date: Sun,  1 Jun 2014 15:34:45 +0200
+Message-Id: <1401629685-6678-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-efl][PATCH] e-wm: Add patch to fix crash caused by type error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +26,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2014 10:57:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 01 Jun 2014 13:34:51 -0000
 
-On May 31, 2014 10:41 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
->
-> On May 30, 2014 1:34 PM, "Gary Thomas" <gary@mlbassoc.com> wrote:
-> >
-> > On 2014-05-30 14:29, Otavio Salvador wrote:
-> >>
-> >> On Fri, May 30, 2014 at 2:14 PM, Chris Morgan <chmorgan@gmail.com>
-wrote:
-> >>>
-> >>> Add a recipe for building 0.7, remove old 0.1 recipe.
-> >>
-> >>
-> >> I'd prefer this in a single commit.
-> >>
-> >
-> > I think he did it this way because of the [slightly confusing]
-> > version 0.4 that is still left in place.
->
-> is there a reason to keep 0.4 usually its better to maintain one recipe
-> >
-> > --
-> > ------------------------------------------------------------
-> > Gary Thomas                 |  Consulting for the
-> > MLB Associates              |    Embedded world
-> > ------------------------------------------------------------
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+---
+ .../e17/e-wm/0001-Fix-incorrect-message-type.patch | 28 ++++++++++++++++++++++
+ meta-efl/recipes-efl/e17/e-wm_0.18.7.bb            |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-Fix-incorrect-message-type.patch
 
-I can send a patch to remove 0.4 as well. Wanted to wait until the two
-easier patches were in before stacking another one up behind them.
+diff --git a/meta-efl/recipes-efl/e17/e-wm/0001-Fix-incorrect-message-type.patch b/meta-efl/recipes-efl/e17/e-wm/0001-Fix-incorrect-message-type.patch
+new file mode 100644
+index 0000000..e718ef3
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/e-wm/0001-Fix-incorrect-message-type.patch
+@@ -0,0 +1,28 @@
++From 0aef43c9cd1656413cf2eb3dc7c19b355ee7ed52 Mon Sep 17 00:00:00 2001
++From: Carlos Rafael Giani <dv@pseudoterminal.org>
++Date: Sun, 1 Jun 2014 14:45:49 +0200
++Subject: [PATCH] Fix incorrect message type
++
++Upstream-Status: Pending
++
++Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
++---
++ src/bin/e_desk.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/bin/e_desk.c b/src/bin/e_desk.c
++index b156e19..77d7520 100644
++--- a/src/bin/e_desk.c
+++++ b/src/bin/e_desk.c
++@@ -221,7 +221,7 @@ e_desk_show(E_Desk *desk)
++    E_Event_Desk_Show *ev;
++    E_Event_Desk_Before_Show *eev;
++    E_Event_Desk_After_Show *eeev;
++-   Edje_Message_Float_Set *msg;
+++   Edje_Message_Int_Set *msg;
++    Eina_List *l;
++    E_Shelf *es;
++    int was_zone = 0, x, y, dx = 0, dy = 0;
++-- 
++1.8.3.2
++
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb b/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
+index 0e39727..929abf6 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.18.7.bb
+@@ -8,6 +8,7 @@ SRC_URI = "\
+     ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+     file://enlightenment_start.oe \
+     file://applications.menu \
++    file://0001-Fix-incorrect-message-type.patch \
+ "
+ 
+ SRC_URI[md5sum] = "499b92ef38347881c72729f1e066eb20"
+-- 
+1.8.3.2
 
-Chris
 
