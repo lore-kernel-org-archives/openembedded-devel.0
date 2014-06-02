@@ -1,36 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EC4F65E35;
-	Mon,  2 Jun 2014 08:49:40 +0000 (UTC)
-Received: by mail-lb0-f172.google.com with SMTP id l4so2351289lbv.17
-	for <multiple recipients>; Mon, 02 Jun 2014 01:49:40 -0700 (PDT)
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 20C4965E0F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Jun 2014 12:45:13 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id 19so3580171ykq.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Jun 2014 05:45:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=KG3cX7o1bPbwsvtqkk6lWy1AacFX5K3Lc4Tn47QgIyY=;
-	b=sLiryeGBDBOo3ZB4Yz9uPI8vyfJxVPkgn+DfURZVKwwafzF+Q01dPOnHHv+Xq2MkQr
-	66CGifC4Cwzju13ONaxbpR7YjJaYjg3D5Q54t0TzNNuJ1DCrFRFgIK13uNdrwSGE9Udd
-	JWVPPOkivAKOgxLAo6ZrELYt2LyzsUAqh7LhrtgSn4XJhNT2BwXG1Pjg2AXbF+jsDJI/
-	Za1h6oDGmmDZleE+QbuSps4RofLGDp19MuBqPBeT7wD30It2mlzoqG0ihvMve1d/K+XS
-	YfTFXeqqPrGz/Ls2L8hobX6HoUL//7GXKcCqy9YGQCIEYhzRlERplVBe+m/NAzWHqKxV
-	Mi6A==
-X-Received: by 10.112.185.105 with SMTP id fb9mr710126lbc.72.1401698980408;
-	Mon, 02 Jun 2014 01:49:40 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bq6sm12253558lbb.34.2014.06.02.01.49.37 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Jun 2014 01:49:38 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Jun 2014 10:49:50 +0200
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140602084950.GL2426@jama>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=86xhvSSWU/lBoltID3ClrV/CrF2/6kGnIbDyjjH9iHk=;
+	b=sQZrdiXCwgaIftSc8djY989CgvnJGg7HTX3vQWv8eyqw6v/xtq1SOvZV5CIDcO/dVD
+	w/zJkbG2t8EBCzYdA6O61mJlyJecG0fPtoRSQyZsa3d04pJQ1Bfup/KyqlhMS0ygjSES
+	jSbxStnifmnPGHFgQI9HMOoJf5Z7dQUA5240Xcw1VjJCGhzqXMvplrphQ0V2PsQI+ry5
+	k1O5mg4n3JSpb2NBRpKyw4Nu2wrMKU8iArGvs445XKjEXGaWKg6MNZA6j5CZXVYvWnnm
+	urqqhqoS8rj4rZ2BuC2YxZJ+Tik/uvpfeAk4/sn1SwzKHSbXbi/Tt5lLKn1OUVKUlIqn
+	RoIw==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, Failed tasks 2014-06-02
+X-Received: by 10.236.124.7 with SMTP id w7mr50943493yhh.33.1401713114328;
+	Mon, 02 Jun 2014 05:45:14 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.166.213 with HTTP; Mon, 2 Jun 2014 05:45:14 -0700 (PDT)
+In-Reply-To: <1401482663-3643-1-git-send-email-dv@pseudoterminal.org>
+References: <1401482663-3643-1-git-send-email-dv@pseudoterminal.org>
+Date: Mon, 2 Jun 2014 09:45:14 -0300
+X-Google-Sender-Auth: 2esyF-b_qnS7eBS1q2Ek1P-Qmxo
+Message-ID: <CAP9ODKotys-XZqTjY7wu1QXFjk1dW-U1v1_XLLH-z5zXozjrfw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH] chromium: Upgrade to version 35.0.1916.114
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,92 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jun 2014 08:49:42 -0000
-X-Groupsio-MsgNum: 50135
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nRwNdQxTdQ7rZk9A"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Jun 2014 12:45:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nRwNdQxTdQ7rZk9A
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, May 30, 2014 at 5:44 PM, Carlos Rafael Giani
+<dv@pseudoterminal.org> wrote:
+> This fixes several CSS transition problems, and improves performance on
+> some pages
+>
+> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 
-This build still contains huge patch setting B =3D S or inherit for
-autotools-brokensep for all recipes which were failing in earlier
-master builds.
+Applied to master.
 
-abiword and few other recipes issues are now hidden by libgsf failure
-most efl recipes are hidden by efl failure (testing 1.10.0 version which I =
-haven't sent to ML yet)
-qt5 is broken because it's testing new 5.3.0
-firefox broken probably by freetype upgrade
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
-grub.do_package failing again for some reason
-
-http://www.openembedded.org/wiki/Bitbake_World_Status
-
-=3D=3D Failed tasks 2014-06-02 =3D=3D
-
-=3D=3D=3D common (9) =3D=3D=3D
-    * meta-openembedded/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb, =
-do_compile
-    * meta-openembedded/meta-networking/recipes-support/curlpp/curlpp_0.7.3=
-=2Ebb, do_compile
-    * meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_c=
-ompile
-    * meta-openembedded/meta-oe/recipes-support/eject/eject_2.1.5.bb, do_co=
-mpile
-    * meta-openembedded/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_=
-0.2.2.bb, do_compile
-    * meta-openembedded/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-sc=
-reenshooter_1.8.1.bb, do_compile
-    * meta-qt5/recipes-qt/qt5/qtbase_5.3.0.bb, do_compile
-    * meta-qt5/recipes-qt/qt5/qtwayland-native_git.bb, do_fetch
-    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_fetch
-
-=3D=3D=3D common-x86 (3) =3D=3D=3D
-    * meta-browser/recipes-browser/chromium/chromium_35.0.1883.0.bb, do_com=
-pile
-    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
-    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
-
-=3D=3D=3D qemuarm (1) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/efl/efl_1.10.0.bb, do_compile
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-efl/recipes-efl/efl/efl_1.10.0.bb, do_install
-
-=3D=3D=3D qemux86_64 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
-_git.bb, do_compile
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140530_174007.log/
-|-
-||qemux86       ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140531_061843.log/
-|-
-||qemux86_64    ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
-ore-branches//log.world.20140531_204145.log/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---nRwNdQxTdQ7rZk9A
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlOMOq4ACgkQN1Ujt2V2gBzZ/wCeNo7uMtYp/Zf/K4PGJhCJ72ZB
-beAAn2QjTkoy5NjRhPTNiTb2BfNoeWkL
-=uuOK
------END PGP SIGNATURE-----
-
---nRwNdQxTdQ7rZk9A--
