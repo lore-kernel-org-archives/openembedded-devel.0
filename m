@@ -1,30 +1,36 @@
-Return-Path: <chmorgan@gmail.com>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id ABCB4660D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Jun 2014 17:42:53 +0000 (UTC)
-Received: by mail-ie0-f170.google.com with SMTP id to1so2387629ieb.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Jun 2014 10:42:54 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
+	[209.85.217.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5EC4F65E35;
+	Mon,  2 Jun 2014 08:49:40 +0000 (UTC)
+Received: by mail-lb0-f172.google.com with SMTP id l4so2351289lbv.17
+	for <multiple recipients>; Mon, 02 Jun 2014 01:49:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=BeW7HwOC5VGdc+pEoYb1V9x0wLsUY6olip8WpBWnmgE=;
-	b=jVu0AJxkaJ2G0STtfs9jloDQatiZgbbXfKkd3Q95NzOBJ22BcXfatCPWxUhMnl3vMk
-	vO7oI2M2P1Q1Rh4W7WVYWfLQg7g8VqQbHoNyZM2P7nl3IGdbXI32rBGL9rFHyArHeWAz
-	HzDTgO2MlqT19JjsXn3LCnBtSYRTjoVUg5hpgp+B6NZ/IQcEqXI/LOFZAjk+kqpgYLlp
-	EzwC89L1tBOh1vkM2+GTmP3RMtIcxmqfTYO5L+bJcBcxczJiwOaCB7J8pngHrBaQPgl7
-	uwP7LZyGzyTAUkU8b8ERExenCr4qAYq28/i7+yeOmQ0oDM6Izv6/mZZTHfObEgqVu0CO
-	xfeQ==
-X-Received: by 10.42.127.199 with SMTP id j7mr28349079ics.27.1401644574680;
-	Sun, 01 Jun 2014 10:42:54 -0700 (PDT)
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=KG3cX7o1bPbwsvtqkk6lWy1AacFX5K3Lc4Tn47QgIyY=;
+	b=sLiryeGBDBOo3ZB4Yz9uPI8vyfJxVPkgn+DfURZVKwwafzF+Q01dPOnHHv+Xq2MkQr
+	66CGifC4Cwzju13ONaxbpR7YjJaYjg3D5Q54t0TzNNuJ1DCrFRFgIK13uNdrwSGE9Udd
+	JWVPPOkivAKOgxLAo6ZrELYt2LyzsUAqh7LhrtgSn4XJhNT2BwXG1Pjg2AXbF+jsDJI/
+	Za1h6oDGmmDZleE+QbuSps4RofLGDp19MuBqPBeT7wD30It2mlzoqG0ihvMve1d/K+XS
+	YfTFXeqqPrGz/Ls2L8hobX6HoUL//7GXKcCqy9YGQCIEYhzRlERplVBe+m/NAzWHqKxV
+	Mi6A==
+X-Received: by 10.112.185.105 with SMTP id fb9mr710126lbc.72.1401698980408;
+	Mon, 02 Jun 2014 01:49:40 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	bq6sm12253558lbb.34.2014.06.02.01.49.37 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Jun 2014 01:49:38 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Jun 2014 10:49:50 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140602084950.GL2426@jama>
 MIME-Version: 1.0
-Received: by 10.64.228.141 with HTTP; Sun, 1 Jun 2014 10:42:34 -0700 (PDT)
-From: Chris Morgan <chmorgan@gmail.com>
-Date: Sun, 1 Jun 2014 13:42:34 -0400
-Message-ID: <CAAPegz1J+4vrvOF3F9Rj11_0-Lhd0ybFFci-_UXgLtVBhxreYg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] dfu-util 0.7 recipe, remove old 0.1 recipe
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-06-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,53 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jun 2014 17:43:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 02 Jun 2014 08:49:42 -0000
+X-Groupsio-MsgNum: 50135
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nRwNdQxTdQ7rZk9A"
+Content-Disposition: inline
 
-dfu-util 0.7 is the latest release of dfu-util
+--nRwNdQxTdQ7rZk9A
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Remove old dfu-util 0.1 recipe
+This build still contains huge patch setting B =3D S or inherit for
+autotools-brokensep for all recipes which were failing in earlier
+master builds.
 
-Signed-off-by: Chris Morgan <chmorgan@gmail.com>
----
- meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb | 10 ----------
- meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb |  6 ++++++
- 2 files changed, 6 insertions(+), 10 deletions(-)
- delete mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
- create mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+abiword and few other recipes issues are now hidden by libgsf failure
+most efl recipes are hidden by efl failure (testing 1.10.0 version which I =
+haven't sent to ML yet)
+qt5 is broken because it's testing new 5.3.0
+firefox broken probably by freetype upgrade
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
-b/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
-deleted file mode 100644
-index b63d74d..0000000
---- a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require dfu-util.inc
--
--PR = "r1"
--
--DEPENDS = "virtual/libusb0 usbpath"
--
--BBCLASSEXTEND = "native"
--
--SRC_URI[md5sum] = "454b931249d29e4a6c2a2ade17858490"
--SRC_URI[sha256sum] =
-"a27cc667be9b158fecf0ed066698e30eca0c0b3cd7a85aad2058d47ffe16f0e1"
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-new file mode 100644
-index 0000000..c4c030d
---- /dev/null
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-@@ -0,0 +1,6 @@
-+require dfu-util.inc
-+
-+DEPENDS = "libusb1"
-+
-+SRC_URI[md5sum] = "56844020177d4db4c1ea2e926fe9d588"
-+SRC_URI[sha256sum] =
-"f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c712e0c58a332d80ec3eab"
--- 
-1.9.3
+grub.do_package failing again for some reason
 
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+=3D=3D Failed tasks 2014-06-02 =3D=3D
+
+=3D=3D=3D common (9) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb, =
+do_compile
+    * meta-openembedded/meta-networking/recipes-support/curlpp/curlpp_0.7.3=
+=2Ebb, do_compile
+    * meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-support/eject/eject_2.1.5.bb, do_co=
+mpile
+    * meta-openembedded/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_=
+0.2.2.bb, do_compile
+    * meta-openembedded/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-sc=
+reenshooter_1.8.1.bb, do_compile
+    * meta-qt5/recipes-qt/qt5/qtbase_5.3.0.bb, do_compile
+    * meta-qt5/recipes-qt/qt5/qtwayland-native_git.bb, do_fetch
+    * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_fetch
+
+=3D=3D=3D common-x86 (3) =3D=3D=3D
+    * meta-browser/recipes-browser/chromium/chromium_35.0.1883.0.bb, do_com=
+pile
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * meta-openembedded/meta-efl/recipes-efl/efl/efl_1.10.0.bb, do_compile
+
+=3D=3D=3D qemux86 (1) =3D=3D=3D
+    * meta-openembedded/meta-efl/recipes-efl/efl/efl_1.10.0.bb, do_install
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
+_git.bb, do_compile
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140530_174007.log/
+|-
+||qemux86       ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140531_061843.log/
+|-
+||qemux86_64    ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140531_204145.log/
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--nRwNdQxTdQ7rZk9A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlOMOq4ACgkQN1Ujt2V2gBzZ/wCeNo7uMtYp/Zf/K4PGJhCJ72ZB
+beAAn2QjTkoy5NjRhPTNiTb2BfNoeWkL
+=uuOK
+-----END PGP SIGNATURE-----
+
+--nRwNdQxTdQ7rZk9A--
