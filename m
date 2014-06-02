@@ -1,17 +1,32 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CD6660425
+Return-Path: <edsiper@gmail.com>
+Received: from mail-ve0-f175.google.com (mail-ve0-f175.google.com
+	[209.85.128.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 239346FA69
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jun 2014 20:56:57 +0000 (UTC)
-Message-ID: <538CE517.4090102@communistcode.co.uk>
-Date: Mon, 02 Jun 2014 21:56:55 +0100
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+	Mon,  2 Jun 2014 21:15:03 +0000 (UTC)
+Received: by mail-ve0-f175.google.com with SMTP id jw12so5857118veb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Jun 2014 14:15:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=cHloiWa+uZNXzPPVrnwyFnl5NsrW3Jxp6oWa+SAT3tU=;
+	b=mMiIHwNegIAh11u/e971cYHiLBIG5ZrEQihsyZObWFQ6GP/xLnCjY8bXV17FdrKjEc
+	19k2DU1kE68dojdCVTHPrPe/q1d1SOQu7+OQ2Paunjx8Q40Gs7lnDHjbgGwEt6erXTsg
+	SAuBdKr0BpncKFuchCH8k2dyaka0P+Byl4C06mHlpdSU5+KnR8s68m3siNZp7dWxCbeQ
+	heg8IDBaxJlWbr3C++HQD4mZa4QoUYFsjhOVdjnLmboaNn96FrGoS3mfijmL+MNmnnbL
+	qaO8/PRuc1bces4ZvKgPjhuynsU5R98Jlb0fU8rHZmT6TNq75ly+XT4yh3vOKKttkLB+
+	Rmvg==
+X-Received: by 10.58.47.36 with SMTP id a4mr260862ven.63.1401743704711; Mon,
+	02 Jun 2014 14:15:04 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.220.167.72 with HTTP; Mon, 2 Jun 2014 14:14:44 -0700 (PDT)
+In-Reply-To: <538CE517.4090102@communistcode.co.uk>
 References: <1401741340-24934-1-git-send-email-eduardo@monkey.io>
-In-Reply-To: <1401741340-24934-1-git-send-email-eduardo@monkey.io>
+	<538CE517.4090102@communistcode.co.uk>
+From: Eduardo Silva <edsiper@gmail.com>
+Date: Mon, 2 Jun 2014 15:14:44 -0600
+Message-ID: <CAMAQheMD9A3VF2FH0QkTTCTz-5qQVHHT0BhzFjo8QW+NL-zRYA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] [meta-webserver]: add Monkey HTTP Server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -26,67 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jun 2014 20:56:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Jun 2014 21:15:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Eduardo,
-
-Just the one comment inline.
-
-On 02/06/2014 21:35, Eduardo Silva wrote:
-> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
-> ---
->   .../recipes-httpd/monkey/monkey_1.5.0.bb           | 38 ++++++++++++++++++++++
->   1 file changed, 38 insertions(+)
->   create mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+On Mon, Jun 2, 2014 at 2:56 PM, Jack Mitchell <ml@communistcode.co.uk> wrote:
+> Hi Eduardo,
 >
-> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
-> new file mode 100644
-> index 0000000..c6f1a76
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY = "Fast and Lightweight HTTP Server for Linux"
-> +HOMEPAGE = "http://monkey-project.com"
-> +BUGTRACKER = "https://github.com/monkey/monkey/issues"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
-> +
-> +PR = "r1"
-
-PR is no longer needed, remove.
-
-> +
-> +SECTION = "net"
-> +
-> +SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "9123fc371334621fde1c060ab17adcd3"
-> +SRC_URI[sha256sum] = "f7a5e4839822750930a723f63a4edbf700e0fb8299a4b3637bd8bab5b1d098a7"
-> +
-> +EXTRA_OECONF = " \
-> +             --plugdir=${libdir}/monkey/ \
-> +             --logdir=/var/log/monkey/ \
-> +             --pidfile=/var/run/monkey.pid \
-> +             --default-user=www-data \
-> +             --datadir=/var/www/monkey/ \
-> +             --sysconfdir=${sysconfdir}/monkey/ \
-> +             --enable-plugins=* \
-> +             --disable-plugins=polarssl \
-> +             --debug \
-> +             --malloc-libc \
-> +"
-> +
-> +inherit autotools pkgconfig update-rc.d systemd
-> +
-> +INITSCRIPT_NAME = "monkey"
-> +INITSCRIPT_PARAMS = "defaults 70"
-> +
-> +SYSTEMD_SERVICE_${PN} = "monkey.service"
-> +
-> +FILES_${PN} += "/www"
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/monkey/"
+> Just the one comment inline.
 >
+>
+> On 02/06/2014 21:35, Eduardo Silva wrote:
+>>
+>> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+>> ---
+>>   .../recipes-httpd/monkey/monkey_1.5.0.bb           | 38
+>> ++++++++++++++++++++++
+>>   1 file changed, 38 insertions(+)
+>>   create mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+>>
+>> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+>> b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+>> new file mode 100644
+>> index 0000000..c6f1a76
+>> --- /dev/null
+>> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+>> @@ -0,0 +1,38 @@
+>> +SUMMARY = "Fast and Lightweight HTTP Server for Linux"
+>> +HOMEPAGE = "http://monkey-project.com"
+>> +BUGTRACKER = "https://github.com/monkey/monkey/issues"
+>> +
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+>> +
+>> +PR = "r1"
+>
+>
+> PR is no longer needed, remove.
+
+new patch will be submitted.
+thanks
 
