@@ -1,34 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f45.google.com (mail-yh0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8032560424
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 2091F60E23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jun 2014 21:36:58 +0000 (UTC)
-Received: by mail-yh0-f45.google.com with SMTP id b6so4361301yha.4
+	Tue,  3 Jun 2014 06:23:37 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Wri8G-0006Yc-EE for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Jun 2014 08:23:36 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Jun 2014 08:23:36 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jun 2014 14:36:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=ATF3YmGOWDoEJqBkK3o4opdA51u3wCrRz3aBYTTc6r8=;
-	b=fqaxzn36WqZW+XdvbEGpKIei+s+mjXEkXdzV2eYpc4iDl2009JhkRO6P9cvFNOD95J
-	Kox3UwwE1/+NR9Lg8O2hZd/n4sT5DLzPXf4S9LT7MzfHODW/28roMm3f42s0Cgbm6HZ9
-	ins38p99K7SwA2dzCmiWMC3duKH+NgqeyQo1ADLpNiI+TqNoDO3pSMhqa69gI8tXqEYl
-	aAKrqwliPN/d7ezyuVVjrBEvjwBsFVd/qZcKjHPD6SG07xUVBgf961uC7ZJj+1ck3E0c
-	2tiTBb0aZ9SygC8y1u/Px1WGfzQn4ywPMQiAz71eKGWhYMuaEMVCsV2Gp7m1XW9UH6tE
-	7gQA==
-MIME-Version: 1.0
-X-Received: by 10.236.129.227 with SMTP id h63mr7333991yhi.148.1401745019197; 
-	Mon, 02 Jun 2014 14:36:59 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Mon, 2 Jun 2014 14:36:59 -0700 (PDT)
-In-Reply-To: <1401743690-25537-1-git-send-email-eduardo@monkey.io>
+	Tue, 03 Jun 2014 08:23:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 03 Jun 2014 08:23:27 +0200
+Message-ID: <lmjpkv$ajq$1@ger.gmane.org>
 References: <1401743690-25537-1-git-send-email-eduardo@monkey.io>
-Date: Mon, 2 Jun 2014 18:36:59 -0300
-X-Google-Sender-Auth: RdBFiHjWP1_vkacJtnjQvqqYalI
-Message-ID: <CAP9ODKodoVzhPpXwER9yHSSxm4o3AvepirusL56EV6PY5OFSiw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+In-Reply-To: <1401743690-25537-1-git-send-email-eduardo@monkey.io>
+X-Enigmail-Version: 1.6
 Subject: Re: [PATCH] [meta-webserver]: add Monkey HTTP Server.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,22 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jun 2014 21:37:07 -0000
+X-List-Received-Date: Tue, 03 Jun 2014 06:23:45 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jun 2, 2014 at 6:14 PM, Eduardo Silva <eduardo@monkey.io> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Eduardo Silva schreef op 02-06-14 23:14:
 > This patch add the initial recipe for Monkey HTTP Server v1.5.0.
->
-> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
-...
-> +             --datadir=/var/www/monkey/ \
-...
-> +FILES_${PN} += "/www"
+> 
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io> --- 
+> .../recipes-httpd/monkey/monkey_1.5.0.bb           | 36
+> ++++++++++++++++++++++ 1 file changed, 36 insertions(+) create mode
+> 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> 
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb new file mode
+> 100644 index 0000000..25a9530 --- /dev/null +++
+> b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb @@ -0,0 +1,36 @@ 
+> +SUMMARY = "Fast and Lightweight HTTP Server for Linux" +HOMEPAGE =
+> "http://monkey-project.com" +BUGTRACKER =
+> "https://github.com/monkey/monkey/issues" + +LICENSE = "Apache-2.0" 
+> +LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93" + +SECTION = "net" 
+> + +SRC_URI =
+> "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz" 
+> +SRC_URI[md5sum] = "9123fc371334621fde1c060ab17adcd3" +SRC_URI[sha256sum]
+> = "f7a5e4839822750930a723f63a4edbf700e0fb8299a4b3637bd8bab5b1d098a7" + 
+> +EXTRA_OECONF = " \ +             --plugdir=${libdir}/monkey/ \ +
+> --logdir=/var/log/monkey/ \ +             --pidfile=/var/run/monkey.pid
+> \ +             --default-user=www-data \ +
+> --datadir=/var/www/monkey/ \
 
-Does not match. Is it right?
+/var -> ${localstatedir} ?
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+> +             --sysconfdir=${sysconfdir}/monkey/ \ +
+> --enable-plugins=* \ +             --disable-plugins=polarssl \ +
+> --debug \ +             --malloc-libc \ +" + +inherit autotools pkgconfig
+> update-rc.d systemd + +INITSCRIPT_NAME = "monkey" +INITSCRIPT_PARAMS =
+> "defaults 70" + +SYSTEMD_SERVICE_${PN} = "monkey.service" + +FILES_${PN}
+> += "/www" + +CONFFILES_${PN} = "${sysconfdir}/monkey/"
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFTjWnfMkyGM64RGpERAleHAJ98+/IM1m1Ddw708zXerzZummo+0QCdH9Yl
+t/mM47yqio6yGosSXuuTVBY=
+=BunW
+-----END PGP SIGNATURE-----
+
 
