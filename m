@@ -1,36 +1,29 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A1B16FA7A
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BE5256FA73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 01:08:23 +0000 (UTC)
-Received: by mail-pd0-f173.google.com with SMTP id v10so5355556pde.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jun 2014 18:08:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=Xv9jW914+Jlbr7sgxnQywUKZO8PB5NmP2L7xc75oJGQ=;
-	b=ZPvKQ8wqnIHyYhiZkRvLry9xJ5ms/ngC+90wtEDHO5i5FKU/kxxWPJa9LthQ7s2rmN
-	/q6eT7WyYXwLinPWb3U1zGwZvSfn5rm0zcHopmixBLzQ7MiATv9J3MmC6HGVlmYDzN5B
-	tNKkkjsY+JmCQMllBKc+/klZUKDcirz7td8ZLbMvOrEnA/k/jmvOilWvYma0WYiW4RZI
-	9ivderlmktY83SBEDRGMbe5YFwbjFeHQdxyWZx6Op5XhBTE805mJYpC0rQ/VIaMcBcrM
-	z1515bp6/vMPc7V3Lb1gzPzcVnkmMnwKMCy+aXee4K9DxItbZ5St0ZpohyzUXQcHaCGb
-	7lbA==
-X-Gm-Message-State: ALoCoQmIgZVGID0MWScqSBl5Y0XQKWZ6FKD6XyloE9CArlP9FZEigeYe9E1lrgUPgUBMzpFcUkGz
-X-Received: by 10.69.26.103 with SMTP id ix7mr55772317pbd.41.1401844103846;
-	Tue, 03 Jun 2014 18:08:23 -0700 (PDT)
-Received: from Pahoa2.mvista.com (64.2.3.195.ptr.us.xo.net. [64.2.3.195])
-	by mx.google.com with ESMTPSA id rc3sm2880305pbc.5.2014.06.03.18.08.22
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 Jun 2014 18:08:23 -0700 (PDT)
-From: Armin Kuster <akuster@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Jun 2014 18:08:20 -0700
-Message-Id: <1401844100-579-1-git-send-email-akuster@mvista.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] tipcutils B!=S fix
+	Wed,  4 Jun 2014 01:25:07 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s541P6hR025287
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 3 Jun 2014 18:25:06 -0700 (PDT)
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 3 Jun 2014 18:25:05 -0700
+Message-ID: <538E7566.7070506@windriver.com>
+Date: Wed, 4 Jun 2014 09:24:54 +0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <1400658223-15804-1-git-send-email-ticotimo@gmail.com>
+	<537D5AC7.8040302@windriver.com>
+	<1823759.lCmpzXZFSI@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <1823759.lCmpzXZFSI@peggleto-mobl5.ger.corp.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-perl][PATCH v4 00/10] add perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 01:08:25 -0000
+X-List-Received-Date: Wed, 04 Jun 2014 01:25:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The do_install_append was trying to install from src location and not the build.
+On 05/31/2014 12:19 AM, Paul Eggleton wrote:
+> Hi Hongxu,
+>
+> On Thursday 22 May 2014 10:02:47 Hongxu Jia wrote:
+>> On 05/21/2014 03:43 PM, Tim Orling wrote:
+>>> From: Tim Orling <TicoTimo@gmail.com>
+>>>
+>>> Changes since v3:
+>>>     * Use ${CPAN_MIRROR} for all recipes
+>>>     
+>>>         * See patches for oe-core:
+>>>             http://patches.openembedded.org/patch/72457/
+>>>             http://patches.openembedded.org/patch/72459/
+>> It seems these patches for oe-core have not been merged.
+> They have been merged now, in which case should I merge these meta-perl
+> patches or do you want to?
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Hi Paul,
 
-diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-index ee56952..fe0e484 100644
---- a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-+++ b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
-@@ -20,15 +20,15 @@ do_install_append() {
-            multicast_demo stream_demo"
-     for i in $demos;do
-         install -d ${D}/opt/tipcutils/demos/$i
--        install ${S}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
--        install ${S}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
-+        install ${B}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
-+        install ${B}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
-     done
-     install -d ${D}/opt/tipcutils/demos/inventory_sim
--    install ${S}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
-+    install ${B}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
- 
-     install -d ${D}/opt/tipcutils/ptts
--    install ${S}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
--    install ${S}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
-+    install ${B}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
-+    install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
- 
-     install -d ${D}${sysconfdir}
-     cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
--- 
-1.9.1
+They are fine to me since the oe-core patches have been merged,
+I am afraid I do not have the permission to merge these meta-perl
+patches, so you could merge these [v4 1-9] and [v5 10] patches.
+
+//Hongxu
+
+> Cheers,
+> Paul
+>
 
 
