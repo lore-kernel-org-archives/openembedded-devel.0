@@ -1,37 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 267F06FAE1
+Received: from mail-pb0-f45.google.com (mail-pb0-f45.google.com
+	[209.85.160.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 8491C6FB5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 09:18:22 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id bs8so7433564wib.5
+	Wed,  4 Jun 2014 09:36:53 +0000 (UTC)
+Received: by mail-pb0-f45.google.com with SMTP id um1so6745055pbc.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 02:18:23 -0700 (PDT)
+	Wed, 04 Jun 2014 02:36:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cXhNLKNbFUbP7KqF6daCz6a9VJ4Jzg3YYQsIMwhckSI=;
-	b=zwJQA9QrWbqbZIh4hnqciHhmYAdT9U7VSV8DGjq7ocwnc/5C02gnktPjM8B++/wEDA
-	G71MepmRff6MstMY//tQJSJMlnCo272Tgrcidmps2UA+FHNL81sY5roi1Ws1KM2AHol4
-	LCrSb7bEYN37d3kPFyGAgHAE0ElTOE1Bpt6F340uU8up5Kx6AkObLTbuZdtyMbt0xWbJ
-	wh2KEzG2yprC8BtCCmAAzmO3V0j2ztqE9/SthW2VQOX6tb2izfvkSBIr4I+LhWZCpgEH
-	P7HKAOiyKk3vM111QfdVidCLutIFwOQaRsBxJNGygrzcTimzz5qSrHM/7VwcYrqIEjUu
-	jgkA==
-X-Received: by 10.194.216.40 with SMTP id on8mr2811949wjc.66.1401873503125;
-	Wed, 04 Jun 2014 02:18:23 -0700 (PDT)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=KG1Q6VTovCvjUaPVTtvXHYahzipK39RnQJ6uQn2r9ag=;
+	b=IZQGf+TtY9poRWwS3sT4Ic1A/+GUzdluo8q0Yuu5ISN7ND4fCz9CZqk43uQdDXOqOs
+	GzFei3kW0Qj6hz2MxGz2QdIh+ZHeTFIXqQOJiJfQKc50YtPxgi4o6wWwHxWkFZ1LV2PR
+	ZsSg+4jcNsvy6LOBSEFNEB1ix/wScAu3Nlmwd6UXUfLr8DLCm9M7Kc04B0yxg27duDWi
+	Dqq6Sl4d8IZWIQatzM3+uYH35gCNQLuO9uPBkwzeyyOPc4MI/uCaiKv6mSlBWN1u4fD6
+	2VdvEwtqeVW/ngbsVw6Vh1nAKY3hT3kYbDChhp0UWqtdBOI/7eihdBZpKEJU80bliD23
+	5LUw==
+X-Received: by 10.68.113.68 with SMTP id iw4mr60347457pbb.119.1401874614944;
+	Wed, 04 Jun 2014 02:36:54 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	en6sm8558863wib.11.2014.06.04.02.18.22 for <multiple recipients>
+	zq5sm7749275pbb.37.2014.06.04.02.36.52
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Jun 2014 02:18:22 -0700 (PDT)
+	Wed, 04 Jun 2014 02:36:53 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 4 Jun 2014 11:37:05 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jun 2014 11:18:24 +0200
-Message-Id: <1401873504-32120-7-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-In-Reply-To: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 7/7] lua: Remove lua5.1
+Message-ID: <20140604093705.GQ2426@jama>
+References: <CAAPegz1J+4vrvOF3F9Rj11_0-Lhd0ybFFci-_UXgLtVBhxreYg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAAPegz1J+4vrvOF3F9Rj11_0-Lhd0ybFFci-_UXgLtVBhxreYg@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] dfu-util 0.7 recipe, remove old 0.1 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,826 +48,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 09:18:23 -0000
+X-List-Received-Date: Wed, 04 Jun 2014 09:36:57 -0000
+X-Groupsio-MsgNum: 50168
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Pa4xkLBhPDIhDLv1"
+Content-Disposition: inline
 
-* we have lua-5.2 in "lua" recipe and lua-5.1 in "lua5.1", but these
-  aren't completely separate in sysroot:
-  WARNING: The recipe lua is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/include/lauxlib.h
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/include/lua.h
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/include/lua.hpp
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/include/luaconf.h
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/include/lualib.h
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-   /OE/build/oe-core/tmp-eglibc/sysroots/qemux86/usr/lib/liblua.a
-   Matched in manifest-qemux86-lua5.1.populate_sysroot
-  Please verify which package should provide the above files.
-  Causing some undeterministic behavior.
-* keep only 5.2 in "lua"
+--Pa4xkLBhPDIhDLv1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../lua/lua5.1/bitwise_operators.patch             | 605 ---------------------
- meta-oe/recipes-devtools/lua/lua5.1/lua5.1.pc      |  11 -
- meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch |  18 -
- meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch |  44 --
- .../lua/lua5.1/uclibc-pthread.patch                |  13 -
- meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb       |  55 --
- 6 files changed, 746 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1/bitwise_operators.patch
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1/lua5.1.pc
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1/uclibc-pthread.patch
- delete mode 100644 meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
+On Sun, Jun 01, 2014 at 01:42:34PM -0400, Chris Morgan wrote:
+> dfu-util 0.7 is the latest release of dfu-util
+>=20
+> Remove old dfu-util 0.1 recipe
 
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1/bitwise_operators.patch b/meta-oe/recipes-devtools/lua/lua5.1/bitwise_operators.patch
-deleted file mode 100644
-index 4f0331e..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1/bitwise_operators.patch
-+++ /dev/null
-@@ -1,605 +0,0 @@
--diff -Nurd lua-5.1.5/src/lcode.c lua-5.1.5/src/lcode.c
----- lua-5.1.5/src/lcode.c	2011-01-31 16:53:16.000000000 +0200
--+++ lua-5.1.5/src/lcode.c	2012-11-28 21:12:23.958419501 +0200
--@@ -642,6 +642,17 @@
--     case OP_POW: r = luai_numpow(v1, v2); break;
--     case OP_UNM: r = luai_numunm(v1); break;
--     case OP_LEN: return 0;  /* no constant folding for 'len' */
--+#if defined(LUA_BITWISE_OPERATORS)
--+    case OP_BOR: luai_logor(r, v1, v2); break;
--+    case OP_BAND: luai_logand(r, v1, v2); break;
--+    case OP_BXOR: luai_logxor(r, v1, v2);  break;
--+    case OP_BLSHFT: luai_loglshft(r, v1, v2); break;
--+    case OP_BRSHFT: luai_logrshft(r, v1, v2); break;
--+    case OP_BNOT: luai_lognot(r, v1); break;
--+    case OP_INTDIV:
--+      if (v2 == 0) return 0;  /* do not attempt to divide by 0 */
--+      r = luai_numintdiv(v1, v2); break;
--+#endif
--     default: lua_assert(0); r = 0; break;
--   }
--   if (luai_numisnan(r)) return 0;  /* do not attempt to produce NaN */
--@@ -654,7 +665,11 @@
--   if (constfolding(op, e1, e2))
--     return;
--   else {
--+#if defined(LUA_BITWISE_OPERATORS)
--+    int o2 = (op != OP_UNM && op != OP_LEN && op != OP_BNOT) ? luaK_exp2RK(fs, e2) : 0;
--+#else
--     int o2 = (op != OP_UNM && op != OP_LEN) ? luaK_exp2RK(fs, e2) : 0;
--+#endif
--     int o1 = luaK_exp2RK(fs, e1);
--     if (o1 > o2) {
--       freeexp(fs, e1);
--@@ -690,6 +705,14 @@
--   expdesc e2;
--   e2.t = e2.f = NO_JUMP; e2.k = VKNUM; e2.u.nval = 0;
--   switch (op) {
--+#if defined(LUA_BITWISE_OPERATORS)
--+    case OPR_BNOT: {
--+      if (e->k == VK)
--+        luaK_exp2anyreg(fs, e);  /* cannot operate on non-numeric constants */
--+      codearith(fs, OP_BNOT, e, &e2);
--+      break;
--+    }
--+#endif
--     case OPR_MINUS: {
--       if (!isnumeral(e))
--         luaK_exp2anyreg(fs, e);  /* cannot operate on non-numeric constants */
--@@ -770,6 +793,14 @@
--     case OPR_DIV: codearith(fs, OP_DIV, e1, e2); break;
--     case OPR_MOD: codearith(fs, OP_MOD, e1, e2); break;
--     case OPR_POW: codearith(fs, OP_POW, e1, e2); break;
--+#if defined(LUA_BITWISE_OPERATORS)
--+    case OPR_BOR: codearith(fs, OP_BOR, e1, e2); break;
--+    case OPR_BAND: codearith(fs, OP_BAND, e1, e2); break;
--+    case OPR_BXOR: codearith(fs, OP_BXOR, e1, e2); break;
--+    case OPR_BLSHFT: codearith(fs, OP_BLSHFT, e1, e2); break;
--+    case OPR_BRSHFT: codearith(fs, OP_BRSHFT, e1, e2); break;
--+    case OPR_INTDIV: codearith(fs, OP_INTDIV, e1, e2); break;
--+#endif
--     case OPR_EQ: codecomp(fs, OP_EQ, 1, e1, e2); break;
--     case OPR_NE: codecomp(fs, OP_EQ, 0, e1, e2); break;
--     case OPR_LT: codecomp(fs, OP_LT, 1, e1, e2); break;
--diff -Nurd lua-5.1.5/src/lcode.h lua-5.1.5/src/lcode.h
----- lua-5.1.5/src/lcode.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/lcode.h	2012-11-28 21:12:23.958419501 +0200
--@@ -25,6 +25,9 @@
-- */
-- typedef enum BinOpr {
--   OPR_ADD, OPR_SUB, OPR_MUL, OPR_DIV, OPR_MOD, OPR_POW,
--+#if defined(LUA_BITWISE_OPERATORS)
--+  OPR_BOR, OPR_BAND, OPR_BXOR, OPR_BLSHFT, OPR_BRSHFT, OPR_INTDIV,
--+#endif
--   OPR_CONCAT,
--   OPR_NE, OPR_EQ,
--   OPR_LT, OPR_LE, OPR_GT, OPR_GE,
--@@ -33,8 +36,11 @@
-- } BinOpr;
-- 
-- 
--+#if defined(LUA_BITWISE_OPERATORS)
--+typedef enum UnOpr { OPR_BNOT, OPR_MINUS, OPR_NOT, OPR_LEN, OPR_NOUNOPR } UnOpr;
--+#else
-- typedef enum UnOpr { OPR_MINUS, OPR_NOT, OPR_LEN, OPR_NOUNOPR } UnOpr;
---
--+#endif
-- 
-- #define getcode(fs,e)	((fs)->f->code[(e)->u.s.info])
-- 
--diff -Nurd lua-5.1.5/src/ldebug.c lua-5.1.5/src/ldebug.c
----- lua-5.1.5/src/ldebug.c	2008-05-08 19:56:26.000000000 +0300
--+++ lua-5.1.5/src/ldebug.c	2012-11-28 21:12:23.958419501 +0200
--@@ -592,6 +592,16 @@
--   luaG_typeerror(L, p2, "perform arithmetic on");
-- }
-- 
--+#if defined (LUA_BITWISE_OPERATORS)
--+void luaG_logicerror (lua_State *L, const TValue *p1, const TValue *p2) {
--+  TValue temp;
--+  if (luaV_tonumber(p1, &temp) == NULL)
--+    p2 = p1;  /* first operand is wrong */
--+  luaG_typeerror(L, p2, "perform bitwise operation on");
--+}
--+#endif
--+
--+
-- 
-- int luaG_ordererror (lua_State *L, const TValue *p1, const TValue *p2) {
--   const char *t1 = luaT_typenames[ttype(p1)];
--diff -Nurd lua-5.1.5/src/ldebug.h lua-5.1.5/src/ldebug.h
----- lua-5.1.5/src/ldebug.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/ldebug.h	2012-11-28 21:12:23.958419501 +0200
--@@ -30,4 +30,9 @@
-- LUAI_FUNC int luaG_checkcode (const Proto *pt);
-- LUAI_FUNC int luaG_checkopenop (Instruction i);
-- 
--+#if defined (LUA_BITWISE_OPERATORS)
--+LUAI_FUNC void luaG_logicerror (lua_State *L, const TValue *p1,
--+                                              const TValue *p2);
--+#endif
--+
-- #endif
--diff -Nurd lua-5.1.5/src/llex.c lua-5.1.5/src/llex.c
----- lua-5.1.5/src/llex.c	2009-11-23 16:58:22.000000000 +0200
--+++ lua-5.1.5/src/llex.c	2012-11-28 21:12:23.958419501 +0200
--@@ -39,7 +39,11 @@
--     "end", "false", "for", "function", "if",
--     "in", "local", "nil", "not", "or", "repeat",
--     "return", "then", "true", "until", "while",
--+#if defined(LUA_BITWISE_OPERATORS)
--+    "..", "...", "==", ">=", ">>", "<=", "<<", "^^", "~=", "!="
--+#else
--     "..", "...", "==", ">=", "<=", "~=",
--+#endif
--     "<number>", "<name>", "<string>", "<eof>",
--     NULL
-- };
--@@ -373,6 +377,30 @@
--         if (ls->current != '=') return '=';
--         else { next(ls); return TK_EQ; }
--       }
--+#if defined(LUA_BITWISE_OPERATORS)
--+      case '<': {
--+        next(ls);
--+        if (ls->current == '=') { next(ls); return TK_LE; }
--+        else if (ls->current == '<') { next(ls); return TK_LSHFT; }
--+        else  return '<';
--+      }
--+      case '>': {
--+        next(ls);
--+        if (ls->current == '=') { next(ls); return TK_GE; }
--+        else if (ls->current == '>') { next(ls); return TK_RSHFT; }
--+        else return '>';
--+      }
--+      case '^': {
--+        next(ls);
--+        if (ls->current != '^') return '^';
--+        else { next(ls); return TK_XOR; }
--+      }
--+      case '!': {
--+        next(ls);
--+        if (ls->current != '=') return '!';
--+        else { next(ls); return TK_NE; }
--+      }
--+#else
--       case '<': {
--         next(ls);
--         if (ls->current != '=') return '<';
--@@ -381,8 +409,9 @@
--       case '>': {
--         next(ls);
--         if (ls->current != '=') return '>';
---        else { next(ls); return TK_GE; }
--+        else  { next(ls); return TK_GE; }
--       }
--+#endif
--       case '~': {
--         next(ls);
--         if (ls->current != '=') return '~';
--diff -Nurd lua-5.1.5/src/llex.h lua-5.1.5/src/llex.h
----- lua-5.1.5/src/llex.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/llex.h	2012-11-28 21:12:23.962419499 +0200
--@@ -28,7 +28,11 @@
--   TK_IF, TK_IN, TK_LOCAL, TK_NIL, TK_NOT, TK_OR, TK_REPEAT,
--   TK_RETURN, TK_THEN, TK_TRUE, TK_UNTIL, TK_WHILE,
--   /* other terminal symbols */
--+#if defined(LUA_BITWISE_OPERATORS)
--+  TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LSHFT, TK_LE, TK_RSHFT, TK_XOR, TK_NE, TK_CNE, TK_NUMBER,
--+#else
--   TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LE, TK_NE, TK_NUMBER,
--+#endif
--   TK_NAME, TK_STRING, TK_EOS
-- };
-- 
--diff -Nurd lua-5.1.5/src/lopcodes.c lua-5.1.5/src/lopcodes.c
----- lua-5.1.5/src/lopcodes.c	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/lopcodes.c	2012-11-28 21:12:23.962419499 +0200
--@@ -32,6 +32,15 @@
--   "DIV",
--   "MOD",
--   "POW",
--+#if defined(LUA_BITWISE_OPERATORS)
--+  "BOR",
--+  "BAND",
--+  "OP_BXOR"
--+  "BLSHFT",
--+  "BRSHFT",
--+  "BNOT",
--+  "INTDIV",
--+#endif
--   "UNM",
--   "NOT",
--   "LEN",
--@@ -78,6 +87,15 @@
--  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_DIV */
--  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_MOD */
--  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_POW */
--+#if defined(LUA_BITWISE_OPERATORS)
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BOR */
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BAND */
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BXOR */
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BLSHFT */
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BRSHFT */
--+ ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_BNOT */
--+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_INTDIV */
--+#endif
--  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_UNM */
--  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_NOT */
--  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_LEN */
--diff -Nurd lua-5.1.5/src/lopcodes.h lua-5.1.5/src/lopcodes.h
----- lua-5.1.5/src/lopcodes.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/lopcodes.h	2012-11-28 21:12:23.962419499 +0200
--@@ -174,10 +174,20 @@
-- OP_DIV,/*	A B C	R(A) := RK(B) / RK(C)				*/
-- OP_MOD,/*	A B C	R(A) := RK(B) % RK(C)				*/
-- OP_POW,/*	A B C	R(A) := RK(B) ^ RK(C)				*/
--+#if defined(LUA_BITWISE_OPERATORS)
--+OP_BOR,/*	A B C	R(A) := RK(B) | RK(C)				*/
--+OP_BAND,/*	A B C	R(A) := RK(B) & RK(C)				*/
--+OP_BXOR,/*	A B C	R(A) := RK(B) ^| RK(C)				*/
--+OP_BLSHFT,/*	A B C	R(A) := RK(B) << RK(C)				*/
--+OP_BRSHFT,/*	A B C	R(A) := RK(B) >> RK(C)				*/
--+OP_BNOT,/*	A B	R(A) := ~ R(B)				*/
--+OP_INTDIV,/*	A B C	R(A) := RK(B) \ RK(C)				*/
--+#endif
-- OP_UNM,/*	A B	R(A) := -R(B)					*/
-- OP_NOT,/*	A B	R(A) := not R(B)				*/
-- OP_LEN,/*	A B	R(A) := length of R(B)				*/
-- 
--+
-- OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C)			*/
-- 
-- OP_JMP,/*	sBx	pc+=sBx					*/
--@@ -186,8 +196,8 @@
-- OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++  		*/
-- OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++  		*/
-- 
---OP_TEST,/*	A C	if not (R(A) <=> C) then pc++			*/ 
---OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	*/ 
--+OP_TEST,/*	A C	if not (R(A) <=> C) then pc++			*/
--+OP_TESTSET,/*	A B C	if (R(B) <=> C) then R(A) := R(B) else pc++	*/
-- 
-- OP_CALL,/*	A B C	R(A), ... ,R(A+C-2) := R(A)(R(A+1), ... ,R(A+B-1)) */
-- OP_TAILCALL,/*	A B C	return R(A)(R(A+1), ... ,R(A+B-1))		*/
--@@ -197,8 +207,8 @@
-- 			if R(A) <?= R(A+1) then { pc+=sBx; R(A+3)=R(A) }*/
-- OP_FORPREP,/*	A sBx	R(A)-=R(A+2); pc+=sBx				*/
-- 
---OP_TFORLOOP,/*	A C	R(A+3), ... ,R(A+2+C) := R(A)(R(A+1), R(A+2)); 
---                        if R(A+3) ~= nil then R(A+2)=R(A+3) else pc++	*/ 
--+OP_TFORLOOP,/*	A C	R(A+3), ... ,R(A+2+C) := R(A)(R(A+1), R(A+2));
--+                        if R(A+3) ~= nil then R(A+2)=R(A+3) else pc++	*/
-- OP_SETLIST,/*	A B C	R(A)[(C-1)*FPF+i] := R(A+i), 1 <= i <= B	*/
-- 
-- OP_CLOSE,/*	A 	close all variables in the stack up to (>=) R(A)*/
--diff -Nurd lua-5.1.5/src/lparser.c lua-5.1.5/src/lparser.c
----- lua-5.1.5/src/lparser.c	2011-10-21 22:31:42.000000000 +0300
--+++ lua-5.1.5/src/lparser.c	2012-11-28 21:12:23.962419499 +0200
--@@ -780,6 +780,9 @@
--     case TK_NOT: return OPR_NOT;
--     case '-': return OPR_MINUS;
--     case '#': return OPR_LEN;
--+#if defined(LUA_BITWISE_OPERATORS)
--+    case '~': return OPR_BNOT;
--+#endif
--     default: return OPR_NOUNOPR;
--   }
-- }
--@@ -793,6 +796,14 @@
--     case '/': return OPR_DIV;
--     case '%': return OPR_MOD;
--     case '^': return OPR_POW;
--+#if defined(LUA_BITWISE_OPERATORS)
--+    case '|': return OPR_BOR;
--+    case '&': return OPR_BAND;
--+    case TK_XOR: return OPR_BXOR;
--+    case TK_LSHFT: return OPR_BLSHFT;
--+    case TK_RSHFT: return OPR_BRSHFT;
--+    case '\\': return OPR_INTDIV;
--+#endif
--     case TK_CONCAT: return OPR_CONCAT;
--     case TK_NE: return OPR_NE;
--     case TK_EQ: return OPR_EQ;
--@@ -812,6 +823,9 @@
--   lu_byte right; /* right priority */
-- } priority[] = {  /* ORDER OPR */
--    {6, 6}, {6, 6}, {7, 7}, {7, 7}, {7, 7},  /* `+' `-' `/' `%' */
--+#if defined(LUA_BITWISE_OPERATORS)
--+   {6, 6}, {6, 6}, {6, 6}, {7, 7}, {7, 7}, {7, 7}, /* `|' `&' `!' `<<' `>>' `\' */
--+#endif
--    {10, 9}, {5, 4},                 /* power and concat (right associative) */
--    {3, 3}, {3, 3},                  /* equality and inequality */
--    {3, 3}, {3, 3}, {3, 3}, {3, 3},  /* order */
--diff -Nurd lua-5.1.5/src/ltm.c lua-5.1.5/src/ltm.c
----- lua-5.1.5/src/ltm.c	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/ltm.c	2012-11-28 21:12:23.962419499 +0200
--@@ -34,6 +34,9 @@
--     "__add", "__sub", "__mul", "__div", "__mod",
--     "__pow", "__unm", "__len", "__lt", "__le",
--     "__concat", "__call"
--+#if defined(LUA_BITWISE_OPERATORS)
--+    ,"__or", "__and", "__xor", "__shl", "__shr", "__not", "__intdiv"
--+#endif
--   };
--   int i;
--   for (i=0; i<TM_N; i++) {
--diff -Nurd lua-5.1.5/src/ltm.h lua-5.1.5/src/ltm.h
----- lua-5.1.5/src/ltm.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/ltm.h	2012-11-28 21:12:23.962419499 +0200
--@@ -33,6 +33,15 @@
--   TM_LE,
--   TM_CONCAT,
--   TM_CALL,
--+#if defined(LUA_BITWISE_OPERATORS)
--+  TM_BOR,
--+  TM_BAND,
--+  TM_BXOR,
--+  TM_BLSHFT,
--+  TM_BRSHFT,
--+  TM_BNOT,
--+  TM_INTDIV,
--+#endif
--   TM_N		/* number of elements in the enum */
-- } TMS;
-- 
--diff -Nurd lua-5.1.5/src/luaconf.h lua-5.1.5/src/luaconf.h
----- lua-5.1.5/src/luaconf.h	2008-02-11 18:25:08.000000000 +0200
--+++ lua-5.1.5/src/luaconf.h	2012-11-28 21:12:23.962419499 +0200
--@@ -2,6 +2,7 @@
-- ** $Id: luaconf.h,v 1.82.1.7 2008/02/11 16:25:08 roberto Exp $
-- ** Configuration file for Lua
-- ** See Copyright Notice in lua.h
--+** Added logic operators : & | ^^ (xor) << >> ~, arithmetic operator \ (integer division) and != as an alternative to ~=
-- */
-- 
-- 
--@@ -209,6 +210,12 @@
-- */
-- #define LUA_IDSIZE	60
-- 
--+/*
--+@@ LUA_BITWISE_OPERATORS enable logical operators | & ^| >> << ~ on lua_Number
--+@* but also arithmetic operator \ (integer division) and != as an alernative to ~=
--+*/
--+#define LUA_BITWISE_OPERATORS
--+
-- 
-- /*
-- ** {==================================================================
--@@ -216,6 +223,7 @@
-- ** ===================================================================
-- */
-- 
--+
-- #if defined(lua_c) || defined(luaall_c)
-- 
-- /*
--@@ -526,25 +534,6 @@
-- 
-- 
-- /*
---@@ The luai_num* macros define the primitive operations over numbers.
---*/
---#if defined(LUA_CORE)
---#include <math.h>
---#define luai_numadd(a,b)	((a)+(b))
---#define luai_numsub(a,b)	((a)-(b))
---#define luai_nummul(a,b)	((a)*(b))
---#define luai_numdiv(a,b)	((a)/(b))
---#define luai_nummod(a,b)	((a) - floor((a)/(b))*(b))
---#define luai_numpow(a,b)	(pow(a,b))
---#define luai_numunm(a)		(-(a))
---#define luai_numeq(a,b)		((a)==(b))
---#define luai_numlt(a,b)		((a)<(b))
---#define luai_numle(a,b)		((a)<=(b))
---#define luai_numisnan(a)	(!luai_numeq((a), (a)))
---#endif
---
---
---/*
-- @@ lua_number2int is a macro to convert lua_Number to int.
-- @@ lua_number2integer is a macro to convert lua_Number to lua_Integer.
-- ** CHANGE them if you know a faster way to convert a lua_Number to
--@@ -560,7 +549,7 @@
-- /* On a Microsoft compiler, use assembler */
-- #if defined(_MSC_VER)
-- 
---#define lua_number2int(i,d)   __asm fld d   __asm fistp i
--+#define lua_number2int(i,d)   { __asm fld d   __asm fistp i }
-- #define lua_number2integer(i,n)		lua_number2int(i, n)
-- 
-- /* the next trick should work on any Pentium, but sometimes clashes
--@@ -582,6 +571,38 @@
-- 
-- #endif
-- 
--+
--+/*
--+@@ The luai_num* macros define the primitive operations over numbers.
--+*/
--+#if defined(LUA_CORE)
--+#include <math.h>
--+#define luai_numadd(a,b)	((a)+(b))
--+#define luai_numsub(a,b)	((a)-(b))
--+#define luai_nummul(a,b)	((a)*(b))
--+#define luai_numdiv(a,b)	((a)/(b))
--+#ifdef LUA_BITWISE_OPERATORS
--+#define luai_numintdiv(a,b)	(floor((a)/(b)))
--+#endif
--+#define luai_nummod(a,b)	((a) - floor((a)/(b))*(b))
--+#define luai_numpow(a,b)	(pow(a,b))
--+#define luai_numunm(a)		(-(a))
--+#define luai_numeq(a,b)		((a)==(b))
--+#define luai_numlt(a,b)		((a)<(b))
--+#define luai_numle(a,b)		((a)<=(b))
--+#define luai_numisnan(a)	(!luai_numeq((a), (a)))
--+
--+#if defined(LUA_BITWISE_OPERATORS)
--+#define luai_logor(r, a, b)	{ lua_Integer ai,bi; lua_number2int(ai,a); lua_number2int(bi,b); r = ai|bi; }
--+#define luai_logand(r, a,b)	{ lua_Integer ai,bi; lua_number2int(ai,a); lua_number2int(bi,b); r = ai&bi; }
--+#define luai_logxor(r, a,b)	{ lua_Integer ai,bi; lua_number2int(ai,a); lua_number2int(bi,b); r = ai^bi; }
--+#define luai_lognot(r,a)	{ lua_Integer ai; lua_number2int(ai,a); r = ~ai; }
--+#define luai_loglshft(r, a,b)	{ lua_Integer ai,bi; lua_number2int(ai,a); lua_number2int(bi,b); r = ai<<bi; }
--+#define luai_logrshft(r, a,b)	{ lua_Integer ai,bi; lua_number2int(ai,a); lua_number2int(bi,b); r = ai>>bi; }
--+#endif
--+
--+#endif
--+
-- /* }================================================================== */
-- 
-- 
--diff -Nurd lua-5.1.5/src/lua.h lua-5.1.5/src/lua.h
----- lua-5.1.5/src/lua.h	2012-01-13 22:36:20.000000000 +0200
--+++ lua-5.1.5/src/lua.h	2012-11-28 21:13:01.266418680 +0200
--@@ -17,7 +17,7 @@
-- 
-- 
-- #define LUA_VERSION	"Lua 5.1"
---#define LUA_RELEASE	"Lua 5.1.5"
--+#define LUA_RELEASE	"Lua 5.1.5+bitwiseops"
-- #define LUA_VERSION_NUM	501
-- #define LUA_COPYRIGHT	"Copyright (C) 1994-2012 Lua.org, PUC-Rio"
-- #define LUA_AUTHORS 	"R. Ierusalimschy, L. H. de Figueiredo & W. Celes"
--diff -Nurd lua-5.1.5/src/lvm.c lua-5.1.5/src/lvm.c
----- lua-5.1.5/src/lvm.c	2011-08-17 23:43:11.000000000 +0300
--+++ lua-5.1.5/src/lvm.c	2012-11-28 21:12:23.966419498 +0200
--@@ -329,6 +329,9 @@
--       case TM_MOD: setnvalue(ra, luai_nummod(nb, nc)); break;
--       case TM_POW: setnvalue(ra, luai_numpow(nb, nc)); break;
--       case TM_UNM: setnvalue(ra, luai_numunm(nb)); break;
--+#if defined(LUA_BITWISE_OPERATORS)
--+      case TM_INTDIV: setnvalue(ra, luai_numintdiv(nb, nc)); break;
--+#endif
--       default: lua_assert(0); break;
--     }
--   }
--@@ -336,7 +339,30 @@
--     luaG_aritherror(L, rb, rc);
-- }
-- 
---
--+#if defined(LUA_BITWISE_OPERATORS)
--+static void Logic (lua_State *L, StkId ra, const TValue *rb,
--+                   const TValue *rc, TMS op) {
--+  TValue tempb, tempc;
--+  const TValue *b, *c;
--+  if ((b = luaV_tonumber(rb, &tempb)) != NULL &&
--+      (c = luaV_tonumber(rc, &tempc)) != NULL) {
--+    lua_Number nb = nvalue(b), nc = nvalue(c);
--+    lua_Integer r;
--+    switch (op) {
--+      case TM_BLSHFT: luai_loglshft(r, nb, nc); break;
--+      case TM_BRSHFT: luai_logrshft(r, nb, nc); break;
--+      case TM_BOR: luai_logor(r, nb, nc); break;
--+      case TM_BAND: luai_logand(r, nb, nc); break;
--+      case TM_BXOR: luai_logxor(r, nb, nc); break;
--+      case TM_BNOT: luai_lognot(r, nb); break;
--+      default: lua_assert(0); r = 0; break;
--+    }
--+    setnvalue(ra, r);
--+  }
--+  else if (!call_binTM(L, rb, rc, ra, op))
--+    luaG_logicerror(L, rb, rc);
--+}
--+#endif
-- 
-- /*
-- ** some macros for common tasks in `luaV_execute'
--@@ -373,6 +399,22 @@
--       }
-- 
-- 
--+#if defined(LUA_BITWISE_OPERATORS)
--+#define logic_op(op,tm) { \
--+        TValue *rb = RKB(i); \
--+        TValue *rc = RKC(i); \
--+        if (ttisnumber(rb) && ttisnumber(rc)) { \
--+          lua_Integer r; \
--+          lua_Number nb = nvalue(rb), nc = nvalue(rc); \
--+          op(r, nb, nc); \
--+          setnvalue(ra, r); \
--+        } \
--+        else \
--+          Protect(Logic(L, ra, rb, rc, tm)); \
--+      }
--+#endif
--+
--+
-- 
-- void luaV_execute (lua_State *L, int nexeccalls) {
--   LClosure *cl;
--@@ -506,6 +548,45 @@
--         }
--         continue;
--       }
--+#if defined(LUA_BITWISE_OPERATORS)
--+      case OP_BOR: {
--+        logic_op(luai_logor, TM_BOR);
--+        continue;
--+      }
--+      case OP_BAND: {
--+        logic_op(luai_logand, TM_BAND);
--+        continue;
--+      }
--+      case OP_BXOR: {
--+        logic_op(luai_logxor, TM_BXOR);
--+        continue;
--+      }
--+      case OP_BLSHFT: {
--+        logic_op(luai_loglshft, TM_BLSHFT);
--+        continue;
--+      }
--+      case OP_BRSHFT: {
--+        logic_op(luai_logrshft, TM_BRSHFT);
--+        continue;
--+      }
--+      case OP_BNOT: {
--+        TValue *rb = RB(i);
--+        if (ttisnumber(rb)) {
--+          lua_Integer r;
--+          lua_Number nb = nvalue(rb);
--+          luai_lognot(r, nb);
--+          setnvalue(ra, r);
--+        }
--+        else {
--+          Protect(Logic(L, ra, rb, rb, TM_BNOT));
--+        }
--+        continue;
--+      }
--+      case OP_INTDIV: {
--+        arith_op(luai_numintdiv, TM_DIV);
--+        continue;
--+      }
--+#endif
--       case OP_NOT: {
--         int res = l_isfalse(RB(i));  /* next assignment may change this value */
--         setbvalue(ra, res);
--diff -Nurd lua-5.1.5/test/bitwisepatchtest.lua lua-5.1.5/test/bitwisepatchtest.lua
----- lua-5.1.5/test/bitwisepatchtest.lua	1970-01-01 02:00:00.000000000 +0200
--+++ lua-5.1.5/test/bitwisepatchtest.lua	2012-11-28 21:12:23.966419498 +0200
--@@ -0,0 +1,24 @@
--+hex=function (i) return "0x"..string.format("%X", i) end
--+print(hex(0x54|0x55))
--+print(hex(0x54&0x66))
--+print(hex(0x54^|0x66))
--+print(hex(~0x54))
--+print(hex(0xF<< 4))
--+print(hex(0xF0>> 4))
--+a,b=0x54,0x55
--+print(hex(a),"|",hex(b), "=",hex(a|b))
--+print(hex(a),"|","0x55", "=",hex(a|0x55))
--+print(hex(a),"|","0x5|0x50 (", hex(0x5|0x50), ") =",hex(a|(0x5|0x50)))
--+a,b=0x54,0x66
--+print(hex(a),"&",hex(b), "=",hex(a&b))
--+print(hex(a),"&","0x66", "=",hex(a&0x66))
--+print(hex(a),"^|",hex(b), "=",hex(a^|b))
--+print(hex(a),"^|","0x66", "=",hex(a^|0x66))
--+print("~"..hex(a),"=",hex(~a))
--+a,b=0xF,0xF0
--+print(hex(a).."<<4","=",hex(a<<4))
--+print(hex(b)..">>4","=",hex(b>>4))
--+a,b=0xF,4
--+print(hex(a).."<<"..b,"=",hex(a<<b))
--+a,b=0xF0,4
--+print(hex(a)..">>"..b,"=",hex(a>>b))
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1/lua5.1.pc b/meta-oe/recipes-devtools/lua/lua5.1/lua5.1.pc
-deleted file mode 100644
-index 64c03d2..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1/lua5.1.pc
-+++ /dev/null
-@@ -1,11 +0,0 @@
--prefix=/usr
--libdir=${prefix}/lib
--includedir=${prefix}/include
--
--Name: Lua
--Description: Lua language engine
--Version: 5.1.5
--Requires:
--Libs: -L${libdir} -llua
--Libs.private: -lm
--Cflags: -I${includedir}
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
-deleted file mode 100644
-index b64a6a2..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_1.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--lua.org patch 1 for lua-5.1.5.
--from http://www.lua.org/bugs.html
--
--Upstream-Status: Backport
--
--Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
--diff -Nurd lua-5.1.5/src/Makefile lua-5.1.5/src/Makefile
----- lua-5.1.5/src/Makefile	2012-02-13 22:41:22.000000000 +0200
--+++ lua-5.1.5/src/Makefile	2013-10-25 11:29:49.769540434 +0300
--@@ -48,7 +48,7 @@
-- a:	$(ALL_A)
-- 
-- $(LUA_A): $(CORE_O) $(LIB_O)
---	$(AR) $@ $(CORE_O) $(LIB_O)	# DLL needs all object files
--+	$(AR) $@ $(CORE_O) $(LIB_O)
-- 	$(RANLIB) $@
-- 
-- $(LUA_T): $(LUA_O) $(LUA_A)
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch b/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
-deleted file mode 100644
-index 0c48ea2..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1/luaorg_2.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--lua.org patch 2 for lua-5.1.5.
--from http://www.lua.org/bugs.html
--
--Upstream-Status: Backport
--
--Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
--diff -Nurd lua-5.1.5/src/lzio.c lua-5.1.5/src/lzio.c
----- lua-5.1.5/src/lzio.c	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/lzio.c	2013-10-25 11:32:45.773536572 +0300
--@@ -22,10 +22,14 @@
--   size_t size;
--   lua_State *L = z->L;
--   const char *buff;
--+  if (z->eoz) return EOZ;
--   lua_unlock(L);
--   buff = z->reader(L, z->data, &size);
--   lua_lock(L);
---  if (buff == NULL || size == 0) return EOZ;
--+  if (buff == NULL || size == 0) {
--+    z->eoz = 1;  /* avoid calling reader function next time */
--+    return EOZ;
--+  }
--   z->n = size - 1;
--   z->p = buff;
--   return char2int(*(z->p++));
--@@ -51,6 +55,7 @@
--   z->data = data;
--   z->n = 0;
--   z->p = NULL;
--+  z->eoz = 0;
-- }
-- 
-- 
--diff -Nurd lua-5.1.5/src/lzio.h lua-5.1.5/src/lzio.h
----- lua-5.1.5/src/lzio.h	2007-12-27 15:02:25.000000000 +0200
--+++ lua-5.1.5/src/lzio.h	2013-10-25 11:31:50.301537789 +0300
--@@ -59,6 +59,7 @@
--   lua_Reader reader;
--   void* data;			/* additional data */
--   lua_State *L;			/* Lua state (for reader) */
--+  int eoz;			/* true if reader has no more data */
-- };
-- 
-- 
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1/uclibc-pthread.patch b/meta-oe/recipes-devtools/lua/lua5.1/uclibc-pthread.patch
-deleted file mode 100644
-index 0555e81..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1/uclibc-pthread.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: lua-5.1.4/src/Makefile
--===================================================================
----- lua-5.1.4.orig/src/Makefile	2010-10-16 09:51:52.000000000 +0200
--+++ lua-5.1.4/src/Makefile	2010-10-16 09:52:15.000000000 +0200
--@@ -12,7 +12,7 @@
-- AR= ar rcu
-- RANLIB= ranlib
-- RM= rm -f
---LIBS= -lm $(MYLIBS)
--+LIBS= -lm -lpthread $(MYLIBS)
-- 
-- MYCFLAGS=
-- MYLDFLAGS=
-diff --git a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb b/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
-deleted file mode 100644
-index f946994..0000000
---- a/meta-oe/recipes-devtools/lua/lua5.1_5.1.5.bb
-+++ /dev/null
-@@ -1,55 +0,0 @@
--DESCRIPTION = "Lua is a powerful light-weight programming language designed \
--for extending applications."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=59bdd99bb82238f238cf5c65c21604fd"
--HOMEPAGE = "http://www.lua.org/"
--
--PR = "r2"
--
--DEPENDS += "readline"
--SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
--           file://bitwise_operators.patch \
--           file://lua5.1.pc \
--           file://luaorg_1.patch \
--           file://luaorg_2.patch \
--"
--S = "${WORKDIR}/lua-${PV}"
--
--inherit pkgconfig binconfig
--
--UCLIBC_PATCHES += "file://uclibc-pthread.patch"
--SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
--
--TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
--EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
--
--do_configure_prepend() {
--    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
--    sed -i -e s:lib/lua/5.1/:${base_libdir}/lua/5.1/:g src/luaconf.h
--}
--
--do_compile () {
--    oe_runmake linux
--}
--
--do_install () {
--    oe_runmake \
--        'INSTALL_TOP=${D}${prefix}' \
--        'INSTALL_BIN=${D}${bindir}' \
--        'INSTALL_INC=${D}${includedir}/' \
--        'INSTALL_MAN=${D}${mandir}/man1' \
--        'INSTALL_SHARE=${D}${datadir}/lua' \
--        'INSTALL_LIB=${D}${libdir}' \
--        'INSTALL_CMOD=${D}${libdir}/lua/5.1' \
--        install
--    install -d ${D}${libdir}/pkgconfig
--    install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
--    rmdir ${D}${libdir}/lua/5.1
--    rmdir ${D}${libdir}/lua
--    rmdir ${D}${datadir}/lua/5.1
--    rmdir ${D}${datadir}/lua
--}
--BBCLASSEXTEND = "native"
--
--SRC_URI[md5sum] = "2e115fe26e435e33b0d5c022e4490567"
--SRC_URI[sha256sum] = "2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333"
--- 
-2.0.0
+Please use git send-email, see extra line feeds you have in
+'SRC_URI[sha256sum]' lines, this time I'll apply it manually, but next
+time I'll just reject them.
 
+Thanks
 
+> Signed-off-by: Chris Morgan <chmorgan@gmail.com>
+> ---
+>  meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb | 10 ----------
+>  meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb |  6 ++++++
+>  2 files changed, 6 insertions(+), 10 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+>  create mode 100644 meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+>=20
+> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+> b/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+> deleted file mode 100644
+> index b63d74d..0000000
+> --- a/meta-oe/recipes-support/dfu-util/dfu-util_0.1.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require dfu-util.inc
+> -
+> -PR =3D "r1"
+> -
+> -DEPENDS =3D "virtual/libusb0 usbpath"
+> -
+> -BBCLASSEXTEND =3D "native"
+> -
+> -SRC_URI[md5sum] =3D "454b931249d29e4a6c2a2ade17858490"
+> -SRC_URI[sha256sum] =3D
+> "a27cc667be9b158fecf0ed066698e30eca0c0b3cd7a85aad2058d47ffe16f0e1"
+> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+> b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+> new file mode 100644
+> index 0000000..c4c030d
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+> @@ -0,0 +1,6 @@
+> +require dfu-util.inc
+> +
+> +DEPENDS =3D "libusb1"
+> +
+> +SRC_URI[md5sum] =3D "56844020177d4db4c1ea2e926fe9d588"
+> +SRC_URI[sha256sum] =3D
+> "f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c712e0c58a332d80ec3eab"
+> --=20
+> 1.9.3
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Pa4xkLBhPDIhDLv1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iEYEARECAAYFAlOO6MEACgkQN1Ujt2V2gBwwYgCfX6JMIDQnavqghfjHosQqJDbO
+pgoAnRX2Ml9Lq1m+reHzJ3sn7+LganqH
+=LP42
+-----END PGP SIGNATURE-----
+
+--Pa4xkLBhPDIhDLv1--
