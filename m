@@ -1,35 +1,37 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id F3E3360196
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6088D60424
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 01:44:03 +0000 (UTC)
-Received: by mail-ie0-f179.google.com with SMTP id rd18so6678589iec.38
+	Wed,  4 Jun 2014 02:17:44 +0000 (UTC)
+Received: by mail-ie0-f174.google.com with SMTP id lx4so6714798iec.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jun 2014 18:44:04 -0700 (PDT)
+	Tue, 03 Jun 2014 19:17:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=gpGFbfiip9qBLIyjIM7r1kk1l9+9rtywFWCyiG3TWlA=;
-	b=iu5RlKINmBu+LSKzbnd1Zvfy2VAM2jfVpKpEqAe33G0N4d9T7AEVzy3SAEHlI091yM
-	XrWUTXEm+fO2dYoPifVpBj1vBF2IDMSJpRJ8gsYxlFlUJsxO7Rz//TJgv6gIZujKt4em
-	uGong0RUVstQneFiznxYBPsVQCnIjm9/cUFZFsxTC7ctOcR+cRpIWsTrbQwYfas46tIN
-	xEENncqsggcZVwk22Dy4I/N88asifVhm78WV3+QHfGG5gHrJDkV3es5Rhszp5OewGzK2
-	rKQZ0PzPaIcIWrL6Mi04GCIyhz4Mk/9L0H5tONbOSeYESd3K42Fnf7QB5hL1Ph2zt/wn
-	XSfg==
-X-Gm-Message-State: ALoCoQl4/VJ4X9siBF/BjumEWrz5xQT0IdIXrMQ4TtL4p3HaJiCeqKDfyYcS5Zs9XV3d9cD6yES3
+	bh=0nvEY0xgVB1WMjSoSzd8SHhskNqdkvE6AKaJJbJo1gQ=;
+	b=gGlNrZtK4aTb5a8qAsYMxesAdq9YB8zoEtiuxpSmuL+JZtrWB/LySm2QktqFtFDRxI
+	u54tvzYoAZTPEVimUMwBi+Bg32LM5zsV10MlyY+J9ShdohrqZnaJjtkrPEw00Giu2eUg
+	IQTXaLW/T2rXQNxlf3HxIjz+SuxQw0Cm+wd/TfTwFYb4icFCYU5U+bLdDxBzf+tLneND
+	GeaEyVnQypCDwcCTfvwmIrXq2y+PR4QV/c7bvwxULdFsB5ack12YVhAEGtzGsyK+Ckqu
+	+Boe94mKKA/sC3DfVM6bDuE4So2TUcIZPuccfQauzKxwFugnRAbdN6ZFZ1Z2eoN+ORW7
+	4K1A==
+X-Gm-Message-State: ALoCoQlOasofYNXs5ppQ4wGZR8EoZO1eiZ6AwZSwKyLHKHlKXf98S0ohEX/Kf4AZP2KUXVRjNT8T
 MIME-Version: 1.0
-X-Received: by 10.50.79.201 with SMTP id l9mr799862igx.11.1401846244772; Tue,
-	03 Jun 2014 18:44:04 -0700 (PDT)
-Received: by 10.42.81.130 with HTTP; Tue, 3 Jun 2014 18:44:04 -0700 (PDT)
-In-Reply-To: <1399997660-12190-1-git-send-email-mihaela.sendrea@enea.com>
-References: <1399997660-12190-1-git-send-email-mihaela.sendrea@enea.com>
-Date: Tue, 3 Jun 2014 21:44:04 -0400
-Message-ID: <CANBf+V0TSv+9P7ieWDBX7ZsgMYYw4T-x9WXKUe-23GMcMvD2Fg@mail.gmail.com>
-From: Joe MacDonald <joe@deserted.net>
+X-Received: by 10.50.78.8 with SMTP id x8mr971995igw.45.1401848265354; Tue, 03
+	Jun 2014 19:17:45 -0700 (PDT)
+Sender: joe@deserted.net
+Received: by 10.42.81.130 with HTTP; Tue, 3 Jun 2014 19:17:45 -0700 (PDT)
+In-Reply-To: <1401720051-23378-1-git-send-email-ml@communistcode.co.uk>
+References: <1401720051-23378-1-git-send-email-ml@communistcode.co.uk>
+Date: Tue, 3 Jun 2014 22:17:45 -0400
+X-Google-Sender-Auth: l6xu9VCUKbB_XvmDH_coiMdVDrk
+Message-ID: <CANBf+V3_RJuXnr1b-gKKBVB-QnKOg3Do6nR74DB3pF2oQofXsA@mail.gmail.com>
+From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v5 1/2] lksctp-tools: add recipe (version 1.0.16)
+Subject: Re: [meta-oe][PATCH] ntp: fix incorrect pidfile handling in ntpd init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,85 +45,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 01:44:04 -0000
+X-List-Received-Date: Wed, 04 Jun 2014 02:17:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Merged, thanks.
+-Joe.
 
--J.
-
-On Tue, May 13, 2014 at 12:14 PM, Mihaela Sendrea
-<mihaela.sendrea@enea.com> wrote:
-> This recipe comes from arago-oe-dev:
-> https://github.com/mrchapp/arago-oe-dev/tree/master/recipes/lksctp-tools
+On Mon, Jun 2, 2014 at 10:40 AM, Jack Mitchell <ml@communistcode.co.uk> wrote:
+> From: Jack Mitchell <jmitchell@cbnl.com>
 >
-> Signed-off-by: Mihaela Sendrea <mihaela.sendrea@enea.com>
+> Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
 > ---
->  .../lksctp-tools/lksctp-tools_1.0.16.bb            | 43 ++++++++++++++++++++++
->  1 file changed, 43 insertions(+)
->  create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+>  meta-networking/recipes-support/ntp/files/ntpd | 21 +++++++++++++++++----
+>  1 file changed, 17 insertions(+), 4 deletions(-)
 >
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> new file mode 100644
-> index 0000000..102c2bb
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> @@ -0,0 +1,43 @@
-> +SUMMARY = "The Linux Kernel Stream Control Transmission Protocol (lksctp) project"
-> +SECTION = "libs"
-> +LICENSE = "LGPLv2"
+> diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/files/ntpd
+> index a62b8ce..3cd1c6c 100755
+> --- a/meta-networking/recipes-support/ntp/files/ntpd
+> +++ b/meta-networking/recipes-support/ntp/files/ntpd
+> @@ -1,9 +1,22 @@
+>  #! /bin/sh
+> -#
 > +
-> +LIC_FILES_CHKSUM = " \
-> +    file://COPYING.lib;md5=0a1b79af951c42a9c8573533fbba9a92 \
-> +    file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
-> +"
+> +### BEGIN INIT INFO
+> +# Provides:        ntp
+> +# Required-Start:  $network $remote_fs $syslog
+> +# Required-Stop:   $network $remote_fs $syslog
+> +# Default-Start:   2 3 4 5
+> +# Default-Stop:
+> +# Short-Description: Start NTP daemon
+> +### END INIT INFO
 > +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
+>  PATH=/sbin:/bin:/usr/bin:/usr/sbin
+>
+> +DAEMON=/usr/sbin/ntpd
+> +PIDFILE=/var/run/ntpd.pid
 > +
-> +SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
-> +SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
+>  # ntpd init.d script for ntpdc from ntp.isc.org
+> -test -x /usr/sbin/ntpd -a -r /etc/ntp.conf || exit 0
+> +test -x $DAEMON -a -r /etc/ntp.conf || exit 0
 > +
-> +S = "${WORKDIR}/${BP}"
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +inherit autotools pkgconfig binconfig
-> +
-> +SOLIBVERSION="${PV}"
-> +SOLIBMAJORVERSION="1"
-> +
-> +PACKAGES =+ "${PN}-withsctp ${PN}-utils"
-> +
-> +FILES_${PN} = " \
-> +    ${libdir}/libsctp.so.${SOLIBVERSION} \
-> +"
-> +
-> +FILES_${PN}-withsctp = " \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
-> +"
-> +
-> +FILES_${PN}-dev += " \
-> +    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/libsctp.so \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
-> +    ${libdir}/lksctp-tools/libwithsctp.so \
-> +    ${datadir}/lksctp-tools/*.c \
-> +    ${datadir}/lksctp-tools/*.h \
-> +"
-> +
-> +FILES_${PN}-utils = "${bindir}/*"
+>  # rcS contains TICKADJ
+>  test -r /etc/default/rcS && . /etc/default/rcS
+>
+> @@ -23,12 +36,12 @@ startdaemon(){
+>         # this.  If ntpd seems to disappear after a while assume TICKADJ
+>         # above is set to a totally incorrect value.
+>         echo -n "Starting ntpd: "
+> -       start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
+> +       start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --startas $DAEMON -- -u ntp:ntp -p $PIDFILE "$@"
+>         echo "done"
+>  }
+>  stopdaemon(){
+>         echo -n "Stopping ntpd: "
+> -       start-stop-daemon --stop -p /var/run/ntp.pid
+> +       start-stop-daemon --stop --quiet --oknodo -p $PIDFILE
+>         echo "done"
+>  }
+>
 > --
-> 1.8.5.3
+> 1.9.3
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
-
--- 
-Joe MacDonald
-:wq
 
