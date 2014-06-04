@@ -1,43 +1,40 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C04F66B3A4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B53B6B3A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 23:51:35 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id g10so210106pdj.36
+	Wed,  4 Jun 2014 23:52:46 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id l18so222694wgh.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 16:51:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=izb+871BgnOebMfi1yv5MdVDutVlzIld4z6K2ABfifw=;
-	b=RdpinzDSFo5+RYKzReSCdqHw6q78byl+XO4WbKNfqTKo0uBYsrejoHlAFGdAAgqksJ
-	9AHUzGdYD1VNPf8I5yhhQZqBKEfZgdysqW6g9XyEk+iHd5LYtAurnUJRl721XlZ5FqqO
-	3wY7XpkV3eACkI2yU3v28MwB+LJ2lq+qkW968OXOpyY9g376tvRK1/+tcgdOi2t5J9VR
-	s7kSa8loUxaYPyJlLoybAP1birq/btewqGQgeF+ECUjdOr14QuGfjmUw9BedGpJfMAHK
-	JWRKg00bho46c7XAloKOL/dBnACbmys4zjWrou1DvqOUIGTWet5kLAltgj/RMwIRNmpJ
-	5+Eg==
-X-Gm-Message-State: ALoCoQnDrD8jQrvrb2ypvrHRxs6jJxJbVudicO2yA+qEaNUlA8eLumKtCFpIAfCbam1rMpooJOwQ
-X-Received: by 10.68.201.226 with SMTP id kd2mr68984544pbc.157.1401925895703; 
-	Wed, 04 Jun 2014 16:51:35 -0700 (PDT)
-Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
-	[98.239.95.55]) by mx.google.com with ESMTPSA id
-	sv10sm15003063pbc.74.2014.06.04.16.51.34 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 04 Jun 2014 16:51:35 -0700 (PDT)
-Message-ID: <538FB105.4040607@mvista.com>
-Date: Wed, 04 Jun 2014 16:51:33 -0700
-From: "akuster@mvista" <akuster@mvista.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+	Wed, 04 Jun 2014 16:52:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=8swNCZbPy5n3qzH/aXgmgT/rg+kHe8ae5nB9lE7m8VY=;
+	b=eQc5l0Cm29vAkOenKY2sFFz2B98qryzxaw24thsZ8aVO26shI7qGteqXVwOB7NH/U9
+	PPwUye7fbgQBk74maNI+okksBHb0cuvTwgMzKDDOkC8Mi9NAwjKR8C6velqj2j5wKKsu
+	4OFttOfnaXbWguqqmcSP8ECohS/xKvYwDZaWo0nbKk+ayvkjZnKQvinCULQu1z1JfUuW
+	X6Bxr0eeX0lHR2TwMp52IuQ/01Hl+E+xNbQo1iUfqSUbPd/qCmHlfvraPa7UNw5QhVoT
+	KoI3SJ5aQEaV1ZDVNUQXHCJTvDzhtsHGEf3DXKsGTpX2PuvU0VpqitSH+ShWabxo4sJX
+	DahA==
+X-Received: by 10.14.246.68 with SMTP id p44mr6757805eer.8.1401925966679;
+	Wed, 04 Jun 2014 16:52:46 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	z7sm9729520eeo.42.2014.06.04.16.52.45
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Jun 2014 16:52:45 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 5 Jun 2014 01:53:00 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140604235300.GV2426@jama>
+References: <1401878650-3362-1-git-send-email-chmorgan@gmail.com>
+	<CAP9ODKoqUaswvNbhR02aX16EgKLmv6g6ws1Lkgpb00Gdmctg=g@mail.gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
-References: <1401923502-22673-1-git-send-email-akuster@mvista.com>
-	<CAP9ODKqPZu_wOQgg05KX_PXWFP68_1J-7PPKu=X4MxL77DFM1g@mail.gmail.com>
-In-Reply-To: <CAP9ODKqPZu_wOQgg05KX_PXWFP68_1J-7PPKu=X4MxL77DFM1g@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH] radvd: fix install issue for S!=B
+In-Reply-To: <CAP9ODKoqUaswvNbhR02aX16EgKLmv6g6ws1Lkgpb00Gdmctg=g@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] Remove dfu-util svn recipes, these point at deprecated svn repositories, dfu-util uses git now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,45 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 23:51:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Jun 2014 23:52:47 -0000
+X-Groupsio-MsgNum: 50194
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="PjLo8P/CG6vpADRe"
+Content-Disposition: inline
 
+--PjLo8P/CG6vpADRe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 06/04/2014 04:36 PM, Otavio Salvador wrote:
-> On Wed, Jun 4, 2014 at 8:11 PM, Armin Kuster <akuster@mvista.com> wrote:
->> Some files are in "S" that are needed for install.
->>
->> Signed-off-by: Armin Kuster <akuster@mvista.com>
->> ---
->>   meta-networking/recipes-daemons/radvd/radvd.inc | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
->> index 9e19401..b7353fc 100644
->> --- a/meta-networking/recipes-daemons/radvd/radvd.inc
->> +++ b/meta-networking/recipes-daemons/radvd/radvd.inc
->> @@ -33,6 +33,7 @@ do_install_append () {
->>
->>       install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/volatiles.03_radvd
->>       # Documentation
->> +    cd ${S}
-> Don't 'cd'...
-ok.
->
->>       for i in radvd.conf.example README; do \
->>           install -m 0644 $i ${D}${docdir}/radvd; \
->>       done
-> Please use:
->
-> install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
+On Wed, Jun 04, 2014 at 08:38:35PM -0300, Otavio Salvador wrote:
+> On Wed, Jun 4, 2014 at 7:44 AM, Chris Morgan <chmorgan@gmail.com> wrote:
+> > Signed-off-by: Chris Morgan <chmorgan@gmail.com>
+>=20
+> Please rewrite the commitlog to adhere to
+> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
 
-thanks.
+In this case I've updated both commit messages when cherry-picking them
+to master-next, so no need to resend, but as Otavio says, please use
+better commit messages next time.
 
-I will sent out V2 shortly.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-- Armin
->
->
+--PjLo8P/CG6vpADRe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
+iEYEARECAAYFAlOPsVwACgkQN1Ujt2V2gBzUSACePy/FWLNNKyDfVVh+06Tx4mP/
+hGcAnjCRV5jffgRTzbMMeyOFrh5pqYih
+=tNJt
+-----END PGP SIGNATURE-----
+
+--PjLo8P/CG6vpADRe--
