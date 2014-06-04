@@ -1,32 +1,32 @@
 Return-Path: <blloyd@familyhonor.net>
 Received: from mho-02-ewr.mailhop.org (mho-02-ewr.mailhop.org [204.13.248.72])
-	by mail.openembedded.org (Postfix) with ESMTP id D4BB76FA55
+	by mail.openembedded.org (Postfix) with ESMTP id 757496B89F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 18:40:40 +0000 (UTC)
+	Wed,  4 Jun 2014 18:45:03 +0000 (UTC)
 Received: from [98.142.68.106] (helo=lloydserv.home.familyhonor.net)
 	by mho-02-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
-	id 1WsG77-000Jxv-QI for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Jun 2014 18:40:41 +0000
+	id 1WsFHl-000CMq-Mb for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Jun 2014 17:47:37 +0000
 Received: from omclinuxballt.home.familyhonor.net ([192.168.0.83])
 	(authenticated bits=0)
 	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
-	s54IeXaX017802
+	s54HlN1f017166
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NO); Wed, 4 Jun 2014 13:40:40 -0500
+	verify=NO); Wed, 4 Jun 2014 12:47:36 -0500
 X-Mail-Handler: Dyn Standard SMTP by Dyn
 X-Originating-IP: 98.142.68.106
 X-Report-Abuse-To: abuse@dyndns.com (see
 	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
 	abuse reporting information)
-X-MHO-User: U2FsdGVkX18dt3g4JJhjmR/++ya0fNj2npKZT4vo1Dc=
+X-MHO-User: U2FsdGVkX19bSHNYVd4nepDOEtmjGhkI6Lz1kaeeoH4=
 From: blloyd <blloyd@familyhonor.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jun 2014 13:40:31 -0500
-Message-Id: <1401907231-5559-2-git-send-email-blloyd@familyhonor.net>
+Date: Wed,  4 Jun 2014 12:47:20 -0500
+Message-Id: <1401904040-4005-2-git-send-email-blloyd@familyhonor.net>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1401907231-5559-1-git-send-email-blloyd@familyhonor.net>
-References: <1401907231-5559-1-git-send-email-blloyd@familyhonor.net>
+In-Reply-To: <1401904040-4005-1-git-send-email-blloyd@familyhonor.net>
+References: <1401904040-4005-1-git-send-email-blloyd@familyhonor.net>
 Subject: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 18:40:41 -0000
+X-List-Received-Date: Wed, 04 Jun 2014 18:45:06 -0000
 
 Signed-off-by: blloyd <blloyd@familyhonor.net>
 ---
