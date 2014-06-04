@@ -1,38 +1,43 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 025266FBE6
+Return-Path: <nick.lewis@usa.g4s.com>
+Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
+	[193.109.254.110])
+	by mail.openembedded.org (Postfix) with ESMTP id A7F696B7A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 14:24:54 +0000 (UTC)
-Received: by mail-qg0-f53.google.com with SMTP id f51so15585845qge.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 07:24:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=zSvbDLMdFT0xr4qJSvRCt9EMIS3f+kdbRChGoIeEWck=;
-	b=WmiFRXBjr7KrWuRSSGHCxj6NgA76w96HJ/ptQvRmuGrnSjOrzkQSsVerQA2DfUosUi
-	Jl+oeiRDTITsgzvCUcRe47AV1Z/EgKfjgPK6E3DU2A5Hk1zCAt0bcJvhmoaAXUU8YK3Q
-	4BeWHjKZwS1tAbJIXMhlsEDZ4y/TsnloZgA4fl88r9A7WFiqu2PW2rZb9LdgcDE9A17A
-	S+MXSRNCZvlyTUaRXdO57EuTNw8XsLMlQM95EwFDcOgoAxkZ6RoofDxyXY0VhGu0uQiX
-	s3xpweosJZbwIZNI8cf8Wk9Jlgv6xYKkuozo3Lwlak/7jHGzp2xUFiFK1EmZzIwh4zp4
-	8siw==
-X-Gm-Message-State: ALoCoQkK9WQhU81J7GR3ugYK3D1bedd7SYX1XPJ3i13MjOHF1PbHijRRoVJTac9SkKfd2bi84o0d
-X-Received: by 10.140.25.37 with SMTP id 34mr68414744qgs.60.1401891895017;
-	Wed, 04 Jun 2014 07:24:55 -0700 (PDT)
+	Wed,  4 Jun 2014 16:47:58 +0000 (UTC)
+Received: from [85.158.140.195:4908] by server-6.bemta-14.messagelabs.com id
+	63/92-13066-EBD4F835; Wed, 04 Jun 2014 16:47:58 +0000
+X-Env-Sender: nick.lewis@usa.g4s.com
+X-Msg-Ref: server-6.tower-193.messagelabs.com!1401900477!17069219!1
+X-Originating-IP: [89.206.228.155]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 10093 invoked from network); 4 Jun 2014 16:47:58 -0000
+Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
+	(89.206.228.155)
+	by server-6.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
+	4 Jun 2014 16:47:58 -0000
+Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
+	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 4 Jun 2014
+	17:47:57 +0100
+From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 4 Jun 2014 17:47:35 +0100
+Thread-Topic: [oe] Fix for libxml++_ptest.patch with out-of-source build
+Thread-Index: Ac9pK4mbW4sFdOQsQFSIp5+yt9wqjgAI8dsAACW+3fAEgpfNAAEG64AA
+Message-ID: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45D82@GBTWK10E001.Technology.local>
+References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0@GBTWK10E001.Technology.local>
+	<2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
+	<AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC6@GBTWK10E001.Technology.local>
+	<cd2e157cc4a741518317749d2f11a4ed@BL2PR04MB852.namprd04.prod.outlook.com>
+In-Reply-To: <cd2e157cc4a741518317749d2f11a4ed@BL2PR04MB852.namprd04.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.140.101.77 with HTTP; Wed, 4 Jun 2014 07:24:34 -0700 (PDT)
-In-Reply-To: <20140604125205.GS2426@jama>
-References: <cover.1399993010.git.valentin.popa@intel.com>
-	<CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
-	<20140604125205.GS2426@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 4 Jun 2014 15:24:34 +0100
-Message-ID: <CAJTo0Lab7wwV2NN=NSMqLYTxeW=_CfeGwvETkDCh4emwVRLxFg@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH 0/3] mesa upgrade
+Subject: Re: Fix for libxml++_ptest.patch with out-of-source build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,25 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 14:24:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Jun 2014 16:48:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 4 June 2014 13:52, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Sorry for hi-jacking the thread, but since today even the older 9.2.5 is
-> failing to find native python-libxml2
+>It still does not apply
 >
-> config.log:
-> configure:8059: checking for python2
-> configure:8075: found
-> /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/python-native/python2
-> configure:8086: result: python2
-> configure:8103: checking python2 module: libxml2
-> configure:8112: result: no
-> configure:8118: error: failed to find required module libxml2
->
-> Any idea why it started to fail now?
+>see http://patchwork.openembedded.org/patch/72639/
 
-Great.  Can you share the config.log?
+Martin
 
-Ross
+Given the problems submitting a patch from my mail client would it be possi=
+ble please to make a manual edit
+
+s|cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples|cd $(srcdir) && cp -=
+-parents $(dist_noinst_DATA) $(DESTDIR)/examples
+
+(not as in patch 72639) and
+
+s|cp ../macros/test-driver $(DESTDIR)/macros|cp $(srcdir)/../macros/test-dr=
+iver $(DESTDIR)/macros
+
+(as per patch 72639)
+--
+Nick
+
+The details of this company are as follows:
+G4S Technology Limited, Registered Office: Challenge House, International D=
+rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
+38.
+
+This communication may contain information which is confidential, personal =
+and/or privileged.
+
+It is for the exclusive use of the intended recipient(s).
+If you are not the intended recipient(s), please note that any distribution=
+, forwarding, copying or use of this communication or the information in it=
+ is strictly prohibited.
+
+Any personal views expressed in this e-mail are those of the individual sen=
+der and the company does not endorse or accept responsibility for them.
+
+Prior to taking any action based upon this e-mail message, you should seek =
+appropriate confirmation of its authenticity.
+
+This e-mail has been scanned for all viruses by MessageLabs.
 
