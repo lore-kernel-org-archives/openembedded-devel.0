@@ -1,43 +1,41 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta14.messagelabs.com (mail1.bemta14.messagelabs.com
-	[193.109.254.110])
-	by mail.openembedded.org (Postfix) with ESMTP id A7F696B7A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 16:47:58 +0000 (UTC)
-Received: from [85.158.140.195:4908] by server-6.bemta-14.messagelabs.com id
-	63/92-13066-EBD4F835; Wed, 04 Jun 2014 16:47:58 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-6.tower-193.messagelabs.com!1401900477!17069219!1
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10093 invoked from network); 4 Jun 2014 16:47:58 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-6.tower-193.messagelabs.com with RC4-SHA encrypted SMTP;
-	4 Jun 2014 16:47:58 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Wed, 4 Jun 2014
-	17:47:57 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Jun 2014 17:47:35 +0100
-Thread-Topic: [oe] Fix for libxml++_ptest.patch with out-of-source build
-Thread-Index: Ac9pK4mbW4sFdOQsQFSIp5+yt9wqjgAI8dsAACW+3fAEgpfNAAEG64AA
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45D82@GBTWK10E001.Technology.local>
-References: <AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC0@GBTWK10E001.Technology.local>
-	<2c12c9ff705a424c99db08f7cfa57c0a@BL2PR04MB852.namprd04.prod.outlook.com>
-	<AAE0766F5AF36B46BAB7E0EFB92732063397EB4BC6@GBTWK10E001.Technology.local>
-	<cd2e157cc4a741518317749d2f11a4ed@BL2PR04MB852.namprd04.prod.outlook.com>
-In-Reply-To: <cd2e157cc4a741518317749d2f11a4ed@BL2PR04MB852.namprd04.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-pb0-f42.google.com (mail-pb0-f42.google.com
+	[209.85.160.42])
+	by mail.openembedded.org (Postfix) with ESMTP id DEBC66AF35;
+	Wed,  4 Jun 2014 17:12:09 +0000 (UTC)
+Received: by mail-pb0-f42.google.com with SMTP id md12so7299525pbc.29
+	for <multiple recipients>; Wed, 04 Jun 2014 10:12:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=f9mnGaV4zKyhIxQoNHWJbMPjW9g686ySLoUMA84+r00=;
+	b=cP7UDc/zAkMB/cuuy95wWuqyJCIEQLpq0OtLKntzy9cHpLAEcSif0rcmcznnMV7Kd8
+	jdqnoRM/8SRdbSdd0gPraJS9Xk3z4XwVlqoCGpcyoOqQ2erdznzfb3thxBBGgh0Tflql
+	BvIW6vUVroabyq7ePxc6s/xim6yDQDNvASCdvjsNat4tHJLCB+rlCAeKx5fAiKhkV0PL
+	23ZcQzFS++Q9O96Lp2a/ULsA7qpco9T6vtcuzEcgLT0hAkIpAcf5GSE/uWoNfHyvRu7d
+	RVw6acFvSnGF+SszFKM9pf44DvsIfGsP8itHCL7PQO8KXTypgDN3RbJtK1DvztjcGhgw
+	a2Sg==
+X-Received: by 10.69.17.230 with SMTP id gh6mr66709696pbd.0.1401901929863;
+	Wed, 04 Jun 2014 10:12:09 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	se3sm12115293pbb.80.2014.06.04.10.12.07 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Jun 2014 10:12:08 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 4 Jun 2014 19:12:20 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140604171220.GT2426@jama>
+References: <cover.1399993010.git.valentin.popa@intel.com>
+	<CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
+	<20140604125205.GS2426@jama>
+	<CAJTo0Lab7wwV2NN=NSMqLYTxeW=_CfeGwvETkDCh4emwVRLxFg@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: Fix for libxml++_ptest.patch with out-of-source build
+In-Reply-To: <CAJTo0Lab7wwV2NN=NSMqLYTxeW=_CfeGwvETkDCh4emwVRLxFg@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH 0/3] mesa upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,50 +49,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 16:48:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 04 Jun 2014 17:12:10 -0000
+X-Groupsio-MsgNum: 50181
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="EsfvRFssnM00t552"
+Content-Disposition: inline
+
+--EsfvRFssnM00t552
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
->It still does not apply
->
->see http://patchwork.openembedded.org/patch/72639/
+On Wed, Jun 04, 2014 at 03:24:34PM +0100, Burton, Ross wrote:
+> On 4 June 2014 13:52, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > Sorry for hi-jacking the thread, but since today even the older 9.2.5 is
+> > failing to find native python-libxml2
+> >
+> > config.log:
+> > configure:8059: checking for python2
+> > configure:8075: found
+> > /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/python-nativ=
+e/python2
+> > configure:8086: result: python2
+> > configure:8103: checking python2 module: libxml2
+> > configure:8112: result: no
+> > configure:8118: error: failed to find required module libxml2
+> >
+> > Any idea why it started to fail now?
+>=20
+> Great.  Can you share the config.log?
 
-Martin
+This is from config.log, do you want whole file?
 
-Given the problems submitting a patch from my mail client would it be possi=
-ble please to make a manual edit
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-s|cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples|cd $(srcdir) && cp -=
--parents $(dist_noinst_DATA) $(DESTDIR)/examples
+--EsfvRFssnM00t552
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-(not as in patch 72639) and
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
 
-s|cp ../macros/test-driver $(DESTDIR)/macros|cp $(srcdir)/../macros/test-dr=
-iver $(DESTDIR)/macros
+iEYEARECAAYFAlOPU3QACgkQN1Ujt2V2gBzb+gCbBXcjewtDdLtZ3TJecVgdf99K
+dbgAnRTNHDaF/LCjflu7lZbznQYzWt1B
+=flRK
+-----END PGP SIGNATURE-----
 
-(as per patch 72639)
---
-Nick
-
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
-
+--EsfvRFssnM00t552--
