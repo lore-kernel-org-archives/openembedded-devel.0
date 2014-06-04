@@ -1,38 +1,36 @@
-Return-Path: <eduardo@monkey.io>
-Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
-	[74.125.82.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 1096960E23
+Return-Path: <akuster@mvista.com>
+Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A1B16FA7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Jun 2014 19:53:54 +0000 (UTC)
-Received: by mail-we0-f182.google.com with SMTP id t60so7494016wes.27
+	Wed,  4 Jun 2014 01:08:23 +0000 (UTC)
+Received: by mail-pd0-f173.google.com with SMTP id v10so5355556pde.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jun 2014 12:53:54 -0700 (PDT)
+	Tue, 03 Jun 2014 18:08:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=zey79Umk2hzvcCBzsGAHfXzuhGIo8ifZf4H/Wap5mlA=;
-	b=eBfsgQ5QhwAWQRinZThDsN3mUPzeGMkOT2cAjgdtjkpHQ2bOO03353jsdM0DGZsgnE
-	9j2JeoFapIL961THd8HZ6sd2YvmB8sz/CtH+QbCXzefxoGW/4kPAHFv8Vzjq/yEVn48q
-	R0pOYoAELtdbJFRx1paQ3cWF3Br5PD2oNgZhF2u4Eu9NIbs8vvYNmecFi7YDnsbHHlhh
-	tbTgiWL6LhZjuxwT/RM1pU6wkKiYzQdXKdgs7gLYcQu8cj7/4v07lLYU+tkZpNDpARiZ
-	HDU3t18uXn04F2L9ZvW+XXg9DaKZ1tVQWjEJyXOZNMwhjdmL0sEr0+NKQFd6CY0/Luw8
-	PEBg==
-X-Gm-Message-State: ALoCoQnV/y+JUWTBxKxPDUUXFOqxzh1lAnYDbPx8dGAP4/a1xhsoceBHSrnxMZpY79zP/5k10xde
-MIME-Version: 1.0
-X-Received: by 10.194.57.225 with SMTP id l1mr64744985wjq.25.1401825234257;
-	Tue, 03 Jun 2014 12:53:54 -0700 (PDT)
-Received: by 10.194.88.135 with HTTP; Tue, 3 Jun 2014 12:53:54 -0700 (PDT)
-X-Originating-IP: [186.32.221.184]
-In-Reply-To: <lmjpkv$ajq$1@ger.gmane.org>
-References: <1401743690-25537-1-git-send-email-eduardo@monkey.io>
-	<lmjpkv$ajq$1@ger.gmane.org>
-Date: Tue, 3 Jun 2014 13:53:54 -0600
-Message-ID: <CAEaCVQj5v-rW5--wrWMb4NuT-PBa4xf59UjDUwdhGVFnNdgYNQ@mail.gmail.com>
-From: Eduardo Silva <eduardo@monkey.io>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] [meta-webserver]: add Monkey HTTP Server.
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=Xv9jW914+Jlbr7sgxnQywUKZO8PB5NmP2L7xc75oJGQ=;
+	b=ZPvKQ8wqnIHyYhiZkRvLry9xJ5ms/ngC+90wtEDHO5i5FKU/kxxWPJa9LthQ7s2rmN
+	/q6eT7WyYXwLinPWb3U1zGwZvSfn5rm0zcHopmixBLzQ7MiATv9J3MmC6HGVlmYDzN5B
+	tNKkkjsY+JmCQMllBKc+/klZUKDcirz7td8ZLbMvOrEnA/k/jmvOilWvYma0WYiW4RZI
+	9ivderlmktY83SBEDRGMbe5YFwbjFeHQdxyWZx6Op5XhBTE805mJYpC0rQ/VIaMcBcrM
+	z1515bp6/vMPc7V3Lb1gzPzcVnkmMnwKMCy+aXee4K9DxItbZ5St0ZpohyzUXQcHaCGb
+	7lbA==
+X-Gm-Message-State: ALoCoQmIgZVGID0MWScqSBl5Y0XQKWZ6FKD6XyloE9CArlP9FZEigeYe9E1lrgUPgUBMzpFcUkGz
+X-Received: by 10.69.26.103 with SMTP id ix7mr55772317pbd.41.1401844103846;
+	Tue, 03 Jun 2014 18:08:23 -0700 (PDT)
+Received: from Pahoa2.mvista.com (64.2.3.195.ptr.us.xo.net. [64.2.3.195])
+	by mx.google.com with ESMTPSA id rc3sm2880305pbc.5.2014.06.03.18.08.22
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 03 Jun 2014 18:08:23 -0700 (PDT)
+From: Armin Kuster <akuster@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Jun 2014 18:08:20 -0700
+Message-Id: <1401844100-579-1-git-send-email-akuster@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] tipcutils B!=S fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,61 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jun 2014 19:54:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Jun 2014 01:08:25 -0000
 
-On Tue, Jun 3, 2014 at 12:23 AM, Koen Kooi <koen@dominion.thruhere.net>
-wrote:
+The do_install_append was trying to install from src location and not the build.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Eduardo Silva schreef op 02-06-14 23:14:
-> > This patch add the initial recipe for Monkey HTTP Server v1.5.0.
-> >
-> > Signed-off-by: Eduardo Silva <eduardo@monkey.io> ---
-> > .../recipes-httpd/monkey/monkey_1.5.0.bb           | 36
-> > ++++++++++++++++++++++ 1 file changed, 36 insertions(+) create mode
-> > 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
-> >
-> > diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
-> > b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb new file mode
-> > 100644 index 0000000..25a9530 --- /dev/null +++
-> > b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb @@ -0,0 +1,36 @@
-> > +SUMMARY = "Fast and Lightweight HTTP Server for Linux" +HOMEPAGE =
-> > "http://monkey-project.com" +BUGTRACKER =
-> > "https://github.com/monkey/monkey/issues" + +LICENSE = "Apache-2.0"
-> > +LIC_FILES_CHKSUM =
-> > "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93" + +SECTION = "net"
-> > + +SRC_URI =
-> > "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz"
-> > +SRC_URI[md5sum] = "9123fc371334621fde1c060ab17adcd3" +SRC_URI[sha256sum]
-> > = "f7a5e4839822750930a723f63a4edbf700e0fb8299a4b3637bd8bab5b1d098a7" +
-> > +EXTRA_OECONF = " \ +             --plugdir=${libdir}/monkey/ \ +
-> > --logdir=/var/log/monkey/ \ +             --pidfile=/var/run/monkey.pid
-> > \ +             --default-user=www-data \ +
-> > --datadir=/var/www/monkey/ \
->
-> /var -> ${localstatedir} ?
->
->
-> > +             --sysconfdir=${sysconfdir}/monkey/ \ +
-> > --enable-plugins=* \ +             --disable-plugins=polarssl \ +
-> > --debug \ +             --malloc-libc \ +" + +inherit autotools pkgconfig
-> > update-rc.d systemd + +INITSCRIPT_NAME = "monkey" +INITSCRIPT_PARAMS =
-> > "defaults 70" + +SYSTEMD_SERVICE_${PN} = "monkey.service" + +FILES_${PN}
-> > += "/www" + +CONFFILES_${PN} = "${sysconfdir}/monkey/"
-> >
->
->
-thanks to all for the feedback!.
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Before to submit a new patch, would you please verify if it now looks
-correct now ?:
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+index ee56952..fe0e484 100644
+--- a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+@@ -20,15 +20,15 @@ do_install_append() {
+            multicast_demo stream_demo"
+     for i in $demos;do
+         install -d ${D}/opt/tipcutils/demos/$i
+-        install ${S}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
+-        install ${S}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
++        install ${B}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
++        install ${B}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
+     done
+     install -d ${D}/opt/tipcutils/demos/inventory_sim
+-    install ${S}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
++    install ${B}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
+ 
+     install -d ${D}/opt/tipcutils/ptts
+-    install ${S}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
+-    install ${S}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
++    install ${B}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
++    install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
+ 
+     install -d ${D}${sysconfdir}
+     cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
+-- 
+1.9.1
 
-   https://github.com/monkey/monkey-yocto/blob/master/monkey/monkey_1.5.0.bb
-
-if it's ok i will submit a new one.
-
-best
 
