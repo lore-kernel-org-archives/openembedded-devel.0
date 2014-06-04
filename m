@@ -1,36 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E8E765D70
+Return-Path: <akuster@mvista.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id DB8866B8BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 23:54:06 +0000 (UTC)
-Received: by mail-yh0-f43.google.com with SMTP id v1so216005yhn.30
+	Wed,  4 Jun 2014 23:59:53 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id r10so222123pdi.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 16:54:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=3/FeFlbMqAtdxIaolBbMDyK9sYEsNykLtrPfjoli2kc=;
-	b=EfuwmaBFdep2z9ko+koLaUJzaWFlbRixQCnjlO9Mh6rPcE+uHSqkbdQd6sr2iZJBU8
-	SO2rZLF8rw/Qfb97n7qOJ45TUW3bXIVF8e5jJhBVX6qqIKNczOnFAWbWYlsVLpoFwLoL
-	krNk29YtnErNfYwQRBo5+DY1D6s12u5K4izNh/rtq+lX7F7Rv8txuph+dPx8OIxoDZdv
-	WfHe7Pa/j8L3SkXXDiQZ3xqMwYhBDWb/plOKg7G9uX0HY9qjpp7F6ibLlZ9iItskbWt1
-	kCt82p9NZI1e1tm82SWRX49uAMKDZbsmzxoJnFrbzJ+Kpi3Hiywfm/HkqqHZLLpTrmzN
-	5fzA==
-MIME-Version: 1.0
-X-Received: by 10.236.134.74 with SMTP id r50mr65409142yhi.2.1401926047664;
-	Wed, 04 Jun 2014 16:54:07 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.166.213 with HTTP; Wed, 4 Jun 2014 16:54:07 -0700 (PDT)
-In-Reply-To: <1401873504-32120-2-git-send-email-Martin.Jansa@gmail.com>
-References: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
-	<1401873504-32120-2-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 4 Jun 2014 20:54:07 -0300
-X-Google-Sender-Auth: Gk3lsRacncMhdvBMkbFYETDDRlM
-Message-ID: <CAP9ODKqc8j-z-kdzorfaMtUXMA1GcNWBEY2k5VxvLQTZsUjwbA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/7] efl, elementary: upgrade to 1.10.0
+	Wed, 04 Jun 2014 16:59:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=aFTfEcmUiI5GUJTJCZgpkaqKQJirfcoUqc/hGLOnoEM=;
+	b=SVSVKYWvACmcYymMO3vi/AZb3hEZg+eOYb8wQXcK3ZQRgdVlGh6CITu+kZdy0MKiWq
+	Nnoj3bZ8l4dW76dk5+ZX64Ams5MAmRlC/RrWt1LJEcLJ85QBiju52tJeL6bxS7PwLuAU
+	vfoSED5xbWVurkW0rkFKb3cLrEIkKthlv+zA71kTSuy+OE5W2spoWMFoUfqe0AnqiH3U
+	B56CPi/9joGn9QYGLauOYS33conutz9dX87+wCpCnsFvLDHzoIFvk2eJxsLWgyK4079C
+	RHUdpj6jX1X+g+oCkq1/OMdadhFDlbabBL50h+zbTH+64Yd7w22suesQZ06DX7TpGzOD
+	fBJg==
+X-Gm-Message-State: ALoCoQlywrtwj3ZYF3wE9bNG1fPevLT5DJ+3dUmZZ0Ys523FaY4csgtJnV5Il1opuzwO5ZOzaV70
+X-Received: by 10.69.31.202 with SMTP id ko10mr64768531pbd.23.1401926394630;
+	Wed, 04 Jun 2014 16:59:54 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55]) by mx.google.com with ESMTPSA id
+	or4sm15138841pbb.17.2014.06.04.16.59.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 04 Jun 2014 16:59:54 -0700 (PDT)
+From: Armin Kuster <akuster@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Jun 2014 16:59:51 -0700
+Message-Id: <1401926391-19770-1-git-send-email-akuster@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] V2 radvd: fix install issue for S!=B
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 23:54:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 04 Jun 2014 23:59:59 -0000
 
-On Wed, Jun 4, 2014 at 6:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * announcement:
->   https://phab.enlightenment.org/phame/post/view/59/
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Some files are in "S" that are needed for install.
 
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Can this to be split?
-
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
+index 9e19401..d8b3893 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ b/meta-networking/recipes-daemons/radvd/radvd.inc
+@@ -34,7 +34,7 @@ do_install_append () {
+     install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/volatiles.03_radvd
+     # Documentation
+     for i in radvd.conf.example README; do \
+-        install -m 0644 $i ${D}${docdir}/radvd; \
++        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
+     done
+ }
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
