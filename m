@@ -1,40 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B53B6B3A4
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E8E765D70
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 23:52:46 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id l18so222694wgh.11
+	Wed,  4 Jun 2014 23:54:06 +0000 (UTC)
+Received: by mail-yh0-f43.google.com with SMTP id v1so216005yhn.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 16:52:46 -0700 (PDT)
+	Wed, 04 Jun 2014 16:54:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8swNCZbPy5n3qzH/aXgmgT/rg+kHe8ae5nB9lE7m8VY=;
-	b=eQc5l0Cm29vAkOenKY2sFFz2B98qryzxaw24thsZ8aVO26shI7qGteqXVwOB7NH/U9
-	PPwUye7fbgQBk74maNI+okksBHb0cuvTwgMzKDDOkC8Mi9NAwjKR8C6velqj2j5wKKsu
-	4OFttOfnaXbWguqqmcSP8ECohS/xKvYwDZaWo0nbKk+ayvkjZnKQvinCULQu1z1JfUuW
-	X6Bxr0eeX0lHR2TwMp52IuQ/01Hl+E+xNbQo1iUfqSUbPd/qCmHlfvraPa7UNw5QhVoT
-	KoI3SJ5aQEaV1ZDVNUQXHCJTvDzhtsHGEf3DXKsGTpX2PuvU0VpqitSH+ShWabxo4sJX
-	DahA==
-X-Received: by 10.14.246.68 with SMTP id p44mr6757805eer.8.1401925966679;
-	Wed, 04 Jun 2014 16:52:46 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	z7sm9729520eeo.42.2014.06.04.16.52.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Jun 2014 16:52:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 5 Jun 2014 01:53:00 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140604235300.GV2426@jama>
-References: <1401878650-3362-1-git-send-email-chmorgan@gmail.com>
-	<CAP9ODKoqUaswvNbhR02aX16EgKLmv6g6ws1Lkgpb00Gdmctg=g@mail.gmail.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=3/FeFlbMqAtdxIaolBbMDyK9sYEsNykLtrPfjoli2kc=;
+	b=EfuwmaBFdep2z9ko+koLaUJzaWFlbRixQCnjlO9Mh6rPcE+uHSqkbdQd6sr2iZJBU8
+	SO2rZLF8rw/Qfb97n7qOJ45TUW3bXIVF8e5jJhBVX6qqIKNczOnFAWbWYlsVLpoFwLoL
+	krNk29YtnErNfYwQRBo5+DY1D6s12u5K4izNh/rtq+lX7F7Rv8txuph+dPx8OIxoDZdv
+	WfHe7Pa/j8L3SkXXDiQZ3xqMwYhBDWb/plOKg7G9uX0HY9qjpp7F6ibLlZ9iItskbWt1
+	kCt82p9NZI1e1tm82SWRX49uAMKDZbsmzxoJnFrbzJ+Kpi3Hiywfm/HkqqHZLLpTrmzN
+	5fzA==
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoqUaswvNbhR02aX16EgKLmv6g6ws1Lkgpb00Gdmctg=g@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] Remove dfu-util svn recipes, these point at deprecated svn repositories, dfu-util uses git now
+X-Received: by 10.236.134.74 with SMTP id r50mr65409142yhi.2.1401926047664;
+	Wed, 04 Jun 2014 16:54:07 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.166.213 with HTTP; Wed, 4 Jun 2014 16:54:07 -0700 (PDT)
+In-Reply-To: <1401873504-32120-2-git-send-email-Martin.Jansa@gmail.com>
+References: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
+	<1401873504-32120-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 4 Jun 2014 20:54:07 -0300
+X-Google-Sender-Auth: Gk3lsRacncMhdvBMkbFYETDDRlM
+Message-ID: <CAP9ODKqc8j-z-kdzorfaMtUXMA1GcNWBEY2k5VxvLQTZsUjwbA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/7] efl, elementary: upgrade to 1.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,41 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 23:52:47 -0000
-X-Groupsio-MsgNum: 50194
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PjLo8P/CG6vpADRe"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Jun 2014 23:54:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
---PjLo8P/CG6vpADRe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jun 4, 2014 at 6:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * announcement:
+>   https://phab.enlightenment.org/phame/post/view/59/
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-On Wed, Jun 04, 2014 at 08:38:35PM -0300, Otavio Salvador wrote:
-> On Wed, Jun 4, 2014 at 7:44 AM, Chris Morgan <chmorgan@gmail.com> wrote:
-> > Signed-off-by: Chris Morgan <chmorgan@gmail.com>
->=20
-> Please rewrite the commitlog to adhere to
-> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
 
-In this case I've updated both commit messages when cherry-picking them
-to master-next, so no need to resend, but as Otavio says, please use
-better commit messages next time.
+Can this to be split?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---PjLo8P/CG6vpADRe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iEYEARECAAYFAlOPsVwACgkQN1Ujt2V2gBzUSACePy/FWLNNKyDfVVh+06Tx4mP/
-hGcAnjCRV5jffgRTzbMMeyOFrh5pqYih
-=tNJt
------END PGP SIGNATURE-----
-
---PjLo8P/CG6vpADRe--
