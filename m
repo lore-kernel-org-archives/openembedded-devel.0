@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E4856ABDA
+Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C2426ABDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jun 2014 09:18:18 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id k14so8102117wgh.19
+	Wed,  4 Jun 2014 09:18:19 +0000 (UTC)
+Received: by mail-we0-f179.google.com with SMTP id q59so8288869wes.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jun 2014 02:18:19 -0700 (PDT)
+	Wed, 04 Jun 2014 02:18:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Z7kay4Lg6S5LfGX1vaGOEQLe00zW+TeKfPMOJ5mRXRI=;
-	b=qPrscS5aD9xLeCoaw1ARpqk+J1D59ihztZC7y8jvGUnhPRt0jzMZ+AwgQmqzTe6Fxl
-	zZ7FklX0dcOUM1/c4YVXLC5eLMPiYrCIppnzDvZT6nVO8IzjIGTsd7F3Yn8KIg/4E7a3
-	JxMGs9PIEnYjeBojLYaR0hGT3iRwMoNbmn1VeAzZfGhXXim3Ne0UOmk8HAbx18mMk4zE
-	wA2efoBc65MmRmp25tnqVYojf8gVVLnfsXahdiNEjutPZYkJ6wVFYEv9uQt4dCGONuN0
-	03gJAxB8RZfG7Yyd/jC19ziaqR8MmBWI0uEG6P3vkHhM/VM5FanxG+XSMSTvzZ+QHV9D
-	T0tQ==
-X-Received: by 10.180.221.229 with SMTP id qh5mr3203612wic.33.1401873499334;
-	Wed, 04 Jun 2014 02:18:19 -0700 (PDT)
+	bh=ToHXLeSMq2+RSHZYfnyfkLDSVLeL+Wk/4tVZlbJ9Hwk=;
+	b=sKAD7WM9yzizQdz81U/txNJXhBZNZU+pBmtaj/wiH8/WUpPFiGQ6WwNLKOuJTqEMxb
+	rweDOpSPeftS3VO0gu7xFPqVmUBdQkYOCivMseEGa/CO+6ulf9YqOc/FL6bZeh8occSR
+	wORDDZuNJm9mLwzjKH+ioHHcsw0CLI1SnkAzcKx3Qdy6jFPaFn7QU45rxHEPcPPza0xr
+	81d1wvTIMaDT7QdJZF4ZhCuDyDMALOBx+fXr8+XLZJy6SuWP780R/IqeTyViGQhSzgDr
+	42fuA7gwZ888KqO4y3edBuadPl3WjuVR0TYFKs9UT8qy2D/1U7lEqTuMPnllGletb/6r
+	jsSg==
+X-Received: by 10.180.221.229 with SMTP id qh5mr3203781wic.33.1401873500491;
+	Wed, 04 Jun 2014 02:18:20 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	cz8sm2945991wjc.11.2014.06.04.02.18.18 for <multiple recipients>
+	b19sm8571316wic.5.2014.06.04.02.18.19 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Jun 2014 02:18:18 -0700 (PDT)
+	Wed, 04 Jun 2014 02:18:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jun 2014 11:18:22 +0200
-Message-Id: <1401873504-32120-5-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed,  4 Jun 2014 11:18:23 +0200
+Message-Id: <1401873504-32120-6-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1401873504-32120-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/7] luajit: upgrade to 2.0.3, add native support
+Subject: [meta-oe][PATCH 6/7] efl: use luajit by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,72 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jun 2014 09:18:19 -0000
+X-List-Received-Date: Wed, 04 Jun 2014 09:18:22 -0000
 
-* http://luajit.org/changes.html says:
-  This release has the new PS4 port and various important bugfixes over
-  2.0.2 - an update is recommended.
-* add native support (used by efl-native)
-* drop lua dependency, it doesn't need lua to be built before luajit
-* LIC_FILES_CHKSUM change is only from copyright year update
-  < Copyright (C) 2005-2013 Mike Pall. All rights reserved.
-  ---
-  > Copyright (C) 2005-2014 Mike Pall. All rights reserved.
+* lua-old is less tested and supported by upstream and luajit
+  seems to work OK with 1.10.0
+* luajit will be hard dependency with elua
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../luajit/{luajit_2.0.2.bb => luajit_2.0.3.bb}         | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-devtools/luajit/{luajit_2.0.2.bb => luajit_2.0.3.bb} (76%)
+ meta-efl/recipes-efl/efl/efl.inc | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
-similarity index 76%
-rename from meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb
-rename to meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
-index b719b48..de3a40b 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.2.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
-@@ -1,14 +1,13 @@
- SUMMARY = "Just-In-Time Compiler for Lua"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1793ef52a5d577794cd886a501a7f861"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=97b6446bbf9d55616838f821585c5978"
- HOMEPAGE = "http://luajit.org"
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index 752e3b7..deca4bf 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -44,8 +44,8 @@ EXTRA_OECONF_append_class-native = " \
+     --disable-image-loader-xpm \
+ "
  
--DEPENDS += "lua5.1"
--SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz;name=tarball \
-+SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
-            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
--          "
--SRC_URI[tarball.md5sum] = "112dfb82548b03377fbefbba2e0e3a5b"
--SRC_URI[tarball.sha256sum] = "c05202974a5890e777b181908ac237625b499aece026654d7cc33607e3f46c38"
-+"
-+SRC_URI[md5sum] = "f14e9104be513913810cd59c8c658dc0"
-+SRC_URI[sha256sum] = "55be6cb2d101ed38acca32c5b1f99ae345904b365b642203194c585d27bebd79"
+-PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio lua-old"
+-PACKAGECONFIG_class-native = "lua-old"
++PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio luajit"
++PACKAGECONFIG_class-native = "luajit"
  
- SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
+ # sort of tri-state
+ PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
+@@ -55,14 +55,8 @@ PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
+ PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+-# we don't have luajit-native now, so use old lua for -native and
+-# for target it's also currently failing with luajit
+-# | /OE/build/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/core2-64-oe-linux/gcc/x86_64-oe-linux/4.8.2/ld: /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libluajit-5.1.a(lj_err.o): relocation R_X86_64_32S against `.rodata' can not be used when making a shared object; recompile with -fPIC
+-# | /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libluajit-5.1.a: error adding symbols: Bad value
+-# | collect2: error: ld returned 1 exit status
+-# | Makefile:12007: recipe for target 'lib/edje/libedje.la' failed
+ PACKAGECONFIG[luajit] = "--disable-lua-old,--enable-lua-old,luajit"
+-PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua5.1"
++PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua"
  
-@@ -16,6 +15,8 @@ S = "${WORKDIR}/LuaJIT-${PV}"
- 
- inherit pkgconfig binconfig
- 
-+BBCLASSEXTEND = "native"
-+
- do_configure_prepend() {
-     sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
-     sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
-@@ -35,9 +36,9 @@ do_compile () {
- 
- do_install () {
-     oe_runmake 'DESTDIR=${D}' install
--    rmdir ${D}${datadir}/lua/5.1 \
-+    rmdir ${D}${datadir}/lua/5.* \
-           ${D}${datadir}/lua \
--          ${D}${libdir}/lua/5.1 \
-+          ${D}${libdir}/lua/5.* \
-           ${D}${libdir}/lua
- }
- 
+ # new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
+ do_configure_prepend_class-native() {
 -- 
 2.0.0
 
