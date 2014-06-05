@@ -1,37 +1,32 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id A01606B7F9
+Return-Path: <blloyd@familyhonor.net>
+Received: from mho-01-ewr.mailhop.org (mho-03-ewr.mailhop.org [204.13.248.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C5B3F6B711
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jun 2014 13:38:06 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id g10so1089834pdj.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jun 2014 06:38:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=NXLnLwEzPpDz7dD6VUUVKfrjiaisqnCqTPwVbwg06xE=;
-	b=JxVVafGWz7aGJnVP1SBAPLGY4JPWgKneiZ3IJOEG+nh2t/j3CBPX1ZtOvIk02TvG7S
-	i59/br8CKlb5OMKlJ8HB2dZYahdjxwZWlRZ3KthAu/eW1IWyIZrQ8tkr4K7pcMy2w9AL
-	dS425LX8T1E54vvgZ1ScpLivelSqQTvLKcxhcmGwIABF4bBnMaV2yI/WTUymKM+ymA67
-	c9ts16kehnNCjxXjCaKs2a9VzNvcFQUiUjMsiwX4WTR1Lhd7AMNx3nO9DaooJVvc9AiU
-	M6/HZNQ8YCHfaI2eAKMMsfi0rByOZTW5hW1vY4OVIJ0nT9aOn+QUiIralHMrYWa++fUF
-	L2Vw==
-X-Gm-Message-State: ALoCoQnBvNDBVqCjCmmnwpR0DV6P5+PJmH3wNHtZLD8Xpy3wvf3oq8RPxqbCUQmwTVKDra7aF+YW
-X-Received: by 10.68.194.229 with SMTP id hz5mr75738000pbc.91.1401975486797;
-	Thu, 05 Jun 2014 06:38:06 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-98-239-95-55.hsd1.ca.comcast.net.
-	[98.239.95.55]) by mx.google.com with ESMTPSA id
-	or4sm23129985pbb.17.2014.06.05.06.38.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 05 Jun 2014 06:38:05 -0700 (PDT)
-From: Armin Kuster <akuster@mvista.com>
+	Thu,  5 Jun 2014 15:10:39 +0000 (UTC)
+Received: from [98.142.68.106] (helo=lloydserv.home.familyhonor.net)
+	by mho-01-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
+	id 1WsZJQ-000CmW-D0 for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Jun 2014 15:10:40 +0000
+Received: from omclinuxballt.devnet.ordermatic.net
+	(mobile-166-137-146-170.mycingular.net [166.137.146.170])
+	(authenticated bits=0)
+	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
+	s55FAOXP029125
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NO); Thu, 5 Jun 2014 10:10:35 -0500
+X-Mail-Handler: Dyn Standard SMTP by Dyn
+X-Originating-IP: 98.142.68.106
+X-Report-Abuse-To: abuse@dyndns.com (see
+	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
+	abuse reporting information)
+X-MHO-User: U2FsdGVkX1+Ib/qwBnhO9+hY5xTQfSBVmJvo6zGlUSY=
+From: Brian Lloyd <blloyd@familyhonor.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jun 2014 06:38:01 -0700
-Message-Id: <1401975481-22389-1-git-send-email-akuster@mvista.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] libop: compile issue files missing in B
+Date: Thu,  5 Jun 2014 10:09:02 -0500
+Message-Id: <1401980942-13018-1-git-send-email-blloyd@familyhonor.net>
+X-Mailer: git-send-email 1.9.0
+Subject: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +40,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jun 2014 13:38:08 -0000
+X-List-Received-Date: Thu, 05 Jun 2014 15:10:45 -0000
 
-needed to copy over a file from S to B.
+From: blloyd <blloyd@familyhonor.net>
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+The latest driver corrected a number of issues and compiles without warnings with just one patch.  The header included by the given patch is already included in the geode master line, so will not be be required after the next geode version release.
+
+Signed-off-by: Brian Lloyd <blloyd@familyhonor.net>
 ---
- meta-oe/recipes-support/libol/libol_0.3.18.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch | 11 +++++++++++
+ ...f86-video-geode_2.11.14.bb => xf86-video-geode_2.11.15.bb} |  6 ++++--
+ 2 files changed, 15 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
+ rename meta-oe/recipes-graphics/xorg-driver/{nonworking/xf86-video-geode_2.11.14.bb => xf86-video-geode_2.11.15.bb} (60%)
 
-diff --git a/meta-oe/recipes-support/libol/libol_0.3.18.bb b/meta-oe/recipes-support/libol/libol_0.3.18.bb
-index 429945f..7ad7ab5 100644
---- a/meta-oe/recipes-support/libol/libol_0.3.18.bb
-+++ b/meta-oe/recipes-support/libol/libol_0.3.18.bb
-@@ -8,3 +8,8 @@ SRC_URI[md5sum] = "cbadf4b7ea276dfa85acc38a1cc5ff17"
- SRC_URI[sha256sum] = "9de3bf13297ff882e02a1e6e5f6bf760a544aff92a9d8a1cf4328a32005cefe7"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
+new file mode 100644
+index 0000000..97d9d49
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
+@@ -0,0 +1,11 @@
++diff -up xf86-video-geode-2.11.14/src/geode_dcon.c.jx xf86-video-geode-2.11.14/src/geode_dcon.c
++--- xf86-video-geode-2.11.14/src/geode_dcon.c.jx	2012-11-24 05:01:15.000000000 -0500
+++++ xf86-video-geode-2.11.14/src/geode_dcon.c	2013-10-25 16:19:35.950234174 -0400
++@@ -29,6 +29,7 @@
++ 
++ /* Includes that are used by all drivers */
++ #include <xf86.h>
+++#include <xf86Modes.h>
++ #include <xf86_OSproc.h>
++ #include <compiler.h>
++ 
+diff --git a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
+similarity index 60%
+rename from meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
+index 2fdb210..07d2d9b 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
+@@ -4,8 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e7f3e39474aeea5af381a8e103dafc36"
+ SUMMARY = "X.org server -- Geode GX2/LX display driver"
+ PR = "${INC_PR}.0"
  
- inherit autotools binconfig
+-SRC_URI[md5sum] = "c9a4e1c5438240e5bdce332f92df9163"
+-SRC_URI[sha256sum] = "4c750b46c932934faa008919922f5ac8a572afcfe265ac8d7c203b8167a0cfcc"
++SRC_URI[md5sum] = "7dafd19e274c771539b6d4d459423ccf"
++SRC_URI[sha256sum] = "00db3bd697b32286eb0e42f5dbd7fcc8d7255dd11c299b1ee16a06a244868ff0"
 +
-+do_compile_prepend() {
-+
-+    install ${S}/utils/make_class.in ${B}/utils 
-+}
++SRC_URI += "file://xf86SetModeDefaultName.patch"
+ 
+ COMPATIBLE_HOST = "i.86.*-linux"
+ 
 -- 
-1.9.1
+1.9.0
 
 
