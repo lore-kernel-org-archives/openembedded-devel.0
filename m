@@ -1,24 +1,29 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BF486FA6A
+Return-Path: <yaoxp@cn.fujitsu.com>
+X-Greylist: delayed 617 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 06 Jun 2014 10:29:17 UTC
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2218460D67
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2014 10:12:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s56ACnjs011476
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  6 Jun 2014 10:29:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="4.98,988,1392134400"; d="scan'208";a="31562694"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Jun 2014 18:16:23 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id s56AIxKk026206
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 Jun 2014 03:12:49 -0700 (PDT)
-Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 6 Jun 2014 03:12:48 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
+	Fri, 6 Jun 2014 18:19:00 +0800
+Received: from FEDORA20.fnst.cn.fujitsu.com (10.167.226.101) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 6 Jun 2014 18:19:06 +0800
+From: Yao Xinpan <yaoxp@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Jun 2014 18:12:47 +0800
-Message-ID: <1402049567-9735-1-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Fri, 6 Jun 2014 06:18:48 -0400
+Message-ID: <1402049928-10313-2-git-send-email-yaoxp@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.4.2
 MIME-Version: 1.0
-Subject: [PATCH][V2] python-m2crypto: avoid swig problem
+X-Originating-IP: [10.167.226.101]
+Subject: [meta-oe][PATCH] lvm2.inc: EXTRA_OECONF is been overwrited.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,64 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 10:12:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 Jun 2014 10:29:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Swig is used to generate C source and it has trouble processing opensslconf.h
-sometimes. So, we help it out when multilib variants exist.
+EXTRA_OECONF has been assigned before =E2=80=98EXTRA_OECONF =3D "--with-usr=
+libdir=3D${libdir}"=E2=80=99.
+collaps the 2 lines into a single EXTRA_OECONF.
 
-For native builds, the variant header will never exist.
-
-Specific multi-lib header files might be named *-32.h or *-n32.h, so we check
-for both names. We also might check for *-n64.h although that will never exist.
-It appears that *-o??.h will never exist, so we don't check for that.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Signed-off-by: Yao Xinpan <yaoxp@cn.fujitsu.com>
 ---
- .../python/python-m2crypto_0.21.1.bb               |   23 +++++++++++++++++++-
- 1 file changed, 22 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-index 21c0269..67ec921 100644
---- a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "A Python crypto and SSL toolkit"
- HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
- 
--DEPENDS = "openssl swig-native"
-+DEPENDS = "openssl swig-native python"
- 
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
-@@ -20,4 +20,25 @@ SWIG_FEATURES_x86-64 = "-D__x86_64__"
- SWIG_FEATURES ?= ""
- export SWIG_FEATURES
- 
-+# Get around a problem with swig, but only if the
-+# multilib header file exists.
-+#
-+do_compile_prepend() {
-+    if [ "${SITEINFO_BITS}" = "64" ];then
-+        bit="64"
-+    else
-+        bit="32"
-+    fi
-+
-+    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "$i"
-+        done
-+    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "$i"
-+        done
-+    fi
-+}
-+
- BBCLASSEXTEND = "native"
--- 
-1.7.9.5
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-suppor=
+t/lvm2/lvm2.inc
+index c6a9ec0..5f77fe6 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -28,6 +28,7 @@ EXTRA_OECONF =3D "--with-user=3D \
+                 --enable-pkgconfig \
+                 --enable-dmeventd \
+                 --with-udev-prefix=3D \
++                --with-usrlibdir=3D${libdir} \
+ "
+=20
+ PACKAGECONFIG +=3D "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinu=
+x', '', d)}"
+@@ -47,4 +48,3 @@ FILES_${PN} +=3D "${libdir}/device-mapper/*.so ${base_lib=
+dir}/udev"
+ FILES_${PN}-dbg +=3D "${libdir}/device-mapper/.debug"
+=20
+ RDEPENDS_${PN} =3D "bash"
+-EXTRA_OECONF =3D "--with-usrlibdir=3D${libdir}"
+--=20
+1.8.4.2
 
 
