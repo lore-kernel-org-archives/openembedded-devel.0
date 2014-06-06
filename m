@@ -1,40 +1,38 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 419796FC70
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
+	[209.85.192.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 86E5A6FC70
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2014 15:11:26 +0000 (UTC)
-Received: by mail-vc0-f172.google.com with SMTP id lf12so3170780vcb.31
+	Fri,  6 Jun 2014 16:15:49 +0000 (UTC)
+Received: by mail-qg0-f52.google.com with SMTP id a108so4981408qge.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jun 2014 08:11:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=LB4q+o+V8+r3DMsv2R3iqLC9/if79+h23Gz/sMCkH70=;
-	b=O+Ra8eEFvRFzVkbE1D6XQYLq0IaFFGgAZVNXe7chDy0jMI6KwFdRKyqlaLlcc0OeUW
-	h1DqKPvaSo2INMnaOYE4z5b/H2aNyJxQXOE8YJecuHm5jpI9273Yp1WocBqWQu4SxLuZ
-	xEWKGrkKxPgwCnFsebjbO5tpCwxdmZ/w4w72cL8dATG/4fR1TdqH8OZIotMOLl3ouugY
-	2YqvPJgjBgkLlY6a4QiG9I4nY1T5bBCkTrD5Rx7E0DA6y0QiHghz/04AhHk/OK8XePLt
-	R4CQOYQw20oR2AXm2xmFpa+HyJ/FQwEjMlHRZUY9QRC7zGeMFmkaRqLytL49NJwaOu92
-	N75g==
-X-Received: by 10.58.74.164 with SMTP id u4mr3106148vev.81.1402067486968;
-	Fri, 06 Jun 2014 08:11:26 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id
-	z12sm16950812vdg.22.2014.06.06.08.11.25 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Jun 2014 08:11:26 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id B65741B76A13A; Fri,  6 Jun 2014 12:11:22 -0300 (BRT)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 Jun 2014 12:11:10 -0300
-Message-Id: <1402067470-15080-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.0.0.rc4
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH] qt5.inc: Fix packaging of plugins
+	Fri, 06 Jun 2014 09:15:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=4lGflFGJ2PCTe9pFi2ZSvpnhTFo4tuokwv+BRsfXt8c=;
+	b=fyrrpSkXW3VdADFsYz7neKoqW44rRhyCKyA+DlCXpNJjBjzKk9YotGUAVb+v7kRYWd
+	BcqVit0X214wL1+Ooq62ZE1DRfBQ18v54uQdKeIzOn9ED18HJLeoMN6D2SOHhbA2Lk9c
+	cIHVzeZwdF1E3uw7Oy5X/tG5+J3yUBYYH7WWDMNZTaO3tPzM5gAWwOmTHxvTOuBBJy1L
+	C5sIO+GfFBkKcpmeAxcazUTbrQ7Q5qUzAJFRMcudPC3ssynLpWBJWFgM6k+fyEaDu025
+	5VqY/i8pTmc/6wV04TAQhMgIR2HYr6nSCeNPbbL5E/avy/zHymFRr++llELoP7eYyqxC
+	rBkA==
+X-Gm-Message-State: ALoCoQmvfBtt39HANP6pZf7U2dTeRAEzV6+wPLaHbjCMd3+E14Cr1S7fLEOrY8yDD7X3WJBqujER
+X-Received: by 10.140.48.161 with SMTP id o30mr9886234qga.68.1402071350374;
+	Fri, 06 Jun 2014 09:15:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.101.77 with HTTP; Fri, 6 Jun 2014 09:15:30 -0700 (PDT)
+In-Reply-To: <20140604125205.GS2426@jama>
+References: <cover.1399993010.git.valentin.popa@intel.com>
+	<CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
+	<20140604125205.GS2426@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 6 Jun 2014 17:15:30 +0100
+Message-ID: <CAJTo0Lb8zgZN=1Xb-=L7J3EydTXOd9SCvTfHnL4p7FKV8msA3g@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH 0/3] mesa upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,53 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 15:11:33 -0000
+X-List-Received-Date: Fri, 06 Jun 2014 16:15:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The qtmultimedia module install the plugins in a sub-directory however
-those were not being packaged. This patch fixes following QA error:
+On 4 June 2014 13:52, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Sorry for hi-jacking the thread, but since today even the older 9.2.5 is
+> failing to find native python-libxml2
+>
+> config.log:
+> configure:8059: checking for python2
+> configure:8075: found
+> /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/python-native/python2
+> configure:8086: result: python2
+> configure:8103: checking python2 module: libxml2
+> configure:8112: result: no
+> configure:8118: error: failed to find required module libxml2
+>
+> Any idea why it started to fail now?
 
-ERROR: QA Issue: qtmultimedia: Files/directories were installed but not shipped
-  /usr/lib/qt5/plugins/video
-  /usr/lib/qt5/plugins/video/videonode
-  /usr/lib/qt5/plugins/video/videonode/libimx6vivantevideonode.so
-  /usr/lib/qt5/plugins/video/videonode/.debug
-  /usr/lib/qt5/plugins/video/videonode/.debug/libimx6vivantevideonode.so
+Something else must have lost a python-libxml2 dependency recently
+because Mesa needs it but doesn't have a declared dependency.
 
-Reported-by: Lauren Post <lauren.post@freescale.com>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-qt/qt5/qt5.inc | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index dfc1c76..bb0bcdc 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -1,4 +1,4 @@
--# Copyright (C) 2012 O.S. Systems Software LTDA.
-+# Copyright (C) 2012, 2014 O.S. Systems Software LTDA.
- # Copyright (C) 2013 Martin Jansa <martin.jansa@gmail.com>
- 
- inherit qmake5
-@@ -54,6 +54,8 @@ FILES_${PN}-tools-dbg = " \
- "
- FILES_${PN}-plugins-dbg = " \
-     ${OE_QMAKE_PATH_PLUGINS}/*/.debug/* \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug/* \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/*/.debug/* \
- "
- 
- # extra packages
-@@ -98,6 +100,8 @@ FILES_${PN}-tools = " \
- "
- FILES_${PN}-plugins = " \
-     ${OE_QMAKE_PATH_PLUGINS}/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
-+    ${OE_QMAKE_PATH_PLUGINS}/*/*/*/*${SOLIBSDEV} \
- "
- FILES_${PN}-mkspecs = "\
-     ${OE_QMAKE_PATH_ARCHDATA}/mkspecs \
--- 
-2.0.0.rc4
-
+Ross
 
