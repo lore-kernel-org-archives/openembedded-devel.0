@@ -1,24 +1,24 @@
-Return-Path: <Chong.Lu@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A1E886FBF9
+	by mail.openembedded.org (Postfix) with ESMTP id 902256FAB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2014 01:46:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s561k7Cn019461
+	Fri,  6 Jun 2014 08:28:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s568Sn2l023236
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Jun 2014 18:46:07 -0700 (PDT)
-Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 5 Jun 2014 18:46:06 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
+	Fri, 6 Jun 2014 01:28:49 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Fri, 6 Jun 2014 01:28:49 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Jun 2014 09:46:05 +0800
-Message-ID: <1402019165-23981-1-git-send-email-Chong.Lu@windriver.com>
+Date: Fri, 6 Jun 2014 04:28:45 -0400
+Message-ID: <1402043327-31663-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] python-m2crypto: avoid swig problem
+Subject: [PATCH 1/3] vim: use BPN instead of PN to fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,63 +32,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 01:46:09 -0000
+X-List-Received-Date: Fri, 06 Jun 2014 08:28:49 -0000
 Content-Type: text/plain
 
-Swig is used to generate C source and it has trouble processing opensslconf.h
-sometimes. So, we help it out when multilib variants exist.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-For native builds, the variant header will never exist.
-
-Specific multi-lib header files might be named *-32.h or *-n32.h, so we check
-for both names. We also might check for *-n64.h although that will never exist.
-It appears that *-o??.h will never exist, so we don't check for that.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../python/python-m2crypto_0.21.1.bb               |   23 +++++++++++++++++++-
- 1 file changed, 22 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/vim/vim_7.4.258.bb |   48 ++++++++++++++--------------
+ 1 file changed, 24 insertions(+), 24 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-index 21c0269..4f0d785 100644
---- a/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-m2crypto_0.21.1.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "A Python crypto and SSL toolkit"
- HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.258.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+index 2d3b0c2..036e43c 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.258.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+@@ -12,9 +12,9 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+ "
+ SRCREV = "v7-4-258"
  
--DEPENDS = "openssl swig-native"
-+DEPENDS = "openssl swig-native python"
+-S = "${WORKDIR}/${PN}/src"
++S = "${WORKDIR}/${BPN}/src"
  
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
-@@ -20,4 +20,25 @@ SWIG_FEATURES_x86-64 = "-D__x86_64__"
- SWIG_FEATURES ?= ""
- export SWIG_FEATURES
+-VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
++VIMDIR = "${BPN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
  
-+# Get around a problem with swig, but only if the
-+# multilib header file exists.
-+#
-+do_compile_prepend() {
-+    if [ "${baselib}" = "lib64" ];then
-+        bit="64"
-+    else
-+        bit="32"
-+    fi
-+
-+    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "$i"
-+        done
-+    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
-+        for i in SWIG/_ec.i SWIG/_evp.i; do
-+            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "$i"
-+        done
-+    fi
-+}
-+
- BBCLASSEXTEND = "native"
+ inherit autotools update-alternatives
+ inherit autotools-brokensep
+@@ -61,41 +61,41 @@ EXTRA_OECONF = " \
+ 
+ do_install_append() {
+     # Work around rpm picking up csh or awk as a dep
+-    chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/vim132
+-    chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/mve.awk
++    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
++    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
+ 
+     # Install example vimrc from runtime files
+-    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${PN}/vimrc
++    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
+ }
+ 
+ PARALLEL_MAKEINST = ""
+ 
+ PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
+-FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
+-FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
+-FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
+-FILES_${PN}-vimrc = "${datadir}/${PN}/vimrc"
+-FILES_${PN}-data = "${datadir}/${PN}"
++FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
++FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
++FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
++FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
++FILES_${PN}-data = "${datadir}/${BPN}"
+ FILES_${PN}-common = " \
+-    ${datadir}/${PN}/${VIMDIR}/*.vim \
+-    ${datadir}/${PN}/${VIMDIR}/autoload \
+-    ${datadir}/${PN}/${VIMDIR}/colors \
+-    ${datadir}/${PN}/${VIMDIR}/compiler \
+-    ${datadir}/${PN}/${VIMDIR}/ftplugin \
+-    ${datadir}/${PN}/${VIMDIR}/indent \
+-    ${datadir}/${PN}/${VIMDIR}/keymap \
+-    ${datadir}/${PN}/${VIMDIR}/lang \
+-    ${datadir}/${PN}/${VIMDIR}/macros \
+-    ${datadir}/${PN}/${VIMDIR}/plugin \
+-    ${datadir}/${PN}/${VIMDIR}/print \
+-    ${datadir}/${PN}/${VIMDIR}/spell \
+-    ${datadir}/${PN}/${VIMDIR}/tools \
++    ${datadir}/${BPN}/${VIMDIR}/*.vim \
++    ${datadir}/${BPN}/${VIMDIR}/autoload \
++    ${datadir}/${BPN}/${VIMDIR}/colors \
++    ${datadir}/${BPN}/${VIMDIR}/compiler \
++    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
++    ${datadir}/${BPN}/${VIMDIR}/indent \
++    ${datadir}/${BPN}/${VIMDIR}/keymap \
++    ${datadir}/${BPN}/${VIMDIR}/lang \
++    ${datadir}/${BPN}/${VIMDIR}/macros \
++    ${datadir}/${BPN}/${VIMDIR}/plugin \
++    ${datadir}/${BPN}/${VIMDIR}/print \
++    ${datadir}/${BPN}/${VIMDIR}/spell \
++    ${datadir}/${BPN}/${VIMDIR}/tools \
+ "
+ 
+ # Recommend that runtime data is installed along with vim
+ RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
+ 
+ ALTERNATIVE_${PN} = "vi"
+-ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
++ALTERNATIVE_TARGET[vi] = "${bindir}/${BPN}"
+ ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+ ALTERNATIVE_PRIORITY[vi] = "100"
 -- 
 1.7.9.5
 
