@@ -1,38 +1,38 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
-	[209.85.192.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 86E5A6FC70
+Return-Path: <nickdademo@gmail.com>
+Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
+	[209.85.214.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B6966FCA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jun 2014 16:15:49 +0000 (UTC)
-Received: by mail-qg0-f52.google.com with SMTP id a108so4981408qge.11
+	Sat,  7 Jun 2014 03:55:47 +0000 (UTC)
+Received: by mail-ob0-f177.google.com with SMTP id wp4so3549398obc.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jun 2014 09:15:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=4lGflFGJ2PCTe9pFi2ZSvpnhTFo4tuokwv+BRsfXt8c=;
-	b=fyrrpSkXW3VdADFsYz7neKoqW44rRhyCKyA+DlCXpNJjBjzKk9YotGUAVb+v7kRYWd
-	BcqVit0X214wL1+Ooq62ZE1DRfBQ18v54uQdKeIzOn9ED18HJLeoMN6D2SOHhbA2Lk9c
-	cIHVzeZwdF1E3uw7Oy5X/tG5+J3yUBYYH7WWDMNZTaO3tPzM5gAWwOmTHxvTOuBBJy1L
-	C5sIO+GfFBkKcpmeAxcazUTbrQ7Q5qUzAJFRMcudPC3ssynLpWBJWFgM6k+fyEaDu025
-	5VqY/i8pTmc/6wV04TAQhMgIR2HYr6nSCeNPbbL5E/avy/zHymFRr++llELoP7eYyqxC
-	rBkA==
-X-Gm-Message-State: ALoCoQmvfBtt39HANP6pZf7U2dTeRAEzV6+wPLaHbjCMd3+E14Cr1S7fLEOrY8yDD7X3WJBqujER
-X-Received: by 10.140.48.161 with SMTP id o30mr9886234qga.68.1402071350374;
-	Fri, 06 Jun 2014 09:15:50 -0700 (PDT)
+	Fri, 06 Jun 2014 20:55:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=x5bssy+fzSHWdvxnEqwF0Btq8hFctbk7FFG8drAB1Vw=;
+	b=R6GYY2AbH+mYzWZ1PKO3ogJ48oksJdFMw6Ie7fvsEjTOg6kZ3eunk3dYNy+3PYIL5d
+	hA4SxRNVHTraIiSu/lOsMJN1ZrDTNnWDth9N1U3Ukft3F0kxYBCQh1ofbCv25ZYBp35s
+	xTcRFDPYpR+UB/1dLCGIQAHWuBkVTln7hZS6lnqjFcMyeImMw+/CrOuLDzDV7cUHlCFc
+	xDr7rozSOoKB93/zOpd3n6ohniQLLjLwTLBJE11bUZtQ5oySH5E9VLFSPl0ugxXiTDLJ
+	f+u99nhV5dbDcR4eX6vjgLKiyZ5nRF9zmqgJSf/T2fRp4c5ex63rzfxODKdnPQ09VWEy
+	jZgg==
+X-Received: by 10.60.42.237 with SMTP id r13mr11251116oel.31.1402113347606;
+	Fri, 06 Jun 2014 20:55:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.101.77 with HTTP; Fri, 6 Jun 2014 09:15:30 -0700 (PDT)
-In-Reply-To: <20140604125205.GS2426@jama>
-References: <cover.1399993010.git.valentin.popa@intel.com>
-	<CAJTo0LaNVqizccFhw8E_Bp8WXX07ZB9Mu+_DoQ0tmjcLf8f=Fg@mail.gmail.com>
-	<20140604125205.GS2426@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 6 Jun 2014 17:15:30 +0100
-Message-ID: <CAJTo0Lb8zgZN=1Xb-=L7J3EydTXOd9SCvTfHnL4p7FKV8msA3g@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH 0/3] mesa upgrade
+Received: by 10.76.85.35 with HTTP; Fri, 6 Jun 2014 20:55:27 -0700 (PDT)
+In-Reply-To: <CANR6C57PkmkrN2HkwbgJB7djco8cHGRtn58xQE17Q19_fheu=A@mail.gmail.com>
+References: <1399414836-16702-1-git-send-email-nickdademo@gmail.com>
+	<20140506222845.GE30955@jama>
+	<CANR6C555Le4jbMW=h3wrSedJgHKWZDnW6WZoz48GJo2dDwd_4A@mail.gmail.com>
+	<20140507165709.GI30955@jama>
+	<CANR6C56P=cU=J6D_xNCPNdY+0smqzjuRxLWWBoJUgY3LBisfvg@mail.gmail.com>
+	<CANR6C57PkmkrN2HkwbgJB7djco8cHGRtn58xQE17Q19_fheu=A@mail.gmail.com>
+From: "Nick D'Ademo" <nickdademo@gmail.com>
+Date: Sat, 7 Jun 2014 13:55:27 +1000
+Message-ID: <CANR6C553W+41dEY+OpA8HEOHf1Mz9BqEfi-ntUQKmt0gd7j-8g@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] opencv: Bump SRCREV to 2.4.9 release tag, PV is now 2.4.9+git.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +46,228 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jun 2014 16:15:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 07 Jun 2014 03:55:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 4 June 2014 13:52, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Sorry for hi-jacking the thread, but since today even the older 9.2.5 is
-> failing to find native python-libxml2
+Hi Martin,
+
+This recipe should be ready for final testing.
+
+Thanks,
+Nick
+
+
+On Sun, Jun 1, 2014 at 2:58 AM, Nick D'Ademo <nickdademo@gmail.com> wrote:
+
+> A follow-up:
+> This compilation issue seems to be fixed with a patch submitted on May 27:
+> [oe] [meta-multimedia][PATCH] libdc1394: fix S!=B failure
 >
-> config.log:
-> configure:8059: checking for python2
-> configure:8075: found
-> /OE/build/oe-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/python-native/python2
-> configure:8086: result: python2
-> configure:8103: checking python2 module: libxml2
-> configure:8112: result: no
-> configure:8118: error: failed to find required module libxml2
 >
-> Any idea why it started to fail now?
-
-Something else must have lost a python-libxml2 dependency recently
-because Mesa needs it but doesn't have a declared dependency.
-
-Ross
+>
+>
+> On Sun, Jun 1, 2014 at 2:36 AM, Nick D'Ademo <nickdademo@gmail.com> wrote:
+>
+>> Apologies for the late reply on this one.
+>>
+>> jasper (as a dependency) seems to be fine with this recipe.
+>> However, libdc1394 gives the following error (camera.h header not found):
+>>
+>>
+>> ERROR: Function failed: do_compile (log file is located at
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117)
+>> ERROR: Logfile of failure stored in:
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117
+>> Log data follows:
+>> | DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
+>> 'bit-64', 'x86_64-linux', 'common']
+>> | DEBUG: Executing shell function do_compile
+>> | NOTE: make -j 8
+>> | make  all-recursive
+>> | make[1]: Entering directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build'
+>> | Making all in dc1394
+>> | make[2]: Entering directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394'
+>> | Making all in linux
+>> | make[3]: Entering directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/linux'
+>> | make[3]: Nothing to be done for `all'.
+>> | make[3]: Leaving directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/linux'
+>> | Making all in juju
+>> | make[3]: Entering directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/juju'
+>> | ../../x86_64-poky-linux-libtool  --tag=CC   --mode=compile
+>> x86_64-poky-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse
+>> -msse4.2 --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H
+>> -I.
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
+>> -I../..
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
+>> -Wall -Wunused -std=gnu99  -O2 -pipe -g -feliminate-unused-debug-types -c
+>> -o control.lo
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c
+>> | ../../x86_64-poky-linux-libtool  --tag=CC   --mode=compile
+>> x86_64-poky-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse
+>> -msse4.2 --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H
+>> -I.
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
+>> -I../..
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
+>> -Wall -Wunused -std=gnu99  -O2 -pipe -g -feliminate-unused-debug-types -c
+>> -o capture.lo
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c
+>> | x86_64-poky-linux-libtool: compile:  x86_64-poky-linux-gcc -m64
+>> -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2
+>> --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H -I.
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
+>> -I../..
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
+>> -Wall -Wunused -std=gnu99 -O2 -pipe -g -feliminate-unused-debug-types -c
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c
+>> -fPIC -DPIC -o .libs/control.o
+>> | x86_64-poky-linux-libtool: compile:  x86_64-poky-linux-gcc -m64
+>> -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2
+>> --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H -I.
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
+>> -I../..
+>> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
+>> -Wall -Wunused -std=gnu99 -O2 -pipe -g -feliminate-unused-debug-types -c
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c
+>> -fPIC -DPIC -o .libs/capture.o
+>> | In file included from
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c:35:0:
+>> |
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/platform.h:27:27:
+>> fatal error: dc1394/camera.h: No such file or directory
+>> |  #include <dc1394/camera.h>
+>> |                            ^
+>> | compilation terminated.
+>> | make[3]: *** [control.lo] Error 1
+>> | make[3]: *** Waiting for unfinished jobs....
+>> | In file included from
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/internal.h:28:0,
+>> |                  from
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/juju.h:29,
+>> |                  from
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c:37:
+>> |
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/platform.h:27:27:
+>> fatal error: dc1394/camera.h: No such file or directory
+>> |  #include <dc1394/camera.h>
+>> |                            ^
+>> | compilation terminated.
+>> | make[3]: *** [capture.lo] Error 1
+>> | make[3]: Leaving directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/juju'
+>> | make[2]: *** [all-recursive] Error 1
+>> | make[2]: Leaving directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394'
+>> | make[1]: *** [all-recursive] Error 1
+>> | make[1]: Leaving directory
+>> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build'
+>> | make: *** [all] Error 2
+>> | ERROR: oe_runmake failed
+>> | WARNING:
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/run.do_compile.10117:1
+>> exit 1 from
+>> |   exit 1
+>> | ERROR: Function failed: do_compile (log file is located at
+>> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117)
+>> ERROR: Task 1372
+>> (/home/nick/poky/meta-openembedded/meta-multimedia/recipes-multimedia/libdc1394/
+>> libdc1394_git.bb, do_compile) failed with exit code '1'
+>>
+>>
+>>
+>>
+>>
+>> On Thu, May 8, 2014 at 2:57 AM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>>
+>>> On Wed, May 07, 2014 at 11:57:09PM +1000, Nick D'Ademo wrote:
+>>> > The recipe successfully builds without errors (multilib build) -
+>>> however, I
+>>> > also had no dependencies issues with the previous version of the recipe
+>>> > either (2.4.8+git).
+>>>
+>>> Have you tried building opencv before and after building jasper nad
+>>> libdc1394 in the same sysroot and comparing opencv output?
+>>>
+>>> >
+>>> >
+>>> > On Wed, May 7, 2014 at 8:28 AM, Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>> >
+>>> > > On Wed, May 07, 2014 at 08:20:36AM +1000, Nick D'Ademo wrote:
+>>> > > > Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+>>> > >
+>>> > > Does it fix this issue reported in test-dependencies report?
+>>> > >
+>>> > > opencv/libopencv-highgui/latest lost dependency on  jasper libdc1394
+>>> > >
+>>> > > > ---
+>>> > > >  meta-oe/recipes-support/opencv/opencv_2.4.bb |    4 ++--
+>>> > > >  1 file changed, 2 insertions(+), 2 deletions(-)
+>>> > > >
+>>> > > > diff --git
+>>> a/meta-oe/recipes-support/opencv/opencv_2.4.bbb/meta-oe/recipes-support/opencv/
+>>> > > opencv_2.4.bb
+>>> > > > index df512f6..43e6a2b 100644
+>>> > > > --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
+>>> > > > +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+>>> > > > @@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET = "arm"
+>>> > > >
+>>> > > >  DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib
+>>> > > glib-2.0"
+>>> > > >
+>>> > > > -SRCREV = "a4b34e7ae10351fc4d30dc55995679340efc488e"
+>>> > > > +SRCREV = "df8e28283f09825cca0c2902160b7abebcfe1b64"
+>>> > > >  SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
+>>> > > >             file://opencv-fix-pkgconfig-generation.patch \
+>>> > > >  "
+>>> > > >
+>>> > > > -PV = "2.4.8+git${SRCPV}"
+>>> > > > +PV = "2.4.9+git${SRCPV}"
+>>> > > >
+>>> > > >  S = "${WORKDIR}/git"
+>>> > > >
+>>> > > > --
+>>> > > > 1.7.9.5
+>>> > > >
+>>> > > > --
+>>> > > > _______________________________________________
+>>> > > > Openembedded-devel mailing list
+>>> > > > Openembedded-devel@lists.openembedded.org
+>>> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>> > >
+>>> > > --
+>>> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>> > >
+>>> > > --
+>>> > > _______________________________________________
+>>> > > Openembedded-devel mailing list
+>>> > > Openembedded-devel@lists.openembedded.org
+>>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>> > >
+>>> > >
+>>> > --
+>>> > _______________________________________________
+>>> > Openembedded-devel mailing list
+>>> > Openembedded-devel@lists.openembedded.org
+>>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>> --
+>>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>>
+>>
+>
 
