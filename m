@@ -1,38 +1,34 @@
-Return-Path: <nickdademo@gmail.com>
-Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B6966FCA9
+Return-Path: <blloyd@familyhonor.net>
+Received: from mho-01-ewr.mailhop.org (mho-03-ewr.mailhop.org [204.13.248.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B2AE6FCEA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2014 03:55:47 +0000 (UTC)
-Received: by mail-ob0-f177.google.com with SMTP id wp4so3549398obc.8
+	Sat,  7 Jun 2014 03:58:18 +0000 (UTC)
+Received: from [98.142.68.106] (helo=lloydserv.home.familyhonor.net)
+	by mho-01-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
+	id 1Wt7lr-0005qm-4n for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Jun 2014 03:58:19 +0000
+Received: from mail.familyhonor.net (lloydserv.home.familyhonor.net
+	[127.0.0.1]) (authenticated bits=0)
+	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
+	s573wGcI017247
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jun 2014 20:55:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=x5bssy+fzSHWdvxnEqwF0Btq8hFctbk7FFG8drAB1Vw=;
-	b=R6GYY2AbH+mYzWZ1PKO3ogJ48oksJdFMw6Ie7fvsEjTOg6kZ3eunk3dYNy+3PYIL5d
-	hA4SxRNVHTraIiSu/lOsMJN1ZrDTNnWDth9N1U3Ukft3F0kxYBCQh1ofbCv25ZYBp35s
-	xTcRFDPYpR+UB/1dLCGIQAHWuBkVTln7hZS6lnqjFcMyeImMw+/CrOuLDzDV7cUHlCFc
-	xDr7rozSOoKB93/zOpd3n6ohniQLLjLwTLBJE11bUZtQ5oySH5E9VLFSPl0ugxXiTDLJ
-	f+u99nhV5dbDcR4eX6vjgLKiyZ5nRF9zmqgJSf/T2fRp4c5ex63rzfxODKdnPQ09VWEy
-	jZgg==
-X-Received: by 10.60.42.237 with SMTP id r13mr11251116oel.31.1402113347606;
-	Fri, 06 Jun 2014 20:55:47 -0700 (PDT)
+	Fri, 6 Jun 2014 22:58:16 -0500
+X-Mail-Handler: Dyn Standard SMTP by Dyn
+X-Originating-IP: 98.142.68.106
+X-Report-Abuse-To: abuse@dyndns.com (see
+	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
+	abuse reporting information)
+X-MHO-User: U2FsdGVkX1/0JvYD53XUhLbtExoqqF0U6RBxw1pKhoU=
 MIME-Version: 1.0
-Received: by 10.76.85.35 with HTTP; Fri, 6 Jun 2014 20:55:27 -0700 (PDT)
-In-Reply-To: <CANR6C57PkmkrN2HkwbgJB7djco8cHGRtn58xQE17Q19_fheu=A@mail.gmail.com>
-References: <1399414836-16702-1-git-send-email-nickdademo@gmail.com>
-	<20140506222845.GE30955@jama>
-	<CANR6C555Le4jbMW=h3wrSedJgHKWZDnW6WZoz48GJo2dDwd_4A@mail.gmail.com>
-	<20140507165709.GI30955@jama>
-	<CANR6C56P=cU=J6D_xNCPNdY+0smqzjuRxLWWBoJUgY3LBisfvg@mail.gmail.com>
-	<CANR6C57PkmkrN2HkwbgJB7djco8cHGRtn58xQE17Q19_fheu=A@mail.gmail.com>
-From: "Nick D'Ademo" <nickdademo@gmail.com>
-Date: Sat, 7 Jun 2014 13:55:27 +1000
-Message-ID: <CANR6C553W+41dEY+OpA8HEOHf1Mz9BqEfi-ntUQKmt0gd7j-8g@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] opencv: Bump SRCREV to 2.4.9 release tag, PV is now 2.4.9+git.
+Date: Fri, 06 Jun 2014 22:58:16 -0500
+From: blloyd <blloyd@familyhonor.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <1e3e1440af55f551685afb9d79e47d71@mail.familyhonor.net>
+X-Sender: blloyd@familyhonor.net
+User-Agent: Roundcube Webmail/0.9.5
+Subject: multi-threaded core dump issues when threading symbols missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,228 +42,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2014 03:55:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 07 Jun 2014 03:58:20 -0000
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Martin,
+I originally tried to solve this problem a long time ago by changing the 
+gdb package to depend on the selected libc debug packages.  That never 
+did get to a state that was accepted for commit.
 
-This recipe should be ready for final testing.
+However, even if it did, I've come to realize that it wouldn't really 
+fix the problem.
 
-Thanks,
-Nick
+Basically, core dumps do not generate valid dumps for multiple threads 
+when the threading debug symbols are not available.  This includes 
+automatically generated core dumps when an application segfaults while 
+running (kernel generated dumps).
+
+Two possible solutions for the problem which will ensure core dumps work 
+when enabled is to:
+1.  not strip the libc packages.  Since this would mean more loaded into 
+memory all the time, I can understand why this may not be desirable.
+2.  Include the debug symbols for either all of libc or just the 
+specific libc debug symbols needed for a valid core dump so that core 
+dumps work.
+      a.  Just have eglibc depend on eglibc-dbg and uclibc depend on 
+uclibc-dbg.  Easy.  For eglibc, this adds @35mb to a system
+      b.  Split the required *.so.debug out from the rest of the dbg, and 
+have the -dbg package and base package depend on the new package.  I 
+believe the minimal required is libpthread-*.so.debug, which for the 
+eglibc case adds less than 1MB to the image.
+
+Testing would be required to ensure the right subset is selected for 
+2.b, but when I originally did this just adding that one debug file 
+caused the generated images to work for all my debugging needs.
+
+Are either of the above possible solutions likely to get approved?  I 
+don't mind implementing either, but as they effectively affect every 
+image made, I would like to discuss before implementing one of the 
+solutions.
+
+Without this change, a debug dump will have only one viewable thread.  
+It is not usually the crashing thread.  With the required debug symbols 
+in place, crash dump debugging (including on a development box with the 
+device SDK installed) appears to function properly.
 
 
-On Sun, Jun 1, 2014 at 2:58 AM, Nick D'Ademo <nickdademo@gmail.com> wrote:
+Any suggestions about what can be done that could be accepted for 
+inclusion into the mainline after completion would be appreciated.
 
-> A follow-up:
-> This compilation issue seems to be fixed with a patch submitted on May 27:
-> [oe] [meta-multimedia][PATCH] libdc1394: fix S!=B failure
->
->
->
->
-> On Sun, Jun 1, 2014 at 2:36 AM, Nick D'Ademo <nickdademo@gmail.com> wrote:
->
->> Apologies for the late reply on this one.
->>
->> jasper (as a dependency) seems to be fine with this recipe.
->> However, libdc1394 gives the following error (camera.h header not found):
->>
->>
->> ERROR: Function failed: do_compile (log file is located at
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117)
->> ERROR: Logfile of failure stored in:
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117
->> Log data follows:
->> | DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
->> 'bit-64', 'x86_64-linux', 'common']
->> | DEBUG: Executing shell function do_compile
->> | NOTE: make -j 8
->> | make  all-recursive
->> | make[1]: Entering directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build'
->> | Making all in dc1394
->> | make[2]: Entering directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394'
->> | Making all in linux
->> | make[3]: Entering directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/linux'
->> | make[3]: Nothing to be done for `all'.
->> | make[3]: Leaving directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/linux'
->> | Making all in juju
->> | make[3]: Entering directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/juju'
->> | ../../x86_64-poky-linux-libtool  --tag=CC   --mode=compile
->> x86_64-poky-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse
->> -msse4.2 --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H
->> -I.
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
->> -I../..
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
->> -Wall -Wunused -std=gnu99  -O2 -pipe -g -feliminate-unused-debug-types -c
->> -o control.lo
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c
->> | ../../x86_64-poky-linux-libtool  --tag=CC   --mode=compile
->> x86_64-poky-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse
->> -msse4.2 --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H
->> -I.
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
->> -I../..
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
->> -Wall -Wunused -std=gnu99  -O2 -pipe -g -feliminate-unused-debug-types -c
->> -o capture.lo
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c
->> | x86_64-poky-linux-libtool: compile:  x86_64-poky-linux-gcc -m64
->> -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2
->> --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H -I.
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
->> -I../..
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
->> -Wall -Wunused -std=gnu99 -O2 -pipe -g -feliminate-unused-debug-types -c
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c
->> -fPIC -DPIC -o .libs/control.o
->> | x86_64-poky-linux-libtool: compile:  x86_64-poky-linux-gcc -m64
->> -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2
->> --sysroot=/home/nick/poky/build/tmp/sysroots/8tree -DHAVE_CONFIG_H -I.
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju
->> -I../..
->> -I/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394
->> -Wall -Wunused -std=gnu99 -O2 -pipe -g -feliminate-unused-debug-types -c
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c
->> -fPIC -DPIC -o .libs/capture.o
->> | In file included from
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/control.c:35:0:
->> |
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/platform.h:27:27:
->> fatal error: dc1394/camera.h: No such file or directory
->> |  #include <dc1394/camera.h>
->> |                            ^
->> | compilation terminated.
->> | make[3]: *** [control.lo] Error 1
->> | make[3]: *** Waiting for unfinished jobs....
->> | In file included from
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/internal.h:28:0,
->> |                  from
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/juju.h:29,
->> |                  from
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/juju/capture.c:37:
->> |
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/git/libdc1394/dc1394/platform.h:27:27:
->> fatal error: dc1394/camera.h: No such file or directory
->> |  #include <dc1394/camera.h>
->> |                            ^
->> | compilation terminated.
->> | make[3]: *** [capture.lo] Error 1
->> | make[3]: Leaving directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394/juju'
->> | make[2]: *** [all-recursive] Error 1
->> | make[2]: Leaving directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build/dc1394'
->> | make[1]: *** [all-recursive] Error 1
->> | make[1]: Leaving directory
->> `/home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/build'
->> | make: *** [all] Error 2
->> | ERROR: oe_runmake failed
->> | WARNING:
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/run.do_compile.10117:1
->> exit 1 from
->> |   exit 1
->> | ERROR: Function failed: do_compile (log file is located at
->> /home/nick/poky/build/tmp/work/corei7-64-poky-linux/libdc1394/2.2.1+gitrAUTOINC+b90342933b-r0/temp/log.do_compile.10117)
->> ERROR: Task 1372
->> (/home/nick/poky/meta-openembedded/meta-multimedia/recipes-multimedia/libdc1394/
->> libdc1394_git.bb, do_compile) failed with exit code '1'
->>
->>
->>
->>
->>
->> On Thu, May 8, 2014 at 2:57 AM, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->>
->>> On Wed, May 07, 2014 at 11:57:09PM +1000, Nick D'Ademo wrote:
->>> > The recipe successfully builds without errors (multilib build) -
->>> however, I
->>> > also had no dependencies issues with the previous version of the recipe
->>> > either (2.4.8+git).
->>>
->>> Have you tried building opencv before and after building jasper nad
->>> libdc1394 in the same sysroot and comparing opencv output?
->>>
->>> >
->>> >
->>> > On Wed, May 7, 2014 at 8:28 AM, Martin Jansa <martin.jansa@gmail.com>
->>> wrote:
->>> >
->>> > > On Wed, May 07, 2014 at 08:20:36AM +1000, Nick D'Ademo wrote:
->>> > > > Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
->>> > >
->>> > > Does it fix this issue reported in test-dependencies report?
->>> > >
->>> > > opencv/libopencv-highgui/latest lost dependency on  jasper libdc1394
->>> > >
->>> > > > ---
->>> > > >  meta-oe/recipes-support/opencv/opencv_2.4.bb |    4 ++--
->>> > > >  1 file changed, 2 insertions(+), 2 deletions(-)
->>> > > >
->>> > > > diff --git
->>> a/meta-oe/recipes-support/opencv/opencv_2.4.bbb/meta-oe/recipes-support/opencv/
->>> > > opencv_2.4.bb
->>> > > > index df512f6..43e6a2b 100644
->>> > > > --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
->>> > > > +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
->>> > > > @@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET = "arm"
->>> > > >
->>> > > >  DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib
->>> > > glib-2.0"
->>> > > >
->>> > > > -SRCREV = "a4b34e7ae10351fc4d30dc55995679340efc488e"
->>> > > > +SRCREV = "df8e28283f09825cca0c2902160b7abebcfe1b64"
->>> > > >  SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
->>> > > >             file://opencv-fix-pkgconfig-generation.patch \
->>> > > >  "
->>> > > >
->>> > > > -PV = "2.4.8+git${SRCPV}"
->>> > > > +PV = "2.4.9+git${SRCPV}"
->>> > > >
->>> > > >  S = "${WORKDIR}/git"
->>> > > >
->>> > > > --
->>> > > > 1.7.9.5
->>> > > >
->>> > > > --
->>> > > > _______________________________________________
->>> > > > Openembedded-devel mailing list
->>> > > > Openembedded-devel@lists.openembedded.org
->>> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>> > >
->>> > > --
->>> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->>> > >
->>> > > --
->>> > > _______________________________________________
->>> > > Openembedded-devel mailing list
->>> > > Openembedded-devel@lists.openembedded.org
->>> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>> > >
->>> > >
->>> > --
->>> > _______________________________________________
->>> > Openembedded-devel mailing list
->>> > Openembedded-devel@lists.openembedded.org
->>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>> --
->>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>>
->>
->
+Is 1MB worth worrying about?  I know some images that are generated are 
+very small, but I don't usually get things smaller than 200MB where 500K 
+is just noise.
+
 
