@@ -1,34 +1,32 @@
-Return-Path: <blloyd@familyhonor.net>
-Received: from mho-01-ewr.mailhop.org (mho-03-ewr.mailhop.org [204.13.248.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B2AE6FCEA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CB2706FC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jun 2014 03:58:18 +0000 (UTC)
-Received: from [98.142.68.106] (helo=lloydserv.home.familyhonor.net)
-	by mho-01-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
-	id 1Wt7lr-0005qm-4n for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Jun 2014 03:58:19 +0000
-Received: from mail.familyhonor.net (lloydserv.home.familyhonor.net
-	[127.0.0.1]) (authenticated bits=0)
-	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
-	s573wGcI017247
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Sat,  7 Jun 2014 10:48:08 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id hn18so1772131igb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 Jun 2014 22:58:16 -0500
-X-Mail-Handler: Dyn Standard SMTP by Dyn
-X-Originating-IP: 98.142.68.106
-X-Report-Abuse-To: abuse@dyndns.com (see
-	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
-	abuse reporting information)
-X-MHO-User: U2FsdGVkX1/0JvYD53XUhLbtExoqqF0U6RBxw1pKhoU=
+	Sat, 07 Jun 2014 03:48:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=lHDpC4SRPFzJk5JPsr35PSXWIIGPL9yQtE3kpuBiRRc=;
+	b=eFpzPUtluWTuB/30wurtoosB7Z+4mhohz+WPA53rqNwxVbqC5Yfz4MErr4bY7uy1c7
+	Urtr92k9+XyMVPADK4WNLGdBCzIWQ2oWutDuXGMhSkdmP56MnDQT1S04uOWpRNN7c1o3
+	uBkgzYQso9tkz9jrUC0+xosHGKiXfrntYb3G/7MPa4+PosWdNVUGqU1TsfXXSJ/MTl8g
+	LL77Z0LA8qgaIlTmvq77r9pYWoaJF8g8//ua4YcEqBPmK/nbYXYup6oMMeuuNZU32baT
+	LMMVoWwuVLzvMoY9n6NgzUXKO/Zup6GxHSl0eaR/0aqJjAaZxGUNvALiI5+CJm3vO9wX
+	5+2g==
+X-Received: by 10.43.62.204 with SMTP id xb12mr13194443icb.51.1402138088759;
+	Sat, 07 Jun 2014 03:48:08 -0700 (PDT)
 MIME-Version: 1.0
-Date: Fri, 06 Jun 2014 22:58:16 -0500
-From: blloyd <blloyd@familyhonor.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <1e3e1440af55f551685afb9d79e47d71@mail.familyhonor.net>
-X-Sender: blloyd@familyhonor.net
-User-Agent: Roundcube Webmail/0.9.5
-Subject: multi-threaded core dump issues when threading symbols missing
+Received: by 10.50.6.197 with HTTP; Sat, 7 Jun 2014 03:47:37 -0700 (PDT)
+In-Reply-To: <1e3e1440af55f551685afb9d79e47d71@mail.familyhonor.net>
+References: <1e3e1440af55f551685afb9d79e47d71@mail.familyhonor.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 7 Jun 2014 03:47:37 -0700
+Message-ID: <CAMKF1sprt8aH5SzK9rcyrKdWpeaezqqox3DDP4N=ucp1VJY6Fw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: multi-threaded core dump issues when threading symbols missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,57 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jun 2014 03:58:20 -0000
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 07 Jun 2014 10:48:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I originally tried to solve this problem a long time ago by changing the 
-gdb package to depend on the selected libc debug packages.  That never 
-did get to a state that was accepted for commit.
+On Fri, Jun 6, 2014 at 8:58 PM, blloyd <blloyd@familyhonor.net> wrote:
+> I originally tried to solve this problem a long time ago by changing the gdb
+> package to depend on the selected libc debug packages.  That never did get
+> to a state that was accepted for commit.
+>
+> However, even if it did, I've come to realize that it wouldn't really fix
+> the problem.
+>
+> Basically, core dumps do not generate valid dumps for multiple threads when
+> the threading debug symbols are not available.  This includes automatically
+> generated core dumps when an application segfaults while running (kernel
+> generated dumps).
+>
+> Two possible solutions for the problem which will ensure core dumps work
+> when enabled is to:
+> 1.  not strip the libc packages.  Since this would mean more loaded into
+> memory all the time, I can understand why this may not be desirable.
+> 2.  Include the debug symbols for either all of libc or just the specific
+> libc debug symbols needed for a valid core dump so that core dumps work.
+>      a.  Just have eglibc depend on eglibc-dbg and uclibc depend on
+> uclibc-dbg.  Easy.  For eglibc, this adds @35mb to a system
+>      b.  Split the required *.so.debug out from the rest of the dbg, and
+> have the -dbg package and base package depend on the new package.  I believe
+> the minimal required is libpthread-*.so.debug, which for the eglibc case
+> adds less than 1MB to the image.
+>
+> Testing would be required to ensure the right subset is selected for 2.b,
+> but when I originally did this just adding that one debug file caused the
+> generated images to work for all my debugging needs.
+>
+> Are either of the above possible solutions likely to get approved?  I don't
+> mind implementing either, but as they effectively affect every image made, I
+> would like to discuss before implementing one of the solutions.
+>
+> Without this change, a debug dump will have only one viewable thread.  It is
+> not usually the crashing thread.  With the required debug symbols in place,
+> crash dump debugging (including on a development box with the device SDK
+> installed) appears to function properly.
+>
+>
+> Any suggestions about what can be done that could be accepted for inclusion
+> into the mainline after completion would be appreciated.
 
-However, even if it did, I've come to realize that it wouldn't really 
-fix the problem.
+what happens if you install eglibc-thread-db ? does that solve the problem
 
-Basically, core dumps do not generate valid dumps for multiple threads 
-when the threading debug symbols are not available.  This includes 
-automatically generated core dumps when an application segfaults while 
-running (kernel generated dumps).
-
-Two possible solutions for the problem which will ensure core dumps work 
-when enabled is to:
-1.  not strip the libc packages.  Since this would mean more loaded into 
-memory all the time, I can understand why this may not be desirable.
-2.  Include the debug symbols for either all of libc or just the 
-specific libc debug symbols needed for a valid core dump so that core 
-dumps work.
-      a.  Just have eglibc depend on eglibc-dbg and uclibc depend on 
-uclibc-dbg.  Easy.  For eglibc, this adds @35mb to a system
-      b.  Split the required *.so.debug out from the rest of the dbg, and 
-have the -dbg package and base package depend on the new package.  I 
-believe the minimal required is libpthread-*.so.debug, which for the 
-eglibc case adds less than 1MB to the image.
-
-Testing would be required to ensure the right subset is selected for 
-2.b, but when I originally did this just adding that one debug file 
-caused the generated images to work for all my debugging needs.
-
-Are either of the above possible solutions likely to get approved?  I 
-don't mind implementing either, but as they effectively affect every 
-image made, I would like to discuss before implementing one of the 
-solutions.
-
-Without this change, a debug dump will have only one viewable thread.  
-It is not usually the crashing thread.  With the required debug symbols 
-in place, crash dump debugging (including on a development box with the 
-device SDK installed) appears to function properly.
-
-
-Any suggestions about what can be done that could be accepted for 
-inclusion into the mainline after completion would be appreciated.
-
-Is 1MB worth worrying about?  I know some images that are generated are 
-very small, but I don't usually get things smaller than 200MB where 500K 
-is just noise.
-
+>
+> Is 1MB worth worrying about?  I know some images that are generated are very
+> small, but I don't usually get things smaller than 200MB where 500K is just
+> noise.
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
