@@ -1,27 +1,40 @@
-Return-Path: <yaoxp@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DB6165F99
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C0E8C65E87
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jun 2014 01:01:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="4.98,1000,1392134400"; d="scan'208";a="31627063"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jun 2014 08:58:41 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id s5911Igv019732
+	Mon,  9 Jun 2014 12:34:59 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id hy4so1835330vcb.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Jun 2014 09:01:18 +0800
-Received: from FEDORA20.fnst.cn.fujitsu.com (10.167.226.101) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 9 Jun 2014 09:01:19 +0800
-From: Yao Xinpan <yaoxp@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 Jun 2014 08:59:53 +0800
-Message-ID: <1402275593-19156-1-git-send-email-yaoxp@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.4.2
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.101]
-Subject: [meta-oe][PATCH v2] lvm2: don't overrwrite EXTRA_OECONF
+	Mon, 09 Jun 2014 05:35:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=xUvrfalPiZxxFBlH++P2BJxV08sTYViHGleOI2VYuV8=;
+	b=SX9ohD112ZzEt6WVVaY1ImA42mzb2ZLhjVKy72jb+OtuKjgxb6TtLzUZ9hfMIF44up
+	dMx8n96IQa6Bz23YvCkfksWuuMALsCF8d+3RBMWvmxTq17CvL0DU3ohC8dCZhgqQGbdh
+	pDSf28YnUWglR+aDUbkOboqKde1HyzfhdMEig2rqTIHf4XIsOGoB43pY29DIcARpug9N
+	RDUO6IHQiZ2RU/oegAf4aT1s3s6bQO/b+cKd6XxhdniloCa4IA3B7qYRpPFaJTbMdPC1
+	Jd9sMod1LgUkz4SapyhF4R5ClOTwc/T+dSNC+PFSQiQIcn075Jg1mGIk+4cz4slDfQlZ
+	nl+A==
+X-Received: by 10.58.132.41 with SMTP id or9mr25982579veb.5.1402317301002;
+	Mon, 09 Jun 2014 05:35:01 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.35.70.10])
+	by mx.google.com with ESMTPSA id
+	wb2sm22634456veb.13.2014.06.09.05.34.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 09 Jun 2014 05:34:59 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 2CE4C1B95540D; Mon,  9 Jun 2014 09:34:56 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon,  9 Jun 2014 09:34:53 -0300
+Message-Id: <1402317295-5120-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.0.0.rc4
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH 1/3] qmake5_base.bbclass: Add the Qt5 tools in the search path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,40 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 01:01:20 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Jun 2014 12:35:02 -0000
 
-EXTRA_OECONF has been assigned before =E2=80=98EXTRA_OECONF =3D "--with-usr=
-libdir=3D${libdir}"=E2=80=99.
-collaps the 2 lines into a single EXTRA_OECONF.
+Every recipe using Qt5 needs to know where the Qt5 tools are installed
+and have them in the search path.
 
-Signed-off-by: Yao Xinpan <yaoxp@cn.fujitsu.com>
+Originally it was being done in qt5.inc file but a better place for it
+is inside qmake5_base.bbclass. We now use the native bindir as every
+recipe needs to use the native one (be it native, nativesdk or
+target).
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ classes/qmake5_base.bbclass | 3 +++
+ recipes-qt/qt5/qt5.inc      | 2 --
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-suppor=
-t/lvm2/lvm2.inc
-index c6a9ec0..5f77fe6 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -28,6 +28,7 @@ EXTRA_OECONF =3D "--with-user=3D \
-                 --enable-pkgconfig \
-                 --enable-dmeventd \
-                 --with-udev-prefix=3D \
-+                --with-usrlibdir=3D${libdir} \
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 3861cd0..3b8c3bd 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -113,6 +113,9 @@ B = "${SEPB}"
+ 
+ CONFIGURESTAMPFILE = "${WORKDIR}/qmake5_base_configure.sstate"
+ 
++# The Qt5 tools binaries need to be included into the search path
++PATH_prepend = "${STAGING_BINDIR_NATIVE}/${QT_DIR_NAME}:"
++
+ qmake5_base_preconfigure() {
+         if [ -n "${CONFIGURESTAMPFILE}" -a -e "${CONFIGURESTAMPFILE}" ]; then
+                 if [ "`cat ${CONFIGURESTAMPFILE}`" != "${BB_TASKHASH}" -a "${S}" != "${B}" ]; then
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index bb0bcdc..7b7526a 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -161,5 +161,3 @@ FILES_${PN}-examples-staticdev = " \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*.a \
+     ${OE_QMAKE_PATH_EXAMPLES}/*/*/*/*/*/*/*/*.a \
  "
-=20
- PACKAGECONFIG +=3D "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinu=
-x', '', d)}"
-@@ -47,4 +48,3 @@ FILES_${PN} +=3D "${libdir}/device-mapper/*.so ${base_lib=
-dir}/udev"
- FILES_${PN}-dbg +=3D "${libdir}/device-mapper/.debug"
-=20
- RDEPENDS_${PN} =3D "bash"
--EXTRA_OECONF =3D "--with-usrlibdir=3D${libdir}"
---=20
-1.8.4.2
+-
+-PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
+-- 
+2.0.0.rc4
 
 
