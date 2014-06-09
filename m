@@ -1,26 +1,22 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C90865D63
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id D67DF65EB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jun 2014 16:23:13 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga101.fm.intel.com with ESMTP; 09 Jun 2014 09:23:11 -0700
+	Mon,  9 Jun 2014 16:24:35 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga103.fm.intel.com with ESMTP; 09 Jun 2014 09:19:47 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="352547909"
+X-IronPort-AV: E=Sophos;i="4.98,1003,1392192000"; d="scan'208";a="545257396"
 Received: from mmckenna-mobl2.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.49])
-	by FMSMGA003.fm.intel.com with ESMTP; 09 Jun 2014 09:19:23 -0700
+	by fmsmga001.fm.intel.com with ESMTP; 09 Jun 2014 09:24:34 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jun 2014 17:23:04 +0100
-Message-Id: <364f9086ac0c992f408413d9b2eb78d53d35b19b.1402330923.git.paul.eggleton@linux.intel.com>
+Date: Mon,  9 Jun 2014 17:24:29 +0100
+Message-Id: <cover.1402331046.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1402330923.git.paul.eggleton@linux.intel.com>
-References: <cover.1402330923.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1402330923.git.paul.eggleton@linux.intel.com>
-References: <cover.1402330923.git.paul.eggleton@linux.intel.com>
 Cc: Eric Benard <eric@eukrea.com>
-Subject: [PATCH 1/1] x264: fix SRCREV after upstream repository change
+Subject: [meta-oe][dylan][PATCH 0/1] x264 SRCREV fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +30,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 16:23:13 -0000
+X-List-Received-Date: Mon, 09 Jun 2014 16:24:38 -0000
 
-The upstream x264 project has re-imported all of their old history,
-meaning that all of the hashes have changed. Update SRCREV based on the
-mapping list they have provided at:
+The following changes since commit 70ebe86f193decd17d6295bcd4d4e5589585c0cc:
 
-  http://sprunge.us/dGOU
+  cloud9: update repository for sass.js (2014-04-20 15:52:43 +0200)
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/x264-dylan
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/x264-dylan
+
+Paul Eggleton (1):
+  x264: fix SRCREV after upstream repository change
+
  meta-oe/recipes-multimedia/x264/x264_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipes-multimedia/x264/x264_git.bb
-index c767ffd..4da24cc 100644
---- a/meta-oe/recipes-multimedia/x264/x264_git.bb
-+++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
-@@ -11,7 +11,7 @@ DEPENDS = "yasm-native"
- SRC_URI = "git://git.videolan.org/x264.git \
-     file://don-t-default-to-cortex-a9-with-neon.patch \
- "
--SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
-+SRCREV = "bfed708c5358a2b4ef65923fb0683cefa9184e6f"
- 
- PV = "r2230+git"
- 
 -- 
 1.9.3
 
