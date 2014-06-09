@@ -1,26 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 0151065F1E
+Return-Path: <paul.eggleton@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id A4E0C65D6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jun 2014 16:24:37 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 09 Jun 2014 09:19:48 -0700
+	Mon,  9 Jun 2014 17:34:40 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 09 Jun 2014 10:34:41 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.98,1003,1392192000"; d="scan'208";a="545257401"
+X-IronPort-AV: E=Sophos;i="4.98,1003,1392192000"; d="scan'208";a="552771993"
 Received: from mmckenna-mobl2.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.49])
-	by fmsmga001.fm.intel.com with ESMTP; 09 Jun 2014 09:24:35 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	by fmsmga002.fm.intel.com with ESMTP; 09 Jun 2014 10:34:40 -0700
+From: Paul Eggleton <paul.eggleton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jun 2014 17:24:30 +0100
-Message-Id: <364f9086ac0c992f408413d9b2eb78d53d35b19b.1402331046.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1402331046.git.paul.eggleton@linux.intel.com>
-References: <cover.1402331046.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1402331046.git.paul.eggleton@linux.intel.com>
-References: <cover.1402331046.git.paul.eggleton@linux.intel.com>
-Cc: Eric Benard <eric@eukrea.com>
-Subject: [meta-oe][dylan][PATCH 1/1] x264: fix SRCREV after upstream repository change
+Date: Mon, 09 Jun 2014 18:34:39 +0100
+Message-ID: <1770553.GcPTkVXTr4@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.5-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
+MIME-Version: 1.0
+Cc: Phil Blundell <pb@pbcl.net>
+Subject: Old OE history
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 16:24:38 -0000
+X-List-Received-Date: Mon, 09 Jun 2014 17:34:45 -0000
+Content-Type: text/plain; charset="us-ascii"
 
-The upstream x264 project has re-imported all of their old history,
-meaning that all of the hashes have changed. Update SRCREV based on the
-mapping list they have provided at:
+Hi there,
 
-  http://sprunge.us/dGOU
+Looking back through OE-Classic git commit history, the first commit (from 
+Chris) is basically an import; so it seems to me that at one point we did have 
+some more history from before then. This was before my time on the project so 
+I'm not sure what we had before bitkeeper (if anything).
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-oe/recipes-multimedia/x264/x264_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Does anyone actually have this early history saved somewhere?
 
-diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb b/meta-oe/recipes-multimedia/x264/x264_git.bb
-index c767ffd..4da24cc 100644
---- a/meta-oe/recipes-multimedia/x264/x264_git.bb
-+++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
-@@ -11,7 +11,7 @@ DEPENDS = "yasm-native"
- SRC_URI = "git://git.videolan.org/x264.git \
-     file://don-t-default-to-cortex-a9-with-neon.patch \
- "
--SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
-+SRCREV = "bfed708c5358a2b4ef65923fb0683cefa9184e6f"
- 
- PV = "r2230+git"
- 
--- 
-1.9.3
+Cheers,
+Paul
+---------------------------------------------------------------------
+Intel Corporation (UK) Limited
+Registered No. 1134945 (England)
+Registered Office: Pipers Way, Swindon SN3 1RJ
+VAT No: 860 2173 47
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
