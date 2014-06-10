@@ -1,43 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D13A96FD63
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A201E6FDFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 17:17:25 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id hi2so4082986wib.2
+	Tue, 10 Jun 2014 17:17:55 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id k14so6875252wgh.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 10:17:26 -0700 (PDT)
+	Tue, 10 Jun 2014 10:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tRpLOxwDYFBInxqdDcL0xKHM4+wGrg5YmM1I+bmc0jU=;
-	b=W6mdevOp6vhozN/FYXP6/eWJLeAxK6/EixPHBwdus+G4gkT6KCSBykWWtZ0/4awGVc
-	mAdHEMuSQqCsBPoPo70maRYMmtabFdHGVz6xAJFFq562aJM04GNjPTmddF0w7BUaCCTt
-	ouLnOLbvqHDGPzadCnyreGkmg1uChILYG6DicV+qsGppbDANZ6JFsbDFLzk9OvEcwt+C
-	U1mPtgr6pA/+WGlJoIBRJLasUd+kVpMGemU0V+7F9Pex6PVegK6HdctTtnKbttjYwUGt
-	eayRVhARy6w23XYLDVOlQy5Ac7F+k+pNNg5HIhVNj5ypD8Sy6jTZkWCoC5GI6F0r45wC
-	cS4Q==
-X-Received: by 10.14.3.5 with SMTP id 5mr67573eeg.58.1402420646552;
-	Tue, 10 Jun 2014 10:17:26 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=4d+IGqPaNdGf3+opcp2ljNGZ1UkGIRg/59A9lJFfjxg=;
+	b=vRRH9GeOy937ImyC79BYcBN86DsjupS/Aby4pFO3s+oxa1fQl7uSkWwgcm6pMVbuhu
+	84Btf4+BOdOC/doL7qpFOIXy5gE4iIixpfFXF230m4dvsCuLCtFHG8xng29XMjND0PBU
+	7za0TguEyijx+mp+xfGi0/04gA7Ub188lSMRuzQuJGSpvLMb+FYkV9Rb6Ghytg/8Zoxr
+	1xCHRJlJjrBiifuOnqsGHqYKbmxTfuey1LPMgyCC0dKxG1eP9z4xIFLz4+RoKiNOv8bO
+	MjOQItx4Y0r0KN3NOpi+bsdxBitDrKI1pVGuY/HeewksNHpEPbfBp2PR4baLOWnyYquB
+	I/2w==
+X-Received: by 10.15.99.75 with SMTP id bk51mr333401eeb.21.1402420676334;
+	Tue, 10 Jun 2014 10:17:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	a45sm53381844eez.2.2014.06.10.10.17.25 for <multiple recipients>
+	w6sm53387958eef.20.2014.06.10.10.17.55 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Jun 2014 10:17:25 -0700 (PDT)
+	Tue, 10 Jun 2014 10:17:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 10 Jun 2014 19:17:46 +0200
-To: Ash Charles <ashcharles@gmail.com>
-Message-ID: <20140610171745.GI2433@jama>
-References: <20140610112139.GD2433@jama>
-	<1402418201-4389-1-git-send-email-ashcharles@gmail.com>
-	<CAK8F28nWie5hLac3mFiB739BRfw=MQQ8q=39rZoV3i39vuvvcw@mail.gmail.com>
-	<20140610171143.GH2433@jama>
-MIME-Version: 1.0
-In-Reply-To: <20140610171143.GH2433@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Patch v2] xfce4-screenshooter: Ensure lib directory exists.
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Jun 2014 19:18:14 +0200
+Message-Id: <1402420694-17957-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-efl][PATCH] efl: add PACKAGECONFIG for c++11 and disable it by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,122 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jun 2014 17:17:32 -0000
-X-Groupsio-MsgNum: 50258
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vs0rQTeTompTJjtd"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Jun 2014 17:17:57 -0000
 
---vs0rQTeTompTJjtd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/efl.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-On Tue, Jun 10, 2014 at 07:11:43PM +0200, Martin Jansa wrote:
-> On Tue, Jun 10, 2014 at 09:42:17AM -0700, Ash Charles wrote:
-> > Hi,
-> >=20
-> > Newbie question:
-> > I sent this correction as a v2 on the patch as committed on
-> > master-next (which, unintentionally meant that I carried over Martin's
-> > SOB).  Is this the correct approach or
->=20
-> I don't mind my SOB being carried (I can still remove it when
-> re-cherry-picking to master next)
->=20
-> > 1. would you rather a completely new patch to resolve just the issue
-> > as the original has already been committed to master-next
->=20
-> No, being in master-next only means that it's being tested in my Jenkins
-> builds, I'm rebasing master-next every time I push something to master,
-> so I'll just replace original patch with v2 in master-next for next Jenki=
-ns
-> build.
->=20
-> > 2. would you rather a v2 on the original patch I sent to the list?
->=20
-> Sending PATCHv2 with --in-reply-to as you did now, is the best for me, th=
-anks
-
-Two smaller nitpicks I've noticed when cherry-picking v2.
-
-1) Subject prefix should be PATCHv2 (not just v2) for people who filter
-patches based on subject.
-
-2) vN changes in commit message are usually written bellow --- so that
-they are in e-mail for reviewers to see, but not part of final commit
-message (usually the incremental process isn't interesting in final
-commit, if it is, it should be mentioned in proper commit message).
-
-3) Upstream-Status this belongs to individual .patch files (applied
-through SRC_URI), not in commit message of whole "metadata change".
-
-I've removed v2:.* and Upstream-Status when cherry-picking it, so no
-need to send v3 this time.
-
-> > thanks,
-> > --Ash
-> >=20
-> > On Tue, Jun 10, 2014 at 9:36 AM, Ash Charles <ashcharles@gmail.com> wro=
-te:
-> > > Screenshooter autogenerates screenshooter-marshal.[ch] in lib/ during
-> > > compilation.  The source directory contains a lib/ but this directory
-> > > doesn't exist in a build directory by default so we add one manually.
-> > > Really, this should be corrected in the upstream package.
-> > >
-> > > v2: only make lib/ if it doesn't exist
-> > >
-> > > Upstream-Status: pending
-> > >
-> > > Signed-off-by: Ash Charles <ashcharles@gmail.com>
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > ---
-> > >  .../recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.1.bb   =
-  | 4 ++++
-> > >  1 file changed, 4 insertions(+)
-> > >
-> > > diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screens=
-hooter_1.8.1.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screensh=
-ooter_1.8.1.bb
-> > > index 4cda352..0e2e327 100644
-> > > --- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_=
-1.8.1.bb
-> > > +++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_=
-1.8.1.bb
-> > > @@ -11,5 +11,9 @@ SRC_URI +=3D "file://0001-Fix-panel-plugin-build.pa=
-tch"
-> > >  SRC_URI[md5sum] =3D "d0ffea2052a8e70154cf13789070711f"
-> > >  SRC_URI[sha256sum] =3D "40419892bd28989315eed053c159bba0f4264ed8c6c6=
-738806024e481eab9492"
-> > >
-> > > +do_compile_prepend() {
-> > > +       mkdir -p lib
-> > > +}
-> > > +
-> > >  FILES_${PN} +=3D "${datadir}/xfce4/panel/plugins \
-> > >          ${libdir}/xfce4/panel/plugins"
-> > > --
-> > > 1.8.3.2
-> > >
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index deca4bf..7ccb634 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -51,6 +51,9 @@ PACKAGECONFIG_class-native = "luajit"
+ PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
+ PACKAGECONFIG[opengl-es] = "--with-opengl=es,,virtual/libgles2"
+ PACKAGECONFIG[opengl-none] = "--with-opengl=none,,"
++# be aware when enabling this for efl-native, we don't provide gcc-native so you need to make
++# sure that all your builders have g++ which supports -std=gnu++11
++PACKAGECONFIG[c++11] = "--enable-c++11,--disable-c++11"
+ PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
+ PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
+-- 
+2.0.0
 
 
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vs0rQTeTompTJjtd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlOXPbkACgkQN1Ujt2V2gByD7ACffEizAETeiym6rdmjnLTr4VU8
-b9wAnAjY/l4wu3IhwMyh3wh0GZX+kVpG
-=NjqK
------END PGP SIGNATURE-----
-
---vs0rQTeTompTJjtd--
