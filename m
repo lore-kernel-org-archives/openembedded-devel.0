@@ -1,37 +1,37 @@
 Return-Path: <ashcharles@gmail.com>
-Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
-	[209.85.220.179])
-	by mail.openembedded.org (Postfix) with ESMTP id D228D6BCB3
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C65165DF9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 17:20:51 +0000 (UTC)
-Received: by mail-vc0-f179.google.com with SMTP id id10so6437405vcb.38
+	Tue, 10 Jun 2014 18:18:30 +0000 (UTC)
+Received: by mail-pa0-f50.google.com with SMTP id fb1so975746pad.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 10:20:53 -0700 (PDT)
+	Tue, 10 Jun 2014 11:18:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=vOWGSdW4jdWGjONsiov/dR+TLHbYCg0hkLFov7bKmC4=;
-	b=jx1AYjDhDYKF9CCGZ7BIrvfpv99EfT79BrrF6czWsmE9c6oZR6me91Nb9hp2ZPLQoX
-	jBe9PbUENMWuwqRPB+NEZxzeezt6HCuSQYyoPZixZbXKqB8qKXwshOxYjY3vxJQfrGEz
-	DhR41fQgfHXgdczWGcbPLIXwoJTlyGcF1wozuNdhu9NWbDLI8oG4mg+ZzszCmItBT9gt
-	5a5sc8vHQy0kLEd7p8LhOT2w8iWAGrikUsPlSNd0PuUAcm3XhyeRmp4X6YEkPLN79WtL
-	JIB1TznBbzcVGNDf6aUX9Xqq6ZcNDh4tRzw9wMZXaf2BxbrjxxGU+QC/2KCil91p93qE
-	UQ9w==
-X-Received: by 10.58.229.101 with SMTP id sp5mr31759654vec.42.1402420853033;
-	Tue, 10 Jun 2014 10:20:53 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.58.198.163 with HTTP; Tue, 10 Jun 2014 10:20:22 -0700 (PDT)
-In-Reply-To: <20140610171143.GH2433@jama>
-References: <20140610112139.GD2433@jama>
-	<1402418201-4389-1-git-send-email-ashcharles@gmail.com>
-	<CAK8F28nWie5hLac3mFiB739BRfw=MQQ8q=39rZoV3i39vuvvcw@mail.gmail.com>
-	<20140610171143.GH2433@jama>
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=P758suIQWzmRY+K+c+pu2jR3gtZa2XpJ4QpZH65RVbA=;
+	b=L0JpRpVmcCRyQepTuHETCOxvKRfFsA93S1D/t6lBtLVA0Uj8vgM981fVmPdrMhdVKn
+	vfuhGDVl0e1vUHygIt15x71befSWNW1HUihtrMH5SuRut5os7APrOJphtzNnfp3sD+uZ
+	sLRij5vv9hHX6NCAlKDQPJwn5JFVlc6xHRTBMdC9Aqa/31QWZY4gnJfXRt/deyLITLTP
+	ILnkX5SglHpLGfLedoa0KJ5z/uieL/CMoJ6w9vPHbsnpojXiC4tYtESuEpNKdti/FaBX
+	8p4JkssIQLHctH8pnHFdQiF1er/+1R4lv9j1LA8oupt7dELdxObKB/Ps/Hy39Mg+XOva
+	l17g==
+X-Received: by 10.68.196.137 with SMTP id im9mr13453198pbc.105.1402424310939; 
+	Tue, 10 Jun 2014 11:18:30 -0700 (PDT)
+Received: from gumstux.ashstix.com
+	(adsl-172-15-162-30.dsl.pltn13.sbcglobal.net. [172.15.162.30])
+	by mx.google.com with ESMTPSA id f2sm16546576pat.11.2014.06.10.11.18.29
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 10 Jun 2014 11:18:30 -0700 (PDT)
 From: Ash Charles <ashcharles@gmail.com>
-Date: Tue, 10 Jun 2014 10:20:22 -0700
-Message-ID: <CAK8F28nAWnNTun5TJhm7shu-SB2AC69JB-sFtT3aBa3MYdC_HA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Patch v2] xfce4-screenshooter: Ensure lib directory exists.
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Jun 2014 11:18:02 -0700
+Message-Id: <1402424282-324-1-git-send-email-ashcharles@gmail.com>
+X-Mailer: git-send-email 1.8.3.2
+In-Reply-To: <20140610112604.GF2433@jama>
+References: <20140610112604.GF2433@jama>
+Subject: [Patch v3] eject: copy po subdirectory for out-of-tree build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,21 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jun 2014 17:20:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Jun 2014 18:18:38 -0000
 
-On Tue, Jun 10, 2014 at 10:11 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> No, being in master-next only means that it's being tested in my Jenkins
-> builds, I'm rebasing master-next every time I push something to master,
-> so I'll just replace original patch with v2 in master-next for next Jenkins
-> build.
-Okay---perfect.  That makes sense.
->
->> 2. would you rather a v2 on the original patch I sent to the list?
->
-> Sending PATCHv2 with --in-reply-to as you did now, is the best for me, thanks
-Great.
+The po subdirectory found on the VPATH for an out-of-tree build so we
+copy it over. See [1] for discussion.
 
-Thanks,
-Ash
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/096052.html
+
+v3: only create and populate po/ if it doesn't already exist
+
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
+Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/eject/eject_2.1.5.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+index c47c653..a71d83f 100644
+--- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
++++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+@@ -16,6 +16,12 @@ S = "${WORKDIR}/${BPN}"
+ 
+ PR = "r1"
+ 
++do_compile_prepend() {
++    # PO subdir must be in build directory
++    mkdir -p ${B}/po
++    cp -r ${S}/po/* ${B}/po/
++}
++
+ ALTERNATIVE_${PN} = "volname eject"
+ ALTERNATIVE_LINK_NAME[volname] = "${bindir}/volname"
+ ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
+-- 
+1.8.3.2
+
 
