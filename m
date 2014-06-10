@@ -1,26 +1,44 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 140A06605F
+Return-Path: <akuster@mvista.com>
+Received: from mail-pb0-f42.google.com (mail-pb0-f42.google.com
+	[209.85.160.42])
+	by mail.openembedded.org (Postfix) with ESMTP id B6A906B232
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 14:21:52 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 10 Jun 2014 07:21:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.98,1009,1392192000"; d="scan'208";a="443838777"
-Received: from cgwithan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.176])
-	by azsmga001.ch.intel.com with ESMTP; 10 Jun 2014 07:21:44 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Kevyn-Alexandre =?ISO-8859-1?Q?Par=E9?= <kapare@rogue-research.com>
-Date: Tue, 10 Jun 2014 15:21:43 +0100
-Message-ID: <2119004.5vv4Yd8mCL@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.5-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <CACgAsMdmdZO6-jePAyHJVSFJg6ntXDzSr2xmx6OqHh5qvVcB-g@mail.gmail.com>
-References: <CACgAsMdmdZO6-jePAyHJVSFJg6ntXDzSr2xmx6OqHh5qvVcB-g@mail.gmail.com>
+	Tue, 10 Jun 2014 15:40:42 +0000 (UTC)
+Received: by mail-pb0-f42.google.com with SMTP id md12so6407887pbc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jun 2014 08:40:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type;
+	bh=uCz/8b62JvQYRQKYoJg9/N67BiIvylsoLGWyUJ4yC6A=;
+	b=RvefEDxeR6LY6KAgrPf1vzJtSGJ81zV5R2acJUZAxoEdvLtIHrd5y+ge9s8B5QkdkI
+	NDn1aH8zRQ/Pp8U6aMctiyHUrdtDbsCvWW0Laf66DVJKCs7/uh1aYFYyVS+KIqumk+Uz
+	wlsH1YxK0i8wHyIxC8meioZCxP/dx/tA8tdMLeTNyPu3fJuvvKdnmJ+ZYlV0aaueWW2J
+	Z52iEtDIu5jDTOvOrI2pGeVJaAPNCiv3c4xuzU+v1SyjLuitPwHqaBkORLHSVQobAQ37
+	TA0dR8NIsG7fHcwI6j++TKK1/gqV2mmlR2xHBthZ1Ll5rgj/vU78RWuCitcIfODml3Gn
+	YOZw==
+X-Gm-Message-State: ALoCoQkEa4iqyUus/IoXGu3LTeOlIAGfdIb0OX+aH50po3A8gMbv8UB8PmcDYSAV8lCHt3S84Ghk
+X-Received: by 10.67.30.163 with SMTP id kf3mr751591pad.144.1402414843385;
+	Tue, 10 Jun 2014 08:40:43 -0700 (PDT)
+Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55]) by mx.google.com with ESMTPSA id
+	av2sm70187941pbc.16.2014.06.10.08.40.41 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 10 Jun 2014 08:40:42 -0700 (PDT)
+Message-ID: <539726F8.3010109@mvista.com>
+Date: Tue, 10 Jun 2014 08:40:40 -0700
+From: "akuster@mvista" <akuster@mvista.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Yocto] How to add the same recipe twice?
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+References: <20140610100722.GC2433@jama>
+In-Reply-To: <20140610100722.GC2433@jama>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-06-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,98 +52,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jun 2014 14:21:56 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 10 Jun 2014 15:40:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Kevyn-Alexandre,
 
-On Monday 09 June 2014 14:26:53 Kevyn-Alexandre Par=E9 wrote:
-> Here what I want to do:
-> - Have 2 different psplash in my image.
->=20
-> Here what I have done:
-> - Copy and rename the psplash recipe to psplash-desktop and modify
-> couple of things.
->=20
->=20
-> Here the warning I'm having:
-> WARNING: The recipe psplash-desktop is trying to install files into a=
+On 06/10/2014 03:07 AM, Martin Jansa wrote:
+> On Mon, Jun 02, 2014 at 10:49:50AM +0200, Martin Jansa wrote:
+>> This build still contains huge patch setting B = S or inherit for
+>> autotools-brokensep for all recipes which were failing in earlier
+>> master builds.
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>
+> == Failed tasks 2014-06-10 ==
+>
+> === common (17) ===
+>      * meta-openembedded/meta-efl/recipes-efl/efl/efl_1.10.0.bb, do_compile
+>      * meta-openembedded/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.26.bb, do_compile
 
-> shared area when those files already exist. Those files and their
-> manifest location are:
->  =20
-> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_buil=
-d/src/
-> build/tmp/sysroots/overo/pkgdata/runtime/psplash-default Matched in
-> manifest-overo-psplash.packagedata
-> manifest-overo-psplash-second.packagedata
->  =20
-> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_buil=
-d/src/
-> build/tmp/sysroots/overo/pkgdata/runtime/psplash-default.packaged Mat=
-ched in
-> manifest-overo-psplash.packagedata
->  =20
-> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_buil=
-d/src/
-> build/tmp/sysroots/overo/pkgdata/runtime-reverse/psplash-default Matc=
-hed in
-> manifest-overo-psplash.packagedata
-> manifest-overo-psplash-second.packagedata
-> Please verify which package should provide the above files.
-> WARNING: The recipe psplash-desktop is trying to install files into a=
+>      * meta-openembedded/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb, do_compile
+>      * meta-openembedded/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb, do_compile
+>      * meta-openembedded/meta-oe/recipes-connectivity/libnet/libnet_1.1.6.bb, do_configure
+I can look into curlpp, lksctp-tools and libnet
 
-> shared area when those files already exist. Those files and their
-> manifest location are:
->  =20
-> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_buil=
-d/src/
-> build/tmp/deploy/rpm/armv7a_vfp_neon/psplash-default-0.1+git0+afd4e22=
-8c6-r15
-> .armv7a_vfp_neon.rpm Matched in
-> manifest-armv7a-vfp-neon-psplash.package_write_rpm
-> Please verify which package should provide the above files.
->=20
-> Here the error:
-> http://pastebin.com/t2gYs3WT
->=20
-> Here the diff of my psplash recipe compare to psplash original:
-> http://pastebin.com/8TrQRFkQ
->=20
-> In the chat sgw_ recommended my to use:...
-> sgw_> kapare, now that I better understand, you want to mv your binar=
-y
-> in the do_install_append(), and keep the update-alternative code and
-> FILES_${PN} bin, but use the renamed binary in the
-> ALTERNATIVE_LINK_NAME, but you also need ALTNATIVE_TARGET[psplash] =3D=
+- armin
 
-> ${bindir}/psplash-default
+>      * meta-openembedded/meta-oe/recipes-devtools/python/python-cython_0.20.1.bb, do_package
+>      * meta-openembedded/meta-oe/recipes-devtools/python/python-pyyaml_3.10.bb, do_compile
+>      * meta-openembedded/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb, do_configure
+>      * meta-openembedded/meta-oe/recipes-navigation/omgps/omgps_svn.bb, do_compile
+>      * meta-openembedded/meta-oe/recipes-support/daemonize/daemonize_git.bb, do_configure
+>      * meta-openembedded/meta-oe/recipes-support/eject/eject_2.1.5.bb, do_compile
+>      * meta-openembedded/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.2.2.bb, do_compile
+>      * meta-openembedded/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.8.1.bb, do_compile
+>      * meta-qt5/recipes-qt/maliit/maliit-framework-qt5_git.bb, do_compile
+>      * meta-qt5/recipes-qt/qt5/qtwayland_git.bb, do_install
+>      * meta-smartphone/meta-fso/recipes-freesmartphone/python/python-pyrtc_git.bb, do_compile
+>      * meta-smartphone/meta-shr/recipes-shr/shr/python-phoneutils_git.bb, do_compile
+>
+> === common-x86 (3) ===
+>      * meta-browser/recipes-browser/chromium/chromium_35.0.1916.114.bb, do_compile
+>      * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+>      * openembedded-core/meta/recipes-bsp/grub/grub_2.00.bb, do_package
+>
+> === qemuarm (0) ===
+>
+> === qemux86 (0) ===
+>
+> === qemux86_64 (1) ===
+>      * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb, do_compile
+>
+> === Number of failed tasks ===
+> {| class=wikitable
+> |-
+> ||qemuarm       ||17    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140606_153039.log/
+> |-
+> ||qemux86       ||20    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140609_094000.log/
+> |-
+> ||qemux86_64    ||21    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-core-branches//log.world.20140610_021320.log/
+> |}
+>
+>
+>
 
-FYI, our psplash recipe has built-in handling for multiple splash image=
-s, so=20
-you don't need to add multiple recipes to use this. You just need a=20
-psplash_git.bbappend in your own layer which does something like this:
-
-FILESEXTRAPATHS_prepend :=3D "${THISDIR}/files:"
-SPLASH_IMAGES =3D "file://splash-file-one.h;outsuffix=3Done \
-                          file://splash-file-two.h;outsuffix=3Dtwo"
-
-This will automatically create psplash-<outsuffix> packages for each sp=
-lash=20
-image entry (i.e. psplash-one and psplash-two in this case), and set up=
-=20
-update-alternatives alternatives for each one.
-
-(I realise we don't have this documented anywhere, I've added a todo li=
-st item=20
-for me to document it.)
-
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
