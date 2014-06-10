@@ -1,34 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A201E6FDFD
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D228D6BCB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 17:17:55 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id k14so6875252wgh.30
+	Tue, 10 Jun 2014 17:20:51 +0000 (UTC)
+Received: by mail-vc0-f179.google.com with SMTP id id10so6437405vcb.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jun 2014 10:17:56 -0700 (PDT)
+	Tue, 10 Jun 2014 10:20:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=4d+IGqPaNdGf3+opcp2ljNGZ1UkGIRg/59A9lJFfjxg=;
-	b=vRRH9GeOy937ImyC79BYcBN86DsjupS/Aby4pFO3s+oxa1fQl7uSkWwgcm6pMVbuhu
-	84Btf4+BOdOC/doL7qpFOIXy5gE4iIixpfFXF230m4dvsCuLCtFHG8xng29XMjND0PBU
-	7za0TguEyijx+mp+xfGi0/04gA7Ub188lSMRuzQuJGSpvLMb+FYkV9Rb6Ghytg/8Zoxr
-	1xCHRJlJjrBiifuOnqsGHqYKbmxTfuey1LPMgyCC0dKxG1eP9z4xIFLz4+RoKiNOv8bO
-	MjOQItx4Y0r0KN3NOpi+bsdxBitDrKI1pVGuY/HeewksNHpEPbfBp2PR4baLOWnyYquB
-	I/2w==
-X-Received: by 10.15.99.75 with SMTP id bk51mr333401eeb.21.1402420676334;
-	Tue, 10 Jun 2014 10:17:56 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	w6sm53387958eef.20.2014.06.10.10.17.55 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Jun 2014 10:17:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jun 2014 19:18:14 +0200
-Message-Id: <1402420694-17957-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-Subject: [meta-efl][PATCH] efl: add PACKAGECONFIG for c++11 and disable it by default
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=vOWGSdW4jdWGjONsiov/dR+TLHbYCg0hkLFov7bKmC4=;
+	b=jx1AYjDhDYKF9CCGZ7BIrvfpv99EfT79BrrF6czWsmE9c6oZR6me91Nb9hp2ZPLQoX
+	jBe9PbUENMWuwqRPB+NEZxzeezt6HCuSQYyoPZixZbXKqB8qKXwshOxYjY3vxJQfrGEz
+	DhR41fQgfHXgdczWGcbPLIXwoJTlyGcF1wozuNdhu9NWbDLI8oG4mg+ZzszCmItBT9gt
+	5a5sc8vHQy0kLEd7p8LhOT2w8iWAGrikUsPlSNd0PuUAcm3XhyeRmp4X6YEkPLN79WtL
+	JIB1TznBbzcVGNDf6aUX9Xqq6ZcNDh4tRzw9wMZXaf2BxbrjxxGU+QC/2KCil91p93qE
+	UQ9w==
+X-Received: by 10.58.229.101 with SMTP id sp5mr31759654vec.42.1402420853033;
+	Tue, 10 Jun 2014 10:20:53 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.198.163 with HTTP; Tue, 10 Jun 2014 10:20:22 -0700 (PDT)
+In-Reply-To: <20140610171143.GH2433@jama>
+References: <20140610112139.GD2433@jama>
+	<1402418201-4389-1-git-send-email-ashcharles@gmail.com>
+	<CAK8F28nWie5hLac3mFiB739BRfw=MQQ8q=39rZoV3i39vuvvcw@mail.gmail.com>
+	<20140610171143.GH2433@jama>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Tue, 10 Jun 2014 10:20:22 -0700
+Message-ID: <CAK8F28nAWnNTun5TJhm7shu-SB2AC69JB-sFtT3aBa3MYdC_HA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Patch v2] xfce4-screenshooter: Ensure lib directory exists.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,28 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jun 2014 17:17:57 -0000
+X-List-Received-Date: Tue, 10 Jun 2014 17:20:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/efl.inc | 3 +++
- 1 file changed, 3 insertions(+)
+On Tue, Jun 10, 2014 at 10:11 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> No, being in master-next only means that it's being tested in my Jenkins
+> builds, I'm rebasing master-next every time I push something to master,
+> so I'll just replace original patch with v2 in master-next for next Jenkins
+> build.
+Okay---perfect.  That makes sense.
+>
+>> 2. would you rather a v2 on the original patch I sent to the list?
+>
+> Sending PATCHv2 with --in-reply-to as you did now, is the best for me, thanks
+Great.
 
-diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
-index deca4bf..7ccb634 100644
---- a/meta-efl/recipes-efl/efl/efl.inc
-+++ b/meta-efl/recipes-efl/efl/efl.inc
-@@ -51,6 +51,9 @@ PACKAGECONFIG_class-native = "luajit"
- PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
- PACKAGECONFIG[opengl-es] = "--with-opengl=es,,virtual/libgles2"
- PACKAGECONFIG[opengl-none] = "--with-opengl=none,,"
-+# be aware when enabling this for efl-native, we don't provide gcc-native so you need to make
-+# sure that all your builders have g++ which supports -std=gnu++11
-+PACKAGECONFIG[c++11] = "--enable-c++11,--disable-c++11"
- PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
- PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
- PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
--- 
-2.0.0
-
+Thanks,
+Ash
 
