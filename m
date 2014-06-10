@@ -1,32 +1,27 @@
-Return-Path: <blloyd@familyhonor.net>
-Received: from mho-01-ewr.mailhop.org (mho-03-ewr.mailhop.org [204.13.248.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 39A4766078
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id E9EB066078
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jun 2014 19:46:34 +0000 (UTC)
-Received: from [98.142.68.106] (helo=lloydserv.home.familyhonor.net)
-	by mho-01-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
-	id 1Wu5Wd-000P1V-Cb for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Jun 2014 19:46:35 +0000
-Received: from omclinuxballt.devnet.ordermatic.net
-	(mobile-166-137-146-170.mycingular.net [166.137.146.170])
-	(authenticated bits=0)
-	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
-	s59JkH6J018067
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NO); Mon, 9 Jun 2014 14:46:32 -0500
-X-Mail-Handler: Dyn Standard SMTP by Dyn
-X-Originating-IP: 98.142.68.106
-X-Report-Abuse-To: abuse@dyndns.com (see
-	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
-	abuse reporting information)
-X-MHO-User: U2FsdGVkX1+VlezHUahohI8fb7txHignVN9z+/mShwE=
-From: Brian Lloyd <blloyd@familyhonor.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jun 2014 14:46:10 -0500
-Message-Id: <1402343170-17707-1-git-send-email-blloyd@familyhonor.net>
-X-Mailer: git-send-email 1.9.0
-Subject: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
+	Tue, 10 Jun 2014 00:27:52 +0000 (UTC)
+Received: (qmail 4538 invoked by uid 1003); 10 Jun 2014 00:27:53 -0000
+Received: from unknown (HELO ?10.16.32.86?) (philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	10 Jun 2014 00:27:52 -0000
+Message-ID: <53965107.4030808@balister.org>
+Date: Mon, 09 Jun 2014 17:27:51 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+References: <9ADD3FDE8B189B4AA2F8A3C711F8155E551A3E5B@fmsmsx111.amr.corp.intel.com>
+In-Reply-To: <9ADD3FDE8B189B4AA2F8A3C711F8155E551A3E5B@fmsmsx111.amr.corp.intel.com>
+X-Enigmail-Version: 1.6
+X-Forwarded-Message-Id: <9ADD3FDE8B189B4AA2F8A3C711F8155E551A3E5B@fmsmsx111.amr.corp.intel.com>
+Subject: [yocto] Agenda: Yocto Project Technical Team Meeting - Tuesday, June 10, 2014 8:00 AM US Pacific Time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,58 +35,273 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jun 2014 19:46:38 -0000
+X-List-Received-Date: Tue, 10 Jun 2014 00:27:57 -0000
+X-Groupsio-MsgNum: 50244
+Content-Type: multipart/mixed; boundary="------------030308010805080309060004"
 
-From: blloyd <blloyd@familyhonor.net>
+--------------030308010805080309060004
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-The latest driver corrected a number of issues and compiles without warnings with just one patch.  The header included by the given patch is already included in the geode master line, so will not be be required after the next geode version release.
+I'd like to make sure everyone is aware this meeting takes place. Also,
+if you have an interest in the next release, be sure to look at:
 
-Signed-off-by: Brian Lloyd <blloyd@familyhonor.net>
----
- .../xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch | 11 +++++++++++
- ...f86-video-geode_2.11.14.bb => xf86-video-geode_2.11.15.bb} |  6 ++++--
- 2 files changed, 15 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
- rename meta-oe/recipes-graphics/xorg-driver/{nonworking/xf86-video-geode_2.11.14.bb => xf86-video-geode_2.11.15.bb} (60%)
+https://wiki.yoctoproject.org/wiki/Yocto_Project_v1.7_Status
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
-new file mode 100644
-index 0000000..97d9d49
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch
-@@ -0,0 +1,11 @@
-+diff -up xf86-video-geode-2.11.14/src/geode_dcon.c.jx xf86-video-geode-2.11.14/src/geode_dcon.c
-+--- xf86-video-geode-2.11.14/src/geode_dcon.c.jx	2012-11-24 05:01:15.000000000 -0500
-++++ xf86-video-geode-2.11.14/src/geode_dcon.c	2013-10-25 16:19:35.950234174 -0400
-+@@ -29,6 +29,7 @@
-+ 
-+ /* Includes that are used by all drivers */
-+ #include <xf86.h>
-++#include <xf86Modes.h>
-+ #include <xf86_OSproc.h>
-+ #include <compiler.h>
-+ 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
-similarity index 60%
-rename from meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb
-rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
-index 2fdb210..07d2d9b 100644
---- a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.11.14.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
-@@ -4,8 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e7f3e39474aeea5af381a8e103dafc36"
- SUMMARY = "X.org server -- Geode GX2/LX display driver"
- PR = "${INC_PR}.0"
- 
--SRC_URI[md5sum] = "c9a4e1c5438240e5bdce332f92df9163"
--SRC_URI[sha256sum] = "4c750b46c932934faa008919922f5ac8a572afcfe265ac8d7c203b8167a0cfcc"
-+SRC_URI[md5sum] = "7dafd19e274c771539b6d4d459423ccf"
-+SRC_URI[sha256sum] = "00db3bd697b32286eb0e42f5dbd7fcc8d7255dd11c299b1ee16a06a244868ff0"
-+
-+SRC_URI += "file://xf86SetModeDefaultName.patch"
- 
- COMPATIBLE_HOST = "i.86.*-linux"
- 
+If you see any features you'd like to help with, I am sure RP would like
+to talk to you.
+
+Philip
+
+
+-------- Original Message --------
+Subject: [yocto] Agenda: Yocto Project Technical Team Meeting - Tuesday,
+June 10, 2014 8:00 AM US Pacific Time
+Date: Tue, 10 Jun 2014 00:08:07 +0000
+From: Jolley, Stephen K <stephen.k.jolley@intel.com>
+To: yocto@yoctoproject.org <yocto@yoctoproject.org>
+
+Agenda:
+
+
+
+* Opens collection - 5 min (Stephen)
+
+* Yocto 1.7 status - 5 min (Stephen/team)
+
+https://wiki.yoctoproject.org/wiki/Yocto_Project_v1.7_Status
+
+https://wiki.yoctoproject.org/wiki/Yocto_1.7_Schedule
+
+https://wiki.yoctoproject.org/wiki/Yocto_1.7_Features
+
+* SWAT team rotation: Nitin -> Beth
+
+https://wiki.yoctoproject.org/wiki/Yocto_Build_Failure_Swat_Team
+
+* Opens - 10 min
+
+* Team Sharing - 10 min
+
+-----Original Appointment-----
+
+We encourage people attending the meeting to logon the Yocto Project IRC
+chancel during the meeting (optional):
+
+
+
+Yocto IRC: http://webchat.freenode.net/?channels=#yocto
+
+IRC Tutorial: http://www.irchelp.org/irchelp/irctutorial.html
+
+Conference details
+
+Conference name:
+
+Yocto Project Technical Team
+
+Conference date/start time:
+
+Tue Jun 25, 2013 at 11:00 AM Eastern Daylight Time (GMT-0400)
+
+Participants:
+
+30
+
+Duration:
+
+30 minutes
+
+Participant passcode:
+
+42001078
+
+Dial-in number:
+
+1.972.995.7777
+
+US Toll Free number:
+
+1.877.561.6828
+
+BlackBerry users, click this link to join your conference as a participant:
+
+1.972.995.7777x42001078#
+
+
+
+Depending on where you are dialing from, either your BlackBerry will
+pause and enter the passcode automatically or you will be prompted to
+click again to dial the passcode.
+
+
+Local and Global Access Numbers
+
+
+
+Country
+
+Dial-in number
+
+Australia:
+
+1800 636 843
+
+Czech Republic:
+
+242 430 350
+
+China (Beijing):
+
+From office dial 8-9957777 or 8784277
+Beijing Out of Office dial 5878 4277
+
+China (Shanghai):
+
+From office dial 8-9957777 or 3073322
+Shanghai Out of Office dial 2307 3322
+
+China (Shenzen):
+
+From office dial 8-9957777 or 6007877
+Shenzen Out of Office dial 2600 7877
+
+China (Other Cities):
+
+From IP phone dial 8-9957777
+Other cities - Non IP phone dial 021-23073322
+
+Denmark:
+
+8060 1400
+
+Finland:
+
+09 41333477
+
+France:
+
+0497 275888
+
+Germany:
+
+08161 803232
+
+Holland:
+
+030 2417490
+
+India:
+
+BSNL subscribers use 1800 425 9996 (Toll Free)
+Airtel subscribers use 0008 009 861 212 (Toll Free)
+From TI Campus use 89957777
+Others use 2509 9555 (Landline within Bangalore) or
+80 2509 9555 (Outside Bangalore)
+
+Israel:
+
+09 790 6715
+
+Italy:
+
+039 69061234 (039 is local city code not country code)
+
+Japan:
+
+From TI Campus use 8 995 7777
+Outside TI use 03 4331 3777
+
+Malaysia:
+
+From IP phone dial 2643799
+From Kuala Lumpur dial 4264 3799
+Outside Kuala Lumpur dial (03)4264 3799
+
+Norway:
+
+2 295 8744
+
+Philippines:
+
+From Baguio City use 4471177
+From Metro Manila area use 8702477
+
+Singapore:
+
+From IP phone dial 3894777
+Outside TI use 6389 4777
+
+South Korea:
+
+From IP phone dial 5606998
+From Seoul dial 5606998
+Outside Seoul dial (02)5606998
+
+Sweden:
+
+08 58755577
+
+Taiwan:
+
+From IP phone dial 1363
+From Taipei dial 2241 1363
+Outside Taipei dial (02)2241 1363
+
+Turkey:
+
+Landline Only dial 0811 288 0001
+then enter 877 633 1123
+
+UK:
+
+01908 355599
+
+US:
+
+972 995 7777 or 1877 561 6828
+
+
+Recurring conferences
+
+First scheduled conference:
+
+Tue Jun 25, 2013
+
+Recurrence frequency:
+
+Weekly - Every 1 week(s) on Tuesday
+
+Recurrence ends:
+
+End after 52 occurrences
+
+
+Thanks,
+
+Stephen K. Jolley
+Yocto Project Program Manager
+INTEL, MS JF1-255, 2111 N.E. 25th Avenue, Hillsboro, OR 97124
+*   Work Telephone:          (503) 712-0534
+*    Cell:                                (208) 244-4460
+* Email:                             stephen.k.jolley@intel.com
+
+
+
+
+
+--------------030308010805080309060004
+Content-Type: text/plain; charset=UTF-8;
+ name="Attached Message Part"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="Attached Message Part"
+
 -- 
-1.9.0
+_______________________________________________
+yocto mailing list
+yocto@yoctoproject.org
+https://lists.yoctoproject.org/listinfo/yocto
 
 
+--------------030308010805080309060004--
