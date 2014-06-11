@@ -1,34 +1,35 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qc0-f170.google.com (mail-qc0-f170.google.com
-	[209.85.216.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DEA96B71B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 19:10:54 +0000 (UTC)
-Received: by mail-qc0-f170.google.com with SMTP id l6so322774qcy.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 12:10:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=2nSjOX5aiD6LfKL3AVgME+N7iqlCSK6WsEntOGEOa2U=;
-	b=IpyjGBGF7WGT1ZYG22xghxazjxt7MtJ4Tc2yAYrbiajx3WyFlsvcQN5ofWA+yy3tVS
-	v2CZJBGsgZugj3RZ6SVJLNgN7OaYEWhzRKplGwvfpUtmbsxsR+6sRXvOBAc5xNBwkVeS
-	JZOOYgDlUpUCMefySpuXmSIHtMJ0sT6F+t/aR01dRo+fJc2PruZNGcoV4QUQE4fslA4C
-	1FfJTGjAYjXW9NEvBm+C9VN8Mtji2DUvvefowDJtGzdSC/kDLbcmkNUw0E3XgP+QAtIr
-	q5Cp6NaDrD/nbZIjayjHVk8Iea3WOgvtdKZCBoiymWncLQ2gbuJHuCV9ITWQqElXwh1t
-	Kjvw==
-X-Gm-Message-State: ALoCoQleo+N63/d8/dWH4TbWIWnsHeP3DugiwtDhwJryQ2aumEChcPCX4RLCU0gr0lMJRZ7Sa2/A
-X-Received: by 10.224.123.202 with SMTP id q10mr2795803qar.79.1402513855689;
-	Wed, 11 Jun 2014 12:10:55 -0700 (PDT)
+Return-Path: <kergoth@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id BB3706BCB3;
+	Wed, 11 Jun 2014 19:24:56 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id ty20so115410lab.40
+	for <multiple recipients>; Wed, 11 Jun 2014 12:24:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=08OQ65u/73VAW1w45dPHF9Wmm+G9NdxgDQxzgeyvXdk=;
+	b=LCU99cQSZe67kMRwNuo3YIqC+Q/FmiTHs/0HddhEFVuCYCj9f554s78WOYEcZ8nUMa
+	5Zg8s2tYZHyIL4c4eqgBLQz0DmTHNTCzU02vS9+Qy/whtMeboKQ7KjMkvqlrmV0PLJ1X
+	h3PzbhRMqlwEYOHWQjmW4SSBEqHaNNaskeJrmnR0x8n/Iijys0EloxYrAf+h5FBxmDwa
+	+vdv44hZaGJ7H3MhNmQgqxj7eFMCjS9mXdByctWNAYqmA63pa4OFO04KTK/Amp82V+XU
+	MHM0c2Q3Br0KOaylMTzJpqviji3igXynXYeJdL+CuVR4qT+qY9tcL7kQ4/iELmMYuKFI
+	7vdQ==
+X-Received: by 10.152.45.37 with SMTP id j5mr3174128lam.58.1402514696740; Wed,
+	11 Jun 2014 12:24:56 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.91.138 with HTTP; Wed, 11 Jun 2014 12:10:35 -0700 (PDT)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 11 Jun 2014 20:10:35 +0100
-Message-ID: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: RFC: automatic -dbg splitting
+Sender: kergoth@gmail.com
+Received: by 10.112.148.170 with HTTP; Wed, 11 Jun 2014 12:24:36 -0700 (PDT)
+In-Reply-To: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
+References: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Wed, 11 Jun 2014 12:24:36 -0700
+X-Google-Sender-Auth: YQNv8eMEzH2zGYV-MeANHrdg8UI
+Message-ID: <CABcZANnZQJuXq_umM5SYZ+Z665PEjO+jdwwVV9Nz50pcWa1DOg@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: RFC: automatic -dbg splitting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,38 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2014 19:11:01 -0000
+X-List-Received-Date: Wed, 11 Jun 2014 19:24:58 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi,
+On Wed, Jun 11, 2014 at 12:10 PM, Burton, Ross <ross.burton@intel.com>
+wrote:
 
-So yet again I was wrestling PACKAGES and FILES in an attempt to get
-everything in the right place, the latest complication being ptest and
-where they are in the PACKAGES chain making correct splitting tricky.
+> So yet again I was wrestling PACKAGES and FILES in an attempt to get
+> everything in the right place, the latest complication being ptest and
+> where they are in the PACKAGES chain making correct splitting tricky.
+>
+> Again I wondered why debug packages need explicit FILES, and did a
+> quick hack as a proof of concept to put split debug objects and source
+> code into PN-dbg automatically, instead of through explicit FILES.
+> This hack is at best: it clears FILES_PN-dbg in bitbake.conf and as it
+> executes do_package FILES is set for each file it handles.  As PN-dbg
+> is at the beginning of PACKAGES it takes the right files before other
+> packages, apart from when other =+ is used as in ptest... so my
+> original reason for looking at this is still a problem.  This is in
+> ross/debug in poky-contrib, fwiw.
+>
+> Before I look at this again and avoid FILES entirely, I should check
+> that my assumptions are valid in the greater community.  My big
+> assumptions here are that 1) every recipe has a single -dbg package,
+> 2) every debug object belongs in that -dbg package, 3) only debug
+> objects and sources belong in that -dbg package.
+>
+> I know there are recipes floating around that have multiple -dbg
+> packages, but I can't see a great rationale for that.  I also can't
+> see a reason why you'd want debug objects/sources outside of the -dbg
+> package, or something that wasn't a debug object or source inside the
+> -dbg package.
+>
 
-Again I wondered why debug packages need explicit FILES, and did a
-quick hack as a proof of concept to put split debug objects and source
-code into PN-dbg automatically, instead of through explicit FILES.
-This hack is at best: it clears FILES_PN-dbg in bitbake.conf and as it
-executes do_package FILES is set for each file it handles.  As PN-dbg
-is at the beginning of PACKAGES it takes the right files before other
-packages, apart from when other =+ is used as in ptest... so my
-original reason for looking at this is still a problem.  This is in
-ross/debug in poky-contrib, fwiw.
+This seems like a step in the right direction to me.
 
-Before I look at this again and avoid FILES entirely, I should check
-that my assumptions are valid in the greater community.  My big
-assumptions here are that 1) every recipe has a single -dbg package,
-2) every debug object belongs in that -dbg package, 3) only debug
-objects and sources belong in that -dbg package.
-
-I know there are recipes floating around that have multiple -dbg
-packages, but I can't see a great rationale for that.  I also can't
-see a reason why you'd want debug objects/sources outside of the -dbg
-package, or something that wasn't a debug object or source inside the
--dbg package.
-
-Anyone disagree?
-
-Ross
+I do think we should also pursue going a step further, adding the ability
+to automatically emit a per-binary-package -dbg package, rather than a
+single monolithic recipe-wide one. This would mean that adding dbg-pkgs to
+an image is cleaner and doesn't result in installing every sub-package of
+the recipe. This change you're proposing would make it easier to extend to
+potentially do this, possibly optionally.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
