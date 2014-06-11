@@ -1,35 +1,36 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id BB3706BCB3;
-	Wed, 11 Jun 2014 19:24:56 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id ty20so115410lab.40
-	for <multiple recipients>; Wed, 11 Jun 2014 12:24:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=08OQ65u/73VAW1w45dPHF9Wmm+G9NdxgDQxzgeyvXdk=;
-	b=LCU99cQSZe67kMRwNuo3YIqC+Q/FmiTHs/0HddhEFVuCYCj9f554s78WOYEcZ8nUMa
-	5Zg8s2tYZHyIL4c4eqgBLQz0DmTHNTCzU02vS9+Qy/whtMeboKQ7KjMkvqlrmV0PLJ1X
-	h3PzbhRMqlwEYOHWQjmW4SSBEqHaNNaskeJrmnR0x8n/Iijys0EloxYrAf+h5FBxmDwa
-	+vdv44hZaGJ7H3MhNmQgqxj7eFMCjS9mXdByctWNAYqmA63pa4OFO04KTK/Amp82V+XU
-	MHM0c2Q3Br0KOaylMTzJpqviji3igXynXYeJdL+CuVR4qT+qY9tcL7kQ4/iELmMYuKFI
-	7vdQ==
-X-Received: by 10.152.45.37 with SMTP id j5mr3174128lam.58.1402514696740; Wed,
-	11 Jun 2014 12:24:56 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.148.170 with HTTP; Wed, 11 Jun 2014 12:24:36 -0700 (PDT)
-In-Reply-To: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-References: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 11 Jun 2014 12:24:36 -0700
-X-Google-Sender-Auth: YQNv8eMEzH2zGYV-MeANHrdg8UI
-Message-ID: <CABcZANnZQJuXq_umM5SYZ+Z665PEjO+jdwwVV9Nz50pcWa1DOg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: RFC: automatic -dbg splitting
+Return-Path: <eduardo@monkey.io>
+Received: from mail-ve0-f180.google.com (mail-ve0-f180.google.com
+	[209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 8349465D32
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jun 2014 23:21:15 +0000 (UTC)
+Received: by mail-ve0-f180.google.com with SMTP id jw12so956965veb.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jun 2014 16:21:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=CVuXBVpICOaIFBSqVAQOSa5mR8Fn1tFUt7OogfWqssQ=;
+	b=aUzQPoOBhbG1pNW4mm0T0rknnXotXRDd3biIWwsn582UbcczIJqdC7A/pF//YbBiNn
+	dEB265wtL/qNVJmW4hKar54SIOT9vg09+345BoXWWhL+nFigZq9diAaozys+pqn7HEO7
+	sN9/vvbVz4yJRumf3UC69Rxj7949NXnLdYzCGYhmPnrqm1VaeQqJNL9KVSudIlpAoY7J
+	tEs5FlIluK8GK6THU10F+6jgwXTJGc9jjXXw+Ot5Y26v/3ymbDOHQ/o+dzCOx3LV86WL
+	rAOh+LAO9nw7No3takLprCuIt4N2/7f7i4xHPiux9HGUx7m8yOeUIwl0oQesPLvekXz5
+	zoyA==
+X-Gm-Message-State: ALoCoQmhIZYerkegl+NAipPfk2cbVKbqfkwL0W5MZIp8FPLSHTJI/zqIW62B+cErRD3XbrgQ3gEq
+X-Received: by 10.220.69.72 with SMTP id y8mr40616776vci.21.1402528875968;
+	Wed, 11 Jun 2014 16:21:15 -0700 (PDT)
+Received: from monotop.amnet.co.cr ([186.32.221.184])
+	by mx.google.com with ESMTPSA id av3sm49050649vdd.6.2014.06.11.16.21.13
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 11 Jun 2014 16:21:15 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Jun 2014 17:20:46 -0600
+Message-Id: <1402528846-26715-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] monkey: fix broken separate build with workaround.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,51 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2014 19:24:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jun 2014 23:21:23 -0000
 
-On Wed, Jun 11, 2014 at 12:10 PM, Burton, Ross <ross.burton@intel.com>
-wrote:
+This patch make use of autotools-brokensep on main
+recipe to avoid a broken build when using a different
+build directory.
 
-> So yet again I was wrestling PACKAGES and FILES in an attempt to get
-> everything in the right place, the latest complication being ptest and
-> where they are in the PACKAGES chain making correct splitting tricky.
->
-> Again I wondered why debug packages need explicit FILES, and did a
-> quick hack as a proof of concept to put split debug objects and source
-> code into PN-dbg automatically, instead of through explicit FILES.
-> This hack is at best: it clears FILES_PN-dbg in bitbake.conf and as it
-> executes do_package FILES is set for each file it handles.  As PN-dbg
-> is at the beginning of PACKAGES it takes the right files before other
-> packages, apart from when other =+ is used as in ptest... so my
-> original reason for looking at this is still a problem.  This is in
-> ross/debug in poky-contrib, fwiw.
->
-> Before I look at this again and avoid FILES entirely, I should check
-> that my assumptions are valid in the greater community.  My big
-> assumptions here are that 1) every recipe has a single -dbg package,
-> 2) every debug object belongs in that -dbg package, 3) only debug
-> objects and sources belong in that -dbg package.
->
-> I know there are recipes floating around that have multiple -dbg
-> packages, but I can't see a great rationale for that.  I also can't
-> see a reason why you'd want debug objects/sources outside of the -dbg
-> package, or something that wasn't a debug object or source inside the
-> -dbg package.
->
+monkey-yocto/f15c9e7cd9143ce8486ae5e78db9092238c3d0ec
 
-This seems like a step in the right direction to me.
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+---
+ meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I do think we should also pursue going a step further, adding the ability
-to automatically emit a per-binary-package -dbg package, rather than a
-single monolithic recipe-wide one. This would mean that adding dbg-pkgs to
-an image is cleaner and doesn't result in installing every sub-package of
-the recipe. This change you're proposing would make it easier to extend to
-potentially do this, possibly optionally.
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+index 07a202f..6fa1b77 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+@@ -24,7 +24,7 @@ EXTRA_OECONF = " \
+              --malloc-libc \
+ "
+ 
+-inherit autotools pkgconfig update-rc.d systemd
++inherit autotools-brokensep pkgconfig update-rc.d systemd
+ 
+ INITSCRIPT_NAME = "monkey"
+ INITSCRIPT_PARAMS = "defaults 70"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.9.1
+
 
