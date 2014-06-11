@@ -1,36 +1,24 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id AAF9360E23
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 79C0165D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 14:53:17 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id 1EC3939A41E5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 10:53:18 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id kxVZs-rv4OyH
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 10:53:14 -0400 (EDT)
-Received: from mail-ve0-f181.google.com (mail-ve0-f181.google.com
-	[209.85.128.181])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id 88F5B39A41D1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 10:53:14 -0400 (EDT)
-Received: by mail-ve0-f181.google.com with SMTP id db11so5626333veb.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jun 2014 07:53:13 -0700 (PDT)
+	Wed, 11 Jun 2014 15:13:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.01,458,1400018400"; d="scan'208";a="52690934"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 11 Jun 2014 17:13:49 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.2.318.1; Wed, 11 Jun 2014 17:13:49 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.2.328.9; Wed, 11 Jun 2014 17:13:49 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Jun 2014 17:13:51 +0200
+Message-ID: <1402499631-12101-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
 MIME-Version: 1.0
-X-Received: by 10.220.190.197 with SMTP id dj5mr39264494vcb.19.1402498393834; 
-	Wed, 11 Jun 2014 07:53:13 -0700 (PDT)
-Received: by 10.58.46.129 with HTTP; Wed, 11 Jun 2014 07:53:13 -0700 (PDT)
-Date: Wed, 11 Jun 2014 10:53:13 -0400
-Message-ID: <CACgAsMeDOnYgGBwCEoev8Pn6tgxBJ4btfwUqdEi2c8fSYG+gYA@mail.gmail.com>
-From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: [Yocto] populate_sdk WARNING messages?
+Subject: [meta-oe][PATCH] id3lib: fix autoheader warning due to missing AC_DEFINE template
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,115 +32,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jun 2014 14:53:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jun 2014 15:14:01 -0000
+Content-Type: text/plain
 
-Hi,
+For more information:
+https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg36641.html
 
-Any thought on why I'm having so many warnings when executing
-populate_sdk? Should I worry?
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ .../id3lib/id3lib/acdefine.patch                   | 42 ++++++++++++++++++++++
+ meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb  |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/id3lib/id3lib/acdefine.patch
 
-yocto_build/src/build$ bitbake -c populate_sdk nirs-console-image
-Loading cache: 100%
-|########################################################################################################################################################################|
-ETA:  00:00:00
-Loaded 2249 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
+diff --git a/meta-oe/recipes-multimedia/id3lib/id3lib/acdefine.patch b/meta-oe/recipes-multimedia/id3lib/id3lib/acdefine.patch
+new file mode 100644
+index 0000000..09edecc
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/id3lib/id3lib/acdefine.patch
+@@ -0,0 +1,42 @@
++Add a description to the AC_DEFINE statements so that it appears in config.h and silences a fatal warning.
++
++Upstream-Status:Pending
++Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
++---
++ configure.in | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index abfe4cd..ce0d380 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -168,7 +168,7 @@ if test $has_iconv = 1; then
++ 		iconv_oldstyle=1, iconv_oldstyle=0)
++   if test $iconv_oldstyle = 1; then
++     AC_MSG_RESULT(const char **)
++-    AC_DEFINE(ID3LIB_ICONV_OLDSTYLE)
+++    AC_DEFINE(ID3LIB_ICONV_OLDSTYLE,[1],[Old iconv prototype definition in iconv.h])
++     #we'll check out the need of
++     #typecast in the call of iconv_open
++     AC_MSG_CHECKING(whether to typecast in iconv)
++@@ -184,7 +184,7 @@ if test $has_iconv = 1; then
++                    iconv_cast=0, iconv_cast=1)
++     if test $iconv_cast = 1; then
++       AC_MSG_RESULT(yes)
++-      AC_DEFINE(ID3LIB_ICONV_CAST_OK)
+++      AC_DEFINE(ID3LIB_ICONV_CAST_OK,[1],[Accepting const char ** in iconv prototype])
++     else
++       AC_MSG_RESULT(no)
++     fi
++@@ -206,7 +206,7 @@ if test $has_iconv = 1; then
++                    iconv_cast=0, iconv_cast=1)
++     if test $iconv_cast = 1; then
++       AC_MSG_RESULT(yes)
++-      AC_DEFINE(ID3LIB_ICONV_CAST_OK)
+++      AC_DEFINE(ID3LIB_ICONV_CAST_OK,[1],[Accepting const char ** in iconv prototype])
++     else
++       AC_MSG_RESULT(no)
++     fi
++-- 
++2.0.0
++
+diff --git a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+index 3089b8e..fc80cc0 100644
+--- a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
++++ b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+@@ -8,6 +8,7 @@ PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/id3lib/id3lib-${PV}.tar.gz;name=archive \
+            http://ftp.de.debian.org/debian/pool/main/i/id3lib3.8.3/id3lib3.8.3_3.8.3-7.2.diff.gz;name=patch \
++           file://acdefine.patch \
+ "
+ SRC_URI[archive.md5sum] = "19f27ddd2dda4b2d26a559a4f0f402a7"
+ SRC_URI[archive.sha256sum] = "2749cc3c0cd7280b299518b1ddf5a5bcfe2d1100614519b68702230e26c7d079"
+-- 
+2.0.0
 
-Build Configuration:
-BB_VERSION        = "1.22.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Ubuntu-12.04"
-TARGET_SYS        = "arm-poky-linux-gnueabi"
-MACHINE           = "overo"
-DISTRO            = "poky"
-DISTRO_VERSION    = "1.6"
-TUNE_FEATURES     = "armv7a vfp neon"
-TARGET_FPU        = "vfp-neon"
-meta
-meta-yocto        = "(nobranch):b8f6c7c794438fcfacef4fed8a9285f5dd2cb663"
-meta-gnome
-meta-oe
-meta-xfce
-meta-systemd
-meta-networking
-meta-multimedia   = "(nobranch):dca466c074c9a35bc0133e7e0d65cca0731e2acf"
-meta-gumstix      = "(nobranch):ee8f9454fbd461e2f32710eb7c35dcd82893aa9e"
-meta-gumstix-extras = "(nobranch):a80a576e65480c89f85e7583e071b6409bf3986c"
-meta-ros          = "(nobranch):821427d23adb33674da76dc34d8ab6983590fcd4"
-meta-nirs         = "(nobranch):b8f6c7c794438fcfacef4fed8a9285f5dd2cb663"
-
-NOTE: Preparing runqueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-eglibc/2.19-r0/packages-split/nativesdk-nscd/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/sbin/nscd'
-has relocations in .text
-WARNING: QA Issue: gcc-cross-canadian-arm: found library in wrong
-location: /opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so.0
-gcc-cross-canadian-arm: found library in wrong location:
-/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so.0.0.0
-gcc-cross-canadian-arm: found library in wrong location:
-/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/lib/qemu/qemu-bridge-helper'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-arm'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-ga'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-ppc'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-x86_64'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-mipsel'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-i386'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-mips'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-io'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-i386'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-mipsel'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-nbd'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-x86_64'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-arm'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-img'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-ppc'
-has relocations in .text
-WARNING: QA Issue: ELF binary
-'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-mips.real'
-has relocations in .text
-NOTE: Tasks Summary: Attempted 3493 tasks of which 2682 didn't need to
-be rerun and all succeeded.
-
-Summary: There were 19 WARNING messages shown.
-
-
-
-BR,
-
--KA
 
