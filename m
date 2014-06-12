@@ -1,32 +1,35 @@
-Return-Path: <fcooper@ti.com>
-X-Greylist: delayed 706 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 12 Jun 2014 18:22:50 UTC
-Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 80A4D6FAB5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id E1B7A6059A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 18:22:50 +0000 (UTC)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id s5CIB5Ac016220
+	Thu, 12 Jun 2014 19:38:48 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id t60so1783009wes.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 13:11:05 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5CIB4DJ010366
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 13:11:05 -0500
-Received: from dlep32.itg.ti.com (157.170.170.100) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 12 Jun 2014 13:11:04 -0500
-Received: from localhost.localdomain (dbdp20.itg.ti.com [172.24.170.38])	by
-	dlep32.itg.ti.com (8.14.3/8.13.8) with ESMTP id s5CIB1Ie020860;
-	Thu, 12 Jun 2014 13:11:03 -0500
-From: "Franklin S. Cooper Jr" <fcooper@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 Jun 2014 13:10:58 -0500
-Message-ID: <1402596658-17371-1-git-send-email-fcooper@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Cc: "Franklin S. Cooper Jr" <fcooper@ti.com>
-Subject: [meta-networking][PATCH] ptpd: update to 2.3.0
+	Thu, 12 Jun 2014 12:38:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=zH/5wSz5DWtP7QaCTC/WdwvqoPJx0yJnmUWJV4Tcr5Q=;
+	b=aeY25++3JZBJcLVYa1UmbWmU2q22aw0mi4SJlGTTM7oqtgz0E3Z1wCYnXI2vgeBApM
+	lBBklQy3Bww5IH5u8Dyyw7qIFLBsvoqrWblClZbOvbi45zHy5vFFP4zt772UFvUFrRga
+	YIDRF8onkbuLjPfh96H1oRgqpgdRb29buK6BPXUZauflyM8q/vFz7nrLdRDQhta/5f5Y
+	lxP+nXMW6yTW5o3kcra3gkfP2pfa0zqiRHyxnbO+fsqrETndwgEgGYsg1qhTTlyipcNn
+	jGOx9pHfhKwUtWi69RDQF3dKI6dolWuTw+LLm5yCTf2cLd9fuSl2v0HPBoiy9pLoEeEh
+	LwWg==
+X-Received: by 10.194.71.81 with SMTP id s17mr65632845wju.10.1402601929007;
+	Thu, 12 Jun 2014 12:38:49 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	o46sm6654137eef.31.2014.06.12.12.38.47 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Jun 2014 12:38:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Jun 2014 21:39:07 +0200
+Message-Id: <1402601947-20352-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-qt5][PATCH] qtwayland: respect OE_QMAKE_PATH_QT_HEADERS and use QT_VERSION variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,102 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jun 2014 18:22:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Jun 2014 19:38:57 -0000
 
+* QT_VERSION allows to use 5.3.1 e.g. when overriding SRCREV
+* ${includedir}/${QT_DIR_NAME} is the default value of OE_QMAKE_PATH_QT_HEADERS, but
+  when it's changed by user we should respect it here
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../ptpd/ptpd-2.2.0/ld-as-needed.patch             |   37 --------------------
- .../ptpd/{ptpd_2.2.0.bb => ptpd_2.3.0.bb}          |   21 ++++++-----
- 2 files changed, 11 insertions(+), 47 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
- rename meta-networking/recipes-daemons/ptpd/{ptpd_2.2.0.bb => ptpd_2.3.0.bb} (57%)
+ recipes-qt/qt5/qtwayland_git.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
-deleted file mode 100644
-index 7d5251b..0000000
---- a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--Patch from http://patch-tracker.debian.org/package/ptpd
--
--Description: Fix ld --as-needed
-- This patch fixes the order of gcc arguments to fix ld --as-needed
--Author: Roland Stigge <stigge@antcom.de>
--Bug-Debian: http://bugs.debian.org/607583
--
--Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-----
-- src/Makefile |    4 ++--
-- 1 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/Makefile b/src/Makefile
--index a672625..88a2fc8 100644
----- a/src/Makefile
--+++ b/src/Makefile
--@@ -40,7 +40,7 @@ CFLAGS += -DDBG_SIGUSR2_CHANGE_DEBUG
-- 
-- CFLAGS += -DPTP_EXPERIMENTAL
-- 
---LDFLAGS+= -lm -lrt
--+LIBS += -lm -lrt
-- 
-- PROG = ptpd
-- SRCS = ptpd.c arith.c bmc.c protocol.c display.c\
--@@ -63,7 +63,7 @@ TAGFILES = GPATH GRTAGS GSYMS GTAGS cscope.in.out cscope.out cscope.po.out
-- all: $(PROG)
-- 
-- $(PROG): $(OBJS)
---	$(CC) -o $@ $(OBJS) $(LDFLAGS)
--+	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
-- 
-- $(OBJS): $(HDRS)
-- 
---- 
--1.7.4
--
-diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-similarity index 57%
-rename from meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
-rename to meta-networking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-index f2e895d..1febbb1 100644
---- a/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
-+++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-@@ -6,23 +6,24 @@ time coordination of LAN connected computers."
- HOMEPAGE = "http://sourceforge.net/projects/ptpd"
- SECTION = "network"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=3d8ac2c46c116bce2d2ad838b6cf3491"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4019cad2b3cd55f22ea819ffad6ccd41"
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index 239b3ce..28a3760 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -10,8 +10,10 @@ SRC_URI += " \
+     file://0001-examples.pro-include-server-buffer-only-when-buildin.patch \
+ "
  
--PR = "r1"
-+DEPENDS = "libpcap"
- 
--SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
--           file://ld-as-needed.patch;striplevel=2 \
--"
-+PR = "r0"
- 
--SRC_URI[md5sum] = "c63a3a149d30c710773ccb02df5782a3"
--SRC_URI[sha256sum] = "f2266a22db84318d8b9ce266ea83772c03438c31f4993fa9643fa675a07c26b4"
-+inherit autotools
- 
--S = "${WORKDIR}/ptpd-${PV}/src"
-+SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz"
++QT_VERSION ?= "5.3.0"
 +
-+S = "${WORKDIR}/ptpd-${PV}"
-+SRC_URI[md5sum] = "f5e931b4a229705ff0dbdfe22490566b"
-+SRC_URI[sha256sum] = "1a4e90496f004bfd91657ccc49209101dc25b787e540648c07c0973469f1d8f7"
- 
- EXTRA_OEMAKE = ""
- 
- do_install() {
-     install -d ${D}${bindir} ${D}${mandir}/man8
--    install -m 0755 ptpd2 ${D}${bindir}
--    install -m 0644 ptpd2.8 ${D}${mandir}/man8
-+    install -m 0755 ${S}/src/ptpd2 ${D}${bindir}
-+    install -m 0644 ${S}/src/ptpd2.8 ${D}${mandir}/man8
+ do_install_append() {
+     # do install files created by qtwaylandscanner
+-    install ${B}/include/QtCompositor/5.3.0/QtCompositor/private/qwayland-server-*.h ${D}${includedir}/${QT_DIR_NAME}/QtCompositor/5.3.0/QtCompositor/private
+-    install ${B}/include/QtCompositor/5.3.0/QtCompositor/private/*protocol*.h ${D}${includedir}/${QT_DIR_NAME}/QtCompositor/5.3.0/QtCompositor/private
++    install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/qwayland-server-*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
++    install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/*protocol*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
  }
 -- 
-1.7.0.4
+2.0.0
 
 
