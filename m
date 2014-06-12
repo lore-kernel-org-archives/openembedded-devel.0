@@ -1,27 +1,26 @@
-Return-Path: <paul.eggleton@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 27B4B65D69
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id BF48365D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 08:38:05 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 12 Jun 2014 01:38:04 -0700
+	Thu, 12 Jun 2014 08:58:09 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 12 Jun 2014 01:52:52 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,463,1400050800"; d="scan'208";a="444605390"
+X-IronPort-AV: E=Sophos;i="5.01,463,1400050800"; d="scan'208";a="556223232"
 Received: from nithyasr-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.63])
-	by azsmga001.ch.intel.com with ESMTP; 12 Jun 2014 01:38:03 -0700
-From: Paul Eggleton <paul.eggleton@intel.com>
-To: Christopher Larson <kergoth@gmail.com>
-Date: Thu, 12 Jun 2014 09:38:02 +0100
-Message-ID: <1421812.IFbAnSHYII@peggleto-mobl5.ger.corp.intel.com>
+	by orsmga002.jf.intel.com with ESMTP; 12 Jun 2014 01:58:09 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Eduardo Silva <eduardo@monkey.io>
+Date: Thu, 12 Jun 2014 09:58:07 +0100
+Message-ID: <3399687.KhPvC9uDaj@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.12.5 (Linux/3.14.5-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <CABcZAN=C89LopMeHf45bgHsLeFsUcs02FYxrZ9a0tzi00Z0+rA@mail.gmail.com>
-References: <1770553.GcPTkVXTr4@peggleto-mobl5.ger.corp.intel.com>
-	<CABcZAN=C89LopMeHf45bgHsLeFsUcs02FYxrZ9a0tzi00Z0+rA@mail.gmail.com>
+In-Reply-To: <1402528846-26715-1-git-send-email-eduardo@monkey.io>
+References: <1402528846-26715-1-git-send-email-eduardo@monkey.io>
 MIME-Version: 1.0
-Cc: Phil Blundell <pb@pbcl.net>, openembedded-devel@lists.openembedded.org
-Subject: Re: Old OE history
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] monkey: fix broken separate build with workaround.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,74 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jun 2014 08:38:09 -0000
+X-List-Received-Date: Thu, 12 Jun 2014 08:58:12 -0000
+Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday 10 June 2014 20:19:53 Christopher Larson wrote:
-> On Mon, Jun 9, 2014 at 10:34 AM, Paul Eggleton <paul.eggleton@intel.com>
-> wrote:
-> > Looking back through OE-Classic git commit history, the first commit (from
-> > Chris) is basically an import; so it seems to me that at one point we did
-> > have
-> > some more history from before then. This was before my time on the
-> > project so
-> > I'm not sure what we had before bitkeeper (if anything).
+On Wednesday 11 June 2014 17:20:46 Eduardo Silva wrote:
+> This patch make use of autotools-brokensep on main
+> recipe to avoid a broken build when using a different
+> build directory.
 > 
-> This doesn't seem accurate to me. The first commit is
-> bda361cba6cf49d92d21f44c87a9d2f13511d551, which created an initial mostly
-> empty repository, which was followed by
-> c11afe579262bdabdf3af8fdfcb24b3598bf0232 which added a couple initial
-> recipes, etc.
+> monkey-yocto/f15c9e7cd9143ce8486ae5e78db9092238c3d0ec
 > 
-> At one point we used cvs, which got imported into bk, which got re-exported
-> as cvs, which got imported into mtn, which got converted to git, or
-> something like that, if I'm remembering correctly, anyway :) And of course
-> I did some careful grafting of the earliest histories. I'm pretty sure we
-> have most of the historical repositories around somewhere or another. I
-> know I have copies of the bkbits repository for bitbake, the oz buildroot
-> repo from various places, and  the cvs exports of the bkbits repositories.
-> It is of course possible that something got lost in the translations
-> between scm types along the way, but I'm not aware of anything missing
-> offhand. And of course the initial repository was prior to bitbake being
-> split out, the split of the early history between bitbake and openembedded
-> was done by me, as carefully as I could, but iirc we still have the old
-> 'oe' repository which was prior to the split.
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+> ---
+>  meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> If I dump a list of every file which has ever existed in the oe classic
-> repository, and then grep out qt.*/compile.patch from that, and use git log
-> on those files, you can see all the way back to the import of the initial
-> qt/qte patches from the oz buildroot, and subsequent changes to it after
-> that:
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb index
+> 07a202f..6fa1b77 100644
+> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> @@ -24,7 +24,7 @@ EXTRA_OECONF = " \
+>               --malloc-libc \
+>  "
 > 
->     git log -- (git rev-list --reverse HEAD | git diff-tree --stdin
-> --no-commit-id --name-only -r | sort -u | grep 'qt.*/compile.patch')
+> -inherit autotools pkgconfig update-rc.d systemd
+> +inherit autotools-brokensep pkgconfig update-rc.d systemd
 > 
-> Aside: I have 'git rev-list --reverse HEAD | git diff-tree --stdin
-> --no-commit-id --name-only -r | sort -u' as a standalone git-ls-files-ever
-> script. this is particularly useful when splitting git repositories up, or
-> doing complete svn to git conversions, to ensure that you don't miss any
-> files, as git's --follow isn't always sufficient, nor are other uses of its
-> copy/move detection.
+>  INITSCRIPT_NAME = "monkey"
+>  INITSCRIPT_PARAMS = "defaults 70"
 
-Ah, thanks for this - this works a lot better. However, I think the reason 
-that I was getting confused before is that some of the patch files I'm trying 
-to trace appear to start with zero size in the history, which leads git's 
-rename detection with --follow down the wrong path. I'd also missed that some 
-of the BK merge commits actually have useful information about the commits 
-they contained; if you know what you're looking for you can match them up with 
-the file(s) they refer to.
+Merged, thanks.
 
 Cheers,
 Paul
----------------------------------------------------------------------
-Intel Corporation (UK) Limited
-Registered No. 1134945 (England)
-Registered Office: Pipers Way, Swindon SN3 1RJ
-VAT No: 860 2173 47
 
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
+-- 
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
