@@ -1,26 +1,26 @@
 Return-Path: <Chong.Lu@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F63B6FD10
+	by mail.openembedded.org (Postfix) with ESMTP id 7E8816FD02
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 06:13:00 +0000 (UTC)
+	Fri, 13 Jun 2014 06:13:03 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5D6D1Y1026230
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5D6D4TD026234
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 23:13:02 -0700 (PDT)
+	Thu, 12 Jun 2014 23:13:04 -0700 (PDT)
 Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 12 Jun 2014 23:13:01 -0700
+	14.3.174.1; Thu, 12 Jun 2014 23:13:04 -0700
 From: Chong Lu <Chong.Lu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jun 2014 14:12:55 +0800
-Message-ID: <1402639978-4607-2-git-send-email-Chong.Lu@windriver.com>
+Date: Fri, 13 Jun 2014 14:12:57 +0800
+Message-ID: <1402639978-4607-4-git-send-email-Chong.Lu@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1402639978-4607-1-git-send-email-Chong.Lu@windriver.com>
 References: <1402639978-4607-1-git-send-email-Chong.Lu@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/5] samba: fix parsing linemarkers in preprocessor output
+Subject: [PATCH 4/5] samba: Security Advisory - CVE-2013-4124
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,106 +37,79 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 13 Jun 2014 06:13:04 -0000
 Content-Type: text/plain
 
-When PIDL calls out to C preprocessor to expand IDL files
-and parse the output, it filters out linemarkers and line control
-information as described in http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-and http://gcc.gnu.org/onlinedocs/cpp/Line-Control.html#Line-Control
+Integer overflow in the read_nttrans_ea_list function in nttrans.c in
+smbd in Samba 3.x before 3.5.22, 3.6.x before 3.6.17, and 4.x before
+4.0.8 allows remote attackers to cause a denial of service (memory
+consumption) via a malformed packet.
 
-With gcc 4.8 stdc-predef.h is included automatically and linemarker for the
-file has extended flags that PIDL couldn't parse ('system header that needs to
-be extern "C" protected for C++')
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4124
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 ---
- ...arsing-linemarkers-in-preprocessor-output.patch |   68 ++++++++++++++++++++
+ .../samba/samba/samba-3.6.16-CVE-2013-4124.patch   |   43 ++++++++++++++++++++
  meta-oe/recipes-connectivity/samba/samba_3.6.8.bb  |    1 +
- 2 files changed, 69 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/samba/samba/0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/samba/samba/samba-3.6.16-CVE-2013-4124.patch
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba/0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch b/meta-oe/recipes-connectivity/samba/samba/0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch
+diff --git a/meta-oe/recipes-connectivity/samba/samba/samba-3.6.16-CVE-2013-4124.patch b/meta-oe/recipes-connectivity/samba/samba/samba-3.6.16-CVE-2013-4124.patch
 new file mode 100644
-index 0000000..586867d
+index 0000000..54b8edf
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/samba/samba/0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch
-@@ -0,0 +1,68 @@
++++ b/meta-oe/recipes-connectivity/samba/samba/samba-3.6.16-CVE-2013-4124.patch
+@@ -0,0 +1,43 @@
 +Upstream-Status: Backport
 +
-+From b07ade6e6fcc8b844cf1fb8b6038617281c4c2d0 Mon Sep 17 00:00:00 2001
-+From: Alexander Bokovoy <ab@samba.org>
-+Date: Wed, 6 Feb 2013 10:17:57 +0200
-+Subject: [PATCH] PIDL: fix parsing linemarkers in preprocessor output
++From efdbcabbe97a594572d71d714d258a5854c5d8ce Mon Sep 17 00:00:00 2001
++From: Jeremy Allison <jra@samba.org>
++Date: Wed, 10 Jul 2013 17:10:17 -0700
++Subject: [PATCH] Fix bug #10010 - Missing integer wrap protection in EA list
++ reading can cause server to loop with DOS.
 +
-+Commit b07ade6e6fcc8b844cf1fb8b6038617281c4c2d0 v3-6-stable
++Ensure we never wrap whilst adding client provided input.
++CVE-2013-4124
 +
-+When PIDL calls out to C preprocessor to expand IDL files
-+and parse the output, it filters out linemarkers and line control
-+information as described in http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-+and http://gcc.gnu.org/onlinedocs/cpp/Line-Control.html#Line-Control
-+
-+With gcc 4.8 stdc-predef.h is included automatically and linemarker for the
-+file has extended flags that PIDL couldn't parse ('system header that needs to
-+be extern "C" protected for C++')
-+
-+Thanks to Jakub Jelinek <jakub@redhat.com> for explanation of the linemarker format.
-+
-+Fixes https://bugzilla.redhat.com/show_bug.cgi?id=906517
-+
-+Reviewed-by: Andreas Schneider <asn@samba.org>
-+(cherry picked from commit 6ba7ab5c14801aecae96373d5a9db7ab82957526)
-+
-+Signed-off-by: Andreas Schneider <asn@samba.org>
-+
-+Fix bug #9636 - pidl can't parse new linemarkers in preprocessor output.
-+(cherry picked from commit 643571470f2e4cd2f58bd60ac7189abb826d33cc)
-+(cherry picked from commit b5a8afd6550e9091d169d3010751913bb483fc4b)
++Signed-off-by: Jeremy Allison <jra@samba.org>
 +---
-+ pidl/idl.yp                |    4 +++-
-+ pidl/lib/Parse/Pidl/IDL.pm |    4 +++-
-+ 2 files changed, 6 insertions(+), 2 deletions(-)
++ source3/smbd/nttrans.c |   12 ++++++++++++
++ 1 file changed, 12 insertions(+)
 +
-+diff --git a/pidl/idl.yp b/pidl/idl.yp
-+index b5c5185..c8a65f6 100644
-+--- a/pidl/idl.yp
-++++ b/pidl/idl.yp
-+@@ -610,7 +610,9 @@ again:
++diff --git a/source3/smbd/nttrans.c b/source3/smbd/nttrans.c
++index ea9d417..5fc3a09 100644
++--- a/source3/smbd/nttrans.c
+++++ b/source3/smbd/nttrans.c
++@@ -989,7 +989,19 @@ struct ea_list *read_nttrans_ea_list(TALLOC_CTX *ctx, const char *pdata, size_t
++ 		if (next_offset == 0) {
++ 			break;
++ 		}
+++
+++		/* Integer wrap protection for the increment. */
+++		if (offset + next_offset < offset) {
+++			break;
+++		}
+++
++ 		offset += next_offset;
+++
+++		/* Integer wrap protection for while loop. */
+++		if (offset + 4 < offset) {
+++			break;
+++		}
+++
++ 	}
 + 
-+ 	for ($parser->YYData->{INPUT}) {
-+ 		if (/^\#/) {
-+-			if (s/^\# (\d+) \"(.*?)\"( \d+|)//) {
-++			# Linemarker format is described at
-++			# http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-++			if (s/^\# (\d+) \"(.*?)\"(( \d+){1,4}|)//) {
-+ 				$parser->YYData->{LINE} = $1-1;
-+ 				$parser->YYData->{FILE} = $2;
-+ 				goto again;
-+diff --git a/pidl/lib/Parse/Pidl/IDL.pm b/pidl/lib/Parse/Pidl/IDL.pm
-+index d4820ff..6927c89 100644
-+--- a/pidl/lib/Parse/Pidl/IDL.pm
-++++ b/pidl/lib/Parse/Pidl/IDL.pm
-+@@ -2576,7 +2576,9 @@ again:
-+ 
-+ 	for ($parser->YYData->{INPUT}) {
-+ 		if (/^\#/) {
-+-			if (s/^\# (\d+) \"(.*?)\"( \d+|)//) {
-++			# Linemarker format is described at
-++			# http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-++			if (s/^\# (\d+) \"(.*?)\"(( \d+){1,4}|)//) {
-+ 				$parser->YYData->{LINE} = $1-1;
-+ 				$parser->YYData->{FILE} = $2;
-+ 				goto again;
++ 	return ea_list_head;
 +-- 
-+1.7.5.4
++1.7.10.4
 +
 diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-index f80e41e..c3e834d 100644
+index a5e7dcd..331796c 100644
 --- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
 +++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
-@@ -31,6 +31,7 @@ SRC_URI += "\
-     file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
-     file://configure-libunwind.patch;patchdir=.. \
+@@ -33,6 +33,7 @@ SRC_URI += "\
      file://samba-3.6.22-CVE-2013-4496.patch;patchdir=.. \
-+    file://0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch;patchdir=.. \
+     file://0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch;patchdir=.. \
+     file://samba-3.6.11-CVE-2013-0213-CVE-2013-0214.patch;patchdir=.. \
++    file://samba-3.6.16-CVE-2013-4124.patch;patchdir=.. \
  "
  SRC_URI[md5sum] = "fbb245863eeef2fffe172df779a217be"
  SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b3514de"
