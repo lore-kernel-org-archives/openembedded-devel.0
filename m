@@ -1,26 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D1146FD24
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D1A36B89F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 00:46:52 +0000 (UTC)
+	Fri, 13 Jun 2014 00:46:53 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0kr2U011818
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0ksUO001244
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 17:46:53 -0700 (PDT)
+	Thu, 12 Jun 2014 17:46:54 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 12 Jun 2014 17:46:53 -0700
+	14.3.169.1; Thu, 12 Jun 2014 17:46:54 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jun 2014 08:46:27 +0800
-Message-ID: <1402620392-7425-23-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 13 Jun 2014 08:46:28 +0800
+Message-ID: <1402620392-7425-24-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 References: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 09/14] autofs: inherit autotools-brokensep
+Subject: [meta-networking][PATCH 10/14] rp-pppoe: inherit autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 00:46:52 -0000
+X-List-Received-Date: Fri, 13 Jun 2014 00:46:53 -0000
 Content-Type: text/plain
 
 From: Robert Yang <liezhi.yang@windriver.com>
 
-Otherwise do_configure failed:
-sed: can't read configure.in: No such file or directory
+Otherwise do_compile failed:
+No rule to make target `pppoe.c', needed by `pppoe.o'.  Stop.
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb |    2 +-
+ meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-index 501e40a..966dada 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.0.7.bb
-@@ -7,7 +7,7 @@ PR = "r6"
+diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
+index 90a8f4d..b3e60fe 100644
+--- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
++++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb
+@@ -20,7 +20,7 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
+ SRC_URI[md5sum] = "0e32760f498f9cde44081ee6aafc823b"
+ SRC_URI[sha256sum] = "d916e9cfe1e62395f63a5361936fa855f6d0f0a37dc7227b394cdb725f553479"
  
- DEPENDS += "libtirpc flex-native bison-native"
+-inherit autotools update-rc.d
++inherit autotools-brokensep update-rc.d
  
--inherit autotools systemd
-+inherit autotools-brokensep systemd
- 
- SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
-            file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
+ do_install() {
+     # Install init script and default settings
 -- 
 1.7.10.4
 
