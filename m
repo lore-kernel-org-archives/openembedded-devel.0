@@ -1,26 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 78ADF6B7F9
+	by mail.openembedded.org (Postfix) with ESMTP id 798A76B89F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 00:46:23 +0000 (UTC)
+	Fri, 13 Jun 2014 00:46:20 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0kN5g011788
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0kLOo011785
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 17:46:23 -0700 (PDT)
+	Thu, 12 Jun 2014 17:46:21 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 12 Jun 2014 17:46:23 -0700
+	14.3.169.1; Thu, 12 Jun 2014 17:46:20 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jun 2014 08:46:07 +0800
-Message-ID: <1402620392-7425-3-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 13 Jun 2014 08:46:05 +0800
+Message-ID: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
-References: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/14] tcpreplay: inherit autotools-brokensep
+Subject: [PATCH 01/14] iftop: inherit autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,30 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 00:46:28 -0000
+X-List-Received-Date: Fri, 13 Jun 2014 00:46:29 -0000
 Content-Type: text/plain
 
 From: Robert Yang <liezhi.yang@windriver.com>
 
-It needs autotools-brokensep, otherwise do_compile error:
+It needs autotools-brokensep, otherwise do_configure error:
 
-src/defines.h:5:18: fatal error: tcpr.h: No such file or directory
+cat: config/pthread.c: No such file or directory
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb |    2 +-
+ meta-networking/recipes-support/iftop/iftop_1.0pre2.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-index d211888..4bce270 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-@@ -18,5 +18,5 @@ DEPENDS = "libpcap"
+diff --git a/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
+index 73f2d85..cc1f8b0 100644
+--- a/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
++++ b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
+@@ -10,5 +10,5 @@ SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
+ SRC_URI[md5sum] = "fef521a49ec0122458d02c64212af3c5"
+ SRC_URI[sha256sum] = "1b193037bb3019afae88cd94c87468aac4b045d81ab816ed8d2f489716b14027"
  
- EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}/usr"
- 
--inherit siteinfo autotools
-+inherit siteinfo autotools-brokensep
+-inherit autotools
++inherit autotools-brokensep
  
 -- 
 1.7.10.4
