@@ -1,26 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A481B6B89F
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 936EE66004
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 00:46:39 +0000 (UTC)
+	Fri, 13 Jun 2014 00:46:40 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0keeR001205
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0kfau011803
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jun 2014 17:46:40 -0700 (PDT)
+	Thu, 12 Jun 2014 17:46:41 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 12 Jun 2014 17:46:40 -0700
+	14.3.169.1; Thu, 12 Jun 2014 17:46:41 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jun 2014 08:46:16 +0800
-Message-ID: <1402620392-7425-12-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 13 Jun 2014 08:46:17 +0800
+Message-ID: <1402620392-7425-13-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 References: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 12/14] proftpd: inherit autotools-brokensep
+Subject: [PATCH 13/14] znc: inherit autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 00:46:39 -0000
+X-List-Received-Date: Fri, 13 Jun 2014 00:46:40 -0000
 Content-Type: text/plain
 
 From: Robert Yang <liezhi.yang@windriver.com>
 
-It needs autotools-brokensep, otherwise do_compile error:
+It needs autotools-brokensep, otherwise do_configure error:
 
-proftpd-1.3.4b/include/version.h:1:24: fatal error: buildstamp.h: No such file or directory
+automake: error: 'configure.ac' is required
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb |    2 +-
+ meta-networking/recipes-irc/znc/znc_git.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-index cfbadfb..c154c6d 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-@@ -20,7 +20,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
- SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
- SRC_URI[sha256sum] = "9f659585cea90fc6af34a0ffae4a90e4ed37abe92dbd9b6c311f95a436c961cb"
+diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
+index b648cd2..33318e1 100644
+--- a/meta-networking/recipes-irc/znc/znc_git.bb
++++ b/meta-networking/recipes-irc/znc/znc_git.bb
+@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/znc/znc.git"
  
--inherit autotools useradd update-rc.d
-+inherit autotools-brokensep useradd update-rc.d
+ S = "${WORKDIR}/git"
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses,--disable-curses --disable-ncurses,ncurses"
+-inherit autotools
++inherit autotools-brokensep
+ 
+ # ZNC has a custom autogen.sh that states that this command is needed *and* expected to fail
+ do_configure_prepend() {
 -- 
 1.7.10.4
 
