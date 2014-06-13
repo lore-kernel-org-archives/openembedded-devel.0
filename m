@@ -1,27 +1,35 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 191CB6B7D2
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 533636FCE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 00:57:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5D0vQta002444
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 12 Jun 2014 17:57:27 -0700 (PDT)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 12 Jun 2014 17:57:26 -0700
-Message-ID: <539A4C80.6030001@windriver.com>
-Date: Fri, 13 Jun 2014 08:57:36 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Fri, 13 Jun 2014 01:47:52 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id q200so1603727ykb.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jun 2014 18:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=OwrO1y5jRWzfVtuQ6S1uQCkgn3WzzQsKX7W7GmZ2R2w=;
+	b=DP/nrS7SvhcxNvfs0shccZ4A4pm6oMXB0ZaL6NaARILAV+T7lQwEYLqSmQoqoxkOId
+	yBO/lHyAPe2/4eaHEWQ9H6RaRZbA8+lypoXao83gkfZnsZAH91bUpd1/Ww+jVCOqiduH
+	zLJTX5kSGuQorj0zwwXjyBDzIBVDSSHP2apZ33CjaPZ0c83zlocqMHRPU91bSBOQQUEW
+	LLjzaDBRPLiERFvxl5tFDKgUOj6RYByGMVae00YWz3t00SDS/pqYoNP9VSDW7p3T81em
+	umPOwSk14BdFqQ304DsxMZ4b4oMVlZXx4gyjDe+ZhyDnLVQzyCELVGZ2wYueZGdcD5D0
+	tgHA==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>,
-	Joe MacDonald <joe@deserted.net>
-References: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1402620392-7425-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH 01/14] iftop: inherit autotools-brokensep
+X-Received: by 10.236.160.67 with SMTP id t43mr21590675yhk.11.1402624073410;
+	Thu, 12 Jun 2014 18:47:53 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.209.68 with HTTP; Thu, 12 Jun 2014 18:47:53 -0700 (PDT)
+In-Reply-To: <1402601947-20352-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1402601947-20352-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 12 Jun 2014 22:47:53 -0300
+X-Google-Sender-Auth: 473-cZaZ1O5ubEzSuOFplnwPPxs
+Message-ID: <CAP9ODKrYUswW5mVrcnu0EygzVR-hk1wzfHkNP6_G=OhF=kUx5A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwayland: respect OE_QMAKE_PATH_QT_HEADERS and use QT_VERSION variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 00:57:30 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Jun 2014 01:47:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I send two copies of these patches, please apply anyone.
+On Thu, Jun 12, 2014 at 4:39 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * QT_VERSION allows to use 5.3.1 e.g. when overriding SRCREV
+> * ${includedir}/${QT_DIR_NAME} is the default value of OE_QMAKE_PATH_QT_HEADERS, but
+>   when it's changed by user we should respect it here
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-These patch are fixing the building failure on master.
-
-
-On 06/13/2014 08:46 AM, rongqing.li@windriver.com wrote:
-> From: Robert Yang <liezhi.yang@windriver.com>
->
-> It needs autotools-brokensep, otherwise do_configure error:
->
-> cat: config/pthread.c: No such file or directory
->
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->   meta-networking/recipes-support/iftop/iftop_1.0pre2.bb |    2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
-> index 73f2d85..cc1f8b0 100644
-> --- a/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
-> +++ b/meta-networking/recipes-support/iftop/iftop_1.0pre2.bb
-> @@ -10,5 +10,5 @@ SRC_URI = "http://www.ex-parrot.com/pdw/iftop/download/iftop-${PV}.tar.gz"
->   SRC_URI[md5sum] = "fef521a49ec0122458d02c64212af3c5"
->   SRC_URI[sha256sum] = "1b193037bb3019afae88cd94c87468aac4b045d81ab816ed8d2f489716b14027"
->
-> -inherit autotools
-> +inherit autotools-brokensep
->
->
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
