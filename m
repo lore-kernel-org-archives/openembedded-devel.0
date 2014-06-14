@@ -1,31 +1,28 @@
-Return-Path: <gada.kashyap@gmail.com>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 493F26FC48
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 066D36B4F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jun 2014 12:41:21 +0000 (UTC)
-Received: by mail-lb0-f176.google.com with SMTP id w7so196105lbi.35
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jun 2014 05:41:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=XOcQZLV+NCszUofC4sC8cmjwLAb86iZ/yQoCVQNWtj4=;
-	b=Yyzi077xvr/jnG/vMvRdcUkmiNGFunsZhdu1y9EmvWOO4bIGMEhdJhRBANYbeFjxB9
-	3nYXIV+2lyTSpzXLIXMYMjvVP1jl8ZOzANpPluj1V65b87zvc7hmM6Yo4w1hLzqmrf/T
-	HP+YYQ/Eo2uzMLM3bT/I9HQ78dJSiAtTmImWwDQawrZgFSOzfUqQo9Fp7mOA1rXamGPq
-	utohuDCLQxBS29GJi4mWHKyBPIcc8OO2OUV/3ciKC7LbYuJ74CyCf/H/3G2447cwcXxg
-	baGrL2R9+aqUpJTy+8QjVfdnPu77ZDjvBZksyUPCQ8ka6ZZOUTSUNtsq3ZyECOywSVSm
-	d/nA==
+	Sat, 14 Jun 2014 12:55:41 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 5C328F811E3; Sat, 14 Jun 2014 06:55:42 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 3378DF811DD;
+	Sat, 14 Jun 2014 06:55:41 -0600 (MDT)
+Message-ID: <539C4659.2020009@mlbassoc.com>
+Date: Sat, 14 Jun 2014 06:55:53 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-X-Received: by 10.152.42.194 with SMTP id q2mr5984068lal.39.1402749682141;
-	Sat, 14 Jun 2014 05:41:22 -0700 (PDT)
-Received: by 10.114.29.132 with HTTP; Sat, 14 Jun 2014 05:41:22 -0700 (PDT)
-Date: Sat, 14 Jun 2014 18:11:22 +0530
-Message-ID: <CANJXcUaVsvT2JUS=o-vHEh9kAT7S75ec7rywWLrAf2ypydPJuA@mail.gmail.com>
-From: Kashyap Gada <gada.kashyap@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Rasperry Pi bcm2835-bootfiles-20140221-r3 do_fetch
+References: <CANJXcUaVsvT2JUS=o-vHEh9kAT7S75ec7rywWLrAf2ypydPJuA@mail.gmail.com>
+In-Reply-To: <CANJXcUaVsvT2JUS=o-vHEh9kAT7S75ec7rywWLrAf2ypydPJuA@mail.gmail.com>
+Subject: Re: Rasperry Pi bcm2835-bootfiles-20140221-r3 do_fetch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,22 +36,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2014 12:41:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 14 Jun 2014 12:55:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
-The following do_fetch of bcm28353-bootfiles-20140221-r3 is taking
-considerable amount of time. I have kept system monitor applcation on on my
-ubuntu workstation which shows download at about 114KBps.
+On 2014-06-14 06:41, Kashyap Gada wrote:
+> Hello,
+> The following do_fetch of bcm28353-bootfiles-20140221-r3 is taking
+> considerable amount of time. I have kept system monitor applcation on on my
+> ubuntu workstation which shows download at about 114KBps.
 
-I want to know if this do_fetch task is interrupted and bitbake is stopped
-as I have to close down my office, will bitbaking the next time i start the
-process continue download from where I stopped or will start fetching for
-the package from 0 again.
+This is going to take a while as it's around 3GB packed.
 
+>
+> I want to know if this do_fetch task is interrupted and bitbake is stopped
+> as I have to close down my office, will bitbaking the next time i start the
+> process continue download from where I stopped or will start fetching for
+> the package from 0 again.
+>
+>
+> Also can it be downloaded separately, if yes where can I find the link to
+> it and where do i have to store it once its downloaded.
 
-Also can it be downloaded separately, if yes where can I find the link to
-it and where do i have to store it once its downloaded.
+If you set BB_GENERATE_MIRROR_TARBALLS ?= "1" in your local.conf you'll
+find the packed tarball in your downloads directory once the fetch completes.
 
-Kashyap Gada
+You can download the tarballs from my website http://www.mlbassoc.com/poky
+These are from the latest build which I made on 2014-06-13.  Just put them
+in your downloads directory (or mirror).  Don't forget to create the 'done'
+stamp when you've downloaded it, e.g.
+   % touch downloads/git2_github.com.raspberrypi.firmware.git.tar.gz.done
+
+Good luck - If you have troubles, try the mailing list again as
+I'll be away on holiday.
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
