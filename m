@@ -1,36 +1,37 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 5396C6FE24
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 58AC36FEB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 20:45:51 +0000 (UTC)
-Received: by mail-pb0-f50.google.com with SMTP id rp16so2505519pbb.9
+	Sat, 14 Jun 2014 00:02:10 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id z12so3309355wgg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jun 2014 13:45:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=x3yFfezfC/yQEuVm4wDv50/1famfl9DVMpraiLZakTc=;
-	b=sA2mGOiMNjYoot+YiEZNGZmKgm4W3ZkSLaxOk161YwuZBLSaw0yblwcyViFGUOvaXN
-	FoWcLj5qO0zsoYZoZkmjk/BwmTfMmQOJhsfbf0fN7i0o71aGS9duYpkna9mjxKWtKiUE
-	wplNn0iOhXxlG3AGwLNb3piCi2Zvdid5s4Cr8pIS78rfkBTK3yZzG1WsSXEwSmopzbia
-	S/Ow8ZJPNp5k2zMA21w1RNkXEzzelaWEn6S1selgRguW2yEBfiUcR/v/ByngPg45+6Mh
-	hA9mJX/UDSYlDSLbF22uQ3zObnlXDZCW/trcN2ZjixGXiTyPgd+WXSSZhBt2WMm7fT9L
-	tIzQ==
-X-Received: by 10.68.221.42 with SMTP id qb10mr6124364pbc.65.1402692352995;
-	Fri, 13 Jun 2014 13:45:52 -0700 (PDT)
-Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	fu12sm26248720pad.42.2014.06.13.13.45.51 for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 13 Jun 2014 13:45:52 -0700 (PDT)
-From: Ash Charles <ashcharles@gmail.com>
+	Fri, 13 Jun 2014 17:02:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=4U/W5q6wT3ZC/gtjAzKIjWUYH5UYRdExfYr6qoGkHgQ=;
+	b=xEtLSxrU5IeXfszcXP/mkqhETRMWf/nH7VxhGeeAgELTRZH19KeGRXbNl/qDb5eeb1
+	Aq29dxxdTgjpNCY5Nty+Ke8+SCbcLxrYf1uOZbFdDpGidztfJHAAEY52HJSd7HY9GnWX
+	VLrHH/BscSxl8CrgXALdHwxHSjPVsolZj2sba+IYE7FIZ2UB7unB654GQeOgbczQsQtl
+	APqEmlTMkgT0Vck6chU+D0ZpfmtGP1zRnyXW+WC6ILLGy1/ncPVC6KDu7awNI01eTPpq
+	QBW3mhq4+3xyqr5erKSszhJnQGsmYwxDjJSxaps2yoxNH7ZuvRGXhXCeAubjqKTQkcQ6
+	pUFg==
+X-Received: by 10.180.83.225 with SMTP id t1mr8738643wiy.28.1402704130683;
+	Fri, 13 Jun 2014 17:02:10 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A1B6B.dip0.t-ipconnect.de.
+	[91.10.27.107])
+	by mx.google.com with ESMTPSA id 8sm15107102eea.10.2014.06.13.17.02.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 13 Jun 2014 17:02:10 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Jun 2014 13:45:36 -0700
-Message-Id: <1402692336-7688-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 1.8.3.2
-In-Reply-To: <20140613144746.GJ2428@jama>
-References: <20140613144746.GJ2428@jama>
-Subject: [Patch v4] eject: copy po subdirectory for out-of-tree build
+Date: Sat, 14 Jun 2014 02:01:57 +0200
+Message-Id: <1402704117-29321-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+Subject: [PATCH][meta-qt5] qttools: make qtwebkit a PACKAGECONFIG and disable by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,43 +45,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jun 2014 20:45:54 -0000
+X-List-Received-Date: Sat, 14 Jun 2014 00:02:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The po subdirectory found on the VPATH for an out-of-tree build so we
-copy it over. See [1] for discussion.
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/096052.html
-
-v3: only create and populate po/ if it doesn't already exist
-v4: test to see if we're building out-of-tree
-
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
-Reviewed-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/eject/eject_2.1.5.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ recipes-qt/qt5/qttools.inc                         |  8 ++++-
+ .../0003-add-noqtwebkit-configuration.patch        | 40 ++++++++++++++++++++++
+ 2 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
 
-diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index c47c653..9534577 100644
---- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-+++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -16,6 +16,14 @@ S = "${WORKDIR}/${BPN}"
+diff --git a/recipes-qt/qt5/qttools.inc b/recipes-qt/qt5/qttools.inc
+index d4d8017..cd8a97f 100644
+--- a/recipes-qt/qt5/qttools.inc
++++ b/recipes-qt/qt5/qttools.inc
+@@ -1,9 +1,10 @@
+ require qt5.inc
  
- PR = "r1"
+-DEPENDS += "qtbase qtdeclarative qtwebkit qtxmlpatterns"
++DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
  
-+do_compile_prepend() {
-+    # PO subdir must be in build directory
-+    if [ ! ${S} = ${B} ]; then
-+        mkdir -p ${B}/po
-+        cp -r ${S}/po/* ${B}/po/
-+    fi
-+}
+ SRC_URI += " \
+     file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
++    file://0003-add-noqtwebkit-configuration.patch \
+ "
+ 
+ # older copyright year than what e.g. qtbase is using now
+@@ -13,3 +14,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
+                     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
+ 
+ FILES_${PN}-examples = "${datadir}/${QT_DIR_NAME}/examples"
 +
- ALTERNATIVE_${PN} = "volname eject"
- ALTERNATIVE_LINK_NAME[volname] = "${bindir}/volname"
- ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
++
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
+diff --git a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
+new file mode 100644
+index 0000000..3238d79
+--- /dev/null
++++ b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
+@@ -0,0 +1,40 @@
++From e6b77a5732610816948a8a860a9cb9e92b02c33e Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Wed, 4 Jun 2014 11:28:16 +0200
++Subject: [PATCH] add noqtwebkit configuration
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Inappropiate [configuration]
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ src/assistant/assistant/assistant.pro | 2 +-
++ src/designer/src/plugins/plugins.pro  | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/assistant/assistant/assistant.pro b/src/assistant/assistant/assistant.pro
++index 5f96377..e461d4b 100644
++--- a/src/assistant/assistant/assistant.pro
+++++ b/src/assistant/assistant/assistant.pro
++@@ -1,4 +1,4 @@
++-qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static) {
+++qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static):!contains(QT_CONFIG, noqtwebkit) {
++     QT += webkitwidgets
++ } else {
++     DEFINES += QT_NO_WEBKIT
++diff --git a/src/designer/src/plugins/plugins.pro b/src/designer/src/plugins/plugins.pro
++index b7ee661..0c6e50a 100644
++--- a/src/designer/src/plugins/plugins.pro
+++++ b/src/designer/src/plugins/plugins.pro
++@@ -1,5 +1,5 @@
++ TEMPLATE = subdirs
++ 
++ # qtHaveModule(opengl): SUBDIRS += tools/view3d
++-qtHaveModule(webkitwidgets): SUBDIRS += qwebview
+++qtHaveModule(webkitwidgets):!contains(QT_CONFIG, noqtwebkit): SUBDIRS += qwebview
++ win32: qtHaveModule(axcontainer): SUBDIRS += activeqt
++-- 
++1.8.3.1
++
 -- 
-1.8.3.2
+1.8.3.1
 
 
