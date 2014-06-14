@@ -1,28 +1,31 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 066D36B4F7
+Return-Path: <sadlife1990@gmail.com>
+Received: from mail-vc0-f196.google.com (mail-vc0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D49D6FCAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jun 2014 12:55:41 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 5C328F811E3; Sat, 14 Jun 2014 06:55:42 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=unavailable version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 3378DF811DD;
-	Sat, 14 Jun 2014 06:55:41 -0600 (MDT)
-Message-ID: <539C4659.2020009@mlbassoc.com>
-Date: Sat, 14 Jun 2014 06:55:53 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+	Sat, 14 Jun 2014 14:21:04 +0000 (UTC)
+Received: by mail-vc0-f196.google.com with SMTP id hy10so919737vcb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Jun 2014 07:21:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=6yGctCQEWSrZMrbLI19EqXsZq3aSmLBVVNgtJPqqXfg=;
+	b=aCcXZ9D8Fn7wSnAQcBWHQeoOdlc5EuyLuSAia/NzH1RtgBi99Fs22+tHUoLYZHHd6g
+	znjsrx5Y2k7eNGucdwUaOzcQjbIn8SIU57hXGHHEYwkM4qp6igKL7ZZbttx8gHGGCDSC
+	l2UeBJanf4CK/9lFaT61anDiHFKzUUpwLbtQaCFacJ/eXprbWf9dp9brHuvW3xPiBYoC
+	z2xzzShqB8PwMNcH2tS1hpfnQNxfg3vvv/XrSo1mtSzYadRXIgK+CDyFO886dgFH87pw
+	rh+kMRXm2UHS0brw3YyU05GY/ZjJi0bjkytwCdbB8w7Lu0HxAt3g0LB7C2HR1XHp4pYk
+	xLEw==
 MIME-Version: 1.0
+X-Received: by 10.220.69.72 with SMTP id y8mr7022062vci.21.1402755665455; Sat,
+	14 Jun 2014 07:21:05 -0700 (PDT)
+Received: by 10.58.126.231 with HTTP; Sat, 14 Jun 2014 07:21:05 -0700 (PDT)
+Date: Sat, 14 Jun 2014 17:21:05 +0300
+Message-ID: <CAAHuHfwohTZ32-U7EsmWxxjj1xo3VjjiZmsS8c_KRGtoD7JMjw@mail.gmail.com>
+From: Life Life <sadlife1990@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <CANJXcUaVsvT2JUS=o-vHEh9kAT7S75ec7rywWLrAf2ypydPJuA@mail.gmail.com>
-In-Reply-To: <CANJXcUaVsvT2JUS=o-vHEh9kAT7S75ec7rywWLrAf2ypydPJuA@mail.gmail.com>
-Subject: Re: Rasperry Pi bcm2835-bootfiles-20140221-r3 do_fetch
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Beaglebone layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,43 +39,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2014 12:55:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 14 Jun 2014 14:21:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2014-06-14 06:41, Kashyap Gada wrote:
-> Hello,
-> The following do_fetch of bcm28353-bootfiles-20140221-r3 is taking
-> considerable amount of time. I have kept system monitor applcation on on my
-> ubuntu workstation which shows download at about 114KBps.
+Hello,
 
-This is going to take a while as it's around 3GB packed.
+We are testing oe with beaglebone black, Did you tell me what is the
+difference
 
->
-> I want to know if this do_fetch task is interrupted and bitbake is stopped
-> as I have to close down my office, will bitbaking the next time i start the
-> process continue download from where I stopped or will start fetching for
-> the package from 0 again.
->
->
-> Also can it be downloaded separately, if yes where can I find the link to
-> it and where do i have to store it once its downloaded.
+ MACHINE=beaglebone ./oebb.sh bitbake systemd-image.bb
+ MACHINE=beaglebone ./oebb.sh bitbake console-image.bb
 
-If you set BB_GENERATE_MIRROR_TARBALLS ?= "1" in your local.conf you'll
-find the packed tarball in your downloads directory once the fetch completes.
-
-You can download the tarballs from my website http://www.mlbassoc.com/poky
-These are from the latest build which I made on 2014-06-13.  Just put them
-in your downloads directory (or mirror).  Don't forget to create the 'done'
-stamp when you've downloaded it, e.g.
-   % touch downloads/git2_github.com.raspberrypi.firmware.git.tar.gz.done
-
-Good luck - If you have troubles, try the mailing list again as
-I'll be away on holiday.
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Thanks
 
