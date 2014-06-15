@@ -1,23 +1,39 @@
-Return-Path: <sledz@dresearch-fe.de>
-X-Greylist: delayed 520 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 14 Jun 2014 19:53:01 UTC
-Received: from zk223.dresearch-fe.de (zk223.dresearch-fe.de [217.92.177.116])
-	by mail.openembedded.org (Postfix) with ESMTP id C53C26FD1A
+Return-Path: <cazfi74@gmail.com>
+Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
+	[209.85.217.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D9BBF6FC48
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jun 2014 19:53:01 +0000 (UTC)
-Received: from fensuse.internal.dresearch-fe.de
-	(fensuse.internal.dresearch-fe.de [172.29.23.6])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id 657ECE0161;
-	Sat, 14 Jun 2014 21:44:21 +0200 (CEST)
-Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id 3E46C700D38; Sat, 14 Jun 2014 21:44:19 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch-fe.de>
+	Sun, 15 Jun 2014 01:25:53 +0000 (UTC)
+Received: by mail-lb0-f170.google.com with SMTP id 10so1194446lbg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Jun 2014 18:25:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=E7h3s4ckNKZs6UUDNATYzdQaoajgRd4W44vyJXP75YA=;
+	b=1IKbsB2c7aHGVM9V9OqqM8SzgbSi9DjuXJ9QAy45yxrR4wAzuOL/LCXT/W5tnihG1o
+	jOLYUs3/E7OE7mlzsFryMoG+J73aAlIMLeBFdopdQM8qk9pHyaUzVAQbynpiHJxtZ3jU
+	4DcuOMo3o9GgZQZivvh/y20T7SdM9yEclv3BsLY4jKeWosNFTYENiEFNAAq1mqSV9Oue
+	j0tiAx7UgYJvfEfxL9yoKI6L23/bqKUmY2n2b2QCYayrMfSZBal2LjUJoX6LglKFFHUZ
+	DAnxIoKunti7TQ13DPu+7MtTTelI2GRS89rnYOQBm/iixHQjB7xm7fDgAFH4IarBI/yo
+	R7eA==
+X-Received: by 10.152.36.134 with SMTP id q6mr7973087laj.29.1402795553530;
+	Sat, 14 Jun 2014 18:25:53 -0700 (PDT)
+Received: from prime (a91-153-14-158.elisa-laajakaista.fi. [91.153.14.158])
+	by mx.google.com with ESMTPSA id xk1sm2666249lac.38.2014.06.14.18.25.52
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 14 Jun 2014 18:25:52 -0700 (PDT)
+Received: from cazfi by prime with local (Exim 4.82_1-5b7a7c0-XX)
+	(envelope-from <cazfi74@gmail.com>)
+	id 1WvzCg-0007tb-Sq; Sun, 15 Jun 2014 04:25:50 +0300
+From: Marko Lindqvist <cazfi74@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Jun 2014 21:44:09 +0200
-Message-Id: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
-X-Mailer: git-send-email 1.9.3
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][daisy][PATCH] live555: fix fetch problem
+Date: Sun, 15 Jun 2014 04:25:20 +0300
+Message-Id: <1402795520-30201-2-git-send-email-cazfi74@gmail.com>
+X-Mailer: git-send-email 2.0.0
+In-Reply-To: <1402795520-30201-1-git-send-email-cazfi74@gmail.com>
+References: <1402795520-30201-1-git-send-email-cazfi74@gmail.com>
+Subject: [meta-oe][PATCH 2/2] libsdl-ttf: Fix build with separate builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jun 2014 19:53:06 -0000
+X-List-Received-Date: Sun, 15 Jun 2014 01:26:02 -0000
 
-live.2013.04.30.tar.gz is no longer available at original live555 url
-and the url of the FreeBSD mirror has changed according to[1].
+Do not assume that sources are in the current directory in
+do_configure_prepend() but refer to them with path to source directory.
 
-[1] <http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/README.txt>
-
-Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
 ---
- meta-oe/recipes-multimedia/live555/live555.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
-index a36177d..0c8208a 100644
---- a/meta-oe/recipes-multimedia/live555/live555.inc
-+++ b/meta-oe/recipes-multimedia/live555/live555.inc
-@@ -7,13 +7,13 @@ HOMEPAGE = "http://live.com/"
- LICENSE = "LGPLv3"
- SECTION = "devel"
+diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
+index c6e5a15..0127b31 100644
+--- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
++++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.10.bb
+@@ -4,7 +4,7 @@ DEPENDS = "virtual/libsdl freetype"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
  
--INC_PR = "r0"
-+INC_PR = "r1"
+-PR = "r1"
++PR = "r2"
  
- URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[6:8]}"
- SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
-            file://config.linux-cross"
- # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
--MIRRORS += "http://www.live555.com/liveMedia/public/ http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ \n"
-+MIRRORS += "http://www.live555.com/liveMedia/public/ http://distcache.FreeBSD.org/ports-distfiles/ \n"
- 
- S = "${WORKDIR}/live"
+ SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
+            file://configure.patch \
+@@ -18,11 +18,12 @@ inherit autotools
  TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ do_configure_prepend() {
+-  
++
++    # Removing these files fixes a libtool version mismatch.
+     MACROS="libtool.m4 lt~obsolete.m4 ltoptions.m4 ltsugar.m4 ltversion.m4"
+- 
++
+     for i in ${MACROS}; do
+-     rm acinclude/$i
++      rm ${S}/acinclude/$i
+     done
+ 
+ }
 -- 
-1.9.3
+2.0.0
 
 
