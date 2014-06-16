@@ -1,27 +1,26 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from zk223.dresearch-fe.de (zk223.dresearch-fe.de [217.92.177.116])
-	by mail.openembedded.org (Postfix) with ESMTP id 9223765D5B;
-	Mon, 16 Jun 2014 06:32:55 +0000 (UTC)
-Received: from fensuse.internal.dresearch-fe.de
-	(fensuse.internal.dresearch-fe.de [172.29.23.6])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id 58EA4E012A;
-	Mon, 16 Jun 2014 08:32:56 +0200 (CEST)
-Received: from [IPv6:::1] (localhost [IPv6:::1])
-	by fensuse.internal.dresearch-fe.de (Postfix) with ESMTP id 2E8EC700D50;
-	Mon, 16 Jun 2014 08:32:56 +0200 (CEST)
-Message-ID: <539E8F97.3070508@dresearch-fe.de>
-Date: Mon, 16 Jun 2014 08:32:55 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E3186B8BF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Jun 2014 08:43:27 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga103.fm.intel.com with ESMTP; 16 Jun 2014 01:38:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,485,1400050800"; d="scan'208";a="548521858"
+Received: from lakaruna-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.8])
+	by fmsmga001.fm.intel.com with ESMTP; 16 Jun 2014 01:43:27 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Eduardo Silva <eduardo@monkey.io>
+Date: Mon, 16 Jun 2014 09:43:25 +0100
+Message-ID: <6983375.pDRiSKljRX@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.12.5 (Linux/3.14.6-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
+In-Reply-To: <1402756840-30533-1-git-send-email-eduardo@monkey.io>
+References: <1402756840-30533-1-git-send-email-eduardo@monkey.io>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>
-References: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
-In-Reply-To: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
-X-Enigmail-Version: 1.6
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][daisy][PATCH] live555: fix fetch problem
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] monkey: new v1.5.1 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,26 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2014 06:33:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Jun 2014 08:43:35 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-What is the right ML address for patches in this area?
+Hi Eduardo,
 
-The meta-multimedia/README in git://git.openembedded.org/meta-openembedded (daisy branch) says:
+On Saturday 14 June 2014 08:40:40 Eduardo Silva wrote:
+> This patch add the minor release fix of Monkey HTTP Server v1.5.1. It fixes
+> some problems when switching user when started as root.
+> 
+> monkey/yocto: 7a702d00c5e48d1e03d8bbd2c7bd93a0d26f701e
+> 
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+> ---
+>  .../recipes-httpd/monkey/monkey_1.5.1.bb           | 36
+> ++++++++++++++++++++++ 1 file changed, 36 insertions(+)
 
-  "Send pull requests to openembedded-devel@lists.openembedded.org"
+Typically we try to keep only one version of each recipe unless there is a 
+good reason to do otherwise. Could you send a v2 of your patch which also 
+removes the previous version recipe?
 
-But i believe this should be openembedded-core@lists.openembedded.org.
-
-Steffen
+Thanks,
+Paul
 
 -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
