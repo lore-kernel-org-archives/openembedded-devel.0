@@ -1,43 +1,15 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id EB9486FF05;
-	Mon, 16 Jun 2014 16:36:40 +0000 (UTC)
-Received: by mail-pd0-f178.google.com with SMTP id r10so4575700pdi.23
-	for <multiple recipients>; Mon, 16 Jun 2014 09:36:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=o/hc+DpoiR/E4voHd3jr1bFpZOOj77wQV+vpzPraeJQ=;
-	b=waQuM3nz5KPun3hjINBTaaeoQaeS9PB1M4Fc3a/TmhAWtNOtEDIgwo2P22elSZiCXL
-	UCXOKZ0OMCCIB4qdviAzz3xGozDKJP7BnxXgoP6TgKfACU0HSNxMUeRkZ0zLnMAbzz+a
-	cn+1jlAEsR2uKilN7lY6mh2EX/GBy9XU9bJGBld2qYef47fMj7ZWutSeWp1l85qCQzxN
-	LmyFiyaYuENW0M93POnAumNL3rcScoM/nlVblWKaBCHFgtf24ZiV9UvZ0ZYDpiMZXlBF
-	VeDHeRURDOawTQGXYbGBr6GIb7jcBr0uyUaOzIdjzI7TWHH2oCWmaXgowiZi+XcfbkAI
-	1o0Q==
-X-Received: by 10.68.239.137 with SMTP id vs9mr25690086pbc.84.1402936601182;
-	Mon, 16 Jun 2014 09:36:41 -0700 (PDT)
-Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
-	[98.239.95.55]) by mx.google.com with ESMTPSA id
-	uj2sm71189027pab.14.2014.06.16.09.36.38 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 16 Jun 2014 09:36:39 -0700 (PDT)
-Message-ID: <539F1D15.8090304@gmail.com>
-Date: Mon, 16 Jun 2014 09:36:37 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>, 
-	Steffen Sledz <sledz@dresearch-fe.de>
-References: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>	<539E8F97.3070508@dresearch-fe.de>	<6076930.voh3DpIb8j@peggleto-mobl5.ger.corp.intel.com>	<539EBCA8.3000709@dresearch-fe.de>
-	<20140616105942.GO2428@jama>
-In-Reply-To: <20140616105942.GO2428@jama>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [meta-oe][daisy][PATCH] live555: fix fetch problem
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 06DE76FEF3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Jun 2014 16:40:11 +0000 (UTC)
+From: Jack Mitchell <ml@communistcode.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Jun 2014 17:40:29 +0100
+Message-Id: <1402936829-23184-1-git-send-email-ml@communistcode.co.uk>
+X-Mailer: git-send-email 1.9.3
+Cc: Jack Mitchell <jmitchell@cbnl.com>
+Subject: [meta-webserver][PATCH] sthttpd: improve init scripts to use config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,39 +23,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2014 16:36:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Jun 2014 16:40:17 -0000
 
-Martin,
+From: Jack Mitchell <jmitchell@cbnl.com>
 
-You can add me as a meta-oe daisy maintainer, if there is still a need.
+Rather than put hardcoded values into the init scripts,
+use a config file. The SRV_DIR is a special value as it
+should be used in the conifg file and also passed to make
+so it can put the html files in the correct directory.
+---
+ meta-webserver/recipes-httpd/sthttpd/sthttpd/init         |  6 +++---
+ meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.conf  |  1 +
+ .../recipes-httpd/sthttpd/sthttpd/thttpd.service          |  2 +-
+ meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb    | 15 ++++++++++-----
+ 4 files changed, 15 insertions(+), 9 deletions(-)
+ create mode 100644 meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.conf
 
-- Armin
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd/init b/meta-webserver/recipes-httpd/sthttpd/sthttpd/init
+index 70f6797..f5f7b01 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd/init
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd/init
+@@ -18,7 +18,7 @@ test -x "$thttpd" || exit 0
+ case "$1" in
+   start)
+     echo -n "Starting thttpd"
+-    start-stop-daemon --start --quiet --exec $thttpd -- -d @@SRVDIR
++    start-stop-daemon --start --quiet --exec $thttpd -- -C @@CONFFILE
+     echo "."
+     ;;
+   stop)
+@@ -31,7 +31,7 @@ case "$1" in
+     ;;
+   restart)
+     echo -n "Stopping thttpd"
+-    start-stop-daemon --stop --quiet --exec $thttpd -- -d @@SRVDIR
++    start-stop-daemon --stop --quiet --exec $thttpd -- -C @@CONFFILE
+     echo "."
+     echo -n "Waiting for thttpd to die off"
+     for i in 1 2 3 ;
+@@ -41,7 +41,7 @@ case "$1" in
+     done
+     echo ""
+     echo -n "Starting thttpd"
+-    start-stop-daemon --start --quiet --exec $thttpd -- -d @@SRVDIR
++    start-stop-daemon --start --quiet --exec $thttpd -- -C @@CONFFILE
+     echo "."
+     ;;
+   *)
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.conf b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.conf
+new file mode 100644
+index 0000000..397984f
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.conf
+@@ -0,0 +1 @@
++dir=@@SRVDIR
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
+index e2dae61..f109500 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd/thttpd.service
+@@ -3,7 +3,7 @@ Description=Tiny/Turbo/Throttling Web Server
+ 
+ [Service]
+ Type=forking
+-ExecStart=/usr/sbin/thttpd -d @@SRVDIR -c cgi-bin/* -i /var/run/thttpd.pid
++ExecStart=/usr/sbin/thttpd -C @@CONFFILE -c cgi-bin/* -i /var/run/thttpd.pid
+ PIDFile=/var/run/thttpd.pid
+ 
+ [Install]
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
+index 0abd131..7034921 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.26.4.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dc
+ 
+ SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
+            file://thttpd.service \
++           file://thttpd.conf \
+            file://init"
+ 
+ SRC_URI[md5sum] = "e645a85a97d3cb883011a35bc2211815"
+@@ -15,19 +16,23 @@ S = "${WORKDIR}/sthttpd-${PV}"
+ 
+ inherit autotools update-rc.d systemd
+ 
+-EXTRA_OEMAKE += "'WEBDIR=${servicedir}/www'"
++SRV_DIR ?= "${servicedir}/www"
++
++EXTRA_OEMAKE += "'WEBDIR=${SRV_DIR}'"
+ 
+ do_install_append () {
+     install -d ${D}${sysconfdir}/init.d
+     install -c -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/thttpd
+-    sed -i -e 's,@@SRVDIR,${servicedir}/www,g' ${D}${sysconfdir}/init.d/thttpd
++    install -c -m 755 ${WORKDIR}/thttpd.conf ${D}${sysconfdir}
++    sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${sysconfdir}/init.d/thttpd
++    sed -i -e 's,@@SRVDIR,${SRV_DIR},g' ${D}${sysconfdir}/thttpd.conf
+     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/thttpd
+ 
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/thttpd.service ${D}${systemd_unitdir}/system
+     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
+     sed -i 's!/var/!${localstatedir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
+-    sed -i -e 's,@@SRVDIR,${servicedir}/www,g' ${D}${systemd_unitdir}/system/thttpd.service
++    sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${systemd_unitdir}/system/thttpd.service
+ }
+ 
+ INITSCRIPT_NAME = "thttpd"
+@@ -35,6 +40,6 @@ INITSCRIPT_PARAMS = "defaults"
+ 
+ SYSTEMD_SERVICE_${PN} = "thttpd.service"
+ 
+-FILES_${PN} += "${servicedir}"
+-FILES_${PN}-dbg += "${servicedir}/www/cgi-bin/.debug"
++FILES_${PN} += "${SRV_DIR}"
++FILES_${PN}-dbg += "${SRV_DIR}/cgi-bin/.debug"
+ 
+-- 
+1.9.3
 
-On 06/16/2014 03:59 AM, Martin Jansa wrote:
-> On Mon, Jun 16, 2014 at 11:45:12AM +0200, Steffen Sledz wrote:
->> On 16.06.2014 10:48, Paul Eggleton wrote:
->>> On Monday 16 June 2014 08:32:55 Steffen Sledz wrote:
->>>> What is the right ML address for patches in this area?
->>>>
->>>> The meta-multimedia/README in git://git.openembedded.org/meta-openembedded
->>>> (daisy branch) says:
->>>>
->>>>    "Send pull requests to openembedded-devel@lists.openembedded.org"
->>>>
->>>> But i believe this should be openembedded-core@lists.openembedded.org.
->>>
->>> No, for all layers in the meta-openembedded repository it should be
->>> openembedded-devel as listed.
->>
->> OK, thx for this info.
->>
->> So i hope the patch will make it into the daisy branch in the next time, because our build is broken meanwhile (OK, we have a workaround, but this is unendearing).
->
-> We still don't have meta-oe daisy maintainer :/ (and update to READMEs
-> in daisy branch)..
->
->
->
 
