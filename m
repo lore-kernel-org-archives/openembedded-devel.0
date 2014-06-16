@@ -1,27 +1,24 @@
-Return-Path: <yaoxp@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C2886FC0F
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DB9D66ABDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jun 2014 05:45:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.00,711,1396972800"; d="scan'208";a="31927660"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2014 13:42:40 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id s5F5jIcX024284
+	Mon, 16 Jun 2014 02:24:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5G2Ok0A004560
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jun 2014 13:45:18 +0800
-Received: from FEDORA20.fnst.cn.fujitsu.com (10.167.226.101) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Sun, 15 Jun 2014 13:45:18 +0800
-From: Yao Xinpan <yaoxp@cn.fujitsu.com>
+	Sun, 15 Jun 2014 19:24:47 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 15 Jun 2014 19:24:46 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 15 Jun 2014 13:45:09 +0800
-Message-ID: <1402811109-29290-1-git-send-email-yaoxp@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.4.2
+Date: Sun, 15 Jun 2014 22:24:44 -0400
+Message-ID: <1402885484-31549-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.101]
-Subject: [meta-oe][meta-networking][PATCH] add recipe cim-schema, cim-schema-docs and license file DMTF.
+Subject: [meta-networking][PATCH] quagga: Security Advisory - CVE-2012-1820
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,191 +32,184 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jun 2014 05:45:30 -0000
+X-List-Received-Date: Mon, 16 Jun 2014 02:24:49 -0000
 Content-Type: text/plain
 
-Common Information Model (CIM) is a model for describing overall
-management information in a network or enterprise environment. CIM
-consists of a specification and a schema. The specification defines the
-details for integration with other management models. The schema
-provides the actual model descriptions.
+From: Yue Tao <Yue.Tao@windriver.com>
 
-Signed-off-by: Yao Xinpan <yaoxp@cn.fujitsu.com>
+The bgp_capability_orf function in bgpd in Quagga 0.99.20.1 and earlier
+allows remote attackers to cause a denial of service (assertion failure
+and daemon exit) by leveraging a BGP peering relationship and sending a
+malformed Outbound Route Filtering (ORF) capability TLV in an OPEN
+message.
+
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2012-1820
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/licenses/DMTF                      | 34 ++++++++++++++++++++++
- .../cim-schema/cim-schema-docs_2.40.0.bb           | 23 +++++++++++++++
- .../recipes-support/cim-schema/cim-schema.inc      |  9 ++++++
- .../cim-schema/cim-schema_2.40.0.bb                | 31 ++++++++++++++++++++
- .../recipes-support/cim-schema/files/LICENSE       | 34 ++++++++++++++++++++++
- 5 files changed, 131 insertions(+)
- create mode 100644 meta-networking/licenses/DMTF
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema.inc
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/files/LICENSE
+ ...d-CVE-2012-1820-DoS-in-bgp_capability_orf.patch | 87 ++++++++++++++++++++++
+ ...bgpd-relax-ORF-capability-length-handling.patch | 42 +++++++++++
+ .../recipes-protocols/quagga/quagga.inc            |  2 +
+ 3 files changed, 131 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch
+ create mode 100644 meta-networking/recipes-protocols/quagga/files/0001-bgpd-relax-ORF-capability-length-handling.patch
 
-diff --git a/meta-networking/licenses/DMTF b/meta-networking/licenses/DMTF
+diff --git a/meta-networking/recipes-protocols/quagga/files/0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch b/meta-networking/recipes-protocols/quagga/files/0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch
 new file mode 100644
-index 0000000..54a2812
+index 0000000..5a2ee1b
 --- /dev/null
-+++ b/meta-networking/licenses/DMTF
-@@ -0,0 +1,34 @@
-+// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
-+// All rights reserved.
-+// DMTF is a not-for-profit association of industry members dedicated
-+// to promoting enterprise and systems management and interoperability.
-+// DMTF specifications and documents may be reproduced by
-+// members and non-members, provided that correct attribution is given.
-+// As DMTF specifications may be revised from time to time,
-+// the particular version and release date should always be noted.
-+// 
-+// Implementation of certain elements of this standard or proposed
-+// standard may be subject to third party patent rights, including
-+// provisional patent rights (herein "patent rights"). DMTF makes
-+// no representations to users of the standard as to the existence
-+// of such rights, and is not responsible to recognize, disclose, or
-+// identify any or all such third party patent right, owners or
-+// claimants, nor for any incomplete or inaccurate identification or
-+// disclosure of such rights, owners or claimants. DMTF shall have no
-+// liability to any party, in any manner or circumstance, under any
-+// legal theory whatsoever, for failure to recognize, disclose, or
-+// identify any such third party patent rights, or for such party's
-+// reliance on the standard or incorporation thereof in its product,
-+// protocols or testing procedures. DMTF shall have no liability to
-+// any party implementing such standard, whether such implementation
-+// is foreseeable or not, nor to any patent owner or claimant, and shall
-+// have no liability or responsibility for costs or losses incurred if
-+// a standard is withdrawn or modified after publication, and shall be
-+// indemnified and held harmless by any party implementing the
-+// standard from any and all claims of infringement by a patent owner
-+// for such implementations.
-+// 
-+// For information about patents held by third-parties which have
-+// notified the DMTF that, in their opinion, such patent may relate to
-+// or impact implementations of DMTF standards, visit
-+// http://www.dmtf.org/about/policies/disclosures.php.
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
++++ b/meta-networking/recipes-protocols/quagga/files/0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch
+@@ -0,0 +1,87 @@
++From fe9bb6459afe0d55e56619cdc5061d8407cd1f15 Mon Sep 17 00:00:00 2001
++From: Denis Ovsienko <infrastation@yandex.ru>
++Date: Thu, 19 Apr 2012 20:34:13 +0400
++Subject: [PATCH] bgpd: CVE-2012-1820, DoS in bgp_capability_orf()
++
++Upstream-Status: Backport
++
++An ORF (code 3) capability TLV is defined to contain exactly one
++AFI/SAFI block. Function bgp_capability_orf(), which parses ORF
++capability TLV, uses do-while cycle to call its helper function
++bgp_capability_orf_entry(), which actually processes the AFI/SAFI data
++block. The call is made at least once and repeated as long as the input
++buffer has enough data for the next call.
++
++The helper function, bgp_capability_orf_entry(), uses "Number of ORFs"
++field of the provided AFI/SAFI block to verify, if it fits the input
++buffer. However, the check is made based on the total length of the ORF
++TLV regardless of the data already consumed by the previous helper
++function call(s). This way, the check condition is only valid for the
++first AFI/SAFI block inside an ORF capability TLV.
++
++For the subsequent calls of the helper function, if any are made, the
++check condition may erroneously tell, that the current "Number of ORFs"
++field fits the buffer boundary, where in fact it does not. This makes it
++possible to trigger an assertion by feeding an OPEN message with a
++specially-crafted malformed ORF capability TLV.
++
++This commit fixes the vulnerability by making the implementation follow
++the spec.
++---
++ bgpd/bgp_open.c |   26 ++------------------------
++ 1 files changed, 2 insertions(+), 24 deletions(-)
++
++diff --git a/bgpd/bgp_open.c b/bgpd/bgp_open.c
++index d045dde..af711cc 100644
++--- a/bgpd/bgp_open.c
+++++ b/bgpd/bgp_open.c
++@@ -230,7 +230,7 @@ bgp_capability_orf_entry (struct peer *peer, struct capability_header *hdr)
++     }
++   
++   /* validate number field */
++-  if (sizeof (struct capability_orf_entry) + (entry.num * 2) > hdr->length)
+++  if (sizeof (struct capability_orf_entry) + (entry.num * 2) != hdr->length)
++     {
++       zlog_info ("%s ORF Capability entry length error,"
++                  " Cap length %u, num %u",
++@@ -334,28 +334,6 @@ bgp_capability_orf_entry (struct peer *peer, struct capability_header *hdr)
++ }
++ 
++ static int
++-bgp_capability_orf (struct peer *peer, struct capability_header *hdr)
++-{
++-  struct stream *s = BGP_INPUT (peer);
++-  size_t end = stream_get_getp (s) + hdr->length;
++-  
++-  assert (stream_get_getp(s) + sizeof(struct capability_orf_entry) <= end);
++-  
++-  /* We must have at least one ORF entry, as the caller has already done
++-   * minimum length validation for the capability code - for ORF there must
++-   * at least one ORF entry (header and unknown number of pairs of bytes).
++-   */
++-  do
++-    {
++-      if (bgp_capability_orf_entry (peer, hdr) == -1)
++-        return -1;
++-    } 
++-  while (stream_get_getp(s) + sizeof(struct capability_orf_entry) < end);
++-  
++-  return 0;
++-}
++-
++-static int
++ bgp_capability_restart (struct peer *peer, struct capability_header *caphdr)
++ {
++   struct stream *s = BGP_INPUT (peer);
++@@ -573,7 +551,7 @@ bgp_capability_parse (struct peer *peer, size_t length, int *mp_capability,
++             break;
++           case CAPABILITY_CODE_ORF:
++           case CAPABILITY_CODE_ORF_OLD:
++-            if (bgp_capability_orf (peer, &caphdr))
+++            if (bgp_capability_orf_entry (peer, &caphdr))
++               return -1;
++             break;
++           case CAPABILITY_CODE_RESTART:
++-- 
++1.7.5.4
++
+diff --git a/meta-networking/recipes-protocols/quagga/files/0001-bgpd-relax-ORF-capability-length-handling.patch b/meta-networking/recipes-protocols/quagga/files/0001-bgpd-relax-ORF-capability-length-handling.patch
 new file mode 100644
-index 0000000..06c0dd9
+index 0000000..0ec02dc
 --- /dev/null
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb
-@@ -0,0 +1,23 @@
-+require cim-schema.inc
++++ b/meta-networking/recipes-protocols/quagga/files/0001-bgpd-relax-ORF-capability-length-handling.patch
+@@ -0,0 +1,42 @@
++From 5e728e929942d39ce5a4ab3d01c33f7b688c4e3f Mon Sep 17 00:00:00 2001
++From: David Lamparter <equinox@opensourcerouting.org>
++Date: Wed, 23 Jan 2013 05:50:24 +0100
++Subject: [PATCH] bgpd: relax ORF capability length handling
 +
-+LICENSE = "DMTF"
++Upstream-Status: Backport
 +
-+SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-Doc.zip \
-+           file://LICENSE \
-+          "
-+SRC_URI[md5sum] = "3d01940bc1085c6c42184c25fb61f739"
-+SRC_URI[sha256sum] = "3174cf0f8657b19d80dc59e184778d8e553da424728cb2966fe9d5428dd84267"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
++commit fe9bb64... "bgpd: CVE-2012-1820, DoS in bgp_capability_orf()"
++made the length test in bgp_capability_orf_entry() stricter and is now
++causing us to refuse (with CEASE) ORF capabilites carrying any excess
++data.  This does not conform to the robustness principle as laid out by
++RFC1122 ("be liberal in what you accept").
 +
-+do_unpack() {
-+        unzip -q ${DL_DIR}/cim_schema_${PV}Final-Doc.zip -d ${S}
-+        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
-+}
++Even worse, RFC5291 is quite unclear on how to use the ORF capability
++with multiple AFI/SAFIs.  It can be interpreted as either "use one
++instance, stuff everything in" but also as "use multiple instances".
++So, if not for applying robustness, we end up clearing sessions from
++implementations going by the former interpretation.  (or if anyone dares
++add a byte of padding...)
 +
-+do_install() {
-+        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}-docs
-+        cp -a ${S}/* ${D}${datadir}/doc/cim-schema-${PV}-docs
-+}
++Cc: Denis Ovsienko <infrastation@yandex.ru>
++Signed-off-by: David Lamparter <equinox@opensourcerouting.org>
++---
++ bgpd/bgp_open.c |    2 +-
++ 1 files changed, 1 insertions(+), 1 deletions(-)
 +
-+FILES_${PN} = "${datadir}/doc/*"
-+FILES_${PN}-doc = ""
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema.inc b/meta-networking/recipes-support/cim-schema/cim-schema.inc
-new file mode 100644
-index 0000000..e35bff6
---- /dev/null
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema.inc
-@@ -0,0 +1,9 @@
-+SUMMARY = "Common Information Model (CIM) Schema"
-+DESCRIPTION = "Common Information Model (CIM) is a model for describing overall\
-+management information in a network or enterprise environment. CIM\
-+consists of a specification and a schema. The specification defines the\
-+details for integration with other management models. The schema\
-+provides the actual model descriptions."
++diff --git a/bgpd/bgp_open.c b/bgpd/bgp_open.c
++index af711cc..7bf3501 100644
++--- a/bgpd/bgp_open.c
+++++ b/bgpd/bgp_open.c
++@@ -230,7 +230,7 @@ bgp_capability_orf_entry (struct peer *peer, struct capability_header *hdr)
++     }
++   
++   /* validate number field */
++-  if (sizeof (struct capability_orf_entry) + (entry.num * 2) != hdr->length)
+++  if (sizeof (struct capability_orf_entry) + (entry.num * 2) > hdr->length)
++     {
++       zlog_info ("%s ORF Capability entry length error,"
++                  " Cap length %u, num %u",
++-- 
++1.7.5.4
 +
-+HOMEPAGE = "http://www.dmtf.org/"
-+SECTION = "Development/Libraries"
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
-new file mode 100644
-index 0000000..ff6c29d
---- /dev/null
-+++ b/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
-@@ -0,0 +1,31 @@
-+require cim-schema.inc
-+
-+LICENSE = "DMTF"
-+
-+SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
-+           file://LICENSE \
-+          "
-+SRC_URI[md5sum] = "a9bdf17c7374e3b5b7adeaac4842c4ad"
-+SRC_URI[sha256sum] = "dbfa3064ea427acd71a4bebbc172ca2dc44b0b09a6d83b0945b9ffa988a9058a"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
-+
-+do_unpack() {
-+        unzip -q ${DL_DIR}/cim_schema_${PV}Final-MOFs.zip -d ${S}
-+        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
-+}
-+
-+do_install() {
-+        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
-+        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
-+        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
-+
-+        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
-+        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
-+                sed -i -e 's/\r//g' $i
-+        done
-+        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
-+        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
-+}
-+
-+FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
-+FILES_${PN}-doc = ""
-diff --git a/meta-networking/recipes-support/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/files/LICENSE
-new file mode 100644
-index 0000000..54a2812
---- /dev/null
-+++ b/meta-networking/recipes-support/cim-schema/files/LICENSE
-@@ -0,0 +1,34 @@
-+// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
-+// All rights reserved.
-+// DMTF is a not-for-profit association of industry members dedicated
-+// to promoting enterprise and systems management and interoperability.
-+// DMTF specifications and documents may be reproduced by
-+// members and non-members, provided that correct attribution is given.
-+// As DMTF specifications may be revised from time to time,
-+// the particular version and release date should always be noted.
-+// 
-+// Implementation of certain elements of this standard or proposed
-+// standard may be subject to third party patent rights, including
-+// provisional patent rights (herein "patent rights"). DMTF makes
-+// no representations to users of the standard as to the existence
-+// of such rights, and is not responsible to recognize, disclose, or
-+// identify any or all such third party patent right, owners or
-+// claimants, nor for any incomplete or inaccurate identification or
-+// disclosure of such rights, owners or claimants. DMTF shall have no
-+// liability to any party, in any manner or circumstance, under any
-+// legal theory whatsoever, for failure to recognize, disclose, or
-+// identify any such third party patent rights, or for such party's
-+// reliance on the standard or incorporation thereof in its product,
-+// protocols or testing procedures. DMTF shall have no liability to
-+// any party implementing such standard, whether such implementation
-+// is foreseeable or not, nor to any patent owner or claimant, and shall
-+// have no liability or responsibility for costs or losses incurred if
-+// a standard is withdrawn or modified after publication, and shall be
-+// indemnified and held harmless by any party implementing the
-+// standard from any and all claims of infringement by a patent owner
-+// for such implementations.
-+// 
-+// For information about patents held by third-parties which have
-+// notified the DMTF that, in their opinion, such patent may relate to
-+// or impact implementations of DMTF standards, visit
-+// http://www.dmtf.org/about/policies/disclosures.php.
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 5eeb18b..5ab43b3 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -36,6 +36,8 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name
+            file://quagga.pam \
+            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
+            file://quagga-Avoid-duplicate-connected-address.patch \
++           file://0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch \
++           file://0001-bgpd-relax-ORF-capability-length-handling.patch \
+ "
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 -- 
-1.8.4.2
+2.0.0
 
 
