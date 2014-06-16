@@ -1,38 +1,39 @@
-Return-Path: <nick.lewis@usa.g4s.com>
-Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
-	[195.245.230.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D21C6FEE4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id D094865FC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jun 2014 13:56:30 +0000 (UTC)
-Received: from [85.158.137.19:42469] by server-11.bemta-3.messagelabs.com id
-	BC/DE-19438-E87FE935; Mon, 16 Jun 2014 13:56:30 +0000
-X-Env-Sender: nick.lewis@usa.g4s.com
-X-Msg-Ref: server-5.tower-39.messagelabs.com!1402926956!14159644!12
-X-Originating-IP: [89.206.228.155]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 17512 invoked from network); 16 Jun 2014 13:56:30 -0000
-Received: from unallocated.star.net.uk (HELO gbtwk10s038.Technology.local)
-	(89.206.228.155)
-	by server-5.tower-39.messagelabs.com with RC4-SHA encrypted SMTP;
-	16 Jun 2014 13:56:30 -0000
-Received: from GBTWK10E001.Technology.local ([10.234.1.29]) by
-	gbtwk10s038.Technology.local ([10.234.1.40]) with mapi; Mon, 16 Jun 2014
-	14:56:26 +0100
-From: "Lewis, Nick" <nick.lewis@usa.g4s.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Jun 2014 14:56:25 +0100
-Thread-Topic: [patch] Libxml++ ptest target paths fix
-Thread-Index: Ac+JauaHyQLY0R/ySy2eAAoRjT/7Eg==
-Message-ID: <AAE0766F5AF36B46BAB7E0EFB927320633FFF45DAF@GBTWK10E001.Technology.local>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon, 16 Jun 2014 14:19:20 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id n3so4170063wiv.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Jun 2014 07:19:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=hMBI0nvbF/AMzzmnN8GLlzcj4m3Hwm48SWabgUDrUno=;
+	b=rPr72dmP+vaTNQwasqUEBl5DslGQoshqSurTYSKyID/CMEshU+X4amt9gYCq58+x06
+	zLHdu/V/0O1K5LzJJ53+NP87BVw4G6fEuHdvAFMKsSaHkqEpcvidjVKzsd1D/NiH5FMX
+	CX8pNg8sR7j3GSzQvcLTNq4IzIFE7enMdVWscx3F8Kj/cilOMgMPXm0N5nmBFw6txr92
+	qyDVWuh7DarQqmjooyr5Zc9eyq9Ko5wHt8OZp35z8GaDGaXUMqd0KJelagR3tPJWnY3U
+	UEh22/EwRMu5b/xBe6+s5kOlr5SuCTK5zr46q7/Rt+ztb5E8DHyhg9QEgZfJ4+t9p6Th
+	fGfg==
+X-Received: by 10.180.72.176 with SMTP id e16mr28007933wiv.44.1402928360684;
+	Mon, 16 Jun 2014 07:19:20 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	w9sm34231696eev.4.2014.06.16.07.19.19 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 16 Jun 2014 07:19:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 16 Jun 2014 16:19:45 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140616141945.GQ2428@jama>
+References: <20140616122805.79FDD50297@opal.openembedded.org>
 MIME-Version: 1.0
-Subject: [patch] Libxml++ ptest target paths fix
+In-Reply-To: <20140616122805.79FDD50297@opal.openembedded.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [oe-commits] Robert Yang : tftp-hpa: inherit autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,193 +47,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jun 2014 13:56:33 -0000
-X-Groupsio-MsgNum: 50353
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_002_AAE0766F5AF36B46BAB7E0EFB927320633FFF45DAFGBTWK10E001Te_"
+X-List-Received-Date: Mon, 16 Jun 2014 14:19:21 -0000
+X-Groupsio-MsgNum: 50354
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="EguBBKnZWdUQS9Kz"
+Content-Disposition: inline
 
---_002_AAE0766F5AF36B46BAB7E0EFB927320633FFF45DAFGBTWK10E001Te_
-Content-Type: text/plain; charset="us-ascii"
+--EguBBKnZWdUQS9Kz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-From 135ef5152b5b50e230940c2822b2eb4371072bb0 Mon Sep 17 00:00:00 2001
-From: Nick Lewis <nick.lewis@usa.g4s.com>
-Date: Mon, 16 Jun 2014 14:39:20 +0100
-Subject: [PATCH] Libxmlxx ptest target paths fix
+On Mon, Jun 16, 2014 at 12:28:05PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 8e689bb7a154143c1bdfda5ec7a7e8c79bb1381b
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D8e689bb7a154143c1bdfda5ec7a7e8c79bb1381b
+>=20
+> Author: Robert Yang <liezhi.yang@windriver.com>
+> Date:   Fri Jun 13 08:46:24 2014 +0800
+>=20
+> tftp-hpa: inherit autotools-brokensep
+>=20
+> It needs autotools-brokensep, otherwise do_install error:
+>=20
+> make: *** No rule to make target `install'.  Stop.
+>=20
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>=20
+> ---
+>=20
+>  '                                                   | 21 +++++++++++++++=
+++++++
 
-Signed-off-by: Nick Lewis <nick.lewis@usa.g4s.com>
----
- .../libxml/libxml++-2.37.1/libxml++_ptest.patch    | 23 +++++++++++++++---=
-----
- 1 file changed, 16 insertions(+), 7 deletions(-)
+Joe: please remove this file ^
 
-diff --git a/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.pat=
-ch b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-index 1e847be..82960f1 100644
---- a/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-+++ b/meta-oe/recipes-core/libxml/libxml++-2.37.1/libxml++_ptest.patch
-@@ -12,10 +12,19 @@ index d4aadb1..0e36756 100644
-  # Optional: auto-generate the ChangeLog file from the git log on make dis=
-t
-  include $(top_srcdir)/macros/dist-changelog.am
- diff --git a/examples/Makefile.am b/examples/Makefile.am
--index d9541ca..c28b49c 100644
-+index d9541ca..c27e088 100644
- --- a/examples/Makefile.am
- +++ b/examples/Makefile.am
--@@ -36,6 +36,23 @@ check_PROGRAMS =3D \
-+@@ -19,6 +19,8 @@ AM_CPPFLAGS =3D -I$(top_builddir) -I$(top_srcdir) -I. $(=
-LIBXMLXX_CFLAGS)
-+ AM_CXXFLAGS =3D $(LIBXMLXX_WXXFLAGS)
-+ LDADD =3D $(top_builddir)/libxml++/libxml++-$(LIBXMLXX_API_VERSION).la $(=
-LIBXMLXX_LIBS)
-+
-++LOG_DRIVER =3D $(SHELL) ../macros/test-driver
-++
-+ check_PROGRAMS =3D \
-+   dom_build/dom_build \
-+   dom_parse_entities/dom_parse_entities \
-+@@ -36,6 +38,23 @@ check_PROGRAMS =3D \
-    schemavalidation/schemavalidation \
-    textreader/textreader
+>  .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb        |  2 +-
+>  2 files changed, 22 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/' b/'
+> new file mode 100644
+> index 0000000..244cc72
+> --- /dev/null
+> +++ b/'
+> @@ -0,0 +1,21 @@
+> +radvd: inherit autotools-brokensep
+> +
+> +It needs autotools-brokensep, otherwise do_install error:
+> +
+> +install: cannot stat `radvd.conf.example': No such file or directory
+> +
+> +(LOCAL REV: NOT UPSTREAM) -- Waiting for updating upstream-master
+> +
+> +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> +
+> +# Please enter the commit message for your changes. Lines starting
+> +# with '#' will be ignored, and an empty message aborts the commit.
+> +# On branch wr-7.0-20140426
+> +# Your branch is ahead of 'origin/wr-7.0-20140426' by 10 commits.
+> +#   (use "git push" to publish your local commits)
+> +#
+> +# Changes to be committed:
+> +#   (use "git reset HEAD <file>..." to unstage)
+> +#
+> +#	modified:   recipes-daemons/radvd/radvd.inc
+> +#
+> diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/m=
+eta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> index 6978e06..5baa61b 100644
+> --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> @@ -29,7 +29,7 @@ SRC_URI =3D "http://kernel.org/pub/software/network/tft=
+p/tftp-hpa/tftp-hpa-${PV}.t
+>  SRC_URI[md5sum] =3D "46c9bd20bbffa62f79c958c7b99aac21"
+>  SRC_URI[sha256sum] =3D "0a9f88d4c1c02687b4853b02ab5dd8779d4de4ffdb9b2e5c=
+9332841304d1a269"
+> =20
+> -inherit autotools update-rc.d update-alternatives
+> +inherit autotools-brokensep update-rc.d update-alternatives
+> =20
+>  EXTRA_OECONF +=3D "--disable-option-checking"
+> =20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
-@@ -39,20 +48,20 @@ index d9541ca..c28b49c 100644
-  # Shell scripts that call the example programs.
-  check_SCRIPTS =3D \
-    dom_build/make_check.sh \
--@@ -147,10 +164,10 @@ dist_noinst_DATA =3D \
-+@@ -147,10 +166,10 @@ dist_noinst_DATA =3D \
-  # file are located in different directories.
-  dom_read_write/make_check.sh: Makefile
-        echo '# Generated and used by "make check"' >$@
- -      echo 'dom_read_write/dom_read_write "$(srcdir)/dom_read_write/examp=
-le.xml" dom_read_write/example_output.xml >/dev/null' >>$@
--+      echo 'dom_read_write/.libs/dom_read_write "$(srcdir)/dom_read_write=
-/example.xml" dom_read_write/example_output.xml >/dev/null' >>$@
-++      echo 'cd dom_read_write && .libs/dom_read_write "example.xml" examp=
-le_output.xml >/dev/null' >>$@
-        chmod +x $@
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
- -script_template =3D cd "$(srcdir)/<!progname!>" && "$(abs_builddir)/<!pro=
-gname!>/<!progname!>" >/dev/null
--+script_template =3D cd "$(srcdir)/<!progname!>" && ".libs/<!progname!>" >=
-/dev/null
-++script_template =3D cd "<!progname!>" && ".libs/<!progname!>" >/dev/null
-  standard_scripts =3D $(filter-out dom_read_write/make_check.sh,$(check_SC=
-RIPTS))
+--EguBBKnZWdUQS9Kz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-  # All other script files are generated like so:
--@@ -162,3 +179,18 @@ $(standard_scripts): Makefile
-+@@ -162,3 +181,18 @@ $(standard_scripts): Makefile
-  CLEANFILES =3D \
-    dom_read_write/example_output.xml \
-    $(check_SCRIPTS)
-@@ -65,7 +74,7 @@ index d9541ca..c28b49c 100644
- +      $(MKDIR_P) $(DESTDIR)/examples
- +      cp --parents $(check_DOTLIBS) $(DESTDIR)/examples
- +      cp --parents $(check_SCRIPTS) $(DESTDIR)/examples
--+      $(foreach i, $(dist_noinst_DATA), cp --parents $(srcdir)/$(i) $(DES=
-TDIR)/examples;)
-++      cd $(srcdir) && cp --parents $(dist_noinst_DATA) $(DESTDIR)/example=
-s
- +      cp Makefile $(DESTDIR)/examples
- +      $(MKDIR_P) $(DESTDIR)/macros
- +      cp $(srcdir)/../macros/test-driver $(DESTDIR)/macros
---
-1.9.1
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlOe/QEACgkQN1Ujt2V2gBzvYgCfUZjA7ILKGQb4fZH0iX9lsTnl
+fAcAoLXI0HTKk2pROSZkorAn2aZ84gvu
+=rdJT
+-----END PGP SIGNATURE-----
 
-The details of this company are as follows:
-G4S Technology Limited, Registered Office: Challenge House, International D=
-rive, Tewkesbury, Gloucestershire GL20 8UQ, Registered in England No. 23823=
-38.
-
-This communication may contain information which is confidential, personal =
-and/or privileged.
-
-It is for the exclusive use of the intended recipient(s).
-If you are not the intended recipient(s), please note that any distribution=
-, forwarding, copying or use of this communication or the information in it=
- is strictly prohibited.
-
-Any personal views expressed in this e-mail are those of the individual sen=
-der and the company does not endorse or accept responsibility for them.
-
-Prior to taking any action based upon this e-mail message, you should seek =
-appropriate confirmation of its authenticity.
-
-This e-mail has been scanned for all viruses by MessageLabs.
-
---_002_AAE0766F5AF36B46BAB7E0EFB927320633FFF45DAFGBTWK10E001Te_
-Content-Type: application/octet-stream;
-	name="0001-Libxmlxx-ptest-target-paths-fix.patch"
-Content-Description: 0001-Libxmlxx-ptest-target-paths-fix.patch
-Content-Disposition: attachment;
-	filename="0001-Libxmlxx-ptest-target-paths-fix.patch"; size=3380;
-	creation-date="Mon, 16 Jun 2014 14:50:25 GMT";
-	modification-date="Mon, 16 Jun 2014 14:46:24 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSAxMzVlZjUxNTJiNWI1MGUyMzA5NDBjMjgyMmIyZWI0MzcxMDcyYmIwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBOaWNrIExld2lzIDxuaWNrLmxld2lzQHVzYS5nNHMuY29tPgpE
-YXRlOiBNb24sIDE2IEp1biAyMDE0IDE0OjM5OjIwICswMTAwClN1YmplY3Q6IFtQQVRDSF0gTGli
-eG1seHggcHRlc3QgdGFyZ2V0IHBhdGhzIGZpeAoKU2lnbmVkLW9mZi1ieTogTmljayBMZXdpcyA8
-bmljay5sZXdpc0B1c2EuZzRzLmNvbT4KLS0tCiAuLi4vbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9s
-aWJ4bWwrK19wdGVzdC5wYXRjaCAgICB8IDIzICsrKysrKysrKysrKysrKy0tLS0tLS0KIDEgZmls
-ZSBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
-L21ldGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRl
-c3QucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9saWJ4bWwvbGlieG1sKystMi4zNy4xL2xp
-YnhtbCsrX3B0ZXN0LnBhdGNoCmluZGV4IDFlODQ3YmUuLjgyOTYwZjEgMTAwNjQ0Ci0tLSBhL21l
-dGEtb2UvcmVjaXBlcy1jb3JlL2xpYnhtbC9saWJ4bWwrKy0yLjM3LjEvbGlieG1sKytfcHRlc3Qu
-cGF0Y2gKKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvbGlieG1sL2xpYnhtbCsrLTIuMzcuMS9s
-aWJ4bWwrK19wdGVzdC5wYXRjaApAQCAtMTIsMTAgKzEyLDE5IEBAIGluZGV4IGQ0YWFkYjEuLjBl
-MzY3NTYgMTAwNjQ0CiAgIyBPcHRpb25hbDogYXV0by1nZW5lcmF0ZSB0aGUgQ2hhbmdlTG9nIGZp
-bGUgZnJvbSB0aGUgZ2l0IGxvZyBvbiBtYWtlIGRpc3QKICBpbmNsdWRlICQodG9wX3NyY2Rpcikv
-bWFjcm9zL2Rpc3QtY2hhbmdlbG9nLmFtCiBkaWZmIC0tZ2l0IGEvZXhhbXBsZXMvTWFrZWZpbGUu
-YW0gYi9leGFtcGxlcy9NYWtlZmlsZS5hbQotaW5kZXggZDk1NDFjYS4uYzI4YjQ5YyAxMDA2NDQK
-K2luZGV4IGQ5NTQxY2EuLmMyN2UwODggMTAwNjQ0CiAtLS0gYS9leGFtcGxlcy9NYWtlZmlsZS5h
-bQogKysrIGIvZXhhbXBsZXMvTWFrZWZpbGUuYW0KLUBAIC0zNiw2ICszNiwyMyBAQCBjaGVja19Q
-Uk9HUkFNUyA9IFwKK0BAIC0xOSw2ICsxOSw4IEBAIEFNX0NQUEZMQUdTID0gLUkkKHRvcF9idWls
-ZGRpcikgLUkkKHRvcF9zcmNkaXIpIC1JLiAkKExJQlhNTFhYX0NGTEFHUykKKyBBTV9DWFhGTEFH
-UyA9ICQoTElCWE1MWFhfV1hYRkxBR1MpCisgTERBREQgPSAkKHRvcF9idWlsZGRpcikvbGlieG1s
-KysvbGlieG1sKystJChMSUJYTUxYWF9BUElfVkVSU0lPTikubGEgJChMSUJYTUxYWF9MSUJTKQor
-IAorK0xPR19EUklWRVIgPSAkKFNIRUxMKSAuLi9tYWNyb3MvdGVzdC1kcml2ZXIKKysKKyBjaGVj
-a19QUk9HUkFNUyA9IFwKKyAgIGRvbV9idWlsZC9kb21fYnVpbGQgXAorICAgZG9tX3BhcnNlX2Vu
-dGl0aWVzL2RvbV9wYXJzZV9lbnRpdGllcyBcCitAQCAtMzYsNiArMzgsMjMgQEAgY2hlY2tfUFJP
-R1JBTVMgPSBcCiAgICBzY2hlbWF2YWxpZGF0aW9uL3NjaGVtYXZhbGlkYXRpb24gXAogICAgdGV4
-dHJlYWRlci90ZXh0cmVhZGVyCiAgCkBAIC0zOSwyMCArNDgsMjAgQEAgaW5kZXggZDk1NDFjYS4u
-YzI4YjQ5YyAxMDA2NDQKICAjIFNoZWxsIHNjcmlwdHMgdGhhdCBjYWxsIHRoZSBleGFtcGxlIHBy
-b2dyYW1zLgogIGNoZWNrX1NDUklQVFMgPSBcCiAgICBkb21fYnVpbGQvbWFrZV9jaGVjay5zaCBc
-Ci1AQCAtMTQ3LDEwICsxNjQsMTAgQEAgZGlzdF9ub2luc3RfREFUQSA9IFwKK0BAIC0xNDcsMTAg
-KzE2NiwxMCBAQCBkaXN0X25vaW5zdF9EQVRBID0gXAogICMgZmlsZSBhcmUgbG9jYXRlZCBpbiBk
-aWZmZXJlbnQgZGlyZWN0b3JpZXMuCiAgZG9tX3JlYWRfd3JpdGUvbWFrZV9jaGVjay5zaDogTWFr
-ZWZpbGUKICAJZWNobyAnIyBHZW5lcmF0ZWQgYW5kIHVzZWQgYnkgIm1ha2UgY2hlY2siJyA+JEAK
-IC0JZWNobyAnZG9tX3JlYWRfd3JpdGUvZG9tX3JlYWRfd3JpdGUgIiQoc3JjZGlyKS9kb21fcmVh
-ZF93cml0ZS9leGFtcGxlLnhtbCIgZG9tX3JlYWRfd3JpdGUvZXhhbXBsZV9vdXRwdXQueG1sID4v
-ZGV2L251bGwnID4+JEAKLSsJZWNobyAnZG9tX3JlYWRfd3JpdGUvLmxpYnMvZG9tX3JlYWRfd3Jp
-dGUgIiQoc3JjZGlyKS9kb21fcmVhZF93cml0ZS9leGFtcGxlLnhtbCIgZG9tX3JlYWRfd3JpdGUv
-ZXhhbXBsZV9vdXRwdXQueG1sID4vZGV2L251bGwnID4+JEAKKysJZWNobyAnY2QgZG9tX3JlYWRf
-d3JpdGUgJiYgLmxpYnMvZG9tX3JlYWRfd3JpdGUgImV4YW1wbGUueG1sIiBleGFtcGxlX291dHB1
-dC54bWwgPi9kZXYvbnVsbCcgPj4kQAogIAljaG1vZCAreCAkQAogIAogLXNjcmlwdF90ZW1wbGF0
-ZSA9IGNkICIkKHNyY2RpcikvPCFwcm9nbmFtZSE+IiAmJiAiJChhYnNfYnVpbGRkaXIpLzwhcHJv
-Z25hbWUhPi88IXByb2duYW1lIT4iID4vZGV2L251bGwKLStzY3JpcHRfdGVtcGxhdGUgPSBjZCAi
-JChzcmNkaXIpLzwhcHJvZ25hbWUhPiIgJiYgIi5saWJzLzwhcHJvZ25hbWUhPiIgPi9kZXYvbnVs
-bAorK3NjcmlwdF90ZW1wbGF0ZSA9IGNkICI8IXByb2duYW1lIT4iICYmICIubGlicy88IXByb2du
-YW1lIT4iID4vZGV2L251bGwKICBzdGFuZGFyZF9zY3JpcHRzID0gJChmaWx0ZXItb3V0IGRvbV9y
-ZWFkX3dyaXRlL21ha2VfY2hlY2suc2gsJChjaGVja19TQ1JJUFRTKSkKICAKICAjIEFsbCBvdGhl
-ciBzY3JpcHQgZmlsZXMgYXJlIGdlbmVyYXRlZCBsaWtlIHNvOgotQEAgLTE2MiwzICsxNzksMTgg
-QEAgJChzdGFuZGFyZF9zY3JpcHRzKTogTWFrZWZpbGUKK0BAIC0xNjIsMyArMTgxLDE4IEBAICQo
-c3RhbmRhcmRfc2NyaXB0cyk6IE1ha2VmaWxlCiAgQ0xFQU5GSUxFUyA9IFwKICAgIGRvbV9yZWFk
-X3dyaXRlL2V4YW1wbGVfb3V0cHV0LnhtbCBcCiAgICAkKGNoZWNrX1NDUklQVFMpCkBAIC02NSw3
-ICs3NCw3IEBAIGluZGV4IGQ5NTQxY2EuLmMyOGI0OWMgMTAwNjQ0CiArCSQoTUtESVJfUCkgJChE
-RVNURElSKS9leGFtcGxlcwogKwljcCAtLXBhcmVudHMgJChjaGVja19ET1RMSUJTKSAkKERFU1RE
-SVIpL2V4YW1wbGVzCiArCWNwIC0tcGFyZW50cyAkKGNoZWNrX1NDUklQVFMpICQoREVTVERJUikv
-ZXhhbXBsZXMKLSsJJChmb3JlYWNoIGksICQoZGlzdF9ub2luc3RfREFUQSksIGNwIC0tcGFyZW50
-cyAkKHNyY2RpcikvJChpKSAkKERFU1RESVIpL2V4YW1wbGVzOykKKysJY2QgJChzcmNkaXIpICYm
-IGNwIC0tcGFyZW50cyAkKGRpc3Rfbm9pbnN0X0RBVEEpICQoREVTVERJUikvZXhhbXBsZXMKICsJ
-Y3AgTWFrZWZpbGUgJChERVNURElSKS9leGFtcGxlcwogKwkkKE1LRElSX1ApICQoREVTVERJUikv
-bWFjcm9zCiArCWNwICQoc3JjZGlyKS8uLi9tYWNyb3MvdGVzdC1kcml2ZXIgJChERVNURElSKS9t
-YWNyb3MKLS0gCjEuOS4xCgo=
-
---_002_AAE0766F5AF36B46BAB7E0EFB927320633FFF45DAFGBTWK10E001Te_--
+--EguBBKnZWdUQS9Kz--
