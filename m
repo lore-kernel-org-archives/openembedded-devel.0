@@ -1,36 +1,37 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 088106BD26
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CCC3B6FEB0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 07:22:25 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id y10so6667513wgg.20
+	Tue, 17 Jun 2014 08:15:26 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id hi2so5327397wib.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 00:22:26 -0700 (PDT)
+	Tue, 17 Jun 2014 01:15:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=GLkcOJAN7wG+l+G/DlcF4YPO6fKbkrHFszItEKZtu7s=;
-	b=WX1aK4xqjuJ3BAVWUdxpu0/bXTCUmXLHkWrw30U0dCtQJ09RpLZrmIzIdjTVcc21uG
-	ZfGzde7Zw2EwlrZmeehqsdHQJrv2GpaI7fNhUAWrN3StdkN3KMJ6TP+VC0KP9KwMyYLp
-	DrgH2gOEy5NRURm06oavmhHxVA0DsqMYnJ5u/zZJ2FXoPPnlQpbLA6b7ycbkNFOKtDq9
-	4Kd9x0HpFoWmWJv5cvT6IKw2H6RaiRvF8O0M0G2iNY3j4k2MpUFLwfWGlhH3iY3zWvLI
-	I1TvRwA0l62Lg+z6aWjZ9cDq0eDo/HljavyKGNC0hKZMcvt4C+HO497rekN2BVeVOW31
-	QmqQ==
-X-Gm-Message-State: ALoCoQkLijClXtk7o+rSxWWqs4RNcRBI07aQ3fUTVRcL5bq6vOGSmPfdLbo6zUd7UNOR7zHzRmHQ
-X-Received: by 10.180.106.1 with SMTP id gq1mr33667068wib.45.1402989745975;
-	Tue, 17 Jun 2014 00:22:25 -0700 (PDT)
+	bh=NXEicVxQnvdJAzrk5W64Z8LXpF8Szolt8KORdheadOY=;
+	b=SCtK+x6Ysb9iBTXXmS9h1Sbl2k4BYvC/CMBnf5JR9WiotTQQDYjRLG6lWCIOz2APfg
+	FsPLUdNR/gGEigvwuDdUYHkUnyYkiiWrDOCl5tl34VdISWTkguZXD9hcqkES4qxpBr86
+	tE96LEW2yLBeZ3UlIGUqn6LYlMvBe05Q44rWGJtCYfaJQpK3JgC+UoUVvIi2veN7277C
+	vDBamRWHArNbKkZEwmfpc8q/wUAr6BncnFL8r4X60ZcRG8JnzalhAxsFxqtaCmC4l+Sg
+	34WzYN4dGq7S6o3TiA50fRBhvQeVf4LcejJOL2g2atRIT1CTbcE4jr6ChCC0JsRHfNM1
+	IYmg==
+X-Gm-Message-State: ALoCoQlud2v36aKN9+qw8Xx5eHtvLU5q0esYKKOEbvX1pfkb32ugD9TR6lyLfKLaMS9vbL1oYSGr
+X-Received: by 10.194.119.34 with SMTP id kr2mr36258353wjb.34.1402992926795;
+	Tue, 17 Jun 2014 01:15:26 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:5e51:4fff:fec8:7c15])
-	by mx.google.com with ESMTPSA id f6sm18549858wiy.19.2014.06.17.00.22.25
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	gp6sm18801789wib.12.2014.06.17.01.15.26 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Jun 2014 00:22:25 -0700 (PDT)
+	Tue, 17 Jun 2014 01:15:26 -0700 (PDT)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Jun 2014 09:22:17 +0200
-Message-Id: <1402989737-32720-1-git-send-email-koen.kooi@linaro.org>
+Date: Tue, 17 Jun 2014 10:15:24 +0200
+Message-Id: <1402992924-28244-1-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.3
 Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-webserver][PATCH] apache2(-native): use pkg-config for pcre detection
+Subject: [meta-oe][PATCH] php 5.4.14: use pkg-config for libxml2 detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,141 +45,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jun 2014 07:22:26 -0000
-
-Also fixup apache2-native recipe to use autotools and SEPB.
+X-List-Received-Date: Tue, 17 Jun 2014 08:15:36 -0000
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- .../recipes-httpd/apache2/apache2-native_2.4.9.bb  | 23 +++++-----
- .../recipes-httpd/apache2/apache2_2.4.9.bb         |  1 +
- ...nfigure-use-pkg-config-for-PCRE-detection.patch | 52 ++++++++++++++++++++++
- 3 files changed, 66 insertions(+), 10 deletions(-)
- create mode 100644 meta-webserver/recipes-httpd/apache2/files/0001-configure-use-pkg-config-for-PCRE-detection.patch
+ ...cinclude-use-pkgconfig-for-libxml2-config.patch | 89 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.4.14.bb         |  1 +
+ 2 files changed, 90 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-index aaa7e60..e50f2b8 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.9.bb
-@@ -6,9 +6,11 @@ DEPENDS = "expat-native pcre-native apr-native apr-util-native"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
--inherit native
-+inherit autotools native
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
-+SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+           file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-+          "
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
-@@ -16,11 +18,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
- SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
- SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
- 
--do_configure () {
--    ./configure --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
--        --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
--        --prefix=${prefix} --datadir=${datadir}/apache2
--}
-+EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
-+                --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
-+                --prefix=${prefix} --datadir=${datadir}/apache2 \
-+               "
- 
- do_install () {
-     install -d ${D}${bindir} ${D}${libdir}
-@@ -28,13 +29,15 @@ do_install () {
-     install -m 755 support/apxs ${D}${bindir}/
-     install -m 755 httpd ${D}${bindir}/
-     install -d ${D}${datadir}/apache2/build
-+    cp ${S}/build/*.mk ${D}${datadir}/apache2/build
-     cp build/*.mk ${D}${datadir}/apache2/build
--    cp build/instdso.sh ${D}${datadir}/apache2/build
-+    cp ${S}/build/instdso.sh ${D}${datadir}/apache2/build
- 
-     install -d ${D}${includedir}/apache2
-+    cp ${S}/include/* ${D}${includedir}/apache2
-     cp include/* ${D}${includedir}/apache2
--    cp os/unix/os.h ${D}${includedir}/apache2
--    cp os/unix/unixd.h ${D}${includedir}/apache2
-+    cp ${S}/os/unix/os.h ${D}${includedir}/apache2
-+    cp ${S}/os/unix/unixd.h ${D}${includedir}/apache2
- 
-     cp support/envvars-std ${D}${bindir}/envvars
-     chmod 755 ${D}${bindir}/envvars
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-index 33e197a..4788110 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.9.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://apache-ssl-ltmain-rpath.patch \
-            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-            file://npn-patch-2.4.7.patch \
-+           file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://init \
-            file://apache2-volatile.conf"
- 
-diff --git a/meta-webserver/recipes-httpd/apache2/files/0001-configure-use-pkg-config-for-PCRE-detection.patch b/meta-webserver/recipes-httpd/apache2/files/0001-configure-use-pkg-config-for-PCRE-detection.patch
+diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
 new file mode 100644
-index 0000000..63096db
+index 0000000..479688c
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/files/0001-configure-use-pkg-config-for-PCRE-detection.patch
-@@ -0,0 +1,52 @@
-+From d8837756f2a48adcfe5d645c39cf163d96eac76c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
+@@ -0,0 +1,89 @@
++From 8d758d381b3c2c2118cc486a1dac312e98cfb971 Mon Sep 17 00:00:00 2001
 +From: Koen Kooi <koen.kooi@linaro.org>
-+Date: Tue, 17 Jun 2014 09:10:57 +0200
-+Subject: [PATCH] configure: use pkg-config for PCRE detection
++Date: Tue, 17 Jun 2014 09:53:00 +0200
++Subject: [PATCH] acinclude: use pkgconfig for libxml2 config
 +
 +Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 +Upstream-Status: pending
 +---
-+ configure.in | 27 +++++----------------------
-+ 1 file changed, 5 insertions(+), 22 deletions(-)
++ acinclude.m4 | 62 +++++++++++++++++++++---------------------------------------
++ 1 file changed, 22 insertions(+), 40 deletions(-)
 +
-+diff --git a/configure.in b/configure.in
-+index 864d7c7..da4138e 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -215,28 +215,11 @@ fi
-+ AC_ARG_WITH(pcre,
-+ APACHE_HELP_STRING(--with-pcre=PATH,Use external PCRE library))
-+ 
-+-AC_PATH_PROG(PCRE_CONFIG, pcre-config, false)
-+-if test -d "$with_pcre" && test -x "$with_pcre/bin/pcre-config"; then
-+-   PCRE_CONFIG=$with_pcre/bin/pcre-config
-+-elif test -x "$with_pcre"; then
-+-   PCRE_CONFIG=$with_pcre
-+-fi
++diff --git a/acinclude.m4 b/acinclude.m4
++index c41c507..b89db84 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2528,48 +2528,30 @@ dnl
++ dnl Common setup macro for libxml
++ dnl
++ AC_DEFUN([PHP_SETUP_LIBXML], [
++-AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
++-[
 +-
-+-if test "$PCRE_CONFIG" != "false"; then
-+-  if $PCRE_CONFIG --version >/dev/null 2>&1; then :; else
-+-    AC_MSG_ERROR([Did not find pcre-config script at $PCRE_CONFIG])
-+-  fi
-+-  case `$PCRE_CONFIG --version` in
-+-  [[1-5].*])
-+-    AC_MSG_ERROR([Need at least pcre version 6.0])
-+-    ;;
-+-  esac
-+-  AC_MSG_NOTICE([Using external PCRE library from $PCRE_CONFIG])
-+-  APR_ADDTO(PCRE_INCLUDES, [`$PCRE_CONFIG --cflags`])
-+-  APR_ADDTO(PCRE_LIBS, [`$PCRE_CONFIG --libs`])
-+-else
-+-  AC_MSG_ERROR([pcre-config for libpcre not found. PCRE is required and available from http://pcre.org/])
-+-fi
-++PKG_CHECK_MODULES([PCRE], [libpcre], [
-++  AC_DEFINE([HAVE_PCRE], [1], [Define if you have PCRE library])
++-      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
++-
+++PKG_CHECK_MODULES([LIBXML], [libxml-2.0 > 2.6.11], [
+++  PHP_EVAL_LIBLINE($LIBXML_LIBS, $1)
+++  PHP_EVAL_INCLINE($LIBXML_CFLAGS)
+++
+++  dnl Check that build works with given libs
+++  AC_CACHE_CHECK(whether libxml build works, php_cv_libxml_build_works, [
+++    PHP_TEST_BUILD(xmlInitParser,
+++    [
+++      php_cv_libxml_build_works=yes
+++    ], [
+++      AC_MSG_RESULT(no)
+++      AC_MSG_ERROR([build test failed.  Please check the config.log for details.])
+++    ], [
+++      [$]$1
+++    ])
+++  ])
+++  if test "$php_cv_libxml_build_works" = "yes"; then
+++    AC_DEFINE(HAVE_LIBXML, 1, [ ])
+++    $2
+++  fi
 ++], [
-++  AC_MSG_ERROR([$PCRE_PKG_ERRORS])
-++])
-+ APACHE_SUBST(PCRE_LIBS)
+++  AC_MSG_ERROR([$LIBXML_PKG_ERRORS])
++ ])
 + 
-+ AC_MSG_NOTICE([])
++-  if test -x "$ac_cv_php_xml2_config_path"; then
++-    XML2_CONFIG="$ac_cv_php_xml2_config_path"
++-    libxml_full_version=`$XML2_CONFIG --version`
++-    ac_IFS=$IFS
++-    IFS="."
++-    set $libxml_full_version
++-    IFS=$ac_IFS
++-    LIBXML_VERSION=`expr [$]1 \* 1000000 + [$]2 \* 1000 + [$]3`
++-    if test "$LIBXML_VERSION" -ge "2006011"; then
++-      LIBXML_LIBS=`$XML2_CONFIG --libs`
++-      LIBXML_INCS=`$XML2_CONFIG --cflags`
++-      PHP_EVAL_LIBLINE($LIBXML_LIBS, $1)
++-      PHP_EVAL_INCLINE($LIBXML_INCS)
++-
++-      dnl Check that build works with given libs
++-      AC_CACHE_CHECK(whether libxml build works, php_cv_libxml_build_works, [
++-        PHP_TEST_BUILD(xmlInitParser,
++-        [
++-          php_cv_libxml_build_works=yes
++-        ], [
++-          AC_MSG_RESULT(no)
++-          AC_MSG_ERROR([build test failed.  Please check the config.log for details.])
++-        ], [
++-          [$]$1
++-        ])
++-      ])
++-      if test "$php_cv_libxml_build_works" = "yes"; then
++-        AC_DEFINE(HAVE_LIBXML, 1, [ ])
++-      fi
++-      $2
++-    else
++-      AC_MSG_ERROR([libxml2 version 2.6.11 or greater required.])
++-    fi
++-ifelse([$3],[],,[else $3])
++-  fi
++ ])
++ 
++ dnl -------------------------------------------------------------------------
 +-- 
 +1.9.3
 +
+diff --git a/meta-oe/recipes-devtools/php/php_5.4.14.bb b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+index 4e0efb1..ad878e5 100644
+--- a/meta-oe/recipes-devtools/php/php_5.4.14.bb
++++ b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+@@ -13,6 +13,7 @@ SRC_URI_append_pn-php += "file://iconv.patch \
+             file://phar-makefile.patch \
+             file://php_exec_native.patch \
+             file://fix-fpm-cross-compile.patch \
++            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
+             file://php-fpm.conf \
+             file://php-fpm-apache.conf \
+ "
 -- 
 1.9.3
 
