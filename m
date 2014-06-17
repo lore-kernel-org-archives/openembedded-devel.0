@@ -1,45 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E091A6FDA6;
-	Tue, 17 Jun 2014 17:42:31 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id x48so6937342wes.9
-	for <multiple recipients>; Tue, 17 Jun 2014 10:42:31 -0700 (PDT)
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f170.google.com (mail-yk0-f170.google.com
+	[209.85.160.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B3B76FFAB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Jun 2014 20:55:14 +0000 (UTC)
+Received: by mail-yk0-f170.google.com with SMTP id q9so5652483ykb.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Jun 2014 13:55:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=aViEQTzNs4T3dS1L+LNemL3V0mRs0+VdYjmDJHu6WVQ=;
-	b=zEM/vFmZ6+F9sQiDvd3WOLrQ/41CFCL6RmR42HAKWZXTdXfIRfRjK68j9ufpaJ5Ekh
-	q3YvoPvQ4WyfWU93RboYh6F6yijguTMhkwiMJX+bbwz6dboU86Q26WmHwlHaqfBBcRL+
-	89AU00vts6Y+U1WRyF91AHwbTpoyVNvVJk8cRxUJpOgKvnLiqvdAnt4CBWhDFPFLFw//
-	f5thpdM1gEn8d8+uT2snIp1cO7zl+lFTpLmHICdt78FMXZC2MduXp1FZ//9iNck4lCSu
-	+eczAnUsJaM3apu3JGhmXsmiLbJp+o2nOnpdp++2BGhgGNEl6yd8sWPKYt/qlHOKn5ic
-	7iWw==
-X-Received: by 10.194.61.193 with SMTP id s1mr40818170wjr.36.1403026951930;
-	Tue, 17 Jun 2014 10:42:31 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	d43sm42450030eep.0.2014.06.17.10.42.28 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Jun 2014 10:42:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 17 Jun 2014 19:42:28 +0200
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20140617174228.GB2117@jama>
-References: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
-	<539E8F97.3070508@dresearch-fe.de>
-	<6076930.voh3DpIb8j@peggleto-mobl5.ger.corp.intel.com>
-	<539EBCA8.3000709@dresearch-fe.de> <20140616105942.GO2428@jama>
-	<539EDD0F.8020505@dresearch-fe.de>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=CUNUvbwKHV897RXoHapn0E01nR1bR1tqka5/XrwHnSI=;
+	b=vNDbiejnVmHTkJ1Rj7JiAep3p8ylV7xuLbjNLpaBdw862r3A8qtHkcyKuIfMv/WPZm
+	77NyHVtHYYL1gdK3rii1AcO56J6mU7c6mSCAL8Jz0dfDqBHZcofmyjSX2ofCzeZclsmu
+	GQVtNd9RZB+YFyey4TudNRsuGhaXs6lqOw4cS+UnQnLskl8PhD5ZkVtZW9Q/mS+qy0Ha
+	0DTqrkxp6XSt9bR75XwJyws7BW44qvCStzdGGipPIsui8dtdFTca5yeBmfbv8HK6JLwL
+	PQkMPOcY3YJ/APcFGY2aTw5xV6zyr3EAQBwO/HhC7Yx2FBPbjv1PrxlkPV3qnOBaMad2
+	Fc2w==
 MIME-Version: 1.0
-In-Reply-To: <539EDD0F.8020505@dresearch-fe.de>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [meta-oe][daisy][PATCH] live555: fix fetch problem
+X-Received: by 10.236.74.33 with SMTP id w21mr47282254yhd.87.1403038514735;
+	Tue, 17 Jun 2014 13:55:14 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.209.68 with HTTP; Tue, 17 Jun 2014 13:55:14 -0700 (PDT)
+In-Reply-To: <20140616134850.GP2428@jama>
+References: <20140430143741.GL2486@jama>
+	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
+	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
+	<20140511145337.GE22774@jama> <20140616134850.GP2428@jama>
+Date: Tue, 17 Jun 2014 17:55:14 -0300
+X-Google-Sender-Auth: 9iE29ihitC4bNWS8B3D6Qm0iMp0
+Message-ID: <CAP9ODKr8=FnXhWranpckyRrPrHzpfCW-fYLxF4S1o_7sYRMFVA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,87 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jun 2014 17:42:39 -0000
-X-Groupsio-MsgNum: 50377
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LyciRD1jyfeSSjG0"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Jun 2014 20:55:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
---LyciRD1jyfeSSjG0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Jun 16, 2014 at 10:48 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, May 11, 2014 at 04:53:37PM +0200, Martin Jansa wrote:
+>> On Wed, May 07, 2014 at 11:32:34AM -0700, Philip Balister wrote:
+>> > On 05/05/2014 09:45 AM, Martin Jansa wrote:
+>> > > On Mon, May 05, 2014 at 09:32:04AM -0700, Adam Lee wrote:
+>> > >> Hi JaMa, what does it take to be a maintainer?
+>> > >>
+>> > >> Do I need to build check all the packages everyday?
+>> > >
+>> > > Definitely no everyday, there are more patches coming in just after the
+>> > > release, but later it's something like 1-5 patches in month.
+>> > >
+>> > > So it doesn't need much time, but it's always good when it's done by
+>> > > someone else then master maintainer (to setup separate builds etc).
+>> > >
+>> > > Possibly more time is spent on watching the ML, because many people
+>> > > don't read README file and instead of following the proper procedure for
+>> > > backports to relase branches they just say somewhere in ML "BTW: also
+>> > > merge this to dora".
+>> > >
+>> > > You can also have some co-maintainer if you find way to split the work
+>> > > without duplicating it.
+>> >
+>> > Adam,
+>> >
+>> > I'd be glad to help scan the list for backport requests.
+>>
+>> Can one of you send README update patch?
+>
+> There are first few backport requests and we still don't have official
+> daisy maintainer and README update.
 
-On Mon, Jun 16, 2014 at 02:03:27PM +0200, Steffen Sledz wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 16.06.2014 12:59, Martin Jansa wrote:
-> > On Mon, Jun 16, 2014 at 11:45:12AM +0200, Steffen Sledz wrote:
-> >> On 16.06.2014 10:48, Paul Eggleton wrote:
-> >>> On Monday 16 June 2014 08:32:55 Steffen Sledz wrote:
-> >>>> What is the right ML address for patches in this area?
-> >>>>=20
-> >>>> The meta-multimedia/README in git://git.openembedded.org/meta-openem=
-bedded (daisy branch) says:
-> >>>>=20
-> >>>> "Send pull requests to openembedded-devel@lists.openembedded.org"
-> >>>>=20
-> >>>> But i believe this should be openembedded-core@lists.openembedded.or=
-g.
-> >>>=20
-> >>> No, for all layers in the meta-openembedded repository it should be o=
-penembedded-devel as listed.
-> >>=20
-> >> OK, thx for this info.
-> >>=20
-> >> So i hope the patch will make it into the daisy branch in the next tim=
-e, because our build is broken meanwhile (OK, we have a workaround, but thi=
-s is unendearing).
-> >=20
-> > We still don't have meta-oe daisy maintainer :/ (and update to READMEs =
-in daisy branch)..
->=20
-> How should i interpret this answer?
->=20
-> There is nobody who can push my patch (about the live555 fetch problem, n=
-othing about READMEs) to the daisy branch?
+I didn't find any. Or are you preparing a list to send?
 
-That there can be longer delay, before we find daisy maintainer which
-will ACK your patch (and include it in consolidated pull request) to get
-it merged. (README update just should be first change in daisy branch
-which isn't included in master)
+> Can anyone please volunteer and send README update patch?
 
-> - --=20
-> DResearch Fahrzeugelektronik GmbH
-> Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-> Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-> Fax: +49 30 515932-299
-> Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-> Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-> Ust.-IDNr. DE273952058
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v2.0.22 (GNU/Linux)
-> Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
->=20
-> iEYEARECAAYFAlOe3Q8ACgkQlSfCk8EgCzhdlQCgjMhmzGAk6sacNllCwiP/+Gd2
-> jxIAoONeZ+a1EwuBT8Dfg0cbmfXM0Lte
-> =3DTnT1
-> -----END PGP SIGNATURE-----
+Is anyone willing to take it? I can help but I don't want to be the only one.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
---LyciRD1jyfeSSjG0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlOgfgQACgkQN1Ujt2V2gBwqvgCghs/aDf1Z2YLx3kSS/4DCFmSc
-Iz4An2zSOKi8qARi3Hxv7So+tpsTKqn6
-=LfCf
------END PGP SIGNATURE-----
-
---LyciRD1jyfeSSjG0--
