@@ -1,37 +1,21 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id DF3626FDA6
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id A0EDE6B8D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 14:07:49 +0000 (UTC)
-Received: by mail-la0-f51.google.com with SMTP id mc6so3668490lab.38
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 07:07:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=f+ccdFnqcjgzLpeF1Q4J0OL57wymRd6kCL4llybPbuA=;
-	b=muTy32oJZZcmqrnHh4Wiw0XZXJDSLic3IQ6a1KCeiT1MnveLSTGueY+MxFEr5mBez4
-	TpfXg+/5LmZk8RLefAOPL832XA9ICQsUuXyNWtnTxwT5O5jOF3v5rgS97xEv7AAVbghg
-	PKJgohkUwxP+cR1ApsH+xyMM32PrRRjk6OszvcO1U+BEeM0VJBZomKZTIssnS06ZRewj
-	38nQ+W9hRrRdAqb1/0FCVW7YBaapUTUjyCWcoZ+G4JpDKElTUH+zvV92yRpcDrnvjBB/
-	Dsi6qXblLBRCNmMIxmNXoTfwtpFnz2pQ6D5i6kPphnzqPBqOPFRuSEQYKuN0Ck0/UGrw
-	wb5A==
-X-Gm-Message-State: ALoCoQkOC2YVHmIX27HKQd4PbtnAiwEenLCIuGQ3dnw0X7R2GbG1M1Gc5h8MpxNKiVGTrd8jymb4
-MIME-Version: 1.0
-X-Received: by 10.152.10.207 with SMTP id k15mr1412744lab.76.1403014069850;
-	Tue, 17 Jun 2014 07:07:49 -0700 (PDT)
-Received: by 10.114.28.67 with HTTP; Tue, 17 Jun 2014 07:07:49 -0700 (PDT)
-In-Reply-To: <1402997798-28328-1-git-send-email-koen.kooi@linaro.org>
-References: <1402997798-28328-1-git-send-email-koen.kooi@linaro.org>
-Date: Tue, 17 Jun 2014 16:07:49 +0200
-Message-ID: <CAP0W-RkK1BtV1wo17HjMHOkpTG=6V94rDL4s2pRU=q2Ry058bQ@mail.gmail.com>
-From: Koen Kooi <koen.kooi@linaro.org>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: Re: [meta-oe][PATCHv2] php 5.4.14: use pkg-config for libxml2 detection
+	Tue, 17 Jun 2014 17:35:09 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 17 Jun 2014 10:35:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,495,1400050800"; d="scan'208";a="446620643"
+Received: from garethcl-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.19])
+	by azsmga001.ch.intel.com with ESMTP; 17 Jun 2014 10:35:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Jun 2014 18:34:56 +0100
+Message-Id: <cover.1403026460.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe][PATCH 0/3] A couple of S!=B fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +29,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jun 2014 14:07:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Jun 2014 17:35:12 -0000
 
-On 17 June 2014 11:36, Koen Kooi <koen.kooi@linaro.org> wrote:
+Plus one related metadata fix.
 
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> ---
->  ...cinclude-use-pkgconfig-for-libxml2-config.patch | 89
-> ++++++++++++++++++++++
->  meta-oe/recipes-devtools/php/php_5.4.14.bb         |  4 +-
->  2 files changed, 92 insertions(+), 1 deletion(-)
->  create mode 100644
-> meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
->
-> diff --git
-> a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
-> b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
->
 
-Looks like a v3 will be needed. Php-native builds and works, but php fails
-to build with xml errors:
+The following changes since commit c76b3b9b97fcdc5854c1d27247c4998c59c2fd2b:
 
-|
-/build/linaro/build/build/tmp-eglibc/work/armv7at2hf-vfp-neon-oe-linux-gnueabi/php/5.4.14-r5.0/php-5.4.14/ext/wddx/wddx.c:1042:58:
-error: unknown type name 'XML_Char'
+  claanup: remove garbage file (2014-06-16 11:02:22 -0400)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/sbfixes1
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/sbfixes1
+
+Paul Eggleton (3):
+  lcdproc: fix do_install for S!=B
+  pv: upgrade to 1.5.3
+  pv: fix metadata fields
+
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc     |  4 ++--
+ meta-oe/recipes-extended/lcdproc/lcdproc_0.5.5.bb |  2 +-
+ meta-oe/recipes-support/pv/pv_1.4.6.bb            | 17 -----------------
+ meta-oe/recipes-support/pv/pv_1.5.3.bb            | 11 +++++++++++
+ 4 files changed, 14 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/pv/pv_1.4.6.bb
+ create mode 100644 meta-oe/recipes-support/pv/pv_1.5.3.bb
+
+-- 
+1.9.3
+
 
