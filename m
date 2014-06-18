@@ -1,28 +1,28 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 55681609BE
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id C07F865ED7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 14:34:25 +0000 (UTC)
-Received: by mail-qg0-f50.google.com with SMTP id j5so805491qga.37
+	Wed, 18 Jun 2014 15:20:44 +0000 (UTC)
+Received: by mail-yh0-f52.google.com with SMTP id a41so719570yho.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 07:34:26 -0700 (PDT)
+	Wed, 18 Jun 2014 08:20:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=uat7I0ohLgquyjZDk0C+Wsz4Q2Nz6X0tK09lcDrkwOw=;
-	b=lXzOr3d8qjfNa7iLuSg7pouoQinEiEOlajiPmmCb3wpjnQfpRBliZ5aaiaNiLDNFfA
-	0lxDltmpxlPi8rbMLPPZjIC3jOy3Q9rd9rDMmws+0cD8UCMElV9G5xAeImKND08csF61
-	kwpeXqlYOGX87EooTxgfTD0S5fNKDfCQpzmTkkgs/C3FFZZ3UH/Aq0V0yrmEbzz4xIBI
-	mCYbMc/DTVHPdznud9B1fn2L2Wk2oMfb7ikyzd+A8vUwgYCG7VJagcHELT/ZkZNN9c94
-	8sF4nxbXvCJFYhmWn7s0tJNuosvt8A1FUfQm5WgMZthmL8RBa7QvY+i7wciNsR69DEaw
-	7ERQ==
+	bh=c+/aHre26MQ3cWL1PdLJa3Q460V1YZjr2b00sMVp1JE=;
+	b=s/9OAJGMUHdHtjhKCI2zyme4Kb/FHuGPtKkOE5t0mNk4MKTy2jFQWRGU9Coc9I8cRu
+	U6xRfc4qm2IaXb0V5ltisyWxzIC0HuqKqEofZqMsMoqtZ01Jya4G3U/YV5qeTHhITKN6
+	qj+D5jg5CBfJc31wOusPHPiPmery9Bko3YKGdkA6+BBlBML1/tI2YxkG6lqa4sKg0Srj
+	ZQIr7JBXIupz6eZkTimPoEKIj3nJ2IEeZZ5YSGCe4DaiNiQeEZYeadJC9iuroCu88N37
+	1yrOgd2tXICmyOZijVL2/GfrbVJIZxM58apVyegnWP+v1BArIBMSyruD0lesz5yFk8dZ
+	8e9A==
 MIME-Version: 1.0
-X-Received: by 10.140.102.163 with SMTP id w32mr3391380qge.97.1403102065962;
-	Wed, 18 Jun 2014 07:34:25 -0700 (PDT)
-Sender: cliff.brake@gmail.com
-Received: by 10.140.31.73 with HTTP; Wed, 18 Jun 2014 07:34:25 -0700 (PDT)
-In-Reply-To: <20140618142125.GJ2117@jama>
+X-Received: by 10.236.180.169 with SMTP id j29mr55985738yhm.47.1403104844944; 
+	Wed, 18 Jun 2014 08:20:44 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.209.68 with HTTP; Wed, 18 Jun 2014 08:20:44 -0700 (PDT)
+In-Reply-To: <CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>
 References: <20140430143741.GL2486@jama>
 	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
 	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
@@ -31,12 +31,11 @@ References: <20140430143741.GL2486@jama>
 	<CAOd_LFzTMonJL_17KyR6e-g8U_ByPRakj26n41qEY2-psOevsw@mail.gmail.com>
 	<CAP9ODKr1QTT++D-iiAwT5LgftiZdmzT34xMM_2dkHF5Ti99KnA@mail.gmail.com>
 	<CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>
-	<20140618142125.GJ2117@jama>
-Date: Wed, 18 Jun 2014 10:34:25 -0400
-X-Google-Sender-Auth: 5KmM-D5r-l4TWMaXRmmSXpfZwVU
-Message-ID: <CAOd_LFxAsqciQfwvwmsHxwxSd7=4A27y2-tWqETU0GTBBG2ZGw@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Jun 2014 12:20:44 -0300
+X-Google-Sender-Auth: q1v4MkFN6uQe3JoURDF__AQtIVc
+Message-ID: <CAP9ODKp4+TAv8F1o01ts8o-aWzKEGdXJdrhj3doHfm69xOBxJw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,32 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2014 14:34:31 -0000
+X-List-Received-Date: Wed, 18 Jun 2014 15:20:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jun 18, 2014 at 10:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Wed, Jun 18, 2014 at 10:04:52AM -0400, Cliff Brake wrote:
-
+On Wed, Jun 18, 2014 at 11:04 AM, Cliff Brake <cbrake@bec-systems.com> wrote:
+> On Wed, Jun 18, 2014 at 7:27 AM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
 >
->> Otavio, Armin, would you like me to add your emails to the maintainer
->> lists in these readme's as well?
+>>
+>> Are you willing to take meta-qt5 too?
 >
-> Should I wait 1 more day before merging branch above for possible
-> maintainer additions?
+> Sure.
+>
+> https://github.com/cbrake/meta-qt5/commits/daisy-to-merge
+>
+> I made some more updates to the meta-oe daisy branch:
+>
+> https://github.com/cbrake/meta-openembedded/commits/daisy-to-merge
+>
+> Otavio, Armin, would you like me to add your emails to the maintainer
+> lists in these readme's as well?
 
-Yes, that would be a good idea.  I'll send a pull request tomorrow, or
-after I hear back from others.
+Yes, please add me.
 
-If there are other outstanding daisy patches, please let me know.
-
-As far as a procedure to merge changes, I propose that initially one
-of the branch maintainers sends a pull request to the maillist .
-Another maintainer ack the pull request, and then Martin (or other
-main branch maintainer) merges and pushes.  This will initially give
-us a little bit more review.  Eventually we may transition to one of
-us pushing changes directly after co-maintainer ack. The goal is
-obviously to keep daisy building and as stable as possible.
-
-Thanks,
-Cliff
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
