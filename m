@@ -1,41 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
 	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 280FA6FC96
+	by mail.openembedded.org (Postfix) with ESMTP id ABE646FDA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 08:08:24 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id r20so627762wiv.4
+	Wed, 18 Jun 2014 08:12:56 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id r20so621437wiv.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 01:08:25 -0700 (PDT)
+	Wed, 18 Jun 2014 01:12:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=vFPj1oHPE0PDQu75FaaBQ/s4sn2m82r3HAQKxE5bsNU=;
-	b=Xykb5MymY7ZV9FExc3l3Ece2a0WRElBGdm3XZAX9ldTA+LnmZkwVPEhi/YBvCwfrZb
-	bSusIgU8BcraGAMhaI0RtCW2foC6kNLvWUjDxyyZe2dPAG2gFEqfa/w4UMwA483Fl9/x
-	0Ewn8iLFY8TNp7GKp79bMAgtziZ28VCEiRvhh44o96iWuy6CGLAusRGPCW5zV9u6ynQZ
-	rhrJ+9I6nJwU+RuYQxcDCn9/CBNBUoYEwd3qeXaeaDQYgC8ugu1lVA/duMxSJIH/FLas
-	Zb64vcn1eudJnDDUnb8hQoj9Hs+tTdMc+QCHVrf5sifoM8V9DyQFgA5luLR8s9O5+ty6
-	00Ng==
-X-Received: by 10.195.18.8 with SMTP id gi8mr22544008wjd.75.1403078904094;
-	Wed, 18 Jun 2014 01:08:24 -0700 (PDT)
+	bh=a70tCAtLn/nu+iA51n4sL1GyYKnCqzq38VeRRFqepXM=;
+	b=p4KiEWBtivrJkw5t2sSed1/gKkvXF3lsDdi5EleNpYeLbxCEHIohJzSLBXqCK05Qun
+	DKHn5E9FRN8ohqgyh2vigyhBgpCsJD94jpwoSpJQABEEX3J3r3GpMHeHsvAmfhXfg9dt
+	TJCIc1cUITHV4imO6s5chGRDKbOpKAoqg0Haza0Or+MgBOzHMINj8lHb2FBOBa/x9V+W
+	/7wg5JTA2LL1r3a8K6liRR0ZTjXX4kAAlBM4BKj0vK7J2gsoJgR5MKuW8XMWs7m3FWKE
+	/A3JyToPaBCNaUYDGBK5synRtMXIjwXxe/cWsLBgHVUZj/0wg2n8nvq6fTp2xKS+FTm0
+	vi6Q==
+X-Received: by 10.180.13.47 with SMTP id e15mr3055634wic.28.1403079176959;
+	Wed, 18 Jun 2014 01:12:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id w9sm3782205eev.4.2014.06.18.01.08.22
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id 8sm3798581eea.10.2014.06.18.01.12.55
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Jun 2014 01:08:23 -0700 (PDT)
+	Wed, 18 Jun 2014 01:12:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 Jun 2014 10:08:23 +0200
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <20140618080823.GG2117@jama>
-References: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
+Date: Wed, 18 Jun 2014 10:12:56 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140618081256.GH2117@jama>
+References: <1403042333-15020-1-git-send-email-eduardo@monkey.io>
 MIME-Version: 1.0
-In-Reply-To: <1402775049-3165-1-git-send-email-sledz@dresearch-fe.de>
+In-Reply-To: <1403042333-15020-1-git-send-email-eduardo@monkey.io>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][daisy][PATCH] live555: fix fetch problem
+Subject: Re: [PATCH] monkey: new v1.5.1 release (v2).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,73 +47,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2014 08:08:31 -0000
-X-Groupsio-MsgNum: 50386
+X-List-Received-Date: Wed, 18 Jun 2014 08:13:02 -0000
+X-Groupsio-MsgNum: 50387
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1giRMj6yz/+FOIRq"
+	protocol="application/pgp-signature"; boundary="X+8siUETKMkW99st"
 Content-Disposition: inline
 
---1giRMj6yz/+FOIRq
+--X+8siUETKMkW99st
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jun 14, 2014 at 09:44:09PM +0200, Steffen Sledz wrote:
-> live.2013.04.30.tar.gz is no longer available at original live555 url
-> and the url of the FreeBSD mirror has changed according to[1].
->=20
-> [1] <http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/README.txt>
+On Tue, Jun 17, 2014 at 03:58:53PM -0600, Eduardo Silva wrote:
+> This patch add the minor release fix of Monkey HTTP Server v1.5.1. It fix=
+es
+> some problems when switching user when started as root.
 
-The same problem is in master branch, I'll cherry-pick it there first.
+(v2) belongs to subject tag (so it's stripped in "git am") , subject should=
+ be
 
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+[PATCHv2][meta-webserver] monkey: upgrade to 1.5.1
+
+> monkey/yocto: 7a702d00c5e48d1e03d8bbd2c7bd93a0d26f701e
+
+^ what's this?
+
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 > ---
->  meta-oe/recipes-multimedia/live555/live555.inc | 4 ++--
+>  .../recipes-httpd/monkey/{monkey_1.5.0.bb =3D> monkey_1.5.1.bb}         =
+| 4 ++--
 >  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.0.bb =3D> monkey_=
+1.5.1.bb} (88%)
 >=20
-> diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/rec=
-ipes-multimedia/live555/live555.inc
-> index a36177d..0c8208a 100644
-> --- a/meta-oe/recipes-multimedia/live555/live555.inc
-> +++ b/meta-oe/recipes-multimedia/live555/live555.inc
-> @@ -7,13 +7,13 @@ HOMEPAGE =3D "http://live.com/"
->  LICENSE =3D "LGPLv3"
->  SECTION =3D "devel"
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb b/meta-w=
+ebserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> similarity index 88%
+> rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> index 6fa1b77..172d4f7 100644
+> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> @@ -8,8 +8,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7=
+014dce33e26468ba93"
+>  SECTION =3D "net"
 > =20
-> -INC_PR =3D "r0"
-> +INC_PR =3D "r1"
+>  SRC_URI =3D "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "9123fc371334621fde1c060ab17adcd3"
+> -SRC_URI[sha256sum] =3D "f7a5e4839822750930a723f63a4edbf700e0fb8299a4b363=
+7bd8bab5b1d098a7"
+> +SRC_URI[md5sum] =3D "2fe04135728f5c3a86c3a412059e0da3"
+> +SRC_URI[sha256sum] =3D "28dfc5e57bbcd305727e7af6a1a0587868db1c1286498757=
+bfeb72edddf457e7"
 > =20
->  URLV =3D "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVa=
-r('PV',1)[6:8]}"
->  SRC_URI =3D "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz=
- \
->             file://config.linux-cross"
->  # only latest live version stays on http://www.live555.com/liveMedia/pub=
-lic/, add mirror for older
-> -MIRRORS +=3D "http://www.live555.com/liveMedia/public/ http://ftp.freebs=
-d.org/pub/FreeBSD/ports/distfiles/ \n"
-> +MIRRORS +=3D "http://www.live555.com/liveMedia/public/ http://distcache.=
-FreeBSD.org/ports-distfiles/ \n"
-> =20
->  S =3D "${WORKDIR}/live"
->  TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>  EXTRA_OECONF =3D " \
+>               --plugdir=3D${libdir}/monkey/ \
 > --=20
-> 1.9.3
+> 1.9.1
 >=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---1giRMj6yz/+FOIRq
+--X+8siUETKMkW99st
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlOhSPcACgkQN1Ujt2V2gBxgiQCfQ5Flg34NIxWeFnxUxvKQITzZ
-GEMAmgMmzdGxPGP0qfa9wOlYQdGlivbj
-=CIBO
+iEYEARECAAYFAlOhSggACgkQN1Ujt2V2gBy82gCePwujh9dNlymDqaxtvW6Co5Wg
+bMAAniRjz3Wde5oORkEnfpYjBuiX+hTw
+=C0C3
 -----END PGP SIGNATURE-----
 
---1giRMj6yz/+FOIRq--
+--X+8siUETKMkW99st--
