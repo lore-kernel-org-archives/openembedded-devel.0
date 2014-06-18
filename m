@@ -1,39 +1,39 @@
-Return-Path: <eduardo@monkey.io>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id DB6126B70A
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ED176FDE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 22:23:45 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id cc10so160125wib.0
+	Wed, 18 Jun 2014 01:32:00 +0000 (UTC)
+Received: by mail-qa0-f53.google.com with SMTP id j15so136764qaq.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jun 2014 15:23:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=X/lkCljxVV5XHhGPmBGRwhPnrnA600dKJwSXrPog9vw=;
-	b=OrWXRcjeOpDUeUEk+4dlWhbr2BNXjijv5k1G4h3LsTJ0jWiEkitmsxagixsrB/CA+M
-	9L2OFESOkgYUruxW1swztaTtUoIFfm63BITZhrf1HoFThDErKADzSozcpRyzlU8RgItB
-	thH2yvQezhlPJI8XQGqvbpwY/nnIHQzlj8zquUdZRXLXvf84S572bIzBzNZ6kYAEF/zI
-	iG31fl9bQgo7OK6QnLaac5Ii/dHcP2u332Km+zb0eMvsxkB1KHBDaJ2iLm4Q8jtPJoj3
-	n5DrWobysaeKItiJ6Wrf77QNjCPtYBr9Ja1ZqeLcqaeZM+Cj31dKgoSG2XuGo28GoXhL
-	vrlQ==
-X-Gm-Message-State: ALoCoQlJdpUOjkOGq9PDAkWguzrQ+vfCx5lBHnu5F+TIG4fGUzjvZYqq5qzkr1r3KzzZt7E0iN7Y
+	Tue, 17 Jun 2014 18:32:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=8ZoOrxFZX7errGqBiXoda7jY6p4QGTFi8nnTxoAwa+w=;
+	b=lU5gKUDzBv+rkgSuSiUxpnHW1wseqgnjb4iIg4kF+sMz/Yp+OzVuQ+dtlMMrBX4hwf
+	nYEgytFmN2aRF+6QAZe+lHbpNnG4hUiVbvMeEKOYirgLQgkZ6WMrpr+n5H+z0/KdDYBB
+	LWRq2kD2RrNBYKFjA0QvkO4se0Gg0YTVZ+o9oDUK8HyRJNBQNxaec2yYho7Wq2JtLZdy
+	JiVJwmMy4TskTOY1x9afd0dLQKBuDw41LMfQSosCeRr+B6rqX/BB/ILmAhoTroQ77tNf
+	pAyJZDBxaT3Lz/QeZ88b40ekkzx6DsCUrWCVoFPQ+/9ktEiouDrmpsAcxMDhNSqFlAMc
+	j86A==
 MIME-Version: 1.0
-X-Received: by 10.194.110.10 with SMTP id hw10mr17597706wjb.81.1403043825715; 
-	Tue, 17 Jun 2014 15:23:45 -0700 (PDT)
-Received: by 10.194.88.135 with HTTP; Tue, 17 Jun 2014 15:23:45 -0700 (PDT)
-X-Originating-IP: [186.32.221.184]
-In-Reply-To: <6983375.pDRiSKljRX@peggleto-mobl5.ger.corp.intel.com>
-References: <1402756840-30533-1-git-send-email-eduardo@monkey.io>
-	<6983375.pDRiSKljRX@peggleto-mobl5.ger.corp.intel.com>
-Date: Tue, 17 Jun 2014 16:23:45 -0600
-Message-ID: <CAEaCVQheZd3EedT5qOaZJ5TjQpfjW8Tvkk0vpqAsiiXc75ggOA@mail.gmail.com>
-From: Eduardo Silva <eduardo@monkey.io>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] monkey: new v1.5.1 release.
+X-Received: by 10.140.94.103 with SMTP id f94mr20927691qge.64.1403055121049;
+	Tue, 17 Jun 2014 18:32:01 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.140.31.73 with HTTP; Tue, 17 Jun 2014 18:32:01 -0700 (PDT)
+In-Reply-To: <CAP9ODKr8=FnXhWranpckyRrPrHzpfCW-fYLxF4S1o_7sYRMFVA@mail.gmail.com>
+References: <20140430143741.GL2486@jama>
+	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
+	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
+	<20140511145337.GE22774@jama> <20140616134850.GP2428@jama>
+	<CAP9ODKr8=FnXhWranpckyRrPrHzpfCW-fYLxF4S1o_7sYRMFVA@mail.gmail.com>
+Date: Tue, 17 Jun 2014 21:32:01 -0400
+X-Google-Sender-Auth: 993P7xkMV0HdMUr6EC6O7sPz1IQ
+Message-ID: <CAOd_LFzTMonJL_17KyR6e-g8U_ByPRakj26n41qEY2-psOevsw@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,24 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jun 2014 22:23:54 -0000
+X-List-Received-Date: Wed, 18 Jun 2014 01:32:02 -0000
 Content-Type: text/plain; charset=UTF-8
 
->
-> >
-> > monkey/yocto: 7a702d00c5e48d1e03d8bbd2c7bd93a0d26f701e
-> >
-> > Signed-off-by: Eduardo Silva <eduardo@monkey.io>
-> > ---
-> >  .../recipes-httpd/monkey/monkey_1.5.1.bb           | 36
-> > ++++++++++++++++++++++ 1 file changed, 36 insertions(+)
->
-> Typically we try to keep only one version of each recipe unless there is a
-> good reason to do otherwise. Could you send a v2 of your patch which also
-> removes the previous version recipe?
->
->
-thanks for the feedback, already done (new patch sent).
+On Tue, Jun 17, 2014 at 4:55 PM, Otavio Salvador <otavio@ossystems.com.br>
 
-best
+> I didn't find any. Or are you preparing a list to send?
+>
+>> Can anyone please volunteer and send README update patch?
+>
+> Is anyone willing to take it? I can help but I don't want to be the only one.
+
+I'm willing to help as well.  I started a branch to merge:
+
+https://github.com/cbrake/meta-openembedded/commits/daisy-to-merge
+
+Let me know if anyone else has ideas for README, etc.  Otavio, perhaps
+you can add your email to the README's as well (assuming this is what
+Martin had in mind).  Thanks.
+
+Cliff
 
