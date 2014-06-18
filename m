@@ -1,36 +1,35 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 09E066FD5D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D0906FD24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 18:04:39 +0000 (UTC)
-Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
-	by relay1.mentorg.com with esmtp 
-	id 1WxKDw-0001gP-Ay from Joe_MacDonald@mentor.com ;
-	Wed, 18 Jun 2014 11:04:40 -0700
-Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 18 Jun 2014 11:04:40 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.2.247.3;
-	Wed, 18 Jun 2014 11:04:29 -0700
-Received: by burninator (Postfix, from userid 1000)	id ACEF8581DF0; Mon, 16
-	Jun 2014 11:04:30 -0400 (EDT)
-Date: Mon, 16 Jun 2014 11:04:30 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20140616150427.GA5780@mentor.com>
-References: <20140616122805.79FDD50297@opal.openembedded.org>
-	<20140616141945.GQ2428@jama>
-MIME-Version: 1.0
-In-Reply-To: <20140616141945.GQ2428@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-OriginalArrivalTime: 18 Jun 2014 18:04:40.0183 (UTC)
-	FILETIME=[C6289870:01CF8B1F]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Robert Yang : tftp-hpa: inherit autotools-brokensep
+	Wed, 18 Jun 2014 21:58:39 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id hi2so9220098wib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Jun 2014 14:58:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=cRY/iPqZdrN5ccCcPIQ5JM/p3YWWoO1JvQTQlr1Ac2g=;
+	b=NNf9PbQ78eP1ewZkXKZkYjbK7GSKBZxaz2D4xScYbSpFENLcu7omPaFIoYiaOm6kS4
+	Uc05zjSwTSYhAtnPqhU/Su9KLaJ3SPm3ehEOsAlTj+GJi187MTz/udhOKV4E3DLWVguh
+	2EZP8yDoT8H3InHNjuWKxH2aqBA8rPR0dWah3eQ6Ab2cdIKVMsERDZVmeGdkAfookt6k
+	yjw3zthy1WtXtxuSq909aYcllCjye5P8DMeycjKfEHX6ptaLQV2rCVrRnZmgqHlZsnMB
+	wK41gGb5hItkLBgRtkmBttI/D9fL6iR1VRUGLp73xrh0wlirGjCvPbZSL/b30rA0A2E8
+	HI2g==
+X-Received: by 10.194.216.136 with SMTP id oq8mr691183wjc.33.1403128719861;
+	Wed, 18 Jun 2014 14:58:39 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	z7sm7988948eeo.42.2014.06.18.14.58.38 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 18 Jun 2014 14:58:38 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Jun 2014 23:58:37 +0200
+Message-Id: <1403128717-4481-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-oe][meta-gnome][PATCH] tracker: move from meta-oe to meta-gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,124 +43,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2014 18:04:42 -0000
-X-Groupsio-MsgNum: 50398
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ikeVEW9yuYc//A+q"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Jun 2014 21:58:45 -0000
 
---ikeVEW9yuYc//A+q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* it rdepends on gvfs which is available only in meta-gnome and nothing
+  in meta-oe depends on tracker
 
-[Re: [oe-commits] Robert Yang : tftp-hpa: inherit autotools-brokensep] On 1=
-4.06.16 (Mon 16:19) Martin Jansa wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-support/tracker/files/90tracker        |  0
+ .../tracker/files/tracker-dbus.service             |  0
+ .../tracker/files/tracker-miner-fs.service         |  0
+ .../tracker/files/tracker-store.service            |  0
+ ...-Fix-missing-gobject-introspection-checks.patch |  0
+ .../enable-sqlite-crosscompile.patch               |  0
+ .../fix-removable-media-detection.patch            |  0
+ .../recipes-support/tracker/tracker_0.14.2.bb      |  0
+ .../recipes-support/tracker/tracker_0.14.2.bb.rej  | 36 ----------------------
+ 9 files changed, 36 deletions(-)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/files/90tracker (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/files/tracker-dbus.service (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/files/tracker-miner-fs.service (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/files/tracker-store.service (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch (100%)
+ rename {meta-oe => meta-gnome}/recipes-support/tracker/tracker_0.14.2.bb (100%)
+ delete mode 100644 meta-oe/recipes-support/tracker/tracker_0.14.2.bb.rej
 
-> On Mon, Jun 16, 2014 at 12:28:05PM +0000, git@git.openembedded.org wrote:
-> > Module: meta-openembedded.git
-> > Branch: master
-> > Commit: 8e689bb7a154143c1bdfda5ec7a7e8c79bb1381b
-> > URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcomm=
-it;h=3D8e689bb7a154143c1bdfda5ec7a7e8c79bb1381b
-> >=20
-> > Author: Robert Yang <liezhi.yang@windriver.com>
-> > Date:   Fri Jun 13 08:46:24 2014 +0800
-> >=20
-> > tftp-hpa: inherit autotools-brokensep
-> >=20
-> > It needs autotools-brokensep, otherwise do_install error:
-> >=20
-> > make: *** No rule to make target `install'.  Stop.
-> >=20
-> > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> >=20
-> > ---
-> >=20
-> >  '                                                   | 21 +++++++++++++=
-++++++++
->=20
-> Joe: please remove this file ^
+diff --git a/meta-oe/recipes-support/tracker/files/90tracker b/meta-gnome/recipes-support/tracker/files/90tracker
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/files/90tracker
+rename to meta-gnome/recipes-support/tracker/files/90tracker
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-dbus.service b/meta-gnome/recipes-support/tracker/files/tracker-dbus.service
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/files/tracker-dbus.service
+rename to meta-gnome/recipes-support/tracker/files/tracker-dbus.service
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-miner-fs.service b/meta-gnome/recipes-support/tracker/files/tracker-miner-fs.service
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/files/tracker-miner-fs.service
+rename to meta-gnome/recipes-support/tracker/files/tracker-miner-fs.service
+diff --git a/meta-oe/recipes-support/tracker/files/tracker-store.service b/meta-gnome/recipes-support/tracker/files/tracker-store.service
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/files/tracker-store.service
+rename to meta-gnome/recipes-support/tracker/files/tracker-store.service
+diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch b/meta-gnome/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
+rename to meta-gnome/recipes-support/tracker/tracker-0.14.2/0005-Fix-missing-gobject-introspection-checks.patch
+diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch b/meta-gnome/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
+rename to meta-gnome/recipes-support/tracker/tracker-0.14.2/enable-sqlite-crosscompile.patch
+diff --git a/meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch b/meta-gnome/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
+rename to meta-gnome/recipes-support/tracker/tracker-0.14.2/fix-removable-media-detection.patch
+diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+similarity index 100%
+rename from meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+rename to meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+diff --git a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb.rej b/meta-oe/recipes-support/tracker/tracker_0.14.2.bb.rej
+deleted file mode 100644
+index d044829..0000000
+--- a/meta-oe/recipes-support/tracker/tracker_0.14.2.bb.rej
++++ /dev/null
+@@ -1,36 +0,0 @@
+---- meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+-+++ meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+-@@ -13,7 +13,7 @@
+- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
+-            file://0005-Fix-missing-gobject-introspection-checks.patch \
+-            file://enable-sqlite-crosscompile.patch \
+--	   file://fix-removable-media-detection.patch \
+-+           file://fix-removable-media-detection.patch \
+-            file://90tracker \
+-            file://tracker-store.service \
+-            file://tracker-miner-fs.service \
+-@@ -32,14 +32,17 @@
+- LEAD_SONAME = "libtrackerclient.so.0"
+- 
+- do_install_append() {
+--   cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
+--#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
+--#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
+-+	cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
+-+	#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
+-+	#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
+- 
+--    install -d ${D}${systemd_unitdir}/system
+--    install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
+--    install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
+--    install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
+-+	install -d ${D}${systemd_unitdir}/system
+-+	install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
+-+	install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
+-+	install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
+-+	sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
+-+		-e 's,@BASE_BINDIR@,${base_bindir},g' \
+-+		${D}${systemd_unitdir}/system/*.service
+- }
+- 
+- PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"
+-- 
+2.0.0
 
-Well that's irritating.
 
-Cleaned up.  Sorry about leaving garbage lying around.
-
--J.
-
->=20
-> >  .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb        |  2 +-
-> >  2 files changed, 22 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/' b/'
-> > new file mode 100644
-> > index 0000000..244cc72
-> > --- /dev/null
-> > +++ b/'
-> > @@ -0,0 +1,21 @@
-> > +radvd: inherit autotools-brokensep
-> > +
-> > +It needs autotools-brokensep, otherwise do_install error:
-> > +
-> > +install: cannot stat `radvd.conf.example': No such file or directory
-> > +
-> > +(LOCAL REV: NOT UPSTREAM) -- Waiting for updating upstream-master
-> > +
-> > +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> > +
-> > +# Please enter the commit message for your changes. Lines starting
-> > +# with '#' will be ignored, and an empty message aborts the commit.
-> > +# On branch wr-7.0-20140426
-> > +# Your branch is ahead of 'origin/wr-7.0-20140426' by 10 commits.
-> > +#   (use "git push" to publish your local commits)
-> > +#
-> > +# Changes to be committed:
-> > +#   (use "git reset HEAD <file>..." to unstage)
-> > +#
-> > +#	modified:   recipes-daemons/radvd/radvd.inc
-> > +#
-> > diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b=
-/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > index 6978e06..5baa61b 100644
-> > --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-> > @@ -29,7 +29,7 @@ SRC_URI =3D "http://kernel.org/pub/software/network/t=
-ftp/tftp-hpa/tftp-hpa-${PV}.t
-> >  SRC_URI[md5sum] =3D "46c9bd20bbffa62f79c958c7b99aac21"
-> >  SRC_URI[sha256sum] =3D "0a9f88d4c1c02687b4853b02ab5dd8779d4de4ffdb9b2e=
-5c9332841304d1a269"
-> > =20
-> > -inherit autotools update-rc.d update-alternatives
-> > +inherit autotools-brokensep update-rc.d update-alternatives
-> > =20
-> >  EXTRA_OECONF +=3D "--disable-option-checking"
-> > =20
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-commits mailing list
-> > Openembedded-commits@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->=20
---=20
--Joe MacDonald.
-:wq
-
---ikeVEW9yuYc//A+q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJTnwd7AAoJEEn8ffcsOfaWcB4H/3SJ6UY8dAz64BkSfqeK1QCV
-2xF87LpYER4dBUmD8Vxmz3jgwmNTVa5rQqCx9K7ApvBCjRHiMNQX08SnrY0GIKYC
-jmSvaonNVKzbE2azBqmxkLEctSSRdANyTjl7vYJeuJBbxjrEK3ZJSW4H7GA2ghxk
-0ULNgdbDYuKycneHLDKk0tgn8Ad07bDhJVaxnSzdFRER1a3FgnVkJ5Nwr05IAP3T
-hazJnABoc4jsvrzA/MZ91730lDoODJ9tT6+kPrwSpbcMBvcJJuCse5WNXR/Xo446
-rKPAZTdMBXpeFAXqHh9F9O0SwqtF21Z9jpMn6RmJx5gxP9/vhQZWuHGEbIsHiFs=
-=m9bg
------END PGP SIGNATURE-----
-
---ikeVEW9yuYc//A+q--
