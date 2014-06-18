@@ -1,35 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 433926FDD2
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 55681609BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 14:21:25 +0000 (UTC)
-Received: by mail-we0-f173.google.com with SMTP id t60so943412wes.18
+	Wed, 18 Jun 2014 14:34:25 +0000 (UTC)
+Received: by mail-qg0-f50.google.com with SMTP id j5so805491qga.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 07:21:26 -0700 (PDT)
+	Wed, 18 Jun 2014 07:34:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=BLyeEQ6jVHkA6Gcim6cGbAzD32GzSyDfSNyiEuYagXM=;
-	b=FSGCeJHbnTioJnNudwgr6a53cdDDxMIKYQviwTbfRUBhSyeeD8/FmnkYANwcZ+WLLS
-	df8yQFhoJYhk7wn6UCV0zvjeYkMefEydh5Tw8k1rx1sJOxX7SOzqHdDhWHF7E4BRB+ly
-	oMa0wCEWVoWdgdWJgAnMBtLxiJ1w35gA21RDpDD+csAYIBy4hw6ZL8Rh4bsQ1v/0K4gh
-	fY3cuAvHEQj0YfEjyDhOOnhe1ZnzJKziZtbrtJzojR3iFSKf7rmflpm5pG1vck/bGjrv
-	Jgqx32TCdNlmCXTrYR6X9bo3aMae7lWk8Q2jUmR5Cz24Y4/4bZd0wq5YL8T/FmDlUh3G
-	KtIg==
-X-Received: by 10.194.79.135 with SMTP id j7mr45665090wjx.56.1403101286349;
-	Wed, 18 Jun 2014 07:21:26 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	h49sm5548801eeg.21.2014.06.18.07.21.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Jun 2014 07:21:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 Jun 2014 16:21:25 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140618142125.GJ2117@jama>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=uat7I0ohLgquyjZDk0C+Wsz4Q2Nz6X0tK09lcDrkwOw=;
+	b=lXzOr3d8qjfNa7iLuSg7pouoQinEiEOlajiPmmCb3wpjnQfpRBliZ5aaiaNiLDNFfA
+	0lxDltmpxlPi8rbMLPPZjIC3jOy3Q9rd9rDMmws+0cD8UCMElV9G5xAeImKND08csF61
+	kwpeXqlYOGX87EooTxgfTD0S5fNKDfCQpzmTkkgs/C3FFZZ3UH/Aq0V0yrmEbzz4xIBI
+	mCYbMc/DTVHPdznud9B1fn2L2Wk2oMfb7ikyzd+A8vUwgYCG7VJagcHELT/ZkZNN9c94
+	8sF4nxbXvCJFYhmWn7s0tJNuosvt8A1FUfQm5WgMZthmL8RBa7QvY+i7wciNsR69DEaw
+	7ERQ==
+MIME-Version: 1.0
+X-Received: by 10.140.102.163 with SMTP id w32mr3391380qge.97.1403102065962;
+	Wed, 18 Jun 2014 07:34:25 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.140.31.73 with HTTP; Wed, 18 Jun 2014 07:34:25 -0700 (PDT)
+In-Reply-To: <20140618142125.GJ2117@jama>
 References: <20140430143741.GL2486@jama>
 	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>
 	<20140505164514.GM2486@jama> <536A7C42.6030502@balister.org>
@@ -38,9 +31,12 @@ References: <20140430143741.GL2486@jama>
 	<CAOd_LFzTMonJL_17KyR6e-g8U_ByPRakj26n41qEY2-psOevsw@mail.gmail.com>
 	<CAP9ODKr1QTT++D-iiAwT5LgftiZdmzT34xMM_2dkHF5Ti99KnA@mail.gmail.com>
 	<CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+	<20140618142125.GJ2117@jama>
+Date: Wed, 18 Jun 2014 10:34:25 -0400
+X-Google-Sender-Auth: 5KmM-D5r-l4TWMaXRmmSXpfZwVU
+Message-ID: <CAOd_LFxAsqciQfwvwmsHxwxSd7=4A27y2-tWqETU0GTBBG2ZGw@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,58 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jun 2014 14:21:30 -0000
-X-Groupsio-MsgNum: 50393
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cN519qCC4CN1mUcX"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Jun 2014 14:34:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
---cN519qCC4CN1mUcX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jun 18, 2014 at 10:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Wed, Jun 18, 2014 at 10:04:52AM -0400, Cliff Brake wrote:
 
-On Wed, Jun 18, 2014 at 10:04:52AM -0400, Cliff Brake wrote:
-> On Wed, Jun 18, 2014 at 7:27 AM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->=20
-> >
-> > Are you willing to take meta-qt5 too?
->=20
-> Sure.
->=20
-> https://github.com/cbrake/meta-qt5/commits/daisy-to-merge
+>
+>> Otavio, Armin, would you like me to add your emails to the maintainer
+>> lists in these readme's as well?
+>
+> Should I wait 1 more day before merging branch above for possible
+> maintainer additions?
 
-This looks like commit for master, daisy branch already exists and has
-README files updated from:
-https://github.com/meta-qt5/meta-qt5/commit/55dff304eff64e77338a82cfc5a0cb1=
-ed5a07342
+Yes, that would be a good idea.  I'll send a pull request tomorrow, or
+after I hear back from others.
 
-> I made some more updates to the meta-oe daisy branch:
->=20
-> https://github.com/cbrake/meta-openembedded/commits/daisy-to-merge
+If there are other outstanding daisy patches, please let me know.
 
-Looks good.
+As far as a procedure to merge changes, I propose that initially one
+of the branch maintainers sends a pull request to the maillist .
+Another maintainer ack the pull request, and then Martin (or other
+main branch maintainer) merges and pushes.  This will initially give
+us a little bit more review.  Eventually we may transition to one of
+us pushing changes directly after co-maintainer ack. The goal is
+obviously to keep daisy building and as stable as possible.
 
-> Otavio, Armin, would you like me to add your emails to the maintainer
-> lists in these readme's as well?
+Thanks,
+Cliff
 
-Should I wait 1 more day before merging branch above for possible
-maintainer additions?
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---cN519qCC4CN1mUcX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlOhoGUACgkQN1Ujt2V2gBxVUQCcCFGosImxWnumuGOgH/1GZFu1
-CcUAoIKwk2FG//3ccOSymdiFK+vNpDDr
-=DzGN
------END PGP SIGNATURE-----
-
---cN519qCC4CN1mUcX--
