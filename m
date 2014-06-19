@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CAAC70185
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id DC2E96FD64
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 09:59:59 +0000 (UTC)
-Received: by mail-we0-f171.google.com with SMTP id q58so2109394wes.30
+	Thu, 19 Jun 2014 10:00:01 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id u57so2083214wes.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:00 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UNkkUJ4fj01wkNIPJlB4Tg6sIiBv+FeTJzbdnm4N/Dk=;
-	b=qD8Ju2AcY7/HSRD3JCqAlApdn0W89g3PV49pViC1ocAR7IXKMb0w3gPjXBGtKnX2Cq
-	TwvuH+DjgZ0a+3Kljo0EDjMngZcAJecbbnGqCqFm9EsKWa8CFWHKuIZ1uwz3RIi/1Y/y
-	0GFtZrZpD2ZlKxj+jED4x2mjXLRwk9hmJaAp4WgQxd05A//86yBCdRH4FA3zY8Q69uiK
-	n8ieuU/FFh7hJHGoUxlJkacVihq2Gk1yNGFKnnNUyzFRI9EG+iG03xscSHwDTtmaFKLF
-	sxJP0v3aV3t4E0T0gDiMVBagrSHYRoDsCrEVQIFK0iFL8LrOmVTXKfYnKF2lY3n6o5oA
-	W21g==
-X-Received: by 10.180.14.166 with SMTP id q6mr5161733wic.40.1403172000744;
-	Thu, 19 Jun 2014 03:00:00 -0700 (PDT)
+	bh=fdsukBVey7xkyokA5gd7Vmk5Jcbn6+fhvJ71noS999Q=;
+	b=E9Q6JHonW2sF9wHIkHeyrKGRLEvwggeXv0F8SECxIhLQh/xAUVsPg/RSjH+wXeEExL
+	+Z1EswOPMsVbloVpVAkfb2XMNWmqvdto8D1N3sjq3oQfl3rHRrGJdtKtaRNPdpeqeUw4
+	JoAlKP6hfWTc+Z23IfyHSByGQy0xK9pTVBY5NEd6HoFrBLvTRtKNdkzj7cYSKCLPSkSn
+	elnZcWpShZKaD5Df/RWB0A+2MEDlT4X4eBT4iJn+NjqBkFcgm2dPl0EteaWHj3UOxMkG
+	HfnV6q8Xt6p91aUk5jH+18s7pgPhJ5ZIVfzuC+FTEgkiNWmYFQ/dyd6EP6xc1pUH1KBQ
+	iZCA==
+X-Received: by 10.194.6.166 with SMTP id c6mr3982036wja.64.1403172001939;
+	Thu, 19 Jun 2014 03:00:01 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	nb8sm31874612wic.18.2014.06.19.03.00.00 for <multiple recipients>
+	gp15sm7683946wjc.10.2014.06.19.03.00.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:00 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:34 +0200
-Message-Id: <1403171993-26208-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:59:35 +0200
+Message-Id: <1403171993-26208-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 06/25] tumbler: Blacklist because freetype2-config was removed
+Subject: [meta-oe][WIP][PATCH 07/25] vala-terminal: Blacklist because of broken with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 10:00:01 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 10:00:04 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb | 2 ++
+ meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
-index 3860716..ed986c2 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.29.bb
-@@ -6,6 +6,8 @@ DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-native"
+diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+index 447381a..6e102c3 100644
+--- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
++++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+@@ -8,6 +8,8 @@ PV = "1.3+gitr${SRCPV}"
+ PE = "1"
+ PR = "r1"
  
- inherit xfce
- 
-+PNBLACKLIST[tumbler] = "BROKEN: needs to be updated to use freetype2 pkg-config instead of freetype2-config"
++PNBLACKLIST[vala-terminal] = "BROKEN: Doesn't work with B!=S, touch: cannot touch `src/.stamp': No such file or directory"
 +
- SRC_URI[md5sum] = "f844215c5e3918eae58abdd85f146780"
- SRC_URI[sha256sum] = "c3bac4ee609e22be6c7f01a4fdf6086bc6b57940d82f99570a2d9d547a32fc93"
+ inherit autotools perlnative vala
  
+ SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;branch=master"
 -- 
 2.0.0
 
