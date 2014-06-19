@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id D5CBF6FC7A
+Return-Path: <kapare@rogue-research.com>
+Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C7816FCAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 19:26:56 +0000 (UTC)
-Received: by mail-we0-f171.google.com with SMTP id q58so2830445wes.30
+	Thu, 19 Jun 2014 19:58:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.rogue-research.com (Postfix) with ESMTP id DA9713A079AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 12:26:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=gJYk8gBXyu3w+pdklL4lJDN4fyReLP64wCP43XF11ys=;
-	b=K2wgevnOn6I5N5UDpzY3Ww58KDCwZqHfQAIYjnAmEYOuzMJPgPV6DvCemQcSsubDUZ
-	4ldNOCVW0mebr6AIoOp0FIRWRKtAFNCMuoMSImLSAjix0TOHXOHNZWgHdMdWcvgV/1uJ
-	tgG2VfJYqEsy/jQBue4ZIdZxhvyyWaaDt/NjoL4oAtasCnkGw4J2w98NcDCCAMi8g/ZV
-	vC7AoDfdFCbzxkIqj8EG/HQJgNIqDgy6cyVl4MvnPRflFyaGs2GqytxzEJCWYuKCLLRg
-	UF+lNAQByA28r0/3Gh2NWZ7r+LCSgzRsiV13rLl3Ak5EvjXAMN/toN2Q9XIVpLkfA7C/
-	2LyQ==
-X-Received: by 10.181.11.193 with SMTP id ek1mr9126770wid.15.1403206017599;
-	Thu, 19 Jun 2014 12:26:57 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	am10sm10586532wjc.45.2014.06.19.12.26.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 12:26:56 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 19 Jun 2014 21:26:58 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140619192658.GS2117@jama>
-References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
+	Thu, 19 Jun 2014 15:58:56 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at rogue-research.com
+Received: from mail.rogue-research.com ([127.0.0.1])
+	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 7SqPapVr2Qb3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 15:58:52 -0400 (EDT)
+Received: from mail-vc0-f179.google.com (mail-vc0-f179.google.com
+	[209.85.220.179])
+	by mail.rogue-research.com (Postfix) with ESMTPSA id 3796F3A079A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 15:58:52 -0400 (EDT)
+Received: by mail-vc0-f179.google.com with SMTP id id10so2685666vcb.38
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 12:58:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+X-Received: by 10.58.196.231 with SMTP id ip7mr2435119vec.47.1403207931517;
+	Thu, 19 Jun 2014 12:58:51 -0700 (PDT)
+Received: by 10.58.46.129 with HTTP; Thu, 19 Jun 2014 12:58:51 -0700 (PDT)
+Date: Thu, 19 Jun 2014 15:58:51 -0400
+Message-ID: <CACgAsMf4yz8NQF7kiQn4HVmvQkCkWBPt2+kO7nr3QprcivViCA@mail.gmail.com>
+From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [yocto][meta-qt5][daisy] ERROR meta-toochain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,129 +43,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 19:27:02 -0000
-X-Groupsio-MsgNum: 50458
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="H88uUF932U8Oj0a6"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Jun 2014 19:58:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
---H88uUF932U8Oj0a6
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Thu, Jun 19, 2014 at 02:49:59PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> Hi,
->=20
-> I started by adding all recipes into my image to try to test as much
-> as possible:
->=20
->   ruby \
->   qtbase \
->   qtconnectivity \
->   qtdeclarative \
->   qtgraphicaleffects \
->   qtimageformats \
->   qtlocation \
->   qtmultimedia \
->   qtquick1 \
->   qtquickcontrols \
->   qtscript \
->   qtsensors \
->   qtserialport \
->   qtsvg \
->   qtsystems \
->   qttools \
->   qtwebkit \
->   qtwebkit-examples \
->   qtx11extras \
->   qtxmlpatterns \
->   qsiv \
->   packagegroup-qt5-qtcreator-debug \
->   packagegroup-qt5-toolchain-target \
->   meta-toolchain-qt5 \
->   maliit-framework-qt5 \
->   maliit-plugins-qt5 \
->   cinematicexperience \
+Any idea?
 
-recipe-name !=3D package-name, check which packages were created by those
-recipes and include those in your image.
+# bitbake meta-toolchain-qt5
+Loading cache: 100%
+|########################################################################################################################################################################|
+ETA:  00:00:00
+Loaded 2302 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
 
-> Then start removing these with error:
->=20
-> ERROR: qtwebkit-examples_5.2.1.bb, do_configure) failed with exit code '1'
-> LOG: http://pastebin.com/qnNStaBE
->=20
-> Remove qtwebkit-examples
-> ERROR: qtgraphicaleffects not found in the base feeds
-> ERROR: Function failed: do_rootfs
-> LOG: http://pastebin.com/FTuE5xzg
->=20
-> Remove qtgraphicaleffects
-> ERROR: meta-toolchain-qt5 not found in the base feeds
-> ERROR: Function failed: do_rootfs
-> This one I was expecting it to fail since it's the toolchain...
->=20
-> Remove meta-toolchain-qt5
-> ERROR: qtwebkit not found in the base feeds
-> ERROR: Function failed: do_rootfs
-> LOG: http://pastebin.com/ZpKC5xwU
->=20
-> Remove qtwebkit
-> ERROR: qtquickcontrols not found in the base feeds
-> ERROR: Function failed: do_rootfs
-> LOG: http://pastebin.com/S2Zn1WMj
->=20
-> Remove qtquickcontrols
-> ERROR: Unable to install packages
-> error: Can't install qtwebkit-dev-5.2.1-r0@armv7a_vfp_neon: no package
-> provides qtwebkit =3D 5.2.1-r0
-> ERROR: Function failed: do_rootfs
-> LOG: http://pastebin.com/E7DspaJy
->=20
-> So I drastically remove  all these to have image that complete.
->  qtx11extras
->  qtxmlpatterns
->  qsiv
->  packagegroup-qt5-qtcreator-debug
->  packagegroup-qt5-toolchain-target
->  maliit-framework-qt5
->  maliit-plugins-qt5
->  cinematicexperience
->=20
-> [1] What will be the recommended recipes to enable to have an image
-> that contain the defaults setup settings as when we download the qt
-> for desktop (qt-opensource-linux-x64-1.6.0-3-online.run)?
->=20
-> [2] Any idea why I'm having these do_rootfs error?
->=20
-> [3] What I'm trying to do is replicate what QtDD13 - Andy Nichols -
-> Developing Embedded Linux Applications with Qt
-> (https://www.youtube.com/watch?v=3DlyQVw1RtaH4) have done with
-> buildroot. Any advise on how to proceed?
->=20
-> BR,
->=20
-> -KA
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Build Configuration:
+BB_VERSION        = "1.22.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-12.04"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "overo"
+DISTRO            = "poky"
+DISTRO_VERSION    = "1.6.1"
+TUNE_FEATURES     = "armv7a vfp neon"
+TARGET_FPU        = "vfp-neon"
+meta
+meta-yocto        = "(nobranch):db6819b0c353479af50058a7f209836e3c1cb4bf"
+meta-gnome
+meta-oe
+meta-xfce
+meta-systemd
+meta-networking
+meta-multimedia
+meta-ruby         = "(nobranch):dca466c074c9a35bc0133e7e0d65cca0731e2acf"
+meta-gumstix      = "master:ee8f9454fbd461e2f32710eb7c35dcd82893aa9e"
+meta-gumstix-extras = "(nobranch):82b92454ffbeda031aa3a93e79247818da960880"
+meta-ros          = "(nobranch):821427d23adb33674da76dc34d8ab6983590fcd4"
+meta-nirs         = "(nobranch):db6819b0c353479af50058a7f209836e3c1cb4bf"
+meta-qt5          = "daisy:0137274b13a568718e441f8f1c611a653db9f2f7"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-eglibc/2.19-r0/packages-split/nativesdk-nscd/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/sbin/nscd'
+has relocations in .text
+WARNING: QA Issue: gcc-cross-canadian-arm: found library in wrong
+location: /opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so.0
+gcc-cross-canadian-arm: found library in wrong location:
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so.0.0.0
+gcc-cross-canadian-arm: found library in wrong location:
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/4.8.2/liblto_plugin.so
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/lib/qemu/qemu-bridge-helper'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-arm'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-ga' has
+relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-ppc' has
+relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-x86_64'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-mipsel' has
+relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-i386' has
+relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu
+/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-mips'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-io'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-i386'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-mipsel'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-nbd'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-x86_64'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-arm'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-img'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-system-ppc'
+has relocations in .text
+WARNING: QA Issue: ELF binary
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qemu/1.7.0-r0/packages-split/nativesdk-qemu/opt/poky/1.6.1/sysroots/x86_64-pokysdk-linux/usr/bin/qemu-mips.real'
+has relocations in .text
+ERROR: Unable to install packages. Command
+'/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/sysroots/x86_64-linux/usr/bin/smart
+--data-dir=/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/sdk/image/opt/poky/1.6.1/sysroots/armv7a-vfp-neon-poky-linux-gnueabi/var/lib/smart
+install -y packagegroup-core-standalone-sdk-target-dbg@all
+packagegroup-core-standalone-sdk-target@all
+packagegroup-qt5-toolchain-target@all' returned 1:
+Loading cache...
+Updating cache...               ######################################## [100%]
 
---H88uUF932U8Oj0a6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Computing transaction...error: Can't install
+qtwebkit-dev-5.2.1-r0@armv7a_vfp_neon: no package provides qtwebkit =
+5.2.1-r0
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlOjOYIACgkQN1Ujt2V2gByNvQCfbg4/MX434Exu1zJdZxKUmkRW
-+kcAoJPxj4sR2NnJdyyMmEsXqdfbZ2+h
-=dFSn
------END PGP SIGNATURE-----
+ERROR: Function failed: do_populate_sdk
+ERROR: Logfile of failure stored in:
+/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/temp/log.do_populate_sdk.32315
+ERROR: Task 7 (/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/poky/meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb,
+do_populate_sdk) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 4312 tasks of which 3693 didn't need to
+be rerun and 1 failed.
+No currently running tasks (4312 of 4313)
 
---H88uUF932U8Oj0a6--
+Summary: 1 task failed:
+  /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/poky/meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb,
+do_populate_sdk
+Summary: There were 19 WARNING messages shown.
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+
+LOG:http://pastebin.com/xXtkFMXf
+
+BR,
+
+-KA
+
+-KA
+
