@@ -1,37 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 43EDE6FEA7
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id A8C8B70197
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 10:00:23 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id u56so2028881wes.8
+	Thu, 19 Jun 2014 11:19:44 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id x13so2103624wgg.21
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SLItbZhvCPV3Cvsm0WMJvgDjXFgsKAnwnJa1+0nHlJI=;
-	b=BvUZY+3Q/wNc0MvdC+KYlSaBma7mDMaPTvkBIYQvewpI80j2AxnZtgm+OBnri4gcC/
-	7DY6A+ZjjyD4YfUa1P7mL3DbWD5Lw4BQagOs204eSGRNhBmu93DqSB5+cuFLhhQNM2g1
-	WokBJuKTdtgsWwTPYa0LfH1A4eXrousctnIKj3uokWsyEvAfR1tdhCMmy6xikOB1Ftwc
-	wWR7ZwK1GAyionqLEotDwUvivqjev71V5t2/sw4RC0IS5loIuZNQg81z8e0j7EkvP++V
-	C2DL0zn6zDVFi0qQiyn7JsgTU3JORIOybPFOOvkbxqOtHBk+ENZmz+MBa63aypRE0xQp
-	taGg==
-X-Received: by 10.180.208.13 with SMTP id ma13mr4926369wic.45.1403172024684;
-	Thu, 19 Jun 2014 03:00:24 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	18sm7684180wju.15.2014.06.19.03.00.23 for <multiple recipients>
+	Thu, 19 Jun 2014 04:19:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2oWm9qJJEIRHk3RGdwN/ZiYUk+/I+SlGCReXP4zqJSg=;
+	b=KrEl1REU85fnaF/l2p5HJIe1/Z6W1sY3l+OkzjCmvrk7zYe+gWnllK/NSgI47uFbku
+	ghA//OLg9vOsSLAF/1++DI55qJqMkC0btTi5cmYrexN6/DtNV/oeHOXa01FkcbI/Z4Fm
+	OwQZlbgjoaU+WmKHW4B/lLmQ0Dj7/GIVNN/doLtV/BqBrzPMeCIckkAwsXEhVliIICkD
+	eS9JIAlq7376AyXkH2Ibv9THkie+rh/V6OBsVaOg6DzGHc9ZqwZLOuyHlflzg/GkIVov
+	SDbBjKx6YBB0F1vppckPrHVZL+pggD2BKhmPWV5yE4Az/wk82KoRly0O4mKE9SK4LR2g
+	UgFg==
+X-Gm-Message-State: ALoCoQlow5Ijtg+TWWJ2/8N+bT4BEnQnJW6noUnoG9Vk3woTmRr1xg0pzdD9i0JpxPyczJB7DR+I
+X-Received: by 10.194.189.81 with SMTP id gg17mr4184480wjc.107.1403176785738; 
+	Thu, 19 Jun 2014 04:19:45 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
+	by mx.google.com with ESMTPSA id ub8sm10675699wib.0.2014.06.19.04.19.44
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:24 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Thu, 19 Jun 2014 04:19:45 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:53 +0200
-Message-Id: <1403171993-26208-25-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 25/25] renderer-service-upnp: Blacklist because of broken with B!=S
+Date: Thu, 19 Jun 2014 13:19:42 +0200
+Message-Id: <1403176782-30997-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.3
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH] libsdl-image: use pkg-config for libSDL detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,27 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 10:00:24 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 11:19:48 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- .../recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb            | 2 ++
- 1 file changed, 2 insertions(+)
+ ...igure-use-pkg-config-for-libSDL-detection.patch | 38 ++++++++++++++++++++++
+ .../libsdl-image/libsdl-image_1.2.12.bb            |  6 ++--
+ 2 files changed, 41 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/libsdl-image/libsdl-image/0001-configure-use-pkg-config-for-libSDL-detection.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
-index 478b1c7..64ec7b8 100644
---- a/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb
-@@ -5,6 +5,8 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
-                     file://src/renderer-service-upnp.c;beginline=1;endline=21;md5=c25c3082684eb4ca87474b7528c6dc15"
- 
-+PNBLACKLIST[renderer-service-upnp] = "BROKEN: doesn't build with B!=S (trying to install rendererconsole.py from ${B} instead of ${S})"
+diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image/0001-configure-use-pkg-config-for-libSDL-detection.patch b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image/0001-configure-use-pkg-config-for-libSDL-detection.patch
+new file mode 100644
+index 0000000..192ee16
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image/0001-configure-use-pkg-config-for-libSDL-detection.patch
+@@ -0,0 +1,38 @@
++From 644ec4d18eb83a0ca826001ebfb7f4782cb8db0f Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen.kooi@linaro.org>
++Date: Thu, 19 Jun 2014 13:16:21 +0200
++Subject: [PATCH] configure: use pkg-config for libSDL detection
 +
- DEPENDS = "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
++Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
++---
++ configure.in | 14 ++++++--------
++ 1 file changed, 6 insertions(+), 8 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index e7010e9..cbb536d 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -113,14 +113,12 @@ find_lib()
++ }
++ 
++ dnl Check for SDL
++-SDL_VERSION=1.2.10
++-AC_SUBST(SDL_VERSION)
++-AM_PATH_SDL($SDL_VERSION,
++-            :,
++-           AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
++-)
++-CFLAGS="$CFLAGS $SDL_CFLAGS"
++-LIBS="$LIBS $SDL_LIBS"
+++PKG_CHECK_MODULES([LIBSDL], [sdl > 1.2.10], [
+++  CFLAGS="$CFLAGS $LIBSDL_CFLAGS"
+++  LIBS="$LIBS $LIBSDL_LIBS"
+++], [
+++  AC_MSG_ERROR([$LIBXML_PKG_ERRORS])
+++])
++ saved_LIBS="$LIBS"
++ 
++ dnl Check command-line options
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
+index 4c5fe29..bc49ff8 100644
+--- a/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
++++ b/meta-oe/recipes-multimedia/libsdl-image/libsdl-image_1.2.12.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=613734b7586e1580ef944961c6d62227"
  
- SRC_URI = "git://github.com/01org/${BPN}.git"
+ DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
+ 
+-SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz"
++SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz \
++           file://0001-configure-use-pkg-config-for-libSDL-detection.patch \
++          "
+ SRC_URI[md5sum] = "a0f9098ebe5400f0bdc9b62e60797ecb"
+ SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
+ 
+@@ -14,8 +16,6 @@ S = "${WORKDIR}/SDL_image-${PV}"
+ 
+ inherit autotools
+ 
+-export SDL_CONFIG = "${STAGING_BINDIR_CROSS}/sdl-config"
+-
+ # Disable the run-time loading of the libs and bring back the soname dependencies.
+ EXTRA_OECONF += "--disable-jpg-shared --disable-png-shared -disable-tif-shared"
+ 
 -- 
-2.0.0
+1.9.3
 
 
