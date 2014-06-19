@@ -1,34 +1,28 @@
-Return-Path: <ka6sox@gmail.com>
-Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
-	[209.85.219.44])
-	by mail.openembedded.org (Postfix) with ESMTP id ADB8870181;
-	Thu, 19 Jun 2014 16:09:33 +0000 (UTC)
-Received: by mail-oa0-f44.google.com with SMTP id i7so5636622oag.17
-	for <multiple recipients>; Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=/yW8EgHuHTIqHxao7iagCuYCwhTBs1HApw2zNGSqkG4=;
-	b=Mfxf57sYQluGqwLPKDWW30pYlt8KZR2arC1SJfrZet+8cxo0wSvrDfqSwe57fsRjLL
-	V32drZ3bxD80Q9ZatfwO2XJaMe+u/yubaGKdKg6wu/36JNt4IKINYcEcatT8kZZ10uLo
-	zv89Pxe/Q/QvQ2LM4+AGbl5wUROgKKdUOqUP7NA6fV3J9DtWGVNypy0lqc1e0hNYgykY
-	s5CPTF2oUfHFuIyIyAdhe5aBApZyktO5RpmmIluZLA/z0oPzRVLr5rJfcP4hXRVJGzEc
-	IC19dkUmNDSDigLHMKvy/1nIrwyECMe0ceMGuwqfS5pTHWW8SBISWk53dg/jh5w7GPiV
-	tXsg==
-MIME-Version: 1.0
-X-Received: by 10.60.178.243 with SMTP id db19mr5419984oec.11.1403194173639;
-	Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
-Received: by 10.76.128.201 with HTTP; Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
-In-Reply-To: <20140619113451.GO2117@jama>
-References: <20140619113451.GO2117@jama>
-Date: Thu, 19 Jun 2014 09:09:33 -0700
-Message-ID: <CAHQecY7HffEF4TJ5Bmbmq0kSgm_p6Ei2JD=s7Jy924fTs0PKbQ@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Few archives to add on sources.oe.org
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3613 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 19 Jun 2014 16:56:00 UTC
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 868936FE57
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 16:56:00 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N7F0095PAVXTP90@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	19 Jun 2014 10:55:19 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 288B720185; Thu,
+	19 Jun 2014 11:55:09 -0400 (EDT)
+Date: Thu, 19 Jun 2014 11:55:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20140619155508.GV27324@denix.org>
+References: <1402675329-25425-1-git-send-email-denis@denix.org>
+MIME-version: 1.0
+In-reply-to: <1402675329-25425-1-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] rng-tools: Update rng-tools version to 4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,30 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 16:09:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 Jun 2014 16:56:01 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Done
+Ping?
 
 
-On Thu, Jun 19, 2014 at 4:34 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> Hi Tom,
->
-> can you please add:
-> IO-Tty-1.10.tar.gz
-> SQLAlchemy-0.7.9.tar.gz
-> fetchmail-6.3.26.tar.xz
-> usb-modeswitch-2.0.1.tar.bz2
-> usb-modeswitch-data-20130807.tar.bz2
->
-> to sources.oe.org? I can send you tarballs (or fetch them from
-> /home/jenkins/oe/shr-core-branches/downloads-missing/ on aruba)
->
-> The most annoying is fetchmail which is now fetching HTML page from
-> berlios (so checksum check fails instead of showing 404) :/. And user
-> needs to download it manually or use sources.oe.org as PREMIRROR, but
-> still better than nothing.
->
+On Fri, Jun 13, 2014 at 12:02:09PM -0400, Denys Dmytriyenko wrote:
+> From: "Balasubramanian, Aparna" <aparnab@ti.com>
+> 
+> Signed-off-by: Aparna Balasubramanian <aparnab@ti.com>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  .../rng-tools/{rng-tools_2.bb => rng-tools_4.bb}   |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/rng-tools/{rng-tools_2.bb => rng-tools_4.bb} (84%)
+> 
+> diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> similarity index 84%
+> rename from meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> rename to meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> index 7803b28..f620d8a 100644
+> --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> +++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> @@ -7,8 +7,8 @@ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/gkernel/${P}.tar.gz \
+>             file://init \
+>             file://default"
+>  
+> -SRC_URI[md5sum] = "63d503191eabed630324c104cc024475"
+> -SRC_URI[sha256sum] = "1126f0ecc8cab3af14a562cddc5d8ffeef47df7eba34a7aadcdee35a25ec2b1e"
+> +SRC_URI[md5sum] = "ae89dbfcf08bdfbea19066cfbf599127"
+> +SRC_URI[sha256sum] = "b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195"
+>  
+>  inherit autotools update-rc.d
+>  
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
