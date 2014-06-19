@@ -1,36 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CC7760144;
-	Thu, 19 Jun 2014 11:34:50 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id hi2so9192767wib.5
-	for <multiple recipients>; Thu, 19 Jun 2014 04:34:51 -0700 (PDT)
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qg0-f48.google.com (mail-qg0-f48.google.com
+	[209.85.192.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 609F06FD77
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 11:52:50 +0000 (UTC)
+Received: by mail-qg0-f48.google.com with SMTP id q108so1975194qgd.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 04:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=GYdZ37wsi9a9ixzztOmzMGadYgEIoSTq9Yt0eI7n68k=;
-	b=PEXRp2B+V7aEgYOzyE9dEII29ovCT7Waf3u80elx9Q2KkY7XG7/7IvDT+CrYFLuWpB
-	IkDPS/nj+fqTFx3U1dOyjg4AFcvQA/FKv6z+76XBKvXKyAcdpHjGTmcinh7PnbJYsBd1
-	D4K34Wa+xMTCslPMHQiTfQf2B/Kmit5wf/43hZEeDFjrGeXSH/MM+LAMihCbIX9vO5Tx
-	+3NKbXxvhaL3yaf7rjn1uQdCH7/zWVS4ZDAgOfR8eMOBzm3L+8IyObu6SjW1cG7k7rMR
-	AUlMI4pmavWfJTUva3FHpZrvr/Gsr8/RXuHhXAYKSSmNn759eaaRjwKHoOVsEolRoG0Q
-	4omg==
-X-Received: by 10.180.105.72 with SMTP id gk8mr5869218wib.32.1403177691077;
-	Thu, 19 Jun 2014 04:34:51 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	l9sm10754488wic.21.2014.06.19.04.34.49 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 04:34:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 19 Jun 2014 13:34:51 +0200
-To: Tom King <ka6sox@gmail.com>, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Message-ID: <20140619113451.GO2117@jama>
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=xIA70FHy7QIyuR46e8MjXbohTASPTpgxV8d4SXNpxoE=;
+	b=OPqfpH9+BD7WDnohDFyTP11XyyAxfNrzW6H0UuFldVVLDOiroDX4a8jaOL4jy5wBFj
+	BlxCkkbTDw4TkOb5T+Jcjpvs3BXrZdqOuQTrs4CLot97PEddjA9GIBaNX8/vdr4u2CTm
+	DhM9gJKq7fhcQ+2aiKdh/DT+KdEKqUFW052RjZMt/SMTSW+1e6+PWJ1t0A5FkdZMMsGW
+	Ljk4HsOUOUGZmZt5NltZARz1U9dLh/XTu4qlEo3UymGxTXHTEZnHxdNwHxMZeeXphthL
+	ylcjuWHjsZ/UAYIOa/QG2xIkv8hDoSot93i17l89c0okAIWmW+e3jYjmt359+xoaPc4q
+	pySw==
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Few archives to add on sources.oe.org
+X-Received: by 10.140.102.163 with SMTP id w32mr5606116qge.97.1403178771548;
+	Thu, 19 Jun 2014 04:52:51 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.140.17.44 with HTTP; Thu, 19 Jun 2014 04:52:51 -0700 (PDT)
+Date: Thu, 19 Jun 2014 07:52:51 -0400
+X-Google-Sender-Auth: K5mxL4IKWcTQB6cjD_gdT6sThA0
+Message-ID: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][daisy] pull request, update README's, live555 fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,43 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 11:34:51 -0000
-X-Groupsio-MsgNum: 50446
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nljfjKcp9HDtPSOP"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Jun 2014 11:52:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nljfjKcp9HDtPSOP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731e2acf:
 
-Hi Tom,
+  python-efl: add dependency on python-dbus and lua to always build
+edje and elementary bindings (2014-05-12 10:08:28 +0200)
 
-can you please add:
-IO-Tty-1.10.tar.gz
-SQLAlchemy-0.7.9.tar.gz
-fetchmail-6.3.26.tar.xz
-usb-modeswitch-2.0.1.tar.bz2
-usb-modeswitch-data-20130807.tar.bz2
+are available in the git repository at:
 
-to sources.oe.org? I can send you tarballs (or fetch them from
-/home/jenkins/oe/shr-core-branches/downloads-missing/ on aruba)
+  https://github.com/cbrake/meta-openembedded.git daisy-to-merge
 
-The most annoying is fetchmail which is now fetching HTML page from
-berlios (so checksum check fails instead of showing 404) :/. And user
-needs to download it manually or use sources.oe.org as PREMIRROR, but
-still better than nothing.
+for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb9:
 
---nljfjKcp9HDtPSOP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+  live555: fix fetch problem (2014-06-18 13:42:35 -0400)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+----------------------------------------------------------------
+Cliff Brake (1):
+      update maintainer info in README's for daisy
 
-iEUEARECAAYFAlOiytsACgkQN1Ujt2V2gBzzSACfa+lTejjXgM9phUHfT1/7O2bB
-PAMAlRQV9iJQ4XMOKwjItIG+SvzDV/c=
-=Y1Rv
------END PGP SIGNATURE-----
+Steffen Sledz (1):
+      live555: fix fetch problem
 
---nljfjKcp9HDtPSOP--
+ meta-efl/README                                | 16 ++++++++++++----
+ meta-filesystems/README                        | 15 +++++++++++----
+ meta-gnome/README                              | 16 ++++++++++++----
+ meta-gpe/README                                | 16 ++++++++++++----
+ meta-initramfs/README                          | 12 +++++++++---
+ meta-multimedia/README                         | 15 +++++++++++----
+ meta-networking/MAINTAINERS                    | 11 +++++++++--
+ meta-networking/README                         |  2 +-
+ meta-oe/README                                 | 14 +++++++++++---
+ meta-oe/recipes-multimedia/live555/live555.inc |  4 ++--
+ meta-perl/README                               | 13 ++++++++++---
+ meta-ruby/README                               | 17 +++++++++++++----
+ meta-systemd/README                            | 16 ++++++++++++----
+ meta-webserver/README                          | 13 ++++++++++---
+ meta-xfce/README                               | 16 ++++++++++++----
+ toolchain-layer/README                         | 14 +++++++++++---
+ 16 files changed, 158 insertions(+), 52 deletions(-)
+
