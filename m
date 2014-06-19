@@ -1,29 +1,37 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 313DF6A451
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BBA26FD1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 08:51:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5J8pOKG011304
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 19 Jun 2014 01:51:24 -0700 (PDT)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 19 Jun 2014 01:51:23 -0700
-Message-ID: <53A2A49A.8040903@windriver.com>
-Date: Thu, 19 Jun 2014 16:51:38 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1403153175-10707-1-git-send-email-rongqing.li@windriver.com>
-	<53A29291.1010700@dominion.thruhere.net>
-	<53A29E1D.9080307@windriver.com> <20140619084640.GM2117@jama>
-In-Reply-To: <20140619084640.GM2117@jama>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [PATCH][meta-oe] dialog: use pkg-config to detect ncurses
+	Thu, 19 Jun 2014 09:09:36 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id hi2so9753373wib.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 02:09:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Vs+DPWeupQ3dGCCenMjS8qDsZ5c6X3S7xVbd7y+BVHc=;
+	b=N4u8+pTB8pUdCbAN0Ipp74GSXr4t9sD/XAZdBL/zTHx6d3GR5d/4eYdqSJItB3wtmQ
+	CmnDuR0LvBnNA2XAWLqiE8b592z6hTXgkvLzD9FOs/8SToN10wZ8Ecxv6GGZFdfXQiI7
+	htBetvelInslBq/Bgqb6zmknXX9OrXyeFbCwd1T6XV/FkUdEsI/bmvOeBlEAP96udTs9
+	q/YDk74P/lo9yjYD+97q69Y9BlZe5SKqI5ZWa6G8sxVi0I6i9zo2sie6hlHPwOb782YA
+	l5/P2ThieiAAWzVj+dW33ruNpmT+S3zEyOboM+HaeCKFdP1ZdWzoyjJ0oc26cm9x25lN
+	OhbQ==
+X-Received: by 10.180.186.97 with SMTP id fj1mr4785494wic.18.1403168977083;
+	Thu, 19 Jun 2014 02:09:37 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	o2sm6345302wia.16.2014.06.19.02.09.36 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 19 Jun 2014 02:09:36 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Jun 2014 11:09:32 +0200
+Message-Id: <1403168972-24905-4-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+In-Reply-To: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][WIP][PATCH 4/4] glmark2: Add virtual/libx11 dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 08:51:28 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Jun 2014 09:09:39 -0000
 
+* without it, do_configure fails:
+  | Checking for 'x11'                       : not found
+  | The configuration failed
+  so it doesn't look as optional dependency, but someone please
+  double-check
 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 06/19/2014 04:46 PM, Martin Jansa wrote:
-> On Thu, Jun 19, 2014 at 04:23:57PM +0800, Rongqing Li wrote:
->>
->>
->> On 06/19/2014 03:34 PM, Koen Kooi wrote:
->>>> +Subject: [PATCH] use pkg-config for ncurses detection. +
->>>>> +Upstream-Status: Inappropriate [configuration]
->>> Why is it inappropriate?
->>
->>
->> I think we should fix the configure.in, but this configure.in can not
->> work with oe-core, the dialog bb file runs configure directly, and
->> I do this fix in configure directly, so it is Inappropriate
->
-> Can you please fix dialog-static as well? It probably doesn't even work with B!=S.
->
-
-
-Yes, I fixed it in this patch
-
--Roy
-
-> | DEBUG: Executing shell function do_configure
-> | gnu-configize: 'configure.ac' or 'configure.in' is required
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_configure (log file is located at /home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/dialog-static/1.1-20120706-r0/temp/log.do_configure.20677)
-> NOTE: recipe dialog-static-1.1-20120706-r0: task do_configure: Failed
->
-> Otherwise it will be PNBLACKLISTED this weekend (together with a lot of other unmaintained recipes)
->
->
->
-
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
+index 3ff0449..565423a 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3+ & SGIv1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
+ 
+-DEPENDS = "libpng12 jpeg"
++DEPENDS = "libpng12 jpeg virtual/libx11"
+ 
+ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
+ 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+2.0.0
+
 
