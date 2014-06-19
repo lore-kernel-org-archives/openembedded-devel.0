@@ -1,44 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id BB5AD70232
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AFED7023F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 23:21:30 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id y10so2903124wgg.8
+	Thu, 19 Jun 2014 23:54:44 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id lj1so2395383pab.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 16:21:31 -0700 (PDT)
+	Thu, 19 Jun 2014 16:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IXGuPCKu/0FWQ3tEWkBGcnaodR9FvVFt/eNvfr6vNtA=;
-	b=tGSsprstgYmKqoYxZaX59LHjxSkTYxWyKlUisoW6PMV83ezGMrTcN4yGb5qzYFQY5h
-	WSeT/qvfKyk/xnD+j9EwHLiIYgSJKb+J8JhGA5YTBW4vZEsv5YSWnn3TMQ5yljCdnZc4
-	BUx4e+AcyHcYjrK1PYPDySdsWI2laeLkNmHJ5Q1Jz4CIjhenwoY/2jDfapHF+yfVr5pz
-	XamdJ8CA2Qa5haihbtny0tYKVumQk8ic3WA9FB9DyrIxm8zAiomDONHpV44wk0dACvXd
-	gKBkaV8se0KeMElYa4kelInkrKR8vGROP+vBMVP3fmP1qwiaY+Mniiyd04JSbKblON3p
-	kSzA==
-X-Received: by 10.180.183.167 with SMTP id en7mr10335488wic.6.1403220091605;
-	Thu, 19 Jun 2014 16:21:31 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=S+OC0RBA+T1+B68xKmUpMW5Xcpq/kcBUZY0En3O3zo8=;
+	b=E5KiQ18gkDER9WoJL6RAdUaYmK1mQ8UHWVtD/varrGfWkilRQeNWhvxGmj4Px/+6xL
+	bqsH9e68pw2wB73lY84xrkioW/ji9kwec0o8EetyW05g/QO0EAwJYXNScWWb2KKRdvrD
+	EPksxvuhCQoW2CpkcG/FonbAz7b3+sgRVf4WTKdxU8bu50Ky17SC9LaFbUwTIxCli875
+	/GPDednZYbxTMmqb90ztoLLZDbQqI4NIiAwFO/PT4LZzClaOSUFPGhGGsUJcYg2Y+Xk+
+	p3lrWZ+boijvx43mopyF9YWJVyfXLfbTEoa3tERkicMv+5uNfxYds4uCaRW3w+DlMOr9
+	SbvA==
+X-Received: by 10.68.181.165 with SMTP id dx5mr9833432pbc.38.1403222085843;
+	Thu, 19 Jun 2014 16:54:45 -0700 (PDT)
+Received: from [10.7.100.231] (64.2.3.195.ptr.us.xo.net. [64.2.3.195])
 	by mx.google.com with ESMTPSA id
-	o3sm37403084wiz.24.2014.06.19.16.21.30
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 16:21:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 20 Jun 2014 01:21:32 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140619232132.GV2117@jama>
-References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
-	<20140619192658.GS2117@jama>
-	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
-	<20140619210847.GT2117@jama>
-	<CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
-	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
+	ir10sm10404204pbc.59.2014.06.19.16.54.44 for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 19 Jun 2014 16:54:44 -0700 (PDT)
+Message-ID: <53A37842.70908@gmail.com>
+Date: Thu, 19 Jun 2014 16:54:42 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-In-Reply-To: <CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
+	<20140619115701.GP2117@jama>
+In-Reply-To: <20140619115701.GP2117@jama>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][daisy] pull request, update README's, live555 fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,119 +49,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 23:21:37 -0000
-X-Groupsio-MsgNum: 50468
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="buDNgeHiu+HCsDEc"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Jun 2014 23:54:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---buDNgeHiu+HCsDEc
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 19, 2014 at 07:06:08PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> I'm a bit further but still have some interrogations?
->=20
-> ERROR: qtwebkit not found in the base feeds (overo armv7a-vfp-neon
-> armv7a-vfp armv7a armv6-vfp armv6 armv5e-vfp armv5e armv5-vfp armv5
-> armv4 arm noarch any all)
->=20
-> I'm having these included in my image:
->=20
->   ruby \
->   qtbase \
->   qtbase-fonts \
->   qtbase-fonts-ttf-vera \
->   qtbase-fonts-ttf-dejavu \
->   qtbase-fonts-pfa \
->   qtbase-fonts-pfb \
->   qtbase-fonts-qpf \
->   qtbase-tools-dbg \
->   qtbase-plugins-dbg \
->   qtbase-tools \
->   qtbase-plugins \
->   qtbase-mkspecs \
->   qtbase-dev \
->   qtdeclarative-qmlplugins-dbg \
->   qtdeclarative-tools-dbg \
->   qtdeclarative-plugins-dbg \
->   qtdeclarative-qmlplugins \
->   qtdeclarative-tools \
->   qtdeclarative-plugins \
->   qtdeclarative-mkspecs \
->   qtdeclarative-dbg \
->   qtdeclarative-dev \
->   qtdeclarative \
->   qtquick1-qmlplugins-dbg \
->   qtquick1-tools-dbg \
->   qtquick1-plugins-dbg \
->   qtquick1-qmlplugins \
->   qtquick1-tools \
->   qtquick1-plugins \
->   qtquick1-mkspecs \
->   qtquick1-dbg \
->   qtquick1-dev \
->   qtquick1 \
->   qttools-tools-dbg \
->   qttools-tools \
->   qttools-mkspecs \
->   qttools-dbg \
->   qttools-dev \
->   qttools \
->   qtwebkit \
->=20
-> [1] Why the bitbake qtwebkit is working but not when I'm including it
-> in my image?
 
-What PACKAGECONFIG values are you using (especially for qtbase)?
+On 06/19/2014 04:57 AM, Martin Jansa wrote:
+> On Thu, Jun 19, 2014 at 07:52:51AM -0400, Cliff Brake wrote:
+>> The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731e2acf:
+>>
+>>    python-efl: add dependency on python-dbus and lua to always build
+>> edje and elementary bindings (2014-05-12 10:08:28 +0200)
+>>
+>> are available in the git repository at:
+>>
+>>    https://github.com/cbrake/meta-openembedded.git daisy-to-merge
+>>
+>> for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb9:
+>>
+>>    live555: fix fetch problem (2014-06-18 13:42:35 -0400)
+>
+> Thank you!
+>
+> Acked-By: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> Waiting for ACK from listed maintainers, then I'll merge it.
 
-carefully read comments in qtbase.inc
+Acked-By: Armin Kuster <akuster808@mvista.com>
 
-> On Thu, Jun 19, 2014 at 5:34 PM, Kevyn-Alexandre Par=E9
-> <kapare@rogue-research.com> wrote:
-> > On Thu, Jun 19, 2014 at 5:08 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
-> >> On Thu, Jun 19, 2014 at 04:32:17PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> >>> Hi Martin,
-> >>>
-> >>> On Thu, Jun 19, 2014 at 3:26 PM, Martin Jansa <martin.jansa@gmail.com=
-> wrote:
-> >>>
-> > ...
-> >>> or use bitbake -e qtbase | grep PACKAGES=3D
-> >>>
-> >>> Other solutions?
-> >>
-> >> buildhistory is great tool
-> >>
-> >
-> > k reading:
-> > http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#mai=
-ntaining-build-output-quality
-> >
-> > thx!
-> >
-> > -KA
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>> ----------------------------------------------------------------
+>> Cliff Brake (1):
+>>        update maintainer info in README's for daisy
+>>
+>> Steffen Sledz (1):
+>>        live555: fix fetch problem
+>>
+>>   meta-efl/README                                | 16 ++++++++++++----
+>>   meta-filesystems/README                        | 15 +++++++++++----
+>>   meta-gnome/README                              | 16 ++++++++++++----
+>>   meta-gpe/README                                | 16 ++++++++++++----
+>>   meta-initramfs/README                          | 12 +++++++++---
+>>   meta-multimedia/README                         | 15 +++++++++++----
+>>   meta-networking/MAINTAINERS                    | 11 +++++++++--
+>>   meta-networking/README                         |  2 +-
+>>   meta-oe/README                                 | 14 +++++++++++---
+>>   meta-oe/recipes-multimedia/live555/live555.inc |  4 ++--
+>>   meta-perl/README                               | 13 ++++++++++---
+>>   meta-ruby/README                               | 17 +++++++++++++----
+>>   meta-systemd/README                            | 16 ++++++++++++----
+>>   meta-webserver/README                          | 13 ++++++++++---
+>>   meta-xfce/README                               | 16 ++++++++++++----
+>>   toolchain-layer/README                         | 14 +++++++++++---
+>>   16 files changed, 158 insertions(+), 52 deletions(-)
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---buDNgeHiu+HCsDEc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlOjcHwACgkQN1Ujt2V2gBxFcQCfRDRKaBmnMQhYI3qd9uqGwnNu
-JK0AoJYtqK/OzzTrnlj0P+eXgRnMjDpZ
-=zwNL
------END PGP SIGNATURE-----
-
---buDNgeHiu+HCsDEc--
