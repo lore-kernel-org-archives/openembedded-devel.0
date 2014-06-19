@@ -1,37 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
 	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D44F6FD1F
+	by mail.openembedded.org (Postfix) with ESMTP id 0E5AC6FE86
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 09:09:33 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w61so2061277wes.15
+	Thu, 19 Jun 2014 09:09:32 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w61so2061244wes.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 02:09:34 -0700 (PDT)
+	Thu, 19 Jun 2014 02:09:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=tFxysy11B/kI4qSelSajKxcRQx4txAUqY0wk4JAF9EM=;
-	b=DytY2SLBLK9lvP1tbLATLqXzKiQDaK89id2BsByVHm4rst37ItP7ynGSXpfnMdVq20
-	sHaFcMxQuU85Y3okiV5Bx2vy3n/oilHSp5iNkhbSYM9fDd1LGa4CJSfHHBjfJpj7M9FI
-	PQN3Xn/ISSx2uR2w4jUYbnNwgwa/tpOMCu9eBAiBUiye35ybmo/jIE2GsRiV58G5e2Wx
-	IcCBpXJPyFBxrndt+F3jWQoyvyZ8xs0ffCzfRBsRo/L/vO5or4/Sh1cBMZ5IYoD/P4za
-	LtaPeXQA8iEpGvt/denwGxJ88hd0cKN2Mt2/Xyk/qQ4iugSaRtf5jYE0GO/Y2MqsPFyp
-	l2Sg==
-X-Received: by 10.180.210.174 with SMTP id mv14mr4551711wic.47.1403168974649; 
-	Thu, 19 Jun 2014 02:09:34 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=V2vyS6APKxWM/BbbtTq3eUg1lv57Zcpwazp+FcDTWR4=;
+	b=f45WvclgXBxAtLQxoib4IErGBzDnVnLNmbMzF2TJIPfhuPAsC/phct6gerDWIxfRXI
+	8eqzz7IyHbixVW7X6dVHe93UTDC45PUibiqGLfaLlUk82eq0P+PXDMXlkpLO8Jj80eQS
+	s51xozZJAnYiLQ+//dj/I+7JVv3Y3/gM0zUKUEoEnvXXLASyPM3J4ubGU+aQFG8v6/7V
+	ZuJZzZg9QZouKIVFM1Z8ZAtI0eI+bnSPOq3ZeW3ZQ+EFzmbMyD+Gzn0MVGxuqoIOQqeg
+	BN6IEifKvcRqfrXLky9YbSD1F0e5AVGNn0kaeYPD/rO0OX6bQCr9OtdwH77XzLBbCPHF
+	a34g==
+X-Received: by 10.194.204.170 with SMTP id kz10mr3673756wjc.38.1403168973423; 
+	Thu, 19 Jun 2014 02:09:33 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	v17sm1536620wjr.33.2014.06.19.02.09.33 for <multiple recipients>
+	v15sm7412132wjq.17.2014.06.19.02.09.32 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 02:09:34 -0700 (PDT)
+	Thu, 19 Jun 2014 02:09:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:09:30 +0200
-Message-Id: <1403168972-24905-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:09:29 +0200
+Message-Id: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-In-Reply-To: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 2/4] libftdi: Blacklist, because of libusb-config
+Subject: [meta-oe][WIP][PATCH 1/4] libsocketcan: Fix build with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,22 +47,20 @@ X-List-Received-Date: Thu, 19 Jun 2014 09:09:40 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/libftdi/libftdi_0.19.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
-index a62236f..773b791 100644
---- a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
-+++ b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
-@@ -11,6 +11,8 @@ LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
-                    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
- "
+diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+index df3c163..98ef73f 100644
+--- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
++++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+@@ -16,5 +16,5 @@ S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
  
-+PNBLACKLIST[libftdi] = "BROKEN: needs to be updated to detect libusb with pkg-config instead of libusb-config"
-+
- DEPENDS = "virtual/libusb0"
- DEPENDS_virtclass-native = "virtual/libusb0-native"
- 
+ do_configure_prepend() {
+-    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: configure.ac
++    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: ${S}/configure.ac
+ }
 -- 
 2.0.0
 
