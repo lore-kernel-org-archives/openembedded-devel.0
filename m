@@ -1,41 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id BD07A70206
+Return-Path: <kapare@rogue-research.com>
+Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
+	by mail.openembedded.org (Postfix) with ESMTP id C6FCE70243
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 23:04:44 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id b13so2896615wgh.2
+	Thu, 19 Jun 2014 23:06:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.rogue-research.com (Postfix) with ESMTP id C29793A094A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 16:04:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Dx/VCzpVSLODFY+H53MDUVVvpS/xg5aVY9mxBxSL1Mo=;
-	b=k3RpWp20kcnvFhRD+7aXErbTxLRWJDKjqiaSRgvdL10a5AshkPK44SHzh5bTP+gE3O
-	V4OfiDuEG+uYE5Wo3XPn8tVEWAv6kO95OTbBGCVFAMjppOoKNkSvx5/BSZG+GoerLe5z
-	E8DkaZixf6iDCPfMVw64Juf830cgfrCCTyst2nOqZWBWqo6Tvgy4CxFfDLaayYVg3yN2
-	sgFI/+z0qI42JF2+ON1ao7tjoQeJNvia9mdYpfesZZED/rz5jhyjxNCyFaJ5GRNU7kB3
-	42eP6cm9RgXeCLeMCp5dM1LK4uGum8TDk7Kb3pNpEXubz1UIIphUIVFU+f1NaKJo0gKR
-	LS1w==
-X-Received: by 10.180.221.229 with SMTP id qh5mr9914983wic.33.1403219084887;
-	Thu, 19 Jun 2014 16:04:44 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	cx5sm11607088wjb.8.2014.06.19.16.04.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 16:04:43 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 20 Jun 2014 01:04:45 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140619230445.GU2117@jama>
-References: <1402675329-25425-1-git-send-email-denis@denix.org>
-	<20140619155508.GV27324@denix.org>
-	<20140619213103.GW27324@denix.org>
+	Thu, 19 Jun 2014 19:06:13 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at rogue-research.com
+Received: from mail.rogue-research.com ([127.0.0.1])
+	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id lcEpijrPrddL
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 19:06:09 -0400 (EDT)
+Received: from mail-vc0-f169.google.com (mail-vc0-f169.google.com
+	[209.85.220.169])
+	by mail.rogue-research.com (Postfix) with ESMTPSA id 24B813A09494
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 19:06:09 -0400 (EDT)
+Received: by mail-vc0-f169.google.com with SMTP id la4so2868008vcb.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 16:06:08 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20140619213103.GW27324@denix.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] rng-tools: Update rng-tools version to 4
+X-Received: by 10.52.252.4 with SMTP id zo4mr5440470vdc.20.1403219168262; Thu,
+	19 Jun 2014 16:06:08 -0700 (PDT)
+Received: by 10.58.46.129 with HTTP; Thu, 19 Jun 2014 16:06:08 -0700 (PDT)
+In-Reply-To: <CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
+References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
+	<20140619192658.GS2117@jama>
+	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
+	<20140619210847.GT2117@jama>
+	<CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
+Date: Thu, 19 Jun 2014 19:06:08 -0400
+Message-ID: <CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
+From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,91 +49,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 23:04:48 -0000
-X-Groupsio-MsgNum: 50466
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vKcNkqnJHUUp475E"
-Content-Disposition: inline
-
---vKcNkqnJHUUp475E
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Jun 2014 23:06:16 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 19, 2014 at 05:31:03PM -0400, Denys Dmytriyenko wrote:
-> On Thu, Jun 19, 2014 at 11:55:08AM -0400, Denys Dmytriyenko wrote:
-> > Ping?
->=20
-> Never mind, I see it in master-next now. Autobuilder delays again?
+I'm a bit further but still have some interrogations?
 
-Yes, last builds aren't really usable (still too many failures from B!=3DS
-and binconfig-disabled), I hope to merge it this weekend.
+ERROR: qtwebkit not found in the base feeds (overo armv7a-vfp-neon
+armv7a-vfp armv7a armv6-vfp armv6 armv5e-vfp armv5e armv5-vfp armv5
+armv4 arm noarch any all)
 
-> > On Fri, Jun 13, 2014 at 12:02:09PM -0400, Denys Dmytriyenko wrote:
-> > > From: "Balasubramanian, Aparna" <aparnab@ti.com>
-> > >=20
-> > > Signed-off-by: Aparna Balasubramanian <aparnab@ti.com>
-> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > ---
-> > >  .../rng-tools/{rng-tools_2.bb =3D> rng-tools_4.bb}   |    4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >  rename meta-oe/recipes-support/rng-tools/{rng-tools_2.bb =3D> rng-to=
-ols_4.bb} (84%)
-> > >=20
-> > > diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-=
-oe/recipes-support/rng-tools/rng-tools_4.bb
-> > > similarity index 84%
-> > > rename from meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> > > rename to meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-> > > index 7803b28..f620d8a 100644
-> > > --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-> > > +++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-> > > @@ -7,8 +7,8 @@ SRC_URI =3D "http://heanet.dl.sourceforge.net/sourcef=
-orge/gkernel/${P}.tar.gz \
-> > >             file://init \
-> > >             file://default"
-> > > =20
-> > > -SRC_URI[md5sum] =3D "63d503191eabed630324c104cc024475"
-> > > -SRC_URI[sha256sum] =3D "1126f0ecc8cab3af14a562cddc5d8ffeef47df7eba34=
-a7aadcdee35a25ec2b1e"
-> > > +SRC_URI[md5sum] =3D "ae89dbfcf08bdfbea19066cfbf599127"
-> > > +SRC_URI[sha256sum] =3D "b71bdfd4222c05e8316001556be90e1606f2a1bac3ef=
-de60153bd84e873cc195"
-> > > =20
-> > >  inherit autotools update-rc.d
-> > > =20
-> > > --=20
-> > > 1.7.9.5
-> > >=20
-> > > --=20
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I'm having these included in my image:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  ruby \
+  qtbase \
+  qtbase-fonts \
+  qtbase-fonts-ttf-vera \
+  qtbase-fonts-ttf-dejavu \
+  qtbase-fonts-pfa \
+  qtbase-fonts-pfb \
+  qtbase-fonts-qpf \
+  qtbase-tools-dbg \
+  qtbase-plugins-dbg \
+  qtbase-tools \
+  qtbase-plugins \
+  qtbase-mkspecs \
+  qtbase-dev \
+  qtdeclarative-qmlplugins-dbg \
+  qtdeclarative-tools-dbg \
+  qtdeclarative-plugins-dbg \
+  qtdeclarative-qmlplugins \
+  qtdeclarative-tools \
+  qtdeclarative-plugins \
+  qtdeclarative-mkspecs \
+  qtdeclarative-dbg \
+  qtdeclarative-dev \
+  qtdeclarative \
+  qtquick1-qmlplugins-dbg \
+  qtquick1-tools-dbg \
+  qtquick1-plugins-dbg \
+  qtquick1-qmlplugins \
+  qtquick1-tools \
+  qtquick1-plugins \
+  qtquick1-mkspecs \
+  qtquick1-dbg \
+  qtquick1-dev \
+  qtquick1 \
+  qttools-tools-dbg \
+  qttools-tools \
+  qttools-mkspecs \
+  qttools-dbg \
+  qttools-dev \
+  qttools \
+  qtwebkit \
 
---vKcNkqnJHUUp475E
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+[1] Why the bitbake qtwebkit is working but not when I'm including it
+in my image?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+BR,
 
-iEYEARECAAYFAlOjbI0ACgkQN1Ujt2V2gBwP6QCeMLeLBtdZjx99opJp5hT9vpGR
-NjwAnjXYZSvPKE7bFdS1GLA8wuQY2Sv4
-=WC0W
------END PGP SIGNATURE-----
+-KA
 
---vKcNkqnJHUUp475E--
+
+On Thu, Jun 19, 2014 at 5:34 PM, Kevyn-Alexandre Par=C3=A9
+<kapare@rogue-research.com> wrote:
+> On Thu, Jun 19, 2014 at 5:08 PM, Martin Jansa <martin.jansa@gmail.com> wr=
+ote:
+>> On Thu, Jun 19, 2014 at 04:32:17PM -0400, Kevyn-Alexandre Par=C3=A9 wrot=
+e:
+>>> Hi Martin,
+>>>
+>>> On Thu, Jun 19, 2014 at 3:26 PM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>>>
+> ...
+>>> or use bitbake -e qtbase | grep PACKAGES=3D
+>>>
+>>> Other solutions?
+>>
+>> buildhistory is great tool
+>>
+>
+> k reading:
+> http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#maint=
+aining-build-output-quality
+>
+> thx!
+>
+> -KA
+
