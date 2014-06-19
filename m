@@ -1,37 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 2444F6FEA7
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id A870D6FEA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 10:00:17 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id cc10so2538742wib.12
+	Thu, 19 Jun 2014 10:00:19 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id k14so2057331wgh.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:18 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=MxanRSO1xwOXfzsSLgLsGL2Vvco08cqAqkKK2lsgIvw=;
-	b=o90a89eFNuNIcHL6Gs2IV81qj1j+66ATtaPfkIRsPydCPZDVkf/7Z08yfm1syvttnV
-	cNovJxqLZhSN+xCcI2Gjh/x+GF2fmpHO5aZSeJo1ywc9jSnvYmc7+O0U76aobqGv1YyS
-	iitctUBsKLzc57nuSrTKae74kqgCdFCJDOKPy2h5/2S8r9rIdvH9l46QBVNJ6r2dples
-	3vEjaWJjPQIw1FfFLEdE3lWHIlg3waIZpqFU7d25K9TLWWrsiDQf32mh/g/k5mPP2r+1
-	6mDAc1x22Ghobdw3d95cCYWr0IwU3YiI2FMzd9wLY82lXButW6sQs5gVK9s7ulsjqp6B
-	fp6Q==
-X-Received: by 10.194.189.81 with SMTP id gg17mr3725482wjc.107.1403172018502; 
-	Thu, 19 Jun 2014 03:00:18 -0700 (PDT)
+	bh=CFNpSpbTJf9mgEPWqj2Rxg97Q3KmFz0/HOPGeujumFY=;
+	b=0B9UuQLxs15wz9s+FtLpUSsBsHlZR5xx1Ue+fhMU3L4O6pRcOCeb9oA+mHSsNy+XSz
+	A0W10PQkQKA+BierIMCuEOXbV6el5194SpxFqcl8YERTv3CtzMyao1avw1mY9+1x64ho
+	Hks9AHchEH0FAO5juMSF5qidLRJ9MxcK/bMftWpImuSMT4taPBg5ksKVqML5jH2ZrkPK
+	hUGM2MsRWgTk7uAs6r2jexKlAWfyo4tjgBCKN2tATIvKRLIPB3WugnvoT97pZgdusB5e
+	pH+LzjYYHpfpnOBLX7GLBGVJ0SJXIzCUyMVWyU79JpuYj476PnE5Fro78fI2YaicLx5+
+	UYcQ==
+X-Received: by 10.180.211.36 with SMTP id mz4mr5184955wic.20.1403172019787;
+	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	i8sm31871892wiw.22.2014.06.19.03.00.17 for <multiple recipients>
+	ft17sm7683987wjc.14.2014.06.19.03.00.19 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:17 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:48 +0200
-Message-Id: <1403171993-26208-20-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:59:49 +0200
+Message-Id: <1403171993-26208-21-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 20/25] zenity: Blacklist because of broken with B!=S
+Subject: [meta-oe][WIP][PATCH 21/25] talloc: Blacklist because of broken with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 10:00:19 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 10:00:20 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb | 2 ++
+ meta-oe/recipes-support/talloc/talloc_2.0.1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-index fb15900..3ea179e 100644
---- a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+index 6b7e4f1..98d0fc7 100644
+--- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
++++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://NEWS;md5=5fe776b23a711c9153ee94bc87e47334"
  
- PR = "r2"
+ inherit autotools pkgconfig
  
-+PNBLACKLIST[zenity] = "BROKEN: doesn't build with B!=S"
++PNBLACKLIST[talloc] = "BROKEN: doesn't build with B!=S (gnu-configize executed in ${B})"
 +
- DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils"
- 
- inherit gnomebase
+ SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz \
+            file://install-swig-interface-in-SWINGLIBDIR.patch \
+ "
 -- 
 2.0.0
 
