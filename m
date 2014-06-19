@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E5AC6FE86
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id AE3856059A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 09:09:32 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w61so2061244wes.15
+	Thu, 19 Jun 2014 09:09:35 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id n3so8969398wiv.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 02:09:33 -0700 (PDT)
+	Thu, 19 Jun 2014 02:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=V2vyS6APKxWM/BbbtTq3eUg1lv57Zcpwazp+FcDTWR4=;
-	b=f45WvclgXBxAtLQxoib4IErGBzDnVnLNmbMzF2TJIPfhuPAsC/phct6gerDWIxfRXI
-	8eqzz7IyHbixVW7X6dVHe93UTDC45PUibiqGLfaLlUk82eq0P+PXDMXlkpLO8Jj80eQS
-	s51xozZJAnYiLQ+//dj/I+7JVv3Y3/gM0zUKUEoEnvXXLASyPM3J4ubGU+aQFG8v6/7V
-	ZuJZzZg9QZouKIVFM1Z8ZAtI0eI+bnSPOq3ZeW3ZQ+EFzmbMyD+Gzn0MVGxuqoIOQqeg
-	BN6IEifKvcRqfrXLky9YbSD1F0e5AVGNn0kaeYPD/rO0OX6bQCr9OtdwH77XzLBbCPHF
-	a34g==
-X-Received: by 10.194.204.170 with SMTP id kz10mr3673756wjc.38.1403168973423; 
-	Thu, 19 Jun 2014 02:09:33 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=cGbHGD2E6On+Xt5mKLZiR8Xyl2SrEYZ/KNlSy8u/TJk=;
+	b=bh6Ut2qNUzmYkhGteOtT9INbQka2XgKDDUS/KW8vzlV1gwX+tYbof2f3JiEoIZD4DO
+	v5FGU2wbCa5hFm96WnKI5bJmIJfZ818HR3IlIC2vLZKQC3V8g9BZNNrgoUraure3GsZF
+	nrf+XjSu6Mx9w/Zpn+OBu47TKUbGvqRCfLmcr1gQuPF4gjCH08bTL0Kg8zZK3Yuy2QDM
+	6ypMvJZJVaCLkJSWfhNGTlmWBTjhepuxUQoydNSiaXrQnsyXsrRuj6o/rSSnmm1DlkXR
+	aKY/uZJ01adPJOac35zf9ZY4rAZFp5ButwGrjwkwZ1iNY7pcBJ/sf25MPDLMtREgobLy
+	nN4A==
+X-Received: by 10.180.99.99 with SMTP id ep3mr4745341wib.42.1403168975834;
+	Thu, 19 Jun 2014 02:09:35 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	v15sm7412132wjq.17.2014.06.19.02.09.32 for <multiple recipients>
+	e11sm9687494wiw.19.2014.06.19.02.09.35 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 02:09:32 -0700 (PDT)
+	Thu, 19 Jun 2014 02:09:35 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:09:29 +0200
-Message-Id: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:09:31 +0200
+Message-Id: <1403168972-24905-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][WIP][PATCH 1/4] libsocketcan: Fix build with B!=S
+In-Reply-To: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1403168972-24905-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][WIP][PATCH 3/4] libusbg: Blacklist, because of B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,24 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 09:09:40 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 09:09:41 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/libusbg/libusbg_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
-index df3c163..98ef73f 100644
---- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
-+++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
-@@ -16,5 +16,5 @@ S = "${WORKDIR}/git"
- inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+index ed5ac65..280983b 100644
+--- a/meta-oe/recipes-support/libusbg/libusbg_git.bb
++++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
- do_configure_prepend() {
--    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: configure.ac
-+    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: ${S}/configure.ac
- }
+ inherit autotools
+ 
++PNBLACKLIST[libusbg] = "BROKEN: Doesn't work with B!=S and nobody sent patch to fix it"
++
+ PV = "0.1.0"
+ SRCREV = "7e2b04363f319e8936a606bdb122dbde249a2f58"
+ SRC_URI = "git://github.com/libusbg/libusbg.git"
 -- 
 2.0.0
 
