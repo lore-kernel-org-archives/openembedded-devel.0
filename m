@@ -1,40 +1,29 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id CA0016FD27
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3608 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 19 Jun 2014 22:31:12 UTC
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C18B7017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 21:34:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id 8A1723A08734
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 17:34:36 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id WeK2neYHrKIY
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 17:34:30 -0400 (EDT)
-Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
-	[209.85.220.180])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id 072943A08724
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 17:34:29 -0400 (EDT)
-Received: by mail-vc0-f180.google.com with SMTP id im17so2797092vcb.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 14:34:29 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.220.9.201 with SMTP id m9mr6008493vcm.5.1403213669355; Thu,
-	19 Jun 2014 14:34:29 -0700 (PDT)
-Received: by 10.58.46.129 with HTTP; Thu, 19 Jun 2014 14:34:29 -0700 (PDT)
-In-Reply-To: <20140619210847.GT2117@jama>
-References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
-	<20140619192658.GS2117@jama>
-	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
-	<20140619210847.GT2117@jama>
-Date: Thu, 19 Jun 2014 17:34:29 -0400
-Message-ID: <CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
-From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+	Thu, 19 Jun 2014 22:31:12 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173023.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N7F00710QFSVCB0@vms173023.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	19 Jun 2014 16:31:04 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 511F020368; Thu,
+	19 Jun 2014 17:31:03 -0400 (EDT)
+Date: Thu, 19 Jun 2014 17:31:03 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+Message-id: <20140619213103.GW27324@denix.org>
+References: <1402675329-25425-1-git-send-email-denis@denix.org>
+	<20140619155508.GV27324@denix.org>
+MIME-version: 1.0
+In-reply-to: <20140619155508.GV27324@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] rng-tools: Update rng-tools version to 4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 21:34:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Jun 2014 22:31:20 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thu, Jun 19, 2014 at 5:08 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Thu, Jun 19, 2014 at 04:32:17PM -0400, Kevyn-Alexandre Par=C3=A9 wrote=
-:
->> Hi Martin,
->>
->> On Thu, Jun 19, 2014 at 3:26 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->>
-...
->> or use bitbake -e qtbase | grep PACKAGES=3D
->>
->> Other solutions?
->
-> buildhistory is great tool
->
+On Thu, Jun 19, 2014 at 11:55:08AM -0400, Denys Dmytriyenko wrote:
+> Ping?
 
-k reading:
-http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#maintai=
-ning-build-output-quality
+Never mind, I see it in master-next now. Autobuilder delays again?
 
-thx!
 
--KA
+> On Fri, Jun 13, 2014 at 12:02:09PM -0400, Denys Dmytriyenko wrote:
+> > From: "Balasubramanian, Aparna" <aparnab@ti.com>
+> > 
+> > Signed-off-by: Aparna Balasubramanian <aparnab@ti.com>
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > ---
+> >  .../rng-tools/{rng-tools_2.bb => rng-tools_4.bb}   |    4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >  rename meta-oe/recipes-support/rng-tools/{rng-tools_2.bb => rng-tools_4.bb} (84%)
+> > 
+> > diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> > similarity index 84%
+> > rename from meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> > rename to meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> > index 7803b28..f620d8a 100644
+> > --- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
+> > +++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+> > @@ -7,8 +7,8 @@ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/gkernel/${P}.tar.gz \
+> >             file://init \
+> >             file://default"
+> >  
+> > -SRC_URI[md5sum] = "63d503191eabed630324c104cc024475"
+> > -SRC_URI[sha256sum] = "1126f0ecc8cab3af14a562cddc5d8ffeef47df7eba34a7aadcdee35a25ec2b1e"
+> > +SRC_URI[md5sum] = "ae89dbfcf08bdfbea19066cfbf599127"
+> > +SRC_URI[sha256sum] = "b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195"
+> >  
+> >  inherit autotools update-rc.d
+> >  
+> > -- 
+> > 1.7.9.5
+> > 
+> > -- 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
