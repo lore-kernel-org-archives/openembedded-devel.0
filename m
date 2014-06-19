@@ -1,22 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 799F96FE9E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 14:10:05 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 19 Jun 2014 07:10:06 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,507,1400050800"; d="scan'208";a="447523681"
-Received: from akagikob-mobl1.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.96])
-	by azsmga001.ch.intel.com with ESMTP; 19 Jun 2014 07:10:04 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 15:09:55 +0100
-Message-Id: <cover.1403186612.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-Cc: Bruce Ashfield <bruce.ashfield@windriver.com>
-Subject: [meta-filesystems][PATCH v2 0/1] Add aufs-util
+Return-Path: <ka6sox@gmail.com>
+Received: from mail-oa0-f44.google.com (mail-oa0-f44.google.com
+	[209.85.219.44])
+	by mail.openembedded.org (Postfix) with ESMTP id ADB8870181;
+	Thu, 19 Jun 2014 16:09:33 +0000 (UTC)
+Received: by mail-oa0-f44.google.com with SMTP id i7so5636622oag.17
+	for <multiple recipients>; Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=/yW8EgHuHTIqHxao7iagCuYCwhTBs1HApw2zNGSqkG4=;
+	b=Mfxf57sYQluGqwLPKDWW30pYlt8KZR2arC1SJfrZet+8cxo0wSvrDfqSwe57fsRjLL
+	V32drZ3bxD80Q9ZatfwO2XJaMe+u/yubaGKdKg6wu/36JNt4IKINYcEcatT8kZZ10uLo
+	zv89Pxe/Q/QvQ2LM4+AGbl5wUROgKKdUOqUP7NA6fV3J9DtWGVNypy0lqc1e0hNYgykY
+	s5CPTF2oUfHFuIyIyAdhe5aBApZyktO5RpmmIluZLA/z0oPzRVLr5rJfcP4hXRVJGzEc
+	IC19dkUmNDSDigLHMKvy/1nIrwyECMe0ceMGuwqfS5pTHWW8SBISWk53dg/jh5w7GPiV
+	tXsg==
+MIME-Version: 1.0
+X-Received: by 10.60.178.243 with SMTP id db19mr5419984oec.11.1403194173639;
+	Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
+Received: by 10.76.128.201 with HTTP; Thu, 19 Jun 2014 09:09:33 -0700 (PDT)
+In-Reply-To: <20140619113451.GO2117@jama>
+References: <20140619113451.GO2117@jama>
+Date: Thu, 19 Jun 2014 09:09:33 -0700
+Message-ID: <CAHQecY7HffEF4TJ5Bmbmq0kSgm_p6Ei2JD=s7Jy924fTs0PKbQ@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Few archives to add on sources.oe.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,44 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 14:10:07 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 16:09:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Since v1, fix the following issues:
- * Use 3.9 as the version since that is materially the same as
-   3.x-rcN upstream
- * Use class overrides instead of context checks within the functions
- * Remove trailing slash on S value which led to debugedit failure (!)
- * Add RRECOMMENDS in case aufs is built as a module
- * Drop paths within SRC_URI
- * Fix HOMEPAGE
- * Spaces instead of tabs
-
-(Sorry, this was a long time coming.)
+Done
 
 
-The following changes since commit 8a9d356a9202350766a68aa07f97ea97e9ed0a51:
+On Thu, Jun 19, 2014 at 4:34 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-  webmin: split out webmin themes (2014-06-18 17:55:55 +0100)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib paule/aufs-util
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/aufs-util
-
-Paul Eggleton (1):
-  aufs-util: add new recipe
-
- ...dd-tool-concept-to-Makefile-for-cross-com.patch |  29 +++
- .../aufs-util-don-t-strip-executables.patch        |  37 ++++
- .../recipes-utils/aufs-util/aufs-util/aufs_type.h  | 210 +++++++++++++++++++++
- .../recipes-utils/aufs-util/aufs-util_git.bb       |  53 ++++++
- 4 files changed, 329 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch
- create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-strip-executables.patch
- create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs_type.h
- create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-
--- 
-1.9.3
-
+> Hi Tom,
+>
+> can you please add:
+> IO-Tty-1.10.tar.gz
+> SQLAlchemy-0.7.9.tar.gz
+> fetchmail-6.3.26.tar.xz
+> usb-modeswitch-2.0.1.tar.bz2
+> usb-modeswitch-data-20130807.tar.bz2
+>
+> to sources.oe.org? I can send you tarballs (or fetch them from
+> /home/jenkins/oe/shr-core-branches/downloads-missing/ on aruba)
+>
+> The most annoying is fetchmail which is now fetching HTML page from
+> berlios (so checksum check fails instead of showing 404) :/. And user
+> needs to download it manually or use sources.oe.org as PREMIRROR, but
+> still better than nothing.
+>
 
