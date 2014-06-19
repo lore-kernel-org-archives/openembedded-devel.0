@@ -1,34 +1,33 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 987CC6FC96
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 459C96FD1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 06:04:35 +0000 (UTC)
-Received: by mail-we0-f176.google.com with SMTP id u56so1836995wes.35
+	Thu, 19 Jun 2014 06:54:30 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id y10so1836341wgg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jun 2014 23:04:36 -0700 (PDT)
+	Wed, 18 Jun 2014 23:54:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=dGGO+V6dknDGbjo1BE3Hv2ee5vGND+8++73wIaUm6Fo=;
-	b=fPRe+cAZUQU00PUxyi7o7dStfomDkREfNzqya2ESwSQ+CvoDRDIoHSU9h5ZDmaOQtQ
-	z/ZD9LkKEXqrImJGOiysMRWLpN3qhhqDZSOrvqGpxMq1hhEFkY12esNlVbMido+flVD7
-	pAWlZ8blJcHfwBy+VFfBRagSHvE+SqKDzVTXgX6BQuOepVzvMCkDpL6q6FJsM3hZcceY
-	CanDhsF2BFKSOp5/qJfY5HVXHnh1PymoTDSqwe9d4YTqIhxFMp5rhwOGNDGEB0EJju0z
-	WSq2rwzKdKrn5V19gBleKqTqmLQ4CfGPW1tx7enB283CGMJwJ6MpdWXtQJXHYAiSyJaC
-	DemQ==
-X-Gm-Message-State: ALoCoQl45xzXzdTrD1HFUUdi52D9CMO9JS6l5hvAqc/bJdrmsPmZObk4Jx6yXnOzhWQBUDXQIl9b
-X-Received: by 10.181.8.198 with SMTP id dm6mr3402767wid.30.1403157876499;
-	Wed, 18 Jun 2014 23:04:36 -0700 (PDT)
+	bh=j+SV0tMzcnE7FBKmsxKfUt0iEUtOff9N/Olig71zzCI=;
+	b=mEOLH/0CgwkLBwUROHyw2rXCWZEphhgX9oZKDiaaVvnytJ0taOC6Dwf+lek5CivLqc
+	qMF0n4vgHgO4yBy6HUwwNYLwqwgPsnGX4L5nb/8oGOw9hQOaM1VfUkJuzMaDcmJDgrNL
+	CTFUvRM1ds7mPNuAUyup2cjWe9313DOtcH+TVZmA5KQPgUaL4u8aR9bDT6cxVetqEl3s
+	l1yzpJDMUMwViZVq6pTA627OGiLCfasxB5TMpqsL81wYYk9RJV17gYjnyggeMmriDarg
+	tpflTU+mTlO+dQuwweR4PxOTi2QxwNX9JihLYxyn7bx1YwMKsEYhYxL8V8wXoKl9tRSj
+	1/ng==
+X-Gm-Message-State: ALoCoQk+oyxaAs4xXgYoVF9UCtJAWcAVBzU1Y9FC3GCbRFgheM4ILr1cN3rRf/BTpTAQwDYwAJGn
+X-Received: by 10.180.90.141 with SMTP id bw13mr3565079wib.23.1403160871602;
+	Wed, 18 Jun 2014 23:54:31 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by mx.google.com with ESMTPSA id
-	hs8sm30201358wib.10.2014.06.18.23.04.35 for <multiple recipients>
+	by mx.google.com with ESMTPSA id lo18sm8739214wic.1.2014.06.18.23.54.30
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Jun 2014 23:04:35 -0700 (PDT)
+	Wed, 18 Jun 2014 23:54:30 -0700 (PDT)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 08:04:33 +0200
-Message-Id: <1403157873-7960-1-git-send-email-koen.kooi@linaro.org>
+Date: Thu, 19 Jun 2014 08:54:28 +0200
+Message-Id: <1403160868-25473-1-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.3
 Cc: Koen Kooi <koen.kooi@linaro.org>
 Subject: [meta-oe][PATCHv3] php 5.4.14: use pkg-config for libxml2 detection
@@ -45,24 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 06:04:38 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 06:54:34 -0000
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
 
-Changes since v2:
-	* AC_MSG_RESULT(yes) on success
+Changes since v3:
+	* swapped fi/$i lines
 
-php-native builds, but php still errors out with xml errors.
+This finally fixes the build!
 
+ meta-oe/recipes-devtools/php/php.inc               |  2 -
  ...cinclude-use-pkgconfig-for-libxml2-config.patch | 90 ++++++++++++++++++++++
  meta-oe/recipes-devtools/php/php_5.4.14.bb         |  4 +-
- 2 files changed, 93 insertions(+), 1 deletion(-)
+ 3 files changed, 93 insertions(+), 3 deletions(-)
  create mode 100644 meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
 
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index b1bf79c..030c090 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -31,12 +31,10 @@ EXTRA_OECONF = "--enable-mbstring \
+                 --with-imap-ssl=${STAGING_DIR_HOST} \
+                 --with-zlib=${STAGING_LIBDIR}/.. \
+                 --with-iconv=${STAGING_LIBDIR}/.. \
+-                --with-libxml-dir=${STAGING_BINDIR_CROSS} \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ EXTRA_OECONF_virtclass-native = " \
+                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+-                --with-libxml-dir=${STAGING_BINDIR_NATIVE} \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ 
 diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
 new file mode 100644
-index 0000000..acace8e
+index 0000000..823007e
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
 @@ -0,0 +1,90 @@
@@ -109,8 +126,8 @@ index 0000000..acace8e
 ++  ])
 ++  if test "$php_cv_libxml_build_works" = "yes"; then
 ++    AC_DEFINE(HAVE_LIBXML, 1, [ ])
-++    $2
 ++  fi
+++  $2
 ++], [
 ++  AC_MSG_ERROR([$LIBXML_PKG_ERRORS])
 + ])
