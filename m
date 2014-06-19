@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id B20547017E
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F30970189
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 10:00:21 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id a1so2081416wgh.24
+	Thu, 19 Jun 2014 10:00:22 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id q59so2059696wes.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:22 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BJKr885sw/bSZKrxx5aoWtddxxlKwOWbT0ZlOTRqd5c=;
-	b=fieirFabNSc9H4jV1r5HM1dXpj4lBqGqM5Xe3MkpVObpw87CjKevQx15p1kLJS+ECm
-	kLkkRARl5Rqu6HunuL3TklR4SOryiXcbHDvPm6oGyqU8ReLmN+ajh4FRRfzXErGdMOZl
-	ZTcK8PTPkxaMxQXWsO/rpm9JP8STTKMxvX8R51Bp1OhbaG0lxcta5t+aBQWK8FQDq0So
-	cqupzeSn2jjd1tyXRUeUYlT5EVakiFvYtd/1W4TmXKEzT1w7DQ9wHcSkUF4lGtKZIfJe
-	4fyo6r2Jb8zJ3SXXu544F2r7jc9fXU7tfp7lva6LbsbJLMJivkX83OCX6jmb4WnWJVUo
-	B34g==
-X-Received: by 10.180.90.242 with SMTP id bz18mr5279904wib.12.1403172022254;
-	Thu, 19 Jun 2014 03:00:22 -0700 (PDT)
+	bh=hD04z9BnvA3a7UWjPMdnjWICxMi/5RfJyrWt8jiaUrY=;
+	b=zx1T/vJ7H4Npi5iamNZa/jhtUAZgjAHLGYiqk2UkVMU1BQPd6bTQg7ukhNS43XixR7
+	np6zCJsmcQY5RtlEx84XsJIMq/jJX7hAivYWTn63fhg21q5YqkS2igmTTpDroHhiLlyB
+	KwIOQ2jONMu7Ug4YMxGbFkj9LVVswLUz1BOsnfY/mWWQAYgCQTO+Vj+ikuUCPvtvtKyC
+	UT8O2eHzQzDmxjLT90Zl0wFTzTZuc3djWAHo2rtTz7L47duLgIeZPG2msgK1dEDjK9Bv
+	WYTQ3kRvaYn9SvACaasuqzyqCRL0Sz9Wg/pgVZwTJsWdn53NSU9dlCatOhvOTaYv3AAI
+	MvQg==
+X-Received: by 10.194.2.45 with SMTP id 13mr2212339wjr.127.1403172023473;
+	Thu, 19 Jun 2014 03:00:23 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	bq7sm31896430wib.7.2014.06.19.03.00.21 for <multiple recipients>
+	e11sm10063237wiw.19.2014.06.19.03.00.22 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:21 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:22 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:51 +0200
-Message-Id: <1403171993-26208-23-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:59:52 +0200
+Message-Id: <1403171993-26208-24-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 23/25] xf86-input-mtev: Blacklist because of broken with B!=S
+Subject: [meta-oe][WIP][PATCH 24/25] fim: Blacklist because of broken with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,26 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 10:00:22 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 10:00:23 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb | 2 ++
+ meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb
-index ac47cee..a1943be 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb
-@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
+diff --git a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+index 3433bd2..afcb113 100644
+--- a/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
++++ b/meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb
+@@ -8,6 +8,8 @@ HOMEPAGE = "http://www.autistici.org/dezperado/fim/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
  
- DEPENDS += "pixman"
- 
-+PNBLACKLIST[xf86-input-mtev] = "BROKEN: doesn't build with B!=S (Makefile without ${S} in sed call)"
++PNBLACKLIST[fim] = "BROKEN: doesn't build with B!=S (flex: can't open lex.lex)"
 +
- SRC_URI = "git://gitorious.org/xorg/xf86-input-mtev.git file://fix-it.patch"
- SRCREV = "1eb469166ffc095c5801475f057f911f97a6e641"
- S = "${WORKDIR}/git"
+ # flex with provide /usr/include/FlexLexer.h
+ DEPENDS = "flex-native bison-native flex"
+ 
 -- 
 2.0.0
 
