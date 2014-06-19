@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id EBC7670195
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E0A9770181
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 10:00:13 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id x12so2045105wgg.10
+	Thu, 19 Jun 2014 10:00:11 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id hi2so9057067wib.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:12 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1lXXOK2yB7QPmdLoKXfaq7gY+lFwUE1Uv3gVCtlR+Wk=;
-	b=V8yClgyUUMU9UaPHC4/tuMSOTjmL6r57t7vCti2Vx7/g3LQEviK9p1w4174uy4+mQM
-	+K8ew+sRmcJC+QMEfVAPUKjsPBcSjHHx9bMEr6noGdZ6UzcnFYAksIDpNhwEH2JuqYWm
-	hkQ4VfIqsoGpZu1ZoTNSh6E0wtfLlnVHsCgXkq9YLElaXBAZg7eJg7UT1pXXIqBV9WIr
-	PE/40eZMdTy53ahWHu2Tq2A5anRrwA+7K5kJ2C6bjC1uVlT8yE5DcqNYsqYzK2bN1aCz
-	rtXC32oTAbEA8Uazap32ZbFX2SLTTqdsBwAQpB46HIAYkq2YOASJL1QgOUEztpovojvS
-	MekQ==
-X-Received: by 10.180.9.71 with SMTP id x7mr4848358wia.61.1403172012236;
-	Thu, 19 Jun 2014 03:00:12 -0700 (PDT)
+	bh=gHjGT+escTLohDPCjb9bw+AdSHgbQWxS7Yc0BU3e4KE=;
+	b=GbY2A8+0EnFAa3rVUZ8g4wBBclnDsRmRclCxS/2jgThpkjm7d4O65vyq5udK2oiHca
+	Z22zSs86Yb4v4hOTOUK4WzFZNARQkh651Or/Tp2mx+edEVZlNxWnWgGlpAEBFO4igW0Y
+	MwpzU8v7f6hpXldXmBTzdr+3vP6yq+OpizEhxockXCfRsjVrLcEXq32CQ/oCoXESJTiD
+	hMT8hx2k2LzXOd6ZePiQcWjyC0EraiXYTO38Twy9AqUoJ5j6KItgemZiaj1q/Jo1rjDG
+	DkhJay4hQYrAuwoYVtIQ0oZYi+01JupaUqlniPXWF/zMP7gDVm4wXNxMJzfdaFBfF48M
+	oEpw==
+X-Received: by 10.194.157.195 with SMTP id wo3mr2068705wjb.130.1403172010995; 
+	Thu, 19 Jun 2014 03:00:10 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ft20sm2716199wic.14.2014.06.19.03.00.11 for <multiple recipients>
+	u10sm10074447wix.11.2014.06.19.03.00.10 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:11 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:43 +0200
-Message-Id: <1403171993-26208-15-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:59:42 +0200
+Message-Id: <1403171993-26208-14-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 15/25] apcupsd: Blacklist because of broken with B!=S
+Subject: [meta-oe][WIP][PATCH 14/25] coriander: Blacklist because libsdl2-config was removed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,22 +49,22 @@ X-List-Received-Date: Thu, 19 Jun 2014 10:00:18 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb | 2 ++
+ meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb b/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb
-index 07b8ccb..4cd3f77 100644
---- a/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb
-+++ b/meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb
-@@ -7,6 +7,8 @@ SRC_URI = "http://garr.dl.sourceforge.net/project/apcupsd/apcupsd%20-%20Stable/3
- SRC_URI[md5sum] = "5928822d855c5cf7ac29655e3e0b8c23"
- SRC_URI[sha256sum] = "0707b5ec9916fbde9e44eb8d18037c8d8f75dfd6aeef51aba5487e189eef2032"
+diff --git a/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb b/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
+index 0311551..1c113c2 100755
+--- a/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
++++ b/meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb
+@@ -5,6 +5,8 @@ LICENSE = "GPL-3.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "gtk+ libgnomeui libraw1394 libdc1394 libxv tiff"
  
-+PNBLACKLIST[apcupsd] = "BROKEN: doesn't build with B!=S"
++PNBLACKLIST[coriander] = "BROKEN: fails to use SDL probably because libsdl-config was removed, error: unknown type name 'SDL_Overlay'"
 +
- inherit autotools
- 
- LD = "${CXX}"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/coriander-2/${PV}/${P}.tar.gz \
+            file://cross-compile.patch \
+           "
 -- 
 2.0.0
 
