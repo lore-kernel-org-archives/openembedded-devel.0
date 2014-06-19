@@ -1,28 +1,40 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 755466FD27
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id A4A736059A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 08:23:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5J8Ni8p001365
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 19 Jun 2014 01:23:44 -0700 (PDT)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 19 Jun 2014 01:23:43 -0700
-Message-ID: <53A29E1D.9080307@windriver.com>
-Date: Thu, 19 Jun 2014 16:23:57 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Thu, 19 Jun 2014 08:39:07 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id n15so8911147wiw.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 01:39:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=jgY1gLzRF5CfztcEPiAmnhBlgT6oinSGMrOxE5XYOK8=;
+	b=IUb+ihwSJ8HX1VKjFMbC+IP4JS/ZgIDglRQKlKRCDtQGtBOQ0ltp7d5V85x0Ipqaua
+	pkoT30x7F6drEezT/K1X9ja/1CYkvNXoczqoGr0FaPSpej4sNKKFwpRvkRUAOFlNEetJ
+	MbAKhYejy6YTb52TRs5sCXS1o0hYoHbN1GbBdca+jB2ePZD9AClfqfsqaLJvv9eLA5+G
+	iFAs48HC98gIyPy8BqeM2B4mHwOPDD0SHNgBGMg/+cH1l5c+HBuznynAsN6v1AOnpzCg
+	8niSidI0irwzqr6wrhMe61eUdnK9q8Pb5e2vodOQ3uWhWO/9VcBFmut83a9bCyIJTbBw
+	8Y7g==
+X-Received: by 10.194.2.72 with SMTP id 8mr334601wjs.85.1403167148601;
+	Thu, 19 Jun 2014 01:39:08 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	r9sm31277818wia.17.2014.06.19.01.39.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 19 Jun 2014 01:39:07 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 10:39:08 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140619083908.GL2117@jama>
+References: <1403134870-29746-1-git-send-email-eduardo@monkey.io>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1403153175-10707-1-git-send-email-rongqing.li@windriver.com>
-	<53A29291.1010700@dominion.thruhere.net>
-In-Reply-To: <53A29291.1010700@dominion.thruhere.net>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [PATCH][meta-oe] dialog: use pkg-config to detect ncurses
+In-Reply-To: <1403134870-29746-1-git-send-email-eduardo@monkey.io>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCHv4] monkey: new v1.5.1 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,26 +48,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 08:23:49 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Jun 2014 08:39:11 -0000
+X-Groupsio-MsgNum: 50409
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="YIleam+9adpUeYf+"
+Content-Disposition: inline
 
+--YIleam+9adpUeYf+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Jun 18, 2014 at 05:41:10PM -0600, Eduardo Silva wrote:
+> This patch add the minor release fix of Monkey HTTP Server v1.5.1. It fix=
+es
+> some problems when switching user when started as root.
+>=20
+> monkey/yocto: 3163d01492ea3d85268dc3773419e94db57ee8df
 
-On 06/19/2014 03:34 PM, Koen Kooi wrote:
->> +Subject: [PATCH] use pkg-config for ncurses detection. +
->> >+Upstream-Status: Inappropriate [configuration]
-> Why is it inappropriate?
+[meta-webserver] is still missing in subject (helps me a lot when
+separating patches on patchwork), you don't need to resend it now, but
+please remember it for next time.
 
+> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+> ---
+>  .../recipes-httpd/monkey/{monkey_1.5.0.bb =3D> monkey_1.5.1.bb}       | =
+6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.0.bb =3D> monkey_=
+1.5.1.bb} (83%)
+>=20
+> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb b/meta-w=
+ebserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> similarity index 83%
+> rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> index 6fa1b77..2ea18f5 100644
+> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.0.bb
+> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
+> @@ -8,15 +8,15 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44f=
+e7014dce33e26468ba93"
+>  SECTION =3D "net"
+> =20
+>  SRC_URI =3D "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "9123fc371334621fde1c060ab17adcd3"
+> -SRC_URI[sha256sum] =3D "f7a5e4839822750930a723f63a4edbf700e0fb8299a4b363=
+7bd8bab5b1d098a7"
+> +SRC_URI[md5sum] =3D "2fe04135728f5c3a86c3a412059e0da3"
+> +SRC_URI[sha256sum] =3D "28dfc5e57bbcd305727e7af6a1a0587868db1c1286498757=
+bfeb72edddf457e7"
+> =20
+>  EXTRA_OECONF =3D " \
+>               --plugdir=3D${libdir}/monkey/ \
+>               --logdir=3D${localstatedir}/log/monkey/ \
+>               --pidfile=3D${localstatedir}/run/monkey.pid \
+>               --default-user=3Dwww-data \
+> -             --datadir=3D ${localstatedir}/www/monkey/ \
+> +             --datadir=3D${localstatedir}/www/monkey/ \
+>               --sysconfdir=3D${sysconfdir}/monkey/ \
+>               --enable-plugins=3D* \
+>               --disable-plugins=3Dpolarssl \
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-I think we should fix the configure.in, but this configure.in can not
-work with oe-core, the dialog bb file runs configure directly, and
-I do this fix in configure directly, so it is Inappropriate
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--YIleam+9adpUeYf+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
--Roy
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
--- 
-Best Reagrds,
-Roy | RongQing Li
+iEYEARECAAYFAlOioawACgkQN1Ujt2V2gBydYQCcDS4fsUAVYyi5vV9UHgJ/AzBp
+uykAnjwTIkCWTLas+Y5MLhwC1Ipsm+Zk
+=3872
+-----END PGP SIGNATURE-----
 
+--YIleam+9adpUeYf+--
