@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A870D6FEA7
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id BF44070198
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 10:00:19 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id k14so2057331wgh.30
+	Thu, 19 Jun 2014 10:00:20 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id n15so2543613wiw.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=CFNpSpbTJf9mgEPWqj2Rxg97Q3KmFz0/HOPGeujumFY=;
-	b=0B9UuQLxs15wz9s+FtLpUSsBsHlZR5xx1Ue+fhMU3L4O6pRcOCeb9oA+mHSsNy+XSz
-	A0W10PQkQKA+BierIMCuEOXbV6el5194SpxFqcl8YERTv3CtzMyao1avw1mY9+1x64ho
-	Hks9AHchEH0FAO5juMSF5qidLRJ9MxcK/bMftWpImuSMT4taPBg5ksKVqML5jH2ZrkPK
-	hUGM2MsRWgTk7uAs6r2jexKlAWfyo4tjgBCKN2tATIvKRLIPB3WugnvoT97pZgdusB5e
-	pH+LzjYYHpfpnOBLX7GLBGVJ0SJXIzCUyMVWyU79JpuYj476PnE5Fro78fI2YaicLx5+
-	UYcQ==
-X-Received: by 10.180.211.36 with SMTP id mz4mr5184955wic.20.1403172019787;
-	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
+	bh=RDoa23V3lOFzi/2SnCtGextstkHU5VUkmxEUoWG4tnk=;
+	b=egOIW2prZIs6Jw9Z7IL5u1ryzLdk+ST4anJbsEFyoU2IW2kSDm/Jxu0VodldyXMcsy
+	EJVFSrptKPTT6tqynGSEVIonIvDVrgvuH4B0wcKbrHbK118S4GKANiX3/doqTqLnBvGw
+	He8+I8uNhEzNXl7hBJpHX0G46OGMz08Q6gFewkeNxPSfoAQAeS2Az/0ppjBvPR9WmHdA
+	zi/Hq0L4u6sOYgIx7ZHoaM8woC2+pZdefbCQtu9WEWJU54A3K0bxvlKwTH4/xIn1dfNQ
+	z0Rpeo0dhCQIQbuOdERv0rJO0iLFj7Mj9EanmD0wJ2rNCwuVqodI7wtPSyXU7XN8nLOr
+	V6WA==
+X-Received: by 10.194.76.212 with SMTP id m20mr3967432wjw.30.1403172021040;
+	Thu, 19 Jun 2014 03:00:21 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ft17sm7683987wjc.14.2014.06.19.03.00.19 for <multiple recipients>
+	pq9sm7671590wjc.35.2014.06.19.03.00.20 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Jun 2014 03:00:19 -0700 (PDT)
+	Thu, 19 Jun 2014 03:00:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jun 2014 11:59:49 +0200
-Message-Id: <1403171993-26208-21-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 19 Jun 2014 11:59:50 +0200
+Message-Id: <1403171993-26208-22-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 21/25] talloc: Blacklist because of broken with B!=S
+Subject: [meta-oe][WIP][PATCH 22/25] zsh: Blacklist because of broken with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,26 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 10:00:20 -0000
+X-List-Received-Date: Thu, 19 Jun 2014 10:00:22 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb | 2 ++
+ meta-oe/recipes-extended/zsh/zsh.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-index 6b7e4f1..98d0fc7 100644
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://NEWS;md5=5fe776b23a711c9153ee94bc87e47334"
+diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-extended/zsh/zsh.inc
+index db51f39..86a546e 100644
+--- a/meta-oe/recipes-extended/zsh/zsh.inc
++++ b/meta-oe/recipes-extended/zsh/zsh.inc
+@@ -8,6 +8,8 @@ SECTION = "base/shell"
+ LICENSE = "zsh"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
  
- inherit autotools pkgconfig
- 
-+PNBLACKLIST[talloc] = "BROKEN: doesn't build with B!=S (gnu-configize executed in ${B})"
++PNBLACKLIST[zsh] = "BROKEN: doesn't build with B!=S (gnu-configize executed in ${B})"
 +
- SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz \
-            file://install-swig-interface-in-SWINGLIBDIR.patch \
- "
+ DEPENDS = "ncurses bison-native"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 -- 
 2.0.0
 
