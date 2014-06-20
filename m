@@ -1,40 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F83E7021D
+Return-Path: <kapare@rogue-research.com>
+Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 0590A70195
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 16:04:30 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id bs8so1076265wib.15
+	Fri, 20 Jun 2014 22:30:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.rogue-research.com (Postfix) with ESMTP id 4A0423A15D08
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 09:04:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JbDrC90S3qVDfpYf6PTFi0zvplbi6Dg61RjpHDPXZG4=;
-	b=Oc8Ve62Q3oF2EaAm30O2AyIvYZn45ecXeTVvnfLFXbH0iGTPtb3NNC/9qhSwmQQV4R
-	m0Kyg2RE7nN8XYeHiFUoFhKaPzq5QXJdMZZKr6aj6HREzFE7/5UNUf3tBwOqjDoscV9U
-	NS0WCrrx/c+DhIuTmz7TSy/WkSpwHIQwsRudQiGR46zd+bL+5i6UNDFX2MMJ4sAFZbbs
-	13WdKQ7bB6Z824XwPrIw6gnL+IOXv6kAurj9KlZy0XNsHXUMh9sdZsFPApKdKn9QaGZm
-	Sl43eQsQSoKmSJRdvGElyzQjNjhkEC21lPuMPIyI3zorGcwchieuXRJLUjDUfSJZ6Un1
-	4M/w==
-X-Received: by 10.194.216.162 with SMTP id or2mr5709502wjc.0.1403280270633;
-	Fri, 20 Jun 2014 09:04:30 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o12sm5909583wiw.5.2014.06.20.09.04.29
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Jun 2014 09:04:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 20 Jun 2014 18:04:31 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140620160431.GY2117@jama>
-References: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
+	Fri, 20 Jun 2014 18:30:14 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at rogue-research.com
+Received: from mail.rogue-research.com ([127.0.0.1])
+	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id h1OCTFSsBTqn
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jun 2014 18:30:09 -0400 (EDT)
+Received: from mail-ve0-f171.google.com (mail-ve0-f171.google.com
+	[209.85.128.171])
+	by mail.rogue-research.com (Postfix) with ESMTPSA id BC58B3A15CFC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jun 2014 18:30:09 -0400 (EDT)
+Received: by mail-ve0-f171.google.com with SMTP id jz11so4127662veb.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Jun 2014 15:30:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][daisy] pull request, update README's, live555 fix
+X-Received: by 10.58.246.132 with SMTP id xw4mr5441675vec.2.1403303409077;
+	Fri, 20 Jun 2014 15:30:09 -0700 (PDT)
+Received: by 10.58.46.129 with HTTP; Fri, 20 Jun 2014 15:30:09 -0700 (PDT)
+In-Reply-To: <20140620081307.GW2117@jama>
+References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
+	<20140619192658.GS2117@jama>
+	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
+	<20140619210847.GT2117@jama>
+	<CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
+	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
+	<20140619232132.GV2117@jama>
+	<CACgAsMdCCZNcNwmLF-BEEcY=JuTtMCPL9K+9TEhCKU7Q+DAs4g@mail.gmail.com>
+	<20140620081307.GW2117@jama>
+Date: Fri, 20 Jun 2014 18:30:09 -0400
+Message-ID: <CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
+From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,55 +53,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jun 2014 16:04:35 -0000
-X-Groupsio-MsgNum: 50481
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="yhqQ34TVR4fE8mPU"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 20 Jun 2014 22:30:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
---yhqQ34TVR4fE8mPU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Jun 20, 2014 at 4:13 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> PACKAGECONFIG_append_pn-qtbase = " icu"
+>
 
-On Thu, Jun 19, 2014 at 07:52:51AM -0400, Cliff Brake wrote:
-> The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731e2a=
-cf:
->=20
->   python-efl: add dependency on python-dbus and lua to always build
-> edje and elementary bindings (2014-05-12 10:08:28 +0200)
->=20
-> are available in the git repository at:
->=20
->   https://github.com/cbrake/meta-openembedded.git daisy-to-merge
->=20
-> for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb9:
->=20
->   live555: fix fetch problem (2014-06-18 13:42:35 -0400)
+Thank you very much for that example!
 
-BTW: there is daisy bundle on patchwork:
-http://patchwork.openembedded.org/bundle/jama/daisy/?archive=3Dboth
+> You'll probably want also gl and accessibility.
 
-When I notice some patch in queue marked as for daisy or requesting
-backport in text I move it to bundle (and mark it as archived)
+Since I'm trying to build it for arm/omap3, gl should be replace for gles2!?
 
-Would be great if one of you keeps an eye on this bundle and sort the
-patches there (they usually aren't marked as applied automatically and
-you need to do it manually).
+qtbase.inc
+PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
+PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+So far here what my image contain and gives me successful image:
 
---yhqQ34TVR4fE8mPU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+PACKAGECONFIG_append_pn-qtbase = " \
+  developer \
+  tests \
+  examples \
+  icu \
+  alsa \
+  gles2 \
+  accessibility \
+  glib-2.0 \
+  tslib \
+  linuxfb \
+  sqlite3 \
+"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+IMAGE_INSTALL += " \
+  bzip2 \
+  u-boot \
+  u-boot-fw-utils \
+  psplash \
+  ruby \
+  qtbase \
+  qtbase-fonts \
+  qtbase-fonts-ttf-vera \
+  qtbase-fonts-ttf-dejavu \
+  qtbase-fonts-pfa \
+  qtbase-fonts-pfb \
+  qtbase-fonts-qpf \
+  qtbase-tools \
+  qtbase-plugins \
+  qtbase-dev \
+  qtdeclarative-qmlplugins \
+  qtdeclarative-tools \
+  qtdeclarative-plugins \
+  qtdeclarative-dev \
+  qtdeclarative \
+  qtscript \
+  qtsensors \
+  qtserialport \
+  qtsvg \
+  libxslt \
+  icu \
+  glib-2.0 \
+  sqlite3 \
+  qtxmlpatterns \
+  qtquick1 \
+  tiff \
+  qtimageformats \
+  qtmultimedia \
+  alsa-lib \
+  qtlocation \
+  qt3d \
+"
 
-iEYEARECAAYFAlOkW48ACgkQN1Ujt2V2gByS/wCeKElJQvpY4PW7umZUJP2OojwR
-p3MAn1JTKjGMIS+RN3S46FQDfk7zO3W+
-=fZWN
------END PGP SIGNATURE-----
+[1] I still don't understand why adding qtwebkit IMAGE_INSTALL make my
+build fail with:
+ERROR: qtwebkit not found in the base feeds
+LOG: http://pastebin.com/fx2Zi9vW
+Any clue what I'm doing wrong?
 
---yhqQ34TVR4fE8mPU--
+BR,
+
+-KA
+
