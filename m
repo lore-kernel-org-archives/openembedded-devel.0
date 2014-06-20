@@ -1,34 +1,30 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 924177020E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 09:52:26 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1WxvUf-0000QY-Br for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Jun 2014 11:52:25 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 11:52:25 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 11:52:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 20 Jun 2014 11:52:11 +0200
-Message-ID: <lo108c$9h6$1@ger.gmane.org>
-References: <1403256454-4045-1-git-send-email-wenzong.fan@windriver.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 93E3965ED7;
+	Fri, 20 Jun 2014 09:58:08 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s5K9w3UB027589; Fri, 20 Jun 2014 10:58:03 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id O5w6kCvo3iQf; Fri, 20 Jun 2014 10:58:03 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s5K9vxu1027581
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
+	Fri, 20 Jun 2014 10:58:00 +0100
+Message-ID: <1403258272.2104.87.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org, Martin Jansa
+	<martin.jansa@gmail.com>
+Date: Fri, 20 Jun 2014 10:57:52 +0100
+In-Reply-To: <20140610100722.GC2433@jama>
+References: <20140610100722.GC2433@jama>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1403256454-4045-1-git-send-email-wenzong.fan@windriver.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH] postgresql: Use pkg-config for libxml2 dependency
+Cc: openembedded-core@lists.openembedded.org
+Subject: Re: State of bitbake world, Failed tasks 2014-06-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,86 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jun 2014 09:52:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Jun 2014 09:58:17 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I know that with some of the changes in oe-core, meta-oe is suffering a
+little. I've been working on fixing up some of a world build of meta-oe
+with patches including the problematic autoconf one applied.
 
-wenzong.fan@windriver.com schreef op 20-06-14 11:27:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
-> 
-> Use pkg-config for the libxml2 dependency, not the -config script.
-> 
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com> --- 
-> .../use-pkg-config-for-libxml2-dependency.patch    |   44
-> ++++++++++++++++++++ .../recipes-support/postgresql/postgresql_9.2.4.bb |
-> 1 + 2 files changed, 45 insertions(+) create mode 100644
-> meta-oe/recipes-support/postgresql/postgresql-9.2.4/use-pkg-config-for-libxml2-dependency.patch
->
->  diff --git
-> a/meta-oe/recipes-support/postgresql/postgresql-9.2.4/use-pkg-config-for-libxml2-dependency.patch
-> b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/use-pkg-config-for-libxml2-dependency.patch
->
-> 
-new file mode 100644
-> index 0000000..d26701f --- /dev/null +++
-> b/meta-oe/recipes-support/postgresql/postgresql-9.2.4/use-pkg-config-for-libxml2-dependency.patch
->
-> 
-@@ -0,0 +1,44 @@
-> +From 744bbd99a779deac244cebc30f21db9b77946eab Mon Sep 17 00:00:00 2001 
-> +From: Wenzong Fan <wenzong.fan@windriver.com> +Date: Thu, 19 Jun 2014
-> 22:34:21 -0400 +Subject: [PATCH] postgresql: Use pkg-config for libxml2
-> dependency + +Use pkg-config for the libxml2 dependency, not the -config
-> script. + +Upstream-Status: Pending + +Signed-off-by: Wenzong Fan
-> <wenzong.fan@windriver.com> +--- + configure.in |   16 ++++------------ +
-> 1 file changed, 4 insertions(+), 12 deletions(-) + +diff --git
-> a/configure.in b/configure.in +index 3bf9728..d768e9f 100644 +---
-> a/configure.in ++++ b/configure.in +@@ -709,18 +709,10 @@
-> PGAC_ARG_BOOL(with, libxml, no, [build with XML support], +
-> [AC_DEFINE([USE_LIBXML], 1, [Define to 1 to build with XML support.
-> (--with-libxml)])]) + + if test "$with_libxml" = yes ; then +-
-> AC_CHECK_PROGS(XML2_CONFIG, xml2-config) +-  if test -n "$XML2_CONFIG";
-> then +-    for pgac_option in `$XML2_CONFIG --cflags`; do +-      case
-> $pgac_option in +-        -I*|-D*) CPPFLAGS="$CPPFLAGS $pgac_option";; +-
-> esac +-    done +-    for pgac_option in `$XML2_CONFIG --libs`; do +-
-> case $pgac_option in +-        -L*) LDFLAGS="$LDFLAGS $pgac_option";; +-
-> esac +-    done ++  PKG_CHECK_MODULES(PKG_XML2, [libxml-2.0],,) ++  if
-> test "x$PKG_XML2_CFLAGS" != "x"; then ++    CPPFLAGS="$CPPFLAGS
-> $PKG_XML2_CFLAGS" ++    LDFLAGS="$LDFLAGS $PKG_XML2_LIBS" +   fi + fi + 
-> +-- +1.7.9.5
+My WIP is:
 
-Since you are dropping the pgac_* processing, could you add a note that you
-drooped it and why?
+http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=rpurdie/meta-oe&id=9ece5e493b7844a7282eb883effa9d9a5b56d20e
 
-regards,
+I appreciate its a huge patch and needs splitting up but there are only
+so many hours in the day.
 
-Koen
+Of note are a few sepbuild fixes in there and one for the binconfig pcre
+issue that apache2 has, introduced by the binconfig change in OE-Core. I
+took the opportunity to clean up the -native recipe a bit, it should be
+closer to the main recipe and allow it to be converted to BBCLASSEXTEND
+in due course.
+
+There are some fixes for talloc which I know has caused some headaches
+too.
+
+I will try and find the time to clean this up and submit it piece by
+piece but if anyone beats me to it, great and hopefully nobody will
+duplicate the work.
+
+Cheers,
+
+Richard
 
 
 
-> + diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb
-> b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb index
-> 49ca53f..e45638d 100644 ---
-> a/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb +++
-> b/meta-oe/recipes-support/postgresql/postgresql_9.2.4.bb @@ -7,6 +7,7 @@
-> PR = "${INC_PR}.0" SRC_URI += "\ 
-> file://remove.autoconf.version.check.patch \ 
-> file://ecpg-parallel-make-fix.patch \ +
-> file://use-pkg-config-for-libxml2-dependency.patch \ "
-> 
-> SRC_URI[md5sum] = "6ee5bb53b97da7c6ad9cb0825d3300dd"
-> 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
 
-iD8DBQFTpARLMkyGM64RGpERAg9hAJ98vjW1rta+ZUF+m/UepLYek9URCQCfW+f1
-1i2dZoiq7OpvAgfIZ4E7n/o=
-=MDCo
------END PGP SIGNATURE-----
 
 
