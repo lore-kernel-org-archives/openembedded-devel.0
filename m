@@ -1,41 +1,43 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AFED7023F
+Return-Path: <kapare@rogue-research.com>
+Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
+	by mail.openembedded.org (Postfix) with ESMTP id C14EA70247
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 23:54:44 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id lj1so2395383pab.8
+	Fri, 20 Jun 2014 00:38:26 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.rogue-research.com (Postfix) with ESMTP id B97653A09E05
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jun 2014 16:54:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=S+OC0RBA+T1+B68xKmUpMW5Xcpq/kcBUZY0En3O3zo8=;
-	b=E5KiQ18gkDER9WoJL6RAdUaYmK1mQ8UHWVtD/varrGfWkilRQeNWhvxGmj4Px/+6xL
-	bqsH9e68pw2wB73lY84xrkioW/ji9kwec0o8EetyW05g/QO0EAwJYXNScWWb2KKRdvrD
-	EPksxvuhCQoW2CpkcG/FonbAz7b3+sgRVf4WTKdxU8bu50Ky17SC9LaFbUwTIxCli875
-	/GPDednZYbxTMmqb90ztoLLZDbQqI4NIiAwFO/PT4LZzClaOSUFPGhGGsUJcYg2Y+Xk+
-	p3lrWZ+boijvx43mopyF9YWJVyfXLfbTEoa3tERkicMv+5uNfxYds4uCaRW3w+DlMOr9
-	SbvA==
-X-Received: by 10.68.181.165 with SMTP id dx5mr9833432pbc.38.1403222085843;
-	Thu, 19 Jun 2014 16:54:45 -0700 (PDT)
-Received: from [10.7.100.231] (64.2.3.195.ptr.us.xo.net. [64.2.3.195])
-	by mx.google.com with ESMTPSA id
-	ir10sm10404204pbc.59.2014.06.19.16.54.44 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 19 Jun 2014 16:54:44 -0700 (PDT)
-Message-ID: <53A37842.70908@gmail.com>
-Date: Thu, 19 Jun 2014 16:54:42 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+	Thu, 19 Jun 2014 20:38:26 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at rogue-research.com
+Received: from mail.rogue-research.com ([127.0.0.1])
+	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id q1IXtdKw86KS
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 20:38:20 -0400 (EDT)
+Received: from mail-ve0-f170.google.com (mail-ve0-f170.google.com
+	[209.85.128.170])
+	by mail.rogue-research.com (Postfix) with ESMTPSA id 0F4023A09DFA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 20:38:20 -0400 (EDT)
+Received: by mail-ve0-f170.google.com with SMTP id i13so3054725veh.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Jun 2014 17:38:19 -0700 (PDT)
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
-	<20140619115701.GP2117@jama>
-In-Reply-To: <20140619115701.GP2117@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][daisy] pull request, update README's, live555 fix
+X-Received: by 10.52.29.236 with SMTP id n12mr8224vdh.38.1403224699371; Thu,
+	19 Jun 2014 17:38:19 -0700 (PDT)
+Received: by 10.58.46.129 with HTTP; Thu, 19 Jun 2014 17:38:19 -0700 (PDT)
+In-Reply-To: <20140619232132.GV2117@jama>
+References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
+	<20140619192658.GS2117@jama>
+	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
+	<20140619210847.GT2117@jama>
+	<CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
+	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
+	<20140619232132.GV2117@jama>
+Date: Thu, 19 Jun 2014 20:38:19 -0400
+Message-ID: <CACgAsMdCCZNcNwmLF-BEEcY=JuTtMCPL9K+9TEhCKU7Q+DAs4g@mail.gmail.com>
+From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,66 +51,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jun 2014 23:54:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Jun 2014 00:38:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Jun 19, 2014 at 7:21 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Jun 19, 2014 at 07:06:08PM -0400, Kevyn-Alexandre Par=C3=A9 wrote=
+:
+>> I'm a bit further but still have some interrogations?
+>>
+>> ERROR: qtwebkit not found in the base feeds (overo armv7a-vfp-neon
+>> armv7a-vfp armv7a armv6-vfp armv6 armv5e-vfp armv5e armv5-vfp armv5
+>> armv4 arm noarch any all)
+>>
+>> I'm having these included in my image:
+>>
+>>   ruby \
+>>   qtbase \
+>>   qtbase-fonts \
+>>   qtbase-fonts-ttf-vera \
+>>   qtbase-fonts-ttf-dejavu \
+>>   qtbase-fonts-pfa \
+>>   qtbase-fonts-pfb \
+>>   qtbase-fonts-qpf \
+>>   qtbase-tools-dbg \
+>>   qtbase-plugins-dbg \
+>>   qtbase-tools \
+>>   qtbase-plugins \
+>>   qtbase-mkspecs \
+>>   qtbase-dev \
+>>   qtdeclarative-qmlplugins-dbg \
+>>   qtdeclarative-tools-dbg \
+>>   qtdeclarative-plugins-dbg \
+>>   qtdeclarative-qmlplugins \
+>>   qtdeclarative-tools \
+>>   qtdeclarative-plugins \
+>>   qtdeclarative-mkspecs \
+>>   qtdeclarative-dbg \
+>>   qtdeclarative-dev \
+>>   qtdeclarative \
+>>   qtquick1-qmlplugins-dbg \
+>>   qtquick1-tools-dbg \
+>>   qtquick1-plugins-dbg \
+>>   qtquick1-qmlplugins \
+>>   qtquick1-tools \
+>>   qtquick1-plugins \
+>>   qtquick1-mkspecs \
+>>   qtquick1-dbg \
+>>   qtquick1-dev \
+>>   qtquick1 \
+>>   qttools-tools-dbg \
+>>   qttools-tools \
+>>   qttools-mkspecs \
+>>   qttools-dbg \
+>>   qttools-dev \
+>>   qttools \
+>>   qtwebkit \
+>>
+>> [1] Why the bitbake qtwebkit is working but not when I'm including it
+>> in my image?
+>
+> What PACKAGECONFIG values are you using (especially for qtbase)?
 
-
-On 06/19/2014 04:57 AM, Martin Jansa wrote:
-> On Thu, Jun 19, 2014 at 07:52:51AM -0400, Cliff Brake wrote:
->> The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731e2acf:
->>
->>    python-efl: add dependency on python-dbus and lua to always build
->> edje and elementary bindings (2014-05-12 10:08:28 +0200)
->>
->> are available in the git repository at:
->>
->>    https://github.com/cbrake/meta-openembedded.git daisy-to-merge
->>
->> for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb9:
->>
->>    live555: fix fetch problem (2014-06-18 13:42:35 -0400)
->
-> Thank you!
->
-> Acked-By: Martin Jansa <Martin.Jansa@gmail.com>
->
-> Waiting for ACK from listed maintainers, then I'll merge it.
-
-Acked-By: Armin Kuster <akuster808@mvista.com>
+Sorry for a lot of newbie questions... But I have not play with PACKAGECONF=
+IG
+I didn't change PACKAGECONFIG. The only thing I was doing was to add
+previous list of packages to IMAGE_INSTALL +=3D
 
 >
->> ----------------------------------------------------------------
->> Cliff Brake (1):
->>        update maintainer info in README's for daisy
->>
->> Steffen Sledz (1):
->>        live555: fix fetch problem
->>
->>   meta-efl/README                                | 16 ++++++++++++----
->>   meta-filesystems/README                        | 15 +++++++++++----
->>   meta-gnome/README                              | 16 ++++++++++++----
->>   meta-gpe/README                                | 16 ++++++++++++----
->>   meta-initramfs/README                          | 12 +++++++++---
->>   meta-multimedia/README                         | 15 +++++++++++----
->>   meta-networking/MAINTAINERS                    | 11 +++++++++--
->>   meta-networking/README                         |  2 +-
->>   meta-oe/README                                 | 14 +++++++++++---
->>   meta-oe/recipes-multimedia/live555/live555.inc |  4 ++--
->>   meta-perl/README                               | 13 ++++++++++---
->>   meta-ruby/README                               | 17 +++++++++++++----
->>   meta-systemd/README                            | 16 ++++++++++++----
->>   meta-webserver/README                          | 13 ++++++++++---
->>   meta-xfce/README                               | 16 ++++++++++++----
->>   toolchain-layer/README                         | 14 +++++++++++---
->>   16 files changed, 158 insertions(+), 52 deletions(-)
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> carefully read comments in qtbase.inc
 >
->
->
+
+Reading it make me remember that what I want to do, enable qtquick,
+that depends on qtquick1.inc:
+
+DEPENDS +=3D "qtscript qtsvg qtxmlpatterns qtwebkit"
+
+I thought that simply adding them to the IMAGE_INSTALL will be enough
+
+Then in qtbase.inc:
+
+# separate some parts of PACKAGECONFIG which are often changed
+# be aware that you need to add icu to build qtwebkit, default
+# PACKAGECONFIG is kept rather minimal for people who don't need
+# stuff like webkit (and it's easier to add options than remove)
+
+So could this be because I'm not adding the icu?
+
+PACKAGECONFIG[icu] =3D "-icu,-no-icu,icu"
+
+So from a old email you respond:
+https://www.mail-archive.com/yocto@yoctoproject.org/msg16316.html
+
+I think that if I want to enable the icu I need to add???
+PACKAGECONFIG vim ??=3D "icu" in my local.conf or could I add it
+somewhere else? like in the recipe of my image?
+
+Still confuse about that part...
+
+BR,
+
+-KA
 
