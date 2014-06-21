@@ -1,38 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B58C470274
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B8F2770234
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 09:19:15 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id u57so4837522wes.33
+	Sat, 21 Jun 2014 09:19:17 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id hi2so1874329wib.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 02:19:16 -0700 (PDT)
+	Sat, 21 Jun 2014 02:19:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TcZTOQATqqv47mUCrQVPC5UG+YwjQ5HChFIxtVdxIXY=;
-	b=N60Qfs4jb8AhI7Sbye4ldNEew3akThrXPx5RV8W3YBRE07BA0bU+3PvKDAReVYCJBG
-	Fihxm2Nf1tX8ynFHcgxLqF6utvo3TiNGs+Lwgg97w2+j38c2oqW+TCTqdJIxjbF/h9NO
-	ZrgsFi5TK2Bv1gI5CsrIwsOfu4G4Za9SRVukQHSlLHTVCSz/70ZvO3/CBwq13MFibHyn
-	1OszMyKiHYbolC56EVSw2Ex8WgqQGa4kHSphRjxDvFpwDAKWn+3UHyuhBq+8oH0H9n8V
-	b9vYC6UzWhk0Sc0XYkpHCM11hbIC95ERUE6Srs1dvLlrZhyI9CZwenpaXXE2Ddt+Zg+/
-	i4sg==
-X-Received: by 10.180.94.37 with SMTP id cz5mr10120643wib.19.1403342356673;
-	Sat, 21 Jun 2014 02:19:16 -0700 (PDT)
+	bh=DBF5NCMIrxYVeIOVSZwaTaJrRtjZsSvxVzNB9LsbRNs=;
+	b=09cEISwzSkEi5C69FMHVJNaNXFSv4D3BoDIy+XdhxsUHLoa2Y9psy9nyE247Dd73uz
+	SmOYbV21WO1BJ52p+IyAO2lne/FvdBeJZhCS7tuOcK3TOa198KMfJqAws9kKAKdBJ366
+	6aGKA72Y73pdbjDb6Mk/9RHTF+Eh8bbdaeO9+GfnJaGEADikQjgOjgePQXrtZLtnBuzc
+	1ZC4FOOhsK2jQPuBj73S+QTji32zjmXXMC9WbAOh2F4sp08JVtDA7hjwPJ6oRoAyZMux
+	Oow7CB9FRNQgGNwDXRHXI1TCTDi7wBSsdaunn/mxQTx734+EYJQeo/vVkpgjfm9TL103
+	zcBw==
+X-Received: by 10.180.37.180 with SMTP id z20mr10082742wij.58.1403342357982;
+	Sat, 21 Jun 2014 02:19:17 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ex4sm12458244wic.2.2014.06.21.02.19.16 for <multiple recipients>
+	wv8sm5439980wjb.1.2014.06.21.02.19.17 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 02:19:16 -0700 (PDT)
+	Sat, 21 Jun 2014 02:19:17 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jun 2014 11:19:04 +0200
-Message-Id: <1403342349-11180-7-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 21 Jun 2014 11:19:05 +0200
+Message-Id: <1403342349-11180-8-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [meta-oe][PATCH 07/12] glade3: add missing dependency on gnome-common and libxml2
+Subject: [meta-oe][PATCH 08/12] gtkextra: add missing dependency on gobject-introspection-stub
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,29 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 09:19:17 -0000
+X-List-Received-Date: Sat, 21 Jun 2014 09:19:18 -0000
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/glade/glade3_3.8.2.bb | 2 +-
+ meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-index eec40e4..3f93eba 100644
---- a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-+++ b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/gnash"
- LICENSE = "GPLv2 & LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
-                     file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7"
--DEPENDS = "gtk+ gnome-doc-utils-native"
-+DEPENDS = "gtk+ gnome-doc-utils-native gnome-common libxml2"
+diff --git a/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb b/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
+index b9b77e4..702419d 100644
+--- a/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
++++ b/meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb
+@@ -11,6 +11,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gtkextra/${P}.tar.gz \
+ SRC_URI[md5sum] = "486cea93666020f85f101ed8341baf41"
+ SRC_URI[sha256sum] = "9cab6c5d6b792eb828d17cec2b9c1baba2ef57f789a290464afab80b53969e65"
  
- PR = "r1"
+-DEPENDS = "gtk+"
++DEPENDS = "gtk+ gobject-introspection-stub"
  
+ inherit autotools pkgconfig
 -- 
 2.0.0
 
