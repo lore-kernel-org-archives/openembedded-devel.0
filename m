@@ -1,37 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id F10F57019E
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 446026FD72
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 09:24:32 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id bs8so1884849wib.7
+	Sat, 21 Jun 2014 10:17:48 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id x12so4649140wgg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 02:24:33 -0700 (PDT)
+	Sat, 21 Jun 2014 03:17:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=hvhrtHUc8E+NW68uTOt9vvGZ0tVpdzWA6W8m2sMX0mc=;
-	b=ll+EyyKVPbq7I+YXV3ypnt2456yimt6aptqFXSsQr1EcUFDr57ODCsK0+PpkCxv+xp
-	o3mDIeqmUwBda1Qgc51Wg42t3KipjWs2esik/jUFMFLiYSjWaZi3oJig9AzdhQSytmUN
-	C4+dw103oP1IpsemdQXvHIBZW3iLFYxNAcmfF0b7TB3pRRcJCvfF4JeOaHg3g5Ybsih9
-	XvY00RLqIhWl2CJOAuSX8jQM6NZlwOFtjfURcLG26zam9dvN10pa/dQnAjQg1mAWwujI
-	8Jt1fY7QPowG8UaDN8IetUjIZEsBI+8iW+V3O9wyZbEtgCTBaYTPZysnLRI4QKklYgt4
-	dCXQ==
-X-Received: by 10.194.120.72 with SMTP id la8mr2515119wjb.24.1403342673245;
-	Sat, 21 Jun 2014 02:24:33 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=9KXKg8kQPSdvt7mCjXS+Dij3YgTW6ASM6TMSOYN0Wrc=;
+	b=gt4IHA0sKWhU+eYdFo6ynjhkefuWRp/0HCVlHokv8tm2r/tONFzNuch38PnedmC6+p
+	QHy/BMP0ipA+67vy5onpIvLPinQ61jhwHKZvgZDgOWr2P7jlYYyc7uB2aV6viRUlu7+/
+	vTg7oagf5I2C5Hm8k9y45S99blY1H7Im3OtOc8WctU1Wb/txd9IwUQQE6bSHQ6O1todA
+	gmtMd52d9nkeUT9fkChcs0GkdX/bOFmUJZ76KCmBUu1FzDj8fFAvqnTZmVeEh3LVx8/E
+	caBi9hEjXMNvof8WmAYd/bXhXg2axZIzNs7BI2/2pvInuNd80LftMInKVsS7y/0j4AYC
+	PH/g==
+X-Received: by 10.194.243.70 with SMTP id ww6mr10888386wjc.76.1403345869132;
+	Sat, 21 Jun 2014 03:17:49 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	lo18sm12504673wic.1.2014.06.21.02.24.32 for <multiple recipients>
+	f6sm21460929wja.25.2014.06.21.03.17.48 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 02:24:32 -0700 (PDT)
+	Sat, 21 Jun 2014 03:17:48 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jun 2014 11:24:26 +0200
-Message-Id: <1403342666-15430-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 21 Jun 2014 12:17:49 +0200
+Message-Id: <1403345869-1557-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-In-Reply-To: <1403342666-15430-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1403342666-15430-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] ktap: Set MACHINE_ARCH because of ktap-module runtime dependency
+Subject: [meta-oe][PATCH] libgnomekbd: delete older 2.26.0 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 09:24:34 -0000
+X-List-Received-Date: Sat, 21 Jun 2014 10:17:53 -0000
 
-* it's possible to exclude ktap-module dependency from siggen, but
-  then we would need to exclude virtual/kernel and that doesn't work
-  we would need to list all posisble providers as
-  ktap->linux-yocto
-  ktap->linux-foo
-  ....
+* there is 2.32.0 version in libgnome and this one was broken for long time
+  it depends on gconf-dbus which was removed 2,5 years ago, now when
+  newer recipe was blacklisted this started to be pulled into the build
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-kernel/ktap/ktap_0.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb | 14 --------------
+ 1 file changed, 14 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
 
-diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-index 20f94d5..cbdabf8 100644
---- a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-+++ b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-@@ -22,5 +22,5 @@ do_install() {
-     install -m 0755 ${S}/ktap ${D}${bindir}/
- }
- 
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
- RDEPENDS_${PN} = "kernel-module-ktapvm"
+diff --git a/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb b/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
+deleted file mode 100644
+index 5f72399..0000000
+--- a/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "GNOME keyboard library"
+-LICENSE = "LGPL"
+-
+-DEPENDS = "gconf-dbus dbus libxklavier gtk+"
+-
+-inherit gnome
+-
+-do_configure_append() {
+-    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+-    find ${S} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
+-}
+-
+-
 -
 -- 
 2.0.0
