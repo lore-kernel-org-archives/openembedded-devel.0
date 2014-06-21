@@ -1,38 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id AD24A65FEC
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C5D76FA3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 09:19:19 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id x48so4826130wes.9
+	Sat, 21 Jun 2014 09:19:20 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id y10so4686018wgg.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 02:19:20 -0700 (PDT)
+	Sat, 21 Jun 2014 02:19:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=G30spWavIG/FAeJHLupj+dRO7r4mDRMAwBBnWjwRFX0=;
-	b=dVnopyON400Pd4WoQYYNPCNINL9J41/Ya31wRWn2FnaNQpEbjvPIJBAiGOnNfQpicf
-	EPlM0ATlczlc/Rdceo6s5dXKFomN987O9DJ589QwCDpRC4u21QSR9CUbBhmuWX8mkNSe
-	r9OI1zTrOHJyWcfAJOMGv6MMGtnefdqGotA/3aAXBA36MQ+je0GQYSoZfPxajwP/Bp2V
-	9jc9jWQumGXrnQiuP1cD3bUpWzZB0BB2decgwv1qMrSYeNENRk9TDETn57TSIbz9FpjZ
-	/Smasf17UyM3C3A+q6m38D82b4gCuzWvHB7KS/xu3lqJ+hs1rUrCfYgMBseo0Mf4m+R4
-	DOkQ==
-X-Received: by 10.194.62.140 with SMTP id y12mr10953210wjr.27.1403342360131;
-	Sat, 21 Jun 2014 02:19:20 -0700 (PDT)
+	bh=0etgy9o6EoizWd9J+r+JwJo3Kslcke0X4m9LjzGX5K8=;
+	b=qb6uCSVTIMXO2iqqqYmP2rflAP35DVdwjGfwNyIXhlfdTP2zoad2WRwi33QgAO4rUK
+	bbU44k98HDgcnCBYWqVwkMYKtSeKtm1MPkQwLNAzpky5Kz3iuGcbn9xO8qHhQ0uaI69h
+	+o3Ryj0CoR9ZR9cxIpbhY0+QzqOl//qIFu+vYpI1JUAH7iXdavKCO513WICIIwdlBTGy
+	grZ+h98lH++4koLCJsBOP2LRnFD+aeTOP0H76RAJIJTOTLuH5z1r2+rbVKoO7i2NfPDb
+	Mk2fOEBSyaain9vjn0pAiY4N7MnFPiH4NDsVZuykz0QxE1j8ULH+D0siJGUBiIWtf8uA
+	6HbQ==
+X-Received: by 10.194.77.103 with SMTP id r7mr9782830wjw.67.1403342361173;
+	Sat, 21 Jun 2014 02:19:21 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	wv8sm5440193wjb.1.2014.06.21.02.19.19 for <multiple recipients>
+	fn1sm12427464wib.18.2014.06.21.02.19.20 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 02:19:19 -0700 (PDT)
+	Sat, 21 Jun 2014 02:19:20 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jun 2014 11:19:07 +0200
-Message-Id: <1403342349-11180-10-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 21 Jun 2014 11:19:08 +0200
+Message-Id: <1403342349-11180-11-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [meta-oe][PATCH 10/12] xpext: fix build with B!=S
+Subject: [meta-oe][PATCH 11/12] libetpan: fix build with B!=S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,26 +52,47 @@ From: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../libetpan/libetpan-0.57/sepbuild.patch                | 16 ++++++++++++++++
+ meta-oe/recipes-support/libetpan/libetpan_0.57.bb        |  3 ++-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/libetpan/libetpan-0.57/sepbuild.patch
 
-diff --git a/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb b/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
-index 7cb84ff..4a1379d 100644
---- a/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
-+++ b/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb
-@@ -12,9 +12,9 @@ S = "${WORKDIR}/xpext-1.0"
- inherit autotools pkgconfig
+diff --git a/meta-oe/recipes-support/libetpan/libetpan-0.57/sepbuild.patch b/meta-oe/recipes-support/libetpan/libetpan-0.57/sepbuild.patch
+new file mode 100644
+index 0000000..4f01617
+--- /dev/null
++++ b/meta-oe/recipes-support/libetpan/libetpan-0.57/sepbuild.patch
+@@ -0,0 +1,16 @@
++Index: libetpan-0.57/rules.mk
++===================================================================
++--- libetpan-0.57.orig/rules.mk
+++++ libetpan-0.57/rules.mk
++@@ -134,9 +134,9 @@ prepare-am: prepare-local
++ 	         if test -e ../../$(subdir)/$${hdr}; then \
++ 	           echo "$(LN_S) -f ../../$(subdir)/$${hdr} ."; \
++ 	           $(LN_S) -f ../../$(subdir)/$${hdr} .; \
++              else \
++-	           echo "$(LN_S) -f ../../$(subdir)/$(srcdir)/$${hdr} ."; \
++-	           $(LN_S) -f ../../$(subdir)/$(srcdir)/$${hdr} .; \
+++	           echo "$(LN_S) -f $(srcdir)/$${hdr} ."; \
+++	           $(LN_S) -f $(srcdir)/$${hdr} .; \
++              fi; \
++            fi; \
++ 	     done; \
+diff --git a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
+index 0dbd782..6be0694 100644
+--- a/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
++++ b/meta-oe/recipes-support/libetpan/libetpan_0.57.bb
+@@ -10,7 +10,8 @@ PR = "r1"
  
- do_configure_prepend () {
--    cd ${S}
--    chmod +x ./autogen.sh
--    ./autogen.sh
-+    cd ${B}
-+    chmod +x ${S}/autogen.sh
-+    ${S}/autogen.sh
- }
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
+            file://libetpan-autoreconf.patch \
+-           file://libetpan-ldflags.patch"
++           file://libetpan-ldflags.patch \
++           file://sepbuild.patch"
  
- SRC_URI[md5sum] = "1b0cb67b6f2bd7c4abef17648b062896"
+ inherit autotools pkgconfig gettext binconfig
+ 
 -- 
 2.0.0
 
