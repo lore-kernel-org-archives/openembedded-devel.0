@@ -1,34 +1,35 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7BF701E3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 25C5E7027B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 00:32:31 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id 474923A169AB
+	Sat, 21 Jun 2014 01:05:05 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id z12so4320861wgg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 20:32:32 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id X-vdpntiB0j5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 20:32:25 -0400 (EDT)
-Received: from mail-ve0-f170.google.com (mail-ve0-f170.google.com
-	[209.85.128.170])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id C4C503A1699A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 20:32:25 -0400 (EDT)
-Received: by mail-ve0-f170.google.com with SMTP id i13so4225900veh.29
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jun 2014 17:32:25 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.52.159.226 with SMTP id xf2mr4886412vdb.14.1403310744978;
-	Fri, 20 Jun 2014 17:32:24 -0700 (PDT)
-Received: by 10.58.46.129 with HTTP; Fri, 20 Jun 2014 17:32:24 -0700 (PDT)
-In-Reply-To: <CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
-References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
-	<20140619192658.GS2117@jama>
-	<CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
+	Fri, 20 Jun 2014 18:05:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=0K1+GS6ni+Bi7yWDfQm0/ADoBdbsxMNiNsbvxo1+u0Q=;
+	b=Ub0l1AHvbvDC1V1YMNTrs/MIkgVzp5iPiqu17b5wv0J5SwzRd4FaFi5xA19jE1/szS
+	HXryL1us6/mMhTUR4e8PvqFflzqbJ4/LK1HEG+UdQODriJFtIgiXT0gsmUwhK0TbJ2mT
+	Il2NrrsAomyfmaunD169mp1EMChMtMPMnmbQio26YGsZ4ZZ7wMEA5ZFxmic7n1ysFH5t
+	kOoOkKKErbVuu7TcLH1EIceumIN9UcX8oTTaAMJoNW//nVEXOS4XVXIem5pohieforkT
+	raHqBy7YRFfKTWQn7U4WYhOpKbLgvKApnqDp2yDv8JHTntgXlH0P5nI0vc5a7PTPD95/
+	i+zw==
+X-Received: by 10.194.71.132 with SMTP id v4mr8437312wju.102.1403312706471;
+	Fri, 20 Jun 2014 18:05:06 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	lo18sm9407326wic.1.2014.06.20.18.05.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 20 Jun 2014 18:05:05 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 21 Jun 2014 03:05:08 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140621010508.GC2117@jama>
+References: <CACgAsMd+5=_77KqbftS_pQMAwU4sgRE+2nVBusc_pUxNXW+jyw@mail.gmail.com>
 	<20140619210847.GT2117@jama>
 	<CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
 	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
@@ -38,10 +39,9 @@ References: <CACgAsMdhMQFewxK6e+Ja8hNUcSUMjL0Xe7WWL-W_EsDSa7sYjQ@mail.gmail.com>
 	<CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
 	<20140620234853.GA2117@jama>
 	<CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
-Date: Fri, 20 Jun 2014 20:32:24 -0400
-Message-ID: <CACgAsMf1LenfvgO=+rVQUp2Kt7-+Sy9pXGDHaqdnqYsfGeexXQ@mail.gmail.com>
-From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
-To: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+In-Reply-To: <CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,50 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 00:32:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 21 Jun 2014 01:05:11 -0000
+X-Groupsio-MsgNum: 50488
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="pgNHpQPJFoUYTAIP"
+Content-Disposition: inline
+
+--pgNHpQPJFoUYTAIP
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 20, 2014 at 8:22 PM, Kevyn-Alexandre Par=C3=A9
-<kapare@rogue-research.com> wrote:
+On Fri, Jun 20, 2014 at 08:22:39PM -0400, Kevyn-Alexandre Par=E9 wrote:
 > On Fri, Jun 20, 2014 at 7:48 PM, Martin Jansa <martin.jansa@gmail.com> wr=
 ote:
->> On Fri, Jun 20, 2014 at 06:30:09PM -0400, Kevyn-Alexandre Par=C3=A9 wrot=
-e:
->>> [1] I still don't understand why adding qtwebkit IMAGE_INSTALL make my
->>> build fail with:
->>> ERROR: qtwebkit not found in the base feeds
->>> LOG: http://pastebin.com/fx2Zi9vW
->>> Any clue what I'm doing wrong?
->>
->> Check which packages (if any) were created by qtwebkit recipe, if any
->> then read log.do_configure for possible clues.
->>
->
+> > On Fri, Jun 20, 2014 at 06:30:09PM -0400, Kevyn-Alexandre Par=E9 wrote:
+> >> [1] I still don't understand why adding qtwebkit IMAGE_INSTALL make my
+> >> build fail with:
+> >> ERROR: qtwebkit not found in the base feeds
+> >> LOG: http://pastebin.com/fx2Zi9vW
+> >> Any clue what I'm doing wrong?
+> >
+> > Check which packages (if any) were created by qtwebkit recipe, if any
+> > then read log.do_configure for possible clues.
+> >
+>=20
 > qtwebkit-dbg and qtwebkit-dev is part of deploy rpm not qtwebkit? In
 > pkgdata these only to have ".packaged"
 > http://pastebin.com/0ugj2NVF
->
+>=20
 > log.do_configure:
 > http://pastebin.com/cXWdDXmy
->
+
+The WebKit build was disabled for the following reasons:
+    * ICU is required. To build QtWebKit with Qt 5 you need to build Qt
+     5 with libICU support. Check for ICU support being mentioned in
+     qtbase/config.summary.
+
 > What's interesting or maybe not is that dgb and dev have empty rpm
 > created and not the others?
 > log.do_package_write_rpm
 > http://pastebin.com/Cft9Uh3J
->
 
-replacing qtwebkit for qtwebkit-dev gave this error:
+-dbg and -dev are configured to create empty package
+ALLOW_EMPTY_<pkgname>
 
-Computing transaction...error: Can't install
-qtwebkit-dev-5.2.1-r0@armv7a_vfp_neon: no package provides qtwebkit =3D
-5.2.1-r0
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-replace qtwebkit-dev for qtwebkit-dbg
+--pgNHpQPJFoUYTAIP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-pass and generate a new image without error !!?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-BR,
+iEYEARECAAYFAlOk2kQACgkQN1Ujt2V2gBzF9QCfTTmZdyk4JT2pxA1icA8DjXZf
+wZYAn0SfYhqSc2CSphXdxdE2Nbh65nS4
+=p9M+
+-----END PGP SIGNATURE-----
 
--KA
-
+--pgNHpQPJFoUYTAIP--
