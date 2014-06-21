@@ -1,49 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 706D16FFA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 07:47:35 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id u56so4630601wes.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 00:47:35 -0700 (PDT)
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 8964D609BE;
+	Sat, 21 Jun 2014 08:09:20 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id a1so4506593wgh.0
+	for <multiple recipients>; Sat, 21 Jun 2014 01:09:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TjldFZXElne9+JXEPeDk4sJSqn2/br40GQs6rZ+4j7c=;
-	b=Z5siP5a3gwxnvj67PMg9wCg2pIpolsi7OKHgOdvI9/vZJ5nxi+LN4VXQuKMnLgiPK8
-	7JfvmRhxFrI566S2QdwH6Ga5iSNXcbyRNoCBHYwMTCBIV5EsvSWOlFr9j4U8LFt0nmOG
-	KAH5wD7QhkcuseXaAbVx2wbGMjr+3k+oNjN5nEj/GKr7t1rg7pHmhW3veY9cPYdF0mvk
-	7T2qW77d9fJPRTihV/0V2gCxq01Sy2YUyNLar/CdHfLKL9CH97tO6oSGOIXODBsxRm0x
-	/15D7VPmv+axL/QfAxuEo9RETVIYYzbzkKnvJ7V2UgLjJtzschfyq9h8PIChWfT4xSJO
-	gK9g==
-X-Received: by 10.181.12.102 with SMTP id ep6mr9803542wid.0.1403336854592;
-	Sat, 21 Jun 2014 00:47:34 -0700 (PDT)
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=r+RWRx83LRlVXLIIcgizB4jcFdvxM08Xn+sApj2AItU=;
+	b=XkMBqpz88ta/q+OPkSbwnKZwa6ScB3Wd7h3vK8jO8ZwLzX0rv2S/RDNBh9T/N4sftX
+	8ZCnyvy/fUyYnJLkxTKMNgA9v5kIwVunnUZKWKis0xIqooeyvI1rvzuCKsHmvM2vsDey
+	r+mKYFB6DEo3QVJbU91gq0M26ET9m2w7y8dJUJazORktN/8kpz7AneGdVMK3mbL+h45M
+	oHRRcK/TIcLN2vmKpJNNTXtsGBWBJpAaNDywtWT4znyH585fTkSK806Kbvy6MixF0fGT
+	mt5TeL1PaOuMBFzpC96muJZtXv5URzbGl+RZa0j438gWQb/eXX5fPELNC6why6E8rCMO
+	xewg==
+X-Received: by 10.195.11.34 with SMTP id ef2mr705024wjd.123.1403338160230;
+	Sat, 21 Jun 2014 01:09:20 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	s14sm4809746wij.1.2014.06.21.00.47.33
-	for <openembedded-devel@lists.openembedded.org>
+	m3sm11972087wik.7.2014.06.21.01.09.19 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 00:47:33 -0700 (PDT)
+	Sat, 21 Jun 2014 01:09:19 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 21 Jun 2014 09:47:33 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140621074733.GD2117@jama>
-References: <CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
-	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
-	<20140619232132.GV2117@jama>
-	<CACgAsMdCCZNcNwmLF-BEEcY=JuTtMCPL9K+9TEhCKU7Q+DAs4g@mail.gmail.com>
-	<20140620081307.GW2117@jama>
-	<CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
-	<20140620234853.GA2117@jama>
-	<CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
-	<20140621010508.GC2117@jama>
-	<CACgAsMdguugQZiTiOo8aWaBZFCYnsWUtp7-0KWu7VdGvdBDCSA@mail.gmail.com>
+Date: Sat, 21 Jun 2014 10:09:22 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140621080922.GE2117@jama>
 MIME-Version: 1.0
-In-Reply-To: <CACgAsMdguugQZiTiOo8aWaBZFCYnsWUtp7-0KWu7VdGvdBDCSA@mail.gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+Subject: State of bitbake world, Failed tasks 2014-06-21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,121 +43,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 07:47:43 -0000
-X-Groupsio-MsgNum: 50490
+X-List-Received-Date: Sat, 21 Jun 2014 08:09:24 -0000
+X-Groupsio-MsgNum: 50491
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qKojvbh47KHQqxue"
+	protocol="application/pgp-signature"; boundary="DRp5/Sds4nAqvQzf"
 Content-Disposition: inline
 
---qKojvbh47KHQqxue
-Content-Type: text/plain; charset=iso-8859-1
+--DRp5/Sds4nAqvQzf
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 20, 2014 at 11:35:34PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> On Fri, Jun 20, 2014 at 9:05 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > On Fri, Jun 20, 2014 at 08:22:39PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> >> On Fri, Jun 20, 2014 at 7:48 PM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
-> >> > On Fri, Jun 20, 2014 at 06:30:09PM -0400, Kevyn-Alexandre Par=E9 wro=
-te:
-> >> >> [1] I still don't understand why adding qtwebkit IMAGE_INSTALL make=
- my
-> >> >> build fail with:
-> >> >> ERROR: qtwebkit not found in the base feeds
-> >> >> LOG: http://pastebin.com/fx2Zi9vW
-> >> >> Any clue what I'm doing wrong?
-> >> >
-> >> > Check which packages (if any) were created by qtwebkit recipe, if any
-> >> > then read log.do_configure for possible clues.
-> >> >
-> >>
-> >> qtwebkit-dbg and qtwebkit-dev is part of deploy rpm not qtwebkit? In
-> >> pkgdata these only to have ".packaged"
-> >> http://pastebin.com/0ugj2NVF
-> >>
-> >> log.do_configure:
-> >> http://pastebin.com/cXWdDXmy
-> >
-> > The WebKit build was disabled for the following reasons:
-> >     * ICU is required. To build QtWebKit with Qt 5 you need to build Qt
-> >      5 with libICU support. Check for ICU support being mentioned in
-> >      qtbase/config.summary.
-> >
+On Wed, Jun 11, 2014 at 12:57:59PM +0200, Martin Jansa wrote:
+> On Tue, Jun 10, 2014 at 12:07:22PM +0200, Martin Jansa wrote:
+> > On Mon, Jun 02, 2014 at 10:49:50AM +0200, Martin Jansa wrote:
+> > > This build still contains huge patch setting B =3D S or inherit for
+> > > autotools-brokensep for all recipes which were failing in earlier
+> > > master builds.
 >=20
-> Yes you told me that in previous email I when to
-> layers.openembedded.org to check
->=20
-> icu  53.1 International Component for Unicode libraries   openembedded-co=
-re
->=20
-> I add it in PACKAGECONFIG_append_pn-qtbase and IMAGE_INSTALL I thought
-> it will be enough?
->=20
-> Obviously, I'm still missing somethink
->=20
-> qtbase/config.summary? you mean qtbase.inc?
+> I've removed this patch for this build to see how bad it is. And it's BAD.
 
-I've just pasted it for you from the log.do_configure you sent me,
-please _read_ it.
+Now it doesn't have the big B=3DS patch, but long patchset of PNBLACKLISTs =
+I've sent
+earlier this week.
 
-Check config.summary in qtbase WORKDIR (where you built qtbase to be
-sure it was enabled) and check with bitbake -e that it's really in your
-PACKAGECONFIG for qtbase.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-> I see icu only mention in
->=20
-> poky/meta-qt5$ grep -Ri ICU *
-> COPYING.MIT:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-> NO EVENT SHALL THE
-> licenses/DIGIA-TPLA-2.4:merchantability, fitness for a particular
-> purpose, title and
-> licenses/DIGIA-TPLA-2.4:merchantability, fitness for a particular
-> purpose, title and
-> recipes-qt/qt5/qtwebkit.inc:DEPENDS +=3D "qtbase qtdeclarative icu
-> ruby-native sqlite3 glib-2.0 libxslt"
-> recipes-qt/qt5/qtbase.inc:# be aware that you need to add icu to build
-> qtwebkit, default
-> recipes-qt/qt5/qtbase.inc:PACKAGECONFIG[icu] =3D "-icu,-no-icu,icu"
-> recipes-qt/qt5/qtbase-native.inc:    -no-icu \
->=20
-> My qtbase log.do_configure shows that it have been enable:
-> http://pastebin.com/g7Lh5cPU
->=20
-> >> What's interesting or maybe not is that dgb and dev have empty rpm
-> >> created and not the others?
-> >> log.do_package_write_rpm
-> >> http://pastebin.com/Cft9Uh3J
-> >
-> > -dbg and -dev are configured to create empty package
-> > ALLOW_EMPTY_<pkgname>
-> >
->=20
-> Aa, I'm only seeing it for these:
->=20
-> poky/meta-qt5$ grep -R ALLOW_EMPTY *
-> recipes-qt/qt5/qtimageformats.inc:ALLOW_EMPTY_${PN} =3D "1"
-> recipes-qt/qt5/qtbase.inc:ALLOW_EMPTY_${PN}-fonts =3D "1"
+=3D=3D Failed tasks 2014-06-21 =3D=3D
 
-meta/conf/bitbake.conf:ALLOW_EMPTY_${PN}-dev =3D "1"
-meta/conf/bitbake.conf:ALLOW_EMPTY_${PN}-dbg =3D "1"
-meta/conf/documentation.conf:ALLOW_EMPTY[doc] =3D "Specifies if an output
-package should still be produced if it is empty."
+I have a fix for python-cython. This doesn't include the big patch from RP.
+
+=3D=3D=3D common (28) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p=
+1.bb, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/openal/openal-so=
+ft_1.15.1.bb, do_compile
+    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb=
+, do_configure
+    * meta-openembedded/meta-networking/recipes-support/lksctp-tools/lksctp=
+-tools_1.0.16.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/phonet-utils/phonet-ut=
+ils_git.bb, do_install
+    * meta-openembedded/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1=
+=2Ebb, do_install
+    * meta-openembedded/meta-oe/recipes-devtools/python/python-pyyaml_3.10.=
+bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb,=
+ do_compile
+    * meta-openembedded/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb, do_=
+compile
+    * meta-openembedded/meta-oe/recipes-extended/subsurface/subsurface_git.=
+bb, do_compile
+    * meta-openembedded/meta-oe/recipes-graphics/clutter/clutter-box2d_git.=
+bb, do_compile
+    * meta-openembedded/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb, do_i=
+nstall
+    * meta-openembedded/meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb, do=
+_install
+    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
+install
+    * meta-openembedded/meta-oe/recipes-navigation/orrery/orrery_2.7.bb, do=
+_compile
+    * meta-openembedded/meta-oe/recipes-support/daemonize/daemonize_git.bb,=
+ do_configure
+    * meta-openembedded/meta-oe/recipes-support/flite/flite-alsa_1.3.bb, do=
+_install
+    * meta-openembedded/meta-oe/recipes-support/fltk/fltk_1.1.10.bb, do_ins=
+tall
+    * meta-openembedded/meta-oe/recipes-support/libetpan/libetpan_0.57.bb, =
+do_compile
+    * meta-openembedded/meta-oe/recipes-support/pidgin/libotr_4.0.0.bb, do_=
+compile
+    * meta-openembedded/meta-oe/recipes-support/usb-modeswitch/usb-modeswit=
+ch_2.0.1.bb, do_install
+    * meta-openembedded/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0=
+=2Ebb, do_compile
+    * meta-openembedded/meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb=
+, do_package
+    * meta-smartphone/meta-fso/recipes-freesmartphone/freesmartphone/zhone_=
+git.bb, do_compile
+    * meta-smartphone/meta-fso/recipes-freesmartphone/python/python-pyrtc_g=
+it.bb, do_compile
+    * meta-smartphone/meta-shr/recipes-shr/shr/python-phoneutils_git.bb, do=
+_compile
+    * openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.1=
+3.bb, do_configure
+
+=3D=3D=3D common-x86 (2) =3D=3D=3D
+    * meta-browser/recipes-browser/chromium/chromium_35.0.1916.114.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-devtools/concurrencykit/concurrency=
+kit_git.bb, do_compile
+
+=3D=3D=3D qemuarm (4) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/gnome-power-manager/gnome-=
+power-manager_2.32.0.bb, do_configure
+    * meta-openembedded/meta-oe/recipes-devtools/python/python-cython_0.20.=
+1.bb, do_package
+    * meta-openembedded/meta-oe/recipes-support/postgresql/postgresql_9.2.4=
+=2Ebb, do_configure
+    * openembedded-core/meta/recipes-kernel/lttng/lttng-modules_2.3.3.bb, d=
+o_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
+_git.bb, do_compile
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||32    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140620_105353.log/||http://errors.yoctoproject.or=
+g:80/Errors/Search/1/255/
+|-
+||qemux86       ||30    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140620_191417.log/||
+|-
+||qemux86_64    ||31    ||http://logs.nslu2-linux.org/buildlogs/oe/oe-shr-c=
+ore-branches//log.world.20140621_000236.log/||
+|}
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---qKojvbh47KHQqxue
+--DRp5/Sds4nAqvQzf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlOlOJUACgkQN1Ujt2V2gBw3JgCdFNEXbpoBJAka4Klx8ibMwIXw
-6dUAoJmW9JYO0fZTY2oWGq6Gw1tAy542
-=d3J0
+iEYEARECAAYFAlOlPbIACgkQN1Ujt2V2gBzx5wCbByXW27evXFGHyaWM4R8KatW9
+rqsAoJdr4cndpMOBuWGa5PQfVVJ2+Hld
+=/+u/
 -----END PGP SIGNATURE-----
 
---qKojvbh47KHQqxue--
+--DRp5/Sds4nAqvQzf--
