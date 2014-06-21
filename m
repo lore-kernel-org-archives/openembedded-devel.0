@@ -1,27 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 646F06FED8;
-	Sat, 21 Jun 2014 09:04:53 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by azsmga101.ch.intel.com with ESMTP; 21 Jun 2014 02:04:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,519,1400050800"; d="scan'208";a="448241432"
-Received: from ckithala-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.251])
-	by azsmga001.ch.intel.com with ESMTP; 21 Jun 2014 02:04:52 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 21 Jun 2014 10:04:51 +0100
-Message-ID: <1784214.6u5AeWhsu4@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.7-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <lo1242$195$1@ger.gmane.org>
-References: <20140610100722.GC2433@jama> <1403258272.2104.87.camel@ted>
-	<lo1242$195$1@ger.gmane.org>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-06-02
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 821CB609BE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Jun 2014 09:19:12 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id r20so1882131wiv.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Jun 2014 02:19:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Pxdl7VfHlW1vvy1q+bml+WQUapUH6tLTNwPPGdfg5BM=;
+	b=p6S+kQdsx+MzR+1ErxRAljzFDTeTwkgk28sbnx4ma4l8srNudm+W6I/QZL6eS/GuWd
+	jPVfIcZljexp3tPUDROFwArZNdtFfZ0LK7zOsr/9lIz692TmAUsGcCbS31EdcsufujEb
+	dRGSHJPtw+5AR+NiwBur/fyhrurX61PZa0lFS9bekwe1iPhIprSi4Wm4br0N9YpRBaQU
+	e/nE+bLoW/9LlYRXPSdKrd+7DE3xwvL4vhWv0ceTU8/8kkSVanHCvPbzmz5pHJ+DbO08
+	uqnEjJH4Sz7Nrw6VdvP6GcTLfSI9vymTkmDEc1g04JyNFih1hJkaLir2e6dTsKh01ru4
+	GFBQ==
+X-Received: by 10.180.74.9 with SMTP id p9mr10187083wiv.39.1403342353159;
+	Sat, 21 Jun 2014 02:19:13 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	lk7sm20106997wjb.24.2014.06.21.02.19.12 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 21 Jun 2014 02:19:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 21 Jun 2014 11:19:01 +0200
+Message-Id: <1403342349-11180-4-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+In-Reply-To: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1403342349-11180-1-git-send-email-Martin.Jansa@gmail.com>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [meta-oe][PATCH 04/12] libmtp: add missing dependency on virtual/libiconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,23 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 09:04:55 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 21 Jun 2014 09:19:14 -0000
 
-On Friday 20 June 2014 12:24:01 Koen Kooi wrote:
-> I noticed that the LAMP recipes are really, really ugly for historical
-> reasons. With the autotools updates in oe-core and a few years of upstream
-> development most hacks aren't needed anymore. Any volunteers for cleaning up
-> those recipes?
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-I'm happy to do it when I get back from holiday, if nobody gets to it first.
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+index 0c92ff9..773e559 100644
+--- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
++++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "\
+     file://examples/albums.c;beginline=5;endline=21;md5=84f4e55dfec49e898b7f68a828c15620 \
+ "
+ 
+-DEPENDS += "libusb1"
++DEPENDS += "libusb1 virtual/libiconv"
+ 
+ SCM_URI = "git://git.code.sf.net/p/libmtp/code"
+ SRC_URI = "\
 -- 
+2.0.0
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
