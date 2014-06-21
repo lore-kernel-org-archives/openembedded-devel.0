@@ -1,34 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 446026FD72
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 79BD170195
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 10:17:48 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id x12so4649140wgg.10
+	Sat, 21 Jun 2014 11:44:46 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id u57so4878867wes.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 03:17:49 -0700 (PDT)
+	Sat, 21 Jun 2014 04:44:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=9KXKg8kQPSdvt7mCjXS+Dij3YgTW6ASM6TMSOYN0Wrc=;
-	b=gt4IHA0sKWhU+eYdFo6ynjhkefuWRp/0HCVlHokv8tm2r/tONFzNuch38PnedmC6+p
-	QHy/BMP0ipA+67vy5onpIvLPinQ61jhwHKZvgZDgOWr2P7jlYYyc7uB2aV6viRUlu7+/
-	vTg7oagf5I2C5Hm8k9y45S99blY1H7Im3OtOc8WctU1Wb/txd9IwUQQE6bSHQ6O1todA
-	gmtMd52d9nkeUT9fkChcs0GkdX/bOFmUJZ76KCmBUu1FzDj8fFAvqnTZmVeEh3LVx8/E
-	caBi9hEjXMNvof8WmAYd/bXhXg2axZIzNs7BI2/2pvInuNd80LftMInKVsS7y/0j4AYC
-	PH/g==
-X-Received: by 10.194.243.70 with SMTP id ww6mr10888386wjc.76.1403345869132;
-	Sat, 21 Jun 2014 03:17:49 -0700 (PDT)
+	bh=7QcP33bWNLGAtb6lCpOiWiIm4RjdBPmmU0uNQHjrcbk=;
+	b=hycZ13ojGs6wDt2YeRD+KIHX/kTwdchgGil0T3VdQwPjdp8ssPopbJq9euAoo6aOTX
+	pBrmwoTp+S76C4QO/oW1mmPl0shdUeokLn/dkpAHwtyxF5DxHX1pQ8r0run5bC5sU2Y2
+	FDgs8pAVcgPsnGqlc7+bd9jrhGgPqWSXsV/W9rc2L9lp4ZGoN0IQt3sHMpar+doA52hh
+	vSbulGuM7Q+1UceUYvbzgNs31VQJZLGtPvcfFTAfxlkmWPec/OfXzXzUgnht61MOSDJD
+	/6e6UnrNZOEWryoV9lqWMoa2adaUMdfJnyINyxOdKEY23Dha6OZW6J7PtzFyHJEDeyJo
+	Gh4A==
+X-Received: by 10.180.74.9 with SMTP id p9mr10961947wiv.39.1403351086296;
+	Sat, 21 Jun 2014 04:44:46 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	f6sm21460929wja.25.2014.06.21.03.17.48 for <multiple recipients>
+	am10sm21886153wjc.45.2014.06.21.04.44.45 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 03:17:48 -0700 (PDT)
+	Sat, 21 Jun 2014 04:44:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jun 2014 12:17:49 +0200
-Message-Id: <1403345869-1557-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 21 Jun 2014 13:44:46 +0200
+Message-Id: <1403351086-15789-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][PATCH] libgnomekbd: delete older 2.26.0 version
+Subject: [meta-oe][WIP][DONT-MERGE][PATCH] python-cython: downgrade to 0.19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,38 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 10:17:53 -0000
+X-List-Received-Date: Sat, 21 Jun 2014 11:44:49 -0000
 
-* there is 2.32.0 version in libgnome and this one was broken for long time
-  it depends on gconf-dbus which was removed 2,5 years ago, now when
-  newer recipe was blacklisted this started to be pulled into the build
+* this is only temporary, until I find better fix for 0.20.1
+* I don't plan to merge this unless fixing 0.20.1 became too
+  complicated, but use it if you need to fix it sooner (notice
+  intentionally missing PE bump)
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb | 14 --------------
- 1 file changed, 14 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
+ .../python/{python-cython_0.20.1.bb => python-cython_0.19.1.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-cython_0.20.1.bb => python-cython_0.19.1.bb} (80%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb b/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
-deleted file mode 100644
-index 5f72399..0000000
---- a/meta-gnome/recipes-gnome/gnome/libgnomekbd_2.26.0.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "GNOME keyboard library"
--LICENSE = "LGPL"
--
--DEPENDS = "gconf-dbus dbus libxklavier gtk+"
--
--inherit gnome
--
--do_configure_append() {
--    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
--    find ${S} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
--}
--
--
--
+diff --git a/meta-oe/recipes-devtools/python/python-cython_0.20.1.bb b/meta-oe/recipes-devtools/python/python-cython_0.19.1.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/python/python-cython_0.20.1.bb
+rename to meta-oe/recipes-devtools/python/python-cython_0.19.1.bb
+index f8cf245..e9b56e4 100644
+--- a/meta-oe/recipes-devtools/python/python-cython_0.20.1.bb
++++ b/meta-oe/recipes-devtools/python/python-cython_0.19.1.bb
+@@ -10,8 +10,8 @@ BBCLASSEXTEND = "native"
+ SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+-SRC_URI[md5sum] = "52431696c64e618036537c4d9aa79d99"
+-SRC_URI[sha256sum] = "31a563744a21d7b10355f25a3bca96b37ec5d32bdecfc75e93d65a5f7e62766c"
++SRC_URI[md5sum] = "df4cfb2b8e3345272e3fc451b76bd630"
++SRC_URI[sha256sum] = "0b90aaa286acdd1bf75a6dd144dfc45192f011f2c2401cf5f80ed6ab5f8bf778"
+ 
+ inherit distutils
+ 
 -- 
 2.0.0
 
