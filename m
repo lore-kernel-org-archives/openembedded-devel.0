@@ -1,35 +1,46 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 672926FC34
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7723866007
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 02:11:02 +0000 (UTC)
-Received: by mail-we0-f172.google.com with SMTP id u57so6166798wes.31
+	Mon, 23 Jun 2014 07:15:11 +0000 (UTC)
+Received: by mail-we0-f181.google.com with SMTP id q59so6198677wes.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jun 2014 19:11:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=6Nsj57YC87FkkTWzMvS7+7gXI5IfyRc5etmGK/A4SLA=;
-	b=Iu1JDT2mWbTM8xP484NCOrT9exlsYjUxgWGmP7d0rL/RBARW3BJEbKNoLpXXQ82RxM
-	PuJvEfMXch6ntalKtD0vrukCOF8+IarcQSK/6Ex3S8ZzTje6/dmVRsWjb51xCTbZmK5y
-	6FN3PeuSzljsNpOybHXZazpearqWuprC7WCnlk2KsLLGdz1Bd3ZJIP6AdBsYVexAXAhJ
-	/fdhS4Qf2dV+u8SJ8jQGCA3KXH2yCpSeiYBlVyTDrC5qzTfX1qHBTnl7BZxgN90QmQQB
-	zQeqjLJRy2bQ3cGSISGwuAWxfjsio/Jl7nCeGJwgUzcXQsiAgkk/UIqMCegRwjQDaIqY
-	7MsQ==
+	Mon, 23 Jun 2014 00:15:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=7j0mRiNIR4Gl0wuLxsuK9dd6WDRth7vXSzoGu4no7F8=;
+	b=nJ9gfYHzQ6kwWY6MCZ5UIlazR8rDIxrv61+/w30Zp46d85cwk1hSL/aOost8ijNDgD
+	fYvdTP7oFns7PAgOHSbdUB2L/JVhTyzjLyx0P7tGZtQV6xDr62ikOSp9PsZ2ggvMz5Ln
+	SI1toR1PL/Qh/JY7VV6meLM8lPhL8dsKkw2lpO1MQLAFUsJ/PvPyt7lCQ+of14+DVtTq
+	h8qfM203xdgRZTwXP1+lI1nQQsLTyzR9fSqCIwV5+GqAzo6aJI9oju23gDL6JDWYftlp
+	4RlFxgSSO6SYmjGPKVP5R8vrbltTZIoMwCxbAY7AfKLqbVJHYPNg/xp81PHNah5Aj3cB
+	CvCw==
+X-Gm-Message-State: ALoCoQmRvYqLTvB7Q70LQf4+7NtRAcTQ/BfbSUVkSAoAtoZSOyFalepxDr82EqJTOEwsLi4+gV3X
+X-Received: by 10.194.157.195 with SMTP id wo3mr788403wjb.130.1403507712161;
+	Mon, 23 Jun 2014 00:15:12 -0700 (PDT)
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPSA id h13sm28235276wjs.2.2014.06.23.00.15.10
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 23 Jun 2014 00:15:11 -0700 (PDT)
+Message-ID: <53A7D3FE.30309@dresearch-fe.de>
+Date: Mon, 23 Jun 2014 09:15:10 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
 MIME-Version: 1.0
-X-Received: by 10.194.120.72 with SMTP id la8mr14915882wjb.24.1403489463492;
-	Sun, 22 Jun 2014 19:11:03 -0700 (PDT)
-Received: by 10.194.34.65 with HTTP; Sun, 22 Jun 2014 19:11:03 -0700 (PDT)
-In-Reply-To: <CAOLEWZU2OoLJw9zfyry4=Ju6qqxTF1NuntTCnxvBwjsE9d-BJA@mail.gmail.com>
-References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
-	<1403171993-26208-4-git-send-email-Martin.Jansa@gmail.com>
-	<CAOLEWZU2OoLJw9zfyry4=Ju6qqxTF1NuntTCnxvBwjsE9d-BJA@mail.gmail.com>
-Date: Sun, 22 Jun 2014 19:11:03 -0700
-Message-ID: <CAOLEWZUv9BntX-Yc6O5VqDEq6oOmUVrF=ot47hjM_29hryMG1A@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][WIP][PATCH 04/25] imlib2, mcnavi: Blacklist because of broken imlib2 after freetype2-config was removed
+References: <20140430143741.GL2486@jama>	<CAFeBWL5HuWex48xB_JZX_C7RMhzgfH93=AVJAkO7Qk7DUToFxg@mail.gmail.com>	<20140505164514.GM2486@jama>
+	<536A7C42.6030502@balister.org>	<20140511145337.GE22774@jama>
+	<20140616134850.GP2428@jama>	<CAP9ODKr8=FnXhWranpckyRrPrHzpfCW-fYLxF4S1o_7sYRMFVA@mail.gmail.com>	<CAOd_LFzTMonJL_17KyR6e-g8U_ByPRakj26n41qEY2-psOevsw@mail.gmail.com>	<CAP9ODKr1QTT++D-iiAwT5LgftiZdmzT34xMM_2dkHF5Ti99KnA@mail.gmail.com>	<CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>	<20140618142125.GJ2117@jama>
+	<CAOd_LFxAsqciQfwvwmsHxwxSd7=4A27y2-tWqETU0GTBBG2ZGw@mail.gmail.com>
+In-Reply-To: <CAOd_LFxAsqciQfwvwmsHxwxSd7=4A27y2-tWqETU0GTBBG2ZGw@mail.gmail.com>
+X-Enigmail-Version: 1.6
+Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,97 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 02:11:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Jun 2014 07:15:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-It sure looks like gmail doesn't like .bbappend files as attachments, so
-this is what I meant.
-
-Steve
-
-
-inherit autotools-brokensep
-
-CFLAGS_append = " -I${STAGING_INCDIR}/freetype2"
-CXXFLAGS_append = " -I${STAGING_INCDIR}/freetype2"
-LDFLAGS_append = " -lfreetype"
-
-EXTRA_OECONF += "--enable-visibility-hiding"
-
-RPROVIDES_${PN}-tests += "imlib2-tests"
-RPROVIDES_${PN}-themes += "imlib2-themes"
-RPROVIDES_${PN}-filters += "imlib2-filters"
-RPROVIDES_${PN}-loaders += "imlib2-loaders"
-
-DEBIAN_NOAUTONAME_${PN}-tests = "1"
-DEBIAN_NOAUTONAME_${PN}-themes = "1"
-DEBIAN_NOAUTONAME_${PN}-filters = "1"
-DEBIAN_NOAUTONAME_${PN}-loaders = "1"
-DEBIAN_NOAUTONAME_${PN}-filters-dbg = "1"
-DEBIAN_NOAUTONAME_${PN}-loaders-dbg = "1"
-
-
-
-On Sun, Jun 22, 2014 at 7:05 PM, Stephen Arnold <stephen.arnold42@gmail.com>
-wrote:
-
-> This one doesn't build with the pkg-config trick; it needs more help than
-> that...  The attached bbappend is what works for me, after removing the
-> blacklist.
->
-> Steve
->
->
->
-> On Thu, Jun 19, 2014 at 2:59 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->>  meta-efl/recipes-efl/efl/imlib2_svn.bb             | 2 ++
->>  meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb | 2 ++
->>  2 files changed, 4 insertions(+)
+On 18.06.2014 16:34, Cliff Brake wrote:
+> On Wed, Jun 18, 2014 at 10:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> On Wed, Jun 18, 2014 at 10:04:52AM -0400, Cliff Brake wrote:
+> 
 >>
->> diff --git a/meta-efl/recipes-efl/efl/imlib2_svn.bb
->> b/meta-efl/recipes-efl/efl/imlib2_svn.bb
->> index 8bd8032..9806de7 100644
->> --- a/meta-efl/recipes-efl/efl/imlib2_svn.bb
->> +++ b/meta-efl/recipes-efl/efl/imlib2_svn.bb
->> @@ -7,6 +7,8 @@ PROVIDES = "virtual/imlib2"
->>  PV = "1.4.5+svnr${SRCPV}"
->>  SRCREV = "${EFL_SRCREV}"
+>>> Otavio, Armin, would you like me to add your emails to the maintainer
+>>> lists in these readme's as well?
 >>
->> +PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2
->> pkg-config"
->> +
->>  inherit efl binconfig
->>  SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
->>  S = "${WORKDIR}/${SRCNAME}"
->> diff --git a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
->> b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
->> index d07b143..1a6e4a0 100644
->> --- a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
->> +++ b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
->> @@ -4,6 +4,8 @@ LICENSE = "GPLv3"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
->>  DEPENDS = "ecore evas imlib2 gpsd edje edje-native mysql5"
->>
->> +PNBLACKLIST[mcnavi] = "BROKEN: depends on broken imlib2"
->> +
->>  SRC_URI = "
->> http://www.gps-routes.info/debian/pool/main/m/mcnavi/mcnavi_${PV}.tar.gz"
->>  SRC_URI[md5sum] = "6860cde5c02a9f93c829da4b10e5a226"
->>  SRC_URI[sha256sum] =
->> "ee7f65155e91386175875fc4f72f4bc94e4e9cdb8258112632da94520ef2c349"
->> --
->> 2.0.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+>> Should I wait 1 more day before merging branch above for possible
+>> maintainer additions?
+> 
+> Yes, that would be a good idea.  I'll send a pull request tomorrow, or
+> after I hear back from others.
+> 
+> If there are other outstanding daisy patches, please let me know.
+> 
+> As far as a procedure to merge changes, I propose that initially one
+> of the branch maintainers sends a pull request to the maillist .
+> Another maintainer ack the pull request, and then Martin (or other
+> main branch maintainer) merges and pushes.  This will initially give
+> us a little bit more review.  Eventually we may transition to one of
+> us pushing changes directly after co-maintainer ack. The goal is
+> obviously to keep daisy building and as stable as possible.
+
+Ping!
+
+My live555 patch is still waiting. :(
+
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
