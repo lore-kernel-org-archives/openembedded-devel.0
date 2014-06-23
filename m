@@ -1,35 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EF856FEB5
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id BF7C46B7F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 17:21:45 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id r20so2163634wiv.16
+	Mon, 23 Jun 2014 02:05:15 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id hi2so3392311wib.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jun 2014 10:21:46 -0700 (PDT)
+	Sun, 22 Jun 2014 19:05:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=wNPx9MRYJIscmipkgTFNzi2X045ugqPaAPn+wveHFFA=;
-	b=ZcnJK/9TNLv3XfMKJjb2HvaOXyl3ZOs3FR2enKEutYwsQRgNQbdRaZDaav3eTZuruz
-	pNrgOWX2aMhAG2pC9DOPeZVPmcakI7PKzSVaa8Pp99An+vlTDJJjqKlY3UOSUa0hoe1c
-	texQTNe0vIlX4I8zRBltmFltWI196b9yRpIwtwvV2E1X0zoL3G5aO+OPXKD+C5SeFV4Q
-	9M2ADnb8W/4Fr7ExImUubDBgAo9/WSAL3ZJ9e4qO1z6B8TmiQ3TAWiccU9IUu/xEQlgV
-	YRUB9O3jsg9yZT9GkjJ6FrlvcSM9gMbtgLYyNc7MB+xY60rM5Rq+fAfleLi6hnSUM0eb
-	M4Gg==
-X-Received: by 10.194.5.103 with SMTP id r7mr13614425wjr.41.1403371306288;
-	Sat, 21 Jun 2014 10:21:46 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bq7sm15751325wib.7.2014.06.21.10.21.45 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jun 2014 10:21:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=+hpQMLn55vMClrQasfZSGGMUqYxwelfUqFh2ELEZS28=;
+	b=PQi5s6+fUuGwg/NYQZ+pPtRShSf1k0wztM1UAWZCil72XAxYjwt/tpiVo1E3Wy4epp
+	wDww0HOoQiAe53K67mnMQFmJEgU1l3NWr5se8YA/QKZY787m0sQN5v/aljuWd9U+aNc/
+	ddBMyuCQnaqDXOQB2Z08RcDUOCGj51pSydUkF2RAFU/Yy5waR91ed+VQksTkV7pkoKuL
+	lxM1C2vc3SXAlOB04SN+ZM5vsT/eR7CB80NnG+5Lfax35Pwoo49SYEs+Kq1GkfOBxW/u
+	r8YY5KMXNN8QSmNWv33N2YkuHR9NP09MJlXag3MadxbFum/ABRdGfTyXakimioK2qsk0
+	DZhw==
+MIME-Version: 1.0
+X-Received: by 10.180.8.136 with SMTP id r8mr21968661wia.60.1403489116430;
+	Sun, 22 Jun 2014 19:05:16 -0700 (PDT)
+Received: by 10.194.34.65 with HTTP; Sun, 22 Jun 2014 19:05:16 -0700 (PDT)
+In-Reply-To: <1403171993-26208-4-git-send-email-Martin.Jansa@gmail.com>
+References: <1403171993-26208-1-git-send-email-Martin.Jansa@gmail.com>
+	<1403171993-26208-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 22 Jun 2014 19:05:16 -0700
+Message-ID: <CAOLEWZU2OoLJw9zfyry4=Ju6qqxTF1NuntTCnxvBwjsE9d-BJA@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jun 2014 19:21:47 +0200
-Message-Id: <1403371307-22839-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][PATCH] python-cython: upgrade to 2.20.2 and fix packaging QA issue
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][WIP][PATCH 04/25] imlib2, mcnavi: Blacklist because of broken imlib2 after freetype2-config was removed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +42,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jun 2014 17:21:51 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 02:05:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../python/{python-cython_0.20.1.bb => python-cython_0.20.2.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-cython_0.20.1.bb => python-cython_0.20.2.bb} (75%)
+This one doesn't build with the pkg-config trick; it needs more help than
+that...  The attached bbappend is what works for me, after removing the
+blacklist.
 
-diff --git a/meta-oe/recipes-devtools/python/python-cython_0.20.1.bb b/meta-oe/recipes-devtools/python/python-cython_0.20.2.bb
-similarity index 75%
-rename from meta-oe/recipes-devtools/python/python-cython_0.20.1.bb
-rename to meta-oe/recipes-devtools/python/python-cython_0.20.2.bb
-index 6c7507b..9f357ec 100644
---- a/meta-oe/recipes-devtools/python/python-cython_0.20.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-cython_0.20.2.bb
-@@ -10,7 +10,7 @@ BBCLASSEXTEND = "native"
- SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
--SRC_URI[md5sum] = "52431696c64e618036537c4d9aa79d99"
--SRC_URI[sha256sum] = "31a563744a21d7b10355f25a3bca96b37ec5d32bdecfc75e93d65a5f7e62766c"
-+SRC_URI[md5sum] = "7fc13e1c665bdf7cea19ad08906af91f"
-+SRC_URI[sha256sum] = "ed13b606a2aeb5bd6c235f8ed6c9988c99d01a033d0d21d56137c13d5c7be63f"
- 
--inherit distutils
-+inherit setuptools
--- 
-2.0.0
+Steve
 
+
+On Thu, Jun 19, 2014 at 2:59 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-efl/recipes-efl/efl/imlib2_svn.bb             | 2 ++
+>  meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb | 2 ++
+>  2 files changed, 4 insertions(+)
+>
+> diff --git a/meta-efl/recipes-efl/efl/imlib2_svn.bb
+> b/meta-efl/recipes-efl/efl/imlib2_svn.bb
+> index 8bd8032..9806de7 100644
+> --- a/meta-efl/recipes-efl/efl/imlib2_svn.bb
+> +++ b/meta-efl/recipes-efl/efl/imlib2_svn.bb
+> @@ -7,6 +7,8 @@ PROVIDES = "virtual/imlib2"
+>  PV = "1.4.5+svnr${SRCPV}"
+>  SRCREV = "${EFL_SRCREV}"
+>
+> +PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2
+> pkg-config"
+> +
+>  inherit efl binconfig
+>  SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
+>  S = "${WORKDIR}/${SRCNAME}"
+> diff --git a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+> b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+> index d07b143..1a6e4a0 100644
+> --- a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+> +++ b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+> @@ -4,6 +4,8 @@ LICENSE = "GPLv3"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+>  DEPENDS = "ecore evas imlib2 gpsd edje edje-native mysql5"
+>
+> +PNBLACKLIST[mcnavi] = "BROKEN: depends on broken imlib2"
+> +
+>  SRC_URI = "
+> http://www.gps-routes.info/debian/pool/main/m/mcnavi/mcnavi_${PV}.tar.gz"
+>  SRC_URI[md5sum] = "6860cde5c02a9f93c829da4b10e5a226"
+>  SRC_URI[sha256sum] =
+> "ee7f65155e91386175875fc4f72f4bc94e4e9cdb8258112632da94520ef2c349"
+> --
+> 2.0.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
