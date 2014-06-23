@@ -1,34 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 389E365F1B
+Return-Path: <kapare@rogue-research.com>
+Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 7483966055
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 13:27:31 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id l18so6301534wgh.28
+	Mon, 23 Jun 2014 13:40:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.rogue-research.com (Postfix) with ESMTP id 863C13A29577
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 06:27:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=hsTXVmHHUsS1wGkg1g+5G0gTRrRXWmkVJU8Cp8viPOk=;
-	b=kobIYWfSf573FxJSXUmWj2Be90rPsGqU7E2Qle+sZcs2r9G2t+hjOw5LdFkTWCU6Dr
-	tDHsU4sM7uFukBlYivAPsv9/axs2W0I4KaMXmpP7o8V+03tEedSC9POlU7tqrsMcQTbO
-	20oejbcTyI38ny2qM3AywP25jMST/bqzLnyBtOr770cN/0PzjN8+1ctRaGVO4NG/lgqB
-	cnoscxyqujB1+Q9XNebteKK0wqFb4AFRT0q6jEKxBN/iD+RPU94u61QZK3L7WIdXHcZG
-	FjSLVNBc0ITpwhDqq0wJgzeh7uYCBIDCxIgW1OCq9t5uQT8zp4sebjlb6yK4NYEZEdX+
-	swnA==
-X-Received: by 10.194.22.100 with SMTP id c4mr27811891wjf.89.1403530047958;
-	Mon, 23 Jun 2014 06:27:27 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fq2sm33464769wib.2.2014.06.23.06.27.27 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Jun 2014 06:27:27 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Mon, 23 Jun 2014 09:40:33 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at rogue-research.com
+Received: from mail.rogue-research.com ([127.0.0.1])
+	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id dWHZditHdge2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jun 2014 09:40:29 -0400 (EDT)
+Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
+	[209.85.220.172])
+	by mail.rogue-research.com (Postfix) with ESMTPSA id 056083A29570
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jun 2014 09:40:28 -0400 (EDT)
+Received: by mail-vc0-f172.google.com with SMTP id hy10so5928440vcb.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Jun 2014 06:40:28 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.221.44.73 with SMTP id uf9mr19521177vcb.9.1403530828194;
+	Mon, 23 Jun 2014 06:40:28 -0700 (PDT)
+Received: by 10.58.85.131 with HTTP; Mon, 23 Jun 2014 06:40:28 -0700 (PDT)
+In-Reply-To: <20140621074733.GD2117@jama>
+References: <CACgAsMdrN75Mrk7Ehuf7=GjzaJmTLMQoWHgDcJ6EshRCLWhURQ@mail.gmail.com>
+	<CACgAsMf5GQ-8325U4aGeNDrM_WtRkmK9bxQuyUSBQw0v_buOSA@mail.gmail.com>
+	<20140619232132.GV2117@jama>
+	<CACgAsMdCCZNcNwmLF-BEEcY=JuTtMCPL9K+9TEhCKU7Q+DAs4g@mail.gmail.com>
+	<20140620081307.GW2117@jama>
+	<CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
+	<20140620234853.GA2117@jama>
+	<CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
+	<20140621010508.GC2117@jama>
+	<CACgAsMdguugQZiTiOo8aWaBZFCYnsWUtp7-0KWu7VdGvdBDCSA@mail.gmail.com>
+	<20140621074733.GD2117@jama>
+Date: Mon, 23 Jun 2014 09:40:28 -0400
+Message-ID: <CACgAsMdQgREcvnQqnH5942TMzAR1LJr5bkHwm0nD+G2wNarEMg@mail.gmail.com>
+From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jun 2014 15:25:32 +0200
-Message-Id: <1403529932-12048-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-Subject: [meta-efl][PATCH] imlib2: upgrade to use pkg-config for freetype2 support
+Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,72 +55,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 13:27:33 -0000
+X-List-Received-Date: Mon, 23 Jun 2014 13:40:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* convert from old svn repo to new (legacy) git repo
-* fixed upstream:
-  commit fe82b9760c7ceb25747c6e634bc827b4cc8ecabd
-  Author: Kim Woelders <kim@woelders.dk>
-  Date:   Thu Jul 4 20:08:53 2013 +0200
+On Sat, Jun 21, 2014 at 3:47 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Fri, Jun 20, 2014 at 11:35:34PM -0400, Kevyn-Alexandre Par=C3=A9 wrote=
+:
+>> On Fri, Jun 20, 2014 at 9:05 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > On Fri, Jun 20, 2014 at 08:22:39PM -0400, Kevyn-Alexandre Par=C3=A9 wr=
+ote:
+>> >> On Fri, Jun 20, 2014 at 7:48 PM, Martin Jansa <martin.jansa@gmail.com=
+> wrote:
+>> >> > On Fri, Jun 20, 2014 at 06:30:09PM -0400, Kevyn-Alexandre Par=C3=A9=
+ wrote:
+>> >> >> [1] I still don't understand why adding qtwebkit IMAGE_INSTALL mak=
+e my
+>> >> >> build fail with:
+>> >> >> ERROR: qtwebkit not found in the base feeds
+>> >> >> LOG: http://pastebin.com/fx2Zi9vW
+>> >> >> Any clue what I'm doing wrong?
+>> >> >
+>> >> > Check which packages (if any) were created by qtwebkit recipe, if a=
+ny
+>> >> > then read log.do_configure for possible clues.
+>> >> >
+>> >>
+>> >> qtwebkit-dbg and qtwebkit-dev is part of deploy rpm not qtwebkit? In
+>> >> pkgdata these only to have ".packaged"
+>> >> http://pastebin.com/0ugj2NVF
+>> >>
+>> >> log.do_configure:
+>> >> http://pastebin.com/cXWdDXmy
+>> >
+>> > The WebKit build was disabled for the following reasons:
+>> >     * ICU is required. To build QtWebKit with Qt 5 you need to build Q=
+t
+>> >      5 with libICU support. Check for ICU support being mentioned in
+>> >      qtbase/config.summary.
+>> >
+>>
+>> Yes you told me that in previous email I when to
+>> layers.openembedded.org to check
+>>
+>> icu  53.1 International Component for Unicode libraries   openembedded-c=
+ore
+>>
+>> I add it in PACKAGECONFIG_append_pn-qtbase and IMAGE_INSTALL I thought
+>> it will be enough?
+>>
+>> Obviously, I'm still missing somethink
+>>
+>> qtbase/config.summary? you mean qtbase.inc?
+>
+> I've just pasted it for you from the log.do_configure you sent me,
+> please _read_ it.
+>
 
-    Autofoo updates.
+Thanks for trying to make me _see_ what I'm clearly not seeing yet...
 
-    - Eliminate deprecated AC_TRY_CPP.
-    - Use pkg-config in stead of freetype-config to get freetype info.
-    - Eliminate my_includes/my_libs.
-    - Clean up include paths.
+I cleanall qtbase & my image since I was having multiple
+log.do_configure and could have looked at the wrong one...
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/{imlib2_svn.bb => imlib2_git.bb} | 12 +++++-------
- meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb        |  2 --
- 2 files changed, 5 insertions(+), 9 deletions(-)
- rename meta-efl/recipes-efl/efl/{imlib2_svn.bb => imlib2_git.bb} (84%)
+My image with IMAGE_INSTALL & PACKAGECONFIG:
+http://pastebin.com/4JCWb5cY
 
-diff --git a/meta-efl/recipes-efl/efl/imlib2_svn.bb b/meta-efl/recipes-efl/efl/imlib2_git.bb
-similarity index 84%
-rename from meta-efl/recipes-efl/efl/imlib2_svn.bb
-rename to meta-efl/recipes-efl/efl/imlib2_git.bb
-index 9806de7..dc91763 100644
---- a/meta-efl/recipes-efl/efl/imlib2_svn.bb
-+++ b/meta-efl/recipes-efl/efl/imlib2_git.bb
-@@ -1,17 +1,15 @@
- SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
- LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
--# can also depend on tiff34, ungif or gif, z, bz2, id3tag
-+
- DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
- PROVIDES = "virtual/imlib2"
--PV = "1.4.5+svnr${SRCPV}"
--SRCREV = "${EFL_SRCREV}"
--
--PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2 pkg-config"
-+PV = "1.4.6+gitr${SRCPV}"
-+SRCREV = "560a58e61778d84953944f744a025af6ce986334"
- 
- inherit efl binconfig
--SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
--S = "${WORKDIR}/${SRCNAME}"
-+SRC_URI = "git://git.enlightenment.org/legacy/${BPN}.git"
-+S = "${WORKDIR}/git"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
-diff --git a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
-index 1a6e4a0..d07b143 100644
---- a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
-+++ b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
-@@ -4,8 +4,6 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
- DEPENDS = "ecore evas imlib2 gpsd edje edje-native mysql5"
- 
--PNBLACKLIST[mcnavi] = "BROKEN: depends on broken imlib2"
--
- SRC_URI = "http://www.gps-routes.info/debian/pool/main/m/mcnavi/mcnavi_${PV}.tar.gz"
- SRC_URI[md5sum] = "6860cde5c02a9f93c829da4b10e5a226"
- SRC_URI[sha256sum] = "ee7f65155e91386175875fc4f72f4bc94e4e9cdb8258112632da94520ef2c349"
--- 
-2.0.0
+Here the way I check that icu is added as part of my image:
+bitbake -e nirs-console-image | grep -n5 PACKAGECONFIG
+2560-# $B_pn-strace
+2561-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yoc=
+to_build/src/poky/meta/conf/distro/include/seperatebuilddir.inc:645
+2562-#     "${SEPB}"
+2563-B_pn-strace=3D"/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_po=
+int/yocto_build/src/build/tmp/work/overo-poky-linux-gnueabi/nirs-console-im=
+age/1.0-r0/build"
+2564-#
+2565:# $PACKAGECONFIG [2 operations]
+2566-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yoc=
+to_build/src/poky/meta/conf/documentation.conf:308
+2567-#     [doc] "This variable provides a means of enabling or
+disabling features of a recipe on a per-recipe basis."
+2568-#   _append[pn-qtbase]
+/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/=
+poky/meta-nirs/recipes-images/gumstix/nirs-console-image.bb:17
+2569-#     "   developer   tests   examples   icu   alsa-lib   gles2
+accessibility   glib-2.0   tslib   linuxfb   sqlite3 "
 
+
+> Check config.summary in qtbase WORKDIR (where you built qtbase to be
+> sure it was enabled) and check with bitbake -e that it's really in your
+> PACKAGECONFIG for qtbase.
+
+My bad I didn't check in the WORKDIR only in meta-qt5...
+
+Check config.summary:
+find tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/ -name config.summa=
+ry
+tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.2.1-r0/build/config.su=
+mmary
+
+http://pastebin.com/gZ2Nqa5g
+
+Found that ICU is disable:
+ 27 Support enabled for:
+ 28   Accessibility .......... no
+ 29   ALSA ................... no
+ 30   CUPS ................... no
+ 31   FontConfig ............. no
+ 32   FreeType ............... qt
+ 33   Iconv .................. no
+ 34   ICU .................... no
+
+Clearly I'm doing something wrong!
+
+[1] Will _read_ and try to make the config.summary change to yes...
+
+[2] When i'm setting my PACKAGECONFIG and i'm having one like:
+PACKAGECONFIG[gles2] =3D "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
+
+I'm suppose to set:
+PACKAGECONFIG_append_pn-qtbase =3D " virtual/libgles2"
+and not
+PACKAGECONFIG_append_pn-qtbase =3D " gles2"
+?
+
+BR,
+
+-KA
 
