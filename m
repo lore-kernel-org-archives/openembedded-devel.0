@@ -1,36 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id CC8736ABDA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 389E365F1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 13:21:00 +0000 (UTC)
-Received: by mail-yh0-f53.google.com with SMTP id b6so4989201yha.12
+	Mon, 23 Jun 2014 13:27:31 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id l18so6301534wgh.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 06:21:01 -0700 (PDT)
+	Mon, 23 Jun 2014 06:27:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=O9Uhiqt3xIZFpd8wgUdLgk6Dc10hXgjlP7rbLddnrD4=;
-	b=XDu3nQmzFcyIISj7Wjk3qHJrtu79wfVHwYJx7UbIOPAKx/w9zBZXotRWApLY0c0Y+w
-	5Ehgt2VJilX9cAmjyazmO/AOBed8KAdEGyjc9jvhyHu/cwTt4998aPp/772Ld15tPAb/
-	plJ/x6oQ2dl3PivGeeHPYPExa6zcJTisUqoDJC7xaoRSQzePvcTz4wOzk9wVQJ/+WDJP
-	ST1z6EQAa63EQts4l65W7mDRCH/g3BUbcFxYDj3VqXpcsG4IyBUu89p6sVSPPOewxnRC
-	h6N2AfFhAbMwOj/pWyuw0nncBOBbxq/jQJJqCJW3Fxx3+jPIkInS32Yfd9vMCI9vxK57
-	LEzQ==
-MIME-Version: 1.0
-X-Received: by 10.236.207.225 with SMTP id n61mr3617349yho.148.1403529661242; 
-	Mon, 23 Jun 2014 06:21:01 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.209.68 with HTTP; Mon, 23 Jun 2014 06:21:01 -0700 (PDT)
-In-Reply-To: <20140619115701.GP2117@jama>
-References: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
-	<20140619115701.GP2117@jama>
-Date: Mon, 23 Jun 2014 10:21:01 -0300
-X-Google-Sender-Auth: Aw5JdHpgx4GAPggYOtNIta7UqJk
-Message-ID: <CAP9ODKp3AEoFrbuaE2x1pPe+5zcEM3Ep_9gSjSOpyKwNbF6T4w@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][daisy] pull request, update README's, live555 fix
+	h=from:to:cc:subject:date:message-id;
+	bh=hsTXVmHHUsS1wGkg1g+5G0gTRrRXWmkVJU8Cp8viPOk=;
+	b=kobIYWfSf573FxJSXUmWj2Be90rPsGqU7E2Qle+sZcs2r9G2t+hjOw5LdFkTWCU6Dr
+	tDHsU4sM7uFukBlYivAPsv9/axs2W0I4KaMXmpP7o8V+03tEedSC9POlU7tqrsMcQTbO
+	20oejbcTyI38ny2qM3AywP25jMST/bqzLnyBtOr770cN/0PzjN8+1ctRaGVO4NG/lgqB
+	cnoscxyqujB1+Q9XNebteKK0wqFb4AFRT0q6jEKxBN/iD+RPU94u61QZK3L7WIdXHcZG
+	FjSLVNBc0ITpwhDqq0wJgzeh7uYCBIDCxIgW1OCq9t5uQT8zp4sebjlb6yK4NYEZEdX+
+	swnA==
+X-Received: by 10.194.22.100 with SMTP id c4mr27811891wjf.89.1403530047958;
+	Mon, 23 Jun 2014 06:27:27 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	fq2sm33464769wib.2.2014.06.23.06.27.27 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 23 Jun 2014 06:27:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Jun 2014 15:25:32 +0200
+Message-Id: <1403529932-12048-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-efl][PATCH] imlib2: upgrade to use pkg-config for freetype2 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 13:21:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Jun 2014 13:27:33 -0000
 
-On Thu, Jun 19, 2014 at 8:57 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Jun 19, 2014 at 07:52:51AM -0400, Cliff Brake wrote:
->> The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731e2acf:
->>
->>   python-efl: add dependency on python-dbus and lua to always build
->> edje and elementary bindings (2014-05-12 10:08:28 +0200)
->>
->> are available in the git repository at:
->>
->>   https://github.com/cbrake/meta-openembedded.git daisy-to-merge
->>
->> for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb9:
->>
->>   live555: fix fetch problem (2014-06-18 13:42:35 -0400)
->
-> Thank you!
->
-> Acked-By: Martin Jansa <Martin.Jansa@gmail.com>
+* convert from old svn repo to new (legacy) git repo
+* fixed upstream:
+  commit fe82b9760c7ceb25747c6e634bc827b4cc8ecabd
+  Author: Kim Woelders <kim@woelders.dk>
+  Date:   Thu Jul 4 20:08:53 2013 +0200
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+    Autofoo updates.
 
+    - Eliminate deprecated AC_TRY_CPP.
+    - Use pkg-config in stead of freetype-config to get freetype info.
+    - Eliminate my_includes/my_libs.
+    - Clean up include paths.
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/{imlib2_svn.bb => imlib2_git.bb} | 12 +++++-------
+ meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb        |  2 --
+ 2 files changed, 5 insertions(+), 9 deletions(-)
+ rename meta-efl/recipes-efl/efl/{imlib2_svn.bb => imlib2_git.bb} (84%)
+
+diff --git a/meta-efl/recipes-efl/efl/imlib2_svn.bb b/meta-efl/recipes-efl/efl/imlib2_git.bb
+similarity index 84%
+rename from meta-efl/recipes-efl/efl/imlib2_svn.bb
+rename to meta-efl/recipes-efl/efl/imlib2_git.bb
+index 9806de7..dc91763 100644
+--- a/meta-efl/recipes-efl/efl/imlib2_svn.bb
++++ b/meta-efl/recipes-efl/efl/imlib2_git.bb
+@@ -1,17 +1,15 @@
+ SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
+ LICENSE = "MIT BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
+-# can also depend on tiff34, ungif or gif, z, bz2, id3tag
++
+ DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
+ PROVIDES = "virtual/imlib2"
+-PV = "1.4.5+svnr${SRCPV}"
+-SRCREV = "${EFL_SRCREV}"
+-
+-PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2 pkg-config"
++PV = "1.4.6+gitr${SRCPV}"
++SRCREV = "560a58e61778d84953944f744a025af6ce986334"
+ 
+ inherit efl binconfig
+-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
+-S = "${WORKDIR}/${SRCNAME}"
++SRC_URI = "git://git.enlightenment.org/legacy/${BPN}.git"
++S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
+diff --git a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+index 1a6e4a0..d07b143 100644
+--- a/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
++++ b/meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb
+@@ -4,8 +4,6 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
+ DEPENDS = "ecore evas imlib2 gpsd edje edje-native mysql5"
+ 
+-PNBLACKLIST[mcnavi] = "BROKEN: depends on broken imlib2"
+-
+ SRC_URI = "http://www.gps-routes.info/debian/pool/main/m/mcnavi/mcnavi_${PV}.tar.gz"
+ SRC_URI[md5sum] = "6860cde5c02a9f93c829da4b10e5a226"
+ SRC_URI[sha256sum] = "ee7f65155e91386175875fc4f72f4bc94e4e9cdb8258112632da94520ef2c349"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.0.0
+
 
