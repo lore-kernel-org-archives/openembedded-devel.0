@@ -1,45 +1,36 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id EF50F66007
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 11:13:32 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id n3so4041659wiv.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 04:13:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=Elf3lUheG2yx65TekdzgcPSWB97HOmiCN+JJM3WmgsU=;
-	b=Vr2j/wzLrsG2M8qc8kpNA6wIMjAKrOXkh3kX+bgBiTQCVZe8yh98zcmIS8lNJCFmYn
-	+20JmlZ1V9DInerfhex/ss1gA/oY+ZErAJy61XKsA9+ncwsHrdBr4DOCM6unpjyCN3KR
-	uNC14lU3yazFdLe4ifkte+1017P/eT2Pr5NIvkxS67AI+miCKOwrD21OO/9xub51P5nU
-	FnjNfDZImgpjHKa9fKPANoeyA+OKGrA3SZs1K7/5/UoKACzBb3MmV57CF4nNUbZi/oal
-	5P26RfyUTJ72Jhd0ADHijkYz84HHgJrSofWpZtX9NfXvZq+MSG6uas6o2a8uNpOX994S
-	5ypQ==
-X-Gm-Message-State: ALoCoQktz1so8nW5ifwy7mPs9Sl3zJWRDORdpRTd5UL2mXvd5PMwl/4oz2w+HlIc18c6Tm17rIdo
-X-Received: by 10.194.89.168 with SMTP id bp8mr27084221wjb.73.1403522009747;
-	Mon, 23 Jun 2014 04:13:29 -0700 (PDT)
-Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
-	by mx.google.com with ESMTPSA id ge6sm12081181wic.0.2014.06.23.04.13.28
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 23 Jun 2014 04:13:29 -0700 (PDT)
-Message-ID: <53A80BD5.6030208@dresearch-fe.de>
-Date: Mon, 23 Jun 2014 13:13:25 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 33E9165F14;
+	Mon, 23 Jun 2014 11:20:52 +0000 (UTC)
+Received: by mail-we0-f180.google.com with SMTP id x48so6826129wes.11
+	for <multiple recipients>; Mon, 23 Jun 2014 04:20:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=UWuP57iUN0qsYKVxc3KF7kpzkplGAiYOiP0tT+SZiv8=;
+	b=LZ4r9pbjSe6UGf+2miYeMw87N/c6xQjixcNl3wcnX4td/FEYfYIEC/id2neGAyegFw
+	UH6WPrDcXIS85d5/PRoXVT+Dr8DBhKtAXJCkMALCWSGC3Eehi3zihH3w6PXQUKoph0ey
+	V75oP4PKW7reRc/QehEKS2jQy9UWQJpaW0wrYoetIgY/7JMrF/+FCwxa6RPplsIgtxUJ
+	SmfNp2B7HC53vPOHaBZRQEJLYh8KRKRW0evr9dWOKTbEpZZ4CJbKcNNrjwhNRBSZqVzt
+	jJunvXjRMKeaSvhA1GVXNZEYUOgr17V3zH8heAeFz1znWKNdS0HEId9n2V8b36ngA2eT
+	wefw==
+X-Received: by 10.194.110.100 with SMTP id hz4mr27192143wjb.65.1403522449770; 
+	Mon, 23 Jun 2014 04:20:49 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	gp15sm35665896wjc.10.2014.06.23.04.20.48 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 23 Jun 2014 04:20:49 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 23 Jun 2014 13:20:50 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140623112050.GD2437@jama>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <536A7C42.6030502@balister.org>
-	<20140511145337.GE22774@jama>	<20140616134850.GP2428@jama>	<CAP9ODKr8=FnXhWranpckyRrPrHzpfCW-fYLxF4S1o_7sYRMFVA@mail.gmail.com>	<CAOd_LFzTMonJL_17KyR6e-g8U_ByPRakj26n41qEY2-psOevsw@mail.gmail.com>	<CAP9ODKr1QTT++D-iiAwT5LgftiZdmzT34xMM_2dkHF5Ti99KnA@mail.gmail.com>	<CAOd_LFz4ArrStfheb4+KKhwhWPDft5BYjqNk7Y05Ja=oDk+ZSg@mail.gmail.com>	<20140618142125.GJ2117@jama>	<CAOd_LFxAsqciQfwvwmsHxwxSd7=4A27y2-tWqETU0GTBBG2ZGw@mail.gmail.com>	<53A7D3FE.30309@dresearch-fe.de>
-	<20140623110143.GB2437@jama>
-In-Reply-To: <20140623110143.GB2437@jama>
-X-Enigmail-Version: 1.6
-Subject: Re: daisy branch for meta-openembedded, meta-qt5 / maintainer wanted
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, wrong PACKAGE_ARCHs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,52 +44,204 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 11:13:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Jun 2014 11:21:06 -0000
+X-Groupsio-MsgNum: 50521
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cHMo6Wbp1wrKhbfi"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--cHMo6Wbp1wrKhbfi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 23.06.2014 13:01, Martin Jansa wrote:
-> On Mon, Jun 23, 2014 at 09:15:10AM +0200, Steffen Sledz wrote:
->> On 18.06.2014 16:34, Cliff Brake wrote:
->>> On Wed, Jun 18, 2014 at 10:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>>> On Wed, Jun 18, 2014 at 10:04:52AM -0400, Cliff Brake wrote:
->>> 
->>>> 
->>>>> Otavio, Armin, would you like me to add your emails to the maintainer lists in these readme's as well?
->>>> 
->>>> Should I wait 1 more day before merging branch above for possible maintainer additions?
->>> 
->>> Yes, that would be a good idea.  I'll send a pull request tomorrow, or after I hear back from others.
->>> 
->>> If there are other outstanding daisy patches, please let me know.
->>> 
->>> As far as a procedure to merge changes, I propose that initially one of the branch maintainers sends a pull request to the maillist . Another maintainer ack the pull request, and then Martin (or other main branch maintainer) merges and pushes.  This will initially give us a little bit more review.  Eventually we may transition to one of us pushing changes directly after co-maintainer ack. The goal is obviously to keep daisy building and as stable as possible.
->> 
->> Ping!
->> 
->> My live555 patch is still waiting. :(
-> 
-> I've just merged it, but next time such patch needs to be merged in master first (where it was merged by me on Saturday) and then cherry-picked to release branch.
+This is new report generated with oe-core/scripts/sstate-diff-machines.sh
 
-Great. Thx.
+To reproduce it, you need "qemux86copy" MACHINE which is the same as
+qemux86 only with different name (to simulate 2 MACHINEs with same
+TUNE_PKGARCH in oe-core). You can find commit adding "qemux86copy" in
+jansa/master branch:
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Djansa/master
 
-- -- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+Current logs:
+http://logs.nslu2-linux.org/buildlogs/oe/world/log.signatures.20140623_1031=
+33.log/
+
+I've sent fix fir firefox-l10n-*.
+jansa/master branches are containing couple of pending changes (mostly
+to remove allarch), so if you try it with current master branches it
+will be (a lot) worse.
+
+ERROR: 123 issues were found in these recipes: dracut firefox-l10n-*
+font-alias gtk-theme-neo initscripts ipsec-tools lmsensors oprofile
+oprofileui oprofileui-server polkit-group-rule-datetime
+polkit-group-rule-network shr-theme-neo sysvinit tipcutils vpnc webmin
+xfce4-session xl2tpd xserver-common xserver-nodm-init xuser-account
+
+The best way to read and fix this issues is to fix do_configure
+signatures first, because otherwise the same recipes are listed also in
+do_populate_sysroot and do_package_write_ipk logs (I've tried to remove
+"duplicities" in this e-mail)
+
+ =3D=3D=3D Comparing signatures for task do_configure.sigdata between qemux=
+86copy and qemux86 =3D=3D=3D
+ERROR: ipsec-tools different signature for task do_configure.sigdata betwee=
+n qemux86copy and qemux86
+Hash for dependent task linux-yocto_3.14.bb.do_populate_sysroot changed fro=
+m 044d21e2b15b62951de269546a864761 to 493ec6f39469f86091bf227da56ab374
+
+ERROR: oprofile different signature for task do_configure.sigdata between q=
+emux86copy and qemux86
+Hash for dependent task linux-yocto_3.14.bb.do_populate_sysroot changed fro=
+m 044d21e2b15b62951de269546a864761 to 493ec6f39469f86091bf227da56ab374
+
+ERROR: tipcutils different signature for task do_configure.sigdata between =
+qemux86copy and qemux86
+Hash for dependent task linux-yocto_3.14.bb.do_populate_sysroot changed fro=
+m 044d21e2b15b62951de269546a864761 to 493ec6f39469f86091bf227da56ab374
+
+ERROR: xl2tpd different signature for task do_configure.sigdata between qem=
+ux86copy and qemux86
+Hash for dependent task linux-yocto_3.14.bb.do_populate_sysroot changed fro=
+m 044d21e2b15b62951de269546a864761 to 493ec6f39469f86091bf227da56ab374
+
+
+
+ =3D=3D=3D Comparing signatures for task do_configure.sigdata between qemux=
+86copy and qemuarm =3D=3D=3D
+ERROR: polkit-group-rule-datetime different signature for task do_configure=
+=2Esigdata between qemux86copy and qemuarm
+Hash for dependent task shadow_4.1.4.3.bb.do_populate_sysroot changed from =
+10bd48d65ec6c48ffd47a8c0680dd4f0 to 75c0567c089f8bcd655cad984616afd9
+Hash for dependent task polkit_0.111.bb.do_populate_sysroot changed from 5b=
+2f6dca4e9a791b6ddb437de8f1d37a to 30b2a1b569a5fde24929ae2bcb8c3d47
+Hash for dependent task shadow-sysroot_4.1.4.3.bb.do_populate_sysroot chang=
+ed from 4e69e139e2362a936f83db7904d192eb to ad29f0109974d30e90e4780b97c503e6
+Hash for dependent task base-passwd_3.5.29.bb.do_populate_sysroot changed f=
+rom 0629faf9b6a696e2bcda98cf9823c68f to 1e54ce0b06a0e76ba4196791ad628e1e
+
+ERROR: polkit-group-rule-network different signature for task do_configure.=
+sigdata between qemux86copy and qemuarm
+Hash for dependent task shadow_4.1.4.3.bb.do_populate_sysroot changed from =
+10bd48d65ec6c48ffd47a8c0680dd4f0 to 75c0567c089f8bcd655cad984616afd9
+Hash for dependent task polkit_0.111.bb.do_populate_sysroot changed from 5b=
+2f6dca4e9a791b6ddb437de8f1d37a to 30b2a1b569a5fde24929ae2bcb8c3d47
+Hash for dependent task shadow-sysroot_4.1.4.3.bb.do_populate_sysroot chang=
+ed from 4e69e139e2362a936f83db7904d192eb to ad29f0109974d30e90e4780b97c503e6
+Hash for dependent task base-passwd_3.5.29.bb.do_populate_sysroot changed f=
+rom 0629faf9b6a696e2bcda98cf9823c68f to 1e54ce0b06a0e76ba4196791ad628e1e
+
+ERROR: xserver-common different signature for task do_configure.sigdata bet=
+ween qemux86copy and qemuarm
+Hash for dependent task eglibc_2.19.bb.do_populate_sysroot changed from ce5=
+bce3e618d84fc771356c66878307f to f007aed17e892d1acf8d6c5a4a253219
+
+ERROR: xuser-account different signature for task do_configure.sigdata betw=
+een qemux86copy and qemuarm
+Hash for dependent task shadow_4.1.4.3.bb.do_populate_sysroot changed from =
+10bd48d65ec6c48ffd47a8c0680dd4f0 to 75c0567c089f8bcd655cad984616afd9
+Hash for dependent task base-passwd_3.5.29.bb.do_populate_sysroot changed f=
+rom 0629faf9b6a696e2bcda98cf9823c68f to 1e54ce0b06a0e76ba4196791ad628e1e
+Hash for dependent task shadow-sysroot_4.1.4.3.bb.do_populate_sysroot chang=
+ed from 4e69e139e2362a936f83db7904d192eb to ad29f0109974d30e90e4780b97c503e6
+
+
+ =3D=3D=3D Comparing signatures for task do_package_write_ipk.sigdata betwe=
+en qemux86copy and qemuarm =3D=3D=3D
+ERROR: font-alias different signature for task do_package_write_ipk.sigdata=
+ between qemux86copy and qemuarm
+Hash for dependent task font-util_1.3.0.bb.do_packagedata changed from 687b=
+4e8a953953232a9cbd266d613fc5 to 9c354c97b1eb29a0df93ff294e0a3d4d
+
+ERROR: gtk-theme-neo different signature for task do_package_write_ipk.sigd=
+ata between qemux86copy and qemuarm
+Hash for dependent task gtk+_2.24.22.bb.do_packagedata changed from 26f2589=
+8265c37c9db595c3d08e1a0e5 to da25e6cd8624867d942d39e894e9def8
+
+ERROR: shr-theme-neo different signature for task do_package_write_ipk.sigd=
+ata between qemux86copy and qemuarm
+Hash for dependent task icon-theme-neo_git.bb.do_packagedata changed from 3=
+ea1a79edcc005040265cb57a7b77eda to 2673548c476d8de5e354e1582d3380b5
+
+ERROR: webmin different signature for task do_package_write_ipk.sigdata bet=
+ween qemux86copy and qemuarm
+Hash for dependent task webmin_1.620.bb.do_package changed from 1a4ee0753ef=
+f9a8e392e851b6bbe252d to 36578d90d5866248da6afaa50fd586a1
+Hash for dependent task perl_5.14.3.bb.do_packagedata changed from c7f95281=
+2f189c608e14e0862807ae27 to 24b9ff1de4f046333d292aa97673a8d2
+Hash for dependent task webmin_1.620.bb.do_packagedata changed from bd1b17c=
+957d4091a0f6d3ff6a9acb0fe to b584e5a6a90eeb320046c457b03a607f
+
+ERROR: xserver-common different signature for task do_package_write_ipk.sig=
+data between qemux86copy and qemuarm
+Hash for dependent task xinput-calibrator_git.bb.do_packagedata changed fro=
+m 8b02b1d0c82cca35fea242c9d354d536 to 578f5a890ebd7a9bcc37b56d26a66819
+Hash for dependent task xserver-common_1.34.bb.do_packagedata changed from =
+2fed45862b973793f9bbd4bbcb673b00 to 7f8cf0da84516eef9660abb2eeaba45f
+Hash for dependent task xdpyinfo_1.3.1.bb.do_packagedata changed from 1c217=
+2f825573d239090c93dba23624f to 405928242519b5028ccaad1fd747f36a
+Hash for dependent task xserver-common_1.34.bb.do_package changed from e273=
+1ac3f576611edd74b6f98ef91d3d to 6002c1e420b45f8a3b339721c36071cc
+Hash for dependent task xmodmap_1.0.8.bb.do_packagedata changed from 06a3ab=
+64bde87a30239a9c78be4c1e82 to e5e0ce3137886fdeac6f0607b21f7914
+Hash for dependent task xrandr_1.4.2.bb.do_packagedata changed from 47ced14=
+b5fe1b2692ad7a219367dbebb to 4e422e31bc487f6300e22ab328308f77
+Hash for dependent task fbset_2.1.bb.do_packagedata changed from 7a681e09fe=
+6b28c38c9a3654d741ee05 to fde25fb85cbbfa25b2b6408984731203
+
+ERROR: xserver-nodm-init different signature for task do_package_write_ipk.=
+sigdata between qemux86copy and qemuarm
+Hash for dependent task xserver-common_1.34.bb.do_packagedata changed from =
+2fed45862b973793f9bbd4bbcb673b00 to 7f8cf0da84516eef9660abb2eeaba45f
+Hash for dependent task xinit_1.3.3.bb.do_packagedata changed from 4785e6a6=
+3639af8005ecb9e04604657c to 384804020c9cf5f1b2c0452bbd608c5b
+Hash for dependent task xserver-nodm-init_2.0.bb.do_packagedata changed fro=
+m 0a2b885e26bce9d00891f66cc71f461c to ddf705fad89c250f9ae1afe0788f8ad8
+Hash for dependent task xserver-nodm-init_2.0.bb.do_package changed from 38=
+ca1cbe0ee04821d8564c6a87a18ed0 to 0258af0d15d7e3989a9c8c017f1c68d6
+
+ =3D=3D=3D Comparing signatures for task do_package_write_ipk.sigdata betwe=
+en qemux86copy and qemux86 =3D=3D=3D
+ERROR: vpnc different signature for task do_package_write_ipk.sigdata betwe=
+en qemux86copy and qemux86
+Hash for dependent task linux-yocto_3.14.bb.do_packagedata changed from 407=
+be3d4a79da2ef3c19413a2393a8a1 to 9c7cb78c5a05f2646531f3f2fa10cdf3
+
+ERROR: xfce4-session different signature for task do_package_write_ipk.sigd=
+ata between qemux86copy and qemux86
+Hash for dependent task xfce4-session_4.10.1.bb.do_packagedata changed from=
+ e9e68bcf9668d76ab78e4318262723ba to 6e25e42a521f64eb121bc7cccf4a4ee8
+Hash for dependent task xfce4-session_4.10.1.bb.do_package changed from b8c=
+ec1181a37d2528e4f4bc2152883b5 to 6bb216d35f1120ca59ed4795fdabe997
+
+ERROR: oprofileui different signature for task do_package_write_ipk.sigdata=
+ between qemux86copy and qemux86
+Hash for dependent task oprofile_0.9.9.bb.do_packagedata changed from d5af6=
+1069bdd20637cd0341f55badb8d to 211c048fc3322f0fe6f5de328114a0be
+
+ERROR: oprofileui-server different signature for task do_package_write_ipk.=
+sigdata between qemux86copy and qemux86
+Hash for dependent task oprofile_0.9.9.bb.do_packagedata changed from d5af6=
+1069bdd20637cd0341f55badb8d to 211c048fc3322f0fe6f5de328114a0be
+
+ERROR: lmsensors different signature for task do_package_write_ipk.sigdata =
+between qemux86copy and qemux86
+Hash for dependent task lmsensors-config_1.0.bb.do_packagedata changed from=
+ 18fdddafaaf421cea83767716002cc4f to eedffc716bb5c4d8d35931b7ecdcf5c2
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--cHMo6Wbp1wrKhbfi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-Comment: Using GnuPG with Thunderbird - http://www.enigmail.net/
+Version: GnuPG v2
 
-iEYEARECAAYFAlOoC9UACgkQlSfCk8EgCzgXeACfYz1WFqdiqGd5/ZG+UGklamDN
-g9cAoNbUjNyNB68seAE+GahaDee57RFA
-=+Dop
+iEYEARECAAYFAlOoDZIACgkQN1Ujt2V2gBzJcwCePlXHBnMo1hBOTiRoFJW4vKn0
+O/YAnRTct+4NUoR0HlK7wyqa8/LcnDBl
+=YF6E
 -----END PGP SIGNATURE-----
 
+--cHMo6Wbp1wrKhbfi--
