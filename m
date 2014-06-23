@@ -1,49 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id CE60765FE2
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id D1A0F65F09
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 16:51:56 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id n15so4694152wiw.17
+	Mon, 23 Jun 2014 17:40:29 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id q59so7480844wes.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 09:51:55 -0700 (PDT)
+	Mon, 23 Jun 2014 10:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Ykg6BHpm1cKF0Q3ak4qHDzh4HZMf36lhD6a7k8UAlxg=;
-	b=ByoMAPSBhPvLPzi0cwdwFFlOFJg3z5dXWrSpUTTEKADKAAGksAr68Zc20GfawCM5R7
-	LQZcs0tdWx0CXkzEsLtFIW9QUfOw1TBTimQJsqHmk4nO/wC5pt3IOOHEnZSaxfPKfNO7
-	aO0ffnLkU3rWIN3cKdkPJQ5exl7pbDN6B9BEeu4syoigjUBl3HTLwCG/s4eNjGDztE8h
-	4dCBWk1tb4g9kmXSCM8dr+YDBPE5NmWB+juiApmGtk6824NkIoDECOQl6jwIQq8EkR0L
-	bauOlGtU6mE4GG9wYkcyqms9dykHaqUkeJ1EZ6HPkgzycgmpF+sWlD2KkpAYiBEXYfHk
-	VoxA==
-X-Received: by 10.194.200.37 with SMTP id jp5mr5125254wjc.120.1403542315773;
-	Mon, 23 Jun 2014 09:51:55 -0700 (PDT)
+	bh=o/8sWAYUrg9G8tzzovrmwshC5DZ81BXmaYKTh9f0794=;
+	b=RoiU1mwOJr2ukFFCnSXHvoJqf9c2TA124fRA9NnI05iy1A1ahU4cE53F5y/HCbxQOJ
+	0NZ+e8eGtgYwQlxKx8KGV0EY0wXq3Lm2fjNt7AddgLgb1y2b/FXsYGTcKqYoQfYSh9pv
+	LZJwAQ4ybaXFiThjgb9roXUS8ZLOdJmn9If3eGTXRHKt1HmbFn9mYwsSuLkbPMDUkdYg
+	vAOkqxxHYAgvXncdB1tdWHK18eXrLh+G6RWWqNBMrtbou5F9Q+VzU85SXuGqoNUni4a2
+	ChJ4FLyNMPmMN5/NBrVAvVryTHr6wChks5U8Ds6K6OBbURXrFBEAmpsioIiM1yDWTmN6
+	u1cw==
+X-Received: by 10.194.200.67 with SMTP id jq3mr5911437wjc.114.1403545229302;
+	Mon, 23 Jun 2014 10:40:29 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	bq7sm34962126wib.7.2014.06.23.09.51.54
-	for <openembedded-devel@lists.openembedded.org>
+	k7sm37691322wjw.6.2014.06.23.10.40.28 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Jun 2014 09:51:54 -0700 (PDT)
+	Mon, 23 Jun 2014 10:40:28 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 23 Jun 2014 18:51:54 +0200
+Date: Mon, 23 Jun 2014 19:40:29 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140623165154.GI2437@jama>
-References: <20140620081307.GW2117@jama>
-	<CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
-	<20140620234853.GA2117@jama>
-	<CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
-	<20140621010508.GC2117@jama>
-	<CACgAsMdguugQZiTiOo8aWaBZFCYnsWUtp7-0KWu7VdGvdBDCSA@mail.gmail.com>
-	<20140621074733.GD2117@jama>
-	<CACgAsMdQgREcvnQqnH5942TMzAR1LJr5bkHwm0nD+G2wNarEMg@mail.gmail.com>
-	<20140623140131.GH2437@jama>
-	<CACgAsMcSoWZSNh9cBnO6Vm9YuCf1NEzzr5VQ=KpSUfoKwC_x5Q@mail.gmail.com>
+Message-ID: <20140623174029.GJ2437@jama>
+References: <cover.1402664272.git.anders@chargestorm.se>
+	<362107ac6702cb380c86a7ac249b52f558d2b923.1402664272.git.anders@chargestorm.se>
 MIME-Version: 1.0
-In-Reply-To: <CACgAsMcSoWZSNh9cBnO6Vm9YuCf1NEzzr5VQ=KpSUfoKwC_x5Q@mail.gmail.com>
+In-Reply-To: <362107ac6702cb380c86a7ac249b52f558d2b923.1402664272.git.anders@chargestorm.se>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [meta-webserver][PATCH 2/2] webmin: split out webmin themes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,165 +49,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 16:51:58 -0000
-X-Groupsio-MsgNum: 50531
+X-List-Received-Date: Mon, 23 Jun 2014 17:40:33 -0000
+X-Groupsio-MsgNum: 50532
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="boAH8PqvUi1v1f55"
+	protocol="application/pgp-signature"; boundary="W/D3X8sky0X3AmG5"
 Content-Disposition: inline
 
---boAH8PqvUi1v1f55
-Content-Type: text/plain; charset=iso-8859-1
+--W/D3X8sky0X3AmG5
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 23, 2014 at 12:21:24PM -0400, Kevyn-Alexandre Par=E9 wrote:
-> On Mon, Jun 23, 2014 at 10:01 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Mon, Jun 23, 2014 at 09:40:28AM -0400, Kevyn-Alexandre Par=E9 wrote:
-> <snip>
-> >> Here the way I check that icu is added as part of my image:
-> >> bitbake -e nirs-console-image | grep -n5 PACKAGECONFIG
-> >> 2560-# $B_pn-strace
-> >> 2561-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_poin=
-t/yocto_build/src/poky/meta/conf/distro/include/seperatebuilddir.inc:645
-> >> 2562-#     "${SEPB}"
-> >> 2563-B_pn-strace=3D"/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starti=
-ng_point/yocto_build/src/build/tmp/work/overo-poky-linux-gnueabi/nirs-conso=
-le-image/1.0-r0/build"
-> >> 2564-#
-> >> 2565:# $PACKAGECONFIG [2 operations]
-> >> 2566-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_poin=
-t/yocto_build/src/poky/meta/conf/documentation.conf:308
-> >> 2567-#     [doc] "This variable provides a means of enabling or
-> >> disabling features of a recipe on a per-recipe basis."
-> >> 2568-#   _append[pn-qtbase]
-> >> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build=
-/src/poky/meta-nirs/recipes-images/gumstix/nirs-console-image.bb:17
-> >> 2569-#     "   developer   tests   examples   icu   alsa-lib   gles2
-> >> accessibility   glib-2.0   tslib   linuxfb   sqlite3 "
-> >
-> > Are you trying to set PACKAGECONFIG_append_pn-qtbase from
-> > nirs-console-image.bb? That wont work you need to set it in distro or
-> > local.conf
+On Fri, Jun 13, 2014 at 03:01:21PM +0200, Anders Darander wrote:
+> The default set of themes taks up ~13MB, with a couple of them weighting =
+in
+> at ~5MB each.
 >=20
-> Yes I was :( I was rereading ref manual
->=20
-> Configuration file: This method is identical to changing the block
-> through an append file except you edit your local.conf or
-> <mydistro>.conf file. As with append files previously described, you
-> can either completely override the variable:
->=20
->      PACKAGECONFIG_pn-<recipename>=3D"f4 f5"
->=20
->=20
-> Or, you can just amend the variable:
->=20
->      PACKAGECONFIG_append_pn-<recipename> =3D " f4"
->=20
->=20
-> I Move my PACKAGECONFIG_append to my local.conf
->=20
-> Here my setup for now just trying to make it compile remove the gles
-> for now it was giving me errors...
->=20
-> bitbake -e qtbase | grep ^PACKAGECONFIG=3D
-> PACKAGECONFIG=3D"     release     dbus udev evdev widgets tools libs
-> openssl     gl          xcb xvideo xsync xshape xrender xrandr xfixes
-> xinput2 xinput xinerama xcursor gtkstyle xkb     fontconfig freetype
->   jpeg libpng zlib     pulseaudio       developer tests examples icu
-> alsa-lib accessibility glib-2.0 tslib sqlite3
->=20
-> cat tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.2.1-r0/build/con=
-fig.summary
-> | grep ICU
->   ICU .................... yes
->=20
-> it's compiling further then before and stop
->=20
-> meta-qt5/recipes-qt/qt5/qtdeclarative_5.2.1.bb, do_compile) failed
-> with exit code '1'
->=20
-> http://pastebin.com/qJAME8ew
+> Let's split the themes to separate packages, to allow a considerable size
+> reduction of the core webmin package (from +15MB to 2.1MB on my build hos=
+t).
 
-Try to disable tests for qtdeclarative, they are not tested as often as
-default setup so it's possible that there is some issue:
-compiling
-/home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/src/=
-build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtdeclarative/5.2.1-r0/qt=
-declarative-opensource-src-5.2.1/tests/auto/qml/qv4debugger/tst_qv4debugger=
-=2Ecpp
-mv: `libplugin1.so' and `./libplugin1.so' are the same file
-make[5]: [libplugin1.so] Error 1 (ignored)
+It isn't caused by your patch, but current webmin recipe
+is inheritting allarch and then adding runtime dependency
+on TUNE_PKGARCH perl, so it's causing webmin rebuilds every
+time MACHINE is changed (to MACHINE with different TUNE_PKGARCH)
 
-> _reading_ qtbase.inc qtwebkit depends on qtdeclarative and it depends
-> # gl or gles needs to be enabled in order to build qtdeclarative
+ERROR: webmin different signature for task do_package_write_ipk.sigdata bet=
+ween qemux86copy and qemuarm                                               =
+       =20
+Hash for dependent task webmin_1.620.bb.do_package changed from 1a4ee0753ef=
+f9a8e392e851b6bbe252d to 36578d90d5866248da6afaa50fd586a1                  =
+       =20
+Hash for dependent task perl_5.14.3.bb.do_packagedata changed from c7f95281=
+2f189c608e14e0862807ae27 to 24b9ff1de4f046333d292aa97673a8d2               =
+       =20
+Hash for dependent task webmin_1.620.bb.do_packagedata changed from bd1b17c=
+957d4091a0f6d3ff6a9acb0fe to b584e5a6a90eeb320046c457b03a607f              =
+       =20
+
+Please fix it if you care about webmin.
+
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> ---
+>  meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 >=20
-> The error is maybe not related to this but will work on adding gles to my=
- image.
+> diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb b/met=
+a-webserver/recipes-webadmin/webmin/webmin_1.620.bb
+> index a561de2..7eb1d63 100644
+> --- a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
+> +++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
+> @@ -113,7 +113,7 @@ RDEPENDS_${PN} +=3D "perl-module-warnings perl-module=
+-xsloader perl-module-posix p
+>  RDEPENDS_${PN} +=3D "perl-module-fcntl perl-module-tie-hash perl-module-=
+vars perl-module-time-local perl-module-config perl-module-constant"
+>  RDEPENDS_${PN} +=3D "perl-module-file-glob perl-module-file-copy perl-mo=
+dule-sdbm perl-module-sdbm-file perl-module-timelocal perl-module-feature"
+> =20
+> -PACKAGES_DYNAMIC +=3D "webmin-module-*"
+> +PACKAGES_DYNAMIC +=3D "webmin-module-* webmin-theme-*"
+>  RRECOMMENDS_${PN} +=3D "webmin-module-system-status"
+> =20
+>  RDEPENDS_webmin-module-proc =3D "procps"
+> @@ -128,12 +128,17 @@ python populate_packages_prepend() {
+>      wadir =3D bb.data.expand('${libexecdir}/webmin', d)
+>      wadir_image =3D bb.data.expand('${D}', d) + wadir
+>      modules =3D []
+> +    themes =3D []
+>      for mod in os.listdir(wadir_image):
+>          modinfo =3D os.path.join(wadir_image, mod, "module.info")
+> +        themeinfo =3D os.path.join(wadir_image, mod, "theme.info")
+>          if os.path.exists(modinfo):
+>              modules.append(mod)
+> +        elif os.path.exists(themeinfo):
+> +            themes.append(mod)
+> =20
+>      do_split_packages(d, wadir, '^(%s)$' % "|".join(modules), 'webmin-mo=
+dule-%s', 'Webmin module for %s', allow_dirs=3DTrue, prepend=3DTrue)
+> +    do_split_packages(d, wadir, '^(%s)$' % "|".join(themes), 'webmin-the=
+me-%s', 'Webmin theme for %s', allow_dirs=3DTrue, prepend=3DTrue)
+>  }
+> =20
+>  # Time-savers
+> --=20
+> 2.0.0
 >=20
-> >
-> >> > Check config.summary in qtbase WORKDIR (where you built qtbase to be
-> >> > sure it was enabled) and check with bitbake -e that it's really in y=
-our
-> >> > PACKAGECONFIG for qtbase.
-> >>
-> >> My bad I didn't check in the WORKDIR only in meta-qt5...
-> >>
-> >> Check config.summary:
-> >> find tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/ -name config.=
-summary
-> >> tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.2.1-r0/build/conf=
-ig.summary
-> >>
-> >> http://pastebin.com/gZ2Nqa5g
-> >>
-> >> Found that ICU is disable:
-> >>  27 Support enabled for:
-> >>  28   Accessibility .......... no
-> >>  29   ALSA ................... no
-> >>  30   CUPS ................... no
-> >>  31   FontConfig ............. no
-> >>  32   FreeType ............... qt
-> >>  33   Iconv .................. no
-> >>  34   ICU .................... no
-> >>
-> >> Clearly I'm doing something wrong!
-> >
-> > Yes, setting PACKAGECONFIG in wrong place.
->=20
-> thx
->=20
-> >
-> > bitbake -e qtbase | grep ^PACKAGECONFIG=3D
-> >
-> > is what you need to check.
-> >
-> >> [1] Will _read_ and try to make the config.summary change to yes...
-> >>
-> >> [2] When i'm setting my PACKAGECONFIG and i'm having one like:
-> >> PACKAGECONFIG[gles2] =3D "-opengl es2 -eglfs,,virtual/libgles2 virtual=
-/egl"
-> >>
-> >> I'm suppose to set:
-> >> PACKAGECONFIG_append_pn-qtbase =3D " virtual/libgles2"
-> >> and not
-> >> PACKAGECONFIG_append_pn-qtbase =3D " gles2"
-> >> ?
-> >
-> > The later is less wrong, but setting
-> > PACKAGECONFIG_GL_pn-qtbase =3D "gles2"
-> > is even better.
->=20
-> For gles2 it's easy to know to use PACKAGECONFIG_GL but how do you
-> know for example when to put it where? I know it result all in
-> PACKAGECONFIG but I'm just curious?
-> ex: glib? PACKAGECONFIG_DISTRO or  PACKAGECONFIG_SYSTEM?
->=20
-> Leaving for a week of vacancy & understanding a lot more thx to you!
->=20
-> BR,
->=20
-> -KA
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -225,16 +143,16 @@ ig.summary
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---boAH8PqvUi1v1f55
+--W/D3X8sky0X3AmG5
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlOoWyoACgkQN1Ujt2V2gByHbQCfZ2yAFzUBaj8O8vxehCQlScR6
-qasAnidy9PL2jiQ2WNJ2Jq77JOfOKubA
-=UZ+B
+iEYEARECAAYFAlOoZo0ACgkQN1Ujt2V2gByhPACePFlUlKi04ZA3Jq1BGruQhQIQ
+UOsAmwYNZDcjVZINJ8LbM/3t49gWxLce
+=4KcJ
 -----END PGP SIGNATURE-----
 
---boAH8PqvUi1v1f55--
+--W/D3X8sky0X3AmG5--
