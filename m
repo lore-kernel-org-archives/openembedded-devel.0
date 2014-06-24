@@ -1,33 +1,21 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id F1ED265F15
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
+	[83.145.59.144])
+	by mail.openembedded.org (Postfix) with ESMTP id CABD3609AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 07:03:15 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s5O73Bml022452 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 08:03:11 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id kOfHHo69ayhO
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 08:03:10 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s5O736Z2022437
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 08:03:08 +0100
-Message-ID: <1403593380.2104.121.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jun 2014 08:03:00 +0100
-In-Reply-To: <20140623235859.GK2437@jama>
-References: <1403553432.2104.112.camel@ted> <20140623235859.GK2437@jama>
-X-Mailer: Evolution 3.8.4-0ubuntu1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH] eject: Fix B != S builds
+	Tue, 24 Jun 2014 07:54:24 +0000 (UTC)
+Received: from localhost (213.114.64.43) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server id 8.3.279.1; Tue, 24 Jun 2014
+	09:54:23 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Jun 2014 09:54:04 +0200
+Message-ID: <cover.1403596416.git.anders@chargestorm.se>
+X-Mailer: git-send-email 2.0.0
+MIME-Version: 1.0
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-webserver][PATCH 0/1] webmin: Drop allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,34 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jun 2014 07:03:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Jun 2014 07:54:33 -0000
+Content-Type: text/plain
 
-On Tue, 2014-06-24 at 01:58 +0200, Martin Jansa wrote:
-> On Mon, Jun 23, 2014 at 08:57:12PM +0100, Richard Purdie wrote:
-> > Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> > 
-> > diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> > index 9534577..6cb31a7 100644
-> > --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> > +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> > @@ -9,6 +9,11 @@ SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz \
-> >             file://eject-2.1.5-error-return.patch \
-> >  "
-> >  
-> > +do_compile_prepend () {
-> > +    mkdir -p ${B}/po
-> > +    cp -r ${S}/po/* ${B}/po/
-> > +}
-> 
-> Wasn't this fixed already? I've seen it in your big patch, but the same
-> logic is applied in newer master already.
+webmin: Drop the allarch as the package gets rebuild when
+changing MACHINE, due to it having an RDEPENDS on perl 
+(TUNE_PKGARCH).
 
-Yes, that has merged, sorry.
+Reported by Martin Jansa.
 
-Cheers,
+The following changes since commit 4fcc5cc1cca20d7c772f7c8b1999ef15fd2dc260:
 
-Richard
+  python-cython: upgrade to 2.20.2 and fix packaging QA issue (2014-06-21 19:22:29 +0200)
+
+are available in the git repository at:
+
+  git://github.com/darander/meta-oe 1b5c27f39444bed435c8c050b2fb6def74a5adb8
+  https://github.com/darander/meta-oe/tree/webmin-noallarch
+
+Anders Darander (1):
+  webmin: drop allarch
+
+ meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+-- 
+2.0.0
 
 
