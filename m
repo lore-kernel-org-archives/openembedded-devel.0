@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 2849A65E63
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FFA160E24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 23:58:59 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id b13so7061828wgh.11
+	Tue, 24 Jun 2014 00:02:55 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id y10so7133821wgg.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jun 2014 16:58:59 -0700 (PDT)
+	Mon, 23 Jun 2014 17:02:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=HDj4WOmF3dycQmxFWRDtgj+OOY5cBvJ4zAlNZk9j7bw=;
-	b=lm1wsyZiJI+euVt8bDYI0l/Z2wTH1fxrGIMiWizqKkkST8xXKeJLfdpmcfp/zw3Ctx
-	Ti7Ka/W8Zdir/6SI/nYqoMI74doESWcomtSm32q+4L7Cem8Xtravx0o7HG9YoTio8WoF
-	IuML9Zy2oS6D+rSEEwFsarkDjJ5iE7+78SRpPkUFfiK+Pmw8ZmvUUJXr+8kaavbT4Sl5
-	Ce7lxdVJ7SGejBNKy2aUKK6idF81HGp7ILjo2Vx9PGwUTnrJqHz6eyzPf66oE4a1trD8
-	MTenNThn4Zpwm3uFNJ9lkHzoXDSWJwbmmjp58ALyv2NdZZlBOjD0zWaSpQT6BwXHpPGM
-	JPKg==
-X-Received: by 10.181.8.198 with SMTP id dm6mr29601666wid.30.1403567939765;
-	Mon, 23 Jun 2014 16:58:59 -0700 (PDT)
+	bh=YnRwEInLfDMPCvtLpsdGrTYkG7aqR3vfPkbH0mUttcw=;
+	b=hHXvqVUJgr4+hg+Xw2TX58OZwpm7/CHNsPbHtsBd67l0v+tKserFHtBROCRqDJ9ARg
+	cva+1ANdHoLqqDbQBnvR+z5WmGZ0Uu2sfeFDTFEW9rIUaEgyhxGuAtph0X9wfugusGQZ
+	2loHLO2yWwrRMpyhv52zwg3KfsTv4+DR/8mzE1NTASnGKodWr+/+X7raPfV6MXeDCS//
+	wi40svrjjZISDe6SbIwNiWuM8Jc5JAOPp3wvP+047J/xzVy03L3mXx0zdaw5IRKo/ClM
+	u4MCq3dnkidc8VrbPDrt9iUKQ6tPHIN2N7SRASpXq1ihm/sJkAMsktOBK2dto5WQRPcj
+	V8TQ==
+X-Received: by 10.194.238.231 with SMTP id vn7mr569wjc.99.1403568176386;
+	Mon, 23 Jun 2014 17:02:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	gi7sm37891321wib.1.2014.06.23.16.58.58
-	for <openembedded-devel@lists.openembedded.org>
+	i6sm37884774wiy.17.2014.06.23.17.02.55 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Jun 2014 16:58:59 -0700 (PDT)
+	Mon, 23 Jun 2014 17:02:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 24 Jun 2014 01:58:59 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140623235859.GK2437@jama>
-References: <1403553432.2104.112.camel@ted>
+Date: Tue, 24 Jun 2014 02:02:57 +0200
+To: openembedded-devel@lists.openembedded.org,
+	Khem Raj <raj.khem@gmail.com>
+Message-ID: <20140624000257.GL2437@jama>
+References: <CAOd_LFwu0hwLcU1+oAvK9TVtsbbawDhRqd=1wafXfOKOWw5T+g@mail.gmail.com>
+	<20140620160431.GY2117@jama>
+	<CAOd_LFznwZYR68XeXKCcDoQyijih7TakvwnQreRSWPss460hZQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1403553432.2104.112.camel@ted>
+In-Reply-To: <CAOd_LFznwZYR68XeXKCcDoQyijih7TakvwnQreRSWPss460hZQ@mail.gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] eject: Fix B != S builds
+Subject: Re: [meta-oe][daisy] pull request, update README's, live555 fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,64 +49,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jun 2014 23:59:02 -0000
-X-Groupsio-MsgNum: 50543
+X-List-Received-Date: Tue, 24 Jun 2014 00:03:02 -0000
+X-Groupsio-MsgNum: 50544
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lZZ4ablUVnt2XgAh"
+	protocol="application/pgp-signature"; boundary="S6vg04ofUPzW4qJg"
 Content-Disposition: inline
 
---lZZ4ablUVnt2XgAh
+--S6vg04ofUPzW4qJg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 23, 2014 at 08:57:12PM +0100, Richard Purdie wrote:
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+On Mon, Jun 23, 2014 at 04:33:13PM -0400, Cliff Brake wrote:
+> On Fri, Jun 20, 2014 at 12:04 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+> > On Thu, Jun 19, 2014 at 07:52:51AM -0400, Cliff Brake wrote:
+> >> The following changes since commit dca466c074c9a35bc0133e7e0d65cca0731=
+e2acf:
+> >>
+> >>   python-efl: add dependency on python-dbus and lua to always build
+> >> edje and elementary bindings (2014-05-12 10:08:28 +0200)
+> >>
+> >> are available in the git repository at:
+> >>
+> >>   https://github.com/cbrake/meta-openembedded.git daisy-to-merge
+> >>
+> >> for you to fetch changes up to f3f1d14a6587d72388f50725b0a49c84cf417eb=
+9:
+> >>
+> >>   live555: fix fetch problem (2014-06-18 13:42:35 -0400)
+> >
+> > BTW: there is daisy bundle on patchwork:
+> > http://patchwork.openembedded.org/bundle/jama/daisy/?archive=3Dboth
+> >
+> > When I notice some patch in queue marked as for daisy or requesting
+> > backport in text I move it to bundle (and mark it as archived)
+> >
+> > Would be great if one of you keeps an eye on this bundle and sort the
+> > patches there (they usually aren't marked as applied automatically and
+> > you need to do it manually).
 >=20
-> diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recip=
-es-support/eject/eject_2.1.5.bb
-> index 9534577..6cb31a7 100644
-> --- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> +++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-> @@ -9,6 +9,11 @@ SRC_URI =3D "http://sources.openembedded.org/${BP}.tar.g=
-z \
->             file://eject-2.1.5-error-return.patch \
->  "
-> =20
-> +do_compile_prepend () {
-> +    mkdir -p ${B}/po
-> +    cp -r ${S}/po/* ${B}/po/
-> +}
+> I will try to watch this.
+>=20
+> I was able to mark my merge request in this bundle as applied, but the
+> other two it does not seem like I can edit in patchwork.  (Still
+> figuring out patchwork flow ...)
 
-Wasn't this fixed already? I've seen it in your big patch, but the same
-logic is applied in newer master already.
+Not your fault, you need to get some super cow (powers) in order to change
+state of other people patches.
 
-> +
->  SRC_URI[md5sum] =3D "b96a6d4263122f1711db12701d79f738"
->  SRC_URI[sha256sum] =3D "ef9f7906484cfde4ba223b2682a37058f9a3c7d3bb1adda7=
-a34a67402e2ffe55"
-> =20
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Khem: Can you please make Cliff maintainer on oe/patchwork? Thanks
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---lZZ4ablUVnt2XgAh
+--S6vg04ofUPzW4qJg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlOov0MACgkQN1Ujt2V2gBzbggCgml+ZjdHqSi2DUNmYoy2HYe6d
-0WsAnj9VK3IBysqXsBym/205VrAjEehr
-=WLqu
+iEYEARECAAYFAlOowDEACgkQN1Ujt2V2gBzWaQCeM0PM1Oc1kUaPNGcAyrJwYM/1
+QuoAn2z9GMxl/MTiGAEgU2GzZOQhTUNz
+=X88U
 -----END PGP SIGNATURE-----
 
---lZZ4ablUVnt2XgAh--
+--S6vg04ofUPzW4qJg--
