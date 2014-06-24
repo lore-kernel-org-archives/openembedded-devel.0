@@ -1,38 +1,35 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DBA165D42
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FAC260D8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 18:26:34 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id h18so5064860igc.4
+	Tue, 24 Jun 2014 20:02:34 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id bs8so1284004wib.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 11:26:35 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=m4KiNw0DAB2BbhkTwlxlZm/+w8KKzWyDe8olhmInvQA=;
-	b=V01I307T7uHgfxSAYKWfnmxeTGkI4cvmYZfBvC1czat0md+S9qW13fmug08Vml30cO
-	DEaNfxLt51dQJH8sdkiDJWdnRcTRK8cCFcC5o2qnl84EL/PVdDiqyVPctbTpl876pFXH
-	RY1itHG+hIqk3nZSU/ixlm4Bx3mWYM+b1Xkm0SegnJTI5KXaKF/wAwSS+5Wa/EhrZ6bO
-	a6LsxdLjRn40lhQT3C3SmLNn3tLwBM0BtYosJqQcUmnfH2yk8b3F87oLfIXvj66vvqLB
-	jFhobEfWU7pSvM9SzSundlT7kl7VCWj3LNfkmPeBVShJ58uDVZl4oNXlT0SRJdQFeizE
-	nZJQ==
-X-Gm-Message-State: ALoCoQmlQrDSueLyBPbpdxJnJIAufIsMphHUKiW/n3gT/IQ5v0W5BKwc6RYaqgOGnvBZYU0JIuPy
-X-Received: by 10.50.66.208 with SMTP id h16mr4019733igt.19.1403634394407;
-	Tue, 24 Jun 2014 11:26:34 -0700 (PDT)
-Received: from openSUSE-i7.site (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158])
-	by mx.google.com with ESMTPSA id k5sm44212338igf.5.2014.06.24.11.26.33
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 24 Jun 2014 11:26:33 -0700 (PDT)
-From: Trevor Woerner <trevor.woerner@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jun 2014 14:26:03 -0400
-Message-Id: <1403634363-18032-1-git-send-email-trevor.woerner@linaro.org>
-X-Mailer: git-send-email 2.0.0.5.gbce14aa
-Cc: patches@linaro.org
-Subject: [meta-oe][MASTER][PATCH] lxdm: add libpam DEPENDS
+	Tue, 24 Jun 2014 13:02:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=OxFBoBev2RdARid1ZsvX+0tf10cjeDp36Kmr4QtcyUY=;
+	b=tS7vts3aCJtoTUXO1OTkVCIN1Qencl+wylRv6AykIFHa+zZbc2t8ZLuwRtKhJpnKzb
+	ah0gDQosGB7zSu4QTBwSflz2wlnHJcsOnszCF4VI/5pw6nQpK/E8cgHXiv1exobU3uJZ
+	rWLHKWOtmGVATihHlWrPgQGasv3420qHV8lMdrILRrGVXI8QTTumkNS9x/Fczamnn3EJ
+	w+ZeXSqyyaVV3RVb2ntcnjERxrxDhU/S4MHU4CMcPoJQeihDk8eJ1r5WRifpM5nBPX6N
+	j92KBdzjyVBVn4k4vpV0Uvmi2R5MbmhbittaTe8s5jae0sRmnyBtiS23/rhpwbIuR/MH
+	AfdQ==
+MIME-Version: 1.0
+X-Received: by 10.180.81.1 with SMTP id v1mr5337237wix.10.1403640153715; Tue,
+	24 Jun 2014 13:02:33 -0700 (PDT)
+Received: by 10.194.34.65 with HTTP; Tue, 24 Jun 2014 13:02:33 -0700 (PDT)
+In-Reply-To: <1403634363-18032-1-git-send-email-trevor.woerner@linaro.org>
+References: <1403634363-18032-1-git-send-email-trevor.woerner@linaro.org>
+Date: Tue, 24 Jun 2014 13:02:33 -0700
+Message-ID: <CAOLEWZXqQ_tnZEiVi5JxLbWGktAXNnTWexw_+C0WY+GbyW6V0w@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: Trevor Woerner <trevor.woerner@linaro.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][MASTER][PATCH] lxdm: add libpam DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jun 2014 18:26:41 -0000
+X-List-Received-Date: Tue, 24 Jun 2014 20:02:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
----
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hey Trevor:
 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-index dc40fb2..d0eb516 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-@@ -16,7 +16,7 @@ SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
- PV = "0.5.0+git${SRCPV}"
- PE = "1"
- 
--DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
-+DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes libpam"
- DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
- 
- # combine oe-core way with angstrom DISTRO_TYPE
--- 
-2.0.0.5.gbce14aa
+I was just working on this one the other day (I have a bbappend for my xorg
+image) and added some pam deps, but not as "hard" deps (since pam is an
+optional feature).  One issue I just hit in my master branch build was
+missing pam plugins for lxdm login, even with the pam feature enabled.
 
+see this lxdm commit
+<https://github.com/sarnold/meta-alt-desktop-extras/commit/05bc68e37e45a0d980b96e5fd93adeb5a9b9f33e>
+
+Maybe it's helpful, maybe not...
+
+Steve aka mr_science
+
+
+On Tue, Jun 24, 2014 at 11:26 AM, Trevor Woerner <trevor.woerner@linaro.org>
+wrote:
+
+> Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+> ---
+>  meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+> b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+> index dc40fb2..d0eb516 100644
+> --- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+> +++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+> @@ -16,7 +16,7 @@ SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
+>  PV = "0.5.0+git${SRCPV}"
+>  PE = "1"
+>
+> -DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0
+> gtk+ virtual/libx11 libxcb pango iso-codes"
+> +DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0
+> gtk+ virtual/libx11 libxcb pango iso-codes libpam"
+>  DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "",
+> "consolekit", d)}"
+>
+>  # combine oe-core way with angstrom DISTRO_TYPE
+> --
+> 2.0.0.5.gbce14aa
+>
+>
 
