@@ -1,23 +1,30 @@
-Return-Path: <anders@chargestorm.se>
-Received: from stoexhubfe02.domain01.net (STOEXHUBFE02.domain01.net
-	[83.145.59.141])
-	by mail.openembedded.org (Postfix) with ESMTP id B679C65D20
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 07:54:27 +0000 (UTC)
-Received: from localhost (213.114.64.43) by stoexhubfe02.domain01.net
-	(10.12.10.7) with Microsoft SMTP Server id 8.3.279.1; Tue, 24 Jun 2014
-	09:54:26 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Jun 2014 09:54:12 +0200
-Message-ID: <1b5c27f39444bed435c8c050b2fb6def74a5adb8.1403596416.git.anders@chargestorm.se>
-X-Mailer: git-send-email 2.0.0
-In-Reply-To: <cover.1403596416.git.anders@chargestorm.se>
-References: <cover.1403596416.git.anders@chargestorm.se>
-MIME-Version: 1.0
-X-GFI-SMTP-Submission: 1
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-webserver][PATCH 1/1] webmin: drop allarch
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 71FA765D32;
+	Tue, 24 Jun 2014 09:08:14 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s5O97jiT027668; Tue, 24 Jun 2014 10:07:45 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id MyZamiv-L8H9; Tue, 24 Jun 2014 10:07:45 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s5O97cDW027660
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
+	Tue, 24 Jun 2014 10:07:39 +0100
+Message-ID: <1403600852.2104.125.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 24 Jun 2014 10:07:32 +0100
+In-Reply-To: <20140621080922.GE2117@jama>
+References: <20140621080922.GE2117@jama>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-06-21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jun 2014 07:54:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Jun 2014 09:08:20 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* runtime dependencies are TUNE_PKGARCH causing do_package_write_*
-  task to have different signature for MACHINEs with different
-  TUNE_PKGARCH
+On Sat, 2014-06-21 at 10:09 +0200, Martin Jansa wrote:
+> On Wed, Jun 11, 2014 at 12:57:59PM +0200, Martin Jansa wrote:
+> > On Tue, Jun 10, 2014 at 12:07:22PM +0200, Martin Jansa wrote:
+> > > On Mon, Jun 02, 2014 at 10:49:50AM +0200, Martin Jansa wrote:
+> > > > This build still contains huge patch setting B = S or inherit for
+> > > > autotools-brokensep for all recipes which were failing in earlier
+> > > > master builds.
+> > 
+> > I've removed this patch for this build to see how bad it is. And it's BAD.
+> 
+> Now it doesn't have the big B=S patch, but long patchset of PNBLACKLISTs I've sent
+> earlier this week.
+> 
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+> 
+> == Failed tasks 2014-06-21 ==
+> 
+> I have a fix for python-cython. This doesn't include the big patch from RP.
+> 
+> === common (28) ===
+[...]
+>     * openembedded-core/meta/recipes-multimedia/gstreamer/gst-ffmpeg_0.10.13.bb, do_configure
 
-Signed-off-by: Anders Darander <anders@chargestorm.se>
----
- meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The gst-ffmpeg failure is somewhat strange. Both libav and libpostproc
+can provide libpostproc but at least in my tests, it builds just fine
+regardless of which one(s) I've previously built (both in OE-Core and
+with meta-oe added).
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-index 7eb1d63..0f8781f 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-@@ -20,7 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
- SRC_URI[md5sum] = "e93bc5057a5b7d7e31ecb2bb228d7044"
- SRC_URI[sha256sum] = "3d36153406d8e5d3dcaeadba34dfb5cdbc4060b75c38339174ac97b2277f284b"
- 
--inherit allarch perlnative update-rc.d
-+inherit perlnative update-rc.d
- 
- do_configure() {
-     # Remove binaries and plugins for other platforms
--- 
-2.0.0
+So I'm not sure why its happening or therefore how to fix it :/.
+
+Cheers,
+
+Richard
+
+
 
 
