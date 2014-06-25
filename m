@@ -1,28 +1,35 @@
-Return-Path: <morphis@gravedo.de>
-X-Greylist: delayed 588 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 25 Jun 2014 08:05:11 UTC
-Received: from gravedo.de (gravedo.de [85.214.79.159])
-	by mail.openembedded.org (Postfix) with ESMTP id 56FCB62252
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
+	[83.145.59.143])
+	by mail.openembedded.org (Postfix) with ESMTP id D67CE601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 08:05:11 +0000 (UTC)
-Received: by gravedo.de (Postfix, from userid 7791)
-	id 388CB3B34112; Wed, 25 Jun 2014 09:55:34 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
-	h1108419.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED autolearn=ham
-	version=3.3.1
-Received: from localhost (dslb-092-077-006-204.pools.arcor-ip.net
-	[92.77.6.204]) by gravedo.de (Postfix) with ESMTPSA id 3C4D93B3410E;
-	Wed, 25 Jun 2014 09:55:21 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jun 2014 09:55:17 +0200
-Message-Id: <1403682917-7598-3-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1403682917-7598-1-git-send-email-morphis@gravedo.de>
-References: <1403682917-7598-1-git-send-email-morphis@gravedo.de>
-Subject: [PATCH 2/2] qtwebengine: add initial recipe for git version only
+	Wed, 25 Jun 2014 09:28:23 +0000 (UTC)
+Received: from ad.chargestorm.se (213.114.64.43) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Wed, 25 Jun 2014 11:28:21 +0200
+Date: Wed, 25 Jun 2014 11:28:07 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20140625092807.GA21830@ad.chargestorm.se>
+Mail-Followup-To: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <cover.1403596416.git.anders@chargestorm.se>
+	<1b5c27f39444bed435c8c050b2fb6def74a5adb8.1403596416.git.anders@chargestorm.se>
+	<2430004.5QNcodJTid@peggleto-mobl5.ger.corp.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <2430004.5QNcodJTid@peggleto-mobl5.ger.corp.intel.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-GFI-SMTP-Submission: 1
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver][PATCH 1/1] webmin: drop allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,332 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 08:05:15 -0000
+X-List-Received-Date: Wed, 25 Jun 2014 09:28:25 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes-qt/qt5/qtwebengine.inc                     |  44 +++++++
- ...ild-time-only-dependency-on-x11-libraries.patch | 137 +++++++++++++++++++++
- ...ip-unwanted-echo-compiling-prefix-from-CC.patch |  38 ++++++
- ...upplied-by-environment-variable-NINJA_PAT.patch |  36 ++++++
- recipes-qt/qt5/qtwebengine_git.bb                  |  24 ++++
- 5 files changed, 279 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwebengine.inc
- create mode 100644 recipes-qt/qt5/qtwebengine/0001-Drop-build-time-only-dependency-on-x11-libraries.patch
- create mode 100644 recipes-qt/qt5/qtwebengine/0001-Strip-unwanted-echo-compiling-prefix-from-CC.patch
- create mode 100644 recipes-qt/qt5/qtwebengine/0002-Use-ninja-supplied-by-environment-variable-NINJA_PAT.patch
- create mode 100644 recipes-qt/qt5/qtwebengine_git.bb
+* Paul Eggleton <paul.eggleton@linux.intel.com> [140625 09:46]:
 
-diff --git a/recipes-qt/qt5/qtwebengine.inc b/recipes-qt/qt5/qtwebengine.inc
-new file mode 100644
-index 0000000..b6f56ae
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine.inc
-@@ -0,0 +1,44 @@
-+SUMMARY = "QtWebEngine combines the power of Chromium and Qt"
-+LICENSE = "LGPL-2.1 & BSD"
-+LIC_FILES_CHKSUM = " \
-+  file://src/core/browser_context_qt.cpp;md5=c23e24b6a534c8b6cc879a397b35db29;beginline=1;endline=40 \
-+  file://src/3rdparty/chromium/LICENSE;md5=d2d164565cc10f298390174d9cb6d18d \
-+"
-+DEPENDS += " \
-+    ninja-native \
-+    qtbase qtdeclarative qtxmlpatterns qtquickcontrols \
-+    libdrm fontconfig pixman openssl pango cairo icu pciutils \
-+"
-+
-+inherit qmake5
-+inherit gettext
-+inherit pythonnative
-+inherit perlnative
-+
-+require recipes-qt/qt5/qt5.inc
-+
-+S = "${WORKDIR}/git"
-+
-+# To avoid trouble start with not separated build directory
-+SEPB = "${S}"
-+B = "${SEPB}"
-+
-+do_configure() {
-+    # replace LD with CXX, to workaround a possible gyp inheritssue?
-+    LD="${CXX}" export LD
-+    CC="${CC}" export CC
-+    CXX="${CXX}" export CXX
-+    CC_host="gcc" export CC_host
-+    CXX_host="g++" export CXX_host
-+
-+    # qmake can't find the OE_QMAKE_* variables on it's own so directly passing them as
-+    # arguments here
-+    ${OE_QMAKE_QMAKE} -r QTWEBENGINE_ROOT="${S}" NINJA_PATH="${STAGING_BINDIR_NATIVE}/ninja" \
-+        QMAKE_CXX="${OE_QMAKE_CXX}" QMAKE_CC="${OE_QMAKE_CC}" \
-+        QMAKE_LINK="${OE_QMAKE_LINK}" \
-+        QMAKE_CFLAGS="${OE_QMAKE_CFLAGS}" \
-+        QMAKE_CXXFLAGS="${OE_QMAKE_CXXFLAGS}" \
-+        QMAKE_AR="${OE_QMAKE_AR}"
-+}
-+
-+PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
-diff --git a/recipes-qt/qt5/qtwebengine/0001-Drop-build-time-only-dependency-on-x11-libraries.patch b/recipes-qt/qt5/qtwebengine/0001-Drop-build-time-only-dependency-on-x11-libraries.patch
-new file mode 100644
-index 0000000..7ee38d0
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0001-Drop-build-time-only-dependency-on-x11-libraries.patch
-@@ -0,0 +1,137 @@
-+From f5c8e973f0a246691b71c256361bfa82619ee2ef Mon Sep 17 00:00:00 2001
-+From: Simon Busch <morphis@gravedo.de>
-+Date: Fri, 20 Jun 2014 09:05:12 +0200
-+Subject: [PATCH 1/2] Drop build time only dependency on x11 libraries
-+
-+Signed-off-by: Simon Busch <morphis@gravedo.de>
-+---
-+ src/3rdparty/chromium/build/linux/system.gyp | 114 ---------------------------
-+ 1 file changed, 114 deletions(-)
-+
-+diff --git a/src/3rdparty/chromium/build/linux/system.gyp b/src/3rdparty/chromium/build/linux/system.gyp
-+index 9911317..85016b8 100644
-+--- a/src/3rdparty/chromium/build/linux/system.gyp
-++++ b/src/3rdparty/chromium/build/linux/system.gyp
-+@@ -786,119 +786,5 @@
-+         }],
-+       ],
-+     },
-+-    {
-+-      'target_name': 'x11',
-+-      'type': 'none',
-+-      'toolsets': ['host', 'target'],
-+-      'conditions': [
-+-        ['_toolset=="target"', {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(<(pkg-config) --cflags x11)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(<(pkg-config) --libs-only-L --libs-only-other x11 xi)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(<(pkg-config) --libs-only-l x11 xi)',
-+-            ],
-+-          },
-+-        }, {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(pkg-config --cflags x11)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(pkg-config --libs-only-L --libs-only-other x11 xi)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(pkg-config --libs-only-l x11 xi)',
-+-            ],
-+-          },
-+-        }],
-+-      ],
-+-    },
-+-    {
-+-      'target_name': 'xext',
-+-      'type': 'none',
-+-      'conditions': [
-+-        ['_toolset=="target"', {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(<(pkg-config) --cflags xext)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(<(pkg-config) --libs-only-L --libs-only-other xext)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(<(pkg-config) --libs-only-l xext)',
-+-            ],
-+-          },
-+-        }],
-+-      ],
-+-    },
-+-    {
-+-      'target_name': 'xfixes',
-+-      'type': 'none',
-+-      'conditions': [
-+-        ['_toolset=="target"', {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(<(pkg-config) --cflags xfixes)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(<(pkg-config) --libs-only-L --libs-only-other xfixes)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(<(pkg-config) --libs-only-l xfixes)',
-+-            ],
-+-          },
-+-        }],
-+-      ],
-+-    },
-+-    {
-+-      'target_name': 'xrandr',
-+-      'type': 'none',
-+-      'toolsets': ['host', 'target'],
-+-      'conditions': [
-+-        ['_toolset=="target"', {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(<(pkg-config) --cflags xrandr)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(<(pkg-config) --libs-only-L --libs-only-other xrandr)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(<(pkg-config) --libs-only-l xrandr)',
-+-            ],
-+-          },
-+-        }, {
-+-          'direct_dependent_settings': {
-+-            'cflags': [
-+-              '<!@(pkg-config --cflags xrandr)',
-+-            ],
-+-          },
-+-          'link_settings': {
-+-            'ldflags': [
-+-              '<!@(pkg-config --libs-only-L --libs-only-other xrandr)',
-+-            ],
-+-            'libraries': [
-+-              '<!@(pkg-config --libs-only-l xrandr)',
-+-            ],
-+-          },
-+-        }],
-+-      ],
-+-    },
-+   ],
-+ }
-+-- 
-+1.9.1
-+
-diff --git a/recipes-qt/qt5/qtwebengine/0001-Strip-unwanted-echo-compiling-prefix-from-CC.patch b/recipes-qt/qt5/qtwebengine/0001-Strip-unwanted-echo-compiling-prefix-from-CC.patch
-new file mode 100644
-index 0000000..6b31598
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0001-Strip-unwanted-echo-compiling-prefix-from-CC.patch
-@@ -0,0 +1,38 @@
-+From 7a3179fee9c88ce3dd018b2f159e1b5df74fc7cc Mon Sep 17 00:00:00 2001
-+From: Simon Busch <morphis@gravedo.de>
-+Date: Fri, 20 Jun 2014 19:04:14 +0200
-+Subject: [PATCH] Strip unwanted "@echo compiling &&" prefix from ${CC}
-+
-+Causes problems when called from a perl script:
-+
-+@echo compiling  && arm-webos-linux-gnueabi-gcc -march=armv7-a -mthumb-interwork -mfloat-abi=softfp -mfpu=neon --sysroot=/home/morphis/work/wop/webos-ports/tmp-eglibc/sysroots/tenderloinCan't exec "@echo": No such file or directory at /home/morphis/work/wop/webos-ports/tmp-eglibc/sysroots/x86_64-linux/usr/lib/perl-native/perl/5.14.3/IPC/Open3.pm line 288.
-+open2: exec of @echo compiling && arm-webos-linux-gnueabi-gcc -march=armv7-a -mthumb-interwork -mfloat-abi=softfp -mfpu=neon --sysroot=/home/morphis/work/wop/webos-ports/tmp-eglibc/sysroots/tenderloin -E -P -x c++ -DENABLE_CUSTOM_SCHEME_HANDLER=0 -DENABLE_SVG_FONTS=1 -DENABLE_GDI_FONTS_ON_WINDOWS=0 -DENABLE_HARFBUZZ_ON_WINDOWS=1 -DWTF_USE_CONCATENATED_IMPULSE_RESPONSES=1 -DENABLE_INPUT_SPEECH=1 -DENABLE_INPUT_MULTIPLE_FIELDS_UI=1 -DENABLE_LEGACY_NOTIFICATIONS=1 -DENABLE_MEDIA_CAPTURE=0 -DENABLE_NAVIGATOR_CONTENT_UTILS=1 -DENABLE_ORIENTATION_EVENTS=0 -DENABLE_WEB_AUDIO=1 -DWTF_USE_WEBAUDIO_FFMPEG=1 -DENABLE_OPENTYPE_VERTICAL=1 -DWTF_USE_DEFAULT_RENDER_THEME=1 css/html.css failed at ../build/scripts/preprocessor.pm line 81
-+Traceback (most recent call last):
-+  File "../build/scripts/action_useragentstylesheets.py", line 124, in <module>
-+    sys.exit(main(sys.argv))
-+  File "../build/scripts/action_useragentstylesheets.py", line 118, in main
-+    assert returnCode == 0
-+AssertionError
-+
-+Signed-off-by: Simon Busch <morphis@gravedo.de>
-+---
-+ .../WebKit/Source/build/scripts/action_useragentstylesheets.py         | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/src/3rdparty/chromium/third_party/WebKit/Source/build/scripts/action_useragentstylesheets.py b/src/3rdparty/chromium/third_party/WebKit/Source/build/scripts/action_useragentstylesheets.py
-+index c0712b3..8460637 100644
-+--- a/src/3rdparty/chromium/third_party/WebKit/Source/build/scripts/action_useragentstylesheets.py
-++++ b/src/3rdparty/chromium/third_party/WebKit/Source/build/scripts/action_useragentstylesheets.py
-+@@ -112,6 +112,9 @@ def main(args):
-+     command.extend([outputH, outputCpp])
-+     command.extend(styleSheets)
-+ 
-++    if os.environ["CC"].startswith("@echo"):
-++        os.environ["CC"] = os.environ["CC"].replace("@echo compiling  &&", "")
-++
-+     # Do it. check_call is new in 2.5, so simulate its behavior with call and
-+     # assert.
-+     returnCode = subprocess.call(command)
-+-- 
-+1.9.1
-+
-diff --git a/recipes-qt/qt5/qtwebengine/0002-Use-ninja-supplied-by-environment-variable-NINJA_PAT.patch b/recipes-qt/qt5/qtwebengine/0002-Use-ninja-supplied-by-environment-variable-NINJA_PAT.patch
-new file mode 100644
-index 0000000..c64b32a
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0002-Use-ninja-supplied-by-environment-variable-NINJA_PAT.patch
-@@ -0,0 +1,36 @@
-+From 2fe53c4c28f91941ee3b446e88f519feb2edc457 Mon Sep 17 00:00:00 2001
-+From: Simon Busch <morphis@gravedo.de>
-+Date: Fri, 20 Jun 2014 09:09:12 +0200
-+Subject: [PATCH 2/2] Use ninja supplied by environment variable NINJA_PATH
-+
-+Signed-off-by: Simon Busch <morphis@gravedo.de>
-+---
-+ tools/qmake/mkspecs/features/functions.prf | 14 ++------------
-+ 1 file changed, 2 insertions(+), 12 deletions(-)
-+
-+diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
-+index 4dcd8ed..8725fd2 100644
-+--- a/tools/qmake/mkspecs/features/functions.prf
-++++ b/tools/qmake/mkspecs/features/functions.prf
-+@@ -84,16 +84,6 @@ defineReplace(which) {
-+ }
-+ 
-+ defineReplace(findOrBuildNinja) {
-+-    git_chromium_src_dir = $$system("git config qtwebengine.chromiumsrcdir")
-+-    # Fall back to the snapshot path if git does not know about chromium sources (i.e. init-repository.py has not been used)
-+-    isEmpty(git_chromium_src_dir): git_chromium_src_dir = "src/3rdparty/chromium"
-+-
-+-    out = $$absolute_path("$$git_chromium_src_dir/../ninja/ninja", "$$QTWEBENGINE_ROOT")
-+-    win32: out = $$system_path($${out}.exe)
-+-
-+-    # If we did not find ninja, then we bootstrap it.
-+-    !exists($$out) {
-+-        system("python $$dirname(out)/bootstrap.py")
-+-    }
-+-    return($$out)
-++    message(Using ninja from path $$NINJA_PATH)
-++    return($$NINJA_PATH)
-+ }
-+-- 
-+1.9.1
-+
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-new file mode 100644
-index 0000000..f4964bf
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -0,0 +1,24 @@
-+require qt5-git.inc
-+require ${PN}.inc
-+
-+# QtWebEngine has it's own version format currently and doesn't follow the major Qt
-+# versions (but it's release are at the same time as of major Qt releases). We're tracking
-+# the master branch which will lead to 1.0 when Qt 5.4 is released here.
-+PV = "0.9.99+git${SRCPV}"
-+
-+QT_MODULE_BRANCH = "master"
-+
-+# For now we have to define SRC_URI here again as qt5-git.inc points to
-+# qt.gitorious.org/qt/ but qtwebengine is still on qt.gitorious.org/qt-labs/ which will
-+# switch soon.
-+SRC_URI = " \
-+    git://gitorious.org/qt-labs/qtwebengine.git;name=qtwebengine;protocol=git;branch=${QT_MODULE_BRANCH} \
-+    git://gitorious.org/qt-labs/chromium.git;name=chromium;protocol=git;branch=${QT_MODULE_BRANCH};destsuffix=git/src/3rdparty \
-+    file://0001-Drop-build-time-only-dependency-on-x11-libraries.patch \
-+    file://0002-Use-ninja-supplied-by-environment-variable-NINJA_PAT.patch \
-+    file://0001-Strip-unwanted-echo-compiling-prefix-from-CC.patch \
-+"
-+SRCREV_qtwebengine = "21f6ce84ecca9a4ff2aa980b21d2e5174c78d14b"
-+SRCREV_chromium = "1f3cc8c2618979b557d60ef1ad984a49dca83bff"
-+
-+SRCREV_FORMAT = "qtwebengine"
+> On Tuesday 24 June 2014 09:54:12 Anders Darander wrote:
+> > * runtime dependencies are TUNE_PKGARCH causing do_package_write_*
+> >   task to have different signature for MACHINEs with different
+> >   TUNE_PKGARCH
+
+> > -inherit allarch perlnative update-rc.d
+> > +inherit perlnative update-rc.d
+
+> So apart from me being reticent to make this change at all (for reasons that 
+> we've discussed before), 
+
+Yes, I'm well aware of those discussions. I was actually thinking about
+CC:ing you on my reply to Martin, after he suggested something like this
+change.
+
+> there is another issue - allarch.bbclass does more than just setting
+> PACKAGE_ARCH, it also disables certain other functionality such as
+> debug symbol splitting which is superfluous for these kinds of
+> recipes; in my testing when I originally wrote the webmin recipe this
+> significantly reduced the time required to build the recipe. We can't
+> just drop this inherit without regard to that. (I'm sure the same
+> applies elsewhere, it's just that the size of webmin makes the impact
+> significant.)
+
+I'm all for saving time! (And I'm not personally concerned by this
+issue, as I'm currently only using webmin in a build tree for a signle
+machine).
+
+Though, to get back to Martin Jansa's issue; if there isn't already an
+enhancment request file to the Yocto bugzilla, maybe it's time to file
+one regarding the possibillity of having an allarch package
+RDEPENDS/RRECOMMNEND a package with an ARCH or MACHINE tune...
+
+Paul, what do you think about the feasibility of finding such a
+solution?
+
+Cheers,
+Anders
+
 -- 
-1.9.1
-
+Anders Darander
+ChargeStorm AB / eStorm AB
 
