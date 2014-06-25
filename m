@@ -1,38 +1,29 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-pb0-f53.google.com (mail-pb0-f53.google.com
-	[209.85.160.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 0819565E83
+Return-Path: <denis@denix.org>
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id B76CF65D0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 18:50:06 +0000 (UTC)
-Received: by mail-pb0-f53.google.com with SMTP id uo5so2058356pbc.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 11:50:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+0/XeexMQ1loLr4DUnQJHAeXDtYS+qBZ+iz/NX4Hh64=;
-	b=OX3tiqA6YfE4DHu7gSUu5VD1n9dwAfYR+FKZBHnHL9PPeIMhaYUsjGjpz7lJ4qK3Rp
-	IaL+2++P4zy80cUiDskzBCkkt3myQr3Z2kRXX8Av2029nLXyc5lWRd90rMfW3YU7jErI
-	gfhIMwlSOMDAhmUmBdbLyqWm9Xy5pRMgx+s4jNvN7+CoLLGEgXRmTUqJKhrMaj5Eb/T+
-	TF7P38adXZojD7qFIhUWLhT+IyJOziGrcBXB1DHwETXC0MMuQQ6p30Vhv2C97s5UCssE
-	UD2VRoJRz59jhwcI2R+whcQuF09iom6SWrM13fXITD5ycPyFNV6EeXksw9+V89t3Gtoy
-	bRMw==
-X-Received: by 10.68.139.36 with SMTP id qv4mr14434879pbb.82.1403722207601;
-	Wed, 25 Jun 2014 11:50:07 -0700 (PDT)
-Received: from mattsbaby.amer.corp.natinst.com
-	(64-186-172-226.static-ip.telepacific.net. [64.186.172.226])
-	by mx.google.com with ESMTPSA id tg9sm6395712pbc.29.2014.06.25.11.50.06
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 25 Jun 2014 11:50:06 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
+	Wed, 25 Jun 2014 18:55:38 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173025.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N7Q00FLDN7STZ80@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	25 Jun 2014 13:55:20 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 692202009B; Wed,
+	25 Jun 2014 14:55:04 -0400 (EDT)
+Date: Wed, 25 Jun 2014 14:55:04 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jun 2014 11:49:51 -0700
-Message-Id: <1403722191-2291-2-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1403722191-2291-1-git-send-email-philip@balister.org>
-References: <1403722191-2291-1-git-send-email-philip@balister.org>
-Subject: [meta-oe][PATCH 2/2] cppzmq : Adds C++ API for zeromq.
+Message-id: <20140625185504.GD1580@denix.org>
+References: <53AA0672.7070606@balister.org>
+	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
+	<53AB1718.7000608@balister.org>
+MIME-version: 1.0
+In-reply-to: <53AB1718.7000608@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: State of the art for creating an image that you can dd to an SD card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 18:50:07 -0000
+X-List-Received-Date: Wed, 25 Jun 2014 18:55:41 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+On Wed, Jun 25, 2014 at 11:38:16AM -0700, Philip Balister wrote:
+> On 06/25/2014 03:07 AM, Paul Eggleton wrote:
+> > On Tuesday 24 June 2014 16:14:58 Philip Balister wrote:
+> >> What's the best available solution for creating an image you can dd to
+> >> an SD card? It seems like this wheel has been invented several times and
+> >> I am wondering if people are converging on one approach.
+> >>
+> >> Bonus points for resizing the linux partition.
+> >>
+> >> How are people doing this today?
+> > 
+> > I think wic has seen some uptake and enhancement since its introduction a 
+> > couple of releases ago. It has certainly worked for me in writing SD cards for 
+> > Galileo. We seem to be a bit short on documentation for it though...
+> 
+> Googling for "wic sd" doesn't help. I've seen some commits, so I'll take
+> a look in the meta data.
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-new file mode 100644
-index 0000000..3409976
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "C++ bindings for ZeroMQ"
-+HOMEPAGE = "http://www.zeromq.org"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
-+DEPENDS = "zeromq"
-+SRCREV = "ee47ae4cddc304741526c9bb2035f98c3274e0ec"
-+
-+SRC_URI = "git://github.com/zeromq/cppzmq.git"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install () {
-+        install -d ${D}/usr/include
-+        install -m 0755 ${S}/zmq.hpp ${D}/usr/include/
-+}
-+
-+PACKAGES = "${PN}-dev"
-+
-+RDEPENDS_${PN}-dev = "zeromq-dev"
+http://cgit.openembedded.org/openembedded-core/tree/scripts/wic
+
+But indeed, better documentation would be most appreciated.
+
 -- 
-1.9.0
-
+Denys
 
