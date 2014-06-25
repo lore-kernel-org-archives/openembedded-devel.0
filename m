@@ -1,25 +1,37 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id EB1D6601A8
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-pb0-f50.google.com (mail-pb0-f50.google.com
+	[209.85.160.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C336605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 18:38:17 +0000 (UTC)
-Received: (qmail 10816 invoked by uid 1003); 25 Jun 2014 18:38:18 -0000
-Received: from unknown (HELO ?10.16.32.86?) (philip@opensdr.com@64.186.172.226)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	25 Jun 2014 18:38:18 -0000
-Message-ID: <53AB1718.7000608@balister.org>
-Date: Wed, 25 Jun 2014 11:38:16 -0700
+	Wed, 25 Jun 2014 18:50:03 +0000 (UTC)
+Received: by mail-pb0-f50.google.com with SMTP id rp16so2053184pbb.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jun 2014 11:50:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=iI2C+eq2+HRANisIrYmlDMQoQpmMyEjmSa2hvEpHXIA=;
+	b=ZpvjPnZP1O9lIb5Qqc+dzKUwxD4psq8cOitnPxynYk4FGyflY2A7OlOFdiltUiofqS
+	cZzh176YWwl47WE2RAeUCkxBP4mf3Z4GwDzqKotmZ1ZieTXoN3JCD281EKWSh62iCw5f
+	q/gQT5mpXaAvIQcCpbi8rpDZ64vfETSb1/ZwFULt7o4973ze7FQlKTFZIpZpS03q8jWe
+	OZvybNElR6ZYkOWCixkvx+NC/W2hypyF7eGaGy1UqG8zFOI/tRL0p5nowv+jHNICCFeS
+	trKE7ti5X7Kc/MO8GD06rgAICVNljnYuumhGjo0fRK8LfT/tqog5yDzXT/VVQVbSV8OR
+	2HTA==
+X-Received: by 10.66.119.136 with SMTP id ku8mr14131678pab.121.1403722205076; 
+	Wed, 25 Jun 2014 11:50:05 -0700 (PDT)
+Received: from mattsbaby.amer.corp.natinst.com
+	(64-186-172-226.static-ip.telepacific.net. [64.186.172.226])
+	by mx.google.com with ESMTPSA id tg9sm6395712pbc.29.2014.06.25.11.50.04
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 25 Jun 2014 11:50:04 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
 From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
-MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <53AA0672.7070606@balister.org>
-	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
-X-Enigmail-Version: 1.6
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: State of the art for creating an image that you can dd to an SD card
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Jun 2014 11:49:50 -0700
+Message-Id: <1403722191-2291-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.9.0
+Cc: Martin Townsend <martin.townsend@xsilon.com>
+Subject: [meta-oe][PATCH 1/2] zero-mq : Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,31 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 18:38:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Jun 2014 18:50:05 -0000
 
-On 06/25/2014 03:07 AM, Paul Eggleton wrote:
-> On Tuesday 24 June 2014 16:14:58 Philip Balister wrote:
->> What's the best available solution for creating an image you can dd to
->> an SD card? It seems like this wheel has been invented several times and
->> I am wondering if people are converging on one approach.
->>
->> Bonus points for resizing the linux partition.
->>
->> How are people doing this today?
-> 
-> I think wic has seen some uptake and enhancement since its introduction a 
-> couple of releases ago. It has certainly worked for me in writing SD cards for 
-> Galileo. We seem to be a bit short on documentation for it though...
+Builds on ARM and tests ran on Zynq.
 
-Googling for "wic sd" doesn't help. I've seen some commits, so I'll take
-a look in the meta data.
+Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Martin Townsend <martin.townsend@xsilon.com>
+---
+ .../recipes-connectivity/zeromq/zeromq_4.0.4.bb    | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb
 
-Philip
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb
+new file mode 100644
+index 0000000..014114f
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.0.4.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like a concurrency framework"
++HOMEPAGE = "http://www.zeromq.org"
++LICENSE = "LGPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
++
++SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz"
++SRC_URI[md5sum] = "f3c3defbb5ef6cc000ca65e529fdab3b"
++SRC_URI[sha256sum] = "1ef71d46e94f33e27dd5a1661ed626cd39be4d2d6967792a275040e34457d399"
++
++S = "${WORKDIR}/zeromq-${PV}"
++
++#Uncomment to choose polling system manually. valid values are kqueue, epoll, devpoll, poll or select
++#EXTRA_OECONF += "--with-poller=kqueue"
++#CFLAGS_append += "-O0"
++#CXXFLAGS_append += "-O0"
++
++inherit autotools
++
++do_install_append () {
++        install -d ${D}${bindir}/tests/zeromq-${PV}
++        install -m 0755 ${B}/tests/.libs/* ${D}${bindir}/tests/zeromq-${PV}
++}
++
++PACKAGES = "${PN}-dbg ${PN}-test ${PN} ${PN}-staticdev ${PN}-doc ${PN}-dev ${PN}-locale"
++
++FILES_${PN}-dbg =+ "${bindir}/tests/zeromq-${PV}/.debug"
++FILES_${PN}-test = "${bindir}/tests"
+-- 
+1.9.0
 
-> 
-> Cheers,
-> Paul
-> 
 
