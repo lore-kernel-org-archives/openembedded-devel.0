@@ -1,28 +1,26 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 341E565D03
+Return-Path: <morphis@gravedo.de>
+Received: from gravedo.de (gravedo.de [85.214.79.159])
+	by mail.openembedded.org (Postfix) with ESMTP id 5610060CFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 07:46:09 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 25 Jun 2014 00:46:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,544,1400050800"; d="scan'208";a="563070145"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.121.119])
-	by orsmga002.jf.intel.com with ESMTP; 25 Jun 2014 00:45:57 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Anders Darander <anders@chargestorm.se>,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 25 Jun 2014 08:45:55 +0100
-Message-ID: <2430004.5QNcodJTid@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.12.5 (Linux/3.14.8-200.fc20.x86_64; KDE/4.12.5; x86_64; ; )
-In-Reply-To: <1b5c27f39444bed435c8c050b2fb6def74a5adb8.1403596416.git.anders@chargestorm.se>
-References: <cover.1403596416.git.anders@chargestorm.se>
-	<1b5c27f39444bed435c8c050b2fb6def74a5adb8.1403596416.git.anders@chargestorm.se>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH 1/1] webmin: drop allarch
+	Wed, 25 Jun 2014 08:05:11 +0000 (UTC)
+Received: by gravedo.de (Postfix, from userid 7791)
+	id 240553B34110; Wed, 25 Jun 2014 09:55:29 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.3.1 (2010-03-16) on
+	h1108419.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED
+	autolearn=unavailable version=3.3.1
+Received: from localhost (dslb-092-077-006-204.pools.arcor-ip.net
+	[92.77.6.204]) by gravedo.de (Postfix) with ESMTPSA id 2911A3B340F7;
+	Wed, 25 Jun 2014 09:55:20 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Jun 2014 09:55:16 +0200
+Message-Id: <1403682917-7598-2-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1403682917-7598-1-git-send-email-morphis@gravedo.de>
+References: <1403682917-7598-1-git-send-email-morphis@gravedo.de>
+Subject: [PATCH 1/2] ninja-native: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,51 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 07:46:13 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 25 Jun 2014 08:05:15 -0000
 
-On Tuesday 24 June 2014 09:54:12 Anders Darander wrote:
-> * runtime dependencies are TUNE_PKGARCH causing do_package_write_*
->   task to have different signature for MACHINEs with different
->   TUNE_PKGARCH
-> 
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
-> ---
->  meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-> b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb index
-> 7eb1d63..0f8781f 100644
-> --- a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-> +++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-> @@ -20,7 +20,7 @@ SRC_URI =
-> "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \ SRC_URI[md5sum] =
-> "e93bc5057a5b7d7e31ecb2bb228d7044"
->  SRC_URI[sha256sum] =
-> "3d36153406d8e5d3dcaeadba34dfb5cdbc4060b75c38339174ac97b2277f284b"
-> 
-> -inherit allarch perlnative update-rc.d
-> +inherit perlnative update-rc.d
-> 
->  do_configure() {
->      # Remove binaries and plugins for other platforms
+Needed to build qtwebengine. Taken from meta-browser.
 
-So apart from me being reticent to make this change at all (for reasons that 
-we've discussed before), there is another issue - allarch.bbclass does more 
-than just setting PACKAGE_ARCH, it also disables certain other functionality 
-such as debug symbol splitting which is superfluous for these kinds of recipes; 
-in my testing when I originally wrote the webmin recipe this significantly 
-reduced the time required to build the recipe. We can't just drop this inherit 
-without regard to that. (I'm sure the same applies elsewhere, it's just that 
-the size of webmin makes the impact significant.)
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes-devtools/ninja/ninja-native_1.4.0.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 recipes-devtools/ninja/ninja-native_1.4.0.bb
 
-Cheers,
-Paul
-
+diff --git a/recipes-devtools/ninja/ninja-native_1.4.0.bb b/recipes-devtools/ninja/ninja-native_1.4.0.bb
+new file mode 100644
+index 0000000..a115c2e
+--- /dev/null
++++ b/recipes-devtools/ninja/ninja-native_1.4.0.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Ninja is a small build system with a focus on speed."
++LICENSE = "Apache-2"
++
++inherit native
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=a81586a64ad4e476c791cda7e2f2c52e"
++
++SRCREV="63d5b1013cafb2db95687cf446eb5bb68cf6a27a"
++SRCBRANCH="release"
++
++SRC_URI = "git://github.com/martine/ninja.git;branch=${SRCBRANCH}"
++
++S="${WORKDIR}/git"
++
++do_compile() {
++    python ${S}/bootstrap.py
++}
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/ninja ${D}${bindir}/ninja
++}
 -- 
+1.9.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
