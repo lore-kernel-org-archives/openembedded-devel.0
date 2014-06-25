@@ -1,47 +1,30 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 10C84607FE
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B0A1E609BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 02:10:06 +0000 (UTC)
-Received: by mail-ig0-f180.google.com with SMTP id h18so1222657igc.1
+	Wed, 25 Jun 2014 02:19:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5P2JGfq001583
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jun 2014 19:10:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-type:content-disposition:in-reply-to
-	:user-agent;
-	bh=+oPahsA+QqTntmk3EhpZnNlBsb2Ds1a/FaE5mqdYrjw=;
-	b=lJjZRcC9FKLyD52U3II+Qx3n16FcuFka8fxdAB4kQahRUdGnAdYplhR6LD6kknMzFz
-	nZ+kglePpmaecHZR02ZmRZxhf/6QE+rQUy3CANrwlKog/tey9UaXdk3E/HTYhMzW1wX4
-	7y8mgKmeXY1yHfaBl/iR9m1baaJKaH979ib1QUSCJRu2Lzqgoe6gWLyfhE4qa9056iDJ
-	f6vQYGOM5dqe4INvx/UtKH5MmTFUtrPzlaf0TGbfGHlJYUhL+OVHDf8KvaTjD/WR7FnZ
-	rmxm2FLNenU5JWgrDRTAflgfCSw7nZuI388omBcFxJy4ihsVwd/OOYu5q52gCe86t+sD
-	mytQ==
-X-Gm-Message-State: ALoCoQm6o/g6NkHn/QivHkTLf7gTsUTkNVer0GwoJiRgCItiK8mIF4GQvLkO8lMKX3Xl9Nju+tVI
-X-Received: by 10.42.107.68 with SMTP id c4mr4402193icp.60.1403662207686;
-	Tue, 24 Jun 2014 19:10:07 -0700 (PDT)
-Received: from skynet (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id p12sm2575774igx.18.2014.06.24.19.10.06
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 24 Jun 2014 19:10:06 -0700 (PDT)
-Received: by skynet (Postfix, from userid 1000)
-	id 90844168543; Tue, 24 Jun 2014 22:10:05 -0400 (EDT)
-Date: Tue, 24 Jun 2014 22:10:05 -0400
-From: Joe MacDonald <joe@deserted.net>
-To: "Franklin S. Cooper Jr" <fcooper@ti.com>
-Message-ID: <20140625021001.GC31512@deserted.net>
-References: <1402596658-17371-1-git-send-email-fcooper@ti.com>
+	Tue, 24 Jun 2014 19:19:16 -0700 (PDT)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.169.1;
+	Tue, 24 Jun 2014 19:19:16 -0700
+Message-ID: <53AA3191.9040303@windriver.com>
+Date: Wed, 25 Jun 2014 10:18:57 +0800
+From: Chong Lu <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
 MIME-Version: 1.0
-In-Reply-To: <1402596658-17371-1-git-send-email-fcooper@ti.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] ptpd: update to 2.3.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1402639978-4607-1-git-send-email-Chong.Lu@windriver.com>	<20140613111128.GG2428@jama>
+	<20140623110500.GC2437@jama>
+In-Reply-To: <20140623110500.GC2437@jama>
+X-Originating-IP: [128.224.162.204]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 1/5] samba: Security Advisory - CVE-2013-4496
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,159 +38,1036 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 02:10:13 -0000
-X-Groupsio-MsgNum: 50564
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CblX+4bnyfN0pR09"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Jun 2014 02:19:17 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---CblX+4bnyfN0pR09
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-[[oe] [meta-networking][PATCH] ptpd: update to 2.3.0] On 14.06.12 (Thu 13:1=
-0) Franklin S. Cooper Jr wrote:
+On 06/23/2014 07:05 PM, Martin Jansa wrote:
+> On Fri, Jun 13, 2014 at 01:11:28PM +0200, Martin Jansa wrote:
+>> On Fri, Jun 13, 2014 at 02:12:54PM +0800, Chong Lu wrote:
+>>> Samba 3.x before 3.6.23, 4.0.x before 4.0.16, and 4.1.x before 4.1.6
+>>> does not enforce the password-guessing protection mechanism for all
+>>> interfaces, which makes it easier for remote attackers to obtain access
+>>> via brute-force ChangePasswordUser2 (1) SAMR or (2) RAP attempts.
+>>>
+>>> http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4496
+>> As you care about samba, would you mind sending fix for autodetecting
+>> talloc?
+>>
+>> see
+>> http://lists.openembedded.org/pipermail/openembedded-core/2014-June/093414.html
+> I've merged this changes (as I don't want to block security fixes), but
+> please fix autodetecting talloc.
+OK, I will send a patch to fix this issue.
 
-> ---
->  .../ptpd/ptpd-2.2.0/ld-as-needed.patch             |   37 --------------=
-------
->  .../ptpd/{ptpd_2.2.0.bb =3D> ptpd_2.3.0.bb}          |   21 ++++++-----
->  2 files changed, 11 insertions(+), 47 deletions(-)
->  delete mode 100644 meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as=
--needed.patch
->  rename meta-networking/recipes-daemons/ptpd/{ptpd_2.2.0.bb =3D> ptpd_2.3=
-=2E0.bb} (57%)
+Best Regards
+Chong
+>>> Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+>>> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+>>> ---
+>>>   .../samba/samba/samba-3.6.22-CVE-2013-4496.patch   |  966 ++++++++++++++++++++
+>>>   meta-oe/recipes-connectivity/samba/samba_3.6.8.bb  |    1 +
+>>>   2 files changed, 967 insertions(+)
+>>>   create mode 100644 meta-oe/recipes-connectivity/samba/samba/samba-3.6.22-CVE-2013-4496.patch
+>>>
+>>> diff --git a/meta-oe/recipes-connectivity/samba/samba/samba-3.6.22-CVE-2013-4496.patch b/meta-oe/recipes-connectivity/samba/samba/samba-3.6.22-CVE-2013-4496.patch
+>>> new file mode 100644
+>>> index 0000000..c190a6c
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-connectivity/samba/samba/samba-3.6.22-CVE-2013-4496.patch
+>>> @@ -0,0 +1,966 @@
+>>> +Upstream-Status: Backport
+>>> +
+>>> +From 25066eb31d6608075b5993b0d19b3e0843cdadeb Mon Sep 17 00:00:00 2001
+>>> +From: Andrew Bartlett <abartlet@samba.org>
+>>> +Date: Fri, 1 Nov 2013 14:55:44 +1300
+>>> +Subject: [PATCH 1/3] CVE-2013-4496:s3-samr: Block attempts to crack passwords
+>>> + via repeated password changes
+>>> +
+>>> +Bug: https://bugzilla.samba.org/show_bug.cgi?id=10245
+>>> +
+>>> +Signed-off-by: Andrew Bartlett <abartlet@samba.org>
+>>> +Signed-off-by: Stefan Metzmacher <metze@samba.org>
+>>> +Signed-off-by: Jeremy Allison <jra@samba.org>
+>>> +Reviewed-by: Stefan Metzmacher <metze@samba.org>
+>>> +Reviewed-by: Jeremy Allison <jra@samba.org>
+>>> +Reviewed-by: Andreas Schneider <asn@samba.org>
+>>> +---
+>>> + source3/rpc_server/samr/srv_samr_chgpasswd.c |   55 ++++++++++++++++
+>>> + source3/rpc_server/samr/srv_samr_nt.c        |   90 +++++++++++++++++++++-----
+>>> + 2 files changed, 129 insertions(+), 16 deletions(-)
+>>> +
+>>> +diff --git a/source3/rpc_server/samr/srv_samr_chgpasswd.c b/source3/rpc_server/samr/srv_samr_chgpasswd.c
+>>> +index 0b4b25b..59905be 100644
+>>> +--- a/source3/rpc_server/samr/srv_samr_chgpasswd.c
+>>> ++++ b/source3/rpc_server/samr/srv_samr_chgpasswd.c
+>>> +@@ -1106,6 +1106,8 @@ NTSTATUS pass_oem_change(char *user, const char *rhost,
+>>> + 	struct samu *sampass = NULL;
+>>> + 	NTSTATUS nt_status;
+>>> + 	bool ret = false;
+>>> ++	bool updated_badpw = false;
+>>> ++	NTSTATUS update_login_attempts_status;
+>>> +
+>>> + 	if (!(sampass = samu_new(NULL))) {
+>>> + 		return NT_STATUS_NO_MEMORY;
+>>> +@@ -1121,6 +1123,13 @@ NTSTATUS pass_oem_change(char *user, const char *rhost,
+>>> + 		return NT_STATUS_NO_SUCH_USER;
+>>> + 	}
+>>> +
+>>> ++	/* Quit if the account was locked out. */
+>>> ++	if (pdb_get_acct_ctrl(sampass) & ACB_AUTOLOCK) {
+>>> ++		DEBUG(3,("check_sam_security: Account for user %s was locked out.\n", user));
+>>> ++		TALLOC_FREE(sampass);
+>>> ++		return NT_STATUS_ACCOUNT_LOCKED_OUT;
+>>> ++	}
+>>> ++
+>>> + 	nt_status = check_oem_password(user,
+>>> + 				       password_encrypted_with_lm_hash,
+>>> + 				       old_lm_hash_encrypted,
+>>> +@@ -1129,6 +1138,52 @@ NTSTATUS pass_oem_change(char *user, const char *rhost,
+>>> + 				       sampass,
+>>> + 				       &new_passwd);
+>>> +
+>>> ++	/*
+>>> ++	 * Notify passdb backend of login success/failure. If not
+>>> ++	 * NT_STATUS_OK the backend doesn't like the login
+>>> ++	 */
+>>> ++	update_login_attempts_status = pdb_update_login_attempts(sampass,
+>>> ++						NT_STATUS_IS_OK(nt_status));
+>>> ++
+>>> ++	if (!NT_STATUS_IS_OK(nt_status)) {
+>>> ++		bool increment_bad_pw_count = false;
+>>> ++
+>>> ++		if (NT_STATUS_EQUAL(nt_status, NT_STATUS_WRONG_PASSWORD) &&
+>>> ++		    (pdb_get_acct_ctrl(sampass) & ACB_NORMAL) &&
+>>> ++		    NT_STATUS_IS_OK(update_login_attempts_status))
+>>> ++		{
+>>> ++			increment_bad_pw_count = true;
+>>> ++		}
+>>> ++
+>>> ++		if (increment_bad_pw_count) {
+>>> ++			pdb_increment_bad_password_count(sampass);
+>>> ++			updated_badpw = true;
+>>> ++		} else {
+>>> ++			pdb_update_bad_password_count(sampass,
+>>> ++						      &updated_badpw);
+>>> ++		}
+>>> ++	} else {
+>>> ++
+>>> ++		if ((pdb_get_acct_ctrl(sampass) & ACB_NORMAL) &&
+>>> ++		    (pdb_get_bad_password_count(sampass) > 0)){
+>>> ++			pdb_set_bad_password_count(sampass, 0, PDB_CHANGED);
+>>> ++			pdb_set_bad_password_time(sampass, 0, PDB_CHANGED);
+>>> ++			updated_badpw = true;
+>>> ++		}
+>>> ++	}
+>>> ++
+>>> ++	if (updated_badpw) {
+>>> ++		NTSTATUS update_status;
+>>> ++		become_root();
+>>> ++		update_status = pdb_update_sam_account(sampass);
+>>> ++		unbecome_root();
+>>> ++
+>>> ++		if (!NT_STATUS_IS_OK(update_status)) {
+>>> ++			DEBUG(1, ("Failed to modify entry: %s\n",
+>>> ++				  nt_errstr(update_status)));
+>>> ++		}
+>>> ++	}
+>>> ++
+>>> + 	if (!NT_STATUS_IS_OK(nt_status)) {
+>>> + 		TALLOC_FREE(sampass);
+>>> + 		return nt_status;
+>>> +diff --git a/source3/rpc_server/samr/srv_samr_nt.c b/source3/rpc_server/samr/srv_samr_nt.c
+>>> +index 78ef1ba..3241b97 100644
+>>> +--- a/source3/rpc_server/samr/srv_samr_nt.c
+>>> ++++ b/source3/rpc_server/samr/srv_samr_nt.c
+>>> +@@ -1715,9 +1715,11 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 	NTSTATUS status;
+>>> + 	bool ret = false;
+>>> + 	struct samr_user_info *uinfo;
+>>> +-	struct samu *pwd;
+>>> ++	struct samu *pwd = NULL;
+>>> + 	struct samr_Password new_lmPwdHash, new_ntPwdHash, checkHash;
+>>> + 	struct samr_Password lm_pwd, nt_pwd;
+>>> ++	bool updated_badpw = false;
+>>> ++	NTSTATUS update_login_attempts_status;
+>>> +
+>>> + 	uinfo = policy_handle_find(p, r->in.user_handle,
+>>> + 				   SAMR_USER_ACCESS_SET_PASSWORD, NULL,
+>>> +@@ -1729,6 +1731,15 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 	DEBUG(5,("_samr_ChangePasswordUser: sid:%s\n",
+>>> + 		  sid_string_dbg(&uinfo->sid)));
+>>> +
+>>> ++	/* basic sanity checking on parameters.  Do this before any database ops */
+>>> ++	if (!r->in.lm_present || !r->in.nt_present ||
+>>> ++	    !r->in.old_lm_crypted || !r->in.new_lm_crypted ||
+>>> ++	    !r->in.old_nt_crypted || !r->in.new_nt_crypted) {
+>>> ++		/* we should really handle a change with lm not
+>>> ++		   present */
+>>> ++		return NT_STATUS_INVALID_PARAMETER_MIX;
+>>> ++	}
+>>> ++
+>>> + 	if (!(pwd = samu_new(NULL))) {
+>>> + 		return NT_STATUS_NO_MEMORY;
+>>> + 	}
+>>> +@@ -1742,6 +1753,14 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 		return NT_STATUS_WRONG_PASSWORD;
+>>> + 	}
+>>> +
+>>> ++	/* Quit if the account was locked out. */
+>>> ++	if (pdb_get_acct_ctrl(pwd) & ACB_AUTOLOCK) {
+>>> ++		DEBUG(3, ("Account for user %s was locked out.\n",
+>>> ++			  pdb_get_username(pwd)));
+>>> ++		status = NT_STATUS_ACCOUNT_LOCKED_OUT;
+>>> ++		goto out;
+>>> ++	}
+>>> ++
+>>> + 	{
+>>> + 		const uint8_t *lm_pass, *nt_pass;
+>>> +
+>>> +@@ -1750,29 +1769,19 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> +
+>>> + 		if (!lm_pass || !nt_pass) {
+>>> + 			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto out;
+>>> ++			goto update_login;
+>>> + 		}
+>>> +
+>>> + 		memcpy(&lm_pwd.hash, lm_pass, sizeof(lm_pwd.hash));
+>>> + 		memcpy(&nt_pwd.hash, nt_pass, sizeof(nt_pwd.hash));
+>>> + 	}
+>>> +
+>>> +-	/* basic sanity checking on parameters.  Do this before any database ops */
+>>> +-	if (!r->in.lm_present || !r->in.nt_present ||
+>>> +-	    !r->in.old_lm_crypted || !r->in.new_lm_crypted ||
+>>> +-	    !r->in.old_nt_crypted || !r->in.new_nt_crypted) {
+>>> +-		/* we should really handle a change with lm not
+>>> +-		   present */
+>>> +-		status = NT_STATUS_INVALID_PARAMETER_MIX;
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> + 	/* decrypt and check the new lm hash */
+>>> + 	D_P16(lm_pwd.hash, r->in.new_lm_crypted->hash, new_lmPwdHash.hash);
+>>> + 	D_P16(new_lmPwdHash.hash, r->in.old_lm_crypted->hash, checkHash.hash);
+>>> + 	if (memcmp(checkHash.hash, lm_pwd.hash, 16) != 0) {
+>>> + 		status = NT_STATUS_WRONG_PASSWORD;
+>>> +-		goto out;
+>>> ++		goto update_login;
+>>> + 	}
+>>> +
+>>> + 	/* decrypt and check the new nt hash */
+>>> +@@ -1780,7 +1789,7 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 	D_P16(new_ntPwdHash.hash, r->in.old_nt_crypted->hash, checkHash.hash);
+>>> + 	if (memcmp(checkHash.hash, nt_pwd.hash, 16) != 0) {
+>>> + 		status = NT_STATUS_WRONG_PASSWORD;
+>>> +-		goto out;
+>>> ++		goto update_login;
+>>> + 	}
+>>> +
+>>> + 	/* The NT Cross is not required by Win2k3 R2, but if present
+>>> +@@ -1789,7 +1798,7 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 		D_P16(lm_pwd.hash, r->in.nt_cross->hash, checkHash.hash);
+>>> + 		if (memcmp(checkHash.hash, new_ntPwdHash.hash, 16) != 0) {
+>>> + 			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto out;
+>>> ++			goto update_login;
+>>> + 		}
+>>> + 	}
+>>> +
+>>> +@@ -1799,7 +1808,7 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 		D_P16(nt_pwd.hash, r->in.lm_cross->hash, checkHash.hash);
+>>> + 		if (memcmp(checkHash.hash, new_lmPwdHash.hash, 16) != 0) {
+>>> + 			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto out;
+>>> ++			goto update_login;
+>>> + 		}
+>>> + 	}
+>>> +
+>>> +@@ -1810,6 +1819,55 @@ NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 	}
+>>> +
+>>> + 	status = pdb_update_sam_account(pwd);
+>>> ++
+>>> ++update_login:
+>>> ++
+>>> ++	/*
+>>> ++	 * Notify passdb backend of login success/failure. If not
+>>> ++	 * NT_STATUS_OK the backend doesn't like the login
+>>> ++	 */
+>>> ++	update_login_attempts_status = pdb_update_login_attempts(pwd,
+>>> ++						NT_STATUS_IS_OK(status));
+>>> ++
+>>> ++	if (!NT_STATUS_IS_OK(status)) {
+>>> ++		bool increment_bad_pw_count = false;
+>>> ++
+>>> ++		if (NT_STATUS_EQUAL(status,NT_STATUS_WRONG_PASSWORD) &&
+>>> ++		    (pdb_get_acct_ctrl(pwd) & ACB_NORMAL) &&
+>>> ++		    NT_STATUS_IS_OK(update_login_attempts_status))
+>>> ++		{
+>>> ++			increment_bad_pw_count = true;
+>>> ++		}
+>>> ++
+>>> ++		if (increment_bad_pw_count) {
+>>> ++			pdb_increment_bad_password_count(pwd);
+>>> ++			updated_badpw = true;
+>>> ++		} else {
+>>> ++			pdb_update_bad_password_count(pwd,
+>>> ++						      &updated_badpw);
+>>> ++		}
+>>> ++	} else {
+>>> ++
+>>> ++		if ((pdb_get_acct_ctrl(pwd) & ACB_NORMAL) &&
+>>> ++		    (pdb_get_bad_password_count(pwd) > 0)){
+>>> ++			pdb_set_bad_password_count(pwd, 0, PDB_CHANGED);
+>>> ++			pdb_set_bad_password_time(pwd, 0, PDB_CHANGED);
+>>> ++			updated_badpw = true;
+>>> ++		}
+>>> ++	}
+>>> ++
+>>> ++	if (updated_badpw) {
+>>> ++		NTSTATUS update_status;
+>>> ++		become_root();
+>>> ++		update_status = pdb_update_sam_account(pwd);
+>>> ++		unbecome_root();
+>>> ++
+>>> ++		if (!NT_STATUS_IS_OK(update_status)) {
+>>> ++			DEBUG(1, ("Failed to modify entry: %s\n",
+>>> ++				  nt_errstr(update_status)));
+>>> ++		}
+>>> ++	}
+>>> ++
+>>> +  out:
+>>> + 	TALLOC_FREE(pwd);
+>>> +
+>>> +--
+>>> +1.7.9.5
+>>> +
+>>> +
+>>> +From 059da248cf69a3b0ef29836f49367b938fb1cbda Mon Sep 17 00:00:00 2001
+>>> +From: Stefan Metzmacher <metze@samba.org>
+>>> +Date: Tue, 5 Nov 2013 14:04:20 +0100
+>>> +Subject: [PATCH 2/3] CVE-2013-4496:s3:auth: fix memory leak in the
+>>> + ACCOUNT_LOCKED_OUT case.
+>>> +
+>>> +Bug: https://bugzilla.samba.org/show_bug.cgi?id=10245
+>>> +
+>>> +Signed-off-by: Stefan Metzmacher <metze@samba.org>
+>>> +Reviewed-by: Jeremy Allison <jra@samba.org>
+>>> +Signed-off-by: Andrew Bartlett <abartlet@samba.org>
+>>> +Reviewed-by: Andreas Schneider <asn@samba.org>
+>>> +---
+>>> + source3/auth/check_samsec.c |    1 +
+>>> + 1 file changed, 1 insertion(+)
+>>> +
+>>> +diff --git a/source3/auth/check_samsec.c b/source3/auth/check_samsec.c
+>>> +index f918dc0..e2c42d6 100644
+>>> +--- a/source3/auth/check_samsec.c
+>>> ++++ b/source3/auth/check_samsec.c
+>>> +@@ -408,6 +408,7 @@ NTSTATUS check_sam_security(const DATA_BLOB *challenge,
+>>> + 	/* Quit if the account was locked out. */
+>>> + 	if (pdb_get_acct_ctrl(sampass) & ACB_AUTOLOCK) {
+>>> + 		DEBUG(3,("check_sam_security: Account for user %s was locked out.\n", username));
+>>> ++		TALLOC_FREE(sampass);
+>>> + 		return NT_STATUS_ACCOUNT_LOCKED_OUT;
+>>> + 	}
+>>> +
+>>> +--
+>>> +1.7.9.5
+>>> +
+>>> +
+>>> +From 27f982ef33a1238ae48d7a38d608dd23ebde61ae Mon Sep 17 00:00:00 2001
+>>> +From: Andrew Bartlett <abartlet@samba.org>
+>>> +Date: Tue, 5 Nov 2013 16:16:46 +1300
+>>> +Subject: [PATCH 3/3] CVE-2013-4496:samr: Remove ChangePasswordUser
+>>> +
+>>> +This old password change mechanism does not provide the plaintext to
+>>> +validate against password complexity, and it is not used by modern
+>>> +clients.
+>>> +
+>>> +The missing features in both implementations (by design) were:
+>>> +
+>>> + - the password complexity checks (no plaintext)
+>>> + - the minimum password length (no plaintext)
+>>> +
+>>> +Additionally, the source3 version did not check:
+>>> +
+>>> + - the minimum password age
+>>> + - pdb_get_pass_can_change() which checks the security
+>>> +   descriptor for the 'user cannot change password' setting.
+>>> + - the password history
+>>> + - the output of the 'passwd program' if 'unix passwd sync = yes'.
+>>> +
+>>> +Finally, the mechanism was almost useless, as it was incorrectly
+>>> +only made available to administrative users with permission
+>>> +to reset the password.  It is removed here so that it is not
+>>> +mistakenly reinstated in the future.
+>>> +
+>>> +Andrew Bartlett
+>>> +
+>>> +Bug: https://bugzilla.samba.org/show_bug.cgi?id=10245
+>>> +
+>>> +Signed-off-by: Andrew Bartlett <abartlet@samba.org>
+>>> +Reviewed-by: Andreas Schneider <asn@samba.org>
+>>> +Reviewed-by: Stefan Metzmacher <metze@samba.org>
+>>> +---
+>>> + source3/rpc_server/samr/srv_samr_nt.c   |  169 +-------------------
+>>> + source3/smbd/lanman.c                   |  254 -------------------------------
+>>> + source4/rpc_server/samr/samr_password.c |  126 +--------------
+>>> + source4/torture/rpc/samr.c              |   12 +-
+>>> + 4 files changed, 24 insertions(+), 537 deletions(-)
+>>> +
+>>> +diff --git a/source3/rpc_server/samr/srv_samr_nt.c b/source3/rpc_server/samr/srv_samr_nt.c
+>>> +index 3241b97..2519a3f 100644
+>>> +--- a/source3/rpc_server/samr/srv_samr_nt.c
+>>> ++++ b/source3/rpc_server/samr/srv_samr_nt.c
+>>> +@@ -1706,172 +1706,19 @@ NTSTATUS _samr_LookupNames(struct pipes_struct *p,
+>>> + }
+>>> +
+>>> + /****************************************************************
+>>> +- _samr_ChangePasswordUser
+>>> ++ _samr_ChangePasswordUser.
+>>> ++
+>>> ++ So old it is just not worth implementing
+>>> ++ because it does not supply a plaintext and so we can't do password
+>>> ++ complexity checking and cannot update other services that use a
+>>> ++ plaintext password via passwd chat/pam password change/ldap password
+>>> ++ sync.
+>>> + ****************************************************************/
+>>> +
+>>> + NTSTATUS _samr_ChangePasswordUser(struct pipes_struct *p,
+>>> + 				  struct samr_ChangePasswordUser *r)
+>>> + {
+>>> +-	NTSTATUS status;
+>>> +-	bool ret = false;
+>>> +-	struct samr_user_info *uinfo;
+>>> +-	struct samu *pwd = NULL;
+>>> +-	struct samr_Password new_lmPwdHash, new_ntPwdHash, checkHash;
+>>> +-	struct samr_Password lm_pwd, nt_pwd;
+>>> +-	bool updated_badpw = false;
+>>> +-	NTSTATUS update_login_attempts_status;
+>>> +-
+>>> +-	uinfo = policy_handle_find(p, r->in.user_handle,
+>>> +-				   SAMR_USER_ACCESS_SET_PASSWORD, NULL,
+>>> +-				   struct samr_user_info, &status);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		return status;
+>>> +-	}
+>>> +-
+>>> +-	DEBUG(5,("_samr_ChangePasswordUser: sid:%s\n",
+>>> +-		  sid_string_dbg(&uinfo->sid)));
+>>> +-
+>>> +-	/* basic sanity checking on parameters.  Do this before any database ops */
+>>> +-	if (!r->in.lm_present || !r->in.nt_present ||
+>>> +-	    !r->in.old_lm_crypted || !r->in.new_lm_crypted ||
+>>> +-	    !r->in.old_nt_crypted || !r->in.new_nt_crypted) {
+>>> +-		/* we should really handle a change with lm not
+>>> +-		   present */
+>>> +-		return NT_STATUS_INVALID_PARAMETER_MIX;
+>>> +-	}
+>>> +-
+>>> +-	if (!(pwd = samu_new(NULL))) {
+>>> +-		return NT_STATUS_NO_MEMORY;
+>>> +-	}
+>>> +-
+>>> +-	become_root();
+>>> +-	ret = pdb_getsampwsid(pwd, &uinfo->sid);
+>>> +-	unbecome_root();
+>>> +-
+>>> +-	if (!ret) {
+>>> +-		TALLOC_FREE(pwd);
+>>> +-		return NT_STATUS_WRONG_PASSWORD;
+>>> +-	}
+>>> +-
+>>> +-	/* Quit if the account was locked out. */
+>>> +-	if (pdb_get_acct_ctrl(pwd) & ACB_AUTOLOCK) {
+>>> +-		DEBUG(3, ("Account for user %s was locked out.\n",
+>>> +-			  pdb_get_username(pwd)));
+>>> +-		status = NT_STATUS_ACCOUNT_LOCKED_OUT;
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	{
+>>> +-		const uint8_t *lm_pass, *nt_pass;
+>>> +-
+>>> +-		lm_pass = pdb_get_lanman_passwd(pwd);
+>>> +-		nt_pass = pdb_get_nt_passwd(pwd);
+>>> +-
+>>> +-		if (!lm_pass || !nt_pass) {
+>>> +-			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto update_login;
+>>> +-		}
+>>> +-
+>>> +-		memcpy(&lm_pwd.hash, lm_pass, sizeof(lm_pwd.hash));
+>>> +-		memcpy(&nt_pwd.hash, nt_pass, sizeof(nt_pwd.hash));
+>>> +-	}
+>>> +-
+>>> +-	/* decrypt and check the new lm hash */
+>>> +-	D_P16(lm_pwd.hash, r->in.new_lm_crypted->hash, new_lmPwdHash.hash);
+>>> +-	D_P16(new_lmPwdHash.hash, r->in.old_lm_crypted->hash, checkHash.hash);
+>>> +-	if (memcmp(checkHash.hash, lm_pwd.hash, 16) != 0) {
+>>> +-		status = NT_STATUS_WRONG_PASSWORD;
+>>> +-		goto update_login;
+>>> +-	}
+>>> +-
+>>> +-	/* decrypt and check the new nt hash */
+>>> +-	D_P16(nt_pwd.hash, r->in.new_nt_crypted->hash, new_ntPwdHash.hash);
+>>> +-	D_P16(new_ntPwdHash.hash, r->in.old_nt_crypted->hash, checkHash.hash);
+>>> +-	if (memcmp(checkHash.hash, nt_pwd.hash, 16) != 0) {
+>>> +-		status = NT_STATUS_WRONG_PASSWORD;
+>>> +-		goto update_login;
+>>> +-	}
+>>> +-
+>>> +-	/* The NT Cross is not required by Win2k3 R2, but if present
+>>> +-	   check the nt cross hash */
+>>> +-	if (r->in.cross1_present && r->in.nt_cross) {
+>>> +-		D_P16(lm_pwd.hash, r->in.nt_cross->hash, checkHash.hash);
+>>> +-		if (memcmp(checkHash.hash, new_ntPwdHash.hash, 16) != 0) {
+>>> +-			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto update_login;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	/* The LM Cross is not required by Win2k3 R2, but if present
+>>> +-	   check the lm cross hash */
+>>> +-	if (r->in.cross2_present && r->in.lm_cross) {
+>>> +-		D_P16(nt_pwd.hash, r->in.lm_cross->hash, checkHash.hash);
+>>> +-		if (memcmp(checkHash.hash, new_lmPwdHash.hash, 16) != 0) {
+>>> +-			status = NT_STATUS_WRONG_PASSWORD;
+>>> +-			goto update_login;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	if (!pdb_set_nt_passwd(pwd, new_ntPwdHash.hash, PDB_CHANGED) ||
+>>> +-	    !pdb_set_lanman_passwd(pwd, new_lmPwdHash.hash, PDB_CHANGED)) {
+>>> +-		status = NT_STATUS_ACCESS_DENIED;
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	status = pdb_update_sam_account(pwd);
+>>> +-
+>>> +-update_login:
+>>> +-
+>>> +-	/*
+>>> +-	 * Notify passdb backend of login success/failure. If not
+>>> +-	 * NT_STATUS_OK the backend doesn't like the login
+>>> +-	 */
+>>> +-	update_login_attempts_status = pdb_update_login_attempts(pwd,
+>>> +-						NT_STATUS_IS_OK(status));
+>>> +-
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		bool increment_bad_pw_count = false;
+>>> +-
+>>> +-		if (NT_STATUS_EQUAL(status,NT_STATUS_WRONG_PASSWORD) &&
+>>> +-		    (pdb_get_acct_ctrl(pwd) & ACB_NORMAL) &&
+>>> +-		    NT_STATUS_IS_OK(update_login_attempts_status))
+>>> +-		{
+>>> +-			increment_bad_pw_count = true;
+>>> +-		}
+>>> +-
+>>> +-		if (increment_bad_pw_count) {
+>>> +-			pdb_increment_bad_password_count(pwd);
+>>> +-			updated_badpw = true;
+>>> +-		} else {
+>>> +-			pdb_update_bad_password_count(pwd,
+>>> +-						      &updated_badpw);
+>>> +-		}
+>>> +-	} else {
+>>> +-
+>>> +-		if ((pdb_get_acct_ctrl(pwd) & ACB_NORMAL) &&
+>>> +-		    (pdb_get_bad_password_count(pwd) > 0)){
+>>> +-			pdb_set_bad_password_count(pwd, 0, PDB_CHANGED);
+>>> +-			pdb_set_bad_password_time(pwd, 0, PDB_CHANGED);
+>>> +-			updated_badpw = true;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	if (updated_badpw) {
+>>> +-		NTSTATUS update_status;
+>>> +-		become_root();
+>>> +-		update_status = pdb_update_sam_account(pwd);
+>>> +-		unbecome_root();
+>>> +-
+>>> +-		if (!NT_STATUS_IS_OK(update_status)) {
+>>> +-			DEBUG(1, ("Failed to modify entry: %s\n",
+>>> +-				  nt_errstr(update_status)));
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +- out:
+>>> +-	TALLOC_FREE(pwd);
+>>> +-
+>>> +-	return status;
+>>> ++	return NT_STATUS_NOT_IMPLEMENTED;
+>>> + }
+>>> +
+>>> + /*******************************************************************
+>>> +diff --git a/source3/smbd/lanman.c b/source3/smbd/lanman.c
+>>> +index aef12df..3b4ec65 100644
+>>> +--- a/source3/smbd/lanman.c
+>>> ++++ b/source3/smbd/lanman.c
+>>> +@@ -2947,259 +2947,6 @@ static bool api_NetRemoteTOD(struct smbd_server_connection *sconn,
+>>> + }
+>>> +
+>>> + /****************************************************************************
+>>> +- Set the user password.
+>>> +-*****************************************************************************/
+>>> +-
+>>> +-static bool api_SetUserPassword(struct smbd_server_connection *sconn,
+>>> +-				connection_struct *conn,uint16 vuid,
+>>> +-				char *param, int tpscnt,
+>>> +-				char *data, int tdscnt,
+>>> +-				int mdrcnt,int mprcnt,
+>>> +-				char **rdata,char **rparam,
+>>> +-				int *rdata_len,int *rparam_len)
+>>> +-{
+>>> +-	char *np = get_safe_str_ptr(param,tpscnt,param,2);
+>>> +-	char *p = NULL;
+>>> +-	fstring user;
+>>> +-	fstring pass1,pass2;
+>>> +-	TALLOC_CTX *mem_ctx = talloc_tos();
+>>> +-	NTSTATUS status, result;
+>>> +-	struct rpc_pipe_client *cli = NULL;
+>>> +-	struct policy_handle connect_handle, domain_handle, user_handle;
+>>> +-	struct lsa_String domain_name;
+>>> +-	struct dom_sid2 *domain_sid;
+>>> +-	struct lsa_String names;
+>>> +-	struct samr_Ids rids;
+>>> +-	struct samr_Ids types;
+>>> +-	struct samr_Password old_lm_hash;
+>>> +-	struct samr_Password new_lm_hash;
+>>> +-	int errcode = NERR_badpass;
+>>> +-	uint32_t rid;
+>>> +-	int encrypted;
+>>> +-	int min_pwd_length;
+>>> +-	struct dcerpc_binding_handle *b = NULL;
+>>> +-
+>>> +-	/* Skip 2 strings. */
+>>> +-	p = skip_string(param,tpscnt,np);
+>>> +-	p = skip_string(param,tpscnt,p);
+>>> +-
+>>> +-	if (!np || !p) {
+>>> +-		return False;
+>>> +-	}
+>>> +-
+>>> +-	/* Do we have a string ? */
+>>> +-	if (skip_string(param,tpscnt,p) == NULL) {
+>>> +-		return False;
+>>> +-	}
+>>> +-	pull_ascii_fstring(user,p);
+>>> +-
+>>> +-	p = skip_string(param,tpscnt,p);
+>>> +-	if (!p) {
+>>> +-		return False;
+>>> +-	}
+>>> +-
+>>> +-	memset(pass1,'\0',sizeof(pass1));
+>>> +-	memset(pass2,'\0',sizeof(pass2));
+>>> +-	/*
+>>> +-	 * We use 31 here not 32 as we're checking
+>>> +-	 * the last byte we want to access is safe.
+>>> +-	 */
+>>> +-	if (!is_offset_safe(param,tpscnt,p,31)) {
+>>> +-		return False;
+>>> +-	}
+>>> +-	memcpy(pass1,p,16);
+>>> +-	memcpy(pass2,p+16,16);
+>>> +-
+>>> +-	encrypted = get_safe_SVAL(param,tpscnt,p+32,0,-1);
+>>> +-	if (encrypted == -1) {
+>>> +-		errcode = W_ERROR_V(WERR_INVALID_PARAM);
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	min_pwd_length = get_safe_SVAL(param,tpscnt,p+34,0,-1);
+>>> +-	if (min_pwd_length == -1) {
+>>> +-		errcode = W_ERROR_V(WERR_INVALID_PARAM);
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	*rparam_len = 4;
+>>> +-	*rparam = smb_realloc_limit(*rparam,*rparam_len);
+>>> +-	if (!*rparam) {
+>>> +-		return False;
+>>> +-	}
+>>> +-
+>>> +-	*rdata_len = 0;
+>>> +-
+>>> +-	DEBUG(3,("Set password for <%s> (encrypted: %d, min_pwd_length: %d)\n",
+>>> +-		user, encrypted, min_pwd_length));
+>>> +-
+>>> +-	ZERO_STRUCT(connect_handle);
+>>> +-	ZERO_STRUCT(domain_handle);
+>>> +-	ZERO_STRUCT(user_handle);
+>>> +-
+>>> +-	status = rpc_pipe_open_interface(mem_ctx, &ndr_table_samr.syntax_id,
+>>> +-					conn->session_info,
+>>> +-					&conn->sconn->client_id,
+>>> +-					conn->sconn->msg_ctx,
+>>> +-					&cli);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		DEBUG(0,("api_SetUserPassword: could not connect to samr: %s\n",
+>>> +-			  nt_errstr(status)));
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	b = cli->binding_handle;
+>>> +-
+>>> +-	status = dcerpc_samr_Connect2(b, mem_ctx,
+>>> +-				      global_myname(),
+>>> +-				      SAMR_ACCESS_CONNECT_TO_SERVER |
+>>> +-				      SAMR_ACCESS_ENUM_DOMAINS |
+>>> +-				      SAMR_ACCESS_LOOKUP_DOMAIN,
+>>> +-				      &connect_handle,
+>>> +-				      &result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	init_lsa_String(&domain_name, get_global_sam_name());
+>>> +-
+>>> +-	status = dcerpc_samr_LookupDomain(b, mem_ctx,
+>>> +-					  &connect_handle,
+>>> +-					  &domain_name,
+>>> +-					  &domain_sid,
+>>> +-					  &result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	status = dcerpc_samr_OpenDomain(b, mem_ctx,
+>>> +-					&connect_handle,
+>>> +-					SAMR_DOMAIN_ACCESS_OPEN_ACCOUNT,
+>>> +-					domain_sid,
+>>> +-					&domain_handle,
+>>> +-					&result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	init_lsa_String(&names, user);
+>>> +-
+>>> +-	status = dcerpc_samr_LookupNames(b, mem_ctx,
+>>> +-					 &domain_handle,
+>>> +-					 1,
+>>> +-					 &names,
+>>> +-					 &rids,
+>>> +-					 &types,
+>>> +-					 &result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	if (rids.count != 1) {
+>>> +-		errcode = W_ERROR_V(WERR_NO_SUCH_USER);
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (rids.count != types.count) {
+>>> +-		errcode = W_ERROR_V(WERR_INVALID_PARAM);
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (types.ids[0] != SID_NAME_USER) {
+>>> +-		errcode = W_ERROR_V(WERR_INVALID_PARAM);
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	rid = rids.ids[0];
+>>> +-
+>>> +-	status = dcerpc_samr_OpenUser(b, mem_ctx,
+>>> +-				      &domain_handle,
+>>> +-				      SAMR_USER_ACCESS_CHANGE_PASSWORD,
+>>> +-				      rid,
+>>> +-				      &user_handle,
+>>> +-				      &result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	if (encrypted == 0) {
+>>> +-		E_deshash(pass1, old_lm_hash.hash);
+>>> +-		E_deshash(pass2, new_lm_hash.hash);
+>>> +-	} else {
+>>> +-		ZERO_STRUCT(old_lm_hash);
+>>> +-		ZERO_STRUCT(new_lm_hash);
+>>> +-		memcpy(old_lm_hash.hash, pass1, MIN(strlen(pass1), 16));
+>>> +-		memcpy(new_lm_hash.hash, pass1, MIN(strlen(pass2), 16));
+>>> +-	}
+>>> +-
+>>> +-	status = dcerpc_samr_ChangePasswordUser(b, mem_ctx,
+>>> +-						&user_handle,
+>>> +-						true, /* lm_present */
+>>> +-						&old_lm_hash,
+>>> +-						&new_lm_hash,
+>>> +-						false, /* nt_present */
+>>> +-						NULL, /* old_nt_crypted */
+>>> +-						NULL, /* new_nt_crypted */
+>>> +-						false, /* cross1_present */
+>>> +-						NULL, /* nt_cross */
+>>> +-						false, /* cross2_present */
+>>> +-						NULL, /* lm_cross */
+>>> +-						&result);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(status));
+>>> +-		goto out;
+>>> +-	}
+>>> +-	if (!NT_STATUS_IS_OK(result)) {
+>>> +-		errcode = W_ERROR_V(ntstatus_to_werror(result));
+>>> +-		goto out;
+>>> +-	}
+>>> +-
+>>> +-	errcode = NERR_Success;
+>>> +- out:
+>>> +-
+>>> +-	if (b && is_valid_policy_hnd(&user_handle)) {
+>>> +-		dcerpc_samr_Close(b, mem_ctx, &user_handle, &result);
+>>> +-	}
+>>> +-	if (b && is_valid_policy_hnd(&domain_handle)) {
+>>> +-		dcerpc_samr_Close(b, mem_ctx, &domain_handle, &result);
+>>> +-	}
+>>> +-	if (b && is_valid_policy_hnd(&connect_handle)) {
+>>> +-		dcerpc_samr_Close(b, mem_ctx, &connect_handle, &result);
+>>> +-	}
+>>> +-
+>>> +-	memset((char *)pass1,'\0',sizeof(fstring));
+>>> +-	memset((char *)pass2,'\0',sizeof(fstring));
+>>> +-
+>>> +-	SSVAL(*rparam,0,errcode);
+>>> +-	SSVAL(*rparam,2,0);		/* converter word */
+>>> +-	return(True);
+>>> +-}
+>>> +-
+>>> +-/****************************************************************************
+>>> +   Set the user password (SamOEM version - gets plaintext).
+>>> + ****************************************************************************/
+>>> +
+>>> +@@ -5790,7 +5537,6 @@ static const struct {
+>>> + 	{"NetServerEnum2",	RAP_NetServerEnum2,	api_RNetServerEnum2}, /* anon OK */
+>>> + 	{"NetServerEnum3",	RAP_NetServerEnum3,	api_RNetServerEnum3}, /* anon OK */
+>>> + 	{"WAccessGetUserPerms",RAP_WAccessGetUserPerms,api_WAccessGetUserPerms},
+>>> +-	{"SetUserPassword",	RAP_WUserPasswordSet2,	api_SetUserPassword},
+>>> + 	{"WWkstaUserLogon",	RAP_WWkstaUserLogon,	api_WWkstaUserLogon},
+>>> + 	{"PrintJobInfo",	RAP_WPrintJobSetInfo,	api_PrintJobInfo},
+>>> + 	{"WPrintDriverEnum",	RAP_WPrintDriverEnum,	api_WPrintDriverEnum},
+>>> +diff --git a/source4/rpc_server/samr/samr_password.c b/source4/rpc_server/samr/samr_password.c
+>>> +index ee13a11..e618740 100644
+>>> +--- a/source4/rpc_server/samr/samr_password.c
+>>> ++++ b/source4/rpc_server/samr/samr_password.c
+>>> +@@ -32,131 +32,17 @@
+>>> +
+>>> + /*
+>>> +   samr_ChangePasswordUser
+>>> ++
+>>> ++  So old it is just not worth implementing
+>>> ++  because it does not supply a plaintext and so we can't do password
+>>> ++  complexity checking and cannot update all the other password hashes.
+>>> ++
+>>> + */
+>>> + NTSTATUS dcesrv_samr_ChangePasswordUser(struct dcesrv_call_state *dce_call,
+>>> + 					TALLOC_CTX *mem_ctx,
+>>> + 					struct samr_ChangePasswordUser *r)
+>>> + {
+>>> +-	struct dcesrv_handle *h;
+>>> +-	struct samr_account_state *a_state;
+>>> +-	struct ldb_context *sam_ctx;
+>>> +-	struct ldb_message **res;
+>>> +-	int ret;
+>>> +-	struct samr_Password new_lmPwdHash, new_ntPwdHash, checkHash;
+>>> +-	struct samr_Password *lm_pwd, *nt_pwd;
+>>> +-	NTSTATUS status = NT_STATUS_OK;
+>>> +-	const char * const attrs[] = { "dBCSPwd", "unicodePwd" , NULL };
+>>> +-
+>>> +-	DCESRV_PULL_HANDLE(h, r->in.user_handle, SAMR_HANDLE_USER);
+>>> +-
+>>> +-	a_state = h->data;
+>>> +-
+>>> +-	/* basic sanity checking on parameters.  Do this before any database ops */
+>>> +-	if (!r->in.lm_present || !r->in.nt_present ||
+>>> +-	    !r->in.old_lm_crypted || !r->in.new_lm_crypted ||
+>>> +-	    !r->in.old_nt_crypted || !r->in.new_nt_crypted) {
+>>> +-		/* we should really handle a change with lm not
+>>> +-		   present */
+>>> +-		return NT_STATUS_INVALID_PARAMETER_MIX;
+>>> +-	}
+>>> +-
+>>> +-	/* Connect to a SAMDB with system privileges for fetching the old pw
+>>> +-	 * hashes. */
+>>> +-	sam_ctx = samdb_connect(mem_ctx, dce_call->event_ctx,
+>>> +-				dce_call->conn->dce_ctx->lp_ctx,
+>>> +-				system_session(dce_call->conn->dce_ctx->lp_ctx), 0);
+>>> +-	if (sam_ctx == NULL) {
+>>> +-		return NT_STATUS_INVALID_SYSTEM_SERVICE;
+>>> +-	}
+>>> +-
+>>> +-	/* fetch the old hashes */
+>>> +-	ret = gendb_search_dn(sam_ctx, mem_ctx,
+>>> +-			      a_state->account_dn, &res, attrs);
+>>> +-	if (ret != 1) {
+>>> +-		return NT_STATUS_WRONG_PASSWORD;
+>>> +-	}
+>>> +-
+>>> +-	status = samdb_result_passwords(mem_ctx,
+>>> +-					dce_call->conn->dce_ctx->lp_ctx,
+>>> +-					res[0], &lm_pwd, &nt_pwd);
+>>> +-	if (!NT_STATUS_IS_OK(status) || !nt_pwd) {
+>>> +-		return NT_STATUS_WRONG_PASSWORD;
+>>> +-	}
+>>> +-
+>>> +-	/* decrypt and check the new lm hash */
+>>> +-	if (lm_pwd) {
+>>> +-		D_P16(lm_pwd->hash, r->in.new_lm_crypted->hash, new_lmPwdHash.hash);
+>>> +-		D_P16(new_lmPwdHash.hash, r->in.old_lm_crypted->hash, checkHash.hash);
+>>> +-		if (memcmp(checkHash.hash, lm_pwd, 16) != 0) {
+>>> +-			return NT_STATUS_WRONG_PASSWORD;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	/* decrypt and check the new nt hash */
+>>> +-	D_P16(nt_pwd->hash, r->in.new_nt_crypted->hash, new_ntPwdHash.hash);
+>>> +-	D_P16(new_ntPwdHash.hash, r->in.old_nt_crypted->hash, checkHash.hash);
+>>> +-	if (memcmp(checkHash.hash, nt_pwd, 16) != 0) {
+>>> +-		return NT_STATUS_WRONG_PASSWORD;
+>>> +-	}
+>>> +-
+>>> +-	/* The NT Cross is not required by Win2k3 R2, but if present
+>>> +-	   check the nt cross hash */
+>>> +-	if (r->in.cross1_present && r->in.nt_cross && lm_pwd) {
+>>> +-		D_P16(lm_pwd->hash, r->in.nt_cross->hash, checkHash.hash);
+>>> +-		if (memcmp(checkHash.hash, new_ntPwdHash.hash, 16) != 0) {
+>>> +-			return NT_STATUS_WRONG_PASSWORD;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	/* The LM Cross is not required by Win2k3 R2, but if present
+>>> +-	   check the lm cross hash */
+>>> +-	if (r->in.cross2_present && r->in.lm_cross && lm_pwd) {
+>>> +-		D_P16(nt_pwd->hash, r->in.lm_cross->hash, checkHash.hash);
+>>> +-		if (memcmp(checkHash.hash, new_lmPwdHash.hash, 16) != 0) {
+>>> +-			return NT_STATUS_WRONG_PASSWORD;
+>>> +-		}
+>>> +-	}
+>>> +-
+>>> +-	/* Start a SAM with user privileges for the password change */
+>>> +-	sam_ctx = samdb_connect(mem_ctx, dce_call->event_ctx,
+>>> +-				dce_call->conn->dce_ctx->lp_ctx,
+>>> +-				dce_call->conn->auth_state.session_info, 0);
+>>> +-	if (sam_ctx == NULL) {
+>>> +-		return NT_STATUS_INVALID_SYSTEM_SERVICE;
+>>> +-	}
+>>> +-
+>>> +-	/* Start transaction */
+>>> +-	ret = ldb_transaction_start(sam_ctx);
+>>> +-	if (ret != LDB_SUCCESS) {
+>>> +-		DEBUG(1, ("Failed to start transaction: %s\n", ldb_errstring(sam_ctx)));
+>>> +-		return NT_STATUS_TRANSACTION_ABORTED;
+>>> +-	}
+>>> +-
+>>> +-	/* Performs the password modification. We pass the old hashes read out
+>>> +-	 * from the database since they were already checked against the user-
+>>> +-	 * provided ones. */
+>>> +-	status = samdb_set_password(sam_ctx, mem_ctx,
+>>> +-				    a_state->account_dn,
+>>> +-				    a_state->domain_state->domain_dn,
+>>> +-				    NULL, &new_lmPwdHash, &new_ntPwdHash,
+>>> +-				    lm_pwd, nt_pwd, /* this is a user password change */
+>>> +-				    NULL,
+>>> +-				    NULL);
+>>> +-	if (!NT_STATUS_IS_OK(status)) {
+>>> +-		ldb_transaction_cancel(sam_ctx);
+>>> +-		return status;
+>>> +-	}
+>>> +-
+>>> +-	/* And this confirms it in a transaction commit */
+>>> +-	ret = ldb_transaction_commit(sam_ctx);
+>>> +-	if (ret != LDB_SUCCESS) {
+>>> +-		DEBUG(1,("Failed to commit transaction to change password on %s: %s\n",
+>>> +-			 ldb_dn_get_linearized(a_state->account_dn),
+>>> +-			 ldb_errstring(sam_ctx)));
+>>> +-		return NT_STATUS_TRANSACTION_ABORTED;
+>>> +-	}
+>>> +-
+>>> +-	return NT_STATUS_OK;
+>>> ++	return NT_STATUS_NOT_IMPLEMENTED;
+>>> + }
+>>> +
+>>> + /*
+>>> +diff --git a/source4/torture/rpc/samr.c b/source4/torture/rpc/samr.c
+>>> +index 7d9a1e2..adfc5d4 100644
+>>> +--- a/source4/torture/rpc/samr.c
+>>> ++++ b/source4/torture/rpc/samr.c
+>>> +@@ -1728,8 +1728,16 @@ static bool test_ChangePasswordUser(struct dcerpc_binding_handle *b,
+>>> +
+>>> + 	torture_assert_ntstatus_ok(tctx, dcerpc_samr_ChangePasswordUser_r(b, tctx, &r),
+>>> + 		"ChangePasswordUser failed");
+>>> +-	torture_assert_ntstatus_equal(tctx, r.out.result, NT_STATUS_WRONG_PASSWORD,
+>>> +-		"ChangePasswordUser failed: expected NT_STATUS_WRONG_PASSWORD because we broke the LM hash");
+>>> ++
+>>> ++	/* Do not proceed if this call has been removed */
+>>> ++	if (NT_STATUS_EQUAL(r.out.result, NT_STATUS_NOT_IMPLEMENTED)) {
+>>> ++		return true;
+>>> ++	}
+>>> ++
+>>> ++	if (!NT_STATUS_EQUAL(r.out.result, NT_STATUS_PASSWORD_RESTRICTION)) {
+>>> ++		torture_assert_ntstatus_equal(tctx, r.out.result, NT_STATUS_WRONG_PASSWORD,
+>>> ++			"ChangePasswordUser failed: expected NT_STATUS_WRONG_PASSWORD because we broke the LM hash");
+>>> ++	}
+>>> +
+>>> + 	/* Unbreak the LM hash */
+>>> + 	hash1.hash[0]--;
+>>> +--
+>>> +1.7.9.5
+>>> +
+>>> diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+>>> index 20b609d..f80e41e 100644
+>>> --- a/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+>>> +++ b/meta-oe/recipes-connectivity/samba/samba_3.6.8.bb
+>>> @@ -30,6 +30,7 @@ SRC_URI += "\
+>>>       file://configure-disable-getaddrinfo-cross.patch;patchdir=.. \
+>>>       file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
+>>>       file://configure-libunwind.patch;patchdir=.. \
+>>> +    file://samba-3.6.22-CVE-2013-4496.patch;patchdir=.. \
+>>>   "
+>>>   SRC_URI[md5sum] = "fbb245863eeef2fffe172df779a217be"
+>>>   SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b3514de"
+>>> -- 
+>>> 1.7.9.5
+>>>
+>>> -- 
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> -- 
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+>
+>
+>
 
-I merged a version of this.  My changes are:
 
-   - changed do_install to (hopefully) play nice with B!=3DS
-
-   - explicitly disabled net-snmp support since it was not called out as
-     a dependency in the recipe, it wasn't immediately obvious to me how
-     to safely update the recipe to find the proper net-snmp support,
-     and ntp already sets that precedent
-
-   - removed setting of PR
-
-Please also be sure to add a SOB line for any patches you send in the
-future.
-
--J.
-
->=20
-> diff --git a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed=
-=2Epatch b/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.pat=
-ch
-> deleted file mode 100644
-> index 7d5251b..0000000
-> --- a/meta-networking/recipes-daemons/ptpd/ptpd-2.2.0/ld-as-needed.patch
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -Patch from http://patch-tracker.debian.org/package/ptpd
-> -
-> -Description: Fix ld --as-needed
-> - This patch fixes the order of gcc arguments to fix ld --as-needed
-> -Author: Roland Stigge <stigge@antcom.de>
-> -Bug-Debian: http://bugs.debian.org/607583
-> -
-> -Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ----
-> - src/Makefile |    4 ++--
-> - 1 files changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/src/Makefile b/src/Makefile
-> -index a672625..88a2fc8 100644
-> ---- a/src/Makefile
-> -+++ b/src/Makefile
-> -@@ -40,7 +40,7 @@ CFLAGS +=3D -DDBG_SIGUSR2_CHANGE_DEBUG
-> -=20
-> - CFLAGS +=3D -DPTP_EXPERIMENTAL
-> -=20
-> --LDFLAGS+=3D -lm -lrt
-> -+LIBS +=3D -lm -lrt
-> -=20
-> - PROG =3D ptpd
-> - SRCS =3D ptpd.c arith.c bmc.c protocol.c display.c\
-> -@@ -63,7 +63,7 @@ TAGFILES =3D GPATH GRTAGS GSYMS GTAGS cscope.in.out cs=
-cope.out cscope.po.out
-> - all: $(PROG)
-> -=20
-> - $(PROG): $(OBJS)
-> --	$(CC) -o $@ $(OBJS) $(LDFLAGS)
-> -+	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
-> -=20
-> - $(OBJS): $(HDRS)
-> -=20
-> ---=20
-> -1.7.4
-> -
-> diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb b/meta-ne=
-tworking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-> similarity index 57%
-> rename from meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
-> rename to meta-networking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-> index f2e895d..1febbb1 100644
-> --- a/meta-networking/recipes-daemons/ptpd/ptpd_2.2.0.bb
-> +++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.0.bb
-> @@ -6,23 +6,24 @@ time coordination of LAN connected computers."
->  HOMEPAGE =3D "http://sourceforge.net/projects/ptpd"
->  SECTION =3D "network"
->  LICENSE =3D "BSD"
-> -LIC_FILES_CHKSUM =3D "file://../COPYRIGHT;md5=3D3d8ac2c46c116bce2d2ad838=
-b6cf3491"
-> +LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D4019cad2b3cd55f22ea819ffad6=
-ccd41"
-> =20
-> -PR =3D "r1"
-> +DEPENDS =3D "libpcap"
-> =20
-> -SRC_URI =3D "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/pt=
-pd-${PV}.tar.gz \
-> -           file://ld-as-needed.patch;striplevel=3D2 \
-> -"
-> +PR =3D "r0"
-> =20
-> -SRC_URI[md5sum] =3D "c63a3a149d30c710773ccb02df5782a3"
-> -SRC_URI[sha256sum] =3D "f2266a22db84318d8b9ce266ea83772c03438c31f4993fa9=
-643fa675a07c26b4"
-> +inherit autotools
-> =20
-> -S =3D "${WORKDIR}/ptpd-${PV}/src"
-> +SRC_URI =3D "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/pt=
-pd-${PV}.tar.gz"
-> +
-> +S =3D "${WORKDIR}/ptpd-${PV}"
-> +SRC_URI[md5sum] =3D "f5e931b4a229705ff0dbdfe22490566b"
-> +SRC_URI[sha256sum] =3D "1a4e90496f004bfd91657ccc49209101dc25b787e540648c=
-07c0973469f1d8f7"
-> =20
->  EXTRA_OEMAKE =3D ""
-> =20
->  do_install() {
->      install -d ${D}${bindir} ${D}${mandir}/man8
-> -    install -m 0755 ptpd2 ${D}${bindir}
-> -    install -m 0644 ptpd2.8 ${D}${mandir}/man8
-> +    install -m 0755 ${S}/src/ptpd2 ${D}${bindir}
-> +    install -m 0644 ${S}/src/ptpd2.8 ${D}${mandir}/man8
->  }
-> --=20
-> 1.7.0.4
->=20
---=20
--Joe MacDonald.
-:wq
-
---CblX+4bnyfN0pR09
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iEYEARECAAYFAlOqL3kACgkQwFvcllog0XwKlgCfcGtKagGJHbJmzyHqgKuGukeC
-tXwAnRCogvuMEq5w+IG0dznwq7ms6Byt
-=NWw6
------END PGP SIGNATURE-----
-
---CblX+4bnyfN0pR09--
