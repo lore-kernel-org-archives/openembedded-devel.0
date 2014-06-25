@@ -1,28 +1,25 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3602 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 25 Jun 2014 17:27:45 UTC
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E1CF60E07
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id EB1D6601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 17:27:45 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N7Q007TNGDTSD10@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	25 Jun 2014 11:27:30 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id BDC6A2009B; Wed,
-	25 Jun 2014 12:27:29 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jun 2014 12:27:18 -0400
-Message-id: <1403713638-437-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.0
-Cc: "Balasubramanian, Aparna" <aparnab@ti.com>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: [daisy][PATCH] rng-tools: Update rng-tools version to 4
+	Wed, 25 Jun 2014 18:38:17 +0000 (UTC)
+Received: (qmail 10816 invoked by uid 1003); 25 Jun 2014 18:38:18 -0000
+Received: from unknown (HELO ?10.16.32.86?) (philip@opensdr.com@64.186.172.226)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	25 Jun 2014 18:38:18 -0000
+Message-ID: <53AB1718.7000608@balister.org>
+Date: Wed, 25 Jun 2014 11:38:16 -0700
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.5.0
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <53AA0672.7070606@balister.org>
+	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
+X-Enigmail-Version: 1.6
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: State of the art for creating an image that you can dd to an SD card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,40 +33,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 17:27:47 -0000
+X-List-Received-Date: Wed, 25 Jun 2014 18:38:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: "Balasubramanian, Aparna" <aparnab@ti.com>
+On 06/25/2014 03:07 AM, Paul Eggleton wrote:
+> On Tuesday 24 June 2014 16:14:58 Philip Balister wrote:
+>> What's the best available solution for creating an image you can dd to
+>> an SD card? It seems like this wheel has been invented several times and
+>> I am wondering if people are converging on one approach.
+>>
+>> Bonus points for resizing the linux partition.
+>>
+>> How are people doing this today?
+> 
+> I think wic has seen some uptake and enhancement since its introduction a 
+> couple of releases ago. It has certainly worked for me in writing SD cards for 
+> Galileo. We seem to be a bit short on documentation for it though...
 
-Signed-off-by: Aparna Balasubramanian <aparnab@ti.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Googling for "wic sd" doesn't help. I've seen some commits, so I'll take
+a look in the meta data.
 
-[Backport from meta-oe/master c992b1ba176af7071416c405df03633ef7bf8e20]
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- meta-oe/recipes-support/rng-tools/{rng-tools_2.bb => rng-tools_4.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/rng-tools/{rng-tools_2.bb => rng-tools_4.bb} (84%)
+Philip
 
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-similarity index 84%
-rename from meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-rename to meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-index 7803b28..f620d8a 100644
---- a/meta-oe/recipes-support/rng-tools/rng-tools_2.bb
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-@@ -7,8 +7,8 @@ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/gkernel/${P}.tar.gz \
-            file://init \
-            file://default"
- 
--SRC_URI[md5sum] = "63d503191eabed630324c104cc024475"
--SRC_URI[sha256sum] = "1126f0ecc8cab3af14a562cddc5d8ffeef47df7eba34a7aadcdee35a25ec2b1e"
-+SRC_URI[md5sum] = "ae89dbfcf08bdfbea19066cfbf599127"
-+SRC_URI[sha256sum] = "b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195"
- 
- inherit autotools update-rc.d
- 
--- 
-2.0.0
-
+> 
+> Cheers,
+> Paul
+> 
 
