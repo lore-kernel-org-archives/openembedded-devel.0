@@ -1,34 +1,35 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-ob0-f171.google.com (mail-ob0-f171.google.com
-	[209.85.214.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6461E60809
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
+	[209.85.216.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D0FF460D8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 19:04:30 +0000 (UTC)
-Received: by mail-ob0-f171.google.com with SMTP id nu7so2631330obb.2
+	Wed, 25 Jun 2014 23:14:13 +0000 (UTC)
+Received: by mail-qa0-f51.google.com with SMTP id j7so2134144qaq.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 12:04:31 -0700 (PDT)
+	Wed, 25 Jun 2014 16:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=I/y1RguUiiQhO3iPGhRmouVPfkUox4JZ9PpKo80qhhQ=;
-	b=I3wV+8cuttiQ7W+wNcEdj4XJF+0UACyJ7sH1wjeXvsAz6/Ye6ymsbfRVhEu5ap7AVG
-	f/W6Z+eJY80k+MkZe7Tj2H7Q7UvmODVUm/8pCxmV+qmm72ZopBIxrUwEcxsm7R5uVz3P
-	jY5gYKWd8Ht+FdEQZoBjqewlfbVM+JRB1JuGjFSjlpLoESYebmjmX6BT+T4z/5B22YGP
-	J+Ebg+Cjr4/rotKZTlYc+9zf4GTbsUZOJBCmh2zK7rMeERztB1aK06NUPoU+BgXGNm0P
-	LVkvLsoXUBJI2YFzQsdM/fYFTrpwot4F0Op3lSBTGTdtqY81v9gRvP1hwXYdjryjQdkK
-	jTrQ==
+	bh=Lky7rAez1tQ3eHdCLyPwuKPaqqMrYQHNWBRiaif4B/c=;
+	b=rwF0vgnT9gYMvd4m6wUBa2cVNDDfGLxDf1U6jQ53eR3MYSa97fK2ORvn7VEdxV75U0
+	zgPB9z5OZMYk41k7PN0mNSSMF8L1ekZ0UgaJ9Wqslwv7AKs81ojqe3X1SfrwhoS1AQyP
+	DnzyL70ec/k6t28K8xY0eCFqi4iynG49qdsYYwro4/cHRkeSHxh7T+KfMtGOKkSW4yRU
+	xQIFZP2AIiCdqBSN9uIE4a95PCIB+sNuaZXimEbbwEbmI+9ZIuwGfLe3rXK70Gxafn28
+	TM3JQv49/Rd/znqSv5EPzBDrPcek7cymPawhHgalgQ+jxDHOfcVWVDYM4Yba6jckY/o3
+	w3Og==
+X-Received: by 10.140.86.147 with SMTP id p19mr15868038qgd.66.1403738054283;
+	Wed, 25 Jun 2014 16:14:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.60.129.161 with SMTP id nx1mr10295578oeb.28.1403723071241;
-	Wed, 25 Jun 2014 12:04:31 -0700 (PDT)
-Received: by 10.60.155.209 with HTTP; Wed, 25 Jun 2014 12:04:31 -0700 (PDT)
-In-Reply-To: <53AB1718.7000608@balister.org>
+Received: by 10.140.48.112 with HTTP; Wed, 25 Jun 2014 16:13:54 -0700 (PDT)
+In-Reply-To: <20140625185504.GD1580@denix.org>
 References: <53AA0672.7070606@balister.org>
 	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
-	<53AB1718.7000608@balister.org>
-Date: Wed, 25 Jun 2014 15:04:31 -0400
-Message-ID: <CAFZh4h80FCq=6u-enoDTzreQhBRB+Sgko+8hRzWRrk1EoS00nw@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
+	<53AB1718.7000608@balister.org> <20140625185504.GD1580@denix.org>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Wed, 25 Jun 2014 20:13:54 -0300
+Message-ID: <CAMCfZKEOYwA=9CtEVVccXASOJXHsh5agvPWvG6imOJXXCEv8Zw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
 Subject: Re: State of the art for creating an image that you can dd to an SD card
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -44,32 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 19:04:39 -0000
+X-List-Received-Date: Wed, 25 Jun 2014 23:14:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Jun 25, 2014 at 2:38 PM, Philip Balister <philip@balister.org> wrote:
-> On 06/25/2014 03:07 AM, Paul Eggleton wrote:
->> On Tuesday 24 June 2014 16:14:58 Philip Balister wrote:
->>> What's the best available solution for creating an image you can dd to
->>> an SD card? It seems like this wheel has been invented several times and
->>> I am wondering if people are converging on one approach.
->>>
->>> Bonus points for resizing the linux partition.
->>>
->>> How are people doing this today?
->>
->> I think wic has seen some uptake and enhancement since its introduction a
->> couple of releases ago. It has certainly worked for me in writing SD cards for
->> Galileo. We seem to be a bit short on documentation for it though...
->
-> Googling for "wic sd" doesn't help. I've seen some commits, so I'll take
-> a look in the meta data.
->
-> Philip
+Hi Denys,
 
-I think he's talking about:
-http://patchwork.openembedded.org/patch/59059/
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3847
+On Wed, Jun 25, 2014 at 3:55 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-B
+> http://cgit.openembedded.org/openembedded-core/tree/scripts/wic
+>
+> But indeed, better documentation would be most appreciated.
+
+
+I didn't have a chance to take a look and test wic tool.
+Do you know if it can be used to generate sdcard images for TI's Sitara
+SoCs?
+The _problem_ for creating a sdcard image for Sitara is the configuration
+of Heads, Sectors and Cylinders that should be passed to sfdisk and needs
+to be done as root.
+
+
+Regards,
+
+--
+*dS
+Diego Sueiro
+
+Administrador do Embarcados
+www.embarcados.com.br
+<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
+
+/*long live rock 'n roll*/
 
