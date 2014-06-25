@@ -1,35 +1,24 @@
-Return-Path: <anders@chargestorm.se>
-Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
-	[83.145.59.143])
-	by mail.openembedded.org (Postfix) with ESMTP id D67CE601A8
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 08C6560CF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jun 2014 09:28:23 +0000 (UTC)
-Received: from ad.chargestorm.se (213.114.64.43) by stoexhub02.domain01.net
-	(10.12.10.2) with Microsoft SMTP Server (TLS) id 8.3.279.1;
-	Wed, 25 Jun 2014 11:28:21 +0200
-Date: Wed, 25 Jun 2014 11:28:07 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20140625092807.GA21830@ad.chargestorm.se>
-Mail-Followup-To: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <cover.1403596416.git.anders@chargestorm.se>
-	<1b5c27f39444bed435c8c050b2fb6def74a5adb8.1403596416.git.anders@chargestorm.se>
-	<2430004.5QNcodJTid@peggleto-mobl5.ger.corp.intel.com>
+	Wed, 25 Jun 2014 09:36:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s5P9aTai018124
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jun 2014 02:36:29 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Wed, 25 Jun 2014 02:36:28 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Jun 2014 05:36:27 -0400
+Message-ID: <1403688987-26915-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-In-Reply-To: <2430004.5QNcodJTid@peggleto-mobl5.ger.corp.intel.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-GFI-SMTP-Submission: 1
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver][PATCH 1/1] webmin: drop allarch
+Subject: [meta-oe][PATCH] vim: work around rpm picking up perl as a dep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,52 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jun 2014 09:28:25 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Jun 2014 09:36:32 -0000
+Content-Type: text/plain
 
-* Paul Eggleton <paul.eggleton@linux.intel.com> [140625 09:46]:
+From: Jackie Huang <jackie.huang@windriver.com>
 
-> On Tuesday 24 June 2014 09:54:12 Anders Darander wrote:
-> > * runtime dependencies are TUNE_PKGARCH causing do_package_write_*
-> >   task to have different signature for MACHINEs with different
-> >   TUNE_PKGARCH
+Some perl example scripts cause RPM to add perl as a
+dep, which we don't want, so remove x bit as work around
+just like the ones for csh and awk.
 
-> > -inherit allarch perlnative update-rc.d
-> > +inherit perlnative update-rc.d
+Refer to:
+1b088e4 vim: workaround nawk dependency problem with RPM
+280d150 vim: workaround a dependency problem with RPM
 
-> So apart from me being reticent to make this change at all (for reasons that 
-> we've discussed before), 
+I think a better solution might be:
+Split the tools directory into a new package ${PN}-tools
+and add RDEPENDS on csh, awk and perl for it and we don't
+put it in RRECOMMENDS to install along with vim.
 
-Yes, I'm well aware of those discussions. I was actually thinking about
-CC:ing you on my reply to Martin, after he suggested something like this
-change.
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-support/vim/vim_7.4.258.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-> there is another issue - allarch.bbclass does more than just setting
-> PACKAGE_ARCH, it also disables certain other functionality such as
-> debug symbol splitting which is superfluous for these kinds of
-> recipes; in my testing when I originally wrote the webmin recipe this
-> significantly reduced the time required to build the recipe. We can't
-> just drop this inherit without regard to that. (I'm sure the same
-> applies elsewhere, it's just that the size of webmin makes the impact
-> significant.)
-
-I'm all for saving time! (And I'm not personally concerned by this
-issue, as I'm currently only using webmin in a build tree for a signle
-machine).
-
-Though, to get back to Martin Jansa's issue; if there isn't already an
-enhancment request file to the Yocto bugzilla, maybe it's time to file
-one regarding the possibillity of having an allarch package
-RDEPENDS/RRECOMMNEND a package with an ARCH or MACHINE tune...
-
-Paul, what do you think about the feasibility of finding such a
-solution?
-
-Cheers,
-Anders
-
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.258.bb b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+index 7f88fa0..844be10 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.258.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.258.bb
+@@ -60,9 +60,10 @@ EXTRA_OECONF = " \
+ "
+ 
+ do_install_append() {
+-    # Work around rpm picking up csh or awk as a dep
++    # Work around rpm picking up csh or awk or perl as a dep
+     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
+     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
++    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
+ 
+     # Install example vimrc from runtime files
+     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+2.0.0
+
 
