@@ -1,30 +1,37 @@
-Return-Path: <denis@denix.org>
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FA0D60703
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 59D0F601A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jun 2014 18:10:17 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [71.191.205.189])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0N7S00915FSJIE20@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	26 Jun 2014 13:10:05 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D90412018D; Thu,
-	26 Jun 2014 14:09:54 -0400 (EDT)
-Date: Thu, 26 Jun 2014 14:09:54 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20140626180954.GG1580@denix.org>
+	Thu, 26 Jun 2014 19:24:04 +0000 (UTC)
+Received: by mail-vc0-f177.google.com with SMTP id ij19so4028155vcb.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jun 2014 12:24:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=5k9cjd0r775c/ciBOIKsEZ3LYjQqf21A1w2+yEbtcpU=;
+	b=NeEcFfNyh/QVqdm5gEmTOTNBby9BdGPoXZOgjIXLxm6W61sB0pBp3mGXZdoYv4tH+8
+	INW9kCP9Wk0TRLVz8yCcssiAbAIdT6KaIWSDVsUoUUmkoLZ1IaVQTDmnC6NvRIq8Icvw
+	Fn0pbt320H0pZHg/JTv87lDDLy0kB57l9LeZMqod/BpIxaLxDc7iLrQYrg3f8SoJTV92
+	aF8oQ0mr3vVpb8HjZtZhhTk14AU4UICzcqbjMbcDczusYcdKnMPfsD8ItQZTLonYkWuS
+	w7cD4AlDNCqOyCmTMq541h+qMbjpvCmxv0oyl81u9wUrvRiM2k3R5BV1ekEk+Ax7Sb/8
+	Y/RA==
+X-Received: by 10.220.95.2 with SMTP id b2mr2809386vcn.61.1403810645364; Thu,
+	26 Jun 2014 12:24:05 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.58.196.229 with HTTP; Thu, 26 Jun 2014 12:23:35 -0700 (PDT)
+In-Reply-To: <20140626180954.GG1580@denix.org>
 References: <53AA0672.7070606@balister.org>
 	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
 	<53AB1718.7000608@balister.org> <20140625185504.GD1580@denix.org>
 	<CAMCfZKEOYwA=9CtEVVccXASOJXHsh5agvPWvG6imOJXXCEv8Zw@mail.gmail.com>
 	<53AB5ADB.3080403@balister.org>
 	<CAMCfZKHUaFwx_pQdgqbeS1C-WmKM9DEcNfixug9Jw8Z645epuQ@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAMCfZKHUaFwx_pQdgqbeS1C-WmKM9DEcNfixug9Jw8Z645epuQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	<20140626180954.GG1580@denix.org>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Thu, 26 Jun 2014 12:23:35 -0700
+Message-ID: <CAK8F28kHj_JJh84XWcVt7wy2p70BvpV+WCF4n2r1=FWrRQT8cQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: State of the art for creating an image that you can dd to an SD card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -39,54 +46,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jun 2014 18:10:18 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 26 Jun 2014 19:24:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jun 25, 2014 at 08:45:50PM -0300, Diego Sueiro wrote:
-> Hi Philip,
-> 
-> On Wed, Jun 25, 2014 at 8:27 PM, Philip Balister <philip@balister.org>
-> wrote:
-> 
-> > On 06/25/2014 04:13 PM, Diego Sueiro wrote:
-> > > Hi Denys,
-> > >
-> > > On Wed, Jun 25, 2014 at 3:55 PM, Denys Dmytriyenko <denis@denix.org>
-> > wrote:
-> > >
-> > >> http://cgit.openembedded.org/openembedded-core/tree/scripts/wic
-> > >>
-> > >> But indeed, better documentation would be most appreciated.
-> > >
-> > >
-> > > I didn't have a chance to take a look and test wic tool.
-> > > Do you know if it can be used to generate sdcard images for TI's Sitara
-> > > SoCs?
-> > > The _problem_ for creating a sdcard image for Sitara is the configuration
-> > > of Heads, Sectors and Cylinders that should be passed to sfdisk and needs
-> > > to be done as root.
-> >
-> > This isn't true.
-> >
-> > https://groups.google.com/forum/#!topic/beagleboard/ro5k5r4Cuq4
-> >
-> > I've avoided the CHS business for ages and haven't had trouble booting
-> 
-> 
-> Thanks for the link.
-> 
-> About 3 yeas ago I have issues with this using an industrial 2GB uSD from
-> Delkin Devices with am3517. And as far as I remember I just got it working
-> with CHS configuration.
-> 
-> I'm going to test it again with a Sandisk uSD and am3359 to see if it
-> remains. But I don't have a Delkin uSD and am3517 anymore :(
+On Thu, Jun 26, 2014 at 11:09 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> "CHS business", as Philip called it, was only partially required in the early
+> days of OMAP3 SoCs few years ago, due to some "specific" FAT implementation of
+> the BootROM. These days it's not required on modern Sitara SoCs.
+Which OMAP3 SOCs need the CHS business?
 
-"CHS business", as Philip called it, was only partially required in the early 
-days of OMAP3 SoCs few years ago, due to some "specific" FAT implementation of 
-the BootROM. These days it's not required on modern Sitara SoCs.
-
--- 
-Denys
+--Ash
 
