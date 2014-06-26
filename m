@@ -1,39 +1,33 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qa0-f49.google.com (mail-qa0-f49.google.com
-	[209.85.216.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E5069601A0
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 132AD60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jun 2014 22:07:14 +0000 (UTC)
-Received: by mail-qa0-f49.google.com with SMTP id w8so3329718qac.8
+	Thu, 26 Jun 2014 23:39:03 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id hy4so4325591vcb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jun 2014 15:07:15 -0700 (PDT)
+	Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=ZcN5dw64QyMeQ4UcXKo3ADh8GvEEDDCsAcU5DYXTOww=;
-	b=vd+Njzrog5C1bijz2qhiXAZVN2WoWL4WAamWW/SNAaBptybTBBJwSuigb/z+4a1ruC
-	L0/RvYESZLUW09qPaRNqhS0Z47GTCCj7lFNcGEk/KbD+y4UYRkRYJmlh+MpHkI8UMeGc
-	Z6/BlxGFSlvfrsKqdiMBV+h4/uK8RVHlQPNeSpPKcroeFY5j9cgp/XIrmqWEfxpWwucf
-	jEknyvcSYN4p9hcUYjs0+qF1MBsa5eQKYzOa6te3O71QsqV7p771lkGTdjcaOme4a+tI
-	dd/O+EuLG1NrKkS55kr67Azz82G66BlMNxweyP/TAGrbym8cfkIeDYvxhyXC4KqI5a+U
-	dnJg==
-X-Received: by 10.224.161.129 with SMTP id r1mr18952997qax.86.1403820435316;
-	Thu, 26 Jun 2014 15:07:15 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=iZ3YkwcyhzPWbe6KWc/nuEYdxDJYVAPaMBnYnD+1fQA=;
+	b=RZqBWh/OazEstRz8nrH6HbyrygfDkl55E4bYNnYymzD1vFW7Rl2B9/7mgOJGWbPseL
+	vVwkkXzVlHsi49IzDAS6GTY4kxxlAubQlFZzoV+DI2zRSfi6tqo9Kh2mCpX0SLxhMx5U
+	6DxHyiPUfVNPTZHlhHO9loV36zWdFDv/xklRDWXqa1xad/VkbcVrGK25OcHgmZB50yrf
+	Fs/nCmwu6J3MtY18xQ93mSdA9p0HQWUuprktmG6ZarNTVFVBBtXcGwt1ZEexQ6F9e4JL
+	n3dKH5svs1TrTEzis0JgCHfR/BEaPseHUP+sNiRlE/WB+iIw+A9/Kcg//XFxWeGouV+5
+	XRUQ==
 MIME-Version: 1.0
-Received: by 10.140.48.112 with HTTP; Thu, 26 Jun 2014 15:06:55 -0700 (PDT)
-In-Reply-To: <20140626180954.GG1580@denix.org>
-References: <53AA0672.7070606@balister.org>
-	<2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
-	<53AB1718.7000608@balister.org> <20140625185504.GD1580@denix.org>
-	<CAMCfZKEOYwA=9CtEVVccXASOJXHsh5agvPWvG6imOJXXCEv8Zw@mail.gmail.com>
-	<53AB5ADB.3080403@balister.org>
-	<CAMCfZKHUaFwx_pQdgqbeS1C-WmKM9DEcNfixug9Jw8Z645epuQ@mail.gmail.com>
-	<20140626180954.GG1580@denix.org>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Thu, 26 Jun 2014 19:06:55 -0300
-Message-ID: <CAMCfZKH82XRE7j2CV0QThWbFBQSC3QBVwDWi0AbBE2T=15WWFw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.220.103.141 with SMTP id k13mr16483473vco.25.1403825944271; 
+	Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
+Received: by 10.52.234.105 with HTTP; Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
+Date: Thu, 26 Jun 2014 16:39:04 -0700
+Message-ID: <CAFeBWL4p+pD1bEhjfQNVWLUowd1FmQOc7Y5m4845462yJ22OFw@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: State of the art for creating an image that you can dd to an SD card
+Subject: Installing RPM packages in SDK sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,32 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jun 2014 22:07:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 26 Jun 2014 23:39:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Denys,
+Hello everyone, in the section 4.2. Configuring the PMS of the Yocto ADT
+manual, it describes adding packages to a target sysroot using OPKG. This
+method works well as documented. However my choice of package manager is
+Yocto's default - RPM. And I was not able to successfully install RPM
+packages in the SDK sysroot.
 
-On Thu, Jun 26, 2014 at 3:09 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Ultimately, I think installing RPM packages using SmartPM fails because the
+list of installed packages is not included in the SDK sysroot. A deployable
+image contains a file called Packages in /var/lib/rpm. The SDK sysroot does
+not have this file and shows 0 installed packages when I run `smart stats`.
+Note that when I am using OPKG instead of RPM, I have the equivalent
+package index file in /var/lib/opkg/lists for both sysroot and deployable
+images.
 
-> "CHS business", as Philip called it, was only partially required in the
-> early
-> days of OMAP3 SoCs few years ago, due to some "specific" FAT
-> implementation of
-> the BootROM. These days it's not required on modern Sitara SoCs.
->
+I can still attempt to install a package, but it quite literally wants to
+rebuild the entire rootfs. For example, running `smart install opencv-dev`
+warns that it has to install 400 packages. These packages include
+base-files, bash, m4, make, python-dev etc.
 
-So it could be true for am3517 of 3 years ago.
+So this makes me think that either RPM is not supported in SDK sysroot or
+the feature is incomplete. It's also possible that I have missed an
+important detail.
 
+I will be looking into the sdk class and the package manager class to see
+what's really happening. In the meanwhile I'd appreciate if someone can
+provide some pointers!
 
-Regards,
+Thanks,
 
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
+Adam
 
