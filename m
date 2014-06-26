@@ -1,33 +1,34 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 132AD60703
+Return-Path: <denis@denix.org>
+Received: from vms173017pub.verizon.net (vms173017pub.verizon.net
+	[206.46.173.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 7524A60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jun 2014 23:39:03 +0000 (UTC)
-Received: by mail-vc0-f175.google.com with SMTP id hy4so4325591vcb.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=iZ3YkwcyhzPWbe6KWc/nuEYdxDJYVAPaMBnYnD+1fQA=;
-	b=RZqBWh/OazEstRz8nrH6HbyrygfDkl55E4bYNnYymzD1vFW7Rl2B9/7mgOJGWbPseL
-	vVwkkXzVlHsi49IzDAS6GTY4kxxlAubQlFZzoV+DI2zRSfi6tqo9Kh2mCpX0SLxhMx5U
-	6DxHyiPUfVNPTZHlhHO9loV36zWdFDv/xklRDWXqa1xad/VkbcVrGK25OcHgmZB50yrf
-	Fs/nCmwu6J3MtY18xQ93mSdA9p0HQWUuprktmG6ZarNTVFVBBtXcGwt1ZEexQ6F9e4JL
-	n3dKH5svs1TrTEzis0JgCHfR/BEaPseHUP+sNiRlE/WB+iIw+A9/Kcg//XFxWeGouV+5
-	XRUQ==
-MIME-Version: 1.0
-X-Received: by 10.220.103.141 with SMTP id k13mr16483473vco.25.1403825944271; 
-	Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
-Received: by 10.52.234.105 with HTTP; Thu, 26 Jun 2014 16:39:04 -0700 (PDT)
-Date: Thu, 26 Jun 2014 16:39:04 -0700
-Message-ID: <CAFeBWL4p+pD1bEhjfQNVWLUowd1FmQOc7Y5m4845462yJ22OFw@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Installing RPM packages in SDK sysroot
+	Thu, 26 Jun 2014 23:43:40 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [71.191.205.189])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0N7S00G3CV8DMNH0@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	26 Jun 2014 18:43:40 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DE119201B8; Thu,
+	26 Jun 2014 19:43:24 -0400 (EDT)
+Date: Thu, 26 Jun 2014 19:43:24 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20140626234324.GH1580@denix.org>
+References: <2894594.Bns9GHPWX5@peggleto-mobl5.ger.corp.intel.com>
+	<53AB1718.7000608@balister.org> <20140625185504.GD1580@denix.org>
+	<CAMCfZKEOYwA=9CtEVVccXASOJXHsh5agvPWvG6imOJXXCEv8Zw@mail.gmail.com>
+	<53AB5ADB.3080403@balister.org>
+	<CAMCfZKHUaFwx_pQdgqbeS1C-WmKM9DEcNfixug9Jw8Z645epuQ@mail.gmail.com>
+	<20140626180954.GG1580@denix.org>
+	<CAK8F28kHj_JJh84XWcVt7wy2p70BvpV+WCF4n2r1=FWrRQT8cQ@mail.gmail.com>
+	<53AC7457.3030103@balister.org>
+	<CAK8F28neQBPbxdfcMGoZ-tyxb1CNoAVO_KC3GDO6tzTjaTpLJg@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <CAK8F28neQBPbxdfcMGoZ-tyxb1CNoAVO_KC3GDO6tzTjaTpLJg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: State of the art for creating an image that you can dd to an SD card
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,37 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jun 2014 23:39:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Jun 2014 23:43:48 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello everyone, in the section 4.2. Configuring the PMS of the Yocto ADT
-manual, it describes adding packages to a target sysroot using OPKG. This
-method works well as documented. However my choice of package manager is
-Yocto's default - RPM. And I was not able to successfully install RPM
-packages in the SDK sysroot.
+On Thu, Jun 26, 2014 at 01:12:41PM -0700, Ash Charles wrote:
+> On Thu, Jun 26, 2014 at 12:28 PM, Philip Balister <philip@balister.org> wrote:
+> > Ones with a really ancient MLO, I think. Hopefully, all of those
+> > binaries are gone from the Internet now.
+> >
+> > Philip
+> 
+> Excellent---thanks.  I had assumed this was boot ROM dependent, not
+> MLO dependent!
 
-Ultimately, I think installing RPM packages using SmartPM fails because the
-list of installed packages is not included in the SDK sysroot. A deployable
-image contains a file called Packages in /var/lib/rpm. The SDK sysroot does
-not have this file and shows 0 installed packages when I run `smart stats`.
-Note that when I am using OPKG instead of RPM, I have the equivalent
-package index file in /var/lib/opkg/lists for both sysroot and deployable
-images.
+It is BootROM, not MLO...
 
-I can still attempt to install a package, but it quite literally wants to
-rebuild the entire rootfs. For example, running `smart install opencv-dev`
-warns that it has to install 400 packages. These packages include
-base-files, bash, m4, make, python-dev etc.
-
-So this makes me think that either RPM is not supported in SDK sysroot or
-the feature is incomplete. It's also possible that I have missed an
-important detail.
-
-I will be looking into the sdk class and the package manager class to see
-what's really happening. In the meanwhile I'd appreciate if someone can
-provide some pointers!
-
-Thanks,
-
-Adam
+-- 
+Denys
 
