@@ -1,34 +1,40 @@
-Return-Path: <Daniel.MONDON@lpgsystems.com>
-Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 233D760030
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 7405E60030
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 13:53:29 +0000 (UTC)
-Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
-	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 6DF4B3300BE
+	Fri, 27 Jun 2014 13:59:55 +0000 (UTC)
+Received: by mail-yk0-f175.google.com with SMTP id 9so2871390ykp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 15:53:29 +0200 (CEST)
-Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
-	([::1]) with mapi id 14.03.0181.006; Fri, 27 Jun 2014 15:53:29 +0200
-From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe]  Building Java 7
-Thread-Index: AQHPkg8rcz0xMCt0GEuyqUMJw+bSjQ==
-Date: Fri, 27 Jun 2014 13:53:27 +0000
-Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0612C63E@SEXCHANGE0100.lpg.priv>
-References: <1403794582-16605-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C430@SEXCHANGE0100.lpg.priv>
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0612C430@SEXCHANGE0100.lpg.priv>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.5.34]
+	Fri, 27 Jun 2014 06:59:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=c9AhFVlJMeU7SZ9pAg00jH6nASP4viI+P3cIgL7/+kg=;
+	b=D4WW8eECaN5GALiT1avej3LnSuJmCiMGxhxgQhgJziYARjGBMe3++QO1ugJoPrFf0a
+	1bizkYYxM2ANF/29kKYIVumnJB93koxLVp2kgXUL1SMn9wz7jq/ojDgIAMXycPX3pCaw
+	gtkqhMvSsL/HDwwBSppKUOwNSKJXPKPMHzvotmccMAZJ01VtyzoNGpODTTrT9hwYW/l+
+	nD74OwwMLX7nVnIDpDCgsKDWpWVjg1G5qwYZwAg7yeRVnliNplO9KeDoXqjpFbHeSUz5
+	nnGVM1YvqZcwv71wZSe4oePuPog29M1FrlTMUmXL1u+EA5htdxdWbNw+6oz7+Y24jo5u
+	Eceg==
 MIME-Version: 1.0
-X-DRWEB-SCAN: ok
-X-VRSPAM-SCORE: 0
-X-VRSPAM-STATE: legit
-X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejfedrtdeiucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
-Subject: Re: Building Java 7
+X-Received: by 10.236.207.225 with SMTP id n61mr3349087yho.148.1403877596941; 
+	Fri, 27 Jun 2014 06:59:56 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.233.65 with HTTP; Fri, 27 Jun 2014 06:59:56 -0700 (PDT)
+In-Reply-To: <B01FEAA5-E6AF-40A3-9C03-A1F204451E86@dominion.thruhere.net>
+References: <Lauren.Post@freescale.com>
+	<1403793465-6376-1-git-send-email-lauren.post@freescale.com>
+	<lojdi3$8mu$1@ger.gmane.org>
+	<CAP9ODKrjhhBwm2Uuwg9j5RQ9e7NdX7TvOTrCG7mjWkWjA77Hiw@mail.gmail.com>
+	<B01FEAA5-E6AF-40A3-9C03-A1F204451E86@dominion.thruhere.net>
+Date: Fri, 27 Jun 2014 10:59:56 -0300
+X-Google-Sender-Auth: CIz_sZ1VCuSi3ahq6I3L9sfNgs4
+Message-ID: <CAP9ODKqpYJh8wYfxPbcjTEpJN9sSyK0DdyOyw-zt7fMxPgoXoA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cpuburn-neon: Upgrade to 2014066 version to fix build break
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,46 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jun 2014 13:53:30 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Jun 2014 13:59:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
->Hi,
+Hello Koen,
+
+On Fri, Jun 27, 2014 at 10:40 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
 >
->I'm back building Java 7 for Arm. (what about Java 8?)
+> Op 27 jun. 2014, om 15:09 heeft Otavio Salvador <otavio@ossystems.com.br> het volgende geschreven:
 >
+>> Hello Koen,
+>>
+>> On Fri, Jun 27, 2014 at 6:29 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>>> Lauren Post schreef op 26-06-14 16:37:
+>>>> Replace SRC_URI with new location, md5sum and new name since previous
+>>>> download will not work.  Without this fix cpuburn-neon has a broken
+>>>> build.
+>>>
+>>> Why not make the recipe clone the git repo?
+>>
+>> I pondered about this when looking at the issue with Lauren. The
+>> recipe was like this before and this build break is causing issues for
+>> several people using meta-fsl-demos as we include it in our test
+>> images.
+>>
+>> The long term solution should be to rework it (also because it has
+>> extra tests and those are not being included) but I think this fix is
+>> urgent and known to work for now.
 >
->I've got the error : :(
->WARNING: Failed to fetch URL https://github.com/downloads/mozilla/rhino/rh=
-ino1_7R4.zip, attempting MIRRORS if available
->ERROR: Fetcher failure: Fetch command failed with exit code 4, output:
->OpenSSL: error:14077410:SSL routines:SSL23_GET_SERVER_HELLO:sslv3 alert ha=
-ndshake failure Unable to establish SSL connection.
+> It's still the wrong way to fix it, rework it to use git://, this will break again when the repo gets updated.
 >
->ERROR: Function failed: Fetcher failure for URL: 'https://github.com/downl=
-oads/mozilla/rhino/rhino1_7R4.zip'. Unable to fetch URL from any source.
->ERROR: Logfile of failure stored in: /home/me/poky/build/tmp/work/x86_64-l=
-inux/rhino-native/1.7r4-r0/temp/log.do_fetch.24461
->ERROR: Task 1806 (virtual:native:/home/me/poky/meta-java/recipes-core/rhin=
-o/rhino_1.7r4.bb, do_fetch) failed with exit code '1'
->NOTE: Tasks Summary: Attempted 1211 tasks of which 1183 didn't need to be =
-rerun and 1 failed.
+>> This fix needs to be backported to old branches as well as current
+>> recipe fails to fetch.
 >
->With the log file joined.
->
->Thanks,
->Daniel.
+> if you're going to backport it make sure it's the right fix.
 
+Instead we can use, for now, the below URL so it stays working even if
+it is updated.
 
-Hi,
+https://raw.githubusercontent.com/ssvb/cpuburn-arm/dd5c5ba58d2b0b23cfab4a286f9d3f5510000f20/cpuburn-a8.S
 
-Is it a configuration error ? (...wget bug ?)
+Fine for this fix? I will update it to use the clone and also include
+the extra tests (for A8, A9 and A7 plus the JPEG ones) soon.
 
-I am under a virtualized Ubuntu server 12.04.
-
-Thanks
-Daniel.
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
