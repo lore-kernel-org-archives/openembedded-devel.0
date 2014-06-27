@@ -1,34 +1,38 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 59CA360030
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id CFF4960559
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 09:29:49 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1X0STc-0003MY-H5 for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Jun 2014 11:29:48 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 11:29:48 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 27 Jun 2014 13:09:06 +0000 (UTC)
+Received: by mail-yk0-f175.google.com with SMTP id 9so2841657ykp.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 11:29:48 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 27 Jun 2014 11:29:39 +0200
-Message-ID: <lojdi3$8mu$1@ger.gmane.org>
+	Fri, 27 Jun 2014 06:09:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=8raLahaybAUtTIvRKBbSS8TguvUGZ7NHDj3ULa0gSbI=;
+	b=MAsjwdyfqPOEEXif7moPNWRzgyK5OdUfVhe1IeqxWZOMYNvBajRRj7w6Vqn8CnrFz6
+	F9t63ukkOhO5j6UiCR+wOU+wBuN6Z39CaKcXia+Sf9H6XffwhtC1jEQ9fDjmSj8Onf7e
+	fYp3qwOK4TkNRR9DYjD/yPMg/1FFF2G5Y8QxoFQQIaB15csuAxMcKkg/gfdO+UDuQPp4
+	zOJ/RVsKjuzglSVZqU9mZhgkzR+cLmqioCpNCnTHVS49BVxboYvVl45GlA7tgX/PsCPC
+	4oHPnbEiRckSELJmVjIwpJ4LjbVQ9eOBJvJKMIHFd4ggTa9SE6O13ea2KU0f2s8BFpjL
+	ZLww==
+MIME-Version: 1.0
+X-Received: by 10.236.108.176 with SMTP id q36mr31194648yhg.87.1403874547569; 
+	Fri, 27 Jun 2014 06:09:07 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.233.65 with HTTP; Fri, 27 Jun 2014 06:09:07 -0700 (PDT)
+In-Reply-To: <lojdi3$8mu$1@ger.gmane.org>
 References: <Lauren.Post@freescale.com>
 	<1403793465-6376-1-git-send-email-lauren.post@freescale.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1403793465-6376-1-git-send-email-lauren.post@freescale.com>
-X-Enigmail-Version: 1.6
+	<lojdi3$8mu$1@ger.gmane.org>
+Date: Fri, 27 Jun 2014 10:09:07 -0300
+X-Google-Sender-Auth: A8Acr5wt9VXamhd_M0pJfhrgiz8
+Message-ID: <CAP9ODKrjhhBwm2Uuwg9j5RQ9e7NdX7TvOTrCG7mjWkWjA77Hiw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Martin Jansa <martin.jansa@gmail.com>,
+	Koen Kooi <koen@dominion.thruhere.net>
 Subject: Re: [meta-oe][PATCH] cpuburn-neon: Upgrade to 2014066 version to fix build break
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,72 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jun 2014 09:29:53 -0000
+X-List-Received-Date: Fri, 27 Jun 2014 13:09:15 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-Lauren Post schreef op 26-06-14 16:37:
-> Replace SRC_URI with new location, md5sum and new name since previous
-> download will not work.  Without this fix cpuburn-neon has a broken
-> build.
-
-Why not make the recipe clone the git repo?
-
-
-> 
-> Signed-off-by: Lauren Post <lauren.post@freescale.com> Signed-off-by:
-> Otavio Salvador <otavio@ossystems.com.br> --- ...n-neon_20120610.bb =>
-> cpuburn-neon_20140626.bb} |    9 +++++---- 1 file changed, 5
-> insertions(+), 4 deletions(-) rename
-> meta-oe/recipes-benchmark/cpuburn/{cpuburn-neon_20120610.bb =>
-> cpuburn-neon_20140626.bb} (72%)
-> 
-> diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb
-> b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb similarity
-> index 72% rename from
-> meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb rename to
-> meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb index
-> 8ec5e95..ed1f1ee 100644 ---
-> a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb +++
-> b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb @@ -8,17
-> +8,18 @@ DL_DIR_append = "/${PN}-${PV}" COMPATIBLE_MACHINE =
-> "(${@bb.utils.contains("TUNE_FEATURES", "neon", "${MACHINE}", "Invalid!",
-> d)})"
-> 
-> SRC_URI = "http://hardwarebug.org/files/burn.S;name=mru \ -
-> http://github.com/downloads/ssvb/ssvb.github.com/ssvb-cpuburn-a8.S;name=ssvb"
+On Fri, Jun 27, 2014 at 6:29 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+> Lauren Post schreef op 26-06-14 16:37:
+>> Replace SRC_URI with new location, md5sum and new name since previous
+>> download will not work.  Without this fix cpuburn-neon has a broken
+>> build.
 >
-> 
-+           https://github.com/ssvb/cpuburn-arm/raw/master/cpuburn-a8.S;name=ssvb"
-> + SRC_URI[mru.md5sum] = "823abc72c2cd448e87df9bc5355a4456" 
-> SRC_URI[mru.sha256sum] =
-> "01d9fc04f83740c513c25401dcc89c11b2a5a6013e70bfca42b7b02129f88cd2" 
-> -SRC_URI[ssvb.md5sum] = "0acc570d943c41c7f8602b9ff6fa111d" 
-> -SRC_URI[ssvb.sha256sum] =
-> "bfddd3226a499ffdf71bb58c05ccdc6dac5bb2c2c3bdb10ac610ee0b60aac087" 
-> +SRC_URI[ssvb.md5sum] = "ba0ef2939a3b3b487523448c67544e94" 
-> +SRC_URI[ssvb.sha256sum] =
-> "ce42ebdc71c876a33d9f7534355ef76cefa0d00ddb19ad69cf05a266c861d08d"
-> 
-> S = "${WORKDIR}"
-> 
-> do_compile() { ${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn -    ${CC}
-> ${CFLAGS} ${LDFLAGS} ssvb-cpuburn-a8.S -o burn-neona8 +    ${CC}
-> ${CFLAGS} ${LDFLAGS} cpuburn-a8.S -o burn-neona8 }
-> 
-> do_install() {
-> 
+> Why not make the recipe clone the git repo?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+I pondered about this when looking at the issue with Lauren. The
+recipe was like this before and this build break is causing issues for
+several people using meta-fsl-demos as we include it in our test
+images.
 
-iD8DBQFTrTmDMkyGM64RGpERAjXBAJ4s5eQ6sg0h4h3D62Vq8ULr+8tzKQCgkAKY
-11UopJhFG8CsPTl/mxMv7Ck=
-=jm+c
------END PGP SIGNATURE-----
+The long term solution should be to rework it (also because it has
+extra tests and those are not being included) but I think this fix is
+urgent and known to work for now.
 
+This fix needs to be backported to old branches as well as current
+recipe fails to fetch.
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
