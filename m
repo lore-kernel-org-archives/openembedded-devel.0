@@ -1,39 +1,49 @@
-Return-Path: <sebastientaylor@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 20C7B60196
+Return-Path: <Lauren.Post@freescale.com>
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2lp0239.outbound.protection.outlook.com [207.46.163.239])
+	by mail.openembedded.org (Postfix) with ESMTP id B5DF960559
 	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 16:01:51 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id fb1so4775893pad.28
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jun 2014 09:01:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=ASMv8GAHrw5PRljXoUIVXtl7JGpoIRzd53JuJclWtWM=;
-	b=DcsjZe+5yG3JNJMowgy9P1obMy3AS2WPhoyo/rG48quQ21hAwv5kGOJvVqzI0BQxm5
-	qdEvzoHgPz70zXTdZ3yu9Y0paSOusVAyCGpt5QKU0LIpTRr3RT2upeztaRCqRr5MbZAm
-	t+Hdpv7eCdDViH7+EoUwz2mi6pOSR29IVJ9angIVkF0StPDkLKnIwzsWjqeOEZ0/mKcN
-	NJc+99/TgaFRK/9vCCdv3Z3fvJ2I255uxOlXSnx2p0LsKlm5QGJ98uJTkhLGEFr2egda
-	i4Z1Ow3EByIoxUJOssXTjrtnkdOifCcD7mqLCSMcDmsuZCak2j/f+cdZAhdD5zA6aS8t
-	+amQ==
-X-Received: by 10.66.154.164 with SMTP id vp4mr32923333pab.4.1403884912084;
-	Fri, 27 Jun 2014 09:01:52 -0700 (PDT)
-Received: from [192.168.1.188] (mail.au-zone.com. [184.70.109.50])
-	by mx.google.com with ESMTPSA id wk4sm53438077pab.5.2014.06.27.09.01.44
-	for <Openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 27 Jun 2014 09:01:51 -0700 (PDT)
-Sender: =?UTF-8?Q?S=C3=A9bastien_Taylor?= <sebastientaylor@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 7.3 \(1878.2\))
-From: =?iso-8859-1?Q?S=E9bastien_Taylor?= <me@staylor.ca>
-In-Reply-To: <75D00F71-5F69-4506-9190-96C8BD98220F@staylor.ca>
-Date: Fri, 27 Jun 2014 10:01:37 -0600
-Message-Id: <90368C38-4B94-4896-A8CA-2B982448700D@staylor.ca>
-References: <75D00F71-5F69-4506-9190-96C8BD98220F@staylor.ca>
-To: Openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1878.2)
-Subject: Re: [meta-qt5] populate_sdk_qt5 qconfig.pri
+	Fri, 27 Jun 2014 17:27:29 +0000 (UTC)
+Received: from BLUPR03CA028.namprd03.prod.outlook.com (10.141.30.21) by
+	DM2PR03MB557.namprd03.prod.outlook.com (10.141.82.152) with Microsoft
+	SMTP Server (TLS) id 15.0.954.9; Fri, 27 Jun 2014 17:27:28 +0000
+Received: from BY2FFO11FD018.protection.gbl (2a01:111:f400:7c0c::137) by
+	BLUPR03CA028.outlook.office365.com (2a01:111:e400:879::21) with
+	Microsoft SMTP Server (TLS) id 15.0.974.11 via Frontend Transport;
+	Fri, 27 Jun 2014 17:27:27 +0000
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BY2FFO11FD018.mail.protection.outlook.com (10.1.14.106) with Microsoft
+	SMTP Server (TLS) id 15.0.969.12 via Frontend Transport;
+	Fri, 27 Jun 2014 17:27:27 +0000
+Received: from neo.am.freescale.net (neo.am.freescale.net [10.81.16.89])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s5RHRQJT023509;
+	Fri, 27 Jun 2014 10:27:26 -0700
+From: Lauren Post <lauren.post@freescale.com>
+To: <Openembedded-devel@lists.openembedded.org>
+Date: Fri, 27 Jun 2014 12:13:16 -0500
+Message-ID: <1403889196-11872-1-git-send-email-lauren.post@freescale.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <lauren.post@freescale.com>
+References: <lauren.post@freescale.com>
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:CAL; IPV:NLI;
+	EFV:NLI; SFV:NSPM;
+	SFS:(6009001)(199002)(189002)(104016002)(107046002)(85306003)(48376002)(81542001)(74502001)(62966002)(83072002)(92726001)(105606002)(95666004)(64706001)(81156004)(36756003)(50466002)(33646001)(85852003)(77156001)(102836001)(229853001)(81342001)(87286001)(20776003)(31966008)(26826002)(47776003)(74662001)(87936001)(15202345003)(79102001)(106466001)(80022001)(68736004)(83322001)(19580405001)(6806004)(19580395003)(84676001)(44976005)(15395725005)(15975445006)(21056001)(4396001)(69596002)(104166001)(89996001)(92566001)(99396002)(97736001)(86362001)(88136002)(46102001)(77982001)(575784001)(50986999)(76176999)(76482001)(50226001)(93916002)(2351001);
+	DIR:OUT; SFP:; SCL:1; SRVR:DM2PR03MB557;
+	H:az84smr01.freescale.net; FPR:; MLV:ovrnspm;
+	PTR:InfoDomainNonexistent; A:1; MX:1; LANG:en; 
+MIME-Version: 1.0
+X-Microsoft-Antispam: BL:0; ACTION:Default; RISK:Low; SCL:0; SPMLVL:NotSpam;
+	PCL:0; RULEID:
+X-Forefront-PRVS: 0255DF69B9
+Received-SPF: Fail (: domain of freescale.com does not designate 192.88.158.2
+	as permitted sender) receiver=; client-ip=192.88.158.2;
+	helo=az84smr01.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=Lauren.Post@freescale.com; 
+X-OriginatorOrg: freescale.com
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH v3] cpuburn-neon: Upgrade to version 20140626
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jun 2014 16:01:55 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Jun 2014 17:27:33 -0000
+Content-Type: text/plain
 
-Hasn't been any feedback on this so just curious if that's because this =
-isn't happening for others or they're simply not using features that =
-trigger this issue.  This makes using qmake with pkg-config (a good way =
-to pull in non-Qt modules into a project) unusable until the qconfig.pri =
-file in the SDK installation is manually corrected.
+Previous location is no longer accessible and breaks builds that include
+cpuburn-neon.  This updates the location to fix the build breaks
 
+Signed-off-by: Lauren Post <lauren.post@freescale.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-On Jun 24, 2014, at 2:34 PM, S=E9bastien Taylor <me@staylor.ca> wrote:
+---
+ ...n-neon_20120610.bb => cpuburn-neon_20140626.bb} |    9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-benchmark/cpuburn/{cpuburn-neon_20120610.bb => cpuburn-neon_20140626.bb} (69%)
 
-> The SDK generated by populate_sdk_qt5 (or meta-toolchain-qt5) has a =
-qconfig.pri which uses various variables that are pointing to the =
-original sources as opposed to the SDK.
->=20
-> For example if you open =
-/opt/poky/1.6.1/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi/usr/lib/qt=
-5/mkspecs/qconfig.pri and look at the QMAKE_DEFAULT_LIBDIRS, =
-QMAKE_DEFAULT_INCDIRS, PKG_CONFIG_SYSROOT_DIR, etc you'll see they point =
-to say /home/user/yocto/build/tmp/...
->=20
-> I have not yet looked at which scripts handle re-hosting the various =
-distributable pieces during installation for the user's selected path, =
-but I would presume that will be the required fix.  If anyone familiar =
-with this portion could offer some advice it would be greatly =
-appreciated.
->=20
+diff --git a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb
+similarity index 69%
+rename from meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb
+rename to meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb
+index 8ec5e95..14e3fc4 100644
+--- a/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20120610.bb
++++ b/meta-oe/recipes-benchmark/cpuburn/cpuburn-neon_20140626.bb
+@@ -8,17 +8,18 @@ DL_DIR_append = "/${PN}-${PV}"
+ COMPATIBLE_MACHINE = "(${@bb.utils.contains("TUNE_FEATURES", "neon", "${MACHINE}", "Invalid!", d)})"
+ 
+ SRC_URI = "http://hardwarebug.org/files/burn.S;name=mru \
+-           http://github.com/downloads/ssvb/ssvb.github.com/ssvb-cpuburn-a8.S;name=ssvb"
++           https://raw.githubusercontent.com/ssvb/cpuburn-arm/dd5c5ba58d2b0b23cfab4a286f9d3f5510000f20/cpuburn-a8.S;name=ssvb"
++
+ SRC_URI[mru.md5sum] = "823abc72c2cd448e87df9bc5355a4456"
+ SRC_URI[mru.sha256sum] = "01d9fc04f83740c513c25401dcc89c11b2a5a6013e70bfca42b7b02129f88cd2"
+-SRC_URI[ssvb.md5sum] = "0acc570d943c41c7f8602b9ff6fa111d"
+-SRC_URI[ssvb.sha256sum] = "bfddd3226a499ffdf71bb58c05ccdc6dac5bb2c2c3bdb10ac610ee0b60aac087"
++SRC_URI[ssvb.md5sum] = "ba0ef2939a3b3b487523448c67544e94"
++SRC_URI[ssvb.sha256sum] = "ce42ebdc71c876a33d9f7534355ef76cefa0d00ddb19ad69cf05a266c861d08d"
+ 
+ S = "${WORKDIR}"
+ 
+ do_compile() {
+     ${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
+-    ${CC} ${CFLAGS} ${LDFLAGS} ssvb-cpuburn-a8.S -o burn-neona8
++    ${CC} ${CFLAGS} ${LDFLAGS} cpuburn-a8.S -o burn-neona8
+ }
+ 
+ do_install() {
+-- 
+1.7.9.5
 
 
