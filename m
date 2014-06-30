@@ -1,24 +1,34 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 405FD6028A
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f181.google.com (mail-qc0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 624BE60CEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2014 12:32:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.01,575,1400018400"; d="scan'208";a="54080791"
-Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
-	by antispam1.usr.ingenico.loc with ESMTP; 30 Jun 2014 14:32:28 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 30 Jun 2014 14:32:28 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.3.174.1; Mon, 30 Jun 2014 14:32:27 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 30 Jun 2014 14:32:26 +0200
-Message-ID: <1404131546-10511-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
+	Mon, 30 Jun 2014 12:48:56 +0000 (UTC)
+Received: by mail-qc0-f181.google.com with SMTP id x13so6867200qcv.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jun 2014 05:48:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=va1Rcjeb+9w1XkzzbOhPzsc5BRIav2JHv6VDk46YIaE=;
+	b=l3SCEhiqMDuN/koXSYRpHqxyyNa+3DrQFT9kLQosfnjM8auXLSX7zA/CvCkKKYKTd4
+	lCTkL2UH7o3MYLaEOpyj3NJSEs+V26FvXweWE4b8AhJm8owAPUGkpqWczRJFWP0yBhF5
+	6yJX0tTPQ9LxJdXZ5bMJV9eooIqWh2j8vxHMOLPmcUcfam6eZzIKdPQqX212DGsiJ4Ka
+	ZAHOE7ij8Q3PHMky3+pIxm9WhDTd8Fj8uMRPC4UQNnbUeWgoc4LGwwlmHe2aSLuDTFqW
+	AujJWMoLkNKv7inOoKbqhiNG/Rg3FpbXZ0Hkh7Usb/s/N7NoIebqR6OwVpnl4ED1t143
+	FKng==
+X-Gm-Message-State: ALoCoQkSFnhwLfJh+wjKagXy+mOX830SZmhUcUvl6qpmjYtXFzM+aGACIa1DnS88sUZwpkfWrAht
+X-Received: by 10.224.124.74 with SMTP id t10mr34725474qar.78.1404132537705;
+	Mon, 30 Jun 2014 05:48:57 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] xmlstarlet: fix S!=B failure
+Received: by 10.140.86.40 with HTTP; Mon, 30 Jun 2014 05:48:37 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 30 Jun 2014 13:48:37 +0100
+Message-ID: <CAJTo0LZvpZCFPYxsF21b1gvzr7TMMRwrLMdthGLzWFcm3JWqbQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: package_name_hook in debian.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,78 +42,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jun 2014 12:32:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Jun 2014 12:48:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Extra change: use ${BP}
+Hi,
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- ...001-usage2c.awk-fix-wrong-basename-regexp.patch | 37 ++++++++++++++++++++++
- .../recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb |  5 +--
- 2 files changed, 40 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/xmlstarlet/files/0001-usage2c.awk-fix-wrong-basename-regexp.patch
+package_name_hook in debian.bbclass is tagged using EXPORT_FUNCTIONS,
+so that other classes can "inherit" it and define their own
+foo_package_name_hook, calling up to debian_package_name_hook.
 
-diff --git a/meta-oe/recipes-support/xmlstarlet/files/0001-usage2c.awk-fix-wrong-basename-regexp.patch b/meta-oe/recipes-support/xmlstarlet/files/0001-usage2c.awk-fix-wrong-basename-regexp.patch
-new file mode 100644
-index 0000000..24b187f
---- /dev/null
-+++ b/meta-oe/recipes-support/xmlstarlet/files/0001-usage2c.awk-fix-wrong-basename-regexp.patch
-@@ -0,0 +1,37 @@
-+Upstream-Status: Submitted [sourceforge]
-+
-+From 75d789d0ea9716c9a9ae72f42a2fcfa907cf4a12 Mon Sep 17 00:00:00 2001
-+From: Matthieu Crapet <mcrapet@gmail.com>
-+Date: Mon, 30 Jun 2014 13:52:25 +0200
-+Subject: [PATCH] usage2c.awk: fix wrong basename regexp
-+
-+Previously not matching with filename argument with absolute path.
-+
-+Signed-off-by: Matthieu Crapet <mcrapet@gmail.com>
-+---
-+ usage2c.awk | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/usage2c.awk b/usage2c.awk
-+index 94b897a..9aea212 100755
-+--- a/usage2c.awk
-++++ b/usage2c.awk
-+@@ -6,13 +6,13 @@ BEGIN {
-+ }
-+ 
-+ # text in src/foo-bar.txt results in
-+-#   static const char foo_text[] = {
-++#   static const char foo_bar[] = {
-+ #     't', 'h', 'e', ' ', 't', 'e', 'x', 't', ...
-+ #   }
-+ length(command_name) == 0 {
-+     command_name = FILENAME;
-+     sub(/\.txt$/, "", command_name);
-+-    sub(/^([^\/]+\/)*/, "", command_name);
-++    sub(/^.*\//, "", command_name);
-+     gsub(/-/, "_", command_name);
-+     printf("static const char %s[] = {\n", command_name);
-+     progs = 0;
-+-- 
-+2.0.0
-+
-diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-index 770ccab..d9a03c6 100644
---- a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-+++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-@@ -12,8 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c04760d09e8b0fe73283d0cc9e8bea53"
- 
- DEPENDS = "libxml2 libxslt"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BPN}-${PV}.tar.gz \
--           file://configure.ac.patch"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BP}.tar.gz \
-+           file://configure.ac.patch \
-+           file://0001-usage2c.awk-fix-wrong-basename-regexp.patch"
- SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
- SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af49fceb303f84da7214779ccf99fffc6bbba"
- 
--- 
-2.0.0
+This seems unlikely to actually happen, and I was thinking about
+removing the EXPORT_FUNCTIONS tag.  Would this break anyone's code?
 
+Ross
 
