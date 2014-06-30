@@ -1,39 +1,46 @@
-Return-Path: <B40290@freescale.com>
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2lp0240.outbound.protection.outlook.com [207.46.163.240])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D0D160559
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 68DA1601A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2014 02:25:32 +0000 (UTC)
-Received: from BY2PR03MB254.namprd03.prod.outlook.com (10.242.37.17) by
-	BY2PR03MB394.namprd03.prod.outlook.com (10.141.141.13) with Microsoft
-	SMTP Server (TLS) id 15.0.974.11; Mon, 30 Jun 2014 02:25:31 +0000
-Received: from BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.22]) by
-	BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.22]) with mapi id
-	15.00.0974.002; Mon, 30 Jun 2014 02:25:31 +0000
-From: "B40290@freescale.com" <B40290@freescale.com>
-To: "B40290@freescale.com" <B40290@freescale.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] libhugetlbfs: arm 32bit support
-Thread-Index: AQHPiqO6XelOop+Ls0GRvamW3pxrCZuI/8Sw
-Date: Mon, 30 Jun 2014 02:25:30 +0000
-Message-ID: <3731aa39aae649be80dd07a5645f3665@BY2PR03MB254.namprd03.prod.outlook.com>
-References: <1403061135-22767-1-git-send-email-b40290@freescale.com>
-In-Reply-To: <1403061135-22767-1-git-send-email-b40290@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [123.151.195.50]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:
-x-forefront-prvs: 0258E7CCD4
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(6009001)(377454003)(199002)(189002)(13464003)(77982001)(79102001)(77096002)(76482001)(33646001)(85306003)(83322001)(99286002)(95666004)(74502001)(19580395003)(19580405001)(46102001)(83072002)(85852003)(99396002)(4396001)(21056001)(76176999)(50986999)(106116001)(76576001)(81542001)(105586002)(81342001)(74662001)(31966008)(92566001)(101416001)(86362001)(54356999)(2656002)(87936001)(20776003)(66066001)(107046002)(64706001)(80022001)(106356001)(74316001)(24736002);
-	DIR:OUT; SFP:; SCL:1; SRVR:BY2PR03MB394;
-	H:BY2PR03MB254.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; LANG:en; 
+	Mon, 30 Jun 2014 03:33:30 +0000 (UTC)
+Received: by mail-ie0-f182.google.com with SMTP id rp18so6375987iec.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Jun 2014 20:33:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=REVv+7q+2vc89xajzI9ot/GQh2mz6rhIRatlh2maSzc=;
+	b=fhyrkN9OuCpklzQlEFY/s+i2Syu8qYnFHboYHhPdL8z/ROrjvWjsdHEBdnDtP1qgIV
+	ww23Fg8ECDDgFB7RowRetouMcpMHRSUrGbpBePB67s+YULt7LyaHseM0V6g/vu1ZfUuM
+	zythYjl/N5M7e+JVBUs+mSSh/cQjuZQf23EFSphs7YCSmSTntA4AbW+3CX9CpRe0xu3J
+	fl+eBCHSEeUhTqOGTusf2mokSLFcov0in2N2m0LJSyMbVQf+ylL1hlNoEi5xj9BL2b3k
+	eqMtwkYeQwwsZLxybYox7wmPnDlx9DFKMn3hTUcSRZsPV3BcgwfMl1RtNcCXYdWMHz0E
+	ik3Q==
+X-Gm-Message-State: ALoCoQld2NmBiCVM+FpSEmwuTE+CdIlL2zhUXfY/0qsxp4vJlldLI+8fLswTuKDDeVbc5S94cuL/
+X-Received: by 10.50.142.97 with SMTP id rv1mr29718053igb.13.1404099211015;
+	Sun, 29 Jun 2014 20:33:31 -0700 (PDT)
+Received: from skynet (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
+	by mx.google.com with ESMTPSA id pm2sm5192544igb.3.2014.06.29.20.33.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 29 Jun 2014 20:33:30 -0700 (PDT)
+Received: by skynet (Postfix, from userid 1000)
+	id 6048A168543; Sun, 29 Jun 2014 23:33:29 -0400 (EDT)
+Date: Sun, 29 Jun 2014 23:33:29 -0400
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140630033327.GA26745@deserted.net>
+References: <1403579481-10494-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH] libhugetlbfs: arm 32bit support
+In-Reply-To: <1403579481-10494-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-703 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [PATCH][meta-networking] tftp-hpa: fix a build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,91 +54,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jun 2014 02:25:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 30 Jun 2014 03:33:31 -0000
+X-Groupsio-MsgNum: 50620
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
+Content-Disposition: inline
+
+--BOKacYhQ+x31HxR3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Pings.
+Merged, thanks.
+-J.
 
+[[oe] [PATCH][meta-networking] tftp-hpa: fix a build failure] On 14.06.24 (=
+Tue 11:11) rongqing.li@windriver.com wrote:
 
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> AR is defined as "ar cq" in MCONFIG.in, then "cq" is no longer needed in
+> Makefile of common and libs subdir.
+> 	#grep AR MCONFIG.in
+> 	AR	=3D ar cq
+> 	#
+>=20
+> 	#grep AR common/Makefile
+> 	$(AR) $(LIB) $(OBJS)
+> 	#
+> But MCONFIG maybe not able to be generated by MCONFIG.in, common/Makefile
+> allows this condition [Note the - before include]
+> 	#grep MCONFIG common/Makefile
+> 	-include ../MCONFIG
+> 	#
+> then AR from building environment is used, but it not included the parame=
+ter
+> "cq", and lead to below error, so add the "cq" to AR to fix this issue.
+> 	i586-wrs-linux-ar libcommon.a tftpsubs.
+> 	i586-wrs-linux-ar: two different operation options specified
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>  meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb |    2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/m=
+eta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> index 366a4e9..1951747 100644
+> --- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> +++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+> @@ -32,6 +32,8 @@ SRC_URI[sha256sum] =3D "0a9f88d4c1c02687b4853b02ab5dd87=
+79d4de4ffdb9b2e5c9332841304
+> =20
+>  inherit autotools-brokensep update-rc.d update-alternatives
+> =20
+> +export AR =3D "${HOST_PREFIX}ar cq"
+> +
+>  EXTRA_OECONF +=3D "--disable-option-checking"
+> =20
+>  # configure.in has errors
+> --=20
+> 1.7.10.4
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
------Original Message-----
-From: b40290@freescale.com [mailto:b40290@freescale.com]=20
-Sent: Wednesday, June 18, 2014 11:12 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Liu Ting-B28495; Luo Zhenhua-B19537; Guo Chunrong-B40290
-Subject: [meta-oe][PATCH] libhugetlbfs: arm 32bit support
+--BOKacYhQ+x31HxR3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-From: Chunrong Guo <B40290@freescale.com>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
----
- .../libhugetlbfs/files/arm32-support.patch         | 29 ++++++++++++++++++=
-++++
- .../libhugetlbfs/libhugetlbfs_git.bb               |  3 ++-
- 2 files changed, 31 insertions(+), 1 deletion(-)  create mode 100644 meta-=
-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
+iEYEARECAAYFAlOw2lQACgkQwFvcllog0Xw+eACfb/awkoZV0SIglQ8LDNoN/WbK
+pMYAoIf5EMYuvulUYt0XkXQmuKQ2bY71
+=YFLd
+-----END PGP SIGNATURE-----
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.pat=
-ch b/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
-new file mode 100644
-index 0000000..96f162d
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
-@@ -0,0 +1,29 @@
-+Upstream-Status: Submitted
-+
-+This patch adds support for arm32.
-+
-+Signed-off-by: Chunrong Guo <B40290@freescale.com>
-+
-+--- a/Makefileold	2014-06-17 21:55:23.131058918 -0500
-++++ b/Makefile	2014-06-17 21:56:08.726098531 -0500
-+@@ -59,6 +59,12 @@
-+ TMPLIB32 =3D lib
-+ CPPFLAGS +=3D -DPPC_NO_SEGMENTS
-+ else
-++ifeq ($(ARCH),arm)
-++CC32 =3D $(CC)
-++TMPLIB32 =3D lib
-++ELF32 +=3D armelf_linux_eabi
-++CUSTOM_LDSCRIPTS =3D no
-++else
-+ ifeq ($(ARCH),armv7l)
-+ CC32 =3D $(CC)
-+ TMPLIB32 =3D lib
-+@@ -116,6 +122,7 @@
-+ endif
-+ endif
-+ endif
-++endif
-+=20
-+ ifdef CC32
-+ OBJDIRS +=3D obj32
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/m=
-eta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 5645add..879f2a0 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -14,11 +14,12 @@ SRC_URI =3D "git://git.code.sf.net/p/libhugetlbfs/code =
-\
-     file://0001-aarch64-fix-cross-compilation.patch \
-     file://0001-aarch64-fix-page-size-not-properly-computed.patch \
-     file://0001-replace-lib-lib64-hardcoded-values-by-LIBDIR32-LIBDI.patch=
- \
-+    file://arm32-support.patch \
- "
-=20
- S =3D "${WORKDIR}/git"
-=20
--COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
-+COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
-=20
- LIBARGS =3D "LIB32=3D${baselib} LIB64=3D${baselib}"
- EXTRA_OEMAKE =3D "'ARCH=3D${TARGET_ARCH}' 'OPT=3D${CFLAGS}' 'CC=3D${CC}' $=
-{LIBARGS} V=3D1"
---
-1.9.2
-
-
+--BOKacYhQ+x31HxR3--
