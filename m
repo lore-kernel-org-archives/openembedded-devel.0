@@ -1,36 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f44.google.com (mail-yh0-f44.google.com
-	[209.85.213.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C4EC6087D
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 35D1C60196
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2014 21:36:12 +0000 (UTC)
-Received: by mail-yh0-f44.google.com with SMTP id f10so5367731yha.3
+	Tue,  1 Jul 2014 06:40:42 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s616ehcf000455
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jun 2014 14:36:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=3fUNkY9w6d12qb4hNW7Zxl37ufAsgTa4BM+m8Jvopdc=;
-	b=WT8ULGNYMEWat8LP73LVc6V1dn2QP05v/ajVRmimB/T5qn6GMZoUS8cNCzHOZpnIc4
-	USz2LOQDy/Nda2gqiBRy1nQm4Du1iQivydqctbJUvF9ufL7EJ6soyqKBkXoLYHBsk55H
-	jJvQMyjr3I6N2msSn8pe4EaxG3eFrXGw9Xn/JlTwl0AEBM7/MOh2Rmd5mRasnsRZ5JHC
-	FsM9NuxyE/BSpV1fMDKmqcM4pY/WK4ysjpKJQQJvSopYf7AYJeMPWkNsocMUU08kK/rJ
-	uXeNvl1K9qm4s4ndk40ClvO/aLMDuitw5XUjjE5AUr8NdiOf57uZ6rF3qiABRsDqj2Pw
-	hu3A==
-X-Received: by 10.236.99.99 with SMTP id w63mr63699883yhf.52.1404164173869;
-	Mon, 30 Jun 2014 14:36:13 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id
-	p23sm24095463yho.27.2014.06.30.14.36.12 for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 30 Jun 2014 14:36:13 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Jun 2014 18:35:55 -0300
-Message-Id: <1404164155-12971-1-git-send-email-otavio@ossystems.com.br>
+	Mon, 30 Jun 2014 23:40:43 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Mon, 30 Jun 2014 23:40:43 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 1 Jul 2014 14:40:42 +0800
+Message-ID: <1404196842-21840-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] v4l-utils: Add virtual/libx11 dependency only if X11 is available
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] hostapd: uprev to 2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jun 2014 21:36:13 -0000
+X-List-Received-Date: Tue, 01 Jul 2014 06:40:52 -0000
+Content-Type: text/plain
 
-In case we are building in a X11-less distro we shouldn't depends on
-virtual/libx11.
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Rename hostap-daemon as hostapd and uprev it to 2.2
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../hostapd/{hostap-daemon-1.0 => hostapd-2.2}/defconfig         |    0
+ .../hostapd/{hostap-daemon-1.0 => hostapd-2.2}/init              |    0
+ .../hostapd/{hostap-daemon_1.0.bb => hostapd_2.2.bb}             |    6 +++---
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/hostapd/{hostap-daemon-1.0 => hostapd-2.2}/defconfig (100%)
+ rename meta-oe/recipes-connectivity/hostapd/{hostap-daemon-1.0 => hostapd-2.2}/init (100%)
+ rename meta-oe/recipes-connectivity/hostapd/{hostap-daemon_1.0.bb => hostapd_2.2.bb} (81%)
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb
-index abe9a64..c3a1370 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb
-@@ -3,7 +3,8 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
-                     file://COPYING.libv4l;md5=d749e86a105281d7a44c2328acebc4b0"
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/defconfig
+similarity index 100%
+rename from meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/defconfig
+rename to meta-oe/recipes-connectivity/hostapd/hostapd-2.2/defconfig
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/init b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+similarity index 100%
+rename from meta-oe/recipes-connectivity/hostapd/hostap-daemon-1.0/init
+rename to meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
+similarity index 81%
+rename from meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb
+rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
+index 1699103..d0d9df9 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostap-daemon_1.0.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
+@@ -1,7 +1,7 @@
+ HOMEPAGE = "http://hostap.epitest.fi"
+ SECTION = "kernel/userland"
+ LICENSE = "GPLv2 | BSD"
+-LIC_FILES_CHKSUM = "file://README;md5=4d709ce0f9c84b87d148e16731f647e1"
++LIC_FILES_CHKSUM = "file://README;md5=0854a4da34ac3990770794d771fac7fd"
+ DEPENDS = "libnl openssl"
+ SUMMARY = "User space daemon for extended IEEE 802.11 management"
  
--DEPENDS = "jpeg virtual/libx11"
-+DEPENDS = "jpeg \
-+           ${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
+@@ -39,5 +39,5 @@ do_install() {
  
- inherit autotools gettext pkgconfig
+ CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
  
+-SRC_URI[md5sum] = "236247a7bbd4f60d5fa3e99849d1ffc9"
+-SRC_URI[sha256sum] = "002e9dcb7e46cf82b5900a2fcf92b30fc8cdfd32a72d7fd4488588f1c013dfcc"
++SRC_URI[md5sum] = "23c1f78a693c3288802d516adb7fd289"
++SRC_URI[sha256sum] = "f15b6bcb434378860ea5b88dffed7f54d8cb71fff2146de0f006977a5e25a882"
 -- 
 1.7.10.4
 
