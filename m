@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id F03A56AC78
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D9DD6087D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2014 16:15:33 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id u57so10058049wes.19
+	Tue,  1 Jul 2014 16:17:14 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id n3so8116311wiv.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jul 2014 09:15:34 -0700 (PDT)
+	Tue, 01 Jul 2014 09:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=x711IDl50eYQyaK0YdVlFYZZ4bmImPOeWWXp/pcdmsg=;
-	b=FamTea4nlCWNOr0mVQzEtGE893FKVsxyko+mEYOe8QQhmvnCRr7xVbGlwCSkCGvrc3
-	lqBRMzW0+vR2wFdMrbnSeW+abZdjE0j0eUTn2s/ctnOB2wFBtQeuzgFNX9KsjGNvDiU9
-	ag0XtC2od8yvq9NbyuncbYz9JbYfpP86DFDWY8m8b2k8iXyYSpLEBt/2IZVmyCF6g+Q5
-	WFvi8YizvPy+kmFF3nUgwDqyfgDyQGfkvxnOaKlzAutpJMAsThR4oDEgNzVEp3n2s0c+
-	d9EPErVo5X/siE6PKhfFwR8IsCE0iv3yQFg8XaPW4qtQJhBxxnMZiOCpeQShTge5WVRn
-	uGxw==
-X-Received: by 10.180.75.212 with SMTP id e20mr38554580wiw.5.1404231334177;
-	Tue, 01 Jul 2014 09:15:34 -0700 (PDT)
+	bh=nD3B8wlVLCkiFdYjXJPdxHDf5Ba46aMiF/HylBS5FGw=;
+	b=amFYDqViga0sJJN9LiRqPkLzCwSlLjSLoNRhCw9XKJknlkeuSv8iwrKsqxcgTp86/x
+	sxWT8cGZp6zJSRdTl9DJVQ92Aj52n1yEk5u2aRBWz3eYu1H4M0Gc3EXBulrzKY+4lPjK
+	R4wAJzZDQfGqW33bZbMzyVgaxB9cuFMb96hC795++94STZeF4VgQhfg1eGk7mjOkU3Pt
+	aK2ooB677JhNTilqrccPW2LBYGYE66hZZ1ppoxXqowLaEk9PAvB8g2CNauVktf1X+FqJ
+	iHpLOMuh78UfI5yy2v83QvibZ408YHHiRQ+KHKRvsR2Dp8VHu6lWv0kc6MOl2xjiduOq
+	d+VQ==
+X-Received: by 10.180.12.137 with SMTP id y9mr37160589wib.46.1404231435958;
+	Tue, 01 Jul 2014 09:17:15 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ec8sm25919693wic.10.2014.07.01.09.15.32
+	i4sm44820390wib.21.2014.07.01.09.17.14
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Jul 2014 09:15:32 -0700 (PDT)
+	Tue, 01 Jul 2014 09:17:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 1 Jul 2014 18:15:42 +0200
+Date: Tue, 1 Jul 2014 18:17:24 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140701161542.GI2437@jama>
+Message-ID: <20140701161724.GJ2437@jama>
 References: <1404158675-20358-1-git-send-email-neena.busireddy@freescale.com>
-	<1404158675-20358-5-git-send-email-neena.busireddy@freescale.com>
+	<1404158675-20358-3-git-send-email-neena.busireddy@freescale.com>
 MIME-Version: 1.0
-In-Reply-To: <1404158675-20358-5-git-send-email-neena.busireddy@freescale.com>
+In-Reply-To: <1404158675-20358-3-git-send-email-neena.busireddy@freescale.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 4/8] qt5nmapcarousedemo: Create recipe to demonstrate qt5 example.
+Subject: Re: [PATCH 2/8] qtsmarthome: Create recipe to demonstrate qt5 example.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,19 +49,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jul 2014 16:15:44 -0000
-X-Groupsio-MsgNum: 50648
+X-List-Received-Date: Tue, 01 Jul 2014 16:17:15 -0000
+X-Groupsio-MsgNum: 50649
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="np3HfElajyDBpWGr"
+	protocol="application/pgp-signature"; boundary="6AFz5yWxU/FsGPwt"
 Content-Disposition: inline
 
---np3HfElajyDBpWGr
+--6AFz5yWxU/FsGPwt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 30, 2014 at 03:04:31PM -0500, Neena Busireddy wrote:
-> Qt5 Nmapcarousel demonstrates the normal mapping technique using Qt5
+On Mon, Jun 30, 2014 at 03:04:29PM -0500, Neena Busireddy wrote:
+> This is the Smarthome QML demo application showing interface
+> to control an automated house.
 >=20
 > This recipe originated from the wandboard wiki page
 > http://wiki.wandboard.org/index.php/Integrate_Qt5_into_yocto_sato_image_o=
@@ -69,53 +70,49 @@ n_Wandboard
 >=20
 > Signed-off-by: Neena Busireddy <neena.busireddy@freescale.com>
 > ---
->  recipes-qt/examples/qt5nmapcarousedemo_1.0.bb |   29 +++++++++++++++++++=
-++++++
+>  recipes-qt/examples/qtsmarthome_1.0.bb |   29 ++++++++++++++++++++++++++=
++++
 >  1 file changed, 29 insertions(+)
->  create mode 100644 recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
+>  create mode 100644 recipes-qt/examples/qtsmarthome_1.0.bb
 >=20
-> diff --git a/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb b/recipes-qt/e=
-xamples/qt5nmapcarousedemo_1.0.bb
+> diff --git a/recipes-qt/examples/qtsmarthome_1.0.bb b/recipes-qt/examples=
+/qtsmarthome_1.0.bb
 > new file mode 100644
-> index 0000000..40265de
+> index 0000000..f213f03
 > --- /dev/null
-> +++ b/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb
+> +++ b/recipes-qt/examples/qtsmarthome_1.0.bb
 > @@ -0,0 +1,29 @@
-> +SUMMARY =3D "NMap Carousel application is demonstrating the=20
-> +normal mapping technique using Qt5"
-> +DESCRIPTION =3D "Normal mapping is used for making the icons=20
-> +appear 3D with lighting and shadows"
+> +SUMMARY =3D "Qt5 smarthome QML demo application"
+> +DESCRIPTION =3D "This is the Smarthome QML demo application. It shows so=
+me user interfaces=20
+> +for controlling an automated house"
 
-It's incorrectly wrapped (maybe by your e-mail client)
+Also incorrectly wrapped (I'll fix it before cherry-picking to
+master-next - no need to send v2).
 
-ERROR: ParseError at
-/OE/build/oe-core/meta-qt5/recipes-qt/examples/qt5nmapcarousedemo_1.0.bb:1:
-unparsed line: 'SUMMARY =3D "NMap Carousel application is demonstrating
-the'
-
-
-> +HOMEPAGE =3D "http://quitcoding.com/?page=3Dwork#cinex"
-> +LICENSE =3D "CC-BY-3.0"
-> +LIC_FILES_CHKSUM =3D "file://README;beginline=3D44;endline=3D55;md5=3D3a=
-9db934c393a0cf198cbe7e73ebec86"
+> +HOMEPAGE =3D "http://www.basyskom.com/news/143-demos-qt5-port.html"
+> +LICENSE =3D "LGPLv2.1+ & GFDL-1.2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.DOC;md5=3Dad1419ecc56e060eccf8184a8=
+7c4285f \
+> +                    file://COPYING.LIB;md5=3D2d5025d4aa3495befef8f17206a=
+5b0a1"
 > +
 > +DEPENDS =3D "qtdeclarative qtgraphicaleffects"
 > +
-> +SRC_URI =3D "http://quitcoding.com/download/Qt5_NMap_CarouselDemo_1.0.tg=
-z"
-> +SRC_URI[md5sum] =3D "c1b4568cdbb6b3af4ca10c5a90aa8128"
-> +SRC_URI[sha256sum] =3D "445da212074a10a432f4508d125814212bbe7a967bfa47b0=
-15b92dfac6bfd65f"
+> +SRC_URI =3D "http://share.basyskom.com/demos/smarthome_src.tar.gz"
+> +SRC_URI[md5sum] =3D "883b0376239baec20ebec072e938a995"
+> +SRC_URI[sha256sum] =3D "fceaa813c33e462bad6c0383eaef81a6f6e586c15d1fa738=
+98173b517fc1cda6"
 > +
-> +S =3D "${WORKDIR}/Qt5_NMap_CarouselDemo_1.0"
+> +S =3D "${WORKDIR}/smarthome_src"
 > +
 > +require recipes-qt/qt5/qt5.inc
 > +
 > +do_install() {
 > +    install -d ${D}${datadir}/${P}
-> +    install -m 0755 ${B}/Qt5_NMap_CarouselDemo ${D}${datadir}/${P} =20
-> +    cp ${S}/Qt5_NMap_CarouselDemo.qml ${D}${datadir}/${P} =20
-> +    cp -a ${S}/content ${D}${datadir}/${P} =20
+> +    install -m 0755 ${B}/smarthome ${D}${datadir}/${P}  =20
+> +    cp -a ${S}/qml ${D}${datadir}/${P} =20
+> +    cp -a ${S}/components ${D}${datadir}/${P} =20
 > +}
 > +
 > +FILES_${PN}-dbg +=3D "${datadir}/${P}/.debug"
@@ -135,16 +132,16 @@ ns"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---np3HfElajyDBpWGr
+--6AFz5yWxU/FsGPwt
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlOy3q4ACgkQN1Ujt2V2gBwdlACgtkMs/TXpzIiHjTuJYTSXtC8X
-HUAAn24AdxkiXiriU+NAq6+aJ2orLK9J
-=hxCK
+iEYEARECAAYFAlOy3xQACgkQN1Ujt2V2gBwkOwCfTLBjc0aNLlZLeyD6e0z1Fh4B
+kMkAn1nQebUnSMkNkmvabG1lI8lnJFrG
+=AWno
 -----END PGP SIGNATURE-----
 
---np3HfElajyDBpWGr--
+--6AFz5yWxU/FsGPwt--
