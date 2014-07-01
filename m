@@ -1,36 +1,36 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E7B160196
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
+	[209.85.216.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 79A2865DAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2014 13:56:16 +0000 (UTC)
-Received: by mail-yh0-f46.google.com with SMTP id c41so5970231yho.5
+	Tue,  1 Jul 2014 14:27:36 +0000 (UTC)
+Received: by mail-qc0-f182.google.com with SMTP id m20so8497747qcx.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jul 2014 06:56:17 -0700 (PDT)
+	Tue, 01 Jul 2014 07:27:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id;
-	bh=unEIDoGAOLGzWX/vnMCpNZXHMrc5jBwtP/E3G5fDRaM=;
-	b=aO+oQjpVLtkIlR8f8eSixBVTVwlokvdBcf8b/ZkQbW7gQaMN1T+AQtVokQzS/xqTjD
-	v304bFQhs18+xhQVPfTH/FuCv8l9fhS/n5Ocatif0mmWalTgr5KU/cQwkyHQ7iK/72Gq
-	iBLZn8XZnvh+NfO/JtLPSPHvCfEutRKDCUhEzcPE4cy8LzZ5TmLFXOnXmR9kAbRhshGb
-	jnAdf03Gsfb17VVKMeuYA4t0sPQwPrtyyG4UYZGEkfVwLl/EcddCq5qVfk/g2ZAAmMjB
-	F3cScYuBWsm5wM8bcUvppUxSlsV2/jn1leYRDpCPjvMcEHt3P7FrVbpnb0Lvpd5hwIkO
-	WkYg==
-X-Received: by 10.236.111.2 with SMTP id v2mr69890282yhg.39.1404222976956;
-	Tue, 01 Jul 2014 06:56:16 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id
-	v63sm27995891yhi.43.2014.07.01.06.56.15 for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Tue, 01 Jul 2014 06:56:16 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	bh=qpfgpAj64eB4o6NNAW4w6xQPtFULZdPs/F4zH3mLafs=;
+	b=rSqrOfT4fE54uZcdLvWoYehFMuVQkqUsPpsHXDfJnSGWrOYBD+b/V7UTi1WzRmIBnh
+	jk+2/L4NVxEDiOfJPaYRyO72wzMRVRMifHzX84ZjWGEh5w93rqa/WBBQG3LZAVJubBKb
+	mOhLNH0h1NYBEAucoFeAkuFXr2NlgqEcOdkDj9vnityr2MWRGssG/tq7nQ0HrKjPWlwd
+	1eawXzSCCUMit0kp4AF/c+c8cDcCgqA9ctLkZ5sYxIkkzkcexSlvhj5E3EFgrQVOAuXK
+	f449+27sJeOdKJ1419KlmzpPI9kTSAXMptGvStg+dH86ogSl9J2lFM/LCf8p1wYmSMVJ
+	ZtSA==
+X-Received: by 10.224.87.130 with SMTP id w2mr72842018qal.5.1404224858037;
+	Tue, 01 Jul 2014 07:27:38 -0700 (PDT)
+Received: from localhost.localdomain
+	(pool-108-44-80-46.ronkva.east.verizon.net. [108.44.80.46])
+	by mx.google.com with ESMTPSA id j81sm7264966qge.41.2014.07.01.07.27.37
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 01 Jul 2014 07:27:37 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Jul 2014 10:56:02 -0300
-Message-Id: <1404222962-18298-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] opencv: Disable 'gtk' backend if X11 is not available
+Date: Tue,  1 Jul 2014 10:27:33 -0400
+Message-Id: <1404224853-22809-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-oe][PATCH] postgresql : Fix build using pkg-config for libxml-2.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,28 +44,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jul 2014 13:56:19 -0000
+X-List-Received-Date: Tue, 01 Jul 2014 14:27:38 -0000
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Use package-config instead of binconfig for libxml-2.0.
+
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- meta-oe/recipes-support/opencv/opencv_2.4.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...0001-Use-pkg-config-for-libxml2-detection.patch | 43 ++++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index df512f6..4059063 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -31,7 +31,8 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
-                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+diff --git a/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch b/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
+new file mode 100644
+index 0000000..d08ec6a
+--- /dev/null
++++ b/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
+@@ -0,0 +1,43 @@
++From d52e330be895bb8c5f0fb3e2884766acbd942a85 Mon Sep 17 00:00:00 2001
++From: Philip Balister <philip@balister.org>
++Date: Tue, 1 Jul 2014 09:40:44 -0400
++Subject: [PATCH] Use pkg-config for libxml2 detection.
++
++Upstream-Status: Inappropriate [configuration]
++
++xml2-config does not work. Use pkgconfig to set CPPFLAGS and LIBS.
++
++Signed-off-by: Philip Balister <philip@balister.org>
++---
++ configure.in | 15 ++-------------
++ 1 file changed, 2 insertions(+), 13 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index f8bf466..1f4fabf 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -734,19 +734,8 @@ PGAC_ARG_BOOL(with, libxml, no, [build with XML support],
++               [AC_DEFINE([USE_LIBXML], 1, [Define to 1 to build with XML support. (--with-libxml)])])
++ 
++ if test "$with_libxml" = yes ; then
++-  AC_CHECK_PROGS(XML2_CONFIG, xml2-config)
++-  if test -n "$XML2_CONFIG"; then
++-    for pgac_option in `$XML2_CONFIG --cflags`; do
++-      case $pgac_option in
++-        -I*|-D*) CPPFLAGS="$CPPFLAGS $pgac_option";;
++-      esac
++-    done
++-    for pgac_option in `$XML2_CONFIG --libs`; do
++-      case $pgac_option in
++-        -L*) LDFLAGS="$LDFLAGS $pgac_option";;
++-      esac
++-    done
++-  fi
+++  CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "libxml-2.0" 2>&1`"
+++  LIBS="`pkg-config --short-errors --print-errors --libs "libxml-2.0" 2>&1` $LIBS"
++ fi
++ 
++ AC_SUBST(with_libxml)
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index 4e5ec02..79d1281 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -28,6 +28,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://postgresql.init \
+            file://postgresql-bashprofile \
+            file://postgresql.pam \
++           file://0001-Use-pkg-config-for-libxml2-detection.patch \
  "
  
--PACKAGECONFIG ??= "eigen gtk jpeg libav png tiff v4l"
-+PACKAGECONFIG ??= "eigen jpeg libav png tiff v4l \
-+                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)}"
- PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
- PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
- PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
+ LEAD_SONAME = "libpq.so"
 -- 
-1.7.10.4
+1.8.3.1
 
 
