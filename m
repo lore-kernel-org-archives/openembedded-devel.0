@@ -1,25 +1,36 @@
-Return-Path: <Huimin.She@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id AEB4D65CCE
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E7B160196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2014 11:57:32 +0000 (UTC)
-Received: from SESTOEX04.enea.se ([fe80::bc2d:9299:d6b2:d0b7]) by
-	SESTOEX03.enea.se ([fe80::6ce7:7b51:1edf:e245%17]) with mapi id
-	14.03.0158.001; Tue, 1 Jul 2014 13:57:31 +0200
-From: Huimin She <Huimin.She@enea.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking] Intel DPDK recipe
-Thread-Index: Ac+VI5f+xUwgvwBtTTa/Co1XQ+/oDQ==
-Date: Tue, 1 Jul 2014 11:57:31 +0000
-Message-ID: <79AD82BE44B82847A99BB3270D2ED3C7032A5367@SESTOEX04.enea.se>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.140.20]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-networking] Intel DPDK recipe
+	Tue,  1 Jul 2014 13:56:16 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id c41so5970231yho.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Jul 2014 06:56:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=unEIDoGAOLGzWX/vnMCpNZXHMrc5jBwtP/E3G5fDRaM=;
+	b=aO+oQjpVLtkIlR8f8eSixBVTVwlokvdBcf8b/ZkQbW7gQaMN1T+AQtVokQzS/xqTjD
+	v304bFQhs18+xhQVPfTH/FuCv8l9fhS/n5Ocatif0mmWalTgr5KU/cQwkyHQ7iK/72Gq
+	iBLZn8XZnvh+NfO/JtLPSPHvCfEutRKDCUhEzcPE4cy8LzZ5TmLFXOnXmR9kAbRhshGb
+	jnAdf03Gsfb17VVKMeuYA4t0sPQwPrtyyG4UYZGEkfVwLl/EcddCq5qVfk/g2ZAAmMjB
+	F3cScYuBWsm5wM8bcUvppUxSlsV2/jn1leYRDpCPjvMcEHt3P7FrVbpnb0Lvpd5hwIkO
+	WkYg==
+X-Received: by 10.236.111.2 with SMTP id v2mr69890282yhg.39.1404222976956;
+	Tue, 01 Jul 2014 06:56:16 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.35.70.10])
+	by mx.google.com with ESMTPSA id
+	v63sm27995891yhi.43.2014.07.01.06.56.15 for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Tue, 01 Jul 2014 06:56:16 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Jul 2014 10:56:02 -0300
+Message-Id: <1404222962-18298-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH] opencv: Disable 'gtk' backend if X11 is not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,20 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jul 2014 11:57:37 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Jul 2014 13:56:19 -0000
 
-Hi,
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-support/opencv/opencv_2.4.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-We have created and used the dpdk recipe internally at Enea, and want to up=
-stream it.
-Do you have any ideas where is a good place to hold it?
-
-
-Thanks.
-Best regards,
-Huimin She
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+index df512f6..4059063 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+@@ -31,7 +31,8 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
+                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+ "
+ 
+-PACKAGECONFIG ??= "eigen gtk jpeg libav png tiff v4l"
++PACKAGECONFIG ??= "eigen jpeg libav png tiff v4l \
++                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)}"
+ PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
+ PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
+ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
+-- 
+1.7.10.4
 
 
