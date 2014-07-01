@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E6A66AC6A
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 433ED6AC6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Jul 2014 16:04:36 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id k14so1011547wgh.26
+	Tue,  1 Jul 2014 16:04:39 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id a1so10104122wgh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jul 2014 09:04:37 -0700 (PDT)
+	Tue, 01 Jul 2014 09:04:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eAX2y+HRfOfH+Eto1QiBPxAgORZrwgfmHTzqwAj/Jyk=;
-	b=UO5lo/LtrWlHs52FpxTUN26HulCqJ0o6n4JTZjARD2lqqCUpWvgl0GfwoImPuerpxE
-	OfewoegQfI6HnSKiM9aqXMsxZ7+z2u2VsMQ+Lt40q/ljHNlzPmX3VUmJMjFp2s+qwaAu
-	VyGRdeGRlysFaZ4MrE1UbYcpffiNtpL9ryrN1RNAKRUNnX7yUcCECkzuo9ZHu69tTjv6
-	Ei/PStJtoUOjkQrhrvbPEUpBa4kGpnQYviUESQlYZVVqpbBKcjcVb8aEcYdmFZy/9CBv
-	TdYil5D6VFylKOa2zWl4Vh24jPriH+06iAxv61gXBYgkPr2fy9sBdbHJXQRbZZwUCfMK
-	uOew==
-X-Received: by 10.194.94.226 with SMTP id df2mr4118619wjb.113.1404230677552;
-	Tue, 01 Jul 2014 09:04:37 -0700 (PDT)
+	bh=dfz0xPFeRJlgBNAIQumgyG7b7w0qXrJhyExzqgPIXOk=;
+	b=Qg7Zehdky3t4jd/g3otomUvePC1jTQZFwOu8Krl32nSANBoMiAO+BZU+clsxRAMvhR
+	3RC7druZyydvtQw762prFYZPI/gNjSMyMYGQXBY9IZhUAbwTHDZvMuZP6lIZzet8lTM2
+	RPozuSOtiGcT3/40AXUVgc6JbKjTyBCJ+HyM8lanAYHOdcyp1aZx7/vIqGhPRtx2Re8B
+	iR/e7KgT3VGskFbDdEXc9gzQKOHjbFZKq36lKc+ZCbbOi76qm02XVpZlUfMKMt551BLg
+	krNTDydVSjpzvhtGTytDSPLSV8G9a6zgst3VrNnVqRIVUv65eqMwDWT61asyVz+nNtnK
+	Evig==
+X-Received: by 10.180.21.200 with SMTP id x8mr37477308wie.70.1404230679098;
+	Tue, 01 Jul 2014 09:04:39 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ey16sm44708784wid.14.2014.07.01.09.04.36 for <multiple recipients>
+	ww4sm49012200wjc.4.2014.07.01.09.04.38 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Jul 2014 09:04:36 -0700 (PDT)
+	Tue, 01 Jul 2014 09:04:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Jul 2014 18:04:39 +0200
-Message-Id: <1404230681-5064-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  1 Jul 2014 18:04:40 +0200
+Message-Id: <1404230681-5064-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1404230681-5064-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1404230681-5064-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/4] glmark2: inherit distro_features_check
+Subject: [meta-oe][PATCH 3/4] irssi: add --with-ncurses option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,24 +46,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 01 Jul 2014 16:04:41 -0000
 
+* otherwise do_configure tries to find ncurses.h on host and
+  disables ncurses support when not found, then build fails because
+  of missing -lcurses when using terminfo-core.o:
+  | terminfo-core.o: In function `_set_bg':
+  | /OE/irssi/0.8.15+0.8.16-rc1-r0/irssi-0.8.16-rc1/src/fe-text/terminfo-core.c:343:
+    undefined reference to `tputs'
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-index 8e3dc8c..708b6d2 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2014.03.bb
-@@ -18,7 +18,7 @@ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
- SRC_URI[md5sum] = "739859cf57d4c8a23452c43e84f66e56"
- SRC_URI[sha256sum] = "bded41aaf918ce062d9b81e42cc5be943e6a80bc4ff9d046983b96102c3df6b5"
+diff --git a/meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb b/meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb
+index b4fbf7a..54d881d 100644
+--- a/meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb
++++ b/meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb
+@@ -17,5 +17,6 @@ S = "${WORKDIR}/irssi-${REALPV}"
  
--inherit waf pkgconfig
-+inherit waf pkgconfig distro_features_check
+ inherit autotools pkgconfig
  
- PACKAGECONFIG ?= "gl gles2"
- 
+-EXTRA_OECONF = "--enable-ssl"
+-
++EXTRA_OECONF = "--enable-ssl \
++    --with-ncurses=${STAGING_EXECPREFIXDIR} \
++"
 -- 
 2.0.0
 
