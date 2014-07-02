@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D87665D33
+	by mail.openembedded.org (Postfix) with ESMTP id 8CAD565CC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2014 06:57:41 +0000 (UTC)
+	Wed,  2 Jul 2014 06:57:42 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s626vgoX016243
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s626viU0016246
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Jul 2014 23:57:43 -0700 (PDT)
+	Tue, 1 Jul 2014 23:57:44 -0700 (PDT)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 1 Jul 2014 23:57:42 -0700
+	Tue, 1 Jul 2014 23:57:43 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Jul 2014 23:56:29 -0700
-Message-ID: <1404284261-42377-3-git-send-email-liezhi.yang@windriver.com>
+Date: Tue, 1 Jul 2014 23:56:31 -0700
+Message-ID: <1404284261-42377-5-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 References: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems] [PATCH 02/74] unionfs-fuse: use BPN in SRC_URI
+Subject: [meta-filesystems] [PATCH 04/74] xfsprogs: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,22 +39,22 @@ Content-Type: text/plain
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../unionfs-fuse/unionfs-fuse_0.26.bb              |    2 +-
+ .../recipes-utils/xfsprogs/xfsprogs_3.1.11.bb      |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-index 1d50364..38ded9f 100644
---- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-+++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
- DEPENDS = "fuse"
- LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8abab00b483a1b7943a32"
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+index 4c3f8fa..fcf8f12 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+@@ -6,7 +6,7 @@ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
+ DEPENDS = "util-linux"
  
--SRC_URI = "http://podgorny.cz/unionfs-fuse/releases/${PN}-${PV}.tar.xz"
-+SRC_URI = "http://podgorny.cz/unionfs-fuse/releases/${BP}.tar.xz"
- 
- SRC_URI[md5sum] = "689c636484756f6f7a728ef354cbeac2"
- SRC_URI[sha256sum] = "8d5c9dcb51ecb9a9b03890e16d17e37d602b0c1f23ed6a9ddec2b0f719c9f662"
+-SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
++SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BP}.tar.gz \
+     file://remove-install-as-user.patch \
+     file://drop-configure-check-for-aio.patch \
+ "
 -- 
 1.7.9.5
 
