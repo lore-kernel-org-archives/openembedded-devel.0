@@ -1,26 +1,24 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BCCE65CB1
+	by mail.openembedded.org (Postfix) with ESMTP id 8F41D6AC77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2014 06:57:44 +0000 (UTC)
+	Wed,  2 Jul 2014 06:57:40 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s626vkRB016252
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s626vg85016240
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Jul 2014 23:57:46 -0700 (PDT)
+	Tue, 1 Jul 2014 23:57:42 -0700 (PDT)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 1 Jul 2014 23:57:45 -0700
+	Tue, 1 Jul 2014 23:57:41 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Jul 2014 23:56:35 -0700
-Message-ID: <1404284261-42377-9-git-send-email-liezhi.yang@windriver.com>
+Date: Tue, 1 Jul 2014 23:56:27 -0700
+Message-ID: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
-References: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome] [PATCH 08/74] gcalctool: use BPN in SRC_URI
+Subject: [PATCH 00/74] use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,24 +35,167 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 02 Jul 2014 06:57:49 -0000
 Content-Type: text/plain
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../nonworking/gcalctool/gcalctool_5.32.0.bb       |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Fixed SRC_URI:
+* ${PN} -> ${BPN}, use ${BP} if it was ${PN}-${PV}
+* ${P} -> ${BP}
 
-diff --git a/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-index f16551f..4812fe3 100644
---- a/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-+++ b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
--SRC_URI = "http://download.gnome.org/sources/${PN}/${SHRT_VER}/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/${SHRT_VER}/${BP}.tar.gz"
- 
- SRC_URI[md5sum] = "48db927c6e7ee1d5395f953a8c184c98"
- SRC_URI[sha256sum] = "346f645c0fdef900642f6e9a2c18e7ba9a7ca9bc62fe2b08eb418f065a425c89"
+Otherwise we would meet do_fetch errors when we do the multilib, native
+or nativesdk build.
+
+// Robert
+
+Robert Yang (74):
+  sshfs-fuse: use BPN in SRC_URI
+  unionfs-fuse: use BPN in SRC_URI
+  physfs: use BPN in SRC_URI
+  xfsprogs: use BPN in SRC_URI
+  gmtk: use BPN in SRC_URI
+  gnome-mplayer: use BPN in SRC_URI
+  libgtkstylus: use BPN in SRC_URI
+  gcalctool: use BPN in SRC_URI
+  minilite: use BPN in SRC_URI
+  coriander: use BPN in SRC_URI
+  fluidsynth: use BPN in SRC_URI
+  libmpd: use BPN in SRC_URI
+  mpd: use BPN in SRC_URI
+  openal-soft: use BPN in SRC_URI
+  gpe.bbclass: use BPN in SRC_URI
+  iperf: use BPN in SRC_URI
+  nbench-byte: use BPN in SRC_URI
+  tiobench: use BPN in SRC_URI
+  gammu: use BPN in SRC_URI
+  krb5: use BPN in SRC_URI
+  libtorrent: use BPN in SRC_URI
+  rfkill: use BPN in SRC_URI
+  rtorrent: use BPN in SRC_URI
+  wvdial: use BPN in SRC_URI
+  wvstreams: use BPN in SRC_URI
+  geany: use BPN in SRC_URI
+  pyrtm: use BPN in SRC_URI
+  python-dateutil: use BPN in SRC_URI
+  python-ldap: use BPN in SRC_URI
+  ddrescue: use BPN in SRC_URI
+  gnuplot: use BPN in SRC_URI
+  hexedit: use BPN in SRC_URI
+  hplip: use BPN in SRC_URI
+  iotop: use BPN in SRC_URI
+  lcdproc5: use BPN in SRC_URI
+  gtkmathview: use BPN in SRC_URI
+  mozjs: use BPN in SRC_URI
+  tmux: use BPN in SRC_URI
+  gtkextra: use BPN in SRC_URI
+  babl: use BPN in SRC_URI
+  fbgrab: use BPN in SRC_URI
+  gegl: use BPN in SRC_URI
+  libsexy: use BPN in SRC_URI
+  slim: use BPN in SRC_URI
+  xterm: use BPN in SRC_URI
+  xorg-data-common: use BPN in SRC_URI
+  audiofile: use BPN in SRC_URI
+  faad2: use BPN in SRC_URI
+  libass: use BPN in SRC_URI
+  libcdio: use BPN in SRC_URI
+  minidlna: use BPN in SRC_URI
+  xpext: use BPN in SRC_URI
+  xsp: use BPN in SRC_URI
+  foxtrotgps: use BPN in SRC_URI
+  gdal: use BPN in SRC_URI
+  gpsd: use BPN in SRC_URI
+  asio: use BPN in SRC_URI
+  farsight2: use BPN in SRC_URI
+  iksemel: use BPN in SRC_URI
+  libol: use BPN in SRC_URI
+  libsmi: use BPN in SRC_URI
+  syslog-ng: use BPN in SRC_URI
+  openldap: use BPN in SRC_URI
+  p11-kit: use BPN in SRC_URI
+  libotr: use BPN in SRC_URI
+  pidgin-otr: use BPN in SRC_URI
+  poppler-data: use BPN in SRC_URI
+  poppler: use BPN in SRC_URI
+  rng-tools: use BPN in SRC_URI
+  zile: use BPN in SRC_URI
+  hiawatha: use BPN in SRC_URI
+  xfce4-icon-theme: use BPN in SRC_URI
+  xfwm4-themes: use BPN in SRC_URI
+  thunar: use BPN in SRC_URI
+
+ .../sshfs-fuse/sshfs-fuse_2.5.bb                   |    2 +-
+ .../unionfs-fuse/unionfs-fuse_0.26.bb              |    2 +-
+ .../recipes-support/physfs/physfs_2.0.3.bb         |    2 +-
+ .../recipes-utils/xfsprogs/xfsprogs_3.1.11.bb      |    2 +-
+ .../recipes-apps/gnome-mplayer/gmtk_1.0.5.bb       |    2 +-
+ .../gnome-mplayer/gnome-mplayer_1.0.5.bb           |    2 +-
+ .../recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb |    2 +-
+ .../nonworking/gcalctool/gcalctool_5.32.0.bb       |    2 +-
+ .../recipes-graphics/minilite/minilite_0.50.bb     |    2 +-
+ .../coriander/coriander_2.0.2.bb                   |    2 +-
+ .../fluidsynth/fluidsynth_1.1.6.bb                 |    2 +-
+ .../recipes-multimedia/musicpd/libmpd_11.8.17.bb   |    2 +-
+ .../recipes-multimedia/musicpd/mpd_0.18.9.bb       |    2 +-
+ .../openal/openal-soft_1.15.1.bb                   |    2 +-
+ meta-oe/classes/gpe.bbclass                        |    2 +-
+ meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |    2 +-
+ .../nbench-byte/nbench-byte_2.2.3.bb               |    2 +-
+ .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |    2 +-
+ meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |    2 +-
+ meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb   |    2 +-
+ .../libtorrent/libtorrent_0.13.3.bb                |    2 +-
+ meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb  |    2 +-
+ .../rtorrent/rtorrent_0.9.3.bb                     |    2 +-
+ meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb |    2 +-
+ .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |    2 +-
+ meta-oe/recipes-devtools/geany/geany_1.23.bb       |    2 +-
+ meta-oe/recipes-devtools/python/pyrtm_0.2.bb       |    2 +-
+ .../recipes-devtools/python/python-dateutil_1.5.bb |    2 +-
+ .../recipes-devtools/python/python-ldap_2.3.9.bb   |    2 +-
+ meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb |    2 +-
+ meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb  |    2 +-
+ meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb |    2 +-
+ meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |    2 +-
+ meta-oe/recipes-extended/iotop/iotop_0.4.4.bb      |    2 +-
+ meta-oe/recipes-extended/lcdproc/lcdproc5.inc      |    2 +-
+ .../mml-widget/gtkmathview_0.8.0.bb                |    2 +-
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |    2 +-
+ meta-oe/recipes-extended/tmux/tmux_1.6.bb          |    2 +-
+ meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb   |    2 +-
+ meta-oe/recipes-graphics/babl/babl_0.1.10.bb       |    2 +-
+ meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb      |    2 +-
+ meta-oe/recipes-graphics/gegl/gegl_0.2.0.bb        |    2 +-
+ meta-oe/recipes-graphics/libsexy/libsexy.inc       |    2 +-
+ .../recipes-graphics/nonworking/slim/slim_1.3.2.bb |    2 +-
+ meta-oe/recipes-graphics/xorg-app/xterm_303.bb     |    2 +-
+ .../xorg-data/xorg-data-common.inc                 |    2 +-
+ .../audiofile/audiofile_0.2.7.bb                   |    2 +-
+ meta-oe/recipes-multimedia/faad2/faad2_2.7.bb      |    2 +-
+ meta-oe/recipes-multimedia/libass/libass.inc       |    2 +-
+ meta-oe/recipes-multimedia/libcdio/libcdio_0.82.bb |    2 +-
+ .../nonworking/minidlna/minidlna_1.0.25.bb         |    2 +-
+ meta-oe/recipes-multimedia/xpext/xpext_1.0-5.bb    |    2 +-
+ meta-oe/recipes-multimedia/xsp/xsp_1.0.0-8.bb      |    2 +-
+ .../foxtrotgps/foxtrotgps_1.1.1.bb                 |    2 +-
+ meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb     |    2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.7.bb        |    2 +-
+ meta-oe/recipes-support/asio/asio.inc              |    2 +-
+ .../recipes-support/farsight/farsight2_0.0.22.bb   |    2 +-
+ meta-oe/recipes-support/iksemel/iksemel_1.4.bb     |    2 +-
+ meta-oe/recipes-support/libol/libol_0.3.18.bb      |    2 +-
+ meta-oe/recipes-support/libsmi/libsmi_0.4.8.bb     |    2 +-
+ .../nonworking/syslog-ng/syslog-ng.inc             |    2 +-
+ .../recipes-support/openldap/openldap_2.4.23.bb    |    2 +-
+ meta-oe/recipes-support/p11-kit/p11-kit_0.19.1.bb  |    2 +-
+ meta-oe/recipes-support/pidgin/libotr_4.0.0.bb     |    2 +-
+ meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb |    2 +-
+ .../recipes-support/poppler/poppler-data_0.4.6.bb  |    2 +-
+ meta-oe/recipes-support/poppler/poppler_0.22.4.bb  |    2 +-
+ meta-oe/recipes-support/rng-tools/rng-tools_4.bb   |    2 +-
+ meta-oe/recipes-support/zile/zile_2.4.9.bb         |    2 +-
+ .../recipes-httpd/hiawatha/hiawatha_9.2.bb         |    2 +-
+ .../xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb     |    2 +-
+ .../xfwm4-themes/xfwm4-themes_4.10.0.bb            |    2 +-
+ meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb      |    2 +-
+ 74 files changed, 74 insertions(+), 74 deletions(-)
+
 -- 
 1.7.9.5
 
