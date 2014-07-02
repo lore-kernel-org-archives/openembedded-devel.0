@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9331A65CC1
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 33A9765CC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jul 2014 06:57:53 +0000 (UTC)
+	Wed,  2 Jul 2014 06:57:54 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s626vtu9013478
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s626vtYg016285
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 1 Jul 2014 23:57:55 -0700 (PDT)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 1 Jul 2014 23:57:51 -0700
+	Tue, 1 Jul 2014 23:57:55 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Jul 2014 23:56:46 -0700
-Message-ID: <1404284261-42377-20-git-send-email-liezhi.yang@windriver.com>
+Date: Tue, 1 Jul 2014 23:56:47 -0700
+Message-ID: <1404284261-42377-21-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 References: <1404284261-42377-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 19/74] gammu: use BPN in SRC_URI
+Subject: [meta-oe] [PATCH 20/74] krb5: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,27 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2014 06:57:53 -0000
+X-List-Received-Date: Wed, 02 Jul 2014 06:57:54 -0000
 Content-Type: text/plain
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |    2 +-
+ meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb b/meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb
-index 714aa50..d123d38 100644
---- a/meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb
-+++ b/meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
- HOMEPAGE = "http://www.gammu.org/"
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+index 6d39a0a..49b8917 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+@@ -10,7 +10,7 @@ inherit autotools binconfig perlnative
+ PNBLACKLIST[krb5] = "BROKEN: doesn't build with B!=S"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${PV}/${BP}.tar.bz2 \
-     file://gammurc \
-     file://gammu-smsdrc \
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar \
++SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
+            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
  "
+ SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
 -- 
 1.7.9.5
 
