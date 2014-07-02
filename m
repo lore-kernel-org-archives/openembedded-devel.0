@@ -1,36 +1,27 @@
-Return-Path: <ka6sox@gmail.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F31B6ACEA;
-	Wed,  2 Jul 2014 07:03:53 +0000 (UTC)
-Received: by mail-ob0-f170.google.com with SMTP id uz6so11877456obc.1
-	for <multiple recipients>; Wed, 02 Jul 2014 00:03:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=5O40vUDs7E+2J2pTeGvGUSjXIUzGSgnYbP6FZMhn/0w=;
-	b=Ec/4un4DjHpi1C71fnod162mTd3he+YoTP/qgH1Cd9wdUYT/Cj8h17oGcBhgPqruLD
-	n7hgHS09uBDTndmbLScGWUya5dLfJppTFgckAQbpq18UIdR+yZHoTVU4pyZ61vj9LS3r
-	/gB6G2eUUCE6BWBxPpHfxTWGl9dl5/HS8mcesRLSkWcdlW5QOjF/AuFcS/ZY1/OBM8jx
-	LrR1AkUfHr1qyO+BHARYIKaZ0sjqTojpUh+owTcIa4744oJCH/MH1ovmT1ATtKV7Z8hi
-	K9fitUt9oR3s4Gpnmm+wzRNKEafS/6v1NA9lvxyBbiP+0UUrR6KO3EGS3mww+CyMlH8Q
-	/h5A==
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 595DF6AD04
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jul 2014 07:46:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s627k3Lu023250
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 2 Jul 2014 00:46:03 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
+	Wed, 2 Jul 2014 00:46:02 -0700
+Message-ID: <53B3B8B9.1080702@windriver.com>
+Date: Wed, 2 Jul 2014 15:46:01 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-X-Received: by 10.60.16.72 with SMTP id e8mr48538597oed.11.1404284634402; Wed,
-	02 Jul 2014 00:03:54 -0700 (PDT)
-Received: by 10.76.128.201 with HTTP; Wed, 2 Jul 2014 00:03:54 -0700 (PDT)
-In-Reply-To: <20140701105815.GF2437@jama>
-References: <20140619113451.GO2117@jama> <20140624101443.GO2437@jama>
-	<CAHQecY6eQfhY4hY_EEUmXd5MEA2_fDb5yfj7YP0i1gg=dKFQ7Q@mail.gmail.com>
-	<20140701105815.GF2437@jama>
-Date: Wed, 2 Jul 2014 00:03:54 -0700
-Message-ID: <CAHQecY4dLUKL_48e5_CEiwsxS_HR_+0Wy85pyNMcMdwtT6TAUw@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Few archives to add on sources.oe.org
+To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+References: <20140702073604.25636.qmail@f4mail-235-146.rediffmail.com>
+In-Reply-To: <20140702073604.25636.qmail@f4mail-235-146.rediffmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [bitbake-devel] Regarding Net-Snmp package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,74 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jul 2014 07:03:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 02 Jul 2014 07:46:09 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Done
+
+I think that this email should go into oe-devel (see the cc) since
+the net-snmp is from the meta-networking layer, please see:
+
+meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+
+PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
+             ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd 
+${PN}-server-snmptrapd"
+
+There is no net-snmp in the PACKAGES, I think that you need use
+net-snmp-client or net-snmp-server.
+
+// Robert
 
 
-On Tue, Jul 1, 2014 at 3:58 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-> On Tue, Jun 24, 2014 at 07:36:59AM -0700, Tom King wrote:
-> > done
+
+On 07/02/2014 03:36 PM, Himanshu Pandey wrote:
+> Hi,
 >
-> Thanks,
+> I am getting following errors:
 >
-> I've found another one in daisy:
+> Error: net-snmp not found in the base feeds (genericx86_64 x86_64 noarch any all).
 >
-> barnyard2-1.8.tar.gz
+> sed: can't read
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/net-snmp/5.7.2-r1/image/usr/bin/net-snmp-config:
+> No such file or directory
 >
-> I've verified that
-> wget http://ftp.psu.ac.th/pub/snort/barnyard2-1.8.tar.gz
-> provides correct checksum or you can fetch it from aruba
-> (/home/jenkins/oe/world/downloads-missing).
+> Please help.
 >
-> SRC_URI[md5sum] = "72fc6c490db6ea6a0f46c27d24998067"
-> SRC_URI[sha256sum] =
-> "1abfe6530d721debd98921421722b02c844c289564730b1e85729e4915b2bb7a"
+> Regards,
+> Himanshu
 >
-> > On Tue, Jun 24, 2014 at 3:14 AM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> > > On Thu, Jun 19, 2014 at 01:34:51PM +0200, Martin Jansa wrote:
-> > > > Hi Tom,
-> > > >
-> > > > can you please add:
-> > > > IO-Tty-1.10.tar.gz
-> > > > SQLAlchemy-0.7.9.tar.gz
-> > > > fetchmail-6.3.26.tar.xz
-> > > > usb-modeswitch-2.0.1.tar.bz2
-> > > > usb-modeswitch-data-20130807.tar.bz2
-> > > >
-> > > > to sources.oe.org? I can send you tarballs (or fetch them from
-> > > > /home/jenkins/oe/shr-core-branches/downloads-missing/ on aruba)
-> > > >
-> > > > The most annoying is fetchmail which is now fetching HTML page from
-> > > > berlios (so checksum check fails instead of showing 404) :/. And user
-> > > > needs to download it manually or use sources.oe.org as PREMIRROR,
-> but
-> > > > still better than nothing.
-> > >
-> > > I've found only one more missing in upstream sites and used from dora
-> > > branch
-> > >
-> > > daq-2.0.1.tar.gz
-> > >
-> > > I've verified that
-> > > http://download.lunar-linux.org/lunar/mirrors/daq-2.0.1.tar.gz
-> > > provides correct checksum or you can fetch it from aruba as before.
-> > >
-> > > SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
-> > > SRC_URI[sha256sum] =
-> > > "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
-> > >
-> > > Thanks
-> > >
-> > > --
-> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > >
 >
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+> Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company email.
+> 	*Know More >*
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>
+>
 >
 
