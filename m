@@ -1,27 +1,24 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EB296AC78
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DC6A65CC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jul 2014 01:45:14 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s631jF7x025446
+	Thu,  3 Jul 2014 02:24:21 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s632OMoD029629
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 2 Jul 2014 18:45:15 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Wed, 2 Jul 2014 18:45:15 -0700
-Message-ID: <53B4B5A9.3030808@windriver.com>
-Date: Thu, 3 Jul 2014 09:45:13 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
+	Wed, 2 Jul 2014 19:24:22 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Wed, 2 Jul 2014 19:24:21 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1404268492-3769-1-git-send-email-liezhi.yang@windriver.com>
-In-Reply-To: <1404268492-3769-1-git-send-email-liezhi.yang@windriver.com>
-Subject: Re: [meta-networking] [PATCH] memcached: use BPN in SRC_URI
+Date: Thu, 3 Jul 2014 10:24:22 +0800
+Message-ID: <1404354262-17491-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH][meta-networking] aoetools: fix the SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,33 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jul 2014 01:45:16 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Jul 2014 02:24:29 -0000
+Content-Type: text/plain
 
+From: Roy Li <rongqing.li@windriver.com>
 
-Please drop this one, will include it in another thread.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-networking/recipes-support/aoetools/aoetools_34.bb |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-// Robert
+diff --git a/meta-networking/recipes-support/aoetools/aoetools_34.bb b/meta-networking/recipes-support/aoetools/aoetools_34.bb
+index 1557de9..eb1e0fe 100644
+--- a/meta-networking/recipes-support/aoetools/aoetools_34.bb
++++ b/meta-networking/recipes-support/aoetools/aoetools_34.bb
+@@ -10,8 +10,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ RRECOMMENDS_${PN} = "kernel-module-aoe"
+ 
+-
+-SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "cde7f7cedc7cd9938a5ebfd009dd3ec0"
+ SRC_URI[sha256sum] = "fd6c57244e9458d7cbe7a0171295ddee4d8cdcae291e40d6acbc641df7296d85"
+ 
+-- 
+1.7.10.4
 
-On 07/02/2014 10:34 AM, Robert Yang wrote:
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->   .../recipes-support/memcached/memcached_1.4.17.bb  |    2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> index 6a01ec2..8ad264f 100644
-> --- a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> +++ b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> @@ -17,7 +17,7 @@ inherit autotools
->   DEPENDS += "libevent"
->   RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
->
-> -SRC_URI = "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
-> +SRC_URI = "http://www.memcached.org/files/${BPN}-${PV}.tar.gz"
->
->   SRC_URI[md5sum] = "46402dfbd7faadf6182283dbbd18b1a6"
->   SRC_URI[sha256sum] = "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9926a89999d8cdc0458"
->
 
