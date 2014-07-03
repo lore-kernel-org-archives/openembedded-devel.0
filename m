@@ -1,26 +1,32 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 55A406ACA5
+	by mail.openembedded.org (Postfix) with ESMTP id BFDA665CD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jul 2014 02:26:02 +0000 (UTC)
+	Thu,  3 Jul 2014 06:45:22 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s632Q3km029736
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 2 Jul 2014 19:26:03 -0700 (PDT)
-Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Wed, 2 Jul 2014 19:26:03 -0700
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s636jNoH017864
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 2 Jul 2014 23:45:23 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
+	Wed, 2 Jul 2014 23:45:23 -0700
+Message-ID: <53B4FC01.4060906@windriver.com>
+Date: Thu, 3 Jul 2014 14:45:21 +0800
 From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Jul 2014 19:26:00 -0700
-Message-ID: <1404354360-978-9-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1404354360-978-1-git-send-email-liezhi.yang@windriver.com>
-References: <1404354360-978-1-git-send-email-liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Subject: [meta-xfce] [PATCH 8/8] meta-xfce: use BPN in SRC_URI
+To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
+	rfs209, 241,
+	539.f4-235-92.old.1404297506.17851@webmail.rediffmail.com>
+In-Reply-To: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
+	rfs209, 241,
+	539.f4-235-92.old.1404297506.17851@webmail.rediffmail.com>
+Subject: Re: [bitbake-devel] Regarding rp-pppoe package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,63 +40,213 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jul 2014 02:26:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 03 Jul 2014 06:45:26 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Fixed SRC_URI:
-* ${PN} -> ${BPN}, use ${BP} if it was ${PN}-${PV}
-* ${P} -> ${BP}
 
-Otherwise we would meet do_fetch errors when we do the multilib, native
-or nativesdk build.
+Hello,
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb     |    2 +-
- .../xfwm4-themes/xfwm4-themes_4.10.0.bb            |    2 +-
- meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb      |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+I can't see the detailed errors from this log, maybe you should check the
+log.do_configure or config.log.
 
-diff --git a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-index ac104e2..1e4b06b 100644
---- a/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-+++ b/meta-xfce/recipes-art/xfce4-icon-theme/xfce4-icon-theme_4.4.3.bb
-@@ -7,7 +7,7 @@ DEPENDS = "intltool-native xfce4-dev-tools-native"
- 
- inherit xfce
- 
--SRC_URI = "http://archive.xfce.org/src/art/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
-+SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:3]}/${BP}.tar.bz2"
- SRC_URI[md5sum] = "73ce2977b84f634a6a6c5d9c27e336db"
- SRC_URI[sha256sum] = "d4786692d56b8a563f66a5f260f1f13ade11e86c78cbcb25a9f9a5fc47cf66fa"
- 
-diff --git a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-index fc1062f..7030f7a 100644
---- a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-+++ b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit xfce
- 
--SRC_URI = "http://archive.xfce.org/src/art/${PN}/${@'${PV}'[0:4]}/${PN}-${PV}.tar.bz2"
-+SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
- SRC_URI[md5sum] = "eaa58362053a3549c8be0b32efd3c54f"
- SRC_URI[sha256sum] = "3214d5f00e9703b5e8c9e7c3287d606dedec7285ceb4d5db332e93ada66fd575"
- 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
-index aa67fdf..3feb242 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
-@@ -8,7 +8,7 @@ inherit xfce
- 
- SRC_URI[md5sum] = "4f10d5d5576ce5127308d6badbac3afa"
- SRC_URI[sha256sum] = "9a2706f6881ac29cda9f0b0325d179153bc09e37bcbafcab9823c1c1ec89579d"
--SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-+SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
- 
- S = "${WORKDIR}/Thunar-${PV}/"
- 
--- 
-1.7.9.5
+// Robert
 
+On 07/02/2014 06:38 PM, Himanshu Pandey wrote:
+> Hi,
+>
+> Here is the log:
+>
+> | ## ----------------- ##
+> | ## Output variables. ##
+> | ## ----------------- ##
+> |
+> | ACLOCAL='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/missing
+> --run aclocal-1.12'
+> | AMTAR='$${TAR-tar}'
+> | AUTOCONF='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/missing
+> --run autoconf'
+> | AUTOHEADER='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/missing
+> --run autoheader'
+> | AUTOMAKE='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/missing
+> --run automake-1.12'
+> | AWK='gawk'
+> | CYGPATH_W='echo'
+> | DEFS='-DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\"
+> -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\"
+> -DPACKAGE=\"rp-pppoe\" -DVERSION=\"3.8\"'
+> | ECHO_C=''
+> | ECHO_N='-n'
+> | ECHO_T=''
+> | INSTALL_DATA='${INSTALL} -m 644'
+> | INSTALL_PROGRAM='${INSTALL}'
+> | INSTALL_SCRIPT='${INSTALL}'
+> | INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'
+> | LIBOBJS=''
+> | LIBS=''
+> | LTLIBOBJS=''
+> | MAKEINFO='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/missing
+> --run makeinfo'
+> | MKDIR_P='/bin/mkdir -p'
+> | PACKAGE='rp-pppoe'
+> | PACKAGE_BUGREPORT=''
+> | PACKAGE_NAME=''
+> | PACKAGE_STRING=''
+> | PACKAGE_TARNAME=''
+> | PACKAGE_URL=''
+> | PACKAGE_VERSION=''
+> | PATH_SEPARATOR=':'
+> | SET_MAKE=''
+> | SHELL='/bin/sh'
+> | STRIP='x86_64-poky-linux-strip'
+> | VERSION='3.8'
+> | am__isrc=''
+> | am__leading_dot='.'
+> | am__tar='$${TAR-tar} chof - "$$tardir"'
+> | am__untar='$${TAR-tar} xf -'
+> | bindir='/usr/bin'
+> | build_alias='x86_64-linux'
+> | datadir='/usr/share'
+> | datarootdir='${prefix}/share'
+> | docdir='${datarootdir}/doc/${PACKAGE}'
+> | dvidir='${docdir}'
+> | exec_prefix='/usr'
+> | host_alias='x86_64-poky-linux'
+> | htmldir='${docdir}'
+> | includedir='/usr/include'
+> | infodir='/usr/share/info'
+> | install_sh='${SHELL}
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/rp-pppoe/3.8-r10/rp-pppoe-3.8/install-sh'
+> | libdir='/usr/lib'
+> | libexecdir='/usr/lib/rp-pppoe'
+> | localedir='${datarootdir}/locale'
+> | localstatedir='/var'
+> | mandir='/usr/share/man'
+> | mkdir_p='$(MKDIR_P)'
+> | oldincludedir='/usr/include'
+> | pdfdir='${docdir}'
+> | prefix='/usr'
+> | program_transform_name='s,x,x,'
+> | psdir='${docdir}'
+> | sbindir='/usr/sbin'
+> | sharedstatedir='/com'
+> | subdirs=' src'
+> | sysconfdir='/etc'
+> | target_alias='x86_64-poky-linux'
+> |
+> | configure: exit 1
+> | ERROR: oe_runconf failed
+>
+> Thanks in Advance.
+>
+> Regards,
+> Himanshu
+>
+>
+> From: Robert Yang <liezhi.yang@windriver.com>
+> Sent: Wed, 02 Jul 2014 15:22:14
+> To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>,
+> "openembedded-devel@lists.openembedded.org"
+> <openembedded-devel@lists.openembedded.org>
+> Subject: Re: [bitbake-devel] Regarding rp-pppoe package
+>
+>
+> On 07/02/2014 05:49 PM, Himanshu Pandey wrote:
+>  > Hi,
+>  >
+>  > I am getting following error when I tried to add and compile rp-pppoe pacakage:
+>  >
+>
+> Please add the full error log, thanks.
+>
+> Btw, I will go to have dinner now, may reply tomorrow.
+>
+> // Robert
+>
+>  > ERROR: oe_runconf failed
+>  >
+>  > Please help.
+>  >
+>  > Regards,
+>  > Himanshu
+>  >
+>  >
+>  >
+>  >
+>  > From: Robert Yang <liezhi.yang@windriver.com>
+>  > Sent: Wed, 02 Jul 2014 13:16:17
+>  > To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+>  > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+>  > Subject: Re: [bitbake-devel] Regarding Net-Snmp package
+>  >
+>  > I think that this email should go into oe-devel (see the cc) since
+>  > the net-snmp is from the meta-networking layer, please see:
+>  >
+>  > meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+>  >
+>  > PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static
+> ${PN}-libs \
+>  >              ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd
+>  > ${PN}-server-snmptrapd"
+>  >
+>  > There is no net-snmp in the PACKAGES, I think that you need use
+>  > net-snmp-client or net-snmp-server.
+>  >
+>  > // Robert
+>  >
+>  >
+>  >
+>  >
+>  > On 07/02/2014 03:36 PM, Himanshu Pandey wrote:
+>  >  > Hi,
+>  >  >
+>  >  > I am getting following errors:
+>  >  >
+>  >  > Error: net-snmp not found in the base feeds (genericx86_64 x86_64 noarch any
+>  > all).
+>  >  >
+>  >  > sed: can't read
+>  >  >
+>  >
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/net-snmp/5.7.2-r1/image/usr/bin/net-snmp-config:
+>  >  > No such file or directory
+>  >  >
+>  >  > Please help.
+>  >  >
+>  >  > Regards,
+>  >  > Himanshu
+>  >  >
+>  >  >
+>  >  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  >  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+>  > email.
+>  >  >    *Know More >*
+>  >  >
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >  >
+>  >  >
+>  >  >
+>  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+> email.
+>  >    *Know More >*
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >
+>
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+> Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company email.
+> 	*Know More >*
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>
 
