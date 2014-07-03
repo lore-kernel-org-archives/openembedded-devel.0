@@ -1,11 +1,11 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 41E2A65CC1
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F1A56AC7B
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  3 Jul 2014 02:25:59 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s632Q1NH029727
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s632Q1ie025645
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 2 Jul 2014 19:26:01 -0700 (PDT)
@@ -14,13 +14,13 @@ Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
 	Wed, 2 Jul 2014 19:26:01 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Jul 2014 19:25:54 -0700
-Message-ID: <1404354360-978-3-git-send-email-liezhi.yang@windriver.com>
+Date: Wed, 2 Jul 2014 19:25:53 -0700
+Message-ID: <1404354360-978-2-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1404354360-978-1-git-send-email-liezhi.yang@windriver.com>
 References: <1404354360-978-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome] [PATCH 2/8] meta-gnome: use BPN in SRC_URI
+Subject: [meta-filesystems] [PATCH 1/8] meta-filesystems: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +46,63 @@ or nativesdk build.
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../recipes-apps/gnome-mplayer/gmtk_1.0.5.bb       |    2 +-
- .../gnome-mplayer/gnome-mplayer_1.0.5.bb           |    2 +-
- .../recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb |    2 +-
- .../nonworking/gcalctool/gcalctool_5.32.0.bb       |    2 +-
+ .../sshfs-fuse/sshfs-fuse_2.5.bb                   |    2 +-
+ .../unionfs-fuse/unionfs-fuse_0.26.bb              |    2 +-
+ .../recipes-support/physfs/physfs_2.0.3.bb         |    2 +-
+ .../recipes-utils/xfsprogs/xfsprogs_3.1.11.bb      |    2 +-
  4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-index 6dc5159..7283409 100644
---- a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-+++ b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
+index 722d0ed..5daeb40 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_2.5.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPLv2"
+ DEPENDS = "glib-2.0 fuse"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS = "gtk+ alsa-lib glib-2.0 virtual/libx11"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${P}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${BP}.tar.gz"
+ S = "${WORKDIR}/${P}"
  
--SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
-+SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
- SRC_URI[md5sum] = "e06e9ca8d61d74910343bb3ef4348f7f"
- SRC_URI[sha256sum] = "a07130d62719e8c1244f8405dd97445798df5204fc0f3f2f2b669b125114b468"
+ inherit autotools
+diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
+index 1d50364..38ded9f 100644
+--- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
++++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
+@@ -5,7 +5,7 @@ LICENSE = "BSD-3-Clause"
+ DEPENDS = "fuse"
+ LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8abab00b483a1b7943a32"
  
-diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
-index 4be94c5..c5ac6e2 100644
---- a/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
-+++ b/meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb
-@@ -10,7 +10,7 @@ PR = "r2"
+-SRC_URI = "http://podgorny.cz/unionfs-fuse/releases/${PN}-${PV}.tar.xz"
++SRC_URI = "http://podgorny.cz/unionfs-fuse/releases/${BP}.tar.xz"
  
- DEPENDS = "gmtk gtk+ alsa-lib libnotify glib-2.0 dbus-glib virtual/libx11 libxscrnsaver"
+ SRC_URI[md5sum] = "689c636484756f6f7a728ef354cbeac2"
+ SRC_URI[sha256sum] = "8d5c9dcb51ecb9a9b03890e16d17e37d602b0c1f23ed6a9ddec2b0f719c9f662"
+diff --git a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb b/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+index 9ad7fab..5618f28 100644
+--- a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
++++ b/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+@@ -6,6 +6,6 @@ DEPENDS = "readline zlib"
  
--SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
-+SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
- SRC_URI[md5sum] = "1d3ab24c5501b5528e357931ca4dc6da"
- SRC_URI[sha256sum] = "ac3c179345baecb4ca5237782aa33e83253a87bf8b42ce6eb3a9207a340f61b2"
+ inherit cmake
  
-diff --git a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-index 3fb5776..3cd7910 100644
---- a/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-+++ b/meta-gnome/recipes-gnome/libgtkstylus/libgtkstylus_0.5.bb
-@@ -7,7 +7,7 @@ PR = "r4"
+-SRC_URI = "http://icculus.org/${PN}/downloads/${PN}-${PV}.tar.bz2"
++SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
+ SRC_URI[md5sum] = "c2c727a8a8deb623b521b52d0080f613"
+ SRC_URI[sha256sum] = "ca862097c0fb451f2cacd286194d071289342c107b6fe69079c079883ff66b69"
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+index 4c3f8fa..fcf8f12 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_3.1.11.bb
+@@ -6,7 +6,7 @@ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
+ DEPENDS = "util-linux"
  
- inherit autotools pkgconfig
- 
--SRC_URI = "http://burtonini.com/temp/${PN}-${PV}.tar.gz \
-+SRC_URI = "http://burtonini.com/temp/${BP}.tar.gz \
-     file://gtkstylus.sh"
- SRC_URI[md5sum] = "fa1c82cd9fd2fafd7ff10d78eb5781c5"
- SRC_URI[sha256sum] = "383e0a22a537f653b8d41688277560f95678a042967198085ec7caa1a5cc2f4c"
-diff --git a/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-index f16551f..4812fe3 100644
---- a/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-+++ b/meta-gnome/recipes-gnome/nonworking/gcalctool/gcalctool_5.32.0.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
--SRC_URI = "http://download.gnome.org/sources/${PN}/${SHRT_VER}/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://download.gnome.org/sources/${BPN}/${SHRT_VER}/${BP}.tar.gz"
- 
- SRC_URI[md5sum] = "48db927c6e7ee1d5395f953a8c184c98"
- SRC_URI[sha256sum] = "346f645c0fdef900642f6e9a2c18e7ba9a7ca9bc62fe2b08eb418f065a425c89"
+-SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
++SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BP}.tar.gz \
+     file://remove-install-as-user.patch \
+     file://drop-configure-check-for-aio.patch \
+ "
 -- 
 1.7.9.5
 
