@@ -1,48 +1,38 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id F353665CFF
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CBC065CA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jul 2014 15:37:22 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id 8ECAD3AAB4CB
+	Fri,  4 Jul 2014 16:01:32 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id m15so767020wgh.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jul 2014 11:37:23 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id fbJJtmA7R0r9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jul 2014 11:37:19 -0400 (EDT)
-Received: from mail-ve0-f182.google.com (mail-ve0-f182.google.com
-	[209.85.128.182])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id 21B5F3AAB4BD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jul 2014 11:37:19 -0400 (EDT)
-Received: by mail-ve0-f182.google.com with SMTP id oy12so1783938veb.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jul 2014 08:37:18 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.220.113.207 with SMTP id b15mr396582vcq.55.1404488238452;
-	Fri, 04 Jul 2014 08:37:18 -0700 (PDT)
-Received: by 10.58.237.200 with HTTP; Fri, 4 Jul 2014 08:37:17 -0700 (PDT)
-In-Reply-To: <CACgAsMfbt4Oh2vFcp_1pvYU19iO+dqOrEoPbtgBxWmZ25dTQpw@mail.gmail.com>
-References: <20140620081307.GW2117@jama>
-	<CACgAsMeUBoXLNq48-2fz_ifnxf=nHGwE_RvAc-q+E_HRGmoYsA@mail.gmail.com>
-	<20140620234853.GA2117@jama>
-	<CACgAsMczZMkbPJ4VsfA8iHBKysS1uLKzDqxLxgkQr7cU_n1TmQ@mail.gmail.com>
-	<20140621010508.GC2117@jama>
-	<CACgAsMdguugQZiTiOo8aWaBZFCYnsWUtp7-0KWu7VdGvdBDCSA@mail.gmail.com>
-	<20140621074733.GD2117@jama>
-	<CACgAsMdQgREcvnQqnH5942TMzAR1LJr5bkHwm0nD+G2wNarEMg@mail.gmail.com>
-	<20140623140131.GH2437@jama>
-	<CACgAsMcSoWZSNh9cBnO6Vm9YuCf1NEzzr5VQ=KpSUfoKwC_x5Q@mail.gmail.com>
-	<20140623165154.GI2437@jama>
-	<CACgAsMfbt4Oh2vFcp_1pvYU19iO+dqOrEoPbtgBxWmZ25dTQpw@mail.gmail.com>
-Date: Fri, 4 Jul 2014 11:37:17 -0400
-Message-ID: <CACgAsMfX1Y-MPg_qmmyP-i0u153=46bDQLbFmQEoVWp2XJfDww@mail.gmail.com>
-From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
+	Fri, 04 Jul 2014 09:01:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=/QKThL1k7tSsPUeifij1zOB6EuB8TbeCNejGR1EMxok=;
+	b=eLGLIpfg8DJs732i+XIi9YXrsNyTOMJLREHUalfhd6DPihrohyAehFXFr74fFFTl/y
+	vka0o6sTjuSXWZ78MHqUIcYWAujTGWxMewKL44xDxnnQdZFIqW1NJ1AOok3KxEwFaJJ3
+	Laa5doTTAa9EOJ7h7CiuIudX6txVdf4yva4aq4p94BwWeCcsvJnXp7VxNMn28c+rBbuJ
+	WPFKKi9TMScSD0Vxs+fyrNpZcL9rZSHquYC2f/bRpQlhS5cSbyiYTJ6VktOUFUCxAhWJ
+	wkh5fDl1EKNSEtOLDXQusJ+2SiJsndz9BQKDJypdxTKfKvlrRAzDgCxHYFG7oNu6hoNi
+	6Fqg==
+X-Gm-Message-State: ALoCoQnwGKB6jbDNAZWNnNJNLeQN4665olCmPk74/2tZGQN0WDQUjQHu6e4Zed/D2pbYoOJ90D91
+X-Received: by 10.194.185.113 with SMTP id fb17mr4160548wjc.117.1404489691922; 
+	Fri, 04 Jul 2014 09:01:31 -0700 (PDT)
+Received: from melchett.burtonini.com (35.106.2.81.in-addr.arpa. [81.2.106.35])
+	by mx.google.com with ESMTPSA id f6sm69829321wja.25.2014.07.04.09.01.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 04 Jul 2014 09:01:31 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [yocto][meta-qt5][daisy] Error during bitbake of my image
+Date: Fri,  4 Jul 2014 17:01:22 +0100
+Message-Id: <1404489682-30529-3-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1404489682-30529-1-git-send-email-ross.burton@intel.com>
+References: <1404489682-30529-1-git-send-email-ross.burton@intel.com>
+Subject: [PATCH 3/3] poppler: remove spurious GTK+ build dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,165 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jul 2014 15:37:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Jul 2014 16:01:38 -0000
 
-On Fri, Jul 4, 2014 at 11:00 AM, Kevyn-Alexandre Par=C3=A9
-<kapare@rogue-research.com> wrote:
-> On Mon, Jun 23, 2014 at 12:51 PM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> On Mon, Jun 23, 2014 at 12:21:24PM -0400, Kevyn-Alexandre Par=C3=A9 wrot=
-e:
->>> On Mon, Jun 23, 2014 at 10:01 AM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
->>> > On Mon, Jun 23, 2014 at 09:40:28AM -0400, Kevyn-Alexandre Par=C3=A9 w=
-rote:
->>> <snip>
->>> >> Here the way I check that icu is added as part of my image:
->>> >> bitbake -e nirs-console-image | grep -n5 PACKAGECONFIG
->>> >> 2560-# $B_pn-strace
->>> >> 2561-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_po=
-int/yocto_build/src/poky/meta/conf/distro/include/seperatebuilddir.inc:645
->>> >> 2562-#     "${SEPB}"
->>> >> 2563-B_pn-strace=3D"/home/knight/SVN/rogue/3rdParty/Yocto/trunk/star=
-ting_point/yocto_build/src/build/tmp/work/overo-poky-linux-gnueabi/nirs-con=
-sole-image/1.0-r0/build"
->>> >> 2564-#
->>> >> 2565:# $PACKAGECONFIG [2 operations]
->>> >> 2566-#   set /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_po=
-int/yocto_build/src/poky/meta/conf/documentation.conf:308
->>> >> 2567-#     [doc] "This variable provides a means of enabling or
->>> >> disabling features of a recipe on a per-recipe basis."
->>> >> 2568-#   _append[pn-qtbase]
->>> >> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_bui=
-ld/src/poky/meta-nirs/recipes-images/gumstix/nirs-console-image.bb:17
->>> >> 2569-#     "   developer   tests   examples   icu   alsa-lib   gles2
->>> >> accessibility   glib-2.0   tslib   linuxfb   sqlite3 "
->>> >
->>> > Are you trying to set PACKAGECONFIG_append_pn-qtbase from
->>> > nirs-console-image.bb? That wont work you need to set it in distro or
->>> > local.conf
->>>
->>> Yes I was :( I was rereading ref manual
->>>
->>> Configuration file: This method is identical to changing the block
->>> through an append file except you edit your local.conf or
->>> <mydistro>.conf file. As with append files previously described, you
->>> can either completely override the variable:
->>>
->>>      PACKAGECONFIG_pn-<recipename>=3D"f4 f5"
->>>
->>>
->>> Or, you can just amend the variable:
->>>
->>>      PACKAGECONFIG_append_pn-<recipename> =3D " f4"
->>>
->>>
->>> I Move my PACKAGECONFIG_append to my local.conf
->>>
->>> Here my setup for now just trying to make it compile remove the gles
->>> for now it was giving me errors...
->>>
->>> bitbake -e qtbase | grep ^PACKAGECONFIG=3D
->>> PACKAGECONFIG=3D"     release     dbus udev evdev widgets tools libs
->>> openssl     gl          xcb xvideo xsync xshape xrender xrandr xfixes
->>> xinput2 xinput xinerama xcursor gtkstyle xkb     fontconfig freetype
->>>   jpeg libpng zlib     pulseaudio       developer tests examples icu
->>> alsa-lib accessibility glib-2.0 tslib sqlite3
->>>
->>> cat tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtbase/5.2.1-r0/build/c=
-onfig.summary
->>> | grep ICU
->>>   ICU .................... yes
->>>
->>> it's compiling further then before and stop
->>>
->>> meta-qt5/recipes-qt/qt5/qtdeclarative_5.2.1.bb, do_compile) failed
->>> with exit code '1'
->>>
->>> http://pastebin.com/qJAME8ew
->>
->> Try to disable tests for qtdeclarative, they are not tested as often as
->> default setup so it's possible that there is some issue:
->> compiling
->> /home/knight/SVN/rogue/3rdParty/Yocto/trunk/starting_point/yocto_build/s=
-rc/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/qtdeclarative/5.2.1-r0=
-/qtdeclarative-opensource-src-5.2.1/tests/auto/qml/qv4debugger/tst_qv4debug=
-ger.cpp
->> mv: `libplugin1.so' and `./libplugin1.so' are the same file
->> make[5]: [libplugin1.so] Error 1 (ignored)
->>
->
-> thx will try to make something more simple work and then will go back
-> to add "gles" and the config (PACKAGECONFIG) that depends on it.
->
-> Simple qt with frame buffer:
->
-> # Remove GL & X11 and replace directfb to linuxfb
-> # conf/local.conf
-> PACKAGECONFIG_GL_pn-qtbase =3D ""
-> PACKAGECONFIG_X11_pn-qtbase =3D ""
-> PACKAGECONFIG_FB_pn-qtbase =3D "linuxfb"
->
-> # Package config enable
-> # bitbake -e qtbase | grep ^PACKAGECONFIG=3D
-> PACKAGECONFIG=3D"     release     dbus udev evdev widgets tools libs
-> openssl          linuxfb               jpeg libpng zlib     pulseaudio
->      "
->
-> # Package enable in the iamge recipe
-> # recipes recipes-images/gumstix/nirs-console-image.bb
-> require recipes-images/gumstix/gumstix-console-image.bb
->
-> inherit populate_sdk_qt5
->
-> IMAGE_INSTALL +=3D " \
->   bzip2 \
->   u-boot \
->   u-boot-fw-utils \
->   psplash \
->   qtbase \
->   qtbase-fonts \
->   qtbase-fonts-ttf-vera \
->   qtbase-fonts-ttf-dejavu \
->   qtbase-fonts-pfa \
->   qtbase-fonts-pfb \
->   qtbase-fonts-qpf \
->   qtbase-tools \
->   qtbase-plugins \
->   qtbase-dev \
-> "
->
-> # Compile
-> bitbake nirs-console-image
->
-> # This result on an image
->
->
-> # Them try to generate the SDK to use with qtcreator
-> # Populate SDK
-> bitbake -c populate_sdk nirs-console-image
->
-> # This result with error not founding the
-> Computing transaction...error: Can't install
-> qtwebkit-dev-5.2.1-r0@armv7a_vfp_neon: no package provides qtwebkit =3D
-> 5.2.1-r0
-> http://pastebin.com/Tc8qtu6W
->
-> [1] Is it possible to use qtcreator without the populate_sdk?
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-oe/recipes-support/poppler/poppler_0.22.4.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I'm asking this one because qtcreator when adding qmake in Menu Tools
-/ Options / Qt Versions it always result in error when adding
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.22.4.bb b/meta-oe/recipes-support/poppler/poppler_0.22.4.bb
+index a192882..4e95c13 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.22.4.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.22.4.bb
+@@ -8,7 +8,7 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
+ SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"
+ 
+-DEPENDS = "fontconfig zlib gtk+ cairo lcms"
++DEPENDS = "fontconfig zlib cairo lcms"
+ 
+ inherit autotools pkgconfig gtk-doc
+ 
+-- 
+1.7.10.4
 
-./tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake
-
-or others in my build folder...
-
-The error is : Qt Version is not properly installed , please run make insta=
-ll
-
-BR,
-
--KA
 
