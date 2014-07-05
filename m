@@ -1,35 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-oa0-f51.google.com (mail-oa0-f51.google.com
-	[209.85.219.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FA6D7029A
+Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C69F70313
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Jul 2014 22:05:04 +0000 (UTC)
-Received: by mail-oa0-f51.google.com with SMTP id j17so3017585oag.24
+	Sat,  5 Jul 2014 22:08:08 +0000 (UTC)
+Received: by mail-ob0-f169.google.com with SMTP id wp18so3064702obc.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Jul 2014 15:05:05 -0700 (PDT)
+	Sat, 05 Jul 2014 15:08:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=lPyDUFTScbUo009nXtfmIFh2GAeAIBFx+QjJBB1Uias=;
-	b=C6EQ4cani0bpstjk1NV11ENcg8lK/U5ryydPUznC792Nfb/hrPTHIO7I+21c7plRxK
-	RfQU8kjZ/uZ5CeTr68JncIjMXcLP4F6UXwDov+0SnkRVfLFSV54Jk+MV2b8TzccAixBx
-	8T/x1nZOrRb3xEIucaY4s1eAodF4ercxwDy0AvLX3Db+JBp95YPH9jHFnDpvTahFnjbc
-	utx6AQ6DtpeEaJ9Op97uC/k98IuxN0pt8Z1uxjTFPqwD36Wc9p1biUnViJeQ+U0Hpt0o
-	BdT0pOm/Jp3P+vUTjmIwl35msSvxjjtRpe3vY46nuJpRC+bHL9xaMtYtr9pb5vdg3fSD
-	heJA==
+	bh=DOEft8HR9/eVrkw+YCtW8qNlpoDKSZE9acvJFOWFeJo=;
+	b=uiJSk/ISuVOilT+7Txws9JvncyRqfdvrnjS7azRz6/xpfaboxs+YJafaomZVPWXIhx
+	cv9ubu0jlU5AeMnwwWe+m+bjXoyP/2dkhTL7ZJUpPZT5oCS/Zfu1xH/9V9BHW15E5GVQ
+	KI6dFw5Z2qXQDCETsWU5bXSQgXwYxgnvAlMkQHM9bFibGxNT7YT02bPhe7V0YBbjUpul
+	xuUxrFTSZfA4f1oqs5Tk+TazFknaYJIhYQpDI6mOqz9VX93dquLtsrOekDhTnN4qZ08B
+	+oK3DW6Fy1c4JZfxMuERS4AEqs6YENq0IZkOoIG1u58b+U4KhiYYkrrxeqdN36/Es+JY
+	EPBw==
 MIME-Version: 1.0
-X-Received: by 10.60.141.67 with SMTP id rm3mr4338076oeb.78.1404597905789;
-	Sat, 05 Jul 2014 15:05:05 -0700 (PDT)
+X-Received: by 10.60.118.38 with SMTP id kj6mr21449949oeb.68.1404598090062;
+	Sat, 05 Jul 2014 15:08:10 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.84.164 with HTTP; Sat, 5 Jul 2014 15:05:05 -0700 (PDT)
-In-Reply-To: <53AA0672.7070606@balister.org>
-References: <53AA0672.7070606@balister.org>
-Date: Sat, 5 Jul 2014 19:05:05 -0300
-X-Google-Sender-Auth: CXrJC2B_7TUKnhFFhESKunVI9mw
-Message-ID: <CAP9ODKoLDRFHVFAxQp57YiWb3NarxpmQoJNwgsnnh+gcRUwXEQ@mail.gmail.com>
+Received: by 10.182.84.164 with HTTP; Sat, 5 Jul 2014 15:08:10 -0700 (PDT)
+In-Reply-To: <1403706635-12134-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1403706635-12134-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 5 Jul 2014 19:08:10 -0300
+X-Google-Sender-Auth: vVLsjI2V7pDLsWndiUYOFVBWVD0
+Message-ID: <CAP9ODKpqRO9Gc7uakKrY8Us8XLE2N4uV061dQiN7WLGBtHYc2A@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: State of the art for creating an image that you can dd to an SD card
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [meta-browser][PATCHv2] firefox-{l10n, addon}: Drop runtime dependency on TUNE_PKGARCH firefox and keep allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jul 2014 22:05:05 -0000
+X-List-Received-Date: Sat, 05 Jul 2014 22:08:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello Philip,
+On Wed, Jun 25, 2014 at 11:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-On Tue, Jun 24, 2014 at 8:14 PM, Philip Balister <philip@balister.org> wrote:
-> What's the best available solution for creating an image you can dd to
-> an SD card? It seems like this wheel has been invented several times and
-> I am wondering if people are converging on one approach.
->
-> Bonus points for resizing the linux partition.
->
-> How are people doing this today?
-
-Sorry for the late reply.
-
-First I'd like to support that 'wic' is the longterm solution for it
-but it lacks good docs and has limited support for non-x86 based
-archs. We've been doing it in meta-fsl-arm for a while[1].
-
-1. http://git.yoctoproject.org/cgit/cgit.cgi/meta-fsl-arm/tree/classes/image_types_fsl.bbclass
-
-Different of TI's code it does not need root to run.
+I think we need to have a better way to address this kind of thing in
+OE. Couldn't the package to 'tell' it is ABI safe?
 
 -- 
 Otavio Salvador                             O.S. Systems
