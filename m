@@ -1,36 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
-	[209.85.214.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C69F70313
+Received: from mail-oa0-f42.google.com (mail-oa0-f42.google.com
+	[209.85.219.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 3345F65CC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Jul 2014 22:08:08 +0000 (UTC)
-Received: by mail-ob0-f169.google.com with SMTP id wp18so3064702obc.28
+	Sat,  5 Jul 2014 22:12:39 +0000 (UTC)
+Received: by mail-oa0-f42.google.com with SMTP id eb12so3023478oac.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Jul 2014 15:08:10 -0700 (PDT)
+	Sat, 05 Jul 2014 15:12:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=DOEft8HR9/eVrkw+YCtW8qNlpoDKSZE9acvJFOWFeJo=;
-	b=uiJSk/ISuVOilT+7Txws9JvncyRqfdvrnjS7azRz6/xpfaboxs+YJafaomZVPWXIhx
-	cv9ubu0jlU5AeMnwwWe+m+bjXoyP/2dkhTL7ZJUpPZT5oCS/Zfu1xH/9V9BHW15E5GVQ
-	KI6dFw5Z2qXQDCETsWU5bXSQgXwYxgnvAlMkQHM9bFibGxNT7YT02bPhe7V0YBbjUpul
-	xuUxrFTSZfA4f1oqs5Tk+TazFknaYJIhYQpDI6mOqz9VX93dquLtsrOekDhTnN4qZ08B
-	+oK3DW6Fy1c4JZfxMuERS4AEqs6YENq0IZkOoIG1u58b+U4KhiYYkrrxeqdN36/Es+JY
-	EPBw==
+	:from:to:content-type:content-transfer-encoding;
+	bh=zGx+ZD4EAGIuJ4qX8MNv5vJG6r26pYlrPVgAebWJmFo=;
+	b=rpDHpDtD9SEv/s88a3B0DYXTAwCsu02EJ2oOK4BpzwYCzqx5+ZFKcG+osqRb84lA3N
+	3cQujh1CCyb/u4eLU0qtUvs+Qbk/Yj/XFBS5CoxI3lNg8uDJBxJsIEzno7g9wzFkxJ65
+	+ENN23MXKunGvhj9ABe1sgylgEVS0R5VSoW9DupaIjUfXiQh/TAFyh/I0kedMWxtZ4Gv
+	YMNwUpuPR8w5zxZtgs+CrIw9BWh99DSO83O7Qq6FfdXEuKST7ZZhzmqv9WtrWR5gXQ+L
+	c1feOHx5OL407MLrRMK6S2CnUcFx52YwtKNb5KJSR8iBzm60OVuyEpf6aMdKsVLtye1U
+	seKg==
 MIME-Version: 1.0
-X-Received: by 10.60.118.38 with SMTP id kj6mr21449949oeb.68.1404598090062;
-	Sat, 05 Jul 2014 15:08:10 -0700 (PDT)
+X-Received: by 10.182.250.196 with SMTP id ze4mr21315936obc.46.1404598361175; 
+	Sat, 05 Jul 2014 15:12:41 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.182.84.164 with HTTP; Sat, 5 Jul 2014 15:08:10 -0700 (PDT)
-In-Reply-To: <1403706635-12134-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1403706635-12134-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Sat, 5 Jul 2014 19:08:10 -0300
-X-Google-Sender-Auth: vVLsjI2V7pDLsWndiUYOFVBWVD0
-Message-ID: <CAP9ODKpqRO9Gc7uakKrY8Us8XLE2N4uV061dQiN7WLGBtHYc2A@mail.gmail.com>
+Received: by 10.182.84.164 with HTTP; Sat, 5 Jul 2014 15:12:41 -0700 (PDT)
+In-Reply-To: <90368C38-4B94-4896-A8CA-2B982448700D@staylor.ca>
+References: <75D00F71-5F69-4506-9190-96C8BD98220F@staylor.ca>
+	<90368C38-4B94-4896-A8CA-2B982448700D@staylor.ca>
+Date: Sat, 5 Jul 2014 19:12:41 -0300
+X-Google-Sender-Auth: 34rRPaQ9ZHhpvKF40GZXBBCmA2M
+Message-ID: <CAP9ODKqbMvZ0E8OG1ZoE4EZ0W-iidAJnVSHbeV6JckFacPtAYg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: Re: [meta-browser][PATCHv2] firefox-{l10n, addon}: Drop runtime dependency on TUNE_PKGARCH firefox and keep allarch
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] populate_sdk_qt5 qconfig.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,16 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jul 2014 22:08:09 -0000
+X-List-Received-Date: Sat, 05 Jul 2014 22:12:49 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 25, 2014 at 11:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+On Fri, Jun 27, 2014 at 1:01 PM, S=C3=A9bastien Taylor <me@staylor.ca> wrot=
+e:
+> Hasn't been any feedback on this so just curious if that's because this i=
+sn't happening for others or they're simply not using features that trigger=
+ this issue.  This makes using qmake with pkg-config (a good way to pull in=
+ non-Qt modules into a project) unusable until the qconfig.pri file in the =
+SDK installation is manually corrected.
 
-I think we need to have a better way to address this kind of thing in
-OE. Couldn't the package to 'tell' it is ABI safe?
+Have you fix it?
 
--- 
+--=20
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
