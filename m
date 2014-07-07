@@ -1,37 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id A6E2470386
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-oa0-f45.google.com (mail-oa0-f45.google.com
+	[209.85.219.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 11D0F7029B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Jul 2014 10:45:42 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id hi2so15576799wib.11
+	Mon,  7 Jul 2014 12:08:44 +0000 (UTC)
+Received: by mail-oa0-f45.google.com with SMTP id o6so4463987oag.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jul 2014 03:45:37 -0700 (PDT)
+	Mon, 07 Jul 2014 05:08:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=RG254ubBKcRWpMGf1dGqTppw7FlW6asCdoc17mC2aIo=;
-	b=ZphTz1gUySif63SkAVKHewPGt0dGHySa2xNai6a8uNTB7/tAnfMf/+s4UaTdoczV6f
-	C5LwXMRsosrgAzUx3z3v7Lt7CksXbWB/5js2DZFLnV7ef/ynuaVCWvO0uPGaxHGUCVLJ
-	cRBc82GUdvui7ZcRBj46YHX7QdDtID0ESNudtLghUaIC9j/lNdym6tOdMr6kRIEeU2uv
-	SkeRJcl5R3SjnVUpQ5DJ+N5SERJHd476gRdfI+lBvlgwM9gQNaqm59KZPvfPmd4DHnZw
-	bSeZGf08xSMFYH4At/NGkPznVym266wIkWBI0tTH3U7UHeox4bldaeXpsqDYCJ6UXZYM
-	DJ7Q==
-X-Received: by 10.180.76.132 with SMTP id k4mr36078191wiw.1.1404729934758;
-	Mon, 07 Jul 2014 03:45:34 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o9sm67063354wib.22.2014.07.07.03.45.34 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 07 Jul 2014 03:45:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Jul 2014 12:45:18 +0200
-Message-Id: <1404729919-2903-6-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-In-Reply-To: <1404729919-2903-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1404729919-2903-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 6/7] recipes: add missing intltool-native dependency
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=tjUJO5CKQlJpz5N/CyWs0gqxIWDJaEr2H7YmlNl/bps=;
+	b=icFsLA6kHGE43zxEjEHOjC5PQ8DJALPTVAWpjXO9ZWYWXRVWIIF63nW/S9ch7xD3ej
+	ohy5Q8ITzedJqjhwEQFlbHCPqmMLARGfBBM9GjXTiNbNleO0HKwERcW/HIIaSzykolAU
+	sP/lLQCDRhcum/nPqeE0gl414T6IUG42a0RcG3Va+/FnqC2n5QY6TCEfwZx8caf8bA2W
+	crWwGdUYQOqlnUMaAXUNursb3E754SHL4ZcyQcKEV5wheRH9/LcDqCYIQT7icxKyamhs
+	z5xd2b3TpIB/5MOS33Etb0uJ8Q+5RkG/fOCkxStGZTQLh40KSQkR3r/14o7ynfTRuLSp
+	H2sw==
+MIME-Version: 1.0
+X-Received: by 10.182.19.196 with SMTP id h4mr31093802obe.20.1404734925800;
+	Mon, 07 Jul 2014 05:08:45 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.182.84.164 with HTTP; Mon, 7 Jul 2014 05:08:45 -0700 (PDT)
+In-Reply-To: <20140706161534.GA2446@jama>
+References: <1403706635-12134-1-git-send-email-Martin.Jansa@gmail.com>
+	<CAP9ODKpqRO9Gc7uakKrY8Us8XLE2N4uV061dQiN7WLGBtHYc2A@mail.gmail.com>
+	<20140706161534.GA2446@jama>
+Date: Mon, 7 Jul 2014 09:08:45 -0300
+X-Google-Sender-Auth: oG-V4AJYQglDhiW0UWzGhZRoXEs
+Message-ID: <CAP9ODKrLQ6aWSSMm8xvdGACUJgXkajOJPDjLG7pmqvybzFxH_A@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [meta-browser][PATCHv2] firefox-{l10n, addon}: Drop runtime dependency on TUNE_PKGARCH firefox and keep allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,55 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jul 2014 10:45:45 -0000
+X-List-Received-Date: Mon, 07 Jul 2014 12:08:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb                         | 2 +-
- meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb      | 2 +-
- .../recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+On Sun, Jul 6, 2014 at 1:15 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sat, Jul 05, 2014 at 07:08:10PM -0300, Otavio Salvador wrote:
+>> On Wed, Jun 25, 2014 at 11:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>
+>> I think we need to have a better way to address this kind of thing in
+>> OE. Couldn't the package to 'tell' it is ABI safe?
+>
+> Yes if you list them all in layer.conf
 
-diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-index 611e83e..a54a3a2 100644
---- a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-+++ b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Take photos and videos with your webcam, with fun graphical effects"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
- 
--DEPENDS = "gtk+ gstreamer gst-plugins-base libcanberra udev librsvg gnome-desktop evolution-data-server"
-+DEPENDS = "gtk+ gstreamer gst-plugins-base libcanberra udev librsvg gnome-desktop evolution-data-server intltool-native"
- 
- PR = "r2"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-index 94bfa3b..4fd38a0 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
- PR = "r1"
- 
- SECTION = "x11/gnome"
--DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi"
-+DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi intltool-native"
- 
- inherit gnomebase gtk-icon-cache
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-index 1c14952..ce4b64e 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SECTION = "x11/gnome"
- PR = "r2"
- 
--DEPENDS = "libgtop gtkmm glibmm gnome-doc-utils gnome-icon-theme libwnck gtk+ dbus-glib librsvg"
-+DEPENDS = "libgtop gtkmm glibmm gnome-doc-utils gnome-icon-theme libwnck gtk+ dbus-glib librsvg intltool-native"
- 
- inherit gnome
- SRC_URI[archive.md5sum] = "3f0bca9b0ebc7a365466851cd580d167"
+Well but maybe we could have this in recipe level? So we wouldn't need
+to keep a long list in the layer.conf file (which is ugly and hard to
+keep clean).
+
 -- 
-2.0.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
