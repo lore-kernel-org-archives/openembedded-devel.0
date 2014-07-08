@@ -1,32 +1,24 @@
-Return-Path: <just4tech83@gmail.com>
-Received: from mail-qc0-f193.google.com (mail-qc0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FC0C70254
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F0966ACE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Jul 2014 06:54:54 +0000 (UTC)
-Received: by mail-qc0-f193.google.com with SMTP id m20so1871006qcx.8
+	Tue,  8 Jul 2014 07:51:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s687pDvx014943
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jul 2014 23:54:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=M4SFNNKHaepNNmd5NucXLe79fbRlP/AWCl7WMTOkDqU=;
-	b=WnwGXs5jd/BlJqmKxJ5EbDwp7cmteWiCAT7fKQrUbbvPUOe9aNep0KhUl67w9ZkiuF
-	Eq6sFPSTW3MyRom58Eb0p+1mpD/oD2jwd6CGoCwDt2/eAizIUcYDCqBvLPNwkJC17NaI
-	Vvwm82Q93Q9UOf1ifd0UE51Ztn4ejLYBWWE7mnHhr+3/V0TiRB4yXsCobMpAuG82Bf6y
-	QLs1ew3Hir0a3Rb1HRdCw2GFoHd2k1ktaF2YIZ2dKq623rCa0MdPYFUVirlGjzrcZ+kE
-	1qURgsCNeRI3TEEmiaSFRbJ4hAXiPtbZjfq+dRutN2PYyRmgtSUYIjvZ35IyARwjQQPS
-	gJBg==
+	Tue, 8 Jul 2014 00:51:13 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Tue, 8 Jul 2014 00:51:12 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 8 Jul 2014 15:51:17 +0800
+Message-ID: <1404805877-7423-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Received: by 10.140.83.209 with SMTP id j75mr52655478qgd.42.1404802495481;
-	Mon, 07 Jul 2014 23:54:55 -0700 (PDT)
-Received: by 10.140.16.103 with HTTP; Mon, 7 Jul 2014 23:54:55 -0700 (PDT)
-Date: Tue, 8 Jul 2014 12:24:55 +0530
-Message-ID: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
-From: Bryan <just4tech83@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: open embedded build issues with beagle board
+Subject: [meta-networking][PATCH] tnftp: add tnftp recipes file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,24 +32,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jul 2014 06:55:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Jul 2014 07:51:14 -0000
+Content-Type: text/plain
 
-Hi All
- I am trying to build  Openembeeded classic for Beagle board-XM but i am
-getting lot of broken link issues. I have  set DISTRO as angstrom-2010.x in
-local.conf.   Is this approach  ok? or should i move to openembedded core ??
-Pls suggest.
+From: Roy Li <rongqing.li@windriver.com>
 
-Broken link e.g.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../tnftp/tnftp/tnftp-autotools.patch              |   42 ++++++++++++++++++++
+ .../recipes-support/tnftp/tnftp_20130505.bb        |   33 +++++++++++++++
+ 2 files changed, 75 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
+ create mode 100644 meta-networking/recipes-support/tnftp/tnftp_20130505.bb
 
-Resolving www.angstrom-distribution.org (www.angstrom-distribution.org)...
-140.211.169.177
- Connecting to www.angstrom-distribution.org
-(www.angstrom-distribution.org)|140.211.169.177|:80...
-connected.
- HTTP request sent, awaiting response...
-404 Not Found  2014-07-08 10:13:43 ERROR 404: Not Found.
+diff --git a/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
+new file mode 100644
+index 0000000..1bda576
+--- /dev/null
++++ b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
+@@ -0,0 +1,42 @@
++[PATCH] Update configure.ac and Makefile.am to resolve warnings/errors
++
++Upstream-Status: Pending
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ configure.ac          |    2 ++
++ libnetbsd/Makefile.am |    2 +-
++ 2 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index a96d2ab..b3b3069 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -71,9 +71,11 @@ AH_TEMPLATE([WITH_SSL],
++ #
++ # Checks for programs.
++ #
+++AM_PROG_AR()
++ AC_PROG_CC()
++ AC_PROG_AWK()
++ AC_PROG_LIBTOOL()
+++AM_PROG_CC_C_O()
++ 
++ #
++ # Checks for tool features.
++diff --git a/libnetbsd/Makefile.am b/libnetbsd/Makefile.am
++index 3e5c3ce..39bb12d 100644
++--- a/libnetbsd/Makefile.am
+++++ b/libnetbsd/Makefile.am
++@@ -5,7 +5,7 @@ noinst_LTLIBRARIES = libnetbsd.la
++ libnetbsd_la_SOURCES =
++ 
++ 
++-CPPFLAGS = \
+++AM_CPPFLAGS = \
++ 	-I$(srcdir) \
++ 	-I$(top_srcdir) \
++ 	-I$(top_builddir)
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-support/tnftp/tnftp_20130505.bb b/meta-networking/recipes-support/tnftp/tnftp_20130505.bb
+new file mode 100644
+index 0000000..80690c5
+--- /dev/null
++++ b/meta-networking/recipes-support/tnftp/tnftp_20130505.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "Enhanced NetBSD ftp client"
++DESCRIPTION = "tnftp (formerly known as lukemftp) is a port of the NetBSD FTP client \
++to other systems. It offers many enhancements over the traditional \
++BSD FTP client, including command-line editing, command-line fetches \
++of FTP and HTTP URLs (including via proxies), command-line uploads of \
++FTP URLs, context-sensitive word completion, dynamic progress bar, \
++IPv6 support, modification time preservation, paging of local and \
++remote files, passive mode support (with fallback to active mode), \
++SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
++throttling."
++
++SECTION = "console/network"
++LICENSE = "BSD-4-Clause"
++
++DEPENDS = "ncurses"
++
++SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
++	   file://tnftp-autotools.patch \
++	  "
++
++inherit autotools update-alternatives
++
++ALTERNATIVE_PRIORITY = "100"
++
++ALTERNATIVE_${PN} = "ftp"
++ALTERNATIVE_LINK_NAME_${PN} = "${bindir}/ftp"
++ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
++
++FILES_${PN} = "${bindir}/tnftp"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=6d6796cb166a9bb050958241dad9479e"
++SRC_URI[md5sum] = "66e218d02ec7d9fc39ab70ba2900305a"
++SRC_URI[sha256sum] = "6f650e25f6fd51538f677b789b49379f367ae9f1dee74c94cfe24d92abc2cffb"
+-- 
+1.7.10.4
 
-Thanks in advance
 
