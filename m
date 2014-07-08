@@ -1,24 +1,21 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id E3DE170196
+Return-Path: <dvhart@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id AF95B70196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Jul 2014 16:11:33 +0000 (UTC)
-Received: (qmail 7089 invoked by uid 1003); 8 Jul 2014 16:11:33 -0000
-Received: from unknown (HELO ?192.168.1.122?) (philip@opensdr.com@108.44.80.46)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	8 Jul 2014 16:11:33 -0000
-Message-ID: <53BC1835.90204@balister.org>
-Date: Tue, 08 Jul 2014 12:11:33 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
+	Tue,  8 Jul 2014 16:14:03 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 08 Jul 2014 09:08:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,625,1400050800"; d="scan'208";a="540336702"
+Received: from fear.jf.intel.com (HELO rage.localnet) ([10.7.201.149])
+	by orsmga001.jf.intel.com with ESMTP; 08 Jul 2014 09:14:02 -0700
+From: Darren Hart <dvhart@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
-In-Reply-To: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
-X-Enigmail-Version: 1.6
-Subject: Re: open embedded build issues with beagle board
+Date: Tue, 08 Jul 2014 09:13:53 -0700
+Message-ID: <4246514.6uHudSIxWy@rage>
+User-Agent: KMail/4.12.4 (Linux/3.14-1-amd64; KDE/4.13.1; x86_64; ; )
+MIME-Version: 1.0
+Subject: meta-xfce: xfce4-taskmanager fails do_configure with git timeout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +29,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jul 2014 16:11:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jul 2014 16:14:05 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On 07/08/2014 02:54 AM, Bryan wrote:
-> Hi All
->  I am trying to build  Openembeeded classic for Beagle board-XM but i am
-> getting lot of broken link issues. I have  set DISTRO as angstrom-2010.x in
-> local.conf.   Is this approach  ok? or should i move to openembedded core ??
-> Pls suggest.
+Building xfce4-taskmanager from behind a proxy is failing during 
+do_configure as xdt-autogen attempts to clone the doc submodule.
 
-Use the current Angstrom instructions, oe-classic is pretty much
-completely unsupported now.
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 
+'bit-64', 'x86_64-linux', 'common']
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_copy_aclocals
+| DEBUG: Python function autotools_copy_aclocals finished
+| DEBUG: Executing shell function do_configure
+| xdt-autogen: Automatically initializing the doc submodule.
+| Synchronizing submodule url for 'doc'
+| Cloning into 'doc'...
+| fatal: unable to connect to git.xfce.org:
+| git.xfce.org[0: 138.48.2.107]: errno=Connection timed out
+|
+| Clone of 'git://git.xfce.org/xfce/xfce4-docs' into submodule path 
+'doc' failed
+| xdt-autogen: Pulling the xfce4-docs git submodule failed. See errors
+|              above for more information and take a look at
+|              http://wiki.xfce.org/documentation.
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at 
+/build/yocto/daisy/intel-
+corei7-64_20140620142725/build/tmp/work/corei7-64-eywa-linux/xfce4-
+taskmanager/1.0.0+gitAUTOINC+e5d958738b-r0/temp/log.do_configure.18692)
 
-Philip
+Interestingly, if I run the devshell and execute the contents of the 
+xfce-git.bbclass do_configure_prepend function, the clone completes 
+successfully and subsequent bitbake builds succeed.
 
-> 
-> Broken link e.g.
-> 
-> Resolving www.angstrom-distribution.org (www.angstrom-distribution.org)...
-> 140.211.169.177
->  Connecting to www.angstrom-distribution.org
-> (www.angstrom-distribution.org)|140.211.169.177|:80...
-> connected.
->  HTTP request sent, awaiting response...
-> 404 Not Found  2014-07-08 10:13:43 ERROR 404: Not Found.
-> 
-> Thanks in advance
-> 
+devshell> NOCONFIGURE=yes ./autogen.sh
+...
+
+Any thoughts on why this might fail from bitbake but succeed from the 
+devshell?
+
+Any thoughts on how to avoid cloning the docs altogether just to get 
+around this and get things building?
+
+Thanks,
+
+-- 
+Darren Hart
+Intel Open Source Technology Center
 
