@@ -1,28 +1,20 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A556170410
+Return-Path: <jukka.rissanen@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id A137370391
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jul 2014 10:21:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s69ALMoi001929
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Jul 2014 03:21:22 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Wed, 9 Jul 2014 03:21:22 -0700
-Message-ID: <53BD17A1.6000205@windriver.com>
-Date: Wed, 9 Jul 2014 18:21:21 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1404886727-44130-1-git-send-email-liezhi.yang@windriver.com>
-	<20140709095544.GC2446@jama>
-In-Reply-To: <20140709095544.GC2446@jama>
-Subject: Re: [meta-oe] [PATCH] fftwf and fftwl: exclude them from world
+	Wed,  9 Jul 2014 13:55:10 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 09 Jul 2014 06:55:12 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,631,1400050800"; d="scan'208";a="567365966"
+Received: from jrissane-mobl.ger.corp.intel.com ([10.237.67.153])
+	by fmsmga002.fm.intel.com with ESMTP; 09 Jul 2014 06:55:11 -0700
+From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Jul 2014 16:55:08 +0300
+Message-Id: <1404914108-27167-1-git-send-email-jukka.rissanen@linux.intel.com>
+X-Mailer: git-send-email 1.8.3.1
+Subject: [meta-oe][PATCH] usb-modeswitch: Do not try to use autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,98 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jul 2014 10:21:23 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Jul 2014 13:55:14 -0000
 
+There is only one Makefile in the project so no use trying to use
+autotools.
 
+Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+---
+ meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-On 07/09/2014 05:55 PM, Martin Jansa wrote:
-> On Tue, Jul 08, 2014 at 11:18:47PM -0700, Robert Yang wrote:
->> The fftw, fftwf and fftwl provide the same files (different contents), we
->> should only build one of them, otherwise there would be warning
->>
->> WARNING: The recipe fftw is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
->>     sysroots/qemux86-64/usr/include/fftw3.f03
->>     Matched in manifest-qemux86-64-fftwl.populate_sysroot
->> manifest-qemux86-64-fftwf.populate_sysroot
->>     sysroots/qemux86-64/usr/include/fftw3.h
->>     Matched in manifest-qemux86-64-fftwl.populate_sysroot
->> manifest-qemux86-64-fftwf.populate_sysroot
->>     sysroots/qemux86-64/usr/include/fftw3q.f03
->>     Matched in manifest-qemux86-64-fftwl.populate_sysroot
->> manifest-qemux86-64-fftwf.populate_sysroot
->>     sysroots/qemux86-64/usr/include/fftw3.f
->>     Matched in manifest-qemux86-64-fftwl.populate_sysroot
->> manifest-qemux86-64-fftwf.populate_sysroot
->>     sysroots/qemux86-64/usr/include/fftw3l.f03
->>     Matched in manifest-qemux86-64-fftwl.populate_sysroot
->> manifest-qemux86-64-fftwf.populate_sysroot
->> Please verify which package should provide the above files.
->>
->> and maybe errors (race issue):
->>
->> The recipe imagemagick.do_compiler error:
->>    fourier.c:69:19: fatal error: fftw3.h: No such file or directory
->>     #include <fftw3.h>
->>
->> This is because imagemagick.do_configure depends on fftw.populate_sysroot, but
->> the files installed by fftw.populate_sysroot, maybe removed by fftwl or fftwf
->> when they rebuild.
->>
->> Only build fftw in the world will fix the problem.
->
-> But it doesn't fix the problem for people who are really building fftwl
-> and fftw. If there is someone with this use-case can he send patch
-> moving common parts to separate recipe used by all 3 or just rename/move
-> files to have unique name?
->
-> Or if they aren't needed at the same time, lets convert fftwl and fftwf
-> to PACKAGECONFIG options in fftw.
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
+index 92d1ac4..761617c 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
+@@ -2,8 +2,6 @@ SUMMARY = "A mode switching tool for controlling 'flip flop' (multiple device) U
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-inherit autotools
+-
+ DEPENDS = "libusb1"
+ 
+ SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${PV}.tar.bz2"
+@@ -15,3 +13,7 @@ EXTRA_OEMAKE = "TCL=${bindir}/tclsh"
+ FILES_${PN} = "${bindir} ${sysconfdir} ${base_libdir}/udev/usb_modeswitch ${sbindir} ${localstatedir}/lib/usb_modeswitch"
+ RDEPENDS_${PN} = "tcl"
+ RRECOMMENDS_${PN} = "usb-modeswitch-data"
++
++do_install_append() {
++	oe_runmake DESTDIR=${D} install
++}
+-- 
+1.8.3.1
 
-Yes, I think that PACKAGECONFIG is a good idea, will send patches tomorrow
-if no objections.
-
-// Robert
-
->
-> Regards,
->
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> ---
->>   meta-oe/recipes-support/fftw/fftwf_3.3.4.bb |    2 ++
->>   meta-oe/recipes-support/fftw/fftwl_3.3.4.bb |    2 ++
->>   2 files changed, 4 insertions(+)
->>
->> diff --git a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
->> index 59f4a11..8731df7 100644
->> --- a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
->> +++ b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
->> @@ -6,3 +6,5 @@ EXTRA_OECONF += "--enable-single \
->>
->>   SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
->>   SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
->> +
->> +EXCLUDE_FROM_WORLD = "1"
->> diff --git a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
->> index 8f37346..a56bbc8 100644
->> --- a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
->> +++ b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
->> @@ -4,3 +4,5 @@ EXTRA_OECONF += "--enable-long-double"
->>
->>   SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
->>   SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
->> +
->> +EXCLUDE_FROM_WORLD = "1"
->> --
->> 1.7.9.5
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
 
