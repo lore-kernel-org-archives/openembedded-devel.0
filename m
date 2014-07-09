@@ -1,27 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
+Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D9987036A
+	by mail.openembedded.org (Postfix) with ESMTP id 0C94070194
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jul 2014 02:58:55 +0000 (UTC)
+	Wed,  9 Jul 2014 06:18:46 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s692wuFw013257
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s696IliP025817
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Jul 2014 19:58:56 -0700 (PDT)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	Tue, 8 Jul 2014 23:18:47 -0700 (PDT)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Tue, 8 Jul 2014 19:58:56 -0700
-Message-ID: <53BCAFF5.6080901@windriver.com>
-Date: Wed, 9 Jul 2014 10:59:01 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
+	Tue, 8 Jul 2014 23:18:47 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1404809042-10815-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1404809042-10815-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH][meta-oe] memstat: add memstat recipe
+Date: Tue, 8 Jul 2014 23:18:47 -0700
+Message-ID: <1404886727-44130-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [meta-oe] [PATCH] fftwf and fftwl: exclude them from world
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,56 +32,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jul 2014 02:58:56 -0000
-Content-Type: text/plain; charset="gbk"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Jul 2014 06:18:55 -0000
+Content-Type: text/plain
 
-Drop this patch, HuangJ has sent out a similar patch
+The fftw, fftwf and fftwl provide the same files (different contents), we
+should only build one of them, otherwise there would be warning
 
--Roy
+WARNING: The recipe fftw is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
+   sysroots/qemux86-64/usr/include/fftw3.f03
+   Matched in manifest-qemux86-64-fftwl.populate_sysroot
+manifest-qemux86-64-fftwf.populate_sysroot
+   sysroots/qemux86-64/usr/include/fftw3.h
+   Matched in manifest-qemux86-64-fftwl.populate_sysroot
+manifest-qemux86-64-fftwf.populate_sysroot
+   sysroots/qemux86-64/usr/include/fftw3q.f03
+   Matched in manifest-qemux86-64-fftwl.populate_sysroot
+manifest-qemux86-64-fftwf.populate_sysroot
+   sysroots/qemux86-64/usr/include/fftw3.f
+   Matched in manifest-qemux86-64-fftwl.populate_sysroot
+manifest-qemux86-64-fftwf.populate_sysroot
+   sysroots/qemux86-64/usr/include/fftw3l.f03
+   Matched in manifest-qemux86-64-fftwl.populate_sysroot
+manifest-qemux86-64-fftwf.populate_sysroot
+Please verify which package should provide the above files.
 
-On 07/08/2014 04:44 PM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   meta-oe/recipes-devtools/memstat/memstat_1.0.bb |   24 +++++++++++++++++++++++
->   1 file changed, 24 insertions(+)
->   create mode 100644 meta-oe/recipes-devtools/memstat/memstat_1.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> new file mode 100644
-> index 0000000..8c8882e
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Display virtual memory allocation"
-> +DESCRIPTION = "Lists all the processes, executables, and shared libraries \
-> +that are using up virtual memory. It's helpful to see how the shared memory \
-> +is used and which 'old' libs are loaded. "
-> +HOMEPAGE = "http://memstattool.sourceforge.net/"
-> +SECTION = "devtool"
-> +
-> +LICENSE = "GPLv2"
-> +
-> +S = "${WORKDIR}/memstattool"
-> +
-> +LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb"
-> +
-> +SRC_URI = "http://sourceforge.net/projects/memstattool/files/${BPN}_${PV}.tar.gz \
-> +          "
-> +SRC_URI[md5sum] = "2c3acc0c62b2a18f6601b84e54aa7462"
-> +SRC_URI[sha256sum] = "245d5fc7fb87bcfd14486cd34917cae2856e799559ac568434af12c4852bce94"
-> +
-> +do_install_append(){
-> +    install -d ${D}${bindir}
-> +    install -m 0755 memstat ${D}${bindir}
-> +    install -d ${D}/etc
-> +    install -m 0755 memstat.conf ${D}/etc
-> +}
->
+and maybe errors (race issue):
 
+The recipe imagemagick.do_compiler error:
+  fourier.c:69:19: fatal error: fftw3.h: No such file or directory
+   #include <fftw3.h>
+
+This is because imagemagick.do_configure depends on fftw.populate_sysroot, but
+the files installed by fftw.populate_sysroot, maybe removed by fftwl or fftwf
+when they rebuild.
+
+Only build fftw in the world will fix the problem.
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-oe/recipes-support/fftw/fftwf_3.3.4.bb |    2 ++
+ meta-oe/recipes-support/fftw/fftwl_3.3.4.bb |    2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
+index 59f4a11..8731df7 100644
+--- a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
++++ b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
+@@ -6,3 +6,5 @@ EXTRA_OECONF += "--enable-single \
+ 
+ SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
+ SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
++
++EXCLUDE_FROM_WORLD = "1"
+diff --git a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
+index 8f37346..a56bbc8 100644
+--- a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
++++ b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
+@@ -4,3 +4,5 @@ EXTRA_OECONF += "--enable-long-double"
+ 
+ SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
+ SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
++
++EXCLUDE_FROM_WORLD = "1"
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.7.9.5
+
 
