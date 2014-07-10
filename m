@@ -1,24 +1,32 @@
-Return-Path: <Rongqing.Li@windriver.com>
+Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5690E6FE41
+	by mail.openembedded.org (Postfix) with ESMTP id B6C627040C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 07:45:10 +0000 (UTC)
+	Thu, 10 Jul 2014 08:38:49 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6A7jCHF011872
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 00:45:12 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.169.1; Thu, 10 Jul 2014 00:45:11 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Jul 2014 15:45:17 +0800
-Message-ID: <1404978317-2680-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6A8cpWA014269
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 10 Jul 2014 01:38:51 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
+	Thu, 10 Jul 2014 01:38:50 -0700
+Message-ID: <53BE5119.1050109@windriver.com>
+Date: Thu, 10 Jul 2014 16:38:49 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] tcpslice: add recipe under tcpdump
+To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+References: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
+	rfs209, 241,
+	539.f4-235-92.old.replied.1404980271.29674@webmail.rediffmail.com>
+In-Reply-To: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
+	rfs209, 241,
+	539.f4-235-92.old.replied.1404980271.29674@webmail.rediffmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Regarding dhcp package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,168 +40,239 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 07:45:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Jul 2014 08:38:50 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
 
-tcpslice is a tool for extracting parts of a tcpdump packet trace,
-so put it under tcpdump dir
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../tcpdump/tcpslice/tcpslice-1.2a3-time.patch     |   75 ++++++++++++++++++++
- .../tcpslice/tcpslice-CVS.20010207-bpf.patch       |   15 ++++
- .../recipes-support/tcpdump/tcpslice_1.2a3.bb      |   35 +++++++++
- 3 files changed, 125 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+On 07/10/2014 04:17 PM, Himanshu Pandey wrote:
+> Hi Robert,
+>
+> I am getting an error while compiling my dhcp package. Please find the log as
+> attachment.
+>
+> My dhcp bb file is as follows:
+>
+> SECTION = "base"
+> SUMMARY = "Internet Software Consortium DHCP package"
+> DESCRIPTION = "DHCP (Dynamic Host Configuration Protocol) is a protocol \
+> which allows individual devices on an IP network to get their own \
+> network configuration information from a server.  DHCP helps make it \
+> easier to administer devices."
+>
+> HOMEPAGE = "http://www.isc.org/"
+>
+> LICENSE = "CLOSED"
+>
+> DEPENDS = "openssl bind"
+>
+> SRC_URI = "svn://192.43.23.436/home/repo/dhcp-4.2.4-P2;module=branch;user=;pswd="
+> SRCREV = "${AUTOREV}"
+> S= "${WORKDIR}/trunk"
+> #inherit autotools
+> do_compile() {
+>          #cp -f ${WORKDIR}/trunk/include/site.h ${S}/includes
+>          cd ../trunk
+>          ./configure --prefix=${prefix} --host=${HOST_SYS}
+>          make
+> }
+>
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
-new file mode 100644
-index 0000000..a86f6d2
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
-@@ -0,0 +1,75 @@
-+Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+
-+--- tcpslice-1.2a3.orig/search.c	2000-09-10 10:52:40.000000000 +0200
-++++ tcpslice-1.2a3/search.c	2006-07-28 14:56:55.000000000 +0200
-+@@ -53,7 +53,7 @@
-+ /* Size of a packet header in bytes; easier than typing the sizeof() all
-+  * the time ...
-+  */
-+-#define PACKET_HDR_LEN (sizeof( struct pcap_pkthdr ))
-++#define PACKET_HDR_LEN (sizeof( struct pcap_sf_pkthdr ))
-+ 
-+ extern int snaplen;
-+ 
-+@@ -111,16 +111,24 @@
-+ static void
-+ extract_header( pcap_t *p, u_char *buf, struct pcap_pkthdr *hdr )
-+ 	{
-+-	memcpy((char *) hdr, (char *) buf, sizeof(struct pcap_pkthdr));
-++	struct pcap_sf_pkthdr hdri;
-++
-++	memcpy((char *) &hdri, (char *) buf, sizeof(struct pcap_sf_pkthdr));
-+ 
-+ 	if ( pcap_is_swapped( p ) )
-+ 		{
-+-		hdr->ts.tv_sec = SWAPLONG(hdr->ts.tv_sec);
-+-		hdr->ts.tv_usec = SWAPLONG(hdr->ts.tv_usec);
-+-		hdr->len = SWAPLONG(hdr->len);
-+-		hdr->caplen = SWAPLONG(hdr->caplen);
-++		hdr->ts.tv_sec = SWAPLONG(hdri.ts.tv_sec);
-++		hdr->ts.tv_usec = SWAPLONG(hdri.ts.tv_usec);
-++		hdr->len = SWAPLONG(hdri.len);
-++		hdr->caplen = SWAPLONG(hdri.caplen);
-++		}
-++	else
-++		{
-++		hdr->ts.tv_sec = hdri.ts.tv_sec;
-++		hdr->ts.tv_usec = hdri.ts.tv_usec;
-++		hdr->len = hdri.len;
-++		hdr->caplen = hdri.caplen;
-+ 		}
-+-
-+ 	/*
-+ 	 * From bpf/libpcap/savefile.c:
-+ 	 *
-+--- tcpslice-1.2a3.orig/tcpslice.h	1995-11-02 00:40:53.000000000 +0100
-++++ tcpslice-1.2a3/tcpslice.h	2006-07-28 14:56:55.000000000 +0200
-+@@ -20,6 +20,26 @@
-+  */
-+ 
-+ 
-++#include <time.h>
-++/* #include <net/bpf.h> */
-++
-++/*
-++ * This is a timeval as stored in disk in a dumpfile.
-++ * It has to use the same types everywhere, independent of the actual
-++ * `struct timeval'
-++ */
-++                                                                                
-++struct pcap_timeval {
-++    bpf_int32 tv_sec;           /* seconds */
-++    bpf_int32 tv_usec;          /* microseconds */
-++};
-++
-++struct pcap_sf_pkthdr {
-++    struct pcap_timeval ts;     /* time stamp */
-++    bpf_u_int32 caplen;         /* length of portion present */
-++    bpf_u_int32 len;            /* length this packet (off wire) */
-++};
-++
-+ time_t	gwtm2secs( struct tm *tm );
-+ 
-+ int	sf_find_end( struct pcap *p, struct timeval *first_timestamp,
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
-new file mode 100644
-index 0000000..0a73593
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
-@@ -0,0 +1,15 @@
-+Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+diff -ur tcpdump-3.8.1/tcpslice/tcpslice.c tcpdump-3.8.1.new/tcpslice/tcpslice.c
-+--- tcpslice/tcpslice.c	2004-01-15 17:35:53.000000000 +0100
-++++ tcpslice/tcpslice.c	2004-01-15 16:12:57.000000000 +0100
-+@@ -35,7 +35,7 @@
-+ #include <sys/file.h>
-+ #include <sys/stat.h>
-+ 
-+-#include <net/bpf.h>
-++/* #include <net/bpf.h> */
-+ 
-+ #include <ctype.h>
-+ #ifdef HAVE_FCNTL_H
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
-new file mode 100644
-index 0000000..0b47da6
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "tcpslice"
-+DESCRIPTION = "A tool for extracting parts of a tcpdump packet trace."
-+HOMEPAGE = "http://ee.lbl.gov"
-+SECTION = "console/network"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb" 
-+
-+SRC_URI = "ftp://ftp.ee.lbl.gov/tcpslice-1.2a3.tar.gz \
-+           file://tcpslice-1.2a3-time.patch \
-+           file://tcpslice-CVS.20010207-bpf.patch \
-+           "
-+SRC_URI[md5sum] = "e329cbeb7e589f132d92c3447c477190"
-+SRC_URI[sha256sum] = "4096e8debc898cfaa16b5306f1c42f8d18b19e30e60da8d4deb781c8f684c840"
-+
-+inherit autotools-brokensep
-+
-+DEPENDS += "libpcap"
-+
-+# We do not want to autoreconf.  We must specify srcdir as ".".
-+# We have to set the ac_cv_* cache variables as well as pass the normal
-+# cross-compilation options to configure!
-+#
-+do_configure () {
-+	oe_runconf \
-+            --srcdir="." \
-+            ac_cv_build=${BUILD_SYS} \
-+            ac_cv_host=${HOST_SYS} \
-+            ac_cv_target=${HOST_SYS}
-+}
-+
-+do_install_prepend () {
-+	mkdir -p ${D}/usr/sbin
-+}
-+
--- 
-1.7.10.4
+I think that these are wrong, you should not disable the "inherit autotools",
+and should not use "./configure" or "make" directly, try to enable
+the "inherit autotools", and remove the do_compile section to see what
+would happen, maybe you need:
 
+inherit autotools
+S = "${WORKDIR}/trunk"
+
+// Robert
+
+>
+> do_install_append () {
+>          install -d ${D}${sysconfdir}/init.d
+>          install -d ${D}${sysconfdir}/default
+>          install -d ${D}${sysconfdir}/dhcp
+>          install -d /etc/dhcp
+>          install -d /sbin
+>          install -d /var/db
+>          install -d /var/lib
+>          install -d /usr/local/sbin/
+> install -m 0755 ${D}/sbin/dhcrelay
+>          install -m 0755 ${D}/sbin/dhcpd
+>          install -m 0755 ${D}/sbin/dhclient-script
+>          install -m 0755 ${D}/var/db/dhcpd.leases
+>          install -m 0755 ${D}/var/lib/dhcpd
+>          install -m 0755 ${D}/usr/local/sbin/dhclient
+>          sudo touch ${D}/usr/local/bin/dhcpd-pools
+>          rm -f ${D}${sysconfdir}/dhclient.conf*
+>          rm -f ${D}${sysconfdir}/dhcpd.conf*
+>          rm -f /etc/dhcpd.conf*
+>          install -m 0644 ${WORKDIR}/dhcpd.conf ${D}/etc/dhcpd.conf
+>          install -m 0644 ${WORKDIR}/dhclient.conf ${D}/etc/dhcp/dhclient.conf
+>
+>          install -d ${D}${base_sbindir}/
+>          if [ "${sbindir}" != "${base_sbindir}" ]; then
+>                  mv ${D}${sbindir}/dhclient ${D}${base_sbindir}/
+>          fi
+>          install -m 0755 ${S}/client/scripts/linux
+> ${D}${base_sbindir}/dhclient-script
+> }
+>
+> PACKAGES += "dhcp-server dhcp-server-config dhcp-client dhcp-relay dhcp-omshell"
+>
+> FILES_${PN} = ""
+> RDEPENDS_${PN}-dev = ""
+> RDEPENDS_${PN}-staticdev = ""
+>
+> FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server"
+> RRECOMMENDS_dhcp-server = "dhcp-server-config"
+>
+> FILES_dhcp-server-config = "${sysconfdir}/default/dhcp-server
+> ${sysconfdir}/dhcp/dhcpd.conf"
+>
+> FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay
+> ${sysconfdir}/default/dhcp-relay"
+>
+> FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script
+> ${sysconfdir}/dhcp/dhclient.conf"
+> RDEPENDS_dhcp-client = "bash"
+>
+> FILES_dhcp-omshell = "${bindir}/omshell"
+>
+> pkg_postinst_dhcp-server() {
+>      mkdir -p $D/${localstatedir}/lib/dhcp
+>      touch $D/${localstatedir}/lib/dhcp/dhcpd.leases
+>      touch $D/${localstatedir}/lib/dhcp/dhcpd6.leases
+> }
+>
+> pkg_postinst_dhcp-client() {
+>      mkdir -p $D/${localstatedir}/lib/dhcp
+> }
+>
+> pkg_postrm_dhcp-server() {
+>      rm -f $D/${localstatedir}/lib/dhcp/dhcpd.leases
+>      rm -f $D/${localstatedir}/lib/dhcp/dhcpd6.leases
+>
+>      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
+>          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
+>      fi
+> }
+>
+> pkg_postrm_dhcp-client() {
+>      rm -f $D/${localstatedir}/lib/dhcp/dhclient.leases
+>      rm -f $D/${localstatedir}/lib/dhcp/dhclient6.leases
+>
+>      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
+>          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
+>      fi
+> }
+>
+> Please help.
+>
+> Regards,
+> Himanshu
+>
+> From: Robert Yang <liezhi.yang@windriver.com>
+> Sent: Wed, 02 Jul 2014 15:22:14
+> To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>,
+> "openembedded-devel@lists.openembedded.org"
+> <openembedded-devel@lists.openembedded.org>
+> Subject: Re: [bitbake-devel] Regarding rp-pppoe package
+>
+>
+> On 07/02/2014 05:49 PM, Himanshu Pandey wrote:
+>  > Hi,
+>  >
+>  > I am getting following error when I tried to add and compile rp-pppoe pacakage:
+>  >
+>
+> Please add the full error log, thanks.
+>
+> Btw, I will go to have dinner now, may reply tomorrow.
+>
+> // Robert
+>
+>  > ERROR: oe_runconf failed
+>  >
+>  > Please help.
+>  >
+>  > Regards,
+>  > Himanshu
+>  >
+>  >
+>  >
+>  >
+>  > From: Robert Yang <liezhi.yang@windriver.com>
+>  > Sent: Wed, 02 Jul 2014 13:16:17
+>  > To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+>  > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+>  > Subject: Re: [bitbake-devel] Regarding Net-Snmp package
+>  >
+>  > I think that this email should go into oe-devel (see the cc) since
+>  > the net-snmp is from the meta-networking layer, please see:
+>  >
+>  > meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+>  >
+>  > PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static
+> ${PN}-libs \
+>  >              ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd
+>  > ${PN}-server-snmptrapd"
+>  >
+>  > There is no net-snmp in the PACKAGES, I think that you need use
+>  > net-snmp-client or net-snmp-server.
+>  >
+>  > // Robert
+>  >
+>  >
+>  >
+>  >
+>  > On 07/02/2014 03:36 PM, Himanshu Pandey wrote:
+>  >  > Hi,
+>  >  >
+>  >  > I am getting following errors:
+>  >  >
+>  >  > Error: net-snmp not found in the base feeds (genericx86_64 x86_64 noarch any
+>  > all).
+>  >  >
+>  >  > sed: can't read
+>  >  >
+>  >
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/net-snmp/5.7.2-r1/image/usr/bin/net-snmp-config:
+>  >  > No such file or directory
+>  >  >
+>  >  > Please help.
+>  >  >
+>  >  > Regards,
+>  >  > Himanshu
+>  >  >
+>  >  >
+>  >  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  >  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+>  > email.
+>  >  >    *Know More >*
+>  >  >
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >  >
+>  >  >
+>  >  >
+>  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+> email.
+>  >    *Know More >*
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >
+>
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+> Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company email.
+> 	*Know More >*
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>
 
