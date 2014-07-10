@@ -1,32 +1,41 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B6C627040C
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id A1AFF65CB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 08:38:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6A8cpWA014269
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 10 Jul 2014 01:38:51 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 10 Jul 2014 01:38:50 -0700
-Message-ID: <53BE5119.1050109@windriver.com>
-Date: Thu, 10 Jul 2014 16:38:49 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
-To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
-References: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
-	rfs209, 241,
-	539.f4-235-92.old.replied.1404980271.29674@webmail.rediffmail.com>
-In-Reply-To: <1404294734.S.4360.22202.H.TlJvYmVydCBZYW5nAFJlOiBbYml0YmFrZS1kZXZlbF0gUmVnYXJkaW5nIHJwLXBwcG9lIHBhY2thZ2U_.RU.rfs209,
-	rfs209, 241,
-	539.f4-235-92.old.replied.1404980271.29674@webmail.rediffmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
+	Thu, 10 Jul 2014 08:52:53 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id A0D113300A3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jul 2014 10:52:53 +0200 (CEST)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0195.001; Thu, 10 Jul 2014 10:52:52 +0200
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Regarding dhcp package
+Thread-Topic: [oe] Building Java 7
+Thread-Index: AQHPkhQeLjZyUdCn6Uq67T0LrV6O+5uFCFuA///nGgCAACU5gIAJcK6QgAXa8UCABLNnwA==
+Date: Thu, 10 Jul 2014 08:52:52 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
+References: <1403794582-16605-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C430@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C63E@SEXCHANGE0100.lpg.priv>
+	<20140627141915.GA23711@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
+	<20140627151503.GB23711@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.34]
+MIME-Version: 1.0
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejfedrvdegucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
+Subject: Re: Building Java 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,239 +49,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 08:38:50 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Jul 2014 08:53:01 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+I'm trying to identify the problem ...
+
+Building one by one, I've got some problems: (more than only this)
+ERROR: commons-cli: Recipe file does not have license file information (LIC=
+_FILES_CHKSUM)
+ERROR: Licensing Error: LIC_FILES_CHKSUM does not match, please fix
+ERROR: Function failed: do_qa_configure
+ERROR: Logfile of failure stored in: /home/me/poky/build/tmp/work/armv5te-p=
+oky-linux-gnueabi/commons-cli/1.1-r0.1/temp/log.do_configure.10894
+ERROR: Task 7 (/home/me/poky/meta-java/recipes-core/jakarta-commons/commons=
+-cli_1.1.bb, do_configure) failed with exit code '1'
+
+Is it the root reason ?
+
+Thanks
+Daniel.
 
 
+-----Message d'origine-----
 
-On 07/10/2014 04:17 PM, Himanshu Pandey wrote:
-> Hi Robert,
+>Hm,
 >
-> I am getting an error while compiling my dhcp package. Please find the log as
-> attachment.
+>maybee a race condition when making parallel builds. Can you run it with a=
+ couple of times with bitbake -k whatever?
 >
-> My dhcp bb file is as follows:
+>Bye Henning
+>--=20
 >
-> SECTION = "base"
-> SUMMARY = "Internet Software Consortium DHCP package"
-> DESCRIPTION = "DHCP (Dynamic Host Configuration Protocol) is a protocol \
-> which allows individual devices on an IP network to get their own \
-> network configuration information from a server.  DHCP helps make it \
-> easier to administer devices."
->
-> HOMEPAGE = "http://www.isc.org/"
->
-> LICENSE = "CLOSED"
->
-> DEPENDS = "openssl bind"
->
-> SRC_URI = "svn://192.43.23.436/home/repo/dhcp-4.2.4-P2;module=branch;user=;pswd="
-> SRCREV = "${AUTOREV}"
-> S= "${WORKDIR}/trunk"
-> #inherit autotools
-> do_compile() {
->          #cp -f ${WORKDIR}/trunk/include/site.h ${S}/includes
->          cd ../trunk
->          ./configure --prefix=${prefix} --host=${HOST_SYS}
->          make
-> }
->
+>Error the second time :
+>| ERROR: Function failed: do_compile (log file is located at /home/lpg/pok=
+y/build/tmp/work/x86_64-linux/log4j1.2-native/1.2.17-r2/temp/log.do_compile=
+.28195)
+>ERROR: Task 2038 (virtual:native:/home/me/poky/meta-java/recipes-core/jaka=
+rta-libs/log4j1.2_1.2.17.bb, do_compile) failed with exit code '1'
 
-I think that these are wrong, you should not disable the "inherit autotools",
-and should not use "./configure" or "make" directly, try to enable
-the "inherit autotools", and remove the do_compile section to see what
-would happen, maybe you need:
 
-inherit autotools
-S = "${WORKDIR}/trunk"
+Hello,
 
-// Robert
+Up ...
+Still have the problem :(
+I don't find any web information about the it :(
 
->
-> do_install_append () {
->          install -d ${D}${sysconfdir}/init.d
->          install -d ${D}${sysconfdir}/default
->          install -d ${D}${sysconfdir}/dhcp
->          install -d /etc/dhcp
->          install -d /sbin
->          install -d /var/db
->          install -d /var/lib
->          install -d /usr/local/sbin/
-> install -m 0755 ${D}/sbin/dhcrelay
->          install -m 0755 ${D}/sbin/dhcpd
->          install -m 0755 ${D}/sbin/dhclient-script
->          install -m 0755 ${D}/var/db/dhcpd.leases
->          install -m 0755 ${D}/var/lib/dhcpd
->          install -m 0755 ${D}/usr/local/sbin/dhclient
->          sudo touch ${D}/usr/local/bin/dhcpd-pools
->          rm -f ${D}${sysconfdir}/dhclient.conf*
->          rm -f ${D}${sysconfdir}/dhcpd.conf*
->          rm -f /etc/dhcpd.conf*
->          install -m 0644 ${WORKDIR}/dhcpd.conf ${D}/etc/dhcpd.conf
->          install -m 0644 ${WORKDIR}/dhclient.conf ${D}/etc/dhcp/dhclient.conf
->
->          install -d ${D}${base_sbindir}/
->          if [ "${sbindir}" != "${base_sbindir}" ]; then
->                  mv ${D}${sbindir}/dhclient ${D}${base_sbindir}/
->          fi
->          install -m 0755 ${S}/client/scripts/linux
-> ${D}${base_sbindir}/dhclient-script
-> }
->
-> PACKAGES += "dhcp-server dhcp-server-config dhcp-client dhcp-relay dhcp-omshell"
->
-> FILES_${PN} = ""
-> RDEPENDS_${PN}-dev = ""
-> RDEPENDS_${PN}-staticdev = ""
->
-> FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server"
-> RRECOMMENDS_dhcp-server = "dhcp-server-config"
->
-> FILES_dhcp-server-config = "${sysconfdir}/default/dhcp-server
-> ${sysconfdir}/dhcp/dhcpd.conf"
->
-> FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay
-> ${sysconfdir}/default/dhcp-relay"
->
-> FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script
-> ${sysconfdir}/dhcp/dhclient.conf"
-> RDEPENDS_dhcp-client = "bash"
->
-> FILES_dhcp-omshell = "${bindir}/omshell"
->
-> pkg_postinst_dhcp-server() {
->      mkdir -p $D/${localstatedir}/lib/dhcp
->      touch $D/${localstatedir}/lib/dhcp/dhcpd.leases
->      touch $D/${localstatedir}/lib/dhcp/dhcpd6.leases
-> }
->
-> pkg_postinst_dhcp-client() {
->      mkdir -p $D/${localstatedir}/lib/dhcp
-> }
->
-> pkg_postrm_dhcp-server() {
->      rm -f $D/${localstatedir}/lib/dhcp/dhcpd.leases
->      rm -f $D/${localstatedir}/lib/dhcp/dhcpd6.leases
->
->      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
->          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
->      fi
-> }
->
-> pkg_postrm_dhcp-client() {
->      rm -f $D/${localstatedir}/lib/dhcp/dhclient.leases
->      rm -f $D/${localstatedir}/lib/dhcp/dhclient6.leases
->
->      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
->          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
->      fi
-> }
->
-> Please help.
->
-> Regards,
-> Himanshu
->
-> From: Robert Yang <liezhi.yang@windriver.com>
-> Sent: Wed, 02 Jul 2014 15:22:14
-> To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>,
-> "openembedded-devel@lists.openembedded.org"
-> <openembedded-devel@lists.openembedded.org>
-> Subject: Re: [bitbake-devel] Regarding rp-pppoe package
->
->
-> On 07/02/2014 05:49 PM, Himanshu Pandey wrote:
->  > Hi,
->  >
->  > I am getting following error when I tried to add and compile rp-pppoe pacakage:
->  >
->
-> Please add the full error log, thanks.
->
-> Btw, I will go to have dinner now, may reply tomorrow.
->
-> // Robert
->
->  > ERROR: oe_runconf failed
->  >
->  > Please help.
->  >
->  > Regards,
->  > Himanshu
->  >
->  >
->  >
->  >
->  > From: Robert Yang <liezhi.yang@windriver.com>
->  > Sent: Wed, 02 Jul 2014 13:16:17
->  > To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
->  > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
->  > Subject: Re: [bitbake-devel] Regarding Net-Snmp package
->  >
->  > I think that this email should go into oe-devel (see the cc) since
->  > the net-snmp is from the meta-networking layer, please see:
->  >
->  > meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
->  >
->  > PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static
-> ${PN}-libs \
->  >              ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd
->  > ${PN}-server-snmptrapd"
->  >
->  > There is no net-snmp in the PACKAGES, I think that you need use
->  > net-snmp-client or net-snmp-server.
->  >
->  > // Robert
->  >
->  >
->  >
->  >
->  > On 07/02/2014 03:36 PM, Himanshu Pandey wrote:
->  >  > Hi,
->  >  >
->  >  > I am getting following errors:
->  >  >
->  >  > Error: net-snmp not found in the base feeds (genericx86_64 x86_64 noarch any
->  > all).
->  >  >
->  >  > sed: can't read
->  >  >
->  >
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/net-snmp/5.7.2-r1/image/usr/bin/net-snmp-config:
->  >  > No such file or directory
->  >  >
->  >  > Please help.
->  >  >
->  >  > Regards,
->  >  > Himanshu
->  >  >
->  >  >
->  >  >
->  >
-> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
->  >  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
->  > email.
->  >  >    *Know More >*
->  >  >
->  >
-> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
->  >  >
->  >  >
->  >  >
->  >
->  >
-> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
->  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
-> email.
->  >    *Know More >*
->  >
-> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
->  >
->
-> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
-> Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company email.
-> 	*Know More >*
-> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
->
+
+Thanks,
+Daniel.
 
