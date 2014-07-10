@@ -1,34 +1,32 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id E7D5465C84
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 53955609B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 09:55:03 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1X5B4C-0006pA-HP for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jul 2014 11:55:04 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 11:55:04 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 11:55:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 10 Jul 2014 11:50:08 +0200
-Message-ID: <lplnkg$9pf$2@ger.gmane.org>
-References: <1404914108-27167-1-git-send-email-jukka.rissanen@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	Thu, 10 Jul 2014 10:54:30 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6AAsTq9002359
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 10 Jul 2014 03:54:30 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
+	Thu, 10 Jul 2014 03:54:28 -0700
+Message-ID: <53BE70E3.2040801@windriver.com>
+Date: Thu, 10 Jul 2014 18:54:27 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1404914108-27167-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-Enigmail-Version: 1.6
-Subject: Re: [meta-oe][PATCH] usb-modeswitch: Do not try to use autotools
+MIME-Version: 1.0
+To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+References: <1404981539.S.9382.6688.H.TlJvYmVydCBZYW5nAFJlOiBSZWdhcmRpbmcgZGhjcCBwYWNrYWdl.RU.rfs209,
+	rfs209, 44,
+	425.f4-235-142.old.1404985811.15071@webmail.rediffmail.com>
+In-Reply-To: <1404981539.S.9382.6688.H.TlJvYmVydCBZYW5nAFJlOiBSZWdhcmRpbmcgZGhjcCBwYWNrYWdl.RU.rfs209,
+	rfs209, 44,
+	425.f4-235-142.old.1404985811.15071@webmail.rediffmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Regarding dhcp package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +40,290 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 09:55:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 10 Jul 2014 10:54:31 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Jukka Rissanen schreef op 09-07-14 15:55:
-> There is only one Makefile in the project so no use trying to use 
-> autotools.
-> 
-> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com> --- 
-> meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb | 6
-> ++++-- 1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git
-> a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-> b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb index
-> 92d1ac4..761617c 100644 ---
-> a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb +++
-> b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb @@ -2,8
-> +2,6 @@ SUMMARY = "A mode switching tool for controlling 'flip flop'
-> (multiple device) U LICENSE = "GPLv2" LIC_FILES_CHKSUM =
-> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-> 
-> -inherit autotools - DEPENDS = "libusb1"
-> 
-> SRC_URI =
-> "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${PV}.tar.bz2" 
-> @@ -15,3 +13,7 @@ EXTRA_OEMAKE = "TCL=${bindir}/tclsh" FILES_${PN} =
-> "${bindir} ${sysconfdir} ${base_libdir}/udev/usb_modeswitch ${sbindir}
-> ${localstatedir}/lib/usb_modeswitch" RDEPENDS_${PN} = "tcl" 
-> RRECOMMENDS_${PN} = "usb-modeswitch-data" + +do_install_append() { +
-> oe_runmake DESTDIR=${D} install +}
-> 
+The error is:
 
-Why 'append'?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+configure: error: source directory already configured; run "make distclean" 
+there first
 
-iD8DBQFTvmHQMkyGM64RGpERAjNhAJsGrPsjduh+tyXOpfdgSGDeyyMIAQCfddVb
-iqFcOGhKW0utODF6oqEi0PU=
-=afXu
------END PGP SIGNATURE-----
+Try a clean build ?
 
+For example:
+
+bitbake dhcp -ccleansstate && bitbake dhcp
+
+If you get the same error again, you may need inherit autotools-brokensep
+rather than autotools as a quick workaround.
+
+// Robert
+
+On 07/10/2014 05:50 PM, Himanshu Pandey wrote:
+> Hi,
+>
+> As advised by you I have done that but again I am getting an error.
+>
+> Please find the log as attachment.
+>
+> Regards,
+> Himanshu
+>
+> From: Robert Yang <liezhi.yang@windriver.com>
+> Sent: Thu, 10 Jul 2014 14:08:59
+> To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+> Cc: "openembedded-devel@lists.openembedded.org"
+> <openembedded-devel@lists.openembedded.org>
+> Subject: Re: Regarding dhcp package
+>
+>
+> On 07/10/2014 04:17 PM, Himanshu Pandey wrote:
+>  > Hi Robert,
+>  >
+>  > I am getting an error while compiling my dhcp package. Please find the log as
+>  > attachment.
+>  >
+>  > My dhcp bb file is as follows:
+>  >
+>  > SECTION = "base"
+>  > SUMMARY = "Internet Software Consortium DHCP package"
+>  > DESCRIPTION = "DHCP (Dynamic Host Configuration Protocol) is a protocol \
+>  > which allows individual devices on an IP network to get their own \
+>  > network configuration information from a server.  DHCP helps make it \
+>  > easier to administer devices."
+>  >
+>  > HOMEPAGE = "http://www.isc.org/"
+>  >
+>  > LICENSE = "CLOSED"
+>  >
+>  > DEPENDS = "openssl bind"
+>  >
+>  > SRC_URI =
+> "svn://192.43.23.436/home/repo/dhcp-4.2.4-P2;module=branch;user=;pswd="
+> <http://192.43.23.436/home/repo/dhcp-4.2.4-P2;module=branch;user=;pswd=">
+>  > SRCREV = "${AUTOREV}"
+>  > S= "${WORKDIR}/trunk"
+>  > #inherit autotools
+>  > do_compile() {
+>  >          #cp -f ${WORKDIR}/trunk/include/site.h ${S}/includes
+>  >          cd ../trunk
+>  >          ./configure --prefix=${prefix} --host=${HOST_SYS}
+>  >          make
+>  > }
+>  >
+>
+> I think that these are wrong, you should not disable the "inherit autotools",
+> and should not use "./configure" or "make" directly, try to enable
+> the "inherit autotools", and remove the do_compile section to see what
+> would happen, maybe you need:
+>
+> inherit autotools
+> S = "${WORKDIR}/trunk"
+>
+> // Robert
+>
+>  >
+>  > do_install_append () {
+>  >          install -d ${D}${sysconfdir}/init.d
+>  >          install -d ${D}${sysconfdir}/default
+>  >          install -d ${D}${sysconfdir}/dhcp
+>  >          install -d /etc/dhcp
+>  >          install -d /sbin
+>  >          install -d /var/db
+>  >          install -d /var/lib
+>  >          install -d /usr/local/sbin/
+>  > install -m 0755 ${D}/sbin/dhcrelay
+>  >          install -m 0755 ${D}/sbin/dhcpd
+>  >          install -m 0755 ${D}/sbin/dhclient-script
+>  >          install -m 0755 ${D}/var/db/dhcpd.leases
+>  >          install -m 0755 ${D}/var/lib/dhcpd
+>  >          install -m 0755 ${D}/usr/local/sbin/dhclient
+>  >          sudo touch ${D}/usr/local/bin/dhcpd-pools
+>  >          rm -f ${D}${sysconfdir}/dhclient.conf*
+>  >          rm -f ${D}${sysconfdir}/dhcpd.conf*
+>  >          rm -f /etc/dhcpd.conf*
+>  >          install -m 0644 ${WORKDIR}/dhcpd.conf ${D}/etc/dhcpd.conf
+>  >          install -m 0644 ${WORKDIR}/dhclient.conf ${D}/etc/dhcp/dhclient.conf
+>  >
+>  >          install -d ${D}${base_sbindir}/
+>  >          if [ "${sbindir}" != "${base_sbindir}" ]; then
+>  >                  mv ${D}${sbindir}/dhclient ${D}${base_sbindir}/
+>  >          fi
+>  >          install -m 0755 ${S}/client/scripts/linux
+>  > ${D}${base_sbindir}/dhclient-script
+>  > }
+>  >
+>  > PACKAGES += "dhcp-server dhcp-server-config dhcp-client dhcp-relay dhcp-omshell"
+>  >
+>  > FILES_${PN} = ""
+>  > RDEPENDS_${PN}-dev = ""
+>  > RDEPENDS_${PN}-staticdev = ""
+>  >
+>  > FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server"
+>  > RRECOMMENDS_dhcp-server = "dhcp-server-config"
+>  >
+>  > FILES_dhcp-server-config = "${sysconfdir}/default/dhcp-server
+>  > ${sysconfdir}/dhcp/dhcpd.conf"
+>  >
+>  > FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay
+>  > ${sysconfdir}/default/dhcp-relay"
+>  >
+>  > FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script
+>  > ${sysconfdir}/dhcp/dhclient.conf"
+>  > RDEPENDS_dhcp-client = "bash"
+>  >
+>  > FILES_dhcp-omshell = "${bindir}/omshell"
+>  >
+>  > pkg_postinst_dhcp-server() {
+>  >      mkdir -p $D/${localstatedir}/lib/dhcp
+>  >      touch $D/${localstatedir}/lib/dhcp/dhcpd.leases
+>  >      touch $D/${localstatedir}/lib/dhcp/dhcpd6.leases
+>  > }
+>  >
+>  > pkg_postinst_dhcp-client() {
+>  >      mkdir -p $D/${localstatedir}/lib/dhcp
+>  > }
+>  >
+>  > pkg_postrm_dhcp-server() {
+>  >      rm -f $D/${localstatedir}/lib/dhcp/dhcpd.leases
+>  >      rm -f $D/${localstatedir}/lib/dhcp/dhcpd6.leases
+>  >
+>  >      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
+>  >          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
+>  >      fi
+>  > }
+>  >
+>  > pkg_postrm_dhcp-client() {
+>  >      rm -f $D/${localstatedir}/lib/dhcp/dhclient.leases
+>  >      rm -f $D/${localstatedir}/lib/dhcp/dhclient6.leases
+>  >
+>  >      if ! rmdir $D/${localstatedir}/lib/dhcp 2>/dev/null; then
+>  >          echo "Not removing ${localstatedir}/lib/dhcp as it is non-empty."
+>  >      fi
+>  > }
+>  >
+>  > Please help.
+>  >
+>  > Regards,
+>  > Himanshu
+>  >
+>  > From: Robert Yang <liezhi.yang@windriver.com>
+>  > Sent: Wed, 02 Jul 2014 15:22:14
+>  > To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>,
+>  > "openembedded-devel@lists.openembedded.org"
+>  > <openembedded-devel@lists.openembedded.org>
+>  > Subject: Re: [bitbake-devel] Regarding rp-pppoe package
+>  >
+>  >
+>  > On 07/02/2014 05:49 PM, Himanshu Pandey wrote:
+>  >  > Hi,
+>  >  >
+>  >  > I am getting following error when I tried to add and compile rp-pppoe
+> pacakage:
+>  >  >
+>  >
+>  > Please add the full error log, thanks.
+>  >
+>  > Btw, I will go to have dinner now, may reply tomorrow.
+>  >
+>  > // Robert
+>  >
+>  >  > ERROR: oe_runconf failed
+>  >  >
+>  >  > Please help.
+>  >  >
+>  >  > Regards,
+>  >  > Himanshu
+>  >  >
+>  >  >
+>  >  >
+>  >  >
+>  >  > From: Robert Yang <liezhi.yang@windriver.com>
+>  >  > Sent: Wed, 02 Jul 2014 13:16:17
+>  >  > To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
+>  >  > Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+>  >  > Subject: Re: [bitbake-devel] Regarding Net-Snmp package
+>  >  >
+>  >  > I think that this email should go into oe-devel (see the cc) since
+>  >  > the net-snmp is from the meta-networking layer, please see:
+>  >  >
+>  >  > meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.bb
+>  >  >
+>  >  > PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static
+>  > ${PN}-libs \
+>  >  >              ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd
+>  >  > ${PN}-server-snmptrapd"
+>  >  >
+>  >  > There is no net-snmp in the PACKAGES, I think that you need use
+>  >  > net-snmp-client or net-snmp-server.
+>  >  >
+>  >  > // Robert
+>  >  >
+>  >  >
+>  >  >
+>  >  >
+>  >  > On 07/02/2014 03:36 PM, Himanshu Pandey wrote:
+>  >  >  > Hi,
+>  >  >  >
+>  >  >  > I am getting following errors:
+>  >  >  >
+>  >  >  > Error: net-snmp not found in the base feeds (genericx86_64 x86_64
+> noarch any
+>  >  > all).
+>  >  >  >
+>  >  >  > sed: can't read
+>  >  >  >
+>  >  >
+>  >
+> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/net-snmp/5.7.2-r1/image/usr/bin/net-snmp-config:
+>  >  >  > No such file or directory
+>  >  >  >
+>  >  >  > Please help.
+>  >  >  >
+>  >  >  > Regards,
+>  >  >  > Himanshu
+>  >  >  >
+>  >  >  >
+>  >  >  >
+>  >  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  >  >  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+>  >  > email.
+>  >  >  >    *Know More >*
+>  >  >  >
+>  >  >
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >  >  >
+>  >  >  >
+>  >  >  >
+>  >  >
+>  >  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  >  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+>  > email.
+>  >  >    *Know More >*
+>  >  >
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >  >
+>  >
+>  >
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+>  > Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company
+> email.
+>  >    *Know More >*
+>  >
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>  >
+>
+> <http://sigads.rediff.com/RealMedia/ads/click_nx.ads/www.rediffmail.com/signatureline.htm@Middle?>
+> Get your own *FREE* website, *FREE* domain & *FREE* mobile app with Company email.
+> 	*Know More >*
+> <http://track.rediff.com/click?url=___http://businessemail.rediff.com/email-ids-for-companies-with-less-than-50-employees?sc_cid=sign-1-10-13___&cmp=host&lnk=sign-1-10-13&nsrv1=host>
+>
 
