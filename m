@@ -1,20 +1,39 @@
-Return-Path: <jukka.rissanen@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FD58703B9
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id D35CB607FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 14:26:23 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 10 Jul 2014 07:25:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,638,1400050800"; d="scan'208";a="541459664"
-Received: from jrissane-mobl.ger.corp.intel.com ([10.237.67.153])
-	by orsmga001.jf.intel.com with ESMTP; 10 Jul 2014 07:25:40 -0700
-From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Jul 2014 17:25:36 +0300
-Message-Id: <1405002337-16927-1-git-send-email-jukka.rissanen@linux.intel.com>
-X-Mailer: git-send-email 1.8.3.1
-Subject: [meta-oe][PATCH v3 1/2] usb-modeswitch: Do not try to use autotools
+	Thu, 10 Jul 2014 15:09:54 +0000 (UTC)
+Received: by mail-qa0-f53.google.com with SMTP id v10so1976155qac.40
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jul 2014 08:09:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=T9g5jf6ta63XPGTFOWjPNTzrX6K3yyuFPVNnTppLX8c=;
+	b=MnrAbpj0loWZClyFif6OymLU16NDU4kmDe3XIWPheD/g7zxqGXZflIHRSHMvy1C/8g
+	jAMQa/XK/+DLm3FX8hdLN+LS/qVstkswnfEhZp+LkiejW91ubqgVP2GhMtV3IoLsrPJX
+	Wm6L1RZNR3AMug6O3G7KgZkObdaHrL/3O5EwXN3DljZ9q7EDtHDH8itNVEzaLNj+dQOW
+	BLL9QtU4BbSbcZoZI1lvF9vy/aFMXNTLvrfhCu1RpWV1lyS48balWmFBsH0dC5MiyWB9
+	U4k8JTpir0sJxbdKh5+69EJHrOnyb8eXcuz0Oe1o++O8MdPUPnwJ41wS8VJSVCNECU8y
+	T3qA==
+X-Gm-Message-State: ALoCoQn3kIQJcDD473UyvCYSO4O7vsTuEnXsXv3k1/N8P2N+AUFQf33X2EKyexfNTG6lpfEnP3Z9
+MIME-Version: 1.0
+X-Received: by 10.224.115.3 with SMTP id g3mr82451836qaq.9.1405004995385; Thu,
+	10 Jul 2014 08:09:55 -0700 (PDT)
+Received: by 10.96.221.48 with HTTP; Thu, 10 Jul 2014 08:09:55 -0700 (PDT)
+In-Reply-To: <CAOLEWZUbT17s1pxuxK7Tkvvf6Jk2AO2w5dk2iWuAVCfzTkpPsA@mail.gmail.com>
+References: <1403634363-18032-1-git-send-email-trevor.woerner@linaro.org>
+	<CAOLEWZXqQ_tnZEiVi5JxLbWGktAXNnTWexw_+C0WY+GbyW6V0w@mail.gmail.com>
+	<53A9E471.8080500@linaro.org>
+	<CAOLEWZUbT17s1pxuxK7Tkvvf6Jk2AO2w5dk2iWuAVCfzTkpPsA@mail.gmail.com>
+Date: Thu, 10 Jul 2014 11:09:55 -0400
+Message-ID: <CALmOhgngis1Qc8GeLhpjYpb1-m1GNXtseuji+e4pnNiAXr7ByQ@mail.gmail.com>
+From: Trevor Woerner <trevor.woerner@linaro.org>
+To: Stephen Arnold <stephen.arnold42@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][MASTER][PATCH] lxdm: add libpam DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,38 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 14:26:24 -0000
+X-List-Received-Date: Thu, 10 Jul 2014 15:09:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-There is only one Makefile in the project so there is no need to use
-autotools.
+Hi Steve,
 
-Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
----
- meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+On 25 June 2014 00:16, Stephen Arnold <stephen.arnold42@gmail.com> wrote:
+> Yeah, it would certainly make more sense with a packageconfig option for
+> that; currently it doesn't work either with or without the "pam" feature due
+> to the missing plugins.  So if you want hard deps, then the plugins need to
+> be included as rdeps.  Otherwise, adding an appropriate packageconfig option
+> to the flexible depends sounds good.
+>
+> I still need an init script anyway, so...
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-index 92d1ac4..61caa84 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-@@ -2,8 +2,6 @@ SUMMARY = "A mode switching tool for controlling 'flip flop' (multiple device) U
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--inherit autotools
--
- DEPENDS = "libusb1"
- 
- SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${PV}.tar.bz2"
-@@ -15,3 +13,7 @@ EXTRA_OEMAKE = "TCL=${bindir}/tclsh"
- FILES_${PN} = "${bindir} ${sysconfdir} ${base_libdir}/udev/usb_modeswitch ${sbindir} ${localstatedir}/lib/usb_modeswitch"
- RDEPENDS_${PN} = "tcl"
- RRECOMMENDS_${PN} = "usb-modeswitch-data"
-+
-+do_install() {
-+	oe_runmake DESTDIR=${D} install
-+}
--- 
-1.8.3.1
+Just curious to know if you're still working on this? It doesn't look
+to me as though pam is optional with lxdm (?)
 
+Best regards,
+    Trevor
 
