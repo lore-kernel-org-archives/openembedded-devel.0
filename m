@@ -1,39 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B61F7037F
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 85EE470466
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jul 2014 16:19:11 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id n12so794672wgh.9
+	Thu, 10 Jul 2014 03:59:06 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id lj1so10248477pab.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jul 2014 09:19:12 -0700 (PDT)
+	Wed, 09 Jul 2014 20:59:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=T1IhK9LXTKHY6cQyvuWhVxmaDTMQsWFl0hmatkLW+So=;
-	b=tGW6ZMPGRqtocIQgpA4Lh+UNS9KQt9i2RUP8zxfd0v9hte4udiW5SCvje62eev73o/
-	AcihSpFDdJVSvTVpHCV8+FJ5b+rG4AuzsYutKmM7VwZik4TiAOc22cNb/+Xxa+E1lhJI
-	9MfWU4T6paIPUuPL7k8bPE+O90RBQCNILFmTkBDwXRGcU8uPZyJ/LZCNEbhXICpGMBi+
-	CpBkl2AZ/eiqoC910XbClPB+X/zJn4KaYYvnnbelogfAPRN/IiFcGB68hVijfCCI2u3n
-	NjkOPSL/f5NooTlURP4WQHDG5kaFVbug7w3OWmCsw+tMWvk0bLjxvdKNSYFu/oyy3FYt
-	QlHg==
-X-Received: by 10.181.11.232 with SMTP id el8mr12881999wid.57.1404922752642;
-	Wed, 09 Jul 2014 09:19:12 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=from:to:cc:subject:date:message-id;
+	bh=WiV7hQfMFIt/DWiOsnJ0jqvphcjgupe/4mEWsPFPVNY=;
+	b=xUtF1xCLhoSyDPOuYmd1oRlfB2xJ/2ayA8l9fsw6Q9jvkN+PO0jd/nBVo5zx66+PVo
+	CjKeMnOSeHq/437WCy9tJFULQyrIBAARAktH0xJ1SsVgGtwMJXKgve5fhRj+3v3E1Pg6
+	sOnk1JQ2DDsYPy76VRpYzkWw1xPzFt9qEt9ifgmZwBqJO9tmbPkj/DL+0l77hNy2cqzn
+	G72FYLUBMMQ7cP3ZWteWAA8j1Xf0iJhPwH9kRL+fyMyQJwyXHGjH+GRRPMd5PxNVkCBT
+	RWgzBw0KTQ5hGZgs6J0rShosi46plKNN4NYIIf+ijfuEgEecnIfmNMtPLidFLvjqRi0W
+	00Bw==
+X-Received: by 10.70.64.201 with SMTP id q9mr5585037pds.130.1404964747280;
+	Wed, 09 Jul 2014 20:59:07 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by mx.google.com with ESMTPSA id
-	pq9sm104297718wjc.35.2014.07.09.09.19.11
-	for <openembedded-devel@lists.openembedded.org>
+	ga1sm60361633pbb.82.2014.07.09.20.59.05 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Jul 2014 09:19:11 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 9 Jul 2014 18:19:15 +0200
+	Wed, 09 Jul 2014 20:59:06 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140709161915.GA2116@jama>
-References: <1404914122-27275-1-git-send-email-jukka.rissanen@linux.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1404914122-27275-1-git-send-email-jukka.rissanen@linux.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] usb-modeswitch: Upgrade to latest version
+Date: Thu, 10 Jul 2014 14:08:35 +1000
+Message-Id: <1404965315-9777-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.0.1
+Subject: [meta-qt5][PATCH] qtbase: fix 0003-Add-external-hostbindir-option.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,193 +43,411 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jul 2014 16:19:20 -0000
-X-Groupsio-MsgNum: 50803
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="a8Wt8u1KmwUX3Y2C"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Jul 2014 03:59:12 -0000
 
---a8Wt8u1KmwUX3Y2C
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The isEmpty function takes a variable name instead of a value.
+As $$[QT_EXTERNAL_HOST_BINS] is a built-in we need to assign it to a
+variable to check if it is empty.
 
-On Wed, Jul 09, 2014 at 04:55:22PM +0300, Jukka Rissanen wrote:
-> Use the latest version of usb-modeswitch (2.2.0) and
-> usb-modeswitch-data (20140529). The data package depends
-> on new usb-modeswitch version so upgrade both of them at
-> the same time.
->=20
-> Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
-> ---
->  .../usb-modeswitch/usb-modeswitch-data_20130807.bb    | 17 -------------=
-----
->  .../usb-modeswitch/usb-modeswitch-data_20140529.bb    | 17 +++++++++++++=
-++++
->  .../usb-modeswitch/usb-modeswitch_2.0.1.bb            | 19 -------------=
-------
->  .../usb-modeswitch/usb-modeswitch_2.2.0.bb            | 19 +++++++++++++=
-++++++
->  4 files changed, 36 insertions(+), 36 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/usb-modeswitch/usb-modeswitch=
--data_20130807.bb
->  create mode 100644 meta-oe/recipes-support/usb-modeswitch/usb-modeswitch=
--data_20140529.bb
->  delete mode 100644 meta-oe/recipes-support/usb-modeswitch/usb-modeswitch=
-_2.0.1.bb
->  create mode 100644 meta-oe/recipes-support/usb-modeswitch/usb-modeswitch=
-_2.2.0.bb
->=20
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2=
-0130807.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201=
-30807.bb
-> deleted file mode 100644
-> index e33f296..0000000
-> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807=
-=2Ebb
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -SUMMARY =3D "Data files for usbmodeswitch"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> -
-> -inherit allarch
-> -
-> -SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-da=
-ta-${PV}.tar.bz2"
+If QT_EXTERNAL_HOST_BINS is empty (as is the case for generated Qt 5
+toolchains), we need to fallback to QT_HOST_BINS when determining
+the path for tools such as moc otherwise you get the following error
+when building a Qt project using the generated toolchain:
+make[1]: /moc: Command not found
 
-It would be even better if you resend it with -M as README says.
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ .../0003-Add-external-hostbindir-option.patch      | 65 +++++++++++++---------
+ .../0003-Add-external-hostbindir-option.patch      | 65 +++++++++++++---------
+ 2 files changed, 78 insertions(+), 52 deletions(-)
 
-If you're going to do that, then please chagne usb-modeswitch-data-${PV}
-to ${BP} and "usb-modeswitch-${PV}" as well.
+diff --git a/recipes-qt/qt5/qtbase-git/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase-git/0003-Add-external-hostbindir-option.patch
+index 44d17ca..2abea8f 100644
+--- a/recipes-qt/qt5/qtbase-git/0003-Add-external-hostbindir-option.patch
++++ b/recipes-qt/qt5/qtbase-git/0003-Add-external-hostbindir-option.patch
+@@ -1,4 +1,4 @@
+-From b45d963702c139ea4f5b5ce572d046511a878d81 Mon Sep 17 00:00:00 2001
++From b544f5f3462e2981ada045a32038b7f116f8590c Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 6 Apr 2013 13:15:07 +0200
+ Subject: [PATCH 03/12] Add -external-hostbindir option
+@@ -22,25 +22,26 @@ Upstream-Status: Pending
+ 
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ Signed-off-by: Simon Busch <morphis@gravedo.de>
++Signed-off-by: Jonathan Liu <net147@gmail.com>
+ ---
+  configure                                   | 15 +++++++++++++++
+- mkspecs/features/qt_functions.prf           |  2 +-
+- mkspecs/features/qt_tool.prf                |  3 +--
++ mkspecs/features/qt_functions.prf           |  6 +++++-
++ mkspecs/features/qt_tool.prf                |  4 ++--
+  qmake/property.cpp                          |  1 +
+- qtbase.pro                                  | 12 +++++++++---
++ qtbase.pro                                  | 14 +++++++++++---
+  src/corelib/Qt5CoreConfigExtras.cmake.in    |  6 +++---
+  src/corelib/global/qlibraryinfo.cpp         |  3 ++-
+  src/corelib/global/qlibraryinfo.h           |  1 +
+  src/dbus/Qt5DBusConfigExtras.cmake.in       |  4 ++--
+  src/widgets/Qt5WidgetsConfigExtras.cmake.in |  2 +-
+  tools/configure/configureapp.cpp            |  8 ++++++++
+- 11 files changed, 44 insertions(+), 13 deletions(-)
++ 11 files changed, 51 insertions(+), 13 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index 4eae0d3..48d5119 100755
++index d5c2b08..dcd066c 100755
+ --- a/configure
+ +++ b/configure
+-@@ -777,6 +777,7 @@ QT_HOST_BINS=
++@@ -759,6 +759,7 @@ QT_HOST_BINS=
+  QT_HOST_LIBS=
+  QT_HOST_DATA=
+  QT_EXT_PREFIX=
+@@ -48,7 +49,7 @@ index 4eae0d3..48d5119 100755
+  
+  #flags for SQL drivers
+  QT_CFLAGS_PSQL=
+-@@ -896,6 +897,7 @@ while [ "$#" -gt 0 ]; do
++@@ -878,6 +879,7 @@ while [ "$#" -gt 0 ]; do
+      -testsdir| \
+      -hostdatadir| \
+      -hostbindir| \
+@@ -56,7 +57,7 @@ index 4eae0d3..48d5119 100755
+      -hostlibdir| \
+      -extprefix| \
+      -sysroot| \
+-@@ -1110,6 +1112,9 @@ while [ "$#" -gt 0 ]; do
++@@ -1092,6 +1094,9 @@ while [ "$#" -gt 0 ]; do
+      extprefix)
+          QT_EXT_PREFIX="$VAL"
+          ;;
+@@ -66,7 +67,7 @@ index 4eae0d3..48d5119 100755
+      pkg-config)
+          if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+              CFG_PKGCONFIG="$VAL"
+-@@ -2248,6 +2253,10 @@ Installation options:
++@@ -2230,6 +2235,10 @@ Installation options:
+      -hostdatadir <dir> . Data used by qmake will be installed to <dir>
+                           (default HOSTPREFIX)
+  
+@@ -77,7 +78,7 @@ index 4eae0d3..48d5119 100755
+  Configure options:
+  
+   The defaults (*) are usually acceptable. A plus (+) denotes a default value
+-@@ -2915,6 +2924,11 @@ fi
++@@ -2897,6 +2906,11 @@ fi
+  # command line and environment validation
+  #-------------------------------------------------------------------------------
+  
+@@ -89,7 +90,7 @@ index 4eae0d3..48d5119 100755
+  # update QT_CONFIG to show our current predefined configuration
+  CFG_QCONFIG_PATH=$relpath/src/corelib/global/qconfig-${CFG_QCONFIG}.h
+  case "$CFG_QCONFIG" in
+-@@ -3595,6 +3609,7 @@ static const char qt_configure_prefix_path_strs[][256 + 12] = {
++@@ -3577,6 +3591,7 @@ static const char qt_configure_prefix_path_strs[][256 + 12] = {
+      "qt_hbinpath=$QT_HOST_BINS",
+      "qt_hlibpath=$QT_HOST_LIBS",
+      "qt_hdatpath=$QT_HOST_DATA",
+@@ -98,29 +99,37 @@ index 4eae0d3..48d5119 100755
+      "qt_hostspec=$shortspec",
+  #endif
+ diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
+-index d41fe3b..050a4a7 100644
++index 9a4d80e..dfc1cff 100644
+ --- a/mkspecs/features/qt_functions.prf
+ +++ b/mkspecs/features/qt_functions.prf
+-@@ -193,7 +193,7 @@ defineTest(qtAddRpathLink) {
++@@ -193,7 +193,11 @@ defineTest(qtAddRpathLink) {
+  defineTest(qtPrepareTool) {
+      cmd = $$eval(QT_TOOL.$${2}.binary)
+      isEmpty(cmd) {
+ -        cmd = $$[QT_HOST_BINS]/$$2
+-+        cmd = $$[QT_EXTERNAL_HOST_BINS]/$$2
+++        QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+++        isEmpty(QT_EXTERNAL_HOST_BINS): \
+++            cmd = $$[QT_HOST_BINS]/$$2
+++        else: \
+++            cmd = $$[QT_EXTERNAL_HOST_BINS]/$$2
+          exists($${cmd}.pl) {
+              cmd = perl -w $$system_path($${cmd}.pl)
+          } else: contains(QMAKE_HOST.os, Windows) {
+ diff --git a/mkspecs/features/qt_tool.prf b/mkspecs/features/qt_tool.prf
+-index 1d3e88c..bd44754 100644
++index 1d3e88c..9b26adf 100644
+ --- a/mkspecs/features/qt_tool.prf
+ +++ b/mkspecs/features/qt_tool.prf
+-@@ -15,8 +15,7 @@ CONFIG += console
++@@ -12,11 +12,11 @@
++ load(qt_app)
++ 
++ CONFIG += console
+++QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+  
+  # If we are doing a prefix build, create a "module" pri which enables
+  # qtPrepareTool() to work with the non-installed build.
+ -# Non-bootstrapped tools always need this because of the environment setup.
+ -!build_pass:if(!host_build|!force_bootstrap|force_independent) {
+-+!build_pass:if(!host_build|!force_bootstrap|force_independent):!exists($$[QT_EXTERNAL_HOST_BINS]) {
+++!build_pass:if(!host_build|!force_bootstrap|force_independent):isEmpty(QT_EXTERNAL_HOST_BINS) {
+      isEmpty(MODULE):MODULE = $$TARGET
+  
+      !host_build|!force_bootstrap: MODULE_DEPENDS = $$replace(QT, -private$, _private)
+@@ -137,15 +146,19 @@ index e50485c..71291ad 100644
+      { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
+  };
+ diff --git a/qtbase.pro b/qtbase.pro
+-index d6861cf..92e6a83 100644
++index d6861cf..7fb58a3 100644
+ --- a/qtbase.pro
+ +++ b/qtbase.pro
+-@@ -71,16 +71,22 @@ CONFIG -= qt
++@@ -69,18 +69,26 @@ CONFIG -= qt
++ 
++ ### installations ####
+  
+++QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+++
+  #qmake
+  qmake.path = $$[QT_HOST_BINS]
+ +qmake.files = $$OUT_PWD/bin/qmake
+-+!isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
+++!isEmpty(QT_EXTERNAL_HOST_BINS) {
+ +   qmake.files = $$[QT_EXTERNAL_HOST_BINS]/bin/qmake
+ +}
+  equals(QMAKE_HOST.os, Windows) {
+@@ -160,7 +173,7 @@ index d6861cf..92e6a83 100644
+  syncqt.path = $$[QT_HOST_BINS]
+  syncqt.files = $$PWD/bin/syncqt.pl
+ +syncqt.files = $$PWD/bin/syncqt.pl
+-+!isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
+++!isEmpty(QT_EXTERNAL_HOST_BINS) {
+ +   syncqt.files = $$[QT_EXTERNAL_HOST_BINS]/bin/syncqt.pl
+ +}
+  INSTALLS += syncqt
+@@ -198,10 +211,10 @@ index 9bda70e..6e3605a 100644
+      _qt5_Core_check_file_exists(${imported_location})
+  
+ diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
+-index 80e0f30..89e13cf 100644
++index 174c1d0..1fe03cb 100644
+ --- a/src/corelib/global/qlibraryinfo.cpp
+ +++ b/src/corelib/global/qlibraryinfo.cpp
+-@@ -336,7 +336,7 @@ QLibraryInfo::isDebugBuild()
++@@ -333,7 +333,7 @@ QLibraryInfo::isDebugBuild()
+   */
+  
+  static const struct {
+@@ -210,7 +223,7 @@ index 80e0f30..89e13cf 100644
+  } qtConfEntries[] = {
+      { "Prefix", "." },
+      { "Documentation", "doc" }, // should be ${Data}/doc
+-@@ -362,6 +362,7 @@ static const struct {
++@@ -359,6 +359,7 @@ static const struct {
+      { "HostBinaries", "bin" },
+      { "HostLibraries", "lib" },
+      { "HostData", "." },
+@@ -292,5 +305,5 @@ index b756509..7e61845 100644
+                    << "    \"qt_hostspec=" << hostSpec << "\"," << endl
+                    << "#endif" << endl
+ -- 
+-2.0.0
++2.0.1
+ 
+diff --git a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+index 66903a3..2abea8f 100644
+--- a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
++++ b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+@@ -1,4 +1,4 @@
+-From 1fd06315781ada843e473ba2c28c594e05808ca2 Mon Sep 17 00:00:00 2001
++From b544f5f3462e2981ada045a32038b7f116f8590c Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 6 Apr 2013 13:15:07 +0200
+ Subject: [PATCH 03/12] Add -external-hostbindir option
+@@ -22,25 +22,26 @@ Upstream-Status: Pending
+ 
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ Signed-off-by: Simon Busch <morphis@gravedo.de>
++Signed-off-by: Jonathan Liu <net147@gmail.com>
+ ---
+  configure                                   | 15 +++++++++++++++
+- mkspecs/features/qt_functions.prf           |  2 +-
+- mkspecs/features/qt_tool.prf                |  3 +--
++ mkspecs/features/qt_functions.prf           |  6 +++++-
++ mkspecs/features/qt_tool.prf                |  4 ++--
+  qmake/property.cpp                          |  1 +
+- qtbase.pro                                  | 12 +++++++++---
++ qtbase.pro                                  | 14 +++++++++++---
+  src/corelib/Qt5CoreConfigExtras.cmake.in    |  6 +++---
+  src/corelib/global/qlibraryinfo.cpp         |  3 ++-
+  src/corelib/global/qlibraryinfo.h           |  1 +
+  src/dbus/Qt5DBusConfigExtras.cmake.in       |  4 ++--
+  src/widgets/Qt5WidgetsConfigExtras.cmake.in |  2 +-
+  tools/configure/configureapp.cpp            |  8 ++++++++
+- 11 files changed, 44 insertions(+), 13 deletions(-)
++ 11 files changed, 51 insertions(+), 13 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index 4eae0d3..48d5119 100755
++index d5c2b08..dcd066c 100755
+ --- a/configure
+ +++ b/configure
+-@@ -777,6 +777,7 @@ QT_HOST_BINS=
++@@ -759,6 +759,7 @@ QT_HOST_BINS=
+  QT_HOST_LIBS=
+  QT_HOST_DATA=
+  QT_EXT_PREFIX=
+@@ -48,7 +49,7 @@ index 4eae0d3..48d5119 100755
+  
+  #flags for SQL drivers
+  QT_CFLAGS_PSQL=
+-@@ -896,6 +897,7 @@ while [ "$#" -gt 0 ]; do
++@@ -878,6 +879,7 @@ while [ "$#" -gt 0 ]; do
+      -testsdir| \
+      -hostdatadir| \
+      -hostbindir| \
+@@ -56,7 +57,7 @@ index 4eae0d3..48d5119 100755
+      -hostlibdir| \
+      -extprefix| \
+      -sysroot| \
+-@@ -1110,6 +1112,9 @@ while [ "$#" -gt 0 ]; do
++@@ -1092,6 +1094,9 @@ while [ "$#" -gt 0 ]; do
+      extprefix)
+          QT_EXT_PREFIX="$VAL"
+          ;;
+@@ -66,7 +67,7 @@ index 4eae0d3..48d5119 100755
+      pkg-config)
+          if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+              CFG_PKGCONFIG="$VAL"
+-@@ -2248,6 +2253,10 @@ Installation options:
++@@ -2230,6 +2235,10 @@ Installation options:
+      -hostdatadir <dir> . Data used by qmake will be installed to <dir>
+                           (default HOSTPREFIX)
+  
+@@ -77,7 +78,7 @@ index 4eae0d3..48d5119 100755
+  Configure options:
+  
+   The defaults (*) are usually acceptable. A plus (+) denotes a default value
+-@@ -2915,6 +2924,11 @@ fi
++@@ -2897,6 +2906,11 @@ fi
+  # command line and environment validation
+  #-------------------------------------------------------------------------------
+  
+@@ -89,7 +90,7 @@ index 4eae0d3..48d5119 100755
+  # update QT_CONFIG to show our current predefined configuration
+  CFG_QCONFIG_PATH=$relpath/src/corelib/global/qconfig-${CFG_QCONFIG}.h
+  case "$CFG_QCONFIG" in
+-@@ -3595,6 +3609,7 @@ static const char qt_configure_prefix_path_strs[][256 + 12] = {
++@@ -3577,6 +3591,7 @@ static const char qt_configure_prefix_path_strs[][256 + 12] = {
+      "qt_hbinpath=$QT_HOST_BINS",
+      "qt_hlibpath=$QT_HOST_LIBS",
+      "qt_hdatpath=$QT_HOST_DATA",
+@@ -98,29 +99,37 @@ index 4eae0d3..48d5119 100755
+      "qt_hostspec=$shortspec",
+  #endif
+ diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
+-index 9a4d80e..e60ce37 100644
++index 9a4d80e..dfc1cff 100644
+ --- a/mkspecs/features/qt_functions.prf
+ +++ b/mkspecs/features/qt_functions.prf
+-@@ -193,7 +193,7 @@ defineTest(qtAddRpathLink) {
++@@ -193,7 +193,11 @@ defineTest(qtAddRpathLink) {
+  defineTest(qtPrepareTool) {
+      cmd = $$eval(QT_TOOL.$${2}.binary)
+      isEmpty(cmd) {
+ -        cmd = $$[QT_HOST_BINS]/$$2
+-+        cmd = $$[QT_EXTERNAL_HOST_BINS]/$$2
+++        QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+++        isEmpty(QT_EXTERNAL_HOST_BINS): \
+++            cmd = $$[QT_HOST_BINS]/$$2
+++        else: \
+++            cmd = $$[QT_EXTERNAL_HOST_BINS]/$$2
+          exists($${cmd}.pl) {
+              cmd = perl -w $$system_path($${cmd}.pl)
+          } else: contains(QMAKE_HOST.os, Windows) {
+ diff --git a/mkspecs/features/qt_tool.prf b/mkspecs/features/qt_tool.prf
+-index 1d3e88c..bd44754 100644
++index 1d3e88c..9b26adf 100644
+ --- a/mkspecs/features/qt_tool.prf
+ +++ b/mkspecs/features/qt_tool.prf
+-@@ -15,8 +15,7 @@ CONFIG += console
++@@ -12,11 +12,11 @@
++ load(qt_app)
++ 
++ CONFIG += console
+++QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+  
+  # If we are doing a prefix build, create a "module" pri which enables
+  # qtPrepareTool() to work with the non-installed build.
+ -# Non-bootstrapped tools always need this because of the environment setup.
+ -!build_pass:if(!host_build|!force_bootstrap|force_independent) {
+-+!build_pass:if(!host_build|!force_bootstrap|force_independent):!exists($$[QT_EXTERNAL_HOST_BINS]) {
+++!build_pass:if(!host_build|!force_bootstrap|force_independent):isEmpty(QT_EXTERNAL_HOST_BINS) {
+      isEmpty(MODULE):MODULE = $$TARGET
+  
+      !host_build|!force_bootstrap: MODULE_DEPENDS = $$replace(QT, -private$, _private)
+@@ -137,15 +146,19 @@ index e50485c..71291ad 100644
+      { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
+  };
+ diff --git a/qtbase.pro b/qtbase.pro
+-index d6861cf..92e6a83 100644
++index d6861cf..7fb58a3 100644
+ --- a/qtbase.pro
+ +++ b/qtbase.pro
+-@@ -71,16 +71,22 @@ CONFIG -= qt
++@@ -69,18 +69,26 @@ CONFIG -= qt
++ 
++ ### installations ####
+  
+++QT_EXTERNAL_HOST_BINS = $$[QT_EXTERNAL_HOST_BINS]
+++
+  #qmake
+  qmake.path = $$[QT_HOST_BINS]
+ +qmake.files = $$OUT_PWD/bin/qmake
+-+!isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
+++!isEmpty(QT_EXTERNAL_HOST_BINS) {
+ +   qmake.files = $$[QT_EXTERNAL_HOST_BINS]/bin/qmake
+ +}
+  equals(QMAKE_HOST.os, Windows) {
+@@ -160,7 +173,7 @@ index d6861cf..92e6a83 100644
+  syncqt.path = $$[QT_HOST_BINS]
+  syncqt.files = $$PWD/bin/syncqt.pl
+ +syncqt.files = $$PWD/bin/syncqt.pl
+-+!isEmpty($$[QT_EXTERNAL_HOST_BINS]) {
+++!isEmpty(QT_EXTERNAL_HOST_BINS) {
+ +   syncqt.files = $$[QT_EXTERNAL_HOST_BINS]/bin/syncqt.pl
+ +}
+  INSTALLS += syncqt
+@@ -198,10 +211,10 @@ index 9bda70e..6e3605a 100644
+      _qt5_Core_check_file_exists(${imported_location})
+  
+ diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
+-index 69e614f..a95ca35 100644
++index 174c1d0..1fe03cb 100644
+ --- a/src/corelib/global/qlibraryinfo.cpp
+ +++ b/src/corelib/global/qlibraryinfo.cpp
+-@@ -336,7 +336,7 @@ QLibraryInfo::isDebugBuild()
++@@ -333,7 +333,7 @@ QLibraryInfo::isDebugBuild()
+   */
+  
+  static const struct {
+@@ -210,7 +223,7 @@ index 69e614f..a95ca35 100644
+  } qtConfEntries[] = {
+      { "Prefix", "." },
+      { "Documentation", "doc" }, // should be ${Data}/doc
+-@@ -362,6 +362,7 @@ static const struct {
++@@ -359,6 +359,7 @@ static const struct {
+      { "HostBinaries", "bin" },
+      { "HostLibraries", "lib" },
+      { "HostData", "." },
+@@ -292,5 +305,5 @@ index b756509..7e61845 100644
+                    << "    \"qt_hostspec=" << hostSpec << "\"," << endl
+                    << "#endif" << endl
+ -- 
+-2.0.0
++2.0.1
+ 
+-- 
+2.0.1
 
-Thanks!
 
-> -SRC_URI[md5sum] =3D "91feff51deba6e48e78506b8f4db2274"
-> -SRC_URI[sha256sum] =3D "a3114e2c1f38eed3ad0067df30e53a96313908a9539a8ea5=
-d94a4d35651699eb"
-> -
-> -do_install() {
-> -    oe_runmake install DESTDIR=3D${D}
-> -}
-> -
-> -RDEPENDS_${PN} =3D "usb-modeswitch"
-> -FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
-> -                ${datadir}/usb_modeswitch"
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2=
-0140529.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201=
-40529.bb
-> new file mode 100644
-> index 0000000..258f740
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529=
-=2Ebb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Data files for usbmodeswitch"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +
-> +inherit allarch
-> +
-> +SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-da=
-ta-${PV}.tar.bz2"
-> +SRC_URI[md5sum] =3D "dff94177781298aaf0b3c2a3c3dea6b2"
-> +SRC_URI[sha256sum] =3D "53889157937109e04dafe897c098ec94f3f44f9c0c83fc6e=
-c8417aa9a587e536"
-> +
-> +do_install() {
-> +    oe_runmake install DESTDIR=3D${D}
-> +}
-> +
-> +RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.2.0)"
-> +FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
-> +                ${datadir}/usb_modeswitch"
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.=
-bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-> deleted file mode 100644
-> index 761617c..0000000
-> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -SUMMARY =3D "A mode switching tool for controlling 'flip flop' (multiple=
- device) USB gear"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> -
-> -DEPENDS =3D "libusb1"
-> -
-> -SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${=
-PV}.tar.bz2"
-> -SRC_URI[md5sum] =3D "e48d4419d0574d342bb183f7465556d0"
-> -SRC_URI[sha256sum] =3D "4706c9cfe825263e189f55730ea3d1d8634aeb15645a1098=
-532e946e770f7f95"
-> -
-> -EXTRA_OEMAKE =3D "TCL=3D${bindir}/tclsh"
-> -
-> -FILES_${PN} =3D "${bindir} ${sysconfdir} ${base_libdir}/udev/usb_modeswi=
-tch ${sbindir} ${localstatedir}/lib/usb_modeswitch"
-> -RDEPENDS_${PN} =3D "tcl"
-> -RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
-> -
-> -do_install_append() {
-> -	oe_runmake DESTDIR=3D${D} install
-> -}
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.=
-bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-> new file mode 100644
-> index 0000000..cdab38c
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY =3D "A mode switching tool for controlling 'flip flop' (multiple=
- device) USB gear"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +
-> +DEPENDS =3D "libusb1"
-> +
-> +SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${=
-PV}.tar.bz2"
-> +SRC_URI[md5sum] =3D "f323fe700edd6ea404c40934ddf32b22"
-> +SRC_URI[sha256sum] =3D "2752103de171ed5f6c8d6a6e3e73e16c9ee3e8e394dd39c5=
-991f7680eb908a3a"
-> +
-> +EXTRA_OEMAKE =3D "TCL=3D${bindir}/tclsh"
-> +
-> +FILES_${PN} =3D "${bindir} ${sysconfdir} ${base_libdir}/udev/usb_modeswi=
-tch ${sbindir} ${localstatedir}/lib/usb_modeswitch"
-> +RDEPENDS_${PN} =3D "tcl"
-> +RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
-> +
-> +do_install_append() {
-> +	oe_runmake DESTDIR=3D${D} install
-> +}
-> --=20
-> 1.8.3.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---a8Wt8u1KmwUX3Y2C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlO9a4MACgkQN1Ujt2V2gBzG4wCgoGCGKiSCh/iGGLFPzoq5/fAw
-KD4An2RCu+3Klv5JmEp0JAqZqmMHOvVN
-=EG2s
------END PGP SIGNATURE-----
-
---a8Wt8u1KmwUX3Y2C--
