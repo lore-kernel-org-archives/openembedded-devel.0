@@ -1,43 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 63B9E702AB
+Return-Path: <jukka.rissanen@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 228056FB75
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 13:57:43 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id q59so8938286wes.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jul 2014 06:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RzR35YzXF+pRsFn/87JcM9eu18mbtc1bvWQCTAfnKwQ=;
-	b=oV7AvZyLtf8FaBaM9GTLt11/XDQveOKvzpbA4yCngZ8Og46XoMjlXzxBF3taF3OhMT
-	+9EWp+F1ch6BI3WSSWCIH2cYAL08aCSwuYOiWXpyxGcDei9rIo7sGdVsVrbKTPuM6RSq
-	zUzOEM9JCmwko5ohWHi4/qCVS4yYrTgUPuBHt7S/q3Mlw8EOZDFQotXHGjPIpWQoj0nK
-	OcPDXcTxTmy1xMHHt5q2rbcGWEv7+2bN4DVfm28mV02/7XBSygYuHUqLLMlPa3phaSsY
-	6/X/6Mq/WShLBWHZfm5sJjpkA3VClIAav6HhjbK+3Qt6HXRSttrJSRbtm0ZRKbCllKpC
-	w9lg==
-X-Received: by 10.180.82.228 with SMTP id l4mr19140973wiy.78.1405000664348;
-	Thu, 10 Jul 2014 06:57:44 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fu7sm32171669wib.2.2014.07.10.06.57.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Jul 2014 06:57:43 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 10 Jul 2014 15:57:48 +0200
+	Thu, 10 Jul 2014 14:26:22 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 10 Jul 2014 07:25:43 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,638,1400050800"; d="scan'208";a="541459674"
+Received: from jrissane-mobl.ger.corp.intel.com ([10.237.67.153])
+	by orsmga001.jf.intel.com with ESMTP; 10 Jul 2014 07:25:41 -0700
+From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140710135748.GB2433@jama>
-References: <1404990575-2064-1-git-send-email-jukka.rissanen@linux.intel.com>
-	<1404990575-2064-2-git-send-email-jukka.rissanen@linux.intel.com>
-	<20140710120659.GA2433@jama>
-	<1404998180.9749.53.camel@jrissane-mobl.ger.corp.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1404998180.9749.53.camel@jrissane-mobl.ger.corp.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2 2/2] usb-modeswitch: Upgrade to latest version
+Date: Thu, 10 Jul 2014 17:25:37 +0300
+Message-Id: <1405002337-16927-2-git-send-email-jukka.rissanen@linux.intel.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1405002337-16927-1-git-send-email-jukka.rissanen@linux.intel.com>
+References: <1405002337-16927-1-git-send-email-jukka.rissanen@linux.intel.com>
+Subject: [meta-oe][PATCH v3 2/2] usb-modeswitch: Upgrade to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,56 +30,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jul 2014 13:57:46 -0000
-X-Groupsio-MsgNum: 50816
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jho1yZJdad60DJr+"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Jul 2014 14:26:24 -0000
 
---jho1yZJdad60DJr+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Use the latest version of usb-modeswitch (2.2.0) and
+usb-modeswitch-data (20140529).
 
-On Thu, Jul 10, 2014 at 04:16:20PM +0300, Jukka Rissanen wrote:
-> On to, 2014-07-10 at 14:06 +0200, Martin Jansa wrote:
-> > On Thu, Jul 10, 2014 at 02:09:35PM +0300, Jukka Rissanen wrote:
-> > > Use the latest version of usb-modeswitch (2.2.0) and
-> > > usb-modeswitch-data (20140529). The data package depends
-> > > on new usb-modeswitch version so upgrade both of them at
-> > > the same time.
-> > >=20
-> > > =20
-> > > -RDEPENDS_${PN} =3D "usb-modeswitch"
-> > > +RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.2.0)"
-> >=20
-> > Do we really need the version here?
-> >=20
-> > If yes then add comment explaining why.
->=20
->=20
-> Hmm, I thought the commit message already states that. Do you want that
-> also in the recipe itself?
+Note that usb-modeswitch-data requires usb-modeswitch
+version >= 2.2.0 due to new parameter HuaweiNewMode.
 
-I read it as explanation why you're upgrading 2 recipes in the same
-commit, but it doesn't say why you need explicit version in
-RDEPENDS_${PN} (instead of letting bitbake do it automatically).
+Signed-off-by: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+---
+ ...odeswitch-data_20130807.bb => usb-modeswitch-data_20140529.bb} | 8 ++++----
+ .../{usb-modeswitch_2.0.1.bb => usb-modeswitch_2.2.0.bb}          | 6 +++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch-data_20130807.bb => usb-modeswitch-data_20140529.bb} (52%)
+ rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch_2.0.1.bb => usb-modeswitch_2.2.0.bb} (68%)
 
-Cheers,
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb
+similarity index 52%
+rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
+rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb
+index e33f296..a265411 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20130807.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb
+@@ -4,14 +4,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ inherit allarch
+ 
+-SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-data-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "91feff51deba6e48e78506b8f4db2274"
+-SRC_URI[sha256sum] = "a3114e2c1f38eed3ad0067df30e53a96313908a9539a8ea5d94a4d35651699eb"
++SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
++SRC_URI[md5sum] = "dff94177781298aaf0b3c2a3c3dea6b2"
++SRC_URI[sha256sum] = "53889157937109e04dafe897c098ec94f3f44f9c0c83fc6ec8417aa9a587e536"
+ 
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
+ 
+-RDEPENDS_${PN} = "usb-modeswitch"
++RDEPENDS_${PN} = "usb-modeswitch (>= 2.2.0)"
+ FILES_${PN} += "${base_libdir}/udev/rules.d/ \
+                 ${datadir}/usb_modeswitch"
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
+similarity index 68%
+rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
+rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
+index 61caa84..5e95bb9 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.0.1.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
+@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ DEPENDS = "libusb1"
+ 
+-SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb-modeswitch-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "e48d4419d0574d342bb183f7465556d0"
+-SRC_URI[sha256sum] = "4706c9cfe825263e189f55730ea3d1d8634aeb15645a1098532e946e770f7f95"
++SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
++SRC_URI[md5sum] = "f323fe700edd6ea404c40934ddf32b22"
++SRC_URI[sha256sum] = "2752103de171ed5f6c8d6a6e3e73e16c9ee3e8e394dd39c5991f7680eb908a3a"
+ 
+ EXTRA_OEMAKE = "TCL=${bindir}/tclsh"
+ 
+-- 
+1.8.3.1
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---jho1yZJdad60DJr+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlO+m9wACgkQN1Ujt2V2gBzJ3wCfQY0SfID92SLxTIpV8AFF/tC8
-JckAn0dvrF9UUxZlnCIl8RhlV63E3fYs
-=o6Dj
------END PGP SIGNATURE-----
-
---jho1yZJdad60DJr+--
