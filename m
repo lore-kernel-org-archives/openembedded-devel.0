@@ -1,45 +1,36 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E3A57029A
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D6C870373
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 14:11:56 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 4787D2232CC0
+	Fri, 11 Jul 2014 14:54:37 +0000 (UTC)
+Received: by mail-qg0-f50.google.com with SMTP id j5so999260qga.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 16:11:55 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id ED2D72232CBF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 16:11:53 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 16:11:53 +0200 (CEST)
-Date: Fri, 11 Jul 2014 16:11:50 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
+	Fri, 11 Jul 2014 07:54:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id;
+	bh=5HsHesfjbji0kU59XDxzVw0xBcwJ6BZFzkH+h1ZfmFM=;
+	b=qirZHYPJSrwrIZkqcmQhYexMNTNs+bO86cwm61Cix8WqWgV7lR3+jPdr/hCsyCyz8x
+	CJbBytIcP4YP1N/TGLkEakhpp16l0K6Wr8plqPGuVA7/rBL7YOscoPAf6NmTPgQpEhX6
+	uN7PPB7svM5Z5a2X5UtwOMzfXRdVAM2tdojBiZhnEePFhVsk72T+hiW4lN0r7SEnXiX4
+	wUbDniwksy5RN3SftMj1taVF3NqtzIntvKsrKVLgH+ZaDMVuqI7lNzGuwo6vkbfXYSyc
+	Y1cGbbV213th1/JqzKZfKC2dDjosKpHQ/qhmkya1R7qNXr4yCrtTD/5p3V/dCRUCmaQl
+	iC2Q==
+X-Received: by 10.140.44.33 with SMTP id f30mr87110794qga.89.1405090478140;
+	Fri, 11 Jul 2014 07:54:38 -0700 (PDT)
+Received: from localhost.localdomain
+	(pool-71-171-41-171.ronkva.east.verizon.net. [71.171.41.171])
+	by mx.google.com with ESMTPSA id m1sm4627598qaz.27.2014.07.11.07.54.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 11 Jul 2014 07:54:36 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140711141150.GB6407@mail.itconsulting-heinold.de>
-References: <F48900D76F0D8349918584FEEFEB4BCA0612C430@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C63E@SEXCHANGE0100.lpg.priv>
-	<20140627141915.GA23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
-	<20140627151503.GB23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
-MIME-Version: 1.0
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Building openjdk-7-jre
+Date: Fri, 11 Jul 2014 10:54:32 -0400
+Message-Id: <1405090473-5413-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 1.8.3.1
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +44,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2014 14:12:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Jul 2014 14:54:43 -0000
 
-On Fri, Jul 11, 2014 at 01:51:37PM +0000, MONDON Daniel wrote:
-> Hi,
-> 
-> New compilation test of java.
-> 
-> I've just do:
->    git clone git://git.openembedded.org/openembedded-core openembedded-core
->    cd openembedded-core
->    git clone git://git.openembedded.org/bitbake bitbake
->    git clone git://git.openembedded.org/meta-openembedded
->    git clone https://github.com/woglinde/meta-java.git
->  
-> Following meta-java ReadMe Instructions:
-> conf/local.conf:
->    PREFERRED_PROVIDER_virtual/java-initial = "cacao-initial"
->    PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
->    PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
->    PREFERRED_VERSION_openjdk-7-jre = "25b30-2.3.12"
->    PREFERRED_VERSION_icedtea7-native = "2.1.3"
-> 
-> conf/bblayers.conf:
-> BBLAYERS ?= " \
->    /home/me/java/openembedded-core/meta \
->    /home/me/java/openembedded-core/meta-openembedded/meta-oe \
->    /home/me/java/openembedded-core/meta-java \
->    "
-> 
-> bitbake openjdk-7-jre errors:
-> /home/me/java/openembedded-core/meta/recipes-devtools/rpm/rpm_5.4.14.bb, do_compile
-> /home/me/java/openembedded-core/meta-java/recipes-core/icedtea/icedtea6-native_1.8.11.bb, do_compile
 
-rpm is not my part.
+I was trying to get this recipe into meta-oe before the daisy branch, but 
+it had to wait on some other patches to get into oe-core.
 
-For the native icedtea build libstdc++ dev library is missing as the log says.
+Now that these are in place, it would be very helpful for people using
+GNU Radio from daisy if this recipe was in the meta-oe/daisy.
 
-Please install this package for your distro and I will update the readme not only for redhat.
+Thanks,
 
-Bye Henning
+Philip
 
