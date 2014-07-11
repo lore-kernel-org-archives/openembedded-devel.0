@@ -1,43 +1,40 @@
-Return-Path: <rstreif@linuxfoundation.org>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DB1C65D53
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DB9A60850
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 17:56:10 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id h3so777723igd.1
+	Fri, 11 Jul 2014 18:14:33 +0000 (UTC)
+Received: by mail-pd0-f176.google.com with SMTP id ft15so1783690pdb.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 10:56:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=QAIunuyj8A4AkmjyZRDBUZJXXs1AeP2En7GQF3Ugcqs=;
-	b=E0vCFB4vLtUNQwf1+d9kX99BA/WoGRo90jugwBkfQP2pK8egAtrrKDYsgjypDj7P4l
-	XXQLnY5qCW1akYSwFp2c7Nbk6lF0spiEG+tp22D6aThCu3EBpbdUcVGtUFsddMHBMKEr
-	xHUUeO7gbPFv62nK/EgTdYED4E66D+kTGax9A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=QAIunuyj8A4AkmjyZRDBUZJXXs1AeP2En7GQF3Ugcqs=;
-	b=DxohB9erCme9YrRAsFEnp08oHJqMkuxbai0FuWk9I5REnWrti/uluT1Xpuj+CqBm6Z
-	8FEhtgqYzq52QMQMU7XwKcxUmzfVlwSIy+7huaZmVP/sXl2p/L+TqaCn/5LxV5yOWAd/
-	y3Y/V0kIj32MWiTnq+5L6zIjaSaYyBnXcpVyas9p8KZeLBhlKCfxpzRX+Pg5q5V1hLaw
-	hWyN+9dCCU/Ot9zII1s4Zzkq+BybdDP4Hc6+oO2wnf8z/+wR3bKcMglU1Ej0fJBMw9+L
-	sttTmcuNt9C0VwthCpkLmz/BZ71QU6v3eDl2nlE8plGgZfD4yFt2Rw5/eXnM439woP0y
-	gR/Q==
-X-Gm-Message-State: ALoCoQlotURBdSWOc+WGGiJ4+TQEous/0K6oMj46/zj8wPI6e+uFsUovv9rziscqPvMxT2ZpruW3
+	Fri, 11 Jul 2014 11:14:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=6OFDTnHTyDjYlJRkQL/sCP1VPyEVsgq+yoHjDHbU9/Q=;
+	b=GgkRoki4B/PNVJKB510VeieXSu4Jzn1e/ndEMNOYjzFEx/x+xnMmrPAqd7AQxN8+JM
+	bCK1n9lcD3AOlH4m8LxBDds0dREwQbRB/Jm2v54r3VXiBom1IaUiGlkg/Y+xypGV6U/y
+	ZyRyLYJNhX+OMGvGxrXd/QUH2cii1dsI9hazPpZtgZVeGtDmenH4EiK71o4A6Fix20AM
+	TM/2czYuShFjfoVnn0cRicPTOlkKMs5h7VV9sL3IbDyzHbzkhY5+GF67I5xSVobhxxQP
+	BY/ONdkgsB6hr/w/6UiKm4gG5RIQoyt57o1PebLXgztHZcyfkFX521SYQ3eSmjX8/tgH
+	9Gsg==
+X-Received: by 10.68.211.233 with SMTP id nf9mr442364pbc.29.1405102474290;
+	Fri, 11 Jul 2014 11:14:34 -0700 (PDT)
+Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55]) by mx.google.com with ESMTPSA id
+	tu10sm2951344pbc.43.2014.07.11.11.14.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 11 Jul 2014 11:14:33 -0700 (PDT)
+Message-ID: <53C02986.8020604@gmail.com>
+Date: Fri, 11 Jul 2014 11:14:30 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-X-Received: by 10.43.66.71 with SMTP id xp7mr6668120icb.32.1405101372198; Fri,
-	11 Jul 2014 10:56:12 -0700 (PDT)
-Received: by 10.50.225.73 with HTTP; Fri, 11 Jul 2014 10:56:12 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.11.1407111233360.5222@localhost>
-References: <alpine.LFD.2.11.1407111233360.5222@localhost>
-Date: Fri, 11 Jul 2014 10:56:12 -0700
-Message-ID: <CA+gsK-qzcd3fa=N1pUw3z46mP8DjP0V7sW3k8z79id2o3AtLsw@mail.gmail.com>
-From: Rudolf Streif <rstreif@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: the awkwardness of using core-image.bbclass
+References: <1405087761-4791-1-git-send-email-philip@balister.org>
+In-Reply-To: <1405087761-4791-1-git-send-email-philip@balister.org>
+Subject: Re: [meta-oe][PATCHv2] postgresql : Fix build using pkg-config for libxml-2.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,141 +48,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2014 17:56:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Jul 2014 18:14:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Robert,
+Philip,
 
+Sweet. this fixes it for me.
 
+if needed:
 
->   some observations/questions on core-image.bbclass, and whether it
-> can be used more understandably. this is being written from the
-> perspective of someone who has had the occasional student ask, "why
-> was it done *that* way?"
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
+On 07/11/2014 07:09 AM, Philip Balister wrote:
+> Use package-config instead of binconfig for libxml-2.0.
 >
->   so here's the important part of core-image.bbclass:
+> The pgac_option processing is filtering the output from
+> the xml-config programming. The pkgconfig output is good
+> enough to use without such filtering.
 >
-> CORE_IMAGE_BASE_INSTALL = '\
->     packagegroup-core-boot \
->     packagegroup-base-extended \
->     \
->     ${CORE_IMAGE_EXTRA_INSTALL} \
->     '
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>   ...0001-Use-pkg-config-for-libxml2-detection.patch | 43 ++++++++++++++++++++++
+>   meta-oe/recipes-support/postgresql/postgresql.inc  |  1 +
+>   2 files changed, 44 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
 >
-> CORE_IMAGE_EXTRA_INSTALL ?= ""
+> diff --git a/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch b/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
+> new file mode 100644
+> index 0000000..d08ec6a
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
+> @@ -0,0 +1,43 @@
+> +From d52e330be895bb8c5f0fb3e2884766acbd942a85 Mon Sep 17 00:00:00 2001
+> +From: Philip Balister <philip@balister.org>
+> +Date: Tue, 1 Jul 2014 09:40:44 -0400
+> +Subject: [PATCH] Use pkg-config for libxml2 detection.
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +xml2-config does not work. Use pkgconfig to set CPPFLAGS and LIBS.
+> +
+> +Signed-off-by: Philip Balister <philip@balister.org>
+> +---
+> + configure.in | 15 ++-------------
+> + 1 file changed, 2 insertions(+), 13 deletions(-)
+> +
+> +diff --git a/configure.in b/configure.in
+> +index f8bf466..1f4fabf 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -734,19 +734,8 @@ PGAC_ARG_BOOL(with, libxml, no, [build with XML support],
+> +               [AC_DEFINE([USE_LIBXML], 1, [Define to 1 to build with XML support. (--with-libxml)])])
+> +
+> + if test "$with_libxml" = yes ; then
+> +-  AC_CHECK_PROGS(XML2_CONFIG, xml2-config)
+> +-  if test -n "$XML2_CONFIG"; then
+> +-    for pgac_option in `$XML2_CONFIG --cflags`; do
+> +-      case $pgac_option in
+> +-        -I*|-D*) CPPFLAGS="$CPPFLAGS $pgac_option";;
+> +-      esac
+> +-    done
+> +-    for pgac_option in `$XML2_CONFIG --libs`; do
+> +-      case $pgac_option in
+> +-        -L*) LDFLAGS="$LDFLAGS $pgac_option";;
+> +-      esac
+> +-    done
+> +-  fi
+> ++  CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "libxml-2.0" 2>&1`"
+> ++  LIBS="`pkg-config --short-errors --print-errors --libs "libxml-2.0" 2>&1` $LIBS"
+> + fi
+> +
+> + AC_SUBST(with_libxml)
+> +--
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+> index 4e5ec02..79d1281 100644
+> --- a/meta-oe/recipes-support/postgresql/postgresql.inc
+> +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+> @@ -28,6 +28,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+>              file://postgresql.init \
+>              file://postgresql-bashprofile \
+>              file://postgresql.pam \
+> +           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+>   "
 >
-> IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
+>   LEAD_SONAME = "libpq.so"
 >
-> inherit image
->
->   whose job is obviously to define the final contents in IMAGE_INSTALL
-> to be handed off to image.bbclass. so far, so good. but notice first
-> that while IMAGE_INSTALL and CORE_IMAGE_EXTRA_INSTALL are weakly
-> assigned, CORE_IMAGE_BASE_INSTALL is *not*, which -- if one is
-> perusing that file -- strongly suggests that if you're inheriting
-> from this class file, you really should use that value. but it doesn't
-> work that way.
->
-> Consider CORE_IMAGE_BASE_INSTALL as a default value for IMAGE_INSTALL.
-It's internal to the core-image class only. Hence, it makes sense for it to
-be directly assigned. It is not meant to be used by any other classes or
-recipes. With the default value the most simple recipe you can write to use
-the core-image class is:
-
-myimage.bb:
-   inherit core-image
-
-which will produce an image that boots to the console and include hardware
-support if so defined by machine and distro features.
-
-IMAGE_INSTALL and CORE_IMAGE_EXTRA_INSTALL are meant to be overwritten by
-image recipes and configuration files.
-
-
-
->   first, here's (the relevant parts of) core-image-base.bb:
->
-> IMAGE_FEATURES += "splash"
-> inherit core-image
->
->   that's perfect -- define an additional feature, then pull in
-> core-image to take care of the rest. perfectly understandable.
->
->   core-image-minimal.bb is *not* so clean:
->
-> IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP}
-> ${CORE_IMAGE_EXTRA_INSTALL}"
-> inherit core-image
->
->   i consider this recipe file potentially confusing since, although it
-> inherits core-image, it effectively stomps on the settings in there,
-> and just rams an overriding value into IMAGE_INSTALL. in short, rather
-> than "inheriting" cleanly from core-image and extending or enhancing
-> the recipe, core-image-mimimal simply kicks IMAGE_INSTALL out of the
-> way and sets its own final value.
->
-> While it may add some confusing it actually illustrates that you can use
-the core-image class in two different ways. You can rely on the default
-values for IMAGE_INSTALL and add to it in your recipe:
-
-myimage.bb
-   IMAGE_INSTALL += "mtd-utils"
-   IMAGE_FEATURES += "splash"
-
-I would use IMAGE_FEATURES over IMAGE_INSTALL whenever an image feature
-already provides what I am looking for.
-
-The other way is that you can use core-image and not rely on the default
-values but set IMAGE_INSTALL directly which is what core-image-minimal.bb
-does. Could you write core-image-minimal.bb differently so that it uses the
-default values from the core-image class? Sure.
-
-
-
->   a final issue is, if you define a new core-image variation and
-> simply want to add some extra packages to it, what's the proper way to
-> do that? at first glance, i might have just created a new .bb file and
-> assigned some extra package names to CORE_IMAGE_EXTRA_INSTALL,
-> wouldn't that work? but the ref manual states quite clearly that you
-> are supposed to use that variable *only* in your local.conf file? any
-> reason for that?
->
-
-Yes, CORE_IMAGE_EXTRA_INSTALL fulfills a similar role in conf/local.conf as
-EXTRA_IMAGE_FEATURES: you can safely assign to them in conf/local.conf
-without worrying that you are overwriting preassigned values from an image
-recipe.
-
-
->
->   as i read it, the accepted way is to use:
->
-> IMAGE_INSTALL += "mtd-utils"
->
-> but is there some reason one can't use CORE_IMAGE_EXTRA_INSTALL from
-> within a recipe file? it seems like that would make recipe files
-> easier to read.
->
-
-I have the same recommendation as the manual has. If you want to have clean
-image recipes use in your image recipes:
-
-IMAGE_INSTALL += "...."
-IMAGE_FEATURES += "...."
-
-if you want to rely on the default values, or
-
-IMAGE_INSTALL = "...."
-IMAGE_FEATURES = "...."
-
-if you do not want to be at the mercy of the default values.
-
-And in conf/local.conf use
-
-EXTRA_IMAGE_FEATURES = "...."
-CORE_IMAGE_EXTRA_INSTALL = "...."
-
-to add to it.
-
-:rjs
 
