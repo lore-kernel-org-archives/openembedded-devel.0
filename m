@@ -1,45 +1,32 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 3052360DF7
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 18D6C65D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 15:08:12 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2C1AC2232CC0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 17:08:08 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8A9762232CBF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 17:08:07 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 17:08:07 +0200 (CEST)
-Date: Fri, 11 Jul 2014 17:08:05 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140711150805.GC6407@mail.itconsulting-heinold.de>
-References: <20140627141915.GA23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
-	<20140627151503.GB23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
-	<20140711141150.GB6407@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BF19@SEXCHANGE0100.lpg.priv>
+	Fri, 11 Jul 2014 15:25:08 +0000 (UTC)
+Received: from [69.196.158.250] (port=35057 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X5chA-0005pd-09 for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jul 2014 11:25:08 -0400
+Date: Fri, 11 Jul 2014 11:24:59 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.11.1407111114310.25692@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0614BF19@SEXCHANGE0100.lpg.priv>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Building openjdk-7-jre
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: a bit of pedantry about core images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,23 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2014 15:08:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Jul 2014 15:25:09 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Fri, Jul 11, 2014 at 02:56:05PM +0000, MONDON Daniel wrote:
-> Hi,
-> 
-> I apt-get install libstdc++-4.8-dev.
-> Is it the right version ?
-> 
-> Thanks
-> Daniel.
-> 
 
-Sorry I can not look at your computer, but it should match the g++ you are using.
+  documenting some stuff about core images and a few quick questions.
+first, in core-image.bbclass:
 
-g++ has a nice option which is called --version, which will tell you the version.
+# By default we install packagegroup-core-boot and packagegroup-base packages - this gives us
+# working (console only) rootfs.
 
-Bye Henning
+  actually, not quite true:
+
+CORE_IMAGE_BASE_INSTALL = '\
+    packagegroup-core-boot \
+    packagegroup-base-extended \        <------
+
+so that comment just needs to be fixed, i can take care of that.
+
+  next, i've always cringed at this bit of code:
+
+  CORE_IMAGE_BASE_INSTALL = '\
+    packagegroup-core-boot \
+    packagegroup-base-extended \
+    \
+    ${CORE_IMAGE_EXTRA_INSTALL} \
+    '
+
+  CORE_IMAGE_EXTRA_INSTALL ?= ""
+
+  IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
+
+could that not just be written as:
+
+  CORE_IMAGE_EXTRA_INSTALL ?= ""
+
+  CORE_IMAGE_BASE_INSTALL = '\
+    packagegroup-core-boot \
+    packagegroup-base-extended \
+    '
+
+  IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}" ${CORE_IMAGE_EXTRA_INSTALL}
+
+which strikes me as much clearer. are those two snippets of code
+equivalent?
+
+  i think that's it.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
