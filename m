@@ -1,43 +1,32 @@
-Return-Path: <Daniel.MONDON@lpgsystems.com>
-Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C6D37024A
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id ABE0165F0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 15:59:02 +0000 (UTC)
-Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
-	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 7F3B13300D1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jul 2014 17:59:02 +0200 (CEST)
-Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
-	([::1]) with mapi id 14.03.0195.001; Fri, 11 Jul 2014 17:59:00 +0200
-From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
-To: "openembedded-devel@lists.openembedded.org"
+	Fri, 11 Jul 2014 16:52:04 +0000 (UTC)
+Received: from [69.196.158.250] (port=37172 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X5e3J-0001zk-Ao for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jul 2014 12:52:05 -0400
+Date: Fri, 11 Jul 2014 12:51:54 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Building openjdk-7-jre
-Thread-Index: AQHPkhQeLjZyUdCn6Uq67T0LrV6O+5uFCFuA///nGgCAACU5gIAJcK6QgAXa8UCABLNnwIAB4g8g///oqwCAAC0REP//4qaAAAVybhA=
-Date: Fri, 11 Jul 2014 15:59:00 +0000
-Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0614BF9B@SEXCHANGE0100.lpg.priv>
-References: <20140627141915.GA23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
-	<20140627151503.GB23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
-	<20140711141150.GB6407@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BF19@SEXCHANGE0100.lpg.priv>
-	<20140711150805.GC6407@mail.itconsulting-heinold.de>
-In-Reply-To: <20140711150805.GC6407@mail.itconsulting-heinold.de>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.5.34]
+Message-ID: <alpine.LFD.2.11.1407111233360.5222@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-X-DRWEB-SCAN: ok
-X-VRSPAM-SCORE: 0
-X-VRSPAM-STATE: legit
-X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejfedrvdehucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
-Subject: Re: Building openjdk-7-jre
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: the awkwardness of using core-image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,43 +40,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jul 2014 15:59:03 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 11 Jul 2014 16:52:07 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-I change g++ from 4.6 to 4.8.
+  some observations/questions on core-image.bbclass, and whether it
+can be used more understandably. this is being written from the
+perspective of someone who has had the occasional student ask, "why
+was it done *that* way?"
 
-http://askubuntu.com/questions/372248/downloaded-g-4-8-but-cant-set-it-as-d=
-efault
+  so here's the important part of core-image.bbclass:
 
-both errors are ok now!
+CORE_IMAGE_BASE_INSTALL = '\
+    packagegroup-core-boot \
+    packagegroup-base-extended \
+    \
+    ${CORE_IMAGE_EXTRA_INSTALL} \
+    '
 
-It is currently running openjdk-7-jre compilation :)
+CORE_IMAGE_EXTRA_INSTALL ?= ""
 
-It is necessary under Ubuntu 12.04 ...
+IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
 
-Thanks
-Daniel.
+inherit image
 
-On Fri, Jul 11, 2014 at 02:56:05PM +0000, MONDON Daniel wrote:
-> Hi,
->=20
-> I apt-get install libstdc++-4.8-dev.
-> Is it the right version ?
->=20
-> Thanks
-> Daniel.
->=20
+  whose job is obviously to define the final contents in IMAGE_INSTALL
+to be handed off to image.bbclass. so far, so good. but notice first
+that while IMAGE_INSTALL and CORE_IMAGE_EXTRA_INSTALL are weakly
+assigned, CORE_IMAGE_BASE_INSTALL is *not*, which -- if one is
+perusing that file -- strongly suggests that if you're inheriting
+from this class file, you really should use that value. but it doesn't
+work that way.
 
-Sorry I can not look at your computer, but it should match the g++ you are =
-using.
+  first, here's (the relevant parts of) core-image-base.bb:
 
-g++ has a nice option which is called --version, which will tell you the ve=
-rsion.
+IMAGE_FEATURES += "splash"
+inherit core-image
 
-Bye Henning
---=20
+  that's perfect -- define an additional feature, then pull in
+core-image to take care of the rest. perfectly understandable.
 
+  core-image-minimal.bb is *not* so clean:
+
+IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL}"
+inherit core-image
+
+  i consider this recipe file potentially confusing since, although it
+inherits core-image, it effectively stomps on the settings in there,
+and just rams an overriding value into IMAGE_INSTALL. in short, rather
+than "inheriting" cleanly from core-image and extending or enhancing
+the recipe, core-image-mimimal simply kicks IMAGE_INSTALL out of the
+way and sets its own final value.
+
+  a final issue is, if you define a new core-image variation and
+simply want to add some extra packages to it, what's the proper way to
+do that? at first glance, i might have just created a new .bb file and
+assigned some extra package names to CORE_IMAGE_EXTRA_INSTALL,
+wouldn't that work? but the ref manual states quite clearly that you
+are supposed to use that variable *only* in your local.conf file? any
+reason for that?
+
+  as i read it, the accepted way is to use:
+
+IMAGE_INSTALL += "mtd-utils"
+
+but is there some reason one can't use CORE_IMAGE_EXTRA_INSTALL from
+within a recipe file? it seems like that would make recipe files
+easier to read.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
