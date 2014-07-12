@@ -1,35 +1,33 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
-	[209.85.217.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C5A26FE5C
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 262B36FE5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jul 2014 20:08:24 +0000 (UTC)
-Received: by mail-lb0-f170.google.com with SMTP id 10so1841276lbg.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jul 2014 13:08:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=Cy5TEuMKZFsuykOVEgxPRzZeGdba8HTuxXnEf72fu3w=;
-	b=Jc2/rpe+/Ue/4wGZFxvzeXa/oSVDjkWAtYsWByIZWA0EDGeF6szUStuUFI0jv9DnW0
-	vFJ1gQzmKw79q4EbXK2spH4JJGjbbndMb8hm/0o6Q7COOVp5iB/K+hy4DuF1dZNOBQ+m
-	/KTnSJgdV/+SrWGNEAelaACfe/FoBeoyOsXR/PpinlGBziSKszjZCOQJJLIaSkyDVAHT
-	4ZCV/2h/L0Rov7WbrbJiIu46rbz8oEmvsBU07ZttN362yefrUmsygnVsl6ZY2DVxkFAr
-	860yL+4RG65ItR1x9AEbm+rZsGCtTjgT6AaAlw6z5bB/C0fH1izJa74Cwq+iN2UTEJZO
-	Feaw==
-X-Received: by 10.112.241.74 with SMTP id wg10mr5396036lbc.3.1405195705520;
-	Sat, 12 Jul 2014 13:08:25 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.168.66 with HTTP; Sat, 12 Jul 2014 13:08:05 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.11.1407120720110.19807@localhost>
-References: <alpine.LFD.2.11.1407120720110.19807@localhost>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Sat, 12 Jul 2014 13:08:05 -0700
-X-Google-Sender-Auth: GGpgCzI-ggyGBSF4st8RCVGd9qA
-Message-ID: <CABcZANkY6NJLP=YVJj1YM5LJ89MUtENCV9PMwKa2CKhr_NzmgQ@mail.gmail.com>
+	Sat, 12 Jul 2014 20:25:44 +0000 (UTC)
+Received: from [99.240.204.5] (port=58156 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X63ra-0002qy-8d for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Jul 2014 16:25:42 -0400
+Date: Sat, 12 Jul 2014 16:25:38 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <CABcZANkY6NJLP=YVJj1YM5LJ89MUtENCV9PMwKa2CKhr_NzmgQ@mail.gmail.com>
+Message-ID: <alpine.LFD.2.11.1407121623480.27064@localhost>
+References: <alpine.LFD.2.11.1407120720110.19807@localhost>
+	<CABcZANkY6NJLP=YVJj1YM5LJ89MUtENCV9PMwKa2CKhr_NzmgQ@mail.gmail.com>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Subject: Re: is it "addtask do_X ..." or "addtask X ..." or does it matter?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,27 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jul 2014 20:08:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 12 Jul 2014 20:25:46 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sat, Jul 12, 2014 at 4:22 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-wrote:
+On Sat, 12 Jul 2014, Christopher Larson wrote:
 
->   want to clarify the two different ways to use addtask.  for example:
+> On Sat, Jul 12, 2014 at 4:22 AM, Robert P. J. Day <rpjday@crashcourse.ca>
+> wrote:
 >
-> classes/kernel.bbclass:addtask savedefconfig after do_configure
-> classes/kernel.bbclass:addtask do_strip before do_sizecheck after
-> do_kernel_link_vmlinux
-> classes/kernel.bbclass:addtask sizecheck before do_install after do_strip
+> >   want to clarify the two different ways to use addtask.  for example:
+> >
+> > classes/kernel.bbclass:addtask savedefconfig after do_configure
+> > classes/kernel.bbclass:addtask do_strip before do_sizecheck after
+> > do_kernel_link_vmlinux
+> > classes/kernel.bbclass:addtask sizecheck before do_install after do_strip
+> >
+> > so what is the preferred form? are they equivalent?
+> >
 >
-> so what is the preferred form? are they equivalent?
->
+> addtask do_strip will add a task named 'do_do_strip', afaik.
 
-addtask do_strip will add a task named 'do_do_strip', afaik.
+  well, there is definitely some of that happening in the oe-core
+codebase, feel free to:
+
+  $ grep -r "addtask do_" *
+
+so i'm not sure what to make of that.
+
+rday
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
