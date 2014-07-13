@@ -1,20 +1,20 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id CCA1F7027F
+	by mail.openembedded.org (Postfix) with ESMTP id 4B01A702A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jul 2014 13:09:58 +0000 (UTC)
-Received: from [99.240.204.5] (port=38253 helo=crashcourse.ca)
+	Sun, 13 Jul 2014 14:19:11 +0000 (UTC)
+Received: from [99.240.204.5] (port=39874 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X6JXS-0003IJ-Oo for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jul 2014 09:09:58 -0400
-Date: Sun, 13 Jul 2014 09:09:55 -0400 (EDT)
+	id 1X6KcR-0007sr-W7 for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Jul 2014 10:19:12 -0400
+Date: Sun, 13 Jul 2014 10:19:08 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.11.1407130825500.24436@localhost>
+Message-ID: <alpine.LFD.2.11.1407130915280.31826@localhost>
 User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -26,7 +26,7 @@ X-AntiAbuse: Sender Address Domain - crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: some questions about overriding tasks
+Subject: overriding tasks with EXPORT_FUNCTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,166 +40,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jul 2014 13:10:05 -0000
+X-List-Received-Date: Sun, 13 Jul 2014 14:19:12 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  i think i understand most of this but just want to make sure -- this
-doesn't seem comprehensively documented in any of the OE or yocto
-docs, and i'll use examples from the oe-core codebase, after which
-i'm going to write all this up and wiki it.
+  followup to last post -- all of the methods for "overriding" task
+definitions in the last post can be used without predeclaring that
+you're about to do that; you just go ahead and do it in either a class
+file or a recipe file. on the other hand, EXPORT_FUNCTIONS allows you
+to retain the base definition of a task (or non-task function, as i
+read it), then define a more general enhanced version.
 
-  to begin with, we have a small number of fundamental tasks defined
-in base.bbclass:
+  (side note: i don't see a single mention of "EXPORT_FUNCTIONS" in
+any of the numerous yocto docs -- i think this feature needs some
+explanation *somewhere*. :-)
 
- * do_fetch
- * do_unpack
- * do_configure
- * do_compile
- * do_install
- * do_package
+  first question -- as long as you're using any of the techniques
+described in my last post, there is no need for EXPORT_FUNCTIONS,
+correct? this feature is only necessary if you want to redefine a task
+in terms of the underlying task definition that doesn't fall into one
+of those earlier categories.
 
-first, it's possible to simply override the entire task definition,
-both in subsequent class files and recipe files, correct?  for
-instance, here's something from cross.bbclass:
+  i notice that base.bbclass does use this thusly:
 
-do_install () {
-        oe_runmake 'DESTDIR=${D}' install
-}
+EXPORT_FUNCTIONS do_fetch do_unpack do_configure do_compile do_install do_package
 
-although it seems extremely uncommon to override those tasks from
-another bbclass file. it's far more common to do that from recipe
-files, like this from zlib_1.2.8.bb:
+which now means that inheriting classes have access to the functions
 
-do_configure (){
-        ./configure --prefix=${prefix} --shared --libdir=${libdir}
-}
+ * base_do_fetch
+ * base_do_unpack
 
-do_compile (){
-        oe_runmake
-}
+and so on. and now, the questions.
 
-  so, in both cases, one can simply override *totally* a base task
-definition in both a class file and a recipe file, even though this is
-done almost exclusively from within recipe files. so far, so good?
+  first, i can see that you can redefine a basic task in terms of the
+underlying base task, as in eglibc_2.19.bb:
 
-  the next option is to use "_append" or "_prepend" to enhance an
-underlying task definition but, again, while this can be done in class
-files, there's not a lot of that in the oe-core class files (here's
-hoping i got my grep command correct):
+  do_compile () {
+        # -Wl,-rpath-link <staging>/lib in LDFLAGS can cause breakage if another glibc is in staging
+        unset LDFLAGS
+        base_do_compile
+        ... snip ...
 
-$ grep -E "^do_.*(ap|pre)pend" *
-binconfig-disabled.bbclass:do_install_append () {
-gnomebase.bbclass:do_install_append() {
-gtk-doc.bbclass:do_configure_prepend () {
-icecc.bbclass:do_configure_prepend() {
-icecc.bbclass:do_compile_prepend() {
-icecc.bbclass:do_compile_kernelmodules_prepend() {
-icecc.bbclass:do_install_prepend() {
-kernel-module-split.bbclass:do_install_append() {
-libc-package.bbclass:do_configure_prepend() {
-$
+at this point, you now have a new, overriding definition for the
+"compile" task for this recipe, although that's the only recipe file
+example for that i found in all of oe-core, so obviously it's not used
+all that often. oh, and the fact that you've defined "do_compile"
+above means that you've redefined the underlying name, so that any
+other recipe that includes this one also picks up that new definition
+for the compile task, yes?
 
-  there is, unsurprisingly, waaaaaaaaay more in recipe files but,
-again, the point is that the above can be done in both class and
-recipe files, yes?
+  on the other hand, a second way to use this can be seen in
+cmake.bbclass:
 
-  the final kind of overriding i've seen is to simply deactivate a
-task, and i've seen that done three different ways. first, you can
-redefine it as the null task, as in xuser-account_0.1.bb:
-
-do_configure() {
-    :
-}
-
-do_compile() {
-    :
-}
-
-do_install() {
-    :
-}
-
-  the next option appears to be to use the "[noexec]" variable flag,
-which can occur in both class and recipe files, like this in
-packagegroup.bbclass:
-
-packagegroup.bbclass:do_fetch[noexec] = "1"
-packagegroup.bbclass:do_unpack[noexec] = "1"
-packagegroup.bbclass:do_patch[noexec] = "1"
-packagegroup.bbclass:do_configure[noexec] = "1"
-packagegroup.bbclass:do_compile[noexec] = "1"
-packagegroup.bbclass:do_install[noexec] = "1"
-packagegroup.bbclass:do_populate_sysroot[noexec] = "1"
-
-  and the *third* way to deactivate a task appears to be with
-"deltask", as in the class files:
-
-$ grep deltask *
-cross.bbclass:deltask package
-cross.bbclass:deltask packagedata
-cross.bbclass:deltask package_write_ipk
-cross.bbclass:deltask package_write_deb
-cross.bbclass:deltask package_write_rpm
-cross.bbclass:deltask package_write
-externalsrc.bbclass:                bb.build.deltask(task, d)
-externalsrc.bbclass:            bb.build.deltask(task, d)
-native.bbclass:deltask package
-native.bbclass:deltask packagedata
-native.bbclass:deltask package_write_ipk
-native.bbclass:deltask package_write_deb
-native.bbclass:deltask package_write_rpm
-native.bbclass:deltask package_write
-ptest.bbclass:            bb.build.deltask(i, d)
-$
-
-  deltask seems to be used almost exclusively in .bbclass files, but i
-found a single example searching through the numerous layers i have on
-my system, in meta-oe/meta-initramfs/recipes/devtools/klibc:
-
-klcc-cross_2.0.3.bb:deltask do_package
-klcc-cross_2.0.3.bb:deltask do_packagedata
-klcc-cross_2.0.3.bb:deltask do_package_write_ipk
-klcc-cross_2.0.3.bb:deltask do_package_write_rpm
-klcc-cross_2.0.3.bb:deltask do_package_write_deb
-klcc-cross_2.0.3.bb:deltask do_package_write_tar
-
-  so it appears that deltask is valid for both class and recipe files,
-but the above is the only example i found across several layers of its
-use in a recipe file.
-
-  and about the three ways to "deactivate" a task:
-
-1)
-
-    do_configure() {
-        :
+    cmake_do_compile()  {
+        cd ${B}
+        base_do_compile
     }
 
-2)
+but this form does *not* override the base definition, it simply
+defines a second, alternative form of compiling that inheriting
+classes or recipes can invoke explicitly if they wish.
 
-    do_configure[noexec] = "1"
+  here's an example from autotools.bbclass:
 
-3)
+autotools_do_install() {
+        oe_runmake 'DESTDIR=${D}' install
+        # Info dir listing isn't interesting at this point so remove it if it exists.
+        if [ -e "${D}${infodir}/dir" ]; then
+                rm -f ${D}${infodir}/dir
+        fi
+}
+... snip ...
+EXPORT_FUNCTIONS do_configure do_install
 
-    deltask do_package
+  (i note that the cmake routine turns around and invokes
+base_do_compile, while the autotools routine does not -- it simply
+redefines the entire routine. both forms perfectly acceptable.)
 
-is there a style guide, since it would appear that the above might
-have very different effects. the first still defines a task which
-runs, but simply does nothing.
+  so as long as i understand this correctly, the above defines a new
+task/function, autotools_do_install(), that inheriting classes *may*
+invoke if they wish, but the base form (base_do_install) is also still
+available and is, in fact, still the default install task.
 
-  the second leaves the task defined, but it does *not* run.
+  and here's the tail end of cmake.bbclass that shows this in action:
 
-  the third appears to delete the definition of the task entirely.
+cmake_do_compile()  {
+        cd ${B}
+        base_do_compile
+}
 
-are there dependency issues related to which version you use? what
-happens if you "delete" a task which is the dependency of some other
-existing task? is this written up somewhere?
+cmake_do_install() {
+        cd ${B}
+        autotools_do_install
+}
 
-  i think i'll stop here, a post on EXPORT_FUNCTIONS coming up
-shortly ...
+EXPORT_FUNCTIONS do_configure do_compile do_install do_generate_toolchain_file
+
+  so, to sum up, the first form of taking advantage of
+EXPORT_FUNCTIONS is the way eglibc does it as above:
+
+
+  do_compile () {
+        unset LDFLAGS
+        base_do_compile
+        ... snip ...
+
+which overrides the underlying do_compile task with this new one, so
+that *everyone* from here on who includes this recipe will pick up
+this redefined compile task. and in a case like this, there is no need
+to use EXPORT_FUNCTIONS further.
+
+  the second form is to define additional, alternative forms of some
+tasks, as is done in cmake.bbclass:
+
+cmake_do_compile()  {
+        cd ${B}
+        base_do_compile
+}
+
+cmake_do_install() {
+        cd ${B}
+        autotools_do_install
+}
+
+EXPORT_FUNCTIONS do_configure do_compile do_install do_generate_toolchain_file
+
+  and in this case, the underlying "base_do*" tasks definitions are
+still available and are the default behaviours, but you can now
+*explicitly* call these alternatives if you so choose, and you would
+need to use EXPORT_FUNCTIONS on them.
+
+  am i missing anything?
 
 rday
+
+p.s. oh, terminology. there is no need for anything to be a "task" for
+the above; these really are all just functions being exported for use,
+it just so happens that some of them represent underlying tasks, but
+that's not necessary.
 
 -- 
 
