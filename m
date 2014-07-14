@@ -1,21 +1,21 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id DA9C665DB1;
-	Mon, 14 Jul 2014 10:13:26 +0000 (UTC)
-Received: from [69.196.158.250] (port=40593 helo=crashcourse.ca)
+	by mail.openembedded.org (Postfix) with ESMTP id 928207029E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 10:18:58 +0000 (UTC)
+Received: from [69.196.158.250] (port=40608 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X6dGA-0002Qg-Lc; Mon, 14 Jul 2014 06:13:26 -0400
-Date: Mon, 14 Jul 2014 06:13:20 -0400 (EDT)
+	id 1X6dLX-0002b2-Kp; Mon, 14 Jul 2014 06:18:59 -0400
+Date: Mon, 14 Jul 2014 06:18:58 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: Paul Eggleton <paul.eggleton@linux.intel.com>
-In-Reply-To: <3833732.EFEfTvAqk5@peggleto-mobl5.ger.corp.intel.com>
-Message-ID: <alpine.LFD.2.11.1407140612160.4257@localhost>
-References: <alpine.LFD.2.11.1407101115390.10701@localhost>
-	<CAP9ODKq1vdW+eZ64gWGbSAygxfYkMCKwOAZGUOD-WntUN+azJA@mail.gmail.com>
-	<3833732.EFEfTvAqk5@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
+Message-ID: <alpine.LFD.2.11.1407140614070.4257@localhost>
+References: <alpine.LFD.2.11.1407130915280.31826@localhost>
+	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
 User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -27,10 +27,8 @@ X-AntiAbuse: Sender Address Domain - crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] any value in keeping the backward compat "task-core" stuff?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: overriding tasks with EXPORT_FUNCTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +42,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 10:13:29 -0000
+X-List-Received-Date: Mon, 14 Jul 2014 10:19:06 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Mon, 14 Jul 2014, Paul Eggleton wrote:
 
-> On Friday 11 July 2014 20:39:04 Otavio Salvador wrote:
-> > On Thu, Jul 10, 2014 at 12:21 PM, Robert P. J. Day
-> >
-> > <rpjday@crashcourse.ca> wrote:
-> > >   a number of the current packagegroup recipe files still have
-> > >
-> > > backward compatibility support for the old "task-core" names, seems
-> > > like that's been there for well over a year, would it be safe to
-> > > finally just toss that? seems like everyone's had enough time to make
-> > > the move to the new names, and it would be clearer to not confuse the
-> > > proper use of the word "task" these days.
-> >
-> > I agree; however this question should also be send to oe-core mailing
-> > list (added in Cc)
+> Hi Robert,
 >
-> I agree as well; these should go. I know there are some who want to
-> keep these indefinitely for upgrade purposes, but I think there's a
-> limit to how long they should stay around in OE-Core. They can
-> always be preserved in bbappends for those that do want to keep
-> them.
+> On Sunday 13 July 2014 10:19:08 Robert P. J. Day wrote:
+> >   followup to last post -- all of the methods for "overriding" task
+> > definitions in the last post can be used without predeclaring that
+> > you're about to do that; you just go ahead and do it in either a class
+> > file or a recipe file. on the other hand, EXPORT_FUNCTIONS allows you
+> > to retain the base definition of a task (or non-task function, as i
+> > read it), then define a more general enhanced version.
+> >
+> >   (side note: i don't see a single mention of "EXPORT_FUNCTIONS" in
+> > any of the numerous yocto docs -- i think this feature needs some
+> > explanation *somewhere*. :-)
+>
+> Did you try the new BitBake manual?
+>
+> http://www.yoctoproject.org/docs/current/bitbake-user-manual/bitbake-user-manual.html#flexible-inheritance-for-class-functions
+>
+> Let me know if that doesn't answer your questions.
 
-  i can submit a patch for that later today if no one objects.
+  actually, i worded the above *really* badly. i see it in the bitbake
+user manual, i was referring to the "yocto-docs" layer, which contains
+all of the yocto docs but not the bitbake manual, which might mislead
+some people into not knowing that the bitbake user manual is even
+there.
+
+  i know bitbake is outside the scope of what belongs in the
+yocto-docs layer, but perhaps there should be at least a pointer to it
+in the yocto-docs README file?
 
 rday
 
