@@ -1,28 +1,51 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DF4370254
+Return-Path: <olof.johansson@axis.com>
+X-Greylist: delayed 354 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 14 Jul 2014 09:11:22 UTC
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id A77B770254
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 09:06:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6E96idC022898
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Jul 2014 09:11:22 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id B30452E2BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 02:06:44 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Mon, 14 Jul 2014 02:06:43 -0700
-Message-ID: <53C39DA2.4090603@windriver.com>
-Date: Mon, 14 Jul 2014 17:06:42 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: Hongxu Jia <hongxu.jia@windriver.com>
+	Mon, 14 Jul 2014 11:05:27 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id rlOCgXdXFWZg
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Received: from boulder.se.axis.com (boulder.se.axis.com [10.0.2.104])
+	by bes.se.axis.com (Postfix) with ESMTP id DC2E82E2CE
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Received: from boulder.se.axis.com (localhost [127.0.0.1])
+	by postfix.imss71 (Postfix) with ESMTP id C5BF0C3E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Received: from thoth.se.axis.com (thoth.se.axis.com [10.0.2.173])
+	by boulder.se.axis.com (Postfix) with ESMTP id BA12BC13
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Received: from xmail2.se.axis.com (xmail2.se.axis.com [10.0.5.74])
+	by thoth.se.axis.com (Postfix) with ESMTP id B7E6C34005
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Received: from lnxolofjn.se.axis.com (10.92.17.1) by xmail2.se.axis.com
+	(10.0.5.74) with Microsoft SMTP Server id 8.3.342.0; Mon, 14 Jul 2014
+	11:05:23 +0200
+Received: by lnxolofjn.se.axis.com (Postfix, from userid 20466)	id 7A3539C739; 
+	Mon, 14 Jul 2014 11:05:23 +0200 (CEST)
+Date: Mon, 14 Jul 2014 11:05:23 +0200
+From: Olof Johansson <olof.johansson@axis.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20140714090523.GB23194@axis.com>
 References: <1405318339-20529-1-git-send-email-rongqing.li@windriver.com>
 	<53C394BF.3050708@windriver.com>
+MIME-Version: 1.0
 In-Reply-To: <53C394BF.3050708@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Subject: Re: [PATCH][meta-perl] libxml-libxml-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -37,30 +60,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 09:06:43 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Jul 2014 09:11:22 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-
-
-On 07/14/2014 04:28 PM, Hongxu Jia wrote:
+On 14-07-14 10:28 +0200, Hongxu Jia wrote:
 > On 07/14/2014 02:12 PM, rongqing.li@windriver.com wrote:
->> +++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
->
+> > +++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
+> 
 > s/libxml-libxml-perl/libxml-perl/
->
+> 
 > How about rename the recipe with "libxml-perl" ?
->
-> //Hongxu
->
 
-there is a libxml-perl under oe-core
-
-/oe-core/meta/recipes-devtools/perl/libxml-perl_0.08.bb
-
->
+This would break the naming convention, lib<distribution name>-perl. The
+module is *actually* named XML::LibXML. Even though it looks strange, I
+think it would be preferable to stick to the convention.
 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+olofjn
 
