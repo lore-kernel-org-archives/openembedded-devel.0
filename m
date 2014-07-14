@@ -1,20 +1,23 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
 	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B70B7039E
+	by mail.openembedded.org (Postfix) with ESMTP id DA097704A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 13:03:16 +0000 (UTC)
-Received: from [69.196.158.250] (port=47112 helo=crashcourse.ca)
+	Mon, 14 Jul 2014 13:33:28 +0000 (UTC)
+Received: from [69.196.158.250] (port=47181 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X6fuX-0008AW-KZ for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jul 2014 09:03:17 -0400
-Date: Mon, 14 Jul 2014 09:03:09 -0400 (EDT)
+	id 1X6gNk-00016H-Of; Mon, 14 Jul 2014 09:33:28 -0400
+Date: Mon, 14 Jul 2014 09:33:25 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.11.1407140857500.26321@localhost>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <CAJTo0LapfkxVsasW=Mt6HTVqBuDk=bE=faeW9BCzVHOF3A-9zA@mail.gmail.com>
+Message-ID: <alpine.LFD.2.11.1407140907400.28064@localhost>
+References: <alpine.LFD.2.11.1407130915280.31826@localhost>
+	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
+	<alpine.LFD.2.11.1407140804360.29952@localhost>
+	<CAJTo0LapfkxVsasW=Mt6HTVqBuDk=bE=faeW9BCzVHOF3A-9zA@mail.gmail.com>
 User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -26,7 +29,8 @@ X-AntiAbuse: Sender Address Domain - crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: [meta-oe][PATCH] Remove deprecated "task" backward compatibility from packagegroups
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: overriding tasks with EXPORT_FUNCTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,175 +44,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 13:03:25 -0000
+X-List-Received-Date: Mon, 14 Jul 2014 13:33:33 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
+On Mon, 14 Jul 2014, Burton, Ross wrote:
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+> On 14 July 2014 13:20, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> > but, as far as i can tell, that is the only class that requires a
+> > package name hook, and it simply defines its own implementation -- it
+> > does nothing with package.bbclass and makes no reference to the
+> > exported function package_package_name_hook(). so am i just
+> > misunderstanding something? what was the point of defining and
+> > exporting that function in package.bbclass if no other class takes
+> > advantage of it?
+>
+> So there needs to be an empty implementation and EXPORT_FUNCTION for
+> package_package_name_hook so that you don't get "cannot find
+> function package_name_hook" when you don't have the debian.bbclass
+> enabled.
+>
+> In cleaning that up I proposed removing the EXPORT_FUNCTION entirely
+> for the hook, but Richard recalled there being something out there
+> that did use the ability to chain up into debian.bbclass's
+> implementation, so I kept it.
 
----
+  uh oh ... now i'm a bit confused again so let me back up a bit
+because i really want to understand this. my apologies for the tedium.
 
-  all of this looked relatively straightforward.
+  as i read it, the only purpose of EXPORT_FUNCTIONS is to support the
+idea of being able to qualify a function with its class name so that
+you can (effectively) have access to more than one function with the
+same "name" at the same time. first, let's see where this is *not*
+necessary.
 
-diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-index 4e5ce78..5ead412 100644
---- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
-@@ -11,9 +11,6 @@ require packagegroup-efl-sdk.inc
+  as an example, base.bbclass defines the routine:
 
- PACKAGES = "${PN}"
+oe_runmake() {
+        oe_runmake_call "$@" || die "oe_runmake failed"
+}
 
--RPROVIDES_${PN} += "task-efl-sdk"
--RREPLACES_${PN} += "task-efl-sdk"
--RCONFLICTS_${PN} += "task-efl-sdk"
- RDEPENDS_${PN} = "\
-     packagegroup-core-sdk \
-     ${SDK-EFL} \
-diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-index 1bcac45..6a3f33d 100644
---- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
-@@ -11,9 +11,6 @@ require packagegroup-efl-sdk.inc
+now, since every class automatically inherits base.bbclass, all of
+those classes can call oe_runmake(), right? that routine is in their
+namespace, there is no need to export it, and they will all get that
+function as it's defined in base.bbclass.
 
- PACKAGES = "${PN} ${PN}-dbg"
+  in addition, even if a class inherits base.bbclass, it has the right
+to totally override that routine by redefining a new oe_runmake(),
+yes? (or possibly _appending or _prepending to it.) in any event, at
+any time, there is only one definition of a function called
+oe_runmake() in scope. so far, so good?
 
--RPROVIDES_${PN} += "task-efl-standalone-sdk-target"
--RREPLACES_${PN} += "task-efl-standalone-sdk-target"
--RCONFLICTS_${PN} += "task-efl-standalone-sdk-target"
- RDEPENDS_${PN} = "\
-     packagegroup-core-standalone-sdk-target \
-     ${SDK-EFL} \
-diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-index 47f758a..63ef0f6 100644
---- a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-+++ b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
-@@ -11,9 +11,6 @@ inherit packagegroup allarch
- ETHEME ?= "e-wm-theme-default"
- ECONFIG ?= "e-wm-config-mobile"
+  what EXPORT_FUNCTIONS appears to do is simply allow you access to
+more than one function with the same "name", so let's look at
+base.bbclass and, say, the do_fetch() routine:
 
--RPROVIDES_${PN} += "task-x11-illume"
--RREPLACES_${PN} += "task-x11-illume"
--RCONFLICTS_${PN} += "task-x11-illume"
- RDEPENDS_${PN} = "\
-     packagegroup-core-x11-xserver \
-     packagegroup-core-x11-utils \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-index 08db943..ad1cd83 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-@@ -23,9 +23,6 @@ MACHINE_EXTRA_RRECOMMENDS ?= ""
- #
- TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
+python base_do_fetch() {
+    ... snip code ...
+}
+...
+EXPORT_FUNCTIONS do_fetch
 
--RPROVIDES_${PN} += "task-basic"
--RREPLACES_${PN} += "task-basic"
--RCONFLICTS_${PN} += "task-basic"
- #
- # The section below is designed to match with packagegroup-boot, but doesn't depend on it to allow for more freedom
- # when writing image recipes.
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-index 3b634f3..61a519d 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
-@@ -19,10 +19,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
- # Make sure we build the kernel
- DEPENDS = "virtual/kernel"
+what does the above do? it now allows you to define, say,
+derived.bbclass, and define a new do_fetch() in terms of the base
+do_fetch(), as in:
 
--RPROVIDES_${PN} += "task-boot"
--RREPLACES_${PN} += "task-boot"
--RCONFLICTS_${PN} += "task-boot"
--
- #
- # minimal set of packages - needed to boot
- #
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-index fbba23c..2a4b067 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
-@@ -10,13 +10,6 @@ inherit packagegroup allarch
+do_fetch() {
+    ...
+    base_do_fetch()
+    ...
+}
 
- PACKAGES += "${PN}-debug"
+however, if i created a new class that had no interest in redefining
+do_fetch() and i was happy with the base definition, i could simply
+continue to use the name do_fetch(), correct? the fact that that
+function was exported in base.bbclass is not relevant to me if i am
+not trying to redefine the name. (i suspect i could also refer to it
+by the name base_do_fetch() if i wanted, but that's unnecessary.)
 
--RPROVIDES_${PN} += "task-cli-tools"
--RPROVIDES_${PN}-debug += "task-cli-tools-debug"
--RREPLACES_${PN} += "task-cli-tools"
--RREPLACES_${PN}-debug += "task-cli-tools-debug"
--RCONFLICTS_${PN} += "task-cli-tools"
--RCONFLICTS_${PN}-debug += "task-cli-tools-debug"
--
- RDEPENDS_${PN} = "\
-     dbus-daemon-proxy \
-     dosfstools \
-diff --git a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-index 9b8cc9a..aafe63a 100644
---- a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-+++ b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-@@ -6,9 +6,9 @@ PR = "r1"
+  that's why i was confused by ross' earlier paragraph about
+package_name_hook being defined in package.bbclass -- unless some
+other class is going to try to access two functions called
+"package_naem_hook" at the same time, i currently see no need to
+export it in package.bbclass. however, if there was something else
+going on somewhere that needed this as richard purdie suggested, then
+i'd be interested in knowing what that is just to understand the whole
+picture.
 
- inherit packagegroup allarch
-
--RPROVIDES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
--RREPLACES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
--RCONFLICTS_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
-+RPROVIDES_${PN} += "packagegroup-native-sdk"
-+RREPLACES_${PN} += "packagegroup-native-sdk"
-+RCONFLICTS_${PN} += "packagegroup-native-sdk"
- RDEPENDS_${PN} = "gcc-symlinks g++-symlinks cpp cpp-symlinks \
-                   binutils-symlinks \
-                   perl-modules \
-diff --git a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
-index 931564f..632e7d4 100644
---- a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
-+++ b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
-@@ -12,18 +12,6 @@ PACKAGES += "\
-     ${PN}-chinese \
-     ${PN}-japanese \
- "
--RPROVIDES_${PN} += "task-fonts-truetype"
--RPROVIDES_${PN}-core += "task-fonts-truetype-core"
--RPROVIDES_${PN}-chinese += "task-fonts-truetype-chinese"
--RPROVIDES_${PN}-japanese += "task-fonts-truetype-japanese"
--RREPLACES_${PN} += "task-fonts-truetype"
--RREPLACES_${PN}-core += "task-fonts-truetype-core"
--RREPLACES_${PN}-chinese += "task-fonts-truetype-chinese"
--RREPLACES_${PN}-japanese += "task-fonts-truetype-japanese"
--RCONFLICTS_${PN} += "task-fonts-truetype"
--RCONFLICTS_${PN}-core += "task-fonts-truetype-core"
--RCONFLICTS_${PN}-chinese += "task-fonts-truetype-chinese"
--RCONFLICTS_${PN}-japanese += "task-fonts-truetype-japanese"
-
- RRECOMMENDS_${PN} = "\
-     ${PN}-core \
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-index 7fcb388..28cfc7f 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-@@ -6,10 +6,6 @@ PR = "r5"
-
- inherit packagegroup
-
--RPROVIDES_${PN} += "task-xfce-base"
--RREPLACES_${PN} += "task-xfce-base"
--RCONFLICTS_${PN} += "task-xfce-base"
--
- RDEPENDS_${PN} = " \
-     xfwm4 \
-     xfce4-session \
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index e91362e..0eab1cc 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -9,10 +9,6 @@ PNBLACKLIST[packagegroup-xfce-extended] = "BROKEN: rdepends on broken xfce4-powe
-
- inherit packagegroup
-
--RPROVIDES_${PN} += "task-xfce-extended"
--RREPLACES_${PN} += "task-xfce-extended"
--RCONFLICTS_${PN} += "task-xfce-extended"
--
- # mandatory
- RDEPENDS_${PN} = " \
-     packagegroup-xfce-base \
+rday
 
 -- 
 
@@ -219,4 +141,6 @@ Robert P. J. Day                                 Ottawa, Ontario, CANADA
 Twitter:                                       http://twitter.com/rpjday
 LinkedIn:                               http://ca.linkedin.com/in/rpjday
 ========================================================================
+
+
 
