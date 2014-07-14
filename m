@@ -1,35 +1,35 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id ED66A70392
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 2079B70392
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 20:40:43 +0000 (UTC)
-Received: by mail-we0-f171.google.com with SMTP id p10so2066442wes.2
+	Mon, 14 Jul 2014 20:42:08 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id f8so2206402wiw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 13:40:43 -0700 (PDT)
+	Mon, 14 Jul 2014 13:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=UBl1NsZhKfEv5eqLXS1x0ysxrBvt04Pfv3u3YWJKDw0=;
-	b=Tzhb/ILKOA+yU/y04uTCNb98+QQdB6YBA7xH6OupjgGREPpAuqgNt51E3muhiqIowC
-	Sh9rbW8gpjFoJbhvdtxCXS2ngnGQ3Tg4P1a/vJc2YOhrWxKuNJkVNqMmYJksCwa/ljXy
-	UBfuot80wI3CzbYdDfwvdoa4bsm4vJh2n8VfeLQW8HME5km1jYC0E16TC0oza5lC1rrr
-	hQITW3usOs3sxVVlQro4fxwmNY0ygmyxJMkktJ4vAqybCETVYWWq64p+55ET1Kx3ATwk
-	HTOeaB2RFXzkj917AC8QEWfa3qvCunO6RwjyRVsfNFixVfiGTZINcrYRDiYSHJ/SHAAX
-	4Now==
-X-Received: by 10.180.97.67 with SMTP id dy3mr479130wib.16.1405370443629;
-	Mon, 14 Jul 2014 13:40:43 -0700 (PDT)
+	bh=Gb0y4ldOWPmqL6dDXl7ykqcbv90irduqiZy1kYRDAQE=;
+	b=Ittok7Jh4FTyAz+AfPAyYeLlCkKQ+psbxZFArUUHHAzw4s/FzaETfTi5UQYWUY4WTT
+	ZxzAQc3aHxDk0fPnW1CBpSu+YM8TJGvVDlyCOOiE/HJhPhUVyVhOw5qKJlF8b4p+3RXZ
+	xLis9nUZG4mQm6+r9kUdMxN0bTWKYDNXqmm6YiW9/mDfTvgDNyKe+NK2fxQfKqoeeSnT
+	O/jC1HVOYkhCGNxUgic9ICnPQd4QrnyYjv/8699SQuQtrStcdrCM/R8UrqFFL0heV9Y/
+	P4R6xn1j1Ju+W6RRcz3hRic+BymjYDSiFrvKh1M5wJfZqMKn0hwICOyICRe77A4mSwe5
+	1DaQ==
+X-Received: by 10.194.174.35 with SMTP id bp3mr21039631wjc.33.1405370529518;
+	Mon, 14 Jul 2014 13:42:09 -0700 (PDT)
 Received: from mizar.208.67.220.220
 	(host8-88-dynamic.45-79-r.retail.telecomitalia.it. [79.45.88.8])
 	by mx.google.com with ESMTPSA id
-	ei3sm35100832wib.13.2014.07.14.13.40.42 for <multiple recipients>
+	nc19sm35152810wic.4.2014.07.14.13.42.08 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 14 Jul 2014 13:40:42 -0700 (PDT)
+	Mon, 14 Jul 2014 13:42:08 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Jul 2014 22:40:38 +0200
-Message-Id: <1405370438-28586-1-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 14 Jul 2014 22:42:04 +0200
+Message-Id: <1405370524-30307-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld][PATCH] Revert "zaurus collie: remove hardcoded mem=64M"
+Subject: [meta-handheld][PATCH] linux-yocto_3.14: zaurus: config serial 8250 as module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,74 +43,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 20:40:46 -0000
+X-List-Received-Date: Mon, 14 Jul 2014 20:42:10 -0000
 
-Unfortunately the default for sa1100/collie is 16M so for collie it is necessary
-to specify mem=64M on cmdline.
-The very rare 5000D users will have to change that to mem=32M.
-
-This reverts commit f4f05028f5ad72a81d6620340fe1c92ac6486890.
+Zaurus is using pxa/sa1100 serial so we only need the
+pcmcia serial cs for i.e. bluetooth cf cards.
+Avoid device address conflict on pxa (fix pending upstream).
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- conf/machine/include/zaurus.inc                                       | 2 +-
- recipes-kernel/linux/linux-yocto-3.10/collie/collie.cfg               | 2 +-
- recipes-kernel/linux/linux-yocto-3.14/collie/defconfig                | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/collie/defconfig | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ recipes-kernel/linux/linux-yocto-3.14/akita/defconfig  | 4 ++--
+ recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig   | 4 ++--
+ recipes-kernel/linux/linux-yocto-3.14/collie/defconfig | 4 ++--
+ recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig | 4 ++--
+ recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig  | 4 ++--
+ recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig   | 4 ++--
+ 6 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index 1f1d28f..f74b987 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -39,7 +39,7 @@ SERIAL_CONSOLE_collie = "115200 ttySA0"
- 
- CMDLINE_akita = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
- CMDLINE_c7x0 = "console=ttyS0,115200n8 console=tty1"
--CMDLINE_collie = "console=ttySA0,115200n8 console=tty1 fbcon=rotate:1"
-+CMDLINE_collie = "console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1"
- CMDLINE_poodle = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
- CMDLINE_spitz = "console=ttyS0,115200n8 console=tty1 fbcon=rotate:1"
- CMDLINE_tosa = "console=ttyS0,115200n8 console=tty1"
-diff --git a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.cfg b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.cfg
-index 323893e..5238c69 100644
---- a/recipes-kernel/linux/linux-yocto-3.10/collie/collie.cfg
-+++ b/recipes-kernel/linux/linux-yocto-3.10/collie/collie.cfg
-@@ -47,7 +47,7 @@ CONFIG_SPARSEMEM_EXTREME=y
- #
- # Boot options
- #
--CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
- 
- #
- # RAM/ROM/Flash chip drivers
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig b/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
+index 8e58216..7d7046a 100644
+--- a/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
++++ b/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
+@@ -242,8 +242,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=y
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_PXA=y
+ CONFIG_SERIAL_PXA_CONSOLE=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig b/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
+index 3a112db..2714fd7 100644
+--- a/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
++++ b/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
+@@ -223,8 +223,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=y
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_PXA=y
+ CONFIG_SERIAL_PXA_CONSOLE=y
 diff --git a/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig b/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
-index 32877cd..36ceadb 100644
+index 8c84b6c..55cbd91 100644
 --- a/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
 +++ b/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
-@@ -50,7 +50,7 @@ CONFIG_AEABI=y
- CONFIG_OABI_COMPAT=y
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=ttySA0,115200n8 console=tty1 mem=64M fbcon=rotate:1 loglevel=3"
- CONFIG_KEXEC=y
- CONFIG_BINFMT_MISC=m
- CONFIG_PM_RUNTIME=y
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/collie/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/collie/defconfig
-index d57e807..2903270 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/collie/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.10/collie/defconfig
-@@ -34,7 +34,7 @@ CONFIG_AEABI=y
- # CONFIG_CROSS_MEMORY_ATTACH is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
+@@ -226,8 +226,8 @@ CONFIG_KEYBOARD_LOCOMO=y
+ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_SA1100=y
+ CONFIG_SERIAL_SA1100_CONSOLE=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig b/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
+index 3e76043..1805246 100644
+--- a/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
++++ b/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
+@@ -221,8 +221,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=y
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_PXA=y
+ CONFIG_SERIAL_PXA_CONSOLE=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig b/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
+index 56db157..bece3f9 100644
+--- a/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
++++ b/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
+@@ -241,8 +241,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_ADS7846=y
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_PXA=y
+ CONFIG_SERIAL_PXA_CONSOLE=y
+diff --git a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
+index 799be1f..dc8f2ba 100644
+--- a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
++++ b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
+@@ -242,8 +242,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
+ CONFIG_TOUCHSCREEN_WM97XX=m
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=m
+-CONFIG_SERIAL_8250=y
+-CONFIG_SERIAL_8250_CONSOLE=y
++CONFIG_SERIAL_8250=m
++# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
+ CONFIG_SERIAL_8250_CS=m
+ CONFIG_SERIAL_PXA=y
+ CONFIG_SERIAL_PXA_CONSOLE=y
 -- 
 1.9.1
 
