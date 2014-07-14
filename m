@@ -1,28 +1,40 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C2116FE5C
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 34D76703CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 08:28:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6E8Ss4f010243
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Jul 2014 08:41:40 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id f8so1182622wiw.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 01:28:54 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Mon, 14 Jul 2014 01:28:53 -0700
-Message-ID: <53C394BF.3050708@windriver.com>
-Date: Mon, 14 Jul 2014 16:28:47 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
-MIME-Version: 1.0
-To: "Li, Rongqing" <Rongqing.Li@windriver.com>
-References: <1405318339-20529-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1405318339-20529-1-git-send-email-rongqing.li@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-perl] libxml-libxml-perl: add recipe
+	Mon, 14 Jul 2014 01:41:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=ue0SC1SU7H4MeHkET7u1mH76+uCJh8ODO1iIwSpTDsw=;
+	b=QneP1rO3y74xVGlhp9f0HB4Ntod/Z/TWsTOBAG54etXt4J4AhlxmEFGKlO+CpTizPR
+	D/c4JmKzTCz4KVxnC14SM2HlA3kEHDEDUzbZqsNHETIDdnQ8LBpz2vmHrUTSsgnTJhmB
+	Efor5HLw/ogk2FjsFmEeHVLuLKBU6ndufsffIGKCJ8zxMGupKDW5xPtUdtO9uoH0peqN
+	5CP53yrvkXQd07Jq2b1UwNULGZOCGeweQY3GERfSw1pOCsMQyjIgP74TSIB7SQNliJBr
+	Ie/2WBqYp3AixiqY2iRrBUu+avECv8r96Dnjc0Ktz9venBwITSCiLDBLiDi7AZOUoBbK
+	6uzw==
+X-Gm-Message-State: ALoCoQn9zoMsZyIwFdcFxWjF4JJmd1+3TclqwdHpd9w2QYMYE3iX+cvPrpeVQoZwzw//7FXzXyKg
+X-Received: by 10.194.11.74 with SMTP id o10mr17676956wjb.82.1405327301230;
+	Mon, 14 Jul 2014 01:41:41 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
+	by mx.google.com with ESMTPSA id l2sm24012479wjw.31.2014.07.14.01.41.40
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 14 Jul 2014 01:41:40 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 Jul 2014 10:41:34 +0200
+Message-Id: <1405327294-4030-2-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1405327294-4030-1-git-send-email-koen.kooi@linaro.org>
+References: <1405327294-4030-1-git-send-email-koen.kooi@linaro.org>
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH 2/2] libhugetlbfs: fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,16 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 08:28:58 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Jul 2014 08:41:48 -0000
 
-On 07/14/2014 02:12 PM, rongqing.li@windriver.com wrote:
-> +++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
+Libhugetlbs doesn't generate proper .so.X libs, only two .so files. Package those in ${PN} and silence the resulting QA warning. This fixes:
 
-s/libxml-libxml-perl/libxml-perl/
+ ERROR: QA Issue: libhugetlbfs-tests rdepends on libhugetlbfs-dev
 
-How about rename the recipe with "libxml-perl" ?
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-//Hongxu
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index af7ed3e..d3b64bf 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -25,6 +25,7 @@ COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
+ 
+ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+ EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=1"
++PARALLEL_MAKE_pn-${PN} = ""
+ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -46,12 +47,15 @@ do_install() {
+           install-tests
+ }
+ 
+-PARALLEL_MAKE_pn-${PN} = ""
+ 
+ PACKAGES =+ "${PN}-perl ${PN}-tests "
++FILES_${PN} += "${libdir}/*.so"
++FILES_${PN}-dev = "${includedir}"
+ FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
+ FILES_${PN}-perl = "${libdir}/perl"
+ FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
+ 
++INSANE_SKIP_${PN} = "dev-so"
++
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+-- 
+1.9.3
+
 
