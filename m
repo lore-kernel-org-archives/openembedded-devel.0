@@ -1,35 +1,43 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2079B70392
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C5CDF701D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 20:42:08 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id f8so2206402wiw.1
+	Mon, 14 Jul 2014 22:43:26 +0000 (UTC)
+Received: by mail-ig0-f182.google.com with SMTP id c1so2277034igq.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 13:42:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Gb0y4ldOWPmqL6dDXl7ykqcbv90irduqiZy1kYRDAQE=;
-	b=Ittok7Jh4FTyAz+AfPAyYeLlCkKQ+psbxZFArUUHHAzw4s/FzaETfTi5UQYWUY4WTT
-	ZxzAQc3aHxDk0fPnW1CBpSu+YM8TJGvVDlyCOOiE/HJhPhUVyVhOw5qKJlF8b4p+3RXZ
-	xLis9nUZG4mQm6+r9kUdMxN0bTWKYDNXqmm6YiW9/mDfTvgDNyKe+NK2fxQfKqoeeSnT
-	O/jC1HVOYkhCGNxUgic9ICnPQd4QrnyYjv/8699SQuQtrStcdrCM/R8UrqFFL0heV9Y/
-	P4R6xn1j1Ju+W6RRcz3hRic+BymjYDSiFrvKh1M5wJfZqMKn0hwICOyICRe77A4mSwe5
-	1DaQ==
-X-Received: by 10.194.174.35 with SMTP id bp3mr21039631wjc.33.1405370529518;
-	Mon, 14 Jul 2014 13:42:09 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host8-88-dynamic.45-79-r.retail.telecomitalia.it. [79.45.88.8])
-	by mx.google.com with ESMTPSA id
-	nc19sm35152810wic.4.2014.07.14.13.42.08 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 14 Jul 2014 13:42:08 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 14 Jul 2014 15:43:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=3fFMzhslXbexRuuxvlxcBbBhpjTwp2onHoJz6lze9F4=;
+	b=cALnFfSx/Ie4TJ64YtLFT5VdlYwDq+vnohT+mz92jzMWi8IlydoxzAzgRYQIuEn0+w
+	JUPPemwbNml1rzqpShsUeeE3CDYN4BVBL9KnkD/Cu/N4KKAGhTjziBuYRO7bLxhcaLue
+	mQXPvTwUeSMhAW39O3CrQnNMpfNHcGsnyRdA4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=3fFMzhslXbexRuuxvlxcBbBhpjTwp2onHoJz6lze9F4=;
+	b=Y+hSVOipLT4itfx7FEqSf4bois335bm5vcEl5Dfi0Vf4fkRx1D4mga4pQqlRdWJyPv
+	P6CMWXi5TD8EwcBDLXsvPYF10moXSjsuyyhAI/ZBOcfQRnztrFBCV0ZqRCvT6NQ2pWzT
+	KrwNCh7Zfw6p5vV7/JlnaAn/KpAGBIR6/1MRVRtUezEZPFlL91dxfXCaFBNzQih3v+a5
+	ad0EC6HDI5nnxmRh1PMOmWX59kxf0Tq/F6z4h+bPx0OkDyik7x7EZxxnef2laPzCODuc
+	iO69xaOwT6B1bBVVpH0UE/ZKffQH3D1qM0W/bWPVWICfTZhqCEqI9TvRTVBrc0mFqd4k
+	y2zQ==
+X-Gm-Message-State: ALoCoQkEIYGJl8R2gUwoOhEAnrgIBQASdbY1qTavH5VUBCt0dFFhS502vVUF3qtlcOBkBxURVXHB
+MIME-Version: 1.0
+X-Received: by 10.50.43.167 with SMTP id x7mr1398606igl.36.1405377806609; Mon,
+	14 Jul 2014 15:43:26 -0700 (PDT)
+Received: by 10.50.225.73 with HTTP; Mon, 14 Jul 2014 15:43:26 -0700 (PDT)
+In-Reply-To: <alpine.LFD.2.11.1407141457150.14590@localhost>
+References: <alpine.LFD.2.11.1407141457150.14590@localhost>
+Date: Mon, 14 Jul 2014 15:43:26 -0700
+Message-ID: <CA+gsK-p7rV+HmdcskYkU0MYRn1zesYDgOUb4raVcj6_xW9x_ag@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Jul 2014 22:42:04 +0200
-Message-Id: <1405370524-30307-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld][PATCH] linux-yocto_3.14: zaurus: config serial 8250 as module
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: defining FEATURE_PACKAGES_* in core-image.bbclass vs image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,113 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 20:42:10 -0000
+X-List-Received-Date: Mon, 14 Jul 2014 22:43:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Zaurus is using pxa/sa1100 serial so we only need the
-pcmcia serial cs for i.e. bluetooth cf cards.
-Avoid device address conflict on pxa (fix pending upstream).
+>
+>
+>   then i noticed that the "splash" feature is defined, not in
+> core-image.bbclass, but in the more basic image.bbclass, as is
+> package-management:
+>
+> FEATURE_PACKAGES_package-management = "${ROOTFS_PKGMANAGE}"
+> SPLASH ?= "psplash"
+> FEATURE_PACKAGES_splash = "${SPLASH}"
+>
+> And then there is debug-tweaks for which the hooks are defined in
+image.bbclass including the function zap_empty_root_password but the
+post-processing is added to the variable by core-image.bbclass:
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-yocto-3.14/akita/defconfig  | 4 ++--
- recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig   | 4 ++--
- recipes-kernel/linux/linux-yocto-3.14/collie/defconfig | 4 ++--
- recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig | 4 ++--
- recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig  | 4 ++--
- recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig   | 4 ++--
- 6 files changed, 12 insertions(+), 12 deletions(-)
+core-image.bbclass: ROOTFS_POSTPROCESS_COMMAND +=
+'${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", "",
+"zap_empty_root_password ; ",d)}'
 
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig b/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
-index 8e58216..7d7046a 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/akita/defconfig
-@@ -242,8 +242,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_TOUCHSCREEN_ADS7846=y
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig b/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
-index 3a112db..2714fd7 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/c7x0/defconfig
-@@ -223,8 +223,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_TOUCHSCREEN_ADS7846=y
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig b/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
-index 8c84b6c..55cbd91 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/collie/defconfig
-@@ -226,8 +226,8 @@ CONFIG_KEYBOARD_LOCOMO=y
- CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_SA1100=y
- CONFIG_SERIAL_SA1100_CONSOLE=y
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig b/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
-index 3e76043..1805246 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/poodle/defconfig
-@@ -221,8 +221,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_TOUCHSCREEN_ADS7846=y
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig b/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
-index 56db157..bece3f9 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/spitz/defconfig
-@@ -241,8 +241,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_TOUCHSCREEN_ADS7846=y
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
-diff --git a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-index 799be1f..dc8f2ba 100644
---- a/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-3.14/tosa/defconfig
-@@ -242,8 +242,8 @@ CONFIG_INPUT_TOUCHSCREEN=y
- CONFIG_TOUCHSCREEN_WM97XX=m
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=m
--CONFIG_SERIAL_8250=y
--CONFIG_SERIAL_8250_CONSOLE=y
-+CONFIG_SERIAL_8250=m
-+# CONFIG_SERIAL_8250_DEPRECATED_OPTIONS is not set
- CONFIG_SERIAL_8250_CS=m
- CONFIG_SERIAL_PXA=y
- CONFIG_SERIAL_PXA_CONSOLE=y
--- 
-1.9.1
+Since image.bbclass also adds the debug-tweaks to the valid image feature
+list
 
+image.bbclass:IMAGE_FEATURES[validitems] += "debug-tweaks read-only-rootfs"
+
+my inclination would be to move the addition to ROOTFS_POSTPROCESS_COMMAND
+from core-image.bbclass to image.bbclass.
+
+The image feature readonly-rootfs is also added to the valid list by
+image.bbclass.
+
+Consequently this makes the image features splash, debug-tweaks,
+package-management, splash and readonly-rootfs available to image recipes
+that inherit image.bbclass while h/w codecs and others are added by
+core-image.bbclass and are only available when an image recipe inherits
+core-image.
+
+Then there are the image features dbg-pkgs, dev-pkgs, doc-pkgs,
+staticdev-pkgs and ptest-pkgs which are added to the image feature list by
+populate_sdk_base.bbclass which image.bbclass inherits and hence they are
+available to all images.
+
+
+>   so is there some rationale for deciding which FEATURE_PACKAGES
+> settings are defined in core-image, while others are defined in
+> image?
+>
+
+That I do not really know. However, to some extend the choices as to what
+class adds what image features make sense, alth
+
+   - The minimal set of features splash, debug-tweaks, package-management,
+   splash and readonly-rootfs to be added by the basic image.bbclass.
+   - Extended image features added by core-image.bbclass.
+   - SDK related image features by the populate_sdk_base.bbclass.
+
+My $0.02
+
+Cheers,
+:rjs
 
