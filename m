@@ -1,26 +1,26 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 00AAD6028A
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id D7231701D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 09:25:19 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 14 Jul 2014 02:25:20 -0700
+	Mon, 14 Jul 2014 09:34:32 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 14 Jul 2014 02:34:34 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,657,1400050800"; d="scan'208";a="569429514"
+X-IronPort-AV: E=Sophos;i="5.01,657,1400050800"; d="scan'208";a="572724623"
 Received: from snaufer-mobl1.gar.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.80])
-	by fmsmga002.fm.intel.com with ESMTP; 14 Jul 2014 02:24:55 -0700
+	by orsmga002.jf.intel.com with ESMTP; 14 Jul 2014 02:34:33 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Date: Mon, 14 Jul 2014 10:24:52 +0100
-Message-ID: <3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
+Date: Mon, 14 Jul 2014 10:34:32 +0100
+Message-ID: <2597354.DlVRPly8Em@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.13.2 (Linux/3.15.4-200.fc20.x86_64; KDE/4.13.2; x86_64; ; )
-In-Reply-To: <alpine.LFD.2.11.1407130915280.31826@localhost>
-References: <alpine.LFD.2.11.1407130915280.31826@localhost>
+In-Reply-To: <alpine.LFD.2.11.1407111233360.5222@localhost>
+References: <alpine.LFD.2.11.1407111233360.5222@localhost>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: overriding tasks with EXPORT_FUNCTIONS
+Subject: Re: the awkwardness of using core-image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,29 +34,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 09:25:20 -0000
+X-List-Received-Date: Mon, 14 Jul 2014 09:34:39 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
 Hi Robert,
 
-On Sunday 13 July 2014 10:19:08 Robert P. J. Day wrote:
->   followup to last post -- all of the methods for "overriding" task
-> definitions in the last post can be used without predeclaring that
-> you're about to do that; you just go ahead and do it in either a class
-> file or a recipe file. on the other hand, EXPORT_FUNCTIONS allows you
-> to retain the base definition of a task (or non-task function, as i
-> read it), then define a more general enhanced version.
+On Friday 11 July 2014 12:51:54 Robert P. J. Day wrote:
+>   some observations/questions on core-image.bbclass, and whether it
+> can be used more understandably. this is being written from the
+> perspective of someone who has had the occasional student ask, "why
+> was it done *that* way?"
 > 
->   (side note: i don't see a single mention of "EXPORT_FUNCTIONS" in
-> any of the numerous yocto docs -- i think this feature needs some
-> explanation *somewhere*. :-)
+>   so here's the important part of core-image.bbclass:
+> 
+> CORE_IMAGE_BASE_INSTALL = '\
+>     packagegroup-core-boot \
+>     packagegroup-base-extended \
+>     \
+>     ${CORE_IMAGE_EXTRA_INSTALL} \
+>     '
+> 
+> CORE_IMAGE_EXTRA_INSTALL ?= ""
+> 
+> IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
+> 
+> inherit image
+> 
+>   whose job is obviously to define the final contents in IMAGE_INSTALL
+> to be handed off to image.bbclass. so far, so good. but notice first
+> that while IMAGE_INSTALL and CORE_IMAGE_EXTRA_INSTALL are weakly
+> assigned, CORE_IMAGE_BASE_INSTALL is *not*, which -- if one is
+> perusing that file -- strongly suggests that if you're inheriting
+> from this class file, you really should use that value. but it doesn't
+> work that way.
+> 
+>   first, here's (the relevant parts of) core-image-base.bb:
+> 
+> IMAGE_FEATURES += "splash"
+> inherit core-image
+> 
+>   that's perfect -- define an additional feature, then pull in
+> core-image to take care of the rest. perfectly understandable.
+> 
+>   core-image-minimal.bb is *not* so clean:
+> 
+> IMAGE_INSTALL = "packagegroup-core-boot ${ROOTFS_PKGMANAGE_BOOTSTRAP}
+> ${CORE_IMAGE_EXTRA_INSTALL}"
+> inherit core-image
+> 
+>   i consider this recipe file potentially confusing since, although it
+> inherits core-image, it effectively stomps on the settings in there,
+> and just rams an overriding value into IMAGE_INSTALL. in short, rather
+> than "inheriting" cleanly from core-image and extending or enhancing
+> the recipe, core-image-mimimal simply kicks IMAGE_INSTALL out of the
+> way and sets its own final value.
 
-Did you try the new BitBake manual?
-
-http://www.yoctoproject.org/docs/current/bitbake-user-manual/bitbake-user-manual.html#flexible-inheritance-for-class-functions
-
-Let me know if that doesn't answer your questions.
+As core-image.bbclass currently works, it core-image-minimal must do this; 
+otherwise you'll get packagegroup-base-extended in the image and the name 
+"minimal" won't be true anymore. If on the other hand you inherit image 
+instead of core-image then you won't be able to use the IMAGE_FEATURES 
+definitions that core-image.bbclass defines.
 
 Cheers,
 Paul
