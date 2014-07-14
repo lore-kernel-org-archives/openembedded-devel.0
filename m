@@ -1,28 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id C4D5270436
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 10:22:56 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 14 Jul 2014 03:22:57 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,657,1400050800"; d="scan'208";a="542972115"
-Received: from snaufer-mobl1.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.80])
-	by orsmga001.jf.intel.com with ESMTP; 14 Jul 2014 03:22:56 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Date: Mon, 14 Jul 2014 11:22:55 +0100
-Message-ID: <2196901.bs1Wfm6nKY@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.2 (Linux/3.15.4-200.fc20.x86_64; KDE/4.13.2; x86_64; ; )
-In-Reply-To: <alpine.LFD.2.11.1407140614070.4257@localhost>
-References: <alpine.LFD.2.11.1407130915280.31826@localhost>
-	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
-	<alpine.LFD.2.11.1407140614070.4257@localhost>
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id CCF22701A9;
+	Mon, 14 Jul 2014 10:31:27 +0000 (UTC)
+Received: from [69.196.158.250] (port=40660 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X6dXb-0002xi-77; Mon, 14 Jul 2014 06:31:27 -0400
+Date: Mon, 14 Jul 2014 06:31:18 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+In-Reply-To: <3833732.EFEfTvAqk5@peggleto-mobl5.ger.corp.intel.com>
+Message-ID: <alpine.LFD.2.11.1407140627370.6362@localhost>
+References: <alpine.LFD.2.11.1407101115390.10701@localhost>
+	<CAP9ODKq1vdW+eZ64gWGbSAygxfYkMCKwOAZGUOD-WntUN+azJA@mail.gmail.com>
+	<3833732.EFEfTvAqk5@peggleto-mobl5.ger.corp.intel.com>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: overriding tasks with EXPORT_FUNCTIONS
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] any value in keeping the backward compat "task-core" stuff?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,53 +44,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 10:23:00 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 14 Jul 2014 10:31:29 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Monday 14 July 2014 06:18:58 Robert P. J. Day wrote:
-> On Mon, 14 Jul 2014, Paul Eggleton wrote:
-> > Hi Robert,
-> > 
-> > On Sunday 13 July 2014 10:19:08 Robert P. J. Day wrote:
-> > >   followup to last post -- all of the methods for "overriding" task
-> > > 
-> > > definitions in the last post can be used without predeclaring that
-> > > you're about to do that; you just go ahead and do it in either a class
-> > > file or a recipe file. on the other hand, EXPORT_FUNCTIONS allows you
-> > > to retain the base definition of a task (or non-task function, as i
-> > > read it), then define a more general enhanced version.
-> > > 
-> > >   (side note: i don't see a single mention of "EXPORT_FUNCTIONS" in
-> > > 
-> > > any of the numerous yocto docs -- i think this feature needs some
-> > > explanation *somewhere*. :-)
-> > 
-> > Did you try the new BitBake manual?
-> > 
-> > http://www.yoctoproject.org/docs/current/bitbake-user-manual/bitbake-user-> > manual.html#flexible-inheritance-for-class-functions
-> > 
-> > Let me know if that doesn't answer your questions.
-> 
->   actually, i worded the above *really* badly. i see it in the bitbake
-> user manual, i was referring to the "yocto-docs" layer, which contains
-> all of the yocto docs but not the bitbake manual, which might mislead
-> some people into not knowing that the bitbake user manual is even
-> there.
-> 
->   i know bitbake is outside the scope of what belongs in the
-> yocto-docs layer, but perhaps there should be at least a pointer to it
-> in the yocto-docs README file?
+On Mon, 14 Jul 2014, Paul Eggleton wrote:
 
-Yes I think that would be a good idea. In fact the BitBake manual being up-to-
-date is a relatively new thing so we're probably missing pointers / links to 
-it in a number of places.
+> On Friday 11 July 2014 20:39:04 Otavio Salvador wrote:
+> > On Thu, Jul 10, 2014 at 12:21 PM, Robert P. J. Day
+> >
+> > <rpjday@crashcourse.ca> wrote:
+> > >   a number of the current packagegroup recipe files still have
+> > >
+> > > backward compatibility support for the old "task-core" names, seems
+> > > like that's been there for well over a year, would it be safe to
+> > > finally just toss that? seems like everyone's had enough time to make
+> > > the move to the new names, and it would be clearer to not confuse the
+> > > proper use of the word "task" these days.
+> >
+> > I agree; however this question should also be send to oe-core mailing
+> > list (added in Cc)
+>
+> I agree as well; these should go. I know there are some who want to
+> keep these indefinitely for upgrade purposes, but I think there's a
+> limit to how long they should stay around in OE-Core. They can
+> always be preserved in bbappends for those that do want to keep
+> them.
 
-Cheers,
-Paul
+  getting rid of all that "task-core" stuff in packagegroups looks
+pretty easy, except for this snippet in
+packagegroup-core-full-cmdline.bb:
+
+    packages = d.getVar("PACKAGES", True).split()
+    for pkg in packages:
+        if pkg.endswith('-dev'):
+            mapped = namemap.get(pkg[:-4], None)
+            if mapped:
+                mapped += '-dev'
+        elif pkg.endswith('-dbg'):
+            mapped = namemap.get(pkg[:-4], None)
+            if mapped:
+                mapped += '-dbg'
+        else:
+            mapped = namemap.get(pkg, None)
+
+        if mapped:
+            oldtaskname = mapped.replace("packagegroup-core", "task-core")
+            mapstr = " %s %s" % (mapped, oldtaskname)
+            d.appendVar("RPROVIDES_%s" % pkg, mapstr)
+            d.appendVar("RREPLACES_%s" % pkg, mapstr)
+            d.appendVar("RCONFLICTS_%s" % pkg, mapstr)
+}
+
+  would one simply delete that last "if mapped:" conditional in its
+entirety? or what?
+
+rday
 
 -- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
