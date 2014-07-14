@@ -1,38 +1,32 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 154266B7BF
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id B41D36ACED
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 17:19:32 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id z12so4366044wgg.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 10:19:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=fxS5nCz5lL5k7glDyltIyWRRkHi74B6jAmQf9tGhzRg=;
-	b=xvl7lAxh5/Lzs+9p1AxaYvRbBMtMiKEx704a9ezeGW7BWEzmPJR5F7d3ZYZigxBNIs
-	IN+xX5VZH8hFa++rrbfTT+5IhAFrPvhOc9waulq/syv9G4rPGb4Cig90A4FpJ76Qou1s
-	XSu3mSYoKc702gRE9uR5yOXQH6LpyIEQ+qY1AwvM8S2lP5OZJyCOVOzeVONIc9peS/1Y
-	LCjPR4s5xTU+Ur2kFZMIutNhY7DaQEpEQ5MT78aRkj06L5PycpmjfmAq3BUlQbEKiLzH
-	FbCPY1v09y8oklUXbUSJixZVBUxfvDYHz5U0yAeUeeZkPNvcGdppwpF3UZMo+AZQDvrZ
-	AL+Q==
+	Mon, 14 Jul 2014 19:06:01 +0000 (UTC)
+Received: from [69.196.158.250] (port=50604 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X6lZa-00060t-Rj for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jul 2014 15:06:02 -0400
+Date: Mon, 14 Jul 2014 15:05:53 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.11.1407141457150.14590@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-X-Received: by 10.180.206.15 with SMTP id lk15mr25548744wic.43.1405358373456; 
-	Mon, 14 Jul 2014 10:19:33 -0700 (PDT)
-Received: by 10.194.18.114 with HTTP; Mon, 14 Jul 2014 10:19:33 -0700 (PDT)
-In-Reply-To: <CALmOhgngis1Qc8GeLhpjYpb1-m1GNXtseuji+e4pnNiAXr7ByQ@mail.gmail.com>
-References: <1403634363-18032-1-git-send-email-trevor.woerner@linaro.org>
-	<CAOLEWZXqQ_tnZEiVi5JxLbWGktAXNnTWexw_+C0WY+GbyW6V0w@mail.gmail.com>
-	<53A9E471.8080500@linaro.org>
-	<CAOLEWZUbT17s1pxuxK7Tkvvf6Jk2AO2w5dk2iWuAVCfzTkpPsA@mail.gmail.com>
-	<CALmOhgngis1Qc8GeLhpjYpb1-m1GNXtseuji+e4pnNiAXr7ByQ@mail.gmail.com>
-Date: Mon, 14 Jul 2014 10:19:33 -0700
-Message-ID: <CAOLEWZW-Qmkqwt=B=69iKHnfv_ebM4xeXq+pAh07=BOyYawDXg@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: Trevor Woerner <trevor.woerner@linaro.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][MASTER][PATCH] lxdm: add libpam DEPENDS
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: defining FEATURE_PACKAGES_* in core-image.bbclass vs image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,39 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 17:19:40 -0000
-Content-Type: text/plain; charset=UTF-8
-
-In theory pam optional, as it's a configure option (and it's been a USE
-flag forever).  I don't use systemd, bu I would guess the systemd login
-manager might work on its own (ie, without pam).  Not sure if lxdm supports
-remote auth or whatever, but for now I'll assume that pam is optional and
-test what I can.  I'll let you test the systemd version...  ;)
-
-Steve
+X-List-Received-Date: Mon, 14 Jul 2014 19:06:06 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-On Thu, Jul 10, 2014 at 8:09 AM, Trevor Woerner <trevor.woerner@linaro.org>
-wrote:
+  i was perusing core-image.bbclass and noticed that the alleged list
+of "Available IMAGE_FEATURES" didn't mention "splash" so i was going
+to submit a simple patch to add a line for it, before i noticed
+something that puzzled me.
 
-> Hi Steve,
->
-> On 25 June 2014 00:16, Stephen Arnold <stephen.arnold42@gmail.com> wrote:
-> > Yeah, it would certainly make more sense with a packageconfig option for
-> > that; currently it doesn't work either with or without the "pam" feature
-> due
-> > to the missing plugins.  So if you want hard deps, then the plugins need
-> to
-> > be included as rdeps.  Otherwise, adding an appropriate packageconfig
-> option
-> > to the flexible depends sounds good.
-> >
-> > I still need an init script anyway, so...
->
-> Just curious to know if you're still working on this? It doesn't look
-> to me as though pam is optional with lxdm (?)
->
-> Best regards,
->     Trevor
->
+  i know there are some features that don't correspond to packagegroup
+names, and here's one from core-image.bbclass:
+
+FEATURE_PACKAGES_hwcodecs = "${MACHINE_HWCODECS}"
+
+so that feature is clearly a "core image" feature. (i know the
+meta-intel layer uses this feature.)
+
+  then i noticed that the "splash" feature is defined, not in
+core-image.bbclass, but in the more basic image.bbclass, as is
+package-management:
+
+FEATURE_PACKAGES_package-management = "${ROOTFS_PKGMANAGE}"
+SPLASH ?= "psplash"
+FEATURE_PACKAGES_splash = "${SPLASH}"
+
+  so is there some rationale for deciding which FEATURE_PACKAGES
+settings are defined in core-image, while others are defined in
+image?
+
+  i'll still add a line for splash to core-image.bbclass.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
