@@ -1,38 +1,32 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
-	[209.85.192.47])
-	by mail.openembedded.org (Postfix) with ESMTP id EBD2B703E0
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B70B7039E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 12:30:47 +0000 (UTC)
-Received: by mail-qg0-f47.google.com with SMTP id i50so556819qgf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 05:30:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=lThahe6VW2kWn2iL0NsXVa+5sD69Y5PIysVqxxvYg4Y=;
-	b=OxW1eSPlcpySA6fJle09OzYG7/vT4V5EEZM0GmyTnjyApISmNyMW4tvNcm9vWEFA6u
-	OGh6o+nQkT0u+73sVrB9OfWCyyZxAePgaxLTDZ4jwU+exkDYHOwQggR4K57kQTN0/B/G
-	JeTUR1YZt9LCbI6dWB6tXCFPHcb71aWmeuXUF/N6+EI1g+1x5hteoJlazRVD5JdceAFr
-	NiizdZm7Kycq2UOsFyYDKFyTO8qjfjQxOR2OVilS8jxdrhf+NJDIuUlHwKMmZFCy8pVA
-	J9ywawRB7ZxCKQ9BvtC1sQPddM13FA0//MV/L9zjTmLHdtQ/d99FS1yi4q0nKq5cXc2i
-	q5eQ==
-X-Gm-Message-State: ALoCoQlE0mcl8L3Z9AzUMBv8tCQAu5BorP6lSwi5A0tLSPlGiWw0Oo9Av2/Q95W/iwjXHZwAYiAY
-X-Received: by 10.140.91.164 with SMTP id z33mr22769654qgd.65.1405341048733;
-	Mon, 14 Jul 2014 05:30:48 -0700 (PDT)
+	Mon, 14 Jul 2014 13:03:16 +0000 (UTC)
+Received: from [69.196.158.250] (port=47112 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X6fuX-0008AW-KZ for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jul 2014 09:03:17 -0400
+Date: Mon, 14 Jul 2014 09:03:09 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.11.1407140857500.26321@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-Received: by 10.140.86.99 with HTTP; Mon, 14 Jul 2014 05:30:28 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.11.1407140804360.29952@localhost>
-References: <alpine.LFD.2.11.1407130915280.31826@localhost>
-	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
-	<alpine.LFD.2.11.1407140804360.29952@localhost>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 14 Jul 2014 13:30:28 +0100
-Message-ID: <CAJTo0LapfkxVsasW=Mt6HTVqBuDk=bE=faeW9BCzVHOF3A-9zA@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: overriding tasks with EXPORT_FUNCTIONS
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-oe][PATCH] Remove deprecated "task" backward compatibility from packagegroups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +40,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 12:30:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 14 Jul 2014 13:03:25 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 14 July 2014 13:20, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
-> but, as far as i can tell, that is the only class that requires a
-> package name hook, and it simply defines its own implementation -- it
-> does nothing with package.bbclass and makes no reference to the
-> exported function package_package_name_hook(). so am i just
-> misunderstanding something? what was the point of defining and
-> exporting that function in package.bbclass if no other class takes
-> advantage of it?
 
-So there needs to be an empty implementation and EXPORT_FUNCTION for
-package_package_name_hook so that you don't get "cannot find function
-package_name_hook" when you don't have the debian.bbclass enabled.
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-In cleaning that up I proposed removing the EXPORT_FUNCTION entirely
-for the hook, but Richard recalled there being something out there
-that did use the ability to chain up into debian.bbclass's
-implementation, so I kept it.
+---
 
-Ross
+  all of this looked relatively straightforward.
+
+diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
+index 4e5ce78..5ead412 100644
+--- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
++++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-sdk.bb
+@@ -11,9 +11,6 @@ require packagegroup-efl-sdk.inc
+
+ PACKAGES = "${PN}"
+
+-RPROVIDES_${PN} += "task-efl-sdk"
+-RREPLACES_${PN} += "task-efl-sdk"
+-RCONFLICTS_${PN} += "task-efl-sdk"
+ RDEPENDS_${PN} = "\
+     packagegroup-core-sdk \
+     ${SDK-EFL} \
+diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
+index 1bcac45..6a3f33d 100644
+--- a/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
++++ b/meta-efl/recipes-efl/packagegroups/packagegroup-efl-standalone-sdk-target.bb
+@@ -11,9 +11,6 @@ require packagegroup-efl-sdk.inc
+
+ PACKAGES = "${PN} ${PN}-dbg"
+
+-RPROVIDES_${PN} += "task-efl-standalone-sdk-target"
+-RREPLACES_${PN} += "task-efl-standalone-sdk-target"
+-RCONFLICTS_${PN} += "task-efl-standalone-sdk-target"
+ RDEPENDS_${PN} = "\
+     packagegroup-core-standalone-sdk-target \
+     ${SDK-EFL} \
+diff --git a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
+index 47f758a..63ef0f6 100644
+--- a/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
++++ b/meta-efl/recipes-efl/packagegroups/packagegroup-x11-illume.bb
+@@ -11,9 +11,6 @@ inherit packagegroup allarch
+ ETHEME ?= "e-wm-theme-default"
+ ECONFIG ?= "e-wm-config-mobile"
+
+-RPROVIDES_${PN} += "task-x11-illume"
+-RREPLACES_${PN} += "task-x11-illume"
+-RCONFLICTS_${PN} += "task-x11-illume"
+ RDEPENDS_${PN} = "\
+     packagegroup-core-x11-xserver \
+     packagegroup-core-x11-utils \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+index 08db943..ad1cd83 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+@@ -23,9 +23,6 @@ MACHINE_EXTRA_RRECOMMENDS ?= ""
+ #
+ TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
+
+-RPROVIDES_${PN} += "task-basic"
+-RREPLACES_${PN} += "task-basic"
+-RCONFLICTS_${PN} += "task-basic"
+ #
+ # The section below is designed to match with packagegroup-boot, but doesn't depend on it to allow for more freedom
+ # when writing image recipes.
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+index 3b634f3..61a519d 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+@@ -19,10 +19,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
+ # Make sure we build the kernel
+ DEPENDS = "virtual/kernel"
+
+-RPROVIDES_${PN} += "task-boot"
+-RREPLACES_${PN} += "task-boot"
+-RCONFLICTS_${PN} += "task-boot"
+-
+ #
+ # minimal set of packages - needed to boot
+ #
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+index fbba23c..2a4b067 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-cli-tools.bb
+@@ -10,13 +10,6 @@ inherit packagegroup allarch
+
+ PACKAGES += "${PN}-debug"
+
+-RPROVIDES_${PN} += "task-cli-tools"
+-RPROVIDES_${PN}-debug += "task-cli-tools-debug"
+-RREPLACES_${PN} += "task-cli-tools"
+-RREPLACES_${PN}-debug += "task-cli-tools-debug"
+-RCONFLICTS_${PN} += "task-cli-tools"
+-RCONFLICTS_${PN}-debug += "task-cli-tools-debug"
+-
+ RDEPENDS_${PN} = "\
+     dbus-daemon-proxy \
+     dosfstools \
+diff --git a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
+index 9b8cc9a..aafe63a 100644
+--- a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
++++ b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
+@@ -6,9 +6,9 @@ PR = "r1"
+
+ inherit packagegroup allarch
+
+-RPROVIDES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
+-RREPLACES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
+-RCONFLICTS_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
++RPROVIDES_${PN} += "packagegroup-native-sdk"
++RREPLACES_${PN} += "packagegroup-native-sdk"
++RCONFLICTS_${PN} += "packagegroup-native-sdk"
+ RDEPENDS_${PN} = "gcc-symlinks g++-symlinks cpp cpp-symlinks \
+                   binutils-symlinks \
+                   perl-modules \
+diff --git a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
+index 931564f..632e7d4 100644
+--- a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
++++ b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
+@@ -12,18 +12,6 @@ PACKAGES += "\
+     ${PN}-chinese \
+     ${PN}-japanese \
+ "
+-RPROVIDES_${PN} += "task-fonts-truetype"
+-RPROVIDES_${PN}-core += "task-fonts-truetype-core"
+-RPROVIDES_${PN}-chinese += "task-fonts-truetype-chinese"
+-RPROVIDES_${PN}-japanese += "task-fonts-truetype-japanese"
+-RREPLACES_${PN} += "task-fonts-truetype"
+-RREPLACES_${PN}-core += "task-fonts-truetype-core"
+-RREPLACES_${PN}-chinese += "task-fonts-truetype-chinese"
+-RREPLACES_${PN}-japanese += "task-fonts-truetype-japanese"
+-RCONFLICTS_${PN} += "task-fonts-truetype"
+-RCONFLICTS_${PN}-core += "task-fonts-truetype-core"
+-RCONFLICTS_${PN}-chinese += "task-fonts-truetype-chinese"
+-RCONFLICTS_${PN}-japanese += "task-fonts-truetype-japanese"
+
+ RRECOMMENDS_${PN} = "\
+     ${PN}-core \
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+index 7fcb388..28cfc7f 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+@@ -6,10 +6,6 @@ PR = "r5"
+
+ inherit packagegroup
+
+-RPROVIDES_${PN} += "task-xfce-base"
+-RREPLACES_${PN} += "task-xfce-base"
+-RCONFLICTS_${PN} += "task-xfce-base"
+-
+ RDEPENDS_${PN} = " \
+     xfwm4 \
+     xfce4-session \
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+index e91362e..0eab1cc 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+@@ -9,10 +9,6 @@ PNBLACKLIST[packagegroup-xfce-extended] = "BROKEN: rdepends on broken xfce4-powe
+
+ inherit packagegroup
+
+-RPROVIDES_${PN} += "task-xfce-extended"
+-RREPLACES_${PN} += "task-xfce-extended"
+-RCONFLICTS_${PN} += "task-xfce-extended"
+-
+ # mandatory
+ RDEPENDS_${PN} = " \
+     packagegroup-xfce-base \
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
