@@ -1,43 +1,24 @@
-Return-Path: <B40290@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1lp0141.outbound.protection.outlook.com [207.46.163.141])
-	by mail.openembedded.org (Postfix) with ESMTP id AD0E37018D
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 986BE70391
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 03:13:09 +0000 (UTC)
-Received: from BY2PR03MB254.namprd03.prod.outlook.com (10.242.37.17) by
-	BY2PR03MB255.namprd03.prod.outlook.com (10.242.37.22) with Microsoft
-	SMTP Server (TLS) id 15.0.985.8; Mon, 14 Jul 2014 03:13:06 +0000
-Received: from BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.227]) by
-	BY2PR03MB254.namprd03.prod.outlook.com ([169.254.16.78]) with mapi id
-	15.00.0985.008; Mon, 14 Jul 2014 03:13:06 +0000
-From: "B40290@freescale.com" <B40290@freescale.com>
-To: "saul.wold@intel.com" <saul.wold@intel.com>, "jessica.zhang@intel.com"
-	<jessica.zhang@intel.com>,
-	"david.nystrom@enea.com" <david.nystrom@enea.com>
-Thread-Topic: what is the process for sending patches about
-	eclipse-poky-kepler?
-Thread-Index: Ac+fEYRgwS5Hm75hRqyAd4Bq3kTP7A==
-Date: Mon, 14 Jul 2014 03:13:05 +0000
-Message-ID: <87b40d7036f0487e862c6062ff66ee48@BY2PR03MB254.namprd03.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [123.151.195.50]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:
-x-forefront-prvs: 02723F29C4
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(6009001)(189002)(199002)(164054003)(53754006)(76576001)(107046002)(18717965001)(33646001)(558084003)(80022001)(66066001)(64706001)(19580395003)(20776003)(15202345003)(15975445006)(74316001)(229853001)(77982001)(19609705001)(79102001)(81542001)(76482001)(83322001)(85306003)(105586002)(77096002)(54356999)(2656002)(50986999)(46102001)(19300405004)(31966008)(74502001)(86362001)(99396002)(74662001)(106356001)(87936001)(81342001)(4396001)(21056001)(19625215002)(101416001)(95666004)(99286002)(16236675004)(85852003)(83072002)(92566001)(2201001)(108616002);
-	DIR:OUT; SFP:; SCL:1; SRVR:BY2PR03MB255;
-	H:BY2PR03MB254.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; LANG:en; 
+	Mon, 14 Jul 2014 06:12:10 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6E6CB3B021538
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Jul 2014 23:12:11 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 13 Jul 2014 23:12:11 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 14 Jul 2014 14:12:09 +0800
+Message-ID: <1405318330-20493-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "poky.watcher@fake.user" <poky.watcher@fake.user>,
-	"poky.adt.watcher@fake.user" <poky.adt.watcher@fake.user>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: what is the process for sending patches about eclipse-poky-kepler?
+Subject: [PATCH][meta-perl] libxml-sax-writer-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,21 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 03:13:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Jul 2014 06:12:11 -0000
+Content-Type: text/plain
 
-Hello all,
+From: Roy Li <rongqing.li@windriver.com>
 
-I  need to send patches to eclipse-poky-kepler .
-What is the process for sending patches ?
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../libxml/libxml-sax-writer-perl_0.54.bb          |   27 ++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
 
-
-
-
-Thanks,
-Chunrong
-
+diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+new file mode 100644
+index 0000000..c7a24fc
+--- /dev/null
++++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "XML::SAX::Writer - SAX2 Writer"
++DESCRIPTION = "\
++XML::SAX::Writer helps to serialize SAX2 representations of XML documents to \
++strings, files, and other flat representations. It handles charset encodings, \
++XML escaping conventions, and so forth. It is still considered alpha, \
++although it has been put to limited use in settings such as XML::LibXML and \
++the AxKit XML Application Server. \
++"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPLv1+"
++HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
++DEPENDS += "libxml-filter-buffertext-perl-native"
++RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
++
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
++SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
++SRC_URI[sha256sum] = "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
++
++LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
++
++S = "${WORKDIR}/XML-SAX-Writer-${PV}"
++
++inherit cpan
++
++BBCLASSEXTEND = "native"
++
++PACKAGE_ARCH = "all"
+-- 
+1.7.10.4
 
 
