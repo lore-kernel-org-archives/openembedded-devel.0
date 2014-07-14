@@ -1,27 +1,18 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id B5BDE703E0;
-	Mon, 14 Jul 2014 09:37:44 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 14 Jul 2014 02:37:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,657,1400050800"; d="scan'208";a="569433237"
-Received: from snaufer-mobl1.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.80])
-	by fmsmga002.fm.intel.com with ESMTP; 14 Jul 2014 02:37:42 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Jul 2014 10:37:42 +0100
-Message-ID: <3833732.EFEfTvAqk5@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.2 (Linux/3.15.4-200.fc20.x86_64; KDE/4.13.2; x86_64; ; )
-In-Reply-To: <CAP9ODKq1vdW+eZ64gWGbSAygxfYkMCKwOAZGUOD-WntUN+azJA@mail.gmail.com>
-References: <alpine.LFD.2.11.1407101115390.10701@localhost>
-	<CAP9ODKq1vdW+eZ64gWGbSAygxfYkMCKwOAZGUOD-WntUN+azJA@mail.gmail.com>
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 78DB465C8D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 09:58:19 +0000 (UTC)
+Message-ID: <53C3A9B5.5000005@communistcode.co.uk>
+Date: Mon, 14 Jul 2014 10:58:13 +0100
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [OE-core] any value in keeping the backward compat "task-core" stuff?
+To: openembedded-devel@lists.openembedded.org
+References: <87b40d7036f0487e862c6062ff66ee48@BY2PR03MB254.namprd03.prod.outlook.com>
+In-Reply-To: <87b40d7036f0487e862c6062ff66ee48@BY2PR03MB254.namprd03.prod.outlook.com>
+Subject: Re: what is the process for sending patches about eclipse-poky-kepler?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,35 +26,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 09:37:51 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 14 Jul 2014 09:58:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Friday 11 July 2014 20:39:04 Otavio Salvador wrote:
-> On Thu, Jul 10, 2014 at 12:21 PM, Robert P. J. Day
+On 14/07/14 04:13, B40290@freescale.com wrote:
+> Hello all,
 > 
-> <rpjday@crashcourse.ca> wrote:
-> >   a number of the current packagegroup recipe files still have
-> > 
-> > backward compatibility support for the old "task-core" names, seems
-> > like that's been there for well over a year, would it be safe to
-> > finally just toss that? seems like everyone's had enough time to make
-> > the move to the new names, and it would be clearer to not confuse the
-> > proper use of the word "task" these days.
+> I  need to send patches to eclipse-poky-kepler .
+> What is the process for sending patches ?
 > 
-> I agree; however this question should also be send to oe-core mailing
-> list (added in Cc)
+> 
+> 
+> 
+> Thanks,
+> Chunrong
+> 
+> 
 
-I agree as well; these should go. I know there are some who want to keep these 
-indefinitely for upgrade purposes, but I think there's a limit to how long they 
-should stay around in OE-Core. They can always be preserved in bbappends for 
-those that do want to keep them.
+If it's poky specific then I would imagine either sending them to Poky
+list, or the Yocto list would be most appropriate.
 
-Cheers,
-Paul
+https://www.yoctoproject.org/tools-resources/community/mailing-lists
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+  Jack Mitchell (jack@embed.me.uk)
+  Embedded Systems Engineer
+  Cambridgeshire, UK
+  http://www.embed.me.uk
+-- 
 
