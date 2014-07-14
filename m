@@ -1,27 +1,26 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B92D703B0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 00AAD6028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 09:17:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6E9HaOt016917
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 14 Jul 2014 02:17:36 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Mon, 14 Jul 2014 02:17:35 -0700
-Message-ID: <53C3A02E.3010002@windriver.com>
-Date: Mon, 14 Jul 2014 17:17:34 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Mon, 14 Jul 2014 09:25:19 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 14 Jul 2014 02:25:20 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,657,1400050800"; d="scan'208";a="569429514"
+Received: from snaufer-mobl1.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.80])
+	by fmsmga002.fm.intel.com with ESMTP; 14 Jul 2014 02:24:55 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Date: Mon, 14 Jul 2014 10:24:52 +0100
+Message-ID: <3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.2 (Linux/3.15.4-200.fc20.x86_64; KDE/4.13.2; x86_64; ; )
+In-Reply-To: <alpine.LFD.2.11.1407130915280.31826@localhost>
+References: <alpine.LFD.2.11.1407130915280.31826@localhost>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1405318339-20529-1-git-send-email-rongqing.li@windriver.com>
-	<53C394BF.3050708@windriver.com> <20140714090523.GB23194@axis.com>
-In-Reply-To: <20140714090523.GB23194@axis.com>
-Subject: Re: [PATCH][meta-perl] libxml-libxml-perl: add recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: overriding tasks with EXPORT_FUNCTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,34 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 09:17:44 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 Jul 2014 09:25:20 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+Hi Robert,
 
+On Sunday 13 July 2014 10:19:08 Robert P. J. Day wrote:
+>   followup to last post -- all of the methods for "overriding" task
+> definitions in the last post can be used without predeclaring that
+> you're about to do that; you just go ahead and do it in either a class
+> file or a recipe file. on the other hand, EXPORT_FUNCTIONS allows you
+> to retain the base definition of a task (or non-task function, as i
+> read it), then define a more general enhanced version.
+> 
+>   (side note: i don't see a single mention of "EXPORT_FUNCTIONS" in
+> any of the numerous yocto docs -- i think this feature needs some
+> explanation *somewhere*. :-)
 
-On 07/14/2014 05:05 PM, Olof Johansson wrote:
-> On 14-07-14 10:28 +0200, Hongxu Jia wrote:
->> On 07/14/2014 02:12 PM, rongqing.li@windriver.com wrote:
->>> +++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
->>
->> s/libxml-libxml-perl/libxml-perl/
->>
->> How about rename the recipe with "libxml-perl" ?
->
-> This would break the naming convention, lib<distribution name>-perl. The
-> module is *actually* named XML::LibXML. Even though it looks strange, I
-> think it would be preferable to stick to the convention.
->
+Did you try the new BitBake manual?
 
-Thanks for all.
+http://www.yoctoproject.org/docs/current/bitbake-user-manual/bitbake-user-manual.html#flexible-inheritance-for-class-functions
 
-And HongXu found a building failure on arm, I will fix it, and resend it.
+Let me know if that doesn't answer your questions.
 
-
-
+Cheers,
+Paul
 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
