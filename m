@@ -1,36 +1,41 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
-	[64.235.106.9])
-	by mail.openembedded.org (Postfix) with ESMTP id DA097704A2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id DD94F703A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 13:33:28 +0000 (UTC)
-Received: from [69.196.158.250] (port=47181 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X6gNk-00016H-Of; Mon, 14 Jul 2014 09:33:28 -0400
-Date: Mon, 14 Jul 2014 09:33:25 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CAJTo0LapfkxVsasW=Mt6HTVqBuDk=bE=faeW9BCzVHOF3A-9zA@mail.gmail.com>
-Message-ID: <alpine.LFD.2.11.1407140907400.28064@localhost>
-References: <alpine.LFD.2.11.1407130915280.31826@localhost>
-	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
-	<alpine.LFD.2.11.1407140804360.29952@localhost>
-	<CAJTo0LapfkxVsasW=Mt6HTVqBuDk=bE=faeW9BCzVHOF3A-9zA@mail.gmail.com>
-User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+	Mon, 14 Jul 2014 14:54:00 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id w61so3343292wes.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jul 2014 07:54:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=wZbxioqIHMp3AW+85EA3rXziuSSAcp99AbAA3qkDTc4=;
+	b=akVUyMwR13wfJdhBPQgVYdLHW+1EphmI83whXwOxTkSJNElYijB0FMeQ1oJZ0s3axW
+	R87D8enkN9lBMt2biRjDLoqvHbKKBJWbEedO6efH+MnqXrS9cf08xSmOEkkhM2MWRAis
+	AWdHYqxFoplLKPAZwVyhaSstLWcC9G1tqcYZPgchSQlpt9+LNEl6pt0KHB5VfoL3BhX6
+	6fCCix/2wUWSpXcorvyI+545/kHQEWg1idOAEAoyf+5EzuQkB2Qpl9+luCeB7BiwzofO
+	+7S/onQ9mOj85OBK5ROcFgrL7PTvvQDUJBXQ0VprYnO1AEb9psXbHOQ13Z1mFUjAv9a4
+	6DWA==
+X-Received: by 10.194.62.110 with SMTP id x14mr19953847wjr.15.1405349641381;
+	Mon, 14 Jul 2014 07:54:01 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	x13sm31953478wib.23.2014.07.14.07.54.00 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 14 Jul 2014 07:54:00 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 14 Jul 2014 16:54:09 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140714145409.GH2433@jama>
+References: <1405327294-4030-1-git-send-email-koen.kooi@linaro.org>
+	<1405327294-4030-2-git-send-email-koen.kooi@linaro.org>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: overriding tasks with EXPORT_FUNCTIONS
+In-Reply-To: <1405327294-4030-2-git-send-email-koen.kooi@linaro.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: Re: [meta-oe][PATCH 2/2] libhugetlbfs: fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,103 +49,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jul 2014 13:33:33 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 14 Jul 2014 14:54:12 -0000
+X-Groupsio-MsgNum: 50914
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aFi3jz1oiPowsTUB"
+Content-Disposition: inline
 
-On Mon, 14 Jul 2014, Burton, Ross wrote:
+--aFi3jz1oiPowsTUB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On 14 July 2014 13:20, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
-> > but, as far as i can tell, that is the only class that requires a
-> > package name hook, and it simply defines its own implementation -- it
-> > does nothing with package.bbclass and makes no reference to the
-> > exported function package_package_name_hook(). so am i just
-> > misunderstanding something? what was the point of defining and
-> > exporting that function in package.bbclass if no other class takes
-> > advantage of it?
->
-> So there needs to be an empty implementation and EXPORT_FUNCTION for
-> package_package_name_hook so that you don't get "cannot find
-> function package_name_hook" when you don't have the debian.bbclass
-> enabled.
->
-> In cleaning that up I proposed removing the EXPORT_FUNCTION entirely
-> for the hook, but Richard recalled there being something out there
-> that did use the ability to chain up into debian.bbclass's
-> implementation, so I kept it.
+On Mon, Jul 14, 2014 at 10:41:34AM +0200, Koen Kooi wrote:
+> Libhugetlbs doesn't generate proper .so.X libs, only two .so files. Packa=
+ge those in ${PN} and silence the resulting QA warning. This fixes:
+>=20
+>  ERROR: QA Issue: libhugetlbfs-tests rdepends on libhugetlbfs-dev
+>=20
+> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> ---
+>  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b=
+/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index af7ed3e..d3b64bf 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -25,6 +25,7 @@ COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64)=
+=2E*-linux*"
+> =20
+>  LIBARGS =3D "LIB32=3D${baselib} LIB64=3D${baselib}"
+>  EXTRA_OEMAKE =3D "'ARCH=3D${TARGET_ARCH}' 'OPT=3D${CFLAGS}' 'CC=3D${CC}'=
+ ${LIBARGS} V=3D1"
+> +PARALLEL_MAKE_pn-${PN} =3D ""
 
-  uh oh ... now i'm a bit confused again so let me back up a bit
-because i really want to understand this. my apologies for the tedium.
+Is _pn override really needed?
 
-  as i read it, the only purpose of EXPORT_FUNCTIONS is to support the
-idea of being able to qualify a function with its class name so that
-you can (effectively) have access to more than one function with the
-same "name" at the same time. first, let's see where this is *not*
-necessary.
+>  CFLAGS +=3D "-fexpensive-optimizations -frename-registers -fomit-frame-p=
+ointer -g0"
+> =20
+>  TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> @@ -46,12 +47,15 @@ do_install() {
+>            install-tests
+>  }
+> =20
+> -PARALLEL_MAKE_pn-${PN} =3D ""
+> =20
+>  PACKAGES =3D+ "${PN}-perl ${PN}-tests "
+> +FILES_${PN} +=3D "${libdir}/*.so"
+> +FILES_${PN}-dev =3D "${includedir}"
+>  FILES_${PN}-dbg +=3D "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir=
+}/libhugetlbfs/tests/obj64/.debug"
+>  FILES_${PN}-perl =3D "${libdir}/perl"
+>  FILES_${PN}-tests +=3D "${libdir}/libhugetlbfs/tests"
+> =20
+> +INSANE_SKIP_${PN} =3D "dev-so"
+> +
+>  INHIBIT_PACKAGE_STRIP =3D "1"
+>  INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
+> --=20
+> 1.9.3
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-  as an example, base.bbclass defines the routine:
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-oe_runmake() {
-        oe_runmake_call "$@" || die "oe_runmake failed"
-}
+--aFi3jz1oiPowsTUB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-now, since every class automatically inherits base.bbclass, all of
-those classes can call oe_runmake(), right? that routine is in their
-namespace, there is no need to export it, and they will all get that
-function as it's defined in base.bbclass.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-  in addition, even if a class inherits base.bbclass, it has the right
-to totally override that routine by redefining a new oe_runmake(),
-yes? (or possibly _appending or _prepending to it.) in any event, at
-any time, there is only one definition of a function called
-oe_runmake() in scope. so far, so good?
+iEYEARECAAYFAlPD7xEACgkQN1Ujt2V2gBxk/QCcDAcR6uuE+Z6zxnbMuLVzsKG5
+NrwAmQHBrDVhmBmWJAcNK+CdyAF+5NbR
+=kLWx
+-----END PGP SIGNATURE-----
 
-  what EXPORT_FUNCTIONS appears to do is simply allow you access to
-more than one function with the same "name", so let's look at
-base.bbclass and, say, the do_fetch() routine:
-
-python base_do_fetch() {
-    ... snip code ...
-}
-...
-EXPORT_FUNCTIONS do_fetch
-
-what does the above do? it now allows you to define, say,
-derived.bbclass, and define a new do_fetch() in terms of the base
-do_fetch(), as in:
-
-do_fetch() {
-    ...
-    base_do_fetch()
-    ...
-}
-
-however, if i created a new class that had no interest in redefining
-do_fetch() and i was happy with the base definition, i could simply
-continue to use the name do_fetch(), correct? the fact that that
-function was exported in base.bbclass is not relevant to me if i am
-not trying to redefine the name. (i suspect i could also refer to it
-by the name base_do_fetch() if i wanted, but that's unnecessary.)
-
-  that's why i was confused by ross' earlier paragraph about
-package_name_hook being defined in package.bbclass -- unless some
-other class is going to try to access two functions called
-"package_naem_hook" at the same time, i currently see no need to
-export it in package.bbclass. however, if there was something else
-going on somewhere that needed this as richard purdie suggested, then
-i'd be interested in knowing what that is just to understand the whole
-picture.
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
-
-
+--aFi3jz1oiPowsTUB--
