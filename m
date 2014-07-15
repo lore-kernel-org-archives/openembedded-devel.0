@@ -1,39 +1,34 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
-	[209.85.192.44])
-	by mail.openembedded.org (Postfix) with ESMTP id C754C6FE5C
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id DD3BD704C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 21:52:02 +0000 (UTC)
-Received: by mail-qg0-f44.google.com with SMTP id e89so26555qgf.3
+	Tue, 15 Jul 2014 22:39:34 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1X7BNj-00029v-I1 for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jul 2014 00:39:31 +0200
+Received: from 74-92-165-193-Oregon.hfc.comcastbusiness.net ([74.92.165.193])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jul 2014 00:39:31 +0200
+Received: from stephanoc by 74-92-165-193-Oregon.hfc.comcastbusiness.net with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 14:52:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=AwyF1jEIzFvz/55sQxVPZ6+vjfW0WyIILZ756ZmNtro=;
-	b=kHStY1lCmQvS7tG1V83ez/44SxwwAMLItU85MhOdUnBOc3un+I6rR6TukKfy9TNeXd
-	Vo5sCPs22BaeI9vHYXgFZ43Gl/xiaPt/iT0pYazgqg/fU1VAtdXLhuCCEWfVC5DSB9ZP
-	P5ImBepotlUu9gcOOPdRF7UUxgoA0UMW+nlA9Mkj8odyA5i3/gyIWAxJ8BuIYrNDz9b2
-	B81URRarX+mVG2IiML7lvwM9kHXQBtQ4Euz4i1rwrg9xFKRUnGyEfy50CkeAcmp1ZOPT
-	nU1VgO6vw0jQX1orneZOnzxUJJQIJfZiG1NPkIVMgwYWZ2m23yhilX0PkOxkA44inINx
-	fb8Q==
-X-Gm-Message-State: ALoCoQlfmmSR4f9dU+m12IoQyfmZmuU8QRjJj9wKAlb1mwY4jyoTep+QMyZ6Aa9NOr0caKefSYGV
-X-Received: by 10.140.100.233 with SMTP id s96mr14987594qge.92.1405461123388; 
-	Tue, 15 Jul 2014 14:52:03 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.86.99 with HTTP; Tue, 15 Jul 2014 14:51:43 -0700 (PDT)
-In-Reply-To: <CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
-References: <cover.1405440532.git.ross.burton@intel.com>
-	<406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
-	<CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 15 Jul 2014 22:51:43 +0100
-Message-ID: <CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [PATCH 7/7] autoconf: remove automake patch enforcing --foreign
+	Wed, 16 Jul 2014 00:39:31 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Stephano Cetola <stephanoc@gmail.com>
+Date: Tue, 15 Jul 2014 22:39:17 +0000 (UTC)
+Message-ID: <loom.20140716T003708-65@post.gmane.org>
+References: <1405447671-23272-1-git-send-email-stephanoc@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 74.92.165.193 (Mozilla/5.0 (X11;
+	Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+	Chrome/35.0.1916.153 Safari/537.36)
+Subject: Re: [meta-oe][PATCH] php: stop removing directories that do not	exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,18 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 21:52:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Jul 2014 22:39:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On 15 July 2014 21:14, Khem Raj <raj.khem@gmail.com> wrote:
-> can it be somehow made such that it can be passed via option flags so we
-> dont have to patch the packages not using above automake macro
+Stephano Cetola <stephanoc <at> gmail.com> writes:
 
-Packages that don't use the right automake macro are generally very
-old and we're already carrying patches to fix the autoconf/automake
-files, so I'm not sure this is actually worth it.  I'm trying to drop
-the patches we're carrying against core build tools, not increase it.
-:)
+> 
+> The directory ${D}/${TMPDIR} does not exist. This patch removes code
+> that was calling rm and rmdir on that location.
+> 
+> Signed-off-by: Stephano Cetola <stephanoc <at> gmail.com>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc |    6 ------
+>  1 file changed, 6 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-
+devtools/php/php.inc
+> index b1bf79c..011eea7 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+>  <at>  <at>  -74,7 +74,6  <at>  <at>  do_install_append_pn-php() {
+>      if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
+>           mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* 
+${D}/${sysconfdir}/
+>      fi
+> -    rm -rf ${D}/${TMPDIR}
+>      rm -rf ${D}/.registry
+>      rm -rf ${D}/.channels
+>      rm -rf ${D}/.[a-z]*
+>  <at>  <at>  -89,11 +88,6  <at>  <at>  do_install_append_pn-php() {
+>      sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
+>      sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
+>      install -m 0755 ${B}/sapi/fpm/init.d.php-fpm 
+${D}${sysconfdir}/init.d/php-fpm
+> -    TMP=`dirname ${D}/${TMPDIR}`
+> -    while test ${TMP} != ${D}; do
+> -        rmdir ${TMP}
+> -        TMP=`dirname ${TMP}`;
+> -    done
+>  }
+> 
+>  PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 
+${PN}-pear ${PN}-dev
+> ${PN}-staticdev ${PN}-doc ${PN}"
 
-Ross
+Please disregard this patch. It is only a partial fix.
+
+I think I am beginning to understand the comment at the beginning of 
+do_install_append_pn-php. I will dig into this further.
+
+Kind Regards,
+Stephano
+
+
+
 
