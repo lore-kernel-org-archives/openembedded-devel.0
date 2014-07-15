@@ -1,44 +1,24 @@
-Return-Path: <Daniel.MONDON@lpgsystems.com>
-Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
-	by mail.openembedded.org (Postfix) with ESMTP id C77307035A
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E2C770191
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 09:36:44 +0000 (UTC)
-Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
-	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 137023300A3
+	Tue, 15 Jul 2014 09:50:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6F9o8ae008229
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 11:36:45 +0200 (CEST)
-Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
-	([::1]) with mapi id 14.03.0195.001; Tue, 15 Jul 2014 11:36:43 +0200
-From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Building openjdk-7-jre
-Thread-Index: AQHPkhQeLjZyUdCn6Uq67T0LrV6O+5uFCFuA///nGgCAACU5gIAJcK6QgAXa8UCABLNnwIAB4g8g///oqwCAAC0REP//4qaAAAVybhAAvELLEA==
-Date: Tue, 15 Jul 2014 09:36:43 +0000
-Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0614CB1D@SEXCHANGE0100.lpg.priv>
-References: <20140627141915.GA23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
-	<20140627151503.GB23711@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
-	<20140711141150.GB6407@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BF19@SEXCHANGE0100.lpg.priv>
-	<20140711150805.GC6407@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0614BF9B@SEXCHANGE0100.lpg.priv>
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0614BF9B@SEXCHANGE0100.lpg.priv>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.5.34]
+	Tue, 15 Jul 2014 02:50:08 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Tue, 15 Jul 2014 02:50:04 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 15 Jul 2014 05:50:03 -0400
+Message-ID: <1405417803-20316-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-DRWEB-SCAN: ok
-X-VRSPAM-SCORE: 0
-X-VRSPAM-STATE: legit
-X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejfedrvdelucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
-Subject: Re: Building openjdk-7-jre
+Subject: [meta-oe][PATCH v2] memstat: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,66 +32,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 09:36:46 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 15 Jul 2014 09:50:15 -0000
+Content-Type: text/plain
 
-Hi,
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Confirmation!
+memstat is a small proc-based utility designed to help the
+system administrator figure out what's consuming memory.
+Like ps, it lists all the processes, and how much private
+memory each is using. Unlike ps, it also lists all the shared
+objects (shared libraries and executables) that are in memory,
+and which processes are using those shared objects.
 
-To build java under Ubuntu 12.04, the default compilator version 4.6 must b=
-e change.
-I succeed with V4.8.
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-devtools/memstat/memstat_1.0.bb | 30 +++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/memstat/memstat_1.0.bb
 
-Thanks
-Daniel.
+diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
+new file mode 100644
+index 0000000..8252153
+--- /dev/null
++++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Display virtual memory allocation"
++DESCRIPTION = "Lists all the processes, executables, and shared libraries \
++that are using up virtual memory. It's helpful to see how the shared memory \
++is used and which 'old' libs are loaded. \
++"
++HOMEPAGE = "http://memstattool.sourceforge.net/"
++SECTION = "devtool"
++
++LICENSE = "GPLv2"
++
++S = "${WORKDIR}/memstattool"
++
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb"
++
++SRC_URI = "http://sourceforge.net/projects/memstattool/files/memstat_${PV}.tar.gz \
++          "
++
++SRC_URI[md5sum] = "2c3acc0c62b2a18f6601b84e54aa7462"
++SRC_URI[sha256sum] = "245d5fc7fb87bcfd14486cd34917cae2856e799559ac568434af12c4852bce94"
++
++do_install_append(){
++    install -d ${D}${bindir}
++    install -m 0755 memstat ${D}${bindir}
++    install -d ${D}${sysconfdir}
++    install -m 0755 memstat.conf ${D}${sysconfdir}
++    install -d ${D}${mandir}/man1
++    install -m 0644 memstat.1 ${D}${mandir}/man1
++    install -d ${D}${docdir}/${BPN}
++    install -m 0644 memstat-tutorial.txt ${D}${docdir}/${BPN}
++}
+-- 
+2.0.0
 
------Message d'origine-----
-De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] De la part de MONDON Daniel
-Envoy=E9=A0: vendredi 11 juillet 2014 17:59
-=C0=A0: openembedded-devel@lists.openembedded.org
-Objet=A0: Re: [oe] Building openjdk-7-jre
-
-
-I change g++ from 4.6 to 4.8.
-
-http://askubuntu.com/questions/372248/downloaded-g-4-8-but-cant-set-it-as-d=
-efault
-
-both errors are ok now!
-
-It is currently running openjdk-7-jre compilation :)
-
-It is necessary under Ubuntu 12.04 ...
-
-Thanks
-Daniel.
-
-On Fri, Jul 11, 2014 at 02:56:05PM +0000, MONDON Daniel wrote:
-> Hi,
->=20
-> I apt-get install libstdc++-4.8-dev.
-> Is it the right version ?
->=20
-> Thanks
-> Daniel.
->=20
-
-Sorry I can not look at your computer, but it should match the g++ you are =
-using.
-
-g++ has a nice option which is called --version, which will tell you the ve=
-rsion.
-
-Bye Henning
---=20
-
---=20
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
