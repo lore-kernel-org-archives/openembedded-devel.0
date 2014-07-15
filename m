@@ -1,37 +1,39 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 57E707025C
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 68DC87025F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 05:26:09 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id ho1so3675572wib.8
+	Tue, 15 Jul 2014 05:26:11 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so2942345wgh.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 22:26:10 -0700 (PDT)
+	Mon, 14 Jul 2014 22:26:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1TedYd7IdHAmQ8SkhDXN8DquIKjUFpl0hYOGektFkqs=;
-	b=OjYTHCGuqRAxsJNZo+ThyFCumGvKM7nBknX/NDBrRIeM521YEQaEQ5QWl70s+xE/6i
-	AdhHfFm8oB55mkOn1wOJLrF8VAnu8rSyKaRgtpfUO3kf+fvrWJv/fkgmRCJSZn2u1TnO
-	6voGM//o3y4owUT0xdx0yjDumCb4fSF7tSehaevOM9LxdTo/StNYL7YdwEdE20GOltlV
-	AJDlaIv4CMIuWwhGAkv1O1EBfEbjN+PErg889rUUdJ3ekd8QZZaBy3mhSGzYmeUECPFD
-	58RGg3g/+CNc5ZI6cJbKllxS/IcVdcceNRSZcrPdtcpzjbGHceGoFD6xIcK+rYVJTjlo
-	lmDA==
-X-Gm-Message-State: ALoCoQn2ofE7dkEOJCEo/LA7HLg3EqpN3j6ZTuNI2xpxbBrFecCGtJEpsEnScZJKVMOxHTRFa6SM
-X-Received: by 10.194.59.65 with SMTP id x1mr23982271wjq.60.1405401970790;
-	Mon, 14 Jul 2014 22:26:10 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=uEahGQPzUVNBmdpZlAlquxDGnromqtNJ5/NJJqmWYyc=;
+	b=HbxIfD/Hw3/ZQcvQ22ikUtvkrb1zDLlg5oxcV2utIEio82P7jP68GOMW00ISP4IWf9
+	1vxjy8tLKJwSZt29qsZYA0Le3Z7lZ7XcJyVxVHmqwLTLPZZQP3DGBEKKSpShbAUXIiwO
+	n/qZcRwO64cQ+fbqL/GPZ9jhpTWWFsGBUDTN8OEBT8qyP8UG06ctLljc98gBP9yfGDIK
+	alcj8VjT0gc6cP9sxrJvvWMo87R9nvwd26ron8CxX+7tkMILaQqCncWDGEu+yXZtiZeT
+	AzrojqugFIR0UOIRVad/m0opGCxXQGQu9maG4U7uJcJVKcWbyPAWFyGgny3oADsaP2ln
+	I/Gg==
+X-Gm-Message-State: ALoCoQkmVJ1B4uz0krTGpsgH4YOn3bIsnlFLTOf4G1MZU7q863HfgsYSLJb3iw/165PIZZnASG20
+X-Received: by 10.180.76.68 with SMTP id i4mr2571890wiw.83.1405401972145;
+	Mon, 14 Jul 2014 22:26:12 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by mx.google.com with ESMTPSA id o9sm39323847wib.22.2014.07.14.22.26.09
+	by mx.google.com with ESMTPSA id 20sm30085044wjt.42.2014.07.14.22.26.11
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 14 Jul 2014 22:26:10 -0700 (PDT)
+	Mon, 14 Jul 2014 22:26:11 -0700 (PDT)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jul 2014 07:26:06 +0200
-Message-Id: <1405401967-9454-1-git-send-email-koen.kooi@linaro.org>
+Date: Tue, 15 Jul 2014 07:26:07 +0200
+Message-Id: <1405401967-9454-2-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1405401967-9454-1-git-send-email-koen.kooi@linaro.org>
+References: <1405401967-9454-1-git-send-email-koen.kooi@linaro.org>
 Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCHv2 1/2] libhugetlbfs: fix versioning
+Subject: [meta-oe][PATCHv2 2/2] libhugetlbfs: fix packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,27 +49,44 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 15 Jul 2014 05:26:18 -0000
 
-PE bump is needed because "git+stuff"" > "2.18"
+Libhugetlbs doesn't generate proper .so.X libs, only two .so files. Package those in ${PN} and silence the resulting QA warning. This fixes:
+
+ ERROR: QA Issue: libhugetlbfs-tests rdepends on libhugetlbfs-dev
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 5645add..af7ed3e 100644
+index af7ed3e..f2da16a 100644
 --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
 +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- DEPENDS = "sysfsutils perl"
- RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
+@@ -25,6 +25,7 @@ COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64).*-linux*"
  
-+PV = "2.18"
-+PE = "1"
+ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+ EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=1"
++PARALLEL_MAKE = ""
+ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -46,12 +47,15 @@ do_install() {
+           install-tests
+ }
+ 
+-PARALLEL_MAKE_pn-${PN} = ""
+ 
+ PACKAGES =+ "${PN}-perl ${PN}-tests "
++FILES_${PN} += "${libdir}/*.so"
++FILES_${PN}-dev = "${includedir}"
+ FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
+ FILES_${PN}-perl = "${libdir}/perl"
+ FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
+ 
++INSANE_SKIP_${PN} = "dev-so"
 +
- SRCREV = "ea3f6b273f535aab38cefae30030774457bbbfe6"
- SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
-     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+ INHIBIT_PACKAGE_STRIP = "1"
+ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 -- 
 1.9.3
 
