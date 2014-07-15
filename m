@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id A95D8704FA
+Return-Path: <stephanoc@gmail.com>
+Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 68C2A7050C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 18:07:07 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id q59so6030874wes.40
+	Tue, 15 Jul 2014 18:08:21 +0000 (UTC)
+Received: by mail-pd0-f170.google.com with SMTP id g10so5279927pdj.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 11:07:09 -0700 (PDT)
+	Tue, 15 Jul 2014 11:08:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hLZ9Tf71TCacQPqW1Qv5eAcBS6gBFT6OKGzVIked+Ko=;
-	b=j4TrgL6QiM07oEHgdvajSvl+uiXC5DySsL2MwqiU4Zy9Vhzfp9qkN+nOShnbXuMKOG
-	fxKVfDyl0LxliyklVEGj1HVlxss1Ta4fs4aGQs6HGRUfZ7loAsjrPaBTVBMG82/s9fRj
-	XHh2n2dN1o7/Y3wKQbRhqTTrjHa5XEsryNuET1E/3n7kCu+wQNCZihUKwQVCATu4XT6z
-	Ed2U2bYf4A6bhD81LXzvbAen6wZ9E5O5hqEaq7ovwVQWAfctGGj/foprBzzRdhc+H/2N
-	569aiHgIx8CT2wHSScs7HSU5pctOVSW0CmSKJs6ZTcDu6dtyyKfPb+8TUoZzn6VvO4pL
-	POBQ==
-X-Received: by 10.194.59.49 with SMTP id w17mr5243394wjq.135.1405447629011;
-	Tue, 15 Jul 2014 11:07:09 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=from:to:cc:subject:date:message-id;
+	bh=1RCsx0O1zmpjW1ThbWGjxnyZJ7Y/la1TdyL4xk8SpbU=;
+	b=S+W9Kst/5gx3ZlMPV4+yTaV05MgywcMnaSFuazB7DCa6c2O+L6ZAuiS/OXnm1Ig4xJ
+	/ys3fOJU2vkcieOeJsaSp/OA0ETtqr276h+X64L0E6sqDbdxD7ofhQ/cMBD+XA+O0TL2
+	aLaEZCKMl2fqAjs2gSh1fKFWQ0GJOYrC9dmvT7gIYQDh5Slfuawbz81sn5BmM+Skage0
+	PTy3zbf86cilzSAIxdbOkoDnkZ5JJmzII+6Ev7p4IGmOTo9yr7Pn8yf3ROQN32PKZATY
+	PfnkA+x30ou5u6C+x1LhNAd9nLZWUpDHv1pWnCVIzc3UjkBbTKFVk2UH3CGVogb5vN/W
+	i/Yg==
+X-Received: by 10.66.141.76 with SMTP id rm12mr3802882pab.138.1405447702409;
+	Tue, 15 Jul 2014 11:08:22 -0700 (PDT)
+Received: from localhost.localdomain
+	(74-92-165-193-Oregon.hfc.comcastbusiness.net. [74.92.165.193])
 	by mx.google.com with ESMTPSA id
-	g8sm10779188wib.18.2014.07.15.11.07.07 for <multiple recipients>
+	dd5sm14608426pbc.85.2014.07.15.11.08.21 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jul 2014 11:07:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 15 Jul 2014 20:07:18 +0200
+	Tue, 15 Jul 2014 11:08:21 -0700 (PDT)
+From: Stephano Cetola <stephanoc@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140715180718.GO2433@jama>
-References: <1405447315-798-1-git-send-email-stephanoc@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1405447315-798-1-git-send-email-stephanoc@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Stephano Cetola <scetola@reachtech.com>
-Subject: Re: [meta-oe][PATCH] stop trying to remove folders that do not exist
+Date: Tue, 15 Jul 2014 11:07:51 -0700
+Message-Id: <1405447671-23272-1-git-send-email-stephanoc@gmail.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCH] php: stop removing directories that do not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,72 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 18:07:12 -0000
-X-Groupsio-MsgNum: 50970
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eAnxKwVhzStH6fSc"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Jul 2014 18:08:28 -0000
 
---eAnxKwVhzStH6fSc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The directory ${D}/${TMPDIR} does not exist. This patch removes code
+that was calling rm and rmdir on that location.
 
-On Tue, Jul 15, 2014 at 11:01:55AM -0700, Stephano Cetola wrote:
-> From: Stephano Cetola <scetola@reachtech.com>
->=20
-> The directory ${D}/${TMPDIR} does not exist. This patch removes code
-> that was calling rm and rmdir on that location.
+Signed-off-by: Stephano Cetola <stephanoc@gmail.com>
+---
+ meta-oe/recipes-devtools/php/php.inc |    6 ------
+ 1 file changed, 6 deletions(-)
 
-this doesn't match with the diff
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index b1bf79c..011eea7 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -74,7 +74,6 @@ do_install_append_pn-php() {
+     if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
+          mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+     fi
+-    rm -rf ${D}/${TMPDIR}
+     rm -rf ${D}/.registry
+     rm -rf ${D}/.channels
+     rm -rf ${D}/.[a-z]*
+@@ -89,11 +88,6 @@ do_install_append_pn-php() {
+     sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
+     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
+     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+-    TMP=`dirname ${D}/${TMPDIR}`
+-    while test ${TMP} != ${D}; do
+-        rmdir ${TMP}
+-        TMP=`dirname ${TMP}`;
+-    done
+ }
+ 
+ PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+-- 
+1.7.10.4
 
->=20
-> Signed-off-by: Stephano Cetola <scetola@reachtech.com>
-> ---
->  meta-oe/recipes-devtools/php/php.inc |    6 ++++++
->  1 file changed, 6 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devto=
-ols/php/php.inc
-> index b1bf79c..000316b 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -90,6 +90,12 @@ do_install_append_pn-php() {
->      sed -i 's:=3D/var:=3D${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
->      install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.=
-d/php-fpm
->      TMP=3D`dirname ${D}/${TMPDIR}`
-> +    bbwarn "D"
-> +    bbwarn ${D}
-> +    bbwarn "TMPDIR"
-> +    bbwarn ${TMPDIR}
-> +    bbwarn "TMP"
-> +    bbwarn ${TMP}
->      while test ${TMP} !=3D ${D}; do
->          rmdir ${TMP}
->          TMP=3D`dirname ${TMP}`;
-> --=20
-> 1.7.10.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---eAnxKwVhzStH6fSc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPFbdYACgkQN1Ujt2V2gByQuwCgsMlGepYSHhVNUhPY7zISrAHn
-DuAAoINfzcON8ubJI5CGmf5F5GCl8Wrj
-=jGJv
------END PGP SIGNATURE-----
-
---eAnxKwVhzStH6fSc--
