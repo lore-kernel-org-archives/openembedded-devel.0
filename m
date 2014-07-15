@@ -1,35 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F06870196
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 811397050C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 18:47:11 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id n3so4566611wiv.4
+	Tue, 15 Jul 2014 18:50:02 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w62so5778129wes.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 11:47:12 -0700 (PDT)
+	Tue, 15 Jul 2014 11:50:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=hp7GyOAHBgRfcWmSZwx0Vmek3cCWlkxW82rcMiUqERI=;
-	b=c9gnI9Oofm088WGLWyA3k7ZQOvM/ZsjS2ptYa+9ZL2EBv1MrzUMTkYO42rKzExNM0n
-	7n9KOrTcDlNITPjiG/7pbr8fi6Db7TkK7FlBCgOlSW53qREKi9ZhmJkD1QKjdo70MdBg
-	4mLh6ROrrv8hFgKJie/R3jkqd615wPc9IDZ7uwsxnZICViepUyk2O+JbcAx/hb9Z36Xi
-	ErgF6JrDm8rl59w0a2k32A7xzHa6ATYwx5xoEN1vmrUBr2Qp3hi/5mIx1stTx9kdyw/9
-	9hKcDIAWoEsTl/XlOk0hoz4keq3LvBkpOyqLXgXifVPjLSwR5H1h9N2Y3mkyZVJdXFlq
-	F5Bg==
-X-Received: by 10.180.91.194 with SMTP id cg2mr7961588wib.12.1405450031986;
-	Tue, 15 Jul 2014 11:47:11 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=2Ola50PwEs8jAyG5xu4gaZPFd4jbGVGiHCeFbA3LcK8=;
+	b=YjQ9kO811rGYZaX68ZADmkOKzPL+tj+AFxQDmnZaSOKbQ6xyq6O44CYeOzgvs9Ih3B
+	4j5E9rfUvPG35vbEkpZy54PYErsB3EkBL5mVqPKLMEabvD7EVcWsQ5bDBWvkjFdD84Da
+	ECbpTQbEmcGGFLNfkbmSjTfo0w/itCrE00DEYC/MEv4NTtKZ7v8/p+Bf/CsIrVI3gcjE
+	u2mvCwEgL1hQEJVP9ph5irJpylz3ZDg7dR35xtLcKw2KQi8sdJT751QMKM0J8XHjZlqP
+	cY4+oOB8Wp7rblZhdOrrckExZjZp5/aCrJ/T5EZPZTLnG/xd9gMpH7Z9mpXaje24z3vN
+	+ehA==
+X-Received: by 10.194.237.135 with SMTP id vc7mr30619743wjc.86.1405450204125; 
+	Tue, 15 Jul 2014 11:50:04 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fb8sm46750438wib.15.2014.07.15.11.47.11 for <multiple recipients>
+	o9sm46749727wib.22.2014.07.15.11.50.02 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jul 2014 11:47:11 -0700 (PDT)
+	Tue, 15 Jul 2014 11:50:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 15 Jul 2014 20:50:13 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jul 2014 20:47:20 +0200
-Message-Id: <1405450040-7193-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][PATCH] libnice: create ${S}/m4 directory before gtkdocize is called
+Message-ID: <20140715185013.GP2433@jama>
+References: <20140621172445.18C94501C0@opal.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <20140621172445.18C94501C0@opal.openembedded.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [oe-commits] Richard Purdie : recipes: add missing gtk-doc class dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +48,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 18:47:21 -0000
+X-List-Received-Date: Tue, 15 Jul 2014 18:50:08 -0000
+X-Groupsio-MsgNum: 50975
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="5KxTQ9fdN6Op3ksq"
+Content-Disposition: inline
 
-* otherwise it fails with:
-+ gtkdocize --docdir /OE/build/shr-core/tmp-eglibc/work/core2-64-oe-linux/libnice/0.0.13-r4/libnice-0.0.13
-  ln: target 'm4/' is not a directory: No such file or directory
-  cp: cannot create regular file 'm4/': Not a directory
+--5KxTQ9fdN6Op3ksq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/farsight/libnice_0.0.13.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+On Sat, Jun 21, 2014 at 05:24:45PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: f6ecec16d799f83bfdf3d6d742d811cc63c1cf1e
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3Df6ecec16d799f83bfdf3d6d742d811cc63c1cf1e
+>=20
+> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Date:   Sat Jun 21 11:04:29 2014 +0200
+>=20
+> recipes: add missing gtk-doc class dependencies
+>=20
+> * These recipes all use gtk-doc m4 macros but were missing
+>   dependencies on the class.
+>=20
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>=20
+> ---
+>=20
+>  meta-gnome/recipes-gnome/bonobo/libbonobo.inc              | 12 +-------=
+----
+>  meta-gnome/recipes-gnome/libgdata/libgdata_0.7.1.bb        |  2 +-
+>  meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb |  8 +-------
+>  meta-gnome/recipes-gnome/libgtop/libgtop_2.28.2.bb         |  2 +-
+>  meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb  |  2 +-
+>  meta-oe/recipes-support/farsight/libnice_0.0.13.bb         |  2 +-
+>  meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb    |  2 +-
+>  meta-oe/recipes-support/udisks/udisks_1.0.4.bb             |  2 +-
+>  meta-xfce/recipes-xfce/garcon/garcon_0.2.1.bb              |  2 +-
+>  meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.10.1.bb |  2 +-
+>  10 files changed, 10 insertions(+), 26 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe=
+/recipes-support/farsight/libnice_0.0.13.bb
+> index 48a80e5..2d7cff3 100644
+> --- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+> +++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+> @@ -16,7 +16,7 @@ DEPENDS =3D "glib-2.0 gstreamer"
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[gupnp] =3D "--enable-gupnp,--disable-gupnp,gupnp-igd"
+> =20
+> -inherit autotools pkgconfig
+> +inherit autotools pkgconfig gtk-doc
+> =20
+>  FILES_${PN} +=3D "${libdir}/gstreamer-0.10/*.so"
+>  FILES_${PN}-dev +=3D "${libdir}/gstreamer-0.10/*.la"
 
-diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-index 2d7cff3..711b6bd 100644
---- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-+++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-@@ -23,6 +23,10 @@ FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
- FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
- FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
- 
-+do_configure_prepend() {
-+    mkdir ${S}/m4 || true
-+}
-+
- do_compile_append() {
-     for i in $(find ${S} -name "*.pc") ; do
-         sed -i -e s:${STAGING_DIR_TARGET}::g \
--- 
-2.0.0
+This seems to break libnice build
 
+I had to create m4 directory first:
+http://lists.openembedded.org/pipermail/openembedded-devel/2014-July/096972=
+=2Ehtml
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--5KxTQ9fdN6Op3ksq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPFd+UACgkQN1Ujt2V2gBxHUACfTbUTKI9CejxisrA1bWlYtP0h
+7r8AmwcXazVcmG3SBRTqkcnnwksCWMqh
+=Re/x
+-----END PGP SIGNATURE-----
+
+--5KxTQ9fdN6Op3ksq--
