@@ -1,45 +1,24 @@
-Return-Path: <rpjday@crashcourse.ca>
-X-Greylist: delayed 405 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 15 Jul 2014 00:54:13 UTC
-Received: from smtp684.redcondor.net (smtp684.redcondor.net [208.80.206.84])
-	by mail.openembedded.org (Postfix) with ESMTP id 93C267039F
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4459A6AC74
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 00:54:13 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp684.redcondor.net ({700db0a8-6fb7-4c8b-9b2a-6812225182d8})
-	via TCP (outbound) with ESMTPS id 20140715004728581
+	Tue, 15 Jul 2014 00:59:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6F0xlDO018441
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 00:47:28 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [99.240.204.5] (port=39495 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1X6qtu-0000mC-FR for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jul 2014 20:47:22 -0400
-Date: Mon, 14 Jul 2014 20:47:19 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CABcZANmegnOviMs-iqARkU+HM88W9hZdoX6W1sJULr9NV9j5Zg@mail.gmail.com>
-Message-ID: <alpine.LFD.2.11.1407142046220.8165@localhost>
-References: <alpine.LFD.2.11.1407120720110.19807@localhost>
-	<CABcZANkY6NJLP=YVJj1YM5LJ89MUtENCV9PMwKa2CKhr_NzmgQ@mail.gmail.com>
-	<alpine.LFD.2.11.1407140605330.4257@localhost>
-	<CABcZANmegnOviMs-iqARkU+HM88W9hZdoX6W1sJULr9NV9j5Zg@mail.gmail.com>
-User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+	Mon, 14 Jul 2014 17:59:47 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 14 Jul 2014 17:59:47 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <wenzong.fan@windriver.com>
+Date: Tue, 15 Jul 2014 08:59:46 +0800
+Message-ID: <1405385986-27334-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: Re: is it "addtask do_X ..." or "addtask X ..." or does it matter?
+Subject: [PATCH] vsftpd: fix install warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,73 +32,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 00:54:20 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 15 Jul 2014 00:59:50 -0000
+Content-Type: text/plain
 
-On Mon, 14 Jul 2014, Christopher Larson wrote:
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-> On Mon, Jul 14, 2014 at 3:11 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-> wrote:
->
-> > if what chris writes is accurate, there are some broken class and
-> > recipe files in oe-core:
-> >
-> > classes/kernel.bbclass:addtask do_strip before do_sizecheck after
-> > do_kernel_link_vmlinux
-> > classes/staging.bbclass:addtask do_populate_sysroot_setscene
-> > classes/insane.bbclass:addtask do_package_qa after do_packagedata
-> > do_package before do_build
-> > classes/insane.bbclass:addtask do_package_qa_setscene
-> > classes/package_rpm.bbclass:addtask do_package_write_rpm_setscene
-> > classes/license.bbclass:addtask do_populate_lic_setscene
-> > classes/archiver.bbclass:addtask do_ar_original after do_unpack
-> > classes/archiver.bbclass:addtask do_unpack_and_patch after do_patch
-> > classes/archiver.bbclass:addtask do_ar_patched after do_unpack_and_patch
-> > classes/archiver.bbclass:addtask do_ar_configured after do_unpack_and_patch
-> > classes/archiver.bbclass:addtask do_dumpdata
-> > classes/archiver.bbclass:addtask do_ar_recipe
-> > classes/archiver.bbclass:addtask do_deploy_archives before do_build
-> > classes/deploy.bbclass:addtask do_deploy_setscene
-> > classes/package_deb.bbclass:addtask do_package_write_deb_setscene
-> > classes/package.bbclass:addtask do_package_setscene
-> > classes/package.bbclass:addtask do_packagedata_setscene
-> > classes/package_ipk.bbclass:addtask do_package_write_ipk_setscene
-> > recipes-core/eglibc/eglibc-package.inc:addtask do_install_locale after
-> > do_install before do_populate_sysroot do_package
-> > recipes-core/base-passwd/base-passwd_3.5.29.bb:addtask do_package after
-> > do_populate_sysroot
-> > recipes-core/meta/package-index.bb:addtask do_package_index before
-> > do_build
-> > recipes-devtools/gcc/gcc-configure-common.inc:addtask do_preconfigure
-> > after do_patch before do_configure
-> > recipes-support/boost/boost.inc:addtask do_boostconfig after do_patch
-> > before do_configure
-> >
-> >   surely all of the above can't be broken, can they?
-> >
->
-> I stand corrected, looks like code in bb.build.addtask automatically
-> adds do_ if it isn't present. We probably should pick one and fix
-> the metadata to be consistent, however :)
+WARNING: QA Issue: vsftpd: Files/directories were installed but not shipped
+  /run
+  /run/vsftpd
+  /run/vsftpd/empty
 
-  ah, yes, there it is:
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb |   16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-def addtask(task, before, after, d):
-    if task[:3] != "do_":
-        task = "do_" + task
-
-  that just invites abuse, doesn't it? :-)
-
-rday
-
+diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+index 0698a63..5df8211 100644
+--- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
++++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
+@@ -70,7 +70,11 @@ do_install() {
+         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
+         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
+     fi
+-    install -d ${D}${localstatedir}/run/vsftpd/empty
++    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /var/run/vsftpd/empty 0755 root root -" \
++        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++    fi
+ }
+ 
+ INITSCRIPT_PACKAGES = "${PN}"
+@@ -82,3 +86,13 @@ USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp
+                        --shell /bin/false ftp "
+ GROUPADD_PARAM_${PN} = "-r ftp"
+ 
++pkg_postinst_${PN}() {
++	if [ -n "$D" ]; then
++		exit 0
++	fi
++	if type systemd-tmpfiles >/dev/null; then
++		systemd-tmpfiles --create
++	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++		${sysconfdir}/init.d/populate-volatile.sh update
++	fi
++}
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+1.7.10.4
 
 
