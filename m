@@ -1,24 +1,45 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 49139704B5
+Return-Path: <rpjday@crashcourse.ca>
+X-Greylist: delayed 395 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 15 Jul 2014 00:46:02 UTC
+Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 52B7465CE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 00:42:38 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6F0gdWs017605
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 15 Jul 2014 00:46:02 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
+	via TCP (outbound) with ESMTPS id 20140715003927387
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 17:42:39 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 14 Jul 2014 17:42:38 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Jul 2014 08:42:38 +0800
-Message-ID: <1405384958-24589-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Tue, 15 Jul 2014 00:39:27 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [99.240.204.5] (port=38934 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X6qm9-0000Zl-8m for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jul 2014 20:39:21 -0400
+Date: Mon, 14 Jul 2014 20:39:14 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <CA+gsK-rJHEnF_KmNFmq_1KqW7wfLBnMLpKWpFBeQYvAHFZM_cg@mail.gmail.com>
+Message-ID: <alpine.LFD.2.11.1407142038250.8059@localhost>
+References: <alpine.LFD.2.11.1407141457150.14590@localhost>
+	<CA+gsK-p7rV+HmdcskYkU0MYRn1zesYDgOUb4raVcj6_xW9x_ag@mail.gmail.com>
+	<alpine.LFD.2.11.1407141919070.5707@localhost>
+	<CA+gsK-rJHEnF_KmNFmq_1KqW7wfLBnMLpKWpFBeQYvAHFZM_cg@mail.gmail.com>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-Subject: [PATCH][meta-perl][v2] libxml-libxml-perl: add recipe
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: Re: defining FEATURE_PACKAGES_* in core-image.bbclass vs image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,303 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 00:42:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Jul 2014 00:46:10 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-From: Roy Li <rongqing.li@windriver.com>
+On Mon, 14 Jul 2014, Rudolf Streif wrote:
 
-This module is an interface to libxml2, providing XML and HTML parsers \
-with DOM, SAX and XMLReader interfaces, a large subset of DOM Layer 3 \
-interface and a XML::XPath-like interface to XPath API of libxml2. \
-The module is split into several packages which are not described in this \
-section; unless stated otherwise, you only need to use XML::LibXML; in \
-your programs.
+> >   is there something special about hwcodecs that suggests it
+> > should stay in core-image rather than moving to image as well? i'm
+> > just trying to understand the rationale.
+> >
+> Not necessarily. But I would consider them extended features and
+> they belong into core-image in my opinion. Not all embedded systems
+> need them. Many don't have video or audio support. I would even
+> suggest to move splash to core-image. If a device does not have
+> video there is not reason for a splash screen.
+>
+> I consider debug-tweaks, package-management, and readonly-rootfs the
+> basic image features to be in image.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../libxml-libxml-perl/disable-libxml2-check.patch |   79 +++++++++++++++++
- .../fix-CATALOG-conditional-compile.patch          |   31 +++++++
- .../using-DOCB-conditional.patch                   |   91 ++++++++++++++++++++
- .../libxml/libxml-libxml-perl_2.0116.bb            |   47 ++++++++++
- 4 files changed, 248 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl/disable-libxml2-check.patch
- create mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl/fix-CATALOG-conditional-compile.patch
- create mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl/using-DOCB-conditional.patch
- create mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
+  and i have no problem with that rationale. :-)
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl/disable-libxml2-check.patch b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/disable-libxml2-check.patch
-new file mode 100644
-index 0000000..a8e7cc1
---- /dev/null
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/disable-libxml2-check.patch
-@@ -0,0 +1,79 @@
-+Do not use the _libxml_check_lib() on cross-compile
-+
-+Upstream-Status: Inappropriate [configuration] 
-+
-+xml2 have been added into package's DEPENDS, so not need to use the
-+_libxml_check_lib() to check it again, and _libxml_check_lib() always
-+return false on cross-compile environment
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ Makefile.PL |   52 ++++++++++++++++++++++++++--------------------------
-+ 1 file changed, 26 insertions(+), 26 deletions(-)
-+
-+diff --git a/Makefile.PL b/Makefile.PL
-+index c0485f1..09c676b 100644
-+--- a/Makefile.PL
-++++ b/Makefile.PL
-+@@ -411,32 +411,32 @@ sub _libxml_check_lib {
-+     }
-+ }
-+ 
-+-print "Checking for ability to link against xml2...";
-+-if ( _libxml_check_lib('xml2') ) {
-+-    print "yes\n";
-+-}
-+-else {
-+-    print "no\n";
-+-    print "Checking for ability to link against libxml2...";
-+-    if ( _libxml_check_lib('libxml2')) {
-+-        print "yes\n";
-+-    }
-+-    else {
-+-        print STDERR <<"DEATH";
-+-libxml2, zlib, and/or the Math library (-lm) have not been found.
-+-Try setting LIBS and INC values on the command line
-+-Or get libxml2 from
-+-  http://xmlsoft.org/
-+-If you install via RPMs, make sure you also install the -devel
-+-RPMs, as this is where the headers (.h files) are.
-+-
-+-Also, you may try to run perl Makefile.PL with the DEBUG=1 parameter
-+-to see the exact reason why the detection of libxml2 installation
-+-failed or why Makefile.PL was not able to compile a test program.
-+-DEATH
-+-        exit 0; # 0 recommended by http://cpantest.grango.org (Notes for CPAN Authors)
-+-    }
-+-}
-++#print "Checking for ability to link against xml2...";
-++#if ( _libxml_check_lib('xml2') ) {
-++#    print "yes\n";
-++#}
-++#else {
-++#    print "no\n";
-++#    print "Checking for ability to link against libxml2...";
-++#    if ( _libxml_check_lib('libxml2')) {
-++#        print "yes\n";
-++#    }
-++#    else {
-++#        print STDERR <<"DEATH";
-++#libxml2, zlib, and/or the Math library (-lm) have not been found.
-++#Try setting LIBS and INC values on the command line
-++#Or get libxml2 from
-++#  http://xmlsoft.org/
-++#If you install via RPMs, make sure you also install the -devel
-++#RPMs, as this is where the headers (.h files) are.
-++#
-++#Also, you may try to run perl Makefile.PL with the DEBUG=1 parameter
-++#to see the exact reason why the detection of libxml2 installation
-++#failed or why Makefile.PL was not able to compile a test program.
-++#DEATH
-++#        exit 0; # 0 recommended by http://cpantest.grango.org (Notes for CPAN Authors)
-++#    }
-++#}
-+ 
-+ # -------------------------------------------------------------------------- #
-+ # _NOW_ write the Makefile
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl/fix-CATALOG-conditional-compile.patch b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/fix-CATALOG-conditional-compile.patch
-new file mode 100644
-index 0000000..1dd9fb3
---- /dev/null
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/fix-CATALOG-conditional-compile.patch
-@@ -0,0 +1,31 @@
-+[PATCH] Fix a compile error 
-+
-+Upstream-Status: Pending
-+
-+Fix a compile error by conditional using 'catal' since catal
-+is only defined when LIBXML_CATALOG_ENABLED is enabled.
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ LibXML.xs |    2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/LibXML.xs b/LibXML.xs
-+index 66da04b..45da681 100644
-+--- a/LibXML.xs
-++++ b/LibXML.xs
-+@@ -2777,9 +2777,11 @@ _default_catalog( self, catalog )
-+         xmlCatalogPtr catal = INT2PTR(xmlCatalogPtr,SvIV(SvRV(catalog)));
-+ #endif
-+     INIT:
-++#ifdef LIBXML_CATALOG_ENABLED
-+         if ( catal == NULL ) {
-+             croak( "empty catalog\n" );
-+         }
-++#endif
-+     CODE:
-+         warn( "this feature is not implemented" );
-+         RETVAL = 0;
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl/using-DOCB-conditional.patch b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/using-DOCB-conditional.patch
-new file mode 100644
-index 0000000..d255ec7
---- /dev/null
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl/using-DOCB-conditional.patch
-@@ -0,0 +1,91 @@
-+[PATCH] Fix a compile error 
-+
-+Upstream-Status: Pending
-+
-+by conditional using 'XML_DOCB_DOCUMENT_NODE' since it is only
-+defined when LIBXML_DOCB_ENABLED is enabled in xmlversion.h.
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ LibXML.xs        |    9 +-
-+ dom.c            |    2 +
-+ perl-libxml-mm.c |    4 +
-+ 4 files changed, 678 insertions(+), 658 deletions(-)
-+
-+diff --git a/LibXML.xs b/LibXML.xs
-+index b299ba4..66da04b 100644
-+--- a/LibXML.xs
-++++ b/LibXML.xs
-+@@ -5026,7 +5026,9 @@ addChild( self, nNode )
-+             XSRETURN_UNDEF;
-+         case XML_DOCUMENT_NODE :
-+         case XML_HTML_DOCUMENT_NODE :
-++#ifdef LIBXML_DOCB_ENABLED
-+         case XML_DOCB_DOCUMENT_NODE :
-++#endif
-+             croak("addChild: HIERARCHY_REQUEST_ERR\n");
-+             XSRETURN_UNDEF;
-+         case XML_NOTATION_NODE :
-+@@ -5286,7 +5288,9 @@ _toStringC14N(self, comments=0, xpath=&PL_sv_undef, exclusive=0, inc_prefix_list
-+         if ( nodepath == NULL
-+              && self->type != XML_DOCUMENT_NODE
-+              && self->type != XML_HTML_DOCUMENT_NODE
-++#ifdef LIBXML_DOCB_ENABLED
-+              && self->type != XML_DOCB_DOCUMENT_NODE
-++#endif
-+            ) {
-+             if (comments)
-+ 	      nodepath = xmlStrdup( (const xmlChar *) "(. | .//node() | .//@* | .//namespace::*)" );
-+@@ -5297,7 +5301,10 @@ _toStringC14N(self, comments=0, xpath=&PL_sv_undef, exclusive=0, inc_prefix_list
-+         if ( nodepath != NULL ) {
-+             if ( self->type == XML_DOCUMENT_NODE
-+                  || self->type == XML_HTML_DOCUMENT_NODE
-+-                 || self->type == XML_DOCB_DOCUMENT_NODE ) {
-++#ifdef LIBXML_DOCB_ENABLED
-++                 || self->type == XML_DOCB_DOCUMENT_NODE
-++#endif
-++	    ) {
-+                 refNode = xmlDocGetRootElement( self->doc );
-+             }
-+ 	    if (SvOK(xpath_context)) {
-+diff --git a/dom.c b/dom.c
-+index 87eb61d..cbd391b 100644
-+--- a/dom.c
-++++ b/dom.c
-+@@ -654,7 +654,9 @@ domName(xmlNodePtr node) {
-+ 
-+     case XML_DOCUMENT_NODE :
-+     case XML_HTML_DOCUMENT_NODE :
-++#ifdef LIBXML_DOCB_ENABLED
-+     case XML_DOCB_DOCUMENT_NODE :
-++#endif
-+         name = (const xmlChar *) "#document";
-+         break;
-+ 
-+diff --git a/perl-libxml-mm.c b/perl-libxml-mm.c
-+index d162b06..7ac5436 100644
-+--- a/perl-libxml-mm.c
-++++ b/perl-libxml-mm.c
-+@@ -331,7 +331,9 @@ PmmNewNode(xmlNodePtr node)
-+         switch ( node->type ) {
-+         case XML_DOCUMENT_NODE:
-+         case XML_HTML_DOCUMENT_NODE:
-++#ifdef LIBXML_DOCB_ENABLED
-+         case XML_DOCB_DOCUMENT_NODE:
-++#endif
-+             proxy = (ProxyNodePtr)xmlMalloc(sizeof(struct _DocProxyNode));
-+             if (proxy != NULL) {
-+                 ((DocProxyNodePtr)proxy)->psvi_status = Pmm_NO_PSVI;
-+@@ -550,7 +552,9 @@ PmmNodeToSv( xmlNodePtr node, ProxyNodePtr owner )
-+         switch ( node->type ) {
-+         case XML_DOCUMENT_NODE:
-+         case XML_HTML_DOCUMENT_NODE:
-++#ifdef LIBXML_DOCB_ENABLED
-+         case XML_DOCB_DOCUMENT_NODE:
-++#endif
-+             if ( ((xmlDocPtr)node)->encoding != NULL ) {
-+                 SetPmmENCODING(dfProxy, (int)xmlParseCharEncoding( (const char*)((xmlDocPtr)node)->encoding ));
-+             }
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
-new file mode 100644
-index 0000000..2a6dbc2
---- /dev/null
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "Perl interface to the libxml2 library"
-+DESCRIPTION = "This module is an interface to libxml2, providing XML and HTML parsers \ 
-+with DOM, SAX and XMLReader interfaces, a large subset of DOM Layer 3 \
-+interface and a XML::XPath-like interface to XPath API of libxml2. \
-+The module is split into several packages which are not described in this \
-+section; unless stated otherwise, you only need to use XML::LibXML; in \
-+your programs."
-+
-+HOMEPAGE = "http://search.cpan.org/dist/XML-LibXML-1.99/"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0|GPLv1+"
-+DEPENDS += "libxml2 \
-+        libxml-sax-perl-native \
-+        zlib \
-+"
-+RDEPENDS_${PN} += "libxml2 \
-+        libxml-sax-perl \
-+        libxml-sax-base-perl \
-+        zlib \
-+"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
-+	file://disable-libxml2-check.patch \
-+	file://fix-CATALOG-conditional-compile.patch \
-+	file://using-DOCB-conditional.patch \
-+"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
-+			file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446"
-+SRC_URI[libxml.md5sum] = "a53a743bf053a0cb4afb41513fb8a684"
-+SRC_URI[libxml.sha256sum] = "b154f2dad3033b30d22ac81b8985b69ad35450b0c552db394cd03bb36845812a"
-+
-+S = "${WORKDIR}/XML-LibXML-${PV}"
-+
-+inherit cpan
-+
-+EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR}/libxml2 LIBS=-L${STAGING_LIBDIR}"
-+
-+BBCLASSEXTEND = "native"
-+
-+CFLAGS += " -D_GNU_SOURCE "
-+BUILD_CFLAGS += " -D_GNU_SOURCE "
-+
-+do_configure_prepend() {
-+	rm -rf ${S}/.pc/*
-+}
-+
-+FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
+rday
+
 -- 
-1.7.10.4
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
