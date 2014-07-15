@@ -1,41 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id A5C847057F
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BA1766FC92
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 13:13:32 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id f8so3337166wiw.0
+	Tue, 15 Jul 2014 13:15:24 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id x12so5653102wgg.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 06:13:33 -0700 (PDT)
+	Tue, 15 Jul 2014 06:15:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ohh1Jq99/aPllYCoY00fbeTa8a7a4qIS/pm8OxhquEI=;
-	b=LJ4yZyIfOJ0VkyGJmsbSqKR5fj+aofOCkRFnE8E6LqaWYzGY8aLWIPudnGpzvAC3zj
-	oWuQvaGPPBMJ7N9iAzMtKu7LJ906CHHLBB6Sc7OZLIHihR3LrBMvmxOJ7tVXyJT0FPbF
-	FOt/6e5TVoHNpK3RW7szMFIMBcBquZuikxpLe/CaG3QinDelK5jDXyi8HPP3HDKaE1Rs
-	qzrVZTmu+1QqjoXvq7ShYzax4Zd+STTy9ujw0mWbqI1w+HYHTzaOROvoZrW5LRU6xIzv
-	rVNnhTEQ5YBfcg6dV2aosLmrixj0XAQ6v8PKWoutoTYCriow1Qf8fJ/gM/OJdjIeMdr3
-	SyIQ==
-X-Received: by 10.180.86.7 with SMTP id l7mr5421836wiz.55.1405430013778;
-	Tue, 15 Jul 2014 06:13:33 -0700 (PDT)
+	bh=X6nTTkm5sCrYvdG7u2+8t506MNllsAg5Fr4yTmikp6E=;
+	b=Itdk//Q/VWGRIpCbZyEfnzjmOR+YOT36JjEYo6XsfaprW1QAuZxrjhKEAYnewo/Mdp
+	b3PXmyI2shaAQRuILvxMFXzxtsMbmHo4uTo5rsJmXhvDjeNyOkHViWwUJvIzuHvVHD2y
+	IfUQOX8kiAKOOF1GDngNfYzfgplUfuU7e+cZ0S8QVAG3hRnyvj1efbZu7XCNxUQi+Bjq
+	fdNCkxtGD81vecKjRSzU70ASzErYLP9byWOUNJrk4wEmcC2jZZclgkBgKE0ablI1of+I
+	U8brQ3Dea2EA/6GsR+ouO1K7BeJTWNzzJKq6ZudDmK+40+E37Z4UTiN91k37eO77fAK1
+	Mcwg==
+X-Received: by 10.194.82.106 with SMTP id h10mr11633183wjy.115.1405430124987; 
+	Tue, 15 Jul 2014 06:15:24 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ut2sm25203134wjc.49.2014.07.15.06.13.32 for <multiple recipients>
+	ja9sm43715551wic.8.2014.07.15.06.15.23
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jul 2014 06:13:32 -0700 (PDT)
+	Tue, 15 Jul 2014 06:15:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 15 Jul 2014 15:13:42 +0200
-To: jackie.huang@windriver.com
-Message-ID: <20140715131342.GL2433@jama>
-References: <1405072509-8901-1-git-send-email-jackie.huang@windriver.com>
-	<1405072509-8901-2-git-send-email-jackie.huang@windriver.com>
+Date: Tue, 15 Jul 2014 15:15:33 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140715131533.GM2433@jama>
+References: <1405402285-29775-1-git-send-email-akuster@mvista.com>
 MIME-Version: 1.0
-In-Reply-To: <1405072509-8901-2-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1405402285-29775-1-git-send-email-akuster@mvista.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 2/2 v2] syslog-ng: uprev to 3.5.4.1
+Subject: Re: [meta-oe][PATCH] [v3] lz4: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,46 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 13:13:39 -0000
-X-Groupsio-MsgNum: 50953
+X-List-Received-Date: Tue, 15 Jul 2014 13:15:32 -0000
+X-Groupsio-MsgNum: 50954
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/jvaajy/zP2g41+Q"
+	protocol="application/pgp-signature"; boundary="XBg9NAhDNArbJUtw"
 Content-Disposition: inline
 
---/jvaajy/zP2g41+Q
+--XBg9NAhDNArbJUtw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 11, 2014 at 05:55:09AM -0400, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
+On Mon, Jul 14, 2014 at 10:31:25PM -0700, Armin Kuster wrote:
+> update to version r119
+> Use github instead of svn
+> LICENSE md5sum changed since it was updated in r117
+> FIxes CVE-2014-4611
+
+This belongs to oe-core as you have originally posted it :)
+
 >=20
-> - initscript: add status, PIDFILE and xconsole
-> - syslog-ng.conf: dump the version
-> - Fix some memory leak problems we found
-> - Some backport patches
-> - scl: fix wrong ownership issue
-> - libnet: add libnet enable option and add it in PACKAGECONFIG
-> - add HOMEPAGE
-> - remove INC_PR
-> - change some config into PACKAGECONFIG
-> - add PACKAGE syslog-ng-tools
-> - use volatiles
-> - inherit update-rc.d and update-alternative
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> ---
+>  meta/recipes-support/lz4/{lz4_svn.bb =3D> lz4_git.bb} | 11 ++++-------
+>  1 file changed, 4 insertions(+), 7 deletions(-)
+>  rename meta/recipes-support/lz4/{lz4_svn.bb =3D> lz4_git.bb} (68%)
+>=20
+> diff --git a/meta/recipes-support/lz4/lz4_svn.bb b/meta/recipes-support/l=
+z4/lz4_git.bb
+> similarity index 68%
+> rename from meta/recipes-support/lz4/lz4_svn.bb
+> rename to meta/recipes-support/lz4/lz4_git.bb
+> index 38e36d8..3978d76 100644
+> --- a/meta/recipes-support/lz4/lz4_svn.bb
+> +++ b/meta/recipes-support/lz4/lz4_git.bb
+> @@ -2,15 +2,12 @@ SUMMARY =3D "Extremely Fast Compression algorithm"
+>  DESCRIPTION =3D "LZ4 is a very fast lossless compression algorithm, prov=
+iding compression speed at 400 MB/s per core, scalable with multi-cores CPU=
+=2E It also features an extremely fast decoder, with speed in multiple GB/s=
+ per core, typically reaching RAM speed limits on multi-core systems."
+> =20
+>  LICENSE =3D "BSD"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2008d2325e11691e17fcaa3a6046f=
+850"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0b0d063f37a4477b54af2459477dc=
+afd"
+> =20
+> -# Upstream names releases after SVN revs
+> -SRCREV =3D "112"
+> -PV =3D "r${SRCREV}"
+> +SRCREV =3D "28fd251bc7b42e5cde15f9a2d78fc53b3b575558"
+> +SRC_URI=3D "git://github.com/Cyan4973/lz4.git;branch=3Dmaster"
+> =20
+> -SRC_URI =3D "svn://lz4.googlecode.com/svn/;module=3Dtrunk;protocol=3Dhtt=
+p"
+> -
+> -S =3D "${WORKDIR}/trunk"
+> +S =3D "${WORKDIR}/git"
+> =20
+>  EXTRA_OEMAKE =3D "PREFIX=3D${prefix} CC=3D'${CC}' DESTDIR=3D${D} LIBDIR=
+=3D${libdir} INCLUDEDIR=3D${includedir}"
+> =20
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-syslog-ng.inc changes don't apply in current master, maybe it got broken
-by patchwork, can you rebase and push it to some repo?
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---/jvaajy/zP2g41+Q
+--XBg9NAhDNArbJUtw
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPFKQYACgkQN1Ujt2V2gBzDbQCfQv0CKyg1i/AmzOa857X4LhEV
-xDcAn24jR6EPLNng7ODZw5UHeb7AOUzB
-=Vv+l
+iEYEARECAAYFAlPFKXUACgkQN1Ujt2V2gBySsACfRyt5zuXxV6dd6o+vGAL7xFHn
+WAYAnjqZz6BGSh23rDoB4Ez58Fqn3GbG
+=Zsf2
 -----END PGP SIGNATURE-----
 
---/jvaajy/zP2g41+Q--
+--XBg9NAhDNArbJUtw--
