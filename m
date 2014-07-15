@@ -1,33 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B634F60030;
-	Tue, 15 Jul 2014 20:14:16 +0000 (UTC)
-Received: by mail-ig0-f177.google.com with SMTP id hn18so64778igb.4
-	for <multiple recipients>; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=cNUiJ+0QE87p6gX01zRiQGURiyT15wBRAL3TB5o/xzw=;
-	b=OjWZbM3uODMhbdFI5UgWaxqtlXp+wuGqvxzsJd6OhARYw33ktqnJCRcMXXSNbGMT7L
-	EI1cRtcBWOg5PKLKkM1Jcve0ElNyP6wtPQAelYdXl9K0bC+fF/vOoarQ65rci5EZCw8+
-	1aQObP7UbyjoK9VAxrdPqk3ii+kB+IOkiGlw25NZUjvIP/czQCeoeqcSzn9MraJY0ZvH
-	oq51kX+MLZWn682ngfU5Xaz0koht6oZxVYQx8FI5FEh/BmPdAX0lfs6ee7R1WKZGqEC1
-	RRsHGTsjGFDvJwNNmETyKHUIZOwYe+XQg6dFPNfvVp2sH7ghbYOV28aD2lg3bULtf/x6
-	oXtg==
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
+	[209.85.192.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C754C6FE5C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2014 21:52:02 +0000 (UTC)
+Received: by mail-qg0-f44.google.com with SMTP id e89so26555qgf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2014 14:52:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=AwyF1jEIzFvz/55sQxVPZ6+vjfW0WyIILZ756ZmNtro=;
+	b=kHStY1lCmQvS7tG1V83ez/44SxwwAMLItU85MhOdUnBOc3un+I6rR6TukKfy9TNeXd
+	Vo5sCPs22BaeI9vHYXgFZ43Gl/xiaPt/iT0pYazgqg/fU1VAtdXLhuCCEWfVC5DSB9ZP
+	P5ImBepotlUu9gcOOPdRF7UUxgoA0UMW+nlA9Mkj8odyA5i3/gyIWAxJ8BuIYrNDz9b2
+	B81URRarX+mVG2IiML7lvwM9kHXQBtQ4Euz4i1rwrg9xFKRUnGyEfy50CkeAcmp1ZOPT
+	nU1VgO6vw0jQX1orneZOnzxUJJQIJfZiG1NPkIVMgwYWZ2m23yhilX0PkOxkA44inINx
+	fb8Q==
+X-Gm-Message-State: ALoCoQlfmmSR4f9dU+m12IoQyfmZmuU8QRjJj9wKAlb1mwY4jyoTep+QMyZ6Aa9NOr0caKefSYGV
+X-Received: by 10.140.100.233 with SMTP id s96mr14987594qge.92.1405461123388; 
+	Tue, 15 Jul 2014 14:52:03 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.50.13.102 with SMTP id g6mr9859703igc.20.1405455257513; Tue,
-	15 Jul 2014 13:14:17 -0700 (PDT)
-Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
-Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
-In-Reply-To: <406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
+Received: by 10.140.86.99 with HTTP; Tue, 15 Jul 2014 14:51:43 -0700 (PDT)
+In-Reply-To: <CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
 References: <cover.1405440532.git.ross.burton@intel.com>
 	<406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
-Date: Tue, 15 Jul 2014 13:14:17 -0700
-Message-ID: <CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 15 Jul 2014 22:51:43 +0100
+Message-ID: <CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
 Cc: Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
 Subject: Re: [PATCH 7/7] autoconf: remove automake patch enforcing --foreign
@@ -44,77 +47,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 20:14:25 -0000
+X-List-Received-Date: Tue, 15 Jul 2014 21:52:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Jul 15, 2014 9:20 AM, "Ross Burton" <ross.burton@intel.com> wrote:
->
-> Since 2004 we've been carrying a patch[1] make autoreconf pass --foreign
-to
-> automake.  Presumably at the time this was due to many upstreams using
-> hand-coded bootstrap scripts that passed --foreign manually, but we were
-using
-> autoreconf.  These days many projects have added foreign to
-AM_INIT_AUTOMAKE and
-> use autoreconf directly, so this patch isn't as critical as it used to be.
+On 15 July 2014 21:14, Khem Raj <raj.khem@gmail.com> wrote:
+> can it be somehow made such that it can be passed via option flags so we
+> dont have to patch the packages not using above automake macro
 
-can it be somehow made such that it can be passed via option flags so we
-dont have to patch the packages not using above automake macro
->
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
->
-> [1] oe-classic 2ab2a92eadaf2f80410d8746099f8a9b1b81ff91
-> ---
->  .../autoconf/autoconf/autoreconf-foreign.patch            |   13
--------------
->  meta/recipes-devtools/autoconf/autoconf_2.69.bb           |    1 -
->  2 files changed, 14 deletions(-)
->  delete mode 100644
-meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
->
-> diff --git
-a/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
-b/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
-> deleted file mode 100644
-> index 88f7501..0000000
-> --- a/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Upstream-Status: Pending
-> -
-> ---- autoconf-2.59/bin/autoreconf.in~autoreconf-foreign 2004-05-09
-20:55:06.000000000 -0400
-> -+++ autoconf-2.59/bin/autoreconf.in    2004-05-09 20:55:55.000000000
--0400
-> -@@ -184,6 +184,8 @@
-> -
-> -   $aclocal_supports_force = `$aclocal --help` =~ /--force/;
-> -
-> -+  $automake   .= ' --foreign';
-> -+
-> -   # Dispatch autoreconf's option to the tools.
-> -   # --include;
-> -   $autoconf   .= join (' --include=', '', @include);
-> diff --git a/meta/recipes-devtools/autoconf/autoconf_2.69.bb
-b/meta/recipes-devtools/autoconf/autoconf_2.69.bb
-> index 5c652d4..6614a7b 100644
-> --- a/meta/recipes-devtools/autoconf/autoconf_2.69.bb
-> +++ b/meta/recipes-devtools/autoconf/autoconf_2.69.bb
-> @@ -10,7 +10,6 @@ LIC_FILES_CHKSUM =
-"file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
->  SRC_URI += "file://autoreconf-include.patch \
->             file://check-automake-cross-warning.patch \
->             file://autoreconf-exclude.patch \
-> -           file://autoreconf-foreign.patch \
->             file://autoreconf-gnuconfigize.patch \
->              file://config_site.patch \
->              file://remove-usr-local-lib-from-m4.patch \
-> --
-> 1.7.10.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Packages that don't use the right automake macro are generally very
+old and we're already carrying patches to fix the autoconf/automake
+files, so I'm not sure this is actually worth it.  I'm trying to drop
+the patches we're carrying against core build tools, not increase it.
+:)
+
+Ross
 
