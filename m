@@ -1,36 +1,28 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 432D0607E5
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id E9C14704FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 18:02:23 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id kq14so4789683pab.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 11:02:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=51Tx80gm+yzTsdLYCvlCLhNG776byd9U3fFGzmiIRbI=;
-	b=J6onJ5LgiGFKtt/iRUlQ317Pq9d5etN2oilFXquECji4lqHPEy6iJ85RDJI5kyl91/
-	Zwi2r+oMcot59yJ78neveHpCLF1h/QmkqVOD4XMPCxJDsal4kM6OTGyAV3MS1+kMBNUr
-	iFQGxFul2KnQ3LiXDtG3f8wzCoUnYIFj4lov8BcjbPCMyyYTHTMlPbp2N31nWteTzZY0
-	SX8u4X+QlY8lHf/jZmxJlXKFScGOqf3WAzEpVZME2nXVZtPpG0VbRQqoKMwb16zFICkK
-	CLvdrJPQKRCYWYQ4pj56Z20l6yZXI2b0SDFcgA6dSHql9uLU2/OCrTZau6tWOD4kwcqF
-	jabA==
-X-Received: by 10.70.43.227 with SMTP id z3mr24510741pdl.77.1405447345279;
-	Tue, 15 Jul 2014 11:02:25 -0700 (PDT)
-Received: from localhost.localdomain
-	(74-92-165-193-Oregon.hfc.comcastbusiness.net. [74.92.165.193])
-	by mx.google.com with ESMTPSA id
-	fb4sm60565140pac.30.2014.07.15.11.02.24 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jul 2014 11:02:24 -0700 (PDT)
-From: Stephano Cetola <stephanoc@gmail.com>
+	Tue, 15 Jul 2014 18:06:04 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 75259F811E7; Tue, 15 Jul 2014 12:06:05 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=unavailable version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id B0AD4F811E1;
+	Tue, 15 Jul 2014 12:06:03 -0600 (MDT)
+Message-ID: <53C56D8D.8040704@mlbassoc.com>
+Date: Tue, 15 Jul 2014 12:06:05 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jul 2014 11:01:55 -0700
-Message-Id: <1405447315-798-1-git-send-email-stephanoc@gmail.com>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Stephano Cetola <scetola@reachtech.com>
-Subject: [meta-oe][PATCH] stop trying to remove folders that do not exist
+References: <1405447315-798-1-git-send-email-stephanoc@gmail.com>
+In-Reply-To: <1405447315-798-1-git-send-email-stephanoc@gmail.com>
+Subject: Re: [meta-oe][PATCH] stop trying to remove folders that do not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 18:02:25 -0000
+X-List-Received-Date: Tue, 15 Jul 2014 18:06:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Stephano Cetola <scetola@reachtech.com>
+On 2014-07-15 12:01, Stephano Cetola wrote:
+> From: Stephano Cetola <scetola@reachtech.com>
+>
+> The directory ${D}/${TMPDIR} does not exist. This patch removes code
+> that was calling rm and rmdir on that location.
+>
+> Signed-off-by: Stephano Cetola <scetola@reachtech.com>
+> ---
+>   meta-oe/recipes-devtools/php/php.inc |    6 ++++++
+>   1 file changed, 6 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index b1bf79c..000316b 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -90,6 +90,12 @@ do_install_append_pn-php() {
+>       sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
+>       install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+>       TMP=`dirname ${D}/${TMPDIR}`
+> +    bbwarn "D"
+> +    bbwarn ${D}
+> +    bbwarn "TMPDIR"
+> +    bbwarn ${TMPDIR}
+> +    bbwarn "TMP"
+> +    bbwarn ${TMP}
+>       while test ${TMP} != ${D}; do
+>           rmdir ${TMP}
+>           TMP=`dirname ${TMP}`;
+>
 
-The directory ${D}/${TMPDIR} does not exist. This patch removes code
-that was calling rm and rmdir on that location.
+The actual patch does not do what the summary claims.  Are you
+sure this is what you wanted to send/commit?
 
-Signed-off-by: Stephano Cetola <scetola@reachtech.com>
----
- meta-oe/recipes-devtools/php/php.inc |    6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index b1bf79c..000316b 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -90,6 +90,12 @@ do_install_append_pn-php() {
-     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
-     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-     TMP=`dirname ${D}/${TMPDIR}`
-+    bbwarn "D"
-+    bbwarn ${D}
-+    bbwarn "TMPDIR"
-+    bbwarn ${TMPDIR}
-+    bbwarn "TMP"
-+    bbwarn ${TMP}
-     while test ${TMP} != ${D}; do
-         rmdir ${TMP}
-         TMP=`dirname ${TMP}`;
 -- 
-1.7.10.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
