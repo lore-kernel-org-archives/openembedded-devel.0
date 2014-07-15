@@ -1,42 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 47F11703EF
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 19:05:53 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id x48so4295242wes.5
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 12:05:54 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B634F60030;
+	Tue, 15 Jul 2014 20:14:16 +0000 (UTC)
+Received: by mail-ig0-f177.google.com with SMTP id hn18so64778igb.4
+	for <multiple recipients>; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ZsdNwU2PpIcufr3ZipQ+RfYDmcBt+wXg+WCmbkoitds=;
-	b=BtUmtSNpu6aVeNiEJRBZ+oE826xnwxg4ZvOHs16p+eVJGz0HCEPSXUGc1/67JkvTqy
-	Oa2ZgMo2hJdCtsp09SnawrafeRHp9eUAnmqYy0CzWCuFp14edbZO3ivHenCROTGNLkjs
-	egGAKqMhbssnL0jTnez9dS5CWGq1EgUMHufqbBC5kQKxE4wP5W7JUJDdgKAT/zj8cOrc
-	HSmdmecPK8va3kND6m5RsqJ19C9adXpye9yPdswNeu1sd1xqGGOoPeRyxoMxY4XLAY26
-	GLrMs0HkC2VCcH5Jy02a4X2gVD7c5Wc0WXrwNwIZmecDQGyXlzh2c8awUELvAkHJsCLP
-	EGJQ==
-X-Received: by 10.180.75.75 with SMTP id a11mr7642816wiw.3.1405451154447;
-	Tue, 15 Jul 2014 12:05:54 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bx2sm34416446wjb.47.2014.07.15.12.05.53 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Jul 2014 12:05:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 15 Jul 2014 21:06:03 +0200
-To: Otavio Salvador <otavio@ossystems.com.br>
-Message-ID: <20140715190603.GQ2433@jama>
-References: <lauren.post@freescale.com>
-	<1403889196-11872-1-git-send-email-lauren.post@freescale.com>
-	<CAP9ODKqccAwSGjkv15wmvFgcLsL3+MCWte+KvA4-6TDf_U9uxw@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=cNUiJ+0QE87p6gX01zRiQGURiyT15wBRAL3TB5o/xzw=;
+	b=OjWZbM3uODMhbdFI5UgWaxqtlXp+wuGqvxzsJd6OhARYw33ktqnJCRcMXXSNbGMT7L
+	EI1cRtcBWOg5PKLKkM1Jcve0ElNyP6wtPQAelYdXl9K0bC+fF/vOoarQ65rci5EZCw8+
+	1aQObP7UbyjoK9VAxrdPqk3ii+kB+IOkiGlw25NZUjvIP/czQCeoeqcSzn9MraJY0ZvH
+	oq51kX+MLZWn682ngfU5Xaz0koht6oZxVYQx8FI5FEh/BmPdAX0lfs6ee7R1WKZGqEC1
+	RRsHGTsjGFDvJwNNmETyKHUIZOwYe+XQg6dFPNfvVp2sH7ghbYOV28aD2lg3bULtf/x6
+	oXtg==
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKqccAwSGjkv15wmvFgcLsL3+MCWte+KvA4-6TDf_U9uxw@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: OpenEmbedded Devel List <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] cpuburn-neon: Upgrade to version 20140626
+X-Received: by 10.50.13.102 with SMTP id g6mr9859703igc.20.1405455257513; Tue,
+	15 Jul 2014 13:14:17 -0700 (PDT)
+Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
+Received: by 10.50.78.105 with HTTP; Tue, 15 Jul 2014 13:14:17 -0700 (PDT)
+In-Reply-To: <406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
+References: <cover.1405440532.git.ross.burton@intel.com>
+	<406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
+Date: Tue, 15 Jul 2014 13:14:17 -0700
+Message-ID: <CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [PATCH 7/7] autoconf: remove automake patch enforcing --foreign
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,47 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 19:06:00 -0000
-X-Groupsio-MsgNum: 50976
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3XZQkxCYp0f/VEFS"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 Jul 2014 20:14:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
---3XZQkxCYp0f/VEFS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Jul 15, 2014 9:20 AM, "Ross Burton" <ross.burton@intel.com> wrote:
+>
+> Since 2004 we've been carrying a patch[1] make autoreconf pass --foreign
+to
+> automake.  Presumably at the time this was due to many upstreams using
+> hand-coded bootstrap scripts that passed --foreign manually, but we were
+using
+> autoreconf.  These days many projects have added foreign to
+AM_INIT_AUTOMAKE and
+> use autoreconf directly, so this patch isn't as critical as it used to be.
 
-On Tue, Jul 15, 2014 at 03:27:58PM -0300, Otavio Salvador wrote:
-> Martin,
->=20
-> On Fri, Jun 27, 2014 at 2:13 PM, Lauren Post <lauren.post@freescale.com> =
-wrote:
-> > Previous location is no longer accessible and breaks builds that include
-> > cpuburn-neon.  This updates the location to fix the build breaks
-> >
-> > Signed-off-by: Lauren Post <lauren.post@freescale.com>
-> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->=20
-> Ping?
->=20
-> This is an important fix as it breaks builders.
+can it be somehow made such that it can be passed via option flags so we
+dont have to patch the packages not using above automake macro
+>
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
+>
+> [1] oe-classic 2ab2a92eadaf2f80410d8746099f8a9b1b81ff91
+> ---
+>  .../autoconf/autoconf/autoreconf-foreign.patch            |   13
+-------------
+>  meta/recipes-devtools/autoconf/autoconf_2.69.bb           |    1 -
+>  2 files changed, 14 deletions(-)
+>  delete mode 100644
+meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
+>
+> diff --git
+a/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
+b/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
+> deleted file mode 100644
+> index 88f7501..0000000
+> --- a/meta/recipes-devtools/autoconf/autoconf/autoreconf-foreign.patch
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -Upstream-Status: Pending
+> -
+> ---- autoconf-2.59/bin/autoreconf.in~autoreconf-foreign 2004-05-09
+20:55:06.000000000 -0400
+> -+++ autoconf-2.59/bin/autoreconf.in    2004-05-09 20:55:55.000000000
+-0400
+> -@@ -184,6 +184,8 @@
+> -
+> -   $aclocal_supports_force = `$aclocal --help` =~ /--force/;
+> -
+> -+  $automake   .= ' --foreign';
+> -+
+> -   # Dispatch autoreconf's option to the tools.
+> -   # --include;
+> -   $autoconf   .= join (' --include=', '', @include);
+> diff --git a/meta/recipes-devtools/autoconf/autoconf_2.69.bb
+b/meta/recipes-devtools/autoconf/autoconf_2.69.bb
+> index 5c652d4..6614a7b 100644
+> --- a/meta/recipes-devtools/autoconf/autoconf_2.69.bb
+> +++ b/meta/recipes-devtools/autoconf/autoconf_2.69.bb
+> @@ -10,7 +10,6 @@ LIC_FILES_CHKSUM =
+"file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
+>  SRC_URI += "file://autoreconf-include.patch \
+>             file://check-automake-cross-warning.patch \
+>             file://autoreconf-exclude.patch \
+> -           file://autoreconf-foreign.patch \
+>             file://autoreconf-gnuconfigize.patch \
+>              file://config_site.patch \
+>              file://remove-usr-local-lib-from-m4.patch \
+> --
+> 1.7.10.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-It was merged earlier today.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---3XZQkxCYp0f/VEFS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPFe5sACgkQN1Ujt2V2gBxTSwCgn/Byh6PMFBhGxMq86e6kh9bl
-K0AAnid+bzBWqtKxPk1Pr1LJN89Vjqfs
-=SPnm
------END PGP SIGNATURE-----
-
---3XZQkxCYp0f/VEFS--
