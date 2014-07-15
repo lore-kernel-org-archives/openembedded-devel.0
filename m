@@ -1,35 +1,44 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E29DF7037D
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id C77307035A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 09:24:57 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6F9OtrO008056
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 15 Jul 2014 02:24:55 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.241]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
-	Tue, 15 Jul 2014 02:24:55 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "Li, Rongqing" <Rongqing.Li@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
+	Tue, 15 Jul 2014 09:36:44 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 137023300A3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2014 11:36:45 +0200 (CEST)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0195.001; Tue, 15 Jul 2014 11:36:43 +0200
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH][meta-oe] memstat: add memstat recipe
-Thread-Index: AQHPoAldf35QkGU1jUyB18xT0hvDWJug3Paw
-Date: Tue, 15 Jul 2014 09:24:54 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABCA851B4@ALA-MBB.corp.ad.wrs.com>
-References: <1404809042-10815-1-git-send-email-rongqing.li@windriver.com>
-	<53BCAFF5.6080901@windriver.com>
-	<8672BB614B4CCA40A6B3BDD6FD82050BA8B274A6@COSNADEXC13.usr.ingenico.loc>
-	<53C4EA8C.9060308@windriver.com>
-In-Reply-To: <53C4EA8C.9060308@windriver.com>
-Accept-Language: en-US, zh-CN
+Thread-Topic: [oe] Building openjdk-7-jre
+Thread-Index: AQHPkhQeLjZyUdCn6Uq67T0LrV6O+5uFCFuA///nGgCAACU5gIAJcK6QgAXa8UCABLNnwIAB4g8g///oqwCAAC0REP//4qaAAAVybhAAvELLEA==
+Date: Tue, 15 Jul 2014 09:36:43 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0614CB1D@SEXCHANGE0100.lpg.priv>
+References: <20140627141915.GA23711@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C6A6@SEXCHANGE0100.lpg.priv>
+	<20140627151503.GB23711@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0612C6D6@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0612EC9F@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0612F212@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0614A7C3@SEXCHANGE0100.lpg.priv>
+	<F48900D76F0D8349918584FEEFEB4BCA0614BE8C@SEXCHANGE0100.lpg.priv>
+	<20140711141150.GB6407@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0614BF19@SEXCHANGE0100.lpg.priv>
+	<20140711150805.GC6407@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0614BF9B@SEXCHANGE0100.lpg.priv>
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0614BF9B@SEXCHANGE0100.lpg.priv>
+Accept-Language: fr-FR, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.143]
+x-originating-ip: [10.1.5.34]
 MIME-Version: 1.0
-Subject: Re: [PATCH][meta-oe] memstat: add memstat recipe
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejfedrvdelucetufdoteggodetrfcurfhrohhfihhlvgemuceonhhonhgvqeenuceurghilhhouhhtmecufedttdenuc
+Subject: Re: Building openjdk-7-jre
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,102 +52,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 09:25:05 -0000
-Content-Language: en-US
+X-List-Received-Date: Tue, 15 Jul 2014 09:36:46 -0000
+Content-Language: fr-FR
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
->=20
->=20
->=20
-> On 07/15/2014 04:44 PM, Matthieu CRAPET wrote:
-> > Hi,
-> >
-> > A manpage is included in the sources but not installed. This would be n=
-ice to package it.
+Hi,
 
-Sure, it make senses, I will add it and send v2.
+Confirmation!
 
-Thanks,
-Jackie
+To build java under Ubuntu 12.04, the default compilator version 4.6 must b=
+e change.
+I succeed with V4.8.
 
-> >
-> > Regards,
-> > Matthieu
+Thanks
+Daniel.
+
+-----Message d'origine-----
+De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] De la part de MONDON Daniel
+Envoy=E9=A0: vendredi 11 juillet 2014 17:59
+=C0=A0: openembedded-devel@lists.openembedded.org
+Objet=A0: Re: [oe] Building openjdk-7-jre
+
+
+I change g++ from 4.6 to 4.8.
+
+http://askubuntu.com/questions/372248/downloaded-g-4-8-but-cant-set-it-as-d=
+efault
+
+both errors are ok now!
+
+It is currently running openjdk-7-jre compilation :)
+
+It is necessary under Ubuntu 12.04 ...
+
+Thanks
+Daniel.
+
+On Fri, Jul 11, 2014 at 02:56:05PM +0000, MONDON Daniel wrote:
+> Hi,
 >=20
+> I apt-get install libstdc++-4.8-dev.
+> Is it the right version ?
 >=20
-> Cc: HuangJie
+> Thanks
+> Daniel.
 >=20
-> -Roy
-> >
-> >
-> > -----Message d'origine-----
-> > De : openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] De la part
-> > de Rongqing Li Envoy=E9 : mercredi 9 juillet 2014 04:59 =C0 :
-> > openembedded-devel@lists.openembedded.org
-> > Objet : Re: [oe] [PATCH][meta-oe] memstat: add memstat recipe
-> >
-> > Drop this patch, HuangJ has sent out a similar patch
-> >
-> > -Roy
-> >
-> > On 07/08/2014 04:44 PM, rongqing.li@windriver.com wrote:
-> >> From: Roy Li <rongqing.li@windriver.com>
-> >>
-> >> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> >> ---
-> >>    meta-oe/recipes-devtools/memstat/memstat_1.0.bb |   24 ++++++++++++=
-+++++++++++
-> >>    1 file changed, 24 insertions(+)
-> >>    create mode 100644 meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> >>
-> >> diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> >> b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> >> new file mode 100644
-> >> index 0000000..8c8882e
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-> >> @@ -0,0 +1,24 @@
-> >> +SUMMARY =3D "Display virtual memory allocation"
-> >> +DESCRIPTION =3D "Lists all the processes, executables, and shared
-> >> +libraries \ that are using up virtual memory. It's helpful to see
-> >> +how the shared memory \ is used and which 'old' libs are loaded. "
-> >> +HOMEPAGE =3D "http://memstattool.sourceforge.net/"
-> >> +SECTION =3D "devtool"
-> >> +
-> >> +LICENSE =3D "GPLv2"
-> >> +
-> >> +S =3D "${WORKDIR}/memstattool"
-> >> +
-> >> +LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3D87be186443b1ac2cf=
-a466f475e1ee0cb"
-> >> +
-> >> +SRC_URI =3D "http://sourceforge.net/projects/memstattool/files/${BPN}=
-_${PV}.tar.gz \
-> >> +          "
-> >> +SRC_URI[md5sum] =3D "2c3acc0c62b2a18f6601b84e54aa7462"
-> >> +SRC_URI[sha256sum] =3D
-> "245d5fc7fb87bcfd14486cd34917cae2856e799559ac568434af12c4852bce94"
-> >> +
-> >> +do_install_append(){
-> >> +    install -d ${D}${bindir}
-> >> +    install -m 0755 memstat ${D}${bindir}
-> >> +    install -d ${D}/etc
-> >> +    install -m 0755 memstat.conf ${D}/etc }
-> >>
-> >
-> > --
-> > Best Reagrds,
-> > Roy | RongQing Li
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
->=20
-> --
-> Best Reagrds,
-> Roy | RongQing Li
+
+Sorry I can not look at your computer, but it should match the g++ you are =
+using.
+
+g++ has a nice option which is called --version, which will tell you the ve=
+rsion.
+
+Bye Henning
+--=20
+
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
