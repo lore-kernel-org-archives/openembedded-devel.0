@@ -1,30 +1,45 @@
-Return-Path: <stephanoc@gmail.com>
-Received: from mail-qc0-f171.google.com (mail-qc0-f171.google.com
-	[209.85.216.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 459B27044B
+Return-Path: <rstreif@linuxfoundation.org>
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3057770249
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 00:06:45 +0000 (UTC)
-Received: by mail-qc0-f171.google.com with SMTP id i17so1738205qcy.30
+	Tue, 15 Jul 2014 00:36:37 +0000 (UTC)
+Received: by mail-ie0-f175.google.com with SMTP id x19so3822791ier.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jul 2014 17:06:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=BMGavLm52JkL5lf/LJzcOz6ujlY7deP1NxMqkAsobsU=;
-	b=g1Dlw5rgfiFDpUOL8R5bbFH0qZ7tudogXIvrCp3rTnDV4i5OtqBtq84CHfn84+gWXq
-	AJcziq5WvojnNIsK4y1Znt8JWhWUEBxsZpSeKILuLWTfn1ZRwT/Uodwk8rmlVLhpznUB
-	cdRC63oIf04xim/jarPpfBxxYzWe8qRfi4/LRxyzQ2dDVfX+zqgBgA385eljGXBxH2Rg
-	i/U4sf9Q07G4ja6Gktt+/RjVF6dPk/ZPu3/oF1Xg1fuFjyynD1EherJu1JyKs7M+pjqB
-	1LyCZrHtBJTxjdSJ+F45+5WexFNFWsqULTr6YYD/MCb6L+83gK0knd7itDRuF9unA89D
-	9kAg==
+	Mon, 14 Jul 2014 17:36:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=2vkmU76TvdyO62L0GwZIbN6yv3MWKg0JyR/xlraRVPo=;
+	b=RVQXJjJznOj0MmjXHOe3K/YD8yGwKPWSE8Os7SYp6AyG2lgtSkv9JRFC1VpeqeKD/1
+	yZF/6sWShf8MnMzEKEuUwqCfQ5EVWfNLkgfxs0jOHWvDoUuZ4yiLxSWGHQVI4WRAij3g
+	/Q7CjyBD82sc37ZiUeILmYTTPquHYNoBMtjTg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=2vkmU76TvdyO62L0GwZIbN6yv3MWKg0JyR/xlraRVPo=;
+	b=L4H+6+pyDaL8tQPpRKkyxu1D13kJ45E4sTGtiJiBSF4/04reBKBD/dmvc1J/hQJzi7
+	CFjkZJ1wMJbktCZFeTxkYVfhYtVLGcU+OdVdOlTEKa1sF06aTm9tmG8rnp8dCiMnG2J6
+	Gg0oUAbPR3ZTa+LurU3f81oy/E2UtRt8FBCHHAhpGZ/wWedff2MD6+Ug16Mz9Z44xvq4
+	86TOGTLitJx3UlIVma2gZUYxsZUuOyI1c8JhC+PxJonc3BQQASpbO2RGf/lw2OuMIvaR
+	ab3rt3XFCw8a+JPXl37KUXPuBf3UsmqQQFQk6cpZA5OqGNU9ZyrDuyKJ6z3QyaUaNfcm
+	e/Ww==
+X-Gm-Message-State: ALoCoQkgjU6aadN8RcwFlhG4ksHXH9B+wBt80j3uJaO0vF58v3WFm1AnwvBYplk1LgiNk2tR7MOU
 MIME-Version: 1.0
-X-Received: by 10.140.83.49 with SMTP id i46mr27942064qgd.22.1405382807000;
-	Mon, 14 Jul 2014 17:06:47 -0700 (PDT)
-Received: by 10.229.88.134 with HTTP; Mon, 14 Jul 2014 17:06:46 -0700 (PDT)
-Date: Mon, 14 Jul 2014 17:06:46 -0700
-Message-ID: <CAB25Ju7BtR02ePz-O5Q5Vi=3jfDbktr8NfGcp-wkU7rBG0V7CA@mail.gmail.com>
-From: Stephano Cetola <stephanoc@gmail.com>
+X-Received: by 10.50.136.135 with SMTP id qa7mr1771961igb.21.1405384598946;
+	Mon, 14 Jul 2014 17:36:38 -0700 (PDT)
+Received: by 10.50.225.73 with HTTP; Mon, 14 Jul 2014 17:36:38 -0700 (PDT)
+In-Reply-To: <alpine.LFD.2.11.1407141919070.5707@localhost>
+References: <alpine.LFD.2.11.1407141457150.14590@localhost>
+	<CA+gsK-p7rV+HmdcskYkU0MYRn1zesYDgOUb4raVcj6_xW9x_ag@mail.gmail.com>
+	<alpine.LFD.2.11.1407141919070.5707@localhost>
+Date: Mon, 14 Jul 2014 17:36:38 -0700
+Message-ID: <CA+gsK-rJHEnF_KmNFmq_1KqW7wfLBnMLpKWpFBeQYvAHFZM_cg@mail.gmail.com>
+From: Rudolf Streif <rstreif@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: php.inc removing directories that do not exist
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: defining FEATURE_PACKAGES_* in core-image.bbclass vs image.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,43 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 00:06:53 -0000
+X-List-Received-Date: Tue, 15 Jul 2014 00:36:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
-php.inc -> do_install_append_pn-php:
+>
+>
+>   is there something special about hwcodecs that suggests it should
+> stay in core-image rather than moving to image as well? i'm just
+> trying to understand the rationale.
+>
+>
+Not necessarily. But I would consider them extended features and they
+belong into core-image in my opinion. Not all embedded systems need them.
+Many don't have video or audio support. I would even suggest to move splash
+to core-image. If a device does not have video there is not reason for a
+splash screen.
 
+I consider debug-tweaks, package-management, and readonly-rootfs the basic
+image features to be in image.
 
-    rm -rf ${D}/${TMPDIR}
-    [...]
-    TMP=`dirname ${D}/${TMPDIR}`
-    while test ${TMP} != ${D}; do
-        rmdir ${TMP}
-        TMP=`dirname ${TMP}`;
-    done
-
-
-Added in this commit:
-
-https://github.com/openembedded/meta-oe/commit/357915b6d11dfa612fbadaa4966a0b3e0f332467
-
-
-
-This is failing when I try to install PHP using Ubuntu 14.04.
-
-Here are the variables being used:
-
-${D} (bitbake destination dir) =
-[...]/build/tmp/work/cortexa9hf-vfp-neon-reach-linux-gnueabi/php/5.4.14-r6.0/image
-
-${TMPDIR} (bitbake temp dir) = [...]/build/tmp
-
-The combination of ${D}/${TMPDIR} doesn't make any sense to me.  Maybe
-the intention was something like ${D}/tmp?
-
-I've removed these references to the dubious directory ${D}/${TMPDIR}
-and everything builds fine without any warnings or errors. Anyone know
-why this code exists?
-
-Kind Regards,
-Stephano
+:rjs
 
