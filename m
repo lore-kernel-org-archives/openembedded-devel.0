@@ -1,34 +1,36 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id DD3BD704C9
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CDC5B65DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 22:39:34 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1X7BNj-00029v-I1 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jul 2014 00:39:31 +0200
-Received: from 74-92-165-193-Oregon.hfc.comcastbusiness.net ([74.92.165.193])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 00:39:31 +0200
-Received: from stephanoc by 74-92-165-193-Oregon.hfc.comcastbusiness.net with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Tue, 15 Jul 2014 23:32:55 +0000 (UTC)
+Received: by mail-vc0-f172.google.com with SMTP id im17so248803vcb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 00:39:31 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 15 Jul 2014 16:32:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=RwOC9gQbOon94k/QpnaQlQGVcduTX0OKz3MZnCoIAbg=;
+	b=y3ZSoGv+KOiPlVWp/wZso7Tu/mcLLNEpmfuK8HFf0EvCyKX3o+P3Wk8PSpsv3vadqX
+	EjjG1pWukyIFn3oOf7N49btX/1eGFP75I436Qh8e2lhJvAAlHbrtbUCkwWmU3+BShWPj
+	v0JcIIrGHjWWJUy6D0JjglgXsVa7KSPRQ06NrQm+bRbAKAfC7u/+pWxHe0A/Z+litBF8
+	fua2EGN4zWGOFJ38ZJAY+6eyi07QpNgNzHwMGl21S4D2OZMgPQEHyPr1xDovXXeqv/G4
+	zBdURCkxBeJBKjtJO3hAJfiZfxcyZb2rOFiJGXbegCYop/icTOae0CXqj3EU4mI+EqU3
+	sUOA==
+X-Received: by 10.53.9.133 with SMTP id ds5mr3233500vdd.66.1405467175816;
+	Tue, 15 Jul 2014 16:32:55 -0700 (PDT)
+Received: from localhost.localdomain.com ([196.40.10.133])
+	by mx.google.com with ESMTPSA id
+	xb3sm27742505vdb.14.2014.07.15.16.32.53 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 15 Jul 2014 16:32:54 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Stephano Cetola <stephanoc@gmail.com>
-Date: Tue, 15 Jul 2014 22:39:17 +0000 (UTC)
-Message-ID: <loom.20140716T003708-65@post.gmane.org>
-References: <1405447671-23272-1-git-send-email-stephanoc@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 74.92.165.193 (Mozilla/5.0 (X11;
-	Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
-	Chrome/35.0.1916.153 Safari/537.36)
-Subject: Re: [meta-oe][PATCH] php: stop removing directories that do not	exist
+Date: Tue, 15 Jul 2014 16:32:32 -0700
+Message-Id: <cover.1405465524.git.TicoTimo@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Cc: paul.eggleton@linux.intel.com
+Subject: [meta-oe][PATCH 0/2] meta-python creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +44,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 22:39:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Jul 2014 23:33:03 -0000
 
-Stephano Cetola <stephanoc <at> gmail.com> writes:
+********
+This layer is intended to be the home of python modules for OpenEmbedded.
+Modules in this layer need to be independent of openembedded-core and
+meta-openembedded/meta-oe. Because of this, modules required by 'gateone'
+and 'anki' are not included and remain in:
+        meta-openembedded/meta-oe/recipes-devtools/python.
 
-> 
-> The directory ${D}/${TMPDIR} does not exist. This patch removes code
-> that was calling rm and rmdir on that location.
-> 
-> Signed-off-by: Stephano Cetola <stephanoc <at> gmail.com>
-> ---
->  meta-oe/recipes-devtools/php/php.inc |    6 ------
->  1 file changed, 6 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-
-devtools/php/php.inc
-> index b1bf79c..011eea7 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
->  <at>  <at>  -74,7 +74,6  <at>  <at>  do_install_append_pn-php() {
->      if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
->           mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* 
-${D}/${sysconfdir}/
->      fi
-> -    rm -rf ${D}/${TMPDIR}
->      rm -rf ${D}/.registry
->      rm -rf ${D}/.channels
->      rm -rf ${D}/.[a-z]*
->  <at>  <at>  -89,11 +88,6  <at>  <at>  do_install_append_pn-php() {
->      sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
->      sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
->      install -m 0755 ${B}/sapi/fpm/init.d.php-fpm 
-${D}${sysconfdir}/init.d/php-fpm
-> -    TMP=`dirname ${D}/${TMPDIR}`
-> -    while test ${TMP} != ${D}; do
-> -        rmdir ${TMP}
-> -        TMP=`dirname ${TMP}`;
-> -    done
->  }
-> 
->  PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 
-${PN}-pear ${PN}-dev
-> ${PN}-staticdev ${PN}-doc ${PN}"
+Maintainers:
+        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+        Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
+********
 
-Please disregard this patch. It is only a partial fix.
+The following changes since commit 239debcd8a0359aad64406476b801948f9b8ff14:
 
-I think I am beginning to understand the comment at the beginning of 
-do_install_append_pn-php. I will dig into this further.
+  usleep: add 1.0 recipe (2014-07-15 15:03:43 +0200)
 
-Kind Regards,
-Stephano
+are available in the git repository at:
 
+  git://git.openembedded.org/meta-openembedded-contrib timo/meta-python
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=timo/meta-python
 
+Tim Orling (2):
+  meta-python: create layer
+  meta-python: move recipes from meta-oe
+
+ meta-python/COPYING.MIT                            | 17 +++++++
+ meta-python/README                                 | 53 ++++++++++++++++++++++
+ meta-python/conf/layer.conf                        |  9 ++++
+ .../recipes-python}/pyrtm_0.2.bb                   |  0
+ .../recipes-python}/python-autobahn_0.8.6.bb       |  0
+ .../recipes-python}/python-cheetah_2.4.4.bb        |  0
+ .../recipes-python}/python-cloudeebus_0.6.0.bb     |  0
+ .../recipes-python}/python-cython_0.20.2.bb        |  0
+ .../recipes-python}/python-dateutil_1.5.bb         |  0
+ .../recipes-python}/python-epydoc_3.0.1.bb         |  0
+ .../recipes-python}/python-feedparser_5.1.3.bb     |  0
+ .../recipes-python}/python-gdata_1.2.4.bb          |  0
+ .../recipes-python}/python-gevent_0.13.8.bb        |  0
+ .../recipes-python}/python-greenlet_0.4.1.bb       |  0
+ .../recipes-python}/python-ldap/setup.cfg.patch    |  0
+ .../recipes-python}/python-ldap_2.3.9.bb           |  0
+ .../recipes-python}/python-lxml_3.0.2.bb           |  0
+ ...y-link-in-sysroot-not-in-host-directories.patch |  0
+ .../recipes-python}/python-m2crypto_0.21.1.bb      |  0
+ .../python-matplotlib/fix_setup.patch              |  0
+ .../python-matplotlib/fix_setupext.patch           |  0
+ .../recipes-python}/python-matplotlib_1.1.0.bb     |  0
+ .../recipes-python}/python-numeric/no-lapack.patch |  0
+ .../recipes-python}/python-numeric_24.2.bb         |  0
+ .../recipes-python}/python-pexpect_2.3.bb          |  0
+ .../recipes-python}/python-pip_1.3.1.bb            |  0
+ .../recipes-python}/python-psutil_0.6.1.bb         |  0
+ .../recipes-python}/python-pyalsaaudio_0.4.bb      |  0
+ .../recipes-python}/python-pyserial_2.4.bb         |  0
+ .../recipes-python}/python-pyudev_0.16.1.bb        |  0
+ .../recipes-python}/python-pyusb_1.0.0a2.bb        |  0
+ .../recipes-python}/python-pyyaml/setup.py         |  0
+ .../recipes-python}/python-pyyaml_3.10.bb          |  0
+ .../recipes-python}/python-smbus_3.0.3.bb          |  0
+ .../recipes-python}/python-sqlalchemy_0.7.9.bb     |  0
+ .../recipes-python}/python-twisted_13.2.0.bb       |  0
+ .../recipes-python}/python-vobject_0.8.1c.bb       |  0
+ .../recipes-python}/python-webdav_0.1.2.bb         |  0
+ .../recipes-python}/python-zopeinterface_4.1.1.bb  |  0
+ 39 files changed, 79 insertions(+)
+ create mode 100644 meta-python/COPYING.MIT
+ create mode 100644 meta-python/README
+ create mode 100644 meta-python/conf/layer.conf
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/pyrtm_0.2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-autobahn_0.8.6.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-cheetah_2.4.4.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-cloudeebus_0.6.0.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-cython_0.20.2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-dateutil_1.5.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-epydoc_3.0.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-feedparser_5.1.3.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-gdata_1.2.4.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-gevent_0.13.8.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-greenlet_0.4.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-ldap/setup.cfg.patch (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-ldap_2.3.9.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-lxml_3.0.2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-m2crypto_0.21.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-matplotlib/fix_setup.patch (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-matplotlib/fix_setupext.patch (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-matplotlib_1.1.0.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-numeric/no-lapack.patch (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-numeric_24.2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pexpect_2.3.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pip_1.3.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-psutil_0.6.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyalsaaudio_0.4.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyserial_2.4.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyudev_0.16.1.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyusb_1.0.0a2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyyaml/setup.py (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-pyyaml_3.10.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-smbus_3.0.3.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-sqlalchemy_0.7.9.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-twisted_13.2.0.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-vobject_0.8.1c.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-webdav_0.1.2.bb (100%)
+ rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/python-zopeinterface_4.1.1.bb (100%)
+
+-- 
+1.9.3
 
 
