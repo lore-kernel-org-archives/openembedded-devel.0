@@ -1,28 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 160067029A
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B03170295
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 08:47:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6F8l9fm007789
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 15 Jul 2014 01:47:10 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Tue, 15 Jul 2014 01:47:09 -0700
-Message-ID: <53C4EA8C.9060308@windriver.com>
-Date: Tue, 15 Jul 2014 16:47:08 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1404809042-10815-1-git-send-email-rongqing.li@windriver.com>
-	<53BCAFF5.6080901@windriver.com>
-	<8672BB614B4CCA40A6B3BDD6FD82050BA8B274A6@COSNADEXC13.usr.ingenico.loc>
-In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050BA8B274A6@COSNADEXC13.usr.ingenico.loc>
-Subject: Re: [PATCH][meta-oe] memstat: add memstat recipe
+	Tue, 15 Jul 2014 09:08:38 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1X6yiy-0001jZ-Hb for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Jul 2014 11:08:36 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2014 11:08:36 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jul 2014 11:08:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 15 Jul 2014 11:08:26 +0200
+Message-ID: <lq2r2a$kla$1@ger.gmane.org>
+References: <1405402285-29775-1-git-send-email-akuster@mvista.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <1405402285-29775-1-git-send-email-akuster@mvista.com>
+X-Enigmail-Version: 1.6
+Subject: Re: [meta-oe][PATCH] [v3] lz4: update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,88 +42,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jul 2014 08:47:17 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 Jul 2014 09:08:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+Armin Kuster schreef op 15-07-14 07:31:
+> update to version r119 Use github instead of svn LICENSE md5sum changed
+> since it was updated in r117
 
-On 07/15/2014 04:44 PM, Matthieu CRAPET wrote:
-> Hi,
->
-> A manpage is included in the sources but not installed. This would be nice to package it.
->
-> Regards,
-> Matthieu
+Good to know when it was changed, but I'm more interested in *what* changed.
 
+> FIxes CVE-2014-4611
+> 
+> Signed-off-by: Armin Kuster <akuster@mvista.com> --- 
+> meta/recipes-support/lz4/{lz4_svn.bb => lz4_git.bb} | 11 ++++------- 1
+> file changed, 4 insertions(+), 7 deletions(-) rename
+> meta/recipes-support/lz4/{lz4_svn.bb => lz4_git.bb} (68%)
+> 
+> diff --git a/meta/recipes-support/lz4/lz4_svn.bb
+> b/meta/recipes-support/lz4/lz4_git.bb similarity index 68% rename from
+> meta/recipes-support/lz4/lz4_svn.bb rename to
+> meta/recipes-support/lz4/lz4_git.bb index 38e36d8..3978d76 100644 ---
+> a/meta/recipes-support/lz4/lz4_svn.bb +++
+> b/meta/recipes-support/lz4/lz4_git.bb @@ -2,15 +2,12 @@ SUMMARY =
+> "Extremely Fast Compression algorithm" DESCRIPTION = "LZ4 is a very fast
+> lossless compression algorithm, providing compression speed at 400 MB/s
+> per core, scalable with multi-cores CPU. It also features an extremely
+> fast decoder, with speed in multiple GB/s per core, typically reaching
+> RAM speed limits on multi-core systems."
+> 
+> LICENSE = "BSD" -LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=2008d2325e11691e17fcaa3a6046f850" +LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=0b0d063f37a4477b54af2459477dcafd"
+> 
+> -# Upstream names releases after SVN revs -SRCREV = "112" -PV =
+> "r${SRCREV}" +SRCREV = "28fd251bc7b42e5cde15f9a2d78fc53b3b575558" 
+> +SRC_URI= "git://github.com/Cyan4973/lz4.git;branch=master"
+> 
+> -SRC_URI = "svn://lz4.googlecode.com/svn/;module=trunk;protocol=http" - 
+> -S = "${WORKDIR}/trunk" +S = "${WORKDIR}/git"
+> 
+> EXTRA_OEMAKE = "PREFIX=${prefix} CC='${CC}' DESTDIR=${D} LIBDIR=${libdir}
+> INCLUDEDIR=${includedir}"
+> 
+> 
 
-Cc: HuangJie
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
--Roy
->
->
-> -----Message d'origine-----
-> De : openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] De la part de Rongqing Li
-> Envoyé : mercredi 9 juillet 2014 04:59
-> À : openembedded-devel@lists.openembedded.org
-> Objet : Re: [oe] [PATCH][meta-oe] memstat: add memstat recipe
->
-> Drop this patch, HuangJ has sent out a similar patch
->
-> -Roy
->
-> On 07/08/2014 04:44 PM, rongqing.li@windriver.com wrote:
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> ---
->>    meta-oe/recipes-devtools/memstat/memstat_1.0.bb |   24 +++++++++++++++++++++++
->>    1 file changed, 24 insertions(+)
->>    create mode 100644 meta-oe/recipes-devtools/memstat/memstat_1.0.bb
->>
->> diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
->> b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
->> new file mode 100644
->> index 0000000..8c8882e
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
->> @@ -0,0 +1,24 @@
->> +SUMMARY = "Display virtual memory allocation"
->> +DESCRIPTION = "Lists all the processes, executables, and shared
->> +libraries \ that are using up virtual memory. It's helpful to see how
->> +the shared memory \ is used and which 'old' libs are loaded. "
->> +HOMEPAGE = "http://memstattool.sourceforge.net/"
->> +SECTION = "devtool"
->> +
->> +LICENSE = "GPLv2"
->> +
->> +S = "${WORKDIR}/memstattool"
->> +
->> +LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb"
->> +
->> +SRC_URI = "http://sourceforge.net/projects/memstattool/files/${BPN}_${PV}.tar.gz \
->> +          "
->> +SRC_URI[md5sum] = "2c3acc0c62b2a18f6601b84e54aa7462"
->> +SRC_URI[sha256sum] = "245d5fc7fb87bcfd14486cd34917cae2856e799559ac568434af12c4852bce94"
->> +
->> +do_install_append(){
->> +    install -d ${D}${bindir}
->> +    install -m 0755 memstat ${D}${bindir}
->> +    install -d ${D}/etc
->> +    install -m 0755 memstat.conf ${D}/etc }
->>
->
-> --
-> Best Reagrds,
-> Roy | RongQing Li
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+iD8DBQFTxO+KMkyGM64RGpERAnrdAJ9H8ZZGNxbZ7hGQd3sL8xKMhJ6v6wCdGKcf
+r8Kx6H0IJOr+2LDz7XAKVzo=
+=CNTg
+-----END PGP SIGNATURE-----
 
--- 
-Best Reagrds,
-Roy | RongQing Li
 
