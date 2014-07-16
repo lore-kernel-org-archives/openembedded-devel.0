@@ -1,40 +1,49 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 49FDD65CE7
+Return-Path: <ting.liu@freescale.com>
+X-Greylist: delayed 914 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 16 Jul 2014 06:38:25 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1lp0141.outbound.protection.outlook.com [207.46.163.141])
+	by mail.openembedded.org (Postfix) with ESMTP id 32E27704D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 06:20:37 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id et14so705866pad.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jul 2014 23:20:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:content-type:content-transfer-encoding;
-	bh=USnQxxNXwPcICYmVK0kPkh4LkNj6SHvGl/5aZixrM3c=;
-	b=Rlf93b3OKZjZPQnbc0CAYf9pYMZDIj2stktKB9DxfMfJDtcFUj3k/k0UHZdl95FxhQ
-	47oc2ryuqoZVK5kNo/BcCbPLS+VOgsAVz0mbmSKPVY0FMzKNKIDKPE1ZKITMxF+A4l1I
-	m6/24EK4yK2XQ2+XCQBjAQpGa3K/Qt4BPGM3OcTTcFppfRPhUWhzkAE/5dRl0aCURaVw
-	NCW/MLODjpjQA2Pd9NIa2EXtYdA0PtmxMiVJMu4eEsDkLK1Ybz7QqkkSEQykpabvEijo
-	ZuuR35XF+4eHVgspcozpTlf9KZphwnHsHKzgtcopExUGAIO4aigh8FxCPF0PxR4jdZH/
-	fvRA==
-X-Gm-Message-State: ALoCoQlC0l575JSY6whcenhMDD9BeD14y891ZWcgzvN1tEme7+zwBVC/+Vn8r6VUn+RKG93IfHjw
-X-Received: by 10.66.119.136 with SMTP id ku8mr8349149pab.121.1405491638790;
-	Tue, 15 Jul 2014 23:20:38 -0700 (PDT)
-Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
-	[98.239.95.55]) by mx.google.com with ESMTPSA id
-	xk1sm66706918pac.21.2014.07.15.23.20.37 for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 15 Jul 2014 23:20:38 -0700 (PDT)
-Message-ID: <53C619B3.7050203@mvista.com>
-Date: Tue, 15 Jul 2014 23:20:35 -0700
-From: akuster <akuster@mvista.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+	Wed, 16 Jul 2014 06:38:25 +0000 (UTC)
+Received: from DM2PR03CA003.namprd03.prod.outlook.com (10.141.52.151) by
+	BL2PR03MB145.namprd03.prod.outlook.com (10.255.230.13) with Microsoft
+	SMTP Server (TLS) id 15.0.985.8; Wed, 16 Jul 2014 06:23:11 +0000
+Received: from BL2FFO11FD037.protection.gbl (2a01:111:f400:7c09::176) by
+	DM2PR03CA003.outlook.office365.com (2a01:111:e400:2414::23) with
+	Microsoft
+	SMTP Server (TLS) id 15.0.990.7 via Frontend Transport; Wed, 16 Jul 2014
+	06:23:10 +0000
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BL2FFO11FD037.mail.protection.outlook.com (10.173.161.133) with
+	Microsoft SMTP Server (TLS) id 15.0.980.11 via Frontend Transport;
+	Wed, 16 Jul 2014 06:23:10 +0000
+Received: from b28495.ap.freescale.net (b28495.ap.freescale.net [10.193.20.99])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s6G6N5ci011967;
+	Tue, 15 Jul 2014 23:23:08 -0700
+From: <ting.liu@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Jul 2014 14:23:58 +0800
+Message-ID: <1405491841-24744-1-git-send-email-ting.liu@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:CAL; IPV:NLI;
+	EFV:NLI; SFV:NSPM;
+	SFS:(6009001)(199002)(189002)(97736001)(85306003)(77156001)(104166001)(47776003)(74502001)(74662001)(102836001)(68736004)(6806004)(4396001)(19580405001)(33646002)(19580395003)(26826002)(48376002)(50226001)(31966008)(62966002)(93916002)(77982001)(79102001)(104016003)(46102001)(85852003)(20776003)(81542001)(87286001)(99396002)(64706001)(36756003)(2351001)(110136001)(50466002)(89996001)(92566001)(81342001)(92726001)(105606002)(83072002)(95666004)(106466001)(229853001)(87936001)(21056001)(50986999)(44976005)(86362001)(84676001)(83322001)(88136002)(107046002)(80022001)(81156004)(76482001)(69596002)(86152002);
+	DIR:OUT; SFP:; SCL:1; SRVR:BL2PR03MB145;
+	H:az84smr01.freescale.net; FPR:; MLV:ovrnspm;
+	PTR:InfoDomainNonexistent; MX:1; LANG:en; 
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-Subject: WIreshark 1.12.x
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:
+X-Forefront-PRVS: 0274272F87
+Received-SPF: Fail (: domain of freescale.com does not designate 192.88.158.2
+	as permitted sender) receiver=; client-ip=192.88.158.2;
+	helo=az84smr01.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=ting.liu@freescale.com; 
+X-OriginatorOrg: freescale.com
+Cc: yocto@mindchasers.com
+Subject: [meta-oe][PATCH 0/3] libhugetlbfs and luajit update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,17 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 06:20:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Jul 2014 06:38:29 -0000
+Content-Type: text/plain
 
-Hello all,
+From: Ting Liu <b28495@freescale.com>
 
-I have the latest wireshark 1.12.0-rc2 building and working with gtk2. 
-Is anyone else working on this? if not I can submit patches.
+Since there are several libhugetlbfs patches to be applied, generate
+the patches based on meta-openembedded-contrib (jansa/master branch):
 
-I am not sure which layer wireshark should swim in,  meta-networking or 
-meta-security ?
+commit 76afdeedacf4497893359c5e9cb335ada6729e12
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Wed Jun 25 20:30:44 2014 +0200
 
-- Armin
+    python-cython: Add git version
+
+Ting Liu (3):
+  libhugetlbfs: use ARCH ppc/ppc64 for powerpc/powerpc64
+  libhugetlbfs: not build obj32 for powerpc64
+  luajit: replace MACHINEOVERRIDES fslmachine with qoriq-ppc
+
+ .../libhugetlbfs/libhugetlbfs_git.bb               |    6 +++++-
+ meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb    |    2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+-- 
+1.7.3.4
+
 
