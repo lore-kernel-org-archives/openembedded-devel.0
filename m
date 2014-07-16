@@ -1,26 +1,37 @@
-Return-Path: <amy.fong@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 24D9A7057D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 15:36:14 +0000 (UTC)
-Received: from yow-dellw-af (yow-dellw-af.wrs.com [128.224.56.22])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6GFaFRO005550
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 08:36:16 -0700 (PDT)
-Received: from afong by yow-dellw-af with local (Exim 4.82)
-	(envelope-from <amy.fong@windriver.com>) id 1X7RFe-0000Hq-Pz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jul 2014 11:36:15 -0400
-Date: Wed, 16 Jul 2014 11:36:14 -0400
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140716153613.GA1067@windriver.com>
-References: <20140716145924.GA13352@windriver.com> <20140716152657.GD2433@jama>
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C49870588;
+	Wed, 16 Jul 2014 16:40:10 +0000 (UTC)
+Received: by mail-ie0-f178.google.com with SMTP id tp5so996655ieb.37
+	for <multiple recipients>; Wed, 16 Jul 2014 09:40:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=Y6iNgh2TaHms2K/bFTkDaIbQgMsYH3+pDsK4Mw2HyDc=;
+	b=L8akcPdsdpVUIs09qKN/5J1OvqEcw37Ggrx+b0RcX4BfFkYFMXjVD2SICueOOU3239
+	8LDxLdjNnzxGQBSI/QL6CzTOyP8JJDiLeCmqxTFgqs3w6BRSWeJYjGqqatn7wmmgQkhb
+	EyrdKuKqeKmpnlKk0u1gzLEeHEANKToMaG8N0pLwXL2m3gkjksUZAYqyVl+gLalHDf9A
+	yi1oFPz1ep2YNssF7Ft0TN5f/I7uD4kqDu7JUmaSbLoeRGPuAsQmZOA3j8sQj/9VkFmQ
+	yrfbZhCAaz3ZPtWfKP13U/BOkE3hWbxgn+wHDZPzLh9uNE847ceURaBWN+4PGEONOQO1
+	xlGg==
+X-Received: by 10.50.176.202 with SMTP id ck10mr18323003igc.2.1405528811908;
+	Wed, 16 Jul 2014 09:40:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20140716152657.GD2433@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe] [PATCH] postgresql configure error
+Received: by 10.50.78.105 with HTTP; Wed, 16 Jul 2014 09:39:41 -0700 (PDT)
+In-Reply-To: <CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
+References: <cover.1405440532.git.ross.burton@intel.com>
+	<406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
+	<CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
+	<CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Jul 2014 09:39:41 -0700
+Message-ID: <CAMKF1soF6tLi+=tOMULDAfDV33XPi8=oWLnVoeriS8ogjrPsOw@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH 7/7] autoconf: remove automake patch enforcing --foreign
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,56 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 15:36:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Jul 2014 16:40:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jul 16, 2014 at 05:26:57PM +0200, Martin Jansa wrote:
-> On Wed, Jul 16, 2014 at 10:59:28AM -0400, Amy Fong wrote:
-> > Author: Amy Fong <amy.fong@windriver.com>
-> > Date:   Wed Jul 16 10:57:38 2014 -0400
-> > 
-> >     postgresql: libxml2 configure error
-> >     
-> >     postgresql is looking for libxml2 in the wrong location .../usr/include
-> >     libxml2 installs its header files under .../usr/include/libxml2
-> >     
-> >     Signed-off-by: Amy Fong <amy.fong@windriver.com>
-> > 
-> > diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgre
-> > index 4e5ec02..47aa3a6 100644
-> > --- a/meta-oe/recipes-support/postgresql/postgresql.inc
-> > +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-> > @@ -47,7 +47,7 @@ PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
-> >  PACKAGECONFIG[tcl] = \
-> >      "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl,"
-> >  PACKAGECONFIG[nls] = "--enable-nls,--disable-nls,,"
-> > -PACKAGECONFIG[libxml] = "--with-libxml,--without-libxml,libxml2,libxml2"
-> > +PACKAGECONFIG[libxml] = "--with-libxml CFLAGS=-I${STAGING_INCDIR}/libxml2,--without-libxml,libx
-> 
-> Using libxml pkgconfig is better option (see patch on ML)
+On Tue, Jul 15, 2014 at 2:51 PM, Burton, Ross <ross.burton@intel.com> wrote:
+> On 15 July 2014 21:14, Khem Raj <raj.khem@gmail.com> wrote:
+>> can it be somehow made such that it can be passed via option flags so we
+>> dont have to patch the packages not using above automake macro
+>
+> Packages that don't use the right automake macro are generally very
+> old and we're already carrying patches to fix the autoconf/automake
+> files, so I'm not sure this is actually worth it.  I'm trying to drop
+> the patches we're carrying against core build tools, not increase it.
+> :)
 
-D'oh. Thanks!
-
-> >  PACKAGECONFIG[perl] = "--with-perl,--without-perl,perl,perl"
-> >  
-> >  EXTRA_OECONF += "--enable-thread-safety --disable-rpath \
-> > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
-> -- 
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
-
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+While I understand that, I am also worried about breakage/work it will
+cause for layers additional to OE-Core
+thats why providing a least impact migration path is desirable.
 
