@@ -1,35 +1,37 @@
 Return-Path: <ting.liu@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1lp0145.outbound.protection.outlook.com [207.46.163.145])
-	by mail.openembedded.org (Postfix) with ESMTP id 64EDD704B6
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2lp0236.outbound.protection.outlook.com [207.46.163.236])
+	by mail.openembedded.org (Postfix) with ESMTP id 8761B7051E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 06:38:49 +0000 (UTC)
-Received: from CH1PR03CA006.namprd03.prod.outlook.com (10.255.156.151) by
-	BLUPR03MB152.namprd03.prod.outlook.com (10.255.212.28) with Microsoft
-	SMTP Server (TLS) id 15.0.985.8; Wed, 16 Jul 2014 06:23:15 +0000
-Received: from BN1AFFO11FD017.protection.gbl (10.255.156.132) by
-	CH1PR03CA006.outlook.office365.com (10.255.156.151) with Microsoft SMTP
-	Server (TLS) id 15.0.985.8 via Frontend Transport;
-	Wed, 16 Jul 2014 06:23:14 +0000
+	Wed, 16 Jul 2014 06:39:20 +0000 (UTC)
+Received: from BN3PR0301CA0061.namprd03.prod.outlook.com (25.160.152.157) by
+	CY1PR0301MB0715.namprd03.prod.outlook.com (25.160.159.145) with
+	Microsoft
+	SMTP Server (TLS) id 15.0.985.8; Wed, 16 Jul 2014 06:23:14 +0000
+Received: from BN1BFFO11FD030.protection.gbl (2a01:111:f400:7c10::1:118) by
+	BN3PR0301CA0061.outlook.office365.com (2a01:111:e400:401e::29) with
+	Microsoft
+	SMTP Server (TLS) id 15.0.985.8 via Frontend Transport; Wed, 16 Jul 2014
+	06:23:14 +0000
 Received: from az84smr01.freescale.net (192.88.158.2) by
-	BN1AFFO11FD017.mail.protection.outlook.com (10.58.52.77) with Microsoft
-	SMTP Server (TLS) id 15.0.980.11 via Frontend Transport;
+	BN1BFFO11FD030.mail.protection.outlook.com (10.58.144.93) with
+	Microsoft SMTP Server (TLS) id 15.0.980.11 via Frontend Transport;
 	Wed, 16 Jul 2014 06:23:14 +0000
 Received: from b28495.ap.freescale.net (b28495.ap.freescale.net [10.193.20.99])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s6G6N5ck011967;
-	Tue, 15 Jul 2014 23:23:12 -0700
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s6G6N5cj011967;
+	Tue, 15 Jul 2014 23:23:10 -0700
 From: <ting.liu@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Jul 2014 14:24:00 +0800
-Message-ID: <1405491841-24744-3-git-send-email-ting.liu@freescale.com>
+Date: Wed, 16 Jul 2014 14:23:59 +0800
+Message-ID: <1405491841-24744-2-git-send-email-ting.liu@freescale.com>
 X-Mailer: git-send-email 1.7.3.4
 In-Reply-To: <1405491841-24744-1-git-send-email-ting.liu@freescale.com>
 References: <1405491841-24744-1-git-send-email-ting.liu@freescale.com>
 X-EOPAttributedMessage: 0
 X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:CAL; IPV:NLI;
 	EFV:NLI; SFV:NSPM;
-	SFS:(6009001)(199002)(189002)(21056001)(26826002)(81342001)(99396002)(4396001)(19580395003)(86152002)(50226001)(6806004)(102836001)(86362001)(77156001)(76176999)(97736001)(105606002)(85306003)(81542001)(92566001)(47776003)(64706001)(33646002)(20776003)(95666004)(87936001)(50466002)(80022001)(88136002)(93916002)(87286001)(62966002)(44976005)(110136001)(107046002)(76482001)(104016003)(48376002)(31966008)(74502001)(85852003)(69596002)(89996001)(50986999)(36756003)(92726001)(2351001)(19580405001)(83322001)(104166001)(84676001)(229853001)(81156004)(106466001)(77982001)(83072002)(46102001)(79102001)(74662001)(68736004);
-	DIR:OUT; SFP:; SCL:1; SRVR:BLUPR03MB152;
+	SFS:(6009001)(189002)(199002)(26826002)(88136002)(19580395003)(77156001)(110136001)(76176999)(99396002)(92566001)(85852003)(36756003)(97736001)(93916002)(83072002)(102836001)(2351001)(229853001)(89996001)(107046002)(50466002)(6806004)(74662001)(87936001)(84676001)(74502001)(81542001)(48376002)(104016003)(104166001)(19580405001)(80022001)(83322001)(85306003)(69596002)(105606002)(81342001)(31966008)(76482001)(87286001)(62966002)(50986999)(77982001)(20776003)(95666004)(44976005)(86152002)(46102001)(50226001)(92726001)(106466001)(86362001)(81156004)(21056001)(68736004)(4396001)(64706001)(47776003)(79102001)(33646002);
+	DIR:OUT; SFP:; SCL:1; SRVR:CY1PR0301MB0715;
 	H:az84smr01.freescale.net; FPR:; MLV:ovrnspm;
 	PTR:InfoDomainNonexistent; MX:1; LANG:en; 
 MIME-Version: 1.0
@@ -42,7 +44,7 @@ Authentication-Results: spf=fail (sender IP is 192.88.158.2)
 	smtp.mailfrom=ting.liu@freescale.com; 
 X-OriginatorOrg: freescale.com
 Cc: yocto@mindchasers.com
-Subject: [meta-oe][PATCH 2/3] libhugetlbfs: not build obj32 for powerpc64
+Subject: [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 for powerpc/powerpc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 06:38:50 -0000
+X-List-Received-Date: Wed, 16 Jul 2014 06:39:22 -0000
 Content-Type: text/plain
 
 From: Ting Liu <b28495@freescale.com>
 
-If obj32 needed, user can build lib32-libhugetlbfs.
+In recent libhugetlbfs source, powerpc/powerpc64 is changed back to
+ppc/ppc64 (to match with the output of `uname -a`).
 
-Fix the below build issue for 64bit powerpc boards:
-| fatal error: gnu/stubs-32.h: No such file or directory
-|  # include <gnu/stubs-32.h>
-|                            ^
-| compilation terminated.
-| make: *** [obj32/elflink.o] Error 1
+Update the recipe to avoid build issue for now.
 
 Signed-off-by: Ting Liu <b28495@freescale.com>
 ---
- .../libhugetlbfs/libhugetlbfs_git.bb               |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ .../libhugetlbfs/libhugetlbfs_git.bb               |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
 diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index e554b26..55d555b 100644
+index e8e0787..e554b26 100644
 --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
 +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -29,6 +29,7 @@ LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
- LIBHUGETLBFS_ARCH_powerpc = "ppc"
- LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
- EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=2"
-+EXTRA_OEMAKE_append_powerpc64 = " BUILDTYPE=NATIVEONLY"
+@@ -25,7 +25,10 @@ S = "${WORKDIR}/git"
+ COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ 
+ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+-EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=1"
++LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
++LIBHUGETLBFS_ARCH_powerpc = "ppc"
++LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
++EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=2"
  PARALLEL_MAKE = ""
  CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
  
