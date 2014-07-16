@@ -1,37 +1,40 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 0949865C8D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 19:35:19 +0000 (UTC)
-Received: by mail-qc0-f174.google.com with SMTP id o8so1232777qcw.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id EEEB170200;
+	Wed, 16 Jul 2014 20:19:26 +0000 (UTC)
+Received: by mail-ie0-f174.google.com with SMTP id rp18so1433978iec.19
+	for <multiple recipients>; Wed, 16 Jul 2014 13:19:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=BYGGVIb7PSFrHXgF9Pl9HijmoIFKuSlfeTBgkKechgE=;
-	b=pyVuLp9qTQDX07mZDXCuw9S61ZEH+UTWy027liCtPLEUFAyRIGufYNX59dWrwsGtc/
-	b8nF9HSbXULf8hfqUU4LLaSl2f5zPcuVdsZ0KK3B4A8EEpX+4A2FepUUwGlDvHM7+zlf
-	onlmCT6KiEMVUIIEbPi9KScfp9FbszG9YmUcGr9AJ0fZxS4NiQnYzDAM2aCxIrIMbIbo
-	nCGcrROHtfTMl03cKvPjJRjPAuE+iaUZ6mc4U1q6XmHlC5JjJk5iOyXL++xUFkzd7FOs
-	USNbwOmW1JohmBbj3DxBURAF6DYv+iUhq1mEvKdK7aoZiS+6uVDV0Uw9OyqD+FoxcdG5
-	DABg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=FiCdEQ83LSlXAzxpPq55V51FD187k9JGXpfqCS8HFWY=;
+	b=bKdGvwTlko6i1Qwk5OcYuUrrD7Zj12RK8QGEmMNCS/GfSibr43MduvOyaGD62lANUO
+	xyUWJvxjEZJ6yWdefcWTs7sZYLWFrA5djW57KSBg5OmslozWw5jD9D4ArgOB0CF8MBIF
+	+WW5299/mjm0vY8AEdcDs8butoSjNSZ+4bauTKQfpUd+7kAhF+JWPzuGY1Ej6jKTiinp
+	vy7daxvsBfaUrqOT4Su5G68RrPjgoShEVKbkxSyZQondrZPoh5YvNYohwRu1LFvjslxM
+	S7qDeDBVScj4d0+IGWBLtuB/kEt4HmSC8RI77Px/V98Ee3F3xIMPZppbes8tG3RJoRrf
+	ieVQ==
 MIME-Version: 1.0
-X-Received: by 10.140.82.113 with SMTP id g104mr48532067qgd.55.1405539320771; 
-	Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
-Sender: cliff.brake@gmail.com
-Received: by 10.140.17.19 with HTTP; Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
-In-Reply-To: <53C6B577.2050909@gmail.com>
-References: <CAP9ODKow7gr1J8_peZJNT4+soQ_vDQP_hi4DYnjx7E0uTCUoBg@mail.gmail.com>
-	<53C6B577.2050909@gmail.com>
-Date: Wed, 16 Jul 2014 15:35:20 -0400
-X-Google-Sender-Auth: HZjpniYgg1cVD6Ara5O9rimJdI0
-Message-ID: <CAOd_LFw=J=cihJBH47N+7NYcLo4bs4BY7d93PY+Xy=_vv5DkJQ@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [for-daisy][meta-oe] Patches to cherry-pick from master
+X-Received: by 10.43.53.199 with SMTP id vr7mr22098554icb.70.1405541967220;
+	Wed, 16 Jul 2014 13:19:27 -0700 (PDT)
+Received: by 10.50.78.105 with HTTP; Wed, 16 Jul 2014 13:19:27 -0700 (PDT)
+Received: by 10.50.78.105 with HTTP; Wed, 16 Jul 2014 13:19:27 -0700 (PDT)
+In-Reply-To: <alpine.LFD.2.11.1407120436510.28008@localhost>
+References: <alpine.LFD.2.11.1407111821080.6262@localhost>
+	<CAP9ODKqwOXV+GxNhoPFXJWcjLipD1P176Qcy0bBNMuzF9=Bhng@mail.gmail.com>
+	<CAMKF1spgCphqN7PVskjP_bHd2CfsBRi52y=KJ2fWyjwQxw0cYw@mail.gmail.com>
+	<alpine.LFD.2.11.1407120436510.28008@localhost>
+Date: Wed, 16 Jul 2014 13:19:27 -0700
+Message-ID: <CAMKF1soB6boe8Echqswu64ptz2PBh_VWF_8aK5WooPcwMYeyGA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH] core-image.bbclass: Reformat definition of CORE_IMAGE_BASE_INSTALL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,24 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 19:35:23 -0000
+X-List-Received-Date: Wed, 16 Jul 2014 20:19:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jul 16, 2014 at 1:25 PM, akuster808 <akuster808@gmail.com> wrote:
+On Jul 12, 2014 1:41 AM, "Robert P. J. Day" <rpjday@crashcourse.ca> wrote:
 >
-> On 07/16/2014 08:21 AM, Otavio Salvador wrote:
->>
->> Hello,
->>
->> Please cherry-pick following patches into daisy branch:
+> On Fri, 11 Jul 2014, Khem Raj wrote:
 >
+> > On Fri, Jul 11, 2014 at 4:41 PM, Otavio Salvador
+> > <otavio@ossystems.com.br> wrote:
+> > > Hello,
+> > >
+> > > +OE-Core
+> > >
+> > > On Fri, Jul 11, 2014 at 7:23 PM, Robert P. J. Day <
+rpjday@crashcourse.ca> wrote:
+> > >>
+> > >> Reformat the assignment to CORE_IMAGE_BASE_INSTALL to be more
+> > >> intuitively obvious.
+> > >>
+> > >> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+> > >>
+> > >> ---
+> > >>
+> > >>   compile and run-time tested, building a core-image-minimal for
+> > >> qemuarm.
+> > >>
+> > >> diff --git a/meta/classes/core-image.bbclass
+b/meta/classes/core-image.bbclass
+> > >> index 1b36cba..d2b9d69 100644
+> > >> --- a/meta/classes/core-image.bbclass
+> > >> +++ b/meta/classes/core-image.bbclass
+> > >> @@ -59,13 +59,11 @@ MACHINE_HWCODECS ??= ""
+> > >>  CORE_IMAGE_BASE_INSTALL = '\
+> > >>      packagegroup-core-boot \
+> > >>      packagegroup-base-extended \
+> > >> -    \
+> > >> -    ${CORE_IMAGE_EXTRA_INSTALL} \
+> > >>      '
+> > >>
+> > >>  CORE_IMAGE_EXTRA_INSTALL ?= ""
+> > >>
+> > >> -IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
+> > >> +IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}
+${CORE_IMAGE_EXTRA_INSTALL}"
+> > >
+> > > For me, more intuitively would be:
+> > >
+> > > CORE_IMAGE_BASE_INSTALL ?= ...
+> >
+> > weak assignment here would mean overridable base install which is
+> > not the intention. we want a working base image when inheriting
+> > core-image
 >
-> who does this?
+>   except that that argument doesn't really hold water given how one
+> can inherit core-image, then (as i pointed out) immediately wipe out
+> that supposedly inviolable definition of CORE_IMAGE_BASE_INSTALL by
+> simply reassigning to IMAGE_INSTALL.
 
-I created a pull request and sent to maillist with these two patches,
-plus a zeroc-ice patch.  Not sure if this makes it easier for Martin
-or not ...
-
-Thanks,
-Cliff
+these classes are provided as basic working blocks. it would be a bad use
+case if one were to override basic constructs inside it completely. some
+variables are sort of interfaces some are not. besides your change is ok
+its just the preset is not. we should start using the constructs as
+intended.
+>
+>   i *like* the idea of a weak assignment to CORE_IMAGE_BASE INSTALL.
+> it's effectively what core-image-minimal is doing anyway, it just
+> allows you to do it in a way that's not grotesquely ugly.
+>
+> rday
+>
+> --
+>
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                         http://crashcourse.ca
+>
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
 
