@@ -1,30 +1,37 @@
 Return-Path: <cliff.brake@gmail.com>
-Received: from mail-qa0-f43.google.com (mail-qa0-f43.google.com
-	[209.85.216.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 6220B7023B
+Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 0949865C8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 19:32:26 +0000 (UTC)
-Received: by mail-qa0-f43.google.com with SMTP id w8so1079023qac.2
+	Wed, 16 Jul 2014 19:35:19 +0000 (UTC)
+Received: by mail-qc0-f174.google.com with SMTP id o8so1232777qcw.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 12:32:27 -0700 (PDT)
+	Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=w4rTYzDtWLbTWq5TUP/Ych1Ub+hV+U89CbqELG1AyBs=;
-	b=waAmZYh7VLoa9s0rQCnRHBoczSAFxeqVKlS3y8z4jaBN8u31hSGcKS7IkRq8217bjT
-	1CJNENCKYf//s/hggZ2KPjIV2T+osahtNFJnfChJQPDMILmDieEE7DqfZXeMStw0RNHH
-	z9IdKZ0281BeoicfDOKtmt7/SZ1qzUZB4KbN4Dg0UFYtmKw4UrfrS5X2J4/aBEW4htVN
-	3QKuP/XxbWMFQohzSo+800ZliewWQGuGGBN35OhpX2NPvg850RfuIC6oHz2ujko3QB91
-	VULHTjdUq4S+gV6JKOR/lY/UqC2IXiFAIzpjQ2ZcW2EsSHDQ5GWeWloueT+hAS1OOsjL
-	jDHA==
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=BYGGVIb7PSFrHXgF9Pl9HijmoIFKuSlfeTBgkKechgE=;
+	b=pyVuLp9qTQDX07mZDXCuw9S61ZEH+UTWy027liCtPLEUFAyRIGufYNX59dWrwsGtc/
+	b8nF9HSbXULf8hfqUU4LLaSl2f5zPcuVdsZ0KK3B4A8EEpX+4A2FepUUwGlDvHM7+zlf
+	onlmCT6KiEMVUIIEbPi9KScfp9FbszG9YmUcGr9AJ0fZxS4NiQnYzDAM2aCxIrIMbIbo
+	nCGcrROHtfTMl03cKvPjJRjPAuE+iaUZ6mc4U1q6XmHlC5JjJk5iOyXL++xUFkzd7FOs
+	USNbwOmW1JohmBbj3DxBURAF6DYv+iUhq1mEvKdK7aoZiS+6uVDV0Uw9OyqD+FoxcdG5
+	DABg==
 MIME-Version: 1.0
-X-Received: by 10.224.87.130 with SMTP id w2mr48332498qal.5.1405539147222;
-	Wed, 16 Jul 2014 12:32:27 -0700 (PDT)
-Received: by 10.140.17.19 with HTTP; Wed, 16 Jul 2014 12:32:27 -0700 (PDT)
-Date: Wed, 16 Jul 2014 15:32:27 -0400
-Message-ID: <CAOd_LFzaYUmCQB0vq_bxi0bWDRvEX8mGb7gFV7YQfRckTzKacQ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+X-Received: by 10.140.82.113 with SMTP id g104mr48532067qgd.55.1405539320771; 
+	Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.140.17.19 with HTTP; Wed, 16 Jul 2014 12:35:20 -0700 (PDT)
+In-Reply-To: <53C6B577.2050909@gmail.com>
+References: <CAP9ODKow7gr1J8_peZJNT4+soQ_vDQP_hi4DYnjx7E0uTCUoBg@mail.gmail.com>
+	<53C6B577.2050909@gmail.com>
+Date: Wed, 16 Jul 2014 15:35:20 -0400
+X-Google-Sender-Auth: HZjpniYgg1cVD6Ara5O9rimJdI0
+Message-ID: <CAOd_LFw=J=cihJBH47N+7NYcLo4bs4BY7d93PY+Xy=_vv5DkJQ@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][diasy] pull request, cpuburn-neon, v4l-utils, zeroc-ice
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [for-daisy][meta-oe] Patches to cherry-pick from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,46 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 19:32:28 -0000
+X-List-Received-Date: Wed, 16 Jul 2014 19:35:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
-The following changes since commit ee24939c4c70b63a9fb7e93a58889a3231d3d367:
+On Wed, Jul 16, 2014 at 1:25 PM, akuster808 <akuster808@gmail.com> wrote:
+>
+> On 07/16/2014 08:21 AM, Otavio Salvador wrote:
+>>
+>> Hello,
+>>
+>> Please cherry-pick following patches into daisy branch:
+>
+>
+> who does this?
 
-  rng-tools: Update rng-tools version to 4 (2014-07-01 15:08:41 -0400)
+I created a pull request and sent to maillist with these two patches,
+plus a zeroc-ice patch.  Not sure if this makes it easier for Martin
+or not ...
 
-are available in the git repository at:
-
-  https://github.com/cbrake/meta-openembedded.git 2014-07-16_merge-to-daisy
-
-for you to fetch changes up to d85b01997ce8cc354ccc53f97fdffc79cf2277d5:
-
-  v4l-utils: Add virtual/libx11 dependency only if X11 is available
-(2014-07-16 15:28:40 -0400)
-
-----------------------------------------------------------------
-Lauren Post (1):
-      cpuburn-neon: Upgrade to version 20140626
-
-Otavio Salvador (1):
-      v4l-utils: Add virtual/libx11 dependency only if X11 is available
-
-Philip Balister (1):
-      zeroc-ice : Add recipe.
-
- .../cpuburn/{cpuburn-neon_20120610.bb => cpuburn-neon_20140626.bb}  |   9 +-
- .../zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch    |
-292 ++++++++++++++++++++++++++++++
- meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb           |
- 77 ++++++++
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb              |   3 +-
- 4 files changed, 376 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-benchmark/cpuburn/{cpuburn-neon_20120610.bb =>
-cpuburn-neon_20140626.bb} (69%)
- create mode 100644
-meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
- create mode 100644 meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-
--- 
-=================
-http://bec-systems.com
+Thanks,
+Cliff
 
