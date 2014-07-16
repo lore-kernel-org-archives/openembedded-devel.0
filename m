@@ -1,34 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id CF2FC7038D
+Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E6637038D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 12:38:53 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id n3so6136849wiv.5
+	Wed, 16 Jul 2014 12:49:56 +0000 (UTC)
+Received: by mail-we0-f179.google.com with SMTP id u57so866792wes.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jul 2014 05:38:54 -0700 (PDT)
+	Wed, 16 Jul 2014 05:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Y59ZCjXr2stv/TyEs5sxEm6JlPCNmBPL5yY0xu2TOZQ=;
-	b=0DxP/rJKJ58h0rJGfpVxLmREjoSWX3JTdEzNt1LBSkw149RNP19DJ9x9JcjyqS3Ehc
-	q0WizB1G34pTZzzzPUC/3M9KIv55j/TDCAyw5Qp5VPt6l/Ta3biqVPy3i+yx3KohrxuB
-	QAGqRKJh3HvjY12y1u+YPoILbwDVLmG3DaVObtqPlzho6yz+sMlrpFU2grgGSvFJHy/L
-	NZ1T1coTjklDxOptvMXAg4Cdd1ec76ueDFdv72NPZ2pRjlvwUh8qwWz0bXTcT4LHCdup
-	sp7hEkiB7WouL2aVhgWyjByGbgYnXbgXtvbJ3pxhLXD+19SSANXfXd0iO3tMif9WJTHn
-	Q+lw==
-X-Received: by 10.194.158.101 with SMTP id wt5mr1745764wjb.136.1405514333257; 
-	Wed, 16 Jul 2014 05:38:53 -0700 (PDT)
+	bh=Neb4Q0GI057/EPEbqgfdthhscG7vJKqW4O8t3pTu22c=;
+	b=LX2g4klaF5h3B08Tn+rFbIxRCCpTKLsEINyvaIqQGewLI266mtFay8J6YF2XlUq9Sv
+	BRy08kVr7tadT8BTdY6LUMoR0I27+1c8aKVbfTXrxtiwsuT8yg+hzCYWXSDFp0Gh97qF
+	zSeZMKRZvEyWKLS+MYEGa9BzrTjYAjEpuoU7wGBPjEFjUZkx/HzDrh+YFlDyoHyPc0/8
+	twwDrs8A/LRbAKq4OJDd82k85xB2QQhpTjs1zPc0GcvcRGREKflRtFCiAuBKf5w8/vh6
+	yM9kgQcwGuNq8DO57zS0kO2tZw9T/6QoVNY2GNOLWT4Fi8agw7/zMNpJZJv/3K7iNAwb
+	V2Ag==
+X-Received: by 10.180.198.244 with SMTP id jf20mr13619383wic.40.1405514997891; 
+	Wed, 16 Jul 2014 05:49:57 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fg1sm8588938wic.17.2014.07.16.05.38.46 for <multiple recipients>
+	ja9sm56205149wic.8.2014.07.16.05.49.56 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 Jul 2014 05:38:47 -0700 (PDT)
+	Wed, 16 Jul 2014 05:49:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 16 Jul 2014 14:38:58 +0200
+Date: Wed, 16 Jul 2014 14:50:07 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140716123858.GU2433@jama>
+Message-ID: <20140716125007.GV2433@jama>
 References: <cover.1405465524.git.TicoTimo@gmail.com>
 	<a6acceb1dc1d391e20c3722e685aa7c9cca313b3.1405465524.git.TicoTimo@gmail.com>
 MIME-Version: 1.0
@@ -49,13 +49,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 12:38:56 -0000
-X-Groupsio-MsgNum: 50997
+X-List-Received-Date: Wed, 16 Jul 2014 12:49:59 -0000
+X-Groupsio-MsgNum: 50998
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0cPfB1ccX8kkdppm"
+	protocol="application/pgp-signature"; boundary="kZn00QyXxdr8qbeL"
 Content-Disposition: inline
 
---0cPfB1ccX8kkdppm
+--kZn00QyXxdr8qbeL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -64,15 +64,6 @@ On Tue, Jul 15, 2014 at 04:32:34PM -0700, Tim Orling wrote:
 >      * Move recipes from meta-openembedded/meta-oe that are not
 >        depended upon by recipes already in meta-oe (e.g. gateone,
 >        anki)
-
-I'll add meta-efl/README update, because of:
-ERROR: Nothing PROVIDES 'python-numeric' (but
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-efl/recipes-devtools=
-/python/python-efl_1.10.0.bb,
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-efl/recipes-devtools=
-/python/python-edbus_1.7.0.bb
-DEPENDS on or otherwise requires it). Close matches:
-
 >=20
 >      * Recipes NOT moved:
 >      	 python-futures
@@ -156,6 +147,15 @@ ch  | 0
     | 0
 >  .../python =3D> meta-python/recipes-python}/python-zopeinterface_4.1.1.b=
 b   | 0
+
+meta-python/recipes-python/*bb isn't included in BBFILES, causing this
+warning:
+WARNING: No bb files matched BBFILE_PATTERN_meta-python '^/home/jenkins/oe/=
+world/shr-core/meta-openembedded/meta-python/'
+
+I'll move them to python subdirectory, but please be more careful when
+sending _tested_ patches.
+
 >  36 files changed, 0 insertions(+), 0 deletions(-)
 >  rename {meta-oe/recipes-devtools/python =3D> meta-python/recipes-python}=
 /pyrtm_0.2.bb (100%)
@@ -429,16 +429,16 @@ b b/meta-python/recipes-python/python-zopeinterface_4.1.1.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0cPfB1ccX8kkdppm
+--kZn00QyXxdr8qbeL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPGcmIACgkQN1Ujt2V2gByhKgCgu6HgwEYkfWpC+BiQ7hsfde42
-PuQAnij5cr6JGxg/cfxElRO1KfZLIZSu
-=ESvr
+iEYEARECAAYFAlPGdP8ACgkQN1Ujt2V2gBxaPQCgqvt+wmKcLw1gs/o9bevL2plL
+sxwAnjGFsX+Nt/tzOGK9Y8cwDNVZOQch
+=jAw6
 -----END PGP SIGNATURE-----
 
---0cPfB1ccX8kkdppm--
+--kZn00QyXxdr8qbeL--
