@@ -1,37 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C49870588;
-	Wed, 16 Jul 2014 16:40:10 +0000 (UTC)
-Received: by mail-ie0-f178.google.com with SMTP id tp5so996655ieb.37
-	for <multiple recipients>; Wed, 16 Jul 2014 09:40:11 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id AC10E70527
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jul 2014 17:25:15 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id fp1so1584356pdb.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jul 2014 10:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=Y6iNgh2TaHms2K/bFTkDaIbQgMsYH3+pDsK4Mw2HyDc=;
-	b=L8akcPdsdpVUIs09qKN/5J1OvqEcw37Ggrx+b0RcX4BfFkYFMXjVD2SICueOOU3239
-	8LDxLdjNnzxGQBSI/QL6CzTOyP8JJDiLeCmqxTFgqs3w6BRSWeJYjGqqatn7wmmgQkhb
-	EyrdKuKqeKmpnlKk0u1gzLEeHEANKToMaG8N0pLwXL2m3gkjksUZAYqyVl+gLalHDf9A
-	yi1oFPz1ep2YNssF7Ft0TN5f/I7uD4kqDu7JUmaSbLoeRGPuAsQmZOA3j8sQj/9VkFmQ
-	yrfbZhCAaz3ZPtWfKP13U/BOkE3hWbxgn+wHDZPzLh9uNE847ceURaBWN+4PGEONOQO1
-	xlGg==
-X-Received: by 10.50.176.202 with SMTP id ck10mr18323003igc.2.1405528811908;
-	Wed, 16 Jul 2014 09:40:11 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=jR/VGC0xh/DQkg614WjXzFo8RiSlQIssrFdhIFaFZ2o=;
+	b=YK5X6e7QBgKmaWY62RKkIgsBSe4ZvFBZRpF4Cn2WVZzSSalla1w2v6InCtqkfyuvbK
+	sNtb4fyM/fYyV++b1XM8D23GfxzXAUlIT880xl1c3ooXcw+Kv4k//ieNsdNXOgR9Hjm1
+	zNkl6vin8r7cd98oRiZ3BleoNGUqMLV9gez300XSBKSSDpdpxUnikEbVZemB0kfX8teI
+	UjT5DgLy0y+H90iYb3jwwURQuYe6Lh5niuZF+EMUi17plKABnVCC2ED9RdRe+xX7DMTH
+	Bgle5gI7GYgABg5rDjqb8zrYA1U+PppsSFOa98nmIBXXwMheK7Fons7RPyFG/in2kN1j
+	YdVQ==
+X-Received: by 10.66.100.227 with SMTP id fb3mr3672334pab.150.1405531516659;
+	Wed, 16 Jul 2014 10:25:16 -0700 (PDT)
+Received: from [172.16.1.20] (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55])
+	by mx.google.com with ESMTPSA id pu5sm17654362pbb.4.2014.07.16.10.25.14
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 16 Jul 2014 10:25:15 -0700 (PDT)
+Message-ID: <53C6B577.2050909@gmail.com>
+Date: Wed, 16 Jul 2014 10:25:11 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Wed, 16 Jul 2014 09:39:41 -0700 (PDT)
-In-Reply-To: <CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
-References: <cover.1405440532.git.ross.burton@intel.com>
-	<406153008dc78f4e3198c012f2db98fcac09b5c1.1405440532.git.ross.burton@intel.com>
-	<CAMKF1sptj_ctzUmMSxm+6VW5LYG8xCm26b3_j4=8GMMS1HPr8w@mail.gmail.com>
-	<CAJTo0LajRNrS1nWfnE1n=ar6tO3A6US4too4sf8GwxZU1KyDwQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Jul 2014 09:39:41 -0700
-Message-ID: <CAMKF1soF6tLi+=tOMULDAfDV33XPi8=oWLnVoeriS8ogjrPsOw@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH 7/7] autoconf: remove automake patch enforcing --foreign
+To: Otavio Salvador <otavio@ossystems.com.br>
+References: <CAP9ODKow7gr1J8_peZJNT4+soQ_vDQP_hi4DYnjx7E0uTCUoBg@mail.gmail.com>
+In-Reply-To: <CAP9ODKow7gr1J8_peZJNT4+soQ_vDQP_hi4DYnjx7E0uTCUoBg@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [for-daisy][meta-oe] Patches to cherry-pick from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,21 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jul 2014 16:40:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 16 Jul 2014 17:25:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 15, 2014 at 2:51 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 15 July 2014 21:14, Khem Raj <raj.khem@gmail.com> wrote:
->> can it be somehow made such that it can be passed via option flags so we
->> dont have to patch the packages not using above automake macro
+
+On 07/16/2014 08:21 AM, Otavio Salvador wrote:
+> Hello,
 >
-> Packages that don't use the right automake macro are generally very
-> old and we're already carrying patches to fix the autoconf/automake
-> files, so I'm not sure this is actually worth it.  I'm trying to drop
-> the patches we're carrying against core build tools, not increase it.
-> :)
+> Please cherry-pick following patches into daisy branch:
 
-While I understand that, I am also worried about breakage/work it will
-cause for layers additional to OE-Core
-thats why providing a least impact migration path is desirable.
+who does this?
+
+>
+> aa7cccf cpuburn-neon: Upgrade to version 20140626
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> 6006202 v4l-utils: Add virtual/libx11 dependency only if X11 is available
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>
+> I am adding the other maintainers so they can add other changes to be picked.
+>
+> Cliff and Armin, please ack those if you have no concerns about them.
+>
 
