@@ -1,31 +1,27 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FAEB7067B
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 26AA3705F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 14:17:26 +0000 (UTC)
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s6HEHLd5025982 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 15:17:22 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 0TVLR6p97eBt
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 15:17:21 +0100 (BST)
-Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s6HEHJgY025972
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 15:17:21 +0100
-Message-ID: <1405606634.26348.10.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Jul 2014 15:17:14 +0100
-X-Mailer: Evolution 3.8.4-0ubuntu1 
-Mime-Version: 1.0
-Subject: [PATCH] re2c: Fix for modern automake
+	Thu, 17 Jul 2014 14:23:15 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 17 Jul 2014 07:17:04 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,678,1400050800"; d="scan'208";a="574687590"
+Received: from ldsaruwe-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.2])
+	by orsmga002.jf.intel.com with ESMTP; 17 Jul 2014 07:20:52 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Jul 2014 15:20:51 +0100
+Message-ID: <1546726.9iZKeAkyu0@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.2 (Linux/3.15.4-200.fc20.x86_64; KDE/4.13.2; x86_64; ; )
+In-Reply-To: <CANx9H-BSe-REicRzcAgcv5=dLx3S8w7ysqgiwhtrC4U0z8P4Pg@mail.gmail.com>
+References: <cover.1405465524.git.TicoTimo@gmail.com>
+	<20140716125007.GV2433@jama>
+	<CANx9H-BSe-REicRzcAgcv5=dLx3S8w7ysqgiwhtrC4U0z8P4Pg@mail.gmail.com>
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH 2/2] meta-python: move recipes from meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,50 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 14:17:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Jul 2014 14:23:18 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+On Thursday 17 July 2014 07:07:01 Tim Orling wrote:
+> Well, that's embarrassing. Thank you, Martin. Obviously, I forgot to push a
+> local commit. I guess I'd better move to the back of the bus!
+> 
+> 
+> On Wed, Jul 16, 2014 at 5:50 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> > On Tue, Jul 15, 2014 at 04:32:34PM -0700, Tim Orling wrote:
+> > >      * Move recipes from meta-openembedded/meta-oe that are not
+> > >      
+> > >        depended upon by recipes already in meta-oe (e.g. gateone,
+> > >        anki)
+> > >      
+> > >      * Recipes NOT moved:
+> > >        python-futures
+> > >        python-pyopenssl
+> > >        python-simplejson
+> > >        python-tornado
+> > >        python-pyqt
+> > >        python-sip
+> > > 
+> > > Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+> > > ---
+> > > 
+> > >  .../recipes-devtools/python => meta-python/recipes-python}/pyrtm_0.2.bb
 
-diff --git a/meta-oe/recipes-support/re2c/re2c/configure.patch b/meta-oe/recipes-support/re2c/re2c/configure.patch
-new file mode 100644
-index 0000000..8ca0969
---- /dev/null
-+++ b/meta-oe/recipes-support/re2c/re2c/configure.patch
-@@ -0,0 +1,18 @@
-+Modernise configure to work with modern automake.
-+
-+RP 2014/7/14
-+
-+Upstream-Status: Pending
-+
-+Index: re2c-0.13.5/configure.in
-+===================================================================
-+--- re2c-0.13.5.orig/configure.in	2008-05-25 14:42:34.000000000 +0000
-++++ re2c-0.13.5/configure.in	2014-07-17 14:10:40.595821292 +0000
-+@@ -1,6 +1,6 @@
-+ AC_PREREQ([2.57])
-+ AC_INIT(re2c, 0.13.5, re2c-general@lists.sourceforge.net)
-+-AM_INIT_AUTOMAKE(re2c, $PACKAGE_VERSION)
-++AM_INIT_AUTOMAKE([foreign])
-+ AC_CONFIG_SRCDIR(actions.cc)
-+ AM_CONFIG_HEADER(config.h)
-+ 
-diff --git a/meta-oe/recipes-support/re2c/re2c_0.13.5.bb b/meta-oe/recipes-support/re2c/re2c_0.13.5.bb
-index fff7a78..dcac940 100644
---- a/meta-oe/recipes-support/re2c/re2c_0.13.5.bb
-+++ b/meta-oe/recipes-support/re2c/re2c_0.13.5.bb
-@@ -5,7 +5,8 @@ SECTION = "devel"
- LICENSE = "PD"
- LIC_FILES_CHKSUM = "file://README;beginline=180;md5=822830a2204aef353f2c489f62e02089"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
-+           file://configure.patch"
- SRC_URI[md5sum] = "4a97d8f77ed6d2c76c8bd840a43f5633"
- SRC_URI[sha256sum] = "f3a995139af475e80a30207d02728b1e0065b0caade7375e974cb1b14861668c"
- 
+I just noticed, this doesn't fit the normal pattern of 
+recipes-xyz/something/*.bb - there's a missing directory level. It's entirely 
+cosmetic, but if we do want to fix it we ought to do so now.
 
+Cheers,
+Paul
 
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
