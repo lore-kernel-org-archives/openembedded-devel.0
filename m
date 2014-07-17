@@ -1,34 +1,37 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 81BE1701C0
+Return-Path: <akuster@mvista.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id D97FC701A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 01:41:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6H1fxDC002070
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 16 Jul 2014 18:41:59 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.241]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0169.001;
-	Wed, 16 Jul 2014 18:41:59 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH 2/2 v2] syslog-ng: uprev to 3.5.4.1
-Thread-Index: AQHPoC6weE8rtBwKDU+dh+PrkZimb5ujf5DQ
-Date: Thu, 17 Jul 2014 01:41:59 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABCA8850F@ALA-MBB.corp.ad.wrs.com>
-References: <1405072509-8901-1-git-send-email-jackie.huang@windriver.com>
-	<1405072509-8901-2-git-send-email-jackie.huang@windriver.com>
-	<20140715131342.GL2433@jama>
-In-Reply-To: <20140715131342.GL2433@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.132]
-MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2 v2] syslog-ng: uprev to 3.5.4.1
+	Thu, 17 Jul 2014 04:25:44 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id y13so2366324pdi.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jul 2014 21:25:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=3xVcNx68xEc6u9aqe/SfVa5ZLGYLOmmi2BP+sZMsRRI=;
+	b=BgJvjZdiyBGmBKgITyT5gQhoKVOrB6JMLT/eG11SHCts0DdNl5qQksBSclgirVs3QS
+	Qy+YMS79TSLKBoMKEV98mV35IpxmINnA28K3IG6ADt603iJAblyAsEbnfRD7nLLhyjsh
+	aktTZN+H0Z4EjdWjqkpzSvyb5wPrCRuOf4s5/yTFcY3YNAVdwRWXEZqGkB1rbQVlEHli
+	soo5eJwhgX6Z2ceIDcI1pV46dQw7yIcLHE45yUxgdYHkPGgkSWErlKz6mvvm4BuxVdkr
+	JcDDWqDyUyw9p7b10cJL6cJ5MsfjXvhOtCJJJ+6063BDYn7+QKreq8kPuMJFPGDbvUH+
+	gJbQ==
+X-Gm-Message-State: ALoCoQl2fLs+cz6Zr8Ljiu6ni/poFrerAJW2GuYLCDWf4q0NJOvz6ArTZeyKirnZn7wa9cS0tuP6
+X-Received: by 10.66.102.102 with SMTP id fn6mr34526468pab.6.1405571145823;
+	Wed, 16 Jul 2014 21:25:45 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55]) by mx.google.com with ESMTPSA id
+	ec10sm5129698pad.33.2014.07.16.21.25.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 Jul 2014 21:25:44 -0700 (PDT)
+From: Armin Kuster <akuster@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Jul 2014 21:25:38 -0700
+Message-Id: <1405571138-20939-1-git-send-email-akuster@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] wireshark: Add recipe 1.12.0-rc2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +45,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 01:42:05 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Jul 2014 04:25:52 -0000
 
+Inital wireshark support on gtk
+README with additional info
 
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ meta-networking/recipes-support/wireshark/README   | 37 ++++++++++++++++++++++
+ .../wireshark/wireshark_1.12.0-rc2.bb              | 37 ++++++++++++++++++++++
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/README
+ create mode 100644 meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
 
-> -----Original Message-----
-> From: Martin Jansa [mailto:martin.jansa@gmail.com]
-> Sent: Tuesday, July 15, 2014 9:14 PM
-> To: Huang, Jie (Jackie)
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 2/2 v2] syslog-ng: uprev to 3.5.4.1
->=20
-> On Fri, Jul 11, 2014 at 05:55:09AM -0400, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > - initscript: add status, PIDFILE and xconsole
-> > - syslog-ng.conf: dump the version
-> > - Fix some memory leak problems we found
-> > - Some backport patches
-> > - scl: fix wrong ownership issue
-> > - libnet: add libnet enable option and add it in PACKAGECONFIG
-> > - add HOMEPAGE
-> > - remove INC_PR
-> > - change some config into PACKAGECONFIG
-> > - add PACKAGE syslog-ng-tools
-> > - use volatiles
-> > - inherit update-rc.d and update-alternative
->=20
-> syslog-ng.inc changes don't apply in current master, maybe it got broken =
-by patchwork, can you
-> rebase and push it to some repo?
+diff --git a/meta-networking/recipes-support/wireshark/README b/meta-networking/recipes-support/wireshark/README
+new file mode 100644
+index 0000000..0e0c526
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/README
+@@ -0,0 +1,37 @@
++#
++Wireshark - Notes
++
++URL: http://www.wireshark.org/
++User Guide: http://www.wireshark.org/docs/wsug_html_chunked/
++Secruity advisories: http://www.wireshark.org/security/
++
++Wireshark is slowly moving away from gtk and towards QT as their graphical stack.
++Currently gtk is supported with this release and I plan on integrating QT. 
++
++
++
++Adding the wireshark to your build
++========================================
++
++via local.conf
++IMAGE_INSTALL_append = " wireshark"
++
++Adding the wireshark to your graphical build
++========================================
++via local.conf
++EXTRA_IMAGE_FEATURES += "x11-base"
++
++or use the "core-image-x11"
++
++
++Maintenance
++-----------
++
++Send patches, comments or questions to openembedded-devel@lists.openembedded.org
++
++When sending single patches, please using something like:
++'git send-email -1 --to  openembedded-devel@lists.openembedded.org --cc akuster@mvista.com --subject-prefix=meta-security][PATCH'
++
++Maintainer:    Armin Kuster <akuster@mvista.com>
++
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+new file mode 100644
+index 0000000..156a067
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+@@ -0,0 +1,37 @@
++DESCRIPTION = "wireshark - a popular network protocol analyzer"
++HOMEPAGE = "http://www.wireshark.org"
++SECTION = "network"
++LICENSE = "GPL-2.0"
++
++DEPENDS = "perl-native libpcap pcre expat glib-2.0 libsmi"
++
++inherit autotools
++
++ARM_INSTRUCTION_SET = "arm"
++
++PACKAGECONFIG ??= "gnutls gcrypt"
++PACKAGECONFIG += " ${@bb.utils.contains("IMAGE_FEATURES", "x11-base", "gtk2 graphics", "", d)}"
++PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
++
++PACKAGECONFIG[gtk2] = "--with-gtk2=yes,--with-gtk2=no, gtk+"
++PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
++PACKAGECONFIG[gnutls] = "--with-gnutls=yes,--with-gnutls=no, gnutls"
++PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes,--with-gcrypt=no, libgcrypt"
++
++EXTRA_OECONF = "--with-gtk3=no --with-qt=no --enable-usr-local=no -enable-tshark"
++
++LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
++SRC_URI = "http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0-rc2.tar.bz2 "
++    
++SRC_URI[md5sum] = "dc1149073066a29f91116c168558262e"
++SRC_URI[sha256sum]= "31009bb450126e9b12808267419f31016d14e6fde7b5e39c85ad37459908cffb"
++
++do_configure_prepend() {
++    # force to use fallback 
++    sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
++}
++
++ALLOW_EMPTY_${PN} = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++
+-- 
+1.9.1
 
-
-Sure, and I found a QA issue, so I will fix that first then rebase and push=
- it to some repo, and send a v3 for this.
-
-Thanks,
-Jackie
 
