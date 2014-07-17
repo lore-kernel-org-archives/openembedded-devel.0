@@ -1,27 +1,31 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E31EE7061E
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 1415B6AD09
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 12:29:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6HCTd1H003454
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 17 Jul 2014 05:29:39 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 17 Jul 2014 05:29:38 -0700
-Message-ID: <53C7C1B4.2010204@windriver.com>
-Date: Thu, 17 Jul 2014 20:29:40 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1405058909-12162-1-git-send-email-rongqing.li@windriver.com>
-	<20140716140341.GC2433@jama>
-In-Reply-To: <20140716140341.GC2433@jama>
-Subject: Re: [PATCH 2/3][meta-perl] libxml-filter-buffertext-perl: add recipe
+	Thu, 17 Jul 2014 13:34:49 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s6HDYihv022979 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jul 2014 14:34:44 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id HRwm9PsN5lQH
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jul 2014 14:34:44 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s6HDYd9d022963
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jul 2014 14:34:40 +0100
+Message-ID: <1405604074.3668.18.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Jul 2014 14:34:34 +0100
+X-Mailer: Evolution 3.8.4-0ubuntu1 
+Mime-Version: 1.0
+Subject: [PATCH] mozjs: Add missing zlib dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,75 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 12:29:46 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Thu, 17 Jul 2014 13:34:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
+Avoids a QA warning. In reality zlib is likely nearly always built before mozjs.
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index eadec11..ab01471 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -13,7 +13,7 @@ S = "${WORKDIR}/${PN}${PV}/js/src"
+ 
+ inherit autotools pkgconfig perlnative
+ 
+-DEPENDS += "nspr"
++DEPENDS += "nspr zlib"
+ 
+ # nspr's package-config is ignored so set libs manually
+ EXTRA_OECONF = " \
 
 
-On 07/16/2014 10:03 PM, Martin Jansa wrote:
-> On Fri, Jul 11, 2014 at 02:08:29PM +0800, rongqing.li@windriver.com wrote:
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> ---
->>   .../libxml/libxml-filter-buffertext-perl_1.01.bb   |   27 ++++++++++++++++++++
->>   1 file changed, 27 insertions(+)
->>   create mode 100644 meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
->>
->> diff --git a/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
->> new file mode 100644
->> index 0000000..0fbeeb5
->> --- /dev/null
->> +++ b/meta-perl/recipes-perl/libxml/libxml-filter-buffertext-perl_1.01.bb
->> @@ -0,0 +1,27 @@
->> +SUMMARY = "XML::Filter::BufferText - Filter to put all characters() in one event"
->> +DESCRIPTION = "\
->> +The XML::Filter::BufferText module is a very simple filter.  One common \
->> +cause of grief (and programmer error) is that XML parsers aren't required \
->> +to provide character events in one chunk.  They can, but are not forced \
->> +to, and most don't.  This filter does the trivial but oft-repeated task \
->> +of putting all characters into a single event. \
->> +"
->> +SECTION = "libs"
->> +LICENSE = "Artistic-1.0 | GPLv1+"
->> +HOMEPAGE = "http://search.cpan.org/dist/XML-Filter-BufferText/"
->> +DEPENDS += "libxml-sax-perl-native"
->> +RDEPENDS_${PN} += "libxml-sax-perl"
->> +
->> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/R/RB/RBERJON/XML-Filter-BufferText-${PV}.tar.gz"
->> +SRC_URI[md5sum] = "2992c0387632583b966ab9c965b25512"
->> +SRC_URI[sha256sum] = "8fd2126d3beec554df852919f4739e689202cbba6a17506e9b66ea165841a75c"
->> +
->> +LIC_FILES_CHKSUM = "file://BufferText.pm;beginline=88;endline=90;md5=497aa6d79cc84c3d769a2a0016bee928"
->> +
->> +S = "${WORKDIR}/XML-Filter-BufferText-${PV}"
->> +
->> +inherit cpan
->> +
->> +BBCLASSEXTEND = "native"
->> +
->> +PACKAGE_ARCH = "all"
->
-> This doesn't seem right, see
-> http://lists.openembedded.org/pipermail/openembedded-core/2014-July/094409.html
->
-
-
-It should inherit allarch, not define PACKAGE_ARCH to all.
-
-but I test, it seems unable to fix this issue, the abi is included into
-./all-poky-linux/libxml-sax-writer-perl
-./all-poky-linux-gnueabi/libxml-sax-writer-perl
-
-
-
--Roy
-
->
->
-
--- 
-Best Reagrds,
-Roy | RongQing Li
 
