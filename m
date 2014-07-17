@@ -1,41 +1,40 @@
-Return-Path: <ting.liu@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1blp0181.outbound.protection.outlook.com [207.46.163.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E38B70604
+Return-Path: <stephen.arnold42@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id AC338701A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 07:09:19 +0000 (UTC)
-Received: from BN1PR03MB156.namprd03.prod.outlook.com (10.255.201.28) by
-	BN1PR03MB153.namprd03.prod.outlook.com (10.255.201.15) with Microsoft
-	SMTP Server (TLS) id 15.0.990.7; Thu, 17 Jul 2014 07:09:18 +0000
-Received: from BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.21]) by
-	BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.21]) with mapi id
-	15.00.0985.008; Thu, 17 Jul 2014 07:09:18 +0000
-From: "ting.liu@freescale.com" <ting.liu@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 for
-	powerpc/powerpc64
-Thread-Index: AQHPoPnD12K7WoUuREaO37e5ONjtWpuj2McA
-Date: Thu, 17 Jul 2014 07:09:18 +0000
-Message-ID: <960fede6c06346c78c13b2cc097255dc@BN1PR03MB156.namprd03.prod.outlook.com>
-References: <1405491841-24744-1-git-send-email-ting.liu@freescale.com>
-	<1405491841-24744-2-git-send-email-ting.liu@freescale.com>
-	<20140716132725.GX2433@jama>
-In-Reply-To: <20140716132725.GX2433@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [123.151.195.50]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:
-x-forefront-prvs: 027578BB13
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(6009001)(199002)(13464003)(51704005)(24454002)(189002)(377454003)(95666004)(77982001)(4396001)(2656002)(99286002)(79102001)(85852003)(33646002)(83072002)(74502001)(99396002)(87936001)(101416001)(66066001)(86362001)(21056001)(105586002)(81342001)(106356001)(20776003)(575784001)(64706001)(50986999)(92566001)(54356999)(76176999)(31966008)(76576001)(15202345003)(83322001)(107886001)(107046002)(19580395003)(2351001)(19580405001)(81542001)(110136001)(80022001)(106116001)(15975445006)(74316001)(77096002)(46102001)(76482001)(85306003)(74662001)(108616002)(24736002);
-	DIR:OUT; SFP:; SCL:1; SRVR:BN1PR03MB153;
-	H:BN1PR03MB156.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; LANG:en; 
+	Thu, 17 Jul 2014 07:15:02 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id bs8so7326949wib.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jul 2014 00:14:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=vwS1OEeDe3tPo7kwL54gjIeqsuByafJnkHD3WPfHeXg=;
+	b=Z94jl5u6ISOGFFFMGEUoOahSAAZGmjuJ9BxdUPQQP4V1d8SNJXqCR8ncFD5K8rXUKY
+	//Ct3u+w0lxFjP4QSu2Ay5n2PcP4+hALry+suOSFrWYp8RaI1RPLKUVDtmtHpcd2ceYt
+	TAr3ocafaqC7xyURUe8yNP5EfIsypl3M9VslObLM4YKY9UR1kqDqp0BxvIl5JR3awhT3
+	ow6BL1MRyQbQzKoBgo9zmoDOcbalF3oUiz3wSsGbrgliPDBwAUpUaViNJrM7KCy+Ob7h
+	Isj6nP4xAa8Z2KmAlBhqEaqkNpfiCToEnTYdunW8Yvy712XcoQY4RDL84pK3A7XDnFWU
+	3Egg==
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 for powerpc/powerpc64
+X-Received: by 10.194.184.200 with SMTP id ew8mr41088405wjc.61.1405581296914; 
+	Thu, 17 Jul 2014 00:14:56 -0700 (PDT)
+Received: by 10.194.18.114 with HTTP; Thu, 17 Jul 2014 00:14:56 -0700 (PDT)
+In-Reply-To: <20140717070546.GB2666@mail.itconsulting-heinold.de>
+References: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
+	<53BC1835.90204@balister.org>
+	<CAD2C2VTnHrLsfhRXcUxpcpXgWK+LzxxD87XrvrN6wiiMK+CMUw@mail.gmail.com>
+	<CAD2C2VSTKS+NX=0CAwh1PAtkKgcHh+mpwMMVmh_b4dw9GeaABw@mail.gmail.com>
+	<53C51AE2.4030100@bec-systems.com>
+	<CAD2C2VR22ww51=1UQbW7OxtWvr8dV1PjLhr0d0O176JtX6PJKQ@mail.gmail.com>
+	<CAD2C2VRr+RfWqxJ_6gL+UCh1Y7j_T41NEpVAw=TrekmxKMadUg@mail.gmail.com>
+	<20140717070546.GB2666@mail.itconsulting-heinold.de>
+Date: Thu, 17 Jul 2014 00:14:56 -0700
+Message-ID: <CAOLEWZXoVWCmT8UCW2YbZeeECpWd-HKtk+SbMTk3vV9FF_DEZA@mail.gmail.com>
+From: Stephen Arnold <stephen.arnold42@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: open embedded build issues with beagle board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,75 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 07:09:21 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Jul 2014 07:15:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-
-> devel-bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Wednesday, July 16, 2014 9:27 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: yocto@mindchasers.com
-> Subject: Re: [oe] [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 f=
-or
-> powerpc/powerpc64
->=20
-> On Wed, Jul 16, 2014 at 02:23:59PM +0800, ting.liu@freescale.com wrote:
-> > From: Ting Liu <b28495@freescale.com>
-> >
-> > In recent libhugetlbfs source, powerpc/powerpc64 is changed back to
-> > ppc/ppc64 (to match with the output of `uname -a`).
-> >
-> > Update the recipe to avoid build issue for now.
-> >
-> > Signed-off-by: Ting Liu <b28495@freescale.com>
-> > ---
-> >  .../libhugetlbfs/libhugetlbfs_git.bb               |    5 ++++-
-> >  1 files changed, 4 insertions(+), 1 deletions(-)
-> >
-> > diff --git
-> > a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > index e8e0787..e554b26 100644
-> > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > @@ -25,7 +25,10 @@ S =3D "${WORKDIR}/git"
-> >  COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
-> >
-> >  LIBARGS =3D "LIB32=3D${baselib} LIB64=3D${baselib}"
-> > -EXTRA_OEMAKE =3D "'ARCH=3D${TARGET_ARCH}' 'OPT=3D${CFLAGS}' 'CC=3D${CC=
-}' ${LIBARGS}
-> V=3D1"
-> > +LIBHUGETLBFS_ARCH =3D "${TARGET_ARCH}"
-> > +LIBHUGETLBFS_ARCH_powerpc =3D "ppc"
-> > +LIBHUGETLBFS_ARCH_powerpc64 =3D "ppc64"
-> > +EXTRA_OEMAKE =3D "'ARCH=3D${LIBHUGETLBFS_ARCH}' 'OPT=3D${CFLAGS}' 'CC=
-=3D${CC}'
-> ${LIBARGS} V=3D2"
-> >  PARALLEL_MAKE =3D ""
-> >  CFLAGS +=3D "-fexpensive-optimizations -frename-registers -fomit-frame=
--
-> pointer -g0"
->=20
-> libhugetlbfs is currently failing with
-> http://logs.nslu2-
-> linux.org/buildlogs/oe/world/log.dependencies.20140714_130534.log/3_min/f=
-ailed
-> /libhugetlbfs.log
+Yes, check the layer index.  I have a patched meta-beagleboard on github,
+with an older kernel, but meta-beagleboard is not as current as meta-ti
+(and not quite as "official" I believe).  The latest kernel works
+reasonably well (the patches maintained by RCN) if you want to check the
+LinuxOnArm wiki.
 
-I think the issue was fixed by this patch:
-http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
-=3D66709a85a2c0d0fdfadbd9832cb8056e65b39a36
+Steve
 
->=20
-> and it also fails to build for qemux86-64 (log in last world status e-mai=
-l).
->=20
-> Can we please fix it first?
->=20
+
+On Thu, Jul 17, 2014 at 12:05 AM, Henning Heinold <
+henning@itconsulting-heinold.de> wrote:
+
+> On Thu, Jul 17, 2014 at 12:29:34PM +0530, Bryan wrote:
+> > ---------- Forwarded message ----------
+> > Hi,
+> >    Thanks for your suggestion to use meta-ti layer. Cau you please tell
+> us
+> > where we can find this layer as we couldn't find it on openembedded git.
+> >
+> > We tried with following link to build but it gives error while building.
+> > https://github.com/beagleboard/meta-beagleboard
+> >
+> >
+> > Thanks
+> > Bryan
+>
+> Have a look at
+> http://layers.openembedded.org/layerindex/branch/master/layers/
+>
+>
+> Bye Henning
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
