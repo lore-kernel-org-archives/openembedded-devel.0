@@ -1,31 +1,31 @@
 Return-Path: <richard.purdie@linuxfoundation.org>
 Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id A84F17019B
+	by mail.openembedded.org (Postfix) with ESMTP id 508EB70673
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 13:45:54 +0000 (UTC)
+	Thu, 17 Jul 2014 13:46:33 +0000 (UTC)
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s6HDjo9W023835 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 14:45:50 +0100
+	s6HDkRv2023869 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jul 2014 14:46:28 +0100
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 1aBdJ4H3woK8
+	with LMTP id GYpPMs51_nFL
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 14:45:50 +0100 (BST)
+	Thu, 17 Jul 2014 14:46:27 +0100 (BST)
 Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s6HDjiX0023825
+	s6HDkLWi023859
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jul 2014 14:45:46 +0100
-Message-ID: <1405604739.26348.5.camel@ted>
+	Thu, 17 Jul 2014 14:46:23 +0100
+Message-ID: <1405604776.26348.6.camel@ted>
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Jul 2014 14:45:39 +0100
+Date: Thu, 17 Jul 2014 14:46:16 +0100
 X-Mailer: Evolution 3.8.4-0ubuntu1 
 Mime-Version: 1.0
-Subject: [PATCH] hexedit: Disable separate build since its broken
+Subject: [PATCH] fltk: Disable separate build since its broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,24 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jul 2014 13:46:03 -0000
+X-List-Received-Date: Thu, 17 Jul 2014 13:46:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-index afc947f..c2f0630 100644
---- a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-+++ b/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-@@ -12,6 +12,6 @@ SRC_URI = "http://rigaux.org/${BP}.src.tgz \
- SRC_URI[md5sum] = "a5af1378d028512a9cad27a5ba3e15f9"
- SRC_URI[sha256sum] = "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54c58c983963b88dd7"
+diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+index 4909460..fa01455 100644
+--- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
++++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+@@ -16,7 +16,7 @@ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fl
  
--inherit autotools
-+inherit autotools-brokensep
+ S = "${WORKDIR}/fltk-${PV}"
  
- S = "${WORKDIR}/${PN}"
+-inherit lib_package autotools binconfig
++inherit lib_package autotools-brokensep binconfig
+ 
+ TARGET_CC_ARCH += "${LDFLAGS} -DXFT_MAJOR=2"
+ 
 
 
 
