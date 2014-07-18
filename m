@@ -1,33 +1,33 @@
 Return-Path: <richard@rpsys.net>
 Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 34346706AE
+	by mail.openembedded.org (Postfix) with ESMTP id 429A170693
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 08:57:05 +0000 (UTC)
+	Fri, 18 Jul 2014 08:57:07 +0000 (UTC)
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s6I8h9uu030346; Fri, 18 Jul 2014 09:43:10 +0100
+	s6I8h3fc030280; Fri, 18 Jul 2014 09:43:03 +0100
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id ugyb3HSnxrtc; Fri, 18 Jul 2014 09:43:10 +0100 (BST)
+	with LMTP id p5Wim72oLB4k; Fri, 18 Jul 2014 09:43:03 +0100 (BST)
 Received: from ted (bebox.config [87.81.244.161] (may be forged))
 	(authenticated bits=0)
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s6I8gxgO030264
+	s6I8gvGw030241
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Fri, 18 Jul 2014 09:43:01 +0100
+	Fri, 18 Jul 2014 09:42:59 +0100
 Received: from richard by ted with local (Exim 4.80)
 	(envelope-from <richard@dan.rpsys.net>)
-	id 1X83kk-0006kD-TQ; Fri, 18 Jul 2014 09:42:54 +0100
+	id 1X83ki-0006iM-Pl; Fri, 18 Jul 2014 09:42:52 +0100
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 09:42:45 +0100
-Message-Id: <1405672966-25729-26-git-send-email-richard.purdie@linuxfoundation.org>
+Date: Fri, 18 Jul 2014 09:42:22 +0100
+Message-Id: <1405672966-25729-3-git-send-email-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.0.2
 In-Reply-To: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 References: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [PATCH 26/27] wvstreams: Add missing dbus/readline DEPENDS and use autotools-brokensep
+Subject: [PATCH 03/27] usbpath: Use "foreign" automake strictness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,33 +41,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 08:57:06 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 08:57:07 -0000
 
 ---
- meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/usbpath/usbpath/configure.patch | 11 +++++++++++
+ meta-oe/recipes-support/usbpath/usbpath_svn.bb          |  3 ++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/usbpath/usbpath/configure.patch
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index bb4d72c..8a77b5b 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -4,7 +4,7 @@ SUMMARY = "WvStreams is a network programming library in C++"
- LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
+diff --git a/meta-oe/recipes-support/usbpath/usbpath/configure.patch b/meta-oe/recipes-support/usbpath/usbpath/configure.patch
+new file mode 100644
+index 0000000..271e6a5
+--- /dev/null
++++ b/meta-oe/recipes-support/usbpath/usbpath/configure.patch
+@@ -0,0 +1,11 @@
++Index: usbpath/configure.ac
++===================================================================
++--- usbpath.orig/configure.ac	2014-07-17 20:40:26.000000000 +0000
+++++ usbpath/configure.ac	2014-07-18 07:01:40.933474420 +0000
++@@ -1,5 +1,5 @@
++ AC_INIT([usbpath],[0.1])
++-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+++AM_INIT_AUTOMAKE([foreign])
++ 
++ AC_PROG_CC
++ AC_PROG_RANLIB
+diff --git a/meta-oe/recipes-support/usbpath/usbpath_svn.bb b/meta-oe/recipes-support/usbpath/usbpath_svn.bb
+index 0ec9324..134192b 100644
+--- a/meta-oe/recipes-support/usbpath/usbpath_svn.bb
++++ b/meta-oe/recipes-support/usbpath/usbpath_svn.bb
+@@ -11,7 +11,8 @@ BBCLASSEXTEND = "native"
+ SRCREV = "3172"
+ PV = "0.0+svnr${SRCPV}"
  
--DEPENDS = "zlib openssl (>= 0.9.8)"
-+DEPENDS = "zlib openssl (>= 0.9.8) dbus readline"
+-SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http"
++SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http \
++           file://configure.patch"
  
- SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
-            file://04_signed_request.diff \
-@@ -16,7 +16,7 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
- SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
- SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
- 
--inherit autotools pkgconfig
-+inherit autotools-brokensep pkgconfig
- 
- PARALLEL_MAKE = ""
+ S = "${WORKDIR}/usbpath"
  
 -- 
 2.0.2
