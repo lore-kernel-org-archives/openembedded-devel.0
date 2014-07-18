@@ -1,33 +1,33 @@
 Return-Path: <richard@rpsys.net>
 Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 03324706B9
+	by mail.openembedded.org (Postfix) with ESMTP id 56AB0706EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 08:57:20 +0000 (UTC)
+	Fri, 18 Jul 2014 08:57:22 +0000 (UTC)
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s6I8h3fl030280; Fri, 18 Jul 2014 09:43:09 +0100
+	s6I8h3fd030280; Fri, 18 Jul 2014 09:43:04 +0100
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id hx7xl0obgFwf; Fri, 18 Jul 2014 09:43:08 +0100 (BST)
+	with LMTP id bByaEfMJJC3x; Fri, 18 Jul 2014 09:43:04 +0100 (BST)
 Received: from ted (bebox.config [87.81.244.161] (may be forged))
 	(authenticated bits=0)
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s6I8gxU7030258
+	s6I8gw6b030246
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Fri, 18 Jul 2014 09:43:00 +0100
+	Fri, 18 Jul 2014 09:42:59 +0100
 Received: from richard by ted with local (Exim 4.80)
 	(envelope-from <richard@dan.rpsys.net>)
-	id 1X83kk-0006jk-CI; Fri, 18 Jul 2014 09:42:54 +0100
+	id 1X83kj-0006il-B9; Fri, 18 Jul 2014 09:42:53 +0100
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 09:42:39 +0100
-Message-Id: <1405672966-25729-20-git-send-email-richard.purdie@linuxfoundation.org>
+Date: Fri, 18 Jul 2014 09:42:27 +0100
+Message-Id: <1405672966-25729-8-git-send-email-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.0.2
 In-Reply-To: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 References: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [PATCH 20/27] subsurface: Fix libxml and libm build failures
+Subject: [PATCH 08/27] claws-plugin-rssyl: Use "foreign" automake strictness and autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,70 +41,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 08:57:21 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 08:57:22 -0000
 
-Use pkg-config to find libxml2 and also link against libm to avoid
-build failures.
-
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../subsurface/subsurface/libm.patch               | 17 +++++++++++++++++
- .../subsurface/subsurface/pkgconfig.patch          | 22 ++++++++++++++++++++++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-extended/subsurface/subsurface/libm.patch
- create mode 100644 meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
+ .../claws-mail/claws-plugin-rssyl/configure.patch  | 53 ++++++++++++++++++++++
+ .../claws-mail/claws-plugin-rssyl_0.34.bb          |  3 +-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl/configure.patch
 
-diff --git a/meta-oe/recipes-extended/subsurface/subsurface/libm.patch b/meta-oe/recipes-extended/subsurface/subsurface/libm.patch
+diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl/configure.patch b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl/configure.patch
 new file mode 100644
-index 0000000..7995608
+index 0000000..a7a38f3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/subsurface/subsurface/libm.patch
-@@ -0,0 +1,17 @@
-+| /media/build1/poky/build1/tmp/sysroots/x86_64-linux/usr/libexec/i586-poky-linux/gcc/i586-poky-linux/4.9.0/ld: divelist.o: undefined reference to symbol 'pow@@GLIBC_2.0'
-+| /media/build1/poky/build1/tmp/sysroots/qemux86/lib/libm.so.6: error adding symbols: DSO missing from command line
-+| collect2: error: ld returned 1 exit status
-+
-+Index: git/Makefile
++++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl/configure.patch
+@@ -0,0 +1,53 @@
++Index: rssyl-0.34/configure.ac
 +===================================================================
-+--- git.orig/Makefile	2014-07-17 20:59:03.152489041 +0000
-++++ git/Makefile	2014-07-17 20:59:19.020489473 +0000
-+@@ -50,7 +50,7 @@
-+ LIBDIVECOMPUTERCFLAGS = -I$(LIBDIVECOMPUTERINCLUDES)
-+ LIBDIVECOMPUTER = $(LIBDIVECOMPUTERARCHIVE) $(LIBUSB)
++--- rssyl-0.34.orig/configure.ac	2014-07-18 07:37:28.981532959 +0000
+++++ rssyl-0.34/configure.ac	2014-07-18 07:39:45.881536690 +0000
++@@ -1,5 +1,13 @@
+++
+++dnl plugin version
+++m4_define([plugin_major_version],[0])
+++m4_define([plugin_minor_version],[34])
+++m4_define([plugin_micro_version],[0])
+++m4_define([plugin_version], [plugin_major_version.plugin_minor_version.plugin_micro_version])
+++
++ AC_PREREQ(2.60)
++-AC_INIT(src/plugin.c)
+++AC_INIT(rssyl, plugin_version)
+++AC_CONFIG_SRCDIR(src/plugin.c)
++ AC_CONFIG_AUX_DIR(config)
++ AM_MAINTAINER_MODE
++ AC_CONFIG_HEADERS(config.h)
++@@ -7,28 +15,15 @@
++ PACKAGE=rssyl
 + 
-+-LIBS = $(LIBXML2) $(LIBGTK) $(LIBDIVECOMPUTER) -lpthread
-++LIBS = $(LIBXML2) $(LIBGTK) $(LIBDIVECOMPUTER) -lpthread -lm
++ dnl plugin version
++-MAJOR_VERSION=0
++-MINOR_VERSION=34
++-MICRO_VERSION=0
+++MAJOR_VERSION=plugin_major_version
+++MINOR_VERSION=plugin_minor_version
+++MICRO_VERSION=plugin_micro_version
++ EXTRA_VERSION=0
++-
++-if test \( $EXTRA_VERSION -eq 0 \); then
++-    if test \( $MICRO_VERSION -eq 0 \); then
++-        VERSION=${MAJOR_VERSION}.${MINOR_VERSION} 
++-    else
++-		VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${MICRO_VERSION}
++-    fi
++-else
++-    if test \( $MICRO_VERSION -eq 0 \); then
++-        VERSION=${MAJOR_VERSION}.${MINOR_VERSION}cvs${EXTRA_VERSION}
++-    else
++-		VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${MICRO_VERSION}cvs${EXTRA_VERSION}
++-    fi
++-fi
+++VERSION=plugin_version
 + 
-+ OBJS =	main.o dive.o profile.o info.o equipment.o divelist.o \
-+ 	parse-xml.o save-xml.o libdivecomputer.o print.o uemis.o \
-diff --git a/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch b/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
-new file mode 100644
-index 0000000..1f294fc
---- /dev/null
-+++ b/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
-@@ -0,0 +1,22 @@
-+Index: git/Makefile
-+===================================================================
-+--- git.orig/Makefile	2014-07-17 20:53:23.620479788 +0000
-++++ git/Makefile	2014-07-17 20:56:07.992484267 +0000
-+@@ -45,7 +45,7 @@
-+ # about it if it doesn't.
-+ LIBUSB = $(shell pkg-config --libs libusb-1.0 2> /dev/null)
++ AC_CANONICAL_SYSTEM
 + 
-+-LIBXML2 = $(shell xml2-config --libs)
-++LIBXML2 = $(shell pkg-config --libs libxml-2.0)
-+ LIBGTK = $(shell pkg-config --libs gtk+-2.0 glib-2.0 gconf-2.0)
-+ LIBDIVECOMPUTERCFLAGS = -I$(LIBDIVECOMPUTERINCLUDES)
-+ LIBDIVECOMPUTER = $(LIBDIVECOMPUTERARCHIVE) $(LIBUSB)
-+@@ -71,7 +71,7 @@
-+ 	$(INSTALL) $(MANFILES) $(MANDIR)
++-AM_INIT_AUTOMAKE($PACKAGE, $VERSION, no-define)
+++AM_INIT_AUTOMAKE([foreign no-define])
++ AC_DEFINE_UNQUOTED(PLUGINVERSION, "$VERSION", [plugin version])
 + 
-+ parse-xml.o: parse-xml.c dive.h
-+-	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c `xml2-config --cflags`  parse-xml.c
-++	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c `pkg-config --cflags libxml-2.0`  parse-xml.c
-+ 
-+ save-xml.o: save-xml.c dive.h
-+ 	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c save-xml.c
++ AC_PROG_CC
+diff --git a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
+index f441c98..cdc465c 100644
+--- a/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
++++ b/meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb
+@@ -4,7 +4,8 @@ DEPENDS = "claws-mail libxml2 curl glib-2.0 gtk+"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0c2348e0a084e573f0220f5e45d8097e"
+ 
+-SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/rssyl-${PV}.tar.gz"
++SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/rssyl-${PV}.tar.gz \
++           file://configure.patch"
+ SRC_URI[md5sum] = "49b45608e8d160b3625d3d50016ec2ca"
+ SRC_URI[sha256sum] = "2e96a1cd6a1a5bb7f86cd2eb48f6e174665957fafe1f3b1e8361aac3bb967f79"
+ inherit autotools pkgconfig gettext
 -- 
 2.0.2
 
