@@ -1,27 +1,33 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F06E270672
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id C1A8770660
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 08:42:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6I8g5aF018706
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 18 Jul 2014 01:42:05 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Fri, 18 Jul 2014 01:42:04 -0700
-Message-ID: <53C8DDDE.1000209@windriver.com>
-Date: Fri, 18 Jul 2014 16:42:06 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1405669276-4940-1-git-send-email-rongqing.li@windriver.com>
-	<20140718080802.GM2433@jama>
-In-Reply-To: <20140718080802.GM2433@jama>
-Subject: Re: [PATCH][meta-oe] numctl: add recipe
+	Fri, 18 Jul 2014 08:49:20 +0000 (UTC)
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
+	s6I8nFwg032213 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2014 09:49:16 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Rcs8yJvR-TZ2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2014 09:49:15 +0100 (BST)
+Received: from [192.168.3.10] (rpvlan0 [192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
+	s6I8nCO7032197
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2014 09:49:14 +0100
+Message-ID: <1405673347.26348.35.camel@ted>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Jul 2014 09:49:07 +0100
+In-Reply-To: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
+References: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
+X-Mailer: Evolution 3.8.4-0ubuntu1 
+Mime-Version: 1.0
+Subject: Re: [PATCH 01/27] onig: Use "foreign" automake strictness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,244 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 08:42:08 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Fri, 18 Jul 2014 08:49:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
+On Fri, 2014-07-18 at 09:42 +0100, Richard Purdie wrote:
+> ---
+>  meta-oe/recipes-support/onig/files/configure.patch | 13 +++++++++++++
+>  meta-oe/recipes-support/onig/onig_5.9.3.bb         |  3 ++-
+>  2 files changed, 15 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/onig/files/configure.patch
 
+Somehow the SoB lines got lost. I'll not spam the list again unless
+someone wants me to, the commits are on:
 
-On 07/18/2014 04:08 PM, Martin Jansa wrote:
-> On Fri, Jul 18, 2014 at 03:41:15PM +0800, rongqing.li@windriver.com wrote:
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> It consists of a numactl program to run other programs with a specific NUMA
->> policy and a libnuma to do allocations with NUMA policy in applications.
->
-> Does it need separate .inc file? With one version per recipe we're not
-> using .inc very much.
->
-> Also please move files from "files" to "numactl" for faster lookup.
-> '
+http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=rpurdie/metaoe
 
-OK, I will change it
+complete with SoB lines.
 
--Roy
+Cheers,
 
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> ---
->>   .../numactl/files/Fix-the-test-output-format.patch |   59 ++++++++++++++++++++
->>   meta-oe/recipes-support/numactl/files/Makefile     |    7 +++
->>   .../numactl/files/fix-null-pointer.patch           |   28 ++++++++++
->>   meta-oe/recipes-support/numactl/files/run-ptest    |    9 +++
->>   meta-oe/recipes-support/numactl/numactl.inc        |   40 +++++++++++++
->>   meta-oe/recipes-support/numactl/numactl_2.0.9.bb   |    6 ++
->>   6 files changed, 149 insertions(+)
->>   create mode 100644 meta-oe/recipes-support/numactl/files/Fix-the-test-output-format.patch
->>   create mode 100644 meta-oe/recipes-support/numactl/files/Makefile
->>   create mode 100644 meta-oe/recipes-support/numactl/files/fix-null-pointer.patch
->>   create mode 100755 meta-oe/recipes-support/numactl/files/run-ptest
->>   create mode 100644 meta-oe/recipes-support/numactl/numactl.inc
->>   create mode 100644 meta-oe/recipes-support/numactl/numactl_2.0.9.bb
->>
->> diff --git a/meta-oe/recipes-support/numactl/files/Fix-the-test-output-format.patch b/meta-oe/recipes-support/numactl/files/Fix-the-test-output-format.patch
->> new file mode 100644
->> index 0000000..8c309a4
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/files/Fix-the-test-output-format.patch
->> @@ -0,0 +1,59 @@
->> +[PATCH] Fix the test output format
->> +
->> +Upstream-Status: Pending
->> +
->> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> +---
->> + test/regress  |    6 +++---
->> + test/regress2 |    9 ++++-----
->> + 2 files changed, 7 insertions(+), 8 deletions(-)
->> +
->> +diff --git a/test/regress b/test/regress
->> +index 05eff5b..10d72f7 100755
->> +--- a/test/regress
->> ++++ b/test/regress
->> +@@ -73,6 +73,7 @@ probe_hardware()
->> + 	if [ $numnodes -lt 2 ] ; then
->> + 	    echo "need at least two nodes with at least $NEEDPAGES each of"
->> + 	    echo "free memory for mempolicy regression tests"
->> ++	    echo "FAIL: numa regress"
->> + 	    exit 1
->> + 	fi
->> + }
->> +@@ -206,10 +207,9 @@ main()
->> + 	rm A B
->> +
->> + 	if [ "$EXIT" = 0 ] ; then
->> +-		echo '========SUCCESS'
->> ++		echo 'PASS: numactl regress'
->> + 	else
->> +-		echo '========FAILURE'
->> +-		exit 1
->> ++		echo 'FAIL: numactl regress'
->> + 	fi
->> + }
->> +
->> +diff --git a/test/regress2 b/test/regress2
->> +index 6a254fa..9c97943 100755
->> +--- a/test/regress2
->> ++++ b/test/regress2
->> +@@ -6,12 +6,11 @@ VALGRIND=${VALGRIND:-}
->> + export LD_LIBRARY_PATH=`pwd`/..
->> +
->> + T() {
->> +-       echo "$@"
->> +-       if ! $VALGRIND "$@" ;  then
->> +-	  echo	$1 FAILED!!!!
->> +-	  exit 1
->> ++       if ! $VALGRIND "$@" 2>&1 1>/dev/null;  then
->> ++	  echo	"FAIL: $1"
->> ++       else
->> ++	  echo "PASS: $1"
->> +        fi
->> +-       echo
->> + }
->> +
->> + # various tests
->> +--
->> +1.7.10.4
->> +
->> diff --git a/meta-oe/recipes-support/numactl/files/Makefile b/meta-oe/recipes-support/numactl/files/Makefile
->> new file mode 100644
->> index 0000000..6489f83
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/files/Makefile
->> @@ -0,0 +1,7 @@
->> +.PHONY: regress1 regress2
->> +
->> +regress1:
->> +	cd test ; ./regress
->> +
->> +regress2:
->> +	cd test ; ./regress2
->> diff --git a/meta-oe/recipes-support/numactl/files/fix-null-pointer.patch b/meta-oe/recipes-support/numactl/files/fix-null-pointer.patch
->> new file mode 100644
->> index 0000000..6a29606
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/files/fix-null-pointer.patch
->> @@ -0,0 +1,28 @@
->> +[PATCH] return 0 if distance_table is NULL
->> +
->> +Upstream-Status: Pending
->> +
->> +read_distance_table() maybe return 0, but distance_table is not set,
->> +if distance_table is used, and will lead to SEGFAULT
->> +
->> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> +---
->> + distance.c |    2 ++
->> + 1 file changed, 2 insertions(+)
->> +
->> +diff --git a/distance.c b/distance.c
->> +index 4a26972..c6ca021 100755
->> +--- a/distance.c
->> ++++ b/distance.c
->> +@@ -113,6 +113,8 @@ int numa_distance(int a, int b)
->> + 		int err = read_distance_table();
->> + 		if (err < 0)
->> + 			return 0;
->> ++		if (!distance_table)
->> ++			return 0;
->> + 	}
->> + 	return distance_table[a * distance_numnodes + b];
->> + }
->> +--
->> +1.7.10.4
->> +
->> diff --git a/meta-oe/recipes-support/numactl/files/run-ptest b/meta-oe/recipes-support/numactl/files/run-ptest
->> new file mode 100755
->> index 0000000..6f67ec2
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/files/run-ptest
->> @@ -0,0 +1,9 @@
->> +#!/bin/sh
->> +make regress1
->> +make regress2
->> +if  numademo -t -e 10M; then
->> +	echo "PASS: numademo"
->> +else
->> +	echo "FAIL: numademo"
->> +fi
->> +
->> diff --git a/meta-oe/recipes-support/numactl/numactl.inc b/meta-oe/recipes-support/numactl/numactl.inc
->> new file mode 100644
->> index 0000000..21a8123
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/numactl.inc
->> @@ -0,0 +1,40 @@
->> +SUMMARY = "Development package for building Applications that use numa"
->> +DESCRIPTION = "Simple NUMA policy support. It consists of a numactl program \
->> +to run other programs with a specific NUMA policy and a libnuma to do \
->> +allocations with NUMA policy in applications."
->> +LICENSE = "GPL-2.0 & LGPL-2.1"
->> +SECTION = "apps"
->> +RDEPENDS_${PN} = "perl"
->> +
->> +inherit autotools-brokensep ptest
->> +
->> +SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
->> +	   file://fix-null-pointer.patch \
->> +	   file://Fix-the-test-output-format.patch \
->> +	   file://Makefile \
->> +	   file://run-ptest \
->> +          "
->> +
->> +# ARM does not currently support NUMA
->> +COMPATIBLE_HOST = "^((?!arm).*)$"
->> +
->> +do_install() {
->> +        oe_runmake DESTDIR=${D} prefix=${D}/usr libdir=${D}/${libdir} install
->> +	#remove the empty man2 directory
->> +	rm -r ${D}${mandir}/man2
->> +}
->> +
->> +do_install_ptest() {
->> +	#install tests binaries
->> +        local test_binaries="checkaffinity checktopology distance	\
->> +		ftok mbind_mig_pages migrate_pages move_pages mynode	\
->> +		nodemap pagesize prefered printcpu randmap realloc_test	\
->> +		regress regress2 runltp shmtest tbitmap tshared"
->> +
->> +	[ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
->> +	for i in $test_binaries; do
->> +		install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
->> +	done
->> +	install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
->> +}
->> +
->> diff --git a/meta-oe/recipes-support/numactl/numactl_2.0.9.bb b/meta-oe/recipes-support/numactl/numactl_2.0.9.bb
->> new file mode 100644
->> index 0000000..1a103cd
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/numactl/numactl_2.0.9.bb
->> @@ -0,0 +1,6 @@
->> +require ${PN}.inc
->> +
->> +LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
->> +SRC_URI[md5sum] = "136685c8eaf9d6569c351fe1d453b30c"
->> +SRC_URI[sha256sum] = "9ca033e6c14c0f26c20379b0cf9299429fd5a354a79c3c7880fd41ef69f7751c"
->> +
->> --
->> 1.7.10.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
+Richard
 
--- 
-Best Reagrds,
-Roy | RongQing Li
 
