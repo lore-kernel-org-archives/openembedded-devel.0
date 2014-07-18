@@ -1,33 +1,33 @@
 Return-Path: <richard@rpsys.net>
 Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id E21AA706E4
+	by mail.openembedded.org (Postfix) with ESMTP id 03324706B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 08:57:19 +0000 (UTC)
+	Fri, 18 Jul 2014 08:57:20 +0000 (UTC)
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu4) with ESMTP id
-	s6I8hCIA030371; Fri, 18 Jul 2014 09:43:12 +0100
+	s6I8h3fl030280; Fri, 18 Jul 2014 09:43:09 +0100
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 4_PBHypodocx; Fri, 18 Jul 2014 09:43:11 +0100 (BST)
+	with LMTP id hx7xl0obgFwf; Fri, 18 Jul 2014 09:43:08 +0100 (BST)
 Received: from ted (bebox.config [87.81.244.161] (may be forged))
 	(authenticated bits=0)
 	by dan.rpsys.net (8.14.4/8.14.4/Debian-2.1ubuntu1) with ESMTP id
-	s6I8gwKL030243
+	s6I8gxU7030258
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Fri, 18 Jul 2014 09:43:04 +0100
+	Fri, 18 Jul 2014 09:43:00 +0100
 Received: from richard by ted with local (Exim 4.80)
 	(envelope-from <richard@dan.rpsys.net>)
-	id 1X83ki-0006iW-VC; Fri, 18 Jul 2014 09:42:52 +0100
+	id 1X83kk-0006jk-CI; Fri, 18 Jul 2014 09:42:54 +0100
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 09:42:24 +0100
-Message-Id: <1405672966-25729-5-git-send-email-richard.purdie@linuxfoundation.org>
+Date: Fri, 18 Jul 2014 09:42:39 +0100
+Message-Id: <1405672966-25729-20-git-send-email-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.0.2
 In-Reply-To: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 References: <1405672966-25729-1-git-send-email-richard.purdie@linuxfoundation.org>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [PATCH 05/27] dejagnu: Use "foreign" automake strictness
+Subject: [PATCH 20/27] subsurface: Fix libxml and libm build failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,79 +41,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 08:57:20 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 08:57:21 -0000
 
+Use pkg-config to find libxml2 and also link against libm to avoid
+build failures.
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../dejagnu/dejagnu/configure.patch                | 45 ++++++++++++++++++++++
- meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb  |  3 +-
- 2 files changed, 47 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/dejagnu/dejagnu/configure.patch
+ .../subsurface/subsurface/libm.patch               | 17 +++++++++++++++++
+ .../subsurface/subsurface/pkgconfig.patch          | 22 ++++++++++++++++++++++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/subsurface/subsurface/libm.patch
+ create mode 100644 meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
 
-diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu/configure.patch b/meta-oe/recipes-devtools/dejagnu/dejagnu/configure.patch
+diff --git a/meta-oe/recipes-extended/subsurface/subsurface/libm.patch b/meta-oe/recipes-extended/subsurface/subsurface/libm.patch
 new file mode 100644
-index 0000000..2eb8af7
+index 0000000..7995608
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/dejagnu/dejagnu/configure.patch
-@@ -0,0 +1,45 @@
-+Index: dejagnu-1.4.4/configure.in
++++ b/meta-oe/recipes-extended/subsurface/subsurface/libm.patch
+@@ -0,0 +1,17 @@
++| /media/build1/poky/build1/tmp/sysroots/x86_64-linux/usr/libexec/i586-poky-linux/gcc/i586-poky-linux/4.9.0/ld: divelist.o: undefined reference to symbol 'pow@@GLIBC_2.0'
++| /media/build1/poky/build1/tmp/sysroots/qemux86/lib/libm.so.6: error adding symbols: DSO missing from command line
++| collect2: error: ld returned 1 exit status
++
++Index: git/Makefile
 +===================================================================
-+--- dejagnu-1.4.4.orig/configure.in	2014-07-18 07:05:49.997481207 +0000
-++++ dejagnu-1.4.4/configure.in	2014-07-18 07:05:50.085481210 +0000
-+@@ -1,10 +1,10 @@
-+ dnl Process this file with autoconf to produce a configure script.
-+ AC_PREREQ(2.13)
-+-AC_INIT(runtest.exp)
-++AC_INIT(dejagnu, 1.4.4)
-+ dnl AC_CONFIG_AUX_DIR(..)
++--- git.orig/Makefile	2014-07-17 20:59:03.152489041 +0000
+++++ git/Makefile	2014-07-17 20:59:19.020489473 +0000
++@@ -50,7 +50,7 @@
++ LIBDIVECOMPUTERCFLAGS = -I$(LIBDIVECOMPUTERINCLUDES)
++ LIBDIVECOMPUTER = $(LIBDIVECOMPUTERARCHIVE) $(LIBUSB)
 + 
-+ dnl These are required by automake
-+-AM_INIT_AUTOMAKE(dejagnu, 1.4.4)
-++AM_INIT_AUTOMAKE([foreign])
-+ AM_MAINTAINER_MODE
-+ AC_PROG_MAKE_SET
++-LIBS = $(LIBXML2) $(LIBGTK) $(LIBDIVECOMPUTER) -lpthread
+++LIBS = $(LIBXML2) $(LIBGTK) $(LIBDIVECOMPUTER) -lpthread -lm
 + 
-+Index: dejagnu-1.4.4/example/calc/configure.in
++ OBJS =	main.o dive.o profile.o info.o equipment.o divelist.o \
++ 	parse-xml.o save-xml.o libdivecomputer.o print.o uemis.o \
+diff --git a/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch b/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
+new file mode 100644
+index 0000000..1f294fc
+--- /dev/null
++++ b/meta-oe/recipes-extended/subsurface/subsurface/pkgconfig.patch
+@@ -0,0 +1,22 @@
++Index: git/Makefile
 +===================================================================
-+--- dejagnu-1.4.4.orig/example/calc/configure.in	2002-04-26 03:32:40.000000000 +0000
-++++ dejagnu-1.4.4/example/calc/configure.in	2014-07-18 07:11:59.085491266 +0000
-+@@ -1,8 +1,8 @@
-+ dnl Process this file with autoconf to produce a configure script.
-+ AC_PREREQ(2.5)
-+-AC_INIT(calc.c)
-++AC_INIT(calc, 1.1)
-+ AM_CONFIG_HEADER(calc.h)
-+-AM_INIT_AUTOMAKE(calc, 1.1)
-++AM_INIT_AUTOMAKE([foreign])
++--- git.orig/Makefile	2014-07-17 20:53:23.620479788 +0000
+++++ git/Makefile	2014-07-17 20:56:07.992484267 +0000
++@@ -45,7 +45,7 @@
++ # about it if it doesn't.
++ LIBUSB = $(shell pkg-config --libs libusb-1.0 2> /dev/null)
 + 
-+ AC_PROG_CC
-+ AC_PROG_INSTALL
-+Index: dejagnu-1.4.4/example/hello/configure.in
-+===================================================================
-+--- dejagnu-1.4.4.orig/example/hello/configure.in	2002-08-31 05:46:16.000000000 +0000
-++++ dejagnu-1.4.4/example/hello/configure.in	2014-07-18 07:12:23.721491937 +0000
-+@@ -25,7 +25,7 @@
-+ # ------------------------------------------------------------------------
++-LIBXML2 = $(shell xml2-config --libs)
+++LIBXML2 = $(shell pkg-config --libs libxml-2.0)
++ LIBGTK = $(shell pkg-config --libs gtk+-2.0 glib-2.0 gconf-2.0)
++ LIBDIVECOMPUTERCFLAGS = -I$(LIBDIVECOMPUTERINCLUDES)
++ LIBDIVECOMPUTER = $(LIBDIVECOMPUTERARCHIVE) $(LIBUSB)
++@@ -71,7 +71,7 @@
++ 	$(INSTALL) $(MANFILES) $(MANDIR)
 + 
-+ AC_INIT(helloworld, demo-version, philip.wilsey@ieee.org)
-+-AM_INIT_AUTOMAKE(helloworld, demo-version)
-++AM_INIT_AUTOMAKE([foreign])
++ parse-xml.o: parse-xml.c dive.h
++-	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c `xml2-config --cflags`  parse-xml.c
+++	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c `pkg-config --cflags libxml-2.0`  parse-xml.c
 + 
-+ #AC_CONFIG_SRCDIR([hello.cc])
-+ #AC_CONFIG_HEADER([config.h])
-diff --git a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
-index f5fe9b9..63726b2 100644
---- a/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
-+++ b/meta-oe/recipes-devtools/dejagnu/dejagnu_1.4.4.bb
-@@ -5,7 +5,8 @@ SECTION = "devel"
- 
- inherit autotools
- 
--SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-+           file://configure.patch"
- 
- SRC_URI[md5sum] = "053f18fd5d00873de365413cab17a666"
- SRC_URI[sha256sum] = "d0fbedef20fb0843318d60551023631176b27ceb1e11de7468a971770d0e048d"
++ save-xml.o: save-xml.c dive.h
++ 	$(CC) $(CFLAGS) `pkg-config --cflags glib-2.0` -c save-xml.c
 -- 
 2.0.2
 
