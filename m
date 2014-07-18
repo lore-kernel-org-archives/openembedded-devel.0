@@ -1,34 +1,35 @@
-Return-Path: <ben.shelton@ni.com>
-X-Greylist: delayed 1769 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 18 Jul 2014 16:07:33 UTC
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id A7B8C65CD8
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 548696ACE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 16:07:33 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
-	s6IFc66a003549 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 10:38:06 -0500
-Received: from bshelton-desktop.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2014071810380613-547884 ;
-	Fri, 18 Jul 2014 10:38:06 -0500 
-From: Ben Shelton <ben.shelton@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 10:37:52 -0500
-Message-Id: <1405697872-23392-1-git-send-email-ben.shelton@ni.com>
-X-Mailer: git-send-email 2.0.2
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 07/18/2014 10:38:06 AM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 07/18/2014 10:38:06 AM,
-	Serialize complete at 07/18/2014 10:38:06 AM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.12.52, 1.0.14,
-	0.0.0000
-	definitions=2014-07-18_04:2014-07-18, 2014-07-18,
-	1970-01-01 signatures=0
-Subject: [meta-oe][PATCH] openvpn: update and enable iproute2 support
+	Fri, 18 Jul 2014 16:26:53 +0000 (UTC)
+Received: by mail-yk0-f174.google.com with SMTP id q9so2288703ykb.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jul 2014 09:26:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=YjXfyql7JeA/VqbUeJ3kjIrczqdgwKsLuHdkay22vHY=;
+	b=t7/I+tO2g2b4akLJJgugp5tj2Is3L3eTYIN8XJySwpieuLvUGXkDD9WcNSaQmnWGxu
+	6CzR9cf/SAgtORHTQB53S9rN9PLlr4MeAWb8lFUpStT6LK783VBNmvXa3lTB06/D6MTX
+	PL7pnLIntROyupDcwHAaElkSJ13Kje4jGtYCkpUNN81vbPl1MVNfzi34hWL95dQFDdep
+	ynTXEdk6XkQJOaTeMtULmB5uegNck13iPfeTGVh4O3DBcNtsg9lks41mOdwuDHDXYqkI
+	Gti8BRyi9aQ9H+duzJR6Yq1ZCR+IXgrEe6y3ANo9UyJUGuavodZwXjrQrItYg2GkDdY3
+	jg8Q==
+MIME-Version: 1.0
+X-Received: by 10.236.28.44 with SMTP id f32mr8843921yha.148.1405700814332;
+	Fri, 18 Jul 2014 09:26:54 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Fri, 18 Jul 2014 09:26:54 -0700 (PDT)
+In-Reply-To: <CAOd_LFzaYUmCQB0vq_bxi0bWDRvEX8mGb7gFV7YQfRckTzKacQ@mail.gmail.com>
+References: <CAOd_LFzaYUmCQB0vq_bxi0bWDRvEX8mGb7gFV7YQfRckTzKacQ@mail.gmail.com>
+Date: Fri, 18 Jul 2014 13:26:54 -0300
+X-Google-Sender-Auth: RORWO37NKTArce3WHQo2KIB3_Ho
+Message-ID: <CAP9ODKoq4Qb6novXBgH4JB=c=-V04n5smkWp-464xqLRoDm9nQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][diasy] pull request, cpuburn-neon, v4l-utils, zeroc-ice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,98 +43,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 16:07:39 -0000
+X-List-Received-Date: Fri, 18 Jul 2014 16:26:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Richard Tollerton <rich.tollerton@ni.com>
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-- Added .bb for version 2.3.4.
-- The download URL was broken; it's changed to reflect where the website
-  points to.
-- Force use of iproute2, which is generally recommended when running
-  OpenVPN as an unprivileged user. Ref:
-  http://community.openvpn.net/openvpn/wiki/UnprivilegedUser
-- Explicitly add libpam to DEPENDS if pam is enabled, and disable the
-  auth-pam plugin if pam is not enabled.
+On Wed, Jul 16, 2014 at 4:32 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> The following changes since commit ee24939c4c70b63a9fb7e93a58889a3231d3d367:
+>
+>   rng-tools: Update rng-tools version to 4 (2014-07-01 15:08:41 -0400)
+>
+> are available in the git repository at:
+>
+>   https://github.com/cbrake/meta-openembedded.git 2014-07-16_merge-to-daisy
+>
+> for you to fetch changes up to d85b01997ce8cc354ccc53f97fdffc79cf2277d5:
+>
+>   v4l-utils: Add virtual/libx11 dependency only if X11 is available
+> (2014-07-16 15:28:40 -0400)
+>
+> ----------------------------------------------------------------
+> Lauren Post (1):
+>       cpuburn-neon: Upgrade to version 20140626
+>
+> Otavio Salvador (1):
+>       v4l-utils: Add virtual/libx11 dependency only if X11 is available
+>
+> Philip Balister (1):
+>       zeroc-ice : Add recipe.
+>
+>  .../cpuburn/{cpuburn-neon_20120610.bb => cpuburn-neon_20140626.bb}  |   9 +-
+>  .../zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch    |
+> 292 ++++++++++++++++++++++++++++++
+>  meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb           |
+>  77 ++++++++
+>  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb              |   3 +-
+>  4 files changed, 376 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-benchmark/cpuburn/{cpuburn-neon_20120610.bb =>
+> cpuburn-neon_20140626.bb} (69%)
+>  create mode 100644
+> meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice-3.5.1/0002-Modify-Makefile-for-cross-compile.patch
+>  create mode 100644 meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
+>
+> --
+> =================
+> http://bec-systems.com
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Signed-off-by: Richard Tollerton <rich.tollerton@ni.com>
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
----
- .../recipes-support/openvpn/openvpn_2.1.3.bb       | 27 -------------------
- .../recipes-support/openvpn/openvpn_2.3.4.bb       | 30 ++++++++++++++++++++++
- 2 files changed, 30 insertions(+), 27 deletions(-)
- delete mode 100644 meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
- create mode 100644 meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb b/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
-deleted file mode 100644
-index 9ef0fbf..0000000
---- a/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "A full-featured SSL VPN solution via tun device"
--HOMEPAGE = "http://openvpn.sourceforge.net"
--SECTION = "console/network"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
--DEPENDS = "lzo openssl"
--
--inherit autotools
--
--SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
--           file://openvpn"
--
--SRC_URI[md5sum] = "7486d3e270ba4b033e311d3e022a0ad7"
--SRC_URI[sha256sum] = "5185181df2e6043bd667377bc92e36ea5a5bd7600af209654f109b6403ca5b36"
--
--CFLAGS += "-fno-inline"
--
--# I want openvpn to be able to read password from file (hrw)
--EXTRA_OECONF += "--enable-password-save"
--
--do_install_append() {
--    install -d ${D}/${sysconfdir}/init.d
--    install -d ${D}/${sysconfdir}/openvpn
--    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
--}
--
--RRECOMMENDS_${PN} = "kernel-module-tun"
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-new file mode 100644
-index 0000000..282befe
---- /dev/null
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "A full-featured SSL VPN solution via tun device."
-+HOMEPAGE = "http://openvpn.sourceforge.net"
-+SECTION = "console/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
-+DEPENDS = "lzo openssl iproute2 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-+
-+inherit autotools
-+
-+SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
-+           file://openvpn"
-+
-+SRC_URI[md5sum] = "04d47237907faabe9d046970ffe44b2e"
-+SRC_URI[sha256sum] = "af506d5f48568fa8d2f2435cb3fad35f9a9a8f263999ea6df3ba296960cec85a"
-+
-+CFLAGS += "-fno-inline"
-+
-+# I want openvpn to be able to read password from file (hrw)
-+EXTRA_OECONF += "--enable-password-save --enable-iproute2"
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
-+
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/init.d
-+    install -d ${D}/${sysconfdir}/openvpn
-+    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
-+}
-+
-+RRECOMMENDS_${PN} = "kernel-module-tun"
-+
-+FILES_${PN}-dbg += "/usr/lib/openvpn/plugins/.debug"
+
 -- 
-2.0.2
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
