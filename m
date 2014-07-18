@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id AC1D160438
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C56C6028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 18:23:28 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id f8so1563993wiw.5
+	Fri, 18 Jul 2014 18:23:30 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id hi2so1319083wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 11:23:29 -0700 (PDT)
+	Fri, 18 Jul 2014 11:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=j1pjR8vJuZAS3mK9s2xxqhUla8HAGdG+p9v5PgCiJP4=;
-	b=uIInRezdd09HaOfehMfg55mpp9NoqaSxXeZgbpl7mcOzwSu4fagZLJ/N4VELjmSL79
-	CXVOt0TafsNcIENFL6LzeEG5s91x0wDXiCDKqxBHfzyQe3bANAlYY+qJhisCfR/sLDxZ
-	Z9sdbDfW8cn/XyKKP82gFdyX+vAT7o2VeQpcyKeUP5BxTXwlEEAuKN7nEtZpg5eNdLUq
-	Uc8Glwi1FFm6sKdoOaAUyxBPWVeykSTdYaAfCNwJoCCGx409M9ZHLWluwpubjuTL9Zrd
-	RHZiBpkNk6+61tKMu0hByG9GW6ADYHzkZLbDlDzUFuqmzQsT/ErtxGHLUqK/dgafaWvR
-	oYUg==
-X-Received: by 10.194.157.195 with SMTP id wo3mr9616764wjb.130.1405707809406; 
-	Fri, 18 Jul 2014 11:23:29 -0700 (PDT)
+	bh=P6SHVn+tQMwQ48+BmaggerYDcp6X9eoQcp5aodYpshM=;
+	b=WrGuvdgifM9YrAFr4Qrq20z7KcN4JiwibBpe7GI2Ku5evRLLRBsX7LI288vznOV/KP
+	FEctIm7IMOPQ/oxSAvucCoqn4gUFIlK2zQ7emYVJYJA6SXt8+f3WcmUx2l3nxxYeRxGC
+	2De9+91Y87n2wopawTrBPDu3C41BLKa1K9BNchEosQT/6kZ8AcimbJlFPnJ8OItU2cay
+	uIrceG9PWyXJCqpgCv/y2klZv5dnBi4ueSnqmTtWYe+C3JH1fNWBlQbw0dhWGnyILusD
+	my/r8HsFeuXM8tHu7srDtdqoTyTwBu6PAiJY26SaD2ZaguMXBLH/Lla2U6gTcN7qy1Dj
+	NO1A==
+X-Received: by 10.180.20.14 with SMTP id j14mr9272977wie.48.1405707810862;
+	Fri, 18 Jul 2014 11:23:30 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	lk7sm15984230wjb.24.2014.07.18.11.23.28 for <multiple recipients>
+	di7sm15973091wjb.34.2014.07.18.11.23.29 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Jul 2014 11:23:28 -0700 (PDT)
+	Fri, 18 Jul 2014 11:23:30 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 20:23:36 +0200
-Message-Id: <1405707818-12348-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 18 Jul 2014 20:23:37 +0200
+Message-Id: <1405707818-12348-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
 In-Reply-To: <1405707818-12348-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1405707818-12348-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][WIP][PATCH 2/4] llvm.inc: Merge all llvm*-dbg and llvm*-staticdev to just one PN-dbg and one PN-staticdev
+Subject: [meta-oe][WIP][PATCH 3/4] dfu-util-0.4: add foreign to AM_INIT_AUTOMAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,45 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 18:23:30 -0000
-
-* if you need debug or staticdev on device then you can probably live
-  with other libs as well.
+X-List-Received-Date: Fri, 18 Jul 2014 18:23:31 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/llvm/llvm.inc | 6 ------
- 1 file changed, 6 deletions(-)
+ meta-oe/recipes-support/dfu-util/dfu-util-native_0.4.bb   |  4 +++-
+ meta-oe/recipes-support/dfu-util/dfu-util/configure.patch | 12 ++++++++++++
+ meta-oe/recipes-support/dfu-util/dfu-util_0.4.bb          |  4 +++-
+ 3 files changed, 18 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/dfu-util/dfu-util/configure.patch
 
-diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
-index f590a7f..4ec1b6d 100644
---- a/meta-oe/recipes-core/llvm/llvm.inc
-+++ b/meta-oe/recipes-core/llvm/llvm.inc
-@@ -33,9 +33,7 @@ LLVM_RELEASE = "${PV}"
- LLVM_DIR = "llvm${LLVM_RELEASE}"
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.4.bb b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.4.bb
+index ce6e566..d0dd362 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.4.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.4.bb
+@@ -6,7 +6,9 @@ do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
+ DEPENDS = "libusb1-native"
  
- ALLOW_EMPTY_${PN} = "1"
--ALLOW_EMPTY_${PN}-staticdev = "1"
- FILES_${PN} = ""
--FILES_${PN}-staticdev = ""
- DOTDEBUG-dbg = " ${bindir}/${LLVM_DIR}/.debug \
-                  ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
-                  ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
-@@ -55,14 +53,10 @@ INSANE_SKIP_libllvm${LLVM_RELEASE}-llvm${LLVM_RELEASE} += "dev-so"
- python llvm_populate_packages() {
-     libdir = bb.data.expand('${libdir}', d)
-     libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
--    split_dbg_packages = do_split_packages(d, libllvm_libdir+'/.debug', '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s-dbg', 'Split debug package for %s', allow_dirs=True)
-     split_packages = do_split_packages(d, libdir, '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s', 'Split package for %s', allow_dirs=True, allow_links=True, recursive=True)
--    split_staticdev_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.a$', 'libllvm${LLVM_RELEASE}-%s-staticdev', 'Split staticdev package for %s', allow_dirs=True)
-     if split_packages:
-         pn = d.getVar('PN', True)
-         d.appendVar('RDEPENDS_' + pn, ' '+' '.join(split_packages))
--        d.appendVar('RDEPENDS_' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
--        d.appendVar('RDEPENDS_' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
- }
+ FILESPATH =. "${FILE_DIRNAME}/${BPN}-${PV}:"
+-SRC_URI += "file://0001-Revert-Makefile.am-Drop-static-dfu-util.patch"
++SRC_URI += "file://0001-Revert-Makefile.am-Drop-static-dfu-util.patch \
++    file://configure.patch \
++"
  
- PACKAGESPLITFUNCS_prepend = "llvm_populate_packages "
+ do_deploy() {
+     install -d ${DEPLOY_DIR_TOOLS}
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util/configure.patch b/meta-oe/recipes-support/dfu-util/dfu-util/configure.patch
+new file mode 100644
+index 0000000..c83d510
+--- /dev/null
++++ b/meta-oe/recipes-support/dfu-util/dfu-util/configure.patch
+@@ -0,0 +1,12 @@
++diff -uNr dfu-util-0.4.orig/configure.ac dfu-util-0.4/configure.ac
++--- dfu-util-0.4.orig/configure.ac	2014-07-18 08:18:45.407552416 +0200
+++++ dfu-util-0.4/configure.ac	2014-07-18 20:05:11.934894143 +0200
++@@ -4,7 +4,7 @@
++ AC_PREREQ(2.59)
++ AC_INIT([dfu-util],[0.4])
++ AC_CONFIG_AUX_DIR(m4)
++-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+++AM_INIT_AUTOMAKE([foreign])
++ AM_CONFIG_HEADER([config.h])
++ 
++ # Test for new silent rules and enable only if they are available
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.4.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.4.bb
+index 12d6af6..9f55a86 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util_0.4.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.4.bb
+@@ -2,7 +2,9 @@ require dfu-util.inc
+ 
+ DEPENDS = "libusb1"
+ 
+-SRC_URI += "file://no-usbpath.patch"
++SRC_URI += "file://no-usbpath.patch \
++    file://configure.patch \
++"
+ 
+ SRC_URI[md5sum] = "2cf466fabb881e8598fa02f286d3242c"
+ SRC_URI[sha256sum] = "f60fea987aa06ee03da22a656d1d113ac224458ec4442bcf1764a62f0930bd07"
 -- 
 2.0.0
 
