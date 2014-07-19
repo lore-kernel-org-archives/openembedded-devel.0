@@ -1,32 +1,43 @@
-Return-Path: <ben.shelton@ni.com>
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 733FD705F1
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 772C270260
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 21:14:48 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
-	s6ILEnnV007118 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jul 2014 16:14:49 -0500
-Received: from bshelton-desktop.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2014071816144936-561698 ;
-	Fri, 18 Jul 2014 16:14:49 -0500 
-From: Ben Shelton <ben.shelton@ni.com>
+	Sat, 19 Jul 2014 21:13:20 +0000 (UTC)
+Received: by mail-ie0-f175.google.com with SMTP id x19so5508235ier.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Jul 2014 14:13:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=1By6ZXCQrukrWKwSe2XsBcPD1IKWtnJYUvnP9AcyjQ0=;
+	b=FqUoQws/S28bITr896TxhZNbcElcXIiEioeKY8dTLanyEJ9ozE6If3cmU6/Un2lpky
+	Tsiyhic2cqbI7U3yQ99QpSNfUvIfMGhmcdBXJpIGnNdHOuZaMTb6SEVIWf65mWDiyaN5
+	7cOmvblMfwuUo/CuXuGmYswCjUMwDrcnDn32ExiMGrLnnCzE+P/HkFLXKwdc859AkyZn
+	20oU01qUQXhpVepAZ0yLBzdSmArgH0EJu+IQ2V/Axg4qSHHwjFKjPYv19TWXXas5B2r0
+	eCa9opY887Brb36h3T4JQV70P9kgujY/Jt/eLZqjyYqvuFUs0/PgYomr6lzBz7gZTq1c
+	4aog==
+X-Gm-Message-State: ALoCoQlgIA9MUg3EgAWT8vJgXjqDYUFXPjlMkEacYEs0JMrnhSYE/g41PB8aMuSIAXAHRCLuacXR
+X-Received: by 10.50.137.71 with SMTP id qg7mr24258486igb.24.1405804401894;
+	Sat, 19 Jul 2014 14:13:21 -0700 (PDT)
+Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
+	[69.165.220.158]) by mx.google.com with ESMTPSA id
+	kk10sm20666919igb.19.2014.07.19.14.13.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Sat, 19 Jul 2014 14:13:21 -0700 (PDT)
+Message-ID: <53CADF70.8050201@linaro.org>
+Date: Sat, 19 Jul 2014 17:13:20 -0400
+From: Trevor Woerner <trevor.woerner@linaro.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jul 2014 16:14:36 -0500
-Message-Id: <1405718076-27646-1-git-send-email-ben.shelton@ni.com>
-X-Mailer: git-send-email 2.0.2
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 07/18/2014 04:14:49 PM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 07/18/2014 04:14:49 PM,
-	Serialize complete at 07/18/2014 04:14:49 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.12.52, 1.0.14,
-	0.0.0000
-	definitions=2014-07-18_05:2014-07-18, 2014-07-18,
-	1970-01-01 signatures=0
-Subject: [meta-oe][PATCH v2] openvpn: update and enable iproute2 support
+References: <alpine.LFD.2.11.1407130825500.24436@localhost>
+In-Reply-To: <alpine.LFD.2.11.1407130825500.24436@localhost>
+Subject: Re: some questions about overriding tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,73 +51,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jul 2014 21:14:51 -0000
+X-List-Received-Date: Sat, 19 Jul 2014 21:13:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-From: Richard Tollerton <rich.tollerton@ni.com>
-
-- Added .bb for version 2.3.4.
-- The download URL was broken; it's changed to reflect where the website
-  points to.
-- Force use of iproute2, which is generally recommended when running
-  OpenVPN as an unprivileged user. Ref:
-  http://community.openvpn.net/openvpn/wiki/UnprivilegedUser
-- Explicitly add libpam to DEPENDS if pam is enabled, and disable the
-  auth-pam plugin if pam is not enabled.
-- Pass the path to the 'ip' utility to the configure script to keep it
-  from trying to find it on the host.
-
-Signed-off-by: Richard Tollerton <rich.tollerton@ni.com>
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
----
- .../openvpn/{openvpn_2.1.3.bb => openvpn_2.3.4.bb}       | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.1.3.bb => openvpn_2.3.4.bb} (45%)
-
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-similarity index 45%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-index 9ef0fbf..a3322a0 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.1.3.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-@@ -1,22 +1,24 @@
--SUMMARY = "A full-featured SSL VPN solution via tun device"
-+SUMMARY = "A full-featured SSL VPN solution via tun device."
- HOMEPAGE = "http://openvpn.sourceforge.net"
- SECTION = "console/network"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
--DEPENDS = "lzo openssl"
-+DEPENDS = "lzo openssl iproute2 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- inherit autotools
- 
--SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
-+SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
-            file://openvpn"
- 
--SRC_URI[md5sum] = "7486d3e270ba4b033e311d3e022a0ad7"
--SRC_URI[sha256sum] = "5185181df2e6043bd667377bc92e36ea5a5bd7600af209654f109b6403ca5b36"
-+SRC_URI[md5sum] = "04d47237907faabe9d046970ffe44b2e"
-+SRC_URI[sha256sum] = "af506d5f48568fa8d2f2435cb3fad35f9a9a8f263999ea6df3ba296960cec85a"
- 
- CFLAGS += "-fno-inline"
- 
- # I want openvpn to be able to read password from file (hrw)
--EXTRA_OECONF += "--enable-password-save"
-+EXTRA_OECONF += "--enable-password-save --enable-iproute2"
-+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
-+EXTRA_OECONF += "IPROUTE=/bin/ip"
- 
- do_install_append() {
-     install -d ${D}/${sysconfdir}/init.d
-@@ -25,3 +27,5 @@ do_install_append() {
- }
- 
- RRECOMMENDS_${PN} = "kernel-module-tun"
-+
-+FILES_${PN}-dbg += "/usr/lib/openvpn/plugins/.debug"
--- 
-2.0.2
-
+Maybe the following email thread will help?
+http://lists.openembedded.org/pipermail/openembedded-core/2013-October/085319.html
 
