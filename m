@@ -1,35 +1,37 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C475705A3
+Return-Path: <akuster@mvista.com>
+Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
+	[209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id F0EEE70200
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 20:03:36 +0000 (UTC)
-Received: by mail-la0-f47.google.com with SMTP id mc6so4139715lab.6
+	Sun, 20 Jul 2014 20:21:35 +0000 (UTC)
+Received: by mail-pa0-f53.google.com with SMTP id kq14so8396475pab.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 13:03:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=XceEGu+zKkEea/jWqftNnd3RUVY8PuXNiXLNmItCT9Q=;
-	b=jY9HLggH7QyuyfEf9Xlpdx8jwwk+OQuSgR5hHKG2kbV0rJIn/1+u9myfXNLX34D7qs
-	UUHePCp1NHgbRfYABYn6bDHBopFmbtNXrLQ5e6MXJ4OW0RP2MyM6MUXt3BCJrU5CFCsA
-	yamdgKrtXCD2G+BlQGnKZ0XmQX/p8OZ4jLDFhCdTDQTHbzphHzuYriQ9ZfDTJUupN3UT
-	SekMIR9oWQnbYwg431TO+wSTYBbHGsiejB5L9Uih/mz0+FWjJidtla/CjrQIDorNEZlC
-	Lrrt6xGOAnc36xruWqcnDCcwu/Rvz9vZz/qyMRUHHRsSOE0UG+bpZ4o20CaChKtTJo18
-	Ax0g==
-MIME-Version: 1.0
-X-Received: by 10.152.115.139 with SMTP id jo11mr5706460lab.77.1405886616608; 
-	Sun, 20 Jul 2014 13:03:36 -0700 (PDT)
-Received: by 10.114.216.35 with HTTP; Sun, 20 Jul 2014 13:03:36 -0700 (PDT)
-In-Reply-To: <20140720195343.GE22875@jama>
-References: <1405883786-26358-1-git-send-email-TicoTimo@gmail.com>
-	<20140720195343.GE22875@jama>
-Date: Sun, 20 Jul 2014 13:03:36 -0700
-Message-ID: <CANx9H-DHuf+6bKXQ7jgbJXKNKaXV0hTJJOMCzhiRcKsGwfcbgQ@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2] imagemagick: add some PACKAGECONFIG, fix unrecognized --without-jp2 option
+	Sun, 20 Jul 2014 13:21:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HxRAUMfSmP5ctA7m1cnoIPvq4IG+CGV44bH2eQPzf/Q=;
+	b=GLWcbd9Fo7VUZQQNleAUeOZ4Taz/Uyv5HsQ3sMbZKqdgVBk+W1ipYU4ukRM8B8+Zy3
+	9WpeYYrpKP5aWGWxekUzuuoNqxYtkXsG4rrE6sn7oiI0jSTUbwzjVeAtmdH9joJdSf62
+	CNQI5v3kksB9u0ywMKDwmSLCImri5j2eE+0iTgcpB78Hq7giN5DmIxuJhmjNAsXLv1bp
+	1c2pBp/t1s97Bz0UcORoPCnZ9BLn1WwyCPTKk7YBjqaJpmfbHvlGLg9GksA/SST0eyCf
+	0/9WfQNoj37dgOW1OXBk0fChGE1VgDDYkhOWshtlFzwm5jndqTSPTDMK8HsA3OGwzVJ/
+	hQrw==
+X-Gm-Message-State: ALoCoQmbYItgAL9V7AFYC8PU/c1uSLF8vjA5X8llXarDeItvNHixHlKEbRPTthQGBKAnW/gmhmXJ
+X-Received: by 10.68.93.65 with SMTP id cs1mr9575834pbb.52.1405887696681;
+	Sun, 20 Jul 2014 13:21:36 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-98-239-95-55.hsd1.ca.comcast.net.
+	[98.239.95.55])
+	by mx.google.com with ESMTPSA id kh7sm49451354pad.8.2014.07.20.13.21.35
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 20 Jul 2014 13:21:35 -0700 (PDT)
+From: Armin Kuster <akuster@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 20 Jul 2014 13:21:25 -0700
+Message-Id: <1405887685-12673-1-git-send-email-akuster@mvista.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] v2] wireshark: Add recipe 1.12.0-rc2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,79 +45,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 20:03:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 20 Jul 2014 20:21:38 -0000
 
-On Sun, Jul 20, 2014 at 12:53 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Inital wireshark support on gtk+
+Added gtk3.
+Cleaned up PACKAGECONFIG options
+README with additional info
 
-> On Sun, Jul 20, 2014 at 12:16:26PM -0700, Tim Orling wrote:
-> > * Add PACKAGECONFIG for lzma, pango, webp, wmf
-> >
-> > Change in v2:
-> > * libwmf is currently blacklisted, so #comment it out
->
-> I like v1 more, because explicitly disable libwmf is better than
-> floating.
->
-> Fine with me. I commented out the line during testing because it failed
-due to blacklist.
-v1 it is :)
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ meta-networking/recipes-support/wireshark/README   | 37 +++++++++++++++++++
+ .../wireshark/wireshark_1.12.0-rc2.bb              | 42 ++++++++++++++++++++++
+ 2 files changed, 79 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/README
+ create mode 100644 meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
 
+diff --git a/meta-networking/recipes-support/wireshark/README b/meta-networking/recipes-support/wireshark/README
+new file mode 100644
+index 0000000..0e0c526
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/README
+@@ -0,0 +1,37 @@
++#
++Wireshark - Notes
++
++URL: http://www.wireshark.org/
++User Guide: http://www.wireshark.org/docs/wsug_html_chunked/
++Secruity advisories: http://www.wireshark.org/security/
++
++Wireshark is slowly moving away from gtk and towards QT as their graphical stack.
++Currently gtk is supported with this release and I plan on integrating QT. 
++
++
++
++Adding the wireshark to your build
++========================================
++
++via local.conf
++IMAGE_INSTALL_append = " wireshark"
++
++Adding the wireshark to your graphical build
++========================================
++via local.conf
++EXTRA_IMAGE_FEATURES += "x11-base"
++
++or use the "core-image-x11"
++
++
++Maintenance
++-----------
++
++Send patches, comments or questions to openembedded-devel@lists.openembedded.org
++
++When sending single patches, please using something like:
++'git send-email -1 --to  openembedded-devel@lists.openembedded.org --cc akuster@mvista.com --subject-prefix=meta-security][PATCH'
++
++Maintainer:    Armin Kuster <akuster@mvista.com>
++
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+new file mode 100644
+index 0000000..6860419
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+@@ -0,0 +1,42 @@
++DESCRIPTION = "wireshark - a popular network protocol analyzer"
++HOMEPAGE = "http://www.wireshark.org"
++SECTION = "network"
++LICENSE = "GPL-2.0"
++
++DEPENDS = "perl-native libpcap pcre expat glib-2.0 libsmi"
++
++inherit autotools
++
++ARM_INSTRUCTION_SET = "arm"
++
++# Works with either gtk+ or gtk3.
++WHICH_GTK = "gtk3"
++
++PACKAGECONFIG ??= "gnutls gcrypt"
++PACKAGECONFIG += " ${@bb.utils.contains("IMAGE_FEATURES", "x11-base", "${WHICH_GTK}  graphics", "", d)}"
++
++PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
++
++PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
++PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
++PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
++PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
++PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
++PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
++
++EXTRA_OECONF = "--with-qt=no --enable-usr-local=no -enable-tshark"
++
++LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
++SRC_URI = "http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0-rc2.tar.bz2 "
++    
++SRC_URI[md5sum] = "dc1149073066a29f91116c168558262e"
++SRC_URI[sha256sum]= "31009bb450126e9b12808267419f31016d14e6fde7b5e39c85ad37459908cffb"
++
++do_configure_prepend() {
++    # force to use fallback 
++    sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
++}
++
++ALLOW_EMPTY_${PN} = "1"
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++
+-- 
+1.9.1
 
-> > Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb | 9 +++++++--
-> >  1 file changed, 7 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-> b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-> > index e261eb8..4b52568 100644
-> > --- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-> > +++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-> > @@ -2,7 +2,7 @@ SUMMARY = "ImageMagick is an image convertion tools"
-> >  SECTION = "console/utils"
-> >  LICENSE = "ImageMagick"
-> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
-> > -# FIXME: There is much more checked libraries. All should be added or
-> explicitly disabled to get consistent results.
-> > +# FIXME: There are many more checked libraries. All should be added or
-> explicitly disabled to get consistent results.
-> >  DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
-> >
-> >  PATCHSET = "10"
-> > @@ -21,7 +21,12 @@ inherit autotools binconfig pkgconfig
-> >  EXTRA_OECONF = "--program-prefix= --program-suffix=.im6 --without-x
-> --without-perl --disable-openmp --without-xml --disable-opencl"
-> >
-> >  PACKAGECONFIG ??= ""
-> > -PACKAGECONFIG[jp2] = "--with-jp2,--without-jp2,jasper"
-> > +PACKAGECONFIG[jp2] = "--with-jp2,,jasper"
-> > +PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
-> > +PACKAGECONFIG[pango] = "--with-pango,--without-pango,pango cairo"
-> > +PACKAGECONFIG[webp] = "--with-webp,--without-webp,libwebp"
-> > +# libwmf is currently blacklisted
-> > +#PACKAGECONFIG[wmf] = "--with-wmf,--without-wmf,libwmf"
-> >
-> >  FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
-> >                  ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
-> > --
-> > 1.9.3
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
