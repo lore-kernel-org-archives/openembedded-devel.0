@@ -1,37 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 167A46AC93
+Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 05F9660438
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 04:08:05 +0000 (UTC)
-Received: by mail-vc0-f176.google.com with SMTP id id10so5384357vcb.21
+	Sun, 20 Jul 2014 04:08:13 +0000 (UTC)
+Received: by mail-vc0-f177.google.com with SMTP id hy4so9816848vcb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jul 2014 21:08:06 -0700 (PDT)
+	Sat, 19 Jul 2014 21:08:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8SO5uHGzVFC3/MV0mRV47VxSmTRrmdwcv16+eXwZgBY=;
-	b=eWWQ8HgjC0UfDkZTttusdRXahI5YQjpva272ePt6FrNH/ZHSNE5hIMkZjc80YcqpSN
-	KMgNncgUMr69aYNv+8/qewoWoqLYAzVjbbmldgSpBAlF/ajSwrykym6ghsgrnzcnnZo8
-	6WU2DPHtlVstViUiei43PuivU39mwk04RVKX50XfIBWT4Y88tXnfOOAqZOgs1NQ/sGxA
-	rU5cScfOeD8/aUr84FhLmSdiWD0vua14HX61u7zV+ZeIbe8VmzwTJb9No7VFalIzUYq1
-	6TxNxq/kzyeiL/EQNoSce8VlEDLMvXZvRcraKIu8gnvXk/nhFSiX4joSBrIu7plhGR6k
-	QHVg==
-X-Received: by 10.220.144.10 with SMTP id x10mr6480482vcu.42.1405829286822;
-	Sat, 19 Jul 2014 21:08:06 -0700 (PDT)
+	bh=D8A6wcSbl2g9+4yfGMLzHeb5nPaDNQrSzDwlsRwFYdg=;
+	b=EYzhkvSILJO+eV+KyH36FWNaArmQdRacF9zpWZ6qZE4J+O6rrwc2dks+sEDOpsw6k4
+	KQeaUjUee7qgo2/BnQDAwBTO7yJsPumGeBxT4uhoFJvZ9jUbF2DOYzy9Za5qPunY5jOo
+	3SBcDlE3RnVvoVctDsb4XTIHh7TkwnejfhDEnQ6/vgUTAoiImRCA1hzHZfukHWFb8Ix8
+	6X73lxKS3Ss6QxF31tdUF62cvIiARch3K9v4lDB/PxpE7z1aEwvEfn0dLkFRUgtbuaAP
+	YxL/xB20U+wHYuusNWDP0XvEzELnBCCpnTrfpYnm4KC5AX8FEHJzmFTyaZX2SpxzRqlp
+	JYpg==
+X-Received: by 10.220.95.132 with SMTP id d4mr18428932vcn.33.1405829294791;
+	Sat, 19 Jul 2014 21:08:14 -0700 (PDT)
 Received: from localhost.localdomain.com ([196.40.10.133])
-	by mx.google.com with ESMTPSA id n7sm2868785ven.1.2014.07.19.21.08.04
+	by mx.google.com with ESMTPSA id n7sm2868785ven.1.2014.07.19.21.08.12
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 19 Jul 2014 21:08:05 -0700 (PDT)
+	Sat, 19 Jul 2014 21:08:13 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jul 2014 21:07:37 -0700
-Message-Id: <1405829260-13293-2-git-send-email-TicoTimo@gmail.com>
+Date: Sat, 19 Jul 2014 21:07:38 -0700
+Message-Id: <1405829260-13293-3-git-send-email-TicoTimo@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1405829260-13293-1-git-send-email-TicoTimo@gmail.com>
 References: <1405829260-13293-1-git-send-email-TicoTimo@gmail.com>
-Subject: [meta-multimedia][PATCH 1/4] vlc.inc: cleanup configure, inherit pkgconfig
+Subject: [meta-multimedia][PATCH 2/4] vlc: use AM_PATH_LIBGCRYPT instead of libgcrypt-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,91 +45,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 04:08:06 -0000
+X-List-Received-Date: Sun, 20 Jul 2014 04:08:14 -0000
 
-* Upstream is now much more pkg-config friendly
-* Clean up configure baggage, no longer needed
+* AM_PATH_LIBGCRYPT exists for a reason, why not use it?
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 33 ++++++++++++--------------
- 1 file changed, 15 insertions(+), 18 deletions(-)
+ .../vlc/vlc/0003-use-am-path-libgcrypt.patch       | 46 ++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 58f5648..c188771 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -5,17 +5,17 @@ SECTION = "multimedia"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl \
--   libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls tremor \
--   faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib libdvdcss \
--   libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs libdc1394 \
--   libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-+DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
-+   virtual/libsdl libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls \
-+   tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
-+   libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
-+   libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-    libmtp opencv libopus orc libusb1 schroedinger taglib \
-    tiff xcb-util-keysyms samba"
- 
- SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
- 
--inherit autotools gettext
-+inherit autotools gettext pkgconfig
- 
- ARM_INSTRUCTION_SET = "arm"
- 
-@@ -29,18 +29,20 @@ EXTRA_OECONF = "\
-     --enable-freetype \
-     --enable-sdl \ 
-     --enable-png \
--    --enable-live555 --enable-tremor \
-+    --enable-tremor \
-     --enable-v4l2 --disable-aa --disable-faad \
-     --enable-dbus \
-     --without-contrib \
-     --without-kde-solid \
-     --disable-glx \
-     --enable-realrtsp \
-+    --disable-libtar \
-     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
-     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
-     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
- "
- 
-+PACKAGECONFIG ?= " live555"
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
- PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
-@@ -48,18 +50,13 @@ PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
- PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
- PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
- 
--do_configure() {
--    cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
--    ./bootstrap    
--    gnu-configize --force
--    libtoolize --force
--    #autoreconf --force -i
-+do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
--    oe_runconf
--    rm config.log
--    #sed -i -e s:-L/usr/lib:-L${STAGING_LIBDIR}/:g ${S}/vlc-config
--    sed -i -e s:'$(MOC) $(DEFS) $(CPPFLAGS)':'$(MOC) $(DEFS)'\ -I${S}/include\ -DSYS_LINUX:g ${S}/modules/gui/qt4/Makefile
--    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_SYS}-libtool:g ${S}/doltlibtool
-+}
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+new file mode 100644
+index 0000000..ae80745
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+@@ -0,0 +1,46 @@
++* The upstream tests for libgcrypt are awkward and not working.
++  - Requires libgcrypt-config, which seems broken?
++* AM_PATH_LIBGCRYPT exists for a reason, why not use it? KISS.
++* Upstream abandoned AM_PATH_LIBGCRYPT in the past...newer automake ok?
 +
-+do_configure_append() {
-+    sed -i -e s:'$(MOC) $(DEFS) $(CPPFLAGS)':'$(MOC) $(DEFS)'\ -I${B}/include\ -DSYS_LINUX:g ${B}/modules/gui/qt4/Makefile
-+    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_SYS}-libtool:g ${B}/doltlibtool
- }
- 
- # This recipe packages vlc as a library as well, so qt4 dependencies
++Upstream status: Pending
++
++Index: vlc-2.1.4/configure.ac
++===================================================================
++--- vlc-2.1.4.orig/configure.ac
+++++ vlc-2.1.4/configure.ac
++@@ -3940,25 +3940,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
++ dnl
++ dnl libgcrypt
++ dnl
+++GCRYPT_LIBVER=1
+++GCRYPT_REQ=1.1.94
++ AC_ARG_ENABLE(libgcrypt,
++   [  --disable-libgcrypt     gcrypt support (default enabled)])
++ AS_IF([test "${enable_libgcrypt}" != "no"], [
++-  AC_CHECK_DECL([GCRYCTL_SET_THREAD_CBS], [
++-    libgcrypt-config --version >/dev/null || \
++-        AC_MSG_ERROR([gcrypt.h present but libgcrypt-config could not be found])
++-    AC_CHECK_LIB(gcrypt, gcry_control, [
++-      have_libgcrypt="yes"
++-      GCRYPT_CFLAGS="`libgcrypt-config --cflags`"
++-      GCRYPT_LIBS="`libgcrypt-config --libs`"
++-    ], [
++-      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
++-    ], [`libgcrypt-config --libs`])
++-  ], [
++-    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
++-  ], [#include <gcrypt.h>]
++-  )
+++      AM_PATH_LIBGCRYPT($GCRYPT_LIBVER:$GCRYPT_REQ,
+++      [
+++          GCRYPT_CFLAGS="$LIBGCRYPT_CFLAGS"
+++          GCRYPT_LIBS="$LIBGCRYPT_LIBS"
+++      ],[
+++          AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
+++      ])
++ ])
++-
++ AC_SUBST(GCRYPT_CFLAGS)
++ AC_SUBST(GCRYPT_LIBS)
++ AM_CONDITIONAL([HAVE_GCRYPT], [test "${have_libgcrypt}" = "yes"])
 -- 
 1.9.3
 
