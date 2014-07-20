@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 60F1D703E9
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 62128705E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 13:54:30 +0000 (UTC)
-Received: by mail-we0-f176.google.com with SMTP id q58so6432657wes.21
+	Sun, 20 Jul 2014 14:23:28 +0000 (UTC)
+Received: by mail-lb0-f182.google.com with SMTP id z11so4115675lbi.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 06:54:31 -0700 (PDT)
+	Sun, 20 Jul 2014 07:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=KjY9Qv44rYgXiOZQK8bsZxwwVRhSr978wQdH44bDfNY=;
-	b=YMJ5ocs1V+EJseF/ovuzstrMx/EuEsZO+fV7F9oW+XSVEI7rlXveI1EXKTzhpdIiS3
-	mpZj8mH4sL+UViflNokuhPeBipZRyWA+x8TVsLhFsT+Qrb996I3N0uVWhrZ/tM8ab5+/
-	wEcdBlwoT2gekxmQDZATTJ73/LlEkQeDaoehX96f0nxBK9WBj6y0JZh3YlHGYmq5dDAH
-	OICbYeYSazlKROH6dP6pJVxr6Kgw9TeJ0lx9oY4hrd4e62zQdaLU2DgTvKNmL0fMtbWj
-	eoG7A+wzTqXoOqinpNfIrVNoQNnfKBtfE6aIQvI+Z+H2HWbtV3Iv1ZD6e6L0zFaf60tS
-	P6CQ==
-X-Received: by 10.194.83.39 with SMTP id n7mr13707996wjy.58.1405864471813;
-	Sun, 20 Jul 2014 06:54:31 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	sa4sm29854403wjb.45.2014.07.20.06.54.30 for <multiple recipients>
+	h=sender:from:to:subject:date:message-id;
+	bh=yYB0il2yNVwUjFsFVVJk+CvM4hhG+jjcVcibe6CEZyE=;
+	b=y4dLByMTLsTdbd1et7stlx9h5hOSTjhcR7puyF7ig4odJf37u3kQRlfxHDs/mpeOjC
+	lUhs7KeiJBT+KKokDjsN5nlXAWETtm+9dwHGE65DHDvN0dgzat1C33GA3kUr6feTkbbd
+	Kte8LVPX/5lqNAsN8Om8hVojWzFc+RTLCPwgEdXiTf4RHgWuTfcs/CB0Az6SPsm0+uDU
+	/ycmhUZ/wvkSH+JKNs5nFbb3eP5UCG32453uxFMjDzAgpoBcVqwOFEaFWhAQGIrf+q9g
+	c4ts8A8N4dLIJSh7f+EcofhfW+Vsk2T73gNfRZIPva87MjSUALUJJ7d4Gl9VV42Cdj97
+	F1oQ==
+X-Received: by 10.152.37.99 with SMTP id x3mr19152844laj.55.1405866208106;
+	Sun, 20 Jul 2014 07:23:28 -0700 (PDT)
+Received: from localhost.localdomain (89-253-118-72.customers.ownit.se.
+	[89.253.118.72])
+	by mx.google.com with ESMTPSA id oy1sm20071060lbb.4.2014.07.20.07.23.27
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 06:54:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 20 Jul 2014 15:54:45 +0200
+	Sun, 20 Jul 2014 07:23:27 -0700 (PDT)
+Sender: Jacob Kroon <jacob.kroon@gmail.com>
+From: Jacob Kroon <jacob.kroon@mikrodidakt.se>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140720135445.GY2433@jama>
-References: <1405864382-16942-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1405864382-16942-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][WIP][PATCH] ser2net: change file used in LIC_FILES_CHKSUM
+Date: Sun, 20 Jul 2014 16:21:57 +0200
+Message-Id: <1405866118-21641-1-git-send-email-jacob.kroon@mikrodidakt.se>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe][PATCH 1/2] liboauth: Add missing OpenSSL build dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,77 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 13:54:32 -0000
-X-Groupsio-MsgNum: 51114
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BzSjWsyRXn5FzoOl"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Jul 2014 14:23:29 -0000
 
---BzSjWsyRXn5FzoOl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes:
 
-On Sun, Jul 20, 2014 at 03:53:02PM +0200, Martin Jansa wrote:
-> * INSTALL file is automatically created by automake (now when it doesn't =
-have
->   implicit foreign) and it changed the md5 to d0697e131465c2bdd0af3b07a84=
-d2878
->   causing do_configure task to fail with:
->=20
->   ERROR: ser2net: md5 data is not matching for file://INSTALL;md5=3D0659e=
-b117294c490ae3853facd7a6ddd
->   ERROR: ser2net: The new md5 checksum is d0697e131465c2bdd0af3b07a84d2878
->=20
->   Use COPYING file which should be more stable.
->=20
-> * adding foreing automake flag is maybe more correct solution, I wonder
->   how many projects were changed like this, but silently (this failed
->   only thanks to INSTALL file being used in LIC_FILES_CHKSUM)
+| liboauth-1.0.3/src/hash.c:363:26: fatal error: openssl/hmac.h:
+|  No such file or directory
 
-Ross: ^ this is the kind of changes which I was concerned about on
-Friday, in this case it caused do_configure to fail, but who knows in
-how many cases it will silently change INSTALL/.. files
+Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+---
+ meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb b/meta=
--oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-> index 9877190..8fe6a6f 100644
-> --- a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-> +++ b/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-> @@ -3,7 +3,7 @@ SECTION =3D "console/network"
->  HOMEPAGE =3D "http://sourceforge.net/projects/ser2net/"
-> =20
->  LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://INSTALL;md5=3D0659eb117294c490ae3853facd7a6=
-ddd"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dbae3019b4c6dc4138c217864bd043=
-31f"
-> =20
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}=
-=2Etar.gz"
-> =20
-> --=20
-> 2.0.0
->=20
+diff --git a/meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb b/meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb
+index 2535b8e..3311da5 100644
+--- a/meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb
++++ b/meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb
+@@ -7,7 +7,7 @@ LICENSE = "MIT|GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING.MIT;md5=6266718a5241c045c8099d9be48817df \
+                     file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ SECTION = "libs"
+-DEPENDS = "curl"
++DEPENDS = "curl openssl"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}.tar.gz"
+ SRC_URI[md5sum] = "689b46c2b3ab1a39735ac33f714c4f7f"
+-- 
+1.9.3
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---BzSjWsyRXn5FzoOl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPLyiUACgkQN1Ujt2V2gBzaXwCgoUGeo7Yzzv7uMQjXL/T1zTxP
-vBIAoJ4/iKhE8cNIEKvxV5RKgJSOEVpg
-=hYGZ
------END PGP SIGNATURE-----
-
---BzSjWsyRXn5FzoOl--
