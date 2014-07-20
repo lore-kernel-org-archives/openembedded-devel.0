@@ -1,38 +1,35 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lb0-f172.google.com (mail-lb0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DD00705A8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F0EB7029C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 10:43:35 +0000 (UTC)
-Received: by mail-lb0-f172.google.com with SMTP id z11so4017461lbi.31
+	Sun, 20 Jul 2014 13:23:18 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id n3so2831003wiv.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 03:43:36 -0700 (PDT)
+	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=zmvWeiJP9GP5U4mP+c9RXs2rY5/vtxueVZgcNRCKLgY=;
-	b=WRVbYRTTl9pJKT6d02Z+y8au9SfyGs+Xi05qiV8UDcwT48hgW2uO++ukzfIjYWQfJM
-	yidc+2lTHe0DjKWIwp44zTyb/vWSds7TfAAtxKiP38Dq+2pBEKTkf/g20IVQ4ZxWk4Zw
-	zQn2orDEKDD7V5QvUQMWh+hYraflrach7w+SmatgVFRpgsVvN3IK0bNAGmtB9bORzhvE
-	8qFiazPzClJeF/0I8EGdOpG9DFL6SY6HJTr9CMNtSvuV7nvgihuS6GG1OvOPB8+bMiRZ
-	W2IG8RGyPBjAEjNpwus+BpMd9CsPtcdFzyrho46mOFn402JWIQML5PhwITeSPat8a26C
-	9RQQ==
-X-Received: by 10.152.198.195 with SMTP id je3mr18265807lac.59.1405853016234; 
-	Sun, 20 Jul 2014 03:43:36 -0700 (PDT)
-Received: from localhost.localdomain (89-253-118-72.customers.ownit.se.
-	[89.253.118.72])
-	by mx.google.com with ESMTPSA id t3sm3448934lby.22.2014.07.20.03.43.35
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=aQgMbvf3stGRjK3bD5e6ZsBpVnXk+nG0b3c8R2s5JCA=;
+	b=uPE/OC9L6bc6acaQQVXdFfCONmPV0zMGpLS1wWUrbmVQgxVPvRefkl/LhgwVmCdOf6
+	JMW9ZjDxZDHKw8CcsE8mrhXsCLeggkn6dfztSandlZz318g2WzV6U7P1sZJLKnAXETcf
+	NsNFIRLJKQ5NJp0FCePYqXX+6bjU9VTtQcwZdMMAXGJE9hRGX0gaf9z7Ncf6Kst1bDnE
+	PY9f/FGw1tQ92pulPHHnWfGPUOLSEKSJFEoUFzT0C3tww3q7CVbHKEjVb70o0VZDAgbb
+	VWfKECFMLVl8KENbIczM7pBfeG5wjjBDsj7MGbAiX0rIC3qcNvuqxtEvsW6ARTDj76nw
+	lPMw==
+X-Received: by 10.180.211.19 with SMTP id my19mr23950657wic.2.1405862599657;
+	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	fw4sm30052630wib.19.2014.07.20.06.23.18 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 03:43:35 -0700 (PDT)
-Sender: Jacob Kroon <jacob.kroon@gmail.com>
-From: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jul 2014 12:41:54 +0200
-Message-Id: <1405852914-4175-2-git-send-email-jacob.kroon@mikrodidakt.se>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1405852914-4175-1-git-send-email-jacob.kroon@mikrodidakt.se>
-References: <1405852914-4175-1-git-send-email-jacob.kroon@mikrodidakt.se>
-Subject: [meta-oe][PATCH 2/2] gnokii: Fix floating runtime dependencies
+Date: Sun, 20 Jul 2014 15:23:32 +0200
+Message-Id: <1405862612-11271-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-oe][WIP][PATCH] libxfce4ui: fix order of inherits
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 10:43:38 -0000
+X-List-Received-Date: Sun, 20 Jul 2014 13:23:20 -0000
 
-Add PACKAGECONFIG for bluez, libical, pcsc-lite, readline and usb.
+* we need gtk-doc before xfce-git, because gtk-doc needs configure.in or configure.ac
+  and the repository contains only configure.ac.in which is transformed into
+  configure.ac by autogen which is prepended to do_configure by xfce-git (so
+  this .bbclass needs to appear in inherit after gtk-doc to prepend autogen.sh
+  before gtkdocize call.
 
-Signed-off-by: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-index 356d5bd..4826452 100644
---- a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-+++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-@@ -9,6 +9,11 @@ DEPENDS = "glib-2.0"
- X11DEPENDS = " libxpm gtk+"
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+index 0582412..6534f94 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
++++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
+ DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
  
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG[bluez] = "--enable-bluetooth,--disable-bluetooth,bluez4"
-+PACKAGECONFIG[libical] = "--enable-libical,--disable-libical,libical"
-+PACKAGECONFIG[pcsc-lite] = "--enable-libpcsclite,--disable-libpcsclite,pcsc-lite"
-+PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
-+PACKAGECONFIG[usb] = "--enable-libusb,--disable-libusb,virtual/libusb0"
- PACKAGECONFIG[x11] = ",--without-x,${X11DEPENDS}"
+-inherit autotools gettext xfce xfce-git gtk-doc
++inherit autotools gettext gtk-doc xfce xfce-git
  
- inherit autotools pkgconfig
+ SRC_URI = " \
+     git://git.xfce.org/xfce/libxfce4ui;protocol=git \
 -- 
-1.9.3
+2.0.0
 
 
