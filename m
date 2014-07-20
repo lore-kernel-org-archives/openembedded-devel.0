@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F0EB7029C
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 207EB703E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 13:23:18 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id n3so2831003wiv.7
+	Sun, 20 Jul 2014 13:52:50 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id w61so6420671wes.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
+	Sun, 20 Jul 2014 06:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=aQgMbvf3stGRjK3bD5e6ZsBpVnXk+nG0b3c8R2s5JCA=;
-	b=uPE/OC9L6bc6acaQQVXdFfCONmPV0zMGpLS1wWUrbmVQgxVPvRefkl/LhgwVmCdOf6
-	JMW9ZjDxZDHKw8CcsE8mrhXsCLeggkn6dfztSandlZz318g2WzV6U7P1sZJLKnAXETcf
-	NsNFIRLJKQ5NJp0FCePYqXX+6bjU9VTtQcwZdMMAXGJE9hRGX0gaf9z7Ncf6Kst1bDnE
-	PY9f/FGw1tQ92pulPHHnWfGPUOLSEKSJFEoUFzT0C3tww3q7CVbHKEjVb70o0VZDAgbb
-	VWfKECFMLVl8KENbIczM7pBfeG5wjjBDsj7MGbAiX0rIC3qcNvuqxtEvsW6ARTDj76nw
-	lPMw==
-X-Received: by 10.180.211.19 with SMTP id my19mr23950657wic.2.1405862599657;
-	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
+	bh=Tn/QqRh0Gggoi9ZwAU+4abB0aZfO8lN3R4TD4zTYOmY=;
+	b=sRQeulYLx/Ka7boXVNDh+zbh1OoVVGhgmXmRasGRyJ8N5KNTyS6Hp1Pt0291phX51N
+	CL6CctnleNsvWtirCA8WIr/IfGx4hA7FED/fWfyicJLECGBrT+w6Q2/PKqADsMaalOVY
+	VB0COOjXocUb6seINh0fa+pdWZcAUE23UtnuPSRRJBfASWJdC4ywcAEC7rsni7Es03Qd
+	uSC91bKFoUqhJTA2qn/HO8l4S4EYTerQeJgkJHsBf2LVfu1Os6aeZhQJVVkdvEop0T8n
+	eL2DIvqkGVCFk1/V2GSL5frRWeHoEDUeR0o2gI1Meld4Rq9cpC7NPSuZO2HYAP7JZ+uq
+	kJcw==
+X-Received: by 10.194.90.106 with SMTP id bv10mr13788085wjb.20.1405864371100; 
+	Sun, 20 Jul 2014 06:52:51 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fw4sm30052630wib.19.2014.07.20.06.23.18 for <multiple recipients>
+	ko8sm3512885wjc.11.2014.07.20.06.52.50 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 06:23:19 -0700 (PDT)
+	Sun, 20 Jul 2014 06:52:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jul 2014 15:23:32 +0200
-Message-Id: <1405862612-11271-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 20 Jul 2014 15:53:02 +0200
+Message-Id: <1405864382-16942-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][WIP][PATCH] libxfce4ui: fix order of inherits
+Subject: [meta-oe][WIP][PATCH] ser2net: change file used in LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 13:23:20 -0000
+X-List-Received-Date: Sun, 20 Jul 2014 13:52:54 -0000
 
-* we need gtk-doc before xfce-git, because gtk-doc needs configure.in or configure.ac
-  and the repository contains only configure.ac.in which is transformed into
-  configure.ac by autogen which is prepended to do_configure by xfce-git (so
-  this .bbclass needs to appear in inherit after gtk-doc to prepend autogen.sh
-  before gtkdocize call.
+* INSTALL file is automatically created by automake (now when it doesn't have
+  implicit foreign) and it changed the md5 to d0697e131465c2bdd0af3b07a84d2878
+  causing do_configure task to fail with:
+
+  ERROR: ser2net: md5 data is not matching for file://INSTALL;md5=0659eb117294c490ae3853facd7a6ddd
+  ERROR: ser2net: The new md5 checksum is d0697e131465c2bdd0af3b07a84d2878
+
+  Use COPYING file which should be more stable.
+
+* adding foreing automake flag is maybe more correct solution, I wonder
+  how many projects were changed like this, but silently (this failed
+  only thanks to INSTALL file being used in LIC_FILES_CHKSUM)
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb | 2 +-
+ meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-index 0582412..6534f94 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.10.0.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
- DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
+index 9877190..8fe6a6f 100644
+--- a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
+@@ -3,7 +3,7 @@ SECTION = "console/network"
+ HOMEPAGE = "http://sourceforge.net/projects/ser2net/"
  
--inherit autotools gettext xfce xfce-git gtk-doc
-+inherit autotools gettext gtk-doc xfce xfce-git
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://INSTALL;md5=0659eb117294c490ae3853facd7a6ddd"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f"
  
- SRC_URI = " \
-     git://git.xfce.org/xfce/libxfce4ui;protocol=git \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
+ 
 -- 
 2.0.0
 
