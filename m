@@ -1,42 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
-	[74.125.82.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CBA6F6AC9D
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 79DD77037F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 09:49:19 +0000 (UTC)
-Received: by mail-we0-f169.google.com with SMTP id u56so6315602wes.0
+	Sun, 20 Jul 2014 09:49:56 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id w61so6346516wes.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 02:49:20 -0700 (PDT)
+	Sun, 20 Jul 2014 02:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=HxuX8FCUCxxV4CFpzrjOCZNm+TFx0vtFVeseOFwWp9g=;
-	b=FOhJN0XUohZWi7seO/pnuMnv+R7Bnob0kXPcwacIhbLkgs+lL9iqme2ASg0PL0VNNd
-	PUfMh37ykNE5Fkd4lT7ARsoVxsjbBtPZ9zK0Fyhcf/f2aWFTg5YLq0FmbMDvfrTdltHC
-	GtC8W0tMiVg4RANvjDYfi/SnAmp5K2y9pQ0RfpDb9QzGhCEYwACEflJKtpo4GqPnM8Ba
-	KNzdCjGQLu9OOuAPoNiB4JsiTHlSNzgBfvOD1cnLUGuS6z2XZ8DgpGQDhVu5S/ltoCN2
-	xijR7eM0wWvggEtPaXUqn4z2LH6LoF8Zg3bvCu7pDkAOVxw9Z24q4QUHf09C6Y6NtUmR
-	xKdA==
-X-Received: by 10.194.63.196 with SMTP id i4mr11871641wjs.50.1405849760098;
-	Sun, 20 Jul 2014 02:49:20 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=yr37hKUcv1oDRMMSImOi2K72ZPbGkczuzVoUTopmBhI=;
+	b=DqFEDzQfs3uwFS8zGdBK/HjJ7pmhla3jcP7a6R1y4G0jpFFm9P35+bhJEfiyEmOuK6
+	j6B3gjXqT9t/Ik8AHzu6G07nZt6zbe2yfEinYZ9LT9PzaCZtyDAI31hib/JKps3+2pcn
+	NQkr57/GmrU8EWVSG6DT2pwgUvK/g1JPoZ9g0BdA1tkHxMbYe0vmLE/5ctd6cPwW4K/5
+	B+InVLzd18E8Et+EyZl6sJycUV/KwVmPmRdKWC+mm+mjvkpdX6fpOT/RZAqk4/MfP57t
+	fNQWInL0suRkXkZsTAYgDMECmg0LaCONxB/LwIa0Z/PnKHFffFC4B54GkWk1Dh6n2TpW
+	CHLA==
+X-Received: by 10.180.84.7 with SMTP id u7mr9672303wiy.1.1405849797143;
+	Sun, 20 Jul 2014 02:49:57 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ub11sm28295036wib.1.2014.07.20.02.49.18
-	for <openembedded-devel@lists.openembedded.org>
+	da9sm28290488wib.5.2014.07.20.02.49.56 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 02:49:19 -0700 (PDT)
+	Sun, 20 Jul 2014 02:49:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 20 Jul 2014 11:49:33 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140720094933.GW2433@jama>
-References: <1405829260-13293-1-git-send-email-TicoTimo@gmail.com>
-	<1405829260-13293-5-git-send-email-TicoTimo@gmail.com>
-	<20140720081931.GU2433@jama>
-MIME-Version: 1.0
-In-Reply-To: <20140720081931.GU2433@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-multimedia][PATCH 4/4] vlc: add patches to fix B!=S and pkg-config
+Date: Sun, 20 Jul 2014 11:50:06 +0200
+Message-Id: <1405849809-30338-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.0
+Subject: [meta-oe][WIP][PATCH 1/4] gmtk: add missing dependency on intltool-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,70 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jul 2014 09:49:28 -0000
-X-Groupsio-MsgNum: 51105
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9JI8GIjjmo2K4enO"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 20 Jul 2014 09:49:57 -0000
 
---9JI8GIjjmo2K4enO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Sun, Jul 20, 2014 at 10:19:31AM +0200, Martin Jansa wrote:
-> On Sat, Jul 19, 2014 at 09:07:40PM -0700, Tim Orling wrote:
-> > Signed-off-by: Tim Orling <TicoTimo@gmail.com>
-> > ---
-> >  meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb b/meta=
--multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-> > index 46a2712..f9be48d 100644
-> > --- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-> > +++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-> > @@ -5,6 +5,8 @@ EXTRA_OECONF +=3D " --enable-libxml2=3Dno"
-> > =20
-> >  SRC_URI +=3D "file://0001-enable-subdir-objects.patch \
-> >              file://0002-glibc-does-not-provide-strlcpy.patch \
-> > +            file://0003-use-am-path-libgcrypt.patch \
-> > +            file://0004-modules-gui-qt4-out-of-tree-build.patch \
-> >  "
->=20
-> Please add this together with .patch file itself.
-
-nvm, I did that when cherry-picking to master-next
-
->=20
-> >  SRC_URI[md5sum] =3D "7ed67d22f7425011078772bfc62ac222"
-> > --=20
-> > 1.9.3
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
+index 7283409..4b4721b 100644
+--- a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
++++ b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-DEPENDS = "gtk+ alsa-lib glib-2.0 virtual/libx11"
++DEPENDS = "gtk+ alsa-lib glib-2.0 virtual/libx11 intltool-native"
+ 
+ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
+ SRC_URI[md5sum] = "e06e9ca8d61d74910343bb3ef4348f7f"
+-- 
+2.0.0
 
 
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---9JI8GIjjmo2K4enO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPLkK0ACgkQN1Ujt2V2gBzXEgCeKg0zITK8S2xeeLWBVwDz+qm6
-EToAmQFeLhH/tRS/RDStCNOMPnO5Znhp
-=07r5
------END PGP SIGNATURE-----
-
---9JI8GIjjmo2K4enO--
