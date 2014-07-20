@@ -1,43 +1,35 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 772C270260
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6347D6AC93
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jul 2014 21:13:20 +0000 (UTC)
-Received: by mail-ie0-f175.google.com with SMTP id x19so5508235ier.6
+	Sun, 20 Jul 2014 04:07:53 +0000 (UTC)
+Received: by mail-vc0-f172.google.com with SMTP id im17so9858030vcb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jul 2014 14:13:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=1By6ZXCQrukrWKwSe2XsBcPD1IKWtnJYUvnP9AcyjQ0=;
-	b=FqUoQws/S28bITr896TxhZNbcElcXIiEioeKY8dTLanyEJ9ozE6If3cmU6/Un2lpky
-	Tsiyhic2cqbI7U3yQ99QpSNfUvIfMGhmcdBXJpIGnNdHOuZaMTb6SEVIWf65mWDiyaN5
-	7cOmvblMfwuUo/CuXuGmYswCjUMwDrcnDn32ExiMGrLnnCzE+P/HkFLXKwdc859AkyZn
-	20oU01qUQXhpVepAZ0yLBzdSmArgH0EJu+IQ2V/Axg4qSHHwjFKjPYv19TWXXas5B2r0
-	eCa9opY887Brb36h3T4JQV70P9kgujY/Jt/eLZqjyYqvuFUs0/PgYomr6lzBz7gZTq1c
-	4aog==
-X-Gm-Message-State: ALoCoQlgIA9MUg3EgAWT8vJgXjqDYUFXPjlMkEacYEs0JMrnhSYE/g41PB8aMuSIAXAHRCLuacXR
-X-Received: by 10.50.137.71 with SMTP id qg7mr24258486igb.24.1405804401894;
-	Sat, 19 Jul 2014 14:13:21 -0700 (PDT)
-Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158]) by mx.google.com with ESMTPSA id
-	kk10sm20666919igb.19.2014.07.19.14.13.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 19 Jul 2014 14:13:21 -0700 (PDT)
-Message-ID: <53CADF70.8050201@linaro.org>
-Date: Sat, 19 Jul 2014 17:13:20 -0400
-From: Trevor Woerner <trevor.woerner@linaro.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
+	Sat, 19 Jul 2014 21:07:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=3RPXIefgG9mt8FT2Ye2onV98vzKttZvgfe5us2jsMxw=;
+	b=GqlzB0I6ekFvwuNnqMyBJXIDEeh6d7x3a0uphkXYOPVaQwOPdVHayf9PyS7j0KC/OO
+	KXgp04UUwLIDaeJamNBoxx76OAulneQItl8PitDSE/C+eqwggOCCAvQQK0xVEtk20aIA
+	Bw465m+tbEGswPVZ61c2b+40T92VCBY/hOFaLRvY4OY+ORmp7W2BjbffkQGCjKhDs6pM
+	uy8AxavEHet3Ni/Dzgj47+uMYII17gWRErMC02uK2jITe2ARpG5/2SVh5IveKrc366v8
+	QK9eY2xFEPzhHDtkM7pX0fj1i/krgMvdIIox1k/tjp6XGAmbGnUpsq7dzueeWeRVX+Uu
+	XomQ==
+X-Received: by 10.52.138.7 with SMTP id qm7mr15694612vdb.7.1405829274831;
+	Sat, 19 Jul 2014 21:07:54 -0700 (PDT)
+Received: from localhost.localdomain.com ([196.40.10.133])
+	by mx.google.com with ESMTPSA id n7sm2868785ven.1.2014.07.19.21.07.52
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Jul 2014 21:07:53 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.11.1407130825500.24436@localhost>
-In-Reply-To: <alpine.LFD.2.11.1407130825500.24436@localhost>
-Subject: Re: some questions about overriding tasks
+Date: Sat, 19 Jul 2014 21:07:36 -0700
+Message-Id: <1405829260-13293-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-multimedia][PATCH 0/4] vlc: B!=S and pkg-config friendly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,10 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jul 2014 21:13:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Jul 2014 04:07:56 -0000
 
-Maybe the following email thread will help?
-http://lists.openembedded.org/pipermail/openembedded-core/2013-October/085319.html
+* Cleanup do_configure, upstream is more autoreconf friendly
+* Inherit pkgconfig, upstream is more pkg-config friendly
+* Remove EXTRA_OECONF --enable-live555, add PACKAGE_CONFIGURE ?= "live555"
+
+Tim Orling (4):
+  vlc.inc: cleanup configure, inherit pkgconfig
+  vlc: use AM_PATH_LIBGCRYPT instead of libgcrypt-config
+  vlc: modules/gui/qt4/Modules.am not B!=S friendly
+  vlc: add patches to fix B!=S and pkg-config
+
+ meta-multimedia/recipes-multimedia/vlc/vlc.inc     | 33 +++++++---------
+ .../vlc/vlc/0003-use-am-path-libgcrypt.patch       | 46 ++++++++++++++++++++++
+ .../0004-modules-gui-qt4-out-of-tree-build.patch   | 17 ++++++++
+ .../recipes-multimedia/vlc/vlc_2.1.4.bb            |  2 +
+ 4 files changed, 80 insertions(+), 18 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0003-use-am-path-libgcrypt.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0004-modules-gui-qt4-out-of-tree-build.patch
+
+-- 
+1.9.3
+
 
