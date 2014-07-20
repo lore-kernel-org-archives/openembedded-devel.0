@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id BE2407036A
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8406E705A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 17:00:12 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id w62so6488590wes.8
+	Sun, 20 Jul 2014 17:00:13 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id x48so6722189wes.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 10:00:13 -0700 (PDT)
+	Sun, 20 Jul 2014 10:00:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=6f1XOg0V4iHulUMrvAVEpJ8jEDOuh/oNP990P+cGsVw=;
-	b=OiX9gPDzpQHhyFY71bLD1aXKB6L4tuOxagYaLIZsfyYs3UUH0rA07517CKZQ6ArrJr
-	Vra88i0OFy9Mwm8hfSHhg6ofdPh9gEx7uEt0CUH9sb/bfmj06uSaTbMSDTUkQ53ZLM0c
-	53AJTZa4v6CxoMSOB7XC16+4tl+ihNRvJxFi9ItShfj5t9B+T0tbSc18Wsv0+sRDLImi
-	eKwXbWFjFviDUvzvRh1v/1H1ksolgZEXkvaDdidQSISZlzExjxgoHLgrBYjWOYeD0p3f
-	l77siiTIQGagCDtPODF7NZuL7rggiLDfTS/3uW+QHyfvhowoxwXCu6mqu4KoZB+vUhCW
-	mEDQ==
-X-Received: by 10.180.36.18 with SMTP id m18mr25492448wij.74.1405875613835;
-	Sun, 20 Jul 2014 10:00:13 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=6nNW95eYwPaZnTOTskyEbLo+BUZTGBKy5BiqkYIvVgA=;
+	b=IDHxWldcaGzunBqf1eoGXyWxgrrSLpPjQziOoB6KzkHsuXDVdee93jRlN1+rr0gmZ3
+	KC5O/9m00l4PMYUyFZVqHEE6iJiWL5+asNQ5iGs9tqmIqvJsYuLSsfIcb1ScTRwKMBTa
+	34IJ9WPxhYrSH2tLyux+JMYlsyO9em1JK6vqy6lSgWAAsrZtHVrYnPGPNRuMfwlx6SlT
+	HkTfF622pn5HHqgNIPhdxzOohRuznVCcALAqMfbwmFhT+K9G3t/+FXWj0HXyvIHO9/1l
+	IwY4y4KC+LLf7nAZHSUrtzeBaHB7A66KsGG2catO8qXA+iJEK/OZghMePeNXeTm2kd3d
+	9mng==
+X-Received: by 10.180.206.134 with SMTP id lo6mr27403655wic.1.1405875615048;
+	Sun, 20 Jul 2014 10:00:15 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	au7sm30942570wjc.41.2014.07.20.10.00.12 for <multiple recipients>
+	ut2sm30929445wjc.49.2014.07.20.10.00.14 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 10:00:13 -0700 (PDT)
+	Sun, 20 Jul 2014 10:00:14 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Jul 2014 19:00:23 +0200
-Message-Id: <1405875626-8011-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 20 Jul 2014 19:00:24 +0200
+Message-Id: <1405875626-8011-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.0
-Subject: [meta-oe][WIP][PATCH 1/4] libebml: upgrade to 1.3.0 required by mkvtoolnix
+In-Reply-To: <1405875626-8011-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1405875626-8011-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][WIP][PATCH 2/4] libmatroska: upgrade to 1.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +47,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 20 Jul 2014 17:00:15 -0000
 
-* otherwise mkvtoolnix tries to use it's own internal git submodule with libebml
-  and fails when B!=S
-
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-mkv/libebml/{libebml_1.2.2.bb => libebml_1.3.0.bb}        | 4 ++--
+ .../libmatroska/{libmatroska_1.3.0.bb => libmatroska_1.4.0.bb}        | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-mkv/libebml/{libebml_1.2.2.bb => libebml_1.3.0.bb} (84%)
+ rename meta-multimedia/recipes-mkv/libmatroska/{libmatroska_1.3.0.bb => libmatroska_1.4.0.bb} (85%)
 
-diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
-similarity index 84%
-rename from meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
-rename to meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
-index eafbdb3..877e176 100644
---- a/meta-multimedia/recipes-mkv/libebml/libebml_1.2.2.bb
-+++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
-@@ -3,8 +3,8 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
+diff --git a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.3.0.bb b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
+similarity index 85%
+rename from meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.3.0.bb
+rename to meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
+index cedd283..9644e84 100644
+--- a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.3.0.bb
++++ b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
+ DEPENDS = "libebml"
  
- SRC_URI = "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2"
--SRC_URI[md5sum] = "726cc2bd1a525929ff35ff9854c0ebab"
--SRC_URI[sha256sum] = "476b08c6436a96c024a53e788e7c945ce9b41cd8654165763444aa7e5245b7a5"
-+SRC_URI[md5sum] = "efec729bf5a51e649e1d9d1f61c0ae7a"
-+SRC_URI[sha256sum] = "83b074d6b62715aa0080406ea84d33df2e44b5d874096640233a4db49b8096de"
+ SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "f4a8c411f09d39c754eb726efd616043"
+-SRC_URI[sha256sum] = "5231ec958571365e719a6fd3c220227af6cf0f14e0bd1bcf766ddbc068d18e69"
++SRC_URI[md5sum] = "5b83155019589b04a49f9db923b5bf74"
++SRC_URI[sha256sum] = "1b6d02e75cdbfb6d282dcf2a902a259c3075404885d5e8063e6652a2b3f6c11b"
  
  do_compile() {
      cd ${S}/make/linux
