@@ -1,36 +1,32 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-la0-f44.google.com (mail-la0-f44.google.com
-	[209.85.215.44])
-	by mail.openembedded.org (Postfix) with ESMTP id AAC7C65E2B
+Return-Path: <ben.shelton@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 94EA96028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 15:27:39 +0000 (UTC)
-Received: by mail-la0-f44.google.com with SMTP id e16so4972236lan.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 08:27:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=VvRYC/Oegb8mheEo50GAfBmhu9QEwxiCKdErjcqfZk4=;
-	b=N69sMd/P+U2PiUyAG9UC0UEJgZhaqTbF/xkWeFUgGNOTMDHtE42ZeF5RQXkSIEjDu+
-	cEQfQomXKbi1bNXmM3axuepTi91v3Hi0YTevJjD/FYq3/YGFejybbqXLhvmaJVnnKiQF
-	Gzvxa7FN4gpCpE8HHkImkXFATmyCDDR4NX6QfSMUD9gHJmr2pu2agm67j8aIhmf29a4I
-	tRhHDAer0/q2PHQEZe5qhN6nYimskYk9VyB11WcYaV9al9cK/XeVsB2TFg6RI+IjqQKN
-	7TD7qkOEuV1vjafqGYYI3A6gFFfo6wEhIGH4VN6WcUpjH34jt+gsLeV2Vpd9YMp1yOaI
-	A9lg==
-X-Received: by 10.152.204.102 with SMTP id kx6mr28089306lac.32.1405956459942; 
-	Mon, 21 Jul 2014 08:27:39 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.63.72 with HTTP; Mon, 21 Jul 2014 08:27:19 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.11.1407210555370.10857@localhost>
-References: <alpine.LFD.2.11.1407210555370.10857@localhost>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Mon, 21 Jul 2014 08:27:19 -0700
-X-Google-Sender-Auth: EER4l9Bk9myAw9VQkh3TDJecbMY
-Message-ID: <CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: i'm assuming some "do_<task>[dirs] =" directives are redundant, yes?
+	Mon, 21 Jul 2014 15:52:29 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
+	s6LFqS9u016414 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Jul 2014 10:52:28 -0500
+Received: from bshelton-desktop.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2014072110522891-32982 ;
+	Mon, 21 Jul 2014 10:52:28 -0500 
+From: Ben Shelton <ben.shelton@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 Jul 2014 10:52:07 -0500
+Message-Id: <1405957930-15362-1-git-send-email-ben.shelton@ni.com>
+X-Mailer: git-send-email 2.0.2
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 07/21/2014 10:52:28 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 07/21/2014 10:52:28 AM,
+	Serialize complete at 07/21/2014 10:52:28 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.12.52, 1.0.14,
+	0.0.0000
+	definitions=2014-07-20_03:2014-07-18, 2014-07-20,
+	1970-01-01 signatures=0
+Subject: [meta-oe][PATCH 1/4] syslog-ng: Move out of nonworking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,35 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 15:27:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Jul 2014 15:52:29 -0000
 
-On Mon, Jul 21, 2014 at 2:59 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-wrote:
+From: Richard Tollerton <rich.tollerton@ni.com>
 
->
->   pedantic observation -- i notice in base.bbclass:
->
-> do_unpack[dirs] = "${WORKDIR}"
->
->   and over in patch.bbclass:
->
-> addtask patch after do_unpack
-> do_patch[dirs] = "${WORKDIR}"
->
->   so given that patching has been added as a task after unpacking,
-> wouldn't ${WORKDIR} already be guaranteed to exist? doesn't hurt, of
-> course, and no, i have no intention of trying to clean any of that up
-> :-), i just wanted to clarify the actual mechanics.
+Signed-off-by: Richard Tollerton <rich.tollerton@ni.com>
+Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+---
+ meta-oe/recipes-support/{nonworking => }/syslog-ng/files/initscript     | 0
+ meta-oe/recipes-support/{nonworking => }/syslog-ng/files/syslog-ng.conf | 0
+ meta-oe/recipes-support/{nonworking => }/syslog-ng/syslog-ng.inc        | 0
+ meta-oe/recipes-support/{nonworking => }/syslog-ng/syslog-ng_3.2.5.bb   | 0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-support/{nonworking => }/syslog-ng/files/initscript (100%)
+ rename meta-oe/recipes-support/{nonworking => }/syslog-ng/files/syslog-ng.conf (100%)
+ rename meta-oe/recipes-support/{nonworking => }/syslog-ng/syslog-ng.inc (100%)
+ rename meta-oe/recipes-support/{nonworking => }/syslog-ng/syslog-ng_3.2.5.bb (100%)
 
-
-'dirs' isn't just a list of dirs to create, it also sets the current
-working directory for the task. The last directory listed is where the path
-is set.
+diff --git a/meta-oe/recipes-support/nonworking/syslog-ng/files/initscript b/meta-oe/recipes-support/syslog-ng/files/initscript
+similarity index 100%
+rename from meta-oe/recipes-support/nonworking/syslog-ng/files/initscript
+rename to meta-oe/recipes-support/syslog-ng/files/initscript
+diff --git a/meta-oe/recipes-support/nonworking/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+similarity index 100%
+rename from meta-oe/recipes-support/nonworking/syslog-ng/files/syslog-ng.conf
+rename to meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+diff --git a/meta-oe/recipes-support/nonworking/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+similarity index 100%
+rename from meta-oe/recipes-support/nonworking/syslog-ng/syslog-ng.inc
+rename to meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+diff --git a/meta-oe/recipes-support/nonworking/syslog-ng/syslog-ng_3.2.5.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.2.5.bb
+similarity index 100%
+rename from meta-oe/recipes-support/nonworking/syslog-ng/syslog-ng_3.2.5.bb
+rename to meta-oe/recipes-support/syslog-ng/syslog-ng_3.2.5.bb
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.0.2
+
 
