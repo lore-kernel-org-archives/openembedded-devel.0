@@ -1,35 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 56A5865CC9
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id CA2CC7051A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 22:29:31 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id ho1so4836791wib.4
+	Mon, 21 Jul 2014 22:29:33 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id n12so7278505wgh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 15:29:32 -0700 (PDT)
+	Mon, 21 Jul 2014 15:29:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=QKY5xVpBVmHPWpUYHrY3V/T5yJ7obYrvrl4ZpDpZIE4=;
-	b=S2iRhgcIX51Gp2pseWTfbHLrBRUeI4Xc012TuJnsd9YW5S6mqPDrR/Lff0fAsNY+7C
-	KyDUkFVLxJ36jgqiPTST81DKlFB9FUSzM3Q6q3iiHGx1kPxU1LozwkSpoUZpxGsanXnc
-	qnAuEW1TIu75A7bVGDup/0adwFC7zv2+pLOBNGe7e/Dgqt4zh0iuk8VrBg+/OX4dQ9Iq
-	iTWk3moCq4MrNAFbqhinK2GUcUuElji5oV4AHfllJ4V+Z8uMVgSBKPnkpJaaQOFZRf1m
-	i6FkA8ww/QqBY0p2VllRcSdqkCyIKcYWgDQK18lt87pHTT5WvKFaoSej2Vc1GhVLpVHt
-	FajA==
-X-Received: by 10.194.62.5 with SMTP id u5mr26690641wjr.46.1405981772923;
-	Mon, 21 Jul 2014 15:29:32 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=6teEcJ3D2hdphFrq5qoRw+Yv9XaiVNy8NKvFro415Ak=;
+	b=rOkOeJ2suhOy7mHJtku3304EN981+7Z5aeG89bSBik0UPVq2H5xe0kY3QM+2DKVVtg
+	zDssDzgo6ZhFZSVgSw2l1txmdJecvaCrfUR/Gvwah+ZvmQO8MO5n4O8HwKEV1WLKD+7a
+	Kpuld72lSCmzzkG5p8Nt3Rgv5QzhMj79Dv30tTZfnqgBCZWIxftzLqwQFAUXszrHTSZM
+	FERzRRd/W4SoQhwAKbEoynH8ZZGnmatVAmDEoYkkTD8C615PWXxS1FxpNPPnfhBeoD7t
+	O9kWjPnDC9by3/WDMkZQWewl4ZkqBXucDpvfxebSs0J4th20qmeh8SC/BPRbXn2RR4bu
+	oGtg==
+X-Received: by 10.180.75.230 with SMTP id f6mr8825019wiw.5.1405981774116;
+	Mon, 21 Jul 2014 15:29:34 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	jv9sm40765441wjc.28.2014.07.21.15.29.32 for <multiple recipients>
+	wi9sm40771488wjc.23.2014.07.21.15.29.33 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Jul 2014 15:29:32 -0700 (PDT)
+	Mon, 21 Jul 2014 15:29:33 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jul 2014 00:29:45 +0200
-Message-Id: <1405981786-9404-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 22 Jul 2014 00:29:46 +0200
+Message-Id: <1405981786-9404-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.2
-Subject: [meta-oe][PATCH 1/2] zeroc-ice: blacklist, because it's not compatible with default db-6* version
+In-Reply-To: <1405981786-9404-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1405981786-9404-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] lksctp-tools: blacklist because it fails to link against sctp_connectx symbol
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,30 +48,26 @@ X-List-Received-Date: Mon, 21 Jul 2014 22:29:34 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-index 79d8b5a..e39aa18 100644
---- a/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-+++ b/meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb
-@@ -10,6 +10,16 @@ SRC_URI = "http://www.zeroc.com/download/Ice/3.5/Ice-${PV}.tar.gz \
- SRC_URI[md5sum] = "f00c59983cc904bca977133c0a9b3e80"
- SRC_URI[sha256sum] = "989e51194c6adadbd156da3288e37bad847b93b3b876502e83033b70493af392"
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+index 102c2bb..e2551e1 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+@@ -12,6 +12,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
+ SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
+ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
  
-+#| MapDb.cpp: In constructor 'Freeze::MapDb::MapDb(const ConnectionIPtr&, const string&, const string&, const string&, const KeyCompareBasePtr&, const std::vector<IceUtil::Handle<Freeze::MapIndexBase> >&, bool)':
-+#| MapDb.cpp:138:46: error: call of overloaded 'set_bt_compare(int (*)(DB*, const DBT*, const DBT*))' is ambiguous
-+#| MapDb.cpp:138:46: note: candidates are:
-+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:272:14: note: virtual int Db::set_bt_compare(bt_compare_fcn_type) <near match>
-+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:272:14: note:   no known conversion for argument 1 from 'int (*)(DB*, const DBT*, const DBT*) {aka int (*)(__db*, const __db_dbt*, const __db_dbt*)}' to 'bt_compare_fcn_type {aka int (*)(__db*, const __db_dbt*, const __db_dbt*, long unsigned int*)}'
-+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:273:14: note: virtual int Db::set_bt_compare(int (*)(Db*, const Dbt*, const Dbt*, size_t*)) <near match>
-+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:273:14: note:   no known conversion for argument 1 from 'int (*)(DB*, const DBT*, const DBT*) {aka int (*)(__db*, const __db_dbt*, const __db_dbt*)}' to 'int (*)(Db*, const Dbt*, const Dbt*, size_t*) {aka int (*)(Db*, const Dbt*, const Dbt*, long unsigned int*)}'
-+#| make[3]: *** [MapDb.o] Error 1
-+PNBLACKLIST[zeroc-ice] = "BROKEN: not compatible with default db version"
++#| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc  -march=armv5te -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -shared  -fPIC -DPIC  .libs/bindx.o .libs/connectx.o .libs/peeloff.o .libs/opt_info.o .libs/addrs.o .libs/sendmsg.o .libs/recvmsg.o    -march=armv5te -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -O2 -Wl,--version-script=/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/lksctp-tools/1.0.16-r0/lksctp-tools-1.0.16/src/lib/Versions.map -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed   -Wl,-soname -Wl,libsctp.so.1 -o .libs/libsctp.so.1.0.16
++#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
++#| collect2: error: ld returned 1 exit status
++#| make[4]: *** [libsctp.la] Error 1
++PNBLACKLIST[lksctp-tools] = "BROKEN: fails to link against sctp_connectx symbol"
 +
- S = "${WORKDIR}/Ice-${PV}"
+ S = "${WORKDIR}/${BP}"
  
- inherit python-dir pkgconfig
+ BBCLASSEXTEND = "native"
 -- 
 2.0.2
 
