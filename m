@@ -1,20 +1,20 @@
 Return-Path: <dvhart@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F36065CC1
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AE1C65CC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 16:38:53 +0000 (UTC)
+	Mon, 21 Jul 2014 16:48:26 +0000 (UTC)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 21 Jul 2014 09:38:47 -0700
+	by orsmga102.jf.intel.com with ESMTP; 21 Jul 2014 09:42:48 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,702,1400050800"; d="scan'208";a="546715904"
+X-IronPort-AV: E=Sophos;i="5.01,702,1400050800"; d="scan'208";a="546721304"
 Received: from fear.jf.intel.com (HELO localhost) ([10.7.201.149])
-	by orsmga001.jf.intel.com with ESMTP; 21 Jul 2014 09:38:11 -0700
+	by orsmga001.jf.intel.com with ESMTP; 21 Jul 2014 09:48:26 -0700
 From: Darren Hart <dvhart@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jul 2014 16:37:46 +0000
-Message-Id: <492ad9c90e5dec4c274d2eda8a71ceced3cea4f2.1405960666.git.dvhart@linux.intel.com>
+Date: Mon, 21 Jul 2014 16:48:20 +0000
+Message-Id: <8ac84d2fa6e192a7452cab5814c5877dc104d7e2.1405961300.git.dvhart@linux.intel.com>
 X-Mailer: git-send-email 2.0.0
-Subject: [PATCH] i2c-tools: Remove i2c-tools, it's now in oe-core
+Subject: [PATCH] mercurial: Update mercurial to 3.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,131 +28,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 16:38:57 -0000
+X-List-Received-Date: Mon, 21 Jul 2014 16:48:32 -0000
 
-i2c-tools was added to oe-core in commit:
-32ac58819580d359e22161be1abf62215d202250
+Update the mercurial version to 3.0.1.
+Update the checksums.
+Remove the PR per current best-practice.
 
-Remove it from meta-openembedded.
+This resolves an issue with Mercurial 1.9 where fetching from behind a
+proxy breaks with a python stack trace. The current python
+httpconnection class no longer has the port setter method.
 
 Signed-off-by: Darren Hart <dvhart@linux.intel.com>
 ---
- .../i2c-tools/i2c-tools-3.1.0/Module.mk            | 72 ----------------------
- .../recipes-support/i2c-tools/i2c-tools_3.1.0.bb   | 26 --------
- 2 files changed, 98 deletions(-)
- delete mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk
- delete mode 100644 meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
+ .../mercurial/mercurial-native_1.9.bb              | 27 ----------------------
+ .../mercurial/mercurial-native_3.0.1.bb            | 26 +++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 27 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
+ create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
 
-diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk b/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
 deleted file mode 100644
-index fcaf72f..0000000
---- a/meta-oe/recipes-support/i2c-tools/i2c-tools-3.1.0/Module.mk
+index 516a9ec..0000000
+--- a/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
 +++ /dev/null
-@@ -1,72 +0,0 @@
--# EEPROMER
--#
--# Licensed under the GNU General Public License.
--
--EEPROMER_DIR	:= eepromer
--
--EEPROMER_CFLAGS	:= -Wstrict-prototypes -Wshadow -Wpointer-arith -Wcast-qual \
--		   -Wcast-align -Wwrite-strings -Wnested-externs -Winline \
--		   -W -Wundef -Wmissing-prototypes -Iinclude
--
--EEPROMER_TARGETS	:= eepromer eeprom eeprog
--
--#
--# Programs
--#
--
--$(EEPROMER_DIR)/eepromer: $(EEPROMER_DIR)/eepromer.o
--	$(CC) $(LDFLAGS) -o $@ $^
--
--$(EEPROMER_DIR)/eeprom: $(EEPROMER_DIR)/eeprom.o
--	$(CC) $(LDFLAGS) -o $@ $^
--
--$(EEPROMER_DIR)/eeprog: $(EEPROMER_DIR)/eeprog.o $(EEPROMER_DIR)/24cXX.o 
--	$(CC) $(LDFLAGS) -o $@ $^
--
--#
--# Objects
--#
--
--$(EEPROMER_DIR)/eepromer.o: $(EEPROMER_DIR)/eepromer.c
--	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
--
--$(EEPROMER_DIR)/eeprom.o: $(EEPROMER_DIR)/eeprom.c
--	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
--
--$(EEPROMER_DIR)/eeprog.o: $(EEPROMER_DIR)/eeprog.c
--	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
--
--$(EEPROMER_DIR)/24cXX.o: $(EEPROMER_DIR)/24cXX.c
--	$(CC) $(CFLAGS) $(EEPROMER_CFLAGS) -c $< -o $@
--
--#
--# Commands
--#
--
--all-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
--
--strip-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
--	strip $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
--
--clean-eepromer:
--	$(RM) $(addprefix $(EEPROMER_DIR)/,*.o $(EEPROMER_TARGETS))
--
--install-eepromer: $(addprefix $(EEPROMER_DIR)/,$(EEPROMER_TARGETS))
--	$(INSTALL_DIR) $(DESTDIR)$(sbindir) $(DESTDIR)$(man8dir)
--	for program in $(EEPROMER_TARGETS) ; do \
--	$(INSTALL_PROGRAM) $(EEPROMER_DIR)/$$program $(DESTDIR)$(sbindir) ; done
--
--uninstall-eepromer:
--	for program in $(EEPROMER_TARGETS) ; do \
--	$(RM) $(DESTDIR)$(sbindir)/$$program ; \
--	$(RM) $(DESTDIR)$(man8dir)/$$program.8 ; done
--
--all: all-eepromer
--
--strip: strip-eepromer
--
--clean: clean-eepromer
--
--install: install-eepromer
--
--uninstall: uninstall-eepromer
-diff --git a/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb b/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
-deleted file mode 100644
-index b8be9ed..0000000
---- a/meta-oe/recipes-support/i2c-tools/i2c-tools_3.1.0.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "Set of i2c tools for linux"
--SECTION = "base"
+@@ -1,27 +0,0 @@
+-SUMMARY = "The Mercurial distributed SCM"
+-HOMEPAGE = "http://mercurial.selenic.com/"
+-SECTION = "console/utils"
 -LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "python-native"
+-PR = "r2"
 -
--RDEPENDS_${PN} += "perl"
+-SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d4842129fa2732eb6ed1180467bc32e2"
+-SRC_URI[sha256sum] = "711e4b1cd2924a7a88499d6c431a9122390183bf554d4e153edbb3b2f30123e0"
 -
--SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/i2c-tools/i2c-tools-3.1.0.tar.bz2/f15019e559e378c6e9d5d6299a00df21/i2c-tools-${PV}.tar.bz2 \
--           file://Module.mk \
--"
--SRC_URI[md5sum] = "f15019e559e378c6e9d5d6299a00df21"
--SRC_URI[sha256sum] = "960023f61de292c6dd757fcedec4bffa7dd036e8594e24b26a706094ca4c142a"
+-S = "${WORKDIR}/mercurial-${PV}"
 -
--inherit autotools-brokensep
+-inherit native
 -
--do_compile_prepend() {
--    cp ${WORKDIR}/Module.mk ${S}/eepromer/
--    sed -i 's#/usr/local#/usr#' ${S}/Makefile
--    echo "include eepromer/Module.mk" >> ${S}/Makefile
+-EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+-    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
+-
+-do_configure_append () {
+-    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
 -}
 -
--do_install_append() {
--    install -d ${D}${includedir}/linux
--    install -m 0644 include/linux/i2c-dev.h ${D}${includedir}/linux/i2c-dev-user.h
--    rm -f ${D}${includedir}/linux/i2c-dev.h
+-do_install () {
+-    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
 -}
+-
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
+new file mode 100644
+index 0000000..9a5eebe
+--- /dev/null
++++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "The Mercurial distributed SCM"
++HOMEPAGE = "http://mercurial.selenic.com/"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "python-native"
++
++SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
++SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
++SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
++
++S = "${WORKDIR}/mercurial-${PV}"
++
++inherit native
++
++EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
++    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
++
++do_configure_append () {
++    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
++}
++
++do_install () {
++    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
++}
++
 -- 
 2.0.0
 
