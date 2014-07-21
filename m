@@ -1,24 +1,28 @@
 Return-Path: <wbx@uclibc-ng.org>
 Received: from helium.waldemar-brodkorb.de (helium.waldemar-brodkorb.de
 	[89.238.66.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A74161FE4
+	by mail.openembedded.org (Postfix) with ESMTP id 002E07022A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 19:23:50 +0000 (UTC)
+	Mon, 21 Jul 2014 19:35:22 +0000 (UTC)
 Received: by helium.waldemar-brodkorb.de (Postfix, from userid 1000)
-	id 4B11D104DE; Mon, 21 Jul 2014 21:23:49 +0200 (CEST)
-Date: Mon, 21 Jul 2014 21:23:49 +0200
+	id 41FD0104DE; Mon, 21 Jul 2014 21:35:23 +0200 (CEST)
+Date: Mon, 21 Jul 2014 21:35:23 +0200
 From: Waldemar Brodkorb <wbx@uclibc-ng.org>
 To: Florian Fainelli <f.fainelli@gmail.com>
-Message-ID: <20140721192348.GJ4431@waldemar-brodkorb.de>
+Message-ID: <20140721193522.GK4431@waldemar-brodkorb.de>
 References: <20140720191326.GD4431@waldemar-brodkorb.de>
 	<CAGVrzcZxcgP+yerqW=1ZDrmgiFmOz9eTwFB2KvZ6Xt2MJpbpDA@mail.gmail.com>
+	<20140721204239.61b225fe@free-electrons.com>
+	<CAGVrzcZja2DTrJGA2QWsMH=2GgUBuouSetK+-cUdXY7XbyA8SA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAGVrzcZxcgP+yerqW=1ZDrmgiFmOz9eTwFB2KvZ6Xt2MJpbpDA@mail.gmail.com>
+In-Reply-To: <CAGVrzcZja2DTrJGA2QWsMH=2GgUBuouSetK+-cUdXY7XbyA8SA@mail.gmail.com>
 X-Operating-System: Linux 3.2.0-4-amd64 x86_64
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openwrt-devel@openwrt.org, buildroot@buildroot.org,
-	openembedded-devel@lists.openembedded.org,
-	uclibc-mailing list <uclibc@uclibc.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>,
+	openwrt-devel <openwrt-devel@openwrt.org>,
+	uclibc-mailing list <uclibc@uclibc.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	buildroot <buildroot@buildroot.org>
 Subject: Re: [OpenWrt-Devel] uClibc-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -33,68 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 19:23:55 -0000
+X-List-Received-Date: Mon, 21 Jul 2014 19:35:26 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 
 Hi Florian,
 Florian Fainelli wrote,
 
-> Hello,
-> 
-> (adding uclibc and Bernhard)
-> 
-> 2014-07-20 12:13 GMT-07:00 Waldemar Brodkorb <wbx@uclibc-ng.org>:
-> > Hello Embedded Linux Hackers,
-> >
-> > it seems there is no plan to release a new uClibc version.
-> > The current maintainer does not response on any public or private mails
-> > about a plan to do a needed release. Therefore most of you carrying a lot
-> > of patches against uClibc 0.9.33.2 to make it work in your project.
-> > A really ugly situation.
-> 
-> Although I do welcome your action, and stepping in to offer a solution
-> to this, I feel like forking might have the potential of making this
-> situation worse, including, but not limited to:
-> 
-> - creating confusion between uclibc and uclibc-ng
+> To speak my mind, I think uClibc has no future in the next 2 or 3
+> years, musl is a much more active project, with multiple embedded
+> projects starting to use it, on the other end, (e)glibc has remedied
+> its own problems and its useful again.
 
-What kind of confusion. uClibc-ng frontpage clearly states it is a
-spin-off of uClibc.
+I am on your site here. But the 2-3 years must be become such a bad
+time for embedded users? 
+We already have separate repositories for ARC and NPTL support and for
+Xtensa and NPTL. We have different projects all using different
+patch sets on top of 0.9.33.x. Buildroot, OpenWrt, OpenEmbedded,
+Freetz, Bering-Uclibc, OpenADK, Aboriginal (musl switch is in work).
 
-> - pissing off Bernhard
-
-May be I am already pissed off by him? In the past I send a patch
-for mips64 n64 with no answer. After a ping a month later it got
-applied. A bug report about broken sparc support never got a
-response. Public mails of the buildroot project missing a release
-got ignored. A private mail from me to Eric and Bernhard, response
-from Eric that he is no longer involved, no answer from Bernhard.
-So the selective answers of Bernhard are a problem, at least for me.
-
-> - duplicating existing infrastructure instead of gaining access to it
-
-I asked Bernhard if he wants to give up maintainership.
-
-> - what if you end up in the same situation as uClibc, we all have busy lives?
-
-So what is the situation of uClibc? The problem is lack of
-communication. I would be fine if Bernhard would answer any mails
-regarding non-technical issues with uClibc. A short mail "I am busy,
-no release this year." would be at least a fair statement.
-Or "I am very busy, having a new job, can someone make a release?"
+I do not see such a bad split-off in musl. Why? Because musl have a 
+responsive and active maintainer. 
  
-> Thomas and I talked to Khem Raj about this uClibc situation during ELC
-> back in June, and Khem offered some help to see if we could:
-> 
-> - make Bernhard aware of the lack of release situation
-> - use his uclibc.org access to facilitate a 0.9.34? release
+> Bottom line is, I believe uClibc is a (relatively speaking) dead
+> project already, forking it might be useful to keep the existing user
+> base alive, but I expect all of them to transition to something active
+> and maintained, whether that's glibc or musl.
 
-Nothing happened. Should I whine another year on the mailinglist
-about a new release?
-As an old OpenBSD user I am following:
-Shutup and hack!
- 
+Sure, and that is totally okay for me. I just wanna make the
+existing userbase happy for the time, they can not switch to musl or
+glibc. Why not make the transition smooth?
+
 best regards
  Waldemar
+
 
