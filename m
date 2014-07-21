@@ -1,40 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A64A7020E
+Return-Path: <wbx@uclibc-ng.org>
+Received: from helium.waldemar-brodkorb.de (helium.waldemar-brodkorb.de
+	[89.238.66.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 24A17701AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 17:01:50 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so6730456wgh.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 10:01:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/lDThq5ua4CvwepA6If9ZZ2ozd/g7BHL9v5FP1TWSh0=;
-	b=mSSGXJ/RSSmsoEtxThqxgiVMJ+AcvoP12XSO7a3WRaGUBeeXYJZ5n8LTd5L3MXps+Z
-	eV5DF0EfegsARh5mfQSqL2HBIiXw8/DpQwA3CcqEU2o/rFAoLPCJdmfOYjQZAEf0sTRn
-	d51H0LxABQ831r/cLDHPybppe9CC67cYoA1FwRskD2LFVOv+BCiS23kJTHg3iyC/fCcO
-	BEvbSpyRaVia02oEXbnUZdBG7csgO/KopkeHBdVLjqWlroVoVPUgyujwezl0tvnxOPt1
-	/kqf4z+K+l0K/TGM43e8aeZMo1TBwLJ5nGgaVEvF9KRvsyDXNAY49NzMctH/ZfP3SxZH
-	/PzA==
-X-Received: by 10.180.38.51 with SMTP id d19mr6258896wik.10.1405962110560;
-	Mon, 21 Jul 2014 10:01:50 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	g8sm43854110wib.18.2014.07.21.10.01.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Jul 2014 10:01:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 21 Jul 2014 19:02:03 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140721170203.GK22875@jama>
-References: <1405957930-15362-1-git-send-email-ben.shelton@ni.com>
-	<1405957930-15362-4-git-send-email-ben.shelton@ni.com>
+	Mon, 21 Jul 2014 17:51:27 +0000 (UTC)
+Received: by helium.waldemar-brodkorb.de (Postfix, from userid 1000)
+	id 0B46B104DE; Mon, 21 Jul 2014 19:51:27 +0200 (CEST)
+Date: Mon, 21 Jul 2014 19:51:27 +0200
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+To: Sedat Dilek <sedat.dilek@gmail.com>
+Message-ID: <20140721175127.GI4431@waldemar-brodkorb.de>
+References: <20140720191326.GD4431@waldemar-brodkorb.de>
+	<CA+icZUWU7ApasykCEU=2O_+wNF7=QKP3LBEXLMjHcguwQbOS_g@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1405957930-15362-4-git-send-email-ben.shelton@ni.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 4/4] syslog-ng: Improved initscript VERBOSE handling.
+In-Reply-To: <CA+icZUWU7ApasykCEU=2O_+wNF7=QKP3LBEXLMjHcguwQbOS_g@mail.gmail.com>
+X-Operating-System: Linux 3.2.0-4-amd64 x86_64
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openwrt-devel@openwrt.org, openembedded-devel@lists.openembedded.org,
+	buildroot@buildroot.org
+Subject: Re: uClibc-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,80 +32,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 17:02:03 -0000
-X-Groupsio-MsgNum: 51153
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lCFQJunhLz1tFGpX"
+X-List-Received-Date: Mon, 21 Jul 2014 17:51:32 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 
---lCFQJunhLz1tFGpX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Sedat,
+Sedat Dilek wrote,
 
-On Mon, Jul 21, 2014 at 10:52:10AM -0500, Ben Shelton wrote:
-> From: Richard Tollerton <rich.tollerton@ni.com>
->=20
-> The messages echoed when starting and stopping syslog-ng are currently
-> printed regardless of the setting of VERBOSE.  Adjust the initscript so
-> they're only printed when VERBOSE is enabled.
+> On Sun, Jul 20, 2014 at 9:13 PM, Waldemar Brodkorb <wbx@uclibc-ng.org> wrote:
+> > Hello Embedded Linux Hackers,
+> >
+> > it seems there is no plan to release a new uClibc version.
+> > The current maintainer does not response on any public or private mails
+> > about a plan to do a needed release. Therefore most of you carrying a lot
+> > of patches against uClibc 0.9.33.2 to make it work in your project.
+> > A really ugly situation.
+> >
+> 
+> I have seen some patches got in uClibc upstream some weeks ago (-> inactivity).
 
-Can you please try to integrate fixes sent by RP?
+I didn't go so far to say uClibc is dead, it is just totally unclear
+when the next release is planned.
 
-Or add it as last commit in your series.
+> But anyway, a 1st try...
+> Look at OpenSSL and LibreSSL... Might be we see some competition or
+> rebirth starting here, too?
 
-> Signed-off-by: Richard Tollerton <rich.tollerton@ni.com>
-> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
-> ---
->  meta-oe/recipes-support/syslog-ng/files/initscript | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/syslog-ng/files/initscript b/meta-oe=
-/recipes-support/syslog-ng/files/initscript
-> index b95e8ad..014997b 100644
-> --- a/meta-oe/recipes-support/syslog-ng/files/initscript
-> +++ b/meta-oe/recipes-support/syslog-ng/files/initscript
-> @@ -11,14 +11,14 @@ test -x "$syslog_ng" || exit 0
-> =20
->  case "$1" in
->    start)
-> -    echo -n "Starting syslog-ng:"
-> +    [ "${VERBOSE}" !=3D "no" ] && echo -n "Starting syslog-ng:"
->      start-stop-daemon --start --quiet --exec $syslog_ng
-> -    echo "."
-> +    [ "${VERBOSE}" !=3D "no" ] && echo "."
->      ;;
->    stop)
-> -    echo -n "Stopping syslog-ng:"
-> +    [ "${VERBOSE}" !=3D "no" ] && echo -n "Stopping syslog-ng:"
->      start-stop-daemon --stop --quiet --pidfile /var/run/syslog-ng.pid
-> -    echo "."
-> +    [ "${VERBOSE}" !=3D "no" ] && echo "."
->      ;;
->    reload|force-reload)
->      start-stop-daemon --stop --quiet --signal 1 --exec $syslog_ng
-> --=20
-> 2.0.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Dunno, time will show.
+ 
+> My POV (from my experiences) is most embedded projects are not really
+> interested in upstream work or keep their own patches (this seems to
+> be easier).
+> An example:
+> Recently, I pointed to [0], but the maintainer of the project did not
+> give any feedback to Bernd (requested a simple S-o-b).
+> What I want to say it is not only a problem of the uClibc maintainer :-).
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+I think most embedded projects try to push their local patches to
+upstream. At least buildroot does it a lot and I try to do it if
+time permits. In your example the uClibc maintainer could also just
+add the patch and mention where he has got it from. Or should the
+known bug should just be ignored, because of a missing S-o-b?
+ 
+> From my experiences successful projects do regular releases (6 months
+> or a year).
+> What are your plans?
 
---lCFQJunhLz1tFGpX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+A good mantra: Release early, release often.
+I have no plans doing regular releases every static time period.
+Just if it make sense.
+ 
+> > To get out of this situation I started a spin-off called uClibc-ng.
+> > The website for the project is here: http://www.uclibc-ng.org
+> > Beta 3 is tagged and downloadable via
+> > http://downloads.uclibc-ng.org/uClibc-ng-1.0.0beta3.tar.xz
+> >
+> 
+> Do you plan a browsable Git website, where someone can look at the
+> source via webbrowser?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Trac has it included:
+http://www.uclibc-ng.org/browser/uClibc-ng
+Or:
+http://www.openadk.org/cgi-bin/gitweb.cgi?p=uClibc-ng.git;a=summary
+ 
+> OK, you have now an infrastructure...
+> Do you have people (developers, users) behind you :-)?
 
-iEYEARECAAYFAlPNR4sACgkQN1Ujt2V2gByyDwCgtEFVtebJxD5myOwFJa3j7GGY
-wIUAoKjbKXIlW8rw70HBXPpuXEpg/tlA
-=Ucpo
------END PGP SIGNATURE-----
+No. Just me. I am using it for my OpenADK project. I published the
+stuff so others might benefit from it. Some buildroot and OpenWrt
+devs were interested.
+ 
+> > If you want a 1.0 in the near future please test and report back any
+> > issues. You can use the bug tracker, the mailing list or dicussion forum
+> > to report back. To prevent spam you need to be subscribed or registered.
+> >
+> > I have added most of the patches from your projects on top of uClibc
+> > master.
+> >
+> 
+> Did you look also at the patches [1] from the Freetz project?
 
---lCFQJunhLz1tFGpX--
+Yes. I wanted to inform the freetz project, but I didn't find a
+mailinglist or the mail adresses of the main contributors.
+Most of the patches are either backports from git master or from
+OpenWrt. I hope the rest might get contributed by the freetz people
+with some meta-information, what kind of problem is fixed by a
+patch.
+
+best regards
+ Waldemar
+ 
+
