@@ -1,46 +1,46 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 796F470538
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 9316170247
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 03:47:14 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id at20so6123084iec.8
+	Mon, 21 Jul 2014 03:56:02 +0000 (UTC)
+Received: by mail-ie0-f171.google.com with SMTP id at1so6427773iec.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 20:47:16 -0700 (PDT)
+	Sun, 20 Jul 2014 20:56:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=rgf/FthCsqidHepefRwKGutJqwUqbmk7fgBsh3i80No=;
-	b=GiSWgQ512DV25bQmlP7Cv882hqUnLwW4Ypnu/Vyf4ntB1chrWTLf+KA2RmNFItPzsF
-	umbWhAc0rP5P+b1DpRc3VRWRp+yzwKRYao/Iqm0CLxvlWHh4tP4n5R7KiuEqIvHtaDpA
-	imrc72f/RJftxXkg22D9WNCICASEjv9l9eAE2zvUrAnlQ0EkTb2sjvHZkTnySAobUPRa
-	W7rDKyewRTW2fSRoFyKL+Nzispu6/J6q/EkVZxFjWA1WEkOb3MDdZVyOXaGI4iv3c+3Q
-	Z/ldw5milz4/AOETuwDLLN57mBpTFfkaZalgJIGNVCOHFqBWE0a6jH2Cbu//OLiKASVZ
-	kLVg==
-X-Gm-Message-State: ALoCoQlZCeISeigrymCWu8fmUZYeUJp1y0COPjY5P70trPLPhespXIlNrKJvXlqAyobvyI6kAVT6
-X-Received: by 10.42.80.208 with SMTP id w16mr8964082ick.83.1405914436090;
-	Sun, 20 Jul 2014 20:47:16 -0700 (PDT)
+	bh=SVpOoz+dzMEjaEoGLSlPmwOklvGWF+m/0VSNbxdiTY0=;
+	b=iQqgSpQAPLxyY5qbOlvlhZ1lxN2+VGwkicUejh7nNvaS/9afNU2Qy5KW34WU2o7AtM
+	nrtH1S4D3Ria7D3u/OaXzpLVUe5WtT/YzdSgchZHve8h3MxCCboypu/t59MymYNrI7mZ
+	RILGvIvi4dCUv/qkD0tuZF45q7sxAro6hFTmbC9wmW/pm7x5AcmPuQ9PvVC3UkRPtnY2
+	Od8KekX7nzOmaL+uaEIsVXbcMx+4Fx0X082iPwUuaeOea0N7Cui2JjT63s1y/lvI10sr
+	SeuV8rKhCvnXYg5mAAE7r9IO8/xL6AaQnwQKlwQpxYHRt5QS4zNiaaTJoJz19rZvqZQR
+	/pDw==
+X-Gm-Message-State: ALoCoQmL7M2jEaHUI8fPVQy7bKzcXIUd+uC2LpX3v7DG1UMIL3T5Cv05JDYDwxSdbmFkCC4waT1l
+X-Received: by 10.50.79.169 with SMTP id k9mr439915igx.0.1405914963484;
+	Sun, 20 Jul 2014 20:56:03 -0700 (PDT)
 Received: from skynet (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id d2sm3035385igl.6.2014.07.20.20.47.15
+	by mx.google.com with ESMTPSA id v8sm34754735igh.19.2014.07.20.20.56.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 20:47:15 -0700 (PDT)
+	Sun, 20 Jul 2014 20:56:02 -0700 (PDT)
 Received: by skynet (Postfix, from userid 1000)
-	id A069B1685E3; Sun, 20 Jul 2014 23:47:14 -0400 (EDT)
-Date: Sun, 20 Jul 2014 23:47:14 -0400
+	id BF8121685E3; Sun, 20 Jul 2014 23:56:01 -0400 (EDT)
+Date: Sun, 20 Jul 2014 23:56:01 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140721034713.GB11616@deserted.net>
-References: <1404805877-7423-1-git-send-email-rongqing.li@windriver.com>
+Message-ID: <20140721035559.GC11616@deserted.net>
+References: <1404978317-2680-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1404805877-7423-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1404978317-2680-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH] tnftp: add tnftp recipes file
+Subject: Re: [meta-networking][PATCH] tcpslice: add recipe under tcpdump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,130 +54,214 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 03:47:19 -0000
-X-Groupsio-MsgNum: 51135
+X-List-Received-Date: Mon, 21 Jul 2014 03:56:04 -0000
+X-Groupsio-MsgNum: 51136
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="CUfgB8w4ZwR/yMy5"
+	protocol="application/pgp-signature"; boundary="6zdv2QT/q3FMhpsV"
 Content-Disposition: inline
 
---CUfgB8w4ZwR/yMy5
+--6zdv2QT/q3FMhpsV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks Roy.
+Hi Roy,
+
+I'm not taking this one right now, I can't tell quite what the state of
+it is.  I wasn't able to find a place on $HOMEPAGE to download the
+source (though I only spent a couple of minutes looking, since obviously
+the download link is live) but the license is a bit hairy.  You can't
+point at ${COMMON_LICENSE_DIR} as the file to use for your checksum
+since that's not part of the source.  I had a quick look at a few of the
+source files and it looks like a 3 Clause BSD license for everything,
+but since there's not an obvious top-level LICENSE file, you probably
+need to confirm that all of the source is covered by the same license
+before we go anywhere with it.  That it doesn't appear to have been
+touched in close to a decade, source-wise, suggests to me it's either
+perfectly clean or below everyone's radar (more likely the latter).
+
+Also, can you update the recipe to use variables where appropriate -- I
+guess just in SRC_URI, since it's so simple -- when you sort out the
+redistribution status?
 
 -J.
 
-[[oe] [meta-networking][PATCH] tnftp: add tnftp recipes file] On 14.07.08 (=
-Tue 15:51) rongqing.li@windriver.com wrote:
+[[oe] [meta-networking][PATCH] tcpslice: add recipe under tcpdump] On 14.07=
+=2E10 (Thu 15:45) rongqing.li@windriver.com wrote:
 
 > From: Roy Li <rongqing.li@windriver.com>
 >=20
+> tcpslice is a tool for extracting parts of a tcpdump packet trace,
+> so put it under tcpdump dir
+>=20
 > Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../tnftp/tnftp/tnftp-autotools.patch              |   42 ++++++++++++++=
+>  .../tcpdump/tcpslice/tcpslice-1.2a3-time.patch     |   75 ++++++++++++++=
 ++++++
->  .../recipes-support/tnftp/tnftp_20130505.bb        |   33 +++++++++++++++
->  2 files changed, 75 insertions(+)
->  create mode 100644 meta-networking/recipes-support/tnftp/tnftp/tnftp-aut=
-otools.patch
->  create mode 100644 meta-networking/recipes-support/tnftp/tnftp_20130505.=
-bb
+>  .../tcpslice/tcpslice-CVS.20010207-bpf.patch       |   15 ++++
+>  .../recipes-support/tcpdump/tcpslice_1.2a3.bb      |   35 +++++++++
+>  3 files changed, 125 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcps=
+lice-1.2a3-time.patch
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcps=
+lice-CVS.20010207-bpf.patch
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice_1.2a=
+3.bb
 >=20
-> diff --git a/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.=
-patch b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.=
+2a3-time.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-=
+1.2a3-time.patch
 > new file mode 100644
-> index 0000000..1bda576
+> index 0000000..a86f6d2
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
-> @@ -0,0 +1,42 @@
-> +[PATCH] Update configure.ac and Makefile.am to resolve warnings/errors
-> +
-> +Upstream-Status: Pending
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-tim=
+e.patch
+> @@ -0,0 +1,75 @@
+> +Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
 > +
 > +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +---
-> + configure.ac          |    2 ++
-> + libnetbsd/Makefile.am |    2 +-
-> + 2 files changed, 3 insertions(+), 1 deletion(-)
 > +
-> +diff --git a/configure.ac b/configure.ac
-> +index a96d2ab..b3b3069 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -71,9 +71,11 @@ AH_TEMPLATE([WITH_SSL],
-> + #
-> + # Checks for programs.
-> + #
-> ++AM_PROG_AR()
-> + AC_PROG_CC()
-> + AC_PROG_AWK()
-> + AC_PROG_LIBTOOL()
-> ++AM_PROG_CC_C_O()
+> +--- tcpslice-1.2a3.orig/search.c	2000-09-10 10:52:40.000000000 +0200
+> ++++ tcpslice-1.2a3/search.c	2006-07-28 14:56:55.000000000 +0200
+> +@@ -53,7 +53,7 @@
+> + /* Size of a packet header in bytes; easier than typing the sizeof() all
+> +  * the time ...
+> +  */
+> +-#define PACKET_HDR_LEN (sizeof( struct pcap_pkthdr ))
+> ++#define PACKET_HDR_LEN (sizeof( struct pcap_sf_pkthdr ))
 > +=20
-> + #
-> + # Checks for tool features.
-> +diff --git a/libnetbsd/Makefile.am b/libnetbsd/Makefile.am
-> +index 3e5c3ce..39bb12d 100644
-> +--- a/libnetbsd/Makefile.am
-> ++++ b/libnetbsd/Makefile.am
-> +@@ -5,7 +5,7 @@ noinst_LTLIBRARIES =3D libnetbsd.la
-> + libnetbsd_la_SOURCES =3D
+> + extern int snaplen;
+> +=20
+> +@@ -111,16 +111,24 @@
+> + static void
+> + extract_header( pcap_t *p, u_char *buf, struct pcap_pkthdr *hdr )
+> + 	{
+> +-	memcpy((char *) hdr, (char *) buf, sizeof(struct pcap_pkthdr));
+> ++	struct pcap_sf_pkthdr hdri;
+> ++
+> ++	memcpy((char *) &hdri, (char *) buf, sizeof(struct pcap_sf_pkthdr));
+> +=20
+> + 	if ( pcap_is_swapped( p ) )
+> + 		{
+> +-		hdr->ts.tv_sec =3D SWAPLONG(hdr->ts.tv_sec);
+> +-		hdr->ts.tv_usec =3D SWAPLONG(hdr->ts.tv_usec);
+> +-		hdr->len =3D SWAPLONG(hdr->len);
+> +-		hdr->caplen =3D SWAPLONG(hdr->caplen);
+> ++		hdr->ts.tv_sec =3D SWAPLONG(hdri.ts.tv_sec);
+> ++		hdr->ts.tv_usec =3D SWAPLONG(hdri.ts.tv_usec);
+> ++		hdr->len =3D SWAPLONG(hdri.len);
+> ++		hdr->caplen =3D SWAPLONG(hdri.caplen);
+> ++		}
+> ++	else
+> ++		{
+> ++		hdr->ts.tv_sec =3D hdri.ts.tv_sec;
+> ++		hdr->ts.tv_usec =3D hdri.ts.tv_usec;
+> ++		hdr->len =3D hdri.len;
+> ++		hdr->caplen =3D hdri.caplen;
+> + 		}
+> +-
+> + 	/*
+> + 	 * From bpf/libpcap/savefile.c:
+> + 	 *
+> +--- tcpslice-1.2a3.orig/tcpslice.h	1995-11-02 00:40:53.000000000 +0100
+> ++++ tcpslice-1.2a3/tcpslice.h	2006-07-28 14:56:55.000000000 +0200
+> +@@ -20,6 +20,26 @@
+> +  */
 > +=20
 > +=20
-> +-CPPFLAGS =3D \
-> ++AM_CPPFLAGS =3D \
-> + 	-I$(srcdir) \
-> + 	-I$(top_srcdir) \
-> + 	-I$(top_builddir)
-> +--=20
-> +1.7.10.4
-> +
-> diff --git a/meta-networking/recipes-support/tnftp/tnftp_20130505.bb b/me=
-ta-networking/recipes-support/tnftp/tnftp_20130505.bb
+> ++#include <time.h>
+> ++/* #include <net/bpf.h> */
+> ++
+> ++/*
+> ++ * This is a timeval as stored in disk in a dumpfile.
+> ++ * It has to use the same types everywhere, independent of the actual
+> ++ * `struct timeval'
+> ++ */
+> ++                                                                       =
+        =20
+> ++struct pcap_timeval {
+> ++    bpf_int32 tv_sec;           /* seconds */
+> ++    bpf_int32 tv_usec;          /* microseconds */
+> ++};
+> ++
+> ++struct pcap_sf_pkthdr {
+> ++    struct pcap_timeval ts;     /* time stamp */
+> ++    bpf_u_int32 caplen;         /* length of portion present */
+> ++    bpf_u_int32 len;            /* length this packet (off wire) */
+> ++};
+> ++
+> + time_t	gwtm2secs( struct tm *tm );
+> +=20
+> + int	sf_find_end( struct pcap *p, struct timeval *first_timestamp,
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CV=
+S.20010207-bpf.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcp=
+slice-CVS.20010207-bpf.patch
 > new file mode 100644
-> index 0000000..80690c5
+> index 0000000..0a73593
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/tnftp/tnftp_20130505.bb
-> @@ -0,0 +1,33 @@
-> +SUMMARY =3D "Enhanced NetBSD ftp client"
-> +DESCRIPTION =3D "tnftp (formerly known as lukemftp) is a port of the Net=
-BSD FTP client \
-> +to other systems. It offers many enhancements over the traditional \
-> +BSD FTP client, including command-line editing, command-line fetches \
-> +of FTP and HTTP URLs (including via proxies), command-line uploads of \
-> +FTP URLs, context-sensitive word completion, dynamic progress bar, \
-> +IPv6 support, modification time preservation, paging of local and \
-> +remote files, passive mode support (with fallback to active mode), \
-> +SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
-> +throttling."
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010=
+207-bpf.patch
+> @@ -0,0 +1,15 @@
+> +Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
 > +
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +diff -ur tcpdump-3.8.1/tcpslice/tcpslice.c tcpdump-3.8.1.new/tcpslice/tc=
+pslice.c
+> +--- tcpslice/tcpslice.c	2004-01-15 17:35:53.000000000 +0100
+> ++++ tcpslice/tcpslice.c	2004-01-15 16:12:57.000000000 +0100
+> +@@ -35,7 +35,7 @@
+> + #include <sys/file.h>
+> + #include <sys/stat.h>
+> +=20
+> +-#include <net/bpf.h>
+> ++/* #include <net/bpf.h> */
+> +=20
+> + #include <ctype.h>
+> + #ifdef HAVE_FCNTL_H
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb b/=
+meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+> new file mode 100644
+> index 0000000..0b47da6
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+> @@ -0,0 +1,35 @@
+> +SUMMARY =3D "tcpslice"
+> +DESCRIPTION =3D "A tool for extracting parts of a tcpdump packet trace."
+> +HOMEPAGE =3D "http://ee.lbl.gov"
 > +SECTION =3D "console/network"
-> +LICENSE =3D "BSD-4-Clause"
 > +
-> +DEPENDS =3D "ncurses"
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/BSD;md5=3D3775480a712=
+fc46a69647678acb234cb"=20
 > +
-> +SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar=
-=2Egz \
-> +	   file://tnftp-autotools.patch \
-> +	  "
+> +SRC_URI =3D "ftp://ftp.ee.lbl.gov/tcpslice-1.2a3.tar.gz \
+> +           file://tcpslice-1.2a3-time.patch \
+> +           file://tcpslice-CVS.20010207-bpf.patch \
+> +           "
+> +SRC_URI[md5sum] =3D "e329cbeb7e589f132d92c3447c477190"
+> +SRC_URI[sha256sum] =3D "4096e8debc898cfaa16b5306f1c42f8d18b19e30e60da8d4=
+deb781c8f684c840"
 > +
-> +inherit autotools update-alternatives
+> +inherit autotools-brokensep
 > +
-> +ALTERNATIVE_PRIORITY =3D "100"
+> +DEPENDS +=3D "libpcap"
 > +
-> +ALTERNATIVE_${PN} =3D "ftp"
-> +ALTERNATIVE_LINK_NAME_${PN} =3D "${bindir}/ftp"
-> +ALTERNATIVE_TARGET_${PN}  =3D "${bindir}/tnftp"
+> +# We do not want to autoreconf.  We must specify srcdir as ".".
+> +# We have to set the ac_cv_* cache variables as well as pass the normal
+> +# cross-compilation options to configure!
+> +#
+> +do_configure () {
+> +	oe_runconf \
+> +            --srcdir=3D"." \
+> +            ac_cv_build=3D${BUILD_SYS} \
+> +            ac_cv_host=3D${HOST_SYS} \
+> +            ac_cv_target=3D${HOST_SYS}
+> +}
 > +
-> +FILES_${PN} =3D "${bindir}/tnftp"
+> +do_install_prepend () {
+> +	mkdir -p ${D}/usr/sbin
+> +}
 > +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6d6796cb166a9bb050958241dad94=
-79e"
-> +SRC_URI[md5sum] =3D "66e218d02ec7d9fc39ab70ba2900305a"
-> +SRC_URI[sha256sum] =3D "6f650e25f6fd51538f677b789b49379f367ae9f1dee74c94=
-cfe24d92abc2cffb"
 > --=20
 > 1.7.10.4
 >=20
@@ -185,16 +269,16 @@ cfe24d92abc2cffb"
 -Joe MacDonald.
 :wq
 
---CUfgB8w4ZwR/yMy5
+--6zdv2QT/q3FMhpsV
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlPMjUEACgkQwFvcllog0XyYEQCguc5aXD6jsPfagsH/OGrnsJMu
-8b0An1GA5BT2aE7SdXuUaQ3nkITD2uaW
-=H4lb
+iEYEARECAAYFAlPMj08ACgkQwFvcllog0XxHlACgtj32p+8khKCZqdQ4f9WJXwWQ
+038An2U1nAlIhwFDpnieaDseWKEvrmb3
+=1KpS
 -----END PGP SIGNATURE-----
 
---CUfgB8w4ZwR/yMy5--
+--6zdv2QT/q3FMhpsV--
