@@ -1,46 +1,46 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F78B70298
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 796F470538
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 03:46:51 +0000 (UTC)
-Received: by mail-ig0-f174.google.com with SMTP id c1so2414993igq.13
+	Mon, 21 Jul 2014 03:47:14 +0000 (UTC)
+Received: by mail-ie0-f177.google.com with SMTP id at20so6123084iec.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jul 2014 20:46:52 -0700 (PDT)
+	Sun, 20 Jul 2014 20:47:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:subject:message-id:references
 	:mime-version:content-type:content-disposition:in-reply-to
 	:user-agent;
-	bh=Zo9xctcteqEzfm74djMDRNN+XBAqUG4ohiCErp1L+rc=;
-	b=aC5tM+DcghrRkaI5wczjrrBX+cMo3IRMdj1XW+4y4Ir/+W2a0ogYdSoLQVMiZoIhmu
-	FYFcjBs2NQtLqGb3sZeKn0eizHE9+lTgkZXjehW8OhJjKHRQKNA3IIuviwcxmTLhuH/C
-	6RzY/2qejG6uvz4K/3j0S/VQpH8KuIwl+SFgTgKUJ7yvM/ZiJEuen2G8dgMNp7sTSWjg
-	kkFfdWxR4SgAOOrgsOuHR4h4cF5sG+eOOzysphBnAnmbcUhGBXfsScoMwiJO+cG9XALj
-	YpNXzl1LzpBSopdwkUkHq59e32G8IHSa/uX7idgaRwJz2Bmi+dFz5CF+dAkVUsC5dyvh
-	jIaQ==
-X-Gm-Message-State: ALoCoQmxC7hdbgeQ4y0+OdkXiCDng9SSkKwh9j2paTtwCnMPogdkJ3lB1QF8RszjD8GYmtPfnJpl
-X-Received: by 10.42.207.68 with SMTP id fx4mr9198414icb.67.1405914412694;
-	Sun, 20 Jul 2014 20:46:52 -0700 (PDT)
+	bh=rgf/FthCsqidHepefRwKGutJqwUqbmk7fgBsh3i80No=;
+	b=GiSWgQ512DV25bQmlP7Cv882hqUnLwW4Ypnu/Vyf4ntB1chrWTLf+KA2RmNFItPzsF
+	umbWhAc0rP5P+b1DpRc3VRWRp+yzwKRYao/Iqm0CLxvlWHh4tP4n5R7KiuEqIvHtaDpA
+	imrc72f/RJftxXkg22D9WNCICASEjv9l9eAE2zvUrAnlQ0EkTb2sjvHZkTnySAobUPRa
+	W7rDKyewRTW2fSRoFyKL+Nzispu6/J6q/EkVZxFjWA1WEkOb3MDdZVyOXaGI4iv3c+3Q
+	Z/ldw5milz4/AOETuwDLLN57mBpTFfkaZalgJIGNVCOHFqBWE0a6jH2Cbu//OLiKASVZ
+	kLVg==
+X-Gm-Message-State: ALoCoQlZCeISeigrymCWu8fmUZYeUJp1y0COPjY5P70trPLPhespXIlNrKJvXlqAyobvyI6kAVT6
+X-Received: by 10.42.80.208 with SMTP id w16mr8964082ick.83.1405914436090;
+	Sun, 20 Jul 2014 20:47:16 -0700 (PDT)
 Received: from skynet (24-246-4-250.cable.teksavvy.com. [24.246.4.250])
-	by mx.google.com with ESMTPSA id l5sm34723284ige.6.2014.07.20.20.46.51
+	by mx.google.com with ESMTPSA id d2sm3035385igl.6.2014.07.20.20.47.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 Jul 2014 20:46:52 -0700 (PDT)
+	Sun, 20 Jul 2014 20:47:15 -0700 (PDT)
 Received: by skynet (Postfix, from userid 1000)
-	id 2C18A1685E3; Sun, 20 Jul 2014 23:46:51 -0400 (EDT)
-Date: Sun, 20 Jul 2014 23:46:51 -0400
+	id A069B1685E3; Sun, 20 Jul 2014 23:47:14 -0400 (EDT)
+Date: Sun, 20 Jul 2014 23:47:14 -0400
 From: Joe MacDonald <joe@deserted.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140721034649.GA11616@deserted.net>
-References: <1404796847-22332-1-git-send-email-rongqing.li@windriver.com>
+Message-ID: <20140721034713.GB11616@deserted.net>
+References: <1404805877-7423-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1404796847-22332-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1404805877-7423-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH][meta-networking] Uprev tcpdump to 4.5.1
+Subject: Re: [meta-networking][PATCH] tnftp: add tnftp recipes file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,13 +54,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 03:46:55 -0000
-X-Groupsio-MsgNum: 51134
+X-List-Received-Date: Mon, 21 Jul 2014 03:47:19 -0000
+X-Groupsio-MsgNum: 51135
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tThc/1wpZn/ma/RB"
+	protocol="application/pgp-signature"; boundary="CUfgB8w4ZwR/yMy5"
 Content-Disposition: inline
 
---tThc/1wpZn/ma/RB
+--CUfgB8w4ZwR/yMy5
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -69,302 +69,115 @@ Merged, thanks Roy.
 
 -J.
 
-[[oe] [PATCH][meta-networking] Uprev tcpdump to 4.5.1] On 14.07.08 (Tue 13:=
-20) rongqing.li@windriver.com wrote:
+[[oe] [meta-networking][PATCH] tnftp: add tnftp recipes file] On 14.07.08 (=
+Tue 15:51) rongqing.li@windriver.com wrote:
 
-> From: Roy Li <rongqing.li@windriver.com>=20
->=20
-> 1. update the patch tcpdump_configure_no_-O2.patch
-> 2. do not check libdlpi dependence on cross-compile, or else it will
-> cause do_qa_configure to fail.
-> 3. do not check libpcap dependence, since the libpcap has been added
-> into DEPENDS, or else it will cause do_qa_configure to fail
-> 4. make the check of getaddrinfo work on cross-compile
+> From: Roy Li <rongqing.li@windriver.com>
 >=20
 > Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../0001-minimal-IEEE802.15.4-allowed.patch        |    0
->  .../{tcpdump-4.3.0 =3D> files}/configure.patch       |    0
->  .../{tcpdump-4.3.0 =3D> files}/ipv6-cross.patch      |    0
->  .../tcpdump/files/tcpdump-configure-dlpi.patch     |   31 +++++++++++++++
->  .../tcpdump/files/tcpdump-cross-getaddrinfo.patch  |   23 +++++++++++
->  .../tcpdump/files/tcpdump_configure_no_-O2.patch   |   27 +++++++++++++
->  .../files/unnecessary-to-check-libpcap.patch       |   33 +++++++++++++++
->  .../tcpdump-4.3.0/tcpdump_configure_no_-O2.patch   |   42 --------------=
-------
->  .../tcpdump/{tcpdump_4.3.0.bb =3D> tcpdump_4.5.1.bb} |    8 +++-
->  9 files changed, 120 insertions(+), 44 deletions(-)
->  rename meta-networking/recipes-support/tcpdump/{tcpdump-4.3.0 =3D> files=
-}/0001-minimal-IEEE802.15.4-allowed.patch (100%)
->  rename meta-networking/recipes-support/tcpdump/{tcpdump-4.3.0 =3D> files=
-}/configure.patch (100%)
->  rename meta-networking/recipes-support/tcpdump/{tcpdump-4.3.0 =3D> files=
-}/ipv6-cross.patch (100%)
->  create mode 100644 meta-networking/recipes-support/tcpdump/files/tcpdump=
--configure-dlpi.patch
->  create mode 100644 meta-networking/recipes-support/tcpdump/files/tcpdump=
--cross-getaddrinfo.patch
->  create mode 100644 meta-networking/recipes-support/tcpdump/files/tcpdump=
-_configure_no_-O2.patch
->  create mode 100644 meta-networking/recipes-support/tcpdump/files/unneces=
-sary-to-check-libpcap.patch
->  delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.3.0=
-/tcpdump_configure_no_-O2.patch
->  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.3.0.bb =3D> tc=
-pdump_4.5.1.bb} (80%)
+>  .../tnftp/tnftp/tnftp-autotools.patch              |   42 ++++++++++++++=
+++++++
+>  .../recipes-support/tnftp/tnftp_20130505.bb        |   33 +++++++++++++++
+>  2 files changed, 75 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/tnftp/tnftp/tnftp-aut=
+otools.patch
+>  create mode 100644 meta-networking/recipes-support/tnftp/tnftp_20130505.=
+bb
 >=20
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-m=
-inimal-IEEE802.15.4-allowed.patch b/meta-networking/recipes-support/tcpdump=
-/files/0001-minimal-IEEE802.15.4-allowed.patch
-> similarity index 100%
-> rename from meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/0001-mi=
-nimal-IEEE802.15.4-allowed.patch
-> rename to meta-networking/recipes-support/tcpdump/files/0001-minimal-IEEE=
-802.15.4-allowed.patch
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/config=
-ure.patch b/meta-networking/recipes-support/tcpdump/files/configure.patch
-> similarity index 100%
-> rename from meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/configu=
-re.patch
-> rename to meta-networking/recipes-support/tcpdump/files/configure.patch
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-c=
-ross.patch b/meta-networking/recipes-support/tcpdump/files/ipv6-cross.patch
-> similarity index 100%
-> rename from meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/ipv6-cr=
-oss.patch
-> rename to meta-networking/recipes-support/tcpdump/files/ipv6-cross.patch
-> diff --git a/meta-networking/recipes-support/tcpdump/files/tcpdump-config=
-ure-dlpi.patch b/meta-networking/recipes-support/tcpdump/files/tcpdump-conf=
-igure-dlpi.patch
+> diff --git a/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.=
+patch b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
 > new file mode 100644
-> index 0000000..50e2d54
+> index 0000000..1bda576
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/tcpdump/files/tcpdump-configure-dlp=
-i.patch
-> @@ -0,0 +1,31 @@
-> +[PATCH] tcpdump: cross-compiling not check dlpi.
-> +
-> +For cross-compiling on Linux platforms, we do not need to check libdlpi=
-=20
-> +since it is only placed on Solaris.
-> +Also, checking libdlpi in native /lib would cause do_qa_configure fail.
-> +
-> +Upstream-Status: Pending.
-> +
-> +Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
-> +---
-> + configure.in |    4 +++-
-> + 1 files changed, 3 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/configure.in b/configure.in
-> +index 7f9591c..ca277c0 100644
-> +--- a/configure.in
-> ++++ b/configure.in
-> +@@ -716,7 +716,9 @@ don't.])
-> + fi
-> +=20
-> + # libdlpi is needed for Solaris 11 and later.
-> +-AC_CHECK_LIB(dlpi, dlpi_walk, LIBS=3D"$LIBS -ldlpi" LDFLAGS=3D"-L/lib $=
-LDFLAGS", ,-L/lib)
-> ++if test "$cross_compiling" !=3D yes; then
-> ++	AC_CHECK_LIB(dlpi, dlpi_walk, LIBS=3D"$LIBS -ldlpi" LDFLAGS=3D"-L/lib =
-$LDFLAGS", ,-L/lib)
-> ++fi
-> +=20
-> + dnl portability macros for getaddrinfo/getnameinfo
-> + dnl
-> +--=20
-> +1.7.5.4
-> +
-> diff --git a/meta-networking/recipes-support/tcpdump/files/tcpdump-cross-=
-getaddrinfo.patch b/meta-networking/recipes-support/tcpdump/files/tcpdump-c=
-ross-getaddrinfo.patch
-> new file mode 100644
-> index 0000000..b414b72
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tcpdump/files/tcpdump-cross-getaddr=
-info.patch
-> @@ -0,0 +1,23 @@
-> +Fix getaddinfo check when cross compiling
-> +
-> +Upstream-Status: Pending.
-> +
-> +AC_TRY_RUN defaults to td_cv_buggygetaddrinfo=3Dyes when
-> +cross-compiling. So this change indicates that we
-> +are cross-compiling.
-> +
-> +Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
-> +
-> +diff --git a/configure.in b/configure.in
-> +index ca277c0..283035e 100644
-> +--- a/configure.in
-> ++++ b/configure.in
-> +@@ -434,7 +434,7 @@ main()
-> + ],
-> + 	td_cv_buggygetaddrinfo=3Dno,
-> + 	td_cv_buggygetaddrinfo=3Dyes,
-> +-	td_cv_buggygetaddrinfo=3Dyes)])
-> ++	td_cv_buggygetaddrinfo=3Dcross)])
-> + 	if test "$td_cv_buggygetaddrinfo" =3D no; then
-> + 		AC_MSG_RESULT(good)
-> + 	else
-> diff --git a/meta-networking/recipes-support/tcpdump/files/tcpdump_config=
-ure_no_-O2.patch b/meta-networking/recipes-support/tcpdump/files/tcpdump_co=
-nfigure_no_-O2.patch
-> new file mode 100644
-> index 0000000..b2296bc
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tcpdump/files/tcpdump_configure_no_=
--O2.patch
-> @@ -0,0 +1,27 @@
-> +---
-> + configure |    4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/configure b/configure
-> +index 468a517..a890728 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -3036,13 +3036,13 @@ if test "$ac_test_CFLAGS" =3D set; then
-> +   CFLAGS=3D$ac_save_CFLAGS
-> + elif test $ac_cv_prog_cc_g =3D yes; then
-> +   if test "$GCC" =3D yes; then
-> +-    CFLAGS=3D"-g -O2"
-> ++    CFLAGS=3D"-g"
-> +   else
-> +     CFLAGS=3D"-g"
-> +   fi
-> + else
-> +   if test "$GCC" =3D yes; then
-> +-    CFLAGS=3D"-O2"
-> ++    CFLAGS=3D
-> +   else
-> +     CFLAGS=3D
-> +   fi
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-networking/recipes-support/tcpdump/files/unnecessary-to=
--check-libpcap.patch b/meta-networking/recipes-support/tcpdump/files/unnece=
-ssary-to-check-libpcap.patch
-> new file mode 100644
-> index 0000000..d7a3ac2
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tcpdump/files/unnecessary-to-check-=
-libpcap.patch
-> @@ -0,0 +1,33 @@
-> +unnecessary to check libpcap
+> +++ b/meta-networking/recipes-support/tnftp/tnftp/tnftp-autotools.patch
+> @@ -0,0 +1,42 @@
+> +[PATCH] Update configure.ac and Makefile.am to resolve warnings/errors
 > +
 > +Upstream-Status: Pending
 > +
-> +since the check of libpcap did not consider the cross-compile, lead to t=
-he
-> +below error:
-> +	This autoconf log indicates errors, it looked at host include and/or
-> +	library paths while determining system capabilities.
-> +
-> +In fact, the libpcap has been added into the tcpdump's DEPENDS, not need=
- to
-> +check if libpcap existed.
-> +
 > +Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > +---
-> + configure.in |    2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> + configure.ac          |    2 ++
+> + libnetbsd/Makefile.am |    2 +-
+> + 2 files changed, 3 insertions(+), 1 deletion(-)
 > +
-> +diff --git a/configure.in b/configure.in
-> +index 06fade1..9125de7 100644
-> +--- a/configure.in
-> ++++ b/configure.in
-> +@@ -567,7 +567,7 @@ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-> + dnl AC_CHECK_LIB(z, uncompress)
-> + dnl AC_CHECK_HEADERS(zlib.h)
-> +=20
-> +-AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
-> ++#AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
+> +diff --git a/configure.ac b/configure.ac
+> +index a96d2ab..b3b3069 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -71,9 +71,11 @@ AH_TEMPLATE([WITH_SSL],
+> + #
+> + # Checks for programs.
+> + #
+> ++AM_PROG_AR()
+> + AC_PROG_CC()
+> + AC_PROG_AWK()
+> + AC_PROG_LIBTOOL()
+> ++AM_PROG_CC_C_O()
 > +=20
 > + #
-> + # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
+> + # Checks for tool features.
+> +diff --git a/libnetbsd/Makefile.am b/libnetbsd/Makefile.am
+> +index 3e5c3ce..39bb12d 100644
+> +--- a/libnetbsd/Makefile.am
+> ++++ b/libnetbsd/Makefile.am
+> +@@ -5,7 +5,7 @@ noinst_LTLIBRARIES =3D libnetbsd.la
+> + libnetbsd_la_SOURCES =3D
+> +=20
+> +=20
+> +-CPPFLAGS =3D \
+> ++AM_CPPFLAGS =3D \
+> + 	-I$(srcdir) \
+> + 	-I$(top_srcdir) \
+> + 	-I$(top_builddir)
 > +--=20
-> +1.7.9.5
+> +1.7.10.4
 > +
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdum=
-p_configure_no_-O2.patch b/meta-networking/recipes-support/tcpdump/tcpdump-=
-4.3.0/tcpdump_configure_no_-O2.patch
-> deleted file mode 100644
-> index 7929da5..0000000
-> --- a/meta-networking/recipes-support/tcpdump/tcpdump-4.3.0/tcpdump_confi=
-gure_no_-O2.patch
-> +++ /dev/null
-> @@ -1,42 +0,0 @@
-> ----
-> - configure |    8 ++++----
-> - 1 files changed, 4 insertions(+), 4 deletions(-)
-> -
-> -diff --git a/configure b/configure
-> -index cb51d19..73d51af 100755
-> ---- a/configure
-> -+++ b/configure
-> -@@ -2691,13 +2691,13 @@ if test "$ac_test_CFLAGS" =3D set; then
-> -   CFLAGS=3D$ac_save_CFLAGS
-> - elif test $ac_cv_prog_cc_g =3D yes; then
-> -   if test "$GCC" =3D yes; then
-> --    CFLAGS=3D"-g -O2"
-> -+    CFLAGS=3D"-g"
-> -   else
-> -     CFLAGS=3D"-g"
-> -   fi
-> - else
-> -   if test "$GCC" =3D yes; then
-> --    CFLAGS=3D"-O2"
-> -+    CFLAGS=3D""
-> -   else
-> -     CFLAGS=3D
-> -   fi
-> -@@ -2830,7 +2830,7 @@ ac_compiler_gnu=3D$ac_cv_c_compiler_gnu
-> -     if test "$GCC" =3D yes ; then
-> - 	    if test "$SHLICC2" =3D yes ; then
-> - 		    ac_cv_lbl_gcc_vers=3D2
-> --		    V_CCOPT=3D"-O2"
-> -+		    V_CCOPT=3D""
-> - 	    else
-> - 		    { echo "$as_me:$LINENO: checking gcc version" >&5
-> - echo $ECHO_N "checking gcc version... $ECHO_C" >&6; }
-> -@@ -2847,7 +2847,7 @@ fi
-> - 		    { echo "$as_me:$LINENO: result: $ac_cv_lbl_gcc_vers" >&5
-> - echo "${ECHO_T}$ac_cv_lbl_gcc_vers" >&6; }
-> - 		    if test $ac_cv_lbl_gcc_vers -gt 1 ; then
-> --			    V_CCOPT=3D"-O2"
-> -+			    V_CCOPT=3D""
-> - 		    fi
-> - 	    fi
-> -     else
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb b/m=
-eta-networking/recipes-support/tcpdump/tcpdump_4.5.1.bb
-> similarity index 80%
-> rename from meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-> rename to meta-networking/recipes-support/tcpdump/tcpdump_4.5.1.bb
-> index 0d88990..9ce02d6 100644
-> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.3.0.bb
-> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.5.1.bb
-> @@ -11,9 +11,13 @@ SRC_URI =3D " \
->      file://0001-minimal-IEEE802.15.4-allowed.patch \
->      file://ipv6-cross.patch \
->      file://configure.patch \
-> +    file://unnecessary-to-check-libpcap.patch \
-> +    file://tcpdump-configure-dlpi.patch \
-> +    file://tcpdump-cross-getaddrinfo.patch \
->  "
-> -SRC_URI[md5sum] =3D "a3fe4d30ac85ff5467c889ff46b7e1e8"
-> -SRC_URI[sha256sum] =3D "efd08b610210d39977ec3175fa82dad9fbd33587930081be=
-2a905a712dba4286"
-> +SRC_URI[md5sum] =3D "973a2513d0076e34aa9da7e15ed98e1b"
-> +SRC_URI[sha256sum] =3D "14ab39657128f3a650aed4cf455f76c7590601087b6101c2=
-53d698f6e73f0b96"
-> +export LIBS=3D" -lpcap"
-> =20
->  inherit autotools-brokensep
->  CACHED_CONFIGUREVARS =3D "ac_cv_linux_vers=3D${ac_cv_linux_vers=3D2}"
+> diff --git a/meta-networking/recipes-support/tnftp/tnftp_20130505.bb b/me=
+ta-networking/recipes-support/tnftp/tnftp_20130505.bb
+> new file mode 100644
+> index 0000000..80690c5
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tnftp/tnftp_20130505.bb
+> @@ -0,0 +1,33 @@
+> +SUMMARY =3D "Enhanced NetBSD ftp client"
+> +DESCRIPTION =3D "tnftp (formerly known as lukemftp) is a port of the Net=
+BSD FTP client \
+> +to other systems. It offers many enhancements over the traditional \
+> +BSD FTP client, including command-line editing, command-line fetches \
+> +of FTP and HTTP URLs (including via proxies), command-line uploads of \
+> +FTP URLs, context-sensitive word completion, dynamic progress bar, \
+> +IPv6 support, modification time preservation, paging of local and \
+> +remote files, passive mode support (with fallback to active mode), \
+> +SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
+> +throttling."
+> +
+> +SECTION =3D "console/network"
+> +LICENSE =3D "BSD-4-Clause"
+> +
+> +DEPENDS =3D "ncurses"
+> +
+> +SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar=
+=2Egz \
+> +	   file://tnftp-autotools.patch \
+> +	  "
+> +
+> +inherit autotools update-alternatives
+> +
+> +ALTERNATIVE_PRIORITY =3D "100"
+> +
+> +ALTERNATIVE_${PN} =3D "ftp"
+> +ALTERNATIVE_LINK_NAME_${PN} =3D "${bindir}/ftp"
+> +ALTERNATIVE_TARGET_${PN}  =3D "${bindir}/tnftp"
+> +
+> +FILES_${PN} =3D "${bindir}/tnftp"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6d6796cb166a9bb050958241dad94=
+79e"
+> +SRC_URI[md5sum] =3D "66e218d02ec7d9fc39ab70ba2900305a"
+> +SRC_URI[sha256sum] =3D "6f650e25f6fd51538f677b789b49379f367ae9f1dee74c94=
+cfe24d92abc2cffb"
 > --=20
 > 1.7.10.4
 >=20
@@ -372,16 +185,16 @@ eta-networking/recipes-support/tcpdump/tcpdump_4.5.1.bb
 -Joe MacDonald.
 :wq
 
---tThc/1wpZn/ma/RB
+--CUfgB8w4ZwR/yMy5
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlPMjSkACgkQwFvcllog0XyvEQCfaRWJr93wQ0W/yCiEz+0CMHR8
-fEAAn1Wb531ShRFGt0+XJ+C1/iDva0SB
-=NFlO
+iEYEARECAAYFAlPMjUEACgkQwFvcllog0XyYEQCguc5aXD6jsPfagsH/OGrnsJMu
+8b0An1GA5BT2aE7SdXuUaQ3nkITD2uaW
+=H4lb
 -----END PGP SIGNATURE-----
 
---tThc/1wpZn/ma/RB--
+--CUfgB8w4ZwR/yMy5--
