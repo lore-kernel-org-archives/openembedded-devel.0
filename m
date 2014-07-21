@@ -1,20 +1,24 @@
-Return-Path: <dvhart@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AE1C65CC1
+Return-Path: <wbx@uclibc-ng.org>
+Received: from helium.waldemar-brodkorb.de (helium.waldemar-brodkorb.de
+	[89.238.66.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F91570233
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 16:48:26 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 21 Jul 2014 09:42:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,702,1400050800"; d="scan'208";a="546721304"
-Received: from fear.jf.intel.com (HELO localhost) ([10.7.201.149])
-	by orsmga001.jf.intel.com with ESMTP; 21 Jul 2014 09:48:26 -0700
-From: Darren Hart <dvhart@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jul 2014 16:48:20 +0000
-Message-Id: <8ac84d2fa6e192a7452cab5814c5877dc104d7e2.1405961300.git.dvhart@linux.intel.com>
-X-Mailer: git-send-email 2.0.0
-Subject: [PATCH] mercurial: Update mercurial to 3.0.1
+	Mon, 21 Jul 2014 16:55:51 +0000 (UTC)
+Received: by helium.waldemar-brodkorb.de (Postfix, from userid 1000)
+	id 10426104DE; Mon, 21 Jul 2014 18:55:51 +0200 (CEST)
+Date: Mon, 21 Jul 2014 18:55:51 +0200
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+To: Thomas De Schampheleire <patrickdepinguin@gmail.com>
+Message-ID: <20140721165551.GH4431@waldemar-brodkorb.de>
+References: <20140720191326.GD4431@waldemar-brodkorb.de>
+	<148124bb-7b66-4363-b171-f0164dab3ced@email.android.com>
+MIME-Version: 1.0
+In-Reply-To: <148124bb-7b66-4363-b171-f0164dab3ced@email.android.com>
+X-Operating-System: Linux 3.2.0-4-amd64 x86_64
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openwrt-devel@openwrt.org, openembedded-devel@lists.openembedded.org,
+	buildroot@buildroot.org
+Subject: Re: [Buildroot] uClibc-ng
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,90 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jul 2014 16:48:32 -0000
+X-List-Received-Date: Mon, 21 Jul 2014 16:55:57 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Update the mercurial version to 3.0.1.
-Update the checksums.
-Remove the PR per current best-practice.
+Hi Thomas,
+Thomas De Schampheleire wrote,
 
-This resolves an issue with Mercurial 1.9 where fetching from behind a
-proxy breaks with a python stack trace. The current python
-httpconnection class no longer has the port setter method.
+> Hi Waldemar,
+> 
+> Waldemar Brodkorb <wbx@uclibc-ng.org> schreef:
+> >Hello Embedded Linux Hackers,
+> >
+> Interesting development!  One question: how do you see musl vs
+> uclibc-ng in the future? At this moment uclibc supports more
+> architectures, but this may change. Do you think both should/can
+> coexist? What are the distinctive features of uclibc over musl,
+> according to you?
 
-Signed-off-by: Darren Hart <dvhart@linux.intel.com>
----
- .../mercurial/mercurial-native_1.9.bb              | 27 ----------------------
- .../mercurial/mercurial-native_3.0.1.bb            | 26 +++++++++++++++++++++
- 2 files changed, 26 insertions(+), 27 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
- create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
+I think both can coexist for a while. uClibc is more compatible to
+glibc, so most of the software packages used on embedded systems are
+working fine without patching. Musl is relatively new and there are
+patches required to make some stuff work. Alpine Linux, Sabotage and
+OpenADK have a lot of patches, fixing musl issues.
 
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
-deleted file mode 100644
-index 516a9ec..0000000
---- a/meta-oe/recipes-devtools/mercurial/mercurial-native_1.9.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "The Mercurial distributed SCM"
--HOMEPAGE = "http://mercurial.selenic.com/"
--SECTION = "console/utils"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "python-native"
--PR = "r2"
--
--SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
--SRC_URI[md5sum] = "d4842129fa2732eb6ed1180467bc32e2"
--SRC_URI[sha256sum] = "711e4b1cd2924a7a88499d6c431a9122390183bf554d4e153edbb3b2f30123e0"
--
--S = "${WORKDIR}/mercurial-${PV}"
--
--inherit native
--
--EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
--    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
--
--do_configure_append () {
--    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
--}
--
--do_install () {
--    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
--}
--
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-new file mode 100644
-index 0000000..9a5eebe
---- /dev/null
-+++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "The Mercurial distributed SCM"
-+HOMEPAGE = "http://mercurial.selenic.com/"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+DEPENDS = "python-native"
-+
-+SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
-+SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
-+SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
-+
-+S = "${WORKDIR}/mercurial-${PV}"
-+
-+inherit native
-+
-+EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
-+    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
-+
-+do_configure_append () {
-+    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
-+}
-+
-+do_install () {
-+    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
-+}
-+
--- 
-2.0.0
+uClibc has support for non-MMU systems. uClibc can be configured at 
+build time and can be made smaller than musl. Musl can be used to
+have a complete static linked system, uClibc still requires
+libgcc_so.so for some threading functions. uClibc is widely used
+in the embedded Linux world, musl is a newcomer.
 
+For musl you need to patch gcc. 4.9.x does not include support for
+it.
+
+It is just good to have a choice.
+At the time all software packages working fine with musl and support
+for it is added to gcc and all architectures and MMU-less systems
+are supported, uClibc might be obsolete.
+
+best regards
+ Waldemar
 
