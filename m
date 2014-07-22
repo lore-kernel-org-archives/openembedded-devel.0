@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C18A65F2A
+	by mail.openembedded.org (Postfix) with ESMTP id D7D0765E48
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 06:44:46 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6M6imXh005948
+	Tue, 22 Jul 2014 07:06:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6M76mDB009072
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 23:44:48 -0700 (PDT)
+	Tue, 22 Jul 2014 00:06:48 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 21 Jul 2014 23:44:47 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Tue, 22 Jul 2014 00:06:48 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Jul 2014 14:44:52 +0800
-Message-ID: <1406011492-20363-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 22 Jul 2014 15:06:53 +0800
+Message-ID: <1406012813-21233-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [PATCH v2][meta-oe] sdparm: add recipe file
+Subject: [PATCH v2][meta-perl] libxml-sax-writer-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,76 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 06:44:52 -0000
+X-List-Received-Date: Tue, 22 Jul 2014 07:06:48 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../sdparm/files/make-sysroot-work.patch           |   27 ++++++++++++++++++++
- meta-oe/recipes-support/sdparm/sdparm_1.08.bb      |   17 ++++++++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
- create mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.08.bb
+ .../libxml/libxml-sax-writer-perl_0.54.bb          |   25 ++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
 
-diff --git a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
+diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
 new file mode 100644
-index 0000000..5405ed8
+index 0000000..52458e4
 --- /dev/null
-+++ b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
-@@ -0,0 +1,27 @@
-+[PATCH] make sysroot work
++++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "XML::SAX::Writer - SAX2 Writer"
++DESCRIPTION = "\
++XML::SAX::Writer helps to serialize SAX2 representations of XML documents to \
++strings, files, and other flat representations. It handles charset encodings, \
++XML escaping conventions, and so forth. It is still considered alpha, \
++although it has been put to limited use in settings such as XML::LibXML and \
++the AxKit XML Application Server. \
++"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPLv1+"
++HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
++DEPENDS += "libxml-filter-buffertext-perl-native"
++RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
 +
-+Upstream-Status: Pending
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
++SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
++SRC_URI[sha256sum] = "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
 +
-+Add = before the included dir to make sysroot work
++LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
 +
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ src/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++S = "${WORKDIR}/XML-SAX-Writer-${PV}"
 +
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index c83788c..9f62115 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -32,7 +32,7 @@ sglib_SOURCES =		../lib/sg_lib.c \
-+ 			../lib/sg_pt_common.c
-+ 
-+ if HAVE_SGUTILS
-+-INCLUDES = -I/usr/include/scsi
-++INCLUDES = -I=@includedir@/scsi
-+ sdparm_LDADD = @GETOPT_O_FILES@ @os_libs@ @SGUTILS_LIBS@
-+ sdparm_DEPENDENCIES = @GETOPT_O_FILES@
-+ else
-+-- 
-+1.9.1
++inherit cpan allarch
 +
-diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.08.bb b/meta-oe/recipes-support/sdparm/sdparm_1.08.bb
-new file mode 100644
-index 0000000..713e451
---- /dev/null
-+++ b/meta-oe/recipes-support/sdparm/sdparm_1.08.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "fetch and change SCSI mode pages"
-+DESCRIPTION = "The sdparm utility accesses and optionally modifies \
-+SCSI devices' mode page and inquiry data."
-+HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
-+SECTION = "console/utils"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
-+                    file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
-+DEPENDS="sg3-utils"
-+SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
-+           file://make-sysroot-work.patch \
-+           "
-+
-+SRC_URI[md5sum] = "be5786f37499018ef44f409597c92d42"
-+SRC_URI[sha256sum] = "376b78a414b1a9c47f3f13dbeb963e7a3ec7be126f83927d6856b5f7ac425e57"
-+
-+inherit autotools
++BBCLASSEXTEND = "native"
 -- 
-1.7.9.5
+1.7.10.4
 
 
