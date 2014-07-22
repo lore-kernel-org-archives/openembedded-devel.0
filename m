@@ -1,39 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BB9D70656
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F79F609AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 16:29:58 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id m15so8293636wgh.15
+	Tue, 22 Jul 2014 16:38:03 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id n12so8281318wgh.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 09:29:59 -0700 (PDT)
+	Tue, 22 Jul 2014 09:38:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+Ri8MX+ZgKmhKHKLmJsA4FAnXcWgCZ6GIfgUSND6pxA=;
-	b=XEGlkiUncJuHMCbCQxpHRNnsdCQxG94QKanFM4JFo7SYVVBR8WZwbJlHh5dDiDNQTU
-	bvLrRtnMQqRwBJ46GMQ0W5Tr4hl7j22M8L9OqTHERBO/kP8NlOQZ9LvzQNbnRJjXqcAB
-	LtzgCBKo9i1GassSL6keyUhRnrVYjjo3VaBL31n3CWPeFGJyCzSYgQdaEztGmqpnmBys
-	7IQI/eqgkwiIC4J/Gp28CT4Y+3XpO+bgaiyBM2uWKgGFtEdrBX7PtxYvoaVZ6nt1092G
-	Upv/skAvcp+k9zbpnLoUArFbssPUyNkoo5YQEXLFFme8+9Tpe8MH4SpkPrsFuFEWDgXK
-	3s1w==
-X-Received: by 10.180.96.97 with SMTP id dr1mr16393838wib.19.1406046599747;
-	Tue, 22 Jul 2014 09:29:59 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=NTkMWxBiJ4t317L+7rclOElRzaLRqsuIUxbEZYBG9/U=;
+	b=SbdWZ4ozFJeunLZ+IOJR5AeZBDXxbwZolRQv7Z1ZxEl0YOaKHDpxdMPLw3m2RU94Qm
+	feLQMrpz+cCRZG3jHWdpfhUuf9VC+QJdWHS/QPSN1cMX5HZWwepCIH89qlpieYB8Xdev
+	ZHtcTGseXDjywkpXN8wCDal+Rna0h0MuhChF3R500D+roUnF4mrDIAhVlOxyyj59Fl14
+	MoXud2+vEcTE7/Z/ULe4BTugx+eDlI+I7Z/kRK+AsXJnC1b+stQC9oreVl8TjIJxADPq
+	Iu04EB6T4JCLTrTTGgbrZHY5mFzz4sGVTF5fZSA7xP4mQbfG5L9Yu3wKvEHkm+Lql262
+	BlCA==
+X-Received: by 10.180.39.34 with SMTP id m2mr13913865wik.80.1406047084471;
+	Tue, 22 Jul 2014 09:38:04 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	10sm2093984wjr.22.2014.07.22.09.29.58
-	for <openembedded-devel@lists.openembedded.org>
+	x3sm4383555wia.11.2014.07.22.09.38.03 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 Jul 2014 09:29:58 -0700 (PDT)
+	Tue, 22 Jul 2014 09:38:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 22 Jul 2014 18:30:15 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140722163015.GW22875@jama>
-References: <1398455613-27167-1-git-send-email-ben.shelton@ni.com>
-MIME-Version: 1.0
-In-Reply-To: <1398455613-27167-1-git-send-email-ben.shelton@ni.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] xwd: add recipe
+Date: Tue, 22 Jul 2014 18:38:17 +0200
+Message-Id: <1406047097-20725-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.2
+Subject: [meta-oe][PATCH] xwd: move require line first
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,66 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 16:30:00 -0000
-X-Groupsio-MsgNum: 51186
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zOhrINIRDRtNKIHr"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Jul 2014 16:38:04 -0000
 
---zOhrINIRDRtNKIHr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* otherwise SUMMARY, HOMEPAGE, SECTION, LICENSE and DEPENDS are overwriten from
+  .inc file
 
-On Fri, Apr 25, 2014 at 02:53:33PM -0500, Ben Shelton wrote:
-> Adding a recipe for the X Window Dump tool, a lightweight tool that is
-> useful for taking screenshots on embedded targets.
->=20
-> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
-> ---
->  meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb b/meta-oe/rec=
-ipes-graphics/xorg-app/xwd_1.0.6.bb
-> new file mode 100644
-> index 0000000..b73afe1
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-> @@ -0,0 +1,11 @@
-> +SUMMARY =3D "xwd is a tool to capture an X window or screen to file"
-> +HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/xwd/"
-> +SECTION =3D "x11/app"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc0cdb783e9a0198237371fdaa26a1=
-8bf"
-> +DEPENDS =3D "libxmu"
-> +
-> +SRC_URI[md5sum] =3D "6b5d48464c5f366e91efd08b62b12d94"
-> +SRC_URI[sha256sum] =3D "3bb396a2268d78de4b1c3e5237a85f7849d3434e87b3cd1f=
-4d57eef614227d79"
-> +
-> +require recipes-graphics/xorg-app/xorg-app-common.inc
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-This line needs to be the first otherwise SUMMARY, HOMEPAGE, SECTION,
-LICENSE and DEPENDS are overwritten from .inc.
+diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
+index 077df7a..694bf57 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
+@@ -1,3 +1,5 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
++
+ SUMMARY = "xwd is a tool to capture an X window or screen to file"
+ HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/xwd/"
+ SECTION = "x11/app"
+@@ -7,5 +9,3 @@ DEPENDS = "libxmu libxkbfile"
+ 
+ SRC_URI[md5sum] = "6b5d48464c5f366e91efd08b62b12d94"
+ SRC_URI[sha256sum] = "3bb396a2268d78de4b1c3e5237a85f7849d3434e87b3cd1f4d57eef614227d79"
+-
+-require recipes-graphics/xorg-app/xorg-app-common.inc
+-- 
+2.0.2
 
-I'll fix that.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---zOhrINIRDRtNKIHr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPOkZcACgkQN1Ujt2V2gBwTPgCgmPMMYW70sA4WwtRmfiDxeC4O
-WxgAn3AB+Acdl9H6OERrlzeDNbZrxfxx
-=zajh
------END PGP SIGNATURE-----
-
---zOhrINIRDRtNKIHr--
