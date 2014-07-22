@@ -1,34 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F79F609AC
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id C283470757
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 16:38:03 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id n12so8281318wgh.33
+	Tue, 22 Jul 2014 18:02:25 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id bs8so872198wib.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 09:38:04 -0700 (PDT)
+	Tue, 22 Jul 2014 11:02:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=NTkMWxBiJ4t317L+7rclOElRzaLRqsuIUxbEZYBG9/U=;
-	b=SbdWZ4ozFJeunLZ+IOJR5AeZBDXxbwZolRQv7Z1ZxEl0YOaKHDpxdMPLw3m2RU94Qm
-	feLQMrpz+cCRZG3jHWdpfhUuf9VC+QJdWHS/QPSN1cMX5HZWwepCIH89qlpieYB8Xdev
-	ZHtcTGseXDjywkpXN8wCDal+Rna0h0MuhChF3R500D+roUnF4mrDIAhVlOxyyj59Fl14
-	MoXud2+vEcTE7/Z/ULe4BTugx+eDlI+I7Z/kRK+AsXJnC1b+stQC9oreVl8TjIJxADPq
-	Iu04EB6T4JCLTrTTGgbrZHY5mFzz4sGVTF5fZSA7xP4mQbfG5L9Yu3wKvEHkm+Lql262
-	BlCA==
-X-Received: by 10.180.39.34 with SMTP id m2mr13913865wik.80.1406047084471;
-	Tue, 22 Jul 2014 09:38:04 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	bh=HLmdVCut7HzgTu1DhJ8MXuYY99ZrMWl7IPLzHIcW0xM=;
+	b=TONGtoiRS3AxpKjwl/51Qpou5Zrfnzdo1ex6qNnNcKjDSH53bGI/GVjCKaaS1hym85
+	9IPXGV7vSUpPtCK2R8EIxwEKAmDWraNi5SPioscBHYgs0HEpe970MAOP4ZueDqbe09mb
+	NJP1E9A7+1yb0QH6NtF5FQVYqJ+EnxHpeEoiic7n94x0I8wFrbbfFzO6HMFsODf0tBnY
+	8QC3bDPwo9DYVNcF0dCoUoNnHAnKYNbgrFNeoWTqGVkVMfRIBVYxiHVCR6y/El7IOjJ0
+	NeVQaAz91zV15M+DqlJaN8kQ8n47KbTbbLGEEWUw1zRX1s/wR2vp24pNv6+70ICrvUq5
+	DZ/A==
+X-Received: by 10.180.104.132 with SMTP id ge4mr17204107wib.0.1406052142678;
+	Tue, 22 Jul 2014 11:02:22 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host214-54-dynamic.1-79-r.retail.telecomitalia.it. [79.1.54.214])
 	by mx.google.com with ESMTPSA id
-	x3sm4383555wia.11.2014.07.22.09.38.03 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 Jul 2014 09:38:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	dn3sm56279342wib.12.2014.07.22.11.02.21 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 22 Jul 2014 11:02:22 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jul 2014 18:38:17 +0200
-Message-Id: <1406047097-20725-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.2
-Subject: [meta-oe][PATCH] xwd: move require line first
+Date: Tue, 22 Jul 2014 20:02:08 +0200
+Message-Id: <1406052128-31657-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] klibc: upgrade to released 2.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +43,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 16:38:04 -0000
+X-List-Received-Date: Tue, 22 Jul 2014 18:02:27 -0000
 
-* otherwise SUMMARY, HOMEPAGE, SECTION, LICENSE and DEPENDS are overwriten from
-  .inc file
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-devtools/klibc/{klcc-cross_2.0.3.bb => klcc-cross_2.0.4.bb} | 0
+ .../klibc/{klibc-2.0.3 => klibc-2.0.4}/armv4-fix-v4bx.patch             | 0
+ .../klibc/{klibc-2.0.3 => klibc-2.0.4}/klibc-config-eabi.patch          | 0
+ .../klibc/{klibc-2.0.3 => klibc-2.0.4}/klibc-linux-libc-dev.patch       | 0
+ .../recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/staging.patch   | 0
+ .../klibc/{klibc-2.0.3 => klibc-2.0.4}/use-env-for-perl.patch           | 0
+ .../klibc/{klibc-static-utils_2.0.3.bb => klibc-static-utils_2.0.4.bb}  | 0
+ .../klibc/{klibc-utils_2.0.3.bb => klibc-utils_2.0.4.bb}                | 0
+ meta-initramfs/recipes-devtools/klibc/klibc.inc                         | 2 +-
+ .../recipes-devtools/klibc/{klibc_2.0.3.bb => klibc_2.0.4.bb}           | 0
+ 10 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-initramfs/recipes-devtools/klibc/{klcc-cross_2.0.3.bb => klcc-cross_2.0.4.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/armv4-fix-v4bx.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/klibc-config-eabi.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/klibc-linux-libc-dev.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/staging.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-2.0.3 => klibc-2.0.4}/use-env-for-perl.patch (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-static-utils_2.0.3.bb => klibc-static-utils_2.0.4.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc-utils_2.0.3.bb => klibc-utils_2.0.4.bb} (100%)
+ rename meta-initramfs/recipes-devtools/klibc/{klibc_2.0.3.bb => klibc_2.0.4.bb} (100%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-index 077df7a..694bf57 100644
---- a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
-@@ -1,3 +1,5 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
-+
- SUMMARY = "xwd is a tool to capture an X window or screen to file"
- HOMEPAGE = "http://cgit.freedesktop.org/xorg/app/xwd/"
- SECTION = "x11/app"
-@@ -7,5 +9,3 @@ DEPENDS = "libxmu libxkbfile"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.4.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.3.bb
+rename to meta-initramfs/recipes-devtools/klibc/klcc-cross_2.0.4.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/armv4-fix-v4bx.patch
+rename to meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/klibc-config-eabi.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/klibc-config-eabi.patch
+rename to meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/klibc-linux-libc-dev.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/klibc-linux-libc-dev.patch
+rename to meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/staging.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/staging.patch
+rename to meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/use-env-for-perl.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/use-env-for-perl.patch
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-2.0.3/use-env-for-perl.patch
+rename to meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/use-env-for-perl.patch
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.3.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.3.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index b4f0cab..0209b20 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
+ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
+ DEPENDS = "linux-libc-headers perl-native"
+-SRCREV = "f0440baf7f2dc1d9a25863c184d0a8fb73c4ee6c"
++SRCREV = "7763dd33e5b8eed4b9e3c583c02c10176fd550d3"
  
- SRC_URI[md5sum] = "6b5d48464c5f366e91efd08b62b12d94"
- SRC_URI[sha256sum] = "3bb396a2268d78de4b1c3e5237a85f7849d3434e87b3cd1f4d57eef614227d79"
--
--require recipes-graphics/xorg-app/xorg-app-common.inc
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
+ SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc_2.0.3.bb b/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb
+similarity index 100%
+rename from meta-initramfs/recipes-devtools/klibc/klibc_2.0.3.bb
+rename to meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb
 -- 
-2.0.2
+1.9.1
 
 
