@@ -1,44 +1,43 @@
-Return-Path: <trevor.woerner@linaro.org>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E14DB705E1
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
+	by mail.openembedded.org (Postfix) with ESMTP id B511465E08
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 13:19:06 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id y20so8192330ier.13
+	Tue, 22 Jul 2014 13:22:19 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
+	via TCP (outbound) with ESMTPS id 20140722132218777
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 06:19:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=UTRVSzEB7BtJahxIrNWNG+0wG2wYxHwDKJ+tqmjfgzM=;
-	b=jGEEN7sQK82ap/p4BSHj45/54NJ2HW1ZIZ+FYranvvC+jIFCfnNdI2uojTvRXEdxvk
-	KVq3Iux0gFmXxxDwA3MjecKsagMup2vdruFDITbn2rc1ZiX+OwA2jyoihyBmoAkUeEik
-	3uN9rgcVqxWRr179ZnyhLOizl6pR/nag2NK3QGS1Y6dhaa8qEZ9OGUMzxabXUQoXNI0/
-	PsI8dgDo7Su5hT+dvi15yemjjwva1cCCKb5vbCRy3BN5a4QVNxBlnkHCRZQO06QplO7B
-	nwp8NEeUGVL3A/sW6KAE+jejrbatqvj3gZbVIdtX6KOZ+9PKfONCs+oYDslJ7Gwmtr5T
-	zsCw==
-X-Gm-Message-State: ALoCoQngk8OBV4IhBeyqCy5RH4p/n/sWKaGjNvCBbFOQpbxsZNy2MrkknfzQnjiMAU++euHlOCVE
-X-Received: by 10.50.137.71 with SMTP id qg7mr16355962igb.24.1406035147434;
-	Tue, 22 Jul 2014 06:19:07 -0700 (PDT)
-Received: from [192.168.141.83] (69-165-220-158.dsl.teksavvy.com.
-	[69.165.220.158])
-	by mx.google.com with ESMTPSA id il3sm2273320igb.1.2014.07.22.06.19.06
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 22 Jul 2014 06:19:06 -0700 (PDT)
-Message-ID: <53CE64C9.2010402@linaro.org>
-Date: Tue, 22 Jul 2014 09:19:05 -0400
-From: Trevor Woerner <trevor.woerner@linaro.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <alpine.LFD.2.11.1407130915280.31826@localhost>	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>	<alpine.LFD.2.11.1407140804360.29952@localhost>
+	Tue, 22 Jul 2014 13:22:18 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [64.102.254.33] (port=10488 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X9a1F-0006vs-Cq; Tue, 22 Jul 2014 09:22:13 -0400
+Date: Tue, 22 Jul 2014 09:22:10 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <53CE64C9.2010402@linaro.org>
+Message-ID: <alpine.LFD.2.11.1407220921230.4203@localhost>
+References: <alpine.LFD.2.11.1407130915280.31826@localhost>
+	<3072899.OS8yJTfGtp@peggleto-mobl5.ger.corp.intel.com>
+	<alpine.LFD.2.11.1407140804360.29952@localhost>
 	<28111309.Fiim3rPSbe@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <28111309.Fiim3rPSbe@peggleto-mobl5.ger.corp.intel.com>
+	<53CE64C9.2010402@linaro.org>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
 Subject: Re: overriding tasks with EXPORT_FUNCTIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,21 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 13:19:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jul 2014 13:22:21 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 07/14/14 08:26, Paul Eggleton wrote:
-> Unfortunately as far as the BitBake manual is concerned, it pretty
-> much has to be abstract. Remember that there are no base
-> implementations of any task functions in BitBake itself; the ones you
-> refer to are in OE's base.bbclass.
+On Tue, 22 Jul 2014, Trevor Woerner wrote:
 
-In reality there are only about 2 people on the whole planet for whom
-that distinction is important :-)
+> On 07/14/14 08:26, Paul Eggleton wrote:
+> > Unfortunately as far as the BitBake manual is concerned, it pretty
+> > much has to be abstract. Remember that there are no base
+> > implementations of any task functions in BitBake itself; the ones
+> > you refer to are in OE's base.bbclass.
+>
+> In reality there are only about 2 people on the whole planet for
+> whom that distinction is important :-)
 
-For the rest of us, it would be nice if there was some middle ground
-from which a document could be written that treated these two entities
-as one; at least up until such a time as some other project comes along
-and uses bitbake for something other than OE/Yocto :-D
+  i should point out that fetching is defined in bitbake, while
+everything else is in oe-core. just being difficult. :-)
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
