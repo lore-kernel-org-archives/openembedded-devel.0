@@ -1,35 +1,24 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id F36B26AD09
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C18A65F2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 03:27:23 +0000 (UTC)
-Received: by mail-vc0-f178.google.com with SMTP id la4so13810058vcb.37
+	Tue, 22 Jul 2014 06:44:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6M6imXh005948
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jul 2014 20:27:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Ong+K+Myti43/PIiOoEhWaDVZLAnxKT28JP175VpwYE=;
-	b=va2SY7Gt6CyrENPVQm6d+pFveYWeJeikZOFUZ/1HTr7HC64VvKalsaxrlIq08Cgfvi
-	OUT154oZsvXD00OPWUK+A6S+69TuGxHESBPtmpbxXcKJsc81MMak6hF33ywCkGUrI+gv
-	c0y2EEoBPt3I3XXlUGua+Qd/O26Bc0N7ztnOzvoxqL+He/Bw+5VPTFqmnPTfQR1C6sPq
-	ctVugF8LojgtR87Kcfpvd5g7khTHh0TrIlLnVHSn/pkYoqUrObfd0Q6W6QJVTvEf0QMX
-	+mo1PkjzSteHMxSXba1SY3LPl1dWGR9MWzdqFN0lF49HFIsa1MOo2GDhjEX45+F8Nqjt
-	t2Rw==
-X-Received: by 10.52.38.105 with SMTP id f9mr29404510vdk.17.1405999644605;
-	Mon, 21 Jul 2014 20:27:24 -0700 (PDT)
-Received: from localhost.localdomain.com ([196.40.10.133])
-	by mx.google.com with ESMTPSA id g9sm9330800vec.16.2014.07.21.20.27.21
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Jul 2014 20:27:23 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Jul 2014 20:27:02 -0700
-Message-Id: <1405999622-6867-1-git-send-email-TicoTimo@gmail.com>
-X-Mailer: git-send-email 1.9.3
-Subject: [meta-multimedia][PATCH] vlc: add PACKAGECONFIG for postproc, patch for postproc header check
+	Mon, 21 Jul 2014 23:44:48 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 21 Jul 2014 23:44:47 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Jul 2014 14:44:52 +0800
+Message-ID: <1406011492-20363-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH v2][meta-oe] sdparm: add recipe file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,67 +32,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 03:27:26 -0000
+X-List-Received-Date: Tue, 22 Jul 2014 06:44:52 -0000
+Content-Type: text/plain
 
-* Built with libav 9.13 and stand-alone libpostproc
-* Although postproc is enable=auto, let's leave it disabled by default
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc          |  1 +
- .../vlc/vlc/0005-libpostproc-header-check.patch         | 17 +++++++++++++++++
- meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb     |  1 +
- 3 files changed, 19 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0005-libpostproc-header-check.patch
+ .../sdparm/files/make-sysroot-work.patch           |   27 ++++++++++++++++++++
+ meta-oe/recipes-support/sdparm/sdparm_1.08.bb      |   17 ++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
+ create mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.08.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index c188771..88605df 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -49,6 +49,7 @@ PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
- PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
- PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
- PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
-+PACKAGECONFIG[postproc] = "--enable-postproc,--disable-postproc,libpostproc"
- 
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0005-libpostproc-header-check.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-libpostproc-header-check.patch
+diff --git a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
 new file mode 100644
-index 0000000..2d84ffd
+index 0000000..5405ed8
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc/0005-libpostproc-header-check.patch
++++ b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
+@@ -0,0 +1,27 @@
++[PATCH] make sysroot work
++
++Upstream-Status: Pending
++
++Add = before the included dir to make sysroot work
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++---
++ src/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/Makefile.am b/src/Makefile.am
++index c83788c..9f62115 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -32,7 +32,7 @@ sglib_SOURCES =		../lib/sg_lib.c \
++ 			../lib/sg_pt_common.c
++ 
++ if HAVE_SGUTILS
++-INCLUDES = -I/usr/include/scsi
+++INCLUDES = -I=@includedir@/scsi
++ sdparm_LDADD = @GETOPT_O_FILES@ @os_libs@ @SGUTILS_LIBS@
++ sdparm_DEPENDENCIES = @GETOPT_O_FILES@
++ else
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.08.bb b/meta-oe/recipes-support/sdparm/sdparm_1.08.bb
+new file mode 100644
+index 0000000..713e451
+--- /dev/null
++++ b/meta-oe/recipes-support/sdparm/sdparm_1.08.bb
 @@ -0,0 +1,17 @@
-+* Also look for postprocess.h under libpostproc/
++SUMMARY = "fetch and change SCSI mode pages"
++DESCRIPTION = "The sdparm utility accesses and optionally modifies \
++SCSI devices' mode page and inquiry data."
++HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
++SECTION = "console/utils"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
++                    file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
++DEPENDS="sg3-utils"
++SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
++           file://make-sysroot-work.patch \
++           "
 +
-+Upstream-status: Pending
++SRC_URI[md5sum] = "be5786f37499018ef44f409597c92d42"
++SRC_URI[sha256sum] = "376b78a414b1a9c47f3f13dbeb963e7a3ec7be126f83927d6856b5f7ac425e57"
 +
-+Index: vlc-2.1.4/configure.ac
-+===================================================================
-+--- vlc-2.1.4.orig/configure.ac
-++++ vlc-2.1.4/configure.ac
-+@@ -2444,7 +2444,7 @@ then
-+       VLC_SAVE_FLAGS
-+       CPPFLAGS="${CPPFLAGS} ${POSTPROC_CFLAGS}"
-+       CFLAGS="${CFLAGS} ${POSTPROC_CFLAGS}"
-+-      AC_CHECK_HEADERS(postproc/postprocess.h)
-++      AC_CHECK_HEADERS(postproc/postprocess.h,[],[AC_CHECK_HEADERS(libpostproc/postprocess.h)])
-+       VLC_ADD_PLUGIN([postproc])
-+       VLC_ADD_LIBS([postproc],[$POSTPROC_LIBS $AVUTIL_LIBS])
-+       VLC_ADD_CFLAGS([postproc],[$POSTPROC_CFLAGS $AVUTIL_CFLAGS])
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-index f9be48d..b4047d3 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb
-@@ -7,6 +7,7 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
-             file://0002-glibc-does-not-provide-strlcpy.patch \
-             file://0003-use-am-path-libgcrypt.patch \
-             file://0004-modules-gui-qt4-out-of-tree-build.patch \
-+            file://0005-libpostproc-header-check.patch \
- "
- 
- SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
++inherit autotools
 -- 
-1.9.3
+1.7.9.5
 
 
