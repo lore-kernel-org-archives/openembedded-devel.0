@@ -1,40 +1,34 @@
-Return-Path: <just4tech83@gmail.com>
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by mail.openembedded.org (Postfix) with ESMTP id E3F0470199
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EE786084E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 10:15:12 +0000 (UTC)
-Received: by mail-qg0-f53.google.com with SMTP id q107so6520738qgd.26
+	Tue, 22 Jul 2014 11:34:42 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id m15so7804246wgh.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 03:15:12 -0700 (PDT)
+	Tue, 22 Jul 2014 04:34:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Wck3ezO2OzzNpaowRj9Eak0VCDbVSqP5sotMX1+yNlQ=;
-	b=o658XtoyvUVnRKD+seUkIgDni1GEQUIUNj1TS+Wu5jDMrDoZP8vU3RqqvpELjULQIH
-	Afod8rcdyxgp/Q3zdOpMhFJcZvKi2qlIMTbbkJYKWqqZgxxb7EhuSktRE4+EVIAHhyra
-	/j81QuC32m8fVfuGoJjlD2mAr+yZ+apD+FuNmbLPa5b3WN8jLF5FuySq23u0h17a/COq
-	D1P3EJCPKTzmTmLiSRFRlR15nvrxV+KPEV5xxsv88OL/cHa7q3E+DM/re90Ld7606TJP
-	vTVhjTgtyN4fhcFdH3+ylN4pFmFK8S2zmSiEzpjSvk6znT2aiU/OnfQcfbkv9b6H0354
-	xFEA==
-MIME-Version: 1.0
-X-Received: by 10.224.63.194 with SMTP id c2mr52673632qai.21.1406024112864;
-	Tue, 22 Jul 2014 03:15:12 -0700 (PDT)
-Received: by 10.140.100.235 with HTTP; Tue, 22 Jul 2014 03:15:12 -0700 (PDT)
-Received: by 10.140.100.235 with HTTP; Tue, 22 Jul 2014 03:15:12 -0700 (PDT)
-In-Reply-To: <CAD2C2VR22ww51=1UQbW7OxtWvr8dV1PjLhr0d0O176JtX6PJKQ@mail.gmail.com>
-References: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
-	<53BC1835.90204@balister.org>
-	<CAD2C2VTnHrLsfhRXcUxpcpXgWK+LzxxD87XrvrN6wiiMK+CMUw@mail.gmail.com>
-	<CAD2C2VSTKS+NX=0CAwh1PAtkKgcHh+mpwMMVmh_b4dw9GeaABw@mail.gmail.com>
-	<53C51AE2.4030100@bec-systems.com>
-	<CAD2C2VR22ww51=1UQbW7OxtWvr8dV1PjLhr0d0O176JtX6PJKQ@mail.gmail.com>
-Date: Tue, 22 Jul 2014 15:45:12 +0530
-Message-ID: <CAD2C2VSFVUi9surRZhB9mZih2MUrUYZ+-zsq=RhrDXCEvber0g@mail.gmail.com>
-From: Bryan <just4tech83@gmail.com>
-To: philip@balister.org, Cliff Brake <cbrake@bec-systems.com>, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: open embedded build issues with beagle board
+	h=from:to:cc:subject:date:message-id;
+	bh=9vGgfU5b1wp/yuVH04kNpW2+dGNzZ7CtlioOr3tZW20=;
+	b=jsrVN56PKA+vyrDKbEWl0vV7AY9bgRbB7V0h6FJcuBSKrw0JWCMg3LIyN8fomuHXPL
+	utoxiciE2mUsmkT5viTVTJX0OBmeWHaeMd69LevAbj2u6wL8IZDiE4tBDhbzIhVF74SU
+	p7PBQEgqFqsL1tJixt8AuvHN/JzHnays5aC4+6qPwLZa3cQL7vQXvKAfCimGbg3cDPRH
+	xJ6hpoJOz5+bxdYh5WAPrz79HRZ42dMxujU4XafZ7GZVLTC+DMKQBAfr1yQ1X2yuwfQC
+	U65mhJuLVBEa/gGP2j5utAeQl1/XhJKDg/oIqQlQWwxvB/oC5aIDW+vaXXsVDXfW8Odh
+	Fk1Q==
+X-Received: by 10.180.104.42 with SMTP id gb10mr13763027wib.65.1406028882038; 
+	Tue, 22 Jul 2014 04:34:42 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id p3sm356542wjw.13.2014.07.22.04.34.41
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 22 Jul 2014 04:34:41 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Jul 2014 13:34:54 +0200
+Message-Id: <1406028895-834-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.2
+Subject: [meta-oe][PATCH 1/2] python-efl: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,147 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 10:15:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 Jul 2014 11:34:47 -0000
 
-Please suggest me link to get  meta layer for beagkeboard.
-On Jul 17, 2014 10:36 AM, "Bryan" <just4tech83@gmail.com> wrote:
+* the tarball is missing .pxd files and re-building with our python-cython fails with:
+  | Compiling efl/elementary/scroller.pyx because it depends on /OE
+  | Error compiling Cython file:
+  | ------------------------------------------------------------
+  | ...
+  | from libc.stdint cimport uintptr_t
+  | import traceback
+  | from efl.eo cimport Eo, PY_REFCOUNT
+  | from efl.utils.conversions cimport _ctouni
+  | from cpython cimport Py_INCREF, Py_DECREF
+  | cimport efl.ecore.enums as enums
+  |        ^
+  | ------------------------------------------------------------
+  |
+  | efl/ecore/__init__.pyx:221:8: 'efl.ecore.enums.pxd' not found
 
->
-> Hi,
->    Thanks for your suggestion to use meta-ti layer. Cau you please tell us
-> where we can find this layer as we couldn't find it on openembedded git.
->
-> We tried with following link to build but it gives error while building.
-> https://github.com/beagleboard/meta-beagleboard
->
->
-> Thanks
-> Bryan
-> On Jul 15, 2014 5:43 PM, "Cliff Brake" <cbrake@bec-systems.com> wrote:
->
->>  The meta-ti layer includes support for the beagleboard.  You probably
->> want the linux-mainline 3.2 recipe.
->>
->> Cliff
->>
->> On 07/15/2014 12:29 AM, Bryan wrote:
->>
->> Hi Cliff,
->>          thanks for your suggestion, i tried links which you mentioned in
->> your mail. Now i am able to build minimal image for MACHINE = qmux6.
->> Can you please tell us how can we make it for beagleboard omap 3530.
->> Where can we find support layer for beagleboard.
->>
->> Thanks a lot in advance !
->> On Jul 11, 2014 11:30 AM, "Bryan" <just4tech83@gmail.com> wrote:
->>
->>> Hi,
->>>      As per your suggestion we took oe-core and other packages from
->>> followinf link:
->>> -> http://git.openembedded.org/meta-openembedded
->>>
->>> We are using bitbake version 1.23.1.
->>>
->>> We have to build image for beagleboard so we find following to build
->>> image:
->>>
->>> ->
->>> http://www.crashcourse.ca/wiki/index.php/Building_for_BBB_using_OpenEmbedded
->>>
->>> While following steps from the above link we have done following
->>> settings in local.conf  and bblayers.conf file.
->>>
->>> MACHINE ??= "beaglebone"
->>> BBLAYERS ?= " \
->>>   /home/rpjday/oe/dist/layers/oe-core/meta \
->>>   /home/rpjday/oe/dist/layers/meta-openembedded/meta-oe \
->>>   /home/rpjday/oe/dist/layers/meta-beagleboard/common-bsp \
->>>   "
->>> Now while running "bitbake core-image-minimal" command we are getting
->>> following issues :
->>>
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/intro_what.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/program_ram.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/arch_apis.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/transapp_reclimit.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/am_close.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/lock_stdmode.html':
->>> Operation not permitted
->>> chown: changing ownership of
->>> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/transapp_env_open.html':
->>> Operation not permitted
->>>
->>> WARNING:
->>> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/temp/run.do_install.26236:1
->>> exit 1 from
->>>   chown -R root:root
->>> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image
->>> ERROR: Function failed: do_install (log file is located at
->>> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/temp/log.do_install.26236)
->>>
->>> one more doubt about the code base which we should follow as we found
->>> one other link which have oe-core code at "
->>> https://github.com/openembedded". We have tried both and found seperate
->>> issues while using both.
->>>
->>> Please suggest us how we can overcome these issues to get test image
->>> build for beagleboard.
->>>
->>> Thanks in advance
->>> ---------- Forwarded message ----------
->>> From: "Philip Balister" <philip@balister.org>
->>> Date: Jul 8, 2014 9:42 PM
->>> Subject: Re: [oe] open embedded build issues with beagle board
->>> To: <openembedded-devel@lists.openembedded.org>
->>> Cc:
->>>
->>> On 07/08/2014 02:54 AM, Bryan wrote:
->>> > Hi All
->>> >  I am trying to build  Openembeeded classic for Beagle board-XM but i
->>> am
->>> > getting lot of broken link issues. I have  set DISTRO as
->>> angstrom-2010.x in
->>> > local.conf.   Is this approach  ok? or should i move to openembedded
->>> core ??
->>> > Pls suggest.
->>>
->>> Use the current Angstrom instructions, oe-classic is pretty much
->>> completely unsupported now.
->>>
->>> Philip
->>>
->>> >
->>> > Broken link e.g.
->>> >
->>> > Resolving www.angstrom-distribution.org (www.angstrom-distribution.org
->>> )...
->>> > 140.211.169.177
->>> >  Connecting to www.angstrom-distribution.org
->>> > (www.angstrom-distribution.org)|140.211.169.177|:80...
->>> > connected.
->>> >  HTTP request sent, awaiting response...
->>> > 404 Not Found  2014-07-08 10:13:43 ERROR 404: Not Found.
->>> >
->>> > Thanks in advance
->>> >
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-devtools/python/python-efl_git.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-efl/recipes-devtools/python/python-efl_git.bb
+
+diff --git a/meta-efl/recipes-devtools/python/python-efl_git.bb b/meta-efl/recipes-devtools/python/python-efl_git.bb
+new file mode 100644
+index 0000000..b776f7d
+--- /dev/null
++++ b/meta-efl/recipes-devtools/python/python-efl_git.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRCREV = "c1497e10288589ff9834f3d4da17461b8a3a1c15"
++PV = "1.10.0+git${SRCPV}"
++
++SRC_URI = "git://git.enlightenment.org/bindings/python/${BPN}.git;branch=python-efl-1.10"
++
++S = "${WORKDIR}/git"
+-- 
+2.0.2
+
 
