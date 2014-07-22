@@ -1,37 +1,39 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-lb0-f173.google.com (mail-lb0-f173.google.com
-	[209.85.217.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 8665562252
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BB9D70656
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 15:55:46 +0000 (UTC)
-Received: by mail-lb0-f173.google.com with SMTP id p9so3023982lbv.18
+	Tue, 22 Jul 2014 16:29:58 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id m15so8293636wgh.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 08:55:46 -0700 (PDT)
+	Tue, 22 Jul 2014 09:29:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=fDqvC2tNgoNCQHCDjfYMocR7zkDhPz05UcmEOkH4XyU=;
-	b=Gh0cU+PbY79pBNZWlcKqdxFYXl3YFzqjduR4EM1IwjOVoTqTv6YBNxz0GZ22MvkSWf
-	jSvCGbMLEQpR04yPhnLbfAKOllK2MUC/ir6MlR9aizGsg/HZO5Ws6ATLrCTzuebJIIs3
-	XinNLU+NyTMdVxSaHjgQzJTDKkptcdrVU7TTD4hejMHmeFnr0g6vOVEFx7FieVoA2ZLa
-	aivwuByu8NbQaHyRQEp1WHTnCDx9CPOVCRm2ZOlKBfhJPUmFjfeR4Kz/emPflReoIPpV
-	f56Rt7BbpnVouwbi2kcbL7tr3SQquXw0PWKY8prmwKmex4HuT50rMZm5TsbL+PjJq3MD
-	Qn7Q==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=+Ri8MX+ZgKmhKHKLmJsA4FAnXcWgCZ6GIfgUSND6pxA=;
+	b=XEGlkiUncJuHMCbCQxpHRNnsdCQxG94QKanFM4JFo7SYVVBR8WZwbJlHh5dDiDNQTU
+	bvLrRtnMQqRwBJ46GMQ0W5Tr4hl7j22M8L9OqTHERBO/kP8NlOQZ9LvzQNbnRJjXqcAB
+	LtzgCBKo9i1GassSL6keyUhRnrVYjjo3VaBL31n3CWPeFGJyCzSYgQdaEztGmqpnmBys
+	7IQI/eqgkwiIC4J/Gp28CT4Y+3XpO+bgaiyBM2uWKgGFtEdrBX7PtxYvoaVZ6nt1092G
+	Upv/skAvcp+k9zbpnLoUArFbssPUyNkoo5YQEXLFFme8+9Tpe8MH4SpkPrsFuFEWDgXK
+	3s1w==
+X-Received: by 10.180.96.97 with SMTP id dr1mr16393838wib.19.1406046599747;
+	Tue, 22 Jul 2014 09:29:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	10sm2093984wjr.22.2014.07.22.09.29.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 22 Jul 2014 09:29:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 22 Jul 2014 18:30:15 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140722163015.GW22875@jama>
+References: <1398455613-27167-1-git-send-email-ben.shelton@ni.com>
 MIME-Version: 1.0
-X-Received: by 10.152.161.225 with SMTP id xv1mr20456751lab.71.1406044546636; 
-	Tue, 22 Jul 2014 08:55:46 -0700 (PDT)
-Received: by 10.114.188.166 with HTTP; Tue, 22 Jul 2014 08:55:46 -0700 (PDT)
-In-Reply-To: <20140722155207.GU22875@jama>
-References: <1406028895-834-1-git-send-email-Martin.Jansa@gmail.com>
-	<1406028895-834-2-git-send-email-Martin.Jansa@gmail.com>
-	<CANx9H-B-XpPeLtcT0fGzNSNOn-gREp5MVQh7Su-kMpxBAsMt6g@mail.gmail.com>
-	<20140722155207.GU22875@jama>
-Date: Tue, 22 Jul 2014 08:55:46 -0700
-Message-ID: <CANx9H-BSGLqnw2hO86Ys5bo3y_R2fjGb+45cEWGnf5zZNjHiCQ@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 2/2] meta-python: rename recipes-python to recipes-devtools
+In-Reply-To: <1398455613-27167-1-git-send-email-ben.shelton@ni.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] xwd: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,459 +47,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 15:55:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 Jul 2014 16:30:00 -0000
+X-Groupsio-MsgNum: 51186
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zOhrINIRDRtNKIHr"
+Content-Disposition: inline
 
-To work as intended, layer.conf should have had:
+--zOhrINIRDRtNKIHr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-# We have recipes-*/* and recipes-* directories, add to BBFILES
-BBFILES += "${LAYERDIR}/recipes-*/*.bb \
-            ${LAYERDIR}/recipes-*/*.bbappend \
-            ${LAYERDIR}/recipes-*/*/*.bb \
-            ${LAYERDIR}/recipes-*/*/*.bbappend"
+On Fri, Apr 25, 2014 at 02:53:33PM -0500, Ben Shelton wrote:
+> Adding a recipe for the X Window Dump tool, a lightweight tool that is
+> useful for taking screenshots on embedded targets.
+>=20
+> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+> ---
+>  meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
+>=20
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb b/meta-oe/rec=
+ipes-graphics/xorg-app/xwd_1.0.6.bb
+> new file mode 100644
+> index 0000000..b73afe1
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xorg-app/xwd_1.0.6.bb
+> @@ -0,0 +1,11 @@
+> +SUMMARY =3D "xwd is a tool to capture an X window or screen to file"
+> +HOMEPAGE =3D "http://cgit.freedesktop.org/xorg/app/xwd/"
+> +SECTION =3D "x11/app"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc0cdb783e9a0198237371fdaa26a1=
+8bf"
+> +DEPENDS =3D "libxmu"
+> +
+> +SRC_URI[md5sum] =3D "6b5d48464c5f366e91efd08b62b12d94"
+> +SRC_URI[sha256sum] =3D "3bb396a2268d78de4b1c3e5237a85f7849d3434e87b3cd1f=
+4d57eef614227d79"
+> +
+> +require recipes-graphics/xorg-app/xorg-app-common.inc
 
-This works just fine without reverting to the original meta-oe structure.
+This line needs to be the first otherwise SUMMARY, HOMEPAGE, SECTION,
+LICENSE and DEPENDS are overwritten from .inc.
 
+I'll fix that.
 
-On Tue, Jul 22, 2014 at 8:52 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-> On Tue, Jul 22, 2014 at 08:33:00AM -0700, Tim Orling wrote:
-> > I'd rather not keep the original structure, part of my motivation for
-> > creating the layer was to not hide python recipes three directories deep.
-> > The structure of the meta-perl layer seems more natural to me.
->
-> meta-perl has also three directories deep structure, just with each
-> recipe in separate directory.
->
-> > However, I realize and regret that the layer.conf in my original patch
-> was
-> > broken and I need to fix it. Please see v2 for meta-python creation.
->
-> It was already merged in master.
->
-> > On Tue, Jul 22, 2014 at 4:34 AM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> > > * match old structure from meta-oe
-> > >
-> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > ---
-> > >  meta-python/{recipes-python => recipes-devtools}/python/pyrtm_0.2.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-autobahn_0.8.6.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-cheetah_2.4.4.bb
-> > >   | 0
-> > >  .../python/python-cloudeebus_0.6.0.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-cython_0.20.2.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-dateutil_1.5.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-epydoc_3.0.1.bb
-> > >  | 0
-> > >  .../python/python-feedparser_5.1.3.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-gdata_1.2.4.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-gevent_0.13.8.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-greenlet_0.4.1.bb
-> > >  | 0
-> > >  .../python/python-ldap/setup.cfg.patch
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-ldap_2.3.9.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-lxml_3.0.2.bb
-> > >  | 0
-> > >  .../0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > > | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-m2crypto_0.21.1.bb
-> > > | 0
-> > >  .../python/python-matplotlib/fix_setup.patch
-> > >  | 0
-> > >  .../python/python-matplotlib/fix_setupext.patch
-> > > | 0
-> > >  .../python/python-matplotlib_1.1.0.bb
-> > >   | 0
-> > >  .../python/python-numeric/no-lapack.patch
-> > > | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-numeric_24.2.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-pexpect_2.3.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-pip_1.3.1.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-psutil_0.6.1.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-pyalsaaudio_0.4.bb
-> > > | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-pyserial_2.4.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-pyudev_0.16.1.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-pyusb_1.0.0a2.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-pyyaml/setup.py
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-pyyaml_3.10.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/python-smbus_3.0.3.bb
-> > >   | 0
-> > >  .../python/python-sqlalchemy_0.7.9.bb
-> > >   | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-twisted_13.2.0.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-vobject_0.8.1c.bb
-> > >  | 0
-> > >  .../{recipes-python => recipes-devtools}/python/
-> python-webdav_0.1.2.bb
-> > >  | 0
-> > >  .../python/python-zopeinterface_4.1.1.bb
-> > >  | 0
-> > >  36 files changed, 0 insertions(+), 0 deletions(-)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > pyrtm_0.2.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-autobahn_0.8.6.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-cheetah_2.4.4.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-cloudeebus_0.6.0.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-cython_0.20.2.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-dateutil_1.5.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-epydoc_3.0.1.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-feedparser_5.1.3.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-gdata_1.2.4.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-gevent_0.13.8.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-greenlet_0.4.1.bb (100%)
-> > >  rename meta-python/{recipes-python =>
-> > > recipes-devtools}/python/python-ldap/setup.cfg.patch (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-ldap_2.3.9.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-lxml_3.0.2.bb (100%)
-> > >  rename meta-python/{recipes-python =>
-> > >
-> recipes-devtools}/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > > (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-m2crypto_0.21.1.bb (100%)
-> > >  rename meta-python/{recipes-python =>
-> > > recipes-devtools}/python/python-matplotlib/fix_setup.patch (100%)
-> > >  rename meta-python/{recipes-python =>
-> > > recipes-devtools}/python/python-matplotlib/fix_setupext.patch (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-matplotlib_1.1.0.bb (100%)
-> > >  rename meta-python/{recipes-python =>
-> > > recipes-devtools}/python/python-numeric/no-lapack.patch (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-numeric_24.2.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pexpect_2.3.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pip_1.3.1.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-psutil_0.6.1.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pyalsaaudio_0.4.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pyserial_2.4.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pyudev_0.16.1.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pyusb_1.0.0a2.bb (100%)
-> > >  rename meta-python/{recipes-python =>
-> > > recipes-devtools}/python/python-pyyaml/setup.py (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-pyyaml_3.10.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-smbus_3.0.3.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-sqlalchemy_0.7.9.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-twisted_13.2.0.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-vobject_0.8.1c.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-webdav_0.1.2.bb (100%)
-> > >  rename meta-python/{recipes-python => recipes-devtools}/python/
-> > > python-zopeinterface_4.1.1.bb (100%)
-> > >
-> > > diff --git a/meta-python/recipes-python/python/pyrtm_0.2.bb
-> > > b/meta-python/recipes-devtools/python/pyrtm_0.2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/pyrtm_0.2.bb
-> > > rename to meta-python/recipes-devtools/python/pyrtm_0.2.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-autobahn_0.8.6.bb
-> > > b/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-autobahn_0.8.6.bb
-> > > rename to meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
-> > > diff --git a/meta-python/recipes-python/python/python-cheetah_2.4.4.bb
-> > > b/meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-cheetah_2.4.4.bb
-> > > rename to meta-python/recipes-devtools/python/python-cheetah_2.4.4.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-cloudeebus_0.6.0.bb
-> > > b/meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-cloudeebus_0.6.0.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-cloudeebus_0.6.0.bb
-> > > diff --git a/meta-python/recipes-python/python/python-cython_0.20.2.bb
-> > > b/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-cython_0.20.2.bb
-> > > rename to meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > > diff --git a/meta-python/recipes-python/python/python-dateutil_1.5.bb
-> > > b/meta-python/recipes-devtools/python/python-dateutil_1.5.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-dateutil_1.5.bb
-> > > rename to meta-python/recipes-devtools/python/python-dateutil_1.5.bb
-> > > diff --git a/meta-python/recipes-python/python/python-epydoc_3.0.1.bb
-> > > b/meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-epydoc_3.0.1.bb
-> > > rename to meta-python/recipes-devtools/python/python-epydoc_3.0.1.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-feedparser_5.1.3.bb
-> > > b/meta-python/recipes-devtools/python/python-feedparser_5.1.3.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-feedparser_5.1.3.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-feedparser_5.1.3.bb
-> > > diff --git a/meta-python/recipes-python/python/python-gdata_1.2.4.bb
-> > > b/meta-python/recipes-devtools/python/python-gdata_1.2.4.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-gdata_1.2.4.bb
-> > > rename to meta-python/recipes-devtools/python/python-gdata_1.2.4.bb
-> > > diff --git a/meta-python/recipes-python/python/python-gevent_0.13.8.bb
-> > > b/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-gevent_0.13.8.bb
-> > > rename to meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-greenlet_0.4.1.bb
-> > > b/meta-python/recipes-devtools/python/python-greenlet_0.4.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-greenlet_0.4.1.bb
-> > > rename to meta-python/recipes-devtools/python/python-greenlet_0.4.1.bb
-> > > diff --git
-> a/meta-python/recipes-python/python/python-ldap/setup.cfg.patch
-> > > b/meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch
-> > > similarity index 100%
-> > > rename from
-> meta-python/recipes-python/python/python-ldap/setup.cfg.patch
-> > > rename to
-> meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch
-> > > diff --git a/meta-python/recipes-python/python/python-ldap_2.3.9.bb
-> > > b/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-ldap_2.3.9.bb
-> > > rename to meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
-> > > diff --git a/meta-python/recipes-python/python/python-lxml_3.0.2.bb
-> > > b/meta-python/recipes-devtools/python/python-lxml_3.0.2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-lxml_3.0.2.bb
-> > > rename to meta-python/recipes-devtools/python/python-lxml_3.0.2.bb
-> > > diff --git
-> > >
-> a/meta-python/recipes-python/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > >
-> b/meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > > similarity index 100%
-> > > rename from
-> > >
-> meta-python/recipes-python/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > > rename to
-> > >
-> meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> > > diff --git a/meta-python/recipes-python/python/
-> python-m2crypto_0.21.1.bb
-> > > b/meta-python/recipes-devtools/python/python-m2crypto_0.21.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-m2crypto_0.21.1.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-m2crypto_0.21.1.bb
-> > > diff --git
-> > > a/meta-python/recipes-python/python/python-matplotlib/fix_setup.patch
-> > > b/meta-python/recipes-devtools/python/python-matplotlib/fix_setup.patch
-> > > similarity index 100%
-> > > rename from
-> > > meta-python/recipes-python/python/python-matplotlib/fix_setup.patch
-> > > rename to
-> > > meta-python/recipes-devtools/python/python-matplotlib/fix_setup.patch
-> > > diff --git
-> > >
-> a/meta-python/recipes-python/python/python-matplotlib/fix_setupext.patch
-> > >
-> b/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
-> > > similarity index 100%
-> > > rename from
-> > > meta-python/recipes-python/python/python-matplotlib/fix_setupext.patch
-> > > rename to
-> > >
-> meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
-> > > diff --git a/meta-python/recipes-python/python/
-> python-matplotlib_1.1.0.bb
-> > > b/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-matplotlib_1.1.0.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-matplotlib_1.1.0.bb
-> > > diff --git
-> > > a/meta-python/recipes-python/python/python-numeric/no-lapack.patch
-> > > b/meta-python/recipes-devtools/python/python-numeric/no-lapack.patch
-> > > similarity index 100%
-> > > rename from
-> > > meta-python/recipes-python/python/python-numeric/no-lapack.patch
-> > > rename to
-> > > meta-python/recipes-devtools/python/python-numeric/no-lapack.patch
-> > > diff --git a/meta-python/recipes-python/python/python-numeric_24.2.bb
-> > > b/meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-numeric_24.2.bb
-> > > rename to meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pexpect_2.3.bb
-> > > b/meta-python/recipes-devtools/python/python-pexpect_2.3.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pexpect_2.3.bb
-> > > rename to meta-python/recipes-devtools/python/python-pexpect_2.3.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pip_1.3.1.bb
-> > > b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pip_1.3.1.bb
-> > > rename to meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-> > > diff --git a/meta-python/recipes-python/python/python-psutil_0.6.1.bb
-> > > b/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-psutil_0.6.1.bb
-> > > rename to meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-pyalsaaudio_0.4.bb
-> > > b/meta-python/recipes-devtools/python/python-pyalsaaudio_0.4.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-pyalsaaudio_0.4.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-pyalsaaudio_0.4.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pyserial_2.4.bb
-> > > b/meta-python/recipes-devtools/python/python-pyserial_2.4.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pyserial_2.4.bb
-> > > rename to meta-python/recipes-devtools/python/python-pyserial_2.4.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pyudev_0.16.1.bb
-> > > b/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pyudev_0.16.1.bb
-> > > rename to meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pyusb_1.0.0a2.bb
-> > > b/meta-python/recipes-devtools/python/python-pyusb_1.0.0a2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pyusb_1.0.0a2.bb
-> > > rename to meta-python/recipes-devtools/python/python-pyusb_1.0.0a2.bb
-> > > diff --git a/meta-python/recipes-python/python/python-pyyaml/setup.py
-> > > b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pyyaml/setup.py
-> > > rename to meta-python/recipes-devtools/python/python-pyyaml/setup.py
-> > > diff --git a/meta-python/recipes-python/python/python-pyyaml_3.10.bb
-> > > b/meta-python/recipes-devtools/python/python-pyyaml_3.10.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-pyyaml_3.10.bb
-> > > rename to meta-python/recipes-devtools/python/python-pyyaml_3.10.bb
-> > > diff --git a/meta-python/recipes-python/python/python-smbus_3.0.3.bb
-> > > b/meta-python/recipes-devtools/python/python-smbus_3.0.3.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-smbus_3.0.3.bb
-> > > rename to meta-python/recipes-devtools/python/python-smbus_3.0.3.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-sqlalchemy_0.7.9.bb
-> > > b/meta-python/recipes-devtools/python/python-sqlalchemy_0.7.9.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> python-sqlalchemy_0.7.9.bb
-> > > rename to meta-python/recipes-devtools/python/
-> python-sqlalchemy_0.7.9.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-twisted_13.2.0.bb
-> > > b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-twisted_13.2.0.bb
-> > > rename to meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> python-vobject_0.8.1c.bb
-> > > b/meta-python/recipes-devtools/python/python-vobject_0.8.1c.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-vobject_0.8.1c.bb
-> > > rename to meta-python/recipes-devtools/python/python-vobject_0.8.1c.bb
-> > > diff --git a/meta-python/recipes-python/python/python-webdav_0.1.2.bb
-> > > b/meta-python/recipes-devtools/python/python-webdav_0.1.2.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/python-webdav_0.1.2.bb
-> > > rename to meta-python/recipes-devtools/python/python-webdav_0.1.2.bb
-> > > diff --git a/meta-python/recipes-python/python/
-> > > python-zopeinterface_4.1.1.bb b/meta-python/recipes-devtools/python/
-> > > python-zopeinterface_4.1.1.bb
-> > > similarity index 100%
-> > > rename from meta-python/recipes-python/python/
-> > > python-zopeinterface_4.1.1.bb
-> > > rename to meta-python/recipes-devtools/python/
-> > > python-zopeinterface_4.1.1.bb
-> > > --
-> > > 2.0.2
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+--zOhrINIRDRtNKIHr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPOkZcACgkQN1Ujt2V2gBwTPgCgmPMMYW70sA4WwtRmfiDxeC4O
+WxgAn3AB+Acdl9H6OERrlzeDNbZrxfxx
+=zajh
+-----END PGP SIGNATURE-----
+
+--zOhrINIRDRtNKIHr--
