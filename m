@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
-	[74.125.82.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D64997064B
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C21CB70671
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 15:26:36 +0000 (UTC)
-Received: by mail-we0-f169.google.com with SMTP id u56so9246307wes.14
+	Tue, 22 Jul 2014 15:28:25 +0000 (UTC)
+Received: by mail-we0-f175.google.com with SMTP id t60so9334561wes.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 08:26:37 -0700 (PDT)
+	Tue, 22 Jul 2014 08:28:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=NYPXmeE8oeejcu7+/JQWvI4A75q7HQq689LjmrcboIU=;
-	b=jFMQCDZ/xa1h5C3/kyn8cIC12osDaEDZoo9eO+15x2cMp/S9duGNrObEHRMx1hQrpx
-	9OuXK8RnuQA3Nfjij+yfa9bKcDWHGTbCCFv2B3MTWfNL/niCDhue2uLlp3DOb5pQDEar
-	CdLTZxe6LXeDr8aFFfH9hnU/3r6vxlgUirtza3f5UWMmGrNpYE44M/4hZXLFK9niDiBq
-	YGf1m8L95gWjCRn/YdeGftYipTZ6XCiRw5mdLQ0a5CZYStzUwLxeuyJ0Mtutg2HqRyfd
-	ShImkAvDcjZO91pqYLOSvB0yBNeLnmOY4g43PawR9cuvEnSyR+76qErQi0aMtYBzU4n+
-	QHXA==
-X-Received: by 10.180.221.108 with SMTP id qd12mr15618307wic.83.1406042797053; 
-	Tue, 22 Jul 2014 08:26:37 -0700 (PDT)
+	bh=W23peoqMnNfWQIKurr7KO7uNU84jBAoWnUrge2l2kZA=;
+	b=kFmZOTE+2PxvLt+OQs8akafr0gyrmphl6VMqIW3ouM0MtkP0JVSyxFt5qH3eaR5S/x
+	mI0wFbB4DNnMZtFW3DJD9MS2cqn8tVCimHN9nL3GdpKP8gPVpa9VUnI7AXjfogFws3a0
+	UCZjLK2/o7nNB1rfzgoVkT9Ax8RMeOyM0+Q0WvNh5xp6+hovJ8AGb18FK48tnv1E9mxT
+	voId7+Am9Q3BwQEzEIo4Q/l3BaTxhsz85T23ZkdoLXK8huPqfcD6fySjLeTo0yk72lcz
+	Z15+ZRUp7zhyRuPFQa6bv98DuzUdwIfWtDTsqPV3EslO2TMI5KtsqwMcqqnd4s2paYWS
+	xGBg==
+X-Received: by 10.194.87.97 with SMTP id w1mr35181290wjz.42.1406042906191;
+	Tue, 22 Jul 2014 08:28:26 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ch5sm1733132wjb.18.2014.07.22.08.26.36 for <multiple recipients>
+	fw4sm3755443wib.19.2014.07.22.08.28.25 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 Jul 2014 08:26:36 -0700 (PDT)
+	Tue, 22 Jul 2014 08:28:25 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jul 2014 17:26:49 +0200
-Message-Id: <1406042809-14261-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 22 Jul 2014 17:28:40 +0200
+Message-Id: <1406042920-15233-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.2
-Subject: [meta-oe][PATCHv2] snort: add openssl PACKAGECONFIG
+Subject: [meta-oe][PATCH] snort: move files from 'files' to 'snort' for faster lookup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +43,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 15:26:39 -0000
-
-* otherwise the result isn't deterministic
-  WARN: packages/armv5te-oe-linux-gnueabi/snort/snort/latest lost dependency on  libcrypto
-
-* enable it by default, disabling currently doesn't work, because there are --with flags for
-  openssl, but then configure.in still checks for sha.h header with
-  AC_CHECK_HEADERS([openssl/sha.h],, SHA_H="no")
-  and autodetects it, I'll leave patching configure to someone who
-  is actually using snort (this issue was reported many times and
-  nobody seems to care).
+X-List-Received-Date: Tue, 22 Jul 2014 15:28:27 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../snort/{files => snort}/0001-libpcap-search-sysroot-for-headers.patch  | 0
+ .../snort/{files => snort}/disable-dap-address-space-id.patch             | 0
+ .../recipes-connectivity/snort/{files => snort}/disable-inaddr-none.patch | 0
+ meta-networking/recipes-connectivity/snort/{files => snort}/snort.init    | 0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-networking/recipes-connectivity/snort/{files => snort}/0001-libpcap-search-sysroot-for-headers.patch (100%)
+ rename meta-networking/recipes-connectivity/snort/{files => snort}/disable-dap-address-space-id.patch (100%)
+ rename meta-networking/recipes-connectivity/snort/{files => snort}/disable-inaddr-none.patch (100%)
+ rename meta-networking/recipes-connectivity/snort/{files => snort}/snort.init (100%)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-index b7a5437..9b46380 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-@@ -32,6 +32,12 @@ EXTRA_OECONF = " \
- 	--with-dnet-libraries=${STAGING_LIBDIR} \
- 	"
- 
-+# if you want to disable it, you need to patch configure.in first
-+# AC_CHECK_HEADERS([openssl/sha.h],, SHA_H="no")
-+# is called even with --without-openssl-includes
-+PACKAGECONFIG ?= "openssl"
-+PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
-+
- do_install_append() {
-     install -d ${D}/${sysconfdir}/snort/rules
-     install -d ${D}/${sysconfdir}/snort/preproc_rules
+diff --git a/meta-networking/recipes-connectivity/snort/files/0001-libpcap-search-sysroot-for-headers.patch b/meta-networking/recipes-connectivity/snort/snort/0001-libpcap-search-sysroot-for-headers.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/snort/files/0001-libpcap-search-sysroot-for-headers.patch
+rename to meta-networking/recipes-connectivity/snort/snort/0001-libpcap-search-sysroot-for-headers.patch
+diff --git a/meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch b/meta-networking/recipes-connectivity/snort/snort/disable-dap-address-space-id.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/snort/files/disable-dap-address-space-id.patch
+rename to meta-networking/recipes-connectivity/snort/snort/disable-dap-address-space-id.patch
+diff --git a/meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch b/meta-networking/recipes-connectivity/snort/snort/disable-inaddr-none.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/snort/files/disable-inaddr-none.patch
+rename to meta-networking/recipes-connectivity/snort/snort/disable-inaddr-none.patch
+diff --git a/meta-networking/recipes-connectivity/snort/files/snort.init b/meta-networking/recipes-connectivity/snort/snort/snort.init
+similarity index 100%
+rename from meta-networking/recipes-connectivity/snort/files/snort.init
+rename to meta-networking/recipes-connectivity/snort/snort/snort.init
 -- 
 2.0.2
 
