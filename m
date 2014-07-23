@@ -1,37 +1,38 @@
 Return-Path: <nilesh.kokane@mindastoneridge.com>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 837B170660
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id F0F4870660
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 12:13:21 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id x48so1080826wes.19
+	Wed, 23 Jul 2014 12:17:55 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id f8so7401466wiw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 05:13:20 -0700 (PDT)
+	Wed, 23 Jul 2014 05:17:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:cc:content-type;
-	bh=Nr23Pc6woFRqEzxgYMOWogFU8VNXXVyxxYbCyuFiLSU=;
-	b=k2zTWYan89oeeLsp3za0udQlTjH/HBp5mWvdQyYDQhShWcJpy0623HsAdZlE3SLeWZ
-	dqrFIOcQfA18FbieDpZhPkoaiiVYmAryCeHCohhz/T3yYiQ5hOVvnPR4mJOBhv4jKBFd
-	EDq/Kl26vqWyqbnw6nDOYsy9Srf0C6N7Z4uZjaJ8DNfLd14RtKsJHSpV/RFfVG7PdqJ1
-	tCfuWuzKfDBcJFEbB+HHggXcp3U4xnmkUAD2ovVd9xyBfjLFg2KbDvVbt0klso/fLnPV
-	nrcOsojmKMjDma4wv9Mt2NcsfWSCMEGiZK6w1/EB4CtvXgPSTXvbgaaYS7QJ6FI6x7By
-	utcw==
-X-Gm-Message-State: ALoCoQkLPeKMxj4h8G1qFNAyNDGstm++uE0+5HK/io+4PQlk0+DNsgS1s4KDBnKBOK/6o51I3zTPqWX77YR8XXg44Ua38/izoZqXiBG/0cbvrki6AZ8uwnz1nG1J3jf+WcUEOxqnsJfJ
+	bh=2Kxx2eb5RCm467udPiRhbjLKmz6uNQbvAKlfw99a8J8=;
+	b=Q8uO7+KoYsBT8Ng9txcnmuXlw0t/Ca3UbWqFOtLckRV9W4He68Uxv8PXU8CZQahjH/
+	F9ssNspBGjt5T/Cu6hG73YwWzavKsqFn4pF/rSWfTY2O7YM1iA3YCsHArEtXZ2Kk/ETO
+	MzsbJEdUSTjubV7APiodyCK9SdxKj5+rL1Kc7V6sMXPyKgD7avlknTXl08fmLa6gvRDq
+	jvtZeH2wttRzd94k6zbDC8yS95jxqaKRZXXcecV6ciZyAaRU10PvXlOsRR5s7GeHybM3
+	Pwt1oFYh8Lv0XDzX0cnLDjCRFnEZoCiqabxL7FNR1Obm86E+8XLIsBOQgPd3nzkorITd
+	KG6g==
+X-Gm-Message-State: ALoCoQl+4ZIsB/j9Gkp2GIt5PV2yYZh3OIOEDS8Fr6wpTrFksFa02ovoPn7VhDG8gvdwgMKdSXXYz3yqSMaoj8vsUBpjyHsLnZyOacm0rZkn/jyQEGKkJ9BJVJRUudG/ptOOlxD9Bv4A
 MIME-Version: 1.0
-X-Received: by 10.180.182.131 with SMTP id ee3mr23624192wic.37.1406117600521; 
-	Wed, 23 Jul 2014 05:13:20 -0700 (PDT)
-Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 05:13:20 -0700 (PDT)
-In-Reply-To: <20140723120746.GC22875@jama>
+X-Received: by 10.194.238.231 with SMTP id vn7mr1083087wjc.99.1406117876364;
+	Wed, 23 Jul 2014 05:17:56 -0700 (PDT)
+Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 05:17:56 -0700 (PDT)
+In-Reply-To: <CAHURY+2vH57ZNh8RJxjw2=yt3kANmVuyLC8zOMQsPqSRR=MVaQ@mail.gmail.com>
 References: <CAHURY+0mB2G3oGHNSBGAn+_jZ78uB4VLBS=817gdhL-WBjOMuw@mail.gmail.com>
 	<20140723120746.GC22875@jama>
-Date: Wed, 23 Jul 2014 17:43:20 +0530
-Message-ID: <CAHURY+2vH57ZNh8RJxjw2=yt3kANmVuyLC8zOMQsPqSRR=MVaQ@mail.gmail.com>
+	<CAHURY+2vH57ZNh8RJxjw2=yt3kANmVuyLC8zOMQsPqSRR=MVaQ@mail.gmail.com>
+Date: Wed, 23 Jul 2014 17:47:56 +0530
+Message-ID: <CAHURY+0dvjJsXCh30Oq4Zx+Vs0_Jrn-eX5XH3RaDEVAOVaRDoQ@mail.gmail.com>
 From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
-To: openembedded-devel@lists.openembedded.org
+To: Martin Jansa <martin.jansa@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Sandeep Gound <sandeepg@mindastoneridge.com>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Building Qt5 using yocto on Wandboard-Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -46,11 +47,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 12:13:25 -0000
-X-Groupsio-MsgNum: 51207
-Content-Type: multipart/related; boundary=089e0163450017c77d04fedb4488
+X-List-Received-Date: Wed, 23 Jul 2014 12:17:57 -0000
+X-Groupsio-MsgNum: 51208
+Content-Type: multipart/related; boundary=089e01493d60899eae04fedb54f1
 
---089e0163450017c77d04fedb4488
+--089e01493d60899eae04fedb54f1
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -61,8 +62,9 @@ Thanks for your valuable reply
 
 I've  downloaded manually and placed it in the downloads folder as follows
 
-- cd /home/minda/bin/fsl-community-bsp/downloads
-- wget manually(successfully)
+- cd /home/minda/bin/fsl-community-
+bsp/downloads
+ - wget manually(successfully)
 - touch qtbase-opensource-src-5.1.1.tar.xz.done
 
 Then I gave a bitbake following which i got the errors as shown in the
@@ -73,98 +75,133 @@ previous mail.
 Please can u suggest.
 
 
+Thanks
+Nilesh Kokane
 
 
 
+On Wed, Jul 23, 2014 at 5:43 PM, Nilesh Kokane <
+nilesh.kokane@mindastoneridge.com> wrote:
 
-On Wed, Jul 23, 2014 at 5:37 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> On Wed, Jul 23, 2014 at 05:07:03PM +0530, Nilesh Kokane wrote:
-> > Hello ,
-> >
-> >
-> >
-> > I've created a yocto image using the following URL
-> >
-> >
-> http://wiki.wandboard.org/index.php/Getting_started_with_Yocto_on_Wandboa=
-rd
-> >
-> >
-> > And  trying to bring in Qt on wandboard using the following link
-> >
-> >
-> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
-> >
-> >
-> > Every thing goes fine until i give the following command
-> >
-> >  bitbake core-image-minimal
-> >
-> > It pops out with following errors.
-> >
-> >
-> > WARNING: Failed to fetch URL
-> >
-> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/=
-qtgraphicaleffects-opensource-src-5.1.1.tar.xz
-> ,
-> > attempting MIRRORS if available
-> >
-> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no outpu=
-t
-> > ERROR: Function failed: Fetcher failure for URL: '
-> >
-> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/=
-qtgraphicaleffects-opensource-src-5.1.1.tar.xz
-> '.
-> > Unable to fetch URL from any source.
-> > ERROR: Logfile of failure stored in:
-> >
-> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky=
--linux-gnueabi/qtgraphicaleffects/5.1.1-r0/temp/log.do_fetch.29384
-> > ERROR: Task 1283
-> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> > qtgraphicaleffects_5.1.1.bb, do_fetch) failed with exit code '1'
-> > WARNING: Failed to fetch URL
-> >
-> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/=
-qtdeclarative-opensource-src-5.1.1.tar.xz
-> ,
-> > attempting MIRRORS if available
-> >
-> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no outpu=
-t
-> > ERROR: Function failed: Fetcher failure for URL: '
-> >
-> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/=
-qtdeclarative-opensource-src-5.1.1.tar.xz
-> '.
-> > Unable to fetch URL from any source.
-> > ERROR: Logfile of failure stored in:
-> >
-> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky=
--linux-gnueabi/qtdeclarative/5.1.1-r0/temp/log.do_fetch.29383
-> > ERROR: Task 1270
-> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> > qtdeclarative_5.1.1.bb, do_fetch) failed with exit code '1'
-> >
-> >
-> > Please can anybody suggest.
+> Hello,
 >
-> Can you download it manually?
 >
-> The URL seems correct, so maybe something wrong with your network setup.
+> Thanks for your valuable reply
+>
+> I've  downloaded manually and placed it in the downloads folder as follow=
+s
+>
+> - cd /home/minda/bin/fsl-community-bsp/downloads
+>  - wget manually(successfully)
+> - touch qtbase-opensource-src-5.1.1.tar.xz.done
+>
+> Then I gave a bitbake following which i got the errors as shown in the
+> previous mail.
+>
+>
+>
+> Please can u suggest.
+>
+>
+>
+>
+>
+>
+> On Wed, Jul 23, 2014 at 5:37 PM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+>
+>> On Wed, Jul 23, 2014 at 05:07:03PM +0530, Nilesh Kokane wrote:
+>> > Hello ,
+>> >
+>> >
+>> >
+>> > I've created a yocto image using the following URL
+>> >
+>> >
+>> http://wiki.wandboard.org/index.php/Getting_started_with_Yocto_on_Wandbo=
+ard
+>> >
+>> >
+>> > And  trying to bring in Qt on wandboard using the following link
+>> >
+>> >
+>> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboar=
+d
+>> >
+>> >
+>> > Every thing goes fine until i give the following command
+>> >
+>> >  bitbake core-image-minimal
+>> >
+>> > It pops out with following errors.
+>> >
+>> >
+>> > WARNING: Failed to fetch URL
+>> >
+>> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules=
+/qtgraphicaleffects-opensource-src-5.1.1.tar.xz
+>> ,
+>> > attempting MIRRORS if available
+>> >
+>> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no outp=
+ut
+>> > ERROR: Function failed: Fetcher failure for URL: '
+>> >
+>> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules=
+/qtgraphicaleffects-opensource-src-5.1.1.tar.xz
+>> '.
+>> > Unable to fetch URL from any source.
+>> > ERROR: Logfile of failure stored in:
+>> >
+>> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-pok=
+y-linux-gnueabi/qtgraphicaleffects/5.1.1-r0/temp/log.do_fetch.29384
+>> > ERROR: Task 1283
+>> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+>> > qtgraphicaleffects_5.1.1.bb, do_fetch) failed with exit code '1'
+>> > WARNING: Failed to fetch URL
+>> >
+>> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules=
+/qtdeclarative-opensource-src-5.1.1.tar.xz
+>> ,
+>> > attempting MIRRORS if available
+>> >
+>> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no outp=
+ut
+>> > ERROR: Function failed: Fetcher failure for URL: '
+>> >
+>> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules=
+/qtdeclarative-opensource-src-5.1.1.tar.xz
+>> '.
+>> > Unable to fetch URL from any source.
+>> > ERROR: Logfile of failure stored in:
+>> >
+>> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-pok=
+y-linux-gnueabi/qtdeclarative/5.1.1-r0/temp/log.do_fetch.29383
+>> > ERROR: Task 1270
+>> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+>> > qtdeclarative_5.1.1.bb, do_fetch) failed with exit code '1'
+>> >
+>> >
+>> > Please can anybody suggest.
+>>
+>> Can you download it manually?
+>>
+>> The URL seems correct, so maybe something wrong with your network setup.
+>>
+>> --
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
+>
 >
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Thanks
 >
 >
 
@@ -185,7 +222,7 @@ strictly prohibited. If you are not the intended recipient, please=20
 immediately notify the sender by reply e-mail or phone and delete this=20
 message and its attachments, if any.=E2=80=9D
 
---089e0163450017c77d04fedb4488
+--089e01493d60899eae04fedb54f1
 Content-Type: image/png; name="image001.png"
 Content-Disposition: inline; filename="image001.png"
 Content-Transfer-Encoding: base64
@@ -1380,4 +1417,4 @@ ppcnCkwUmCgwUWCiwESBSQM38cDyFKhhQ5I2CnCLRq6GYKhhDPjNHS5/40TriQITBSYKTBSYKDBR
 q+W0azUA7jiG1bz1HevnJh+tY03RqbyJAhMFJgpMFFgPFNjUkn9PEZnWw0hNbZwoMFFgosBEgYkC
 EwUmCixR4P8BoitzjyPlp/oAAAAASUVORK5CYII=
 
---089e0163450017c77d04fedb4488--
+--089e01493d60899eae04fedb54f1--
