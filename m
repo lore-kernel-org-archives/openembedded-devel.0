@@ -1,33 +1,38 @@
 Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F09C70786
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id DB2C9707D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 01:03:13 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id x12so422102wgg.16
+	Wed, 23 Jul 2014 01:10:04 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id b13so413634wgh.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 18:03:14 -0700 (PDT)
+	Tue, 22 Jul 2014 18:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Ip0AE1XYLsBeOIfGY0pBuX6u5RKVi+8yC6y5sDhbLiA=;
-	b=lenfXwNKc+wLsOS6+rILF9x5v9FTsz9sF8nwoaZB0wQ4SD8K5XwgiDuRpJ528ZLHqX
-	Zcq1u5CUNZo2yDWfgPNk2nkLYUxFWApMVt+CLufxbF9yMoylSc0MUVPzSaOIZe4FjdB3
-	IcjsclrKdtqdKbBXWA2LEqqMEFm8AcA16WM9OYKBq5H7c7IwyOu3RSzPdlMZn8FgY0Wh
-	X4icnsRyvi2CkHxAk15XYVnryzUCy5nmMy5S6dH51U4yPorqFWk9zN0+YkDvOYLXGId/
-	Fdf3cfXHGjS+CXVHeKPL/c3UnWa2cBwU3M2pX+3OQ4G7atKCAyi4bkE8Lw/q3KGWgzu7
-	kHRA==
+	:content-type; bh=rWMCB/KOGGkIAIxuRko39bFP2Xog+mtE0Wn1jdneBU0=;
+	b=Y4cG/s+ttxq68aUY/YhoI33mGn04L1cI/L5lfbxmeOYFwqBMAmcAqSBOu2rU3ICJ7B
+	UhzMTWgxTlZBda9AljAZxtjaaI7UzUqTuPItGCDQOSa4Is2TA+MPwT7j7gLeckyFsvK6
+	alg5yxpJwVfHXOS2CcfZdGiGjG6mbd1IhvLUwhIRjD+dMnYz/owbkTnBarTPzOnbJk/L
+	i7oUbvT36oxbSKLcorcInL3ChaKBpOb2EpGeloLbvFcvOkQQ+QZAjHlqLo+szMYZpTHn
+	AmPbsckj+Fb3bhmftKV5uTPBHl561shCmrKiTwSMYlRxKKlEtjRN9jpW+iyUuqxVk8Gm
+	ijVQ==
 MIME-Version: 1.0
-X-Received: by 10.194.92.244 with SMTP id cp20mr39887948wjb.109.1406077394548; 
-	Tue, 22 Jul 2014 18:03:14 -0700 (PDT)
-Received: by 10.194.18.114 with HTTP; Tue, 22 Jul 2014 18:03:14 -0700 (PDT)
-In-Reply-To: <20140722190116.GY22875@jama>
-References: <cover.1405465524.git.TicoTimo@gmail.com>
-	<20140722190116.GY22875@jama>
-Date: Tue, 22 Jul 2014 18:03:14 -0700
-Message-ID: <CAOLEWZVAwu4nRBUuSsES-qPqY5T7YubtwTeB=uxssqgy5JA+Yg@mail.gmail.com>
+X-Received: by 10.180.207.105 with SMTP id lv9mr19215049wic.23.1406077805377; 
+	Tue, 22 Jul 2014 18:10:05 -0700 (PDT)
+Received: by 10.194.18.114 with HTTP; Tue, 22 Jul 2014 18:10:05 -0700 (PDT)
+In-Reply-To: <CAD2C2VSFVUi9surRZhB9mZih2MUrUYZ+-zsq=RhrDXCEvber0g@mail.gmail.com>
+References: <CAD2C2VT=3DipX=8chChc6_NefZSfs3jocmYxePJp5THxANiKVg@mail.gmail.com>
+	<53BC1835.90204@balister.org>
+	<CAD2C2VTnHrLsfhRXcUxpcpXgWK+LzxxD87XrvrN6wiiMK+CMUw@mail.gmail.com>
+	<CAD2C2VSTKS+NX=0CAwh1PAtkKgcHh+mpwMMVmh_b4dw9GeaABw@mail.gmail.com>
+	<53C51AE2.4030100@bec-systems.com>
+	<CAD2C2VR22ww51=1UQbW7OxtWvr8dV1PjLhr0d0O176JtX6PJKQ@mail.gmail.com>
+	<CAD2C2VSFVUi9surRZhB9mZih2MUrUYZ+-zsq=RhrDXCEvber0g@mail.gmail.com>
+Date: Tue, 22 Jul 2014 18:10:05 -0700
+Message-ID: <CAOLEWZXWK0smRL0v+Ke+EGnNy_ho52rc9xmc3pq-f38s8mcsUQ@mail.gmail.com>
 From: Stephen Arnold <stephen.arnold42@gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 0/2] meta-python creation
+Subject: Re: open embedded build issues with beagle board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,190 +46,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 01:03:16 -0000
+X-List-Received-Date: Wed, 23 Jul 2014 01:10:08 -0000
 Content-Type: text/plain; charset=UTF-8
 
-And when you say "depend" in that context, you mean add it to your local
-bblayers, right?
+It's in the layer index, which will point to the beagleboard.org stuff on
+github:
 
-Just checking...
+https://github.com/beagleboard
+
+Have fun...
 
 Steve
 
 
-On Tue, Jul 22, 2014 at 12:01 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+On Tue, Jul 22, 2014 at 3:15 AM, Bryan <just4tech83@gmail.com> wrote:
 
-> On Tue, Jul 15, 2014 at 04:32:32PM -0700, Tim Orling wrote:
-> > ********
-> > This layer is intended to be the home of python modules for OpenEmbedded.
-> > Modules in this layer need to be independent of openembedded-core and
-> > meta-openembedded/meta-oe. Because of this, modules required by 'gateone'
-> > and 'anki' are not included and remain in:
-> >         meta-openembedded/meta-oe/recipes-devtools/python.
->
-> meta-networking/README should be updated to depend on meta-python
->
-> ERROR: Nothing PROVIDES 'python-m2crypto-native' (but
-> meta-oe/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb DEPENDS
-> on or otherwise requires it).
+> Please suggest me link to get  meta layer for beagkeboard.
+> On Jul 17, 2014 10:36 AM, "Bryan" <just4tech83@gmail.com> wrote:
 >
 > >
-> > Maintainers:
-> >         Tim "moto-timo" Orling <TicoTimo@gmail.com>
-> >         Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
-> > ********
+> > Hi,
+> >    Thanks for your suggestion to use meta-ti layer. Cau you please tell
+> us
+> > where we can find this layer as we couldn't find it on openembedded git.
 > >
-> > The following changes since commit
-> 239debcd8a0359aad64406476b801948f9b8ff14:
+> > We tried with following link to build but it gives error while building.
+> > https://github.com/beagleboard/meta-beagleboard
 > >
-> >   usleep: add 1.0 recipe (2014-07-15 15:03:43 +0200)
 > >
-> > are available in the git repository at:
+> > Thanks
+> > Bryan
+> > On Jul 15, 2014 5:43 PM, "Cliff Brake" <cbrake@bec-systems.com> wrote:
 > >
-> >   git://git.openembedded.org/meta-openembedded-contrib timo/meta-python
-> >
-> http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=timo/meta-python
-> >
-> > Tim Orling (2):
-> >   meta-python: create layer
-> >   meta-python: move recipes from meta-oe
-> >
-> >  meta-python/COPYING.MIT                            | 17 +++++++
-> >  meta-python/README                                 | 53
-> ++++++++++++++++++++++
-> >  meta-python/conf/layer.conf                        |  9 ++++
-> >  .../recipes-python}/pyrtm_0.2.bb                   |  0
-> >  .../recipes-python}/python-autobahn_0.8.6.bb       |  0
-> >  .../recipes-python}/python-cheetah_2.4.4.bb        |  0
-> >  .../recipes-python}/python-cloudeebus_0.6.0.bb     |  0
-> >  .../recipes-python}/python-cython_0.20.2.bb        |  0
-> >  .../recipes-python}/python-dateutil_1.5.bb         |  0
-> >  .../recipes-python}/python-epydoc_3.0.1.bb         |  0
-> >  .../recipes-python}/python-feedparser_5.1.3.bb     |  0
-> >  .../recipes-python}/python-gdata_1.2.4.bb          |  0
-> >  .../recipes-python}/python-gevent_0.13.8.bb        |  0
-> >  .../recipes-python}/python-greenlet_0.4.1.bb       |  0
-> >  .../recipes-python}/python-ldap/setup.cfg.patch    |  0
-> >  .../recipes-python}/python-ldap_2.3.9.bb           |  0
-> >  .../recipes-python}/python-lxml_3.0.2.bb           |  0
-> >  ...y-link-in-sysroot-not-in-host-directories.patch |  0
-> >  .../recipes-python}/python-m2crypto_0.21.1.bb      |  0
-> >  .../python-matplotlib/fix_setup.patch              |  0
-> >  .../python-matplotlib/fix_setupext.patch           |  0
-> >  .../recipes-python}/python-matplotlib_1.1.0.bb     |  0
-> >  .../recipes-python}/python-numeric/no-lapack.patch |  0
-> >  .../recipes-python}/python-numeric_24.2.bb         |  0
-> >  .../recipes-python}/python-pexpect_2.3.bb          |  0
-> >  .../recipes-python}/python-pip_1.3.1.bb            |  0
-> >  .../recipes-python}/python-psutil_0.6.1.bb         |  0
-> >  .../recipes-python}/python-pyalsaaudio_0.4.bb      |  0
-> >  .../recipes-python}/python-pyserial_2.4.bb         |  0
-> >  .../recipes-python}/python-pyudev_0.16.1.bb        |  0
-> >  .../recipes-python}/python-pyusb_1.0.0a2.bb        |  0
-> >  .../recipes-python}/python-pyyaml/setup.py         |  0
-> >  .../recipes-python}/python-pyyaml_3.10.bb          |  0
-> >  .../recipes-python}/python-smbus_3.0.3.bb          |  0
-> >  .../recipes-python}/python-sqlalchemy_0.7.9.bb     |  0
-> >  .../recipes-python}/python-twisted_13.2.0.bb       |  0
-> >  .../recipes-python}/python-vobject_0.8.1c.bb       |  0
-> >  .../recipes-python}/python-webdav_0.1.2.bb         |  0
-> >  .../recipes-python}/python-zopeinterface_4.1.1.bb  |  0
-> >  39 files changed, 79 insertions(+)
-> >  create mode 100644 meta-python/COPYING.MIT
-> >  create mode 100644 meta-python/README
-> >  create mode 100644 meta-python/conf/layer.conf
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> pyrtm_0.2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-autobahn_0.8.6.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-cheetah_2.4.4.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-cloudeebus_0.6.0.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-cython_0.20.2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-dateutil_1.5.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-epydoc_3.0.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-feedparser_5.1.3.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-gdata_1.2.4.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-gevent_0.13.8.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-greenlet_0.4.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-ldap/setup.cfg.patch (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-ldap_2.3.9.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-lxml_3.0.2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-m2crypto_0.21.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-matplotlib/fix_setup.patch (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-matplotlib/fix_setupext.patch (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-matplotlib_1.1.0.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-numeric/no-lapack.patch (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-numeric_24.2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pexpect_2.3.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pip_1.3.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-psutil_0.6.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pyalsaaudio_0.4.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pyserial_2.4.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pyudev_0.16.1.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pyusb_1.0.0a2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python =>
-> meta-python/recipes-python}/python-pyyaml/setup.py (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-pyyaml_3.10.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-smbus_3.0.3.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-sqlalchemy_0.7.9.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-twisted_13.2.0.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-vobject_0.8.1c.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-webdav_0.1.2.bb (100%)
-> >  rename {meta-oe/recipes-devtools/python => meta-python/recipes-python}/
-> python-zopeinterface_4.1.1.bb (100%)
-> >
-> > --
-> > 1.9.3
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
+> >>  The meta-ti layer includes support for the beagleboard.  You probably
+> >> want the linux-mainline 3.2 recipe.
+> >>
+> >> Cliff
+> >>
+> >> On 07/15/2014 12:29 AM, Bryan wrote:
+> >>
+> >> Hi Cliff,
+> >>          thanks for your suggestion, i tried links which you mentioned
+> in
+> >> your mail. Now i am able to build minimal image for MACHINE = qmux6.
+> >> Can you please tell us how can we make it for beagleboard omap 3530.
+> >> Where can we find support layer for beagleboard.
+> >>
+> >> Thanks a lot in advance !
+> >> On Jul 11, 2014 11:30 AM, "Bryan" <just4tech83@gmail.com> wrote:
+> >>
+> >>> Hi,
+> >>>      As per your suggestion we took oe-core and other packages from
+> >>> followinf link:
+> >>> -> http://git.openembedded.org/meta-openembedded
+> >>>
+> >>> We are using bitbake version 1.23.1.
+> >>>
+> >>> We have to build image for beagleboard so we find following to build
+> >>> image:
+> >>>
+> >>> ->
+> >>>
+> http://www.crashcourse.ca/wiki/index.php/Building_for_BBB_using_OpenEmbedded
+> >>>
+> >>> While following steps from the above link we have done following
+> >>> settings in local.conf  and bblayers.conf file.
+> >>>
+> >>> MACHINE ??= "beaglebone"
+> >>> BBLAYERS ?= " \
+> >>>   /home/rpjday/oe/dist/layers/oe-core/meta \
+> >>>   /home/rpjday/oe/dist/layers/meta-openembedded/meta-oe \
+> >>>   /home/rpjday/oe/dist/layers/meta-beagleboard/common-bsp \
+> >>>   "
+> >>> Now while running "bitbake core-image-minimal" command we are getting
+> >>> following issues :
+> >>>
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/intro_what.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/program_ram.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/arch_apis.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/transapp_reclimit.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/am_close.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/lock_stdmode.html':
+> >>> Operation not permitted
+> >>> chown: changing ownership of
+> >>>
+> `/home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image/home/test/oe/oe-core/build/tmp-eglibc/sysroots/i686-linux/usr/share/doc/programmer_reference/transapp_env_open.html':
+> >>> Operation not permitted
+> >>>
+> >>> WARNING:
+> >>>
+> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/temp/run.do_install.26236:1
+> >>> exit 1 from
+> >>>   chown -R root:root
+> >>>
+> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/image
+> >>> ERROR: Function failed: do_install (log file is located at
+> >>>
+> /home/test/oe/oe-core/build/tmp-eglibc/work/i686-linux/db-native/5.3.21-r0/temp/log.do_install.26236)
+> >>>
+> >>> one more doubt about the code base which we should follow as we found
+> >>> one other link which have oe-core code at "
+> >>> https://github.com/openembedded". We have tried both and found
+> seperate
+> >>> issues while using both.
+> >>>
+> >>> Please suggest us how we can overcome these issues to get test image
+> >>> build for beagleboard.
+> >>>
+> >>> Thanks in advance
+> >>> ---------- Forwarded message ----------
+> >>> From: "Philip Balister" <philip@balister.org>
+> >>> Date: Jul 8, 2014 9:42 PM
+> >>> Subject: Re: [oe] open embedded build issues with beagle board
+> >>> To: <openembedded-devel@lists.openembedded.org>
+> >>> Cc:
+> >>>
+> >>> On 07/08/2014 02:54 AM, Bryan wrote:
+> >>> > Hi All
+> >>> >  I am trying to build  Openembeeded classic for Beagle board-XM but i
+> >>> am
+> >>> > getting lot of broken link issues. I have  set DISTRO as
+> >>> angstrom-2010.x in
+> >>> > local.conf.   Is this approach  ok? or should i move to openembedded
+> >>> core ??
+> >>> > Pls suggest.
+> >>>
+> >>> Use the current Angstrom instructions, oe-classic is pretty much
+> >>> completely unsupported now.
+> >>>
+> >>> Philip
+> >>>
+> >>> >
+> >>> > Broken link e.g.
+> >>> >
+> >>> > Resolving www.angstrom-distribution.org (
+> www.angstrom-distribution.org
+> >>> )...
+> >>> > 140.211.169.177
+> >>> >  Connecting to www.angstrom-distribution.org
+> >>> > (www.angstrom-distribution.org)|140.211.169.177|:80...
+> >>> > connected.
+> >>> >  HTTP request sent, awaiting response...
+> >>> > 404 Not Found  2014-07-08 10:13:43 ERROR 404: Not Found.
+> >>> >
+> >>> > Thanks in advance
+> >>> >
+> >>> --
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>
+> >>
+> >>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 >
 
