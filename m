@@ -1,27 +1,34 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EE8A70671
+Return-Path: <nilesh.kokane@mindastoneridge.com>
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A1B570820
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 10:57:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6NAvKwf012496
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 23 Jul 2014 11:37:03 +0000 (UTC)
+Received: by mail-we0-f180.google.com with SMTP id w61so1045360wes.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 03:57:20 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.169.1;
-	Wed, 23 Jul 2014 03:57:19 -0700
-Message-ID: <53CF94FF.4080106@windriver.com>
-Date: Wed, 23 Jul 2014 18:57:03 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Wed, 23 Jul 2014 04:37:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=Cw/Vdwd2SHXLkEp8bZwjuVjqUV8CKKjz15hVfaitY+c=;
+	b=UW1FzX33COWYuveW71sdFRAtkM2p1N3VpsF3YEeJQiz7CZqe+kpRc4yO54De/DUhIy
+	yASaaSMeWODYiLMZa8Pm4hEjUrIXRYV8v6w2Db3XDObU0ipaME8Q9XsmIR+T1bpPVFw4
+	WDLE3xrFtEBNOpv8zoHt1VeK0OR6J8Ieb1PuA7ddV3r//WBoKNvES8gkgL0IRgm1Ve2e
+	BorSTBeFyVDSHMZeWRImlw4JINbFG6Q/BgdGIzPWJwqZ16pxd/lFU46S4ILFRm8OK6fm
+	vVzxHliH4TjeujeQS8cFheMWMtli13WzlNahIORzv11K5xNuvdBoLMjh3GXU8BSGz2Y9
+	Ktzw==
+X-Gm-Message-State: ALoCoQlxJh4iRpUB1IUaCtGhgPIgqL1qlsAW2yseTmytRVxnQbB8v8Lcd+lPrGv+FjUCQEhHze1HNeCQ4D+izpN8JmL4f6eHIyOefWjGYPZb+JAxElT3BpXLiOcx5mrd75mgmgfybNfF
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1406012813-21233-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1406012813-21233-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH v2][meta-perl] libxml-sax-writer-perl: add recipe
+X-Received: by 10.180.184.20 with SMTP id eq20mr2179599wic.37.1406115423934;
+	Wed, 23 Jul 2014 04:37:03 -0700 (PDT)
+Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 04:37:03 -0700 (PDT)
+Date: Wed, 23 Jul 2014 17:07:03 +0530
+Message-ID: <CAHURY+0mB2G3oGHNSBGAn+_jZ78uB4VLBS=817gdhL-WBjOMuw@mail.gmail.com>
+From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Building Qt5 using yocto on Wandboard-Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,53 +42,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 10:57:19 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Jul 2014 11:37:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Hongxu Jia <hongxu.jia@windriver.com>
+Hello ,
 
-//Hongxu
 
-On 07/22/2014 03:06 PM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   .../libxml/libxml-sax-writer-perl_0.54.bb          |   25 ++++++++++++++++++++
->   1 file changed, 25 insertions(+)
->   create mode 100644 meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
->
-> diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
-> new file mode 100644
-> index 0000000..52458e4
-> --- /dev/null
-> +++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY = "XML::SAX::Writer - SAX2 Writer"
-> +DESCRIPTION = "\
-> +XML::SAX::Writer helps to serialize SAX2 representations of XML documents to \
-> +strings, files, and other flat representations. It handles charset encodings, \
-> +XML escaping conventions, and so forth. It is still considered alpha, \
-> +although it has been put to limited use in settings such as XML::LibXML and \
-> +the AxKit XML Application Server. \
-> +"
-> +SECTION = "libs"
-> +LICENSE = "Artistic-1.0 | GPLv1+"
-> +HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
-> +DEPENDS += "libxml-filter-buffertext-perl-native"
-> +RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
-> +
-> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
-> +SRC_URI[sha256sum] = "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
-> +
-> +LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
-> +
-> +S = "${WORKDIR}/XML-SAX-Writer-${PV}"
-> +
-> +inherit cpan allarch
-> +
-> +BBCLASSEXTEND = "native"
 
+I've created a yocto image using the following URL
+
+http://wiki.wandboard.org/index.php/Getting_started_with_Yocto_on_Wandboard
+
+
+And  trying to bring in Qt on wandboard using the following link
+
+http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
+
+
+Every thing goes fine until i give the following command
+
+ bitbake core-image-minimal
+
+It pops out with following errors.
+
+
+WARNING: Failed to fetch URL
+http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
+graphicaleffects-opensource-src-5.1.1.tar.xz,
+attempting MIRRORS if available
+
+ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
+ERROR: Function failed: Fetcher failure for URL: '
+http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
+graphicaleffects-opensource-src-5.1.1.tar.xz'.
+Unable to fetch URL from any source.
+ERROR: Logfile of failure stored in:
+/home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-l=
+inux-gnueabi/qtgraphicaleffects/5.1.1-r0/temp/log.do_fetch.29384
+ERROR: Task 1283
+(/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+qtgraphicaleffects_5.1.1.bb, do_fetch) failed with exit code '1'
+WARNING: Failed to fetch URL
+http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
+declarative-opensource-src-5.1.1.tar.xz,
+attempting MIRRORS if available
+
+ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
+ERROR: Function failed: Fetcher failure for URL: '
+http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
+declarative-opensource-src-5.1.1.tar.xz'.
+Unable to fetch URL from any source.
+ERROR: Logfile of failure stored in:
+/home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-l=
+inux-gnueabi/qtdeclarative/5.1.1-r0/temp/log.do_fetch.29383
+ERROR: Task 1270
+(/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+qtdeclarative_5.1.1.bb, do_fetch) failed with exit code '1'
+
+
+Please can anybody suggest.
+
+
+--=20
+Thanks
+Nilesh Prakash Kokane
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
+=20
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
+=20
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
