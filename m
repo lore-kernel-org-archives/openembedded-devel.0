@@ -1,40 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id AA637607E5
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D0366AC9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 13:56:00 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id f8so7625852wiw.5
+	Wed, 23 Jul 2014 14:33:37 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id m15so1280958wgh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 06:56:01 -0700 (PDT)
+	Wed, 23 Jul 2014 07:33:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jNSeFy4oLXhBEwPL+iLc1V8XbeEUY5UoA+XaWPtqGF8=;
-	b=KbI7/NSF3uRdTM4sMQzxoiUaM+EJ1CHKmnQpIZsIXBbsgfiRS95iLDTDYxKS7W2iM+
-	jox5x8xcLZHNGnxVbf4ZskzOxOzwh/unGwQAiNDeF+HrNEO2p2YzWWLzwGrKRVGM2WBQ
-	tVMLJfGQ/v495j5gpIZwnw9vyfeK/hUbQeSJax8LomtaJSi4+qEVfLMYmg490N0eUIUz
-	G79NqEKgVbBXpx3DG0HnX6fDuUE8PoKwPPvrSS2wwSC/DtwF0Fvkq61QiY1bBVFfTvr0
-	oRv4b+JMz/kAHaD1Wzj5MEFTGzacfrZL/xlH5FB7foaZZDP5mK/U7XqRy5uBECULD77k
-	Y1Lg==
-X-Received: by 10.194.92.177 with SMTP id cn17mr2031846wjb.71.1406123761175;
-	Wed, 23 Jul 2014 06:56:01 -0700 (PDT)
+	bh=Czpp9FeTs5II4lWWWVq2sawiUfNOajs6eFBFfqX4fLg=;
+	b=OI+wYBqmXkjDlZcxPIHHSLS1QoiNa+BvHt7GPoIEac9y225WYhEnHNAGEUgSRyKmfH
+	4yBA+tJegWFChZT4J/NShMrGrNv85YnYBSeZ+wrvRFUHtyXdkmtnHMIPsVjjpMOf1FVg
+	QgIDDNsHIrs3WcJYcxd0aazFOT+bdXXE79N53JD9AwRZK2nMHbrRjX2JJ5sSgkSOrXTJ
+	MiqGqI8hiAJ3RCK5bJE6La0VV1yVaqxtIXNDECq43oPt1TnyoCA13+o7tud4hc7xiEYS
+	JbVkMafB5xp3SddhTg5EbK3lZfpG+zJtB/t9Y7q/RXvjnKACstDioGC8KiMOnwPveTA7
+	l8Lw==
+X-Received: by 10.194.5.103 with SMTP id r7mr2396531wjr.41.1406126018242;
+	Wed, 23 Jul 2014 07:33:38 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fb8sm9757654wib.15.2014.07.23.06.55.59
-	for <openembedded-devel@lists.openembedded.org>
+	by mx.google.com with ESMTPSA id m3sm9891313wik.7.2014.07.23.07.33.36
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Jul 2014 06:55:59 -0700 (PDT)
+	Wed, 23 Jul 2014 07:33:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Jul 2014 15:56:16 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140723135616.GD22875@jama>
-References: <1405981228-26871-1-git-send-email-akuster@mvista.com>
+Date: Wed, 23 Jul 2014 16:33:54 +0200
+To: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
+Message-ID: <20140723143354.GE22875@jama>
+References: <CAHURY+0mB2G3oGHNSBGAn+_jZ78uB4VLBS=817gdhL-WBjOMuw@mail.gmail.com>
+	<20140723120746.GC22875@jama>
+	<CAHURY+2vH57ZNh8RJxjw2=yt3kANmVuyLC8zOMQsPqSRR=MVaQ@mail.gmail.com>
+	<CAHURY+0dvjJsXCh30Oq4Zx+Vs0_Jrn-eX5XH3RaDEVAOVaRDoQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1405981228-26871-1-git-send-email-akuster@mvista.com>
+In-Reply-To: <CAHURY+0dvjJsXCh30Oq4Zx+Vs0_Jrn-eX5XH3RaDEVAOVaRDoQ@mail.gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] v3] Wireshark: build fix and recipe update
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Building Qt5 using yocto on Wandboard-Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,217 +50,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 13:56:08 -0000
-X-Groupsio-MsgNum: 51210
+X-List-Received-Date: Wed, 23 Jul 2014 14:33:41 -0000
+X-Groupsio-MsgNum: 51211
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bda7maMjJbTZ4Ov1"
+	protocol="application/pgp-signature"; boundary="0k7NRaGPjSSxFfo/"
 Content-Disposition: inline
 
---bda7maMjJbTZ4Ov1
-Content-Type: text/plain; charset=us-ascii
+--0k7NRaGPjSSxFfo/
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 21, 2014 at 03:20:28PM -0700, Armin Kuster wrote:
-> Backported Arm build fix
-> Added gtk3 support
-> Cleaned up PACKAGECONFIG options
-
-You cannot use IMAGE_FEATURES to define PACKAGECONFIG, see what I did
-with it in master-next (and confirm that you're ok with my changes).
-
-Also please notice wrong number of ']' in subject, no big deal, but I
-had to strip 'v3]" from subject lines manually when cherry-picking from
-patchwork.
-
-> Signed-off-by: Armin Kuster <akuster@mvista.com>
-> ---
->  .../files/va_list-can-t-be-NULL-on-ARM.patch       | 98 ++++++++++++++++=
-++++++
->  .../wireshark/wireshark_1.12.0-rc2.bb              |  5 +-
->  2 files changed, 102 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-support/wireshark/files/va_li=
-st-can-t-be-NULL-on-ARM.patch
+On Wed, Jul 23, 2014 at 05:47:56PM +0530, Nilesh Kokane wrote:
+> Hello,
 >=20
-> diff --git a/meta-networking/recipes-support/wireshark/files/va_list-can-=
-t-be-NULL-on-ARM.patch b/meta-networking/recipes-support/wireshark/files/va=
-_list-can-t-be-NULL-on-ARM.patch
-> new file mode 100644
-> index 0000000..301c381
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/wireshark/files/va_list-can-t-be-NU=
-LL-on-ARM.patch
-> @@ -0,0 +1,98 @@
-> +From 320c4f0d705a3ed94f710fb4b7b3eef897ff7bc4 Mon Sep 17 00:00:00 2001
-> +From: Steev Klimaszewski <threeway@gmail.com>
-> +Date: Thu, 19 Jun 2014 16:54:57 -0500
-> +Subject: [PATCH] va_list can't be NULL on ARM.
-> +
-> +Bug: 10209
-> +Change-Id: Ibd63a530450b7d2d4ec244e91c77caa731ba63aa
-> +Signed-off-by: Steev Klimaszewski <threeway@gmail.com>
-> +Signed-off-by: Balint Reczey <balint@balintreczey.hu>
-> +Reviewed-on: https://code.wireshark.org/review/2464
-> +Reviewed-by: Evan Huus <eapache@gmail.com>
-> +Reviewed-by: Michael Mann <mmann78@netscape.net>
-> +
-> +The patch was imported from the wireshark git server
-> +  (https://code.wireshark.org/review/p/wireshark.git) as of commit id
-> +    320c4f0d705a3ed94f710fb4b7b3eef897ff7bc4.
-> +
-> +Signed-off-by: Armin Kuster <akuster@mvista.com>
-> +
-> +---
-> + epan/expert.c | 36 +++++++++++++++++++++++++++++-------
-> + 1 file changed, 29 insertions(+), 7 deletions(-)
-> +
-> +diff --git a/epan/expert.c b/epan/expert.c
-> +index 46be838..a69566d 100644
-> +--- a/epan/expert.c
-> ++++ b/epan/expert.c
-> +@@ -381,15 +381,26 @@ expert_set_info_vformat(packet_info *pinfo, proto_=
-item *pi, int group, int sever
-> + 	tap_queue_packet(expert_tap, pinfo, ei);
-> + }
-> +=20
-> +-void
-> +-expert_add_info(packet_info *pinfo, proto_item *pi, expert_field *expin=
-dex)
-> ++/* Helper function for expert_add_info() to work around compiler's spec=
-ial needs on ARM*/
-> ++static inline void
-> ++expert_add_info_internal(packet_info *pinfo, proto_item *pi, expert_fie=
-ld *expindex, ...)
-> + {
-> ++	/* the va_list is ignored */
-> ++	va_list unused;
-> + 	expert_field_info* eiinfo;
-> +=20
-> + 	/* Look up the item */
-> + 	EXPERT_REGISTRAR_GET_NTH(expindex->ei, eiinfo);
-> +=20
-> +-	expert_set_info_vformat(pinfo, pi, eiinfo->group, eiinfo->severity, *e=
-iinfo->hf_info.p_id, FALSE, eiinfo->summary, NULL);
-> ++	va_start(unused, expindex);
-> ++	expert_set_info_vformat(pinfo, pi, eiinfo->group, eiinfo->severity, *e=
-iinfo->hf_info.p_id, FALSE, eiinfo->summary, unused);
-> ++	va_end(unused);
-> ++}
-> ++
-> ++void
-> ++expert_add_info(packet_info *pinfo, proto_item *pi, expert_field *expin=
-dex)
-> ++{
-> ++	expert_add_info_internal(pinfo, pi, expindex);
-> + }
-> +=20
-> + void
-> +@@ -406,22 +417,33 @@ expert_add_info_format(packet_info *pinfo, proto_i=
-tem *pi, expert_field *expinde
-> + 	va_end(ap);
-> + }
-> +=20
-> +-proto_item *
-> +-proto_tree_add_expert(proto_tree *tree, packet_info *pinfo, expert_fiel=
-d* expindex,
-> +-		tvbuff_t *tvb, gint start, gint length)
-> ++/* Helper function for expert_add_expert() to work around compiler's sp=
-ecial needs on ARM*/
-> ++static inline proto_item *
-> ++proto_tree_add_expert_internal(proto_tree *tree, packet_info *pinfo, ex=
-pert_field* expindex,
-> ++		tvbuff_t *tvb, gint start, gint length, ...)
-> + {
-> + 	expert_field_info* eiinfo;
-> + 	proto_item *ti;
-> ++	va_list unused;
-> +=20
-> + 	/* Look up the item */
-> + 	EXPERT_REGISTRAR_GET_NTH(expindex->ei, eiinfo);
-> +=20
-> + 	ti =3D proto_tree_add_text(tree, tvb, start, length, "%s", eiinfo->sum=
-mary);
-> +-	expert_set_info_vformat(pinfo, ti, eiinfo->group, eiinfo->severity, *e=
-iinfo->hf_info.p_id, FALSE, eiinfo->summary, NULL);
-> ++	va_start(unused, length);
-> ++	expert_set_info_vformat(pinfo, ti, eiinfo->group, eiinfo->severity, *e=
-iinfo->hf_info.p_id, FALSE, eiinfo->summary, unused);
-> ++	va_end(unused);
-> + 	return ti;
-> + }
-> +=20
-> + proto_item *
-> ++proto_tree_add_expert(proto_tree *tree, packet_info *pinfo, expert_fiel=
-d* expindex,
-> ++		tvbuff_t *tvb, gint start, gint length)
-> ++{
-> ++	return proto_tree_add_expert_internal(tree, pinfo, expindex, tvb, star=
-t, length);
-> ++}
-> ++
-> ++proto_item *
-> + proto_tree_add_expert_format(proto_tree *tree, packet_info *pinfo, expe=
-rt_field* expindex,
-> + 		tvbuff_t *tvb, gint start, gint length, const char *format, ...)
-> + {
-> +--=20
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-r=
-c2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> index 66716c3..47e72f4 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> @@ -14,6 +14,7 @@ PACKAGECONFIG +=3D " ${@bb.utils.contains("IMAGE_FEATUR=
-ES", "x11-base", "gtk2 grap
->  PACKAGECONFIG +=3D " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ip=
-v6", "", d)}"
-> =20
->  PACKAGECONFIG[gtk2] =3D "--with-gtk2=3Dyes,--with-gtk2=3Dno, gtk+"
-> +PACKAGECONFIG[gtk3] =3D "--with-gtk3=3Dyes, --with-gtk3=3Dno, gtk+3"
->  PACKAGECONFIG[graphics] =3D "--enable-wireshark, --disable-wireshark,"
->  PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
->  PACKAGECONFIG[gnutls] =3D "--with-gnutls=3Dyes,--with-gnutls=3Dno, gnutl=
-s"
-> @@ -22,7 +23,9 @@ PACKAGECONFIG[gcrypt] =3D "--with-gcrypt=3Dyes,--with-g=
-crypt=3Dno, libgcrypt"
->  EXTRA_OECONF =3D "--with-gtk3=3Dno --with-qt=3Dno --enable-usr-local=3Dn=
-o -enable-tshark"
-> =20
->  LIC_FILES_CHKSUM =3D "file://README.linux;md5=3D631e077455b7972172eb1491=
-95e065b0"
-> -SRC_URI =3D "http://wiresharkdownloads.riverbed.com/wireshark/src/wiresh=
-ark-1.12.0-rc2.tar.bz2 "
-> +SRC_URI =3D "http://wiresharkdownloads.riverbed.com/wireshark/src/wiresh=
-ark-1.12.0-rc2.tar.bz2 \
-> +    file://va_list-can-t-be-NULL-on-ARM.patch \
-> +    "
->     =20
->  SRC_URI[md5sum] =3D "dc1149073066a29f91116c168558262e"
->  SRC_URI[sha256sum]=3D "31009bb450126e9b12808267419f31016d14e6fde7b5e39c8=
-5ad37459908cffb"
-> --=20
-> 1.9.1
+>=20
+> Thanks for your valuable reply
+>=20
+> I've  downloaded manually and placed it in the downloads folder as follows
+>=20
+> - cd /home/minda/bin/fsl-community-
+> bsp/downloads
+>  - wget manually(successfully)
+> - touch qtbase-opensource-src-5.1.1.tar.xz.done
+>=20
+> Then I gave a bitbake following which i got the errors as shown in the
+> previous mail.
+>=20
+>=20
+>=20
+> Please can u suggest.
+
+Download the right packages qtdeclarative and qtgraphicaleffects not
+qtbase.
+
+>=20
+>=20
+> Thanks
+> Nilesh Kokane
+>=20
+>=20
+>=20
+> On Wed, Jul 23, 2014 at 5:43 PM, Nilesh Kokane <
+> nilesh.kokane@mindastoneridge.com> wrote:
+>=20
+> > Hello,
+> >
+> >
+> > Thanks for your valuable reply
+> >
+> > I've  downloaded manually and placed it in the downloads folder as foll=
+ows
+> >
+> > - cd /home/minda/bin/fsl-community-bsp/downloads
+> >  - wget manually(successfully)
+> > - touch qtbase-opensource-src-5.1.1.tar.xz.done
+> >
+> > Then I gave a bitbake following which i got the errors as shown in the
+> > previous mail.
+> >
+> >
+> >
+> > Please can u suggest.
+> >
+> >
+> >
+> >
+> >
+> >
+> > On Wed, Jul 23, 2014 at 5:37 PM, Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> >
+> >> On Wed, Jul 23, 2014 at 05:07:03PM +0530, Nilesh Kokane wrote:
+> >> > Hello ,
+> >> >
+> >> >
+> >> >
+> >> > I've created a yocto image using the following URL
+> >> >
+> >> >
+> >> http://wiki.wandboard.org/index.php/Getting_started_with_Yocto_on_Wand=
+board
+> >> >
+> >> >
+> >> > And  trying to bring in Qt on wandboard using the following link
+> >> >
+> >> >
+> >> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandbo=
+ard
+> >> >
+> >> >
+> >> > Every thing goes fine until i give the following command
+> >> >
+> >> >  bitbake core-image-minimal
+> >> >
+> >> > It pops out with following errors.
+> >> >
+> >> >
+> >> > WARNING: Failed to fetch URL
+> >> >
+> >> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodul=
+es/qtgraphicaleffects-opensource-src-5.1.1.tar.xz
+> >> ,
+> >> > attempting MIRRORS if available
+> >> >
+> >> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no ou=
+tput
+> >> > ERROR: Function failed: Fetcher failure for URL: '
+> >> >
+> >> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodul=
+es/qtgraphicaleffects-opensource-src-5.1.1.tar.xz
+> >> '.
+> >> > Unable to fetch URL from any source.
+> >> > ERROR: Logfile of failure stored in:
+> >> >
+> >> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-p=
+oky-linux-gnueabi/qtgraphicaleffects/5.1.1-r0/temp/log.do_fetch.29384
+> >> > ERROR: Task 1283
+> >> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+> >> > qtgraphicaleffects_5.1.1.bb, do_fetch) failed with exit code '1'
+> >> > WARNING: Failed to fetch URL
+> >> >
+> >> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodul=
+es/qtdeclarative-opensource-src-5.1.1.tar.xz
+> >> ,
+> >> > attempting MIRRORS if available
+> >> >
+> >> > ERROR: Fetcher failure: Fetch command failed with exit code 4, no ou=
+tput
+> >> > ERROR: Function failed: Fetcher failure for URL: '
+> >> >
+> >> http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodul=
+es/qtdeclarative-opensource-src-5.1.1.tar.xz
+> >> '.
+> >> > Unable to fetch URL from any source.
+> >> > ERROR: Logfile of failure stored in:
+> >> >
+> >> /home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-p=
+oky-linux-gnueabi/qtdeclarative/5.1.1-r0/temp/log.do_fetch.29383
+> >> > ERROR: Task 1270
+> >> > (/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
+> >> > qtdeclarative_5.1.1.bb, do_fetch) failed with exit code '1'
+> >> >
+> >> >
+> >> > Please can anybody suggest.
+> >>
+> >> Can you download it manually?
+> >>
+> >> The URL seems correct, so maybe something wrong with your network setu=
+p.
+> >>
+> >> --
+> >> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> >>
+> >
+> >
+> > --
+> > Thanks
+> >
+> >
+>=20
 >=20
 > --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Thanks
+>=20
+> --=20
+> =E2=80=9CThe contents of this e-mail message and any attachments are conf=
+idential=20
+> and are intended solely for addressee. The information may also be legall=
+y=20
+> privileged. This transmission is sent in trust, for the sole purpose of=
+=20
+> delivery to the intended recipient. If you have received this transmissio=
+n=20
+> in error, any use, reproduction or dissemination of this transmission is=
+=20
+> strictly prohibited. If you are not the intended recipient, please=20
+> immediately notify the sender by reply e-mail or phone and delete this=20
+> message and its attachments, if any.=E2=80=9D
+
+
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---bda7maMjJbTZ4Ov1
+--0k7NRaGPjSSxFfo/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPPvwAACgkQN1Ujt2V2gBzDTgCfSgMDWM2nGl93eh2ncYaNNzfQ
-SVIAnj8Ee8cJ4k8Va+wfmG03dOVb+JlY
-=nt7Z
+iEYEARECAAYFAlPPx9IACgkQN1Ujt2V2gByVZwCfUV94gVpc+B5QzJCX/rRKnGnk
+q7YAn3DGUg7KTwDBQJIGuFcy0/K6u30w
+=5sK3
 -----END PGP SIGNATURE-----
 
---bda7maMjJbTZ4Ov1--
+--0k7NRaGPjSSxFfo/--
