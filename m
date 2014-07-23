@@ -1,36 +1,39 @@
-Return-Path: <kapare@rogue-research.com>
-Received: from mail.rogue-research.com (mail.rogue-research.com [68.67.54.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AC16707D9
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B874707C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 23:07:08 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.rogue-research.com (Postfix) with ESMTP id B24C63B6F58F
+	Wed, 23 Jul 2014 00:14:44 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
+	via TCP (outbound) with ESMTPS id 20140723001444804
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 19:07:09 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at rogue-research.com
-Received: from mail.rogue-research.com ([127.0.0.1])
-	by localhost (kingu.rogue-research.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 1IoJ2o5sCD4i
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 19:07:02 -0400 (EDT)
-Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
-	[209.85.220.180])
-	by mail.rogue-research.com (Postfix) with ESMTPSA id 41ED23B6F580
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 19:07:02 -0400 (EDT)
-Received: by mail-vc0-f180.google.com with SMTP id ij19so694205vcb.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jul 2014 16:07:01 -0700 (PDT)
+	Wed, 23 Jul 2014 00:14:44 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [64.134.185.139] (port=58304 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1X9kCc-0000vB-GX for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jul 2014 20:14:38 -0400
+Date: Tue, 22 Jul 2014 20:14:32 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.11.1407222013280.24982@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-X-Received: by 10.52.34.46 with SMTP id w14mr21454189vdi.64.1406070421501;
-	Tue, 22 Jul 2014 16:07:01 -0700 (PDT)
-Received: by 10.58.237.200 with HTTP; Tue, 22 Jul 2014 16:07:01 -0700 (PDT)
-Date: Tue, 22 Jul 2014 19:07:01 -0400
-Message-ID: <CACgAsMdT_ZUw+z2qQ0CghqLYmKDUybwDYwvHwqu7N5SO6yqWYg@mail.gmail.com>
-From: =?UTF-8?Q?Kevyn=2DAlexandre_Par=C3=A9?= <kapare@rogue-research.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: [Yocto 1.6] PAM _pam_load_conf_file: unable to open /etc/pam.d/system-auth
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: [meta-oe][PATCH] Correct spelling of "BBFILES_PRIORITY" in comments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,57 +47,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jul 2014 23:07:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 23 Jul 2014 00:14:52 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hi,
 
-Just trying to found what's missing for PAM to work so ssh will stop
-exiting with Broken pipe? Quick fix to solve ssh broken pipe is to
-change in /etc/ssh/sshd_config "UsePAM yes" to "UsePAM no". But this
-does not remove my PAM error?
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-Here the log for PAM:
-root@ka:~$  journalctl | grep -i PAM
-Jan 01 00:00:11 ka systemd[1]: systemd 211 running in system mode.
-(+PAM +LIBWRAP -AUDIT -SELINUX +IMA +SYSVINIT -LIBCRYPTSETUP -GCRYPT
-+ACL +XZ -SECCOMP -APPARMOR)
-Jan 01 00:00:16 ka kernel[116]: [    4.918701] systemd[1]: systemd 211
-running in system mode. (+PAM +LIBWRAP -AUDIT -SELINUX +IMA +SYSVINIT
--LIBCRYPTSETUP -GCRYPT +ACL +XZ -SE
-CCOMP -APPARMOR)
-Jan 01 00:40:22 ka login[132]: pam_unix(login:account): account root
-has password changed in future
-Jan 01 00:40:22 ka login[132]: pam_lastlog(login:session): file
-/var/log/lastlog created
-Jan 01 00:40:22 ka login[132]: pam_unix(login:session): session opened
-for user root by LOGIN(uid=0)
-Jan 01 00:40:22 ka systemd[194]: PAM _pam_load_conf_file: unable to
-open /etc/pam.d/system-auth
-Jan 01 00:40:22 ka systemd[194]: PAM _pam_load_conf_file: unable to
-open /etc/pam.d/system-auth
-Jan 01 00:40:22 ka systemd[194]: Failed at step PAM spawning
-/lib/systemd/systemd: Operation not permitted
+---
 
-So my image contain pam:
-bitbake -e nirs-console-image | grep ^DISTRO_FEATURES=
-DISTRO_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia
-usbgadget usbhost wifi xattr nfs zeroconf pci 3g nfc x11 ipv4 ipv6
-libc-backtrace libc-big-macros libc-bsd libc-cxx-tests libc-catgets
-libc-charsets libc-crypt
-libc-crypt-ufc libc-db-aliases libc-envz libc-fcvt libc-fmtmsg
-libc-fstab libc-ftraverse
-libc-getlogin libc-idn libc-inet-anl libc-libm libc-locales
-libc-locale-code                                        libc-memusage
-libc-nis libc-nsswitch libc-rcmd libc-rtld-debug libc-spawn
-libc-streams libc-sunrpc         libc-utmp libc-utmpx libc-wordexp
-libc-posix-clang-wchar libc-posix-regexp libc-posix-regexp-glibc
-                                libc-posix-wchar-io largefile opengl
-ptest multiarch wayland pulseaudio systemd pam"
+diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+index 64a0a44..bfecb8c 100644
+--- a/meta-multimedia/conf/layer.conf
++++ b/meta-multimedia/conf/layer.conf
+@@ -4,7 +4,7 @@
+ # search the directories from first to last as specified in BBPATH
+ # Therefore if you want a given layer to be considered high priority
+ # for the .inc and .conf etc. then consider it adding at the beginning
+-# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
++# of BBPATH. For bblayers bitbake will use BBFILE_PRIORITY to resolve
+ # the recipe contention so the order of directories in BBFILES does
+ # not matter.
 
-Any clue or advise on how to fix this and why it's not working?
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 2a5a428..9d7a60a 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -4,7 +4,7 @@
+ # search the directories from first to last as specified in BBPATH
+ # Therefore if you want a given layer to be considered high priority
+ # for the .inc and .conf etc. then consider it adding at the beginning
+-# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
++# of BBPATH. For bblayers bitbake will use BBFILE_PRIORITY to resolve
+ # the recipe contention so the order of directories in BBFILES does
+ # not matter.
 
-BR,
+diff --git a/meta-systemd/conf/layer.conf b/meta-systemd/conf/layer.conf
+index f3fc45d..d8faf21 100644
+--- a/meta-systemd/conf/layer.conf
++++ b/meta-systemd/conf/layer.conf
+@@ -4,7 +4,7 @@
+ # search the directories from first to last as specified in BBPATH
+ # Therefore if you want a given layer to be considered high priority
+ # for the .inc and .conf etc. then consider it adding at the beginning
+-# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
++# of BBPATH. For bblayers bitbake will use BBFILE_PRIORITY to resolve
+ # the recipe contention so the order of directories in BBFILES does
+ # not matter.
 
--KA
+diff --git a/toolchain-layer/conf/layer.conf b/toolchain-layer/conf/layer.conf
+index ca81eb1..9289a8f 100644
+--- a/toolchain-layer/conf/layer.conf
++++ b/toolchain-layer/conf/layer.conf
+@@ -4,7 +4,7 @@
+ # search the directories from first to last as specified in BBPATH
+ # Therefore if you want a given layer to be considered high priority
+ # for the .inc and .conf etc. then consider it adding at the beginning
+-# of BBPATH. For bblayers bitbake will use BBFILES_PRIORITY to resolve
++# of BBPATH. For bblayers bitbake will use BBFILE_PRIORITY to resolve
+ # the recipe contention so the order of directories in BBFILES does
+ # not matter.
+
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
