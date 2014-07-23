@@ -1,34 +1,34 @@
-Return-Path: <nilesh.kokane@mindastoneridge.com>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A1B570820
+Return-Path: <coldnew.tw@gmail.com>
+Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 0905E6FC70
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 11:37:03 +0000 (UTC)
-Received: by mail-we0-f180.google.com with SMTP id w61so1045360wes.25
+	Wed, 23 Jul 2014 11:55:28 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id c41so691173yho.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 04:37:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=Cw/Vdwd2SHXLkEp8bZwjuVjqUV8CKKjz15hVfaitY+c=;
-	b=UW1FzX33COWYuveW71sdFRAtkM2p1N3VpsF3YEeJQiz7CZqe+kpRc4yO54De/DUhIy
-	yASaaSMeWODYiLMZa8Pm4hEjUrIXRYV8v6w2Db3XDObU0ipaME8Q9XsmIR+T1bpPVFw4
-	WDLE3xrFtEBNOpv8zoHt1VeK0OR6J8Ieb1PuA7ddV3r//WBoKNvES8gkgL0IRgm1Ve2e
-	BorSTBeFyVDSHMZeWRImlw4JINbFG6Q/BgdGIzPWJwqZ16pxd/lFU46S4ILFRm8OK6fm
-	vVzxHliH4TjeujeQS8cFheMWMtli13WzlNahIORzv11K5xNuvdBoLMjh3GXU8BSGz2Y9
-	Ktzw==
-X-Gm-Message-State: ALoCoQlxJh4iRpUB1IUaCtGhgPIgqL1qlsAW2yseTmytRVxnQbB8v8Lcd+lPrGv+FjUCQEhHze1HNeCQ4D+izpN8JmL4f6eHIyOefWjGYPZb+JAxElT3BpXLiOcx5mrd75mgmgfybNfF
+	Wed, 23 Jul 2014 04:55:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=PFsOo7xQlZjVoZxZGXKZsy1CQnNPe7hwPSvGaHnDBXo=;
+	b=Oq/IID2nFQA5T5nLeevAOzXHfPIR6ICmMNL2B+dra0DzukRALtUM2MhXcnHquCDSuV
+	ek+UkOpJ8gsGaqa6yTzTQ5OBm6sDzqtwX8KcJ1yY8Rm1c/2ptC5BZbRUOxmRwbeR51S/
+	5NcPVx9AREz83fXn5XFWE6HgrTxFo0wj6fWhyZ0+E4wtKZUNC3Ti2qj8iaKVRnKxQw9B
+	mANYb882abq4YjqKckHFbC8XLe/Io1IBuvGEhN3E9UlaBLwrsUTvEBc/74zmZtTkFHbx
+	cDTeIgPUhelgMAqy+94kdf/4MFk0pME9nyrTCFy42Jm9PY4lC7Hlk6NtJB5hR0mO/amJ
+	Nyjg==
 MIME-Version: 1.0
-X-Received: by 10.180.184.20 with SMTP id eq20mr2179599wic.37.1406115423934;
-	Wed, 23 Jul 2014 04:37:03 -0700 (PDT)
-Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 04:37:03 -0700 (PDT)
-Date: Wed, 23 Jul 2014 17:07:03 +0530
-Message-ID: <CAHURY+0mB2G3oGHNSBGAn+_jZ78uB4VLBS=817gdhL-WBjOMuw@mail.gmail.com>
-From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
+X-Received: by 10.236.209.228 with SMTP id s64mr1073869yho.132.1406116528967; 
+	Wed, 23 Jul 2014 04:55:28 -0700 (PDT)
+Received: by 10.170.100.69 with HTTP; Wed, 23 Jul 2014 04:55:28 -0700 (PDT)
+In-Reply-To: <20140723092011.GB22875@jama>
+References: <1406105533-78428-1-git-send-email-coldnew.tw@gmail.com>
+	<20140723092011.GB22875@jama>
+Date: Wed, 23 Jul 2014 19:55:28 +0800
+Message-ID: <CAF6djU9xC-2uES3T8oUB6LyJ-6cH=kRVRvzXXAWt7TS5whAjFA@mail.gmail.com>
+From: =?UTF-8?B?5b2l55G+?= <coldnew.tw@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Building Qt5 using yocto on Wandboard-Error
+Subject: Re: [meta-qt5][PATCH] cinematicexperience: fix qt5.3 compatibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,82 +42,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 11:37:05 -0000
+X-List-Received-Date: Wed, 23 Jul 2014 11:55:36 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hello ,
+2014-07-23 17:20 GMT+08:00 Martin Jansa <martin.jansa@gmail.com>:
 
+> On Wed, Jul 23, 2014 at 04:52:13PM +0800, coldnew wrote:
+> > cinematicexperience will run failed on Qt5.3 and Qt5.3.1, error message
+> > as below
+> >
+> > ------------------------------------------------------------
+> > Qt5_CinematicExperience.qml:26:5: Type MainView unavailable
+> >          MainView {
+> >          ^
+> > /content/MainView.qml:241:9: Type SettingsView unavailable
+> >              SettingsView {
+> >              ^
+> > /content/SettingsView.qml:88:13: Type Switch unavailable
+> >                  Switch {
+> >                  ^
+> > /content/Switch.qml:9:21: Cannot assign a value to a signal (expecting a
+> script to be run)
+> >          property string onText: "On"
+> >
+> >                          ^
+> >
+> > ------------------------------------------------------------
+> >
+> > This patch fix this issue and make cinematicexperience can run on qt5.3.
+> >
+> > ref:
+> http://wickwire2099.blogspot.tw/2014/05/qt-530-qt5-cinematic-experience.html
+> >
+> > Signed-off-by: coldnew <coldnew.tw@gmail.com>
+>
+> Can you please use full name?
+>
 
-
-I've created a yocto image using the following URL
-
-http://wiki.wandboard.org/index.php/Getting_started_with_Yocto_on_Wandboard
-
-
-And  trying to bring in Qt on wandboard using the following link
-
-http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
-
-
-Every thing goes fine until i give the following command
-
- bitbake core-image-minimal
-
-It pops out with following errors.
-
-
-WARNING: Failed to fetch URL
-http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
-graphicaleffects-opensource-src-5.1.1.tar.xz,
-attempting MIRRORS if available
-
-ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
-ERROR: Function failed: Fetcher failure for URL: '
-http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
-graphicaleffects-opensource-src-5.1.1.tar.xz'.
-Unable to fetch URL from any source.
-ERROR: Logfile of failure stored in:
-/home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-l=
-inux-gnueabi/qtgraphicaleffects/5.1.1-r0/temp/log.do_fetch.29384
-ERROR: Task 1283
-(/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-qtgraphicaleffects_5.1.1.bb, do_fetch) failed with exit code '1'
-WARNING: Failed to fetch URL
-http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
-declarative-opensource-src-5.1.1.tar.xz,
-attempting MIRRORS if available
-
-ERROR: Fetcher failure: Fetch command failed with exit code 4, no output
-ERROR: Function failed: Fetcher failure for URL: '
-http://download.qt-project.org/official_releases/qt/5.1/5.1.1/submodules/qt=
-declarative-opensource-src-5.1.1.tar.xz'.
-Unable to fetch URL from any source.
-ERROR: Logfile of failure stored in:
-/home/minda/bin/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-l=
-inux-gnueabi/qtdeclarative/5.1.1-r0/temp/log.do_fetch.29383
-ERROR: Task 1270
-(/home/minda/bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-qtdeclarative_5.1.1.bb, do_fetch) failed with exit code '1'
-
-
-Please can anybody suggest.
-
-
---=20
-Thanks
-Nilesh Prakash Kokane
-
---=20
-=E2=80=9CThe contents of this e-mail message and any attachments are confid=
-ential=20
-and are intended solely for addressee. The information may also be legally=
-=20
-privileged. This transmission is sent in trust, for the sole purpose of=20
-delivery to the intended recipient. If you have received this transmission=
-=20
-in error, any use, reproduction or dissemination of this transmission is=20
-strictly prohibited. If you are not the intended recipient, please=20
-immediately notify the sender by reply e-mail or phone and delete this=20
-message and its attachments, if any.=E2=80=9D
+ Ok, I'll resend this patch
 
