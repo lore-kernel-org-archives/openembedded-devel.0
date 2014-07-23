@@ -1,40 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
-	[74.125.82.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 199C270660
+Return-Path: <ting.liu@freescale.com>
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1blp0186.outbound.protection.outlook.com [207.46.163.186])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F2C170828
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 09:19:57 +0000 (UTC)
-Received: by mail-we0-f169.google.com with SMTP id u56so865438wes.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 02:19:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Z0OjhIzWSGEkeo6tMWAkqBR5yVmcXdrj9ydJCJMLv7E=;
-	b=C91U0QhEBTzNdpq10t85ZGu6dm7K14tVyi5vqMta/5xykN6e95RNP2957ZdiP1Npew
-	5B4fgVR7NHMdZg5hHF8lAmRYAtYUzuFp5r+juM7jmWBEU1Upf7ms+i1xcDPAVczp6I6w
-	0qer5LdlwM/9cUncpyzKtrg39WnwAiWHrWXfOKKIV+dg72Uv8HnTsgUTJdtTAJJpvCTA
-	jL1CVM4FmI7EUoIpsro4w/zhMkAYbm6F6e5xJ4G93QeiNTiYmSVJhnbBNnrQZUpT9pjS
-	rxqFSq84ThictxB4AFzxkFC01uX1pek0gG+NRW4DoQ8DWgSXKgPtT4egkY+zkSmvOIFp
-	I2Pg==
-X-Received: by 10.194.249.98 with SMTP id yt2mr43248215wjc.66.1406107195971;
-	Wed, 23 Jul 2014 02:19:55 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	l2sm4534721wjw.31.2014.07.23.02.19.54
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Jul 2014 02:19:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 23 Jul 2014 11:20:11 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140723092011.GB22875@jama>
-References: <1406105533-78428-1-git-send-email-coldnew.tw@gmail.com>
+	Wed, 23 Jul 2014 10:19:33 +0000 (UTC)
+Received: from BN1PR03MB156.namprd03.prod.outlook.com (10.255.201.28) by
+	BN1PR03MB124.namprd03.prod.outlook.com (10.255.201.23) with Microsoft
+	SMTP Server (TLS) id 15.0.990.7; Wed, 23 Jul 2014 10:19:32 +0000
+Received: from BN1PR03MB156.namprd03.prod.outlook.com (10.255.201.28) by
+	BN1PR03MB156.namprd03.prod.outlook.com (10.255.201.28) with Microsoft
+	SMTP Server (TLS) id 15.0.990.7; Wed, 23 Jul 2014 10:19:31 +0000
+Received: from BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.141]) by
+	BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.141]) with mapi id
+	15.00.0990.007; Wed, 23 Jul 2014 10:19:31 +0000
+From: "ting.liu@freescale.com" <ting.liu@freescale.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 for
+	powerpc/powerpc64
+Thread-Index: AQHPoPnD12K7WoUuREaO37e5ONjtWpuj2McAgAmLxQCAABhX4A==
+Date: Wed, 23 Jul 2014 10:19:31 +0000
+Message-ID: <9451d31a97f84bee88c53ef659d7b30a@BN1PR03MB156.namprd03.prod.outlook.com>
+References: <1405491841-24744-1-git-send-email-ting.liu@freescale.com>
+	<1405491841-24744-2-git-send-email-ting.liu@freescale.com>
+	<20140716132725.GX2433@jama>
+	<960fede6c06346c78c13b2cc097255dc@BN1PR03MB156.namprd03.prod.outlook.com>
+	<20140723085110.GA22875@jama>
+In-Reply-To: <20140723085110.GA22875@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [123.151.195.49]
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:
+x-forefront-prvs: 028166BF91
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(979002)(6009001)(377454003)(51704005)(189002)(199002)(13464003)(24454002)(93886003)(74316001)(77982001)(19580395003)(79102001)(76576001)(19580405001)(83322001)(107046002)(107886001)(15975445006)(99396002)(54356999)(21056001)(15202345003)(76176999)(92566001)(50986999)(2656002)(76482001)(33646002)(85852003)(81342001)(106116001)(46102001)(83072002)(80022001)(95666004)(99286002)(105586002)(575784001)(64706001)(66066001)(74662001)(87936001)(74502001)(86362001)(4396001)(2351001)(110136001)(101416001)(31966008)(77096002)(106356001)(85306003)(81542001)(20776003)(108616002)(24736002)(969003)(989001)(999001)(1009001)(1019001);
+	DIR:OUT; SFP:; SCL:1; SRVR:BN1PR03MB156;
+	H:BN1PR03MB156.namprd03.prod.outlook.com; FPR:; MLV:ovrnspm;
+	PTR:InfoNoRecords; MX:1; LANG:en; 
 MIME-Version: 1.0
-In-Reply-To: <1406105533-78428-1-git-send-email-coldnew.tw@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH] cinematicexperience: fix qt5.3 compatibility
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:
+X-OriginatorOrg: freescale.com
+Subject: Re: [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 for powerpc/powerpc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,155 +55,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jul 2014 09:20:01 -0000
-X-Groupsio-MsgNum: 51200
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Y18yPE/eBgOv3N1p"
-Content-Disposition: inline
-
---Y18yPE/eBgOv3N1p
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Jul 2014 10:19:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 23, 2014 at 04:52:13PM +0800, coldnew wrote:
-> cinematicexperience will run failed on Qt5.3 and Qt5.3.1, error message
-> as below
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-
+> devel-bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Wednesday, July 23, 2014 4:51 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH ppc/ppc64 f=
+or
+> powerpc/powerpc64
 >=20
-> ------------------------------------------------------------
-> Qt5_CinematicExperience.qml:26:5: Type MainView unavailable
->          MainView {
->          ^
-> /content/MainView.qml:241:9: Type SettingsView unavailable
->              SettingsView {
->              ^
-> /content/SettingsView.qml:88:13: Type Switch unavailable
->                  Switch {
->                  ^
-> /content/Switch.qml:9:21: Cannot assign a value to a signal (expecting a =
-script to be run)
->          property string onText: "On"
+> On Thu, Jul 17, 2014 at 07:09:18AM +0000, ting.liu@freescale.com wrote:
+> > > -----Original Message-----
+> > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > [mailto:openembedded- devel-bounces@lists.openembedded.org] On
+> > > Behalf Of Martin Jansa
+> > > Sent: Wednesday, July 16, 2014 9:27 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Cc: yocto@mindchasers.com
+> > > Subject: Re: [oe] [meta-oe][PATCH 1/3] libhugetlbfs: use ARCH
+> > > ppc/ppc64 for
+> > > powerpc/powerpc64
+> > >
+> > > On Wed, Jul 16, 2014 at 02:23:59PM +0800, ting.liu@freescale.com wrot=
+e:
+> > > > From: Ting Liu <b28495@freescale.com>
+> > > >
+> > > > In recent libhugetlbfs source, powerpc/powerpc64 is changed back
+> > > > to
+> > > > ppc/ppc64 (to match with the output of `uname -a`).
+> > > >
+> > > > Update the recipe to avoid build issue for now.
+> > > >
+> > > > Signed-off-by: Ting Liu <b28495@freescale.com>
+> > > > ---
+> > > >  .../libhugetlbfs/libhugetlbfs_git.bb               |    5 ++++-
+> > > >  1 files changed, 4 insertions(+), 1 deletions(-)
+> > > >
+> > > > diff --git
+> > > > a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > > b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > > index e8e0787..e554b26 100644
+> > > > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> > > > @@ -25,7 +25,10 @@ S =3D "${WORKDIR}/git"
+> > > >  COMPATIBLE_HOST =3D "(x86_64|powerpc|powerpc64|aarch64|arm).*-linu=
+x*"
+> > > >
+> > > >  LIBARGS =3D "LIB32=3D${baselib} LIB64=3D${baselib}"
+> > > > -EXTRA_OEMAKE =3D "'ARCH=3D${TARGET_ARCH}' 'OPT=3D${CFLAGS}' 'CC=3D=
+${CC}'
+> > > > ${LIBARGS}
+> > > V=3D1"
+> > > > +LIBHUGETLBFS_ARCH =3D "${TARGET_ARCH}"
+> > > > +LIBHUGETLBFS_ARCH_powerpc =3D "ppc"
+> > > > +LIBHUGETLBFS_ARCH_powerpc64 =3D "ppc64"
+> > > > +EXTRA_OEMAKE =3D "'ARCH=3D${LIBHUGETLBFS_ARCH}' 'OPT=3D${CFLAGS}' =
+'CC=3D${CC}'
+> > > ${LIBARGS} V=3D2"
+> > > >  PARALLEL_MAKE =3D ""
+> > > >  CFLAGS +=3D "-fexpensive-optimizations -frename-registers
+> > > > -fomit-frame-
+> > > pointer -g0"
+> > >
+> > > libhugetlbfs is currently failing with
+> > > http://logs.nslu2-
+> > > linux.org/buildlogs/oe/world/log.dependencies.20140714_130534.log/3_
+> > > min/failed
+> > > /libhugetlbfs.log
+> >
+> > I think the issue was fixed by this patch:
+> > http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&=
+i
+> > d=3D66709a85a2c0d0fdfadbd9832cb8056e65b39a36
+> >
+> > >
+> > > and it also fails to build for qemux86-64 (log in last world status e=
+-
+> mail).
+> > >
 >=20
->                          ^
+> with all the libhugetlbfs patches included I still get
 >=20
-> ------------------------------------------------------------
->=20
-> This patch fix this issue and make cinematicexperience can run on qt5.3.
->=20
-> ref: http://wickwire2099.blogspot.tw/2014/05/qt-530-qt5-cinematic-experie=
-nce.html
->=20
-> Signed-off-by: coldnew <coldnew.tw@gmail.com>
+> NOTE: recipe libhugetlbfs-1_2.18-r0: task do_compile: Started
+> ERROR: Function failed: do_compile (log file is located at
+> /home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-
+> linux/libhugetlbfs/1_2.18-r0/temp/log.do_compile.7225)
+> ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-
+> eglibc/work/core2-64-oe-linux/libhugetlbfs/1_2.18-r0/temp/log.do_compile.=
+7225
+> Log data follows:
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make ARCH=3Dx86_64 OPT=3D -O2 -pipe -g
+> | -feliminate-unused-debug-types -fexpensive-optimizations
+> | -frename-registers -fomit-frame-pointer -g0 CC=3Dx86_64-oe-linux-gcc
+> | -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -Wl,-O1
+> | -Wl,--hash-style=3Dgnu -Wl,--as-needed
+> | --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86=
+-64
+> LIB32=3Dlib LIB64=3Dlib V=3D2 ./localversion
+> version ./libhugetlbfs_testprobes.h ./libhugetlbfs_privutils.h ./libhuget=
+lbfs_
+> internal.h ./libhugetlbfs_debug.h ./kernel-features.h ./hugetlbfs.h *.c *=
+.lds
+> Makefile version update: 2.18 version string: 2.18 (modified) x86_64-oe-l=
+inux-
+> gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -Wl,-O1 -Wl=
+,--hash-
+> style=3Dgnu -Wl,--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/t=
+mp-
+> eglibc/sysroots/qemux86-64 -m32  -D__LIBHUGETLBFS__  -O2 -pipe -g -felimi=
+nate-
+> unused-debug-types -fexpensive-optimizations -frename-registers -fomit-fr=
+ame-
+> pointer -g0 -Wall -fPIC -o obj32/elflink.o -c elflink.c In file included =
+from
+> /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-
+> 64/usr/include/features.h:402:0,
+> |                  from /home/jenkins/oe/world/shr-core/tmp-
+> eglibc/sysroots/qemux86-64/usr/include/stdio.h:27,
+> |                  from elflink.c:23:
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/inc
+> | lude/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No such file or
+> directory  # include <gnu/stubs-32.h>
+> |                            ^
+> | compilation terminated.
+> | make: *** [obj32/elflink.o] Error 1
+> | ERROR: oe_runmake failed
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-linux/libh
+> | ugetlbfs/1_2.18-r0/temp/log.do_compile.7225)
+> NOTE: recipe libhugetlbfs-1_2.18-r0: task do_compile: Failed
+> ERROR: Task 25874 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta=
+-
+> oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb, do_compile) failed=
+ with
+> exit code '1'
 
-Can you please use full name?
+So 'BUILDTYPE=3DNATIVEONLY' is needed for all 64bit platforms, not only pow=
+erpc64.
 
-> ---
->  .../fix_qt5_3_compatibility.patch                  | 48 ++++++++++++++++=
-++++++
->  recipes-qt/examples/cinematicexperience_1.0.bb     |  1 +
->  2 files changed, 49 insertions(+)
->  create mode 100644 recipes-qt/examples/cinematicexperience/fix_qt5_3_com=
-patibility.patch
 >=20
-> diff --git a/recipes-qt/examples/cinematicexperience/fix_qt5_3_compatibil=
-ity.patch b/recipes-qt/examples/cinematicexperience/fix_qt5_3_compatibility=
-=2Epatch
-> new file mode 100644
-> index 0000000..fc132ec
-> --- /dev/null
-> +++ b/recipes-qt/examples/cinematicexperience/fix_qt5_3_compatibility.pat=
-ch
-> @@ -0,0 +1,48 @@
-> +Index: Qt5_CinematicExperience_rpi_1.0/content/SettingsView.qml
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- Qt5_CinematicExperience_rpi_1.0.orig/content/SettingsView.qml
-> ++++ Qt5_CinematicExperience_rpi_1.0/content/SettingsView.qml
-> +@@ -127,8 +127,8 @@ Item {
-> +             Switch {
-> +                 text: "Do you l-o-v-e colors?"
-> +                 checked: settings.showColors
-> +-                onText: "Yes"
-> +-                offText: "No!"
-> ++                textON: "Yes"
-> ++                textOFF: "No!"
-> +                 onCheckedChanged: {
-> +                     settings.showColors =3D checked;
-> +                 }
-> +Index: Qt5_CinematicExperience_rpi_1.0/content/Switch.qml
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- Qt5_CinematicExperience_rpi_1.0.orig/content/Switch.qml
-> ++++ Qt5_CinematicExperience_rpi_1.0/content/Switch.qml
-> +@@ -6,8 +6,8 @@ Item {
-> +=20
-> +     property alias text: textItem.text
-> +     property bool checked: false
-> +-    property string onText: "On"
-> +-    property string offText: "Off"
-> ++    property string textON: "On"
-> ++    property string textOFF: "Off"
-> +=20
-> +     QtObject {
-> +         id: priv
-> +@@ -120,7 +120,7 @@ Item {
-> +             color: "#000000"
-> +             font.pixelSize: 18
-> +             font.bold: true
-> +-            text: onText
-> ++            text: textON
-> +         }
-> +         Text {
-> +             anchors.verticalCenter: parent.verticalCenter
-> +@@ -129,7 +129,7 @@ Item {
-> +             color: "#ffffff"
-> +             font.pixelSize: 18
-> +             font.bold: true
-> +-            text: offText
-> ++            text: textOFF
-> +         }
-> +=20
-> +         Image {
-> diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/=
-examples/cinematicexperience_1.0.bb
-> index 9ee5532..116127f 100644
-> --- a/recipes-qt/examples/cinematicexperience_1.0.bb
-> +++ b/recipes-qt/examples/cinematicexperience_1.0.bb
-> @@ -5,6 +5,7 @@ LICENSE =3D "CC-BY-3.0"
->  LIC_FILES_CHKSUM =3D "file://README;beginline=3D38;endline=3D50;md5=3D51=
-babd597624b70752069953876aaa18"
-> =20
->  SRC_URI =3D "http://quitcoding.com/download/Qt5_CinematicExperience_rpi_=
-1.0.tgz"
-> +SRC_URI +=3D "file://fix_qt5_3_compatibility.patch"
-> =20
->  SRC_URI[md5sum] =3D "935a5db0a6b2a72c67236e72f52be7d1"
->  SRC_URI[sha256sum] =3D "0dd602983ced5f7c0cfd5ad0fbfe2b0b7e3c9ff715e4ef23=
-eef818ccc2b6c60b"
-> --=20
-> 1.9.2
+> > > Can we please fix it first?
+> > >
+> > > --
+> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Y18yPE/eBgOv3N1p
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPPfksACgkQN1Ujt2V2gBzhBgCeO+HsybWU0nVFFmksdmoxovua
-fR4AnRtdEtbSioCgYbCTEXzegorHsz1I
-=7wn3
------END PGP SIGNATURE-----
-
---Y18yPE/eBgOv3N1p--
