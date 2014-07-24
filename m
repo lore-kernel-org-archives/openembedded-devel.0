@@ -1,41 +1,44 @@
 Return-Path: <nilesh.kokane@mindastoneridge.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id E349C6AD05
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 956EA707C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 03:34:24 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id n3so8449324wiv.4
+	Thu, 24 Jul 2014 03:35:27 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id q58so2080781wes.18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jul 2014 20:34:25 -0700 (PDT)
+	Wed, 23 Jul 2014 20:35:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:cc:content-type;
-	bh=+gI7bYTK9ji+PUhM8zmBNahnDwbdgjCWG3zWiUEAq3M=;
-	b=FUKPEyv5ckLIXe55BheRTKHOLPnFyIdgN1D4SgtgXbjMAiAMfYpJG7HDrY/HHI1ZIk
-	uiLt4MUBbpiqJ+e1Pj0Q3Ch8izeKhWJwUmxj8FRp30/UgxNm1DB9PwN7U/oDuclaN2tT
-	fCeHeHfKbzv8Pu74y8ODMoREY6nisQfs0oJLRjvx4HttNObZWOVXYrkytokNkKg7Hrph
-	svmS2xPSR4VfwcD6zcYINDdr97SuhOdIYgN0JKNuB0BjlEI/l9lpKnpeUtyNrPpT7pUb
-	PoYiK1VSqyIU7PXwEvTgXdN8Bp3PXzHLlUdhGJM5eg/fZ968bU2WV8E63EzghY+sHqYF
-	ruNQ==
-X-Gm-Message-State: ALoCoQkyncipOxhmjjuZRIGxv8u1qrsQ0DYJ5gycjmrqE5q9dEnyM2ypKE0niIxQr9J2pCPjguS9lNIGXNi1ju8nP5ZSkNS+uwDrR+IvyYxOH0v0x1Ly5oDhu5+ij3FB49GM/gPu5V5y
+	bh=yoA3Cj+OKc2bcesQs715Trr+VLE9vGLIu59hBRQzeZc=;
+	b=ZDo6Q1y7BvkmFIno/7FTjuNvgaWz6aEezEVXgoS3N3VrmSs/3d7FUufPst+Q6CSq5/
+	MOY4hnAWzlY/pfqyU7k2gmXtj2bL75Q5Fv0NHLHt/uCq0OFd1n0/4Y90G5YxZHOOldwC
+	Cal7Wb8042Vezwd26O0W0OzumpB8nxJPR29+9YsdyIVOPLsHB6Iz7WyMf3IVlg2xzBRO
+	E12UmZxv44c6cataBaAwHaFYihHhRinQMnpZaAnGwbCUsgyE2ei5BzNyJdCrI1LHo+QP
+	/z5JMkjEXBtQBoSIOKB/uG4ic3qEyQ0xxVwkGyfFrKRxsK2nFQJj5wv6Q0kJmQAOokDQ
+	bYvA==
+X-Gm-Message-State: ALoCoQkEHAAsbgGYxx/RdF8U/y6ctKSB/fDm9y+QI6thh5atIPhJK/gmDZvyXYjcwwgRe1g/xs+m/lBEY7IAW36xdNSosVoOaRNjgfBz96/vD3cXCaG6v7KxYyKEveBNuxmC+TRFL2tk
 MIME-Version: 1.0
-X-Received: by 10.180.182.131 with SMTP id ee3mr29739066wic.37.1406172865831; 
-	Wed, 23 Jul 2014 20:34:25 -0700 (PDT)
-Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 20:34:25 -0700 (PDT)
-In-Reply-To: <20140723143354.GE22875@jama>
+X-Received: by 10.194.238.231 with SMTP id vn7mr7337747wjc.99.1406172928246;
+	Wed, 23 Jul 2014 20:35:28 -0700 (PDT)
+Received: by 10.217.55.10 with HTTP; Wed, 23 Jul 2014 20:35:28 -0700 (PDT)
+In-Reply-To: <CAHURY+3wE3MHkk=x6ZZvmUJ-MyTLdLZ78DALrb2LxBu02yUU1g@mail.gmail.com>
 References: <CAHURY+0mB2G3oGHNSBGAn+_jZ78uB4VLBS=817gdhL-WBjOMuw@mail.gmail.com>
 	<20140723120746.GC22875@jama>
 	<CAHURY+2vH57ZNh8RJxjw2=yt3kANmVuyLC8zOMQsPqSRR=MVaQ@mail.gmail.com>
 	<CAHURY+0dvjJsXCh30Oq4Zx+Vs0_Jrn-eX5XH3RaDEVAOVaRDoQ@mail.gmail.com>
 	<20140723143354.GE22875@jama>
-Date: Thu, 24 Jul 2014 09:04:25 +0530
-Message-ID: <CAHURY+3wE3MHkk=x6ZZvmUJ-MyTLdLZ78DALrb2LxBu02yUU1g@mail.gmail.com>
+	<CAHURY+3wE3MHkk=x6ZZvmUJ-MyTLdLZ78DALrb2LxBu02yUU1g@mail.gmail.com>
+Date: Thu, 24 Jul 2014 09:05:28 +0530
+Message-ID: <CAHURY+3apyDCHG4vZyqk2KSQs9eL7-ZCEGp5V_ujotLDvT+VnQ@mail.gmail.com>
 From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
 To: Martin Jansa <martin.jansa@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Building Qt5 using yocto on Wandboard-Error
+Cc: Sandeep Gound <sandeepg@mindastoneridge.com>,
+	openembedded-devel@lists.openembedded.org,
+	Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+Subject: Building Qt5 using yocto on Wandboard-Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,11 +52,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 03:34:32 -0000
-X-Groupsio-MsgNum: 51220
-Content-Type: multipart/related; boundary=089e0163450029505c04fee82216
+X-List-Received-Date: Thu, 24 Jul 2014 03:35:29 -0000
+X-Groupsio-MsgNum: 51221
+Content-Type: multipart/related; boundary=089e01493d60e1bf2f04fee82586
 
---089e0163450029505c04fee82216
+--089e01493d60e1bf2f04fee82586
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -271,6 +274,12 @@ s
 --=20
 Thanks
 
+
+
+
+--=20
+Thanks
+
 --=20
 =E2=80=9CThe contents of this e-mail message and any attachments are confid=
 ential=20
@@ -284,7 +293,7 @@ strictly prohibited. If you are not the intended recipient, please=20
 immediately notify the sender by reply e-mail or phone and delete this=20
 message and its attachments, if any.=E2=80=9D
 
---089e0163450029505c04fee82216
+--089e01493d60e1bf2f04fee82586
 Content-Type: image/png; name="image001.png"
 Content-Disposition: inline; filename="image001.png"
 Content-Transfer-Encoding: base64
@@ -1479,4 +1488,4 @@ ppcnCkwUmCgwUWCiwESBSQM38cDyFKhhQ5I2CnCLRq6GYKhhDPjNHS5/40TriQITBSYKTBSYKDBR
 q+W0azUA7jiG1bz1HevnJh+tY03RqbyJAhMFJgpMFFgPFNjUkn9PEZnWw0hNbZwoMFFgosBEgYkC
 EwUmCixR4P8BoitzjyPlp/oAAAAASUVORK5CYII=
 
---089e0163450029505c04fee82216--
+--089e01493d60e1bf2f04fee82586--
