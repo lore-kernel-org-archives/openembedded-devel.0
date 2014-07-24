@@ -1,36 +1,37 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C94B6ACA0
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 8971F707B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 21:27:51 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id d1so4761753wiv.3
+	Thu, 24 Jul 2014 21:28:01 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id x12so3334835wgg.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 14:27:52 -0700 (PDT)
+	Thu, 24 Jul 2014 14:28:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=fQfo4AfxzVX03qukrAa5SsMrOU7MQIlh2H3O98Sanbk=;
-	b=UT1R/MBuxrk/AgBCPTeCRNqfGsgiIYEXF4bsku6GxI5PfMtGf0FQn7TstNKbo/a1tC
-	7X/Y+ZOpNuRBwXdoQ6yq444SQHgr+F1rx3BKSbP8PWFv5VELgfIT4ZHIGn5fLISxNqQM
-	se89oX5ZaytElNleljfIBA1g+d32oNyYs6h5exZOFroixOJZnxUZdPLkSzHGpFL+ceIR
-	Q51FHZk921+3gQcAdc1hDpTL4CUuswJw60prSFyJgcU8GFeIp5CtB2mW7uWpXtHtJCyH
-	lIKdmJMKjLUs8Yw5QsYPZH11Ixuet6LRVccqNEJNFghHsbgHFenhxexsmgp0X+g5F+tJ
-	PYCQ==
-X-Received: by 10.194.7.167 with SMTP id k7mr15754228wja.11.1406237272693;
-	Thu, 24 Jul 2014 14:27:52 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=eXnPKU/aj9kyDLmGiUoEIRZsbvn4Kh4+x0I5HabgHh8=;
+	b=cys4UXXH0PfNZLmLeisYlyCe1dSKAqaAdisZxtD/kpuUM7/frh1YblTd9tNk+lPu7x
+	chglnZ/NAFRGZ1AumrRV7VntDlmLbr/u0Jfhf2xESSNHwZyjIHVZlwD39agE26wgatgP
+	riXKhKmYXuy0F8BKac7QuX3Jfsg/6tUw1ITDdlhKBS8hM3Mp3dYxR6EH6lVsXW4FaxIn
+	xCsDGw954zqA52zoK12Q8kjxGV+fSaFKgrBqrt2pPjx32RqAuqBvhgdxauudd6ZZGzKe
+	rf2Kl1QyVsTWdhr+hXE+Wep2TDW+y0bOcSkMl3CiBMgXaLAMBcjSGOi6JUk48sBJioE4
+	5OSw==
+X-Received: by 10.194.90.79 with SMTP id bu15mr16081492wjb.17.1406237282646;
+	Thu, 24 Jul 2014 14:28:02 -0700 (PDT)
 Received: from mizar.208.67.220.220
 	(host253-222-dynamic.20-79-r.retail.telecomitalia.it.
 	[79.20.222.253])
-	by mx.google.com with ESMTPSA id ub11sm9613wib.1.2014.07.24.14.27.51
+	by mx.google.com with ESMTPSA id ub11sm9613wib.1.2014.07.24.14.28.01
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 Jul 2014 14:27:51 -0700 (PDT)
+	Thu, 24 Jul 2014 14:28:01 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Jul 2014 23:27:36 +0200
-Message-Id: <1406237257-13724-1-git-send-email-andrea.adami@gmail.com>
+Date: Thu, 24 Jul 2014 23:27:37 +0200
+Message-Id: <1406237257-13724-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: do not exec do_package_qa task
+In-Reply-To: <1406237257-13724-1-git-send-email-andrea.adami@gmail.com>
+References: <1406237257-13724-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH] klibc-utils: add explicit dependency on klibc for the shared utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,29 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 21:27:59 -0000
+X-List-Received-Date: Thu, 24 Jul 2014 21:28:05 -0000
 
-The task was added with commit d31f75a72cb2322f753d945da86d5f3287eef06b
-"insane: Split do_package_qa into a separate task (from do_package)"
-and we avoid it because the recipe does not create packages.
+The two recipes for klibc-utils (static and shared) have been split-off
+from a single original recipe for more granular packaging and share the
+same SRC_URI set in the .inc file so there is an implicit dependency.
+Make it explicit for the utils needing the shared klibc lib at runtime.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-index 8c7f717..a823e0f 100644
---- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-+++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-@@ -13,6 +13,7 @@ INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
- # disable unneeded tasks
- do_install[noexec] = "1"
- do_package[noexec] = "1"
-+do_package_qa[noexec] = "1"
- do_packagedata[noexec] = "1"
- do_package_deb[noexec] = "1"
- do_package_ipk[noexec] = "1"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
+index fc53bec..06e71cb 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
+@@ -10,3 +10,5 @@ KLIBC_UTILS_PKGNAME = "klibc-utils"
+ 
+ require klibc-utils.inc
+ require klibc.inc
++
++DEPENDS = "klibc"
 -- 
 1.9.1
 
