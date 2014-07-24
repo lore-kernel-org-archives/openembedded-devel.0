@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8803E7069F
+	by mail.openembedded.org (Postfix) with ESMTP id 0179370249
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 08:18:17 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6O8IJpH010924
+	Thu, 24 Jul 2014 08:51:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6O8pGvC016259
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 01:18:19 -0700 (PDT)
+	Thu, 24 Jul 2014 01:51:17 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 24 Jul 2014 01:18:18 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.169.1; Thu, 24 Jul 2014 01:51:16 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Jul 2014 16:18:24 +0800
-Message-ID: <1406189904-25165-1-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 24 Jul 2014 16:51:23 +0800
+Message-ID: <1406191883-25637-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] snort: do not hardcoded the libdir
+Subject: [PATCH][meta-networking] ipsec-tools: several fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,317 +32,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 08:18:22 -0000
+X-List-Received-Date: Thu, 24 Jul 2014 08:51:22 -0000
 Content-Type: text/plain
 
-From: "Roy.Li" <rongqing.li@windriver.com>
+From: Roy Li <rongqing.li@windriver.com>
 
-libdir is defined as ${pref_exec}/lib/, but we want it to support multilib path
+1. use PACKAGECONFIG
+2. add three patches which will add the address check, to avoid SEGFAULT
 
-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../snort/files/not-hardcoded-libdir.patch         |  279 ++++++++++++++++++++
- .../recipes-connectivity/snort/snort_2.9.6.0.bb    |    1 +
- 2 files changed, 280 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/snort/files/not-hardcoded-libdir.patch
+ ...y-avoid-potential-null-pointer-dereferenc.patch |   33 +++++++++++
+ .../ipsec-tools/racoon-check-invalid-ivm.patch     |   26 +++++++++
+ .../racoon-check-invalid-pointers.patch            |   61 ++++++++++++++++++++
+ .../ipsec-tools/ipsec-tools_0.8.1.bb               |    8 ++-
+ 4 files changed, 127 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
+ create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
+ create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
 
-diff --git a/meta-networking/recipes-connectivity/snort/files/not-hardcoded-libdir.patch b/meta-networking/recipes-connectivity/snort/files/not-hardcoded-libdir.patch
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
 new file mode 100644
-index 0000000..075ec13
+index 0000000..d5602c0
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/snort/files/not-hardcoded-libdir.patch
-@@ -0,0 +1,279 @@
-+[PATCH] do not hardcoded libdir
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch
+@@ -0,0 +1,33 @@
++From 738a9857be9c92ad2f70be88ccee238e3154a936 Mon Sep 17 00:00:00 2001
++From: Joe MacDonald <joe.macdonald@windriver.com>
++Date: Wed, 2 Oct 2013 14:20:37 -0400
++Subject: [PATCH] racoon/pfkey: avoid potential null-pointer dereference
++
++Building with -Werror=maybe-uninitialized revealed that 'remote' from
++pk_recvmigrate() could be used with uninitialized data in
++migrate_sp_ike_addresses().  Ensure it is always at a minimum assigned
++NULL.
 +
 +Upstream-Status: Pending
 +
-+libdir is hardcoded to ${exec_prefix}/lib, but we want it to support multilib
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++Signed-off-by: Joe MacDonald <joe.macdonald@windriver.com>
 +---
-+ src/dynamic-examples/dynamic-preprocessor/Makefile.am | 2 +-
-+ src/dynamic-examples/dynamic-rule/Makefile.am         | 2 +-
-+ src/dynamic-plugins/sf_engine/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/dcerpc2/Makefile.am         | 2 +-
-+ src/dynamic-preprocessors/dnp3/Makefile.am            | 2 +-
-+ src/dynamic-preprocessors/dns/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/file/Makefile.am            | 2 +-
-+ src/dynamic-preprocessors/ftptelnet/Makefile.am       | 2 +-
-+ src/dynamic-preprocessors/gtp/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/imap/Makefile.am            | 2 +-
-+ src/dynamic-preprocessors/modbus/Makefile.am          | 2 +-
-+ src/dynamic-preprocessors/pop/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/reputation/Makefile.am      | 2 +-
-+ src/dynamic-preprocessors/rzb_saac/Makefile.am        | 2 +-
-+ src/dynamic-preprocessors/sdf/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/sip/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/smtp/Makefile.am            | 2 +-
-+ src/dynamic-preprocessors/ssh/Makefile.am             | 2 +-
-+ src/dynamic-preprocessors/ssl/Makefile.am             | 2 +-
-+ 19 files changed, 19 insertions(+), 19 deletions(-)
++ src/racoon/pfkey.c |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/dynamic-examples/dynamic-preprocessor/Makefile.am b/src/dynamic-examples/dynamic-preprocessor/Makefile.am
-+index 255755e..1cafead 100644
-+--- a/src/dynamic-examples/dynamic-preprocessor/Makefile.am
-++++ b/src/dynamic-examples/dynamic-preprocessor/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include
-+ 
-+-noinst_libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++noinst_libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ noinst_lib_LTLIBRARIES = lib_sfdynamic_preprocessor_example.la
-+ 
-+diff --git a/src/dynamic-examples/dynamic-rule/Makefile.am b/src/dynamic-examples/dynamic-rule/Makefile.am
-+index e5338d2..82eb212 100644
-+--- a/src/dynamic-examples/dynamic-rule/Makefile.am
-++++ b/src/dynamic-examples/dynamic-rule/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include
-+ 
-+-noinst_libdir = ${exec_prefix}/lib/snort_dynamicrules
-++noinst_libdir = ${exec_prefix}${base_libdir}/snort_dynamicrules
-+ 
-+ noinst_lib_LTLIBRARIES = lib_sfdynamic_example_rule.la
-+ 
-+diff --git a/src/dynamic-plugins/sf_engine/Makefile.am b/src/dynamic-plugins/sf_engine/Makefile.am
-+index d6a6200..3d270c3 100644
-+--- a/src/dynamic-plugins/sf_engine/Makefile.am
-++++ b/src/dynamic-plugins/sf_engine/Makefile.am
-+@@ -5,7 +5,7 @@ INCLUDES = @INCLUDES@
-+ 
-+ lib_LTLIBRARIES = libsf_engine.la
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicengine
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicengine
-+ 
-+ libsf_engine_la_LDFLAGS = -export-dynamic -module @XCCFLAGS@
-+ 
-+diff --git a/src/dynamic-preprocessors/dcerpc2/Makefile.am b/src/dynamic-preprocessors/dcerpc2/Makefile.am
-+index 9843073..8a0caa5 100644
-+--- a/src/dynamic-preprocessors/dcerpc2/Makefile.am
-++++ b/src/dynamic-preprocessors/dcerpc2/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I$(srcdir)/includes
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_dce2_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/dnp3/Makefile.am b/src/dynamic-preprocessors/dnp3/Makefile.am
-+index 1358862..18e2178 100644
-+--- a/src/dynamic-preprocessors/dnp3/Makefile.am
-++++ b/src/dynamic-preprocessors/dnp3/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_dnp3_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/dns/Makefile.am b/src/dynamic-preprocessors/dns/Makefile.am
-+index f22d90e..49d2f55 100644
-+--- a/src/dynamic-preprocessors/dns/Makefile.am
-++++ b/src/dynamic-preprocessors/dns/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_dns_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/file/Makefile.am b/src/dynamic-preprocessors/file/Makefile.am
-+index d71c0fd..834f7ac 100644
-+--- a/src/dynamic-preprocessors/file/Makefile.am
-++++ b/src/dynamic-preprocessors/file/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I./include   
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_file_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/ftptelnet/Makefile.am b/src/dynamic-preprocessors/ftptelnet/Makefile.am
-+index fe73835..3457231 100644
-+--- a/src/dynamic-preprocessors/ftptelnet/Makefile.am
-++++ b/src/dynamic-preprocessors/ftptelnet/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I$(srcdir)/includes
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_ftptelnet_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/gtp/Makefile.am b/src/dynamic-preprocessors/gtp/Makefile.am
-+index 51c961a..d7fb9b2 100644
-+--- a/src/dynamic-preprocessors/gtp/Makefile.am
-++++ b/src/dynamic-preprocessors/gtp/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I$(srcdir)/includes
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_gtp_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/imap/Makefile.am b/src/dynamic-preprocessors/imap/Makefile.am
-+index 533e43d..9efcbc4 100644
-+--- a/src/dynamic-preprocessors/imap/Makefile.am
-++++ b/src/dynamic-preprocessors/imap/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_imap_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/modbus/Makefile.am b/src/dynamic-preprocessors/modbus/Makefile.am
-+index 05fc63e..e4f1415 100644
-+--- a/src/dynamic-preprocessors/modbus/Makefile.am
-++++ b/src/dynamic-preprocessors/modbus/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_modbus_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/pop/Makefile.am b/src/dynamic-preprocessors/pop/Makefile.am
-+index d4b07b3..1345bc6 100644
-+--- a/src/dynamic-preprocessors/pop/Makefile.am
-++++ b/src/dynamic-preprocessors/pop/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_pop_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/reputation/Makefile.am b/src/dynamic-preprocessors/reputation/Makefile.am
-+index 4e16142..14ba0cb 100644
-+--- a/src/dynamic-preprocessors/reputation/Makefile.am
-++++ b/src/dynamic-preprocessors/reputation/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I$(srcdir)/includes
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_reputation_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/rzb_saac/Makefile.am b/src/dynamic-preprocessors/rzb_saac/Makefile.am
-+index f0b0912..6ebe04e 100644
-+--- a/src/dynamic-preprocessors/rzb_saac/Makefile.am
-++++ b/src/dynamic-preprocessors/rzb_saac/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-pkglibdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++pkglibdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ pkglib_LTLIBRARIES = sf_rzb_saac_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/sdf/Makefile.am b/src/dynamic-preprocessors/sdf/Makefile.am
-+index 97b416e..04b5ce5 100644
-+--- a/src/dynamic-preprocessors/sdf/Makefile.am
-++++ b/src/dynamic-preprocessors/sdf/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_sdf_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/sip/Makefile.am b/src/dynamic-preprocessors/sip/Makefile.am
-+index 67ac1e1..b4f360f 100644
-+--- a/src/dynamic-preprocessors/sip/Makefile.am
-++++ b/src/dynamic-preprocessors/sip/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs -I$(srcdir)/includes
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_sip_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/smtp/Makefile.am b/src/dynamic-preprocessors/smtp/Makefile.am
-+index 3b5893f..96750df 100644
-+--- a/src/dynamic-preprocessors/smtp/Makefile.am
-++++ b/src/dynamic-preprocessors/smtp/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_smtp_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/ssh/Makefile.am b/src/dynamic-preprocessors/ssh/Makefile.am
-+index 0eab645..5ae9b80 100644
-+--- a/src/dynamic-preprocessors/ssh/Makefile.am
-++++ b/src/dynamic-preprocessors/ssh/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_ssh_preproc.la
-+ 
-+diff --git a/src/dynamic-preprocessors/ssl/Makefile.am b/src/dynamic-preprocessors/ssl/Makefile.am
-+index 4ac2943..8d3abe3 100644
-+--- a/src/dynamic-preprocessors/ssl/Makefile.am
-++++ b/src/dynamic-preprocessors/ssl/Makefile.am
-+@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign no-dependencies
-+ 
-+ INCLUDES = -I../include -I${srcdir}/../libs
-+ 
-+-libdir = ${exec_prefix}/lib/snort_dynamicpreprocessor
-++libdir = ${exec_prefix}${base_libdir}/snort_dynamicpreprocessor
-+ 
-+ lib_LTLIBRARIES = libsf_ssl_preproc.la
-+ 
++diff --git a/src/racoon/pfkey.c b/src/racoon/pfkey.c
++index d00b166..e0dc1db 100644
++--- a/src/racoon/pfkey.c
+++++ b/src/racoon/pfkey.c
++@@ -3352,7 +3352,7 @@ pk_recvmigrate(mhp)
++ 	struct sockaddr *old_saddr, *new_saddr;
++ 	struct sockaddr *old_daddr, *new_daddr;
++ 	struct sockaddr *old_local, *old_remote;
++-	struct sockaddr *local, *remote;
+++	struct sockaddr *local, *remote = NULL;
++ 	struct sadb_x_kmaddress *kmaddr;
++ 	struct sadb_x_policy *xpl;
++ 	struct sadb_x_ipsecrequest *xisr_list;
 +-- 
-+1.9.1
++1.7.9.5
 +
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-index aba2850..66279e9 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb
-@@ -11,6 +11,7 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
-             file://disable-inaddr-none.patch \
-             file://disable-dap-address-space-id.patch \
-             file://0001-libpcap-search-sysroot-for-headers.patch \
-+            file://not-hardcoded-libdir.patch \
- "
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
+new file mode 100644
+index 0000000..e272bc2
+--- /dev/null
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-ivm.patch
+@@ -0,0 +1,26 @@
++Subject: [PATCH] ipsec-tools: racoon: check several invalid ivm
++
++Upstream-Status: Pending
++
++Add checking for invalid ivm, or it will crash racoon.
++
++Signed-off-by: Ming Liu <ming.liu@windriver.com>
++---
++ isakmp_cfg.c |    5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff -urpN a/src/racoon/isakmp_cfg.c b/src/racoon/isakmp_cfg.c
++--- a/src/racoon/isakmp_cfg.c
+++++ b/src/racoon/isakmp_cfg.c
++@@ -171,6 +171,11 @@ isakmp_cfg_r(iph1, msg)
++ 	    iph1->mode_cfg->last_msgid != packet->msgid )
++ 		iph1->mode_cfg->ivm = 
++ 		    isakmp_cfg_newiv(iph1, packet->msgid);
+++	if(iph1->mode_cfg->ivm == NULL) {
+++		plog(LLV_ERROR, LOCATION, NULL, 
+++		    "failed to create new IV\n");
+++		return;
+++	}
++ 	ivm = iph1->mode_cfg->ivm;
++ 
++ 	dmsg = oakley_do_decrypt(iph1, msg, ivm->iv, ivm->ive);
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
+new file mode 100644
+index 0000000..de1bdb4
+--- /dev/null
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-check-invalid-pointers.patch
+@@ -0,0 +1,61 @@
++Subject: [PATCH] ipsec-tools: racoon: check several invalid pointers
++
++Upstream-Status: Pending
++
++Add checking for invalid pointers, or it will crash racoon.
++
++Signed-off-by: Ming Liu <ming.liu@windriver.com>
++---
++ ipsec_doi.c    |    5 +++--
++ isakmp_cfg.c   |    7 +++++++
++ isakmp_quick.c |    6 ++++--
++ 3 files changed, 14 insertions(+), 4 deletions(-)
++
++diff -urpN a/src/racoon/ipsec_doi.c b/src/racoon/ipsec_doi.c
++--- a/src/racoon/ipsec_doi.c
+++++ b/src/racoon/ipsec_doi.c
++@@ -3374,8 +3374,9 @@ ipsecdoi_chkcmpids( idt, ids, exact )
++ 
++ 	/* handle wildcard IDs */
++ 
++-	if (idt == NULL || ids == NULL)
++-	{
+++	if (idt == NULL || ids == NULL ||
+++	    idt->v == NULL || idt->l == 0 ||
+++	    ids->v == NULL || ids->l == 0) {
++ 		if( !exact )
++ 		{
++ 			plog(LLV_DEBUG, LOCATION, NULL,
++diff -urpN a/src/racoon/isakmp_cfg.c b/src/racoon/isakmp_cfg.c
++--- a/src/racoon/isakmp_cfg.c
+++++ b/src/racoon/isakmp_cfg.c
++@@ -1138,6 +1138,13 @@ isakmp_cfg_newiv(iph1, msgid)
++ 		return NULL;
++ 	}
++ 
+++	if (iph1->ivm == NULL || iph1->ivm->iv == NULL ||
+++	    iph1->ivm->iv->v == NULL || iph1->ivm->iv->l == 0) {
+++		plog(LLV_ERROR, LOCATION, NULL,
+++		    "isakmp_cfg_newiv called with invalid IV management\n");
+++		return NULL;
+++	}
+++
++ 	if (ics->ivm != NULL)
++ 		oakley_delivm(ics->ivm);
++ 
++diff -urpN a/src/racoon/isakmp_quick.c b/src/racoon/isakmp_quick.c
++--- a/src/racoon/isakmp_quick.c
+++++ b/src/racoon/isakmp_quick.c
++@@ -2243,8 +2243,10 @@ get_proposal_r(iph2)
++ 	int error = ISAKMP_INTERNAL_ERROR;
++ 
++ 	/* check the existence of ID payload */
++-	if ((iph2->id_p != NULL && iph2->id == NULL)
++-	 || (iph2->id_p == NULL && iph2->id != NULL)) {
+++	if ((iph2->id_p != NULL &&
+++	    (iph2->id == NULL || iph2->id->v == NULL || iph2->id->l == 0)) ||
+++	    (iph2->id != NULL &&
+++	    (iph2->id_p == NULL || iph2->id_p->v == NULL || iph2->id_p->l == 0))) {
++ 		plog(LLV_ERROR, LOCATION, NULL,
++ 			"Both IDs wasn't found in payload.\n");
++ 		return ISAKMP_NTYPE_INVALID_ID_INFORMATION;
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+index 2e5c0a4..b27eb0f 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+@@ -11,6 +11,9 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
+            file://0001-Fix-warning-with-gcc-4.8.patch \
+            file://0002-Don-t-link-against-libfl.patch \
+            file://configure.patch \
++           file://0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch \
++           file://racoon-check-invalid-pointers.patch \
++           file://racoon-check-invalid-ivm.patch \
+           "
+ SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
+ SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
+@@ -46,10 +49,13 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
+                 --with-readline \
+                 --with-openssl=${STAGING_LIBDIR}/.. \
+                 --without-libradius \
+-                --without-libpam \
+                 --disable-security-context \
+                 --enable-shared \
+                 ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
  
- SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
+ # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
+ CFLAGS += "-fno-strict-aliasing"
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam,"
++PACKAGECONFIG[selinux] = "--enable-security-context,--disable-security-context,libselinux,"
 -- 
 1.7.10.4
 
