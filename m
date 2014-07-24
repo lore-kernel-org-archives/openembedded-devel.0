@@ -1,39 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 815FF707A9
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id BE32170799
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 12:08:20 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id a1so2550053wgh.23
+	Thu, 24 Jul 2014 13:17:01 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id f8so9538890wiw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 05:08:19 -0700 (PDT)
+	Thu, 24 Jul 2014 06:17:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=SEhKSPw0M2+M/bGzZG/8Ijsd8BhRP84SWF7pPmRNd+w=;
-	b=q7dGyCJnk9zCxNm6tcQOqP4aI8wcmxJDVX1OBSY2KFvbTdeQ3xAuGOp0tV0g1mNK0a
-	jRj4n1bFTnwgV7orIETX50zWp5JeWI5wmy2NmAaEN062vZOPMGVU6vUYn4Xe2d9hiqAm
-	5AJM5w6T0RTycj1Yg04IiTlbKyK7X49VG98xPnKVIkdTZoiGZTV5jfSdi6nUU5+DG+Jc
-	ILP8dSaMYbTYcELoDSGYRaQxv9YyQBuEvG1yjK14puMS6cFvVPjueTFgA5do7J0xCYKU
-	ZpDReUGwdWQ2A1j4/cTtiuOSbHYPVH7h4zaiBKLGqUOVOSn6jN0s4+n/OVUx+7cY6Zfc
-	yMeQ==
-X-Received: by 10.194.191.162 with SMTP id gz2mr11562253wjc.89.1406203698488; 
-	Thu, 24 Jul 2014 05:08:18 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=vDlnXA2O6VwxyDhpQlL9raaxg+cSp4m7MHSVcULl2Yg=;
+	b=ilSfmhrwLaaue2Z03KIOLud5jkSyMWlvAAeopiP3Mtp3szcbhwCiGVBm9L+ueiMuIn
+	tiFv9/oHvsui3NFapkKs+n75tYHO93IeBQ5cbBpo04L7c7jYzuK5nzjCwGAndkk8JBoR
+	L787MESntDKMCg51L/Gy5gRNVmMFBeyDbrGMZpMEVO9X/Pj03ARevF+Bsatkkm9doFBb
+	wqGC1fCot0IVpXSni8bInVtLYeM7XMDPk+jLvo7rutXgv6cb+vLmKX+SY9B2Zs2nWCs3
+	b5OmUiNz2a6jHSfywPhdvc4bvsMgzSpdnssKS5B7pLwnOB2Q1sr6Zzk9dqnk7TUxdsHu
+	yy4A==
+X-Received: by 10.194.100.34 with SMTP id ev2mr12135424wjb.76.1406207822502;
+	Thu, 24 Jul 2014 06:17:02 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o2sm22256899wij.24.2014.07.24.05.08.16
-	for <openembedded-devel@lists.openembedded.org>
+	fb8sm22935352wib.15.2014.07.24.06.17.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Jul 2014 05:08:17 -0700 (PDT)
+	Thu, 24 Jul 2014 06:17:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 24 Jul 2014 14:08:34 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140724120834.GK2492@jama>
-References: <53D0F38E.2040209@pseudoterminal.org>
-MIME-Version: 1.0
-In-Reply-To: <53D0F38E.2040209@pseudoterminal.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: git directory in WORKDIR question
+Date: Thu, 24 Jul 2014 15:17:17 +0200
+Message-Id: <1406207837-28267-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.2
+Subject: [meta-oe][PATCH] libmatroska: upgrade to 1.4.1 required by mkvtoolnix-7.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,44 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 12:08:24 -0000
-X-Groupsio-MsgNum: 51232
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="8m/hfNLtAhX2NvnO"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Jul 2014 13:17:04 -0000
 
---8m/hfNLtAhX2NvnO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-mkv/libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb} (85%)
 
-On Thu, Jul 24, 2014 at 01:52:46PM +0200, Carlos Rafael Giani wrote:
-> Hello,
->=20
-> When I use a git:// URL in SRC_URI , that git repository is cloned over=
-=20
-> to the WORKDIR , and ends up in a directory called "git".
-> In other words, the sources are at $WORKDIR/git .
->=20
-> Can I instruct OE to use another name? Like, $WORKDIR/my_name instead of=
-=20
-> $WORKDIR/git ?
+diff --git a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
+similarity index 85%
+rename from meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
+rename to meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
+index 9644e84..547e848 100644
+--- a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
++++ b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
+ DEPENDS = "libebml"
+ 
+ SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "5b83155019589b04a49f9db923b5bf74"
+-SRC_URI[sha256sum] = "1b6d02e75cdbfb6d282dcf2a902a259c3075404885d5e8063e6652a2b3f6c11b"
++SRC_URI[md5sum] = "f61b2e5086f4bb9d24a43cc8af43a719"
++SRC_URI[sha256sum] = "086f21873e925679babdabf793c3bb85c353d0cd79423543a3355e08e8a4efb7"
+ 
+ do_compile() {
+     cd ${S}/make/linux
+-- 
+2.0.2
 
-yes, destsuffix param in SRC_URI.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---8m/hfNLtAhX2NvnO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPQ90IACgkQN1Ujt2V2gBwe7gCfZLj5SeAfWzYAp2+wVIWd4oZ+
-flcAn1bc7DDn7kBTqJqzpzF/2hFH2YFz
-=tUxZ
------END PGP SIGNATURE-----
-
---8m/hfNLtAhX2NvnO--
