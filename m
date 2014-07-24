@@ -1,35 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id BE32170799
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 637D170606
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 13:17:01 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id f8so9538890wiw.0
+	Thu, 24 Jul 2014 13:25:06 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id n12so2709090wgh.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 06:17:02 -0700 (PDT)
+	Thu, 24 Jul 2014 06:25:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=vDlnXA2O6VwxyDhpQlL9raaxg+cSp4m7MHSVcULl2Yg=;
-	b=ilSfmhrwLaaue2Z03KIOLud5jkSyMWlvAAeopiP3Mtp3szcbhwCiGVBm9L+ueiMuIn
-	tiFv9/oHvsui3NFapkKs+n75tYHO93IeBQ5cbBpo04L7c7jYzuK5nzjCwGAndkk8JBoR
-	L787MESntDKMCg51L/Gy5gRNVmMFBeyDbrGMZpMEVO9X/Pj03ARevF+Bsatkkm9doFBb
-	wqGC1fCot0IVpXSni8bInVtLYeM7XMDPk+jLvo7rutXgv6cb+vLmKX+SY9B2Zs2nWCs3
-	b5OmUiNz2a6jHSfywPhdvc4bvsMgzSpdnssKS5B7pLwnOB2Q1sr6Zzk9dqnk7TUxdsHu
-	yy4A==
-X-Received: by 10.194.100.34 with SMTP id ev2mr12135424wjb.76.1406207822502;
-	Thu, 24 Jul 2014 06:17:02 -0700 (PDT)
+	bh=g9e+fhznH9EcmEKQVMRWtQ5eejf32UCwRQvCfHjYgfo=;
+	b=mzRmHTDcwKyXVeJvG2RnwY3uyHopMBM0yiVsFSE52oS0vi7/OPCJqAygwLTNo8Mwxx
+	F0kTj4oPKum59ASR/WEAK1SKWzFuZAXSM8WQXHO8ugyxXeWpk2lB6Yv1awAPe0/hjf40
+	jN8PNUbKxrzZzb+iLPHW02x13M189DxyyjxPq1cO7fVI574N5BuqhG+s7RHN3xnoBQuT
+	+T7/81OoGJiwPBdxDt2JRj2oQzUSOMWu2wyKhNfgYYuwrEShekjBe/gvqtE/9oPu9xW+
+	pLxb+TS11sw7+IUs/oBy+rxSpUdVjCTVMX++VkWGuors47h0Gu7wz8BUZWUmqNDHqLJz
+	Sl5A==
+X-Received: by 10.180.210.132 with SMTP id mu4mr12885531wic.18.1406208306277; 
+	Thu, 24 Jul 2014 06:25:06 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fb8sm22935352wib.15.2014.07.24.06.17.01 for <multiple recipients>
+	fu7sm22799666wib.2.2014.07.24.06.25.05 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Jul 2014 06:17:01 -0700 (PDT)
+	Thu, 24 Jul 2014 06:25:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Jul 2014 15:17:17 +0200
-Message-Id: <1406207837-28267-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 24 Jul 2014 15:25:21 +0200
+Message-Id: <1406208321-7832-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.2
-Subject: [meta-oe][PATCH] libmatroska: upgrade to 1.4.1 required by mkvtoolnix-7.0.0
+Subject: [meta-oe][PATCHv2] libmatroska: upgrade to 1.4.1 required by mkvtoolnix-7.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,22 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 13:17:04 -0000
+X-List-Received-Date: Thu, 24 Jul 2014 13:25:07 -0000
+
+* LIC_FILES_CHKSUM change only because of formating
+  (unix line feeds and some alignment in header)
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-mkv/libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb} (85%)
+ .../libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-mkv/libmatroska/{libmatroska_1.4.0.bb => libmatroska_1.4.1.bb} (77%)
 
 diff --git a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
-similarity index 85%
+similarity index 77%
 rename from meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
 rename to meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
-index 9644e84..547e848 100644
+index 9644e84..95ea93d 100644
 --- a/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.0.bb
 +++ b/meta-multimedia/recipes-mkv/libmatroska/libmatroska_1.4.1.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
+@@ -1,12 +1,12 @@
+ SUMMARY = "libmatroska is a C++ libary to parse Matroska files (.mkv and .mka)"
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
++LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
+ 
  DEPENDS = "libebml"
  
  SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
