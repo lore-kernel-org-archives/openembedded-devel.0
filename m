@@ -1,37 +1,27 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8971F707B0
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 26B5765E08
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 21:28:01 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id x12so3334835wgg.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jul 2014 14:28:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eXnPKU/aj9kyDLmGiUoEIRZsbvn4Kh4+x0I5HabgHh8=;
-	b=cys4UXXH0PfNZLmLeisYlyCe1dSKAqaAdisZxtD/kpuUM7/frh1YblTd9tNk+lPu7x
-	chglnZ/NAFRGZ1AumrRV7VntDlmLbr/u0Jfhf2xESSNHwZyjIHVZlwD39agE26wgatgP
-	riXKhKmYXuy0F8BKac7QuX3Jfsg/6tUw1ITDdlhKBS8hM3Mp3dYxR6EH6lVsXW4FaxIn
-	xCsDGw954zqA52zoK12Q8kjxGV+fSaFKgrBqrt2pPjx32RqAuqBvhgdxauudd6ZZGzKe
-	rf2Kl1QyVsTWdhr+hXE+Wep2TDW+y0bOcSkMl3CiBMgXaLAMBcjSGOi6JUk48sBJioE4
-	5OSw==
-X-Received: by 10.194.90.79 with SMTP id bu15mr16081492wjb.17.1406237282646;
-	Thu, 24 Jul 2014 14:28:02 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host253-222-dynamic.20-79-r.retail.telecomitalia.it.
-	[79.20.222.253])
-	by mx.google.com with ESMTPSA id ub11sm9613wib.1.2014.07.24.14.28.01
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 Jul 2014 14:28:01 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Jul 2014 23:27:37 +0200
-Message-Id: <1406237257-13724-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1406237257-13724-1-git-send-email-andrea.adami@gmail.com>
-References: <1406237257-13724-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-initramfs][PATCH] klibc-utils: add explicit dependency on klibc for the shared utils
+	Fri, 25 Jul 2014 01:19:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6P1JViE003085
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 24 Jul 2014 18:19:31 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
+	Thu, 24 Jul 2014 18:19:30 -0700
+Message-ID: <53D1B0A1.2050402@windriver.com>
+Date: Fri, 25 Jul 2014 09:19:29 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1406184181-23969-1-git-send-email-rongqing.li@windriver.com>
+	<20140724110231.GG2492@jama>
+In-Reply-To: <20140724110231.GG2492@jama>
+Subject: Re: [PATCH][meta-networking] openvpn: not use the hardcoded libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +35,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jul 2014 21:28:05 -0000
+X-List-Received-Date: Fri, 25 Jul 2014 01:19:43 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The two recipes for klibc-utils (static and shared) have been split-off
-from a single original recipe for more granular packaging and share the
-same SRC_URI set in the .inc file so there is an implicit dependency.
-Make it explicit for the utils needing the shared klibc lib at runtime.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-index fc53bec..06e71cb 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-@@ -10,3 +10,5 @@ KLIBC_UTILS_PKGNAME = "klibc-utils"
- 
- require klibc-utils.inc
- require klibc.inc
-+
-+DEPENDS = "klibc"
+On 07/24/2014 07:02 PM, Martin Jansa wrote:
+> On Thu, Jul 24, 2014 at 02:43:01PM +0800, rongqing.li@windriver.com wrote:
+>> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> it will lead to QA failure, since .debug dir can not be installed into dbg package
+>>
+>>      ERROR: QA Issue: non debug package contains .debug directory: openvpn path
+>>      /work/core2-64-wrs-linux/openvpn/2.3.4-r0/packages-split/openvpn/usr/lib64i
+>>      /openvpn/plugins/.debug/openvpn-plugin-down-root.so [debug-files]
+>
+> Can you please check this floating dependency?
+>
+> snort/snort/latest lost dependency on  util-linux-libuuid
+>
+
+Ok, I will check it.
+
+-Roy
+
+
+
+>>
+>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>> ---
+>>   meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb |    2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> index a3322a0..48e04b7 100644
+>> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> @@ -28,4 +28,4 @@ do_install_append() {
+>>
+>>   RRECOMMENDS_${PN} = "kernel-module-tun"
+>>
+>> -FILES_${PN}-dbg += "/usr/lib/openvpn/plugins/.debug"
+>> +FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
+>> --
+>> 1.7.10.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
+
 -- 
-1.9.1
-
+Best Reagrds,
+Roy | RongQing Li
 
