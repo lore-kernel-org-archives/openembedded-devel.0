@@ -1,27 +1,27 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CAABA70789
+	by mail.openembedded.org (Postfix) with ESMTP id 486AF65D5E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 01:20:21 +0000 (UTC)
+	Fri, 25 Jul 2014 02:37:47 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6P1KJ9S003094
+	by mail1.windriver.com (8.14.5/8.14.5) with ESMTP id s6P2bhj1003523
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 24 Jul 2014 18:20:19 -0700 (PDT)
+	Thu, 24 Jul 2014 19:37:43 -0700 (PDT)
 Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.169.1;
-	Thu, 24 Jul 2014 18:20:18 -0700
-Message-ID: <53D1B0D2.1000509@windriver.com>
-Date: Fri, 25 Jul 2014 09:20:18 +0800
+	Thu, 24 Jul 2014 19:37:43 -0700
+Message-ID: <53D1C2F6.4010905@windriver.com>
+Date: Fri, 25 Jul 2014 10:37:42 +0800
 From: Rongqing Li <rongqing.li@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
-References: <1406012813-21233-1-git-send-email-rongqing.li@windriver.com>
-	<20140724111438.GI2492@jama>
-In-Reply-To: <20140724111438.GI2492@jama>
-Subject: Re: [PATCH v2][meta-perl] libxml-sax-writer-perl: add recipe
+References: <1406184181-23969-1-git-send-email-rongqing.li@windriver.com>
+	<20140724110231.GG2492@jama>
+In-Reply-To: <20140724110231.GG2492@jama>
+Subject: Re: [PATCH][meta-networking] openvpn: not use the hardcoded libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,69 +35,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jul 2014 01:20:21 -0000
+X-List-Received-Date: Fri, 25 Jul 2014 02:37:56 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 
-On 07/24/2014 07:14 PM, Martin Jansa wrote:
-> On Tue, Jul 22, 2014 at 03:06:53PM +0800, rongqing.li@windriver.com wrote:
+On 07/24/2014 07:02 PM, Martin Jansa wrote:
+> On Thu, Jul 24, 2014 at 02:43:01PM +0800, rongqing.li@windriver.com wrote:
 >> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> it will lead to QA failure, since .debug dir can not be installed into dbg package
+>>
+>>      ERROR: QA Issue: non debug package contains .debug directory: openvpn path
+>>      /work/core2-64-wrs-linux/openvpn/2.3.4-r0/packages-split/openvpn/usr/lib64i
+>>      /openvpn/plugins/.debug/openvpn-plugin-down-root.so [debug-files]
 >
-> Sorry, but it still isn't correct even with allarch, because there is
-> dependency on TUNE_PKGARCH perl:
+> Can you please check this floating dependency?
 >
-> ERROR: libxml-filter-buffertext-perl different signature for task do_configure.sigdata between qemux86copy and qemuarm
-> Hash for dependent task perl_5.20.0.bb.do_populate_sysroot changed from a5827c8deafb0ace555794c62c44e19f to 1a07f7ac7ad2a2750b58dfa60136114b
->
-> ERROR: libxml-sax-writer-perl different signature for task do_configure.sigdata between qemux86copy and qemuarm
-> Hash for dependent task perl_5.20.0.bb.do_populate_sysroot changed from a5827c8deafb0ace555794c62c44e19f to 1a07f7ac7ad2a2750b58dfa60136114b
+> snort/snort/latest lost dependency on  util-linux-libuuid
 >
 
-Sorry,
-I will check it
+Hi, martin:
+
+
+This patch is fixing the openvpn, not snort, it should be a good fix.
+
+About snort dependency, snort will check if util-linux-libuuid exist or
+not when do configuration, and no configuration options can control it,
+so PACKAGECONFIG can not be used on snort, so I like leave it to wait
+until I have time
 
 -Roy
 
 
+
+>>
 >> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 >> ---
->>   .../libxml/libxml-sax-writer-perl_0.54.bb          |   25 ++++++++++++++++++++
->>   1 file changed, 25 insertions(+)
->>   create mode 100644 meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+>>   meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb |    2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
->> new file mode 100644
->> index 0000000..52458e4
->> --- /dev/null
->> +++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
->> @@ -0,0 +1,25 @@
->> +SUMMARY = "XML::SAX::Writer - SAX2 Writer"
->> +DESCRIPTION = "\
->> +XML::SAX::Writer helps to serialize SAX2 representations of XML documents to \
->> +strings, files, and other flat representations. It handles charset encodings, \
->> +XML escaping conventions, and so forth. It is still considered alpha, \
->> +although it has been put to limited use in settings such as XML::LibXML and \
->> +the AxKit XML Application Server. \
->> +"
->> +SECTION = "libs"
->> +LICENSE = "Artistic-1.0 | GPLv1+"
->> +HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
->> +DEPENDS += "libxml-filter-buffertext-perl-native"
->> +RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
->> +
->> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
->> +SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
->> +SRC_URI[sha256sum] = "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
->> +
->> +LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
->> +
->> +S = "${WORKDIR}/XML-SAX-Writer-${PV}"
->> +
->> +inherit cpan allarch
->> +
->> +BBCLASSEXTEND = "native"
+>> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> index a3322a0..48e04b7 100644
+>> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+>> @@ -28,4 +28,4 @@ do_install_append() {
+>>
+>>   RRECOMMENDS_${PN} = "kernel-module-tun"
+>>
+>> -FILES_${PN}-dbg += "/usr/lib/openvpn/plugins/.debug"
+>> +FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
 >> --
 >> 1.7.10.4
 >>
