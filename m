@@ -1,45 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 87BA670684
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id ACF1E6AC77
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 10:04:51 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id n3so690109wiv.5
+	Fri, 25 Jul 2014 10:06:04 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id f8so704833wiw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 03:04:50 -0700 (PDT)
+	Fri, 25 Jul 2014 03:06:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=4DIE77T87iqA0HqMLNdC2kHkblMss2c1BXCVDDV/Nzk=;
-	b=WdKTltDlH/jCIUYtQQHdDPAbU7c/rtmndgg/SBg0xlpD8dr2K/hgwLJaPAFyD80RFp
-	kuzGCieFNPH22mDR3iH9a6oR/SQXieEX6cTXPXLBe0tByH4+13fCbT2oQx6DdnYHYXns
-	PcPCO9vt1PpsSPsnU4onDt+hEGbWMmJE5wIJZIHs4pZmX4clTexZwPyHjwLmh3/jKpMS
-	a5deDe3vgdNrMpbvZOB5LCSeFuPl1JojlnxVKUOjd+z97CKn1f6TEeweJxLQUw18uYoY
-	0lkmAzR4fPAbqLKtjUb8fgqEkSUyLcl+qXGQdDHQ1jjI10hElAC8u5jduIELL5IZEoWZ
-	drJQ==
-X-Received: by 10.180.100.193 with SMTP id fa1mr3870514wib.16.1406282689914;
-	Fri, 25 Jul 2014 03:04:49 -0700 (PDT)
+	bh=bIii9Zf7D/gbfAJyCzxd4MsD6V9ecVrYVox0Ppf2cJQ=;
+	b=CveRjyxpegv17/NT1gP108KwD7L0GXgv+Mkju1Y6NyJhVKJKdhVPgeQoE4g1pKFTQK
+	jyorzbVI3TIegKuaV37W/7O67YfWToh6ElecXPtEsIr5Cjxg6TiV3wZjEDWUGXF0YYGk
+	Aa6GXkq5FbURMSgzJFK36fNjsQHZZDHcYtY9mXLBDKmKig2hoXJgkmjst9FwNr71T5ea
+	Cgju+6ri93Xz+Mm8Un1dqZevCeOGbVuIwO9kr7xDKNK/YXHAf5aoTU+kXwbIhdDh6OcE
+	I3lrJukpB3sPxlESYCbaaOhq+adDIw8Gmicnj9V+SY6G/bqvP2Y1cRIHVw7EdQMCO1np
+	sOCg==
+X-Received: by 10.194.87.10 with SMTP id t10mr20416660wjz.82.1406282764826;
+	Fri, 25 Jul 2014 03:06:04 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ey16sm4026498wid.14.2014.07.25.03.04.48
-	for <openembedded-devel@lists.openembedded.org>
+	w9sm4055053wif.12.2014.07.25.03.06.03 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Jul 2014 03:04:48 -0700 (PDT)
+	Fri, 25 Jul 2014 03:06:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Jul 2014 12:05:07 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140725100507.GS2492@jama>
-References: <1405147077-22498-1-git-send-email-eduardo@monkey.io>
-	<20140718181535.GQ2433@jama>
-	<CAEaCVQj60r8pmT4RwLWZ3RO5NvkKzbQPHbkdhOqhoX3zbO2mRw@mail.gmail.com>
-	<20140718182742.GR2433@jama>
-	<CAEaCVQjMYWSZQQYj+wueXund=+XRyfnzXtmrg6WW8FyCSztukQ@mail.gmail.com>
-	<20140720214725.GG22875@jama>
+Date: Fri, 25 Jul 2014 12:06:22 +0200
+To: Rongqing Li <rongqing.li@windriver.com>
+Message-ID: <20140725100622.GT2492@jama>
+References: <1406184181-23969-1-git-send-email-rongqing.li@windriver.com>
+	<20140724110231.GG2492@jama> <53D1C2F6.4010905@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20140720214725.GG22875@jama>
+In-Reply-To: <53D1C2F6.4010905@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-webserver][PATCHv4] monkey: new v1.5.1 release.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking] openvpn: not use the hardcoded libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,161 +49,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jul 2014 10:04:53 -0000
-X-Groupsio-MsgNum: 51249
+X-List-Received-Date: Fri, 25 Jul 2014 10:06:07 -0000
+X-Groupsio-MsgNum: 51250
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hc4757KF+wLS/WHK"
+	protocol="application/pgp-signature"; boundary="b2s+RKoBicgQlNJs"
 Content-Disposition: inline
 
---hc4757KF+wLS/WHK
+--b2s+RKoBicgQlNJs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 20, 2014 at 11:47:25PM +0200, Martin Jansa wrote:
-> On Sun, Jul 20, 2014 at 03:15:00PM -0600, Eduardo Silva wrote:
-> > Hi Martin,
-> >=20
-> > I was trying to reproduce the problem that you faced but here it worked
-> > fine. My local.conf looks like this:
-> >=20
-> > --
-> > BB_NUMBER_THREADS ?=3D "${@oe.utils.cpu_count()}"
-> > PARALLEL_MAKE ?=3D "-j ${@oe.utils.cpu_count()}"
-> > MACHINE ??=3D "qemux86"
-> > DISTRO ?=3D "poky"
-> > PACKAGE_CLASSES ?=3D "package_rpm"
-> > EXTRA_IMAGE_FEATURES =3D "debug-tweaks"
-> > USER_CLASSES ?=3D "buildstats image-mklibs image-prelink"
-> > PATCHRESOLVE =3D "noop"
-> > BB_DISKMON_DIRS =3D "\
-> >     STOPTASKS,${TMPDIR},1G,100K \
-> >     STOPTASKS,${DL_DIR},1G,100K \
-> >     STOPTASKS,${SSTATE_DIR},1G,100K \
-> >     ABORT,${TMPDIR},100M,1K \
-> >     ABORT,${DL_DIR},100M,1K \
-> >     ABORT,${SSTATE_DIR},100M,1K"
-> > PACKAGECONFIG_pn-qemu-native =3D "sdl"
-> > ASSUME_PROVIDED +=3D "libsdl-native"
-> > CONF_VERSION =3D "1"
-> >=20
-> > INHERIT +=3D ""
-> >=20
-> > IMAGE_INSTALL_append =3D " monkey dropbear"
-> > DISTRO_FEATURES_append =3D " systemd"
-> > VIRTUAL-RUNTIME_init_manager =3D "systemd"
-> > DISTRO_FEATURES_BACKFILL_CONSIDERED =3D "sysvinit"
-> > VIRTUAL-RUNTIME_initscripts =3D ""
-> > --
-> >=20
-> > a fresh build of 'bitbake -k core-image-sato' worked with the following=
- .bb:
-> >=20
-> >     b40e6ecaed2b10ba9c9aba4f128b029a  monkey_1.5.1.bb
-> >=20
-> > before the test i make sure to clean the monkey stuff with 'bitbake -c
-> > cleanall monkey'.  Do you see any difference between your system and mi=
-ne
-> > ?, i am very interested into reproduce the problem you detected.
+On Fri, Jul 25, 2014 at 10:37:42AM +0800, Rongqing Li wrote:
 >=20
-> Please see rm_sysvinit_initddir function in systemd.bbclass
 >=20
-> My builds are using "distroless" setup, if you're using poky then it's
-> possible that there is still sysvinit added in your DISTRO_FEATURES
-> somewhere (check bitbake -e monkay) so the sysv init script isn't
-> removed in the end for you.
+> On 07/24/2014 07:02 PM, Martin Jansa wrote:
+> > On Thu, Jul 24, 2014 at 02:43:01PM +0800, rongqing.li@windriver.com wro=
+te:
+> >> From: Roy Li <rongqing.li@windriver.com>
+> >>
+> >> it will lead to QA failure, since .debug dir can not be installed into=
+ dbg package
+> >>
+> >>      ERROR: QA Issue: non debug package contains .debug directory: ope=
+nvpn path
+> >>      /work/core2-64-wrs-linux/openvpn/2.3.4-r0/packages-split/openvpn/=
+usr/lib64i
+> >>      /openvpn/plugins/.debug/openvpn-plugin-down-root.so [debug-files]
+> >
+> > Can you please check this floating dependency?
+> >
+> > snort/snort/latest lost dependency on  util-linux-libuuid
+> >
+>=20
+> Hi, martin:
+>=20
+>=20
+> This patch is fixing the openvpn, not snort, it should be a good fix.
 
-I've just noticed that CONFFILES is set to
-${sysconfdir}/monkey/
+Ah sorry, I wanted to write it in your next patch which is changing
+snort.
 
-so it's not caused by missing init.d script but whole
-${sysconfdir}/monkey/ is empty in PN, can you check what's installed
-there in your builds?
+> About snort dependency, snort will check if util-linux-libuuid exist or
+> not when do configuration, and no configuration options can control it,
+> so PACKAGECONFIG can not be used on snort, so I like leave it to wait
+> until I have time
 
-It's either not installed when some dependency is missing or it's
-included in different package in my build (knowing which file to look
-for would help).
+OK, I won't block it because of this dependency, but if you're using
+snort, then please fix it when you can.
+
 
 Thanks
 
-> Thanks
->=20
-> > On Fri, Jul 18, 2014 at 12:27 PM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >=20
-> > > On Fri, Jul 18, 2014 at 12:19:29PM -0600, Eduardo Silva wrote:
-> > > > >
-> > > > > Now it failed with:
-> > > > >
-> > > > > | NOTE: Not creating empty archive for monkey-locale-1.5.1-r0.2
-> > > > > | *** Error: CONTROL/conffiles mentions conffile /etc/monkey/ whi=
-ch
-> > > does
-> > > > > not exist
-> > > > > |
-> > > > > | opkg-build: Please fix the above errors and try again.
-> > > > >
-> > > > > I guess it's because sysvinit script was removed by
-> > > update-rc.d.bbclass and
-> > > > > then nothing was left in /etc/monkey
-> > > > >
-> > > > >
-> > > > thanks for the report. Which specific build options did you use (and
-> > > image)
-> > > > ?, i would like to be able to reproduce that problem locally, not s=
-ure
-> > > why
-> > > > my tests passed.
-> > >
-> > > world builds as described on
-> > > http://www.openembedded.org/wiki/Bitbake_World_Status
-> > >
-> > > probably the most important difference is:
-> > > # use systemd
-> > > DISTRO_FEATURES_append =3D " systemd"
-> > > DISTRO_FEATURES_BACKFILL_CONSIDERED =3D "sysvinit"
-> > > VIRTUAL-RUNTIME_init_manager =3D "systemd"
-> > > VIRTUAL-RUNTIME_initscripts =3D ""
-> > >
-> > > --
-> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > >
-> >=20
-> >=20
-> > --=20
-> > Eduardo Silva
-> > Monkey Software
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> >> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> >> ---
+> >>   meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb |    2 +-
+> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb =
+b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+> >> index a3322a0..48e04b7 100644
+> >> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+> >> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+> >> @@ -28,4 +28,4 @@ do_install_append() {
+> >>
+> >>   RRECOMMENDS_${PN} =3D "kernel-module-tun"
+> >>
+> >> -FILES_${PN}-dbg +=3D "/usr/lib/openvpn/plugins/.debug"
+> >> +FILES_${PN}-dbg +=3D "${libdir}/openvpn/plugins/.debug"
+> >> --
+> >> 1.7.10.4
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
 >=20
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> Best Reagrds,
+> Roy | RongQing Li
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hc4757KF+wLS/WHK
+--b2s+RKoBicgQlNJs
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPSK9MACgkQN1Ujt2V2gByXzwCglxlkHE9egfkFNe3SlzRBU5nf
-PzEAnRVjD7D6YyVoqOrWMLTK6P+o2ZQC
-=EsLU
+iEYEARECAAYFAlPSLB4ACgkQN1Ujt2V2gBxMVACfd1H2qJqawLoFRNwGhL+8ESAX
+tVMAnj1DFuBw5fgjwPLe03LPuWzgpkrf
+=1QXw
 -----END PGP SIGNATURE-----
 
---hc4757KF+wLS/WHK--
+--b2s+RKoBicgQlNJs--
