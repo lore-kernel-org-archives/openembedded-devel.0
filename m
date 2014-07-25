@@ -1,41 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id ACF1E6AC77
+Return-Path: <ting.liu@freescale.com>
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2lp0244.outbound.protection.outlook.com [207.46.163.244])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B20C70695
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 10:06:04 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id f8so704833wiw.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 03:06:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=bIii9Zf7D/gbfAJyCzxd4MsD6V9ecVrYVox0Ppf2cJQ=;
-	b=CveRjyxpegv17/NT1gP108KwD7L0GXgv+Mkju1Y6NyJhVKJKdhVPgeQoE4g1pKFTQK
-	jyorzbVI3TIegKuaV37W/7O67YfWToh6ElecXPtEsIr5Cjxg6TiV3wZjEDWUGXF0YYGk
-	Aa6GXkq5FbURMSgzJFK36fNjsQHZZDHcYtY9mXLBDKmKig2hoXJgkmjst9FwNr71T5ea
-	Cgju+6ri93Xz+Mm8Un1dqZevCeOGbVuIwO9kr7xDKNK/YXHAf5aoTU+kXwbIhdDh6OcE
-	I3lrJukpB3sPxlESYCbaaOhq+adDIw8Gmicnj9V+SY6G/bqvP2Y1cRIHVw7EdQMCO1np
-	sOCg==
-X-Received: by 10.194.87.10 with SMTP id t10mr20416660wjz.82.1406282764826;
-	Fri, 25 Jul 2014 03:06:04 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	w9sm4055053wif.12.2014.07.25.03.06.03 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Jul 2014 03:06:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 25 Jul 2014 12:06:22 +0200
-To: Rongqing Li <rongqing.li@windriver.com>
-Message-ID: <20140725100622.GT2492@jama>
-References: <1406184181-23969-1-git-send-email-rongqing.li@windriver.com>
-	<20140724110231.GG2492@jama> <53D1C2F6.4010905@windriver.com>
+	Fri, 25 Jul 2014 10:06:11 +0000 (UTC)
+Received: from BN3PR0301CA0035.namprd03.prod.outlook.com (25.160.180.173) by
+	BN1PR0301MB0706.namprd03.prod.outlook.com (25.160.78.13) with Microsoft
+	SMTP Server (TLS) id 15.0.990.7; Fri, 25 Jul 2014 10:06:10 +0000
+Received: from BN1BFFO11FD025.protection.gbl (2a01:111:f400:7c10::1:143) by
+	BN3PR0301CA0035.outlook.office365.com (2a01:111:e400:4000::45) with
+	Microsoft SMTP Server (TLS) id 15.0.995.14 via Frontend Transport;
+	Fri, 25 Jul 2014 10:06:10 +0000
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BN1BFFO11FD025.mail.protection.outlook.com (10.58.144.88) with
+	Microsoft SMTP Server (TLS) id 15.0.980.11 via Frontend Transport;
+	Fri, 25 Jul 2014 10:06:09 +0000
+Received: from b28495.ap.freescale.net (b28495.ap.freescale.net [10.193.20.99])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	s6PA662T025130; Fri, 25 Jul 2014 03:06:08 -0700
+From: <ting.liu@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 25 Jul 2014 18:08:14 +0800
+Message-ID: <1406282895-19011-1-git-send-email-ting.liu@freescale.com>
+X-Mailer: git-send-email 1.7.3.4
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:CAL; IPV:NLI;
+	EFV:NLI; SFV:NSPM;
+	SFS:(6009001)(199002)(189002)(33646002)(2351001)(20776003)(107046002)(84676001)(79102001)(87286001)(74662001)(81542001)(92566001)(229853001)(50986999)(105606002)(104016003)(6806004)(110136001)(44976005)(77156001)(31966008)(48376002)(77982001)(106466001)(87936001)(47776003)(89996001)(99396002)(93916002)(4396001)(46102001)(74502001)(81342001)(95666004)(102836001)(50466002)(86362001)(104166001)(62966002)(19580395003)(86152002)(85852003)(76482001)(97736001)(21056001)(88136002)(50226001)(19580405001)(83072002)(80022001)(64706001)(85306003)(68736004)(26826002)(92726001)(36756003)(83322001);
+	DIR:OUT; SFP:; SCL:1; SRVR:BN1PR0301MB0706;
+	H:tx30smr01.am.freescale.net; FPR:; MLV:ovrnspm;
+	PTR:InfoDomainNonexistent; MX:1; LANG:en; 
 MIME-Version: 1.0
-In-Reply-To: <53D1C2F6.4010905@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] openvpn: not use the hardcoded libdir
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:
+X-Forefront-PRVS: 02830F0362
+Received-SPF: Fail (: domain of freescale.com does not designate 192.88.168.50
+	as permitted sender) receiver=; client-ip=192.88.168.50;
+	helo=tx30smr01.am.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.168.50)
+	smtp.mailfrom=ting.liu@freescale.com; 
+X-OriginatorOrg: freescale.com
+Subject: [meta-oe][PATCH 1/2] libhugetlbfs: not build obj32 for all 64b platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,104 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jul 2014 10:06:07 -0000
-X-Groupsio-MsgNum: 51250
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="b2s+RKoBicgQlNJs"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 25 Jul 2014 10:06:12 -0000
+Content-Type: text/plain
 
---b2s+RKoBicgQlNJs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Ting Liu <b28495@freescale.com>
 
-On Fri, Jul 25, 2014 at 10:37:42AM +0800, Rongqing Li wrote:
->=20
->=20
-> On 07/24/2014 07:02 PM, Martin Jansa wrote:
-> > On Thu, Jul 24, 2014 at 02:43:01PM +0800, rongqing.li@windriver.com wro=
-te:
-> >> From: Roy Li <rongqing.li@windriver.com>
-> >>
-> >> it will lead to QA failure, since .debug dir can not be installed into=
- dbg package
-> >>
-> >>      ERROR: QA Issue: non debug package contains .debug directory: ope=
-nvpn path
-> >>      /work/core2-64-wrs-linux/openvpn/2.3.4-r0/packages-split/openvpn/=
-usr/lib64i
-> >>      /openvpn/plugins/.debug/openvpn-plugin-down-root.so [debug-files]
-> >
-> > Can you please check this floating dependency?
-> >
-> > snort/snort/latest lost dependency on  util-linux-libuuid
-> >
->=20
-> Hi, martin:
->=20
->=20
-> This patch is fixing the openvpn, not snort, it should be a good fix.
+qemux86_64 has the same issue with powerpc64, set
+BUILDTYPE=NATIVEONLY as default
 
-Ah sorry, I wanted to write it in your next patch which is changing
-snort.
+Fix the below build issue for 64bit platforms:
+| fatal error: gnu/stubs-32.h: No such file or directory
+|  # include <gnu/stubs-32.h>
+|                            ^
+| compilation terminated.
+| make: *** [obj32/elflink.o] Error 1
 
-> About snort dependency, snort will check if util-linux-libuuid exist or
-> not when do configuration, and no configuration options can control it,
-> so PACKAGECONFIG can not be used on snort, so I like leave it to wait
-> until I have time
+Signed-off-by: Ting Liu <b28495@freescale.com>
+---
+ .../libhugetlbfs/libhugetlbfs_git.bb               |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-OK, I won't block it because of this dependency, but if you're using
-snort, then please fix it when you can.
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index 55d555b..315863d 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -28,8 +28,7 @@ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+ LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
+ LIBHUGETLBFS_ARCH_powerpc = "ppc"
+ LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
+-EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=2"
+-EXTRA_OEMAKE_append_powerpc64 = " BUILDTYPE=NATIVEONLY"
++EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} BUILDTYPE=NATIVEONLY V=2"
+ PARALLEL_MAKE = ""
+ CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
+ 
+-- 
+1.7.3.4
 
 
-Thanks
-
-> >>
-> >> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> >> ---
-> >>   meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb |    2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb =
-b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-> >> index a3322a0..48e04b7 100644
-> >> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-> >> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
-> >> @@ -28,4 +28,4 @@ do_install_append() {
-> >>
-> >>   RRECOMMENDS_${PN} =3D "kernel-module-tun"
-> >>
-> >> -FILES_${PN}-dbg +=3D "/usr/lib/openvpn/plugins/.debug"
-> >> +FILES_${PN}-dbg +=3D "${libdir}/openvpn/plugins/.debug"
-> >> --
-> >> 1.7.10.4
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> >
->=20
-> --=20
-> Best Reagrds,
-> Roy | RongQing Li
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---b2s+RKoBicgQlNJs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPSLB4ACgkQN1Ujt2V2gBxMVACfd1H2qJqawLoFRNwGhL+8ESAX
-tVMAnj1DFuBw5fgjwPLe03LPuWzgpkrf
-=1QXw
------END PGP SIGNATURE-----
-
---b2s+RKoBicgQlNJs--
