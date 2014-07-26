@@ -1,36 +1,41 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 1721270668
+Return-Path: <eduardo@monkey.io>
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D62F60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jul 2014 14:58:58 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id a1so5368936wgh.11
+	Sat, 26 Jul 2014 15:03:20 +0000 (UTC)
+Received: by mail-ie0-f179.google.com with SMTP id rl12so4909021iec.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jul 2014 07:58:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=5VffxYgKJe3GicVWnUF8r/uEDxmshyG/pq6XXoxrhCA=;
-	b=vtcO+tflDIdfccshNAjuL/ltdrB4M9GFxJQA3TGyr40E6ljoXvLRBC8Wyi7D17xi3k
-	h0JzAWJM9XlJeD8Em+dqgDGOMWWvoJJZi0FaJRAg19KSoDcjs0epnsTJFASFt4hSHhQU
-	NDOGY4Vlei4qL9yF0XGo+hLN2niEXNNqvHRYKMwNS83cDAI0eXRMWU8SH5r9MN+hHWOv
-	YHxJD+COwHstBG22S2GceNKHRb4O6UlVWDHzk7CHZaWUrhRz9GRtbcmyrVn4PoaG2qaW
-	1SHj/aTAqA6k1406Mn9Tyxgk1r+XnIMuEDwjAFA0hRQkOEIWw4kFBGZz+R85wZVcB/2x
-	wN3Q==
-X-Received: by 10.180.187.197 with SMTP id fu5mr3043412wic.64.1406386739120;
-	Sat, 26 Jul 2014 07:58:59 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host30-249-dynamic.54-79-r.retail.telecomitalia.it. [79.54.249.30])
-	by mx.google.com with ESMTPSA id hp6sm8277089wib.23.2014.07.26.07.58.58
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 26 Jul 2014 07:58:58 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Jul 2014 16:58:47 +0200
-Message-Id: <1406386727-19634-2-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1406386727-19634-1-git-send-email-andrea.adami@gmail.com>
-References: <1406386727-19634-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH] linux-gcw0-kexecboot_3.12: update defconfig
+	Sat, 26 Jul 2014 08:03:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=A+rV8slN1SOLyoV+DkLkzJa9/yDQBHNpisM3NrW7fwQ=;
+	b=FjixcjKrU2MidGWkZJvs2wQuTytKn1fAGy5qrb39aDwtyyRrQXkIobhDoLY8hABkU+
+	fedqRP59JON/nP9As03VLya6rJ89T4NPG0/dpJVwxdpBrPOJHZNwDVoefWioNXPS3k3l
+	5e9NBImSr2iafTDibtP5p6VBYjPxGyjXyzgOUjUnJDeLQSoXERr75wIth+AKRQUKT93H
+	QZR7+/i6hsGO3np154PUhEyAzfdiD5CVtExR8W6biNjVgrtc5U7KOUUfG5B8GprhTCiJ
+	3ubyithDfIbg9rDIHD9A71xV4IlM5aEMfx3iO9C6Er45hyAQDlwF71QNSkTUTh+N2CcF
+	v8+A==
+X-Gm-Message-State: ALoCoQnhjx4i+hDb4XalWGhS2YXkDxIXlRrWoNhQUXpZq0yK8pO3OSqZQM2cqUWgEYkpDPXyPBA3
+MIME-Version: 1.0
+X-Received: by 10.50.62.80 with SMTP id w16mr15119856igr.21.1406387001133;
+	Sat, 26 Jul 2014 08:03:21 -0700 (PDT)
+Received: by 10.107.133.199 with HTTP; Sat, 26 Jul 2014 08:03:21 -0700 (PDT)
+In-Reply-To: <20140725100507.GS2492@jama>
+References: <1405147077-22498-1-git-send-email-eduardo@monkey.io>
+	<20140718181535.GQ2433@jama>
+	<CAEaCVQj60r8pmT4RwLWZ3RO5NvkKzbQPHbkdhOqhoX3zbO2mRw@mail.gmail.com>
+	<20140718182742.GR2433@jama>
+	<CAEaCVQjMYWSZQQYj+wueXund=+XRyfnzXtmrg6WW8FyCSztukQ@mail.gmail.com>
+	<20140720214725.GG22875@jama> <20140725100507.GS2492@jama>
+Date: Sat, 26 Jul 2014 09:03:21 -0600
+Message-ID: <CAEaCVQjC6f-6o1DhjR_=pCSngLsg8xCFWG+BDCpwZp-kbNKMEw@mail.gmail.com>
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-webserver][PATCHv4] monkey: new v1.5.1 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,83 +49,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jul 2014 14:59:05 -0000
+X-List-Received-Date: Sat, 26 Jul 2014 15:03:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Follow upstream changes.
+hi Martin,
 
-While there, fix a potential issue with do_package_qa
-like done in meta-initramfs for the main -kexecboot kernel.
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig | 8 +++++---
- recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb             | 1 +
- 2 files changed, 6 insertions(+), 3 deletions(-)
+> > My builds are using "distroless" setup, if you're using poky then it's
+> > possible that there is still sysvinit added in your DISTRO_FEATURES
+> > somewhere (check bitbake -e monkay) so the sysv init script isn't
+> > removed in the end for you.
+>
+> I've just noticed that CONFFILES is set to
+> ${sysconfdir}/monkey/
+>
+> so it's not caused by missing init.d script but whole
+> ${sysconfdir}/monkey/ is empty in PN, can you check what's installed
+> there in your builds?
+>
+> It's either not installed when some dependency is missing or it's
+> included in different package in my build (knowing which file to look
+> for would help).
+>
+>
+thanks for tracking this. In my build using Poky i get installed the
+following files:
 
-diff --git a/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig b/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-index e5c5d7e..97e2e82 100644
---- a/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-+++ b/recipes-kernel/linux/linux-gcw0-kexecboot-3.12/gcw0/defconfig
-@@ -7,6 +7,7 @@ CONFIG_PREEMPT_VOLUNTARY=y
- CONFIG_KEXEC=y
- # CONFIG_SECCOMP is not set
- CONFIG_LOCALVERSION="-dingux"
-+# CONFIG_LOCALVERSION_AUTO is not set
- CONFIG_DEFAULT_HOSTNAME="gcw-zero"
- CONFIG_SYSVIPC=y
- CONFIG_NO_HZ_IDLE=y
-@@ -21,10 +22,8 @@ CONFIG_PROFILING=y
- CONFIG_OPROFILE=y
- CONFIG_MODULES=y
- CONFIG_MODULE_UNLOAD=y
--# CONFIG_LBDAF is not set
- # CONFIG_BLK_DEV_BSG is not set
- CONFIG_PARTITION_ADVANCED=y
--# CONFIG_EFI_PARTITION is not set
- # CONFIG_IOSCHED_CFQ is not set
- # CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
- # CONFIG_SUSPEND is not set
-@@ -68,8 +67,10 @@ CONFIG_KEYBOARD_GPIO=y
- # CONFIG_INPUT_MOUSE is not set
- CONFIG_INPUT_JOYSTICK=y
- CONFIG_JOYSTICK_JZ_SADC=y
-+CONFIG_JOYSTICK_MXC6225=m
- CONFIG_INPUT_MISC=y
- CONFIG_INPUT_UINPUT=y
-+CONFIG_INPUT_PWM_HAPTIC=y
- # CONFIG_SERIO is not set
- CONFIG_LEGACY_PTY_COUNT=2
- # CONFIG_DEVMEM is not set
-@@ -82,6 +83,7 @@ CONFIG_I2C=y
- # CONFIG_I2C_COMPAT is not set
- CONFIG_I2C_CHARDEV=y
- CONFIG_I2C_GPIO=y
-+CONFIG_PINCTRL_JZ4770=y
- CONFIG_GPIO_SYSFS=y
- CONFIG_POWER_SUPPLY=y
- CONFIG_PMU_ACT8600_SUPPORT=y
-@@ -175,7 +177,7 @@ CONFIG_LEDS_TRIGGERS=y
- CONFIG_LEDS_TRIGGER_TIMER=y
- CONFIG_RTC_CLASS=y
- # CONFIG_RTC_INTF_PROC is not set
--CONFIG_RTC_DRV_JZ4770=y
-+CONFIG_RTC_DRV_JZ4740=y
- # CONFIG_IOMMU_SUPPORT is not set
- CONFIG_PWM=y
- CONFIG_PWM_JZ4770=y
-diff --git a/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb b/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-index 45a18c0..aada422 100644
---- a/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-+++ b/recipes-kernel/linux/linux-gcw0-kexecboot_3.12.bb
-@@ -16,6 +16,7 @@ INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
- # disable unneeded tasks
- do_install[noexec] = "1"
- do_package[noexec] = "1"
-+do_package_qa[noexec] = "1"
- do_packagedata[noexec] = "1"
- do_package_deb[noexec] = "1"
- do_package_ipk[noexec] = "1"
--- 
-1.9.1
+root@qemux86:~# find /etc/monkey/
+/etc/monkey/
+/etc/monkey/sites
+/etc/monkey/sites/default
+/etc/monkey/plugins.load
+/etc/monkey/monkey.conf
+/etc/monkey/monkey.mime
+/etc/monkey/plugins
+/etc/monkey/plugins/fastcgi
+/etc/monkey/plugins/fastcgi/fastcgi.conf
+/etc/monkey/plugins/logger
+/etc/monkey/plugins/logger/logger.conf
+/etc/monkey/plugins/mandril
+/etc/monkey/plugins/mandril/mandril.conf
+/etc/monkey/plugins/dirlisting
+/etc/monkey/plugins/dirlisting/dirhtml.conf
+/etc/monkey/plugins/dirlisting/themes
+/etc/monkey/plugins/dirlisting/themes/guineo
+/etc/monkey/plugins/dirlisting/themes/guineo/entry.theme
+/etc/monkey/plugins/dirlisting/themes/guineo/footer.theme
+/etc/monkey/plugins/dirlisting/themes/guineo/header.theme
+/etc/monkey/plugins/cgi
+/etc/monkey/plugins/cgi/cgi.conf
+/etc/monkey/plugins/auth
+/etc/monkey/plugins/auth/monkey.users
+/etc/monkey/plugins/auth/README
+/etc/monkey/plugins/proxy_reverse
+/etc/monkey/plugins/proxy_reverse/proxy_reverse.conf
+/etc/monkey/plugins/cheetah
+/etc/monkey/plugins/cheetah/cheetah.conf
 
+if you need any extra info let me know,
+
+best
 
