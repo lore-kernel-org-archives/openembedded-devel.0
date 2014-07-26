@@ -1,37 +1,41 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 018DE70200
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 46E4960144
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 19:33:11 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id kq14so6613090pab.40
+	Sat, 26 Jul 2014 12:43:21 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
+	via TCP (outbound) with ESMTPS id 20140726124320993
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jul 2014 12:33:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O8D1X2bSBmSn4zjWKr29nzUnCYCR5Q4JccVI4OtnmCc=;
-	b=HqJPO0/V5Vuzd6jkZOciH9mLjoJCqt/H4HDuvJK0Z9m9qb07mtOL+FjsyLAKVa+DWR
-	ljgthRFy/u931w4wf/cCO13FB15WnvCbSotjHJH7I9M1c4tcMJpfZ9CTgwqehGnpXf18
-	M2JP3GlhTw49WNLTLtWa+8rDglg9sRq5u/IZQcMlRaeZqxcdVa29mgt/n+zyAjmqWkWE
-	bm/wXe1b4Jr4v5IRrHf2AwPoy7um9puQAYTm5m3H7sxP2HRxEckGz3z01KJyTThPwDjV
-	vXzss4Vp2tbHg2jpgF7Yk4WgG4MSWbK2WYYPTsKHWbtvD8qQ5wTiBetG2OjitJTDd5+1
-	tZsg==
-X-Gm-Message-State: ALoCoQlHb+SS13wGMDLgfc6uuRQ0NBQVGOSmqzP7LfSI5PccH/lYJ/31i2d1vUGY3GUiPGmuTaTI
-X-Received: by 10.68.164.164 with SMTP id yr4mr20791833pbb.57.1406316792638;
-	Fri, 25 Jul 2014 12:33:12 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-98-239-95-55.hsd1.ca.comcast.net.
-	[98.239.95.55])
-	by mx.google.com with ESMTPSA id dd5sm9650903pbc.85.2014.07.25.12.33.11
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 25 Jul 2014 12:33:12 -0700 (PDT)
-From: Armin Kuster <akuster@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jul 2014 12:33:09 -0700
-Message-Id: <1406316789-27514-1-git-send-email-akuster@mvista.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] V4 wireshark: fix build depends
+	Sat, 26 Jul 2014 12:43:20 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [24.211.139.253] (port=60673 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1XB1Jj-00066w-0A for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Jul 2014 08:43:15 -0400
+Date: Sat, 26 Jul 2014 08:43:11 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
+Message-ID: <alpine.LFD.2.11.1407260841510.28771@localhost>
+References: <alpine.LFD.2.11.1407210555370.10857@localhost>
+	<CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: Re: i'm assuming some "do_<task>[dirs] =" directives are redundant, yes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jul 2014 19:33:16 -0000
+X-List-Received-Date: Sat, 26 Jul 2014 12:43:24 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-This should address issues found in test-dependencies 2014-07-25
+On Mon, 21 Jul 2014, Christopher Larson wrote:
 
-wireshark/wireshark/latest lost dependency on  libcap libnl libnl-genl libnl-nf libnl-route portaudio-v19 sbc
+> On Mon, Jul 21, 2014 at 2:59 AM, Robert P. J. Day <rpjday@crashcourse.ca>
+> wrote:
+>
+> >
+> >   pedantic observation -- i notice in base.bbclass:
+> >
+> > do_unpack[dirs] = "${WORKDIR}"
+> >
+> >   and over in patch.bbclass:
+> >
+> > addtask patch after do_unpack
+> > do_patch[dirs] = "${WORKDIR}"
+> >
+> >   so given that patching has been added as a task after unpacking,
+> > wouldn't ${WORKDIR} already be guaranteed to exist? doesn't hurt, of
+> > course, and no, i have no intention of trying to clean any of that up
+> > :-), i just wanted to clarify the actual mechanics.
+>
+>
+> 'dirs' isn't just a list of dirs to create, it also sets the current
+> working directory for the task. The last directory listed is where
+> the path is set.
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  is that documented anywhere? the "variable flags" section of the
+bitbake user manual says nothing about that last obviously significant
+property.
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-index 5d6df40..b965fdf 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.wireshark.org"
- SECTION = "network"
- LICENSE = "GPL-2.0"
- 
--DEPENDS = "perl-native libpcap pcre expat glib-2.0 libsmi"
-+DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libsmi libnl portaudio-v19 sbc"
- 
- inherit autotools pkgconfig
- 
+rday
+
 -- 
-1.9.1
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
