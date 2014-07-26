@@ -1,41 +1,34 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
-	by mail.openembedded.org (Postfix) with ESMTP id 46E4960144
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id D952660703
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jul 2014 12:43:21 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
-	via TCP (outbound) with ESMTPS id 20140726124320993
+	Sat, 26 Jul 2014 14:58:55 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id k14so5420842wgh.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jul 2014 12:43:20 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [24.211.139.253] (port=60673 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1XB1Jj-00066w-0A for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jul 2014 08:43:15 -0400
-Date: Sat, 26 Jul 2014 08:43:11 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
-Message-ID: <alpine.LFD.2.11.1407260841510.28771@localhost>
-References: <alpine.LFD.2.11.1407210555370.10857@localhost>
-	<CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
-User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: Re: i'm assuming some "do_<task>[dirs] =" directives are redundant, yes?
+	Sat, 26 Jul 2014 07:58:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZAj8ja0zH6Bx4lbvQ7xHA6KVNgFab5KFaEIM61AmFe0=;
+	b=AgyEIZMpmWB070rw89TYehMyST3f+VC6B2GeuEiQVsHa74p+54owup6gFuITl5ghV7
+	ziIYlJ2yCWva/2CIR/KP/8z2WHMqhs5mosYQVAcpY1iSpIGsPHC1S1aqri3LtojXzOZu
+	uwctTCTNh3L9ep2TKPowQa0ZqGYI69uWpn3bGYZtau4HnPUsL9q676eETkXPH4Snf55T
+	563pmeS2uAP0qq5VH5x95ksGWuSRQsDzMmuIAvRhuqkCmEsMepK1YAQ99SA4hFR8h7Fa
+	gm4C4MlcYnB/37vzxodTONEaVpnROkAvqIubcdcH0obdgpJZ6ZzhKQeXvq8yWrMgY5Es
+	lmuQ==
+X-Received: by 10.180.106.138 with SMTP id gu10mr14305586wib.21.1406386736436; 
+	Sat, 26 Jul 2014 07:58:56 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host30-249-dynamic.54-79-r.retail.telecomitalia.it. [79.54.249.30])
+	by mx.google.com with ESMTPSA id hp6sm8277089wib.23.2014.07.26.07.58.54
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 26 Jul 2014 07:58:55 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 26 Jul 2014 16:58:46 +0200
+Message-Id: <1406386727-19634-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld][PATCH] linux-gcw0_3.12: update defconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,48 +42,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jul 2014 12:43:24 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 26 Jul 2014 14:59:05 -0000
 
-On Mon, 21 Jul 2014, Christopher Larson wrote:
+Follow upstream changes.
+Add CONFIG_KEXEC=y
 
-> On Mon, Jul 21, 2014 at 2:59 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-> wrote:
->
-> >
-> >   pedantic observation -- i notice in base.bbclass:
-> >
-> > do_unpack[dirs] = "${WORKDIR}"
-> >
-> >   and over in patch.bbclass:
-> >
-> > addtask patch after do_unpack
-> > do_patch[dirs] = "${WORKDIR}"
-> >
-> >   so given that patching has been added as a task after unpacking,
-> > wouldn't ${WORKDIR} already be guaranteed to exist? doesn't hurt, of
-> > course, and no, i have no intention of trying to clean any of that up
-> > :-), i just wanted to clarify the actual mechanics.
->
->
-> 'dirs' isn't just a list of dirs to create, it also sets the current
-> working directory for the task. The last directory listed is where
-> the path is set.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-  is that documented anywhere? the "variable flags" section of the
-bitbake user manual says nothing about that last obviously significant
-property.
-
-rday
-
+diff --git a/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig b/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
+index 70f6f41..44c53bd 100644
+--- a/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
++++ b/recipes-kernel/linux/linux-gcw0-3.12/gcw0/defconfig
+@@ -7,6 +7,7 @@ CONFIG_PREEMPT_VOLUNTARY=y
+ CONFIG_KEXEC=y
+ # CONFIG_SECCOMP is not set
+ CONFIG_LOCALVERSION="-dingux"
++# CONFIG_LOCALVERSION_AUTO is not set
+ CONFIG_DEFAULT_HOSTNAME="gcw-zero"
+ CONFIG_SYSVIPC=y
+ CONFIG_NO_HZ_IDLE=y
+@@ -21,10 +22,8 @@ CONFIG_PROFILING=y
+ CONFIG_OPROFILE=y
+ CONFIG_MODULES=y
+ CONFIG_MODULE_UNLOAD=y
+-# CONFIG_LBDAF is not set
+ # CONFIG_BLK_DEV_BSG is not set
+ CONFIG_PARTITION_ADVANCED=y
+-# CONFIG_EFI_PARTITION is not set
+ # CONFIG_IOSCHED_CFQ is not set
+ # CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS is not set
+ # CONFIG_SUSPEND is not set
+@@ -67,8 +66,10 @@ CONFIG_KEYBOARD_GPIO=y
+ # CONFIG_INPUT_MOUSE is not set
+ CONFIG_INPUT_JOYSTICK=y
+ CONFIG_JOYSTICK_JZ_SADC=y
++CONFIG_JOYSTICK_MXC6225=m
+ CONFIG_INPUT_MISC=y
+ CONFIG_INPUT_UINPUT=y
++CONFIG_INPUT_PWM_HAPTIC=y
+ # CONFIG_SERIO is not set
+ CONFIG_LEGACY_PTY_COUNT=2
+ # CONFIG_DEVMEM is not set
+@@ -81,6 +82,7 @@ CONFIG_I2C=y
+ # CONFIG_I2C_COMPAT is not set
+ CONFIG_I2C_CHARDEV=y
+ CONFIG_I2C_GPIO=y
++CONFIG_PINCTRL_JZ4770=y
+ CONFIG_GPIO_SYSFS=y
+ CONFIG_POWER_SUPPLY=y
+ CONFIG_PMU_ACT8600_SUPPORT=y
+@@ -174,7 +176,7 @@ CONFIG_LEDS_TRIGGERS=y
+ CONFIG_LEDS_TRIGGER_TIMER=y
+ CONFIG_RTC_CLASS=y
+ # CONFIG_RTC_INTF_PROC is not set
+-CONFIG_RTC_DRV_JZ4770=y
++CONFIG_RTC_DRV_JZ4740=y
+ # CONFIG_IOMMU_SUPPORT is not set
+ CONFIG_PWM=y
+ CONFIG_PWM_JZ4770=y
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+1.9.1
 
 
