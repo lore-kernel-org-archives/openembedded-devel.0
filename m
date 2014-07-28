@@ -1,43 +1,24 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B58265D5E
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D92BE65E08
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jul 2014 12:10:28 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
-	via TCP (outbound) with ESMTPS id 20140727121029149
+	Mon, 28 Jul 2014 08:08:02 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6S883Gq021828
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jul 2014 12:10:29 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [99.240.204.5] (port=57479 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1XBNHT-0000Uo-By for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jul 2014 08:10:23 -0400
-Date: Sun, 27 Jul 2014 08:10:22 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CABcZANmro1OOnNZjAM-mkPjxV7wTUOpKHR9AQrqJTMhV5LOs5g@mail.gmail.com>
-Message-ID: <alpine.LFD.2.11.1407270804480.4789@localhost>
-References: <alpine.LFD.2.11.1407210555370.10857@localhost>
-	<CABcZANkamKKfYkMBnit4H8go-_BY_0ePWbg32Fx6oCjNVspiwg@mail.gmail.com>
-	<alpine.LFD.2.11.1407260841510.28771@localhost>
-	<CABcZANmro1OOnNZjAM-mkPjxV7wTUOpKHR9AQrqJTMhV5LOs5g@mail.gmail.com>
-User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
+	Mon, 28 Jul 2014 01:08:03 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 28 Jul 2014 01:08:02 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Jul 2014 04:08:01 -0400
+Message-ID: <1406534881-17136-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: Re: i'm assuming some "do_<task>[dirs] =" directives are redundant, yes?
+Subject: [meta-networking][PATCH] ipsec-tools: Fix pfkey UPDATE failure caused by EINTR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,78 +32,265 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jul 2014 12:10:36 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 28 Jul 2014 08:08:11 -0000
+Content-Type: text/plain
 
-On Sat, 26 Jul 2014, Christopher Larson wrote:
+From: Xufeng Zhang <xufeng.zhang@windriver.com>
 
-> On Sat, Jul 26, 2014 at 5:43 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-> wrote:
->
-> > On Mon, 21 Jul 2014, Christopher Larson wrote:
-> >
-> > > On Mon, Jul 21, 2014 at 2:59 AM, Robert P. J. Day <rpjday@crashcourse.ca
-> > >
-> > > wrote:
-> > >
-> > > >
-> > > >   pedantic observation -- i notice in base.bbclass:
-> > > >
-> > > > do_unpack[dirs] = "${WORKDIR}"
-> > > >
-> > > >   and over in patch.bbclass:
-> > > >
-> > > > addtask patch after do_unpack
-> > > > do_patch[dirs] = "${WORKDIR}"
-> > > >
-> > > >   so given that patching has been added as a task after unpacking,
-> > > > wouldn't ${WORKDIR} already be guaranteed to exist? doesn't hurt, of
-> > > > course, and no, i have no intention of trying to clean any of that up
-> > > > :-), i just wanted to clarify the actual mechanics.
-> > >
-> > >
-> > > 'dirs' isn't just a list of dirs to create, it also sets the current
-> > > working directory for the task. The last directory listed is where
-> > > the path is set.
-> >
-> >   is that documented anywhere? the "variable flags" section of the
-> > bitbake user manual says nothing about that last obviously significant
-> > property.
->
-> Good question, I have no idea :) Clearly it should be somewhere.
+While kernel is processing the UPDATE message which is sent from racoon,
+it maybe interrupted by certain system signal and if this case happens,
+kernel responds with an EINTR message to racoon and kernel fails to
+establish the corresponding SA.
+Fix this problem by resend the UPDATE message when EINTR(Interrupted
+system call) error happens.
 
-  actually, while i'm there:
+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ ...PDATE-message-when-received-EINTR-message.patch | 220 +++++++++++++++++++++
+ .../ipsec-tools/ipsec-tools_0.8.1.bb               |   1 +
+ 2 files changed, 221 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
 
-http://www.yoctoproject.org/docs/current/bitbake-user-manual/bitbake-user-manual.html#variable-flags
-
-anything else i should add just to make it a single patch? (yes, i
-realize this should have gone to the bitbake list at this point but
-let's just finish it off here and be done with it.)
-
-  it occurs that one could mention variable flags like [doc] in that
-section since, technically, that section is entitled "Variable Flags",
-not just "Task Flags", even though it is clearly discussing only task
-flags, which seems a touch incomplete.
-
-  and just so i'm clear on this, one does not need to pre-declare
-variable flags anywhere, right? one can just start using them, yes?
-that's probably worth mentioning as well as, on a regular basis, my
-students ask, "where do i declare that thing that looks like a
-subscript?"
-
-  anyway, any suggestions as to what else can go in there while i
-ponder what to add/change?
-
-rday
-
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+new file mode 100644
+index 0000000..1ec5a41
+--- /dev/null
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+@@ -0,0 +1,220 @@
++racoon: Resend UPDATE message when received EINTR message
++
++Upstream-Status: Pending
++
++While kernel is processing the UPDATE message which is sent from racoon,
++it maybe interrupted by system signal and if this case happens,
++kernel responds with an EINTR message to racoon and kernel fails to
++establish the corresponding SA.
++Fix this problem by resend the UPDATE message when EINTR(Interrupted
++system call) error happens.
++
++Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++---
++--- a/src/libipsec/libpfkey.h
+++++ b/src/libipsec/libpfkey.h
++@@ -92,6 +92,12 @@
++ 	u_int16_t ctxstrlen;		/* length of security context string */
++ };
++ 
+++struct update_msg_info {
+++        struct sadb_msg *update_msg;
+++        int so;
+++        int len;
+++};
+++
++ /* The options built into libipsec */
++ extern int libipsec_opt;
++ #define LIBIPSEC_OPT_NATT		0x01
++--- a/src/libipsec/pfkey.c
+++++ b/src/libipsec/pfkey.c
++@@ -1219,7 +1219,8 @@
++ }
++ #endif
++ 
++-
+++struct update_msg_info update_msg_send = {NULL, 0, 0};
+++	
++ /* sending SADB_ADD or SADB_UPDATE message to the kernel */
++ static int
++ pfkey_send_x1(struct pfkey_send_sa_args *sa_parms)
++@@ -1483,10 +1484,24 @@
++ 
++ 	/* send message */
++ 	len = pfkey_send(sa_parms->so, newmsg, len);
++-	free(newmsg);
++ 
++-	if (len < 0)
++-		return -1;
+++	if (newmsg->sadb_msg_type == SADB_UPDATE) {
+++		if (update_msg_send.update_msg)
+++			free(update_msg_send.update_msg);
+++		update_msg_send.update_msg = newmsg;
+++		update_msg_send.so = sa_parms->so;
+++		update_msg_send.len = len;
+++
+++		if (len < 0) {
+++			free(update_msg_send.update_msg);
+++			update_msg_send.update_msg = NULL;	
+++			return -1;
+++		}
+++	} else {
+++		free(newmsg);
+++		if (len < 0)
+++			return -1;
+++	}
++ 
++ 	__ipsec_errcode = EIPSEC_NO_ERROR;
++ 	return len;
++--- a/src/racoon/session.c
+++++ b/src/racoon/session.c
++@@ -100,6 +100,8 @@
++ 
++ #include "sainfo.h"
++ 
+++extern struct update_msg_info update_msg_send;
+++
++ struct fd_monitor {
++ 	int (*callback)(void *ctx, int fd);
++ 	void *ctx;
++@@ -348,6 +350,11 @@
++ 	close_sockets();
++ 	backupsa_clean();
++ 
+++	if (update_msg_send.update_msg) {
+++		free(update_msg_send.update_msg);
+++		update_msg_send.update_msg = NULL;
+++	}
+++
++ 	plog(LLV_INFO, LOCATION, NULL, "racoon process %d shutdown\n", getpid());
++ 
++ 	exit(0);
++--- a/src/racoon/pfkey.c
+++++ b/src/racoon/pfkey.c
++@@ -103,10 +103,12 @@
++ #include "crypto_openssl.h"
++ #include "grabmyaddr.h"
+++#include "../libipsec/libpfkey.h"
++ 
++ #if defined(SADB_X_EALG_RIJNDAELCBC) && !defined(SADB_X_EALG_AESCBC)
++ #define SADB_X_EALG_AESCBC  SADB_X_EALG_RIJNDAELCBC
++ #endif
++ 
+++extern struct update_msg_info update_msg_send;
++ /* prototype */
++ static u_int ipsecdoi2pfkey_aalg __P((u_int));
++ static u_int ipsecdoi2pfkey_ealg __P((u_int));
++@@ -253,6 +255,13 @@
++ 			s_pfkey_type(msg->sadb_msg_type),
++ 			strerror(msg->sadb_msg_errno));
++ 
+++		if (msg->sadb_msg_errno == EINTR &&
+++			update_msg_send.update_msg) {
+++			plog(LLV_DEBUG, LOCATION, NULL,
+++			"pfkey update resend\n");
+++			send(update_msg_send.so, (void *)update_msg_send.update_msg, (socklen_t)update_msg_send.len, 0);
+++		}
+++
++ 		goto end;
++ 	}
++ 
++@@ -498,6 +507,11 @@
++ {
++ 	flushsp();
++ 
+++	if (update_msg_send.update_msg) {
+++		free(update_msg_send.update_msg);
+++		update_msg_send.update_msg = NULL;
+++	}
+++
++ 	if (pfkey_send_spddump(lcconf->sock_pfkey) < 0) {
++ 		plog(LLV_ERROR, LOCATION, NULL,
++ 			"libipsec sending spddump failed: %s\n",
++@@ -1295,6 +1309,8 @@
++ 	return 0;
++ }
++ 
+++int update_received = 0;
+++
++ static int
++ pk_recvupdate(mhp)
++ 	caddr_t *mhp;
++@@ -1307,6 +1323,13 @@
++ 	int incomplete = 0;
++ 	struct saproto *pr;
++ 
+++	update_received = 1;
+++
+++	if (update_msg_send.update_msg) {
+++                free(update_msg_send.update_msg);
+++                update_msg_send.update_msg = NULL;
+++        }
+++
++ 	/* ignore this message because of local test mode. */
++ 	if (f_local)
++ 		return 0;
++@@ -4163,3 +4186,8 @@
++ 
++ 	return buf;
++ }
+++
+++int receive_from_isakmp()
+++{
+++	return pfkey_handler(NULL, lcconf->sock_pfkey);
+++}
++--- a/src/racoon/pfkey.h
+++++ b/src/racoon/pfkey.h
++@@ -71,5 +71,6 @@
++ extern u_int32_t pk_getseq __P((void));
++ extern const char *sadbsecas2str
++ 	__P((struct sockaddr *, struct sockaddr *, int, u_int32_t, int));
+++extern int receive_from_isakmp __P((void));
++ 
++ #endif /* _PFKEY_H */
++--- a/src/racoon/isakmp_quick.c
+++++ b/src/racoon/isakmp_quick.c
++@@ -774,6 +774,8 @@
++ 	return error;
++ }
++ 
+++extern int update_received;
+++
++ /*
++  * send to responder
++  * 	HDR*, HASH(3)
++@@ -892,6 +894,11 @@
++ 	}
++ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
++ 
+++	while (!update_received)
+++		receive_from_isakmp();
+++	
+++	update_received = 0;
+++
++ 	/* Do ADD for responder */
++ 	if (pk_sendadd(iph2) < 0) {
++ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
++@@ -1035,6 +1042,11 @@
++ 	}
++ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
++ 
+++	while (!update_received)
+++		receive_from_isakmp();
+++
+++	update_received = 0;
+++
++ 	/* Do ADD for responder */
++ 	if (pk_sendadd(iph2) < 0) {
++ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
++@@ -1989,6 +2001,11 @@
++ 	}
++ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
++ 
+++	while (!update_received)
+++		receive_from_isakmp();
+++
+++	update_received = 0;
+++
++ 	/* Do ADD for responder */
++ 	if (pk_sendadd(iph2) < 0) {
++ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+index 2e5c0a4..0332f7f 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+@@ -11,6 +11,7 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
+            file://0001-Fix-warning-with-gcc-4.8.patch \
+            file://0002-Don-t-link-against-libfl.patch \
+            file://configure.patch \
++           file://racoon-Resend-UPDATE-message-when-received-EINTR-message.patch \
+           "
+ SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
+ SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+2.0.0
 
 
