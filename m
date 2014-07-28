@@ -1,33 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id D93326FECD
+Return-Path: <ben.shelton@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 41AA760030
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2014 20:03:04 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id rp18so7235949iec.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2014 13:03:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=IvVpodQh9y3OIiPicMk/5UOsMSIRyrVwHz3yEc6pOXg=;
-	b=jd5nVz5+akwrGqkHWH9cLAbwVg5WxgM+7Frxdde5aasYfhPu7CL4kd411RFTshhEhY
-	FVCmCJp1kQTdIZxN/6nnnOPjzye0sW8hGqyaG+h680BxepkzVY8BVxeeyAIesLwjF7tl
-	8DPf1QrOk9T9J/VwZhOSPDCmcv1k9yBmRw3rdgqwWPPicXcWc9p8bkjMoly6s+l6l+/e
-	zr5ZPLeckYgerL4qXj2PkV6xcI1FM+oOwCU0j6MgnHvDvwhjGYbRC6kznHk5rlImKYgL
-	+D0Tfx4v7Rf/6LDGwP+1BhlM3c+0I9E/giUoC5xEqNlLTsDY6ro7IO84sGFw2MUkteSu
-	DrKw==
-X-Received: by 10.51.17.2 with SMTP id ga2mr28562545igd.2.1406577786180; Mon,
-	28 Jul 2014 13:03:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Mon, 28 Jul 2014 13:02:36 -0700 (PDT)
-In-Reply-To: <1406575596-15006-3-git-send-email-ben.shelton@ni.com>
+	Mon, 28 Jul 2014 21:54:01 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
+	s6SLs2p6031454 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jul 2014 16:54:02 -0500
+Received: from localhost ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2014072816540241-334847 ;
+	Mon, 28 Jul 2014 16:54:02 -0500 
+Date: Mon, 28 Jul 2014 16:53:49 -0500
+From: Ben Shelton <ben.shelton@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140728215349.GA13093@bshelton-desktop>
 References: <1406575596-15006-1-git-send-email-ben.shelton@ni.com>
-	<1406575596-15006-3-git-send-email-ben.shelton@ni.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Jul 2014 13:02:36 -0700
-Message-ID: <CAMKF1srMsLU11_YQVdXksRmmQAT2Hw6TzNoNgmT8=5Weyn+tfw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] xorg-fonts-misc: add recipe
+	<CAMKF1sor__WRSb_Yo_G1+NhDX0TF8uY5tXAfMJQBgfD7um1rOg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1sor__WRSb_Yo_G1+NhDX0TF8uY5tXAfMJQBgfD7um1rOg@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 07/28/2014 04:54:02 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 07/28/2014 04:54:02 PM,
+	Serialize complete at 07/28/2014 04:54:02 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.12.52, 1.0.14,
+	0.0.0000
+	definitions=2014-07-28_03:2014-07-28, 2014-07-28,
+	1970-01-01 signatures=0
+Subject: Re: [meta-oe][PATCH 1/3] font-misc-misc: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,44 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jul 2014 20:03:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 28 Jul 2014 21:54:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Jul 28, 2014 at 12:26 PM, Ben Shelton <ben.shelton@ni.com> wrote:
-> Adding a packagegroup recipe to build both the misc-misc and cursor-misc
-> X.org fonts.
->
-> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
-> ---
->  meta-oe/recipes-graphics/xorg-font/xorg-fonts-misc.bb | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-font/xorg-fonts-misc.bb
->
-> diff --git a/meta-oe/recipes-graphics/xorg-font/xorg-fonts-misc.bb b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-misc.bb
-> new file mode 100644
-> index 0000000..b2d1db7
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-misc.bb
+On 07/28, Khem Raj wrote:
+> On Mon, Jul 28, 2014 at 12:26 PM, Ben Shelton <ben.shelton@ni.com> wrote:
+> > +RDEPENDS_${PN}_class-native = "font-util-native"
+> 
+> there is no native bbclassextend here so why is this needed ?
 
-For packagegroups the naming convention is to have packagegroup
-somewhere in name and probably put it under recipes-core/packagegroups
+Good catch -- I'll remove it and resubmit.
 
-> @@ -0,0 +1,11 @@
-> +SUMMARY = "X.org misc font set"
-> +LICENSE = "PD"
-> +
-> +inherit packagegroup
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +RDEPENDS_${PN} = "\
-> +       font-cursor-misc \
-> +       font-misc-misc \
-> +"
-> --
-> 2.0.3
->
-> --
+Thanks,
+Ben
+
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
