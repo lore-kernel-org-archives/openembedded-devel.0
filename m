@@ -1,24 +1,24 @@
 Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D92BE65E08
+	by mail.openembedded.org (Postfix) with ESMTP id E76C16A9FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2014 08:08:02 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6S883Gq021828
+	Mon, 28 Jul 2014 08:14:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6S8EIGh022526
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jul 2014 01:08:03 -0700 (PDT)
+	Mon, 28 Jul 2014 01:14:19 -0700 (PDT)
 Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 28 Jul 2014 01:08:02 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 28 Jul 2014 01:14:18 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 28 Jul 2014 04:08:01 -0400
-Message-ID: <1406534881-17136-1-git-send-email-jackie.huang@windriver.com>
+Date: Mon, 28 Jul 2014 04:14:16 -0400
+Message-ID: <1406535256-20652-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ipsec-tools: Fix pfkey UPDATE failure caused by EINTR
+Subject: [meta-networking][PATCH] znc: Fix for CVE-2013-2130
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,264 +32,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jul 2014 08:08:11 -0000
+X-List-Received-Date: Mon, 28 Jul 2014 08:14:24 -0000
 Content-Type: text/plain
 
 From: Xufeng Zhang <xufeng.zhang@windriver.com>
 
-While kernel is processing the UPDATE message which is sent from racoon,
-it maybe interrupted by certain system signal and if this case happens,
-kernel responds with an EINTR message to racoon and kernel fails to
-establish the corresponding SA.
-Fix this problem by resend the UPDATE message when EINTR(Interrupted
-system call) error happens.
+ZNC 1.0 allows remote authenticated users to cause a denial of service
+(NULL pointer reference and crash) via a crafted request to the (1) editnetwork,
+(2) editchan, (3) addchan, or (4) delchan page in modules/webadmin.cpp.
+Per: http://cwe.mitre.org/data/definitions/476.html
+CWE-476: NULL Pointer Dereference
 
 Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...PDATE-message-when-received-EINTR-message.patch | 220 +++++++++++++++++++++
- .../ipsec-tools/ipsec-tools_0.8.1.bb               |   1 +
- 2 files changed, 221 insertions(+)
- create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+ ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ++++++++++++++++++++++
+ meta-networking/recipes-irc/znc/znc_git.bb         |  4 +-
+ 2 files changed, 61 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
 
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
 new file mode 100644
-index 0000000..1ec5a41
+index 0000000..68e4414
 --- /dev/null
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
-@@ -0,0 +1,220 @@
-+racoon: Resend UPDATE message when received EINTR message
++++ b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+@@ -0,0 +1,58 @@
++Subject: [PATCH] Fix NULL pointer dereference in webadmin.
 +
-+Upstream-Status: Pending
++Upstream-Status: Backport
 +
-+While kernel is processing the UPDATE message which is sent from racoon,
-+it maybe interrupted by system signal and if this case happens,
-+kernel responds with an EINTR message to racoon and kernel fails to
-+establish the corresponding SA.
-+Fix this problem by resend the UPDATE message when EINTR(Interrupted
-+system call) error happens.
++commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
 +
-+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++Triggerable by any non-admin, if webadmin is loaded.
++
++The only affected version is 1.0
++
++Thanks to ChauffeR (Simone Esposito) for reporting this.
 +---
-+--- a/src/libipsec/libpfkey.h
-++++ b/src/libipsec/libpfkey.h
-+@@ -92,6 +92,12 @@
-+ 	u_int16_t ctxstrlen;		/* length of security context string */
-+ };
++ modules/webadmin.cpp | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
++index b793c02..816f217 100644
++--- a/modules/webadmin.cpp
+++++ b/modules/webadmin.cpp
++@@ -419,7 +419,7 @@ public:
++ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
 + 
-++struct update_msg_info {
-++        struct sadb_msg *update_msg;
-++        int so;
-++        int len;
-++};
-++
-+ /* The options built into libipsec */
-+ extern int libipsec_opt;
-+ #define LIBIPSEC_OPT_NATT		0x01
-+--- a/src/libipsec/pfkey.c
-++++ b/src/libipsec/pfkey.c
-+@@ -1219,7 +1219,8 @@
-+ }
-+ #endif
++ 			// Admin||Self Check
++-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
++ 				return false;
++ 			}
 + 
-+-
-++struct update_msg_info update_msg_send = {NULL, 0, 0};
-++	
-+ /* sending SADB_ADD or SADB_UPDATE message to the kernel */
-+ static int
-+ pfkey_send_x1(struct pfkey_send_sa_args *sa_parms)
-+@@ -1483,10 +1484,24 @@
++@@ -448,7 +448,7 @@ public:
++ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
 + 
-+ 	/* send message */
-+ 	len = pfkey_send(sa_parms->so, newmsg, len);
-+-	free(newmsg);
++ 			// Admin||Self Check
++-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
++ 				return false;
++ 			}
 + 
-+-	if (len < 0)
-+-		return -1;
-++	if (newmsg->sadb_msg_type == SADB_UPDATE) {
-++		if (update_msg_send.update_msg)
-++			free(update_msg_send.update_msg);
-++		update_msg_send.update_msg = newmsg;
-++		update_msg_send.so = sa_parms->so;
-++		update_msg_send.len = len;
-++
-++		if (len < 0) {
-++			free(update_msg_send.update_msg);
-++			update_msg_send.update_msg = NULL;	
-++			return -1;
-++		}
-++	} else {
-++		free(newmsg);
-++		if (len < 0)
-++			return -1;
-++	}
++@@ -472,7 +472,7 @@ public:
++ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
 + 
-+ 	__ipsec_errcode = EIPSEC_NO_ERROR;
-+ 	return len;
-+--- a/src/racoon/session.c
-++++ b/src/racoon/session.c
-+@@ -100,6 +100,8 @@
++ 			// Admin||Self Check
++-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
++ 				return false;
++ 			}
 + 
-+ #include "sainfo.h"
++@@ -486,7 +486,7 @@ public:
++ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
 + 
-++extern struct update_msg_info update_msg_send;
-++
-+ struct fd_monitor {
-+ 	int (*callback)(void *ctx, int fd);
-+ 	void *ctx;
-+@@ -348,6 +350,11 @@
-+ 	close_sockets();
-+ 	backupsa_clean();
++ 			// Admin||Self Check
++-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
++ 				return false;
++ 			}
 + 
-++	if (update_msg_send.update_msg) {
-++		free(update_msg_send.update_msg);
-++		update_msg_send.update_msg = NULL;
-++	}
-++
-+ 	plog(LLV_INFO, LOCATION, NULL, "racoon process %d shutdown\n", getpid());
-+ 
-+ 	exit(0);
-+--- a/src/racoon/pfkey.c
-++++ b/src/racoon/pfkey.c
-+@@ -103,10 +103,12 @@
-+ #include "crypto_openssl.h"
-+ #include "grabmyaddr.h"
-++#include "../libipsec/libpfkey.h"
-+ 
-+ #if defined(SADB_X_EALG_RIJNDAELCBC) && !defined(SADB_X_EALG_AESCBC)
-+ #define SADB_X_EALG_AESCBC  SADB_X_EALG_RIJNDAELCBC
-+ #endif
-+ 
-++extern struct update_msg_info update_msg_send;
-+ /* prototype */
-+ static u_int ipsecdoi2pfkey_aalg __P((u_int));
-+ static u_int ipsecdoi2pfkey_ealg __P((u_int));
-+@@ -253,6 +255,13 @@
-+ 			s_pfkey_type(msg->sadb_msg_type),
-+ 			strerror(msg->sadb_msg_errno));
-+ 
-++		if (msg->sadb_msg_errno == EINTR &&
-++			update_msg_send.update_msg) {
-++			plog(LLV_DEBUG, LOCATION, NULL,
-++			"pfkey update resend\n");
-++			send(update_msg_send.so, (void *)update_msg_send.update_msg, (socklen_t)update_msg_send.len, 0);
-++		}
-++
-+ 		goto end;
-+ 	}
-+ 
-+@@ -498,6 +507,11 @@
-+ {
-+ 	flushsp();
-+ 
-++	if (update_msg_send.update_msg) {
-++		free(update_msg_send.update_msg);
-++		update_msg_send.update_msg = NULL;
-++	}
-++
-+ 	if (pfkey_send_spddump(lcconf->sock_pfkey) < 0) {
-+ 		plog(LLV_ERROR, LOCATION, NULL,
-+ 			"libipsec sending spddump failed: %s\n",
-+@@ -1295,6 +1309,8 @@
-+ 	return 0;
-+ }
-+ 
-++int update_received = 0;
-++
-+ static int
-+ pk_recvupdate(mhp)
-+ 	caddr_t *mhp;
-+@@ -1307,6 +1323,13 @@
-+ 	int incomplete = 0;
-+ 	struct saproto *pr;
-+ 
-++	update_received = 1;
-++
-++	if (update_msg_send.update_msg) {
-++                free(update_msg_send.update_msg);
-++                update_msg_send.update_msg = NULL;
-++        }
-++
-+ 	/* ignore this message because of local test mode. */
-+ 	if (f_local)
-+ 		return 0;
-+@@ -4163,3 +4186,8 @@
-+ 
-+ 	return buf;
-+ }
-++
-++int receive_from_isakmp()
-++{
-++	return pfkey_handler(NULL, lcconf->sock_pfkey);
-++}
-+--- a/src/racoon/pfkey.h
-++++ b/src/racoon/pfkey.h
-+@@ -71,5 +71,6 @@
-+ extern u_int32_t pk_getseq __P((void));
-+ extern const char *sadbsecas2str
-+ 	__P((struct sockaddr *, struct sockaddr *, int, u_int32_t, int));
-++extern int receive_from_isakmp __P((void));
-+ 
-+ #endif /* _PFKEY_H */
-+--- a/src/racoon/isakmp_quick.c
-++++ b/src/racoon/isakmp_quick.c
-+@@ -774,6 +774,8 @@
-+ 	return error;
-+ }
-+ 
-++extern int update_received;
-++
-+ /*
-+  * send to responder
-+  * 	HDR*, HASH(3)
-+@@ -892,6 +894,11 @@
-+ 	}
-+ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
-+ 
-++	while (!update_received)
-++		receive_from_isakmp();
-++	
-++	update_received = 0;
-++
-+ 	/* Do ADD for responder */
-+ 	if (pk_sendadd(iph2) < 0) {
-+ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
-+@@ -1035,6 +1042,11 @@
-+ 	}
-+ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
-+ 
-++	while (!update_received)
-++		receive_from_isakmp();
-++
-++	update_received = 0;
-++
-+ 	/* Do ADD for responder */
-+ 	if (pk_sendadd(iph2) < 0) {
-+ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
-+@@ -1989,6 +2001,11 @@
-+ 	}
-+ 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
-+ 
-++	while (!update_received)
-++		receive_from_isakmp();
-++
-++	update_received = 0;
-++
-+ 	/* Do ADD for responder */
-+ 	if (pk_sendadd(iph2) < 0) {
-+ 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-index 2e5c0a4..0332f7f 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
-@@ -11,6 +11,7 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
-            file://0001-Fix-warning-with-gcc-4.8.patch \
-            file://0002-Don-t-link-against-libfl.patch \
-            file://configure.patch \
-+           file://racoon-Resend-UPDATE-message-when-received-EINTR-message.patch \
-           "
- SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
- SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
++-- 
++1.8.5.2.233.g932f7e4
++
+diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
+index c8a19dc..77db25b 100644
+--- a/meta-networking/recipes-irc/znc/znc_git.bb
++++ b/meta-networking/recipes-irc/znc/znc_git.bb
+@@ -7,7 +7,9 @@ DEPENDS = "openssl"
+ PV = "1.0+git"
+ 
+ SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
+-SRC_URI = "git://github.com/znc/znc.git"
++SRC_URI = "git://github.com/znc/znc.git \
++           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
++          "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.0.0
 
