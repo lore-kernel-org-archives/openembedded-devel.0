@@ -1,36 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id E68AC6FE41;
-	Tue, 29 Jul 2014 00:41:46 +0000 (UTC)
-Received: by mail-ie0-f179.google.com with SMTP id rl12so7422102iec.24
-	for <multiple recipients>; Mon, 28 Jul 2014 17:41:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=CEaIV9sJ2Fxdu0RjQkFVW1PEaj82mnQNf64kOTLfGuc=;
-	b=k2MJRwV1Q0GiKvtvaPQZTsBl2c/U439MVpbL+IJPj+qnSt2450qQyWRgIQD7l1IeIM
-	aJ0dmkhdcynOZ4oB5a5WU3R/ZuhamXno0UW5pTb1V6hWy/BerbDB+7TDRPFyZx1NC9Pu
-	scqFkrtBANdc1mBLFUE0+41EeBAkMqyNcUWuV8SPh1DyzSqHJMMaG3X4Uad3p9Vf6kyj
-	idv1cGnaSZiaNnBtfpA+Hwy2IhNFll3X9OtmJzW+hB1VNTshGbFsNYmZIcdtZtUbAZVu
-	Vz+hnHxeAOqEQ5706NAe8lpsF36H2AezPtHGwdPmVw4vYmBvrmJcMg/rb6VJZ5qmBU9i
-	phgg==
-X-Received: by 10.42.90.74 with SMTP id j10mr770776icm.29.1406594507024; Mon,
-	28 Jul 2014 17:41:47 -0700 (PDT)
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E7477018D;
+	Tue, 29 Jul 2014 01:54:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.5/8.14.5) with ESMTP id s6T1sHeZ025647
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 28 Jul 2014 18:54:18 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Mon, 28 Jul 2014 18:54:17 -0700
+Message-ID: <53D6FECB.6060202@windriver.com>
+Date: Tue, 29 Jul 2014 09:54:19 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Mon, 28 Jul 2014 17:41:16 -0700 (PDT)
-In-Reply-To: <53D6EAC1.2030802@mvista.com>
-References: <53D2DE13.9010007@mvista.com>
-	<CAMKF1son3T9fsuF9X0Px4hirfk7Ezguy4s5Zit6-0JvfmXDV5A@mail.gmail.com>
-	<53D65F40.7010701@windriver.com> <53D6EAC1.2030802@mvista.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Jul 2014 17:41:16 -0700
-Message-ID: <CAMKF1sqs+WMPnctwwZ7-BkR6VvMjFSxPO2q=7Oz2wyQ5cWVMsA@mail.gmail.com>
-To: akuster <akuster@mvista.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] libpcap-ng
+To: Rongqing Li <rongqing.li@windriver.com>
+References: <1406012813-21233-1-git-send-email-rongqing.li@windriver.com>
+	<20140724111438.GI2492@jama> <53D1E6E3.5000202@windriver.com>
+In-Reply-To: <53D1E6E3.5000202@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH v2][meta-perl] libxml-sax-writer-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,42 +37,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jul 2014 00:41:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 29 Jul 2014 01:54:26 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 28, 2014 at 5:28 PM, akuster <akuster@mvista.com> wrote:
+
+
+On 07/25/2014 01:10 PM, Rongqing Li wrote:
+>
+>
+> On 07/24/2014 07:14 PM, Martin Jansa wrote:
+>> On Tue, Jul 22, 2014 at 03:06:53PM +0800, rongqing.li@windriver.com
+>> wrote:
+>>> From: Roy Li <rongqing.li@windriver.com>
+>>
+>> Sorry, but it still isn't correct even with allarch, because there is
+>> dependency on TUNE_PKGARCH perl:
+>>
+>> ERROR: libxml-filter-buffertext-perl different signature for task
+>> do_configure.sigdata between qemux86copy and qemuarm
+>> Hash for dependent task perl_5.20.0.bb.do_populate_sysroot changed
+>> from a5827c8deafb0ace555794c62c44e19f to 1a07f7ac7ad2a2750b58dfa60136114b
+>>
+>> ERROR: libxml-sax-writer-perl different signature for task
+>> do_configure.sigdata between qemux86copy and qemuarm
+>> Hash for dependent task perl_5.20.0.bb.do_populate_sysroot changed
+>> from a5827c8deafb0ace555794c62c44e19f to 1a07f7ac7ad2a2750b58dfa60136114b
+>>
+>
+> 1. I can not reproduce it, where are my steps be wrong?
+>
+> $ ../scripts/sstate-diff-machines.sh --tmpdir=tmp/ --machines="qemuarm
+> qemux86copy qemux86-64" --targets=libxml-sax
+> -writer-perl
+> ...
+> NOTE: Preparing runqueue
+> NOTE: Reparsing files to collect dependency data
+> NOTE: Tasks Summary: Attempted 0 tasks of which 0 didn't need to be
+> rerun and all succeeded.
+> INFO: Output written in:
+> /buildarea1/lirq/new/5/poky/build-next/tmp/sstate-diff/1406264562
+>
+> $cd /buildarea1/lirq/new/5/poky/build-next/tmp/sstate-diff/1406264562
+> $
+>
+> builder@pek-yocto-build1:/buildarea1/lirq/new/5/poky/build-next/tmp/sstate-diff/1406264562$
+> find . |grep writer-perl|grep sysroot
+> ./qemux86copy/all-poky-linux/libxml-sax-writer-perl/0.54-r0.do_populate_sysroot.sigdata.323a1635a2b08060e64815de8e009281
+>
+> ./qemuarm/all-poky-linux/libxml-sax-writer-perl/0.54-r0.do_populate_sysroot.sigdata.323a1635a2b08060e64815de8e009281
+>
+> ./qemux86-64/all-poky-linux/libxml-sax-writer-perl/0.54-r0.do_populate_sysroot.sigdata.323a1635a2b08060e64815de8e009281
+>
+> builder@pek-yocto-build1:/buildarea1/lirq/new/5/poky/build-next/tmp/sstate-diff/1406264562$
+>
+>
+>
+>
+> 2. the cause maybe the below:
+> perl module will depend on perl, but perl is not allarch, so make your
+> error.
+>
+> meta/classes/cpan-base.bbclass
+>    7 DEPENDS  += "${@["perl",
+> "perl-native"][(bb.data.inherits_class('native', d))]}"
+>    8 RDEPENDS_${PN} += "${@["perl",
+> ""][(bb.data.inherits_class('native', d))]}"
+>
+>
+>
+>
+> 3. no perl modules inherit allarch in oe-core;
+> oe-core$ find ./ -name "*perl*bb" -exec grep allarch {} \;
+> oe-core$
+>
+>
+> but I think some module should be allarch, like: libxml-simple-perl
+> https://packages.debian.org/search?keywords=libxml-simple-perl&searchon=names&suite=stable&section=all
+>
+>
+>
+Martin Jansa:
+
+What should I do?  make this recipes not to inherit allarch?
+or remove the adding dependency on perl from cpan-base.bbclass
+or other
+
+
+-Roy
+
+>
+> -Roy
+>
+>>> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+>>> ---
+>>>   .../libxml/libxml-sax-writer-perl_0.54.bb          |   25
+>>> ++++++++++++++++++++
+>>>   1 file changed, 25 insertions(+)
+>>>   create mode 100644
+>>> meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
 >>>
->>> I think at very least you can propose it for meta-oe if not or-core.
->
->
-> I think core libcap-ng recipe belongs in a common layer and not maintained
-> in two places.
-
-yes meta-oe is kind of extended common layer besides oe-core, if it
-can be proven that we can drop libpcap and replace its use completely
-with libpcap-ng you might have a better case to include it in oe-core,
-
->
->
->>> But I also wonder why meta-selinux is not a sub-layer under
->>> meta-security,
+>>> diff --git
+>>> a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+>>> b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+>>> new file mode 100644
+>>> index 0000000..52458e4
+>>> --- /dev/null
+>>> +++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.54.bb
+>>> @@ -0,0 +1,25 @@
+>>> +SUMMARY = "XML::SAX::Writer - SAX2 Writer"
+>>> +DESCRIPTION = "\
+>>> +XML::SAX::Writer helps to serialize SAX2 representations of XML
+>>> documents to \
+>>> +strings, files, and other flat representations. It handles charset
+>>> encodings, \
+>>> +XML escaping conventions, and so forth. It is still considered alpha, \
+>>> +although it has been put to limited use in settings such as
+>>> XML::LibXML and \
+>>> +the AxKit XML Application Server. \
+>>> +"
+>>> +SECTION = "libs"
+>>> +LICENSE = "Artistic-1.0 | GPLv1+"
+>>> +HOMEPAGE = "http://search.cpan.org/dist/XML-SAX-Writer/"
+>>> +DEPENDS += "libxml-filter-buffertext-perl-native"
+>>> +RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
+>>> +
+>>> +SRC_URI =
+>>> "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
 >>>
+>>> +SRC_URI[md5sum] = "383139d76418a82b9800dc4f8b568891"
+>>> +SRC_URI[sha256sum] =
+>>> "a1b4d959aed8f8337523c4cef4b431e56e619c795dc6f99a868548952101cf3d"
+>>> +
+>>> +LIC_FILES_CHKSUM =
+>>> "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
+>>>
+>>> +
+>>> +S = "${WORKDIR}/XML-SAX-Writer-${PV}"
+>>> +
+>>> +inherit cpan allarch
+>>> +
+>>> +BBCLASSEXTEND = "native"
+>>> --
+>>> 1.7.10.4
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >>
->> meta-selinux existed first... no other reason.
 >>
 >>
->> The last time I looked at meta-security (well over a year ago), it
->> wasn't terribly useful.
 >
->
-> Well when a security package like 'snort' and maybe others are in other
-> locations, I can see why meta-security won't be very useful.
->
->
->  It was just a random collection of
->>
->> security-like packages, some worked, some didn't.
->
->
-> Hopefully that will change.
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
