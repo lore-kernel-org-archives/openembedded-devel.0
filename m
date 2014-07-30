@@ -1,24 +1,33 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 98BD9708B3
+Return-Path: <nilesh.kokane@mindastoneridge.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 38DD265D53
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 06:11:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s6U6BGmX013530
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 30 Jul 2014 06:16:20 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id a1so654582wgh.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jul 2014 23:11:16 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 29 Jul 2014 23:11:15 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Jul 2014 14:11:18 +0800
-Message-ID: <1406700678-5877-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=Mb1WKYqyQtjy1OlcAWOveaYdPiGQX/FesY39MOMtvkw=;
+	b=N05eKc87e0IwYuaBVfuPmi+QNOI9uSnrA0QXzTDp24evuc+ALs0xGuLHXHHxQTD0Gs
+	OH9yuFvVsfP58ey6K18U8crbpKalIkzkwUhV3OFvvfiORYlWXYhDPeqG7KmyGWwsLf3X
+	apScDH2jA/3Q+HHUX2O6EQc5855DZszvuwtjGvfwuAGV6JebTK5qTCZNYkDT0LI4D3eY
+	h2MIIN2TBmIO7hSrz1X1Ywzal06laLTsvLroA82Z4qb7qRqz+wIWTHtttdqCrgUHPJsp
+	4gnjqV34bW0uwgqL9bJaSmae6jb1PQgwdyMFChXJQHCMJm7lwPCfZxKHB5GCdc9bl3Vi
+	Hz0g==
+X-Gm-Message-State: ALoCoQnM1kwd7qigcKQuypLLzvre5e/LpRqsjsRefEDyv92B+g0l7wjnGGAnHhlpR3l9ZDt7R1QHP7eSmDqQRqBdBltYWK3FuSLw6ScMC9W61484hu8c4g9SGSGt23iRSv1XeCcpsREB
 MIME-Version: 1.0
-Subject: [PATCH][meta-python] python-decorator: add recipe
+X-Received: by 10.194.92.115 with SMTP id cl19mr2809380wjb.29.1406700981526;
+	Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
+Received: by 10.217.38.72 with HTTP; Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
+Date: Wed, 30 Jul 2014 11:46:21 +0530
+Message-ID: <CAHURY+30Z_tK7SMRs_vM55vB6gS+zmJiEP66DMegzhvVx3pn8Q@mail.gmail.com>
+From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: bitbale meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,46 +41,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 06:11:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Jul 2014 06:16:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Roy Li <rongqing.li@windriver.com>
+Hello,
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../python/python-decorator_3.4.0.bb               |   22 ++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-python/recipes-python/python/python-decorator_3.4.0.bb
 
-diff --git a/meta-python/recipes-python/python/python-decorator_3.4.0.bb b/meta-python/recipes-python/python/python-decorator_3.4.0.bb
-new file mode 100644
-index 0000000..4316630
---- /dev/null
-+++ b/meta-python/recipes-python/python/python-decorator_3.4.0.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Python decorator utilities"
-+HOMEPAGE = "http://pypi.python.org/pypi/decorator/"
-+DESCRIPTION = "\
-+The aim of the decorator module it to simplify the usage of decorators \
-+for the average programmer, and to popularize decorators by showing \
-+various non-trivial examples. Of course, as all techniques, decorators \
-+can be abused and you should not try to solve every problem with a \
-+decorator, just because you can."
-+
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://documentation3.py;beginline=848;endline=877;md5=0b56661417fb7b841afc8892e14ba241"
-+
-+SRCNAME = "decorator"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/d/decorator/decorator-${PV}.tar.gz"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+SRC_URI[md5sum] = "1e8756f719d746e2fc0dd28b41251356"
-+SRC_URI[sha256sum] = "c20b404cbb7ee5cebd506688e0114e3cd76f5ce233805a51f36e1a7988d9d783"
--- 
-1.7.10.4
+can anyone tell the steps to bitbake meta-toolchain-qt5.
 
+As, after the /bin/fsl-community-bsp$ . ./setup-environment
+
+i'm getting the options as
+Welcome to Freescale Community BSP
+
+The Yocto Project has extensive documentation about OE including a
+reference manual which can be found at:
+    http://yoctoproject.org/documentation
+
+For more information about OpenEmbedded see their website:
+    http://www.openembedded.org/
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+
+
+
+
+*    core-image-minimal    meta-toolchain    meta-toolchain-sdk
+adt-installer    meta-ide-support*
+
+Your configuration files at build have not been touched.
+
+/bin/fsl-community-bsp/build$ bitbake meta-toolchain-qt5
+Loading cache: 100%
+|##########################################################################=
+#######################|
+ETA:  00:00:00
+Loaded 1873 entries from dependency cache.
+ERROR: Nothing PROVIDES 'meta-toolchain-qt5'. Close matches:
+  meta-toolchain-qt
+  meta-toolchain-qte
+  meta-toolchain
+
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+
+
+
+there is no meta-toolchain-qt5.
+
+
+
+
+even in source i checked the /bin/fsl-community-bsp/sources there is no
+,meta-toolchain-qt5
+
+
+
+please assist.
+
+--=20
+Thanks
+Nilesh Kokane
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
+=20
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
+=20
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
