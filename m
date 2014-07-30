@@ -1,35 +1,38 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 53CA5601A0
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 51AB760196
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 12:56:19 +0000 (UTC)
-Received: by mail-we0-f170.google.com with SMTP id w62so1173391wes.1
+	Wed, 30 Jul 2014 13:02:32 +0000 (UTC)
+Received: by mail-yh0-f43.google.com with SMTP id 29so650989yhl.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 05:56:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=vmPpbHWj3QwGc7Es+tCkImrnhHfsJB3Mu3rsrIv0rf8=;
-	b=js02vtMgcJK4Xn+OgNCHUuuPhi4onj4fAzbaOBx4OJikVtXBGc1qa23QqikoazY7o6
-	74+qbsS1FRk++9KbjiiBaTvhUIq3VkE6UKzSUkoFkwaZ7uR/Pbj3iuDRdwdkIA8/s1v5
-	cGPHsPj2+k6i2bm7eJ/yBtbFHXd9Qd5UX+ulZhvyEHnhsCwbC5dAbf0m6f2ox2JPO/BR
-	O25U1yS5akf/HLBktLT++z4VFOMqOZMyUAtd8k9wCFeOCgyIHGAa5nL2w325yHRPOyTm
-	bjCPUzHkOi09JyLONwFeSzq3AcV81sfkEBH8vKsjA3c87uTeK0P6JFIyEqNbYV+fkoJy
-	8xtg==
-X-Gm-Message-State: ALoCoQlotN13Tz1EVEbwogL9UGK0PzPiEkKXntUJhMI/GDSFM0t0JqMs0rvW0QLNEMRdgWl49RY3
-X-Received: by 10.194.7.167 with SMTP id k7mr5900886wja.11.1406724980426; Wed,
-	30 Jul 2014 05:56:20 -0700 (PDT)
+	Wed, 30 Jul 2014 06:02:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=eG6WY0U6ReDvzkHEQOywLBRvVlMhIVFUaq+fVJ96d5A=;
+	b=QX9X+OMzI1WejZwUqVAdLbqDO7cA6/k5OhMt2z6pimfJstADcxoJJ2TQ1VV4P+atL0
+	0Xmfa8D18pMmcewrho9P+8A7A2H4Og6Vpf/VqSeFzeC7CqbUxHdxAkt2Q28Dw8nBqN1K
+	0NvH6uXQeFBDfHV/SnyoqRfTjD8K0AiGiovqK58pmyi6act4lVEGjgvCmcizh4dk/x8L
+	hKW1UDax6rgNch2UyQBxXQbU82g9gttHKdrSNM+3htqp+sWIfUCBKrnpZVrPV+91aUMJ
+	+Z0bhi4MKYgjyXiWS0OVIIfTzDbqJP/N7jpyLkmB6bKpK36KbkkbxDhdR/sV0eUyTauB
+	2ZLA==
 MIME-Version: 1.0
-Received: by 10.216.76.5 with HTTP; Wed, 30 Jul 2014 05:56:00 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Wed, 30 Jul 2014 15:56:00 +0300
-Message-ID: <CAK18fxEwnZdq5nObukmqOCahN6p7JcLRbctDzS2-tJjqALMDCw@mail.gmail.com>
-To: openembedded <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe] Issues while building gpsd
+X-Received: by 10.236.79.230 with SMTP id i66mr2436845yhe.136.1406725353378;
+	Wed, 30 Jul 2014 06:02:33 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Wed, 30 Jul 2014 06:02:33 -0700 (PDT)
+In-Reply-To: <CAMKF1srBNaC9hA8Sq_-jV3qmwn+SM4-nXpmvSBfU3+VftCUEZg@mail.gmail.com>
+References: <1406629327-29169-1-git-send-email-dv@pseudoterminal.org>
+	<CAMKF1sqknbM=rXZCRLjPtcHG_1-D1wV+XtBDtao2kOTG9F81+g@mail.gmail.com>
+	<CAP9ODKq=mNeFOf_DMTNiiT4Lj0H=zujFyad97=E1K+KGTrr5OQ@mail.gmail.com>
+	<CAMKF1srBNaC9hA8Sq_-jV3qmwn+SM4-nXpmvSBfU3+VftCUEZg@mail.gmail.com>
+Date: Wed, 30 Jul 2014 10:02:33 -0300
+X-Google-Sender-Auth: 28DByR2AMUTXU9BsJqszX2D13fk
+Message-ID: <CAP9ODKo8o-bidnDgAUQZD5Yek_9fHg2FWR=m8+xE=-pLS4ttMA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 1/2] chromium: Add PACKAGECONFIG for disabling API keys info bar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,50 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 12:56:22 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 13:02:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I'm using Fedora 20 and yocto / meta-oe master / HEAD. While trying to
-build gspd I encounter this error:
+On Tue, Jul 29, 2014 at 11:28 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Jul 29, 2014 at 2:51 PM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> There are customers who don't need to use the Google APIs so they are
+>> not willing to make an API key and instead they prefer to drop the
+>> warning and keep using the Chromium as an application platform. We've
+>> been involved in a couple of projects lately where this happened.
+>>
+>> Chromium's upstream advice is to generate an API and use it to deploy;
+>> I think in the meta-browser's case this is sub-optimal as we'll end
+>> having several products and customers using our key and not making
+>> their own ones.
+>
+> OK then disabling the API key is in essence suppressing the problem. I
+> am fine if thats the general usecase but I doubt that
 
-...
-| i586-poky-linux-gcc -m32 -march=i586
---sysroot=/build/tmp/sysroots/qemux86 -o gpspipe.o -c -O2 -pipe -g
--feliminate-unused-debug-types -D_GNU_SOURCE
---sysroot=/media/SSHDD-WRS/Projects/Genivi/2014-07-23-qemux86/tmp/sysroots/qemux86
--Wextra -Wall -Wno-uninitialized -Wno-missing-field-initializers
--Wcast-align -Wmissing-declarations -Wmissing-prototypes
--Wstrict-prototypes -Wpointer-arith -Wreturn-type -g -O0 gpspipe.c
-| i586-poky-linux-gcc -m32 -march=i586
---sysroot=/build/tmp/sysroots/qemux86 -o gpxlogger.o -c -O2 -pipe -g
--feliminate-unused-debug-types -D_GNU_SOURCE
---sysroot=/build/tmp/sysroots/qemux86 -Wextra -Wall -Wno-uninitialized
--Wno-missing-field-initializers -Wcast-align -Wmissing-declarations
--Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith -Wreturn-type -g
--O0 gpxlogger.c
-| //usr/lib/libpthread.so.0: undefined reference to `__uname@GLIBC_PRIVATE'
-| //usr/lib/libpthread.so.0: undefined reference to
-`__getrlimit@GLIBC_PRIVATE'
-| collect2: error: ld returned 1 exit status
-| //usr/lib/libpthread.so.0: undefined reference to `__uname@GLIBC_PRIVATE'
-| //usr/lib/libpthread.so.0: undefined reference to
-`__getrlimit@GLIBC_PRIVATE'
-| collect2: error: ld returned 1 exit status
-| scons: *** [gpsdecode] Error 1
-| scons: *** [gpsctl] Error 1
-| scons: building terminated because of errors.
-| ERROR: scons build execution failed.
-| WARNING:
-/build/tmp/work/i586-poky-linux/gpsd/3.7-r14/temp/run.do_compile.24778:1
-exit 1 from
-|   exit 1
-| ERROR: Function failed: do_compile (log file is located at
-/build/tmp/work/i586-poky-linux/gpsd/3.7-r14/temp/log.do_compile.24778)
-ERROR: Task 6 (//meta-openembedded/meta-oe/recipes-navigation/gpsd/
-gpsd_3.7.bb, do_compile) failed with exit code '1'
+As I explained, this is the requirement for some projects we've been
+involved with. The idea here is to share it in a 'reusable' way and
+avoid this patch to be kept private for no good reason.
 
-Any hints?
+I think it is fine as is.
+
 -- 
-*Andrei Gherzan*
-m: +40.744.478.414 |  f: +40.31.816.28.12
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
