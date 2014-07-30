@@ -1,40 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
-	[74.125.82.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F883708B0
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CC7AC65F81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 07:26:25 +0000 (UTC)
-Received: by mail-we0-f175.google.com with SMTP id t60so734747wes.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 00:26:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=U/qG/KsJSMQTRU4rom9cxK1slOQhjhBScPMLUf01iT0=;
-	b=Z+0AMeSORh6I4Y/YYSfxV1MDmlU5uFPaKK7HhHNPY5yJ+QcIrz86lGbA08u9gVn5+B
-	emm/723U8B7LcvR8iJw2vI+3HxZZBix5pHUxrk6T5fqsvNTtntaVy1v7+CAqR2N80PUe
-	eeirDpbsRJ5uwykIH9N4/7fF0x/j/+xUJ9tXc/YTjZ1nMKOQ9W6uhWepzJ6QyBFIZwd/
-	qfAoRrJlEydtmyX4gxlyEjEsGvgFEVqOqyiLNrGOVNNPvinU9KcqM6CgdOUwRHxRq58l
-	GClkSFUudgDAGPibcI6krf1Jr+vOAy36ErhLFOvVwVoq+YSB/L9kJJ5eeFK/E319lPSr
-	Ynrg==
-X-Received: by 10.194.104.97 with SMTP id gd1mr3066035wjb.77.1406705185916;
-	Wed, 30 Jul 2014 00:26:25 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	r1sm6489934wia.21.2014.07.30.00.26.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Jul 2014 00:26:24 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Jul 2014 09:26:48 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140730072648.GG16445@jama>
-References: <1406316789-27514-1-git-send-email-akuster@mvista.com>
+	Wed, 30 Jul 2014 07:28:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s6U7SdHs017849
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 30 Jul 2014 00:28:39 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 30 Jul 2014 00:28:38 -0700
+Message-ID: <53D89EA9.4020801@windriver.com>
+Date: Wed, 30 Jul 2014 15:28:41 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-In-Reply-To: <1406316789-27514-1-git-send-email-akuster@mvista.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] V4 wireshark: fix build depends
+To: <openembedded-devel@lists.openembedded.org>
+References: <1406700643-5816-1-git-send-email-rongqing.li@windriver.com>
+	<CAMKF1sppmXVJj8tkDv4=JJN1jkirMZuJ5pimJDoifcZyikaJRA@mail.gmail.com>
+In-Reply-To: <CAMKF1sppmXVJj8tkDv4=JJN1jkirMZuJ5pimJDoifcZyikaJRA@mail.gmail.com>
+Subject: Re: [PATCH][meta-python] python-slip-dbus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,68 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 07:26:25 -0000
-X-Groupsio-MsgNum: 51312
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fmvA4kSBHQVZhkR6"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Jul 2014 07:28:48 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---fmvA4kSBHQVZhkR6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 25, 2014 at 12:33:09PM -0700, Armin Kuster wrote:
-> This should address issues found in test-dependencies 2014-07-25
 
-V4 in subject belongs to [PATCHv4], I've removed it from subject after
-cherry-picking it to master-next.
+On 07/30/2014 02:49 PM, Khem Raj wrote:
+> On Tue, Jul 29, 2014 at 11:10 PM,  <rongqing.li@windriver.com> wrote:
+>> +SECTION = "devel/python"
+>> +LICENSE = "GPLv2+"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+>> +SRCNAME = "python-slip"
+>> +
+>> +SRC_URI = "https://fedorahosted.org/released/python-slip/python-slip-${PV}.tar.bz2"
+>
+> You could use SRCNAME in SRC_URI as well instead of hardcoding python-slip
+>
+>> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+>> +
+>> +inherit setuptools
+>> +
+>> +SRC_URI[md5sum] = "fb3299d75af1a67ca6679d96ce839da6"
+>> +SRC_URI[sha256sum] = "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afdeff866cd94463ad5c"
+>> +
+>> +do_compile_prepend() {
+>> +    sed -e 's/@VERSION@/0.6.0/g' setup.py.in > setup.py
+>
+> could this somehow use PV and not 0.6.0 hardcoded ?
+>
+>> +}
+>
+> may be also run the recipe thru contrib/oe-stylize.py for formatting
+> and structure.
+>
 
-> wireshark/wireshark/latest lost dependency on  libcap libnl libnl-genl li=
-bnl-nf libnl-route portaudio-v19 sbc
->=20
-> Signed-off-by: Armin Kuster <akuster@mvista.com>
-> ---
->  meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-r=
-c2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> index 5d6df40..b965fdf 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.wireshark.org"
->  SECTION =3D "network"
->  LICENSE =3D "GPL-2.0"
-> =20
-> -DEPENDS =3D "perl-native libpcap pcre expat glib-2.0 libsmi"
-> +DEPENDS =3D "perl-native libcap libpcap pcre expat glib-2.0 libsmi libnl=
- portaudio-v19 sbc"
-> =20
->  inherit autotools pkgconfig
-> =20
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Thanks, I will change them
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
---fmvA4kSBHQVZhkR6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPYnjgACgkQN1Ujt2V2gByQWgCdFFCK9H0Zc448cyG7x2/iwez1
-sJgAniGPpWiKzgLDqNOyO01MNOzzJlb1
-=it2v
------END PGP SIGNATURE-----
-
---fmvA4kSBHQVZhkR6--
