@@ -1,24 +1,35 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C45AD70904
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 6971265F2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 07:44:10 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s6U7iBES027549
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 30 Jul 2014 08:02:20 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id f8so6592507wiw.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 00:44:11 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 30 Jul 2014 00:44:10 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Jul 2014 15:44:13 +0800
-Message-ID: <1406706254-7799-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Subject: [PATCH v2][meta-python] python-slip-dbus: add recipe
+	Wed, 30 Jul 2014 01:02:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=FFZhB6wc62GzHKX/GT7td7vbWW1U3BdCwS6XAYvOduQ=;
+	b=RUMKG81g/fu7tdHSjhYAQUNMco5ODpR9OIr/km9G7TssJFtIn+22GVazpYLiaSTCAk
+	+3ixxASOtgC/cEFSSOC4ssbMoyjDeq2WrxcBrB0Ilm/TUpFm/6kbyWxnBDQexsZ6tice
+	98vdB9qT0X8GqwZdIcvVFMgUYdgNSHPQqpMOwwrR4bluGQT4X91CMHfkDQq5s5IMvnFR
+	Btc2Nm777DhkDF5xPGKy67OEs5JbONJ8ETUN1sxarQi3FaXkUGqZy1YzGVDYJgVdPNZB
+	Na2d7U1jde3FberPU6FeqFIzn/C3L2j+A50r+Na44EqARDRIuoLnMBPBlbX1a9RDEV1n
+	RdBw==
+X-Received: by 10.180.187.113 with SMTP id fr17mr3416008wic.51.1406707341541; 
+	Wed, 30 Jul 2014 01:02:21 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	bp9sm52607158wib.7.2014.07.30.01.02.20 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jul 2014 01:02:20 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Jul 2014 10:02:42 +0200
+Message-Id: <1406707362-26085-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.2
+Subject: [meta-systemd][PATCH] portmap: fix FILESEXTRAPATHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,51 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 07:44:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Jul 2014 08:02:24 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../python/python-slip-dbus_0.6.0.bb               |   27 ++++++++++++++++++++
- 1 file changed, 27 insertions(+)
- create mode 100644 meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+ .../oe-core/recipes-connectivity/portmap/portmap_6.0.bbappend         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
-new file mode 100644
-index 0000000..d091336
---- /dev/null
-+++ b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
-@@ -0,0 +1,27 @@
-+SUMMARY = "Convenience functions for dbus services in Python 2.x"
-+HOMEPAGE = "http://nphilipp.fedorapeople.org/python-slip/"
-+DESCRIPTION = "\
-+The Simple Library for Python 2.x packages contain miscellaneous code for \
-+convenience, extension and workaround purposes. \
-+\
-+This package provides slip.dbus.service.Object, which is a dbus.service.Object \
-+derivative that ends itself after a certain time without being used and/or if \
-+there are no clients anymore on the message bus, as well as convenience \
-+functions and decorators for integrating a dbus service with PolicyKit."
+diff --git a/meta-systemd/oe-core/recipes-connectivity/portmap/portmap_6.0.bbappend b/meta-systemd/oe-core/recipes-connectivity/portmap/portmap_6.0.bbappend
+index 765f4b3..f13b511 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/portmap/portmap_6.0.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/portmap/portmap_6.0.bbappend
+@@ -1,4 +1,4 @@
+-FILESEXTRAPATHS := "${THISDIR}/${PN}"
++FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+ 
+ inherit systemd
+ 
+@@ -9,8 +9,8 @@ SYSTEMD_SERVICE_${PN} = "portmap.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+ SRC_URI_append = " file://portmap.service"
 +
-+SECTION = "devel/python"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
-+SRCNAME = "python-slip"
-+
-+SRC_URI = "https://fedorahosted.org/released/python-slip/${SRCNAME}-${PV}.tar.bz2"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+SRC_URI[md5sum] = "fb3299d75af1a67ca6679d96ce839da6"
-+SRC_URI[sha256sum] = "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afdeff866cd94463ad5c"
-+
-+do_compile_prepend() {
-+    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
-+}
+ do_install_append() {
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/portmap.service ${D}${systemd_unitdir}/system
+ }
+-
 -- 
-1.7.10.4
+2.0.2
 
 
