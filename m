@@ -1,33 +1,32 @@
-Return-Path: <lchristina26@gmail.com>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B5647051A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4345C609C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 19:57:40 +0000 (UTC)
-Received: by mail-ig0-f182.google.com with SMTP id c1so3565463igq.15
+	Wed, 30 Jul 2014 20:04:03 +0000 (UTC)
+Received: by mail-ie0-f179.google.com with SMTP id rl12so2221690iec.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
+	Wed, 30 Jul 2014 13:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=ADM4/MK4xV/u2CsCOtuMg9k5z8iywIs1p357PwoHK0k=;
-	b=eLILx1Q0SgEilrdONl1IuyLKdacOUYtW/aiYQ6HqpZeMSuda4rDPGU7axKxnZPSl+6
-	ofRVmlS//JBBbenauD0JJnog3liFwG+Qh3IT6Zrq9tS+/86QTTFWmT3CA1dUo/TpgrWG
-	HlXWXp9KXqXtK1LsKEGfo5BaOsDvakry2JOX/Y3ZIrgAAZOBrpjEU7NbUiVrhtdWxH3Y
-	o/H6cgRMNS1ZPTO+Ui146rOf1tO/3mGwLoUFIg0WmMFBxm/gNoP2mlsR0QRK7cwqGwNR
-	Ue+aJ08xZC5vPja0DfCO7qXd2mgqK2caKtPJdYSvso5SKnAKHlJN+XDBZUodEDONe3o2
-	jGBw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=JUMkG1YZv+4VlwcH1fFdFaxvJU/YHerX4IDrv+jikPE=;
+	b=bQsmRe6aMj5utWl2rzvwtEB26Rx5KOjgw6GfxzgV6TtdGut/IjcqEVCfYGtRKuRtk+
+	xGlpBj5dIp8pr5Gtov8yfj/l7UFjE8R+9bH0l6a5tNLLm/fcmbzQx6XzqpdG+EyIQgMO
+	7Ec0o1Pu6isZ1YHzjOIOsyBt+4KNMvpp9AFOMorcg7oBAF3NWhIxQQFQqsDHLVXKzBUc
+	lYHca3KdsV+c3XoZ10Ge3xpZZCTKErFNFqw960FYluPyt6PESiA9lTTUF1l/wAps//UJ
+	7nqycNMTrSKpzXkdb0jQnei1zUnTDYw9ti+FzhRs8gjzdqYgK3uHrXkOkbbhbQBcT+Fp
+	Ml0Q==
+X-Received: by 10.50.176.202 with SMTP id ck10mr58391843igc.2.1406750644111;
+	Wed, 30 Jul 2014 13:04:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.50.50.229 with SMTP id f5mr56866229igo.42.1406750261269;
-	Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
-Sender: lchristina26@gmail.com
-Received: by 10.64.11.102 with HTTP; Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
-Date: Wed, 30 Jul 2014 13:57:41 -0600
-X-Google-Sender-Auth: Q52wYd0qblPyXDAOKoR1iPUIidI
-Message-ID: <CAL0pqZ0hXybc_m5_wsbtoeekbz0FUrFFK=jXcsa2Jm+3XugEzA@mail.gmail.com>
-From: Leah <leah@wolfssl.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Add recipe to meta-oe
+Received: by 10.50.78.105 with HTTP; Wed, 30 Jul 2014 13:03:34 -0700 (PDT)
+In-Reply-To: <CAL0pqZ0hXybc_m5_wsbtoeekbz0FUrFFK=jXcsa2Jm+3XugEzA@mail.gmail.com>
+References: <CAL0pqZ0hXybc_m5_wsbtoeekbz0FUrFFK=jXcsa2Jm+3XugEzA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 30 Jul 2014 13:03:34 -0700
+Message-ID: <CAMKF1sq5epx=VmB07HxePZ-XrD0J43d7axFcY=C1bYG6r34Dfg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Add recipe to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,24 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 19:57:45 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 20:04:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi,
+On Wed, Jul 30, 2014 at 12:57 PM, Leah <leah@wolfssl.com> wrote:
+> Hi,
+>
+> I have a recipe - cyassl_3.1.0.bb <http://cyassl_3.1.0.bb>, a lightweight
+> ssl library that I would like to add to openembedded. Please let me know
+> the steps I need to follow to add my recipe.
 
-I have a recipe - cyassl_3.1.0.bb <http://cyassl_3.1.0.bb>, a lightweight
-ssl library that I would like to add to openembedded. Please let me know
-the steps I need to follow to add my recipe.
-
-Thanks,
-
-Leah
-
--- 
-
-Leah Thompson
-www.wolfssl.com
-leah@wolfssl.com
-406-570-1389
-Skype: lchristina26
+Follow http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 
