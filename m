@@ -1,24 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CFEDB70872
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C4225701AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 02:22:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s6U2McZm022913
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 30 Jul 2014 02:29:23 +0000 (UTC)
+Received: by mail-ig0-f182.google.com with SMTP id c1so2075046igq.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jul 2014 19:22:39 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 29 Jul 2014 19:22:38 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Jul 2014 10:22:41 +0800
-Message-ID: <1406686961-21142-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Tue, 29 Jul 2014 19:29:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=vzzL7u2dYN3FMpQx/hGUnIjZxQwwkmQRUYvSzo9Hw60=;
+	b=chvi8FMCqFrvcXyE5Bsd7hOSw8KaubXW+kBtFj4N95bT569rdIwbCqX10+oD56bgDt
+	/fxbkBwVhgJG6OhO2qUO5hiKAKPWpOMJ97L5eHo5HzI4qX/NK+GIIfcXyaSoUpylwCj+
+	ihIR2B9WveYnU7ELiCKgmv9KiWizvrgOkBsJ0GRiCASDQBrSiCx4qJx2RJRqiwwzbBl7
+	7v/9DsvZ5iRWsV6DUH8+s5oh4n/mQNnKZBhpqI7J9E8Fm4oZtq0775cyD0wSwSBz/BXV
+	JhDkN0Cl6UnpgWh/CnB8CpS5Ylv36meTDr5u53QH1FITyB5tDGNvROr7j8MLPajGymW4
+	Za6w==
+X-Received: by 10.50.134.136 with SMTP id pk8mr49431318igb.20.1406687365167;
+	Tue, 29 Jul 2014 19:29:25 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH v2][meta-networking] tcpslice: add recipe under tcpdump
+Received: by 10.50.78.105 with HTTP; Tue, 29 Jul 2014 19:28:55 -0700 (PDT)
+In-Reply-To: <CAP9ODKq=mNeFOf_DMTNiiT4Lj0H=zujFyad97=E1K+KGTrr5OQ@mail.gmail.com>
+References: <1406629327-29169-1-git-send-email-dv@pseudoterminal.org>
+	<CAMKF1sqknbM=rXZCRLjPtcHG_1-D1wV+XtBDtao2kOTG9F81+g@mail.gmail.com>
+	<CAP9ODKq=mNeFOf_DMTNiiT4Lj0H=zujFyad97=E1K+KGTrr5OQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Jul 2014 19:28:55 -0700
+Message-ID: <CAMKF1srBNaC9hA8Sq_-jV3qmwn+SM4-nXpmvSBfU3+VftCUEZg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 1/2] chromium: Add PACKAGECONFIG for disabling API keys info bar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,168 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 02:22:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 30 Jul 2014 02:29:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Roy Li <rongqing.li@windriver.com>
+On Tue, Jul 29, 2014 at 2:51 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> There are customers who don't need to use the Google APIs so they are
+> not willing to make an API key and instead they prefer to drop the
+> warning and keep using the Chromium as an application platform. We've
+> been involved in a couple of projects lately where this happened.
+>
+> Chromium's upstream advice is to generate an API and use it to deploy;
+> I think in the meta-browser's case this is sub-optimal as we'll end
+> having several products and customers using our key and not making
+> their own ones.
 
-tcpslice is a tool for extracting parts of a tcpdump packet trace,
-so put it under tcpdump dir
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../tcpdump/tcpslice/tcpslice-1.2a3-time.patch     |   75 ++++++++++++++++++++
- .../tcpslice/tcpslice-CVS.20010207-bpf.patch       |   15 ++++
- .../recipes-support/tcpdump/tcpslice_1.2a3.bb      |   35 +++++++++
- 3 files changed, 125 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
-new file mode 100644
-index 0000000..a86f6d2
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
-@@ -0,0 +1,75 @@
-+Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+
-+--- tcpslice-1.2a3.orig/search.c	2000-09-10 10:52:40.000000000 +0200
-++++ tcpslice-1.2a3/search.c	2006-07-28 14:56:55.000000000 +0200
-+@@ -53,7 +53,7 @@
-+ /* Size of a packet header in bytes; easier than typing the sizeof() all
-+  * the time ...
-+  */
-+-#define PACKET_HDR_LEN (sizeof( struct pcap_pkthdr ))
-++#define PACKET_HDR_LEN (sizeof( struct pcap_sf_pkthdr ))
-+ 
-+ extern int snaplen;
-+ 
-+@@ -111,16 +111,24 @@
-+ static void
-+ extract_header( pcap_t *p, u_char *buf, struct pcap_pkthdr *hdr )
-+ 	{
-+-	memcpy((char *) hdr, (char *) buf, sizeof(struct pcap_pkthdr));
-++	struct pcap_sf_pkthdr hdri;
-++
-++	memcpy((char *) &hdri, (char *) buf, sizeof(struct pcap_sf_pkthdr));
-+ 
-+ 	if ( pcap_is_swapped( p ) )
-+ 		{
-+-		hdr->ts.tv_sec = SWAPLONG(hdr->ts.tv_sec);
-+-		hdr->ts.tv_usec = SWAPLONG(hdr->ts.tv_usec);
-+-		hdr->len = SWAPLONG(hdr->len);
-+-		hdr->caplen = SWAPLONG(hdr->caplen);
-++		hdr->ts.tv_sec = SWAPLONG(hdri.ts.tv_sec);
-++		hdr->ts.tv_usec = SWAPLONG(hdri.ts.tv_usec);
-++		hdr->len = SWAPLONG(hdri.len);
-++		hdr->caplen = SWAPLONG(hdri.caplen);
-++		}
-++	else
-++		{
-++		hdr->ts.tv_sec = hdri.ts.tv_sec;
-++		hdr->ts.tv_usec = hdri.ts.tv_usec;
-++		hdr->len = hdri.len;
-++		hdr->caplen = hdri.caplen;
-+ 		}
-+-
-+ 	/*
-+ 	 * From bpf/libpcap/savefile.c:
-+ 	 *
-+--- tcpslice-1.2a3.orig/tcpslice.h	1995-11-02 00:40:53.000000000 +0100
-++++ tcpslice-1.2a3/tcpslice.h	2006-07-28 14:56:55.000000000 +0200
-+@@ -20,6 +20,26 @@
-+  */
-+ 
-+ 
-++#include <time.h>
-++/* #include <net/bpf.h> */
-++
-++/*
-++ * This is a timeval as stored in disk in a dumpfile.
-++ * It has to use the same types everywhere, independent of the actual
-++ * `struct timeval'
-++ */
-++                                                                                
-++struct pcap_timeval {
-++    bpf_int32 tv_sec;           /* seconds */
-++    bpf_int32 tv_usec;          /* microseconds */
-++};
-++
-++struct pcap_sf_pkthdr {
-++    struct pcap_timeval ts;     /* time stamp */
-++    bpf_u_int32 caplen;         /* length of portion present */
-++    bpf_u_int32 len;            /* length this packet (off wire) */
-++};
-++
-+ time_t	gwtm2secs( struct tm *tm );
-+ 
-+ int	sf_find_end( struct pcap *p, struct timeval *first_timestamp,
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
-new file mode 100644
-index 0000000..0a73593
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
-@@ -0,0 +1,15 @@
-+Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+diff -ur tcpdump-3.8.1/tcpslice/tcpslice.c tcpdump-3.8.1.new/tcpslice/tcpslice.c
-+--- tcpslice/tcpslice.c	2004-01-15 17:35:53.000000000 +0100
-++++ tcpslice/tcpslice.c	2004-01-15 16:12:57.000000000 +0100
-+@@ -35,7 +35,7 @@
-+ #include <sys/file.h>
-+ #include <sys/stat.h>
-+ 
-+-#include <net/bpf.h>
-++/* #include <net/bpf.h> */
-+ 
-+ #include <ctype.h>
-+ #ifdef HAVE_FCNTL_H
-diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
-new file mode 100644
-index 0000000..d0bf7a2
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "tcpslice"
-+DESCRIPTION = "A tool for extracting parts of a tcpdump packet trace."
-+HOMEPAGE = "http://www.tcpdump.org/related.html"
-+SECTION = "console/network"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://tcpslice.c;endline=20;md5=99519e2e5234d1662a4ce16baa62c64e" 
-+
-+SRC_URI = "ftp://ftp.ee.lbl.gov/${BPN}-${PV}.tar.gz \
-+           file://tcpslice-1.2a3-time.patch \
-+           file://tcpslice-CVS.20010207-bpf.patch \
-+           "
-+SRC_URI[md5sum] = "e329cbeb7e589f132d92c3447c477190"
-+SRC_URI[sha256sum] = "4096e8debc898cfaa16b5306f1c42f8d18b19e30e60da8d4deb781c8f684c840"
-+
-+inherit autotools-brokensep
-+
-+DEPENDS += "libpcap"
-+
-+# We do not want to autoreconf.  We must specify srcdir as ".".
-+# We have to set the ac_cv_* cache variables as well as pass the normal
-+# cross-compilation options to configure!
-+#
-+do_configure () {
-+	oe_runconf \
-+            --srcdir="." \
-+            ac_cv_build=${BUILD_SYS} \
-+            ac_cv_host=${HOST_SYS} \
-+            ac_cv_target=${HOST_SYS}
-+}
-+
-+do_install_prepend () {
-+	mkdir -p ${D}/usr/sbin
-+}
-+
--- 
-1.7.10.4
-
+OK then disabling the API key is in essence suppressing the problem. I
+am fine if thats
+the general usecase but I doubt that
 
