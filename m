@@ -1,40 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2675365DB1
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id C7E2065D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 10:52:28 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id bs8so7351450wib.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 03:52:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=U60SlTVbJpQldqI1gOUB5fn+JnXivE336HM0Ec9UPK0=;
-	b=wXqP9odxJ+Hzibf6RjofImKJT1GuOK/8J+PwQdJrW1YII3o7phYVYAKoQ+mRU7aAjC
-	Ltlrh7o3salIdlVGVZVK7ONAwi58RRhKuf+4fBQ1Ln0da+htMny3Dh+IvGdhUr/XLLk0
-	PdGhenE3FhpEg0MhxC3seWrd9JiqC4eF50OcLAaSaWXeUuFZb3gO7iQVDe+0erak2JzY
-	bsC6P/0xID0O79afNDu2foLRguOONCJw4/VTmRbK+0J49kL1x2csTvgyCHJQyHUE2zLN
-	lWIsqGAlRYmf4axUIAeHNy6dvwRTi9faWA+HGQBHj7TMsU+KRoRcTNtDHM5U+QH5UUQh
-	y4AA==
-X-Received: by 10.180.80.133 with SMTP id r5mr5747261wix.62.1406717549789;
-	Wed, 30 Jul 2014 03:52:29 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	rw4sm4622184wjb.44.2014.07.30.03.52.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Jul 2014 03:52:28 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 30 Jul 2014 12:52:52 +0200
+	Wed, 30 Jul 2014 11:30:43 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 30 Jul 2014 04:30:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,763,1400050800"; d="scan'208";a="577636813"
+Received: from cfitzsim-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.251])
+	by fmsmga002.fm.intel.com with ESMTP; 30 Jul 2014 04:28:43 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140730105252.GM16445@jama>
-References: <1406706254-7799-1-git-send-email-rongqing.li@windriver.com>
+Date: Wed, 30 Jul 2014 12:28:42 +0100
+Message-ID: <2463245.SkJkBSUsEE@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.15.6-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <364f9086ac0c992f408413d9b2eb78d53d35b19b.1402331046.git.paul.eggleton@linux.intel.com>
+References: <cover.1402331046.git.paul.eggleton@linux.intel.com>
+	<364f9086ac0c992f408413d9b2eb78d53d35b19b.1402331046.git.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1406706254-7799-1-git-send-email-rongqing.li@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH v2][meta-python] python-slip-dbus: add recipe
+Cc: Eric Benard <eric@eukrea.com>
+Subject: Re: [meta-oe][dylan][PATCH 1/1] x264: fix SRCREV after upstream repository change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,94 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 10:52:31 -0000
-X-Groupsio-MsgNum: 51320
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kVcb4xucqmsYUpQy"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Jul 2014 11:30:44 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---kVcb4xucqmsYUpQy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jul 30, 2014 at 03:44:13PM +0800, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+On Monday 09 June 2014 17:24:30 Paul Eggleton wrote:
+> The upstream x264 project has re-imported all of their old history,
+> meaning that all of the hashes have changed. Update SRCREV based on the
+> mapping list they have provided at:
+> 
+>   http://sprunge.us/dGOU
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 > ---
->  .../python/python-slip-dbus_0.6.0.bb               |   27 ++++++++++++++=
-++++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 meta-python/recipes-python/python/python-slip-dbus_0.=
-6.0.bb
->=20
-> diff --git a/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb =
-b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
-> new file mode 100644
-> index 0000000..d091336
-> --- /dev/null
-> +++ b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "Convenience functions for dbus services in Python 2.x"
-> +HOMEPAGE =3D "http://nphilipp.fedorapeople.org/python-slip/"
-> +DESCRIPTION =3D "\
-> +The Simple Library for Python 2.x packages contain miscellaneous code fo=
-r \
-> +convenience, extension and workaround purposes. \
-> +\
-> +This package provides slip.dbus.service.Object, which is a dbus.service.=
-Object \
-> +derivative that ends itself after a certain time without being used and/=
-or if \
-> +there are no clients anymore on the message bus, as well as convenience \
-> +functions and decorators for integrating a dbus service with PolicyKit."
-> +
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5574c6965ae5f583e55880e397fbb=
-018"
-> +SRCNAME =3D "python-slip"
-> +
-> +SRC_URI =3D "https://fedorahosted.org/released/python-slip/${SRCNAME}-${=
-PV}.tar.bz2"
+>  meta-oe/recipes-multimedia/x264/x264_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-multimedia/x264/x264_git.bb
+> b/meta-oe/recipes-multimedia/x264/x264_git.bb index c767ffd..4da24cc 100644
+> --- a/meta-oe/recipes-multimedia/x264/x264_git.bb
+> +++ b/meta-oe/recipes-multimedia/x264/x264_git.bb
+> @@ -11,7 +11,7 @@ DEPENDS = "yasm-native"
+>  SRC_URI = "git://git.videolan.org/x264.git \
+>      file://don-t-default-to-cortex-a9-with-neon.patch \
+>  "
+> -SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
+> +SRCREV = "bfed708c5358a2b4ef65923fb0683cefa9184e6f"
+> 
+>  PV = "r2230+git"
 
-I've replaced also 2nd "python-slip" with ${SRCNAME} and I've moved both
-new recipes to recipes-devtools when cherry-picking this to master-next.
+ping
 
-> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +inherit setuptools
-> +
-> +SRC_URI[md5sum] =3D "fb3299d75af1a67ca6679d96ce839da6"
-> +SRC_URI[sha256sum] =3D "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afde=
-ff866cd94463ad5c"
-> +
-> +do_compile_prepend() {
-> +    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
-> +}
-> --=20
-> 1.7.10.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Paul Eggleton
+Intel Open Source Technology Centre
 
---kVcb4xucqmsYUpQy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPYzoQACgkQN1Ujt2V2gBxj7ACfd2/WfgtFWH/KwPSxzo4/iQjI
-EYMAnj2U5XVdcxfZjTEbD5Ri8mQUXIeR
-=Tpdi
------END PGP SIGNATURE-----
-
---kVcb4xucqmsYUpQy--
