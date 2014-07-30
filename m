@@ -1,32 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f180.google.com (mail-ie0-f180.google.com
-	[209.85.223.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BCD37038D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 06:57:56 +0000 (UTC)
-Received: by mail-ie0-f180.google.com with SMTP id at20so947886iec.39
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jul 2014 23:57:58 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 3265A60DD7;
+	Wed, 30 Jul 2014 07:17:43 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id x13so715311wgg.31
+	for <multiple recipients>; Wed, 30 Jul 2014 00:17:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=K8dEgPZnbXUwFWLysjfHM/lc4zAJk+m1PPeVh2d/u10=;
-	b=n41VBC0Z+OrlKxprcWSPHxI6zgdamnqXfkbEex/BeA0mGAjAcADvDwyzd9M5DruI7Z
-	dFmPMi8R/bGBV1ogjrVC05qf6pA5EUDpPECq3bnLwrhu/9Lw5SjFSGfDt8+BGac4gf+y
-	ugjUxzbMR14Koc8QMr1lgWoXUF8/reywxwY1nqDhMdLvWuqUZcfHgML/gsMYAPVz8zWw
-	ysV6KqY17MLmZFreEJ6HYITdWD6qGiWBcwnrmJV+PlivpUYsNpERmn0DooAqbE6QY/ov
-	SRvPQIPCoexr2OvMS6cN0unHfTEbyN0xisYUWgmkHPg4xXiY2nnltDHTk+l0j8y7B068
-	rQlg==
-X-Received: by 10.42.168.199 with SMTP id x7mr2728786icy.70.1406703478174;
-	Tue, 29 Jul 2014 23:57:58 -0700 (PDT)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=VS/3BzCQpuSfe3qOHoH2XkEjVXieWRSBO3ttZ5yV/ZA=;
+	b=JD4eJyulQNv8kK/y91JezFVs07Tkt0ZdqUe/os3PphyXXloeKGyOro2jfNFLS94ANO
+	DDFZlICkQhqJgyIs/JVU5E8Km0/mtLkpj3kVkTbke5hUWjo9raunpNaGo2hQM9qjS4JJ
+	CTQBq+AIAzXBytswXhyavY3Habxtf2k/DgYI26/weuN/ANsnvEqhRDaLgKSswnV0bfan
+	Or3ZII33Jyf4wFwg5vCQLmr4Gn29snud1GcTb8E98cOBdFc/D8mxSj9sxYxcCkB+E3ex
+	i6HXJ0TTEB1dqssStCsiRD4Aaw3e0PfMnu1ywQYpC4VxTWzcDUlDC7Lp3ballGLO203z
+	I5dg==
+X-Received: by 10.194.60.240 with SMTP id k16mr3120529wjr.109.1406704664515;
+	Wed, 30 Jul 2014 00:17:44 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	v17sm3375903wjr.33.2014.07.30.00.17.42 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jul 2014 00:17:42 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Jul 2014 09:18:05 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140730071805.GE16445@jama>
+References: <20140724105336.GE2492@jama>
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Tue, 29 Jul 2014 23:57:28 -0700 (PDT)
-In-Reply-To: <CAHURY+30Z_tK7SMRs_vM55vB6gS+zmJiEP66DMegzhvVx3pn8Q@mail.gmail.com>
-References: <CAHURY+30Z_tK7SMRs_vM55vB6gS+zmJiEP66DMegzhvVx3pn8Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 Jul 2014 23:57:28 -0700
-Message-ID: <CAMKF1srWJ0uG397vOmpAXHr56bSY-oe2Y2=z7k_tyjUeVaNtUA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: bitbale meta-toolchain-qt5
+In-Reply-To: <20140724105336.GE2492@jama>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: State of bitbake world, test-dependencies 2014-07-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,23 +45,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 06:57:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Jul 2014 07:17:49 -0000
+X-Groupsio-MsgNum: 51310
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yQbNiKLmgenwUfTN"
+Content-Disposition: inline
 
-On Tue, Jul 29, 2014 at 11:16 PM, Nilesh Kokane
-<nilesh.kokane@mindastoneridge.com> wrote:
-> /bin/fsl-community-bsp/build$ bitbake meta-toolchain-qt5
-> Loading cache: 100%
-> |#################################################################################################|
-> ETA:  00:00:00
-> Loaded 1873 entries from dependency cache.
-> ERROR: Nothing PROVIDES 'meta-toolchain-qt5'. Close matches:
->   meta-toolchain-qt
->   meta-toolchain-qte
->   meta-toolchain
->
+--yQbNiKLmgenwUfTN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-well you are missing meta-qt5 in your layermix. and I guess
-meta-fsl-community layer mailing lists would be appropriate to ask
-if you should expect meta-qt5 to be a default layer in the setup or not.
+On Thu, Jul 24, 2014 at 12:53:36PM +0200, Martin Jansa wrote:
+> So it looks like we're again in better shape, but something is strange
+> with this new insane_qa check for build dependencies, since it was
+> introduced in master-next it finds more issues than test-dependencies.sh
+> did and vice-versa test-dependencies.sh now doesn't report some issues
+> which IIRC weren't properly fixed yet. So we need to double check why.
 
+I've found an issue in test-dependencies.sh script, it wasn't properly
+reporting all recipes with found issues in last "failed-recipes.log" list.
+
+With that fixed there is only couple of recipes where insane-qa and
+test-dependencies results differ.
+
+We can ignore gst-ffmpeg and openal-soft which are in list because they
+don't build at all (because of libav-9).
+
+So it leaves 10 recipes where insane_qa is stricter than test-dependencies.sh.
+
+I'll include them all in next test-dependencies build to confirm that there was
+no difference in metadata.
+
+diff -uN failed-recipes/failed-recipes-2014-07-28 failed-recipes/failed-recipes-2014-07-28.insane_qa
+--- failed-recipes/failed-recipes-2014-07-28    2014-07-30 07:11:46.956282771 +0000
++++ failed-recipes/failed-recipes-2014-07-28.insane_qa  2014-07-30 07:08:10.735494787 +0000
+@@ -1,24 +1,30 @@
++dconf
+ directfb
+ engrave
+ epiphany
++evopedia
+ expedite
+ gd
++gimp
+ gmtk
+ gnome-disk-utility
+-gst-ffmpeg
++gtksourceview2
+ guile
++kernelshark
+ leptonica
+ libarchive
++libextutils-helpers-perl
+ libmicrohttpd
+ libmikmod
++libmodule-build-tiny-perl
+ libungif
+ libwebp
++libxklavier
+ ltrace
+ midori
+ mpd
+ mpeg2dec
+ mpg123
+-openal-soft
+ oscam
+ perf
+ piglit
+@@ -31,4 +37,6 @@
+ synergy
+ tesseract
+ tracker
++ttf-mplus
++webmin
+ wireshark
+
+--yQbNiKLmgenwUfTN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPYnC0ACgkQN1Ujt2V2gBzaDgCePAd4LnTrc/39oEoYzWrreJ10
+7wgAnR51lDKoPMbpi8f6zDbOBWe+jN8W
+=+3DH
+-----END PGP SIGNATURE-----
+
+--yQbNiKLmgenwUfTN--
