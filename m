@@ -1,33 +1,32 @@
-Return-Path: <nilesh.kokane@mindastoneridge.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 38DD265D53
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
+	[209.85.214.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CFA96AC95
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 06:16:20 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id a1so654582wgh.23
+	Wed, 30 Jul 2014 06:49:50 +0000 (UTC)
+Received: by mail-ob0-f177.google.com with SMTP id wp18so243816obc.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=Mb1WKYqyQtjy1OlcAWOveaYdPiGQX/FesY39MOMtvkw=;
-	b=N05eKc87e0IwYuaBVfuPmi+QNOI9uSnrA0QXzTDp24evuc+ALs0xGuLHXHHxQTD0Gs
-	OH9yuFvVsfP58ey6K18U8crbpKalIkzkwUhV3OFvvfiORYlWXYhDPeqG7KmyGWwsLf3X
-	apScDH2jA/3Q+HHUX2O6EQc5855DZszvuwtjGvfwuAGV6JebTK5qTCZNYkDT0LI4D3eY
-	h2MIIN2TBmIO7hSrz1X1Ywzal06laLTsvLroA82Z4qb7qRqz+wIWTHtttdqCrgUHPJsp
-	4gnjqV34bW0uwgqL9bJaSmae6jb1PQgwdyMFChXJQHCMJm7lwPCfZxKHB5GCdc9bl3Vi
-	Hz0g==
-X-Gm-Message-State: ALoCoQnM1kwd7qigcKQuypLLzvre5e/LpRqsjsRefEDyv92B+g0l7wjnGGAnHhlpR3l9ZDt7R1QHP7eSmDqQRqBdBltYWK3FuSLw6ScMC9W61484hu8c4g9SGSGt23iRSv1XeCcpsREB
+	Tue, 29 Jul 2014 23:49:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=M2rNrZFVw/29dGeOY5lIWK6WMk6HlEB6T3grEZGRjoE=;
+	b=UyfnL3shfV+aFuV0PhzZHuM/siM8Sj95xpBK5Wtb+V+u37WpBKPbw42LmMyETpwqzT
+	t4vWfPbrF4eYXJxz4d0Od8nOv5GmT7NNZVLQr6iPnMt8TnAys0rf67c22cTg6EQzSOLW
+	zUZMnYu5sJPKtMTVf4CXZYfFDB9KVqnpau8st15sk/TTeJLo0yTVtnMO/6/PUXgWi5T3
+	XVDzHLJxGwZ3FFcSh5xF+2xqvQMeUmhXPJr1QRFUXDkX5xxU0MpiYpF//YgrvoDy4zJ4
+	8KzC4k7v4Ezj7c1j7ISUY2yqBZbwc9IGKG0/2exDXrbWrEy/yUTbS5QdYzLHfyVaLDGU
+	v7iw==
+X-Received: by 10.60.43.196 with SMTP id y4mr2806733oel.60.1406702991144; Tue,
+	29 Jul 2014 23:49:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.194.92.115 with SMTP id cl19mr2809380wjb.29.1406700981526;
-	Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
-Received: by 10.217.38.72 with HTTP; Tue, 29 Jul 2014 23:16:21 -0700 (PDT)
-Date: Wed, 30 Jul 2014 11:46:21 +0530
-Message-ID: <CAHURY+30Z_tK7SMRs_vM55vB6gS+zmJiEP66DMegzhvVx3pn8Q@mail.gmail.com>
-From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: bitbale meta-toolchain-qt5
+Received: by 10.202.85.77 with HTTP; Tue, 29 Jul 2014 23:49:20 -0700 (PDT)
+In-Reply-To: <1406700643-5816-1-git-send-email-rongqing.li@windriver.com>
+References: <1406700643-5816-1-git-send-email-rongqing.li@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Jul 2014 23:49:20 -0700
+Message-ID: <CAMKF1sppmXVJj8tkDv4=JJN1jkirMZuJ5pimJDoifcZyikaJRA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-python] python-slip-dbus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,81 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 06:16:25 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 06:49:57 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On Tue, Jul 29, 2014 at 11:10 PM,  <rongqing.li@windriver.com> wrote:
+> +SECTION = "devel/python"
+> +LICENSE = "GPLv2+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+> +SRCNAME = "python-slip"
+> +
+> +SRC_URI = "https://fedorahosted.org/released/python-slip/python-slip-${PV}.tar.bz2"
 
+You could use SRCNAME in SRC_URI as well instead of hardcoding python-slip
 
-can anyone tell the steps to bitbake meta-toolchain-qt5.
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> +
+> +SRC_URI[md5sum] = "fb3299d75af1a67ca6679d96ce839da6"
+> +SRC_URI[sha256sum] = "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afdeff866cd94463ad5c"
+> +
+> +do_compile_prepend() {
+> +    sed -e 's/@VERSION@/0.6.0/g' setup.py.in > setup.py
 
-As, after the /bin/fsl-community-bsp$ . ./setup-environment
+could this somehow use PV and not 0.6.0 hardcoded ?
 
-i'm getting the options as
-Welcome to Freescale Community BSP
+> +}
 
-The Yocto Project has extensive documentation about OE including a
-reference manual which can be found at:
-    http://yoctoproject.org/documentation
-
-For more information about OpenEmbedded see their website:
-    http://www.openembedded.org/
-
-You can now run 'bitbake <target>'
-
-Common targets are:
-
-
-
-
-*    core-image-minimal    meta-toolchain    meta-toolchain-sdk
-adt-installer    meta-ide-support*
-
-Your configuration files at build have not been touched.
-
-/bin/fsl-community-bsp/build$ bitbake meta-toolchain-qt5
-Loading cache: 100%
-|##########################################################################=
-#######################|
-ETA:  00:00:00
-Loaded 1873 entries from dependency cache.
-ERROR: Nothing PROVIDES 'meta-toolchain-qt5'. Close matches:
-  meta-toolchain-qt
-  meta-toolchain-qte
-  meta-toolchain
-
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-
-
-
-
-there is no meta-toolchain-qt5.
-
-
-
-
-even in source i checked the /bin/fsl-community-bsp/sources there is no
-,meta-toolchain-qt5
-
-
-
-please assist.
-
---=20
-Thanks
-Nilesh Kokane
-
---=20
-=E2=80=9CThe contents of this e-mail message and any attachments are confid=
-ential=20
-and are intended solely for addressee. The information may also be legally=
-=20
-privileged. This transmission is sent in trust, for the sole purpose of=20
-delivery to the intended recipient. If you have received this transmission=
-=20
-in error, any use, reproduction or dissemination of this transmission is=20
-strictly prohibited. If you are not the intended recipient, please=20
-immediately notify the sender by reply e-mail or phone and delete this=20
-message and its attachments, if any.=E2=80=9D
+may be also run the recipe thru contrib/oe-stylize.py for formatting
+and structure.
 
