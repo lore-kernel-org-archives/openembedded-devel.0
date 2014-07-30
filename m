@@ -1,38 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C7DF70961
+Return-Path: <lchristina26@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B5647051A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 17:29:30 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id at20so1933543iec.8
+	Wed, 30 Jul 2014 19:57:40 +0000 (UTC)
+Received: by mail-ig0-f182.google.com with SMTP id c1so3565463igq.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 10:29:32 -0700 (PDT)
+	Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=iYyrbi8Q8PriQW7GwRQmVPfTt/bSUyeoPQJYMfGy0H0=;
-	b=Za8WnOfWwEZ68I/QAX/0Xceuc0dH0oqpSZdQvc8nciLcU58rQtGtFuRG59aVYAkuya
-	cZLXY0jEKOx/pqdEiv3uu17d/pGOwMA3lam4pS/w4OWc/sjm6MG9XJmXUZN/94thQ2c/
-	O6P5lUiAwE88lDSbR+lxPQ7MY+XUz5xwmXS2wU4mo8RtZMZyl1K/+2mt0ztQ2ezbzAXW
-	JNdN0OADuryhPh1lY58Eg0e7+tIw0TeqavH4yq87KQg7bJtbxooX4v/lKmSXSqqgC3D/
-	IbKI1iPCmq26ktx3DSSl6suOnZTb6xhjFKvjUNRVyjgVXELmvM2N88x83JqWsXMGFWNH
-	Pyww==
-X-Received: by 10.50.13.102 with SMTP id g6mr9996208igc.20.1406741372173; Wed,
-	30 Jul 2014 10:29:32 -0700 (PDT)
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=ADM4/MK4xV/u2CsCOtuMg9k5z8iywIs1p357PwoHK0k=;
+	b=eLILx1Q0SgEilrdONl1IuyLKdacOUYtW/aiYQ6HqpZeMSuda4rDPGU7axKxnZPSl+6
+	ofRVmlS//JBBbenauD0JJnog3liFwG+Qh3IT6Zrq9tS+/86QTTFWmT3CA1dUo/TpgrWG
+	HlXWXp9KXqXtK1LsKEGfo5BaOsDvakry2JOX/Y3ZIrgAAZOBrpjEU7NbUiVrhtdWxH3Y
+	o/H6cgRMNS1ZPTO+Ui146rOf1tO/3mGwLoUFIg0WmMFBxm/gNoP2mlsR0QRK7cwqGwNR
+	Ue+aJ08xZC5vPja0DfCO7qXd2mgqK2caKtPJdYSvso5SKnAKHlJN+XDBZUodEDONe3o2
+	jGBw==
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Wed, 30 Jul 2014 10:29:01 -0700 (PDT)
-In-Reply-To: <20140730172323.GS16445@jama>
-References: <1406629327-29169-1-git-send-email-dv@pseudoterminal.org>
-	<CAMKF1sqknbM=rXZCRLjPtcHG_1-D1wV+XtBDtao2kOTG9F81+g@mail.gmail.com>
-	<CAP9ODKq=mNeFOf_DMTNiiT4Lj0H=zujFyad97=E1K+KGTrr5OQ@mail.gmail.com>
-	<CAMKF1srBNaC9hA8Sq_-jV3qmwn+SM4-nXpmvSBfU3+VftCUEZg@mail.gmail.com>
-	<CAP9ODKo8o-bidnDgAUQZD5Yek_9fHg2FWR=m8+xE=-pLS4ttMA@mail.gmail.com>
-	<CAMKF1soqe5woG5DcO9FP0tPVpprtgnHKMY4W8HcThZWTdncioA@mail.gmail.com>
-	<20140730172323.GS16445@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Jul 2014 10:29:01 -0700
-Message-ID: <CAMKF1sr+ftWMFsPR_sX0io-ksrwbuYp2WhN9PyfWe6FyVGg6BQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH 1/2] chromium: Add PACKAGECONFIG for disabling API keys info bar
+X-Received: by 10.50.50.229 with SMTP id f5mr56866229igo.42.1406750261269;
+	Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
+Sender: lchristina26@gmail.com
+Received: by 10.64.11.102 with HTTP; Wed, 30 Jul 2014 12:57:41 -0700 (PDT)
+Date: Wed, 30 Jul 2014 13:57:41 -0600
+X-Google-Sender-Auth: Q52wYd0qblPyXDAOKoR1iPUIidI
+Message-ID: <CAL0pqZ0hXybc_m5_wsbtoeekbz0FUrFFK=jXcsa2Jm+3XugEzA@mail.gmail.com>
+From: Leah <leah@wolfssl.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Add recipe to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,15 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 17:29:35 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 19:57:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jul 30, 2014 at 10:23 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> For you yes I understand, do you have say of other folks who use this layer ?
->
-> He only adds the option, it even isn't enabled by default, so FWIW I'm
-> fine with this.
->
+Hi,
 
-oh its not default. That was an oversight from me. In this case its ok.
+I have a recipe - cyassl_3.1.0.bb <http://cyassl_3.1.0.bb>, a lightweight
+ssl library that I would like to add to openembedded. Please let me know
+the steps I need to follow to add my recipe.
+
+Thanks,
+
+Leah
+
+-- 
+
+Leah Thompson
+www.wolfssl.com
+leah@wolfssl.com
+406-570-1389
+Skype: lchristina26
 
