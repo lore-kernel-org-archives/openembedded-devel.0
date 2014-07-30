@@ -1,37 +1,32 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
 	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id AB24170961;
-	Wed, 30 Jul 2014 16:56:55 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id uq10so7704834igb.2
-	for <multiple recipients>; Wed, 30 Jul 2014 09:56:57 -0700 (PDT)
+	by mail.openembedded.org (Postfix) with ESMTP id 8A432609BF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2014 17:00:37 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id uq10so7711310igb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2014 10:00:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=BsYalL77OaKXkdqQdsRfMpK/EyAuMV3UlZdHphbeYFU=;
-	b=GRAaRyHNap07BX8qLEETN8PDW5+ekatZ7948D9gVw59lLVtbsPehpsX0efmkcSVP9O
-	yPX5mfDtymlpxQu+mpVjrjRkZ69T6ZpHdIO1XP63XVqaVMSEbI1UCHNBJBe0skLswywf
-	q02ZdV2LNUTnf4eaSM7MLu2qIJZdAXqcaF+K6rPTnTHOcWaTg4uoC7fZLA0FSe3O99+M
-	ph9mnGLEdDHSY/av6OGOYAHc7EbSuhVYwdVlXOE6UQlcwjhqYEzrS/2Oe29mPtn07wn5
-	ctnDMemRsvZKf/Vukg+nlQwAhngS/J3DnM52jG+qKxXq05Bf1YkvLB5EjIF1qTM/wh2G
-	gFcA==
-X-Received: by 10.50.43.134 with SMTP id w6mr9367954igl.17.1406739417048; Wed,
-	30 Jul 2014 09:56:57 -0700 (PDT)
+	:content-type; bh=qhPEvgtpCSC8SQR30ALRbRuB0uO+A5WXXYKMQBUGm0U=;
+	b=y1EifbN8j55JwAxZLTEl2GGQaWMBoOGQHB/2qB6qH4V6FCEFWIM5MpUHuuBmzIx4Ru
+	lZSNS/mwFriI92+ORnTRPZNnxMHUgIU+TceXMKfHK9KdLARY7vGC9sUGVZeKtMULDRxK
+	/5zlEVK6m9WSaf5c+S+esUwaCGJnhdVooqtQ1kVa8lR47vQ4+ix4bNZNp20gQregJBQW
+	TwVqIQ/XIQ85BD/eRlEscfPtcBvTR2vINy6fgyxb3ywp2TV4MPLLLN+XpKSSJEXLNONt
+	6iAgAvQNmAjH4unWtKWMIi/fMpgOYys+ip2xOJyojOb95QlEiS7fPpuTCrmQypKs8x+a
+	OgtA==
+X-Received: by 10.50.134.136 with SMTP id pk8mr56601141igb.20.1406739638644;
+	Wed, 30 Jul 2014 10:00:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Wed, 30 Jul 2014 09:56:26 -0700 (PDT)
-In-Reply-To: <53D8DB24.2070409@phytec.de>
-References: <1406541304-18741-1-git-send-email-freesilicon@gmail.com>
-	<1406543035.13346.11.camel@ted> <53D8DB24.2070409@phytec.de>
+Received: by 10.50.78.105 with HTTP; Wed, 30 Jul 2014 10:00:08 -0700 (PDT)
+In-Reply-To: <CAK18fxEwnZdq5nObukmqOCahN6p7JcLRbctDzS2-tJjqALMDCw@mail.gmail.com>
+References: <CAK18fxEwnZdq5nObukmqOCahN6p7JcLRbctDzS2-tJjqALMDCw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Jul 2014 09:56:26 -0700
-Message-ID: <CAMKF1sp6=sCzffe9Q=nEjPjaidKrg2_LYtLeZS+ZMgAsUMdVig@mail.gmail.com>
-To: =?UTF-8?Q?Stefan_M=C3=BCller=2DKlieser?= <s.mueller-klieser@phytec.de>
-Cc: David Vincent <freesilicon@gmail.com>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH] barebox: Add recipe
+Date: Wed, 30 Jul 2014 10:00:08 -0700
+Message-ID: <CAMKF1sq3ravDmn6dKzJXhNSEz8aZ6E7iROnW7tL1t7m4u9Eqzg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] Issues while building gpsd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,23 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 16:57:00 -0000
+X-List-Received-Date: Wed, 30 Jul 2014 17:00:43 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 30, 2014 at 4:46 AM, Stefan M=C3=BCller-Klieser
-<s.mueller-klieser@phytec.de> wrote:
->
-> it happened that I am also preparing our barebox recipe for OE-core. I
-> started similar to David but it evolved already. I added support for
-> packages, configuration fragments and an the ipl, needed for some SoCs. I
-> will send it to the list for comments. Even if it will not be accepted, i=
-t
-> might be useful for some people. I will provide an explanation for the
-> maintainer.
+On Wed, Jul 30, 2014 at 5:56 AM, Andrei Gherzan <andrei@gherzan.ro> wrote:
+> | //usr/lib/libpthread.so.0: undefined reference to `__uname@GLIBC_PRIVATE'
+> | //usr/lib/libpthread.so.0: undefined reference to
+> `__getrlimit@GLIBC_PRIVATE'
+> | collect2: error: ld returned 1 exit status
+> | //usr/lib/libpthread.so.0: undefined reference to `__uname@GLIBC_PRIVATE'
+> | //usr/lib/libpthread.so.0: undefined reference to
+> `__getrlimit@GLIBC_PRIVATE'
+> | collect2: error: ld returned 1 exit status
 
-could you both merge your changes and propose single recipe ?
-We could put it in meta-oe and later decide to move to or-core if that
-becomes the case.
-so also send to oe-devel ml when you send v2
+well gpsd's own build system seems to be not so cross compile
+friendly. Figure out why it decided to poke
+at your host thread library instead of one from target sysroot
 
