@@ -1,32 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C5B36ACD6
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 58D417089B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 05:43:44 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id at20so854171iec.8
+	Wed, 30 Jul 2014 06:10:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s6U6AeZh017057
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jul 2014 22:43:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=eC5eJcVVjdHGnPU7zAUkIrB7qNWNBRkpDj0rNQ+9KBs=;
-	b=qRy2LwWpQnzogwi9S5lFVUJzNArPw2DHA1jnZlB5c5XPrhpEr6g6rV+NZBDNCU5sEH
-	z53bwuciTS0U+3IXZLv4qZj0K8GdLlbu5haozVXO9fydGbgeZs1uIg0zacp+7UELvOUB
-	NwkGGlsz3vpvNIEfVsyuBRM4dnHjODxCWS7Y12TAFviNfpiRjdnZGRdG5KZvhCVQ/CaW
-	IroimwvTFmtNKk/yZ1Rce3ktvGhH0upZgKEB/C01yjEPWhUcmUD3wW8nqjuUBFovgZ+3
-	78BIDsPu/4BRi5MYN6kKr3ZJBU8jpD+TiDTIfVuXEZ19gC/KZRTbswCdNC0uG1ZKU/vZ
-	zXoQ==
-X-Received: by 10.50.134.136 with SMTP id pk8mr50648558igb.20.1406699025454;
-	Tue, 29 Jul 2014 22:43:45 -0700 (PDT)
+	Tue, 29 Jul 2014 23:10:40 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.159) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 29 Jul 2014 23:10:39 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 30 Jul 2014 14:10:42 +0800
+Message-ID: <1406700643-5816-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Tue, 29 Jul 2014 22:43:15 -0700 (PDT)
-In-Reply-To: <53D855E4.2020005@windriver.com>
-References: <53D855E4.2020005@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 Jul 2014 22:43:15 -0700
-Message-ID: <CAMKF1srsgwfg1dQafnRp6TXL5DVdRNWL+nbbZYtt=t3A__nWSA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking] integrate firewalld
+Subject: [PATCH][meta-python] python-slip-dbus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,17 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 05:43:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 30 Jul 2014 06:10:49 -0000
+Content-Type: text/plain
 
-On Tue, Jul 29, 2014 at 7:18 PM, Rongqing Li <rongqing.li@windriver.com> wrote:
-> HI:
->     firewalld is a firewall service daemon that provides a dynamic
-> customizable firewall with a D-Bus interface.
->
->     Now, We want to integrate firewalld into meta-networking, what
-> is your suggestion?
->
+From: Roy Li <rongqing.li@windriver.com>
 
-yes thats appropriate layer for it.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../python/python-slip-dbus_0.6.0.bb               |   27 ++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+
+diff --git a/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+new file mode 100644
+index 0000000..2a7c139
+--- /dev/null
++++ b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "Convenience functions for dbus services in Python 2.x"
++HOMEPAGE = "http://nphilipp.fedorapeople.org/python-slip/"
++DESCRIPTION = "\
++The Simple Library for Python 2.x packages contain miscellaneous code for \
++convenience, extension and workaround purposes. \
++\
++This package provides slip.dbus.service.Object, which is a dbus.service.Object \
++derivative that ends itself after a certain time without being used and/or if \
++there are no clients anymore on the message bus, as well as convenience \
++functions and decorators for integrating a dbus service with PolicyKit."
++
++SECTION = "devel/python"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
++SRCNAME = "python-slip"
++
++SRC_URI = "https://fedorahosted.org/released/python-slip/python-slip-${PV}.tar.bz2"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
++
++SRC_URI[md5sum] = "fb3299d75af1a67ca6679d96ce839da6"
++SRC_URI[sha256sum] = "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afdeff866cd94463ad5c"
++
++do_compile_prepend() {
++    sed -e 's/@VERSION@/0.6.0/g' setup.py.in > setup.py
++}
+-- 
+1.7.10.4
+
 
