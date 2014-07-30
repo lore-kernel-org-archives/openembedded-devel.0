@@ -1,28 +1,40 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id E22AA65CA8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 2675365DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 10:30:16 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 30 Jul 2014 03:30:18 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,763,1400050800"; d="scan'208";a="551200692"
-Received: from cfitzsim-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.251])
-	by orsmga001.jf.intel.com with ESMTP; 30 Jul 2014 03:30:16 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>, Tim Orling <ticotimo@gmail.com>
-Date: Wed, 30 Jul 2014 11:30:15 +0100
-Message-ID: <3193777.KGUVVojpmr@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.6-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140730081205.GI16445@jama>
-References: <1406053708-24207-1-git-send-email-TicoTimo@gmail.com>
-	<CANx9H-AuCdp4dnFKmA7Ygq0J=2nNR_E2c-LN-1_1OaZF2LLSPg@mail.gmail.com>
-	<20140730081205.GI16445@jama>
+	Wed, 30 Jul 2014 10:52:28 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id bs8so7351450wib.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2014 03:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=U60SlTVbJpQldqI1gOUB5fn+JnXivE336HM0Ec9UPK0=;
+	b=wXqP9odxJ+Hzibf6RjofImKJT1GuOK/8J+PwQdJrW1YII3o7phYVYAKoQ+mRU7aAjC
+	Ltlrh7o3salIdlVGVZVK7ONAwi58RRhKuf+4fBQ1Ln0da+htMny3Dh+IvGdhUr/XLLk0
+	PdGhenE3FhpEg0MhxC3seWrd9JiqC4eF50OcLAaSaWXeUuFZb3gO7iQVDe+0erak2JzY
+	bsC6P/0xID0O79afNDu2foLRguOONCJw4/VTmRbK+0J49kL1x2csTvgyCHJQyHUE2zLN
+	lWIsqGAlRYmf4axUIAeHNy6dvwRTi9faWA+HGQBHj7TMsU+KRoRcTNtDHM5U+QH5UUQh
+	y4AA==
+X-Received: by 10.180.80.133 with SMTP id r5mr5747261wix.62.1406717549789;
+	Wed, 30 Jul 2014 03:52:29 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	rw4sm4622184wjb.44.2014.07.30.03.52.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jul 2014 03:52:28 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Jul 2014 12:52:52 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140730105252.GM16445@jama>
+References: <1406706254-7799-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] meta-python: fix conf/layer.conf, follow typical structure
+In-Reply-To: <1406706254-7799-1-git-send-email-rongqing.li@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH v2][meta-python] python-slip-dbus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 10:30:21 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 30 Jul 2014 10:52:31 -0000
+X-Groupsio-MsgNum: 51320
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="kVcb4xucqmsYUpQy"
+Content-Disposition: inline
 
-On Wednesday 30 July 2014 10:12:05 Martin Jansa wrote:
-> On Sat, Jul 26, 2014 at 10:34:35AM -0700, Tim Orling wrote:
-> > Ping.
-> > I haven't seen any comment on this patch at all.
-> 
-> I don't have strong opinion on this, but I don't like much the structure
-> with 1 recipe per directory, so I prefer single python directory with
-> all python modules together.
-> 
-> Also using the original structure from meta-oe has the advantage that
-> additional layers which were using include or require of some file from
-> python directory don't need any adaptation after meta-python was
-> separated (I've noticed it in one of our layers and that's why I've
-> submitted recipes-python -> recipes-devtools change).
+--kVcb4xucqmsYUpQy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Good point - I hadn't thought of this. FWIW I'm happy to have the meta-oe 
-directory structure retained in meta-python if it makes this easier.
+On Wed, Jul 30, 2014 at 03:44:13PM +0800, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> ---
+>  .../python/python-slip-dbus_0.6.0.bb               |   27 ++++++++++++++=
+++++++
+>  1 file changed, 27 insertions(+)
+>  create mode 100644 meta-python/recipes-python/python/python-slip-dbus_0.=
+6.0.bb
+>=20
+> diff --git a/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb =
+b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+> new file mode 100644
+> index 0000000..d091336
+> --- /dev/null
+> +++ b/meta-python/recipes-python/python/python-slip-dbus_0.6.0.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY =3D "Convenience functions for dbus services in Python 2.x"
+> +HOMEPAGE =3D "http://nphilipp.fedorapeople.org/python-slip/"
+> +DESCRIPTION =3D "\
+> +The Simple Library for Python 2.x packages contain miscellaneous code fo=
+r \
+> +convenience, extension and workaround purposes. \
+> +\
+> +This package provides slip.dbus.service.Object, which is a dbus.service.=
+Object \
+> +derivative that ends itself after a certain time without being used and/=
+or if \
+> +there are no clients anymore on the message bus, as well as convenience \
+> +functions and decorators for integrating a dbus service with PolicyKit."
+> +
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "GPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5574c6965ae5f583e55880e397fbb=
+018"
+> +SRCNAME =3D "python-slip"
+> +
+> +SRC_URI =3D "https://fedorahosted.org/released/python-slip/${SRCNAME}-${=
+PV}.tar.bz2"
 
-Cheers,
-Paul
+I've replaced also 2nd "python-slip" with ${SRCNAME} and I've moved both
+new recipes to recipes-devtools when cherry-picking this to master-next.
 
--- 
+> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> +
+> +SRC_URI[md5sum] =3D "fb3299d75af1a67ca6679d96ce839da6"
+> +SRC_URI[sha256sum] =3D "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afde=
+ff866cd94463ad5c"
+> +
+> +do_compile_prepend() {
+> +    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
+> +}
+> --=20
+> 1.7.10.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--kVcb4xucqmsYUpQy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPYzoQACgkQN1Ujt2V2gBxj7ACfd2/WfgtFWH/KwPSxzo4/iQjI
+EYMAnj2U5XVdcxfZjTEbD5Ri8mQUXIeR
+=Tpdi
+-----END PGP SIGNATURE-----
+
+--kVcb4xucqmsYUpQy--
