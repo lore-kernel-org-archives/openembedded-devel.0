@@ -1,27 +1,39 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CC7AC65F81
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A547E65F81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jul 2014 07:28:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s6U7SdHs017849
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 30 Jul 2014 00:28:39 -0700 (PDT)
-Received: from [128.224.162.159] (128.224.162.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 30 Jul 2014 00:28:38 -0700
-Message-ID: <53D89EA9.4020801@windriver.com>
-Date: Wed, 30 Jul 2014 15:28:41 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Wed, 30 Jul 2014 07:28:48 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id x13so732130wgg.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jul 2014 00:28:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ahLuHbRZYyf26JB9DQMXK3GTetRIBSjhXSU55DuFrmg=;
+	b=xEsBXv9jwn9OPj2spUGMrUbyKN9mjJZbEApxQSF4O+ZWDvsYp9EDL48FfURj6vdldI
+	pdCbhOfF40cyR3xr8UMuBhNXTL5cZYKVsWZgUCD6bGpRCCtBJVg451CNk3UZhRXHSijJ
+	qky1Fhc9GpBTfxUdFwivbdsaGMyQIKYshiIM5u4Y25zdAZrYCDUvO6P4CbBj0J5TUSGC
+	jgeQ70+Z1ZGSrzwtDS+ZAhpypimNGvaqLUQF/8QdpwUW1yPQwdH4sWCnkLGPhDp+zI1Q
+	E+XPE+KiJrJJRvJ1/XZjU7r43gLIgiu9r3lhJDZt2IdXXI2qUiC+sLW3gNwWTQmCLDZS
+	kJ7Q==
+X-Received: by 10.194.200.229 with SMTP id jv5mr3347031wjc.90.1406705329644;
+	Wed, 30 Jul 2014 00:28:49 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	20sm3429134wjt.42.2014.07.30.00.28.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 30 Jul 2014 00:28:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 30 Jul 2014 09:29:11 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140730072911.GH16445@jama>
+References: <1406534881-17136-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1406700643-5816-1-git-send-email-rongqing.li@windriver.com>
-	<CAMKF1sppmXVJj8tkDv4=JJN1jkirMZuJ5pimJDoifcZyikaJRA@mail.gmail.com>
-In-Reply-To: <CAMKF1sppmXVJj8tkDv4=JJN1jkirMZuJ5pimJDoifcZyikaJRA@mail.gmail.com>
-Subject: Re: [PATCH][meta-python] python-slip-dbus: add recipe
+In-Reply-To: <1406534881-17136-1-git-send-email-jackie.huang@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH] ipsec-tools: Fix pfkey UPDATE failure caused by EINTR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,44 +47,318 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jul 2014 07:28:48 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Jul 2014 07:28:50 -0000
+X-Groupsio-MsgNum: 51314
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="5cSRzy0VGBWAML+b"
+Content-Disposition: inline
 
+--5cSRzy0VGBWAML+b
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Jul 28, 2014 at 04:08:01AM -0400, jackie.huang@windriver.com wrote:
+> From: Xufeng Zhang <xufeng.zhang@windriver.com>
+>=20
+> While kernel is processing the UPDATE message which is sent from racoon,
+> it maybe interrupted by certain system signal and if this case happens,
+> kernel responds with an EINTR message to racoon and kernel fails to
+> establish the corresponding SA.
+> Fix this problem by resend the UPDATE message when EINTR(Interrupted
+> system call) error happens.
 
-On 07/30/2014 02:49 PM, Khem Raj wrote:
-> On Tue, Jul 29, 2014 at 11:10 PM,  <rongqing.li@windriver.com> wrote:
->> +SECTION = "devel/python"
->> +LICENSE = "GPLv2+"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
->> +SRCNAME = "python-slip"
->> +
->> +SRC_URI = "https://fedorahosted.org/released/python-slip/python-slip-${PV}.tar.bz2"
->
-> You could use SRCNAME in SRC_URI as well instead of hardcoding python-slip
->
->> +S = "${WORKDIR}/${SRCNAME}-${PV}"
->> +
->> +inherit setuptools
->> +
->> +SRC_URI[md5sum] = "fb3299d75af1a67ca6679d96ce839da6"
->> +SRC_URI[sha256sum] = "f47361ec52b608309b83c71905e692b6b363eaf3b8a7afdeff866cd94463ad5c"
->> +
->> +do_compile_prepend() {
->> +    sed -e 's/@VERSION@/0.6.0/g' setup.py.in > setup.py
->
-> could this somehow use PV and not 0.6.0 hardcoded ?
->
->> +}
->
-> may be also run the recipe thru contrib/oe-stylize.py for formatting
-> and structure.
->
+Is this still needed after:
 
-Thanks, I will change them
+commit 2ea5feedac7ba04417ce95ba0b14a8ce478614f6
+Author: Roy Li <rongqing.li@windriver.com>
+Date:   Thu Jul 24 16:51:23 2014 +0800
 
--- 
-Best Reagrds,
-Roy | RongQing Li
+    ipsec-tools: several fixes
 
+Please check and send follow-up change if needed.
+
+>=20
+> Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  ...PDATE-message-when-received-EINTR-message.patch | 220 +++++++++++++++=
+++++++
+>  .../ipsec-tools/ipsec-tools_0.8.1.bb               |   1 +
+>  2 files changed, 221 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-too=
+ls/racoon-Resend-UPDATE-message-when-received-EINTR-message.patch
+>=20
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/raco=
+on-Resend-UPDATE-message-when-received-EINTR-message.patch b/meta-networkin=
+g/recipes-support/ipsec-tools/ipsec-tools/racoon-Resend-UPDATE-message-when=
+-received-EINTR-message.patch
+> new file mode 100644
+> index 0000000..1ec5a41
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon-Rese=
+nd-UPDATE-message-when-received-EINTR-message.patch
+> @@ -0,0 +1,220 @@
+> +racoon: Resend UPDATE message when received EINTR message
+> +
+> +Upstream-Status: Pending
+> +
+> +While kernel is processing the UPDATE message which is sent from racoon,
+> +it maybe interrupted by system signal and if this case happens,
+> +kernel responds with an EINTR message to racoon and kernel fails to
+> +establish the corresponding SA.
+> +Fix this problem by resend the UPDATE message when EINTR(Interrupted
+> +system call) error happens.
+> +
+> +Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+> +---
+> +--- a/src/libipsec/libpfkey.h
+> ++++ b/src/libipsec/libpfkey.h
+> +@@ -92,6 +92,12 @@
+> + 	u_int16_t ctxstrlen;		/* length of security context string */
+> + };
+> +=20
+> ++struct update_msg_info {
+> ++        struct sadb_msg *update_msg;
+> ++        int so;
+> ++        int len;
+> ++};
+> ++
+> + /* The options built into libipsec */
+> + extern int libipsec_opt;
+> + #define LIBIPSEC_OPT_NATT		0x01
+> +--- a/src/libipsec/pfkey.c
+> ++++ b/src/libipsec/pfkey.c
+> +@@ -1219,7 +1219,8 @@
+> + }
+> + #endif
+> +=20
+> +-
+> ++struct update_msg_info update_msg_send =3D {NULL, 0, 0};
+> ++=09
+> + /* sending SADB_ADD or SADB_UPDATE message to the kernel */
+> + static int
+> + pfkey_send_x1(struct pfkey_send_sa_args *sa_parms)
+> +@@ -1483,10 +1484,24 @@
+> +=20
+> + 	/* send message */
+> + 	len =3D pfkey_send(sa_parms->so, newmsg, len);
+> +-	free(newmsg);
+> +=20
+> +-	if (len < 0)
+> +-		return -1;
+> ++	if (newmsg->sadb_msg_type =3D=3D SADB_UPDATE) {
+> ++		if (update_msg_send.update_msg)
+> ++			free(update_msg_send.update_msg);
+> ++		update_msg_send.update_msg =3D newmsg;
+> ++		update_msg_send.so =3D sa_parms->so;
+> ++		update_msg_send.len =3D len;
+> ++
+> ++		if (len < 0) {
+> ++			free(update_msg_send.update_msg);
+> ++			update_msg_send.update_msg =3D NULL;=09
+> ++			return -1;
+> ++		}
+> ++	} else {
+> ++		free(newmsg);
+> ++		if (len < 0)
+> ++			return -1;
+> ++	}
+> +=20
+> + 	__ipsec_errcode =3D EIPSEC_NO_ERROR;
+> + 	return len;
+> +--- a/src/racoon/session.c
+> ++++ b/src/racoon/session.c
+> +@@ -100,6 +100,8 @@
+> +=20
+> + #include "sainfo.h"
+> +=20
+> ++extern struct update_msg_info update_msg_send;
+> ++
+> + struct fd_monitor {
+> + 	int (*callback)(void *ctx, int fd);
+> + 	void *ctx;
+> +@@ -348,6 +350,11 @@
+> + 	close_sockets();
+> + 	backupsa_clean();
+> +=20
+> ++	if (update_msg_send.update_msg) {
+> ++		free(update_msg_send.update_msg);
+> ++		update_msg_send.update_msg =3D NULL;
+> ++	}
+> ++
+> + 	plog(LLV_INFO, LOCATION, NULL, "racoon process %d shutdown\n", getpid(=
+));
+> +=20
+> + 	exit(0);
+> +--- a/src/racoon/pfkey.c
+> ++++ b/src/racoon/pfkey.c
+> +@@ -103,10 +103,12 @@
+> + #include "crypto_openssl.h"
+> + #include "grabmyaddr.h"
+> ++#include "../libipsec/libpfkey.h"
+> +=20
+> + #if defined(SADB_X_EALG_RIJNDAELCBC) && !defined(SADB_X_EALG_AESCBC)
+> + #define SADB_X_EALG_AESCBC  SADB_X_EALG_RIJNDAELCBC
+> + #endif
+> +=20
+> ++extern struct update_msg_info update_msg_send;
+> + /* prototype */
+> + static u_int ipsecdoi2pfkey_aalg __P((u_int));
+> + static u_int ipsecdoi2pfkey_ealg __P((u_int));
+> +@@ -253,6 +255,13 @@
+> + 			s_pfkey_type(msg->sadb_msg_type),
+> + 			strerror(msg->sadb_msg_errno));
+> +=20
+> ++		if (msg->sadb_msg_errno =3D=3D EINTR &&
+> ++			update_msg_send.update_msg) {
+> ++			plog(LLV_DEBUG, LOCATION, NULL,
+> ++			"pfkey update resend\n");
+> ++			send(update_msg_send.so, (void *)update_msg_send.update_msg, (sockle=
+n_t)update_msg_send.len, 0);
+> ++		}
+> ++
+> + 		goto end;
+> + 	}
+> +=20
+> +@@ -498,6 +507,11 @@
+> + {
+> + 	flushsp();
+> +=20
+> ++	if (update_msg_send.update_msg) {
+> ++		free(update_msg_send.update_msg);
+> ++		update_msg_send.update_msg =3D NULL;
+> ++	}
+> ++
+> + 	if (pfkey_send_spddump(lcconf->sock_pfkey) < 0) {
+> + 		plog(LLV_ERROR, LOCATION, NULL,
+> + 			"libipsec sending spddump failed: %s\n",
+> +@@ -1295,6 +1309,8 @@
+> + 	return 0;
+> + }
+> +=20
+> ++int update_received =3D 0;
+> ++
+> + static int
+> + pk_recvupdate(mhp)
+> + 	caddr_t *mhp;
+> +@@ -1307,6 +1323,13 @@
+> + 	int incomplete =3D 0;
+> + 	struct saproto *pr;
+> +=20
+> ++	update_received =3D 1;
+> ++
+> ++	if (update_msg_send.update_msg) {
+> ++                free(update_msg_send.update_msg);
+> ++                update_msg_send.update_msg =3D NULL;
+> ++        }
+> ++
+> + 	/* ignore this message because of local test mode. */
+> + 	if (f_local)
+> + 		return 0;
+> +@@ -4163,3 +4186,8 @@
+> +=20
+> + 	return buf;
+> + }
+> ++
+> ++int receive_from_isakmp()
+> ++{
+> ++	return pfkey_handler(NULL, lcconf->sock_pfkey);
+> ++}
+> +--- a/src/racoon/pfkey.h
+> ++++ b/src/racoon/pfkey.h
+> +@@ -71,5 +71,6 @@
+> + extern u_int32_t pk_getseq __P((void));
+> + extern const char *sadbsecas2str
+> + 	__P((struct sockaddr *, struct sockaddr *, int, u_int32_t, int));
+> ++extern int receive_from_isakmp __P((void));
+> +=20
+> + #endif /* _PFKEY_H */
+> +--- a/src/racoon/isakmp_quick.c
+> ++++ b/src/racoon/isakmp_quick.c
+> +@@ -774,6 +774,8 @@
+> + 	return error;
+> + }
+> +=20
+> ++extern int update_received;
+> ++
+> + /*
+> +  * send to responder
+> +  * 	HDR*, HASH(3)
+> +@@ -892,6 +894,11 @@
+> + 	}
+> + 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+> +=20
+> ++	while (!update_received)
+> ++		receive_from_isakmp();
+> ++=09
+> ++	update_received =3D 0;
+> ++
+> + 	/* Do ADD for responder */
+> + 	if (pk_sendadd(iph2) < 0) {
+> + 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+> +@@ -1035,6 +1042,11 @@
+> + 	}
+> + 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+> +=20
+> ++	while (!update_received)
+> ++		receive_from_isakmp();
+> ++
+> ++	update_received =3D 0;
+> ++
+> + 	/* Do ADD for responder */
+> + 	if (pk_sendadd(iph2) < 0) {
+> + 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+> +@@ -1989,6 +2001,11 @@
+> + 	}
+> + 	plog(LLV_DEBUG, LOCATION, NULL, "pfkey update sent.\n");
+> +=20
+> ++	while (!update_received)
+> ++		receive_from_isakmp();
+> ++
+> ++	update_received =3D 0;
+> ++
+> + 	/* Do ADD for responder */
+> + 	if (pk_sendadd(iph2) < 0) {
+> + 		plog(LLV_ERROR, LOCATION, NULL, "pfkey add failed.\n");
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.=
+1.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+> index 2e5c0a4..0332f7f 100644
+> --- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.1.bb
+> @@ -11,6 +11,7 @@ SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec=
+-tools/0.8/ipsec-tools-${PV
+>             file://0001-Fix-warning-with-gcc-4.8.patch \
+>             file://0002-Don-t-link-against-libfl.patch \
+>             file://configure.patch \
+> +           file://racoon-Resend-UPDATE-message-when-received-EINTR-messa=
+ge.patch \
+>            "
+>  SRC_URI[md5sum] =3D "d38b39f291ba2962387c3232e7335dd8"
+>  SRC_URI[sha256sum] =3D "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a=
+881d63abe8153dd4"
+> --=20
+> 2.0.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--5cSRzy0VGBWAML+b
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPYnscACgkQN1Ujt2V2gByUAgCgpv4a+WLzw3ud6pkx8Aag3e3T
+UV4An1Ul4SeZjlwMVx0sxMYtC54WC6kM
+=xyGR
+-----END PGP SIGNATURE-----
+
+--5cSRzy0VGBWAML+b--
