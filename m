@@ -1,28 +1,36 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C66A70632
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id CE0D2708A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 22:56:14 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id A5822F811FE; Thu, 31 Jul 2014 16:56:15 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 97C98F811FD;
-	Thu, 31 Jul 2014 16:56:13 -0600 (MDT)
-Message-ID: <53DAC99F.6070701@mlbassoc.com>
-Date: Thu, 31 Jul 2014 16:56:31 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
-MIME-Version: 1.0
+	Thu, 31 Jul 2014 22:58:08 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id x48so3458001wes.19
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Jul 2014 15:58:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=jGEtAOHrn/DETlRrCKicrH/Wja9UEM3CTYnVB33OZK8=;
+	b=igvdWfqRNbGCB04ov2uxzyQ3JyfeaWeeUVGkflqk1X3qKqWIiLG3U4vnzxVke6P0Uv
+	Ev9sOlKHnb1F2X9gabpFX0X+N/Rb2dGLnqtHKm+sgUlkQ0Ke3jD0Kbk/IA2BJ94f1HJ/
+	YaPZOCpsm6183k1EfOBlrEnCop6qWlL9mzBqWRtNLcLgtnlvFyQX0MtNTjx5oBImVctK
+	m9LCsmenmXwo5XxjGFfnHoAkCPx7+7oP78IoDGraJoPBmpsP4l+tM2A+45utp/dQ1GK8
+	hpk3XJZfdXAjAzvWx9/XrVCN5PNSX87Y9JsxY9TyY8l6vi9FcXxgsfkY8B8Rdr1qFrpK
+	P/Gw==
+X-Received: by 10.194.89.168 with SMTP id bp8mr1934099wjb.73.1406847489329;
+	Thu, 31 Jul 2014 15:58:09 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host115-254-dynamic.11-79-r.retail.telecomitalia.it.
+	[79.11.254.115])
+	by mx.google.com with ESMTPSA id u10sm2371048wix.14.2014.07.31.15.58.08
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 31 Jul 2014 15:58:08 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
-In-Reply-To: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
-Subject: Re: [meta-initramfs][PATCH] kexecboot: remove trailing slash in do_install
+Date: Fri,  1 Aug 2014 00:58:05 +0200
+Message-Id: <1406847485-17420-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] kexec_tools_klibc_2.0.2: update x86_vfscanf.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,37 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 22:56:21 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 31 Jul 2014 22:58:13 -0000
 
-On 2014-07-31 16:46, Andrea Adami wrote:
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->   meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-> index d0176c5..1fb5f0d 100644
-> --- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-> +++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-> @@ -48,7 +48,7 @@ EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
->
->   do_install () {
->       install -d ${D}${bindir}
-> -    install -m 0755 kexecboot ${D}${bindir}/
-> +    install -m 0755 kexecboot ${D}${bindir}
->       install -d ${D}/proc
->       install -d ${D}/mnt
->       install -d ${D}/dev
->
+fgets in while loops is expected to check for != NULL
 
-What is the reason for this change.  Using XXX/ is quite common
-in OE recipes.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
+index 14f4d2a..cad6951 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
+@@ -16,7 +16,7 @@
+ -	retno = vfscanf(fp, scanf_line, argptr);
+ +
+ +	line = xmalloc(sizeof(line) * line_size);
+-+	while(fgets(line, sizeof(line), fp) != 0 ) {
+++	while(fgets(line, sizeof(line), fp) != NULL ) {
+ +		line_size += MAX_LINE;
+ +		line = xrealloc(line,line_size);
+ +	}
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.1
+
 
