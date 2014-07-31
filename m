@@ -1,36 +1,28 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A0C970632
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C66A70632
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 22:46:45 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id bs8so396169wib.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 15:46:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=t7NxxLWObMaJnMG8uG6pNzxN6s5EJz7xLkdR4uH/Hhk=;
-	b=Jh2UQrD1plni98+coPRq7P6u6YYBdYpdOqers8RrHbcX1oxX3G+/epxwAfvL/6HBqg
-	MUuaWsJBTjL0Wopv2nBwCNlUeWH4sP+1c469aeoyD1ifSUgRK/5RKhPOX73gOe/gKvYh
-	7CkbDK+Fg4A3b8YKse80+1neIMHlxEIdJrg2EXOUVEif9xudOMLlDgacquYbGdJ/Ms0H
-	XLGQ6Yz6hpnvvtFEy9kKHR55mXebGzSLAHWR9rk4WFKdCY7kj3HqAyizfqTw0IlQql53
-	S04fjxkph8pnDilriGm/M5ZEGhn7UyFj6ZFqNiiG8dPdqhP7KvciFdB8fyeHKlXx6k6U
-	N25g==
-X-Received: by 10.180.20.15 with SMTP id j15mr1053375wie.60.1406846806509;
-	Thu, 31 Jul 2014 15:46:46 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host115-254-dynamic.11-79-r.retail.telecomitalia.it.
-	[79.11.254.115])
-	by mx.google.com with ESMTPSA id r1sm2275732wia.21.2014.07.31.15.46.45
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 31 Jul 2014 15:46:45 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 31 Jul 2014 22:56:14 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id A5822F811FE; Thu, 31 Jul 2014 16:56:15 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 97C98F811FD;
+	Thu, 31 Jul 2014 16:56:13 -0600 (MDT)
+Message-ID: <53DAC99F.6070701@mlbassoc.com>
+Date: Thu, 31 Jul 2014 16:56:31 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Aug 2014 00:46:42 +0200
-Message-Id: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] kexecboot: remove trailing slash in do_install
+References: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
+Subject: Re: [meta-initramfs][PATCH] kexecboot: remove trailing slash in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 22:46:52 -0000
+X-List-Received-Date: Thu, 31 Jul 2014 22:56:21 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 2014-07-31 16:46, Andrea Adami wrote:
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>   meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+> index d0176c5..1fb5f0d 100644
+> --- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+> +++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+> @@ -48,7 +48,7 @@ EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
+>
+>   do_install () {
+>       install -d ${D}${bindir}
+> -    install -m 0755 kexecboot ${D}${bindir}/
+> +    install -m 0755 kexecboot ${D}${bindir}
+>       install -d ${D}/proc
+>       install -d ${D}/mnt
+>       install -d ${D}/dev
+>
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-index d0176c5..1fb5f0d 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
-@@ -48,7 +48,7 @@ EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
- 
- do_install () {
-     install -d ${D}${bindir}
--    install -m 0755 kexecboot ${D}${bindir}/
-+    install -m 0755 kexecboot ${D}${bindir}
-     install -d ${D}/proc
-     install -d ${D}/mnt
-     install -d ${D}/dev
+What is the reason for this change.  Using XXX/ is quite common
+in OE recipes.
+
 -- 
-1.9.1
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
