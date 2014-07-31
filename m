@@ -1,32 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id F4218706D2
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 652BD6FE7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 21:02:05 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id y20so4611617ier.41
+	Thu, 31 Jul 2014 22:06:10 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id d1so380758wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 14:02:06 -0700 (PDT)
+	Thu, 31 Jul 2014 15:06:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=cjvcy77IiNm1/SObpqscUQRjxVCDpY6n8mfqfkPxr4Y=;
-	b=EhBITClEBQzPpGmLGc15OCRHUa08/pTyv01swx24y1zOv7WeimRPaPrL1NKEMqooX9
-	+M5wdxBlCUEP9usIfAcl4fVtvlB8k1Xx7l/CVYKJIEVxIx5IIN+3CrI7wHwp5+ZnldNn
-	q8z8XMbLtL0l+fgrFlA3mmaRahJQKPfnPxNSedbsUvgxAMQtcZ2kJ/3q7DcSWaXcim4C
-	wKTFw7+cmOBJz5wvA8eSYS8k7bL3vWKwU1ihS1UUl4CELzGLER7q4W3SU587vLkWwZBE
-	okCX9Pv8oEBrNNqLWNKCXmL0te1LDRRHxNAMylgCTLFICFZ4hrSnj8OWBly0Xy+gBFW6
-	OtwQ==
-X-Received: by 10.50.13.102 with SMTP id g6mr587979igc.20.1406840526304; Thu,
-	31 Jul 2014 14:02:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.78.105 with HTTP; Thu, 31 Jul 2014 14:01:36 -0700 (PDT)
-In-Reply-To: <1406834100-20328-1-git-send-email-yao.zhao@windriver.com>
-References: <1406834100-20328-1-git-send-email-yao.zhao@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Jul 2014 14:01:36 -0700
-Message-ID: <CAMKF1sqMntjWJX6efbyO5JO3eSbg_aLsq8q+JN-3Gjmc6b=KRQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] add support for opendataplane
+	h=from:to:cc:subject:date:message-id;
+	bh=YSA0CHfgvFk8DtfdsPgi9iRrFYmpx+xPYl8MRNEA01I=;
+	b=PsKVYYJnek6K0TND0Qih6QEjJXbmC2QPFdCJ3FfYi6dRLs/ItKq+DJOx/+IARGjpUT
+	qkvHYoOdejg2pPCIvUU+fWWU8OZixbRY6qJij3zGjXKPGye1iaXwY1eZ6FjA0jVtnaUP
+	csnBhKEHNsLKKi1pzDDip5qtzJleqnryWl3FwKyIqY8aW/3OcDLwod5/si7yBPA6JIpA
+	uzoFK4YKuWBUk1VLObiWv4z+5XW4TzxObNxcmktMdOKLsKqtAv+f0VasKzfVW+w05D+4
+	ismMWKoujX90wM6Q6rv5fCQwF7cY6WGz4UrWwzLRxDj+5oDTaHdGNl6/PegFKr8nGTfL
+	VwPg==
+X-Received: by 10.180.183.36 with SMTP id ej4mr580497wic.77.1406844371993;
+	Thu, 31 Jul 2014 15:06:11 -0700 (PDT)
+Received: from mizar.208.67.220.220
+	(host115-254-dynamic.11-79-r.retail.telecomitalia.it.
+	[79.11.254.115])
+	by mx.google.com with ESMTPSA id cx5sm16233940wjb.8.2014.07.31.15.06.10
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 31 Jul 2014 15:06:11 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Aug 2014 00:06:07 +0200
+Message-Id: <1406844367-10560-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld][PATCH] linux-yocto-tiny-kexecboot: change KERNEL_IMAGE_MAXSIZE from bytes to KB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,145 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 21:02:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 31 Jul 2014 22:06:17 -0000
 
-On Thu, Jul 31, 2014 at 12:15 PM, Yao Zhao <yao.zhao@windriver.com> wrote:
-> support build opendataplane from linaro.
->
-> The OpenDataPlane (ODP) project provides a data plane application
-> programming environment that is easy to use, high performance,
-> and portable between networking SoCs.
->
-> Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-> ---
->  ...inux-dpdk-remove-unnecessary-include-path.patch | 29 ++++++++++++++++++++++
->  .../opendataplane/opendataplane.inc                | 21 ++++++++++++++++
->  .../opendataplane/opendataplane_0.2.bb             | 25 +++++++++++++++++++
->  .../opendataplane/opendataplane_git.bb             | 14 +++++++++++
->  4 files changed, 89 insertions(+)
->  create mode 100644 meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane.inc
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane_git.bb
->
-> diff --git a/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch b/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
-> new file mode 100644
-> index 0000000..a0ef7ce
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
-> @@ -0,0 +1,29 @@
-> +From 72b8eacc2985f054cadc5d0b48351a658998b8d6 Mon Sep 17 00:00:00 2001
-> +From: Yao Zhao <yao.zhao@windriver.com>
-> +Date: Wed, 30 Jul 2014 16:02:14 -0400
-> +Subject: [PATCH] linux-dpdk: remove unnecessary include path
-> +
-> +for dpdk include/arch and include/exec-env is only included
-> +by generic rte_xxx.h header, can't be included directly.
-> +
-> +Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-> +---
-> + platform/linux-dpdk/Makefile.am | 2 --
-> + 1 file changed, 2 deletions(-)
-> +
-> +diff --git a/platform/linux-dpdk/Makefile.am b/platform/linux-dpdk/Makefile.am
-> +index 4aa568f..dfcaadb 100644
-> +--- a/platform/linux-dpdk/Makefile.am
-> ++++ b/platform/linux-dpdk/Makefile.am
-> +@@ -12,8 +12,6 @@ PLAT_CFLAGS  = -msse4.2
-> + if SDK_INSTALL_PATH_
-> + PLAT_CFLAGS += -include $(SDK_INSTALL_PATH)/include/rte_config.h
-> + PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include
-> +-PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include/arch
-> +-PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include/exec-env
+Match the changes done by commit 7384d2831c713ac5999aca83c312154dc15cec56
+in oe-core.
 
-is this patch upstreamed ?
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../linux/linux-yocto-tiny-kexecboot_3.10.bbappend           | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-> +
-> + AM_LDFLAGS  += -L$(SDK_INSTALL_PATH)/lib
-> + endif
-> +--
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane.inc b/meta-networking/recipes-support/opendataplane/opendataplane.inc
-> new file mode 100644
-> index 0000000..c4b184e
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane.inc
-> @@ -0,0 +1,21 @@
-> +SUMMARY = "Cross platform OpenDataPlane application APIs"
-> +
-> +DESCRIPTION = "The OpenDataPlane project has been established to \
-> +produce an open-source, cross-platform set of application \
-> +programming interfaces (APIs) for the networking data plane."
-> +
-> +HOMEPAGE = "http://www.opendataplane.org"
-> +SECTION = "networking"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4ccfa994aa96974cfcd39a59faee20a2"
-> +
-> +SRC_URI = "git://git.linaro.org/lng/odp.git"
-> +
-> +COMPATIBLE_HOST = "^((?!mips).*)$"
-> +
-> +PACKAGECONFIG ??= "platform_linux_generic"
-> +PACKAGECONFIG[netmap] = "--enable-netmap,,,"
-> +PACKAGECONFIG[platform_linux_generic] = "--with-platform=linux-generic,,,"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb b/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
-> new file mode 100644
-> index 0000000..74b6c2f
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
-> @@ -0,0 +1,25 @@
-> +require ${BPN}.inc
-> +
-> +#odp-0.2 tag
-> +SRCREV  = "6007d8833a6880abedf98f792586c0cfb9f10de0"
-> +PV = "0.2"
-> +
-> +#0.2 still using pure Makefile
-> +
-> +#override the Makefile DESTDIR
-> +export DESTDIR="${D}${exec_prefix}"
-> +
-> +do_install () {
-> +    oe_runmake install
-> +
-> +    #move DESTDIR/share/odp/odp_x usr/bin
-> +    install -d ${D}${bindir}
-> +    for i in ${DESTDIR}/share/odp/*; do
-> +        filename=`basename $i`
-> +        mv ${DESTDIR}/share/odp/${filename} ${D}${bindir}/${filename}
-> +    done
-> +    rm -rf ${DESTDIR}/share
-> +}
-> +
-> +#non standard doc install location
-> +FILES_${PN}-doc += "/usr/doc/*"
+diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
+index 70d8a4a..53c2924 100644
+--- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
++++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bbappend
+@@ -3,12 +3,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.10:${THISDIR}/linux-yocto-3.10:${
+ COMPATIBLE_MACHINE .= "|akita|c7x0|collie|poodle|spitz|tosa"
+ 
+ # Zaurus machines need kernel size-check.
+-KERNEL_IMAGE_MAXSIZE_akita = "1294336"
+-KERNEL_IMAGE_MAXSIZE_c7x0 = "1294336"
+-KERNEL_IMAGE_MAXSIZE_collie = "1048576"
+-KERNEL_IMAGE_MAXSIZE_poodle = "1294336"
+-KERNEL_IMAGE_MAXSIZE_spitz = "1294336"
+-KERNEL_IMAGE_MAXSIZE_tosa = "1294336"
++KERNEL_IMAGE_MAXSIZE_akita = "1264"
++KERNEL_IMAGE_MAXSIZE_c7x0 = "1264"
++KERNEL_IMAGE_MAXSIZE_collie = "1024"
++KERNEL_IMAGE_MAXSIZE_poodle = "1264"
++KERNEL_IMAGE_MAXSIZE_spitz = "1264"
++KERNEL_IMAGE_MAXSIZE_tosa = "1264"
+ 
+ KMACHINE_akita = "akita"
+ KMACHINE_c7x0 = "c7x0"
+-- 
+1.9.1
 
-hardcoding /usr can be removed.
-
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_git.bb b/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
-> new file mode 100644
-> index 0000000..7415993
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
-> @@ -0,0 +1,14 @@
-> +require ${BPN}.inc
-> +
-> +SRC_URI += "file://0001-linux-dpdk-remove-unnecessary-include-path.patch"
-> +
-> +SRCREV  = "${AUTOREV}"
-> +#8f4f080625e2db810da3f13770ba418c72b08ede will support --with-sdk-install-path
-> +PV = "0.2+git${SRCPV}"
-> +
-> +PACKAGECONFIG[platform_linux_generic] = "--with-platform=linux-generic,,openssl,libcrypto"
-> +#need meta-intel layer's common/recipes-extended/dpdk/dpdk recipe
-> +PACKAGECONFIG[platform_linux_dpdk] = '--with-platform=linux-dpdk --with-sdk-install-path="${STAGING_EXECPREFIXDIR}",,dpdk,'
-> +PACKAGECONFIG[platform_linux_keystone2] = "--with-platform=linux-keystone2,,,"
-> +
-> +inherit autotools
 
