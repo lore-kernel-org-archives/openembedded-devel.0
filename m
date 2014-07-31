@@ -1,26 +1,40 @@
-Return-Path: <Matthieu.CRAPET@ingenico.com>
-Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
-	by mail.openembedded.org (Postfix) with ESMTP id C305A65C93
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 466EF601A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 12:42:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.01,772,1400018400"; d="scan'208";a="55832589"
-Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
-	by antispam1.usr.ingenico.loc with ESMTP; 31 Jul 2014 14:42:47 +0200
-Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
-	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 31 Jul 2014 14:42:47 +0200
-Received: from u56.usr.ingenico.loc (10.23.7.56) by
-	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
-	id 14.3.174.1; Thu, 31 Jul 2014 14:42:46 +0200
-From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Jul 2014 14:42:39 +0200
-Message-ID: <1406810559-10578-1-git-send-email-Matthieu.Crapet@ingenico.com>
-X-Mailer: git-send-email 1.9.2
-In-Reply-To: <20140731100745.GW16445@jama>
-References: <20140731100745.GW16445@jama>
+	Thu, 31 Jul 2014 13:09:48 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id f8so9404283wiw.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Jul 2014 06:09:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=UuJhcIb4Uig9euVrLNSNXriuFXoakJfasHHRmO/uRc4=;
+	b=T9Np2N5NU3+F+3Nncg0XE5IfBUuWx0FaMZc55X3MPqvKegoj3vjlbXj837Yolu3AP2
+	0NG8OQdm8rT5dumjHsghSu92hTVgVuxNWp1oNzuddpUpOLekqK9nzOIdnGfUlvEKXnDT
+	bHhgPLm/3dxxBYyUkeF5I41nJRq0QlXVN6NwZWA0u1IBnBHZpncs/+HQQjUojwuWT46C
+	BAMYm2aSOzKBzRQoTmEC+9SFleohPfjv5Sdou3u+JsP32eC4RNp/9EfFdzZDdsrhNZSq
+	L5fpczE1wplyyfnAbwPOCOMQbvAn/S3ZmqIJzR7nIpe4izyrOoSEcbI+eEFJ8I5DtC0Q
+	dCvQ==
+X-Received: by 10.194.78.243 with SMTP id e19mr16285068wjx.119.1406812187707; 
+	Thu, 31 Jul 2014 06:09:47 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	gc8sm20492234wic.3.2014.07.31.06.09.45 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 31 Jul 2014 06:09:46 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 31 Jul 2014 15:10:10 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140731131010.GX16445@jama>
+References: <1406803267-2669-1-git-send-email-b40869@freescale.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3] jq: upgrade to 1.4
+In-Reply-To: <1406803267-2669-1-git-send-email-b40869@freescale.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: YangHaibo <b40869@freescale.com>
+Subject: Re: [meta-webserver][PATCH v2] fcgi: integrate fcgi-2.4.0 and add OML license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,73 +48,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 12:42:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Jul 2014 13:09:54 -0000
+X-Groupsio-MsgNum: 51347
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yTwVabqJa5IUz21H"
+Content-Disposition: inline
 
-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
----
- .../jq/files/automake-once-fix.patch               | 29 ----------------------
- .../recipes-devtools/jq/{jq_1.3.bb => jq_1.4.bb}   |  5 ++--
- 2 files changed, 2 insertions(+), 32 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
- rename meta-oe/recipes-devtools/jq/{jq_1.3.bb => jq_1.4.bb} (79%)
+--yTwVabqJa5IUz21H
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch b/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
-deleted file mode 100644
-index 0a1d1a2..0000000
---- a/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--Upstream-Status: Applied
--https://github.com/stedolan/jq/commit/f0d1c39b5bbb4ccc517773eb635ba7f38ec7da1a
--
--Fixes build with automake-1.14
--
--diff --git a/configure.ac b/configure.ac
--index 76a49a9..d6d2d38 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -4,7 +4,7 @@ AC_INIT([jq], [1.3], [mu@netsoc.tcd.ie],
-- dnl Created autoconf implementation thompson@dtosolutions, 26NOV12
-- AC_PREREQ([2.61])
-- AC_CONFIG_AUX_DIR([config])
---AM_INIT_AUTOMAKE([parallel-tests foreign])
--+AM_INIT_AUTOMAKE([parallel-tests foreign -Wall])
-- AM_SILENT_RULES([yes])
-- AC_PROG_CC
-- AC_PROG_CC_STDC
--@@ -66,7 +66,6 @@ AC_SUBST([BUNDLER], ["$bundle_cmd"])
-- 
-- dnl AC_CONFIG_MACRO_DIR([m4])
-- AC_CONFIG_HEADERS(config.h)
---AM_INIT_AUTOMAKE([-Wall])
-- AC_CONFIG_FILES([Makefile])
-- AC_OUTPUT
-- 
---- 
--1.8.5.4
--
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.3.bb b/meta-oe/recipes-devtools/jq/jq_1.4.bb
-similarity index 79%
-rename from meta-oe/recipes-devtools/jq/jq_1.3.bb
-rename to meta-oe/recipes-devtools/jq/jq_1.4.bb
-index c58b472..6e50803 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.3.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.4.bb
-@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=244a1fb9cf472474a062d67069dec653"
- DEPENDS = "flex-native bison-native"
- 
- SRC_URI = "http://stedolan.github.io/${BPN}/download/source/${BP}.tar.gz \
--           file://automake-once-fix.patch \
- "
--SRC_URI[md5sum] = "26081b05d22525eca5cbdd8f9f4db17d"
--SRC_URI[sha256sum] = "623f23c36abfc1d96d85020cf421b56f90a229d566f26a4a0d3e8536244bfed7"
-+SRC_URI[md5sum] = "e3c75a4f805bb5342c9f4b3603fb248f"
-+SRC_URI[sha256sum] = "998c41babeb57b4304e65b4eb73094279b3ab1e63801b6b4bddd487ce009b39d"
- 
- inherit autotools
- 
--- 
-2.0.0
+On Thu, Jul 31, 2014 at 06:41:07PM +0800, YangHaibo wrote:
+> ---
+>  meta-oe/licenses/OML                               | 28 ++++++++++++++++=
+++++++
+>  meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 16 +++++++++++++
+>  .../fcgi/files/Fix_EOF_not_declared_issue.patch    | 17 +++++++++++++
+>  3 files changed, 61 insertions(+)
+>  create mode 100644 meta-oe/licenses/OML
+>  create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
+>  create mode 100644 meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_de=
+clared_issue.patch
 
+In general I would prefer "fcgi" as BPN instead of "files" directory for
+a bit faster lookup.
 
+> diff --git a/meta-oe/licenses/OML b/meta-oe/licenses/OML
+> new file mode 100644
+> index 0000000..7e6bdfd
+> --- /dev/null
+> +++ b/meta-oe/licenses/OML
+> @@ -0,0 +1,28 @@
+> +This FastCGI application library source and object code (the
+> +"Software") and its documentation (the "Documentation") are
+> +copyrighted by Open Market, Inc ("Open Market").  The following terms
+> +apply to all files associated with the Software and Documentation
+> +unless explicitly disclaimed in individual files.
+> +
+> +Open Market permits you to use, copy, modify, distribute, and license
+> +this Software and the Documentation for any purpose, provided that
+> +existing copyright notices are retained in all copies and that this
+> +notice is included verbatim in any distributions.  No written
+> +agreement, license, or royalty fee is required for any of the
+> +authorized uses.  Modifications to this Software and Documentation may
+> +be copyrighted by their authors and need not follow the licensing
+> +terms described here.  If modifications to this Software and
+> +Documentation have new licensing terms, the new terms must be clearly
+> +indicated on the first page of each file where they apply.
+> +
+> +OPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE
+> +SOFTWARE OR THE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY
+> +WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  IN
+> +NO EVENT SHALL OPEN MARKET BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY
+> +DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE OR THE
+> +DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR
+> +CONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR
+> +LOST DATA, EVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF
+> +SUCH DAMAGES.  THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS".
+> +OPEN MARKET HAS NO LIABILITY IN CONTRACT, TORT, NEGLIGENCE OR
+> +OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE DOCUMENTATION.
+> diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb b/meta-webser=
+ver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
+> new file mode 100644
+> index 0000000..ceb5909
+> --- /dev/null
+> +++ b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "FastCGI is a protocol for interfacing interactive progr=
+ams with a web server."
+> +HOMEPAGE =3D "http://www.fastcgi.com"
+> +LICENSE =3D "OML"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.TERMS;md5=3De3aacac3a647af6e7e31f18=
+1cda0a06a"
+> +
+> +SRC_URI =3D "http://fossies.org/linux/www/fcgi-2.4.0.tar.gz \
+> +           file://Fix_EOF_not_declared_issue.patch \
+> +"
+> +SRC_URI[md5sum] =3D "d15060a813b91383a9f3c66faf84867e"
+> +SRC_URI[sha256sum] =3D "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e=
+76d2b4402d3f05b9"
+> +
+> +S =3D "${WORKDIR}/${BPN}-${PV}/"
+> +
+> +inherit autotools
+> +
+> +PARALLEL_MAKE =3D ""
+> diff --git a/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_=
+issue.patch b/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_i=
+ssue.patch
+> new file mode 100644
+> index 0000000..b4cf080
+> --- /dev/null
+> +++ b/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_issue.p=
+atch
+> @@ -0,0 +1,17 @@
+> +Upstream-Status: Pending
+> +
+> +Fix EOF not declared issue, following is the error log.
+> +fcgio.cpp:70:72: error: 'EOF' was not declared in this scope
+> +              if (FCGX_PutStr(pbase(), plen, this->fcgx) !=3D plen) retu=
+rn EOF;
+> +
+> +Signed-off-by: Yang Haibo <b40869@freescale.com>
+> +--- fcgi-ori/libfcgi/fcgio.cpp	2014-07-28 18:01:00.000000000 +0800
+> ++++ fcgi-2.4.0/libfcgi/fcgio.cpp	2014-07-28 18:01:22.000000000 +0800
+> +@@ -22,6 +22,7 @@
+> + #define DLLAPI  __declspec(dllexport)
+> + #endif
+> +=20
+> ++#include <stdio.h>
+> + #include <limits.h>
+> + #include "fcgio.h"
+> +=20
+> --=20
+> 1.9.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--yTwVabqJa5IUz21H
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPaQDIACgkQN1Ujt2V2gBzGBACghy55bZrl2X+AL6Y/SiA8OfOC
+jCIAn1wPSvzK3ftcg3h5vPi1E7bz8vUT
+=dP39
+-----END PGP SIGNATURE-----
+
+--yTwVabqJa5IUz21H--
