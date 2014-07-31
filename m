@@ -1,38 +1,41 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 099A97097D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id CAC8E70983
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 09:39:07 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id n3so957288wiv.4
+	Thu, 31 Jul 2014 10:07:21 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so2477391wgh.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 02:39:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=OUNIbGMoMvJ/S+JixtxRu/BEV2XupayNDJXzJE47xaY=;
-	b=HRUY01XW0KnQSqXznshbDy6qYUpRhzTMIjOkjdD37D5a9RQTvKBoq/8UHLg4ufQPH8
-	fPxdxIdpgmSKhNzkocyZKjjBeTJaD/lPsfERCD4CEGg63/IDANH1GFB4gWqgI6wvTxm+
-	y3G0mX1ORaiqX4/h8KSdkhMGKR2FRwHRrYoMEw7ZJvERxBnyVU4QbOrIviR9SaXcjVK0
-	Hx+A7K2fOqEAVb7I2QYeJ6eDS41dKDwISRCp5L3H5MkBKwuJVJJv0i6mFV6K11w3skAX
-	dk7o0f8k+IecqGx9+H9qRDqajMjnddxVmVTINqDTBhqmfjD6tr5okgPAR+1shQjKkzy/
-	2dyA==
-X-Gm-Message-State: ALoCoQkQFKMaUiKsaWAcIIlQWMgHoZKLOUVnPO+T1nKzXgnO76DTyiZFdXr/QHHt23dXAjM9GL31
-X-Received: by 10.194.134.70 with SMTP id pi6mr15224506wjb.1.1406799546263;
-	Thu, 31 Jul 2014 02:39:06 -0700 (PDT)
+	Thu, 31 Jul 2014 03:07:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=WtcdPM9MKAMBrJd5wxeUNZhq4lC+ukbkr+QvxFWDYYk=;
+	b=EDyvAOLwdoADuczDjTofXpDEYfSWx1ySoJoDFlYRY+1wylTdEHq70jhsBh7BrgWslM
+	nLh3H1Bhk4EIbxnek7xZDnoHVIGnSvwKvq6CsGPK1V2z97uCqvrVwG2yjiJnVRyvpqCB
+	Qo9gvujbM/sH1JWsaUB5D7oC7H94+s/ZF+JnWVztctKVzcmBf/XYMqZW4EOZYeMZ2J8k
+	HHBgyIHQpbUvgJeYGjCWgcnwXeRl0EBJWGqldwmdr+P8HwMcCeHpMmCBcdgARZp40Hz3
+	2gBHLSn2GE5ArJaxTbP5acVXzyO8etdN62mxeyhmjquY2AuLmulLd+pI9wXE3znMEKj9
+	gKRw==
+X-Received: by 10.180.38.51 with SMTP id d19mr14478618wik.10.1406801242661;
+	Thu, 31 Jul 2014 03:07:22 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ge8sm15413292wib.4.2014.07.31.03.07.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 31 Jul 2014 03:07:21 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 31 Jul 2014 12:07:45 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140731100745.GW16445@jama>
+References: <1406637609-27046-1-git-send-email-Matthieu.Crapet@ingenico.com>
+	<20140730122758.GN16445@jama>
+	<8672BB614B4CCA40A6B3BDD6FD82050BAA134DD7@COSNADEXC13.usr.ingenico.loc>
 MIME-Version: 1.0
-Received: by 10.216.76.5 with HTTP; Thu, 31 Jul 2014 02:38:46 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <CAMKF1sq3ravDmn6dKzJXhNSEz8aZ6E7iROnW7tL1t7m4u9Eqzg@mail.gmail.com>
-References: <CAK18fxEwnZdq5nObukmqOCahN6p7JcLRbctDzS2-tJjqALMDCw@mail.gmail.com>
-	<CAMKF1sq3ravDmn6dKzJXhNSEz8aZ6E7iROnW7tL1t7m4u9Eqzg@mail.gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Thu, 31 Jul 2014 12:38:46 +0300
-Message-ID: <CAK18fxHeWbDzPpgaerHoZCA1uF04mE-eb8w2d6hT_Apt=O8kCQ@mail.gmail.com>
-To: openembedded <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe] Issues while building gpsd
+In-Reply-To: <8672BB614B4CCA40A6B3BDD6FD82050BAA134DD7@COSNADEXC13.usr.ingenico.loc>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] jq: upgrade to 1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 09:39:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 31 Jul 2014 10:07:29 -0000
+X-Groupsio-MsgNum: 51342
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="vRjLMflJ/YJvC+Q3"
+Content-Disposition: inline
 
-On Wed, Jul 30, 2014 at 8:00 PM, Khem Raj <raj.khem@gmail.com> wrote:
+--vRjLMflJ/YJvC+Q3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Wed, Jul 30, 2014 at 5:56 AM, Andrei Gherzan <andrei@gherzan.ro> wrote:
-> > | //usr/lib/libpthread.so.0: undefined reference to
-> `__uname@GLIBC_PRIVATE'
-> > | //usr/lib/libpthread.so.0: undefined reference to
-> > `__getrlimit@GLIBC_PRIVATE'
-> > | collect2: error: ld returned 1 exit status
-> > | //usr/lib/libpthread.so.0: undefined reference to
-> `__uname@GLIBC_PRIVATE'
-> > | //usr/lib/libpthread.so.0: undefined reference to
-> > `__getrlimit@GLIBC_PRIVATE'
-> > | collect2: error: ld returned 1 exit status
->
-> well gpsd's own build system seems to be not so cross compile
-> friendly. Figure out why it decided to poke
-> at your host thread library instead of one from target sysroot
->
+On Thu, Jul 31, 2014 at 08:56:04AM +0000, Matthieu CRAPET wrote:
+> Martin,
+>=20
+> Sorry I forgot a git diff. Please replace with patch v2 in master-next.
+> Thanks for your work.
 
-Ok. Thanks. Hoped somebody already saw this before. No luck.
+Was it sent with -M? It doesn't look so.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
--- 
-*Andrei Gherzan*
-m: +40.744.478.414 |  f: +40.31.816.28.12
+--vRjLMflJ/YJvC+Q3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPaFXEACgkQN1Ujt2V2gBzc8ACglT1iK2dhezx0ZOzwGzIZznnh
+7XUAoKxJH1EGi2Ix6pIVpvesAKCeWEhx
+=LgTs
+-----END PGP SIGNATURE-----
+
+--vRjLMflJ/YJvC+Q3--
