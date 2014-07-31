@@ -1,38 +1,26 @@
-Return-Path: <B40869@freescale.com>
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2lp0241.outbound.protection.outlook.com [207.46.163.241])
-	by mail.openembedded.org (Postfix) with ESMTP id E355A709B3
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id C305A65C93
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Jul 2014 10:49:13 +0000 (UTC)
-Received: from BN1PR0301MB0756.namprd03.prod.outlook.com (25.160.78.150) by
-	BN1PR0301MB0755.namprd03.prod.outlook.com (25.160.78.15) with Microsoft
-	SMTP Server (TLS) id 15.0.995.14; Thu, 31 Jul 2014 10:49:12 +0000
-Received: from BN1PR0301MB0756.namprd03.prod.outlook.com ([25.160.78.150]) by
-	BN1PR0301MB0756.namprd03.prod.outlook.com ([25.160.78.150]) with
-	mapi id 15.00.0995.014; Thu, 31 Jul 2014 10:49:12 +0000
-From: "B40869@freescale.com" <B40869@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] meta-oe: Add OML lincence and recipe for fastcgi
-Thread-Index: AQHPrKk37c4d4KdEZ0a1Jqg/7PO+QJu6AJ6M
-Date: Thu, 31 Jul 2014 10:49:11 +0000
-Message-ID: <1406804276758.51849@freescale.com>
-References: <1406801673-15255-1-git-send-email-b40869@freescale.com>
-In-Reply-To: <1406801673-15255-1-git-send-email-b40869@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [192.88.158.211]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:
-x-forefront-prvs: 0289B6431E
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(6009001)(377454003)(189002)(199002)(377424004)(107046002)(110136001)(85306003)(85852003)(66066001)(106356001)(2351001)(76482001)(95666004)(99286002)(105586002)(15975445006)(77096002)(19580395003)(83072002)(107886001)(21056001)(101416001)(106116001)(54356999)(50986999)(76176999)(83322001)(46102001)(15395725005)(92726001)(74662001)(74502001)(87936001)(20776003)(79102001)(36756003)(77982001)(80022001)(81542001)(86362001)(15202345003)(31966008)(16601075003)(92566001)(4396001)(19580405001)(81342001)(575784001)(2656002)(64706001);
-	DIR:OUT; SFP:; SCL:1; SRVR:BN1PR0301MB0755;
-	H:BN1PR0301MB0756.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; LANG:en; 
+	Thu, 31 Jul 2014 12:42:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.01,772,1400018400"; d="scan'208";a="55832589"
+Received: from cosnadexc22.usr.ingenico.loc ([10.31.4.222])
+	by antispam1.usr.ingenico.loc with ESMTP; 31 Jul 2014 14:42:47 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC22.usr.ingenico.loc (10.31.4.222) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Thu, 31 Jul 2014 14:42:47 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.3.174.1; Thu, 31 Jul 2014 14:42:46 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 31 Jul 2014 14:42:39 +0200
+Message-ID: <1406810559-10578-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
+In-Reply-To: <20140731100745.GW16445@jama>
+References: <20140731100745.GW16445@jama>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-oe][PATCH] meta-oe: Add OML lincence and recipe for fastcgi
+Subject: [meta-oe][PATCH v3] jq: upgrade to 1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,125 +34,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Jul 2014 10:49:20 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 31 Jul 2014 12:42:49 -0000
+Content-Type: text/plain
 
-Send a new patch: =0A=
-[meta-webserver][PATCH v2] fcgi: integrate fcgi-2.4.0 and add OML license f=
-ile=0A=
-________________________________________=0A=
-From: YangHaibo <b40869@freescale.com>=0A=
-Sent: Thursday, July 31, 2014 6:14 PM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Cc: Yang Haibo-B40869=0A=
-Subject: [meta-oe][PATCH] meta-oe: Add OML lincence and recipe for fastcgi=
-=0A=
-=0A=
-Fastcgi version: 2.4.0=0A=
-=0A=
-Upstream-Status: Submitted [openembedded-devel@lists.openembedded.org]=0A=
-=0A=
-Signed-off-by: Yang Haibo <b40869@freescale.com>=0A=
----=0A=
- meta-oe/licenses/OML                               | 28 ++++++++++++++++++=
-++++=0A=
- meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 16 +++++++++++++=0A=
- .../fcgi/files/Fix_EOF_not_declared_issue.patch    | 15 ++++++++++++=0A=
- 3 files changed, 59 insertions(+)=0A=
- create mode 100644 meta-oe/licenses/OML=0A=
- create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
- create mode 100644 meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_decl=
-ared_issue.patch=0A=
-=0A=
-diff --git a/meta-oe/licenses/OML b/meta-oe/licenses/OML=0A=
-new file mode 100644=0A=
-index 0000000..7e6bdfd=0A=
---- /dev/null=0A=
-+++ b/meta-oe/licenses/OML=0A=
-@@ -0,0 +1,28 @@=0A=
-+This FastCGI application library source and object code (the=0A=
-+"Software") and its documentation (the "Documentation") are=0A=
-+copyrighted by Open Market, Inc ("Open Market").  The following terms=0A=
-+apply to all files associated with the Software and Documentation=0A=
-+unless explicitly disclaimed in individual files.=0A=
-+=0A=
-+Open Market permits you to use, copy, modify, distribute, and license=0A=
-+this Software and the Documentation for any purpose, provided that=0A=
-+existing copyright notices are retained in all copies and that this=0A=
-+notice is included verbatim in any distributions.  No written=0A=
-+agreement, license, or royalty fee is required for any of the=0A=
-+authorized uses.  Modifications to this Software and Documentation may=0A=
-+be copyrighted by their authors and need not follow the licensing=0A=
-+terms described here.  If modifications to this Software and=0A=
-+Documentation have new licensing terms, the new terms must be clearly=0A=
-+indicated on the first page of each file where they apply.=0A=
-+=0A=
-+OPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE=0A=
-+SOFTWARE OR THE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY=0A=
-+WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  IN=0A=
-+NO EVENT SHALL OPEN MARKET BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY=0A=
-+DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE OR THE=0A=
-+DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR=0A=
-+CONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR=0A=
-+LOST DATA, EVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF=0A=
-+SUCH DAMAGES.  THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS".=0A=
-+OPEN MARKET HAS NO LIABILITY IN CONTRACT, TORT, NEGLIGENCE OR=0A=
-+OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE DOCUMENTATION.=0A=
-diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb b/meta-webserve=
-r/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
-new file mode 100644=0A=
-index 0000000..ceb5909=0A=
---- /dev/null=0A=
-+++ b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
-@@ -0,0 +1,16 @@=0A=
-+DESCRIPTION =3D "FastCGI is a protocol for interfacing interactive program=
-s with a web server."=0A=
-+HOMEPAGE =3D "http://www.fastcgi.com"=0A=
-+LICENSE =3D "OML"=0A=
-+LIC_FILES_CHKSUM =3D "file://LICENSE.TERMS;md5=3De3aacac3a647af6e7e31f181c=
-da0a06a"=0A=
-+=0A=
-+SRC_URI =3D "http://fossies.org/linux/www/fcgi-2.4.0.tar.gz \=0A=
-+           file://Fix_EOF_not_declared_issue.patch \=0A=
-+"=0A=
-+SRC_URI[md5sum] =3D "d15060a813b91383a9f3c66faf84867e"=0A=
-+SRC_URI[sha256sum] =3D "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e76=
-d2b4402d3f05b9"=0A=
-+=0A=
-+S =3D "${WORKDIR}/${BPN}-${PV}/"=0A=
-+=0A=
-+inherit autotools=0A=
-+=0A=
-+PARALLEL_MAKE =3D ""=0A=
-diff --git a/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_is=
-sue.patch b/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_iss=
-ue.patch=0A=
-new file mode 100644=0A=
-index 0000000..f382142=0A=
---- /dev/null=0A=
-+++ b/meta-webserver/recipes-fcgi/fcgi/files/Fix_EOF_not_declared_issue.pat=
-ch=0A=
-@@ -0,0 +1,15 @@=0A=
-+Fix EOF not declared issue=0A=
-+=0A=
-+Error like:=0A=
-+fcgio.cpp:70:72: error: 'EOF' was not declared in this scope=0A=
-+              if (FCGX_PutStr(pbase(), plen, this->fcgx) !=3D plen) return=
- EOF;=0A=
-+--- fcgi-ori/libfcgi/fcgio.cpp 2014-07-28 18:01:00.000000000 +0800=0A=
-++++ fcgi-2.4.0/libfcgi/fcgio.cpp       2014-07-28 18:01:22.000000000 +0800=
-=0A=
-+@@ -22,6 +22,7 @@=0A=
-+ #define DLLAPI  __declspec(dllexport)=0A=
-+ #endif=0A=
-+=0A=
-++#include <stdio.h>=0A=
-+ #include <limits.h>=0A=
-+ #include "fcgio.h"=0A=
-+=0A=
---=0A=
-1.9.2=0A=
-=0A=
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ .../jq/files/automake-once-fix.patch               | 29 ----------------------
+ .../recipes-devtools/jq/{jq_1.3.bb => jq_1.4.bb}   |  5 ++--
+ 2 files changed, 2 insertions(+), 32 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
+ rename meta-oe/recipes-devtools/jq/{jq_1.3.bb => jq_1.4.bb} (79%)
+
+diff --git a/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch b/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
+deleted file mode 100644
+index 0a1d1a2..0000000
+--- a/meta-oe/recipes-devtools/jq/files/automake-once-fix.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-Upstream-Status: Applied
+-https://github.com/stedolan/jq/commit/f0d1c39b5bbb4ccc517773eb635ba7f38ec7da1a
+-
+-Fixes build with automake-1.14
+-
+-diff --git a/configure.ac b/configure.ac
+-index 76a49a9..d6d2d38 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -4,7 +4,7 @@ AC_INIT([jq], [1.3], [mu@netsoc.tcd.ie],
+- dnl Created autoconf implementation thompson@dtosolutions, 26NOV12
+- AC_PREREQ([2.61])
+- AC_CONFIG_AUX_DIR([config])
+--AM_INIT_AUTOMAKE([parallel-tests foreign])
+-+AM_INIT_AUTOMAKE([parallel-tests foreign -Wall])
+- AM_SILENT_RULES([yes])
+- AC_PROG_CC
+- AC_PROG_CC_STDC
+-@@ -66,7 +66,6 @@ AC_SUBST([BUNDLER], ["$bundle_cmd"])
+- 
+- dnl AC_CONFIG_MACRO_DIR([m4])
+- AC_CONFIG_HEADERS(config.h)
+--AM_INIT_AUTOMAKE([-Wall])
+- AC_CONFIG_FILES([Makefile])
+- AC_OUTPUT
+- 
+--- 
+-1.8.5.4
+-
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.3.bb b/meta-oe/recipes-devtools/jq/jq_1.4.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/jq/jq_1.3.bb
+rename to meta-oe/recipes-devtools/jq/jq_1.4.bb
+index c58b472..6e50803 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.3.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.4.bb
+@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=244a1fb9cf472474a062d67069dec653"
+ DEPENDS = "flex-native bison-native"
+ 
+ SRC_URI = "http://stedolan.github.io/${BPN}/download/source/${BP}.tar.gz \
+-           file://automake-once-fix.patch \
+ "
+-SRC_URI[md5sum] = "26081b05d22525eca5cbdd8f9f4db17d"
+-SRC_URI[sha256sum] = "623f23c36abfc1d96d85020cf421b56f90a229d566f26a4a0d3e8536244bfed7"
++SRC_URI[md5sum] = "e3c75a4f805bb5342c9f4b3603fb248f"
++SRC_URI[sha256sum] = "998c41babeb57b4304e65b4eb73094279b3ab1e63801b6b4bddd487ce009b39d"
+ 
+ inherit autotools
+ 
+-- 
+2.0.0
+
 
