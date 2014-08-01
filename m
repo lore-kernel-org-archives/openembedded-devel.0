@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 528BD60438
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 354BC707BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Aug 2014 10:23:15 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so4021794wgh.2
+	Fri,  1 Aug 2014 10:23:36 +0000 (UTC)
+Received: by mail-ie0-f181.google.com with SMTP id rp18so5570218iec.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Aug 2014 03:23:16 -0700 (PDT)
+	Fri, 01 Aug 2014 03:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/vCs9RSADm89tkHphQEJWe6ihXkgdgsXVzX5yJKkKPI=;
-	b=rHmyy/kzA3dwSSfTWzC+mEiGo4Rp2Nj81AX+EFD4CGbq4srztkFqIJms7qsrD+8Yt9
-	/ZNGJnIU2LtniN46bw8khCO+VjDFR4sWozzwNmEI3SQyBJT2ftCYbHFmdPts8Da/RQ/z
-	mQU5y32CtX18S6bcl33hbNLRuXTulJbVM9jAAlOk545WHOo3TrqpEMTC5gPagIMGTPwl
-	jop1pQI+RJwSBq9vlFRfxngvr8AX7mk6lN1IR+rAbgHpuVFlpuQrwydZ3v9Cfunu0qni
-	+6+elaexzE8JkvBwWC1+kDrUKRSS97st6S1J1UlczClw7NX6B0FsRMnhPJSdd/4LEC1W
-	6M+w==
-X-Received: by 10.194.91.228 with SMTP id ch4mr6451445wjb.59.1406888595408;
-	Fri, 01 Aug 2014 03:23:15 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	gq4sm7306541wib.8.2014.08.01.03.23.14 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Aug 2014 03:23:14 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 1 Aug 2014 12:23:39 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140801102339.GB16445@jama>
-References: <1406887022-18508-1-git-send-email-koen@dominion.thruhere.net>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=StcX0ZPkPeGxWVQNf8xp2AXnIQi3yWSl8y3iW/+UhEQ=;
+	b=GfuE/Q6kXHcFWv/nagRvyiqSpHPf+qyoVQTkvn59Ef2YAFBSmVG0zz9wC31I9MSyq5
+	LuXRX9qiiFCZNcs/zdFTDIRhP/rsxw72G/NVzVnvvb94u+NNtWtnmHUPHLmTS98Pt0+n
+	Pim986ZzkCRgJETameJoTD06vYPVxzAEuXOcFPpMApCV7IMU6H0vqBowe0z7qDhgmEre
+	dK3xrS5b/btcurlbKNCLcvhgHsA8fmkXiUUc/IURFf1KBFnQGDfVUyl5s2VOx5MuEGL0
+	9Svgqy/cU2fhrsg3h3YUHKXt7Q83NrskoVvUo17wPJ9vIoD+he8YXzHWUFyT7mAmIgv1
+	5H/g==
 MIME-Version: 1.0
-In-Reply-To: <1406887022-18508-1-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-gnome][PATCH] libgnomekbd: fix S!=B
+X-Received: by 10.50.39.8 with SMTP id l8mr6090552igk.13.1406888617634; Fri,
+	01 Aug 2014 03:23:37 -0700 (PDT)
+Received: by 10.107.9.214 with HTTP; Fri, 1 Aug 2014 03:23:37 -0700 (PDT)
+In-Reply-To: <3353440.oUBJEHypqt@peggleto-mobl5.ger.corp.intel.com>
+References: <CALYKT1jXkq-Ci_gpLs4v4rn50P6UsVRQUL7pO2BrWd9V-==eaA@mail.gmail.com>
+	<3353440.oUBJEHypqt@peggleto-mobl5.ger.corp.intel.com>
+Date: Fri, 1 Aug 2014 19:23:37 +0900
+Message-ID: <CALYKT1gD5KrrS9bOtG9gY4NwzmXD0rfhk1oPQAPGX1zmF=jgeQ@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [boost]How can I develop a daemon which depends on boost?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,72 +44,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2014 10:23:16 -0000
-X-Groupsio-MsgNum: 51366
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XIT9+HGZgTFaGwcE"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Aug 2014 10:23:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
---XIT9+HGZgTFaGwcE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Paul,
 
-On Fri, Aug 01, 2014 at 11:57:02AM +0200, Koen Kooi wrote:
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->=20
-> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/me=
-ta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-> index e9ca2a7..0381192 100644
-> --- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-> @@ -6,9 +6,7 @@ SECTION =3D "x11/gnome/libs"
-> =20
->  DEPENDS =3D "gconf gtk+ glib-2.0 libxklavier"
+Thank you for your kindness!
 
-Please test these 2 as well:
+I will try with your method.
 
-meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.b=
-b:PNBLACKLIST[gnome-control-center] =3D "BROKEN: depends on broken libgnome=
-kbd"
-meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1=
-=2Ebb:PNBLACKLIST[gnome-settings-daemon] =3D "BROKEN: depends on broken lib=
-gnomekbd"
+Have a good day!
+Journeyer
 
-> =20
-> -PNBLACKLIST[libgnomekbd] =3D "BROKEN: wasn't updated to work with B!=3DS"
-> -
-> -inherit gnome
-> +inherit gnome autotools-brokensep
-> =20
->  SRC_URI[archive.md5sum] =3D "de32a6e3e3464b566eecdc4332bf34bd"
->  SRC_URI[archive.sha256sum] =3D "ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00=
-ffc3e70c088ca4ee7383d256"
-> --=20
-> 1.9.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---XIT9+HGZgTFaGwcE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+2014-08-01 18:37 GMT+09:00 Paul Eggleton <paul.eggleton@linux.intel.com>:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+> Hi Journeyer,
+>
+> On Friday 01 August 2014 16:55:24 Journeyer J. Joh wrote:
+> > I just submitted a question about how to include boost. Now I'd like to
+> ask
+> > another question - How can I develop a daemon which depends on boost?
+> >
+> > I believe firstly, I need to make boost be included into my binary image.
+> > Secondly I believe that I need to develop a daemon which compiles with
+> > boost library. Then how can I compile this daemon with boost library? The
+> > boost library doesn't exist when the compile is executed.
+>
+> This would be a build dependency, so simply add boost to DEPENDS. To help
+> answer your other question, since this will be (presumably) dynamically
+> linked
+> to your application, you don't need to do anything else because we detect
+> dynamic links between files within packages and add a runtime dependency
+> between the packages.
+>
+> As for generally how to add packages to an image, please see:
+>
+>
+> http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#usingpoky-extend-customimage
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
 
-iEYEARECAAYFAlPbaqsACgkQN1Ujt2V2gBw6wQCgkpt2uYPAOwQvph01z22JWoZi
-BQsAmwdOtkhwq5peGrIfKjiJ7I581xUI
-=9N50
------END PGP SIGNATURE-----
-
---XIT9+HGZgTFaGwcE--
