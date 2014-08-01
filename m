@@ -1,30 +1,28 @@
-Return-Path: <Yao.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 74CE365C70
+Return-Path: <lchristina26@hotmail.com>
+X-Greylist: delayed 307 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 01 Aug 2014 17:36:28 UTC
+Received: from BLU004-OMC4S9.hotmail.com (blu004-omc4s9.hotmail.com
+	[65.55.111.148])
+	by mail.openembedded.org (Postfix) with ESMTP id DBE0B609BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Aug 2014 16:05:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s71G5lh8029496
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Aug 2014 09:05:47 -0700 (PDT)
-Received: from [128.224.140.163] (128.224.140.163) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Fri, 1 Aug 2014 09:05:46 -0700
-Message-ID: <53DBBAC4.8040403@windriver.com>
-Date: Fri, 1 Aug 2014 12:05:24 -0400
-From: Yao Zhao <yao.zhao@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Fri,  1 Aug 2014 17:36:28 +0000 (UTC)
+Received: from BLU436-SMTP146 ([65.55.111.135]) by BLU004-OMC4S9.hotmail.com
+	with Microsoft SMTPSVC(7.5.7601.22712); 
+	Fri, 1 Aug 2014 10:31:22 -0700
+X-TMN: [4Svd16Z/4pXSp5Zk1X17lQY51waODYhx]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP146A07F73D628D357FEB9C0D6E70@phx.gbl>
+Received: from localhost.localdomain ([174.45.121.196]) by
+	BLU436-SMTP146.smtp.hotmail.com over TLS secured channel with
+	Microsoft SMTPSVC(8.0.9200.16384); Fri, 1 Aug 2014 10:31:20 -0700
+From: lchristina26 <lchristina26@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 1 Aug 2014 11:31:10 -0600
+X-Mailer: git-send-email 1.9.1
+X-OriginalArrivalTime: 01 Aug 2014 17:31:20.0513 (UTC)
+	FILETIME=[68702B10:01CFADAE]
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <20140801133505.GA702@windriver.com>
-	<1406903795-9767-1-git-send-email-yao.zhao@windriver.com>
-In-Reply-To: <1406903795-9767-1-git-send-email-yao.zhao@windriver.com>
-X-Originating-IP: [128.224.140.163]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH v2] add support for opendataplane
+Subject: [meta-oe][PATCH] 'meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,47 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2014 16:05:49 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 01 Aug 2014 17:36:33 -0000
+Content-Type: text/plain
 
-Hi,
+Signed-off-by: lchristina26 <lchristina26@hotmail.com>
+---
+ .../recipes-connectivity/cyassl/cyassl_3.1.0.bb    | 26 ++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
 
-Please hold on reviewing this.
-I think it needs more work and will repost it a bit later.
-
-Sorry about that.
-
-thanks,
-yao
-
-------------------------------------------------------------------------
-
-*From:* Zhao, Yao
-*Sent:* Friday, August 01, 2014 10:36AM
-*To:* openembedded-devel@lists.openembedded.org
-*Subject:* [oe] [meta-networking][PATCH v2] add support for opendataplane
-
-changes v2:
-1.change /usr to variable in 0.2 bb
-2.replace AUTOREV with current HEAD tag(which works)
-3.add more descriptions for dpdk build in commit message
-4.will send the 0001-linux-dpdk-remove-unnecessary-include-path.patch
-   to upstream.
-
-Yao Zhao (1):
-   add support for opendataplane
-
-  ...inux-dpdk-remove-unnecessary-include-path.patch | 29 ++++++++++++++++++++++
-  .../opendataplane/opendataplane.inc                | 21 ++++++++++++++++
-  .../opendataplane/opendataplane_0.2.bb             | 25 +++++++++++++++++++
-  .../opendataplane/opendataplane_git.bb             | 14 +++++++++++
-  4 files changed, 89 insertions(+)
-  create mode 100644 meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
-  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane.inc
-  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
-  create mode 100644 meta-networking/recipes-support/opendataplane/opendataplane_git.bb
-
-
+diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+new file mode 100644
+index 0000000..accc144
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "CyaSSL Embedded SSL Library"
++DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
++               optimized for embedded and RTOS environments. It can be \
++               Up to 20 times smaller than OpenSSL while still supporting \
++               a full TLS 1.2 client and server."
++HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
++BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
++SECTION = "libs/network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++PR = "r1"
++
++SRC_URI = "http://www.yassl.com/cyassl-${PV}.zip"
++
++
++SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
++SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++inherit autotools
++
++# Detect and build with correct endianness
++# CFLAGS += "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '', '-DBIG_ENDIAN_ORDER', d)}"
++
+-- 
+1.9.1
 
 
