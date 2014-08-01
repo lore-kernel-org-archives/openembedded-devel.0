@@ -1,31 +1,33 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id A101A60C19
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-la0-f52.google.com (mail-la0-f52.google.com
+	[209.85.215.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 85A986028A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Aug 2014 07:55:22 +0000 (UTC)
-Received: by mail-ig0-f170.google.com with SMTP id h3so3124269igd.3
+	Fri,  1 Aug 2014 08:03:02 +0000 (UTC)
+Received: by mail-la0-f52.google.com with SMTP id e16so2980329lan.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Aug 2014 00:55:24 -0700 (PDT)
+	Fri, 01 Aug 2014 01:03:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=pXWuuPIsEAHJHwPmQERLXJzMT53OToo0muE8v3q4sF0=;
-	b=zNnQjjei+/qXSQOO2zsBMUcrEr8Y6PvVOH13IaPvsGG4UITRCFksKNWaKh2jQTvYpp
-	pCzwIrDsVLWmPY5DhyBZazRCGYi+VoMX1R8NKxIUucaL885eF8507EXp0eJB6eD18OU0
-	DVZcFxOuOoXRrcnLxlYhszQjRCMcukVENSpHfU2yJFZ19toUCfzBj/gL9xo5K9n8oazz
-	7gUCPOLzjkwglQOt3FfFQaUV6XJlNK/1tR5X4ML5oxn4WEAXuzSUq6PFg2bjiszoXRI8
-	RduiFq/9RCkNj/+p4015FSuvOD3oz4wI3kF3z8cVqs+xLbMrommEL7+CDcvV3fFbBZNB
-	TLjQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=zKG8GwsMKAQPVBBsnDhUQjP7qMivvIy0kLC7k89Cn3o=;
+	b=sGIdhuzBHmq/dCeT43KTUBrLJn/IkRSG7aXug4Mn/rzAWM74qSZdvPbcd8cKDMZd7w
+	wFUk2D+80nJNC4qxxxzsXxNxQZtbaHc20RCkm7VvvLOeSuIk+BFFQpSmfQIYIfVWceIo
+	ip9XPuJiO6mpp6ZpHPrV8SzCiX8QzUjLaxO8z58Y4CSQqwwXcbz4TZV/rSe6/n6cmB6V
+	gWKM+YE7FPTmeGOos0QrMEd0tWXhF5Gs2RHmpbeKWLrC9G7ESmUttg1c5n89vvcgTkGH
+	oGGXiwZP6IC7qiqFUuwq9QMRWcG1S3rjjZTr7tDdX89/wL9/apXLYAyDu7lKZxVCy3Qc
+	ta9A==
 MIME-Version: 1.0
-X-Received: by 10.43.154.145 with SMTP id le17mr4798105icc.20.1406879724113;
-	Fri, 01 Aug 2014 00:55:24 -0700 (PDT)
-Received: by 10.107.9.214 with HTTP; Fri, 1 Aug 2014 00:55:24 -0700 (PDT)
-Date: Fri, 1 Aug 2014 16:55:24 +0900
-Message-ID: <CALYKT1jXkq-Ci_gpLs4v4rn50P6UsVRQUL7pO2BrWd9V-==eaA@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [boost]How can I develop a daemon which depends on boost?
+X-Received: by 10.112.161.72 with SMTP id xq8mr3474967lbb.18.1406880183481;
+	Fri, 01 Aug 2014 01:03:03 -0700 (PDT)
+Received: by 10.112.207.9 with HTTP; Fri, 1 Aug 2014 01:03:03 -0700 (PDT)
+In-Reply-To: <53DAC99F.6070701@mlbassoc.com>
+References: <1406846802-1311-1-git-send-email-andrea.adami@gmail.com>
+	<53DAC99F.6070701@mlbassoc.com>
+Date: Fri, 1 Aug 2014 10:03:03 +0200
+Message-ID: <CAAQYJAv97nF8AX9CKT5at+82gen1NhZnQ3tc5yJrz4ng=ypgYA@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH] kexecboot: remove trailing slash in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,26 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2014 07:55:23 -0000
+X-List-Received-Date: Fri, 01 Aug 2014 08:03:03 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi list,
+On Fri, Aug 1, 2014 at 12:56 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 2014-07-31 16:46, Andrea Adami wrote:
+>>
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+>> ---
+>>   meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+>> b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+>> index d0176c5..1fb5f0d 100644
+>> --- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+>> +++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+>> @@ -48,7 +48,7 @@ EXTRA_OECONF = "--enable-delay=2
+>> --enable-evdev-rate=1000,250"
+>>
+>>   do_install () {
+>>       install -d ${D}${bindir}
+>> -    install -m 0755 kexecboot ${D}${bindir}/
+>> +    install -m 0755 kexecboot ${D}${bindir}
+>>       install -d ${D}/proc
+>>       install -d ${D}/mnt
+>>       install -d ${D}/dev
+>>
+>
+> What is the reason for this change.  Using XXX/ is quite common
+> in OE recipes.
+>
 
-I just submitted a question about how to include boost. Now I'd like to ask
-another question - How can I develop a daemon which depends on boost?
+Hi Gary,
 
-I believe firstly, I need to make boost be included into my binary image.
-Secondly I believe that I need to develop a daemon which compiles with
-boost library. Then how can I compile this daemon with boost library? The
-boost library doesn't exist when the compile is executed.
+thanks for reviewing, I recently spotted this slash and imho is just
+one extra unnecessary char.
 
-Thank you very much in advance! *^^*
+About the 'best practice' here, the POSIX synopsis seems not
+describing an ending slash for <target>
+http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cp.html
 
-Journeyer
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
+Cheers
+
+Andrea
+
+
+> --
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
