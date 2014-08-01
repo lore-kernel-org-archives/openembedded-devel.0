@@ -1,26 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id B9CBE65E08
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E207965E03
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Aug 2014 09:37:42 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP; 01 Aug 2014 02:37:43 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="366644064"
-Received: from pwarusav-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.170])
-	by FMSMGA003.fm.intel.com with ESMTP; 01 Aug 2014 02:34:32 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-Date: Fri, 01 Aug 2014 10:37:41 +0100
-Message-ID: <3353440.oUBJEHypqt@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.6-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <CALYKT1jXkq-Ci_gpLs4v4rn50P6UsVRQUL7pO2BrWd9V-==eaA@mail.gmail.com>
-References: <CALYKT1jXkq-Ci_gpLs4v4rn50P6UsVRQUL7pO2BrWd9V-==eaA@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [boost]How can I develop a daemon which depends on boost?
+	Fri,  1 Aug 2014 09:57:11 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id bs8so1035211wib.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Aug 2014 02:57:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=K8HRTRFKSgh3aVQ6W7qOGsjFjJKB6wo6rxf1kjScm18=;
+	b=LsLW4Ku23gDhKhYi+wZcvKvbXn5nKPzJNnFLwhG9vINwLw9aJCDynSC6ZU3KTNGHiU
+	NXgMrp13+I+3UqaMaxgeLAlAa2wLfSsnZlwD9KiriRwcX3LTwV7tzfZE1dHWyH8sY6VZ
+	WGojQkk0x+FbXU4UOPes4jfG4NPaSbSg8H3zY2Bp83/MIfOzBjPM9es2nis0IC/N08gN
+	vyj7mvnZwAurKgwiUc40aAiKO0rIyM+0/AbsFVmrHqrVDZ8d9eORYxraBYXzffLk4wmh
+	e2Pe+p+qAtgrByMr9KpiD0n8CelgDd4rMcTlJHFGNT6IVWH970WWYhyRzSjSRy4+C7uZ
+	99Tg==
+X-Gm-Message-State: ALoCoQl8OPTttPLAlqJhMqN6XrwvLqj3oDXcOrxYXvNeg6ZJtxoYuviRXEmeBDUkSjsqU7k1+l5T
+X-Received: by 10.180.221.133 with SMTP id qe5mr5072084wic.17.1406887029637;
+	Fri, 01 Aug 2014 02:57:09 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id
+	fb12sm19725551wjc.43.2014.08.01.02.57.08 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 01 Aug 2014 02:57:08 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Aug 2014 11:57:02 +0200
+Message-Id: <1406887022-18508-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-gnome][PATCH] libgnomekbd: fix S!=B
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,36 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Aug 2014 09:37:43 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 01 Aug 2014 09:57:19 -0000
 
-Hi Journeyer,
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-On Friday 01 August 2014 16:55:24 Journeyer J. Joh wrote:
-> I just submitted a question about how to include boost. Now I'd like to ask
-> another question - How can I develop a daemon which depends on boost?
-> 
-> I believe firstly, I need to make boost be included into my binary image.
-> Secondly I believe that I need to develop a daemon which compiles with
-> boost library. Then how can I compile this daemon with boost library? The
-> boost library doesn't exist when the compile is executed.
-
-This would be a build dependency, so simply add boost to DEPENDS. To help
-answer your other question, since this will be (presumably) dynamically linked
-to your application, you don't need to do anything else because we detect
-dynamic links between files within packages and add a runtime dependency
-between the packages.
-
-As for generally how to add packages to an image, please see:
-
-http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#usingpoky-extend-customimage
-
-Cheers,
-Paul
-
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+index e9ca2a7..0381192 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+@@ -6,9 +6,7 @@ SECTION = "x11/gnome/libs"
+ 
+ DEPENDS = "gconf gtk+ glib-2.0 libxklavier"
+ 
+-PNBLACKLIST[libgnomekbd] = "BROKEN: wasn't updated to work with B!=S"
+-
+-inherit gnome
++inherit gnome autotools-brokensep
+ 
+ SRC_URI[archive.md5sum] = "de32a6e3e3464b566eecdc4332bf34bd"
+ SRC_URI[archive.sha256sum] = "ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00ffc3e70c088ca4ee7383d256"
 -- 
+1.9.0
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
