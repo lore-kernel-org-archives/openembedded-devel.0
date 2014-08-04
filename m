@@ -1,41 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D7B5B60703
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id CAB3860438
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Aug 2014 16:14:12 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id d1so5419548wiv.1
+	Mon,  4 Aug 2014 17:24:10 +0000 (UTC)
+Received: by mail-we0-f175.google.com with SMTP id t60so8071472wes.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Aug 2014 09:14:12 -0700 (PDT)
+	Mon, 04 Aug 2014 10:24:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9USyO3FtygWWjWvBV38wMACcTZFyEuIS0jzXc3NfQ6o=;
-	b=VqJgtVY+6vb7W+ituXgXB7hOlCtj2g6C8/tvkBN7dq+8kMltZrQi835t0nrbX0kZTe
-	n9Xo/Bi3g6rQl0KCXiiVIxO9d8iydd5/UO+RJ7lDNrlc/MXaC/WxU81U7fidaNqSEtE2
-	u7EKtlpcxco6ejtO2L2z3QxpXwGgQcnI+sPFBSILUSDReHPm9j1pLnkREwMQDXuGs01R
-	bPiBlijQhHiZBeXz9Zj/K7u0LBZZ0fEQAOXjlxlJmMXIhQpI9Ugoot94WPe1KtryHzUW
-	3/IGlLLrB+7L98SzPhraMxl6bDeuGzquKtwAwy3r2xFh4KisOdgjxq4A0ysPw6pbz/Bw
-	gkxw==
-X-Received: by 10.180.88.167 with SMTP id bh7mr32187183wib.12.1407168852073;
-	Mon, 04 Aug 2014 09:14:12 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=us73u7726hIgjaQ4IGacXM7BeF4+VTG2AWuouIqr3mY=;
+	b=yT8ZlmEg5ESdBlEObxwp/Ng1nwskIMs1zBSeEGj4lUwJKMm5QwORAySp/Qrx2CI7fR
+	h92HbDLIuKAtecLMV41YuKSrk8Glpgavg86u+HGW3LDI4/QoYoC168iXsOEUoZ64IgMc
+	RNXse8ryOhmEjrnXEAx77rTzzvBoAzXRpgBwPtLg/y/l7+FebddUW3m0rmTbjhMveN5Q
+	lPqYg1KSgFG1Ac4kJsMB+Hz8j41DsFjQ7tr9JAVAMdpvrUjlncwbbLyYysz0JcSMWfIZ
+	50bdrwXltz2hTgFu8SEj2yvjKMN/sGw/Za1wPtBQS6AZB1U8M/xyCHI9ff+5lab6tRLh
+	mRug==
+X-Received: by 10.180.189.4 with SMTP id ge4mr32014633wic.25.1407173047923;
+	Mon, 04 Aug 2014 10:24:07 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	h3sm44540489wjn.10.2014.08.04.09.14.10 for <multiple recipients>
+	ca8sm44934611wjc.0.2014.08.04.10.24.06 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Aug 2014 09:14:10 -0700 (PDT)
+	Mon, 04 Aug 2014 10:24:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Aug 2014 18:14:38 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140804161438.GC2465@jama>
-References: <1406900096-31368-1-git-send-email-koen@dominion.thruhere.net>
-	<1406900096-31368-7-git-send-email-koen@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <1406900096-31368-7-git-send-email-koen@dominion.thruhere.net>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-gnome][PATCH 07/10] abiword: remove blacklist, libgsf and sv have been fixed
+Date: Mon,  4 Aug 2014 19:24:32 +0200
+Message-Id: <1407173072-3558-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.4
+Subject: [meta-qt5][PATCH] qtimageformats: Make the dependencies deterministic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,98 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 16:14:23 -0000
-X-Groupsio-MsgNum: 51408
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GZVR6ND4mMseVXL/"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Aug 2014 17:24:17 -0000
 
---GZVR6ND4mMseVXL/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* jasper and libwebp were autodetected from sysroot
 
-On Fri, Aug 01, 2014 at 03:34:53PM +0200, Koen Kooi wrote:
-> Also disable collab service due to gnutls build errors.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtimageformats.inc                  | 16 ++++++++++-
+ ...ats.pro-Make-the-dependencies-determinist.patch | 31 ++++++++++++++++++++++
+ 2 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
 
-abiword also depends on libwmf-native which is still broken
+diff --git a/recipes-qt/qt5/qtimageformats.inc b/recipes-qt/qt5/qtimageformats.inc
+index b5edf1b..9306070 100644
+--- a/recipes-qt/qt5/qtimageformats.inc
++++ b/recipes-qt/qt5/qtimageformats.inc
+@@ -1,8 +1,22 @@
+ require qt5.inc
+ 
+-DEPENDS += "qtbase tiff"
++DEPENDS += "qtbase"
+ ALLOW_EMPTY_${PN} = "1"
+ 
++SRC_URI += "file://0001-qtimageformats.pro-Make-the-dependencies-determinist.patch"
++
++PACKAGECONFIG ?= "libtiff"
++# Currently we don't have recipe for libmng, but lock it anyway so qtimageformats stay deterministic even when libmng is introduced
++PACKAGECONFIG[jasper] = ",,jasper"
++PACKAGECONFIG[libmng] = ",,libmng"
++PACKAGECONFIG[libtiff] = ",,tiff"
++PACKAGECONFIG[libwebp] = ",,libwebp"
++
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'libmng', 'CONFIG+=OE_LIBMNG_ENABLED', '', d)}"
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'jasper', 'CONFIG+=OE_JASPER_ENABLED', '', d)}"
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'libtiff', 'CONFIG+=OE_LIBTIFF_ENABLED', '', d)}"
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'libwebp', 'CONFIG+=OE_LIBWEBP_ENABLED', '', d)}"
++
+ # older copyright year than what e.g. qtbase is using now
+ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
+                     file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
+diff --git a/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+new file mode 100644
+index 0000000..d12851f
+--- /dev/null
++++ b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+@@ -0,0 +1,31 @@
++From f309b1e149764a193cbfc694973083e70b5f4a7e Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 4 Aug 2014 19:19:05 +0200
++Subject: [PATCH] qtimageformats.pro: Make the dependencies deterministic
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ qtimageformats.pro | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/qtimageformats.pro b/qtimageformats.pro
++index 8382e5c..63d13ce 100644
++--- a/qtimageformats.pro
+++++ b/qtimageformats.pro
++@@ -1,9 +1,9 @@
++ requires(qtHaveModule(gui))
++ 
++ load(configure)
++-qtCompileTest(jasper)
++-qtCompileTest(libmng)
++-qtCompileTest(libtiff)
++-qtCompileTest(libwebp)
+++OE_JASPER_ENABLED:qtCompileTest(jasper)
+++OE_LIBMNG_ENABLED:qtCompileTest(libmng)
+++OE_LIBTIFF_ENABLED:qtCompileTest(libtiff)
+++OE_LIBWEBP_ENABLED:qtCompileTest(libwebp)
++ 
++ load(qt_parts)
++-- 
++2.0.4
++
+-- 
+2.0.4
 
-| checking for XML_ParserFree in -lexpat... yes
-| checking for freetype-config... /home/jenkins/oe/world/shr-core/tmp-eglib=
-c/sysroots/x86_64-linux/usr/bin/freetype-config
-| checking for FT_Init_FreeType in -lfreetype... yes
-| checking ft2build.h usability... no
-| checking ft2build.h presence... no
-| checking for ft2build.h... no
-| configure: error: * * * freetype(2) is required * * *
-| Configure failed. The contents of all config.log files follows to aid deb=
-ugging
-| ERROR: oe_runconf failed
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-eglibc/work/x86_64-linux/libwmf-native/0.2.8.4-r3/t=
-emp/log.do_configure.22003)
-NOTE: recipe libwmf-native-0.2.8.4-r3: task do_configure: Failed
-ERROR: Task 28608 (virtual:native:/home/jenkins/oe/world/shr-core/meta-open=
-embedded/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb, do_configure) f=
-ailed with exit code '1'
 
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->=20
-> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gno=
-me/recipes-gnome/abiword/abiword_3.0.0.bb
-> index 7cd6c65..eb4bba2 100644
-> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
-> @@ -14,8 +14,6 @@ SRC_URI =3D "http://www.abisource.com/downloads/${BPN}/=
-${PV}/source/${BP}.tar.gz \
->             file://autogen-common.sh \
->  "
-> =20
-> -PNBLACKLIST[abiword] =3D "BROKEN: depends on broken wv -> libgsf"
-> -
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc5edcc3ccd864b19004d14e9c1c9a=
-26a"
-> =20
->  SRC_URI[md5sum] =3D "8d9c41cff3a8fbef8d0c835c65600e65"
-> @@ -26,7 +24,7 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.g=
-etVar('PV',1).split('.')[1]
-> =20
->  inherit autotools-brokensep pkgconfig
-> =20
-> -PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp collab-backe=
-nd-service"
-> +PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp"
->  PACKAGECONFIG[spell] =3D "--enable-spell,--disable-spell,enchant"
->  PACKAGECONFIG[collab-backend-xmpp] =3D "--enable-collab-backend-xmpp,--d=
-isable-collab-backend-xmpp,libgsf libxml2 loudmouth"
->  PACKAGECONFIG[collab-backend-tcp] =3D "--enable-collab-backend-tcp,--dis=
-able-collab-backend-tcp,libgsf libxml2"
-> --=20
-> 1.9.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---GZVR6ND4mMseVXL/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPfsW4ACgkQN1Ujt2V2gBw9HACfRAE0elaljgSa2Gc+c2o2z02/
-DM0AnRJ1Ljg/zi+AvciD6/JmPWacAri8
-=/PUi
------END PGP SIGNATURE-----
-
---GZVR6ND4mMseVXL/--
