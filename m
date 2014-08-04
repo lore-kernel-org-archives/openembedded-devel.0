@@ -1,37 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
-	[209.85.220.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E05B865DAC
+Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 51F1F65CAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Aug 2014 18:39:25 +0000 (UTC)
-Received: by mail-vc0-f182.google.com with SMTP id hy4so11831025vcb.41
+	Mon,  4 Aug 2014 18:45:59 +0000 (UTC)
+Received: by mail-yk0-f174.google.com with SMTP id q9so4368774ykb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Aug 2014 11:39:26 -0700 (PDT)
+	Mon, 04 Aug 2014 11:46:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GQsP1zKhvhESXYN3pVDAPBpN0NmLTm7jTqkaO1osE08=;
-	b=qN/tJHGcXMUgJNcxnwY0AzvPtzbLNXFyqmMGTdsu3ikVjaCon2Eg908TyGEUIRXiRU
-	gIgqYAfMcRehdaMjg9aN7whI4faJoKrrIkI5jUi1Ic2W6gK9q5CmJST/ds04JV4WAwH/
-	Yh0mUOekwsAPGj9kZWiNQvTt1aaVeEkFaWbDcCNPRPieEktoz1FqITCAI8n4iqLayqCT
-	LqbLDh5k8Zhe6I/FyMROhYlWGmvFupW+otaS9ZBVvCEeY8cB8/1WZqruwLU3WHX8dygX
-	zpXMeJwW1BClhTnQpCkTcUHglXQiv1TqfUDWb2gzfFopDp4n3HhjnwhANqtThi/ZkI9J
-	6UWg==
-X-Received: by 10.52.179.161 with SMTP id dh1mr3508552vdc.78.1407177566694;
-	Mon, 04 Aug 2014 11:39:26 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id
-	u18sm45672879vdi.20.2014.08.04.11.39.24 for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Mon, 04 Aug 2014 11:39:25 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Aug 2014 15:38:35 -0300
-Message-Id: <1407177515-15086-2-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ApdB9kzSl4o/XkY3vEroVLqBqEiqsRL0GTtWWkFeWK8=;
+	b=rAi4EYPGwwZ47IpcO51hJEGgRbZpdOwcxTb+EepMC8P7d5y6JV2C9Aj07pcB+U5tpK
+	Z7+NQre0k7cvQO+46TVhFGYfdzd9LYcK7sErwsG55KgOrkGtgjKLfEOWjfvP5eW3ELWl
+	oYAsY8cM1Xz6fNVgn7b/xEhUkX41PuaUmeeKXo5DeAbE2LD39ooG3zc2cm3BVQSASOxJ
+	OsotqI0kFj8QTFIzNW+p5NKjdo8VMtk1npXiMBEBR4qrwrMLEJU5mJ1ycZ4MvWcKdHlA
+	cZtVR7Fe8fCVOh7S3Oj2OvsnqAsAj2fS/Y/flhVMEneP4SNA0D4tqd13XDLtTpmzsC7x
+	1uQA==
+MIME-Version: 1.0
+X-Received: by 10.236.198.204 with SMTP id v52mr41272081yhn.105.1407177960774; 
+	Mon, 04 Aug 2014 11:46:00 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Mon, 4 Aug 2014 11:46:00 -0700 (PDT)
 In-Reply-To: <1407177515-15086-1-git-send-email-otavio@ossystems.com.br>
 References: <1407177515-15086-1-git-send-email-otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] evtest: Update to 0e14da9 revision
+Date: Mon, 4 Aug 2014 15:46:00 -0300
+X-Google-Sender-Auth: TfF8ox3s2F5JMu2dZZhZee2-sCY
+Message-ID: <CAP9ODKrhpyVAXkrCeEk2yqjvwm1G34aqF-sP__fQvQ8yyMCJyA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: Re: [meta-oe][PATCH 1/2] evtest: Stop using Cgit based archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 18:39:32 -0000
+X-List-Received-Date: Mon, 04 Aug 2014 18:46:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This updates to 1.31, plus fixes available in the Git tree.
+Hello Martin,
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/evtest/evtest_git.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Mon, Aug 4, 2014 at 3:38 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> The Cgit based archive may change depending on the order of images,
+> timestamp and like causing checksum to change.
+>
+> This patch uses the same 1.25 version but fetching it using Git, so no
+> code changes are done.
+>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-diff --git a/meta-oe/recipes-support/evtest/evtest_git.bb b/meta-oe/recipes-support/evtest/evtest_git.bb
-index e4e4347..6fbb77d 100644
---- a/meta-oe/recipes-support/evtest/evtest_git.bb
-+++ b/meta-oe/recipes-support/evtest/evtest_git.bb
-@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- DEPENDS = "libxml2"
- 
--SRCREV = "67f3dfefb0b5708ad5b692f19c1a3a5b135264ca"
-+SRCREV = "0e14da978ea906c7fdaf90f54f798a542e79ce8f"
- SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git"
- 
--PV = "1.25+${SRCPV}"
-+PV = "1.31+${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
+Please queue this update for Daisy as well, as this is failing to
+fetch currently (cced other Daisy maintainers).
+
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
 -- 
-1.7.10.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
