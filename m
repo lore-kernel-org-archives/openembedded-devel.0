@@ -1,37 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D54E760809
+Return-Path: <bobadeshrikant@gmail.com>
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F95465CA8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Aug 2014 07:07:39 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id d1so4452177wiv.7
+	Mon,  4 Aug 2014 09:11:45 +0000 (UTC)
+Received: by mail-pd0-f179.google.com with SMTP id ft15so9359247pdb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Aug 2014 00:07:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=K2oxo3qkegiXGXxZtCEmMhtB4V4el0SsZXuG79woM8A=;
-	b=IIbNxTeGCqPiEyItUupcNHiuL1tfO4E9eEn/3yQ8MU8MBHTCi3UhDyRGgrU6PBE5+R
-	36JGF2oaP13F8cB6rrEj24I9W5S4W0zpCsCUDIZyhMnjsvFLj6XWqdCtcjzFPlAqeOlh
-	O662sQQOqpAWUHy2UDBHDSFU+V7g9zVIv7d/n9LsqXBmp0dRHrf1kaP4mxSO6uFZ2/tV
-	OW5lxZzx8OIk1lNmcLqwKIF+YvaHKA3cQCqAWeRCtNRQ49pxCOGsUb7t8e/Y4b7nbO4P
-	Rlo5j1x2wjpvdWhcm/sYWc5MZC5IgRqE7oKSQ4eWxAvXmSx2kVjERECIeD5uwG7YXD0V
-	jV0w==
-X-Gm-Message-State: ALoCoQlMasoD/7WvKEb4j6PlcGBY6CEjanVgvudfM16PeHnQ3SzweiH65TO3KM4EI/LCS0XDZoZ+
-X-Received: by 10.194.87.134 with SMTP id ay6mr27667080wjb.84.1407136060099;
-	Mon, 04 Aug 2014 00:07:40 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id lg7sm41354912wjb.9.2014.08.04.00.07.38
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Mon, 04 Aug 2014 00:07:39 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	Mon, 04 Aug 2014 02:11:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=S3QxebvrrtJ+oQSLZ8eagHIr2O5mN8pdwqrTyBYh9gE=;
+	b=j0jyiY8i+XGpD+ru2cExsyVTW8iLrrT7Es2LYpmShsijGJaALPUCfei58zhGxnb6RP
+	tcaSFLPhpIQPpcAcOyKog2Or0bRA1viCctUpQyi1VmcoM6I24U46MTsQjC5NeWKxnqLv
+	zR1OUjk/vwutR9rVm6Lf6c5pAJQycAQsAA6lcl++wMdvLt/LEFLjpcnHDHzY2/w68Yvc
+	pNnLfGPAswKAIhnuC7+Y7R++JYKX5kGTBX36LsnXhY3RcJKAsLJXgiChzqxjEn2A3URt
+	P4xZAg0fmLXY7ScGqczvs9vdQ2OivrnM45woTq2i/06lX0c2wuHEcp8sRuGTd1O++bHy
+	2ang==
+X-Received: by 10.68.104.66 with SMTP id gc2mr22765673pbb.17.1407143507225;
+	Mon, 04 Aug 2014 02:11:47 -0700 (PDT)
+Received: from localhost.localdomain ([139.181.35.34])
+	by mx.google.com with ESMTPSA id
+	co3sm16755674pbb.89.2014.08.04.02.11.45 for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 04 Aug 2014 02:11:46 -0700 (PDT)
+From: Shrikant Bobade <bobadeshrikant@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Aug 2014 09:07:34 +0200
-Message-Id: <1407136054-29043-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] libusbg: update to latest git and fix S!=B
+Date: Mon,  4 Aug 2014 14:42:57 +0530
+Message-Id: <1407143577-22390-1-git-send-email-bobadeshrikant@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+Subject: [PATCH] dnsmasq: fix parallel make failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,81 +43,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 07:07:41 -0000
+X-List-Received-Date: Mon, 04 Aug 2014 09:11:52 -0000
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+
+The dnsmasq target depends on .configured and $(objs). .configured does an rm
+-f *.o. Yet the only thing telling make to build the .configured target before
+the $(objs) target was the order of the dependencies of the dnsmasq target. We
+can't rely on that order when doing a paralllel make build, so add an explicit
+rule to enforce that order.
+
+Signed-off-by: Christopher Larson <kergoth@gmail.com>
+Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
 ---
- .../libusbg/0001-Fix-out-of-tree-builds.patch      | 39 ++++++++++++++++++++++
- meta-oe/recipes-support/libusbg/libusbg_git.bb     |  8 ++---
- 2 files changed, 43 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/libusbg/libusbg/0001-Fix-out-of-tree-builds.patch
+ .../recipes-support/dnsmasq/dnsmasq.inc            |    1 +
+ .../dnsmasq/files/parallel-make.patch              |   18 ++++++++++++++++++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/parallel-make.patch
 
-diff --git a/meta-oe/recipes-support/libusbg/libusbg/0001-Fix-out-of-tree-builds.patch b/meta-oe/recipes-support/libusbg/libusbg/0001-Fix-out-of-tree-builds.patch
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index e57ab72..1955d6f 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -11,6 +11,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
+            file://init \
+            file://dnsmasq.conf \
+            file://dnsmasq.service \
++           file://parallel-make.patch \
+ "
+ 
+ inherit update-rc.d systemd
+diff --git a/meta-networking/recipes-support/dnsmasq/files/parallel-make.patch b/meta-networking/recipes-support/dnsmasq/files/parallel-make.patch
 new file mode 100644
-index 0000000..6be49fb
+index 0000000..3d1040c
 --- /dev/null
-+++ b/meta-oe/recipes-support/libusbg/libusbg/0001-Fix-out-of-tree-builds.patch
-@@ -0,0 +1,39 @@
-+From 6118c6ec1291a5c731aa8d4f0c1eb8cce43d47ad Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Mon, 4 Aug 2014 09:04:08 +0200
-+Subject: [PATCH] Fix out-of-tree builds
++++ b/meta-networking/recipes-support/dnsmasq/files/parallel-make.patch
+@@ -0,0 +1,18 @@
++The dnsmasq target depends on .configured and $(objs). .configured does an rm
++-f *.o. Yet the only thing telling make to build the .configured target before
++the $(objs) target was the order of the dependencies of the dnsmasq target. We
++can't rely on that order when doing a paralllel make build, so add an explicit
++rule to enforce that order.
 +
-+The include flag should point to the source directory, not the build
-+directory.
++Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 +
-+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-+Upstream-status: Submitted [https://github.com/libusbg/libusbg/pull/9]
-+---
-+ examples/Makefile.am | 2 +-
-+ src/Makefile.am      | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
++--- dnsmasq-2.68.orig/Makefile
+++++ dnsmasq-2.68/Makefile
++@@ -139,6 +139,8 @@ bloatcheck : $(BUILDDIR)/dnsmasq_baselin
++	@rm -f *.o
++	@touch $@
 +
-+diff --git a/examples/Makefile.am b/examples/Makefile.am
-+index f9f9407..ef4f81e 100644
-+--- a/examples/Makefile.am
-++++ b/examples/Makefile.am
-+@@ -1,5 +1,5 @@
-+ bin_PROGRAMS = show-gadgets gadget-acm-ecm 
-+ gadget_acm_ecm_SOURCES = gadget-acm-ecm.c
-+ show_gadgets_SOURCES = show-gadgets.c
-+-AM_CPPFLAGS=-I../include/
-++AM_CPPFLAGS=-I$(top_srcdir)/include/
-+ AM_LDFLAGS=-L../src/ -lusbg
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index d955a4c..2f71366 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -1,4 +1,4 @@
-+ lib_LTLIBRARIES = libusbg.la
-+ libusbg_la_SOURCES = usbg.c
-+ libusbg_la_LDFLAGS = -version-info 0:1:0
-+-AM_CPPFLAGS=-I../include/
-++AM_CPPFLAGS=-I$(top_srcdir)/include/
-+-- 
-+1.9.0
-+
-diff --git a/meta-oe/recipes-support/libusbg/libusbg_git.bb b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-index 280983b..97d60a6 100644
---- a/meta-oe/recipes-support/libusbg/libusbg_git.bb
-+++ b/meta-oe/recipes-support/libusbg/libusbg_git.bb
-@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- inherit autotools
- 
--PNBLACKLIST[libusbg] = "BROKEN: Doesn't work with B!=S and nobody sent patch to fix it"
--
- PV = "0.1.0"
--SRCREV = "7e2b04363f319e8936a606bdb122dbde249a2f58"
--SRC_URI = "git://github.com/libusbg/libusbg.git"
-+SRCREV = "a826d136e0e8fa53815f1ba05893e6dd74208c15"
-+SRC_URI = "git://github.com/libusbg/libusbg.git \
-+           file://0001-Fix-out-of-tree-builds.patch \
-+          "
- 
- S = "${WORKDIR}/git"
- 
+++$(objs): .configured
+++
++ $(objs:.o=.c) $(hdrs):
++	ln -s $(top)/$(SRC)/$@ .
 -- 
-1.9.0
+1.7.9.5
 
 
