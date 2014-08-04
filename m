@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id B940460703
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D7B5B60703
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Aug 2014 16:10:42 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id m15so7773792wgh.15
+	Mon,  4 Aug 2014 16:14:12 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id d1so5419548wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Aug 2014 09:10:39 -0700 (PDT)
+	Mon, 04 Aug 2014 09:14:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=DBEcI/WR+K1yMDVqVBu3T/zDBQ69LF3EQ0iBpZEzJMU=;
-	b=PeZ7jSeepGzOJ/pbi7tmcvJvUYgvwyzD6tdnTY7J40IO18Y0eZUWzs1U/7GdhuB14i
-	D4kIxVZygA183TX1svMdcxhLic4Nk4WNSoDZToAsfxNcCSTHC+IkIKUm4x3ggjUADHJd
-	95O9LbTyCiGX1E+5LZozA9Th+U2VDU5nR5H06CizWKuF1kpdTTy1PKZKgUrtSIJWyKtB
-	DnVsfSSPdMQ79SywSh3Van64AOcpyyE4LXdGFYvKxmZtAVvHOCTL7syXbGxkojZvS0yE
-	bhdXE/QA3kPpEct2uSpr5Bawwx3OasHBmNmSt+/7tLz48ZDXA5k5+//u27BTiyg44Fig
-	V6gQ==
-X-Received: by 10.194.100.34 with SMTP id ev2mr32510953wjb.76.1407168637304;
-	Mon, 04 Aug 2014 09:10:37 -0700 (PDT)
+	bh=9USyO3FtygWWjWvBV38wMACcTZFyEuIS0jzXc3NfQ6o=;
+	b=VqJgtVY+6vb7W+ituXgXB7hOlCtj2g6C8/tvkBN7dq+8kMltZrQi835t0nrbX0kZTe
+	n9Xo/Bi3g6rQl0KCXiiVIxO9d8iydd5/UO+RJ7lDNrlc/MXaC/WxU81U7fidaNqSEtE2
+	u7EKtlpcxco6ejtO2L2z3QxpXwGgQcnI+sPFBSILUSDReHPm9j1pLnkREwMQDXuGs01R
+	bPiBlijQhHiZBeXz9Zj/K7u0LBZZ0fEQAOXjlxlJmMXIhQpI9Ugoot94WPe1KtryHzUW
+	3/IGlLLrB+7L98SzPhraMxl6bDeuGzquKtwAwy3r2xFh4KisOdgjxq4A0ysPw6pbz/Bw
+	gkxw==
+X-Received: by 10.180.88.167 with SMTP id bh7mr32187183wib.12.1407168852073;
+	Mon, 04 Aug 2014 09:14:12 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	f6sm44505761wja.25.2014.08.04.09.10.36 for <multiple recipients>
+	h3sm44540489wjn.10.2014.08.04.09.14.10 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Aug 2014 09:10:36 -0700 (PDT)
+	Mon, 04 Aug 2014 09:14:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 4 Aug 2014 18:11:03 +0200
+Date: Mon, 4 Aug 2014 18:14:38 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140804161103.GB2465@jama>
-References: <1406861456-16786-1-git-send-email-b40869@freescale.com>
+Message-ID: <20140804161438.GC2465@jama>
+References: <1406900096-31368-1-git-send-email-koen@dominion.thruhere.net>
+	<1406900096-31368-7-git-send-email-koen@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <1406861456-16786-1-git-send-email-b40869@freescale.com>
+In-Reply-To: <1406900096-31368-7-git-send-email-koen@dominion.thruhere.net>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: YangHaibo <b40869@freescale.com>
-Subject: Re: [meta-webserver][PATCH v3] integrate fcgi-2.4.0 and add OML license file
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [meta-gnome][PATCH 07/10] abiword: remove blacklist, libgsf and sv have been fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,160 +49,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Aug 2014 16:10:47 -0000
-X-Groupsio-MsgNum: 51407
+X-List-Received-Date: Mon, 04 Aug 2014 16:14:23 -0000
+X-Groupsio-MsgNum: 51408
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uZ3hkaAS1mZxFaxD"
+	protocol="application/pgp-signature"; boundary="GZVR6ND4mMseVXL/"
 Content-Disposition: inline
 
---uZ3hkaAS1mZxFaxD
+--GZVR6ND4mMseVXL/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 01, 2014 at 10:50:56AM +0800, YangHaibo wrote:
-> ---
->  meta-oe/licenses/OML                               | 28 ++++++++++++++++=
-++++++
->  .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch     | 17 +++++++++++++
->  meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 16 +++++++++++++
->  3 files changed, 61 insertions(+)
->  create mode 100644 meta-oe/licenses/OML
->  create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_dec=
-lared_issue.patch
->  create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
->=20
-> diff --git a/meta-oe/licenses/OML b/meta-oe/licenses/OML
-> new file mode 100644
-> index 0000000..7e6bdfd
-> --- /dev/null
-> +++ b/meta-oe/licenses/OML
-> @@ -0,0 +1,28 @@
-> +This FastCGI application library source and object code (the
-> +"Software") and its documentation (the "Documentation") are
-> +copyrighted by Open Market, Inc ("Open Market").  The following terms
-> +apply to all files associated with the Software and Documentation
-> +unless explicitly disclaimed in individual files.
-> +
-> +Open Market permits you to use, copy, modify, distribute, and license
-> +this Software and the Documentation for any purpose, provided that
-> +existing copyright notices are retained in all copies and that this
-> +notice is included verbatim in any distributions.  No written
-> +agreement, license, or royalty fee is required for any of the
-> +authorized uses.  Modifications to this Software and Documentation may
-> +be copyrighted by their authors and need not follow the licensing
-> +terms described here.  If modifications to this Software and
-> +Documentation have new licensing terms, the new terms must be clearly
-> +indicated on the first page of each file where they apply.
-> +
-> +OPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE
-> +SOFTWARE OR THE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY
-> +WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  IN
-> +NO EVENT SHALL OPEN MARKET BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY
-> +DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE OR THE
-> +DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR
-> +CONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR
-> +LOST DATA, EVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF
-> +SUCH DAMAGES.  THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS".
-> +OPEN MARKET HAS NO LIABILITY IN CONTRACT, TORT, NEGLIGENCE OR
-> +OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE DOCUMENTATION.
-> diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_i=
-ssue.patch b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_iss=
-ue.patch
-> new file mode 100644
-> index 0000000..b4cf080
-> --- /dev/null
-> +++ b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.pa=
-tch
-> @@ -0,0 +1,17 @@
-> +Upstream-Status: Pending
-> +
-> +Fix EOF not declared issue, following is the error log.
-> +fcgio.cpp:70:72: error: 'EOF' was not declared in this scope
-> +              if (FCGX_PutStr(pbase(), plen, this->fcgx) !=3D plen) retu=
-rn EOF;
-> +
-> +Signed-off-by: Yang Haibo <b40869@freescale.com>
-> +--- fcgi-ori/libfcgi/fcgio.cpp	2014-07-28 18:01:00.000000000 +0800
-> ++++ fcgi-2.4.0/libfcgi/fcgio.cpp	2014-07-28 18:01:22.000000000 +0800
-> +@@ -22,6 +22,7 @@
-> + #define DLLAPI  __declspec(dllexport)
-> + #endif
-> +=20
-> ++#include <stdio.h>
-> + #include <limits.h>
-> + #include "fcgio.h"
-> +=20
-> diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb b/meta-webser=
-ver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
-> new file mode 100644
-> index 0000000..ceb5909
-> --- /dev/null
-> +++ b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "FastCGI is a protocol for interfacing interactive progr=
-ams with a web server."
-> +HOMEPAGE =3D "http://www.fastcgi.com"
-> +LICENSE =3D "OML"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.TERMS;md5=3De3aacac3a647af6e7e31f18=
-1cda0a06a"
-> +
-> +SRC_URI =3D "http://fossies.org/linux/www/fcgi-2.4.0.tar.gz \
+On Fri, Aug 01, 2014 at 03:34:53PM +0200, Koen Kooi wrote:
+> Also disable collab service due to gnutls build errors.
 
-fcgi-2.4.0 -> ${BP}
+abiword also depends on libwmf-native which is still broken
 
-> +           file://Fix_EOF_not_declared_issue.patch \
-> +"
-> +SRC_URI[md5sum] =3D "d15060a813b91383a9f3c66faf84867e"
-> +SRC_URI[sha256sum] =3D "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e=
-76d2b4402d3f05b9"
-> +
-> +S =3D "${WORKDIR}/${BPN}-${PV}/"
-
-This is default, you can drop it.
-
-> +
-> +inherit autotools
-> +
-> +PARALLEL_MAKE =3D ""
-
-Fails in current master, you need to add foreign to AC_INIT_AUTOMAKE
-
-| Makefile.am: installing './INSTALL'
-| Makefile.am: error: required file './NEWS' not found
-| Makefile.am: error: required file './AUTHORS' not found
-| Makefile.am: error: required file './ChangeLog' not found
-| Makefile.am: installing './COPYING' using GNU General Public License v3 f=
-ile
-| Makefile.am:     Consider adding the COPYING file to the version control =
-system
-| Makefile.am:     for your code, to avoid questions about which license yo=
-ur project uses
-| automake: warning: autoconf input should be named 'configure.ac', not 'co=
-nfigure.in'
-| cgi-fcgi/Makefile.am:5: warning: 'CPPFLAGS' is a user variable, you shoul=
-d not override it;
-| cgi-fcgi/Makefile.am:5: use 'AM_CPPFLAGS' instead
-| examples/Makefile.am:14: warning: 'CPPFLAGS' is a user variable, you shou=
-ld not override it;
-| examples/Makefile.am:14: use 'AM_CPPFLAGS' instead
-| libfcgi/Makefile.am:4: warning: 'CPPFLAGS' is a user variable, you should=
- not override it;
-| libfcgi/Makefile.am:4: use 'AM_CPPFLAGS' instead
-| autoreconf: automake failed with exit status: 1
-| ERROR: autoreconf execution failed.
+| checking for XML_ParserFree in -lexpat... yes
+| checking for freetype-config... /home/jenkins/oe/world/shr-core/tmp-eglib=
+c/sysroots/x86_64-linux/usr/bin/freetype-config
+| checking for FT_Init_FreeType in -lfreetype... yes
+| checking ft2build.h usability... no
+| checking ft2build.h presence... no
+| checking for ft2build.h... no
+| configure: error: * * * freetype(2) is required * * *
+| Configure failed. The contents of all config.log files follows to aid deb=
+ugging
+| ERROR: oe_runconf failed
 | WARNING: exit code 1 from a shell command.
 | ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-eglibc/work/i586-oe-linux/fcgi/2.4.0-r0/temp/log.do=
-_configure.23481)
-NOTE: recipe fcgi-2.4.0-r0: task do_configure: Failed
-ERROR: Task 35 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-webs=
-erver/recipes-fcgi/fcgi/fcgi_2.4.0.bb, do_configure) failed with exit code =
-'1'
+s/oe/world/shr-core/tmp-eglibc/work/x86_64-linux/libwmf-native/0.2.8.4-r3/t=
+emp/log.do_configure.22003)
+NOTE: recipe libwmf-native-0.2.8.4-r3: task do_configure: Failed
+ERROR: Task 28608 (virtual:native:/home/jenkins/oe/world/shr-core/meta-open=
+embedded/meta-oe/recipes-extended/libwmf/libwmf_0.2.8.4.bb, do_configure) f=
+ailed with exit code '1'
 
-
+> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+> ---
+>  meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>=20
+> diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb b/meta-gno=
+me/recipes-gnome/abiword/abiword_3.0.0.bb
+> index 7cd6c65..eb4bba2 100644
+> --- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> +++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.0.bb
+> @@ -14,8 +14,6 @@ SRC_URI =3D "http://www.abisource.com/downloads/${BPN}/=
+${PV}/source/${BP}.tar.gz \
+>             file://autogen-common.sh \
+>  "
+> =20
+> -PNBLACKLIST[abiword] =3D "BROKEN: depends on broken wv -> libgsf"
+> -
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc5edcc3ccd864b19004d14e9c1c9a=
+26a"
+> =20
+>  SRC_URI[md5sum] =3D "8d9c41cff3a8fbef8d0c835c65600e65"
+> @@ -26,7 +24,7 @@ SHRT_VER =3D "${@d.getVar('PV',1).split('.')[0]}.${@d.g=
+etVar('PV',1).split('.')[1]
+> =20
+>  inherit autotools-brokensep pkgconfig
+> =20
+> -PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp collab-backe=
+nd-service"
+> +PACKAGECONFIG ??=3D "collab-backend-xmpp collab-backend-tcp"
+>  PACKAGECONFIG[spell] =3D "--enable-spell,--disable-spell,enchant"
+>  PACKAGECONFIG[collab-backend-xmpp] =3D "--enable-collab-backend-xmpp,--d=
+isable-collab-backend-xmpp,libgsf libxml2 loudmouth"
+>  PACKAGECONFIG[collab-backend-tcp] =3D "--enable-collab-backend-tcp,--dis=
+able-collab-backend-tcp,libgsf libxml2"
 > --=20
-> 1.9.2
+> 1.9.0
 >=20
 > --=20
 > _______________________________________________
@@ -211,16 +131,16 @@ erver/recipes-fcgi/fcgi/fcgi_2.4.0.bb, do_configure) failed with exit code =
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---uZ3hkaAS1mZxFaxD
+--GZVR6ND4mMseVXL/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPfsJcACgkQN1Ujt2V2gBxU9wCeMAM/sjhxLMq4tmAVZ0cvpDcK
-fSAAnApd0ZzbdP1D2MoJwMuzVfl3gBlx
-=cbm7
+iEYEARECAAYFAlPfsW4ACgkQN1Ujt2V2gBw9HACfRAE0elaljgSa2Gc+c2o2z02/
+DM0AnRJ1Ljg/zi+AvciD6/JmPWacAri8
+=/PUi
 -----END PGP SIGNATURE-----
 
---uZ3hkaAS1mZxFaxD--
+--GZVR6ND4mMseVXL/--
