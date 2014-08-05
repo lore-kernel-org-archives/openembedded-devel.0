@@ -1,35 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 79B0B65D57
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 1227365D59
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Aug 2014 11:14:17 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id f8so7763837wiw.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Aug 2014 04:14:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=b9sJfx2ZekOp73SDvmVg2H96oXpiMHcLFO+SYfmJYiU=;
-	b=tuQLs/db7ucDogOXOR5LJ6Tmfx88EEt5Hb7Zq9Pi3mmzSiayQvrwJ8K/bIv6Lw+7tv
-	dDJ9jNZ1cB8KnvPIE+Ic3CgUawQYCrqD+AUEIfkuK9lrVjEm9tZlyOM16xmq6wS/B9GJ
-	CklPYkG7Y6mQb64SNbf1Msa7F2azH/Zar7NXfx17HxR22eDtGHPwIF69kWat53fgajw4
-	5aCmNWZQc/KbzdkLDO7Taa3q9bT/dFsuRL48oEd3ACjBm5v6xB2nUxFJqSD66T1j6gY3
-	dTT32/BLXDeq3RJPBn/IIRPYXkPBElho1CGq5g9IP+7G6mvJH5yw4fFe+awSqYsr6pLd
-	fc+g==
-X-Received: by 10.194.84.69 with SMTP id w5mr5049435wjy.0.1407237257190;
-	Tue, 05 Aug 2014 04:14:17 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	td10sm6759444wic.10.2014.08.05.04.14.16 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 Aug 2014 04:14:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue,  5 Aug 2014 13:21:06 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 05 Aug 2014 06:21:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,804,1400050800"; d="scan'208";a="465149408"
+Received: from tskannan-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.122])
+	by azsmga001.ch.intel.com with ESMTP; 05 Aug 2014 06:21:05 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Aug 2014 13:14:42 +0200
-Message-Id: <1407237282-24497-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
-Subject: [meta-oe][PATCH] ltrace: add PV and PACKAGECONFIG for libunwind
+Date: Tue,  5 Aug 2014 14:20:42 +0100
+Message-Id: <e1023ee4e19fcc2f56733b3b4586ad9bda814ede.1407244194.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <cover.1407244194.git.paul.eggleton@linux.intel.com>
+References: <cover.1407244194.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1407244194.git.paul.eggleton@linux.intel.com>
+References: <cover.1407244194.git.paul.eggleton@linux.intel.com>
+Subject: [meta-webserver][PATCH 1/5] apache2: do not patch generated file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2014 11:14:22 -0000
+X-List-Received-Date: Tue, 05 Aug 2014 13:21:34 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+We already patch configure.ac and we're not bypassing autoreconf,
+so we don't need to patch configure as well.
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../ltrace/{ltrace-git => ltrace}/ltrace-0.7.2-unused-typedef.patch    | 0
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb                          | 3 +++
- 2 files changed, 3 insertions(+)
- rename meta-oe/recipes-devtools/ltrace/{ltrace-git => ltrace}/ltrace-0.7.2-unused-typedef.patch (100%)
+ .../apache2/apache2/apache-configure_perlbin.patch      | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace-git/ltrace-0.7.2-unused-typedef.patch b/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/ltrace/ltrace-git/ltrace-0.7.2-unused-typedef.patch
-rename to meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index 89f760a..77790b5 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -9,6 +9,7 @@ HOMEPAGE = "http://ltrace.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+index baa739f..c90279d 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
++++ b/meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+@@ -4,23 +4,6 @@
+ #
+ # Upstream-Status: Inappropriate [configuration]
  
-+PV = "7.2+git${SRCPV}"
- SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
- 
- DEPENDS = "elfutils"
-@@ -20,6 +21,8 @@ S = "${WORKDIR}/git"
- 
- inherit autotools
- 
-+PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
-+
- do_configure_prepend () {
- 	( cd ${S}; ./autogen.sh )
- }
+---- a/configure
+-+++ b/configure
+-@@ -22365,13 +22365,7 @@
+- #define APACHE_MPM_DIR "$MPM_DIR"
+- _ACEOF
+-
+--
+--perlbin=`$ac_aux_dir/PrintPath perl`
+--if test "x$perlbin" = "x"; then
+--    perlbin="/replace/with/path/to/perl/interpreter"
+--fi
+--
+--
+-+perlbin='/usr/bin/perl'
+-
+- BSD_MAKEFILE=no
+- ap_make_include=include
+ --- a/configure.in
+ +++ b/configure.in
+ @@ -638,10 +638,7 @@
 -- 
-2.0.4
+1.9.3
 
 
