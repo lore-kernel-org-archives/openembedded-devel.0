@@ -1,41 +1,42 @@
 Return-Path: <nilesh.kokane@mindastoneridge.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id B5C5360EFA
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 730F965F81
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Aug 2014 06:32:33 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id a1so451698wgh.35
+	Tue,  5 Aug 2014 06:37:52 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id k48so463336wev.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Aug 2014 23:32:34 -0700 (PDT)
+	Mon, 04 Aug 2014 23:37:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:cc:content-type;
-	bh=TuL0Wtggc5pZoHIzaJyZDcuxd4WIxmWVktRcEpb7qmY=;
-	b=A/Cg6gMrH4prVhZW1q7HysRmtX0k4Mz2HXw6Jrx/lYOO2XchuJiIt0a+jIRlU+hJ0J
-	Nn5Gfw/f6lQqczjh022NfPxqVTHxiT6ZCvJn4Z1V4RHlRJ7TQzc1fXvTJ2i8N5GJ+1RM
-	DilQuVp7P1gz6q63d6XufD51mwUBzKfMGXkoiGHudBP3b3RXDfj4GH3JVxNUvSF09HFN
-	SWqReiss+vlHPY/+yozoPNkpMlBNYpd9yy7LjR0unVWcXrEQxt+XyX5MywMPuUqXTDC8
-	FNDz+7kSedENc4CqkIUL27QirzZxlP4cYKdkMRc7C4aqN+ixWVxGmT4WvN7laxrt2q2N
-	v/MQ==
-X-Gm-Message-State: ALoCoQkvHyyCcHbF3EtFwazis5DLGJOfIyIfdK9iSosNofVlNXEvhOgnAXj1VG/dznVrV3RZXF/NBqP5/T7p4kajcrwr169fOSIefd3OOc0dorkV94tgXs9cOo1JejwWcb1D/j1m2ZM4
+	bh=cbLM5oFAwfcO2r0EjpJk3J/T4/NKHTHyQFV3awYIxvQ=;
+	b=Lkty96QtzRVGdCdtNvwINcr+Bo5RZc80aTvuJcyCpA42Or0EzRKAC/71+SSL5MpVWJ
+	QGS/a6KUE97AZRN41uiICWDxNgfeprLsQrAwfDz1v9YPT67QWwWST2VFtord2PAaSHVE
+	624nLssxYjUSAOKfMnBacXXLKhWxqdfcEtQ/DiS4niea5NfmHDBLJEJt5yEUthviQ5zU
+	IRjpGDrSqzZqz4WeiIy/yao6dlTeCh8h4FTB0VPzKGWr6CU9nX4CyjirFWLBr4M9CL/q
+	RmbajeX01PUP8ZnPsOVsMVQVVX8L9fNrVUW2/Dz9etMm7t0Rts6lqrwYHNSd8dm5/acx
+	b4yg==
+X-Gm-Message-State: ALoCoQkHLiEtmJsenj/rgn5zPGNe5y8j4L0gC3EW6Rlguy0+oRRVQreeKuDREznui4hsU9gtHjLMBdj8ahvwrgELiiefjGYBY3JKBwVD3ttFFjgOr7GY4peqQD/DzQjH+RahvZzt0uf4
 MIME-Version: 1.0
-X-Received: by 10.194.92.115 with SMTP id cl19mr2543352wjb.29.1407220354104;
-	Mon, 04 Aug 2014 23:32:34 -0700 (PDT)
-Received: by 10.216.205.66 with HTTP; Mon, 4 Aug 2014 23:32:33 -0700 (PDT)
-In-Reply-To: <CAHURY+2Epg2CNJRD6Evpp99TnyWTQSLOjUxnczSqNsTXz58Jpg@mail.gmail.com>
+X-Received: by 10.180.186.98 with SMTP id fj2mr36964469wic.83.1407220674024;
+	Mon, 04 Aug 2014 23:37:54 -0700 (PDT)
+Received: by 10.216.205.66 with HTTP; Mon, 4 Aug 2014 23:37:53 -0700 (PDT)
+In-Reply-To: <CAHURY+31pAdZWUa3vycim_XHxf_MH-HKkZsWAj=hPHd9i24yzg@mail.gmail.com>
 References: <CAHURY+15jB-vQQakQSfjL7WsNjpQyQy6Nq-dcUVPKJ11SNWF7w@mail.gmail.com>
 	<20140802202908.GB23556@haswell>
 	<CAHURY+2S57BPgcsbNZjnpLQs4f-x7k=hbNqVnrT6yS0dwQuy0A@mail.gmail.com>
 	<5290215.bXYc1MYsDd@comet>
 	<CAHURY+2uwGvwmp=FHiTmTASRRRi4_TjtCHdFmiFQzOtnU2TwAQ@mail.gmail.com>
 	<CAHURY+2Epg2CNJRD6Evpp99TnyWTQSLOjUxnczSqNsTXz58Jpg@mail.gmail.com>
-Date: Tue, 5 Aug 2014 12:02:33 +0530
-Message-ID: <CAHURY+31pAdZWUa3vycim_XHxf_MH-HKkZsWAj=hPHd9i24yzg@mail.gmail.com>
+	<CAHURY+31pAdZWUa3vycim_XHxf_MH-HKkZsWAj=hPHd9i24yzg@mail.gmail.com>
+Date: Tue, 5 Aug 2014 12:07:53 +0530
+Message-ID: <CAHURY+2Fdmdk+ed2VrJoW_3tKnv_dvZ242CDdxpU2+cjVQWOtg@mail.gmail.com>
 From: Nilesh Kokane <nilesh.kokane@mindastoneridge.com>
 To: Thomas Senyk <thomas.senyk@pelagicore.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Sandeep Gound <sandeepg@mindastoneridge.com>,
-	openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: bitbake meta-toolchain error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -50,11 +51,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2014 06:32:48 -0000
-X-Groupsio-MsgNum: 51417
-Content-Type: multipart/related; boundary=047d7bfcf88e542c9504ffdc05ac
+X-List-Received-Date: Tue, 05 Aug 2014 06:38:00 -0000
+X-Groupsio-MsgNum: 51418
+Content-Type: multipart/related; boundary=001a11c263d865724704ffdc18e8
 
---047d7bfcf88e542c9504ffdc05ac
+--001a11c263d865724704ffdc18e8
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -89,170 +90,128 @@ log.do_configure,  http://pastebin.com/5wHqWdGD
 do_compile,         http://pastebin.com/ZFCJa8aL
 
 
-With this setup and without DISTRO_FEATURE_remove I gave i bitbake and was
+With this setup and  DISTRO_FEATURE_remove I gave i bitbake and was
 encountered with the errors as posted http://pastebin.com/V2fMF785
 
 
 
 Please suggest to resolve this issue.
 
+Thanks
+Nilesh Kokane
 
 
-
-
-
-On Mon, Aug 4, 2014 at 3:39 PM, Nilesh Kokane <
+On Tue, Aug 5, 2014 at 12:02 PM, Nilesh Kokane <
 nilesh.kokane@mindastoneridge.com> wrote:
 
-> Hi Thomas
+> Hi Thomas,
+>
+> I'd like to update with the following.
+>
+> The local config was altered based on the url mentioned in the previous
+> mail
+>
+> And QT_CONFIG_FLAGS_append_mx6 =3D "${@base_contains('DISTRO_FEATURES',
+> 'x11',*'-xcb'*,  -eglfs', d)}"
 >
 >
-> I'd like to update you with the following exp.
+> -no-eglfs was replaced with the -xcb in the base contents as it accepts
+> only 5 args
+>
+>
+> And  DISTRO_FEATURE was removed from the local.conf.Also the
+> bblayers.conf was tweaked accordingly.
 >
 >
 >
-> This should be solved by qtbase_%.bbappend in meta-fsl-arm.
-> You'll see that there is code for:
->         a. taking the right platform plugin
->                 (the line with "-eglfs" in it)*
+> with this the bitbake core-image-minimal failed with the following logs
+>
+> baitbake log :http://pastebin.com/V2fMF785
+>
+> qtbase:
+>
+> log.do_configure,  http://pastebin.com/5wHqWdGD
+> do_compile,         http://pastebin.com/ZFCJa8aL
 >
 >
->
->  In /meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend
->
-> QT_CONFIG_FLAGS_append_mx6 =3D "${@base_contains('DISTRO_FEATURES', 'x11'=
-,
-> *'-xcb'*, ' -no-eglfs', ' -eglfs', d)}"
->
-> I added -xcb
->
->         b. setup for eglvivante.h
->                 (the lines around -DEGL_API_FB=3D1
->
-> I didnt got the line -DEGL_API_FB=3D1 , so i didn't alter this, and left
-> unchanged
->
-> (*this line could be improved by adding -xcb and -no-xcb accordingly...)
->
-> Open qtbase.inc (from meta-qt5) and remove the "-silent"
->
-> In  /bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtbase.in
->
->
-> QT_CONFIG_FLAGS +=3D " \
->     -reduce-relocations \
->     -shared \
->   *  -silent \*
->     -no-pch \
->     -no-rpath \
->     -pkg-config \
->     ${EXTRA_OECONF} \
-> "
->
-> -silent was deleted. and was found only in QT_CONFIG_FLAGS
->
-> Then clean your build director* (I usually just delete the complete build
-> folder and start from scratch)
->
-> I deleted the Build folder and started right from the scratch
->
-> Build again, and if it fails then write again to this mail list with link=
+> With this setup and without DISTRO_FEATURE_remove I gave i bitbake and wa=
 s
-> to
-> all logs:
->
->
-> With the setup above i got *success*.
+> encountered with the errors as posted http://pastebin.com/V2fMF785
 >
 >
 >
->         bitbake log,
->         qtbase: run.configure, log.do_configure, run.do_compile,
-> log.do_compile
->
->
-> (*This is just to make sure the change for DISTRO_FEATURE has no side
-> effects,
-> if already did a clean build after the change then you should be good)
->
->
->
-> Now to set up qt
-> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
-> says to alter the conf/local.conf to be changed according to the contents
-> given in the link and again give a bitbake.
-> so should i alter the local.conf and the /bblayers.conf to set up the qt
-> platform?
->
->
-> Please suggest.
+> Please suggest to resolve this issue.
 >
 >
 >
 >
 >
-> On Sun, Aug 3, 2014 at 2:39 PM, Nilesh Kokane <
+>
+> On Mon, Aug 4, 2014 at 3:39 PM, Nilesh Kokane <
 > nilesh.kokane@mindastoneridge.com> wrote:
 >
 >> Hi Thomas
 >>
 >>
->> Thanks for your reply
+>> I'd like to update you with the following exp.
 >>
->>
->> And that's the problem .. isn't it? From previose mails I understand you
->> trying to get a EGLFS (egl on top of framebuffer) build .. right?
->> (the rest of this mail assume a 'yes' to this answer)
->>
->> Yes, I'm trying to get EGLFS
->>
->>
->> You're trying to compile Qt/XCB on top of a sysroot which has no X11 in
->> it.
->>
->> .. and/or you have X11 left overs from previous builds and Qt picks them
->> up
->> although you're building with -DEGL_API_FB=3D1
->>
->> >
->> > then check if egl defines are OK in that header.
->> > you might delete all defines except X11 in eglvivante.h
->> > may be that will help.
->>
->> Tinkering your eglvivante.h sound like the wrong thing to do :)
->>
->>  I largely tweaked the eglvivante.h in an attempt to solve the problem
->> without having the backup copy.
->> So just to restore the eglvivante.h back, i derived the file from the
->> reference  github (
->> https://github.com/rogeriorps/gpu-samples-mx6/blob/master/lesson03/inclu=
-de/EGL/eglvivante.h)
->> will that cause a -ve effect in the build?
->>
->>
->>
->>
->> Also, I'll perform the following mentioned experiments and update about
->> the results shortly.
 >>
 >>
 >> This should be solved by qtbase_%.bbappend in meta-fsl-arm.
 >> You'll see that there is code for:
 >>         a. taking the right platform plugin
 >>                 (the line with "-eglfs" in it)*
+>>
+>>
+>>
+>>  In /meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend
+>>
+>> QT_CONFIG_FLAGS_append_mx6 =3D "${@base_contains('DISTRO_FEATURES', 'x11=
+',
+>> *'-xcb'*, ' -no-eglfs', ' -eglfs', d)}"
+>>
+>> I added -xcb
+>>
 >>         b. setup for eglvivante.h
 >>                 (the lines around -DEGL_API_FB=3D1
 >>
+>> I didnt got the line -DEGL_API_FB=3D1 , so i didn't alter this, and left
+>> unchanged
+>>
 >> (*this line could be improved by adding -xcb and -no-xcb accordingly...)
 >>
->>
 >> Open qtbase.inc (from meta-qt5) and remove the "-silent"
+>>
+>> In  /bin/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtbase.in
+>>
+>>
+>> QT_CONFIG_FLAGS +=3D " \
+>>     -reduce-relocations \
+>>     -shared \
+>>   *  -silent \*
+>>     -no-pch \
+>>     -no-rpath \
+>>     -pkg-config \
+>>     ${EXTRA_OECONF} \
+>> "
+>>
+>> -silent was deleted. and was found only in QT_CONFIG_FLAGS
+>>
 >> Then clean your build director* (I usually just delete the complete buil=
 d
 >> folder and start from scratch)
+>>
+>> I deleted the Build folder and started right from the scratch
+>>
 >> Build again, and if it fails then write again to this mail list with
 >> links to
 >> all logs:
+>>
+>>
+>> With the setup above i got *success*.
+>>
+>>
+>>
 >>         bitbake log,
 >>         qtbase: run.configure, log.do_configure, run.do_compile,
 >> log.do_compile
@@ -263,28 +222,39 @@ d
 >> if already did a clean build after the change then you should be good)
 >>
 >>
->> On Sun, Aug 3, 2014 at 12:53 PM, Thomas Senyk <
->> thomas.senyk@pelagicore.com> wrote:
 >>
->>> On Sunday, August 03, 2014 09:53:24 AM Nilesh Kokane wrote:
->>> > Hi Raj,
->>> >
->>> >
->>> > Thanks for your valuable reply first of all.
->>> >
->>> >
->>> >
->>> >
->>> >
->>> > It seems eglvivante.h might have issues are you compiling
->>> > Qt with XCB support ?
->>> >
->>> > Yes , i'm compiling the Qt with the XCB support
+>> Now to set up qt
+>> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboar=
+d
+>> says to alter the conf/local.conf to be changed according to the content=
+s
+>> given in the link and again give a bitbake.
+>> so should i alter the local.conf and the /bblayers.conf to set up the qt
+>> platform?
+>>
+>>
+>> Please suggest.
+>>
+>>
+>>
+>>
+>>
+>> On Sun, Aug 3, 2014 at 2:39 PM, Nilesh Kokane <
+>> nilesh.kokane@mindastoneridge.com> wrote:
+>>
+>>> Hi Thomas
+>>>
+>>>
+>>> Thanks for your reply
+>>>
 >>>
 >>> And that's the problem .. isn't it? From previose mails I understand yo=
 u
 >>> trying to get a EGLFS (egl on top of framebuffer) build .. right?
 >>> (the rest of this mail assume a 'yes' to this answer)
+>>>
+>>> Yes, I'm trying to get EGLFS
+>>>
 >>>
 >>> You're trying to compile Qt/XCB on top of a sysroot which has no X11 in
 >>> it.
@@ -300,6 +270,21 @@ m
 >>> > may be that will help.
 >>>
 >>> Tinkering your eglvivante.h sound like the wrong thing to do :)
+>>>
+>>>  I largely tweaked the eglvivante.h in an attempt to solve the problem
+>>> without having the backup copy.
+>>> So just to restore the eglvivante.h back, i derived the file from the
+>>> reference  github (
+>>> https://github.com/rogeriorps/gpu-samples-mx6/blob/master/lesson03/incl=
+ude/EGL/eglvivante.h)
+>>> will that cause a -ve effect in the build?
+>>>
+>>>
+>>>
+>>>
+>>> Also, I'll perform the following mentioned experiments and update about
+>>> the results shortly.
+>>>
 >>>
 >>> This should be solved by qtbase_%.bbappend in meta-fsl-arm.
 >>> You'll see that there is code for:
@@ -328,32 +313,104 @@ ld
 >>> effects,
 >>> if already did a clean build after the change then you should be good)
 >>>
->>> >
->>> >
->>> > My eglvivante.h looks something like  this
->>> http://pastebin.com/DTEDrRkx
->>> > can you tell me exactly what i need to delete in the header file for
->>> > circumventing the problem
->>> >
->>> >
->>> >
->>> > Thanks
->>> > Nilesh Kokane
->>> >
->>> > On Sun, Aug 3, 2014 at 1:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
->>> > > On 14-08-02 08:59:13, Nilesh Kokane wrote:
->>> > > > where are the logs
->>> > > >
->>> > > > I'm logged with the errors as posted on pastebin
->>> > > > http://pastebin.com/hsMhT9f8
->>> > > >
->>> > > > Please if you can have alook.
->>> > >
->>> > > It seems eglvivante.h might have issues are you compiling
->>> > > Qt with XCB support ?
->>> > > then check if egl defines are OK in that header.
->>> > > you might delete all defines except X11 in eglvivante.h
->>> > > may be that will help.
+>>>
+>>> On Sun, Aug 3, 2014 at 12:53 PM, Thomas Senyk <
+>>> thomas.senyk@pelagicore.com> wrote:
+>>>
+>>>> On Sunday, August 03, 2014 09:53:24 AM Nilesh Kokane wrote:
+>>>> > Hi Raj,
+>>>> >
+>>>> >
+>>>> > Thanks for your valuable reply first of all.
+>>>> >
+>>>> >
+>>>> >
+>>>> >
+>>>> >
+>>>> > It seems eglvivante.h might have issues are you compiling
+>>>> > Qt with XCB support ?
+>>>> >
+>>>> > Yes , i'm compiling the Qt with the XCB support
+>>>>
+>>>> And that's the problem .. isn't it? From previose mails I understand y=
+ou
+>>>> trying to get a EGLFS (egl on top of framebuffer) build .. right?
+>>>> (the rest of this mail assume a 'yes' to this answer)
+>>>>
+>>>> You're trying to compile Qt/XCB on top of a sysroot which has no X11 i=
+n
+>>>> it.
+>>>>
+>>>> .. and/or you have X11 left overs from previous builds and Qt picks
+>>>> them up
+>>>> although you're building with -DEGL_API_FB=3D1
+>>>>
+>>>> >
+>>>> > then check if egl defines are OK in that header.
+>>>> > you might delete all defines except X11 in eglvivante.h
+>>>> > may be that will help.
+>>>>
+>>>> Tinkering your eglvivante.h sound like the wrong thing to do :)
+>>>>
+>>>> This should be solved by qtbase_%.bbappend in meta-fsl-arm.
+>>>> You'll see that there is code for:
+>>>>         a. taking the right platform plugin
+>>>>                 (the line with "-eglfs" in it)*
+>>>>         b. setup for eglvivante.h
+>>>>                 (the lines around -DEGL_API_FB=3D1
+>>>>
+>>>> (*this line could be improved by adding -xcb and -no-xcb accordingly..=
+.)
+>>>>
+>>>>
+>>>> Open qtbase.inc (from meta-qt5) and remove the "-silent"
+>>>> Then clean your build director* (I usually just delete the complete
+>>>> build
+>>>> folder and start from scratch)
+>>>> Build again, and if it fails then write again to this mail list with
+>>>> links to
+>>>> all logs:
+>>>>         bitbake log,
+>>>>         qtbase: run.configure, log.do_configure, run.do_compile,
+>>>> log.do_compile
+>>>>
+>>>>
+>>>> (*This is just to make sure the change for DISTRO_FEATURE has no side
+>>>> effects,
+>>>> if already did a clean build after the change then you should be good)
+>>>>
+>>>> >
+>>>> >
+>>>> > My eglvivante.h looks something like  this
+>>>> http://pastebin.com/DTEDrRkx
+>>>> > can you tell me exactly what i need to delete in the header file for
+>>>> > circumventing the problem
+>>>> >
+>>>> >
+>>>> >
+>>>> > Thanks
+>>>> > Nilesh Kokane
+>>>> >
+>>>> > On Sun, Aug 3, 2014 at 1:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>> > > On 14-08-02 08:59:13, Nilesh Kokane wrote:
+>>>> > > > where are the logs
+>>>> > > >
+>>>> > > > I'm logged with the errors as posted on pastebin
+>>>> > > > http://pastebin.com/hsMhT9f8
+>>>> > > >
+>>>> > > > Please if you can have alook.
+>>>> > >
+>>>> > > It seems eglvivante.h might have issues are you compiling
+>>>> > > Qt with XCB support ?
+>>>> > > then check if egl defines are OK in that header.
+>>>> > > you might delete all defines except X11 in eglvivante.h
+>>>> > > may be that will help.
+>>>>
+>>>>
+>>>
+>>>
+>>> --
+>>> Thanks
 >>>
 >>>
 >>
@@ -386,7 +443,7 @@ strictly prohibited. If you are not the intended recipient, please=20
 immediately notify the sender by reply e-mail or phone and delete this=20
 message and its attachments, if any.=E2=80=9D
 
---047d7bfcf88e542c9504ffdc05ac
+--001a11c263d865724704ffdc18e8
 Content-Type: image/png; name="image001.png"
 Content-Disposition: inline; filename="image001.png"
 Content-Transfer-Encoding: base64
@@ -1581,4 +1638,4 @@ ppcnCkwUmCgwUWCiwESBSQM38cDyFKhhQ5I2CnCLRq6GYKhhDPjNHS5/40TriQITBSYKTBSYKDBR
 q+W0azUA7jiG1bz1HevnJh+tY03RqbyJAhMFJgpMFFgPFNjUkn9PEZnWw0hNbZwoMFFgosBEgYkC
 EwUmCixR4P8BoitzjyPlp/oAAAAASUVORK5CYII=
 
---047d7bfcf88e542c9504ffdc05ac--
+--001a11c263d865724704ffdc18e8--
