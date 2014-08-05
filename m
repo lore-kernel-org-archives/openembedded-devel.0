@@ -1,49 +1,42 @@
 Return-Path: <B40869@freescale.com>
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2lp0211.outbound.protection.outlook.com [207.46.163.211])
-	by mail.openembedded.org (Postfix) with ESMTP id 163E060196
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1lp0142.outbound.protection.outlook.com [207.46.163.142])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F15565EE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Aug 2014 07:39:11 +0000 (UTC)
-Received: from BN3PR0301CA0055.namprd03.prod.outlook.com (25.160.152.151) by
-	CY1PR0301MB0764.namprd03.prod.outlook.com (25.160.160.12) with
+	Tue,  5 Aug 2014 07:42:44 +0000 (UTC)
+Received: from BN1PR0301MB0756.namprd03.prod.outlook.com (25.160.78.150) by
+	BN1PR0301MB0754.namprd03.prod.outlook.com (25.160.78.149) with
 	Microsoft SMTP
-	Server (TLS) id 15.0.995.14; Tue, 5 Aug 2014 07:39:05 +0000
-Received: from BN1BFFO11FD022.protection.gbl (2a01:111:f400:7c10::1:184) by
-	BN3PR0301CA0055.outlook.office365.com (2a01:111:e400:401e::23) with
-	Microsoft
-	SMTP Server (TLS) id 15.0.995.14 via Frontend Transport; Tue, 5 Aug 2014
-	07:39:05 +0000
-Received: from az84smr01.freescale.net (192.88.158.2) by
-	BN1BFFO11FD022.mail.protection.outlook.com (10.58.144.85) with
-	Microsoft SMTP Server (TLS) id 15.0.990.10 via Frontend Transport;
-	Tue, 5 Aug 2014 07:39:04 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id s757d2oc010192;
-	Tue, 5 Aug 2014 00:39:03 -0700
-From: YangHaibo <b40869@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Aug 2014 15:31:33 +0800
-Message-ID: <1407223893-7560-1-git-send-email-b40869@freescale.com>
-X-Mailer: git-send-email 1.9.2
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:CAL; IPV:NLI;
-	EFV:NLI; SFV:NSPM;
-	SFS:(6009001)(377424004)(199002)(189002)(86362001)(77156001)(104016003)(110136001)(15975445006)(15395725005)(46102001)(575784001)(93916002)(47776003)(64706001)(20776003)(21056001)(15202345003)(50466002)(69596002)(106466001)(76482001)(68736004)(33646002)(104166001)(36756003)(77982001)(6806004)(105606002)(81156004)(48376002)(2351001)(107046002)(50226001)(229853001)(4396001)(84676001)(79102001)(16601075003)(95666004)(102836001)(62966002)(26826002)(92566001)(19580395003)(92726001)(99396002)(87286001)(81342001)(89996001)(87936001)(97736001)(50986999)(88136002)(19580405001)(81542001)(85306004)(74662001)(31966008)(74502001)(80022001)(83072002)(85852003)(83322001)(44976005);
-	DIR:OUT; SFP:; SCL:1; SRVR:CY1PR0301MB0764;
-	H:az84smr01.freescale.net; FPR:; MLV:ovrnspm;
-	PTR:InfoDomainNonexistent; MX:1; LANG:en; 
+	Server (TLS) id 15.0.995.14; Tue, 5 Aug 2014 07:42:43 +0000
+Received: from BN1PR0301MB0756.namprd03.prod.outlook.com ([25.160.78.150]) by
+	BN1PR0301MB0756.namprd03.prod.outlook.com ([25.160.78.150]) with
+	mapi id 15.00.0995.014; Tue, 5 Aug 2014 07:42:43 +0000
+From: "B40869@freescale.com" <B40869@freescale.com>
+To: Martin Jansa <martin.jansa@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-webserver][PATCH v3] integrate fcgi-2.4.0 and add OML
+	license file
+Thread-Index: AQHPrTRsIpEI/cxEtk+j9ki52X/PHZvAoveAgAEEAiY=
+Date: Tue, 5 Aug 2014 07:42:42 +0000
+Message-ID: <1407225055047.39766@freescale.com>
+References: <1406861456-16786-1-git-send-email-b40869@freescale.com>,
+	<20140804161103.GB2465@jama>
+In-Reply-To: <20140804161103.GB2465@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.88.158.211]
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:
+x-forefront-prvs: 02945962BD
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(6009001)(51704005)(24454002)(199002)(189002)(377424004)(377454003)(54534003)(99396002)(15395725005)(15975445006)(106116001)(36756003)(105586002)(509001)(15202345003)(95666004)(31966008)(21056001)(99286002)(54356999)(106356001)(74502001)(80022001)(76176999)(50986999)(85306004)(74662001)(66066001)(76482001)(4396001)(81342001)(79102001)(16601075003)(81542001)(77982001)(2656002)(87936001)(575784001)(86362001)(19580405001)(83322001)(19580395003)(20776003)(101416001)(64706001)(107886001)(83072002)(85852003)(46102001)(77096002)(92726001)(92566001)(107046002);
+	DIR:OUT; SFP:; SCL:1; SRVR:BN1PR0301MB0754;
+	H:BN1PR0301MB0756.namprd03.prod.outlook.com; FPR:; MLV:ovrnspm;
+	PTR:InfoNoRecords; MX:1; UriScan:(84726307001); LANG:en; 
 MIME-Version: 1.0
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:
-X-Forefront-PRVS: 02945962BD
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.158.2 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.158.2)
-	smtp.mailfrom=B40869@freescale.com; 
 X-OriginatorOrg: freescale.com
-Cc: YangHaibo <b40869@freescale.com>
-Subject: [meta-oe][meta-webserver][PATCH v4] integrate fcgi-2.4.0 and add OML license file
+Subject: Re: [meta-webserver][PATCH v3] integrate fcgi-2.4.0 and add OML license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,124 +50,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Aug 2014 07:39:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 05 Aug 2014 07:42:46 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: YangHaibo <b40869@freescale.com>
----
- meta-oe/licenses/OML                               | 28 ++++++++++++++++++++++
- .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch     | 17 +++++++++++++
- .../fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch     | 18 ++++++++++++++
- meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 15 ++++++++++++
- 4 files changed, 78 insertions(+)
- create mode 100644 meta-oe/licenses/OML
- create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
- create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
- create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
-
-diff --git a/meta-oe/licenses/OML b/meta-oe/licenses/OML
-new file mode 100644
-index 0000000..7e6bdfd
---- /dev/null
-+++ b/meta-oe/licenses/OML
-@@ -0,0 +1,28 @@
-+This FastCGI application library source and object code (the
-+"Software") and its documentation (the "Documentation") are
-+copyrighted by Open Market, Inc ("Open Market").  The following terms
-+apply to all files associated with the Software and Documentation
-+unless explicitly disclaimed in individual files.
-+
-+Open Market permits you to use, copy, modify, distribute, and license
-+this Software and the Documentation for any purpose, provided that
-+existing copyright notices are retained in all copies and that this
-+notice is included verbatim in any distributions.  No written
-+agreement, license, or royalty fee is required for any of the
-+authorized uses.  Modifications to this Software and Documentation may
-+be copyrighted by their authors and need not follow the licensing
-+terms described here.  If modifications to this Software and
-+Documentation have new licensing terms, the new terms must be clearly
-+indicated on the first page of each file where they apply.
-+
-+OPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE
-+SOFTWARE OR THE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY
-+WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  IN
-+NO EVENT SHALL OPEN MARKET BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY
-+DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE OR THE
-+DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR
-+CONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR
-+LOST DATA, EVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF
-+SUCH DAMAGES.  THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS".
-+OPEN MARKET HAS NO LIABILITY IN CONTRACT, TORT, NEGLIGENCE OR
-+OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE DOCUMENTATION.
-diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.patch b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
-new file mode 100644
-index 0000000..51ddeaa
---- /dev/null
-+++ b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
-@@ -0,0 +1,17 @@
-+Upstream-Status: Pending
-+
-+Fix EOF not declared issue, following is the error log.
-+fcgio.cpp:70:72: error: 'EOF' was not declared in this scope
-+              if (FCGX_PutStr(pbase(), plen, this->fcgx) != plen) return EOF;
-+
-+Signed-off-by: Yang Haibo <b40869@freescale.com>
-+--- fcgi-ori/libfcgi/fcgio.cpp 2014-07-28 18:01:00.000000000 +0800
-++++ fcgi-2.4.0/libfcgi/fcgio.cpp       2014-07-28 18:01:22.000000000 +0800
-+@@ -22,6 +22,7 @@
-+ #define DLLAPI  __declspec(dllexport)
-+ #endif
-+
-++#include <stdio.h>
-+ #include <limits.h>
-+ #include "fcgio.h"
-+
-diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch b/meta-webserver/recipes-fcgi/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
-new file mode 100644
-index 0000000..eca694a
---- /dev/null
-+++ b/meta-webserver/recipes-fcgi/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
-@@ -0,0 +1,18 @@
-+Upstream-Status: Pending
-+
-+use automake options "foreign" to set the strictness as appropriate
-+
-+Signed-off-by: Yang Haibo <b40869@freescale.com>
-+--- fcgi-ori/configure.in	2014-08-05 14:58:35.000000000 +0800
-++++ fcgi-2.4.0/configure.in	2014-08-05 14:59:08.000000000 +0800
-+@@ -4,8 +4,8 @@
-+ dnl     generate the file "configure", which is run during the build
-+ dnl     to configure the system for the local environment.
-+ 
-+-AC_INIT
-+-AM_INIT_AUTOMAKE(fcgi, 2.4.0)
-++AC_INIT([fcgi], [2.4.0])
-++AM_INIT_AUTOMAKE([foreign])
-+ 
-+ AM_CONFIG_HEADER(fcgi_config.h)
-+ 
-diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
-new file mode 100644
-index 0000000..ed718ae
---- /dev/null
-+++ b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "FastCGI is a protocol for interfacing interactive programs with a web server."
-+HOMEPAGE = "http://www.fastcgi.com"
-+LICENSE = "OML"
-+LIC_FILES_CHKSUM = "file://LICENSE.TERMS;md5=e3aacac3a647af6e7e31f181cda0a06a"
-+
-+SRC_URI = "http://fossies.org/linux/www/${BP}.tar.gz \
-+           file://Fix_EOF_not_declared_issue.patch \
-+           file://add_foreign_to_AM_INIT_AUTOMAKE.patch \
-+"
-+SRC_URI[md5sum] = "d15060a813b91383a9f3c66faf84867e"
-+SRC_URI[sha256sum] = "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e76d2b4402d3f05b9"
-+
-+inherit autotools
-+
-+PARALLEL_MAKE = ""
--- 
-1.9.2
-
+Thank you, patch v4 is submitted. Test passed on master branch.=0A=
+=0A=
+BR,=0A=
+YangHaibo=0A=
+________________________________________=0A=
+From: Martin Jansa <martin.jansa@gmail.com>=0A=
+Sent: Tuesday, August 5, 2014 12:11 AM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Cc: Yang Haibo-B40869=0A=
+Subject: Re: [oe] [meta-webserver][PATCH v3] integrate fcgi-2.4.0 and add O=
+ML license file=0A=
+=0A=
+On Fri, Aug 01, 2014 at 10:50:56AM +0800, YangHaibo wrote:=0A=
+> ---=0A=
+>  meta-oe/licenses/OML                               | 28 ++++++++++++++++=
+++++++=0A=
+>  .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch     | 17 +++++++++++++=0A=
+>  meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 16 +++++++++++++=0A=
+>  3 files changed, 61 insertions(+)=0A=
+>  create mode 100644 meta-oe/licenses/OML=0A=
+>  create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_dec=
+lared_issue.patch=0A=
+>  create mode 100644 meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
+>=0A=
+> diff --git a/meta-oe/licenses/OML b/meta-oe/licenses/OML=0A=
+> new file mode 100644=0A=
+> index 0000000..7e6bdfd=0A=
+> --- /dev/null=0A=
+> +++ b/meta-oe/licenses/OML=0A=
+> @@ -0,0 +1,28 @@=0A=
+> +This FastCGI application library source and object code (the=0A=
+> +"Software") and its documentation (the "Documentation") are=0A=
+> +copyrighted by Open Market, Inc ("Open Market").  The following terms=0A=
+> +apply to all files associated with the Software and Documentation=0A=
+> +unless explicitly disclaimed in individual files.=0A=
+> +=0A=
+> +Open Market permits you to use, copy, modify, distribute, and license=0A=
+> +this Software and the Documentation for any purpose, provided that=0A=
+> +existing copyright notices are retained in all copies and that this=0A=
+> +notice is included verbatim in any distributions.  No written=0A=
+> +agreement, license, or royalty fee is required for any of the=0A=
+> +authorized uses.  Modifications to this Software and Documentation may=
+=0A=
+> +be copyrighted by their authors and need not follow the licensing=0A=
+> +terms described here.  If modifications to this Software and=0A=
+> +Documentation have new licensing terms, the new terms must be clearly=0A=
+> +indicated on the first page of each file where they apply.=0A=
+> +=0A=
+> +OPEN MARKET MAKES NO EXPRESS OR IMPLIED WARRANTY WITH RESPECT TO THE=0A=
+> +SOFTWARE OR THE DOCUMENTATION, INCLUDING WITHOUT LIMITATION ANY=0A=
+> +WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  IN=0A=
+> +NO EVENT SHALL OPEN MARKET BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY=
+=0A=
+> +DAMAGES ARISING FROM OR RELATING TO THIS SOFTWARE OR THE=0A=
+> +DOCUMENTATION, INCLUDING, WITHOUT LIMITATION, ANY INDIRECT, SPECIAL OR=
+=0A=
+> +CONSEQUENTIAL DAMAGES OR SIMILAR DAMAGES, INCLUDING LOST PROFITS OR=0A=
+> +LOST DATA, EVEN IF OPEN MARKET HAS BEEN ADVISED OF THE POSSIBILITY OF=0A=
+> +SUCH DAMAGES.  THE SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS".=0A=
+> +OPEN MARKET HAS NO LIABILITY IN CONTRACT, TORT, NEGLIGENCE OR=0A=
+> +OTHERWISE ARISING OUT OF THIS SOFTWARE OR THE DOCUMENTATION.=0A=
+> diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_i=
+ssue.patch b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_iss=
+ue.patch=0A=
+> new file mode 100644=0A=
+> index 0000000..b4cf080=0A=
+> --- /dev/null=0A=
+> +++ b/meta-webserver/recipes-fcgi/fcgi/fcgi/Fix_EOF_not_declared_issue.pa=
+tch=0A=
+> @@ -0,0 +1,17 @@=0A=
+> +Upstream-Status: Pending=0A=
+> +=0A=
+> +Fix EOF not declared issue, following is the error log.=0A=
+> +fcgio.cpp:70:72: error: 'EOF' was not declared in this scope=0A=
+> +              if (FCGX_PutStr(pbase(), plen, this->fcgx) !=3D plen) retu=
+rn EOF;=0A=
+> +=0A=
+> +Signed-off-by: Yang Haibo <b40869@freescale.com>=0A=
+> +--- fcgi-ori/libfcgi/fcgio.cpp       2014-07-28 18:01:00.000000000 +0800=
+=0A=
+> ++++ fcgi-2.4.0/libfcgi/fcgio.cpp     2014-07-28 18:01:22.000000000 +0800=
+=0A=
+> +@@ -22,6 +22,7 @@=0A=
+> + #define DLLAPI  __declspec(dllexport)=0A=
+> + #endif=0A=
+> +=0A=
+> ++#include <stdio.h>=0A=
+> + #include <limits.h>=0A=
+> + #include "fcgio.h"=0A=
+> +=0A=
+> diff --git a/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb b/meta-webser=
+ver/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
+> new file mode 100644=0A=
+> index 0000000..ceb5909=0A=
+> --- /dev/null=0A=
+> +++ b/meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb=0A=
+> @@ -0,0 +1,16 @@=0A=
+> +DESCRIPTION =3D "FastCGI is a protocol for interfacing interactive progr=
+ams with a web server."=0A=
+> +HOMEPAGE =3D "http://www.fastcgi.com"=0A=
+> +LICENSE =3D "OML"=0A=
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.TERMS;md5=3De3aacac3a647af6e7e31f18=
+1cda0a06a"=0A=
+> +=0A=
+> +SRC_URI =3D "http://fossies.org/linux/www/fcgi-2.4.0.tar.gz \=0A=
+=0A=
+fcgi-2.4.0 -> ${BP}=0A=
+=0A=
+> +           file://Fix_EOF_not_declared_issue.patch \=0A=
+> +"=0A=
+> +SRC_URI[md5sum] =3D "d15060a813b91383a9f3c66faf84867e"=0A=
+> +SRC_URI[sha256sum] =3D "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e=
+76d2b4402d3f05b9"=0A=
+> +=0A=
+> +S =3D "${WORKDIR}/${BPN}-${PV}/"=0A=
+=0A=
+This is default, you can drop it.=0A=
+=0A=
+> +=0A=
+> +inherit autotools=0A=
+> +=0A=
+> +PARALLEL_MAKE =3D ""=0A=
+=0A=
+Fails in current master, you need to add foreign to AC_INIT_AUTOMAKE=0A=
+=0A=
+| Makefile.am: installing './INSTALL'=0A=
+| Makefile.am: error: required file './NEWS' not found=0A=
+| Makefile.am: error: required file './AUTHORS' not found=0A=
+| Makefile.am: error: required file './ChangeLog' not found=0A=
+| Makefile.am: installing './COPYING' using GNU General Public License v3 f=
+ile=0A=
+| Makefile.am:     Consider adding the COPYING file to the version control =
+system=0A=
+| Makefile.am:     for your code, to avoid questions about which license yo=
+ur project uses=0A=
+| automake: warning: autoconf input should be named 'configure.ac', not 'co=
+nfigure.in'=0A=
+| cgi-fcgi/Makefile.am:5: warning: 'CPPFLAGS' is a user variable, you shoul=
+d not override it;=0A=
+| cgi-fcgi/Makefile.am:5: use 'AM_CPPFLAGS' instead=0A=
+| examples/Makefile.am:14: warning: 'CPPFLAGS' is a user variable, you shou=
+ld not override it;=0A=
+| examples/Makefile.am:14: use 'AM_CPPFLAGS' instead=0A=
+| libfcgi/Makefile.am:4: warning: 'CPPFLAGS' is a user variable, you should=
+ not override it;=0A=
+| libfcgi/Makefile.am:4: use 'AM_CPPFLAGS' instead=0A=
+| autoreconf: automake failed with exit status: 1=0A=
+| ERROR: autoreconf execution failed.=0A=
+| WARNING: exit code 1 from a shell command.=0A=
+| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
+s/oe/world/shr-core/tmp-eglibc/work/i586-oe-linux/fcgi/2.4.0-r0/temp/log.do=
+_configure.23481)=0A=
+NOTE: recipe fcgi-2.4.0-r0: task do_configure: Failed=0A=
+ERROR: Task 35 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-webs=
+erver/recipes-fcgi/fcgi/fcgi_2.4.0.bb, do_configure) failed with exit code =
+'1'=0A=
+=0A=
+=0A=
+> --=0A=
+> 1.9.2=0A=
+>=0A=
+> --=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
+=0A=
+--=0A=
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com=0A=
 
