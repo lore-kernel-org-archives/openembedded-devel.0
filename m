@@ -1,35 +1,35 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A50660030
+	by mail.openembedded.org (Postfix) with ESMTP id D13C370889
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 18:45:00 +0000 (UTC)
-Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	Wed,  6 Aug 2014 18:51:46 +0000 (UTC)
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
 	by relay1.mentorg.com with esmtp 
-	id 1XF6Cq-0000mo-S7 from Joe_MacDonald@mentor.com 
+	id 1XF6JQ-0001Na-0x from Joe_MacDonald@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Aug 2014 11:45:00 -0700
+	Wed, 06 Aug 2014 11:51:48 -0700
 Received: from SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) by
-	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.4675); Wed, 6 Aug 2014 11:45:00 -0700
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 6 Aug 2014 11:51:47 -0700
 Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
 	(147.34.97.43) with Microsoft SMTP Server id 14.2.247.3; Wed, 6 Aug 2014
-	11:45:00 -0700
-Received: by burninator (Postfix, from userid 1000)	id 688F7580DB1; Wed,  6
-	Aug 2014 14:44:59 -0400 (EDT)
-Date: Wed, 6 Aug 2014 14:44:59 -0400
+	11:51:46 -0700
+Received: by burninator (Postfix, from userid 1000)	id E5631580DB1; Wed,  6
+	Aug 2014 14:51:45 -0400 (EDT)
+Date: Wed, 6 Aug 2014 14:51:45 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140806184459.GE14621@mentor.com>
+Message-ID: <20140806185145.GF14621@mentor.com>
 References: <1407332271-32696-1-git-send-email-joe_macdonald@mentor.com>
-	<20140806183714.GM14848@jama>
+	<20140806183909.GO14848@jama>
 MIME-Version: 1.0
-In-Reply-To: <20140806183714.GM14848@jama>
+In-Reply-To: <20140806183909.GO14848@jama>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-X-OriginalArrivalTime: 06 Aug 2014 18:45:00.0557 (UTC)
-	FILETIME=[870E1BD0:01CFB1A6]
+X-OriginalArrivalTime: 06 Aug 2014 18:51:47.0807 (UTC)
+	FILETIME=[79CB86F0:01CFB1A7]
 Subject: Re: [meta-networking][PATCH] wireshark: update to latest stable version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,36 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 18:45:04 -0000
-X-Groupsio-MsgNum: 51462
+X-List-Received-Date: Wed, 06 Aug 2014 18:51:53 -0000
+X-Groupsio-MsgNum: 51463
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="m0vRWufqUC70IDnR"
+	protocol="application/pgp-signature"; boundary="oyqLL/JqMvClXZi1"
 Content-Disposition: inline
 
---m0vRWufqUC70IDnR
+--oyqLL/JqMvClXZi1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 [Re: [oe] [meta-networking][PATCH] wireshark: update to latest stable versi=
-on] On 14.08.06 (Wed 20:37) Martin Jansa wrote:
+on] On 14.08.06 (Wed 20:39) Martin Jansa wrote:
 
 > On Wed, Aug 06, 2014 at 09:37:51AM -0400, Joe MacDonald wrote:
 > > Version 1.12.0 is out, update the SRC_URI and associated variables.
 >=20
-> BTW: this causes:
-> ERROR: QA Issue: Package version for package wireshark went backwards
-> which would break package feeds from (0:1.12.0-rc2-r0.3 to
-> 0:1.12.0-r0.0) [version-going-backwards]
+> One more issue:
 >=20
-> Which is caused by incorrect PV in rc2 (which I haven't noticed before),
-> but as rc2 was in master only for couple of days, I can live without PE
-> bump in it.
+> WARNING: QA Issue: wireshark rdepends on c-ares but its not a build
+> dependency? [build-deps]
+>=20
+> it's strange, but it's new with 1.12.0 final.
 
-Boo.  And I didn't run into it since I'd never got around to building
-the -rc2 before we had the final version.  A PE bump is probably best if
-you want to go that route, it is a pretty narrow window but it broke
-your stuff, I imagine you're not alone.  :-/
+This is likely auto-detected and the behaviour is different depending on
+the presence or absence of c-ares.  I'm inclined to disable the
+dependency in wireshark, but calling it out explicitly is fine with me
+too.
 
 -J.
 
@@ -95,20 +93,20 @@ your stuff, I imagine you're not alone.  :-/
 -Joe MacDonald.
 :wq
 
---m0vRWufqUC70IDnR
+--oyqLL/JqMvClXZi1
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJT4neoAAoJEEn8ffcsOfaWdUAH/2bPdWotCGg8NlaX7evO33YH
-/L26TjsZnItv3F/tCBnlZcL1uO8ZdYtEKYrK9ahDUujGDsbBKbCLGMKAg1H5aQCP
-AczDefFsZdj30veExIGoCXDtfb5LBU1GzrTxB/RMoKWzjU2+/NA2RMk4WFWpuVSe
-9+dNBxTVz/VuI6Tjs5g5Owiyc+OJ+knondL4bQUW+m+CZ/AWgag0AHsuwbK5RbSF
-x0RLcztO4dv537ZenxdtPvzt9I8GjqfGQ1IGvhj7qLNN3wjsfhS6Ipo4wDYrXMgU
-5/NFZGnzH5Q4YoXKwjmcmxLfxbeznWlCufMKtLRYfqj2eUaJ31aLgBHw/aDjQLc=
-=v9jf
+iQEcBAEBAgAGBQJT4nlBAAoJEEn8ffcsOfaWXksIAJ7/biNN9gT3FtI75EjAqRSg
+A57ipHLb3H51Yz5gcPOYTp8xK91J3JOg+YLxQ3J53/P7PTOZI4QTdGdKdrN/i52G
+57e272CINaQYrNZli61otj2EMRzQ5l0nCwBossLtMRJxKW3RTjN7mVP8w6x0SOe1
+wDVlMmb2OroqVZSQebx9+C2mjrp1JzVxvocb5AAnSEqsZ1TODgbeRiypyVkFsd7/
+VTbigyDeExJmLBUSvIU6VYZ9YcvJX8lpv5zMjPcoGjWwjp4ZQTArvSH44q4dnYWZ
+nPSCOXaFpASn1S+b4L1jhtwxk9ZMmhmlKo+FV8qBdP8BGa8K7y2XI6mwfiOJbTo=
+=ar4T
 -----END PGP SIGNATURE-----
 
---m0vRWufqUC70IDnR--
+--oyqLL/JqMvClXZi1--
