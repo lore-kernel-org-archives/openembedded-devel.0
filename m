@@ -1,28 +1,40 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id EA19660809
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E671270620
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 13:58:40 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 06 Aug 2014 06:58:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,812,1400050800"; d="scan'208";a="572541544"
-Received: from cgwithan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.26])
-	by fmsmga001.fm.intel.com with ESMTP; 06 Aug 2014 06:58:19 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Moseley, Drew" <drew_moseley@mentor.com>
-Date: Wed, 06 Aug 2014 14:58:18 +0100
-Message-ID: <1769384.uxY9ZMhYVY@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.7-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <DDDF1E21-0028-492F-B858-9174A09DB1BA@mentor.com>
-References: <1407331293-4055-1-git-send-email-drew_moseley@mentor.com>
-	<53E22FBE.4060004@mlbassoc.com>
-	<DDDF1E21-0028-492F-B858-9174A09DB1BA@mentor.com>
+	Wed,  6 Aug 2014 14:33:24 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w62so2778993wes.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Aug 2014 07:33:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=cBir3QO4QCtjSa+9ug9i8/WGGKQvcJM97aIOvxul89M=;
+	b=TW+N1120CxOJu3uUJ1Nfhqycauu/8rkkOuYK3MYCrZZzw0q5naPQk2rRaJFhXZzWNG
+	tI+ZVEaB4qvZcwo+TozFsWh5d/dPT714ZriGCNJS5xWpIzDiXmCaVGnZwnV+/6gWez7T
+	diZZpL3FPCbzOiMtl2EHEqOZJ2+ogsFUzWimZZUsVeIpge8VTrWyoA3oAlgQFAYK2Ki2
+	ZaNvcrG48EL7+pPe0fOfZVJr6Xq/F3FWS+R0ifU2Xj0+SsJWkes4hJGpgcDxEab1d5xR
+	kiC2gj3LjWK0Bm/4DURBf7yP5zDkiz0tiQfJnK5FqYA35KNsAy15vYoRbnJ2ao5/8JyN
+	XFEw==
+X-Received: by 10.180.206.134 with SMTP id lo6mr51000983wic.1.1407335604826;
+	Wed, 06 Aug 2014 07:33:24 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	eh7sm2885960wjd.32.2014.08.06.07.33.23 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Aug 2014 07:33:23 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 6 Aug 2014 16:33:54 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140806143354.GI14848@jama>
+References: <1407322522-6572-1-git-send-email-bobadeshrikant@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] evtest: Provide updated checksums
+In-Reply-To: <1407322522-6572-1-git-send-email-bobadeshrikant@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+Subject: Re: [meta-oe][daisy][PATCH] libmtp: inherit gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,62 +48,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 13:58:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 06 Aug 2014 14:33:30 -0000
+X-Groupsio-MsgNum: 51452
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gJNQRAHI5jiYqw2y"
+Content-Disposition: inline
 
-Hi Drew,
+--gJNQRAHI5jiYqw2y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wednesday 06 August 2014 13:41:15 Moseley, Drew wrote:
-> On Aug 6, 2014, at 9:38 AM, Gary Thomas <gary@mlbassoc.com> wrote:
-> > On 2014-08-06 07:21, Drew Moseley wrote:
-> >> Signed-off-by: Drew Moseley <drew_moseley@mentor.com>
-> >> ---
-> >> 
-> >>  meta-oe/recipes-support/evtest/evtest_1.25.bb | 4 ++--
-> >>  1 file changed, 2 insertions(+), 2 deletions(-)
-> >> 
-> >> diff --git a/meta-oe/recipes-support/evtest/evtest_1.25.bb
-> >> b/meta-oe/recipes-support/evtest/evtest_1.25.bb index 640cec0..ccaa0c6
-> >> 100644
-> >> --- a/meta-oe/recipes-support/evtest/evtest_1.25.bb
-> >> +++ b/meta-oe/recipes-support/evtest/evtest_1.25.bb
-> >> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =
-> >> "file://COPYING;md5=751419260aa954499f7abaabaa882bbe">> 
-> >>  DEPENDS = "libxml2"
-> >>  
-> >>  SRC_URI =
-> >>  "http://cgit.freedesktop.org/~whot/evtest/snapshot/evtest-${PV}.tar.bz2
-> >>  ;name=archive">> 
-> >> -SRC_URI[archive.md5sum] = "770d6af03affe976bdbe3ad1a922c973"
-> >> -SRC_URI[archive.sha256sum] =
-> >> "3d34123c68014dae6f7c19144ef79ea2915fa7a2f89ea35ca375a9cf9e191473"
-> >> +SRC_URI[archive.md5sum] = "0ef3fe5e20fa2dee8994827d48482902"
-> >> +SRC_URI[archive.sha256sum] =
-> >> "6e93ef54f0aa7d263f5486ce4a14cac53cf50036bfd20cf045fef2b27ee6664b">> 
-> >>  inherit autotools pkgconfig
-> > 
-> > Why did these change?  It's really BAD practice to have a new/different
-> > version of a program with an old name (hence different checksums).
-> 
-> No clue.  I downloaded them today and those were the sums that were there.
+On Wed, Aug 06, 2014 at 04:25:22PM +0530, Shrikant Bobade wrote:
+> From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+>=20
+> This is required to fix autoreconf execution failure
+> : AM_ICONV,AC_LIB
 
-As a general rule, we can't just change signatures without some understanding 
-of why they are changing; otherwise we could miss some tampering with the 
-contents, the detection of which is the entire purpose of having the 
-checksums.
+NAK: See meta-oe/master commit
+74783ca1901aea31b79a762836a3595ffd1ad49b
 
-In this specific instance the reason it has changed is almost certainly the 
-fact that the source is being fetched from a cgit snapshot. These are not 
-guaranteed to remain the same, so pointing to them in SRC_URI isn't really a 
-good idea. FYI Otavio has already sent patches to switch over to fetching 
-directly from git instead to this list a couple of days ago.
+which can be backported instead of this one.
 
-Cheers,
-Paul
+> Signed-off-by: Christopher Larson <kergoth@gmail.com>
+> Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+> ---
+>  .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-o=
+e/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+> index f4ea800..6185217 100644
+> --- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+> +++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+> @@ -33,7 +33,7 @@ skip_udev_rules_generation () {
+>  	cp ${WORKDIR}/69-libmtp.rules ${S}/
+>  }
+> =20
+> -inherit autotools pkgconfig lib_package
+> +inherit autotools pkgconfig lib_package gettext
+> =20
+>  EXTRA_OECONF +=3D "--disable-rpath"
+> =20
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
--- 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Paul Eggleton
-Intel Open Source Technology Centre
+--gJNQRAHI5jiYqw2y
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPiPNIACgkQN1Ujt2V2gBxVRwCgmwXQlheX59u+GZBYGNt7bS+P
+QhcAmwagG0r12ep1T+S09TjPVT7vM+FO
+=BJrx
+-----END PGP SIGNATURE-----
+
+--gJNQRAHI5jiYqw2y--
