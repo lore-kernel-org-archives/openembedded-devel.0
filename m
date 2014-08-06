@@ -1,29 +1,44 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D54B60809
+Return-Path: <akuster@mvista.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id AF2816FE7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 13:51:36 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 8FF39F811EE; Wed,  6 Aug 2014 07:51:37 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=4.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id A1B8BF811ED;
-	Wed,  6 Aug 2014 07:51:35 -0600 (MDT)
-Message-ID: <53E23302.8070408@mlbassoc.com>
-Date: Wed, 06 Aug 2014 07:52:02 -0600
-From: Gary Thomas <gary@mlbassoc.com>
+	Wed,  6 Aug 2014 13:52:29 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id lj1so3512494pab.33
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Aug 2014 06:52:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=2Hoto1qMd532QAAolBisX/YWO5tcn/iywZfxX8lcKkE=;
+	b=bmf4N/Y3wP3eg8mSZbqHUlHKzuzd1CxoE7tgBkuf6I3sQoqeRdSp8OBaRXn0AZ8dCy
+	fmASq78MbTzGYtxM/K1PzsQHMe2GL/6PcXAWKexROQ5JYqOXvs85lqATxX4+eENEFTgS
+	0Z9nggLQ60xxvdmMTB2gQ1mZFhlRD2OK1RzglHjoA+Ubv9//d6/ew9GCAdb+9LzEMo5h
+	S6wQKSq9BYGrmZVD9Bdt5n8BbQ4N+6hPnBnnRtA4GPRi0o7sVonZT7bUBjBu8BM8g6vc
+	wpo95vxT9mWuyRIKTc22OvQPMRpGtMEnehvRF0qophqc09RHgbCrcTh1/b1brUp4xBHh
+	QeUw==
+X-Gm-Message-State: ALoCoQl8ueFlCmPR9xqSa8NdKgHaVg3aOD59wpUJRRzSzaFmQFUCXX2rrU9PqGHBOh/cyHbn/G4q
+X-Received: by 10.68.223.202 with SMTP id qw10mr3401332pbc.163.1407333150383; 
+	Wed, 06 Aug 2014 06:52:30 -0700 (PDT)
+Received: from ?IPv6:2601:c:9380:601:51fd:c9cf:3e1a:35e1?
+	([2601:c:9380:601:51fd:c9cf:3e1a:35e1])
+	by mx.google.com with ESMTPSA id j6sm1916087pdr.9.2014.08.06.06.52.29
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Aug 2014 06:52:29 -0700 (PDT)
+Message-ID: <53E2331C.1020008@mvista.com>
+Date: Wed, 06 Aug 2014 06:52:28 -0700
+From: akuster <akuster@mvista.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1407331293-4055-1-git-send-email-drew_moseley@mentor.com>	<53E22FBE.4060004@mlbassoc.com>
-	<DDDF1E21-0028-492F-B858-9174A09DB1BA@mentor.com>
-In-Reply-To: <DDDF1E21-0028-492F-B858-9174A09DB1BA@mentor.com>
-Subject: Re: [meta-oe][PATCH] evtest: Provide updated checksums
+To: joe_macdonald@mentor.com
+References: <1407332271-32696-1-git-send-email-joe_macdonald@mentor.com>
+In-Reply-To: <1407332271-32696-1-git-send-email-joe_macdonald@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] wireshark: update to latest stable version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,50 +52,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 13:51:42 -0000
+X-List-Received-Date: Wed, 06 Aug 2014 13:52:29 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 2014-08-06 07:41, Moseley, Drew wrote:
->
-> On Aug 6, 2014, at 9:38 AM, Gary Thomas <gary@mlbassoc.com> wrote:
->
->> On 2014-08-06 07:21, Drew Moseley wrote:
->>> Signed-off-by: Drew Moseley <drew_moseley@mentor.com>
->>> ---
->>>   meta-oe/recipes-support/evtest/evtest_1.25.bb | 4 ++--
->>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/meta-oe/recipes-support/evtest/evtest_1.25.bb b/meta-oe/recipes-support/evtest/evtest_1.25.bb
->>> index 640cec0..ccaa0c6 100644
->>> --- a/meta-oe/recipes-support/evtest/evtest_1.25.bb
->>> +++ b/meta-oe/recipes-support/evtest/evtest_1.25.bb
->>> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->>>   DEPENDS = "libxml2"
->>>
->>>   SRC_URI = "http://cgit.freedesktop.org/~whot/evtest/snapshot/evtest-${PV}.tar.bz2;name=archive"
->>> -SRC_URI[archive.md5sum] = "770d6af03affe976bdbe3ad1a922c973"
->>> -SRC_URI[archive.sha256sum] = "3d34123c68014dae6f7c19144ef79ea2915fa7a2f89ea35ca375a9cf9e191473"
->>> +SRC_URI[archive.md5sum] = "0ef3fe5e20fa2dee8994827d48482902"
->>> +SRC_URI[archive.sha256sum] = "6e93ef54f0aa7d263f5486ce4a14cac53cf50036bfd20cf045fef2b27ee6664b"
->>>
->>>   inherit autotools pkgconfig
->>
->> Why did these change?  It's really BAD practice to have a new/different
->> version of a program with an old name (hence different checksums).
->
-> No clue.  I downloaded them today and those were the sums that were there.
+thanks.
 
-Interesting - I have the older tar ball here (from 2012-01-23) and
-the contents are identical when extracted, even down to the file
-dates, etc.  It must have been repacked recently as the old file
-was still in place in June.
+- Armin
 
-All in all, not nice... (not your fault I know)
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+On 08/06/2014 06:37 AM, Joe MacDonald wrote:
+> Version 1.12.0 is out, update the SRC_URI and associated variables.
+>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> ---
+>   .../wireshark/va_list-can-t-be-NULL-on-ARM.patch   | 99 ----------------------
+>   ...wireshark_1.12.0-rc2.bb => wireshark_1.12.0.bb} | 10 +--
+>   2 files changed, 5 insertions(+), 104 deletions(-)
+>   delete mode 100644 meta-networking/recipes-support/wireshark/wireshark/va_list-can-t-be-NULL-on-ARM.patch
+>   rename meta-networking/recipes-support/wireshark/{wireshark_1.12.0-rc2.bb => wireshark_1.12.0.bb} (81%)
+>
+> diff --git a/meta-networking/recipes-support/wireshark/wireshark/va_list-can-t-be-NULL-on-ARM.patch b/meta-networking/recipes-support/wireshark/wireshark/va_list-can-t-be-NULL-on-ARM.patch
+> deleted file mode 100644
+> index 26a004c..0000000
+> --- a/meta-networking/recipes-support/wireshark/wireshark/va_list-can-t-be-NULL-on-ARM.patch
+> +++ /dev/null
+> @@ -1,99 +0,0 @@
+> -From 320c4f0d705a3ed94f710fb4b7b3eef897ff7bc4 Mon Sep 17 00:00:00 2001
+> -From: Steev Klimaszewski <threeway@gmail.com>
+> -Date: Thu, 19 Jun 2014 16:54:57 -0500
+> -Subject: [PATCH] va_list can't be NULL on ARM.
+> -
+> -Bug: 10209
+> -Change-Id: Ibd63a530450b7d2d4ec244e91c77caa731ba63aa
+> -Signed-off-by: Steev Klimaszewski <threeway@gmail.com>
+> -Signed-off-by: Balint Reczey <balint@balintreczey.hu>
+> -Reviewed-on: https://code.wireshark.org/review/2464
+> -Reviewed-by: Evan Huus <eapache@gmail.com>
+> -Reviewed-by: Michael Mann <mmann78@netscape.net>
+> -
+> -Upstream-Status: Backport
+> -The patch was imported from the wireshark git server
+> -  (https://code.wireshark.org/review/p/wireshark.git) as of commit id
+> -    320c4f0d705a3ed94f710fb4b7b3eef897ff7bc4.
+> -
+> -Signed-off-by: Armin Kuster <akuster@mvista.com>
+> -
+> ----
+> - epan/expert.c | 36 +++++++++++++++++++++++++++++-------
+> - 1 file changed, 29 insertions(+), 7 deletions(-)
+> -
+> -diff --git a/epan/expert.c b/epan/expert.c
+> -index 46be838..a69566d 100644
+> ---- a/epan/expert.c
+> -+++ b/epan/expert.c
+> -@@ -381,15 +381,26 @@ expert_set_info_vformat(packet_info *pinfo, proto_item *pi, int group, int sever
+> - 	tap_queue_packet(expert_tap, pinfo, ei);
+> - }
+> -
+> --void
+> --expert_add_info(packet_info *pinfo, proto_item *pi, expert_field *expindex)
+> -+/* Helper function for expert_add_info() to work around compiler's special needs on ARM*/
+> -+static inline void
+> -+expert_add_info_internal(packet_info *pinfo, proto_item *pi, expert_field *expindex, ...)
+> - {
+> -+	/* the va_list is ignored */
+> -+	va_list unused;
+> - 	expert_field_info* eiinfo;
+> -
+> - 	/* Look up the item */
+> - 	EXPERT_REGISTRAR_GET_NTH(expindex->ei, eiinfo);
+> -
+> --	expert_set_info_vformat(pinfo, pi, eiinfo->group, eiinfo->severity, *eiinfo->hf_info.p_id, FALSE, eiinfo->summary, NULL);
+> -+	va_start(unused, expindex);
+> -+	expert_set_info_vformat(pinfo, pi, eiinfo->group, eiinfo->severity, *eiinfo->hf_info.p_id, FALSE, eiinfo->summary, unused);
+> -+	va_end(unused);
+> -+}
+> -+
+> -+void
+> -+expert_add_info(packet_info *pinfo, proto_item *pi, expert_field *expindex)
+> -+{
+> -+	expert_add_info_internal(pinfo, pi, expindex);
+> - }
+> -
+> - void
+> -@@ -406,22 +417,33 @@ expert_add_info_format(packet_info *pinfo, proto_item *pi, expert_field *expinde
+> - 	va_end(ap);
+> - }
+> -
+> --proto_item *
+> --proto_tree_add_expert(proto_tree *tree, packet_info *pinfo, expert_field* expindex,
+> --		tvbuff_t *tvb, gint start, gint length)
+> -+/* Helper function for expert_add_expert() to work around compiler's special needs on ARM*/
+> -+static inline proto_item *
+> -+proto_tree_add_expert_internal(proto_tree *tree, packet_info *pinfo, expert_field* expindex,
+> -+		tvbuff_t *tvb, gint start, gint length, ...)
+> - {
+> - 	expert_field_info* eiinfo;
+> - 	proto_item *ti;
+> -+	va_list unused;
+> -
+> - 	/* Look up the item */
+> - 	EXPERT_REGISTRAR_GET_NTH(expindex->ei, eiinfo);
+> -
+> - 	ti = proto_tree_add_text(tree, tvb, start, length, "%s", eiinfo->summary);
+> --	expert_set_info_vformat(pinfo, ti, eiinfo->group, eiinfo->severity, *eiinfo->hf_info.p_id, FALSE, eiinfo->summary, NULL);
+> -+	va_start(unused, length);
+> -+	expert_set_info_vformat(pinfo, ti, eiinfo->group, eiinfo->severity, *eiinfo->hf_info.p_id, FALSE, eiinfo->summary, unused);
+> -+	va_end(unused);
+> - 	return ti;
+> - }
+> -
+> - proto_item *
+> -+proto_tree_add_expert(proto_tree *tree, packet_info *pinfo, expert_field* expindex,
+> -+		tvbuff_t *tvb, gint start, gint length)
+> -+{
+> -+	return proto_tree_add_expert_internal(tree, pinfo, expindex, tvb, start, length);
+> -+}
+> -+
+> -+proto_item *
+> - proto_tree_add_expert_format(proto_tree *tree, packet_info *pinfo, expert_field* expindex,
+> - 		tvbuff_t *tvb, gint start, gint length, const char *format, ...)
+> - {
+> ---
+> -1.9.1
+> -
+> diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+> similarity index 81%
+> rename from meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+> rename to meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+> index b965fdf..449ac47 100644
+> --- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0-rc2.bb
+> +++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+> @@ -26,12 +26,12 @@ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+>   EXTRA_OECONF = "--with-qt=no --enable-usr-local=no -enable-tshark"
+>
+>   LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
+> -SRC_URI = "http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0-rc2.tar.bz2 \
+> -    file://va_list-can-t-be-NULL-on-ARM.patch \
+> +SRC_URI = " \
+> +    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
+>   "
+> -
+> -SRC_URI[md5sum] = "dc1149073066a29f91116c168558262e"
+> -SRC_URI[sha256sum]= "31009bb450126e9b12808267419f31016d14e6fde7b5e39c85ad37459908cffb"
+> +
+> +SRC_URI[md5sum] = "8dcfe451d8769901129809d2e19c1fb7"
+> +SRC_URI[sha256sum]= "0f59fea1c5b35de90af681067e49113fee0dd7a901750a97fa25f4256dbf13c7"
+>
+>   do_configure_prepend() {
+>       # force to use fallback
+>
 
