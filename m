@@ -1,32 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f176.google.com (mail-yk0-f176.google.com
-	[209.85.160.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C2FB61585
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 481CB609AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 17:59:08 +0000 (UTC)
-Received: by mail-yk0-f176.google.com with SMTP id 19so1921418ykq.35
+	Wed,  6 Aug 2014 18:36:43 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id a1so2989717wgh.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2014 10:59:10 -0700 (PDT)
+	Wed, 06 Aug 2014 11:36:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=CGNQh4zv+EvelgitSQk4PAccMBK9xXAz/gTxiiN0qBI=;
-	b=htb3Zglx48U9VSgSyQkrPltXGYXAZuKBq8wajupePrpJdpxc4qP7T9xUrmB2AGEHIN
-	VZEmKWHmZKU9e+//v4pgfO+mdqw7pqNMGmXePN0otuEKynVlGaskFqxKkSkdq/MCtvCZ
-	Fk1YJen1+EYezg3qHS7bd44tzZotFnVIonHXHchCoFDPkclxqclj+GtdBZzuMxaCxamK
-	tcJygFNnnqA0fvvicn4gXuOHcMBPXXPckf1bgcf5GDb63nSmlg1+eJpNn1aTSgQcutTZ
-	LW6Seqq3SyTo7l7DsfDg2xeFVhFwUT49tr6VE0RmxYyAGOFqxhI+F3bUPBr3bYnMESNO
-	XAog==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=O3cmw5znme/v3eN9NhL7tYp8r15RE9wGDH0n/+jGSkU=;
+	b=E9DAxD5rTssBOTFudkU5Y+Gm5o1NZkj6I5lGqlaXI2oou2lOsbDMV6CzDESODIvpNO
+	Q+mE8XEtoFadaIyHLcdVNEc3i7PTPZRJCY0u1MYkrK62MXJ3jLFaStLWS6vyn5ffvhpk
+	+AhDgyuuMNEy8b3aDUyjibH6S5MCTo8fN0MA2/HWuJbG27SY6Rq/dWI9fIqYJL9MZ1An
+	oSqqc163WJYYzaewUdZZSTgiJURp/E1BhSpWKXl4oJp65S8QZ+Ujhb44CRxVIVGCHvla
+	uf44R4v/ZoHRt7ATd9C3BhyDtdyboWZWQIAjkPGZXk0OZ1+LX6OT/0oyc6KHmPXP7naL
+	WRHA==
+X-Received: by 10.180.99.34 with SMTP id en2mr53325770wib.34.1407350204781;
+	Wed, 06 Aug 2014 11:36:44 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ga2sm4201400wjb.44.2014.08.06.11.36.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Aug 2014 11:36:43 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 6 Aug 2014 20:37:14 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140806183714.GM14848@jama>
+References: <1407332271-32696-1-git-send-email-joe_macdonald@mentor.com>
 MIME-Version: 1.0
-X-Received: by 10.236.129.3 with SMTP id g3mr18638330yhi.67.1407347946805;
-	Wed, 06 Aug 2014 10:59:06 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Wed, 6 Aug 2014 10:59:06 -0700 (PDT)
-Date: Wed, 6 Aug 2014 14:59:06 -0300
-X-Google-Sender-Auth: ABpY99zQ1U6RZOMwhLWuXAMj0tc
-Message-ID: <CAP9ODKpe1xeC9KksG+7igf_nrLY5-hx5UgeoC=2p=D4Vysj1hA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: [meta-qt5] Patch failing to apply
+In-Reply-To: <1407332271-32696-1-git-send-email-joe_macdonald@mentor.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH] wireshark: update to latest stable version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,29 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 17:59:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Aug 2014 18:36:46 -0000
+X-Groupsio-MsgNum: 51459
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GoZzJvFfKjxI3RhA"
+Content-Disposition: inline
 
-Hello,
+--GoZzJvFfKjxI3RhA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The daisy branch seems to be broken. Please check:
+On Wed, Aug 06, 2014 at 09:37:51AM -0400, Joe MacDonald wrote:
+> Version 1.12.0 is out, update the SRC_URI and associated variables.
 
-recipe qtimageformats-5.2.1-r0: task do_patch: Started
-ERROR: Command Error: exit status: 1  Output:
-Applying patch 0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
-patching file qtimageformats.pro
-Hunk #1 FAILED at 1.
-1 out of 1 hunk FAILED -- rejects in file qtimageformats.pro
-Patch 0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
-does not apply (enforce with -f)
-ERROR: Function failed: patch_do_patch
-ERROR: Logfile of failure stored in:
-.../build/tmp/work/cortexa9hf-vfp-neon-oel-linux-gnueabi/qtimageformats/5.2.1-r0/temp/log.do_patch.22853
+BTW: this causes:
+ERROR: QA Issue: Package version for package wireshark went backwards
+which would break package feeds from (0:1.12.0-rc2-r0.3 to
+0:1.12.0-r0.0) [version-going-backwards]
 
-I catch this in our autobuilder.
+Which is caused by incorrect PV in rc2 (which I haven't noticed before),
+but as rc2 was in master only for couple of days, I can live without PE
+bump in it.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> ---
+>  .../wireshark/va_list-can-t-be-NULL-on-ARM.patch   | 99 ----------------------
+>  ...wireshark_1.12.0-rc2.bb => wireshark_1.12.0.bb} | 10 +--
+>  2 files changed, 5 insertions(+), 104 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/wireshark/wireshark/va_list-can-t-be-NULL-on-ARM.patch
+>  rename meta-networking/recipes-support/wireshark/{wireshark_1.12.0-rc2.bb => wireshark_1.12.0.bb} (81%)
 
+--GoZzJvFfKjxI3RhA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPiddoACgkQN1Ujt2V2gBzQLwCeL4hh4wsjQqkQKywG0qhLc76T
+dcgAoJf2EQCFcS+3VMKJOa0rNAJl5cyN
+=+5JK
+-----END PGP SIGNATURE-----
+
+--GoZzJvFfKjxI3RhA--
