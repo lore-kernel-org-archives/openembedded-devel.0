@@ -1,36 +1,37 @@
-Return-Path: <joe.macdonald@gmail.com>
-Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id DE10C60809
+Return-Path: <drew_moseley@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 0930D6FE7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 13:39:31 +0000 (UTC)
-Received: by mail-ig0-f169.google.com with SMTP id r2so10382982igi.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2014 06:39:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id;
-	bh=rymyzKt7o9YEplZF0wrHqs5s8m9w5BbccO3bZ5Mfowo=;
-	b=uHQT9ZhsgULLcVhp2EIh+EhaAyfEImK7f4O9qfqEjYQzTcLk6HNy8Iyy1+pI7dWfPM
-	06fWJT3sWwm+Xk2jkTb52k9ondsnQ7T3P0Mk3vnAjVBvWxKUq12LVKqPl5hY3fWjTz7x
-	IAbaOB8/B9xwx4jbuugAoPeakOfKfkHCk2NzQOLSyqtfd9yDxKMqBnks5jaWvbJYsg/n
-	8dWuxywrHyDEvxTeD7JeEZ0sZxQmhMIz0N2mWZ1LkPjqCy2yTk3nhhRh5SrUci1fqtcD
-	Zqb8sYLWMK8ShmzQH/93pP/kU7CKfaTS61anHQ6qT4BnhWDNyRZ8YslHFCcvkREbZk2F
-	r98g==
-X-Received: by 10.50.138.195 with SMTP id qs3mr18582517igb.14.1407332372801;
-	Wed, 06 Aug 2014 06:39:32 -0700 (PDT)
-Received: from skynet.deserted.net (24-246-4-250.cable.teksavvy.com.
-	[24.246.4.250])
-	by mx.google.com with ESMTPSA id bf4sm7716175igb.17.2014.08.06.06.39.30
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Aug 2014 06:39:31 -0700 (PDT)
-Sender: Joe MacDonald <joe.macdonald@gmail.com>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Aug 2014 09:39:29 -0400
-Message-Id: <1407332369-386-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 2.0.0.257.g75cc6c6
-Subject: [meta-networking][PATCH] README: Update layer dependencies
+	Wed,  6 Aug 2014 13:41:14 +0000 (UTC)
+Received: from svr-orw-fem-01.mgc.mentorg.com ([147.34.98.93])
+	by relay1.mentorg.com with esmtp 
+	id 1XF1Su-0005Ol-2w from drew_moseley@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Aug 2014 06:41:16 -0700
+Received: from SVR-ORW-FEM-06.mgc.mentorg.com ([147.34.97.120]) by
+	svr-orw-fem-01.mgc.mentorg.com over TLS secured channel with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 6 Aug 2014 06:41:15 -0700
+Received: from NA-MBX-03.mgc.mentorg.com ([fe80::9a:1569:df57:45b8]) by
+	SVR-ORW-FEM-06.mgc.mentorg.com ([147.34.97.120]) with mapi id
+	14.02.0247.003; Wed, 6 Aug 2014 06:41:15 -0700
+From: "Moseley, Drew" <drew_moseley@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] evtest: Provide updated checksums
+Thread-Index: AQHPsXlt1EKOyvK7pkC4DqaNRXRBT5vECbQAgAAA4YA=
+Date: Wed, 6 Aug 2014 13:41:15 +0000
+Message-ID: <DDDF1E21-0028-492F-B858-9174A09DB1BA@mentor.com>
+References: <1407331293-4055-1-git-send-email-drew_moseley@mentor.com>
+	<53E22FBE.4060004@mlbassoc.com>
+In-Reply-To: <53E22FBE.4060004@mlbassoc.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.34.91.1]
+MIME-Version: 1.0
+X-OriginalArrivalTime: 06 Aug 2014 13:41:15.0989 (UTC)
+	FILETIME=[185DB850:01CFB17C]
+Subject: Re: [meta-oe][PATCH] evtest: Provide updated checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +45,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 13:39:41 -0000
-
-There are a few recipes in meta-networking that depend unconditionally on
-components in meta-oe, so indicate that in the README.
-
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- meta-networking/README | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-Roy's question on the list reminded me of a change I've been meaning to do
-for ages now.  This follows the form used in meta-webserver.
+X-List-Received-Date: Wed, 06 Aug 2014 13:41:19 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <B53850DE56780F4A8A0AB9BCD33F64F7@mentor.com>
+Content-Transfer-Encoding: quoted-printable
 
 
-diff --git a/meta-networking/README b/meta-networking/README
-index 872b013..339d40e 100644
---- a/meta-networking/README
-+++ b/meta-networking/README
-@@ -21,6 +21,14 @@ URI: git://github.com/openembedded/oe-core.git
- branch: master
- revision: HEAD
- 
-+For some recipes, the meta-oe layer is required:
-+
-+URI: git://github.com/openembedded/meta-oe.git
-+subdirectory: meta-oe
-+branch: master
-+revision: HEAD
-+
-+
- Maintenance
- -----------
- 
--- 
-2.0.0.257.g75cc6c6
+On Aug 6, 2014, at 9:38 AM, Gary Thomas <gary@mlbassoc.com> wrote:
 
+> On 2014-08-06 07:21, Drew Moseley wrote:
+>> Signed-off-by: Drew Moseley <drew_moseley@mentor.com>
+>> ---
+>>  meta-oe/recipes-support/evtest/evtest_1.25.bb | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>=20
+>> diff --git a/meta-oe/recipes-support/evtest/evtest_1.25.bb b/meta-oe/rec=
+ipes-support/evtest/evtest_1.25.bb
+>> index 640cec0..ccaa0c6 100644
+>> --- a/meta-oe/recipes-support/evtest/evtest_1.25.bb
+>> +++ b/meta-oe/recipes-support/evtest/evtest_1.25.bb
+>> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa95=
+4499f7abaabaa882bbe"
+>>  DEPENDS =3D "libxml2"
+>>=20
+>>  SRC_URI =3D "http://cgit.freedesktop.org/~whot/evtest/snapshot/evtest-$=
+{PV}.tar.bz2;name=3Darchive"
+>> -SRC_URI[archive.md5sum] =3D "770d6af03affe976bdbe3ad1a922c973"
+>> -SRC_URI[archive.sha256sum] =3D "3d34123c68014dae6f7c19144ef79ea2915fa7a=
+2f89ea35ca375a9cf9e191473"
+>> +SRC_URI[archive.md5sum] =3D "0ef3fe5e20fa2dee8994827d48482902"
+>> +SRC_URI[archive.sha256sum] =3D "6e93ef54f0aa7d263f5486ce4a14cac53cf5003=
+6bfd20cf045fef2b27ee6664b"
+>>=20
+>>  inherit autotools pkgconfig
+>=20
+> Why did these change?  It's really BAD practice to have a new/different
+> version of a program with an old name (hence different checksums).
+>=20
+> --=20
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+No clue.  I downloaded them today and those were the sums that were there.
+
+Drew=
 
