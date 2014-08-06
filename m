@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id BD41D70998
+Return-Path: <bobadeshrikant@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FB42609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 10:23:32 +0000 (UTC)
-Received: by mail-wi0-f171.google.com with SMTP id hi2so8601031wib.16
+	Wed,  6 Aug 2014 10:54:27 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id n3so9372389wiv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2014 03:23:33 -0700 (PDT)
+	Wed, 06 Aug 2014 03:54:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TGP3l8hxrn7FatFpNTXls4d+R4mrTGu3uHKiyxW2EYo=;
-	b=oIarHK6H359S0SnCSsiWATnMIL9L/yvWF5ym7rhRn87mLwdU6eE7skZvXCo/3TZXg6
-	OjELVBFsclyJXyOYOdoNu53hVjh8PPqMVPOgQgmFOATuiFiNuUcVQY6HJw+ujFeqMrZ5
-	27DZp1FS1JuJDhO60RyaFvuX92vOxetqGGJ30eyF4X5R8Xu/yZ3XIFCXOFIz2dtTgGXD
-	D8+xHpEpziTYg6G1Lx+0+ZkTCYA1KI3WgQDMa3xH3Nk+TzRNXUmnhsjxb/KwPhkCOISP
-	KKe1OfYSA6cD3ch1Fg5rfRV5eunh5fx7XID/WwSmGIuTcFVJ8KdRWH3RB6nKJ4Ggt4S8
-	3EJQ==
-X-Received: by 10.180.75.49 with SMTP id z17mr14630208wiv.80.1407320613338;
-	Wed, 06 Aug 2014 03:23:33 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	es9sm1436639wjd.1.2014.08.06.03.23.32 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Aug 2014 03:23:32 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 6 Aug 2014 12:24:02 +0200
+	h=from:to:cc:subject:date:message-id;
+	bh=kzOYK9HhsTEtBcHYVdNrMZ38Ye36Yxo8ABEHow49U4k=;
+	b=swiIGANNxGJvEJ+NR1vz4axqIricfI/5uF63xWXdS5BjSsUXN9rWVLfLkRBIyO8RDH
+	fffIVXGy4DOl2xhSTW2eENNAwy6WwIa87Yrvp9nLrmQsDZ8NbhDmmru7FrBpTmITMKpm
+	wElSU3htUw8yDUxuJ0q7wVQB3nyP3CEzdr6MkGcjy3mLspucTheGnWyZoEuGo7JSuXlj
+	+qkcXziK1bkoQU+T0UBFaHQFeX/c9qi+PbnhNOFgePYeQhgk9N9HJ4W/LPxiuC+XVi7Z
+	wMAhGGyHvxPF+Ra3WcY/HoBAw8T0jSa+WAwyOTzjbJkEWcxk3TLvYZcFjResbul+mQFE
+	isZA==
+X-Received: by 10.180.184.20 with SMTP id eq20mr8024360wic.37.1407322468219;
+	Wed, 06 Aug 2014 03:54:28 -0700 (PDT)
+Received: from localhost.localdomain ([139.181.35.34])
+	by mx.google.com with ESMTPSA id hp6sm4926416wib.23.2014.08.06.03.54.25
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 06 Aug 2014 03:54:27 -0700 (PDT)
+From: Shrikant Bobade <bobadeshrikant@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140806102402.GF14848@jama>
-References: <1404822759-25699-1-git-send-email-koen.kooi@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <1404822759-25699-1-git-send-email-koen.kooi@linaro.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: Re: [meta-browser][PATCH] firefox: workaround for freetype-config breakage
+Date: Wed,  6 Aug 2014 16:25:22 +0530
+Message-Id: <1407322522-6572-1-git-send-email-bobadeshrikant@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+Subject: [meta-oe][daisy][PATCH] libmtp: inherit gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,66 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 10:23:34 -0000
-X-Groupsio-MsgNum: 51439
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ULyIDA2m8JTe+TiX"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Aug 2014 10:54:34 -0000
 
---ULyIDA2m8JTe+TiX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
 
-On Tue, Jul 08, 2014 at 02:32:39PM +0200, Koen Kooi wrote:
-> All binconfig scripts in OE-core have been disabled, leading to -I/usr/in=
-clude/freetype2 disappearing from C(PP)FLAGS. Add it in manually as a worka=
-round, mozilla autotools are a maze and not easily fixed.
+This is required to fix autoreconf execution failure
+: AM_ICONV,AC_LIB
 
-I've merged this one.
+Signed-off-by: Christopher Larson <kergoth@gmail.com>
+Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+---
+ .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks
+diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+index f4ea800..6185217 100644
+--- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
++++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+@@ -33,7 +33,7 @@ skip_udev_rules_generation () {
+ 	cp ${WORKDIR}/69-libmtp.rules ${S}/
+ }
+ 
+-inherit autotools pkgconfig lib_package
++inherit autotools pkgconfig lib_package gettext
+ 
+ EXTRA_OECONF += "--disable-rpath"
+ 
+-- 
+1.7.9.5
 
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> ---
->  recipes-mozilla/firefox/firefox_10.0.11esr.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb b/recipes-mozi=
-lla/firefox/firefox_10.0.11esr.bb
-> index 1a1178c..98da1a4 100644
-> --- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-> +++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-> @@ -85,6 +85,7 @@ inherit mozilla
->  EXTRA_OEMAKE =3D "installdir=3D${libdir}/${PN}"
-> =20
->  ARM_INSTRUCTION_SET =3D "arm"
-> +TARGET_CC_ARCH +=3D " -I${STAGING_INCDIR}/freetype2"
-> =20
->  do_install() {
->  	oe_runmake DESTDIR=3D"${D}" destdir=3D"${D}" install
-> --=20
-> 1.9.3
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ULyIDA2m8JTe+TiX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPiAkIACgkQN1Ujt2V2gBxPUwCZAT4Jc1ZklKxPMzaIFyqzJCSq
-XWUAn2Jt4DstiJ/uXTPzZ/yLN7jDLWR+
-=svXF
------END PGP SIGNATURE-----
-
---ULyIDA2m8JTe+TiX--
