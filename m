@@ -1,26 +1,32 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id E999F7067B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f176.google.com (mail-yk0-f176.google.com
+	[209.85.160.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C2FB61585
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 15:51:39 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 06 Aug 2014 08:51:40 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,812,1400050800"; d="scan'208";a="584262469"
-Received: from cgwithan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.26])
-	by orsmga002.jf.intel.com with ESMTP; 06 Aug 2014 08:51:39 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Himanshu Pandey <pandey_himanshu80@rediffmail.com>
-Date: Wed, 06 Aug 2014 16:51:38 +0100
-Message-ID: <2182141.T2GfbSclhN@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.7-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140806081042.15013.qmail@f4mail-235-223.rediffmail.com>
-References: <20140806081042.15013.qmail@f4mail-235-223.rediffmail.com>
+	Wed,  6 Aug 2014 17:59:08 +0000 (UTC)
+Received: by mail-yk0-f176.google.com with SMTP id 19so1921418ykq.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Aug 2014 10:59:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=CGNQh4zv+EvelgitSQk4PAccMBK9xXAz/gTxiiN0qBI=;
+	b=htb3Zglx48U9VSgSyQkrPltXGYXAZuKBq8wajupePrpJdpxc4qP7T9xUrmB2AGEHIN
+	VZEmKWHmZKU9e+//v4pgfO+mdqw7pqNMGmXePN0otuEKynVlGaskFqxKkSkdq/MCtvCZ
+	Fk1YJen1+EYezg3qHS7bd44tzZotFnVIonHXHchCoFDPkclxqclj+GtdBZzuMxaCxamK
+	tcJygFNnnqA0fvvicn4gXuOHcMBPXXPckf1bgcf5GDb63nSmlg1+eJpNn1aTSgQcutTZ
+	LW6Seqq3SyTo7l7DsfDg2xeFVhFwUT49tr6VE0RmxYyAGOFqxhI+F3bUPBr3bYnMESNO
+	XAog==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Regarding net-snmp
+X-Received: by 10.236.129.3 with SMTP id g3mr18638330yhi.67.1407347946805;
+	Wed, 06 Aug 2014 10:59:06 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Wed, 6 Aug 2014 10:59:06 -0700 (PDT)
+Date: Wed, 6 Aug 2014 14:59:06 -0300
+X-Google-Sender-Auth: ABpY99zQ1U6RZOMwhLWuXAMj0tc
+Message-ID: <CAP9ODKpe1xeC9KksG+7igf_nrLY5-hx5UgeoC=2p=D4Vysj1hA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: [meta-qt5] Patch failing to apply
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,185 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 15:51:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 06 Aug 2014 17:59:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wednesday 06 August 2014 08:10:42 Himanshu  Pandey wrote:
-> Please help me rectify the following error:
-> 
-> ERROR: QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpnetstat ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpdelta ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpusm ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpbulkget ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpstatus ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/agentxtrap ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpwalk ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpget ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmptranslate ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpgetnext ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmptest ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpdf ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmptable ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpbulkwalk ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmptrap ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/encode_keychange ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpvacm ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/bin/snmpset ERROR:
->  QA Issue: non -staticdev package contains static .a library: snmp path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmpagent.a' ERROR:
->  QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: snmp
-> path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmp.so' ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/lib/libnetsnmpmibs.so.30.0.2 ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/lib/libnetsnmpagent.so.30.0.2 ERROR:
->  QA Issue: non -staticdev package contains static .a library: snmp path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmptrapd.a' ERROR:
->  QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: snmp
-> path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmptrapd.so' ERROR:
->  QA Issue: non -staticdev package contains static .a library: snmp path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmphelpers.a' ERROR:
->  QA Issue: non -staticdev package contains static .a library: snmp path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmpmibs.a' ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/lib/libnetsnmptrapd.so.30.0.2 ERROR:
->  QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: snmp
-> path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmpagent.so' ERROR:
->  QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: snmp
-> path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmphelpers.so' ERROR:
->  QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: snmp
-> path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmpmibs.so' ERROR:
->  QA Issue: non -staticdev package contains static .a library: snmp path
-> '/work/x86_64-poky-linux/snmp/1.0-r7/packages-split/snmp/opt/net-snmp/lib/li
-> bnetsnmp.a' ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/sbin/snmptrapd ERROR:
->  QA Issue: package snmp contains bad RPATH
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/im
-> age/opt/net-snmp/lib in file
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/pa
-> ckages-split/snmp/opt/net-snmp/sbin/snmpd ERROR: QA run found fatal errors.
-> Please consider fixing them.
-> ERROR: Function failed: do_package_qa
-> ERROR:
->  Logfile of failure stored in:
-> /home/yocto/poky-dora-10.0.0/build/tmp/work/x86_64-poky-linux/snmp/1.0-r7/te
-> mp/log.do_package.6586 ERROR: Task 466
-> (/home/yocto/poky-dora-10.0.0/meta-msc/recipes-msc/msc/snmp.bb, do_package)
-> failed with exit code '1'
+Hello,
 
-So this is your own recipe and not the net-snmp recipe in meta-networking, is 
-that correct?
+The daisy branch seems to be broken. Please check:
 
-As for the resolving QA errors, we have a section recently added to the Yocto 
-Project reference manual which may be useful:
+recipe qtimageformats-5.2.1-r0: task do_patch: Started
+ERROR: Command Error: exit status: 1  Output:
+Applying patch 0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+patching file qtimageformats.pro
+Hunk #1 FAILED at 1.
+1 out of 1 hunk FAILED -- rejects in file qtimageformats.pro
+Patch 0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+does not apply (enforce with -f)
+ERROR: Function failed: patch_do_patch
+ERROR: Logfile of failure stored in:
+.../build/tmp/work/cortexa9hf-vfp-neon-oel-linux-gnueabi/qtimageformats/5.2.1-r0/temp/log.do_patch.22853
 
-http://www.yoctoproject.org/docs/1.7/ref-manual/ref-manual.html#ref-qa-checks
-
-Cheers,
-Paul
+I catch this in our autobuilder.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
