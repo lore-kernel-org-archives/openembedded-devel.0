@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 626B57067B
+Return-Path: <joe.macdonald@gmail.com>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 74303709D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Aug 2014 14:34:30 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id x13so2734893wgg.31
+	Wed,  6 Aug 2014 14:42:37 +0000 (UTC)
+Received: by mail-ie0-f182.google.com with SMTP id y20so2944135ier.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Aug 2014 07:34:31 -0700 (PDT)
+	Wed, 06 Aug 2014 07:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1YuEa4vXE/eH3P5nyDLaOfvpoi1tnjnXdyrKhbocKMY=;
-	b=F9O5uHaDvTAvwguoArT4G7rLkEpDOenmHVhgXY+O5g2iPzARbd2+uDc9m30tnclayl
-	YB+WOpArc0GQEnI4fJ28G5K8AWibuR0RD1NOZRaBRsK3Paxe+rmlQ+HI+PpOnVt+1dhW
-	XMuHLyK3zZAjIhGUxeOFDnrcG96TpXj/1eDhrepWz0vYzp5L5BYtb4S+572Yp07ohSt8
-	szLSL9vcXJEWZjNAZDsWqBNLj86pAEy2hJS8FSStgc4sLX0aodhDZC9ysuyweb14rKMs
-	6CFtQ+ZySluCN9eh76zyIocdafqO39EVLXYQVMW/qjNcYMiP/Xihk4CJSDeMKpzKIKlC
-	OU8w==
-X-Received: by 10.180.186.3 with SMTP id fg3mr49649972wic.78.1407335671416;
-	Wed, 06 Aug 2014 07:34:31 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	pj6sm2903385wjb.21.2014.08.06.07.34.30
-	for <openembedded-devel@lists.openembedded.org>
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=0OTdq06wTqh51/Y4nB695Oqiq+1ZmebGchpOrjhPzFY=;
+	b=gBr40hERZ+XCrVzMc1MD0f+cRtRPSY72gZ2Mi7MwZTMyyR27S91AnnmU2elUbvn1de
+	Snk90ikcw6TLldjNee+Yqgbx6NBSsVXGrLaV5URfiJsn2MjFZFx+8f3jEMgfnyGWqPdF
+	trOKOn/Ra1V7RflipHZQnc2chNM8WAqP+N6FUd05zPSvMSoYHwmS67HvM1SCbgZ0Ne/P
+	Nrqg7aT/qPMLRKo63D3AHkZ6dJiSGU7Tv9lGUWeEIOzMYwsye2TuOtxqjWZZg71SokDN
+	7C66iK9EpM28dfnyd+tMH1u5s2PaLQ5AW9VMcHJeSdtU7fHdMSU+567kecbdyuA7S/4C
+	j7HA==
+X-Received: by 10.50.35.133 with SMTP id h5mr19350699igj.26.1407336158032;
+	Wed, 06 Aug 2014 07:42:38 -0700 (PDT)
+Received: from skynet.deserted.net (24-246-4-250.cable.teksavvy.com.
+	[24.246.4.250])
+	by mx.google.com with ESMTPSA id l6sm22969002igv.4.2014.08.06.07.42.35
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Aug 2014 07:34:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 6 Aug 2014 16:35:01 +0200
+	Wed, 06 Aug 2014 07:42:36 -0700 (PDT)
+Sender: Joe MacDonald <joe.macdonald@gmail.com>
+From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140806143501.GJ14848@jama>
-References: <1407331293-4055-1-git-send-email-drew_moseley@mentor.com>
-MIME-Version: 1.0
-In-Reply-To: <1407331293-4055-1-git-send-email-drew_moseley@mentor.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] evtest: Provide updated checksums
+Date: Wed,  6 Aug 2014 10:42:33 -0400
+Message-Id: <1407336153-2226-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 2.0.0.257.g75cc6c6
+Subject: [meta-networking][PATCH] wireshark: update README instructions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,69 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Aug 2014 14:34:32 -0000
-X-Groupsio-MsgNum: 51453
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bgQAstJ9X1Eg13Dy"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Aug 2014 14:42:38 -0000
 
---bgQAstJ9X1Eg13Dy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Minor tweaks to the README to make the email suggestion follow the format
+used in other meta-openembedded README files and adding clarification on
+building wireshark in a GUI environment.
 
-On Wed, Aug 06, 2014 at 09:21:33AM -0400, Drew Moseley wrote:
-> Signed-off-by: Drew Moseley <drew_moseley@mentor.com>
-> ---
->  meta-oe/recipes-support/evtest/evtest_1.25.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/evtest/evtest_1.25.bb b/meta-oe/reci=
-pes-support/evtest/evtest_1.25.bb
-> index 640cec0..ccaa0c6 100644
-> --- a/meta-oe/recipes-support/evtest/evtest_1.25.bb
-> +++ b/meta-oe/recipes-support/evtest/evtest_1.25.bb
-> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954=
-499f7abaabaa882bbe"
->  DEPENDS =3D "libxml2"
-> =20
->  SRC_URI =3D "http://cgit.freedesktop.org/~whot/evtest/snapshot/evtest-${=
-PV}.tar.bz2;name=3Darchive"
-> -SRC_URI[archive.md5sum] =3D "770d6af03affe976bdbe3ad1a922c973"
-> -SRC_URI[archive.sha256sum] =3D "3d34123c68014dae6f7c19144ef79ea2915fa7a2=
-f89ea35ca375a9cf9e191473"
-> +SRC_URI[archive.md5sum] =3D "0ef3fe5e20fa2dee8994827d48482902"
-> +SRC_URI[archive.sha256sum] =3D "6e93ef54f0aa7d263f5486ce4a14cac53cf50036=
-bfd20cf045fef2b27ee6664b"
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ meta-networking/recipes-support/wireshark/README | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-NAK: see evtest changes in master-next:
-http://patchwork.openembedded.org/patch/77211/
-http://patchwork.openembedded.org/patch/77213/
+diff --git a/meta-networking/recipes-support/wireshark/README b/meta-networking/recipes-support/wireshark/README
+index 0e0c526..63b5b72 100644
+--- a/meta-networking/recipes-support/wireshark/README
++++ b/meta-networking/recipes-support/wireshark/README
+@@ -19,6 +19,10 @@ IMAGE_INSTALL_append = " wireshark"
+ Adding the wireshark to your graphical build
+ ========================================
+ via local.conf
++IMAGE_INSTALL_append = " wireshark"
++
++and one of:
++
+ EXTRA_IMAGE_FEATURES += "x11-base"
+ 
+ or use the "core-image-x11"
+@@ -29,8 +33,12 @@ Maintenance
+ 
+ Send patches, comments or questions to openembedded-devel@lists.openembedded.org
+ 
+-When sending single patches, please using something like:
+-'git send-email -1 --to  openembedded-devel@lists.openembedded.org --cc akuster@mvista.com --subject-prefix=meta-security][PATCH'
++When sending single patches, please use something like:
++
++   git send-email -1 -M \
++       --to openembedded-devel@lists.openembedded.org \
++       --cc akuster@mvista.com \
++       --subject-prefix=meta-networking][PATCH
+ 
+ Maintainer:    Armin Kuster <akuster@mvista.com>
+ 
+-- 
+2.0.0.257.g75cc6c6
 
-> =20
->  inherit autotools pkgconfig
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---bgQAstJ9X1Eg13Dy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPiPRUACgkQN1Ujt2V2gBzCygCeN7CpIDKtJHpKUyf52wzS8zYg
-4doAn218QCjwoOHgnIU9JblR8uxgMMvc
-=vWSc
------END PGP SIGNATURE-----
-
---bgQAstJ9X1Eg13Dy--
