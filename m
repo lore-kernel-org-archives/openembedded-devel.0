@@ -1,31 +1,52 @@
-Return-Path: <bobadeshrikant@gmail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FF1265CAD
+Return-Path: <mike.looijmans@topic.nl>
+X-Greylist: delayed 342 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 07 Aug 2014 12:34:58 UTC
+Received: from retry101.mer-nm.internl.net (vif1-retry101.mer-nm.internl.net
+	[217.149.192.107])
+	by mail.openembedded.org (Postfix) with ESMTP id A0D26609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 12:05:55 +0000 (UTC)
-Received: by mail-ig0-f179.google.com with SMTP id h18so4380897igc.6
+	Thu,  7 Aug 2014 12:34:58 +0000 (UTC)
+Received: from smtp102.mer-nm.internl.net (smtp102.mer-nm.internl.net
+	[217.149.192.138])
+	by retry101.mer-nm.internl.net (Postfix) with ESMTP id 294B54039E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Aug 2014 05:05:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=J9jEacb6SXMOpVThRB1sVvZ3Q16+AB+LAGYcvVH7yMU=;
-	b=UBE5rr02wrsHllt4au0tvVt3gBY7w97d6+1FWtwy/NUj5NgMbiSbA7gR7g9P73PGPO
-	w/hzXq9+11qA52stEhoJzSdjpYQsaz75fcIe6fKQFeoPvvMhZVBPbCGnmJXXTAP76a/s
-	bvpmOmRmU0Y8vl+neJKJyZtuwEF4KPpKIA1FBkLZW1optJUj/MSrl/PUSOkUVo7aFaqc
-	ul3xe0DntbBdRlOVub1AxcggEFYLuhZ0EF6pO+fM0JxCmrzcTGqhylPhftH1ac0B5+t8
-	bENDUZ0IygdQcfcPR+BJ70jjfI2ki2ogq1iDEOqUQI9K1wg9VlpKKLRhzwgJlYnZFIOS
-	jZ5w==
+	Thu,  7 Aug 2014 14:29:19 +0200 (CEST)
+Received: from amavisd-new (mailscanner02.wrt-nm.internl.net [217.149.192.114])
+	by smtp102.mer-nm.internl.net (Postfix) with ESMTP id B4F363F55F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Aug 2014 14:29:16 +0200 (CEST)
+X-Spam-scanned: scanned by InterNLnet Mail Scan System
+X-Spam-Flag: NO
+X-Spam-Score: -2.9
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 tagged_above=-999 required=4.5
+	tests=[BAYES_00=-2.9] autolearn=no
+X-Spam-Languages: en
+Received: from smtp102.mer-nm.internl.net ([217.149.192.138])
+	by amavisd-new (mailscanner02.wrt-nm.internl.net [217.149.192.160])
+	(amavisd-new, port 10024)
+	with ESMTP for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Aug 2014 14:29:16 +0200 (CEST)
+Received: from TOP-EX01.TOPIC.LOCAL (mail.topic.nl [82.204.13.182])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by smtp102.mer-nm.internl.net (Postfix) with ESMTPS
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Aug 2014 14:29:15 +0200 (CEST)
+Received: from [192.168.80.45] (192.168.80.45) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.181.6;
+	Thu, 7 Aug 2014 14:29:25 +0200
+Message-ID: <53E3711A.7000002@topic.nl>
+Date: Thu, 7 Aug 2014 14:29:14 +0200
+From: Mike Looijmans <mike.looijmans@topic.nl>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-X-Received: by 10.50.80.45 with SMTP id o13mr68601122igx.7.1407413156409; Thu,
-	07 Aug 2014 05:05:56 -0700 (PDT)
-Received: by 10.50.13.10 with HTTP; Thu, 7 Aug 2014 05:05:56 -0700 (PDT)
-Date: Thu, 7 Aug 2014 17:35:56 +0530
-Message-ID: <CALwQErryyYqTt9cJ8aAYVbHgtd3_bwSAxii5EeRJOtMNeXFQPg@mail.gmail.com>
-From: Shrikant Bobade <bobadeshrikant@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [PATCH] gdk-pixbuf-native: add setscene dep on jpeg-native
+To: <openembedded-devel@lists.openembedded.org>
+X-Originating-IP: [192.168.80.45]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+Subject: bitcoin recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,68 +60,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Aug 2014 12:05:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 07 Aug 2014 12:35:02 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Thanks Martin,
+=EF=BB=BFJust out of curiousity, I tried to build bitcoin for an ARM target=
+ using bitbake.
 
-sending it to oe-core mailing list.
+Googling a bit reveils tons of claims of people having compiled it for thei=
+r
+board (e.g. the raspberry pi), and very likely, some of them were using OE.
 
-Thanks
-Shrikant
+Somewhere, someone knows how to do this...
+
+Strangely, i couldn't find a recipe online. So i did a quick try with this =
+recipe:
+
+SUMMARY =3D "Bitcoin miner"
+LICENSE =3D "MIT"
+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9eef91148a9b14ec7f9df333daebc746=
+"
+# https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md
+DEPENDS +=3D "boost db"
+SRCREV =3D "5e94d0036a76ea9d63e4ed17b12554caef7f55da"
+SRC_URI =3D "git://github.com/bitcoin/bitcoin/"
+S =3D "${WORKDIR}/git"
+inherit pkgconfig autotools
+# Workarounds...
+EXTRA_OECONF +=3D "\
+	--with-incompatible-bdb \
+	--with-boost-libdir=3D${STAGING_LIBDIR} \
+	"
 
 
-On Thu, Aug 7, 2014 at 5:33 PM, Bobade, Shrikant <Shrikant_Bobade@mentor.com
-> wrote:
+This didn't get very far, apparently the bitcoin people aren't very aware o=
+f=20
+crosscompiling...
 
->
-> ________________________________________
-> From: Martin Jansa [martin.jansa@gmail.com]
-> Sent: Thursday, August 07, 2014 3:46 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Bobade, Shrikant
-> Subject: Re: [oe] [PATCH] gdk-pixbuf-native: add setscene dep on
-> jpeg-native
->
-> On Thu, Aug 07, 2014 at 03:13:38PM +0530, Shrikant Bobade wrote:
-> > From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
-> >
-> > Without this, we can get setscene postinst failure due to libjpeg being
-> > unavailable.
->
-> This needs to go to oe-core ML.
->
-> >
-> > Signed-off-by: Christopher Larson <kergoth@gmail.com>
-> > Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
-> > ---
-> >  meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb |    1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> > index 3d08146..1248529 100644
-> > --- a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> > +++ b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> > @@ -74,6 +74,7 @@ RDEPENDS_${PN}-ptest += "gnome-desktop-testing"
-> >
-> >  PACKAGES_DYNAMIC += "^gdk-pixbuf-loader-.*"
-> >  PACKAGES_DYNAMIC_class-native = ""
-> > +PIXBUFCACHE_SYSROOT_DEPS_class-native +=
-> "jpeg-native:do_populate_sysroot_setscene"
-> >
-> >  python populate_packages_prepend () {
-> >      postinst_pixbufloader = d.getVar("postinst_pixbufloader", True)
-> > --
-> > 1.7.9.5
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
+It fails to configure with a cryptic message like this:
+
+checking whether the Boost::Thread library is available... yes
+checking for exit in -lboost_thread... yes
+checking whether the Boost::Chrono library is available... yes
+configure: error: Could not find a version of the boost_chrono library!
+
+A similar one about the boost_system library was fixed using the=20
+"--with-boost-libdir=3D${STAGING_LIBDIR}" hack, but this one has me baffled=
+.
+
+
+Met vriendelijke groet / kind regards,
+
+Mike Looijmans
+
+TOPIC Embedded Systems
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: (+31) (0) 499 33 69 79
+Telefax:  (+31) (0) 499 33 69 70
+E-mail: mike.looijmans@topic.nl
+Website: www.topic.nl
+
+Please consider the environment before printing this e-mail
+
+Topic zoekt FPGA experts
+http://topic.nl/vacatures/word-jij-onze-nieuwe-fpga-expert/
+
 
