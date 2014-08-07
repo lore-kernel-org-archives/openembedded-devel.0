@@ -1,39 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E35A61585
+Return-Path: <bobadeshrikant@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FF1265CAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 10:15:44 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id k14so3842829wgh.8
+	Thu,  7 Aug 2014 12:05:55 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id h18so4380897igc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Aug 2014 03:15:45 -0700 (PDT)
+	Thu, 07 Aug 2014 05:05:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=lJk0QgaTMQ0U+Uojj8CkUdpayLQQmOcHqgkfFRMlAhk=;
-	b=hk+Kq4pcVfDodzoO8S/mseUHfoAGySbVQdMRbYIdZoCzZrOdO8yTuJapIHKDvpazYv
-	xua5iAUToJK2bXGpLvjjtMyJVrsNz+8GCxdwOs5KfG/9NBYPyfZqsgAlmHT4veh114gE
-	+fJMz8HXremOa0EvYVQyO+7DB0DnAxTnoJDbdGDqcB+XttzZG1hIprZahyhO1WXGPyeI
-	aicc9X/+XN9mlBQK97h8BAzPzo3vLrkhOptrkQdDFgMLeqBP3BcUxoVOlXyMjEpgtCtl
-	nnP3J9YpbGOQ9dSTY3ktPMXnkVdxcT658dmSgtgLyP5iDUilF0rI9tnxmy8YrYiuCBKv
-	Czng==
-X-Received: by 10.194.78.170 with SMTP id c10mr23490583wjx.22.1407406545490;
-	Thu, 07 Aug 2014 03:15:45 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	pj6sm8856526wjb.21.2014.08.07.03.15.44 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Aug 2014 03:15:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 7 Aug 2014 12:16:16 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140807101616.GU14848@jama>
-References: <1407404618-32573-1-git-send-email-bobadeshrikant@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=J9jEacb6SXMOpVThRB1sVvZ3Q16+AB+LAGYcvVH7yMU=;
+	b=UBE5rr02wrsHllt4au0tvVt3gBY7w97d6+1FWtwy/NUj5NgMbiSbA7gR7g9P73PGPO
+	w/hzXq9+11qA52stEhoJzSdjpYQsaz75fcIe6fKQFeoPvvMhZVBPbCGnmJXXTAP76a/s
+	bvpmOmRmU0Y8vl+neJKJyZtuwEF4KPpKIA1FBkLZW1optJUj/MSrl/PUSOkUVo7aFaqc
+	ul3xe0DntbBdRlOVub1AxcggEFYLuhZ0EF6pO+fM0JxCmrzcTGqhylPhftH1ac0B5+t8
+	bENDUZ0IygdQcfcPR+BJ70jjfI2ki2ogq1iDEOqUQI9K1wg9VlpKKLRhzwgJlYnZFIOS
+	jZ5w==
 MIME-Version: 1.0
-In-Reply-To: <1407404618-32573-1-git-send-email-bobadeshrikant@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Shrikant Bobade <Shrikant_Bobade@mentor.com>
-Subject: Re: [PATCH] gdk-pixbuf-native: add setscene dep on jpeg-native
+X-Received: by 10.50.80.45 with SMTP id o13mr68601122igx.7.1407413156409; Thu,
+	07 Aug 2014 05:05:56 -0700 (PDT)
+Received: by 10.50.13.10 with HTTP; Thu, 7 Aug 2014 05:05:56 -0700 (PDT)
+Date: Thu, 7 Aug 2014 17:35:56 +0530
+Message-ID: <CALwQErryyYqTt9cJ8aAYVbHgtd3_bwSAxii5EeRJOtMNeXFQPg@mail.gmail.com>
+From: Shrikant Bobade <bobadeshrikant@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [PATCH] gdk-pixbuf-native: add setscene dep on jpeg-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +39,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Aug 2014 10:15:55 -0000
-X-Groupsio-MsgNum: 51480
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="udzYTtuEmHLUHegf"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Aug 2014 12:05:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
---udzYTtuEmHLUHegf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks Martin,
 
-On Thu, Aug 07, 2014 at 03:13:38PM +0530, Shrikant Bobade wrote:
-> From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
->=20
-> Without this, we can get setscene postinst failure due to libjpeg being
-> unavailable.
+sending it to oe-core mailing list.
 
-This needs to go to oe-core ML.
+Thanks
+Shrikant
 
->=20
-> Signed-off-by: Christopher Larson <kergoth@gmail.com>
-> Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
-> ---
->  meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb |    1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb b/meta/re=
-cipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> index 3d08146..1248529 100644
-> --- a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> +++ b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
-> @@ -74,6 +74,7 @@ RDEPENDS_${PN}-ptest +=3D "gnome-desktop-testing"
-> =20
->  PACKAGES_DYNAMIC +=3D "^gdk-pixbuf-loader-.*"
->  PACKAGES_DYNAMIC_class-native =3D ""
-> +PIXBUFCACHE_SYSROOT_DEPS_class-native +=3D "jpeg-native:do_populate_sysr=
-oot_setscene"
-> =20
->  python populate_packages_prepend () {
->      postinst_pixbufloader =3D d.getVar("postinst_pixbufloader", True)
-> --=20
-> 1.7.9.5
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+On Thu, Aug 7, 2014 at 5:33 PM, Bobade, Shrikant <Shrikant_Bobade@mentor.com
+> wrote:
 
---udzYTtuEmHLUHegf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+>
+> ________________________________________
+> From: Martin Jansa [martin.jansa@gmail.com]
+> Sent: Thursday, August 07, 2014 3:46 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Bobade, Shrikant
+> Subject: Re: [oe] [PATCH] gdk-pixbuf-native: add setscene dep on
+> jpeg-native
+>
+> On Thu, Aug 07, 2014 at 03:13:38PM +0530, Shrikant Bobade wrote:
+> > From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+> >
+> > Without this, we can get setscene postinst failure due to libjpeg being
+> > unavailable.
+>
+> This needs to go to oe-core ML.
+>
+> >
+> > Signed-off-by: Christopher Larson <kergoth@gmail.com>
+> > Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+> > ---
+> >  meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb |    1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+> b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+> > index 3d08146..1248529 100644
+> > --- a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+> > +++ b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+> > @@ -74,6 +74,7 @@ RDEPENDS_${PN}-ptest += "gnome-desktop-testing"
+> >
+> >  PACKAGES_DYNAMIC += "^gdk-pixbuf-loader-.*"
+> >  PACKAGES_DYNAMIC_class-native = ""
+> > +PIXBUFCACHE_SYSROOT_DEPS_class-native +=
+> "jpeg-native:do_populate_sysroot_setscene"
+> >
+> >  python populate_packages_prepend () {
+> >      postinst_pixbufloader = d.getVar("postinst_pixbufloader", True)
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPjUfAACgkQN1Ujt2V2gBxYeQCfTuHQxzawWIkcB7Lt1xsbjak4
-sSkAn2DxoF36eL5PkP4KnCYUG8CsK5+g
-=z0dJ
------END PGP SIGNATURE-----
-
---udzYTtuEmHLUHegf--
