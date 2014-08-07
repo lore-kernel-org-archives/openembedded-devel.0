@@ -1,39 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id A04C5701A6
+Return-Path: <bobadeshrikant@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 37D1460144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 07:49:03 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id n12so3783533wgh.9
+	Thu,  7 Aug 2014 09:42:17 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id bs8so4645454wib.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Aug 2014 00:49:04 -0700 (PDT)
+	Thu, 07 Aug 2014 02:42:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ymm44jmD12vE/CE1U2GYmlY4qbdu6BIEVgLUkj5iok8=;
-	b=p15YN4NJKe/xfEGMTzMfPlJwYUeSQgDlcg/04ZV/KP61lTnGgYyCxpiLI72w9IuthR
-	9vAZUzdVWeJBI6ZkJvpehRhmhae0V+GkDhBG9kLzSIWLzpeFru/jDdFBvDjFDFHZ7U50
-	sjQgjr5GH1zTP64GAgfCJ11r3/uvMula+0/hDFYEP4mXyzPLtSPt1faxpdLrxbUuQkBD
-	Cif/mG2MWWjpgWO6gK/nIfuScyvF/2EFyBtNmmj5cpM8R2uu7sn4qcYTaKpEqKGbp3ft
-	MM4V2oIc99HNL+IRYI5toZsZ6ttlZBLRom1svHnS8wyjbO7J9XBLP8HHg/xJWJQy4+DL
-	xSUg==
-X-Received: by 10.181.13.44 with SMTP id ev12mr58121238wid.57.1407397744700;
-	Thu, 07 Aug 2014 00:49:04 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	r20sm26303614wik.0.2014.08.07.00.49.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Aug 2014 00:49:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 7 Aug 2014 09:49:35 +0200
+	h=from:to:cc:subject:date:message-id;
+	bh=wlym23lNPazpcOA0BFds1/Ulz6NZchao9ePVnvxy7zY=;
+	b=y9ZKPipoN85r168nb1dtM/kQno4gfyzfSjTn0oUuGbAVdyEtWDWsdoJmI28rtXUAcY
+	H20BVQtEm+XmQCtZyQiE79nEvK2BrkIy2qshjxKwHr/dFyj11b1OaEK36evZ0i0i0xQr
+	zutabqu8BpL0PnyouxBwbaMDQ9nJkPOEu5YuuRXkMcYp/0y0HVeSs1HtWd47aOc2/rJU
+	b8F8TSWzCmmhIz0vDAJHRzl9v++8oH3YzN7Z8XMvA2s3LUdl5K3gDFRSqeSAgj9/6fK0
+	uCRJAC3mx24koQdgqJtu64bKAYPJgTF3DmoRwe756BO9ZtTKIF8PCGbMl92gnsOks/K7
+	Qa8Q==
+X-Received: by 10.180.83.8 with SMTP id m8mr56919732wiy.8.1407404538677;
+	Thu, 07 Aug 2014 02:42:18 -0700 (PDT)
+Received: from localhost.localdomain ([139.181.35.34])
+	by mx.google.com with ESMTPSA id u7sm27189637wif.3.2014.08.07.02.42.16
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 Aug 2014 02:42:18 -0700 (PDT)
+From: Shrikant Bobade <bobadeshrikant@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140807074935.GT14848@jama>
-References: <1407386976-24889-1-git-send-email-eduardo@monkey.io>
-MIME-Version: 1.0
-In-Reply-To: <1407386976-24889-1-git-send-email-eduardo@monkey.io>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-webserver][PATCH] monkey: new v1.5.2 release.
+Date: Thu,  7 Aug 2014 15:13:38 +0530
+Message-Id: <1407404618-32573-1-git-send-email-bobadeshrikant@gmail.com>
+X-Mailer: git-send-email 1.7.9.5
+Cc: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+Subject: [PATCH] gdk-pixbuf-native: add setscene dep on jpeg-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,208 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Aug 2014 07:49:12 -0000
-X-Groupsio-MsgNum: 51478
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+OVWeTxrbAwQuiek"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Aug 2014 09:42:22 -0000
 
---+OVWeTxrbAwQuiek
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Shrikant Bobade <Shrikant_Bobade@mentor.com>
 
-On Wed, Aug 06, 2014 at 10:49:36PM -0600, Eduardo Silva wrote:
-> This patch add the new Monkey HTTP Server v1.5.2. The new Bitbake file
-> contains the modifications suggested over the patch set for v1.5.1. It
-> specify each configuration file for CONFFILES_${PN}.
->=20
-> For more details about software changes please visit:
->=20
->   http://monkey-project.com/Announcements/v1.5.2
+Without this, we can get setscene postinst failure due to libjpeg being
+unavailable.
 
-Can you please resend with -M?
+Signed-off-by: Christopher Larson <kergoth@gmail.com>
+Signed-off-by: Shrikant Bobade <Shrikant_Bobade@mentor.com>
+---
+ meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
-> =3D=3D=3D Build Tests =3D=3D
->=20
-> This version and new Bitbake file have been tested on Yocto/Daisy being
-> packaged and deployed on images based on rpm and ipk successfully.
->=20
-> monkey-yocto/70d57bfd19c01ec055db57e35385ffc4185ae186
->=20
-> Signed-off-by: Eduardo Silva <eduardo@monkey.io>
-> ---
->  .../recipes-httpd/monkey/monkey_1.5.1.bb           | 50 -----------------
->  .../recipes-httpd/monkey/monkey_1.5.2.bb           | 64 ++++++++++++++++=
-++++++
->  2 files changed, 64 insertions(+), 50 deletions(-)
->  delete mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
->  create mode 100644 meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb
->=20
-> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb b/meta-w=
-ebserver/recipes-httpd/monkey/monkey_1.5.1.bb
-> deleted file mode 100644
-> index 2de98f4..0000000
-> --- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.1.bb
-> +++ /dev/null
-> @@ -1,50 +0,0 @@
-> -SUMMARY =3D "Fast and Lightweight HTTP Server for Linux"
-> -HOMEPAGE =3D "http://monkey-project.com"
-> -BUGTRACKER =3D "https://github.com/monkey/monkey/issues"
-> -
-> -LICENSE =3D "Apache-2.0"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
-a93"
-> -
-> -SECTION =3D "net"
-> -
-> -SRC_URI =3D "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
-> -           file://monkey.service \
-> -           file://monkey.init"
-> -
-> -SRC_URI[md5sum] =3D "2fe04135728f5c3a86c3a412059e0da3"
-> -SRC_URI[sha256sum] =3D "28dfc5e57bbcd305727e7af6a1a0587868db1c1286498757=
-bfeb72edddf457e7"
-> -
-> -EXTRA_OECONF =3D " \
-> -             --plugdir=3D${libdir}/monkey/ \
-> -             --logdir=3D${localstatedir}/log/monkey/ \
-> -             --pidfile=3D${localstatedir}/run/monkey.pid \
-> -             --default-user=3Dwww-data \
-> -             --datadir=3D${localstatedir}/www/monkey/ \
-> -             --sysconfdir=3D${sysconfdir}/monkey/ \
-> -             --enable-plugins=3D* \
-> -             --disable-plugins=3Dpolarssl \
-> -             --debug \
-> -             --malloc-libc"
-> -
-> -inherit autotools-brokensep pkgconfig update-rc.d systemd
-> -
-> -INITSCRIPT_NAME =3D "monkey"
-> -INITSCRIPT_PARAMS =3D "defaults 70"
-> -
-> -SYSTEMD_SERVICE_${PN} =3D "monkey.service"
-> -
-> -FILES_${PN} +=3D "${localstatedir}/www/monkey/"
-> -
-> -# temporarily remove, because ipk doesn't allow directories in CONFFILES
-> -# CONFFILES_${PN} =3D "${sysconfdir}/monkey/"
-> -
-> -do_install_append() {
-> -
-> -    mkdir -p ${D}${sysconfdir}/init.d
-> -    install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monk=
-ey
-> -
-> -    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
-then
-> -        install -d ${D}${systemd_unitdir}/system
-> -        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}=
-/system
-> -    fi
-> -}
-> diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb b/meta-w=
-ebserver/recipes-httpd/monkey/monkey_1.5.2.bb
-> new file mode 100644
-> index 0000000..fcd40e0
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb
-> @@ -0,0 +1,64 @@
-> +SUMMARY =3D "Fast and Lightweight HTTP Server for Linux"
-> +HOMEPAGE =3D "http://monkey-project.com"
-> +BUGTRACKER =3D "https://github.com/monkey/monkey/issues"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
-a93"
-> +
-> +SECTION =3D "net"
-> +
-> +SRC_URI =3D "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
-> +           file://monkey.service \
-> +           file://monkey.init"
-> +
-> +SRC_URI[md5sum] =3D "c90ccba23a814265c7e0fd3a75f883fd"
-> +SRC_URI[sha256sum] =3D "2048d49662895f83df475e22d87c45ea8022c0b1565bba22=
-2bda2192fd02c349"
-> +
-> +EXTRA_OECONF =3D "--plugdir=3D${libdir}/monkey/ \
-> +                --logdir=3D${localstatedir}/log/monkey/ \
-> +                --pidfile=3D${localstatedir}/run/monkey.pid \
-> +                --default-user=3Dwww-data \
-> +                --datadir=3D${localstatedir}/www/monkey/ \
-> +                --sysconfdir=3D${sysconfdir}/monkey/ \
-> +                --enable-plugins=3D* \
-> +                --disable-plugins=3Dpolarssl \
-> +                --debug \
-> +                --malloc-libc"
-> +
-> +inherit autotools-brokensep pkgconfig update-rc.d systemd
-> +
-> +INITSCRIPT_NAME =3D "monkey"
-> +INITSCRIPT_PARAMS =3D "defaults 70"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "monkey.service"
-> +
-> +FILES_${PN} +=3D "${localstatedir}/www/monkey/"
-> +
-> +CONFFILES_${PN} =3D "${sysconfdir}/monkey/monkey.conf \
-> +                   ${sysconfdir}/monkey/sites/default \
-> +                   ${sysconfdir}/monkey/monkey.mime \
-> +                   ${sysconfdir}/monkey/plugins.load \
-> +                   ${sysconfdir}/monkey/plugins/proxy_reverse/proxy_reve=
-rse.conf \
-> +                   ${sysconfdir}/monkey/plugins/mandril/mandril.conf \
-> +                   ${sysconfdir}/monkey/plugins/fastcgi/fastcgi.conf \
-> +                   ${sysconfdir}/monkey/plugins/logger/logger.conf \
-> +                   ${sysconfdir}/monkey/plugins/cgi/cgi.conf \
-> +                   ${sysconfdir}/monkey/plugins/cheetah/cheetah.conf \
-> +                   ${sysconfdir}/monkey/plugins/dirlisting/dirhtml.conf \
-> +                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
-/header.theme \
-> +                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
-/footer.theme \
-> +                   ${sysconfdir}/monkey/plugins/dirlisting/themes/guineo=
-/entry.theme \
-> +                   ${sysconfdir}/monkey/plugins/auth/README \
-> +                   ${sysconfdir}/monkey/plugins/auth/monkey.users \
-> +                   "
-> +
-> +do_install_append() {
-> +
-> +    mkdir -p ${D}${sysconfdir}/init.d
-> +    install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monk=
-ey
-> +
-> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
-then
-> +        install -d ${D}${systemd_unitdir}/system
-> +        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}=
-/system
-> +    fi
-> +}
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+index 3d08146..1248529 100644
+--- a/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
++++ b/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.30.8.bb
+@@ -74,6 +74,7 @@ RDEPENDS_${PN}-ptest += "gnome-desktop-testing"
+ 
+ PACKAGES_DYNAMIC += "^gdk-pixbuf-loader-.*"
+ PACKAGES_DYNAMIC_class-native = ""
++PIXBUFCACHE_SYSROOT_DEPS_class-native += "jpeg-native:do_populate_sysroot_setscene"
+ 
+ python populate_packages_prepend () {
+     postinst_pixbufloader = d.getVar("postinst_pixbufloader", True)
+-- 
+1.7.9.5
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---+OVWeTxrbAwQuiek
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPjL48ACgkQN1Ujt2V2gBxlPQCgozZ8w1XXRT3my8ifceQKU8BJ
-p98An0nm5laWmdrbdgHLuZ2sk7XH5acH
-=xIGu
------END PGP SIGNATURE-----
-
---+OVWeTxrbAwQuiek--
