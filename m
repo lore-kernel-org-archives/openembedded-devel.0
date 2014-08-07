@@ -1,37 +1,37 @@
-Return-Path: <sven.ebenfeld@vaillant.de>
-X-Greylist: delayed 563 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 07 Aug 2014 14:50:01 UTC
-Received: from mailgw02.hp-net.de (mailgw02.hp-net.de [213.15.0.26])
-	by mail.openembedded.org (Postfix) with ESMTP id C6EAF6FE5C
+Return-Path: <eduardo@monkey.io>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id E70D560809
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 14:50:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailgw02.hp-net.de (Postfix) with ESMTP id D9412178C95
+	Thu,  7 Aug 2014 15:06:43 +0000 (UTC)
+Received: by mail-ie0-f182.google.com with SMTP id y20so4886761ier.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 16:40:37 +0200 (CEST)
-X-Virus-Scanned: Virusscanner at mailgw02
-Received: from VADERU07.vaillant.vhgroup.lan (vaderu07.vaillant.vhgroup.lan
-	[10.107.77.148])
-	by mailgw02.hp-net.de (Postfix) with ESMTPS id C5645178C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 16:40:37 +0200 (CEST)
-Received: from VADERU05.vaillant.vhgroup.lan ([fe80::4ca3:211f:12fe:63e3]) by
-	VADERU07.vaillant.vhgroup.lan ([::1]) with mapi id 14.03.0169.001;
-	Thu, 7 Aug 2014 16:39:36 +0200
-From: "Ebenfeld, Sven" <sven.ebenfeld@vaillant.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: change systemd startup within image recipe
-Thread-Index: Ac+yTWjOaJiolSvbSY+LpIPHxMcD5w==
-Date: Thu, 7 Aug 2014 14:39:36 +0000
-Message-ID: <D56C992E15F8814CADE76D2D1AABFF600EE0C5EB@vaderu05.vaillant.vhgroup.lan>
-Accept-Language: de-DE, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.107.185.223]
-x-olx-disclaimer: Done
+	Thu, 07 Aug 2014 08:06:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=RjDD2qRyM1iLwb/OgFsdP3q9VhvOY0ktURs9W1nuJ/M=;
+	b=hDUgWqrVmsp000FMVG1QDFnQ6IHV9stI+WmX24n0f5IBCI/aOd26Sy+Q6iiuHkBmF0
+	8s3+DP4AGxEFgGsLGU6k9xpjM6bMKzmwuYcD8PB8xb8L0bdCmqW2P8phAtboNli/Lx5A
+	N3ilbr3nicnBbSVORIkm0lrs4pGNePOcfu/q/KFe0EnxBEV4GIo+h8Vk0QCF2qX6ldGp
+	7lWvgKTIPGQvQklQgmunSDIjEtZ0djkEh/LU3s64qc5ch5pTP93iTdqfFIKw2CgDJidA
+	4E6/fSIm5+9imwzV2v1vb97U2pUefJZZF/VVpwgT2dm4slNRhpkfL+5hb5zaS+rkTCr4
+	t0LA==
+X-Gm-Message-State: ALoCoQnekSVBSpNDqGj5zgNm4xqqCSlTrH7UZ7MdKLLprWUCuzyqWE2P4n3WsWNHGcZ5Yr3hA5mO
 MIME-Version: 1.0
-Subject: change systemd startup within image recipe
+X-Received: by 10.43.63.134 with SMTP id xe6mr4117801icb.97.1407424003388;
+	Thu, 07 Aug 2014 08:06:43 -0700 (PDT)
+Received: by 10.107.133.199 with HTTP; Thu, 7 Aug 2014 08:06:43 -0700 (PDT)
+In-Reply-To: <20140807074935.GT14848@jama>
+References: <1407386976-24889-1-git-send-email-eduardo@monkey.io>
+	<20140807074935.GT14848@jama>
+Date: Thu, 7 Aug 2014 09:06:43 -0600
+Message-ID: <CAEaCVQh_V-XuobximDhnC1o9Z8NsevySSTDJ6Z6XY68LOP5d2g@mail.gmail.com>
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-webserver][PATCH] monkey: new v1.5.2 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Aug 2014 14:50:05 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Aug 2014 15:06:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+On Thu, Aug 7, 2014 at 1:49 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-I'm writing my own image-recipe that contains systemd as init manager. But =
-all recipes are installing and enabling their systemd startupscripts when i=
-nstalling them.
-Is there a good way to disable them during image creation? Or do I have to =
-manually remove them afterwards?
+> On Wed, Aug 06, 2014 at 10:49:36PM -0600, Eduardo Silva wrote:
+> > This patch add the new Monkey HTTP Server v1.5.2. The new Bitbake file
+> > contains the modifications suggested over the patch set for v1.5.1. It
+> > specify each configuration file for CONFFILES_${PN}.
+> >
+> > For more details about software changes please visit:
+> >
+> >   http://monkey-project.com/Announcements/v1.5.2
+>
+> Can you please resend with -M?
+>
 
-For instance my main problem at this time is, that I've installed (IMAGE_IN=
-STALL) the hostapd package. But this one fails during boot because the wifi=
--device is not available yet.
-I need this package but only want to start it manually, how can I remove th=
-e systemd-startupscript during image creation?
-
-Best Regards,
-Sven
+I did it, i will send a new one as Patch v2.
 
