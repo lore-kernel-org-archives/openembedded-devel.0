@@ -1,41 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id EA620609B1
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id AA485609B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Aug 2014 09:59:10 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id w61so5488940wes.37
+	Fri,  8 Aug 2014 10:01:36 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id hi2so741010wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Aug 2014 02:59:11 -0700 (PDT)
+	Fri, 08 Aug 2014 03:01:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1UQQP4/uGpMprPmtv5K5YnLPnDneo5C4DhXgAsn79GQ=;
-	b=Go6KdaXioHyMHtLFzFcgdilebK5+kGub1PFxY/j1P1ItUsYYjDzTR472CrXtLb9QUn
-	wZGvhl35ARXTNMuS7mxd3MxwjPQ5KjbatpGboa+TgmJZC4qvlpkcQf+KkgamAclUrqV4
-	2J80EmywKdiz/AE+hUf9CFgaVXY5arKv85CvVySr8rXbXn4RGRn1SnZW7eKfnGLS2/+u
-	AIoq7onYyttklVbnizcv1x2EKn4LZvG2LDmPGnIlBZ/bhAnOgPOOFbvpKvLvERdvGOwY
-	+cg4luGkR4pD+640tdRBgPAl8I2EYxes+Ige8XNFIKajeOuI16EtT8j+Y4t2mug8XJCA
-	cCRQ==
-X-Received: by 10.180.11.135 with SMTP id q7mr2946417wib.67.1407491951071;
-	Fri, 08 Aug 2014 02:59:11 -0700 (PDT)
+	bh=SuuU0Y5w9HamIpPdbqUAFeWhOkQotedahgUhD0QyTi4=;
+	b=0mIhQDm2CMIxUeDkrUHopC9DMEVce/eYfyrUD2FTwJ3hwxC00xhhx7SR8QHpFjMbah
+	Quq+81ogb9nvdWeFNvNKEdX80RU8dmJKI3PDB8qP6Msp86PBxYLVqlXDB0txP3laufUB
+	OpTxG9OPtXc+vjYM55iX1Ul4g/mH9NPaVcvwP+dEu13BoKAI+G8Bwn5M7ZF7n9RIGzze
+	bQAqzdRCFn9ngeGNFvIsEpp2mIS9z4iUin3CadNGjq/qDgju5nhSIcMgW0tZvpcM+cA8
+	UyTmg6TFAGZLX7bl3QOzJXR9T3GuQeoVdz1kB7/k3kGbHxt/J1ZdE4Ej8jVrFReLTdda
+	yFjg==
+X-Received: by 10.180.92.134 with SMTP id cm6mr3091228wib.72.1407492097695;
+	Fri, 08 Aug 2014 03:01:37 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	10sm16203743wjx.26.2014.08.08.02.59.09
+	fc7sm16206087wjc.37.2014.08.08.03.01.36
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Aug 2014 02:59:10 -0700 (PDT)
+	Fri, 08 Aug 2014 03:01:36 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 8 Aug 2014 11:59:42 +0200
+Date: Fri, 8 Aug 2014 12:02:08 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140808095942.GB14848@jama>
-References: <1406903795-9767-1-git-send-email-yao.zhao@windriver.com>
-	<1406903886-9812-1-git-send-email-yao.zhao@windriver.com>
+Message-ID: <20140808100208.GC14848@jama>
+References: <20140806192249.GP14848@jama>
+	<1407418315-15620-1-git-send-email-paul.eggleton@linux.intel.com>
+	<20140808004507.GZ14848@jama>
 MIME-Version: 1.0
-In-Reply-To: <1406903886-9812-1-git-send-email-yao.zhao@windriver.com>
+In-Reply-To: <20140808004507.GZ14848@jama>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH v2] add support for opendataplane
+Subject: Re: [meta-oe][PATCH v2] mariadb: update to 5.5.38
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,249 +50,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Aug 2014 09:59:14 -0000
-X-Groupsio-MsgNum: 51495
+X-List-Received-Date: Fri, 08 Aug 2014 10:01:42 -0000
+X-Groupsio-MsgNum: 51496
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZCk4OG7a+AFlaik7"
+	protocol="application/pgp-signature"; boundary="ozkSYTWEkbLDijvq"
 Content-Disposition: inline
 
---ZCk4OG7a+AFlaik7
+--ozkSYTWEkbLDijvq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 01, 2014 at 10:38:06AM -0400, Yao Zhao wrote:
-> The OpenDataPlane (ODP) project provides a data plane application
-> programming environment that is easy to use, high performance,
-> and portable between networking SoCs.
+On Fri, Aug 08, 2014 at 02:45:07AM +0200, Martin Jansa wrote:
+> On Thu, Aug 07, 2014 at 02:31:55PM +0100, Paul Eggleton wrote:
+> > * Upstream switched from autotools to cmake
+> > * Separate build dir and parallel make now work
+> > * Library versioning no longer used for plugins; other libtool cruft
+> >   gone
+> > * Proper upstream initscript
+> > * Plugins moved from client library package to mariadb-server package
+> >   (matches how Fedora packages these)
+> >=20
+> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> > ---
+> >=20
+> > Changes since v1:
+> > * Add readline and libaio to DEPENDS
+> > * Disable usage of boost
 >=20
-> support build opendataplane release 0.2 and current HEAD from linaro.
-> For dpdk build, it is tested against layer meta-intel's
-> common/recipes-extended/dpdk/dpdk_1.6.0r2.bb recipe.
-> And it is needed to change its do_configure to add support for
-> a single intel_dpdk library.(default is multiple static libraries)
-> for example:
-> @@ -35,6 +35,8 @@ do_configure () {
->         #############################################################
->         unset prefix
+> Thanks for update, I've found few more differences between failing (after=
+ building world) and
+> working (with minimal deps) build:
 >=20
-> +       sed -i -e "s/CONFIG_RTE_BUILD_COMBINE_LIBS=3Dn/CONFIG_RTE_BUILD_C=
-OMBINE_LIBS=3Dy/g" \
-> +               config/defconfig_${TARGET_ARCH}-default-${TARGET_OS}app-g=
-cc
->         make O=3D$RTE_TARGET T=3D$RTE_TARGET config
-
-Fails to build for qemuarm
-
-| arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=
-=3Darmv5te -marm -mthumb-interwork --sysroot=3D/home/jenkins/oe/world/shr-c=
-ore/tmp-eglibc/sysroots/qemuarm -DHAVE_CONFIG_H -I. -pthread -DODP_DEBUG_PR=
-INT=3D1 -W -Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -Wmissing=
--declarations -Wold-style-definition -Wpointer-arith -Wcast-align -Wnested-=
-externs -Wcast-qual -Wformat-nonliteral -Wformat-security -Wundef -Wwrite-s=
-trings -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-g=
-nueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/platform/linux-generi=
-c/include -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linu=
-x-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/platform/linux-gen=
-eric/include/api -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-=
-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/include -O2=
- -pipe -g -feliminate-unused-debug-types -c /home/jenkins/oe/world/shr-core=
-/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a4=
-5b11e5-r0/git/platform/linux-generic/odp_packet.c -o odp_packet.o
-| {standard input}: Assembler messages:
-| {standard input}:40: Error: selected processor does not support ARM mode =
-`dmb st'
-| {standard input}:72: Error: selected processor does not support ARM mode =
-`dmb st'
-| make[2]: *** [odp_barrier.lo] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-eglibc/wo=
-rk/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/buil=
-d/platform/linux-generic'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-eglibc/wo=
-rk/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/buil=
-d/platform'
-| make: *** [all-recursive] Error 1
-| ERROR: oe_runmake failed
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
-oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.=
-2+gitAUTOINC+68a45b11e5-r0/temp/log.do_compile.12211)
-NOTE: recipe opendataplane-0.2+gitAUTOINC+68a45b11e5-r0: task do_compile: F=
-ailed
-ERROR: Task 12545 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-n=
-etworking/recipes-support/opendataplane/opendataplane_git.bb, do_compile) f=
-ailed with exit code '1'
-
-> Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+> 646c646
+> < -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h -=
+ found
 > ---
->  ...inux-dpdk-remove-unnecessary-include-path.patch | 29 ++++++++++++++++=
-++++++
->  .../opendataplane/opendataplane.inc                | 21 ++++++++++++++++
->  .../opendataplane/opendataplane_0.2.bb             | 25 ++++++++++++++++=
-+++
->  .../opendataplane/opendataplane_git.bb             | 14 +++++++++++
->  4 files changed, 89 insertions(+)
->  create mode 100644 meta-networking/recipes-support/opendataplane/files/0=
-001-linux-dpdk-remove-unnecessary-include-path.patch
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendat=
-aplane.inc
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendat=
-aplane_0.2.bb
->  create mode 100644 meta-networking/recipes-support/opendataplane/opendat=
-aplane_git.bb
+> > -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h -=
+ not found
+> 733c733
+> < -- Looking for include file security/pam_appl.h - found
+> ---
+> > -- Looking for include file security/pam_appl.h - not found
+> 759c759
+> < -- Looking for event.h - found
+> ---
+> > -- Looking for event.h - not found
 >=20
-> diff --git a/meta-networking/recipes-support/opendataplane/files/0001-lin=
-ux-dpdk-remove-unnecessary-include-path.patch b/meta-networking/recipes-sup=
-port/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.pa=
-tch
-> new file mode 100644
-> index 0000000..a0ef7ce
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk=
--remove-unnecessary-include-path.patch
-> @@ -0,0 +1,29 @@
-> +From 72b8eacc2985f054cadc5d0b48351a658998b8d6 Mon Sep 17 00:00:00 2001
-> +From: Yao Zhao <yao.zhao@windriver.com>
-> +Date: Wed, 30 Jul 2014 16:02:14 -0400
-> +Subject: [PATCH] linux-dpdk: remove unnecessary include path
-> +
-> +for dpdk include/arch and include/exec-env is only included
-> +by generic rte_xxx.h header, can't be included directly.
-> +
-> +Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-> +---
-> + platform/linux-dpdk/Makefile.am | 2 --
-> + 1 file changed, 2 deletions(-)
-> +
-> +diff --git a/platform/linux-dpdk/Makefile.am b/platform/linux-dpdk/Makef=
-ile.am
-> +index 4aa568f..dfcaadb 100644
-> +--- a/platform/linux-dpdk/Makefile.am
-> ++++ b/platform/linux-dpdk/Makefile.am
-> +@@ -12,8 +12,6 @@ PLAT_CFLAGS  =3D -msse4.2
-> + if SDK_INSTALL_PATH_
-> + PLAT_CFLAGS +=3D -include $(SDK_INSTALL_PATH)/include/rte_config.h
-> + PLAT_CFLAGS +=3D -I$(SDK_INSTALL_PATH)/include
-> +-PLAT_CFLAGS +=3D -I$(SDK_INSTALL_PATH)/include/arch
-> +-PLAT_CFLAGS +=3D -I$(SDK_INSTALL_PATH)/include/exec-env
-> +=20
-> + AM_LDFLAGS  +=3D -L$(SDK_INSTALL_PATH)/lib
-> + endif
-> +--=20
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane.=
-inc b/meta-networking/recipes-support/opendataplane/opendataplane.inc
-> new file mode 100644
-> index 0000000..c4b184e
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane.inc
-> @@ -0,0 +1,21 @@
-> +SUMMARY =3D "Cross platform OpenDataPlane application APIs"
-> +
-> +DESCRIPTION =3D "The OpenDataPlane project has been established to \
-> +produce an open-source, cross-platform set of application \
-> +programming interfaces (APIs) for the networking data plane."
-> +
-> +HOMEPAGE =3D "http://www.opendataplane.org"
-> +SECTION =3D "networking"
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4ccfa994aa96974cfcd39a59faee2=
-0a2"
-> +                =20
-> +SRC_URI =3D "git://git.linaro.org/lng/odp.git"
-> +
-> +COMPATIBLE_HOST =3D "^((?!mips).*)$"
-> +
-> +PACKAGECONFIG ??=3D "platform_linux_generic"
-> +PACKAGECONFIG[netmap] =3D "--enable-netmap,,,"
-> +PACKAGECONFIG[platform_linux_generic] =3D "--with-platform=3Dlinux-gener=
-ic,,,"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_=
-0.2.bb b/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
-> new file mode 100644
-> index 0000000..6f7f601
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
-> @@ -0,0 +1,25 @@
-> +require ${BPN}.inc
-> +
-> +#odp-0.2 tag
-> +SRCREV  =3D "6007d8833a6880abedf98f792586c0cfb9f10de0"
-> +PV =3D "0.2"
-> +
-> +#0.2 still using pure Makefile
-> +
-> +#override the Makefile DESTDIR
-> +export DESTDIR=3D"${D}${exec_prefix}"
-> +
-> +do_install () {
-> +    oe_runmake install
-> +   =20
-> +    #move DESTDIR/share/odp/odp_x usr/bin
-> +    install -d ${D}${bindir}
-> +    for i in ${DESTDIR}/share/odp/*; do
-> +        filename=3D`basename $i`
-> +        mv ${DESTDIR}/share/odp/${filename} ${D}${bindir}/${filename}
-> +    done
-> +    rm -rf ${DESTDIR}/share
-> +}
-> +
-> +#non standard doc install location
-> +FILES_${PN}-doc +=3D "${exec_prefix}/doc/*"
-> diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_=
-git.bb b/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
-> new file mode 100644
-> index 0000000..e569daa
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
-> @@ -0,0 +1,14 @@
-> +require ${BPN}.inc
-> +
-> +SRC_URI +=3D "file://0001-linux-dpdk-remove-unnecessary-include-path.pat=
-ch"
-> +
-> +SRCREV  =3D "68a45b11e52dbf835a7087c15d503c6b0e5d91ed"
-> +#8f4f080625e2db810da3f13770ba418c72b08ede will support --with-sdk-instal=
-l-path
-> +PV =3D "0.2+git${SRCPV}"
-> +
-> +PACKAGECONFIG[platform_linux_generic] =3D "--with-platform=3Dlinux-gener=
-ic,,openssl,libcrypto"
-> +#need meta-intel layer's common/recipes-extended/dpdk/dpdk recipe
-> +PACKAGECONFIG[platform_linux_dpdk] =3D '--with-platform=3Dlinux-dpdk --w=
-ith-sdk-install-path=3D"${STAGING_EXECPREFIXDIR}",,dpdk,'
-> +PACKAGECONFIG[platform_linux_keystone2] =3D "--with-platform=3Dlinux-key=
-stone2,,,"
-> +
-> +inherit autotools
-> --=20
-> 1.9.1
+> There is also floating systemtap-native dependency which enables DTRACE s=
+upport
+> in mariadb (see mariadb-5.5.38/cmake/dtrace.cmake).
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> And groff-native is the cause for following error:
+> | Scanning dependencies of target ps
+> | make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+> | make -f dbug/CMakeFiles/ps.dir/build.make dbug/CMakeFiles/ps.dir/build
+> | make[2]: Entering directory `/work/i586-oe-linux/mariadb/5.5.38-r0/buil=
+d'
+> | /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report /work/i58=
+6-oe-linux/mariadb/5.5.38-r0/build/CMakeFiles
+> | [ 84%] Generating example3.r
+> | cd /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && sed -e 's!\\!\\\=
+\!g' </work/i586-oe-linux/mariadb/5.5.38-r0/mariadb-5.5.38/dbug/example3.c =
+>example3.r
+> | /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report /work/i58=
+6-oe-linux/mariadb/5.5.38-r0/build/CMakeFiles
+> | [ 84%] Generating output1.r, output2.r, output3.r, output4.r, output5.r
+> | cd /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && ./factorial 1 2 =
+3 4 5 > output1.r
+> | ./factorial: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_2.17' not fo=
+und (required by ./factorial)
+> | make[2]: *** [dbug/output1.r] Error 1
+> | make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+> | make[1]: *** [dbug/CMakeFiles/ps.dir/all] Error 2
+> | make[1]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+> | make: *** [all] Error 2
+> | ERROR: oe_runmake failed
+>=20
+> Adding -DGROFF=3DFalse -DNROFF=3DFalse to EXTRA_OECMAKE allowed me to bui=
+ld it after world, but please check other floating deps as well.
+
+And now it failed on jenkins builder (maybe because this one is using
+gold)
+
+| cd /home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnuea=
+bi/mariadb/5.5.38-r0/build/storage/myisam && /home/jenkins/oe/world/shr-cor=
+e/tmp-eglibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux-gnueabi/arm-oe-linu=
+x-gnueabi-gcc  -DHAVE_CONFIG_H -Wall  -march=3Darmv5te -marm -mthumb-interw=
+ork  --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuar=
+m  -O2 -pipe -g -feliminate-unused-debug-types -fPIC -O2 -g -DNDEBUG -DDBUG=
+_OFF -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnu=
+eabi/mariadb/5.5.38-r0/build/include -I/home/jenkins/oe/world/shr-core/tmp-=
+eglibc/work/armv5te-oe-linux-gnueabi/mariadb/5.5.38-r0/mariadb-5.5.38/inclu=
+de -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnuea=
+bi/mariadb/5.5.38-r0/mariadb-5.5.38/sql -I/home/jenkins/oe/world/shr-core/t=
+mp-eglibc/work/armv5te-oe-linux-gnueabi/mariadb/5.5.38-r0/mariadb-5.5.38/re=
+gex -I/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm/usr/inclu=
+de     -fvisibility=3Dhidden -o CMakeFiles/myisam.dir/mi_create.c.o   -c /h=
+ome/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/mari=
+adb/5.5.38-r0/mariadb-5.5.38/storage/myisam/mi_create.c
+| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libe=
+xec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/je=
+nkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/mariadb/5.=
+5.38-r0/build/libmysql/libmysql_versions.ld:155:9: invalid use of VERSION i=
+n input file
+| collect2: error: ld returned 1 exit status
+| make[2]: *** [libmysql/libmysqlclient.so.18..0] Error 1
+| make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-eglibc/wo=
+rk/armv5te-oe-linux-gnueabi/mariadb/5.5.38-r0/build'
+| make[1]: *** [libmysql/CMakeFiles/libmysql.dir/all] Error 2
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ZCk4OG7a+AFlaik7
+--ozkSYTWEkbLDijvq
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPkn44ACgkQN1Ujt2V2gBwYTQCdF5MSXQMuV/mwZ5OfwM2Tr3UU
-Y9AAn1lZ9JIYZa0rnvIGJ2F06Db4secE
-=Rxvg
+iEYEARECAAYFAlPkoCAACgkQN1Ujt2V2gBxV9wCeK9DurfUjhZpk7DtjkWVtkaDi
+qaMAnj0S16d/OiOGyqQ9FQly6UOrx3rv
+=flLY
 -----END PGP SIGNATURE-----
 
---ZCk4OG7a+AFlaik7--
+--ozkSYTWEkbLDijvq--
