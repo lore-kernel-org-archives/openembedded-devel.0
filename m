@@ -1,35 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 0724E709FD
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FB1365CD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Aug 2014 14:17:53 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id f8so1110368wiw.6
+	Fri,  8 Aug 2014 15:20:04 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id fa1so7435354pad.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Aug 2014 07:17:54 -0700 (PDT)
+	Fri, 08 Aug 2014 08:20:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=hPfjt47OULyq9u0lPLOSSWw7ikxm9BDvlRqdWfCqbtE=;
-	b=pXt0cgLmkkmbGn3uwd0bKzJJMNo7iwIUai4RAgXudzQ0yJF9wa2Y2Vi3qgO/qlDxre
-	qV/7NDq2ykEReub99iF4HHOOBI+lFTOTmtdOblQrWnJX1bnMpPHH7aJVofWL2fR1Gsn/
-	1HxLCVW34Rv53lI4Dd8j70fZ/u+QteiZfAJNhO1XdtGx7EwMYqlEUxH+wyg4YT/LMK/I
-	DOcrFID6qLQGkzaw9hxhtxzB5JUiZab8B6sGT7GcMAZ0dVe6kC4cUP1eh2wA1oyUslA6
-	+BSjYNj+BEYiTLymlnQbF9DnDcOaWrjy1Lqp6DMjWK/xUmX4iCp+VuxJoq7xwKZXlDmZ
-	EV1A==
-X-Received: by 10.194.78.100 with SMTP id a4mr27544285wjx.106.1407507474281;
-	Fri, 08 Aug 2014 07:17:54 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	w1sm7589726wiz.14.2014.08.08.07.17.53 for <multiple recipients>
+	bh=eJBuYH8DT1kSbVuAXkxWjHc2BOc51FJkgEwGE0eyocU=;
+	b=AbHjj4E/2r4zIwDFhZGc+Od14rh2UQhrCodDXH/ooPv6zWQ62Im9W184E9DmW/1iaT
+	2+TKxNat4K0O6Zx3VnJeM2jOGc8C1DMCgXcE1T8VxFWELkYd+2Qp4KhIlxiirqGeYvjE
+	5hDajFpdmU2n1pA8gHw7SVTEYx+aVK3kNish8UBYvix4fMmf19sXQwi/3lx9HUNUtj5p
+	Za6qSRMtWTSabeJ1VwhXHDb0tFdD7iDYhDkbwX3S5zXGmLXLJcWIf3dWSXpVtE/IrWzj
+	baN1IEzeOKYorxHW9ppzZ2/HLwhrlBSfzYOxiS+0oMgyKHqf8dbg2GDMIRh06vqunuPf
+	PgGw==
+X-Received: by 10.69.20.11 with SMTP id gy11mr24859044pbd.28.1407511205552;
+	Fri, 08 Aug 2014 08:20:05 -0700 (PDT)
+Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150]) by mx.google.com with ESMTPSA id
+	bl12sm26473431pac.44.2014.08.08.08.20.03 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Aug 2014 07:17:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Fri, 08 Aug 2014 08:20:04 -0700 (PDT)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Aug 2014 16:18:24 +0200
-Message-Id: <1407507504-4041-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
-Subject: [RFC][PATCH] libpostproc: switch to lu-zero's for on github with 12 fixes
+Date: Fri,  8 Aug 2014 08:19:50 -0700
+Message-Id: <1407511191-28246-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-perl] [PATCH 1/2] libextutils-helpers-perl: fix RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,38 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Aug 2014 14:17:54 -0000
+X-List-Received-Date: Fri, 08 Aug 2014 15:20:11 -0000
 
-* last commit on videolan.org is more than 1 year old, lu-zero's for has couple of fixes
-  and also defines the version in the code, use that instead of 0.0.0"
+* Module::Load is provided by perl-module-load, NOT perl-module-module-load
+* Fixes QA build-deps warning.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb b/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-index aae1700..811175c 100644
---- a/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-+++ b/meta-oe/recipes-multimedia/libpostproc/libpostproc_git.bb
-@@ -5,13 +5,10 @@ DEPENDS = "libav"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--PV = "0.0.0+git${SRCPV}"
--PR = "r1"
-+PV = "52.3.0+git${SRCPV}"
- 
--DEFAULT_PREFERENCE = "-1"
--
--SRCREV = "3b7053f46dbfe4662063345245cb00b6acbbe969"
--SRC_URI = "git://git.videolan.org/libpostproc.git"
-+SRCREV = "811db3b957dfde24aef2d0f82e297e5bf552d873"
-+SRC_URI = "git://github.com/lu-zero/postproc;protocol=https"
- 
- S = "${WORKDIR}/git"
- 
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
+index 055f571..9a0234e 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-helpers-perl_0.022.bb
+@@ -21,7 +21,7 @@ RDEPENDS_${PN} = " perl-module-file-copy \
+                    perl-module-carp \
+                    perl-module-test-more \
+                    perl-module-text-parsewords \
+-                   perl-module-module-load \
++                   perl-module-load \
+                    perl-module-file-temp \
+                    perl-module-file-spec-functions \
+ "
 -- 
-2.0.4
+1.9.3
 
 
