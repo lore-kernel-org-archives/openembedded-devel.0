@@ -1,36 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5903C65E11
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FF1F65CA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Aug 2014 23:38:06 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id x13so4886391wgg.7
+	Fri,  8 Aug 2014 00:44:35 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id m15so4949989wgh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Aug 2014 16:38:07 -0700 (PDT)
+	Thu, 07 Aug 2014 17:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=tXAZQp4KOFpATA/Tu7Lb2XddOgg0O9uCnoTygFm6wIY=;
-	b=OViH+2TY1iIuYZqBc7AT+vAscSxi+Q/BOi6zsICZ4xhaUNKME89MtR2SV7ZoLVXwWr
-	DUltbFEqaZK1seT5JR2Qib97qQ2MXvkdg1+RaNrnu13hpz+jClLtqrxz9cbhpnVTY7/0
-	fQVjoDP4GRBlFyGjibTkEQcsWmJq1ETkTn3utfvvG09lLwKT/hf0reJlc93PsyybHcT8
-	y6rw2qx177xzfOk/3S19hBTWs9cqghDOS7tOLUgRdlcfe6t9D602IdJJTvE4mlQJeoc9
-	OHpBCdqIXpLyprfbR99oOncosEYTk8cLDZm5mU3J2DyIT5K/3WBSD6q7mgDm7dtsBKX5
-	S6ew==
-X-Received: by 10.180.211.19 with SMTP id my19mr216609wic.2.1407454687307;
-	Thu, 07 Aug 2014 16:38:07 -0700 (PDT)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XHKu80GIm+gYWGuPmnx5vakraANK2yXwQpwD6LPzdhA=;
+	b=mgn1YqJorb/Rtz1c1dWAhOYz0IOTfb1eQjZ4mmRQns9f4GiIqMNkEMJaceGyGBZB+v
+	zQl1K+Ysgdwog5ZSQL6LagM3Ld9ksUl7dQBTbESbYoWd+NmIo66SX5z8iY5qkMeh8YKJ
+	e+hcEYuxNrewHTyEk1a8azFBVRheZCnC/5ydnfUU1iOxYQSXPGg4IcRnnMH5tSwfPw/k
+	KVxCgy00YrUVBenMzimt95R7J8e4qEih2B1HEt5SseMfw7aXNwP2GATV23UpYWxx6ArS
+	Shwj0curF+NP+LnGKYPDhNG2RHFTXvsQDt6M0qzPkP9UU2A0U4nJ95dmohlNDXyuXseo
+	gOrg==
+X-Received: by 10.195.11.234 with SMTP id el10mr28270138wjd.95.1407458677064; 
+	Thu, 07 Aug 2014 17:44:37 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id t6sm1241029wib.4.2014.08.07.16.38.06
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	xn12sm1646060wib.13.2014.08.07.17.44.35
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Aug 2014 16:38:06 -0700 (PDT)
+	Thu, 07 Aug 2014 17:44:35 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 8 Aug 2014 02:45:07 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Aug 2014 01:38:37 +0200
-Message-Id: <1407454717-15792-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
+Message-ID: <20140808004507.GZ14848@jama>
+References: <20140806192249.GP14848@jama>
+	<1407418315-15620-1-git-send-email-paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][daisy][PATCH] qttools: fix noqtwebkit option
+In-Reply-To: <1407418315-15620-1-git-send-email-paul.eggleton@linux.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH v2] mariadb: update to 5.5.38
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,97 +48,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Aug 2014 23:38:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Aug 2014 00:44:40 -0000
+X-Groupsio-MsgNum: 51491
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="TXtETX/xrt1zdi6e"
+Content-Disposition: inline
 
-* it's added to CONFIG variable not QT_CONFIG
+--TXtETX/xrt1zdi6e
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* qtwebkit was still detected and linked against
-DEBUG: qttools-tools: Dependency libQt5WebKitWidgets.so.5 requires
-package qtwebkit (used by files:
-['qttools/5.3.1-r0/packages-split/qttools-tools/usr/bin/qt5/assistant',
- 'qttools/5.3.1-r0/packages-split/qttools-plugins/usr/lib/qt5/plugins/designer/libqwebview.so'])
+On Thu, Aug 07, 2014 at 02:31:55PM +0100, Paul Eggleton wrote:
+> * Upstream switched from autotools to cmake
+> * Separate build dir and parallel make now work
+> * Library versioning no longer used for plugins; other libtool cruft
+>   gone
+> * Proper upstream initscript
+> * Plugins moved from client library package to mariadb-server package
+>   (matches how Fedora packages these)
+>=20
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>=20
+> Changes since v1:
+> * Add readline and libaio to DEPENDS
+> * Disable usage of boost
 
-DEBUG: qttools-tools: Dependency libQt5WebKit.so.5 requires package
-qtwebkit (used by files:
-['qttools/5.3.1-r0/packages-split/qttools-tools/usr/bin/qt5/assistant'])
+Thanks for update, I've found few more differences between failing (after b=
+uilding world) and
+working (with minimal deps) build:
 
-DEBUG: qttools-plugins: Dependency libQt5WebKitWidgets.so.5 requires
-package qtwebkit (used by files:
-['qttools/5.3.1-r0/packages-split/qttools-tools/usr/bin/qt5/assistant',
- 'qttools/5.3.1-r0/packages-split/qttools-plugins/usr/lib/qt5/plugins/designer/libqwebview.so'])
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+646c646
+< -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h - f=
+ound
 ---
- .../0003-add-noqtwebkit-configuration.patch        | 28 +++++++++++++++-------
- 1 file changed, 19 insertions(+), 9 deletions(-)
+> -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h - n=
+ot found
+733c733
+< -- Looking for include file security/pam_appl.h - found
+---
+> -- Looking for include file security/pam_appl.h - not found
+759c759
+< -- Looking for event.h - found
+---
+> -- Looking for event.h - not found
 
-diff --git a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
-index 3238d79..ff7d300 100644
---- a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
-+++ b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
-@@ -1,7 +1,7 @@
--From e6b77a5732610816948a8a860a9cb9e92b02c33e Mon Sep 17 00:00:00 2001
-+From 434d38b073556deaca2412cd9e71645b73732e90 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
- Date: Wed, 4 Jun 2014 11:28:16 +0200
--Subject: [PATCH] add noqtwebkit configuration
-+Subject: [PATCH 3/3] add noqtwebkit configuration
- MIME-Version: 1.0
- Content-Type: text/plain; charset=UTF-8
- Content-Transfer-Encoding: 8bit
-@@ -9,23 +9,33 @@ Content-Transfer-Encoding: 8bit
- Upstream-Status: Inappropiate [configuration]
- 
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
- ---
-- src/assistant/assistant/assistant.pro | 2 +-
-+ src/assistant/assistant/assistant.pro | 4 ++--
-  src/designer/src/plugins/plugins.pro  | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
- 
- diff --git a/src/assistant/assistant/assistant.pro b/src/assistant/assistant/assistant.pro
--index 5f96377..e461d4b 100644
-+index 5f96377..71acdfc 100644
- --- a/src/assistant/assistant/assistant.pro
- +++ b/src/assistant/assistant/assistant.pro
- @@ -1,4 +1,4 @@
- -qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static) {
--+qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static):!contains(QT_CONFIG, noqtwebkit) {
-++qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static):!contains(CONFIG, noqtwebkit) {
-      QT += webkitwidgets
-  } else {
-      DEFINES += QT_NO_WEBKIT
-+@@ -72,7 +72,7 @@ SOURCES += aboutdialog.cpp \
-+     openpageswidget.cpp \
-+     openpagesmanager.cpp \
-+     openpagesswitcher.cpp
-+-qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static) {
-++qtHaveModule(webkitwidgets):!contains(QT_CONFIG, static):!contains(CONFIG, noqtwebkit) {
-+     SOURCES += helpviewer_qwv.cpp
-+ } else {
-+     SOURCES += helpviewer_qtb.cpp
- diff --git a/src/designer/src/plugins/plugins.pro b/src/designer/src/plugins/plugins.pro
--index b7ee661..0c6e50a 100644
-+index b7ee661..921ec11 100644
- --- a/src/designer/src/plugins/plugins.pro
- +++ b/src/designer/src/plugins/plugins.pro
- @@ -1,5 +1,5 @@
-@@ -33,8 +43,8 @@ index b7ee661..0c6e50a 100644
-  
-  # qtHaveModule(opengl): SUBDIRS += tools/view3d
- -qtHaveModule(webkitwidgets): SUBDIRS += qwebview
--+qtHaveModule(webkitwidgets):!contains(QT_CONFIG, noqtwebkit): SUBDIRS += qwebview
-++qtHaveModule(webkitwidgets):!contains(CONFIG, noqtwebkit): SUBDIRS += qwebview
-  win32: qtHaveModule(axcontainer): SUBDIRS += activeqt
- -- 
--1.8.3.1
-+2.0.4
- 
--- 
-2.0.4
+There is also floating systemtap-native dependency which enables DTRACE sup=
+port
+in mariadb (see mariadb-5.5.38/cmake/dtrace.cmake).
 
 
+And groff-native is the cause for following error:
+| Scanning dependencies of target ps
+| make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+| make -f dbug/CMakeFiles/ps.dir/build.make dbug/CMakeFiles/ps.dir/build
+| make[2]: Entering directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+| /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report /work/i586-=
+oe-linux/mariadb/5.5.38-r0/build/CMakeFiles
+| [ 84%] Generating example3.r
+| cd /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && sed -e 's!\\!\\\\!=
+g' </work/i586-oe-linux/mariadb/5.5.38-r0/mariadb-5.5.38/dbug/example3.c >e=
+xample3.r
+| /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report /work/i586-=
+oe-linux/mariadb/5.5.38-r0/build/CMakeFiles
+| [ 84%] Generating output1.r, output2.r, output3.r, output4.r, output5.r
+| cd /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && ./factorial 1 2 3 =
+4 5 > output1.r
+| ./factorial: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_2.17' not foun=
+d (required by ./factorial)
+| make[2]: *** [dbug/output1.r] Error 1
+| make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+| make[1]: *** [dbug/CMakeFiles/ps.dir/all] Error 2
+| make[1]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+
+Adding -DGROFF=3DFalse -DNROFF=3DFalse to EXTRA_OECMAKE allowed me to build=
+ it after world, but please check other floating deps as well.
+
+Thanks
+
+--TXtETX/xrt1zdi6e
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlPkHZMACgkQN1Ujt2V2gByffQCcCCyhc3ApvAQMymPMoXFbxSR7
+lcIAmgMm2aYP0IkNcti7cZAsVFtWzjUw
+=bCLc
+-----END PGP SIGNATURE-----
+
+--TXtETX/xrt1zdi6e--
