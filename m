@@ -1,25 +1,24 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AA536FE7E
+Received: from mga03.intel.com (mga03.intel.com [143.182.124.21])
+	by mail.openembedded.org (Postfix) with ESMTP id BB657701A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Aug 2014 13:02:05 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 08 Aug 2014 06:02:06 -0700
+	Fri,  8 Aug 2014 13:05:43 +0000 (UTC)
+Received: from azsmga001.ch.intel.com ([10.2.17.19])
+	by azsmga101.ch.intel.com with ESMTP; 08 Aug 2014 06:05:44 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,825,1400050800"; d="scan'208";a="581957633"
+X-IronPort-AV: E=Sophos;i="5.01,825,1400050800"; d="scan'208";a="466486962"
 Received: from colmmora-mobl2.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.127])
-	by fmsmga002.fm.intel.com with ESMTP; 08 Aug 2014 06:01:38 -0700
+	by azsmga001.ch.intel.com with ESMTP; 08 Aug 2014 06:05:42 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 08 Aug 2014 14:01:37 +0100
-Message-ID: <5216672.5TmkmhXQ6e@peggleto-mobl5.ger.corp.intel.com>
+Date: Fri, 08 Aug 2014 14:05:42 +0100
+Message-ID: <1638429.iXmVO7ted9@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.13.3 (Linux/3.15.7-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140808004507.GZ14848@jama>
-References: <20140806192249.GP14848@jama>
-	<1407418315-15620-1-git-send-email-paul.eggleton@linux.intel.com>
-	<20140808004507.GZ14848@jama>
+In-Reply-To: <20140808100208.GC14848@jama>
+References: <20140806192249.GP14848@jama> <20140808004507.GZ14848@jama>
+	<20140808100208.GC14848@jama>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH v2] mariadb: update to 5.5.38
@@ -36,88 +35,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Aug 2014 13:02:15 -0000
+X-List-Received-Date: Fri, 08 Aug 2014 13:05:44 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Friday 08 August 2014 02:45:07 Martin Jansa wrote:
-> On Thu, Aug 07, 2014 at 02:31:55PM +0100, Paul Eggleton wrote:
-> > * Upstream switched from autotools to cmake
-> > * Separate build dir and parallel make now work
-> > * Library versioning no longer used for plugins; other libtool cruft
-> >   gone
-> > * Proper upstream initscript
-> > * Plugins moved from client library package to mariadb-server package
-> > 
-> >   (matches how Fedora packages these)
-> > 
-> > Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> > ---
-> > 
-> > Changes since v1:
-> > * Add readline and libaio to DEPENDS
-> > * Disable usage of boost
+On Friday 08 August 2014 12:02:08 Martin Jansa wrote:
+> And now it failed on jenkins builder (maybe because this one is using
+> gold)
 > 
-> Thanks for update, I've found few more differences between failing (after
-> building world) and working (with minimal deps) build:
-> 
-> 646c646
-> < -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h -
-> found ---
-> 
-> > -- Looking for include files valgrind/memcheck.h, valgrind/valgrind.h -
-> > not found
-> 733c733
-> < -- Looking for include file security/pam_appl.h - found
-> ---
-> 
-> > -- Looking for include file security/pam_appl.h - not found
-> 
-> 759c759
-> < -- Looking for event.h - found
-> ---
-> 
-> > -- Looking for event.h - not found
+> | cd
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/
+> | mariadb/5.5.38-r0/build/storage/myisam &&
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/
+> | arm-oe-linux-gnueabi/arm-oe-linux-gnueabi-gcc  -DHAVE_CONFIG_H -Wall 
+> | -march=armv5te -marm -mthumb-interwork 
+> | --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm 
+> | -O2 -pipe -g -feliminate-unused-debug-types -fPIC -O2 -g -DNDEBUG
+> | -DDBUG_OFF
+> | -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueab
+> | i/mariadb/5.5.38-r0/build/include
+> | -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueab
+> | i/mariadb/5.5.38-r0/mariadb-5.5.38/include
+> | -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueab
+> | i/mariadb/5.5.38-r0/mariadb-5.5.38/sql
+> | -I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueab
+> | i/mariadb/5.5.38-r0/mariadb-5.5.38/regex
+> | -I/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm/usr/include
+> |     -fvisibility=hidden -o CMakeFiles/myisam.dir/mi_create.c.o   -c
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/
+> | mariadb/5.5.38-r0/mariadb-5.5.38/storage/myisam/mi_create.c
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libe
+> | xec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error:
+> | /home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/
+> | mariadb/5.5.38-r0/build/libmysql/libmysql_versions.ld:155:9: invalid use
+> | of VERSION in input file collect2: error: ld returned 1 exit status
+> | make[2]: *** [libmysql/libmysqlclient.so.18..0] Error 1
+> | make[2]: Leaving directory
+> | `/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi
+> | /mariadb/5.5.38-r0/build' make[1]: ***
+> | [libmysql/CMakeFiles/libmysql.dir/all] Error 2
 
-PAM is an issue, I will fix that one. The other two are unconditional checks, 
-but actually making use of the dependency is off by default regardless of 
-whether or not it is present (don't you just love consistency...)
+I'm really not sure what to do about this. There is a bug report about this 
+here:
 
-> There is also floating systemtap-native dependency which enables DTRACE
-> support in mariadb (see mariadb-5.5.38/cmake/dtrace.cmake).
+  https://sourceware.org/bugzilla/show_bug.cgi?id=16895
 
-OK, I'll explicitly set ENABLE_DTRACE to FALSE then.
- 
-> And groff-native is the cause for following error:
-> | Scanning dependencies of target ps
-> | make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
-> | make -f dbug/CMakeFiles/ps.dir/build.make dbug/CMakeFiles/ps.dir/build
-> | make[2]: Entering directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
-> | /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report
-> | /work/i586-oe-linux/mariadb/5.5.38-r0/build/CMakeFiles [ 84%] Generating
-> | example3.r
-> | cd /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && sed -e
-> | 's!\\!\\\\!g'
-> | </work/i586-oe-linux/mariadb/5.5.38-r0/mariadb-5.5.38/dbug/example3.c
-> | >example3.r /sysroots/x86_64-linux/usr/bin/cmake -E cmake_progress_report
-> | /work/i586-oe-linux/mariadb/5.5.38-r0/build/CMakeFiles [ 84%] Generating
-> | output1.r, output2.r, output3.r, output4.r, output5.r cd
-> | /work/i586-oe-linux/mariadb/5.5.38-r0/build/dbug && ./factorial 1 2 3 4 5
-> | > output1.r ./factorial: /lib/i386-linux-gnu/libc.so.6: version
-> | `GLIBC_2.17' not found (required by ./factorial) make[2]: ***
-> | [dbug/output1.r] Error 1
-> | make[2]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
-> | make[1]: *** [dbug/CMakeFiles/ps.dir/all] Error 2
-> | make[1]: Leaving directory `/work/i586-oe-linux/mariadb/5.5.38-r0/build'
-> | make: *** [all] Error 2
-> | ERROR: oe_runmake failed
-> 
-> Adding -DGROFF=False -DNROFF=False to EXTRA_OECMAKE allowed me to build it
-> after world, but please check other floating deps as well.
+Unfortunately there is no viable workaround or patch either in the linked 
+gentoo/mariadb bugs.
 
-OK, I'll add those.
+Any suggestions?
 
-Thanks,
+Cheers,
 Paul
 
 -- 
