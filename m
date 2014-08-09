@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B69070A6B
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E0A1A70A7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 21:38:38 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id k48so6903352wev.26
+	Sat,  9 Aug 2014 21:38:40 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so2567648wiv.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 14:38:39 -0700 (PDT)
+	Sat, 09 Aug 2014 14:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=/pOPC6f7NNsNvzpnCitSQOSIIDBdxkYnfUSc1AlAcvM=;
-	b=kXOI8jGqySZFTjYAUpRSuPV+UbngXMiRQnhhXkjE3fG990Kct9lJXgkarFeXpK5fTZ
-	AFWdpzmeAwiz1kIKSbdzbZ/aA/6NFZKYHUAZ9h0PCB2Qr5M8bPOWgaW6Yr7kPz/Ti8d+
-	LySgNoKHORdGt+8VnAH2DtOcRDWLTBegeZKx8tFxTM7CBx0mFTCGH6HutKVPRBqVVaXM
-	xm/0L7j69sIWw1+8sTli79p1GuQsxIlBZ/gId5WTEJdkmKEBqO4xNKaUD9WmUkBP2DcR
-	y1y3+Z99cKwPi0AKSux22wZ5bJR0Wif6xg7KgP6hM0YLedtfUbWx51kCmGrQz225Q6qt
-	RhlQ==
-X-Received: by 10.180.38.39 with SMTP id d7mr12951623wik.24.1407620318954;
-	Sat, 09 Aug 2014 14:38:38 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=D23eWFL7BuyRuIcZRGLt/gMMmftzMZAtSx55rfSLg0A=;
+	b=cbFPJa3EX1v3erV3Blh70UR8yA7UENp3PeHlyh3evuu7W4N8FNCfnwM/gRR6KZpN1b
+	OkBh8dQ3oXYjDkXSCoOSG2eOVW7rE4uymOML9SEuBts3ZhN4qVlTVyOU4FoocEgKNZyr
+	iOHU8R5Bo6VpOOzZXoNSnKPQS9OfB2ebJN8EFx3YdLWvYoNBmZHpv1Io/WctsLuzJt4B
+	o2OAUKSWQwkTYXMseEugAx7TgXPaxvnJCOP9WkpDkbFxmRYF/oWbcBLOVbfa7+7gKt6L
+	ETWRqZUk6X1KmYs+1AixONnL97P7Dx/jnLoiwXExbVOttJRON5KGoGznVlFFONh2b/Tr
+	3wIw==
+X-Received: by 10.195.13.34 with SMTP id ev2mr21052795wjd.55.1407620321430;
+	Sat, 09 Aug 2014 14:38:41 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ex2sm23230695wic.24.2014.08.09.14.38.37 for <multiple recipients>
+	e3sm27309559wjp.4.2014.08.09.14.38.40 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 14:38:38 -0700 (PDT)
+	Sat, 09 Aug 2014 14:38:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 23:39:09 +0200
-Message-Id: <1407620350-7644-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 23:39:10 +0200
+Message-Id: <1407620350-7644-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
-Subject: [meta-browser][PATCH 1/2] firefox: properly fix build without freetype-config
+In-Reply-To: <1407620350-7644-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1407620350-7644-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-browser][PATCH 2/2] chromium-35*: use BFD when building for x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,124 +45,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 21:38:44 -0000
+X-List-Received-Date: Sat, 09 Aug 2014 21:38:45 -0000
 
-* fails with:
-  ../../gfx/thebes/gfxFT2Utils.o: In function `gfxFT2LockedFace::GetMetrics(gfxFont::Metrics*, unsigned int*)':
-  /OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/firefox/10.0.11esr-r0/mozilla-esr10/gfx/thebes/gfxFT2Utils.cpp:139: undefined reference to `FT_Get_Sfnt_Table'
-  /OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/firefox/10.0.11esr-r0/mozilla-esr10/gfx/thebes/gfxFT2Utils.cpp:234: undefined reference to `FT_Get_Sfnt_Table'
-  ../../gfx/thebes/gfxFT2Utils.o: In function `gfxFT2LockedFace::GetFontTable(unsigned int, FallibleTArray<unsigned char>&)':
-  /OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/firefox/10.0.11esr-r0/mozilla-esr10/gfx/thebes/gfxFT2Utils.cpp:364: undefined reference to `FT_Load_Sfnt_Table'
-  /OE/build/oe-core/tmp-eglibc/work/i586-oe-linux/firefox/10.0.11esr-r0/mozilla-esr10/gfx/thebes/gfxFT2Utils.cpp:372: undefined reference to `FT_Load_Sfnt_Table'
+* this doesn't fix it completely, but allows it a bit further and then
+  it fails in the same spot as when building for qemux86 (or 37* version
+  with gold)
+
+  sysroots/x86_64-linux/usr/bin/x86_64-oe-linux/x86_64-oe-linux-ld.gold:
+    warning: hidden symbol 'sqlite3_temp_directory' in obj/third_party/sqlite/libsqlite3.a(obj/third_party/sqlite/amalgamation/sqlite.sqlite3.o)
+    is referenced by DSO
+    sysroots/qemux86-64/usr/lib/../lib/libsoftokn3.so
+  sysroots/x86_64-linux/usr/bin/x86_64-oe-linux/x86_64-oe-linux-ld.gold:
+    error: treating warnings as errors
   collect2: error: ld returned 1 exit status
-  ../../config/rules.mk:1089: recipe for target 'libxul.so' failed
+
+  and few more symbols like this, libsoftokn3.so is provided by system
+  nss, using system sqlite3 has some issues too:
+  https://code.google.com/p/chromium/issues/detail?id=22208
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-mozilla/firefox/firefox/freetype-2.5.patch | 73 ++++++++++++++++++++++
- recipes-mozilla/firefox/firefox_10.0.11esr.bb      |  2 +-
- 2 files changed, 74 insertions(+), 1 deletion(-)
- create mode 100644 recipes-mozilla/firefox/firefox/freetype-2.5.patch
+ recipes-browser/chromium/chromium_35.0.1916.114.bb | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-mozilla/firefox/firefox/freetype-2.5.patch b/recipes-mozilla/firefox/firefox/freetype-2.5.patch
-new file mode 100644
-index 0000000..78f4ff8
---- /dev/null
-+++ b/recipes-mozilla/firefox/firefox/freetype-2.5.patch
-@@ -0,0 +1,73 @@
-+Adapted from:
-+https://bugzilla.mozilla.org/show_bug.cgi?id=944454
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+diff -uNr mozilla-esr10.orig/config/system-headers mozilla-esr10/config/system-headers
-+--- mozilla-esr10.orig/config/system-headers	2012-11-15 19:24:02.000000000 +0100
-++++ mozilla-esr10/config/system-headers	2014-08-09 20:59:18.103672068 +0200
-+@@ -273,6 +273,19 @@
-+ freetype/ttnameid.h
-+ freetype/tttables.h
-+ freetype/t1tables.h
-++freetype.h
-++ftcache.h
-++ftglyph.h
-++ftsynth.h
-++ftoutln.h
-++ttnameid.h
-++tttables.h
-++t1tables.h
-++ftlcdfil.h
-++ftsizes.h
-++ftadvanc.h
-++ftbitmap.h
-++ftxf86.h
-+ fribidi/fribidi.h
-+ FSp_fopen.h
-+ fstream
-+diff -uNr mozilla-esr10.orig/js/src/config/system-headers mozilla-esr10/js/src/config/system-headers
-+--- mozilla-esr10.orig/js/src/config/system-headers	2012-11-15 19:24:19.000000000 +0100
-++++ mozilla-esr10/js/src/config/system-headers	2014-08-09 20:59:25.877672347 +0200
-+@@ -273,6 +273,19 @@
-+ freetype/ttnameid.h
-+ freetype/tttables.h
-+ freetype/t1tables.h
-++freetype.h
-++ftcache.h
-++ftglyph.h
-++ftsynth.h
-++ftoutln.h
-++ttnameid.h
-++tttables.h
-++t1tables.h
-++ftlcdfil.h
-++ftsizes.h
-++ftadvanc.h
-++ftbitmap.h
-++ftxf86.h
-+ fribidi/fribidi.h
-+ FSp_fopen.h
-+ fstream
-+--- mozilla-esr10.orig/configure	2014-08-09 23:05:46.397944139 +0200
-++++ mozilla-esr10/configure	2014-08-09 23:07:23.691947627 +0200
-+@@ -16011,8 +16011,7 @@
-+ #define MOZ_PANGO 1
-+ EOF
-+ 
-+-    else
-+-        succeeded=no
-++    fi
-+ 
-+   if test -z "$PKG_CONFIG"; then
-+     # Extract the first word of "pkg-config", so it can be a program name with args.
-+@@ -16105,7 +16104,6 @@
-+ 
-+         
-+         
-+-    fi
-+ fi
-+ 
-+ if test "$MOZ_ENABLE_QT"
-diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-index 98da1a4..307e672 100644
---- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-+++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-@@ -73,6 +73,7 @@ SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/f
-            file://debian-hacks/Bug-508942-Use-Preprocessor.py-filters-in-defines-an.patch \
-            file://configure.patch \
-            file://powerpc_va_list.patch \
-+	   file://freetype-2.5.patch \
-            file://vendor.js"
+diff --git a/recipes-browser/chromium/chromium_35.0.1916.114.bb b/recipes-browser/chromium/chromium_35.0.1916.114.bb
+index c1021c0..3df1716 100644
+--- a/recipes-browser/chromium/chromium_35.0.1916.114.bb
++++ b/recipes-browser/chromium/chromium_35.0.1916.114.bb
+@@ -30,9 +30,17 @@ inherit gettext
+ # automatically and silently fall back to GLX
+ PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
  
- SRC_URI[archive.md5sum] = "2f0e3a1dd7480e03f374c0121b4155e2"
-@@ -85,7 +86,6 @@ inherit mozilla
- EXTRA_OEMAKE = "installdir=${libdir}/${PN}"
- 
- ARM_INSTRUCTION_SET = "arm"
--TARGET_CC_ARCH += " -I${STAGING_INCDIR}/freetype2"
- 
- do_install() {
- 	oe_runmake DESTDIR="${D}" destdir="${D}" install
++# when building with gold for qemux86-64 it fails with:
++# FAILED: x86_64-oe-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro -Wl,--fatal-warnings -pthread -Wl,-z,noexecstack -fPIC -B/home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-linux/chromium/35.0.1916.114-r0/chromium-35.0.1916.114/third_party/gold -m64 -Wl,--icf=none -Wl,--gc-sections -o chrome_sandbox -Wl,--start-group obj/sandbox/linux/suid/chrome_sandbox.linux_util.o obj/sandbox/linux/suid/chrome_sandbox.process_util_linux.o obj/sandbox/linux/suid/chrome_sandbox.sandbox.o  -Wl,--end-group
++# chromium/35.0.1916.114-r0/chromium-35.0.1916.114/third_party/gold/gold64: -plugin: unknown option
++# chromium/35.0.1916.114-r0/chromium-35.0.1916.114/third_party/gold/gold64: use the --help option for usage information
++# collect2: error: ld returned 1 exit status
++# ninja: build stopped: subcommand failed.
++EXTRA_OEGYP_GOLD_x86-64 = "-Dlinux_use_gold_binary=0 -Dlinux_use_gold_flags=0"
++EXTRA_OEGYP_GOLD = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0 -Dlinux_use_gold_flags=0', d)}"
++
+ EXTRA_OEGYP =	" \
+-	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
+-	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
++	${EXTRA_OEGYP_GOLD} \
+ 	-I ${WORKDIR}/oe-defaults.gypi \
+ 	-I ${WORKDIR}/include.gypi \
+ 	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
 -- 
 2.0.4
 
