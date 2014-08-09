@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 10CA470A10
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F6F970A77
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 16:09:05 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id b13so6876604wgh.30
+	Sat,  9 Aug 2014 16:09:06 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id hi2so2343205wib.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 09:09:06 -0700 (PDT)
+	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IlOVPOgmLdnKhGk2DJEPev9MSZl3HRjT7nGAXw/zdPA=;
-	b=Knsf+R0EYijjQ5hNqoRB6mqMzBGVF8cy/UGIKuMy2fcDwgIypBza2mO+u2c/2X85pI
-	15njfGHaAfcxhl68ZUCAtl3rWUG/3eZYnRXD83uOA1GBiiU1VekzCG3xPE9WcAugbZZW
-	FiZXg2HXYhuJcwZTjkuEfMdcFuzLR6O9d8jT6DRrrl/s8oyNOoUZXP1FeWv2fingi2KN
-	X5Aq1inUYXuV4prhU6rqtqkZKG8yV4Xqw9cuRg58UzXaitu9qRWSxKDGtyUE7V3ez7De
-	6RDToT4fPWzNUvOXfjwcxDlXlwKgOUdrPmHM0UYEFbVr2uWC45GSvfVHfpnSqHnEX5oK
-	7N3g==
-X-Received: by 10.180.210.172 with SMTP id mv12mr4944822wic.45.1407600546713; 
-	Sat, 09 Aug 2014 09:09:06 -0700 (PDT)
+	bh=p9NxDieft/da369rxpPaWW1IpLBqZ7ZP2mhEaOo+eXM=;
+	b=0sfn9y/rTt0ii6s6+XllQLhlbVbDifvwqzJLCFWm5uenSpB/m6ayI+Bk3gShOlKnAX
+	Ud7mFqXoK8xBzbqq/NaneJpUq9zAhXLltNI90JAZTK8qHIyY4GcPVNG5Dcsre6sILsGb
+	75IM5mJx/X0BziSNMTxhx8l7u1x1KatZIaw38GnBXddBiaSaAFLn68+/4uH6TpNe3yo7
+	Fs89nDKdepAYY5zcxmONF5iq9MeyNcztGoRDRUu7Qq+GPd+X6BdWOROsZ3GvTLL1pBHw
+	ORjS6SQy8wFw+TgOsTuArDZep2/QmoFWcymNZhR2HqIP/M3IaGVQCXy7i0KB/mKN5v3H
+	moRA==
+X-Received: by 10.194.205.129 with SMTP id lg1mr5796160wjc.97.1407600547934;
+	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	wd7sm25520053wjc.36.2014.08.09.09.09.05 for <multiple recipients>
+	fb8sm20418263wib.15.2014.08.09.09.09.07 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 09:09:06 -0700 (PDT)
+	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:08:53 +0200
-Message-Id: <1407600537-10857-32-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 18:08:54 +0200
+Message-Id: <1407600537-10857-33-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 32/36] stunnel: add dependency on zlib and tcp-wrappers
+Subject: [meta-oe][PATCH 33/36] epiphany: add dependency on libnotify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,29 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 16:09:06 -0000
+X-List-Received-Date: Sat, 09 Aug 2014 16:09:08 -0000
 
 * fixes floating dependency:
-  stunnel/stunnel/latest lost dependency on  libwrap zlib
+  epiphany/epiphany/latest lost dependency on  libnotify
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 2 +-
+ meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-index 938f043..8671193 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-sta
- SECTION = "net"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
--DEPENDS = "openssl"
-+DEPENDS = "openssl zlib tcp-wrappers"
+diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
+index 4c8c58a..9e1a0dc 100644
+--- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
++++ b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
+@@ -2,7 +2,7 @@ SUMMARY = "GNOME default webbrowser"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- SRC_URI = "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
+-DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring avahi"
++DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring avahi libnotify"
  
+ inherit gnome
+ SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
 -- 
 2.0.4
 
