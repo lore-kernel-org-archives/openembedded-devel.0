@@ -1,38 +1,28 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EDA765E2B
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D7C8170746
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 18:22:31 +0000 (UTC)
-Received: by mail-lb0-f181.google.com with SMTP id 10so4665661lbg.26
+	Sat,  9 Aug 2014 21:17:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s79LHbXH029835
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 11:22:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=4+ztSUEyieJd88FMJE887Pd2AMbKGLkguIhEG+of9hI=;
-	b=niwBEM07VJn9pW6H9gYnEriy1555KM/EAPKcWizfNeeznmTJ8x3SzndfmjX8c0Vkrk
-	KPJDj+WVOBwSqM7FIR35SxxbdHVdwM5n0GG7N35LA25yiClUGII8WuDvcXUhYMyE6sRQ
-	lmF54yULrugEXg3UhIzVC0dSLVGBJJ4qrAfm9vc6oYPWbPmVf5tJZvOPtBkrD8YrLLLN
-	+xoFD1+kursrGHuQCFCkBEvupGhoUds6mMnAaFwxzkMCczjJoFXGUNvJCaHvoFfdmDZz
-	5+60mzM/8ZTiX38SvhLjVp7tLY82rPXRt7ijgDXPoj78A1KRt4tHuZzcjDhFylxwqxGt
-	7AnQ==
-X-Received: by 10.152.26.100 with SMTP id k4mr28411623lag.30.1407608552220;
-	Sat, 09 Aug 2014 11:22:32 -0700 (PDT)
+	Sat, 9 Aug 2014 14:17:38 -0700 (PDT)
+Received: from msp-dhcp9.wrs.com (172.25.34.9) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Sat, 9 Aug 2014 14:17:36 -0700
+Message-ID: <53E68FF0.50104@windriver.com>
+Date: Sat, 9 Aug 2014 16:17:36 -0500
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.43.42 with HTTP; Sat, 9 Aug 2014 11:22:11 -0700 (PDT)
-In-Reply-To: <01b401cfaf9f$14258da0$3c70a8e0$@lge.com>
-References: <017701cfaf7e$77e1a390$67a4eab0$@lge.com>
-	<20140804030800.GB18172@haswell>
-	<01b401cfaf9f$14258da0$3c70a8e0$@lge.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Sat, 9 Aug 2014 11:22:11 -0700
-X-Google-Sender-Auth: CJW1595pUcK9KOLE03hjC_WC-dQ
-Message-ID: <CABcZANnn4CSDe4Gvc+nuM39u9dQK74zuLnzw8Uf6sKfDp5v2Gw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How to apply "-Wl,--build-id" in all recipes?
+To: <openembedded-devel@lists.openembedded.org>
+References: <20140809124025.6627.qmail@f4mail-235-198.rediffmail.com>
+In-Reply-To: <20140809124025.6627.qmail@f4mail-235-198.rediffmail.com>
+Subject: Re: Error: package not found in the base feeds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 18:22:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 09 Aug 2014 21:17:43 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Aug 3, 2014 at 9:46 PM, Changhyeok Bae <changhyeok.bae@lge.com>
-wrote:
+On 8/9/14, 7:40 AM, Himanshu Pandey wrote:
+> Hi,I am getting following error:Error: spread not found in the base feeds (genericx86_64 x86_64 noarch any all).Error: liburiparser not found in the base feeds (genericx86_64 x86_64 noarch any all).
 
-> As I said, I applied the variable in local.conf.
-> The LDFLAGS env. variable is included '-Wl,--build-id'.
-> However, the variable is not applied at the linking time.
+This message indicates that something put "liburiparser" into the IMAGE_INSTALL 
+(or PACKAGE_INSTALL) variable.  The system was unable to find a package with 
+that name (or the 'debian renamed' version if applicable) within the system 
+packages.
+
+You'll likely need to look at the recipe that was supposed to come from and 
+figure out if you are using the wrong name -- or if it wasn't created for some 
+reason.
+
+--Mark
+
+> Please help to resolve the same.
+> Regards,Himanshu
 >
 
-All recipes *should* ensure that the buildsystem of what they're building
-obeys our LDFLAGS, but plenty do not. We used to spot these cases via the
-GNU_HASH warnings, but now we build the internal toolchain with the default
-gnu hash so cases where LDFLAGS isn't being obeyed are slightly more
-difficult to detect unless you'er building with an external toolchain.
-There are some fixes for such issues floating around in the meta-sourcery
-repository until I get time to push them. So I expect it's a case by case
-thing. It should be applied for most things, but it's possible that it
-doesn't in others, and it'd be a bug in the cases where it isn't.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
