@@ -1,35 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id F1AB0610F5
+Return-Path: <pandey_himanshu80@rediffmail.com>
+Received: from rediffmail.com (unknown [202.137.235.198])
+	by mail.openembedded.org (Postfix) with SMTP id BED2470A61
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 10:58:39 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id n3so3568702wiv.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 03:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=//B1nxkbcIyE8yTQ3x4AHTNNP0JGQex1QiGJWJlKX88=;
-	b=i5yb1XuoawF2QhAu7PWujVyA5NyJ5mlHiCthJTcp2IYc1qzqBB4MpvKFl8rRaUgdhJ
-	LOeNhXkdP2FWsm545ZMO7go+N/cxnAea/G93FjH/WOAHgitJ4cdu3JkSLYSe7RLM2LCZ
-	+Zt7LiijKaKMSRhp1PZ87ZqkmUihAeqbT+CPY8GsIy+rP687B1dKx9s/vMA+Whnjd1PZ
-	29HekdobCf1hblN0Zy9jh6UxiAAyExE6mxYIULSaWNSG2dTXwREChNdaNnSimc9i9OsY
-	cCGvwXWUTxzD0n/GlmlGv2qn/nUlKEyICtzNTmYYwitCgNv35sA/FSpBblcgRdQrYSB2
-	YzWw==
-X-Received: by 10.180.188.203 with SMTP id gc11mr10022865wic.59.1407581919659; 
-	Sat, 09 Aug 2014 03:58:39 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	co6sm23848741wjb.31.2014.08.09.03.58.38 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 03:58:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 12:59:09 +0200
-Message-Id: <1407581949-17124-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
-Subject: [meta-oe][WIP][PATCH] tracker: add all floating dependencies
+	Sat,  9 Aug 2014 12:40:33 +0000 (UTC)
+Received: (qmail 6785 invoked by uid 510); 9 Aug 2014 12:40:26 -0000
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=redf; d=rediffmail.com;
+	b=cuagnhsIt6pUNBidEwPzLrxnKxd6eh2aoxGTfbyf9PDtanvB+vnkSLBjbkO+NIE8hHkZ60ZV5HdYFHNwm4jtqhgcWvLzqk/FnoAJh1IGKgER+QArw+lyQB+83xJEqp4XnTXfkNfOgGxR06BF7uROZxqIZgDS2+R0G3qZtDbdLPI=
+	; 
+x-m-msg: asd54ad564ad7aa6sd5as6d5; a6da7d6asas6dasd77; 5dad65ad5sd;
+X-CTCH-Spam: Unknown
+X-CTCH-VOD: Unknown
+X-CTCH-Flags: : 0
+X-CTCH-RefID: str=0001.0A160204.53E616BA.0065, ss=1, re=0.000, recu=0.000,
+	reip=0.000, cl=1, cld=1, fgs=0
+X-REDF-OSEN: pandey_himanshu80@rediffmail.com
+Date: 9 Aug 2014 12:40:25 -0000
+Message-ID: <20140809124025.6627.qmail@f4mail-235-198.rediffmail.com>
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Received: from unknown 122.177.212.189 by rediffmail.com via HTTP;
+	09 Aug 2014 12:40:25 -0000
+Sender: pandey_himanshu80@rediffmail.com
+From: "Himanshu  Pandey" <pandey_himanshu80@rediffmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Error: package not found in the base feeds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,120 +41,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 10:58:41 -0000
+X-List-Received-Date: Sat, 09 Aug 2014 12:40:35 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* fixes following warnings:
-  WARN: tracker: tracker rdepends on dbus-lib but its not a build dependency?
-  WARN: tracker: tracker rdepends on eglibc but its not a build dependency?
-  WARN: tracker: tracker rdepends on enca but its not a build dependency?
-  WARN: tracker: tracker rdepends on gdk-pixbuf but its not a build dependency?
-  WARN: tracker: tracker rdepends on glib-2.0 but its not a build dependency?
-  WARN: tracker: tracker rdepends on glib-2.0-utils but its not a build dependency?
-  WARN: tracker: tracker rdepends on gsettings-desktop-schemas but its not a build dependency?
-  WARN: tracker: tracker rdepends on gtk+3 but its not a build dependency?
-  WARN: tracker: tracker rdepends on gvfs but its not a build dependency?
-  WARN: tracker: tracker rdepends on libcap but its not a build dependency?
-  WARN: tracker: tracker rdepends on libexif but its not a build dependency?
-  WARN: tracker: tracker rdepends on libffi but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgcc but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgcrypt but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgee but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgnome-keyring but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgpg-error but its not a build dependency?
-  WARN: tracker: tracker rdepends on libgsf but its not a build dependency?
-  WARN: tracker: tracker rdepends on libsqlite3 but its not a build dependency?
-  WARN: tracker: tracker rdepends on libstdc++ but its not a build dependency?
-  WARN: tracker: tracker rdepends on libunistring but its not a build dependency?
-  WARN: tracker: tracker rdepends on upower but its not a build dependency?
-  WARN: tracker: tracker rdepends on util-linux-libuuid but its not a build dependency?
-  WARN: tracker: tracker rdepends on zlib but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on cairo but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on eglibc but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on enca but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on expat but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on fontconfig but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on freetype but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on giflib but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on glib-2.0 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on gstreamer but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on lcms but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libbz2 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libexif but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libffi but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libgsf but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libgstpbutils-0.10 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libgsttag-0.10 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libjpeg-turbo but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on liblzma but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libpng but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libpoppler but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libpoppler-glib but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libsqlite3 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libstdc++ but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libunistring but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libx11 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxau but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxcb but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxcb-render but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxcb-shm but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxdmcp but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxext but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxml2 but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on libxrender but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on pixman but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on taglib but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on taglib-c but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on tiff but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on tracker but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on tracker but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on util-linux-libuuid but its not a build dependency?
-  WARN: tracker: tracker-dev rdepends on zlib but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on atk but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on cairo but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on eglibc but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on expat but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on fontconfig but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on freetype but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on gdk-pixbuf but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on glib-2.0 but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on gtk+ but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on harfbuzz but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libffi but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libpng but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libsqlite3 but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libunistring but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libx11 but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxau but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxcb but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxcb-render but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxcb-shm but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxdmcp but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxext but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on libxrender but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on pango but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on pixman but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on tracker but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on util-linux-libuuid but its not a build dependency?
-  WARN: tracker: tracker-nautilus-extension rdepends on zlib but its not a build dependency?
+Hi,I am getting following error:Error: spread not found in the base feeds (genericx86_64 x86_64 noarch any all).Error: liburiparser not found in the base feeds (genericx86_64 x86_64 noarch any all).
+
+Please help to resolve the same.
+Regards,Himanshu
+From martin.jansa@gmail.com  Sat Aug  9 16:08:28 2014
+Return-Path: <martin.jansa@gmail.com>
+X-Original-To: openembedded-devel@lists.openembedded.org
+Delivered-To: openembedded-devel@lists.openembedded.org
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id CD89570A10
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  9 Aug 2014 16:08:27 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id m15so6786766wgh.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Aug 2014 09:08:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=pzSUyCO/wjEB5vf/q48p5gjZXDIvvPDl5Dvww6NXDyk=;
+	b=keurbZmVDOXH7kd3/PeKapqLRueExXmY03y1iZVFYp264av+B6HR0g/uWQR/Zhkqc+
+	aSSnE83AzG3ihl+asAcfyezD3dP80ilpCaEXR448S8jZ8vOie/1YU5SoobFeoI1S9jXF
+	2U6i7JEod9QWnHWdT+m1QH1a0Q17rcMvpXJgK4GOlyYTUngLRPTjKhNuJYAh3GAHZ9Ct
+	eSuTRNg5rqc2Ap/hUZYxRBUK0BaKUygAfrac1reI5M5dw0iuRrXPCBAVN5F9a3WwBx1A
+	qqZKNuoPKqQPEUIlWz1aVbnFKb+j13NZiUnCD6ZEQChX1yhEDl6cWgZM2RjoFbzrg8AE
+	dUNA==
+X-Received: by 10.180.14.170 with SMTP id q10mr2097306wic.56.1407600508078;
+	Sat, 09 Aug 2014 09:08:28 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	xn12sm20415885wib.13.2014.08.09.09.08.26 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 09 Aug 2014 09:08:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  9 Aug 2014 18:08:22 +0200
+Message-Id: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.4
+Subject: [oe] [meta-oe][PATCH 01/36] libungif: remove and use giflib
+	everywhere
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.12
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.openembedded.org/mailman/options/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
+List-Archive: <http://lists.openembedded.org/pipermail/openembedded-devel/>
+List-Post: <mailto:openembedded-devel@lists.openembedded.org>
+List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
+List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
+X-List-Received-Date: Sat, 09 Aug 2014 16:08:28 -0000
+
+* giflib says it's API and ABI compatible with libungif
+  which was in wide use while the LZW compression algorithm was
+  patented.
+
+* the selection between giflib and libungif wasn't ever determinictic
+  because of conflicts in sysroot
+* resolves couple of undeterministic dependencies and:
+  WARNING: The recipe giflib is trying to install files into a shared area
+  when those files already exist. Those files and their manifest location
+  are:
+   sysroots/qemuarm/usr/include/gif_lib.h
+      Matched in manifest-qemuarm-libungif.populate_sysroot
+      Please verify which package should provide the above files.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/libungif/libungif_4.1.4.bb  | 16 ----------------
+ meta-oe/recipes-graphics/fbida/fbida_git.bb          |  2 +-
+ meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb |  2 +-
+ 3 files changed, 2 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
 
-diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-index eea8edc..21df29d 100644
---- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-+++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Tracker is a tool designed to extract information and metadata about your personal data so that it can be searched easily and quickly."
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ee31012bf90e7b8c108c69f197f3e3a4"
--DEPENDS = "file gstreamer gamin dbus libexif gettext sqlite3 icu"
-+DEPENDS = "file gstreamer gamin dbus libexif gettext sqlite3 icu gst-plugins-base libgnome-keyring poppler tiff enca libgsf libunistring giflib taglib bzip2 upower gtk+3 libgee"
-+
- RDEPENDS_${PN} += " gvfs gsettings-desktop-schemas"
- HOMEPAGE = "http://projects.gnome.org/tracker/"
+diff --git a/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb b/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
+deleted file mode 100644
+index aa05653..0000000
+--- a/meta-oe/recipes-extended/libungif/libungif_4.1.4.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "shared library for GIF images"
+-SECTION = "libs"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/giflib/libungif-4.x/libungif-${PV}/libungif-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "76865bc1bed90ecb5992a1edcc4d6c15"
+-SRC_URI[sha256sum] = "708a7eac218d3fd8e8dfb13f1089d4e1e98246985180a17d6ecfca5a6bd4d332"
+-
+-inherit autotools lib_package
+-
+-PACKAGES =+ "${PN}-utils"
+-
+-FILES_${PN}-utils = "${bindir}/*"
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_git.bb b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+index f4dd01d..41c14b8 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_git.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_git.bb
+@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
+ EXTRA_OEMAKE = "STRIP="
+ 
+ PACKAGECONFIG ??= "gif png"
+-PACKAGECONFIG[gif] = ",,libungif"
++PACKAGECONFIG[gif] = ",,giflib"
+ PACKAGECONFIG[png] = ",,libpng"
+ PACKAGECONFIG[tiff] = ",,tiff"
+ PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
+index 6d57da7..e826e05 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "A pedagogically-oriented open source site containing software that is broadly useful for image processing and image analysis applications"
+-DEPENDS = "jpeg tiff libpng zlib libungif"
++DEPENDS = "jpeg tiff libpng zlib giflib"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
  
 -- 
 2.0.4
