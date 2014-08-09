@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D2A0170A7A
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 25F7D70A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 16:08:53 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id b13so6771228wgh.18
+	Sat,  9 Aug 2014 16:08:54 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id n12so6897259wgh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 09:08:54 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=iU6RGvvb0wNnrgyQXj3hNvfSHTiI91K8vwOpT5O3jy0=;
-	b=PHx6zx2f027sAn49v2lTKCypU/xxaeG39S606VJZo0oIjS01p0PNWzSLPuoryFt9oY
-	FAXhX7ju+Nbaj2uYpwNCGygQjPF8xAEJfxJ0Ed1aW1fng0J3/Ovv0v6tXSEesbfEfbbb
-	ESMLRsAhvtdMVyPhz6+1uuI0O3K6arbcYJI+hmugzoAVcoJrhXgsanJdtjQXtjOU+m8d
-	2AnoIZbaaKFgP+17M/F9TkKVoC/fjgR41HBY0n3qXudbMoobIkc/0hEC/YkZuE6niOeR
-	dFH0wODYKHJe6Zf4GHbQoJ7SdWhu7Vhq9am87Zt6LK3CmUfVlcspg2OHO5JlEw1LYqYd
-	qSCw==
-X-Received: by 10.181.5.39 with SMTP id cj7mr11823296wid.79.1407600534516;
-	Sat, 09 Aug 2014 09:08:54 -0700 (PDT)
+	bh=mDCdodZcHwT9vx2ini+pN96mvMANCA8BA5h3k2z8bvc=;
+	b=H+M1Te4i3P1Mj7s06SEcG1r08F3fg/LL8Z1PYOVgMQYOQlvpLjXWAdUd6tOfVFHGB6
+	F/rmht6zFNMotP4B9n1D4ZA1G/Rzcwel7qkiuSdP4i3wdemwAAKJXfiX1veIx2vRRT6d
+	RrzRlqjlZnpMCdTQ9I/FmdBfLzjyoBRCKm3fe9omu0cwTaJf5F/S4XJZFKLYIZOYWhOU
+	AOMVVlZIjFCIR0WkHxlyBKKp4uPe1kAGKCjLxGFqnDggm6TmQBmvBrqhGUmMkqchV9G+
+	n6LZfZQuir0v5QLH1rpLQ+1RbUNKAvq2OIaZASpfD+C5xhInpeWH+N+EZN+zl/le5Q+7
+	7RMQ==
+X-Received: by 10.194.158.101 with SMTP id wt5mr2054544wjb.136.1407600535668; 
+	Sat, 09 Aug 2014 09:08:55 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ex2sm20401001wic.24.2014.08.09.09.08.53 for <multiple recipients>
+	j5sm25518248wjf.35.2014.08.09.09.08.54 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 09:08:54 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:08:43 +0200
-Message-Id: <1407600537-10857-22-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 18:08:44 +0200
+Message-Id: <1407600537-10857-23-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 22/36] links, links-x11: remove unrecognized configure options
+Subject: [meta-oe][PATCH 23/36] metacity: remove unrecognized configure option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,58 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 16:08:54 -0000
+X-List-Received-Date: Sat, 09 Aug 2014 16:08:55 -0000
 
 * fixes following QA warnings:
-  links-2.7: links: configure was passed unrecognised options:
-    --enable-javascript --with-libfl --without-sdl
-    [unknown-configure-option]
-  links-x11-2.7: links-x11: configure was passed unrecognised options:
-    --enable-javascript --with-libfl --without-sdl
-    [unknown-configure-option]
+  metacity-2.34.13: metacity: configure was passed unrecognised options:
+    --disable-verbose [unknown-configure-option]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/links/links-x11_2.7.bb | 4 ++--
- meta-oe/recipes-support/links/links_2.7.bb     | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/links/links-x11_2.7.bb b/meta-oe/recipes-support/links/links-x11_2.7.bb
-index 601742f..8766653 100644
---- a/meta-oe/recipes-support/links/links-x11_2.7.bb
-+++ b/meta-oe/recipes-support/links/links-x11_2.7.bb
-@@ -8,11 +8,11 @@ SRC_URI += " file://links2.desktop \
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+index fc0a977..9c48238 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+@@ -19,8 +19,7 @@ ALTERNATIVE_${PN} = "x-window-manager"
+ ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/metacity"
+ ALTERNATIVE_PRIORITY = "10"
  
- S = "${WORKDIR}/links-${PV}"
+-EXTRA_OECONF += "--disable-verbose \
+-             --disable-xinerama"
++EXTRA_OECONF += "--disable-xinerama"
  
--EXTRA_OECONF = "--enable-javascript --with-libfl --enable-graphics \
-+EXTRA_OECONF = "--enable-graphics \
-                 --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
-                 --without-libtiff --without-svgalib --without-fb \
-                 --without-directfb --without-pmshell --without-atheos \
--                --with-x --without-gpm --without-sdl"
-+                --with-x --without-gpm"
- 
- do_install_append() {
-     install -d ${D}/${datadir}/applications
-diff --git a/meta-oe/recipes-support/links/links_2.7.bb b/meta-oe/recipes-support/links/links_2.7.bb
-index 24c1985..e80dd7b 100644
---- a/meta-oe/recipes-support/links/links_2.7.bb
-+++ b/meta-oe/recipes-support/links/links_2.7.bb
-@@ -3,11 +3,11 @@ require links.inc
- DEPENDS += "gpm"
- RCONFLICTS_${PN} = "links-x11"
- 
--EXTRA_OECONF = "--enable-javascript --with-libfl --enable-graphics \
-+EXTRA_OECONF = "--enable-graphics \
-                 --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
-                 --without-libtiff --without-svgalib --with-fb \
-                 --without-directfb --without-pmshell --without-atheos \
--                --without-x --without-sdl"
-+                --without-x"
- 
- SRC_URI[md5sum] = "d06aa6e14b2172d73188871a5357185a"
- SRC_URI[sha256sum] = "0c182b1cbcdfd5cdcd2f75a6032d1a4b660d07c1225c1e07757cec81d3302130"
+ do_configure_prepend() {
+     sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
 -- 
 2.0.4
 
