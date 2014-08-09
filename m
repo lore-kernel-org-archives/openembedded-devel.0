@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E769470A81
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 18C6470A81
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 16:08:57 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id z12so6821183wgg.12
+	Sat,  9 Aug 2014 16:08:58 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so2379828wiv.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 09:08:58 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=4t4i8y5wxdzlX/9vW/5dLv8urFuUXKWMfP7HQiXNlTw=;
-	b=lCt1ZHEmmj6g3NM28uFubZ4q4s9pINuFGgkLlHfZOo7sU3MXOEbfcCmNgsSwuBIHdz
-	f3/k+WojjDi6h4i1SIRofCOM01GGjBkH6Zd+KsBYkKBYopMJJ7i1eauFnkJA+7BH97eu
-	vN/ozxL4ppi9Cn4ym7IBQFvVZfqsQ91ryrw0RHjDVNkVhd81QJqq73xY8YJtaI5E1k5i
-	YrtvK9vaz5LWmS7GKsIdpfECwmGSxd7fD2tP478XAJ7R4sYKhsOnEmLEWEcJPrr4kmqQ
-	tcdwcQ7PvZh6xgZtM7e3EZAsUcY5CNMu6na9JhZZiIwOB3AtJYXwjCXbwUnuNMOobyLP
-	vmPQ==
-X-Received: by 10.194.84.69 with SMTP id w5mr40967307wjy.0.1407600538326;
-	Sat, 09 Aug 2014 09:08:58 -0700 (PDT)
+	bh=B780JpLy6nLoB9QXsxdDdg7NuAnd9I/7n/balb6WTS4=;
+	b=GrojsBUCOZZE11LT1s8K9Nuu2p/Y11MMuhrvODEMV6CReeDykz9GITQX7x4hdffGiu
+	NGUPdIGarzC/71YIQwETAelRo7O3fPjeHQxS9xiyjWCfDz7c/VcjQ2IhPueemJuGW75W
+	hW4sZ+5OV4nIU93m/PyQlCyXCkYt0/b5thw0JOrMcZK19Pd8hjsE6CcIJDteD9n2FUX1
+	PofwsNWpqOpl7Qau4LZnhxnIeGI0WuzTyW5bSHb0IkvYqHTEAVxaxEU5vTu9Q2VrGOOE
+	6N3zcUuFolm0sFDpZgbJBgbUeEbHoQRB+JpkIk9K9GxVuRO2SvJiQmbxFMh3X+NgNx53
+	rVsQ==
+X-Received: by 10.194.134.70 with SMTP id pi6mr40751562wjb.1.1407600539570;
+	Sat, 09 Aug 2014 09:08:59 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fv10sm20393050wic.23.2014.08.09.09.08.57 for <multiple recipients>
+	v14sm25516947wjw.38.2014.08.09.09.08.58 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 09:08:57 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:08:46 +0200
-Message-Id: <1407600537-10857-25-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 18:08:47 +0200
+Message-Id: <1407600537-10857-26-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 25/36] openobex: remove unrecognized configure options
+Subject: [meta-oe][PATCH 26/36] owfs: remove unrecognized configure options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Aug 2014 16:08:58 -0000
+X-List-Received-Date: Sat, 09 Aug 2014 16:08:59 -0000
 
 * fixes following QA warnings:
-  openobex-1.5: openobex: configure was passed unrecognised options:
-    --with-usb --with-bluez [unknown-configure-option]
+  owfs-2.9p1: owfs: configure was passed unrecognised options:
+    --enable-cache --enable-mt [unknown-configure-option]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-connectivity/obex/openobex_1.5.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-index bf30817..b07779d 100644
---- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-+++ b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-@@ -18,8 +18,7 @@ SRC_URI[sha256sum] = "e602047570799a47ecb028420bda8f2cef41310e5a99d084de10aa9422
- 
- inherit autotools binconfig pkgconfig
- 
--EXTRA_OECONF = "--enable-apps --enable-syslog \
--                --with-usb=${STAGING_LIBDIR}/.. --with-bluez=${STAGING_LIBDIR}/.."
-+EXTRA_OECONF = "--enable-apps --enable-syslog"
- 
- do_install_append() {
-     install -d ${D}${datadir}/aclocal
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb
+index e8b34d3..21fd7e9 100644
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb
++++ b/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb
+@@ -22,8 +22,6 @@ EXTRA_OECONF = " \
+                  --with-fuselib=${STAGING_LIBDIR} \
+                  --enable-owfs \
+                  --enable-owhttpd \
+-                 --enable-cache \
+-                 --enable-mt \
+                  --enable-w1 \
+                  --disable-swig \
+                  --disable-owtcl \
 -- 
 2.0.4
 
