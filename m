@@ -1,37 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 6691570A7F
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id E73D570AA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 16:08:47 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id w62so6698601wes.8
+	Sat,  9 Aug 2014 16:08:49 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id m15so6706384wgh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 09:08:48 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=gUJFIA5ibXw/hzxiowVx7QkyXkoxCnht/A8HtOxsg3E=;
-	b=iiEMEIxlgO1GVwSf1FbD27bGbZyyykhZ7mUW6MOi1KBKej0izMXwoYGOT8AQH7XNQh
-	otKvd0TvzAob+zQrC2UN48nttdOFUJ+RkPA+y97NAoBa03ZKAy4wBqYUkSlDIroaMUjh
-	ONktAkpA3WruZ+ERK+u/wmX7tikjU4R3jKYZkfLUsTBdTgfOUQGg6wYxN3PmXyCTXQoq
-	48ozqAkg9M3UKkRrZHw67f0QKnwUTnxjoIm//i/LhajnENWik9R1FrzNVr2me+eFoysz
-	s6r/n+CAl4LwJE+tzjnOzDWyqXXIdR7wqK80TdEH2rSEsSQ/hZzTjWsc/DKkBiB4sgqF
-	kMmg==
-X-Received: by 10.180.107.65 with SMTP id ha1mr11390833wib.59.1407600528225;
-	Sat, 09 Aug 2014 09:08:48 -0700 (PDT)
+	bh=gznQvdAlI4gEDWm/QdrYT2L/VFJUsYMGfBlhb5+aHjU=;
+	b=B+RoeiU5ymtNeUz4V+L3fxS43O/jMEx0Oc57YOs3mWsQtqRz2HSMZmkImIbCSeTtLe
+	r7P/7JQP/fYAFvygmjdBx0sjGoM0+Sjx1JoufIUZ6OSoXKcKvT3DTZ5tm0nX/o7ylHbf
+	E1pFTr+QK+pU0MEi1TQiheAvdpj3M2Di3NxKBJzQfQabo0W6Oh4jPsKxJuPibY9y8L25
+	O1U8PVuxRJ6D2F8q4aqxmA62+6vBWt2SHNUse9yhDIKc6Mit4iK5iAccZJrMrM0Zh0z/
+	TPTkxDYYvQvtMnez4biPBmJi+ycNCQiUV6PZJegBMgLyCOrr5QX/smid5qDSH9+KzKA9
+	HOZA==
+X-Received: by 10.180.73.139 with SMTP id l11mr11570348wiv.30.1407600530734;
+	Sat, 09 Aug 2014 09:08:50 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	19sm25551600wjz.3.2014.08.09.09.08.47 for <multiple recipients>
+	10sm25527706wjx.26.2014.08.09.09.08.50 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 09:08:47 -0700 (PDT)
+	Sat, 09 Aug 2014 09:08:50 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:08:38 +0200
-Message-Id: <1407600537-10857-17-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 18:08:40 +0200
+Message-Id: <1407600537-10857-19-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 17/36] gnome-power-manager: remove unrecognized configure options
+Subject: [meta-oe][PATCH 19/36] gnome-themes: remove unrecognized configure options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +47,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 09 Aug 2014 16:08:50 -0000
 
 * fixes following QA warning:
-  gnome-power-manager-2.32.0: gnome-power-manager: configure was passed
-    unrecognised options: --with-dpms-ext [unknown-configure-option]
+  gnome-themes-2.32.1: gnome-themes: configure was passed unrecognised
+    options: --disable-hicolor-check [unknown-configure-option]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb      | 1 -
- 1 file changed, 1 deletion(-)
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb
-index 586eba6..2c55cf1 100644
---- a/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb
-@@ -21,7 +21,6 @@ EXTRA_OECONF = " --disable-scrollkeeper \
-                  --disable-applets \
-                  --x-includes=${STAGING_INCDIR} \
-                  --x-libraries=${STAGING_LIBDIR} \
--                 --with-dpms-ext=${STAGING_INCDIR}/.. \
-                  --enable-compile-warnings=no \
-                  ac_cv_header_X11_extensions_dpms_h=yes \
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index 6664bfa..a2b7e0c 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -8,7 +8,7 @@ SECTION = "x11/gnome"
+ DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
+ RDEPENDS_${PN} = "gnome-icon-theme"
+ 
+-EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check \
++EXTRA_OECONF += "--enable-all-themes \
+     --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
  "
+ 
 -- 
 2.0.4
 
