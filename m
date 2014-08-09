@@ -1,37 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F6F970A77
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EBC970A97
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Aug 2014 16:09:06 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id hi2so2343205wib.11
+	Sat,  9 Aug 2014 16:09:07 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so6866887wgh.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
+	Sat, 09 Aug 2014 09:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=p9NxDieft/da369rxpPaWW1IpLBqZ7ZP2mhEaOo+eXM=;
-	b=0sfn9y/rTt0ii6s6+XllQLhlbVbDifvwqzJLCFWm5uenSpB/m6ayI+Bk3gShOlKnAX
-	Ud7mFqXoK8xBzbqq/NaneJpUq9zAhXLltNI90JAZTK8qHIyY4GcPVNG5Dcsre6sILsGb
-	75IM5mJx/X0BziSNMTxhx8l7u1x1KatZIaw38GnBXddBiaSaAFLn68+/4uH6TpNe3yo7
-	Fs89nDKdepAYY5zcxmONF5iq9MeyNcztGoRDRUu7Qq+GPd+X6BdWOROsZ3GvTLL1pBHw
-	ORjS6SQy8wFw+TgOsTuArDZep2/QmoFWcymNZhR2HqIP/M3IaGVQCXy7i0KB/mKN5v3H
-	moRA==
-X-Received: by 10.194.205.129 with SMTP id lg1mr5796160wjc.97.1407600547934;
-	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
+	bh=MpJc7gUyAuZHtGMal8rLyVWzWPhXHKzjD5PmDf3TSGU=;
+	b=ZjN2KzZrIpp1cc4ODvZnXyXHZMwuKPfFFvxGkUeJoCKNi35Ex4VSiU0Rc4tKmIhSti
+	uJA6Qd41pgPmx8zYDxoi2wiqIa4CNiGrdE6DX6jJ1WVktcm62lbU1UslCngUU+nVCX5M
+	4hkt8YovrajU2btDYoACW8mijuMWFgmNeAG/7tpnw/I93fYs/4J4zzsG0ZwX5IknVbff
+	wXsgTY4jDAvG7c3blO+040dlhdpBXMhLFjpay0/H/40jnI1mwLcHVsuvwcIKzZ4s+fWe
+	KlFfB8+cRIEGXFUG1pmc3zTLd5A7UMaDhO3LNPTPQxqSKfvAVI2BGZyd+sF4tpsW4g7i
+	ATvA==
+X-Received: by 10.180.99.34 with SMTP id en2mr7566927wib.34.1407600549132;
+	Sat, 09 Aug 2014 09:09:09 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fb8sm20418263wib.15.2014.08.09.09.09.07 for <multiple recipients>
+	ft17sm25541930wjc.14.2014.08.09.09.09.08 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Aug 2014 09:09:07 -0700 (PDT)
+	Sat, 09 Aug 2014 09:09:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:08:54 +0200
-Message-Id: <1407600537-10857-33-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  9 Aug 2014 18:08:55 +0200
+Message-Id: <1407600537-10857-34-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407600537-10857-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 33/36] epiphany: add dependency on libnotify
+Subject: [meta-oe][PATCH 34/36] gd: add dependency on tiff
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +47,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 09 Aug 2014 16:09:08 -0000
 
 * fixes floating dependency:
-  epiphany/epiphany/latest lost dependency on  libnotify
+  gd/gd/latest lost dependency on  liblzma tiff
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb | 2 +-
+ meta-oe/recipes-support/gd/gd_2.1.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-index 4c8c58a..9e1a0dc 100644
---- a/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-+++ b/meta-gnome/recipes-gnome/epiphany/epiphany_2.30.6.bb
-@@ -2,7 +2,7 @@ SUMMARY = "GNOME default webbrowser"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+index ec2a09d..4bc9867 100644
+--- a/meta-oe/recipes-support/gd/gd_2.1.0.bb
++++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
+@@ -10,7 +10,7 @@ HOMEPAGE = "http://libgd.bitbucket.org/"
+ SECTION = "libs"
+ LICENSE = "GD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
+-DEPENDS = "freetype libpng jpeg zlib"
++DEPENDS = "freetype libpng jpeg zlib tiff"
  
--DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring avahi"
-+DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring avahi libnotify"
- 
- inherit gnome
- SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
+ SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
+            file://fix-the-subdir-objects-error.patch \
 -- 
 2.0.4
 
