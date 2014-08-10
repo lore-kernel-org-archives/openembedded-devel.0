@@ -1,37 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 45FC465D5E
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id DF7A570276
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 14:01:58 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id f8so4445699wiw.1
+	Sun, 10 Aug 2014 14:02:01 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id m15so7458518wgh.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 07:01:59 -0700 (PDT)
+	Sun, 10 Aug 2014 07:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6rznwwxo+mFo+SHmJjWHzZI05k81ay9NLr5G1Re7qBI=;
-	b=WPpycxNVA8F5alQ7inEOZlAxyKPNI2piAUHIxlM7P+96CipxO78RI/B0hR+DnSfhzw
-	hqFu691RoAkxR+ZHvr3xWHmuGWARD0xybdAAOTLmA/fTOIcM14PBnsilaGCi8OX/oI5W
-	xAq2pqvPy2rTVZll5EGUik0Ykwyfp36SeVXJcnY70VpEq6BKY824mvnb57LSibBT2h8A
-	rvlUHT5fQnGnQl2b0Slfp/yBFvDFKDqtwi1UkNhciUnKraR84wTQmTIFs5wZKdzttAqx
-	GLfN33VrwYP7V1HO1Eli5zIeKbTgbPy2N4UhGSzuYp5XC4d1clA7tUos7k8wBBHh1P5z
-	RURg==
-X-Received: by 10.180.12.38 with SMTP id v6mr12316889wib.31.1407679319283;
-	Sun, 10 Aug 2014 07:01:59 -0700 (PDT)
+	bh=SF5d72LMZ/g/7d6mpL1dYtNagkaKkeMNH1cIKqrFiRM=;
+	b=wWZazl8wPjEdnfyCOASpsBKLcNK5F/sNCM9gB8FQNxvwjK5sYVEGx/rWmGURFa02F0
+	bmDaOpIDPbjc/+HR+1/bV1TiNs5FC1LAj6EWvYrK3MWQQ0xR5v8G2b1yyoyGY3WA1Fvx
+	Cv4afsS3I9AGPFbuW0xZ2R+UXsULZBpoRcUPo9Loj3yy/w76VIWonuZAo3SP+/DgbdpQ
+	4CRuWUN3mcfXN9lvPD6PLuUoLXlyKtVinEgXvsDthC/6Bt8c/jztpTTmcv2v9jbu30qU
+	L7z3gNYwSK47yjAIr4pgPg8GkK8AEM8Afop+yKs5qJCMx7PORSdpN9MqSDp9jd5kO4Bs
+	C75g==
+X-Received: by 10.194.91.228 with SMTP id ch4mr46486526wjb.59.1407679322383;
+	Sun, 10 Aug 2014 07:02:02 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	f6sm32292546wja.25.2014.08.10.07.01.58 for <multiple recipients>
+	e3sm32314455wjp.4.2014.08.10.07.02.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 Aug 2014 07:01:58 -0700 (PDT)
+	Sun, 10 Aug 2014 07:02:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Aug 2014 16:02:23 +0200
-Message-Id: <1407679345-31695-5-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 10 Aug 2014 16:02:24 +0200
+Message-Id: <1407679345-31695-6-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/7] webmin: explicitly list some packages, drop perl-module-timelocal rdep
+Subject: [meta-oe][PATCH 6/7] efl, expedite: explicitly add some packages, add libsdl dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,48 +46,54 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 10 Aug 2014 14:02:02 -0000
 
-* perl-module-time-local is already in RDEPENDS (I guess it's the
-  same thing as perl-module-timelocal without the last dash)
-* list some packages explicitly so that bitbake finds their
-  RDEPENDS correctly
-* fixes following warnings:
-  webmin-1.620: webmin-module-raid rdepends on mdadm, but it isn't a build dependency? [build-deps]
-  webmin-1.620: webmin-module-proc rdepends on procps, but it isn't a build dependency? [build-deps]
-  webmin-1.620: webmin rdepends on perl-module-timelocal, but it isn't a build dependency? [build-deps]
+* expedite has runtime dependency on them and insane_qa check doesn't see
+  them as provided by evas dependency and shows following warnings:
+  expedite-1.7.9: expedite rdepends on evas-engine-software-generic, but it isn't a build dependency? [build-deps]
+  expedite-1.7.9: expedite rdepends on evas-engine-fb, but it isn't a build dependency? [build-deps]
+  expedite-1.7.9: expedite rdepends on evas-loader-png, but it isn't a build dependency? [build-deps]
+* always use libsdl dependency instead of PACKAGECONFIG, because
+  there is also software-sdl engine, which isn't controlled by
+  any configure option
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ meta-efl/recipes-efl/efl/efl.inc      | 1 +
+ meta-efl/recipes-efl/efl/expedite.inc | 5 +----
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-index 91ec5d7..95540cc 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.620.bb
-@@ -111,16 +111,17 @@ INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
- RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict"
- RDEPENDS_${PN} += "perl-module-warnings perl-module-xsloader perl-module-posix perl-module-autoloader"
- RDEPENDS_${PN} += "perl-module-fcntl perl-module-tie-hash perl-module-vars perl-module-time-local perl-module-config perl-module-constant"
--RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm perl-module-sdbm-file perl-module-timelocal perl-module-feature"
-+RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm perl-module-sdbm-file perl-module-feature"
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index 7ccb634..648c5b6 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -104,6 +104,7 @@ python populate_packages_prepend () {
+         allow_dirs=True, recursive=False, extra_depends="" )
+ }
  
- PACKAGES_DYNAMIC += "webmin-module-* webmin-theme-*"
- RRECOMMENDS_${PN} += "webmin-module-system-status"
++PACKAGES += "evas-loader-png evas-engine-software-generic evas-engine-fb"
+ PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
  
--RDEPENDS_webmin-module-proc = "procps"
--RDEPENDS_webmin-module-raid = "mdadm"
--RDEPENDS_webmin-module-exports = "perl-module-file-basename perl-module-file-path perl-module-cwd perl-module-file-spec perl-module-file-spec-unix"
--RRECOMMENDS_webmin-module-fdisk = "parted"
--RRECOMMENDS_webmin-module-lvm = "lvm2"
-+PACKAGES += "${PN}-module-proc ${PN}-module-raid ${PN}-module-exports ${PN}-module-fdisk ${PN}-module-lvm"
-+RDEPENDS_${PN}-module-proc = "procps"
-+RDEPENDS_${PN}-module-raid = "mdadm"
-+RDEPENDS_${PN}-module-exports = "perl-module-file-basename perl-module-file-path perl-module-cwd perl-module-file-spec perl-module-file-spec-unix"
-+RRECOMMENDS_${PN}-module-fdisk = "parted"
-+RRECOMMENDS_${PN}-module-lvm = "lvm2"
+ # PACKAGES_DYNAMIC + do_split_packages isn't used for all libe libs,
+diff --git a/meta-efl/recipes-efl/efl/expedite.inc b/meta-efl/recipes-efl/efl/expedite.inc
+index 0a1f725..30ba063 100644
+--- a/meta-efl/recipes-efl/efl/expedite.inc
++++ b/meta-efl/recipes-efl/efl/expedite.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
+-DEPENDS = "eet evas"
++DEPENDS = "eet evas libsdl"
+ LICENSE = "MIT BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d70bc65d46237e4ef386beebe7d0fe5b"
  
- python populate_packages_prepend() {
-     import os, os.path
+@@ -7,9 +7,6 @@ INC_PR = "r0"
+ 
+ inherit e
+ 
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[sdl] = "--enable-opengl-sdl,--disable-opengl-sdl,libsdl"
+-
+ EXTRA_OECONF = "\
+     --x-includes=${STAGING_INCDIR}/X11 \
+     --x-libraries=${STAGING_LIBDIR} \
 -- 
 2.0.4
 
