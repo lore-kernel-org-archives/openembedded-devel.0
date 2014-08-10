@@ -1,25 +1,26 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id ABD2E70A40
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CF136FF24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 16:15:00 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 10 Aug 2014 09:09:12 -0700
+	Sun, 10 Aug 2014 16:26:56 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 10 Aug 2014 09:26:58 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,837,1400050800"; d="scan'208";a="586134168"
-Received: from mrdissan-mobl.gar.corp.intel.com (HELO peggleto-mobl5.lan)
-	([10.252.122.124])
-	by orsmga002.jf.intel.com with ESMTP; 10 Aug 2014 09:15:01 -0700
+X-IronPort-AV: E=Sophos;i="5.01,837,1400050800"; d="scan'208";a="582847888"
+Received: from mrdissan-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.124])
+	by fmsmga002.fm.intel.com with ESMTP; 10 Aug 2014 09:26:57 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Aug 2014 17:14:45 +0100
-Message-Id: <999cb66f195845ae6087651e1bc7fdce4bc6b0ab.1407687153.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1407687153.git.paul.eggleton@linux.intel.com>
-References: <cover.1407687153.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1407687153.git.paul.eggleton@linux.intel.com>
-References: <cover.1407687153.git.paul.eggleton@linux.intel.com>
-Subject: [meta-systemd][PATCH 5/5] libpam: systemd support now in OE-Core
+To: YangHaibo <b40869@freescale.com>
+Date: Sun, 10 Aug 2014 17:26:56 +0100
+Message-ID: <5845461.pDedrMP9qU@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <1407223893-7560-1-git-send-email-b40869@freescale.com>
+References: <1407223893-7560-1-git-send-email-b40869@freescale.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][meta-webserver][PATCH v4] integrate fcgi-2.4.0 and add OML license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,25 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Aug 2014 16:15:00 -0000
+X-List-Received-Date: Sun, 10 Aug 2014 16:26:58 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-systemd/oe-core/recipes-extended/pam/libpam_1.1.6.bbappend | 4 ----
- 1 file changed, 4 deletions(-)
- delete mode 100644 meta-systemd/oe-core/recipes-extended/pam/libpam_1.1.6.bbappend
+On Tuesday 05 August 2014 15:31:33 YangHaibo wrote:
+> Signed-off-by: YangHaibo <b40869@freescale.com>
+> ---
+>  meta-oe/licenses/OML                               | 28
+> ++++++++++++++++++++++ .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch     |
+> 17 +++++++++++++ .../fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch     | 18
+> ++++++++++++++ meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 15
 
-diff --git a/meta-systemd/oe-core/recipes-extended/pam/libpam_1.1.6.bbappend b/meta-systemd/oe-core/recipes-extended/pam/libpam_1.1.6.bbappend
-deleted file mode 100644
-index db55082..0000000
---- a/meta-systemd/oe-core/recipes-extended/pam/libpam_1.1.6.bbappend
-+++ /dev/null
-@@ -1,4 +0,0 @@
--# Register with logind to make screen/tmux/etc work
--do_install_append() {
--    echo "session required    pam_systemd.so" >> ${D}${sysconfdir}/pam.d/common-session
--}
+I've merged this, thanks; I did move it to recipes-support (rather than 
+recipes-fcgi) though.
+
+Cheers,
+Paul
+
 -- 
-1.9.3
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
