@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F63765D5E
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B456770276
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 14:01:52 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id w61so7617911wes.37
+	Sun, 10 Aug 2014 14:01:54 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id f8so3036129wiw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 07:01:53 -0700 (PDT)
+	Sun, 10 Aug 2014 07:01:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=nyGkgqUxCQjmYwsFI/+XuFQjlDvC9mWHIXhvujig/k8=;
-	b=F1dgKFCdmVHpopEXp0CFQf3847+lNYmO8swcq8BAdx7OTgded6P55lKLK7qKk14Dbh
-	N7Lli+RcaP9GdNy46Bnwp0QV8mTfAWM8raT7BEe5qluIrOwnrWdp4f2WeSb4YWjkaCD0
-	dErYrH3u08QM+DXTl0icPPCcFX8D2ByglUaK7G542PlDPlWbBZWJ8XKaghCFN687sHKj
-	vYYqGok/FLZsN3w62TzK7El9Yf6ZiGn9J5WRjH05wyySZWfIVTlwQyQNvK92+fpDvJtn
-	Pnqnk+QPGEsrQp7BZ8c1P/KoxqDdkKqgMkMnUudSS3oyvaRZ27g+lpRzKTFitwyKPBAe
-	SMTA==
-X-Received: by 10.194.78.170 with SMTP id c10mr18818067wjx.22.1407679313837;
-	Sun, 10 Aug 2014 07:01:53 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=A+RGjGu9MiGfNmzL/lKAKSlxP49ju7H3yRZAdNG0QWQ=;
+	b=s3XM3/M51stL8QRgtBVYGUsMzYeoxvQ0zjJIevk9iY0QlaFRxzh/FFnBxIT42SmNSQ
+	0gE+EONxkLxF6yyTP71rE0XIKn2mLw0u/nFhvjx+0qXju7phlZLbOry1IFrq1dZCaOiz
+	8oz2ArEV6KjGWYDOCGqRBVhpN42fKRIyqGgLMiZzQg2ypulGIFNTg78GmgHJ7uQKCvcP
+	dgoWRfr1qJ/MznigxuHvwH9eJLwjrkSfenIuAkCJG5jvr2cPrPq+k9OOBFbE9tTWACS2
+	KWxG6ugmwXOBEES6Yo2K9IZyORW5Z9qWqzTGvYB5TUxM9x56Wxlc6a6Hg9npjzy16WIK
+	HT0A==
+X-Received: by 10.180.205.212 with SMTP id li20mr12910355wic.2.1407679315354; 
+	Sun, 10 Aug 2014 07:01:55 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	au7sm32275630wjc.41.2014.08.10.07.01.52 for <multiple recipients>
+	pj6sm32294989wjb.21.2014.08.10.07.01.54 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 Aug 2014 07:01:52 -0700 (PDT)
+	Sun, 10 Aug 2014 07:01:54 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Aug 2014 16:02:19 +0200
-Message-Id: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 10 Aug 2014 16:02:20 +0200
+Message-Id: <1407679345-31695-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
-Subject: [meta-oe][PATCH 1/7] gd: add dependency on libvpx
+In-Reply-To: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/7] dconf: add dependency on libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +48,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sun, 10 Aug 2014 14:01:56 -0000
 
 * fixes floating dependency:
-  gd-2.1.0: gd rdepends on libvpx but it isn't a build dependency? [build-deps]
+  dconf-0.18.0: dconf-editor rdepends on libxml2, but it isn't a build dependency? [build-deps]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/gd/gd_2.1.0.bb | 2 +-
+ meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gd/gd_2.1.0.bb b/meta-oe/recipes-support/gd/gd_2.1.0.bb
-index 4bc9867..f03b9b0 100644
---- a/meta-oe/recipes-support/gd/gd_2.1.0.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.1.0.bb
-@@ -10,7 +10,7 @@ HOMEPAGE = "http://libgd.bitbucket.org/"
- SECTION = "libs"
- LICENSE = "GD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
--DEPENDS = "freetype libpng jpeg zlib tiff"
-+DEPENDS = "freetype libpng jpeg zlib tiff libvpx"
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+index 38b2789..2b6f15e 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
+ SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
+ GNOME_COMPRESS_TYPE = "xz"
  
- SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
-            file://fix-the-subdir-objects-error.patch \
+-DEPENDS = "glib-2.0 gtk+3"
++DEPENDS = "glib-2.0 gtk+3 libxml2"
+ 
+ inherit vala gtk-doc
+ 
 -- 
 2.0.4
 
