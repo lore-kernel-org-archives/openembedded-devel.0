@@ -1,40 +1,37 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id C0E3C70A88
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BF9160144
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 01:03:51 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kx10so9188085pab.34
+	Sun, 10 Aug 2014 08:52:26 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id x48so7361070wes.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Aug 2014 18:03:52 -0700 (PDT)
+	Sun, 10 Aug 2014 01:52:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=ez2UvI8Itg6tl2bxKZD3+RPVQz4+aiL+mDqvxnYuCOQ=;
-	b=naJUz33i6CLGpFiKtCN5Hf7WEHvBQMiVh+LrnXsny7HVzG4wiW17E8FuEvlZeELX2v
-	ocJRHJrfliPYzrKiabAHJafnVqVJcfc71wpBq/jx4cdS0EOfmBCoEV9lYgy1XLcGIREd
-	lfHLPdctJQHcutBbxi3mq29LUp5Bq1zEz8Lh+gdk6/w5AYJbXkThekIcNv2AZvONWNhW
-	lyubE9zeHs4YvehaCsn0T4SJwA4P5qdFhSxiZyykPJRO4WxcwuTKWYIuY7GFsm27RW41
-	+G38UomYOjx9H9OeNSgSVVa343sWKHZmdZQX1AONKMdbz4WMxn0NqYWpx5TFGgQZIxYg
-	b4TA==
-X-Received: by 10.70.47.168 with SMTP id e8mr33182153pdn.112.1407632632784;
-	Sat, 09 Aug 2014 18:03:52 -0700 (PDT)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPSA id fu13sm150134pdb.81.2014.08.09.18.03.50
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 09 Aug 2014 18:03:51 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=VDUFAo2e+A6aRx0nozaca/5h+lsvdCormwyZKRy4QFw=;
+	b=v28JlHG8v0+W3oJYY49rD92q51sLn5IKSaI/d5MY7AzEhwAb+l/tWRTYbQcBROIy2+
+	jikBzyEl4H+VB2pI0jdAqwRZmQhWIOvaD4XtuyZr/B0vaczfE2LKAwFP4LCO+AuQfjAO
+	BCbszVqqd2ioR2mdzucRl5Pdry6TqyyjsMxwOAbSpGr5un9YJBBMEcYtXoBwvhkOz85Y
+	KcIV1JSTYv3ijhb+xpM7vC+P4n3iKhHd5PlEbTCJHtbJJp3Jht2Kl8RStYG0Z61r/yhB
+	up0aRsBjTcYjlYnkxdk+LuaE1wWVqyT3utoHZ5xNH4gxKX25pCQdFUJgUuL6cXWmsYgz
+	XdGA==
+X-Received: by 10.194.237.135 with SMTP id vc7mr45998091wjc.86.1407660747554; 
+	Sun, 10 Aug 2014 01:52:27 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	w14sm11622586wij.2.2014.08.10.01.52.26 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 10 Aug 2014 01:52:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Aug 2014 18:01:15 -0700
-Message-Id: <ce63b6d184231a0a1797b91e2ad530bcdc4c7fee.1407632366.git.chris_larson@mentor.com>
-X-Mailer: git-send-email 1.8.3.4
-In-Reply-To: <cover.1407632366.git.chris_larson@mentor.com>
-References: <cover.1407632366.git.chris_larson@mentor.com>
-In-Reply-To: <cover.1407632366.git.chris_larson@mentor.com>
-References: <cover.1407632366.git.chris_larson@mentor.com>
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH 5/5] dnsmasq: add packageconfigs for idn, conntrack, lua
+Date: Sun, 10 Aug 2014 10:52:59 +0200
+Message-Id: <1407660779-3490-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.4
+In-Reply-To: <1407600537-10857-12-git-send-email-Martin.Jansa@gmail.com>
+References: <1407600537-10857-12-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCHv 12/36] cairomm: don't include cairo.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,41 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Aug 2014 01:03:51 -0000
+X-List-Received-Date: Sun, 10 Aug 2014 08:52:29 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
+* we were overriding most variables from cairo.inc
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+* fixes following QA warnings:
+  cairomm-1.10.0: cairomm: configure was passed unrecognised options:
+    --disable-egl --enable-tee --with-x --disable-glesv2
+    --disable-valgrind --disable-some-floating-point
+    [unknown-configure-option]
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index 92c5367..1335245 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -18,10 +18,16 @@ inherit pkgconfig update-rc.d systemd
- INITSCRIPT_NAME = "dnsmasq"
- INITSCRIPT_PARAMS = "defaults"
+diff --git a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
+index 86ba552..a5e383a 100644
+--- a/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
++++ b/meta-oe/recipes-graphics/cairo/cairomm_1.10.0.bb
+@@ -1,5 +1,3 @@
+-require recipes-graphics/cairo/cairo.inc
+-
+ SUMMARY = "C++ bindings for Cairo graphics library"
  
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[dbus] = "COPTS=-DHAVE_DBUS,,dbus"
--EXTRA_OEMAKE = "${EXTRA_OECONF}"
--EXTRA_OEMAKE += "\
-+PACKAGECONFIG ?= ""
-+PACKAGECONFIG[dbus] = ",,dbus"
-+PACKAGECONFIG[idn] = ",,libidn"
-+PACKAGECONFIG[conntrack] = ",,libnetfilter-conntrack"
-+PACKAGECONFIG[lua] = ",,lua"
-+EXTRA_OEMAKE = "\
-+    'COPTS=${@base_contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
-+           ${@base_contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
-+           ${@base_contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTRACK', '', d)} \
-+           ${@base_contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', '', d)}' \
-     'CFLAGS=${CFLAGS}' \
-     'LDFLAGS=${LDFLAGS}' \
- "
+ LICENSE = "LGPLv2"
+@@ -7,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
+ 
+ PR = "r1"
+ 
++inherit autotools pkgconfig
++
+ DEPENDS = "cairo libsigc++-2.0"
+ 
+ SRC_URI = "http://cairographics.org/releases/cairomm-${PV}.tar.gz;name=archive"
 -- 
-1.8.3.4
+2.0.4
 
 
