@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id B456770276
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D88D70341
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 14:01:54 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id f8so3036129wiw.0
+	Sun, 10 Aug 2014 14:01:55 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id hi2so3030514wib.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 07:01:55 -0700 (PDT)
+	Sun, 10 Aug 2014 07:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=A+RGjGu9MiGfNmzL/lKAKSlxP49ju7H3yRZAdNG0QWQ=;
-	b=s3XM3/M51stL8QRgtBVYGUsMzYeoxvQ0zjJIevk9iY0QlaFRxzh/FFnBxIT42SmNSQ
-	0gE+EONxkLxF6yyTP71rE0XIKn2mLw0u/nFhvjx+0qXju7phlZLbOry1IFrq1dZCaOiz
-	8oz2ArEV6KjGWYDOCGqRBVhpN42fKRIyqGgLMiZzQg2ypulGIFNTg78GmgHJ7uQKCvcP
-	dgoWRfr1qJ/MznigxuHvwH9eJLwjrkSfenIuAkCJG5jvr2cPrPq+k9OOBFbE9tTWACS2
-	KWxG6ugmwXOBEES6Yo2K9IZyORW5Z9qWqzTGvYB5TUxM9x56Wxlc6a6Hg9npjzy16WIK
-	HT0A==
-X-Received: by 10.180.205.212 with SMTP id li20mr12910355wic.2.1407679315354; 
-	Sun, 10 Aug 2014 07:01:55 -0700 (PDT)
+	bh=ehG5y5rfnZK3oCzU5G/5Xth61n02IdUdUL24+MEX2/4=;
+	b=WxYTN6vuxY1tUznrq0Ce2q/AahUvKt243bwgEJTH4LGpNWNdtGhxAl41IaXzEo5Ixf
+	irvfXoNq4JMC7m+oMGAPzcY50RjhGvIXMAXw3BvrSpL7gAIqYlxmwHFjBXKK06tEXlYz
+	NmMNzMQw/AV9ZXuf6farPSPVfE8owakp02M/11p+Hw+VtSQvwoBKVEkFhtNeOvVCQWDl
+	ZNC4oEnqHwrvV8w3zXZDauKT+rFCzXC+U47RWKC/E+kmtKNf8yypad0q/j/ZVgGNJZnl
+	Tdqb6TNAsFPOIsdYFog4+feNdbtH4yfcwwC980VwXbR7mnNahPpvUk1qBGQtcRm1+Rqf
+	//bw==
+X-Received: by 10.194.89.36 with SMTP id bl4mr2871193wjb.126.1407679316681;
+	Sun, 10 Aug 2014 07:01:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	pj6sm32294989wjb.21.2014.08.10.07.01.54 for <multiple recipients>
+	kw1sm32296977wjb.19.2014.08.10.07.01.55 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 Aug 2014 07:01:54 -0700 (PDT)
+	Sun, 10 Aug 2014 07:01:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Aug 2014 16:02:20 +0200
-Message-Id: <1407679345-31695-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 10 Aug 2014 16:02:21 +0200
+Message-Id: <1407679345-31695-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/7] dconf: add dependency on libxml2
+Subject: [meta-oe][PATCH 3/7] gtksourceview2: add dependency on libxml2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Aug 2014 14:01:56 -0000
+X-List-Received-Date: Sun, 10 Aug 2014 14:01:57 -0000
 
 * fixes floating dependency:
-  dconf-0.18.0: dconf-editor rdepends on libxml2, but it isn't a build dependency? [build-deps]
+  gtksourceview2-2.10.5: gtksourceview2 rdepends on libxml2, but it isn't a build dependency? [build-deps]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-index 38b2789..2b6f15e 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
- SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
- GNOME_COMPRESS_TYPE = "xz"
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+index df4d472..c745e34 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--DEPENDS = "glib-2.0 gtk+3"
-+DEPENDS = "glib-2.0 gtk+3 libxml2"
+-DEPENDS = "gtk+"
++DEPENDS = "gtk+ libxml2"
  
- inherit vala gtk-doc
+ PNAME = "gtksourceview"
  
 -- 
 2.0.4
