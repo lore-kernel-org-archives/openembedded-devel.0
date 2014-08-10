@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id DF7A570276
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 114A070276
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 14:02:01 +0000 (UTC)
-Received: by mail-wg0-f46.google.com with SMTP id m15so7458518wgh.29
+	Sun, 10 Aug 2014 14:02:04 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id k14so7510347wgh.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 07:02:02 -0700 (PDT)
+	Sun, 10 Aug 2014 07:02:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SF5d72LMZ/g/7d6mpL1dYtNagkaKkeMNH1cIKqrFiRM=;
-	b=wWZazl8wPjEdnfyCOASpsBKLcNK5F/sNCM9gB8FQNxvwjK5sYVEGx/rWmGURFa02F0
-	bmDaOpIDPbjc/+HR+1/bV1TiNs5FC1LAj6EWvYrK3MWQQ0xR5v8G2b1yyoyGY3WA1Fvx
-	Cv4afsS3I9AGPFbuW0xZ2R+UXsULZBpoRcUPo9Loj3yy/w76VIWonuZAo3SP+/DgbdpQ
-	4CRuWUN3mcfXN9lvPD6PLuUoLXlyKtVinEgXvsDthC/6Bt8c/jztpTTmcv2v9jbu30qU
-	L7z3gNYwSK47yjAIr4pgPg8GkK8AEM8Afop+yKs5qJCMx7PORSdpN9MqSDp9jd5kO4Bs
-	C75g==
-X-Received: by 10.194.91.228 with SMTP id ch4mr46486526wjb.59.1407679322383;
-	Sun, 10 Aug 2014 07:02:02 -0700 (PDT)
+	bh=ndhdi9oGvgDfAB9l79a8MR822rHwxk6pzahlPMm+Q38=;
+	b=PegXwzm4aFnPljJGvCh9dU11/9pCmsslmNX5b+5QKomu3OnpWgkbA/pzCM037ft/sX
+	pUFOsGtGm1r1LuS3N0C6BUif0TgdMQZNmQuIUMO/YJ+KzZCcXwOskM4zyfWsw7LdT/Z8
+	hUmEohhUsjQKzjmcawa9xjnZV1Q/t7UyRJK690P+ngNfMMmqlxkylmi+3rzozVm3LwqS
+	FhgxM8T+eiDIcEUxne/RHlJWQ+x9tDW8+MzhCjlTeolrZsXElUgEDSAitZbcWGWa4Eu/
+	kqEZj3hEeDXQud39hZ14iWSk9YriJxHTxl7bKqIuDWIus6F74pBAODwTFVlrclmjziyv
+	9Ohg==
+X-Received: by 10.180.35.134 with SMTP id h6mr18120729wij.0.1407679323703;
+	Sun, 10 Aug 2014 07:02:03 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	e3sm32314455wjp.4.2014.08.10.07.02.01 for <multiple recipients>
+	u7sm31499276wif.3.2014.08.10.07.02.02 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 Aug 2014 07:02:01 -0700 (PDT)
+	Sun, 10 Aug 2014 07:02:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Aug 2014 16:02:24 +0200
-Message-Id: <1407679345-31695-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 10 Aug 2014 16:02:25 +0200
+Message-Id: <1407679345-31695-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
 In-Reply-To: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1407679345-31695-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/7] efl, expedite: explicitly add some packages, add libsdl dependency
+Subject: [meta-oe][PATCH 7/7] tracker: add PACKAGECONFIG for nautilus extension
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,56 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Aug 2014 14:02:02 -0000
+X-List-Received-Date: Sun, 10 Aug 2014 14:02:05 -0000
 
-* expedite has runtime dependency on them and insane_qa check doesn't see
-  them as provided by evas dependency and shows following warnings:
-  expedite-1.7.9: expedite rdepends on evas-engine-software-generic, but it isn't a build dependency? [build-deps]
-  expedite-1.7.9: expedite rdepends on evas-engine-fb, but it isn't a build dependency? [build-deps]
-  expedite-1.7.9: expedite rdepends on evas-loader-png, but it isn't a build dependency? [build-deps]
-* always use libsdl dependency instead of PACKAGECONFIG, because
-  there is also software-sdl engine, which isn't controlled by
-  any configure option
+* fixes following floating dependencies:
+  WARN: tracker: tracker-nautilus-extension rdepends on atk, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on cairo, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on eglibc, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on expat, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on fontconfig, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on freetype, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on gdk-pixbuf, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on glib-2.0, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on gtk+, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on harfbuzz, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libffi, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libpng, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libsqlite3, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libunistring, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libx11, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxau, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxcb, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxcb-render, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxcb-shm, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxdmcp, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxext, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on libxrender, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on pango, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on pixman, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on tracker, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on util-linux-libuuid, but it isn't a build dependency?
+  WARN: tracker: tracker-nautilus-extension rdepends on zlib, but it isn't a build dependency?
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/efl.inc      | 1 +
- meta-efl/recipes-efl/efl/expedite.inc | 5 +----
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
-index 7ccb634..648c5b6 100644
---- a/meta-efl/recipes-efl/efl/efl.inc
-+++ b/meta-efl/recipes-efl/efl/efl.inc
-@@ -104,6 +104,7 @@ python populate_packages_prepend () {
-         allow_dirs=True, recursive=False, extra_depends="" )
- }
+diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+index 21df29d..d412183 100644
+--- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+@@ -26,6 +26,9 @@ SYSTEMD_AUTO_ENABLE = "disable"
  
-+PACKAGES += "evas-loader-png evas-engine-software-generic evas-engine-fb"
- PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
+ EXTRA_OECONF += " tracker_cv_have_ioprio=yes"
  
- # PACKAGES_DYNAMIC + do_split_packages isn't used for all libe libs,
-diff --git a/meta-efl/recipes-efl/efl/expedite.inc b/meta-efl/recipes-efl/efl/expedite.inc
-index 0a1f725..30ba063 100644
---- a/meta-efl/recipes-efl/efl/expedite.inc
-+++ b/meta-efl/recipes-efl/efl/expedite.inc
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
--DEPENDS = "eet evas"
-+DEPENDS = "eet evas libsdl"
- LICENSE = "MIT BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d70bc65d46237e4ef386beebe7d0fe5b"
- 
-@@ -7,9 +7,6 @@ INC_PR = "r0"
- 
- inherit e
- 
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[sdl] = "--enable-opengl-sdl,--disable-opengl-sdl,libsdl"
--
- EXTRA_OECONF = "\
-     --x-includes=${STAGING_INCDIR}/X11 \
-     --x-libraries=${STAGING_LIBDIR} \
++PACKAGECONFIG ?= "nautilus"
++PACKAGECONFIG[nautilus] = "--enable-nautilus-extension,--disable-nautilus-extension,nautilus"
++
+ # Disable the desktop-centric miners
+ EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
+                  --disable-miner-evolution --disable-miner-flickr"
 -- 
 2.0.4
 
