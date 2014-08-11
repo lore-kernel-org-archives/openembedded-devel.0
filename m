@@ -1,26 +1,34 @@
-Return-Path: <lchristina26@hotmail.com>
-Received: from BLU004-OMC4S10.hotmail.com (blu004-omc4s10.hotmail.com
-	[65.55.111.149])
-	by mail.openembedded.org (Postfix) with ESMTP id BC38765D5F
+Return-Path: <kernel@tekno-soft.it>
+X-Greylist: delayed 529 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 11 Aug 2014 17:46:22 UTC
+Received: from mail.tekno-soft.it (li153-180.members.linode.com
+	[109.74.206.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DB9D65D9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 17:32:55 +0000 (UTC)
-Received: from BLU436-SMTP78 ([65.55.111.137]) by BLU004-OMC4S10.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22712);
-	Mon, 11 Aug 2014 10:32:56 -0700
-X-TMN: [EpuMyrgD5Zjf7K17R75gcXjrzhlrlGeZ]
-X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BLU436-SMTP782D203C1A9AF2454095C9D6ED0@phx.gbl>
-Received: from localhost.localdomain ([174.45.121.196]) by
-	BLU436-SMTP78.smtp.hotmail.com over TLS secured channel with
-	Microsoft SMTPSVC(8.0.9200.16384); Mon, 11 Aug 2014 10:32:54 -0700
-From: lchristina26 <lchristina26@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Aug 2014 11:32:36 -0600
-X-Mailer: git-send-email 1.9.1
-X-OriginalArrivalTime: 11 Aug 2014 17:32:54.0804 (UTC)
-	FILETIME=[48C55540:01CFB58A]
+	Mon, 11 Aug 2014 17:46:22 +0000 (UTC)
+Received: from dragon.tekno-soft.it
+	(host142-53-static.94-94-b.business.telecomitalia.it [94.94.53.142])
+	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: robyf@tekno-soft.it)
+	by mail.tekno-soft.it (Postfix) with ESMTPSA id 2648F17727
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Aug 2014 17:42:35 +0000 (UTC)
+Message-ID: <53E8FF4F.1000203@tekno-soft.it>
+Date: Mon, 11 Aug 2014 19:37:19 +0200
+From: Roberto Fichera <kernel@tekno-soft.it>
+Organization: TeknoSOFT
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.7.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] 'Update cyassl bb file'
+To: openembedded-devel@lists.openembedded.org
+X-Intuitive-System-MailScanner-Information: Please contact the ISP for more
+	information
+X-Intuitive-System-MailScanner-ID: 2648F17727.ABC14
+X-Intuitive-System-MailScanner: Found to be clean
+X-Intuitive-System-MailScanner-From: kernel@tekno-soft.it
+X-Spam-Status: No
+Subject: Asterisk v11 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,35 +42,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 17:33:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Aug 2014 17:46:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: lchristina26 <lchristina26@hotmail.com>
----
- meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb | 5 -----
- 1 file changed, 5 deletions(-)
+Hi All,
 
-diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
-index accc144..441d321 100644
---- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
-+++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
-@@ -9,8 +9,6 @@ SECTION = "libs/network"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--PR = "r1"
--
- SRC_URI = "http://www.yassl.com/cyassl-${PV}.zip"
- 
- 
-@@ -21,6 +19,3 @@ S = "${WORKDIR}/${PN}-${PV}"
- 
- inherit autotools
- 
--# Detect and build with correct endianness
--# CFLAGS += "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '', '-DBIG_ENDIAN_ORDER', d)}"
--
--- 
-1.9.1
+does anyone has an Asterisk v11 recipe? I know there is a meta-telephony layer
+but that one has v1.8.x asterisk version.
 
+Thanks in advance,
+Roberto Fichera.
 
