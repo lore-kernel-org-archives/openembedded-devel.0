@@ -1,38 +1,33 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B270D609C0
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E318965D54
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 20:06:28 +0000 (UTC)
-Received: by mail-yh0-f53.google.com with SMTP id c41so6685714yho.26
+	Mon, 11 Aug 2014 20:08:20 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id a41so6698855yho.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
+	Mon, 11 Aug 2014 13:08:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=ggo5JZ5lFJsHAXgs7i5diGx0HDZVY47q2ghLhxo+kYs=;
-	b=dCsj6mo9RZAIoFsHY8zZhDaJAwKQHHn/WZlje97UTkeHSnc0ZQ1OpDvntLDawqYQQk
-	aym6SAb+9bGI5G1X7WiU007B2Fg/zqwOobls9HBuYSif31lSFI6WnTI0r8dmb3OoGADn
-	2xg95NYX0gbFbBdYYHT13N6Eo8JBRBgJ2oKytmjtZhxjNbOjvdvj9UaYuwatPMxuMPY8
-	j1IxD2/pRWNynznpW6qS9MaMjRX9fM1NotXGer2FgJl+cd/8Tox6HFh+h3zs3fXuV4bD
-	Me1d2bABawRf7hn0u0FBTK3MM4QpBsWAF8r/w8CEVEpXrI0rvbLqj+OP4HJrp59t8oHG
-	Nywg==
+	h=mime-version:sender:date:message-id:subject:from:to:cc:content-type; 
+	bh=yvzikqU3ROMjtFB1XuYINgvjX5aiOwpbPnHTFi3KWXE=;
+	b=f282jGkyGuExbeYXoQMiZZrbWUFezFUbpeRheJUnBvtuCMfMH7QGKrsLU/K3V4NnOC
+	fKLrsyV1ybzqCDxNtRnnyT7EUaN+p9ldnBUIdcW1nB7K6NkiCR4ReUbwssFYl2Y7vn1/
+	LgjkVL4GecYVKlmXsbjZOQuzrwGlONZURcKTpw9Kfzxn6Z6T3Kk0l47N76n1CdhPl3f7
+	QFrjFoHw4dwEsTF1vP9MRxw3mWgKGri4HsM94uFyIrNwZl194FolMkwiGuaajmESUL7/
+	6/RhS3OsHSkqHBNyHwhnX8I4zh93E2H+7+nj7TbiGokSflBLVTJoStAw1KueNAas1lrs
+	qf7A==
 MIME-Version: 1.0
-X-Received: by 10.236.129.3 with SMTP id g3mr47122957yhi.67.1407787590117;
-	Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
+X-Received: by 10.236.216.16 with SMTP id f16mr49294029yhp.90.1407787701754;
+	Mon, 11 Aug 2014 13:08:21 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
-In-Reply-To: <CAOd_LFyOC8uR2gk=u2YpB1cq8P_hkqHoYKDxUmou=y1UcBDnVA@mail.gmail.com>
-References: <1407177515-15086-1-git-send-email-otavio@ossystems.com.br>
-	<CAP9ODKrhpyVAXkrCeEk2yqjvwm1G34aqF-sP__fQvQ8yyMCJyA@mail.gmail.com>
-	<CAOd_LFyOC8uR2gk=u2YpB1cq8P_hkqHoYKDxUmou=y1UcBDnVA@mail.gmail.com>
-Date: Mon, 11 Aug 2014 17:06:30 -0300
-X-Google-Sender-Auth: g9absJJ6c0tRznvbOeyEdOBL1Xw
-Message-ID: <CAP9ODKpGbmi=dsvubh9O-ok9_Enc5cewtdC6TQ+H0OJo3Y3_-w@mail.gmail.com>
+Received: by 10.170.56.201 with HTTP; Mon, 11 Aug 2014 13:08:21 -0700 (PDT)
+Date: Mon, 11 Aug 2014 17:08:21 -0300
+X-Google-Sender-Auth: TZCmzP3u4WgorjeeIO2lQqZ_TJk
+Message-ID: <CAP9ODKoPbC6qvtDq938R_1VZ4f27MrJJDMvOxKV88C2My519rw@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [meta-oe][PATCH 1/2] evtest: Stop using Cgit based archive
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Daisy pending backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 20:06:37 -0000
+X-List-Received-Date: Mon, 11 Aug 2014 20:08:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello Martin,
+Hello,
 
-On Mon, Aug 4, 2014 at 6:26 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
-> On Mon, Aug 4, 2014 at 2:46 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> Hello Martin,
->>
->> On Mon, Aug 4, 2014 at 3:38 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
->>> The Cgit based archive may change depending on the order of images,
->>> timestamp and like causing checksum to change.
->>>
->>> This patch uses the same 1.25 version but fetching it using Git, so no
->>> code changes are done.
->>>
->>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->>
->> Please queue this update for Daisy as well, as this is failing to
->> fetch currently (cced other Daisy maintainers).
->>
->> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
->
-> Acked-by: Cliff Brake <cbrake@bec-systems.com>
+here goes the pending backports I am aware of:
 
-Please merged this.
+commit 9c762b824cbf7ecd9ce7f7859d22ff89c59fa28d
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Mon Aug 4 15:38:34 2014 -0300
+
+    evtest: Stop using Cgit based archive
+
+    The Cgit based archive may change depending on the order of images,
+    timestamp and like causing checksum to change.
+
+    This patch uses the same 1.25 version but fetching it using Git, so no
+    code changes are done.
+
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+    Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+    Acked-by: Cliff Brake <cbrake@bec-systems.com>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+This one has been acked by all Daisy maintainers so please merge this.
+
+
+commit 1fe211750e11420095dd29e08eba4bb615d9ffca
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Tue Jul 1 10:56:02 2014 -0300
+
+    opencv: Disable 'gtk' backend if X11 is not available
+
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+This one is new and Cliff and Armin need to review it.
 
 
 -- 
