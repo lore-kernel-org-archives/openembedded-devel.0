@@ -1,43 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id F16FB601A0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 7AF6B65E3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 08:51:15 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so8018302wgh.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 01:51:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=fTeJrXSaIS2S8tYRZnzWG8FoKe7Bafg3LkOxtp4445M=;
-	b=tpuS96Wx+FB+zQUHaFa2gLXxy13XvsESiBZImt7q9KIGShy9kir6LHF1tegNuxQDjU
-	fKUaOsPRwPLhcUgAK7W3T8sLtr+mkuo/p8T7tV58KiGdg9K0uys7wJ5/qB/qx9PKp/4j
-	EJb9opxHwP0V/VYF4CTrfJ+utXfrT4/ONqiNFZ9ipNoAzP5OL09VmLb0GegOE8nUOc1A
-	0zIyRxtmR9KAD3c/HRdEAzwBqN5s7Q6l8cTClM5n1W1Ew1HZnMhMR8tCR/hEDY/Y0kNZ
-	U+nF7enqVd6VdnOc+bX/+c/fhIyuOmEIPQZ9WFmFFES/wel5+cNBqCUjZtkPdOP+r9qM
-	spxQ==
-X-Received: by 10.180.184.20 with SMTP id eq20mr23298950wic.37.1407747076126; 
-	Mon, 11 Aug 2014 01:51:16 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ex2sm38404640wjd.30.2014.08.11.01.51.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Aug 2014 01:51:15 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 11 Aug 2014 10:51:50 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140811085150.GV14848@jama>
-References: <cover.1407632366.git.chris_larson@mentor.com>
-	<df6c707e6db09c6b640084b8a4a69919b147ad07.1407632366.git.chris_larson@mentor.com>
-	<20140810092431.GP14848@jama>
-	<CABcZANma2YyDV34G+9EcZ20n8Uj7cFjKXh2AHG0zSqd2b+f4wg@mail.gmail.com>
-	<20140811084647.GU14848@jama>
+	Mon, 11 Aug 2014 09:09:15 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 11 Aug 2014 02:03:03 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.01,840,1400050800"; d="scan'208";a="556763016"
+Received: from glucy-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.202])
+	by orsmga001.jf.intel.com with ESMTP; 11 Aug 2014 02:08:35 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 11 Aug 2014 10:08:34 +0100
+Message-ID: <1544415.MBbs8JpE6c@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <CABcZANnn4CSDe4Gvc+nuM39u9dQK74zuLnzw8Uf6sKfDp5v2Gw@mail.gmail.com>
+References: <017701cfaf7e$77e1a390$67a4eab0$@lge.com>
+	<01b401cfaf9f$14258da0$3c70a8e0$@lge.com>
+	<CABcZANnn4CSDe4Gvc+nuM39u9dQK74zuLnzw8Uf6sKfDp5v2Gw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20140811084647.GU14848@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 3/5] dnsmasq: fix parallel make issue
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: How to apply "-Wl,--build-id" in all recipes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,70 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 08:51:22 -0000
-X-Groupsio-MsgNum: 51581
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0o4l8DLzmjliL3C4"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 Aug 2014 09:09:22 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---0o4l8DLzmjliL3C4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Chris,
 
-On Mon, Aug 11, 2014 at 10:46:47AM +0200, Martin Jansa wrote:
-> On Sun, Aug 10, 2014 at 05:36:32PM -0700, Christopher Larson wrote:
-> > On Sun, Aug 10, 2014 at 2:24 AM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >=20
-> > > > From: Christopher Larson <chris_larson@mentor.com>
-> > >
-> > > Is this v2 of this change which was sent earlier?
-> > >
-> >=20
-> >=20
-> > They should be the same, just this one is part of a series with other
-> > changes. Either should work fine for that particular issue.
->=20
-> There were some smaller differences (like Upstream-Status and SRC_URI
-> addition in .inc instead of .bb).
->=20
-> I've resolved them as conflicts in next patch.
+On Saturday 09 August 2014 11:22:11 Christopher Larson wrote:
+> On Sun, Aug 3, 2014 at 9:46 PM, Changhyeok Bae <changhyeok.bae@lge.com>
+> wrote:
+> > As I said, I applied the variable in local.conf.
+> > The LDFLAGS env. variable is included '-Wl,--build-id'.
+> > However, the variable is not applied at the linking time.
+> 
+> All recipes *should* ensure that the buildsystem of what they're building
+> obeys our LDFLAGS, but plenty do not. We used to spot these cases via the
+> GNU_HASH warnings, but now we build the internal toolchain with the default
+> gnu hash so cases where LDFLAGS isn't being obeyed are slightly more
+> difficult to detect unless you'er building with an external toolchain.
 
-Hmm, maybe not correctly, can you please check what's wrong in
-master-next or resend rebased v2?
+Hmm, when did this change? I was sure we still got this warning if the OE 
+LDFLAGS weren't used...
 
-NOTE: Running task 16205 of 29186 (ID: 11621, /home/jenkins/oe/world/shr-co=
-re/meta-openembedded/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.b=
-b, do_patch)
-NOTE: recipe dnsmasq-2.68-r0: task do_patch: Started
-ERROR: Command Error: exit status: 1  Output:
-Applying patch lua.patch
-patching file Makefile
-Hunk #1 FAILED at 57.
-1 out of 1 hunk FAILED -- rejects in file Makefile
-Patch lua.patch does not apply (enforce with -f)
-ERROR: Function failed: patch_do_patch
-ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-eg=
-libc/work/armv5te-oe-linux-gnueabi/dnsmasq/2.68-r0/temp/log.do_patch.24548
-NOTE: recipe dnsmasq-2.68-r0: task do_patch: Failed
-ERROR: Task 11621 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-n=
-etworking/recipes-support/dnsmasq/dnsmasq_2.68.bb, do_patch) failed with ex=
-it code '1'
+Cheers,
+Paul
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
 
---0o4l8DLzmjliL3C4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Paul Eggleton
+Intel Open Source Technology Centre
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPohCYACgkQN1Ujt2V2gByvGwCfQg+cLL4DM5o/SrjrCdnf8Xhf
-PD0AnAqeOyYWhSYT4G9vZ1ua3fzP5Hbf
-=jJeW
------END PGP SIGNATURE-----
-
---0o4l8DLzmjliL3C4--
