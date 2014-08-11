@@ -1,38 +1,40 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-la0-f48.google.com (mail-la0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 62D6265CC1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AEA970B2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 00:36:52 +0000 (UTC)
-Received: by mail-la0-f48.google.com with SMTP id gl10so6240003lab.35
+	Mon, 11 Aug 2014 02:45:29 +0000 (UTC)
+Received: by mail-pa0-f42.google.com with SMTP id lf10so10387235pab.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 17:36:52 -0700 (PDT)
+	Sun, 10 Aug 2014 19:45:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=gbMmzUP2xq3KdQoC5V5XufiXg0yV2zyZnY6bUnrB8Ys=;
-	b=kP2sNhQ87Z1hTw9dmvTr8we4yr+PH4kICuJaSmZKezN7z5N/hL+Oz1SlVgmM2tKw1o
-	DaKUMaDb3qq1q76wYxHOBKUHQDFE67BkEvNgvi42TUalC/O3x9PlFq4sW0qPiZ76hX/k
-	fMaA5SPSq3G4KXdCTwOwom98OGgJ6h7pDMSczyWxaLPXO5rha90nG92dPrhn57IuElJB
-	bP0RLYEMWf0kNUCG6m951Cku+c6DjyVv4uC8PeQWPMyCjm6pOiX5tuvlEMav/smseiC4
-	S4YzRgDYgJkNXKc5RnE8NxmR3LntNiP4AAP26naL/0P8LWhSV0grArYDLlpQpLZk4ok/
-	Yf3Q==
-X-Received: by 10.112.159.169 with SMTP id xd9mr5031072lbb.76.1407717412244;
-	Sun, 10 Aug 2014 17:36:52 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=B4Bm9plArb9CFNsDoMZZOrecU+wBV7IMHFRM+4PBoys=;
+	b=MgbkZFZtBXxHXc+Jn5nZovBL9ZpxDFVUkAOleCCjiRsq4yzVIuxVb5bkBhAGCWNaxi
+	0dr/OQ6rMm3QALWiZySab2q4kISszzQggR7ZEpA85rj6a8B7F0aro88EnrGpVzr/nHQK
+	sCLDR2Y/+MyFxhfXF5yG+sQyjBhShTgWDN3JdJK1t6eTyi35nPGusvVTT6nqOAxPxHqF
+	pgNVc4CSnO+6o6TGdbn4obZFdLK3Dc48x0Qo5/pDGlCQQVlAysHZQ/Qd4JtcHYQmDvWb
+	t0yjssHh8f8BA9R0uk7Ps8vn7FlUQ8bvCGjbFxR0k61Bds6pxjwXUdF473wDdEDPk5Es
+	pFlA==
+X-Received: by 10.70.20.34 with SMTP id k2mr18287020pde.98.1407725130315;
+	Sun, 10 Aug 2014 19:45:30 -0700 (PDT)
+Received: from ?IPv6:2601:c:9380:601:35b9:fa54:d802:ee1f?
+	([2601:c:9380:601:35b9:fa54:d802:ee1f])
+	by mx.google.com with ESMTPSA id pv2sm9725108pbb.13.2014.08.10.19.45.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 10 Aug 2014 19:45:29 -0700 (PDT)
+Message-ID: <53E82E3E.2030707@gmail.com>
+Date: Sun, 10 Aug 2014 19:45:18 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.43.42 with HTTP; Sun, 10 Aug 2014 17:36:32 -0700 (PDT)
-In-Reply-To: <20140810092431.GP14848@jama>
-References: <cover.1407632366.git.chris_larson@mentor.com>
-	<df6c707e6db09c6b640084b8a4a69919b147ad07.1407632366.git.chris_larson@mentor.com>
-	<20140810092431.GP14848@jama>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Sun, 10 Aug 2014 17:36:32 -0700
-X-Google-Sender-Auth: d_SN2FEqQ5RKuIQTeqQ418xdKFs
-Message-ID: <CABcZANma2YyDV34G+9EcZ20n8Uj7cFjKXh2AHG0zSqd2b+f4wg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 3/5] dnsmasq: fix parallel make issue
+To: openembedded-devel@lists.openembedded.org
+References: <1407661142-12785-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1407661142-12785-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [meta-oe][daisy][PATCHv] ltrace: add PV and PACKAGECONFIG for libunwind
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,20 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 00:37:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Aug 2014 02:45:31 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Aug 10, 2014 at 2:24 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
 
-> > From: Christopher Larson <chris_larson@mentor.com>
+
+On 08/10/2014 01:59 AM, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Acked-by: Armin Kuster <akuster808@gmail.com>
+
+> ---
+>   .../ltrace/{ltrace-git => ltrace}/ltrace-0.7.2-unused-typedef.patch   | 0
+>   meta-oe/recipes-devtools/ltrace/ltrace_git.bb                         | 4 ++++
+>   2 files changed, 4 insertions(+)
+>   rename meta-oe/recipes-devtools/ltrace/{ltrace-git => ltrace}/ltrace-0.7.2-unused-typedef.patch (100%)
 >
-> Is this v2 of this change which was sent earlier?
+> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace-git/ltrace-0.7.2-unused-typedef.patch b/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
+> similarity index 100%
+> rename from meta-oe/recipes-devtools/ltrace/ltrace-git/ltrace-0.7.2-unused-typedef.patch
+> rename to meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
+> diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> index 149af52..6476f97 100644
+> --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> @@ -9,6 +9,8 @@ HOMEPAGE = "http://ltrace.org/"
+>   LICENSE = "GPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 >
-
-
-They should be the same, just this one is part of a series with other
-changes. Either should work fine for that particular issue.
-
--Chris
+> +PE = "1"
+> +PV = "7.2+git${SRCPV}"
+>   SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
+>
+>   DEPENDS = "elfutils"
+> @@ -20,6 +22,8 @@ S = "${WORKDIR}/git"
+>
+>   inherit autotools
+>
+> +PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
+> +
+>   do_configure_prepend () {
+>   	./autogen.sh
+>   }
+>
 
