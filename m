@@ -1,51 +1,28 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 33732609B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 13:23:33 +0000 (UTC)
-Received: by mail-we0-f172.google.com with SMTP id x48so8614391wes.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 06:23:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:resent-from:resent-to:resent-date
-	:resent-message-id:resent-user-agent:message-id:date:from:user-agent
-	:mime-version:to:subject:content-type:content-transfer-encoding;
-	bh=yqaRMdnrgW6LtaTILcKLxqKAj1DQgsDDpLeRpcfbP3w=;
-	b=EwA4bG0lS72ZAl3khZnewhKJtgicx/id9fA5S56QW+t1DTompY/5eo1SSwdQkpLfAn
-	wUw/8+UHrPA94NGL8FuEaUTc3H2ezdHwzYV01aMb94yhcoMiH0nAaRxAfXPUvfJMale/
-	fHBhkdVT9EJhWU9ZNzDaeVS8ge12kgivwjh+BaZFKLqsFLJnOS3hW4E1sp5i85OQ1rq3
-	0Lmiid11Q2bwoh8NxpV8XDdeiZrQq7nRiLI6ncIj7zO5jX/ThMx7NZ4gBnU0NltS/Gr9
-	2gqI8JifY9bZG0O+SmHB2cDzN34V81njJtpIOq6RHomd4DIaqgY7upMruf825+LSnplO
-	tyTQ==
-X-Gm-Message-State: ALoCoQk2GI/Um/0j41wnZqrYckIXhz+7qUwoe/T6X8WOkbg0ikVYdukaexeoNNUV3BNRXVG9X9kX
-X-Received: by 10.194.188.46 with SMTP id fx14mr11472244wjc.112.1407763413922; 
-	Mon, 11 Aug 2014 06:23:33 -0700 (PDT)
-Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
-	by mx.google.com with ESMTPSA id z5sm1534362wje.49.2014.08.11.06.23.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Aug 2014 06:23:33 -0700 (PDT)
-Resent-From: Steffen Sledz <sledz@dresearch-fe.de>
-Resent-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Resent-Date: Mon, 11 Aug 2014 15:23:32 +0200
-Resent-Message-ID: <53E8C3D4.5020400@dresearch-fe.de>
-Resent-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
-Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
-	by mx.google.com with ESMTPSA id fe5sm301187wjc.12.2014.08.11.02.53.11
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Aug 2014 02:53:12 -0700 (PDT)
-Message-ID: <53E89286.7050303@dresearch-fe.de>
-Date: Mon, 11 Aug 2014 11:53:10 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
+Return-Path: <Yao.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 83642609C0;
+	Mon, 11 Aug 2014 13:57:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7BDvkgc019280
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 11 Aug 2014 06:57:47 -0700 (PDT)
+Received: from [128.224.140.163] (128.224.140.163) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Mon, 11 Aug 2014 06:57:46 -0700
+Message-ID: <53E8CBB3.1080207@windriver.com>
+Date: Mon, 11 Aug 2014 09:57:07 -0400
+From: Yao Zhao <yao.zhao@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-To: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Ralink RT3572/RT5572?
+To: <openembedded-devel@lists.openembedded.org>,
+	<openembedded-commits@lists.openembedded.org>
+References: <20140810141713.D71AD5030F@opal.openembedded.org>
+In-Reply-To: <20140810141713.D71AD5030F@opal.openembedded.org>
+X-Originating-IP: [128.224.140.163]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [oe-commits] Martin Jansa : Revert "add support for opendataplane"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,20 +36,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 13:23:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 11 Aug 2014 13:57:56 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Are the linux kernel modules for Ralink WiFi-USB devices with RT3572 and/or RT5572 (available from <http://www.mediatek.com/en/downloads/>) still integrated in an OE-Layer?
+Hi,
 
-If not, what would be the right place for them (openembedded-core, meta-networking, or something else)?
+I had noticed this problem so I sent an email before to hold on merging 
+this recipe.
+Please ignore it until I fix it.
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+thanks,
+yao
+
+------------------------------------------------------------------------
+
+*From:* git@opal.openembedded.org
+*Sent:* Sunday, August 10, 2014 10:17AM
+*To:* openembedded-commits@lists.openembedded.org
+*Subject:* [oe-commits] Martin Jansa : Revert "add support for 
+opendataplane"
+
+Module: meta-openembedded.git
+Branch: master-next
+Commit: 638603cd28bf2fb95278e1239c9e0ca1c73fbc92
+URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=638603cd28bf2fb95278e1239c9e0ca1c73fbc92
+
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Fri Aug  8 15:59:02 2014 +0200
+
+Revert "add support for opendataplane"
+
+doesn't build for qemuarm
+
+| arm-oe-linux-gnueabi-libtool: compile:  arm-oe-linux-gnueabi-gcc -march=armv5te -marm -mthumb-interwork
+--sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -DHAVE_CONFIG_H -I. -pthread -DODP_DEBUG_PRINT=1 -W -Wall -Werror -Wstrict-prototypes
+-Wmissing-prototypes -Wmissing-declarations -Wold-style-definition -Wpointer-arith -Wcast-align -Wnested-externs -Wcast-qual -Wformat-nonliteral
+-Wformat-security -Wundef -Wwrite-strings
+-I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/platform/linux-generic/include
+-I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/platform/linux-generic/include/api
+-I/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/include -O2 -pipe -g
+-feliminate-unused-debug-types -c
+/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/git/platform/linux-generic/odp_packet.c -o
+odp_packet.o
+| {standard input}: Assembler messages:
+| {standard input}:40: Error: selected processor does not support ARM mode `dmb st'
+| {standard input}:72: Error: selected processor does not support ARM mode `dmb st'
+| make[2]: *** [odp_barrier.lo] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| make[2]: Leaving directory
+`/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/build/platform/linux-generic'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory
+`/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/build/platform'
+| make: *** [all-recursive] Error 1
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at
+/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/opendataplane/0.2+gitAUTOINC+68a45b11e5-r0/temp/log.do_compile.12211)
+NOTE: recipe opendataplane-0.2+gitAUTOINC+68a45b11e5-r0: task do_compile: Failed
+ERROR: Task 12545 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-support/opendataplane/opendataplane_git.bb, do_compile) failed
+with exit code '1'
+
+This reverts commit e30d6d13f8108a1e3b9bcd8e39b87526e1097f06.
+
+---
+
+  ...inux-dpdk-remove-unnecessary-include-path.patch | 29 ----------------------
+  .../opendataplane/opendataplane.inc                | 21 ----------------
+  .../opendataplane/opendataplane_0.2.bb             | 25 -------------------
+  .../opendataplane/opendataplane_git.bb             | 14 -----------
+  4 files changed, 89 deletions(-)
+
+diff --git a/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch b/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
+deleted file mode 100644
+index a0ef7ce..0000000
+--- a/meta-networking/recipes-support/opendataplane/files/0001-linux-dpdk-remove-unnecessary-include-path.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 72b8eacc2985f054cadc5d0b48351a658998b8d6 Mon Sep 17 00:00:00 2001
+-From: Yao Zhao <yao.zhao@windriver.com>
+-Date: Wed, 30 Jul 2014 16:02:14 -0400
+-Subject: [PATCH] linux-dpdk: remove unnecessary include path
+-
+-for dpdk include/arch and include/exec-env is only included
+-by generic rte_xxx.h header, can't be included directly.
+-
+-Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+----
+- platform/linux-dpdk/Makefile.am | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/platform/linux-dpdk/Makefile.am b/platform/linux-dpdk/Makefile.am
+-index 4aa568f..dfcaadb 100644
+---- a/platform/linux-dpdk/Makefile.am
+-+++ b/platform/linux-dpdk/Makefile.am
+-@@ -12,8 +12,6 @@ PLAT_CFLAGS  = -msse4.2
+- if SDK_INSTALL_PATH_
+- PLAT_CFLAGS += -include $(SDK_INSTALL_PATH)/include/rte_config.h
+- PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include
+--PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include/arch
+--PLAT_CFLAGS += -I$(SDK_INSTALL_PATH)/include/exec-env
+-
+- AM_LDFLAGS  += -L$(SDK_INSTALL_PATH)/lib
+- endif
+---
+-1.9.1
+-
+diff --git a/meta-networking/recipes-support/opendataplane/opendataplane.inc b/meta-networking/recipes-support/opendataplane/opendataplane.inc
+deleted file mode 100644
+index c4b184e..0000000
+--- a/meta-networking/recipes-support/opendataplane/opendataplane.inc
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "Cross platform OpenDataPlane application APIs"
+-
+-DESCRIPTION = "The OpenDataPlane project has been established to \
+-produce an open-source, cross-platform set of application \
+-programming interfaces (APIs) for the networking data plane."
+-
+-HOMEPAGE = "http://www.opendataplane.org"
+-SECTION = "networking"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=4ccfa994aa96974cfcd39a59faee20a2"
+-
+-SRC_URI = "git://git.linaro.org/lng/odp.git"
+-
+-COMPATIBLE_HOST = "^((?!mips).*)$"
+-
+-PACKAGECONFIG ??= "platform_linux_generic"
+-PACKAGECONFIG[netmap] = "--enable-netmap,,,"
+-PACKAGECONFIG[platform_linux_generic] = "--with-platform=linux-generic,,,"
+-
+-S = "${WORKDIR}/git"
+-
+diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb b/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
+deleted file mode 100644
+index 6f7f601..0000000
+--- a/meta-networking/recipes-support/opendataplane/opendataplane_0.2.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-require ${BPN}.inc
+-
+-#odp-0.2 tag
+-SRCREV  = "6007d8833a6880abedf98f792586c0cfb9f10de0"
+-PV = "0.2"
+-
+-#0.2 still using pure Makefile
+-
+-#override the Makefile DESTDIR
+-export DESTDIR="${D}${exec_prefix}"
+-
+-do_install () {
+-    oe_runmake install
+-
+-    #move DESTDIR/share/odp/odp_x usr/bin
+-    install -d ${D}${bindir}
+-    for i in ${DESTDIR}/share/odp/*; do
+-        filename=`basename $i`
+-        mv ${DESTDIR}/share/odp/${filename} ${D}${bindir}/${filename}
+-    done
+-    rm -rf ${DESTDIR}/share
+-}
+-
+-#non standard doc install location
+-FILES_${PN}-doc += "${exec_prefix}/doc/*"
+diff --git a/meta-networking/recipes-support/opendataplane/opendataplane_git.bb b/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
+deleted file mode 100644
+index e569daa..0000000
+--- a/meta-networking/recipes-support/opendataplane/opendataplane_git.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI += "file://0001-linux-dpdk-remove-unnecessary-include-path.patch"
+-
+-SRCREV  = "68a45b11e52dbf835a7087c15d503c6b0e5d91ed"
+-#8f4f080625e2db810da3f13770ba418c72b08ede will support --with-sdk-install-path
+-PV = "0.2+git${SRCPV}"
+-
+-PACKAGECONFIG[platform_linux_generic] = "--with-platform=linux-generic,,openssl,libcrypto"
+-#need meta-intel layer's common/recipes-extended/dpdk/dpdk recipe
+-PACKAGECONFIG[platform_linux_dpdk] = '--with-platform=linux-dpdk --with-sdk-install-path="${STAGING_EXECPREFIXDIR}",,dpdk,'
+-PACKAGECONFIG[platform_linux_keystone2] = "--with-platform=linux-keystone2,,,"
+-
+-inherit autotools
+
+
+
 
