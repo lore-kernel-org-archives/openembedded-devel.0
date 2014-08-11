@@ -1,28 +1,51 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AF6B65E3D
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 33732609B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 09:09:15 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 11 Aug 2014 02:03:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,840,1400050800"; d="scan'208";a="556763016"
-Received: from glucy-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.202])
-	by orsmga001.jf.intel.com with ESMTP; 11 Aug 2014 02:08:35 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Christopher Larson <clarson@kergoth.com>
-Date: Mon, 11 Aug 2014 10:08:34 +0100
-Message-ID: <1544415.MBbs8JpE6c@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <CABcZANnn4CSDe4Gvc+nuM39u9dQK74zuLnzw8Uf6sKfDp5v2Gw@mail.gmail.com>
-References: <017701cfaf7e$77e1a390$67a4eab0$@lge.com>
-	<01b401cfaf9f$14258da0$3c70a8e0$@lge.com>
-	<CABcZANnn4CSDe4Gvc+nuM39u9dQK74zuLnzw8Uf6sKfDp5v2Gw@mail.gmail.com>
+	Mon, 11 Aug 2014 13:23:33 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id x48so8614391wes.31
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Aug 2014 06:23:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:resent-from:resent-to:resent-date
+	:resent-message-id:resent-user-agent:message-id:date:from:user-agent
+	:mime-version:to:subject:content-type:content-transfer-encoding;
+	bh=yqaRMdnrgW6LtaTILcKLxqKAj1DQgsDDpLeRpcfbP3w=;
+	b=EwA4bG0lS72ZAl3khZnewhKJtgicx/id9fA5S56QW+t1DTompY/5eo1SSwdQkpLfAn
+	wUw/8+UHrPA94NGL8FuEaUTc3H2ezdHwzYV01aMb94yhcoMiH0nAaRxAfXPUvfJMale/
+	fHBhkdVT9EJhWU9ZNzDaeVS8ge12kgivwjh+BaZFKLqsFLJnOS3hW4E1sp5i85OQ1rq3
+	0Lmiid11Q2bwoh8NxpV8XDdeiZrQq7nRiLI6ncIj7zO5jX/ThMx7NZ4gBnU0NltS/Gr9
+	2gqI8JifY9bZG0O+SmHB2cDzN34V81njJtpIOq6RHomd4DIaqgY7upMruf825+LSnplO
+	tyTQ==
+X-Gm-Message-State: ALoCoQk2GI/Um/0j41wnZqrYckIXhz+7qUwoe/T6X8WOkbg0ikVYdukaexeoNNUV3BNRXVG9X9kX
+X-Received: by 10.194.188.46 with SMTP id fx14mr11472244wjc.112.1407763413922; 
+	Mon, 11 Aug 2014 06:23:33 -0700 (PDT)
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPSA id z5sm1534362wje.49.2014.08.11.06.23.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Aug 2014 06:23:33 -0700 (PDT)
+Resent-From: Steffen Sledz <sledz@dresearch-fe.de>
+Resent-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Resent-Date: Mon, 11 Aug 2014 15:23:32 +0200
+Resent-Message-ID: <53E8C3D4.5020400@dresearch-fe.de>
+Resent-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPSA id fe5sm301187wjc.12.2014.08.11.02.53.11
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Aug 2014 02:53:12 -0700 (PDT)
+Message-ID: <53E89286.7050303@dresearch-fe.de>
+Date: Mon, 11 Aug 2014 11:53:10 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: How to apply "-Wl,--build-id" in all recipes?
+To: openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Ralink RT3572/RT5572?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +59,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 09:09:22 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 11 Aug 2014 13:23:40 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Hi Chris,
+Are the linux kernel modules for Ralink WiFi-USB devices with RT3572 and/or RT5572 (available from <http://www.mediatek.com/en/downloads/>) still integrated in an OE-Layer?
 
-On Saturday 09 August 2014 11:22:11 Christopher Larson wrote:
-> On Sun, Aug 3, 2014 at 9:46 PM, Changhyeok Bae <changhyeok.bae@lge.com>
-> wrote:
-> > As I said, I applied the variable in local.conf.
-> > The LDFLAGS env. variable is included '-Wl,--build-id'.
-> > However, the variable is not applied at the linking time.
-> 
-> All recipes *should* ensure that the buildsystem of what they're building
-> obeys our LDFLAGS, but plenty do not. We used to spot these cases via the
-> GNU_HASH warnings, but now we build the internal toolchain with the default
-> gnu hash so cases where LDFLAGS isn't being obeyed are slightly more
-> difficult to detect unless you'er building with an external toolchain.
-
-Hmm, when did this change? I was sure we still got this warning if the OE 
-LDFLAGS weren't used...
-
-Cheers,
-Paul
+If not, what would be the right place for them (openembedded-core, meta-networking, or something else)?
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
