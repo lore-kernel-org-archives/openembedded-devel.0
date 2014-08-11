@@ -1,40 +1,35 @@
 Return-Path: <kergoth@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 874CE65D9B
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B44F601A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 15:54:37 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id gl10so6764212lab.40
+	Mon, 11 Aug 2014 16:12:59 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id d1so4475037wiv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 08:54:38 -0700 (PDT)
+	Mon, 11 Aug 2014 09:13:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=4M298Cwyqvjq6bQyFUFFFV0Rpqrs2hwO/HuEcO6EDcA=;
-	b=kM1yUkMbXqqa5gaihFJCAq8+Pmm/qqAV7zj9rIUqzoGJyxW9MB/xi/+T4z4wFkZJko
-	nnGvh+Pkszkk14CwPGA5XMkVFF+dijhhnMIuhNKmF2uwvd0GbXJ3QPaQCB9X1mCqKWDq
-	26y29v0MmhZ5CeRH1Zs0RUUnMv4xWeSX+me9OTEiQpTEi2ujSgm124S/2HHMmlvBJmBS
-	ADrqZVGvMEvD+Nn5nWNuXPIGpIkkfEgrH9uFgHaWDuIpPNnsiltJwC+3k5JX9INKAy9L
-	pfJfNACpw9554inSqONZSoC3ekjFqvnhDmPit+54PY+zsJdJD+i4YC6u9mk0bkALu5Eq
-	0Nqg==
-X-Received: by 10.152.204.5 with SMTP id ku5mr9020280lac.68.1407772477805;
-	Mon, 11 Aug 2014 08:54:37 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.43.42 with HTTP; Mon, 11 Aug 2014 08:54:17 -0700 (PDT)
-In-Reply-To: <20140811085150.GV14848@jama>
-References: <cover.1407632366.git.chris_larson@mentor.com>
-	<df6c707e6db09c6b640084b8a4a69919b147ad07.1407632366.git.chris_larson@mentor.com>
-	<20140810092431.GP14848@jama>
-	<CABcZANma2YyDV34G+9EcZ20n8Uj7cFjKXh2AHG0zSqd2b+f4wg@mail.gmail.com>
-	<20140811084647.GU14848@jama> <20140811085150.GV14848@jama>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Mon, 11 Aug 2014 08:54:17 -0700
-X-Google-Sender-Auth: zcU6eEzedd8F31chfDohDF8NU4c
-Message-ID: <CABcZANktWOJNMn2RUDhzxn1_5CyE1KV8iCpECp6kvP_Z2K9UnA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 3/5] dnsmasq: fix parallel make issue
+	h=from:to:cc:subject:date:message-id;
+	bh=O9QWUcq1V5hLrVjVqWDMWvmhZPMqFUoW2478cT9M4GY=;
+	b=sEWIepVc9jRXBoPawCHH3MpkN1rQSJF5IhyA1NeEHJwImgE6lyZ1ljH1qVNsfIT8Z6
+	IkFErXHqR7s8UdxeTgkmqZaPckW5c22SSbxw3G9o9chW8ZLNI5zDDiaZFpyAk/JP48MQ
+	xaEbAJm7VUid9aTv6maIhrY1yVfAGpmJWfkmWRDwhE+Cf9MN6CmJfJnKErCq9vN+Zp9q
+	4dicF6A+J1YkNuZuRDNCu5aA6rXK/CasYtHXyp0vhBlBcwjbNcejxGd9DQD7J/rB9kym
+	sfty8HGUfd/Y3utps4U00xbSgQT+GT6p5eDdtq9pY/XOomPzcEB3mHHIiVLK5hQni/d8
+	wIaQ==
+X-Received: by 10.180.97.129 with SMTP id ea1mr26857093wib.29.1407773580600;
+	Mon, 11 Aug 2014 09:13:00 -0700 (PDT)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by mx.google.com with ESMTPSA id 20sm2589822wjt.42.2014.08.11.09.12.58
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 11 Aug 2014 09:12:59 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Aug 2014 09:12:21 -0700
+Message-Id: <cover.1407773390.git.chris_larson@mentor.com>
+X-Mailer: git-send-email 1.8.3.4
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH v2 0/5] Various dnsmasq fixes/improvements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,40 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 15:54:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Aug 2014 16:13:03 -0000
 
-On Mon, Aug 11, 2014 at 1:51 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+From: Christopher Larson <chris_larson@mentor.com>
 
-> On Mon, Aug 11, 2014 at 10:46:47AM +0200, Martin Jansa wrote:
-> > On Sun, Aug 10, 2014 at 05:36:32PM -0700, Christopher Larson wrote:
-> > > On Sun, Aug 10, 2014 at 2:24 AM, Martin Jansa <martin.jansa@gmail.com>
-> > > wrote:
-> > >
-> > > > > From: Christopher Larson <chris_larson@mentor.com>
-> > > >
-> > > > Is this v2 of this change which was sent earlier?
-> > > >
-> > >
-> > >
-> > > They should be the same, just this one is part of a series with other
-> > > changes. Either should work fine for that particular issue.
-> >
-> > There were some smaller differences (like Upstream-Status and SRC_URI
-> > addition in .inc instead of .bb).
-> >
-> > I've resolved them as conflicts in next patch.
->
-> Hmm, maybe not correctly, can you please check what's wrong in
-> master-next or resend rebased v2?
+This is rebased on current master. The parallel make fix's commit message is
+adjusted to match what it does, and the lua patch is fixed.. It seems
+something inadvertantly trimmed trailing whitespace out of the patch, oops.
 
+The following changes since commit 4d4ab8fd320b58323033c12cf705e7b3ce10d659:
 
-Hmm, will do, thanks.
+  integrate fcgi-2.4.0 and add OML license file (2014-08-10 17:23:22 +0100)
+
+are available in the git repository at:
+
+  https://github.com/kergoth/meta-openembedded dnsmasq-fixes
+
+for you to fetch changes up to 2e84f59401a5ce57ba17841ff4ddb01cffeb1145:
+
+  dnsmasq: add packageconfigs for idn, conntrack, lua (2014-08-11 09:07:14 -0700)
+
+----------------------------------------------------------------
+Christopher Larson (5):
+      dnsmasq: add missing inherit pkgconfig
+      dnsmasq: obey CFLAGS & LDFLAGS
+      dnsmasq: move parallel make patch to .bb, add upstream-status
+      dnsmasq: look for lua.pc, not lua5.1.pc
+      dnsmasq: add packageconfigs for idn, conntrack, lua
+
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc   | 19 ++++++++++++++-----
+ .../recipes-support/dnsmasq/dnsmasq/lua.patch         | 16 ++++++++++++++++
+ .../dnsmasq/{files => dnsmasq}/parallel-make.patch    |  1 +
+ .../recipes-support/dnsmasq/dnsmasq_2.68.bb           |  5 +++++
+ 4 files changed, 36 insertions(+), 5 deletions(-)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
+ rename meta-networking/recipes-support/dnsmasq/{files => dnsmasq}/parallel-make.patch (96%)
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.8.3.4
+
 
