@@ -1,34 +1,38 @@
-Return-Path: <kernel@tekno-soft.it>
-X-Greylist: delayed 529 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 11 Aug 2014 17:46:22 UTC
-Received: from mail.tekno-soft.it (li153-180.members.linode.com
-	[109.74.206.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DB9D65D9B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B270D609C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 17:46:22 +0000 (UTC)
-Received: from dragon.tekno-soft.it
-	(host142-53-static.94-94-b.business.telecomitalia.it [94.94.53.142])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: robyf@tekno-soft.it)
-	by mail.tekno-soft.it (Postfix) with ESMTPSA id 2648F17727
+	Mon, 11 Aug 2014 20:06:28 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id c41so6685714yho.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Aug 2014 17:42:35 +0000 (UTC)
-Message-ID: <53E8FF4F.1000203@tekno-soft.it>
-Date: Mon, 11 Aug 2014 19:37:19 +0200
-From: Roberto Fichera <kernel@tekno-soft.it>
-Organization: TeknoSOFT
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.7.0
+	Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=ggo5JZ5lFJsHAXgs7i5diGx0HDZVY47q2ghLhxo+kYs=;
+	b=dCsj6mo9RZAIoFsHY8zZhDaJAwKQHHn/WZlje97UTkeHSnc0ZQ1OpDvntLDawqYQQk
+	aym6SAb+9bGI5G1X7WiU007B2Fg/zqwOobls9HBuYSif31lSFI6WnTI0r8dmb3OoGADn
+	2xg95NYX0gbFbBdYYHT13N6Eo8JBRBgJ2oKytmjtZhxjNbOjvdvj9UaYuwatPMxuMPY8
+	j1IxD2/pRWNynznpW6qS9MaMjRX9fM1NotXGer2FgJl+cd/8Tox6HFh+h3zs3fXuV4bD
+	Me1d2bABawRf7hn0u0FBTK3MM4QpBsWAF8r/w8CEVEpXrI0rvbLqj+OP4HJrp59t8oHG
+	Nywg==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Intuitive-System-MailScanner-Information: Please contact the ISP for more
-	information
-X-Intuitive-System-MailScanner-ID: 2648F17727.ABC14
-X-Intuitive-System-MailScanner: Found to be clean
-X-Intuitive-System-MailScanner-From: kernel@tekno-soft.it
-X-Spam-Status: No
-Subject: Asterisk v11 recipe
+X-Received: by 10.236.129.3 with SMTP id g3mr47122957yhi.67.1407787590117;
+	Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Mon, 11 Aug 2014 13:06:30 -0700 (PDT)
+In-Reply-To: <CAOd_LFyOC8uR2gk=u2YpB1cq8P_hkqHoYKDxUmou=y1UcBDnVA@mail.gmail.com>
+References: <1407177515-15086-1-git-send-email-otavio@ossystems.com.br>
+	<CAP9ODKrhpyVAXkrCeEk2yqjvwm1G34aqF-sP__fQvQ8yyMCJyA@mail.gmail.com>
+	<CAOd_LFyOC8uR2gk=u2YpB1cq8P_hkqHoYKDxUmou=y1UcBDnVA@mail.gmail.com>
+Date: Mon, 11 Aug 2014 17:06:30 -0300
+X-Google-Sender-Auth: g9absJJ6c0tRznvbOeyEdOBL1Xw
+Message-ID: <CAP9ODKpGbmi=dsvubh9O-ok9_Enc5cewtdC6TQ+H0OJo3Y3_-w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [meta-oe][PATCH 1/2] evtest: Stop using Cgit based archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,15 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Aug 2014 17:46:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Aug 2014 20:06:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi All,
+Hello Martin,
 
-does anyone has an Asterisk v11 recipe? I know there is a meta-telephony layer
-but that one has v1.8.x asterisk version.
+On Mon, Aug 4, 2014 at 6:26 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
+> On Mon, Aug 4, 2014 at 2:46 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>> Hello Martin,
+>>
+>> On Mon, Aug 4, 2014 at 3:38 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>>> The Cgit based archive may change depending on the order of images,
+>>> timestamp and like causing checksum to change.
+>>>
+>>> This patch uses the same 1.25 version but fetching it using Git, so no
+>>> code changes are done.
+>>>
+>>> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>>
+>> Please queue this update for Daisy as well, as this is failing to
+>> fetch currently (cced other Daisy maintainers).
+>>
+>> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> Acked-by: Cliff Brake <cbrake@bec-systems.com>
 
-Thanks in advance,
-Roberto Fichera.
+Please merged this.
+
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
