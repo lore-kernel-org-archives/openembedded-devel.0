@@ -1,26 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CF136FF24
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id BC3AD65D9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Aug 2014 16:26:56 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 10 Aug 2014 09:26:58 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,837,1400050800"; d="scan'208";a="582847888"
-Received: from mrdissan-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.124])
-	by fmsmga002.fm.intel.com with ESMTP; 10 Aug 2014 09:26:57 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: YangHaibo <b40869@freescale.com>
-Date: Sun, 10 Aug 2014 17:26:56 +0100
-Message-ID: <5845461.pDedrMP9qU@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <1407223893-7560-1-git-send-email-b40869@freescale.com>
-References: <1407223893-7560-1-git-send-email-b40869@freescale.com>
+	Mon, 11 Aug 2014 00:12:49 +0000 (UTC)
+Received: by mail-yk0-f171.google.com with SMTP id 19so5441102ykq.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Aug 2014 17:12:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=boWHlrIFarX/y+nPxR7N+p+sDpsLgcc2PJ+RRQUYc/M=;
+	b=KxptQOYJHJmcv8cmI0gZp2ZmlLnWs1osxjh/hbC1McOY2BZCnK4SKHijc5hpH6VL4+
+	+jR40gEGshHHzAHHVKF1ymKGzhUBeDPthV2FP3Stxi5HkbumtcMLnzRRa8caLt7220LG
+	asP66Ltf/MGKnOMc7J703nkdhOhtkZoDuW5iL1IuVYxsO1t0lCDEj6tacKWNsdP48fs0
+	LQS1O0owV4oOY/1MucpOqI15q0uJwPAU33CtWFu+xMEf8QfKf86993sd+PmoctBcvrYi
+	i/67oui/8sJhhJfBEmMIVz1z+yp3yi9tKO8oVg6VEp+KRixwcdEDtNFBa7YBHG4qrLIR
+	9Bpw==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-webserver][PATCH v4] integrate fcgi-2.4.0 and add OML license file
+X-Received: by 10.236.228.161 with SMTP id f31mr39033272yhq.44.1407715970755; 
+	Sun, 10 Aug 2014 17:12:50 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Sun, 10 Aug 2014 17:12:50 -0700 (PDT)
+In-Reply-To: <1407620350-7644-2-git-send-email-Martin.Jansa@gmail.com>
+References: <1407620350-7644-1-git-send-email-Martin.Jansa@gmail.com>
+	<1407620350-7644-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Sun, 10 Aug 2014 21:12:50 -0300
+X-Google-Sender-Auth: DFFnQXlpMZrLYyA2D_8kQ00phQ8
+Message-ID: <CAP9ODKqvW9XkHB3e5f1WwjCvVgpdOMmU3WNNfW=H11CaWH3s=w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 2/2] chromium-35*: use BFD when building for x86-64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,26 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Aug 2014 16:26:58 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 11 Aug 2014 00:12:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tuesday 05 August 2014 15:31:33 YangHaibo wrote:
-> Signed-off-by: YangHaibo <b40869@freescale.com>
-> ---
->  meta-oe/licenses/OML                               | 28
-> ++++++++++++++++++++++ .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch     |
-> 17 +++++++++++++ .../fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch     | 18
-> ++++++++++++++ meta-webserver/recipes-fcgi/fcgi/fcgi_2.4.0.bb     | 15
+On Sat, Aug 9, 2014 at 6:39 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * this doesn't fix it completely, but allows it a bit further and then
+>   it fails in the same spot as when building for qemux86 (or 37* version
+>   with gold)
+>
+>   sysroots/x86_64-linux/usr/bin/x86_64-oe-linux/x86_64-oe-linux-ld.gold:
+>     warning: hidden symbol 'sqlite3_temp_directory' in obj/third_party/sqlite/libsqlite3.a(obj/third_party/sqlite/amalgamation/sqlite.sqlite3.o)
+>     is referenced by DSO
+>     sysroots/qemux86-64/usr/lib/../lib/libsoftokn3.so
+>   sysroots/x86_64-linux/usr/bin/x86_64-oe-linux/x86_64-oe-linux-ld.gold:
+>     error: treating warnings as errors
+>   collect2: error: ld returned 1 exit status
+>
+>   and few more symbols like this, libsoftokn3.so is provided by system
+>   nss, using system sqlite3 has some issues too:
+>   https://code.google.com/p/chromium/issues/detail?id=22208
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-I've merged this, thanks; I did move it to recipes-support (rather than 
-recipes-fcgi) though.
+Are you going to work on this to fix it completely?
 
-Cheers,
-Paul
+I think we ought to focus in 37 as 35 is "old" already.
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
