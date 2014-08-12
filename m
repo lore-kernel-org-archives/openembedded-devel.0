@@ -1,27 +1,28 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 21FA965CA8
+	by mail.openembedded.org (Postfix) with ESMTP id 9BA5D65CA8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 13:55:33 +0000 (UTC)
+	Tue, 12 Aug 2014 14:00:26 +0000 (UTC)
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 12 Aug 2014 06:55:34 -0700
+	by orsmga101.jf.intel.com with ESMTP; 12 Aug 2014 07:00:26 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.01,849,1400050800"; d="scan'208";a="557425016"
-Received: from atdias-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.159])
-	by orsmga001.jf.intel.com with ESMTP; 12 Aug 2014 06:55:33 -0700
+X-IronPort-AV: E=Sophos;i="5.01,849,1400050800"; d="scan'208";a="557426701"
+Received: from glucy-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.202])
+	by orsmga001.jf.intel.com with ESMTP; 12 Aug 2014 07:00:14 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 12 Aug 2014 14:55:32 +0100
-Message-ID: <2509223.ytjg6V1x30@peggleto-mobl5.ger.corp.intel.com>
+To: Sujith H <sujith.h@gmail.com>
+Date: Tue, 12 Aug 2014 14:59:34 +0100
+Message-ID: <1607625.zbYtdvxeAh@peggleto-mobl5.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140812115132.GK14848@jama>
-References: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
-	<20140812115132.GK14848@jama>
+In-Reply-To: <1407849496-25893-1-git-send-email-sujith.h@gmail.com>
+References: <1407849496-25893-1-git-send-email-sujith.h@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] ifenslave: add recipes
+Cc: Sujith H <Sujith_Haridasan@mentor.com>,
+	Christopher Larson <chris_larson@mentor.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,60 +36,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 13:55:41 -0000
+X-List-Received-Date: Tue, 12 Aug 2014 14:00:33 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday 12 August 2014 13:51:32 Martin Jansa wrote:
-> On Tue, Aug 12, 2014 at 03:01:04PM +0800, rongqing.li@windriver.com wrote:
-> > From: Roy Li <rongqing.li@windriver.com>
-> > 
-> > Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> > ---
-> > 
-> >  .../recipes-support/ifenslave/ifenslave_1.1.0.bb    |   19
-> >  +++++++++++++++++++ 1 file changed, 19 insertions(+)
-> >  create mode 100644
-> >  meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb> 
-> > diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> > b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb new file
-> > mode 100644
-> > index 0000000..d6252a9
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> > @@ -0,0 +1,19 @@
-> > +SUMMARY = "Configure network interfaces for parallel routing"
-> 
-> ^ dropped in master-next
-> 
-> > +DESCRIPTION = "Configure network interfaces for parallel routing"
+Hi Sujith,
 
-I guess you meant DESCRIPTION (which is the same as SUMMARY) was dropped.
+Just some minor corrections:
 
-> > +HOMEPAGE =
-> > "http://www.linuxfoundation.org/collaborate/workgroups/networking/bonding
-> > " +SECTION = "network"
-> > +LICENSE = "GPLv2"
-> > +
-> > +SRC_URI =
-> > "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-2.6_${PV}.ori
-> > g.tar.gz" +
-> > +do_compile() {
-> > +    ${CC} ifenslave.c -o ifenslave
-> > +}
-> > +do_install() {
-> > +    install -d "${D}${sbindir}"
-> > +    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
-> > +}
-> > +
+On Tuesday 12 August 2014 18:48:16 Sujith H wrote:
+> From: Sujith H <Sujith_Haridasan@mentor.com>
 > 
-> ^ moved next to LICENSE in master-next
+> This recipe will provide a set of Python modules that
+> provide Python programmers an interface to libparted,
+> the GNU parted library for disk partitioning and filesystem
+> manipulation.
 > 
-> > +LIC_FILES_CHKSUM =
-> > "file://ifenslave.c;beginline=8;endline=12;md5=a9f0bd2324cdc1b36d1f44f0e6
-> > 43a62a" +SRC_URI[md5sum] = "56126cd1013cefe0ce6f81613e677bdd"
+> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+> ---
+>  .../recipes-extended/pyparted/pyparted_3.9.bb       | 21
+> +++++++++++++++++++++ 1 file changed, 21 insertions(+)
+>  create mode 100644 meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> 
+> diff --git a/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb new file mode
+> 100644
+> index 0000000..7b284cc
+> --- /dev/null
+> +++ b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \ 
+> +an interface to libparted, the GNU parted library for disk partitioning and \ 
+> +filesystem manipulation."
+> +SUMMARY = "Python bindings for libparted"
+> +HOMEPAGE = "https://fedorahosted.org/pyparted/"
+> +SCM_URI = "git://git.fedorahosted.org/pyparted.git"
 
-Ditto here, LIC_FILES_CHKSUM was moved, right?
+SCM_URI isn't a standard variable and doesn't seem to be used anywhere else in
+the recipe - is this expected to be used somewhere?
+
+> +LICENSE = "GPL-2.0+"
+> +LIC_FILES_CHKSUM = "\
+> +    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+> +    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \ 
+> +"
+> +DEPENDS += "parted"
+> +PR = "r0"
+
+Please drop this PR value, it's redundant.
+
+> +SRC_URI =
+> "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
+> +SRC_URI[sha256sum] =
+> "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb" +
+> +inherit distutils
+> +
+> +BBCLASSEXTEND += "native"
 
 Cheers,
 Paul
