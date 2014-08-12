@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C6B21609BF
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 31FDB609BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 11:39:55 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id w62so9821828wes.22
+	Tue, 12 Aug 2014 11:45:01 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id d1so5632732wiv.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 04:39:56 -0700 (PDT)
+	Tue, 12 Aug 2014 04:45:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=XVRmBfmv1SsBVU5Kqu+M+BPyLzglSmGSYynF7F1AIb8=;
-	b=iHpKaLhfR4L+hHBahMltMV7yXbjnUTNfXcmMSjWrY92QRGHcsmDpfSD8oRX9cve0Wi
-	2+dkgTYCl+4QzSyxhdMm8c+pYs4b8r3sw+VW7b7ryeD0vaLgq5tPHYil7E04dhrlv6vO
-	t37uuiTBQk4Z/1mtp/P53LSJDLMl0iwGRP1Z4TiqkLGQ3WfMCGn1gy4OxylIigqUUrc4
-	hl5hpWr4QBWZryGULiYCwvnE9pK6kCV+E3tJxxGt4mT/YYAXOg3mFEjXKyMDdIhEH21V
-	zEYB1VsuYFG40uFr3o4VO9marlVrVnT3WhIIiDSUUUD3dEGcEcwJUU2VO7YpQwPoili+
-	y9lA==
-X-Received: by 10.180.20.40 with SMTP id k8mr32770208wie.54.1407843596158;
-	Tue, 12 Aug 2014 04:39:56 -0700 (PDT)
+	bh=3f7+9iEkAJbpQhjF/dNP3H7WBrDUMLqFQCRghpJXn64=;
+	b=s9Cp84NvUk2xD9JF3mJnYd+kvhUG/HDi+g8GPa2ongKdXQvPJxxxeSkyIQBQOFVk7l
+	MdN/tp7GjHdND3Rb3G3c50uqkOdQz1WMiet5wUlGW/IrBfXk24ka1bn2N8Bj8Gmzi7Rj
+	rjks5dvfBQqr3c6AuAb5FPxkt9R3JNpo2bWoK7DdbMXLxhhh2alDlc3B428H/rBJN7Wb
+	y3tELF7T95iNS5zGntWwA0ZOsT70yOUJvF5Dw+qB7dV/wO/9rfZiH40zJx6Y2n+fUfD+
+	EUxi4OSa8PK0Amix9db3AhyTgcrbRQfN/U/eObkfSWi1u3INo1aXObh7ToMKOx8kMDHg
+	/ePg==
+X-Received: by 10.194.219.193 with SMTP id pq1mr4709029wjc.5.1407843902839;
+	Tue, 12 Aug 2014 04:45:02 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	a4sm55282440wie.21.2014.08.12.04.39.55 for <multiple recipients>
+	dc3sm55365324wib.9.2014.08.12.04.45.01 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 04:39:55 -0700 (PDT)
+	Tue, 12 Aug 2014 04:45:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 12 Aug 2014 13:40:31 +0200
+Date: Tue, 12 Aug 2014 13:45:38 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140812114031.GI14848@jama>
-References: <cover.1407773390.git.chris_larson@mentor.com>
+Message-ID: <20140812114538.GJ14848@jama>
+References: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
 MIME-Version: 1.0
-In-Reply-To: <cover.1407773390.git.chris_larson@mentor.com>
+In-Reply-To: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [meta-oe][PATCH v2 0/5] Various dnsmasq fixes/improvements
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: Re: [meta-oe][PATCH] rabbitmq-c: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,108 +48,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 11:40:02 -0000
-X-Groupsio-MsgNum: 51615
+X-List-Received-Date: Tue, 12 Aug 2014 11:45:09 -0000
+X-Groupsio-MsgNum: 51616
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eS1VfoAplU8hbCPA"
+	protocol="application/pgp-signature"; boundary="YBZtlKTDrhBF+VTv"
 Content-Disposition: inline
 
---eS1VfoAplU8hbCPA
+--YBZtlKTDrhBF+VTv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 11, 2014 at 09:12:21AM -0700, Christopher Larson wrote:
-> From: Christopher Larson <chris_larson@mentor.com>
+On Mon, Aug 11, 2014 at 04:33:56PM +0200, Maciej Borzecki wrote:
+> rabbitmq-c is a C library providing an implementation of AMQP client for
+> use with v2.0+ of the RabbitMQ broker
 >=20
-> This is rebased on current master. The parallel make fix's commit message=
- is
-> adjusted to match what it does, and the lua patch is fixed.. It seems
-> something inadvertantly trimmed trailing whitespace out of the patch, oop=
-s.
+> Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> ---
+>  .../rabbitmq-c/rabbitmq-c_0.5.0.bb                 | 22 ++++++++++++++++=
+++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.=
+5.0.bb
 >=20
-> The following changes since commit 4d4ab8fd320b58323033c12cf705e7b3ce10d6=
-59:
->=20
->   integrate fcgi-2.4.0 and add OML license file (2014-08-10 17:23:22 +010=
-0)
->=20
-> are available in the git repository at:
+> diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb =
+b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
+> new file mode 100644
+> index 0000000..d8e3189
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION =3D "A C-language AMQP client library for use with v2.0+ of =
+the RabbitMQ broker"
+> +HOMEPAGE =3D "https://github.com/alanxz/rabbitmq-c"
+> +LIC_FILES_CHKSUM =3D "file://${S}/LICENSE-MIT;md5=3D6b7424f9db80cfb11fdd=
+5c980b583f53"
+> +LICENSE =3D "MIT"
+> +
+> +SRC_URI =3D "https://github.com/alanxz/rabbitmq-c/releases/download/v${P=
+V}/rabbitmq-c-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "b1f902c658c772cda464754678d8deb6"
+> +SRC_URI[sha256sum] =3D "53702ea2ab809af0f923e387458e2cad191d9549f5041003=
+5fe82ce5e6ccc4fa"
+> +
+> +PR =3D "r0"
 
-Thanks for v2, it looks like some trailing spaces were lost in v1, so
-hopefully it will apply now:
+^ dropped when cherry-picking to master-next
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-index 63dd71a..aac7b97 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-@@ -1,15 +1,16 @@
- Upstream-status: Inappropriate [OE specific]
- Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-=20
----- dnsmasq-2.68.orig/Makefile
--+++ dnsmasq-2.68/Makefile
--@@ -57,8 +57,8 @@ idn_cflags =3D  `echo $(COPTS) | $(top)/bl
-- idn_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_IDN $(PKG_CO=
-NFIG) --libs libidn`
-+--- dnsmasq-2.68.orig/Makefile       2014-08-11 09:05:17.000000000 -0700
-++++ dnsmasq-2.68/Makefile    2014-08-11 09:05:51.930648617 -0700
-+@@ -57,8 +57,8 @@
-+ idn_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_IDN $(PKG_CO=
-NFIG) --libs libidn`=20
-  ct_cflags =3D   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(=
-PKG_CONFIG) --cflags libnetfilter_conntrack`
-  ct_libs =3D     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(=
-PKG_CONFIG) --libs libnetfilter_conntrack`
---lua_cflags =3D  `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --cflags lua5.1`
---lua_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --libs lua5.1`
-+-lua_cflags =3D  `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --cflags lua5.1`=20
-+-lua_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --libs lua5.1`=20
- +lua_cflags =3D  `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --cflags lua`
- +lua_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(=
-PKG_CONFIG) --libs lua`
-  sunos_libs =3D  `if uname | grep SunOS >/dev/null 2>&1; then echo -lsocke=
-t -lnsl -lposix4; fi`
-  version =3D     -DVERSION=3D'\"`$(top)/bld/get-version $(top)`\"'
-+=20
+> +
+> +S =3D "${WORKDIR}/rabbitmq-c-${PV}"
 
+^ dropped when cherry-picking to master-next
 
->=20
->   https://github.com/kergoth/meta-openembedded dnsmasq-fixes
->=20
-> for you to fetch changes up to 2e84f59401a5ce57ba17841ff4ddb01cffeb1145:
->=20
->   dnsmasq: add packageconfigs for idn, conntrack, lua (2014-08-11 09:07:1=
-4 -0700)
->=20
-> ----------------------------------------------------------------
-> Christopher Larson (5):
->       dnsmasq: add missing inherit pkgconfig
->       dnsmasq: obey CFLAGS & LDFLAGS
->       dnsmasq: move parallel make patch to .bb, add upstream-status
->       dnsmasq: look for lua.pc, not lua5.1.pc
->       dnsmasq: add packageconfigs for idn, conntrack, lua
->=20
->  meta-networking/recipes-support/dnsmasq/dnsmasq.inc   | 19 +++++++++++++=
-+-----
->  .../recipes-support/dnsmasq/dnsmasq/lua.patch         | 16 +++++++++++++=
-+++
->  .../dnsmasq/{files =3D> dnsmasq}/parallel-make.patch    |  1 +
->  .../recipes-support/dnsmasq/dnsmasq_2.68.bb           |  5 +++++
->  4 files changed, 36 insertions(+), 5 deletions(-)
->  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/lua.p=
-atch
->  rename meta-networking/recipes-support/dnsmasq/{files =3D> dnsmasq}/para=
-llel-make.patch (96%)
->=20
+> +
+> +EXTRA_OECONF =3D "--disable-examples --enable-tools"
+> +
+> +inherit autotools pkgconfig
+> +
+> +PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-tools ${PN}"
+
+Why are you dropping -doc, -staticdev, -locale and other default
+packages?
+
+PACKAGE_BEFORE_PN +=3D "${PN}-tools"
+
+should be enough, will do in master-next, but please ack
+
+> +
+> +DEPENDS =3D "popt openssl"
+> +
+> +FILES_${PN}-tools =3D "${bindir}"
+> \ No newline at end of file
 > --=20
-> 1.8.3.4
+> 1.9.0
 >=20
 > --=20
 > _______________________________________________
@@ -160,16 +132,16 @@ llel-make.patch (96%)
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---eS1VfoAplU8hbCPA
+--YBZtlKTDrhBF+VTv
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPp/S8ACgkQN1Ujt2V2gByw0ACfa1/Rm/jiDVMaL3ym5tZtBJH0
-nvMAn3D3zabOZ4wmS+NVWhA/CMZ6FZS6
-=JIv2
+iEYEARECAAYFAlPp/mIACgkQN1Ujt2V2gBxwFQCgkdsNwXodu1i+pbe+VXPwQLbi
+1wwAoJpW2bxR1OMbFx9H8l4aBVINZB8s
+=322J
 -----END PGP SIGNATURE-----
 
---eS1VfoAplU8hbCPA--
+--YBZtlKTDrhBF+VTv--
