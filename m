@@ -1,41 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DDB070BED
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 63E1570C27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 12:30:45 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id ho1so5694408wib.16
+	Tue, 12 Aug 2014 12:44:42 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id c41so7385242yho.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 05:30:46 -0700 (PDT)
+	Tue, 12 Aug 2014 05:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=kqw9XLxwoYwk9aCbwlyer7iR4dDl9DWX/viIbp5f/jE=;
-	b=0Yt/NOhWru/gRgwN9GkfxvdTNR5d/UvnLNoEcl52HsSPyhQOAXnS0RBEw4xdaPqafh
-	1ovLj1DSr1GGwyUNk/8S9B0pT44dJ4HUOsjbPbTFsGqz+YCc6phNR1HPX4hPGO5v50nG
-	oEiqKCch1DV4GSKIHT5TLNfy6jk9OqYwM6riHaJFKHv+4/aRjcwdLnHbyfV8eBR4S1sQ
-	szYXH2C35GCv/mokkjFQZ67Zi6GNvZ6a1M+MpSEdPXGw2kuCWzQGBW/XlX0aCM3v3w2c
-	ovSrMKnfQfHZih7OYsyrgnlzapouvDKrDWSMWgjUi9+iEP8+L+vvYLe0Bxf0NGDEOkcE
-	FaYg==
-X-Received: by 10.180.74.240 with SMTP id x16mr32440597wiv.13.1407846646234;
-	Tue, 12 Aug 2014 05:30:46 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	r1sm55742561wia.21.2014.08.12.05.30.45 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 05:30:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Aug 2014 14:31:18 +0200
-Message-Id: <08c6c87275ce97d7dd05bb0d10723f614731847a.1407846579.git.Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
-In-Reply-To: <cover.1407846579.git.Martin.Jansa@gmail.com>
-References: <cover.1407846579.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1407846579.git.Martin.Jansa@gmail.com>
-References: <cover.1407846579.git.Martin.Jansa@gmail.com>
-Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [dora][PATCH] 2/2] glmark2: Add virtual/libx11 dependency
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=fFLVQPTjBusFClfNynI7C2s3eBYnPlSfQYL/QRTW13c=;
+	b=yXAxEP2UP8eM/rEnN3MUrVn6sXOA7Q1PihpNuZJWQ9kIhDvcenPNAF8GhNf08ybZiT
+	PfYnqcKUlUILd11k0rOzTP7ZIyiC8v9u2zHCxLuqPVLyLcO4TrXKT2bRUX58Ke/m5MRb
+	MGBkj5IYLRq6eDMeUtAKCkdA7SLXrnBVP30A7QPKl7ZKkqb97rWsTzcqYDvDOImjqIER
+	m5AjsZ2nkbb/Z8h5a1aj9TUJsF69LHrxJ/u9YbFneyHsSq6MVT3vppQ0m7FONtJ7xo6r
+	gtX7P6/GPI9CW7K/bML3t4r7g7DvA81ZHiUM7MbX/EGD7qtRLHUztmE4Dd2INnOtG3bG
+	7Pqw==
+MIME-Version: 1.0
+X-Received: by 10.236.31.135 with SMTP id m7mr53945651yha.104.1407847484093;
+	Tue, 12 Aug 2014 05:44:44 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Tue, 12 Aug 2014 05:44:44 -0700 (PDT)
+In-Reply-To: <cover.1407846175.git.Martin.Jansa@gmail.com>
+References: <cover.1407846175.git.Martin.Jansa@gmail.com>
+Date: Tue, 12 Aug 2014 09:44:44 -0300
+X-Google-Sender-Auth: RtKBrQyJng6mJs3x2zkCmAK03yc
+Message-ID: <CAP9ODKoypiVSqwgCwWO4h9UFoQSSY12UYvXgWc2A2727FuhMVg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [daisy][PATCH 0/5] small build fixes for daisy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,31 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 12:30:48 -0000
+X-List-Received-Date: Tue, 12 Aug 2014 12:44:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* without it, do_configure fails:
-  | Checking for 'x11'                       : not found
-  | The configuration failed
+On Tue, Aug 12, 2014 at 9:25 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Martin Jansa (5):
+>   sethdlc: Set MACHINE_ARCH, because of virtual/kernel dependency
+>   ktap: Set MACHINE_ARCH because of ktap-module runtime dependency
+>   glmark2: Add virtual/libx11 dependency
+>   irssi: add --with-ncurses option
+>   libgc: add PACKAGECONFIG for libatomic-ops
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
-index 9edee14..fbc402b 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
-@@ -8,7 +8,7 @@ LICENSE = "GPLv3+ & SGIv1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
- 
--DEPENDS = "libpng12 jpeg"
-+DEPENDS = "libpng12 jpeg virtual/libx11"
- 
- SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
- 
 -- 
-2.0.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
