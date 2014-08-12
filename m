@@ -1,35 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FD4570C27
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DDB070BED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 12:30:42 +0000 (UTC)
-Received: by mail-wg0-f46.google.com with SMTP id m15so9836148wgh.17
+	Tue, 12 Aug 2014 12:30:45 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id ho1so5694408wib.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 05:30:43 -0700 (PDT)
+	Tue, 12 Aug 2014 05:30:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=h3A16hWzFCtW3fhAk8xdiAYGFJAwBh5W8gNMvguGDb0=;
-	b=XhikrjNOtqfj84qfEbQJoK/mfn+bDUJd6s828x9oywodPL1GnZZUD3R68ojB0LL0XQ
-	FVfcfyid/wEyLT2sqeJOyGn6McUcleNEdYWzUSaS127gQrfj6pB3X7TeLJ5Wfkds2MaO
-	MDfRO1tSmX9XkF1sAF4OZJvaU+GZHeEnrVojwQo0kHOfwTKyeRsupFH1UGWawTKvFQkH
-	KT+2Jg30SPo8OkySBJn2LWdNkmCN3jtEpVBUqQ2blCiNiowV1kY09MNQlejUjXxkE0jw
-	NSx/KAOKJDduo3NQkPByQJyqaY3EjjSTBBTg/E8k91AktiJz0aIGNE1htzQrUu6ga3Jm
-	G+lw==
-X-Received: by 10.194.19.165 with SMTP id g5mr4975822wje.65.1407846643625;
-	Tue, 12 Aug 2014 05:30:43 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:in-reply-to:references;
+	bh=kqw9XLxwoYwk9aCbwlyer7iR4dDl9DWX/viIbp5f/jE=;
+	b=0Yt/NOhWru/gRgwN9GkfxvdTNR5d/UvnLNoEcl52HsSPyhQOAXnS0RBEw4xdaPqafh
+	1ovLj1DSr1GGwyUNk/8S9B0pT44dJ4HUOsjbPbTFsGqz+YCc6phNR1HPX4hPGO5v50nG
+	oEiqKCch1DV4GSKIHT5TLNfy6jk9OqYwM6riHaJFKHv+4/aRjcwdLnHbyfV8eBR4S1sQ
+	szYXH2C35GCv/mokkjFQZ67Zi6GNvZ6a1M+MpSEdPXGw2kuCWzQGBW/XlX0aCM3v3w2c
+	ovSrMKnfQfHZih7OYsyrgnlzapouvDKrDWSMWgjUi9+iEP8+L+vvYLe0Bxf0NGDEOkcE
+	FaYg==
+X-Received: by 10.180.74.240 with SMTP id x16mr32440597wiv.13.1407846646234;
+	Tue, 12 Aug 2014 05:30:46 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o2sm55716982wij.24.2014.08.12.05.30.42 for <multiple recipients>
+	r1sm55742561wia.21.2014.08.12.05.30.45 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 05:30:43 -0700 (PDT)
+	Tue, 12 Aug 2014 05:30:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Aug 2014 14:31:16 +0200
-Message-Id: <cover.1407846579.git.Martin.Jansa@gmail.com>
+Date: Tue, 12 Aug 2014 14:31:18 +0200
+Message-Id: <08c6c87275ce97d7dd05bb0d10723f614731847a.1407846579.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
+In-Reply-To: <cover.1407846579.git.Martin.Jansa@gmail.com>
+References: <cover.1407846579.git.Martin.Jansa@gmail.com>
+In-Reply-To: <cover.1407846579.git.Martin.Jansa@gmail.com>
+References: <cover.1407846579.git.Martin.Jansa@gmail.com>
 Cc: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-Subject: [dora][PATCH] 0/2] Small build fixes for dora
+Subject: [dora][PATCH] 2/2] glmark2: Add virtual/libx11 dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,25 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 12:30:47 -0000
+X-List-Received-Date: Tue, 12 Aug 2014 12:30:48 -0000
 
-The following changes since commit ee173678383683e972c7d4d6f0ef5790bfa50274:
+* without it, do_configure fails:
+  | Checking for 'x11'                       : not found
+  | The configuration failed
 
-  cloud9: Fix branch param (2014-04-20 15:41:44 +0200)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib 08c6c87275ce97d7dd05bb0d10723f614731847a
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/dora-backports
-
-Martin Jansa (2):
-  daq: explicitly disable nfq and ipq modules
-  glmark2: Add virtual/libx11 dependency
-
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
  meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb | 2 +-
- meta-oe/recipes-connectivity/daq/daq_2.0.1.bb        | 7 ++++++-
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+index 9edee14..fbc402b 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3+ & SGIv1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
+ 
+-DEPENDS = "libpng12 jpeg"
++DEPENDS = "libpng12 jpeg virtual/libx11"
+ 
+ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
+ 
 -- 
 2.0.4
 
