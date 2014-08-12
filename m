@@ -1,38 +1,36 @@
 Return-Path: <sujith.h@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E40FF65E1B
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 2240770C8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 14:05:25 +0000 (UTC)
-Received: by mail-qg0-f49.google.com with SMTP id j107so9590757qga.36
+	Tue, 12 Aug 2014 14:06:19 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id fa1so13073406pad.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 07:05:26 -0700 (PDT)
+	Tue, 12 Aug 2014 07:06:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=0wRjhcmPDbcG2qaqajMNbEwXd3w+rWEfGhVYphZwRdI=;
-	b=cxdk6yrxMCbSSJfZ3D8cUJBcLcvln5ye8rcZRvFH3VFTuF+xFze/WtryzTPrGOcFoF
-	+HLm4JMLRY7kbMUn0MtRPVeVjWWKVGSUvfnpG/1QM+eKgc0hnE4mImw7DUI1PZNDVD8A
-	/OSmYI9i+laheWzOSZbx0Nu6Kq2DafxPDxXCzTD6A9z+XJmhlj2ogIlTvwr/D7OYifKm
-	BZNQBR07DtFFCNvyaQPJ6uwOh47+q1cJpNKls9Ylct3qwFYqgFzBxh1nOLOSqZBpzd/n
-	1E6VQNxNF0uh2Cz6Krt5CybVw/e5gj/9H8hy3S0Lwcu+UmSw63wTp0n2DAGV8Jz/9fBF
-	5Tcg==
-X-Received: by 10.224.21.9 with SMTP id h9mr6797547qab.67.1407852326563; Tue,
-	12 Aug 2014 07:05:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.41.148 with HTTP; Tue, 12 Aug 2014 07:05:06 -0700 (PDT)
-In-Reply-To: <1607625.zbYtdvxeAh@peggleto-mobl5.ger.corp.intel.com>
-References: <1407849496-25893-1-git-send-email-sujith.h@gmail.com>
-	<1607625.zbYtdvxeAh@peggleto-mobl5.ger.corp.intel.com>
-From: sujith h <sujith.h@gmail.com>
-Date: Tue, 12 Aug 2014 19:35:06 +0530
-Message-ID: <CADyYWLmriwUJ7fChUkUouX6M4esKNgM+oy7UD9E=3AFwC=NvCg@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	h=from:to:cc:subject:date:message-id;
+	bh=WhJWbnJrjf9viRkWEkVPH1LgqBXMT1ZNY7A1jJUz2NY=;
+	b=z7U56rLjy8fg9SsmS4vLgEgazNejQ+8RdfKKLeXti4VyFD3xTaPVLben2KDhEudEoR
+	xO3NqPdnKeFY3v7XoaGyDUq2iyXh+DUGHCVDYOHCtxOeQnHEOC7S7EfdQVi5j9wUiWcl
+	3OP2Z1vBYihDnB1ppBkHQdjb6oEq5JC/RRe7gqBg/7ys++FimEh2FtDyVHxXVNLzg2/T
+	z5LeEhzIVhN4zZcrpSFpkkLBm/kRKvY3LkBd6pk59RICCcztagbKe+UYoxlYYohe8D64
+	WBLjKNW3dA+XPr3hhkMhysZnlXgN5+zorm3rUVYKdL9KGkrn0m06oXnE2yz+3SUPr4j6
+	4eyA==
+X-Received: by 10.70.101.201 with SMTP id fi9mr4592681pdb.125.1407852380308;
+	Tue, 12 Aug 2014 07:06:20 -0700 (PDT)
+Received: from linux-z8xt.inp.mentorg.com ([139.181.35.34])
+	by mx.google.com with ESMTPSA id hk7sm16664256pdb.4.2014.08.12.07.06.16
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Aug 2014 07:06:18 -0700 (PDT)
+From: Sujith H <sujith.h@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Aug 2014 19:31:50 +0530
+Message-Id: <1407852110-26705-1-git-send-email-sujith.h@gmail.com>
+X-Mailer: git-send-email 1.8.4
 Cc: Sujith H <Sujith_Haridasan@mentor.com>,
-	Christopher Larson <chris_larson@mentor.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] pyparted: Add recipe
+	Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-python][PATCH] pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,103 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 14:05:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Aug 2014 14:06:20 -0000
 
-Hi Paul,
+From: Sujith H <Sujith_Haridasan@mentor.com>
 
+This recipe will provide a set of Python modules that
+provide Python programmers an interface to libparted,
+the GNU parted library for disk partitioning and filesystem
+manipulation.
 
-On Tue, Aug 12, 2014 at 7:29 PM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+---
+ meta-python/recipes-extended/pyparted/pyparted_3.9.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-extended/pyparted/pyparted_3.9.bb
 
-> Hi Sujith,
->
-> Just some minor corrections:
->
-> On Tuesday 12 August 2014 18:48:16 Sujith H wrote:
-> > From: Sujith H <Sujith_Haridasan@mentor.com>
-> >
-> > This recipe will provide a set of Python modules that
-> > provide Python programmers an interface to libparted,
-> > the GNU parted library for disk partitioning and filesystem
-> > manipulation.
-> >
-> > Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> > Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
-> > ---
-> >  .../recipes-extended/pyparted/pyparted_3.9.bb       | 21
-> > +++++++++++++++++++++ 1 file changed, 21 insertions(+)
-> >  create mode 100644 meta-python/recipes-extended/pyparted/
-> pyparted_3.9.bb
-> >
-> > diff --git a/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
-> > b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb new file mode
-> > 100644
-> > index 0000000..7b284cc
-> > --- /dev/null
-> > +++ b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
-> > @@ -0,0 +1,21 @@
-> > +DESCRIPTION =3D "pyparted is a set of Python modules that provide Pyth=
-on
-> programmers \
-> > +an interface to libparted, the GNU parted library for disk partitionin=
-g
-> and \
-> > +filesystem manipulation."
-> > +SUMMARY =3D "Python bindings for libparted"
-> > +HOMEPAGE =3D "https://fedorahosted.org/pyparted/"
-> > +SCM_URI =3D "git://git.fedorahosted.org/pyparted.git"
->
-> SCM_URI isn't a standard variable and doesn't seem to be used anywhere
-> else in
-> the recipe - is this expected to be used somewhere?
->
->
-Ok I will drop SCM_URI. No its not used anywhere in the recipe.
+diff --git a/meta-python/recipes-extended/pyparted/pyparted_3.9.bb b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+new file mode 100644
+index 0000000..79ebe02
+--- /dev/null
++++ b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
++an interface to libparted, the GNU parted library for disk partitioning and \
++filesystem manipulation."
++SUMMARY = "Python bindings for libparted"
++HOMEPAGE = "https://fedorahosted.org/pyparted/"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \
++"
++DEPENDS += "parted"
++
++SRC_URI = "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
++SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
++SRC_URI[sha256sum] = "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
++
++inherit distutils
++
++BBCLASSEXTEND += "native"
+-- 
+1.8.4
 
->  > +LICENSE =3D "GPL-2.0+"
-> > +LIC_FILES_CHKSUM =3D "\
-> > +    file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c28b \
-> > +
->  file://src/_pedmodule.c;startline=3D10;endline=3D22;md5=3D70c62bd73782a0=
-3f56a0571a9f08ea46
-> \
-> > +"
-> > +DEPENDS +=3D "parted"
-> > +PR =3D "r0"
->
-> Please drop this PR value, it's redundant.
->
-
-Sure I will drop PR value too.
-
->
-> > +SRC_URI =3D
-> > "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
-> > +SRC_URI[md5sum] =3D "f16c7ef7f5fa4a43fcb2a4654b487e39"
-> > +SRC_URI[sha256sum] =3D
-> > "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb" +
-> > +inherit distutils
-> > +
-> > +BBCLASSEXTEND +=3D "native"
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
->
-
-
-
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
 
