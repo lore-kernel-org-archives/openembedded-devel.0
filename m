@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 31FDB609BF
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 15CC770C27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 11:45:01 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id d1so5632732wiv.9
+	Tue, 12 Aug 2014 11:50:55 +0000 (UTC)
+Received: by mail-we0-f175.google.com with SMTP id t60so9640874wes.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 04:45:02 -0700 (PDT)
+	Tue, 12 Aug 2014 04:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3f7+9iEkAJbpQhjF/dNP3H7WBrDUMLqFQCRghpJXn64=;
-	b=s9Cp84NvUk2xD9JF3mJnYd+kvhUG/HDi+g8GPa2ongKdXQvPJxxxeSkyIQBQOFVk7l
-	MdN/tp7GjHdND3Rb3G3c50uqkOdQz1WMiet5wUlGW/IrBfXk24ka1bn2N8Bj8Gmzi7Rj
-	rjks5dvfBQqr3c6AuAb5FPxkt9R3JNpo2bWoK7DdbMXLxhhh2alDlc3B428H/rBJN7Wb
-	y3tELF7T95iNS5zGntWwA0ZOsT70yOUJvF5Dw+qB7dV/wO/9rfZiH40zJx6Y2n+fUfD+
-	EUxi4OSa8PK0Amix9db3AhyTgcrbRQfN/U/eObkfSWi1u3INo1aXObh7ToMKOx8kMDHg
-	/ePg==
-X-Received: by 10.194.219.193 with SMTP id pq1mr4709029wjc.5.1407843902839;
-	Tue, 12 Aug 2014 04:45:02 -0700 (PDT)
+	bh=2ZC573guR2e4N8KPhpTTuTl6p5TR7khe5ZwW+E6ygZs=;
+	b=JB2OrQVun33ziKqeRJgWe15/3UNmtG2GGlRTt4qXs0Bb6e0wP0yBPItb82Di3sF1lW
+	L8nYPV1jPsULYlmfyKFWOlrlOW9ZkzPd4RWigak3BL+N13Tfz+XuH0l6w9BdeMDPnFwm
+	Bh4NcKnPfuxThl8VZLOEpG19qvGiTt/8o7iNREhNc4x5frbBoF9BmtxYWlgpeYKduEDi
+	NLbUsESdV4A6SdmDx/z258b5ztW1uQGOmsgA1Wp5/oUQZNzLHNZYjf0jryyNe846ps/o
+	ucQkwSUYKC5mJCeV4pJhAEs91alOrqfrwnw8njYbOH4kWA9XAI89ChfQ61ga9VAYhsjI
+	PJqQ==
+X-Received: by 10.194.90.201 with SMTP id by9mr4784185wjb.94.1407844256606;
+	Tue, 12 Aug 2014 04:50:56 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	dc3sm55365324wib.9.2014.08.12.04.45.01 for <multiple recipients>
+	10sm8753449wjx.26.2014.08.12.04.50.55
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 04:45:01 -0700 (PDT)
+	Tue, 12 Aug 2014 04:50:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 12 Aug 2014 13:45:38 +0200
+Date: Tue, 12 Aug 2014 13:51:32 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140812114538.GJ14848@jama>
-References: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
+Message-ID: <20140812115132.GK14848@jama>
+References: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
+In-Reply-To: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
-Subject: Re: [meta-oe][PATCH] rabbitmq-c: add recipe
+Subject: Re: [PATCH][meta-networking] ifenslave: add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,80 +48,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 11:45:09 -0000
-X-Groupsio-MsgNum: 51616
+X-List-Received-Date: Tue, 12 Aug 2014 11:50:58 -0000
+X-Groupsio-MsgNum: 51617
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="YBZtlKTDrhBF+VTv"
+	protocol="application/pgp-signature"; boundary="Aheoz1xTfOXEcBpP"
 Content-Disposition: inline
 
---YBZtlKTDrhBF+VTv
+--Aheoz1xTfOXEcBpP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 11, 2014 at 04:33:56PM +0200, Maciej Borzecki wrote:
-> rabbitmq-c is a C library providing an implementation of AMQP client for
-> use with v2.0+ of the RabbitMQ broker
+On Tue, Aug 12, 2014 at 03:01:04PM +0800, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
 >=20
-> Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../rabbitmq-c/rabbitmq-c_0.5.0.bb                 | 22 ++++++++++++++++=
+>  .../recipes-support/ifenslave/ifenslave_1.1.0.bb    |   19 +++++++++++++=
 ++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.=
-5.0.bb
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/ifenslave/ifenslave_1=
+=2E1.0.bb
 >=20
-> diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb =
-b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
+> diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb=
+ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
 > new file mode 100644
-> index 0000000..d8e3189
+> index 0000000..d6252a9
 > --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION =3D "A C-language AMQP client library for use with v2.0+ of =
-the RabbitMQ broker"
-> +HOMEPAGE =3D "https://github.com/alanxz/rabbitmq-c"
-> +LIC_FILES_CHKSUM =3D "file://${S}/LICENSE-MIT;md5=3D6b7424f9db80cfb11fdd=
-5c980b583f53"
-> +LICENSE =3D "MIT"
-> +
-> +SRC_URI =3D "https://github.com/alanxz/rabbitmq-c/releases/download/v${P=
-V}/rabbitmq-c-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "b1f902c658c772cda464754678d8deb6"
-> +SRC_URI[sha256sum] =3D "53702ea2ab809af0f923e387458e2cad191d9549f5041003=
-5fe82ce5e6ccc4fa"
-> +
-> +PR =3D "r0"
+> +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY =3D "Configure network interfaces for parallel routing"
 
-^ dropped when cherry-picking to master-next
+^ dropped in master-next
 
+> +DESCRIPTION =3D "Configure network interfaces for parallel routing"
+> +HOMEPAGE =3D "http://www.linuxfoundation.org/collaborate/workgroups/netw=
+orking/bonding"
+> +SECTION =3D "network"
+> +LICENSE =3D "GPLv2"
 > +
-> +S =3D "${WORKDIR}/rabbitmq-c-${PV}"
-
-^ dropped when cherry-picking to master-next
-
+> +SRC_URI =3D "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-=
+2.6_${PV}.orig.tar.gz"
 > +
-> +EXTRA_OECONF =3D "--disable-examples --enable-tools"
+> +do_compile() {
+> +    ${CC} ifenslave.c -o ifenslave
+> +}
+> +do_install() {
+> +    install -d "${D}${sbindir}"
+> +    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
+> +}
 > +
-> +inherit autotools pkgconfig
-> +
-> +PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-tools ${PN}"
 
-Why are you dropping -doc, -staticdev, -locale and other default
-packages?
+^ moved next to LICENSE in master-next
 
-PACKAGE_BEFORE_PN +=3D "${PN}-tools"
+> +LIC_FILES_CHKSUM =3D "file://ifenslave.c;beginline=3D8;endline=3D12;md5=
+=3Da9f0bd2324cdc1b36d1f44f0e643a62a"
+> +SRC_URI[md5sum] =3D "56126cd1013cefe0ce6f81613e677bdd"
+> +SRC_URI[sha256sum] =3D "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0f=
+d5b3fd147ccd3041"
 
-should be enough, will do in master-next, but please ack
-
-> +
-> +DEPENDS =3D "popt openssl"
-> +
-> +FILES_${PN}-tools =3D "${bindir}"
-> \ No newline at end of file
+^ moved next to SRC_URI in master-next
 > --=20
-> 1.9.0
+> 1.7.10.4
 >=20
 > --=20
 > _______________________________________________
@@ -132,16 +120,16 @@ should be enough, will do in master-next, but please ack
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---YBZtlKTDrhBF+VTv
+--Aheoz1xTfOXEcBpP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPp/mIACgkQN1Ujt2V2gBxwFQCgkdsNwXodu1i+pbe+VXPwQLbi
-1wwAoJpW2bxR1OMbFx9H8l4aBVINZB8s
-=322J
+iEYEARECAAYFAlPp/8QACgkQN1Ujt2V2gBzgeACgr/EJcW4ql8BBPp6pYsnzdCYC
+Pt8AoLr986i0NzqRYVzFOY8Rv7hb3mcm
+=X1AY
 -----END PGP SIGNATURE-----
 
---YBZtlKTDrhBF+VTv--
+--Aheoz1xTfOXEcBpP--
