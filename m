@@ -1,42 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 35B7B65E1B
+Return-Path: <lchristina26@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E71865DB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 14:09:36 +0000 (UTC)
-Received: by mail-wi0-f171.google.com with SMTP id hi2so5909429wib.4
+	Tue, 12 Aug 2014 16:03:30 +0000 (UTC)
+Received: by mail-ig0-f179.google.com with SMTP id h18so7161548igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 07:09:37 -0700 (PDT)
+	Tue, 12 Aug 2014 09:03:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=LjtgfoMNOK1qyRuQl1PfYVKDJA+8toK4HnP1mGXkDbI=;
-	b=TeeQv9EuifDbjoxz8ZWE377X8XaRxkVZhfWPA4UTeeuqb6ou89t5SYrYnA1t1/q6W+
-	CIq0mFMi/KCMzpZ3Bg+ANjhKCRtHoLhaI0H1UQw0W8V3SIMjBmCZ1o3cvSjfhYfMZfJX
-	gvDHuVMIY3tuPpwIUuvQQE4sfftX3XmHBiKUsSSCuDXEATiBDJ6OhZPzSsJbn1cvjLy+
-	xwEG0+iMSUu0UE32bObcm/GRQXsKMrGS91cOxBKyAtHutHBJwMS4t/TbekRmmgqCaEdT
-	pFjqqMkjwiAObUISLpiEhKtUmdtNlbJ6KM7iapjHic8Cg5xjq+e0JY6PTRzvty2m3HaG
-	ukxw==
-X-Received: by 10.180.75.49 with SMTP id z17mr32319975wiv.80.1407852577646;
-	Tue, 12 Aug 2014 07:09:37 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	u10sm56639246wix.14.2014.08.12.07.09.36 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 07:09:36 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 12 Aug 2014 16:10:13 +0200
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20140812141013.GP14848@jama>
-References: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
-	<20140812115132.GK14848@jama>
-	<2509223.ytjg6V1x30@peggleto-mobl5.ger.corp.intel.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=tZ0eZV8BQabZU1yc8BqxHf9eO6H7zEXAQWSYiIF99qs=;
+	b=vDbL7lQV0pJQ73jVKAgKoPcFyCGUqjxYcoZuK1NWxa8qQJfYq8NQOlUZ8ERFm41b0T
+	TjzzApUCxGxaKyE0jTdG+tw6oRHDU8pVha9DCKSyxZDWLPT5ClkX1UCDw/EJse2DyLyS
+	50b39liCusjle5iYam4fHNyzwVCXoAfdylisL10yo1L312AFFi6Q2WiFEQ4SpKwOHa1u
+	/4eSAUlGfw/OUgAt6D9Lp7H8PLeB18+7jBkebH5GI8GyRma1VBXH8lmoUPAerDq1JjJ+
+	UDDnbVxyNf5poT9HDKB9lZhTl23Uxp21gOBTHPtGlCjQB8KjJtMk8jRuB/BYNqZLP1J2
+	Gghg==
 MIME-Version: 1.0
-In-Reply-To: <2509223.ytjg6V1x30@peggleto-mobl5.ger.corp.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] ifenslave: add recipes
+X-Received: by 10.42.247.137 with SMTP id mc9mr41824398icb.13.1407859411952;
+	Tue, 12 Aug 2014 09:03:31 -0700 (PDT)
+Sender: lchristina26@gmail.com
+Received: by 10.64.11.102 with HTTP; Tue, 12 Aug 2014 09:03:31 -0700 (PDT)
+In-Reply-To: <20140812111432.GC14848@jama>
+References: <BLU436-SMTP782D203C1A9AF2454095C9D6ED0@phx.gbl>
+	<20140812111432.GC14848@jama>
+Date: Tue, 12 Aug 2014 10:03:31 -0600
+X-Google-Sender-Auth: Y8oehPMbIzZpdLh-JaUw1Eb0SJw
+Message-ID: <CAL0pqZ0MCfiH4wHuCDsVTab9vVJa2fQ0DFb2PB06s40YW7aevQ@mail.gmail.com>
+From: Leah <leah@wolfssl.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] 'Update cyassl bb file'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,91 +45,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 14:09:43 -0000
-X-Groupsio-MsgNum: 51635
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jIondxHzhZPVGMQ8"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Aug 2014 16:03:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
---jIondxHzhZPVGMQ8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I submitted a recipe to be considered for adding to meta-oe and was told to
+make changes. I made the changes and resubmitted and was told "you cannot
+break upgrade path (make version going backwards) just to remove 2
+comments." I am not sure how else to go about getting my recipe added. Any
+assistance would be greatly appreciated.
 
-On Tue, Aug 12, 2014 at 02:55:32PM +0100, Paul Eggleton wrote:
-> On Tuesday 12 August 2014 13:51:32 Martin Jansa wrote:
-> > On Tue, Aug 12, 2014 at 03:01:04PM +0800, rongqing.li@windriver.com wro=
-te:
-> > > From: Roy Li <rongqing.li@windriver.com>
-> > >=20
-> > > Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> > > ---
-> > >=20
-> > >  .../recipes-support/ifenslave/ifenslave_1.1.0.bb    |   19
-> > >  +++++++++++++++++++ 1 file changed, 19 insertions(+)
-> > >  create mode 100644
-> > >  meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb>=20
-> > > diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.=
-0.bb
-> > > b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb new fi=
-le
-> > > mode 100644
-> > > index 0000000..d6252a9
-> > > --- /dev/null
-> > > +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> > > @@ -0,0 +1,19 @@
-> > > +SUMMARY =3D "Configure network interfaces for parallel routing"
-> >=20
-> > ^ dropped in master-next
-> >=20
-> > > +DESCRIPTION =3D "Configure network interfaces for parallel routing"
->=20
-> I guess you meant DESCRIPTION (which is the same as SUMMARY) was dropped.
->=20
-> > > +HOMEPAGE =3D
-> > > "http://www.linuxfoundation.org/collaborate/workgroups/networking/bon=
-ding
-> > > " +SECTION =3D "network"
-> > > +LICENSE =3D "GPLv2"
-> > > +
-> > > +SRC_URI =3D
-> > > "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-2.6_${PV}=
-=2Eori
-> > > g.tar.gz" +
-> > > +do_compile() {
-> > > +    ${CC} ifenslave.c -o ifenslave
-> > > +}
-> > > +do_install() {
-> > > +    install -d "${D}${sbindir}"
-> > > +    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
-> > > +}
-> > > +
-> >=20
-> > ^ moved next to LICENSE in master-next
-> >=20
-> > > +LIC_FILES_CHKSUM =3D
-> > > "file://ifenslave.c;beginline=3D8;endline=3D12;md5=3Da9f0bd2324cdc1b3=
-6d1f44f0e6
-> > > 43a62a" +SRC_URI[md5sum] =3D "56126cd1013cefe0ce6f81613e677bdd"
->=20
-> Ditto here, LIC_FILES_CHKSUM was moved, right?
+~Leah
 
-Right for both of them, for some reason, my vim/screen got confused and
-all my edits were shown on different line, sorry for confusion.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+On Tue, Aug 12, 2014 at 5:14 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
---jIondxHzhZPVGMQ8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> On Mon, Aug 11, 2014 at 11:32:36AM -0600, lchristina26 wrote:
+> > Signed-off-by: lchristina26 <lchristina26@hotmail.com>
+> > ---
+> >  meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb | 5 -----
+> >  1 file changed, 5 deletions(-)
+> >
+> > diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> > index accc144..441d321 100644
+> > --- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> > +++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> > @@ -9,8 +9,6 @@ SECTION = "libs/network"
+> >  LICENSE = "GPLv2"
+> >  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> > -PR = "r1"
+> > -
+>
+> NAK ^ you cannot break upgrade path (make version going backwards) just to
+> remove 2 comments.
+>
+> >  SRC_URI = "http://www.yassl.com/cyassl-${PV}.zip"
+> >
+> >
+> > @@ -21,6 +19,3 @@ S = "${WORKDIR}/${PN}-${PV}"
+> >
+> >  inherit autotools
+> >
+> > -# Detect and build with correct endianness
+> > -# CFLAGS += "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '',
+> '-DBIG_ENDIAN_ORDER', d)}"
+> > -
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlPqIEUACgkQN1Ujt2V2gByOAQCfbhQKKtqLSkLXNIQWaUmfZv/7
-eYMAoJ51BqKwxt4XPbV7244gdKfDzJKs
-=TunT
------END PGP SIGNATURE-----
+-- 
 
---jIondxHzhZPVGMQ8--
+Leah Thompson
+www.wolfssl.com
+leah@wolfssl.com
+406-570-1389
+Skype: lchristina26
+
