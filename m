@@ -1,40 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
-	[74.125.82.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 15CC770C27
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id BD370609AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 11:50:55 +0000 (UTC)
-Received: by mail-we0-f175.google.com with SMTP id t60so9640874wes.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 04:50:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2ZC573guR2e4N8KPhpTTuTl6p5TR7khe5ZwW+E6ygZs=;
-	b=JB2OrQVun33ziKqeRJgWe15/3UNmtG2GGlRTt4qXs0Bb6e0wP0yBPItb82Di3sF1lW
-	L8nYPV1jPsULYlmfyKFWOlrlOW9ZkzPd4RWigak3BL+N13Tfz+XuH0l6w9BdeMDPnFwm
-	Bh4NcKnPfuxThl8VZLOEpG19qvGiTt/8o7iNREhNc4x5frbBoF9BmtxYWlgpeYKduEDi
-	NLbUsESdV4A6SdmDx/z258b5ztW1uQGOmsgA1Wp5/oUQZNzLHNZYjf0jryyNe846ps/o
-	ucQkwSUYKC5mJCeV4pJhAEs91alOrqfrwnw8njYbOH4kWA9XAI89ChfQ61ga9VAYhsjI
-	PJqQ==
-X-Received: by 10.194.90.201 with SMTP id by9mr4784185wjb.94.1407844256606;
-	Tue, 12 Aug 2014 04:50:56 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	10sm8753449wjx.26.2014.08.12.04.50.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 04:50:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 12 Aug 2014 13:51:32 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140812115132.GK14848@jama>
-References: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
+	Tue, 12 Aug 2014 12:05:07 +0000 (UTC)
+Received: from localhost.localdomain (unknown [78.10.193.111])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 5D8F42B022A4;
+	Tue, 12 Aug 2014 14:05:06 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 12 Aug 2014 14:05:05 +0200
+Message-ID: <1698797.3VM4VhPSOi@localhost.localdomain>
+User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <20140812114538.GJ14848@jama>
+References: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
+	<20140812114538.GJ14848@jama>
 MIME-Version: 1.0
-In-Reply-To: <1407826864-32606-1-git-send-email-rongqing.li@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH][meta-networking] ifenslave: add recipes
+Cc: maciek.borzecki@gmail.com, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] rabbitmq-c: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,88 +30,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Aug 2014 11:50:58 -0000
-X-Groupsio-MsgNum: 51617
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Aheoz1xTfOXEcBpP"
-Content-Disposition: inline
-
---Aheoz1xTfOXEcBpP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Aug 2014 12:05:08 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On Tue, Aug 12, 2014 at 03:01:04PM +0800, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
+On Tuesday 12 of August 2014 13:45:38 Martin Jansa wrote:
+> On Mon, Aug 11, 2014 at 04:33:56PM +0200, Maciej Borzecki wrote:
+> > rabbitmq-c is a C library providing an implementation of AMQP clien=
+t for
+> > use with v2.0+ of the RabbitMQ broker
+> >=20
+> > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> > ---
+> >=20
+> >  .../rabbitmq-c/rabbitmq-c_0.5.0.bb                 | 22
+> >  ++++++++++++++++++++++ 1 file changed, 22 insertions(+)
+> >  create mode 100644
+> >  meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb>=20
+> > diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5=
+.0.bb
+> > b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb new f=
+ile
+> > mode 100644
+> > index 0000000..d8e3189
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
+> > @@ -0,0 +1,22 @@
+> > +DESCRIPTION =3D "A C-language AMQP client library for use with v2.=
+0+ of the
+> > RabbitMQ broker" +HOMEPAGE =3D "https://github.com/alanxz/rabbitmq-=
+c"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://${S}/LICENSE-MIT;md5=3D6b7424f9db80cfb11fdd5c980b583f53" +L=
+ICENSE =3D
+> > "MIT"
+> > +
+> > +SRC_URI =3D
+> > "https://github.com/alanxz/rabbitmq-c/releases/download/v${PV}/rabb=
+itmq-c
+> > -${PV}.tar.gz" +SRC_URI[md5sum] =3D "b1f902c658c772cda464754678d8de=
+b6"
+> > +SRC_URI[sha256sum] =3D
+> > "53702ea2ab809af0f923e387458e2cad191d9549f50410035fe82ce5e6ccc4fa" =
++
+> > +PR =3D "r0"
 >=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  .../recipes-support/ifenslave/ifenslave_1.1.0.bb    |   19 +++++++++++++=
-++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-networking/recipes-support/ifenslave/ifenslave_1=
-=2E1.0.bb
+> ^ dropped when cherry-picking to master-next
 >=20
-> diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb=
- b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> new file mode 100644
-> index 0000000..d6252a9
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY =3D "Configure network interfaces for parallel routing"
-
-^ dropped in master-next
-
-> +DESCRIPTION =3D "Configure network interfaces for parallel routing"
-> +HOMEPAGE =3D "http://www.linuxfoundation.org/collaborate/workgroups/netw=
-orking/bonding"
-> +SECTION =3D "network"
-> +LICENSE =3D "GPLv2"
-> +
-> +SRC_URI =3D "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-=
-2.6_${PV}.orig.tar.gz"
-> +
-> +do_compile() {
-> +    ${CC} ifenslave.c -o ifenslave
-> +}
-> +do_install() {
-> +    install -d "${D}${sbindir}"
-> +    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
-> +}
-> +
-
-^ moved next to LICENSE in master-next
-
-> +LIC_FILES_CHKSUM =3D "file://ifenslave.c;beginline=3D8;endline=3D12;md5=
-=3Da9f0bd2324cdc1b36d1f44f0e643a62a"
-> +SRC_URI[md5sum] =3D "56126cd1013cefe0ce6f81613e677bdd"
-> +SRC_URI[sha256sum] =3D "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0f=
-d5b3fd147ccd3041"
-
-^ moved next to SRC_URI in master-next
-> --=20
-> 1.7.10.4
+> > +
+> > +S =3D "${WORKDIR}/rabbitmq-c-${PV}"
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> ^ dropped when cherry-picking to master-next
+>=20
+> > +
+> > +EXTRA_OECONF =3D "--disable-examples --enable-tools"
+> > +
+> > +inherit autotools pkgconfig
+> > +
+> > +PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-tools ${PN}"
+>=20
+> Why are you dropping -doc, -staticdev, -locale and other default
+> packages?
+>=20
+> PACKAGE_BEFORE_PN +=3D "${PN}-tools"
+Right, this should do the trick. The -doc, -staticdev, -locale are empt=
+y=20
+anyway, but it does make more sense not to remove them from PACKAGES.
+
+I can post an updated patch if that's needed.
+
+>=20
+> should be enough, will do in master-next, but please ack
+>=20
+> > +
+> > +DEPENDS =3D "popt openssl"
+> > +
+> > +FILES_${PN}-tools =3D "${bindir}"
+> > \ No newline at end of file
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+=20
+Maciej Borz=C4=99cki=20
+Senior Software Engineer Open-RnD Sp. z o.o.=20
+www.open-rnd.pl, Facebook, Twitter=20
+mobile: +48 telefon, fax: +48 42 657 9079=20
 
---Aheoz1xTfOXEcBpP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
+awiera=C4=87 chronione prawem lub=20
+poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
+adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
+kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
+zosta=C5=82a otrzymana przypadkowo=20
+zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
+ich. W takim przypadku=20
+uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
+formowanie=20
+nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
+tnej. Dzi=C4=99kujemy.=20
 
-iEYEARECAAYFAlPp/8QACgkQN1Ujt2V2gBzgeACgr/EJcW4ql8BBPp6pYsnzdCYC
-Pt8AoLr986i0NzqRYVzFOY8Rv7hb3mcm
-=X1AY
------END PGP SIGNATURE-----
+This message, including any attachments hereto, may contain privileged =
+or=20
+confidential information and is sent solely for the attention and use o=
+f the=20
+intended addressee(s). If you are not an intended addressee, you may ne=
+ither=20
+use this message nor copy or deliver it to anyone. In such case, you sh=
+ould=20
+immediately destroy this message and kindly notify the sender by reply =
+email.=20
+Thank you. 
 
---Aheoz1xTfOXEcBpP--
