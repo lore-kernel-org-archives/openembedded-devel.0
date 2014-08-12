@@ -1,41 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BEBE70C47
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id A6DC670C8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 12:24:47 +0000 (UTC)
-Received: by mail-wi0-f174.google.com with SMTP id d1so5760653wiv.1
+	Tue, 12 Aug 2014 12:24:44 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id x48so9948865wes.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 05:24:48 -0700 (PDT)
+	Tue, 12 Aug 2014 05:24:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=jLqoFIFXNOuw8AfcPS6Cp+Wb+lDzsfq8rQyCOtmfIVA=;
-	b=P2x7oyFpeyHHVQ7M2vggIQACqxBR9kN40WIhaaS7pzRTC1vW9EQpbN1kLvVVePZyR4
-	sHR53ibqhXSCW+gGfaNAi5fYKn2CzHQJyzMXN2JvY3jTnh8S7qYHRkZwhu9DaVeMtRQi
-	WlLgxekjPM+cbHpKvI6dqwXuBgQmSwCcMSmAqj7+kiMXSuoep8dykUnAdOeVHHOG5bcX
-	hetdvxmYj+2OMk47F3lcJPHz0Va8wKpj/f2yhNulQ08xnseZe3t8PbrL39HEceFhATXj
-	4n4NRtcHHAR4tPx7AHiFzPdBmH85FDKXhVSRRPoaMxXLLr+J63gPm2FDlEp8sNYf6JAi
-	V8fg==
-X-Received: by 10.180.72.146 with SMTP id d18mr26652906wiv.53.1407846288740;
-	Tue, 12 Aug 2014 05:24:48 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=Ej8CM5ub2ZXdVbftwkW/UA9q5as2imdGBJpW4Vf4oWU=;
+	b=EOfAfu8rqCR3w9oott2HNV2tIEgLBILm1tptSUYJutOBZt9K2tuET+PXasBg2SLcn4
+	mfd4/YEREeji22HPKwf4hxo9d0XSbY0t0DRdXHOoLCrLVrziQ7GPtc1WgXjgDmIjUOiA
+	9+TIhL7tA3xpJnY8i01cyZiE+wN2G/XguPS7Cjwr245ISlPISBci1d8WMYUtpZMKi1f7
+	FUB3fw1tB48AxYQZNWbQcb3VM30sq3BUTj9mcrBkA6V1Ve6cRPhB3qrHgz1z7fJaxc8u
+	zJkme5u9icF+Tqqj2VRJt2MT2hy6NYu0fVTzeRAMREZScBApsINF5x/Pa/TtpMm5yIX0
+	iHvA==
+X-Received: by 10.180.99.65 with SMTP id eo1mr27675517wib.12.1407846285833;
+	Tue, 12 Aug 2014 05:24:45 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	h3sm8980513wjn.10.2014.08.12.05.24.47 for <multiple recipients>
+	f6sm8942301wja.25.2014.08.12.05.24.45 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Aug 2014 05:24:48 -0700 (PDT)
+	Tue, 12 Aug 2014 05:24:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Aug 2014 14:25:12 +0200
-Message-Id: <62ff3d8c12d8114416dd1b21b7575a2dd8903f00.1407846175.git.Martin.Jansa@gmail.com>
+Date: Tue, 12 Aug 2014 14:25:10 +0200
+Message-Id: <cover.1407846175.git.Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
-In-Reply-To: <cover.1407846175.git.Martin.Jansa@gmail.com>
-References: <cover.1407846175.git.Martin.Jansa@gmail.com>
-In-Reply-To: <cover.1407846175.git.Martin.Jansa@gmail.com>
-References: <cover.1407846175.git.Martin.Jansa@gmail.com>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [daisy][PATCH 2/5] ktap: Set MACHINE_ARCH because of ktap-module runtime dependency
+Subject: [daisy][PATCH 0/5] small build fixes for daisy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,29 +46,29 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 12 Aug 2014 12:24:49 -0000
 
-* it's possible to exclude ktap-module dependency from siggen, but
-  then we would need to exclude virtual/kernel and that doesn't work
-  we would need to list all posisble providers as
-  ktap->linux-yocto
-  ktap->linux-foo
-  ....
+The following changes since commit 9ee63edfd9c6e5c22ce707770955a5796cde2cfc:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-kernel/ktap/ktap_0.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  ltrace: add PV and PACKAGECONFIG for libunwind (2014-08-12 14:15:26 +0200)
 
-diff --git a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-index 20f94d5..cbdabf8 100644
---- a/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-+++ b/meta-oe/recipes-kernel/ktap/ktap_0.4.bb
-@@ -22,5 +22,5 @@ do_install() {
-     install -m 0755 ${S}/ktap ${D}${bindir}/
- }
- 
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
- RDEPENDS_${PN} = "kernel-module-ktapvm"
--
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib b90153d5981990ea9910c417a868fb26e7e264a4
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=jansa/daisy-backports
+
+Martin Jansa (5):
+  sethdlc: Set MACHINE_ARCH, because of virtual/kernel dependency
+  ktap: Set MACHINE_ARCH because of ktap-module runtime dependency
+  glmark2: Add virtual/libx11 dependency
+  irssi: add --with-ncurses option
+  libgc: add PACKAGECONFIG for libatomic-ops
+
+ meta-networking/recipes-connectivity/sethdlc/sethdlc.bb | 3 ++-
+ meta-oe/recipes-benchmark/glmark2/glmark2_2012.12.bb    | 7 +++++--
+ meta-oe/recipes-connectivity/irssi/irssi_0.8.16-rc1.bb  | 5 +++--
+ meta-oe/recipes-kernel/ktap/ktap_0.4.bb                 | 2 +-
+ meta-oe/recipes-support/libgc/libgc_7.2d.bb             | 4 ++++
+ 5 files changed, 15 insertions(+), 6 deletions(-)
+
 -- 
 2.0.4
 
