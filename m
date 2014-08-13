@@ -1,33 +1,33 @@
-Return-Path: <stephen.arnold42@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id A620465CB2
+Return-Path: <pandey_himanshu80@rediffmail.com>
+Received: from rediffmail.com (unknown [202.137.235.239])
+	by mail.openembedded.org (Postfix) with SMTP id 9376065D54
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 01:30:26 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id bs8so88301wib.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Aug 2014 18:30:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ne3BKvFlr3uLZ61av+Ci/7UmxcxQe6W8tu110HXWwhU=;
-	b=MNOUeaB2ERZfDYgFK4GpCztqD08hzKjfIXdjCG/LvIR0KXfneLG5so/yJwOEbgJXja
-	ExVSacdooGiWJySD2KGxWn3qk99IEOpJEeP1F/NMIQojTgjsKDNbGeOccEsqVswlUoJt
-	ONs0nRLMCjTiF+B9xoMGeA55lBd9cscI6v1PrDlamECZyyF31Zk4NVVwBqX4u7XDSHZ+
-	qlc6qqhlDG5a7Ro+bv+Ut52JL9Uzd68lbI22sTxi02oQglVZkWa1N86hIxsvjn6iWdyj
-	/iybXA0lUEycsniqvaHXJhuWIT6TgLVG4pc7AoEja0GgS/JROif2nbJIcw+7K3YeZdUh
-	N4LA==
+	Wed, 13 Aug 2014 04:57:53 +0000 (UTC)
+Received: (qmail 6087 invoked by uid 510); 13 Aug 2014 04:57:47 -0000
+Comment: DomainKeys? See http://antispam.yahoo.com/domainkeys
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=redf; d=rediffmail.com;
+	b=SQ1Y7F/x1qLms/tOUOnH78KZzi9+BBrRX45M/44e/VD2febO6XQ42b5k5bJhQdwCENJWRkWgmX1IuLkNVKaBaNRZbk4FTLUR9E/cp0X1Om8ESP2Lk7tkCNDmiLYvzeMLBbDxkU8qA38baoptIU4yEsfuMgOXNFUPgH3R7RIXa5A=
+	; 
+x-m-msg: asd54ad564ad7aa6sd5as6d5; a6da7d6asas6dasd77; 5dad65ad5sd;
+X-CTCH-Spam: Unknown
+X-CTCH-VOD: Unknown
+X-CTCH-Flags: : 0
+X-CTCH-RefID: str=0001.0A160204.53EAF04A.0289, ss=1, re=0.000, recu=0.000,
+	reip=0.000, cl=1, cld=1, fgs=0
+X-REDF-OSEN: pandey_himanshu80@rediffmail.com
+Date: 13 Aug 2014 04:57:46 -0000
 MIME-Version: 1.0
-X-Received: by 10.180.37.241 with SMTP id b17mr2115830wik.70.1407893426756;
-	Tue, 12 Aug 2014 18:30:26 -0700 (PDT)
-Received: by 10.194.164.165 with HTTP; Tue, 12 Aug 2014 18:30:26 -0700 (PDT)
-In-Reply-To: <CADJ8CoM1iHzedFROL50wR0GQfZnSeL8sUn_gFb=wdYz8nmChvA@mail.gmail.com>
-References: <CADJ8CoM1iHzedFROL50wR0GQfZnSeL8sUn_gFb=wdYz8nmChvA@mail.gmail.com>
-Date: Tue, 12 Aug 2014 18:30:26 -0700
-Message-ID: <CAOLEWZX3tZtEo5BYsDgdMiujGAsY47hZgvpyaVEph7PLYKt_9g@mail.gmail.com>
-From: Stephen Arnold <stephen.arnold42@gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Received: from unknown 103.25.205.2 by rediffmail.com via HTTP;
+	13 Aug 2014 04:57:46 -0000
+Message-ID: <1407840950.S.69623.autosave.drafts.old.1407905866.6016@webmail.rediffmail.com>
+Sender: pandey_himanshu80@rediffmail.com
+From: "Himanshu  Pandey" <pandey_himanshu80@rediffmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Doubts regarding the final Image file
+Subject: Regarding PR flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,52 +41,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 01:30:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 Aug 2014 04:57:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I'm not the TI guru-dude, but the beaglebone machines (white or black)
-don't seem to use the image bbclass, but should at least produce the rootfs
-tarballs and kernel/u-boot files to make a card (in your deploy
-directory).  The TI sdcard and u-boot stuff is documented all over, but
-essentially you format the sdcard as a vfat boot partition and ext* root
-partition, copy MLO first, then the u-boot.bin file to the boot partition,
-then untar (with -p) the rootfs to the root partition.  The kernel image
-could go either place, depending on the u-boot config (but is probably in
-the rootfs under /boot).  If the root part is ext2/3 then u-boot should be
-able to load kernel image from there with the right config.  This way is
-the "old" way and unfortunately has many variations depending on versions
-of u-boot and vendor.  There should be some TI people listening who know
-more, but if you just try it and it fails, you could try a serial console
-to get a u-boot prompt.  Then you can display the u-boot environment and
-see how it's configured.
-
-Steve
-
-
-On Tue, Aug 12, 2014 at 4:07 PM, Amey Patil <amey.patil@sjsu.edu> wrote:
-
-> Hi,
-> I am a beginner in this Yocto stuff.
->
-> My objective: Angstrom operating system with built in Qt5 libraries on
-> Beaglebone Black.
-> My source:
->
-> http://www.ics.com/blog/beaglebone-black-low-cost-embedded-platform-part-3#.U-lfAv7fEew
->
-> I was expecting when I do "bitbake" (the final step), I will get a image
-> file which I will copy to a memory card and flash the on board eMMC of
-> Beaglebone black with it.
-> But I dont see an image. :(
->
-> Please guide.
->
-> Sincere Regards,
-> Amey Patil
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Hi,
+How to bump up PR flag automatically. The problem is that every time I clean and compile my image, some of the .bb files are not compiled, then in that case I bump their PR by 1 and then they get compiled. So I want to avoid this situation. I want that every time I do clean &amp; compile all the packages shall be compiled without any problem.
+Please help.
+Regards,Himanshu
 
