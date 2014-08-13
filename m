@@ -1,26 +1,32 @@
-Return-Path: <lchristina26@hotmail.com>
-Received: from BLU004-OMC4S1.hotmail.com (blu004-omc4s1.hotmail.com
-	[65.55.111.140])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C7C4609C0
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4115C609BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 21:48:00 +0000 (UTC)
-Received: from BLU436-SMTP224 ([65.55.111.136]) by BLU004-OMC4S1.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22712);
-	Wed, 13 Aug 2014 14:48:01 -0700
-X-TMN: [3bSjZS6K92R7V5iAZ/q1ZwbCBE9EvpWP]
-X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BLU436-SMTP224E70D020C628B199E17E5D6EB0@phx.gbl>
-Received: from localhost.localdomain ([174.45.121.196]) by
-	BLU436-SMTP224.smtp.hotmail.com over TLS secured channel with
-	Microsoft SMTPSVC(8.0.9200.16384); Wed, 13 Aug 2014 14:48:00 -0700
-From: lchristina26 <lchristina26@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Aug 2014 15:47:52 -0600
-X-Mailer: git-send-email 1.9.1
-X-OriginalArrivalTime: 13 Aug 2014 21:48:00.0151 (UTC)
-	FILETIME=[404B7270:01CFB740]
+	Wed, 13 Aug 2014 23:12:26 +0000 (UTC)
+Received: by mail-yk0-f171.google.com with SMTP id 19so405764ykq.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Aug 2014 16:12:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:cc:content-type; 
+	bh=Ri6LGvlEmAuuz81GQmlp9F9qO7VrcouGL9MZGYauz7E=;
+	b=QCqBCiStIWrEzJxzaal4huG5D7exot+kDJAyNW1BhLAE92AVa2fDWqj+car6cxnsRa
+	6G9cuu1jGU/MfomDT4EJOB6yNFYeRhjLTCoHd0dU2QyX4Zyt53HmlE8soj5+qdJPSDzA
+	FrDo+E8quEYbPNgB2Qvcu9Gg64FzKgQXlWCHpxv5797VFmlm4kIBH4kIUkr51FGFMPG5
+	hFSrXsZ73xfLfgWL9QSLdHCTHKPep7OHvX5/ekEWsTpMXZEZ0C3jAPSDXJhq0cW+2JKy
+	yOYJG31hcc7YAXsyuxCNLFUcqRnjbBx5Pzd3MWRZQHo8JTiLTPsqTA2Ym+6gpjrA4uBZ
+	rDng==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3] add cyassl to meta-networking/recipes-connectivity
+X-Received: by 10.236.223.229 with SMTP id v95mr11589251yhp.128.1407971547230; 
+	Wed, 13 Aug 2014 16:12:27 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Wed, 13 Aug 2014 16:12:27 -0700 (PDT)
+Date: Wed, 13 Aug 2014 20:12:27 -0300
+X-Google-Sender-Auth: HmWEm1wWWclMmxFmqMKCu9O81xk
+Message-ID: <CAP9ODKr7+nzk9sCsHzB+Eg+YG_FpvO5U+X7d86fS4mybg_gNtg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: [for-daisy] Backports for merging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,40 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 21:48:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Aug 2014 23:12:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
----
- .../recipes-connectivity/cyassl/cyassl_3.1.0.bb        | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+Hello,
 
-diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
-new file mode 100644
-index 0000000..0c0cac2
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "CyaSSL Embedded SSL Library"
-+DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
-+               optimized for embedded and RTOS environments. It can be \
-+               Up to 20 times smaller than OpenSSL while still supporting \
-+               a full TLS 1.2 client and server."
-+HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
-+BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
-+SECTION = "libs/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "http://www.yassl.com/${BP}.zip"
-+
-+SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
-+SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
-+
-+inherit autotools
-+
+I am seeing this failure in Daisy branches:
+
+commit 75ca64e5917d0177c48f58f631497a05e2773731
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Wed Jun 4 20:09:39 2014 -0300
+
+    nbench-byte: Fix parallel building error
+
+    This extends the dependencies on pointer.h to fix following error:
+
+    | ./sysinfo.sh arm-poky-linux-gnueabi-gcc ...
+    | In file included from misc.h:36:0,
+    |                  from misc.c:23:
+    | nmglobal.h:29:21: fatal error: pointer.h: No such file or directory
+    |  #include "pointer.h"
+    |                      ^
+    | compilation terminated.
+    | make: *** [misc.o] Error 1
+    | make: *** Waiting for unfinished jobs....
+    | ERROR: oe_runmake failed
+    | WARNING: exit code 1 from a shell command.
+
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Please wait for one more Ack and backport it, if fine.
+
 -- 
-1.9.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
