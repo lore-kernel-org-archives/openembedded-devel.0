@@ -1,42 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
-	[209.85.215.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 181ED601A8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 20:33:24 +0000 (UTC)
-Received: by mail-la0-f42.google.com with SMTP id pv20so240515lab.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 13:33:25 -0700 (PDT)
+Received: from mail-lb0-f180.google.com (mail-lb0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id F38F4609C0;
+	Wed, 13 Aug 2014 20:38:33 +0000 (UTC)
+Received: by mail-lb0-f180.google.com with SMTP id v6so239272lbi.11
+	for <multiple recipients>; Wed, 13 Aug 2014 13:38:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=CxGnXQhY8Cye4E6b5p/sn8d22wB2blkdnsA62gDFC4o=;
-	b=bYvNAD/W+fMmu2m37OPcqCvrs8N3nMFWwBPnxwSERbvX/SwVsYmts98vS5kxouFZvA
-	6m0A8bPhheUteA/mRhKH8Wg2/TqS5M0Xaks1CQ+QXzxGZQcqBHHKQy/BC4VnsUqbALce
-	P2TCHvaktJn7YHa4lFhxmzJELuj//U7RAogE/qm7GcWa/11+c7XkrvV16iqiCrjaA3LO
-	0BB4xu28qcfnftIogrhKiAM3JbIs+FpLzDyJU07MBx0MkghPehOKeTpvugKQcBgxJtET
-	mxrf5o2DLl/UcZBFRuqMzLMAqhUZWufdxI6ILxZ+bfIQNYiQjKkCinwT7SGTdmxQJPHO
-	zTMA==
-X-Received: by 10.152.9.194 with SMTP id c2mr391943lab.16.1407962005368;
-	Wed, 13 Aug 2014 13:33:25 -0700 (PDT)
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=ARzwvYVDZAlXvXU9zO+JkLnrajDuNH/vpmQ2rO0VVhE=;
+	b=xVPC6BjQMWNpVjXBZMnKpLhhyB+Gih7KEvmTR0WknO61GNzHKWiqCsIJAHRz96/vEG
+	YoovMMZI3gNsy6MOW9JFz2uQPk94ykRC2K2Ei6YiHDTjX7rnGp7SMWqpGvExiKxiO2FG
+	MqaMxHaAn1RJC50/1qxswUJ/1swE+L9YcL0lJT+F01q3TMA4CaW6q+mEzz9PAVva2Swp
+	N24HFE0fpMlDwIUI7YsrL0NnrgjKp+4Genapp9gdeNeirsai6DlooTc+W2WLYHF0KWG8
+	Ypyo4SGIwujUanAYRDW0wNQd7V78dfCgAtOr9TlXsvHPBNkGOyWEfXVmVEVNr0AJXHpe
+	2hMw==
+X-Received: by 10.152.44.230 with SMTP id h6mr383539lam.51.1407962314220;
+	Wed, 13 Aug 2014 13:38:34 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	q8sm1794676laj.33.2014.08.13.13.33.23 for <multiple recipients>
+	xl2sm4540791lbb.47.2014.08.13.13.38.32 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Aug 2014 13:33:24 -0700 (PDT)
+	Wed, 13 Aug 2014 13:38:33 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 13 Aug 2014 22:34:01 +0200
-To: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-Message-ID: <20140813203401.GX14848@jama>
-References: <1407767636-32624-1-git-send-email-maciej.borzecki@open-rnd.pl>
-	<20140812114538.GJ14848@jama>
-	<1698797.3VM4VhPSOi@localhost.localdomain>
+Date: Wed, 13 Aug 2014 22:39:09 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20140813203909.GY14848@jama>
 MIME-Version: 1.0
-In-Reply-To: <1698797.3VM4VhPSOi@localhost.localdomain>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: maciek.borzecki@gmail.com, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] rabbitmq-c: add recipe
+Subject: State of bitbake world, Failed tasks 2014-08-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,200 +44,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 20:33:33 -0000
-X-Groupsio-MsgNum: 51650
+X-List-Received-Date: Wed, 13 Aug 2014 20:38:44 -0000
+X-Groupsio-MsgNum: 51651
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MhgcBKmfuR2ggk1S"
+	protocol="application/pgp-signature"; boundary="nPYEf/DvajCvrriP"
 Content-Disposition: inline
 
---MhgcBKmfuR2ggk1S
-Content-Type: text/plain; charset=utf-8
+--nPYEf/DvajCvrriP
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 12, 2014 at 02:05:05PM +0200, Maciej Borzecki wrote:
-> On Tuesday 12 of August 2014 13:45:38 Martin Jansa wrote:
-> > On Mon, Aug 11, 2014 at 04:33:56PM +0200, Maciej Borzecki wrote:
-> > > rabbitmq-c is a C library providing an implementation of AMQP client =
-for
-> > > use with v2.0+ of the RabbitMQ broker
-> > >=20
-> > > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> > > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
-> > > ---
-> > >=20
-> > >  .../rabbitmq-c/rabbitmq-c_0.5.0.bb                 | 22
-> > >  ++++++++++++++++++++++ 1 file changed, 22 insertions(+)
-> > >  create mode 100644
-> > >  meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb>=20
-> > > diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0=
-=2Ebb
-> > > b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb new file
-> > > mode 100644
-> > > index 0000000..d8e3189
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
-> > > @@ -0,0 +1,22 @@
-> > > +DESCRIPTION =3D "A C-language AMQP client library for use with v2.0+=
- of the
-> > > RabbitMQ broker" +HOMEPAGE =3D "https://github.com/alanxz/rabbitmq-c"
-> > > +LIC_FILES_CHKSUM =3D
-> > > "file://${S}/LICENSE-MIT;md5=3D6b7424f9db80cfb11fdd5c980b583f53" +LIC=
-ENSE =3D
-> > > "MIT"
-> > > +
-> > > +SRC_URI =3D
-> > > "https://github.com/alanxz/rabbitmq-c/releases/download/v${PV}/rabbit=
-mq-c
-> > > -${PV}.tar.gz" +SRC_URI[md5sum] =3D "b1f902c658c772cda464754678d8deb6"
-> > > +SRC_URI[sha256sum] =3D
-> > > "53702ea2ab809af0f923e387458e2cad191d9549f50410035fe82ce5e6ccc4fa" +
-> > > +PR =3D "r0"
-> >=20
-> > ^ dropped when cherry-picking to master-next
-> >=20
-> > > +
-> > > +S =3D "${WORKDIR}/rabbitmq-c-${PV}"
-> >=20
-> > ^ dropped when cherry-picking to master-next
-> >=20
-> > > +
-> > > +EXTRA_OECONF =3D "--disable-examples --enable-tools"
-> > > +
-> > > +inherit autotools pkgconfig
-> > > +
-> > > +PACKAGES =3D "${PN}-dev ${PN}-dbg ${PN}-tools ${PN}"
-> >=20
-> > Why are you dropping -doc, -staticdev, -locale and other default
-> > packages?
-> >=20
-> > PACKAGE_BEFORE_PN +=3D "${PN}-tools"
-> Right, this should do the trick. The -doc, -staticdev, -locale are empty=
-=20
-> anyway, but it does make more sense not to remove them from PACKAGES.
->=20
-> I can post an updated patch if that's needed.
+Fix for dnsmasq is already on ML (and applied for qemux86*)
 
-There is another issue found in world builds:
+rabbitmq-c is new recipe from review, issue was reported
 
-| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/=
-xmlto: line 325: local: can only be used in a function
-| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/=
-xmlto: line 325: local: can only be used in a function
-| I/O xmlto --skip-validation --searchpath /home/jenkins/oe/world/shr-core/=
-tmp-eglibc/work/core2-64-oe-linux/rabbitmq-c/0.5.0-r0/build/tools/doc -o ./=
-tools/doc man /home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-l=
-inux/rabbitmq-c/0.5.0-r0/rabbitmq-c-0.5.0/tools/doc/amqp-delete-queue.xml
-| error : Attempt to load network entity http://docbook.sourceforge.net/rel=
-ease/xsl/current/manpages/docbook.xsl
-| warning: failed to load external entity "http://docbook.sourceforge.net/r=
-elease/xsl/current/manpages/docbook.xsl"
-| compilation error: file /tmp/xmlto-xsl.dUNOhT line 4 element import
-| xsl:import : unable to load http://docbook.sourceforge.net/release/xsl/cu=
-rrent/manpages/docbook.xsl
-| make[1]: *** [tools/doc/amqp-publish.1] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-| I/O error : Attempt to load network entity http://docbook.sourceforge.net=
-/release/xsl/current/manpages/docbook.xsl
-| warning: failed to load external entity "http://docbook.sourceforge.net/r=
-elease/xsl/current/manpages/docbook.xsl"
-| compilation error: file /tmp/xmlto-xsl.9922tE line 4 element import
-| xsl:import : unable to load http://docbook.sourceforge.net/release/xsl/cu=
-rrent/manpages/docbook.xsl
-| I/O error : Attempt to load network entity http://docbook.sourceforge.net=
-/release/xsl/current/manpages/docbook.xsl
-| warning: failed to load external entity "http://docbook.sourceforge.net/r=
-elease/xsl/current/manpages/docbook.xsl"
-| compilation error: file /tmp/xmlto-xsl.EhgGFW line 4 element import
-| xsl:import : unable to load http://docbook.sourceforge.net/release/xsl/cu=
-rrent/manpages/docbook.xsl
-| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/=
-xmlto: line 325: local: can only be used in a function
-| make[1]: *** [tools/doc/amqp-consume.1] Error 1
-| make[1]: *** [tools/doc/amqp-get.1] Error 1
-| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/bin/=
-xmlto: line 325: local: can only be used in a function
-| I/O error : Attempt to load network entity http://docbook.sourceforge.net=
-/release/xsl/current/manpages/docbook.xsl
-| warning: failed to load external entity "http://docbook.sourceforge.net/r=
-elease/xsl/current/manpages/docbook.xsl"
-| compilation error: file /tmp/xmlto-xsl.31x9dG line 4 element import
-| xsl:import : unable to load http://docbook.sourceforge.net/release/xsl/cu=
-rrent/manpages/docbook.xsl
-| make[1]: *** [tools/doc/amqp-declare-queue.1] Error 1
-| I/O error : Attempt to load network entity http://docbook.sourceforge.net=
-/release/xsl/current/manpages/docbook.xsl
-| warning: failed to load external entity "http://docbook.sourceforge.net/r=
-elease/xsl/current/manpages/docbook.xsl"
-| compilation error: file /tmp/xmlto-xsl.z0t8kl line 4 element import
-| xsl:import : unable to load http://docbook.sourceforge.net/release/xsl/cu=
-rrent/manpages/docbook.xsl
-| make[1]: *** [tools/doc/amqp-delete-queue.1] Error 1
-| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-eglibc/wo=
-rk/core2-64-oe-linux/rabbitmq-c/0.5.0-r0/build'
-| make: *** [all] Error 2
-| ERROR: oe_runmake failed
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
-oe/world/shr-core/tmp-eglibc/work/core2-64-oe-linux/rabbitmq-c/0.5.0-r0/tem=
-p/log.do_compile.28061)
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-so please send updated version with disabled or fixed doc generation
+=3D=3D Failed tasks 2014-08-13 =3D=3D
 
-> > should be enough, will do in master-next, but please ack
-> >=20
-> > > +
-> > > +DEPENDS =3D "popt openssl"
-> > > +
-> > > +FILES_${PN}-tools =3D "${bindir}"
-> > > \ No newline at end of file
->=20
-> --=20
-> =20
-> Maciej Borz=C4=99cki=20
-> Senior Software Engineer Open-RnD Sp. z o.o.=20
-> www.open-rnd.pl, Facebook, Twitter=20
-> mobile: +48 telefon, fax: +48 42 657 9079=20
->=20
->=20
-> Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe zaw=
-iera=C4=87 chronione prawem lub=20
-> poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wiad=
-omo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
-> kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 zo=
-sta=C5=82a otrzymana przypadkowo=20
-> zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzecic=
-h. W takim przypadku=20
-> uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poinfo=
-rmowanie=20
-> nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwrotn=
-ej. Dzi=C4=99kujemy.=20
->=20
-> This message, including any attachments hereto, may contain privileged or=
-=20
-> confidential information and is sent solely for the attention and use of =
-the=20
-> intended addressee(s). If you are not an intended addressee, you may neit=
-her=20
-> use this message nor copy or deliver it to anyone. In such case, you shou=
-ld=20
-> immediately destroy this message and kindly notify the sender by reply em=
-ail.=20
-> Thank you.
+=3D=3D=3D common () =3D=3D=3D
+
+=3D=3D=3D common-x86 (1) =3D=3D=3D
+    * meta-browser/recipes-browser/chromium/chromium_37.0.2062.0.bb, do_com=
+pile
+
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * meta-openembedded/meta-networking/recipes-support/dnsmasq/dnsmasq_2.6=
+8.bb, do_patch
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (3) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_10.0.11esr.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_=
+0.5.0.bb, do_compile
+    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb, do_compile
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||1     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20140810_115305.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/1702/
+|-
+||qemux86       ||2     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20140811_084941.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/1705/
+|-
+||qemux86_64    ||4     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20140813_111311.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/1706/
+|}
+
+More importantly here is full QA log (the build was without sstate-cache),
+the number says in how many qa.log files it was found
+
+      1 gstreamer1.0-libav-1.4.0: ELF binary '/home/jenkins/oe/world/shr-co=
+re/tmp-eglibc/work/armv5te-oe-linux-gnueabi/gstreamer1.0-libav/1.4.0-r0/pac=
+kages-split/gstreamer1.0-libav/usr/lib/gstreamer-1.0/libgstlibav.so' has re=
+locations in .text [textrel]
+      1 gstreamer1.0-libav-1.4.0: ELF binary '/home/jenkins/oe/world/shr-co=
+re/tmp-eglibc/work/i586-oe-linux/gstreamer1.0-libav/1.4.0-r0/packages-split=
+/gstreamer1.0-libav/usr/lib/gstreamer-1.0/libgstlibav.so' has relocations i=
+n .text [textrel]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libdrm, but it=
+ isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libegl-mesa, b=
+ut it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libgbm, but it=
+ isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libgl-mesa, bu=
+t it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libglapi, but =
+it isn't a build dependency? [build-deps]
+      1 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libgles2-mesa,=
+ but it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libglu, but it=
+ isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libgstgl-1.0, =
+but it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libudev, but i=
+t isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libwayland-egl=
+, but it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libxdamage, bu=
+t it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libxfixes, but=
+ it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on libxxf86vm, bu=
+t it isn't a build dependency? [build-deps]
+      3 gstreamer1.0-omx-1.2.0: gstreamer1.0-omx rdepends on wayland, but i=
+t isn't a build dependency? [build-deps]
+      4 gstreamer1.0-plugins-bad-1.4.0: gstreamer1.0-plugins-bad-opengl rde=
+pends on libglu, but it isn't a build dependency? [build-deps]
+      4 gstreamer1.0-plugins-bad-1.4.0: gstreamer1.0-plugins-bad-opengl rde=
+pends on libjpeg-turbo, but it isn't a build dependency? [build-deps]
+      4 gstreamer1.0-plugins-bad-1.4.0: gstreamer1.0-plugins-bad-opengl rde=
+pends on libpng, but it isn't a build dependency? [build-deps]
+      4 gstreamer1.0-plugins-bad-1.4.0: libgstgl-1.0 rdepends on libglu, bu=
+t it isn't a build dependency? [build-deps]
+      4 gypsy-0.9: gypsy: configure was passed unrecognised options: --with=
+-distro [unknown-configure-option]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/armv5te-oe-linux-gnueabi/libav/9.13-r0/packages-split/libavcodec/usr/l=
+ib/libavcodec.so.54.35.0' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavcodec/usr/lib/libavcod=
+ec.so.54.35.0' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavdevice/usr/lib/libavde=
+vice.so.53.2.0' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavfilter/usr/lib/libavfi=
+lter.so.3.3.0' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavformat/usr/lib/libavfo=
+rmat.so.54.20.4' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavresample/usr/lib/libav=
+resample.so.1.0.1' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libavutil/usr/lib/libavutil=
+=2Eso.52.3.0' has relocations in .text [textrel]
+      1 libav-9.13: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eglibc/=
+work/i586-oe-linux/libav/9.13-r0/packages-split/libswscale/usr/lib/libswsca=
+le.so.2.1.1' has relocations in .text [textrel]
+      1 libgcrypt-1.6.1: ELF binary '/home/jenkins/oe/world/shr-core/tmp-eg=
+libc/work/armv5te-oe-linux-gnueabi/libgcrypt/1.6.1-r0/packages-split/libgcr=
+ypt/usr/lib/libgcrypt.so.20.0.1' has relocations in .text [textrel]
+      1 libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/home/jenkins=
+/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/libpostproc/52.=
+3.0+gitAUTOINC+811db3b957-r0/packages-split/libpostproc/usr/lib/libpostproc=
+=2Eso.52.3.0' has relocations in .text [textrel]
+      1 libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/home/jenkins=
+/oe/world/shr-core/tmp-eglibc/work/i586-oe-linux/libpostproc/52.3.0+gitAUTO=
+INC+811db3b957-r0/packages-split/libpostproc/usr/lib/libpostproc.so.52.3.0'=
+ has relocations in .text [textrel]
+      2 libwebp-0.4.0: libwebp-bin rdepends on libgl-mesa, but it isn't a b=
+uild dependency? [build-deps]
+      2 libwebp-0.4.0: libwebp-bin rdepends on mesa-glut, but it isn't a bu=
+ild dependency? [build-deps]
+      1 mpg123-1.19.0: ELF binary '/home/jenkins/oe/world/shr-core/tmp-egli=
+bc/work/i586-oe-linux/mpg123/1.19.0-r0/packages-split/mpg123/usr/lib/libmpg=
+123.so.0.40.1' has relocations in .text [textrel]
+      4 openldap-2.4.39: openldap: Files/directories were installed but not=
+ shipped  /run [installed-vs-shipped]
+      4 oscam-1.10+9164: File '/usr/bin/oscam' from oscam was already strip=
+ped, this will prevent future debugging! [already-stripped]
+      2 qemu-2.1.0: qemu rdepends on lzo, but it isn't a build dependency? =
+[build-deps]
+      1 qtwebengine-0.9.99+gitAUTOINC+21f6ce84ec: ELF binary '/home/jenkins=
+/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/qtwebengine/0.9=
+=2E99+gitAUTOINC+21f6ce84ec-r0/packages-split/qtwebengine/usr/lib/libQt0Web=
+EngineCore.so.0.9.0' has relocations in .text [textrel]
+      1 qtwebkit-5.3.1: ELF binary '/home/jenkins/oe/world/shr-core/tmp-egl=
+ibc/work/i586-oe-linux/qtwebkit/5.3.1-r0/packages-split/qtwebkit/usr/lib/li=
+bQt5WebKit.so.5.3.1' has relocations in .text [textrel]
+      5 qwt-6.0.1: File '/usr/lib/libqwt.so.6.0.1' from qwt was already str=
+ipped, this will prevent future debugging! [already-stripped]
+      5 qwt-6.0.1: File '/usr/lib/libqwtmathml.so.6.0.1' from qwt was alrea=
+dy stripped, this will prevent future debugging! [already-stripped]
+      5 qwt-6.0.1: File '/usr/lib/qt4/plugins/designer/libqwt_designer_plug=
+in.so' from qwt was already stripped, this will prevent future debugging! [=
+already-stripped]
+      1 webkit-efl-2.3.4+svnr164189: ELF binary '/home/jenkins/oe/world/shr=
+-core/tmp-eglibc/work/i586-oe-linux/webkit-efl/2.3.4+svnr164189-r0/packages=
+-split/webkit-efl/usr/lib/libjavascriptcore_efl.so.0.1.0' has relocations i=
+n .text [textrel]
+      1 webkit-gtk-1.8.3: ELF binary '/home/jenkins/oe/world/shr-core/tmp-e=
+glibc/work/i586-oe-linux/webkit-gtk/1.8.3-r1/packages-split/libjavascriptco=
+re/usr/lib/libjavascriptcoregtk-1.0.so.0.13.4' has relocations in .text [te=
+xtrel]
+
+Fixes on ML
+      1 dconf-0.18.0: dconf-editor rdepends on libxml2, but it isn't a buil=
+d dependency? [build-deps]
+      4 evopedia-0.4.2+gitrAUTOINC+36ca70acb4: evopedia rdepends on libbz2,=
+ but it isn't a build dependency? [build-deps]
+      1 expedite-1.7.9: expedite rdepends on evas-engine-fb, but it isn't a=
+ build dependency? [build-deps]
+      1 expedite-1.7.9: expedite rdepends on evas-engine-software-generic, =
+but it isn't a build dependency? [build-deps]
+      1 expedite-1.7.9: expedite rdepends on evas-loader-png, but it isn't =
+a build dependency? [build-deps]
+      1 expedite-1.7.9: expedite rdepends on libsdl, but it isn't a build d=
+ependency? [build-deps]
+      1 webmin-1.620: webmin rdepends on perl-module-timelocal, but it isn'=
+t a build dependency? [build-deps]
+      1 webmin-1.620: webmin-module-proc rdepends on procps, but it isn't a=
+ build dependency? [build-deps]
+      1 webmin-1.620: webmin-module-raid rdepends on mdadm, but it isn't a =
+build dependency? [build-deps]
+      1 gtksourceview2-2.10.5: gtksourceview2 rdepends on libxml2, but it i=
+sn't a build dependency? [build-deps]
+      1 kernelshark-1.2+gitAUTOINC+7055ffd37b: kernelshark rdepends on libx=
+ml2, but it isn't a build dependency? [build-deps]
+      1 libxklavier-5.3: libxklavier rdepends on libxml2, but it isn't a bu=
+ild dependency? [build-deps]
+      2 talloc-2.0.1: talloc: Files/directories were installed but not ship=
+ped  /usr/bin [installed-vs-shipped]
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MhgcBKmfuR2ggk1S
+--nPYEf/DvajCvrriP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPry7kACgkQN1Ujt2V2gBztQwCdH2+GZbrr5mRWPeFr/j33vhJ4
-c+oAn1ke4IjN4n5iIN87WYWcLLJDamPK
-=Lsam
+iEYEARECAAYFAlPrzO0ACgkQN1Ujt2V2gBxOIgCfQBs8CletOdXp4BRFIcSKelbt
++WsAoIIH5fOpmjszibc87BOs+9yXSllk
+=LqIX
 -----END PGP SIGNATURE-----
 
---MhgcBKmfuR2ggk1S--
+--nPYEf/DvajCvrriP--
