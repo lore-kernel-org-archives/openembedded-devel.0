@@ -1,29 +1,28 @@
 Return-Path: <lchristina26@hotmail.com>
-X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 13 Aug 2014 20:58:24 UTC
-Received: from BAY004-OMC4S8.hotmail.com (bay004-omc4s8.hotmail.com
-	[65.54.190.210])
-	by mail.openembedded.org (Postfix) with ESMTP id C719C609C0
+Received: from BAY004-OMC4S9.hotmail.com (bay004-omc4s9.hotmail.com
+	[65.54.190.211])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F7EB609C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 20:58:24 +0000 (UTC)
-Received: from BAY168-W105 ([65.54.190.201]) by BAY004-OMC4S8.hotmail.com with
-	Microsoft SMTPSVC(7.5.7601.22712); Wed, 13 Aug 2014 13:53:20 -0700
-X-TMN: [dqFsTDKOx7UbzuSLbj0otaxlC25cO6gS]
+	Wed, 13 Aug 2014 21:06:52 +0000 (UTC)
+Received: from BAY168-W66 ([65.54.190.201]) by BAY004-OMC4S9.hotmail.com with
+	Microsoft SMTPSVC(7.5.7601.22712); Wed, 13 Aug 2014 14:06:53 -0700
+X-TMN: [Va73LXyFjUh0GlSC2Y/5oal/hk1cVWZd]
 X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BAY168-W105F8D49A2D581CB059AAD5D6EB0@phx.gbl>
+Message-ID: <BAY168-W66150ECA8D3F1C5D8BBD02D6EB0@phx.gbl>
 From: LC Mac <lchristina26@hotmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Aug 2014 14:53:19 -0600
+Date: Wed, 13 Aug 2014 15:06:53 -0600
 Importance: Normal
-In-Reply-To: <20140812221225.GT14848@jama>
+In-Reply-To: <BAY168-W105F8D49A2D581CB059AAD5D6EB0@phx.gbl>
 References: <BLU436-SMTP223AFD3FCC0CB7D577EB9D6D6EA0@phx.gbl>,
-	<20140812221225.GT14848@jama>
+	<20140812221225.GT14848@jama>,
+	<BAY168-W105F8D49A2D581CB059AAD5D6EB0@phx.gbl>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 13 Aug 2014 20:53:20.0143 (UTC)
-	FILETIME=[9D41F1F0:01CFB738]
+X-OriginalArrivalTime: 13 Aug 2014 21:06:53.0852 (UTC)
+	FILETIME=[824415C0:01CFB73A]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2] Submitting cyassl recipe for consideration in being added to meta-oe/meta-networking/recipes-connectivity. Cyassl is a lightweight, embedded SSL/TLS library. For more information: www.wolfssl.com. The cyassl recipe is a fully
+Subject: Re: [meta-oe][PATCH v2] Submitting cyassl recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,10 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Aug 2014 20:58:34 -0000
+X-List-Received-Date: Wed, 13 Aug 2014 21:07:01 -0000
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+Actually=2C I'm guessing you meant for me to delete the entire line S =3D "=
+.." without adding anything else? This line just threw me off: cyassl-${PV}=
+ -> ${BP}.
+
+From: lchristina26@hotmail.com
+To: openembedded-devel@lists.openembedded.org
+Subject: RE: [oe] [meta-oe][PATCH v2] Submitting cyassl recipe for consider=
+ation in being added to meta-oe/meta-networking/recipes-connectivity. Cyass=
+l is a lightweight=2C embedded SSL/TLS library. For more information: www.w=
+olfssl.com. The cyassl recipe is a fully
+Date: Wed=2C 13 Aug 2014 14:53:19 -0600
+
+=0A=
+=0A=
+=0A=
 Hi Martin=2C=20
 
 I'm a bit confused by the line cyassl-${PV} -> ${BP}. =0A=
@@ -127,5 +141,5 @@ _______________________________________________=0A=
 Openembedded-devel mailing list=0A=
 Openembedded-devel@lists.openembedded.org=0A=
 http://lists.openembedded.org/mailman/listinfo/openembedded-devel 		 	   		=
-  =
+   		 	   		  =
 
