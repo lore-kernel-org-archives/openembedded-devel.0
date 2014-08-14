@@ -1,33 +1,31 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 876A460144
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D026610F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 08:53:48 +0000 (UTC)
-Received: by mail-ig0-f173.google.com with SMTP id h18so12886515igc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 01:53:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=TVuoFeBJq27CUAtUkYuyknvxSMSHNdOv+3BIZ+q9M50=;
-	b=CVChPY8ooi8n4GXiKmJ6l5Bqe6C+KGvnj8ElefDU2irFVYv2NpaNL/q0bX6lhJ8T5Q
-	H56nxzOfV9NyJ4Ol1BM/xgbx1OeMl9R+NBzooCP1Nk4IuAvXWgxhpw5Ix0ExhTt9hnuW
-	AVV/NqxjUylLIo1q3niu4gktQcWb1RZGgJudhxPf2fPk5jhOYGooNindDGSt2tBcgiX4
-	f6O53HArQ6xWRuBzhdNl8y5k4PifoOgcEZQSkEsFCx7SvIgaYV6v/GLRJgMj7U3J2Ktf
-	dDbpojtyBznWLxoF1Kfgg+7WKpufjiDq9s2ZbwvevH0oLrnUbYKomeGtav95CdX8g2pr
-	7uxA==
+	Thu, 14 Aug 2014 08:55:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E8t1nE013212
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 14 Aug 2014 01:55:01 -0700 (PDT)
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Thu, 14 Aug 2014 01:55:01 -0700
+Message-ID: <53EC7964.5050504@windriver.com>
+Date: Thu, 14 Aug 2014 16:55:00 +0800
+From: Kang Kai <Kai.Kang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
 MIME-Version: 1.0
-X-Received: by 10.43.154.145 with SMTP id le17mr13095141icc.20.1408006429210; 
-	Thu, 14 Aug 2014 01:53:49 -0700 (PDT)
-Received: by 10.107.9.214 with HTTP; Thu, 14 Aug 2014 01:53:49 -0700 (PDT)
-In-Reply-To: <CALYKT1iTdGsQrx6UqBKDfKv5_E_T_QRfrVQFOb=oXE_Zj06MSg@mail.gmail.com>
-References: <CALYKT1iTdGsQrx6UqBKDfKv5_E_T_QRfrVQFOb=oXE_Zj06MSg@mail.gmail.com>
-Date: Thu, 14 Aug 2014 17:53:49 +0900
-Message-ID: <CALYKT1h7=U02XiQGsJDqdN5BghwJggPz3S1hn0QBA8UHZqvgZg@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>	<53EC6CFA.9050406@windriver.com>
+	<20140814083809.GD14848@jama>	<53EC766B.8090402@windriver.com>
+	<20140814085201.GF14848@jama>
+In-Reply-To: <20140814085201.GF14848@jama>
+X-Originating-IP: [128.224.162.231]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [poky] Which beaglebone can I use to develop/use Poky?
+Subject: Re: [meta-perl][PATCH 1/6] libdigest-sha1-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,60 +39,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 08:53:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Aug 2014 08:55:03 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello list,
+On 2014?08?14? 16:52, Martin Jansa wrote:
+> On Thu, Aug 14, 2014 at 04:42:19PM +0800, Kang Kai wrote:
+>> On 2014?08?14? 16:38, Martin Jansa wrote:
+>>> On Thu, Aug 14, 2014 at 04:02:02PM +0800, Kang Kai wrote:
+>>>> This series of commits is for layer *meta-perl*, and I add it in cover
+>>>> letter created by 'git send-email --compose', but it seems doesn't work.
+>>> Please update indentation in them, you're using mix of tabs and spaces
+>>> -> use 4 spaces everywhere.
+>> Even in the shell function, such as
+>>
+>> +do_install_ptest () {
+>> +       cp -r ${B}/t ${D}${PTEST_PATH}
+>> +}
+>>
+>>
+>> I just thought it should be indented with tab.
+> Yes, tabs in shell tasks are used only by oe-core, meta-oe, meta-smartphone, meta-qt5, meta-webos, ..
+> are using consistent styleguide with 4 spaces everywhere.
 
-Please ignore this question.
-I should have searched internet more before ask questions here!
+OK. I'll sent V2.
 
-It was easy to find the information I need via google.
+Thanks a lot.
 
-I need beaglebone (black).
+--Kai
 
-Though I didn't find a good blog yet. I think I can find for those
-information also.
-
-I am sorry for not doing my must-do first.
-
-Thank you very much in advance.
-
-Sincerely
-Journeyer
-
-
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
-
-
-2014-08-14 11:47 GMT+09:00 Journeyer J. Joh <oosaprogrammer@gmail.com>:
-
-> Hi list,
 >
-> I'd like to ask about beaglebone for Poky.
+>> If so, I'll update them and send V2.
+>>
+>> Thanks,
+>> Kai
+>>
+>>>> On 2014?08?14? 15:49, Kai Kang wrote:
+>>>>
+>>>>
+>>>>> Add recipe for libdigest-sha1-perl and enable create -ptest sub-package.
+>>>>>
+>>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>>>>> ---
+>>>>>     meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++++++++
+>>>>>     .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++++++++++++
+>>>>>     2 files changed, 41 insertions(+)
+>>>>>     create mode 100644 meta-perl/recipes-perl/libdigest/files/run-ptest
+>>>>>     create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+>>>>>
+>>>>> diff --git a/meta-perl/recipes-perl/libdigest/files/run-ptest b/meta-perl/recipes-perl/libdigest/files/run-ptest
+>>>>> new file mode 100644
+>>>>> index 0000000..1c008b5
+>>>>> --- /dev/null
+>>>>> +++ b/meta-perl/recipes-perl/libdigest/files/run-ptest
+>>>>> @@ -0,0 +1,16 @@
+>>>>> +#!/bin/sh
+>>>>> +
+>>>>> +for case in `find t -type f -name '*.t'`; do
+>>>>> +	perl $case >$case.output 2>&1
+>>>>> +	ret=$?
+>>>>> +	cat $case.output
+>>>>> +	if [ $ret -ne 0 ]; then
+>>>>> +		echo "FAIL: ${case%.t}"
+>>>>> +	elif grep -i 'SKIP' $case.output; then
+>>>>> +		echo "SKIP: ${case%.t}"
+>>>>> +	else
+>>>>> +		echo "PASS: ${case%.t}"
+>>>>> +	fi
+>>>>> +
+>>>>> +	rm -f $case.output
+>>>>> +done
+>>>>> diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+>>>>> new file mode 100644
+>>>>> index 0000000..42d5875
+>>>>> --- /dev/null
+>>>>> +++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+>>>>> @@ -0,0 +1,25 @@
+>>>>> +SUMMARY = "Perl interface to the SHA-1 algorithm "
+>>>>> +DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
+>>>>> +HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
+>>>>> +SECTION = "libs"
+>>>>> +
+>>>>> +LICENSE = "Artistic-1.0|GPLv1+"
+>>>>> +LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
+>>>>> +
+>>>>> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
+>>>>> +           file://run-ptest \
+>>>>> +          "
+>>>>> +SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
+>>>>> +SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
+>>>>> +
+>>>>> +S = "${WORKDIR}/Digest-SHA1-${PV}"
+>>>>> +
+>>>>> +inherit cpan ptest
+>>>>> +
+>>>>> +do_install_ptest () {
+>>>>> +       cp -r ${B}/t ${D}${PTEST_PATH}
+>>>>> +}
+>>>>> +
+>>>>> +BBCLASSEXTEND="native"
+>>>>> +
+>>>>> +FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Digest/SHA1/.debug/"
+>>>> -- 
+>>>> Regards,
+>>>> Neil | Kai Kang
+>>>>
+>>>> -- 
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>
+>> -- 
+>> Regards,
+>> Neil | Kai Kang
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-> I want to develop and use Poky on a beaglebone.
-> But since I have no experience on this, I need information below. Please
-> help me.
 >
-> - Specific beaglebone version that Poky supports
-> - Any beaglebone accessory needed
-> - Some helpful blog or website for learning how to develop Poky on
-> beaglebone
->
-> Thank you very much in advance!
->
-> Sincerely
-> ----------------------------------------
-> Journeyer J. Joh
-> o o s a p r o g r a m m e r
-> a t
-> g m a i l  d o t  c o m
-> ----------------------------------------
->
+
+
+-- 
+Regards,
+Neil | Kai Kang
+
 
