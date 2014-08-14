@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0819470BE2
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CC2D470BE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 09:17:55 +0000 (UTC)
+	Thu, 14 Aug 2014 09:17:56 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9HsU7006943
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9HuZd015927
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Aug 2014 02:17:54 -0700 (PDT)
+	Thu, 14 Aug 2014 02:17:56 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:54 -0700
+	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:55 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <martin.jansa@gmail.com>
-Date: Thu, 14 Aug 2014 17:13:34 +0800
-Message-ID: <1408007615-23880-6-git-send-email-kai.kang@windriver.com>
+Date: Thu, 14 Aug 2014 17:13:35 +0800
+Message-ID: <1408007615-23880-7-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
 References: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 5/6] libio-socket-ssl-perl: add recipe
+Subject: [PATCH 6/6] libmime-types-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,25 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 09:17:55 -0000
+X-List-Received-Date: Thu, 14 Aug 2014 09:17:57 -0000
 Content-Type: text/plain
 
-Add recipe for libio-socket-ssl-perl. Inherit ptest to enable build
--ptest sub-package and add file 'run-ptest'.
+Add recipe for libmime-types-perl. Enable to create ptest sub-package at
+same time.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-perl/recipes-perl/libio/files/run-ptest       | 16 ++++++++
- .../libio/libio-socket-ssl-perl_1.997.bb           | 45 ++++++++++++++++++++++
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libio/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
+ meta-perl/recipes-perl/libmime/files/run-ptest     | 16 +++++++++++++
+ .../libmime/libmime-types-perl_2.04.bb             | 26 ++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmime/files/run-ptest
+ create mode 100644 meta-perl/recipes-perl/libmime/libmime-types-perl_2.04.bb
 
-diff --git a/meta-perl/recipes-perl/libio/files/run-ptest b/meta-perl/recipes-perl/libio/files/run-ptest
+diff --git a/meta-perl/recipes-perl/libmime/files/run-ptest b/meta-perl/recipes-perl/libmime/files/run-ptest
 new file mode 100644
 index 0000000..c9f9ca9
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libio/files/run-ptest
++++ b/meta-perl/recipes-perl/libmime/files/run-ptest
 @@ -0,0 +1,16 @@
 +#!/bin/sh
 +
@@ -71,57 +71,38 @@ index 0000000..c9f9ca9
 +
 +    rm -f $case.output
 +done
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
+diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.04.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.04.bb
 new file mode 100644
-index 0000000..19dec83
+index 0000000..ef53029
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "Perl library for transparent SSL"
-+DESCRIPTION = "This module is a true drop-in replacement for IO::Socket::INET that \
-+uses SSL to encrypt data before it is transferred to a remote server \
-+or client. IO::Socket::SSL supports all the extra features that one \
-+needs to write a full-featured SSL client or server application: \
-+multiple SSL contexts, cipher selection, certificate verification, and \
-+SSL version selection. As an extra bonus, it works perfectly with \
-+mod_perl."
-+HOMEPAGE = "http://search.cpan.org/dist/IO-Socket-SSL/"
-+SECTION = "libs"
++++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.04.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "MIME::Types - Definition of MIME types"
++DESCRIPTION = "MIME types are used in MIME compliant lines, for instance \
++as part of e-mail and HTTP traffic, to indicate the type of content which \
++is transmitted. Sometimes real knowledge about a mime-type is need.\
++\n\
++This module maintains a set of MIME::Type objects, which each describe \
++one known mime type."
++HOMEPAGE = "http://search.cpan.org/~markov/MIME-Types-${PV}"
++SECTION = "libraries"
 +
 +LICENSE = "Artistic-1.0|GPLv1+"
 +LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
 +
-+RDEPENDS_${PN} += "perl-module-scalar-util libnet-ssleay-perl"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
 +           file://run-ptest \
 +          "
-+SRC_URI[md5sum] = "2a6268bb42da81e69d1c1feb2fcb0eea"
-+SRC_URI[sha256sum] = "acdb67b5b63aea5b7e70c3e4c70a16128810329592b63753a38c794aff76a1dd"
++SRC_URI[md5sum] = "e292bbf7756bb4999407f3f660697168"
++SRC_URI[sha256sum] = "22b6069d372d587b1f2ecc6d0aaf50fb5c64920caed8c214b9884e64538acc8f"
 +
-+S = "${WORKDIR}/IO-Socket-SSL-${PV}"
++S = "${WORKDIR}/MIME-Types-${PV}"
 +
 +inherit cpan ptest
 +
-+PACKAGE_ARCH = "all"
-+
-+do_install_append () {
-+    mkdir -p ${D}${docdir}/${PN}/
-+    cp ${S}/BUGS ${D}${docdir}/${PN}/
-+    cp ${S}/Changes ${D}${docdir}/${PN}/
-+    cp ${S}/README ${D}${docdir}/${PN}/
-+    cp -pRP ${S}/docs ${D}${docdir}/${PN}/
-+    cp -pRP ${S}/certs ${D}${docdir}/${PN}/
-+    cp -pRP ${S}/example ${D}${docdir}/${PN}/
-+    cp -pRP ${S}/util ${D}${docdir}/${PN}/
-+}
-+
 +do_install_ptest () {
 +    cp -r ${B}/t ${D}${PTEST_PATH}
-+    cp -r ${B}/certs ${D}${PTEST_PATH}
 +}
-+
-+BBCLASSEXTEND = "native"
 -- 
 1.9.1
 
