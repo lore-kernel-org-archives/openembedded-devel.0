@@ -1,25 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 51AE960144
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 32EE365F2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 09:17:46 +0000 (UTC)
+	Thu, 14 Aug 2014 09:17:48 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9Hld5015905
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9HmDB006937
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Aug 2014 02:17:47 -0700 (PDT)
+	Thu, 14 Aug 2014 02:17:48 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:46 -0700
+	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:48 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <martin.jansa@gmail.com>
-Date: Thu, 14 Aug 2014 17:13:29 +0800
-Message-ID: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
+Date: Thu, 14 Aug 2014 17:13:30 +0800
+Message-ID: <1408007615-23880-2-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
+References: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 0/6][meta-perl] V2 - Add some perl modules
+Subject: [PATCH 1/6] libdigest-sha1-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,45 +35,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 09:17:47 -0000
+X-List-Received-Date: Thu, 14 Aug 2014 09:17:49 -0000
 Content-Type: text/plain
 
-V2:
-* Re-indent with 4 spaces
+Add recipe for libdigest-sha1-perl and enable create -ptest sub-package.
 
-
-Kai Kang (6):
-  libdigest-sha1-perl: add recipe
-  libdigest-hmac-perl: add recipe
-  libauthen-sasl-perl: add recipe
-  libnet-ssleay-perl: add recipe
-  libio-socket-ssl-perl: add recipe
-  libmime-types-perl: add recipe
-
- meta-perl/recipes-perl/libauthen/files/run-ptest   | 16 ++++++++
- .../libauthen/libauthen-sasl-perl_2.16.bb          | 30 +++++++++++++++
- meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++
- .../libdigest/libdigest-hmac-perl_1.03.bb          | 26 +++++++++++++
- .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++
- meta-perl/recipes-perl/libio/files/run-ptest       | 16 ++++++++
- .../libio/libio-socket-ssl-perl_1.997.bb           | 45 ++++++++++++++++++++++
- meta-perl/recipes-perl/libmime/files/run-ptest     | 16 ++++++++
- .../libmime/libmime-types-perl_2.04.bb             | 26 +++++++++++++
- meta-perl/recipes-perl/libnet/files/run-ptest      | 16 ++++++++
- .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 43 +++++++++++++++++++++
- 11 files changed, 275 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libauthen/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libauthen/libauthen-sasl-perl_2.16.bb
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++++++++
+ .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
  create mode 100644 meta-perl/recipes-perl/libdigest/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
  create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
- create mode 100644 meta-perl/recipes-perl/libio/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libio/libio-socket-ssl-perl_1.997.bb
- create mode 100644 meta-perl/recipes-perl/libmime/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libmime/libmime-types-perl_2.04.bb
- create mode 100644 meta-perl/recipes-perl/libnet/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
 
+diff --git a/meta-perl/recipes-perl/libdigest/files/run-ptest b/meta-perl/recipes-perl/libdigest/files/run-ptest
+new file mode 100644
+index 0000000..c9f9ca9
+--- /dev/null
++++ b/meta-perl/recipes-perl/libdigest/files/run-ptest
+@@ -0,0 +1,16 @@
++#!/bin/sh
++
++for case in `find t -type f -name '*.t'`; do
++    perl $case >$case.output 2>&1
++    ret=$?
++    cat $case.output
++    if [ $ret -ne 0 ]; then
++        echo "FAIL: ${case%.t}"
++    elif grep -i 'SKIP' $case.output; then
++        echo "SKIP: ${case%.t}"
++    else
++        echo "PASS: ${case%.t}"
++    fi
++
++    rm -f $case.output
++done
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+new file mode 100644
+index 0000000..0371ea6
+--- /dev/null
++++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Perl interface to the SHA-1 algorithm "
++DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
++HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
++SECTION = "libs"
++
++LICENSE = "Artistic-1.0|GPLv1+"
++LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
++
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
++           file://run-ptest \
++          "
++SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
++SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
++
++S = "${WORKDIR}/Digest-SHA1-${PV}"
++
++inherit cpan ptest
++
++do_install_ptest () {
++    cp -r ${B}/t ${D}${PTEST_PATH}
++}
++
++BBCLASSEXTEND="native"
++
++FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Digest/SHA1/.debug/"
 -- 
 1.9.1
 
