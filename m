@@ -1,21 +1,41 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id DD6B9609B1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-la0-f43.google.com (mail-la0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ACBA609B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 15:47:43 +0000 (UTC)
-Received: from localhost.localdomain (unknown [46.170.72.194])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 64DFD116AA8F;
-	Thu, 14 Aug 2014 17:47:44 +0200 (CEST)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 14 Aug 2014 17:47:43 +0200
-Message-ID: <1648379.8MoRdfFvOV@localhost.localdomain>
-User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <20140814154220.GL14848@jama>
+	Thu, 14 Aug 2014 15:49:27 +0000 (UTC)
+Received: by mail-la0-f43.google.com with SMTP id hr17so1344548lab.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Aug 2014 08:49:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=PM9n1TLSvxebylzoLzTX8VyvHlSIVbMGAAV3GJkhKzE=;
+	b=hXTGPe94PpDzrjVMJLd3+t0lcSUIEZlse6ICQ4DTJSxl6id20AXH2wcSalc+MwnjGH
+	ZNVvr1wiqFSjpnOnz1vT5nXoDGKF/WsxZxipfD7KJ2IEBm1b2xlfheNHaWNSsrbBewN1
+	tZFByafmvrxuNnrhmG45+gm1jAtd5nTroiJDnvSmCznaPcJoxB8Qo4ZokLhbDGwzyUHr
+	XYAqjJyWuHPKQRIEAJ9zhoz+vV3M6e4BOJPWqBAByFP+BQ9WfzotxvLY0nU+iAI8uxu7
+	6nkrzkpumy3+8WMZV9WjIYz4+dvEXSCl5SvxYKSQMBKM4wlPAK6G1L+BjxPxDeav2jsD
+	E8VQ==
+X-Received: by 10.152.121.98 with SMTP id lj2mr4259102lab.93.1408031368411;
+	Thu, 14 Aug 2014 08:49:28 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id l4sm3320130lam.2.2014.08.14.08.49.26
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Aug 2014 08:49:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 14 Aug 2014 17:50:04 +0200
+To: Maciej Borzecki <maciek.borzecki@gmail.com>
+Message-ID: <20140814155004.GM14848@jama>
 References: <1408030303-742-1-git-send-email-maciej.borzecki@open-rnd.pl>
 	<1408030303-742-3-git-send-email-maciej.borzecki@open-rnd.pl>
 	<20140814154220.GL14848@jama>
+	<3050179.UVPPAEUo1f@localhost.localdomain>
 MIME-Version: 1.0
+In-Reply-To: <3050179.UVPPAEUo1f@localhost.localdomain>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
 	openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 2/2] collectd: make pinba support a selectable feature
@@ -32,86 +52,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 15:47:47 -0000
+X-List-Received-Date: Thu, 14 Aug 2014 15:49:31 -0000
+X-Groupsio-MsgNum: 51702
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FzMlDQVV4VcwxUi5"
+Content-Disposition: inline
+
+--FzMlDQVV4VcwxUi5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
 
-On Thursday 14 of August 2014 17:42:20 Martin Jansa wrote:
-> On Thu, Aug 14, 2014 at 05:31:43PM +0200, Maciej Borzecki wrote:
-> > Pinba support requires protobuf-c that is currently only available =
-in
-> > meta-virtualization layer. Make this a selectable feature.
->=20
-> There is some protobuf in meta-oe
-> meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf_2.4.1.bb=
-
->=20
-> is protobuf-c something else?
-Yes. protobuf in meta-oe is a tool (protoc) and a C++ library, protobuf=
--c is a
-C implementation of the library.
-
-(sorry if you get multiple copies of this email, kmail got confused wit=
-h=20
-multiple email accounts)
-
->=20
-> > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
-> > ---
+On Thu, Aug 14, 2014 at 05:45:12PM +0200, Maciej Borzecki wrote:
+> On Thursday 14 of August 2014 17:42:20 Martin Jansa wrote:
+> > On Thu, Aug 14, 2014 at 05:31:43PM +0200, Maciej Borzecki wrote:
+> > > Pinba support requires protobuf-c that is currently only available in
+> > > meta-virtualization layer. Make this a selectable feature.
 > >=20
-> >  meta-oe/recipes-extended/collectd/collectd_5.2.2.bb | 1 +
-> >  1 file changed, 1 insertion(+)
+> > There is some protobuf in meta-oe
+> > meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf_2.4.1.bb
 > >=20
-> > diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb index
-> > 30279c2..837eae5 100644
-> > --- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > +++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > @@ -32,6 +32,7 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors
-> > --with-libsensors=3Dyes, \>=20
-> >          --disable-sensors --with-libsensors=3Dno,lmsensors"
-> > =20
-> >  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \=
+> > is protobuf-c something else?
+> Yes. protobuf in meta-oe is a tool (protoc) and a C++ library, protobuf-c=
+ is a=20
+> C implementation of the library.
 
-> > =20
-> >          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
-> >=20
-> > +PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf
-> > protobuf-native">=20
-> >  EXTRA_OECONF =3D " \
-> > =20
-> >                  ${FPLAYOUT} \
+So shouldn't PACKAGECONFIG contain protobuf-c as well?
+
+If yes, then please add comment above PACKAGECONFIG definition that
+protobuf-c is in meta-virtualization (so that people don't need to
+search commit messages).
+
+Thanks
+
+> > > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> > > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> > > ---
+> > >=20
+> > >  meta-oe/recipes-extended/collectd/collectd_5.2.2.bb | 1 +
+> > >  1 file changed, 1 insertion(+)
+> > >=20
+> > > diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > > b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb index
+> > > 30279c2..837eae5 100644
+> > > --- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > > +++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > > @@ -32,6 +32,7 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors
+> > > --with-libsensors=3Dyes, \>=20
+> > >          --disable-sensors --with-libsensors=3Dno,lmsensors"
+> > > =20
+> > >  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \
+> > > =20
+> > >          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
+> > >=20
+> > > +PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf
+> > > protobuf-native">=20
+> > >  EXTRA_OECONF =3D " \
+> > > =20
+> > >                  ${FPLAYOUT} \
+>=20
+> --=20
+> Maciek Borzecki <maciek.borzecki@gmail.com>
 
 --=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Maciej Borz=C4=99cki=20
-Senior Software Engineer Open-RnD Sp. z o.o.=20
-www.open-rnd.pl, Facebook, Twitter=20
-mobile: +48 telefon, fax: +48 42 657 9079=20
+--FzMlDQVV4VcwxUi5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
-awiera=C4=87 chronione prawem lub=20
-poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
-adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
-kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
-zosta=C5=82a otrzymana przypadkowo=20
-zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
-ich. W takim przypadku=20
-uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
-formowanie=20
-nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
-tnej. Dzi=C4=99kujemy.=20
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-This message, including any attachments hereto, may contain privileged =
-or=20
-confidential information and is sent solely for the attention and use o=
-f the=20
-intended addressee(s). If you are not an intended addressee, you may ne=
-ither=20
-use this message nor copy or deliver it to anyone. In such case, you sh=
-ould=20
-immediately destroy this message and kindly notify the sender by reply =
-email.=20
-Thank you. 
+iEYEARECAAYFAlPs2qwACgkQN1Ujt2V2gByvDwCaAp9gjEGLosG0hZ4hcOvUFhn+
+f7QAoK41BEkkcYO1GJkSCnuU18pIf93/
+=rqOy
+-----END PGP SIGNATURE-----
 
+--FzMlDQVV4VcwxUi5--
