@@ -1,51 +1,39 @@
-Return-Path: <donald.poole@swri.org>
-X-Greylist: delayed 1135 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 14 Aug 2014 14:58:48 UTC
-Received: from esg256-2.itc.swri.edu (esg256-2.itc.swri.edu [129.162.243.101])
-	by mail.openembedded.org (Postfix) with ESMTP id C07C86084E
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id BDE4260B05
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 14:58:48 +0000 (UTC)
-Received: from exchmail.swri.org (casht260-1.adm.swri.edu [129.162.243.128])
-	by esg256-2.itc.swri.edu (8.14.5/8.14.5) with ESMTP id s7EEbJmT003235
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NOT)
+	Thu, 14 Aug 2014 15:02:42 +0000 (UTC)
+Received: by mail-la0-f51.google.com with SMTP id pn19so1278098lab.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 09:37:19 -0500
-Received: from MBX256-1.adm.swri.edu ([169.254.1.232]) by
-	casht260-1.adm.swri.edu ([129.162.243.128]) with mapi id 14.03.0181.006;
-	Thu, 14 Aug 2014 09:39:53 -0500
-From: "Poole Jr, Donald R." <donald.poole@swri.org>
+	Thu, 14 Aug 2014 08:02:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=5bqZHVpDglUpEjLQZZK2PV2ybY5NVoklsZQfEADpdRo=;
+	b=fWURXC8Q3iXh8lLTH7U928hlupYWl5kT7z2nxJlZD0aOys0v3cM5DAWhb+HzU5ZmNM
+	E0wYdLIz3JDMsx+hLCsvLO6iwqdshHJsI5KGURjfZEpL0QqwbGqitR8f+OK+r49WY9pP
+	ULccFmI/JhCrChncYTYJ1H3h4rqr5viQu/ThbQdQXHu5OjqKGh8lJS7gXpoJVUH9zaSH
+	/RKdWq2ITJuF6gwR6Xhg4+R37XGH8uItA2qXQPDyPgZkHq3S2qi6TBHGSA6e1k39vWlN
+	NPfQuBfiEFIvQrZBfDvFNdjZJxp81gof3psctNA/jqyxJUHwHnmOWRkH3TX7JZjoNcp9
+	A/Kg==
+MIME-Version: 1.0
+X-Received: by 10.112.219.234 with SMTP id pr10mr5359706lbc.59.1408028563244; 
+	Thu, 14 Aug 2014 08:02:43 -0700 (PDT)
+Received: by 10.114.161.116 with HTTP; Thu, 14 Aug 2014 08:02:43 -0700 (PDT)
+In-Reply-To: <CADyYWLmyyhyXvctZKXPLmf1gDn5RS9XcJ-8capNXsZXRDAy8iw@mail.gmail.com>
+References: <1407852110-26705-1-git-send-email-sujith.h@gmail.com>
+	<CANx9H-BU8vM-EAOPZgfmbSZtxze9t=fiywO4n=BtLb+oqut_wQ@mail.gmail.com>
+	<CADyYWLmyyhyXvctZKXPLmf1gDn5RS9XcJ-8capNXsZXRDAy8iw@mail.gmail.com>
+Date: Thu, 14 Aug 2014 08:02:43 -0700
+Message-ID: <CANx9H-CVviXCnHa4W7Fm_W6W9DXBrtC+S=BwvKDVc8LCmspzHQ@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [poky] Which beaglebone can I use to develop/use Poky?
-Thread-Index: AQHPt51f4wLr4OzLA0e8QiW0TNWe4JvQK/kA
-Date: Thu, 14 Aug 2014 14:40:48 +0000
-Message-ID: <D012343B.4F9D%donald.poole@swri.org>
-References: <CALYKT1iTdGsQrx6UqBKDfKv5_E_T_QRfrVQFOb=oXE_Zj06MSg@mail.gmail.com>
-	<CALYKT1h7=U02XiQGsJDqdN5BghwJggPz3S1hn0QBA8UHZqvgZg@mail.gmail.com>
-In-Reply-To: <CALYKT1h7=U02XiQGsJDqdN5BghwJggPz3S1hn0QBA8UHZqvgZg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/14.4.3.140616
-x-originating-ip: [129.162.230.100]
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.12.52, 1.0.27,
-	0.0.0000
-	definitions=2014-08-14_03:2014-08-14, 2014-08-14,
-	1970-01-01 signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
-	score=0
-	kscore.is_bulkscore=5.55111512312578e-17 kscore.compositescore=1
-	circleOfTrustscore=0 compositescore=0.997781753771917
-	urlsuspect_oldscore=0.997781753771917 suspectscore=0
-	recipient_domain_to_sender_totalscore=0 phishscore=0 bulkscore=0
-	kscore.is_spamscore=0 recipient_to_sender_totalscore=0
-	recipient_domain_to_sender_domain_totalscore=0
-	rbsscore=0.997781753771917
-	spamscore=0 recipient_to_sender_domain_totalscore=0 urlsuspectscore=0.9
-	adultscore=0 classifier=spam adjust=-40 reason=mlx scancount=1
-	engine=7.0.1-1402240000 definitions=main-1408140181
-Subject: Re: [poky] Which beaglebone can I use to develop/use Poky?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Sujith H <Sujith_Haridasan@mentor.com>,
+	Christopher Larson <chris_larson@mentor.com>
+Subject: Re: [meta-python][PATCH] pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,85 +47,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 14:58:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <145002EC4076A24CA2701F4C1F561CFE@sw.pvt>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Aug 2014 15:02:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-You can check out this site too, if you haven=B9t come across it already:
-https://learn.adafruit.com/category/beaglebone
+On Thu, Aug 14, 2014 at 2:46 AM, sujith h <sujith.h@gmail.com> wrote:
 
-Donald R. Poole, Jr.
-Research Engineer
-Voice: 210.522.3131 | Fax: 210.522.4931
-Tactical Networks & Communications (tacticalnetworks.swri.org)
-Southwest Research Institute (SwRI)
+> Hi Tim,
+>
+>
+> On Wed, Aug 13, 2014 at 11:18 AM, Tim Orling <ticotimo@gmail.com> wrote:
+>
+> > On Tue, Aug 12, 2014 at 7:01 AM, Sujith H <sujith.h@gmail.com> wrote:
+> >
+> > > From: Sujith H <Sujith_Haridasan@mentor.com>
+> > >
+> > > This recipe will provide a set of Python modules that
+> > > provide Python programmers an interface to libparted,
+> > > the GNU parted library for disk partitioning and filesystem
+> > > manipulation.
+> > >
+> > > Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> > > Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+> > > ---
+> > >  meta-python/recipes-extended/pyparted/pyparted_3.9.bb | 19
+> > > +++++++++++++++++++
+> > >  1 file changed, 19 insertions(+)
+> > >  create mode 100644 meta-python/recipes-extended/pyparted/
+> > pyparted_3.9.bb
+> > >
+> >
+> > You should be following Debian naming policy (see
+> >
+> >
+> http://www.debian.org/doc/packaging-manuals/python-policy/ch-module_packages.html
+> > section 3.3), which means the name should be python-pyparted_3.9.bb ...
+> > the
+> > ONLY recipe that breaks this naming scheme in oe-core or meta-oe is
+> > pyrtm...and that is only because of legacy. I came >< this close to
+> > changing it during the layer creation.
+> >
+>
+> Ok. I will change it.
+>
+> >
+> > >
+> > > diff --git a/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> > > b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> > > new file mode 100644
+> > > index 0000000..79ebe02
+> > > --- /dev/null
+> > > +++ b/meta-python/recipes-extended/pyparted/pyparted_3.9.bb
+> > > @@ -0,0 +1,19 @@
+> > > +DESCRIPTION = "pyparted is a set of Python modules that provide Python
+> > > programmers \
+> > > +an interface to libparted, the GNU parted library for disk
+> partitioning
+> > > and \
+> > > +filesystem manipulation."
+> > > +SUMMARY = "Python bindings for libparted"
+> > > +HOMEPAGE = "https://fedorahosted.org/pyparted/"
+> > > +LICENSE = "GPL-2.0+"
+> > > +LIC_FILES_CHKSUM = "\
+> > > +    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+> > > +
+> > >
+> >
+>  file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46
+> > > \
+> > > +"
+> > > +DEPENDS += "parted"
+> > >
+> > During testing on qemuarm with core-image-sato, import fails for
+> "string" ,
+> > "locale", "math"... You need:
+> > RDEPENDS_${PN} += " python-stringold python-codecs python-math"
+> >
+> > I stopped testing at that point and went to bed :)
+> >
+> >
+> When I tried to build core-image-sato with meta-python layer included in
+> the bblayers, I had to add:
+> S="${WORKDIR}/pyparted-${PV}" ( as the name I changed to python-pyarted).
+> And the build went fine for me.
+> I was testing on qemuarm. I can add the RDEPENDS_${PN} += in the recipe.
+> Because of curiosity let me know
+> how you got import failure. I am building on the master branch.
+>
+> I am also using master branch (for both openembedded-core and
+meta-openembedded). I am building "distroless", with nothing added to
+core-image-sato except the following added to conf/local.conf:
+IMAGE_INSTALL_append = " python-pyparted"
 
+After the build completes, "runqemu core-image-sato". Launch the terminal
+application. At the prompt, "python"
+>>>import parted
 
+This reports, for instance, cannot import "string". Then an iterative
+process of adding packages to RDEPENDS_${PN} as it only checks for the
+first missing python module...
 
+I would have done a capture of the output, but qemu doesn't copy/paste?
 
+Regards,
+Tim
 
-
-On 8/14/14, 3:53 AM, "Journeyer J. Joh" <oosaprogrammer@gmail.com> wrote:
-
->Hello list,
 >
->Please ignore this question.
->I should have searched internet more before ask questions here!
->
->It was easy to find the information I need via google.
->
->I need beaglebone (black).
->
->Though I didn't find a good blog yet. I think I can find for those
->information also.
->
->I am sorry for not doing my must-do first.
->
->Thank you very much in advance.
->
->Sincerely
->Journeyer
->
->
->----------------------------------------
->Journeyer J. Joh
->o o s a p r o g r a m m e r
->a t
->g m a i l  d o t  c o m
->----------------------------------------
+> > > +
+> > > +SRC_URI = "
+> > > https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
+> > > +SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
+> > > +SRC_URI[sha256sum] =
+> > > "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
+> > > +
+> > > +inherit distutils
+> > > +
+> > > +BBCLASSEXTEND += "native"
+> > > --
+> > > 1.8.4
+> > >
+> >
+> >
+> > Regards,
+> >
+> > --Tim
+> >
+> > >
+> > >
 >
 >
->2014-08-14 11:47 GMT+09:00 Journeyer J. Joh <oosaprogrammer@gmail.com>:
->
->> Hi list,
->>
->> I'd like to ask about beaglebone for Poky.
->>
->> I want to develop and use Poky on a beaglebone.
->> But since I have no experience on this, I need information below. Please
->> help me.
->>
->> - Specific beaglebone version that Poky supports
->> - Any beaglebone accessory needed
->> - Some helpful blog or website for learning how to develop Poky on
->> beaglebone
->>
->> Thank you very much in advance!
->>
->> Sincerely
->> ----------------------------------------
->> Journeyer J. Joh
->> o o s a p r o g r a m m e r
->> a t
->> g m a i l  d o t  c o m
->> ----------------------------------------
->>
->--=20
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
 
