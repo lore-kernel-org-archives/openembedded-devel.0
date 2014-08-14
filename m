@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 32EE365F2A
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CA28660144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 09:17:48 +0000 (UTC)
+	Thu, 14 Aug 2014 09:17:49 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9HmDB006937
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E9HnqL015911
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Aug 2014 02:17:48 -0700 (PDT)
+	Thu, 14 Aug 2014 02:17:50 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:48 -0700
+	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 02:17:49 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <martin.jansa@gmail.com>
-Date: Thu, 14 Aug 2014 17:13:30 +0800
-Message-ID: <1408007615-23880-2-git-send-email-kai.kang@windriver.com>
+Date: Thu, 14 Aug 2014 17:13:31 +0800
+Message-ID: <1408007615-23880-3-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
 References: <1408007615-23880-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/6] libdigest-sha1-perl: add recipe
+Subject: [PATCH 2/6] libdigest-hmac-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,59 +38,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 14 Aug 2014 09:17:49 -0000
 Content-Type: text/plain
 
-Add recipe for libdigest-sha1-perl and enable create -ptest sub-package.
+Add recipe for libdigest-hmac-perl and enable to create -ptest sub-package.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++++++++
- .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++++++++++++
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libdigest/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
+ .../libdigest/libdigest-hmac-perl_1.03.bb          | 26 ++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
 
-diff --git a/meta-perl/recipes-perl/libdigest/files/run-ptest b/meta-perl/recipes-perl/libdigest/files/run-ptest
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
 new file mode 100644
-index 0000000..c9f9ca9
+index 0000000..affc9f6
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libdigest/files/run-ptest
-@@ -0,0 +1,16 @@
-+#!/bin/sh
-+
-+for case in `find t -type f -name '*.t'`; do
-+    perl $case >$case.output 2>&1
-+    ret=$?
-+    cat $case.output
-+    if [ $ret -ne 0 ]; then
-+        echo "FAIL: ${case%.t}"
-+    elif grep -i 'SKIP' $case.output; then
-+        echo "SKIP: ${case%.t}"
-+    else
-+        echo "PASS: ${case%.t}"
-+    fi
-+
-+    rm -f $case.output
-+done
-diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-new file mode 100644
-index 0000000..0371ea6
---- /dev/null
-+++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Perl interface to the SHA-1 algorithm "
-+DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
-+HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Keyed-Hashing for Message Authentication"
++DESCRIPTION = "Keyed-Hashing for Message Authentication"
++HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
 +SECTION = "libs"
 +
 +LICENSE = "Artistic-1.0|GPLv1+"
-+LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
++LIC_FILES_CHKSUM = "file://README;beginline=13;endline=17;md5=da980cdc026faa065e5d5004115334e6"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
++RDEPENDS_${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
++
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-HMAC-${PV}.tar.gz \
 +           file://run-ptest \
 +          "
-+SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
-+SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
++SRC_URI[md5sum] = "e6a5d6f552da16eacb5157ea4369ff9d"
++SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96da4a59"
 +
-+S = "${WORKDIR}/Digest-SHA1-${PV}"
++S = "${WORKDIR}/Digest-HMAC-${PV}"
 +
 +inherit cpan ptest
 +
@@ -98,9 +76,8 @@ index 0000000..0371ea6
 +    cp -r ${B}/t ${D}${PTEST_PATH}
 +}
 +
-+BBCLASSEXTEND="native"
-+
-+FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Digest/SHA1/.debug/"
++PACKAGE_ARCH = "all"
++BBCLASSEXTEND = "native"
 -- 
 1.9.1
 
