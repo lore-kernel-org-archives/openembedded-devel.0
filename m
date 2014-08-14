@@ -1,30 +1,35 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6343760144
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id C55C170CE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 08:42:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E8gKZM009934
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 14 Aug 2014 08:46:37 +0000 (UTC)
+Received: by mail-la0-f51.google.com with SMTP id pn19so735874lab.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 01:42:21 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Thu, 14 Aug 2014 01:42:20 -0700
-Message-ID: <53EC766B.8090402@windriver.com>
-Date: Thu, 14 Aug 2014 16:42:19 +0800
-From: Kang Kai <Kai.Kang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>	<53EC6CFA.9050406@windriver.com>
-	<20140814083809.GD14848@jama>
-In-Reply-To: <20140814083809.GD14848@jama>
-X-Originating-IP: [128.224.162.231]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-perl][PATCH 1/6] libdigest-sha1-perl: add recipe
+	Thu, 14 Aug 2014 01:46:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=YHkY0pZFvjttIhj34/Z2OnRT9CdeLc4E+FwGiq2CJFQ=;
+	b=H1tRzE8Bv15ZJ3IUwUMnNTOf1GNrfxUt1h+E0zuk8+Wb5mWGvW5tsD6NrJigjo4L7O
+	ZVlE0qFxKzS5ZSHnFmqJ1sr6Apof1qnYcQZ63baQWkroPDPthdkk9JVKe1DZ/74SFyxk
+	PRPtc6nOkgNLFO1MmNru0h854XSGkteZ7qqqWaYnsUqRozzsEnVivcQtvQpj5gTIwUZy
+	COX+kjUSrZgKFamVDP58LRFWgJZcojstdCsPEZDkFIpNxYeWez9Bqt5V5g7wEPOT9VRh
+	+1hqYjXVlSoW03zq1aHlrWyyW3myKnDtjTCrmS7loChu1t5p3Tl8smp5yK1JBjVr9qg4
+	Mkbg==
+X-Received: by 10.152.164.229 with SMTP id yt5mr3367385lab.19.1408005998147;
+	Thu, 14 Aug 2014 01:46:38 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id p4sm2733863lap.0.2014.08.14.01.46.36
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Aug 2014 01:46:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 Aug 2014 10:47:11 +0200
+Message-Id: <1408006032-21762-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.4
+Subject: [meta-oe][WIP][PATCH 1/2] efl: upgrade to 1.11.0-beta2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,114 +43,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 08:42:26 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Aug 2014 08:46:38 -0000
 
-On 2014?08?14? 16:38, Martin Jansa wrote:
-> On Thu, Aug 14, 2014 at 04:02:02PM +0800, Kang Kai wrote:
->> This series of commits is for layer *meta-perl*, and I add it in cover
->> letter created by 'git send-email --compose', but it seems doesn't work.
-> Please update indentation in them, you're using mix of tabs and spaces
-> -> use 4 spaces everywhere.
+* announcement:
+  https://phab.enlightenment.org/phame/post/view/74/
 
-Even in the shell function, such as
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/efl.inc                            | 13 +++++++++++--
+ .../efl/{efl_1.10.2.bb => efl_1.10.2+1.11.0-beta2.bb}       |  6 ++++--
+ ...ementary_1.10.2.bb => elementary_1.10.2+1.11.0-beta2.bb} |  6 ++++--
+ meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb  |  8 --------
+ .../efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb      | 10 ++++++++++
+ meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb     |  8 --------
+ .../efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb         | 10 ++++++++++
+ 7 files changed, 39 insertions(+), 22 deletions(-)
+ rename meta-efl/recipes-efl/efl/{efl_1.10.2.bb => efl_1.10.2+1.11.0-beta2.bb} (90%)
+ rename meta-efl/recipes-efl/efl/{elementary_1.10.2.bb => elementary_1.10.2+1.11.0-beta2.bb} (76%)
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
 
-+do_install_ptest () {
-+       cp -r ${B}/t ${D}${PTEST_PATH}
-+}
-
-
-I just thought it should be indented with tab.
-
-If so, I'll update them and send V2.
-
-Thanks,
-Kai
-
->
->> On 2014?08?14? 15:49, Kai Kang wrote:
->>
->>
->>> Add recipe for libdigest-sha1-perl and enable create -ptest sub-package.
->>>
->>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> ---
->>>    meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++++++++
->>>    .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++++++++++++
->>>    2 files changed, 41 insertions(+)
->>>    create mode 100644 meta-perl/recipes-perl/libdigest/files/run-ptest
->>>    create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>>
->>> diff --git a/meta-perl/recipes-perl/libdigest/files/run-ptest b/meta-perl/recipes-perl/libdigest/files/run-ptest
->>> new file mode 100644
->>> index 0000000..1c008b5
->>> --- /dev/null
->>> +++ b/meta-perl/recipes-perl/libdigest/files/run-ptest
->>> @@ -0,0 +1,16 @@
->>> +#!/bin/sh
->>> +
->>> +for case in `find t -type f -name '*.t'`; do
->>> +	perl $case >$case.output 2>&1
->>> +	ret=$?
->>> +	cat $case.output
->>> +	if [ $ret -ne 0 ]; then
->>> +		echo "FAIL: ${case%.t}"
->>> +	elif grep -i 'SKIP' $case.output; then
->>> +		echo "SKIP: ${case%.t}"
->>> +	else
->>> +		echo "PASS: ${case%.t}"
->>> +	fi
->>> +
->>> +	rm -f $case.output
->>> +done
->>> diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>> new file mode 100644
->>> index 0000000..42d5875
->>> --- /dev/null
->>> +++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>> @@ -0,0 +1,25 @@
->>> +SUMMARY = "Perl interface to the SHA-1 algorithm "
->>> +DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
->>> +HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
->>> +SECTION = "libs"
->>> +
->>> +LICENSE = "Artistic-1.0|GPLv1+"
->>> +LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
->>> +
->>> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
->>> +           file://run-ptest \
->>> +          "
->>> +SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
->>> +SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
->>> +
->>> +S = "${WORKDIR}/Digest-SHA1-${PV}"
->>> +
->>> +inherit cpan ptest
->>> +
->>> +do_install_ptest () {
->>> +       cp -r ${B}/t ${D}${PTEST_PATH}
->>> +}
->>> +
->>> +BBCLASSEXTEND="native"
->>> +
->>> +FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Digest/SHA1/.debug/"
->>
->> -- 
->> Regards,
->> Neil | Kai Kang
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
-
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index 648c5b6..6c870c5 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -19,7 +19,7 @@ PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldb
+ # your own in terms of ensuring everything works if you do this
+ EXTRA_OECONF = " \
+     --disable-physics \
+-    --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aaa \
++    --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aba \
+ "
+ EXTRA_OECONF_append_class-target = " \
+     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+@@ -60,13 +60,16 @@ PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+ PACKAGECONFIG[luajit] = "--disable-lua-old,--enable-lua-old,luajit"
+ PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua"
++PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
++# currently we don't provide doxygen-native
++PACKAGECONFIG[doc] = "--enable-doc,--disable-doc,doxygen-native"
+ 
+ # new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
+ do_configure_prepend_class-native() {
+     sed -i 's/EFL_LIB_START_OPTIONAL(\[Eeze\], \[test "${have_linux}" = "yes"\])/EFL_LIB_START_OPTIONAL([Eeze], [test "${no-we-really-dont-want-native-eeze}" = "yes"])/g' ${S}/configure.ac
+ }
+ 
+-PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
++PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua"
+ 
+ # upgrade path from 1.7
+ DEBIAN_NOAUTONAME_ecore-audio = "1"
+@@ -153,6 +156,7 @@ FILES_ecore-ipc = "\
+ "
+ FILES_ecore-x = "\
+     ${libdir}/libecore_x${SOLIBS} \
++    ${libdir}/ecore_x/bin/v-*/ecore_x_vsync \
+ "
+ FILES_ecore-evas = "\
+     ${libdir}/libecore_evas${SOLIBS} \
+@@ -241,9 +245,14 @@ FILES_edje = " \
+     ${datadir}/edje \
+     ${datadir}/mime \
+ "
++FILES_elua = " \
++    ${bindir}/elua \
++    ${datadir}/elua \
++"
+ FILES_${PN}-dbg += " \
+     ${libdir}/efreet/*/.debug \
+     ${libdir}/ecore*/*/*/*/.debug \
++    ${libdir}/ecore*/*/*/.debug \
+     ${libdir}/evas*/*/*/*/*/.debug \
+     ${libdir}/evas/cserve2/bin/*/.debug \
+     ${libdir}/eeze*/*/*/*/*/.debug \
+diff --git a/meta-efl/recipes-efl/efl/efl_1.10.2.bb b/meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
+similarity index 90%
+rename from meta-efl/recipes-efl/efl/efl_1.10.2.bb
+rename to meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
+index 76a9ba7..81b1e10 100644
+--- a/meta-efl/recipes-efl/efl/efl_1.10.2.bb
++++ b/meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
+@@ -1,11 +1,13 @@
+ require ${BPN}.inc
+ 
++SRCVER = "1.11.0-beta2"
++
+ SRC_URI = "\
+     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "c74888bfdc774e69eac26978557a89bb"
+-SRC_URI[sha256sum] = "44acf012f0dd3b0c01bb2c5e53231076d7ed463166f581d22ef441b127e8c85f"
++SRC_URI[md5sum] = "e995c4128c0469855c8e42bd098464a6"
++SRC_URI[sha256sum] = "2638ed950c84173c7ae25834d626db829984a377149c52ea3807326cbfa1b71a"
+ 
+ # Temporary disable until error like the one following are fixed
+ # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.10.2.bb b/meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
+similarity index 76%
+rename from meta-efl/recipes-efl/efl/elementary_1.10.2.bb
+rename to meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
+index eb182bb..40e1ebf 100644
+--- a/meta-efl/recipes-efl/efl/elementary_1.10.2.bb
++++ b/meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
+@@ -1,5 +1,7 @@
+ require ${BPN}.inc
+ 
++SRCVER = "1.11.0-beta2"
++
+ SRC_URI = "\
+     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+ "
+@@ -8,8 +10,8 @@ SRC_URI = "\
+ # these paths aren't passed in -native build
+ SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
+ 
+-SRC_URI[md5sum] = "2ccc130e137319accd81ccf3d321905b"
+-SRC_URI[sha256sum] = "48fcfbd66b90df8b21203307d66364fb1d773b3e979476116b2ad1a5eab67378"
++SRC_URI[md5sum] = "e665f480b4cafd95286c0cf88eb0a901"
++SRC_URI[sha256sum] = "c65b3b61e2ac6a72e84394055ec4cbf433302c19990807aea9fc261ddba3e586"
+ 
+ # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
+ # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
+deleted file mode 100644
+index 5d5ed4b..0000000
+--- a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "f73b1f73b38a323e37bd138b103191a5"
+-SRC_URI[sha256sum] = "ccfb1c8c346ba1a84484b82ce1ce871fd2c6660421ca7fa5d911661bd3cc94db"
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
+new file mode 100644
+index 0000000..3d2c72d
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
+@@ -0,0 +1,10 @@
++require ${BPN}.inc
++
++SRCVER = "1.11.0-beta2"
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "7a4ef3614f54f1886069c518a478d323"
++SRC_URI[sha256sum] = "e8b31d0609618333e9b61bb502243a9c37b6fae15a4b59badc641e2e0a0914c0"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
+deleted file mode 100644
+index 732c296..0000000
+--- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "ef5ac6a7960528bb12e997f3e304f151"
+-SRC_URI[sha256sum] = "f5294c1a86dd4d7d4983ec4217c0d0d1a9cfa3fc2060d4af7eec5fa4ce23a463"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
+new file mode 100644
+index 0000000..3d59565
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
+@@ -0,0 +1,10 @@
++require ${BPN}.inc
++
++SRCVER = "1.11.0-beta2"
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "e6b4792538df292e0a9735b15e02371c"
++SRC_URI[sha256sum] = "a77ae25ee30683a75dd4040f6547e2b9cc32cac8a274431750a90aafc8bdb9dc"
 -- 
-Regards,
-Neil | Kai Kang
+2.0.4
 
 
