@@ -1,31 +1,22 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D026610F5
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id C234D60144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 08:55:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7E8t1nE013212
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Aug 2014 01:55:01 -0700 (PDT)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Thu, 14 Aug 2014 01:55:01 -0700
-Message-ID: <53EC7964.5050504@windriver.com>
-Date: Thu, 14 Aug 2014 16:55:00 +0800
-From: Kang Kai <Kai.Kang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+	Thu, 14 Aug 2014 08:57:07 +0000 (UTC)
+Received: from localhost.localdomain (unknown [78.10.193.111])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 663CA4009BF;
+	Thu, 14 Aug 2014 10:57:06 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 14 Aug 2014 10:57:05 +0200
+Message-ID: <2564441.T2MRKS19rc@localhost.localdomain>
+User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <20140814083615.GC14848@jama>
+References: <1408002845-30625-1-git-send-email-maciej.borzecki@open-rnd.pl>
+	<20140814083615.GC14848@jama>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-References: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>	<53EC6CFA.9050406@windriver.com>
-	<20140814083809.GD14848@jama>	<53EC766B.8090402@windriver.com>
-	<20140814085201.GF14848@jama>
-In-Reply-To: <20140814085201.GF14848@jama>
-X-Originating-IP: [128.224.162.231]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-perl][PATCH 1/6] libdigest-sha1-perl: add recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] rabbitmq-c: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,133 +30,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 08:55:03 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Aug 2014 08:57:10 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On 2014?08?14? 16:52, Martin Jansa wrote:
-> On Thu, Aug 14, 2014 at 04:42:19PM +0800, Kang Kai wrote:
->> On 2014?08?14? 16:38, Martin Jansa wrote:
->>> On Thu, Aug 14, 2014 at 04:02:02PM +0800, Kang Kai wrote:
->>>> This series of commits is for layer *meta-perl*, and I add it in cover
->>>> letter created by 'git send-email --compose', but it seems doesn't work.
->>> Please update indentation in them, you're using mix of tabs and spaces
->>> -> use 4 spaces everywhere.
->> Even in the shell function, such as
->>
->> +do_install_ptest () {
->> +       cp -r ${B}/t ${D}${PTEST_PATH}
->> +}
->>
->>
->> I just thought it should be indented with tab.
-> Yes, tabs in shell tasks are used only by oe-core, meta-oe, meta-smartphone, meta-qt5, meta-webos, ..
-> are using consistent styleguide with 4 spaces everywhere.
+On Thursday 14 of August 2014 10:36:16 Martin Jansa wrote:
+> On Thu, Aug 14, 2014 at 09:54:05AM +0200, Maciej Borzecki wrote:
+> > rabbitmq-c is a C library providing an implementation of AMQP clien=
+t for
+> > use with v2.0+ of the RabbitMQ broker
+> >=20
+> > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> > ---
+> >=20
+> >  .../recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb | 17
+> >  +++++++++++++++++ 1 file changed, 17 insertions(+)
+> >  create mode 100644
+> >  meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb>=20
+> > diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5=
+.0.bb
+> > b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb new f=
+ile
+> > mode 100644
+> > index 0000000..5a02c99
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.5.0.bb
+> > @@ -0,0 +1,17 @@
+> > +DESCRIPTION =3D "A C-language AMQP client library for use with v2.=
+0+ of the
+> > RabbitMQ broker"
+> I did few more modifications when cherry-picking to master-next.
+Right, I missed that. Will post an updated patch.
 
-OK. I'll sent V2.
+BTW. any idea why xmlto might not be picking up the stylesheets correct=
+ly? I=20
+found your patch: https://git.congatec.com/yocto/meta-openembedded/comm=
+it/c688085b4c96c169ca853bf91b6fee54f4cd983d
+and you seem to be taking similar measures to disable documentation.
 
-Thanks a lot.
+>=20
+> > +HOMEPAGE =3D "https://github.com/alanxz/rabbitmq-c"
+> > +LIC_FILES_CHKSUM =3D
+> > "file://${S}/LICENSE-MIT;md5=3D6b7424f9db80cfb11fdd5c980b583f53"
+> Dropped ${S} as LIC_FILES_CHKSUM are by default relative to ${S}
+>=20
+> > +LICENSE =3D "MIT"
+> > +
+> >=20
+> >=20
+> > +SRC_URI =3D
+> > "https://github.com/alanxz/rabbitmq-c/releases/download/v${PV}/rabb=
+itmq-c
+> > -${PV}.tar.gz"
+> rabbitmq-c -> ${BPN}
+> rabbitmq-c-${PV} -> ${BP}
+>=20
+> > +SRC_URI[md5sum] =3D "b1f902c658c772cda464754678d8deb6"
+> > +SRC_URI[sha256sum] =3D
+> > "53702ea2ab809af0f923e387458e2cad191d9549f50410035fe82ce5e6ccc4fa" =
++
+> > +DEPENDS =3D "popt openssl"
+> > +
+> > +EXTRA_OECONF =3D "--disable-examples --enable-tools --disable-docs=
+"
+> > +
+> > +inherit autotools pkgconfig
+> > +
+> > +PACKAGE_BEFORE_PN +=3D "${PN}-tools"
+> > +FILES_${PN}-tools =3D "${bindir}"
 
---Kai
+--=20
 
->
->> If so, I'll update them and send V2.
->>
->> Thanks,
->> Kai
->>
->>>> On 2014?08?14? 15:49, Kai Kang wrote:
->>>>
->>>>
->>>>> Add recipe for libdigest-sha1-perl and enable create -ptest sub-package.
->>>>>
->>>>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>>>> ---
->>>>>     meta-perl/recipes-perl/libdigest/files/run-ptest   | 16 ++++++++++++++
->>>>>     .../libdigest/libdigest-sha1-perl_2.13.bb          | 25 ++++++++++++++++++++++
->>>>>     2 files changed, 41 insertions(+)
->>>>>     create mode 100644 meta-perl/recipes-perl/libdigest/files/run-ptest
->>>>>     create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>>>>
->>>>> diff --git a/meta-perl/recipes-perl/libdigest/files/run-ptest b/meta-perl/recipes-perl/libdigest/files/run-ptest
->>>>> new file mode 100644
->>>>> index 0000000..1c008b5
->>>>> --- /dev/null
->>>>> +++ b/meta-perl/recipes-perl/libdigest/files/run-ptest
->>>>> @@ -0,0 +1,16 @@
->>>>> +#!/bin/sh
->>>>> +
->>>>> +for case in `find t -type f -name '*.t'`; do
->>>>> +	perl $case >$case.output 2>&1
->>>>> +	ret=$?
->>>>> +	cat $case.output
->>>>> +	if [ $ret -ne 0 ]; then
->>>>> +		echo "FAIL: ${case%.t}"
->>>>> +	elif grep -i 'SKIP' $case.output; then
->>>>> +		echo "SKIP: ${case%.t}"
->>>>> +	else
->>>>> +		echo "PASS: ${case%.t}"
->>>>> +	fi
->>>>> +
->>>>> +	rm -f $case.output
->>>>> +done
->>>>> diff --git a/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>>>> new file mode 100644
->>>>> index 0000000..42d5875
->>>>> --- /dev/null
->>>>> +++ b/meta-perl/recipes-perl/libdigest/libdigest-sha1-perl_2.13.bb
->>>>> @@ -0,0 +1,25 @@
->>>>> +SUMMARY = "Perl interface to the SHA-1 algorithm "
->>>>> +DESCRIPTION = "Digest::SHA1 - Perl interface to the SHA-1 algorithm"
->>>>> +HOMEPAGE = "http://search.cpan.org/~gaas/Digest-SHA1-2.13/"
->>>>> +SECTION = "libs"
->>>>> +
->>>>> +LICENSE = "Artistic-1.0|GPLv1+"
->>>>> +LIC_FILES_CHKSUM = "file://README;beginline=10;endline=14;md5=ff5867ebb4bc1103a7a416aef2fce00a"
->>>>> +
->>>>> +SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-SHA1-${PV}.tar.gz \
->>>>> +           file://run-ptest \
->>>>> +          "
->>>>> +SRC_URI[md5sum] = "bd22388f268434f2b24f64e28bf1aa35"
->>>>> +SRC_URI[sha256sum] = "68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc"
->>>>> +
->>>>> +S = "${WORKDIR}/Digest-SHA1-${PV}"
->>>>> +
->>>>> +inherit cpan ptest
->>>>> +
->>>>> +do_install_ptest () {
->>>>> +       cp -r ${B}/t ${D}${PTEST_PATH}
->>>>> +}
->>>>> +
->>>>> +BBCLASSEXTEND="native"
->>>>> +
->>>>> +FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Digest/SHA1/.debug/"
->>>> -- 
->>>> Regards,
->>>> Neil | Kai Kang
->>>>
->>>> -- 
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->> -- 
->> Regards,
->> Neil | Kai Kang
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Maciej Borz=C4=99cki=20
+Senior Software Engineer Open-RnD Sp. z o.o.=20
+www.open-rnd.pl, Facebook, Twitter=20
+mobile: +48 telefon, fax: +48 42 657 9079=20
 
+Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
+awiera=C4=87 chronione prawem lub=20
+poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
+adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
+kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
+zosta=C5=82a otrzymana przypadkowo=20
+zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
+ich. W takim przypadku=20
+uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
+formowanie=20
+nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
+tnej. Dzi=C4=99kujemy.=20
 
--- 
-Regards,
-Neil | Kai Kang
-
+This message, including any attachments hereto, may contain privileged =
+or=20
+confidential information and is sent solely for the attention and use o=
+f the=20
+intended addressee(s). If you are not an intended addressee, you may ne=
+ither=20
+use this message nor copy or deliver it to anyone. In such case, you sh=
+ould=20
+immediately destroy this message and kindly notify the sender by reply =
+email.=20
+Thank you. 
 
