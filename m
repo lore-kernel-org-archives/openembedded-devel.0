@@ -1,44 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f43.google.com (mail-la0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ACBA609B1
+Return-Path: <gary.robertson@linaro.org>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id B7CAB60424
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 15:49:27 +0000 (UTC)
-Received: by mail-la0-f43.google.com with SMTP id hr17so1344548lab.2
+	Thu, 14 Aug 2014 19:04:59 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id f8so9385427wiw.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 08:49:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PM9n1TLSvxebylzoLzTX8VyvHlSIVbMGAAV3GJkhKzE=;
-	b=hXTGPe94PpDzrjVMJLd3+t0lcSUIEZlse6ICQ4DTJSxl6id20AXH2wcSalc+MwnjGH
-	ZNVvr1wiqFSjpnOnz1vT5nXoDGKF/WsxZxipfD7KJ2IEBm1b2xlfheNHaWNSsrbBewN1
-	tZFByafmvrxuNnrhmG45+gm1jAtd5nTroiJDnvSmCznaPcJoxB8Qo4ZokLhbDGwzyUHr
-	XYAqjJyWuHPKQRIEAJ9zhoz+vV3M6e4BOJPWqBAByFP+BQ9WfzotxvLY0nU+iAI8uxu7
-	6nkrzkpumy3+8WMZV9WjIYz4+dvEXSCl5SvxYKSQMBKM4wlPAK6G1L+BjxPxDeav2jsD
-	E8VQ==
-X-Received: by 10.152.121.98 with SMTP id lj2mr4259102lab.93.1408031368411;
-	Thu, 14 Aug 2014 08:49:28 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id l4sm3320130lam.2.2014.08.14.08.49.26
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Aug 2014 08:49:27 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 14 Aug 2014 17:50:04 +0200
-To: Maciej Borzecki <maciek.borzecki@gmail.com>
-Message-ID: <20140814155004.GM14848@jama>
-References: <1408030303-742-1-git-send-email-maciej.borzecki@open-rnd.pl>
-	<1408030303-742-3-git-send-email-maciej.borzecki@open-rnd.pl>
-	<20140814154220.GL14848@jama>
-	<3050179.UVPPAEUo1f@localhost.localdomain>
+	Thu, 14 Aug 2014 12:04:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc:content-type;
+	bh=3r/QGDeffiNGbOcnS5P+40WzErUCjLkGLuP4Mmhep08=;
+	b=SXwpZPfHKVVCW4duSKQxqNE80UeNpuzdZIGwZfDzR/GT26dkQGsDe8PTTefXeCkyqP
+	RJior312xxPGd24826LJKV1wIWjTIn36ZYBtMmjeXXNM4A67d6f6ZYFj9zhoXKTH7PsZ
+	uwmyqS61UdHR5xFNvYlZL5ZGYzzLOqAgsw0/77ghyf9JdmQiWVlZR7bAC+ewtxN5rPEr
+	9monzytncYpTJ83FnaQW5aABzgx4PXWpOHcyYYKyxK8GTD8OsGD9acWBzTW4yv/tpW9x
+	k9tjd+Iw/Qo5bR4lS0zmIPmYQrikWVWCVDR0BPdXyHo0bamdv+SGaPU78tsL/V5GRPgH
+	xBNg==
+X-Gm-Message-State: ALoCoQkhoWNliaYsqFznhNhwjNNOAEi2+t6jUiemFjOK/r1KCEDfi9PC4okJeviDHVhyJu4c14R/
 MIME-Version: 1.0
-In-Reply-To: <3050179.UVPPAEUo1f@localhost.localdomain>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 2/2] collectd: make pinba support a selectable feature
+X-Received: by 10.180.188.203 with SMTP id gc11mr47789791wic.59.1408043098232; 
+	Thu, 14 Aug 2014 12:04:58 -0700 (PDT)
+Received: by 10.216.120.72 with HTTP; Thu, 14 Aug 2014 12:04:58 -0700 (PDT)
+In-Reply-To: <1407868378-26155-1-git-send-email-gary.robertson@linaro.org>
+References: <1407868378-26155-1-git-send-email-gary.robertson@linaro.org>
+Date: Thu, 14 Aug 2014 14:04:58 -0500
+Message-ID: <CAF7YWnxeFrzp1EOojxezpa0-f+ivKPKmKnp1evdFr=pmd53npw@mail.gmail.com>
+From: Gary Robertson <gary.robertson@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][master][PATCH] libhugetlbfs: Extend arm32 support to include BE variants
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,81 +44,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 15:49:31 -0000
-X-Groupsio-MsgNum: 51702
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FzMlDQVV4VcwxUi5"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Aug 2014 19:05:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
---FzMlDQVV4VcwxUi5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The patch to add support for all arm 32-bit variants has now been accepted
+by the libhugetlbfs project - but as yet I have received no feedback on
+adding the patch to the OE libhugetlbfs recipe.  Did I format the patch or
+the subject line improperly?  I am new to this mailing list so I'm not too
+confident that I have adhered to its common practices.
 
-On Thu, Aug 14, 2014 at 05:45:12PM +0200, Maciej Borzecki wrote:
-> On Thursday 14 of August 2014 17:42:20 Martin Jansa wrote:
-> > On Thu, Aug 14, 2014 at 05:31:43PM +0200, Maciej Borzecki wrote:
-> > > Pinba support requires protobuf-c that is currently only available in
-> > > meta-virtualization layer. Make this a selectable feature.
-> >=20
-> > There is some protobuf in meta-oe
-> > meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf_2.4.1.bb
-> >=20
-> > is protobuf-c something else?
-> Yes. protobuf in meta-oe is a tool (protoc) and a C++ library, protobuf-c=
- is a=20
-> C implementation of the library.
+Gary Robertson
 
-So shouldn't PACKAGECONFIG contain protobuf-c as well?
 
-If yes, then please add comment above PACKAGECONFIG definition that
-protobuf-c is in meta-virtualization (so that people don't need to
-search commit messages).
+On Tue, Aug 12, 2014 at 1:32 PM, Gary S. Robertson <
+gary.robertson@linaro.org> wrote:
 
-Thanks
+> From: "Gary S. Robertson" <gary.robertson@linaro.org>
+>
+> Upstream Status: Submitted
+>
+> This patch applies the same technique used by Koen Kool in the following
+> patch
+> which was accepted by the libhugetlbfs project:
+>
+> [0a4f6] Add aarch64_be_support 2014-03-31 10:52:37
+>
+> It modifies the libhugetlbfs Makefile to mark all 32-bit arm architectures
+> as supported by the libhugetlbfs build.  Builds and successful functional
+> tests have been performed for armv7a LE and BE runtime platforms.
+>
+> This patch replaces and renders obsolete the following patch:
+> arm32-support.patch by: Chunrong Guo <B40290@freescale.com>
+>
+> Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+> ---
+>  ...tend-arm32-support-to-include-BE-variants.patch |   38
+> ++++++++++++++++++++
+>  .../libhugetlbfs/files/arm32-support.patch         |   29 ---------------
+>  .../libhugetlbfs/libhugetlbfs_git.bb               |    2 +-
+>  3 files changed, 39 insertions(+), 30 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Extend-arm32-support-to-include-BE-variants.patch
+>  delete mode 100644
+> meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
+>
+> diff --git
+> a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Extend-arm32-support-to-include-BE-variants.patch
+> b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Extend-arm32-support-to-include-BE-variants.patch
+> new file mode 100644
+> index 0000000..f6147cb
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Extend-arm32-support-to-include-BE-variants.patch
+> @@ -0,0 +1,38 @@
+> +From 5af6dec8764375ca4f13bd9fed96af090228351a Mon Sep 17 00:00:00 2001
+> +From: "Gary S. Robertson" <gary.robertson@linaro.org>
+> +Date: Mon, 11 Aug 2014 11:06:04 -0500
+> +Subject: [libhugetlbfs][PATCH] Extend arm32 support to include BE variants
+> +
+> +This patch applies the same technique used by Koen Kool in the following
+> patch
+> +which was accepted by the libhugetlbfs project:
+> +
+> +[0a4f6] Add aarch64_be_support 2014-03-31 10:52:37
+> +
+> +It modifies the libhugetlbfs Makefile to mark all 32-bit arm architectures
+> +as supported by the libhugetlbfs build.  Builds and successful functional
+> +tests have been performed for armv7a LE and BE runtime platforms.
+> +
+> +This patch replaces and renders obsolete the following patch:
+> +arm32-support.patch submitted by: Chunrong Guo <B40290@freescale.com>
+> +
+> +Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+> +---
+> + Makefile |    2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 91502e1..ba79607 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -59,7 +59,7 @@ ELF32 = elf32ppclinux
+> + TMPLIB32 = lib
+> + CPPFLAGS += -DPPC_NO_SEGMENTS
+> + else
+> +-ifeq ($(ARCH),armv7l)
+> ++ifneq (,$(findstring arm,$(ARCH)))
+> + CC32 = $(CC)
+> + TMPLIB32 = lib
+> + ELF32 += armelf_linux_eabi
+> +--
+> +1.7.9.5
+> +
+> diff --git
+> a/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
+> b/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
+> deleted file mode 100644
+> index 96f162d..0000000
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/arm32-support.patch
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -Upstream-Status: Submitted
+> -
+> -This patch adds support for arm32.
+> -
+> -Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> -
+> ---- a/Makefileold      2014-06-17 21:55:23.131058918 -0500
+> -+++ b/Makefile 2014-06-17 21:56:08.726098531 -0500
+> -@@ -59,6 +59,12 @@
+> - TMPLIB32 = lib
+> - CPPFLAGS += -DPPC_NO_SEGMENTS
+> - else
+> -+ifeq ($(ARCH),arm)
+> -+CC32 = $(CC)
+> -+TMPLIB32 = lib
+> -+ELF32 += armelf_linux_eabi
+> -+CUSTOM_LDSCRIPTS = no
+> -+else
+> - ifeq ($(ARCH),armv7l)
+> - CC32 = $(CC)
+> - TMPLIB32 = lib
+> -@@ -116,6 +122,7 @@
+> - endif
+> - endif
+> - endif
+> -+endif
+> -
+> - ifdef CC32
+> - OBJDIRS += obj32
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index 315863d..851b050 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -17,7 +17,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
+>      file://0001-aarch64-fix-cross-compilation.patch \
+>      file://0001-aarch64-fix-page-size-not-properly-computed.patch \
+>
+>  file://0001-replace-lib-lib64-hardcoded-values-by-LIBDIR32-LIBDI.patch \
+> -    file://arm32-support.patch \
+> +    file://0001-Extend-arm32-support-to-include-BE-variants.patch \
+>  "
+>
+>  S = "${WORKDIR}/git"
+> --
+> 1.7.9.5
+>
+>
 
-> > > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> > > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
-> > > ---
-> > >=20
-> > >  meta-oe/recipes-extended/collectd/collectd_5.2.2.bb | 1 +
-> > >  1 file changed, 1 insertion(+)
-> > >=20
-> > > diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > > b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb index
-> > > 30279c2..837eae5 100644
-> > > --- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > > +++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> > > @@ -32,6 +32,7 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors
-> > > --with-libsensors=3Dyes, \>=20
-> > >          --disable-sensors --with-libsensors=3Dno,lmsensors"
-> > > =20
-> > >  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \
-> > > =20
-> > >          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
-> > >=20
-> > > +PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf
-> > > protobuf-native">=20
-> > >  EXTRA_OECONF =3D " \
-> > > =20
-> > >                  ${FPLAYOUT} \
->=20
-> --=20
-> Maciek Borzecki <maciek.borzecki@gmail.com>
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---FzMlDQVV4VcwxUi5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPs2qwACgkQN1Ujt2V2gByvDwCaAp9gjEGLosG0hZ4hcOvUFhn+
-f7QAoK41BEkkcYO1GJkSCnuU18pIf93/
-=rqOy
------END PGP SIGNATURE-----
-
---FzMlDQVV4VcwxUi5--
