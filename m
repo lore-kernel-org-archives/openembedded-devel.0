@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C55C170CE4
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 808F170CBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 08:46:37 +0000 (UTC)
-Received: by mail-la0-f51.google.com with SMTP id pn19so735874lab.10
+	Thu, 14 Aug 2014 08:46:40 +0000 (UTC)
+Received: by mail-lb0-f182.google.com with SMTP id z11so727091lbi.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 01:46:38 -0700 (PDT)
+	Thu, 14 Aug 2014 01:46:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=YHkY0pZFvjttIhj34/Z2OnRT9CdeLc4E+FwGiq2CJFQ=;
-	b=H1tRzE8Bv15ZJ3IUwUMnNTOf1GNrfxUt1h+E0zuk8+Wb5mWGvW5tsD6NrJigjo4L7O
-	ZVlE0qFxKzS5ZSHnFmqJ1sr6Apof1qnYcQZ63baQWkroPDPthdkk9JVKe1DZ/74SFyxk
-	PRPtc6nOkgNLFO1MmNru0h854XSGkteZ7qqqWaYnsUqRozzsEnVivcQtvQpj5gTIwUZy
-	COX+kjUSrZgKFamVDP58LRFWgJZcojstdCsPEZDkFIpNxYeWez9Bqt5V5g7wEPOT9VRh
-	+1hqYjXVlSoW03zq1aHlrWyyW3myKnDtjTCrmS7loChu1t5p3Tl8smp5yK1JBjVr9qg4
-	Mkbg==
-X-Received: by 10.152.164.229 with SMTP id yt5mr3367385lab.19.1408005998147;
-	Thu, 14 Aug 2014 01:46:38 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=y740T6zNobu6yePkQiohgnZ+pOweVQ5EO1yiyZsP174=;
+	b=IRrDSAWUQ6kHnsRGWvO6y/TCDlUINM5ql2Md3/G4eCIFcKLongjdqwwAZ3FZRRhc6k
+	KTU467KlpDUH40UXKNSCJFdgYHgVYwVS/N+V6UdKUvPF4HZw7DbTqaqQLhS0lYXQttly
+	XV4+V6MFN2n5T2kkJR5fUJXkPFwCGbAPzaniLnuU+8T+E7OCMCHsSQY44Rxh4zJ4u7le
+	dS39TyWNl6DpxVsKXbLEKKsLhBYnRxzCJrJMmfZUmuow4hg3X4njl8WOPL4EFTZRXzfx
+	TkfbCeiDNDVJka+DNQgV2ajjPp6VojkQJU3Nf/aBI9GkP3ladr2E0VogMUXfpNzR2/35
+	szvw==
+X-Received: by 10.152.207.36 with SMTP id lt4mr3402541lac.72.1408006000264;
+	Thu, 14 Aug 2014 01:46:40 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id p4sm2733863lap.0.2014.08.14.01.46.36
+	by mx.google.com with ESMTPSA id p4sm2733932lap.0.2014.08.14.01.46.38
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Aug 2014 01:46:37 -0700 (PDT)
+	Thu, 14 Aug 2014 01:46:39 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Aug 2014 10:47:11 +0200
-Message-Id: <1408006032-21762-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 14 Aug 2014 10:47:12 +0200
+Message-Id: <1408006032-21762-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.0.4
-Subject: [meta-oe][WIP][PATCH 1/2] efl: upgrade to 1.11.0-beta2
+In-Reply-To: <1408006032-21762-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1408006032-21762-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][WIP][PATCH 2/2] webkit-efl: upgrade to 1.11.0-beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,191 +45,664 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 08:46:38 -0000
+X-List-Received-Date: Thu, 14 Aug 2014 08:46:41 -0000
 
+* webkit-efl snapshots are now versioned consistenly with efl
+  bump PE to prevent version going backwards
 * announcement:
-  https://phab.enlightenment.org/phame/post/view/74/
+  http://sourceforge.net/p/enlightenment/mailman/message/32713414/
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-efl/efl/efl.inc                            | 13 +++++++++++--
- .../efl/{efl_1.10.2.bb => efl_1.10.2+1.11.0-beta2.bb}       |  6 ++++--
- ...ementary_1.10.2.bb => elementary_1.10.2+1.11.0-beta2.bb} |  6 ++++--
- meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb  |  8 --------
- .../efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb      | 10 ++++++++++
- meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb     |  8 --------
- .../efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb         | 10 ++++++++++
- 7 files changed, 39 insertions(+), 22 deletions(-)
- rename meta-efl/recipes-efl/efl/{efl_1.10.2.bb => efl_1.10.2+1.11.0-beta2.bb} (90%)
- rename meta-efl/recipes-efl/efl/{elementary_1.10.2.bb => elementary_1.10.2+1.11.0-beta2.bb} (76%)
- delete mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
- create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
- delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
- create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
+ meta-efl/recipes-efl/webkit/webkit-efl.inc         |  28 ++--
+ ...on.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch |  46 ++++++
+ ...KitHelpers.cmake-Add-Wno-error-cast-align.patch |  30 ----
+ ...r.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch |  80 ----------
+ ...rs.cmake-Add-Wno-error-deprecated-declara.patch |  27 ++++
+ .../webkit/webkit-efl/0003-Fix-linking-issue.patch |  63 --------
+ ...emorySamplerLinux-Fix-type-limits-warning.patch |  32 ----
+ .../webkit-efl/0004-fix-type-limits-error.patch    |  15 ++
+ .../recipes-efl/webkit/webkit-efl/CMakeLists.txt   | 166 ---------------------
+ .../webkit/webkit-efl_1.10.0+1.11.0-beta1.bb       |  10 ++
+ .../webkit/webkit-efl_2.3.4+svnr164189.bb          |  13 --
+ meta-efl/recipes-efl/webkit/webkit-efl_svn.bb      |  22 ---
+ 12 files changed, 111 insertions(+), 421 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-OptionsCommon.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0002-WebKitHelpers.cmake-Add-Wno-error-deprecated-declara.patch
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0003-Fix-linking-issue.patch
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0004-WebMemorySamplerLinux-Fix-type-limits-warning.patch
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/0004-fix-type-limits-error.patch
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl/CMakeLists.txt
+ create mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_1.10.0+1.11.0-beta1.bb
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_2.3.4+svnr164189.bb
+ delete mode 100644 meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
 
-diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
-index 648c5b6..6c870c5 100644
---- a/meta-efl/recipes-efl/efl/efl.inc
-+++ b/meta-efl/recipes-efl/efl/efl.inc
-@@ -19,7 +19,7 @@ PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldb
- # your own in terms of ensuring everything works if you do this
- EXTRA_OECONF = " \
-     --disable-physics \
--    --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aaa \
-+    --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aba \
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl.inc b/meta-efl/recipes-efl/webkit/webkit-efl.inc
+index 44ef9d4..bb5d7a6 100644
+--- a/meta-efl/recipes-efl/webkit/webkit-efl.inc
++++ b/meta-efl/recipes-efl/webkit/webkit-efl.inc
+@@ -1,8 +1,10 @@
+ DESCRIPTION = "Webkit browser engine, EFL edition"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8bab0b12 \
+-                    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
+-                    file://Source/WebKit/efl/ewk/EWebKit.h;endline=20;md5=55ea170b1582797d2c69712de850f2fa \
++LICENSE = "GPLv2+ & LGPL-2.1"
++LIC_FILES_CHKSUM = " \
++    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
++    file://Source/WebCore/LICENSE-APPLE;md5=4646f90082c40bcf298c285f8bab0b12 \
++    file://Source/WebCore/LICENSE-LGPL-2.1;md5=a778a33ef338abbaf8b8a7c36b6eec80 \
++    file://Source/WebCore/LICENSE-LGPL-2;md5=36357ffde2b64ae177b2494445b79d21 \
  "
- EXTRA_OECONF_append_class-target = " \
-     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-@@ -60,13 +60,16 @@ PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio
- PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
- PACKAGECONFIG[luajit] = "--disable-lua-old,--enable-lua-old,luajit"
- PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua"
-+PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
-+# currently we don't provide doxygen-native
-+PACKAGECONFIG[doc] = "--enable-doc,--disable-doc,doxygen-native"
  
- # new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
- do_configure_prepend_class-native() {
-     sed -i 's/EFL_LIB_START_OPTIONAL(\[Eeze\], \[test "${have_linux}" = "yes"\])/EFL_LIB_START_OPTIONAL([Eeze], [test "${no-we-really-dont-want-native-eeze}" = "yes"])/g' ${S}/configure.ac
- }
- 
--PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
-+PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua"
- 
- # upgrade path from 1.7
- DEBIAN_NOAUTONAME_ecore-audio = "1"
-@@ -153,6 +156,7 @@ FILES_ecore-ipc = "\
- "
- FILES_ecore-x = "\
-     ${libdir}/libecore_x${SOLIBS} \
-+    ${libdir}/ecore_x/bin/v-*/ecore_x_vsync \
- "
- FILES_ecore-evas = "\
-     ${libdir}/libecore_evas${SOLIBS} \
-@@ -241,9 +245,14 @@ FILES_edje = " \
-     ${datadir}/edje \
-     ${datadir}/mime \
- "
-+FILES_elua = " \
-+    ${bindir}/elua \
-+    ${datadir}/elua \
-+"
- FILES_${PN}-dbg += " \
-     ${libdir}/efreet/*/.debug \
-     ${libdir}/ecore*/*/*/*/.debug \
-+    ${libdir}/ecore*/*/*/.debug \
-     ${libdir}/evas*/*/*/*/*/.debug \
-     ${libdir}/evas/cserve2/bin/*/.debug \
-     ${libdir}/eeze*/*/*/*/*/.debug \
-diff --git a/meta-efl/recipes-efl/efl/efl_1.10.2.bb b/meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
-similarity index 90%
-rename from meta-efl/recipes-efl/efl/efl_1.10.2.bb
-rename to meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
-index 76a9ba7..81b1e10 100644
---- a/meta-efl/recipes-efl/efl/efl_1.10.2.bb
-+++ b/meta-efl/recipes-efl/efl/efl_1.10.2+1.11.0-beta2.bb
-@@ -1,11 +1,13 @@
- require ${BPN}.inc
- 
-+SRCVER = "1.11.0-beta2"
+ # you need harfbuzz with icu enabled, you can add this to your config:
+@@ -10,18 +12,14 @@ LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8ba
+ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
+            libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
+            libxml2 pango eina ecore evas edje eldbus harfbuzz enchant \
+-           ruby-native"
++           ruby-native elementary"
 +
++PE = "1"
+ 
  SRC_URI = "\
-     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_RELEASES}/libs/webkit-efl/webkit-efl-164189.tar.xz \
+-    file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
+-    file://0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch \
+-    file://0003-Fix-linking-issue.patch \
++    ${E_RELEASES}/libs/webkit-efl/ewebkit-${SRCVER}.tar.xz \
  "
- 
--SRC_URI[md5sum] = "c74888bfdc774e69eac26978557a89bb"
--SRC_URI[sha256sum] = "44acf012f0dd3b0c01bb2c5e53231076d7ed463166f581d22ef441b127e8c85f"
-+SRC_URI[md5sum] = "e995c4128c0469855c8e42bd098464a6"
-+SRC_URI[sha256sum] = "2638ed950c84173c7ae25834d626db829984a377149c52ea3807326cbfa1b71a"
- 
- # Temporary disable until error like the one following are fixed
- # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.10.2.bb b/meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
-similarity index 76%
-rename from meta-efl/recipes-efl/efl/elementary_1.10.2.bb
-rename to meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
-index eb182bb..40e1ebf 100644
---- a/meta-efl/recipes-efl/efl/elementary_1.10.2.bb
-+++ b/meta-efl/recipes-efl/efl/elementary_1.10.2+1.11.0-beta2.bb
-@@ -1,5 +1,7 @@
- require ${BPN}.inc
- 
-+SRCVER = "1.11.0-beta2"
-+
- SRC_URI = "\
-     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
- "
-@@ -8,8 +10,8 @@ SRC_URI = "\
- # these paths aren't passed in -native build
- SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
- 
--SRC_URI[md5sum] = "2ccc130e137319accd81ccf3d321905b"
--SRC_URI[sha256sum] = "48fcfbd66b90df8b21203307d66364fb1d773b3e979476116b2ad1a5eab67378"
-+SRC_URI[md5sum] = "e665f480b4cafd95286c0cf88eb0a901"
-+SRC_URI[sha256sum] = "c65b3b61e2ac6a72e84394055ec4cbf433302c19990807aea9fc261ddba3e586"
- 
- # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
- # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
-diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
-deleted file mode 100644
-index 5d5ed4b..0000000
---- a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.0.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require ${BPN}.inc
+-SRC_URI[md5sum] = "731513fc042ec8e03840bc1ab6a66771"
+-SRC_URI[sha256sum] = "660aefd65c0e5c6494eaec30539cda5f40fbdff17f28e7e83d341b245227cccd"
 -
--SRC_URI = "\
--    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
--"
--
--SRC_URI[md5sum] = "f73b1f73b38a323e37bd138b103191a5"
--SRC_URI[sha256sum] = "ccfb1c8c346ba1a84484b82ce1ce871fd2c6660421ca7fa5d911661bd3cc94db"
-diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
+-S = "${WORKDIR}/efl-webkit"
++S = "${WORKDIR}/ewebkit"
+ 
+ inherit cmake lib_package pkgconfig perlnative pythonnative
+ 
+@@ -60,8 +58,8 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
+ LEAD_SONAME = "libewebkit.so"
+ PACKAGES =+ "${PN}launcher-dbg ${PN}launcher ${PN}-inspector"
+ 
+-FILES_${PN} += "${datadir}/webkit-1.0/theme/default.edj ${datadir}/ewebkit-0/themes/default.edj"
++FILES_${PN} += "${datadir}/ewebkit2-1/themes/default.edj"
+ FILES_${PN}-dev += "${libdir}/cmake"
+ FILES_${PN}launcher = "${bindir}/EWebLauncher"
+ FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
+-FILES_${PN}-inspector += "${datadir}/ewebkit-0/inspector"
++FILES_${PN}-inspector += "${datadir}/ewebkit2-1/inspector"
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-OptionsCommon.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-OptionsCommon.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch
 new file mode 100644
-index 0000000..3d2c72d
+index 0000000..56026ea
 --- /dev/null
-+++ b/meta-efl/recipes-efl/efl/emotion-generic-players_1.10.2+1.11.0-beta2.bb
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0001-OptionsCommon.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch
+@@ -0,0 +1,46 @@
++From 3c0dbb8f46f61127d89b29a1be2793325f104989 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Thu, 14 Aug 2014 01:00:21 +0200
++Subject: [PATCH 1/2] OptionsCommon.cmake: don't mix CXX_FLAGS into C_FLAGS
++
++* it was added in https://bugs.webkit.org/show_bug.cgi?id=130261
++* causes build failures in udis86 which explicitly asks for gcc but then
++  gets g++ flags from CMAKE_CXX_FLAGS.
++
++cc1: error: command line option '-fvisibility-inlines-hidden' is valid
++for C++/ObjC++ but not for C [-Werror]
++cc1: error: command line option '-fpermissive' is valid for C++/ObjC++
++but not for C [-Werror]
++cc1: all warnings being treated as errors
++Source/JavaScriptCore/CMakeFiles/JavaScriptCore.dir/build.make:11182:
++recipe for target
++'Source/JavaScriptCore/CMakeFiles/JavaScriptCore.dir/disassembler/udis86/udis86.c.o'
++failed
++make[2]: ***
++[Source/JavaScriptCore/CMakeFiles/JavaScriptCore.dir/disassembler/udis86/udis86.c.o]
++Error 1
++make[2]: *** Waiting for unfinished jobs....
++make[2]: Leaving directory
++'/OE/build/oe-core/tmp-eglibc/work/core2-64-oe-linux/webkit-efl/1_1.10.0+1.11.0-beta1-r0/build'
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ Source/cmake/OptionsCommon.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Source/cmake/OptionsCommon.cmake b/Source/cmake/OptionsCommon.cmake
++index e304a99..045c614 100644
++--- a/Source/cmake/OptionsCommon.cmake
+++++ b/Source/cmake/OptionsCommon.cmake
++@@ -25,7 +25,7 @@ endif ()
++ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
++ 
++ if (CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
++-    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-strict-aliasing")
+++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-exceptions -fno-strict-aliasing")
++     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-exceptions -fno-strict-aliasing -fno-rtti")
++ endif ()
++ 
++-- 
++2.0.4
++
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
+deleted file mode 100644
+index c769c7f..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl/0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From b37711ca03ea9410e795f29398069fed9e9c2d30 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Mon, 13 Jan 2014 17:21:25 +0100
+-Subject: [PATCH 1/3] WebKitHelpers.cmake: Add -Wno-error=cast-align
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- Source/cmake/WebKitHelpers.cmake | 6 +++++-
+- 1 file changed, 5 insertions(+), 1 deletion(-)
+-
+-diff --git a/Source/cmake/WebKitHelpers.cmake b/Source/cmake/WebKitHelpers.cmake
+-index 409931c..345b346 100644
+---- a/Source/cmake/WebKitHelpers.cmake
+-+++ b/Source/cmake/WebKitHelpers.cmake
+-@@ -44,7 +44,11 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
+- 
+-         # Enable errors on warning
+-         if (OPTION_ENABLE_WERROR)
+--            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter ${OLD_COMPILE_FLAGS}")
+-+            # FIXME: When we use -fno-tree-dce to support the jsCStack branch merge, build error occurs due to the uninitialization. Temporarily we set
+-+            # uninitialized as build warning in order to support the jsCStack merge. https://bugs.webkit.org/show_bug.cgi?id=127777.
+-+            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=uninitialized ${OLD_COMPILE_FLAGS}")
+-+            # | /OE/build/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:161:104: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::FloatTypedArrayAdaptor<double, JSC::GenericTypedArrayView<JSC::Float64Adaptor>, JSC::JSGenericTypedArrayView<JSC::Float64Adaptor>, (JSC::TypedArrayType)9u>::Type* {aka double*}' increases required alignment of target type [-Werror=cast-align]
+-+            set(OLD_COMPILE_FLAGS "-Wno-error=cast-align -Wno-error=array-bounds -Wno-error=deprecated-declarations ${OLD_COMPILE_FLAGS}")
+-         endif ()
+- 
+-         set_target_properties(${_target} PROPERTIES
+--- 
+-1.9.0
+-
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch
+deleted file mode 100644
+index 9f005bc..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl/0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+-From e284e92da00011e55d8f79383034e0c9c1a8a106 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Thu, 27 Feb 2014 13:40:43 +0100
+-Subject: [PATCH 2/3] ARMAssembler.h: Don't generate BKPT and BLX for armv4*
+-
+-* I haven't tested it in runtime yet, but it's better than to wait for asm failure later:
+-  {standard input}: Assembler messages:
+-  {standard input}:35: Error: selected processor does not support ARM mode `bkpt #0'
+-  {standard input}:62: Error: selected processor does not support ARM mode `blx llint_throw_stack_overflow_error'
+-  ...
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- Source/JavaScriptCore/assembler/ARMAssembler.h | 19 +++++++++++++++++++
+- 1 file changed, 19 insertions(+)
+-
+-diff --git a/Source/JavaScriptCore/assembler/ARMAssembler.h b/Source/JavaScriptCore/assembler/ARMAssembler.h
+-index 087d31c..1b40ded 100644
+---- a/Source/JavaScriptCore/assembler/ARMAssembler.h
+-+++ b/Source/JavaScriptCore/assembler/ARMAssembler.h
+-@@ -211,7 +211,9 @@ namespace JSC {
+-             LDMIA = 0x08b00000,
+-             B = 0x0a000000,
+-             BL = 0x0b000000,
+-+#if WTF_ARM_ARCH_AT_LEAST(5)
+-             BX = 0x012fff10,
+-+#endif
+-             VMOV_VFP64 = 0x0c400a10,
+-             VMOV_ARM64 = 0x0c500a10,
+-             VMOV_VFP32 = 0x0e000a10,
+-@@ -223,8 +225,10 @@ namespace JSC {
+-             VCVT_F64_F32 = 0x0eb70ac0,
+-             VMRS_APSR = 0x0ef1fa10,
+-             CLZ = 0x016f0f10,
+-+#if WTF_ARM_ARCH_AT_LEAST(5)
+-             BKPT = 0xe1200070,
+-             BLX = 0x012fff30,
+-+#endif
+- #if WTF_ARM_ARCH_AT_LEAST(7)
+-             MOVW = 0x03000000,
+-             MOVT = 0x03400000,
+-@@ -689,7 +693,11 @@ namespace JSC {
+- 
+-         void bkpt(ARMWord value)
+-         {
+-+#if WTF_ARM_ARCH_AT_LEAST(5)
+-             m_buffer.putInt(BKPT | ((value & 0xff0) << 4) | (value & 0xf));
+-+#else
+-+            // BKPT is available in ARMv5T and above, skip it here
+-+#endif
+-         }
+- 
+-         void nop()
+-@@ -704,12 +712,23 @@ namespace JSC {
+- 
+-         void bx(int rm, Condition cc = AL)
+-         {
+-+#if WTF_ARM_ARCH_AT_LEAST(5)
+-             emitInstruction(toARMWord(cc) | BX, 0, 0, RM(rm));
+-+#else
+-+            // BX is available in ARMv5T and above.
+-+            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::pc, ARMRegisters::lr, 0);
+-+#endif
+-         }
+- 
+-         AssemblerLabel blx(int rm, Condition cc = AL)
+-         {
+-+#if WTF_ARM_ARCH_AT_LEAST(5)
+-             emitInstruction(toARMWord(cc) | BLX, 0, 0, RM(rm));
+-+#else
+-+            // BLX is available in ARMv5T and above.
+-+            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::lr, ARMRegisters::pc, 0);
+-+            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::pc, RM(rm), 0);
+-+#endif
+-             return m_buffer.label();
+-         }
+- 
+--- 
+-1.9.0
+-
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0002-WebKitHelpers.cmake-Add-Wno-error-deprecated-declara.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0002-WebKitHelpers.cmake-Add-Wno-error-deprecated-declara.patch
+new file mode 100644
+index 0000000..8b8bf15
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0002-WebKitHelpers.cmake-Add-Wno-error-deprecated-declara.patch
+@@ -0,0 +1,27 @@
++From c7d6469d07fc8f04352a56a649b9abfafa4a1355 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 13 Jan 2014 17:21:25 +0100
++Subject: [PATCH 2/2] WebKitHelpers.cmake: Add
++ -Wno-error=deprecated-declarations
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ Source/cmake/WebKitHelpers.cmake | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/Source/cmake/WebKitHelpers.cmake b/Source/cmake/WebKitHelpers.cmake
++index 227b9ee..bf5257c 100644
++--- a/Source/cmake/WebKitHelpers.cmake
+++++ b/Source/cmake/WebKitHelpers.cmake
++@@ -40,6 +40,8 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
++             # FIXME: When we use -fno-tree-dce to support the jsCStack branch merge, build error occurs due to the uninitialization. Temporarily we set
++             # uninitialized as build warning in order to support the jsCStack merge. https://bugs.webkit.org/show_bug.cgi?id=127777.
++             set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=uninitialized -Wno-error=literal-suffix ${OLD_COMPILE_FLAGS}")
+++            # libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:13:84: error: 'GType soup_proxy_uri_resolver_get_type()' is deprecated (declared at /OE/build/oe-core/tmp-eglibc/sysroots/qemux86-64/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:48) [-Werror=deprecated-declarations]
+++            set(OLD_COMPILE_FLAGS "-Wno-error=deprecated-declarations ${OLD_COMPILE_FLAGS}")
++         endif ()
++ 
++         set_target_properties(${_target} PROPERTIES
++-- 
++2.0.4
++
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0003-Fix-linking-issue.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0003-Fix-linking-issue.patch
+deleted file mode 100644
+index ce1c687..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl/0003-Fix-linking-issue.patch
++++ /dev/null
+@@ -1,63 +0,0 @@
+-From 09088da56f3de17ab1cc537627cda6bf808eaf4c Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Thu, 27 Feb 2014 14:17:29 +0100
+-Subject: [PATCH 3/3] Fix linking issue
+-
+-* inline function is sometimes not included soon enough
+-
+-  Partialy taken from:
+-  https://bugs.webkit.org/show_bug.cgi?id=124152
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- Source/JavaScriptCore/llint/LLIntEntrypoint.cpp          | 3 +++
+- Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp | 3 +++
+- Source/JavaScriptCore/runtime/SymbolTable.cpp            | 4 ++++
+- 3 files changed, 10 insertions(+)
+-
+-diff --git a/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp b/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
+-index 5d91be6..73cba31 100644
+---- a/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
+-+++ b/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
+-@@ -31,6 +31,9 @@
+- #include "CodeBlock.h"
+- #include "JITCode.h"
+- #include "JSObject.h"
+-+#include "JSCellInlines.h"
+-+#include "JSDestructibleObject.h"
+-+#include "SlotVisitorInlines.h"
+- #include "LLIntThunks.h"
+- #include "LowLevelInterpreter.h"
+- #include "MaxFrameExtentForSlowPathCall.h"
+-diff --git a/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp b/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
+-index d0583fc..4be5ec3 100644
+---- a/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
+-+++ b/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
+-@@ -25,6 +25,9 @@
+- 
+- #include "config.h"
+- #include "FunctionExecutableDump.h"
+-+#include "JSCellInlines.h"
+-+#include "JSDestructibleObject.h"
+-+#include "SlotVisitorInlines.h"
+- 
+- #include "CodeBlock.h"
+- 
+-diff --git a/Source/JavaScriptCore/runtime/SymbolTable.cpp b/Source/JavaScriptCore/runtime/SymbolTable.cpp
+-index 6eb0239..21450df 100644
+---- a/Source/JavaScriptCore/runtime/SymbolTable.cpp
+-+++ b/Source/JavaScriptCore/runtime/SymbolTable.cpp
+-@@ -33,6 +33,10 @@
+- #include "JSCInlines.h"
+- #include "SlotVisitorInlines.h"
+- 
+-+#include "JSCellInlines.h"
+-+#include "JSDestructibleObject.h"
+-+#include "SlotVisitorInlines.h"
+-+
+- namespace JSC {
+- 
+- const ClassInfo SymbolTable::s_info = { "SymbolTable", 0, 0, 0, CREATE_METHOD_TABLE(SymbolTable) };
+--- 
+-1.9.0
+-
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0004-WebMemorySamplerLinux-Fix-type-limits-warning.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0004-WebMemorySamplerLinux-Fix-type-limits-warning.patch
+deleted file mode 100644
+index f30987b..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl/0004-WebMemorySamplerLinux-Fix-type-limits-warning.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From ed7972510df191d9fabe7aff2f688cbc45f0c955 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Sun, 20 Jul 2014 10:52:17 +0200
+-Subject: [PATCH] WebMemorySamplerLinux: Fix type-limits warning
+-
+-* otherwise it fails with:
+-  webkit-efl/2.3.4+svnr164189-r0/efl-webkit/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp:70:16:
+-  error: comparison is always false due to limited range of data type [-Werror=type-limits]
+-  |          if (ch == EOF || (isASCIISpace(ch) && index)) // Break on non-initial ASCII space.
+-  |                 ^
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp b/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp
+-index 7cb70d4..6bb78d8 100644
+---- a/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp
+-+++ b/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp
+-@@ -67,7 +67,7 @@ static inline String nextToken(FILE* file)
+-     unsigned int index = 0;
+-     while (index < maxBuffer) {
+-         char ch = fgetc(file);
+--        if (ch == EOF || (isASCIISpace(ch) && index)) // Break on non-initial ASCII space.
+-+        if (isASCIISpace(ch) && index) // Break on non-initial ASCII space.
+-             break;
+-         if (!isASCIISpace(ch)) {
+-             buffer[index] = ch;
+--- 
+-2.0.0
+-
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/0004-fix-type-limits-error.patch b/meta-efl/recipes-efl/webkit/webkit-efl/0004-fix-type-limits-error.patch
+new file mode 100644
+index 0000000..21ebb65
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl/0004-fix-type-limits-error.patch
+@@ -0,0 +1,15 @@
++webkit-efl/2.3.4+svnr164189-r0/efl-webkit/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp:70:16: error: comparison is always false due to limited range of data type [-Werror=type-limits]
++|          if (ch == EOF || (isASCIISpace(ch) && index)) // Break on non-initial ASCII space.
++|                 ^
++
++--- efl-webkit/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp.orig       2014-07-20 10:50:06.454145736 +0200
+++++ efl-webkit/Source/WebKit2/Shared/linux/WebMemorySamplerLinux.cpp    2014-07-20 10:46:33.952159063 +0200
++@@ -67,7 +67,7 @@
++     unsigned int index = 0;
++     while (index < maxBuffer) {
++         char ch = fgetc(file);
++-        if (ch == EOF || (isASCIISpace(ch) && index)) // Break on non-initial ASCII space.
+++        if (isASCIISpace(ch) && index) // Break on non-initial ASCII space.
++             break;
++         if (!isASCIISpace(ch)) {
++             buffer[index] = ch;
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl/CMakeLists.txt b/meta-efl/recipes-efl/webkit/webkit-efl/CMakeLists.txt
+deleted file mode 100644
+index 8071d61..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl/CMakeLists.txt
++++ /dev/null
+@@ -1,166 +0,0 @@
+-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+-PROJECT(WebKit)
+-
+-# Set a default build type if and only if user did not define one as command
+-# line options and he did not give custom CFLAGS or CXXFLAGS. Otherwise, flags
+-# from default build type would overwrite user-defined ones.
+-IF (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_C_FLAGS AND NOT CMAKE_CXX_FLAGS)
+-    SET(CMAKE_BUILD_TYPE Release)
+-ENDIF ()
+-
+-# -----------------------------------------------------------------------------
+-# Default library type
+-# -----------------------------------------------------------------------------
+-SET(ENABLE_WEBCORE ON)
+-
+-IF (NOT ENABLE_WEBKIT AND NOT ENABLE_WEBKIT2)
+-    SET(ENABLE_WEBKIT ON)
+-ENDIF ()
+-
+-SET(ENABLE_TOOLS ON)
+-
+-SET(WTF_DIR "${CMAKE_SOURCE_DIR}/Source/WTF")
+-SET(JAVASCRIPTCORE_DIR "${CMAKE_SOURCE_DIR}/Source/JavaScriptCore")
+-SET(WEBCORE_DIR "${CMAKE_SOURCE_DIR}/Source/WebCore")
+-SET(WEBKIT_DIR "${CMAKE_SOURCE_DIR}/Source/WebKit")
+-SET(WEBKIT2_DIR "${CMAKE_SOURCE_DIR}/Source/WebKit2")
+-SET(THIRDPARTY_DIR "${CMAKE_SOURCE_DIR}/Source/ThirdParty")
+-
+-SET(TOOLS_DIR "${CMAKE_SOURCE_DIR}/Tools")
+-
+-SET(DERIVED_SOURCES_DIR "${CMAKE_BINARY_DIR}/DerivedSources")
+-SET(DERIVED_SOURCES_JAVASCRIPTCORE_DIR "${CMAKE_BINARY_DIR}/DerivedSources/JavaScriptCore")
+-SET(DERIVED_SOURCES_WEBCORE_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebCore")
+-SET(DERIVED_SOURCES_WEBKIT_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebKit")
+-SET(DERIVED_SOURCES_WEBKIT2_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebKit2")
+-
+-SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Source/cmake")
+-
+-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+-SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+-
+-INCLUDE(WebKitMacros)
+-INCLUDE(WebKitFS)
+-INCLUDE(WebKitHelpers)
+-INCLUDE(WebKitFeatures)
+-
+-# -----------------------------------------------------------------------------
+-# Determine which port will be built
+-# -----------------------------------------------------------------------------
+-SET(ALL_PORTS Efl WinCE BlackBerry)
+-SET(PORT "NOPORT" CACHE STRING "choose which WebKit port to build (one of ${ALL_PORTS})")
+-
+-LIST(FIND ALL_PORTS ${PORT} RET)
+-IF (${RET} EQUAL -1)
+-    MESSAGE(FATAL_ERROR "Please choose which WebKit port to build (one of ${ALL_PORTS})")
+-ENDIF ()
+-
+-STRING(TOLOWER ${PORT} WEBKIT_PORT_DIR)
+-
+-# -----------------------------------------------------------------------------
+-# Find common packages (used by all ports)
+-# -----------------------------------------------------------------------------
+-FIND_PACKAGE(BISON REQUIRED)
+-FIND_PACKAGE(FLEX REQUIRED)
+-FIND_PACKAGE(Gperf REQUIRED)
+-FIND_PACKAGE(Perl REQUIRED)
+-FIND_PACKAGE(PythonInterp REQUIRED)
+-
+-# -----------------------------------------------------------------------------
+-# Determine the target processor
+-# -----------------------------------------------------------------------------
+-STRING(TOLOWER ${CMAKE_SYSTEM_PROCESSOR} LOWERCASE_CMAKE_SYSTEM_PROCESSOR)
+-IF (LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "^arm")
+-    SET(WTF_CPU_ARM 1)
+-ELSEIF (LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "^mips")
+-    SET(WTF_CPU_MIPS 1)
+-ELSEIF (LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "(x86_64|amd64)")
+-    SET(WTF_CPU_X86_64 1)
+-ELSEIF (LOWERCASE_CMAKE_SYSTEM_PROCESSOR MATCHES "(i[3-6]86|x86)")
+-    SET(WTF_CPU_X86 1)
+-ELSE ()
+-    MESSAGE(FATAL_ERROR "Unknown CPU '${CMAKE_SYSTEM_PROCESSOR}'")
+-ENDIF ()
+-
+-# -----------------------------------------------------------------------------
+-# Determine the operating system
+-# -----------------------------------------------------------------------------
+-IF (UNIX)
+-    IF (APPLE)
+-        SET(WTF_OS_MAC_OS_X 1)
+-    ELSE ()
+-        SET(WTF_OS_UNIX 1)
+-    ENDIF ()
+-ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
+-    SET(WTF_OS_WINDOWS 1)
+-ELSEIF (CMAKE_SYSTEM_NAME MATCHES "QNX")
+-    SET(WTF_OS_QNX 1)
+-    SET(WTF_OS_UNIX 1)
+-ELSE ()
+-    MESSAGE(FATAL_ERROR "Unknown OS '${CMAKE_SYSTEM_NAME}'")
+-ENDIF ()
+-
+-# -----------------------------------------------------------------------------
+-# Default target names (can be overrriden in Options${PORT}.cmake file)
+-# -----------------------------------------------------------------------------
+-SET(JSC_EXECUTABLE_NAME JSC)
+-SET(WTF_LIBRARY_NAME WTF)
+-SET(JavaScriptCore_LIBRARY_NAME JavaScriptCore)
+-SET(WebCore_LIBRARY_NAME WebCore)
+-SET(WebKit_LIBRARY_NAME WebKit)
+-SET(WebKit2_LIBRARY_NAME WebKit2)
+-SET(WebCoreTestSupport_LIBRARY_NAME WebCoreTestSupport)
+-
+-# -----------------------------------------------------------------------------
+-# Default library types
+-# -----------------------------------------------------------------------------
+-OPTION(SHARED_CORE "build JavaScriptCore and WebCore as shared libraries")
+-
+-IF (SHARED_CORE)
+-    SET(JavaScriptCore_LIBRARY_TYPE SHARED)
+-    SET(WebCore_LIBRARY_TYPE SHARED)
+-ELSE ()
+-    SET(JavaScriptCore_LIBRARY_TYPE STATIC)
+-    SET(WebCore_LIBRARY_TYPE STATIC)
+-ENDIF ()
+-
+-SET(WebKit_LIBRARY_TYPE SHARED)
+-SET(WebKit2_LIBRARY_TYPE SHARED)
+-SET(WebCoreTestSupport_LIBRARY_TYPE STATIC)
+-
+-# -----------------------------------------------------------------------------
+-# Port-specific options
+-# -----------------------------------------------------------------------------
+-INCLUDE(OptionsCommon)
+-INCLUDE(Options${PORT})
+-
+-# -----------------------------------------------------------------------------
+-# Enable API unit tests and create a target for the test runner
+-# -----------------------------------------------------------------------------
+-IF (ENABLE_API_TESTS)
+-    ENABLE_TESTING()
+-ENDIF ()
+-
+-# -----------------------------------------------------------------------------
+-# Install JavaScript shell
+-# -----------------------------------------------------------------------------
+-OPTION(SHOULD_INSTALL_JS_SHELL "generate an installation rule to install the built JavaScript shell")
+-
+-# -----------------------------------------------------------------------------
+-# Define packaging
+-# -----------------------------------------------------------------------------
+-INCLUDE(WebKitPackaging)
+-
+-# -----------------------------------------------------------------------------
+-# Add module directories
+-# -----------------------------------------------------------------------------
+-ADD_SUBDIRECTORY(Source)
+-
+-# -----------------------------------------------------------------------------
+-# Add tools
+-# -----------------------------------------------------------------------------
+-IF (ENABLE_TOOLS)
+-    ADD_SUBDIRECTORY(Tools)
+-ENDIF ()
+-
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_1.10.0+1.11.0-beta1.bb b/meta-efl/recipes-efl/webkit/webkit-efl_1.10.0+1.11.0-beta1.bb
+new file mode 100644
+index 0000000..82f6ac2
+--- /dev/null
++++ b/meta-efl/recipes-efl/webkit/webkit-efl_1.10.0+1.11.0-beta1.bb
 @@ -0,0 +1,10 @@
 +require ${BPN}.inc
 +
-+SRCVER = "1.11.0-beta2"
++SRCVER = "1.11.0-beta1"
 +
-+SRC_URI = "\
-+    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++SRC_URI += "\
++    file://0001-OptionsCommon.cmake-don-t-mix-CXX_FLAGS-into-C_FLAGS.patch \
++    file://0002-WebKitHelpers.cmake-Add-Wno-error-deprecated-declara.patch \
 +"
-+
-+SRC_URI[md5sum] = "7a4ef3614f54f1886069c518a478d323"
-+SRC_URI[sha256sum] = "e8b31d0609618333e9b61bb502243a9c37b6fae15a4b59badc641e2e0a0914c0"
-diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
++SRC_URI[md5sum] = "03932735215118c3c354ccab4a517b13"
++SRC_URI[sha256sum] = "7d0545f79be3633973eb7340318552f80a213c5afddd2c3fee5ccd543cc0418d"
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.4+svnr164189.bb b/meta-efl/recipes-efl/webkit/webkit-efl_2.3.4+svnr164189.bb
 deleted file mode 100644
-index 732c296..0000000
---- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.0.bb
+index 748ecea..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl_2.3.4+svnr164189.bb
 +++ /dev/null
-@@ -1,8 +0,0 @@
+@@ -1,13 +0,0 @@
 -require ${BPN}.inc
 -
 -SRC_URI = "\
--    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-    ${E_RELEASES}/libs/webkit-efl/webkit-efl-164189.tar.xz \
+-    file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
+-    file://0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch \
+-    file://0003-Fix-linking-issue.patch \
+-    file://0004-WebMemorySamplerLinux-Fix-type-limits-warning.patch \
+-"
+-SRC_URI[md5sum] = "731513fc042ec8e03840bc1ab6a66771"
+-SRC_URI[sha256sum] = "660aefd65c0e5c6494eaec30539cda5f40fbdff17f28e7e83d341b245227cccd"
+-
+-S = "${WORKDIR}/efl-webkit"
+diff --git a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb b/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
+deleted file mode 100644
+index e50139c..0000000
+--- a/meta-efl/recipes-efl/webkit/webkit-efl_svn.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-require ${BPN}.inc
+-
+-SRCREV = "164189"
+-PV = "2.3.4+svnr${SRCPV}"
+-
+-SRCREV_FORMAT = "source"
+-
+-SRC_URI = "\
+-    svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
+-    svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
+-    svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
+-    file://CMakeLists.txt \
+-    file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
+-    file://0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch \
+-    file://0003-Fix-linking-issue.patch \
 -"
 -
--SRC_URI[md5sum] = "ef5ac6a7960528bb12e997f3e304f151"
--SRC_URI[sha256sum] = "f5294c1a86dd4d7d4983ec4217c0d0d1a9cfa3fc2060d4af7eec5fa4ce23a463"
-diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
-new file mode 100644
-index 0000000..3d59565
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.10.2+1.11.0-beta2.bb
-@@ -0,0 +1,10 @@
-+require ${BPN}.inc
-+
-+SRCVER = "1.11.0-beta2"
-+
-+SRC_URI = "\
-+    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "e6b4792538df292e0a9735b15e02371c"
-+SRC_URI[sha256sum] = "a77ae25ee30683a75dd4040f6547e2b9cc32cac8a274431750a90aafc8bdb9dc"
+-S = "${WORKDIR}/src"
+-
+-do_configure_prepend() {
+-    cp ${WORKDIR}/CMakeLists.txt ${S};
+-}
 -- 
 2.0.4
 
