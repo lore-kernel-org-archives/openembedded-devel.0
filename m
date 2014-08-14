@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F71460CFC
+	by mail.openembedded.org (Postfix) with ESMTP id 604C56ACD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 07:54:14 +0000 (UTC)
+	Thu, 14 Aug 2014 07:54:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E7sFIw006063
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E7sDAO006060
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 00:54:16 -0700 (PDT)
+	Thu, 14 Aug 2014 00:54:13 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 00:54:15 -0700
+	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 00:54:12 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Aug 2014 15:49:54 +0800
-Message-ID: <1408002596-9778-4-git-send-email-kai.kang@windriver.com>
+Date: Thu, 14 Aug 2014 15:49:52 +0800
+Message-ID: <1408002596-9778-2-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>
 References: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
-Subject: [PATCH 4/6] libnet-ssleay-perl: add recipe
+Subject: [PATCH 2/6] libdigest-hmac-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,88 +38,46 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 14 Aug 2014 07:54:17 -0000
 Content-Type: text/plain
 
-Add recipe for libnet-ssleay-perl. Inherit ptest to enable build
--ptest sub-package and add file 'run-ptest'.
+Add recipe for libdigest-hmac-perl and enable to create -ptest sub-package.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-perl/recipes-perl/libnet/files/run-ptest      | 16 ++++++++
- .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 43 ++++++++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libnet/files/run-ptest
- create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+ .../libdigest/libdigest-hmac-perl_1.03.bb          | 26 ++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
 
-diff --git a/meta-perl/recipes-perl/libnet/files/run-ptest b/meta-perl/recipes-perl/libnet/files/run-ptest
+diff --git a/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
 new file mode 100644
-index 0000000..1c008b5
+index 0000000..6ca6814
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libnet/files/run-ptest
-@@ -0,0 +1,16 @@
-+#!/bin/sh
-+
-+for case in `find t -type f -name '*.t'`; do
-+	perl $case >$case.output 2>&1
-+	ret=$?
-+	cat $case.output
-+	if [ $ret -ne 0 ]; then
-+		echo "FAIL: ${case%.t}"
-+	elif grep -i 'SKIP' $case.output; then
-+		echo "SKIP: ${case%.t}"
-+	else
-+		echo "PASS: ${case%.t}"
-+	fi
-+
-+	rm -f $case.output
-+done
-diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-new file mode 100644
-index 0000000..8e4ba2a
---- /dev/null
-+++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "Net::SSLeay - Perl extension for using OpenSSL"
-+DESCRIPTION = "This module offers some high level convenience functions for accessing \
-+web pages on SSL servers (for symmetry, same API is offered for \
-+accessing http servers, too), a sslcat() function for writing your own \
-+clients, and finally access to the SSL api of SSLeay/OpenSSL package \
-+so you can write servers or clients for more complicated applications."
-+HOMEPAGE = "http://search.cpan.org/dist/Net-SSLeay/"
++++ b/meta-perl/recipes-perl/libdigest/libdigest-hmac-perl_1.03.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Keyed-Hashing for Message Authentication"
++DESCRIPTION = "Keyed-Hashing for Message Authentication"
++HOMEPAGE = "http://search.cpan.org/~gaas/Digest-HMAC-1.03/"
 +SECTION = "libs"
 +
-+LICENSE = "OpenSSL"
-+LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=49f415984b387be999ee2ad0e5c692fe"
++LICENSE = "Artistic-1.0|GPLv1+"
++LIC_FILES_CHKSUM = "file://README;beginline=13;endline=17;md5=da980cdc026faa065e5d5004115334e6"
 +
-+DEPENDS = "openssl zlib"
-+RDEPENDS_${PN} += " \
-+	perl-module-carp \
-+	perl-module-errno \
-+	perl-module-extutils-makemaker \
-+	perl-module-mime-base64 \
-+	perl-module-socket \
-+	"
++RDEPENDS_${PN} = "libdigest-sha1-perl perl-module-extutils-makemaker perl-module-digest-md5"
 +
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/Digest-HMAC-${PV}.tar.gz \
 +           file://run-ptest \
 +          "
-+SRC_URI[md5sum] = "19600c036e9e0bbfbf9157f083e40755"
-+SRC_URI[sha256sum] = "2fb1371120b85f018944d95736c107163f04ba56b6029c0709a2c3d6247b9c06"
++SRC_URI[md5sum] = "e6a5d6f552da16eacb5157ea4369ff9d"
++SRC_URI[sha256sum] = "3bc72c6d3ff144d73aefb90e9a78d33612d58cf1cd1631ecfb8985ba96da4a59"
 +
-+S = "${WORKDIR}/Net-SSLeay-${PV}"
++S = "${WORKDIR}/Digest-HMAC-${PV}"
 +
 +inherit cpan ptest
 +
-+EXTRA_CPANFLAGS = "LIBS='-L=${libdir} -L=${base_libdir}' \
-+              INC=-I=${includedir} \
-+              'EXTRALIBS=-lssl -lcrypto -lz' \
-+              'LDLOADLIBS=-lssl -lcrypto -lz'"
-+
-+do_install_ptest() {
-+	cp -r ${B}/t ${D}${PTEST_PATH}
++do_install_ptest () {
++       cp -r ${B}/t ${D}${PTEST_PATH}
 +}
 +
++PACKAGE_ARCH = "all"
 +BBCLASSEXTEND = "native"
-+
-+FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
 -- 
 1.9.1
 
