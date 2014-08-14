@@ -1,24 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2826460438
+	by mail.openembedded.org (Postfix) with ESMTP id 5F71460CFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 03:19:39 +0000 (UTC)
+	Thu, 14 Aug 2014 07:54:14 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E3Je1Z003899
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7E7sFIw006063
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Aug 2014 20:19:41 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 13 Aug 2014 20:19:40 -0700
-From: <rongqing.li@windriver.com>
+	Thu, 14 Aug 2014 00:54:16 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Thu, 14 Aug 2014 00:54:15 -0700
+From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Aug 2014 11:19:42 +0800
-Message-ID: <1407986382-29305-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+Date: Thu, 14 Aug 2014 15:49:54 +0800
+Message-ID: <1408002596-9778-4-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>
+References: <1408002596-9778-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] eject: three fixes
+X-Originating-IP: [128.224.153.152]
+Subject: [PATCH 4/6] libnet-ssleay-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,162 +35,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Aug 2014 03:19:40 -0000
+X-List-Received-Date: Thu, 14 Aug 2014 07:54:17 -0000
 Content-Type: text/plain
 
-From: Morgan Little <morgan.little@windriver.com>
+Add recipe for libnet-ssleay-perl. Inherit ptest to enable build
+-ptest sub-package and add file 'run-ptest'.
 
-eject-2.1.1-verbose.patch: Kept to help with debugging
-eject-2.1.5-spaces.patch: help with spaces in the mount path
-eject-timeout.patch: allow a longer timeout
-
-Signed-off-by: Morgan Little <morgan.little@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../eject/eject/eject-2.1.1-verbose.patch          |   19 ++++++
- .../eject/eject/eject-2.1.5-spaces.patch           |   66 ++++++++++++++++++++
- .../eject/eject/eject-timeout.patch                |   17 +++++
- meta-oe/recipes-support/eject/eject_2.1.5.bb       |    3 +
- 4 files changed, 105 insertions(+)
- create mode 100644 meta-oe/recipes-support/eject/eject/eject-2.1.1-verbose.patch
- create mode 100644 meta-oe/recipes-support/eject/eject/eject-2.1.5-spaces.patch
- create mode 100644 meta-oe/recipes-support/eject/eject/eject-timeout.patch
+ meta-perl/recipes-perl/libnet/files/run-ptest      | 16 ++++++++
+ .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 43 ++++++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libnet/files/run-ptest
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
 
-diff --git a/meta-oe/recipes-support/eject/eject/eject-2.1.1-verbose.patch b/meta-oe/recipes-support/eject/eject/eject-2.1.1-verbose.patch
+diff --git a/meta-perl/recipes-perl/libnet/files/run-ptest b/meta-perl/recipes-perl/libnet/files/run-ptest
 new file mode 100644
-index 0000000..7403606
+index 0000000..1c008b5
 --- /dev/null
-+++ b/meta-oe/recipes-support/eject/eject/eject-2.1.1-verbose.patch
-@@ -0,0 +1,19 @@
-+Kept to help with debugging
++++ b/meta-perl/recipes-perl/libnet/files/run-ptest
+@@ -0,0 +1,16 @@
++#!/bin/sh
 +
-+Upstream-Status: Pending
++for case in `find t -type f -name '*.t'`; do
++	perl $case >$case.output 2>&1
++	ret=$?
++	cat $case.output
++	if [ $ret -ne 0 ]; then
++		echo "FAIL: ${case%.t}"
++	elif grep -i 'SKIP' $case.output; then
++		echo "SKIP: ${case%.t}"
++	else
++		echo "PASS: ${case%.t}"
++	fi
 +
-+Signed-off-by: Morgan Little <morgan.little@windriver.com>
-+
-+--- eject-2.1.1/eject.c.tn	2005-08-24 11:27:42.000000000 +0200
-++++ eject-2.1.1/eject.c	2005-08-24 11:33:05.000000000 +0200
-+@@ -638,7 +638,9 @@
-+ 	unsigned char sense_buffer[32];
-+ 
-+ 	if ((ioctl(fd, SG_GET_VERSION_NUM, &k) < 0) || (k < 30000)) {
-+-	  printf("not an sg device, or old sg driver\n");
-++	  if (v_option) {
-++		  printf(_("not an sg device, or old sg driver\n"));
-++	  }
-+ 	  return 0;
-+ 	}
-+ 
-diff --git a/meta-oe/recipes-support/eject/eject/eject-2.1.5-spaces.patch b/meta-oe/recipes-support/eject/eject/eject-2.1.5-spaces.patch
++	rm -f $case.output
++done
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
 new file mode 100644
-index 0000000..a16c4b1
+index 0000000..8e4ba2a
 --- /dev/null
-+++ b/meta-oe/recipes-support/eject/eject/eject-2.1.5-spaces.patch
-@@ -0,0 +1,66 @@
-+Kept to help with spaces in the mount path
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+@@ -0,0 +1,43 @@
++SUMMARY = "Net::SSLeay - Perl extension for using OpenSSL"
++DESCRIPTION = "This module offers some high level convenience functions for accessing \
++web pages on SSL servers (for symmetry, same API is offered for \
++accessing http servers, too), a sslcat() function for writing your own \
++clients, and finally access to the SSL api of SSLeay/OpenSSL package \
++so you can write servers or clients for more complicated applications."
++HOMEPAGE = "http://search.cpan.org/dist/Net-SSLeay/"
++SECTION = "libs"
 +
-+Upstream-Status: Backport
++LICENSE = "OpenSSL"
++LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=49f415984b387be999ee2ad0e5c692fe"
 +
-+Linux mangles spaces in mount points by changing them to an octal string
-+of '\040'.  So lets scan the mount point and fix it up by replacing all
-+occurrences off '\0##' with the ASCII value of 0##.  Requires a writable
-+string as input as we mangle in place.  Some of this was taken from the
-+util-linux package.
++DEPENDS = "openssl zlib"
++RDEPENDS_${PN} += " \
++	perl-module-carp \
++	perl-module-errno \
++	perl-module-extutils-makemaker \
++	perl-module-mime-base64 \
++	perl-module-socket \
++	"
 +
-+Signed-off-by: Morgan Little <morgan.little@windriver.com>
-+--- eject/eject.c.ori   2007-06-24 00:08:44 -0700
-++++ eject/eject.c       2007-06-24 00:12:44 -0700
-+@@ -370,6 +370,30 @@
-+ 
-+ 
-+ /*
-++ * Linux mangles spaces in mount points by changing them to an octal string
-++ * of '\040'.  So lets scan the mount point and fix it up by replacing all
-++ * occurrences off '\0##' with the ASCII value of 0##.  Requires a writable
-++ * string as input as we mangle in place.  Some of this was taken from the
-++ * util-linux package.
-++ */
-++#define octalify(a) ((a) & 7)
-++#define tooctal(s) (64*octalify(s[1]) + 8*octalify(s[2]) + octalify(s[3]))
-++#define isoctal(a) (((a) & ~7) == '0')
-++static char *DeMangleMount(char *s)
-++{
-++	char *tmp = s;
-++	while ((tmp = strchr(tmp, '\\')) != NULL) {
-++		if (isoctal(tmp[1]) && isoctal(tmp[2]) && isoctal(tmp[3])) {
-++			tmp[0] = tooctal(tmp);
-++			memmove(tmp+1, tmp+4, strlen(tmp)-3);
-++		}
-++		++tmp;
-++	}
-++	return s;
-++}
-++
-++
-++/*
-+  * Given name, such as foo, see if any of the following exist:
-+  *
-+  * foo (if foo starts with '.' or '/')
-+@@ -884,8 +908,8 @@
-+ 			if (((strcmp(s1, name) == 0) || (strcmp(s2, name) == 0)) ||
-+ 				((maj != -1) && (maj == mtabmaj) && (min == mtabmin))) {
-+ 				FCLOSE(fp);
-+-				*deviceName = strdup(s1);
-+-				*mountName = strdup(s2);
-++				*deviceName = DeMangleMount(strdup(s1));
-++				*mountName = DeMangleMount(strdup(s2));
-+ 				return 1;
-+ 			}
-+ 		}
-+@@ -928,8 +952,8 @@
-+ 		rc = sscanf(line, "%1023s %1023s", s1, s2);
-+ 		if (rc >= 2 && s1[0] != '#' && strcmp(s2, name) == 0) {
-+ 			FCLOSE(fp);
-+-			*deviceName = strdup(s1);
-+-			*mountName = strdup(s2);
-++			*deviceName = DeMangleMount(strdup(s1));
-++			*mountName = DeMangleMount(strdup(s2));
-+ 			return 1;
-+ 		}
-+ 	}
-diff --git a/meta-oe/recipes-support/eject/eject/eject-timeout.patch b/meta-oe/recipes-support/eject/eject/eject-timeout.patch
-new file mode 100644
-index 0000000..de8146f
---- /dev/null
-+++ b/meta-oe/recipes-support/eject/eject/eject-timeout.patch
-@@ -0,0 +1,17 @@
-+allow a longer timeout
++SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
++           file://run-ptest \
++          "
++SRC_URI[md5sum] = "19600c036e9e0bbfbf9157f083e40755"
++SRC_URI[sha256sum] = "2fb1371120b85f018944d95736c107163f04ba56b6029c0709a2c3d6247b9c06"
 +
-+Upstream-Status: Backport 
++S = "${WORKDIR}/Net-SSLeay-${PV}"
 +
-+Signed-off-by: Morgan Little <morgan.little@windriver.com>
++inherit cpan ptest
 +
-+--- eject/eject.c.orig	2006-08-07 16:35:15.000000000 +0200
-++++ eject/eject.c	2006-08-07 16:35:54.000000000 +0200
-+@@ -723,7 +723,7 @@
-+ 	io_hdr.dxfer_len = 0;
-+ 	io_hdr.dxferp = inqBuff;
-+ 	io_hdr.sbp = sense_buffer;
-+-	io_hdr.timeout = 2000;
-++	io_hdr.timeout = 10000;
-+ 
-+ 	io_hdr.cmdp = allowRmBlk;
-+ 	status = ioctl(fd, SG_IO, (void *)&io_hdr);
-diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index 9534577..0440f0c 100644
---- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-+++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -7,6 +7,9 @@ inherit autotools gettext update-alternatives
- 
- SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz \
-            file://eject-2.1.5-error-return.patch \
-+           file://eject-2.1.1-verbose.patch \
-+           file://eject-2.1.5-spaces.patch \
-+           file://eject-timeout.patch \
- "
- 
- SRC_URI[md5sum] = "b96a6d4263122f1711db12701d79f738"
++EXTRA_CPANFLAGS = "LIBS='-L=${libdir} -L=${base_libdir}' \
++              INC=-I=${includedir} \
++              'EXTRALIBS=-lssl -lcrypto -lz' \
++              'LDLOADLIBS=-lssl -lcrypto -lz'"
++
++do_install_ptest() {
++	cp -r ${B}/t ${D}${PTEST_PATH}
++}
++
++BBCLASSEXTEND = "native"
++
++FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
 -- 
-1.7.10.4
+1.9.1
 
 
