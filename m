@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 032BE60438
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 005F660438
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Aug 2014 05:35:52 +0000 (UTC)
+	Fri, 15 Aug 2014 05:46:25 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7F5ZrAe021815
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7F5kQPE003147
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Aug 2014 22:35:53 -0700 (PDT)
-Received: from pek-hostel-vm07.wrs.com (128.224.153.177) by
+	Thu, 14 Aug 2014 22:46:26 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 14 Aug 2014 22:35:52 -0700
-From: <Qi.Chen@windriver.com>
+	14.3.174.1; Thu, 14 Aug 2014 22:46:26 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Aug 2014 01:35:51 -0400
-Message-ID: <1408080951-30317-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Fri, 15 Aug 2014 13:46:29 +0800
+Message-ID: <1408081589-29084-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] hostapd: add systemd support
+Subject: [PATCH][meta-networking] wireshark: add libsmi portaudio to PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,80 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Aug 2014 05:35:55 -0000
+X-List-Received-Date: Fri, 15 Aug 2014 05:46:34 -0000
 Content-Type: text/plain
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: "Roy.Li" <rongqing.li@windriver.com>
 
-Add hostapd.service file.
-The file mostly comes from Fedora20.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
 ---
- .../hostapd/hostapd-2.2/hostapd.service            |   11 +++++++++++
- .../recipes-connectivity/hostapd/hostapd_2.2.bb    |   11 ++++++++---
- 2 files changed, 19 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd-2.2/hostapd.service
+ meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/hostapd.service b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/hostapd.service
-new file mode 100644
-index 0000000..151c050
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/hostapd.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Hostapd IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator
-+After=network.target
-+
-+[Service]
-+Type=forking
-+PIDFile=/run/hostapd.pid
-+ExecStart=@SBINDIR@/hostapd @SYSCONFDIR@/hostapd.conf -P /run/hostapd.pid -B
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-index d0d9df9..f1c6b3a 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-@@ -5,9 +5,11 @@ LIC_FILES_CHKSUM = "file://README;md5=0854a4da34ac3990770794d771fac7fd"
- DEPENDS = "libnl openssl"
- SUMMARY = "User space daemon for extended IEEE 802.11 management"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+index 13b1f3f..39a24dc 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.wireshark.org"
+ SECTION = "network"
+ LICENSE = "GPL-2.0"
  
--inherit update-rc.d
-+inherit update-rc.d systemd
- INITSCRIPT_NAME = "hostapd"
--
-+SYSTEMD_PACKAGES = "hostapd"
-+SYSTEMD_SERVICE_hostapd = "hostapd.service"
-+SYSTEMD_AUTO_ENABLE_hostapd = "disable"
+-DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libsmi libnl portaudio-v19 sbc"
++DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
  
- DEFAULT_PREFERENCE = "-1"
+ inherit autotools pkgconfig
  
-@@ -15,6 +17,7 @@ SRC_URI = " \
-     http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
-     file://defconfig \
-     file://init \
-+    file://hostapd.service \
- "
+@@ -16,6 +16,8 @@ PACKAGECONFIG ??= "gnutls gcrypt"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
  
- S = "${WORKDIR}/hostapd-${PV}/hostapd"
-@@ -30,11 +33,13 @@ do_compile() {
- }
- 
- do_install() {
--    install -d ${D}${sbindir} ${D}${sysconfdir}/init.d
-+    install -d ${D}${sbindir} ${D}${sysconfdir}/init.d ${D}${systemd_unitdir}/system/
-     install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
-     install -m 0755 ${S}/hostapd ${D}${sbindir}
-     install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
-     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
-+    install -m 0644 ${WORKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
-+    sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/hostapd.service
- }
- 
- CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
++PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
++PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
+ PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
+ PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
+ PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
 -- 
-1.7.9.5
+1.7.10.4
 
 
