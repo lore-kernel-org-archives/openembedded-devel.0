@@ -1,31 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 652846AC6C;
-	Sun, 17 Aug 2014 00:51:07 +0000 (UTC)
-Received: by mail-ig0-f174.google.com with SMTP id c1so5121412igq.7
-	for <multiple recipients>; Sat, 16 Aug 2014 17:51:08 -0700 (PDT)
+Return-Path: <diego.sueiro@gmail.com>
+Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C40D665DD6;
+	Sun, 17 Aug 2014 11:50:57 +0000 (UTC)
+Received: by mail-qc0-f175.google.com with SMTP id w7so3777323qcr.20
+	for <multiple recipients>; Sun, 17 Aug 2014 04:50:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=qBuQHu8gq4942jdLuQMEEeHJGwPs8SYqhtuolOjBHDE=;
-	b=Pp9/dQ6aUfbg9ShUiR+sBNkJxe5M1MeDjTHj6hryvFz0QmHY0mIANKVQ2gt/+irLuz
-	rzp/m1/rNpG42fgIyc0E0wp3qSdWnXDjLKkmuc2VY4tGkCCQnbTqqEkHBQQtsrHmlBL8
-	EtrMY6Ae8Hk9oP/LfCpo8VK8MEyx4q9ZrXC9DrTZ2BGtTlC8tVEO4vUxUZWLxy70b+T+
-	9JdJLQYHcIvTOcgYre/enBFyECsm8H/36h8M+X+XGLNSZDwKqt2KOaGURXERiQ3++zDm
-	B/D975NScXwDXIe0isvYGXE+oJMxWvs16eVTTTMCnViGdVWZXoN+fqRgHpsNFp6K9P33
-	mcpw==
-X-Received: by 10.50.176.202 with SMTP id ck10mr76461473igc.2.1408236668839;
-	Sat, 16 Aug 2014 17:51:08 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=ywAGlFg8T4/UMwDo8IvZ6WXPoJGpKS2FPze7LfU7F7M=;
+	b=SrJBujENxmi44lXvrILMuqpNvJDZ0nddCuXt7LYNGpO5wjSWm+HTpdDj1dPn5Bvczb
+	h+efgfZduyyD5imanJ+V/pPiRF4sPAXk8XrmDKTzNgNKknCs/pak2D8f3ttSXrNZrfdD
+	hzGZJk1rimIWtcCkbscT1MnHLfuWHG/9STuHODdk/5GVkGx9N9rh2jGgUfh4ihdpcvHF
+	yQ0QnKMFY4Xbzba75R2DQGSyDgley9w0wB+kDuX6Gdwq/hwLTPxofA1SHtCe0AA1PKyn
+	2pM1b9T0tLcFd75Rl1xUBgCCe8kvIFn3qILdzCpEUGEwAE1+xrS+fltmL3jrk3edTfUU
+	VCbw==
+X-Received: by 10.140.32.134 with SMTP id h6mr43842382qgh.49.1408276258234;
+	Sun, 17 Aug 2014 04:50:58 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.126.103 with HTTP; Sat, 16 Aug 2014 17:50:38 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Aug 2014 17:50:38 -0700
-Message-ID: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>, musl@lists.openwall.com
-Subject: Announcing meta-musl OE/Yocto layer supporting musl C library
+Received: by 10.140.85.83 with HTTP; Sun, 17 Aug 2014 04:50:38 -0700 (PDT)
+In-Reply-To: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
+References: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
+Date: Sun, 17 Aug 2014 08:50:38 -0300
+Message-ID: <CAMCfZKFWAsu8m2h907RwM6XMCr6NbpsxeWE2hfuC=FtFyLAS5A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Announcing meta-musl OE/Yocto layer supporting musl C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,39 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Aug 2014 00:51:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 17 Aug 2014 11:51:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello All
+Wow!!!!
 
-musl <http://www.musl-libc.org/> is a newer implementation licensed
-under MIT licence
-A layer to support musl to supply your system C library as an
-alternative to uclibc and eglibc/glibc  is now available at
+This is a really great job. Nice work.
 
-https://github.com/kraj/meta-musl
+I'm gonna test it.
 
-README describes way to get going with it.
 
-Few things to note
+Regards,
 
-* Supports gcc 4.9 in OE not 4.8
-* Current musl recipe is 1.1.4 based
-* You need latest master of OE-Core
-(106305227003761c3fc562c21bb859a5256f2b36) or          newer and
-bitbake
-* Its only able to build core-image-minimal
-* core-image-minimal boots on qemuarm, qemuppc, qemumips, qemux86, qemux86-64
+--
+*dS
+Diego Sueiro
 
-I will send a request to add it to layerindex soon and then you should
-be able to find it using
-layerindex.opernembedded.org as well
+Administrador do Embarcados
+www.embarcados.com.br
+<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
 
-If you try it out on your hardware and/or have feedback I am
-interested. Fork it from github, file bugs
-send patches ....
+/*long live rock 'n roll*/
 
-Happy hacking
 
--Khem
+On Sat, Aug 16, 2014 at 9:50 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Hello All
+>
+> musl <http://www.musl-libc.org/> is a newer implementation licensed
+> under MIT licence
+> A layer to support musl to supply your system C library as an
+> alternative to uclibc and eglibc/glibc  is now available at
+>
+> https://github.com/kraj/meta-musl
+>
+> README describes way to get going with it.
+>
+> Few things to note
+>
+> * Supports gcc 4.9 in OE not 4.8
+> * Current musl recipe is 1.1.4 based
+> * You need latest master of OE-Core
+> (106305227003761c3fc562c21bb859a5256f2b36) or          newer and
+> bitbake
+> * Its only able to build core-image-minimal
+> * core-image-minimal boots on qemuarm, qemuppc, qemumips, qemux86,
+> qemux86-64
+>
+> I will send a request to add it to layerindex soon and then you should
+> be able to find it using
+> layerindex.opernembedded.org as well
+>
+> If you try it out on your hardware and/or have feedback I am
+> interested. Fork it from github, file bugs
+> send patches ....
+>
+> Happy hacking
+>
+> -Khem
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
 
