@@ -1,36 +1,36 @@
-Return-Path: <diego.sueiro@gmail.com>
-Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id C40D665DD6;
-	Sun, 17 Aug 2014 11:50:57 +0000 (UTC)
-Received: by mail-qc0-f175.google.com with SMTP id w7so3777323qcr.20
-	for <multiple recipients>; Sun, 17 Aug 2014 04:50:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=ywAGlFg8T4/UMwDo8IvZ6WXPoJGpKS2FPze7LfU7F7M=;
-	b=SrJBujENxmi44lXvrILMuqpNvJDZ0nddCuXt7LYNGpO5wjSWm+HTpdDj1dPn5Bvczb
-	h+efgfZduyyD5imanJ+V/pPiRF4sPAXk8XrmDKTzNgNKknCs/pak2D8f3ttSXrNZrfdD
-	hzGZJk1rimIWtcCkbscT1MnHLfuWHG/9STuHODdk/5GVkGx9N9rh2jGgUfh4ihdpcvHF
-	yQ0QnKMFY4Xbzba75R2DQGSyDgley9w0wB+kDuX6Gdwq/hwLTPxofA1SHtCe0AA1PKyn
-	2pM1b9T0tLcFd75Rl1xUBgCCe8kvIFn3qILdzCpEUGEwAE1+xrS+fltmL3jrk3edTfUU
-	VCbw==
-X-Received: by 10.140.32.134 with SMTP id h6mr43842382qgh.49.1408276258234;
-	Sun, 17 Aug 2014 04:50:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.85.83 with HTTP; Sun, 17 Aug 2014 04:50:38 -0700 (PDT)
-In-Reply-To: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
-References: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
-From: Diego Sueiro <diego.sueiro@gmail.com>
-Date: Sun, 17 Aug 2014 08:50:38 -0300
-Message-ID: <CAMCfZKFWAsu8m2h907RwM6XMCr6NbpsxeWE2hfuC=FtFyLAS5A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Announcing meta-musl OE/Yocto layer supporting musl C library
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-la0-f44.google.com (mail-la0-f44.google.com
+	[209.85.215.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FADE60CFC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Aug 2014 15:55:06 +0000 (UTC)
+Received: by mail-la0-f44.google.com with SMTP id el20so3821516lab.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Aug 2014 08:55:07 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=/5KmsBATRdYLDGr6qLva1YXaMvtKzck3E5ir+uk+wbM=;
+	b=D7XYLNhxObZlaiyA34vjauLyRWpH39Rj3c7gpECUnHC7U/Fo8tqEgMuX8bFFhqWfA8
+	T0XemglF6Or+rClMQSfLbyE3RibtGc9YaJWsEUsrwSJ5VhpVng42PV0/kKq1PHFj/peD
+	gZbCyuHc5DS9nDAitk0H6nn7eM9AJI6pQp74TsEnRJ/pkrrb5Yo7MbSJEdBKYyLp9OuI
+	RaHg7kVHKOs2bUHmxhYmX+ZRkVe0UWfvjw+RbTYotT0eNxUXfvk3jiO0gqfb3yPYoLEM
+	PG7d0HGyiQRIZPYebrQ32HKrfuNHXp7RilnoVVQ9A5Z4zd+DhKDrVOd1aHF9H3DZi6+X
+	rcFA==
+X-Gm-Message-State: ALoCoQlAlYJ/2gVZ0h2EIh2oS3Ej0Oxqg128UdIEK5u12Q8bxr+U5D8QVg3E+Zh0gJ5/Cp9dFYBx
+X-Received: by 10.152.29.230 with SMTP id n6mr24169072lah.29.1408290907074;
+	Sun, 17 Aug 2014 08:55:07 -0700 (PDT)
+Received: from otp-agherzan-l1.gjk.dk (dhcp-189-34.gjk.dk. [195.249.189.34])
+	by mx.google.com with ESMTPSA id o4sm8819275lag.47.2014.08.17.08.55.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 17 Aug 2014 08:55:06 -0700 (PDT)
+From: Andrei Gherzan <andrei@gherzan.ro>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Aug 2014 17:54:57 +0200
+Message-Id: <1408290897-3508-1-git-send-email-andrei@gherzan.ro>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe][PATCH 1/1] libcec: Update to v2.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,68 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Aug 2014 11:51:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Aug 2014 15:55:11 -0000
 
-Wow!!!!
+Change-Id: Iaacfe4506b8ce68443fafd1eeee6b3eea6ff667d
+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+---
+ meta-oe/recipes-extended/libcec/libcec_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-This is a really great job. Nice work.
+diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
+index db032f9..0f2a64e 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_git.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
+ 
+ DEPENDS = "udev lockdev"
+ 
+-PV = "1.9.0"
++PV = "2.1.4"
+ 
+-SRCREV = "9884e9ffc5293de5bb9092db1ed581f213a678df"
+-SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
++SRCREV = "81e38211724bc6e8bd7a60f484433053ed682635"
++SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+1.9.3
 
-I'm gonna test it.
-
-
-Regards,
-
---
-*dS
-Diego Sueiro
-
-Administrador do Embarcados
-www.embarcados.com.br
-<http://www.embarcados.com.br/?utm_source=assinatura_diego&utm_medium=e-mail&utm_campaign=Assinatura%20Email%20Diego>
-
-/*long live rock 'n roll*/
-
-
-On Sat, Aug 16, 2014 at 9:50 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Hello All
->
-> musl <http://www.musl-libc.org/> is a newer implementation licensed
-> under MIT licence
-> A layer to support musl to supply your system C library as an
-> alternative to uclibc and eglibc/glibc  is now available at
->
-> https://github.com/kraj/meta-musl
->
-> README describes way to get going with it.
->
-> Few things to note
->
-> * Supports gcc 4.9 in OE not 4.8
-> * Current musl recipe is 1.1.4 based
-> * You need latest master of OE-Core
-> (106305227003761c3fc562c21bb859a5256f2b36) or          newer and
-> bitbake
-> * Its only able to build core-image-minimal
-> * core-image-minimal boots on qemuarm, qemuppc, qemumips, qemux86,
-> qemux86-64
->
-> I will send a request to add it to layerindex soon and then you should
-> be able to find it using
-> layerindex.opernembedded.org as well
->
-> If you try it out on your hardware and/or have feedback I am
-> interested. Fork it from github, file bugs
-> send patches ....
->
-> Happy hacking
->
-> -Khem
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
 
