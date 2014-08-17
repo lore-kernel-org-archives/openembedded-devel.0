@@ -1,22 +1,31 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 98EBF65E14
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Aug 2014 18:07:32 +0000 (UTC)
-Received: from [192.168.178.14] (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 5B00933426
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Aug 2014 20:07:31 +0200 (CEST)
-Message-ID: <53EF9DE3.5020303@pseudoterminal.org>
-Date: Sat, 16 Aug 2014 20:07:31 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.4.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 652846AC6C;
+	Sun, 17 Aug 2014 00:51:07 +0000 (UTC)
+Received: by mail-ig0-f174.google.com with SMTP id c1so5121412igq.7
+	for <multiple recipients>; Sat, 16 Aug 2014 17:51:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	bh=qBuQHu8gq4942jdLuQMEEeHJGwPs8SYqhtuolOjBHDE=;
+	b=Pp9/dQ6aUfbg9ShUiR+sBNkJxe5M1MeDjTHj6hryvFz0QmHY0mIANKVQ2gt/+irLuz
+	rzp/m1/rNpG42fgIyc0E0wp3qSdWnXDjLKkmuc2VY4tGkCCQnbTqqEkHBQQtsrHmlBL8
+	EtrMY6Ae8Hk9oP/LfCpo8VK8MEyx4q9ZrXC9DrTZ2BGtTlC8tVEO4vUxUZWLxy70b+T+
+	9JdJLQYHcIvTOcgYre/enBFyECsm8H/36h8M+X+XGLNSZDwKqt2KOaGURXERiQ3++zDm
+	B/D975NScXwDXIe0isvYGXE+oJMxWvs16eVTTTMCnViGdVWZXoN+fqRgHpsNFp6K9P33
+	mcpw==
+X-Received: by 10.50.176.202 with SMTP id ck10mr76461473igc.2.1408236668839;
+	Sat, 16 Aug 2014 17:51:08 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <53EF59FE.7040709@pseudoterminal.org>
-In-Reply-To: <53EF59FE.7040709@pseudoterminal.org>
-Subject: Re: Is core-image-x11 broken?
+Received: by 10.50.126.103 with HTTP; Sat, 16 Aug 2014 17:50:38 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 16 Aug 2014 17:50:38 -0700
+Message-ID: <CAMKF1sp9Z6vj1Dz96_WYiHOtYFqa-zECrNHOFgb=dBUDJN2Z_g@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>, musl@lists.openwall.com
+Subject: Announcing meta-musl OE/Yocto layer supporting musl C library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,60 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Aug 2014 18:07:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Aug 2014 00:51:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Nevermind, I found out that subtle data corruption problems with one 
-hard drive were causing all sorts of chaos.
-Rebuilt on another hard disk, works now.
+Hello All
 
+musl <http://www.musl-libc.org/> is a newer implementation licensed
+under MIT licence
+A layer to support musl to supply your system C library as an
+alternative to uclibc and eglibc/glibc  is now available at
 
-On 08/16/2014 03:17 PM, Carlos Rafael Giani wrote:
-> Hello,
->
-> I have experienced very strange issues with core-image-x11 .
-> Until recently, the image worked fine. I could boot with it, and got a 
-> fullscreen matchbox-terminal on screen.
->
-> I did a fresh build from scratch, with yesterday's master state of 
-> poky. core-image-x11 didn't boot.
-> It turns out that sysvinit wasn't on the image! So I added it 
-> explicitely by using IMAGE_INSTALL_append .
-> This helped, but now I see this:
->
-> /etc/init.d/rcS: line 17: mount: command not found
-> /etc/rcS.d/S00psplash.sh: line 10: /proc/cmdline: No such file or 
-> directory
-> /etc/rcS.d/S00psplash.sh: line 21: mount: command not found
-> INIT: Entering runlevel: 5
-> cat: /proc/cmdline: No such file or directory
-> cat: /proc/cmdline: No such file or directory
-> Starting Xserver
-> [    3.442068] random: nonblocking pool is initialized
-> /etc/X11/xserver-common: line 36: grep: command not found
-> /etc/X11/xserver-common: line 37: awk: command not found
-> /etc/X11/xserver-common: line 38: awk: command not found
-> /etc/X11/xserver-common: line 39: awk: command not found
-> /etc/X11/functions: line 10: /proc/cpuinfo: No such file or directory
-> /etc/rc5.d/S01xserver-nodm: line 31: which: command not found
-> Starting system message bus: /etc/rc5.d/S02dbus-1: line 63: 
-> start-stop-daemon: command not found
-> dbus.
-> /etc/rc5.d/S10dropbear: line 32: /proc/mounts: No such file or directory
-> Starting Dropbear SSH server: Generating key, this may take a while...
-> Public key portion is:
-> ssh-rsa 
-> AAAAB3NzaC1yc2EAAAADAQABAAABAQC9JkKHluBboO77TPybTGN/cBcwDmFWvcCcRPhauXT4af3ycFt+eRwv2md3n6PNDAXHlZioH0uCSQBPoZSJoOnXn06BgU3BuhWlN/HgVDE3G8OKHhcB87Z7lodKhhSKIoupolYcQGtTXC+rOt84hqxreHln6Pw5R8ZNYbg6zBcesVs4v3zR+DcaBcOmt4XjQkmDDRvQgp1WfOWHAzuXJVNyE27yTLYuIOj0Fe1HhD)
-> Fingerprint: md5 90:68:ab:32:67:63:37:8b:3f:08:fc:72:1a:f2:0e:42
-> /etc/rc5.d/S10dropbear: line 84: start-stop-daemon: command not found
-> /etc/rc5.d/S99stop-bootlogd: line 64: start-stop-daemon: command not 
-> found
-> INIT: cannot execute "/sbin/getty"
-> INIT: cannot execute "/sbin/getty"
->
->
-> #Why are all these files missing? None of this happens with 
-> core-image-base .
+https://github.com/kraj/meta-musl
 
+README describes way to get going with it.
+
+Few things to note
+
+* Supports gcc 4.9 in OE not 4.8
+* Current musl recipe is 1.1.4 based
+* You need latest master of OE-Core
+(106305227003761c3fc562c21bb859a5256f2b36) or          newer and
+bitbake
+* Its only able to build core-image-minimal
+* core-image-minimal boots on qemuarm, qemuppc, qemumips, qemux86, qemux86-64
+
+I will send a request to add it to layerindex soon and then you should
+be able to find it using
+layerindex.opernembedded.org as well
+
+If you try it out on your hardware and/or have feedback I am
+interested. Fork it from github, file bugs
+send patches ....
+
+Happy hacking
+
+-Khem
 
