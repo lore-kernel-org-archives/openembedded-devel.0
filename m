@@ -1,40 +1,21 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 368BF610F5
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 055B365CB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 09:16:59 +0000 (UTC)
-Received: by mail-la0-f54.google.com with SMTP id hz20so4141679lab.41
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 02:16:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=i4sDM+JC0/huOhoTM5+urDw2K7j8sKPNGOpwf89MdHY=;
-	b=PPQtGBy6IgD8rrdLd4bQBnN64D0f2gLrvsR1p7N+lHwp+q1XRdslEKw6KfP+BN3cmi
-	SsDgZMW1CUPW8I9w0Q6yhH8fvw4BIlS6i3VgLLm+yf5MQOz1jskTW9uWB/r5MzdiUngE
-	E3aDtWH/D6kdvT8XoUIG/3ZwcfCxfdKVEUNsASynijE8QN9h8Ldfjx0OWEViciOlR2pe
-	3pUvtHXuoUFeTdJzU9Boy5FcvBajkzHV48JyWwDi1M1lijq9cruOV7WWtyLudgmDx+db
-	ODWzzU+2tJ9aTuO6krvm9BIUAbJV7eP4P2x4BvhvHM9OmgfnHlvuzmKVSKm1wb0ORbrh
-	WXyQ==
-X-Received: by 10.112.14.199 with SMTP id r7mr26928587lbc.58.1408353419819;
-	Mon, 18 Aug 2014 02:16:59 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	pq3sm8812000lbc.20.2014.08.18.02.16.57 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Aug 2014 02:16:58 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 18 Aug 2014 11:16:58 +0200
-To: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-Message-ID: <20140818091658.GJ3660@jama>
+	Mon, 18 Aug 2014 09:43:50 +0000 (UTC)
+Received: from localhost.localdomain (unknown [78.10.193.111])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id 666CC1B81B009;
+	Mon, 18 Aug 2014 11:43:49 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 18 Aug 2014 11:43:49 +0200
+Message-ID: <1467268.4I7ksEROPs@localhost.localdomain>
+User-Agent: KMail/4.13.3 (Linux/3.15.8-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <20140818091658.GJ3660@jama>
 References: <1408345522-29466-1-git-send-email-maciej.borzecki@open-rnd.pl>
+	<20140818091658.GJ3660@jama>
 MIME-Version: 1.0
-In-Reply-To: <1408345522-29466-1-git-send-email-maciej.borzecki@open-rnd.pl>
-User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Maciek Borzecki <maciek.borzecki@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH v2] collectd: make pinba support a selectable feature
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -50,65 +31,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Aug 2014 09:17:01 -0000
-X-Groupsio-MsgNum: 51741
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jITzwD3HDGXid3BE"
-Content-Disposition: inline
-
---jITzwD3HDGXid3BE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Aug 2014 09:43:52 -0000
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On Mon, Aug 18, 2014 at 09:05:22AM +0200, Maciej Borzecki wrote:
-> Pinba support requires protobuf-c that is currently only available in
-> meta-virtualization layer. Make this a selectable feature.
+On Monday 18 of August 2014 11:16:58 Martin Jansa wrote:
+> On Mon, Aug 18, 2014 at 09:05:22AM +0200, Maciej Borzecki wrote:
+> > Pinba support requires protobuf-c that is currently only available =
+in
+> > meta-virtualization layer. Make this a selectable feature.
+>=20
+> I'll add this as comment above PACKAGECONFIG as requested.
 
-I'll add this as comment above PACKAGECONFIG as requested.
+Great. Thanks.
 
-> Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-> Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
-> ---
 >=20
-> Notes:
->     Updated pinba plugin dependency to protobuf-c.
->=20
->  meta-oe/recipes-extended/collectd/collectd_5.2.2.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-o=
-e/recipes-extended/collectd/collectd_5.2.2.bb
-> index 30279c2..443f85d 100644
-> --- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> +++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-> @@ -32,6 +32,7 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors --with-lib=
-sensors=3Dyes, \
->          --disable-sensors --with-libsensors=3Dno,lmsensors"
->  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \
->          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
-> +PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf-c-nati=
-ve protobuf-c"
-> =20
->  EXTRA_OECONF =3D " \
->                  ${FPLAYOUT} \
-> --=20
-> 1.9.0
->=20
+> > Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+> > Signed-off-by: Maciek Borzecki <maciek.borzecki@gmail.com>
+> > ---
+> >=20
+> > Notes:
+> >     Updated pinba plugin dependency to protobuf-c.
+> > =20
+> >  meta-oe/recipes-extended/collectd/collectd_5.2.2.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >=20
+> > diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb index
+> > 30279c2..443f85d 100644
+> > --- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > +++ b/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
+> > @@ -32,6 +32,7 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors
+> > --with-libsensors=3Dyes, \>=20
+> >          --disable-sensors --with-libsensors=3Dno,lmsensors"
+> > =20
+> >  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \=
+
+> > =20
+> >          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
+> >=20
+> > +PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf-=
+c-native
+> > protobuf-c">=20
+> >  EXTRA_OECONF =3D " \
+> > =20
+> >                  ${FPLAYOUT} \
 
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---jITzwD3HDGXid3BE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Maciej Borz=C4=99cki=20
+Senior Software Engineer Open-RnD Sp. z o.o.=20
+www.open-rnd.pl, Facebook, Twitter=20
+mobile: +48 telefon, fax: +48 42 657 9079=20
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Niniejsza wiadomo=C5=9B=C4=87 wraz z za=C5=82=C4=85cznikami mo=C5=BCe z=
+awiera=C4=87 chronione prawem lub=20
+poufne informacje i zosta=C5=82a wys=C5=82ana wy=C5=82=C4=85cznie do wi=
+adomo=C5=9Bci i u=C5=BCytku os=C3=B3b, do=20
+kt=C3=B3rych zosta=C5=82a zaadresowana. Je=C5=9Bli wiadomo=C5=9B=C4=87 =
+zosta=C5=82a otrzymana przypadkowo=20
+zabrania si=C4=99 jej kopiowania lub rozsy=C5=82ania do os=C3=B3b trzec=
+ich. W takim przypadku=20
+uprasza si=C4=99 o natychmiastowe zniszczenie wiadomo=C5=9Bci oraz poin=
+formowanie=20
+nadawcy o zaistnia=C5=82ej sytuacji za pomoc=C4=85 wiadomo=C5=9Bci zwro=
+tnej. Dzi=C4=99kujemy.=20
 
-iEYEARECAAYFAlPxxIoACgkQN1Ujt2V2gBysEgCcD6CstCg/Djlz7TxgVZeX+MCM
-6mEAoKRIO7clkfdhgrPoyz+oz56ob4TH
-=MTZX
------END PGP SIGNATURE-----
+This message, including any attachments hereto, may contain privileged =
+or=20
+confidential information and is sent solely for the attention and use o=
+f the=20
+intended addressee(s). If you are not an intended addressee, you may ne=
+ither=20
+use this message nor copy or deliver it to anyone. In such case, you sh=
+ould=20
+immediately destroy this message and kindly notify the sender by reply =
+email.=20
+Thank you. 
 
---jITzwD3HDGXid3BE--
