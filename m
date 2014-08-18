@@ -1,38 +1,38 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-la0-f48.google.com (mail-la0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0BD4665DD6
+Return-Path: <kergoth@gmail.com>
+Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 068C2610F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 13:44:56 +0000 (UTC)
-Received: by mail-la0-f48.google.com with SMTP id gl10so4493890lab.21
+	Mon, 18 Aug 2014 14:29:53 +0000 (UTC)
+Received: by mail-la0-f42.google.com with SMTP id pv20so4644085lab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 06:44:57 -0700 (PDT)
+	Mon, 18 Aug 2014 07:29:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=7oq/ATfdbEVEkLgpVV9k0gRVIsguz5kCpAXGchZjDAM=;
-	b=NHr1DOrfzMcf3NFAf/Ixbw/EYXl5UPGYgpS63UB81JmwR4bD5W10z6Nr0LBZp2IbzW
-	IpbOjtd8HT0szvV+1eviTLGaswzN64rkEFxA5Rsu5N1Yaxr28HJ/etdW3XZCRqvyBtbm
-	e2BfFC73HnaqIjnjVWs3sU04zxIU1iQ1lcAPrZQ5B+FbN+8fs8FQf51XOqpJSTDfi1i/
-	m53+GN3cyb2LvCnIXL482PBj2qEGkSiORaZR3i8LbpmYkUBeMGerFUMmj00vb7Q0L/28
-	veQmcfCnbduR0PU8rHwnI4DyZDvOPY+fhGuImMhhGJZlPdez56M38Qa263aG8gx4tY89
-	MTjA==
-X-Received: by 10.152.5.102 with SMTP id r6mr28585554lar.81.1408369496903;
-	Mon, 18 Aug 2014 06:44:56 -0700 (PDT)
-Received: from gmail.com (ygg.betafive.co.uk. [5.9.90.21])
-	by mx.google.com with ESMTPSA id b2sm6769532laf.41.2014.08.18.06.44.55
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Aug 2014 06:44:56 -0700 (PDT)
-Sender: Paul Barker <paul.betafive@gmail.com>
-Date: Mon, 18 Aug 2014 13:44:53 +0000
-From: Paul Barker <paul@paulbarker.me.uk>
-To: OE Devel <openembedded-devel@lists.openembedded.org>,
-	Yocto discussion list <yocto@yoctoproject.org>
-Message-ID: <20140818134453.GE12992@gmail.com>
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=aTuFUhNSiPG/bbh3DJ5SF/gTPlDrLums0QuEuF5+kYc=;
+	b=EKOPQ7NavX+DwGVQt5H73nj9t+ICl26GcNR59LjEBylLteuopeHZ1rVPS5Y60FM8rk
+	TRkN+qJLbcciCIabw0yQ+NPbr9dT+jNgSbT71so49v2oRywTet5OeA2u2h2R4DGRyoke
+	4qJfHRU1mXI5UjW/vwjFr1JAWqhScHq0oNGZjzndCuxcMeP5o7CI3neuCdmvE8SYy2cG
+	PGPKXu9EiUDmSRf9lYW09wx5kKk9RPG/vmndP1wBVt5YpmvHJbLLafrzBgnCNnbKk4ng
+	oOeYIS9wOejTBXXGFkczhbuBtcRGoM9fA99bauhn5rlmWQICqP1wGJ8uP8Ua7vQl/Abx
+	me9A==
+X-Received: by 10.112.209.36 with SMTP id mj4mr28816035lbc.26.1408372193794;
+	Mon, 18 Aug 2014 07:29:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: toybox in OpenEmbedded
+Sender: kergoth@gmail.com
+Received: by 10.112.43.42 with HTTP; Mon, 18 Aug 2014 07:29:33 -0700 (PDT)
+In-Reply-To: <20140818134453.GE12992@gmail.com>
+References: <20140818134453.GE12992@gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 18 Aug 2014 07:29:33 -0700
+X-Google-Sender-Auth: TBiFgPIhN0H5B2xWspn7_AjfFDM
+Message-ID: <CABcZANmKtKEC=VX2La83gpvQVA84yf6VdUvNXv412Nwjk_2zDA@mail.gmail.com>
+To: Paul Barker <paul@paulbarker.me.uk>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto discussion list <yocto@yoctoproject.org>,
+	OE Devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [yocto] toybox in OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,75 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Aug 2014 13:44:59 -0000
-X-Groupsio-MsgNum: 51743
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="kA1LkgxZ0NN7Mz3A"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Aug 2014 14:29:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
---kA1LkgxZ0NN7Mz3A
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Aug 18, 2014 at 6:44 AM, Paul Barker <paul@paulbarker.me.uk> wrote:
 
-Hi all,
+> I've been wanting to try out toybox within OpenEmbedded for quite a while
+> and
+> have finally found time to put a recipe together. Toybox is a BSD-licensed
+> alternative to Busybox which may be of interest to a few people. It's
+> still a
+> work in progress but it already covers a large number of the basic
+> commands a
+> system needs. It should tie in well with the recent work Khem has done to
+> enable
+> the use of musl in OpenEmbedded as toybox and musl are often used together
+> (e.g.
+> Aboriginal Linux distro).
+>
+> My patches are currently against openembedded-core for convenience but this
+> probably belongs in meta-oe for now. I've done some basic testing on
+> qemuarm but
+> nothing significant. toybox builds and installs correctly though and I've
+> set
+> ALTERNATIVE_PRIORITY = 60 so that it takes precedence over busybox tools.
+>
+> Removing toybox after it has been installed currently bricks the system
+> though
+> as the postrm script runs after '/bin/toybox' has been removed (so things
+> like
+> '/bin/ln' become broken links and the update-alternatives script can't
+> run).
+>
 
-I've been wanting to try out toybox within OpenEmbedded for quite a while a=
-nd
-have finally found time to put a recipe together. Toybox is a BSD-licensed
-alternative to Busybox which may be of interest to a few people. It's still=
- a
-work in progress but it already covers a large number of the basic commands=
- a
-system needs. It should tie in well with the recent work Khem has done to e=
-nable
-the use of musl in OpenEmbedded as toybox and musl are often used together =
-(e.g.
-Aboriginal Linux distro).
+One option for that might be to try the C implementation of alternatives
+that's provided in chkconfig, rather than cworth's shell version. I haven't
+tested it in that context, but I doubt it runs so many external tools.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
-My patches are currently against openembedded-core for convenience but this
-probably belongs in meta-oe for now. I've done some basic testing on qemuar=
-m but
-nothing significant. toybox builds and installs correctly though and I've s=
-et
-ALTERNATIVE_PRIORITY =3D 60 so that it takes precedence over busybox tools.
-
-Removing toybox after it has been installed currently bricks the system tho=
-ugh
-as the postrm script runs after '/bin/toybox' has been removed (so things l=
-ike
-'/bin/ln' become broken links and the update-alternatives script can't run).
-
-I can send patches but as I say, this is a work in progress and you shouldn=
-'t
-install toybox using this recipe on a production system yet. Would anyone e=
-lse
-be interested in testing this out? And should I send these patches against
-openembedded-core or meta-oe or should I create a separate layer for this u=
-ntil
-it stabilises?
-
-Thanks,
-
---=20
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
-
---kA1LkgxZ0NN7Mz3A
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQEcBAEBAgAGBQJT8gNVAAoJEBwoJlo7UPQDRpIIAJkfyU5uwPHqAJarSVJtxJwC
-/g9gQIeMHtkZHF3lGqE6syXVSiWXSUwIP2RGG7MplL+EUgaQs0khRTm4Hhp3otuM
-LmfAU+wbfEesih2GKtmYJxWOWxQoRk4SQAZB5jwWKlA/59SNnxntZbq0HLn0i/cS
-QqHoEwTwnAqVK2s6XiOQsr9nA8sZ91IUYQny110dmV3YyjOVrCY7fRgDFbiPN6W3
-pHSNL5tS/Uth6rBelCncPxEBkKWWUyopWyya4k05F4xDByU38PfJLhWw9dUGDEIc
-s8Y9TRWXENYXonjez1yI6IbXUZau09Sx3udMXkU64cfbafCxv80kKiQ6zg3p+20=
-=Gpp4
------END PGP SIGNATURE-----
-
---kA1LkgxZ0NN7Mz3A--
