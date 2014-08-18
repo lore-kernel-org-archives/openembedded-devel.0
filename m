@@ -1,24 +1,24 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CD346ACD6
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CA08065DD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 03:21:12 +0000 (UTC)
+	Mon, 18 Aug 2014 07:05:02 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7I3LDwb025224
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7I75432005646
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Aug 2014 20:21:13 -0700 (PDT)
+	Mon, 18 Aug 2014 00:05:04 -0700 (PDT)
 Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 17 Aug 2014 20:21:13 -0700
+	14.3.174.1; Mon, 18 Aug 2014 00:05:03 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 17 Aug 2014 23:21:12 -0400
-Message-ID: <1408332072-22801-1-git-send-email-jackie.huang@windriver.com>
+Date: Mon, 18 Aug 2014 03:05:02 -0400
+Message-ID: <1408345502-16283-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] iw: uprev to version 3.15
+Subject: [meta-networking][PATCH] strongswan: uprev to version 5.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,77 +32,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Aug 2014 03:21:13 -0000
+X-List-Received-Date: Mon, 18 Aug 2014 07:05:04 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-- change to use tar.gz since bz2 is no longer provided in upstream
-- adjust the patch for new version
+* removed two patches which were already integrated in 5.2.0:
+  strongswan-4.3.3-5.1.1_asn1_unwrap.patch
+  strongswan-5.0.0-5.1.2_reject_child_sa.patch
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...-iw-version.sh-don-t-use-git-describe-for-versioning.patch | 11 +++++------
- meta-oe/recipes-connectivity/iw/{iw_3.11.bb => iw_3.15.bb}    |  6 +++---
- 2 files changed, 8 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-connectivity/iw/{iw_3.11.bb => iw_3.15.bb} (81%)
+ .../files/strongswan-4.3.3-5.1.1_asn1_unwrap.patch | 28 -----------------
+ .../strongswan-5.0.0-5.1.2_reject_child_sa.patch   | 36 ----------------------
+ .../{strongswan_5.1.1.bb => strongswan_5.2.0.bb}   |  6 ++--
+ 3 files changed, 2 insertions(+), 68 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/strongswan/files/strongswan-4.3.3-5.1.1_asn1_unwrap.patch
+ delete mode 100644 meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.1.1.bb => strongswan_5.2.0.bb} (87%)
 
-diff --git a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch b/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-index 97c00cd..e64dd0a 100644
---- a/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-+++ b/meta-oe/recipes-connectivity/iw/iw/0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch
-@@ -9,18 +9,18 @@ Upstream-Status: Unknown
- 
- Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
- ---
-- version.sh |   16 +---------------
-- 1 files changed, 1 insertions(+), 15 deletions(-)
-+ version.sh | 16 +---------------
-+ 1 file changed, 1 insertion(+), 15 deletions(-)
- 
- diff --git a/version.sh b/version.sh
--index 3fb9f6d..e4a56cb 100755
-+index 11d124b..5d423c4 100755
- --- a/version.sh
- +++ b/version.sh
- @@ -3,21 +3,7 @@
-- VERSION="3.2"
-+ VERSION="3.15"
-  OUT="$1"
-  
---if head=`git rev-parse --verify HEAD 2>/dev/null`; then
-+-if [ -d .git ] && head=`git rev-parse --verify HEAD 2>/dev/null`; then
- -	git update-index --refresh --unmerged > /dev/null
- -	descr=$(git describe)
- -
-@@ -41,4 +41,3 @@ index 3fb9f6d..e4a56cb 100755
-  echo "const char iw_version[] = \"$v\";" >> "$OUT"
- -- 
- 1.7.7.3
+diff --git a/meta-networking/recipes-support/strongswan/files/strongswan-4.3.3-5.1.1_asn1_unwrap.patch b/meta-networking/recipes-support/strongswan/files/strongswan-4.3.3-5.1.1_asn1_unwrap.patch
+deleted file mode 100644
+index 374f2cf..0000000
+--- a/meta-networking/recipes-support/strongswan/files/strongswan-4.3.3-5.1.1_asn1_unwrap.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-strongswan: asn1: Properly check length in asn1_unwrap()
 -
-diff --git a/meta-oe/recipes-connectivity/iw/iw_3.11.bb b/meta-oe/recipes-connectivity/iw/iw_3.15.bb
-similarity index 81%
-rename from meta-oe/recipes-connectivity/iw/iw_3.11.bb
-rename to meta-oe/recipes-connectivity/iw/iw_3.15.bb
-index d72a140..7800e90 100644
---- a/meta-oe/recipes-connectivity/iw/iw_3.11.bb
-+++ b/meta-oe/recipes-connectivity/iw/iw_3.15.bb
-@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
+-Fixes CVE-2014-2891 in strongSwan releases 4.3.3-5.1.1.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Yue Tao <yue.tao@windriver.com>
+-
+----
+- src/libstrongswan/asn1/asn1.c |    2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/libstrongswan/asn1/asn1.c b/src/libstrongswan/asn1/asn1.c
+-index d860ad9..9a5f5c5 100644
+---- a/src/libstrongswan/asn1/asn1.c
+-+++ b/src/libstrongswan/asn1/asn1.c
+-@@ -296,7 +296,7 @@ int asn1_unwrap(chunk_t *blob, chunk_t *inner)
+- 	else
+- 	{	/* composite length, determine number of length octets */
+- 		len &= 0x7f;
+--		if (len == 0 || len > sizeof(res.len))
+-+		if (len == 0 || len > blob->len || len > sizeof(res.len))
+- 		{
+- 			return ASN1_INVALID;
+- 		}
+--- 
+-1.7.10.4
+-
+diff --git a/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch b/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
+deleted file mode 100644
+index ad3459e..0000000
+--- a/meta-networking/recipes-support/strongswan/files/strongswan-5.0.0-5.1.2_reject_child_sa.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From b980ba7757dcfedd756aa055b3271ea58cf85aa6 Mon Sep 17 00:00:00 2001
+-From: Martin Willi <martin@revosec.ch>
+-Date: Thu, 20 Feb 2014 16:08:43 +0100
+-Subject: [PATCH] ikev2: Reject CREATE_CHILD_SA exchange on unestablished
+- IKE_SAs
+-
+-Prevents a responder peer to trick us into established state by starting
+-IKE_SA rekeying before the IKE_SA has been authenticated during IKE_AUTH.
+-
+-Fixes CVE-2014-2338 for 5.x versions of strongSwan.
+----
+- src/libcharon/sa/ikev2/task_manager_v2.c | 9 +++++++++
+- 1 file changed, 9 insertions(+)
+-
+-diff --git a/src/libcharon/sa/ikev2/task_manager_v2.c b/src/libcharon/sa/ikev2/task_manager_v2.c
+-index ac3be90..a5252ab 100644
+---- a/src/libcharon/sa/ikev2/task_manager_v2.c
+-+++ b/src/libcharon/sa/ikev2/task_manager_v2.c
+-@@ -780,6 +780,15 @@ static status_t process_request(private_
+- 			case CREATE_CHILD_SA:
+- 			{	/* FIXME: we should prevent this on mediation connections */
+- 				bool notify_found = FALSE, ts_found = FALSE;
+-+
+-+				if (this->ike_sa->get_state(this->ike_sa) == IKE_CREATED ||
+-+					this->ike_sa->get_state(this->ike_sa) == IKE_CONNECTING)
+-+				{
+-+					DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
+-+						 "unestablished IKE_SA, rejected");
+-+					return FAILED;
+-+				}
+-+
+- 				enumerator = message->create_payload_enumerator(message);
+- 				while (enumerator->enumerate(enumerator, &payload))
+- 				{
+---
+-1.8.1.2
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.2.0.bb
+similarity index 87%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.2.0.bb
+index cfa9abc..0997fd0 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.1.1.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.2.0.bb
+@@ -9,12 +9,10 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
  
- DEPENDS = "libnl pkgconfig"
- 
--SRC_URI = "http://www.kernel.org/pub/software/network/iw/${BP}.tar.bz2 \
-+SRC_URI = "http://www.kernel.org/pub/software/network/iw/${BP}.tar.gz \
-            file://0001-iw-version.sh-don-t-use-git-describe-for-versioning.patch \
+ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+         file://fix-funtion-parameter.patch \
+-        file://strongswan-5.0.0-5.1.2_reject_child_sa.patch \
+-        file://strongswan-4.3.3-5.1.1_asn1_unwrap.patch \
  "
  
--SRC_URI[md5sum] = "e633cf7c875c7d8b547abafc0d95f6c4"
--SRC_URI[sha256sum] = "09348d4f7371fad00c07cfb67b9e34f24403cbd9361f9634cfb4dff9cdd40139"
-+SRC_URI[md5sum] = "ebb16e6c29b075e3a58b99552583fd79"
-+SRC_URI[sha256sum] = "1223ebab68dc337f16ed80c45af37b78f112ea091e919eafe96a4cbd63942081"
+-SRC_URI[md5sum] = "e3af3d493d22286be3cd794533a8966a"
+-SRC_URI[sha256sum] = "fbf2a668221fc4a36a34bdeac2dfeda25b96f572d551df022585177953622406"
++SRC_URI[md5sum] = "5cee4ee1a6ccb74400758b3ace54d46e"
++SRC_URI[sha256sum] = "b00c30bd2e60ff2e5fc85f54bbad54fe246585812fdf212dbe777a5258da26ce"
  
- EXTRA_OEMAKE = ""
- 
+ EXTRA_OECONF = "--enable-gmp \
+         --enable-openssl \
 -- 
 2.0.0
 
