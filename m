@@ -1,34 +1,31 @@
-Return-Path: <gary.robertson@linaro.org>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 092F5617B8
+Return-Path: <oosaprogrammer@gmail.com>
+Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
+	[209.85.218.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 7747765D56
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 20:40:21 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id hi2so4301980wib.5
+	Tue, 19 Aug 2014 01:19:34 +0000 (UTC)
+Received: by mail-oi0-f50.google.com with SMTP id a141so4180532oig.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 13:40:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to:cc
-	:content-type;
-	bh=wlQsWJhVjHF7kZFRzhD/AJlF2QM2mJT77REh3SBCCEE=;
-	b=ZgEHlPcAY0Y+hCJVh7/1It7t14yj25b4lpLFZ8Pv81CqHrQQB3SY+EtITJ5Ky157ai
-	+o7WEKYOY+C7zxr7cd0pCrYGK4vCp/UAtXypkWGevkNxMEa5Uno07ev3YWWfEWluZptA
-	0B7zInnVbhdji9Yvo9hQQDGVdeC8n1fwA4sCD26S3MZ0mVNIFSvWBvK/GUMMN00uu9BB
-	RlpJalslIU8E6XFq/oPYp5MG3QCXWCErcgYcq76k45sp3FIK+Ofmv+JVPVWZtLgTmwhh
-	Oadg98Q5/QXeo+UEKUHxnEcW0N8+IbfV7HEWtvhXXp2XYsale3qa2j8eT1LeAdjJGjhb
-	UT7Q==
-X-Gm-Message-State: ALoCoQnz0Jy9KttHQcX4/vlQxJMAozv5mC97znzZrfrUBQmMUIoKz/dxgJ/QPIko7FmCA3p6EQbb
+	Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=tvra1Ej7y/g1XkgDB6/SFvW3scZFZvpueKLweP2lz7U=;
+	b=0YfDKtJTDNZPWfhKpsTDxIeh1Vn1TVf57XnAxmZP7jJap1Lz33yaBDsPCn950qklGk
+	3FflQIJ46g7QE58HZFLkWGrzQxJM65kI4US6A6DxC5f95QqhQxbxs3zHbAeb6rNsUrnL
+	U27D6ykI8dI1fjc5XRrxUarg83Hxlt3mgL20jlwoT1KMYGYS0SaFGhSsfyhN6j6kAAVS
+	6beYD1Oky7x3lt0CKV/JEHv6xScwBI0pStrBu/RNuxQk0iJ73OWJ9yNypyZZlSUtqxwn
+	O3S/+Rj2dE9/rRzKURjbswFFzGqQeo1glq/QCAqjpKOcCXf2N7Md+7BA2yT5IE7ABj+3
+	te1w==
 MIME-Version: 1.0
-X-Received: by 10.180.96.196 with SMTP id du4mr1572525wib.44.1408394422306;
-	Mon, 18 Aug 2014 13:40:22 -0700 (PDT)
-Received: by 10.216.120.72 with HTTP; Mon, 18 Aug 2014 13:40:22 -0700 (PDT)
-Date: Mon, 18 Aug 2014 15:40:22 -0500
-Message-ID: <CAF7YWny422XPrCf=A-5k4KiitLM6x6PjKpPArcjjvffMZvg6=w@mail.gmail.com>
-From: Gary Robertson <gary.robertson@linaro.org>
+X-Received: by 10.182.215.134 with SMTP id oi6mr61211obc.84.1408411175758;
+	Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
+Received: by 10.182.132.52 with HTTP; Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
+Date: Tue, 19 Aug 2014 10:19:35 +0900
+Message-ID: <CALYKT1iTDfz53Yo98Mr8XKvrHHR8WUJafpMs9OSTiap+TAMKww@mail.gmail.com>
+From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Autoconf problems in filesystem image build using linux-dummy virtual/kernel
+Subject: Correct usage of FILES variable of OE build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,49 +39,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Aug 2014 20:40:29 -0000
+X-List-Received-Date: Tue, 19 Aug 2014 01:19:36 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello, all.
+Hi list,
 
-We are experiencing a problem with our root filesystem builds.  For
-logistical reasons we are building an OE root filesystem image with no
-kernel included.  We build this 'generic rootfs' once for a given
-architecture and then later select a separately-built kernel for that
-architecture and merge it into the rootfs image using our own local tools.
-This allows us to maintain several kernel trees separately from the rootfs
-tree and still have a common set of supported features in our final
-deployed filesystem images.
+I've got question about OE build system variable, FILES.
+I wanted to install my application into a directory under "/App".
+So I placed 'mkdir', 'chmod', 'install' command into "do_install_append()"
+of .bb file.
+But finally my built image didn't include the directory "/App".
+So I searched yocto manual and found a brief description about the variable
+"FILES".
 
-The 'generic rootfs' image is built using the 'linux-dummy' recipe as a
-place-holder for the missing virtual/kernel... however we are encountering
-problems in building the LTP package for inclusion in this 'generic rootfs'
-image.  LTP relies heavily on autoconf to determine what features can be
-used and/or tested in the runtime target environment, and when it attempts
-to configure against the 'linux-dummy' virtual kernel it finds a number of
-features 'missing' which are in fact supported in our externally-built
-kernels.
+With the usage of the variable 'FILES' below, I succeeded to install my
+application under "/App"
 
-I believe the cleanest solution might be to supply a set of kernel headers
-reflecting the subset of supported features common to all of our available
-external kernels, and then to allow autoconf to configure all userland
-packages against those headers.  Ideally these headers could be fetched
-from the appropriate git repository and  made available for autoconf to
-configure against, but would not be included into the final deployed rootfs
-image.
+FILES_${PN} += "/App"
+> FILES_${PN} += "/App/ini"
+> FILES_${PN} += "/App/lib"
+> FILES_${PN} += "/App/download"
 
-Unfortunately I am a relatively new and inexperienced OE / bitbake user and
-am unsure whether this is even possible or how to go about setting it up -
-so I am asking the experts here for some advice and / or pointers on the
-issue.
 
-If what I am seeking is impossible - how close could I come to that goal...
-that is, can we build the image with just the headers from our custom
-common kernel?  And if it is possible to allow autoconf to configure
-against custom kernel headers without moving those headers into the final
-deployed filesystem image, how would I go about that?
+But I found some weird observation. I found a directory "/App/ini" is
+created like "/App/ini?".
+There appended unexpected question mark at the end of the path "/App/ini".
+This doesn't happen all time. This happens from time to time, once out of
+almost about 200 trials.
+It's rare to observe this problem.
 
-Any insight would be appreciated.
+I doubt this happens with the wrong use of the variable FILES.
 
-Gary Robertson
+Is my usage above correct?
+Shouldn't I need to place spaces like below? :
+
+FILES_${PN} += "/App "
+> FILES_${PN} += "/App/ini "
+> FILES_${PN} += "/App/lib "
+> FILES_${PN} += "/App/download "
+
+
+or like below? :
+
+FILES_${PN} += "/App /App/ini /App/lib /App/download"
+
+
+And what about the trial below? :
+
+FILES_${PN} += "/App/*"
+> FILES_${PN} += "/App/ini/*"
+> FILES_${PN} += "/App/lib/*"
+> FILES_${PN} += "/App/download/*"
+
+
+Let me list up my questions:
+
+1. It's shown above. Is my usage above correct? If I need to use it as
+shown above?
+2. What does '*' mean in the usage of FILES variable above?
+3. Why I need to use this variable FILES? I know without it new directory
+is not created. But I'd like to know why?
+
+Below is the explanation from yocto reference manual.
+Thank you very much in advance.
+Journeyer J. Joh
+
+
+> *The list of directories or files that are placed in packages.*
+> *To use the FILES variable, provide a package name override that
+> identifies the resulting package. Then, provide a space-separated list of
+> files or paths that identifies the files you want included as part of the
+> resulting package. Here is an example:**FILES_${PN} += "${bindir}/mydir1/
+> ${bindir}/mydir2/myfile"*
+> *If some of the files you provide with the FILES variable are editable and
+> you know they should not be overwritten during the package update process
+> by the Package Management System (PMS), you can identify these files so
+> that the PMS will not overwrite them. See the CONFFILES variable for
+> information on how to identify these files to the PMS.
+> - http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html
+> <http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html>*
+
+
+----------------------------------------
+Journeyer J. Joh
+o o s a p r o g r a m m e r
+a t
+g m a i l  d o t  c o m
+----------------------------------------
 
