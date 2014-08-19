@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 987B865DEB
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C242617B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2014 10:07:29 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id n3so5015681wiv.1
+	Tue, 19 Aug 2014 11:41:36 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id k14so6386751wgh.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2014 03:07:30 -0700 (PDT)
+	Tue, 19 Aug 2014 04:41:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IGN4FjBuMB64LxABBHUBCGQob6qCbYYuTKY7fkmwxf8=;
-	b=UwoRf8KTJVOIa033T5PH4ybuwbuVjFtU5prcwd3FdbkOQuUAZkTuiLsuF0yRq8pd3o
-	nHbsPTPxsUbLWlRJVVFjmzHEcIgmmYwn5tmfMxNpdF2x2Tb9sEfQ8lipHPHD8p7j6NZc
-	YnSg8i/6jlD1fxvuuFQwn+9XeLBIxm/bbI5b5A780Jmr8cDxxURuaaGqiw07RLRa4d1b
-	3DnbnsJugC06Z9r91g0VfZSmOwjAt99ss/VqcOL8pOh1YCU9dz44tiCG8Zeds7itxoD7
-	eJi02hq1zCilStzKQC1dgC3mXk8DfvgFgJ12HnXRPWUQ8PZilWEluONVYjOWukvov8+B
-	8FMw==
-X-Received: by 10.194.110.135 with SMTP id ia7mr1417189wjb.128.1408442850786; 
-	Tue, 19 Aug 2014 03:07:30 -0700 (PDT)
+	bh=tFrnq+ftRc2uJ731uiTZSSMD/m8dsbz9AXvdzlLEcZ0=;
+	b=zD0ipf1Y5yhzEgdIu7UUzSc9Vmx3KkxiXNs9Jp9fcdSkBv2cJRUL+GaYr5QEOBqDU6
+	s9ji9SiXvnQ5WLgvWooSbpXyHA+Wfs4+2nJmX9u5Aa+y48jEiMDWiNepzQkKWsgjBNCJ
+	4Ulkgj5T0G84mubIF/T4J5l5A5w/Ychv6NgFmDKWR0SMeJdyxOiakguHuDTCb4K3PhSo
+	kb1v503I7zt5TW01JB7o1YKpXmNryvER8ZgHUTCh3xJeQ+bIycRylJzhUymvDKfj/dwb
+	nDXm8wmgmtGiRLVuEwpaySDWQKPqiDEKQo4BUewkzZvT639F+wxael8fVeu0We19sKC3
+	MHvQ==
+X-Received: by 10.194.2.12 with SMTP id 12mr48781368wjq.54.1408448497416;
+	Tue, 19 Aug 2014 04:41:37 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ge8sm47182795wib.4.2014.08.19.03.07.29 for <multiple recipients>
+	m5sm49822631wjx.16.2014.08.19.04.41.34
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Aug 2014 03:07:30 -0700 (PDT)
+	Tue, 19 Aug 2014 04:41:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 19 Aug 2014 12:07:31 +0200
+Date: Tue, 19 Aug 2014 13:41:36 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140819100731.GO3660@jama>
-References: <1408431709-5955-1-git-send-email-b40869@freescale.com>
+Message-ID: <20140819114136.GQ3660@jama>
+References: <53F3215D.6000407@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <1408431709-5955-1-git-send-email-b40869@freescale.com>
+In-Reply-To: <53F3215D.6000407@linaro.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: YangHaibo <b40869@freescale.com>
-Subject: Re: [meta-oe][meta-webserver][PATCH] move fcgi-2.4.0 recipe and patch to correct folder
+Subject: Re: wget --content-disposition flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,69 +47,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2014 10:07:33 -0000
-X-Groupsio-MsgNum: 51772
+X-List-Received-Date: Tue, 19 Aug 2014 11:41:41 -0000
+X-Groupsio-MsgNum: 51773
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dT+85zccSFkyJC53"
+	protocol="application/pgp-signature"; boundary="2qwbT0JTInWqknst"
 Content-Disposition: inline
 
---dT+85zccSFkyJC53
+--2qwbT0JTInWqknst
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 19, 2014 at 03:01:49PM +0800, YangHaibo wrote:
-> ---
->  meta-webserver/recipes-support/{ =3D> fcgi}/fcgi_2.4.0.bb               =
-    | 0
->  .../recipes-support/fcgi/{ =3D> files}/Fix_EOF_not_declared_issue.patch =
-    | 0
->  .../fcgi/{ =3D> files}/add_foreign_to_AM_INIT_AUTOMAKE.patch            =
-    | 0
->  3 files changed, 0 insertions(+), 0 deletions(-)
->  rename meta-webserver/recipes-support/{ =3D> fcgi}/fcgi_2.4.0.bb (100%)
->  rename meta-webserver/recipes-support/fcgi/{ =3D> files}/Fix_EOF_not_dec=
-lared_issue.patch (100%)
->  rename meta-webserver/recipes-support/fcgi/{ =3D> files}/add_foreign_to_=
-AM_INIT_AUTOMAKE.patch (100%)
+On Tue, Aug 19, 2014 at 02:05:17PM +0400, Maxim Uvarov wrote:
+> Hello,
 >=20
-> diff --git a/meta-webserver/recipes-support/fcgi_2.4.0.bb b/meta-webserve=
-r/recipes-support/fcgi/fcgi_2.4.0.bb
-> similarity index 100%
-> rename from meta-webserver/recipes-support/fcgi_2.4.0.bb
-> rename to meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
-> diff --git a/meta-webserver/recipes-support/fcgi/Fix_EOF_not_declared_iss=
-ue.patch b/meta-webserver/recipes-support/fcgi/files/Fix_EOF_not_declared_i=
-ssue.patch
-> similarity index 100%
-> rename from meta-webserver/recipes-support/fcgi/Fix_EOF_not_declared_issu=
-e.patch
-> rename to meta-webserver/recipes-support/fcgi/files/Fix_EOF_not_declared_=
-issue.patch
-> diff --git a/meta-webserver/recipes-support/fcgi/add_foreign_to_AM_INIT_A=
-UTOMAKE.patch b/meta-webserver/recipes-support/fcgi/files/add_foreign_to_AM=
-_INIT_AUTOMAKE.patch
-> similarity index 100%
-> rename from meta-webserver/recipes-support/fcgi/add_foreign_to_AM_INIT_AU=
-TOMAKE.patch
-> rename to meta-webserver/recipes-support/fcgi/files/add_foreign_to_AM_INI=
-T_AUTOMAKE.patch
+> can we add by default wget --content-disposition flag? Github has=20
+> releases feature and creates tarball for certain git tag. And tarball=20
+> file name is for example v1.tar.gz.  But for html content right name can=
+=20
+> be used i.e. project-name-v1.tar.gz.
 
-Please use fcgi (BPN) instead of "files" for slightly faster lookup.
+Aren't those tarballs regenerated from time to time like snapshots are?
+
+In that case we cannot use them, because they change checksums from time
+to time.
+
+> If it's possible to add this flag wget will downloads files to right=20
+> file names:
+>=20
+> Example:
+> wget --content-disposition=20
+> https://github.com/muvarov/daq-odp/archive/v0.1.tar.gz
+>=20
+> Thank you,
+> Maxim.
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---dT+85zccSFkyJC53
+--2qwbT0JTInWqknst
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlPzIeMACgkQN1Ujt2V2gBxp+wCglKvAKB0qToCm8RjVVVaQYbYY
-sxsAn2aCXkWnc7uaNzBbKT3C0bxIuclG
-=q909
+iEYEARECAAYFAlPzN/AACgkQN1Ujt2V2gBwjeQCgiVg0HDkP2mHkiX+45LHoSMqy
+Tt0Anj/VTjvHwHtdyv5zPoB7BxCH1SJM
+=iLhP
 -----END PGP SIGNATURE-----
 
---dT+85zccSFkyJC53--
+--2qwbT0JTInWqknst--
