@@ -1,31 +1,24 @@
-Return-Path: <oosaprogrammer@gmail.com>
-Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
-	[209.85.218.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 7747765D56
+Return-Path: <Fupan.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CE9470D4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2014 01:19:34 +0000 (UTC)
-Received: by mail-oi0-f50.google.com with SMTP id a141so4180532oig.9
+	Tue, 19 Aug 2014 01:22:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7J1M6wd029270
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=tvra1Ej7y/g1XkgDB6/SFvW3scZFZvpueKLweP2lz7U=;
-	b=0YfDKtJTDNZPWfhKpsTDxIeh1Vn1TVf57XnAxmZP7jJap1Lz33yaBDsPCn950qklGk
-	3FflQIJ46g7QE58HZFLkWGrzQxJM65kI4US6A6DxC5f95QqhQxbxs3zHbAeb6rNsUrnL
-	U27D6ykI8dI1fjc5XRrxUarg83Hxlt3mgL20jlwoT1KMYGYS0SaFGhSsfyhN6j6kAAVS
-	6beYD1Oky7x3lt0CKV/JEHv6xScwBI0pStrBu/RNuxQk0iJ73OWJ9yNypyZZlSUtqxwn
-	O3S/+Rj2dE9/rRzKURjbswFFzGqQeo1glq/QCAqjpKOcCXf2N7Md+7BA2yT5IE7ABj+3
-	te1w==
+	Mon, 18 Aug 2014 18:22:06 -0700 (PDT)
+Received: from pek-bsp-build1.wrs.com (128.224.179.105) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 18 Aug 2014 18:22:05 -0700
+From: <fupan.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 19 Aug 2014 09:20:39 +0800
+Message-ID: <1408411240-14009-1-git-send-email-fupan.li@windriver.com>
+X-Mailer: git-send-email 1.8.1.2
 MIME-Version: 1.0
-X-Received: by 10.182.215.134 with SMTP id oi6mr61211obc.84.1408411175758;
-	Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
-Received: by 10.182.132.52 with HTTP; Mon, 18 Aug 2014 18:19:35 -0700 (PDT)
-Date: Tue, 19 Aug 2014 10:19:35 +0900
-Message-ID: <CALYKT1iTDfz53Yo98Mr8XKvrHHR8WUJafpMs9OSTiap+TAMKww@mail.gmail.com>
-From: "Journeyer J. Joh" <oosaprogrammer@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Correct usage of FILES variable of OE build system
+Subject: [kernel.bbclass] [PATCH] let the multi-version kernel header files coexist on the target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,91 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2014 01:19:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 Aug 2014 01:22:08 -0000
+Content-Type: text/plain
 
-Hi list,
+From: fupan li <fupan.li@windriver.com>
 
-I've got question about OE build system variable, FILES.
-I wanted to install my application into a directory under "/App".
-So I placed 'mkdir', 'chmod', 'install' command into "do_install_append()"
-of .bb file.
-But finally my built image didn't include the directory "/App".
-So I searched yocto manual and found a brief description about the variable
-"FILES".
+When do RCPL upgrading, we want to keep the different RCPL's kernel header files coexist, just
+as the kernel image does.
 
-With the usage of the variable 'FILES' below, I succeeded to install my
-application under "/App"
+Signed-off-by: fupan li <fupan.li@windriver.com>
+---
+ meta/classes/kernel.bbclass | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-FILES_${PN} += "/App"
-> FILES_${PN} += "/App/ini"
-> FILES_${PN} += "/App/lib"
-> FILES_${PN} += "/App/download"
+diff --git a/meta/classes/kernel.bbclass b/meta/classes/kernel.bbclass
+index 6d9e646..e6ed716 100644
+--- a/meta/classes/kernel.bbclass
++++ b/meta/classes/kernel.bbclass
+@@ -75,9 +75,11 @@ EXTRA_OEMAKE = ""
+ 
+ KERNEL_ALT_IMAGETYPE ??= ""
+ 
+-# Define where the kernel headers are installed on the target as well as where
+-# they are staged.
+-KERNEL_SRC_PATH = "/usr/src/kernel"
++# Define where the kernel headers are staged.
++KERNEL_SRC_EXPORT_PATH = "/usr/src/kernel"
++#put the kernel headers in /usr/src/kernel-${@legitimize_package_name('${KERNEL_VERSION}')} to
++#let the different RCPL's kernel headers coexist.
++KERNEL_SRC_PATH = "/usr/src/kernel-${@legitimize_package_name('${KERNEL_VERSION}')}"
+ 
+ KERNEL_IMAGETYPE_FOR_MAKE = "${@(lambda s: s[:-3] if s[-3:] == ".gz" else s)(d.getVar('KERNEL_IMAGETYPE', True))}"
+ 
+@@ -313,7 +315,7 @@ kernelscripts_sstate_postinst () {
+ }
+ 
+ sysroot_stage_all_append() {
+-	sysroot_stage_dir ${D}${KERNEL_SRC_PATH} ${SYSROOT_DESTDIR}${KERNEL_SRC_PATH}
++	sysroot_stage_dir ${D}${KERNEL_SRC_PATH} ${SYSROOT_DESTDIR}${KERNEL_SRC_EXPORT_PATH}
+ }
+ 
+ kernel_do_configure() {
+@@ -386,6 +388,14 @@ pkg_postrm_kernel-image () {
+ 	update-alternatives --remove ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} || true
+ }
+ 
++pkg_postinst_kernel-dev () {
++        update-alternatives --install ${KERNEL_SRC_EXPORT_PATH} kernel-path kernel-${@legitimize_package_name('${KERNEL_VERSION}')} ${KERNEL_PRIORITY} || true
++}
++
++pkg_postrm_kernel-dev () {
++        update-alternatives --remove kernel-path kernel-${@legitimize_package_name('${KERNEL_VERSION}')} || true
++}
++
+ PACKAGESPLITFUNCS_prepend = "split_kernel_packages "
+ 
+ python split_kernel_packages () {
+-- 
+1.8.1.2
 
-
-But I found some weird observation. I found a directory "/App/ini" is
-created like "/App/ini?".
-There appended unexpected question mark at the end of the path "/App/ini".
-This doesn't happen all time. This happens from time to time, once out of
-almost about 200 trials.
-It's rare to observe this problem.
-
-I doubt this happens with the wrong use of the variable FILES.
-
-Is my usage above correct?
-Shouldn't I need to place spaces like below? :
-
-FILES_${PN} += "/App "
-> FILES_${PN} += "/App/ini "
-> FILES_${PN} += "/App/lib "
-> FILES_${PN} += "/App/download "
-
-
-or like below? :
-
-FILES_${PN} += "/App /App/ini /App/lib /App/download"
-
-
-And what about the trial below? :
-
-FILES_${PN} += "/App/*"
-> FILES_${PN} += "/App/ini/*"
-> FILES_${PN} += "/App/lib/*"
-> FILES_${PN} += "/App/download/*"
-
-
-Let me list up my questions:
-
-1. It's shown above. Is my usage above correct? If I need to use it as
-shown above?
-2. What does '*' mean in the usage of FILES variable above?
-3. Why I need to use this variable FILES? I know without it new directory
-is not created. But I'd like to know why?
-
-Below is the explanation from yocto reference manual.
-Thank you very much in advance.
-Journeyer J. Joh
-
-
-> *The list of directories or files that are placed in packages.*
-> *To use the FILES variable, provide a package name override that
-> identifies the resulting package. Then, provide a space-separated list of
-> files or paths that identifies the files you want included as part of the
-> resulting package. Here is an example:**FILES_${PN} += "${bindir}/mydir1/
-> ${bindir}/mydir2/myfile"*
-> *If some of the files you provide with the FILES variable are editable and
-> you know they should not be overwritten during the package update process
-> by the Package Management System (PMS), you can identify these files so
-> that the PMS will not overwrite them. See the CONFFILES variable for
-> information on how to identify these files to the PMS.
-> - http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html
-> <http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html>*
-
-
-----------------------------------------
-Journeyer J. Joh
-o o s a p r o g r a m m e r
-a t
-g m a i l  d o t  c o m
-----------------------------------------
 
