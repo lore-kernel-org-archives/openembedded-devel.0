@@ -1,39 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C242617B8
+Return-Path: <Yasir_Khan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 513FD617B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2014 11:41:36 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id k14so6386751wgh.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Aug 2014 04:41:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tFrnq+ftRc2uJ731uiTZSSMD/m8dsbz9AXvdzlLEcZ0=;
-	b=zD0ipf1Y5yhzEgdIu7UUzSc9Vmx3KkxiXNs9Jp9fcdSkBv2cJRUL+GaYr5QEOBqDU6
-	s9ji9SiXvnQ5WLgvWooSbpXyHA+Wfs4+2nJmX9u5Aa+y48jEiMDWiNepzQkKWsgjBNCJ
-	4Ulkgj5T0G84mubIF/T4J5l5A5w/Ychv6NgFmDKWR0SMeJdyxOiakguHuDTCb4K3PhSo
-	kb1v503I7zt5TW01JB7o1YKpXmNryvER8ZgHUTCh3xJeQ+bIycRylJzhUymvDKfj/dwb
-	nDXm8wmgmtGiRLVuEwpaySDWQKPqiDEKQo4BUewkzZvT639F+wxael8fVeu0We19sKC3
-	MHvQ==
-X-Received: by 10.194.2.12 with SMTP id 12mr48781368wjq.54.1408448497416;
-	Tue, 19 Aug 2014 04:41:37 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	m5sm49822631wjx.16.2014.08.19.04.41.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Aug 2014 04:41:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 19 Aug 2014 13:41:36 +0200
+	Tue, 19 Aug 2014 11:50:05 +0000 (UTC)
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1XJhvS-000424-6S from Yasir_Khan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Aug 2014 04:50:06 -0700
+Received: from svr-pkl-eng-06.pkl.mentorg.com ([137.202.156.65]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Tue, 19 Aug 2014 04:50:05 -0700
+From: Yasir-Khan <yasir_khan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140819114136.GQ3660@jama>
-References: <53F3215D.6000407@linaro.org>
-MIME-Version: 1.0
-In-Reply-To: <53F3215D.6000407@linaro.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: wget --content-disposition flag
+Date: Tue, 19 Aug 2014 16:49:24 +0500
+Message-Id: <1408448964-11764-1-git-send-email-yasir_khan@mentor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-OriginalArrivalTime: 19 Aug 2014 11:50:06.0061 (UTC)
+	FILETIME=[B82639D0:01CFBBA3]
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH] lmbench: if a machine config file exists, install it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,59 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Aug 2014 11:41:41 -0000
-X-Groupsio-MsgNum: 51773
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2qwbT0JTInWqknst"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 19 Aug 2014 11:50:13 -0000
 
---2qwbT0JTInWqknst
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Yasir-Khan <yasir_khan@mentor.com>
+---
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |    7 +++++++
+ 1 file changed, 7 insertions(+)
 
-On Tue, Aug 19, 2014 at 02:05:17PM +0400, Maxim Uvarov wrote:
-> Hello,
->=20
-> can we add by default wget --content-disposition flag? Github has=20
-> releases feature and creates tarball for certain git tag. And tarball=20
-> file name is for example v1.tar.gz.  But for html content right name can=
-=20
-> be used i.e. project-name-v1.tar.gz.
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 41db150..a3873a6 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -60,6 +60,13 @@ do_install () {
+            ${D}${bindir}/lmbench-run
+     install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
+     install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
++
++    # If the machine installs a config file, install it to the appropriate place
++    if [ -f ${WORKDIR}/CONFIG.${MACHINE} ]; then
++        install -D 0644 ${WORKDIR}/CONFIG.${MACHINE} \
++                        ${D}/${datadir}/lmbench/bin/${TARGET_PREFIX}/CONFIG.${MACHINE}
++    fi
++
+ }
+ 
+ pkg_postinst_${PN} () {
+-- 
+1.7.9.5
 
-Aren't those tarballs regenerated from time to time like snapshots are?
 
-In that case we cannot use them, because they change checksums from time
-to time.
-
-> If it's possible to add this flag wget will downloads files to right=20
-> file names:
->=20
-> Example:
-> wget --content-disposition=20
-> https://github.com/muvarov/daq-odp/archive/v0.1.tar.gz
->=20
-> Thank you,
-> Maxim.
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---2qwbT0JTInWqknst
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlPzN/AACgkQN1Ujt2V2gBwjeQCgiVg0HDkP2mHkiX+45LHoSMqy
-Tt0Anj/VTjvHwHtdyv5zPoB7BxCH1SJM
-=iLhP
------END PGP SIGNATURE-----
-
---2qwbT0JTInWqknst--
