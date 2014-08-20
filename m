@@ -1,27 +1,25 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3607 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 20 Aug 2014 02:26:12 UTC
-Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
-	[206.46.173.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BF3C617B8
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 550AA65DD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 02:26:12 +0000 (UTC)
-Received: from gandalf.denix.org ([unknown] [108.18.33.160])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0NAK008O8ZYQ3ID0@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	19 Aug 2014 20:25:48 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id F00D420092; Tue,
-	19 Aug 2014 21:25:37 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Aug 2014 21:25:33 -0400
-Message-id: <1408497933-11310-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.0.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH] ltp-ddt: update to the latest rev, bump the version
+	Wed, 20 Aug 2014 02:39:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7K2dE1R000806
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Aug 2014 19:39:14 -0700 (PDT)
+Received: from [128.224.162.141] (128.224.162.141) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 19 Aug 2014 19:39:13 -0700
+Message-ID: <53F40A50.4030509@windriver.com>
+Date: Wed, 20 Aug 2014 10:39:12 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+Subject: Should we set the LICENSE_FLAGS = "commercial" in meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,138 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2014 02:26:13 -0000
+X-List-Received-Date: Wed, 20 Aug 2014 02:39:21 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+Hi:
 
-* Fix KERNEL_DIR vs. KERNEL_INC properly, drop not needed Makefile patch
-* Pass CC and KERNEL_CC to preserve the necessary system flags
-* Tons of other fixes and new testcases
+     I see the recipes is using the binary file,
+http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin
+Should we set the LICENSE_FLAGS = "commercial" in ]
+meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- ...in-modern-kernel-should-point-at-toplevel.patch | 40 ----------------------
- .../ltp-ddt/{ltp-ddt_0.0.4.bb => ltp-ddt_0.0.5.bb} | 20 +++++++----
- 2 files changed, 14 insertions(+), 46 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch
- rename meta-oe/recipes-devtools/ltp-ddt/{ltp-ddt_0.0.4.bb => ltp-ddt_0.0.5.bb} (85%)
 
-diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch
-deleted file mode 100644
-index 0b4ee64..0000000
---- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch
-+++ /dev/null
-@@ -1,40 +0,0 @@
--From e0fc5bea466c16b9d754a8ac8d0453e396678a2c Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 19 Feb 2014 20:28:07 -0800
--Subject: [PATCH] KERNEL_INC in modern kernel should point at toplevel
-- kerneldir
--
--Reason is kernel headers are not only in toplevel
--include/ but also in toplevel arch/ dir
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Makefile | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index 031d8bc..73e9b3c 100644
----- a/Makefile
--+++ b/Makefile
--@@ -245,15 +245,15 @@ endif
-- 
-- modules_edma:
-- 	@echo "Going to compile edma test kernel modules for $(PLATFORM)"
---	cd testcases/ddt/edma_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC)/.. PLATFORM=$(PLATFORM)
--+	cd testcases/ddt/edma_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC) PLATFORM=$(PLATFORM)
-- 
-- modules_gpio:
-- 	@echo "Going to compile gpio test kernel modules for $(PLATFORM)"
---	cd testcases/ddt/gpio_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC)/.. PLATFORM=$(PLATFORM)
--+	cd testcases/ddt/gpio_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC) PLATFORM=$(PLATFORM)
-- 
-- modules_ipc:
-- 	@echo "Going to compile IPC test kernel modules for $(PLATFORM)"
---	cd testcases/ddt/ipc_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC)/.. PLATFORM=$(PLATFORM)
--+	cd testcases/ddt/ipc_test_suite/src/kernel; make CROSS_COMPILE=$(CROSS_COMPILE) KERNEL_DIR=$(KERNEL_INC) PLATFORM=$(PLATFORM)
-- 
-- modules: $(MODULES_TO_BUILD)
-- 
---- 
--1.9.0
--
-diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
-similarity index 85%
-rename from meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb
-rename to meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
-index a70d5b9..d0b84ad 100644
---- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.4.bb
-+++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
-@@ -3,21 +3,21 @@ HOMEPAGE = "http://arago-project.org/git/projects/test-automation/ltp-ddt.git"
- SECTION = "console/utils"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
--PR = "r1"
- 
- PROVIDES += "ltp"
- DEPENDS += "zip-native virtual/kernel alsa-lib"
- 
--inherit autotools module-base kernel-module-split
-+RDEPENDS_${PN} += "pm-qa"
-+
-+inherit autotools-brokensep module-base kernel-module-split
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--SRCREV = "4f77e2e33357d2b23211ecd22f27f521aa01469a"
-+SRCREV = "088356602220dd8b48aeb138d4976c05c0879574"
- BRANCH ?= "master"
- 
- SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
-            file://0001-wdt_test_suite-Make-sure-to-include-generated-header.patch \
--           file://0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch \
-           "
- 
- S = "${WORKDIR}/git"
-@@ -28,12 +28,16 @@ EXTRA_OEMAKE_append = " \
-     prefix=${LTPROOT} \
-     CROSS_COMPILE=${HOST_PREFIX} \
-     SKIP_IDCHECK=1 \
-+    KERNEL_PATH=${STAGING_KERNEL_DIR} \
-     KERNEL_INC=${STAGING_KERNEL_DIR} \
-     KERNEL_USR_INC=${STAGING_INCDIR} \
-     ALSA_INCPATH=${STAGING_INCDIR} \
-     ALSA_LIBPATH=${STAGING_LIBDIR} \
-     PLATFORM=${MACHINE} \
-     RANLIB=${RANLIB} \
-+    DESTDIR=${D} \
-+    CC='${CC}' \
-+    KERNEL_CC='${KERNEL_CC}' \
- "
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
-@@ -63,12 +67,16 @@ do_configure() {
- 
- kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
- 
-+do_compile_prepend () {
-+    do_make_scripts
-+}
-+
- do_compile_append () {
--    oe_runmake DESTDIR=${D} modules
-+    oe_runmake modules
- }
- 
- do_install() {
--    oe_runmake DESTDIR=${D} install
-+    oe_runmake install
-     install -d ${D}${datadir}
-     install -d ${D}${kmoddir}
-     cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
--- 
-2.0.4
-
+-Roy
 
