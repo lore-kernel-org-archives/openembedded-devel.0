@@ -1,31 +1,25 @@
-Return-Path: <kernel@tekno-soft.it>
-Received: from mail.tekno-soft.it (li153-180.members.linode.com
-	[109.74.206.180])
-	by mail.openembedded.org (Postfix) with ESMTP id B92D665D56
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 5EC66601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 12:46:16 +0000 (UTC)
-Received: from dragon.tekno-soft.it
-	(host142-53-static.94-94-b.business.telecomitalia.it [94.94.53.142])
-	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: robyf@tekno-soft.it)
-	by mail.tekno-soft.it (Postfix) with ESMTPSA id 4131A1782D;
-	Wed, 20 Aug 2014 12:51:20 +0000 (UTC)
-Message-ID: <53F49881.3090409@tekno-soft.it>
-Date: Wed, 20 Aug 2014 14:45:53 +0200
-From: Roberto Fichera <kernel@tekno-soft.it>
-Organization: TeknoSOFT
+	Wed, 20 Aug 2014 13:16:21 +0000 (UTC)
+Received: (qmail 16678 invoked by uid 1003); 20 Aug 2014 13:16:22 -0000
+Received: from unknown (HELO ?10.212.226.128?)
+	(philip@opensdr.com@98.191.4.207)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	20 Aug 2014 13:16:22 -0000
+Message-ID: <53F49FA5.9070002@balister.org>
+Date: Wed, 20 Aug 2014 09:16:21 -0400
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.7.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, meta-freescale@yoctoproject.org
-X-Intuitive-System-MailScanner-Information: Please contact the ISP for more
-	information
-X-Intuitive-System-MailScanner-ID: 4131A1782D.A6BF9
-X-Intuitive-System-MailScanner: Found to be clean
-X-Intuitive-System-MailScanner-From: kernel@tekno-soft.it
-X-Spam-Status: No
-Subject: [ANNOUNCE] New telephony recipe with Asterisk 11.x, OPUS codec, SRTP and libPRI
+To: openembedded-devel@lists.openembedded.org
+References: <CALZ2gZUPQD9irvcfL5EvtMK=cokRj8n9KSW5nzsP_BgiTCfscw@mail.gmail.com>	<53F479A1.7050903@balister.org>
+	<53F47D26.7000204@topic.nl>
+In-Reply-To: <53F47D26.7000204@topic.nl>
+Subject: Re: [yocto] Community Demo Area at ELCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,22 +33,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2014 12:46:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 20 Aug 2014 13:16:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 08/20/2014 06:49 AM, Mike Looijmans wrote:
+> Is this solely for Yocto or is it good enough to have used "plain"
+> OpenEmbedded?
+> 
+> If "plain" is enough, I can probably bring some stuff to interact with :)
 
-I've made freely available a new telephony meta layer at
+What Paul said. The Yocto Project is an umbrella project to make
+embedded development easier. The point of the community demos is to show
+all the different ways people can use things like OE, Poky, Angstrom,
+Toaster, etc to make cool things.
 
-https://github.com/DICENetworks/meta-dicenetworks
+Philip
 
-In the new meta layer you can find Asterisk v11.9 recipe supporting
-SRTP, OPUS Codec as well as libPRI, DAHDI kernel drivers and tools
-and GSM library.
-
-Feel free to suggest any improvements and fixes.
-
-Cheers,
-Roberto Fichera.
+> 
+> M.
+> 
+> On 08/20/2014 12:34 PM, Philip Balister wrote:
+>> FYI. Bring your toys.
+>>
+>> Philip
+>>
+>>
+>> -------- Original Message --------
+>> Subject: [yocto] Community Demo Area at ELCE
+>> Date: Tue, 19 Aug 2014 17:50:37 -0700
+>> From: Osier-mixon, Jeffrey <jeffrey.osier-mixon@intel.com>
+>> To: yocto@yoctoproject.org <yocto@yoctoproject.org>
+>>
+>> At the Embedded Linux Conference in San Jose, CA USA this past spring, we
+>> had six great demos in the Yocto Project booth. However, only two of
+>> those
+>> were demos that we arrived with. Four were from community members who
+>> spontaneously showed up, including a homebuilt audio player (hi nerdboy)
+>> and we thank them very much for their support and willingness to share.
+>>
+>> As a response to that, the Yocto Project would like to invite Embedded
+>> Linux Conference Europe* participants to bring your projects to the Yocto
+>> Project booth if you'd like to show off your work. We will have a screen,
+>> keyboard, mouse, and power available. Small embedded projects are
+>> best, but
+>> if you have a scale robotic dinosaur or a Yocto-powered Lamborghini, we
+>> won't turn you away. (Probably.)
+>>
+>> Please RSVP to me directly and let me know when to expect you.
+>>
+>> If there is enough interest, we can also set up a table at lunchtime
+>> at the
+>> Yocto Project Developer Day** following ELCE.
+>>
+>> *
+>> http://events.linuxfoundation.org/events/embedded-linux-conference-europe
+>> **
+>> https://www.yoctoproject.org/tools-resources/events/yocto-project-developer-day-elce-2014
+>>
+>>
+>>
+>>
+> 
+> 
+> 
+> Met vriendelijke groet / kind regards,
+> 
+> Mike Looijmans
+> 
+> TOPIC Embedded Systems
+> Eindhovenseweg 32-C, NL-5683 KH Best
+> Postbus 440, NL-5680 AK Best
+> Telefoon: (+31) (0) 499 33 69 79
+> Telefax:  (+31) (0) 499 33 69 70
+> E-mail: mike.looijmans@topic.nl
+> Website: www.topic.nl
+> 
+> Please consider the environment before printing this e-mail
+> 
+> Bezoek ons op 9 en 10 september tijdens Technology for Health Den Bosch
+> (stand 53)
+> http://www.technologyforhealth.nl
+> 
 
