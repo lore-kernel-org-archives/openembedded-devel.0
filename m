@@ -1,23 +1,37 @@
-Return-Path: <rsantos@admtronics.com>
-Received: from p3plsmtpa09-09.prod.phx3.secureserver.net
-	(p3plsmtpa09-09.prod.phx3.secureserver.net [173.201.193.238])
-	by mail.openembedded.org (Postfix) with ESMTP id 5014F65DD0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 17:51:35 +0000 (UTC)
-Received: from [192.168.1.93] ([75.99.190.18])
-	by p3plsmtpa09-09.prod.phx3.secureserver.net with 
-	id h5ra1o00Y0QFrz7015rbEX; Wed, 20 Aug 2014 10:51:36 -0700
-Message-ID: <53F4E02A.1070808@admtronics.com>
-Date: Wed, 20 Aug 2014 13:51:38 -0400
-From: Rui DosSantos <rsantos@admtronics.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Icedove/24.6.0
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id ADE3A60169;
+	Wed, 20 Aug 2014 18:45:26 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id rl12so3414488iec.15
+	for <multiple recipients>; Wed, 20 Aug 2014 11:45:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=gou9hslrO6aj1Mdhdq/ZC14GGtoJfvnpbJ6t9SJXr7s=;
+	b=odUF47NniXiVugUQNa9iS5YwgELZqsbbHKAX+tYcdRB5fc+qJC0dq9sStc7XrJ7ubO
+	zPJhBzHtNWaeQAxdLdAflDX+AutGSd5n4XMSG3kZ9PD3y31lFD+2ymXFajp6pLQkjFLu
+	V/I8UFmuWjGjcM6cHTUMEYyxv1yteujy/HfN2WwMlhOZaJekduJ0GQOjvDqN7gYqICVO
+	wKfSJHdPG2VajoXqFNImDXbDZD1DVs8wAhKo1euqykC1LcYTMYc4P68hkA0faefMVz2j
+	Rtjq0HzK2W2oL1u1elA7nzYyNvP1fYOPx9M2deHvmmAXVTIqxXAgdrEaX0+c3NLAcpLL
+	xyHQ==
+X-Received: by 10.42.70.11 with SMTP id d11mr2345801icj.92.1408560327787;
+	Wed, 20 Aug 2014 11:45:27 -0700 (PDT)
+Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
+	[66.219.191.105]) by mx.google.com with ESMTPSA id
+	z11sm13963867igm.13.2014.08.20.11.45.26 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 20 Aug 2014 11:45:26 -0700 (PDT)
+Date: Wed, 20 Aug 2014 11:45:26 -0700 (PDT)
+X-Google-Original-Date: Wed, 20 Aug 2014 18:45:25 GMT
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <53F3DC14.1040305@admtronics.com>
-In-Reply-To: <53F3DC14.1040305@admtronics.com>
-X-Forwarded-Message-Id: <53F3DC14.1040305@admtronics.com>
-Subject: [meta-qt5][daisy] error meta-toolchain-qt5 not building
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1408560325436.1a852e84@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-08-10 until 2014-08-17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,452 +45,674 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2014 17:51:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Aug 2014 18:45:30 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hey Guys,
+Changelog since 2014-08-10 until 2014-08-17.  Projects included in this =
+report:
 
-Im trying to build "meta-toolchain-qt5" but it is failing, I am able to 
-build my own custom Qt5 image however the "meta-toolchain-qt5" errors 
-out with the following
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
-ERROR: Unable to install packages. Command 
-'/media/secondary/oe-core/build-cubie/tmp-eglibc/sysroots/x86_64-linux/usr/bin/opkg-cl 
--f 
-/media/secondary/oe-core/build-cubie/tmp-eglibc/work/cortexa8hf-vfp-neon-oe-linux-gnueabi/meta-toolchain-qt5/1.0-r0/opkg.conf 
--o 
-/media/secondary/oe-core/build-cubie/tmp-eglibc/work/cortexa8hf-vfp-neon-oe-linux-gnueabi/meta-toolchain-qt5/1.0-r0/sdk/image/usr/local/oecore-x86_64/sysroots/cortexa8hf-vfp-neon-oe-linux-gnueabi 
---force_postinstall --prefer-arch-to-version   install 
-packagegroup-core-standalone-sdk-target-dbg 
-packagegroup-core-standalone-sdk-target 
-packagegroup-qt5-toolchain-target' returned 255:
-Installing packagegroup-core-standalone-sdk-target-dbg (1.0-r8) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/all/packagegroup-core-standalone-sdk-target-dbg_1.0-r8_all.ipk.
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for libsegfault-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for libstdc++-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-utils-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-thread-db-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-gconv-ibm850-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-gconv-iso8859-15-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-gconv-cp1252-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-localedata-i18n-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation 
-for eglibc-gconv-iso8859-1-dbg
-Installing qemuwrapper-cross-dbg (1.0-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/qemuwrapper-cross-dbg_1.0-r0_cortexa8hf-vfp-neon.ipk.
-Installing libgcc-s-dbg (4.8.2-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libgcc-s-dbg_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6-dbg (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libc6-dbg_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing packagegroup-core-standalone-sdk-target (1.0-r8) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/all/packagegroup-core-standalone-sdk-target_1.0-r8_all.ipk.
-libc6-dev: unsatisfied recommendation for eglibc-extra-nss-dev
-libc6-dev: unsatisfied recommendation for libsegfault-dev
-libc6-dev: unsatisfied recommendation for eglibc-thread-db-dev
-libc6-dev: unsatisfied recommendation for libcidn-dev
-Installing libgcc1 (4.8.2-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libgcc1_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libc6_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libgcc-s-dev (4.8.2-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libgcc-s-dev_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6-dev (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libc6-dev_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libthread-db1 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libthread-db1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-extra-nss (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-extra-nss_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libcidn1 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libcidn1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing linux-libc-headers-dev (3.14-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/linux-libc-headers-dev_3.14-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-cp1252 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-cp1252_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-utils (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-utils_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-ibm850 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-ibm850_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libstdc++-dev (4.8.2-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libstdc++-dev_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libstdc++6 (4.8.2-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libstdc++6_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-i18n (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-i18n_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-neutral (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-neutral_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-circle (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-circle_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-cjk-compat (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-cjk-compat_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-small (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-small_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-compat (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-compat_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-narrow (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-narrow_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-wide (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-wide_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-font (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-font_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-fraction (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-fraction_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-iso14651-t1 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-iso14651-t1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-iso14651-t1-common (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-iso14651-t1-common_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libsegfault (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/libsegfault_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-iso8859-1 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-iso8859-1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-iso8859-15 (2.19-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-iso8859-15_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing qemuwrapper-cross (1.0-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/cortexa8hf-vfp-neon/qemuwrapper-cross_1.0-r0_cortexa8hf-vfp-neon.ipk.
-Installing packagegroup-qt5-toolchain-target (1.0-r0) to root...
-Downloading 
-file:/media/secondary/oe-core/build-cubie/tmp-eglibc/deploy/ipk/all/packagegroup-qt5-toolchain-target_1.0-r0_all.ipk.
-udev-dev: unsatisfied recommendation for libusb-dev
-pciutils-dev: unsatisfied recommendation for pciutils-ids-dev
-kmod-dev: unsatisfied recommendation for libkmod-dev
-kmod-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-pciutils-dev: unsatisfied recommendation for libkmod-dev
-udev-dev: unsatisfied recommendation for module-init-tools-dev
-usbutils-dev: unsatisfied recommendation for usbutils-ids-dev
-usbutils-dev: unsatisfied recommendation for libusb-dev
-udev-dev: unsatisfied recommendation for libgudev-dev
-package libtinfo5 suggests installing ncurses-terminfo
-util-linux-dev: unsatisfied recommendation for util-linux-swaponoff-dev
-util-linux-dev: unsatisfied recommendation for util-linux-umount-dev
-util-linux-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-util-linux-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libmenu-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libpanel-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libform-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libtic-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libncurses-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libmenuw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-terminfo-base-dev
-ncurses-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libpanelw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libformw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libticw-dev
-util-linux-dev: unsatisfied recommendation for util-linux-losetup-dev
-util-linux-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-udev-dev: unsatisfied recommendation for libkmod-dev
-initscripts-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-initscripts-dev: unsatisfied recommendation for initscripts-functions-dev
-udev-dev: unsatisfied recommendation for libudev-dev
-qtbase-dev: unsatisfied recommendation for libssl-dev
-openssl-dev: unsatisfied recommendation for libcrypto-dev
-openssl-dev: unsatisfied recommendation for libssl-dev
-qtbase-dev: unsatisfied recommendation for libcrypto-dev
-libts-1.0-dev: unsatisfied recommendation for tslib-conf-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-card-restore-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-intended-roles-dev
-pulseaudio-dev: unsatisfied recommendation for libpulsecore-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-alsa-util-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-cli-protocol-unix-dev
-pulseaudio-dev: unsatisfied recommendation for libavahi-client-dev
-alsa-lib-dev: unsatisfied recommendation for libasound-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-protocol-simple-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-detect-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-alsa-sink-dev
-python-pygobject-dev: unsatisfied recommendation for libpython2-dev
-python-pygobject-dev: unsatisfied recommendation for python-textutils-dev
-python-pygobject-dev: unsatisfied recommendation for 
-python-pygobject-lib-dev
-python-dev: unsatisfied recommendation for python-audio-dev
-python-dev: unsatisfied recommendation for python-mime-dev
-python-dev: unsatisfied recommendation for python-io-dev
-python-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-python-dev: unsatisfied recommendation for python-resource-dev
-python-dev: unsatisfied recommendation for python-zlib-dev
-python-dev: unsatisfied recommendation for python-lang-dev
-python-dev: unsatisfied recommendation for python-multiprocessing-dev
-python-dev: unsatisfied recommendation for python-pkgutil-dev
-python-dev: unsatisfied recommendation for python-subprocess-dev
-python-dev: unsatisfied recommendation for python-json-dev
-python-dev: unsatisfied recommendation for python-doctest-dev
-python-dev: unsatisfied recommendation for python-gdbm-dev
-bzip2-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-python-dev: unsatisfied recommendation for python-sqlite3-dev
-python-dev: unsatisfied recommendation for python-logging-dev
-python-dev: unsatisfied recommendation for python-pickle-dev
-python-dev: unsatisfied recommendation for python-threading-dev
-python-dev: unsatisfied recommendation for python-codecs-dev
-libgdbm-dev: unsatisfied recommendation for gdbm-compat-dev
-python-dev: unsatisfied recommendation for python-pydoc-dev
-python-dev: unsatisfied recommendation for python-pprint-dev
-python-dev: unsatisfied recommendation for python-curses-dev
-libreadline-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-python-dev: unsatisfied recommendation for python-fcntl-dev
-python-dev: unsatisfied recommendation for python-compile-dev
-python-dev: unsatisfied recommendation for python-debugger-dev
-python-dev: unsatisfied recommendation for python-xmlrpc-dev
-python-dev: unsatisfied recommendation for sqlite3-dev
-python-dev: unsatisfied recommendation for python-distutils-dev
-python-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-python-dev: unsatisfied recommendation for python-difflib-dev
-python-dev: unsatisfied recommendation for python-crypt-dev
-python-dev: unsatisfied recommendation for python-numbers-dev
-python-dev: unsatisfied recommendation for python-idle-dev
-python-dev: unsatisfied recommendation for python-db-dev
-python-dev: unsatisfied recommendation for python-compiler-dev
-python-dev: unsatisfied recommendation for python-unixadmin-dev
-python-dev: unsatisfied recommendation for libssl-dev
-python-dev: unsatisfied recommendation for ncurses-libpanelw-dev
-python-dev: unsatisfied recommendation for python-tests-dev
-python-dev: unsatisfied recommendation for libcrypto-dev
-python-dev: unsatisfied recommendation for python-datetime-dev
-python-dev: unsatisfied recommendation for python-unittest-dev
-python-dev: unsatisfied recommendation for python-profile-dev
-python-dev: unsatisfied recommendation for python-netclient-dev
-python-dev: unsatisfied recommendation for python-xml-dev
-python-dev: unsatisfied recommendation for python-textutils-dev
-python-dev: unsatisfied recommendation for python-image-dev
-python-dev: unsatisfied recommendation for python-smtpd-dev
-python-dev: unsatisfied recommendation for python-hotshot-dev
-python-dev: unsatisfied recommendation for python-html-dev
-python-dev: unsatisfied recommendation for python-tkinter-dev
-python-dev: unsatisfied recommendation for python-mmap-dev
-python-dev: unsatisfied recommendation for python-bsddb-dev
-python-dev: unsatisfied recommendation for python-compression-dev
-python-dev: unsatisfied recommendation for python-readline-dev
-python-dev: unsatisfied recommendation for python-elementtree-dev
-python-dev: unsatisfied recommendation for python-email-dev
-python-dev: unsatisfied recommendation for python-shell-dev
-python-dev: unsatisfied recommendation for python-ctypes-dev
-python-dev: unsatisfied recommendation for libpython2-dev
-python-dev: unsatisfied recommendation for python-sqlite3-tests-dev
-python-dev: unsatisfied recommendation for python-mailbox-dev
-python-dev: unsatisfied recommendation for python-2to3-dev
-python-dev: unsatisfied recommendation for python-math-dev
-python-dev: unsatisfied recommendation for python-robotparser-dev
-python-dev: unsatisfied recommendation for python-syslog-dev
-python-dev: unsatisfied recommendation for python-stringold-dev
-python-dev: unsatisfied recommendation for python-re-dev
-python-dev: unsatisfied recommendation for python-netserver-dev
-python-dev: unsatisfied recommendation for python-terminal-dev
-python-dev: unsatisfied recommendation for python-core-dev
-python-pygobject-dev: unsatisfied recommendation for python-core-dev
-libsndfile-dev: unsatisfied recommendation for libasound-dev
-libsndfile-dev: unsatisfied recommendation for sqlite3-dev
-bluez4-dev: unsatisfied recommendation for libusb-dev
-bluez4-dev: unsatisfied recommendation for dbus-lib-dev
-libdbus-glib-1-dev: unsatisfied recommendation for dbus-lib-dev
-shadow-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-dbus-dev: unsatisfied recommendation for shadow-sysroot-dev
-dbus-dev: unsatisfied recommendation for dbus-lib-dev
-dbus-dev: unsatisfied recommendation for initscripts-functions-dev
-libdbus-glib-1-dev: unsatisfied recommendation for dbus-x11-dev
-bluez4-dev: unsatisfied recommendation for libasound-dev
-gawk-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-gawk-dev: unsatisfied recommendation for gawk-common-dev
-python-dbus-dev: unsatisfied recommendation for python-io-dev
-python-dbus-dev: unsatisfied recommendation for dbus-lib-dev
-python-dbus-dev: unsatisfied recommendation for python-logging-dev
-python-dbus-dev: unsatisfied recommendation for python-xml-dev
-python-dbus-dev: unsatisfied recommendation for python-stringold-dev
-python-dbus-dev: unsatisfied recommendation for python-threading-dev
-bluez4-dev: unsatisfied recommendation for libudev-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-filter-heuristics-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-cli-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-avahi-wrap-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-stream-restore-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-null-sink-dev
-pulseaudio-dev: unsatisfied recommendation for libudev-dev
-gettext-dev: unsatisfied recommendation for libgettextlib-dev
-gettext-dev: unsatisfied recommendation for libgettextsrc-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-rtp-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-bluez4-util-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-default-device-restore-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-always-sink-dev
-pulseaudio-dev: unsatisfied recommendation for libavahi-common-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-protocol-esound-dev
-pulseaudio-dev: unsatisfied recommendation for libpulsecommon-dev
-gconf-dev: unsatisfied recommendation for dbus-lib-dev
-gconf-dev: unsatisfied recommendation for gobject-introspection-stub-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-rescue-streams-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-role-cork-dev
-pulseaudio-dev: unsatisfied recommendation for libasound-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-device-restore-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-simple-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-protocol-cli-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-alsa-card-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-protocol-native-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-alsa-source-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-augment-properties-dev
-pulseaudio-dev: unsatisfied recommendation for shadow-sysroot-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-lib-protocol-http-dev
-pulseaudio-dev: unsatisfied recommendation for dbus-lib-dev
-pulseaudio-dev: unsatisfied recommendation for consolekit-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-udev-detect-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-mainloop-glib-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-switch-on-port-available-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-native-protocol-unix-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-oss-util-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-filter-apply-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-position-event-sounds-dev
-pulseaudio-dev: unsatisfied recommendation for 
-pulseaudio-module-suspend-on-idle-dev
-flac-dev: unsatisfied recommendation for libflac-dev
-flac-dev: unsatisfied recommendation for libflac++-dev
-qtsystems-dev: unsatisfied recommendation for libx11-dev
-qtsystems-dev: unsatisfied recommendation for libudev-dev
-libqt5serialport-dev: unsatisfied recommendation for libudev-dev
-icu-dev: unsatisfied recommendation for libicuuc-dev
-icu-dev: unsatisfied recommendation for libicudata-dev
-icu-dev: unsatisfied recommendation for libiculx-dev
-icu-dev: unsatisfied recommendation for libicule-dev
-icu-dev: unsatisfied recommendation for libicuio-dev
-icu-dev: unsatisfied recommendation for libicui18n-dev
-icu-dev: unsatisfied recommendation for libicutu-dev
-qtmultimedia-dev: unsatisfied recommendation for libgstvideo-0.10-dev
-qtmultimedia-dev: unsatisfied recommendation for libpulse-dev
-qtmultimedia-dev: unsatisfied recommendation for libgstinterfaces-0.10-dev
-qtmultimedia-dev: unsatisfied recommendation for libgstapp-0.10-dev
-qtwebkit-dev: unsatisfied recommendation for sqlite3-dev
-orc-dev: unsatisfied recommendation for liborc-test-0.4-dev
-orc-dev: unsatisfied recommendation for liborc-0.4-dev
-packagegroup-qt5-toolchain-target: unsatisfied recommendation for 
-qtquickcontrols-qmlplugins
-Configuring qemuwrapper-cross-dbg.
-Configuring libc6-dbg.
-Configuring libgcc-s-dbg.
-Configuring packagegroup-core-standalone-sdk-target-dbg.
-Configuring libc6.
-Configuring eglibc-localedata-translit-fraction.
-Configuring eglibc-extra-nss.
-Configuring eglibc-localedata-iso14651-t1-common.
-Configuring eglibc-localedata-iso14651-t1.
-Configuring libgcc1.
-Configuring libstdc++6.
-Configuring libthread-db1.
-Configuring libcidn1.
-Configuring linux-libc-headers-dev.
-Configuring libc6-dev.
-Configuring libgcc-s-dev.
-Configuring libstdc++-dev.
-Configuring eglibc-gconv.
-Configuring eglibc-gconv-iso8859-1.
-Configuring eglibc-utils.
-Configuring eglibc-localedata-translit-small.
-Configuring qemuwrapper-cross.
-Configuring eglibc-localedata-translit-circle.
-Configuring eglibc-localedata-translit-cjk-compat.
-Configuring eglibc-localedata-translit-compat.
-Configuring eglibc-localedata-translit-narrow.
-Configuring eglibc-localedata-translit-wide.
-Configuring eglibc-localedata-translit-font.
-Configuring eglibc-localedata-translit-neutral.
-Configuring eglibc-gconv-cp1252.
-Configuring eglibc-gconv-ibm850.
-Configuring eglibc-localedata-i18n.
-Configuring libsegfault.
-Configuring eglibc-gconv-iso8859-15.
-Configuring packagegroup-core-standalone-sdk-target.
-Collected errors:
-  * satisfy_dependencies_for: Cannot satisfy the following dependencies 
-for packagegroup-qt5-toolchain-target:
-  *     qtwebkit-mkspecs *     libx11-6 (>= 1.6.2) *     qtwebkit (= 
-5.2.1-r0) * libxkbcommon (>= 0.4.0) *     qtwebkit-qmlplugins *     
-qttools-plugins *
-  * opkg_install_cmd: Cannot install package 
-packagegroup-qt5-toolchain-target.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
-ERROR: Function failed: do_populate_sdk
-ERROR: Logfile of failure stored in: 
-/media/secondary/oe-core/build-cubie/tmp-eglibc/work/cortexa8hf-vfp-neon-oe-linux-gnueabi/meta-toolchain-qt5/1.0-r0/temp/log.do_populate_sdk.24564
-ERROR: Task 7 
-(/media/secondary/oe-core/meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb, do_populate_sdk) 
-failed with exit code '1'
-NOTE: Tasks Summary: Attempted 2957 tasks of which 2949 didn't need to 
-be rerun and 1 failed.
-No currently running tasks (2957 of 2958)
+Andre McCurdy (3):
+=20=20curl: add zlib PACKAGECONFIG and remove hardcoded DEPENDS
+=20=20curl: let configure find gnutls via pkg-config
+=20=20curl: --with-random is only applicable with openssl
 
-Summary: 1 task failed:
-/media/secondary/oe-core/meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb, 
-do_populate_sdk
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+Armin Kuster (3):
+=20=20tzcode: update to 2014f
+=20=20tzdata: update to 2014f
+=20=20lz4: update to 120
 
+Chen Qi (2):
+=20=20alsa-state: install init script only when 'sysvinit' is in =
+DISTRO_FEATURES
+=20=20v86d: fix for systemd to load uvesafb module correctly
 
-Any help is appreciated
-Thanks
+Christopher Larson (2):
+=20=20python-dbus: use PACKAGECONFIG for doc generation
+=20=20oe.package_manager: fix use of PACKAGE_EXCLUDE for dpkg
+
+Corneliu Stoicescu (1):
+=20=20oeqa/runtime: add new cpp test and file
+
+Cristian Iorga (1):
+=20=20qemu: upgrade to 2.1
+
+Gary Thomas (1):
+=20=20toolchain-shar-template.sh: Limit xargs command line
+
+Jo=C3=A3o Henrique Ferreira de Freitas (1):
+=20=20curl: add ssl to PACKAGECONFIG
+
+Kai Kang (2):
+=20=20qemu: enable aarch64 support
+=20=20qemu: add PACKAGECONF lzo
+
+Khem Raj (5):
+=20=20python: Fix build on musl
+=20=20gcc-cross-initial: Use good old bfd linker by default
+=20=20gcc: Abstract long double configuration into python function
+=20=20gcc-cross-initial: Put limits.h in gccdir/include
+=20=20openssl: Repace if-else with case and add musl triplet
+
+Koen Kooi (1):
+=20=20kexec-tools: reinstate 'kexec-tools' package
+
+Maciej Borzecki (2):
+=20=20cml1.bbclass: fix diffconfig diff command
+=20=20wic: include partition label in fs image file name
+
+Marek Vasut (1):
+=20=20qt4: Avoid duplicate flags in the g++-unix.conf
+
+Mark Hatle (2):
+=20=20prelink_git: Update to current head of cross-prelink development
+=20=20tcmode-default.inc: Add eglibc-scripts and eglibc-mtrace
+
+Martin Jansa (14):
+=20=20directfb: add PACKAGECONFIG for drmkms and tiff
+=20=20test-dependencies, insane.bbclass: improve the message
+=20=20gst-fluendo*: add --disable-debug only to gst-fluendo-mp3
+=20=20mpeg2dec: add PACKAGECONFIG for x11 and fix dependencies
+=20=20libarchive: add PACKAGECONFIG for nettle
+=20=20midori: add dependency on libxscrnsaver
+=20=20guile: add dependency on ncurses and readline
+=20=20kernelshark: add dependency on libxml2
+=20=20directfb: add PACKAGECONFIG for webp
+=20=20sstate-sysroot-cruft.sh: Improve to use it from CI
+=20=20SIGGEN_EXCLUDERECIPES_ABISAFE: add initscripts
+=20=20cmake: drop -fpermissive
+=20=20piglit: add dependency on libxrender
+=20=20gst-ffmpeg: add PACKAGECONFIG for libav9 and patch from Gentoo
+
+Max Eliaser (2):
+=20=20bootchart2: create recipe for bootchart2
+=20=20ubootchart: delete ubootchart recipe
+
+Maxin B. John (1):
+=20=20remake: fix build error
+
+Mike Looijmans (2):
+=20=20squashfs-tools: Add support for LZO and LZ4 compression
+=20=20Support image type "squashfs-lzo"
+
+Otavio Salvador (3):
+=20=20cracklib: Allow use in SDK
+=20=20attr: Allow use during build and SDK
+=20=20libpam: Allow use during build and in SDK
+
+Paul Barker (1):
+=20=20opkg: Protect add-exclude.patch from malloc failure
+
+Paul Eggleton (3):
+=20=20openssl: upgrade to 1.0.1i
+=20=20libav: update 0.8 version to 0.8.15
+=20=20libav: update 9.x version to 9.16
+
+Peter A. Bigot (8):
+=20=20gcc: recipe whitespace changes
+=20=20gcc: remove inappropriate patch
+=20=20gcc-4.9: Ensure c++ includes are in /usr/include/c++/${BINV}
+=20=20gcc: remove outdated configuration option
+=20=20gcc-target: make --enable-clocale consistent with gcc-runtime
+=20=20sdk: change EXTRA_OECONF_FPU to EXTRA_OECONF_GCC_FLOAT
+=20=20gcc: backport patch affecting Linux kernel builds
+=20=20gcc: update compiler architecture to match gcc-runtime (armv6, armv7a)
+
+Peter Kjellerstedt (8):
+=20=20gdb: Add a dependency on zlib
+=20=20gstreamer1.0-plugins-good: Add a PACKAGECONFIG for udev
+=20=20systemd: Inherit gettext
+=20=20libsoup-2.4: Inherit gettext
+=20=20glib-networking: Inherit gettext
+=20=20python-scons-native: Make it useable if old host install exists
+=20=20libgcrypt: Do not remove m4 files so aggressively
+=20=20gstreamer1.0-rtsp-server: Upgrade to 1.4.0
+
+Peter Seebach (1):
+=20=20multilib_global.bbclass: PREFERRED_PROVIDERS for multilibs
+
+Richard Purdie (22):
+=20=20classes: Combine rootfs_<pkgtype> and populate_sdk_<pkgtype>
+=20=20rootfs_*: Refactor common depends/lockfile task flags
+=20=20populate_sdk_base: Move toolchain installation script to a separate =
+file
+=20=20glib-2.0: Make the gtester-report installation conditional
+=20=20glib-2.0: Allow correct printf configuration on darwin/mingw
+=20=20site: Add common-darwin
+=20=20qemu: Move dtc(fdt) configuration to PACKAGECONFIG
+=20=20qemu: Fixup target sdl configuration to use PACKAGECONFIG
+=20=20qemu: Add alsa PACKAGECONFIG and cleanup native/nativesdk DEPENDS
+=20=20qemu: Add PACKAGECONFIG for glx
+=20=20qemu: Simplify DEPENDS
+=20=20qemu: Overwrite KVM explicitly for darwin/mingw
+=20=20lttng-tools/lttng-ust: Drop old 2.3.1 versions
+=20=20lttng-ust/lttng-modules: Update LICENSE to reflect MIT
+=20=20coreutils/libpam: Add BBCLASSEXTEND nativesdk
+=20=20crosssdk: Clear MACHINEOVERRIDES
+=20=20avahi: Since ${PN} is empty, set -dev RDEPENDS
+=20=20local.conf.sample: Append sdl to qemu-native* PACKAGECONFIG
+=20=20qemu-targets.inc: Update to handle mingw/darwin
+=20=20qemu.inc: Drop unneeded nativesdk-libsdl RDEPENDS
+=20=20glib-2.0: Add missing nativesdk-gettext DEPENDS
+=20=20chrpath: Drop warning from darwn builds
+
+Robert P. J. Day (4):
+=20=20core-image.bbclass: Correct comment about packagegroups.
+=20=20Remove remnants of deleted "do_package_write" task.
+=20=20base.bbclass: Remove old-style definition of do_build() task.
+=20=20tslib: Delete unnecessary "SRC_URI_OVERRIDES_PACKAGE_ARCH =3D 0"
+
+Robert Yang (13):
+=20=20boot-directdisk.bbclass: use local HDDDIR
+=20=20libnewt: fix recompile error
+=20=20logrotate: fix recompile error
+=20=20kexec-tools: fix recompile error
+=20=20kernelshark: fix recompile error
+=20=20u-boot-mkimage: fix recompile error
+=20=20syslinux: fix reinstall error
+=20=20trace-cmd: fix recompile error
+=20=20python-pygtk: fix native python path
+=20=20image.bbclass: image_types.bbclass is a must
+=20=20bootchart2: fix installed-vs-shipped
+=20=20avahi-ui: drop rmdir localstatedir in bb recipe
+=20=20syslinux: fix race issue
+
+Ross Burton (3):
+=20=20libxml2: port AM_PATH_XML2 to use pkg-config
+=20=20lttng-tools: update to version 2.5.0
+=20=20avahi: unset FILES_avahi to avoid packaging files there
+
+Roy Li (1):
+=20=20gmp: uprev it to 6.0.0
+
+Saul Wold (1):
+=20=20busybox: Add Upstream-Status to patch
+
+Scot Salmon (1):
+=20=20sysvinit: allow stack size configuration from rcS
+
+Shrikant Bobade (2):
+=20=20gnupg: Added PACKAGECONFIG[curl]
+=20=20autoconf: add rdep on perl-module-data-dumper
+
+Tim Orling (1):
+=20=20perl-rdepends: add CPAN, CPAN::Meta requirements
+
+Tom Zanussi (42):
+=20=20wic: Make exec_cmd() error out instead of warn
+=20=20wic: Remove unused custom commands
+=20=20wic: Remove packaging, config commands
+=20=20wic: Remove mic bootstrap
+=20=20wic: Remove mic chroot
+=20=20wic: Remove rt_util
+=20=20wic: Remove mic package managers
+=20=20wic: Remove bmap support
+=20=20wic: Remove fiemap support
+=20=20wic: Remove grabber implementation
+=20=20wic: Remove proxy support
+=20=20wic: Remove rpmmisc
+=20=20wic: Remove unused fs_related code
+=20=20wic: Remove unused misc code
+=20=20wic: Remove 3rdparty/urlgrabber
+=20=20wic: Remove unused 3rdparty/commands
+=20=20wic: Remove gpt_parser
+=20=20wic: Remove unused plugin and error code
+=20=20wic: Clean up BaseImageCreator
+=20=20wic: Clean up DirectImageCreator
+=20=20wic: Clean up PartitionedMount
+=20=20wic: Clean up Creator
+=20=20wic: Remove unused command versioning support
+=20=20wic: Update 'Background and Motivation' help section
+=20=20wic: Remove unused conf support
+=20=20wic: Remove Mount object
+=20=20wic: Update/rename/delete mount-related code
+=20=20wic: Update cleanup/unmount-related code
+=20=20wic: Update/rename install-related code
+=20=20wic: Update/rename configure-related code
+=20=20wic: Rename PartitionedMount
+=20=20wic: Rename MountError
+=20=20wic: Update Disk description
+=20=20wic: Rename /mic to /wic
+=20=20wic: Bump the version to 2.0
+=20=20wic: Add '--sourceparams' partition option
+=20=20wic: Add utility function for parsing sourceparams
+=20=20wic: Add sourceparam param to partition plugin methods
+=20=20wic: Parse and pass sourceparams to partition plugin methods
+=20=20wic: Add gummiboot support to bootimg-efi
+=20=20wic: Add sourceparams to mkefidisk.wks
+=20=20wic: Add mkgummidisk kickstart file
+
+Tyler Hall (1):
+=20=20lib/oeqa/selftest: Don't match log level in output
+
+Wang Zidan (1):
+=20=20gstreamer1.0-plugins-good: fix the bug for gstrtpmp4gpay
+
+Yasir-Khan (7):
+=20=20wpa-supplicant: use PACKAGECONFIG for ssl selection
+=20=20trace-cmd: Update to version 2.3.2
+=20=20udev-extraconf: Unmount SD card after ejection
+=20=20consolekit: allow explicit enable/disable of polkit
+=20=20consolekit: depend on glib-2.0-native
+=20=20strace: apply ptrace.h conflict workaround
+=20=20lttng-ust: update to version 2.5.0
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andrea Adami (1):
+=20=20kexecboot: remove trailing slash in do_install
+
+Christopher Larson (5):
+=20=20dnsmasq: add missing inherit pkgconfig
+=20=20dnsmasq: obey CFLAGS & LDFLAGS
+=20=20dnsmasq: move parallel make patch to .bb, add upstream-status
+=20=20dnsmasq: look for lua.pc, not lua5.1.pc
+=20=20dnsmasq: add packageconfigs for idn, conntrack, lua
+
+Gary S. Robertson (1):
+=20=20libhugetlbfs: Extend arm32 support to include BE variants
+
+Hongxu Jia (2):
+=20=20syslog-ng: fix do_compi1e of qemuarm while DEBUG_BUILD
+=20=20curlpp: fix do_compile failed since gcc upgrade to 4.9
+
+Jackie Huang (3):
+=20=20rsyslog: use syslog as the script name of syslog-init
+=20=20syslog-ng: fix a multilib build failure and a QA issue
+=20=20ruby: fix race conditions at install-ext
+
+Maciej Borzecki (2):
+=20=20collectd: make amqp plugin a selectable feature
+=20=20rabbitmq-c: add recipe
+
+Martin Jansa (46):
+=20=20libungif: remove and use giflib everywhere
+=20=20tracker: add all floating dependencies
+=20=20mpd: add all floating dependencies
+=20=20mpg123: add all floating dependencies
+=20=20gnome-disk-utility: add dependency on libgnome-keyring
+=20=20gmtk: add dependency on gtk+3 and pulseaudio
+=20=20sox: add dependency on libvorbis
+=20=20libmikmod: add dependency on pulseaudio
+=20=20libwebp: fix wrong DEPENDS
+=20=20libmicrohttpd: add dependency on file and disable spdy
+=20=20engrave: add dependency on flex
+=20=20cairomm: don't include cairo.inc
+=20=20claws-mail: remove unrecognized options
+=20=20evolution-data-server: remove unrecognized configure options
+=20=20fuse: remove unrecognized configure option
+=20=20libgnomecanvas: inherit only gnomebase
+=20=20gnome-power-manager: remove unrecognized configure options
+=20=20gnome-settings-daemon: remove unrecognized configure options
+=20=20gnome-themes: remove unrecognized configure options
+=20=20libgsf: remove unrecognized configure options
+=20=20libxaw: remove unrecognized configure option
+=20=20links, links-x11: remove unrecognized configure options
+=20=20metacity: remove unrecognized configure option
+=20=20openbox: remove unrecognized configure option
+=20=20openobex: remove unrecognized configure options
+=20=20owfs: remove unrecognized configure options
+=20=20polkit-gnome: remove unrecognized configure options
+=20=20start-stop-daemon: remove unrecognized configure option
+=20=20expedite: remove unrecognized configure options
+=20=20protobuf: add dependency on zlib
+=20=20synergy: add dependency on libxinerama
+=20=20stunnel: add dependency on zlib and tcp-wrappers
+=20=20epiphany: add dependency on libnotify
+=20=20gd: add dependency on tiff
+=20=20snort: add dependency on util-linux
+=20=20oscam: add dependency on pscs-lite
+=20=20ttf-mplus: use PACKAGESPLITFUNCS and add drop ttf-common dependency
+=20=20gd: add dependency on libvpx
+=20=20dconf: add dependency on libxml2
+=20=20gtksourceview2: add dependency on libxml2
+=20=20libxklavier: add dependency on libxml2
+=20=20webmin: explicitly list some packages, drop perl-module-timelocal rdep
+=20=20efl, expedite: explicitly add some packages, add libsdl dependency
+=20=20tracker: add PACKAGECONFIG for nautilus extension
+=20=20llvm: drop 2.8 and 2.9 versions
+=20=20talloc: remove empty bindir
+
+Morgan Little (1):
+=20=20eject: three fixes
+
+Paul Eggleton (5):
+=20=20dropbear: systemd support now in OE-Core
+=20=20busybox: systemd support now in OE-Core
+=20=20avahi: systemd support now in OE-Core
+=20=20cronie: systemd support now in OE-Core
+=20=20libpam: systemd support now in OE-Core
+
+Peter Bigot (2):
+=20=20python-smbus: upgrade to 3.1.1
+=20=20rrdtool: update to 1.4.8
+
+Robert P. J. Day (1):
+=20=20packagegroups: Remove deprecated "task" backward compatibility
+
+Robert Yang (1):
+=20=20syslog-ng: update configure.patch for older patch tool
+
+Roy Li (4):
+=20=20ifenslave: add recipes
+=20=20ipsec-tools: uprev it to 0.8.2
+=20=20quagga: uprev it to 0.99.23
+=20=20net-snmp: uprev it to 5.7.2.1
+
+Tim Orling (2):
+=20=20libextutils-helpers-perl: fix RDEPENDS
+=20=20libmodule-build-tiny-perl: fix RDEPENDS
+
+Ting Liu (1):
+=20=20inetutils: not use auto-detected login for telnetd
+
+lchristina26 (1):
+=20=20cyassl: add recipe
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+Koen Kooi (2):
+=20=20systemd: add missing curl dependency
+=20=20linux-yocto 3.10 bbappend: make FRI2 actually useful
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+Denys Dmytriyenko (6):
+=20=20u-boot: switch to git for github access
+=20=20ltp-ddt: update with latest changes in Makefile to pass kernel dir
+=20=20ltp-ddt-legacy: remove special version meant for 3.2 kernels
+=20=20packagegroup-*-matrix-sdk-host: skip matrix-browser and =
+refresh-screen for k
+=20=20omapconf: update to 1.70 version, add am335x support
+=20=20packagegroups*: install omapconf for ti33x platforms as well
+
+Franklin S. Cooper Jr (20):
+=20=20arago.conf: Make sure qtbase builds example applications
+=20=20packagegroup-arago-qte: Pull in Qt3D when using Qt 5
+=20=20packagegroup-arago-tisdk-qte: Pull in more Qt 5 example applications
+=20=20qtwayland - Fix fetch breakage
+=20=20u-boot-fw-utils: Use dra7 evm for U-boot config for am57x
+=20=20arago-prefs: Point omap-15 SOCs to use the latest TI U-boot =
+integration tree
+=20=20u-boot-ti-staging: Use AM57x branch/git tree
+=20=20qtbase: Set wayland as the default display plugin
+=20=20arago.conf: Enable touchscreen support to qtbase
+=20=20tslib: Use custom tslib.sh
+=20=20qtbase: Add global environment variable script
+=20=20weston: Add global environment variable script
+=20=20matrix-gui: Remove environment variables from init script
+=20=20arago-qt4: Add global environment variable script
+=20=20ts-calibrate-init: Simplify calibrate logic
+=20=20arago-qt4: Add rotation to global environment variable script
+=20=20matrix-gui: Remove rotation option for am37x
+=20=20weston-init: Pull in init from oe-core
+=20=20weston-init: Unset env variable that are set by scripts in =
+/etc/profile.d/
+=20=20packagegroup-arago-tisdk-graphics: Add weston-examples
+
+Jacob Stiffler (1):
+=20=20qtwayland - update to 5.4 branch
+
+Yaniv Machani (3):
+=20=20wl18xx-compat: version update
+=20=20wl18xx-wlconf: version update
+=20=20wpa-supplicant-wl18xx: configuration files update
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Javier Viguera (1):
+=20=20meta-fsl-arm: fix some typos
+
+Lauren Post (3):
+=20=20gpu-viv-bin-mx6q: Upgrade to 3.10.17-1.0.1
+=20=20xf86-video-imxfb-vivante: Upgrade to 3.10.17-1.0.1
+=20=20linux-imx: Upgrade to 3.10.17-1.0.1
+
+Max Krummenacher (2):
+=20=20libmcc: remove bashism in Makefile
+=20=20kernel-module-mcc: remove bashism in Makefile
+
+Otavio Salvador (1):
+=20=20gpu-viv-bin-mx6q: Add a missing runtime dependency on libdrm
+
+Wang Zidan (1):
+=20=20alsa-lib: add conf for multichannel support in mx6
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Otavio Salvador (1):
+=20=20linux-denx: Restrict recipe compatibility for m53evk
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+Andrea Adami (1):
+=20=20linux-yocto-tiny-kexecboot: change KERNEL_IMAGE_MAXSIZE from bytes to =
+KB
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+Andrei Gherzan (4):
+=20=20Use FILESEXTRAPATHS correctly
+=20=20weston-ivi-shell: Add patches on top of weston v1.5
+=20=20layer.conf: Use 1.5 as weston preferred version
+=20=20poky-ivi-systemd.conf: Add PATCHTOOL variable
+
+Florin Sarbu (1):
+=20=20Use weston version 1.4% from meta-ivi
+
+Holger Behrens (3):
+=20=20packagegroups: add weston-examples to install binaries referenced in =
+weston.
+=20=20common-api: upgrade to 2.1.6
+=20=20audiomanager: upgrade to version 6.1
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Martin Jansa (2):
+=20=20qtwebkit.inc: add PACKAGECONFIG for libwebp
+=20=20qttools: fix noqtwebkit option
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+Alex J Lennon (1):
+=20=20rpi-config,README: Add option to enable offline image compositing
+
+Andrei Gherzan (3):
+=20=20gstreamer1.0-plugins-bad: Sync version with yocto master
+=20=20omxplayer: Add dependency on openssl
+=20=20README: Some minor clarifications
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Martin Jansa (2):
+=20=20evopedia: add dependency on bzip2
+
+Simon Busch (2):
+=20=20meta-lg: systemd-machine-units: put files into correct directory to =
+include=20
+=20=20meta-hp: initramfs-boot-android: create missing directories
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+Alexandre Belloni (1):
+=20=20beaglebone: use the am335x_boneblack u-boot configuration
+
+Denys Dmytriyenko (4):
+=20=20linux-ti-staging: update to 3.14.16 with am57xx and other updates
+=20=20beaglebone.conf: use correct UBOOT_MACHINE
+=20=20am33x-cm3: update with version 1.8.7
+=20=20linux-ti-staging: update to 3.14.17 stable
+
+Franklin S. Cooper Jr (1):
+=20=20am57xx-evm: Update the config name used in U-boot for this board
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+Alexandr Smoktal (1):
+=20=20webos-image: luna-service2=3D195,v3.9.4
+
+Andrii Motsok (1):
+=20=20webos-image: ptmalloc3=3Dr3
+
+Iurii Artemenko (1):
+=20=20webos-image: busybox=3Dv1.20.2-0webos3
+
+Keith Derrick (3):
+=20=20webos-image: pmlogdaemon=3D121
+=20=20Update webosvbox for new repository layout
+=20=20webos-image: Introduce webos_nyx_modules_provider bbclass
+
+Kyrylo Kropivyanskiy (2):
+=20=20webos-image: dbus=3Dwebos2
+=20=20webos-image: hdparm=3Dwebos1
+
+Martin Jansa (3):
+=20=20meta-webos: webos.inc: use MACHINE subdirectory in DEPLOY_DIR_IMAGE
+=20=20nyx-modules: Fix syntax
+=20=20e2fsprogs: Backport 1.42.8 version from oe-core/dora
+
+Sapna Todwal (1):
+=20=20webos-image: nyx-modules=3D96
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+Nathan Rossi (1):
+=20=20qemu: Updated version
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Richard Purdie (1):
+=20=20local.conf.sample: Append sdl to qemu-native* PACKAGECONFIG
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
 
 
