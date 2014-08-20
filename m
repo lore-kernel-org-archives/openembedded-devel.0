@@ -1,25 +1,35 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 082AE65D53
+Return-Path: <kernel@tekno-soft.it>
+Received: from mail.tekno-soft.it (li153-180.members.linode.com
+	[109.74.206.180])
+	by mail.openembedded.org (Postfix) with ESMTP id F1EA0601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 13:22:38 +0000 (UTC)
-Received: (qmail 21073 invoked by uid 1003); 20 Aug 2014 13:22:39 -0000
-Received: from unknown (HELO ?10.212.226.128?)
-	(philip@opensdr.com@98.191.4.207)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	20 Aug 2014 13:22:38 -0000
-Message-ID: <53F4A10A.2000009@balister.org>
-Date: Wed, 20 Aug 2014 09:22:18 -0400
-From: Philip Balister <philip@balister.org>
+	Wed, 20 Aug 2014 14:33:55 +0000 (UTC)
+Received: from dragon.tekno-soft.it
+	(host142-53-static.94-94-b.business.telecomitalia.it [94.94.53.142])
+	(using TLSv1 with cipher DHE-RSA-AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: robyf@tekno-soft.it)
+	by mail.tekno-soft.it (Postfix) with ESMTPSA id E8F3117727;
+	Wed, 20 Aug 2014 14:39:06 +0000 (UTC)
+Message-ID: <53F4B1C3.2000806@tekno-soft.it>
+Date: Wed, 20 Aug 2014 16:33:39 +0200
+From: Roberto Fichera <kernel@tekno-soft.it>
+Organization: TeknoSOFT
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:24.0) Gecko/20100101 Thunderbird/24.7.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org, 
 	meta-freescale@yoctoproject.org, 
 	Holger Hans Peter Freyther <holger@freyther.de>
-References: <53F49881.3090409@tekno-soft.it>
-In-Reply-To: <53F49881.3090409@tekno-soft.it>
-Subject: Re: [ANNOUNCE] New telephony recipe with Asterisk 11.x, OPUS codec, SRTP and libPRI
+References: <53F49881.3090409@tekno-soft.it> <53F4A10A.2000009@balister.org>
+In-Reply-To: <53F4A10A.2000009@balister.org>
+X-Intuitive-System-MailScanner-Information: Please contact the ISP for more
+	information
+X-Intuitive-System-MailScanner-ID: E8F3117727.A77F8
+X-Intuitive-System-MailScanner: Found to be clean
+X-Intuitive-System-MailScanner-From: kernel@tekno-soft.it
+X-Spam-Status: No
+Subject: Re: [meta-freescale] [ANNOUNCE] New telephony recipe with Asterisk 11.x, OPUS codec, SRTP and libPRI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Aug 2014 13:22:42 -0000
+X-List-Received-Date: Wed, 20 Aug 2014 14:33:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 08/20/2014 08:45 AM, Roberto Fichera wrote:
-> Hi All,
-> 
-> I've made freely available a new telephony meta layer at
+On 08/20/2014 03:22 PM, Philip Balister wrote:
+> On 08/20/2014 08:45 AM, Roberto Fichera wrote:
+>> Hi All,
+>>
+>> I've made freely available a new telephony meta layer at
+> There is already a meta-telephony at:
+>
+> http://layers.openembedded.org/layerindex/branch/master/layer/meta-telephony/
+>
+> We should try and avoid having layers with duplicate recipes. It does
+> look like asterisk in meta-telephony needs updating.
 
-There is already a meta-telephony at:
+Yep! Some recipes might need an update as I can see.
 
-http://layers.openembedded.org/layerindex/branch/master/layer/meta-telephony/
+> Also, please remember to use the layer index to search for recipes
+> before writing your own :)
 
-We should try and avoid having layers with duplicate recipes. It does
-look like asterisk in meta-telephony needs updating.
+In case I can easily merge my recipes with the meta-telephony.
 
-Also, please remember to use the layer index to search for recipes
-before writing your own :)
+Cheers,
+Roberto Fichera.
 
-Philip
+>
+> Philip
+>
+>> https://github.com/DICENetworks/meta-dicenetworks
+>>
+>> In the new meta layer you can find Asterisk v11.9 recipe supporting
+>> SRTP, OPUS Codec as well as libPRI, DAHDI kernel drivers and tools
+>> and GSM library.
+>>
+>> Feel free to suggest any improvements and fixes.
+>>
+>> Cheers,
+>> Roberto Fichera.
+>>
 
-> 
-> https://github.com/DICENetworks/meta-dicenetworks
-> 
-> In the new meta layer you can find Asterisk v11.9 recipe supporting
-> SRTP, OPUS Codec as well as libPRI, DAHDI kernel drivers and tools
-> and GSM library.
-> 
-> Feel free to suggest any improvements and fixes.
-> 
-> Cheers,
-> Roberto Fichera.
-> 
 
