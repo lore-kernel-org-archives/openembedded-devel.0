@@ -1,24 +1,53 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8431A65DB1
+Return-Path: <zboszor@pr.hu>
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id A0D0B65DD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 09:20:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7L9KkSP023601
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 02:20:46 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 21 Aug 2014 02:20:45 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Aug 2014 05:20:43 -0400
-Message-ID: <1408612843-22017-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+	Thu, 21 Aug 2014 10:09:02 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1XKPIl-0005ou-QD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Aug 2014 12:09:03 +0200
+Received: from host-87-242-0-11.prtelecom.hu ([87.242.0.11]
+	helo=webmail.prtelecom.hu) by mail.pr.hu with esmtp (Exim 4.80)
+	(envelope-from <zboszor@pr.hu>) id 1XKPIe-0004ks-AN
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Aug 2014 12:09:01 +0200
+Received: from 87.242.22.241 (SquirrelMail authenticated user zboszor@pr.hu)
+	by webmail.prtelecom.hu with HTTP; Thu, 21 Aug 2014 12:08:56 +0200
+Message-ID: <674e63b93b3c0bfe18d58d6c11c1cc7a.squirrel@webmail.prtelecom.hu>
+Date: Thu, 21 Aug 2014 12:08:56 +0200
+From: zboszor@pr.hu
+To: openembedded-devel@lists.openembedded.org
+User-Agent: SquirrelMail/1.4.23 [SVN]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] lmbench: remove debianutils from RDEPENDS and add perl
+X-Priority: 3 (Normal)
+Importance: Normal
+X-Spam-Score: 1.6 (+)
+X-Spam-Report: Spam detection software, running on the system "prspamd3.pr.hu",
+	has NOT identified this incoming email as spam.  The original
+	message has been attached to this so you can view it or label
+	similar future email.  If you have any questions, see
+	the administrator of that system for details.
+	Content preview:  Hello,
+	as a follow-up to my yesterday's mail about "[PATCH]
+	Allow using a more recent php",
+	here's the proof of the pudding. I needed
+	GD support in PHP, and it turned out that PHP 5.4.x only supports GD 2.0,
+	while current OE has 2.1. Not wanting to downgrade GD,
+	I chose to upgrade PHP. [...] 
+	Content analysis details:   (1.6 points, 5.0 required)
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+	-0.2 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	1.5 SUBJ_ALL_CAPS          Subject is all capitals
+	0.8 BAYES_50               BODY: Bayes spam probability is 40 to 60%
+	[score: 0.5000]
+	-0.5 AWL AWL: From: address is in the auto white-list
+X-Scan-Signature: a7cf27f25ef8a025e565bb3cf9269fc9
+X-Spam-Tracer: backend.mail.pr.hu 1.6 20140821100901Z
+Subject: [PATCH] PHP 5.5.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,38 +61,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2014 09:20:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Aug 2014 10:09:12 -0000
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Hello,
 
-- I don't see any evdidence that lmbench needs debianutils to run:
-  debianutils provides:
-    run-parts, tempfile, savelog, which, ischroot,
-    add-shell, installkernel, remove-shell
-  but none of them is used by lmbench scripts and I tested it work
-  fine without debianutils, so remove debianutils from RDEPENDS
+as a follow-up to my yesterday's mail about "[PATCH] Allow using a more
+recent php", here's the proof of the pudding.
 
-- Some scripts in lmbench are perl scripts, so add
-  RDEPENDS on perl (no addtional perl module is needed).
+I needed GD support in PHP, and it turned out that PHP 5.4.x only supports
+GD 2.0, while current OE has 2.1. Not wanting to downgrade GD, I chose to
+upgrade PHP.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I had to update imap-fix-autofoo.patch so it applies cleanly and I also
+had to fix https://bugs.php.net/bug.php?id=66103 so it can be cross
+compiled. (I also submitted the patch at the link).
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 38e0d2e..0586d72 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -74,5 +74,5 @@ pkg_postinst_${PN} () {
-     fi
- }
- 
--RDEPENDS_${PN} = "debianutils"
-+RDEPENDS_${PN} = "perl"
- FILES_${PN} += "${datadir}/lmbench ${libdir}/lmbench"
--- 
-2.0.0
+I enabled more extensions in PHP than what was in the previous version,
+this is what I needed locally.
+
+Comments?
+
+Feel free to use it in any way.
+
+Best regards,
+Zoltán Böszörményi
+
 
 
