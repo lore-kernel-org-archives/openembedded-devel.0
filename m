@@ -1,31 +1,36 @@
-Return-Path: <ka6sox@gmail.com>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E99E65CB2
+Return-Path: <sujith.h@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 0282165D56
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 06:13:10 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id g201so6425379oib.24
+	Thu, 21 Aug 2014 06:50:46 +0000 (UTC)
+Received: by mail-pd0-f182.google.com with SMTP id fp1so13316552pdb.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 23:13:11 -0700 (PDT)
+	Wed, 20 Aug 2014 23:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=+IVUun7cvWGGTbcCRZ1Y1SeqBH8QMCJwsWD4QYlyJ3Q=;
-	b=RwOdf3Ka1UAOn4z695/4Nd8z2bJ7k7jpGq+Y8r/4nidwGjBMMDVBGaKY9MVKdMyoEf
-	1d7uk9wLxCdIrybYcg+9Y3i1619vhAudSFj0qDLkU+WiuCpAt9VP6Zz8s2xu0HG+LiC7
-	THUXB7X0OGKF48DUnbnRS5fPDniL7YYbk+IWiEOvRslIkTmWyqmRqp8lH5r4MLIGS01c
-	DEGETTqGvhdUomxN/QISNsQmPLzxH2fHR3QrN50AeFYPSvP9YaEVsLjr1mMZL4zt/3UV
-	I8HkLX1zPq5P/moVf2HCcvNlqNP9fyomyU+ZQWrV+fjTMLu1FTSeEdMcBGv91yVRvidB
-	E0/g==
-MIME-Version: 1.0
-X-Received: by 10.60.94.66 with SMTP id da2mr54081709oeb.59.1408601591288;
-	Wed, 20 Aug 2014 23:13:11 -0700 (PDT)
-Received: by 10.76.6.136 with HTTP; Wed, 20 Aug 2014 23:13:11 -0700 (PDT)
-Date: Wed, 20 Aug 2014 23:13:11 -0700
-Message-ID: <CAHQecY6bxmkDi3U6nN3MhF4x6-ysPnXyb0nwrjXwq3-xX5NdcQ@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=RYas9sJxmYeyfxVAVnkvy8Y22FxA2wA1PHgukfi8YIQ=;
+	b=IqzJBuXsQs9wJZbUx8Bp29N3Yz+kwFO9FSzAOJlPDUM0y90WOs0lFtC6jhAIT2HSpk
+	55+z96AuI7iS9T6hkGsutjETos7LGrpNd1RqLwqjjuQ8avnvwRYdRPdtKrhBaSB9H3f5
+	pbo5zqFvl08ZBidTHhmLRTYNt5N18bvDJkfjqLQpWQciMIUYwhgkxYn5frvg4oFJxU05
+	U4ols4EIDADUPSXLLl+FGZ7KvdU57QLWCZMNDgcQ+vi6bQIrSHMaTkOIwPDoctXGy7va
+	ygad+6zYaWYH+HGQj0xxX3duafDWFDi5xmlKaPf3sL79uTUvT9SC3/lb7h6Yr/loQgu3
+	feBg==
+X-Received: by 10.68.190.9 with SMTP id gm9mr32758480pbc.151.1408603847593;
+	Wed, 20 Aug 2014 23:50:47 -0700 (PDT)
+Received: from linux-z8xt.inp.mentorg.com ([139.181.35.34])
+	by mx.google.com with ESMTPSA id
+	ux10sm87840494pac.10.2014.08.20.23.50.45 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 20 Aug 2014 23:50:46 -0700 (PDT)
+From: Sujith H <sujith.h@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [META-OE][PATCH 1/1] oscam: fixed QA issue where binary was being stripped
+Date: Thu, 21 Aug 2014 12:16:47 +0530
+Message-Id: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
+X-Mailer: git-send-email 1.8.4
+Cc: Sujith H <Sujith_Haridasan@mentor.com>,
+	Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-python][PATCH] python-pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,39 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2014 06:13:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Aug 2014 06:50:49 -0000
 
-http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095778.html
+From: Sujith H <Sujith_Haridasan@mentor.com>
 
-WARNING: QA Issue: File '/usr/bin/oscam' from oscam was already stripped,
-this
-will prevent future debugging! [already-stripped]
+This recipe will provide a set of Python modules that
+provide Python programmers an interface to libparted,
+the GNU parted library for disk partitioning and filesystem
+manipulation.
 
-Fix above warning by telling cmake to do Debug type build, which prevents
-linking with '-s' flag that removed symbols before bitbake could put them
-into dbg package.
-
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
-Signed-off-by: Tom King<ka6sox@gmail.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
 ---
- meta-multimedia/recipes-dvb/oscam/oscam_svn.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python-pyparted/python-pyparted_3.9.bb          | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
 
-diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
- b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-index e3f2708..c4a4d99 100644
---- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-+++ b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-@@ -14,5 +14,5 @@ S = "${WORKDIR}/trunk"
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+new file mode 100644
+index 0000000..db1b936
+--- /dev/null
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
++an interface to libparted, the GNU parted library for disk partitioning and \
++filesystem manipulation."
++SUMMARY = "Python bindings for libparted"
++HOMEPAGE = "https://fedorahosted.org/pyparted/"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \
++"
++DEPENDS += "parted"
++RDEPENDS_${PN} += "python-stringold python-codecs python-math"
++
++S="${WORKDIR}/pyparted-${PV}"
++SRC_URI = "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
++SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
++SRC_URI[sha256sum] = "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
++
++inherit distutils
++
++BBCLASSEXTEND += "native"
+-- 
+1.8.4
 
- inherit cmake
-
--EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}"
-+EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}
--DCMAKE_BUILD_TYPE=Debug"
-
-
---
-1.7.9.5
 
