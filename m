@@ -1,36 +1,33 @@
-Return-Path: <sujith.h@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 0282165D56
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 94DBF65F1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 06:50:46 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id fp1so13316552pdb.41
+	Thu, 21 Aug 2014 07:45:13 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XKN3Z-0004zy-Mt for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Aug 2014 09:45:13 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Aug 2014 09:45:13 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Aug 2014 23:50:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=RYas9sJxmYeyfxVAVnkvy8Y22FxA2wA1PHgukfi8YIQ=;
-	b=IqzJBuXsQs9wJZbUx8Bp29N3Yz+kwFO9FSzAOJlPDUM0y90WOs0lFtC6jhAIT2HSpk
-	55+z96AuI7iS9T6hkGsutjETos7LGrpNd1RqLwqjjuQ8avnvwRYdRPdtKrhBaSB9H3f5
-	pbo5zqFvl08ZBidTHhmLRTYNt5N18bvDJkfjqLQpWQciMIUYwhgkxYn5frvg4oFJxU05
-	U4ols4EIDADUPSXLLl+FGZ7KvdU57QLWCZMNDgcQ+vi6bQIrSHMaTkOIwPDoctXGy7va
-	ygad+6zYaWYH+HGQj0xxX3duafDWFDi5xmlKaPf3sL79uTUvT9SC3/lb7h6Yr/loQgu3
-	feBg==
-X-Received: by 10.68.190.9 with SMTP id gm9mr32758480pbc.151.1408603847593;
-	Wed, 20 Aug 2014 23:50:47 -0700 (PDT)
-Received: from linux-z8xt.inp.mentorg.com ([139.181.35.34])
-	by mx.google.com with ESMTPSA id
-	ux10sm87840494pac.10.2014.08.20.23.50.45 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 20 Aug 2014 23:50:46 -0700 (PDT)
-From: Sujith H <sujith.h@gmail.com>
+	Thu, 21 Aug 2014 09:45:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Aug 2014 12:16:47 +0530
-Message-Id: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
-X-Mailer: git-send-email 1.8.4
-Cc: Sujith H <Sujith_Haridasan@mentor.com>,
-	Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-python][PATCH] python-pyparted: Add recipe
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 21 Aug 2014 09:44:59 +0200
+Message-ID: <lt481r$hms$1@ger.gmane.org>
+References: <CAHQecY6bxmkDi3U6nN3MhF4x6-ysPnXyb0nwrjXwq3-xX5NdcQ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <CAHQecY6bxmkDi3U6nN3MhF4x6-ysPnXyb0nwrjXwq3-xX5NdcQ@mail.gmail.com>
+Subject: Re: [META-OE][PATCH 1/1] oscam: fixed QA issue where binary was being stripped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,50 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2014 06:50:49 -0000
+X-List-Received-Date: Thu, 21 Aug 2014 07:45:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Sujith H <Sujith_Haridasan@mentor.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This recipe will provide a set of Python modules that
-provide Python programmers an interface to libparted,
-the GNU parted library for disk partitioning and filesystem
-manipulation.
+Tom King schreef op 21-08-14 08:13:
+> http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095778.html
+>
+>  WARNING: QA Issue: File '/usr/bin/oscam' from oscam was already
+> stripped, this will prevent future debugging! [already-stripped]
+> 
+> Fix above warning by telling cmake to do Debug type build, which
+> prevents linking with '-s' flag that removed symbols before bitbake could
+> put them into dbg package.
+> 
+> Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com> Signed-off-by: Tom
+> King<ka6sox@gmail.com> --- meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
+> |    2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb 
+> b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb index e3f2708..c4a4d99
+> 100644 --- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb +++
+> b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb @@ -14,5 +14,5 @@ S =
+> "${WORKDIR}/trunk"
+> 
+> inherit cmake
+> 
+> -EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}" +EXTRA_OECMAKE =
+> "-DDEFAULT_CS_CONFDIR=${sysconfdir} -DCMAKE_BUILD_TYPE=Debug"
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
----
- .../python-pyparted/python-pyparted_3.9.bb          | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+Whitespace damage due to mailer?
 
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-new file mode 100644
-index 0000000..db1b936
---- /dev/null
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
-+an interface to libparted, the GNU parted library for disk partitioning and \
-+filesystem manipulation."
-+SUMMARY = "Python bindings for libparted"
-+HOMEPAGE = "https://fedorahosted.org/pyparted/"
-+LICENSE = "GPL-2.0+"
-+LIC_FILES_CHKSUM = "\
-+    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-+    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \
-+"
-+DEPENDS += "parted"
-+RDEPENDS_${PN} += "python-stringold python-codecs python-math"
-+
-+S="${WORKDIR}/pyparted-${PV}"
-+SRC_URI = "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
-+SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
-+SRC_URI[sha256sum] = "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
-+
-+inherit distutils
-+
-+BBCLASSEXTEND += "native"
--- 
-1.8.4
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFT9aN7MkyGM64RGpERAocuAJ41630bimczFzLdBtpxDkCRY33h6QCeO80c
+myBws3uS1pXaavua8+O9vo8=
+=xjKT
+-----END PGP SIGNATURE-----
 
 
