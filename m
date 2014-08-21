@@ -1,29 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 2059260169
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DD3F65DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 13:47:56 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga103.fm.intel.com with ESMTP; 21 Aug 2014 06:40:11 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="375280070"
-Received: from mvnawara-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.246])
-	by FMSMGA003.fm.intel.com with ESMTP; 21 Aug 2014 06:44:06 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Sujith H <sujith.h@gmail.com>
-Date: Thu, 21 Aug 2014 14:47:55 +0100
-Message-ID: <2646587.gJzHJE2pH7@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.10-200.fc20.x86_64; KDE/4.13.3; x86_64; ;
-	)
-In-Reply-To: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
-References: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
+	Thu, 21 Aug 2014 19:31:38 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id m15so9581073wgh.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Aug 2014 12:31:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=dAHZ7+vqetk+nx+Ptb1oPMJNZ7drkL1g5KATucu+OrI=;
+	b=OAznzOF8ZUSced10+cDNgBOghZBBrjYn1z8M0/RH+/YePHpvHi1EdD930UVlB+KLS2
+	J4roFfrfJp56IiRDDx3xbyRjUAGFsFJrKMKpLiESClEqHvd1E4Ovp8WZWl584O7vt56I
+	HVr0XJY+53bo0vQTn/uAyJb74oAJp8PuOprb4R3dYJYgXGz5qRPOEYOGB9JLlXTYDy1X
+	IepTdrx+sCFhyw9c9sk4TZtHJi+1DR55uT0lG3Hd+YVtmzAFfYpGjGSC2wHj1Uvd4ndV
+	bwDlXVHFUNB8JaUbg9nkGiPe1ugwFxjAm/YgDedy74c4Dbdaab6eNK34WmG2LyKZUXqD
+	oOlg==
+X-Received: by 10.194.77.212 with SMTP id u20mr513090wjw.27.1408649499220;
+	Thu, 21 Aug 2014 12:31:39 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	r1sm22928835wia.21.2014.08.21.12.31.37 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 Aug 2014 12:31:38 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 21 Aug 2014 21:31:42 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140821193142.GB3660@jama>
+References: <1408612843-22017-1-git-send-email-jackie.huang@windriver.com>
 MIME-Version: 1.0
-Cc: Sujith H <Sujith_Haridasan@mentor.com>,
-	Christopher Larson <chris_larson@mentor.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python-pyparted: Add recipe
+In-Reply-To: <1408612843-22017-1-git-send-email-jackie.huang@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] lmbench: remove debianutils from RDEPENDS and add perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,69 +46,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2014 13:48:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 21 Aug 2014 19:31:40 -0000
+X-Groupsio-MsgNum: 51813
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="hCRFYJKfs6IGypzU"
+Content-Disposition: inline
 
-Hi Sujith,
+--hCRFYJKfs6IGypzU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I think this recipe is almost there, just some minor tweaks:
+On Thu, Aug 21, 2014 at 05:20:43AM -0400, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> - I don't see any evdidence that lmbench needs debianutils to run:
+>   debianutils provides:
+>     run-parts, tempfile, savelog, which, ischroot,
+>     add-shell, installkernel, remove-shell
+>   but none of them is used by lmbench scripts and I tested it work
+>   fine without debianutils, so remove debianutils from RDEPENDS
 
-On Thursday 21 August 2014 12:16:47 Sujith H wrote:
-> From: Sujith H <Sujith_Haridasan@mentor.com>
-> 
-> This recipe will provide a set of Python modules that
-> provide Python programmers an interface to libparted,
-> the GNU parted library for disk partitioning and filesystem
-> manipulation.
-> 
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+Lets see how far Tom's memory goes :)
+
+commit 6dbe8d71c465fdf86310ca7f83332ff32baf12f5
+Author: Tom Rini <trini@embeddedalley.com>
+Date:   Fri Feb 13 01:14:22 2009 -0500
+
+    lmbench: Fix config file location in lmbench-run add RDEP on debianutil=
+s, bump PR
+
+>=20
+> - Some scripts in lmbench are perl scripts, so add
+>   RDEPENDS on perl (no addtional perl module is needed).
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 > ---
->  .../python-pyparted/python-pyparted_3.9.bb          | 21
-> +++++++++++++++++++++ 1 file changed, 21 insertions(+)
->  create mode 100644
-> meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-> 
-> diff --git
-> a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-> b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb new
-> file mode 100644
-> index 0000000..db1b936
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
-> @@ -0,0 +1,21 @@
-> +DESCRIPTION = "pyparted is a set of Python modules that provide Python
-> programmers \ +an interface to libparted, the GNU parted library for disk
-> partitioning and \ +filesystem manipulation."
-> +SUMMARY = "Python bindings for libparted"
-> +HOMEPAGE = "https://fedorahosted.org/pyparted/"
-> +LICENSE = "GPL-2.0+"
-> +LIC_FILES_CHKSUM = "\
-> +    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-> +   
-> file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571
-> a9f08ea46 \ +"
-> +DEPENDS += "parted"
-> +RDEPENDS_${PN} += "python-stringold python-codecs python-math"
+>  meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-o=
+e/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> index 38e0d2e..0586d72 100644
+> --- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+> @@ -74,5 +74,5 @@ pkg_postinst_${PN} () {
+>      fi
+>  }
+> =20
+> -RDEPENDS_${PN} =3D "debianutils"
+> +RDEPENDS_${PN} =3D "perl"
+>  FILES_${PN} +=3D "${datadir}/lmbench ${libdir}/lmbench"
+> --=20
+> 2.0.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Could you please move the RDEPENDS line down to just before the BBCLASSEXTEND 
-line? (i.e. where any other definitions that concern packaging would appear).
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-> +
-> +S="${WORKDIR}/pyparted-${PV}"
+--hCRFYJKfs6IGypzU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Please move this after the SRC_URI / checksums and add spaces around the = .
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-if you could also please ensure that your next version is marked [PATCH v3] 
-(if it will be the third version of this patch) rather than just [PATCH] so 
-that it's clear that it supersedes an earlier version.
+iEYEARECAAYFAlP2SR4ACgkQN1Ujt2V2gByEXwCgrw53kcbtqEIqHOa3nCbUnwxo
+eUAAniYtTvKMSuHxEklhMLKluRWadnds
+=kuqP
+-----END PGP SIGNATURE-----
 
-Thanks,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
+--hCRFYJKfs6IGypzU--
